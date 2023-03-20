@@ -19,7 +19,7 @@
 #      contact@openairinterface.org
 ################################################################################
 
-SET(CONFIG_DIR ${SRC_TOP_DIR}/oai-cn5g-common-src/config)
+SET(CONFIG_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/config)
 
 SET(CONFIG_SRC_FILES
         ${CONFIG_DIR}/config.cpp

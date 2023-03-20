@@ -70,18 +70,12 @@ printf_logger::printf_logger(
   logger = std::make_shared<spdlog::logger>(
       category, std::begin(sinks), std::end(sinks));
 
-  // TODO wouldn't it be better to have a console parameter for log level
-  // I'd much prefer an enum value here
-
-#if TRACE_IS_ON
-  logger->set_level(spdlog::level::trace);
-#elif DEBUG_IS_ON
+  // Out of the box the level is debug
   logger->set_level(spdlog::level::debug);
-#elif INFO_IS_ON
-  logger->set_level(spdlog::level::info);
-#else
-  logger->set_level(spdlog::level::warn);
-#endif
+}
+
+void printf_logger::set_level(spdlog::level::level_enum level) {
+  logger->set_level(level);
 }
 
 std::unordered_map<std::string, printf_logger> logger_registry::logger_map;
@@ -110,4 +104,10 @@ const printf_logger& logger_registry::get_logger(const std::string& logger) {
     throw std::runtime_error(fmt::format("Logger {} does not exist", logger));
   }
   return it->second;
+}
+
+void logger_registry::set_level(spdlog::level::level_enum level) {
+  for (auto element : logger_map) {
+    element.second.set_level(level);
+  }
 }

@@ -28,19 +28,3 @@ target_sources(${NF_TARGET} PRIVATE
         ${LOGGER_DIR}/logger_base.cpp
         )
 endif()
-
-## Logger used in NF_TARGET_LIB ("app" library)
-if (TARGET ${NF_TARGET_LIB})
-target_include_directories(${NF_TARGET_LIB} PUBLIC ${LOGGER_DIR})
-target_sources(${NF_TARGET_LIB} PRIVATE
-        ${LOGGER_DIR}/logger_base.cpp
-        )
-endif()
-
-## UTILS used in NF_TARGET_API (API library
-if (TARGET ${NF_TARGET_API_LIB})
-target_include_directories(${NF_TARGET_API_LIB} PUBLIC ${LOGGER_DIR})
-target_sources(${NF_TARGET_API_LIB} PRIVATE
-        ${LOGGER_DIR}/logger_base.cpp
-        )
-endif()

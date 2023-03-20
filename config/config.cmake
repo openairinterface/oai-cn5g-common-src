@@ -27,26 +27,10 @@ SET(CONFIG_SRC_FILES
         ${CONFIG_DIR}/config_yaml_file.cpp
         )
 
-if (TARGET ${NF_TARGET})
 ## CONFIG used in NF_TARGET (main)
+if (TARGET ${NF_TARGET})
 target_include_directories(${NF_TARGET} PUBLIC ${CONFIG_DIR})
 target_sources(${NF_TARGET} PRIVATE
-        ${CONFIG_SRC_FILES}
-        )
-endif()
-
-if (TARGET ${NF_TARGET_LIB})
-## CONFIG used in NF_TARGET_LIB ("app" library)
-target_include_directories(${NF_TARGET_LIB} PUBLIC ${CONFIG_DIR})
-target_sources(${NF_TARGET_LIB} PRIVATE
-        ${CONFIG_SRC_FILES}
-        )
-endif()
-
-if (TARGET ${NF_TARGET_API_LIB})
-## CONFIG used in NF_TARGET_API (API library)
-target_include_directories(${NF_TARGET_API_LIB} PUBLIC ${CONFIG_DIR})
-target_sources(${NF_TARGET_API_LIB} PRIVATE
         ${CONFIG_SRC_FILES}
         )
 endif()

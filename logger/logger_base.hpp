@@ -40,7 +40,7 @@
 
 // this way we redefine: warn->start, error->warn, critical->error
 #define SPDLOG_LEVEL_NAMES                                                     \
-  {"trace", "debug", "info ", "start", "warn ", "error", "off  "};
+  {"trace", "debug", "info", "start", "warning", "error", "off"};
 
 #include <spdlog/spdlog.h>
 #include <spdlog/logger.h>
@@ -57,6 +57,11 @@ class printf_logger {
   printf_logger(
       const std::string& nf_name, const std::string& name, bool log_stdout,
       bool log_rot_file);
+
+  void set_level(spdlog::level::level_enum level);
+  bool should_log(spdlog::level::level_enum level) {
+    return logger->should_log(level);
+  }
 
   template<typename... T>
   void trace(const std::string& fmt, const T&... args) const {
@@ -148,6 +153,14 @@ class logger_registry {
       bool log_stdout, bool log_rot_file);
 
   static const printf_logger& get_logger(const std::string& logger);
+  static void set_level(spdlog::level::level_enum level);
+  static bool should_log(spdlog::level::level_enum level) {
+    if (logger_map.empty()) {
+      return false;
+    }
+    const auto& it = logger_map.begin();
+    return it->second.should_log(level);
+  }
 
  private:
   static std::unordered_map<std::string, printf_logger> logger_map;

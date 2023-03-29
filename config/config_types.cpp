@@ -30,116 +30,159 @@
 #include "config_types.hpp"
 #include "config.hpp"
 #include "conversions.hpp"
-#include "logger_base.hpp"
 #include "if.hpp"
 #include "common_defs.h"
 
 #include <fmt/format.h>
-#include <algorithm>
-#include <regex>
 #include <string>
+#include <regex>
 
 using namespace oai::config;
 
 const std::string INNER_LIST_ELEM = "+";
-
-bool config_type::matches_regex(
-    const std::string& value, const std::string& regex) {
-  std::regex re(regex);
-
-  if (!std::regex_match(value, re)) {
-    logger::logger_registry::get_logger(LOGGER_NAME)
-        .error("%s does not follow regex specification: %s", value, regex);
-    return false;
-  }
-  return true;
-}
+const std::string OUTER_LIST_ELEM = "-";
 
 bool config_type::is_set() const {
   return m_set;
 }
 
-config_type_e config_type::get_config_type() const {
-  return config_type_e::invalid;
+const std::string& config_type::get_config_name() const {
+  return m_config_name;
 }
 
-bool sbi_interface::validate() {
-  if (!matches_regex(m_url, URL_REGEX)) {
-    return false;
-  }
-  m_set = true;
-  return true;
-}
-
-sbi_interface::sbi_interface(YAML::Node const& node) {
-  m_api_version = node["api_version"].as<std::string>();
-  // this is easily adaptable to HTTPS, just add a flag, and we change the URL
-  m_url.append("http://")
-      .append(node["host"].as<std::string>())
-      .append(":")
-      .append(node["port"].as<std::string>());
-}
-
-std::string sbi_interface::to_string(const std::string& indent) const {
-  std::string out;
+unsigned int config_type::get_inner_width(unsigned int indent_length) {
   unsigned int inner_width = COLUMN_WIDTH;
-  if (indent.length() < COLUMN_WIDTH) {
-    inner_width = COLUMN_WIDTH - indent.length();
+  if (indent_length < COLUMN_WIDTH) {
+    inner_width = COLUMN_WIDTH - indent_length;
   }
 
-  out.append("SBI Interface\n");
-  out.append(indent).append(
-      fmt::format(BASE_FORMATTER, INNER_LIST_ELEM, "URL", inner_width, m_url));
-  out.append(indent).append(fmt::format(
-      BASE_FORMATTER, INNER_LIST_ELEM, "API Version", inner_width,
-      m_api_version));
-  return out;
+  return inner_width;
 }
 
-config_type_e sbi_interface::get_config_type() const {
-  return config_type_e::sbi;
+string_config_value::string_config_value(
+    const std::string& name, const std::string& value) {
+  m_config_name = name;
+  m_value       = value;
+  m_set         = true;
 }
 
-const std::string& sbi_interface::get_api_version() const {
-  return m_api_version;
+void string_config_value::from_yaml(const YAML::Node& node) {
+  m_value = node.as<std::string>();
 }
 
-const std::string& sbi_interface::get_url() const {
-  return m_url;
+std::string string_config_value::to_string(const std::string&) const {
+  std::string out;
+  return out.append(m_value);
 }
 
-local_interface::local_interface(YAML::Node const& node) {
-  m_port    = node["port"].as<uint16_t>();
-  m_if_name = node["name"].as<std::string>();
-}
-
-bool local_interface::validate() {
-  unsigned int _mtu{};
-  in_addr _addr4{};
-  in_addr _netmask{};
-  if (get_inet_addr_infos_from_iface(m_if_name, _addr4, _netmask, _mtu) ==
-      RETURNerror) {
-    logger::logger_registry::get_logger(LOGGER_NAME)
-        .error(
-            "Error in reading configuration from network interface %s",
-            m_if_name);
-    return false;
+void string_config_value::validate() {
+  if (!m_set) return;
+  std::regex re(m_regex);
+  if (!std::regex_match(m_value, re)) {
+    throw std::runtime_error(fmt::format(
+        "{} does not follow the regex specification: {}", m_value, m_regex));
   }
-  m_mtu   = _mtu;
-  m_addr4 = _addr4;
+}
 
+const std::string& string_config_value::get_value() const {
+  return m_value;
+}
+
+void string_config_value::set_validation_regex(const std::string& regex) {
+  m_regex = regex;
+}
+
+option_config_value::option_config_value(const std::string& name, bool value) {
+  m_config_name = name;
+  m_value       = value;
+  m_set         = true;
+}
+
+void option_config_value::from_yaml(const YAML::Node& node) {
+  m_value = node.as<bool>();
+}
+
+std::string option_config_value::to_string(const std::string&) const {
+  std::string val = m_value ? "Yes" : "No";
+  return val;
+}
+
+bool option_config_value::get_value() const {
+  return m_value;
+}
+
+int_config_value::int_config_value(const std::string& name, int value) {
+  m_config_name = name;
+  m_value       = value;
+  m_set         = true;
+}
+
+void int_config_value::from_yaml(const YAML::Node& node) {
+  m_value = node.as<int>();
+}
+
+std::string int_config_value::to_string(const std::string&) const {
+  return std::to_string(m_value);
+}
+
+void int_config_value::validate() {
+  if (!m_set) return;
+  if (m_value < m_min_value || m_value > m_max_value) {
+    throw std::runtime_error(fmt::format(
+        "Value {} must be in interval [{},{}]", m_value, m_min_value,
+        m_max_value));
+  }
+}
+
+int int_config_value::get_value() const {
+  return m_value;
+}
+
+void int_config_value::set_validation_interval(int min, int max) {
+  m_min_value = min;
+  m_max_value = max;
+}
+
+local_interface::local_interface(
+    const std::string& name, const std::string& host, uint16_t port,
+    const std::string& if_name) {
+  m_host        = string_config_value("Host", host);
+  m_config_name = name;
+  m_if_name     = string_config_value("Interface", if_name);
+  m_port        = int_config_value("Port", port);
+  m_port.set_validation_interval(PORT_MIN_VALUE, PORT_MAX_VALUE);
+  m_host.set_validation_regex(HOST_VALIDATOR_REGEX);
   m_set = true;
-  return true;
+}
+
+void local_interface::from_yaml(const YAML::Node& node) {
+  if (node["port"]) {
+    m_port.from_yaml(node["port"]);
+  }
+  if (node["interface_name"]) {
+    m_if_name.from_yaml(node["interface_name"]);
+  }
 }
 
 std::string local_interface::to_string(const std::string& indent) const {
   std::string out;
-  unsigned int inner_width = COLUMN_WIDTH;
-  if (indent.length() < COLUMN_WIDTH) {
-    inner_width = COLUMN_WIDTH - indent.length();
-  }
+  unsigned int inner_width = get_inner_width(indent.length());
 
-  out.append("Local Interface\n");
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, INNER_LIST_ELEM, "Port", inner_width,
+      m_port.get_value()));
+
+  if (!m_is_local_interface) return out;
+  out.append(to_string_for_local(indent));
+
+  return out;
+}
+
+std::string local_interface::to_string_for_local(
+    const std::string& indent) const {
+  unsigned int inner_width = get_inner_width(indent.length());
+  std::string out;
+
   std::string ip4 = conv::toString(m_addr4);
   std::string ip6 = conv::toString(m_addr6);
 
@@ -153,19 +196,37 @@ std::string local_interface::to_string(const std::string& indent) const {
       fmt::format(BASE_FORMATTER, INNER_LIST_ELEM, "MTU", inner_width, m_mtu));
   out.append(indent).append(fmt::format(
       BASE_FORMATTER, INNER_LIST_ELEM, "Interface name: ", inner_width,
-      m_if_name));
-  out.append(indent).append(fmt::format(
-      BASE_FORMATTER, INNER_LIST_ELEM, "Port", inner_width, m_port));
-
+      m_if_name.get_value()));
   return out;
 }
 
-config_type_e local_interface::get_config_type() const {
-  return config_type_e::local;
+void local_interface::validate() {
+  if (!m_set) return;
+  m_host.validate();
+  m_port.validate();
+  if (!m_is_local_interface) return;
+
+  m_if_name.validate();
+
+  unsigned int _mtu{};
+  in_addr _addr4{};
+  in_addr _netmask{};
+  if (get_inet_addr_infos_from_iface(
+          m_if_name.get_value(), _addr4, _netmask, _mtu) == RETURNerror) {
+    throw std::runtime_error(fmt::format(
+        "Error in reading network interface {}. Make sure it exists",
+        m_if_name.get_value()));
+  }
+  m_mtu   = _mtu;
+  m_addr4 = _addr4;
+}
+
+const std::string& local_interface::get_host() const {
+  return m_host.get_value();
 }
 
 const std::string& local_interface::get_if_name() const {
-  return m_if_name;
+  return m_if_name.get_value();
 }
 
 const in_addr& local_interface::get_addr4() const {
@@ -181,167 +242,344 @@ unsigned int local_interface::get_mtu() const {
 }
 
 uint16_t local_interface::get_port() const {
-  return m_port;
+  return m_port.get_value();
 }
 
-local_sbi_interface::local_sbi_interface(YAML::Node const& node) {
-  m_if_name      = node["name"].as<std::string>();
-  m_port         = node["port_http"].as<uint16_t>();
-  m_port_http2   = node["port_http2"].as<uint16_t>();
-  m_api_version  = node["api_version"].as<std::string>();
-  m_http_version = node["http_version"].as<uint8_t>();
+void local_interface::set_is_local_interface(bool val) {
+  m_is_local_interface = val;
 }
 
-bool local_sbi_interface::validate() {
-  bool sbi_validate = validate_sbi_api_version(m_api_version);
-  if (!sbi_validate) {
-    return false;
-  }
-
-  if (m_http_version < 1 || m_http_version > 2) {
-    logger::logger_registry::get_logger(LOGGER_NAME)
-        .error("Wrong HTTP version: %u. Should be 1 or 2", m_http_version);
-    return false;
-  }
-
-  return local_interface::validate();
+bool local_interface::is_local_interface() const {
+  return m_is_local_interface;
 }
 
-std::string local_sbi_interface::to_string(const std::string& indent) const {
-  unsigned int inner_width = 0;
-  if (indent.length() < COLUMN_WIDTH) {
-    inner_width = COLUMN_WIDTH - indent.length();
-  }
+sbi_interface::sbi_interface(
+    const std::string& name, const std::string& host, uint16_t port_http1,
+    uint16_t port_http2, const std::string& api_version,
+    const std::string& interface_name)
+    : local_interface(name, host, port_http1, interface_name) {
+  m_config_name = name;
+  m_host        = string_config_value("Host", host);
+  m_port_http1  = int_config_value("Port HTTP1", port_http1);
+  m_port_http2  = int_config_value("Port HTTP2", port_http2);
+  m_api_version = string_config_value("API Version", api_version);
 
-  std::string out = local_interface::to_string(indent);
+  m_host.set_validation_regex(HOST_VALIDATOR_REGEX);
+  m_api_version.set_validation_regex(API_VERSION_REGEX);
+  m_port_http1.set_validation_interval(PORT_MIN_VALUE, PORT_MAX_VALUE);
+  m_port_http2.set_validation_interval(PORT_MIN_VALUE, PORT_MAX_VALUE);
+  m_set = true;
+  set_url();
+}
+
+void sbi_interface::from_yaml(const YAML::Node& node) {
+  local_interface::from_yaml(node);
+
+  if (node["api_version"]) {
+    m_api_version.from_yaml(node["api_version"]);
+  }
+  if (node["port_http1"]) {
+    m_port_http1.from_yaml(node["port_http1"]);
+    m_port = m_port_http1;
+  }
+  if (node["port_http2"]) {
+    m_port_http2.from_yaml(node["port_http2"]);
+    m_port = m_port_http2;
+  }
+  set_url();
+}
+
+std::string sbi_interface::to_string(const std::string& indent) const {
+  std::string out;
+  unsigned int inner_width = get_inner_width(indent.length());
+
+  out.append(indent).append(
+      fmt::format(BASE_FORMATTER, INNER_LIST_ELEM, "URL", inner_width, m_url));
   out.append(indent).append(fmt::format(
       BASE_FORMATTER, INNER_LIST_ELEM, "API Version", inner_width,
-      m_api_version));
-
-  out.append(indent).append(fmt::format(
-      BASE_FORMATTER, INNER_LIST_ELEM, "HTTP Version", inner_width,
-      m_http_version));
+      m_api_version.get_value()));
+  std::string use_http2_string = use_http2() ? "Yes" : "No";
+  if (!is_local_interface()) {
+    out.append(indent).append(fmt::format(
+        BASE_FORMATTER, INNER_LIST_ELEM, "Use HTTP2", inner_width,
+        use_http2_string));
+  } else {
+    out.append(indent).append(fmt::format(
+        BASE_FORMATTER, INNER_LIST_ELEM, "Serve HTTP1 on Port", inner_width,
+        m_port_http1.get_value()));
+    if (use_http2()) {
+      out.append(indent).append(fmt::format(
+          BASE_FORMATTER, INNER_LIST_ELEM, "Serve HTTP2 on Port", inner_width,
+          m_port_http2.get_value()));
+    }
+    out.append(to_string_for_local(indent));
+  }
 
   return out;
 }
 
-const std::string& local_sbi_interface::get_api_version() const {
-  return m_api_version;
-}
-
-uint8_t local_sbi_interface::http_version() const {
-  return m_http_version;
-}
-
-uint16_t local_sbi_interface::get_port_http2() const {
-  return m_port_http2;
-}
-
-bool network_interface::validate_sbi_api_version(const std::string& v) {
-  auto it =
-      std::find(allowed_api_versions.begin(), allowed_api_versions.end(), v);
-  if (it == allowed_api_versions.end()) {
-    logger::logger_registry::get_logger(LOGGER_NAME)
-        .error("API version %s not valid!", v);
-    return false;
+void sbi_interface::validate() {
+  if (!m_set) return;
+  local_interface::validate();
+  m_port_http1.validate();
+  if (m_port_http2.get_value() != 0) {
+    m_port_http2.validate();
   }
-  return true;
+  m_api_version.validate();
 }
 
-string_config_value::string_config_value(YAML::Node const& node) {
-  m_value = node.as<std::string>();
+const std::string& sbi_interface::get_api_version() const {
+  return m_api_version.get_value();
 }
 
-std::string string_config_value::to_string(const std::string&) const {
+const std::string& sbi_interface::get_url() const {
+  return m_url;
+}
+
+uint16_t sbi_interface::get_port_http1() const {
+  return m_port_http1.get_value();
+}
+
+uint16_t sbi_interface::get_port_http2() const {
+  return m_port_http2.get_value();
+}
+
+bool sbi_interface::use_http2() const {
+  return m_port_http2.get_value() != 0;
+}
+
+void sbi_interface::set_url() {
+  uint16_t used_port = m_port_http2.get_value();
+  if (used_port == 0) {
+    used_port = m_port_http1.get_value();
+  }
+  m_url = "";
+  // this is easily adaptable to HTTPS, just add a flag, and we change the URL
+  m_url.append("http://")
+      .append(get_host())
+      .append(":")
+      .append(std::to_string(used_port));
+}
+
+nf::nf(
+    const std::string& name, const std::string& host, const sbi_interface& sbi,
+    const local_interface& local, interface_type_e type)
+    : nf(name, host, sbi) {
+  switch (type) {
+    case interface_type_e::n1:
+      m_n1 = local;
+      break;
+    case interface_type_e::n4:
+      m_n4 = local;
+      break;
+    default:
+      logger::logger_registry::get_logger(LOGGER_NAME)
+          .error("Unknown interface type in configuration");
+  }
+}
+
+nf::nf(
+    const std::string& name, const std::string& host,
+    const sbi_interface& sbi) {
+  m_config_name = name;
+  m_host        = string_config_value("Host", host);
+  m_sbi         = sbi;
+  m_set         = true;
+  m_host.set_validation_regex(HOST_VALIDATOR_REGEX);
+}
+
+void nf::from_yaml(const YAML::Node& node) {
+  if (node["host"]) {
+    m_host.from_yaml(node["host"]);
+  }
+  if (node["n1"]) {
+    m_n1.from_yaml(node["n1"]);
+  }
+  if (node["n4"]) {
+    m_n4.from_yaml(node["n4"]);
+  }
+  if (node["sbi"]) {
+    m_sbi.from_yaml(node["sbi"]);
+  }
+}
+
+std::string nf::to_string(const std::string& indent) const {
   std::string out;
-  return out.append(m_value);
-}
-
-bool string_config_value::validate() {
-  m_set = true;
-  return true;
-}
-
-config_type_e string_config_value::get_config_type() const {
-  return config_type_e::string;
-}
-
-const std::string& string_config_value::get_value() const {
-  return m_value;
-}
-
-option_config_value::option_config_value(YAML::Node const& node) {
-  m_value = node.as<bool>();
-}
-
-std::string option_config_value::to_string(const std::string&) const {
-  std::string val = m_value ? "Yes" : "No";
-  return val;
-}
-
-bool option_config_value::validate() {
-  m_set = true;
-  return true;
-}
-
-config_type_e option_config_value::get_config_type() const {
-  return config_type_e::option;
-}
-
-bool option_config_value::get_value() const {
-  return m_value;
-}
-
-uint8_config_value factory::get_uint8_config(uint8_t val) {
-  uint8_config_value v;
-  v.m_value = val;
-  return v;
-}
-
-uint8_config_value::uint8_config_value(const YAML::Node& node) {
-  m_value = node.as<uint8_t>();
-}
-
-std::string uint8_config_value::to_string(const std::string&) const {
-  return std::to_string(m_value);
-}
-
-bool uint8_config_value::validate() {
-  if (m_value < m_min_value || m_value > m_max_value) {
-    logger::logger_registry::get_logger(LOGGER_NAME)
-        .error(
-            "Value should be in [%u, %u], but it is: %u", m_min_value,
-            m_max_value, m_value);
-    return false;
+  if (!is_set()) {
+    return "";
   }
+  std::string inner_indent = indent + indent;
+  unsigned int inner_width = get_inner_width(inner_indent.length());
+
+  out.append(indent).append(m_config_name).append(":\n");
+  out.append(inner_indent)
+      .append(fmt::format(
+          BASE_FORMATTER, OUTER_LIST_ELEM, m_host.get_config_name(),
+          inner_width, m_host.get_value()));
+
+  if (m_sbi.is_set()) {
+    out.append(inner_indent)
+        .append(
+            fmt::format("{} {}\n", OUTER_LIST_ELEM, m_sbi.get_config_name()));
+    out.append(m_sbi.to_string(inner_indent + indent));
+  }
+  if (m_n1.is_set()) {
+    out.append(inner_indent)
+        .append(
+            fmt::format("{} {}\n", OUTER_LIST_ELEM, m_n1.get_config_name()));
+    out.append(m_n1.to_string(inner_indent + indent));
+  }
+  if (m_n4.is_set()) {
+    out.append(inner_indent)
+        .append(
+            fmt::format("{} {}\n", OUTER_LIST_ELEM, m_n4.get_config_name()));
+    out.append(m_n4.to_string(inner_indent + indent));
+  }
+
+  return out;
+}
+
+void nf::validate() {
+  if (!m_set) return;
+  m_host.validate();
+  m_sbi.validate();
+  m_n4.validate();
+  m_n1.validate();
+}
+
+const sbi_interface& nf::get_sbi() const {
+  return m_sbi;
+}
+
+const local_interface& nf::get_n1() const {
+  return m_n1;
+}
+
+const local_interface& nf::get_n4() const {
+  return m_n4;
+}
+
+const std::string& nf::get_host() const {
+  return m_host.get_value();
+}
+
+policy_config::policy_config(
+    const std::string& policy_decisions_path, const std::string& pcc_rules_path,
+    const std::string& traffic_rules_path) {
+  m_config_name = "Policy";
+  m_traffic_rules_path =
+      string_config_value("Traffic Rules", traffic_rules_path);
+  m_pcc_rules_path = string_config_value("PCC Rules", pcc_rules_path);
+  m_policy_decisions_path =
+      string_config_value("Policy Decisions", policy_decisions_path);
   m_set = true;
-  return true;
 }
 
-config_type_e uint8_config_value::get_config_type() const {
-  return config_type_e::uint8;
+void policy_config::from_yaml(const YAML::Node& node) {
+  if (node["policy_decisions_path"]) {
+    m_policy_decisions_path.from_yaml(node["policy_decisions_path"]);
+  }
+  if (node["pcc_rules_path"]) {
+    m_pcc_rules_path.from_yaml(node["pcc_rules_path"]);
+  }
+  if (node["traffic_rules_path"]) {
+    m_traffic_rules_path.from_yaml(node["traffic_rules_path"]);
+  }
 }
 
-uint8_t uint8_config_value::get_value() const {
-  return m_value;
+std::string policy_config::to_string(const std::string& indent) const {
+  std::string out;
+  unsigned int inner_width = get_inner_width(indent.length());
+  out.append(m_config_name).append("\n");
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, OUTER_LIST_ELEM,
+      m_policy_decisions_path.get_config_name(), inner_width,
+      m_policy_decisions_path.get_value()));
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, OUTER_LIST_ELEM, m_pcc_rules_path.get_config_name(),
+      inner_width, m_pcc_rules_path.get_value()));
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, OUTER_LIST_ELEM, m_traffic_rules_path.get_config_name(),
+      inner_width, m_traffic_rules_path.get_value()));
+  return out;
 }
 
-void uint8_config_value::set_validation_min_value(uint8_t val) {
-  m_min_value = val;
+const std::string& policy_config::get_pcc_rules_path() const {
+  return m_pcc_rules_path.get_value();
 }
 
-void uint8_config_value::set_validation_max_value(uint8_t val) {
-  m_max_value = val;
+const std::string& policy_config::get_policy_decisions_path() const {
+  return m_policy_decisions_path.get_value();
 }
 
-option_config_value factory::get_option_config(bool val) {
-  option_config_value v;
-  v.m_value = val;
-  return v;
+const std::string& policy_config::get_traffic_rules_path() const {
+  return m_traffic_rules_path.get_value();
 }
 
-string_config_value factory::get_string_config(const std::string& val) {
-  string_config_value v;
-  v.m_value = val;
-  return v;
+nf_features_config::nf_features_config(
+    const std::string& name, const std::string& nf_name, bool value) {
+  m_option_value = option_config_value("", value);
+  m_config_name  = name;
+  m_nf_name      = nf_name;
+  m_set          = true;
+}
+
+nf_features_config::nf_features_config(
+    const std::string& name, const std::string& nf_name,
+    const std::string& value) {
+  m_string_value = string_config_value("", value);
+  m_config_name  = name;
+  m_nf_name      = nf_name;
+  m_set          = true;
+}
+
+void nf_features_config::from_yaml(const YAML::Node& node) {
+  if (node["general"]) {
+    set_value(node["general"]);
+  }
+
+  // first we handle the NF-specific configuration
+  if (node[m_nf_name]) {
+    set_value(node[m_nf_name]);
+  }
+}
+
+void nf_features_config::set_value(const YAML::Node& node) {
+  try {
+    m_option_value.from_yaml(node);
+  } catch (YAML::Exception&) {
+    m_string_value.from_yaml(node);
+  }
+}
+
+std::string nf_features_config::to_string(const std::string& indent) const {
+  std::string out;
+  unsigned int inner_width = get_inner_width(indent.length());
+  if (m_string_value.get_value().empty()) {
+    out.append(indent).append(fmt::format(
+        BASE_FORMATTER, OUTER_LIST_ELEM, m_config_name, inner_width,
+        m_option_value.to_string("")));
+  } else {
+    out.append(indent).append(fmt::format(
+        BASE_FORMATTER, OUTER_LIST_ELEM, m_config_name, inner_width,
+        m_string_value.to_string("")));
+  }
+  return out;
+}
+
+void nf_features_config::validate() {
+  if (!m_set) return;
+  m_string_value.validate();
+}
+
+void nf_features_config::set_validation_regex(const std::string& regex) {
+  m_string_value.set_validation_regex(regex);
+}
+
+bool nf_features_config::get_option() const {
+  return m_option_value.get_value();
+}
+
+const std::string& nf_features_config::get_string() const {
+  return m_string_value.get_value();
 }

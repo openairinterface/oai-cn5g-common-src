@@ -23,7 +23,7 @@
  \brief
  \author  Stefan Spettel
  \company phine.tech
- \date 2022
+ \date 2023
  \email: stefan.spettel@phine.tech
 */
 
@@ -36,13 +36,6 @@
 #include <yaml-cpp/yaml.h>
 
 namespace oai::config {
-
-const std::vector<std::string> allowed_api_versions{"v1", "v2"};
-
-const std::string URL_REGEX = "http://.*:[0-9]*";
-
-// Only used for pretty-printing
-enum class config_type_e { string, option, sbi, local, invalid, uint8 };
 
 class config_type {
   friend class yaml_file_iface;
@@ -58,17 +51,18 @@ class config_type {
       const std::string& indent) const = 0;
 
   /**
-   * Validates the configuration and marks the configuration as set if
-   * successful
-   * @return true if validation successful, false otherwise
+   * Validates the configuration
+   * @throws std::runtime_error if validation is not successful
    */
-  [[nodiscard]] virtual bool validate() = 0;
+  virtual void validate(){};
 
   /**
-   * Gets the config type of this config
-   * @return config_type_e
+   * Overwrites the values from a YAML node
+   * @param node YAML node, non-existing values are not evaluated, but types
+   * must be correct
+   * @throws YAML::Exception if YAML conversion failed
    */
-  [[nodiscard]] virtual config_type_e get_config_type() const = 0;
+  virtual void from_yaml(const YAML::Node& node) = 0;
 
   /**
    * Checks if the configuration is set. Configuration is not set if it has not
@@ -78,147 +72,212 @@ class config_type {
   [[nodiscard]] virtual bool is_set() const;
 
   /**
-   * Helper function to match a regex
-   * @param value to match again
-   * @param regex that is used for the matching
-   * @return true if matched, false otherwise
+   * Returns the name of this configuration in a user-friendly representation
+   * @return
    */
-  static bool matches_regex(const std::string& value, const std::string& regex);
+  [[nodiscard]] virtual const std::string& get_config_name() const;
 
   virtual ~config_type() = default;
 
  protected:
   bool m_set = false;
+  std::string m_config_name;
+
+  static unsigned int get_inner_width(unsigned int indent_length);
 };
 
 class string_config_value : public config_type {
-  friend class factory;
-
  private:
   std::string m_value;
-  std::string m_regex;
+  std::string m_regex = ".*";
 
  public:
-  explicit string_config_value(YAML::Node const&);
+  explicit string_config_value(
+      const std::string& name, const std::string& value);
   string_config_value() = default;
 
+  void from_yaml(const YAML::Node& node) override;
+
   [[nodiscard]] std::string to_string(const std::string& indent) const override;
-  [[nodiscard]] bool validate() override;
-  [[nodiscard]] config_type_e get_config_type() const override;
+  void validate() override;
 
   [[nodiscard]] const std::string& get_value() const;
+  void set_validation_regex(const std::string& regex);
 };
 
 class option_config_value : public config_type {
-  friend class factory;
-
  private:
   bool m_value = false;
 
  public:
-  explicit option_config_value(YAML::Node const&);
+  explicit option_config_value(const std::string& name, bool value);
   option_config_value() = default;
 
+  void from_yaml(const YAML::Node& node) override;
+
   [[nodiscard]] std::string to_string(const std::string& indent) const override;
-  [[nodiscard]] bool validate() override;
-  [[nodiscard]] config_type_e get_config_type() const override;
 
   [[nodiscard]] bool get_value() const;
 };
 
-class uint8_config_value : public config_type {
-  friend class factory;
-
+class int_config_value : public config_type {
  private:
-  uint8_t m_value     = 0;
-  uint8_t m_min_value = 0;
-  uint8_t m_max_value = UINT8_MAX;
+  int m_value     = 0;
+  int m_min_value = 0;
+  int m_max_value = INT32_MAX;
 
  public:
-  explicit uint8_config_value(YAML::Node const&);
-  uint8_config_value() = default;
+  explicit int_config_value(const std::string& name, int value);
+  int_config_value() = default;
+
+  void from_yaml(const YAML::Node& node) override;
 
   [[nodiscard]] std::string to_string(const std::string& indent) const override;
-  [[nodiscard]] bool validate() override;
-  [[nodiscard]] config_type_e get_config_type() const override;
+  void validate() override;
 
-  [[nodiscard]] uint8_t get_value() const;
-  void set_validation_min_value(uint8_t val);
-  void set_validation_max_value(uint8_t val);
+  [[nodiscard]] int get_value() const;
+  void set_validation_interval(int min, int max);
 };
 
-class network_interface : public config_type {
- public:
-  static bool validate_sbi_api_version(const std::string& v);
-};
-
-class sbi_interface : public network_interface {
- private:
-  std::string m_api_version;
-  std::string m_url;
-
- public:
-  explicit sbi_interface(YAML::Node const&);
-  sbi_interface() = default;
-
-  [[nodiscard]] bool validate() override;
-  [[nodiscard]] std::string to_string(const std::string& indent) const override;
-  [[nodiscard]] config_type_e get_config_type() const override;
-
-  [[nodiscard]] const std::string& get_api_version() const;
-  [[nodiscard]] const std::string& get_url() const;
-};
-
-class local_interface : public network_interface {
-  friend class local_sbi_interface;
+class local_interface : public config_type {
+ protected:
+  string_config_value m_host{};
+  int_config_value m_port{};
+  [[nodiscard]] std::string to_string_for_local(
+      const std::string& indent) const;
 
  private:
-  std::string m_if_name{};
+  string_config_value m_if_name{};
+  // these values are read from the m_if_name
   in_addr m_addr4{};
   in6_addr m_addr6{};
   unsigned int m_mtu{};
-  uint16_t m_port{};
+  bool m_is_local_interface = false;
 
  public:
-  explicit local_interface(YAML::Node const&);
+  explicit local_interface(
+      const std::string& name, const std::string& host, uint16_t port,
+      const std::string& if_name);
+
   local_interface() = default;
 
-  [[nodiscard]] bool validate() override;
+  void from_yaml(const YAML::Node& node) override;
   [[nodiscard]] std::string to_string(const std::string& indent) const override;
-  [[nodiscard]] config_type_e get_config_type() const override;
+  void validate() override;
 
+  [[nodiscard]] const std::string& get_host() const;
   [[nodiscard]] const std::string& get_if_name() const;
   [[nodiscard]] const in_addr& get_addr4() const;
   [[nodiscard]] const in6_addr& get_addr6() const;
   [[nodiscard]] unsigned int get_mtu() const;
   [[nodiscard]] uint16_t get_port() const;
+
+  void set_is_local_interface(bool val);
+  bool is_local_interface() const;
 };
 
-class local_sbi_interface : public local_interface {
+class sbi_interface : public local_interface {
  private:
-  std::string m_api_version{};
-  uint8_t m_http_version = 1;
-  uint16_t m_port_http2{};
+  string_config_value m_api_version;
+  int_config_value m_port_http1;
+  int_config_value m_port_http2;
+  std::string m_url;
+
+  void set_url();
 
  public:
-  explicit local_sbi_interface(YAML::Node const&);
-  local_sbi_interface() = default;
+  explicit sbi_interface(
+      const std::string& name, const std::string& host, uint16_t port_http1,
+      uint16_t port_http2, const std::string& api_version,
+      const std::string& interface_name);
 
-  [[nodiscard]] bool validate() override;
+  sbi_interface() = default;
+
+  void from_yaml(const YAML::Node& node) override;
   [[nodiscard]] std::string to_string(const std::string& indent) const override;
+  void validate() override;
 
   [[nodiscard]] const std::string& get_api_version() const;
-  [[nodiscard]] uint8_t http_version() const;
+  [[nodiscard]] const std::string& get_url() const;
+  [[nodiscard]] uint16_t get_port_http1() const;
   [[nodiscard]] uint16_t get_port_http2() const;
+  [[nodiscard]] bool use_http2() const;
 };
 
-class factory {
+enum class interface_type_e { n1, n4 };
+
+class nf : public config_type {
+  friend class yaml_file;
+  friend class config;
+
+ private:
+  sbi_interface m_sbi;
+  local_interface m_n1;
+  local_interface m_n4;
+  string_config_value m_host;
+
  public:
-  static option_config_value get_option_config(bool val);
+  explicit nf(
+      const std::string& name, const std::string& host,
+      const sbi_interface& sbi, const local_interface& local,
+      interface_type_e type);
+  explicit nf(
+      const std::string& name, const std::string& host,
+      const sbi_interface& sbi);
+  explicit nf() = default;
 
-  static string_config_value get_string_config(const std::string& val);
+  void from_yaml(const YAML::Node& node) override;
 
-  static uint8_config_value get_uint8_config(uint8_t val);
+  [[nodiscard]] std::string to_string(const std::string& indent) const override;
+  void validate() override;
+  [[nodiscard]] const sbi_interface& get_sbi() const;
+  [[nodiscard]] const local_interface& get_n1() const;
+  [[nodiscard]] const local_interface& get_n4() const;
+  [[nodiscard]] const std::string& get_host() const;
+};
+
+class policy_config : public config_type {
+ private:
+  string_config_value m_pcc_rules_path;
+  string_config_value m_policy_decisions_path;
+  string_config_value m_traffic_rules_path;
+
+ public:
+  explicit policy_config(
+      const std::string& policy_decisions_path,
+      const std::string& pcc_rules_path, const std::string& traffic_rules_path);
+
+  void from_yaml(const YAML::Node& node) override;
+
+  [[nodiscard]] std::string to_string(const std::string& indent) const override;
+  [[nodiscard]] const std::string& get_pcc_rules_path() const;
+  [[nodiscard]] const std::string& get_policy_decisions_path() const;
+  [[nodiscard]] const std::string& get_traffic_rules_path() const;
+};
+
+class nf_features_config : public config_type {
+ private:
+  string_config_value m_string_value{};
+  option_config_value m_option_value{};
+  std::string m_nf_name;
+
+  void set_value(const YAML::Node& node);
+
+ public:
+  explicit nf_features_config(
+      const std::string& name, const std::string& nf_name, bool value);
+
+  explicit nf_features_config(
+      const std::string& name, const std::string& nf_name,
+      const std::string& value);
+
+  void from_yaml(const YAML::Node& node) override;
+
+  [[nodiscard]] std::string to_string(const std::string& indent) const override;
+  void validate() override;
+  void set_validation_regex(const std::string& regex);
+  [[nodiscard]] bool get_option() const;
+  [[nodiscard]] const std::string& get_string() const;
 };
 
 }  // namespace oai::config

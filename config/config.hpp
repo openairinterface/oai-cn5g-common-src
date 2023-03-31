@@ -47,7 +47,7 @@ const std::string LOGGER_NAME    = "config ";
 
 // common validator REGEX
 
-const std::string LOG_LVL_VALIDATOR_REGEX = "debug|info|warn|error|off";
+const std::string LOG_LVL_VALIDATOR_REGEX = "debug|info|warning|error|off";
 const std::string IPV4_ADDRESS_VALIDATOR_REGEX =
     "^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\\.?\\b){4}$";
 const std::string IPV6_ADDRESS_VALIDATOR_REGEX = ".*";  // TODO

@@ -97,8 +97,13 @@ bool config::validate() {
   std::shared_lock lock(m_config_mutex);
   bool success = true;
 
-  success &= safe_validate_field(m_register_nrf_feature);
   success &= safe_validate_field(m_log_level_feature);
+  // we set log level here to not print debug here, but first debug message is
+  // printed
+  if (success) {
+    logger::logger_registry::set_level(spdlog::level::from_str(log_level()));
+  }
+  success &= safe_validate_field(m_register_nrf_feature);
   for (auto& nf : m_nf_map) {
     success &= safe_validate_field(*nf.second);
   }

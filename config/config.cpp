@@ -156,6 +156,7 @@ std::string config::to_string() const {
 }
 
 void config::display() const {
+  logger::logger_registry::set_level(spdlog::level::info);
   std::stringstream ss(to_string());
   std::string line;
 
@@ -165,6 +166,7 @@ void config::display() const {
   while (std::getline(ss, line)) {
     logger::logger_registry::get_logger(LOGGER_NAME).info(line);
   }
+  logger::logger_registry::set_level(spdlog::level::from_str(log_level()));
 }
 
 bool config::init() {

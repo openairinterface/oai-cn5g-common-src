@@ -120,7 +120,7 @@ class config_iface {
 
   [[nodiscard]] virtual const nf& local() const = 0;
 
-  [[nodiscard]] virtual const policy_config& get_policy() const = 0;
+  [[nodiscard]] virtual const policy_config& get_pcf_policy() const = 0;
 
   /**
    * Initializes the configuration, reads YAML configuration file and validates
@@ -164,7 +164,7 @@ class config : public config_iface {
 
   [[nodiscard]] const nf& local() const override;
 
-  [[nodiscard]] const policy_config& get_policy() const override;
+  [[nodiscard]] const policy_config& get_pcf_policy() const override;
 
   bool init() override;
 
@@ -194,7 +194,7 @@ class config : public config_iface {
   std::shared_ptr<nf> m_ausf;
   std::shared_ptr<nf> m_nssf;
   std::shared_ptr<nf> m_local_nf;
-  class policy_config m_policy;
+  policy_config m_pcf_policy;
 
   std::unordered_map<std::string, std::shared_ptr<nf>> m_nf_map;
 

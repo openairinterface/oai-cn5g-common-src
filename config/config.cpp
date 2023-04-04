@@ -42,7 +42,7 @@ config::config(
     bool log_rot_file)
     : m_log_level_feature("Log Level", nf_name, std::string("info")),
       m_register_nrf_feature("Register NF", nf_name, false),
-      m_policy(
+      m_pcf_policy(
           "/openair-pcf/policies/policy_decisions",
           "/openair-pcf/policies/pcc_rules",
           "/openair-pcf/policies/traffic_rules") {
@@ -148,7 +148,7 @@ std::string config::to_string() const {
       out.append(nf.second->to_string(indent));
     }
   }
-  out.append(m_policy.to_string(indent));
+  out.append(m_pcf_policy.to_string(indent));
 
   // TODO rest of the fields
 
@@ -231,8 +231,8 @@ const nf& config::local() const {
   return *m_local_nf;
 }
 
-const class policy_config& config::get_policy() const {
-  return m_policy;
+const class policy_config& config::get_pcf_policy() const {
+  return m_pcf_policy;
 }
 
 void config::update_used_nfs() {

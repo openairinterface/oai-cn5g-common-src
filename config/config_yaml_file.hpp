@@ -53,6 +53,9 @@ class yaml_file : public yaml_file_iface {
   explicit yaml_file() = default;
 
   void read_from_file(const std::string& file_path, config& config) override;
+
+ private:
+  static void read_pcf_config(const YAML::Node& node, config& config);
 };
 
 }  // namespace oai::config

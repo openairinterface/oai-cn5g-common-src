@@ -47,8 +47,8 @@ void oai::config::yaml_file::read_from_file(
           config.m_log_level_feature.from_yaml(elem.second);
         } else if (key == REGISTER_NF_CONFIG_NAME) {
           config.m_register_nrf_feature.from_yaml(elem.second);
-        } else if (key == LOCAL_POLICY_CONFIG_NAME) {
-          config.m_policy.from_yaml(elem.second);
+        } else if (key == PCF_CONFIG_NAME) {
+          read_pcf_config(elem.second, config);
         } else if (key == NF_LIST_CONFIG_NAME) {
           for (auto yaml_nf : elem.second) {
             auto nf_name = yaml_nf.first.as<std::string>();
@@ -92,4 +92,14 @@ void oai::config::yaml_file::read_from_file(
     throw std::runtime_error(ex.what());
   }
   config.update_used_nfs();
+}
+
+void oai::config::yaml_file::read_pcf_config(
+    const YAML::Node& node, config& cfg) {
+  for (const auto& elem : node) {
+    auto key = elem.first.as<std::string>();
+    if (key == LOCAL_POLICY_CONFIG_NAME) {
+      cfg.m_pcf_policy.from_yaml(elem.second);
+    }
+  }
 }

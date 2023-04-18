@@ -36,38 +36,54 @@
 #include <map>
 #include <memory>
 #include <shared_mutex>
+#include <unordered_set>
 
 namespace oai::config {
 
 const int COLUMN_WIDTH           = 30;
-const std::string BASE_FORMATTER = " {} {:.<{}}: {}\n";
+const int INDENT_WIDTH           = 2;
+const std::string BASE_FORMATTER = "{} {:.<{}}: {}\n";
 const std::string LOGGER_NAME    = "config ";
+
+// common validator REGEX
+
+const std::string LOG_LVL_VALIDATOR_REGEX = "debug|info|warning|error|off";
+const std::string IPV4_ADDRESS_VALIDATOR_REGEX =
+    "^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\\.?\\b){4}$";
+const std::string IPV6_ADDRESS_VALIDATOR_REGEX = ".*";  // TODO
+const std::string HOSTNAME_VALIDATOR_REGEX =
+    "^([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])(\\.([a-zA-Z0-9]|"
+    "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9]))*$";
+const std::string API_VERSION_REGEX = "v1|v2";
+const std::string HOST_VALIDATOR_REGEX =
+    IPV4_ADDRESS_VALIDATOR_REGEX + "|" + HOSTNAME_VALIDATOR_REGEX;
+
+const uint16_t PORT_MIN_VALUE = 1;
+const uint16_t PORT_MAX_VALUE = 65535;
+
+const std::string PCF_CONFIG_NAME  = "pcf";
+const std::string NRF_CONFIG_NAME  = "nrf";
+const std::string SMF_CONFIG_NAME  = "smf";
+const std::string AMF_CONFIG_NAME  = "amf";
+const std::string UDM_CONFIG_NAME  = "udm";
+const std::string UDR_CONFIG_NAME  = "udr";
+const std::string NSSF_CONFIG_NAME = "nssf";
+const std::string AUSF_CONFIG_NAME = "ausf";
+
+const std::string LOG_LEVEL_CONFIG_NAME    = "log_level";
+const std::string REGISTER_NF_CONFIG_NAME  = "register_nf";
+const std::string NF_LIST_CONFIG_NAME      = "nfs";
+const std::string LOCAL_POLICY_CONFIG_NAME = "local_policy";
 
 class config_iface {
  public:
-  /**
-   * Sets a string configuration, adds if not existing or overrides if exists
-   * Takes ownership of configuration, becomes null after call to this function
-   * @param name name of the configuration
-   * @param val value of the configuration
-   */
-  virtual void set_configuration(
-      const std::string& name, std::unique_ptr<config_type> val) = 0;
-
-  /**
-   * Sets a configuration of any type with name to be mandatory, used for
-   * validation
-   * @param name name of the configuration
-   */
-  virtual void set_configuration_mandatory(const std::string& name) = 0;
-
   /**
    * Validates the configuration:
    *  - All configurations set as mandatory must be present
    *  - All present configurations must pass their type-specific validation
    * @return True if validation passed, false otherwise
    */
-  [[nodiscard]] virtual bool validate() const = 0;
+  [[nodiscard]] virtual bool validate() = 0;
 
   /**
    * Returns a string representation of the configuration
@@ -75,139 +91,116 @@ class config_iface {
    */
   [[nodiscard]] virtual std::string to_string() const = 0;
 
-  // The get method is not defined here, as we cannot have virtual template
-  // members Annoying that I cannot have a virtual template method just called
-  // "get"
-  /**
-   * Gets a string base configuration
-   * @throws std::invalid_argument when name does not exist in configuration
-   * @param name of the configuration
-   * @return value
-   */
-  [[nodiscard]] virtual const std::string& get_base_conf_val(
-      const std::string& name) const = 0;
-
-  /**
-   * Gets a boolean configuration
-   * @throws std::invalid_argument when name does not exist in configuration
-   * @param name of the configuration
-   * @return value
-   */
-  [[nodiscard]] virtual bool get_support_feature(
-      const std::string& name) const = 0;
-
-  /**
-   * Gets a SBI interface configuration
-   * @throws std::invalid_argument when name does not exist in configuration
-   * @param name of the configuration
-   * @return value
-   */
-  [[nodiscard]] virtual const sbi_interface& get_sbi_interface(
-      const std::string& name) const = 0;
-
-  /**
-   * Gets a local SBI interface configuration
-   * @throws std::invalid_argument when name does not exist in configuration
-   * @param name of the configuration
-   * @return value
-   */
-  [[nodiscard]] virtual const local_sbi_interface& get_local_sbi_interface(
-      const std::string& name) const = 0;
-
-  /**
-   * Gets a local interface configuration
-   * @throws std::invalid_argument when name does not exist in configuration
-   * @param name of the configuration
-   * @return value
-   */
-  [[nodiscard]] virtual const local_interface& get_local_interface(
-      const std::string& name) const = 0;
-
-  /**
-   * Gets a uint8 configuration value
-   * @throws std::invalid_argument when name does not exist in configuration
-   * @param name of the configuration
-   * @return value
-   */
-  [[nodiscard]] virtual uint8_t get_uint8_conf_val(
-      const std::string& name) const = 0;
-
-  /**
-   * Gets a uint8 configuration
-   * @throws std::invalid_argument when name does not exist in configuration
-   * @param name of the configuration
-   * @return value
-   */
-  [[nodiscard]] virtual const uint8_config_value& get_uint8_conf(
-      const std::string& name) const = 0;
-
   /**
    * Displays the to_string method to the config logger
    */
   virtual void display() const = 0;
 
   virtual ~config_iface() = default;
+
+  [[nodiscard]] virtual bool register_nrf() const = 0;
+
+  [[nodiscard]] virtual const std::string& log_level() const = 0;
+
+  [[nodiscard]] virtual const nf& amf() const = 0;
+
+  [[nodiscard]] virtual const nf& smf() const = 0;
+
+  [[nodiscard]] virtual const nf& nrf() const = 0;
+
+  [[nodiscard]] virtual const nf& pcf() const = 0;
+
+  [[nodiscard]] virtual const nf& ausf() const = 0;
+
+  [[nodiscard]] virtual const nf& udm() const = 0;
+
+  [[nodiscard]] virtual const nf& udr() const = 0;
+
+  [[nodiscard]] virtual const nf& nssf() const = 0;
+
+  [[nodiscard]] virtual const nf& local() const = 0;
+
+  [[nodiscard]] virtual const policy_config& get_pcf_policy() const = 0;
+
+  /**
+   * Initializes the configuration, reads YAML configuration file and validates
+   * the configuration
+   * @return True on success
+   */
+  virtual bool init() = 0;
 };
 
 class config : public config_iface {
+  friend class yaml_file;
+
  public:
   explicit config(
-      const std::string& nf_name, bool log_stdout, bool log_rot_file) {
-    logger::logger_registry::register_logger(
-        nf_name, LOGGER_NAME, log_stdout, log_rot_file);
-    m_nf_name = nf_name;
-  }
+      const std::string& config_path, const std::string& nf_name,
+      bool log_stdout, bool log_rot_file);
 
-  void set_configuration(
-      const std::string& name, std::unique_ptr<config_type> val) override;
-
-  void set_configuration_mandatory(const std::string& name) override;
-
-  [[nodiscard]] bool validate() const override;
+  [[nodiscard]] bool validate() override;
 
   [[nodiscard]] std::string to_string() const override;
 
-  /**
-   * Gets configuration of type T, must be derived from conf_type
-   * @tparam T sub_type of conf_type
-   * @param name of the configuration
-   * @throws std::invalid_argument when name does not exist in configuration
-   * @return configuration of type T
-   */
-  template<typename T>
-  [[nodiscard]] const T& get(const std::string& name) const;
+  [[nodiscard]] bool register_nrf() const override;
 
-  [[nodiscard]] const std::string& get_base_conf_val(
-      const std::string& name) const override;
+  [[nodiscard]] const std::string& log_level() const override;
 
-  [[nodiscard]] bool get_support_feature(
-      const std::string& name) const override;
+  [[nodiscard]] const nf& amf() const override;
 
-  [[nodiscard]] const sbi_interface& get_sbi_interface(
-      const std::string& name) const override;
+  [[nodiscard]] const nf& smf() const override;
 
-  [[nodiscard]] const local_interface& get_local_interface(
-      const std::string& name) const override;
+  [[nodiscard]] const nf& nrf() const override;
 
-  [[nodiscard]] const local_sbi_interface& get_local_sbi_interface(
-      const std::string& name) const override;
+  [[nodiscard]] const nf& pcf() const override;
 
-  [[nodiscard]] uint8_t get_uint8_conf_val(
-      const std::string& name) const override;
+  [[nodiscard]] const nf& ausf() const override;
 
-  [[nodiscard]] const uint8_config_value& get_uint8_conf(
-      const std::string& name) const override;
+  [[nodiscard]] const nf& udm() const override;
+
+  [[nodiscard]] const nf& udr() const override;
+
+  [[nodiscard]] const nf& nssf() const override;
+
+  [[nodiscard]] const nf& local() const override;
+
+  [[nodiscard]] const policy_config& get_pcf_policy() const override;
+
+  bool init() override;
 
   void display() const override;
 
- private:
-  std::map<std::string, std::unique_ptr<config_type>> m_config;
+ protected:
+  // to define for each NF which values are used
+  std::unordered_set<std::string> m_used_config_values;
+  std::unordered_set<std::string> m_used_sbi_values;
+  std::string m_nf_name;
 
-  std::vector<std::string> m_mandatory_keys;
+  void update_used_nfs();
+
+ private:
+  std::string m_config_path;
+
+  nf_features_config m_log_level_feature;
+  nf_features_config m_register_nrf_feature;
+
+  // default values are set in constructor
+  std::shared_ptr<nf> m_amf;
+  std::shared_ptr<nf> m_smf;
+  std::shared_ptr<nf> m_nrf;
+  std::shared_ptr<nf> m_pcf;
+  std::shared_ptr<nf> m_udm;
+  std::shared_ptr<nf> m_udr;
+  std::shared_ptr<nf> m_ausf;
+  std::shared_ptr<nf> m_nssf;
+  std::shared_ptr<nf> m_local_nf;
+  policy_config m_pcf_policy;
+
+  std::unordered_map<std::string, std::shared_ptr<nf>> m_nf_map;
 
   mutable std::shared_mutex m_config_mutex;
 
-  std::string m_nf_name;
+  static bool safe_validate_field(config_type& config);
 };
 
 }  // namespace oai::config

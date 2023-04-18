@@ -28,47 +28,102 @@
 */
 
 #include "config.hpp"
+#include "if.hpp"
+#include "config_yaml_file.hpp"
+
 #include <fmt/format.h>
 #include <stdexcept>
-#include <sstream>
+#include <regex>
 
 using namespace oai::config;
 
-void config::set_configuration(
-    const std::string& name, std::unique_ptr<config_type> val) {
-  std::unique_lock lock(m_config_mutex);
-  m_config[name] = std::move(val);
+config::config(
+    const std::string& config_path, const std::string& nf_name, bool log_stdout,
+    bool log_rot_file)
+    : m_log_level_feature("Log Level", nf_name, std::string("info")),
+      m_register_nrf_feature("Register NF", nf_name, false),
+      m_pcf_policy(
+          "/openair-pcf/policies/policy_decisions",
+          "/openair-pcf/policies/pcc_rules",
+          "/openair-pcf/policies/traffic_rules") {
+  logger::logger_registry::register_logger(
+      nf_name, LOGGER_NAME, log_stdout, log_rot_file);
+
+  m_log_level_feature.set_validation_regex(LOG_LVL_VALIDATOR_REGEX);
+
+  m_config_path = config_path;
+  m_nf_name     = nf_name;
+
+  m_amf = std::make_shared<nf>(
+      "AMF", "oai-amf", sbi_interface("SBI", "oai-amf", 80, 0, "v1", "eth0"),
+      local_interface("N1", "oai-amf", 38412, "eth0"), interface_type_e::n1);
+
+  m_smf = std::make_shared<nf>(
+      "SMF", "oai-smf", sbi_interface("SBI", "oai-smf", 80, 0, "v1", "eth0"),
+      local_interface("N4", "oai-smf", 8805, "eth0"), interface_type_e::n4);
+
+  m_nrf = std::make_shared<nf>(
+      "NRF", "oai-nrf", sbi_interface("SBI", "oai-nrf", 80, 0, "v1", "eth0"));
+
+  m_udm = std::make_shared<nf>(
+      "UDM", "oai-udm", sbi_interface("SBI", "oai-udm", 80, 0, "v1", "eth0"));
+
+  m_udr = std::make_shared<nf>(
+      "UDR", "oai-udr", sbi_interface("SBI", "oai-udr", 80, 0, "v1", "eth0"));
+
+  m_pcf = std::make_shared<nf>(
+      "PCF", "oai-pcf", sbi_interface("SBI", "oai-pcf", 80, 0, "v1", "eth0"));
+
+  m_ausf = std::make_shared<nf>(
+      "AUSF", "oai-ausf",
+      sbi_interface("SBI", "oai-ausf", 80, 0, "v1", "eth0"));
+
+  m_nssf = std::make_shared<nf>(
+      "NSSF", "oai-nssf",
+      sbi_interface("SBI", "oai-nssf", 80, 0, "v1", "eth0"));
+
+  // we use a map to have easy mapping from string value to pointer
+  m_nf_map.insert(std::make_pair(AMF_CONFIG_NAME, m_amf));
+  m_nf_map.insert(std::make_pair(SMF_CONFIG_NAME, m_smf));
+  m_nf_map.insert(std::make_pair(NRF_CONFIG_NAME, m_nrf));
+  m_nf_map.insert(std::make_pair(AUSF_CONFIG_NAME, m_ausf));
+  m_nf_map.insert(std::make_pair(UDM_CONFIG_NAME, m_udm));
+  m_nf_map.insert(std::make_pair(UDR_CONFIG_NAME, m_udr));
+  m_nf_map.insert(std::make_pair(NSSF_CONFIG_NAME, m_nssf));
+  m_nf_map.insert(std::make_pair(PCF_CONFIG_NAME, m_pcf));
 }
 
-void config::set_configuration_mandatory(const std::string& name) {
-  std::unique_lock lock(m_config_mutex);
-  m_mandatory_keys.push_back(name);
-}
-
-bool config::validate() const {
+bool config::validate() {
   std::shared_lock lock(m_config_mutex);
   bool success = true;
-  // check if all keys are present
-  for (const auto& key : m_mandatory_keys) {
-    const auto it = m_config.find(key);
-    if (it == m_config.end()) {
-      logger::logger_registry::get_logger(LOGGER_NAME)
-          .error(
-              "Mandatory configuration %s does not exist in configuration",
-              key);
-      success = false;
-    }
-  }
 
-  for (const auto& conf : m_config) {
-    if (!conf.second->validate()) {
-      logger::logger_registry::get_logger(LOGGER_NAME)
-          .error("Validation of %s not successful", conf.first);
-      success = false;
-    }
+  success &= safe_validate_field(m_log_level_feature);
+  // we set log level here to not print debug here, but first debug message is
+  // printed
+  if (success) {
+    logger::logger_registry::set_level(spdlog::level::from_str(log_level()));
+  }
+  success &= safe_validate_field(m_register_nrf_feature);
+  for (auto& nf : m_nf_map) {
+    success &= safe_validate_field(*nf.second);
   }
 
   return success;
+}
+
+bool config::safe_validate_field(config_type& config) {
+  try {
+    logger::logger_registry::get_logger(LOGGER_NAME)
+        .debug("Validating configuration of %s", config.get_config_name());
+    config.validate();
+    return true;
+  } catch (std::exception& e) {
+    logger::logger_registry::get_logger(LOGGER_NAME)
+        .error(
+            "Validation of %s not successful: %s", config.get_config_name(),
+            e.what());
+    return false;
+  }
 }
 
 std::string config::to_string() const {
@@ -80,113 +135,28 @@ std::string config::to_string() const {
   std::string local_iface_out;
   std::string others_out;
 
-  for (const auto& conf : m_config) {
-    std::string val = fmt::format(
-        BASE_FORMATTER, "-", conf.first, COLUMN_WIDTH,
-        conf.second->to_string("  "));
-
-    switch (conf.second->get_config_type()) {
-      case config_type_e::local:
-        local_iface_out.append(val);
-        break;
-      case config_type_e::string:
-      case config_type_e::uint8:
-        base_conf_out.append(val);
-        break;
-      case config_type_e::option:
-        support_features_out.append(val);
-        break;
-      case config_type_e::sbi:
-        sbi_out.append(val);
-        break;
-      case config_type_e::invalid:
-        logger::logger_registry::get_logger(LOGGER_NAME)
-            .error(
-                "General error in configuration. Invalid type of: %s",
-                conf.first);
-        others_out.append(val);
-        break;
-      default:
-        logger::logger_registry::get_logger(LOGGER_NAME)
-            .warn(
-                "%s unhandled value %d", __PRETTY_FUNCTION__,
-                static_cast<int>(conf.second->get_config_type()));
+  std::string out;
+  out.append("Basic Configuration:\n");
+  std::string indent = fmt::format("{:<{}}", "", INDENT_WIDTH);
+  out.append(m_log_level_feature.to_string(indent));
+  out.append(m_register_nrf_feature.to_string(indent));
+  out.append("Local NF Configuration:\n");
+  out.append(m_local_nf->to_string(indent));
+  out.append("Peer NF Configuration:\n");
+  for (const auto& nf : m_nf_map) {
+    if (nf.first != m_nf_name) {
+      out.append(nf.second->to_string(indent));
     }
   }
+  out.append(m_pcf_policy.to_string(indent));
 
-  std::string out;
-  if (!base_conf_out.empty()) {
-    out.append("Basic Configuration:\n").append(base_conf_out);
-  }
-  if (!support_features_out.empty()) {
-    out.append("Support features:\n").append(support_features_out);
-  }
-  if (!local_iface_out.empty()) {
-    out.append("Local Interfaces:\n").append(local_iface_out);
-  }
-  if (!sbi_out.empty()) {
-    out.append("SBI Interfaces:\n").append(sbi_out);
-  }
-  if (!others_out.empty()) {
-    out.append("Other configuration:\n").append(others_out);
-  }
+  // TODO rest of the fields
 
   return out;
 }
 
-const std::string& config::get_base_conf_val(const std::string& name) const {
-  return get<string_config_value>(name).get_value();
-}
-
-bool config::get_support_feature(const std::string& name) const {
-  return get<option_config_value>(name).get_value();
-}
-
-const sbi_interface& config::get_sbi_interface(const std::string& name) const {
-  return get<sbi_interface>(name);
-}
-
-const local_interface& config::get_local_interface(
-    const std::string& name) const {
-  return get<local_interface>(name);
-}
-
-const local_sbi_interface& config::get_local_sbi_interface(
-    const std::string& name) const {
-  return get<local_sbi_interface>(name);
-}
-
-uint8_t config::get_uint8_conf_val(const std::string& name) const {
-  return get_uint8_conf(name).get_value();
-}
-
-const uint8_config_value& config::get_uint8_conf(
-    const std::string& name) const {
-  return get<uint8_config_value>(name);
-}
-
-template<typename T>
-const T& config::get(const std::string& name) const {
-  static_assert(
-      std::is_base_of<config_type, T>::value,
-      "Templated config type not derived from config_type");
-
-  std::shared_lock lock(m_config_mutex);
-  const auto it = m_config.find(name);
-  if (it == m_config.end()) {
-    throw std::invalid_argument(
-        fmt::format("Configuration {} does not exist", name));
-  }
-  // may throw a bad_cast exception, we catch it to conform with interface
-  try {
-    return dynamic_cast<T&>(*(it->second));
-  } catch (std::bad_cast& e) {
-    throw std::invalid_argument(
-        fmt::format("Configuration {} has wrong type: {}", name, e.what()));
-  }
-}
-
 void config::display() const {
+  logger::logger_registry::set_level(spdlog::level::info);
   std::stringstream ss(to_string());
   std::string line;
 
@@ -195,5 +165,91 @@ void config::display() const {
 
   while (std::getline(ss, line)) {
     logger::logger_registry::get_logger(LOGGER_NAME).info(line);
+  }
+  logger::logger_registry::set_level(spdlog::level::from_str(log_level()));
+}
+
+bool config::init() {
+  yaml_file file;
+  try {
+    logger::logger_registry::get_logger(LOGGER_NAME)
+        .info("Reading NF configuration from %s", m_config_path);
+    file.read_from_file(m_config_path, *this);
+  } catch (std::runtime_error& err) {
+    return false;
+  }
+
+  if (!validate()) {
+    logger::logger_registry::get_logger(LOGGER_NAME)
+        .error("Configuration validation not successful!");
+    return false;
+  }
+  return true;
+}
+
+bool config::register_nrf() const {
+  return m_register_nrf_feature.get_option();
+}
+
+const std::string& config::log_level() const {
+  return m_log_level_feature.get_string();
+}
+
+const nf& config::amf() const {
+  return *m_amf;
+}
+
+const nf& config::smf() const {
+  return *m_smf;
+}
+
+const nf& config::nrf() const {
+  return *m_nrf;
+}
+
+const nf& config::pcf() const {
+  return *m_pcf;
+}
+
+const nf& config::ausf() const {
+  return *m_ausf;
+}
+
+const nf& config::udm() const {
+  return *m_udm;
+}
+
+const nf& config::udr() const {
+  return *m_udr;
+}
+
+const nf& config::nssf() const {
+  return *m_nssf;
+}
+
+const nf& config::local() const {
+  return *m_local_nf;
+}
+
+const class policy_config& config::get_pcf_policy() const {
+  return m_pcf_policy;
+}
+
+void config::update_used_nfs() {
+  for (auto& nf : m_nf_map) {
+    if (nf.first == m_nf_name) {
+      m_local_nf = nf.second;
+      m_local_nf->m_sbi.set_is_local_interface(true);
+      m_local_nf->m_n1.set_is_local_interface(true);
+      m_local_nf->m_n4.set_is_local_interface(true);
+    } else {
+      auto used_nf = m_used_sbi_values.find(nf.first);
+      if (used_nf == m_used_sbi_values.end()) {
+        nf.second->m_set = false;
+      }
+      if (register_nrf() && nf.first != "nrf") {
+        nf.second->m_set = false;
+      }
+    }
   }
 }

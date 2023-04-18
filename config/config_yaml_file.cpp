@@ -33,33 +33,50 @@
 using namespace oai::logger;
 
 void oai::config::yaml_file::read_from_file(
-    const std::string& file_path, oai::config::config_iface& config) {
+    const std::string& file_path, oai::config::config& config) {
   try {
     YAML::Node node = YAML::LoadFile(file_path);
     for (const auto& elem : node) {
-      bool success;
       auto key = elem.first.as<std::string>();
-      if (elem.second.IsScalar()) {
-        success = convert_type<uint8_config_value>(key, elem.second, config);
-        if (!success) {
-          success = convert_type<option_config_value>(key, elem.second, config);
-        }
-        if (!success) {
-          success = convert_type<string_config_value>(key, elem.second, config);
-        }
-      } else {
-        success = convert_type<sbi_interface>(key, elem.second, config);
-        if (!success) {
-          success = convert_type<local_sbi_interface>(key, elem.second, config);
-        }
-        if (!success) {
-          success = convert_type<local_interface>(key, elem.second, config);
-        }
+      if (config.m_used_config_values.find(key) ==
+          config.m_used_config_values.end()) {
+        continue;
       }
+      try {
+        if (key == LOG_LEVEL_CONFIG_NAME) {
+          config.m_log_level_feature.from_yaml(elem.second);
+        } else if (key == REGISTER_NF_CONFIG_NAME) {
+          config.m_register_nrf_feature.from_yaml(elem.second);
+        } else if (key == PCF_CONFIG_NAME) {
+          read_pcf_config(elem.second, config);
+        } else if (key == NF_LIST_CONFIG_NAME) {
+          for (auto yaml_nf : elem.second) {
+            auto nf_name = yaml_nf.first.as<std::string>();
 
-      if (!success) {
-        logger_registry::get_logger(LOGGER_NAME)
-            .warn("Could not parse YAML element: %s", key);
+            const auto nf_ptr = config.m_nf_map.find(nf_name);
+            if (nf_ptr == config.m_nf_map.end()) {
+              logger_registry::get_logger(LOGGER_NAME)
+                  .info("Unknown NF %s in configuration. Ignored", nf_name);
+              continue;
+            }
+            if (config.m_used_sbi_values.find(nf_name) ==
+                config.m_used_sbi_values.end()) {
+              // we unset the values that are not used by this NF -> they are
+              // not validated and not printed
+              nf_ptr->second->m_set = false;
+              continue;
+            }
+            try {
+              nf_ptr->second->from_yaml(yaml_nf.second);
+            } catch (std::exception& e) {
+              logger::logger_registry::get_logger(LOGGER_NAME)
+                  .warn("Could not parse %s: %s", nf_name, e.what());
+            }
+          }
+        }
+      } catch (std::exception& e) {
+        logger::logger_registry::get_logger(LOGGER_NAME)
+            .warn("Could not parse %s: %s", key, e.what());
       }
     }
   } catch (YAML::BadFile& ex) {
@@ -74,18 +91,15 @@ void oai::config::yaml_file::read_from_file(
         .error("Could not parse YAML configuration file: %s", ex.what());
     throw std::runtime_error(ex.what());
   }
+  config.update_used_nfs();
 }
 
-template<class T>
-bool oai::config::yaml_file::convert_type(
-    const std::string& key, const YAML::Node& node, config_iface& config) {
-  try {
-    T conf_val{node};
-    std::unique_ptr<config_type> conf = std::make_unique<T>(conf_val);
-    config.set_configuration(key, std::move(conf));
-    return true;
-
-  } catch (std::exception&) {
-    return false;
+void oai::config::yaml_file::read_pcf_config(
+    const YAML::Node& node, config& cfg) {
+  for (const auto& elem : node) {
+    auto key = elem.first.as<std::string>();
+    if (key == LOCAL_POLICY_CONFIG_NAME) {
+      cfg.m_pcf_policy.from_yaml(elem.second);
+    }
   }
 }

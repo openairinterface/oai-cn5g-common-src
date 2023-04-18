@@ -45,21 +45,17 @@ class yaml_file_iface {
    * @param filepath filepath to load configuration from
    * @param config config object to load into
    */
-  virtual void read_from_file(
-      const std::string& file_path, config_iface& config) = 0;
+  virtual void read_from_file(const std::string& file_path, config& config) = 0;
 };
 
 class yaml_file : public yaml_file_iface {
  public:
   explicit yaml_file() = default;
 
-  void read_from_file(
-      const std::string& file_path, config_iface& config) override;
+  void read_from_file(const std::string& file_path, config& config) override;
 
  private:
-  template<class T>
-  static bool convert_type(
-      const std::string& conf, const YAML::Node& node, config_iface& config);
+  static void read_pcf_config(const YAML::Node& node, config& config);
 };
 
 }  // namespace oai::config

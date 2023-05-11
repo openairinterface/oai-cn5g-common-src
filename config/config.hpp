@@ -75,16 +75,6 @@ const std::string REGISTER_NF_CONFIG_NAME  = "register_nf";
 const std::string NF_LIST_CONFIG_NAME      = "nfs";
 const std::string LOCAL_POLICY_CONFIG_NAME = "local_policy";
 
-// AMF
-constexpr auto AMF_SUPPORT_FEATURES                   = "support_features";
-constexpr auto AMF_SUPPORT_FEATURES_USE_EXTERNAL_AUSF = "use_external_ausf";
-constexpr auto AMF_SUPPORT_FEATURES_USE_EXTERNAL_UDM  = "use_external_udm";
-constexpr auto AMF_SUPPORT_FEATURES_USE_EXTERNAL_NSSF = "use_external_nssf";
-constexpr auto AMF_SUPPORT_FEATURES_ENABLE_SMF_SELECTIOM =
-    "enable_smf_selection";
-constexpr auto AMF_RELATIVE_CAPACITY_NAME    = "relative_capacity";
-constexpr auto AMF_STATISTICS_TIMER_INTERVAL = "statistics_timer_interval";
-
 class config_iface {
  public:
   /**
@@ -112,22 +102,6 @@ class config_iface {
 
   [[nodiscard]] virtual const std::string& log_level() const = 0;
 
-  [[nodiscard]] virtual const amf& get_amf() const = 0;
-
-  [[nodiscard]] virtual const nf& get_smf() const = 0;
-
-  [[nodiscard]] virtual const nf& get_nrf() const = 0;
-
-  [[nodiscard]] virtual const nf& get_pcf() const = 0;
-
-  [[nodiscard]] virtual const nf& get_ausf() const = 0;
-
-  [[nodiscard]] virtual const nf& get_udm() const = 0;
-
-  [[nodiscard]] virtual const nf& get_udr() const = 0;
-
-  [[nodiscard]] virtual const nf& get_nssf() const = 0;
-
   [[nodiscard]] virtual const nf& local() const = 0;
 
   [[nodiscard]] virtual const policy_config& get_pcf_policy() const = 0;
@@ -141,7 +115,7 @@ class config_iface {
 };
 
 class config : public config_iface {
-  friend class yaml_file;
+  // friend class yaml_file;
 
  public:
   explicit config(
@@ -155,22 +129,6 @@ class config : public config_iface {
   [[nodiscard]] bool register_nrf() const override;
 
   [[nodiscard]] const std::string& log_level() const override;
-
-  [[nodiscard]] const amf& get_amf() const override;
-
-  [[nodiscard]] const nf& get_smf() const override;
-
-  [[nodiscard]] const nf& get_nrf() const override;
-
-  [[nodiscard]] const nf& get_pcf() const override;
-
-  [[nodiscard]] const nf& get_ausf() const override;
-
-  [[nodiscard]] const nf& get_udm() const override;
-
-  [[nodiscard]] const nf& get_udr() const override;
-
-  [[nodiscard]] const nf& get_nssf() const override;
 
   [[nodiscard]] const nf& local() const override;
 
@@ -189,6 +147,7 @@ class config : public config_iface {
   std::string m_nf_name;
 
   void update_used_nfs();
+  bool add_nf(const std::string& name, const std::shared_ptr<nf>& nf_ptr);
 
  private:
   std::string m_config_path;
@@ -196,15 +155,6 @@ class config : public config_iface {
   nf_features_config m_log_level_feature;
   nf_features_config m_register_nrf_feature;
 
-  // default values are set in constructor
-  std::shared_ptr<amf> m_amf;
-  std::shared_ptr<nf> m_smf;
-  std::shared_ptr<nf> m_nrf;
-  std::shared_ptr<nf> m_pcf;
-  std::shared_ptr<nf> m_udm;
-  std::shared_ptr<nf> m_udr;
-  std::shared_ptr<nf> m_ausf;
-  std::shared_ptr<nf> m_nssf;
   std::shared_ptr<nf> m_local_nf;
 
   // TODO: should not included in common Config

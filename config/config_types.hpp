@@ -36,6 +36,8 @@
 #include <yaml-cpp/yaml.h>
 
 namespace oai::config {
+const std::string INNER_LIST_ELEM = "+";
+const std::string OUTER_LIST_ELEM = "-";
 
 class config_type {
   friend class yaml_file_iface;
@@ -256,48 +258,6 @@ class policy_config : public config_type {
   [[nodiscard]] const std::string& get_pcc_rules_path() const;
   [[nodiscard]] const std::string& get_policy_decisions_path() const;
   [[nodiscard]] const std::string& get_traffic_rules_path() const;
-};
-
-class amf_support_features : public config_type {
- private:
-  option_config_value m_use_external_ausf{};
-  option_config_value m_use_external_udm{};
-  option_config_value m_use_external_nssf{};
-  option_config_value m_enable_smf_selection{};
-
-  void set_value(const YAML::Node& node);
-
- public:
-  explicit amf_support_features();
-
-  void from_yaml(const YAML::Node& node) override;
-
-  [[nodiscard]] std::string to_string(const std::string& indent) const override;
-  void validate() override;
-  void set_validation_regex(const std::string& regex);
-};
-
-class amf : public nf {
- private:
-  amf_support_features m_amf_support_features;
-  int_config_value m_relative_capacity;
-  int_config_value m_statistics_timer_interval;
-  // TODO: served_guami_list
-  // TODO: plmn_support_list
-  // TODO: supported_integrity_algorithms
-  // TODO: supported_ciphering_algorithms
-
- public:
-  explicit amf(
-      const std::string& name, const std::string& host,
-      const sbi_interface& sbi, const local_interface& local,
-      interface_type_e type);
-
-  void from_yaml(const YAML::Node& node) override;
-
-  [[nodiscard]] std::string to_string(const std::string& indent) const override;
-  // [[nodiscard]] const uint32_t& get_relative_capacity() const;
-  // [[nodiscard]] const uint32_t& get_statistics_timer_interval() const;
 };
 
 class nf_features_config : public config_type {

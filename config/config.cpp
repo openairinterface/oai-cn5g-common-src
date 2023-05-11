@@ -29,7 +29,6 @@
 
 #include "config.hpp"
 #include "if.hpp"
-#include "config_yaml_file.hpp"
 
 #include <fmt/format.h>
 #include <stdexcept>
@@ -53,47 +52,6 @@ config::config(
 
   m_config_path = config_path;
   m_nf_name     = nf_name;
-
-  /*
-  //ONlY create and store necessary NFs
-  m_amf = std::make_shared<nf>(
-      "AMF", "oai-amf", sbi_interface("SBI", "oai-amf", 80, 0, "v1", "eth0"),
-      local_interface("N1", "oai-amf", 38412, "eth0"), interface_type_e::n1);
-
-  m_smf = std::make_shared<nf>(
-      "SMF", "oai-smf", sbi_interface("SBI", "oai-smf", 80, 0, "v1", "eth0"),
-      local_interface("N4", "oai-smf", 8805, "eth0"), interface_type_e::n4);
-
-  m_nrf = std::make_shared<nf>(
-      "NRF", "oai-nrf", sbi_interface("SBI", "oai-nrf", 80, 0, "v1", "eth0"));
-
-  m_udm = std::make_shared<nf>(
-      "UDM", "oai-udm", sbi_interface("SBI", "oai-udm", 80, 0, "v1", "eth0"));
-
-  m_udr = std::make_shared<nf>(
-      "UDR", "oai-udr", sbi_interface("SBI", "oai-udr", 80, 0, "v1", "eth0"));
-
-  m_pcf = std::make_shared<nf>(
-      "PCF", "oai-pcf", sbi_interface("SBI", "oai-pcf", 80, 0, "v1", "eth0"));
-
-  m_ausf = std::make_shared<nf>(
-      "AUSF", "oai-ausf",
-      sbi_interface("SBI", "oai-ausf", 80, 0, "v1", "eth0"));
-
-  m_nssf = std::make_shared<nf>(
-      "NSSF", "oai-nssf",
-      sbi_interface("SBI", "oai-nssf", 80, 0, "v1", "eth0"));
-
-  // we use a map to have easy mapping from string value to pointer
-  m_nf_map.insert(std::make_pair(AMF_CONFIG_NAME, m_amf));
-  m_nf_map.insert(std::make_pair(SMF_CONFIG_NAME, m_smf));
-  m_nf_map.insert(std::make_pair(NRF_CONFIG_NAME, m_nrf));
-  m_nf_map.insert(std::make_pair(AUSF_CONFIG_NAME, m_ausf));
-  m_nf_map.insert(std::make_pair(UDM_CONFIG_NAME, m_udm));
-  m_nf_map.insert(std::make_pair(UDR_CONFIG_NAME, m_udr));
-  m_nf_map.insert(std::make_pair(NSSF_CONFIG_NAME, m_nssf));
-  m_nf_map.insert(std::make_pair(PCF_CONFIG_NAME, m_pcf));
-  */
 }
 
 void config::read_from_file(const std::string& file_path) {
@@ -109,14 +67,11 @@ void config::read_from_file(const std::string& file_path) {
           m_log_level_feature.from_yaml(elem.second);
         } else if (key == REGISTER_NF_CONFIG_NAME) {
           m_register_nrf_feature.from_yaml(elem.second);
-        } else if (key == PCF_CONFIG_NAME) {
-          // TODO FOR PCF: read_pcf_config(elem.second, config);
-        } else if (key == AMF_CONFIG_NAME) {
-          const auto nf_ptr = m_nf_map.find(AMF_CONFIG_NAME);
+        } else if (key == m_nf_name) {
+          const auto nf_ptr = m_nf_map.find(m_nf_name);
           if (nf_ptr == m_nf_map.end()) {
             logger::logger_registry::get_logger(LOGGER_NAME)
-                .info(
-                    "Unknown NF %s in configuration. Ignored", AMF_CONFIG_NAME);
+                .info("Unknown NF %s in configuration. Ignored", m_nf_name);
             continue;
           }
 
@@ -271,38 +226,6 @@ const std::string& config::log_level() const {
   return m_log_level_feature.get_string();
 }
 
-const amf& config::get_amf() const {
-  return *m_amf;
-}
-
-const nf& config::get_smf() const {
-  return *m_smf;
-}
-
-const nf& config::get_nrf() const {
-  return *m_nrf;
-}
-
-const nf& config::get_pcf() const {
-  return *m_pcf;
-}
-
-const nf& config::get_ausf() const {
-  return *m_ausf;
-}
-
-const nf& config::get_udm() const {
-  return *m_udm;
-}
-
-const nf& config::get_udr() const {
-  return *m_udr;
-}
-
-const nf& config::get_nssf() const {
-  return *m_nssf;
-}
-
 const nf& config::local() const {
   return *m_local_nf;
 }
@@ -311,25 +234,13 @@ const class policy_config& config::get_pcf_policy() const {
   return m_pcf_policy;
 }
 
-void config::update_used_nfs() {
-  // TODO with NF_Type and switch
-  if (!m_nf_name.compare(AMF_CONFIG_NAME)) {
-    logger::logger_registry::get_logger(LOGGER_NAME)
-        .warn("NF Name %s", AMF_CONFIG_NAME);
-    m_amf = std::make_shared<amf>(
-        "AMF", "oai-amf", sbi_interface("SBI", "oai-amf", 80, 0, "v1", "eth0"),
-        local_interface("N1", "oai-amf", 38412, "eth0"), interface_type_e::n1);
-    m_nf_map.insert(std::make_pair(AMF_CONFIG_NAME, m_amf));
-  }
-  for (auto& used_nf : m_used_sbi_values) {
-    if (!used_nf.compare(SMF_CONFIG_NAME)) {
-      m_smf = std::make_shared<nf>(
-          "SMF", "oai-smf",
-          sbi_interface("SBI", "oai-smf", 80, 0, "v1", "eth0"));
-      m_nf_map.insert(std::make_pair(SMF_CONFIG_NAME, m_smf));
-    }
-  }
+bool config::add_nf(
+    const std::string& name, const std::shared_ptr<nf>& nf_ptr) {
+  m_nf_map.insert(std::make_pair(name, nf_ptr));
+  return true;
+}
 
+void config::update_used_nfs() {
   for (auto& nf : m_nf_map) {
     if (nf.first == m_nf_name) {
       m_local_nf = nf.second;

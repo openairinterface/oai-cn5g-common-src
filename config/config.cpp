@@ -54,6 +54,8 @@ config::config(
   m_config_path = config_path;
   m_nf_name     = nf_name;
 
+  /*
+  //ONlY create and store necessary NFs
   m_amf = std::make_shared<nf>(
       "AMF", "oai-amf", sbi_interface("SBI", "oai-amf", 80, 0, "v1", "eth0"),
       local_interface("N1", "oai-amf", 38412, "eth0"), interface_type_e::n1);
@@ -91,6 +93,81 @@ config::config(
   m_nf_map.insert(std::make_pair(UDR_CONFIG_NAME, m_udr));
   m_nf_map.insert(std::make_pair(NSSF_CONFIG_NAME, m_nssf));
   m_nf_map.insert(std::make_pair(PCF_CONFIG_NAME, m_pcf));
+  */
+}
+
+void config::read_from_file(const std::string& file_path) {
+  try {
+    YAML::Node node = YAML::LoadFile(file_path);
+    for (const auto& elem : node) {
+      auto key = elem.first.as<std::string>();
+      if (m_used_config_values.find(key) == m_used_config_values.end()) {
+        continue;
+      }
+      try {
+        if (key == LOG_LEVEL_CONFIG_NAME) {
+          m_log_level_feature.from_yaml(elem.second);
+        } else if (key == REGISTER_NF_CONFIG_NAME) {
+          m_register_nrf_feature.from_yaml(elem.second);
+        } else if (key == PCF_CONFIG_NAME) {
+          // TODO FOR PCF: read_pcf_config(elem.second, config);
+        } else if (key == AMF_CONFIG_NAME) {
+          const auto nf_ptr = m_nf_map.find(AMF_CONFIG_NAME);
+          if (nf_ptr == m_nf_map.end()) {
+            logger::logger_registry::get_logger(LOGGER_NAME)
+                .info(
+                    "Unknown NF %s in configuration. Ignored", AMF_CONFIG_NAME);
+            continue;
+          }
+
+          try {
+            nf_ptr->second->from_yaml(elem.second);
+          } catch (std::exception& e) {
+            logger::logger_registry::get_logger(LOGGER_NAME)
+                .warn("Could not parse %s: %s", AMF_CONFIG_NAME, e.what());
+          }
+        } else if (key == NF_LIST_CONFIG_NAME) {
+          for (auto yaml_nf : elem.second) {
+            auto nf_name = yaml_nf.first.as<std::string>();
+
+            const auto nf_ptr = m_nf_map.find(nf_name);
+            if (nf_ptr == m_nf_map.end()) {
+              logger::logger_registry::get_logger(LOGGER_NAME)
+                  .info("Unknown NF %s in configuration. Ignored", nf_name);
+              continue;
+            }
+            if (m_used_sbi_values.find(nf_name) == m_used_sbi_values.end()) {
+              // we unset the values that are not used by this NF -> they are
+              // not validated and not printed
+              nf_ptr->second->m_set = false;
+              continue;
+            }
+            try {
+              nf_ptr->second->from_yaml(yaml_nf.second);
+            } catch (std::exception& e) {
+              logger::logger_registry::get_logger(LOGGER_NAME)
+                  .warn("Could not parse %s: %s", nf_name, e.what());
+            }
+          }
+        }
+      } catch (std::exception& e) {
+        logger::logger_registry::get_logger(LOGGER_NAME)
+            .warn("Could not parse %s: %s", key, e.what());
+      }
+    }
+  } catch (YAML::BadFile& ex) {
+    logger::logger_registry::get_logger(LOGGER_NAME)
+        .error(
+            "Could not read YAML configuration file, please ensure that it "
+            "exists: %s",
+            ex.what());
+    throw std::runtime_error(ex.what());
+  } catch (std::exception& ex) {
+    logger::logger_registry::get_logger(LOGGER_NAME)
+        .error("Could not parse YAML configuration file: %s", ex.what());
+    throw std::runtime_error(ex.what());
+  }
+  update_used_nfs();
 }
 
 bool config::validate() {
@@ -170,11 +247,10 @@ void config::display() const {
 }
 
 bool config::init() {
-  yaml_file file;
   try {
     logger::logger_registry::get_logger(LOGGER_NAME)
         .info("Reading NF configuration from %s", m_config_path);
-    file.read_from_file(m_config_path, *this);
+    read_from_file(m_config_path);
   } catch (std::runtime_error& err) {
     return false;
   }
@@ -195,35 +271,35 @@ const std::string& config::log_level() const {
   return m_log_level_feature.get_string();
 }
 
-const nf& config::amf() const {
+const amf& config::get_amf() const {
   return *m_amf;
 }
 
-const nf& config::smf() const {
+const nf& config::get_smf() const {
   return *m_smf;
 }
 
-const nf& config::nrf() const {
+const nf& config::get_nrf() const {
   return *m_nrf;
 }
 
-const nf& config::pcf() const {
+const nf& config::get_pcf() const {
   return *m_pcf;
 }
 
-const nf& config::ausf() const {
+const nf& config::get_ausf() const {
   return *m_ausf;
 }
 
-const nf& config::udm() const {
+const nf& config::get_udm() const {
   return *m_udm;
 }
 
-const nf& config::udr() const {
+const nf& config::get_udr() const {
   return *m_udr;
 }
 
-const nf& config::nssf() const {
+const nf& config::get_nssf() const {
   return *m_nssf;
 }
 
@@ -236,6 +312,24 @@ const class policy_config& config::get_pcf_policy() const {
 }
 
 void config::update_used_nfs() {
+  // TODO with NF_Type and switch
+  if (!m_nf_name.compare(AMF_CONFIG_NAME)) {
+    logger::logger_registry::get_logger(LOGGER_NAME)
+        .warn("NF Name %s", AMF_CONFIG_NAME);
+    m_amf = std::make_shared<amf>(
+        "AMF", "oai-amf", sbi_interface("SBI", "oai-amf", 80, 0, "v1", "eth0"),
+        local_interface("N1", "oai-amf", 38412, "eth0"), interface_type_e::n1);
+    m_nf_map.insert(std::make_pair(AMF_CONFIG_NAME, m_amf));
+  }
+  for (auto& used_nf : m_used_sbi_values) {
+    if (!used_nf.compare(SMF_CONFIG_NAME)) {
+      m_smf = std::make_shared<nf>(
+          "SMF", "oai-smf",
+          sbi_interface("SBI", "oai-smf", 80, 0, "v1", "eth0"));
+      m_nf_map.insert(std::make_pair(SMF_CONFIG_NAME, m_smf));
+    }
+  }
+
   for (auto& nf : m_nf_map) {
     if (nf.first == m_nf_name) {
       m_local_nf = nf.second;

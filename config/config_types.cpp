@@ -463,6 +463,118 @@ const std::string& nf::get_host() const {
   return m_host.get_value();
 }
 
+void nf::set_url() {
+  uint16_t used_port = get_sbi().get_port_http2();
+  if (used_port == 0) {
+    used_port = get_sbi().get_port_http1();
+  }
+  m_url = "";
+  // this is easily adaptable to HTTPS, just add a flag, and we change the URL
+  m_url.append("http://")
+      .append(get_host())
+      .append(":")
+      .append(std::to_string(used_port));
+}
+
+amf_support_features::amf_support_features() {
+  m_set = true;
+}
+
+void amf_support_features::from_yaml(const YAML::Node& node) {
+  if (node["use_external_ausf"]) {
+    m_use_external_ausf.from_yaml(node["use_external_ausf"]);
+  }
+  if (node["use_external_udm"]) {
+    m_use_external_udm.from_yaml(node["use_external_udm"]);
+  }
+  if (node["use_external_nssf"]) {
+    m_use_external_nssf.from_yaml(node["use_external_nssf"]);
+  }
+  if (node["enable_smf_selection"]) {
+    m_enable_smf_selection.from_yaml(node["enable_smf_selection"]);
+  }
+}
+
+void amf_support_features::set_value(const YAML::Node& node) {}
+
+std::string amf_support_features::to_string(const std::string& indent) const {
+  std::string out;
+  unsigned int inner_width = get_inner_width(indent.length());
+
+  std::string use_external_ausf_string =
+      m_use_external_ausf.get_value() ? "Yes" : "No";
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, INNER_LIST_ELEM, AMF_SUPPORT_FEATURES_USE_EXTERNAL_AUSF,
+      inner_width, use_external_ausf_string));
+
+  std::string use_external_udm_string =
+      m_use_external_udm.get_value() ? "Yes" : "No";
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, INNER_LIST_ELEM, AMF_SUPPORT_FEATURES_USE_EXTERNAL_UDM,
+      inner_width, use_external_udm_string));
+
+  std::string use_external_nssf_string =
+      m_use_external_nssf.get_value() ? "Yes" : "No";
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, INNER_LIST_ELEM, AMF_SUPPORT_FEATURES_USE_EXTERNAL_NSSF,
+      inner_width, use_external_nssf_string));
+
+  std::string enable_smf_selection_string =
+      m_enable_smf_selection.get_value() ? "Yes" : "No";
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, INNER_LIST_ELEM,
+      AMF_SUPPORT_FEATURES_ENABLE_SMF_SELECTIOM, inner_width,
+      enable_smf_selection_string));
+  return out;
+}
+
+void amf_support_features::validate() {
+  if (!m_set) return;
+}
+
+void amf_support_features::set_validation_regex(const std::string& regex) {
+  // m_string_value.set_validation_regex(regex);
+}
+
+amf::amf(
+    const std::string& name, const std::string& host, const sbi_interface& sbi,
+    const local_interface& local, interface_type_e type)
+    : nf(name, host, sbi, local, type) {}
+
+void amf::from_yaml(const YAML::Node& node) {
+  nf::from_yaml(node);
+
+  // Load AMF specified parameter
+  for (const auto& elem : node) {
+    auto key = elem.first.as<std::string>();
+    if (key == AMF_RELATIVE_CAPACITY_NAME) {
+      m_relative_capacity.from_yaml(elem.second);
+    }
+    if (key == AMF_SUPPORT_FEATURES) {
+      m_amf_support_features.from_yaml(elem.second);
+    }
+  }
+}
+
+std::string amf::to_string(const std::string& indent) const {
+  std::string out;
+  std::string inner_indent = indent + indent;
+  unsigned int inner_width = get_inner_width(inner_indent.length());
+
+  out.append(indent).append(nf::to_string(indent));
+
+  out.append(inner_indent)
+      .append(fmt::format("{} {}\n", OUTER_LIST_ELEM, "support_features"));
+  out.append(m_amf_support_features.to_string(inner_indent + indent));
+
+  out.append(inner_indent)
+      .append(fmt::format(
+          BASE_FORMATTER, OUTER_LIST_ELEM, "relative_capacity", inner_width,
+          m_relative_capacity.get_value()));
+
+  return out;
+}
+
 policy_config::policy_config(
     const std::string& policy_decisions_path, const std::string& pcc_rules_path,
     const std::string& traffic_rules_path) {

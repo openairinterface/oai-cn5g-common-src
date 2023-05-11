@@ -75,6 +75,16 @@ const std::string REGISTER_NF_CONFIG_NAME  = "register_nf";
 const std::string NF_LIST_CONFIG_NAME      = "nfs";
 const std::string LOCAL_POLICY_CONFIG_NAME = "local_policy";
 
+// AMF
+constexpr auto AMF_SUPPORT_FEATURES                   = "support_features";
+constexpr auto AMF_SUPPORT_FEATURES_USE_EXTERNAL_AUSF = "use_external_ausf";
+constexpr auto AMF_SUPPORT_FEATURES_USE_EXTERNAL_UDM  = "use_external_udm";
+constexpr auto AMF_SUPPORT_FEATURES_USE_EXTERNAL_NSSF = "use_external_nssf";
+constexpr auto AMF_SUPPORT_FEATURES_ENABLE_SMF_SELECTIOM =
+    "enable_smf_selection";
+constexpr auto AMF_RELATIVE_CAPACITY_NAME    = "relative_capacity";
+constexpr auto AMF_STATISTICS_TIMER_INTERVAL = "statistics_timer_interval";
+
 class config_iface {
  public:
   /**
@@ -102,21 +112,21 @@ class config_iface {
 
   [[nodiscard]] virtual const std::string& log_level() const = 0;
 
-  [[nodiscard]] virtual const nf& amf() const = 0;
+  [[nodiscard]] virtual const amf& get_amf() const = 0;
 
-  [[nodiscard]] virtual const nf& smf() const = 0;
+  [[nodiscard]] virtual const nf& get_smf() const = 0;
 
-  [[nodiscard]] virtual const nf& nrf() const = 0;
+  [[nodiscard]] virtual const nf& get_nrf() const = 0;
 
-  [[nodiscard]] virtual const nf& pcf() const = 0;
+  [[nodiscard]] virtual const nf& get_pcf() const = 0;
 
-  [[nodiscard]] virtual const nf& ausf() const = 0;
+  [[nodiscard]] virtual const nf& get_ausf() const = 0;
 
-  [[nodiscard]] virtual const nf& udm() const = 0;
+  [[nodiscard]] virtual const nf& get_udm() const = 0;
 
-  [[nodiscard]] virtual const nf& udr() const = 0;
+  [[nodiscard]] virtual const nf& get_udr() const = 0;
 
-  [[nodiscard]] virtual const nf& nssf() const = 0;
+  [[nodiscard]] virtual const nf& get_nssf() const = 0;
 
   [[nodiscard]] virtual const nf& local() const = 0;
 
@@ -146,21 +156,21 @@ class config : public config_iface {
 
   [[nodiscard]] const std::string& log_level() const override;
 
-  [[nodiscard]] const nf& amf() const override;
+  [[nodiscard]] const amf& get_amf() const override;
 
-  [[nodiscard]] const nf& smf() const override;
+  [[nodiscard]] const nf& get_smf() const override;
 
-  [[nodiscard]] const nf& nrf() const override;
+  [[nodiscard]] const nf& get_nrf() const override;
 
-  [[nodiscard]] const nf& pcf() const override;
+  [[nodiscard]] const nf& get_pcf() const override;
 
-  [[nodiscard]] const nf& ausf() const override;
+  [[nodiscard]] const nf& get_ausf() const override;
 
-  [[nodiscard]] const nf& udm() const override;
+  [[nodiscard]] const nf& get_udm() const override;
 
-  [[nodiscard]] const nf& udr() const override;
+  [[nodiscard]] const nf& get_udr() const override;
 
-  [[nodiscard]] const nf& nssf() const override;
+  [[nodiscard]] const nf& get_nssf() const override;
 
   [[nodiscard]] const nf& local() const override;
 
@@ -169,6 +179,8 @@ class config : public config_iface {
   bool init() override;
 
   void display() const override;
+
+  void read_from_file(const std::string& file_path);
 
  protected:
   // to define for each NF which values are used
@@ -185,7 +197,7 @@ class config : public config_iface {
   nf_features_config m_register_nrf_feature;
 
   // default values are set in constructor
-  std::shared_ptr<nf> m_amf;
+  std::shared_ptr<amf> m_amf;
   std::shared_ptr<nf> m_smf;
   std::shared_ptr<nf> m_nrf;
   std::shared_ptr<nf> m_pcf;
@@ -194,6 +206,8 @@ class config : public config_iface {
   std::shared_ptr<nf> m_ausf;
   std::shared_ptr<nf> m_nssf;
   std::shared_ptr<nf> m_local_nf;
+
+  // TODO: should not included in common Config
   policy_config m_pcf_policy;
 
   std::unordered_map<std::string, std::shared_ptr<nf>> m_nf_map;

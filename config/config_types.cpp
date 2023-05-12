@@ -65,6 +65,7 @@ string_config_value::string_config_value(
 
 void string_config_value::from_yaml(const YAML::Node& node) {
   m_value = node.as<std::string>();
+  m_set   = true;
 }
 
 std::string string_config_value::to_string(const std::string&) const {
@@ -97,6 +98,7 @@ option_config_value::option_config_value(const std::string& name, bool value) {
 
 void option_config_value::from_yaml(const YAML::Node& node) {
   m_value = node.as<bool>();
+  m_set   = true;
 }
 
 std::string option_config_value::to_string(const std::string&) const {
@@ -116,6 +118,7 @@ int_config_value::int_config_value(const std::string& name, int value) {
 
 void int_config_value::from_yaml(const YAML::Node& node) {
   m_value = node.as<int>();
+  m_set   = true;
 }
 
 std::string int_config_value::to_string(const std::string&) const {
@@ -159,6 +162,7 @@ void local_interface::from_yaml(const YAML::Node& node) {
   if (node["interface_name"]) {
     m_if_name.from_yaml(node["interface_name"]);
   }
+  m_set = true;
 }
 
 std::string local_interface::to_string(const std::string& indent) const {
@@ -284,6 +288,7 @@ void sbi_interface::from_yaml(const YAML::Node& node) {
     m_port = m_port_http2;
   }
   set_url();
+  m_set = true;
 }
 
 std::string sbi_interface::to_string(const std::string& indent) const {
@@ -362,7 +367,7 @@ nf::nf(
     const std::string& name, const std::string& host, const sbi_interface& sbi,
     const local_interface& local)
     : nf(name, host, sbi) {
-    	m_nx = local;
+  m_nx = local;
 }
 
 nf::nf(
@@ -387,6 +392,7 @@ void nf::from_yaml(const YAML::Node& node) {
   } else if (node["n4"]) {
     m_nx.from_yaml(node["n4"]);
   }
+  m_set = true;
 }
 
 std::string nf::to_string(const std::string& indent) const {
@@ -530,6 +536,7 @@ void nf_features_config::from_yaml(const YAML::Node& node) {
   if (node[m_nf_name]) {
     set_value(node[m_nf_name]);
   }
+  m_set = true;
 }
 
 void nf_features_config::set_value(const YAML::Node& node) {

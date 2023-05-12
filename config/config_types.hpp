@@ -38,6 +38,7 @@
 namespace oai::config {
 const std::string INNER_LIST_ELEM = "+";
 const std::string OUTER_LIST_ELEM = "-";
+const std::string EMPTY_LIST_ELEM = " ";
 
 class config_type {
   friend class yaml_file_iface;
@@ -218,7 +219,7 @@ class nf : public config_type {
   string_config_value m_host;
 
   std::string m_url;  // Moved from SBI interface
-  void set_url();  // Moved from SBI interface
+  void set_url();     // Moved from SBI interface
 
  public:
   explicit nf(

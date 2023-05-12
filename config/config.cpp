@@ -244,9 +244,9 @@ void config::update_used_nfs() {
   for (auto& nf : m_nf_map) {
     if (nf.first == m_nf_name) {
       m_local_nf = nf.second;
-      m_local_nf->m_sbi.set_is_local_interface(true);
-      m_local_nf->m_n1.set_is_local_interface(true);
-      m_local_nf->m_n4.set_is_local_interface(true);
+      m_local_nf->m_sbi.set_is_local_interface(
+          true);  // TODO: to be updated with UPF
+      m_local_nf->m_nx.set_is_local_interface(true);  // TODO: to be verified
     } else {
       auto used_nf = m_used_sbi_values.find(nf.first);
       if (used_nf == m_used_sbi_values.end()) {

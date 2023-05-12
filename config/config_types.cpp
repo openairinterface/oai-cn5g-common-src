@@ -360,19 +360,9 @@ void sbi_interface::set_url() {
 
 nf::nf(
     const std::string& name, const std::string& host, const sbi_interface& sbi,
-    const local_interface& local, interface_type_e type)
+    const local_interface& local)
     : nf(name, host, sbi) {
-  switch (type) {
-    case interface_type_e::n1:
-      m_n1 = local;
-      break;
-    case interface_type_e::n4:
-      m_n4 = local;
-      break;
-    default:
-      logger::logger_registry::get_logger(LOGGER_NAME)
-          .error("Unknown interface type in configuration");
-  }
+    	m_nx = local;
 }
 
 nf::nf(
@@ -389,14 +379,13 @@ void nf::from_yaml(const YAML::Node& node) {
   if (node["host"]) {
     m_host.from_yaml(node["host"]);
   }
-  if (node["n1"]) {
-    m_n1.from_yaml(node["n1"]);
-  }
-  if (node["n4"]) {
-    m_n4.from_yaml(node["n4"]);
-  }
   if (node["sbi"]) {
     m_sbi.from_yaml(node["sbi"]);
+  }
+  if (node["n1"]) {
+    m_nx.from_yaml(node["n1"]);
+  } else if (node["n4"]) {
+    m_nx.from_yaml(node["n4"]);
   }
 }
 
@@ -420,17 +409,11 @@ std::string nf::to_string(const std::string& indent) const {
             fmt::format("{} {}\n", OUTER_LIST_ELEM, m_sbi.get_config_name()));
     out.append(m_sbi.to_string(inner_indent + indent));
   }
-  if (m_n1.is_set()) {
+  if (m_nx.is_set()) {
     out.append(inner_indent)
         .append(
-            fmt::format("{} {}\n", OUTER_LIST_ELEM, m_n1.get_config_name()));
-    out.append(m_n1.to_string(inner_indent + indent));
-  }
-  if (m_n4.is_set()) {
-    out.append(inner_indent)
-        .append(
-            fmt::format("{} {}\n", OUTER_LIST_ELEM, m_n4.get_config_name()));
-    out.append(m_n4.to_string(inner_indent + indent));
+            fmt::format("{} {}\n", OUTER_LIST_ELEM, m_nx.get_config_name()));
+    out.append(m_nx.to_string(inner_indent + indent));
   }
 
   return out;
@@ -440,20 +423,15 @@ void nf::validate() {
   if (!m_set) return;
   m_host.validate();
   m_sbi.validate();
-  m_n4.validate();
-  m_n1.validate();
+  m_nx.validate();
 }
 
 const sbi_interface& nf::get_sbi() const {
   return m_sbi;
 }
 
-const local_interface& nf::get_n1() const {
-  return m_n1;
-}
-
-const local_interface& nf::get_n4() const {
-  return m_n4;
+const local_interface& nf::get_nx() const {
+  return m_nx;
 }
 
 const std::string& nf::get_host() const {

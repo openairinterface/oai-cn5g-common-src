@@ -214,18 +214,16 @@ class nf : public config_type {
 
  private:
   sbi_interface m_sbi;
-  local_interface m_n1;
-  local_interface m_n4;
+  local_interface m_nx;
   string_config_value m_host;
-  std::string m_url;  // Moved from SBI interface
 
+  std::string m_url;  // Moved from SBI interface
   void set_url();  // Moved from SBI interface
 
  public:
   explicit nf(
       const std::string& name, const std::string& host,
-      const sbi_interface& sbi, const local_interface& local,
-      interface_type_e type);
+      const sbi_interface& sbi, const local_interface& local);
   explicit nf(
       const std::string& name, const std::string& host,
       const sbi_interface& sbi);
@@ -236,8 +234,7 @@ class nf : public config_type {
   [[nodiscard]] std::string to_string(const std::string& indent) const override;
   void validate() override;
   [[nodiscard]] const sbi_interface& get_sbi() const;
-  [[nodiscard]] const local_interface& get_n1() const;
-  [[nodiscard]] const local_interface& get_n4() const;
+  [[nodiscard]] const local_interface& get_nx() const;
   [[nodiscard]] const std::string& get_host() const;
 };
 

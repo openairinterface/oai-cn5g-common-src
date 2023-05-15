@@ -241,6 +241,14 @@ std::shared_ptr<nf> config::get_local() {
   return m_local_nf;
 }
 
+std::shared_ptr<nf> config::get_nf(const std::string& nf_name) {
+  auto nf_ptr = m_nf_map.find(m_nf_name);
+  if (nf_ptr == m_nf_map.end()) {
+    return nullptr;
+  }
+  return nf_ptr->second;
+}
+
 const class policy_config& config::get_pcf_policy() const {
   return m_pcf_policy;
 }
@@ -268,7 +276,7 @@ void config::update_used_nfs() {
         nf.second->m_set = false;
       }
       if (register_nrf() && nf.first != "nrf") {
-        //nf.second->m_set = false;
+        // nf.second->m_set = false;
       }
     }
   }

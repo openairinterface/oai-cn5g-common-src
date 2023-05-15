@@ -117,6 +117,8 @@ class config_iface {
   [[nodiscard]] virtual const nf& local() const = 0;
 
   [[nodiscard]] virtual std::shared_ptr<nf> get_local() = 0;
+  [[nodiscard]] virtual std::shared_ptr<nf> get_nf(
+      const std::string& nf_name) = 0;
 
   [[nodiscard]] virtual const policy_config& get_pcf_policy() const        = 0;
   [[nodiscard]] virtual const database_config& get_database_config() const = 0;
@@ -147,6 +149,7 @@ class config : public config_iface {
 
   [[nodiscard]] const nf& local() const override;
   [[nodiscard]] std::shared_ptr<nf> get_local() override;
+  [[nodiscard]] std::shared_ptr<nf> get_nf(const std::string& nf_name);
 
   [[nodiscard]] const policy_config& get_pcf_policy() const override;
   [[nodiscard]] const database_config& get_database_config() const override;

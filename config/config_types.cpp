@@ -381,15 +381,16 @@ nf::nf(
 }
 
 void nf::from_yaml(const YAML::Node& node) {
-  if (node["host"]) {
-    m_host.from_yaml(node["host"]);
+  if (node[NF_CONFIG_HOST_NAME]) {
+    m_host.from_yaml(node[NF_CONFIG_HOST_NAME]);
   }
   if (node["sbi"]) {
     m_sbi.from_yaml(node["sbi"]);
   }
-  if (node["n1"]) {
-    m_nx.from_yaml(node["n1"]);
-  } else if (node["n4"]) {
+  if (node["n2"]) {
+    m_nx.from_yaml(node["n2"]);
+  }
+  if (node["n4"]) {
     m_nx.from_yaml(node["n4"]);
   }
   m_set = true;
@@ -577,4 +578,68 @@ bool nf_features_config::get_option() const {
 
 const std::string& nf_features_config::get_string() const {
   return m_string_value.get_value();
+}
+
+database_config::database_config() {
+  m_set = false;
+}
+
+void database_config::from_yaml(const YAML::Node& node) {
+  m_set = true;
+  // TODO:
+  if (node[NF_CONFIG_HOST_NAME]) {
+    m_host.from_yaml(node[NF_CONFIG_HOST_NAME]);
+  }
+  if (node[DATABASE_CONFIG_USER]) {
+    m_user.from_yaml(node[DATABASE_CONFIG_USER]);
+  }
+  if (node[DATABASE_CONFIG_PASSWORD]) {
+    m_pass.from_yaml(node[DATABASE_CONFIG_PASSWORD]);
+  }
+  if (node[DATABASE_CONFIG_DATABASE_NAME]) {
+    m_database_name.from_yaml(node[DATABASE_CONFIG_DATABASE_NAME]);
+  }
+  if (node[DATABASE_CONFIG_RANDOM]) {
+    m_random.from_yaml(node[DATABASE_CONFIG_RANDOM]);
+  }
+  if (node[DATABASE_CONFIG_CONNECTION_TIMEOUT]) {
+    m_connection_timeout.from_yaml(node[DATABASE_CONFIG_CONNECTION_TIMEOUT]);
+  }
+}
+
+std::string database_config::to_string(const std::string& indent) const {
+  std::string out;
+  unsigned int inner_width = get_inner_width(indent.length());
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, OUTER_LIST_ELEM, m_host.get_config_name(), inner_width,
+      m_host.get_value()));
+  return out;
+}
+
+const std::string& database_config::get_host() const {
+  return m_host.get_value();
+}
+
+const std::string& database_config::get_user() const {
+  return m_user.get_value();
+}
+
+const std::string& database_config::get_pass() const {
+  return m_pass.get_value();
+}
+
+const std::string& database_config::get_database_name() const {
+  return m_database_name.get_value();
+}
+
+const std::string& database_config::get_database_type() const {
+  return m_database_type.get_value();
+}
+
+const bool database_config::get_random() const {
+  return m_random.get_value();
+}
+
+const int database_config::get_connection_timeout() const {
+  return m_connection_timeout.get_value();
 }

@@ -44,7 +44,8 @@ config::config(
       m_pcf_policy(
           "/openair-pcf/policies/policy_decisions",
           "/openair-pcf/policies/pcc_rules",
-          "/openair-pcf/policies/traffic_rules") {
+          "/openair-pcf/policies/traffic_rules"),
+      m_database() {
   logger::logger_registry::register_logger(
       nf_name, LOGGER_NAME, log_stdout, log_rot_file);
 
@@ -104,7 +105,12 @@ void config::read_from_file(const std::string& file_path) {
                   .warn("Could not parse %s: %s", nf_name, e.what());
             }
           }
+        } else if (key == DATABASE_CONFIG) {
+          m_database.from_yaml(elem.second);
         }
+        // TODO: check in m_used_config_values
+        logger::logger_registry::get_logger(LOGGER_NAME)
+            .error("TODO: parse other config parts %s", key);
       } catch (std::exception& e) {
         logger::logger_registry::get_logger(LOGGER_NAME)
             .warn("Could not parse %s: %s", key, e.what());
@@ -122,6 +128,7 @@ void config::read_from_file(const std::string& file_path) {
         .error("Could not parse YAML configuration file: %s", ex.what());
     throw std::runtime_error(ex.what());
   }
+
   update_used_nfs();
 }
 
@@ -230,8 +237,16 @@ const nf& config::local() const {
   return *m_local_nf;
 }
 
+std::shared_ptr<nf> config::get_local() {
+  return m_local_nf;
+}
+
 const class policy_config& config::get_pcf_policy() const {
   return m_pcf_policy;
+}
+
+const class database_config& config::get_database_config() const {
+  return m_database;
 }
 
 bool config::add_nf(

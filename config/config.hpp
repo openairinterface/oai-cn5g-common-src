@@ -75,6 +75,18 @@ const std::string REGISTER_NF_CONFIG_NAME  = "register_nf";
 const std::string NF_LIST_CONFIG_NAME      = "nfs";
 const std::string LOCAL_POLICY_CONFIG_NAME = "local_policy";
 
+// NF
+constexpr auto NF_CONFIG_HOST_NAME = "host";
+
+// Database (AMF/UDR)
+constexpr auto DATABASE_CONFIG                    = "database";
+constexpr auto DATABASE_CONFIG_USER               = "user";
+constexpr auto DATABASE_CONFIG_PASSWORD           = "password";
+constexpr auto DATABASE_CONFIG_DATABASE_NAME      = "database_name";
+constexpr auto DATABASE_CONFIG_DATABASE_TYPE      = "database_type";
+constexpr auto DATABASE_CONFIG_RANDOM             = "random";
+constexpr auto DATABASE_CONFIG_CONNECTION_TIMEOUT = "connection_timeout";
+
 class config_iface {
  public:
   /**
@@ -104,7 +116,10 @@ class config_iface {
 
   [[nodiscard]] virtual const nf& local() const = 0;
 
-  [[nodiscard]] virtual const policy_config& get_pcf_policy() const = 0;
+  [[nodiscard]] virtual std::shared_ptr<nf> get_local() = 0;
+
+  [[nodiscard]] virtual const policy_config& get_pcf_policy() const        = 0;
+  [[nodiscard]] virtual const database_config& get_database_config() const = 0;
 
   /**
    * Initializes the configuration, reads YAML configuration file and validates
@@ -131,8 +146,10 @@ class config : public config_iface {
   [[nodiscard]] const std::string& log_level() const override;
 
   [[nodiscard]] const nf& local() const override;
+  [[nodiscard]] std::shared_ptr<nf> get_local() override;
 
   [[nodiscard]] const policy_config& get_pcf_policy() const override;
+  [[nodiscard]] const database_config& get_database_config() const override;
 
   bool init() override;
 
@@ -159,6 +176,7 @@ class config : public config_iface {
 
   // TODO: should not included in common Config
   policy_config m_pcf_policy;
+  database_config m_database;
 
   std::unordered_map<std::string, std::shared_ptr<nf>> m_nf_map;
 

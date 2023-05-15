@@ -68,6 +68,12 @@ class config_type {
   virtual void from_yaml(const YAML::Node& node) = 0;
 
   /**
+   * Convert to JSON format
+   * @return void
+   */
+  virtual void to_json(){};
+
+  /**
    * Checks if the configuration is set. Configuration is not set if it has not
    * been validated.
    * @return true if set, false otherwise
@@ -284,4 +290,28 @@ class nf_features_config : public config_type {
   [[nodiscard]] const std::string& get_string() const;
 };
 
+class database_config : public config_type {
+ private:
+  string_config_value m_host;
+  string_config_value m_user;
+  string_config_value m_pass;
+  string_config_value m_database_name;
+  string_config_value m_database_type;
+  option_config_value m_random;
+  int_config_value m_connection_timeout;
+
+ public:
+  explicit database_config();
+
+  void from_yaml(const YAML::Node& node) override;
+
+  [[nodiscard]] std::string to_string(const std::string& indent) const override;
+  [[nodiscard]] const std::string& get_host() const;
+  [[nodiscard]] const std::string& get_user() const;
+  [[nodiscard]] const std::string& get_pass() const;
+  [[nodiscard]] const std::string& get_database_name() const;
+  [[nodiscard]] const std::string& get_database_type() const;
+  [[nodiscard]] const bool get_random() const;
+  [[nodiscard]] const int get_connection_timeout() const;
+};
 }  // namespace oai::config

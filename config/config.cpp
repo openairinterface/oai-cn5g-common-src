@@ -268,7 +268,7 @@ void config::update_used_nfs() {
         nf.second->m_set = false;
       }
       if (register_nrf() && nf.first != "nrf") {
-        nf.second->m_set = false;
+        //nf.second->m_set = false;
       }
     }
   }

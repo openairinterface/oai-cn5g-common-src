@@ -243,6 +243,7 @@ class nf : public config_type {
   [[nodiscard]] const sbi_interface& get_sbi() const;
   [[nodiscard]] const local_interface& get_nx() const;
   [[nodiscard]] const std::string& get_host() const;
+  [[nodiscard]] const std::string& get_url() const;
 };
 
 class policy_config : public config_type {

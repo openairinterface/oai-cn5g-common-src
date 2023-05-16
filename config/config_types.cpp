@@ -368,6 +368,7 @@ nf::nf(
     const local_interface& local)
     : nf(name, host, sbi) {
   m_nx = local;
+  set_url();
 }
 
 nf::nf(
@@ -377,7 +378,8 @@ nf::nf(
   m_host        = string_config_value("Host", host);
   m_sbi         = sbi;
   m_set         = true;
-  m_host.set_validation_regex(HOST_VALIDATOR_REGEX);
+  // m_host.set_validation_regex(HOST_VALIDATOR_REGEX); //DISABLE it temporarily
+  set_url();
 }
 
 void nf::from_yaml(const YAML::Node& node) {
@@ -394,6 +396,7 @@ void nf::from_yaml(const YAML::Node& node) {
     m_nx.from_yaml(node["n4"]);
   }
   m_set = true;
+  set_url();
 }
 
 std::string nf::to_string(const std::string& indent) const {
@@ -445,6 +448,10 @@ const std::string& nf::get_host() const {
   return m_host.get_value();
 }
 
+const std::string& nf::get_url() const {
+  return m_url;
+}
+
 void nf::set_url() {
   uint16_t used_port = get_sbi().get_port_http2();
   if (used_port == 0) {
@@ -452,10 +459,7 @@ void nf::set_url() {
   }
   m_url = "";
   // this is easily adaptable to HTTPS, just add a flag, and we change the URL
-  m_url.append("http://")
-      .append(get_host())
-      .append(":")
-      .append(std::to_string(used_port));
+  m_url.append(get_host()).append(":").append(std::to_string(used_port));
 }
 
 policy_config::policy_config(

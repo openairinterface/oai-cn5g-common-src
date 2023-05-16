@@ -105,7 +105,9 @@ void config::read_from_file(const std::string& file_path) {
                   .warn("Could not parse %s: %s", nf_name, e.what());
             }
           }
-        } else if (key == DATABASE_CONFIG) {
+        } else if (key == DATABASE_CONFIG) {  // TODO: Don't need to do this if
+                                              // we drop the support for Mini
+                                              // scenario
           m_database.from_yaml(elem.second);
         }
         // TODO: check in m_used_config_values
@@ -242,7 +244,7 @@ std::shared_ptr<nf> config::get_local() {
 }
 
 std::shared_ptr<nf> config::get_nf(const std::string& nf_name) {
-  auto nf_ptr = m_nf_map.find(m_nf_name);
+  auto nf_ptr = m_nf_map.find(nf_name);
   if (nf_ptr == m_nf_map.end()) {
     return nullptr;
   }

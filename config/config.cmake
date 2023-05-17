@@ -21,6 +21,8 @@
 
 SET(CONFIG_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/config)
 
+include_directories(${CONFIG_DIR})
+
 SET(CONFIG_SRC_FILES
         ${CONFIG_DIR}/config.cpp
         ${CONFIG_DIR}/config_types.cpp

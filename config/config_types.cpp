@@ -56,6 +56,17 @@ unsigned int config_type::get_inner_width(unsigned int indent_length) {
   return inner_width;
 }
 
+in_addr config_type::safe_convert_ip(const std::string& ipv4_string)
+{
+  in_addr ip = conv::fromString(ipv4_string);
+
+  if (!ip.s_addr) {
+    throw std::runtime_error(fmt::format(
+       +        "The IP address {} is not valid", ipv4_string));
+  }
+  return ip;
+}
+
 string_config_value::string_config_value(
     const std::string& name, const std::string& value) {
   m_config_name = name;

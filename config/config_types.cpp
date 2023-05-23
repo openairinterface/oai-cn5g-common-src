@@ -623,8 +623,25 @@ std::string database_config::to_string(const std::string& indent) const {
   std::string out;
   unsigned int inner_width = get_inner_width(indent.length());
   out.append(indent).append(fmt::format(
-      BASE_FORMATTER, OUTER_LIST_ELEM, m_host.get_config_name(), inner_width,
+      BASE_FORMATTER, OUTER_LIST_ELEM, NF_CONFIG_HOST_NAME_LABEL, inner_width,
       m_host.get_value()));
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, OUTER_LIST_ELEM, DATABASE_CONFIG_USER_LABEL, inner_width,
+      m_user.get_value()));
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, OUTER_LIST_ELEM, DATABASE_CONFIG_PASSWORD_LABEL,
+      inner_width, m_pass.get_value()));
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, OUTER_LIST_ELEM, DATABASE_CONFIG_DATABASE_NAME_LABEL,
+      inner_width, m_database_name.get_value()));
+  std::string database_config_random_string =
+      m_random.get_value() ? "Yes" : "No";
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, OUTER_LIST_ELEM, DATABASE_CONFIG_RANDOM_LABEL,
+      inner_width, database_config_random_string));
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, OUTER_LIST_ELEM, DATABASE_CONFIG_CONNECTION_TIMEOUT_LABEL,
+      inner_width, m_connection_timeout.get_value()));
   return out;
 }
 

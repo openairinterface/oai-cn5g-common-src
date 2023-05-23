@@ -76,16 +76,24 @@ const std::string NF_LIST_CONFIG_NAME      = "nfs";
 const std::string LOCAL_POLICY_CONFIG_NAME = "local_policy";
 
 // NF
-constexpr auto NF_CONFIG_HOST_NAME = "host";
+constexpr auto NF_CONFIG_HOST_NAME       = "host";
+constexpr auto NF_CONFIG_HOST_NAME_LABEL = "Host";
 
 // Database (AMF/UDR)
-constexpr auto DATABASE_CONFIG                    = "database";
-constexpr auto DATABASE_CONFIG_USER               = "user";
-constexpr auto DATABASE_CONFIG_PASSWORD           = "password";
-constexpr auto DATABASE_CONFIG_DATABASE_NAME      = "database_name";
-constexpr auto DATABASE_CONFIG_DATABASE_TYPE      = "database_type";
-constexpr auto DATABASE_CONFIG_RANDOM             = "random";
-constexpr auto DATABASE_CONFIG_CONNECTION_TIMEOUT = "connection_timeout";
+constexpr auto DATABASE_CONFIG                          = "database";
+constexpr auto DATABASE_CONFIG_LABEL                    = "Database";
+constexpr auto DATABASE_CONFIG_USER                     = "user";
+constexpr auto DATABASE_CONFIG_USER_LABEL               = "User";
+constexpr auto DATABASE_CONFIG_PASSWORD                 = "password";
+constexpr auto DATABASE_CONFIG_PASSWORD_LABEL           = "Password";
+constexpr auto DATABASE_CONFIG_DATABASE_NAME            = "database_name";
+constexpr auto DATABASE_CONFIG_DATABASE_NAME_LABEL      = "Database Name";
+constexpr auto DATABASE_CONFIG_DATABASE_TYPE            = "database_type";
+constexpr auto DATABASE_CONFIG_DATABASE_TYPE_LABEL      = "Database Type";
+constexpr auto DATABASE_CONFIG_RANDOM                   = "random";
+constexpr auto DATABASE_CONFIG_RANDOM_LABEL             = "Random";
+constexpr auto DATABASE_CONFIG_CONNECTION_TIMEOUT       = "connection_timeout";
+constexpr auto DATABASE_CONFIG_CONNECTION_TIMEOUT_LABEL = "Connection Timeout";
 
 class config_iface {
  public:

@@ -177,6 +177,10 @@ std::string config::to_string() const {
   out.append(m_register_nrf_feature.to_string(indent));
   out.append("Local NF Configuration:\n");
   out.append(m_local_nf->to_string(indent));
+  if (m_database.is_set()) {
+    out.append(indent).append("Database:\n");
+    out.append(m_database.to_string(indent + indent));
+  }
   out.append("Peer NF Configuration:\n");
   for (const auto& nf : m_nf_map) {
     if (nf.first != m_nf_name) {

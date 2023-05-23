@@ -398,12 +398,15 @@ void nf::from_yaml(const YAML::Node& node) {
     m_host.from_yaml(node[NF_CONFIG_HOST_NAME]);
   }
   if (node["sbi"]) {
+    m_sbi.m_host = m_host;
     m_sbi.from_yaml(node["sbi"]);
   }
   if (node["n2"]) {
+    m_nx.m_host = m_host;
     m_nx.from_yaml(node["n2"]);
   }
   if (node["n4"]) {
+    m_nx.m_host = m_host;
     m_nx.from_yaml(node["n4"]);
   }
   m_set = true;

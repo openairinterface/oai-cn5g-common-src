@@ -151,6 +151,8 @@ class int_config_value : public config_type {
 };
 
 class local_interface : public config_type {
+  friend class nf;
+
  protected:
   string_config_value m_host{};
   int_config_value m_port{};
@@ -188,6 +190,8 @@ class local_interface : public config_type {
 };
 
 class sbi_interface : public local_interface {
+  friend class nf;
+
  private:
   string_config_value m_api_version;
   int_config_value m_port_http1;
@@ -218,7 +222,6 @@ class sbi_interface : public local_interface {
 enum class interface_type_e { n1, n4 };
 
 class nf : public config_type {
-  friend class yaml_file;
   friend class config;
 
  private:

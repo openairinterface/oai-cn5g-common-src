@@ -80,7 +80,7 @@ void config::read_from_file(const std::string& file_path) {
             nf_ptr->second->from_yaml(elem.second);
           } catch (std::exception& e) {
             logger::logger_registry::get_logger(LOGGER_NAME)
-                .warn("Could not parse %s: %s", AMF_CONFIG_NAME, e.what());
+                .warn("Could not parse %s: %s", m_nf_name, e.what());
           }
         } else if (key == NF_LIST_CONFIG_NAME) {
           for (auto yaml_nf : elem.second) {
@@ -110,9 +110,6 @@ void config::read_from_file(const std::string& file_path) {
                                               // scenario
           m_database.from_yaml(elem.second);
         }
-        // TODO: check in m_used_config_values
-        logger::logger_registry::get_logger(LOGGER_NAME)
-            .error("TODO: parse other config parts %s", key);
       } catch (std::exception& e) {
         logger::logger_registry::get_logger(LOGGER_NAME)
             .warn("Could not parse %s: %s", key, e.what());

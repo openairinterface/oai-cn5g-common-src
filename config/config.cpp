@@ -41,10 +41,7 @@ config::config(
     bool log_rot_file)
     : m_log_level_feature("Log Level", nf_name, std::string("info")),
       m_register_nrf_feature("Register NF", nf_name, false),
-      m_pcf_policy(
-          "/openair-pcf/policies/policy_decisions",
-          "/openair-pcf/policies/pcc_rules",
-          "/openair-pcf/policies/traffic_rules"),
+      m_pcf_policy(),
       m_database() {
   logger::logger_registry::register_logger(
       nf_name, LOGGER_NAME, log_stdout, log_rot_file);
@@ -110,9 +107,6 @@ void config::read_from_file(const std::string& file_path) {
                                               // scenario
           m_database.from_yaml(elem.second);
         }
-        // TODO: check in m_used_config_values
-        logger::logger_registry::get_logger(LOGGER_NAME)
-            .error("TODO: parse other config parts %s", key);
       } catch (std::exception& e) {
         logger::logger_registry::get_logger(LOGGER_NAME)
             .warn("Could not parse %s: %s", key, e.what());
@@ -189,7 +183,7 @@ std::string config::to_string() const {
       out.append(nf.second->to_string(indent));
     }
   }
-  out.append(m_pcf_policy.to_string(indent));
+  // out.append(m_pcf_policy.to_string(indent)); //TODO: enable for PCF/SMF only
 
   // TODO rest of the fields
 
@@ -269,16 +263,10 @@ void config::update_used_nfs() {
   for (auto& nf : m_nf_map) {
     if (nf.first == m_nf_name) {
       m_local_nf = nf.second;
-      m_local_nf->m_sbi.set_is_local_interface(
-          true);  // TODO: to be updated with UPF
-      m_local_nf->m_nx.set_is_local_interface(true);  // TODO: to be verified
     } else {
       auto used_nf = m_used_sbi_values.find(nf.first);
       if (used_nf == m_used_sbi_values.end()) {
         nf.second->m_set = false;
-      }
-      if (register_nrf() && nf.first != "nrf") {
-        // nf.second->m_set = false;
       }
     }
   }

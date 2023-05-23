@@ -253,6 +253,7 @@ class policy_config : public config_type {
   string_config_value m_traffic_rules_path;
 
  public:
+  explicit policy_config();
   explicit policy_config(
       const std::string& policy_decisions_path,
       const std::string& pcc_rules_path, const std::string& traffic_rules_path);

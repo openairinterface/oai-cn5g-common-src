@@ -152,7 +152,8 @@ local_interface::local_interface(
   m_port        = int_config_value("Port", port);
   m_port.set_validation_interval(PORT_MIN_VALUE, PORT_MAX_VALUE);
   m_host.set_validation_regex(HOST_VALIDATOR_REGEX);
-  m_set = true;
+  m_set                = true;
+  m_is_local_interface = true;
 }
 
 void local_interface::from_yaml(const YAML::Node& node) {
@@ -162,7 +163,8 @@ void local_interface::from_yaml(const YAML::Node& node) {
   if (node["interface_name"]) {
     m_if_name.from_yaml(node["interface_name"]);
   }
-  m_set = true;
+  m_set                = true;
+  m_is_local_interface = true;
 }
 
 std::string local_interface::to_string(const std::string& indent) const {
@@ -270,11 +272,13 @@ sbi_interface::sbi_interface(
   m_port_http1.set_validation_interval(PORT_MIN_VALUE, PORT_MAX_VALUE);
   m_port_http2.set_validation_interval(PORT_MIN_VALUE, PORT_MAX_VALUE);
   m_set = true;
+  set_is_local_interface(false);
   set_url();
 }
 
 void sbi_interface::from_yaml(const YAML::Node& node) {
   local_interface::from_yaml(node);
+  set_is_local_interface(false);
 
   if (node["api_version"]) {
     m_api_version.from_yaml(node["api_version"]);
@@ -372,8 +376,8 @@ nf::nf(
 }
 
 nf::nf(
-    const std::string& name, const std::string& host,
-    const sbi_interface& sbi) {
+    const std::string& name, const std::string& host, const sbi_interface& sbi)
+    : m_nx() {
   m_config_name = name;
   m_host        = string_config_value("Host", host);
   m_sbi         = sbi;
@@ -389,10 +393,10 @@ void nf::from_yaml(const YAML::Node& node) {
   if (node["sbi"]) {
     m_sbi.from_yaml(node["sbi"]);
   }
-  if (node["n2"]) {
+  if (node["n2"] and m_nx.is_set()) {
     m_nx.from_yaml(node["n2"]);
   }
-  if (node["n4"]) {
+  if (node["n4"] and m_nx.is_set()) {
     m_nx.from_yaml(node["n4"]);
   }
   m_set = true;
@@ -460,6 +464,10 @@ void nf::set_url() {
   m_url = "";
   // this is easily adaptable to HTTPS, just add a flag, and we change the URL
   m_url.append(get_host()).append(":").append(std::to_string(used_port));
+}
+
+policy_config::policy_config() {
+  m_set = false;
 }
 
 policy_config::policy_config(

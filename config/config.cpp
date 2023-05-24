@@ -236,11 +236,11 @@ const nf& config::local() const {
   return *m_local_nf;
 }
 
-std::shared_ptr<nf> config::get_local() {
+std::shared_ptr<nf> config::get_local() const {
   return m_local_nf;
 }
 
-std::shared_ptr<nf> config::get_nf(const std::string& nf_name) {
+std::shared_ptr<nf> config::get_nf(const std::string& nf_name) const {
   auto nf_ptr = m_nf_map.find(nf_name);
   if (nf_ptr == m_nf_map.end()) {
     return nullptr;

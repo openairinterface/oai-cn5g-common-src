@@ -56,13 +56,21 @@ unsigned int config_type::get_inner_width(unsigned int indent_length) {
   return inner_width;
 }
 
-in_addr config_type::safe_convert_ip(const std::string& ipv4_string)
-{
+in_addr config_type::safe_convert_ip(const std::string& ipv4_string) {
   in_addr ip = conv::fromString(ipv4_string);
 
   if (!ip.s_addr) {
-    throw std::runtime_error(fmt::format(
-       +        "The IP address {} is not valid", ipv4_string));
+    throw std::runtime_error(
+        fmt::format(+"The IP address {} is not valid", ipv4_string));
+  }
+  return ip;
+}
+
+in6_addr config_type::safe_convert_ip6(const std::string& ipv6_string) {
+  in6_addr ip = conv::fromStringV6(ipv6_string);
+  if (IN6_IS_ADDR_UNSPECIFIED(&ip)) {
+    throw std::runtime_error(
+        fmt::format(+"The IPv6 address {} is not valid", ipv6_string));
   }
   return ip;
 }

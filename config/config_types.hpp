@@ -95,6 +95,8 @@ class config_type {
   static unsigned int get_inner_width(unsigned int indent_length);
 
   static in_addr safe_convert_ip(const std::string& ipv4_string);
+
+  static in6_addr safe_convert_ip6(const std::string& ipv6_string);
 };
 
 class string_config_value : public config_type {

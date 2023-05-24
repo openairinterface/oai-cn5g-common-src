@@ -36,6 +36,9 @@
 #include <fmt/format.h>
 #include <string>
 #include <regex>
+#include <boost/algorithm/string/split.hpp>
+#include <boost/algorithm/string/classification.hpp>
+#include <boost/algorithm/string/trim.hpp>
 
 using namespace oai::config;
 
@@ -668,4 +671,128 @@ const bool database_config::get_random() const {
 
 const int database_config::get_connection_timeout() const {
   return m_connection_timeout.get_value();
+}
+
+dnn_config::dnn_config(
+    const std::string& dnn, const std::string& pdu_type,
+    const std::string& ipv4_pool, const std::string& ipv6_prefix) {
+  m_config_name      = "DNN";
+  m_dnn              = string_config_value("DNN", dnn);
+  m_pdu_session_type = string_config_value("PDU session type", pdu_type);
+  m_ipv4_pool        = string_config_value("IPv4 pool", ipv4_pool);
+  m_ipv6_prefix      = string_config_value("IPv6 prefix", ipv6_prefix);
+
+  m_pdu_session_type.set_validation_regex(PDU_SESSION_TYPE_REGEX);
+  m_ipv4_pool.set_validation_regex(
+      IPV4_ADDRESS_VALIDATOR_REGEX + "( )*-( )*" +
+      IPV4_ADDRESS_VALIDATOR_REGEX);
+  m_ipv6_prefix.set_validation_regex(IPV6_ADDRESS_VALIDATOR_REGEX);
+}
+
+void dnn_config::from_yaml(const YAML::Node& node) {
+  if (node["dnn"]) {
+    m_dnn.from_yaml(node["dnn"]);
+  }
+  if (node["pdu_session_type"]) {
+    m_pdu_session_type.from_yaml(node["pdu_session_type"]);
+  }
+  if (node["ipv4_pool"]) {
+    m_ipv4_pool.from_yaml(node["ipv4_pool"]);
+  }
+  if (node["ipv6_prefix"]) {
+    m_ipv6_prefix.from_yaml(node["ipv6_prefix"]);
+  }
+}
+
+[[nodiscard]] std::string dnn_config::to_string(
+    const std::string& indent) const {
+  unsigned int inner_width = get_inner_width(indent.length());
+  std::string out;
+
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, OUTER_LIST_ELEM, m_dnn.get_config_name(), inner_width,
+      m_dnn.to_string("")));
+
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, OUTER_LIST_ELEM, m_pdu_session_type.get_config_name(),
+      inner_width, m_pdu_session_type.to_string("")));
+  if (m_ipv6_prefix.get_value().empty()) {
+    out.append(indent).append(fmt::format(
+        BASE_FORMATTER, OUTER_LIST_ELEM, m_ipv6_prefix.get_config_name(),
+        inner_width, m_ipv6_prefix.to_string("")));
+  } else {
+    out.append(indent).append(fmt::format(
+        BASE_FORMATTER, OUTER_LIST_ELEM, m_ipv4_pool.get_config_name(),
+        inner_width, m_ipv4_pool.to_string("")));
+  }
+  return out;
+}
+
+void dnn_config::validate() {
+  m_pdu_session_type_generated =
+      pdu_session_type_t(m_pdu_session_type.get_value());
+
+  std::vector<std::string> ips;
+  boost::split(
+      ips, m_ipv4_pool.get_value(), boost::is_any_of("-"),
+      boost::token_compress_on);
+
+  if (ips.size() != 2) {
+    throw std::runtime_error(fmt::format(
+        "The IP address pool {} is not valid", m_ipv4_pool.get_value()));
+  }
+
+  boost::trim_left(ips[0]);
+  boost::trim_right(ips[0]);
+  boost::trim_left(ips[1]);
+  boost::trim_right(ips[1]);
+
+  m_ipv4_pool_start_ip = safe_convert_ip(ips[0]);
+  m_ipv4_pool_end_ip   = safe_convert_ip(ips[1]);
+
+  std::vector<std::string> ip6s;
+boost:
+  split(
+      ip6s, m_ipv6_prefix.get_value(), boost::is_any_of("/"),
+      boost::token_compress_on);
+
+  if (ip6s.size() != 2) {
+    throw std::runtime_error(fmt::format(
+        "The IPv6 prefix / length {} is not valid", m_ipv6_prefix.get_value()));
+  }
+
+  m_ipv6_prefix_ip     = safe_convert_ip6(ip6s[0]);
+  m_ipv6_prefix_length = std::stoi(ip6s[1]);
+
+  if (htonl(m_ipv4_pool_start_ip.s_addr) >= htonl(m_ipv4_pool_end_ip.s_addr)) {
+    throw std::runtime_error(fmt::format(
+        "The IPv4 range {} is not valid. The start range must be below the end "
+        "range",
+        m_ipv4_pool.get_value()));
+  }
+}
+
+[[nodiscard]] const in_addr& dnn_config::get_ipv4_pool_start() const {
+  return m_ipv4_pool_start_ip;
+}
+
+[[nodiscard]] const in_addr& dnn_config::get_ipv4_pool_end() const {
+  return m_ipv4_pool_end_ip;
+}
+
+[[nodiscard]] const in6_addr& dnn_config::get_ipv6_prefix() const {
+  return m_ipv6_prefix_ip;
+}
+
+[[nodiscard]] uint8_t dnn_config::get_ipv6_prefix_length() const {
+  return m_ipv6_prefix_length;
+}
+
+[[nodiscard]] const pdu_session_type_t& dnn_config::get_pdu_session_type()
+    const {
+  return m_pdu_session_type_generated;
+}
+
+const std::string& dnn_config::get_dnn() const {
+  return m_dnn.get_value();
 }

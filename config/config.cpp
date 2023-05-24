@@ -109,6 +109,15 @@ void config::read_from_file(const std::string& file_path) {
                                               // we drop the support for Mini
                                               // scenario
           m_database.from_yaml(elem.second);
+        } else if (key == DNNS_CONFIG_NAME) {
+          // remove default DNNs
+          m_dnns.clear();
+
+          for (const auto& yaml_dnn : elem.second) {
+            dnn_config cfg("default", "IPv4", "12.1.1.0-12.1.1.255", "");
+            cfg.from_yaml(yaml_dnn);
+            m_dnns.push_back(cfg);
+          }
         }
       } catch (std::exception& e) {
         logger::logger_registry::get_logger(LOGGER_NAME)
@@ -144,6 +153,9 @@ bool config::validate() {
   success &= safe_validate_field(m_register_nrf_feature);
   for (auto& nf : m_nf_map) {
     success &= safe_validate_field(*nf.second);
+  }
+  for (auto& dnn : m_dnns) {
+    success &= safe_validate_field(dnn);
   }
 
   return success;
@@ -254,6 +266,10 @@ const class policy_config& config::get_pcf_policy() const {
 
 const class database_config& config::get_database_config() const {
   return m_database;
+}
+
+const std::vector<dnn_config>& config::get_dnns() const {
+  return m_dnns;
 }
 
 bool config::add_nf(

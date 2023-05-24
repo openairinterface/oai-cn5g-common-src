@@ -57,6 +57,7 @@ const std::string HOSTNAME_VALIDATOR_REGEX =
 const std::string API_VERSION_REGEX = "v1|v2";
 const std::string HOST_VALIDATOR_REGEX =
     IPV4_ADDRESS_VALIDATOR_REGEX + "|" + HOSTNAME_VALIDATOR_REGEX;
+const std::string PDU_SESSION_TYPE_REGEX = "IPV4|IPV6|IPV4V6";
 
 const uint16_t PORT_MIN_VALUE = 1;
 const uint16_t PORT_MAX_VALUE = 65535;
@@ -86,6 +87,9 @@ constexpr auto DATABASE_CONFIG_DATABASE_NAME      = "database_name";
 constexpr auto DATABASE_CONFIG_DATABASE_TYPE      = "database_type";
 constexpr auto DATABASE_CONFIG_RANDOM             = "random";
 constexpr auto DATABASE_CONFIG_CONNECTION_TIMEOUT = "connection_timeout";
+
+// DNN (SMF/UPF)
+const std::string DNNS_CONFIG_NAME = "dnns";
 
 class config_iface {
  public:
@@ -122,6 +126,7 @@ class config_iface {
 
   [[nodiscard]] virtual const policy_config& get_pcf_policy() const        = 0;
   [[nodiscard]] virtual const database_config& get_database_config() const = 0;
+  [[nodiscard]] virtual const std::vector<dnn_config>& get_dnns() const    = 0;
 
   /**
    * Initializes the configuration, reads YAML configuration file and validates
@@ -154,6 +159,7 @@ class config : public config_iface {
 
   [[nodiscard]] const policy_config& get_pcf_policy() const override;
   [[nodiscard]] const database_config& get_database_config() const override;
+  [[nodiscard]] const std::vector<dnn_config>& get_dnns() const override;
 
   bool init() override;
 
@@ -183,6 +189,8 @@ class config : public config_iface {
   database_config m_database;
 
   std::unordered_map<std::string, std::shared_ptr<nf>> m_nf_map;
+
+  std::vector<dnn_config> m_dnns;
 
   mutable std::shared_mutex m_config_mutex;
 

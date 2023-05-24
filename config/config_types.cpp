@@ -43,6 +43,14 @@ bool config_type::is_set() const {
   return m_set;
 }
 
+void config_type::set_config() {
+  m_set = true;
+}
+
+void config_type::unset_config() {
+  m_set = false;
+}
+
 const std::string& config_type::get_config_name() const {
   return m_config_name;
 }

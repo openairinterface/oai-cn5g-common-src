@@ -81,6 +81,18 @@ class config_type {
   [[nodiscard]] virtual bool is_set() const;
 
   /**
+   * Set the configuration
+   * @return true if set, false otherwise
+   */
+  virtual void set_config();
+
+  /**
+   * Unset the configuration
+   * @return true if set, false otherwise
+   */
+  virtual void unset_config();
+
+  /**
    * Returns the name of this configuration in a user-friendly representation
    * @return
    */

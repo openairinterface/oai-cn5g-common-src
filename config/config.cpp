@@ -253,7 +253,7 @@ const class policy_config& config::get_pcf_policy() const {
   return m_pcf_policy;
 }
 
-const class database_config& config::get_database_config() const {
+class database_config& config::get_database_config() {
   return m_database;
 }
 

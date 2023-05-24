@@ -90,8 +90,8 @@ constexpr auto DATABASE_CONFIG_DATABASE_NAME            = "database_name";
 constexpr auto DATABASE_CONFIG_DATABASE_NAME_LABEL      = "Database Name";
 constexpr auto DATABASE_CONFIG_DATABASE_TYPE            = "database_type";
 constexpr auto DATABASE_CONFIG_DATABASE_TYPE_LABEL      = "Database Type";
-constexpr auto DATABASE_CONFIG_RANDOM                   = "random";
-constexpr auto DATABASE_CONFIG_RANDOM_LABEL             = "Random";
+constexpr auto DATABASE_CONFIG_RANDOM                   = "generate_random";
+constexpr auto DATABASE_CONFIG_RANDOM_LABEL             = "Generate Random";
 constexpr auto DATABASE_CONFIG_CONNECTION_TIMEOUT       = "connection_timeout";
 constexpr auto DATABASE_CONFIG_CONNECTION_TIMEOUT_LABEL = "Connection Timeout";
 
@@ -128,8 +128,8 @@ class config_iface {
   [[nodiscard]] virtual std::shared_ptr<nf> get_nf(
       const std::string& nf_name) = 0;
 
-  [[nodiscard]] virtual const policy_config& get_pcf_policy() const        = 0;
-  [[nodiscard]] virtual const database_config& get_database_config() const = 0;
+  [[nodiscard]] virtual const policy_config& get_pcf_policy() const = 0;
+  [[nodiscard]] virtual database_config& get_database_config()      = 0;
 
   /**
    * Initializes the configuration, reads YAML configuration file and validates
@@ -160,7 +160,7 @@ class config : public config_iface {
   [[nodiscard]] std::shared_ptr<nf> get_nf(const std::string& nf_name);
 
   [[nodiscard]] const policy_config& get_pcf_policy() const override;
-  [[nodiscard]] const database_config& get_database_config() const override;
+  [[nodiscard]] database_config& get_database_config() override;
 
   bool init() override;
 

@@ -79,7 +79,8 @@ const std::string LOCAL_POLICY_CONFIG_NAME = "local_policy";
 constexpr auto NF_CONFIG_HOST_NAME       = "host";
 constexpr auto NF_CONFIG_HOST_NAME_LABEL = "Host";
 
-// Database (AMF/UDR)
+// Database (AMF/UDR): should be moved to UDR when we drop minimal deployment
+// scenario (only AMF/SMF/UPF)
 constexpr auto DATABASE_CONFIG                          = "database";
 constexpr auto DATABASE_CONFIG_LABEL                    = "Database";
 constexpr auto DATABASE_CONFIG_USER                     = "user";
@@ -185,7 +186,8 @@ class config : public config_iface {
 
   std::shared_ptr<nf> m_local_nf;
 
-  // TODO: should not included in common Config
+  // TODO: should not included in Config except these parts are used by more
+  // than 2 NFs
   policy_config m_pcf_policy;
   database_config m_database;
 

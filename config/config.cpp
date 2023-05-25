@@ -69,7 +69,7 @@ void config::read_from_file(const std::string& file_path) {
           const auto nf_ptr = m_nf_map.find(m_nf_name);
           if (nf_ptr == m_nf_map.end()) {
             logger::logger_registry::get_logger(LOGGER_NAME)
-                .info("Unknown NF %s in configuration. Ignored", m_nf_name);
+                .debug("Unknown NF %s in configuration. Ignored", m_nf_name);
             continue;
           }
 
@@ -86,7 +86,7 @@ void config::read_from_file(const std::string& file_path) {
             const auto nf_ptr = m_nf_map.find(nf_name);
             if (nf_ptr == m_nf_map.end()) {
               logger::logger_registry::get_logger(LOGGER_NAME)
-                  .info("Unknown NF %s in configuration. Ignored", nf_name);
+                  .debug("Unknown NF %s in configuration. Ignored", nf_name);
               continue;
             }
             if (m_used_sbi_values.find(nf_name) == m_used_sbi_values.end()) {
@@ -103,7 +103,7 @@ void config::read_from_file(const std::string& file_path) {
             }
           }
         } else if (key == DATABASE_CONFIG) {  // TODO: Don't need to do this if
-                                              // we drop the support for Mini
+                                              // we drop the support for Minimal
                                               // scenario
           m_database.from_yaml(elem.second);
         }

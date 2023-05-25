@@ -390,7 +390,8 @@ nf::nf(
   m_host        = string_config_value("Host", host);
   m_sbi         = sbi;
   m_set         = true;
-  // m_host.set_validation_regex(HOST_VALIDATOR_REGEX); //DISABLE it temporarily
+  // m_host.set_validation_regex(HOST_VALIDATOR_REGEX); //TODO: DISABLE it
+  // temporarily
   set_url();
 }
 

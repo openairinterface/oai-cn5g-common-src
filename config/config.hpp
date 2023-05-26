@@ -40,7 +40,7 @@
 
 namespace oai::config {
 
-const int COLUMN_WIDTH           = 30;
+const int COLUMN_WIDTH           = 45;
 const int INDENT_WIDTH           = 2;
 const std::string BASE_FORMATTER = "{} {:.<{}}: {}\n";
 const std::string LOGGER_NAME    = "config ";

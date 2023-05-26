@@ -78,6 +78,11 @@ in6_addr config_type::safe_convert_ip6(const std::string& ipv6_string) {
   return ip;
 }
 
+std::string config_type::add_indent(const std::string& indent) {
+  std::string base_indent = fmt::format("{:<{}}", "", INDENT_WIDTH);
+  return base_indent + indent;
+}
+
 string_config_value::string_config_value(
     const std::string& name, const std::string& value) {
   m_config_name = name;
@@ -429,7 +434,7 @@ std::string nf::to_string(const std::string& indent) const {
   if (!is_set()) {
     return "";
   }
-  std::string inner_indent = indent + indent;
+  std::string inner_indent = add_indent(indent);
   unsigned int inner_width = get_inner_width(inner_indent.length());
 
   out.append(indent).append(m_config_name).append(":\n");
@@ -442,13 +447,13 @@ std::string nf::to_string(const std::string& indent) const {
     out.append(inner_indent)
         .append(
             fmt::format("{} {}\n", OUTER_LIST_ELEM, m_sbi.get_config_name()));
-    out.append(m_sbi.to_string(inner_indent + indent));
+    out.append(m_sbi.to_string(add_indent(inner_indent)));
   }
   if (m_nx.is_set()) {
     out.append(inner_indent)
         .append(
             fmt::format("{} {}\n", OUTER_LIST_ELEM, m_nx.get_config_name()));
-    out.append(m_nx.to_string(inner_indent + indent));
+    out.append(m_nx.to_string(add_indent(inner_indent)));
   }
 
   return out;

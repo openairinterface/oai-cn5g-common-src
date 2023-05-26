@@ -190,7 +190,6 @@ std::string config::to_string() const {
   std::string indent = fmt::format("{:<{}}", "", INDENT_WIDTH);
   out.append(m_log_level_feature.to_string(indent));
   out.append(m_register_nrf_feature.to_string(indent));
-  out.append("Local NF Configuration:\n");
   out.append(m_local_nf->to_string(indent));
   out.append("Peer NF Configuration:\n");
   for (const auto& nf : m_nf_map) {
@@ -199,8 +198,12 @@ std::string config::to_string() const {
     }
   }
   out.append(m_pcf_policy.to_string(indent));
-
-  // TODO rest of the fields
+  if (!m_dnns.empty()) {
+    out.append("DNNs:\n");
+  }
+  for (const auto& dnn : m_dnns) {
+    out.append(dnn.to_string(indent));
+  }
 
   return out;
 }

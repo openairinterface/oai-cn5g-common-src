@@ -173,7 +173,7 @@ class config : public config_iface {
   std::unordered_set<std::string> m_used_sbi_values;
   std::string m_nf_name;
 
-  void update_used_nfs();
+  virtual void update_used_nfs();
   bool add_nf(const std::string& name, const std::shared_ptr<nf>& nf_ptr);
 
  private:
@@ -195,6 +195,8 @@ class config : public config_iface {
   mutable std::shared_mutex m_config_mutex;
 
   static bool safe_validate_field(config_type& config);
+
+  bool is_config_used(const std::string& key) const;
 };
 
 }  // namespace oai::config

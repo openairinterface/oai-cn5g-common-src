@@ -83,6 +83,10 @@ std::string config_type::add_indent(const std::string& indent) {
   return base_indent + indent;
 }
 
+void config_type::set(bool val) {
+  m_set = val;
+}
+
 string_config_value::string_config_value(
     const std::string& name, const std::string& value) {
   m_config_name = name;
@@ -517,6 +521,7 @@ void policy_config::from_yaml(const YAML::Node& node) {
 }
 
 std::string policy_config::to_string(const std::string& indent) const {
+  if (!m_set) return "";
   std::string out;
   unsigned int inner_width = get_inner_width(indent.length());
   out.append(m_config_name).append("\n");
@@ -711,24 +716,32 @@ void dnn_config::from_yaml(const YAML::Node& node) {
 
 [[nodiscard]] std::string dnn_config::to_string(
     const std::string& indent) const {
-  unsigned int inner_width = get_inner_width(indent.length());
   std::string out;
 
-  out.append(indent).append(fmt::format(
-      BASE_FORMATTER, OUTER_LIST_ELEM, m_dnn.get_config_name(), inner_width,
-      m_dnn.to_string("")));
+  std::string inner_indent = add_indent(indent);
+  unsigned int inner_width = get_inner_width(inner_indent.length());
 
-  out.append(indent).append(fmt::format(
-      BASE_FORMATTER, OUTER_LIST_ELEM, m_pdu_session_type.get_config_name(),
-      inner_width, m_pdu_session_type.to_string("")));
+  out.append(fmt::format("{} {}:\n", OUTER_LIST_ELEM, m_dnn.get_config_name()));
+
+  out.append(inner_indent)
+      .append(fmt::format(
+          BASE_FORMATTER, INNER_LIST_ELEM, m_dnn.get_config_name(), inner_width,
+          m_dnn.to_string("")));
+
+  out.append(inner_indent)
+      .append(fmt::format(
+          BASE_FORMATTER, INNER_LIST_ELEM, m_pdu_session_type.get_config_name(),
+          inner_width, m_pdu_session_type.to_string("")));
   if (m_ipv6_prefix.get_value().empty()) {
-    out.append(indent).append(fmt::format(
-        BASE_FORMATTER, OUTER_LIST_ELEM, m_ipv6_prefix.get_config_name(),
-        inner_width, m_ipv6_prefix.to_string("")));
+    out.append(inner_indent)
+        .append(fmt::format(
+            BASE_FORMATTER, INNER_LIST_ELEM, m_ipv6_prefix.get_config_name(),
+            inner_width, m_ipv6_prefix.to_string("")));
   } else {
-    out.append(indent).append(fmt::format(
-        BASE_FORMATTER, OUTER_LIST_ELEM, m_ipv4_pool.get_config_name(),
-        inner_width, m_ipv4_pool.to_string("")));
+    out.append(inner_indent)
+        .append(fmt::format(
+            BASE_FORMATTER, INNER_LIST_ELEM, m_ipv4_pool.get_config_name(),
+            inner_width, m_ipv4_pool.to_string("")));
   }
   return out;
 }

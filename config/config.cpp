@@ -197,7 +197,10 @@ std::string config::to_string() const {
       out.append(nf.second->to_string(indent));
     }
   }
-  out.append(m_pcf_policy.to_string(indent));
+  if (is_config_used(PCF_CONFIG_NAME)) {
+    out.append(m_pcf_policy.to_string(indent));
+  }
+
   if (!m_dnns.empty()) {
     out.append("DNNs:\n");
   }
@@ -293,9 +296,14 @@ void config::update_used_nfs() {
       if (used_nf == m_used_sbi_values.end()) {
         nf.second->m_set = false;
       }
-      if (register_nrf() && nf.first != "nrf") {
-        // nf.second->m_set = false;
+      if (register_nrf() && nf.first != NRF_CONFIG_NAME) {
+        nf.second->m_set = false;
       }
     }
   }
+}
+
+bool config::is_config_used(const std::string& key) const {
+  auto found = m_used_config_values.find(key);
+  return found != m_used_config_values.end();
 }

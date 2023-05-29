@@ -172,6 +172,7 @@ class config : public config_iface {
   std::unordered_set<std::string> m_used_config_values;
   std::unordered_set<std::string> m_used_sbi_values;
   std::string m_nf_name;
+  std::vector<dnn_config> m_dnns;
 
   virtual void update_used_nfs();
   bool add_nf(const std::string& name, const std::shared_ptr<nf>& nf_ptr);
@@ -189,8 +190,6 @@ class config : public config_iface {
   database_config m_database;
 
   std::unordered_map<std::string, std::shared_ptr<nf>> m_nf_map;
-
-  std::vector<dnn_config> m_dnns;
 
   mutable std::shared_mutex m_config_mutex;
 

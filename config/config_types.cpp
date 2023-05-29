@@ -697,6 +697,10 @@ dnn_config::dnn_config(
       IPV4_ADDRESS_VALIDATOR_REGEX + "( )*-( )*" +
       IPV4_ADDRESS_VALIDATOR_REGEX);
   m_ipv6_prefix.set_validation_regex(IPV6_ADDRESS_VALIDATOR_REGEX);
+  if (ipv6_prefix.empty()) {
+    m_ipv6_prefix.set(false);
+  }
+  m_set = true;
 }
 
 void dnn_config::from_yaml(const YAML::Node& node) {
@@ -750,43 +754,55 @@ void dnn_config::validate() {
   m_pdu_session_type_generated =
       pdu_session_type_t(m_pdu_session_type.get_value());
 
-  std::vector<std::string> ips;
-  boost::split(
-      ips, m_ipv4_pool.get_value(), boost::is_any_of("-"),
-      boost::token_compress_on);
+  if (m_pdu_session_type_generated ==
+          pdu_session_type_e::PDU_SESSION_TYPE_E_IPV4 ||
+      m_pdu_session_type_generated ==
+          pdu_session_type_e::PDU_SESSION_TYPE_E_IPV4V6) {
+    std::vector<std::string> ips;
+    boost::split(
+        ips, m_ipv4_pool.get_value(), boost::is_any_of("-"),
+        boost::token_compress_on);
 
-  if (ips.size() != 2) {
-    throw std::runtime_error(fmt::format(
-        "The IP address pool {} is not valid", m_ipv4_pool.get_value()));
-  }
+    if (ips.size() != 2) {
+      throw std::runtime_error(fmt::format(
+          "The IP address pool {} is not valid", m_ipv4_pool.get_value()));
+    }
 
-  boost::trim_left(ips[0]);
-  boost::trim_right(ips[0]);
-  boost::trim_left(ips[1]);
-  boost::trim_right(ips[1]);
+    boost::trim_left(ips[0]);
+    boost::trim_right(ips[0]);
+    boost::trim_left(ips[1]);
+    boost::trim_right(ips[1]);
 
-  m_ipv4_pool_start_ip = safe_convert_ip(ips[0]);
-  m_ipv4_pool_end_ip   = safe_convert_ip(ips[1]);
+    m_ipv4_pool_start_ip = safe_convert_ip(ips[0]);
+    m_ipv4_pool_end_ip   = safe_convert_ip(ips[1]);
 
-  std::vector<std::string> ip6s;
-boost:
-  split(
-      ip6s, m_ipv6_prefix.get_value(), boost::is_any_of("/"),
-      boost::token_compress_on);
+    if (htonl(m_ipv4_pool_start_ip.s_addr) >=
+        htonl(m_ipv4_pool_end_ip.s_addr)) {
+      throw std::runtime_error(fmt::format(
+          "The IPv4 range {} is not valid. The start range must be below the "
+          "end "
+          "range",
+          m_ipv4_pool.get_value()));
+    }
+    if (m_pdu_session_type_generated ==
+            pdu_session_type_e::PDU_SESSION_TYPE_E_IPV6 ||
+        m_pdu_session_type_generated ==
+            pdu_session_type_e::PDU_SESSION_TYPE_E_IPV4V6) {
+      std::vector<std::string> ip6s;
+    boost:
+      split(
+          ip6s, m_ipv6_prefix.get_value(), boost::is_any_of("/"),
+          boost::token_compress_on);
 
-  if (ip6s.size() != 2) {
-    throw std::runtime_error(fmt::format(
-        "The IPv6 prefix / length {} is not valid", m_ipv6_prefix.get_value()));
-  }
+      if (ip6s.size() != 2) {
+        throw std::runtime_error(fmt::format(
+            "The IPv6 prefix / length {} is not valid",
+            m_ipv6_prefix.get_value()));
+      }
 
-  m_ipv6_prefix_ip     = safe_convert_ip6(ip6s[0]);
-  m_ipv6_prefix_length = std::stoi(ip6s[1]);
-
-  if (htonl(m_ipv4_pool_start_ip.s_addr) >= htonl(m_ipv4_pool_end_ip.s_addr)) {
-    throw std::runtime_error(fmt::format(
-        "The IPv4 range {} is not valid. The start range must be below the end "
-        "range",
-        m_ipv4_pool.get_value()));
+      m_ipv6_prefix_ip     = safe_convert_ip6(ip6s[0]);
+      m_ipv6_prefix_length = std::stoi(ip6s[1]);
+    }
   }
 }
 

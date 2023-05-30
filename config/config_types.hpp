@@ -197,7 +197,7 @@ class local_interface : public config_type {
   [[nodiscard]] uint16_t get_port() const;
 
   void set_is_local_interface(bool val);
-  bool is_local_interface() const;
+  [[nodiscard]] bool is_local_interface() const;
 };
 
 class sbi_interface : public local_interface {
@@ -328,8 +328,8 @@ class database_config : public config_type {
   [[nodiscard]] const std::string& get_pass() const;
   [[nodiscard]] const std::string& get_database_name() const;
   [[nodiscard]] const std::string& get_database_type() const;
-  [[nodiscard]] const bool get_random() const;
-  [[nodiscard]] const int get_connection_timeout() const;
+  [[nodiscard]] bool get_random() const;
+  [[nodiscard]] int get_connection_timeout() const;
 };
 
 // TODO we should just use the DnnConfiguration data structure, but that

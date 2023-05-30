@@ -487,13 +487,7 @@ const std::string& nf::get_url() const {
 }
 
 void nf::set_url() {
-  uint16_t used_port = get_sbi().get_port_http2();
-  if (used_port == 0) {
-    used_port = get_sbi().get_port_http1();
-  }
-  m_url = "";
-  // this is easily adaptable to HTTPS, just add a flag, and we change the URL
-  m_url.append(get_host()).append(":").append(std::to_string(used_port));
+  m_url = m_sbi.get_url();
 }
 
 policy_config::policy_config(
@@ -675,11 +669,11 @@ const std::string& database_config::get_database_type() const {
   return m_database_type.get_value();
 }
 
-const bool database_config::get_random() const {
+bool database_config::get_random() const {
   return m_random.get_value();
 }
 
-const int database_config::get_connection_timeout() const {
+int database_config::get_connection_timeout() const {
   return m_connection_timeout.get_value();
 }
 
@@ -789,8 +783,7 @@ void dnn_config::validate() {
         m_pdu_session_type_generated ==
             pdu_session_type_e::PDU_SESSION_TYPE_E_IPV4V6) {
       std::vector<std::string> ip6s;
-    boost:
-      split(
+      boost::split(
           ip6s, m_ipv6_prefix.get_value(), boost::is_any_of("/"),
           boost::token_compress_on);
 

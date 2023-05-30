@@ -77,16 +77,25 @@ const std::string NF_LIST_CONFIG_NAME      = "nfs";
 const std::string LOCAL_POLICY_CONFIG_NAME = "local_policy";
 
 // NF
-constexpr auto NF_CONFIG_HOST_NAME = "host";
+constexpr auto NF_CONFIG_HOST_NAME       = "host";
+constexpr auto NF_CONFIG_HOST_NAME_LABEL = "Host";
 
-// Database (AMF/UDR)
-constexpr auto DATABASE_CONFIG                    = "database";
-constexpr auto DATABASE_CONFIG_USER               = "user";
-constexpr auto DATABASE_CONFIG_PASSWORD           = "password";
-constexpr auto DATABASE_CONFIG_DATABASE_NAME      = "database_name";
-constexpr auto DATABASE_CONFIG_DATABASE_TYPE      = "database_type";
-constexpr auto DATABASE_CONFIG_RANDOM             = "random";
-constexpr auto DATABASE_CONFIG_CONNECTION_TIMEOUT = "connection_timeout";
+// Database (AMF/UDR): should be moved to UDR when we drop minimal deployment
+// scenario (only AMF/SMF/UPF)
+constexpr auto DATABASE_CONFIG                          = "database";
+constexpr auto DATABASE_CONFIG_LABEL                    = "Database";
+constexpr auto DATABASE_CONFIG_USER                     = "user";
+constexpr auto DATABASE_CONFIG_USER_LABEL               = "User";
+constexpr auto DATABASE_CONFIG_PASSWORD                 = "password";
+constexpr auto DATABASE_CONFIG_PASSWORD_LABEL           = "Password";
+constexpr auto DATABASE_CONFIG_DATABASE_NAME            = "database_name";
+constexpr auto DATABASE_CONFIG_DATABASE_NAME_LABEL      = "Database Name";
+constexpr auto DATABASE_CONFIG_DATABASE_TYPE            = "database_type";
+constexpr auto DATABASE_CONFIG_DATABASE_TYPE_LABEL      = "Database Type";
+constexpr auto DATABASE_CONFIG_RANDOM                   = "generate_random";
+constexpr auto DATABASE_CONFIG_RANDOM_LABEL             = "Generate Random";
+constexpr auto DATABASE_CONFIG_CONNECTION_TIMEOUT       = "connection_timeout";
+constexpr auto DATABASE_CONFIG_CONNECTION_TIMEOUT_LABEL = "Connection Timeout";
 
 // DNN (SMF/UPF)
 const std::string DNNS_CONFIG_NAME = "dnns";
@@ -124,9 +133,9 @@ class config_iface {
   [[nodiscard]] virtual std::shared_ptr<nf> get_nf(
       const std::string& nf_name) const = 0;
 
-  [[nodiscard]] virtual const policy_config& get_pcf_policy() const        = 0;
   [[nodiscard]] virtual const database_config& get_database_config() const = 0;
   [[nodiscard]] virtual const std::vector<dnn_config>& get_dnns() const    = 0;
+  [[nodiscard]] virtual database_config& get_database_config()      = 0;
 
   /**
    * Initializes the configuration, reads YAML configuration file and validates
@@ -158,7 +167,7 @@ class config : public config_iface {
       const std::string& nf_name) const override;
 
   [[nodiscard]] const policy_config& get_pcf_policy() const override;
-  [[nodiscard]] const database_config& get_database_config() const override;
+  [[nodiscard]] database_config& get_database_config() override;
   [[nodiscard]] const std::vector<dnn_config>& get_dnns() const override;
 
   bool init() override;
@@ -185,8 +194,6 @@ class config : public config_iface {
 
   std::shared_ptr<nf> m_local_nf;
 
-  // TODO: should not included in common Config
-  policy_config m_pcf_policy;
   database_config m_database;
 
   std::unordered_map<std::string, std::shared_ptr<nf>> m_nf_map;

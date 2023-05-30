@@ -41,10 +41,6 @@ config::config(
     bool log_rot_file)
     : m_log_level_feature("Log Level", nf_name, std::string("info")),
       m_register_nrf_feature("Register NF", nf_name, false),
-      m_pcf_policy(
-          "/openair-pcf/policies/policy_decisions",
-          "/openair-pcf/policies/pcc_rules",
-          "/openair-pcf/policies/traffic_rules"),
       m_database() {
   logger::logger_registry::register_logger(
       nf_name, LOGGER_NAME, log_stdout, log_rot_file);
@@ -72,7 +68,7 @@ void config::read_from_file(const std::string& file_path) {
           const auto nf_ptr = m_nf_map.find(m_nf_name);
           if (nf_ptr == m_nf_map.end()) {
             logger::logger_registry::get_logger(LOGGER_NAME)
-                .info("Unknown NF %s in configuration. Ignored", m_nf_name);
+                .debug("Unknown NF %s in configuration. Ignored", m_nf_name);
             continue;
           }
 
@@ -89,7 +85,7 @@ void config::read_from_file(const std::string& file_path) {
             const auto nf_ptr = m_nf_map.find(nf_name);
             if (nf_ptr == m_nf_map.end()) {
               logger::logger_registry::get_logger(LOGGER_NAME)
-                  .info("Unknown NF %s in configuration. Ignored", nf_name);
+                  .debug("Unknown NF %s in configuration. Ignored", nf_name);
               continue;
             }
             if (m_used_sbi_values.find(nf_name) == m_used_sbi_values.end()) {
@@ -106,7 +102,7 @@ void config::read_from_file(const std::string& file_path) {
             }
           }
         } else if (key == DATABASE_CONFIG) {  // TODO: Don't need to do this if
-                                              // we drop the support for Mini
+                                              // we drop the support for Minimal
                                               // scenario
           m_database.from_yaml(elem.second);
         } else if (key == DNNS_CONFIG_NAME) {
@@ -191,14 +187,15 @@ std::string config::to_string() const {
   out.append(m_log_level_feature.to_string(indent));
   out.append(m_register_nrf_feature.to_string(indent));
   out.append(m_local_nf->to_string(indent));
+  if (m_database.is_set()) {
+    out.append(indent).append("Database:\n");
+    out.append(m_database.to_string(indent + indent));
+  }
   out.append("Peer NF Configuration:\n");
   for (const auto& nf : m_nf_map) {
     if (nf.first != m_nf_name) {
       out.append(nf.second->to_string(indent));
     }
-  }
-  if (is_config_used(PCF_CONFIG_NAME)) {
-    out.append(m_pcf_policy.to_string(indent));
   }
 
   if (!m_dnns.empty()) {
@@ -270,7 +267,7 @@ const class policy_config& config::get_pcf_policy() const {
   return m_pcf_policy;
 }
 
-const class database_config& config::get_database_config() const {
+class database_config& config::get_database_config() {
   return m_database;
 }
 

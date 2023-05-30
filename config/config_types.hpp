@@ -82,10 +82,16 @@ class config_type {
   [[nodiscard]] virtual bool is_set() const;
 
   /**
-   * Sets the configuration with the value
-   * @param val true=configuration is set, false=not set
+   * Set the configuration
+   * @return true if set, false otherwise
    */
-  void set(bool val);
+  virtual void set_config();
+
+  /**
+   * Unset the configuration
+   * @return true if set, false otherwise
+   */
+  virtual void unset_config();
 
   /**
    * Returns the name of this configuration in a user-friendly representation
@@ -162,8 +168,6 @@ class int_config_value : public config_type {
 };
 
 class local_interface : public config_type {
-  friend class nf;
-
  protected:
   string_config_value m_host{};
   int_config_value m_port{};
@@ -201,8 +205,6 @@ class local_interface : public config_type {
 };
 
 class sbi_interface : public local_interface {
-  friend class nf;
-
  private:
   string_config_value m_api_version;
   int_config_value m_port_http1;

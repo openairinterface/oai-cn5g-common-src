@@ -46,6 +46,14 @@ bool config_type::is_set() const {
   return m_set;
 }
 
+void config_type::set_config() {
+  m_set = true;
+}
+
+void config_type::unset_config() {
+  m_set = false;
+}
+
 const std::string& config_type::get_config_name() const {
   return m_config_name;
 }
@@ -81,10 +89,6 @@ in6_addr config_type::safe_convert_ip6(const std::string& ipv6_string) {
 std::string config_type::add_indent(const std::string& indent) {
   std::string base_indent = fmt::format("{:<{}}", "", INDENT_WIDTH);
   return base_indent + indent;
-}
-
-void config_type::set(bool val) {
-  m_set = val;
 }
 
 string_config_value::string_config_value(
@@ -183,7 +187,8 @@ local_interface::local_interface(
   m_port        = int_config_value("Port", port);
   m_port.set_validation_interval(PORT_MIN_VALUE, PORT_MAX_VALUE);
   m_host.set_validation_regex(HOST_VALIDATOR_REGEX);
-  m_set = true;
+  m_set                = true;
+  m_is_local_interface = true;
 }
 
 void local_interface::from_yaml(const YAML::Node& node) {
@@ -193,7 +198,8 @@ void local_interface::from_yaml(const YAML::Node& node) {
   if (node["interface_name"]) {
     m_if_name.from_yaml(node["interface_name"]);
   }
-  m_set = true;
+  m_set                = true;
+  m_is_local_interface = true;
 }
 
 std::string local_interface::to_string(const std::string& indent) const {
@@ -301,11 +307,13 @@ sbi_interface::sbi_interface(
   m_port_http1.set_validation_interval(PORT_MIN_VALUE, PORT_MAX_VALUE);
   m_port_http2.set_validation_interval(PORT_MIN_VALUE, PORT_MAX_VALUE);
   m_set = true;
+  set_is_local_interface(false);
   set_url();
 }
 
 void sbi_interface::from_yaml(const YAML::Node& node) {
   local_interface::from_yaml(node);
+  set_is_local_interface(false);
 
   if (node["api_version"]) {
     m_api_version.from_yaml(node["api_version"]);
@@ -403,13 +411,13 @@ nf::nf(
 }
 
 nf::nf(
-    const std::string& name, const std::string& host,
-    const sbi_interface& sbi) {
+    const std::string& name, const std::string& host, const sbi_interface& sbi)
+    : m_nx() {
   m_config_name = name;
   m_host        = string_config_value("Host", host);
   m_sbi         = sbi;
   m_set         = true;
-  // m_host.set_validation_regex(HOST_VALIDATOR_REGEX); //DISABLE it temporarily
+  m_host.set_validation_regex(HOST_VALIDATOR_REGEX);
   set_url();
 }
 
@@ -421,11 +429,11 @@ void nf::from_yaml(const YAML::Node& node) {
     m_sbi.m_host = m_host;
     m_sbi.from_yaml(node["sbi"]);
   }
-  if (node["n2"]) {
+  if (node["n2"] and m_nx.is_set()) {
     m_nx.m_host = m_host;
     m_nx.from_yaml(node["n2"]);
   }
-  if (node["n4"]) {
+  if (node["n4"] and m_nx.is_set()) {
     m_nx.m_host = m_host;
     m_nx.from_yaml(node["n4"]);
   }
@@ -644,8 +652,25 @@ std::string database_config::to_string(const std::string& indent) const {
   std::string out;
   unsigned int inner_width = get_inner_width(indent.length());
   out.append(indent).append(fmt::format(
-      BASE_FORMATTER, OUTER_LIST_ELEM, m_host.get_config_name(), inner_width,
+      BASE_FORMATTER, OUTER_LIST_ELEM, NF_CONFIG_HOST_NAME_LABEL, inner_width,
       m_host.get_value()));
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, OUTER_LIST_ELEM, DATABASE_CONFIG_USER_LABEL, inner_width,
+      m_user.get_value()));
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, OUTER_LIST_ELEM, DATABASE_CONFIG_PASSWORD_LABEL,
+      inner_width, m_pass.get_value()));
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, OUTER_LIST_ELEM, DATABASE_CONFIG_DATABASE_NAME_LABEL,
+      inner_width, m_database_name.get_value()));
+  std::string database_config_random_string =
+      m_random.get_value() ? "Yes" : "No";
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, OUTER_LIST_ELEM, DATABASE_CONFIG_RANDOM_LABEL,
+      inner_width, database_config_random_string));
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, OUTER_LIST_ELEM, DATABASE_CONFIG_CONNECTION_TIMEOUT_LABEL,
+      inner_width, m_connection_timeout.get_value()));
   return out;
 }
 

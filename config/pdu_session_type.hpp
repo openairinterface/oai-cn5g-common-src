@@ -21,9 +21,10 @@
 
 /*! \file pdu_session_type.hpp
  \brief
- \author  Puzyu Dukl (BUPT), Tien-Thinh NGUYEN (EURECOM), Stefan Spettel
- (phine.tech) \company BUPT, EURECOM, phine.tech \date 2023 \email:
- stefan.spettel@phine.tech
+ \author  Puzyu Dukl (BUPT), Tien-Thinh NGUYEN (EURECOM)
+ \company BUPT, EURECOM
+ \date 2023
+ \email: tien-thinh.nguyen@eurecom.fr
 */
 
 #pragma once

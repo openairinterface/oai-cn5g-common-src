@@ -82,14 +82,12 @@ class config_type {
   [[nodiscard]] virtual bool is_set() const;
 
   /**
-   * Set the configuration
-   * @return true if set, false otherwise
+   * Sets the configuration
    */
   virtual void set_config();
 
   /**
-   * Unset the configuration
-   * @return true if set, false otherwise
+   * Unsets the configuration
    */
   virtual void unset_config();
 
@@ -168,6 +166,8 @@ class int_config_value : public config_type {
 };
 
 class local_interface : public config_type {
+  friend class nf;
+
  protected:
   string_config_value m_host{};
   int_config_value m_port{};
@@ -205,6 +205,8 @@ class local_interface : public config_type {
 };
 
 class sbi_interface : public local_interface {
+  friend class nf;
+
  private:
   string_config_value m_api_version;
   int_config_value m_port_http1;
@@ -262,25 +264,6 @@ class nf : public config_type {
   [[nodiscard]] const local_interface& get_nx() const;
   [[nodiscard]] const std::string& get_host() const;
   [[nodiscard]] const std::string& get_url() const;
-};
-
-class policy_config : public config_type {
- private:
-  string_config_value m_pcc_rules_path;
-  string_config_value m_policy_decisions_path;
-  string_config_value m_traffic_rules_path;
-
- public:
-  explicit policy_config(
-      const std::string& policy_decisions_path,
-      const std::string& pcc_rules_path, const std::string& traffic_rules_path);
-
-  void from_yaml(const YAML::Node& node) override;
-
-  [[nodiscard]] std::string to_string(const std::string& indent) const override;
-  [[nodiscard]] const std::string& get_pcc_rules_path() const;
-  [[nodiscard]] const std::string& get_policy_decisions_path() const;
-  [[nodiscard]] const std::string& get_traffic_rules_path() const;
 };
 
 class nf_features_config : public config_type {

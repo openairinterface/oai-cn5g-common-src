@@ -498,60 +498,6 @@ void nf::set_url() {
   m_url = m_sbi.get_url();
 }
 
-policy_config::policy_config(
-    const std::string& policy_decisions_path, const std::string& pcc_rules_path,
-    const std::string& traffic_rules_path) {
-  m_config_name = "Policy";
-  m_traffic_rules_path =
-      string_config_value("Traffic Rules", traffic_rules_path);
-  m_pcc_rules_path = string_config_value("PCC Rules", pcc_rules_path);
-  m_policy_decisions_path =
-      string_config_value("Policy Decisions", policy_decisions_path);
-  m_set = true;
-}
-
-void policy_config::from_yaml(const YAML::Node& node) {
-  if (node["policy_decisions_path"]) {
-    m_policy_decisions_path.from_yaml(node["policy_decisions_path"]);
-  }
-  if (node["pcc_rules_path"]) {
-    m_pcc_rules_path.from_yaml(node["pcc_rules_path"]);
-  }
-  if (node["traffic_rules_path"]) {
-    m_traffic_rules_path.from_yaml(node["traffic_rules_path"]);
-  }
-}
-
-std::string policy_config::to_string(const std::string& indent) const {
-  if (!m_set) return "";
-  std::string out;
-  unsigned int inner_width = get_inner_width(indent.length());
-  out.append(m_config_name).append("\n");
-  out.append(indent).append(fmt::format(
-      BASE_FORMATTER, OUTER_LIST_ELEM,
-      m_policy_decisions_path.get_config_name(), inner_width,
-      m_policy_decisions_path.get_value()));
-  out.append(indent).append(fmt::format(
-      BASE_FORMATTER, OUTER_LIST_ELEM, m_pcc_rules_path.get_config_name(),
-      inner_width, m_pcc_rules_path.get_value()));
-  out.append(indent).append(fmt::format(
-      BASE_FORMATTER, OUTER_LIST_ELEM, m_traffic_rules_path.get_config_name(),
-      inner_width, m_traffic_rules_path.get_value()));
-  return out;
-}
-
-const std::string& policy_config::get_pcc_rules_path() const {
-  return m_pcc_rules_path.get_value();
-}
-
-const std::string& policy_config::get_policy_decisions_path() const {
-  return m_policy_decisions_path.get_value();
-}
-
-const std::string& policy_config::get_traffic_rules_path() const {
-  return m_traffic_rules_path.get_value();
-}
-
 nf_features_config::nf_features_config(
     const std::string& name, const std::string& nf_name, bool value) {
   m_option_value = option_config_value("", value);
@@ -717,7 +663,7 @@ dnn_config::dnn_config(
       IPV4_ADDRESS_VALIDATOR_REGEX);
   m_ipv6_prefix.set_validation_regex(IPV6_ADDRESS_VALIDATOR_REGEX);
   if (ipv6_prefix.empty()) {
-    m_ipv6_prefix.set(false);
+    m_ipv6_prefix.unset_config();
   }
   m_set = true;
 }

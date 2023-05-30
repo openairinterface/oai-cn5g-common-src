@@ -133,9 +133,8 @@ class config_iface {
   [[nodiscard]] virtual std::shared_ptr<nf> get_nf(
       const std::string& nf_name) const = 0;
 
-  [[nodiscard]] virtual const database_config& get_database_config() const = 0;
-  [[nodiscard]] virtual const std::vector<dnn_config>& get_dnns() const    = 0;
-  [[nodiscard]] virtual database_config& get_database_config()      = 0;
+  [[nodiscard]] virtual const std::vector<dnn_config>& get_dnns() const = 0;
+  [[nodiscard]] virtual database_config& get_database_config()          = 0;
 
   /**
    * Initializes the configuration, reads YAML configuration file and validates
@@ -166,7 +165,6 @@ class config : public config_iface {
   [[nodiscard]] std::shared_ptr<nf> get_nf(
       const std::string& nf_name) const override;
 
-  [[nodiscard]] const policy_config& get_pcf_policy() const override;
   [[nodiscard]] database_config& get_database_config() override;
   [[nodiscard]] const std::vector<dnn_config>& get_dnns() const override;
 
@@ -201,8 +199,6 @@ class config : public config_iface {
   mutable std::shared_mutex m_config_mutex;
 
   static bool safe_validate_field(config_type& config);
-
-  bool is_config_used(const std::string& key) const;
 };
 
 }  // namespace oai::config

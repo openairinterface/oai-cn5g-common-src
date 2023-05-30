@@ -263,10 +263,6 @@ std::shared_ptr<nf> config::get_nf(const std::string& nf_name) const {
   return nf_ptr->second;
 }
 
-const class policy_config& config::get_pcf_policy() const {
-  return m_pcf_policy;
-}
-
 class database_config& config::get_database_config() {
   return m_database;
 }
@@ -287,7 +283,6 @@ void config::update_used_nfs() {
       m_local_nf = nf.second;
       m_local_nf->m_sbi.set_is_local_interface(
           true);  // TODO: to be updated with UPF
-      m_local_nf->m_nx.set_is_local_interface(true);  // TODO: to be verified
     } else {
       auto used_nf = m_used_sbi_values.find(nf.first);
       if (used_nf == m_used_sbi_values.end()) {
@@ -298,9 +293,4 @@ void config::update_used_nfs() {
       }
     }
   }
-}
-
-bool config::is_config_used(const std::string& key) const {
-  auto found = m_used_config_values.find(key);
-  return found != m_used_config_values.end();
 }

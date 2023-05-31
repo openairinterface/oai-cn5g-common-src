@@ -40,7 +40,7 @@
 
 namespace oai::config {
 
-const int COLUMN_WIDTH           = 30;
+const int COLUMN_WIDTH           = 45;
 const int INDENT_WIDTH           = 2;
 const std::string BASE_FORMATTER = "{} {:.<{}}: {}\n";
 const std::string LOGGER_NAME    = "config ";
@@ -57,6 +57,7 @@ const std::string HOSTNAME_VALIDATOR_REGEX =
 const std::string API_VERSION_REGEX = "v1|v2";
 const std::string HOST_VALIDATOR_REGEX =
     IPV4_ADDRESS_VALIDATOR_REGEX + "|" + HOSTNAME_VALIDATOR_REGEX;
+const std::string PDU_SESSION_TYPE_REGEX = "IPV4|IPV6|IPV4V6";
 
 const uint16_t PORT_MIN_VALUE = 1;
 const uint16_t PORT_MAX_VALUE = 65535;
@@ -96,6 +97,9 @@ constexpr auto DATABASE_CONFIG_RANDOM_LABEL             = "Generate Random";
 constexpr auto DATABASE_CONFIG_CONNECTION_TIMEOUT       = "connection_timeout";
 constexpr auto DATABASE_CONFIG_CONNECTION_TIMEOUT_LABEL = "Connection Timeout";
 
+// DNN (SMF/UPF)
+const std::string DNNS_CONFIG_NAME = "dnns";
+
 class config_iface {
  public:
   /**
@@ -125,12 +129,12 @@ class config_iface {
 
   [[nodiscard]] virtual const nf& local() const = 0;
 
-  [[nodiscard]] virtual std::shared_ptr<nf> get_local() = 0;
+  [[nodiscard]] virtual std::shared_ptr<nf> get_local() const = 0;
   [[nodiscard]] virtual std::shared_ptr<nf> get_nf(
-      const std::string& nf_name) = 0;
+      const std::string& nf_name) const = 0;
 
-  [[nodiscard]] virtual const policy_config& get_pcf_policy() const = 0;
-  [[nodiscard]] virtual database_config& get_database_config()      = 0;
+  [[nodiscard]] virtual const std::vector<dnn_config>& get_dnns() const = 0;
+  [[nodiscard]] virtual database_config& get_database_config()          = 0;
 
   /**
    * Initializes the configuration, reads YAML configuration file and validates
@@ -157,11 +161,12 @@ class config : public config_iface {
   [[nodiscard]] const std::string& log_level() const override;
 
   [[nodiscard]] const nf& local() const override;
-  [[nodiscard]] std::shared_ptr<nf> get_local() override;
-  [[nodiscard]] std::shared_ptr<nf> get_nf(const std::string& nf_name);
+  [[nodiscard]] std::shared_ptr<nf> get_local() const override;
+  [[nodiscard]] std::shared_ptr<nf> get_nf(
+      const std::string& nf_name) const override;
 
-  [[nodiscard]] const policy_config& get_pcf_policy() const override;
   [[nodiscard]] database_config& get_database_config() override;
+  [[nodiscard]] const std::vector<dnn_config>& get_dnns() const override;
 
   bool init() override;
 
@@ -174,8 +179,9 @@ class config : public config_iface {
   std::unordered_set<std::string> m_used_config_values;
   std::unordered_set<std::string> m_used_sbi_values;
   std::string m_nf_name;
+  std::vector<dnn_config> m_dnns;
 
-  void update_used_nfs();
+  virtual void update_used_nfs();
   bool add_nf(const std::string& name, const std::shared_ptr<nf>& nf_ptr);
 
  private:
@@ -186,9 +192,6 @@ class config : public config_iface {
 
   std::shared_ptr<nf> m_local_nf;
 
-  // TODO: should not included in Config except these parts are used by more
-  // than 2 NFs
-  policy_config m_pcf_policy;
   database_config m_database;
 
   std::unordered_map<std::string, std::shared_ptr<nf>> m_nf_map;

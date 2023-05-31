@@ -41,7 +41,6 @@ config::config(
     bool log_rot_file)
     : m_log_level_feature("Log Level", nf_name, std::string("info")),
       m_register_nrf_feature("Register NF", nf_name, false),
-      m_pcf_policy(),
       m_database() {
   logger::logger_registry::register_logger(
       nf_name, LOGGER_NAME, log_stdout, log_rot_file);
@@ -77,7 +76,7 @@ void config::read_from_file(const std::string& file_path) {
             nf_ptr->second->from_yaml(elem.second);
           } catch (std::exception& e) {
             logger::logger_registry::get_logger(LOGGER_NAME)
-                .warn("Could not parse %s: %s", AMF_CONFIG_NAME, e.what());
+                .warn("Could not parse %s: %s", m_nf_name, e.what());
           }
         } else if (key == NF_LIST_CONFIG_NAME) {
           for (auto yaml_nf : elem.second) {
@@ -106,6 +105,15 @@ void config::read_from_file(const std::string& file_path) {
                                               // we drop the support for Minimal
                                               // scenario
           m_database.from_yaml(elem.second);
+        } else if (key == DNNS_CONFIG_NAME) {
+          // remove default DNNs
+          m_dnns.clear();
+
+          for (const auto& yaml_dnn : elem.second) {
+            dnn_config cfg("default", "IPv4", "12.1.1.0-12.1.1.255", "");
+            cfg.from_yaml(yaml_dnn);
+            m_dnns.push_back(cfg);
+          }
         }
       } catch (std::exception& e) {
         logger::logger_registry::get_logger(LOGGER_NAME)
@@ -142,6 +150,9 @@ bool config::validate() {
   for (auto& nf : m_nf_map) {
     success &= safe_validate_field(*nf.second);
   }
+  for (auto& dnn : m_dnns) {
+    success &= safe_validate_field(dnn);
+  }
 
   return success;
 }
@@ -175,7 +186,6 @@ std::string config::to_string() const {
   std::string indent = fmt::format("{:<{}}", "", INDENT_WIDTH);
   out.append(m_log_level_feature.to_string(indent));
   out.append(m_register_nrf_feature.to_string(indent));
-  out.append("Local NF Configuration:\n");
   out.append(m_local_nf->to_string(indent));
   if (m_database.is_set()) {
     out.append(indent).append("Database:\n");
@@ -187,9 +197,13 @@ std::string config::to_string() const {
       out.append(nf.second->to_string(indent));
     }
   }
-  // out.append(m_pcf_policy.to_string(indent)); //TODO: enable for PCF/SMF only
 
-  // TODO rest of the fields
+  if (!m_dnns.empty()) {
+    out.append("DNNs:\n");
+  }
+  for (const auto& dnn : m_dnns) {
+    out.append(dnn.to_string(indent));
+  }
 
   return out;
 }
@@ -237,11 +251,11 @@ const nf& config::local() const {
   return *m_local_nf;
 }
 
-std::shared_ptr<nf> config::get_local() {
+std::shared_ptr<nf> config::get_local() const {
   return m_local_nf;
 }
 
-std::shared_ptr<nf> config::get_nf(const std::string& nf_name) {
+std::shared_ptr<nf> config::get_nf(const std::string& nf_name) const {
   auto nf_ptr = m_nf_map.find(nf_name);
   if (nf_ptr == m_nf_map.end()) {
     return nullptr;
@@ -249,12 +263,12 @@ std::shared_ptr<nf> config::get_nf(const std::string& nf_name) {
   return nf_ptr->second;
 }
 
-const class policy_config& config::get_pcf_policy() const {
-  return m_pcf_policy;
-}
-
 class database_config& config::get_database_config() {
   return m_database;
+}
+
+const std::vector<dnn_config>& config::get_dnns() const {
+  return m_dnns;
 }
 
 bool config::add_nf(
@@ -267,11 +281,14 @@ void config::update_used_nfs() {
   for (auto& nf : m_nf_map) {
     if (nf.first == m_nf_name) {
       m_local_nf = nf.second;
-      m_local_nf->m_sbi.set_is_local_interface(true);  // TODO: to be removed
-
+      m_local_nf->m_sbi.set_is_local_interface(
+          true);  // TODO: to be updated with UPF
     } else {
       auto used_nf = m_used_sbi_values.find(nf.first);
       if (used_nf == m_used_sbi_values.end()) {
+        nf.second->m_set = false;
+      }
+      if (register_nrf() && nf.first != NRF_CONFIG_NAME) {
         nf.second->m_set = false;
       }
     }

@@ -288,7 +288,13 @@ void config::update_used_nfs() {
       if (used_nf == m_used_sbi_values.end()) {
         nf.second->m_set = false;
       }
+      // If we register to NRF; we unset all other NFs
+      // Assume that each NF is discovered via NRF.
       if (register_nrf() && nf.first != NRF_CONFIG_NAME) {
+        nf.second->m_set = false;
+      }
+      // If we do not register NRF, we unset NRF
+      if (!register_nrf() && nf.first == NRF_CONFIG_NAME) {
         nf.second->m_set = false;
       }
     }

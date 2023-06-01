@@ -29,7 +29,6 @@
 
 #include "config.hpp"
 #include "if.hpp"
-#include "config_yaml_file.hpp"
 
 #include <fmt/format.h>
 #include <stdexcept>
@@ -42,10 +41,7 @@ config::config(
     bool log_rot_file)
     : m_log_level_feature("Log Level", nf_name, std::string("info")),
       m_register_nrf_feature("Register NF", nf_name, false),
-      m_pcf_policy(
-          "/openair-pcf/policies/policy_decisions",
-          "/openair-pcf/policies/pcc_rules",
-          "/openair-pcf/policies/traffic_rules") {
+      m_database() {
   logger::logger_registry::register_logger(
       nf_name, LOGGER_NAME, log_stdout, log_rot_file);
 
@@ -53,44 +49,91 @@ config::config(
 
   m_config_path = config_path;
   m_nf_name     = nf_name;
+}
 
-  m_amf = std::make_shared<nf>(
-      "AMF", "oai-amf", sbi_interface("SBI", "oai-amf", 80, 0, "v1", "eth0"),
-      local_interface("N1", "oai-amf", 38412, "eth0"), interface_type_e::n1);
+void config::read_from_file(const std::string& file_path) {
+  try {
+    YAML::Node node = YAML::LoadFile(file_path);
+    for (const auto& elem : node) {
+      auto key = elem.first.as<std::string>();
+      if (m_used_config_values.find(key) == m_used_config_values.end()) {
+        continue;
+      }
+      try {
+        if (key == LOG_LEVEL_CONFIG_NAME) {
+          m_log_level_feature.from_yaml(elem.second);
+        } else if (key == REGISTER_NF_CONFIG_NAME) {
+          m_register_nrf_feature.from_yaml(elem.second);
+        } else if (key == m_nf_name) {
+          const auto nf_ptr = m_nf_map.find(m_nf_name);
+          if (nf_ptr == m_nf_map.end()) {
+            logger::logger_registry::get_logger(LOGGER_NAME)
+                .debug("Unknown NF %s in configuration. Ignored", m_nf_name);
+            continue;
+          }
 
-  m_smf = std::make_shared<nf>(
-      "SMF", "oai-smf", sbi_interface("SBI", "oai-smf", 80, 0, "v1", "eth0"),
-      local_interface("N4", "oai-smf", 8805, "eth0"), interface_type_e::n4);
+          try {
+            nf_ptr->second->from_yaml(elem.second);
+          } catch (std::exception& e) {
+            logger::logger_registry::get_logger(LOGGER_NAME)
+                .warn("Could not parse %s: %s", m_nf_name, e.what());
+          }
+        } else if (key == NF_LIST_CONFIG_NAME) {
+          for (auto yaml_nf : elem.second) {
+            auto nf_name = yaml_nf.first.as<std::string>();
 
-  m_nrf = std::make_shared<nf>(
-      "NRF", "oai-nrf", sbi_interface("SBI", "oai-nrf", 80, 0, "v1", "eth0"));
+            const auto nf_ptr = m_nf_map.find(nf_name);
+            if (nf_ptr == m_nf_map.end()) {
+              logger::logger_registry::get_logger(LOGGER_NAME)
+                  .debug("Unknown NF %s in configuration. Ignored", nf_name);
+              continue;
+            }
+            if (m_used_sbi_values.find(nf_name) == m_used_sbi_values.end()) {
+              // we unset the values that are not used by this NF -> they are
+              // not validated and not printed
+              nf_ptr->second->m_set = false;
+              continue;
+            }
+            try {
+              nf_ptr->second->from_yaml(yaml_nf.second);
+            } catch (std::exception& e) {
+              logger::logger_registry::get_logger(LOGGER_NAME)
+                  .warn("Could not parse %s: %s", nf_name, e.what());
+            }
+          }
+        } else if (key == DATABASE_CONFIG) {  // TODO: Don't need to do this if
+                                              // we drop the support for Minimal
+                                              // scenario
+          m_database.from_yaml(elem.second);
+        } else if (key == DNNS_CONFIG_NAME) {
+          // remove default DNNs
+          m_dnns.clear();
 
-  m_udm = std::make_shared<nf>(
-      "UDM", "oai-udm", sbi_interface("SBI", "oai-udm", 80, 0, "v1", "eth0"));
+          for (const auto& yaml_dnn : elem.second) {
+            dnn_config cfg("default", "IPv4", "12.1.1.0-12.1.1.255", "");
+            cfg.from_yaml(yaml_dnn);
+            m_dnns.push_back(cfg);
+          }
+        }
+      } catch (std::exception& e) {
+        logger::logger_registry::get_logger(LOGGER_NAME)
+            .warn("Could not parse %s: %s", key, e.what());
+      }
+    }
+  } catch (YAML::BadFile& ex) {
+    logger::logger_registry::get_logger(LOGGER_NAME)
+        .error(
+            "Could not read YAML configuration file, please ensure that it "
+            "exists: %s",
+            ex.what());
+    throw std::runtime_error(ex.what());
+  } catch (std::exception& ex) {
+    logger::logger_registry::get_logger(LOGGER_NAME)
+        .error("Could not parse YAML configuration file: %s", ex.what());
+    throw std::runtime_error(ex.what());
+  }
 
-  m_udr = std::make_shared<nf>(
-      "UDR", "oai-udr", sbi_interface("SBI", "oai-udr", 80, 0, "v1", "eth0"));
-
-  m_pcf = std::make_shared<nf>(
-      "PCF", "oai-pcf", sbi_interface("SBI", "oai-pcf", 80, 0, "v1", "eth0"));
-
-  m_ausf = std::make_shared<nf>(
-      "AUSF", "oai-ausf",
-      sbi_interface("SBI", "oai-ausf", 80, 0, "v1", "eth0"));
-
-  m_nssf = std::make_shared<nf>(
-      "NSSF", "oai-nssf",
-      sbi_interface("SBI", "oai-nssf", 80, 0, "v1", "eth0"));
-
-  // we use a map to have easy mapping from string value to pointer
-  m_nf_map.insert(std::make_pair(AMF_CONFIG_NAME, m_amf));
-  m_nf_map.insert(std::make_pair(SMF_CONFIG_NAME, m_smf));
-  m_nf_map.insert(std::make_pair(NRF_CONFIG_NAME, m_nrf));
-  m_nf_map.insert(std::make_pair(AUSF_CONFIG_NAME, m_ausf));
-  m_nf_map.insert(std::make_pair(UDM_CONFIG_NAME, m_udm));
-  m_nf_map.insert(std::make_pair(UDR_CONFIG_NAME, m_udr));
-  m_nf_map.insert(std::make_pair(NSSF_CONFIG_NAME, m_nssf));
-  m_nf_map.insert(std::make_pair(PCF_CONFIG_NAME, m_pcf));
+  update_used_nfs();
 }
 
 bool config::validate() {
@@ -106,6 +149,9 @@ bool config::validate() {
   success &= safe_validate_field(m_register_nrf_feature);
   for (auto& nf : m_nf_map) {
     success &= safe_validate_field(*nf.second);
+  }
+  for (auto& dnn : m_dnns) {
+    success &= safe_validate_field(dnn);
   }
 
   return success;
@@ -140,17 +186,24 @@ std::string config::to_string() const {
   std::string indent = fmt::format("{:<{}}", "", INDENT_WIDTH);
   out.append(m_log_level_feature.to_string(indent));
   out.append(m_register_nrf_feature.to_string(indent));
-  out.append("Local NF Configuration:\n");
   out.append(m_local_nf->to_string(indent));
+  if (m_database.is_set()) {
+    out.append(indent).append("Database:\n");
+    out.append(m_database.to_string(indent + indent));
+  }
   out.append("Peer NF Configuration:\n");
   for (const auto& nf : m_nf_map) {
     if (nf.first != m_nf_name) {
       out.append(nf.second->to_string(indent));
     }
   }
-  out.append(m_pcf_policy.to_string(indent));
 
-  // TODO rest of the fields
+  if (!m_dnns.empty()) {
+    out.append("DNNs:\n");
+  }
+  for (const auto& dnn : m_dnns) {
+    out.append(dnn.to_string(indent));
+  }
 
   return out;
 }
@@ -170,11 +223,10 @@ void config::display() const {
 }
 
 bool config::init() {
-  yaml_file file;
   try {
     logger::logger_registry::get_logger(LOGGER_NAME)
         .info("Reading NF configuration from %s", m_config_path);
-    file.read_from_file(m_config_path, *this);
+    read_from_file(m_config_path);
   } catch (std::runtime_error& err) {
     return false;
   }
@@ -195,59 +247,48 @@ const std::string& config::log_level() const {
   return m_log_level_feature.get_string();
 }
 
-const nf& config::amf() const {
-  return *m_amf;
-}
-
-const nf& config::smf() const {
-  return *m_smf;
-}
-
-const nf& config::nrf() const {
-  return *m_nrf;
-}
-
-const nf& config::pcf() const {
-  return *m_pcf;
-}
-
-const nf& config::ausf() const {
-  return *m_ausf;
-}
-
-const nf& config::udm() const {
-  return *m_udm;
-}
-
-const nf& config::udr() const {
-  return *m_udr;
-}
-
-const nf& config::nssf() const {
-  return *m_nssf;
-}
-
 const nf& config::local() const {
   return *m_local_nf;
 }
 
-const class policy_config& config::get_pcf_policy() const {
-  return m_pcf_policy;
+std::shared_ptr<nf> config::get_local() const {
+  return m_local_nf;
+}
+
+std::shared_ptr<nf> config::get_nf(const std::string& nf_name) const {
+  auto nf_ptr = m_nf_map.find(nf_name);
+  if (nf_ptr == m_nf_map.end()) {
+    return nullptr;
+  }
+  return nf_ptr->second;
+}
+
+class database_config& config::get_database_config() {
+  return m_database;
+}
+
+const std::vector<dnn_config>& config::get_dnns() const {
+  return m_dnns;
+}
+
+bool config::add_nf(
+    const std::string& name, const std::shared_ptr<nf>& nf_ptr) {
+  m_nf_map.insert(std::make_pair(name, nf_ptr));
+  return true;
 }
 
 void config::update_used_nfs() {
   for (auto& nf : m_nf_map) {
     if (nf.first == m_nf_name) {
       m_local_nf = nf.second;
-      m_local_nf->m_sbi.set_is_local_interface(true);
-      m_local_nf->m_n1.set_is_local_interface(true);
-      m_local_nf->m_n4.set_is_local_interface(true);
+      m_local_nf->m_sbi.set_is_local_interface(
+          true);  // TODO: to be updated with UPF
     } else {
       auto used_nf = m_used_sbi_values.find(nf.first);
       if (used_nf == m_used_sbi_values.end()) {
         nf.second->m_set = false;
       }
-      if (register_nrf() && nf.first != "nrf") {
+      if (register_nrf() && nf.first != NRF_CONFIG_NAME) {
         nf.second->m_set = false;
       }
     }

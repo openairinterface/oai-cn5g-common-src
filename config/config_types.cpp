@@ -36,14 +36,22 @@
 #include <fmt/format.h>
 #include <string>
 #include <regex>
+#include <boost/algorithm/string/split.hpp>
+#include <boost/algorithm/string/classification.hpp>
+#include <boost/algorithm/string/trim.hpp>
 
 using namespace oai::config;
 
-const std::string INNER_LIST_ELEM = "+";
-const std::string OUTER_LIST_ELEM = "-";
-
 bool config_type::is_set() const {
   return m_set;
+}
+
+void config_type::set_config() {
+  m_set = true;
+}
+
+void config_type::unset_config() {
+  m_set = false;
 }
 
 const std::string& config_type::get_config_name() const {
@@ -59,6 +67,30 @@ unsigned int config_type::get_inner_width(unsigned int indent_length) {
   return inner_width;
 }
 
+in_addr config_type::safe_convert_ip(const std::string& ipv4_string) {
+  in_addr ip = conv::fromString(ipv4_string);
+
+  if (!ip.s_addr) {
+    throw std::runtime_error(
+        fmt::format(+"The IP address {} is not valid", ipv4_string));
+  }
+  return ip;
+}
+
+in6_addr config_type::safe_convert_ip6(const std::string& ipv6_string) {
+  in6_addr ip = conv::fromStringV6(ipv6_string);
+  if (IN6_IS_ADDR_UNSPECIFIED(&ip)) {
+    throw std::runtime_error(
+        fmt::format(+"The IPv6 address {} is not valid", ipv6_string));
+  }
+  return ip;
+}
+
+std::string config_type::add_indent(const std::string& indent) {
+  std::string base_indent = fmt::format("{:<{}}", "", INDENT_WIDTH);
+  return base_indent + indent;
+}
+
 string_config_value::string_config_value(
     const std::string& name, const std::string& value) {
   m_config_name = name;
@@ -68,6 +100,7 @@ string_config_value::string_config_value(
 
 void string_config_value::from_yaml(const YAML::Node& node) {
   m_value = node.as<std::string>();
+  m_set   = true;
 }
 
 std::string string_config_value::to_string(const std::string&) const {
@@ -100,6 +133,7 @@ option_config_value::option_config_value(const std::string& name, bool value) {
 
 void option_config_value::from_yaml(const YAML::Node& node) {
   m_value = node.as<bool>();
+  m_set   = true;
 }
 
 std::string option_config_value::to_string(const std::string&) const {
@@ -119,6 +153,7 @@ int_config_value::int_config_value(const std::string& name, int value) {
 
 void int_config_value::from_yaml(const YAML::Node& node) {
   m_value = node.as<int>();
+  m_set   = true;
 }
 
 std::string int_config_value::to_string(const std::string&) const {
@@ -152,7 +187,8 @@ local_interface::local_interface(
   m_port        = int_config_value("Port", port);
   m_port.set_validation_interval(PORT_MIN_VALUE, PORT_MAX_VALUE);
   m_host.set_validation_regex(HOST_VALIDATOR_REGEX);
-  m_set = true;
+  m_set                = true;
+  m_is_local_interface = true;
 }
 
 void local_interface::from_yaml(const YAML::Node& node) {
@@ -162,6 +198,8 @@ void local_interface::from_yaml(const YAML::Node& node) {
   if (node["interface_name"]) {
     m_if_name.from_yaml(node["interface_name"]);
   }
+  m_set                = true;
+  m_is_local_interface = true;
 }
 
 std::string local_interface::to_string(const std::string& indent) const {
@@ -269,11 +307,13 @@ sbi_interface::sbi_interface(
   m_port_http1.set_validation_interval(PORT_MIN_VALUE, PORT_MAX_VALUE);
   m_port_http2.set_validation_interval(PORT_MIN_VALUE, PORT_MAX_VALUE);
   m_set = true;
+  set_is_local_interface(false);
   set_url();
 }
 
 void sbi_interface::from_yaml(const YAML::Node& node) {
   local_interface::from_yaml(node);
+  set_is_local_interface(false);
 
   if (node["api_version"]) {
     m_api_version.from_yaml(node["api_version"]);
@@ -287,6 +327,7 @@ void sbi_interface::from_yaml(const YAML::Node& node) {
     m_port = m_port_http2;
   }
   set_url();
+  m_set = true;
 }
 
 std::string sbi_interface::to_string(const std::string& indent) const {
@@ -363,44 +404,41 @@ void sbi_interface::set_url() {
 
 nf::nf(
     const std::string& name, const std::string& host, const sbi_interface& sbi,
-    const local_interface& local, interface_type_e type)
+    const local_interface& local)
     : nf(name, host, sbi) {
-  switch (type) {
-    case interface_type_e::n1:
-      m_n1 = local;
-      break;
-    case interface_type_e::n4:
-      m_n4 = local;
-      break;
-    default:
-      logger::logger_registry::get_logger(LOGGER_NAME)
-          .error("Unknown interface type in configuration");
-  }
+  m_nx = local;
+  set_url();
 }
 
 nf::nf(
-    const std::string& name, const std::string& host,
-    const sbi_interface& sbi) {
+    const std::string& name, const std::string& host, const sbi_interface& sbi)
+    : m_nx() {
   m_config_name = name;
   m_host        = string_config_value("Host", host);
   m_sbi         = sbi;
   m_set         = true;
   m_host.set_validation_regex(HOST_VALIDATOR_REGEX);
+  set_url();
 }
 
 void nf::from_yaml(const YAML::Node& node) {
-  if (node["host"]) {
-    m_host.from_yaml(node["host"]);
-  }
-  if (node["n1"]) {
-    m_n1.from_yaml(node["n1"]);
-  }
-  if (node["n4"]) {
-    m_n4.from_yaml(node["n4"]);
+  if (node[NF_CONFIG_HOST_NAME]) {
+    m_host.from_yaml(node[NF_CONFIG_HOST_NAME]);
   }
   if (node["sbi"]) {
+    m_sbi.m_host = m_host;
     m_sbi.from_yaml(node["sbi"]);
   }
+  if (node["n2"] and m_nx.is_set()) {
+    m_nx.m_host = m_host;
+    m_nx.from_yaml(node["n2"]);
+  }
+  if (node["n4"] and m_nx.is_set()) {
+    m_nx.m_host = m_host;
+    m_nx.from_yaml(node["n4"]);
+  }
+  m_set = true;
+  set_url();
 }
 
 std::string nf::to_string(const std::string& indent) const {
@@ -408,7 +446,7 @@ std::string nf::to_string(const std::string& indent) const {
   if (!is_set()) {
     return "";
   }
-  std::string inner_indent = indent + indent;
+  std::string inner_indent = add_indent(indent);
   unsigned int inner_width = get_inner_width(inner_indent.length());
 
   out.append(indent).append(m_config_name).append(":\n");
@@ -421,19 +459,13 @@ std::string nf::to_string(const std::string& indent) const {
     out.append(inner_indent)
         .append(
             fmt::format("{} {}\n", OUTER_LIST_ELEM, m_sbi.get_config_name()));
-    out.append(m_sbi.to_string(inner_indent + indent));
+    out.append(m_sbi.to_string(add_indent(inner_indent)));
   }
-  if (m_n1.is_set()) {
+  if (m_nx.is_set()) {
     out.append(inner_indent)
         .append(
-            fmt::format("{} {}\n", OUTER_LIST_ELEM, m_n1.get_config_name()));
-    out.append(m_n1.to_string(inner_indent + indent));
-  }
-  if (m_n4.is_set()) {
-    out.append(inner_indent)
-        .append(
-            fmt::format("{} {}\n", OUTER_LIST_ELEM, m_n4.get_config_name()));
-    out.append(m_n4.to_string(inner_indent + indent));
+            fmt::format("{} {}\n", OUTER_LIST_ELEM, m_nx.get_config_name()));
+    out.append(m_nx.to_string(add_indent(inner_indent)));
   }
 
   return out;
@@ -443,77 +475,27 @@ void nf::validate() {
   if (!m_set) return;
   m_host.validate();
   m_sbi.validate();
-  m_n4.validate();
-  m_n1.validate();
+  m_nx.validate();
 }
 
 const sbi_interface& nf::get_sbi() const {
   return m_sbi;
 }
 
-const local_interface& nf::get_n1() const {
-  return m_n1;
-}
-
-const local_interface& nf::get_n4() const {
-  return m_n4;
+const local_interface& nf::get_nx() const {
+  return m_nx;
 }
 
 const std::string& nf::get_host() const {
   return m_host.get_value();
 }
 
-policy_config::policy_config(
-    const std::string& policy_decisions_path, const std::string& pcc_rules_path,
-    const std::string& traffic_rules_path) {
-  m_config_name = "Policy";
-  m_traffic_rules_path =
-      string_config_value("Traffic Rules", traffic_rules_path);
-  m_pcc_rules_path = string_config_value("PCC Rules", pcc_rules_path);
-  m_policy_decisions_path =
-      string_config_value("Policy Decisions", policy_decisions_path);
-  m_set = true;
+const std::string& nf::get_url() const {
+  return m_url;
 }
 
-void policy_config::from_yaml(const YAML::Node& node) {
-  if (node["policy_decisions_path"]) {
-    m_policy_decisions_path.from_yaml(node["policy_decisions_path"]);
-  }
-  if (node["pcc_rules_path"]) {
-    m_pcc_rules_path.from_yaml(node["pcc_rules_path"]);
-  }
-  if (node["traffic_rules_path"]) {
-    m_traffic_rules_path.from_yaml(node["traffic_rules_path"]);
-  }
-}
-
-std::string policy_config::to_string(const std::string& indent) const {
-  std::string out;
-  unsigned int inner_width = get_inner_width(indent.length());
-  out.append(m_config_name).append("\n");
-  out.append(indent).append(fmt::format(
-      BASE_FORMATTER, OUTER_LIST_ELEM,
-      m_policy_decisions_path.get_config_name(), inner_width,
-      m_policy_decisions_path.get_value()));
-  out.append(indent).append(fmt::format(
-      BASE_FORMATTER, OUTER_LIST_ELEM, m_pcc_rules_path.get_config_name(),
-      inner_width, m_pcc_rules_path.get_value()));
-  out.append(indent).append(fmt::format(
-      BASE_FORMATTER, OUTER_LIST_ELEM, m_traffic_rules_path.get_config_name(),
-      inner_width, m_traffic_rules_path.get_value()));
-  return out;
-}
-
-const std::string& policy_config::get_pcc_rules_path() const {
-  return m_pcc_rules_path.get_value();
-}
-
-const std::string& policy_config::get_policy_decisions_path() const {
-  return m_policy_decisions_path.get_value();
-}
-
-const std::string& policy_config::get_traffic_rules_path() const {
-  return m_traffic_rules_path.get_value();
+void nf::set_url() {
+  m_url = m_sbi.get_url();
 }
 
 nf_features_config::nf_features_config(
@@ -542,6 +524,7 @@ void nf_features_config::from_yaml(const YAML::Node& node) {
   if (node[m_nf_name]) {
     set_value(node[m_nf_name]);
   }
+  m_set = true;
 }
 
 void nf_features_config::set_value(const YAML::Node& node) {
@@ -582,4 +565,232 @@ bool nf_features_config::get_option() const {
 
 const std::string& nf_features_config::get_string() const {
   return m_string_value.get_value();
+}
+
+database_config::database_config() {
+  m_set = false;
+}
+
+void database_config::from_yaml(const YAML::Node& node) {
+  m_set = true;
+  // TODO:
+  if (node[NF_CONFIG_HOST_NAME]) {
+    m_host.from_yaml(node[NF_CONFIG_HOST_NAME]);
+  }
+  if (node[DATABASE_CONFIG_USER]) {
+    m_user.from_yaml(node[DATABASE_CONFIG_USER]);
+  }
+  if (node[DATABASE_CONFIG_PASSWORD]) {
+    m_pass.from_yaml(node[DATABASE_CONFIG_PASSWORD]);
+  }
+  if (node[DATABASE_CONFIG_DATABASE_NAME]) {
+    m_database_name.from_yaml(node[DATABASE_CONFIG_DATABASE_NAME]);
+  }
+  if (node[DATABASE_CONFIG_RANDOM]) {
+    m_random.from_yaml(node[DATABASE_CONFIG_RANDOM]);
+  }
+  if (node[DATABASE_CONFIG_CONNECTION_TIMEOUT]) {
+    m_connection_timeout.from_yaml(node[DATABASE_CONFIG_CONNECTION_TIMEOUT]);
+  }
+}
+
+std::string database_config::to_string(const std::string& indent) const {
+  std::string out;
+  unsigned int inner_width = get_inner_width(indent.length());
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, OUTER_LIST_ELEM, NF_CONFIG_HOST_NAME_LABEL, inner_width,
+      m_host.get_value()));
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, OUTER_LIST_ELEM, DATABASE_CONFIG_USER_LABEL, inner_width,
+      m_user.get_value()));
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, OUTER_LIST_ELEM, DATABASE_CONFIG_PASSWORD_LABEL,
+      inner_width, m_pass.get_value()));
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, OUTER_LIST_ELEM, DATABASE_CONFIG_DATABASE_NAME_LABEL,
+      inner_width, m_database_name.get_value()));
+  std::string database_config_random_string =
+      m_random.get_value() ? "Yes" : "No";
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, OUTER_LIST_ELEM, DATABASE_CONFIG_RANDOM_LABEL,
+      inner_width, database_config_random_string));
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, OUTER_LIST_ELEM, DATABASE_CONFIG_CONNECTION_TIMEOUT_LABEL,
+      inner_width, m_connection_timeout.get_value()));
+  return out;
+}
+
+const std::string& database_config::get_host() const {
+  return m_host.get_value();
+}
+
+const std::string& database_config::get_user() const {
+  return m_user.get_value();
+}
+
+const std::string& database_config::get_pass() const {
+  return m_pass.get_value();
+}
+
+const std::string& database_config::get_database_name() const {
+  return m_database_name.get_value();
+}
+
+const std::string& database_config::get_database_type() const {
+  return m_database_type.get_value();
+}
+
+bool database_config::get_random() const {
+  return m_random.get_value();
+}
+
+int database_config::get_connection_timeout() const {
+  return m_connection_timeout.get_value();
+}
+
+dnn_config::dnn_config(
+    const std::string& dnn, const std::string& pdu_type,
+    const std::string& ipv4_pool, const std::string& ipv6_prefix) {
+  m_config_name      = "DNN";
+  m_dnn              = string_config_value("DNN", dnn);
+  m_pdu_session_type = string_config_value("PDU session type", pdu_type);
+  m_ipv4_pool        = string_config_value("IPv4 pool", ipv4_pool);
+  m_ipv6_prefix      = string_config_value("IPv6 prefix", ipv6_prefix);
+
+  m_pdu_session_type.set_validation_regex(PDU_SESSION_TYPE_REGEX);
+  m_ipv4_pool.set_validation_regex(
+      IPV4_ADDRESS_VALIDATOR_REGEX + "( )*-( )*" +
+      IPV4_ADDRESS_VALIDATOR_REGEX);
+  m_ipv6_prefix.set_validation_regex(IPV6_ADDRESS_VALIDATOR_REGEX);
+  if (ipv6_prefix.empty()) {
+    m_ipv6_prefix.unset_config();
+  }
+  m_set = true;
+}
+
+void dnn_config::from_yaml(const YAML::Node& node) {
+  if (node["dnn"]) {
+    m_dnn.from_yaml(node["dnn"]);
+  }
+  if (node["pdu_session_type"]) {
+    m_pdu_session_type.from_yaml(node["pdu_session_type"]);
+  }
+  if (node["ipv4_pool"]) {
+    m_ipv4_pool.from_yaml(node["ipv4_pool"]);
+  }
+  if (node["ipv6_prefix"]) {
+    m_ipv6_prefix.from_yaml(node["ipv6_prefix"]);
+  }
+}
+
+[[nodiscard]] std::string dnn_config::to_string(
+    const std::string& indent) const {
+  std::string out;
+
+  std::string inner_indent = add_indent(indent);
+  unsigned int inner_width = get_inner_width(inner_indent.length());
+
+  out.append(fmt::format("{} {}:\n", OUTER_LIST_ELEM, m_dnn.get_config_name()));
+
+  out.append(inner_indent)
+      .append(fmt::format(
+          BASE_FORMATTER, INNER_LIST_ELEM, m_dnn.get_config_name(), inner_width,
+          m_dnn.to_string("")));
+
+  out.append(inner_indent)
+      .append(fmt::format(
+          BASE_FORMATTER, INNER_LIST_ELEM, m_pdu_session_type.get_config_name(),
+          inner_width, m_pdu_session_type.to_string("")));
+  if (m_ipv6_prefix.get_value().empty()) {
+    out.append(inner_indent)
+        .append(fmt::format(
+            BASE_FORMATTER, INNER_LIST_ELEM, m_ipv6_prefix.get_config_name(),
+            inner_width, m_ipv6_prefix.to_string("")));
+  } else {
+    out.append(inner_indent)
+        .append(fmt::format(
+            BASE_FORMATTER, INNER_LIST_ELEM, m_ipv4_pool.get_config_name(),
+            inner_width, m_ipv4_pool.to_string("")));
+  }
+  return out;
+}
+
+void dnn_config::validate() {
+  m_pdu_session_type_generated =
+      pdu_session_type_t(m_pdu_session_type.get_value());
+
+  if (m_pdu_session_type_generated ==
+          pdu_session_type_e::PDU_SESSION_TYPE_E_IPV4 ||
+      m_pdu_session_type_generated ==
+          pdu_session_type_e::PDU_SESSION_TYPE_E_IPV4V6) {
+    std::vector<std::string> ips;
+    boost::split(
+        ips, m_ipv4_pool.get_value(), boost::is_any_of("-"),
+        boost::token_compress_on);
+
+    if (ips.size() != 2) {
+      throw std::runtime_error(fmt::format(
+          "The IP address pool {} is not valid", m_ipv4_pool.get_value()));
+    }
+
+    boost::trim_left(ips[0]);
+    boost::trim_right(ips[0]);
+    boost::trim_left(ips[1]);
+    boost::trim_right(ips[1]);
+
+    m_ipv4_pool_start_ip = safe_convert_ip(ips[0]);
+    m_ipv4_pool_end_ip   = safe_convert_ip(ips[1]);
+
+    if (htonl(m_ipv4_pool_start_ip.s_addr) >=
+        htonl(m_ipv4_pool_end_ip.s_addr)) {
+      throw std::runtime_error(fmt::format(
+          "The IPv4 range {} is not valid. The start range must be below the "
+          "end "
+          "range",
+          m_ipv4_pool.get_value()));
+    }
+    if (m_pdu_session_type_generated ==
+            pdu_session_type_e::PDU_SESSION_TYPE_E_IPV6 ||
+        m_pdu_session_type_generated ==
+            pdu_session_type_e::PDU_SESSION_TYPE_E_IPV4V6) {
+      std::vector<std::string> ip6s;
+      boost::split(
+          ip6s, m_ipv6_prefix.get_value(), boost::is_any_of("/"),
+          boost::token_compress_on);
+
+      if (ip6s.size() != 2) {
+        throw std::runtime_error(fmt::format(
+            "The IPv6 prefix / length {} is not valid",
+            m_ipv6_prefix.get_value()));
+      }
+
+      m_ipv6_prefix_ip     = safe_convert_ip6(ip6s[0]);
+      m_ipv6_prefix_length = std::stoi(ip6s[1]);
+    }
+  }
+}
+
+[[nodiscard]] const in_addr& dnn_config::get_ipv4_pool_start() const {
+  return m_ipv4_pool_start_ip;
+}
+
+[[nodiscard]] const in_addr& dnn_config::get_ipv4_pool_end() const {
+  return m_ipv4_pool_end_ip;
+}
+
+[[nodiscard]] const in6_addr& dnn_config::get_ipv6_prefix() const {
+  return m_ipv6_prefix_ip;
+}
+
+[[nodiscard]] uint8_t dnn_config::get_ipv6_prefix_length() const {
+  return m_ipv6_prefix_length;
+}
+
+[[nodiscard]] const pdu_session_type_t& dnn_config::get_pdu_session_type()
+    const {
+  return m_pdu_session_type_generated;
+}
+
+const std::string& dnn_config::get_dnn() const {
+  return m_dnn.get_value();
 }

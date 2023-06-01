@@ -30,12 +30,16 @@
 #pragma once
 
 #include "string"
+#include "pdu_session_type.hpp"
 #include <netinet/in.h>
 #include <vector>
 #include <memory>
 #include <yaml-cpp/yaml.h>
 
 namespace oai::config {
+const std::string INNER_LIST_ELEM = "+";
+const std::string OUTER_LIST_ELEM = "-";
+const std::string EMPTY_LIST_ELEM = " ";
 
 class config_type {
   friend class yaml_file_iface;
@@ -65,11 +69,27 @@ class config_type {
   virtual void from_yaml(const YAML::Node& node) = 0;
 
   /**
+   * Convert to JSON format
+   * @return void
+   */
+  virtual void to_json(){};
+
+  /**
    * Checks if the configuration is set. Configuration is not set if it has not
    * been validated.
    * @return true if set, false otherwise
    */
   [[nodiscard]] virtual bool is_set() const;
+
+  /**
+   * Sets the configuration
+   */
+  virtual void set_config();
+
+  /**
+   * Unsets the configuration
+   */
+  virtual void unset_config();
 
   /**
    * Returns the name of this configuration in a user-friendly representation
@@ -84,6 +104,12 @@ class config_type {
   std::string m_config_name;
 
   static unsigned int get_inner_width(unsigned int indent_length);
+
+  static std::string add_indent(const std::string& indent);
+
+  static in_addr safe_convert_ip(const std::string& ipv4_string);
+
+  static in6_addr safe_convert_ip6(const std::string& ipv6_string);
 };
 
 class string_config_value : public config_type {
@@ -140,6 +166,8 @@ class int_config_value : public config_type {
 };
 
 class local_interface : public config_type {
+  friend class nf;
+
  protected:
   string_config_value m_host{};
   int_config_value m_port{};
@@ -173,10 +201,12 @@ class local_interface : public config_type {
   [[nodiscard]] uint16_t get_port() const;
 
   void set_is_local_interface(bool val);
-  bool is_local_interface() const;
+  [[nodiscard]] bool is_local_interface() const;
 };
 
 class sbi_interface : public local_interface {
+  friend class nf;
+
  private:
   string_config_value m_api_version;
   int_config_value m_port_http1;
@@ -207,20 +237,20 @@ class sbi_interface : public local_interface {
 enum class interface_type_e { n1, n4 };
 
 class nf : public config_type {
-  friend class yaml_file;
   friend class config;
 
  private:
   sbi_interface m_sbi;
-  local_interface m_n1;
-  local_interface m_n4;
+  local_interface m_nx;
   string_config_value m_host;
+
+  std::string m_url;  // Moved from SBI interface
+  void set_url();     // Moved from SBI interface
 
  public:
   explicit nf(
       const std::string& name, const std::string& host,
-      const sbi_interface& sbi, const local_interface& local,
-      interface_type_e type);
+      const sbi_interface& sbi, const local_interface& local);
   explicit nf(
       const std::string& name, const std::string& host,
       const sbi_interface& sbi);
@@ -231,32 +261,14 @@ class nf : public config_type {
   [[nodiscard]] std::string to_string(const std::string& indent) const override;
   void validate() override;
   [[nodiscard]] const sbi_interface& get_sbi() const;
-  [[nodiscard]] const local_interface& get_n1() const;
-  [[nodiscard]] const local_interface& get_n4() const;
+  [[nodiscard]] const local_interface& get_nx() const;
   [[nodiscard]] const std::string& get_host() const;
-};
-
-class policy_config : public config_type {
- private:
-  string_config_value m_pcc_rules_path;
-  string_config_value m_policy_decisions_path;
-  string_config_value m_traffic_rules_path;
-
- public:
-  explicit policy_config(
-      const std::string& policy_decisions_path,
-      const std::string& pcc_rules_path, const std::string& traffic_rules_path);
-
-  void from_yaml(const YAML::Node& node) override;
-
-  [[nodiscard]] std::string to_string(const std::string& indent) const override;
-  [[nodiscard]] const std::string& get_pcc_rules_path() const;
-  [[nodiscard]] const std::string& get_policy_decisions_path() const;
-  [[nodiscard]] const std::string& get_traffic_rules_path() const;
+  [[nodiscard]] const std::string& get_url() const;
 };
 
 class nf_features_config : public config_type {
  private:
+  // TODO: either have string or option
   string_config_value m_string_value{};
   option_config_value m_option_value{};
   std::string m_nf_name;
@@ -278,6 +290,68 @@ class nf_features_config : public config_type {
   void set_validation_regex(const std::string& regex);
   [[nodiscard]] bool get_option() const;
   [[nodiscard]] const std::string& get_string() const;
+};
+
+class database_config : public config_type {
+ private:
+  string_config_value m_host;
+  string_config_value m_user;
+  string_config_value m_pass;
+  string_config_value m_database_name;
+  string_config_value m_database_type;
+  option_config_value m_random;
+  int_config_value m_connection_timeout;
+
+ public:
+  explicit database_config();
+
+  void from_yaml(const YAML::Node& node) override;
+
+  [[nodiscard]] std::string to_string(const std::string& indent) const override;
+  [[nodiscard]] const std::string& get_host() const;
+  [[nodiscard]] const std::string& get_user() const;
+  [[nodiscard]] const std::string& get_pass() const;
+  [[nodiscard]] const std::string& get_database_name() const;
+  [[nodiscard]] const std::string& get_database_type() const;
+  [[nodiscard]] bool get_random() const;
+  [[nodiscard]] int get_connection_timeout() const;
+};
+
+// TODO we should just use the DnnConfiguration data structure, but that
+// requires a lot of changes in the using classes
+class dnn_config : public config_type {
+ private:
+  string_config_value m_dnn;
+  string_config_value m_pdu_session_type;
+  string_config_value m_ipv4_pool;
+  string_config_value m_ipv6_prefix;
+
+  // generated
+  in_addr m_ipv4_pool_start_ip{};
+  in_addr m_ipv4_pool_end_ip{};
+  in6_addr m_ipv6_prefix_ip{};
+
+ private:
+  uint8_t m_ipv6_prefix_length{};
+  pdu_session_type_t m_pdu_session_type_generated;
+
+ public:
+  explicit dnn_config(
+      const std::string& dnn, const std::string& pdu_type,
+      const std::string& ipv4_pool, const std::string& ipv6_prefix);
+
+  void from_yaml(const YAML::Node& node) override;
+
+  [[nodiscard]] std::string to_string(const std::string& indent) const override;
+
+  void validate() override;
+
+  [[nodiscard]] const in_addr& get_ipv4_pool_start() const;
+  [[nodiscard]] const in_addr& get_ipv4_pool_end() const;
+  [[nodiscard]] const in6_addr& get_ipv6_prefix() const;
+  [[nodiscard]] uint8_t get_ipv6_prefix_length() const;
+  [[nodiscard]] const pdu_session_type_t& get_pdu_session_type() const;
+  [[nodiscard]] const std::string& get_dnn() const;
 };
 
 }  // namespace oai::config

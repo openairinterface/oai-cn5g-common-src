@@ -209,17 +209,15 @@ class sbi_interface : public local_interface {
 
  private:
   string_config_value m_api_version;
-  int_config_value m_port_http1;
-  int_config_value m_port_http2;
+  int_config_value m_port_http;
   std::string m_url;
 
   void set_url();
 
  public:
   explicit sbi_interface(
-      const std::string& name, const std::string& host, uint16_t port_http1,
-      uint16_t port_http2, const std::string& api_version,
-      const std::string& interface_name);
+      const std::string& name, const std::string& host, uint16_t port_http,
+      const std::string& api_version, const std::string& interface_name);
 
   sbi_interface() = default;
 
@@ -229,9 +227,7 @@ class sbi_interface : public local_interface {
 
   [[nodiscard]] const std::string& get_api_version() const;
   [[nodiscard]] const std::string& get_url() const;
-  [[nodiscard]] uint16_t get_port_http1() const;
-  [[nodiscard]] uint16_t get_port_http2() const;
-  [[nodiscard]] bool use_http2() const;
+  [[nodiscard]] uint16_t get_port_http() const;
 };
 
 enum class interface_type_e { n1, n4 };
@@ -352,6 +348,20 @@ class dnn_config : public config_type {
   [[nodiscard]] uint8_t get_ipv6_prefix_length() const;
   [[nodiscard]] const pdu_session_type_t& get_pdu_session_type() const;
   [[nodiscard]] const std::string& get_dnn() const;
+};
+
+class nf_http_version : public config_type {
+ private:
+  string_config_value m_version{};
+
+ public:
+  explicit nf_http_version();
+
+  void from_yaml(const YAML::Node& node) override;
+
+  [[nodiscard]] std::string to_string(const std::string& indent) const override;
+  void validate() override;
+  [[nodiscard]] const std::string& get_http_version() const;
 };
 
 }  // namespace oai::config

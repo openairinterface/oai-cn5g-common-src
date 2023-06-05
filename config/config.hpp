@@ -100,6 +100,10 @@ constexpr auto DATABASE_CONFIG_CONNECTION_TIMEOUT_LABEL = "Connection Timeout";
 // DNN (SMF/UPF)
 const std::string DNNS_CONFIG_NAME = "dnns";
 
+// HTTP Version
+constexpr auto NF_CONFIG_HTTP_NAME  = "http_version";
+constexpr auto NF_CONFIG_HTTP_LABEL = "HTTP Version";
+
 class config_iface {
  public:
   /**
@@ -135,6 +139,7 @@ class config_iface {
 
   [[nodiscard]] virtual const std::vector<dnn_config>& get_dnns() const = 0;
   [[nodiscard]] virtual database_config& get_database_config()          = 0;
+  [[nodiscard]] virtual const int get_http_version() const              = 0;
 
   /**
    * Initializes the configuration, reads YAML configuration file and validates
@@ -168,6 +173,8 @@ class config : public config_iface {
   [[nodiscard]] database_config& get_database_config() override;
   [[nodiscard]] const std::vector<dnn_config>& get_dnns() const override;
 
+  [[nodiscard]] const int get_http_version() const override;
+
   bool init() override;
 
   void display() const override;
@@ -189,6 +196,7 @@ class config : public config_iface {
 
   nf_features_config m_log_level_feature;
   nf_features_config m_register_nrf_feature;
+  nf_http_version m_http_version;
 
   std::shared_ptr<nf> m_local_nf;
 

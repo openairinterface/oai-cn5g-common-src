@@ -332,11 +332,6 @@ std::string sbi_interface::to_string(const std::string& indent) const {
   out.append(indent).append(fmt::format(
       BASE_FORMATTER, INNER_LIST_ELEM, "API Version", inner_width,
       m_api_version.get_value()));
-
-  out.append(indent).append(fmt::format(
-      BASE_FORMATTER, INNER_LIST_ELEM, "Port Number", inner_width,
-      m_port_http.get_value()));
-
   return out;
 }
 

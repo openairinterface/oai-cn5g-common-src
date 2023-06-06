@@ -59,8 +59,7 @@ typedef struct pdu_session_type_s {
   uint8_t pdu_session_type;
   pdu_session_type_s() : pdu_session_type(PDU_SESSION_TYPE_E_IPV4) {}
   pdu_session_type_s(const uint8_t& p) : pdu_session_type(p) {}
-  pdu_session_type_s(const struct pdu_session_type_s& p)
-      : pdu_session_type(p.pdu_session_type) {}
+  pdu_session_type_s(const struct pdu_session_type_s& p) = default;
   pdu_session_type_s(const std::string& s) {
     if (s.compare("IPV4") == 0) {
       pdu_session_type = pdu_session_type_e::PDU_SESSION_TYPE_E_IPV4;

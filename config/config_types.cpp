@@ -487,6 +487,7 @@ void nf_features_config::set_value(const YAML::Node& node) {
 }
 
 std::string nf_features_config::to_string(const std::string& indent) const {
+  if (!m_set) return "";
   std::string out;
   unsigned int inner_width = get_inner_width(indent.length());
   if (m_string_value.get_value().empty()) {

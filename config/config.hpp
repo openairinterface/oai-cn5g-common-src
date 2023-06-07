@@ -71,10 +71,9 @@ const std::string UDR_CONFIG_NAME  = "udr";
 const std::string NSSF_CONFIG_NAME = "nssf";
 const std::string AUSF_CONFIG_NAME = "ausf";
 
-const std::string LOG_LEVEL_CONFIG_NAME    = "log_level";
-const std::string REGISTER_NF_CONFIG_NAME  = "register_nf";
-const std::string NF_LIST_CONFIG_NAME      = "nfs";
-const std::string LOCAL_POLICY_CONFIG_NAME = "local_policy";
+const std::string LOG_LEVEL_CONFIG_NAME   = "log_level";
+const std::string REGISTER_NF_CONFIG_NAME = "register_nf";
+const std::string NF_LIST_CONFIG_NAME     = "nfs";
 
 // NF
 constexpr auto NF_CONFIG_HOST_NAME       = "host";
@@ -187,6 +186,7 @@ class config : public config_iface {
   std::unordered_set<std::string> m_used_sbi_values;
   std::string m_nf_name;
   std::vector<dnn_config> m_dnns;
+  nf_features_config m_register_nrf_feature;
 
   virtual void update_used_nfs();
   bool add_nf(const std::string& name, const std::shared_ptr<nf>& nf_ptr);
@@ -195,7 +195,6 @@ class config : public config_iface {
   std::string m_config_path;
 
   nf_features_config m_log_level_feature;
-  nf_features_config m_register_nrf_feature;
   nf_http_version m_http_version;
 
   std::shared_ptr<nf> m_local_nf;

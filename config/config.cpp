@@ -195,7 +195,9 @@ std::string config::to_string() const {
     out.append(indent).append("Database:\n");
     out.append(m_database.to_string(indent + indent));
   }
-  out.append("Peer NF Configuration:\n");
+  if (!m_nf_map.empty()) {
+    out.append("Peer NF Configuration:\n");
+  }
   for (const auto& nf : m_nf_map) {
     if (nf.first != m_nf_name) {
       out.append(nf.second->to_string(indent));
@@ -306,7 +308,13 @@ void config::update_used_nfs() {
       if (used_nf == m_used_sbi_values.end()) {
         nf.second->m_set = false;
       }
+      // If we register to NRF; we unset all other NFs
+      // Assume that each NF is discovered via NRF.
       if (register_nrf() && nf.first != NRF_CONFIG_NAME) {
+        nf.second->m_set = false;
+      }
+      // If we do not register NRF, we unset NRF
+      if (!register_nrf() && nf.first == NRF_CONFIG_NAME) {
         nf.second->m_set = false;
       }
     }

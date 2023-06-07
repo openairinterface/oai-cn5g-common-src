@@ -41,6 +41,7 @@ config::config(
     bool log_rot_file)
     : m_log_level_feature("Log Level", nf_name, std::string("info")),
       m_register_nrf_feature("Register NF", nf_name, false),
+      m_http_version(),
       m_database() {
   logger::logger_registry::register_logger(
       nf_name, LOGGER_NAME, log_stdout, log_rot_file);
@@ -64,6 +65,8 @@ void config::read_from_file(const std::string& file_path) {
           m_log_level_feature.from_yaml(elem.second);
         } else if (key == REGISTER_NF_CONFIG_NAME) {
           m_register_nrf_feature.from_yaml(elem.second);
+        } else if (key == NF_CONFIG_HTTP_NAME) {
+          m_http_version.from_yaml(elem.second);
         } else if (key == m_nf_name) {
           const auto nf_ptr = m_nf_map.find(m_nf_name);
           if (nf_ptr == m_nf_map.end()) {
@@ -186,6 +189,7 @@ std::string config::to_string() const {
   std::string indent = fmt::format("{:<{}}", "", INDENT_WIDTH);
   out.append(m_log_level_feature.to_string(indent));
   out.append(m_register_nrf_feature.to_string(indent));
+  out.append(m_http_version.to_string(indent));
   out.append(m_local_nf->to_string(indent));
   if (m_database.is_set()) {
     out.append(indent).append("Database:\n");
@@ -271,6 +275,20 @@ class database_config& config::get_database_config() {
 
 const std::vector<dnn_config>& config::get_dnns() const {
   return m_dnns;
+}
+
+const int config::get_http_version() const {
+  if (m_http_version.get_http_version() == "1") {
+    return 1;
+  }
+  if (m_http_version.get_http_version() == "1.1") {
+    return 1;
+  }
+  if (m_http_version.get_http_version() == "2") {
+    return 2;
+  }
+  // by default
+  return 1;
 }
 
 bool config::add_nf(

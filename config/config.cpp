@@ -191,7 +191,9 @@ std::string config::to_string() const {
     out.append(indent).append("Database:\n");
     out.append(m_database.to_string(indent + indent));
   }
-  out.append("Peer NF Configuration:\n");
+  if (!m_nf_map.empty()) {
+    out.append("Peer NF Configuration:\n");
+  }
   for (const auto& nf : m_nf_map) {
     if (nf.first != m_nf_name) {
       out.append(nf.second->to_string(indent));

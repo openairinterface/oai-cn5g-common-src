@@ -292,17 +292,15 @@ bool local_interface::is_local_interface() const {
 }
 
 sbi_interface::sbi_interface(
-    const std::string& name, const std::string& host, uint16_t port_http,
+    const std::string& name, const std::string& host, uint16_t port,
     const std::string& api_version, const std::string& interface_name)
-    : local_interface(name, host, port_http, interface_name) {
+    : local_interface(name, host, port, interface_name) {
   m_config_name = name;
   m_host        = string_config_value("Host", host);
-  m_port_http   = int_config_value("Port HTTP", port_http);
   m_api_version = string_config_value("API Version", api_version);
 
   m_host.set_validation_regex(HOST_VALIDATOR_REGEX);
   m_api_version.set_validation_regex(API_VERSION_REGEX);
-  m_port_http.set_validation_interval(PORT_MIN_VALUE, PORT_MAX_VALUE);
   m_set = true;
   set_is_local_interface(false);
   set_url();
@@ -314,10 +312,6 @@ void sbi_interface::from_yaml(const YAML::Node& node) {
 
   if (node["api_version"]) {
     m_api_version.from_yaml(node["api_version"]);
-  }
-  if (node["port_http"]) {
-    m_port_http.from_yaml(node["port_http"]);
-    m_port = m_port_http;
   }
   set_url();
   m_set = true;
@@ -332,13 +326,13 @@ std::string sbi_interface::to_string(const std::string& indent) const {
   out.append(indent).append(fmt::format(
       BASE_FORMATTER, INNER_LIST_ELEM, "API Version", inner_width,
       m_api_version.get_value()));
+
   return out;
 }
 
 void sbi_interface::validate() {
   if (!m_set) return;
   local_interface::validate();
-  m_port_http.validate();
   m_api_version.validate();
 }
 
@@ -350,19 +344,13 @@ const std::string& sbi_interface::get_url() const {
   return m_url;
 }
 
-uint16_t sbi_interface::get_port_http() const {
-  return m_port_http.get_value();
-}
-
 void sbi_interface::set_url() {
-  uint16_t used_port = m_port_http.get_value();
-
   m_url = "";
   // this is easily adaptable to HTTPS, just add a flag, and we change the URL
   m_url.append("http://")
       .append(get_host())
       .append(":")
-      .append(std::to_string(used_port));
+      .append(std::to_string(get_port()));
 }
 
 nf::nf(
@@ -761,6 +749,7 @@ const std::string& dnn_config::get_dnn() const {
 nf_http_version::nf_http_version() {
   m_set     = false;
   m_version = string_config_value(NF_CONFIG_HTTP_NAME, "1.1");
+  m_version.add_validation_regex("1|1.1|2|3");
 }
 
 void nf_http_version::from_yaml(const YAML::Node& node) {
@@ -772,7 +761,7 @@ std::string nf_http_version::to_string(const std::string& indent) const {
   std::string out;
   unsigned int inner_width = get_inner_width(indent.length());
   out.append(indent).append(fmt::format(
-      BASE_FORMATTER, INNER_LIST_ELEM, NF_CONFIG_HTTP_LABEL, inner_width,
+      BASE_FORMATTER, OUTER_LIST_ELEM, NF_CONFIG_HTTP_LABEL, inner_width,
       m_version.get_value()));
   return out;
 }

@@ -276,15 +276,16 @@ const std::vector<dnn_config>& config::get_dnns() const {
 }
 
 const int config::get_http_version() const {
-  if (!m_http_version.get_http_version().compare("1")) {
+  if (m_http_version.get_http_version() == "1") {
     return 1;
   }
-  if (!m_http_version.get_http_version().compare("1.1")) {
+  if (m_http_version.get_http_version() == "1.1") {
     return 1;
   }
-  if (!m_http_version.get_http_version().compare("2")) {
+  if (m_http_version.get_http_version() == "2") {
     return 2;
   }
+  // by default
   return 1;
 }
 

@@ -209,14 +209,13 @@ class sbi_interface : public local_interface {
 
  private:
   string_config_value m_api_version;
-  int_config_value m_port_http;
   std::string m_url;
 
   void set_url();
 
  public:
   explicit sbi_interface(
-      const std::string& name, const std::string& host, uint16_t port_http,
+      const std::string& name, const std::string& host, uint16_t port,
       const std::string& api_version, const std::string& interface_name);
 
   sbi_interface() = default;
@@ -227,7 +226,6 @@ class sbi_interface : public local_interface {
 
   [[nodiscard]] const std::string& get_api_version() const;
   [[nodiscard]] const std::string& get_url() const;
-  [[nodiscard]] uint16_t get_port_http() const;
 };
 
 enum class interface_type_e { n1, n4 };

@@ -750,7 +750,7 @@ const std::string& dnn_config::get_dnn() const {
 nf_http_version::nf_http_version() {
   m_set     = false;
   m_version = string_config_value(NF_CONFIG_HTTP_NAME, "1.1");
-  m_version.add_validation_regex("1|1.1|2|3");
+  m_version.set_validation_regex("1|1.1|2|3");
 }
 
 void nf_http_version::from_yaml(const YAML::Node& node) {

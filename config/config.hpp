@@ -179,6 +179,7 @@ class config : public config_iface {
   std::unordered_set<std::string> m_used_sbi_values;
   std::string m_nf_name;
   std::vector<dnn_config> m_dnns;
+  nf_features_config m_register_nrf_feature;
 
   virtual void update_used_nfs();
   bool add_nf(const std::string& name, const std::shared_ptr<nf>& nf_ptr);
@@ -187,7 +188,6 @@ class config : public config_iface {
   std::string m_config_path;
 
   nf_features_config m_log_level_feature;
-  nf_features_config m_register_nrf_feature;
 
   std::shared_ptr<nf> m_local_nf;
 

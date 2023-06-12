@@ -318,7 +318,7 @@ void sbi_interface::from_yaml(const YAML::Node& node) {
 }
 
 std::string sbi_interface::to_string(const std::string& indent) const {
-  std::string out;
+  std::string out          = local_interface::to_string(indent);
   unsigned int inner_width = get_inner_width(indent.length());
 
   out.append(indent).append(

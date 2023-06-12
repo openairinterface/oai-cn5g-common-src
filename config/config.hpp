@@ -138,7 +138,7 @@ class config_iface {
 
   [[nodiscard]] virtual const std::vector<dnn_config>& get_dnns() const = 0;
   [[nodiscard]] virtual database_config& get_database_config()          = 0;
-  [[nodiscard]] virtual const int get_http_version() const              = 0;
+  [[nodiscard]] virtual int get_http_version() const                    = 0;
 
   /**
    * Initializes the configuration, reads YAML configuration file and validates
@@ -172,7 +172,7 @@ class config : public config_iface {
   [[nodiscard]] database_config& get_database_config() override;
   [[nodiscard]] const std::vector<dnn_config>& get_dnns() const override;
 
-  [[nodiscard]] const int get_http_version() const override;
+  [[nodiscard]] int get_http_version() const override;
 
   bool init() override;
 

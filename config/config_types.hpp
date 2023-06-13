@@ -174,11 +174,12 @@ class local_interface : public config_type {
   [[nodiscard]] std::string to_string_for_local(
       const std::string& indent) const;
 
- private:
-  string_config_value m_if_name{};
   // these values are read from the m_if_name
   in_addr m_addr4{};
   in6_addr m_addr6{};
+
+ private:
+  string_config_value m_if_name{};
   unsigned int m_mtu{};
   bool m_is_local_interface = false;
 

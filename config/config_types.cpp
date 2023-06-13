@@ -327,6 +327,16 @@ std::string sbi_interface::to_string(const std::string& indent) const {
       BASE_FORMATTER, INNER_LIST_ELEM, "API Version", inner_width,
       m_api_version.get_value()));
 
+  std::string ip4 = conv::toString(m_addr4);
+  std::string ip6 = conv::toString(m_addr6);
+
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, INNER_LIST_ELEM, "IPv4 Address ", inner_width, ip4));
+  if (ip6 != "::") {
+    out.append(indent).append(fmt::format(
+        BASE_FORMATTER, INNER_LIST_ELEM, "IPv6 Address", inner_width, ip6));
+  }
+
   return out;
 }
 
@@ -751,6 +761,7 @@ nf_http_version::nf_http_version() {
   m_set     = false;
   m_version = string_config_value(NF_CONFIG_HTTP_NAME, "1.1");
   m_version.set_validation_regex("1|1.1|2|3");
+  m_config_name = NF_CONFIG_HTTP_LABEL;
 }
 
 void nf_http_version::from_yaml(const YAML::Node& node) {
@@ -762,7 +773,7 @@ std::string nf_http_version::to_string(const std::string& indent) const {
   std::string out;
   unsigned int inner_width = get_inner_width(indent.length());
   out.append(indent).append(fmt::format(
-      BASE_FORMATTER, OUTER_LIST_ELEM, NF_CONFIG_HTTP_LABEL, inner_width,
+      BASE_FORMATTER, OUTER_LIST_ELEM, m_version.get_config_name(), inner_width,
       m_version.get_value()));
   return out;
 }

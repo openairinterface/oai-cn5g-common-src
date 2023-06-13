@@ -39,8 +39,8 @@ using namespace oai::config;
 config::config(
     const std::string& config_path, const std::string& nf_name, bool log_stdout,
     bool log_rot_file)
-    : m_log_level_feature("Log Level", nf_name, std::string("info")),
-      m_register_nrf_feature("Register NF", nf_name, false),
+    : m_register_nrf_feature("Register NF", nf_name, false),
+      m_log_level_feature("Log Level", nf_name, std::string("info")),
       m_http_version(),
       m_database() {
   logger::logger_registry::register_logger(
@@ -150,6 +150,7 @@ bool config::validate() {
     logger::logger_registry::set_level(spdlog::level::from_str(log_level()));
   }
   success &= safe_validate_field(m_register_nrf_feature);
+  success &= safe_validate_field(m_http_version);
   for (auto& nf : m_nf_map) {
     success &= safe_validate_field(*nf.second);
   }
@@ -277,7 +278,7 @@ const std::vector<dnn_config>& config::get_dnns() const {
   return m_dnns;
 }
 
-const int config::get_http_version() const {
+int config::get_http_version() const {
   if (m_http_version.get_http_version() == "1") {
     return 1;
   }

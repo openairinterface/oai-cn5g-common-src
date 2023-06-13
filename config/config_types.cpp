@@ -318,7 +318,7 @@ void sbi_interface::from_yaml(const YAML::Node& node) {
 }
 
 std::string sbi_interface::to_string(const std::string& indent) const {
-  std::string out          = local_interface::to_string(indent);
+  std::string out;
   unsigned int inner_width = get_inner_width(indent.length());
 
   out.append(indent).append(
@@ -326,6 +326,16 @@ std::string sbi_interface::to_string(const std::string& indent) const {
   out.append(indent).append(fmt::format(
       BASE_FORMATTER, INNER_LIST_ELEM, "API Version", inner_width,
       m_api_version.get_value()));
+
+  std::string ip4 = conv::toString(m_addr4);
+  std::string ip6 = conv::toString(m_addr6);
+
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, INNER_LIST_ELEM, "IPv4 Address ", inner_width, ip4));
+  if (ip6 != "::") {
+    out.append(indent).append(fmt::format(
+        BASE_FORMATTER, INNER_LIST_ELEM, "IPv6 Address", inner_width, ip6));
+  }
 
   return out;
 }

@@ -327,6 +327,8 @@ std::string sbi_interface::to_string(const std::string& indent) const {
       BASE_FORMATTER, INNER_LIST_ELEM, "API Version", inner_width,
       m_api_version.get_value()));
 
+  if (!is_local_interface()) return out;
+
   std::string ip4 = conv::toString(m_addr4);
   std::string ip6 = conv::toString(m_addr6);
 

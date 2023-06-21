@@ -65,6 +65,7 @@ const uint16_t PORT_MAX_VALUE = 65535;
 const std::string PCF_CONFIG_NAME  = "pcf";
 const std::string NRF_CONFIG_NAME  = "nrf";
 const std::string SMF_CONFIG_NAME  = "smf";
+const std::string UPF_CONFIG_NAME  = "upf";
 const std::string AMF_CONFIG_NAME  = "amf";
 const std::string UDM_CONFIG_NAME  = "udm";
 const std::string UDR_CONFIG_NAME  = "udr";

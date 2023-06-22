@@ -621,10 +621,14 @@ dnn_config::dnn_config(
   m_ipv4_pool        = string_config_value("IPv4 pool", ipv4_pool);
   m_ipv6_prefix      = string_config_value("IPv6 prefix", ipv6_prefix);
 
+  // here we have to cut the end $ and start ^ from the regex for it to work
+  std::string start_ipv4 = IPV4_ADDRESS_VALIDATOR_REGEX.substr(
+      0, IPV4_ADDRESS_VALIDATOR_REGEX.length() - 1);
+  std::string end_ipv4 = IPV4_ADDRESS_VALIDATOR_REGEX.substr(
+      1, IPV4_ADDRESS_VALIDATOR_REGEX.length());
+
   m_pdu_session_type.set_validation_regex(PDU_SESSION_TYPE_REGEX);
-  m_ipv4_pool.set_validation_regex(
-      IPV4_ADDRESS_VALIDATOR_REGEX + "( )*-( )*" +
-      IPV4_ADDRESS_VALIDATOR_REGEX);
+  m_ipv4_pool.set_validation_regex(start_ipv4 + "( )*-( )*" + end_ipv4);
   m_ipv6_prefix.set_validation_regex(IPV6_ADDRESS_VALIDATOR_REGEX);
   if (ipv6_prefix.empty()) {
     m_ipv6_prefix.unset_config();
@@ -665,12 +669,15 @@ void dnn_config::from_yaml(const YAML::Node& node) {
       .append(fmt::format(
           BASE_FORMATTER, INNER_LIST_ELEM, m_pdu_session_type.get_config_name(),
           inner_width, m_pdu_session_type.to_string("")));
-  if (m_ipv6_prefix.get_value().empty()) {
+  if (m_pdu_session_type_generated == PDU_SESSION_TYPE_E_IPV4V6 ||
+      m_pdu_session_type_generated == PDU_SESSION_TYPE_E_IPV6) {
     out.append(inner_indent)
         .append(fmt::format(
             BASE_FORMATTER, INNER_LIST_ELEM, m_ipv6_prefix.get_config_name(),
             inner_width, m_ipv6_prefix.to_string("")));
-  } else {
+  }
+  if (m_pdu_session_type_generated == PDU_SESSION_TYPE_E_IPV4V6 ||
+      m_pdu_session_type_generated == PDU_SESSION_TYPE_E_IPV4) {
     out.append(inner_indent)
         .append(fmt::format(
             BASE_FORMATTER, INNER_LIST_ELEM, m_ipv4_pool.get_config_name(),
@@ -680,6 +687,10 @@ void dnn_config::from_yaml(const YAML::Node& node) {
 }
 
 void dnn_config::validate() {
+  m_pdu_session_type.validate();
+  m_ipv4_pool.validate();
+  m_ipv6_prefix.validate();
+
   m_pdu_session_type_generated =
       pdu_session_type_t(m_pdu_session_type.get_value());
 
@@ -713,21 +724,30 @@ void dnn_config::validate() {
           "range",
           m_ipv4_pool.get_value()));
     }
-    if (m_pdu_session_type_generated ==
-            pdu_session_type_e::PDU_SESSION_TYPE_E_IPV6 ||
-        m_pdu_session_type_generated ==
-            pdu_session_type_e::PDU_SESSION_TYPE_E_IPV4V6) {
-      std::vector<std::string> ip6s;
-      boost::split(
-          ip6s, m_ipv6_prefix.get_value(), boost::is_any_of("/"),
-          boost::token_compress_on);
+  }
+  if (m_pdu_session_type_generated ==
+          pdu_session_type_e::PDU_SESSION_TYPE_E_IPV6 ||
+      m_pdu_session_type_generated ==
+          pdu_session_type_e::PDU_SESSION_TYPE_E_IPV4V6) {
+    std::vector<std::string> ip6s;
+    boost::split(
+        ip6s, m_ipv6_prefix.get_value(), boost::is_any_of("/"),
+        boost::token_compress_on);
 
-      if (ip6s.size() != 2) {
-        throw std::runtime_error(fmt::format(
-            "The IPv6 prefix / length {} is not valid",
-            m_ipv6_prefix.get_value()));
-      }
+    if (ip6s.size() != 2) {
+      // TODO IPv6 is no handled correctly in PPA, which is why we print a
+      // warning here instead of an exception. We need to verify IPv6 and IPv4V6
+      // end to end
 
+      // throw std::runtime_error(fmt::format(
+      //    "The IPv6 prefix / length {} is not valid",
+      //    m_ipv6_prefix.get_value()));
+
+      logger::logger_registry::get_logger(LOGGER_NAME)
+          .warn(
+              "The IPv6 prefix / length %s is not valid",
+              m_ipv6_prefix.get_value());
+    } else {
       m_ipv6_prefix_ip     = safe_convert_ip6(ip6s[0]);
       m_ipv6_prefix_length = std::stoi(ip6s[1]);
     }

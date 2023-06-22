@@ -350,6 +350,7 @@ class dnn_config : public config_type {
   string_config_value m_pdu_session_type;
   string_config_value m_ipv4_pool;
   string_config_value m_ipv6_prefix;
+  ue_dns m_ue_dns;
 
   // generated
   in_addr m_ipv4_pool_start_ip{};
@@ -377,6 +378,8 @@ class dnn_config : public config_type {
   [[nodiscard]] uint8_t get_ipv6_prefix_length() const;
   [[nodiscard]] const pdu_session_type_t& get_pdu_session_type() const;
   [[nodiscard]] const std::string& get_dnn() const;
+  [[nodiscard]] const ue_dns& get_ue_dns() const;
+  void set_ue_dns(const ue_dns& dns);
 };
 
 class nf_http_version : public config_type {

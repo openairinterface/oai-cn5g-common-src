@@ -612,6 +612,111 @@ int database_config::get_connection_timeout() const {
   return m_connection_timeout.get_value();
 }
 
+ue_dns::ue_dns(
+    const std::string& primary_dns_v4, const std::string& secondary_dns_v4,
+    const std::string& primary_dns_v6, const std::string& secondary_dns_v6) {
+  m_primary_dns_v4 = string_config_value("Primary DNS IPv4", primary_dns_v4);
+  m_primary_dns_v6 = string_config_value("Primary DNS IPv6", primary_dns_v6);
+  m_secondary_dns_v6 =
+      string_config_value("Secondary DNS IPv6", secondary_dns_v6);
+  m_secondary_dns_v4 =
+      string_config_value("Secondary DNS IPv4", secondary_dns_v4);
+
+  m_primary_dns_v4.set_validation_regex(IPV4_ADDRESS_VALIDATOR_REGEX);
+  m_primary_dns_v6.set_validation_regex(IPV6_ADDRESS_VALIDATOR_REGEX);
+  m_secondary_dns_v4.set_validation_regex(IPV4_ADDRESS_VALIDATOR_REGEX);
+  m_secondary_dns_v6.set_validation_regex(IPV6_ADDRESS_VALIDATOR_REGEX);
+
+  // only Primary IPv4 is mandatory
+  if (primary_dns_v6.empty()) {
+    m_primary_dns_v6.unset_config();
+  }
+  if (secondary_dns_v6.empty()) {
+    m_secondary_dns_v6.unset_config();
+  }
+  if (secondary_dns_v4.empty()) {
+    m_secondary_dns_v4.unset_config();
+  }
+}
+
+void ue_dns::from_yaml(const YAML::Node& node) {
+  if (node["primary_ipv4"]) {
+    m_primary_dns_v4.from_yaml(node["primary_ipv4"]);
+  }
+  if (node["primary_ipv6"]) {
+    m_primary_dns_v6.from_yaml(node["primary_ipv6"]);
+  }
+  if (node["secondary_ipv4"]) {
+    m_secondary_dns_v4.from_yaml(node["secondary_ipv4"]);
+  }
+  if (node["secondary_ipv6"]) {
+    m_secondary_dns_v6.from_yaml(node["secondary_ipv6"]);
+  }
+}
+
+std::string ue_dns::to_string(const std::string& indent) const {
+  std::string out;
+  unsigned int inner_width = get_inner_width(indent.length());
+
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, OUTER_LIST_ELEM, m_primary_dns_v4.get_config_name(),
+      inner_width, m_primary_dns_v4.to_string("")));
+
+  if (m_primary_dns_v6.is_set()) {
+    out.append(indent).append(fmt::format(
+        BASE_FORMATTER, OUTER_LIST_ELEM, m_primary_dns_v6.get_config_name(),
+        inner_width, m_primary_dns_v6.to_string("")));
+  }
+
+  if (m_secondary_dns_v4.is_set()) {
+    out.append(indent).append(fmt::format(
+        BASE_FORMATTER, OUTER_LIST_ELEM, m_secondary_dns_v4.get_config_name(),
+        inner_width, m_secondary_dns_v4.to_string("")));
+  }
+
+  if (m_secondary_dns_v6.is_set()) {
+    out.append(indent).append(fmt::format(
+        BASE_FORMATTER, OUTER_LIST_ELEM, m_secondary_dns_v6.get_config_name(),
+        inner_width, m_secondary_dns_v6.to_string("")));
+  }
+
+  return out;
+}
+
+void ue_dns::validate() {
+  m_primary_dns_v4.validate();
+  m_secondary_dns_v4.validate();
+  m_primary_dns_v6.validate();
+  m_secondary_dns_v6.validate();
+
+  m_primary_dns_v4_ip = safe_convert_ip(m_primary_dns_v4.get_value());
+  if (m_secondary_dns_v4.is_set()) {
+    m_secondary_dns_v4_ip = safe_convert_ip(m_secondary_dns_v4.get_value());
+  }
+  if (m_primary_dns_v6.is_set()) {
+    m_primary_dns_v6_ip = safe_convert_ip6(m_primary_dns_v6.get_value());
+  }
+  if (m_secondary_dns_v6.is_set()) {
+    m_secondary_dns_v6_ip = safe_convert_ip6(m_secondary_dns_v6.get_value());
+  }
+}
+
+const in_addr& ue_dns::get_primary_dns_v4() const {
+  return m_primary_dns_v4_ip;
+}
+
+const in_addr& ue_dns::get_secondary_dns_v4() const {
+  return m_secondary_dns_v4_ip;
+}
+
+const in6_addr& ue_dns::get_primary_dns_v6() const {
+  return m_primary_dns_v6_ip;
+}
+
+const in6_addr& ue_dns::get_secondary_dns_v6() const {
+  return m_secondary_dns_v6_ip;
+}
+
 dnn_config::dnn_config(
     const std::string& dnn, const std::string& pdu_type,
     const std::string& ipv4_pool, const std::string& ipv6_prefix) {

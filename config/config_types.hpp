@@ -312,6 +312,36 @@ class database_config : public config_type {
   [[nodiscard]] int get_connection_timeout() const;
 };
 
+class ue_dns : public config_type {
+ private:
+  string_config_value m_primary_dns_v4;
+  string_config_value m_secondary_dns_v4;
+  string_config_value m_primary_dns_v6;
+  string_config_value m_secondary_dns_v6;
+
+  // generated values
+  in_addr m_primary_dns_v4_ip{};
+  in_addr m_secondary_dns_v4_ip{};
+  in6_addr m_primary_dns_v6_ip{};
+  in6_addr m_secondary_dns_v6_ip{};
+
+ public:
+  explicit ue_dns(
+      const std::string& primary_dns_v4, const std::string& secondary_dns_v4,
+      const std::string& primary_dns_v6, const std::string& secondary_dns_v6);
+
+  void from_yaml(const YAML::Node& node) override;
+
+  [[nodiscard]] std::string to_string(const std::string& indent) const override;
+
+  void validate() override;
+
+  [[nodiscard]] const in_addr& get_primary_dns_v4() const;
+  [[nodiscard]] const in_addr& get_secondary_dns_v4() const;
+  [[nodiscard]] const in6_addr& get_primary_dns_v6() const;
+  [[nodiscard]] const in6_addr& get_secondary_dns_v6() const;
+};
+
 // TODO we should just use the DnnConfiguration data structure, but that
 // requires a lot of changes in the using classes
 class dnn_config : public config_type {
@@ -320,6 +350,7 @@ class dnn_config : public config_type {
   string_config_value m_pdu_session_type;
   string_config_value m_ipv4_pool;
   string_config_value m_ipv6_prefix;
+  ue_dns m_ue_dns;
 
   // generated
   in_addr m_ipv4_pool_start_ip{};
@@ -347,6 +378,8 @@ class dnn_config : public config_type {
   [[nodiscard]] uint8_t get_ipv6_prefix_length() const;
   [[nodiscard]] const pdu_session_type_t& get_pdu_session_type() const;
   [[nodiscard]] const std::string& get_dnn() const;
+  [[nodiscard]] const ue_dns& get_ue_dns() const;
+  void set_ue_dns(const ue_dns& dns);
 };
 
 class nf_http_version : public config_type {

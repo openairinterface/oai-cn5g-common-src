@@ -612,14 +612,123 @@ int database_config::get_connection_timeout() const {
   return m_connection_timeout.get_value();
 }
 
+ue_dns::ue_dns(
+    const std::string& primary_dns_v4, const std::string& secondary_dns_v4,
+    const std::string& primary_dns_v6, const std::string& secondary_dns_v6) {
+  m_primary_dns_v4 = string_config_value("Primary DNS IPv4", primary_dns_v4);
+  m_primary_dns_v6 = string_config_value("Primary DNS IPv6", primary_dns_v6);
+  m_secondary_dns_v6 =
+      string_config_value("Secondary DNS IPv6", secondary_dns_v6);
+  m_secondary_dns_v4 =
+      string_config_value("Secondary DNS IPv4", secondary_dns_v4);
+
+  m_primary_dns_v4.set_validation_regex(IPV4_ADDRESS_VALIDATOR_REGEX);
+  m_primary_dns_v6.set_validation_regex(IPV6_ADDRESS_VALIDATOR_REGEX);
+  m_secondary_dns_v4.set_validation_regex(IPV4_ADDRESS_VALIDATOR_REGEX);
+  m_secondary_dns_v6.set_validation_regex(IPV6_ADDRESS_VALIDATOR_REGEX);
+
+  // only Primary IPv4 is mandatory
+  if (primary_dns_v6.empty()) {
+    m_primary_dns_v6.unset_config();
+  }
+  if (secondary_dns_v6.empty()) {
+    m_secondary_dns_v6.unset_config();
+  }
+  if (secondary_dns_v4.empty()) {
+    m_secondary_dns_v4.unset_config();
+  }
+}
+
+void ue_dns::from_yaml(const YAML::Node& node) {
+  if (node["primary_ipv4"]) {
+    m_primary_dns_v4.from_yaml(node["primary_ipv4"]);
+  }
+  if (node["primary_ipv6"]) {
+    m_primary_dns_v6.from_yaml(node["primary_ipv6"]);
+  }
+  if (node["secondary_ipv4"]) {
+    m_secondary_dns_v4.from_yaml(node["secondary_ipv4"]);
+  }
+  if (node["secondary_ipv6"]) {
+    m_secondary_dns_v6.from_yaml(node["secondary_ipv6"]);
+  }
+}
+
+std::string ue_dns::to_string(const std::string& indent) const {
+  std::string out;
+  unsigned int inner_width = get_inner_width(indent.length());
+
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, OUTER_LIST_ELEM, m_primary_dns_v4.get_config_name(),
+      inner_width, m_primary_dns_v4.to_string("")));
+
+  if (m_primary_dns_v6.is_set()) {
+    out.append(indent).append(fmt::format(
+        BASE_FORMATTER, OUTER_LIST_ELEM, m_primary_dns_v6.get_config_name(),
+        inner_width, m_primary_dns_v6.to_string("")));
+  }
+
+  if (m_secondary_dns_v4.is_set()) {
+    out.append(indent).append(fmt::format(
+        BASE_FORMATTER, OUTER_LIST_ELEM, m_secondary_dns_v4.get_config_name(),
+        inner_width, m_secondary_dns_v4.to_string("")));
+  }
+
+  if (m_secondary_dns_v6.is_set()) {
+    out.append(indent).append(fmt::format(
+        BASE_FORMATTER, OUTER_LIST_ELEM, m_secondary_dns_v6.get_config_name(),
+        inner_width, m_secondary_dns_v6.to_string("")));
+  }
+
+  return out;
+}
+
+void ue_dns::validate() {
+  m_primary_dns_v4.validate();
+  m_secondary_dns_v4.validate();
+  m_primary_dns_v6.validate();
+  m_secondary_dns_v6.validate();
+
+  m_primary_dns_v4_ip = safe_convert_ip(m_primary_dns_v4.get_value());
+  if (m_secondary_dns_v4.is_set()) {
+    m_secondary_dns_v4_ip = safe_convert_ip(m_secondary_dns_v4.get_value());
+  }
+  if (m_primary_dns_v6.is_set()) {
+    m_primary_dns_v6_ip = safe_convert_ip6(m_primary_dns_v6.get_value());
+  }
+  if (m_secondary_dns_v6.is_set()) {
+    m_secondary_dns_v6_ip = safe_convert_ip6(m_secondary_dns_v6.get_value());
+  }
+}
+
+const in_addr& ue_dns::get_primary_dns_v4() const {
+  return m_primary_dns_v4_ip;
+}
+
+const in_addr& ue_dns::get_secondary_dns_v4() const {
+  return m_secondary_dns_v4_ip;
+}
+
+const in6_addr& ue_dns::get_primary_dns_v6() const {
+  return m_primary_dns_v6_ip;
+}
+
+const in6_addr& ue_dns::get_secondary_dns_v6() const {
+  return m_secondary_dns_v6_ip;
+}
+
 dnn_config::dnn_config(
     const std::string& dnn, const std::string& pdu_type,
-    const std::string& ipv4_pool, const std::string& ipv6_prefix) {
+    const std::string& ipv4_pool, const std::string& ipv6_prefix)
+    : m_ue_dns("8.8.8.8", "1.1.1.1", "", "") {
   m_config_name      = "DNN";
   m_dnn              = string_config_value("DNN", dnn);
   m_pdu_session_type = string_config_value("PDU session type", pdu_type);
   m_ipv4_pool        = string_config_value("IPv4 pool", ipv4_pool);
   m_ipv6_prefix      = string_config_value("IPv6 prefix", ipv6_prefix);
+  // we unset it here, so that we can check if we can overwrite it from the
+  // default UE DNS config
+  m_ue_dns.unset_config();
 
   // here we have to cut the end $ and start ^ from the regex for it to work
   std::string start_ipv4 = IPV4_ADDRESS_VALIDATOR_REGEX.substr(
@@ -648,6 +757,10 @@ void dnn_config::from_yaml(const YAML::Node& node) {
   }
   if (node["ipv6_prefix"]) {
     m_ipv6_prefix.from_yaml(node["ipv6_prefix"]);
+  }
+  if (node["ue_dns"]) {
+    m_ue_dns.from_yaml(node["ue_dns"]);
+    m_ue_dns.set_config();
   }
 }
 
@@ -683,6 +796,12 @@ void dnn_config::from_yaml(const YAML::Node& node) {
             BASE_FORMATTER, INNER_LIST_ELEM, m_ipv4_pool.get_config_name(),
             inner_width, m_ipv4_pool.to_string("")));
   }
+  out.append(inner_indent)
+      .append(fmt::format("{} {}:\n", INNER_LIST_ELEM, "DNS Settings"));
+  std::string inner_indent2 = add_indent(inner_indent);
+
+  out.append(m_ue_dns.to_string(inner_indent2));
+
   return out;
 }
 
@@ -690,6 +809,7 @@ void dnn_config::validate() {
   m_pdu_session_type.validate();
   m_ipv4_pool.validate();
   m_ipv6_prefix.validate();
+  m_ue_dns.validate();
 
   m_pdu_session_type_generated =
       pdu_session_type_t(m_pdu_session_type.get_value());
@@ -748,8 +868,12 @@ void dnn_config::validate() {
               "The IPv6 prefix / length %s is not valid",
               m_ipv6_prefix.get_value());
     } else {
-      m_ipv6_prefix_ip     = safe_convert_ip6(ip6s[0]);
-      m_ipv6_prefix_length = std::stoi(ip6s[1]);
+      try {
+        m_ipv6_prefix_ip     = safe_convert_ip6(ip6s[0]);
+        m_ipv6_prefix_length = std::stoi(ip6s[1]);
+      } catch (std::runtime_error& e) {
+        logger::logger_registry::get_logger(LOGGER_NAME).warn(e.what());
+      }
     }
   }
 }
@@ -777,6 +901,15 @@ void dnn_config::validate() {
 
 const std::string& dnn_config::get_dnn() const {
   return m_dnn.get_value();
+}
+
+const ue_dns& dnn_config::get_ue_dns() const {
+  return m_ue_dns;
+}
+
+void dnn_config::set_ue_dns(const ue_dns& dns) {
+  m_ue_dns = dns;
+  m_ue_dns.set_config();
 }
 
 nf_http_version::nf_http_version() {

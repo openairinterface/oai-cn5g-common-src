@@ -83,11 +83,25 @@ typedef struct pdu_session_type_s {
   const std::string& to_string() const {
     return pdu_session_type_e2str.at(pdu_session_type);
   }
-
+  //------------------------------------------------------------------------------
   nlohmann::json to_json() const {
     nlohmann::json json_data = {};
     json_data                = to_string();
     return json_data;
+  }
+  //------------------------------------------------------------------------------
+  void from_json(nlohmann::json& json_data) {
+    std::string pdu_session_type_str = json_data.get<std::string>();
+    if (pdu_session_type_str.compare("IPV4") == 0) {
+      pdu_session_type = pdu_session_type_e::PDU_SESSION_TYPE_E_IPV4;
+    } else if (pdu_session_type_str.compare("IPV6") == 0) {
+      pdu_session_type = pdu_session_type_e::PDU_SESSION_TYPE_E_IPV6;
+    } else if (pdu_session_type_str.compare("IPV4V6") == 0) {
+      pdu_session_type = pdu_session_type_e::PDU_SESSION_TYPE_E_IPV4V6;
+    } else {
+      pdu_session_type =
+          pdu_session_type_e::PDU_SESSION_TYPE_E_IPV4;  // Default value
+    }
   }
 
 } pdu_session_type_t;

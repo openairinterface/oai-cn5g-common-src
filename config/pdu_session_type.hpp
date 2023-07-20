@@ -61,11 +61,11 @@ typedef struct pdu_session_type_s {
   pdu_session_type_s(const uint8_t& p) : pdu_session_type(p) {}
   pdu_session_type_s(const struct pdu_session_type_s& p) = default;
   pdu_session_type_s(const std::string& s) {
-    if (s.compare("IPV4") == 0) {
+    if (s == "IPV4") {
       pdu_session_type = pdu_session_type_e::PDU_SESSION_TYPE_E_IPV4;
-    } else if (s.compare("IPV6") == 0) {
+    } else if (s == "IPV6") {
       pdu_session_type = pdu_session_type_e::PDU_SESSION_TYPE_E_IPV6;
-    } else if (s.compare("IPV4V6") == 0) {
+    } else if (s == "IPV4V6") {
       pdu_session_type = pdu_session_type_e::PDU_SESSION_TYPE_E_IPV4V6;
     } else {
       pdu_session_type =
@@ -92,11 +92,11 @@ typedef struct pdu_session_type_s {
   //------------------------------------------------------------------------------
   void from_json(nlohmann::json& json_data) {
     std::string pdu_session_type_str = json_data.get<std::string>();
-    if (pdu_session_type_str.compare("IPV4") == 0) {
+    if (pdu_session_type_str == "IPV4") {
       pdu_session_type = pdu_session_type_e::PDU_SESSION_TYPE_E_IPV4;
-    } else if (pdu_session_type_str.compare("IPV6") == 0) {
+    } else if (pdu_session_type_str == "IPV6") {
       pdu_session_type = pdu_session_type_e::PDU_SESSION_TYPE_E_IPV6;
-    } else if (pdu_session_type_str.compare("IPV4V6") == 0) {
+    } else if (pdu_session_type_str == "IPV4V6") {
       pdu_session_type = pdu_session_type_e::PDU_SESSION_TYPE_E_IPV4V6;
     } else {
       pdu_session_type =

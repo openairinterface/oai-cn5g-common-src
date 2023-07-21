@@ -34,6 +34,7 @@
 #include <netinet/in.h>
 #include <vector>
 #include <memory>
+#include <nlohmann/json.hpp>
 #include <yaml-cpp/yaml.h>
 
 namespace oai::config {
@@ -72,7 +73,18 @@ class config_type {
    * Convert to JSON format
    * @return void
    */
-  virtual void to_json(){};
+  virtual nlohmann::json to_json() {
+    nlohmann::json json_data = {};
+    return json_data;
+  };  // TODO: pure virtual
+
+  /**
+   * Get value from JSON
+   * @return void
+   */
+  virtual bool from_json(const nlohmann::json& json_data) {
+    return true;
+  };  // TODO: pure virtual
 
   /**
    * Checks if the configuration is set. Configuration is not set if it has not
@@ -123,6 +135,8 @@ class string_config_value : public config_type {
   string_config_value() = default;
 
   void from_yaml(const YAML::Node& node) override;
+  nlohmann::json to_json() override;
+  bool from_json(const nlohmann::json& json_data) override;
 
   [[nodiscard]] std::string to_string(const std::string& indent) const override;
   void validate() override;
@@ -140,6 +154,8 @@ class option_config_value : public config_type {
   option_config_value() = default;
 
   void from_yaml(const YAML::Node& node) override;
+  nlohmann::json to_json() override;
+  bool from_json(const nlohmann::json& json_data) override;
 
   [[nodiscard]] std::string to_string(const std::string& indent) const override;
 
@@ -157,6 +173,8 @@ class int_config_value : public config_type {
   int_config_value() = default;
 
   void from_yaml(const YAML::Node& node) override;
+  nlohmann::json to_json() override;
+  bool from_json(const nlohmann::json& json_data) override;
 
   [[nodiscard]] std::string to_string(const std::string& indent) const override;
   void validate() override;
@@ -191,6 +209,8 @@ class local_interface : public config_type {
   local_interface() = default;
 
   void from_yaml(const YAML::Node& node) override;
+  nlohmann::json to_json() override;
+  bool from_json(const nlohmann::json& json_data) override;
   [[nodiscard]] std::string to_string(const std::string& indent) const override;
   void validate() override;
 
@@ -222,6 +242,8 @@ class sbi_interface : public local_interface {
   sbi_interface() = default;
 
   void from_yaml(const YAML::Node& node) override;
+  nlohmann::json to_json() override;
+  bool from_json(const nlohmann::json& json_data) override;
   [[nodiscard]] std::string to_string(const std::string& indent) const override;
   void validate() override;
 
@@ -252,6 +274,8 @@ class nf : public config_type {
   explicit nf() = default;
 
   void from_yaml(const YAML::Node& node) override;
+  nlohmann::json to_json() override;
+  bool from_json(const nlohmann::json& json_data) override;
 
   [[nodiscard]] std::string to_string(const std::string& indent) const override;
   void validate() override;
@@ -279,6 +303,8 @@ class nf_features_config : public config_type {
       const std::string& value);
 
   void from_yaml(const YAML::Node& node) override;
+  nlohmann::json to_json() override;
+  bool from_json(const nlohmann::json& json_data) override;
 
   [[nodiscard]] std::string to_string(const std::string& indent) const override;
   void validate() override;
@@ -301,6 +327,9 @@ class database_config : public config_type {
   explicit database_config();
 
   void from_yaml(const YAML::Node& node) override;
+  // TODO:
+  // nlohmann::json to_json() override;
+  // bool from_json(const nlohmann::json& json_data) override;
 
   [[nodiscard]] std::string to_string(const std::string& indent) const override;
   [[nodiscard]] const std::string& get_host() const;
@@ -331,6 +360,8 @@ class ue_dns : public config_type {
       const std::string& primary_dns_v6, const std::string& secondary_dns_v6);
 
   void from_yaml(const YAML::Node& node) override;
+  nlohmann::json to_json() override;
+  bool from_json(const nlohmann::json& json_data) override;
 
   [[nodiscard]] std::string to_string(const std::string& indent) const override;
 
@@ -367,6 +398,8 @@ class dnn_config : public config_type {
       const std::string& ipv4_pool, const std::string& ipv6_prefix);
 
   void from_yaml(const YAML::Node& node) override;
+  nlohmann::json to_json() override;
+  bool from_json(const nlohmann::json& json_data) override;
 
   [[nodiscard]] std::string to_string(const std::string& indent) const override;
 

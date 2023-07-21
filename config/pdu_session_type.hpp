@@ -19,14 +19,6 @@
  *      contact@openairinterface.org
  */
 
-/*! \file pdu_session_type.hpp
- \brief
- \author  Puzyu Dukl (BUPT), Tien-Thinh NGUYEN (EURECOM)
- \company BUPT, EURECOM
- \date 2023
- \email: tien-thinh.nguyen@eurecom.fr
-*/
-
 #pragma once
 
 // TODO this is here because we need it for the common DNS configuration

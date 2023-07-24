@@ -645,15 +645,20 @@ void nf_features_config::from_yaml(const YAML::Node& node) {
 
 nlohmann::json nf_features_config::to_json() {
   nlohmann::json json_data = {};
-  json_data                = m_string_value.to_json();
+  if (m_option_value.is_set())
+    json_data = m_option_value.to_json();
+  else
+    json_data = m_string_value.to_json();
   return json_data;
 }
 
 bool nf_features_config::from_json(const nlohmann::json& json_data) {
   try {
-    if (json_data.find(m_config_name) != json_data.end()) {
-      m_string_value.from_json(json_data[m_config_name]);
-    }
+    // TODO:
+    /*   if (json_data.find(m_config_name) != json_data.end()) {
+           m_option_value.from_json(json_data[m_config_name]);
+       }
+       */
   } catch (nlohmann::detail::exception& e) {
     // TODO:
   } catch (std::exception& e) {
@@ -1217,12 +1222,29 @@ nf_http_version::nf_http_version() {
   m_set     = false;
   m_version = string_config_value(NF_CONFIG_HTTP_NAME, "1.1");
   m_version.set_validation_regex("1|1.1|2|3");
-  m_config_name = NF_CONFIG_HTTP_LABEL;
+  m_config_name = NF_CONFIG_HTTP_NAME;
 }
 
 void nf_http_version::from_yaml(const YAML::Node& node) {
   m_set = true;
   m_version.from_yaml(node);
+}
+
+nlohmann::json nf_http_version::to_json() {
+  nlohmann::json json_data = {};
+  json_data                = m_version.to_json();
+  return json_data;
+}
+
+bool nf_http_version::from_json(const nlohmann::json& json_data) {
+  try {
+    m_version.from_json(json_data);
+  } catch (nlohmann::detail::exception& e) {
+    // TODO:
+  } catch (std::exception& e) {
+    // TODO:
+  }
+  return false;
 }
 
 std::string nf_http_version::to_string(const std::string& indent) const {

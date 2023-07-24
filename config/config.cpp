@@ -39,8 +39,8 @@ using namespace oai::config;
 config::config(
     const std::string& config_path, const std::string& nf_name, bool log_stdout,
     bool log_rot_file)
-    : m_register_nrf_feature("Register NF", nf_name, false),
-      m_log_level_feature("Log Level", nf_name, std::string("info")),
+    : m_register_nrf_feature("register_nf", nf_name, false),
+      m_log_level_feature("log_level", nf_name, std::string("info")),
       m_http_version(),
       m_database() {
   logger::logger_registry::register_logger(
@@ -137,6 +137,39 @@ void config::read_from_file(const std::string& file_path) {
   }
 
   update_used_nfs();
+}
+
+void config::to_json(nlohmann::json& json_data) {
+  json_data[m_http_version.get_config_name()] = m_http_version.to_json();
+  json_data[m_log_level_feature.get_config_name()] =
+      m_log_level_feature.to_json();
+  json_data[m_register_nrf_feature.get_config_name()] =
+      m_register_nrf_feature.to_json();
+}
+
+bool config::from_json(const nlohmann::json& json_data) {
+  try {
+    if (json_data.find(m_http_version.get_config_name()) != json_data.end()) {
+      m_http_version.from_json(json_data[m_http_version.get_config_name()]);
+    }
+
+    if (json_data.find(m_log_level_feature.get_config_name()) !=
+        json_data.end()) {
+      m_log_level_feature.from_json(
+          json_data[m_log_level_feature.get_config_name()]);
+    }
+    if (json_data.find(m_register_nrf_feature.get_config_name()) !=
+        json_data.end()) {
+      m_register_nrf_feature.from_json(
+          json_data[m_register_nrf_feature.get_config_name()]);
+    }
+
+  } catch (nlohmann::detail::exception& e) {
+    // TODO:
+  } catch (std::exception& e) {
+    // TODO:
+  }
+  return false;
 }
 
 bool config::validate() {

@@ -428,6 +428,8 @@ class nf_http_version : public config_type {
   explicit nf_http_version();
 
   void from_yaml(const YAML::Node& node) override;
+  nlohmann::json to_json() override;
+  bool from_json(const nlohmann::json& json_data) override;
 
   [[nodiscard]] std::string to_string(const std::string& indent) const override;
   void validate() override;

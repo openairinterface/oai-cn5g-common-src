@@ -58,6 +58,10 @@ const std::string& config_type::get_config_name() const {
   return m_config_name;
 }
 
+void config_type::set_config_name(const std::string& name) {
+  m_config_name = name;
+}
+
 unsigned int config_type::get_inner_width(unsigned int indent_length) {
   unsigned int inner_width = COLUMN_WIDTH;
   if (indent_length < COLUMN_WIDTH) {
@@ -106,18 +110,12 @@ void string_config_value::from_yaml(const YAML::Node& node) {
 nlohmann::json string_config_value::to_json() {
   nlohmann::json json_data = {};
   json_data                = m_value;
-  // json_data[m_config_name] = m_value;
   return json_data;
 }
 
 bool string_config_value::from_json(const nlohmann::json& json_data) {
   try {
     m_value = json_data.get<std::string>();
-    /*	 if (json_data.find(m_config_name) != json_data.end()) {
-                     m_value = json_data[m_config_name].get<std::string>();
-                     return true;
-             }*/
-
   } catch (nlohmann::detail::exception& e) {
     // TODO:
   } catch (std::exception& e) {
@@ -263,11 +261,11 @@ void local_interface::from_yaml(const YAML::Node& node) {
 
 nlohmann::json local_interface::to_json() {
   nlohmann::json json_data               = {};
-  json_data[m_host.get_config_name()]    = m_if_name.get_value();
-  json_data[m_port.get_config_name()]    = m_port.get_value();
-  json_data[m_if_name.get_config_name()] = m_if_name.get_value();
-  json_data["mtu"]                       = m_mtu;
-  json_data["addr4"]                     = conv::toString(m_addr4);
+  json_data[m_if_name.get_config_name()] = m_if_name.to_json();
+  if (!m_is_local_interface) return json_data;
+  json_data[m_port.get_config_name()] = m_port.to_json();
+  json_data["mtu"]                    = m_mtu;
+  json_data["addr4"]                  = conv::toString(m_addr4);
   return json_data;
 }
 
@@ -282,7 +280,10 @@ bool local_interface::from_json(const nlohmann::json& json_data) {
     if (json_data.find(m_if_name.get_config_name()) != json_data.end()) {
       m_if_name.from_json(json_data[m_if_name.get_config_name()]);
     }
-    // TODO: MTU/IP Addr
+    if (json_data.find("mtu") != json_data.end()) {
+      m_mtu = json_data["mtu"].get<int>();
+    }
+    // TODO: IP Addr
 
   } catch (nlohmann::detail::exception& e) {
     // TODO:
@@ -408,14 +409,16 @@ void sbi_interface::from_yaml(const YAML::Node& node) {
 }
 
 nlohmann::json sbi_interface::to_json() {
-  nlohmann::json json_data                   = {};
+  nlohmann::json json_data = {};
+  set_is_local_interface(false);
   json_data                                  = local_interface::to_json();
-  json_data[m_api_version.get_config_name()] = m_api_version.get_value();
+  json_data[m_api_version.get_config_name()] = m_api_version.to_json();
   json_data["url"]                           = m_url;
   return json_data;
 }
 
 bool sbi_interface::from_json(const nlohmann::json& json_data) {
+  set_is_local_interface(false);
   try {
     local_interface::from_json(json_data);
 
@@ -526,7 +529,6 @@ nlohmann::json nf::to_json() {
   nlohmann::json json_data           = {};
   json_data[m_sbi.get_config_name()] = m_sbi.to_json();
   if (m_nx.is_set()) json_data[m_nx.get_config_name()] = m_nx.to_json();
-  json_data["url"] = m_url;
   return json_data;
 }
 
@@ -643,7 +645,7 @@ void nf_features_config::from_yaml(const YAML::Node& node) {
 
 nlohmann::json nf_features_config::to_json() {
   nlohmann::json json_data = {};
-  json_data                = m_string_value.get_value();
+  json_data                = m_string_value.to_json();
   return json_data;
 }
 
@@ -728,6 +730,49 @@ void database_config::from_yaml(const YAML::Node& node) {
   }
 }
 
+nlohmann::json database_config::to_json() {
+  nlohmann::json json_data                     = {};
+  json_data[m_host.get_config_name()]          = m_host.to_json();
+  json_data[m_user.get_config_name()]          = m_user.to_json();
+  json_data[m_pass.get_config_name()]          = m_pass.to_json();
+  json_data[m_database_name.get_config_name()] = m_database_name.to_json();
+  json_data[m_random.get_config_name()]        = m_random.to_json();
+  json_data[m_connection_timeout.get_config_name()] =
+      m_connection_timeout.to_json();
+  return json_data;
+}
+
+bool database_config::from_json(const nlohmann::json& json_data) {
+  try {
+    if (json_data.find(m_host.get_config_name()) != json_data.end()) {
+      m_host.from_json(json_data[m_host.get_config_name()]);
+    }
+
+    if (json_data.find(m_user.get_config_name()) != json_data.end()) {
+      m_user.from_json(json_data[m_user.get_config_name()]);
+    }
+    if (json_data.find(m_pass.get_config_name()) != json_data.end()) {
+      m_pass.from_json(json_data[m_pass.get_config_name()]);
+    }
+    if (json_data.find(m_database_name.get_config_name()) != json_data.end()) {
+      m_database_name.from_json(json_data[m_database_name.get_config_name()]);
+    }
+    if (json_data.find(m_random.get_config_name()) != json_data.end()) {
+      m_random.from_json(json_data[m_random.get_config_name()]);
+    }
+    if (json_data.find(m_connection_timeout.get_config_name()) !=
+        json_data.end()) {
+      m_connection_timeout.from_json(
+          json_data[m_connection_timeout.get_config_name()]);
+    }
+  } catch (nlohmann::detail::exception& e) {
+    // TODO:
+  } catch (std::exception& e) {
+    // TODO:
+  }
+  return false;
+}
+
 std::string database_config::to_string(const std::string& indent) const {
   std::string out;
   unsigned int inner_width = get_inner_width(indent.length());
@@ -785,12 +830,13 @@ int database_config::get_connection_timeout() const {
 ue_dns::ue_dns(
     const std::string& primary_dns_v4, const std::string& secondary_dns_v4,
     const std::string& primary_dns_v6, const std::string& secondary_dns_v6) {
-  m_primary_dns_v4 = string_config_value("Primary DNS IPv4", primary_dns_v4);
-  m_primary_dns_v6 = string_config_value("Primary DNS IPv6", primary_dns_v6);
+  set_config_name("ue_dns");
+  m_primary_dns_v4 = string_config_value("primary_dns_ipv4", primary_dns_v4);
+  m_primary_dns_v6 = string_config_value("primary_dns_ipv6", primary_dns_v6);
   m_secondary_dns_v6 =
-      string_config_value("Secondary DNS IPv6", secondary_dns_v6);
+      string_config_value("secondary_dns_ipv6", secondary_dns_v6);
   m_secondary_dns_v4 =
-      string_config_value("Secondary DNS IPv4", secondary_dns_v4);
+      string_config_value("secondary_dns_ipv4", secondary_dns_v4);
 
   m_primary_dns_v4.set_validation_regex(IPV4_ADDRESS_VALIDATOR_REGEX);
   m_primary_dns_v6.set_validation_regex(IPV6_ADDRESS_VALIDATOR_REGEX);
@@ -826,12 +872,12 @@ void ue_dns::from_yaml(const YAML::Node& node) {
 
 nlohmann::json ue_dns::to_json() {
   nlohmann::json json_data                      = {};
-  json_data[m_primary_dns_v4.get_config_name()] = m_primary_dns_v4.get_value();
+  json_data[m_primary_dns_v4.get_config_name()] = m_primary_dns_v4.to_json();
   json_data[m_secondary_dns_v4.get_config_name()] =
-      m_secondary_dns_v4.get_value();
-  json_data[m_primary_dns_v6.get_config_name()] = m_primary_dns_v6.get_value();
+      m_secondary_dns_v4.to_json();
+  json_data[m_primary_dns_v6.get_config_name()] = m_primary_dns_v6.to_json();
   json_data[m_secondary_dns_v6.get_config_name()] =
-      m_secondary_dns_v6.get_value();
+      m_secondary_dns_v6.to_json();
   return json_data;
 }
 
@@ -975,11 +1021,11 @@ void dnn_config::from_yaml(const YAML::Node& node) {
 
 nlohmann::json dnn_config::to_json() {
   nlohmann::json json_data           = {};
-  json_data[m_dnn.get_config_name()] = m_dnn.get_value();
+  json_data[m_dnn.get_config_name()] = m_dnn.to_json();
   json_data[m_pdu_session_type.get_config_name()] =
-      m_pdu_session_type.get_value();
-  json_data[m_ipv4_pool.get_config_name()]   = m_ipv4_pool.get_value();
-  json_data[m_ipv6_prefix.get_config_name()] = m_ipv6_prefix.get_value();
+      m_pdu_session_type.to_json();
+  json_data[m_ipv4_pool.get_config_name()]   = m_ipv4_pool.to_json();
+  json_data[m_ipv6_prefix.get_config_name()] = m_ipv6_prefix.to_json();
 
   json_data["ipv4_pool_start_ip"] = conv::toString(m_ipv4_pool_start_ip);
   json_data["ipv4_pool_end_ip"]   = conv::toString(m_ipv4_pool_end_ip);

@@ -109,6 +109,12 @@ class config_type {
    */
   [[nodiscard]] virtual const std::string& get_config_name() const;
 
+  /**
+   * Sets the configuration name
+   *  @param const std::string&: Name of the config_type
+   */
+  virtual void set_config_name(const std::string& name);
+
   virtual ~config_type() = default;
 
  protected:
@@ -327,9 +333,8 @@ class database_config : public config_type {
   explicit database_config();
 
   void from_yaml(const YAML::Node& node) override;
-  // TODO:
-  // nlohmann::json to_json() override;
-  // bool from_json(const nlohmann::json& json_data) override;
+  nlohmann::json to_json() override;
+  bool from_json(const nlohmann::json& json_data) override;
 
   [[nodiscard]] std::string to_string(const std::string& indent) const override;
   [[nodiscard]] const std::string& get_host() const;

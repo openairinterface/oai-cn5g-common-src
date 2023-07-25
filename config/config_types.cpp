@@ -58,6 +58,10 @@ const std::string& config_type::get_config_name() const {
   return m_config_name;
 }
 
+void config_type::set_config_name(const std::string& name) {
+  m_config_name = name;
+}
+
 unsigned int config_type::get_inner_width(unsigned int indent_length) {
   unsigned int inner_width = COLUMN_WIDTH;
   if (indent_length < COLUMN_WIDTH) {
@@ -103,6 +107,23 @@ void string_config_value::from_yaml(const YAML::Node& node) {
   m_set   = true;
 }
 
+nlohmann::json string_config_value::to_json() {
+  nlohmann::json json_data = {};
+  json_data                = m_value;
+  return json_data;
+}
+
+bool string_config_value::from_json(const nlohmann::json& json_data) {
+  try {
+    m_value = json_data.get<std::string>();
+  } catch (nlohmann::detail::exception& e) {
+    // TODO:
+  } catch (std::exception& e) {
+    // TODO:
+  }
+  return false;
+}
+
 std::string string_config_value::to_string(const std::string&) const {
   std::string out;
   return out.append(m_value);
@@ -136,6 +157,24 @@ void option_config_value::from_yaml(const YAML::Node& node) {
   m_set   = true;
 }
 
+nlohmann::json option_config_value::to_json() {
+  nlohmann::json json_data = {};
+  json_data                = m_value;
+  return json_data;
+}
+
+bool option_config_value::from_json(const nlohmann::json& json_data) {
+  try {
+    m_value = json_data.get<bool>();
+
+  } catch (nlohmann::detail::exception& e) {
+    // TODO:
+  } catch (std::exception& e) {
+    // TODO:
+  }
+  return false;
+}
+
 std::string option_config_value::to_string(const std::string&) const {
   std::string val = m_value ? "Yes" : "No";
   return val;
@@ -154,6 +193,24 @@ int_config_value::int_config_value(const std::string& name, int value) {
 void int_config_value::from_yaml(const YAML::Node& node) {
   m_value = node.as<int>();
   m_set   = true;
+}
+
+nlohmann::json int_config_value::to_json() {
+  nlohmann::json json_data = {};
+  json_data                = m_value;
+  return json_data;
+}
+
+bool int_config_value::from_json(const nlohmann::json& json_data) {
+  try {
+    m_value = json_data.get<int>();
+
+  } catch (nlohmann::detail::exception& e) {
+    // TODO:
+  } catch (std::exception& e) {
+    // TODO:
+  }
+  return false;
 }
 
 std::string int_config_value::to_string(const std::string&) const {
@@ -181,10 +238,10 @@ void int_config_value::set_validation_interval(int min, int max) {
 local_interface::local_interface(
     const std::string& name, const std::string& host, uint16_t port,
     const std::string& if_name) {
-  m_host        = string_config_value("Host", host);
+  m_host        = string_config_value("host", host);
   m_config_name = name;
-  m_if_name     = string_config_value("Interface", if_name);
-  m_port        = int_config_value("Port", port);
+  m_if_name     = string_config_value("interface_name", if_name);
+  m_port        = int_config_value("port", port);
   m_port.set_validation_interval(PORT_MIN_VALUE, PORT_MAX_VALUE);
   m_host.set_validation_regex(HOST_VALIDATOR_REGEX);
   m_set                = true;
@@ -200,6 +257,40 @@ void local_interface::from_yaml(const YAML::Node& node) {
   }
   m_set                = true;
   m_is_local_interface = true;
+}
+
+nlohmann::json local_interface::to_json() {
+  nlohmann::json json_data               = {};
+  json_data[m_if_name.get_config_name()] = m_if_name.to_json();
+  if (!m_is_local_interface) return json_data;
+  json_data[m_port.get_config_name()] = m_port.to_json();
+  json_data["mtu"]                    = m_mtu;
+  json_data["addr4"]                  = conv::toString(m_addr4);
+  return json_data;
+}
+
+bool local_interface::from_json(const nlohmann::json& json_data) {
+  try {
+    if (json_data.find(m_host.get_config_name()) != json_data.end()) {
+      m_host.from_json(json_data[m_host.get_config_name()]);
+    }
+    if (json_data.find(m_port.get_config_name()) != json_data.end()) {
+      m_port.from_json(json_data[m_port.get_config_name()]);
+    }
+    if (json_data.find(m_if_name.get_config_name()) != json_data.end()) {
+      m_if_name.from_json(json_data[m_if_name.get_config_name()]);
+    }
+    if (json_data.find("mtu") != json_data.end()) {
+      m_mtu = json_data["mtu"].get<int>();
+    }
+    // TODO: IP Addr
+
+  } catch (nlohmann::detail::exception& e) {
+    // TODO:
+  } catch (std::exception& e) {
+    // TODO:
+  }
+  return false;
 }
 
 std::string local_interface::to_string(const std::string& indent) const {
@@ -296,8 +387,8 @@ sbi_interface::sbi_interface(
     const std::string& api_version, const std::string& interface_name)
     : local_interface(name, host, port, interface_name) {
   m_config_name = name;
-  m_host        = string_config_value("Host", host);
-  m_api_version = string_config_value("API Version", api_version);
+  m_host        = string_config_value("host", host);
+  m_api_version = string_config_value("api_version", api_version);
 
   m_host.set_validation_regex(HOST_VALIDATOR_REGEX);
   m_api_version.set_validation_regex(API_VERSION_REGEX);
@@ -315,6 +406,36 @@ void sbi_interface::from_yaml(const YAML::Node& node) {
   }
   set_url();
   m_set = true;
+}
+
+nlohmann::json sbi_interface::to_json() {
+  nlohmann::json json_data = {};
+  set_is_local_interface(false);
+  json_data                                  = local_interface::to_json();
+  json_data[m_api_version.get_config_name()] = m_api_version.to_json();
+  json_data["url"]                           = m_url;
+  return json_data;
+}
+
+bool sbi_interface::from_json(const nlohmann::json& json_data) {
+  set_is_local_interface(false);
+  try {
+    local_interface::from_json(json_data);
+
+    if (json_data.find(m_api_version.get_config_name()) != json_data.end()) {
+      m_api_version.from_json(json_data[m_api_version.get_config_name()]);
+    }
+
+    if (json_data.find("url") != json_data.end()) {
+      m_url = json_data["url"].get<std::string>();
+    }
+
+  } catch (nlohmann::detail::exception& e) {
+    // TODO:
+  } catch (std::exception& e) {
+    // TODO:
+  }
+  return false;
 }
 
 std::string sbi_interface::to_string(const std::string& indent) const {
@@ -377,7 +498,7 @@ nf::nf(
     const std::string& name, const std::string& host, const sbi_interface& sbi)
     : m_nx() {
   m_config_name = name;
-  m_host        = string_config_value("Host", host);
+  m_host        = string_config_value("host", host);
   m_sbi         = sbi;
   m_set         = true;
   m_host.set_validation_regex(HOST_VALIDATOR_REGEX);
@@ -402,6 +523,38 @@ void nf::from_yaml(const YAML::Node& node) {
   }
   m_set = true;
   set_url();
+}
+
+nlohmann::json nf::to_json() {
+  nlohmann::json json_data           = {};
+  json_data[m_sbi.get_config_name()] = m_sbi.to_json();
+  if (m_nx.is_set()) json_data[m_nx.get_config_name()] = m_nx.to_json();
+  return json_data;
+}
+
+bool nf::from_json(const nlohmann::json& json_data) {
+  try {
+    if (json_data.find(m_sbi.get_config_name()) != json_data.end()) {
+      m_sbi.from_json(json_data[m_sbi.get_config_name()]);
+    }
+    // TODO:
+    if (json_data.find("n2") != json_data.end()) {
+      m_nx.from_json(json_data["n2"]);
+    }
+    if (json_data.find("n4") != json_data.end()) {
+      m_nx.from_json(json_data["n4"]);
+    }
+
+    if (json_data.find("url") != json_data.end()) {
+      m_url = json_data["url"].get<std::string>();
+    }
+
+  } catch (nlohmann::detail::exception& e) {
+    // TODO:
+  } catch (std::exception& e) {
+    // TODO:
+  }
+  return false;
 }
 
 std::string nf::to_string(const std::string& indent) const {
@@ -490,6 +643,30 @@ void nf_features_config::from_yaml(const YAML::Node& node) {
   m_set = true;
 }
 
+nlohmann::json nf_features_config::to_json() {
+  nlohmann::json json_data = {};
+  if (m_option_value.is_set())
+    json_data = m_option_value.to_json();
+  else
+    json_data = m_string_value.to_json();
+  return json_data;
+}
+
+bool nf_features_config::from_json(const nlohmann::json& json_data) {
+  try {
+    // TODO:
+    /*   if (json_data.find(m_config_name) != json_data.end()) {
+           m_option_value.from_json(json_data[m_config_name]);
+       }
+       */
+  } catch (nlohmann::detail::exception& e) {
+    // TODO:
+  } catch (std::exception& e) {
+    // TODO:
+  }
+  return false;
+}
+
 void nf_features_config::set_value(const YAML::Node& node) {
   try {
     m_option_value.from_yaml(node);
@@ -558,6 +735,49 @@ void database_config::from_yaml(const YAML::Node& node) {
   }
 }
 
+nlohmann::json database_config::to_json() {
+  nlohmann::json json_data                     = {};
+  json_data[m_host.get_config_name()]          = m_host.to_json();
+  json_data[m_user.get_config_name()]          = m_user.to_json();
+  json_data[m_pass.get_config_name()]          = m_pass.to_json();
+  json_data[m_database_name.get_config_name()] = m_database_name.to_json();
+  json_data[m_random.get_config_name()]        = m_random.to_json();
+  json_data[m_connection_timeout.get_config_name()] =
+      m_connection_timeout.to_json();
+  return json_data;
+}
+
+bool database_config::from_json(const nlohmann::json& json_data) {
+  try {
+    if (json_data.find(m_host.get_config_name()) != json_data.end()) {
+      m_host.from_json(json_data[m_host.get_config_name()]);
+    }
+
+    if (json_data.find(m_user.get_config_name()) != json_data.end()) {
+      m_user.from_json(json_data[m_user.get_config_name()]);
+    }
+    if (json_data.find(m_pass.get_config_name()) != json_data.end()) {
+      m_pass.from_json(json_data[m_pass.get_config_name()]);
+    }
+    if (json_data.find(m_database_name.get_config_name()) != json_data.end()) {
+      m_database_name.from_json(json_data[m_database_name.get_config_name()]);
+    }
+    if (json_data.find(m_random.get_config_name()) != json_data.end()) {
+      m_random.from_json(json_data[m_random.get_config_name()]);
+    }
+    if (json_data.find(m_connection_timeout.get_config_name()) !=
+        json_data.end()) {
+      m_connection_timeout.from_json(
+          json_data[m_connection_timeout.get_config_name()]);
+    }
+  } catch (nlohmann::detail::exception& e) {
+    // TODO:
+  } catch (std::exception& e) {
+    // TODO:
+  }
+  return false;
+}
+
 std::string database_config::to_string(const std::string& indent) const {
   std::string out;
   unsigned int inner_width = get_inner_width(indent.length());
@@ -615,12 +835,13 @@ int database_config::get_connection_timeout() const {
 ue_dns::ue_dns(
     const std::string& primary_dns_v4, const std::string& secondary_dns_v4,
     const std::string& primary_dns_v6, const std::string& secondary_dns_v6) {
-  m_primary_dns_v4 = string_config_value("Primary DNS IPv4", primary_dns_v4);
-  m_primary_dns_v6 = string_config_value("Primary DNS IPv6", primary_dns_v6);
+  set_config_name("ue_dns");
+  m_primary_dns_v4 = string_config_value("primary_dns_ipv4", primary_dns_v4);
+  m_primary_dns_v6 = string_config_value("primary_dns_ipv6", primary_dns_v6);
   m_secondary_dns_v6 =
-      string_config_value("Secondary DNS IPv6", secondary_dns_v6);
+      string_config_value("secondary_dns_ipv6", secondary_dns_v6);
   m_secondary_dns_v4 =
-      string_config_value("Secondary DNS IPv4", secondary_dns_v4);
+      string_config_value("secondary_dns_ipv4", secondary_dns_v4);
 
   m_primary_dns_v4.set_validation_regex(IPV4_ADDRESS_VALIDATOR_REGEX);
   m_primary_dns_v6.set_validation_regex(IPV6_ADDRESS_VALIDATOR_REGEX);
@@ -652,6 +873,45 @@ void ue_dns::from_yaml(const YAML::Node& node) {
   if (node["secondary_ipv6"]) {
     m_secondary_dns_v6.from_yaml(node["secondary_ipv6"]);
   }
+}
+
+nlohmann::json ue_dns::to_json() {
+  nlohmann::json json_data                      = {};
+  json_data[m_primary_dns_v4.get_config_name()] = m_primary_dns_v4.to_json();
+  json_data[m_secondary_dns_v4.get_config_name()] =
+      m_secondary_dns_v4.to_json();
+  json_data[m_primary_dns_v6.get_config_name()] = m_primary_dns_v6.to_json();
+  json_data[m_secondary_dns_v6.get_config_name()] =
+      m_secondary_dns_v6.to_json();
+  return json_data;
+}
+
+bool ue_dns::from_json(const nlohmann::json& json_data) {
+  try {
+    if (json_data.find(m_primary_dns_v4.get_config_name()) != json_data.end()) {
+      m_primary_dns_v4.from_json(json_data[m_primary_dns_v4.get_config_name()]);
+    }
+
+    if (json_data.find(m_secondary_dns_v4.get_config_name()) !=
+        json_data.end()) {
+      m_secondary_dns_v4.from_json(
+          json_data[m_secondary_dns_v4.get_config_name()]);
+    }
+    if (json_data.find(m_primary_dns_v6.get_config_name()) != json_data.end()) {
+      m_primary_dns_v6.from_json(json_data[m_primary_dns_v6.get_config_name()]);
+    }
+    if (json_data.find(m_secondary_dns_v6.get_config_name()) !=
+        json_data.end()) {
+      m_secondary_dns_v6.from_json(
+          json_data[m_secondary_dns_v6.get_config_name()]);
+    }
+
+  } catch (nlohmann::detail::exception& e) {
+    // TODO:
+  } catch (std::exception& e) {
+    // TODO:
+  }
+  return false;
 }
 
 std::string ue_dns::to_string(const std::string& indent) const {
@@ -762,6 +1022,52 @@ void dnn_config::from_yaml(const YAML::Node& node) {
     m_ue_dns.from_yaml(node["ue_dns"]);
     m_ue_dns.set_config();
   }
+}
+
+nlohmann::json dnn_config::to_json() {
+  nlohmann::json json_data           = {};
+  json_data[m_dnn.get_config_name()] = m_dnn.to_json();
+  json_data[m_pdu_session_type.get_config_name()] =
+      m_pdu_session_type.to_json();
+  json_data[m_ipv4_pool.get_config_name()]   = m_ipv4_pool.to_json();
+  json_data[m_ipv6_prefix.get_config_name()] = m_ipv6_prefix.to_json();
+
+  json_data["ipv4_pool_start_ip"] = conv::toString(m_ipv4_pool_start_ip);
+  json_data["ipv4_pool_end_ip"]   = conv::toString(m_ipv4_pool_end_ip);
+  json_data["ipv6_prefix_ip"]     = conv::toString(m_ipv6_prefix_ip);
+  json_data["ipv6_prefix_length"] = m_ipv6_prefix_length;
+  return json_data;
+}
+
+bool dnn_config::from_json(const nlohmann::json& json_data) {
+  try {
+    if (json_data.find(m_dnn.get_config_name()) != json_data.end()) {
+      m_dnn.from_json(json_data[m_dnn.get_config_name()]);
+    }
+    if (json_data.find(m_pdu_session_type.get_config_name()) !=
+        json_data.end()) {
+      m_pdu_session_type.from_json(
+          json_data[m_pdu_session_type.get_config_name()]);
+    }
+    if (json_data.find(m_ipv4_pool.get_config_name()) != json_data.end()) {
+      m_ipv4_pool.from_json(json_data[m_ipv4_pool.get_config_name()]);
+    }
+
+    // TODO: trim
+    m_ipv4_pool_start_ip =
+        safe_convert_ip(json_data["ipv4_pool_start_ip"].get<std::string>());
+    m_ipv4_pool_end_ip =
+        safe_convert_ip(json_data["m_ipv4_pool_end_ip"].get<std::string>());
+    // TODO:
+    // m_ipv6_prefix_ip
+    // m_ipv6_prefix_length
+
+  } catch (nlohmann::detail::exception& e) {
+    // TODO:
+  } catch (std::exception& e) {
+    // TODO:
+  }
+  return false;
 }
 
 [[nodiscard]] std::string dnn_config::to_string(
@@ -916,12 +1222,29 @@ nf_http_version::nf_http_version() {
   m_set     = false;
   m_version = string_config_value(NF_CONFIG_HTTP_NAME, "1.1");
   m_version.set_validation_regex("1|1.1|2|3");
-  m_config_name = NF_CONFIG_HTTP_LABEL;
+  m_config_name = NF_CONFIG_HTTP_NAME;
 }
 
 void nf_http_version::from_yaml(const YAML::Node& node) {
   m_set = true;
   m_version.from_yaml(node);
+}
+
+nlohmann::json nf_http_version::to_json() {
+  nlohmann::json json_data = {};
+  json_data                = m_version.to_json();
+  return json_data;
+}
+
+bool nf_http_version::from_json(const nlohmann::json& json_data) {
+  try {
+    m_version.from_json(json_data);
+  } catch (nlohmann::detail::exception& e) {
+    // TODO:
+  } catch (std::exception& e) {
+    // TODO:
+  }
+  return false;
 }
 
 std::string nf_http_version::to_string(const std::string& indent) const {

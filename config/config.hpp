@@ -180,6 +180,8 @@ class config : public config_iface {
   void display() const override;
 
   void read_from_file(const std::string& file_path);
+  void to_json(nlohmann::json& json_data);
+  bool from_json(const nlohmann::json& json_data);
 
  protected:
   // to define for each NF which values are used

@@ -43,8 +43,6 @@ const std::string OUTER_LIST_ELEM = "-";
 const std::string EMPTY_LIST_ELEM = " ";
 
 class config_type {
-  friend class yaml_file_iface;
-
  public:
   /**
    * Returns a string representation of the config. The indent is prepended at
@@ -126,6 +124,10 @@ class config_type {
   static std::string add_indent(const std::string& indent);
 
   static in_addr safe_convert_ip(const std::string& ipv4_string);
+
+  static void get_ipv4_range(
+      const in_addr& ipv4_subnet, const uint8_t& ipv4_prefix, in_addr& start_ip,
+      in_addr& end_ip);
 
   static in6_addr safe_convert_ip6(const std::string& ipv6_string);
 };
@@ -229,6 +231,7 @@ class local_interface : public config_type {
 
   void set_is_local_interface(bool val);
   [[nodiscard]] bool is_local_interface() const;
+  void set_host(const std::string& host);
 };
 
 class sbi_interface : public local_interface {
@@ -264,16 +267,12 @@ class nf : public config_type {
 
  private:
   sbi_interface m_sbi;
-  local_interface m_nx;
   string_config_value m_host;
 
   std::string m_url;  // Moved from SBI interface
   void set_url();     // Moved from SBI interface
 
  public:
-  explicit nf(
-      const std::string& name, const std::string& host,
-      const sbi_interface& sbi, const local_interface& local);
   explicit nf(
       const std::string& name, const std::string& host,
       const sbi_interface& sbi);
@@ -286,7 +285,6 @@ class nf : public config_type {
   [[nodiscard]] std::string to_string(const std::string& indent) const override;
   void validate() override;
   [[nodiscard]] const sbi_interface& get_sbi() const;
-  [[nodiscard]] const local_interface& get_nx() const;
   [[nodiscard]] const std::string& get_host() const;
   [[nodiscard]] const std::string& get_url() const;
 };
@@ -384,11 +382,14 @@ class dnn_config : public config_type {
  private:
   string_config_value m_dnn;
   string_config_value m_pdu_session_type;
-  string_config_value m_ipv4_pool;
+  string_config_value m_ipv4_subnet;
   string_config_value m_ipv6_prefix;
   ue_dns m_ue_dns;
 
   // generated
+  int m_ipv4_prefix{};
+  in_addr m_ipv4_subnet_ip{};
+
   in_addr m_ipv4_pool_start_ip{};
   in_addr m_ipv4_pool_end_ip{};
   in6_addr m_ipv6_prefix_ip{};
@@ -400,7 +401,7 @@ class dnn_config : public config_type {
  public:
   explicit dnn_config(
       const std::string& dnn, const std::string& pdu_type,
-      const std::string& ipv4_pool, const std::string& ipv6_prefix);
+      const std::string& ipv4_subnet, const std::string& ipv6_prefix);
 
   void from_yaml(const YAML::Node& node) override;
   nlohmann::json to_json() override;
@@ -412,6 +413,9 @@ class dnn_config : public config_type {
 
   [[nodiscard]] const in_addr& get_ipv4_pool_start() const;
   [[nodiscard]] const in_addr& get_ipv4_pool_end() const;
+  [[nodiscard]] const in_addr& get_ipv4_subnet() const;
+  [[nodiscard]] const in_addr& get_ipv4_subnet_mask() const;
+  [[nodiscard]] const int& get_ipv4_subnet_prefix() const;
   [[nodiscard]] const in6_addr& get_ipv6_prefix() const;
   [[nodiscard]] uint8_t get_ipv6_prefix_length() const;
   [[nodiscard]] const pdu_session_type_t& get_pdu_session_type() const;

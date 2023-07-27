@@ -113,7 +113,7 @@ void config::read_from_file(const std::string& file_path) {
           m_dnns.clear();
 
           for (const auto& yaml_dnn : elem.second) {
-            dnn_config cfg("default", "IPv4", "12.1.1.0-12.1.1.255", "");
+            dnn_config cfg("default", "IPv4", "12.1.1.0/24", "");
             cfg.from_yaml(yaml_dnn);
             m_dnns.push_back(cfg);
           }
@@ -242,7 +242,7 @@ std::string config::to_string() const {
     out.append("DNNs:\n");
   }
   for (const auto& dnn : m_dnns) {
-    out.append(dnn.to_string(indent));
+    if (dnn.is_set()) out.append(dnn.to_string(indent));
   }
 
   return out;

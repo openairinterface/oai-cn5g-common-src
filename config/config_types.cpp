@@ -35,6 +35,7 @@
 
 #include <fmt/format.h>
 #include <string>
+
 #include <regex>
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/classification.hpp>
@@ -79,6 +80,33 @@ in_addr config_type::safe_convert_ip(const std::string& ipv4_string) {
         fmt::format(+"The IP address {} is not valid", ipv4_string));
   }
   return ip;
+}
+
+void config_type::get_ipv4_range(
+    const in_addr& ipv4_domain, const uint8_t& ipv4_prefix, in_addr& start_ip,
+    in_addr& end_ip) {
+  uint32_t ipv4_subnet = ntohl(ipv4_domain.s_addr);
+
+  uint32_t startIP, endIP;
+
+  startIP = ipv4_subnet & ~(0xFFFFFFFF >> ipv4_prefix);
+  endIP   = startIP | (0xFFFFFFFF >> ipv4_prefix);
+
+  std::string start = std::to_string((startIP >> 24) & 0xFF) + "." +
+                      std::to_string((startIP >> 16) & 0xFF) + "." +
+                      std::to_string((startIP >> 8) & 0xFF) + "." +
+                      std::to_string(startIP & 0xFF);
+
+  std::string end = std::to_string((endIP >> 24) & 0xFF) + "." +
+                    std::to_string((endIP >> 16) & 0xFF) + "." +
+                    std::to_string((endIP >> 8) & 0xFF) + "." +
+                    std::to_string(endIP & 0xFF);
+
+  start_ip = conv::fromString(start);
+  end_ip   = conv::fromString(end);
+
+  start_ip.s_addr = start_ip.s_addr + be32toh(1);
+  end_ip.s_addr   = end_ip.s_addr - be32toh(1);
 }
 
 in6_addr config_type::safe_convert_ip6(const std::string& ipv6_string) {
@@ -382,6 +410,13 @@ bool local_interface::is_local_interface() const {
   return m_is_local_interface;
 }
 
+void local_interface::set_host(const std::string& host) {
+  string_config_value host_val =
+      string_config_value(m_host.get_config_name(), host);
+  host_val.set_validation_regex(HOST_VALIDATOR_REGEX);
+  m_host = host_val;
+}
+
 sbi_interface::sbi_interface(
     const std::string& name, const std::string& host, uint16_t port,
     const std::string& api_version, const std::string& interface_name)
@@ -487,16 +522,8 @@ void sbi_interface::set_url() {
 }
 
 nf::nf(
-    const std::string& name, const std::string& host, const sbi_interface& sbi,
-    const local_interface& local)
-    : nf(name, host, sbi) {
-  m_nx = local;
-  set_url();
-}
-
-nf::nf(
-    const std::string& name, const std::string& host, const sbi_interface& sbi)
-    : m_nx() {
+    const std::string& name, const std::string& host,
+    const sbi_interface& sbi) {
   m_config_name = name;
   m_host        = string_config_value("host", host);
   m_sbi         = sbi;
@@ -513,14 +540,6 @@ void nf::from_yaml(const YAML::Node& node) {
     m_sbi.m_host = m_host;
     m_sbi.from_yaml(node["sbi"]);
   }
-  if (node["n2"] and m_nx.is_set()) {
-    m_nx.m_host = m_host;
-    m_nx.from_yaml(node["n2"]);
-  }
-  if (node["n4"] and m_nx.is_set()) {
-    m_nx.m_host = m_host;
-    m_nx.from_yaml(node["n4"]);
-  }
   m_set = true;
   set_url();
 }
@@ -528,7 +547,6 @@ void nf::from_yaml(const YAML::Node& node) {
 nlohmann::json nf::to_json() {
   nlohmann::json json_data           = {};
   json_data[m_sbi.get_config_name()] = m_sbi.to_json();
-  if (m_nx.is_set()) json_data[m_nx.get_config_name()] = m_nx.to_json();
   return json_data;
 }
 
@@ -536,13 +554,6 @@ bool nf::from_json(const nlohmann::json& json_data) {
   try {
     if (json_data.find(m_sbi.get_config_name()) != json_data.end()) {
       m_sbi.from_json(json_data[m_sbi.get_config_name()]);
-    }
-    // TODO:
-    if (json_data.find("n2") != json_data.end()) {
-      m_nx.from_json(json_data["n2"]);
-    }
-    if (json_data.find("n4") != json_data.end()) {
-      m_nx.from_json(json_data["n4"]);
     }
 
     if (json_data.find("url") != json_data.end()) {
@@ -577,12 +588,6 @@ std::string nf::to_string(const std::string& indent) const {
             fmt::format("{} {}\n", OUTER_LIST_ELEM, m_sbi.get_config_name()));
     out.append(m_sbi.to_string(add_indent(inner_indent)));
   }
-  if (m_nx.is_set()) {
-    out.append(inner_indent)
-        .append(
-            fmt::format("{} {}\n", OUTER_LIST_ELEM, m_nx.get_config_name()));
-    out.append(m_nx.to_string(add_indent(inner_indent)));
-  }
 
   return out;
 }
@@ -591,15 +596,10 @@ void nf::validate() {
   if (!m_set) return;
   m_host.validate();
   m_sbi.validate();
-  m_nx.validate();
 }
 
 const sbi_interface& nf::get_sbi() const {
   return m_sbi;
-}
-
-const local_interface& nf::get_nx() const {
-  return m_nx;
 }
 
 const std::string& nf::get_host() const {
@@ -835,7 +835,7 @@ int database_config::get_connection_timeout() const {
 ue_dns::ue_dns(
     const std::string& primary_dns_v4, const std::string& secondary_dns_v4,
     const std::string& primary_dns_v6, const std::string& secondary_dns_v6) {
-  set_config_name("ue_dns");
+  m_config_name    = "ue_dns";
   m_primary_dns_v4 = string_config_value("primary_dns_ipv4", primary_dns_v4);
   m_primary_dns_v6 = string_config_value("primary_dns_ipv6", primary_dns_v6);
   m_secondary_dns_v6 =
@@ -979,12 +979,12 @@ const in6_addr& ue_dns::get_secondary_dns_v6() const {
 
 dnn_config::dnn_config(
     const std::string& dnn, const std::string& pdu_type,
-    const std::string& ipv4_pool, const std::string& ipv6_prefix)
+    const std::string& ipv4_subnet, const std::string& ipv6_prefix)
     : m_ue_dns("8.8.8.8", "1.1.1.1", "", "") {
   m_config_name      = "DNN";
   m_dnn              = string_config_value("DNN", dnn);
   m_pdu_session_type = string_config_value("PDU session type", pdu_type);
-  m_ipv4_pool        = string_config_value("IPv4 pool", ipv4_pool);
+  m_ipv4_subnet      = string_config_value("IPv4 subnet", ipv4_subnet);
   m_ipv6_prefix      = string_config_value("IPv6 prefix", ipv6_prefix);
   // we unset it here, so that we can check if we can overwrite it from the
   // default UE DNS config
@@ -993,11 +993,9 @@ dnn_config::dnn_config(
   // here we have to cut the end $ and start ^ from the regex for it to work
   std::string start_ipv4 = IPV4_ADDRESS_VALIDATOR_REGEX.substr(
       0, IPV4_ADDRESS_VALIDATOR_REGEX.length() - 1);
-  std::string end_ipv4 = IPV4_ADDRESS_VALIDATOR_REGEX.substr(
-      1, IPV4_ADDRESS_VALIDATOR_REGEX.length());
 
   m_pdu_session_type.set_validation_regex(PDU_SESSION_TYPE_REGEX);
-  m_ipv4_pool.set_validation_regex(start_ipv4 + "( )*-( )*" + end_ipv4);
+  m_ipv4_subnet.set_validation_regex(start_ipv4 + "/[0-9]{1,2}");
   m_ipv6_prefix.set_validation_regex(IPV6_ADDRESS_VALIDATOR_REGEX);
   if (ipv6_prefix.empty()) {
     m_ipv6_prefix.unset_config();
@@ -1012,8 +1010,8 @@ void dnn_config::from_yaml(const YAML::Node& node) {
   if (node["pdu_session_type"]) {
     m_pdu_session_type.from_yaml(node["pdu_session_type"]);
   }
-  if (node["ipv4_pool"]) {
-    m_ipv4_pool.from_yaml(node["ipv4_pool"]);
+  if (node["ipv4_subnet"]) {
+    m_ipv4_subnet.from_yaml(node["ipv4_subnet"]);
   }
   if (node["ipv6_prefix"]) {
     m_ipv6_prefix.from_yaml(node["ipv6_prefix"]);
@@ -1029,7 +1027,7 @@ nlohmann::json dnn_config::to_json() {
   json_data[m_dnn.get_config_name()] = m_dnn.to_json();
   json_data[m_pdu_session_type.get_config_name()] =
       m_pdu_session_type.to_json();
-  json_data[m_ipv4_pool.get_config_name()]   = m_ipv4_pool.to_json();
+  json_data[m_ipv4_subnet.get_config_name()] = m_ipv4_subnet.to_json();
   json_data[m_ipv6_prefix.get_config_name()] = m_ipv6_prefix.to_json();
 
   json_data["ipv4_pool_start_ip"] = conv::toString(m_ipv4_pool_start_ip);
@@ -1049,8 +1047,8 @@ bool dnn_config::from_json(const nlohmann::json& json_data) {
       m_pdu_session_type.from_json(
           json_data[m_pdu_session_type.get_config_name()]);
     }
-    if (json_data.find(m_ipv4_pool.get_config_name()) != json_data.end()) {
-      m_ipv4_pool.from_json(json_data[m_ipv4_pool.get_config_name()]);
+    if (json_data.find(m_ipv4_subnet.get_config_name()) != json_data.end()) {
+      m_ipv4_subnet.from_json(json_data[m_ipv4_subnet.get_config_name()]);
     }
 
     // TODO: trim
@@ -1095,12 +1093,13 @@ bool dnn_config::from_json(const nlohmann::json& json_data) {
             BASE_FORMATTER, INNER_LIST_ELEM, m_ipv6_prefix.get_config_name(),
             inner_width, m_ipv6_prefix.to_string("")));
   }
-  if (m_pdu_session_type_generated == PDU_SESSION_TYPE_E_IPV4V6 ||
-      m_pdu_session_type_generated == PDU_SESSION_TYPE_E_IPV4) {
+  if ((m_pdu_session_type_generated == PDU_SESSION_TYPE_E_IPV4V6 ||
+       m_pdu_session_type_generated == PDU_SESSION_TYPE_E_IPV4) &&
+      !m_ipv4_subnet.to_string("").empty()) {
     out.append(inner_indent)
         .append(fmt::format(
-            BASE_FORMATTER, INNER_LIST_ELEM, m_ipv4_pool.get_config_name(),
-            inner_width, m_ipv4_pool.to_string("")));
+            BASE_FORMATTER, INNER_LIST_ELEM, m_ipv4_subnet.get_config_name(),
+            inner_width, m_ipv4_subnet.to_string("")));
   }
   out.append(inner_indent)
       .append(fmt::format("{} {}:\n", INNER_LIST_ELEM, "DNS Settings"));
@@ -1113,7 +1112,7 @@ bool dnn_config::from_json(const nlohmann::json& json_data) {
 
 void dnn_config::validate() {
   m_pdu_session_type.validate();
-  m_ipv4_pool.validate();
+  m_ipv4_subnet.validate();
   m_ipv6_prefix.validate();
   m_ue_dns.validate();
 
@@ -1125,31 +1124,25 @@ void dnn_config::validate() {
       m_pdu_session_type_generated ==
           pdu_session_type_e::PDU_SESSION_TYPE_E_IPV4V6) {
     std::vector<std::string> ips;
+    std::vector<std::string> ipsub;
+
     boost::split(
-        ips, m_ipv4_pool.get_value(), boost::is_any_of("-"),
+        ipsub, m_ipv4_subnet.get_value(), boost::is_any_of("/"),
         boost::token_compress_on);
 
-    if (ips.size() != 2) {
+    if (ipsub.size() != 2) {
       throw std::runtime_error(fmt::format(
-          "The IP address pool {} is not valid", m_ipv4_pool.get_value()));
+          "The IP address subnet {} is not valid", m_ipv4_subnet.get_value()));
     }
 
-    boost::trim_left(ips[0]);
-    boost::trim_right(ips[0]);
-    boost::trim_left(ips[1]);
-    boost::trim_right(ips[1]);
+    boost::trim_left(ipsub[0]);
+    boost::trim_right(ipsub[0]);
 
-    m_ipv4_pool_start_ip = safe_convert_ip(ips[0]);
-    m_ipv4_pool_end_ip   = safe_convert_ip(ips[1]);
-
-    if (htonl(m_ipv4_pool_start_ip.s_addr) >=
-        htonl(m_ipv4_pool_end_ip.s_addr)) {
-      throw std::runtime_error(fmt::format(
-          "The IPv4 range {} is not valid. The start range must be below the "
-          "end "
-          "range",
-          m_ipv4_pool.get_value()));
-    }
+    m_ipv4_subnet_ip = safe_convert_ip(ipsub[0]);
+    m_ipv4_prefix    = std::stoi(ipsub[1], nullptr, 0);
+    get_ipv4_range(
+        m_ipv4_subnet_ip, m_ipv4_prefix, m_ipv4_pool_start_ip,
+        m_ipv4_pool_end_ip);
   }
   if (m_pdu_session_type_generated ==
           pdu_session_type_e::PDU_SESSION_TYPE_E_IPV6 ||
@@ -1190,6 +1183,14 @@ void dnn_config::validate() {
 
 [[nodiscard]] const in_addr& dnn_config::get_ipv4_pool_end() const {
   return m_ipv4_pool_end_ip;
+}
+
+[[nodiscard]] const in_addr& dnn_config::get_ipv4_subnet() const {
+  return m_ipv4_subnet_ip;
+}
+
+[[nodiscard]] const int& dnn_config::get_ipv4_subnet_prefix() const {
+  return m_ipv4_prefix;
 }
 
 [[nodiscard]] const in6_addr& dnn_config::get_ipv6_prefix() const {

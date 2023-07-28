@@ -22,6 +22,7 @@
 SET(CONFIG_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/config)
 
 include_directories(${CONFIG_DIR})
+include_directories(${SRC_TOP_DIR}/${MOUNTED_COMMON}/3gpp)
 
 SET(CONFIG_SRC_FILES
         ${CONFIG_DIR}/config.cpp

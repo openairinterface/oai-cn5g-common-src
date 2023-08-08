@@ -112,8 +112,8 @@ static std::string get_value_formatter(int level) {
       (level + 1) % 2 == 0 ? INNER_LIST_ELEM : OUTER_LIST_ELEM;
 
   unsigned int inner_width = COLUMN_WIDTH;
-  if (base_indent.length() + 2 < COLUMN_WIDTH) {
-    inner_width = COLUMN_WIDTH - base_indent.length() + 2;
+  if (base_indent.length() < COLUMN_WIDTH) {
+    inner_width = COLUMN_WIDTH - base_indent.length();
   }
   return base_indent + indent_char + " {:.<" + std::to_string(inner_width) +
          "}: {}\n";

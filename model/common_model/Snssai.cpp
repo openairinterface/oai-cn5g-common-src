@@ -13,8 +13,10 @@
 
 #include "Snssai.h"
 #include "Helpers.h"
+#include "config.hpp"
 
 #include <sstream>
+#include <fmt/format.h>
 
 namespace oai::model::common {
 
@@ -53,12 +55,19 @@ bool Snssai::validate(
       msg << currentValuePath << ": must be less than or equal to 255;";
     }
   }
-  /*
   if (sdIsSet()) {
     const std::string& value           = m_Sd;
     const std::string currentValuePath = _pathPrefix + ".sd";
+    int32_t int_val                    = std::stoi(value, nullptr, 16);
+    if (int_val < 0) {
+      success = false;
+      msg << currentValuePath << ": must be greater than or equal to 0;";
+    } else if (int_val > 16777215) {
+      success = false;
+      msg << currentValuePath
+          << ": must be less than or equal to 0xFFFFFF (16777215)";
+    }
   }
-  */
   return success;
 }
 
@@ -86,8 +95,20 @@ void to_json(nlohmann::json& j, const Snssai& o) {
 void from_json(const nlohmann::json& j, Snssai& o) {
   j.at("sst").get_to(o.m_Sst);
   if (j.find("sd") != j.end()) {
-    j.at("sd").get_to(o.m_Sd);
+    // Here, we allow a more lenient API definition because we also allow it in
+    // the config
+    if (j.at("sd").is_number_integer()) {
+      int val = j.at("sd");
+      o.m_Sd  = fmt::format("{:X}", val);
+    } else {
+      j.at("sd").get_to(o.m_Sd);
+    }
     o.m_SdIsSet = true;
+  } else {
+    // TODO this is not strictly standard-compliant
+    o.m_Sd      = "FFFFFF";
+    o.m_SdIsSet = true;
+    // we set the default SD value to 0xFFFFFF
   }
 }
 
@@ -104,11 +125,27 @@ void Snssai::setSd(std::string const& value) {
   m_Sd      = value;
   m_SdIsSet = true;
 }
+
 bool Snssai::sdIsSet() const {
   return m_SdIsSet;
 }
+
 void Snssai::unsetSd() {
   m_SdIsSet = false;
+}
+
+std::string Snssai::to_string(const int indent_level) const {
+  std::string out;
+  std::string fmt_title = oai::config::get_title_formatter(indent_level);
+  std::string fmt_value = oai::config::get_value_formatter(indent_level + 1);
+  out.append(fmt::format(fmt_title, "snssai:"));
+
+  std::string sd_val =
+      fmt::format("0x{} ({})", m_Sd, std::stoi(m_Sd, nullptr, 16));
+
+  out.append(fmt::format(fmt_value, "sst", m_Sst));
+  out.append(fmt::format(fmt_value, "sd", sd_val));
+  return out;
 }
 
 }  // namespace oai::model::common

@@ -30,7 +30,10 @@ namespace oai::model::common {
 class Snssai {
  public:
   Snssai();
-  Snssai(const int32_t& sst) : m_Sst(sst){};
+  Snssai(const int32_t& sst) : m_Sst(sst) {
+    m_Sd      = "ffffff";
+    m_SdIsSet = true;
+  };
   virtual ~Snssai() = default;
 
   /// <summary>
@@ -66,6 +69,7 @@ class Snssai {
   ///
   /// </summary>
   std::string getSd() const;
+  int32_t getSdInt() const;
   void setSd(std::string const& value);
   bool sdIsSet() const;
   void unsetSd();

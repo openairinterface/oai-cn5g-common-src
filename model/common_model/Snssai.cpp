@@ -139,13 +139,15 @@ std::string Snssai::to_string(const int indent_level) const {
   std::string fmt_title = oai::config::get_title_formatter(indent_level);
   std::string fmt_value = oai::config::get_value_formatter(indent_level + 1);
   out.append(fmt::format(fmt_title, "snssai:"));
-
-  std::string sd_val =
-      fmt::format("0x{} ({})", m_Sd, std::stoi(m_Sd, nullptr, 16));
-
   out.append(fmt::format(fmt_value, "sst", m_Sst));
-  out.append(fmt::format(fmt_value, "sd", sd_val));
+  if (sdIsSet()) {
+    std::string sd_val = fmt::format("0x{} ({})", m_Sd, getSdInt());
+    out.append(fmt::format(fmt_value, "sd", sd_val));
+  }
   return out;
+}
+int32_t Snssai::getSdInt() const {
+  return std::stoi(m_Sd, nullptr, 16);
 }
 
 }  // namespace oai::model::common

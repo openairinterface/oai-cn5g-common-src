@@ -74,7 +74,7 @@ void DnnSmfInfoItem::setDnn(std::string const& value) {
 std::string DnnSmfInfoItem::to_string(int indent_level) const {
   std::string out;
   std::string fmt_value = oai::config::get_value_formatter(indent_level);
-  out.append(fmt::format(fmt_value, "DNN", m_Dnn));
+  out.append(fmt::format(fmt_value, "dnn", m_Dnn));
   return out;
 }
 

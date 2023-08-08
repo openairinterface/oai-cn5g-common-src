@@ -113,11 +113,14 @@ void SnssaiSmfInfoItem::setDnnSmfInfoList(
 std::string SnssaiSmfInfoItem::to_string(int indent_level) const {
   std::string out;
   std::string fmt_title = oai::config::get_title_formatter(indent_level);
-  out.append(m_SNssai.to_string(indent_level));
+
+  out.append(fmt::format(fmt_title, "snssai_smf_info_item:"));
+  out.append(m_SNssai.to_string(indent_level + 1));
   if (!m_DnnSmfInfoList.empty()) {
-    out.append(fmt::format(fmt_title, "dnns"));
+    fmt_title = oai::config::get_title_formatter(indent_level + 1);
+    out.append(fmt::format(fmt_title, "dnns:"));
     for (const auto& dnn : m_DnnSmfInfoList) {
-      out.append(dnn.to_string(indent_level + 1));
+      out.append(dnn.to_string(indent_level + 2));
     }
   }
   return out;

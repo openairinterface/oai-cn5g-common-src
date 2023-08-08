@@ -328,11 +328,8 @@ std::string SmfInfo::to_string(int indent_level) const {
   out.append(fmt::format(fmt_title, "smf_info:"));
 
   if (!m_SNssaiSmfInfoList.empty()) {
-    fmt_title = oai::config::get_title_formatter(indent_level + 1);
-    out.append(fmt::format(fmt_title, "snssai_smf_info_list:"));
-
     for (const auto& info : m_SNssaiSmfInfoList) {
-      out.append(info.to_string(indent_level + 2));
+      out.append(info.to_string(indent_level + 1));
     }
   }
   // TODO other values

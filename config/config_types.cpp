@@ -162,7 +162,8 @@ void string_config_value::validate() {
   std::regex re(m_regex);
   if (!std::regex_match(m_value, re)) {
     throw std::runtime_error(fmt::format(
-        "{} does not follow the regex specification: {}", m_value, m_regex));
+        "{} (value: {}) does not follow the regex specification: {}",
+        m_config_name, m_value, m_regex));
   }
 }
 
@@ -249,8 +250,8 @@ void int_config_value::validate() {
   if (!m_set) return;
   if (m_value < m_min_value || m_value > m_max_value) {
     throw std::runtime_error(fmt::format(
-        "Value {} must be in interval [{},{}]", m_value, m_min_value,
-        m_max_value));
+        "{} (value: {}) must be in interval [{},{}]", m_config_name, m_value,
+        m_min_value, m_max_value));
   }
 }
 

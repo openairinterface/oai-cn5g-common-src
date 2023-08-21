@@ -104,6 +104,29 @@ const std::string DNNS_CONFIG_NAME = "dnns";
 constexpr auto NF_CONFIG_HTTP_NAME  = "http_version";
 constexpr auto NF_CONFIG_HTTP_LABEL = "HTTP Version";
 
+static std::string get_value_formatter(int level) {
+  // TODO use this function everywhere, it is much simpler
+  int indent_width        = level * INDENT_WIDTH;
+  std::string base_indent = fmt::format("{:<{}}", "", indent_width);
+  std::string indent_char =
+      (level + 1) % 2 == 0 ? INNER_LIST_ELEM : OUTER_LIST_ELEM;
+
+  unsigned int inner_width = COLUMN_WIDTH;
+  if (base_indent.length() < COLUMN_WIDTH) {
+    inner_width = COLUMN_WIDTH - base_indent.length();
+  }
+  return base_indent + indent_char + " {:.<" + std::to_string(inner_width) +
+         "}: {}\n";
+}
+
+static std::string get_title_formatter(int level) {
+  int indent_width        = level * INDENT_WIDTH;
+  std::string base_indent = fmt::format("{:<{}}", "", indent_width);
+  std::string indent_char =
+      (level + 1) % 2 == 0 ? INNER_LIST_ELEM : OUTER_LIST_ELEM;
+  return base_indent + indent_char + " {}\n";
+}
+
 class config_iface {
  public:
   /**

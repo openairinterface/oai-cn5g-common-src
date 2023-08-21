@@ -141,4 +141,15 @@ bool fromStringValue(const std::string& inStr, double& value) {
   return true;
 }
 
+bool validate_regex(
+    const std::string& regex, const std::string& value, std::stringstream& msg,
+    const std::string& pathPrefix) {
+  std::regex re(regex);
+  if (!std::regex_match(value, re)) {
+    msg << pathPrefix << " must follow regex specification: " << regex;
+    return false;
+  }
+  return true;
+}
+
 }  // namespace oai::model::common::helpers

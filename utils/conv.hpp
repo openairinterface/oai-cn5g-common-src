@@ -44,6 +44,11 @@ static void fix_primitive_json_values(
     nlohmann::json& j, bool parse_hex_values = false) {
   for (const auto& elem : j.items()) {
     if (elem.value().is_primitive()) {
+      // we have to hardcode SD value here, because of the stupid 3GPP format
+      // without leading 0x -> There is no way how we can detect this
+      // automatically so then, stoi just takes base 10 and we have wrong values
+      if (elem.key() == "sd") continue;
+
       try {
         std::string e = elem.value();
         if (e == "true") j[elem.key()] = true;

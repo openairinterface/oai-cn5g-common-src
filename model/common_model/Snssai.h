@@ -24,6 +24,9 @@
 
 namespace oai::model::common {
 
+const std::string SD_VALIDATION_REGEX = "^[A-Fa-f0-9]{6}$";
+const std::string SD_DEFAULT_VALUE    = "FFFFFF";
+
 /// <summary>
 ///
 /// </summary>

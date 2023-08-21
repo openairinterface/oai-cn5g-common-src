@@ -56,17 +56,9 @@ bool Snssai::validate(
     }
   }
   if (sdIsSet()) {
-    const std::string& value           = m_Sd;
     const std::string currentValuePath = _pathPrefix + ".sd";
-    int32_t int_val                    = std::stoi(value, nullptr, 16);
-    if (int_val < 0) {
-      success = false;
-      msg << currentValuePath << ": must be greater than or equal to 0;";
-    } else if (int_val > 16777215) {
-      success = false;
-      msg << currentValuePath
-          << ": must be less than or equal to 0xFFFFFF (16777215)";
-    }
+    success &= helpers::validate_regex(
+        SD_VALIDATION_REGEX, m_Sd, msg, currentValuePath);
   }
   return success;
 }
@@ -95,18 +87,11 @@ void to_json(nlohmann::json& j, const Snssai& o) {
 void from_json(const nlohmann::json& j, Snssai& o) {
   j.at("sst").get_to(o.m_Sst);
   if (j.find("sd") != j.end()) {
-    // Here, we allow a more lenient API definition because we also allow it in
-    // the config
-    if (j.at("sd").is_number_integer()) {
-      int val = j.at("sd");
-      o.m_Sd  = fmt::format("{:X}", val);
-    } else {
-      j.at("sd").get_to(o.m_Sd);
-    }
     o.m_SdIsSet = true;
+    j.at("sd").get_to(o.m_Sd);
   } else {
     // TODO this is not strictly standard-compliant
-    o.m_Sd      = "FFFFFF";
+    o.m_Sd      = SD_DEFAULT_VALUE;
     o.m_SdIsSet = true;
     // we set the default SD value to 0xFFFFFF
   }

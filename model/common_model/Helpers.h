@@ -34,6 +34,10 @@ class ValidationException : public std::runtime_error {
   ~ValidationException() override = default;
 };
 
+bool validate_regex(
+    const std::string& regex, const std::string& value, std::stringstream& msg,
+    const std::string& pathPrefix);
+
 /// <summary>
 /// Validate a string against the full-date definition of RFC 3339, section 5.6.
 /// </summary>

@@ -29,6 +29,16 @@ file(GLOB NRF_MODEL_SRC_FILES
         ${NRF_MODEL_DIR}/*.cpp
         )
 
+# Add common model dependencies from NRF model
+list(APPEND USED_COMMON_MODEL_SRC_FILES
+        ${COMMON_MODEL_DIR}/Tai.cpp
+        ${COMMON_MODEL_DIR}/PlmnId.cpp
+        ${COMMON_MODEL_DIR}/AccessType.cpp
+        ${COMMON_MODEL_DIR}/Snssai.cpp
+        ${COMMON_MODEL_DIR}/Helpers.cpp
+        )
+#set(USED_COMMON_MODEL_SRC_FILES PARENT_SCOPE)
+
 ## CONFIG used in NF_TARGET (main)
 if (TARGET ${NF_TARGET})
     target_include_directories(${NF_TARGET} PUBLIC ${NRF_MODEL_DIR})

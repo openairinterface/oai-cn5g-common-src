@@ -23,14 +23,13 @@ SET(COMMON_MODEL_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/model/common_model)
 
 include_directories(${COMMON_MODEL_DIR})
 
-file(GLOB COMMON_MODEL_SRC_FILES
-        ${COMMON_MODEL_DIR}/*.cpp
-        )
+list(REMOVE_DUPLICATES USED_COMMON_MODEL_SRC_FILES)
 
-## CONFIG used in NF_TARGET (main)
+# Here, we expect that in NF build directory or in other models (e.g. NRF) selected common_models are written to
+# ${USED_COMMON_MODEL_SRC_FILES} to speed up the build (more performant than just adding all models)
 if (TARGET ${NF_TARGET})
     target_include_directories(${NF_TARGET} PUBLIC ${COMMON_MODEL_DIR})
     target_sources(${NF_TARGET} PRIVATE
-            ${COMMON_MODEL_SRC_FILES}
+            ${USED_COMMON_MODEL_SRC_FILES}
             )
 endif()

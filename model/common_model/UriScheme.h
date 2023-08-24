@@ -59,6 +59,7 @@ class UriScheme {
   UriScheme_anyOf getValue() const;
   void setValue(UriScheme_anyOf value);
   UriScheme_anyOf::eUriScheme_anyOf getEnumValue() const;
+  std::string getEnumString() const;
   void setEnumValue(UriScheme_anyOf::eUriScheme_anyOf value);
   friend void to_json(nlohmann::json& j, const UriScheme& o);
   friend void from_json(const nlohmann::json& j, UriScheme& o);

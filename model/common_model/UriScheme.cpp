@@ -77,4 +77,10 @@ void UriScheme::setEnumValue(UriScheme_anyOf::eUriScheme_anyOf value) {
   m_value.setValue(value);
 }
 
+std::string UriScheme::getEnumString() const {
+  nlohmann::json j;
+  to_json(j, m_value);
+  return j.dump();
+}
+
 }  // namespace oai::model::common

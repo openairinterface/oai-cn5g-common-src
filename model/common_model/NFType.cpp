@@ -73,6 +73,12 @@ NFType_anyOf::eNFType_anyOf NFType::getEnumValue() const {
   return m_value.getValue();
 }
 
+std::string NFType::getEnumString() const {
+  nlohmann::json j;
+  to_json(j, m_value);
+  return j.dump();
+}
+
 void NFType::setEnumValue(NFType_anyOf::eNFType_anyOf value) {
   m_value.setValue(value);
 }

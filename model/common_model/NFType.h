@@ -59,6 +59,7 @@ class NFType {
   NFType_anyOf getValue() const;
   void setValue(NFType_anyOf value);
   NFType_anyOf::eNFType_anyOf getEnumValue() const;
+  std::string getEnumString() const;
   void setEnumValue(NFType_anyOf::eNFType_anyOf value);
   friend void to_json(nlohmann::json& j, const NFType& o);
   friend void from_json(const nlohmann::json& j, NFType& o);

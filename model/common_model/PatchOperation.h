@@ -60,6 +60,7 @@ class PatchOperation {
   PatchOperation_anyOf getValue() const;
   void setValue(PatchOperation_anyOf value);
   PatchOperation_anyOf::ePatchOperation_anyOf getEnumValue() const;
+  std::string getEnumString() const;
   void setEnumValue(PatchOperation_anyOf::ePatchOperation_anyOf value);
   friend void to_json(nlohmann::json& j, const PatchOperation& o);
   friend void from_json(const nlohmann::json& j, PatchOperation& o);

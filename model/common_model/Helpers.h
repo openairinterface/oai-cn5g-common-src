@@ -24,6 +24,7 @@
 #include <sstream>
 #include <vector>
 #include <map>
+#include <nlohmann/json.hpp>
 
 namespace oai::model::common::helpers {
 
@@ -129,6 +130,18 @@ bool fromStringValue(
     inStrings.push_back(s);
   }
   return fromStringValue(inStrings, value);
+}
+
+template<typename T>
+std::string enumToString(T enum_val) {
+  nlohmann::json j;
+  to_json(j, enum_val);
+  std::string e_str = j.dump();
+  // remove leading and trailing " with boundary check
+  e_str.erase(e_str.end() - ((e_str.length() > 0) ? 1 : 0), e_str.end());
+  e_str.erase(e_str.begin(), e_str.begin() + ((e_str.length() > 0) ? 1 : 0));
+
+  return e_str;
 }
 
 }  // namespace oai::model::common::helpers

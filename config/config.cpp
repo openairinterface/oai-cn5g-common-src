@@ -230,11 +230,15 @@ std::string config::to_string() const {
     out.append(m_database.to_string(indent + indent));
   }
   if (!m_nf_map.empty()) {
-    out.append("Peer NF Configuration:\n");
-  }
-  for (const auto& nf : m_nf_map) {
-    if (nf.first != m_nf_name) {
-      out.append(nf.second->to_string(indent));
+    bool has_peer_nf = false;
+    for (const auto& nf : m_nf_map) {
+      if (nf.first != m_nf_name) {
+        if (!has_peer_nf) {
+          has_peer_nf = true;
+          out.append("Peer NF Configuration:\n");
+        }
+        out.append(nf.second->to_string(indent));
+      }
     }
   }
 

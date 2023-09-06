@@ -36,6 +36,7 @@ list(APPEND USED_COMMON_MODEL_SRC_FILES
         ${COMMON_MODEL_DIR}/AccessType.cpp
         ${COMMON_MODEL_DIR}/Snssai.cpp
         ${COMMON_MODEL_DIR}/Helpers.cpp
+        ${COMMON_MODEL_DIR}/PduSessionType.cpp
         )
 #set(USED_COMMON_MODEL_SRC_FILES PARENT_SCOPE)
 

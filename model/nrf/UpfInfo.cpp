@@ -548,6 +548,11 @@ std::string UpfInfo::to_string(int indent_level) const {
       out.append(info.to_string(indent_level + 1));
     }
   }
+  if (!m_InterfaceUpfInfoList.empty()) {
+    for (const auto& iface : m_InterfaceUpfInfoList) {
+      out.append(iface.to_string(indent_level + 1));
+    }
+  }
   return out;
   // TODO other values
 }

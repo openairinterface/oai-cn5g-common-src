@@ -80,4 +80,8 @@ void UPInterfaceType::setEnumValue(
   m_value.setValue(value);
 }
 
+std::string UPInterfaceType::getEnumString() const {
+  return common::helpers::enumToString(m_value);
+}
+
 }  // namespace oai::model::nrf

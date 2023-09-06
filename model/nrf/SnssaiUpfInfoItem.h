@@ -80,6 +80,8 @@ class SnssaiUpfInfoItem {
   friend void to_json(nlohmann::json& j, const SnssaiUpfInfoItem& o);
   friend void from_json(const nlohmann::json& j, SnssaiUpfInfoItem& o);
 
+  [[nodiscard]] std::string to_string(int indent_level) const;
+
  protected:
   oai::model::common::Snssai m_SNssai;
 

@@ -13,6 +13,7 @@
 
 #include "SnssaiUpfInfoItem.h"
 #include "Helpers.h"
+#include "config.hpp"
 
 #include <sstream>
 
@@ -39,6 +40,11 @@ bool SnssaiUpfInfoItem::validate(
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "SnssaiUpfInfoItem" : pathPrefix;
+
+  if (!m_SNssai.validate(msg)) {
+    msg << _pathPrefix << ": SNssai is invalid;";
+    success = false;
+  }
 
   /* DnnUpfInfoList */ {
     const std::vector<oai::model::nrf::DnnUpfInfoItem>& value =
@@ -128,6 +134,22 @@ bool SnssaiUpfInfoItem::redundantTransportIsSet() const {
 }
 void SnssaiUpfInfoItem::unsetRedundantTransport() {
   m_RedundantTransportIsSet = false;
+}
+
+std::string SnssaiUpfInfoItem::to_string(int indent_level) const {
+  std::string out;
+  std::string fmt_title = oai::config::get_title_formatter(indent_level);
+
+  out.append(fmt::format(fmt_title, "snssai_upf_info_item:"));
+  out.append(m_SNssai.to_string(indent_level + 1));
+  if (!m_DnnUpfInfoList.empty()) {
+    fmt_title = oai::config::get_title_formatter(indent_level + 1);
+    out.append(fmt::format(fmt_title, "dnns:"));
+    for (const auto& dnn : m_DnnUpfInfoList) {
+      out.append(dnn.to_string(indent_level + 2));
+    }
+  }
+  return out;
 }
 
 }  // namespace oai::model::nrf

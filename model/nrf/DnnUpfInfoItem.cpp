@@ -13,6 +13,7 @@
 
 #include "DnnUpfInfoItem.h"
 #include "Helpers.h"
+#include "config.hpp"
 
 #include <sstream>
 
@@ -27,6 +28,10 @@ DnnUpfInfoItem::DnnUpfInfoItem() {
   m_Ipv4AddressRangesIsSet  = false;
   m_Ipv6PrefixRangesIsSet   = false;
   m_DnaiNwInstanceListIsSet = false;
+}
+
+DnnUpfInfoItem::DnnUpfInfoItem(const std::string& dnn) : DnnUpfInfoItem() {
+  m_Dnn = dnn;
 }
 
 void DnnUpfInfoItem::validate() const {
@@ -295,4 +300,28 @@ void DnnUpfInfoItem::unsetDnaiNwInstanceList() {
   m_DnaiNwInstanceListIsSet = false;
 }
 
+std::string DnnUpfInfoItem::to_string(int indent_level) const {
+  std::string out;
+  std::string fmt_value = oai::config::get_value_formatter(indent_level);
+  std::string fmt_value_inner =
+      oai::config::get_value_formatter(indent_level + 1);
+  std::string fmt_title = oai::config::get_title_formatter(indent_level);
+  out.append(fmt::format(fmt_value, "dnn", m_Dnn));
+
+  if (m_DnaiListIsSet) {
+    out.append(fmt::format(fmt_title, "dnai_list:"));
+    for (const auto& dnai : m_DnaiList) {
+      out.append(fmt::format(fmt_value_inner, "dnai", dnai));
+    }
+  }
+  if (m_DnaiNwInstanceListIsSet) {
+    out.append(fmt::format(fmt_title, "dnai_nw_instance_list:"));
+    for (const auto& nwi : m_DnaiNwInstanceList) {
+      out.append(fmt::format(fmt_value_inner, nwi.first, nwi.second));
+    }
+  }
+
+  // TODO other values
+  return out;
+}
 }  // namespace oai::model::nrf

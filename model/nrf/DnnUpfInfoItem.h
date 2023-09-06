@@ -35,6 +35,9 @@ namespace oai::model::nrf {
 class DnnUpfInfoItem {
  public:
   DnnUpfInfoItem();
+
+  explicit DnnUpfInfoItem(const std::string& dnn);
+
   virtual ~DnnUpfInfoItem() = default;
 
   /// <summary>
@@ -109,6 +112,8 @@ class DnnUpfInfoItem {
 
   friend void to_json(nlohmann::json& j, const DnnUpfInfoItem& o);
   friend void from_json(const nlohmann::json& j, DnnUpfInfoItem& o);
+
+  [[nodiscard]] std::string to_string(int indent_level) const;
 
  protected:
   std::string m_Dnn;

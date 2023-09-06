@@ -176,6 +176,8 @@ class UpfInfo {
   friend void to_json(nlohmann::json& j, const UpfInfo& o);
   friend void from_json(const nlohmann::json& j, UpfInfo& o);
 
+  [[nodiscard]] std::string to_string(int indent_level) const;
+
  protected:
   std::vector<oai::model::nrf::SnssaiUpfInfoItem> m_SNssaiUpfInfoList;
 

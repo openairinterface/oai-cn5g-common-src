@@ -109,7 +109,7 @@ static std::string get_value_formatter(int level) {
   int indent_width        = level * INDENT_WIDTH;
   std::string base_indent = fmt::format("{:<{}}", "", indent_width);
   std::string indent_char =
-      (level + 1) % 2 == 0 ? INNER_LIST_ELEM : OUTER_LIST_ELEM;
+      (level) % 2 == 0 ? INNER_LIST_ELEM : OUTER_LIST_ELEM;
 
   unsigned int inner_width = COLUMN_WIDTH;
   if (base_indent.length() < COLUMN_WIDTH) {
@@ -123,7 +123,7 @@ static std::string get_title_formatter(int level) {
   int indent_width        = level * INDENT_WIDTH;
   std::string base_indent = fmt::format("{:<{}}", "", indent_width);
   std::string indent_char =
-      (level + 1) % 2 == 0 ? INNER_LIST_ELEM : OUTER_LIST_ELEM;
+      (level) % 2 == 0 ? INNER_LIST_ELEM : OUTER_LIST_ELEM;
   return base_indent + indent_char + " {}\n";
 }
 

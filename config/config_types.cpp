@@ -719,6 +719,9 @@ void database_config::from_yaml(const YAML::Node& node) {
   if (node[NF_CONFIG_HOST_NAME]) {
     m_host.from_yaml(node[NF_CONFIG_HOST_NAME]);
   }
+  if (node[DATABASE_CONFIG_DATABASE_TYPE]) {
+    m_database_type.from_yaml(node[DATABASE_CONFIG_DATABASE_TYPE]);
+  }
   if (node[DATABASE_CONFIG_USER]) {
     m_user.from_yaml(node[DATABASE_CONFIG_USER]);
   }
@@ -739,6 +742,7 @@ void database_config::from_yaml(const YAML::Node& node) {
 nlohmann::json database_config::to_json() {
   nlohmann::json json_data                     = {};
   json_data[m_host.get_config_name()]          = m_host.to_json();
+  json_data[m_database_type.get_config_name()] = m_database_type.to_json();
   json_data[m_user.get_config_name()]          = m_user.to_json();
   json_data[m_pass.get_config_name()]          = m_pass.to_json();
   json_data[m_database_name.get_config_name()] = m_database_name.to_json();
@@ -753,7 +757,9 @@ bool database_config::from_json(const nlohmann::json& json_data) {
     if (json_data.find(m_host.get_config_name()) != json_data.end()) {
       m_host.from_json(json_data[m_host.get_config_name()]);
     }
-
+    if (json_data.find(m_database_type.get_config_name()) != json_data.end()) {
+      m_database_type.from_json(json_data[m_database_type.get_config_name()]);
+    }
     if (json_data.find(m_user.get_config_name()) != json_data.end()) {
       m_user.from_json(json_data[m_user.get_config_name()]);
     }
@@ -785,6 +791,9 @@ std::string database_config::to_string(const std::string& indent) const {
   out.append(indent).append(fmt::format(
       BASE_FORMATTER, OUTER_LIST_ELEM, NF_CONFIG_HOST_NAME_LABEL, inner_width,
       m_host.get_value()));
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, OUTER_LIST_ELEM, DATABASE_CONFIG_DATABASE_TYPE_LABEL,
+      inner_width, m_database_type.get_value()));
   out.append(indent).append(fmt::format(
       BASE_FORMATTER, OUTER_LIST_ELEM, DATABASE_CONFIG_USER_LABEL, inner_width,
       m_user.get_value()));

@@ -145,6 +145,9 @@ void config::to_json(nlohmann::json& json_data) {
       m_log_level_feature.to_json();
   json_data[m_register_nrf_feature.get_config_name()] =
       m_register_nrf_feature.to_json();
+  if (m_database.is_set()) {
+    json_data[m_database.get_config_name()] = m_database.to_json();
+  }
 }
 
 bool config::from_json(const nlohmann::json& json_data) {

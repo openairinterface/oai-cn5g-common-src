@@ -710,7 +710,16 @@ const std::string& nf_features_config::get_string() const {
 }
 
 database_config::database_config() {
-  m_set = false;
+  m_set           = false;
+  m_host          = string_config_value(NF_CONFIG_HOST_NAME, "mysql");
+  m_database_type = string_config_value(DATABASE_CONFIG_DATABASE_TYPE, "mysql");
+  m_user          = string_config_value(DATABASE_CONFIG_USER, "root");
+  m_pass          = string_config_value(DATABASE_CONFIG_PASSWORD, "linux");
+  m_database_name =
+      string_config_value(DATABASE_CONFIG_DATABASE_NAME, "oai_db");
+  m_random = option_config_value(DATABASE_CONFIG_RANDOM, false);
+  m_connection_timeout =
+      int_config_value(DATABASE_CONFIG_CONNECTION_TIMEOUT, 300);
 }
 
 void database_config::from_yaml(const YAML::Node& node) {

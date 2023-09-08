@@ -709,7 +709,8 @@ const std::string& nf_features_config::get_string() const {
   return m_string_value.get_value();
 }
 
-database_config::database_config() {
+database_config::database_config(const std::string& name) {
+  m_config_name   = name;
   m_set           = false;
   m_host          = string_config_value(NF_CONFIG_HOST_NAME, "mysql");
   m_database_type = string_config_value(DATABASE_CONFIG_DATABASE_TYPE, "mysql");

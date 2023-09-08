@@ -328,7 +328,7 @@ class database_config : public config_type {
   int_config_value m_connection_timeout;
 
  public:
-  explicit database_config();
+  explicit database_config(const std::string& name);
 
   void from_yaml(const YAML::Node& node) override;
   nlohmann::json to_json() override;

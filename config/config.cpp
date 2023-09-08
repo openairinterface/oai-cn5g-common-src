@@ -42,7 +42,7 @@ config::config(
     : m_register_nrf_feature("register_nf", nf_name, false),
       m_log_level_feature("log_level", nf_name, std::string("info")),
       m_http_version(),
-      m_database() {
+      m_database(DATABASE_CONFIG) {
   logger::logger_registry::register_logger(
       nf_name, LOGGER_NAME, log_stdout, log_rot_file);
 

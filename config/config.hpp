@@ -106,9 +106,11 @@ constexpr auto NF_CONFIG_HTTP_LABEL = "HTTP Version";
 
 // HTTP Version
 constexpr auto NF_CONFIG_CURL_TIMEOUT       = "curl_timeout";
-constexpr auto NF_CONFIG_CURL_TIMEOUT_LABEL = "CURL Timeout";
+constexpr auto NF_CONFIG_CURL_TIMEOUT_LABEL = "Curl Timeout";
 constexpr uint32_t NF_CONFIG_CURL_TIMEOUT_DEFAULT_VALUE =
-    10000;  // in milliseconds
+    3000;                                                     // in milliseconds
+constexpr uint32_t NF_CONFIG_CURL_TIMEOUT_MIN_VALUE = 10;     // in milliseconds
+constexpr uint32_t NF_CONFIG_CURL_TIMEOUT_MAX_VALUE = 20000;  // in milliseconds
 
 static std::string get_value_formatter(int level) {
   // TODO use this function everywhere, it is much simpler
@@ -193,7 +195,6 @@ class config : public config_iface {
   [[nodiscard]] bool register_nrf() const override;
 
   [[nodiscard]] const std::string& log_level() const override;
-  [[nodiscard]] const uint32_t curl_timeout() const;
 
   [[nodiscard]] const nf& local() const override;
   [[nodiscard]] std::shared_ptr<nf> get_local() const override;
@@ -204,6 +205,7 @@ class config : public config_iface {
   [[nodiscard]] const std::vector<dnn_config>& get_dnns() const override;
 
   [[nodiscard]] int get_http_version() const override;
+  [[nodiscard]] const uint32_t get_curl_timeout();
 
   bool init() override;
 
@@ -229,7 +231,7 @@ class config : public config_iface {
 
   nf_features_config m_log_level_feature;
   nf_http_version m_http_version;
-  int_config_value m_curl_timeout;
+  curl_timeout m_curl_timeout;
 
   std::shared_ptr<nf> m_local_nf;
 

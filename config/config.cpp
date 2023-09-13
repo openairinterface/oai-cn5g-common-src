@@ -42,14 +42,12 @@ config::config(
     : m_register_nrf_feature("register_nf", nf_name, false),
       m_log_level_feature("log_level", nf_name, std::string("info")),
       m_http_version(),
-      m_curl_timeout(
-          NF_CONFIG_CURL_TIMEOUT, NF_CONFIG_CURL_TIMEOUT_DEFAULT_VALUE),
+      m_curl_timeout(),
       m_database(DATABASE_CONFIG) {
   logger::logger_registry::register_logger(
       nf_name, LOGGER_NAME, log_stdout, log_rot_file);
 
   m_log_level_feature.set_validation_regex(LOG_LVL_VALIDATOR_REGEX);
-  m_curl_timeout.set_validation_interval(10, 100000);  // in milliseconds
 
   m_config_path = config_path;
   m_nf_name     = nf_name;
@@ -241,6 +239,7 @@ std::string config::to_string() const {
   out.append(m_register_nrf_feature.to_string(indent));
   out.append(m_http_version.to_string(indent));
   out.append(m_curl_timeout.to_string(indent));
+
   out.append(m_local_nf->to_string(indent));
   if (m_database.is_set()) {
     out.append(indent).append("Database:\n");
@@ -308,10 +307,6 @@ const std::string& config::log_level() const {
   return m_log_level_feature.get_string();
 }
 
-const uint32_t config::curl_timeout() const {
-  return m_curl_timeout.get_value();
-}
-
 const nf& config::local() const {
   return *m_local_nf;
 }
@@ -348,6 +343,10 @@ int config::get_http_version() const {
   }
   // by default
   return 1;
+}
+
+const uint32_t config::get_curl_timeout() {
+  return m_curl_timeout.get();
 }
 
 bool config::add_nf(

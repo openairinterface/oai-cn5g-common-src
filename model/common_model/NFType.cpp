@@ -74,9 +74,7 @@ NFType_anyOf::eNFType_anyOf NFType::getEnumValue() const {
 }
 
 std::string NFType::getEnumString() const {
-  nlohmann::json j;
-  to_json(j, m_value);
-  return j.dump();
+  return helpers::enumToString(m_value);
 }
 
 void NFType::setEnumValue(NFType_anyOf::eNFType_anyOf value) {

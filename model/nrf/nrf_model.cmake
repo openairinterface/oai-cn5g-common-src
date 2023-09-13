@@ -36,6 +36,11 @@ list(APPEND USED_COMMON_MODEL_SRC_FILES
         ${COMMON_MODEL_DIR}/AccessType.cpp
         ${COMMON_MODEL_DIR}/Snssai.cpp
         ${COMMON_MODEL_DIR}/Helpers.cpp
+        ${COMMON_MODEL_DIR}/PduSessionType.cpp
+        ${COMMON_MODEL_DIR}/PduSessionType_anyOf.cpp
+        ${COMMON_MODEL_DIR}/Ipv6Prefix.cpp
+        ${COMMON_MODEL_DIR}/Ipv6Addr.cpp
+        ${COMMON_MODEL_DIR}/AtsssCapability.cpp
         )
 #set(USED_COMMON_MODEL_SRC_FILES PARENT_SCOPE)
 

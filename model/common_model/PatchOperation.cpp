@@ -76,9 +76,7 @@ PatchOperation_anyOf::ePatchOperation_anyOf PatchOperation::getEnumValue()
 }
 
 std::string PatchOperation::getEnumString() const {
-  nlohmann::json j;
-  to_json(j, m_value);
-  return j.dump();
+  return helpers::enumToString(m_value);
 }
 
 void PatchOperation::setEnumValue(

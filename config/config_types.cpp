@@ -1297,6 +1297,7 @@ curl_timeout::curl_timeout() {
       NF_CONFIG_CURL_TIMEOUT, NF_CONFIG_CURL_TIMEOUT_DEFAULT_VALUE);
   m_curl_timeout.set_validation_interval(
       NF_CONFIG_CURL_TIMEOUT_MIN_VALUE, NF_CONFIG_CURL_TIMEOUT_MAX_VALUE);
+  m_config_name = NF_CONFIG_CURL_TIMEOUT;
 }
 
 void curl_timeout::from_yaml(const YAML::Node& node) {

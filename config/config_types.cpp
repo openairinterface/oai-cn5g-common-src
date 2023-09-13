@@ -721,11 +721,12 @@ database_config::database_config(const std::string& name) {
   m_random = option_config_value(DATABASE_CONFIG_RANDOM, false);
   m_connection_timeout =
       int_config_value(DATABASE_CONFIG_CONNECTION_TIMEOUT, 300);
+
+  m_database_type.set_validation_regex("mysql|cassandra|mongodb");
 }
 
 void database_config::from_yaml(const YAML::Node& node) {
   m_set = true;
-  // TODO:
   if (node[NF_CONFIG_HOST_NAME]) {
     m_host.from_yaml(node[NF_CONFIG_HOST_NAME]);
   }
@@ -822,6 +823,10 @@ std::string database_config::to_string(const std::string& indent) const {
       BASE_FORMATTER, OUTER_LIST_ELEM, DATABASE_CONFIG_CONNECTION_TIMEOUT_LABEL,
       inner_width, m_connection_timeout.get_value()));
   return out;
+}
+
+void database_config::validate() {
+  m_database_type.validate();
 }
 
 const std::string& database_config::get_host() const {

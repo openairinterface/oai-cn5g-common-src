@@ -194,6 +194,8 @@ bool config::validate() {
     success &= safe_validate_field(dnn);
   }
 
+  success &= safe_validate_field(m_database);
+
   return success;
 }
 

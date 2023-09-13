@@ -42,7 +42,7 @@ config::config(
     : m_register_nrf_feature("register_nf", nf_name, false),
       m_log_level_feature("log_level", nf_name, std::string("info")),
       m_http_version(),
-      m_database() {
+      m_database(DATABASE_CONFIG) {
   logger::logger_registry::register_logger(
       nf_name, LOGGER_NAME, log_stdout, log_rot_file);
 
@@ -145,6 +145,9 @@ void config::to_json(nlohmann::json& json_data) {
       m_log_level_feature.to_json();
   json_data[m_register_nrf_feature.get_config_name()] =
       m_register_nrf_feature.to_json();
+  if (m_database.is_set()) {
+    json_data[m_database.get_config_name()] = m_database.to_json();
+  }
 }
 
 bool config::from_json(const nlohmann::json& json_data) {
@@ -190,6 +193,8 @@ bool config::validate() {
   for (auto& dnn : m_dnns) {
     success &= safe_validate_field(dnn);
   }
+
+  success &= safe_validate_field(m_database);
 
   return success;
 }

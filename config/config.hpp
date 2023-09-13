@@ -104,6 +104,12 @@ const std::string DNNS_CONFIG_NAME = "dnns";
 constexpr auto NF_CONFIG_HTTP_NAME  = "http_version";
 constexpr auto NF_CONFIG_HTTP_LABEL = "HTTP Version";
 
+// HTTP Version
+constexpr auto NF_CONFIG_CURL_TIMEOUT       = "curl_timeout";
+constexpr auto NF_CONFIG_CURL_TIMEOUT_LABEL = "CURL Timeout";
+constexpr uint32_t NF_CONFIG_CURL_TIMEOUT_DEFAULT_VALUE =
+    10000;  // in milliseconds
+
 static std::string get_value_formatter(int level) {
   // TODO use this function everywhere, it is much simpler
   int indent_width        = level * INDENT_WIDTH;
@@ -187,6 +193,7 @@ class config : public config_iface {
   [[nodiscard]] bool register_nrf() const override;
 
   [[nodiscard]] const std::string& log_level() const override;
+  [[nodiscard]] const uint32_t curl_timeout() const;
 
   [[nodiscard]] const nf& local() const override;
   [[nodiscard]] std::shared_ptr<nf> get_local() const override;
@@ -222,6 +229,7 @@ class config : public config_iface {
 
   nf_features_config m_log_level_feature;
   nf_http_version m_http_version;
+  int_config_value m_curl_timeout;
 
   std::shared_ptr<nf> m_local_nf;
 

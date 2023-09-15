@@ -71,18 +71,12 @@ class config_type {
    * Convert to JSON format
    * @return void
    */
-  virtual nlohmann::json to_json() {
-    nlohmann::json json_data = {};
-    return json_data;
-  };  // TODO: pure virtual
-
+  virtual nlohmann::json to_json();
   /**
    * Get value from JSON
    * @return void
    */
-  virtual bool from_json(const nlohmann::json& json_data) {
-    return true;
-  };  // TODO: pure virtual
+  virtual bool from_json(const nlohmann::json& json_data);
 
   /**
    * Checks if the configuration is set. Configuration is not set if it has not

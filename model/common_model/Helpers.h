@@ -25,6 +25,8 @@
 #include <vector>
 #include <map>
 #include <nlohmann/json.hpp>
+#include "PlmnId.h"
+#include "Snssai.h"
 
 namespace oai::model::common::helpers {
 
@@ -105,6 +107,11 @@ bool fromStringValue(const std::string& inStr, int64_t& value);
 bool fromStringValue(const std::string& inStr, bool& value);
 bool fromStringValue(const std::string& inStr, float& value);
 bool fromStringValue(const std::string& inStr, double& value);
+bool fromStringValue(
+    const std::string& inStr, oai::model::common::PlmnId& value);
+bool fromStringValue(
+    const std::string& inStr, oai::model::common::Snssai& value);
+
 template<typename T>
 bool fromStringValue(
     const std::vector<std::string>& inStr, std::vector<T>& value) {

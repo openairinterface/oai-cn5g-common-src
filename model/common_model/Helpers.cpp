@@ -141,6 +141,19 @@ bool fromStringValue(const std::string& inStr, double& value) {
   return true;
 }
 
+bool fromStringValue(
+    const std::string& inStr, oai::model::common::PlmnId& value) {
+  nlohmann::json json_value = nlohmann::json::parse(inStr);
+  from_json(json_value, value);
+  return true;
+}
+bool fromStringValue(
+    const std::string& inStr, oai::model::common::Snssai& value) {
+  nlohmann::json json_value = nlohmann::json::parse(inStr);
+  from_json(json_value, value);
+  return true;
+}
+
 bool validate_regex(
     const std::string& regex, const std::string& value, std::stringstream& msg,
     const std::string& pathPrefix) {

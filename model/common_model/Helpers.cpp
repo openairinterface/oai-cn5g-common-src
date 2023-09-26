@@ -154,6 +154,22 @@ bool fromStringValue(
   return true;
 }
 
+bool fromStringValue(
+    const std::string& inStr, oai::model::common::NFType& value) {
+  nlohmann::json json_value = nlohmann::json::parse(inStr);
+  from_json(json_value, value);
+  if (value.getEnumValue() ==
+      NFType_anyOf::eNFType_anyOf::INVALID_VALUE_OPENAPI_GENERATED)
+    return false;
+
+  return true;
+}
+
+bool fromStringValue(const std::string& inStr, oai::model::common::Tai& value) {
+  nlohmann::json::parse(inStr.c_str()).get_to(value);
+  return true;
+}
+
 bool validate_regex(
     const std::string& regex, const std::string& value, std::stringstream& msg,
     const std::string& pathPrefix) {

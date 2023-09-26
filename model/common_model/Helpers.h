@@ -27,6 +27,8 @@
 #include <nlohmann/json.hpp>
 #include "PlmnId.h"
 #include "Snssai.h"
+#include "NFType.h"
+#include "Tai.h"
 
 namespace oai::model::common::helpers {
 
@@ -111,6 +113,9 @@ bool fromStringValue(
     const std::string& inStr, oai::model::common::PlmnId& value);
 bool fromStringValue(
     const std::string& inStr, oai::model::common::Snssai& value);
+bool fromStringValue(
+    const std::string& inStr, oai::model::common::NFType& value);
+bool fromStringValue(const std::string& inStr, oai::model::common::Tai& value);
 
 template<typename T>
 bool fromStringValue(

@@ -28,6 +28,9 @@
 
 namespace oai::model::common::helpers {
 
+const std::string BANDWIDTH_VALIDATION_REGEX =
+    R"(^\d+(\.\d+)? (bps|Kbps|Mbps|Gbps|Tbps)$)";
+
 class ValidationException : public std::runtime_error {
  public:
   explicit ValidationException(const std::string& what)

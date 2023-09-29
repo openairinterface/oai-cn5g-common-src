@@ -60,6 +60,7 @@ void to_json(nlohmann::json& j, const AccessType& o) {
 
   switch (o.getValue()) {
     case AccessType::eAccessType::INVALID_VALUE_OPENAPI_GENERATED:
+    case AccessType::eAccessType::NULL_VALUE:
       j = "INVALID_VALUE_OPENAPI_GENERATED";
       break;
     case AccessType::eAccessType::_3GPP_ACCESS:

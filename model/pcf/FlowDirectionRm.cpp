@@ -16,6 +16,7 @@
 #include "logger.hpp"
 
 #include <sstream>
+#include <iostream>
 
 namespace oai::model::pcf {
 
@@ -52,13 +53,13 @@ bool FlowDirectionRm::operator!=(const FlowDirectionRm& rhs) const {
 
 void to_json(nlohmann::json& /*j*/, const FlowDirectionRm& /*o*/) {
   // j = nlohmann::json();
-  Logger::pcf_app().error(
-      __PRETTY_FUNCTION__ + std::string{" not implemented"});
+  std::cout << __PRETTY_FUNCTION__ + std::string{" not implemented"}
+            << std::endl;
 }
 
 void from_json(const nlohmann::json& /*j*/, FlowDirectionRm& /*o*/) {
-  Logger::pcf_app().error(
-      __PRETTY_FUNCTION__ + std::string{" not implemented"});
+  std::cout << __PRETTY_FUNCTION__ + std::string{" not implemented"}
+            << std::endl;
 }
 
 FlowDirection_anyOf FlowDirectionRm::getValue() const {

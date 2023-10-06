@@ -19,6 +19,7 @@
 #ifndef OdbPacketServices_H_
 #define OdbPacketServices_H_
 
+#include "OdbPacketServices_anyOf.h"
 #include "NullValue.h"
 #include <nlohmann/json.hpp>
 
@@ -59,7 +60,13 @@ class OdbPacketServices {
   friend void to_json(nlohmann::json& j, const OdbPacketServices& o);
   friend void from_json(const nlohmann::json& j, OdbPacketServices& o);
 
+  OdbPacketServices_anyOf getValue() const;
+  void setValue(OdbPacketServices_anyOf value);
+  OdbPacketServices_anyOf::eOdbPacketServices_anyOf getEnumValue() const;
+  void setEnumValue(OdbPacketServices_anyOf::eOdbPacketServices_anyOf value);
+
  protected:
+  OdbPacketServices_anyOf m_value;
 };
 
 }  // namespace oai::model::common

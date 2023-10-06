@@ -96,7 +96,7 @@ void to_json(nlohmann::json& j, const LoggingIntervalNrMdt_anyOf& o) {
     case LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf::_640:
       j = "640";
       break;
-    case LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf::INFINITY:
+    case LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf::_INFINITY:
       j = "infinity";
       break;
   }
@@ -126,7 +126,7 @@ void from_json(const nlohmann::json& j, LoggingIntervalNrMdt_anyOf& o) {
     o.setValue(LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf::_640);
   } else if (s == "infinity") {
     o.setValue(
-        LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf::INFINITY);
+        LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf::_INFINITY);
   } else {
     std::stringstream ss;
     ss << "Unexpected value " << s << " in json"

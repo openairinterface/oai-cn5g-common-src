@@ -65,7 +65,9 @@ static void fix_primitive_json_values(
             continue;
           }
         } else {
-          int val       = std::stoi(e);
+          size_t chars_processed = 0;
+          int val                = std::stoi(e, &chars_processed);
+          if (chars_processed != e.length()) throw std::invalid_argument("");
           j[elem.key()] = val;  // replace with int
         }
       } catch (std::invalid_argument& ex) {

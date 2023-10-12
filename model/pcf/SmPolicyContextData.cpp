@@ -683,11 +683,11 @@ std::string SmPolicyContextData::getDnn() const {
 void SmPolicyContextData::setDnn(std::string const& value) {
   m_Dnn = value;
 }
-oai::model::pcf::DnnSelectionMode SmPolicyContextData::getDnnSelMode() const {
+oai::model::smf::DnnSelectionMode SmPolicyContextData::getDnnSelMode() const {
   return m_DnnSelMode;
 }
 void SmPolicyContextData::setDnnSelMode(
-    oai::model::pcf::DnnSelectionMode const& value) {
+    oai::model::smf::DnnSelectionMode const& value) {
   m_DnnSelMode      = value;
   m_DnnSelModeIsSet = true;
 }

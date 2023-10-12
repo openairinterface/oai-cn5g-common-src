@@ -16,7 +16,7 @@
 
 #include <sstream>
 
-namespace oai::model::pcf {
+namespace oai::model::smf {
 
 DnnSelectionMode::DnnSelectionMode() {}
 
@@ -80,4 +80,4 @@ void DnnSelectionMode::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::pcf
+}  // namespace oai::model::smf

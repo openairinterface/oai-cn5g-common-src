@@ -16,7 +16,6 @@
 
 #include <sstream>
 
-// TODO move to SMF model
 namespace oai::model::smf {
 using namespace oai::model::common;
 

@@ -11,14 +11,14 @@
  * the class manually.
  */
 /*
- * DnnSelectionMode_anyOf.h
+ * AtsssCapability.h
  *
  *
  */
 
-#ifndef DnnSelectionMode_anyOf_H_
-#define DnnSelectionMode_anyOf_H_
+#pragma once
 
+#include "PcfAtsssCapability_anyOf.h"
 #include <nlohmann/json.hpp>
 
 namespace oai::model::pcf {
@@ -26,20 +26,10 @@ namespace oai::model::pcf {
 /// <summary>
 ///
 /// </summary>
-class DnnSelectionMode_anyOf {
+class AtsssCapability {
  public:
-  DnnSelectionMode_anyOf();
-  virtual ~DnnSelectionMode_anyOf() = default;
-
-  enum class eDnnSelectionMode_anyOf {
-    // To have a valid default value.
-    // Avoiding name clashes with user defined
-    // enum values
-    INVALID_VALUE_OPENAPI_GENERATED = 0,
-    VERIFIED,
-    UE_DNN_NOT_VERIFIED,
-    NW_DNN_NOT_VERIFIED
-  };
+  AtsssCapability();
+  virtual ~AtsssCapability() = default;
 
   /// <summary>
   /// Validate the current data in the model. Throws a ValidationException on
@@ -59,24 +49,23 @@ class DnnSelectionMode_anyOf {
   /// </summary>
   bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
 
-  bool operator==(const DnnSelectionMode_anyOf& rhs) const;
-  bool operator!=(const DnnSelectionMode_anyOf& rhs) const;
+  bool operator==(const AtsssCapability& rhs) const;
+  bool operator!=(const AtsssCapability& rhs) const;
 
   /////////////////////////////////////////////
-  /// DnnSelectionMode_anyOf members
+  /// AtsssCapability members
 
-  DnnSelectionMode_anyOf::eDnnSelectionMode_anyOf getValue() const;
-  void setValue(DnnSelectionMode_anyOf::eDnnSelectionMode_anyOf value);
-
-  friend void to_json(nlohmann::json& j, const DnnSelectionMode_anyOf& o);
-  friend void from_json(const nlohmann::json& j, DnnSelectionMode_anyOf& o);
+  AtsssCapability_anyOf getValue() const;
+  void setValue(AtsssCapability_anyOf value);
+  AtsssCapability_anyOf::eAtsssCapability_anyOf getEnumValue() const;
+  void setEnumValue(AtsssCapability_anyOf::eAtsssCapability_anyOf value);
+  friend void to_json(nlohmann::json& j, const AtsssCapability& o);
+  friend void from_json(const nlohmann::json& j, AtsssCapability& o);
+  friend void to_json(nlohmann::json& j, const AtsssCapability_anyOf& o);
+  friend void from_json(const nlohmann::json& j, AtsssCapability_anyOf& o);
 
  protected:
-  DnnSelectionMode_anyOf::eDnnSelectionMode_anyOf m_value =
-      DnnSelectionMode_anyOf::eDnnSelectionMode_anyOf::
-          INVALID_VALUE_OPENAPI_GENERATED;
+  AtsssCapability_anyOf m_value;
 };
 
 }  // namespace oai::model::pcf
-
-#endif /* DnnSelectionMode_anyOf_H_ */

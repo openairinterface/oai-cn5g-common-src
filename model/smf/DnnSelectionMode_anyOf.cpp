@@ -16,7 +16,7 @@
 #include <stdexcept>
 #include <sstream>
 
-namespace oai::model::pcf {
+namespace oai::model::smf {
 
 DnnSelectionMode_anyOf::DnnSelectionMode_anyOf() {}
 
@@ -106,4 +106,4 @@ void DnnSelectionMode_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::pcf
+}  // namespace oai::model::smf

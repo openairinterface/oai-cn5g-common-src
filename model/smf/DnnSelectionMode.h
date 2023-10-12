@@ -22,7 +22,7 @@
 #include "DnnSelectionMode_anyOf.h"
 #include <nlohmann/json.hpp>
 
-namespace oai::model::pcf {
+namespace oai::model::smf {
 
 /// <summary>
 /// Possible values are - VERIFIED - UE_DNN_NOT_VERIFIED - NW_DNN_NOT_VERIFIED
@@ -69,6 +69,6 @@ class DnnSelectionMode {
   DnnSelectionMode_anyOf m_value;
 };
 
-}  // namespace oai::model::pcf
+}  // namespace oai::model::smf
 
 #endif /* DnnSelectionMode_H_ */

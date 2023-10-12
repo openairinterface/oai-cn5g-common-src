@@ -11,7 +11,7 @@
  * the class manually.
  */
 
-#include "AtsssCapability_anyOf.h"
+#include "PcfAtsssCapability_anyOf.h"
 #include "Helpers.h"
 #include <stdexcept>
 #include <sstream>

@@ -21,7 +21,7 @@
 
 #include "AccNetChId.h"
 #include "Ambr.h"
-#include "AtsssCapability.h"
+#include "PcfAtsssCapability.h"
 #include "SubscribedDefaultQos.h"
 #include "VplmnQos.h"
 #include "RatType.h"
@@ -145,8 +145,8 @@ class SmPolicyContextData {
   /// <summary>
   ///
   /// </summary>
-  oai::model::pcf::DnnSelectionMode getDnnSelMode() const;
-  void setDnnSelMode(oai::model::pcf::DnnSelectionMode const& value);
+  oai::model::smf::DnnSelectionMode getDnnSelMode() const;
+  void setDnnSelMode(oai::model::smf::DnnSelectionMode const& value);
   bool dnnSelModeIsSet() const;
   void unsetDnnSelMode();
   /// <summary>
@@ -392,7 +392,7 @@ class SmPolicyContextData {
   bool m_ChargingcharacteristicsIsSet;
   std::string m_Dnn;
 
-  oai::model::pcf::DnnSelectionMode m_DnnSelMode;
+  oai::model::smf::DnnSelectionMode m_DnnSelMode;
   bool m_DnnSelModeIsSet;
   std::string m_NotificationUri;
 

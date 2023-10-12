@@ -36,7 +36,7 @@
 #include "AdditionalAccessInfo.h"
 #include "AccNetChId.h"
 #include "Ambr.h"
-#include "AtsssCapability.h"
+#include "PcfAtsssCapability.h"
 #include "VplmnQos.h"
 #include "RatType.h"
 #include "SessionRuleReport.h"

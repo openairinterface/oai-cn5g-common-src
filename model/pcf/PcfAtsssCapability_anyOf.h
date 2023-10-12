@@ -11,15 +11,13 @@
  * the class manually.
  */
 /*
- * AtsssCapability.h
+ * AtsssCapability_anyOf.h
  *
  *
  */
 
-#ifndef AtsssCapability_H_
-#define AtsssCapability_H_
+#pragma once
 
-#include "AtsssCapability_anyOf.h"
 #include <nlohmann/json.hpp>
 
 namespace oai::model::pcf {
@@ -27,10 +25,22 @@ namespace oai::model::pcf {
 /// <summary>
 ///
 /// </summary>
-class AtsssCapability {
+class AtsssCapability_anyOf {
  public:
-  AtsssCapability();
-  virtual ~AtsssCapability() = default;
+  AtsssCapability_anyOf();
+  virtual ~AtsssCapability_anyOf() = default;
+
+  enum class eAtsssCapability_anyOf {
+    // To have a valid default value.
+    // Avoiding name clashes with user defined
+    // enum values
+    INVALID_VALUE_OPENAPI_GENERATED = 0,
+    MPTCP_ATSSS_LL_WITH_ASMODE_UL,
+    MPTCP_ATSSS_LL_WITH_EXSDMODE_DL_ASMODE_UL,
+    MPTCP_ATSSS_LL_WITH_ASMODE_DLUL,
+    ATSSS_LL,
+    MPTCP_ATSSS_LL
+  };
 
   /// <summary>
   /// Validate the current data in the model. Throws a ValidationException on
@@ -50,25 +60,22 @@ class AtsssCapability {
   /// </summary>
   bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
 
-  bool operator==(const AtsssCapability& rhs) const;
-  bool operator!=(const AtsssCapability& rhs) const;
+  bool operator==(const AtsssCapability_anyOf& rhs) const;
+  bool operator!=(const AtsssCapability_anyOf& rhs) const;
 
   /////////////////////////////////////////////
-  /// AtsssCapability members
+  /// AtsssCapability_anyOf members
 
-  AtsssCapability_anyOf getValue() const;
-  void setValue(AtsssCapability_anyOf value);
-  AtsssCapability_anyOf::eAtsssCapability_anyOf getEnumValue() const;
-  void setEnumValue(AtsssCapability_anyOf::eAtsssCapability_anyOf value);
-  friend void to_json(nlohmann::json& j, const AtsssCapability& o);
-  friend void from_json(const nlohmann::json& j, AtsssCapability& o);
+  AtsssCapability_anyOf::eAtsssCapability_anyOf getValue() const;
+  void setValue(AtsssCapability_anyOf::eAtsssCapability_anyOf value);
+
   friend void to_json(nlohmann::json& j, const AtsssCapability_anyOf& o);
   friend void from_json(const nlohmann::json& j, AtsssCapability_anyOf& o);
 
  protected:
-  AtsssCapability_anyOf m_value;
+  AtsssCapability_anyOf::eAtsssCapability_anyOf m_value =
+      AtsssCapability_anyOf::eAtsssCapability_anyOf::
+          INVALID_VALUE_OPENAPI_GENERATED;
 };
 
 }  // namespace oai::model::pcf
-
-#endif /* AtsssCapability_H_ */

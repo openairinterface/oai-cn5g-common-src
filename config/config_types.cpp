@@ -834,8 +834,8 @@ std::string database_config::to_string(const std::string& indent) const {
       BASE_FORMATTER, OUTER_LIST_ELEM, NF_CONFIG_HOST_NAME_LABEL, inner_width,
       m_host.get_value()));
   out.append(indent).append(fmt::format(
-          BASE_FORMATTER, OUTER_LIST_ELEM, DATABASE_CONFIG_PORT_LABEL, inner_width,
-          m_port.get_value()));
+      BASE_FORMATTER, OUTER_LIST_ELEM, DATABASE_CONFIG_PORT_LABEL, inner_width,
+      m_port.get_value()));
   out.append(indent).append(fmt::format(
       BASE_FORMATTER, OUTER_LIST_ELEM, DATABASE_CONFIG_DATABASE_TYPE_LABEL,
       inner_width, m_database_type.get_value()));

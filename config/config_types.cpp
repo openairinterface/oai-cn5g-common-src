@@ -1290,3 +1290,52 @@ void nf_http_version::validate() {
 const std::string& nf_http_version::get_http_version() const {
   return m_version.get_value();
 }
+
+curl_timeout::curl_timeout() {
+  m_set          = false;
+  m_curl_timeout = int_config_value(
+      NF_CONFIG_CURL_TIMEOUT, NF_CONFIG_CURL_TIMEOUT_DEFAULT_VALUE);
+  m_curl_timeout.set_validation_interval(
+      NF_CONFIG_CURL_TIMEOUT_MIN_VALUE, NF_CONFIG_CURL_TIMEOUT_MAX_VALUE);
+  m_config_name = NF_CONFIG_CURL_TIMEOUT;
+}
+
+void curl_timeout::from_yaml(const YAML::Node& node) {
+  m_set = true;
+  m_curl_timeout.from_yaml(node);
+}
+
+nlohmann::json curl_timeout::to_json() {
+  nlohmann::json json_data = {};
+  json_data                = m_curl_timeout.to_json();
+  return json_data;
+}
+
+bool curl_timeout::from_json(const nlohmann::json& json_data) {
+  try {
+    m_curl_timeout.from_json(json_data);
+  } catch (nlohmann::detail::exception& e) {
+    // TODO:
+  } catch (std::exception& e) {
+    // TODO:
+  }
+  return false;
+}
+
+std::string curl_timeout::to_string(const std::string& indent) const {
+  std::string out;
+  unsigned int inner_width = get_inner_width(indent.length());
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, OUTER_LIST_ELEM, NF_CONFIG_CURL_TIMEOUT_LABEL,
+      inner_width, std::to_string(m_curl_timeout.get_value()) + " (ms)"));
+  return out;
+}
+
+void curl_timeout::validate() {
+  if (!m_set) return;
+  m_curl_timeout.validate();
+}
+
+const uint32_t curl_timeout::get() const {
+  return m_curl_timeout.get_value();
+}

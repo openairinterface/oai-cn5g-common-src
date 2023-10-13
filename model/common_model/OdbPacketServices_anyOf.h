@@ -11,13 +11,12 @@
  * the class manually.
  */
 /*
- * LoggingIntervalNrMdt_anyOf.h
+ * OdbPacketServices_anyOf.h
  *
  *
  */
-
-#ifndef LoggingIntervalNrMdt_anyOf_H_
-#define LoggingIntervalNrMdt_anyOf_H_
+#ifndef OdbPacketServices_anyOf_H_
+#define OdbPacketServices_anyOf_H_
 
 #include <nlohmann/json.hpp>
 
@@ -26,27 +25,20 @@ namespace oai::model::common {
 /// <summary>
 ///
 /// </summary>
-class LoggingIntervalNrMdt_anyOf {
+class OdbPacketServices_anyOf {
  public:
-  LoggingIntervalNrMdt_anyOf();
-  virtual ~LoggingIntervalNrMdt_anyOf() = default;
+  OdbPacketServices_anyOf();
+  virtual ~OdbPacketServices_anyOf() = default;
 
-  enum class eLoggingIntervalNrMdt_anyOf {
+  enum class eOdbPacketServices_anyOf {
     // To have a valid default value.
     // Avoiding name clashes with user defined
     // enum values
     INVALID_VALUE_OPENAPI_GENERATED = 0,
-    _128,
-    _256,
-    _512,
-    _1024,
-    _2048,
-    _3072,
-    _4096,
-    _6144,
-    _320,
-    _640,
-    _INFINITY
+    ALL_PACKET_SERVICES,
+    NULL_VALUE,
+    ROAMER_ACCESS_HPLMN_AP,
+    ROAMER_ACCESS_VPLMN_AP
   };
 
   /// <summary>
@@ -67,24 +59,24 @@ class LoggingIntervalNrMdt_anyOf {
   /// </summary>
   bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
 
-  bool operator==(const LoggingIntervalNrMdt_anyOf& rhs) const;
-  bool operator!=(const LoggingIntervalNrMdt_anyOf& rhs) const;
+  bool operator==(const OdbPacketServices_anyOf& rhs) const;
+  bool operator!=(const OdbPacketServices_anyOf& rhs) const;
 
   /////////////////////////////////////////////
-  /// LoggingIntervalNrMdt_anyOf members
+  /// OdbPacketServices_anyOf members
 
-  LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf getValue() const;
-  void setValue(LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf value);
+  OdbPacketServices_anyOf::eOdbPacketServices_anyOf getValue() const;
+  void setValue(OdbPacketServices_anyOf::eOdbPacketServices_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const LoggingIntervalNrMdt_anyOf& o);
-  friend void from_json(const nlohmann::json& j, LoggingIntervalNrMdt_anyOf& o);
+  friend void to_json(nlohmann::json& j, const OdbPacketServices_anyOf& o);
+  friend void from_json(const nlohmann::json& j, OdbPacketServices_anyOf& o);
 
  protected:
-  LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf m_value =
-      LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf::
+  OdbPacketServices_anyOf::eOdbPacketServices_anyOf m_value =
+      OdbPacketServices_anyOf::eOdbPacketServices_anyOf::
           INVALID_VALUE_OPENAPI_GENERATED;
 };
 
 }  // namespace oai::model::common
 
-#endif /* LoggingIntervalNrMdt_anyOf_H_ */
+#endif /* OdbPacketServices_anyOf_H_ */

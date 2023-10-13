@@ -42,6 +42,7 @@ config::config(
     : m_register_nrf_feature("register_nf", nf_name, false),
       m_log_level_feature("log_level", nf_name, std::string("info")),
       m_http_version(),
+      m_curl_timeout(),
       m_database(DATABASE_CONFIG) {
   logger::logger_registry::register_logger(
       nf_name, LOGGER_NAME, log_stdout, log_rot_file);
@@ -67,6 +68,8 @@ void config::read_from_file(const std::string& file_path) {
           m_register_nrf_feature.from_yaml(elem.second);
         } else if (key == NF_CONFIG_HTTP_NAME) {
           m_http_version.from_yaml(elem.second);
+        } else if (key == NF_CONFIG_CURL_TIMEOUT) {
+          m_curl_timeout.from_yaml(elem.second);
         } else if (key == m_nf_name) {
           const auto nf_ptr = m_nf_map.find(m_nf_name);
           if (nf_ptr == m_nf_map.end()) {
@@ -145,6 +148,7 @@ void config::to_json(nlohmann::json& json_data) {
       m_log_level_feature.to_json();
   json_data[m_register_nrf_feature.get_config_name()] =
       m_register_nrf_feature.to_json();
+  json_data[m_curl_timeout.get_config_name()] = m_curl_timeout.to_json();
   if (m_database.is_set()) {
     json_data[m_database.get_config_name()] = m_database.to_json();
   }
@@ -167,6 +171,10 @@ bool config::from_json(const nlohmann::json& json_data) {
           json_data[m_register_nrf_feature.get_config_name()]);
     }
 
+    if (json_data.find(m_curl_timeout.get_config_name()) != json_data.end()) {
+      m_curl_timeout.from_json(json_data[m_curl_timeout.get_config_name()]);
+    }
+
   } catch (nlohmann::detail::exception& e) {
     // TODO:
   } catch (std::exception& e) {
@@ -187,6 +195,7 @@ bool config::validate() {
   }
   success &= safe_validate_field(m_register_nrf_feature);
   success &= safe_validate_field(m_http_version);
+  success &= safe_validate_field(m_curl_timeout);
   for (auto& nf : m_nf_map) {
     success &= safe_validate_field(*nf.second);
   }
@@ -229,6 +238,8 @@ std::string config::to_string() const {
   out.append(m_log_level_feature.to_string(indent));
   out.append(m_register_nrf_feature.to_string(indent));
   out.append(m_http_version.to_string(indent));
+  out.append(m_curl_timeout.to_string(indent));
+
   out.append(m_local_nf->to_string(indent));
   if (m_database.is_set()) {
     out.append(indent).append("Database:\n");
@@ -332,6 +343,10 @@ int config::get_http_version() const {
   }
   // by default
   return 1;
+}
+
+const uint32_t config::get_curl_timeout() {
+  return m_curl_timeout.get();
 }
 
 bool config::add_nf(

@@ -37,13 +37,16 @@ bool OdbPacketServices::validate(
   const std::string _pathPrefix =
       pathPrefix.empty() ? "OdbPacketServices" : pathPrefix;
 
+  if (!m_value.validate(msg)) {
+    success = false;
+    msg << _pathPrefix << ": has no value;";
+  }
+
   return success;
 }
 
 bool OdbPacketServices::operator==(const OdbPacketServices& rhs) const {
-  return
-
-      ;
+  return getValue() == rhs.getValue();
 }
 
 bool OdbPacketServices::operator!=(const OdbPacketServices& rhs) const {
@@ -55,5 +58,23 @@ void to_json(nlohmann::json& j, const OdbPacketServices& o) {
 }
 
 void from_json(const nlohmann::json& j, OdbPacketServices& o) {}
+
+OdbPacketServices_anyOf OdbPacketServices::getValue() const {
+  return m_value;
+}
+
+void OdbPacketServices::setValue(OdbPacketServices_anyOf value) {
+  m_value = value;
+}
+
+OdbPacketServices_anyOf::eOdbPacketServices_anyOf
+OdbPacketServices::getEnumValue() const {
+  return m_value.getValue();
+}
+
+void OdbPacketServices::setEnumValue(
+    OdbPacketServices_anyOf::eOdbPacketServices_anyOf value) {
+  m_value.setValue(value);
+}
 
 }  // namespace oai::model::common

@@ -84,6 +84,8 @@ constexpr auto NF_CONFIG_HOST_NAME_LABEL = "Host";
 // scenario (only AMF/SMF/UPF)
 constexpr auto DATABASE_CONFIG                          = "database";
 constexpr auto DATABASE_CONFIG_LABEL                    = "Database";
+constexpr auto DATABASE_CONFIG_PORT                     = "port";
+constexpr auto DATABASE_CONFIG_PORT_LABEL               = "Port";
 constexpr auto DATABASE_CONFIG_USER                     = "user";
 constexpr auto DATABASE_CONFIG_USER_LABEL               = "User";
 constexpr auto DATABASE_CONFIG_PASSWORD                 = "password";

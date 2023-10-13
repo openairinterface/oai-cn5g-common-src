@@ -435,4 +435,20 @@ class nf_http_version : public config_type {
   [[nodiscard]] const std::string& get_http_version() const;
 };
 
+class curl_timeout : public config_type {
+ private:
+  int_config_value m_curl_timeout{};
+
+ public:
+  explicit curl_timeout();
+
+  void from_yaml(const YAML::Node& node) override;
+  nlohmann::json to_json() override;
+  bool from_json(const nlohmann::json& json_data) override;
+
+  [[nodiscard]] std::string to_string(const std::string& indent) const override;
+  void validate() override;
+  [[nodiscard]] const uint32_t get() const;
+};
+
 }  // namespace oai::config

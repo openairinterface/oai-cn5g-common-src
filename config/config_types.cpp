@@ -812,7 +812,7 @@ bool database_config::from_json(const nlohmann::json& json_data) {
 }
 
 int_config_value database_config::get_default_database_port(
-    const string_config_value database_type) const {
+    const string_config_value& database_type) const {
   if (database_type.get_value() == "mysql") {
     return int_config_value(DATABASE_CONFIG_PORT, 3306);
   }

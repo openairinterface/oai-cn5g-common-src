@@ -44,11 +44,12 @@ bool DddTrafficDescriptor::validate(
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "DddTrafficDescriptor" : pathPrefix;
-
+  /*
   if (ipv4AddrIsSet()) {
     const std::string& value           = m_Ipv4Addr;
     const std::string currentValuePath = _pathPrefix + ".ipv4Addr";
   }
+  */
 
   if (portNumberIsSet()) {
     const int32_t& value               = m_PortNumber;
@@ -59,11 +60,12 @@ bool DddTrafficDescriptor::validate(
       msg << currentValuePath << ": must be greater than or equal to 0;";
     }
   }
-
+  /*
   if (macAddrIsSet()) {
     const std::string& value           = m_MacAddr;
     const std::string currentValuePath = _pathPrefix + ".macAddr";
   }
+  */
 
   return success;
 }

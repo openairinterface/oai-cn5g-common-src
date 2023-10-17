@@ -26,6 +26,11 @@ bool AccessTypeRm::validate(
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AccessTypeRm" : pathPrefix;
 
+  if (m_value == AccessType::eAccessType::INVALID_VALUE_OPENAPI_GENERATED) {
+    success = false;
+    msg << _pathPrefix << ": has no value;";
+  }
+
   return success;
 }
 
@@ -42,12 +47,15 @@ void to_json(nlohmann::json& j, const AccessTypeRm& o) {
     case AccessType::eAccessType::NON_3GPP_ACCESS:
       j = "NON_3GPP_ACCESS";
       break;
+    case AccessType::eAccessType::NULL_VALUE:
+      j = nullptr;
+      break;
   }
 }
 
 void from_json(const nlohmann::json& j, AccessTypeRm& o) {
   if (!j) {
-    o.setValue(AccessType::eAccessType::INVALID_VALUE_OPENAPI_GENERATED);
+    o.setValue(AccessType::eAccessType::NULL_VALUE);
     return;
   }
 
@@ -56,6 +64,8 @@ void from_json(const nlohmann::json& j, AccessTypeRm& o) {
     o.setValue(AccessType::eAccessType::_3GPP_ACCESS);
   } else if (s == "NON_3GPP_ACCESS") {
     o.setValue(AccessType::eAccessType::NON_3GPP_ACCESS);
+  } else if (s == "null") {
+    o.setValue(AccessType::eAccessType::NULL_VALUE);
   } else {
     std::stringstream ss;
     ss << "Unexpected value " << s << " in json"

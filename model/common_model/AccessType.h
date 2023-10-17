@@ -37,7 +37,8 @@ class AccessType {
     // enum values
     INVALID_VALUE_OPENAPI_GENERATED = 0,
     _3GPP_ACCESS,
-    NON_3GPP_ACCESS
+    NON_3GPP_ACCESS,
+    NULL_VALUE
   };
 
   /// <summary>

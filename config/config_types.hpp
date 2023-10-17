@@ -324,7 +324,6 @@ class database_config : public config_type {
   string_config_value m_pass;
   string_config_value m_database_name;
   string_config_value m_database_type;
-  option_config_value m_random;
   int_config_value m_connection_timeout;
 
  public:

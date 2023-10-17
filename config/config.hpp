@@ -92,8 +92,6 @@ constexpr auto DATABASE_CONFIG_DATABASE_NAME            = "database_name";
 constexpr auto DATABASE_CONFIG_DATABASE_NAME_LABEL      = "Database Name";
 constexpr auto DATABASE_CONFIG_DATABASE_TYPE            = "type";
 constexpr auto DATABASE_CONFIG_DATABASE_TYPE_LABEL      = "Database Type";
-constexpr auto DATABASE_CONFIG_RANDOM                   = "generate_random";
-constexpr auto DATABASE_CONFIG_RANDOM_LABEL             = "Generate Random";
 constexpr auto DATABASE_CONFIG_CONNECTION_TIMEOUT       = "connection_timeout";
 constexpr auto DATABASE_CONFIG_CONNECTION_TIMEOUT_LABEL = "Connection Timeout";
 

@@ -718,7 +718,6 @@ database_config::database_config(const std::string& name) {
   m_pass          = string_config_value(DATABASE_CONFIG_PASSWORD, "linux");
   m_database_name =
       string_config_value(DATABASE_CONFIG_DATABASE_NAME, "oai_db");
-  m_random = option_config_value(DATABASE_CONFIG_RANDOM, false);
   m_connection_timeout =
       int_config_value(DATABASE_CONFIG_CONNECTION_TIMEOUT, 300);
 
@@ -742,9 +741,6 @@ void database_config::from_yaml(const YAML::Node& node) {
   if (node[DATABASE_CONFIG_DATABASE_NAME]) {
     m_database_name.from_yaml(node[DATABASE_CONFIG_DATABASE_NAME]);
   }
-  if (node[DATABASE_CONFIG_RANDOM]) {
-    m_random.from_yaml(node[DATABASE_CONFIG_RANDOM]);
-  }
   if (node[DATABASE_CONFIG_CONNECTION_TIMEOUT]) {
     m_connection_timeout.from_yaml(node[DATABASE_CONFIG_CONNECTION_TIMEOUT]);
   }
@@ -757,7 +753,6 @@ nlohmann::json database_config::to_json() {
   json_data[m_user.get_config_name()]          = m_user.to_json();
   json_data[m_pass.get_config_name()]          = m_pass.to_json();
   json_data[m_database_name.get_config_name()] = m_database_name.to_json();
-  json_data[m_random.get_config_name()]        = m_random.to_json();
   json_data[m_connection_timeout.get_config_name()] =
       m_connection_timeout.to_json();
   return json_data;
@@ -779,9 +774,6 @@ bool database_config::from_json(const nlohmann::json& json_data) {
     }
     if (json_data.find(m_database_name.get_config_name()) != json_data.end()) {
       m_database_name.from_json(json_data[m_database_name.get_config_name()]);
-    }
-    if (json_data.find(m_random.get_config_name()) != json_data.end()) {
-      m_random.from_json(json_data[m_random.get_config_name()]);
     }
     if (json_data.find(m_connection_timeout.get_config_name()) !=
         json_data.end()) {
@@ -814,11 +806,6 @@ std::string database_config::to_string(const std::string& indent) const {
   out.append(indent).append(fmt::format(
       BASE_FORMATTER, OUTER_LIST_ELEM, DATABASE_CONFIG_DATABASE_NAME_LABEL,
       inner_width, m_database_name.get_value()));
-  std::string database_config_random_string =
-      m_random.get_value() ? "Yes" : "No";
-  out.append(indent).append(fmt::format(
-      BASE_FORMATTER, OUTER_LIST_ELEM, DATABASE_CONFIG_RANDOM_LABEL,
-      inner_width, database_config_random_string));
   out.append(indent).append(fmt::format(
       BASE_FORMATTER, OUTER_LIST_ELEM, DATABASE_CONFIG_CONNECTION_TIMEOUT_LABEL,
       inner_width, m_connection_timeout.get_value()));
@@ -847,10 +834,6 @@ const std::string& database_config::get_database_name() const {
 
 const std::string& database_config::get_database_type() const {
   return m_database_type.get_value();
-}
-
-bool database_config::get_random() const {
-  return m_random.get_value();
 }
 
 int database_config::get_connection_timeout() const {

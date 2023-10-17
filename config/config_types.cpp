@@ -714,6 +714,7 @@ database_config::database_config(const std::string& name) {
   m_set           = false;
   m_host          = string_config_value(NF_CONFIG_HOST_NAME, "mysql");
   m_database_type = string_config_value(DATABASE_CONFIG_DATABASE_TYPE, "mysql");
+  m_port          = database_config::get_default_database_port(m_database_type);
   m_user          = string_config_value(DATABASE_CONFIG_USER, "root");
   m_pass          = string_config_value(DATABASE_CONFIG_PASSWORD, "linux");
   m_database_name =
@@ -723,6 +724,7 @@ database_config::database_config(const std::string& name) {
       int_config_value(DATABASE_CONFIG_CONNECTION_TIMEOUT, 300);
 
   m_database_type.set_validation_regex("mysql|cassandra|mongodb");
+  m_port.set_validation_interval(0, 65535);
 }
 
 void database_config::from_yaml(const YAML::Node& node) {
@@ -732,6 +734,12 @@ void database_config::from_yaml(const YAML::Node& node) {
   }
   if (node[DATABASE_CONFIG_DATABASE_TYPE]) {
     m_database_type.from_yaml(node[DATABASE_CONFIG_DATABASE_TYPE]);
+  }
+  if (node[DATABASE_CONFIG_PORT]) {
+    m_port.from_yaml(node[DATABASE_CONFIG_PORT]);
+  } else {
+    // SET DEFAULT DB PORTS
+    m_port = database_config::get_default_database_port(m_database_type);
   }
   if (node[DATABASE_CONFIG_USER]) {
     m_user.from_yaml(node[DATABASE_CONFIG_USER]);
@@ -753,6 +761,7 @@ void database_config::from_yaml(const YAML::Node& node) {
 nlohmann::json database_config::to_json() {
   nlohmann::json json_data                     = {};
   json_data[m_host.get_config_name()]          = m_host.to_json();
+  json_data[m_port.get_config_name()]          = m_port.to_json();
   json_data[m_database_type.get_config_name()] = m_database_type.to_json();
   json_data[m_user.get_config_name()]          = m_user.to_json();
   json_data[m_pass.get_config_name()]          = m_pass.to_json();
@@ -770,6 +779,12 @@ bool database_config::from_json(const nlohmann::json& json_data) {
     }
     if (json_data.find(m_database_type.get_config_name()) != json_data.end()) {
       m_database_type.from_json(json_data[m_database_type.get_config_name()]);
+    }
+    if (json_data.find(m_port.get_config_name()) != json_data.end()) {
+      m_port.from_json(json_data[m_port.get_config_name()]);
+    } else {
+      // SET DEFAULT DB PORTS
+      m_port = database_config::get_default_database_port(m_database_type);
     }
     if (json_data.find(m_user.get_config_name()) != json_data.end()) {
       m_user.from_json(json_data[m_user.get_config_name()]);
@@ -796,12 +811,29 @@ bool database_config::from_json(const nlohmann::json& json_data) {
   return false;
 }
 
+int_config_value database_config::get_default_database_port(
+    const string_config_value& database_type) const {
+  if (database_type.get_value() == "mysql") {
+    return int_config_value(DATABASE_CONFIG_PORT, 3306);
+  }
+  if (database_type.get_value() == "mongodb") {
+    return int_config_value(DATABASE_CONFIG_PORT, 27017);
+  }
+  if (database_type.get_value() == "casandra") {
+    return int_config_value(DATABASE_CONFIG_PORT, 9042);
+  }
+  return int_config_value(DATABASE_CONFIG_PORT, 0);
+}
+
 std::string database_config::to_string(const std::string& indent) const {
   std::string out;
   unsigned int inner_width = get_inner_width(indent.length());
   out.append(indent).append(fmt::format(
       BASE_FORMATTER, OUTER_LIST_ELEM, NF_CONFIG_HOST_NAME_LABEL, inner_width,
       m_host.get_value()));
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, OUTER_LIST_ELEM, DATABASE_CONFIG_PORT_LABEL, inner_width,
+      m_port.get_value()));
   out.append(indent).append(fmt::format(
       BASE_FORMATTER, OUTER_LIST_ELEM, DATABASE_CONFIG_DATABASE_TYPE_LABEL,
       inner_width, m_database_type.get_value()));
@@ -831,6 +863,10 @@ void database_config::validate() {
 
 const std::string& database_config::get_host() const {
   return m_host.get_value();
+}
+
+int database_config::get_port() const {
+  return m_port.get_value();
 }
 
 const std::string& database_config::get_user() const {

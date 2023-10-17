@@ -320,12 +320,17 @@ class nf_features_config : public config_type {
 class database_config : public config_type {
  private:
   string_config_value m_host;
+  int_config_value m_port;
   string_config_value m_user;
   string_config_value m_pass;
   string_config_value m_database_name;
   string_config_value m_database_type;
   option_config_value m_random;
   int_config_value m_connection_timeout;
+
+ protected:
+  [[nodiscard]] int_config_value get_default_database_port(
+      const string_config_value& database_type) const;
 
  public:
   explicit database_config(const std::string& name);
@@ -337,6 +342,7 @@ class database_config : public config_type {
   void validate() override;
 
   [[nodiscard]] const std::string& get_host() const;
+  [[nodiscard]] int get_port() const;
   [[nodiscard]] const std::string& get_user() const;
   [[nodiscard]] const std::string& get_pass() const;
   [[nodiscard]] const std::string& get_database_name() const;

@@ -328,6 +328,10 @@ class database_config : public config_type {
   option_config_value m_random;
   int_config_value m_connection_timeout;
 
+ protected:
+  [[nodiscard]] int_config_value get_default_database_port(
+      const string_config_value& database_type) const;
+
  public:
   explicit database_config(const std::string& name);
 

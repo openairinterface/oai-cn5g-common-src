@@ -325,7 +325,6 @@ class database_config : public config_type {
   string_config_value m_pass;
   string_config_value m_database_name;
   string_config_value m_database_type;
-  option_config_value m_random;
   int_config_value m_connection_timeout;
 
  protected:
@@ -347,7 +346,6 @@ class database_config : public config_type {
   [[nodiscard]] const std::string& get_pass() const;
   [[nodiscard]] const std::string& get_database_name() const;
   [[nodiscard]] const std::string& get_database_type() const;
-  [[nodiscard]] bool get_random() const;
   [[nodiscard]] int get_connection_timeout() const;
 };
 

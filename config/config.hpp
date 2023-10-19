@@ -71,6 +71,7 @@ const std::string UDM_CONFIG_NAME  = "udm";
 const std::string UDR_CONFIG_NAME  = "udr";
 const std::string NSSF_CONFIG_NAME = "nssf";
 const std::string AUSF_CONFIG_NAME = "ausf";
+const std::string UDSF_CONFIG_NAME = "udsf";
 
 const std::string LOG_LEVEL_CONFIG_NAME   = "log_level";
 const std::string REGISTER_NF_CONFIG_NAME = "register_nf";

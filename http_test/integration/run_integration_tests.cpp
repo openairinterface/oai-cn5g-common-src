@@ -38,40 +38,42 @@ using namespace oai;
 using namespace oai::http;
 
 const int NUMBER_OF_THREADS = 100;
-const int HTTP_TIMEOUT = 4000; // in ms
-const int FUTURE_WAIT = 2; // in s
-const bool SLEEP = false;
-const int SLEEP_DUR = 1; // in ms
-const bool SEQ_SLEEP = true;
-const int SEQ_SLEEP_DUR = 100;
+const int HTTP_TIMEOUT      = 4000;  // in ms
+const int FUTURE_WAIT       = 2;     // in s
+const bool SLEEP            = false;
+const int SLEEP_DUR         = 1;  // in ms
+const bool SEQ_SLEEP        = true;
+const int SEQ_SLEEP_DUR     = 100;
 
 static std::atomic<int> unsuccessful_threads(0);
 
-void task(std::future<response> &future_resp) {
-  std::future_status status = future_resp.wait_for(std::chrono::seconds(FUTURE_WAIT));
+void task(std::future<response>& future_resp) {
+  std::future_status status =
+      future_resp.wait_for(std::chrono::seconds(FUTURE_WAIT));
   if (status != std::future_status::ready) {
-    logger::logger_registry::get_logger("test").info("wait_for has expired! No Response");
+    logger::logger_registry::get_logger("test").info(
+        "wait_for has expired! No Response");
     unsuccessful_threads++;
   } else {
-    auto resp = future_resp.get();
+    auto resp         = future_resp.get();
     std::string b_str = resp.body;
-    auto stat_code = static_cast<std::underlying_type<status_code_e>::type>(resp.status_code);
-    logger::logger_registry::get_logger("test").trace("Status Code: %u, Body: %s", stat_code, b_str);
+    auto stat_code    = static_cast<std::underlying_type<status_code_e>::type>(
+        resp.status_code);
+    logger::logger_registry::get_logger("test").trace(
+        "Status Code: %u, Body: %s", stat_code, b_str);
   }
 }
 
-int main(int argc, char *argv[]) {
-  logger::logger_registry::register_logger(
-          "common-src", "test", true, false);
+int main(int argc, char* argv[]) {
+  logger::logger_registry::register_logger("common-src", "test", true, false);
   logger::logger_registry::set_level(spdlog::level::level_enum::trace);
 
   http_client::create_instance(
-          logger::logger_registry::get_logger("test"), HTTP_TIMEOUT, "lo", 2);
+      logger::logger_registry::get_logger("test"), HTTP_TIMEOUT, "lo", 2);
 
   auto http_client = oai::http::http_client::get_instance();
-  int num_threads = NUMBER_OF_THREADS;
-  auto start = std::chrono::high_resolution_clock::now();
-
+  int num_threads  = NUMBER_OF_THREADS;
+  auto start       = std::chrono::high_resolution_clock::now();
 
   std::vector<std::future<response>> responses;
 
@@ -87,32 +89,33 @@ int main(int argc, char *argv[]) {
     } else {
       ruri = "http://localhost:80/post";
     }
-    request r = http_client->prepare_json_request(ruri, std::string("{\n"
-                                                                                  "    \"test\" : {\n"
-                                                                                  "        \"key\":\"test\"\n"
-                                                                                  "    },\n"
-                                                                                  "    \"test_values\" : {\n"
-                                                                                  "        \"w\" : \"x\",\n"
-                                                                                  "        \"y\" : \"z\"\n"
-                                                                                  "    }\n"
-                                                                                  "}"));
+    request r = http_client->prepare_json_request(
+        ruri, std::string("{\n"
+                          "    \"test\" : {\n"
+                          "        \"key\":\"test\"\n"
+                          "    },\n"
+                          "    \"test_values\" : {\n"
+                          "        \"w\" : \"x\",\n"
+                          "        \"y\" : \"z\"\n"
+                          "    }\n"
+                          "}"));
     responses.push_back(
-            std::async([http_client, r] { return http_client->send_post(r); }));
-
+        std::async([http_client, r] { return http_client->send_post(r); }));
+  }
   std::vector<std::thread> threads;
-  for (auto &resp: responses) {
+  for (auto& resp : responses) {
     threads.emplace_back(task, std::ref(resp));
   }
-  for (auto &th: threads) {
+  for (auto& th : threads) {
     th.join();
   }
 
   auto stop_1 = std::chrono::high_resolution_clock::now();
-  auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop_1 - start);
+  auto duration =
+      std::chrono::duration_cast<std::chrono::milliseconds>(stop_1 - start);
   logger::logger_registry::get_logger("test").info(
-          "FIN PARALLEL - %i wait_fore were expired - DURATION: %i (ms)",
-          unsuccessful_threads, duration.count());
-
+      "FIN PARALLEL - %i wait_fore were expired - DURATION: %i (ms)",
+      unsuccessful_threads, duration.count());
 
   for (int i = 0; i < num_threads; i++) {
     request r;
@@ -127,16 +130,19 @@ int main(int argc, char *argv[]) {
       std::this_thread::sleep_for(std::chrono::milliseconds{SEQ_SLEEP_DUR});
     }
 
-    response resp = http_client->send_get(r);
+    response resp     = http_client->send_get(r);
     std::string b_str = resp.body;
-    auto stat_code = static_cast<std::underlying_type<status_code_e>::type>(resp.status_code);
-    logger::logger_registry::get_logger("test").trace("Status Code: %u, Body: %s", stat_code, b_str);
+    auto stat_code    = static_cast<std::underlying_type<status_code_e>::type>(
+        resp.status_code);
+    logger::logger_registry::get_logger("test").trace(
+        "Status Code: %u, Body: %s", stat_code, b_str);
   }
   auto stop_2 = std::chrono::high_resolution_clock::now();
-  auto duration_2 = std::chrono::duration_cast<std::chrono::milliseconds>(stop_2 - stop_1);
+  auto duration_2 =
+      std::chrono::duration_cast<std::chrono::milliseconds>(stop_2 - stop_1);
 
   logger::logger_registry::get_logger("test").info(
-          "FIN SEQUENTIAL - DURATION: %i (ms)", duration_2.count());
+      "FIN SEQUENTIAL - DURATION: %i (ms)", duration_2.count());
 
   return 0;
 }

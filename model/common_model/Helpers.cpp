@@ -11,6 +11,7 @@
  * the class manually.
  */
 #include "Helpers.h"
+
 #include <regex>
 
 namespace oai::model::common::helpers {
@@ -179,6 +180,33 @@ bool validate_regex(
     return false;
   }
   return true;
+}
+
+bool fromStringValue(
+    const std::string& inStr, oai::model::udsf::ClientId& value) {
+  nlohmann::json::parse(inStr).get_to(value);
+  return true;
+}
+
+bool fromStringValue(
+    const std::string& inStr, oai::model::udsf::SearchExpression& value) {
+  nlohmann::json::parse(inStr).get_to(value);
+  return true;
+}
+
+bool fromStringValue(
+    const std::string& inStr, oai::model::udsf::RetrieveRecords& value) {
+  value.set(inStr);
+  // nlohmann::json::parse(inStr).get_to(value);
+  return true;
+}
+
+void fromPistacheToStdStringOptional(
+    const Pistache::Optional<Pistache::Http::Header::Raw>& inOpt,
+    std::optional<std::string>& outOpt) {
+  if (!inOpt.isEmpty()) {
+    outOpt = std::optional<std::string>(inOpt.get().value());
+  }
 }
 
 }  // namespace oai::model::common::helpers

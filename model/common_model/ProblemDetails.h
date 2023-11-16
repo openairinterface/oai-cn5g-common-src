@@ -19,12 +19,13 @@
 #ifndef ProblemDetails_H_
 #define ProblemDetails_H_
 
+#include <nlohmann/json.hpp>
 #include <string>
-#include "InvalidParam.h"
+#include <vector>
+
 #include "AccessTokenErr.h"
 #include "AccessTokenReq.h"
-#include <vector>
-#include <nlohmann/json.hpp>
+#include "InvalidParam.h"
 
 namespace oai::model::common {
 
@@ -138,6 +139,13 @@ class ProblemDetails {
   void setNrfId(std::string const& value);
   bool nrfIdIsSet() const;
   void unsetNrfId();
+  /// <summary>
+  ///
+  /// </summary>
+  std::vector<std::string> getSupportedApiVersions() const;
+  void setSupportedApiVersions(std::vector<std::string> const& value);
+  bool supportedApiVersionsIsSet() const;
+  void unsetSupportedApiVersions();
 
   friend void to_json(nlohmann::json& j, const ProblemDetails& o);
   friend void from_json(const nlohmann::json& j, ProblemDetails& o);
@@ -165,6 +173,8 @@ class ProblemDetails {
   bool m_AccessTokenRequestIsSet;
   std::string m_NrfId;
   bool m_NrfIdIsSet;
+  std::vector<std::string> m_SupportedApiVersions;
+  bool m_SupportedApiVersionsIsSet;
 };
 
 }  // namespace oai::model::common

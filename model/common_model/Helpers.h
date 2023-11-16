@@ -19,15 +19,24 @@
 #ifndef Helpers_H_
 #define Helpers_H_
 
+#include <pistache/endpoint.h>
+#include <pistache/http.h>
+#include <pistache/router.h>
+
 #include <ctime>
-#include <string>
-#include <sstream>
-#include <vector>
 #include <map>
 #include <nlohmann/json.hpp>
-#include "PlmnId.h"
-#include "Snssai.h"
+#include <optional>
+#include <sstream>
+#include <string>
+#include <vector>
+
+#include "ClientId.h"
 #include "NFType.h"
+#include "PlmnId.h"
+#include "RetrieveRecords.h"
+#include "SearchExpression.h"
+#include "Snssai.h"
 #include "Tai.h"
 
 namespace oai::model::common::helpers {
@@ -117,8 +126,22 @@ bool fromStringValue(
 bool fromStringValue(
     const std::string& inStr, oai::model::common::Snssai& value);
 bool fromStringValue(
+    const std::string& inStr, oai::model::udsf::ClientId& value);
+bool fromStringValue(
+    const std::string& inStr, oai::model::udsf::SearchExpression& value);
+bool fromStringValue(
     const std::string& inStr, oai::model::common::NFType& value);
 bool fromStringValue(const std::string& inStr, oai::model::common::Tai& value);
+bool fromStringValue(
+    const std::string& inStr, oai::model::udsf::ClientId& value);
+bool fromStringValue(
+    const std::string& inStr, oai::model::udsf::SearchExpression& value);
+bool fromStringValue(
+    const std::string& inStr, oai::model::udsf::RetrieveRecords& value);
+
+void fromPistacheToStdStringOptional(
+    const Pistache::Optional<Pistache::Http::Header::Raw>& inOpt,
+    std::optional<std::string>& outOpt);
 
 template<typename T>
 bool fromStringValue(
@@ -157,6 +180,14 @@ std::string enumToString(T enum_val) {
   e_str.erase(e_str.begin(), e_str.begin() + ((e_str.length() > 0) ? 1 : 0));
 
   return e_str;
+}
+
+template<typename T>
+void fromPistacheStdOptional(
+    const Pistache::Optional<T>& inOpt, std::optional<T>& outOpt) {
+  if (!inOpt.isEmpty()) {
+    outOpt = std::optional<T>(inOpt.get());
+  }
 }
 
 }  // namespace oai::model::common::helpers

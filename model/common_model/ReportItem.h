@@ -19,8 +19,8 @@
 #ifndef ReportItem_H_
 #define ReportItem_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::common {
 
@@ -62,11 +62,26 @@ class ReportItem {
   std::string getPath() const;
   void setPath(std::string const& value);
 
+  /// <summary>
+  /// A human-readable reason providing details on the reported modification
+  /// failure.  The reason string should identify the operation that failed
+  /// using the operation&#39;s  array index to assist in correlation of the
+  /// invalid parameter with the failed  operation, e.g. \&quot;Replacement
+  /// value invalid for attribute (failed operation index&#x3D; 4)\&quot;.
+  /// </summary>
+  std::string getReason() const;
+  void setReason(std::string const& value);
+  bool reasonIsSet() const;
+  void unsetReason();
+
   friend void to_json(nlohmann::json& j, const ReportItem& o);
   friend void from_json(const nlohmann::json& j, ReportItem& o);
 
  protected:
   std::string m_Path;
+
+  std::string m_Reason;
+  bool m_ReasonIsSet;
 };
 
 }  // namespace oai::model::common

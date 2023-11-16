@@ -12,14 +12,17 @@
  */
 
 #include "ReportItem.h"
-#include "Helpers.h"
 
 #include <sstream>
+
+#include "Helpers.h"
 
 namespace oai::model::common {
 
 ReportItem::ReportItem() {
-  m_Path = "";
+  m_Path        = "";
+  m_Reason      = "";
+  m_ReasonIsSet = false;
 }
 
 void ReportItem::validate() const {
@@ -45,7 +48,10 @@ bool ReportItem::validate(
 bool ReportItem::operator==(const ReportItem& rhs) const {
   return
 
-      (getPath() == rhs.getPath())
+      (getPath() == rhs.getPath()) &&
+
+      ((!reasonIsSet() && !rhs.reasonIsSet()) ||
+       (reasonIsSet() && rhs.reasonIsSet() && getReason() == rhs.getReason()))
 
           ;
 }
@@ -57,10 +63,15 @@ bool ReportItem::operator!=(const ReportItem& rhs) const {
 void to_json(nlohmann::json& j, const ReportItem& o) {
   j         = nlohmann::json();
   j["path"] = o.m_Path;
+  if (o.reasonIsSet()) j["reason"] = o.m_Reason;
 }
 
 void from_json(const nlohmann::json& j, ReportItem& o) {
   j.at("path").get_to(o.m_Path);
+  if (j.find("reason") != j.end()) {
+    j.at("reason").get_to(o.m_Reason);
+    o.m_ReasonIsSet = true;
+  }
 }
 
 std::string ReportItem::getPath() const {
@@ -68,6 +79,19 @@ std::string ReportItem::getPath() const {
 }
 void ReportItem::setPath(std::string const& value) {
   m_Path = value;
+}
+std::string ReportItem::getReason() const {
+  return m_Reason;
+}
+void ReportItem::setReason(std::string const& value) {
+  m_Reason      = value;
+  m_ReasonIsSet = true;
+}
+bool ReportItem::reasonIsSet() const {
+  return m_ReasonIsSet;
+}
+void ReportItem::unsetReason() {
+  m_ReasonIsSet = false;
 }
 
 }  // namespace oai::model::common

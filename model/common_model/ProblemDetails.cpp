@@ -12,32 +12,34 @@
  */
 
 #include "ProblemDetails.h"
-#include "Helpers.h"
 
 #include <sstream>
+
+#include "Helpers.h"
 
 namespace oai::model::common {
 
 ProblemDetails::ProblemDetails() {
-  m_Type                    = "";
-  m_TypeIsSet               = false;
-  m_Title                   = "";
-  m_TitleIsSet              = false;
-  m_Status                  = 0;
-  m_StatusIsSet             = false;
-  m_Detail                  = "";
-  m_DetailIsSet             = false;
-  m_Instance                = "";
-  m_InstanceIsSet           = false;
-  m_Cause                   = "";
-  m_CauseIsSet              = false;
-  m_InvalidParamsIsSet      = false;
-  m_SupportedFeatures       = "";
-  m_SupportedFeaturesIsSet  = false;
-  m_AccessTokenErrorIsSet   = false;
-  m_AccessTokenRequestIsSet = false;
-  m_NrfId                   = "";
-  m_NrfIdIsSet              = false;
+  m_Type                      = "";
+  m_TypeIsSet                 = false;
+  m_Title                     = "";
+  m_TitleIsSet                = false;
+  m_Status                    = 0;
+  m_StatusIsSet               = false;
+  m_Detail                    = "";
+  m_DetailIsSet               = false;
+  m_Instance                  = "";
+  m_InstanceIsSet             = false;
+  m_Cause                     = "";
+  m_CauseIsSet                = false;
+  m_InvalidParamsIsSet        = false;
+  m_SupportedFeatures         = "";
+  m_SupportedFeaturesIsSet    = false;
+  m_AccessTokenErrorIsSet     = false;
+  m_AccessTokenRequestIsSet   = false;
+  m_NrfId                     = "";
+  m_NrfIdIsSet                = false;
+  m_SupportedApiVersionsIsSet = false;
 }
 
 void ProblemDetails::validate() const {
@@ -80,12 +82,46 @@ bool ProblemDetails::validate(
       }
     }
   }
-  /*
+
   if (supportedFeaturesIsSet()) {
     const std::string& value           = m_SupportedFeatures;
     const std::string currentValuePath = _pathPrefix + ".supportedFeatures";
   }
-  */
+
+  if (nrfIdIsSet()) {
+    const std::string& value           = m_NrfId;
+    const std::string currentValuePath = _pathPrefix + ".nrfId";
+
+    if (value.length() < 4) {
+      success = false;
+      msg << currentValuePath << ": must be at least 4 characters long;";
+    }
+    if (value.length() > 253) {
+      success = false;
+      msg << currentValuePath << ": must be at most 253 characters long;";
+    }
+  }
+
+  if (supportedApiVersionsIsSet()) {
+    const std::vector<std::string>& value = m_SupportedApiVersions;
+    const std::string currentValuePath = _pathPrefix + ".supportedApiVersions";
+
+    if (value.size() < 1) {
+      success = false;
+      msg << currentValuePath << ": must have at least 1 elements;";
+    }
+    {  // Recursive validation of array elements
+      const std::string oldValuePath = currentValuePath;
+      int i                          = 0;
+      for (const std::string& value : value) {
+        const std::string currentValuePath =
+            oldValuePath + "[" + std::to_string(i) + "]";
+
+        i++;
+      }
+    }
+  }
+
   return success;
 }
 
@@ -130,7 +166,11 @@ bool ProblemDetails::operator==(const ProblemDetails& rhs) const {
         getAccessTokenRequest() == rhs.getAccessTokenRequest())) &&
 
       ((!nrfIdIsSet() && !rhs.nrfIdIsSet()) ||
-       (nrfIdIsSet() && rhs.nrfIdIsSet() && getNrfId() == rhs.getNrfId()))
+       (nrfIdIsSet() && rhs.nrfIdIsSet() && getNrfId() == rhs.getNrfId())) &&
+
+      ((!supportedApiVersionsIsSet() && !rhs.supportedApiVersionsIsSet()) ||
+       (supportedApiVersionsIsSet() && rhs.supportedApiVersionsIsSet() &&
+        getSupportedApiVersions() == rhs.getSupportedApiVersions()))
 
           ;
 }
@@ -155,6 +195,8 @@ void to_json(nlohmann::json& j, const ProblemDetails& o) {
   if (o.accessTokenRequestIsSet())
     j["accessTokenRequest"] = o.m_AccessTokenRequest;
   if (o.nrfIdIsSet()) j["nrfId"] = o.m_NrfId;
+  if (o.supportedApiVersionsIsSet() || !o.m_SupportedApiVersions.empty())
+    j["supportedApiVersions"] = o.m_SupportedApiVersions;
 }
 
 void from_json(const nlohmann::json& j, ProblemDetails& o) {
@@ -201,6 +243,10 @@ void from_json(const nlohmann::json& j, ProblemDetails& o) {
   if (j.find("nrfId") != j.end()) {
     j.at("nrfId").get_to(o.m_NrfId);
     o.m_NrfIdIsSet = true;
+  }
+  if (j.find("supportedApiVersions") != j.end()) {
+    j.at("supportedApiVersions").get_to(o.m_SupportedApiVersions);
+    o.m_SupportedApiVersionsIsSet = true;
   }
 }
 
@@ -351,6 +397,20 @@ bool ProblemDetails::nrfIdIsSet() const {
 }
 void ProblemDetails::unsetNrfId() {
   m_NrfIdIsSet = false;
+}
+std::vector<std::string> ProblemDetails::getSupportedApiVersions() const {
+  return m_SupportedApiVersions;
+}
+void ProblemDetails::setSupportedApiVersions(
+    std::vector<std::string> const& value) {
+  m_SupportedApiVersions      = value;
+  m_SupportedApiVersionsIsSet = true;
+}
+bool ProblemDetails::supportedApiVersionsIsSet() const {
+  return m_SupportedApiVersionsIsSet;
+}
+void ProblemDetails::unsetSupportedApiVersions() {
+  m_SupportedApiVersionsIsSet = false;
 }
 
 }  // namespace oai::model::common

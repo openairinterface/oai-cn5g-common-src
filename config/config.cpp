@@ -378,3 +378,30 @@ void config::update_used_nfs() {
     }
   }
 }
+
+std::string oai::config::get_value_formatter(int level) {
+  {
+    // TODO use this function everywhere, it is much simpler
+    int indent_width        = level * INDENT_WIDTH;
+    std::string base_indent = fmt::format("{:<{}}", "", indent_width);
+    std::string indent_char =
+        (level + 1) % 2 == 0 ? INNER_LIST_ELEM : OUTER_LIST_ELEM;
+
+    unsigned int inner_width = COLUMN_WIDTH;
+    if (base_indent.length() < COLUMN_WIDTH) {
+      inner_width = COLUMN_WIDTH - base_indent.length();
+    }
+    return base_indent + indent_char + " {:.<" + std::to_string(inner_width) +
+           "}: {}\n";
+  }
+}
+
+std::string oai::config::get_title_formatter(int level) {
+  {
+    int indent_width        = level * INDENT_WIDTH;
+    std::string base_indent = fmt::format("{:<{}}", "", indent_width);
+    std::string indent_char =
+        (level + 1) % 2 == 0 ? INNER_LIST_ELEM : OUTER_LIST_ELEM;
+    return base_indent + indent_char + " {}\n";
+  }
+}

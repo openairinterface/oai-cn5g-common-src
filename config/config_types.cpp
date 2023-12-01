@@ -123,6 +123,14 @@ std::string config_type::add_indent(const std::string& indent) {
   return base_indent + indent;
 }
 
+nlohmann::json config_type::to_json() {
+  return {};
+}
+
+bool config_type::from_json(const nlohmann::json&) {
+  return false;
+}
+
 string_config_value::string_config_value(
     const std::string& name, const std::string& value) {
   m_config_name = name;
@@ -653,7 +661,7 @@ nlohmann::json nf_features_config::to_json() {
   return json_data;
 }
 
-bool nf_features_config::from_json(const nlohmann::json& json_data) {
+bool nf_features_config::from_json(const nlohmann::json&) {
   try {
     // TODO:
     /*   if (json_data.find(m_config_name) != json_data.end()) {

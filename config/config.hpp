@@ -105,7 +105,6 @@ const std::string DNNS_CONFIG_NAME = "dnns";
 constexpr auto NF_CONFIG_HTTP_NAME  = "http_version";
 constexpr auto NF_CONFIG_HTTP_LABEL = "HTTP Version";
 
-
 // HTTP Version
 constexpr auto NF_CONFIG_CURL_TIMEOUT       = "curl_timeout";
 constexpr auto NF_CONFIG_CURL_TIMEOUT_LABEL = "Curl Timeout";

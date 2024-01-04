@@ -47,6 +47,11 @@ typedef struct s_nssai  // section 28.4, TS23.003
       return false;
     }
   }
+  s_nssai& operator=(const s_nssai& s) {
+    sST = s.sST;
+    sD  = s.sD;
+    return *this;
+  }
 
 } snssai_t;
 

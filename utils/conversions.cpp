@@ -27,6 +27,9 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <iomanip>
+#include <iostream>
+#include <sstream>
 
 #include "logger_base.hpp"
 
@@ -51,6 +54,7 @@ static const signed char ascii_to_hex_table[0x100] = {
     -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
     -1, -1, -1, -1, -1, -1, -1, -1, -1};
 
+//------------------------------------------------------------------------------
 void conv::hexa_to_ascii(uint8_t* from, char* to, size_t length) {
   size_t i;
 
@@ -63,6 +67,7 @@ void conv::hexa_to_ascii(uint8_t* from, char* to, size_t length) {
   }
 }
 
+//------------------------------------------------------------------------------
 int conv::ascii_to_hex(uint8_t* dst, const char* h) {
   const unsigned char* hex = (const unsigned char*) h;
   unsigned i               = 0;
@@ -99,6 +104,7 @@ std::string conv::mccToString(
   s.append(std::to_string(mcc16));
   return s;
 }
+
 //------------------------------------------------------------------------------
 std::string conv::mncToString(
     const uint8_t digit1, const uint8_t digit2, const uint8_t digit3) {
@@ -149,6 +155,7 @@ std::string conv::toString(const struct in_addr& inaddr) {
   }
   return s;
 }
+
 //------------------------------------------------------------------------------
 std::string conv::toString(const struct in6_addr& in6addr) {
   std::string s              = {};
@@ -165,4 +172,68 @@ std::string conv::toString(const struct in6_addr& in6addr) {
 //------------------------------------------------------------------------------
 void conv::to_mongodb_path(std::string& input) {
   std::replace(input.begin(), input.end(), '/', '.');
+}
+
+//------------------------------------------------------------------------------
+std::string conv::uint8_to_hex_string(const uint8_t* v, const size_t s) {
+  std::stringstream ss;
+
+  ss << std::hex << std::setfill('0');
+
+  for (int i = 0; i < s; i++) {
+    ss << std::hex << std::setw(2) << static_cast<int>(v[i]);
+  }
+
+  return ss.str();
+}
+
+//------------------------------------------------------------------------------
+void conv::hex_str_to_uint8(const char* string, uint8_t* des) {
+  if (string == NULL) return;
+
+  size_t slength = strlen(string);
+  if ((slength % 2) != 0)  // must be even
+    return;
+
+  size_t dlength = slength / 2;
+
+  // des = (uint8_t*)malloc(dlength);
+
+  memset(des, 0, dlength);
+
+  size_t index = 0;
+  while (index < slength) {
+    char c    = string[index];
+    int value = 0;
+    if (c >= '0' && c <= '9')
+      value = (c - '0');
+    else if (c >= 'A' && c <= 'F')
+      value = (10 + (c - 'A'));
+    else if (c >= 'a' && c <= 'f')
+      value = (10 + (c - 'a'));
+    else
+      return;
+
+    des[(index / 2)] += value << (((index + 1) % 2) * 4);
+
+    index++;
+  }
+}
+
+//------------------------------------------------------------------------------
+std::string conv::UrlDecode(std::string& SRC) {
+  std::string ret;
+  char ch;
+  int ii;
+  for (size_t i = 0; i < SRC.length(); i++) {
+    if (int(SRC[i]) == 37) {
+      sscanf(SRC.substr(i + 1, 2).c_str(), "%x", &ii);
+      ch = static_cast<char>(ii);
+      ret += ch;
+      i = i + 2;
+    } else {
+      ret += SRC[i];
+    }
+  }
+  return (ret);
 }

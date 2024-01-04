@@ -24,6 +24,19 @@ InvalidParam::InvalidParam() {
   m_ReasonIsSet = false;
 }
 
+InvalidParam::InvalidParam(std::string const& param) {
+  m_Param       = param;
+  m_Reason      = "";
+  m_ReasonIsSet = false;
+}
+
+InvalidParam::InvalidParam(
+    std::string const& param, std::string const& reason) {
+  m_Param       = param;
+  m_Reason      = reason;
+  m_ReasonIsSet = true;
+}
+
 void InvalidParam::validate() const {
   std::stringstream msg;
   if (!validate(msg)) {

@@ -101,7 +101,10 @@ const printf_logger& logger_registry::get_logger(const std::string& logger) {
   const auto& end = logger_map.end();
 
   if (it == end) {
-    throw std::runtime_error(fmt::format("Logger {} does not exist", logger));
+    const auto& it_common = logger_map.find(LOGGER_COMMON);
+    if (it_common == end)
+      throw std::runtime_error(fmt::format("Logger {} does not exist", logger));
+    return it_common->second;
   }
   return it->second;
 }

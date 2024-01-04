@@ -47,6 +47,8 @@
 #include <spdlog/common.h>
 #include <fmt/printf.h>
 
+static const std::string LOGGER_COMMON = "common";
+
 namespace oai::logger {
 /**
  * Wrapper class for spdlog, stores reference to spdlog log object and allows
@@ -164,6 +166,15 @@ class logger_registry {
 
  private:
   static std::unordered_map<std::string, printf_logger> logger_map;
+};
+
+class logger_common {
+ public:
+  logger_common(
+      const std::string& name, const bool log_stdout, const bool log_rot_file) {
+    oai::logger::logger_registry::register_logger(
+        name, LOGGER_COMMON, log_stdout, log_rot_file);
+  }
 };
 
 }  // namespace oai::logger

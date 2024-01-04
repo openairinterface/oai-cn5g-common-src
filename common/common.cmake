@@ -19,16 +19,16 @@
 #      contact@openairinterface.org
 ################################################################################
 
-SET(UTILS_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/utils)
-include_directories(UTILS_DIR)
+SET(COMMON_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/common)
+include_directories(COMMON_DIR)
 
-file(GLOB UTILS_SRC_FILES
-        ${UTILS_DIR}/*.cpp
+file(GLOB COMMON_SRC_FILES
+        ${COMMON_DIR}/*.cpp
         )
 
 if (TARGET ${NF_TARGET})
-target_include_directories(${NF_TARGET} PUBLIC ${UTILS_DIR})
+target_include_directories(${NF_TARGET} PUBLIC ${COMMON_DIR})
 target_sources(${NF_TARGET} PRIVATE
-        ${UTILS_SRC_FILES}
+        ${COMMON_SRC_FILES}
         )
 endif()

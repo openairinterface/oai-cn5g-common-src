@@ -151,6 +151,12 @@ typedef struct pcf_info_s {
   // ToDo: rxDiamHost, rxDiamRealm, v2xSupportInd.
 } pcf_info_t;
 
+typedef struct udsf_info_s {
+  std::string group_id;
+  std::vector<supi_range_t> supi_ranges;
+  std::map<std::string, std::vector<identity_range_t>> storage_id_ranges;
+} udsf_info_t;
+
 enum subscr_condition_type_e {  // TODO: use enum class
   UNKNOWN_CONDITION   = 0,
   NF_INSTANCE_ID_COND = 1,

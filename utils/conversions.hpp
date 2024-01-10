@@ -55,7 +55,7 @@ class conv {
   static void to_mongodb_path(std::string& input);
   static std::string uint8_to_hex_string(const uint8_t* v, const size_t s);
   static void hex_str_to_uint8(const char* string, uint8_t* des);
-  static std::string UrlDecode(std::string& SRC);
+  static std::string url_decode(std::string& value);
 
   static bool string_to_int8(const std::string& str, uint8_t& value);
   static bool string_to_int32(const std::string& str, uint32_t& value);

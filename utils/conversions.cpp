@@ -223,18 +223,18 @@ void conv::hex_str_to_uint8(const char* string, uint8_t* des) {
 }
 
 //------------------------------------------------------------------------------
-std::string conv::UrlDecode(std::string& SRC) {
+std::string conv::url_decode(std::string& value) {
   std::string ret;
   char ch;
   int ii;
-  for (size_t i = 0; i < SRC.length(); i++) {
-    if (int(SRC[i]) == 37) {
-      sscanf(SRC.substr(i + 1, 2).c_str(), "%x", &ii);
+  for (size_t i = 0; i < value.length(); i++) {
+    if (int(value[i]) == 37) {
+      sscanf(value.substr(i + 1, 2).c_str(), "%x", &ii);
       ch = static_cast<char>(ii);
       ret += ch;
       i = i + 2;
     } else {
-      ret += SRC[i];
+      ret += value[i];
     }
   }
   return (ret);

@@ -27,6 +27,8 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdlib.h>
+
+#include <boost/algorithm/string.hpp>
 #include <iomanip>
 #include <iostream>
 #include <sstream>
@@ -236,4 +238,96 @@ std::string conv::UrlDecode(std::string& SRC) {
     }
   }
   return (ret);
+}
+
+//------------------------------------------------------------------------------
+bool conv::string_to_int8(const std::string& str, uint8_t& value) {
+  if (str.empty()) return false;
+  try {
+    value = (uint8_t) std::stoi(str);
+  } catch (const std::exception& e) {
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Error when converting from string to int, error: %s", e.what());
+    return false;
+  }
+  return true;
+}
+
+//------------------------------------------------------------------------------
+bool conv::string_to_int32(const std::string& str, uint32_t& value) {
+  if (str.empty()) return false;
+  try {
+    value = (uint32_t) std::stoi(str);
+  } catch (const std::exception& e) {
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Error when converting from string to int, error: %s", e.what());
+    return false;
+  }
+  return true;
+}
+
+//------------------------------------------------------------------------------
+bool conv::string_to_int(
+    const std::string& str, uint32_t& value, const uint8_t& base) {
+  if (str.empty()) return false;
+  if ((base != 10) or (base != 16)) {
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .warn("Only support Dec or Hex string value");
+    return false;
+  }
+  if (base == 16) {
+    if (str.size() <= 2) return false;
+    if (!boost::iequals(str.substr(0, 2), "0x")) return false;
+  }
+  try {
+    value = std::stoul(str, nullptr, base);
+  } catch (const std::exception& e) {
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Error when converting from string to int, error: %s", e.what());
+    return false;
+  }
+  return true;
+}
+
+//------------------------------------------------------------------------------
+void conv::int_to_string_hex(
+    uint32_t value, std::string& value_str, uint8_t length) {
+  std::stringstream stream_str;
+  if (length > 0) {
+    stream_str << std::setfill('0') << std::setw(length) << std::hex << value;
+  } else {
+    stream_str << std::hex << value;
+  }
+
+  std::string value_tmp(stream_str.str());
+  value_str = value_tmp;
+}
+
+//------------------------------------------------------------------------------
+bool conv::string_hex_to_int(const std::string& value_str, uint32_t& value) {
+  if (value_str.empty()) return false;
+  uint8_t base = 16;
+  try {
+    value = std::stoul(value_str, nullptr, base);
+  } catch (const std::exception& e) {
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Error when converting from string to int, error: %s", e.what());
+    return false;
+  }
+  return true;
+}
+
+//------------------------------------------------------------------------------
+uint32_t conv::string_hex_to_int(const std::string& value_str) {
+  uint32_t value = {};
+  if (value_str.empty()) return value;
+  uint8_t base = 16;
+  try {
+    value = std::stoul(value_str, nullptr, base);
+  } catch (const std::exception& e) {
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Error when converting from string to int, error: %s", e.what());
+    value = {};
+  }
+  return value;
 }

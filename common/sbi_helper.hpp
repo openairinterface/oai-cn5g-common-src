@@ -61,26 +61,25 @@ class sbi_helper {
   // AMF: Communication Service
   static inline const std::string AmfCommBase = "/namf-comm/";
   static inline const std::string AmfCommPathUeContextContextId =
-      "/ue-contexts/{ueContextId}";
+      "/ue-contexts/{}";  // /ue-contexts/{ueContextId}
   static inline const std::string AmfCommPathUeContextContextIdRelease =
-      "/ue-contexts/{ueContextId}/release";
+      "/ue-contexts/{}/release";  // /ue-contexts/{ueContextId}/release
   static inline const std::string AmfCommPathUeContextContextIdAssignEbi =
-      "/ue-contexts/{ueContextId}/assign-ebi";
+      "/ue-contexts/{}/assign-ebi";  // /ue-contexts/{ueContextId}/assign-ebi
   static inline const std::string AmfCommPathUeContextContextIdTransfer =
-      "/ue-contexts/{ueContextId}/transfer";
+      "/ue-contexts/{}/transfer";  // /ue-contexts/{ueContextId}/transfer
   static inline const std::string AmfCommPathUeContextContextIdTransferUpdate =
-      "/ue-contexts/{ueContextId}/transfer-update";
+      "/ue-contexts/{}/transfer-update";  // /ue-contexts/{ueContextId}/transfer-update
   static inline const std::string AmfCommPathUeContextContextIdRelocate =
-      "/ue-contexts/{ueContextId}/relocate";
+      "/ue-contexts/{}/relocate";  // /ue-contexts/{ueContextId}/relocate
   static inline const std::string AmfCommPathUeContextContextIdN1N2Message =
-      "/ue-contexts/{ueContextId}/n1-n2-messages";
+      "/ue-contexts/{}/n1-n2-messages";  // /ue-contexts/{ueContextId}/n1-n2-messages
   static inline const std::string
       AmfCommPathUeContextContextIdN1N2MessageSubscriptions =
-          "/ue-contexts/{ueContextId}/n1-n2-messages/subscriptions";
+          "/ue-contexts/{}/n1-n2-messages/subscriptions";  // /ue-contexts/{ueContextId}/n1-n2-messages/subscriptions
   static inline const std::string
       AmfCommPathUeContextContextIdN1N2MessageSubscriptionsSubscriptionId =
-          "/ue-contexts/{ueContextId}/n1-n2-messages/subscriptions/"
-          "{subscriptionId}";
+          "/ue-contexts/{}/n1-n2-messages/subscriptions/{}";  // /ue-contexts/{ueContextId}/n1-n2-messages/subscriptions/{subscriptionId}
   static inline const std::string AmfCommPathNonUeN1N2MessageTransfer =
       "/non-ue-n2-messages/transfer";
 
@@ -91,22 +90,22 @@ class sbi_helper {
           "/non-ue-n2-messages/subscriptions/{n2NotifySubscriptionId}";
   static inline const std::string AmfCommPathSubscriptions = "/subscriptions";
   static inline const std::string AmfCommPathSubscriptionsSubscriptionId =
-      "/subscriptions/{subscriptionId}";
+      "/subscriptions/{}";  // /subscriptions/{subscriptionId}"
 
   // AMF: Event Exposure Service
   static inline const std::string AmfEvtsBase              = "/namf-evts/";
   static inline const std::string AmfEvtsPathSubscriptions = "/subscriptions";
   static inline const std::string AmfEvtsPathSubscriptionsSubscriptionId =
-      "/subscriptions/{subscriptionId}";
+      "/subscriptions/{}";  // /subscriptions/{subscriptionId}"
 
   // AMF: Location Service
   static inline const std::string AmflocBase = "/namf-loc/";
   static inline const std::string AmflocPathUeContextIdProvidePosInfo =
-      "/{ueContextId}/provide-pos-info";
+      "/{}/provide-pos-info";  // /{ueContextId}/provide-pos-info
   static inline const std::string AmflocPathUeContextIdProvideLocInfo =
-      "/{ueContextId}/provide-loc-info";
+      "/{}/provide-loc-info";  // /{ueContextId}/provide-loc-info
   static inline const std::string AmflocPathUeContextIdCancelPosInfo =
-      "/{ueContextId}/cancel-pos-info";
+      "/{}/cancel-pos-info";  // /{ueContextId}/cancel-pos-info
 
   // TODO: AMF: Mobile Terminated Service
 

@@ -26,6 +26,7 @@
 #include <sys/socket.h>
 
 #include <nlohmann/json.hpp>
+#include <optional>
 #include <string>
 
 // TODO: namespace oai::sbi
@@ -40,13 +41,15 @@ constexpr auto kNumberOfNfDeregisterRetries          = 3;
 constexpr auto kTimeIntervalBetweenNfRegisterRetries = 1;    // in seconds
 constexpr auto kTimeIntervalBetweenNfDeregisterRetries = 1;  // in seconds
 
+constexpr auto kDefaultSbiApiVersion = "v1";
+
 typedef struct interface_cfg_s {
   std::string if_name;
   struct in_addr addr4;
   struct in_addr network4;
   struct in6_addr addr6;
   unsigned int port;
-  std::string api_version;
+  std::optional<std::string> api_version;
 } interface_cfg_t;
 
 typedef struct nf_addr_s {

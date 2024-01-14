@@ -22,6 +22,7 @@
 #include "sbi_helper.hpp"
 
 #include <fmt/format.h>
+#include <regex>
 
 //---------------------------------------------------------------------------------------------
 void sbi_helper::get_nrf_nfm_api_root(
@@ -35,6 +36,21 @@ void sbi_helper::get_nrf_nf_instance_uri(
     std::string& uri) {
   std::string nrf_api_root = {};
   get_nrf_nfm_api_root(nrf_addr, nrf_api_root);
-  uri = nrf_api_root +
-        fmt::format(sbi_helper::NrfNfmPathNfInstancesNfInstanceId, nf_instance);
+  std::string path_nf_instance_id = {};
+  get_fmt_format_form(
+      sbi_helper::NrfNfmPathNfInstancesNfInstanceId, path_nf_instance_id);
+  uri = nrf_api_root + fmt::format(path_nf_instance_id, nf_instance);
+}
+
+void sbi_helper::get_fmt_format_form(
+    const std::string& input_str, std::string& output_str) {
+  // First replace request parameters (except the last one) with {}
+  std::regex e_parameter("\\:[a-zA-Z0-9]+\\/");
+  std::string tmp = std::regex_replace(
+      input_str, e_parameter, "{}/", std::regex_constants::match_any);
+
+  // Replace the last request parameter with {}
+  std::regex e_last_parameter("\\:[a-zA-Z0-9]+");
+  output_str = std::regex_replace(
+      tmp, e_last_parameter, "{}", std::regex_constants::match_any);
 }

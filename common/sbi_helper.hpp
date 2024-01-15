@@ -114,6 +114,19 @@ typedef struct nf_addr_s {
   unsigned int port;
   std::string api_version;
   std::string uri_root;
+
+  nlohmann::json to_json() const {
+    nlohmann::json json_data = {};
+    json_data["uri_root"]    = this->uri_root;
+    json_data["api_version"] = this->api_version;
+    return json_data;
+  }
+
+  void from_json(nlohmann::json& json_data) {
+    this->uri_root    = json_data["uri_root"].get<std::string>();
+    this->api_version = json_data["api_version"].get<std::string>();
+  }
+
 } nf_addr_t;
 
 class sbi_helper {

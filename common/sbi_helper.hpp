@@ -156,7 +156,6 @@ class sbi_helper {
           ":subscriptionId";
   static inline const std::string AmfCommPathNonUeN1N2MessageTransfer =
       "/non-ue-n2-messages/transfer";
-
   static inline const std::string AmfCommPathNonUeN1N2MessageSubscriptions =
       "/non-ue-n2-messages/subscriptions";
   static inline const std::string
@@ -165,13 +164,11 @@ class sbi_helper {
   static inline const std::string AmfCommPathSubscriptions = "/subscriptions";
   static inline const std::string AmfCommPathSubscriptionsSubscriptionId =
       "/subscriptions/:subscriptionId";
-
   // AMF: Event Exposure Service
   static inline const std::string AmfEvtsBase              = "/namf-evts/";
   static inline const std::string AmfEvtsPathSubscriptions = "/subscriptions";
   static inline const std::string AmfEvtsPathSubscriptionsSubscriptionId =
       "/subscriptions/:subscriptionId";
-
   // AMF: Location Service
   static inline const std::string AmflocBase = "/namf-loc/";
   static inline const std::string AmflocPathUeContextIdProvidePosInfo =
@@ -180,7 +177,6 @@ class sbi_helper {
       "/:ueContextId/provide-loc-info";
   static inline const std::string AmflocPathUeContextIdCancelPosInfo =
       "/:ueContextId/cancel-pos-info";
-
   // TODO: AMF: Mobile Terminated Service
 
   // AUSF: UEAuthentication
@@ -192,7 +188,6 @@ class sbi_helper {
           "/ue-authentications/:authCtxId/5g-aka-confirmation";
   static inline const std::string AusfAuthPathUeAuthenticationsEapSession =
       "/ue-authentications/:authCtxId/eap-session";
-
   // TODO: AUSF: SoR Protection
   // TODO: AUSF: UPU Protection
 
@@ -204,7 +199,6 @@ class sbi_helper {
   static inline const std::string NrfNfmPathSubscriptions = "/subscriptions";
   static inline const std::string NrfNfmPathSubscriptionsSubscriptionId =
       "/subscriptions/:subscriptionID";
-
   // NRF: NF Discovery Service
   static inline const std::string NrfDiscBase            = "/nnrf-disc/";
   static inline const std::string NrfDiscPathNfInstances = "/nf-instances";
@@ -219,7 +213,6 @@ class sbi_helper {
   static inline const std::string
       NrfDiscPathScpDomainRoutingInfoSubsSubscriptionId =
           "/scp-domain-routing-info-subs/:subscriptionID";
-
   // TODO: NRF: Access Token Service
   // TODO: NRF: Bootstrapping Service
 
@@ -268,8 +261,7 @@ class sbi_helper {
           "/shared-data-subscriptions/:subscriptionId";
   static inline const std::string UdmSdmPathGroupDataGroupIdentifiers =
       "/group-data/group-identifiers";
-
-  // TODO: UDM: UE Authentication Service
+  // UDM: UE Authentication Service
   static inline const std::string UdmUeAuBase = "/nudm-ueau/";
   static inline const std::string UdmUeAuPathGenerateAuthData =
       "/:supiOrSuci/security-information/generate-auth-data";
@@ -281,7 +273,7 @@ class sbi_helper {
   static inline const std::string UdmUeAuPathAuthEventId =
       "/:supi/auth-events/:authEventId";
 
-  // TODO: UDM UE Context Management Service
+  // UDM UE Context Management Service
   static inline const std::string UdmUeCmBase = "/nudm-uecm/";
   static inline const std::string UdmUeCmPathRegistrations =
       "/:ueId/registrations";
@@ -307,7 +299,7 @@ class sbi_helper {
   static inline const std::string UdmUeCmPathLocationInfo =
       "/:ueId/registrations/location";
 
-  // TODO: UDM Event Exposure Service
+  // UDM Event Exposure Service
   static inline const std::string UdmEeBase = "/nudm-ee/";
   static inline const std::string UdmEePathEeSubscription =
       "/:ueIdentity/ee-subscriptions";
@@ -318,8 +310,238 @@ class sbi_helper {
 
   // UDR: Data Repository Service
   static inline const std::string UdrDataRepositoryBase = "/nudr-dr/";
-  static inline const std::string UdrAuthenticationSubscriptionEndpoint =
-      "/authentication-data/authentication-subscription";
+  static inline const std::string
+      UdrDrPathSubscriptionDataAuthenticationSubscription =
+          "/subscription-data/:ueId/authentication-data/"
+          "authentication-subscription";
+  static inline const std::string
+      UdrDrPathSubscriptionDataAuthenticationStatus =
+          "/subscription-data/:ueId/authentication-data/authentication-status";
+  static inline const std::string
+      UdrDrPathSubscriptionDataAuthenticationStatusServingNetworkName =
+          "/subscription-data/:ueId/authentication-data/authentication-status/"
+          ":servingNetworkName";
+  static inline const std::string
+      UdrDrPathSubscriptionDataUeUpdateConfirmationDataSorData =
+          "/subscription-data/:ueId/ue-update-confirmation-data/sor-data";
+  static inline const std::string
+      UdrDrPathSubscriptionDataUeUpdateConfirmationDataUpuData =
+          "/subscription-data/:ueId/ue-update-confirmation-data/upu-data";
+  static inline const std::string
+      UdrDrPathSubscriptionDataUeUpdateConfirmationSubscribedCag =
+          "/subscription-data/:ueId/ue-update-confirmation-data/subscribed-cag";
+  static inline const std::string
+      UdrDrPathSubscriptionDataUeUpdateConfirmationSubscribedSnssais =
+          "/subscription-data/:ueId/ue-update-confirmation-data/"
+          "subscribed-snssais";
+  static inline const std::string UdrDrPathSubscriptionDataProvisionedData =
+      "/subscription-data/:ueId/:servingPlmnId/provisioned-data";
+  static inline const std::string
+      UdrDrPathSubscriptionDataProvisionedDataAmData =
+          "/subscription-data/:ueId/:servingPlmnId/provisioned-data/am-data";
+  static inline const std::string UdrDrPathSubscriptionDataProvisionedDataSmf =
+      "/subscription-data/:ueId/:servingPlmnId/provisioned-data/"
+      "smf-selection-subscription-data";
+  static inline const std::string
+      UdrDrPathSubscriptionDataProvisionedDataSmData =
+          "/subscription-data/:ueId/:servingPlmnId/provisioned-data/sm-data";
+  static inline const std::string
+      UdrDrPathSubscriptionDataProvisionedDataLcsBcaData =
+          "/subscription-data/:ueId/:servingPlmnId/provisioned-data/"
+          "lcs-bca-data";
+  static inline const std::string UdrDrPathSubscriptionDataContextData =
+      "/subscription-data/:ueId/context-data";
+  static inline const std::string
+      UdrDrPathSubscriptionDataContextDataAmf3gppAccess =
+          "/subscription-data/:ueId/context-data/amf-3gpp-access";
+  static inline const std::string
+      UdrDrPathSubscriptionDataContextDataAmfNon3gppAccess =
+          "/subscription-data/:ueId/context-data/amf-non-3gpp-access";
+  static inline const std::string
+      UdrDrPathSubscriptionDataContextDataSmfRegistrations =
+          "/subscription-data/:ueId/context-data/smf-registrations";
+  static inline const std::string
+      UdrDrPathSubscriptionDataContextDataSmfRegistrationsPduSession =
+          "/subscription-data/:ueId/context-data/smf-registrations/"
+          ":pduSessionId";
+  static inline const std::string
+      UdrDrPathSubscriptionDataOperatorSpecificData =
+          "/subscription-data/:ueId/operator-specific-data";
+  static inline const std::string
+      UdrDrPathSubscriptionDataContextDataSmsf3gppAccess =
+          "/subscription-data/:ueId/context-data/smsf-3gpp-access";
+  static inline const std::string
+      UdrDrPathSubscriptionDataContextDataSmsfNon3gppAccess =
+          "/subscription-data/:ueId/context-data/smsf-non-3gpp-access";
+  static inline const std::string UdrDrPathSubscriptionDataContextDataLocation =
+      "/subscription-data/:ueId/context-data/location";
+  static inline const std::string UdrDrPathSubscriptionDataContextDataIpSmGw =
+      "/subscription-data/:ueId/context-data/ip-sm-gw";
+  static inline const std::string UdrDrPathSubscriptionDataContextDataMwd =
+      "/subscription-data/:ueId/context-data/mwd";
+  static inline const std::string
+      UdrDrPathSubscriptionDataProvisionedDataSmsMngData =
+          "/subscription-data/:ueId/:servingPlmnId/provisioned-data/"
+          "sms-mng-data";
+  static inline const std::string
+      UdrDrPathSubscriptionDataProvisionedDataSmsData =
+          "/subscription-data/:ueId/:servingPlmnId/provisioned-data/sms-data";
+  static inline const std::string UdrDrPathSubscriptionDataLcsPrivacyData =
+      "/subscription-data/:ueId/lcs-privacy-data";
+  static inline const std::string UdrDrPathSubscriptionDataLcsMoData =
+      "/subscription-data/:ueId/lcs-mo-data";
+  static inline const std::string UdrDrPathSubscriptionDataPpData =
+      "/subscription-data/:ueId/pp-data";
+  static inline const std::string
+      UdrDrPathSubscriptionDataContextDataEeSubscriptions =
+          "/subscription-data/:ueId/context-data/ee-subscriptions";
+  static inline const std::string
+      UdrDrPathSubscriptionDataContextDataEeSubscriptionsSubsId =
+          "/subscription-data/:ueId/context-data/ee-subscriptions/:subsId";
+  static inline const std::string
+      UdrDrPathSubscriptionDataContextDataEeSubscriptionsSubsIdAmf =
+          "/subscription-data/:ueId/context-data/ee-subscriptions/:subsId/"
+          "amf-subscriptions";
+  static inline const std::string
+      UdrDrPathSubscriptionDataContextDataEeSubscriptionsSubsIdSmf =
+          "/subscription-data/:ueId/context-data/ee-subscriptions/:subsId/"
+          "smf-subscriptions";
+  static inline const std::string
+      UdrDrPathSubscriptionDataContextDataEeSubscriptionsSubsIdHss =
+          "/subscription-data/:ueId/context-data/ee-subscriptions/:subsId/"
+          "hss-subscriptions";
+  static inline const std::string
+      UdrDrPathSubscriptionDataGroupDataEeSubscriptions =
+          "/subscription-data/group-data/:ueGroupId/ee-subscriptions";
+  static inline const std::string
+      UdrDrPathSubscriptionDataGroupDataEeSubscriptionsSubsId =
+          "/subscription-data/group-data/:ueGroupId/ee-subscriptions/:subsId";
+  static inline const std::string
+      UdrDrPathSubscriptionDataGroupDataEeProfileData =
+          "/subscription-data/group-data/:ueGroupId/ee-profile-data";
+  static inline const std::string UdrDrPathSubscriptionDataGroupData5gVnGroups =
+      "/subscription-data/group-data/5g-vn-groups";
+  static inline const std::string
+      UdrDrPathSubscriptionDataGroupData5gVnGroupsExternalGroupId =
+          "/subscription-data/group-data/5g-vn-groups/:externalGroupId";
+  static inline const std::string
+      UdrDrPathSubscriptionDataGroupData5gVnGroupsInternal =
+          "/subscription-data/group-data/5g-vn-groups/internal";
+  static inline const std::string
+      UdrDrPathSubscriptionDataGroupData5gVnGroupsPpProfileData =
+          "/subscription-data/group-data/5g-vn-groups/pp-profile-data";
+  static inline const std::string UdrDrPathSubscriptionDataEeProfileData =
+      "/subscription-data/:ueId/ee-profile-data";
+  static inline const std::string
+      UdrDrPathSubscriptionDataContextDataSdmSubscriptions =
+          "/subscription-data/:ueId/context-data/sdm-subscriptions";
+  static inline const std::string
+      UdrDrPathSubscriptionDataContextDataSdmSubscriptionsSubsId =
+          "/subscription-data/:ueId/context-data/sdm-subscriptions/:subsId";
+  static inline const std::string
+      UdrDrPathSubscriptionDataContextDataSdmSubscriptionsSubsIdHss =
+          "/subscription-data/:ueId/context-data/sdm-subscriptions/:subsId/"
+          "hss-sdm-subscriptions";
+  static inline const std::string UdrDrPathSubscriptionDataSharedData =
+      "/subscription-data/shared-data";
+  static inline const std::string
+      UdrDrPathSubscriptionDataSharedDataSharedDataId =
+          "/subscription-data/shared-data/:sharedDataId";
+  static inline const std::string UdrDrPathSubscriptionDataSubsToNotify =
+      "/subscription-data/subs-to-notify";
+  static inline const std::string UdrDrPathSubscriptionDataSubsToNotifySubsId =
+      "/subscription-data/subs-to-notify/:subsId";
+  static inline const std::string
+      UdrDrPathSubscriptionDataProvisionedDataTraceData =
+          "/subscription-data/:ueId/:servingPlmnId/provisioned-data/trace-data";
+  static inline const std::string UdrDrPathSubscriptionDataIdentityData =
+      "/subscription-data/:ueId/identity-data";
+  static inline const std::string
+      UdrDrPathSubscriptionDataOperatorDeterminedBarringData =
+          "/subscription-data/:ueId/operator-determined-barring-data";
+  static inline const std::string
+      UdrDrPathSubscriptionDataNiddAuthorizationData =
+          "/subscription-data/:ueId/nidd-authorization-data";
+  static inline const std::string UdrDrPathSubscriptionDataV2xData =
+      "/subscription-data/:ueId/v2x-data";
+  static inline const std::string UdrDrPathSubscriptionDataPpProfileData =
+      "/subscription-data/:ueId/pp-profile-data";
+  static inline const std::string
+      UdrDrPathSubscriptionDataCoverageRestrictionData =
+          "/subscription-data/:ueId/coverage-restriction-data";
+  static inline const std::string
+      UdrDrPathSubscriptionDataGroupDataGroupIdentifier =
+          "/subscription-data/group-data/group-identifiers";
+  static inline const std::string UdrDrPathSubscriptionDataUesAmData =
+      "/policy-data/ues/:ueId/am-data";
+  static inline const std::string UdrDrPathSubscriptionDataUesUePolicySet =
+      "/policy-data/ues/:ueId/ue-policy-set";
+  static inline const std::string UdrDrPathSubscriptionDataUesSmData =
+      "/policy-data/ues/:ueId/sm-data";
+  static inline const std::string UdrDrPathSubscriptionDataUesSmDataUsageMonId =
+      "/policy-data/ues/:ueId/sm-data/:usageMonId";
+  static inline const std::string
+      UdrDrPathSubscriptionDataSponsorConnectivityDataSponsorId =
+          "/policy-data/sponsor-connectivity-data/:sponsorId";
+  static inline const std::string UdrDrPathSubscriptionDataPolicyDataBdtData =
+      "/policy-data/bdt-data";
+  static inline const std::string
+      UdrDrPathSubscriptionDataPolicyDataBdtDataBdtReferenceId =
+          "/policy-data/bdt-data/:bdtReferenceId";
+  static inline const std::string
+      UdrDrPathSubscriptionDataPolicyDataSubsToNotify =
+          "/policy-data/subs-to-notify";
+  static inline const std::string
+      UdrDrPathSubscriptionDataPolicyDataSubsToNotitySubsId =
+          "/policy-data/subs-to-notify/:subsId";
+  static inline const std::string
+      UdrDrPathSubscriptionDataPolicyDataUesOperatorSpecificData =
+          "/policy-data/ues/:ueId/operator-specific-data";
+  static inline const std::string UdrDrPathApplicationDataPfds =
+      "/application-data/pfds";
+  static inline const std::string UdrDrPathApplicationDataPfdsApp =
+      "/application-data/pfds/:appId";
+  static inline const std::string UdrDrPathApplicationDataInfluenceData =
+      "/application-data/influenceData";
+  static inline const std::string
+      UdrDrPathApplicationDataInfluenceDataInfluenceId =
+          "/application-data/influenceData/:influenceId";
+  static inline const std::string UdrDrPathApplicationDataPlmnsUePolicySet =
+      "/policy-data/plmns/:plmnId/ue-policy-set";
+  static inline const std::string UdrDrPathApplicationDataBdtPolicyData =
+      "/application-data/bdtPolicyData";
+  static inline const std::string
+      UdrDrPathApplicationDataBdtPolicyDataBdtPolicyId =
+          "/application-data/bdtPolicyData/:bdtPolicyId";
+  static inline const std::string UdrDrPathApplicationDataIptvConfigData =
+      "/application-data/iptvConfigData";
+  static inline const std::string
+      UdrDrPathApplicationDataIptvConfigDataConfigurationId =
+          "/application-data/iptvConfigData/:configurationId";
+  static inline const std::string
+      UdrDrPathApplicationDataInfluenceDataSubsToNotify =
+          "/application-data/influenceData/subs-to-notify";
+  static inline const std::string
+      UdrDrPathApplicationDataInfluenceDataSubsToNotifySubscriptionId =
+          "/application-data/influenceData/subs-to-notify/:subscriptionId";
+  static inline const std::string UdrDrPathApplicationDataServiceParamData =
+      "/application-data/serviceParamData";
+  static inline const std::string
+      UdrDrPathApplicationDataServiceParamDataServiceParamId =
+          "/application-data/serviceParamData/:serviceParamId";
+  static inline const std::string UdrDrPathApplicationDataSubsToNotify =
+      "/application-data/subs-to-notify";
+  static inline const std::string UdrDrPathApplicationDataSubsToNotifySubsId =
+      "/application-data/subs-to-notify/:subsId";
+  static inline const std::string UdrDrPathExposureDataAccessAndMobilityData =
+      "/exposure-data/:ueId/access-and-mobility-data";
+  static inline const std::string
+      UdrDrPathExposureDataSessionManagementDataPduSessionId =
+          "/exposure-data/:ueId/session-management-data/:pduSessionId";
+  static inline const std::string UdrDrPathExposureDataSubsToNotify =
+      "/exposure-data/subs-to-notify";
+  static inline const std::string UdrDrPathExposureDataSubsToNotifySubsId =
+      "/exposure-data/subs-to-notify/:subId";
 
   // UDSF: Data Repository
   static inline const std::string UdsfDrBase = "/nudsf-dr/";

@@ -230,56 +230,94 @@ class sbi_helper {
   // TODO: SMF
 
   // UDM: Subscriber Data Management
-  static inline const std::string UdmSdmBase       = "/nudm-sdm/";
-  static inline const std::string UdmSdmSupi       = "/:supi";
-  static inline const std::string UdmSdmSupiNssai  = "/:supi/nssai";
-  static inline const std::string UdmSdmSupiAmData = "/:supi/am-data";
-  static inline const std::string UdmSdmSupiSmfSelData =
+  static inline const std::string UdmSdmBase           = "/nudm-sdm/";
+  static inline const std::string UdmSdmPathSupi       = "/:supi";
+  static inline const std::string UdmSdmPathSupiNssai  = "/:supi/nssai";
+  static inline const std::string UdmSdmPathSupiAmData = "/:supi/am-data";
+  static inline const std::string UdmSdmPathSupiSmfSelData =
       "/:supi/smf-select-data";
-  static inline const std::string UdmSdmSupiUeCtxInSmfData =
+  static inline const std::string UdmSdmPathSupiUeCtxInSmfData =
       "/:supi/ue-context-in-smf-data";
-  static inline const std::string UdmSdmSupiUeCtxInSmsfData =
+  static inline const std::string UdmSdmPathSupiUeCtxInSmsfData =
       "/:supi/ue-context-in-smsf-data";
-  static inline const std::string UdmSdmSupiTraceConfigData =
+  static inline const std::string UdmSdmPathSupiTraceConfigData =
       "/:supi/trace-data";
-  static inline const std::string UdmSdmSupiSmData      = "/:supi/sm-data";
-  static inline const std::string UdmSdmSupiSmsData     = "/:supi/sms-data";
-  static inline const std::string UdmSdmSupiSmsMngtData = "/:supi/sms-mng-data";
-  static inline const std::string UdmSdmSupiSdmSubscriptions =
+  static inline const std::string UdmSdmPathSupiSmData  = "/:supi/sm-data";
+  static inline const std::string UdmSdmPathSupiSmsData = "/:supi/sms-data";
+  static inline const std::string UdmSdmPathSupiSmsMngtData =
+      "/:supi/sms-mng-data";
+  static inline const std::string UdmSdmPathSupiSdmSubscriptions =
       "/:supi/sdm-subscriptions";
-  static inline const std::string UdmSdmSupiSdmSubscriptionsSubscriptionId =
+  static inline const std::string UdmSdmPathSupiSdmSubscriptionsSubscriptionId =
       "/:supi/sdm-subscriptions/:subscriptionId";
-  static inline const std::string UdmSdmUeIdSupiOrGpsi =
-      "/:ueId/id-translation-result";
-  static inline const std::string UdmSdmSupiAmDataSorAckInfo =
+  static inline const std::string UdmSdmPathUeIdSupiOrGpsi =
+      "/:gpsi/id-translation-result";
+  static inline const std::string UdmSdmPathSupiAmDataSorAckInfo =
       "/:supi/am-data/sor-ack";
-  static inline const std::string UdmSdmSupiAmDataUpuAck =
+  static inline const std::string UdmSdmPathSupiAmDataUpuAck =
       "/:supi/am-data/upu-ack";
-  static inline const std::string UdmSdmSupiAmDataSubscribedSNssaisAck =
+  static inline const std::string UdmSdmPathSupiAmDataSubscribedSNssaisAck =
       "/:supi/am-data/subscribed-snssais-ack";
-  static inline const std::string UdmSdmSupiAmDataCagAck =
+  static inline const std::string UdmSdmPathSupiAmDataCagAck =
       "/:supi/am-data/cag-ack";
-  static inline const std::string UdmSdmSharedData = "/shared-data";
-  static inline const std::string UdmSdmSharedDataSubscriptions =
+  static inline const std::string UdmSdmPathSharedData = "/shared-data";
+  static inline const std::string UdmSdmPathSharedDataSubscriptions =
       "/shared-data-subscriptions";
-  static inline const std::string UdmSdmSharedDataSubscriptionsSubscriptionId =
-      "/shared-data-subscriptions/:subscriptionId";
-  static inline const std::string UdmSdmGroupDataGroupIdentifiers =
+  static inline const std::string
+      UdmSdmPathSharedDataSubscriptionsSubscriptionId =
+          "/shared-data-subscriptions/:subscriptionId";
+  static inline const std::string UdmSdmPathGroupDataGroupIdentifiers =
       "/group-data/group-identifiers";
 
   // TODO: UDM: UE Authentication Service
   static inline const std::string UdmUeAuBase = "/nudm-ueau/";
   static inline const std::string UdmUeAuPathGenerateAuthData =
       "/:supiOrSuci/security-information/generate-auth-data";
+  static inline const std::string UdmUeAuPathRgAuthData =
+      "/:supiOrSuci/security-information-rg";
   static inline const std::string UdmUeAuPathConfirmAuth = "/:supi/auth-events";
+  static inline const std::string UdmUeAuPathGenerateHssAuthenticationVectors =
+      "/:supi/hss-security-information/:hssAuthType/generate-av";
+  static inline const std::string UdmUeAuPathAuthEventId =
+      "/:supi/auth-events/:authEventId";
 
   // TODO: UDM UE Context Management Service
+  static inline const std::string UdmUeCmBase = "/nudm-uecm/";
+  static inline const std::string UdmUeCmPathRegistrations =
+      "/:ueId/registrations";
+  static inline const std::string UdmUeCmPath3gppRegistrations =
+      "/:ueId/registrations/amf-3gpp-access";
+  static inline const std::string UdmUeCmPathDeregAmf =
+      "/:ueId/registrations/amf-3gpp-access/dereg-amf";
+  static inline const std::string UdmUeCmPathPeiUpdate =
+      "/:ueId/registrations/amf-3gpp-access/pei-update";
+  static inline const std::string UdmUeCmPathNon3GppRegistration =
+      "/:ueId/registrations/amf-non-3gpp-access";
+  static inline const std::string UdmUeCmPathSmfRegistration =
+      "/:ueId/registrations/smf-registrations";
+  static inline const std::string UdmUeCmPathSmfRegistrationPduSession =
+      "/:ueId/registrations/smf-registrations/:pduSessionId";
+  static inline const std::string UdmUeCmPath3GppSmsfRegistration =
+      "/:ueId/registrations/smsf-3gpp-access";
+  static inline const std::string UdmUeCmPathNon3GppSmsfRegistration =
+      "/:ueId/registrations/smsf-non-3gpp-access";
+  static inline const std::string UdmUeCmPathIpSmGwRegistration =
+      "/:ueId/registrations/ip-sm-gw";
+  static inline const std::string UdmUeCmPathRestorePcscf = "/restore-pcscf";
+  static inline const std::string UdmUeCmPathLocationInfo =
+      "/:ueId/registrations/location";
+
   // TODO: UDM Event Exposure Service
+  static inline const std::string UdmEeBase = "/nudm-ee/";
+  static inline const std::string UdmEePathEeSubscription =
+      "/:ueIdentity/ee-subscriptions";
+  static inline const std::string UdmEePathEeSubscriptionSubscriptionId =
+      "/:ueIdentity/ee-subscriptions/:subscriptionId";
   // TODO: UDM Parameter Provision Service
   // TODO: UDM NIDD Authorization
 
   // UDR: Data Repository Service
-  static inline const std::string UdrDataRepositoryBase = "/nudsf-dr/";
+  static inline const std::string UdrDataRepositoryBase = "/nudr-dr/";
   static inline const std::string UdrAuthenticationSubscriptionEndpoint =
       "/authentication-data/authentication-subscription";
 

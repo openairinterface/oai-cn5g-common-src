@@ -48,8 +48,59 @@ typedef struct interface_cfg_s {
   struct in_addr addr4;
   struct in_addr network4;
   struct in6_addr addr6;
+  unsigned int mtu;
   unsigned int port;
   std::optional<std::string> api_version;
+
+  nlohmann::json to_json() const {
+    nlohmann::json json_data = {};
+    json_data["if_name"]     = this->if_name;
+    json_data["addr4"]       = inet_ntoa(this->addr4);
+    json_data["network4"]    = inet_ntoa(this->network4);
+    char str_addr6[INET6_ADDRSTRLEN];
+    inet_ntop(AF_INET6, &this->addr6, str_addr6, sizeof(str_addr6));
+    json_data["addr6"] = str_addr6;
+    json_data["mtu"]   = this->mtu;
+    json_data["port"]  = this->port;
+    if (api_version.has_value())
+      json_data["api_version"] = this->api_version.value();
+    return json_data;
+  }
+
+  void from_json(nlohmann::json& json_data) {
+    this->if_name         = json_data["if_name"].get<std::string>();
+    std::string addr4_str = {};
+    addr4_str             = json_data["addr4"].get<std::string>();
+
+    if (boost::iequals(addr4_str, "read")) {
+      if (get_inet_addr_infos_from_iface(
+              this->if_name, this->addr4, this->network4, this->mtu)) {
+        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+            .error(
+                "Could not read %s network interface configuration",
+                this->if_name);
+        return;
+      }
+    } else {
+      IPV4_STR_ADDR_TO_INADDR(
+          util::trim(addr4_str).c_str(), this->addr4,
+          "BAD IPv4 ADDRESS FORMAT FOR INTERFACE !");
+
+      std::string network4_str = json_data["network4"].get<std::string>();
+      IPV4_STR_ADDR_TO_INADDR(
+          util::trim(network4_str).c_str(), this->network4,
+          "BAD IPv4 ADDRESS FORMAT FOR INTERFACE !");
+      // TODO: addr6
+      this->mtu  = json_data["mtu"].get<int>();
+      this->port = json_data["port"].get<int>();
+
+      if (json_data.find("api_version") != json_data.end()) {
+        this->api_version = std::make_optional<std::string>(
+            json_data["api_version"].get<std::string>());
+      }
+    }
+  }
+
 } interface_cfg_t;
 
 typedef struct nf_addr_s {
@@ -133,22 +184,22 @@ class sbi_helper {
   static inline const std::string NrfNfmPathNfInstances   = "/nf-instances";
   static inline const std::string NrfNfmPathSubscriptions = "/subscriptions";
   static inline const std::string NrfNfmPathSubscriptionsSubscriptionId =
-      "/subscriptions/:subscriptionID";  // subscriptions/{subscriptionID}
+      "/subscriptions/:subscriptionID";
 
   // NRF: NF Discovery Service
   static inline const std::string NrfDiscBase            = "/nnrf-disc/";
   static inline const std::string NrfDiscPathNfInstances = "/nf-instances";
   static inline const std::string NrfDiscPathSearchesSearchId =
-      "/searches/:searchId";  // searches/{searchId}
+      "/searches/:searchId";
   static inline const std::string NrfDiscPathSearchesSearchIdComplete =
-      "/searches/:searchId/complete";  // searches/{searchId}/complete
+      "/searches/:searchId/complete";
   static inline const std::string NrfDiscPathScpDomainRoutingInfo =
       "/scp-domain-routing-info";
   static inline const std::string NrfDiscPathScpDomainRoutingInfoSubs =
       "/scp-domain-routing-info-subs";
   static inline const std::string
       NrfDiscPathScpDomainRoutingInfoSubsSubscriptionId =
-          "/scp-domain-routing-info-subs/:subscriptionID";  // scp-domain-routing-info-subs/{subscriptionID}
+          "/scp-domain-routing-info-subs/:subscriptionID";
 
   // TODO: NRF: Access Token Service
   // TODO: NRF: Bootstrapping Service

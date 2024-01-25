@@ -35,7 +35,7 @@
 #include "logger_base.hpp"
 #include "string.hpp"
 
-// TODO: namespace oai::sbi
+namespace oai::common::sbi {
 
 constexpr auto kNumberOfFirstConnectionRetries       = 10;
 constexpr auto kNumberOfConnectionRetries            = 3;
@@ -567,11 +567,11 @@ class sbi_helper {
   /*
    * Get NRF Nfm API Root
    * @param [const nf_addr_t& ] nrf_addr: NRF's Addr info
-   * @param [std::string& ] api_root: NRF's API Root
+   * @param [std::string& ] nrf_root: NRF's API Root
    * @return void
    */
   static void get_nrf_nfm_api_root(
-      const nf_addr_t& nrf_addr, std::string& nrf__root);
+      const nf_addr_t& nrf_addr, std::string& nrf_root);
 
   /*
    * Get NRF NF Register URI
@@ -584,6 +584,13 @@ class sbi_helper {
       const nf_addr_t& nrf_addr, const std::string& nf_instance,
       std::string& uri);
 
+  /*
+   * Get FMT format from an input string (3GPP format)
+   * @param [const std::string& ] input_str: Input string
+   * @param [std::string& ] output_str: Output string
+   * @return void
+   */
   static void get_fmt_format_form(
       const std::string& input_str, std::string& output_str);
 };
+}  // namespace oai::common::sbi

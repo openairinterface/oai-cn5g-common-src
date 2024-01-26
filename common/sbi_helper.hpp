@@ -74,36 +74,48 @@ typedef struct interface_cfg_s {
   }
 
   void from_json(nlohmann::json& json_data) {
-    this->if_name         = json_data["if_name"].get<std::string>();
-    std::string addr4_str = {};
-    addr4_str             = json_data["addr4"].get<std::string>();
-
-    if (boost::iequals(addr4_str, "read")) {
-      if (get_inet_addr_infos_from_iface(
-              this->if_name, this->addr4, this->network4, this->mtu)) {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .error(
-                "Could not read %s network interface configuration",
-                this->if_name);
-        return;
+    try {
+      if (json_data.find("if_name") != json_data.end()) {
+        this->if_name = json_data["if_name"].get<std::string>();
       }
-    } else {
-      IPV4_STR_ADDR_TO_INADDR(
-          util::trim(addr4_str).c_str(), this->addr4,
-          "BAD IPv4 ADDRESS FORMAT FOR INTERFACE !");
-
-      std::string network4_str = json_data["network4"].get<std::string>();
-      IPV4_STR_ADDR_TO_INADDR(
-          util::trim(network4_str).c_str(), this->network4,
-          "BAD IPv4 ADDRESS FORMAT FOR INTERFACE !");
-      // TODO: addr6
-      this->mtu  = json_data["mtu"].get<int>();
-      this->port = json_data["port"].get<int>();
-
-      if (json_data.find("api_version") != json_data.end()) {
-        this->api_version = std::make_optional<std::string>(
-            json_data["api_version"].get<std::string>());
+      if (json_data.find("addr4") != json_data.end()) {
+        std::string addr4_str = {};
+        addr4_str             = json_data["addr4"].get<std::string>();
+        if (boost::iequals(addr4_str, "read")) {
+          if (get_inet_addr_infos_from_iface(
+                  this->if_name, this->addr4, this->network4, this->mtu)) {
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error(
+                    "Could not read %s network interface configuration",
+                    this->if_name);
+            return;
+          }
+        } else {
+          IPV4_STR_ADDR_TO_INADDR(
+              util::trim(addr4_str).c_str(), this->addr4,
+              "BAD IPv4 ADDRESS FORMAT FOR INTERFACE !");
+          if (json_data.find("network4") != json_data.end()) {
+            std::string network4_str = json_data["network4"].get<std::string>();
+            IPV4_STR_ADDR_TO_INADDR(
+                util::trim(network4_str).c_str(), this->network4,
+                "BAD IPv4 ADDRESS FORMAT FOR INTERFACE !");
+          }
+          // TODO: addr6
+          if (json_data.find("mtu") != json_data.end()) {
+            this->mtu = json_data["mtu"].get<int>();
+          }
+          if (json_data.find("port") != json_data.end()) {
+            this->port = json_data["port"].get<int>();
+          }
+          if (json_data.find("api_version") != json_data.end()) {
+            this->api_version = std::make_optional<std::string>(
+                json_data["api_version"].get<std::string>());
+          }
+        }
       }
+    } catch (std::exception& e) {
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .error("%s", e.what());
     }
   }
 
@@ -123,8 +135,17 @@ typedef struct nf_addr_s {
   }
 
   void from_json(nlohmann::json& json_data) {
-    this->uri_root    = json_data["uri_root"].get<std::string>();
-    this->api_version = json_data["api_version"].get<std::string>();
+    try {
+      if (json_data.find("uri_root") != json_data.end()) {
+        this->uri_root = json_data["uri_root"].get<std::string>();
+      }
+      if (json_data.find("api_version") != json_data.end()) {
+        this->api_version = json_data["api_version"].get<std::string>();
+      }
+    } catch (std::exception& e) {
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .error("%s", e.what());
+    }
   }
 
 } nf_addr_t;

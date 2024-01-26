@@ -24,6 +24,7 @@
 
 #include <stdint.h>
 
+#include "logger_base.hpp"
 #include <nlohmann/json.hpp>
 #include <string>
 
@@ -169,11 +170,26 @@ typedef struct guami_full_format_s {
   }
 
   void from_json(nlohmann::json& json_data) {
-    this->mcc         = json_data["mcc"].get<std::string>();
-    this->mnc         = json_data["mnc"].get<std::string>();
-    this->region_id   = json_data["region_id"].get<int>();
-    this->amf_set_id  = json_data["amf_set_id"].get<int>();
-    this->amf_pointer = json_data["amf_pointer"].get<int>();
+    try {
+      if (json_data.find("mcc") != json_data.end()) {
+        this->mcc = json_data["mcc"].get<std::string>();
+      }
+      if (json_data.find("mnc") != json_data.end()) {
+        this->mnc = json_data["mnc"].get<std::string>();
+      }
+      if (json_data.find("region_id") != json_data.end()) {
+        this->region_id = json_data["region_id"].get<int>();
+      }
+      if (json_data.find("amf_set_id") != json_data.end()) {
+        this->amf_set_id = json_data["amf_set_id"].get<int>();
+      }
+      if (json_data.find("amf_pointer") != json_data.end()) {
+        this->amf_pointer = json_data["amf_pointer"].get<int>();
+      }
+    } catch (std::exception& e) {
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .error("%s", e.what());
+    }
   }
 } guami_full_format_t;
 

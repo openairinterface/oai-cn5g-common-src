@@ -199,6 +199,11 @@ class sbi_helper {
   static inline const std::string AmflocPathUeContextIdCancelPosInfo =
       "/:ueContextId/cancel-pos-info";
   // TODO: AMF: Mobile Terminated Service
+  // AMF Configuration Service
+  static inline const std::string AmfConfBase              = "/namf-oai/";
+  static inline const std::string AmfConfPathConfiguration = "/configuration/";
+  // AMF Status Notify
+  static inline const std::string AmfStatusNotifBase = "/namf-status-notfify/";
 
   // AUSF: UEAuthentication
   static inline const std::string AusfAuthBase = "/nausf-auth/";

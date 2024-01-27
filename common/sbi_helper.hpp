@@ -153,7 +153,8 @@ typedef struct nf_addr_s {
 class sbi_helper {
  public:
   // AMF: Communication Service
-  static inline const std::string AmfCommBase = "/namf-comm/";
+  static inline const std::string AmfCommBase          = "/namf-comm/";
+  static inline const std::string AmfCommPathUeContext = "/ue-contexts/";
   static inline const std::string AmfCommPathUeContextContextId =
       "/ue-contexts/:ueContextId";
   static inline const std::string AmfCommPathUeContextContextIdRelease =
@@ -168,6 +169,8 @@ class sbi_helper {
       "/ue-contexts/:ueContextId/relocate";
   static inline const std::string AmfCommPathUeContextContextIdN1N2Message =
       "/ue-contexts/:ueContextId/n1-n2-messages";
+  static inline const std::string AmfCommPathUeContextContextIdN1MessageNotify =
+      "/ue-contexts/:ueContextId/n1-message-notify";
   static inline const std::string
       AmfCommPathUeContextContextIdN1N2MessageSubscriptions =
           "/ue-contexts/:ueContextId/n1-n2-messages/subscriptions";
@@ -204,6 +207,11 @@ class sbi_helper {
   static inline const std::string AmfConfPathConfiguration = "/configuration/";
   // AMF Status Notify
   static inline const std::string AmfStatusNotifBase = "/namf-status-notfify/";
+  static inline const std::string AmfStatusNotifPathPduSessionRelease =
+      "/pdu-session-release/callback/";
+  static inline const std::string
+      AmfStatusNotifPathPduSessionReleasePduSessionId =
+          "/pdu-session-release/callback/:ueContextId/:pduSessionId";
 
   // AUSF: UEAuthentication
   static inline const std::string AusfAuthBase = "/nausf-auth/";

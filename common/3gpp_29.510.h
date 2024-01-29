@@ -19,8 +19,8 @@
  *      contact@openairinterface.org
  */
 
-#ifndef FILE_3GPP_29_510_NRF_SEEN
-#define FILE_3GPP_29_510_NRF_SEEN
+#ifndef FILE_3GPP_29_510_SEEN
+#define FILE_3GPP_29_510_SEEN
 
 #include <vector>
 #include <map>
@@ -429,7 +429,5 @@ typedef struct patch_item_s {
     return json_data;
   }
 } patch_item_t;
-
-#define NNRF_NFM_BASE "/nnrf-nfm/"
 
 #endif

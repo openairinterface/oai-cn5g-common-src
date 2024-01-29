@@ -201,6 +201,8 @@ class sbi_helper {
       "/:ueContextId/provide-loc-info";
   static inline const std::string AmflocPathUeContextIdCancelPosInfo =
       "/:ueContextId/cancel-pos-info";
+  static inline const std::string AmflocPathDetermineLocation =
+      "/determine-location";
   // TODO: AMF: Mobile Terminated Service
   // AMF Configuration Service
   static inline const std::string AmfConfBase              = "/namf-oai/";
@@ -254,7 +256,28 @@ class sbi_helper {
 
   // TODO: PCF
 
-  // TODO: SMF
+  // SMF: SMF PDU Session Service
+  static inline const std::string SmfPduSessionBase = "/nsmf-pdusession/";
+  static inline const std::string SmfPduSessionPathSmContexts = "/sm-contexts";
+  static inline const std::string SmfPduSessionPathSmContextsRetrieve =
+      "/sm-contexts/:smContextRef/retrieve";
+  static inline const std::string SmfPduSessionPathSmContextsModify =
+      "/sm-contexts/:smContextRef/modify";
+  static inline const std::string SmfPduSessionPathSmContextsRelease =
+      "/sm-contexts/:smContextRef/release";
+  static inline const std::string SmfPduSessionPathSmContextsSendMoData =
+      "/sm-contexts/:smContextRef/send-mo-data";
+  static inline const std::string SmfPduSessionPathPduSessions =
+      "/pdu-sessions";
+  static inline const std::string SmfPduSessionPathPduSessionsModify =
+      "/pdu-sessions/:pduSessionRef/modify";
+  static inline const std::string SmfPduSessionPathPduSessionsRelease =
+      "/pdu-sessions/:pduSessionRef/release";
+  static inline const std::string SmfPduSessionPathPduSessionsRetrieve =
+      "/pdu-sessions/:pduSessionRef/retrieve";
+  static inline const std::string SmfPduSessionPathPduSessionsTransferMoData =
+      "/pdu-sessions/:pduSessionRef/transfer-mo-data";
+  // TODO: SMF: Session Management Event Exposure Service
 
   // UDM: Subscriber Data Management
   static inline const std::string UdmSdmBase           = "/nudm-sdm/";

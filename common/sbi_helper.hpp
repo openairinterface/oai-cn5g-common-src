@@ -119,6 +119,11 @@ typedef struct interface_cfg_s {
     }
   }
 
+  std::string get_ipv4_root() {
+    return std::string(inet_ntoa(this->addr4)) + ":" +
+           std::to_string(this->port);
+  }
+
 } interface_cfg_t;
 
 typedef struct nf_addr_s {
@@ -252,7 +257,11 @@ class sbi_helper {
   // TODO: NRF: Access Token Service
   // TODO: NRF: Bootstrapping Service
 
-  // TODO: NSSF
+  // NSSF: Network Slice Selection Service
+  static inline const std::string NssfNsSelectionBase = "/nnssf-nsselection/";
+  static inline const std::string NssfNsSelectionPathNetworSliceInformation =
+      "/network-slice-information";
+  // TODO: NSSF NSSAI Availability Service
 
   // TODO: PCF
 
@@ -624,11 +633,11 @@ class sbi_helper {
   /*
    * Get NRF Nfm API Root
    * @param [const nf_addr_t& ] nrf_addr: NRF's Addr info
-   * @param [std::string& ] nrf_root: NRF's API Root
+   * @param [std::string& ] api_root: NRF's API Root
    * @return void
    */
   static void get_nrf_nfm_api_root(
-      const nf_addr_t& nrf_addr, std::string& nrf_root);
+      const nf_addr_t& nrf_addr, std::string& api_root);
 
   /*
    * Get NRF NF Register URI
@@ -640,6 +649,24 @@ class sbi_helper {
   static void get_nrf_nf_instance_uri(
       const nf_addr_t& nrf_addr, const std::string& nf_instance,
       std::string& uri);
+
+  /*
+   * Get NRF Disc API Root
+   * @param [const nf_addr_t& ] nrf_addr: NRF's Addr info
+   * @param [std::string& ] api_root: NRF Discovery API Root
+   * @return void
+   */
+  static void get_nrf_disc_api_root(
+      const nf_addr_t& nrf_addr, std::string& api_root);
+
+  /*
+   * Get NRF NF Discovery SearchNFInstances URI
+   * @param [const nf_addr_t& ] nrf_addr: NRF's Addr info
+   * @param [std::string& ] uri: NRF SearchNFInstances URI
+   * @return void
+   */
+  static void get_nrf_disc_search_nf_instances_uri(
+      const nf_addr_t& nrf_addr, std::string& uri);
 
   /*
    * Get FMT format from an input string (3GPP format)

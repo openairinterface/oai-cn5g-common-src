@@ -45,6 +45,20 @@ void sbi_helper::get_nrf_nf_instance_uri(
 }
 
 //---------------------------------------------------------------------------------------------
+void sbi_helper::get_nrf_disc_api_root(
+    const nf_addr_t& nrf_addr, std::string& api_root) {
+  api_root = nrf_addr.uri_root + sbi_helper::NrfDiscBase + nrf_addr.api_version;
+}
+
+//---------------------------------------------------------------------------------------------
+void sbi_helper::get_nrf_disc_search_nf_instances_uri(
+    const nf_addr_t& nrf_addr, std::string& uri) {
+  std::string api_root = {};
+  get_nrf_disc_api_root(nrf_addr, api_root);
+  uri = api_root + NrfDiscPathNfInstances;
+}
+
+//---------------------------------------------------------------------------------------------
 void sbi_helper::get_fmt_format_form(
     const std::string& input_str, std::string& output_str) {
   // First replace request parameters (except the last one) with {}

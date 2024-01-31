@@ -123,7 +123,7 @@ typedef struct internal_grpid_range_info_item_s {
 typedef struct ausf_info_s {
   std::string groupid;
   std::vector<supi_range_info_item_t> supi_ranges;
-  std::vector<std::string> routing_indicator;
+  std::vector<std::string> routing_indicators;
 } ausf_info_t;
 
 typedef struct udm_info_s {

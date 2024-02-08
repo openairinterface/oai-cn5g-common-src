@@ -25,7 +25,6 @@
 #include <netinet/in.h>
 #include <stdint.h>
 #include <stdlib.h>
-#include <string.h>
 
 #include <string>
 
@@ -56,6 +55,15 @@ class conv {
   static void to_mongodb_path(std::string& input);
   static std::string uint8_to_hex_string(const uint8_t* v, const size_t s);
   static void hex_str_to_uint8(const char* string, uint8_t* des);
-  static std::string UrlDecode(std::string& SRC);
+  static std::string url_decode(std::string& value);
+
+  static bool string_to_int8(const std::string& str, uint8_t& value);
+  static bool string_to_int32(const std::string& str, uint32_t& value);
+  static bool string_to_int(
+      const std::string& str, uint32_t& value, const uint8_t& base);
+  static bool string_hex_to_int(const std::string& value_str, uint32_t& value);
+  static uint32_t string_hex_to_int(const std::string& value_str);
+  static void int_to_string_hex(
+      uint32_t value, std::string& value_str, uint8_t length = 0);
 };
 #endif /* FILE_CONVERSIONS_HPP_SEEN */

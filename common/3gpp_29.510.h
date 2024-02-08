@@ -19,8 +19,8 @@
  *      contact@openairinterface.org
  */
 
-#ifndef FILE_3GPP_29_510_NRF_SEEN
-#define FILE_3GPP_29_510_NRF_SEEN
+#ifndef FILE_3GPP_29_510_SEEN
+#define FILE_3GPP_29_510_SEEN
 
 #include <vector>
 #include <map>
@@ -123,7 +123,7 @@ typedef struct internal_grpid_range_info_item_s {
 typedef struct ausf_info_s {
   std::string groupid;
   std::vector<supi_range_info_item_t> supi_ranges;
-  std::vector<std::string> routing_indicator;
+  std::vector<std::string> routing_indicators;
 } ausf_info_t;
 
 typedef struct udm_info_s {
@@ -429,7 +429,5 @@ typedef struct patch_item_s {
     return json_data;
   }
 } patch_item_t;
-
-#define NNRF_NFM_BASE "/nnrf-nfm/"
 
 #endif

@@ -23,6 +23,9 @@
 #define FILE_3GPP_23_003_SEEN
 
 #include <stdint.h>
+
+#include "logger_base.hpp"
+#include <nlohmann/json.hpp>
 #include <string>
 
 const uint32_t SD_NO_VALUE               = 0xFFFFFF;
@@ -148,5 +151,46 @@ typedef struct guami_5g_s {
   plmn_t plmn;
   uint32_t amf_id;
 } guami_5g_t;
+
+typedef struct guami_full_format_s {
+  std::string mcc;
+  std::string mnc;
+  uint8_t region_id;
+  uint16_t amf_set_id;
+  uint8_t amf_pointer;
+
+  nlohmann::json to_json() const {
+    nlohmann::json json_data = {};
+    json_data["mcc"]         = this->mcc;
+    json_data["mnc"]         = this->mnc;
+    json_data["region_id"]   = this->region_id;
+    json_data["amf_set_id"]  = this->amf_set_id;
+    json_data["amf_pointer"] = this->amf_pointer;
+    return json_data;
+  }
+
+  void from_json(nlohmann::json& json_data) {
+    try {
+      if (json_data.find("mcc") != json_data.end()) {
+        this->mcc = json_data["mcc"].get<std::string>();
+      }
+      if (json_data.find("mnc") != json_data.end()) {
+        this->mnc = json_data["mnc"].get<std::string>();
+      }
+      if (json_data.find("region_id") != json_data.end()) {
+        this->region_id = json_data["region_id"].get<int>();
+      }
+      if (json_data.find("amf_set_id") != json_data.end()) {
+        this->amf_set_id = json_data["amf_set_id"].get<int>();
+      }
+      if (json_data.find("amf_pointer") != json_data.end()) {
+        this->amf_pointer = json_data["amf_pointer"].get<int>();
+      }
+    } catch (std::exception& e) {
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .error("%s", e.what());
+    }
+  }
+} guami_full_format_t;
 
 #endif

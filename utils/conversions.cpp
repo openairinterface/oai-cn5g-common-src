@@ -56,6 +56,9 @@ static const signed char ascii_to_hex_table[0x100] = {
     -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
     -1, -1, -1, -1, -1, -1, -1, -1, -1};
 
+constexpr uint8_t kUint32Length =
+    8;  // 4 bytes  -8 characters representation in hex
+
 //------------------------------------------------------------------------------
 void conv::hexa_to_ascii(uint8_t* from, char* to, size_t length) {
   size_t i;
@@ -331,3 +334,23 @@ uint32_t conv::string_hex_to_int(const std::string& value_str) {
   }
   return value;
 }
+
+//------------------------------------------------------------------------------
+std::string conv::uint32_to_hex_string(uint32_t value) {
+  char hex_str[kUint32Length + 1];
+  sprintf(hex_str, "%X", value);
+  return std::string(hex_str);
+}
+
+//------------------------------------------------------------------------------
+std::string conv::tmsi_to_string(const uint32_t tmsi) {
+  std::string s        = {};
+  std::string tmsi_str = uint32_to_hex_string(tmsi);
+  uint8_t length       = kUint32Length - tmsi_str.size();
+  for (uint8_t i = 0; i < length; i++) {
+    s.append("0");
+  }
+  s.append(std::to_string(tmsi));
+  return s;
+}
+

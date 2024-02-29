@@ -181,6 +181,13 @@ constexpr uint8_t kDeregistrationTypeMask = 0b00001000;
 
 constexpr uint8_t kNasMessageMinLength = 3;
 
+constexpr uint8_t kSecurityProtected5gsNasMessageSequenceNumberOctet = 6;
+constexpr uint8_t kSecurityProtected5gsNasMessageHeaderLength =
+    7;  // Including 1 octet for Extended protocol discriminator
+// 1 octet for Security header type associated with a spare half octet
+// 4 octets for Message authentication code
+// 1 octet for Sequence number
+
 constexpr int KEncodeDecodeError = -1;
 constexpr int KEncodeDecodeOK    = 0;
 

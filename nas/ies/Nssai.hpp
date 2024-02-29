@@ -29,7 +29,7 @@ constexpr uint8_t kNssaiMinimumLength = 4;
 constexpr uint8_t kNssaiMaximumLength = 146;
 constexpr auto kNssaiIeName           = "NSSAI";
 
-namespace nas {
+namespace oai::nas {
 
 class Nssai : public Type4NasIe {
  public:
@@ -50,6 +50,6 @@ class Nssai : public Type4NasIe {
       s_nssais_;  // TODO: use class S-NSSAI instead of struct SNSSAI_s
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

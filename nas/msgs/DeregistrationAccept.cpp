@@ -23,7 +23,7 @@
 
 #include "NasHelper.hpp"
 
-using namespace nas;
+using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 DeregistrationAccept::DeregistrationAccept(bool is_ue_originating)

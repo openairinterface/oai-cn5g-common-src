@@ -21,7 +21,7 @@
 
 #include "MaPduSessionInformation.hpp"
 
-using namespace nas;
+using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 MaPduSessionInformation::MaPduSessionInformation()

@@ -24,7 +24,7 @@
 
 #include "NasIeHeader.hpp"
 
-namespace nas {
+namespace oai::nas {
 
 class IdentityResponse : public NasMmPlainHeader {
  public:
@@ -56,6 +56,6 @@ class IdentityResponse : public NasMmPlainHeader {
   _5gsMobileIdentity ie_mobile_identity_;  // Mandatory
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

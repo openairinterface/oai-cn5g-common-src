@@ -28,7 +28,7 @@ constexpr uint8_t k5gmmCapabilityMinimumLength = 3;
 constexpr uint8_t k5gmmCapabilityMaximumLength = 15;
 constexpr auto k5gmmCapabilityIeName           = "5GMM Capability";
 
-namespace nas {
+namespace oai::nas {
 
 class _5gmmCapability : public Type4NasIe {
  public:
@@ -50,6 +50,6 @@ class _5gmmCapability : public Type4NasIe {
   std::optional<uint8_t> octet5_;
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

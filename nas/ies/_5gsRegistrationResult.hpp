@@ -28,7 +28,7 @@ constexpr uint8_t k5gsRegistrationResultLength        = 3;
 constexpr uint8_t k5gsRegistrationResultContentLength = 1;
 constexpr auto k5gsRegistrationResultIeName = "5GS Registration Result";
 
-namespace nas {
+namespace oai::nas {
 
 class _5gsRegistrationResult : public Type4NasIe {
  public:
@@ -56,6 +56,6 @@ class _5gsRegistrationResult : public Type4NasIe {
   bool sms_allowed_;
   uint8_t value_;
 };
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

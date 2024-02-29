@@ -27,7 +27,7 @@
 constexpr uint8_t kUeUsageSettingLength = 3;
 constexpr auto kUeUsageSettingIeName    = "UE's Usage Setting";
 
-namespace nas {
+namespace oai::nas {
 
 class UeUsageSetting : public Type4NasIe {
  public:
@@ -46,6 +46,6 @@ class UeUsageSetting : public Type4NasIe {
  private:
   bool ues_usage_setting_;
 };
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

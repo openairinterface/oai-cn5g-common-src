@@ -24,7 +24,7 @@
 #include "NasHelper.hpp"
 #include "conversions.hpp"
 
-using namespace nas;
+using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 DeregistrationRequestUeTerminated::DeregistrationRequestUeTerminated()

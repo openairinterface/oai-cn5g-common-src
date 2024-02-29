@@ -24,7 +24,7 @@
 
 #include "NasIeHeader.hpp"
 
-namespace nas {
+namespace oai::nas {
 
 class RegistrationComplete : public NasMmPlainHeader {
  public:
@@ -46,6 +46,6 @@ class RegistrationComplete : public NasMmPlainHeader {
       ie_sor_transparent_container_;  // Optional
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

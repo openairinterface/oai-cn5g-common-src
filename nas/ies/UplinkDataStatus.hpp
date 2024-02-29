@@ -28,7 +28,7 @@ constexpr uint8_t kUplinkDataStatusMinimumLength = 4;
 constexpr uint8_t kUplinkDataStatusMaximumLength = 34;
 constexpr auto kUplinkDataStatusIeName           = "Uplink Data Status";
 
-namespace nas {
+namespace oai::nas {
 
 class UplinkDataStatus : public Type4NasIe {
  public:
@@ -49,6 +49,6 @@ class UplinkDataStatus : public Type4NasIe {
   // TODO: spare
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

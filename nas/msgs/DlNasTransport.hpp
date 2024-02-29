@@ -24,7 +24,7 @@
 
 #include "NasIeHeader.hpp"
 
-namespace nas {
+namespace oai::nas {
 
 class DlNasTransport : public NasMmPlainHeader {
  public:
@@ -62,6 +62,6 @@ class DlNasTransport : public NasMmPlainHeader {
   std::optional<GprsTimer3> ie_back_off_timer_value_;               // Optional
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

@@ -27,7 +27,7 @@
 constexpr uint8_t kNasMessageTypeIeSize = 1;
 constexpr auto kNasMessageTypeIeName    = "NAS Message Type";
 
-namespace nas {
+namespace oai::nas {
 
 class NasMessageType : public NasIe {
  public:
@@ -51,6 +51,6 @@ class NasMessageType : public NasIe {
   uint8_t message_type_;
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

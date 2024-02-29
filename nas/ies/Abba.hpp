@@ -27,7 +27,7 @@
 constexpr uint8_t kAbbaMinimumLength = 4;
 constexpr auto kAbbaIeName           = "Abba";
 
-namespace nas {
+namespace oai::nas {
 
 class Abba : public Type4NasIe {
  public:
@@ -49,6 +49,6 @@ class Abba : public Type4NasIe {
   uint8_t value_[256];  // TODO:
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

@@ -27,7 +27,7 @@
 constexpr uint8_t kNssaiInclusionModeLength = 1;
 constexpr auto kNssaiInclusionModeIeName    = "NSSAI Inclusion Mode";
 
-namespace nas {
+namespace oai::nas {
 
 class NssaiInclusionMode : public Type1NasIeFormatTv {
  public:
@@ -43,6 +43,6 @@ class NssaiInclusionMode : public Type1NasIeFormatTv {
  private:
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

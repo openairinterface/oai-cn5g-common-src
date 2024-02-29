@@ -28,7 +28,7 @@ constexpr uint8_t kNon3gppNwProvidedPoliciesLength = 1;
 constexpr auto kNon3gppNwProvidedPoliciesIeName =
     "Non-3GPP NW Provided Policies";
 
-namespace nas {
+namespace oai::nas {
 
 class Non3gppNwProvidedPolicies : public Type1NasIeFormatTv {
  public:
@@ -44,6 +44,6 @@ class Non3gppNwProvidedPolicies : public Type1NasIeFormatTv {
  private:
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

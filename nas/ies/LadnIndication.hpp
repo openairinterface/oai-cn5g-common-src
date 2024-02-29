@@ -28,7 +28,7 @@ constexpr uint8_t kLadnIndicationMinimumLength  = 3;
 constexpr uint16_t kLadnIndicationMaximumLength = 811;
 constexpr auto kLadnIndicationIeName            = "LADN Indication";
 
-namespace nas {
+namespace oai::nas {
 
 class LadnIndication : Type6NasIe {
  public:
@@ -48,6 +48,6 @@ class LadnIndication : Type6NasIe {
   std::vector<bstring> ladn_;
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

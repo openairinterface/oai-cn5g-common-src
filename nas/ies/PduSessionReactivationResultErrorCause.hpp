@@ -29,7 +29,7 @@ constexpr uint32_t kPduSessionReactivationResultErrorCauseMaximumLength = 515;
 constexpr auto kPduSessionReactivationResultErrorCauseIeName =
     "PDU Session Reactivation Result Error Cause";
 
-namespace nas {
+namespace oai::nas {
 
 class PduSessionReactivationResultErrorCause : public Type6NasIe {
  public:
@@ -54,6 +54,6 @@ class PduSessionReactivationResultErrorCause : public Type6NasIe {
   std::vector<std::pair<uint8_t, uint8_t>> pdu_session_id_cause_value_pair_;
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

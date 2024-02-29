@@ -28,7 +28,7 @@ constexpr uint8_t k5gsNetworkFeatureSupportMinimumLength = 3;
 constexpr uint8_t k5gsNetworkFeatureSupportMaximumLength = 5;
 constexpr auto k5gsNetworkFeatureSupportIeName = "5GS Network Feature Support";
 
-namespace nas {
+namespace oai::nas {
 
 class _5gsNetworkFeatureSupport : public Type4NasIe {
  public:
@@ -51,6 +51,6 @@ class _5gsNetworkFeatureSupport : public Type4NasIe {
   // Spare
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

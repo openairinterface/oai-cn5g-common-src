@@ -24,7 +24,7 @@
 
 #include "NasIeHeader.hpp"
 
-namespace nas {
+namespace oai::nas {
 
 class SecurityModeReject : public NasMmPlainHeader {
  public:
@@ -43,6 +43,6 @@ class SecurityModeReject : public NasMmPlainHeader {
   _5gmmCause ie_5gmm_cause_;  // Mandatory
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

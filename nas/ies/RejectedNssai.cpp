@@ -21,7 +21,7 @@
 
 #include "RejectedNssai.hpp"
 
-using namespace nas;
+using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 RejectedNssai::RejectedNssai(uint8_t iei) : Type4NasIe(iei) {

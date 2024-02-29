@@ -24,7 +24,7 @@
 
 #include "NasIeHeader.hpp"
 
-namespace nas {
+namespace oai::nas {
 
 class AuthenticationFailure : public NasMmPlainHeader {
  public:
@@ -53,6 +53,6 @@ class AuthenticationFailure : public NasMmPlainHeader {
       ie_authentication_failure_parameter_;  // Optional
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

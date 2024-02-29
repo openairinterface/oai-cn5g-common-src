@@ -28,7 +28,7 @@ constexpr uint8_t kAdditional5gSecurityInformationLength = 3;
 constexpr auto kAdditional5gSecurityInformationIeName =
     "Additional 5G Security Information";
 
-namespace nas {
+namespace oai::nas {
 
 class Additional5gSecurityInformation : public Type4NasIe {
  public:
@@ -53,6 +53,6 @@ class Additional5gSecurityInformation : public Type4NasIe {
   bool rinmr_;
   bool hdp_;
 };
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

@@ -24,7 +24,7 @@
 
 #include "NasIeHeader.hpp"
 
-namespace nas {
+namespace oai::nas {
 
 class RegistrationAccept : public NasMmPlainHeader {
  public:
@@ -202,6 +202,6 @@ class RegistrationAccept : public NasMmPlainHeader {
   // TODO: Negotiated NB-N1 mode DRX parameters (Release 16.14.0)
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

@@ -38,7 +38,7 @@ extern "C" {
 #include "bstrlib.h"
 }
 
-namespace nas {
+namespace oai::nas {
 
 class NasIe {
  public:
@@ -54,6 +54,6 @@ class NasIe {
  protected:
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

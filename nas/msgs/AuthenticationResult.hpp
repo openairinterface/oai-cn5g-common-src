@@ -24,7 +24,7 @@
 
 #include "NasIeHeader.hpp"
 
-namespace nas {
+namespace oai::nas {
 
 class AuthenticationResult : public NasMmPlainHeader {
  public:
@@ -51,6 +51,6 @@ class AuthenticationResult : public NasMmPlainHeader {
   std::optional<Abba> ie_abba_;    // Optional
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

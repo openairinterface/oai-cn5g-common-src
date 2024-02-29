@@ -21,7 +21,7 @@
 
 #include "ControlPlaneServiceType.hpp"
 
-using namespace nas;
+using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 ControlPlaneServiceType::ControlPlaneServiceType()

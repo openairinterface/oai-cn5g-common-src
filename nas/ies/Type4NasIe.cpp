@@ -21,7 +21,7 @@
 
 #include "Type4NasIe.hpp"
 
-using namespace nas;
+using namespace oai::nas;
 //------------------------------------------------------------------------------
 Type4NasIe::Type4NasIe() : NasIe() {
   iei_ = std::nullopt;

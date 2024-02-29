@@ -28,7 +28,7 @@
 
 #include "NasIeHeader.hpp"
 
-namespace nas {
+namespace oai::nas {
 
 class RegistrationRequest : public NasMmPlainHeader {
  public:
@@ -59,7 +59,7 @@ class RegistrationRequest : public NasMmPlainHeader {
       const std::string& mcc, const std::string& mnc,
       const std::string& routing_ind, uint8_t protection_sch_id, uint8_t hnpki,
       const std::string& msin);
-  bool GetSuciSupiFormatImsi(nas::SUCI_imsi_t& imsi) const;
+  bool GetSuciSupiFormatImsi(SUCI_imsi_t& imsi) const;
 
   void Set5gGuti();
   std::string Get5gGuti() const;
@@ -69,7 +69,7 @@ class RegistrationRequest : public NasMmPlainHeader {
   void SetAdditionalGuti(
       const std::string& mcc, const std::string& mnc, uint8_t amf_region_id,
       uint8_t amf_set_id, uint8_t amf_pointer, const std::string& _5g_tmsi);
-  bool GetAdditionalGuti(nas::_5G_GUTI_t& guti) const;
+  bool GetAdditionalGuti(_5G_GUTI_t& guti) const;
 
   void SetNonCurrentNativeNasKSI(uint8_t tsc, uint8_t key_set_id);
   bool GetNonCurrentNativeNasKSI(uint8_t& value) const;
@@ -194,6 +194,6 @@ class RegistrationRequest : public NasMmPlainHeader {
   // TODO: Requested NB-N1 mode DRX parameters (Rel 16.14.0)
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

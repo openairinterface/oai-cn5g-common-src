@@ -25,7 +25,7 @@
 #include "NasIe.hpp"
 
 constexpr uint8_t kType1NasIeFormatVLength = 1;
-namespace nas {
+namespace oai::nas {
 
 class Type1NasIeFormatV : public NasIe {
  public:
@@ -50,6 +50,6 @@ class Type1NasIeFormatV : public NasIe {
                    // use Type1NasIeFormatTV instead)
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

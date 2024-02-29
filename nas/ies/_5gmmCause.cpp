@@ -24,7 +24,7 @@
 #include "3gpp_24.501.hpp"
 #include "common_defs.h"
 #include "logger_base.hpp"
-using namespace nas;
+using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 _5gmmCause::_5gmmCause(uint8_t iei) : Type3NasIe(iei) {

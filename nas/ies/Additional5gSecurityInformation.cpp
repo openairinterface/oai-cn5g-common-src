@@ -21,7 +21,7 @@
 
 #include "Additional5gSecurityInformation.hpp"
 
-using namespace nas;
+using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 Additional5gSecurityInformation::Additional5gSecurityInformation()

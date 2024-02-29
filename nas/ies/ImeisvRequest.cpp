@@ -21,7 +21,7 @@
 
 #include "ImeisvRequest.hpp"
 
-using namespace nas;
+using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 ImeisvRequest::ImeisvRequest() : Type1NasIeFormatTv(kIeiImeisvRequest) {}

@@ -37,7 +37,7 @@ extern "C" {
 #include "bstrlib.h"
 }
 
-namespace nas {
+namespace oai::nas {
 
 typedef struct SNSSAI_s {
   uint8_t sst;
@@ -162,6 +162,6 @@ typedef struct _5G_S_TMSI_s {
 
 // TODO: 5GS mobile identity information element for type of identity "MAC
 // address"
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

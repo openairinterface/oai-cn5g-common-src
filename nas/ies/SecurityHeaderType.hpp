@@ -27,7 +27,7 @@
 constexpr uint8_t kSecurityHeaderTypeLength = 1;
 constexpr auto kSecurityHeaderTypeIeName    = "Security Header Type";
 
-namespace nas {
+namespace oai::nas {
 
 class SecurityHeaderType : public NasIe {
  public:
@@ -51,6 +51,6 @@ class SecurityHeaderType : public NasIe {
   uint8_t secu_header_type_ : 4;
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

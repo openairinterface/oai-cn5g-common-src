@@ -28,7 +28,7 @@ constexpr uint8_t kAdditionalInformationMinimumLength  = 3;
 constexpr uint16_t kAdditionalInformationMaximumLength = 257;
 constexpr auto kAdditionalInformationIeName = "Additional Information";
 
-namespace nas {
+namespace oai::nas {
 
 class AdditionalInformation : public Type4NasIe {
  public:
@@ -48,6 +48,6 @@ class AdditionalInformation : public Type4NasIe {
   bstring value_;
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

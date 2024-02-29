@@ -29,7 +29,7 @@ constexpr uint8_t kAuthenticationResponseParameterMaximumLength = 18;
 constexpr auto kAuthenticationResponseParameterIeName =
     "Authentication Response Parameter";
 
-namespace nas {
+namespace oai::nas {
 
 class AuthenticationResponseParameter : public Type4NasIe {
  public:
@@ -51,6 +51,6 @@ class AuthenticationResponseParameter : public Type4NasIe {
   bstring res_or_res_star_;
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

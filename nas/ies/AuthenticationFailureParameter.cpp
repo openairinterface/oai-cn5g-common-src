@@ -21,7 +21,7 @@
 
 #include "AuthenticationFailureParameter.hpp"
 
-using namespace nas;
+using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 AuthenticationFailureParameter::AuthenticationFailureParameter()

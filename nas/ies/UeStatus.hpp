@@ -27,7 +27,7 @@
 constexpr uint8_t kUeStatusIeLength = 3;
 constexpr auto kUeStatusIeName      = "UE Status";
 
-namespace nas {
+namespace oai::nas {
 
 class UeStatus : public Type4NasIe {
  public:
@@ -50,6 +50,6 @@ class UeStatus : public Type4NasIe {
   bool n1_;
   bool s1_;
 };
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

@@ -26,7 +26,7 @@
 
 constexpr auto k5gsRegistrationTypeName = "5GS Registration Type";
 
-namespace nas {
+namespace oai::nas {
 
 class _5gsRegistrationType : public Type1NasIeFormatTv {
  public:
@@ -56,6 +56,6 @@ class _5gsRegistrationType : public Type1NasIeFormatTv {
   uint8_t reg_type_ : 3;
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

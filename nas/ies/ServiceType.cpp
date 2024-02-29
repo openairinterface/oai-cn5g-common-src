@@ -21,7 +21,7 @@
 
 #include "ServiceType.hpp"
 
-using namespace nas;
+using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 ServiceType::ServiceType() : Type1NasIe(true), service_type_value_() {}

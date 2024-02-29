@@ -23,7 +23,7 @@
 
 #include "logger_base.hpp"
 
-using namespace nas;
+using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 Dnn::Dnn() : Type4NasIe(kIeiDnn), dnn_() {

@@ -25,7 +25,7 @@
 #include "common_defs.h"
 #include "logger_base.hpp"
 
-using namespace nas;
+using namespace oai::nas;
 //------------------------------------------------------------------------------
 Type1NasIeFormatTv::Type1NasIeFormatTv() : NasIe(), value_(0) {
   iei_ = std::nullopt;

@@ -29,7 +29,7 @@ constexpr uint8_t kPayloadContainerMinimumLength  = 4;
 constexpr uint32_t kPayloadContainerMaximumLength = 65538;
 constexpr auto kPayloadContainerIeName            = "Payload Container";
 
-namespace nas {
+namespace oai::nas {
 class PayloadContainer : Type6NasIe {
  public:
   PayloadContainer();
@@ -58,6 +58,6 @@ class PayloadContainer : Type6NasIe {
   std::optional<std::vector<PayloadContainerEntry>> contents_;
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

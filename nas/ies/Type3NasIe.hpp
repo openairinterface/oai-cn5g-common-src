@@ -25,7 +25,7 @@
 #include "NasIe.hpp"
 
 constexpr uint8_t kType3NasIeFormatTvLength = 1;
-namespace nas {
+namespace oai::nas {
 
 class Type3NasIe : public NasIe {
  public:
@@ -45,6 +45,6 @@ class Type3NasIe : public NasIe {
   std::optional<uint8_t> iei_;  // IEI present format TV
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

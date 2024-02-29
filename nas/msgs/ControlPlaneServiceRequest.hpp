@@ -25,7 +25,7 @@
 #include "NasIeHeader.hpp"
 #include "bstrlib.h"
 
-namespace nas {
+namespace oai::nas {
 
 class ControlPlaneServiceRequest : public NasMmPlainHeader {
  public:
@@ -77,6 +77,6 @@ class ControlPlaneServiceRequest : public NasMmPlainHeader {
   // TODO: Additional information (Optional)
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

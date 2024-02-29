@@ -29,7 +29,7 @@ constexpr uint8_t kSorTransparentContainerIeMinimumLength = 17;
 constexpr uint8_t kSorTransparentContainerIeMacLength     = 16;
 constexpr auto kSorTransparentContainerIeName = "SOR Transparent Container";
 
-namespace nas {
+namespace oai::nas {
 
 class SorTransparentContainer : Type6NasIe {
  public:
@@ -53,6 +53,6 @@ class SorTransparentContainer : Type6NasIe {
   // Other IEs
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

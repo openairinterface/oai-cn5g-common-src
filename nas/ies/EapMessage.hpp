@@ -28,7 +28,7 @@ constexpr uint8_t kEapMessageMinimumLength  = 7;
 constexpr uint16_t kEapMessageMaximumLength = 1503;
 constexpr auto kEapMessageIeName            = "EAP Message";
 
-namespace nas {
+namespace oai::nas {
 
 class EapMessage : public Type6NasIe {
  public:
@@ -50,6 +50,6 @@ class EapMessage : public Type6NasIe {
   bstring eap_;
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

@@ -26,7 +26,7 @@
 #include "common_defs.h"
 #include "logger_base.hpp"
 
-using namespace nas;
+using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 NasMmPlainHeader::NasMmPlainHeader(uint8_t epd) : epd_(epd) {}

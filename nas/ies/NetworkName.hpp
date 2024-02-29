@@ -31,7 +31,7 @@
 constexpr uint8_t kNetworkNameMinimumLength = 3;
 constexpr auto kNetworkNameIeName           = "Network Name";
 
-namespace nas {
+namespace oai::nas {
 
 class NetworkName {
  public:
@@ -66,6 +66,6 @@ class NetworkName {
   uint8_t number_of_spare_bits_;  // octet 3
   bstring text_string_;
 };
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

@@ -21,7 +21,7 @@
 
 #include "EpsNasSecurityAlgorithms.hpp"
 
-using namespace nas;
+using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 EpsNasSecurityAlgorithms::EpsNasSecurityAlgorithms()

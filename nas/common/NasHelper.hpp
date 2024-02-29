@@ -23,7 +23,7 @@
 
 #include "logger_base.hpp"
 
-namespace nas {
+namespace oai::nas {
 
 class NasHelper {
  public:
@@ -143,4 +143,4 @@ class NasHelper {
   }
 };
 
-}  // namespace nas
+}  // namespace oai::nas

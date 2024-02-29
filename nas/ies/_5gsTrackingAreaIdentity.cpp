@@ -27,7 +27,7 @@
 #include "logger_base.hpp"
 #include "utils.hpp"
 
-using namespace nas;
+using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 _5gsTrackingAreaIdentity::_5gsTrackingAreaIdentity()

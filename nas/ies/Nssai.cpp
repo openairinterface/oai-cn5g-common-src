@@ -27,7 +27,7 @@
 //#include "amf.hpp"
 #include "logger_base.hpp"
 
-using namespace nas;
+using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 Nssai::Nssai(uint8_t iei) : Type4NasIe(iei) {

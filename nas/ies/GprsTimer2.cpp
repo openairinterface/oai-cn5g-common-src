@@ -21,7 +21,7 @@
 
 #include "GprsTimer2.hpp"
 
-using namespace nas;
+using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 GprsTimer2::GprsTimer2(uint8_t iei) : Type4NasIe(iei), value_() {

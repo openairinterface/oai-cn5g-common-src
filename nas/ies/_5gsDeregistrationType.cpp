@@ -24,7 +24,7 @@
 #include "3gpp_24.501.hpp"
 #include "logger_base.hpp"
 
-using namespace nas;
+using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 _5gsDeregistrationType::_5gsDeregistrationType() : Type1NasIeFormatTv() {

@@ -24,7 +24,7 @@
 
 #include "NasIeHeader.hpp"
 
-namespace nas {
+namespace oai::nas {
 
 class DeregistrationRequestUeTerminated : public NasMmPlainHeader {
  public:
@@ -61,6 +61,6 @@ class DeregistrationRequestUeTerminated : public NasMmPlainHeader {
   // TODO: CagInformationList ie_cag_information_list ; //Optional
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

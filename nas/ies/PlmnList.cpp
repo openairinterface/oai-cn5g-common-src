@@ -26,7 +26,7 @@
 #include "logger_base.hpp"
 #include "utils.hpp"
 
-using namespace nas;
+using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 PlmnList::PlmnList(uint8_t iei) : Type4NasIe(iei) {

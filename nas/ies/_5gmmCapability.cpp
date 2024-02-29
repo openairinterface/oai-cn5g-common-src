@@ -26,7 +26,7 @@
 #include "common_defs.h"
 #include "logger_base.hpp"
 
-using namespace nas;
+using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 _5gmmCapability::_5gmmCapability(uint8_t iei, uint8_t octet3)

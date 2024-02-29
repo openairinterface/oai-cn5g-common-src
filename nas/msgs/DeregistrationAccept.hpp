@@ -24,7 +24,7 @@
 
 #include "NasIeHeader.hpp"
 
-namespace nas {
+namespace oai::nas {
 
 class DeregistrationAccept : public NasMmPlainHeader {
  public:
@@ -39,6 +39,6 @@ class DeregistrationAccept : public NasMmPlainHeader {
  private:
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

@@ -24,7 +24,7 @@
 
 #include "NasIeHeader.hpp"
 
-namespace nas {
+namespace oai::nas {
 
 class DeregistrationRequest : public NasMmPlainHeader {
  public:
@@ -56,7 +56,7 @@ class DeregistrationRequest : public NasMmPlainHeader {
       const std::string& mcc, const std::string& mnc,
       const std::string& routing_ind, uint8_t protection_sch_id, uint8_t hnpki,
       const std::string& msin);
-  bool GetSuciSupiFormatImsi(nas::SUCI_imsi_t& imsi) const;
+  bool GetSuciSupiFormatImsi(SUCI_imsi_t& imsi) const;
 
   void Set5gGuti();
   std::string Get5gGuti() const;
@@ -73,6 +73,6 @@ class DeregistrationRequest : public NasMmPlainHeader {
   _5gsMobileIdentity ie_5gs_mobility_id_;          // Mandatory
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

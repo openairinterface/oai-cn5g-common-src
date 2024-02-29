@@ -27,7 +27,7 @@
 constexpr uint8_t k5gsTrackingAreaIdentityLength = 7;
 constexpr auto k5gsTrackingAreaIdentityIeName    = "5GS Tracking Area Identity";
 
-namespace nas {
+namespace oai::nas {
 
 class _5gsTrackingAreaIdentity : public Type3NasIe {
  public:
@@ -57,6 +57,6 @@ class _5gsTrackingAreaIdentity : public Type3NasIe {
   std::string mnc_;
   uint32_t tac_;
 };
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

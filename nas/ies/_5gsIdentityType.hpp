@@ -26,7 +26,7 @@
 
 constexpr auto k5gsIdentityTypeIeName = "5GS Identity Type";
 
-namespace nas {
+namespace oai::nas {
 
 class _5gsIdentityType : public Type1NasIeFormatTv {
  public:
@@ -42,6 +42,6 @@ class _5gsIdentityType : public Type1NasIeFormatTv {
 
  private:
 };
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

@@ -27,7 +27,7 @@
 constexpr uint8_t k5gsDrxParametersLength = 3;
 constexpr auto k5gsDrxParametersIeName    = "5GS DRX Parameters";
 
-namespace nas {
+namespace oai::nas {
 
 class _5gsDrxParameters : public Type4NasIe {
  public:
@@ -46,6 +46,6 @@ class _5gsDrxParameters : public Type4NasIe {
  private:
   uint8_t value_;
 };
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

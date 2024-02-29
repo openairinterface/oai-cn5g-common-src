@@ -25,7 +25,7 @@
 #include "NasIe.hpp"
 
 constexpr uint8_t kType1NasIeLength = 1;
-namespace nas {
+namespace oai::nas {
 
 class Type1NasIe : public NasIe {
  public:
@@ -61,6 +61,6 @@ class Type1NasIe : public NasIe {
   uint8_t value_;  // value (in bit positions 4,3,2,1 or 8,7,6,5)
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

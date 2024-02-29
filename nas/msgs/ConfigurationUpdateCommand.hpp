@@ -24,7 +24,7 @@
 
 #include "NasIeHeader.hpp"
 
-namespace nas {
+namespace oai::nas {
 
 class ConfigurationUpdateCommand : public NasMmPlainHeader {
  public:
@@ -88,6 +88,6 @@ class ConfigurationUpdateCommand : public NasMmPlainHeader {
   // TODO: Additional configuration indication (Rel 16.14.0) (Optional)
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

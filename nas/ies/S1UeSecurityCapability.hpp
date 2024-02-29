@@ -28,7 +28,7 @@ constexpr uint8_t kS1UeSecurityCapabilityMinimumLength = 4;
 constexpr uint8_t kS1UeSecurityCapabilityMaximumLength = 7;
 constexpr auto kS1UeSecurityCapabilityIeName = "S1 UE Security Capability";
 
-namespace nas {
+namespace oai::nas {
 
 class S1UeSecurityCapability : public Type4NasIe {
  public:
@@ -64,6 +64,6 @@ class S1UeSecurityCapability : public Type4NasIe {
   std::optional<uint8_t> gea_;  // 7th octet, Optional
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

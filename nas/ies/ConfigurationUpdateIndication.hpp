@@ -27,7 +27,7 @@
 constexpr auto kConfigurationUpdateIndicationIeName =
     "Configuration Update Indication";
 
-namespace nas {
+namespace oai::nas {
 
 class ConfigurationUpdateIndication : public Type1NasIe {
  public:
@@ -56,6 +56,6 @@ class ConfigurationUpdateIndication : public Type1NasIe {
   void GetValue() override;
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

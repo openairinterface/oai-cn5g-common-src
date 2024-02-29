@@ -23,7 +23,7 @@
 
 #include "logger_base.hpp"
 
-using namespace nas;
+using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 PduSessionIdentity2::PduSessionIdentity2(uint8_t iei) : Type3NasIe(iei) {

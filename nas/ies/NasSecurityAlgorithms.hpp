@@ -27,7 +27,7 @@
 constexpr uint8_t kNasSecurityAlgorithmsLength = 2;
 constexpr auto kNasSecurityAlgorithmsIeName    = "NAS Security Algorithms";
 
-namespace nas {
+namespace oai::nas {
 
 class NasSecurityAlgorithms : public Type3NasIe {
  public:
@@ -57,6 +57,6 @@ class NasSecurityAlgorithms : public Type3NasIe {
   uint8_t type_of_integrity_protection_algorithm_;
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

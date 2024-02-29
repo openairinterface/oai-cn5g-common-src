@@ -29,7 +29,7 @@
 
 constexpr uint8_t kNasMmPlainHeaderLength = 3;
 
-namespace nas {
+namespace oai::nas {
 
 class NasMmPlainHeader {
  public:
@@ -64,6 +64,6 @@ class NasMmPlainHeader {
   std::string msg_name_;  // non 3GPP IE
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

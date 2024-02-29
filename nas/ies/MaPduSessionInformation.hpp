@@ -26,7 +26,7 @@
 
 constexpr auto kMaPduSessionInformationIeName = "MA PDU Session Information";
 
-namespace nas {
+namespace oai::nas {
 
 class MaPduSessionInformation : public Type1NasIeFormatTv {
  public:
@@ -41,6 +41,6 @@ class MaPduSessionInformation : public Type1NasIeFormatTv {
 
  private:
 };
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

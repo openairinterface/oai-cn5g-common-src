@@ -21,7 +21,7 @@
 
 #include "ReleaseAssistanceIndication.hpp"
 
-using namespace nas;
+using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 ReleaseAssistanceIndication::ReleaseAssistanceIndication()

@@ -25,7 +25,7 @@
 #include "NasIeHeader.hpp"
 #include "bstrlib.h"
 
-namespace nas {
+namespace oai::nas {
 
 class ServiceRequest : public NasMmPlainHeader {
  public:
@@ -75,6 +75,6 @@ class ServiceRequest : public NasMmPlainHeader {
   std::optional<NasMessageContainer> ie_nas_message_container_;  // Optional
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

@@ -27,7 +27,7 @@
 constexpr uint8_t kEpsBearerContextStatusLength = 4;
 constexpr auto kEpsBearerContextStatusIeName    = "EPS Bearer Context Status";
 
-namespace nas {
+namespace oai::nas {
 
 class EpsBearerContextStatus : public Type4NasIe {
  public:
@@ -47,6 +47,6 @@ class EpsBearerContextStatus : public Type4NasIe {
   uint16_t value_;
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

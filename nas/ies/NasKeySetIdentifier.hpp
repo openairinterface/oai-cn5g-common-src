@@ -26,7 +26,7 @@
 
 constexpr auto kNasKeySetIdentifierName = "NAS Key Set Identifier";
 
-namespace nas {
+namespace oai::nas {
 
 class NasKeySetIdentifier : public Type1NasIe {
  public:
@@ -57,6 +57,6 @@ class NasKeySetIdentifier : public Type1NasIe {
   uint8_t key_id_;
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

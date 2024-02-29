@@ -28,7 +28,7 @@ constexpr uint8_t kUeNetworkCapabilityMinimumLength = 4;
 constexpr uint8_t kUeNetworkCapabilityMaximumLength = 15;
 constexpr auto kUeNetworkCapabilityIeName           = "UE Network Capability";
 
-namespace nas {
+namespace oai::nas {
 
 class UeNetworkCapability : public Type4NasIe {
  public:
@@ -59,6 +59,6 @@ class UeNetworkCapability : public Type4NasIe {
   // TODO: spare octet 10-15
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

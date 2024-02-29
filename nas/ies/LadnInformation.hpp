@@ -31,7 +31,7 @@ constexpr uint8_t kLadnInformationMinimumLength  = 3;
 constexpr uint16_t kLadnInformationMaximumLength = 1715;
 constexpr auto kLadnInformationIeName            = "LADN Information";
 
-namespace nas {
+namespace oai::nas {
 
 class LadnInformation : Type6NasIe {
  public:
@@ -50,6 +50,6 @@ class LadnInformation : Type6NasIe {
   std::vector<Ladn> ladn_list_;
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

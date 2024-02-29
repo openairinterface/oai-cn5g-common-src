@@ -22,7 +22,7 @@
 #include "_5gsIdentityType.hpp"
 
 #include "logger_base.hpp"
-using namespace nas;
+using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 _5gsIdentityType::_5gsIdentityType() : Type1NasIeFormatTv() {}

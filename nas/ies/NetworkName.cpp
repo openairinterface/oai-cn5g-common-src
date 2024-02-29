@@ -32,7 +32,7 @@ extern "C" {
 #include "TLVEncoder.h"
 }
 
-using namespace nas;
+using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 NetworkName::NetworkName() {

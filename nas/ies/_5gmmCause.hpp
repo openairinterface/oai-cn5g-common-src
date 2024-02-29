@@ -71,7 +71,7 @@ constexpr uint8_t k5gmmCauseMaximumLength = 2;
 
 constexpr auto k5gmmCauseIeName = "5GMM Cause";
 
-namespace nas {
+namespace oai::nas {
 
 class _5gmmCause : public Type3NasIe {
  public:
@@ -94,6 +94,6 @@ class _5gmmCause : public Type3NasIe {
   uint8_t value_;
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

@@ -28,7 +28,7 @@ constexpr uint8_t kDnnMinimumLength = 3;
 constexpr uint8_t kDnnMaximumLength = 102;
 constexpr auto kDnnIeName           = "DNN";
 
-namespace nas {
+namespace oai::nas {
 
 class Dnn : public Type4NasIe {
  public:
@@ -49,6 +49,6 @@ class Dnn : public Type4NasIe {
   bstring dnn_;
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

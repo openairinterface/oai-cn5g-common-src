@@ -28,7 +28,7 @@ constexpr uint8_t kPduSessionReactivationResultMaximumLength = 34;
 constexpr auto kPduSessionReactivationResultIeName =
     "PDU Session Reactivation Result";
 
-namespace nas {
+namespace oai::nas {
 
 class PduSessionReactivationResult : public Type4NasIe {
  public:
@@ -49,6 +49,6 @@ class PduSessionReactivationResult : public Type4NasIe {
   // Spare
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

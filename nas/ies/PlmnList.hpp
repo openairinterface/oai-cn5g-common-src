@@ -29,7 +29,7 @@ constexpr uint8_t kPlmnListMinimumLength = 5;
 constexpr uint8_t kPlmnListMaximumLength = 47;
 constexpr auto kPlmnListIeName           = "PLMN List";
 
-namespace nas {
+namespace oai::nas {
 
 class PlmnList : public Type4NasIe {
  public:
@@ -48,6 +48,6 @@ class PlmnList : public Type4NasIe {
  private:
   std::vector<nas_plmn_t> plmn_list_;
 };
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

@@ -24,7 +24,7 @@
 
 #include "Type1NasIeFormatTv.hpp"
 
-namespace nas {
+namespace oai::nas {
 typedef struct _5gs_deregistration_type_s {
   uint8_t iei : 4;
   uint8_t switch_off : 1;
@@ -71,6 +71,6 @@ class _5gsDeregistrationType : public Type1NasIeFormatTv {
   } u1;
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

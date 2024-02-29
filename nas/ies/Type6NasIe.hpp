@@ -24,7 +24,7 @@
 
 #include "NasIe.hpp"
 
-namespace nas {
+namespace oai::nas {
 
 class Type6NasIe : public NasIe {
  public:
@@ -57,6 +57,6 @@ class Type6NasIe : public NasIe {
   uint16_t li_;                 // length indicator, 2 bytes
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

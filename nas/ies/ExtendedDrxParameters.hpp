@@ -27,7 +27,7 @@
 constexpr uint8_t kExtendedDrxParametersLength = 3;
 constexpr auto kExtendedDrxParametersIeName    = "Extended DRX Parameters";
 
-namespace nas {
+namespace oai::nas {
 
 class ExtendedDrxParameters : public Type4NasIe {
  public:
@@ -50,6 +50,6 @@ class ExtendedDrxParameters : public Type4NasIe {
   uint8_t paging_time_;
   uint8_t e_drx_value_;
 };
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

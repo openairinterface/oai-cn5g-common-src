@@ -21,7 +21,7 @@
 
 #include "ConfigurationUpdateIndication.hpp"
 
-using namespace nas;
+using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 ConfigurationUpdateIndication::ConfigurationUpdateIndication()

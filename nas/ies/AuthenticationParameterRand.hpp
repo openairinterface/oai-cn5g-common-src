@@ -30,7 +30,7 @@ constexpr uint8_t kAuthenticationParameterRandValueLength =
 constexpr auto kAuthenticationParameterRandIeName =
     "Authentication Parameter RAND";
 
-namespace nas {
+namespace oai::nas {
 
 class AuthenticationParameterRand : public Type3NasIe {
  public:
@@ -51,6 +51,6 @@ class AuthenticationParameterRand : public Type3NasIe {
   uint8_t value_[kAuthenticationParameterRandValueLength];
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

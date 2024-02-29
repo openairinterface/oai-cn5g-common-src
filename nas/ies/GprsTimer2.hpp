@@ -27,7 +27,7 @@
 constexpr uint8_t kGprsTimer2Length = 3;
 constexpr auto kGprsTimer2IeName    = "GPRS Timer 2";
 
-namespace nas {
+namespace oai::nas {
 
 class GprsTimer2 : public Type4NasIe {
  public:
@@ -46,6 +46,6 @@ class GprsTimer2 : public Type4NasIe {
  private:
   uint8_t value_;
 };
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

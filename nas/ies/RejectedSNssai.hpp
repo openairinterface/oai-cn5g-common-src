@@ -26,7 +26,7 @@
 
 #include <optional>
 
-namespace nas {
+namespace oai::nas {
 
 class RejectedSNssai {
  public:
@@ -58,6 +58,6 @@ class RejectedSNssai {
   std::optional<uint32_t> sd_;
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

@@ -24,7 +24,7 @@
 
 #include "NasIeHeader.hpp"
 
-namespace nas {
+namespace oai::nas {
 
 class UlNasTransport : public NasMmPlainHeader {
  public:
@@ -83,6 +83,6 @@ class UlNasTransport : public NasMmPlainHeader {
       ie_release_assistance_indication_;  // Optional
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

@@ -23,7 +23,7 @@
 
 #include "logger_base.hpp"
 
-using namespace nas;
+using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 Non3gppNwProvidedPolicies::Non3gppNwProvidedPolicies(uint8_t value)

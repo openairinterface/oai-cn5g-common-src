@@ -27,7 +27,7 @@
 constexpr uint8_t k5gsUpdateTypeLength = 3;
 constexpr auto k5gsUpdateTypeIeName    = "5GS Update Type";
 
-namespace nas {
+namespace oai::nas {
 
 class _5gsUpdateType : public Type4NasIe {
  public:
@@ -60,6 +60,6 @@ class _5gsUpdateType : public Type4NasIe {
   bool sms_;               // bit 0
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

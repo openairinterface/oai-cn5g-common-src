@@ -28,7 +28,7 @@ constexpr uint8_t kPduSessionStatusMinimumLength = 4;
 constexpr uint8_t kPduSessionStatusMaximumLength = 34;
 constexpr auto kPduSessionStatusIeName           = "PDU Session Status";
 
-namespace nas {
+namespace oai::nas {
 
 class PduSessionStatus : public Type4NasIe {
  public:
@@ -49,6 +49,6 @@ class PduSessionStatus : public Type4NasIe {
   // TODO: spare
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

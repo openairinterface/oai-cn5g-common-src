@@ -30,7 +30,7 @@ constexpr uint8_t kAuthenticationFailureParameterContentLength =
 constexpr auto kAuthenticationFailureParameterIeName =
     "Authentication Failure Parameter";
 
-namespace nas {
+namespace oai::nas {
 
 class AuthenticationFailureParameter : public Type4NasIe {
  public:
@@ -57,6 +57,6 @@ class AuthenticationFailureParameter : public Type4NasIe {
   bstring value_;
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

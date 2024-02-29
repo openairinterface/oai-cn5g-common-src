@@ -23,7 +23,7 @@
 
 #include "logger_base.hpp"
 
-using namespace nas;
+using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 SNssai::SNssai(std::optional<uint8_t> iei) : Type4NasIe() {

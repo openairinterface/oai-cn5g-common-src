@@ -26,7 +26,7 @@
 
 constexpr auto kUeRadioCapabilityIdIeName = "UE Radio Capability ID";
 
-namespace nas {
+namespace oai::nas {
 
 class UeRadioCapabilityId : public Type4NasIe {
  public:
@@ -45,6 +45,6 @@ class UeRadioCapabilityId : public Type4NasIe {
  private:
   bstring value_;
 };
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

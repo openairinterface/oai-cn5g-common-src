@@ -27,7 +27,7 @@
 constexpr uint8_t kPayloadContainerTypeLength = 1;
 constexpr auto kPayloadContainerTypeIeName    = "Payload Container Type";
 
-namespace nas {
+namespace oai::nas {
 
 class PayloadContainerType : public Type1NasIeFormatTv {
  public:
@@ -41,6 +41,6 @@ class PayloadContainerType : public Type1NasIeFormatTv {
  private:
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

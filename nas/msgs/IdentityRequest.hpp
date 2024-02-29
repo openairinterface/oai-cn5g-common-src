@@ -24,7 +24,7 @@
 
 #include "NasIeHeader.hpp"
 
-namespace nas {
+namespace oai::nas {
 
 class IdentityRequest : public NasMmPlainHeader {
  public:
@@ -44,6 +44,6 @@ class IdentityRequest : public NasMmPlainHeader {
   // Spare half octet (Mandatory)
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

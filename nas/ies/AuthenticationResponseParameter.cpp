@@ -22,7 +22,7 @@
 #include "AuthenticationResponseParameter.hpp"
 
 #include "logger_base.hpp"
-using namespace nas;
+using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 AuthenticationResponseParameter::AuthenticationResponseParameter()

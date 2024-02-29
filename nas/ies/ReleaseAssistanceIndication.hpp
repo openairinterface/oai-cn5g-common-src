@@ -27,7 +27,7 @@
 constexpr auto kReleaseAssistanceIndicationIeName =
     "Release Assistance Indication";
 
-namespace nas {
+namespace oai::nas {
 
 class ReleaseAssistanceIndication : public Type1NasIeFormatTv {
  public:
@@ -43,6 +43,6 @@ class ReleaseAssistanceIndication : public Type1NasIeFormatTv {
  private:
   // uint8_t ddx_;
 };
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

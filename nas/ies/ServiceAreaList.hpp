@@ -32,7 +32,7 @@ constexpr uint8_t kServiceAreaListMaximumLength        = 114;
 constexpr uint8_t kServiceAreaListMaximumSupportedTAIs = 16;
 constexpr auto kServiceAreaListIeName                  = "Service Area List";
 
-namespace nas {
+namespace oai::nas {
 
 class ServiceAreaList : public Type4NasIe {
  public:
@@ -55,6 +55,6 @@ class ServiceAreaList : public Type4NasIe {
   int EncodeType11(service_area_list_ie_t item, uint8_t* buf, int len);
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

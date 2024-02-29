@@ -24,7 +24,7 @@
 
 #include "NasIeHeader.hpp"
 
-namespace nas {
+namespace oai::nas {
 
 class SecurityModeCommand : public NasMmPlainHeader {
  public:
@@ -85,6 +85,6 @@ class SecurityModeCommand : public NasMmPlainHeader {
       ie_s1_ue_security_capability_;  // Optional
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

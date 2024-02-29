@@ -24,7 +24,7 @@
 
 #include "NasIeHeader.hpp"
 
-namespace nas {
+namespace oai::nas {
 
 class SecurityModeComplete : public NasMmPlainHeader {
  public:
@@ -51,6 +51,6 @@ class SecurityModeComplete : public NasMmPlainHeader {
   std::optional<_5gsMobileIdentity> ie_non_imeisvpei_;           // Optional
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

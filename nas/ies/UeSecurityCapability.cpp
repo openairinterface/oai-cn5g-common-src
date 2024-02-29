@@ -23,7 +23,7 @@
 
 #include "logger_base.hpp"
 
-using namespace nas;
+using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 UeSecurityCapability::UeSecurityCapability() : Type4NasIe() {

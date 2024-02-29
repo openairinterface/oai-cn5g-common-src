@@ -24,7 +24,7 @@
 #include "NasHelper.hpp"
 #include "conversions.hpp"
 
-using namespace nas;
+using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 DeregistrationRequest::DeregistrationRequest()
@@ -100,15 +100,14 @@ void DeregistrationRequest::GetMobilityIdentityType(uint8_t& type) const {
 }
 
 //------------------------------------------------------------------------------
-bool DeregistrationRequest::GetSuciSupiFormatImsi(
-    nas::SUCI_imsi_t& imsi) const {
+bool DeregistrationRequest::GetSuciSupiFormatImsi(SUCI_imsi_t& imsi) const {
   ie_5gs_mobility_id_.GetSuciWithSupiImsi(imsi);
   return true;
 }
 
 //------------------------------------------------------------------------------
 std::string DeregistrationRequest::Get5gGuti() const {
-  std::optional<nas::_5G_GUTI_t> guti = std::nullopt;
+  std::optional<_5G_GUTI_t> guti = std::nullopt;
   ie_5gs_mobility_id_.Get5gGuti(guti);
   if (!guti.has_value()) return {};
 

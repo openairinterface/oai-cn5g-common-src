@@ -23,7 +23,7 @@
 
 #include "logger_base.hpp"
 
-using namespace nas;
+using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 RequestType::RequestType() : Type1NasIeFormatTv(kIeiRequestType) {

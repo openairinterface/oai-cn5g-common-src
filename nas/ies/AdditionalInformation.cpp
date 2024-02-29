@@ -21,7 +21,7 @@
 
 #include "AdditionalInformation.hpp"
 
-using namespace nas;
+using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 AdditionalInformation::AdditionalInformation()

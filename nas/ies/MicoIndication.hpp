@@ -27,7 +27,7 @@
 constexpr uint8_t kMicoIndicationIELength = 1;
 constexpr auto kMicoIndicationIeName      = "MICO Indication";
 
-namespace nas {
+namespace oai::nas {
 
 class MicoIndication : public Type1NasIeFormatTv {
  public:
@@ -54,6 +54,6 @@ class MicoIndication : public Type1NasIeFormatTv {
   bool raai_;
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

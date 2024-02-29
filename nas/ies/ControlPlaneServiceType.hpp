@@ -26,7 +26,7 @@
 
 constexpr auto kControlPlaneServiceTypeIeName = "Control Plane Service Type";
 
-namespace nas {
+namespace oai::nas {
 
 class ControlPlaneServiceType : public Type1NasIe {
  public:
@@ -45,6 +45,6 @@ class ControlPlaneServiceType : public Type1NasIe {
   uint8_t service_type_value_;
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

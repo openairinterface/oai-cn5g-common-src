@@ -26,7 +26,7 @@
 #include "common_defs.h"
 #include "logger_base.hpp"
 
-using namespace nas;
+using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 _5gsUpdateType::_5gsUpdateType() : Type4NasIe(kIei5gsUpdateType) {

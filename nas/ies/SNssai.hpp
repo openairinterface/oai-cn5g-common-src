@@ -29,7 +29,7 @@ constexpr uint8_t kSNssaiMinimumLength = 3;
 constexpr uint8_t kSNssaiMaximumLength = 10;
 constexpr auto kSNssaiIeName           = "S-NSSAI";
 
-namespace nas {
+namespace oai::nas {
 
 class SNssai : public Type4NasIe {
  public:
@@ -60,6 +60,6 @@ class SNssai : public Type4NasIe {
   std::optional<int32_t> mapped_hplmn_sd_;
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

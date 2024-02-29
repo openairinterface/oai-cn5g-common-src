@@ -27,7 +27,7 @@
 
 constexpr auto kRequestTypeIeName = "Request Type";
 
-namespace nas {
+namespace oai::nas {
 
 class RequestType : public Type1NasIeFormatTv {
  public:
@@ -43,6 +43,6 @@ class RequestType : public Type1NasIeFormatTv {
  private:
   uint8_t value_;
 };
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

@@ -24,7 +24,7 @@
 
 #include "NasIeHeader.hpp"
 
-namespace nas {
+namespace oai::nas {
 
 class ServiceReject : public NasMmPlainHeader {
  public:
@@ -61,6 +61,6 @@ class ServiceReject : public NasMmPlainHeader {
   // TODO: CAG information list (Rel 16.14.0, Optional)
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

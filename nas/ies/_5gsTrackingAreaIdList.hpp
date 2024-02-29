@@ -32,7 +32,7 @@ constexpr uint8_t k5gsTrackingAreaIdListMaximumLength        = 114;
 constexpr uint8_t k5gsTrackingAreaIdListMaximumSupportedTAIs = 16;
 constexpr auto k5gsTrackingAreaIdListIeName = "5GS Tracking Area Identity List";
 
-namespace nas {
+namespace oai::nas {
 
 class _5gsTrackingAreaIdList : public Type4NasIe {
  public:
@@ -52,6 +52,6 @@ class _5gsTrackingAreaIdList : public Type4NasIe {
   int EncodeType10(p_tai_t item, uint8_t* buf, int len);
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

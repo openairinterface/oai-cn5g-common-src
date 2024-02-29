@@ -24,7 +24,7 @@
 
 #include "NasIeHeader.hpp"
 
-namespace nas {
+namespace oai::nas {
 
 class AuthenticationResponse : public NasMmPlainHeader {
  public:
@@ -48,6 +48,6 @@ class AuthenticationResponse : public NasMmPlainHeader {
   std::optional<EapMessage> ie_eap_message_;  // Optional
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

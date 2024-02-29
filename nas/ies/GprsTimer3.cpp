@@ -21,7 +21,7 @@
 
 #include "GprsTimer3.hpp"
 
-using namespace nas;
+using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 GprsTimer3::GprsTimer3(uint8_t iei) : Type4NasIe(iei), unit_(), value_() {

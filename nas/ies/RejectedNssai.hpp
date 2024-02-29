@@ -30,7 +30,7 @@ constexpr uint8_t kRejectedNssaiMinimumLength = 4;
 constexpr uint8_t kRejectedNssaiMaximumLength = 42;
 constexpr auto kRejectedNssaiIeName           = "Rejected NSSAI";
 
-namespace nas {
+namespace oai::nas {
 
 class RejectedNssai : public Type4NasIe {
  public:
@@ -50,6 +50,6 @@ class RejectedNssai : public Type4NasIe {
   std::vector<RejectedSNssai> rejected_nssais_;
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

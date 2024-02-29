@@ -29,7 +29,7 @@ constexpr uint8_t k5gsMobileIdentityIe5gGutiLength  = 11;
 constexpr uint8_t k5gsMobileIdentityIe5gSTmsiLength = 7;
 constexpr auto k5gsMobileIdentityIeName             = "5GS Mobile Identity";
 
-namespace nas {
+namespace oai::nas {
 
 // TODO: 5GS mobile identity information element for type of identity "MAC
 // address"
@@ -102,6 +102,6 @@ class _5gsMobileIdentity : public Type6NasIe {
   std::optional<_5G_S_TMSI_t> _5g_s_tmsi_;
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

@@ -25,7 +25,7 @@
 #include "common_defs.h"
 #include "logger_base.hpp"
 
-using namespace nas;
+using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 NasMessageType::NasMessageType(uint8_t message_type)

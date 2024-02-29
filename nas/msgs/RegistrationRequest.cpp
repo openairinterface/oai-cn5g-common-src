@@ -25,7 +25,7 @@
 #include "conversions.hpp"
 #include "utils.hpp"
 
-using namespace nas;
+using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 RegistrationRequest::RegistrationRequest()
@@ -112,14 +112,14 @@ uint8_t RegistrationRequest::GetMobileIdentityType() const {
 }
 
 //------------------------------------------------------------------------------
-bool RegistrationRequest::GetSuciSupiFormatImsi(nas::SUCI_imsi_t& imsi) const {
+bool RegistrationRequest::GetSuciSupiFormatImsi(SUCI_imsi_t& imsi) const {
   ie_5gs_mobile_identity_.GetSuciWithSupiImsi(imsi);
   return true;
 }
 
 //------------------------------------------------------------------------------
 std::string RegistrationRequest::Get5gGuti() const {
-  std::optional<nas::_5G_GUTI_t> guti = std::nullopt;
+  std::optional<_5G_GUTI_t> guti = std::nullopt;
   ie_5gs_mobile_identity_.Get5gGuti(guti);
   if (!guti.has_value()) return {};
 
@@ -148,9 +148,9 @@ void RegistrationRequest::SetAdditionalGuti(
 }
 
 //------------------------------------------------------------------------------
-bool RegistrationRequest::GetAdditionalGuti(nas::_5G_GUTI_t& guti) const {
+bool RegistrationRequest::GetAdditionalGuti(_5G_GUTI_t& guti) const {
   if (ie_additional_guti_.has_value()) {
-    std::optional<nas::_5G_GUTI_t> guti = std::nullopt;
+    std::optional<_5G_GUTI_t> guti = std::nullopt;
     ie_additional_guti_.value().Get5gGuti(guti);
     if (!guti.has_value()) return false;
     return true;

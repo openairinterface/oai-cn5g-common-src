@@ -24,7 +24,7 @@
 #include "NasHelper.hpp"
 #include "bstrlib.h"
 
-using namespace nas;
+using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 DlNasTransport::DlNasTransport()

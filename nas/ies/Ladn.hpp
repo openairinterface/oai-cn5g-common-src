@@ -26,7 +26,7 @@
 #include "Type6NasIe.hpp"
 #include "_5gsTrackingAreaIdList.hpp"
 
-namespace nas {
+namespace oai::nas {
 
 class Ladn {
  public:
@@ -46,6 +46,6 @@ class Ladn {
   _5gsTrackingAreaIdList ta_list_;
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

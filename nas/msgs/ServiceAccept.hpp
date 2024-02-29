@@ -24,7 +24,7 @@
 
 #include "NasIeHeader.hpp"
 
-namespace nas {
+namespace oai::nas {
 
 class ServiceAccept : public NasMmPlainHeader {
  public:
@@ -62,6 +62,6 @@ class ServiceAccept : public NasMmPlainHeader {
   std::optional<GprsTimer3> ie_t3448_value_;            // Optional
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

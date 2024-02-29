@@ -27,7 +27,7 @@
 constexpr uint8_t kPduSessionIdentity2Length = 2;
 constexpr auto kPduSessionIdentity2IeName    = "PDU Session Identity 2";
 
-namespace nas {
+namespace oai::nas {
 
 class PduSessionIdentity2 : public Type3NasIe {
  public:
@@ -47,6 +47,6 @@ class PduSessionIdentity2 : public Type3NasIe {
  private:
   uint8_t value_;
 };
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

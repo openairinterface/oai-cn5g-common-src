@@ -29,7 +29,7 @@ constexpr uint8_t kAuthenticationParameterAutnValueLength =
 constexpr auto kAuthenticationParameterAutnIeName =
     "Authentication Parameter AUTN";
 
-namespace nas {
+namespace oai::nas {
 
 class AuthenticationParameterAutn : public Type4NasIe {
  public:
@@ -49,6 +49,6 @@ class AuthenticationParameterAutn : public Type4NasIe {
   uint8_t value_[kAuthenticationParameterAutnValueLength];
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

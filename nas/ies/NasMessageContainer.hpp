@@ -28,7 +28,7 @@ constexpr uint8_t kNasMessageContainerMinimumLength  = 3;
 constexpr uint32_t kNasMessageContainerMaximumLength = 65535;
 constexpr auto kNasMessageContainerIeName            = "NAS Message Container";
 
-namespace nas {
+namespace oai::nas {
 
 class NasMessageContainer : Type6NasIe {
  public:
@@ -47,6 +47,6 @@ class NasMessageContainer : Type6NasIe {
   bstring value_;
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

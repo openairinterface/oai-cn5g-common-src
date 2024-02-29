@@ -28,7 +28,7 @@ constexpr uint8_t kExtendedProtocolDiscriminatorLength = 1;
 constexpr auto kExtendedProtocolDiscriminatorIeName =
     "Extended Protocol Discriminator";
 
-namespace nas {
+namespace oai::nas {
 
 class ExtendedProtocolDiscriminator : public NasIe {
  public:
@@ -54,6 +54,6 @@ class ExtendedProtocolDiscriminator : public NasIe {
   uint8_t epd_;
 };
 
-}  // namespace nas
+}  // namespace oai::nas
 
 #endif

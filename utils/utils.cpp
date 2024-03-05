@@ -23,7 +23,7 @@
 
 #include "3gpp_24.501.hpp"
 #include "common_defs.h"
-#include "logger.hpp"
+#include "logger_base.hpp"
 
 #include <stdlib.h>
 
@@ -44,9 +44,11 @@ int utils::encodeMccMnc2Buffer(
   value = (0x0f & (mcc / 100)) | ((0x0f & ((mcc % 100) / 10)) << 4);
   ENCODE_U8(buf + encoded_size, value, encoded_size);
 
-  Logger::nas_mm().debug("MNC digit 1: %d", mnc / 100);
+  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+      .debug("MNC digit 1: %d", mnc / 100);
   if (!(mnc / 100)) {
-    Logger::nas_mm().debug("Encoding MNC 2 digits");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .debug("Encoding MNC 2 digits");
     value = (0x0f & (mcc % 10)) | 0xf0;
     ENCODE_U8(buf + encoded_size, value, encoded_size);
 
@@ -54,14 +56,16 @@ int utils::encodeMccMnc2Buffer(
     ENCODE_U8(buf + encoded_size, value, encoded_size);
 
   } else {
-    Logger::nas_mm().debug("Encoding MNC 3 digits");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .debug("Encoding MNC 3 digits");
     value = (0x0f & (mcc % 10)) | ((0x0f & (mnc % 10)) << 4);
     ENCODE_U8(buf + encoded_size, value, encoded_size);
 
     value = ((0x0f & ((mnc % 100) / 10)) << 4) | (0x0f & (mnc / 100));
     ENCODE_U8(buf + encoded_size, value, encoded_size);
   }
-  Logger::nas_mm().debug("MCC %s, MNC %s", mcc_str.c_str(), mnc_str.c_str());
+  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+      .debug("MCC %s, MNC %s", mcc_str.c_str(), mnc_str.c_str());
   return encoded_size;
 }
 
@@ -69,9 +73,11 @@ int utils::encodeMccMnc2Buffer(
 int utils::decodeMccMncFromBuffer(
     std::string& mcc_str, std::string& mnc_str, uint8_t* buf, int len) {
   if (len < kMccMncLength) {
-    Logger::nas_mm().error(
-        "Buffer length is less than the minimum length of this IE (%d octet)",
-        kMccMncLength);
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error(
+            "Buffer length is less than the minimum length of this IE (%d "
+            "octet)",
+            kMccMncLength);
     return KEncodeDecodeError;
   }
   int decoded_size = 0;
@@ -107,7 +113,8 @@ int utils::decodeMccMncFromBuffer(
     mcc_str = "0" + mcc_str;
   }
 
-  Logger::nas_mm().debug("MCC %s, MNC %s", mcc_str.c_str(), mnc_str.c_str());
+  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+      .debug("MCC %s, MNC %s", mcc_str.c_str(), mnc_str.c_str());
   return decoded_size;
 }
 

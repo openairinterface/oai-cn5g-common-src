@@ -353,4 +353,3 @@ std::string conv::tmsi_to_string(const uint32_t tmsi) {
   s.append(std::to_string(tmsi));
   return s;
 }
-

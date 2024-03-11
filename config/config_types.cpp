@@ -775,6 +775,51 @@ nlohmann::json database_config::to_json() {
   return json_data;
 }
 
+bool lttng_config::is_lttng_active() const { return m_is_active.get_value(); }
+
+std::string lttng_config::get_lttng_log_level() {
+  return m_log_level.get_value();
+}
+
+lttng_config::lttng_config(const std::string &name) {
+  m_config_name = name;
+  m_set = false;
+  m_is_active = option_config_value("active", false);
+  m_log_level = string_config_value("level", "debug");
+  m_use_spd = option_config_value("use_spd", false);
+}
+
+void lttng_config::from_yaml(const YAML::Node &node) {
+  m_set = true;
+  if (node["active"]) {
+    m_is_active.from_yaml(node["active"]);
+  }
+  if (!m_is_active.get_value())
+    return;
+
+  if (node["level"]) {
+    m_log_level.from_yaml(node["level"]);
+  }
+
+  if (node["use_spd"]) {
+    m_use_spd.from_yaml(node["use_spd"]);
+  }
+}
+
+nlohmann::json lttng_config::to_json() {
+  nlohmann::json json_data{};
+  return json_data;
+}
+
+bool lttng_config::from_json(const nlohmann::json &json_data) { return true; }
+
+std::string lttng_config::to_string(const std::string &indent) const {
+  std::string out{indent};
+  return out;
+}
+
+void lttng_config::validate() { return; }
+
 bool database_config::from_json(const nlohmann::json& json_data) {
   try {
     if (json_data.find(m_host.get_config_name()) != json_data.end()) {

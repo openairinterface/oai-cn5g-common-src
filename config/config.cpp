@@ -36,6 +36,30 @@
 
 using namespace oai::config;
 
+lttng_configuration::lttng_configuration(const std::string &config_path)
+    : m_lttng("lttng_config") {
+  m_config_path = config_path;
+}
+
+void lttng_configuration::read_from_file() {
+  YAML::Node node = YAML::LoadFile(m_config_path);
+  for (const auto &elem : node) {
+    auto key = elem.first.as<std::string>();
+    if (key != "lttng")
+      continue;
+
+    m_lttng.from_yaml(elem.second);
+  }
+}
+
+bool lttng_configuration::is_lttng_active() const {
+  return m_lttng.is_lttng_active();
+}
+
+std::string lttng_configuration::get_lttng_log_level() {
+  return m_lttng.get_lttng_log_level();
+}
+
 config::config(
     const std::string& config_path, const std::string& nf_name, bool log_stdout,
     bool log_rot_file)

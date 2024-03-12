@@ -80,8 +80,9 @@ public:
     } catch (std::exception &e) {
       logger->error("Format error in format string {}", e.what());
     }
+  }
 
-  private:
-    std::shared_ptr<spdlog::logger> logger;
-  };
-}
+private:
+  std::shared_ptr<spdlog::logger> logger;
+};
+} // namespace oai::logger

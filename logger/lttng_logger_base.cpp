@@ -17,6 +17,7 @@ bool lttng_logger::should_log(const spdlog::level::level_enum &level) const {
 
 void lttng_logger::lttng_trace_log(const spdlog::level::level_enum &lvl,
                                    const char *cstr_msg) const {
+#ifdef LOGGER_CAN_USE_LTTNG
   // NF_TRACE_EVENT(m_provider.c_str(), m_event.c_str(), cstr_msg);
   switch (lvl) {
   case spdlog::level::level_enum::trace:
@@ -38,4 +39,5 @@ void lttng_logger::lttng_trace_log(const spdlog::level::level_enum &lvl,
     tracelog(LTTNG_UST_TRACEPOINT_LOGLEVEL_CRIT, cstr_msg);
     break;
   }
+#endif
 }

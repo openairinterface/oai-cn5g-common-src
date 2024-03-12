@@ -5,6 +5,8 @@ Function (NF_TRACE). The events are defined for log types like warn, info,
 error, trace, debug, and startup.
 */
 
+#ifdef LOGGER_CAN_USE_LTTNG
+
 #undef TRACEPOINT_PROVIDER
 #define TRACEPOINT_PROVIDER NF_TRACE
 
@@ -32,3 +34,5 @@ error, trace, debug, and startup.
 
 #include <lttng/tracelog.h>
 #include <lttng/tracepoint-event.h>
+
+#endif /* LOGGER_CAN_USE_LTTNG */

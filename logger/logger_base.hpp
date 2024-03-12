@@ -177,7 +177,11 @@ class logger_registry {
 
   static const printf_logger& get_logger(const std::string& logger);
   static void set_level(spdlog::level::level_enum level);
-  static void set_lttng_is_active(bool isActive) { m_isLTTngActive = isActive; }
+  static void set_lttng_is_active(bool isActive) {
+#ifdef LOGGER_CAN_USE_LTTNG
+    m_isLTTngActive = isActive;
+#endif
+  }
   static bool should_log(spdlog::level::level_enum level) {
     if (logger_map.empty()) {
       return false;

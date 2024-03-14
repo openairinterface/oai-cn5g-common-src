@@ -53,6 +53,11 @@ bool Type2NasIeFormatT::Validate(const int& len) const {
 }
 
 //------------------------------------------------------------------------------
+uint8_t Type2NasIeFormatT::GetIeLength() const {
+  return kType2NasIeFormatTLength;
+}
+
+//------------------------------------------------------------------------------
 int Type2NasIeFormatT::Encode(uint8_t* buf, const int& len) {
   // oai::logger::logger_registry::get_logger(LOGGER_COMMON).debug("Encoding
   // %s", GetIeName().c_str());

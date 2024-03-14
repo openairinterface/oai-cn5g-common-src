@@ -34,14 +34,13 @@ class Type6NasIe : public NasIe {
 
   bool Validate(const int& len) const override;
   bool ValidateHeader(const int& len) const;
+  uint8_t GetIeLength() const override;
 
   void SetIei(uint8_t iei);
 
   void SetLengthIndicator(uint16_t li);
   void GetLengthIndicator(uint16_t& li) const;
   uint16_t GetLengthIndicator() const;
-
-  uint16_t GetIeLength() const;
 
   uint8_t GetHeaderLength() const;
 

@@ -57,6 +57,11 @@ bool Type1NasIeFormatV::Validate(const int& len) const {
 }
 
 //------------------------------------------------------------------------------
+uint8_t Type1NasIeFormatV::GetIeLength() const {
+  return kType1NasIeFormatVLength;
+}
+
+//------------------------------------------------------------------------------
 void Type1NasIeFormatV::Set(bool high_pos, uint8_t value) {
   high_pos_ = high_pos;
   value_    = value & 0x0f;  // 4 bits

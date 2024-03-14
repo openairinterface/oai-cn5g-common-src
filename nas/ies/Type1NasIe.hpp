@@ -37,6 +37,7 @@ class Type1NasIe : public NasIe {
   virtual ~Type1NasIe();
 
   bool Validate(const int& len) const override;
+  uint8_t GetIeLength() const override;
 
   // void SetIei(uint8_t iei);
   void Set(bool high_pos, uint8_t value);

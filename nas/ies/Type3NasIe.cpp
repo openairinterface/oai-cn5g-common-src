@@ -58,6 +58,11 @@ bool Type3NasIe::Validate(const int& len) const {
 }
 
 //------------------------------------------------------------------------------
+uint8_t Type3NasIe::GetIeLength() const {
+  return kType3NasIeFormatTvLength;
+}
+
+//------------------------------------------------------------------------------
 int Type3NasIe::Encode(uint8_t* buf, const int& len) {
   if (!Validate(len)) return KEncodeDecodeError;
 

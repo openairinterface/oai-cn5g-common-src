@@ -93,6 +93,11 @@ bool Type1NasIe::Validate(const int& len) const {
 }
 
 //------------------------------------------------------------------------------
+uint8_t Type1NasIe::GetIeLength() const {
+  return kType1NasIeLength;
+}
+
+//------------------------------------------------------------------------------
 void Type1NasIe::SetValue(uint8_t value) {
   value_ = value & 0x0f;  // 4 lower bits
 }

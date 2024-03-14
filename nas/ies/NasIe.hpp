@@ -46,6 +46,7 @@ class NasIe {
   virtual ~NasIe();
 
   virtual bool Validate(const int& len) const = 0;
+  virtual uint8_t GetIeLength() const         = 0;
 
   virtual int Encode(uint8_t* buf, const int& len) = 0;
   virtual int Decode(

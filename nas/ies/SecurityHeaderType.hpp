@@ -37,6 +37,7 @@ class SecurityHeaderType : public NasIe {
   static std::string GetIeName() { return kSecurityHeaderTypeIeName; }
 
   bool Validate(const int& len) const override;
+  uint16_t GetIeLength() const override;
 
   void Set(uint8_t secu_header_type, uint8_t spare = 0);
   void Get(uint8_t& secu_header_type) const;

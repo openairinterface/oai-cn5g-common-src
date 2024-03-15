@@ -48,6 +48,11 @@ bool ExtendedProtocolDiscriminator::Validate(const int& len) const {
 }
 
 //------------------------------------------------------------------------------
+uint16_t ExtendedProtocolDiscriminator::GetIeLength() const {
+  return kExtendedProtocolDiscriminatorLength;
+}
+
+//------------------------------------------------------------------------------
 void ExtendedProtocolDiscriminator::Set(uint8_t epd) {
   epd_ = epd;
 }

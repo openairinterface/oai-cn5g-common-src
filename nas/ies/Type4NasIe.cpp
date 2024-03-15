@@ -31,6 +31,7 @@ Type4NasIe::Type4NasIe() : NasIe() {
 //------------------------------------------------------------------------------
 Type4NasIe::Type4NasIe(uint8_t iei) : NasIe() {
   iei_ = std::optional<uint8_t>(iei);
+  li_  = 0;
 }
 
 //------------------------------------------------------------------------------
@@ -61,7 +62,7 @@ uint8_t Type4NasIe::GetLengthIndicator() const {
 }
 
 //------------------------------------------------------------------------------
-uint8_t Type4NasIe::GetIeLength() const {
+uint16_t Type4NasIe::GetIeLength() const {
   return (iei_.has_value() ? (li_ + 2) : (li_ + 1));  // 1 for IEI, 1 for Length
 }
 

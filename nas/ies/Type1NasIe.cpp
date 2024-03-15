@@ -93,7 +93,7 @@ bool Type1NasIe::Validate(const int& len) const {
 }
 
 //------------------------------------------------------------------------------
-uint8_t Type1NasIe::GetIeLength() const {
+uint16_t Type1NasIe::GetIeLength() const {
   return kType1NasIeLength;
 }
 

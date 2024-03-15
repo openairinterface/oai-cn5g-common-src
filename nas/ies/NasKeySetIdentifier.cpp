@@ -36,7 +36,7 @@ NasKeySetIdentifier::NasKeySetIdentifier(uint8_t iei, bool tsc, uint8_t key_id)
     : Type1NasIe(iei) {
   tsc_    = 0x01 & tsc;
   key_id_ = 0x07 & key_id;
-  SetValue();
+  NasKeySetIdentifier::SetValue();
 }
 
 //------------------------------------------------------------------------------
@@ -44,7 +44,7 @@ NasKeySetIdentifier::NasKeySetIdentifier(bool tsc, uint8_t key_id)
     : Type1NasIe(false) {
   tsc_    = 0x01 & tsc;
   key_id_ = 0x07 & key_id;
-  SetValue();
+  NasKeySetIdentifier::SetValue();
 }
 
 //------------------------------------------------------------------------------
@@ -124,13 +124,13 @@ minimum length of this IE (%d octet)", kType1IeSize); return KEncodeDecodeError;
 //------------------------------------------------------------------------------
 void NasKeySetIdentifier::SetTypeOfSecurityContext(bool type) {
   tsc_ = type;
-  SetValue();  // Update value
+  NasKeySetIdentifier::SetValue();  // Update value
 }
 
 //------------------------------------------------------------------------------
 void NasKeySetIdentifier::SetNasKeyIdentifier(uint8_t id) {
   key_id_ = 0x07 & id;
-  SetValue();  // Update value
+  NasKeySetIdentifier::SetValue();  // Update value
 }
 
 //------------------------------------------------------------------------------

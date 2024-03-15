@@ -28,7 +28,10 @@
 using namespace oai::nas;
 
 //------------------------------------------------------------------------------
-SecurityHeaderType::SecurityHeaderType() : NasIe() {}
+SecurityHeaderType::SecurityHeaderType() : NasIe() {
+  spare_            = 0;
+  secu_header_type_ = 0;
+}
 
 //------------------------------------------------------------------------------
 SecurityHeaderType::~SecurityHeaderType() {}
@@ -44,6 +47,11 @@ bool SecurityHeaderType::Validate(const int& len) const {
     return false;
   }
   return true;
+}
+
+//------------------------------------------------------------------------------
+uint16_t SecurityHeaderType::GetIeLength() const {
+  return kSecurityHeaderTypeLength;
 }
 
 //------------------------------------------------------------------------------

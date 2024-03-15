@@ -26,13 +26,11 @@
 using namespace oai::nas;
 
 //------------------------------------------------------------------------------
-RequestType::RequestType() : Type1NasIeFormatTv(kIeiRequestType) {
-  value_ = 0;
-}
+RequestType::RequestType() : Type1NasIeFormatTv(kIeiRequestType) {}
 
 //------------------------------------------------------------------------------
 RequestType::RequestType(uint8_t value) : Type1NasIeFormatTv(kIeiRequestType) {
-  value_ = value;
+  Type1NasIeFormatTv::SetValue(value & 0x07);
 }
 
 //------------------------------------------------------------------------------
@@ -40,7 +38,7 @@ RequestType::~RequestType() {}
 
 //------------------------------------------------------------------------------
 void RequestType::SetValue(uint8_t value) {
-  Type1NasIeFormatTv::SetValue(value_ & 0x07);
+  Type1NasIeFormatTv::SetValue(value & 0x07);
 }
 
 //------------------------------------------------------------------------------

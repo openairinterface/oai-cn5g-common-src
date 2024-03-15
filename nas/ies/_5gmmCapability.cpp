@@ -39,6 +39,7 @@ _5gmmCapability::_5gmmCapability(uint8_t iei, uint8_t octet3)
 
 //------------------------------------------------------------------------------
 _5gmmCapability::_5gmmCapability() : Type4NasIe(kIei5gmmCapability) {
+  octet3_ = 0;
   octet4_ = std::nullopt;
   octet5_ = std::nullopt;
   SetLengthIndicator(1);

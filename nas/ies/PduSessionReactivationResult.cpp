@@ -30,6 +30,7 @@ using namespace oai::nas;
 //------------------------------------------------------------------------------
 PduSessionReactivationResult::PduSessionReactivationResult()
     : Type4NasIe(kIeiPduSessionReactivationResult) {
+  value_ = 0;
   SetLengthIndicator(2);
 }
 

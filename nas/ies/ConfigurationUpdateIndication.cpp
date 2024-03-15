@@ -30,7 +30,7 @@ ConfigurationUpdateIndication::ConfigurationUpdateIndication()
 //------------------------------------------------------------------------------
 ConfigurationUpdateIndication::ConfigurationUpdateIndication(bool red, bool ack)
     : Type1NasIe(false), red_(red), ack_(ack) {
-  SetValue();
+  ConfigurationUpdateIndication::SetValue();
 }
 
 //------------------------------------------------------------------------------
@@ -39,7 +39,7 @@ ConfigurationUpdateIndication::~ConfigurationUpdateIndication() {}
 //------------------------------------------------------------------------------
 void ConfigurationUpdateIndication::SetRed(bool red) {
   red_ = red;
-  SetValue();
+  ConfigurationUpdateIndication::SetValue();
 }
 
 //------------------------------------------------------------------------------
@@ -50,7 +50,7 @@ void ConfigurationUpdateIndication::GetRed(bool& red) const {
 //------------------------------------------------------------------------------
 void ConfigurationUpdateIndication::SetAck(bool ack) {
   ack_ = ack;
-  SetValue();
+  ConfigurationUpdateIndication::SetValue();
 }
 
 //------------------------------------------------------------------------------
@@ -72,7 +72,7 @@ void ConfigurationUpdateIndication::GetValue() {
 
 //------------------------------------------------------------------------------
 int ConfigurationUpdateIndication::Encode(uint8_t* buf, int len) {
-  SetValue();
+  ConfigurationUpdateIndication::SetValue();
   return Type1NasIe::Encode(buf, len);
 }
 

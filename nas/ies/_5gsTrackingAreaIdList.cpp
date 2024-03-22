@@ -56,12 +56,25 @@ _5gsTrackingAreaIdList::_5gsTrackingAreaIdList(
       (tai_list.size() > k5gsTrackingAreaIdListMaximumSupportedTAIs) ?
           k5gsTrackingAreaIdListMaximumSupportedTAIs :
           tai_list.size();
+  uint8_t ie_len = 0;
   for (int i = 0; i < size; i++) {
     tai_list_.push_back(tai_list[i]);
+    switch (tai_list_[i].type) {
+      case 0x00: {
+        ie_len += 4 + tai_list_[i].tac_list.size() * 3;
+      } break;
+      case 0x01: {
+        ie_len += 7;
+      } break;
+      case 0x10: {
+        ie_len += 1 + tai_list_[i].tac_list.size() * 6;
+      }
+    }
   }
 
   tai_list_ = tai_list;
   // Don't know Length Indicator for now
+  SetLengthIndicator(ie_len);
 }
 
 //------------------------------------------------------------------------------

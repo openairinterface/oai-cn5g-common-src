@@ -46,6 +46,11 @@ AuthenticationParameterRand::AuthenticationParameterRand(
 //------------------------------------------------------------------------------
 AuthenticationParameterRand::~AuthenticationParameterRand() {}
 
+//------------------------------------------------------------------------------
+uint16_t AuthenticationParameterRand::GetIeLength() const {
+  return (kAuthenticationParameterRandLength - 1 + Type3NasIe::GetIeLength());
+}
+
 /*
 //------------------------------------------------------------------------------
 uint8_t* AuthenticationParameterRand::GetValue() {

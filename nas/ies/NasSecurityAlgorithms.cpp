@@ -49,6 +49,11 @@ NasSecurityAlgorithms::NasSecurityAlgorithms(
 }
 
 //------------------------------------------------------------------------------
+uint16_t NasSecurityAlgorithms::GetIeLength() const {
+  return (kNasSecurityAlgorithmsLength - 1 + Type3NasIe::GetIeLength());
+}
+
+//------------------------------------------------------------------------------
 void NasSecurityAlgorithms::SetTypeOfCipheringAlgorithm(uint8_t value) {
   type_of_ciphering_algorithm_ = value & 0x0f;
 }

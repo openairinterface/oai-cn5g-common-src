@@ -37,6 +37,36 @@ AuthenticationRequest::AuthenticationRequest()
 AuthenticationRequest::~AuthenticationRequest() {}
 
 //------------------------------------------------------------------------------
+uint32_t AuthenticationRequest::GetLength() const {
+  uint32_t msg_len = 0;
+  msg_len += NasMmPlainHeader::GetLength();
+  msg_len += ie_ng_ksi_.GetIeLength();
+  msg_len += ie_abba_.GetIeLength();
+  if (ie_authentication_parameter_rand_.has_value())
+    msg_len += ie_authentication_parameter_rand_.value().GetIeLength();
+  if (ie_authentication_parameter_autn_.has_value())
+    msg_len += ie_authentication_parameter_autn_.value().GetIeLength();
+  if (ie_eap_message_.has_value())
+    msg_len += ie_eap_message_.value().GetIeLength();
+  return msg_len;
+}
+
+//------------------------------------------------------------------------------
+bool AuthenticationRequest::Validate(const uint32_t& len) const {
+  uint32_t actual_length = GetLength();
+  if (len < actual_length) {
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error(
+            "Buffer length is less than the minimum length of this message "
+            "(0x%x "
+            "octet)",
+            actual_length);
+    return false;
+  }
+  return true;
+}
+
+//------------------------------------------------------------------------------
 void AuthenticationRequest::SetHeader(uint8_t security_header_type) {
   NasMmPlainHeader::SetSecurityHeaderType(security_header_type);
 }
@@ -78,6 +108,9 @@ void AuthenticationRequest::SetEapMessage(const bstring& eap) {
 int AuthenticationRequest::Encode(uint8_t* buf, int len) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding AuthenticationRequest message");
+
+  if (!Validate(len)) return KEncodeDecodeError;
+
   int encoded_size    = 0;
   int encoded_ie_size = 0;
 

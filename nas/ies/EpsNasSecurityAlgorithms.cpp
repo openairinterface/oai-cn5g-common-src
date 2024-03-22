@@ -41,6 +41,11 @@ EpsNasSecurityAlgorithms::EpsNasSecurityAlgorithms(
 EpsNasSecurityAlgorithms::~EpsNasSecurityAlgorithms() {}
 
 //------------------------------------------------------------------------------
+uint16_t EpsNasSecurityAlgorithms::GetIeLength() const {
+  return (kEpsNasSecurityAlgorithmsLength - 1 + Type3NasIe::GetIeLength());
+}
+
+//------------------------------------------------------------------------------
 void EpsNasSecurityAlgorithms::SetTypeOfCipheringAlgorithm(uint8_t value) {
   type_of_ciphering_algorithm_ = value & 0x07;
 }

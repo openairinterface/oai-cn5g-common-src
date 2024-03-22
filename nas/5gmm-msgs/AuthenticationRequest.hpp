@@ -34,6 +34,11 @@ class AuthenticationRequest : public NasMmPlainHeader {
   int Encode(uint8_t* buf, int len);
   int Decode(uint8_t* buf, int len);
 
+  // May not be the actual length of the message (by rounding 1/2 octet to 1
+  // octet in some IEs) but always greater than the actual length of the message
+  uint32_t GetLength() const;
+  bool Validate(const uint32_t& len) const;
+
   void SetHeader(uint8_t security_header_type);
 
   void SetNgKsi(uint8_t tsc, uint8_t key_set_id);

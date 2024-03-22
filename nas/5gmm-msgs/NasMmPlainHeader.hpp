@@ -39,9 +39,12 @@ class NasMmPlainHeader {
   virtual ~NasMmPlainHeader();
 
   void SetHeader(uint8_t epd, uint8_t security_header_type, uint8_t msg_type);
+
   void SetMessageName(const std::string& name);
   std::string GetMessageName() const;
   void GetMessageName(std::string& name) const;
+
+  uint16_t GetLength() const;
 
   int Encode(uint8_t* buf, int len);
   int Decode(uint8_t* buf, int len);

@@ -59,7 +59,11 @@ bool Type3NasIe::Validate(const int& len) const {
 
 //------------------------------------------------------------------------------
 uint16_t Type3NasIe::GetIeLength() const {
-  return kType3NasIeFormatTvLength;
+  if (iei_.has_value()) {
+    return kType3NasIeFormatTvLength;
+  } else {
+    return kType3NasIeFormatTvLength - 1;
+  }
 }
 
 //------------------------------------------------------------------------------

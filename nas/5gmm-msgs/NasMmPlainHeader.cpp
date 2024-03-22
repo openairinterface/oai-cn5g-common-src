@@ -92,6 +92,11 @@ void NasMmPlainHeader::GetMessageName(std::string& name) const {
 }
 
 //------------------------------------------------------------------------------
+uint16_t NasMmPlainHeader::GetLength() const {
+  return kNasMmPlainHeaderLength;
+}
+
+//------------------------------------------------------------------------------
 int NasMmPlainHeader::Encode(uint8_t* buf, int len) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding NasMmPlainHeader");

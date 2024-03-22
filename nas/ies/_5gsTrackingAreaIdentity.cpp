@@ -50,6 +50,11 @@ _5gsTrackingAreaIdentity::_5gsTrackingAreaIdentity(
 _5gsTrackingAreaIdentity::~_5gsTrackingAreaIdentity() {}
 
 //------------------------------------------------------------------------------
+uint16_t _5gsTrackingAreaIdentity::GetIeLength() const {
+  return (k5gsTrackingAreaIdentityLength - 1 + Type3NasIe::GetIeLength());
+}
+
+//------------------------------------------------------------------------------
 void _5gsTrackingAreaIdentity::SetTac(uint32_t value) {
   tac_ = value & 0x0fff;
 }

@@ -26,7 +26,7 @@
 
 namespace oai::nas {
 
-class SecurityModeCommand : public NasMmPlainHeader {
+class SecurityModeCommand : public Nas5gmmMessage {
  public:
   SecurityModeCommand();
   ~SecurityModeCommand();
@@ -35,6 +35,8 @@ class SecurityModeCommand : public NasMmPlainHeader {
 
   int Encode(uint8_t* buf, int len);
   int Decode(uint8_t* buf, int len);
+
+  uint32_t GetLength() const override;
 
   void SetNasSecurityAlgorithms(uint8_t ciphering, uint8_t integrity);
   // TODO: Get
@@ -69,6 +71,7 @@ class SecurityModeCommand : public NasMmPlainHeader {
   // TODO: Get
 
  private:
+  NasMmPlainHeader ie_header_;                                 // Mandatory
   NasSecurityAlgorithms ie_selected_nas_security_algorithms_;  // Mandatory
   NasKeySetIdentifier ie_ng_ksi_;  // Mandatory (1/2 octet)
   // Spare half octet

@@ -45,7 +45,7 @@ PduSessionIdentity2::PduSessionIdentity2() : Type3NasIe() {
 PduSessionIdentity2::~PduSessionIdentity2() {}
 
 //------------------------------------------------------------------------------
-uint16_t PduSessionIdentity2::GetIeLength() const {
+uint32_t PduSessionIdentity2::GetIeLength() const {
   return (kPduSessionIdentity2Length - 1 + Type3NasIe::GetIeLength());
 }
 

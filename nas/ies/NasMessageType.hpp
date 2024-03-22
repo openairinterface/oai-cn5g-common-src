@@ -38,7 +38,7 @@ class NasMessageType : public NasIe {
   static std::string GetIeName() { return kNasMessageTypeIeName; }
 
   bool Validate(const int& len) const override;
-  uint16_t GetIeLength() const override;
+  uint32_t GetIeLength() const override;
 
   void Set(uint8_t message_type);
   void Get(uint8_t& message_type) const;

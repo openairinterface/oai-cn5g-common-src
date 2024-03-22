@@ -41,7 +41,7 @@ EpsNasSecurityAlgorithms::EpsNasSecurityAlgorithms(
 EpsNasSecurityAlgorithms::~EpsNasSecurityAlgorithms() {}
 
 //------------------------------------------------------------------------------
-uint16_t EpsNasSecurityAlgorithms::GetIeLength() const {
+uint32_t EpsNasSecurityAlgorithms::GetIeLength() const {
   return (kEpsNasSecurityAlgorithmsLength - 1 + Type3NasIe::GetIeLength());
 }
 

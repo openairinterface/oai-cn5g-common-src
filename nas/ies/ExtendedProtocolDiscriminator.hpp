@@ -41,7 +41,7 @@ class ExtendedProtocolDiscriminator : public NasIe {
   }
 
   bool Validate(const int& len) const override;
-  uint16_t GetIeLength() const override;
+  uint32_t GetIeLength() const override;
 
   void Set(uint8_t epd);
   void Get(uint8_t& epd) const;

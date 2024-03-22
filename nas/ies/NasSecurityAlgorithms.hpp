@@ -39,7 +39,7 @@ class NasSecurityAlgorithms : public Type3NasIe {
   ~NasSecurityAlgorithms();
 
   static std::string GetIeName() { return kNasSecurityAlgorithmsIeName; }
-  uint16_t GetIeLength() const override;
+  uint32_t GetIeLength() const override;
 
   void SetTypeOfCipheringAlgorithm(uint8_t value);
   uint8_t GetTypeOfCipheringAlgorithm() const;

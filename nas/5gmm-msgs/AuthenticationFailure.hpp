@@ -26,13 +26,15 @@
 
 namespace oai::nas {
 
-class AuthenticationFailure : public NasMmPlainHeader {
+class AuthenticationFailure : public Nas5gmmMessage {
  public:
   AuthenticationFailure();
   ~AuthenticationFailure();
 
   int Encode(uint8_t* buf, int len);
   int Decode(uint8_t* buf, int len);
+
+  uint32_t GetLength() const override;
 
   void SetHeader(uint8_t security_header_type);
 
@@ -48,7 +50,8 @@ class AuthenticationFailure : public NasMmPlainHeader {
   bool GetAuthenticationFailureParameter(bstring& value) const;
 
  private:
-  _5gmmCause ie_5gmm_cause_;  // Mandatory
+  NasMmPlainHeader ie_header_;  // Mandatory
+  _5gmmCause ie_5gmm_cause_;    // Mandatory
   std::optional<AuthenticationFailureParameter>
       ie_authentication_failure_parameter_;  // Optional
 };

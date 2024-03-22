@@ -19,75 +19,41 @@
  *      contact@openairinterface.org
  */
 
-#include "Type3NasIe.hpp"
+#include "Nas5gmmMessage.hpp"
 
 #include "3gpp_24.501.hpp"
+#include "NasHelper.hpp"
 #include "common_defs.h"
 #include "logger_base.hpp"
 
 using namespace oai::nas;
-//------------------------------------------------------------------------------
-Type3NasIe::Type3NasIe() : NasIe() {
-  iei_ = std::nullopt;
-}
 
 //------------------------------------------------------------------------------
-Type3NasIe::Type3NasIe(uint8_t iei) : NasIe() {
-  iei_ = std::optional<uint8_t>(iei);
-}
-
-//------------------------------------------------------------------------------
-Type3NasIe::~Type3NasIe() {}
-
-//------------------------------------------------------------------------------
-void Type3NasIe::SetIei(uint8_t iei) {
-  iei_ = std::optional<uint8_t>(iei);
-}
-
-//------------------------------------------------------------------------------
-bool Type3NasIe::Validate(const int& len) const {
-  if (iei_.has_value() and (len < kType3NasIeFormatTvLength)) {
+bool Nas5gmmMessage::Validate(const uint32_t& len) const {
+  uint32_t actual_length = GetLength();
+  if (len < actual_length) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error(
-            "Buffer length is less than the minimum length of this IE (%d "
+            "Buffer length is less than the minimum length of this message "
+            "(0x%x "
             "octet)",
-            kType3NasIeFormatTvLength);
+            actual_length);
     return false;
   }
   return true;
 }
 
 //------------------------------------------------------------------------------
-uint32_t Type3NasIe::GetIeLength() const {
-  if (iei_.has_value()) {
-    return kType3NasIeFormatTvLength;
-  } else {
-    return kType3NasIeFormatTvLength - 1;
-  }
+void Nas5gmmMessage::SetMessageName(const std::string& name) {
+  msg_name_ = name;
 }
 
 //------------------------------------------------------------------------------
-int Type3NasIe::Encode(uint8_t* buf, const int& len) {
-  if (!Validate(len)) return KEncodeDecodeError;
-
-  int encoded_size = 0;
-  uint8_t octet    = 0;
-  if (iei_.has_value()) {
-    ENCODE_U8(buf + encoded_size, iei_.value(), encoded_size);
-  }
-  return encoded_size;
+std::string Nas5gmmMessage::GetMessageName() const {
+  return msg_name_;
 }
 
 //------------------------------------------------------------------------------
-int Type3NasIe::Decode(const uint8_t* const buf, const int& len, bool is_iei) {
-  if (!Validate(len)) return KEncodeDecodeError;
-
-  int decoded_size = 0;
-  uint8_t octet    = 0;
-
-  if (is_iei) {
-    DECODE_U8(buf + decoded_size, octet, decoded_size);
-    iei_ = std::optional<uint8_t>(octet);
-  }
-  return decoded_size;
+void Nas5gmmMessage::GetMessageName(std::string& name) const {
+  name = msg_name_;
 }

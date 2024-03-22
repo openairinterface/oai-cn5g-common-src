@@ -58,7 +58,7 @@ bool Type1NasIeFormatTv::Validate(const int& len) const {
 }
 
 //------------------------------------------------------------------------------
-uint16_t Type1NasIeFormatTv::GetIeLength() const {
+uint32_t Type1NasIeFormatTv::GetIeLength() const {
   return kType1NasIeFormatTvLength;
 }
 

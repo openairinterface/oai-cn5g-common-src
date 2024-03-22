@@ -26,7 +26,7 @@
 
 namespace oai::nas {
 
-class SecurityModeComplete : public NasMmPlainHeader {
+class SecurityModeComplete : public Nas5gmmMessage {
  public:
   SecurityModeComplete();
   ~SecurityModeComplete();
@@ -35,6 +35,8 @@ class SecurityModeComplete : public NasMmPlainHeader {
 
   int Encode(uint8_t* buf, int len);
   int Decode(uint8_t* buf, int len);
+
+  uint32_t GetLength() const override;
 
   void SetImeisv(const IMEI_IMEISV_t& imeisv);
   bool GetImeisv(IMEI_IMEISV_t& imeisv) const;
@@ -46,6 +48,7 @@ class SecurityModeComplete : public NasMmPlainHeader {
   bool GetNonImeisv(IMEI_IMEISV_t& imeisv) const;
 
  private:
+  NasMmPlainHeader ie_header_;                                   // Mandatory
   std::optional<_5gsMobileIdentity> ie_imeisv_;                  // Optional
   std::optional<NasMessageContainer> ie_nas_message_container_;  // Optional
   std::optional<_5gsMobileIdentity> ie_non_imeisvpei_;           // Optional

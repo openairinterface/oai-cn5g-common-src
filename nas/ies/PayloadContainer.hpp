@@ -30,7 +30,7 @@ constexpr uint32_t kPayloadContainerMaximumLength = 65538;
 constexpr auto kPayloadContainerIeName            = "Payload Container";
 
 namespace oai::nas {
-class PayloadContainer : Type6NasIe {
+class PayloadContainer : public Type6NasIe {
  public:
   PayloadContainer();
   PayloadContainer(uint8_t iei);

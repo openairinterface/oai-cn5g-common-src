@@ -29,7 +29,7 @@ constexpr auto kNetworkSlicingIndicationIeName = "Network Slicing Indication";
 
 namespace oai::nas {
 
-class NetworkSlicingIndication : Type1NasIeFormatTv {
+class NetworkSlicingIndication : public Type1NasIeFormatTv {
  public:
   NetworkSlicingIndication();
   NetworkSlicingIndication(uint8_t iei);

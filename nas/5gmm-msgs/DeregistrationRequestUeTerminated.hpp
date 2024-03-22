@@ -26,13 +26,15 @@
 
 namespace oai::nas {
 
-class DeregistrationRequestUeTerminated : public NasMmPlainHeader {
+class DeregistrationRequestUeTerminated : public Nas5gmmMessage {
  public:
   DeregistrationRequestUeTerminated();
   ~DeregistrationRequestUeTerminated();
 
   int Encode(uint8_t* buf, int len);
   int Decode(uint8_t* buf, int len);
+
+  uint32_t GetLength() const override;
 
   void SetHeader(uint8_t security_header_type);
 
@@ -54,6 +56,7 @@ class DeregistrationRequestUeTerminated : public NasMmPlainHeader {
   // TODO:CagInformationList
 
  private:
+  NasMmPlainHeader ie_header_;                      // Mandatory
   _5gsDeregistrationType ie_deregistration_type_;   // Mandatory
   std::optional<_5gmmCause> ie_5gmm_cause_;         // Optional
   std::optional<GprsTimer2> ie_t3346_value_;        // Optional

@@ -30,7 +30,7 @@ constexpr auto kLadnIndicationIeName            = "LADN Indication";
 
 namespace oai::nas {
 
-class LadnIndication : Type6NasIe {
+class LadnIndication : public Type6NasIe {
  public:
   LadnIndication();
   LadnIndication(const std::vector<bstring>& ladn);

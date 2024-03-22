@@ -26,13 +26,15 @@
 
 namespace oai::nas {
 
-class RegistrationComplete : public NasMmPlainHeader {
+class RegistrationComplete : public Nas5gmmMessage {
  public:
   RegistrationComplete();
   ~RegistrationComplete();
 
   int Encode(uint8_t* buf, int len);
   int Decode(uint8_t* buf, int len);
+
+  uint32_t GetLength() const override;
 
   void SetHeader(uint8_t security_header_type);
 
@@ -42,6 +44,7 @@ class RegistrationComplete : public NasMmPlainHeader {
   // TODO: Get
 
  private:
+  NasMmPlainHeader ie_header_;  // Mandatory
   std::optional<SorTransparentContainer>
       ie_sor_transparent_container_;  // Optional
 };

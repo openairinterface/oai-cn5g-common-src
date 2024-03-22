@@ -41,7 +41,7 @@ class AuthenticationParameterRand : public Type3NasIe {
   ~AuthenticationParameterRand();
 
   static std::string GetIeName() { return kAuthenticationParameterRandIeName; }
-  uint16_t GetIeLength() const override;
+  uint32_t GetIeLength() const override;
 
   int Encode(uint8_t* buf, int len);
   int Decode(uint8_t* buf, int len, bool is_option);

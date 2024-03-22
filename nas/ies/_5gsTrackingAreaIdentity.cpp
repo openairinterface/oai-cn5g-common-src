@@ -50,7 +50,7 @@ _5gsTrackingAreaIdentity::_5gsTrackingAreaIdentity(
 _5gsTrackingAreaIdentity::~_5gsTrackingAreaIdentity() {}
 
 //------------------------------------------------------------------------------
-uint16_t _5gsTrackingAreaIdentity::GetIeLength() const {
+uint32_t _5gsTrackingAreaIdentity::GetIeLength() const {
   return (k5gsTrackingAreaIdentityLength - 1 + Type3NasIe::GetIeLength());
 }
 

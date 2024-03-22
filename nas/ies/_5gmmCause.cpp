@@ -45,7 +45,7 @@ _5gmmCause::_5gmmCause(uint8_t iei, uint8_t value) : Type3NasIe(iei) {
 _5gmmCause::~_5gmmCause(){};
 
 //------------------------------------------------------------------------------
-uint16_t _5gmmCause::GetIeLength() const {
+uint32_t _5gmmCause::GetIeLength() const {
   return (k5gmmCauseMaximumLength - 1 + Type3NasIe::GetIeLength());
 }
 

@@ -27,7 +27,7 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 SecurityModeComplete::SecurityModeComplete()
-    : NasMmPlainHeader(k5gsMobilityManagementMessages, kSecurityModeComplete) {
+    : ie_header_(k5gsMobilityManagementMessages, kSecurityModeComplete) {
   ie_imeisv_                = std::nullopt;
   ie_nas_message_container_ = std::nullopt;
   ie_non_imeisvpei_         = std::nullopt;
@@ -37,8 +37,20 @@ SecurityModeComplete::SecurityModeComplete()
 SecurityModeComplete::~SecurityModeComplete() {}
 
 //------------------------------------------------------------------------------
+uint32_t SecurityModeComplete::GetLength() const {
+  uint32_t msg_len = 0;
+  msg_len += ie_header_.GetLength();
+  if (ie_imeisv_.has_value()) msg_len += ie_imeisv_.value().GetIeLength();
+  if (ie_nas_message_container_.has_value())
+    msg_len += ie_nas_message_container_.value().GetIeLength();
+  if (ie_non_imeisvpei_.has_value())
+    msg_len += ie_non_imeisvpei_.value().GetIeLength();
+  return msg_len;
+}
+
+//------------------------------------------------------------------------------
 void SecurityModeComplete::SetHeader(uint8_t security_header_type) {
-  NasMmPlainHeader::SetSecurityHeaderType(security_header_type);
+  ie_header_.SetSecurityHeaderType(security_header_type);
 }
 
 //------------------------------------------------------------------------------
@@ -100,8 +112,7 @@ int SecurityModeComplete::Encode(uint8_t* buf, int len) {
   int encoded_ie_size = 0;
 
   // Header
-  if ((encoded_ie_size = NasMmPlainHeader::Encode(buf, len)) ==
-      KEncodeDecodeError) {
+  if ((encoded_ie_size = ie_header_.Encode(buf, len)) == KEncodeDecodeError) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error("Encoding NAS Header error");
     return KEncodeDecodeError;
@@ -141,7 +152,7 @@ int SecurityModeComplete::Decode(uint8_t* buf, int len) {
   int decoded_ie_size = 0;
 
   // Header
-  decoded_ie_size = NasMmPlainHeader::Decode(buf, len);
+  decoded_ie_size = ie_header_.Decode(buf, len);
   if (decoded_ie_size == KEncodeDecodeError) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error("Decoding NAS Header error");

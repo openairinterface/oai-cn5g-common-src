@@ -34,7 +34,7 @@ class Type2NasIeFormatT : public NasIe {
   virtual ~Type2NasIeFormatT();
 
   bool Validate(const int& len) const override;
-  uint16_t GetIeLength() const override;
+  uint32_t GetIeLength() const override;
 
   int Encode(uint8_t* buf, const int& len) override;
   int Decode(

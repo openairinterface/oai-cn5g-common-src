@@ -27,7 +27,7 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 UlNasTransport::UlNasTransport()
-    : NasMmPlainHeader(k5gsMobilityManagementMessages, kUlNasTransport) {
+    : ie_header_(k5gsMobilityManagementMessages, kUlNasTransport) {
   ie_pdu_session_id_                = std::nullopt;
   ie_old_pdu_session_id_            = std::nullopt;
   ie_request_type_                  = std::nullopt;
@@ -42,8 +42,33 @@ UlNasTransport::UlNasTransport()
 UlNasTransport::~UlNasTransport() {}
 
 //------------------------------------------------------------------------------
+uint32_t UlNasTransport::GetLength() const {
+  uint32_t msg_len = 0;
+  msg_len += ie_header_.GetLength();
+  msg_len += ie_payload_container_type_.GetIeLength();
+  msg_len += ie_payload_container_.GetIeLength();
+
+  if (ie_pdu_session_id_.has_value())
+    msg_len += ie_pdu_session_id_.value().GetIeLength();
+  if (ie_old_pdu_session_id_.has_value())
+    msg_len += ie_old_pdu_session_id_.value().GetIeLength();
+  if (ie_request_type_.has_value())
+    msg_len += ie_request_type_.value().GetIeLength();
+  if (ie_s_nssai_.has_value()) msg_len += ie_s_nssai_.value().GetIeLength();
+  if (ie_dnn_.has_value()) msg_len += ie_dnn_.value().GetIeLength();
+  if (ie_additional_information_.has_value())
+    msg_len += ie_additional_information_.value().GetIeLength();
+  if (ie_ma_pdu_session_information_.has_value())
+    msg_len += ie_ma_pdu_session_information_.value().GetIeLength();
+  if (ie_release_assistance_indication_.has_value())
+    msg_len += ie_release_assistance_indication_.value().GetIeLength();
+
+  return msg_len;
+}
+
+//------------------------------------------------------------------------------
 void UlNasTransport::SetHeader(uint8_t security_header_type) {
-  NasMmPlainHeader::SetSecurityHeaderType(security_header_type);
+  ie_header_.SetSecurityHeaderType(security_header_type);
 }
 
 //------------------------------------------------------------------------------
@@ -176,8 +201,7 @@ int UlNasTransport::Encode(uint8_t* buf, int len) {
   int encoded_ie_size = 0;
 
   // Header
-  if ((encoded_ie_size = NasMmPlainHeader::Encode(buf, len)) ==
-      KEncodeDecodeError) {
+  if ((encoded_ie_size = ie_header_.Encode(buf, len)) == KEncodeDecodeError) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error("Encoding NAS Header error");
     return KEncodeDecodeError;
@@ -272,7 +296,7 @@ int UlNasTransport::Decode(uint8_t* buf, int len) {
   int decoded_ie_size = 0;
 
   // Header
-  decoded_ie_size = NasMmPlainHeader::Decode(buf, len);
+  decoded_ie_size = ie_header_.Decode(buf, len);
   if (decoded_ie_size == KEncodeDecodeError) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error("Decoding NAS Header error");

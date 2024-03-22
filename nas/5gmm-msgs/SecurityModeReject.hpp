@@ -26,21 +26,24 @@
 
 namespace oai::nas {
 
-class SecurityModeReject : public NasMmPlainHeader {
+class SecurityModeReject : public Nas5gmmMessage {
  public:
   SecurityModeReject();
   ~SecurityModeReject();
 
-  void SetHeader(uint8_t security_header_type);
-
   int Encode(uint8_t* buf, int len);
   int Decode(uint8_t* buf, int len);
+
+  uint32_t GetLength() const override;
+
+  void SetHeader(uint8_t security_header_type);
 
   void Set5gmmCause(uint8_t value);
   // TODO: Get
 
  private:
-  _5gmmCause ie_5gmm_cause_;  // Mandatory
+  NasMmPlainHeader ie_header_;  // Mandatory
+  _5gmmCause ie_5gmm_cause_;    // Mandatory
 };
 
 }  // namespace oai::nas

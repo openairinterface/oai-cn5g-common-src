@@ -62,7 +62,7 @@ uint16_t Type6NasIe::GetLengthIndicator() const {
 }
 
 //------------------------------------------------------------------------------
-uint16_t Type6NasIe::GetIeLength() const {
+uint32_t Type6NasIe::GetIeLength() const {
   return (GetHeaderLength() + li_);
 }
 

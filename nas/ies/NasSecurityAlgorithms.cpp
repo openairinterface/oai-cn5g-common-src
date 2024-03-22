@@ -49,7 +49,7 @@ NasSecurityAlgorithms::NasSecurityAlgorithms(
 }
 
 //------------------------------------------------------------------------------
-uint16_t NasSecurityAlgorithms::GetIeLength() const {
+uint32_t NasSecurityAlgorithms::GetIeLength() const {
   return (kNasSecurityAlgorithmsLength - 1 + Type3NasIe::GetIeLength());
 }
 

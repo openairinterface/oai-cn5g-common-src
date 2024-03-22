@@ -50,7 +50,7 @@ bool SecurityHeaderType::Validate(const int& len) const {
 }
 
 //------------------------------------------------------------------------------
-uint16_t SecurityHeaderType::GetIeLength() const {
+uint32_t SecurityHeaderType::GetIeLength() const {
   return kSecurityHeaderTypeLength;
 }
 

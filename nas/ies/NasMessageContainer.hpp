@@ -30,7 +30,7 @@ constexpr auto kNasMessageContainerIeName            = "NAS Message Container";
 
 namespace oai::nas {
 
-class NasMessageContainer : Type6NasIe {
+class NasMessageContainer : public Type6NasIe {
  public:
   NasMessageContainer();
   NasMessageContainer(const bstring& value);

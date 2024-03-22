@@ -26,13 +26,15 @@
 
 namespace oai::nas {
 
-class DeregistrationRequest : public NasMmPlainHeader {
+class DeregistrationRequest : public Nas5gmmMessage {
  public:
   DeregistrationRequest();
   ~DeregistrationRequest();
 
   int Encode(uint8_t* buf, int len);
   int Decode(uint8_t* buf, int len);
+
+  uint32_t GetLength() const override;
 
   void SetHeader(uint8_t security_header_type);
 
@@ -68,6 +70,7 @@ class DeregistrationRequest : public NasMmPlainHeader {
   // TODO: Get
 
  private:
+  NasMmPlainHeader ie_header_;                     // Mandatory
   _5gsDeregistrationType ie_deregistration_type_;  // Mandatory
   NasKeySetIdentifier ie_ng_ksi_;                  // Mandatory
   _5gsMobileIdentity ie_5gs_mobility_id_;          // Mandatory

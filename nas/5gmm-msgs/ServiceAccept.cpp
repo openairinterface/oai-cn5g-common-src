@@ -27,7 +27,7 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 ServiceAccept::ServiceAccept()
-    : NasMmPlainHeader(k5gsMobilityManagementMessages, kServiceAccept) {
+    : ie_header_(k5gsMobilityManagementMessages, kServiceAccept) {
   ie_pdu_session_status_                          = std::nullopt;
   ie_pdu_session_reactivation_result_             = std::nullopt;
   ie_pdu_session_reactivation_result_error_cause_ = std::nullopt;
@@ -36,9 +36,30 @@ ServiceAccept::ServiceAccept()
 }
 
 ServiceAccept::~ServiceAccept() {}
+
+//------------------------------------------------------------------------------
+uint32_t ServiceAccept::GetLength() const {
+  uint32_t msg_len = 0;
+  msg_len += ie_header_.GetLength();
+
+  if (ie_pdu_session_status_.has_value())
+    msg_len += ie_pdu_session_status_.value().GetIeLength();
+  if (ie_pdu_session_reactivation_result_.has_value())
+    msg_len += ie_pdu_session_reactivation_result_.value().GetIeLength();
+  if (ie_pdu_session_reactivation_result_error_cause_.has_value())
+    msg_len +=
+        ie_pdu_session_reactivation_result_error_cause_.value().GetIeLength();
+  if (ie_eap_message_.has_value())
+    msg_len += ie_eap_message_.value().GetIeLength();
+  if (ie_t3448_value_.has_value())
+    msg_len += ie_t3448_value_.value().GetIeLength();
+
+  return msg_len;
+}
+
 //------------------------------------------------------------------------------
 void ServiceAccept::SetHeader(uint8_t security_header_type) {
-  NasMmPlainHeader::SetSecurityHeaderType(security_header_type);
+  ie_header_.SetSecurityHeaderType(security_header_type);
 }
 
 //------------------------------------------------------------------------------
@@ -78,8 +99,7 @@ int ServiceAccept::Encode(uint8_t* buf, int len) {
   int encoded_size    = 0;
   int encoded_ie_size = 0;
   // Header
-  if ((encoded_ie_size = NasMmPlainHeader::Encode(buf, len)) ==
-      KEncodeDecodeError) {
+  if ((encoded_ie_size = ie_header_.Encode(buf, len)) == KEncodeDecodeError) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error("Encoding NAS Header error");
     return KEncodeDecodeError;
@@ -132,7 +152,7 @@ int ServiceAccept::Decode(uint8_t* buf, int len) {
   int decoded_ie_size = 0;
 
   // Header
-  decoded_ie_size = NasMmPlainHeader::Decode(buf, len);
+  decoded_ie_size = ie_header_.Decode(buf, len);
   if (decoded_ie_size == KEncodeDecodeError) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error("Decoding NAS Header error");

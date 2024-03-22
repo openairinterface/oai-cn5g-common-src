@@ -28,7 +28,7 @@ constexpr auto kEpsNasMessageContainerIeName = "EPS NAS Message Container";
 
 namespace oai::nas {
 
-class EpsNasMessageContainer : Type6NasIe {
+class EpsNasMessageContainer : public Type6NasIe {
  public:
   EpsNasMessageContainer();
   EpsNasMessageContainer(const bstring& value);

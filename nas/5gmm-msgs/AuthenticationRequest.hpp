@@ -26,7 +26,7 @@
 
 namespace oai::nas {
 
-class AuthenticationRequest : public NasMmPlainHeader {
+class AuthenticationRequest : public Nas5gmmMessage {
  public:
   AuthenticationRequest();
   ~AuthenticationRequest();
@@ -34,10 +34,7 @@ class AuthenticationRequest : public NasMmPlainHeader {
   int Encode(uint8_t* buf, int len);
   int Decode(uint8_t* buf, int len);
 
-  // May not be the actual length of the message (by rounding 1/2 octet to 1
-  // octet in some IEs) but always greater than the actual length of the message
-  uint32_t GetLength() const;
-  bool Validate(const uint32_t& len) const;
+  uint32_t GetLength() const override;
 
   void SetHeader(uint8_t security_header_type);
 
@@ -59,6 +56,7 @@ class AuthenticationRequest : public NasMmPlainHeader {
   // TODO: Get
 
  private:
+  NasMmPlainHeader ie_header_;     // Mandatory
   NasKeySetIdentifier ie_ng_ksi_;  // Mandatory
   // Spare half octet (will be processed together with NgKSI)
   Abba ie_abba_;  // Mandatory

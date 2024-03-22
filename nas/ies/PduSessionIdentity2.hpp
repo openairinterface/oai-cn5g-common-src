@@ -37,7 +37,7 @@ class PduSessionIdentity2 : public Type3NasIe {
   ~PduSessionIdentity2();
 
   static std::string GetIeName() { return kPduSessionIdentity2IeName; }
-  uint16_t GetIeLength() const override;
+  uint32_t GetIeLength() const override;
 
   int Encode(uint8_t* buf, int len);
   int Decode(uint8_t* buf, int len, bool is_option);

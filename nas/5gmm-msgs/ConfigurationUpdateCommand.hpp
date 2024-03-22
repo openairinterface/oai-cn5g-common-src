@@ -26,10 +26,15 @@
 
 namespace oai::nas {
 
-class ConfigurationUpdateCommand : public NasMmPlainHeader {
+class ConfigurationUpdateCommand : public Nas5gmmMessage {
  public:
   ConfigurationUpdateCommand();
   ~ConfigurationUpdateCommand();
+
+  int Encode(uint8_t* buf, int len);
+  int Decode(uint8_t* buf, int len);
+
+  uint32_t GetLength() const override;
 
   void SetHeader(uint8_t security_header_type);
   void GetSecurityHeaderType(uint8_t security_header_type);
@@ -54,10 +59,8 @@ class ConfigurationUpdateCommand : public NasMmPlainHeader {
   void SetShortNameForNetwork(const std::string& text_string);
   void GetShortNameForNetwork(NetworkName& name) const;
 
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len);
-
  private:
+  NasMmPlainHeader ie_header_;  // Mandatory
   // Configuration update indication
   std::optional<ConfigurationUpdateIndication>
       ie_configuration_update_indication_;        // Optional

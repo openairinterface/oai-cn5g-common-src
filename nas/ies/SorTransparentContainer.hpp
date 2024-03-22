@@ -31,7 +31,7 @@ constexpr auto kSorTransparentContainerIeName = "SOR Transparent Container";
 
 namespace oai::nas {
 
-class SorTransparentContainer : Type6NasIe {
+class SorTransparentContainer : public Type6NasIe {
  public:
   SorTransparentContainer();
   SorTransparentContainer(

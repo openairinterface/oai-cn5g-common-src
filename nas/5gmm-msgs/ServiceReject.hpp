@@ -26,7 +26,7 @@
 
 namespace oai::nas {
 
-class ServiceReject : public NasMmPlainHeader {
+class ServiceReject : public Nas5gmmMessage {
  public:
   ServiceReject();
   ~ServiceReject();
@@ -35,6 +35,8 @@ class ServiceReject : public NasMmPlainHeader {
 
   int Encode(uint8_t* buf, int len);
   int Decode(uint8_t* buf, int len);
+
+  uint32_t GetLength() const override;
 
   void Set5gmmCause(uint8_t value);
   uint8_t Get5GMmCause();
@@ -52,7 +54,8 @@ class ServiceReject : public NasMmPlainHeader {
   // TODO: Get
 
  private:
-  _5gmmCause ie_5gmm_cause_;  // Mandatory
+  NasMmPlainHeader ie_header_;  // Mandatory
+  _5gmmCause ie_5gmm_cause_;    // Mandatory
 
   std::optional<PduSessionStatus> ie_pdu_session_status_;  // Optional
   std::optional<GprsTimer2> ie_t3346_value_;               // Optional

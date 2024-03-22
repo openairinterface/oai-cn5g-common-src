@@ -26,7 +26,7 @@
 
 namespace oai::nas {
 
-class IdentityRequest : public NasMmPlainHeader {
+class IdentityRequest : public Nas5gmmMessage {
  public:
   IdentityRequest();
   ~IdentityRequest();
@@ -34,12 +34,15 @@ class IdentityRequest : public NasMmPlainHeader {
   int Encode(uint8_t* buf, int len);
   int Decode(uint8_t* buf, int len);
 
+  uint32_t GetLength() const override;
+
   void SetHeader(uint8_t security_header_type);
 
   void Set5gsIdentityType(uint8_t value);
   // TODO: Get
 
  private:
+  NasMmPlainHeader ie_header_;             // Mandatory
   _5gsIdentityType ie_5gs_identity_type_;  // Mandatory
   // Spare half octet (Mandatory)
 };

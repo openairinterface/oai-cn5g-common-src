@@ -27,10 +27,12 @@
 
 namespace oai::nas {
 
-class ControlPlaneServiceRequest : public NasMmPlainHeader {
+class ControlPlaneServiceRequest : public Nas5gmmMessage {
  public:
   ControlPlaneServiceRequest();
   ~ControlPlaneServiceRequest();
+
+  uint32_t GetLength() const override;
 
   void SetHeader(uint8_t security_header_type);
 
@@ -63,6 +65,7 @@ class ControlPlaneServiceRequest : public NasMmPlainHeader {
   // TODO: Additional information (Optional)
 
  private:
+  NasMmPlainHeader ie_header_;                             // Mandatory
   ControlPlaneServiceType ie_control_plane_service_type_;  // Mandatory
   NasKeySetIdentifier ie_ng_ksi_;                          // Mandatory
 

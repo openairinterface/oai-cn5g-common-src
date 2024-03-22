@@ -48,7 +48,7 @@ bool NasMessageType::Validate(const int& len) const {
 }
 
 //------------------------------------------------------------------------------
-uint16_t NasMessageType::GetIeLength() const {
+uint32_t NasMessageType::GetIeLength() const {
   return kNasMessageTypeIeSize;
 }
 

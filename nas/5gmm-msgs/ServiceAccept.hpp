@@ -26,7 +26,7 @@
 
 namespace oai::nas {
 
-class ServiceAccept : public NasMmPlainHeader {
+class ServiceAccept : public Nas5gmmMessage {
  public:
   ServiceAccept();
   ~ServiceAccept();
@@ -35,6 +35,8 @@ class ServiceAccept : public NasMmPlainHeader {
 
   int Encode(uint8_t* buf, int len);
   int Decode(uint8_t* buf, int len);
+
+  uint32_t GetLength() const override;
 
   void SetPduSessionStatus(uint16_t value);
   // TODO: Get
@@ -53,6 +55,7 @@ class ServiceAccept : public NasMmPlainHeader {
   // TODO: Get
 
  private:
+  NasMmPlainHeader ie_header_;                             // Mandatory
   std::optional<PduSessionStatus> ie_pdu_session_status_;  // Optional
   std::optional<PduSessionReactivationResult>
       ie_pdu_session_reactivation_result_;  // Optional

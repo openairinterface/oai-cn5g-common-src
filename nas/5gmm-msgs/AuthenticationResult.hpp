@@ -26,13 +26,15 @@
 
 namespace oai::nas {
 
-class AuthenticationResult : public NasMmPlainHeader {
+class AuthenticationResult : public Nas5gmmMessage {
  public:
   AuthenticationResult();
   ~AuthenticationResult();
 
   int Encode(uint8_t* buf, int len);
   int Decode(uint8_t* buf, int len);
+
+  uint32_t GetLength() const override;
 
   void SetHeader(uint8_t security_header_type);
 
@@ -46,6 +48,7 @@ class AuthenticationResult : public NasMmPlainHeader {
   // TODO: Get
 
  private:
+  NasMmPlainHeader ie_header_;     // Mandatory
   NasKeySetIdentifier ie_ng_ksi_;  // Mandatory (1/2 lower octet)
   EapMessage ie_eap_message_;      // Mandatory
   std::optional<Abba> ie_abba_;    // Optional

@@ -53,7 +53,7 @@ bool Type2NasIeFormatT::Validate(const int& len) const {
 }
 
 //------------------------------------------------------------------------------
-uint16_t Type2NasIeFormatT::GetIeLength() const {
+uint32_t Type2NasIeFormatT::GetIeLength() const {
   return kType2NasIeFormatTLength;
 }
 

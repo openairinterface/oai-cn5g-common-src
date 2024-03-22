@@ -30,13 +30,15 @@
 
 namespace oai::nas {
 
-class RegistrationRequest : public NasMmPlainHeader {
+class RegistrationRequest : public Nas5gmmMessage {
  public:
   RegistrationRequest();
   ~RegistrationRequest();
 
   int Encode(uint8_t* buf, int len);
   int Decode(uint8_t* buf, int len);
+
+  uint32_t GetLength() const override;
 
   void SetHeader(uint8_t security_header_type);
   void GetSecurityHeaderType(uint8_t security_header_type);
@@ -150,6 +152,7 @@ class RegistrationRequest : public NasMmPlainHeader {
   bool GetEpsBearerContextStatus(uint16_t& value) const;
 
  private:
+  NasMmPlainHeader ie_header_;                     // Mandatory
   _5gsRegistrationType ie_5gs_registration_type_;  // Mandatory
   NasKeySetIdentifier ie_ng_ksi_;                  // Mandatory
   _5gsMobileIdentity ie_5gs_mobile_identity_;      // Mandatory

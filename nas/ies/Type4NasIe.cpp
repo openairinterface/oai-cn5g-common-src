@@ -62,7 +62,7 @@ uint8_t Type4NasIe::GetLengthIndicator() const {
 }
 
 //------------------------------------------------------------------------------
-uint16_t Type4NasIe::GetIeLength() const {
+uint32_t Type4NasIe::GetIeLength() const {
   return (iei_.has_value() ? (li_ + 2) : (li_ + 1));  // 1 for IEI, 1 for Length
 }
 

@@ -48,7 +48,7 @@ bool ExtendedProtocolDiscriminator::Validate(const int& len) const {
 }
 
 //------------------------------------------------------------------------------
-uint16_t ExtendedProtocolDiscriminator::GetIeLength() const {
+uint32_t ExtendedProtocolDiscriminator::GetIeLength() const {
   return kExtendedProtocolDiscriminatorLength;
 }
 

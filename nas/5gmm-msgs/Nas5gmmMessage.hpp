@@ -19,47 +19,32 @@
  *      contact@openairinterface.org
  */
 
-#ifndef _TYPE1_NAS_IE_H_
-#define _TYPE1_NAS_IE_H_
+#ifndef _NAS_5GMM_MESSAGE_H_
+#define _NAS_5GMM_MESSAGE_H_
 
-#include "NasIe.hpp"
+#include "3gpp_24.501.hpp"
 
-constexpr uint8_t kType1NasIeLength = 1;
 namespace oai::nas {
 
-class Type1NasIe : public NasIe {
+class Nas5gmmMessage {
  public:
-  Type1NasIe();
-  Type1NasIe(bool high_pos, uint8_t value);
-  Type1NasIe(bool high_pos);
-  Type1NasIe(uint8_t iei, uint8_t value);
-  Type1NasIe(uint8_t iei);
-  virtual ~Type1NasIe();
+  Nas5gmmMessage(){};
+  virtual ~Nas5gmmMessage() {}
 
-  bool Validate(const int& len) const override;
-  uint32_t GetIeLength() const override;
+  // May not be the actual length of the message (by rounding 1/2 octet to 1
+  // octet in some IEs) but always greater than the actual length of the message
+  virtual uint32_t GetLength() const = 0;
+  virtual bool Validate(const uint32_t& len) const;
 
-  // void SetIei(uint8_t iei);
-  void Set(bool high_pos, uint8_t value);
-  void Set(bool high_pos);
+  virtual int Encode(uint8_t* buf, int len) = 0;
+  virtual int Decode(uint8_t* buf, int len) = 0;
 
-  void SetValue(uint8_t value);
+  void SetMessageName(const std::string& name);
+  std::string GetMessageName() const;
+  void GetMessageName(std::string& name) const;
 
-  int Encode(uint8_t* buf, const int& len) override;
-  int Decode(
-      const uint8_t* const buf, const int& len, bool is_iei = true) override;
-  int Decode(
-      const uint8_t* const buf, const int& len, const bool& high_pos,
-      bool is_iei);
-
- protected:
-  virtual void SetValue() = 0;
-  virtual void GetValue() = 0;
-
-  std::optional<uint8_t>
-      iei_;        // IEI present in Format TV (in bit position 8,7,6,5)
-  bool high_pos_;  // choose bit position for Format V
-  uint8_t value_;  // value (in bit positions 4,3,2,1 or 8,7,6,5)
+ private:
+  std::string msg_name_;  // non 3GPP IE
 };
 
 }  // namespace oai::nas

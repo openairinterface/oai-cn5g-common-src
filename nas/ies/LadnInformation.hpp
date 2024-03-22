@@ -33,7 +33,7 @@ constexpr auto kLadnInformationIeName            = "LADN Information";
 
 namespace oai::nas {
 
-class LadnInformation : Type6NasIe {
+class LadnInformation : public Type6NasIe {
  public:
   LadnInformation();
   ~LadnInformation();

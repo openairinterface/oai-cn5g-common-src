@@ -33,7 +33,7 @@ ServiceAreaList::ServiceAreaList()
     : Type4NasIe(kIei5gsTrackingAreaIdentityList), ie_list_() {
   SetLengthIndicator(
       kServiceAreaListMinimumLength -
-      2);  // Minimim length - 2 bytes for header
+      2);  // Minimum length - 2 bytes for IEI/Length
 }
 
 //------------------------------------------------------------------------------
@@ -43,7 +43,7 @@ ServiceAreaList::ServiceAreaList(bool iei) : Type4NasIe(), ie_list_() {
   }
   SetLengthIndicator(
       kServiceAreaListMinimumLength -
-      2);  // Minimim length - 2 bytes for header
+      2);  // Minimum length - 2 bytes for IEI/Length
 }
 
 //------------------------------------------------------------------------------
@@ -51,17 +51,32 @@ ServiceAreaList::ServiceAreaList(
     const std::vector<service_area_list_ie_t>& list)
     : Type4NasIe(kIeiServiceAreaList) {
   // "Allowed type" should be the same in all the partial service area lists
-  for (int i = 0; i < ie_list_.size(); i++) {
-    if (ie_list_[i].type != ie_list_[0].type) return;
+  for (int i = 0; i < list.size(); i++) {
+    if (list[i].type != list[0].type) return;
   }
   // only store the first 16 TAIs
   uint8_t size = (list.size() > kServiceAreaListMaximumSupportedTAIs) ?
                      kServiceAreaListMaximumSupportedTAIs :
                      list.size();
+
+  uint8_t ie_len = 0;
   for (int i = 0; i < size; i++) {
     ie_list_.push_back(list[i]);
+
+    switch (list[i].type) {
+      case 0x00: {
+        ie_len += 4 + list[i].tac_list.size() * 3;
+      } break;
+      case 0x01: {
+        ie_len += 7;
+      } break;
+      case 0x10: {
+        ie_len += 1 + list[i].tac_list.size() * 6;
+      }
+    }
   }
-  // Don't know Length Indicator for now
+
+  SetLengthIndicator(ie_len);
 }
 
 //------------------------------------------------------------------------------

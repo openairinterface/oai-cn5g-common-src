@@ -28,12 +28,14 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 Abba::Abba() : Type4NasIe(), value_() {
-  SetLengthIndicator(0);
+  SetLengthIndicator(
+      kAbbaMinimumLength - 2);  // Minimum length - 2 bytes for IEI/Length
 }
 
 //------------------------------------------------------------------------------
 Abba::Abba(uint8_t iei) : Type4NasIe(iei), value_() {
-  SetLengthIndicator(0);
+  SetLengthIndicator(
+      kAbbaMinimumLength - 2);  // Minimum length - 2 bytes for IEI/Length
 }
 
 //------------------------------------------------------------------------------
@@ -41,7 +43,8 @@ Abba::Abba(uint8_t length, uint8_t* value) : Type4NasIe() {
   for (int i = 0; i < length; i++) {
     this->value_[i] = value[i];
   }
-  SetLengthIndicator(length);
+  SetLengthIndicator(
+      (length > (kAbbaMinimumLength - 2)) ? length : (kAbbaMinimumLength - 2));
 }
 
 //------------------------------------------------------------------------------
@@ -49,7 +52,8 @@ Abba::Abba(uint8_t iei, uint8_t length, uint8_t* value) : Type4NasIe(iei) {
   for (int i = 0; i < length; i++) {
     this->value_[i] = value[i];
   }
-  SetLengthIndicator(length);
+  SetLengthIndicator(
+      (length > (kAbbaMinimumLength - 2)) ? length : (kAbbaMinimumLength - 2));
 }
 
 //------------------------------------------------------------------------------
@@ -60,7 +64,8 @@ void Abba::Set(uint8_t length, const uint8_t* value) {
   for (int i = 0; i < length; i++) {
     this->value_[i] = value[i];
   }
-  SetLengthIndicator(length);
+  SetLengthIndicator(
+      (length > (kAbbaMinimumLength - 2)) ? length : (kAbbaMinimumLength - 2));
 }
 
 //------------------------------------------------------------------------------
@@ -69,7 +74,8 @@ void Abba::Set(uint8_t iei, uint8_t length, const uint8_t* value) {
   for (int i = 0; i < length; i++) {
     this->value_[i] = value[i];
   }
-  SetLengthIndicator(length);
+  SetLengthIndicator(
+      (length > (kAbbaMinimumLength - 2)) ? length : (kAbbaMinimumLength - 2));
 }
 
 //------------------------------------------------------------------------------

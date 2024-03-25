@@ -30,12 +30,14 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 PlmnList::PlmnList(uint8_t iei) : Type4NasIe(iei) {
-  SetLengthIndicator(0);
+  SetLengthIndicator(
+      kPlmnListMinimumLength - 2);  // Minimum length - 2 bytes for IEI/Length
 }
 
 //------------------------------------------------------------------------------
 PlmnList::PlmnList() : Type4NasIe() {
-  SetLengthIndicator(0);
+  SetLengthIndicator(
+      kPlmnListMinimumLength - 2);  // Minimum length - 2 bytes for IEI/Length
 }
 
 //------------------------------------------------------------------------------
@@ -52,7 +54,9 @@ void PlmnList::Set(uint8_t iei, const std::vector<nas_plmn_t>& list) {
             3;  // 3 - size of each PLMN
                 // size of the first PLMN is included in kPlmnListMinimumLength
 
-  SetLengthIndicator(length);
+  SetLengthIndicator(
+      (length > (kPlmnListMinimumLength - 2)) ? length :
+                                                (kPlmnListMinimumLength - 2));
 }
 
 //------------------------------------------------------------------------------

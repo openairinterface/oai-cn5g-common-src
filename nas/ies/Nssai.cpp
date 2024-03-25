@@ -24,14 +24,14 @@
 #include <vector>
 
 #include "3gpp_24.501.hpp"
-//#include "amf.hpp"
 #include "logger_base.hpp"
 
 using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 Nssai::Nssai(uint8_t iei) : Type4NasIe(iei) {
-  SetLengthIndicator(0);
+  SetLengthIndicator(
+      kNssaiMinimumLength - 2);  // Minimum length - 2 bytes for IEI/Length
 }
 
 //------------------------------------------------------------------------------
@@ -42,11 +42,16 @@ Nssai::Nssai(uint8_t iei, const std::vector<struct SNSSAI_s>& nssai)
   for (int i = 0; i < nssai.size(); i++) {
     length += (1 + nssai[i].length);  // 1 for length IE
   }
-  SetLengthIndicator(length);
+  SetLengthIndicator(
+      (length > (kNssaiMinimumLength - 2)) ? length :
+                                             (kNssaiMinimumLength - 2));
 }
 
 //------------------------------------------------------------------------------
-Nssai::Nssai() : Type4NasIe(), s_nssais_() {}
+Nssai::Nssai() : Type4NasIe(), s_nssais_() {
+  SetLengthIndicator(
+      kNssaiMinimumLength - 2);  // Minimum length - 2 bytes for IEI/Length
+}
 
 //------------------------------------------------------------------------------
 Nssai::~Nssai() {}
@@ -129,7 +134,6 @@ int Nssai::Decode(uint8_t* buf, int len, bool is_iei) {
 
   // IEI and Length
   int decoded_header_size = Type4NasIe::Decode(buf + decoded_size, len, is_iei);
-  // decoded_size += Type4NasIe::Decode(buf + decoded_size, len, is_iei);
   if (decoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   decoded_size += decoded_header_size;
 

@@ -25,7 +25,9 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 RejectedNssai::RejectedNssai(uint8_t iei) : Type4NasIe(iei) {
-  SetLengthIndicator(2);  // 1 for Length/Cause and 1 for SST of the 1st S-NSSAI
+  SetLengthIndicator(
+      kRejectedNssaiMinimumLength -
+      2);  // Minimum length - 2 bytes for IEI/Length
 }
 
 //------------------------------------------------------------------------------
@@ -40,7 +42,10 @@ void RejectedNssai::SetRejectedSNssais(
     length += n.GetLength();
   }
 
-  SetLengthIndicator(length);
+  SetLengthIndicator(
+      (length > (kRejectedNssaiMinimumLength - 2)) ?
+          length :
+          (kRejectedNssaiMinimumLength - 2));
 }
 
 //------------------------------------------------------------------------------

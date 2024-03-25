@@ -31,14 +31,19 @@ using namespace oai::nas;
 //------------------------------------------------------------------------------
 UeRadioCapabilityId::UeRadioCapabilityId()
     : Type4NasIe(kIeiUeRadioCapabilityId), value_() {
-  SetLengthIndicator(0);
+  SetLengthIndicator(
+      kUeRadioCapabilityIdMinimumLength -
+      2);  // Minimum length - 2 bytes for IEI/Length
 }
 
 //------------------------------------------------------------------------------
 UeRadioCapabilityId::UeRadioCapabilityId(const bstring& value)
     : Type4NasIe(kIeiUeRadioCapabilityId) {
   value_ = bstrcpy(value);
-  SetLengthIndicator(blength(value_));
+  SetLengthIndicator(
+      (blength(value_) > (kUeRadioCapabilityIdMinimumLength - 2)) ?
+          blength(value_) :
+          (kUeRadioCapabilityIdMinimumLength - 2));
 }
 
 //------------------------------------------------------------------------------
@@ -47,6 +52,10 @@ UeRadioCapabilityId::~UeRadioCapabilityId() {}
 //------------------------------------------------------------------------------
 void UeRadioCapabilityId::SetValue(const bstring& value) {
   value_ = bstrcpy(value);
+  SetLengthIndicator(
+      (blength(value_) > (kUeRadioCapabilityIdMinimumLength - 2)) ?
+          blength(value_) :
+          (kUeRadioCapabilityIdMinimumLength - 2));
 }
 
 //------------------------------------------------------------------------------

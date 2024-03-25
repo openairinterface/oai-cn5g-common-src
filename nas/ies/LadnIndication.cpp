@@ -31,15 +31,22 @@ using namespace oai::nas;
 //------------------------------------------------------------------------------
 LadnIndication::LadnIndication() : Type6NasIe(kIeiLadnIndication) {
   ladn_ = {};
+  SetLengthIndicator(
+      kLadnIndicationMinimumLength -
+      3);  // Minimum length - 3 bytes for IEI/Length
 }
 
 //------------------------------------------------------------------------------
 LadnIndication::LadnIndication(const std::vector<bstring>& ladn)
     : Type6NasIe(kIeiLadnIndication) {
-  int length = 0;
-  ladn_.assign(ladn.begin(), ladn.end());
-  for (int i = 0; i < ladn.size(); i++) {
-    length = length + blength(ladn.at(i));
+  int length   = 0;
+  uint8_t size = (ladn.size() > kLadnIndicationMaximumSupportedLadns) ?
+                     kLadnIndicationMaximumSupportedLadns :
+                     ladn.size();
+  for (int i = 0; i < size; i++) {
+    bstring ladnItem = bstrcpy(ladn.at(i));
+    ladn_.push_back(ladnItem);
+    length += blength(ladn.at(i));
   }
   SetLengthIndicator(length);
 }

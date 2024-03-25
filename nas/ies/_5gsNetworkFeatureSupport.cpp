@@ -60,6 +60,7 @@ _5gsNetworkFeatureSupport::~_5gsNetworkFeatureSupport() {}
 void _5gsNetworkFeatureSupport::SetValue(uint8_t value, uint8_t value2) {
   value_  = value;
   value2_ = value2;
+  SetLengthIndicator(2);
 }
 
 /*

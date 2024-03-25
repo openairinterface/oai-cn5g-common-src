@@ -32,13 +32,13 @@ using namespace oai::nas;
 EpsBearerContextStatus::EpsBearerContextStatus()
     : Type4NasIe(kIeiEpsBearerContextStatus) {
   value_ = 0;
-  SetLengthIndicator(2);
+  SetLengthIndicator(kEpsBearerContextStatusLength);
 }
 
 //------------------------------------------------------------------------------
 EpsBearerContextStatus::EpsBearerContextStatus(uint16_t value) {
   value_ = value;
-  SetLengthIndicator(2);
+  SetLengthIndicator(kEpsBearerContextStatusLength);
 }
 
 //------------------------------------------------------------------------------

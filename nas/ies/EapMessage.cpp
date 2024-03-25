@@ -29,19 +29,24 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 EapMessage::EapMessage() : Type6NasIe(), eap_() {
-  SetLengthIndicator(0);
+  SetLengthIndicator(
+      kEapMessageMinimumLength - 3);  // Minimum length - 3 bytes for IEI/Length
 }
 
 //------------------------------------------------------------------------------
 EapMessage::EapMessage(uint8_t iei) : Type6NasIe(iei), eap_() {
-  SetLengthIndicator(0);
+  SetLengthIndicator(
+      kEapMessageMinimumLength - 3);  // Minimum length - 3 bytes for IEI/Length
 }
 
 //------------------------------------------------------------------------------
 EapMessage::EapMessage(const uint8_t iei, const bstring& eap)
     : Type6NasIe(iei) {
   eap_ = bstrcpy(eap);
-  SetLengthIndicator(blength(eap));
+  SetLengthIndicator(
+      (blength(eap_) > (kEapMessageMinimumLength - 3)) ?
+          blength(eap_) :
+          (kEapMessageMinimumLength - 3));
 }
 
 //------------------------------------------------------------------------------
@@ -50,6 +55,10 @@ EapMessage::~EapMessage() {}
 //------------------------------------------------------------------------------
 void EapMessage::SetValue(const bstring& eap) {
   eap_ = bstrcpy(eap);
+  SetLengthIndicator(
+      (blength(eap_) > (kEapMessageMinimumLength - 3)) ?
+          blength(eap_) :
+          (kEapMessageMinimumLength - 3));
 }
 
 //------------------------------------------------------------------------------

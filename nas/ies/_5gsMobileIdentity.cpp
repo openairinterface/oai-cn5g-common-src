@@ -32,12 +32,18 @@ using namespace oai::nas;
 _5gsMobileIdentity::_5gsMobileIdentity() : Type6NasIe() {
   type_of_identity_ = 0;
   ClearIe();
+  SetLengthIndicator(
+      k5gsMobileIdentityMinimumLength -
+      3);  // Minimum length - 3 bytes for IEI/Length
 }
 
 //------------------------------------------------------------------------------
 _5gsMobileIdentity::_5gsMobileIdentity(uint8_t iei) : Type6NasIe(iei) {
   type_of_identity_ = 0;
   ClearIe();
+  SetLengthIndicator(
+      k5gsMobileIdentityMinimumLength -
+      3);  // Minimum length - 3 bytes for IEI/Length
 }
 
 //------------------------------------------------------------------------------
@@ -455,7 +461,7 @@ void _5gsMobileIdentity::SetSuciWithSupiImsi(
   supi_format_imsi_tmp.protection_scheme_id = protection_sch_id;
   supi_format_imsi_tmp.home_network_pki     = kHomeNetworkPki0WhenPsi0;
   supi_format_imsi_tmp.msin                 = msin;
-  SetLengthIndicator(10 + ceil(msin.length() / 2));
+  SetLengthIndicator(8 + ceil(msin.length() / 2));
 
   supi_format_imsi_ = std::optional<SUCI_imsi_t>(supi_format_imsi_tmp);
 }
@@ -475,7 +481,7 @@ void _5gsMobileIdentity::SetSuciWithSupiImsi(
   supi_format_imsi_tmp.mcc         = mcc;
   supi_format_imsi_tmp.mnc         = mnc;
   supi_format_imsi_ = std::optional<SUCI_imsi_t>(supi_format_imsi_tmp);
-  // TODO: SetLengthIndicator();
+  SetLengthIndicator(8 + ceil(msin.length() / 2));
 }
 
 //------------------------------------------------------------------------------
@@ -733,6 +739,7 @@ void _5gsMobileIdentity::SetImeisv(const IMEI_IMEISV_t& imeisv) {
 
   // Set value for IMEISV
   imeisv_ = std::optional<IMEI_IMEISV_t>(imeisv);
+  SetLengthIndicator(1 + imeisv.identity.length() / 2);
 }
 
 //------------------------------------------------------------------------------

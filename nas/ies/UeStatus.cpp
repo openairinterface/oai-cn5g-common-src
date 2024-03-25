@@ -32,14 +32,16 @@ using namespace oai::nas;
 UeStatus::UeStatus() : Type4NasIe(kIeiUeStatus) {
   s1_ = false;
   n1_ = false;
-  SetLengthIndicator(1);
+  SetLengthIndicator(
+      kUeStatusIeLength - 2);  // Minimum length - 2 bytes for IEI/Length
 }
 
 //------------------------------------------------------------------------------
 UeStatus::UeStatus(bool n1, bool s1) : Type4NasIe(kIeiUeStatus) {
   s1_ = s1;
   n1_ = n1;
-  SetLengthIndicator(1);
+  SetLengthIndicator(
+      kUeStatusIeLength - 2);  // Minimum length - 2 bytes for IEI/Length
 }
 
 //------------------------------------------------------------------------------

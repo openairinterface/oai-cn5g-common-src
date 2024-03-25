@@ -29,7 +29,7 @@ using namespace oai::nas;
 //------------------------------------------------------------------------------
 AuthenticationParameterAutn::AuthenticationParameterAutn(uint8_t iei)
     : Type4NasIe(iei), value_() {
-  SetLengthIndicator(0);
+  SetLengthIndicator(kAuthenticationParameterAutnValueLength);
 }
 
 //------------------------------------------------------------------------------
@@ -45,7 +45,7 @@ AuthenticationParameterAutn::AuthenticationParameterAutn(
 //------------------------------------------------------------------------------
 AuthenticationParameterAutn::AuthenticationParameterAutn()
     : Type4NasIe(), value_() {
-  SetLengthIndicator(0);
+  SetLengthIndicator(kAuthenticationParameterAutnValueLength);
 }
 
 //------------------------------------------------------------------------------

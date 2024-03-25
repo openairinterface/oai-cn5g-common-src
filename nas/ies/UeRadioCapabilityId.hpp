@@ -24,7 +24,8 @@
 
 #include "Type4NasIe.hpp"
 
-constexpr auto kUeRadioCapabilityIdIeName = "UE Radio Capability ID";
+constexpr uint8_t kUeRadioCapabilityIdMinimumLength = 4;
+constexpr auto kUeRadioCapabilityIdIeName           = "UE Radio Capability ID";
 
 namespace oai::nas {
 

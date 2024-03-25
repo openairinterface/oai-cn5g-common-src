@@ -27,19 +27,23 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 Dnn::Dnn() : Type4NasIe(kIeiDnn), dnn_() {
-  SetLengthIndicator(1);
+  SetLengthIndicator(
+      kDnnMinimumLength - 2);  // Minimum length - 2 bytes for IEI/Length
 }
 
 //------------------------------------------------------------------------------
 Dnn::Dnn(const bstring& dnn) : Type4NasIe(kIeiDnn) {
   dnn_ = bstrcpy(dnn);
-  SetLengthIndicator(blength(dnn));
+  SetLengthIndicator(
+      (blength(dnn_) > (kDnnMinimumLength - 2)) ? blength(dnn_) :
+                                                  (kDnnMinimumLength - 2));
 }
 
 //------------------------------------------------------------------------------
 Dnn::Dnn(bool iei) : Type4NasIe(), dnn_() {
   if (iei) SetIei(kIeiDnn);
-  SetLengthIndicator(1);
+  SetLengthIndicator(
+      kDnnMinimumLength - 2);  // Minimum length - 2 bytes for IEI/Length
 }
 
 //------------------------------------------------------------------------------
@@ -48,6 +52,9 @@ Dnn::~Dnn() {}
 //------------------------------------------------------------------------------
 void Dnn::SetValue(const bstring& dnn) {
   dnn_ = bstrcpy(dnn);
+  SetLengthIndicator(
+      (blength(dnn_) > (kDnnMinimumLength - 2)) ? blength(dnn_) :
+                                                  (kDnnMinimumLength - 2));
 }
 
 //------------------------------------------------------------------------------

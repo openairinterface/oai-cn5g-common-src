@@ -60,7 +60,7 @@ this->value_[i];
 //------------------------------------------------------------------------------
 void AuthenticationFailureParameter::SetValue(const bstring& value) {
   value_ = bstrcpy(value);
-  SetLengthIndicator(blength(value));
+  SetLengthIndicator(kAuthenticationFailureParameterContentLength);
 }
 
 //------------------------------------------------------------------------------

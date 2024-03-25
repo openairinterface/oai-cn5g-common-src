@@ -27,7 +27,9 @@ using namespace oai::nas;
 //------------------------------------------------------------------------------
 AuthenticationResponseParameter::AuthenticationResponseParameter()
     : Type4NasIe(kIeiAuthenticationResponseParameter), res_or_res_star_() {
-  SetLengthIndicator(4);  // Minimum length for the content (RES or RES*)
+  SetLengthIndicator(
+      kAuthenticationResponseParameterMinimumLength -
+      2);  // Minimum length - 2 bytes for IEI/Length
 }
 
 //------------------------------------------------------------------------------
@@ -35,7 +37,11 @@ AuthenticationResponseParameter::AuthenticationResponseParameter(
     const bstring& para)
     : Type4NasIe(kIeiAuthenticationResponseParameter) {
   res_or_res_star_ = bstrcpy(para);
-  SetLengthIndicator(blength(res_or_res_star_));
+  SetLengthIndicator(
+      (blength(res_or_res_star_) >
+       (kAuthenticationResponseParameterMinimumLength - 2)) ?
+          blength(res_or_res_star_) :
+          (kAuthenticationResponseParameterMinimumLength - 2));
 }
 
 //------------------------------------------------------------------------------
@@ -44,6 +50,11 @@ AuthenticationResponseParameter::~AuthenticationResponseParameter() {}
 //------------------------------------------------------------------------------
 void AuthenticationResponseParameter::SetValue(const bstring& para) {
   res_or_res_star_ = bstrcpy(para);
+  SetLengthIndicator(
+      (blength(res_or_res_star_) >
+       (kAuthenticationResponseParameterMinimumLength - 2)) ?
+          blength(res_or_res_star_) :
+          (kAuthenticationResponseParameterMinimumLength - 2));
 }
 
 //------------------------------------------------------------------------------

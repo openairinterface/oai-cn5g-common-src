@@ -25,7 +25,7 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 GprsTimer3::GprsTimer3(uint8_t iei) : Type4NasIe(iei), unit_(), value_() {
-  SetLengthIndicator(1);
+  SetLengthIndicator(kGprsTimer3Length);
 }
 
 //------------------------------------------------------------------------------
@@ -33,7 +33,7 @@ GprsTimer3::GprsTimer3(const uint8_t iei, uint8_t unit, uint8_t value)
     : Type4NasIe(iei) {
   unit_  = unit;
   value_ = value;
-  SetLengthIndicator(1);
+  SetLengthIndicator(kGprsTimer3Length);
 }
 
 //------------------------------------------------------------------------------

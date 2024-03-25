@@ -36,19 +36,23 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 NetworkName::NetworkName() : Type4NasIe() {
-  SetLengthIndicator(kNetworkNameMinimumLength);
   coding_scheme_        = 0;
   add_ci_               = false;
   number_of_spare_bits_ = 0;
   text_string_          = nullptr;
+  SetLengthIndicator(
+      kNetworkNameMinimumLength -
+      2);  // Minimum length - 2 bytes for IEI/Length
 }
 //------------------------------------------------------------------------------
 NetworkName::NetworkName(uint8_t iei) : Type4NasIe(iei) {
-  SetLengthIndicator(kNetworkNameMinimumLength);
   coding_scheme_        = 0;
   add_ci_               = false;
   number_of_spare_bits_ = 0;
   text_string_          = nullptr;
+  SetLengthIndicator(
+      kNetworkNameMinimumLength -
+      2);  // Minimum length - 2 bytes for IEI/Length
 }
 
 //------------------------------------------------------------------------------

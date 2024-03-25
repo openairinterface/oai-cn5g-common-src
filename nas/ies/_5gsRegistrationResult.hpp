@@ -24,8 +24,10 @@
 
 #include "Type4NasIe.hpp"
 
-constexpr uint8_t k5gsRegistrationResultLength        = 3;
-constexpr uint8_t k5gsRegistrationResultContentLength = 1;
+constexpr uint8_t k5gsRegistrationResultLength = 3;
+constexpr uint8_t k5gsRegistrationResultContentLength =
+    k5gsRegistrationResultLength -
+    2;  // Minimum length - 2 bytes for IEI/Length
 constexpr auto k5gsRegistrationResultIeName = "5GS Registration Result";
 
 namespace oai::nas {

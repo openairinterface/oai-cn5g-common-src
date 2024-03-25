@@ -28,7 +28,7 @@ using namespace oai::nas;
 //------------------------------------------------------------------------------
 ExtendedDrxParameters::ExtendedDrxParameters()
     : Type4NasIe(kIeiExtendedDrxParameters), paging_time_(), e_drx_value_() {
-  SetLengthIndicator(1);
+  SetLengthIndicator(kExtendedDrxParametersLength);
 }
 
 //------------------------------------------------------------------------------
@@ -36,7 +36,7 @@ ExtendedDrxParameters::ExtendedDrxParameters(uint8_t paging_time, uint8_t value)
     : Type4NasIe(kIeiExtendedDrxParameters) {
   paging_time_ = paging_time & 0x0F;
   e_drx_value_ = value & 0x0F;
-  SetLengthIndicator(1);
+  SetLengthIndicator(kExtendedDrxParametersLength);
 }
 
 //------------------------------------------------------------------------------

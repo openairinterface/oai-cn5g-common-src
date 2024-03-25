@@ -31,14 +31,18 @@ using namespace oai::nas;
 //------------------------------------------------------------------------------
 UplinkDataStatus::UplinkDataStatus() : Type4NasIe(kIeiUplinkDataStatus) {
   value_ = 0;
-  SetLengthIndicator(2);
+  SetLengthIndicator(
+      kUplinkDataStatusMinimumLength -
+      2);  // Minimum length - 2 bytes for IEI/Length
 }
 
 //------------------------------------------------------------------------------
 UplinkDataStatus::UplinkDataStatus(uint16_t value)
     : Type4NasIe(kIeiUplinkDataStatus) {
   value_ = value;
-  SetLengthIndicator(2);
+  SetLengthIndicator(
+      kUplinkDataStatusMinimumLength -
+      2);  // Minimum length - 2 bytes for IEI/Length
 }
 
 //-----------------------------------------------------------------------------

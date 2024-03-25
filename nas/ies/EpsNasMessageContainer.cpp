@@ -30,13 +30,20 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 EpsNasMessageContainer::EpsNasMessageContainer()
-    : Type6NasIe(kIeiEpsNasMessageContainer), value_() {}
+    : Type6NasIe(kIeiEpsNasMessageContainer), value_() {
+  SetLengthIndicator(
+      kEpsNasMessageContainerMinimumLength -
+      3);  // Minimum length - 3 bytes for IEI/Length
+}
 
 //------------------------------------------------------------------------------
 EpsNasMessageContainer::EpsNasMessageContainer(const bstring& value)
     : Type6NasIe(kIeiEpsNasMessageContainer) {
   value_ = bstrcpy(value);
-  SetLengthIndicator(blength(value_));
+  SetLengthIndicator(
+      (blength(value_) > (kEpsNasMessageContainerMinimumLength - 3)) ?
+          blength(value_) :
+          (kEpsNasMessageContainerMinimumLength - 3));
 }
 
 //------------------------------------------------------------------------------

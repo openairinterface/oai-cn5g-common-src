@@ -31,14 +31,16 @@ using namespace oai::nas;
 //------------------------------------------------------------------------------
 UeUsageSetting::UeUsageSetting() : Type4NasIe(kIeiUeUsageSetting) {
   ues_usage_setting_ = false;
-  SetLengthIndicator(1);
+  SetLengthIndicator(
+      kUeUsageSettingLength - 2);  // Minimum length - 2 bytes for IEI/Length
 }
 
 //------------------------------------------------------------------------------
 UeUsageSetting::UeUsageSetting(bool ues_usage_setting)
     : Type4NasIe(kIeiUeUsageSetting) {
   ues_usage_setting_ = ues_usage_setting;
-  SetLengthIndicator(1);
+  SetLengthIndicator(
+      kUeUsageSettingLength - 2);  // Minimum length - 2 bytes for IEI/Length
 }
 
 //------------------------------------------------------------------------------

@@ -31,14 +31,18 @@ using namespace oai::nas;
 PduSessionReactivationResult::PduSessionReactivationResult()
     : Type4NasIe(kIeiPduSessionReactivationResult) {
   value_ = 0;
-  SetLengthIndicator(2);
+  SetLengthIndicator(
+      kPduSessionReactivationResultMinimumLength -
+      2);  // Minimum length - 2 bytes for IEI/Length
 }
 
 //------------------------------------------------------------------------------
 PduSessionReactivationResult::PduSessionReactivationResult(uint16_t value)
     : Type4NasIe(kIeiPduSessionReactivationResult) {
   value_ = value;
-  SetLengthIndicator(2);
+  SetLengthIndicator(
+      kPduSessionReactivationResultMinimumLength -
+      2);  // Minimum length - 2 bytes for IEI/Length
 }
 
 //------------------------------------------------------------------------------

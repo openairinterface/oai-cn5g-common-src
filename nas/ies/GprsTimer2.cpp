@@ -25,13 +25,13 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 GprsTimer2::GprsTimer2(uint8_t iei) : Type4NasIe(iei), value_() {
-  SetLengthIndicator(1);
+  SetLengthIndicator(kGprsTimer2Length);
 }
 
 //------------------------------------------------------------------------------
 GprsTimer2::GprsTimer2(uint8_t iei, uint8_t value) : Type4NasIe(iei) {
   value_ = value;
-  SetLengthIndicator(1);
+  SetLengthIndicator(kGprsTimer2Length);
 }
 
 //------------------------------------------------------------------------------

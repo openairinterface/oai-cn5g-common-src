@@ -26,13 +26,18 @@ using namespace oai::nas;
 //------------------------------------------------------------------------------
 AdditionalInformation::AdditionalInformation()
     : Type4NasIe(kIeiAdditionalInformation), value_() {
-  SetLengthIndicator(1);  // Minimum 3 octets (-2 for header)
+  SetLengthIndicator(
+      kAdditionalInformationMinimumLength -
+      2);  // Minimum length - 2 bytes for IEI/Length
 }
 
 //------------------------------------------------------------------------------
 AdditionalInformation::AdditionalInformation(const bstring& value) {
   value_ = bstrcpy(value);
-  SetLengthIndicator(blength(value));
+  SetLengthIndicator(
+      (blength(value) > (kAdditionalInformationMinimumLength - 2)) ?
+          blength(value) :
+          (kAdditionalInformationMinimumLength - 2));
 }
 
 //------------------------------------------------------------------------------
@@ -41,6 +46,10 @@ AdditionalInformation::~AdditionalInformation() {}
 //------------------------------------------------------------------------------
 void AdditionalInformation::SetValue(const bstring& value) {
   value_ = bstrcpy(value);
+  SetLengthIndicator(
+      (blength(value) > (kAdditionalInformationMinimumLength - 2)) ?
+          blength(value) :
+          (kAdditionalInformationMinimumLength - 2));
 }
 
 //------------------------------------------------------------------------------

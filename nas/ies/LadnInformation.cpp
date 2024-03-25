@@ -30,7 +30,9 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 LadnInformation::LadnInformation() : Type6NasIe(kIeiLadnInformation) {
-  SetLengthIndicator(0);
+  SetLengthIndicator(
+      kLadnInformationMinimumLength -
+      3);  // Minimum length - 3 bytes for IEI/Length
 }
 
 //------------------------------------------------------------------------------
@@ -39,14 +41,26 @@ LadnInformation::~LadnInformation() {}
 //------------------------------------------------------------------------------
 void LadnInformation::Set(const std::vector<Ladn>& value) {
   ladn_list_.assign(value.begin(), value.end());
+
+  int length   = 0;
+  uint8_t size = (value.size() > kLadnInformationMaximumSupportedLadns) ?
+                     kLadnInformationMaximumSupportedLadns :
+                     value.size();
+  for (int i = 0; i < size; i++) {
+    ladn_list_.push_back(value.at(i));
+    length += value.at(i).GetLength();
+  }
+  SetLengthIndicator(length);
 }
 
 //------------------------------------------------------------------------------
 void LadnInformation::Add(const Ladn& value) {
-  // TODO: Check maximum items  - 8
-  ladn_list_.push_back(value);
-  int ie_len = GetIeLength();
-  ie_len += value.GetLength();
+  if (ladn_list_.size() < kLadnInformationMaximumSupportedLadns) {
+    int ie_len = GetIeLength();
+    ladn_list_.push_back(value);
+    ie_len += value.GetLength();
+    SetLengthIndicator(ie_len);
+  }
 }
 
 //------------------------------------------------------------------------------

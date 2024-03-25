@@ -31,7 +31,9 @@ using namespace oai::nas;
 //------------------------------------------------------------------------------
 NasMessageContainer::NasMessageContainer()
     : Type6NasIe(kIeiNasMessageContainer), value_() {
-  SetLengthIndicator(0);
+  SetLengthIndicator(
+      kNasMessageContainerMinimumLength -
+      3);  // Minimum length - 3 bytes for IEI/Length
 }
 
 //------------------------------------------------------------------------------

@@ -28,7 +28,9 @@ using namespace oai::nas;
 //------------------------------------------------------------------------------
 SorTransparentContainer::SorTransparentContainer()
     : Type6NasIe(kIeiSorTransparentContainer), header_(), sor_mac_i_() {
-  SetLengthIndicator(kSorTransparentContainerIeMinimumLength);
+  SetLengthIndicator(
+      kSorTransparentContainerMinimumLength -
+      3);  // Minimum length - 3 bytes for IEI/Length
 }
 
 //------------------------------------------------------------------------------
@@ -39,7 +41,9 @@ SorTransparentContainer::SorTransparentContainer(
   for (int i = 0; i < 16; i++) {
     this->sor_mac_i_[i] = value[i];
   }
-  SetLengthIndicator(kSorTransparentContainerIeMinimumLength);
+  SetLengthIndicator(
+      kSorTransparentContainerMinimumLength -
+      3);  // Minimum length - 3 bytes for IEI/Length
 }
 
 //------------------------------------------------------------------------------

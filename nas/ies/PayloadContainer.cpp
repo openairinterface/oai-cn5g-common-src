@@ -31,21 +31,28 @@ using namespace oai::nas;
 PayloadContainer::PayloadContainer() : Type6NasIe() {
   content_  = std::nullopt;
   contents_ = std::nullopt;
-  SetLengthIndicator(0);
+  SetLengthIndicator(
+      kPayloadContainerMinimumLength -
+      3);  // Minimum length - 3 bytes for IEI/Length
 }
 
 //------------------------------------------------------------------------------
 PayloadContainer::PayloadContainer(uint8_t iei) : Type6NasIe(iei) {
   content_  = std::nullopt;
   contents_ = std::nullopt;
-  SetLengthIndicator(0);
+  SetLengthIndicator(
+      kPayloadContainerMinimumLength -
+      3);  // Minimum length - 3 bytes for IEI/Length
 }
 
 //------------------------------------------------------------------------------
 PayloadContainer::PayloadContainer(const bstring& b) : Type6NasIe() {
   content_  = std::optional<bstring>(b);
   contents_ = std::nullopt;
-  SetLengthIndicator(blength(b));
+  SetLengthIndicator(
+      (blength(b) > (kPayloadContainerMinimumLength - 3)) ?
+          blength(b) :
+          (kPayloadContainerMinimumLength - 3));
 }
 
 //------------------------------------------------------------------------------
@@ -53,7 +60,10 @@ PayloadContainer::PayloadContainer(uint8_t iei, const bstring& b)
     : Type6NasIe(iei) {
   content_  = std::optional<bstring>(b);
   contents_ = std::nullopt;
-  SetLengthIndicator(blength(b));
+  SetLengthIndicator(
+      (blength(b) > (kPayloadContainerMinimumLength - 3)) ?
+          blength(b) :
+          (kPayloadContainerMinimumLength - 3));
 }
 
 //------------------------------------------------------------------------------
@@ -63,8 +73,7 @@ PayloadContainer::PayloadContainer(
   content_ = std::nullopt;
 
   int length = 1;  // for number of entries
-  // contents_.assign(content_.begin(), content_.end());
-  contents_ = std::optional<std::vector<PayloadContainerEntry>>(contents);
+  contents_  = std::optional<std::vector<PayloadContainerEntry>>(contents);
   for (int i = 0; i < contents.size(); i++) {
     length = length + 2 +
              contents.at(i).length;  // 2 for Length of Payload container entry
@@ -79,8 +88,7 @@ PayloadContainer::PayloadContainer(
   content_ = std::nullopt;
 
   int length = 1;  // for number of entries
-  // contents_.assign(content_.begin(), content_.end());
-  contents_ = std::optional<std::vector<PayloadContainerEntry>>(contents);
+  contents_  = std::optional<std::vector<PayloadContainerEntry>>(contents);
   for (int i = 0; i < contents.size(); i++) {
     length = length + 2 +
              contents.at(i).length;  // 2 for Length of Payload container entry

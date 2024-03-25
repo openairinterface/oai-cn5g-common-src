@@ -35,7 +35,8 @@ PduSessionReactivationResultErrorCause::PduSessionReactivationResultErrorCause()
   std::pair<uint8_t, uint8_t> value = std::make_pair<uint8_t, uint8_t>(0, 0);
   pdu_session_id_cause_value_pair_.push_back(value);
   SetLengthIndicator(
-      2);  // Minimum length with 1 pair (PDU Session ID, Cause Value)
+      kPduSessionReactivationResultErrorCauseMinimumLength -
+      3);  // Minimum length - 3 bytes for IEI/Length
 }
 
 //------------------------------------------------------------------------------
@@ -45,7 +46,8 @@ PduSessionReactivationResultErrorCause::PduSessionReactivationResultErrorCause(
   std::pair<uint8_t, uint8_t> value = std::make_pair(session_id, cause);
   pdu_session_id_cause_value_pair_.push_back(value);
   SetLengthIndicator(
-      2);  // Minimum length with 1 pair (PDU Session ID, Cause Value)
+      kPduSessionReactivationResultErrorCauseMinimumLength -
+      3);  // Minimum length - 3 bytes for IEI/Length
 }
 
 //------------------------------------------------------------------------------

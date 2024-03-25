@@ -481,7 +481,7 @@ void _5gsMobileIdentity::SetSuciWithSupiImsi(
   supi_format_imsi_tmp.mcc         = mcc;
   supi_format_imsi_tmp.mnc         = mnc;
   supi_format_imsi_ = std::optional<SUCI_imsi_t>(supi_format_imsi_tmp);
-  SetLengthIndicator(8 + ceil(msin.length() / 2));
+  SetLengthIndicator(8 + ceil(supi_format_imsi_tmp.msin.length() / 2));
 }
 
 //------------------------------------------------------------------------------

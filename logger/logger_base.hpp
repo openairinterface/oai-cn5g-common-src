@@ -43,7 +43,7 @@ namespace oai::logger {
 
 class printf_logger {
 private:
-  bool m_isLTTngActive{false};
+  bool m_is_lttng_active{false};
   std::shared_ptr<spd_logger> m_spd_logger{nullptr};
   std::shared_ptr<lttng_logger> m_lttng_logger{nullptr};
 
@@ -51,8 +51,8 @@ public:
   explicit printf_logger(const std::string &nf_name,
                          const std::string &category, bool log_stdout,
                          bool log_rot_file, bool isLTTngActive)
-      : m_isLTTngActive(isLTTngActive) {
-    if (m_isLTTngActive) {
+      : m_is_lttng_active(isLTTngActive) {
+    if (m_is_lttng_active) {
       m_lttng_logger = std::make_shared<lttng_logger>(nf_name, category,
                                                       log_stdout, log_rot_file);
     } else {
@@ -62,7 +62,7 @@ public:
   }
 
   bool should_log(spdlog::level::level_enum level) {
-    if (m_isLTTngActive) {
+    if (m_is_lttng_active) {
       return m_lttng_logger->should_log(level);
     } else {
       return m_spd_logger->should_log(level);
@@ -70,7 +70,7 @@ public:
   }
 
   void set_level(spdlog::level::level_enum level) {
-    if (m_isLTTngActive) {
+    if (m_is_lttng_active) {
       m_lttng_logger->set_level(level);
     } else {
       m_spd_logger->set_level(level);
@@ -79,14 +79,14 @@ public:
 
   template <typename... T>
   void trace(const std::string &fmt, const T &...args) const {
-    if (m_isLTTngActive)
+    if (m_is_lttng_active)
       m_lttng_logger->log_printf(spdlog::level::trace, fmt, args...);
     else
       m_spd_logger->log_printf(spdlog::level::trace, fmt, args...);
   }
 
   template <typename... T> void trace(const char *fmt, const T &...args) const {
-    if (m_isLTTngActive)
+    if (m_is_lttng_active)
       m_lttng_logger->log_printf(spdlog::level::trace, fmt, args...);
     else
       m_spd_logger->log_printf(spdlog::level::trace, fmt, args...);
@@ -94,14 +94,14 @@ public:
 
   template <typename... T>
   void debug(const std::string &fmt, const T &...args) const {
-    if (m_isLTTngActive)
+    if (m_is_lttng_active)
       m_lttng_logger->log_printf(spdlog::level::debug, fmt, args...);
     else
       m_spd_logger->log_printf(spdlog::level::debug, fmt, args...);
   }
 
   template <typename... T> void debug(const char *fmt, const T &...args) const {
-    if (m_isLTTngActive)
+    if (m_is_lttng_active)
       m_lttng_logger->log_printf(spdlog::level::debug, fmt, args...);
     else
       m_spd_logger->log_printf(spdlog::level::debug, fmt, args...);
@@ -109,14 +109,14 @@ public:
 
   template <typename... T>
   void info(const std::string &fmt, const T &...args) const {
-    if (m_isLTTngActive)
+    if (m_is_lttng_active)
       m_lttng_logger->log_printf(spdlog::level::info, fmt, args...);
     else
       m_spd_logger->log_printf(spdlog::level::info, fmt, args...);
   }
 
   template <typename... T> void info(const char *fmt, const T &...args) const {
-    if (m_isLTTngActive)
+    if (m_is_lttng_active)
       m_lttng_logger->log_printf(spdlog::level::info, fmt, args...);
     else
       m_spd_logger->log_printf(spdlog::level::info, fmt, args...);
@@ -124,7 +124,7 @@ public:
 
   template <typename... T>
   void startup(const std::string &fmt, const T &...args) const {
-    if (m_isLTTngActive)
+    if (m_is_lttng_active)
       m_lttng_logger->log_printf(spdlog::level::warn, fmt, args...);
     else
       m_spd_logger->log_printf(spdlog::level::warn, fmt, args...);
@@ -132,7 +132,7 @@ public:
 
   template <typename... T>
   void startup(const char *fmt, const T &...args) const {
-    if (m_isLTTngActive)
+    if (m_is_lttng_active)
       m_lttng_logger->log_printf(spdlog::level::warn, fmt, args...);
     else
       m_spd_logger->log_printf(spdlog::level::warn, fmt, args...);
@@ -140,14 +140,14 @@ public:
 
   template <typename... T>
   void warn(const std::string &fmt, const T &...args) const {
-    if (m_isLTTngActive)
+    if (m_is_lttng_active)
       m_lttng_logger->log_printf(spdlog::level::err, fmt, args...);
     else
       m_spd_logger->log_printf(spdlog::level::err, fmt, args...);
   }
 
   template <typename... T> void warn(const char *fmt, const T &...args) const {
-    if (m_isLTTngActive)
+    if (m_is_lttng_active)
       m_lttng_logger->log_printf(spdlog::level::err, fmt, args...);
     else
       m_spd_logger->log_printf(spdlog::level::err, fmt, args...);
@@ -155,14 +155,14 @@ public:
 
   template <typename... T>
   void error(const std::string &fmt, const T &...args) const {
-    if (m_isLTTngActive)
+    if (m_is_lttng_active)
       m_lttng_logger->log_printf(spdlog::level::critical, fmt, args...);
     else
       m_spd_logger->log_printf(spdlog::level::critical, fmt, args...);
   }
 
   template <typename... T> void error(const char *fmt, const T &...args) const {
-    if (m_isLTTngActive)
+    if (m_is_lttng_active)
       m_lttng_logger->log_printf(spdlog::level::trace, fmt, args...);
     else
       m_spd_logger->log_printf(spdlog::level::trace, fmt, args...);
@@ -179,7 +179,7 @@ class logger_registry {
   static void set_level(spdlog::level::level_enum level);
   static void set_lttng_is_active(bool isActive) {
 #ifdef LOGGER_CAN_USE_LTTNG
-    m_isLTTngActive = isActive;
+    m_is_lttng_active = isActive;
 #endif
   }
   static bool should_log(spdlog::level::level_enum level) {
@@ -192,7 +192,7 @@ class logger_registry {
 
  private:
   static std::unordered_map<std::string, printf_logger> logger_map;
-  static bool m_isLTTngActive;
+  static bool m_is_lttng_active;
 };
 
 class logger_common {

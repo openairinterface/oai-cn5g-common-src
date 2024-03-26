@@ -32,7 +32,7 @@ error, trace, debug, and startup.
 
 #endif /* _NF_TP_H */
 
-#include <lttng/tracelog.h>
 #include <lttng/tracepoint-event.h>
+#include <lttng/tracelog.h>
 
 #endif /* LOGGER_CAN_USE_LTTNG */

@@ -50,8 +50,4 @@ private:
   std::string m_event{};
 };
 
-<<<<<<< HEAD
 } // namespace oai::logger
-=======
-} // namespace oai::logger
->>>>>>> 2fbe645 (chore(ci): proper formatting post-develop merge and adding compilation flag as discussed during F2F)

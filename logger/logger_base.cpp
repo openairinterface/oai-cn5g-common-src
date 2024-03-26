@@ -39,7 +39,7 @@
 using namespace oai::logger;
 
 std::unordered_map<std::string, printf_logger> logger_registry::logger_map;
-bool logger_registry::m_isLTTngActive{false};
+bool logger_registry::m_is_lttng_active{false};
 
 void logger_registry::register_logger(
     const std::string& nf_name, const std::string& logger_name, bool log_stdout,
@@ -51,7 +51,7 @@ void logger_registry::register_logger(
   auto lock = std::unique_lock(mutex);
 
   auto logger = printf_logger(nf_name, logger_name, log_stdout, log_rot_file,
-                              m_isLTTngActive);
+                              m_is_lttng_active);
 
   logger_map.insert(std::make_pair<>(logger_name, logger));
 }

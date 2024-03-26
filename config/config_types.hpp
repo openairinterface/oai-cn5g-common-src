@@ -294,9 +294,6 @@ public:
   void from_yaml(const YAML::Node &node) override;
   bool is_lttng_active() const;
   std::string get_lttng_log_level();
-  // Unused functions at the moment
-  nlohmann::json to_json() override;
-  bool from_json(const nlohmann::json &json_data) override;
   [[nodiscard]] std::string to_string(const std::string &indent) const override;
   void validate() override;
 };

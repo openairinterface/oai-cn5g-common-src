@@ -39,7 +39,7 @@ class _5gmmCapability : public Type4NasIe {
   void SetOctet3(uint8_t iei, uint8_t octet3);
   uint8_t GetOctet3() const;
 
-  int Encode(uint8_t* buf, int len);
+  int Encode(uint8_t* buf, const int& len) override;
   int Decode(uint8_t* buf, int len, bool is_iei = true);
 
   static std::string GetIeName() { return k5gmmCapabilityIeName; }

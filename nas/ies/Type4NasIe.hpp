@@ -48,7 +48,7 @@ class Type4NasIe : public NasIe {
   int Encode(uint8_t* buf, const int& len) override;
   int Encode(
       uint8_t* buf, const int& len,
-      int& len_pos);  // Use this function to encode IE lengh later
+      int& len_pos);  // Use this function to encode IE length later
   int Decode(
       const uint8_t* const buf, const int& len, bool is_iei = false) override;
 

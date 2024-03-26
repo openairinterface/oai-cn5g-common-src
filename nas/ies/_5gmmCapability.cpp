@@ -61,7 +61,7 @@ uint8_t _5gmmCapability::GetOctet3() const {
 }
 
 //------------------------------------------------------------------------------
-int _5gmmCapability::Encode(uint8_t* buf, int len) {
+int _5gmmCapability::Encode(uint8_t* buf, const int& len) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
   int ie_len = GetIeLength();

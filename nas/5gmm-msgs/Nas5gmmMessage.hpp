@@ -39,6 +39,8 @@ class Nas5gmmMessage {
   virtual int Encode(uint8_t* buf, int len) = 0;
   virtual int Decode(uint8_t* buf, int len) = 0;
 
+  virtual void SetHeader(uint8_t security_header_type) = 0;
+
   void SetMessageName(const std::string& name);
   std::string GetMessageName() const;
   void GetMessageName(std::string& name) const;

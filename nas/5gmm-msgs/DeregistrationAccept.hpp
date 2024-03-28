@@ -31,8 +31,8 @@ class DeregistrationAccept : public Nas5gmmMessage {
   DeregistrationAccept(bool is_ue_originating = true);
   ~DeregistrationAccept();
 
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len);
+  int Encode(uint8_t* buf, int len) override;
+  int Decode(uint8_t* buf, int len) override;
 
   uint32_t GetLength() const override;
 

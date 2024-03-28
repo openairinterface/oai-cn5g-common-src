@@ -31,8 +31,8 @@ class AuthenticationResult : public Nas5gmmMessage {
   AuthenticationResult();
   ~AuthenticationResult();
 
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len);
+  int Encode(uint8_t* buf, int len) override;
+  int Decode(uint8_t* buf, int len) override;
 
   uint32_t GetLength() const override;
 

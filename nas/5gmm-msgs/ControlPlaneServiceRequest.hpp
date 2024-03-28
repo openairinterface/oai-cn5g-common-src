@@ -36,8 +36,8 @@ class ControlPlaneServiceRequest : public Nas5gmmMessage {
 
   void SetHeader(uint8_t security_header_type);
 
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len);
+  int Encode(uint8_t* buf, int len) override;
+  int Decode(uint8_t* buf, int len) override;
 
   void SetControlPlaneServiceType(uint8_t value);
   void GetControlPlaneServiceType(uint8_t& value) const;

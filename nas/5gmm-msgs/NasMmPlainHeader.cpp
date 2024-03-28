@@ -39,6 +39,7 @@ NasMmPlainHeader::NasMmPlainHeader(uint8_t epd, uint8_t msg_type)
 NasMmPlainHeader::NasMmPlainHeader(
     uint8_t epd, uint8_t security_header_type, uint8_t msg_type)
     : epd_(epd), secu_header_type_(security_header_type), msg_type_(msg_type) {}
+
 //------------------------------------------------------------------------------
 NasMmPlainHeader::~NasMmPlainHeader() {}
 

@@ -34,6 +34,12 @@ SecurityHeaderType::SecurityHeaderType() : NasIe() {
 }
 
 //------------------------------------------------------------------------------
+SecurityHeaderType::SecurityHeaderType(uint8_t secu_header_type) : NasIe() {
+  spare_            = 0;
+  secu_header_type_ = 0x0f & secu_header_type;
+}
+
+//------------------------------------------------------------------------------
 SecurityHeaderType::~SecurityHeaderType() {}
 
 //------------------------------------------------------------------------------

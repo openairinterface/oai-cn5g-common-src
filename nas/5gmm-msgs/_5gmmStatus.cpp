@@ -27,7 +27,8 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 _5gmmStatus::_5gmmStatus()
-    : ie_header_(k5gsMobilityManagementMessages, k5gmmStatus) {}
+    : ie_header_(
+          k5gsMobilityManagementMessages, kPlain5gsMessage, k5gmmStatus) {}
 
 //------------------------------------------------------------------------------
 _5gmmStatus::~_5gmmStatus() {}

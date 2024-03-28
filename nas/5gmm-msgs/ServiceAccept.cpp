@@ -27,7 +27,8 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 ServiceAccept::ServiceAccept()
-    : ie_header_(k5gsMobilityManagementMessages, kServiceAccept) {
+    : ie_header_(
+          k5gsMobilityManagementMessages, kPlain5gsMessage, kServiceAccept) {
   ie_pdu_session_status_                          = std::nullopt;
   ie_pdu_session_reactivation_result_             = std::nullopt;
   ie_pdu_session_reactivation_result_error_cause_ = std::nullopt;

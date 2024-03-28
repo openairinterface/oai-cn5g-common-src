@@ -27,7 +27,9 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 RegistrationAccept::RegistrationAccept()
-    : ie_header_(k5gsMobilityManagementMessages, kRegistrationAccept) {
+    : ie_header_(
+          k5gsMobilityManagementMessages, kPlain5gsMessage,
+          kRegistrationAccept) {
   ie_5g_guti_                                     = std::nullopt;
   ie_equivalent_plmns_                            = std::nullopt;
   ie_allowed_nssai_                               = std::nullopt;

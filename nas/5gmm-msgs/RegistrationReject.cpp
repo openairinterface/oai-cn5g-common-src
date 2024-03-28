@@ -27,7 +27,9 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 RegistrationReject::RegistrationReject()
-    : ie_header_(k5gsMobilityManagementMessages, kRegistrationReject) {
+    : ie_header_(
+          k5gsMobilityManagementMessages, kPlain5gsMessage,
+          kRegistrationReject) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Initiating RegistrationReject");
   ie_t3346_value_    = std::nullopt;

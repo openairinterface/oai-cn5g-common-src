@@ -28,7 +28,8 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 DlNasTransport::DlNasTransport()
-    : ie_header_(k5gsMobilityManagementMessages, kDlNasTransport) {
+    : ie_header_(
+          k5gsMobilityManagementMessages, kPlain5gsMessage, kDlNasTransport) {
   ie_pdu_session_identity_2_ = std::nullopt;
   ie_additional_information_ = std::nullopt;
   ie_5gmm_cause_             = std::nullopt;

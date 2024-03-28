@@ -27,7 +27,9 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 RegistrationComplete::RegistrationComplete()
-    : ie_header_(k5gsMobilityManagementMessages, kRegistrationComplete) {
+    : ie_header_(
+          k5gsMobilityManagementMessages, kPlain5gsMessage,
+          kRegistrationComplete) {
   ie_sor_transparent_container_ = std::nullopt;
 }
 

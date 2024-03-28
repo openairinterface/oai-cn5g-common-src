@@ -27,7 +27,9 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 AuthenticationResult::AuthenticationResult()
-    : ie_header_(k5gsMobilityManagementMessages, kAuthenticationResult) {
+    : ie_header_(
+          k5gsMobilityManagementMessages, kPlain5gsMessage,
+          kAuthenticationResult) {
   ie_abba_ = std::nullopt;
 }
 

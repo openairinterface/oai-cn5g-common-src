@@ -27,7 +27,8 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 ControlPlaneServiceRequest::ControlPlaneServiceRequest()
-    : ie_header_(k5gsMobilityManagementMessages, kServiceRequest) {
+    : ie_header_(
+          k5gsMobilityManagementMessages, kPlain5gsMessage, kServiceRequest) {
   ie_pdu_session_status_    = std::nullopt;
   ie_uplink_data_status_    = std::nullopt;
   ie_nas_message_container_ = std::nullopt;

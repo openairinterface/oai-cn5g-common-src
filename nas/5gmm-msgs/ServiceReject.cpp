@@ -27,7 +27,8 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 ServiceReject::ServiceReject()
-    : ie_header_(k5gsMobilityManagementMessages, kServiceReject) {
+    : ie_header_(
+          k5gsMobilityManagementMessages, kPlain5gsMessage, kServiceReject) {
   ie_pdu_session_status_ = std::nullopt;
   ie_t3346_value_        = std::nullopt;
   ie_eap_message_        = std::nullopt;

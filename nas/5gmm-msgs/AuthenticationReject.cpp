@@ -27,7 +27,9 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 AuthenticationReject::AuthenticationReject()
-    : ie_header_(k5gsMobilityManagementMessages, kAuthenticationReject) {
+    : ie_header_(
+          k5gsMobilityManagementMessages, kPlain5gsMessage,
+          kAuthenticationReject) {
   ie_eap_message_ = std::nullopt;
 }
 

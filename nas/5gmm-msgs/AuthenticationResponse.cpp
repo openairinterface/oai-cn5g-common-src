@@ -27,7 +27,9 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 AuthenticationResponse::AuthenticationResponse()
-    : ie_header_(k5gsMobilityManagementMessages, kAuthenticationResponse) {
+    : ie_header_(
+          k5gsMobilityManagementMessages, kPlain5gsMessage,
+          kAuthenticationResponse) {
   ie_authentication_response_parameter_ = std::nullopt;
   ie_eap_message_                       = std::nullopt;
 }

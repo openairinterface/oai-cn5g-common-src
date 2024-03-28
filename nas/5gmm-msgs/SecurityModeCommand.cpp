@@ -27,7 +27,9 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 SecurityModeCommand::SecurityModeCommand()
-    : ie_header_(k5gsMobilityManagementMessages, kSecurityModeCommand) {
+    : ie_header_(
+          k5gsMobilityManagementMessages, kPlain5gsMessage,
+          kSecurityModeCommand) {
   ie_imeisv_request_                     = std::nullopt;
   ie_eps_nas_security_algorithms_        = std::nullopt;
   ie_additional_5g_security_information_ = std::nullopt;

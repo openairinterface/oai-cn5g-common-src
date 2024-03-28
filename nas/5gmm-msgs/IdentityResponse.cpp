@@ -27,7 +27,9 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 IdentityResponse::IdentityResponse()
-    : ie_header_(k5gsMobilityManagementMessages, kIdentityResponse) {}
+    : ie_header_(
+          k5gsMobilityManagementMessages, kPlain5gsMessage, kIdentityResponse) {
+}
 
 //------------------------------------------------------------------------------
 IdentityResponse::~IdentityResponse() {}

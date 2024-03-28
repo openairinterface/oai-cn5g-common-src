@@ -27,7 +27,9 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 ConfigurationUpdateCommand::ConfigurationUpdateCommand()
-    : ie_header_(k5gsMobilityManagementMessages, kConfigurationUpdateCommand) {
+    : ie_header_(
+          k5gsMobilityManagementMessages, kPlain5gsMessage,
+          kConfigurationUpdateCommand) {
   ie_configuration_update_indication_ = std::nullopt;
   ie_5g_guti_                         = std::nullopt;
   ie_full_name_for_network_           = std::nullopt;

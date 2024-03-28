@@ -37,6 +37,7 @@ class NasMmPlainHeader : public Nas5gmmMessage {
   NasMmPlainHeader() : Nas5gmmMessage(){};
   NasMmPlainHeader(uint8_t epd);
   NasMmPlainHeader(uint8_t epd, uint8_t msg_type);
+  NasMmPlainHeader(uint8_t epd, uint8_t security_header_type, uint8_t msg_type);
   virtual ~NasMmPlainHeader();
 
   void SetHeader(uint8_t epd, uint8_t security_header_type, uint8_t msg_type);

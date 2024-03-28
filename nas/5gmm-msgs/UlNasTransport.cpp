@@ -27,7 +27,8 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 UlNasTransport::UlNasTransport()
-    : ie_header_(k5gsMobilityManagementMessages, kUlNasTransport) {
+    : ie_header_(
+          k5gsMobilityManagementMessages, kPlain5gsMessage, kUlNasTransport) {
   ie_pdu_session_id_                = std::nullopt;
   ie_old_pdu_session_id_            = std::nullopt;
   ie_request_type_                  = std::nullopt;

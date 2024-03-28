@@ -27,7 +27,9 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 SecurityModeReject::SecurityModeReject()
-    : ie_header_(k5gsMobilityManagementMessages, kSecurityModeReject) {}
+    : ie_header_(
+          k5gsMobilityManagementMessages, kPlain5gsMessage,
+          kSecurityModeReject) {}
 
 //------------------------------------------------------------------------------
 SecurityModeReject::~SecurityModeReject() {}

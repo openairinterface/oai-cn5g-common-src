@@ -27,7 +27,9 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 AuthenticationFailure::AuthenticationFailure()
-    : ie_header_(k5gsMobilityManagementMessages, kAuthenticationFailure) {
+    : ie_header_(
+          k5gsMobilityManagementMessages, kPlain5gsMessage,
+          kAuthenticationFailure) {
   ie_authentication_failure_parameter_ = std::nullopt;
 }
 

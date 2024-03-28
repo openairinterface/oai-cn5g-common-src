@@ -28,9 +28,9 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 DeregistrationRequestUeTerminated::DeregistrationRequestUeTerminated()
-    : ie_header_(k5gsMobilityManagementMessages) {
-  ie_header_.SetMessageType(kDeregistrationRequestUeTerminated);
-}
+    : ie_header_(
+          k5gsMobilityManagementMessages, kPlain5gsMessage,
+          kDeregistrationRequestUeTerminated) {}
 
 //------------------------------------------------------------------------------
 DeregistrationRequestUeTerminated::~DeregistrationRequestUeTerminated() {}

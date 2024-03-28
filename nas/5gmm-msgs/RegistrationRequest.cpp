@@ -29,7 +29,9 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 RegistrationRequest::RegistrationRequest()
-    : ie_header_(k5gsMobilityManagementMessages, kRegistrationRequest) {
+    : ie_header_(
+          k5gsMobilityManagementMessages, kPlain5gsMessage,
+          kRegistrationRequest) {
   ie_non_current_native_nas_ksi_  = std::nullopt;
   ie_5g_mm_capability_            = std::nullopt;
   ie_ue_security_capability_      = std::nullopt;

@@ -31,6 +31,7 @@ namespace oai::nas {
 
 class SecurityHeaderType : public NasIe {
  public:
+  SecurityHeaderType(uint8_t secu_header_type);
   SecurityHeaderType();
   virtual ~SecurityHeaderType();
 

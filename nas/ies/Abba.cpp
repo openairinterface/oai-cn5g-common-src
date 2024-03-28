@@ -28,14 +28,12 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 Abba::Abba() : Type4NasIe(), value_() {
-  SetLengthIndicator(
-      kAbbaMinimumLength - 2);  // Minimum length - 2 bytes for IEI/Length
+  SetLengthIndicator(kAbbaContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
 Abba::Abba(uint8_t iei) : Type4NasIe(iei), value_() {
-  SetLengthIndicator(
-      kAbbaMinimumLength - 2);  // Minimum length - 2 bytes for IEI/Length
+  SetLengthIndicator(kAbbaContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -44,7 +42,8 @@ Abba::Abba(uint8_t length, uint8_t* value) : Type4NasIe() {
     this->value_[i] = value[i];
   }
   SetLengthIndicator(
-      (length > (kAbbaMinimumLength - 2)) ? length : (kAbbaMinimumLength - 2));
+      (length > kAbbaContentMinimumLength) ? length :
+                                             kAbbaContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -53,7 +52,8 @@ Abba::Abba(uint8_t iei, uint8_t length, uint8_t* value) : Type4NasIe(iei) {
     this->value_[i] = value[i];
   }
   SetLengthIndicator(
-      (length > (kAbbaMinimumLength - 2)) ? length : (kAbbaMinimumLength - 2));
+      (length > kAbbaContentMinimumLength) ? length :
+                                             kAbbaContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -65,7 +65,8 @@ void Abba::Set(uint8_t length, const uint8_t* value) {
     this->value_[i] = value[i];
   }
   SetLengthIndicator(
-      (length > (kAbbaMinimumLength - 2)) ? length : (kAbbaMinimumLength - 2));
+      (length > kAbbaContentMinimumLength) ? length :
+                                             kAbbaContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -75,23 +76,17 @@ void Abba::Set(uint8_t iei, uint8_t length, const uint8_t* value) {
     this->value_[i] = value[i];
   }
   SetLengthIndicator(
-      (length > (kAbbaMinimumLength - 2)) ? length : (kAbbaMinimumLength - 2));
+      (length > kAbbaContentMinimumLength) ? length :
+                                             kAbbaContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
 int Abba::Encode(uint8_t* buf, int len) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
-  int ie_len = GetIeLength();
-
-  if (len < ie_len) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Len is less than %d", ie_len);
-    return KEncodeDecodeError;
-  }
 
   int encoded_size = 0;
-  // IEI and Length
+  // Validate the buffer's length and Encode IEI/Length
   int encoded_header_size = Type4NasIe::Encode(buf + encoded_size, len);
   if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   encoded_size += encoded_header_size;

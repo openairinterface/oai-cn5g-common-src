@@ -27,6 +27,9 @@
 #include "Type4NasIe.hpp"
 
 constexpr uint8_t kRejectedNssaiMinimumLength = 4;
+constexpr uint8_t kRejectedNssaiContentMinimumLength =
+    kRejectedNssaiMinimumLength -
+    2;  // Minimum length - 2 octets for IEI/Length
 constexpr uint8_t kRejectedNssaiMaximumLength = 42;
 constexpr auto kRejectedNssaiIeName           = "Rejected NSSAI";
 

@@ -25,6 +25,9 @@
 #include "Type4NasIe.hpp"
 
 constexpr uint8_t k5gmmCapabilityMinimumLength = 3;
+constexpr uint8_t k5gmmCapabilityContentMinimumLength =
+    k5gmmCapabilityMinimumLength -
+    2;  // Minimum length - 2 octets for IEI/Length
 constexpr uint8_t k5gmmCapabilityMaximumLength = 15;
 constexpr auto k5gmmCapabilityIeName           = "5GMM Capability";
 
@@ -48,6 +51,7 @@ class _5gmmCapability : public Type4NasIe {
   uint8_t octet3_;  // minimum length of 3 octets
   std::optional<uint8_t> octet4_;
   std::optional<uint8_t> octet5_;
+  // TODO: octets 6-15
 };
 
 }  // namespace oai::nas

@@ -25,7 +25,9 @@
 #include "Type4NasIe.hpp"
 
 constexpr uint8_t k5gsUpdateTypeLength = 3;
-constexpr auto k5gsUpdateTypeIeName    = "5GS Update Type";
+constexpr uint8_t k5gsUpdateTypeContentLength =
+    k5gsUpdateTypeLength - 2;  // Minimum length - 2 octets for IEI/Length
+constexpr auto k5gsUpdateTypeIeName = "5GS Update Type";
 
 namespace oai::nas {
 

@@ -30,7 +30,9 @@
 #include "bstrlib.h"
 
 constexpr uint8_t kNetworkNameMinimumLength = 3;
-constexpr auto kNetworkNameIeName           = "Network Name";
+constexpr uint8_t kNetworkNameContentMinimumLength =
+    kNetworkNameMinimumLength - 2;  // Minimum length - 2 octets for IEI/Length
+constexpr auto kNetworkNameIeName = "Network Name";
 
 namespace oai::nas {
 

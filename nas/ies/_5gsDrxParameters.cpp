@@ -32,13 +32,13 @@ using namespace oai::nas;
 _5gsDrxParameters::_5gsDrxParameters(uint8_t value)
     : Type4NasIe(kIei5gsDrxParameters) {
   value_ = value & 0x0F;
-  SetLengthIndicator(1);
+  SetLengthIndicator(k5gsDrxParametersContentLength);
 }
 
 //------------------------------------------------------------------------------
 _5gsDrxParameters::_5gsDrxParameters() {
   value_ = 0;
-  SetLengthIndicator(1);
+  SetLengthIndicator(k5gsDrxParametersContentLength);
 }
 _5gsDrxParameters::~_5gsDrxParameters() {}
 
@@ -57,17 +57,8 @@ int _5gsDrxParameters::Encode(uint8_t* buf, int len) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
-  if (len < k5gsDrxParametersLength) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this IE (%d "
-            "octet)",
-            k5gsDrxParametersLength);
-    return KEncodeDecodeError;
-  }
-
   int encoded_size = 0;
-  // IEI and Length
+  // Validate the buffer's length and Encode IEI/Length
   int encoded_header_size = Type4NasIe::Encode(buf + encoded_size, len);
   if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   encoded_size += encoded_header_size;

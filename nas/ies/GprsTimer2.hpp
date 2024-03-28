@@ -25,7 +25,9 @@
 #include "Type4NasIe.hpp"
 
 constexpr uint8_t kGprsTimer2Length = 3;
-constexpr auto kGprsTimer2IeName    = "GPRS Timer 2";
+constexpr uint8_t kGprsTimer2ContentLength =
+    kGprsTimer2Length - 2;  // Length - 2 octets for IEI/Length
+constexpr auto kGprsTimer2IeName = "GPRS Timer 2";
 
 namespace oai::nas {
 

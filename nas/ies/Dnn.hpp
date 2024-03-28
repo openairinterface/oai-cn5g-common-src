@@ -25,6 +25,8 @@
 #include "Type4NasIe.hpp"
 
 constexpr uint8_t kDnnMinimumLength = 3;
+constexpr uint8_t kDnnContentMinimumLength =
+    kDnnMinimumLength - 2;  // Minimum length - 2 octets for IEI/Length
 constexpr uint8_t kDnnMaximumLength = 102;
 constexpr auto kDnnIeName           = "DNN";
 

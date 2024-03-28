@@ -26,6 +26,8 @@
 #include "Type4NasIe.hpp"
 
 constexpr uint8_t kPlmnListMinimumLength = 5;
+constexpr uint8_t kPlmnListContentMinimumLength =
+    kPlmnListMinimumLength - 2;  // Minimum length - 2 octets for IEI/Length
 constexpr uint8_t kPlmnListMaximumLength = 47;
 constexpr auto kPlmnListIeName           = "PLMN List";
 

@@ -34,7 +34,7 @@ _5gmmCapability::_5gmmCapability(uint8_t iei, uint8_t octet3)
   octet3_ = octet3;
   octet4_ = std::nullopt;
   octet5_ = std::nullopt;
-  SetLengthIndicator(1);
+  SetLengthIndicator(k5gmmCapabilityContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -42,7 +42,7 @@ _5gmmCapability::_5gmmCapability() : Type4NasIe(kIei5gmmCapability) {
   octet3_ = 0;
   octet4_ = std::nullopt;
   octet5_ = std::nullopt;
-  SetLengthIndicator(1);
+  SetLengthIndicator(k5gmmCapabilityContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -51,7 +51,7 @@ _5gmmCapability::~_5gmmCapability() {}
 //------------------------------------------------------------------------------
 void _5gmmCapability::SetOctet3(uint8_t iei, uint8_t octet3) {
   SetIei(iei);
-  SetLengthIndicator(1);
+  SetLengthIndicator(k5gmmCapabilityContentMinimumLength);
   octet3_ = octet3;
 }
 
@@ -66,14 +66,8 @@ int _5gmmCapability::Encode(uint8_t* buf, const int& len) {
       .debug("Encoding %s", GetIeName().c_str());
   int ie_len = GetIeLength();
 
-  if (len < ie_len) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Len is less than %d", ie_len);
-    return KEncodeDecodeError;
-  }
-
   int encoded_size = 0;
-  // IEI and Length
+  // Validate the buffer's length and Encode IEI/Length
   int encoded_header_size = Type4NasIe::Encode(buf + encoded_size, len);
   if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   encoded_size += encoded_header_size;

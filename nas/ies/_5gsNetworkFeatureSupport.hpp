@@ -25,6 +25,9 @@
 #include "Type4NasIe.hpp"
 
 constexpr uint8_t k5gsNetworkFeatureSupportMinimumLength = 3;
+constexpr uint8_t k5gsNetworkFeatureSupportContentMinimumLength =
+    k5gsNetworkFeatureSupportMinimumLength -
+    2;  // Minimum length - 2 octets for IEI/Length
 constexpr uint8_t k5gsNetworkFeatureSupportMaximumLength = 5;
 constexpr auto k5gsNetworkFeatureSupportIeName = "5GS Network Feature Support";
 

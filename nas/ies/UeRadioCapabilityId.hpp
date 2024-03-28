@@ -25,7 +25,10 @@
 #include "Type4NasIe.hpp"
 
 constexpr uint8_t kUeRadioCapabilityIdMinimumLength = 4;
-constexpr auto kUeRadioCapabilityIdIeName           = "UE Radio Capability ID";
+constexpr uint8_t kUeRadioCapabilityIdContentMinimumLength =
+    kUeRadioCapabilityIdMinimumLength -
+    2;  // Minimum length - 2 octets for IEI/Length
+constexpr auto kUeRadioCapabilityIdIeName = "UE Radio Capability ID";
 
 namespace oai::nas {
 

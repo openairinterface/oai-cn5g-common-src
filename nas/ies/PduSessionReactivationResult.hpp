@@ -24,6 +24,9 @@
 #include "Type4NasIe.hpp"
 
 constexpr uint8_t kPduSessionReactivationResultMinimumLength = 4;
+constexpr uint8_t kPduSessionReactivationResultContentMinimumLength =
+    kPduSessionReactivationResultMinimumLength -
+    2;  // Minimum length - 2 octets for IEI/Length
 constexpr uint8_t kPduSessionReactivationResultMaximumLength = 34;
 constexpr auto kPduSessionReactivationResultIeName =
     "PDU Session Reactivation Result";

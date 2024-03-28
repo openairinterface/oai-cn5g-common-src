@@ -27,7 +27,10 @@
 #include "Struct.hpp"
 #include "Type4NasIe.hpp"
 
-constexpr uint8_t kServiceAreaListMinimumLength        = 6;
+constexpr uint8_t kServiceAreaListMinimumLength = 6;
+constexpr uint8_t kServiceAreaListContentMinimumLength =
+    kServiceAreaListMinimumLength -
+    2;  // Minimum length - 2 octets for IEI/Length
 constexpr uint8_t kServiceAreaListMaximumLength        = 114;
 constexpr uint8_t kServiceAreaListMaximumSupportedTAIs = 16;
 constexpr auto kServiceAreaListIeName                  = "Service Area List";

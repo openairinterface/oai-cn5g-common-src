@@ -32,16 +32,14 @@ using namespace oai::nas;
 UeStatus::UeStatus() : Type4NasIe(kIeiUeStatus) {
   s1_ = false;
   n1_ = false;
-  SetLengthIndicator(
-      kUeStatusIeLength - 2);  // Minimum length - 2 bytes for IEI/Length
+  SetLengthIndicator(kUeStatusIeContentLength);
 }
 
 //------------------------------------------------------------------------------
 UeStatus::UeStatus(bool n1, bool s1) : Type4NasIe(kIeiUeStatus) {
   s1_ = s1;
   n1_ = n1;
-  SetLengthIndicator(
-      kUeStatusIeLength - 2);  // Minimum length - 2 bytes for IEI/Length
+  SetLengthIndicator(kUeStatusIeContentLength);
 }
 
 //------------------------------------------------------------------------------
@@ -71,18 +69,9 @@ bool UeStatus::GetN1() const {
 int UeStatus::Encode(uint8_t* buf, int len) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
-  int ie_len = GetIeLength();
-
-  if (len < ie_len) {  // Length of the content + IEI/Len
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Size of the buffer is not enough to store this IE (IE len %d)",
-            ie_len);
-    return KEncodeDecodeError;
-  }
 
   int encoded_size = 0;
-  // IEI and Length
+  // Validate the buffer's length and Encode IEI/Length
   int encoded_header_size = Type4NasIe::Encode(buf + encoded_size, len);
   if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   encoded_size += encoded_header_size;

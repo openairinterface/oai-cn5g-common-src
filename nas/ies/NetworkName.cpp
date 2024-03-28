@@ -40,9 +40,7 @@ NetworkName::NetworkName() : Type4NasIe() {
   add_ci_               = false;
   number_of_spare_bits_ = 0;
   text_string_          = nullptr;
-  SetLengthIndicator(
-      kNetworkNameMinimumLength -
-      2);  // Minimum length - 2 bytes for IEI/Length
+  SetLengthIndicator(kNetworkNameContentMinimumLength);
 }
 //------------------------------------------------------------------------------
 NetworkName::NetworkName(uint8_t iei) : Type4NasIe(iei) {
@@ -50,9 +48,7 @@ NetworkName::NetworkName(uint8_t iei) : Type4NasIe(iei) {
   add_ci_               = false;
   number_of_spare_bits_ = 0;
   text_string_          = nullptr;
-  SetLengthIndicator(
-      kNetworkNameMinimumLength -
-      2);  // Minimum length - 2 bytes for IEI/Length
+  SetLengthIndicator(kNetworkNameContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -118,17 +114,9 @@ int NetworkName::Encode(uint8_t* buf, int len) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding NetworkName");
 
-  int ie_len = GetIeLength();
-
-  if (len < ie_len) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("len is less than %d", ie_len);
-    return -1;
-  }
-
   int encoded_size = 0;
 
-  // IEI and Length
+  // Validate the buffer's length and Encode IEI/Length
   int encoded_header_size = Type4NasIe::Encode(buf + encoded_size, len);
   if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   encoded_size += encoded_header_size;

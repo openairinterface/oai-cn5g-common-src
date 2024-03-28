@@ -31,18 +31,14 @@ using namespace oai::nas;
 //------------------------------------------------------------------------------
 UplinkDataStatus::UplinkDataStatus() : Type4NasIe(kIeiUplinkDataStatus) {
   value_ = 0;
-  SetLengthIndicator(
-      kUplinkDataStatusMinimumLength -
-      2);  // Minimum length - 2 bytes for IEI/Length
+  SetLengthIndicator(kUplinkDataStatusContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
 UplinkDataStatus::UplinkDataStatus(uint16_t value)
     : Type4NasIe(kIeiUplinkDataStatus) {
   value_ = value;
-  SetLengthIndicator(
-      kUplinkDataStatusMinimumLength -
-      2);  // Minimum length - 2 bytes for IEI/Length
+  SetLengthIndicator(kUplinkDataStatusContentMinimumLength);
 }
 
 //-----------------------------------------------------------------------------
@@ -64,7 +60,7 @@ int UplinkDataStatus::Encode(uint8_t* buf, int len) {
       .debug("Encoding %s", GetIeName().c_str());
 
   int encoded_size = 0;
-  // IEI and Length
+  // Validate the buffer's length and Encode IEI/Length
   int encoded_header_size = Type4NasIe::Encode(buf + encoded_size, len);
   if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   encoded_size += encoded_header_size;

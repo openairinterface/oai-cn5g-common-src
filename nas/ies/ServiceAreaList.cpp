@@ -31,9 +31,7 @@ using namespace oai::nas;
 //------------------------------------------------------------------------------
 ServiceAreaList::ServiceAreaList()
     : Type4NasIe(kIei5gsTrackingAreaIdentityList), ie_list_() {
-  SetLengthIndicator(
-      kServiceAreaListMinimumLength -
-      2);  // Minimum length - 2 bytes for IEI/Length
+  SetLengthIndicator(kServiceAreaListContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -41,9 +39,7 @@ ServiceAreaList::ServiceAreaList(bool iei) : Type4NasIe(), ie_list_() {
   if (iei) {
     SetIei(kIeiServiceAreaList);
   }
-  SetLengthIndicator(
-      kServiceAreaListMinimumLength -
-      2);  // Minimum length - 2 bytes for IEI/Length
+  SetLengthIndicator(kServiceAreaListContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -83,16 +79,9 @@ ServiceAreaList::ServiceAreaList(
 int ServiceAreaList::Encode(uint8_t* buf, int len) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
-  int ie_len = GetIeLength();
-
-  if (len < ie_len) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Len is less than %d", ie_len);
-    return KEncodeDecodeError;
-  }
 
   int encoded_size = 0;
-  // IEI and Length
+  // Validate the buffer's length and Encode IEI/Length
   int len_pos = 0;
   int encoded_header_size =
       Type4NasIe::Encode(buf + encoded_size, len, len_pos);

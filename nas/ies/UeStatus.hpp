@@ -25,7 +25,9 @@
 #include "Type4NasIe.hpp"
 
 constexpr uint8_t kUeStatusIeLength = 3;
-constexpr auto kUeStatusIeName      = "UE Status";
+constexpr uint8_t kUeStatusIeContentLength =
+    kUeStatusIeLength - 2;  // Minimum length - 2 octets for IEI/Length
+constexpr auto kUeStatusIeName = "UE Status";
 
 namespace oai::nas {
 

@@ -25,6 +25,9 @@
 #include "Type4NasIe.hpp"
 
 constexpr uint8_t kUplinkDataStatusMinimumLength = 4;
+constexpr uint8_t kUplinkDataStatusContentMinimumLength =
+    kUplinkDataStatusMinimumLength -
+    2;  // Minimum length - 2 octets for IEI/Length
 constexpr uint8_t kUplinkDataStatusMaximumLength = 34;
 constexpr auto kUplinkDataStatusIeName           = "Uplink Data Status";
 

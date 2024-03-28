@@ -25,6 +25,9 @@
 #include "Type4NasIe.hpp"
 
 constexpr uint8_t kPduSessionStatusMinimumLength = 4;
+constexpr uint8_t kPduSessionStatusContentMinimumLength =
+    kPduSessionStatusMinimumLength -
+    2;  // Minimum length - 2 octets for IEI/Length
 constexpr uint8_t kPduSessionStatusMaximumLength = 34;
 constexpr auto kPduSessionStatusIeName           = "PDU Session Status";
 

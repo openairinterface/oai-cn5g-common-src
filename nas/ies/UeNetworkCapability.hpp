@@ -25,6 +25,9 @@
 #include "Type4NasIe.hpp"
 
 constexpr uint8_t kUeNetworkCapabilityMinimumLength = 4;
+constexpr uint8_t kUeNetworkCapabilityContentMinimumLength =
+    kUeNetworkCapabilityMinimumLength -
+    2;  // Minimum length - 2 octets for IEI/Length
 constexpr uint8_t kUeNetworkCapabilityMaximumLength = 15;
 constexpr auto kUeNetworkCapabilityIeName           = "UE Network Capability";
 

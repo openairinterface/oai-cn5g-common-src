@@ -27,7 +27,10 @@
 #include "Struct.hpp"
 #include "Type4NasIe.hpp"
 
-constexpr uint8_t k5gsTrackingAreaIdListMinimumLength        = 9;
+constexpr uint8_t k5gsTrackingAreaIdListMinimumLength = 9;
+constexpr uint8_t k5gsTrackingAreaIdListContentMinimumLength =
+    k5gsTrackingAreaIdListMinimumLength -
+    2;  // Minimum length - 2 octets for IEI/Length
 constexpr uint8_t k5gsTrackingAreaIdListMaximumLength        = 114;
 constexpr uint8_t k5gsTrackingAreaIdListMaximumSupportedTAIs = 16;
 constexpr auto k5gsTrackingAreaIdListIeName = "5GS Tracking Area Identity List";

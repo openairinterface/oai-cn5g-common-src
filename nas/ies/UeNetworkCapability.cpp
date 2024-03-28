@@ -31,14 +31,14 @@ using namespace oai::nas;
 UeNetworkCapability::UeNetworkCapability() : Type4NasIe() {
   eea_ = 0;
   eia_ = 0;
-  SetLengthIndicator(2);
+  SetLengthIndicator(kUeNetworkCapabilityContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
 UeNetworkCapability::UeNetworkCapability(uint8_t iei) : Type4NasIe(iei) {
   eea_ = 0;
   eia_ = 0;
-  SetLengthIndicator(2);
+  SetLengthIndicator(kUeNetworkCapabilityContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -49,7 +49,7 @@ UeNetworkCapability::UeNetworkCapability(uint8_t iei, uint8_t eea, uint8_t eia)
     : Type4NasIe(iei) {
   eea_ = eea;
   eia_ = eia;
-  SetLengthIndicator(2);
+  SetLengthIndicator(kUeNetworkCapabilityContentMinimumLength);
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug(
           "Initialized %s EEA 0x%x, EIA 0x%x", GetIeName().c_str(), eea_, eia_);
@@ -79,19 +79,10 @@ uint8_t UeNetworkCapability::GetEia() const {
 int UeNetworkCapability::Encode(uint8_t* buf, int len) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
-  int ie_len = GetIeLength();
-
-  if (len < ie_len) {  // Length of the content + IEI/Len
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Size of the buffer is not enough to store this IE (IE len %d)",
-            ie_len);
-    return KEncodeDecodeError;
-  }
-
+  int ie_len       = GetIeLength();
   int encoded_size = 0;
 
-  // IEI and Length
+  // Validate the buffer's length and Encode IEI/Length
   int encoded_header_size = Type4NasIe::Encode(buf + encoded_size, len);
   if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   encoded_size += encoded_header_size;

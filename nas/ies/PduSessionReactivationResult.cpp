@@ -31,18 +31,14 @@ using namespace oai::nas;
 PduSessionReactivationResult::PduSessionReactivationResult()
     : Type4NasIe(kIeiPduSessionReactivationResult) {
   value_ = 0;
-  SetLengthIndicator(
-      kPduSessionReactivationResultMinimumLength -
-      2);  // Minimum length - 2 bytes for IEI/Length
+  SetLengthIndicator(kPduSessionReactivationResultContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
 PduSessionReactivationResult::PduSessionReactivationResult(uint16_t value)
     : Type4NasIe(kIeiPduSessionReactivationResult) {
   value_ = value;
-  SetLengthIndicator(
-      kPduSessionReactivationResultMinimumLength -
-      2);  // Minimum length - 2 bytes for IEI/Length
+  SetLengthIndicator(kPduSessionReactivationResultContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -64,14 +60,8 @@ int PduSessionReactivationResult::Encode(uint8_t* buf, int len) {
       .debug("Encoding %s", GetIeName().c_str());
   int ie_len = GetIeLength();
 
-  if (len < ie_len) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Len is less than %d", ie_len);
-    return KEncodeDecodeError;
-  }
-
   int encoded_size = 0;
-  // IEI and Length
+  // Validate the buffer's length and Encode IEI/Length
   int encoded_header_size = Type4NasIe::Encode(buf + encoded_size, len);
   if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   encoded_size += encoded_header_size;

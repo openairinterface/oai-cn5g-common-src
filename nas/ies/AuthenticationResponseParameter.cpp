@@ -27,9 +27,7 @@ using namespace oai::nas;
 //------------------------------------------------------------------------------
 AuthenticationResponseParameter::AuthenticationResponseParameter()
     : Type4NasIe(kIeiAuthenticationResponseParameter), res_or_res_star_() {
-  SetLengthIndicator(
-      kAuthenticationResponseParameterMinimumLength -
-      2);  // Minimum length - 2 bytes for IEI/Length
+  SetLengthIndicator(kAuthenticationResponseParameterContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -39,9 +37,9 @@ AuthenticationResponseParameter::AuthenticationResponseParameter(
   res_or_res_star_ = bstrcpy(para);
   SetLengthIndicator(
       (blength(res_or_res_star_) >
-       (kAuthenticationResponseParameterMinimumLength - 2)) ?
+       kAuthenticationResponseParameterContentMinimumLength) ?
           blength(res_or_res_star_) :
-          (kAuthenticationResponseParameterMinimumLength - 2));
+          kAuthenticationResponseParameterContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -52,9 +50,9 @@ void AuthenticationResponseParameter::SetValue(const bstring& para) {
   res_or_res_star_ = bstrcpy(para);
   SetLengthIndicator(
       (blength(res_or_res_star_) >
-       (kAuthenticationResponseParameterMinimumLength - 2)) ?
+       kAuthenticationResponseParameterContentMinimumLength) ?
           blength(res_or_res_star_) :
-          (kAuthenticationResponseParameterMinimumLength - 2));
+          kAuthenticationResponseParameterContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -66,16 +64,9 @@ void AuthenticationResponseParameter::GetValue(bstring& para) const {
 int AuthenticationResponseParameter::Encode(uint8_t* buf, int len) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
-  int ie_len = GetIeLength();
-
-  if (len < ie_len) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Len is less than %d", ie_len);
-    return KEncodeDecodeError;
-  }
 
   int encoded_size = 0;
-  // IEI and Length
+  // Validate the buffer's length and Encode IEI/Length
   int encoded_header_size = Type4NasIe::Encode(buf + encoded_size, len);
   if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   encoded_size += encoded_header_size;

@@ -25,7 +25,9 @@
 #include "Type4NasIe.hpp"
 
 constexpr uint8_t kEpsBearerContextStatusLength = 4;
-constexpr auto kEpsBearerContextStatusIeName    = "EPS Bearer Context Status";
+constexpr uint8_t kEpsBearerContextStatusContentLength =
+    kEpsBearerContextStatusLength - 2;  // Length - 2 octets for IEI/Length
+constexpr auto kEpsBearerContextStatusIeName = "EPS Bearer Context Status";
 
 namespace oai::nas {
 

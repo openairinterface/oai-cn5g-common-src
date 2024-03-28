@@ -25,7 +25,7 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 GprsTimer3::GprsTimer3(uint8_t iei) : Type4NasIe(iei), unit_(), value_() {
-  SetLengthIndicator(kGprsTimer3Length);
+  SetLengthIndicator(kGprsTimer3ContentLength);
 }
 
 //------------------------------------------------------------------------------
@@ -33,7 +33,7 @@ GprsTimer3::GprsTimer3(const uint8_t iei, uint8_t unit, uint8_t value)
     : Type4NasIe(iei) {
   unit_  = unit;
   value_ = value;
-  SetLengthIndicator(kGprsTimer3Length);
+  SetLengthIndicator(kGprsTimer3ContentLength);
 }
 
 //------------------------------------------------------------------------------
@@ -59,16 +59,9 @@ uint8_t GprsTimer3::GetValue() const {
 int GprsTimer3::Encode(uint8_t* buf, int len) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
-  int ie_len = GetIeLength();
-
-  if (len < ie_len) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Len is less than %d", ie_len);
-    return KEncodeDecodeError;
-  }
 
   int encoded_size = 0;
-  // IEI and Length
+  // Validate the buffer's length and Encode IEI/Length
   int encoded_header_size = Type4NasIe::Encode(buf + encoded_size, len);
   if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   encoded_size += encoded_header_size;

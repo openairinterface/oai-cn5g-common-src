@@ -26,18 +26,16 @@ using namespace oai::nas;
 //------------------------------------------------------------------------------
 AdditionalInformation::AdditionalInformation()
     : Type4NasIe(kIeiAdditionalInformation), value_() {
-  SetLengthIndicator(
-      kAdditionalInformationMinimumLength -
-      2);  // Minimum length - 2 bytes for IEI/Length
+  SetLengthIndicator(kAdditionalInformationContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
 AdditionalInformation::AdditionalInformation(const bstring& value) {
   value_ = bstrcpy(value);
   SetLengthIndicator(
-      (blength(value) > (kAdditionalInformationMinimumLength - 2)) ?
+      (blength(value) > kAdditionalInformationContentMinimumLength) ?
           blength(value) :
-          (kAdditionalInformationMinimumLength - 2));
+          kAdditionalInformationContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -47,9 +45,9 @@ AdditionalInformation::~AdditionalInformation() {}
 void AdditionalInformation::SetValue(const bstring& value) {
   value_ = bstrcpy(value);
   SetLengthIndicator(
-      (blength(value) > (kAdditionalInformationMinimumLength - 2)) ?
+      (blength(value) > kAdditionalInformationContentMinimumLength) ?
           blength(value) :
-          (kAdditionalInformationMinimumLength - 2));
+          kAdditionalInformationContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -61,16 +59,9 @@ void AdditionalInformation::GetValue(bstring& value) const {
 int AdditionalInformation::Encode(uint8_t* buf, int len) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
-  int ie_len = GetIeLength();
-
-  if (len < ie_len) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Len is less than %d", ie_len);
-    return KEncodeDecodeError;
-  }
 
   int encoded_size = 0;
-  // IEI and Length
+  // Validate the buffer's length and Encode IEI/Length
   int encoded_header_size = Type4NasIe::Encode(buf + encoded_size, len);
   if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   encoded_size += encoded_header_size;

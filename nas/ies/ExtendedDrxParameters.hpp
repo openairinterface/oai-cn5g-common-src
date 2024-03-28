@@ -25,7 +25,10 @@
 #include "Type4NasIe.hpp"
 
 constexpr uint8_t kExtendedDrxParametersLength = 3;
-constexpr auto kExtendedDrxParametersIeName    = "Extended DRX Parameters";
+constexpr uint8_t kExtendedDrxParametersContentLength =
+    kExtendedDrxParametersLength -
+    2;  // Minimum length - 2 octets for IEI/Length
+constexpr auto kExtendedDrxParametersIeName = "Extended DRX Parameters";
 
 namespace oai::nas {
 

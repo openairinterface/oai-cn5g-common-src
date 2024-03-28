@@ -31,9 +31,7 @@ using namespace oai::nas;
 //------------------------------------------------------------------------------
 UeRadioCapabilityId::UeRadioCapabilityId()
     : Type4NasIe(kIeiUeRadioCapabilityId), value_() {
-  SetLengthIndicator(
-      kUeRadioCapabilityIdMinimumLength -
-      2);  // Minimum length - 2 bytes for IEI/Length
+  SetLengthIndicator(kUeRadioCapabilityIdContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -41,9 +39,9 @@ UeRadioCapabilityId::UeRadioCapabilityId(const bstring& value)
     : Type4NasIe(kIeiUeRadioCapabilityId) {
   value_ = bstrcpy(value);
   SetLengthIndicator(
-      (blength(value_) > (kUeRadioCapabilityIdMinimumLength - 2)) ?
+      (blength(value_) > kUeRadioCapabilityIdContentMinimumLength) ?
           blength(value_) :
-          (kUeRadioCapabilityIdMinimumLength - 2));
+          kUeRadioCapabilityIdContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -53,9 +51,9 @@ UeRadioCapabilityId::~UeRadioCapabilityId() {}
 void UeRadioCapabilityId::SetValue(const bstring& value) {
   value_ = bstrcpy(value);
   SetLengthIndicator(
-      (blength(value_) > (kUeRadioCapabilityIdMinimumLength - 2)) ?
+      (blength(value_) > kUeRadioCapabilityIdContentMinimumLength) ?
           blength(value_) :
-          (kUeRadioCapabilityIdMinimumLength - 2));
+          kUeRadioCapabilityIdContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -68,16 +66,8 @@ int UeRadioCapabilityId::Encode(uint8_t* buf, int len) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
   int encoded_size = 0;
-  int ie_len       = GetIeLength();
-  if (len < ie_len) {  // Length of the content + IEI/Len
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Size of the buffer is not enough to store this IE (IE len %d)",
-            ie_len);
-    return KEncodeDecodeError;
-  }
 
-  // IEI and Length (later)
+  // Validate the buffer's length and Encode IEI, Length (later)
   int len_pos = 0;
   int encoded_header_size =
       Type4NasIe::Encode(buf + encoded_size, len, len_pos);

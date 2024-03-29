@@ -71,6 +71,7 @@ static void fix_primitive_json_values(
           j[elem.key()] = val;  // replace with int
         }
       } catch (std::invalid_argument& ex) {
+      } catch (std::exception& e) {
       }
     } else {
       fix_primitive_json_values(elem.value(), parse_hex_values);

@@ -289,6 +289,8 @@ bool config::init() {
     read_from_file(m_config_path);
   } catch (std::runtime_error& err) {
     return false;
+  } catch (std::exception& e) {
+    return false;
   }
 
   if (!validate()) {

@@ -73,7 +73,7 @@ _5gsTrackingAreaIdList::_5gsTrackingAreaIdList(
 }
 
 //------------------------------------------------------------------------------
-int _5gsTrackingAreaIdList::Encode(uint8_t* buf, int len) {
+int _5gsTrackingAreaIdList::Encode(uint8_t* buf, const int& len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
@@ -122,7 +122,8 @@ int _5gsTrackingAreaIdList::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int _5gsTrackingAreaIdList::EncodeType00(p_tai_t item, uint8_t* buf, int len) {
+int _5gsTrackingAreaIdList::EncodeType00(
+    p_tai_t item, uint8_t* buf, int len) const {
   int encoded_size = 0;
   // Type of list/Number of elements
   uint8_t octet = 0x00 | (item.type & 0x60) |
@@ -143,13 +144,15 @@ int _5gsTrackingAreaIdList::EncodeType00(p_tai_t item, uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int _5gsTrackingAreaIdList::EncodeType01(p_tai_t item, uint8_t* buf, int len) {
+int _5gsTrackingAreaIdList::EncodeType01(
+    p_tai_t item, uint8_t* buf, int len) const {
   // TODO:
   return KEncodeDecodeError;
 }
 
 //------------------------------------------------------------------------------
-int _5gsTrackingAreaIdList::EncodeType10(p_tai_t item, uint8_t* buf, int len) {
+int _5gsTrackingAreaIdList::EncodeType10(
+    p_tai_t item, uint8_t* buf, int len) const {
   // TODO:
   return KEncodeDecodeError;
 }

@@ -107,7 +107,7 @@ bool Type4NasIe::ValidateHeader(const int& len) const {
 }
 
 //------------------------------------------------------------------------------
-int Type4NasIe::Encode(uint8_t* buf, const int& len) {
+int Type4NasIe::Encode(uint8_t* buf, const int& len) const {
   if (!Validate(len)) return KEncodeDecodeError;
 
   int encoded_size = 0;
@@ -121,7 +121,7 @@ int Type4NasIe::Encode(uint8_t* buf, const int& len) {
 }
 
 //------------------------------------------------------------------------------
-int Type4NasIe::Encode(uint8_t* buf, const int& len, int& len_pos) {
+int Type4NasIe::Encode(uint8_t* buf, const int& len, int& len_pos) const {
   if (!Validate(len)) return KEncodeDecodeError;
 
   int encoded_size = 0;

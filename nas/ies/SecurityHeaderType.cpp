@@ -77,7 +77,7 @@ uint8_t SecurityHeaderType::Get() const {
 }
 
 //------------------------------------------------------------------------------
-int SecurityHeaderType::Encode(uint8_t* buf, const int& len) {
+int SecurityHeaderType::Encode(uint8_t* buf, const int& len) const {
   if (!Validate(len)) return KEncodeDecodeError;
   uint8_t value         = (secu_header_type_ & 0x0f) | (spare_ & 0xf0);
   uint32_t encoded_size = 0;

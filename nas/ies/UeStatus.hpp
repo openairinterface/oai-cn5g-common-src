@@ -39,8 +39,9 @@ class UeStatus : public Type4NasIe {
 
   static std::string GetIeName() { return kUeStatusIeName; }
 
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len, bool is_iei);
+  int Encode(uint8_t* buf, const int& len) const override;
+  int Decode(
+      const uint8_t* const buf, const int& len, bool is_iei = false) override;
 
   void SetN1(bool value);
   bool GetN1() const;

@@ -63,7 +63,7 @@ void PlmnList::Get(std::vector<nas_plmn_t>& list) const {
 }
 
 //------------------------------------------------------------------------------
-int PlmnList::Encode(uint8_t* buf, int len) {
+int PlmnList::Encode(uint8_t* buf, const int& len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
@@ -83,7 +83,7 @@ int PlmnList::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int PlmnList::Decode(uint8_t* buf, int len, bool is_iei) {
+int PlmnList::Decode(const uint8_t* const buf, const int& len, bool is_iei) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding %s", GetIeName().c_str());
 

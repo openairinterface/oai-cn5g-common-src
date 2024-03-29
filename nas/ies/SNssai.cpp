@@ -170,7 +170,7 @@ std::string SNssai::ToString() {
 }
 
 //------------------------------------------------------------------------------
-int SNssai::Encode(uint8_t* buf, int len) {
+int SNssai::Encode(uint8_t* buf, const int& len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 

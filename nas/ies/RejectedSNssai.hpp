@@ -48,8 +48,8 @@ class RejectedSNssai {
   uint8_t GetCause() const;
   void GetCause(uint8_t& cause) const;
 
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len);
+  int Encode(uint8_t* buf, const int& len) const;
+  int Decode(const uint8_t* const buf, const int& len);
 
  private:
   uint8_t length_;

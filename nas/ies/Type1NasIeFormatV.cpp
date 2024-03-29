@@ -72,7 +72,7 @@ void Type1NasIeFormatV::Set(uint8_t value) {
   value_ = value & 0x0f;  // 4 bits
 }
 //------------------------------------------------------------------------------
-int Type1NasIeFormatV::Encode(uint8_t* buf, const int& len) {
+int Type1NasIeFormatV::Encode(uint8_t* buf, const int& len) const {
   // oai::logger::logger_registry::get_logger(LOGGER_COMMON).debug("Encoding
   // %s", GetIeName().c_str());
   if (!Validate(len)) return KEncodeDecodeError;

@@ -83,8 +83,9 @@ class _5gmmCause : public Type3NasIe {
   static std::string GetIeName() { return k5gmmCauseIeName; }
   uint32_t GetIeLength() const override;
 
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len, bool is_iei);
+  int Encode(uint8_t* buf, const int& len) const override;
+  int Decode(
+      const uint8_t* const buf, const int& len, bool is_iei = false) override;
 
   void Set(uint8_t _iei, uint8_t value);
 

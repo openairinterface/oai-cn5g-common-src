@@ -44,8 +44,9 @@ class Abba : public Type4NasIe {
   void Set(uint8_t length, const uint8_t* value);
   void Set(uint8_t iei, uint8_t length, const uint8_t* value);
 
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len, bool is_option);
+  int Encode(uint8_t* buf, const int& len) const override;
+  int Decode(
+      const uint8_t* const buf, const int& len, bool is_iei = false) override;
 
  private:
   uint8_t value_[256];  // TODO:

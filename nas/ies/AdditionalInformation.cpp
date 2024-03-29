@@ -56,7 +56,7 @@ void AdditionalInformation::GetValue(bstring& value) const {
 }
 
 //------------------------------------------------------------------------------
-int AdditionalInformation::Encode(uint8_t* buf, int len) {
+int AdditionalInformation::Encode(uint8_t* buf, const int& len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
@@ -76,7 +76,8 @@ int AdditionalInformation::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int AdditionalInformation::Decode(uint8_t* buf, int len, bool is_iei) {
+int AdditionalInformation::Decode(
+    const uint8_t* const buf, const int& len, bool is_iei) {
   if (len < kAdditionalInformationMinimumLength) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error(

@@ -45,8 +45,9 @@ class ConfigurationUpdateIndication : public Type1NasIe {
   void SetAck(bool value);
   void GetAck(bool& value) const;
 
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len, bool is_iei);
+  int Encode(uint8_t* buf, const int& len) const override;
+  int Decode(
+      const uint8_t* const buf, const int& len, bool is_iei = false) override;
 
  private:
   bool red_;

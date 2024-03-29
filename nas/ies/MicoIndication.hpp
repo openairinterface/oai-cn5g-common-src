@@ -38,8 +38,9 @@ class MicoIndication : public Type1NasIeFormatTv {
 
   static std::string GetIeName() { return kMicoIndicationIeName; }
 
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len, bool is_option);
+  int Encode(uint8_t* buf, const int& len) const override;
+  int Decode(
+      const uint8_t* const buf, const int& len, bool is_iei = false) override;
 
   void SetSprti(bool value);
   bool GetSprti() const;

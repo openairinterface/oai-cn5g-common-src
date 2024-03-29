@@ -71,7 +71,7 @@ void NasKeySetIdentifier::GetValue() {
 
 /*
 //------------------------------------------------------------------------------
-int NasKeySetIdentifier::Encode(uint8_t* buf, const int& len) {
+int NasKeySetIdentifier::Encode(uint8_t* buf, const int& len)  const{
   Logger::nas_mm().debug("Encoding NasKeySetIdentifier IE");
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)IeSize) {
     Logger::nas_mm().error(

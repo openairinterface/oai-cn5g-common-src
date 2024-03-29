@@ -62,7 +62,7 @@ void LadnInformation::Add(const Ladn& value) {
 }
 
 //------------------------------------------------------------------------------
-int LadnInformation::Encode(uint8_t* buf, int len) {
+int LadnInformation::Encode(uint8_t* buf, const int& len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
@@ -101,7 +101,8 @@ int LadnInformation::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int LadnInformation::Decode(uint8_t* buf, int len, bool is_iei) {
+int LadnInformation::Decode(
+    const uint8_t* const buf, const int& len, bool is_iei) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding EPS_NAS_Message_Container");
   int decoded_size = 0;

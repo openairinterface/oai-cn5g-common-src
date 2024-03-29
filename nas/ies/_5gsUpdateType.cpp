@@ -92,7 +92,7 @@ bool _5gsUpdateType::GetSms() const {
 }
 
 //------------------------------------------------------------------------------
-int _5gsUpdateType::Encode(uint8_t* buf, int len) {
+int _5gsUpdateType::Encode(uint8_t* buf, const int& len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
@@ -112,7 +112,8 @@ int _5gsUpdateType::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int _5gsUpdateType::Decode(uint8_t* buf, int len, bool is_iei) {
+int _5gsUpdateType::Decode(
+    const uint8_t* const buf, const int& len, bool is_iei) {
   if (len < k5gsUpdateTypeLength) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error(

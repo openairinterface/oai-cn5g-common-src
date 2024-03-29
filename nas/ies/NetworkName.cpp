@@ -110,7 +110,7 @@ void NetworkName::SetTextString(const bstring& str) {
 }
 
 //------------------------------------------------------------------------------
-int NetworkName::Encode(uint8_t* buf, int len) {
+int NetworkName::Encode(uint8_t* buf, const int& len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding NetworkName");
 

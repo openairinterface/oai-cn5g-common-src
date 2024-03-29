@@ -36,7 +36,7 @@ class Type2NasIeFormatT : public NasIe {
   bool Validate(const int& len) const override;
   uint32_t GetIeLength() const override;
 
-  int Encode(uint8_t* buf, const int& len) override;
+  int Encode(uint8_t* buf, const int& len) const override;
   int Decode(
       const uint8_t* const buf, const int& len, bool is_iei = true) override;
 

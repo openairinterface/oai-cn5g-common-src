@@ -41,7 +41,7 @@ class SNssai : public Type4NasIe {
 
   static std::string GetIeName() { return kSNssaiIeName; }
 
-  int Encode(uint8_t* buf, int len);
+  int Encode(uint8_t* buf, const int& len) const override;
   int Decode(uint8_t* buf, int len, const bool is_option = true);
 
   void GetValue(SNSSAI_t& snssai) const;

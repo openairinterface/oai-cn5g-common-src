@@ -106,7 +106,7 @@ void RejectedSNssai::GetCause(uint8_t& cause) const {
 }
 
 //------------------------------------------------------------------------------
-int RejectedSNssai::Encode(uint8_t* buf, int len) {
+int RejectedSNssai::Encode(uint8_t* buf, const int& len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding RejectedSNssai");
   if (len < length_ + 1) {
@@ -117,11 +117,6 @@ int RejectedSNssai::Encode(uint8_t* buf, int len) {
 
   int encoded_size = 0;
   uint8_t octet    = 0;
-  if (sd_.has_value()) {
-    length_ = 4;
-  } else {
-    length_ = 1;
-  }
 
   // Length + Cause
   octet = (length_ << 4) | (0x0f & cause_);
@@ -144,7 +139,7 @@ int RejectedSNssai::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int RejectedSNssai::Decode(uint8_t* buf, int len) {
+int RejectedSNssai::Decode(const uint8_t* const buf, const int& len) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding RejectedSNssai");
   int decoded_size = 0;

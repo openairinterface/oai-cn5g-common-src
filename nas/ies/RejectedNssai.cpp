@@ -53,7 +53,7 @@ void RejectedNssai::GetRejectedSNssais(
 }
 //------------------------------------------------------------------------------
 
-int RejectedNssai::Encode(uint8_t* buf, int len) {
+int RejectedNssai::Encode(uint8_t* buf, const int& len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
@@ -78,7 +78,8 @@ int RejectedNssai::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int RejectedNssai::Decode(uint8_t* buf, int len, bool is_iei) {
+int RejectedNssai::Decode(
+    const uint8_t* const buf, const int& len, bool is_iei) {
   if (len < kRejectedNssaiMinimumLength) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error(

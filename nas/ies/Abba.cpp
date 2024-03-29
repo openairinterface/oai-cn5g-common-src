@@ -81,7 +81,7 @@ void Abba::Set(uint8_t iei, uint8_t length, const uint8_t* value) {
 }
 
 //------------------------------------------------------------------------------
-int Abba::Encode(uint8_t* buf, int len) {
+int Abba::Encode(uint8_t* buf, const int& len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
@@ -104,7 +104,7 @@ int Abba::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int Abba::Decode(uint8_t* buf, int len, bool is_iei) {
+int Abba::Decode(const uint8_t* const buf, const int& len, bool is_iei) {
   if (len < kAbbaMinimumLength) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error(

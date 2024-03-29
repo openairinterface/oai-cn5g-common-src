@@ -38,7 +38,7 @@ class Type3NasIe : public NasIe {
 
   void SetIei(uint8_t iei);
 
-  int Encode(uint8_t* buf, const int& len) override;
+  int Encode(uint8_t* buf, const int& len) const override;
   int Decode(
       const uint8_t* const buf, const int& len, bool is_iei = false) override;
 

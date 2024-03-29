@@ -47,8 +47,9 @@ class LadnInformation : public Type6NasIe {
   void Set(const std::vector<Ladn>& value);
   void Add(const Ladn& value);
 
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len, bool is_option);
+  int Encode(uint8_t* buf, const int& len) const override;
+  int Decode(
+      const uint8_t* const buf, const int& len, bool is_iei = false) override;
 
  private:
   std::vector<Ladn> ladn_list_;

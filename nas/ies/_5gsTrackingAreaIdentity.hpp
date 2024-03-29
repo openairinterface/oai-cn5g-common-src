@@ -40,8 +40,8 @@ class _5gsTrackingAreaIdentity : public Type3NasIe {
   static std::string GetIeName() { return k5gsTrackingAreaIdentityIeName; }
   uint32_t GetIeLength() const override;
 
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len, bool is_iei = true);
+  int Encode(uint8_t* buf, const int& len) const override;
+  int Decode(const uint8_t* const buf, const int& len, bool is_iei = true);
 
   void SetTac(uint32_t value);
   uint32_t GetTac() const;

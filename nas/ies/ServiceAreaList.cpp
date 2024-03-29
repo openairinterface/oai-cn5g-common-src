@@ -76,7 +76,7 @@ ServiceAreaList::ServiceAreaList(
 }
 
 //------------------------------------------------------------------------------
-int ServiceAreaList::Encode(uint8_t* buf, int len) {
+int ServiceAreaList::Encode(uint8_t* buf, const int& len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
@@ -131,7 +131,7 @@ int ServiceAreaList::Encode(uint8_t* buf, int len) {
 
 //------------------------------------------------------------------------------
 int ServiceAreaList::EncodeType00(
-    service_area_list_ie_t item, uint8_t* buf, int len) {
+    service_area_list_ie_t item, uint8_t* buf, int len) const {
   int encoded_size = 0;
   // Allowed type/Type of list/Number of elements
   uint8_t octet = (item.allowed_type & 0x80) | (item.type & 0x60) |
@@ -153,7 +153,7 @@ int ServiceAreaList::EncodeType00(
 
 //------------------------------------------------------------------------------
 int ServiceAreaList::EncodeType01(
-    service_area_list_ie_t item, uint8_t* buf, int len) {
+    service_area_list_ie_t item, uint8_t* buf, int len) const {
   int encoded_size = 0;
   // Allowed type/Type of list/Number of elements
   uint8_t octet = (item.allowed_type & 0x80) | (item.type & 0x60) |
@@ -174,7 +174,7 @@ int ServiceAreaList::EncodeType01(
 
 //------------------------------------------------------------------------------
 int ServiceAreaList::EncodeType10(
-    service_area_list_ie_t item, uint8_t* buf, int len) {
+    service_area_list_ie_t item, uint8_t* buf, int len) const {
   int encoded_size = 0;
   // Allowed type/Type of list/Number of elements
   uint8_t octet = (item.allowed_type & 0x80) | (item.type & 0x60) |
@@ -200,7 +200,7 @@ int ServiceAreaList::EncodeType10(
 
 //------------------------------------------------------------------------------
 int ServiceAreaList::EncodeType11(
-    service_area_list_ie_t item, uint8_t* buf, int len) {
+    service_area_list_ie_t item, uint8_t* buf, int len) const {
   int encoded_size = 0;
   // Allowed type/Type of list/Number of elements
   uint8_t octet = 0x00 | (item.type & 0x60) |

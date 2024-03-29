@@ -103,7 +103,7 @@ void Type1NasIe::SetValue(uint8_t value) {
 }
 
 //------------------------------------------------------------------------------
-int Type1NasIe::Encode(uint8_t* buf, const int& len) {
+int Type1NasIe::Encode(uint8_t* buf, const int& len) const {
   // oai::logger::logger_registry::get_logger(LOGGER_COMMON).debug("Encoding
   // %s", GetIeName().c_str());
   if (!Validate(len)) return KEncodeDecodeError;

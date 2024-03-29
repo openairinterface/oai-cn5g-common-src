@@ -105,7 +105,7 @@ void _5gsDeregistrationType::Get(uint8_t& type) const {
 
 /*
 //------------------------------------------------------------------------------
-int _5gsDeregistrationType::Encode(uint8_t* buf, int len) {
+int _5gsDeregistrationType::Encode(uint8_t* buf, const int& len){
   oai::logger::logger_registry::get_logger(LOGGER_COMMON).error("Encoding
 5GSDeregistrationType IE"); if (len < 1) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(

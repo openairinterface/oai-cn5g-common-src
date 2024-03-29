@@ -47,7 +47,8 @@ class utils {
       const std::string& mcc_str, const std::string& mnc_str, uint8_t* buf,
       int len);
   static int decodeMccMncFromBuffer(
-      std::string& mcc_str, std::string& mnc_str, uint8_t* buf, int len);
+      std::string& mcc_str, std::string& mnc_str, const uint8_t* const buf,
+      const int& len);
 
   // For Boost
   template<typename T>

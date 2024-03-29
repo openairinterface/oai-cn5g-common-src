@@ -56,8 +56,9 @@ class S1UeSecurityCapability : public Type4NasIe {
   void Set(uint8_t eea, uint8_t eia, uint8_t uea, uint8_t uia);
   void Get(uint8_t& eea, uint8_t& eia, uint8_t& uea, uint8_t& uia) const;
 
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len, bool is_iei);
+  int Encode(uint8_t* buf, const int& len) const override;
+  int Decode(
+      const uint8_t* const buf, const int& len, bool is_iei = false) override;
 
  private:
   uint8_t eea_;

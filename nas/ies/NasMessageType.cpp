@@ -68,7 +68,7 @@ uint8_t NasMessageType::Get() const {
 }
 
 //------------------------------------------------------------------------------
-int NasMessageType::Encode(uint8_t* buf, const int& len) {
+int NasMessageType::Encode(uint8_t* buf, const int& len) const {
   if (!Validate(len)) return KEncodeDecodeError;
 
   uint32_t encoded_size = 0;

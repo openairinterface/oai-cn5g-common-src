@@ -44,7 +44,7 @@ class NasMessageType : public NasIe {
   void Get(uint8_t& message_type) const;
   uint8_t Get() const;
 
-  int Encode(uint8_t* buf, const int& len) override;
+  int Encode(uint8_t* buf, const int& len) const override;
   int Decode(
       const uint8_t* const buf, const int& len, bool is_iei = false) override;
 

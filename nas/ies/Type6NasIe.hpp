@@ -44,10 +44,10 @@ class Type6NasIe : public NasIe {
 
   uint8_t GetHeaderLength() const;
 
-  int Encode(uint8_t* buf, const int& len) override;
+  int Encode(uint8_t* buf, const int& len) const override;
   int Encode(
       uint8_t* buf, const int& len,
-      int& len_pos);  // Use this function to encode IE lengh later
+      int& len_pos) const;  // Use this function to encode IE lengh later
   int Decode(
       const uint8_t* const buf, const int& len, bool is_iei = false) override;
 

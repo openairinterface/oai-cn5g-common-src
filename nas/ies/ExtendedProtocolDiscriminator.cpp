@@ -68,7 +68,7 @@ uint8_t ExtendedProtocolDiscriminator::Get() const {
 }
 
 //------------------------------------------------------------------------------
-int ExtendedProtocolDiscriminator::Encode(uint8_t* buf, const int& len) {
+int ExtendedProtocolDiscriminator::Encode(uint8_t* buf, const int& len) const {
   if (!Validate(len)) return KEncodeDecodeError;
   uint32_t encoded_size = 0;
   ENCODE_U8(buf, epd_, encoded_size);

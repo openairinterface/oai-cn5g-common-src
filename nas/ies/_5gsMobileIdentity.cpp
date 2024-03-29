@@ -54,7 +54,7 @@ void _5gsMobileIdentity::ClearIe() {
 }
 
 //------------------------------------------------------------------------------
-int _5gsMobileIdentity::Encode(uint8_t* buf, int len) {
+int _5gsMobileIdentity::Encode(uint8_t* buf, const int& len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
   switch (type_of_identity_) {
@@ -80,7 +80,8 @@ int _5gsMobileIdentity::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int _5gsMobileIdentity::Decode(uint8_t* buf, int len, bool is_iei) {
+int _5gsMobileIdentity::Decode(
+    const uint8_t* const buf, const int& len, bool is_iei) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding 5GSMobilityIdentity");
   int decoded_size = 0;
@@ -136,7 +137,7 @@ int _5gsMobileIdentity::Decode(uint8_t* buf, int len, bool is_iei) {
 }
 
 //------------------------------------------------------------------------------
-int _5gsMobileIdentity::Encode5gGuti(uint8_t* buf, int len) {
+int _5gsMobileIdentity::Encode5gGuti(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding 5G-GUTI IEI 0x%x", iei_.value());
   int encoded_size = 0;
@@ -182,7 +183,7 @@ int _5gsMobileIdentity::Encode5gGuti(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int _5gsMobileIdentity::Decode5gGuti(uint8_t* buf, int len) {
+int _5gsMobileIdentity::Decode5gGuti(const uint8_t* const buf, const int& len) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding 5GSMobilityIdentity 5G-GUTI");
 
@@ -247,7 +248,7 @@ void _5gsMobileIdentity::Get5gGuti(std::optional<_5G_GUTI_t>& guti) const {
 }
 
 //------------------------------------------------------------------------------
-int _5gsMobileIdentity::EncodeSuci(uint8_t* buf, int len) {
+int _5gsMobileIdentity::EncodeSuci(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding SUCI");
 
@@ -317,7 +318,8 @@ int _5gsMobileIdentity::EncodeSuci(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int _5gsMobileIdentity::DecodeSuci(uint8_t* buf, int len, int ie_len) {
+int _5gsMobileIdentity::DecodeSuci(
+    const uint8_t* const buf, const int& len, int ie_len) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding 5GSMobilityIdentity SUCI");
   int decoded_size = 0;
@@ -489,7 +491,7 @@ bool _5gsMobileIdentity::GetSuciWithSupiImsi(SUCI_imsi_t& suci) const {
 
 //------------------------------------------------------------------------------
 int _5gsMobileIdentity::EncodeRoutingIndicator(
-    std::optional<std::string> routing_indicator, uint8_t* buf, int len) {
+    std::optional<std::string> routing_indicator, uint8_t* buf, int len) const {
   int encoded_size = 0;
   if (!routing_indicator.has_value()) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
@@ -535,14 +537,14 @@ int _5gsMobileIdentity::EncodeRoutingIndicator(
 
 //------------------------------------------------------------------------------
 int _5gsMobileIdentity::EncodeMsin(
-    const std::string& msin_str, uint8_t* buf, int len) {
+    const std::string& msin_str, uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .warn("Encode MSIN to Buffer is not implemented yet!");
   return KEncodeDecodeError;
 }
 
 //------------------------------------------------------------------------------
-int _5gsMobileIdentity::Encode5gSTmsi(uint8_t* buf, int len) {
+int _5gsMobileIdentity::Encode5gSTmsi(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding 5GSMobilityIdentity 5G-S-TMSI");
   if (!_5g_s_tmsi_.has_value()) return KEncodeDecodeError;
@@ -577,7 +579,8 @@ int _5gsMobileIdentity::Encode5gSTmsi(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int _5gsMobileIdentity::Decode5gSTmsi(uint8_t* buf, int len) {
+int _5gsMobileIdentity::Decode5gSTmsi(
+    const uint8_t* const buf, const int& len) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding 5GSMobilityIdentity 5G-S-TMSI");
   int decoded_size            = 0;
@@ -635,7 +638,7 @@ bool _5gsMobileIdentity::Get5gSTmsi(
 }
 
 //------------------------------------------------------------------------------
-int _5gsMobileIdentity::EncodeImeisv(uint8_t* buf, int len) {
+int _5gsMobileIdentity::EncodeImeisv(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding IMEISV IE");
   if (!imeisv_.has_value()) return KEncodeDecodeError;
@@ -682,7 +685,7 @@ int _5gsMobileIdentity::EncodeImeisv(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int _5gsMobileIdentity::DecodeImeisv(uint8_t* buf, int len) {
+int _5gsMobileIdentity::DecodeImeisv(const uint8_t* const buf, const int& len) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding 5GSMobilityIdentity IMEISV");
   int decoded_size             = 0;

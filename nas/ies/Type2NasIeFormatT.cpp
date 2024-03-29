@@ -58,7 +58,7 @@ uint32_t Type2NasIeFormatT::GetIeLength() const {
 }
 
 //------------------------------------------------------------------------------
-int Type2NasIeFormatT::Encode(uint8_t* buf, const int& len) {
+int Type2NasIeFormatT::Encode(uint8_t* buf, const int& len) const {
   // oai::logger::logger_registry::get_logger(LOGGER_COMMON).debug("Encoding
   // %s", GetIeName().c_str());
   if (!Validate(len)) return KEncodeDecodeError;

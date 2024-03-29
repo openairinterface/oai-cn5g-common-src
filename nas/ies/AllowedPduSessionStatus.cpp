@@ -56,7 +56,7 @@ uint16_t AllowedPduSessionStatus::GetValue() const {
 }
 
 //------------------------------------------------------------------------------
-int AllowedPduSessionStatus::Encode(uint8_t* buf, int len) {
+int AllowedPduSessionStatus::Encode(uint8_t* buf, const int& len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
   int ie_len = GetIeLength();
@@ -82,7 +82,8 @@ int AllowedPduSessionStatus::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int AllowedPduSessionStatus::Decode(uint8_t* buf, int len, bool is_iei) {
+int AllowedPduSessionStatus::Decode(
+    const uint8_t* const buf, const int& len, bool is_iei) {
   if (len < kAllowedPduSessionStatusMinimumLength) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error(

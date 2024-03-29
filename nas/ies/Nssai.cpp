@@ -60,7 +60,7 @@ void Nssai::GetValue(std::vector<struct SNSSAI_s>& nssai) const {
 }
 
 //------------------------------------------------------------------------------
-int Nssai::Encode(uint8_t* buf, int len) {
+int Nssai::Encode(uint8_t* buf, const int& len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
@@ -106,7 +106,7 @@ int Nssai::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int Nssai::Decode(uint8_t* buf, int len, bool is_iei) {
+int Nssai::Decode(const uint8_t* const buf, const int& len, bool is_iei) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding %s", GetIeName().c_str());
   if (len < kNssaiMinimumLength) {

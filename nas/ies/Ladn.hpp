@@ -38,7 +38,7 @@ class Ladn {
 
   uint32_t GetLength() const;
 
-  int Encode(uint8_t* buf, int len);
+  int Encode(uint8_t* buf, const int& len) const;
   int Decode(uint8_t* buf, int len);
 
  private:

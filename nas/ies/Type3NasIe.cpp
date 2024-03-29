@@ -67,7 +67,7 @@ uint32_t Type3NasIe::GetIeLength() const {
 }
 
 //------------------------------------------------------------------------------
-int Type3NasIe::Encode(uint8_t* buf, const int& len) {
+int Type3NasIe::Encode(uint8_t* buf, const int& len) const {
   if (!Validate(len)) return KEncodeDecodeError;
 
   int encoded_size = 0;

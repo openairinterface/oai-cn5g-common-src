@@ -43,8 +43,9 @@ class _5gsRegistrationResult : public Type4NasIe {
 
   static std::string GetIeName() { return k5gsRegistrationResultIeName; }
 
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len, bool is_iei);
+  int Encode(uint8_t* buf, const int& len) const override;
+  int Decode(
+      const uint8_t* const buf, const int& len, bool is_iei = false) override;
 
   void SetValue(uint8_t value);
   uint8_t GetValue() const;

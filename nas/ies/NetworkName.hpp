@@ -58,7 +58,7 @@ class NetworkName : public Type4NasIe {
   void SetTextString(const std::string& str);
   void SetTextString(const bstring& str);
 
-  int Encode(uint8_t* buf, int len);
+  int Encode(uint8_t* buf, const int& len) const override;
   int Decode(uint8_t* buf, int len, bool is_option = true);
 
  private:

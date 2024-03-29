@@ -24,7 +24,10 @@
 
 #include "Type6NasIe.hpp"
 
-constexpr uint8_t kNasMessageContainerMinimumLength  = 3;
+constexpr uint8_t kNasMessageContainerMinimumLength = 3;
+constexpr uint8_t kNasMessageContainerContentMinimumLength =
+    kNasMessageContainerMinimumLength -
+    3;  // Minimum length - 3 octets for IEI/Length
 constexpr uint32_t kNasMessageContainerMaximumLength = 65535;
 constexpr auto kNasMessageContainerIeName            = "NAS Message Container";
 

@@ -30,9 +30,7 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 LadnInformation::LadnInformation() : Type6NasIe(kIeiLadnInformation) {
-  SetLengthIndicator(
-      kLadnInformationMinimumLength -
-      3);  // Minimum length - 3 bytes for IEI/Length
+  SetLengthIndicator(kLadnInformationContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------

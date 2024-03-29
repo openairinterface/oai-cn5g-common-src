@@ -25,7 +25,10 @@
 #include "NasIeHeader.hpp"
 #include "Type6NasIe.hpp"
 
-constexpr uint8_t kPayloadContainerMinimumLength  = 4;
+constexpr uint8_t kPayloadContainerMinimumLength = 4;
+constexpr uint8_t kPayloadContainerContentMinimumLength =
+    kPayloadContainerMinimumLength -
+    3;  // Minimum length - 3 octets for IEI/Length
 constexpr uint32_t kPayloadContainerMaximumLength = 65538;
 constexpr auto kPayloadContainerIeName            = "Payload Container";
 

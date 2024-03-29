@@ -27,7 +27,10 @@
 #include "Type6NasIe.hpp"
 #include "_5gsTrackingAreaIdList.hpp"
 
-constexpr uint8_t kLadnInformationMinimumLength         = 3;
+constexpr uint8_t kLadnInformationMinimumLength = 3;
+constexpr uint8_t kLadnInformationContentMinimumLength =
+    kLadnInformationMinimumLength -
+    3;  // Minimum length - 3 octets for IEI/Length
 constexpr uint16_t kLadnInformationMaximumLength        = 1715;
 constexpr uint8_t kLadnInformationMaximumSupportedLadns = 8;
 constexpr auto kLadnInformationIeName                   = "LADN Information";

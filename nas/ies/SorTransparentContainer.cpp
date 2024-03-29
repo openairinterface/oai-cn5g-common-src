@@ -28,9 +28,7 @@ using namespace oai::nas;
 //------------------------------------------------------------------------------
 SorTransparentContainer::SorTransparentContainer()
     : Type6NasIe(kIeiSorTransparentContainer), header_(), sor_mac_i_() {
-  SetLengthIndicator(
-      kSorTransparentContainerMinimumLength -
-      3);  // Minimum length - 3 bytes for IEI/Length
+  SetLengthIndicator(kSorTransparentContainerContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -41,9 +39,7 @@ SorTransparentContainer::SorTransparentContainer(
   for (int i = 0; i < 16; i++) {
     this->sor_mac_i_[i] = value[i];
   }
-  SetLengthIndicator(
-      kSorTransparentContainerMinimumLength -
-      3);  // Minimum length - 3 bytes for IEI/Length
+  SetLengthIndicator(kSorTransparentContainerContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -64,16 +60,8 @@ int SorTransparentContainer::Encode(uint8_t* buf, int len) {
 
   int ie_len = GetIeLength();
 
-  if (len < ie_len) {  // Length of the content + IEI/Len
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Size of the buffer is not enough to store this IE (IE len %d)",
-            ie_len);
-    return KEncodeDecodeError;
-  }
-
   int encoded_size = 0;
-  // IEI and Length (later)
+  // Validate the buffer's length and Encode IEI/Length (later)
   int len_pos = 0;
   int encoded_header_size =
       Type6NasIe::Encode(buf + encoded_size, len, len_pos);
@@ -132,8 +120,8 @@ int SorTransparentContainer::Decode(uint8_t* buf, int len, bool is_iei) {
 
   // TODO: decode the rest as spare for now
   uint8_t spare = 0;
-  for (int i = 0;
-       i < (GetLengthIndicator() - kSorTransparentContainerIeMinimumLength);
+  for (int i = 0; i < (GetLengthIndicator() -
+                       kSorTransparentContainerContentMinimumLength);
        i++) {
     DECODE_U8(buf + decoded_size, spare, decoded_size);
   }

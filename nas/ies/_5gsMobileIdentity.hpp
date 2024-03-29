@@ -25,7 +25,10 @@
 #include "Struct.hpp"
 #include "Type6NasIe.hpp"
 
-constexpr uint8_t k5gsMobileIdentityMinimumLength   = 4;
+constexpr uint8_t k5gsMobileIdentityMinimumLength = 4;
+constexpr uint8_t k5gsMobileIdentityContentMinimumLength =
+    k5gsMobileIdentityMinimumLength -
+    3;  // Minimum length - 3 octets for IEI/Length
 constexpr uint8_t k5gsMobileIdentityIe5gGutiLength  = 11;
 constexpr uint8_t k5gsMobileIdentityIe5gSTmsiLength = 7;
 constexpr auto k5gsMobileIdentityIeName             = "5GS Mobile Identity";

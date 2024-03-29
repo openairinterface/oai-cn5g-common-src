@@ -31,9 +31,7 @@ using namespace oai::nas;
 //------------------------------------------------------------------------------
 LadnIndication::LadnIndication() : Type6NasIe(kIeiLadnIndication) {
   ladn_ = {};
-  SetLengthIndicator(
-      kLadnIndicationMinimumLength -
-      3);  // Minimum length - 3 bytes for IEI/Length
+  SetLengthIndicator(kLadnIndicationContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -64,19 +62,9 @@ int LadnIndication::Encode(uint8_t* buf, int len) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
-  int ie_len = GetIeLength();
-
-  if (len < ie_len) {  // Length of the content + IEI/Len
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Size of the buffer is not enough to store this IE (IE len %d)",
-            ie_len);
-    return KEncodeDecodeError;
-  }
-
   int encoded_size = 0;
 
-  // IEI and Length (later)
+  // Validate the buffer's length and Encode IEI/Length (later)
   int len_pos = 0;
   int encoded_header_size =
       Type6NasIe::Encode(buf + encoded_size, len, len_pos);

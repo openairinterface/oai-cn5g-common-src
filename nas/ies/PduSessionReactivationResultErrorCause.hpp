@@ -24,7 +24,10 @@
 
 #include "Type6NasIe.hpp"
 
-constexpr uint8_t kPduSessionReactivationResultErrorCauseMinimumLength  = 5;
+constexpr uint8_t kPduSessionReactivationResultErrorCauseMinimumLength = 5;
+constexpr uint8_t kPduSessionReactivationResultErrorCauseContentMinimumLength =
+    kPduSessionReactivationResultErrorCauseMinimumLength -
+    3;  // Minimum length - 3 octets for IEI/Length
 constexpr uint32_t kPduSessionReactivationResultErrorCauseMaximumLength = 515;
 constexpr auto kPduSessionReactivationResultErrorCauseIeName =
     "PDU Session Reactivation Result Error Cause";

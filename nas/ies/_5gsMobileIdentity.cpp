@@ -32,18 +32,14 @@ using namespace oai::nas;
 _5gsMobileIdentity::_5gsMobileIdentity() : Type6NasIe() {
   type_of_identity_ = 0;
   ClearIe();
-  SetLengthIndicator(
-      k5gsMobileIdentityMinimumLength -
-      3);  // Minimum length - 3 bytes for IEI/Length
+  SetLengthIndicator(k5gsMobileIdentityContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
 _5gsMobileIdentity::_5gsMobileIdentity(uint8_t iei) : Type6NasIe(iei) {
   type_of_identity_ = 0;
   ClearIe();
-  SetLengthIndicator(
-      k5gsMobileIdentityMinimumLength -
-      3);  // Minimum length - 3 bytes for IEI/Length
+  SetLengthIndicator(k5gsMobileIdentityContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -145,7 +141,7 @@ int _5gsMobileIdentity::Encode5gGuti(uint8_t* buf, int len) {
       .debug("Encoding 5G-GUTI IEI 0x%x", iei_.value());
   int encoded_size = 0;
 
-  // IEI and Length
+  // Validate the buffer's length and Encode IEI/Length
   int len_pos = 0;
   int encoded_header_size =
       Type6NasIe::Encode(buf + encoded_size, len, len_pos);
@@ -258,7 +254,7 @@ int _5gsMobileIdentity::EncodeSuci(uint8_t* buf, int len) {
   if (!supi_format_imsi_.has_value()) return KEncodeDecodeError;
 
   int encoded_size = 0;
-  // IEI and Length
+  // Validate the buffer's length and Encode IEI/Length
   int len_pos = 0;
   int encoded_header_size =
       Type6NasIe::Encode(buf + encoded_size, len, len_pos);
@@ -553,7 +549,7 @@ int _5gsMobileIdentity::Encode5gSTmsi(uint8_t* buf, int len) {
 
   int encoded_size = 0;
 
-  // IEI and Length
+  // Validate the buffer's length and Encode IEI/Length
   int encoded_header_size = Type6NasIe::Encode(buf + encoded_size, len);
   if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   encoded_size += encoded_header_size;

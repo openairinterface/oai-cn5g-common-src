@@ -35,7 +35,7 @@ ExtendedProtocolDiscriminator::ExtendedProtocolDiscriminator(uint8_t epd)
 ExtendedProtocolDiscriminator::~ExtendedProtocolDiscriminator() {}
 
 //------------------------------------------------------------------------------
-bool ExtendedProtocolDiscriminator::Validate(const int& len) const {
+bool ExtendedProtocolDiscriminator::Validate(int len) const {
   if (len < kExtendedProtocolDiscriminatorLength) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error(
@@ -68,7 +68,7 @@ uint8_t ExtendedProtocolDiscriminator::Get() const {
 }
 
 //------------------------------------------------------------------------------
-int ExtendedProtocolDiscriminator::Encode(uint8_t* buf, const int& len) const {
+int ExtendedProtocolDiscriminator::Encode(uint8_t* buf, int len) const {
   if (!Validate(len)) return KEncodeDecodeError;
   uint32_t encoded_size = 0;
   ENCODE_U8(buf, epd_, encoded_size);
@@ -77,7 +77,7 @@ int ExtendedProtocolDiscriminator::Encode(uint8_t* buf, const int& len) const {
 
 //------------------------------------------------------------------------------
 int ExtendedProtocolDiscriminator::Decode(
-    const uint8_t* const buf, const int& len, bool is_iei) {
+    const uint8_t* const buf, int len, bool is_iei) {
   if (!Validate(len)) return KEncodeDecodeError;
   uint32_t decoded_size = 0;
   DECODE_U8(buf, epd_, decoded_size);

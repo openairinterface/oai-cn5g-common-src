@@ -39,24 +39,6 @@ AuthenticationFailureParameter::AuthenticationFailureParameter(
 //------------------------------------------------------------------------------
 AuthenticationFailureParameter::~AuthenticationFailureParameter() {}
 
-/*
-//------------------------------------------------------------------------------
-void AuthenticationFailureParameter::SetValue(const uint8_t
-(&value)[kAuthenticationFailureParameterContentLength]) { for (int i = 0; i <
-kAuthenticationFailureParameterContentLength; i++) { this->value_[i] = value[i];
-          }
-}
-
-//------------------------------------------------------------------------------
-void AuthenticationFailureParameter::GetValue(uint8_t
-(&value)[kAuthenticationFailureParameterContentLength]) const{ for (int i = 0; i
-< kAuthenticationFailureParameterContentLength; i++) { value[i] =
-this->value_[i];
-          }
-
-}
-*/
-
 //------------------------------------------------------------------------------
 void AuthenticationFailureParameter::SetValue(const bstring& value) {
   value_ = bstrcpy(value);
@@ -69,7 +51,7 @@ void AuthenticationFailureParameter::GetValue(bstring& value) const {
 }
 
 //------------------------------------------------------------------------------
-int AuthenticationFailureParameter::Encode(uint8_t* buf, const int& len) const {
+int AuthenticationFailureParameter::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
@@ -79,11 +61,6 @@ int AuthenticationFailureParameter::Encode(uint8_t* buf, const int& len) const {
   if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   encoded_size += encoded_header_size;
 
-  // Value
-  /* for (int i = 0; i < kAuthenticationFailureParameterContentLength; i++) {
-    ENCODE_U8(buf + encoded_size, value_[i], encoded_size);
-  }
-  */
   int size = encode_bstring(value_, (buf + encoded_size), len - encoded_size);
   encoded_size += size;
 
@@ -94,7 +71,7 @@ int AuthenticationFailureParameter::Encode(uint8_t* buf, const int& len) const {
 
 //------------------------------------------------------------------------------
 int AuthenticationFailureParameter::Decode(
-    const uint8_t* const buf, const int& len, bool is_iei) {
+    const uint8_t* const buf, int len, bool is_iei) {
   uint8_t decoded_size = 0;
   uint8_t octet        = 0;
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)

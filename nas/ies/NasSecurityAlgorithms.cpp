@@ -80,6 +80,7 @@ void NasSecurityAlgorithms::Set(
   type_of_ciphering_algorithm_            = ciphering & 0x0f;
   type_of_integrity_protection_algorithm_ = integrity_protection & 0x0f;
 }
+
 //------------------------------------------------------------------------------
 void NasSecurityAlgorithms::Get(
     uint8_t& ciphering, uint8_t& integrity_protection) const {
@@ -88,7 +89,7 @@ void NasSecurityAlgorithms::Get(
 }
 
 //------------------------------------------------------------------------------
-int NasSecurityAlgorithms::Encode(uint8_t* buf, const int& len) const {
+int NasSecurityAlgorithms::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
@@ -118,7 +119,7 @@ int NasSecurityAlgorithms::Encode(uint8_t* buf, const int& len) const {
 
 //------------------------------------------------------------------------------
 int NasSecurityAlgorithms::Decode(
-    const uint8_t* const buf, const int& len, bool is_iei) {
+    const uint8_t* const buf, int len, bool is_iei) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding %s", GetIeName().c_str());
 

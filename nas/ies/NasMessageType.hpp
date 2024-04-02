@@ -35,18 +35,17 @@ class NasMessageType : public NasIe {
   NasMessageType(uint8_t message_type);
   virtual ~NasMessageType();
 
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+
   static std::string GetIeName() { return kNasMessageTypeIeName; }
 
-  bool Validate(const int& len) const override;
+  bool Validate(int len) const override;
   uint32_t GetIeLength() const override;
 
   void Set(uint8_t message_type);
   void Get(uint8_t& message_type) const;
   uint8_t Get() const;
-
-  int Encode(uint8_t* buf, const int& len) const override;
-  int Decode(
-      const uint8_t* const buf, const int& len, bool is_iei = false) override;
 
  private:
   uint8_t message_type_;

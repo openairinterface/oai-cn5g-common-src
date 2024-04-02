@@ -42,7 +42,7 @@ class _5gsTrackingAreaIdList : public Type4NasIe {
   _5gsTrackingAreaIdList();
   _5gsTrackingAreaIdList(bool iei);
   _5gsTrackingAreaIdList(const std::vector<p_tai_t>& tai_list);
-  int Encode(uint8_t* buf, const int& len) const override;
+  int Encode(uint8_t* buf, int len) const override;
 
   static std::string GetIeName() { return k5gsTrackingAreaIdListIeName; }
 

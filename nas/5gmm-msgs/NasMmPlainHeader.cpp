@@ -87,7 +87,7 @@ uint32_t NasMmPlainHeader::GetLength() const {
 }
 
 //------------------------------------------------------------------------------
-bool NasMmPlainHeader::Validate(const uint32_t& len) const {
+bool NasMmPlainHeader::Validate(uint32_t len) const {
   uint32_t actual_length = GetLength();
   if (len < actual_length) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)

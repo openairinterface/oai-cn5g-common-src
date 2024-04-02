@@ -54,7 +54,7 @@ void SorTransparentContainer::GetValue(
 }
 
 //------------------------------------------------------------------------------
-int SorTransparentContainer::Encode(uint8_t* buf, const int& len) const {
+int SorTransparentContainer::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
@@ -93,7 +93,7 @@ int SorTransparentContainer::Encode(uint8_t* buf, const int& len) const {
 
 //------------------------------------------------------------------------------
 int SorTransparentContainer::Decode(
-    const uint8_t* const buf, const int& len, bool is_iei) {
+    const uint8_t* const buf, int len, bool is_iei) {
   if (len < kSorTransparentContainerMinimumLength) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error(

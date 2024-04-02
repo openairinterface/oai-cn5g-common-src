@@ -42,14 +42,13 @@ class LadnInformation : public Type6NasIe {
   LadnInformation();
   ~LadnInformation();
 
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+
   static std::string GetIeName() { return kLadnInformationIeName; }
 
   void Set(const std::vector<Ladn>& value);
   void Add(const Ladn& value);
-
-  int Encode(uint8_t* buf, const int& len) const override;
-  int Decode(
-      const uint8_t* const buf, const int& len, bool is_iei = false) override;
 
  private:
   std::vector<Ladn> ladn_list_;

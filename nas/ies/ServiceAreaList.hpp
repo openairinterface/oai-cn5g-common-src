@@ -43,7 +43,7 @@ class ServiceAreaList : public Type4NasIe {
   ServiceAreaList(bool iei);
   ServiceAreaList(const std::vector<service_area_list_ie_t>& list);
 
-  int Encode(uint8_t* buf, const int& len) const override;
+  int Encode(uint8_t* buf, int len) const override;
   // TODO: int Decode(uint8_t* buf, int len);
 
   static std::string GetIeName() { return kServiceAreaListIeName; }

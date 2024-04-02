@@ -46,6 +46,9 @@ class UeSecurityCapability : public Type4NasIe {
   ~UeSecurityCapability();
   void operator=(const UeSecurityCapability& ue_security_capability);
 
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+
   static std::string GetIeName() { return kUeSecurityCapabilityIeName; }
 
   void SetEa(uint8_t value);
@@ -62,10 +65,6 @@ class UeSecurityCapability : public Type4NasIe {
 
   void Set(uint8_t _5g_ea, uint8_t _5g_ia);
   void Set(uint8_t _5g_ea, uint8_t _5g_ia, uint8_t eea, uint8_t eia);
-
-  int Encode(uint8_t* buf, const int& len) const override;
-  int Decode(
-      const uint8_t* const buf, const int& len, bool is_iei = false) override;
 
  private:
   uint8_t _5g_ea_;              // 3rd octet, Mandatory

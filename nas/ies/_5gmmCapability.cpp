@@ -61,7 +61,7 @@ uint8_t _5gmmCapability::GetOctet3() const {
 }
 
 //------------------------------------------------------------------------------
-int _5gmmCapability::Encode(uint8_t* buf, const int& len) const {
+int _5gmmCapability::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
   int ie_len = GetIeLength();
@@ -87,8 +87,7 @@ int _5gmmCapability::Encode(uint8_t* buf, const int& len) const {
 }
 
 //------------------------------------------------------------------------------
-int _5gmmCapability::Decode(
-    const uint8_t* const buf, const int& len, bool is_iei) {
+int _5gmmCapability::Decode(const uint8_t* const buf, int len, bool is_iei) {
   if (len < k5gmmCapabilityMinimumLength) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error(

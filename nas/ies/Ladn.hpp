@@ -33,13 +33,13 @@ class Ladn {
   Ladn();
   ~Ladn();
 
-  void Set(const Dnn& value);
-  void Set(const _5gsTrackingAreaIdList& value);
+  int Encode(uint8_t* buf, int len) const;
+  int Decode(uint8_t* buf, int len);
 
   uint32_t GetLength() const;
 
-  int Encode(uint8_t* buf, const int& len) const;
-  int Decode(uint8_t* buf, int len);
+  void Set(const Dnn& value);
+  void Set(const _5gsTrackingAreaIdList& value);
 
  private:
   Dnn dnn_;

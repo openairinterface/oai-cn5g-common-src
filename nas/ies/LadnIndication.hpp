@@ -40,14 +40,13 @@ class LadnIndication : public Type6NasIe {
   LadnIndication(const std::vector<bstring>& ladn);
   ~LadnIndication();
 
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+
   static std::string GetIeName() { return kLadnIndicationIeName; }
 
   // void SetValue(const std::vector<bstring>& ladn);
   void GetValue(std::vector<bstring>& ladn) const;
-
-  int Encode(uint8_t* buf, const int& len) const override;
-  int Decode(
-      const uint8_t* const buf, const int& len, bool is_iei = false) override;
 
  private:
   std::vector<bstring> ladn_;

@@ -39,10 +39,12 @@ class SNssai : public Type4NasIe {
   SNssai(std::optional<uint8_t> iei, SNSSAI_s snssai);
   ~SNssai();
 
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(uint8_t* buf, int len, const bool is_option = true);
+
   static std::string GetIeName() { return kSNssaiIeName; }
 
-  int Encode(uint8_t* buf, const int& len) const override;
-  int Decode(uint8_t* buf, int len, const bool is_option = true);
+  uint8_t GetLength();
 
   void GetValue(SNSSAI_t& snssai) const;
 
@@ -50,8 +52,6 @@ class SNssai : public Type4NasIe {
       std::optional<int8_t> iei, uint8_t sst, std::optional<int32_t> sd,
       std::optional<int8_t> mapped_hplmn_sst,
       std::optional<int32_t> mapped_hplmn_sd);
-
-  uint8_t GetLength();
 
   std::string ToString();
 

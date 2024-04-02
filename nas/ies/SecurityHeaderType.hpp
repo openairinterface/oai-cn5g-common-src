@@ -35,18 +35,17 @@ class SecurityHeaderType : public NasIe {
   SecurityHeaderType();
   virtual ~SecurityHeaderType();
 
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+
   static std::string GetIeName() { return kSecurityHeaderTypeIeName; }
 
-  bool Validate(const int& len) const override;
+  bool Validate(int len) const override;
   uint32_t GetIeLength() const override;
 
   void Set(uint8_t secu_header_type, uint8_t spare = 0);
   void Get(uint8_t& secu_header_type) const;
   uint8_t Get() const;
-
-  int Encode(uint8_t* buf, const int& len) const override;
-  int Decode(
-      const uint8_t* const buf, const int& len, bool is_iei = false) override;
 
  private:
   uint8_t spare_ : 4;

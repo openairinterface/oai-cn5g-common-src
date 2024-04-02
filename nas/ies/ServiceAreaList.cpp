@@ -76,7 +76,7 @@ ServiceAreaList::ServiceAreaList(
 }
 
 //------------------------------------------------------------------------------
-int ServiceAreaList::Encode(uint8_t* buf, const int& len) const {
+int ServiceAreaList::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 

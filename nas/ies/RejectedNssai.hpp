@@ -41,11 +41,10 @@ class RejectedNssai : public Type4NasIe {
   RejectedNssai(uint8_t iei);
   ~RejectedNssai();
 
-  static std::string GetIeName() { return kRejectedNssaiIeName; }
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
 
-  int Encode(uint8_t* buf, const int& len) const override;
-  int Decode(
-      const uint8_t* const buf, const int& len, bool is_iei = false) override;
+  static std::string GetIeName() { return kRejectedNssaiIeName; }
 
   void SetRejectedSNssais(const std::vector<RejectedSNssai>& nssais);
   void GetRejectedSNssais(std::vector<RejectedSNssai>& nssais) const;

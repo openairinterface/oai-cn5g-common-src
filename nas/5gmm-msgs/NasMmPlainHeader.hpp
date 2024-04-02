@@ -43,7 +43,7 @@ class NasMmPlainHeader : public Nas5gmmMessage {
   void SetHeader(uint8_t epd, uint8_t security_header_type, uint8_t msg_type);
 
   uint32_t GetLength() const override;
-  bool Validate(const uint32_t& len) const override;
+  bool Validate(uint32_t len) const override;
 
   int Encode(uint8_t* buf, int len) override;
   int Decode(uint8_t* buf, int len) override;

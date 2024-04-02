@@ -50,7 +50,7 @@ void NasMessageContainer::GetValue(bstring& value) const {
 }
 
 //------------------------------------------------------------------------------
-int NasMessageContainer::Encode(uint8_t* buf, const int& len) const {
+int NasMessageContainer::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
   int encoded_size = 0;
@@ -77,7 +77,7 @@ int NasMessageContainer::Encode(uint8_t* buf, const int& len) const {
 
 //------------------------------------------------------------------------------
 int NasMessageContainer::Decode(
-    const uint8_t* const buf, const int& len, bool is_iei) {
+    const uint8_t* const buf, int len, bool is_iei) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding %s", GetIeName().c_str());
   int decoded_size = 0;

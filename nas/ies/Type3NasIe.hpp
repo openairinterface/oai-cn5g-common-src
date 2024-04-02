@@ -33,14 +33,13 @@ class Type3NasIe : public NasIe {
   Type3NasIe(uint8_t iei);
   virtual ~Type3NasIe();
 
-  bool Validate(const int& len) const override;
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+
   uint32_t GetIeLength() const override;
+  bool Validate(int len) const override;
 
   void SetIei(uint8_t iei);
-
-  int Encode(uint8_t* buf, const int& len) const override;
-  int Decode(
-      const uint8_t* const buf, const int& len, bool is_iei = false) override;
 
  protected:
   std::optional<uint8_t> iei_;  // IEI present format TV

@@ -63,15 +63,8 @@ void _5gsNetworkFeatureSupport::SetValue(uint8_t value, uint8_t value2) {
   SetLengthIndicator(2);
 }
 
-/*
 //------------------------------------------------------------------------------
-uint8_t _5gsNetworkFeatureSupport::GetValue() {
-  return value_;
-}
-*/
-
-//------------------------------------------------------------------------------
-int _5gsNetworkFeatureSupport::Encode(uint8_t* buf, const int& len) const {
+int _5gsNetworkFeatureSupport::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
@@ -101,7 +94,7 @@ int _5gsNetworkFeatureSupport::Encode(uint8_t* buf, const int& len) const {
 
 //------------------------------------------------------------------------------
 int _5gsNetworkFeatureSupport::Decode(
-    const uint8_t* const buf, const int& len, bool is_iei) {
+    const uint8_t* const buf, int len, bool is_iei) {
   if (len < k5gsNetworkFeatureSupportMinimumLength) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error(

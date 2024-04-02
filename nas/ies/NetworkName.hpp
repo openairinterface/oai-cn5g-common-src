@@ -42,6 +42,9 @@ class NetworkName : public Type4NasIe {
   NetworkName(uint8_t iei);
   ~NetworkName();
 
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = true) override;
+
   static std::string GetIeName() { return kNetworkNameIeName; }
 
   void SetIei(uint8_t iei);
@@ -57,9 +60,6 @@ class NetworkName : public Type4NasIe {
 
   void SetTextString(const std::string& str);
   void SetTextString(const bstring& str);
-
-  int Encode(uint8_t* buf, const int& len) const override;
-  int Decode(uint8_t* buf, int len, bool is_option = true);
 
  private:
   // uint8_t iei_;

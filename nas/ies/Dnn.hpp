@@ -39,11 +39,10 @@ class Dnn : public Type4NasIe {
   Dnn(bool iei);
   ~Dnn();
 
-  static std::string GetIeName() { return kDnnIeName; }
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
 
-  int Encode(uint8_t* buf, const int& len) const override;
-  int Decode(
-      const uint8_t* const buf, const int& len, bool is_iei = false) override;
+  static std::string GetIeName() { return kDnnIeName; }
 
   void SetValue(const bstring& dnn);
   void GetValue(bstring& dnn) const;

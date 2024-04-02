@@ -37,14 +37,13 @@ class _5gsDrxParameters : public Type4NasIe {
   _5gsDrxParameters(uint8_t value);
   ~_5gsDrxParameters();
 
-  int Encode(uint8_t* buf, const int& len) const override;
-  int Decode(
-      const uint8_t* const buf, const int& len, bool is_iei = false) override;
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+
+  static std::string GetIeName() { return k5gsDrxParametersIeName; }
 
   void SetValue(uint8_t value);
   uint8_t GetValue() const;
-
-  static std::string GetIeName() { return k5gsDrxParametersIeName; }
 
  private:
   uint8_t value_;

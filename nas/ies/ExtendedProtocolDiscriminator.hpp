@@ -36,20 +36,19 @@ class ExtendedProtocolDiscriminator : public NasIe {
   ExtendedProtocolDiscriminator(uint8_t epd);
   virtual ~ExtendedProtocolDiscriminator();
 
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = true) override;
+
   static std::string GetIeName() {
     return kExtendedProtocolDiscriminatorIeName;
   }
 
-  bool Validate(const int& len) const override;
   uint32_t GetIeLength() const override;
+  bool Validate(int len) const override;
 
   void Set(uint8_t epd);
   void Get(uint8_t& epd) const;
   uint8_t Get() const;
-
-  int Encode(uint8_t* buf, const int& len) const override;
-  int Decode(
-      const uint8_t* const buf, const int& len, bool is_iei = true) override;
 
  private:
   uint8_t epd_;

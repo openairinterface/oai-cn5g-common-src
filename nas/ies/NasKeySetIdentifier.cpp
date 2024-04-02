@@ -69,58 +69,6 @@ void NasKeySetIdentifier::GetValue() {
   key_id_ = value_ & 0b00000111;
 }
 
-/*
-//------------------------------------------------------------------------------
-int NasKeySetIdentifier::Encode(uint8_t* buf, const int& len)  const{
-  Logger::nas_mm().debug("Encoding NasKeySetIdentifier IE");
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)IeSize) {
-    Logger::nas_mm().error(
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)th is less than the
-minimum length of this IE (%d octet)", kType1IeSize); return KEncodeDecodeError;
-  }
-
-  uint8_t octet         = 0;
-  uint32_t encoded_size = 0;
-  Logger::nas_mm().debug(
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)KeySetIdentifier IE
-(TSC 0x%x, Key_id 0x%x)", tsc_, key_id_); return encoded_size;
-}
-
-//------------------------------------------------------------------------------
-int NasKeySetIdentifier::Decode(
-    uint8_t* buf, const int& len, bool is_option, bool is_high) {
-  Logger::nas_mm().debug("Decoding NasKeySetIdentifier IE");
-oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-  if (len < kType1IeSize) {
-    Logger::nas_mm().error(
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)th is less than the
-minimum length of this IE (%d octet)", kType1IeSize); return KEncodeDecodeError;
-  }
-  uint32_t decoded_size = 0;
-  uint8_t octet         = 0;
-  DECODE_U8(buf, octet, decoded_size);
-
-  if (is_option) {
-    // iei_ = (octet & 0xf0) >> 4;
-  } else {
-    // iei_ = 0;
-  }
-
-  if (!is_high) {
-    tsc_    = octet & 0x08;
-    key_id_ = octet & 0x07;
-  } else {
-    tsc_    = (octet & 0x80) >> 4;
-    key_id_ = (octet & 0x70) >> 4;
-  }
-
-  Logger::nas_mm().debug(
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)KeySetIdentifier IE
-(TSC 0x%x, Key_id 0x%x)", tsc_, key_id_); if (iei_) return 1; else return 0;  //
-1/2 octet
-}
-*/
-
 //------------------------------------------------------------------------------
 void NasKeySetIdentifier::SetTypeOfSecurityContext(bool type) {
   tsc_ = type;

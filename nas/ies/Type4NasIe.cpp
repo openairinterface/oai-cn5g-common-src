@@ -22,6 +22,7 @@
 #include "Type4NasIe.hpp"
 
 using namespace oai::nas;
+
 //------------------------------------------------------------------------------
 Type4NasIe::Type4NasIe() : NasIe() {
   iei_ = std::nullopt;
@@ -46,6 +47,7 @@ void Type4NasIe::SetIei(uint8_t iei) {
 void Type4NasIe::GetIei(std::optional<uint8_t>& iei) const {
   iei = iei_;
 }
+
 //------------------------------------------------------------------------------
 void Type4NasIe::SetLengthIndicator(uint8_t li) {
   li_ = li;
@@ -72,7 +74,7 @@ uint8_t Type4NasIe::GetHeaderLength() const {
 }
 
 //------------------------------------------------------------------------------
-bool Type4NasIe::Validate(const int& len) const {
+bool Type4NasIe::Validate(int len) const {
   uint32_t ie_len = GetIeLength();  // Length of the content + IEI/Len
 
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
@@ -92,7 +94,7 @@ bool Type4NasIe::Validate(const int& len) const {
 }
 
 //------------------------------------------------------------------------------
-bool Type4NasIe::ValidateHeader(const int& len) const {
+bool Type4NasIe::ValidateHeader(int len) const {
   int header_len = GetHeaderLength();  // Length of IEI/Len
   if (len < header_len) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
@@ -107,7 +109,7 @@ bool Type4NasIe::ValidateHeader(const int& len) const {
 }
 
 //------------------------------------------------------------------------------
-int Type4NasIe::Encode(uint8_t* buf, const int& len) const {
+int Type4NasIe::Encode(uint8_t* buf, int len) const {
   if (!Validate(len)) return KEncodeDecodeError;
 
   int encoded_size = 0;
@@ -121,7 +123,7 @@ int Type4NasIe::Encode(uint8_t* buf, const int& len) const {
 }
 
 //------------------------------------------------------------------------------
-int Type4NasIe::Encode(uint8_t* buf, const int& len, int& len_pos) const {
+int Type4NasIe::Encode(uint8_t* buf, int len, int& len_pos) const {
   if (!Validate(len)) return KEncodeDecodeError;
 
   int encoded_size = 0;
@@ -135,7 +137,7 @@ int Type4NasIe::Encode(uint8_t* buf, const int& len, int& len_pos) const {
 }
 
 //------------------------------------------------------------------------------
-int Type4NasIe::Decode(const uint8_t* const buf, const int& len, bool is_iei) {
+int Type4NasIe::Decode(const uint8_t* const buf, int len, bool is_iei) {
   if (!ValidateHeader(len)) return KEncodeDecodeError;
 
   int decoded_size = 0;

@@ -101,8 +101,7 @@ int conv::ascii_to_hex(uint8_t* dst, const char* h) {
 }
 
 //------------------------------------------------------------------------------
-std::string conv::mccToString(
-    const uint8_t digit1, const uint8_t digit2, const uint8_t digit3) {
+std::string conv::mccToString(uint8_t digit1, uint8_t digit2, uint8_t digit3) {
   std::string s  = {};
   uint16_t mcc16 = digit1 * 100 + digit2 * 10 + digit3;
   // s.append(std::to_string(digit1)).append(std::to_string(digit2)).append(std::to_string(digit3));
@@ -111,8 +110,7 @@ std::string conv::mccToString(
 }
 
 //------------------------------------------------------------------------------
-std::string conv::mncToString(
-    const uint8_t digit1, const uint8_t digit2, const uint8_t digit3) {
+std::string conv::mncToString(uint8_t digit1, uint8_t digit2, uint8_t digit3) {
   std::string s  = {};
   uint16_t mcc16 = 0;
 
@@ -271,7 +269,7 @@ bool conv::string_to_int32(const std::string& str, uint32_t& value) {
 
 //------------------------------------------------------------------------------
 bool conv::string_to_int(
-    const std::string& str, uint32_t& value, const uint8_t& base) {
+    const std::string& str, uint32_t& value, uint8_t base) {
   if (str.empty()) return false;
   if ((base != 10) or (base != 16)) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)

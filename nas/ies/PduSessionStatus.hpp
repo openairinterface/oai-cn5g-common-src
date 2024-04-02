@@ -39,14 +39,13 @@ class PduSessionStatus : public Type4NasIe {
   PduSessionStatus(uint16_t value);
   ~PduSessionStatus();
 
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+
   static std::string GetIeName() { return kPduSessionStatusIeName; }
 
   void SetValue(uint16_t value);
   uint16_t GetValue() const;
-
-  int Encode(uint8_t* buf, const int& len) const override;
-  int Decode(
-      const uint8_t* const buf, const int& len, bool is_iei = false) override;
 
  private:
   uint16_t value_;

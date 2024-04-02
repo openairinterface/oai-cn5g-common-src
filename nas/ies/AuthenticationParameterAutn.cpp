@@ -34,7 +34,7 @@ AuthenticationParameterAutn::AuthenticationParameterAutn(uint8_t iei)
 
 //------------------------------------------------------------------------------
 AuthenticationParameterAutn::AuthenticationParameterAutn(
-    const uint8_t iei, uint8_t value[kAuthenticationParameterAutnValueLength])
+    uint8_t iei, uint8_t value[kAuthenticationParameterAutnValueLength])
     : Type4NasIe(iei) {
   for (int i = 0; i < kAuthenticationParameterAutnValueLength; i++) {
     this->value_[i] = value[i];
@@ -52,7 +52,7 @@ AuthenticationParameterAutn::AuthenticationParameterAutn()
 AuthenticationParameterAutn::~AuthenticationParameterAutn() {}
 
 //------------------------------------------------------------------------------
-int AuthenticationParameterAutn::Encode(uint8_t* buf, const int& len) const {
+int AuthenticationParameterAutn::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
@@ -76,7 +76,7 @@ int AuthenticationParameterAutn::Encode(uint8_t* buf, const int& len) const {
 
 //------------------------------------------------------------------------------
 int AuthenticationParameterAutn::Decode(
-    const uint8_t* const buf, const int& len, bool is_iei) {
+    const uint8_t* const buf, int len, bool is_iei) {
   uint8_t decoded_size = 0;
   uint8_t octet        = 0;
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)

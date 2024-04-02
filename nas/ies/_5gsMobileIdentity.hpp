@@ -44,37 +44,33 @@ class _5gsMobileIdentity : public Type6NasIe {
   _5gsMobileIdentity(uint8_t iei);
   ~_5gsMobileIdentity();
 
-  static std::string GetIeName() { return k5gsMobileIdentityIeName; }
-
   // Common
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+
+  static std::string GetIeName() { return k5gsMobileIdentityIeName; }
   void ClearIe();
-
   uint8_t GetTypeOfIdentity() const { return type_of_identity_; };
-
-  int Encode(uint8_t* buf, const int& len) const override;
-  int Decode(
-      const uint8_t* const buf, const int& len, bool is_iei = false) override;
 
   // 5G GUTI
   int Encode5gGuti(uint8_t* buf, int len) const;
-  int Decode5gGuti(const uint8_t* const buf, const int& len);
+  int Decode5gGuti(const uint8_t* const buf, int len);
   void Set5gGuti(
-      const std::string& mcc, const std::string& mnc,
-      const uint8_t& amf_region_id, const uint16_t& amf_set_id,
-      const uint8_t& amf_pointer, const uint32_t& _5g_tmsi);
+      const std::string& mcc, const std::string& mnc, uint8_t amf_region_id,
+      uint16_t amf_set_id, uint8_t amf_pointer, uint32_t _5g_tmsi);
   void Get5gGuti(std::optional<_5G_GUTI_t>&) const;
 
   // SUCI
   int EncodeSuci(uint8_t* buf, int len) const;
-  int DecodeSuci(const uint8_t* const buf, const int& len, int length);
+  int DecodeSuci(const uint8_t* const buf, int len, int length);
   void SetSuciWithSupiImsi(
       const std::string& mcc, const std::string& mnc,
-      const std::string& routing_ind, const uint8_t protection_sch_id,
+      const std::string& routing_ind, uint8_t protection_sch_id,
       const std::string& msin);  // TODO: SetSUCI, SUCI and SUPI format IMSI
   void SetSuciWithSupiImsi(
       const std::string& mcc, const std::string& mnc,
-      const std::string& routing_ind, const uint8_t protection_sch_id,
-      const uint8_t home_pki, const std::string& msin_digits);
+      const std::string& routing_ind, uint8_t protection_sch_id,
+      uint8_t home_pki, const std::string& msin_digits);
   bool GetSuciWithSupiImsi(SUCI_imsi_t& suci) const;
 
   int EncodeRoutingIndicator(
@@ -84,7 +80,7 @@ class _5gsMobileIdentity : public Type6NasIe {
 
   // TMSI
   int Encode5gSTmsi(uint8_t* buf, int len) const;
-  int Decode5gSTmsi(const uint8_t* const buf, const int& len);
+  int Decode5gSTmsi(const uint8_t* const buf, int len);
 
   void Set5gSTmsi(
       uint16_t amf_set_id, uint8_t amf_pointer, const std::string& tmsi);
@@ -93,7 +89,7 @@ class _5gsMobileIdentity : public Type6NasIe {
 
   // IMEI/IMEISV
   int EncodeImeisv(uint8_t* buf, int len) const;
-  int DecodeImeisv(const uint8_t* const buf, const int& len);
+  int DecodeImeisv(const uint8_t* const buf, int len);
 
   void SetImeisv(const IMEI_IMEISV_t& imeisv);
   bool GetImeisv(IMEI_IMEISV_t& imeisv) const;

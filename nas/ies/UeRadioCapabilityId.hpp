@@ -38,11 +38,10 @@ class UeRadioCapabilityId : public Type4NasIe {
   UeRadioCapabilityId(const bstring& value);
   ~UeRadioCapabilityId();
 
-  static std::string GetIeName() { return kUeRadioCapabilityIdIeName; }
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
 
-  int Encode(uint8_t* buf, const int& len) const override;
-  int Decode(
-      const uint8_t* const buf, const int& len, bool is_iei = false) override;
+  static std::string GetIeName() { return kUeRadioCapabilityIdIeName; }
 
   void SetValue(const bstring& value);
   void GetValue(bstring& value) const;

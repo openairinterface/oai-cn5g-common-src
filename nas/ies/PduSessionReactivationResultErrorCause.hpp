@@ -40,6 +40,9 @@ class PduSessionReactivationResultErrorCause : public Type6NasIe {
   PduSessionReactivationResultErrorCause(uint8_t session_id, uint8_t value);
   ~PduSessionReactivationResultErrorCause();
 
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+
   static std::string GetIeName() {
     return kPduSessionReactivationResultErrorCauseIeName;
   }
@@ -49,10 +52,6 @@ class PduSessionReactivationResultErrorCause : public Type6NasIe {
 
   void SetValue(const std::vector<std::pair<uint8_t, uint8_t>>& value);
   void GetValue(std::vector<std::pair<uint8_t, uint8_t>>& value) const;
-
-  int Encode(uint8_t* buf, const int& len) const override;
-  int Decode(
-      const uint8_t* const buf, const int& len, bool is_iei = false) override;
 
  private:
   std::vector<std::pair<uint8_t, uint8_t>> pdu_session_id_cause_value_pair_;

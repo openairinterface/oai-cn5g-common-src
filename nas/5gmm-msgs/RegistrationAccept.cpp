@@ -165,8 +165,8 @@ void RegistrationAccept::SetSuciSupiFormatImsi(
 //------------------------------------------------------------------------------
 void RegistrationAccept::SetSuciSupiFormatImsi(
     const std::string& mcc, const std::string& mnc,
-    const std::string& routing_ind, uint8_t protection_sch_id,
-    const uint8_t& hnpki, const std::string& msin) {
+    const std::string& routing_ind, uint8_t protection_sch_id, uint8_t hnpki,
+    const std::string& msin) {
   // TODO:
 }
 

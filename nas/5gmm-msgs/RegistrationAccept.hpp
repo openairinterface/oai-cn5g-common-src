@@ -51,8 +51,8 @@ class RegistrationAccept : public Nas5gmmMessage {
       const std::string& msin);
   void SetSuciSupiFormatImsi(
       const std::string& mcc, const std::string& mnc,
-      const std::string& routing_ind, uint8_t protection_sch_id,
-      const uint8_t& hnpki, const std::string& msin);
+      const std::string& routing_ind, uint8_t protection_sch_id, uint8_t hnpki,
+      const std::string& msin);
   void Set5gGuti(
       const std::string& mcc, const std::string& mnc, uint8_t amf_region_id,
       uint16_t amf_set_id, uint8_t amf_pointer, uint32_t tmsi);

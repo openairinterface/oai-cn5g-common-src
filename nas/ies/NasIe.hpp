@@ -45,12 +45,13 @@ class NasIe {
   NasIe();
   virtual ~NasIe();
 
-  virtual bool Validate(const int& len) const = 0;
-  virtual uint32_t GetIeLength() const        = 0;
-
-  virtual int Encode(uint8_t* buf, const int& len) const = 0;
+  virtual int Encode(uint8_t* buf, int len) const = 0;
   virtual int Decode(
-      const uint8_t* const buf, const int& len, bool is_option = false) = 0;
+      const uint8_t* const buf, int len, bool is_option = false) = 0;
+
+  virtual uint32_t GetIeLength() const = 0;
+
+  virtual bool Validate(int len) const = 0;
 
  protected:
 };

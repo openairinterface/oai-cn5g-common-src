@@ -39,11 +39,10 @@ class PlmnList : public Type4NasIe {
   PlmnList(uint8_t iei);
   ~PlmnList();
 
-  static std::string GetIeName() { return kPlmnListIeName; }
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
 
-  int Encode(uint8_t* buf, const int& len) const override;
-  int Decode(
-      const uint8_t* const buf, const int& len, bool is_iei = false) override;
+  static std::string GetIeName() { return kPlmnListIeName; }
 
   void Set(uint8_t iei, const std::vector<nas_plmn_t>& list);
   void Get(std::vector<nas_plmn_t>& list) const;

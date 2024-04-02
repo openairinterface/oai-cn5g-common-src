@@ -41,11 +41,10 @@ class _5gsRegistrationResult : public Type4NasIe {
       uint8_t iei, bool emergency, bool nssaa, bool sms, uint8_t value);
   ~_5gsRegistrationResult();
 
-  static std::string GetIeName() { return k5gsRegistrationResultIeName; }
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
 
-  int Encode(uint8_t* buf, const int& len) const override;
-  int Decode(
-      const uint8_t* const buf, const int& len, bool is_iei = false) override;
+  static std::string GetIeName() { return k5gsRegistrationResultIeName; }
 
   void SetValue(uint8_t value);
   uint8_t GetValue() const;

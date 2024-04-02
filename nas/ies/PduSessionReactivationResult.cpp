@@ -55,7 +55,7 @@ uint16_t PduSessionReactivationResult::GetValue() const {
 }
 
 //------------------------------------------------------------------------------
-int PduSessionReactivationResult::Encode(uint8_t* buf, const int& len) const {
+int PduSessionReactivationResult::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
   int ie_len = GetIeLength();
@@ -82,7 +82,7 @@ int PduSessionReactivationResult::Encode(uint8_t* buf, const int& len) const {
 
 //------------------------------------------------------------------------------
 int PduSessionReactivationResult::Decode(
-    const uint8_t* const buf, const int& len, bool is_iei) {
+    const uint8_t* const buf, int len, bool is_iei) {
   if (len < kPduSessionReactivationResultMinimumLength) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error(

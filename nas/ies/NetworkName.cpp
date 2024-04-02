@@ -42,6 +42,7 @@ NetworkName::NetworkName() : Type4NasIe() {
   text_string_          = nullptr;
   SetLengthIndicator(kNetworkNameContentMinimumLength);
 }
+
 //------------------------------------------------------------------------------
 NetworkName::NetworkName(uint8_t iei) : Type4NasIe(iei) {
   coding_scheme_        = 0;
@@ -60,6 +61,7 @@ NetworkName::~NetworkName() {
 void NetworkName::SetIei(uint8_t iei) {
   iei_ = iei;
 }
+
 //------------------------------------------------------------------------------
 void NetworkName::NetworkName::SetCodingScheme(uint8_t value) {
   coding_scheme_ = value & 0x07;
@@ -110,7 +112,7 @@ void NetworkName::SetTextString(const bstring& str) {
 }
 
 //------------------------------------------------------------------------------
-int NetworkName::Encode(uint8_t* buf, const int& len) const {
+int NetworkName::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding NetworkName");
 
@@ -137,7 +139,7 @@ int NetworkName::Encode(uint8_t* buf, const int& len) const {
 }
 
 //------------------------------------------------------------------------------
-int NetworkName::Decode(uint8_t* buf, int len, bool is_option) {
-  // TODO
+int NetworkName::Decode(const uint8_t* const buf, int len, bool is_iei) {
+  // TODO: to be implemented
   return -1;
 }

@@ -39,13 +39,12 @@ class Additional5gSecurityInformation : public Type4NasIe {
   Additional5gSecurityInformation(bool RINMR, bool HDP);
   ~Additional5gSecurityInformation();
 
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+
   static std::string GetIeName() {
     return kAdditional5gSecurityInformationIeName;
   }
-
-  int Encode(uint8_t* buf, const int& len) const override;
-  int Decode(
-      const uint8_t* const buf, const int& len, bool is_iei = false) override;
 
   void SetRinmr(bool value);
   bool GetRinmr() const;

@@ -100,7 +100,7 @@ class NasHelper {
   template<typename T>
   static int Decode(
       std::optional<T>& ie, uint8_t*& buf, int& len, int& decoded_size,
-      const bool& high_pos, bool iei) noexcept {
+      bool high_pos, bool iei) noexcept {
     T ie_tmp = {};
     int decoded_result =
         ie_tmp.Decode(buf + decoded_size, len - decoded_size, high_pos, iei);
@@ -129,7 +129,7 @@ class NasHelper {
 
   template<typename T>
   static int Decode(
-      T& ie, uint8_t*& buf, int& len, int& decoded_size, const bool& high_pos,
+      T& ie, uint8_t*& buf, int& len, int& decoded_size, bool high_pos,
       bool iei) noexcept {
     int decoded_result =
         ie.Decode(buf + decoded_size, len - decoded_size, high_pos, iei);

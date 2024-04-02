@@ -106,7 +106,7 @@ void RejectedSNssai::GetCause(uint8_t& cause) const {
 }
 
 //------------------------------------------------------------------------------
-int RejectedSNssai::Encode(uint8_t* buf, const int& len) const {
+int RejectedSNssai::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding RejectedSNssai");
   if (len < length_ + 1) {
@@ -139,7 +139,7 @@ int RejectedSNssai::Encode(uint8_t* buf, const int& len) const {
 }
 
 //------------------------------------------------------------------------------
-int RejectedSNssai::Decode(const uint8_t* const buf, const int& len) {
+int RejectedSNssai::Decode(const uint8_t* const buf, int len) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding RejectedSNssai");
   int decoded_size = 0;

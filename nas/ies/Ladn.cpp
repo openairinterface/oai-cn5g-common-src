@@ -48,8 +48,9 @@ void Ladn::Set(const _5gsTrackingAreaIdList& value) {
 uint32_t Ladn::GetLength() const {
   return (dnn_.GetIeLength() + ta_list_.GetIeLength());
 }
+
 //------------------------------------------------------------------------------
-int Ladn::Encode(uint8_t* buf, const int& len) const {
+int Ladn::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding LADN");
 

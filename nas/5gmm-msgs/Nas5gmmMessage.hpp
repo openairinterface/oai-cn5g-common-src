@@ -34,7 +34,7 @@ class Nas5gmmMessage {
   // May not be the actual length of the message (by rounding 1/2 octet to 1
   // octet in some IEs) but always greater than the actual length of the message
   virtual uint32_t GetLength() const = 0;
-  virtual bool Validate(const uint32_t& len) const;
+  virtual bool Validate(uint32_t len) const;
 
   virtual int Encode(uint8_t* buf, int len) = 0;
   virtual int Decode(uint8_t* buf, int len) = 0;

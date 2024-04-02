@@ -45,7 +45,7 @@ void Type1NasIeFormatTv::SetIei(uint8_t iei) {
 }
 
 //------------------------------------------------------------------------------
-bool Type1NasIeFormatTv::Validate(const int& len) const {
+bool Type1NasIeFormatTv::Validate(int len) const {
   if (len < kType1NasIeFormatTvLength) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error(
@@ -71,10 +71,9 @@ void Type1NasIeFormatTv::SetValue(uint8_t value) {
 uint8_t Type1NasIeFormatTv::GetValue() const {
   return value_;
 }
+
 //------------------------------------------------------------------------------
-int Type1NasIeFormatTv::Encode(uint8_t* buf, const int& len) const {
-  // oai::logger::logger_registry::get_logger(LOGGER_COMMON).debug("Encoding
-  // %s", GetIeName().c_str());
+int Type1NasIeFormatTv::Encode(uint8_t* buf, int len) const {
   if (!Validate(len)) return KEncodeDecodeError;
 
   int encoded_size = 0;
@@ -86,8 +85,6 @@ int Type1NasIeFormatTv::Encode(uint8_t* buf, const int& len) const {
   }
   ENCODE_U8(buf + encoded_size, octet, encoded_size);
 
-  //  oai::logger::logger_registry::get_logger(LOGGER_COMMON).debug(
-  //     "Encoded %s (len %d)", GetIeName().c_str(), encoded_size);
   if (iei_.has_value()) {
     return encoded_size;  // 1 octet
   } else {
@@ -96,11 +93,7 @@ int Type1NasIeFormatTv::Encode(uint8_t* buf, const int& len) const {
 }
 
 //------------------------------------------------------------------------------
-int Type1NasIeFormatTv::Decode(
-    const uint8_t* const buf, const int& len, bool is_iei) {
-  // oai::logger::logger_registry::get_logger(LOGGER_COMMON).debug("Decoding
-  // %s", GetIeName().c_str());
-
+int Type1NasIeFormatTv::Decode(const uint8_t* const buf, int len, bool is_iei) {
   if (!Validate(len)) return KEncodeDecodeError;
 
   int decoded_size = 0;
@@ -111,8 +104,6 @@ int Type1NasIeFormatTv::Decode(
   }
   value_ = octet & 0x0f;
 
-  // oai::logger::logger_registry::get_logger(LOGGER_COMMON).debug(
-  //      "Decoded %s (len %d)", GetIeName().c_str(), decoded_size);
   if (is_iei) {
     return decoded_size;  // 1 octet
   } else {

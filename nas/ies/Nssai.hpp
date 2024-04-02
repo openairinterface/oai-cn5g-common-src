@@ -40,11 +40,10 @@ class Nssai : public Type4NasIe {
   Nssai(uint8_t iei, const std::vector<struct SNSSAI_s>& nssai);
   ~Nssai();
 
-  static std::string GetIeName() { return kNssaiIeName; }
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
 
-  int Encode(uint8_t* buf, const int& len) const override;
-  int Decode(
-      const uint8_t* const buf, const int& len, bool is_iei = false) override;
+  static std::string GetIeName() { return kNssaiIeName; }
 
   void GetValue(std::vector<struct SNSSAI_s>& nssai) const;
 

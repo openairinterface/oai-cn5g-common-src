@@ -37,11 +37,10 @@ class UeUsageSetting : public Type4NasIe {
   UeUsageSetting(bool ues_usage_setting);
   ~UeUsageSetting();
 
-  static std::string GetIeName() { return kUeUsageSettingIeName; }
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = true) override;
 
-  int Encode(uint8_t* buf, const int& len) const override;
-  int Decode(
-      const uint8_t* const buf, const int& len, bool is_iei = true) override;
+  static std::string GetIeName() { return kUeUsageSettingIeName; }
 
   void SetValue(bool value);
   bool GetValue() const;

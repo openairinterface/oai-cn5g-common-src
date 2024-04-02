@@ -72,7 +72,7 @@ uint8_t Type6NasIe::GetHeaderLength() const {
 }
 
 //------------------------------------------------------------------------------
-bool Type6NasIe::Validate(const int& len) const {
+bool Type6NasIe::Validate(int len) const {
   uint16_t ie_len = GetIeLength();
   if (len < ie_len) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
@@ -86,7 +86,7 @@ bool Type6NasIe::Validate(const int& len) const {
 }
 
 //------------------------------------------------------------------------------
-bool Type6NasIe::ValidateHeader(const int& len) const {
+bool Type6NasIe::ValidateHeader(int len) const {
   int header_len = GetHeaderLength();  // Length of IEI/Len
   if (len < header_len) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
@@ -101,7 +101,7 @@ bool Type6NasIe::ValidateHeader(const int& len) const {
 }
 
 //------------------------------------------------------------------------------
-int Type6NasIe::Encode(uint8_t* buf, const int& len) const {
+int Type6NasIe::Encode(uint8_t* buf, int len) const {
   if (!Validate(len)) return KEncodeDecodeError;
 
   int encoded_size = 0;
@@ -115,7 +115,7 @@ int Type6NasIe::Encode(uint8_t* buf, const int& len) const {
 }
 
 //------------------------------------------------------------------------------
-int Type6NasIe::Encode(uint8_t* buf, const int& len, int& len_pos) const {
+int Type6NasIe::Encode(uint8_t* buf, int len, int& len_pos) const {
   if (!Validate(len)) return KEncodeDecodeError;
 
   int encoded_size = 0;
@@ -130,7 +130,7 @@ int Type6NasIe::Encode(uint8_t* buf, const int& len, int& len_pos) const {
 }
 
 //------------------------------------------------------------------------------
-int Type6NasIe::Decode(const uint8_t* const buf, const int& len, bool is_iei) {
+int Type6NasIe::Decode(const uint8_t* const buf, int len, bool is_iei) {
   if (!ValidateHeader(len)) return KEncodeDecodeError;
 
   int decoded_size = 0;

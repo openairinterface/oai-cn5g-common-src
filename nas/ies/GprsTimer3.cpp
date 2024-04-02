@@ -29,7 +29,7 @@ GprsTimer3::GprsTimer3(uint8_t iei) : Type4NasIe(iei), unit_(), value_() {
 }
 
 //------------------------------------------------------------------------------
-GprsTimer3::GprsTimer3(const uint8_t iei, uint8_t unit, uint8_t value)
+GprsTimer3::GprsTimer3(uint8_t iei, uint8_t unit, uint8_t value)
     : Type4NasIe(iei) {
   unit_  = unit;
   value_ = value;
@@ -56,7 +56,7 @@ uint8_t GprsTimer3::GetValue() const {
 }
 
 //------------------------------------------------------------------------------
-int GprsTimer3::Encode(uint8_t* buf, const int& len) const {
+int GprsTimer3::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
@@ -76,7 +76,7 @@ int GprsTimer3::Encode(uint8_t* buf, const int& len) const {
 }
 
 //------------------------------------------------------------------------------
-int GprsTimer3::Decode(const uint8_t* const buf, const int& len, bool is_iei) {
+int GprsTimer3::Decode(const uint8_t* const buf, int len, bool is_iei) {
   if (len < kGprsTimer3Length) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error(

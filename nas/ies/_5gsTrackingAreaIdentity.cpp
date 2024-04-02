@@ -39,7 +39,7 @@ _5gsTrackingAreaIdentity::_5gsTrackingAreaIdentity()
 
 //------------------------------------------------------------------------------
 _5gsTrackingAreaIdentity::_5gsTrackingAreaIdentity(
-    const std::string& mcc, const std::string& mnc, const uint32_t& tac)
+    const std::string& mcc, const std::string& mnc, uint32_t tac)
     : Type3NasIe(kIei5gsTrackingAreaIdentity) {
   mcc_ = mcc;
   mnc_ = mnc;
@@ -89,7 +89,7 @@ void _5gsTrackingAreaIdentity::GetMnc(std::string& mnc) const {
 }
 
 //------------------------------------------------------------------------------
-int _5gsTrackingAreaIdentity::Encode(uint8_t* buf, const int& len) const {
+int _5gsTrackingAreaIdentity::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
@@ -118,7 +118,7 @@ int _5gsTrackingAreaIdentity::Encode(uint8_t* buf, const int& len) const {
 
 //------------------------------------------------------------------------------
 int _5gsTrackingAreaIdentity::Decode(
-    const uint8_t* const buf, const int& len, bool is_iei) {
+    const uint8_t* const buf, int len, bool is_iei) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding %s", GetIeName().c_str());
 

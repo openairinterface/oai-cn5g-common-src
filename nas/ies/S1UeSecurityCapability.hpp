@@ -42,6 +42,9 @@ class S1UeSecurityCapability : public Type4NasIe {
       uint8_t iei, uint8_t eea, uint8_t eia, uint8_t uea, uint8_t uia);
   ~S1UeSecurityCapability();
 
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+
   static std::string GetIeName() { return kS1UeSecurityCapabilityIeName; }
 
   void SetEea(uint8_t sel);
@@ -55,10 +58,6 @@ class S1UeSecurityCapability : public Type4NasIe {
 
   void Set(uint8_t eea, uint8_t eia, uint8_t uea, uint8_t uia);
   void Get(uint8_t& eea, uint8_t& eia, uint8_t& uea, uint8_t& uia) const;
-
-  int Encode(uint8_t* buf, const int& len) const override;
-  int Decode(
-      const uint8_t* const buf, const int& len, bool is_iei = false) override;
 
  private:
   uint8_t eea_;

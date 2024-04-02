@@ -33,12 +33,12 @@ class Type2NasIeFormatT : public NasIe {
   Type2NasIeFormatT(uint8_t iei);
   virtual ~Type2NasIeFormatT();
 
-  bool Validate(const int& len) const override;
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = true) override;
+
   uint32_t GetIeLength() const override;
 
-  int Encode(uint8_t* buf, const int& len) const override;
-  int Decode(
-      const uint8_t* const buf, const int& len, bool is_iei = true) override;
+  bool Validate(int len) const override;
 
  protected:
   uint8_t iei_;  // 1 byte

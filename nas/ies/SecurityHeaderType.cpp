@@ -43,7 +43,7 @@ SecurityHeaderType::SecurityHeaderType(uint8_t secu_header_type) : NasIe() {
 SecurityHeaderType::~SecurityHeaderType() {}
 
 //------------------------------------------------------------------------------
-bool SecurityHeaderType::Validate(const int& len) const {
+bool SecurityHeaderType::Validate(int len) const {
   if (len < kSecurityHeaderTypeLength) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error(
@@ -77,7 +77,7 @@ uint8_t SecurityHeaderType::Get() const {
 }
 
 //------------------------------------------------------------------------------
-int SecurityHeaderType::Encode(uint8_t* buf, const int& len) const {
+int SecurityHeaderType::Encode(uint8_t* buf, int len) const {
   if (!Validate(len)) return KEncodeDecodeError;
   uint8_t value         = (secu_header_type_ & 0x0f) | (spare_ & 0xf0);
   uint32_t encoded_size = 0;
@@ -86,8 +86,7 @@ int SecurityHeaderType::Encode(uint8_t* buf, const int& len) const {
 }
 
 //------------------------------------------------------------------------------
-int SecurityHeaderType::Decode(
-    const uint8_t* const buf, const int& len, bool is_iei) {
+int SecurityHeaderType::Decode(const uint8_t* const buf, int len, bool is_iei) {
   if (!Validate(len)) return KEncodeDecodeError;
   uint8_t value         = 0;
   uint32_t decoded_size = 0;

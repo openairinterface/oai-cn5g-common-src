@@ -42,6 +42,7 @@ _5gsDeregistrationType::_5gsDeregistrationType(uint8_t iei, uint8_t value) {
   u1.b = (iei << 4) | (value & 0x0f);
   Type1NasIeFormatTv::SetValue(value & 0x0f);
 }
+
 //------------------------------------------------------------------------------
 _5gsDeregistrationType::_5gsDeregistrationType(
     _5gs_deregistration_type_t type) {
@@ -102,26 +103,3 @@ void _5gsDeregistrationType::Set(uint8_t type) {
 void _5gsDeregistrationType::Get(uint8_t& type) const {
   type = u1.b;
 }
-
-/*
-//------------------------------------------------------------------------------
-int _5gsDeregistrationType::Encode(uint8_t* buf, const int& len){
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON).error("Encoding
-5GSDeregistrationType IE"); if (len < 1) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-        "Encoding 5GSDeregistrationType error (len is less than one)");
-    return -1;
-  }
-  *buf = u1.b;
-  return 0;
-}
-
-//------------------------------------------------------------------------------
-int _5gsDeregistrationType::Decode(uint8_t* buf, int len) {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON).debug("Decoding
-5GSDeregistrationType"); u1.b = *buf;
-
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON).debug("Decoded
-5GSDeRegistrationType"); return 0;
-}
-*/

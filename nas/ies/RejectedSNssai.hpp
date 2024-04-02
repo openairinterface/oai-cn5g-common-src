@@ -34,6 +34,9 @@ class RejectedSNssai {
   RejectedSNssai(uint8_t cause, uint8_t sst, uint32_t sd);
   ~RejectedSNssai();
 
+  int Encode(uint8_t* buf, int len) const;
+  int Decode(const uint8_t* const buf, int len);
+
   uint8_t GetLength() const;
 
   void SetSST(uint8_t sst);
@@ -47,9 +50,6 @@ class RejectedSNssai {
   void SetCause(uint8_t cause);
   uint8_t GetCause() const;
   void GetCause(uint8_t& cause) const;
-
-  int Encode(uint8_t* buf, const int& len) const;
-  int Decode(const uint8_t* const buf, const int& len);
 
  private:
   uint8_t length_;

@@ -62,6 +62,7 @@ S1UeSecurityCapability::S1UeSecurityCapability(
   uia_ = std::optional<uint8_t>(uia);
   SetLengthIndicator(4);
 }
+
 //------------------------------------------------------------------------------
 S1UeSecurityCapability::~S1UeSecurityCapability() {}
 
@@ -118,7 +119,7 @@ void S1UeSecurityCapability::Get(
 }
 
 //------------------------------------------------------------------------------
-int S1UeSecurityCapability::Encode(uint8_t* buf, const int& len) const {
+int S1UeSecurityCapability::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
@@ -154,7 +155,7 @@ int S1UeSecurityCapability::Encode(uint8_t* buf, const int& len) const {
 
 //------------------------------------------------------------------------------
 int S1UeSecurityCapability::Decode(
-    const uint8_t* const buf, const int& len, bool is_iei) {
+    const uint8_t* const buf, int len, bool is_iei) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding %s", GetIeName().c_str());
 

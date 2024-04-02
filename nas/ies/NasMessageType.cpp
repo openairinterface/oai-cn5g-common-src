@@ -35,7 +35,7 @@ NasMessageType::NasMessageType(uint8_t message_type)
 NasMessageType::~NasMessageType() {}
 
 //------------------------------------------------------------------------------
-bool NasMessageType::Validate(const int& len) const {
+bool NasMessageType::Validate(int len) const {
   if (len < kNasMessageTypeIeSize) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error(
@@ -68,7 +68,7 @@ uint8_t NasMessageType::Get() const {
 }
 
 //------------------------------------------------------------------------------
-int NasMessageType::Encode(uint8_t* buf, const int& len) const {
+int NasMessageType::Encode(uint8_t* buf, int len) const {
   if (!Validate(len)) return KEncodeDecodeError;
 
   uint32_t encoded_size = 0;
@@ -77,8 +77,7 @@ int NasMessageType::Encode(uint8_t* buf, const int& len) const {
 }
 
 //------------------------------------------------------------------------------
-int NasMessageType::Decode(
-    const uint8_t* const buf, const int& len, bool is_iei) {
+int NasMessageType::Decode(const uint8_t* const buf, int len, bool is_iei) {
   if (!Validate(len)) return KEncodeDecodeError;
   uint32_t decoded_size = 0;
   DECODE_U8(buf, message_type_, decoded_size);

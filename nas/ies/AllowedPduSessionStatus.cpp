@@ -56,7 +56,7 @@ uint16_t AllowedPduSessionStatus::GetValue() const {
 }
 
 //------------------------------------------------------------------------------
-int AllowedPduSessionStatus::Encode(uint8_t* buf, const int& len) const {
+int AllowedPduSessionStatus::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
   int ie_len = GetIeLength();
@@ -83,7 +83,7 @@ int AllowedPduSessionStatus::Encode(uint8_t* buf, const int& len) const {
 
 //------------------------------------------------------------------------------
 int AllowedPduSessionStatus::Decode(
-    const uint8_t* const buf, const int& len, bool is_iei) {
+    const uint8_t* const buf, int len, bool is_iei) {
   if (len < kAllowedPduSessionStatusMinimumLength) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error(
@@ -100,7 +100,6 @@ int AllowedPduSessionStatus::Decode(
 
   // IEI and Length
   int decoded_header_size = Type4NasIe::Decode(buf + decoded_size, len, is_iei);
-  // decoded_size += Type4NasIe::Decode(buf + decoded_size, len, is_iei);
   if (decoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   decoded_size += decoded_header_size;
 

@@ -26,6 +26,7 @@
 #include "logger_base.hpp"
 
 using namespace oai::nas;
+
 //------------------------------------------------------------------------------
 Type1NasIe::Type1NasIe() : NasIe(), high_pos_(false), value_(0) {
   iei_ = std::nullopt;
@@ -60,14 +61,6 @@ Type1NasIe::Type1NasIe(uint8_t iei) : NasIe(), value_() {
 //------------------------------------------------------------------------------
 Type1NasIe::~Type1NasIe() {}
 
-/*
-//------------------------------------------------------------------------------
-void Type1NasIe::SetIei(const uint8_t& iei) {
-  iei_      = std::optional<uint8_t>(iei & 0x0f);
-  high_pos_ = false;
-}
-*/
-
 //------------------------------------------------------------------------------
 void Type1NasIe::Set(bool high_pos, uint8_t value) {
   high_pos_ = high_pos;
@@ -80,7 +73,7 @@ void Type1NasIe::Set(bool high_pos) {
 }
 
 //------------------------------------------------------------------------------
-bool Type1NasIe::Validate(const int& len) const {
+bool Type1NasIe::Validate(int len) const {
   if (len < kType1NasIeLength) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error(
@@ -103,9 +96,7 @@ void Type1NasIe::SetValue(uint8_t value) {
 }
 
 //------------------------------------------------------------------------------
-int Type1NasIe::Encode(uint8_t* buf, const int& len) const {
-  // oai::logger::logger_registry::get_logger(LOGGER_COMMON).debug("Encoding
-  // %s", GetIeName().c_str());
+int Type1NasIe::Encode(uint8_t* buf, int len) const {
   if (!Validate(len)) return KEncodeDecodeError;
 
   int encoded_size = 0;
@@ -128,8 +119,6 @@ int Type1NasIe::Encode(uint8_t* buf, const int& len) const {
 
   ENCODE_U8(buf + encoded_size, octet, encoded_size);
 
-  // oai::logger::logger_registry::get_logger(LOGGER_COMMON).debug(
-  //     "Encoded %s (len %d)", GetIeName().c_str(), encoded_size);
   if (iei_.has_value()) {
     return encoded_size;  // 1 octet
   } else {
@@ -138,17 +127,13 @@ int Type1NasIe::Encode(uint8_t* buf, const int& len) const {
 }
 
 //------------------------------------------------------------------------------
-int Type1NasIe::Decode(const uint8_t* const buf, const int& len, bool is_iei) {
+int Type1NasIe::Decode(const uint8_t* const buf, int len, bool is_iei) {
   return Decode(buf, len, false, is_iei);
 }
 
 //------------------------------------------------------------------------------
 int Type1NasIe::Decode(
-    const uint8_t* const buf, const int& len, const bool& high_pos,
-    bool is_iei) {
-  // oai::logger::logger_registry::get_logger(LOGGER_COMMON).debug("Decoding
-  // %s", GetIeName().c_str());
-
+    const uint8_t* const buf, int len, bool high_pos, bool is_iei) {
   if (!Validate(len)) return KEncodeDecodeError;
 
   high_pos_        = high_pos;
@@ -167,8 +152,6 @@ int Type1NasIe::Decode(
     }
   }
 
-  // oai::logger::logger_registry::get_logger(LOGGER_COMMON).debug(
-  //     "Decoded %s (len %d)", GetIeName().c_str(), decoded_size);
   if (is_iei) {
     return decoded_size;  // 1 octet
   } else {

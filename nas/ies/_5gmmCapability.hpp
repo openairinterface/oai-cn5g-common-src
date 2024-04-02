@@ -39,14 +39,13 @@ class _5gmmCapability : public Type4NasIe {
   _5gmmCapability(uint8_t iei, uint8_t octet3);
   ~_5gmmCapability();
 
-  void SetOctet3(uint8_t iei, uint8_t octet3);
-  uint8_t GetOctet3() const;
-
-  int Encode(uint8_t* buf, const int& len) const override;
-  int Decode(
-      const uint8_t* const buf, const int& len, bool is_iei = true) override;
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = true) override;
 
   static std::string GetIeName() { return k5gmmCapabilityIeName; }
+
+  void SetOctet3(uint8_t iei, uint8_t octet3);
+  uint8_t GetOctet3() const;
 
  private:
   uint8_t octet3_;  // minimum length of 3 octets

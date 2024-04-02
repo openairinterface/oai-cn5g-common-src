@@ -40,13 +40,12 @@ class AuthenticationResponseParameter : public Type4NasIe {
   AuthenticationResponseParameter(const bstring& para);
   ~AuthenticationResponseParameter();
 
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+
   static std::string GetIeName() {
     return kAuthenticationResponseParameterIeName;
   }
-
-  int Encode(uint8_t* buf, const int& len) const override;
-  int Decode(
-      const uint8_t* const buf, const int& len, bool is_iei = false) override;
 
   void SetValue(const bstring& para);
   void GetValue(bstring& para) const;

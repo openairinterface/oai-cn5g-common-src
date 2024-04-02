@@ -44,11 +44,10 @@ class PayloadContainer : public Type6NasIe {
       uint8_t iei, const std::vector<PayloadContainerEntry>& content);
   ~PayloadContainer();
 
-  static std::string GetIeName() { return kPayloadContainerIeName; }
+  int Encode(uint8_t* buf, int len, uint8_t type) const;
+  int Decode(const uint8_t* const buf, int len, bool is_iei, uint8_t type);
 
-  // void setValue(uint8_t iei, uint8_t value);
-  int Encode(uint8_t* buf, int len, uint8_t type);
-  int Decode(uint8_t* buf, int len, bool is_iei, uint8_t type);
+  static std::string GetIeName() { return kPayloadContainerIeName; }
 
   void SetValue(const bstring& cnt);
   bool GetValue(bstring& cnt) const;

@@ -40,14 +40,13 @@ class _5gsNetworkFeatureSupport : public Type4NasIe {
   _5gsNetworkFeatureSupport(uint8_t value, uint8_t value2);
   ~_5gsNetworkFeatureSupport();
 
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+
   static std::string GetIeName() { return k5gsNetworkFeatureSupportIeName; }
 
   void SetValue(uint8_t value, uint8_t value2);
   // uint8_t GetValue() const;
-
-  int Encode(uint8_t* buf, const int& len) const override;
-  int Decode(
-      const uint8_t* const buf, const int& len, bool is_iei = false) override;
 
  private:
   uint8_t value_;

@@ -26,6 +26,7 @@
 
 #include "3gpp_24.007.hpp"
 
+//------------------------------------------------------------------------------
 // Security Header Type
 constexpr uint8_t kPlain5gsMessage                                     = 0b0000;
 constexpr uint8_t kIntegrityProtected                                  = 0b0001;
@@ -33,6 +34,7 @@ constexpr uint8_t kIntegrityProtectedAndCiphered                       = 0b0010;
 constexpr uint8_t kIntegrityProtectedWithNewSecurityContext            = 0b0011;
 constexpr uint8_t kIntegrityProtectedAndCipheredWithNewSecurityContext = 0b0100;
 
+//------------------------------------------------------------------------------
 // Message Types for 5GS Mobility Management
 constexpr uint8_t k5gsMobilityManagementMessageTypeUnknown = 0b10000000;
 
@@ -95,6 +97,7 @@ constexpr uint8_t kPduSessionReleaseComplete = 0b11010100;
 
 constexpr uint8_t k5gsmStatus = 0b11010110;
 
+//------------------------------------------------------------------------------
 // Registration Type
 constexpr bool kNoFollowOnReqPending = false;
 constexpr bool kFollowOnReqPending   = true;
@@ -104,11 +107,13 @@ constexpr uint8_t kMobilityRegistrationUpdating = 0b010;
 constexpr uint8_t kPeriodicRegistrationUpdating = 0b011;
 constexpr uint8_t kEmergencyRegistration        = 0b100;
 
+//------------------------------------------------------------------------------
 // NAS Key Set Identifier
 constexpr uint8_t kNasKeySetIdentifierNative       = 0b0;
 constexpr uint8_t kNasKeySetIdentifierMapped       = 0b1;
 constexpr uint8_t kNasKeySetIdentifierNotAvailable = 0b111;
 
+//------------------------------------------------------------------------------
 // 5GS Mobile Identity
 constexpr uint8_t kNoIdentity                = 0b000;
 constexpr uint8_t kSuci                      = 0b001;
@@ -143,24 +148,64 @@ constexpr uint8_t kEa0_5g     = 0b000;
 constexpr uint8_t kEa1_128_5g = 0b001;
 constexpr uint8_t kEa2_128_5g = 0b010;
 
-// 5G MM CAUSE value for 5g mobility management (Annex A)
-constexpr uint8_t k5gmmCauseIllegalUe                 = 3;
-constexpr uint8_t k5gmmCauseSynchFailure              = 0b00010101;  // 21
-constexpr uint8_t k5gmmCauseImplicitlyDeRegistered    = 10;
-constexpr uint8_t k5gmmCauseUeIdentityCannotBeDerived = 9;
-constexpr uint8_t k5gmmCauseNgksiAlreadyInUse         = 0b01000111;  // 71
-
-// A.5 Causes related to invalid messages
 //------------------------------------------------------------------------------
-constexpr uint8_t k5gmmCauseSemanticallyIncorrect     = 95;
-constexpr uint8_t k5gmmCauseInvalidMandatoryInfo      = 96;
-constexpr uint8_t k5gmmCauseMessageTypeNotImplemented = 97;
-constexpr uint8_t k5gmmCauseMessageTypeNotCompatible  = 98;
-constexpr uint8_t k5gmmCauseIeNotImplemented          = 99;
-constexpr uint8_t k5gmmCauseConditionalIeError        = 100;
-constexpr uint8_t k5gmmCauseMessageNotCompatible      = 101;
-constexpr uint8_t k5gmmCauseProtocolError             = 111;
+// 5G MM CAUSE value for 5g mobility management (Annex A)
 
+// Causes related to UE identification
+constexpr uint8_t k5gmmCauseIllegalUe                 = 3;
+constexpr uint8_t k5gmmCauseIllegalMe                 = 6;
+constexpr uint8_t k5gmmCauseUeIdentityCannotBeDerived = 9;
+constexpr uint8_t k5gmmCauseImplicitlyDeRegistered    = 10;
+
+// Cause related to subscription options
+constexpr uint8_t k5gmmCausePeiNotAccepted                      = 5;
+constexpr uint8_t k5gmmCause5gsServicesNotAllowed               = 7;
+constexpr uint8_t k5gmmCausePlmnNotAllowed                      = 11;
+constexpr uint8_t k5gmmCauseTrackingAreaNotAllowed              = 12;
+constexpr uint8_t k5gmmCauseRoamingNotAllowedInThisTrackingArea = 13;
+constexpr uint8_t k5gmmCauseNoSuitableCellsInTrackingArea       = 15;
+constexpr uint8_t k5gmmCauseN1ModeNotAllowed                    = 27;
+constexpr uint8_t k5gmmCauseRedirectionToEpcRequired            = 31;
+constexpr uint8_t k5gmmCauseIabNodeOperationNotAuthorized       = 36;
+constexpr uint8_t k5gmmCauseNon3gppAccessTo5gcnNotAllowed       = 72;
+constexpr uint8_t k5gmmCauseTemporarilyNotAuthorizedForThisSnpn = 74;
+constexpr uint8_t k5gmmCausePermanentlyNotAuthorizedForThisSnpn = 75;
+constexpr uint8_t k5gmmCauseNotAuthorizedForThisCagOrAuthorizedForCagCellsOnly =
+    76;
+constexpr uint8_t k5gmmCauseWirelineAccessAreaNotAllowed = 77;
+
+// Causes related to PLMN or SNPN specific network failures and
+// congestion/authentication failures
+constexpr uint8_t k5gmmCauseMacFailure                      = 20;
+constexpr uint8_t k5gmmCauseSynchFailure                    = 21;
+constexpr uint8_t k5gmmCauseCongestion                      = 22;
+constexpr uint8_t k5gmmCauseUeSecurityCapabilitiesMismatch  = 23;
+constexpr uint8_t k5gmmCauseSecurityModeRejectedUnspecified = 24;
+constexpr uint8_t k5gmmCauseNon5gAuthenticationUnacceptable = 26;
+constexpr uint8_t k5gmmCauseRestrictedServiceArea           = 28;
+constexpr uint8_t k5gmmCauseLadnNotAvailable                = 43;
+constexpr uint8_t k5gmmCauseNoNetworkSlicesAvailable        = 62;
+
+constexpr uint8_t k5gmmCauseMaximumNumberOfPduSessionsReached           = 65;
+constexpr uint8_t k5gmmCauseInsufficientResourcesForSpecificSliceAndDnn = 67;
+constexpr uint8_t k5gmmCauseInsufficientResourcesForSpecificSlice       = 69;
+constexpr uint8_t k5gmmCauseNgksiAlreadyInUse                           = 71;
+constexpr uint8_t k5gmmCauseServingNetworkNotAuthorized                 = 73;
+constexpr uint8_t k5gmmCausePayloadWasNotForwarded                      = 90;
+constexpr uint8_t k5gmmCauseDnnNotSupportedOrNotSubscribedInTheSlice    = 91;
+constexpr uint8_t k5gmmCauseInsufficientUpResourcesForThePduSession     = 92;
+
+// Causes related to invalid messages
+constexpr uint8_t k5gmmCauseSemanticallyIncorrect                  = 95;
+constexpr uint8_t k5gmmCauseInvalidMandatoryInfo                   = 96;
+constexpr uint8_t k5gmmCauseMessageTypeNonExistentOrNotImplemented = 97;
+constexpr uint8_t k5gmmCauseMessageTypeNotCompatible               = 98;
+constexpr uint8_t k5gmmCauseIeNonExistentOrNotImplemented          = 99;
+constexpr uint8_t k5gmmCauseConditionalIeError                     = 100;
+constexpr uint8_t k5gmmCauseMessageNotCompatible                   = 101;
+constexpr uint8_t k5gmmCauseProtocolErrorUnspecified               = 111;
+
+//------------------------------------------------------------------------------
 // UL NAS TRANSPORT payload container type
 constexpr uint8_t kN1SmInformation         = 0x01;
 constexpr uint8_t kSmsContainer            = 0x02;
@@ -179,8 +224,8 @@ constexpr uint8_t kMaPduRequest                      = 0b110;
 
 constexpr uint8_t kDeregistrationTypeMask = 0b00001000;
 
-constexpr uint8_t kNasMessageMinLength = 3;
-
+//------------------------------------------------------------------------------
+constexpr uint8_t kNasMessageMinLength                               = 3;
 constexpr uint8_t kSecurityProtected5gsNasMessageSequenceNumberOctet = 6;
 constexpr uint8_t kSecurityProtected5gsNasMessageHeaderLength =
     7;  // Including 1 octet for Extended protocol discriminator
@@ -188,9 +233,11 @@ constexpr uint8_t kSecurityProtected5gsNasMessageHeaderLength =
 // 4 octets for Message authentication code
 // 1 octet for Sequence number
 
+//------------------------------------------------------------------------------
 constexpr int KEncodeDecodeError = -1;
 constexpr int KEncodeDecodeOK    = 0;
 
+//------------------------------------------------------------------------------
 constexpr int kT3502TimerDefaultValueMin = 12;  // 12 minutes
 
 // Table 10.3.1 @3GPP TS 24.501 V16.1.0 (2019-06)
@@ -200,9 +247,11 @@ constexpr int kMobileReachableTimerNoEmergencyServicesMin =
     (kT3512TimerValueMin + 4);  // T3512 + 4, not for emergency services
 constexpr int kImplicitDeregistrationTimerMin = (kT3512TimerValueMin + 4);
 
+//------------------------------------------------------------------------------
 constexpr uint8_t KAccessType3gppAccess    = 0x01;
 constexpr uint8_t KAccessTypeNon3gppAccess = 0x02;
 
+//------------------------------------------------------------------------------
 enum class _5g_ia_e {
   _5G_IA0 = 0,
   _5G_IA1 = 1,

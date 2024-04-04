@@ -21,6 +21,8 @@
 
 #pragma once
 
+#include <optional>
+
 #include "logger_base.hpp"
 
 namespace oai::nas {

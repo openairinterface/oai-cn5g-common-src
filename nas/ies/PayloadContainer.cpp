@@ -132,7 +132,7 @@ bool PayloadContainer::GetValue(
 //------------------------------------------------------------------------------
 bool PayloadContainer::GetValue(bstring& cnt) const {
   if (content_.has_value()) {
-    cnt = content_.value();
+    cnt = bstrcpy(content_.value());
     return true;
   }
   return false;

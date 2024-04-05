@@ -24,7 +24,8 @@ include_directories(UTILS_DIR)
 
 file(GLOB UTILS_SRC_FILES
         ${UTILS_DIR}/*.cpp
-         ${UTILS_DIR}/bstr/bstrlib.c 
+        ${UTILS_DIR}/backtrace.c
+        ${UTILS_DIR}/bstr/bstrlib.c 
         )
 
 if (TARGET ${NF_TARGET})

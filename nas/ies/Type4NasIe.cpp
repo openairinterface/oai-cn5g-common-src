@@ -77,12 +77,6 @@ uint8_t Type4NasIe::GetHeaderLength() const {
 bool Type4NasIe::Validate(int len) const {
   uint32_t ie_len = GetIeLength();  // Length of the content + IEI/Len
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .error(
-          "Buffer length is less than the length of this IE (%ld octet(s), LEN "
-          " %ld)",
-          ie_len, len);
-
   if (len < ie_len) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error(

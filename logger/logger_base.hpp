@@ -144,6 +144,8 @@ class printf_logger {
       // It would be better to not catch here, but keep it here for now
       // to ensure that we don't break when we replace the logger
       logger->error("Format error in format string {}: {}", fmt, err.what());
+    } catch (std::exception& e) {
+      logger->error("Format error in format string {}", e.what());
     }
   }
 };

@@ -99,7 +99,10 @@ bool fromStringValue(const std::string& inStr, int32_t& value) {
     value = std::stoi(inStr);
   } catch (const std::invalid_argument&) {
     return false;
+  } catch (std::exception& e) {
+    return false;
   }
+
   return true;
 }
 
@@ -107,6 +110,8 @@ bool fromStringValue(const std::string& inStr, int64_t& value) {
   try {
     value = std::stol(inStr);
   } catch (const std::invalid_argument&) {
+    return false;
+  } catch (std::exception& e) {
     return false;
   }
   return true;
@@ -129,6 +134,8 @@ bool fromStringValue(const std::string& inStr, float& value) {
     value = std::stof(inStr);
   } catch (const std::invalid_argument&) {
     return false;
+  } catch (std::exception& e) {
+    return false;
   }
   return true;
 }
@@ -137,6 +144,8 @@ bool fromStringValue(const std::string& inStr, double& value) {
   try {
     value = std::stod(inStr);
   } catch (const std::invalid_argument&) {
+    return false;
+  } catch (std::exception& e) {
     return false;
   }
   return true;

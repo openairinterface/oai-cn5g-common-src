@@ -95,8 +95,9 @@ class InitialContextSetupRequestMsg : public NgapUeMessage {
       uint16_t& eutraEncryptionAlgorithms,
       uint16_t& eutraIntegrityProtectionAlgorithms) const;
 
-  void setSecurityKey(uint8_t* key);         // 256bits
-  bool getSecurityKey(uint8_t*& key) const;  // 256bits
+  void setSecurityKey(
+      uint8_t* key, const size_t& size = 256);  // Maximum 256bits
+  bool getSecurityKey(uint8_t*& key) const;     // 256bits
 
   void setMobilityRestrictionList(const PlmnId& plmn_id);
   // TODO: getMobilityRestrictionList

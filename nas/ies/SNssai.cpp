@@ -117,8 +117,8 @@ void SNssai::GetValue(SNSSAI_t& snssai) const {
 
 //------------------------------------------------------------------------------
 void SNssai::SetSNSSAI(
-    std::optional<int8_t> iei, uint8_t sst, int32_t sd, int8_t mapped_hplmn_sst,
-    int32_t mapped_hplmn_sd) {
+    std::optional<int8_t> iei, uint8_t sst, uint32_t sd,
+    uint8_t mapped_hplmn_sst, uint32_t mapped_hplmn_sd) {
   // IEI
   if (iei_.has_value()) {
     SetIei(iei.value());

@@ -512,8 +512,10 @@ bool InitialContextSetupRequestMsg::getUeSecurityCapability(
 }
 
 //------------------------------------------------------------------------------
-void InitialContextSetupRequestMsg::setSecurityKey(uint8_t* key) {
-  m_SecurityKey.set(key);
+void InitialContextSetupRequestMsg::setSecurityKey(
+    uint8_t* key, const size_t& size) {
+  size_t actual_size = (size > 256) ? 256 : size;
+  m_SecurityKey.set(key, actual_size);
 
   Ngap_InitialContextSetupRequestIEs_t* ie =
       (Ngap_InitialContextSetupRequestIEs_t*) calloc(

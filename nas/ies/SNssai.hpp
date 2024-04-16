@@ -45,9 +45,8 @@ class SNssai : public Type4NasIe {
   void GetValue(SNSSAI_t& snssai) const;
 
   void SetSNSSAI(
-      std::optional<int8_t> iei, uint8_t sst, std::optional<int32_t> sd,
-      std::optional<int8_t> mapped_hplmn_sst,
-      std::optional<int32_t> mapped_hplmn_sd);
+      std::optional<int8_t> iei, uint8_t sst, uint32_t sd,
+      uint8_t mapped_hplmn_sst, uint32_t mapped_hplmn_sd);
 
   uint8_t GetLength();
 
@@ -55,9 +54,9 @@ class SNssai : public Type4NasIe {
 
  private:
   uint8_t sst_;
-  std::optional<int32_t> sd_;
-  std::optional<int8_t> mapped_hplmn_sst_;
-  std::optional<int32_t> mapped_hplmn_sd_;
+  uint32_t sd_;
+  uint8_t mapped_hplmn_sst_;
+  uint32_t mapped_hplmn_sd_;
 };
 
 }  // namespace oai::nas

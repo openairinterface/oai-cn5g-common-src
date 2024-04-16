@@ -30,10 +30,10 @@ SNssai::SNssai(std::optional<uint8_t> iei) : Type4NasIe() {
   if (iei_.has_value()) {
     SetIei(iei.value());
   }
-  sst_              = {0};
-  sd_               = std::nullopt;
-  mapped_hplmn_sst_ = std::nullopt;
-  mapped_hplmn_sd_  = std::nullopt;
+  sst_              = 0;
+  sd_               = SD_NO_VALUE;
+  mapped_hplmn_sst_ = 0;
+  mapped_hplmn_sd_  = SD_NO_VALUE;
   SetLengthIndicator(1);  // SST
 }
 
@@ -52,26 +52,26 @@ SNssai::SNssai(std::optional<uint8_t> iei, SNSSAI_s snssai) {
 
   // SD
   if (len == SD_LENGTH + SST_LENGTH + SD_LENGTH) {
-    mapped_hplmn_sd_ = std::optional<uint32_t>{snssai.mHplmnSd};
+    mapped_hplmn_sd_ = snssai.mHplmnSd;
     len -= SD_LENGTH;
   } else {
-    mapped_hplmn_sd_ = std::nullopt;
+    mapped_hplmn_sd_ = SD_NO_VALUE;
   }
 
   // mappedHPLMN SST
   if (len == SD_LENGTH + SST_LENGTH) {
-    mapped_hplmn_sst_ = std::optional<uint8_t>{snssai.mHplmnSst};
+    mapped_hplmn_sst_ = snssai.mHplmnSst;
     len -= SST_LENGTH;
   } else {
-    mapped_hplmn_sst_ = std::nullopt;
+    mapped_hplmn_sst_ = 0;
   }
 
   // mappedHPLMN SD
   if (len == SD_LENGTH) {
-    sd_ = std::optional<uint32_t>{snssai.sd};
+    sd_ = snssai.sd;
     len -= SD_LENGTH;
   } else {
-    sd_ = std::nullopt;
+    sd_ = SD_NO_VALUE;
   }
 
   SetLengthIndicator(snssai.length);
@@ -88,24 +88,24 @@ void SNssai::GetValue(SNSSAI_t& snssai) const {
   len += SST_LENGTH;
 
   // SD
-  if (sd_.has_value()) {
-    snssai.sd = sd_.value();
+  if (sd_ != SD_NO_VALUE) {
+    snssai.sd = sd_;
     len += SD_LENGTH;
   } else {
     snssai.sd = SD_NO_VALUE;
   }
 
   // mappedHPLMN SST
-  if (mapped_hplmn_sst_.has_value()) {
-    snssai.mHplmnSd = mapped_hplmn_sst_.value();
+  if (mapped_hplmn_sst_ != 0) {
+    snssai.mHplmnSst = mapped_hplmn_sst_;
     len += SST_LENGTH;
   } else {
     snssai.mHplmnSst = 0;  // TODO
   }
 
   // mappedHPLMN SD
-  if (mapped_hplmn_sd_.has_value()) {
-    snssai.mHplmnSd = mapped_hplmn_sd_.value();
+  if (mapped_hplmn_sd_ != SD_NO_VALUE) {
+    snssai.mHplmnSd = mapped_hplmn_sd_;
     len += SD_LENGTH;
   } else {
     snssai.mHplmnSd = SD_NO_VALUE;
@@ -117,9 +117,8 @@ void SNssai::GetValue(SNSSAI_t& snssai) const {
 
 //------------------------------------------------------------------------------
 void SNssai::SetSNSSAI(
-    std::optional<int8_t> iei, uint8_t sst, std::optional<int32_t> sd,
-    std::optional<int8_t> mapped_hplmn_sst,
-    std::optional<int32_t> mapped_hplmn_sd) {
+    std::optional<int8_t> iei, uint8_t sst, uint32_t sd,
+    uint8_t mapped_hplmn_sst, uint32_t mapped_hplmn_sd) {
   // IEI
   if (iei_.has_value()) {
     SetIei(iei.value());
@@ -131,19 +130,19 @@ void SNssai::SetSNSSAI(
 
   // SD
   sd_ = sd;
-  if (sd_.has_value()) {
+  if (sd_ != SD_NO_VALUE) {
     length += SD_LENGTH;
   }
 
   // mappedHPLMN SST
   mapped_hplmn_sst_ = mapped_hplmn_sst;
-  if (mapped_hplmn_sst_.has_value()) {
+  if (mapped_hplmn_sst_ > 0) {
     length += SST_LENGTH;
   }
 
   // mappedHPLMN SD
   mapped_hplmn_sd_ = mapped_hplmn_sd;
-  if (mapped_hplmn_sd_.has_value()) {
+  if (mapped_hplmn_sd_ != SD_NO_VALUE) {
     length += SD_LENGTH;
   }
 
@@ -155,16 +154,16 @@ std::string SNssai::ToString() {
   std::string s;
   s.append(fmt::format("SST {:#x}", sst_));
 
-  if (sd_.has_value()) {
-    s.append(fmt::format(" SD {:#x}", sd_.value()));
+  if (sd_ != SD_NO_VALUE) {
+    s.append(fmt::format(" SD {:#x}", sd_));
   }
 
-  if (mapped_hplmn_sst_.has_value()) {
-    s.append(fmt::format(" M-HPLMN SST {:#x}", mapped_hplmn_sst_.value()));
+  if (mapped_hplmn_sst_ > 0) {
+    s.append(fmt::format(" M-HPLMN SST {:#x}", mapped_hplmn_sst_));
   }
 
-  if (mapped_hplmn_sd_.has_value()) {
-    s.append(fmt::format(" M-HPLMN SD {:#x}", mapped_hplmn_sd_.value()));
+  if (mapped_hplmn_sd_ != SD_NO_VALUE) {
+    s.append(fmt::format(" M-HPLMN SD {:#x}", mapped_hplmn_sd_));
   }
   return s;
 }
@@ -191,16 +190,15 @@ int SNssai::Encode(uint8_t* buf, int len) {
   ENCODE_U8(buf + encoded_size, sst_, encoded_size);
 
   // SD
-  if (sd_.has_value())
-    ENCODE_U24(buf + encoded_size, sd_.value(), encoded_size);
+  if (sd_ != SD_NO_VALUE) ENCODE_U24(buf + encoded_size, sd_, encoded_size);
 
   // mappedHPLMN SST
-  if (mapped_hplmn_sst_.has_value())
-    ENCODE_U8(buf + encoded_size, mapped_hplmn_sst_.value(), encoded_size);
+  if (mapped_hplmn_sst_ > 0)
+    ENCODE_U8(buf + encoded_size, mapped_hplmn_sst_, encoded_size);
 
   // mappedHPLMN SD
-  if (mapped_hplmn_sd_.has_value())
-    ENCODE_U24(buf + encoded_size, mapped_hplmn_sd_.value(), encoded_size);
+  if (mapped_hplmn_sd_ != SD_NO_VALUE)
+    ENCODE_U24(buf + encoded_size, mapped_hplmn_sd_, encoded_size);
 
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
@@ -228,54 +226,37 @@ int SNssai::Decode(uint8_t* buf, int len, const bool is_iei) {
   if (decoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   decoded_size += decoded_header_size;
 
+  sd_               = SD_NO_VALUE;
+  mapped_hplmn_sst_ = 0;
+  mapped_hplmn_sd_  = SD_NO_VALUE;
+
   switch (GetLengthIndicator()) {
     case 1: {
       DECODE_U8(buf + decoded_size, sst_, decoded_size);
-      sd_               = std::nullopt;
-      mapped_hplmn_sst_ = std::nullopt;
-      mapped_hplmn_sd_  = std::nullopt;
     } break;
     case 4: {
       // SST
       DECODE_U8(buf + decoded_size, sst_, decoded_size);
       // SSD
-      uint32_t sd_value = {0};
-      DECODE_U24(buf + decoded_size, sd_value, decoded_size);
-      sd_ = std::optional<uint32_t>{sd_value};
-      // mapped HPLMN SST/SD
-      mapped_hplmn_sst_ = std::nullopt;
-      mapped_hplmn_sd_  = std::nullopt;
-
+      DECODE_U24(buf + decoded_size, sd_, decoded_size);
     } break;
     case 5: {
       // SST
       DECODE_U8(buf + decoded_size, sst_, decoded_size);
       // SD
-      uint32_t sd_value = {0};
-      DECODE_U24(buf + decoded_size, sd_value, decoded_size);
-      sd_ = std::optional<uint32_t>{sd_value};
+      DECODE_U24(buf + decoded_size, sd_, decoded_size);
       // Mapped HPLMN SST
-      uint8_t mapped_hplmn_sst_value = {0};
-      DECODE_U8(buf + decoded_size, mapped_hplmn_sst_value, decoded_size);
-      mapped_hplmn_sst_ = std::optional<uint8_t>{mapped_hplmn_sst_value};
-      // Mapped HPLMN SD
-      mapped_hplmn_sd_ = std::nullopt;
+      DECODE_U8(buf + decoded_size, mapped_hplmn_sst_, decoded_size);
     } break;
     case 8: {
       // SST
       DECODE_U8(buf + decoded_size, sst_, decoded_size);
       // SD
-      uint32_t sd_value = {0};
-      DECODE_U24(buf + decoded_size, sd_value, decoded_size);
-      sd_ = std::optional<uint32_t>{sd_value};
+      DECODE_U24(buf + decoded_size, sd_, decoded_size);
       // Mapped HPLMN SST
-      uint8_t mapped_hplmn_sst_value = {0};
-      DECODE_U8(buf + decoded_size, mapped_hplmn_sst_value, decoded_size);
-      mapped_hplmn_sst_ = std::optional<uint8_t>{mapped_hplmn_sst_value};
+      DECODE_U8(buf + decoded_size, mapped_hplmn_sst_, decoded_size);
       // Mapped HPLMN SD
-      uint32_t mapped_hplmn_sd_value = {0};
-      DECODE_U24(buf + decoded_size, mapped_hplmn_sd_value, decoded_size);
-      mapped_hplmn_sd_ = std::optional<uint32_t>{mapped_hplmn_sd_value};
+      DECODE_U24(buf + decoded_size, mapped_hplmn_sd_, decoded_size);
     } break;
   }
 

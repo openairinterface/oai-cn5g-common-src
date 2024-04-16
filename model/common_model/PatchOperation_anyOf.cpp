@@ -99,6 +99,9 @@ void from_json(const nlohmann::json& j, PatchOperation_anyOf& o) {
     o.setValue(PatchOperation_anyOf::ePatchOperation_anyOf::REPLACE);
   } else if (s == "test") {
     o.setValue(PatchOperation_anyOf::ePatchOperation_anyOf::TEST);
+  } else if (s == "INVALID_VALUE_OPENAPI_GENERATED") {
+    o.setValue(PatchOperation_anyOf::ePatchOperation_anyOf::
+                   INVALID_VALUE_OPENAPI_GENERATED);
   } else {
     std::stringstream ss;
     ss << "Unexpected value " << s << " in json"

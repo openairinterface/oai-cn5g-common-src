@@ -19,11 +19,12 @@
  *      contact@openairinterface.org
  */
 
-#include "utils.hpp"
+#include "nas_utils.hpp"
 
 #include "3gpp_24.501.hpp"
 #include "common_defs.h"
 #include "logger_base.hpp"
+#include "utils.hpp"
 
 #include <stdlib.h>
 
@@ -34,7 +35,7 @@ extern "C" {
 
 using namespace oai::nas;
 //------------------------------------------------------------------------------
-int utils::encodeMccMnc2Buffer(
+int nas_utils::encodeMccMnc2Buffer(
     const std::string& mcc_str, const std::string& mnc_str, uint8_t* buf,
     int len) {
   int encoded_size = 0;
@@ -71,7 +72,7 @@ int utils::encodeMccMnc2Buffer(
 }
 
 //------------------------------------------------------------------------------
-int utils::decodeMccMncFromBuffer(
+int nas_utils::decodeMccMncFromBuffer(
     std::string& mcc_str, std::string& mnc_str, uint8_t* buf, int len) {
   if (len < kMccMncLength) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)

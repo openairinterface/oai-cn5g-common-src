@@ -33,7 +33,7 @@ namespace oai::nas {
 
 constexpr uint8_t kMccMncLength = 3;
 
-class utils {
+class nas_utils {
  public:
   static int encodeMccMnc2Buffer(
       const std::string& mcc_str, const std::string& mnc_str, uint8_t* buf,

@@ -28,6 +28,7 @@
 #include <string>
 
 #include "bstrlib.h"
+// namespace oai::common  {
 
 constexpr uint8_t kMccMncLength           = 3;
 constexpr uint32_t KFutureStatusTimeoutMs = 1000;
@@ -65,4 +66,5 @@ class utils {
   static void free_wrapper(void** ptr) __attribute__((hot));
   static void bdestroy_wrapper(bstring* b);
 };
+//} //namespace oai::common
 #endif /* FILE_UTILS_HPP_SEEN */

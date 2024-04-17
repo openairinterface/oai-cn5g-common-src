@@ -42,11 +42,11 @@ class UeContextReleaseCommandMsg : public NgapMessage {
 
   bool decode(Ngap_NGAP_PDU_t* ngapMsgPdu) override;
 
-  void setAmfUeNgapId(const unsigned long& id);
-  bool getAmfUeNgapId(unsigned long& id) const;
+  void setAmfUeNgapId(const uint64_t& id);
+  bool getAmfUeNgapId(uint64_t& id) const;
 
-  void setUeNgapIdPair(const unsigned long& amfId, const uint32_t& ranId);
-  bool getUeNgapIdPair(unsigned long& amfId, uint32_t& ranId) const;
+  void setUeNgapIdPair(const uint64_t& amfId, const uint32_t& ranId);
+  bool getUeNgapIdPair(uint64_t& amfId, uint32_t& ranId) const;
 
   void addCauseIe();
   void setCauseRadioNetwork(const e_Ngap_CauseRadioNetwork& cause);

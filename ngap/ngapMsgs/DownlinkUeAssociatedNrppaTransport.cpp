@@ -46,8 +46,7 @@ void DownlinkUeAssociatedNrppaTransportMsg::initialize() {
 }
 
 //------------------------------------------------------------------------------
-void DownlinkUeAssociatedNrppaTransportMsg::setAmfUeNgapId(
-    const unsigned long& id) {
+void DownlinkUeAssociatedNrppaTransportMsg::setAmfUeNgapId(const uint64_t& id) {
   NgapUeMessage::m_AmfUeNgapId.set(id);
 
   Ngap_DownlinkUEAssociatedNRPPaTransportIEs_t* ie =

@@ -48,8 +48,7 @@ void PduSessionResourceReleaseCommandMsg::initialize() {
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceReleaseCommandMsg::setAmfUeNgapId(
-    const unsigned long& id) {
+void PduSessionResourceReleaseCommandMsg::setAmfUeNgapId(const uint64_t& id) {
   NgapUeMessage::m_AmfUeNgapId.set(id);
 
   Ngap_PDUSessionResourceReleaseCommandIEs_t* ie =

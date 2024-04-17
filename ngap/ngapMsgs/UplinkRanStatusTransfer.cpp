@@ -44,7 +44,7 @@ void UplinkRanStatusTransfer::initialize() {
 }
 
 //------------------------------------------------------------------------------
-void UplinkRanStatusTransfer::setAmfUeNgapId(const unsigned long& id) {
+void UplinkRanStatusTransfer::setAmfUeNgapId(const uint64_t& id) {
   NgapUeMessage::m_AmfUeNgapId.set(id);
 
   Ngap_UplinkRANStatusTransferIEs_t* ie =

@@ -58,7 +58,7 @@ void HandoverRequest::initialize() {
 }
 
 //------------------------------------------------------------------------------
-unsigned long HandoverRequest::getAmfUeNgapId() const {
+uint64_t HandoverRequest::getAmfUeNgapId() const {
   return m_AmfUeNgapId.get();
 }
 
@@ -143,7 +143,7 @@ bool HandoverRequest::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
 }
 
 //------------------------------------------------------------------------------
-void HandoverRequest::setAmfUeNgapId(const unsigned long& id) {
+void HandoverRequest::setAmfUeNgapId(const uint64_t& id) {
   m_AmfUeNgapId.set(id);
 
   Ngap_HandoverRequestIEs_t* ie =

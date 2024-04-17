@@ -61,8 +61,11 @@ bool AmfUeNgapId::encode(Ngap_AMF_UE_NGAP_ID_t& amf_ue_ngap_id) const {
 bool AmfUeNgapId::decode(const Ngap_AMF_UE_NGAP_ID_t& amf_ue_ngap_id) {
   if (!amf_ue_ngap_id.buf) return false;
 
+  uint8_t actual_size =
+      (amf_ue_ngap_id.size > 5) ? 5 : amf_ue_ngap_id.size;  // 5 bytes = 40 bits
+
   m_AmfUeNgapId = 0;
-  for (int i = 0; i < amf_ue_ngap_id.size; i++) {
+  for (int i = 0; i < actual_size; i++) {
     m_AmfUeNgapId = m_AmfUeNgapId << 8;
     m_AmfUeNgapId |= amf_ue_ngap_id.buf[i];
   }

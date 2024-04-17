@@ -44,7 +44,7 @@ void UplinkNasTransportMsg::initialize() {
 }
 
 //------------------------------------------------------------------------------
-void UplinkNasTransportMsg::setAmfUeNgapId(const unsigned long& id) {
+void UplinkNasTransportMsg::setAmfUeNgapId(const uint64_t& id) {
   NgapUeMessage::m_AmfUeNgapId.set(id);
 
   Ngap_UplinkNASTransport_IEs_t* ie = (Ngap_UplinkNASTransport_IEs_t*) calloc(

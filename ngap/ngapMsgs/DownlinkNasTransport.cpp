@@ -47,7 +47,7 @@ void DownLinkNasTransportMsg::initialize() {
 }
 
 //------------------------------------------------------------------------------
-void DownLinkNasTransportMsg::setAmfUeNgapId(const unsigned long& id) {
+void DownLinkNasTransportMsg::setAmfUeNgapId(const uint64_t& id) {
   NgapUeMessage::m_AmfUeNgapId.set(id);
 
   Ngap_DownlinkNASTransport_IEs_t* ie =

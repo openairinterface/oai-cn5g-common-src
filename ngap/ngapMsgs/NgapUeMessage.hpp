@@ -38,8 +38,8 @@ class NgapUeMessage : public NgapMessage {
   NgapUeMessage();
   virtual ~NgapUeMessage();
 
-  virtual void setAmfUeNgapId(const unsigned long& id) = 0;
-  unsigned long getAmfUeNgapId() const;
+  virtual void setAmfUeNgapId(const uint64_t& id) = 0;
+  uint64_t getAmfUeNgapId() const;
 
   virtual void setRanUeNgapId(const uint32_t& id) = 0;
   uint32_t getRanUeNgapId() const;

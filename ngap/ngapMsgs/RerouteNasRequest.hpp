@@ -40,8 +40,8 @@ class RerouteNasRequest : public NgapMessage {
   void initialize();
   bool decode(Ngap_NGAP_PDU_t* ngap_msg_pdu) override;
 
-  void setAmfUeNgapId(const unsigned long& id);  // 40 bits
-  bool getAmfUeNgapId(unsigned long& id) const;
+  void setAmfUeNgapId(const uint64_t& id);  // 40 bits
+  bool getAmfUeNgapId(uint64_t& id) const;
 
   void setRanUeNgapId(const uint32_t& id);  // 32 bits
   uint32_t getRanUeNgapId() const;

@@ -49,7 +49,7 @@ void RerouteNasRequest::initialize() {
 }
 
 //------------------------------------------------------------------------------
-void RerouteNasRequest::setAmfUeNgapId(const unsigned long& id) {
+void RerouteNasRequest::setAmfUeNgapId(const uint64_t& id) {
   AmfUeNgapId tmp = {};
   tmp.set(id);
   m_AmfUeNgapId = std::optional<AmfUeNgapId>(tmp);
@@ -72,7 +72,7 @@ void RerouteNasRequest::setAmfUeNgapId(const unsigned long& id) {
 }
 
 //------------------------------------------------------------------------------
-bool RerouteNasRequest::getAmfUeNgapId(unsigned long& id) const {
+bool RerouteNasRequest::getAmfUeNgapId(uint64_t& id) const {
   if (!m_AmfUeNgapId.has_value()) return false;
   id = m_AmfUeNgapId->get();
   return true;

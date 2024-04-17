@@ -32,7 +32,7 @@ NgapUeMessage::NgapUeMessage() : NgapMessage() {}
 NgapUeMessage::~NgapUeMessage() {}
 
 //------------------------------------------------------------------------------
-unsigned long NgapUeMessage::getAmfUeNgapId() const {
+uint64_t NgapUeMessage::getAmfUeNgapId() const {
   return m_AmfUeNgapId.get();
 }
 

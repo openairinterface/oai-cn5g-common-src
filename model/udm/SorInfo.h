@@ -44,9 +44,7 @@
 
 #include "SteeringContainer.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -108,8 +106,6 @@ class SorInfo {
   std::string m_ProvisioningTime;
 };
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm
 
 #endif /* SorInfo_H_ */

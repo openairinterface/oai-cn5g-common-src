@@ -33,9 +33,7 @@
 
 #include "Nssai.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 Nssai::Nssai() {
   m_SupportedFeatures      = "";
@@ -95,6 +93,4 @@ void Nssai::unsetSingleNssais() {
   m_SingleNssaisIsSet = false;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

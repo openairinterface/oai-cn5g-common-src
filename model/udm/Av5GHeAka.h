@@ -44,9 +44,7 @@
 
 #include "AvType.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -102,8 +100,6 @@ class Av5GHeAka {
   std::string m_Kausf;
 };
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm
 
 #endif /* Av5GHeAka_H_ */

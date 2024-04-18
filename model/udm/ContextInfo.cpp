@@ -33,9 +33,7 @@
 
 #include "ContextInfo.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 ContextInfo::ContextInfo() {
   m_OrigHeadersIsSet = false;
@@ -74,6 +72,4 @@ void ContextInfo::unsetOrigHeaders() {
   m_OrigHeadersIsSet = false;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

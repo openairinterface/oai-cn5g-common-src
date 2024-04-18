@@ -33,9 +33,7 @@
 
 #include "TraceDataResponse.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 TraceDataResponse::TraceDataResponse() {
   m_TraceDataIsSet         = false;
@@ -95,6 +93,4 @@ void TraceDataResponse::unsetSharedTraceDataId() {
   m_SharedTraceDataIdIsSet = false;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

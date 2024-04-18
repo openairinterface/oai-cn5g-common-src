@@ -33,9 +33,7 @@
 
 #include "SmsfInfo.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 SmsfInfo::SmsfInfo() {
   m_SmsfInstanceId = "";
@@ -71,6 +69,4 @@ void SmsfInfo::setPlmnId(oai::model::common::PlmnId const& value) {
   m_PlmnId = value;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

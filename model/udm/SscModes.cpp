@@ -33,9 +33,7 @@
 
 #include "SscModes.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 SscModes::SscModes() {
   m_AllowedSscModesIsSet = false;
@@ -77,6 +75,4 @@ void SscModes::unsetAllowedSscModes() {
   m_AllowedSscModesIsSet = false;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

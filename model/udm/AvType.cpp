@@ -33,9 +33,7 @@
 
 #include "AvType.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 AvType::AvType() {}
 
@@ -51,6 +49,4 @@ void to_json(nlohmann::json& j, const AvType& o) {
 
 void from_json(const nlohmann::json& j, AvType& o) {}
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

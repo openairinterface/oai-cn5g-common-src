@@ -47,9 +47,7 @@
 #include "Sign.h"
 #include "SqnScheme.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -116,8 +114,6 @@ class SequenceNumber {
   bool m_DifSignIsSet;
 };
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm
 
 #endif /* SequenceNumber_H_ */

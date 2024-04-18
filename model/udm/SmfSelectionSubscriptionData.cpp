@@ -33,9 +33,7 @@
 
 #include "SmfSelectionSubscriptionData.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 SmfSelectionSubscriptionData::SmfSelectionSubscriptionData() {
   m_SupportedFeatures          = "";
@@ -115,6 +113,4 @@ void SmfSelectionSubscriptionData::unsetSharedSnssaiInfosId() {
   m_SharedSnssaiInfosIdIsSet = false;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

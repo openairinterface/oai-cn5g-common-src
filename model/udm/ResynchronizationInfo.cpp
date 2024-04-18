@@ -33,9 +33,7 @@
 
 #include "ResynchronizationInfo.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 ResynchronizationInfo::ResynchronizationInfo() {
   m_Rand = "";
@@ -72,6 +70,4 @@ void ResynchronizationInfo::setAuts(std::string const& value) {
   m_Auts = value;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

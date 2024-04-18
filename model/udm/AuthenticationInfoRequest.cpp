@@ -33,9 +33,7 @@
 
 #include "AuthenticationInfoRequest.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 AuthenticationInfoRequest::AuthenticationInfoRequest() {
   m_SupportedFeatures          = "";
@@ -157,6 +155,4 @@ void AuthenticationInfoRequest::unsetN5gcInd() {
   m_N5gcIndIsSet = false;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

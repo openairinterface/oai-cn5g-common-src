@@ -33,9 +33,7 @@
 
 #include "HssAuthenticationInfoResult.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 HssAuthenticationInfoResult::HssAuthenticationInfoResult() {
   m_SupportedFeatures      = "";
@@ -86,6 +84,4 @@ void HssAuthenticationInfoResult::setHssAuthenticationVectors(
   m_HssAuthenticationVectors = value;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

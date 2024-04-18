@@ -44,9 +44,7 @@
 
 #include "PlmnId.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -81,8 +79,6 @@ class SmsfInfo {
   oai::model::common::PlmnId m_PlmnId;
 };
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm
 
 #endif /* SmsfInfo_H_ */

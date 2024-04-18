@@ -44,9 +44,7 @@
 
 #include "HssAuthenticationVectors.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -84,8 +82,6 @@ class HssAuthenticationInfoResult {
   HssAuthenticationVectors m_HssAuthenticationVectors;
 };
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm
 
 #endif /* HssAuthenticationInfoResult_H_ */

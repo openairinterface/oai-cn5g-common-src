@@ -33,9 +33,7 @@
 
 #include "Av5GHeAka.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 Av5GHeAka::Av5GHeAka() {
   m_Rand     = "";
@@ -98,6 +96,4 @@ void Av5GHeAka::setKausf(std::string const& value) {
   m_Kausf = value;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

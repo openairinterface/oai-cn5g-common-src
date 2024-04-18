@@ -49,11 +49,9 @@
 #include "Snssai.h"
 #include "TraceData.h"
 
-using namespace oai::udm::model;
+using namespace oai::model::udm;
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -140,8 +138,6 @@ class SessionManagementSubscriptionData {
   bool m_SharedTraceDataIdIsSet;
 };
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm
 
 #endif /* SessionManagementSubscriptionData_H_ */

@@ -33,9 +33,7 @@
 
 #include "SteeringInfo.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 SteeringInfo::SteeringInfo() {
   m_AccessTechListIsSet = false;
@@ -77,6 +75,4 @@ void SteeringInfo::unsetAccessTechList() {
   m_AccessTechListIsSet = false;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

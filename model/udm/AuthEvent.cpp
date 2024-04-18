@@ -33,9 +33,7 @@
 
 #include "AuthEvent.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 AuthEvent::AuthEvent() {
   m_NfInstanceId        = "";
@@ -119,6 +117,4 @@ void AuthEvent::unsetAuthRemovalInd() {
   m_AuthRemovalIndIsSet = false;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

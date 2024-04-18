@@ -33,9 +33,7 @@
 
 #include "PduSession.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 PduSession::PduSession() {
   m_Dnn           = "";
@@ -80,6 +78,4 @@ void PduSession::setPlmnId(oai::model::common::PlmnId const& value) {
   m_PlmnId = value;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

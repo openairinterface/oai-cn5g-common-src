@@ -43,9 +43,7 @@
 #include <string>
 #include <vector>
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -84,8 +82,6 @@ class SdmSubsModification {
   bool m_MonitoredResourceUrisIsSet;
 };
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm
 
 #endif /* SdmSubsModification_H_ */

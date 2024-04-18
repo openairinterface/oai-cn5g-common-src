@@ -33,9 +33,7 @@
 
 #include "PgwInfo.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 PgwInfo::PgwInfo() {
   m_Dnn         = "";
@@ -91,6 +89,4 @@ void PgwInfo::unsetPlmnId() {
   m_PlmnIdIsSet = false;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

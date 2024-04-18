@@ -44,9 +44,7 @@
 
 #include "Ipv6Addr.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -95,8 +93,6 @@ class VgmlcAddress {
   bool m_VgmlcFqdnIsSet;
 };
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm
 
 #endif /* VgmlcAddress_H_ */

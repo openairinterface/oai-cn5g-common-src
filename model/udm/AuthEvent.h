@@ -44,9 +44,7 @@
 
 #include "AuthType.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -112,8 +110,6 @@ class AuthEvent {
   bool m_AuthRemovalIndIsSet;
 };
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm
 
 #endif /* AuthEvent_H_ */

@@ -42,9 +42,7 @@
 #include <nlohmann/json.hpp>
 #include <string>
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -79,8 +77,6 @@ class ResynchronizationInfo {
   std::string m_Auts;
 };
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm
 
 #endif /* ResynchronizationInfo_H_ */

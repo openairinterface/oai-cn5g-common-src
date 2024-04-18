@@ -33,9 +33,7 @@
 
 #include "AuthenticationVector.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 AuthenticationVector::AuthenticationVector() {
   m_Rand     = "";
@@ -125,6 +123,4 @@ void AuthenticationVector::setKausf(std::string const& value) {
   m_Kausf = value;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

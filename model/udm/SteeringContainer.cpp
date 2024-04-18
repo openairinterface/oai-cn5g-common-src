@@ -33,9 +33,7 @@
 
 #include "SteeringContainer.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 SteeringContainer::SteeringContainer() {}
 
@@ -51,6 +49,4 @@ void to_json(nlohmann::json& j, const SteeringContainer& o) {
 
 void from_json(const nlohmann::json& j, SteeringContainer& o) {}
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

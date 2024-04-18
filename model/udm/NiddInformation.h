@@ -42,9 +42,7 @@
 #include <nlohmann/json.hpp>
 #include <string>
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -82,8 +80,6 @@ class NiddInformation {
   bool m_GpsiIsSet;
 };
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm
 
 #endif /* NiddInformation_H_ */

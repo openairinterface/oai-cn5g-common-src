@@ -33,9 +33,7 @@
 
 #include "VgmlcAddress.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 VgmlcAddress::VgmlcAddress() {
   m_VgmlcAddressIpv4      = "";
@@ -114,6 +112,4 @@ void VgmlcAddress::unsetVgmlcFqdn() {
   m_VgmlcFqdnIsSet = false;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

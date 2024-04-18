@@ -33,9 +33,7 @@
 
 #include "AccessAndMobilitySubscriptionData.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 using namespace oai::model::common;
 
@@ -488,6 +486,4 @@ void AccessAndMobilitySubscriptionData::unsetTraceData() {
   m_TraceDataIsSet = false;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

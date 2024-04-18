@@ -42,9 +42,7 @@
 #include <nlohmann/json.hpp>
 #include <string>
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -100,8 +98,6 @@ class DnnInfo {
   bool m_IwkEpsIndIsSet;
 };
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm
 
 #endif /* DnnInfo_H_ */

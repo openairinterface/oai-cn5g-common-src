@@ -33,9 +33,7 @@
 
 #include "PduSessionTypes.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 PduSessionTypes::PduSessionTypes() {
   m_AllowedSessionTypesIsSet = false;
@@ -81,6 +79,4 @@ void PduSessionTypes::unsetAllowedSessionTypes() {
   m_AllowedSessionTypesIsSet = false;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

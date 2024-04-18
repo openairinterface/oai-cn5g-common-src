@@ -33,9 +33,7 @@
 
 #include "SessionManagementSubscriptionData.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 SessionManagementSubscriptionData::SessionManagementSubscriptionData() {
   m_DnnConfigurationsIsSet         = false;
@@ -198,6 +196,4 @@ void SessionManagementSubscriptionData::unsetSharedTraceDataId() {
   m_SharedTraceDataIdIsSet = false;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

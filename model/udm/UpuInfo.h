@@ -45,9 +45,7 @@
 
 #include "UpuData.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -113,8 +111,6 @@ class UpuInfo {
   std::string m_ProvisioningTime;
 };
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm
 
 #endif /* UpuInfo_H_ */

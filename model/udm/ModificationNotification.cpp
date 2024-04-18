@@ -33,9 +33,7 @@
 
 #include "ModificationNotification.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 ModificationNotification::ModificationNotification() {}
 
@@ -59,6 +57,4 @@ ModificationNotification::getNotifyItems() {
   return m_NotifyItems;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

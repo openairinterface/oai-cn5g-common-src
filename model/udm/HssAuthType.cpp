@@ -33,9 +33,7 @@
 
 #include "HssAuthType.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 HssAuthType::HssAuthType() {}
 
@@ -51,6 +49,4 @@ void to_json(nlohmann::json& j, const HssAuthType& o) {
 
 void from_json(const nlohmann::json& j, HssAuthType& o) {}
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

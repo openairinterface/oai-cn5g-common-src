@@ -45,9 +45,7 @@
 #include "AuthType.h"
 #include "AuthenticationVector.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -112,8 +110,6 @@ class AuthenticationInfoResult {
   bool m_AkmaIndIsSet;
 };
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm
 
 #endif /* AuthenticationInfoResult_H_ */

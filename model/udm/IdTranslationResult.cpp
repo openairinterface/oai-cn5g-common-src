@@ -33,9 +33,7 @@
 
 #include "IdTranslationResult.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 IdTranslationResult::IdTranslationResult() {
   m_SupportedFeatures      = "";
@@ -104,6 +102,4 @@ void IdTranslationResult::unsetGpsi() {
   m_GpsiIsSet = false;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

@@ -33,9 +33,7 @@
 
 #include "AccessNetworkId.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 AccessNetworkId::AccessNetworkId() {}
 
@@ -51,6 +49,4 @@ void to_json(nlohmann::json& j, const AccessNetworkId& o) {
 
 void from_json(const nlohmann::json& j, AccessNetworkId& o) {}
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

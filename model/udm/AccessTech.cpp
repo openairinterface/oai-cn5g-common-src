@@ -33,9 +33,7 @@
 
 #include "AccessTech.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 AccessTech::AccessTech() {}
 
@@ -51,6 +49,4 @@ void to_json(nlohmann::json& j, const AccessTech& o) {
 
 void from_json(const nlohmann::json& j, AccessTech& o) {}
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

@@ -45,9 +45,7 @@
 
 #include "Snssai.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -92,8 +90,6 @@ class Nssai {
   bool m_SingleNssaisIsSet;
 };
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm
 
 #endif /* Nssai_H_ */

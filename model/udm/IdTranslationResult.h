@@ -42,9 +42,7 @@
 #include <nlohmann/json.hpp>
 #include <string>
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -91,8 +89,6 @@ class IdTranslationResult {
   bool m_GpsiIsSet;
 };
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm
 
 #endif /* IdTranslationResult_H_ */

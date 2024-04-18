@@ -33,9 +33,7 @@
 
 #include "AuthenticationInfoResult.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 AuthenticationInfoResult::AuthenticationInfoResult() {
   m_SupportedFeatures         = "";
@@ -144,6 +142,4 @@ void AuthenticationInfoResult::unsetAkmaInd() {
   m_AkmaIndIsSet = false;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

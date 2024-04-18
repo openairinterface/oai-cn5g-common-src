@@ -33,9 +33,7 @@
 
 #include "UpuInfo.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 UpuInfo::UpuInfo() {
   m_UpuRegInd        = false;
@@ -126,6 +124,4 @@ void UpuInfo::setProvisioningTime(std::string const& value) {
   m_ProvisioningTime = value;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

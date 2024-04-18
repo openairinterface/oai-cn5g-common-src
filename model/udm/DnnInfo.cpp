@@ -33,9 +33,7 @@
 
 #include "DnnInfo.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 DnnInfo::DnnInfo() {
   m_Dnn                      = "";
@@ -125,6 +123,4 @@ void DnnInfo::unsetIwkEpsInd() {
   m_IwkEpsIndIsSet = false;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

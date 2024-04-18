@@ -33,9 +33,7 @@
 
 #include "UpuData.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 UpuData::UpuData() {}
 
@@ -51,6 +49,4 @@ void to_json(nlohmann::json& j, const UpuData& o) {
 
 void from_json(const nlohmann::json& j, UpuData& o) {}
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

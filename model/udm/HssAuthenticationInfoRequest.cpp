@@ -33,9 +33,7 @@
 
 #include "HssAuthenticationInfoRequest.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 HssAuthenticationInfoRequest::HssAuthenticationInfoRequest() {
   m_SupportedFeatures          = "";
@@ -177,6 +175,4 @@ void HssAuthenticationInfoRequest::unsetAnId() {
   m_AnIdIsSet = false;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

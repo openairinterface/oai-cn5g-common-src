@@ -46,9 +46,7 @@
 #include "AvEapAkaPrime.h"
 #include "AvType.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -125,8 +123,6 @@ class AuthenticationVector {
   std::string m_Kausf;
 };
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm
 
 #endif /* AuthenticationVector_H_ */

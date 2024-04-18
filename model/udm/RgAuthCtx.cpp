@@ -33,9 +33,7 @@
 
 #include "RgAuthCtx.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 RgAuthCtx::RgAuthCtx() {
   m_AuthInd                = false;
@@ -104,6 +102,4 @@ void RgAuthCtx::unsetSupportedFeatures() {
   m_SupportedFeaturesIsSet = false;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

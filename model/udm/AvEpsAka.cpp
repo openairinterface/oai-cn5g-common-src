@@ -33,9 +33,7 @@
 
 #include "AvEpsAka.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 AvEpsAka::AvEpsAka() {
   m_Rand  = "";
@@ -98,6 +96,4 @@ void AvEpsAka::setKasme(std::string const& value) {
   m_Kasme = value;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

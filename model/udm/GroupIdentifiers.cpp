@@ -33,9 +33,7 @@
 
 #include "GroupIdentifiers.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 GroupIdentifiers::GroupIdentifiers() {
   m_ExtGroupId      = "";
@@ -94,6 +92,4 @@ void GroupIdentifiers::unsetIntGroupId() {
   m_IntGroupIdIsSet = false;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

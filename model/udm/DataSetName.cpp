@@ -33,9 +33,7 @@
 
 #include "DataSetName.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 DataSetName::DataSetName() {}
 
@@ -51,6 +49,4 @@ void to_json(nlohmann::json& j, const DataSetName& o) {
 
 void from_json(const nlohmann::json& j, DataSetName& o) {}
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

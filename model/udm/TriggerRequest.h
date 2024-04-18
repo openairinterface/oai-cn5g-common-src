@@ -42,9 +42,7 @@
 #include <nlohmann/json.hpp>
 #include <string>
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -72,8 +70,6 @@ class TriggerRequest {
   std::string m_Supi;
 };
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm
 
 #endif /* TriggerRequest_H_ */

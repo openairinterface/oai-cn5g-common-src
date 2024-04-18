@@ -33,9 +33,7 @@
 
 #include "SnssaiInfo.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 SnssaiInfo::SnssaiInfo() {}
 
@@ -58,6 +56,4 @@ std::vector<DnnInfo>& SnssaiInfo::getDnnInfos() {
   return m_DnnInfos;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

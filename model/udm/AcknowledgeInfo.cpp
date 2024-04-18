@@ -33,9 +33,7 @@
 
 #include "AcknowledgeInfo.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 AcknowledgeInfo::AcknowledgeInfo() {
   m_SorMacIue          = "";
@@ -123,6 +121,4 @@ void AcknowledgeInfo::setProvisioningTime(std::string const& value) {
   m_ProvisioningTime = value;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

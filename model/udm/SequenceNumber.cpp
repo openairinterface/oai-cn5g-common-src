@@ -33,9 +33,7 @@
 
 #include "SequenceNumber.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 SequenceNumber::SequenceNumber() {
   m_SqnScheme        = "";
@@ -154,6 +152,4 @@ void SequenceNumber::unsetDifSign() {
   m_DifSignIsSet = false;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

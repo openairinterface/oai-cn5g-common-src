@@ -33,9 +33,7 @@
 
 #include "EmergencyInfo.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 EmergencyInfo::EmergencyInfo() {}
 
@@ -51,6 +49,4 @@ void to_json(nlohmann::json& j, const EmergencyInfo& o) {
 
 void from_json(const nlohmann::json& j, EmergencyInfo& o) {}
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

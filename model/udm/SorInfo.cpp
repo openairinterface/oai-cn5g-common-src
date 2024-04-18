@@ -33,9 +33,7 @@
 
 #include "SorInfo.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 SorInfo::SorInfo() {
   m_SteeringContainerIsSet = false;
@@ -132,6 +130,4 @@ void SorInfo::setProvisioningTime(std::string const& value) {
   m_ProvisioningTime = value;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

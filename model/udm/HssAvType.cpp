@@ -33,9 +33,7 @@
 
 #include "HssAvType.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 HssAvType::HssAvType() {}
 
@@ -51,6 +49,4 @@ void to_json(nlohmann::json& j, const HssAvType& o) {
 
 void from_json(const nlohmann::json& j, HssAvType& o) {}
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

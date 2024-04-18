@@ -51,9 +51,7 @@
 #include "SnssaiInfo.h"
 #include "TraceData.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -134,8 +132,6 @@ class SharedData {
   bool m_SharedSnssaiInfosIsSet;
 };
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm
 
 #endif /* SharedData_H_ */

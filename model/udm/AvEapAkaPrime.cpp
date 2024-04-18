@@ -33,9 +33,7 @@
 
 #include "AvEapAkaPrime.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 AvEapAkaPrime::AvEapAkaPrime() {
   m_Rand    = "";
@@ -107,6 +105,4 @@ void AvEapAkaPrime::setIkPrime(std::string const& value) {
   m_IkPrime = value;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

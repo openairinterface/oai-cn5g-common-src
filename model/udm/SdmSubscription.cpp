@@ -33,9 +33,7 @@
 
 #include "SdmSubscription.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 SdmSubscription::SdmSubscription() {
   m_NfInstanceId             = "";
@@ -216,6 +214,4 @@ void SdmSubscription::unsetPlmnId() {
   m_PlmnIdIsSet = false;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

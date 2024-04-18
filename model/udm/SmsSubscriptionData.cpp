@@ -33,9 +33,7 @@
 
 #include "SmsSubscriptionData.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 SmsSubscriptionData::SmsSubscriptionData() {
   m_SmsSubscribed            = false;
@@ -95,6 +93,4 @@ void SmsSubscriptionData::unsetSharedSmsSubsDataId() {
   m_SharedSmsSubsDataIdIsSet = false;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

@@ -33,9 +33,7 @@
 
 #include "IpAddress.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 IpAddress::IpAddress() {}
 
@@ -51,6 +49,4 @@ void to_json(nlohmann::json& j, const IpAddress& o) {
 
 void from_json(const nlohmann::json& j, IpAddress& o) {}
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

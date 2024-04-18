@@ -33,9 +33,7 @@
 
 #include "AvImsGbaEapAka.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 AvImsGbaEapAka::AvImsGbaEapAka() {
   m_Rand = "";
@@ -107,6 +105,4 @@ void AvImsGbaEapAka::setIk(std::string const& value) {
   m_Ik = value;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

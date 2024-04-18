@@ -33,9 +33,7 @@
 
 #include "DnnConfiguration.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 using namespace oai::model::common;
 
@@ -268,6 +266,4 @@ void DnnConfiguration::unsetNiddInfo() {
   m_NiddInfoIsSet = false;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

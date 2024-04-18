@@ -44,9 +44,7 @@
 
 #include "SscMode.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -83,8 +81,6 @@ class SscModes {
   bool m_AllowedSscModesIsSet;
 };
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm
 
 #endif /* SscModes_H_ */

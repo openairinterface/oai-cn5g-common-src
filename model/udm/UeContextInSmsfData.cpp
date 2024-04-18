@@ -33,9 +33,7 @@
 
 #include "UeContextInSmsfData.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 UeContextInSmsfData::UeContextInSmsfData() {
   m_SmsfInfo3GppAccessIsSet    = false;
@@ -94,6 +92,4 @@ void UeContextInSmsfData::unsetSmsfInfoNon3GppAccess() {
   m_SmsfInfoNon3GppAccessIsSet = false;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

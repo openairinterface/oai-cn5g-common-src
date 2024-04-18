@@ -33,9 +33,7 @@
 
 #include "SubscriptionDataSets.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 SubscriptionDataSets::SubscriptionDataSets() {
   m_AmDataIsSet      = false;
@@ -207,6 +205,4 @@ void SubscriptionDataSets::unsetSmsMngData() {
   m_SmsMngDataIsSet = false;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

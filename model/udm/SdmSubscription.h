@@ -47,9 +47,7 @@
 #include "ServiceName.h"
 #include "Snssai.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -154,8 +152,6 @@ class SdmSubscription {
   bool m_PlmnIdIsSet;
 };
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm
 
 #endif /* SdmSubscription_H_ */

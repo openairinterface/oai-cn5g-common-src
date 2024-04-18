@@ -33,9 +33,7 @@
 
 #include "SharedData.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 SharedData::SharedData() {
   m_SharedDataId                 = "";
@@ -177,6 +175,4 @@ void SharedData::unsetSharedSnssaiInfos() {
   m_SharedSnssaiInfosIsSet = false;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

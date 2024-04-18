@@ -46,9 +46,7 @@
 
 #include "SnssaiInfo.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -97,8 +95,6 @@ class SmfSelectionSubscriptionData {
   bool m_SharedSnssaiInfosIdIsSet;
 };
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm
 
 #endif /* SmfSelectionSubscriptionData_H_ */

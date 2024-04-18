@@ -33,9 +33,7 @@
 
 #include "SmsManagementSubscriptionData.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 SmsManagementSubscriptionData::SmsManagementSubscriptionData() {
   m_SupportedFeatures        = "";
@@ -236,6 +234,4 @@ void SmsManagementSubscriptionData::unsetTraceData() {
   m_TraceDataIsSet = false;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

@@ -33,9 +33,7 @@
 
 #include "SdmSubsModification.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 SdmSubsModification::SdmSubsModification() {
   m_Expires                    = "";
@@ -90,6 +88,4 @@ void SdmSubsModification::unsetMonitoredResourceUris() {
   m_MonitoredResourceUrisIsSet = false;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

@@ -44,9 +44,7 @@
 
 #include "PduSessionType.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -83,8 +81,6 @@ class PduSessionTypes {
   bool m_AllowedSessionTypesIsSet;
 };
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm
 
 #endif /* PduSessionTypes_H_ */

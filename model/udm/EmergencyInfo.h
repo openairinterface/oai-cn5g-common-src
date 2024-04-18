@@ -41,9 +41,7 @@
 
 #include <nlohmann/json.hpp>
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -64,8 +62,6 @@ class EmergencyInfo {
  protected:
 };
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm
 
 #endif /* EmergencyInfo_H_ */

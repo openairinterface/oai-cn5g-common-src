@@ -45,9 +45,7 @@
 
 #include "ResynchronizationInfo.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -119,8 +117,6 @@ class AuthenticationInfoRequest {
   bool m_N5gcIndIsSet;
 };
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm
 
 #endif /* AuthenticationInfoRequest_H_ */

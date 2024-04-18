@@ -33,9 +33,7 @@
 
 #include "HssAuthenticationVectors.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 HssAuthenticationVectors::HssAuthenticationVectors() {}
 
@@ -51,6 +49,4 @@ void to_json(nlohmann::json& j, const HssAuthenticationVectors& o) {
 
 void from_json(const nlohmann::json& j, HssAuthenticationVectors& o) {}
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

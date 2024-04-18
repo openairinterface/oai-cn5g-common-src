@@ -51,9 +51,7 @@
 #include "UeContextInSmfData.h"
 #include "UeContextInSmsfData.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -146,8 +144,6 @@ class SubscriptionDataSets {
   bool m_SmsMngDataIsSet;
 };
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm
 
 #endif /* SubscriptionDataSets_H_ */

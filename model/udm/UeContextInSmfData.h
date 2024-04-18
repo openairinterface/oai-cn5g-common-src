@@ -47,9 +47,7 @@
 #include "PduSession.h"
 #include "PgwInfo.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -97,8 +95,6 @@ class UeContextInSmfData {
   bool m_EmergencyInfoIsSet;
 };
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm
 
 #endif /* UeContextInSmfData_H_ */

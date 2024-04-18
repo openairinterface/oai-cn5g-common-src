@@ -44,9 +44,7 @@
 
 #include "HssAvType.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -109,8 +107,6 @@ class AvImsGbaEapAka {
   std::string m_Ik;
 };
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm
 
 #endif /* AvImsGbaEapAka_H_ */

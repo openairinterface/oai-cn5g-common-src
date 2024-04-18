@@ -33,9 +33,7 @@
 
 #include "Sign.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 Sign::Sign() {}
 
@@ -51,6 +49,4 @@ void to_json(nlohmann::json& j, const Sign& o) {
 
 void from_json(const nlohmann::json& j, Sign& o) {}
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

@@ -44,9 +44,7 @@
 
 #include "NotifyItem.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -73,8 +71,6 @@ class ModificationNotification {
   std::vector<oai::model::common::NotifyItem> m_NotifyItems;
 };
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm
 
 #endif /* ModificationNotification_H_ */

@@ -44,9 +44,7 @@
 
 #include "PlmnId.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -91,8 +89,6 @@ class PgwInfo {
   bool m_PlmnIdIsSet;
 };
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm
 
 #endif /* PgwInfo_H_ */

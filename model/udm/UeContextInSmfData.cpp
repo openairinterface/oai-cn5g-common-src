@@ -33,9 +33,7 @@
 
 #include "UeContextInSmfData.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 UeContextInSmfData::UeContextInSmfData() {
   m_PduSessionsIsSet   = false;
@@ -103,6 +101,4 @@ void UeContextInSmfData::unsetEmergencyInfo() {
   m_EmergencyInfoIsSet = false;
 }
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm

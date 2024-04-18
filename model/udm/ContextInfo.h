@@ -43,9 +43,7 @@
 #include <string>
 #include <vector>
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -76,8 +74,6 @@ class ContextInfo {
   bool m_OrigHeadersIsSet;
 };
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm
 
 #endif /* ContextInfo_H_ */

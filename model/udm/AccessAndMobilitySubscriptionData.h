@@ -53,9 +53,7 @@
 #include "TraceData.h"
 #include "UpuInfo.h"
 
-namespace oai {
-namespace udm {
-namespace model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -281,8 +279,6 @@ class AccessAndMobilitySubscriptionData {
   bool m_TraceDataIsSet;
 };
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+}  // namespace oai::model::udm
 
 #endif /* AccessAndMobilitySubscriptionData_H_ */

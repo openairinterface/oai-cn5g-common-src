@@ -33,7 +33,7 @@
 
 #include "PeiUpdateInfo.h"
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 PeiUpdateInfo::PeiUpdateInfo() {
   m_Pei = "";
 }
@@ -60,4 +60,4 @@ void PeiUpdateInfo::setPei(std::string const& value) {
   m_Pei = value;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

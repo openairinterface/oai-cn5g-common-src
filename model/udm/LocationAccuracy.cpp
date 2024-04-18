@@ -36,7 +36,7 @@
 
 #include <sstream>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 LocationAccuracy::LocationAccuracy() {}
 
@@ -74,4 +74,4 @@ void to_json(nlohmann::json& j, const LocationAccuracy& o) {
 
 void from_json(const nlohmann::json& j, LocationAccuracy& o) {}
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

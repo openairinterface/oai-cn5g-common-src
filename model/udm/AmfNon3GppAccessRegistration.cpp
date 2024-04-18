@@ -33,7 +33,7 @@
 
 #include "AmfNon3GppAccessRegistration.h"
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 using namespace oai::model::common;
 
@@ -348,4 +348,4 @@ void AmfNon3GppAccessRegistration::unsetContextInfo() {
   m_ContextInfoIsSet = false;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

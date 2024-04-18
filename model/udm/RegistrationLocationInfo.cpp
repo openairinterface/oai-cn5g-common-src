@@ -33,7 +33,7 @@
 
 #include "RegistrationLocationInfo.h"
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 RegistrationLocationInfo::RegistrationLocationInfo() {
   m_AmfInstanceId     = "";
@@ -110,4 +110,4 @@ void RegistrationLocationInfo::setAccessTypeList(
   m_AccessTypeList = value;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

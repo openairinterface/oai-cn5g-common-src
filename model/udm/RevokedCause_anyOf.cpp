@@ -36,7 +36,7 @@
 #include <stdexcept>
 #include <sstream>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 RevokedCause_anyOf::RevokedCause_anyOf() {}
 
@@ -111,4 +111,4 @@ void RevokedCause_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

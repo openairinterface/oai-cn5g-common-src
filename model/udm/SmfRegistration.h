@@ -47,7 +47,7 @@
 #include "RegistrationReason.h"
 #include "Snssai.h"
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -196,6 +196,6 @@ class SmfRegistration {
   bool m_ContextInfoIsSet;
 };
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm
 
 #endif /* SmfRegistration_H_ */

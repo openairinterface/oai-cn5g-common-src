@@ -36,7 +36,7 @@
 
 #include <sstream>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 Report::Report() {
   m_NewPei             = "";
@@ -239,4 +239,4 @@ void Report::setNewCmInfoList(std::vector<std::string> const& value) {
   m_NewCmInfoList = value;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

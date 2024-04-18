@@ -36,7 +36,7 @@
 #include <stdexcept>
 #include <sstream>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 EventType_anyOf::EventType_anyOf() {}
 
@@ -167,4 +167,4 @@ void EventType_anyOf::setValue(EventType_anyOf::eEventType_anyOf value) {
   m_value = value;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

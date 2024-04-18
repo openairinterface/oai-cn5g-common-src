@@ -36,7 +36,7 @@
 
 #include <sstream>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 LocationReportingConfiguration::LocationReportingConfiguration() {
   m_CurrentLocation    = false;
@@ -164,4 +164,4 @@ void LocationReportingConfiguration::unsetN3gppAccuracy() {
   m_N3gppAccuracyIsSet = false;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

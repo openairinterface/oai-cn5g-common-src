@@ -36,7 +36,7 @@
 
 #include <sstream>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 ReachabilityForSmsReport::ReachabilityForSmsReport() {
   m_MaxAvailabilityTime      = "";
@@ -125,4 +125,4 @@ void ReachabilityForSmsReport::unsetMaxAvailabilityTime() {
   m_MaxAvailabilityTimeIsSet = false;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

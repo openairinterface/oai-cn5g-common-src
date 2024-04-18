@@ -36,7 +36,7 @@
 #include <stdexcept>
 #include <sstream>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 AssociationType_anyOf::AssociationType_anyOf() {}
 
@@ -117,4 +117,4 @@ void AssociationType_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

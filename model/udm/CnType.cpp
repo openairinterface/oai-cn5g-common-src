@@ -36,7 +36,7 @@
 
 #include <sstream>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 CnType::CnType() {}
 
@@ -73,4 +73,4 @@ void to_json(nlohmann::json& j, const CnType& o) {
 
 void from_json(const nlohmann::json& j, CnType& o) {}
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

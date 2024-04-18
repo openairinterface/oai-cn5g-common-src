@@ -36,7 +36,7 @@
 
 #include <sstream>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 EventType::EventType() {}
 
@@ -73,4 +73,4 @@ void to_json(nlohmann::json& j, const EventType& o) {
 
 void from_json(const nlohmann::json& j, EventType& o) {}
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

@@ -42,7 +42,7 @@
 #include <nlohmann/json.hpp>
 #include <string>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -71,6 +71,6 @@ class PcscfRestorationNotification {
   std::string m_Supi;
 };
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm
 
 #endif /* PcscfRestorationNotification_H_ */

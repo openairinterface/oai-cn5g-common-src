@@ -43,7 +43,7 @@
 
 #include "DeregistrationReason.h"
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -71,6 +71,6 @@ class AmfDeregInfo {
   DeregistrationReason m_DeregReason;
 };
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm
 
 #endif /* AmfDeregInfo_H_ */

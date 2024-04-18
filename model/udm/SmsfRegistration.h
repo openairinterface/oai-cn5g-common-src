@@ -46,7 +46,7 @@
 #include "NetworkNodeDiameterAddress.h"
 #include "PlmnId.h"
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -136,6 +136,6 @@ class SmsfRegistration {
   bool m_ContextInfoIsSet;
 };
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm
 
 #endif /* SmsfRegistration_H_ */

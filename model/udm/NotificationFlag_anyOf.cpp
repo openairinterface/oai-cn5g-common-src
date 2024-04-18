@@ -36,7 +36,7 @@
 #include <stdexcept>
 #include <sstream>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 NotificationFlag_anyOf::NotificationFlag_anyOf() {}
 
@@ -124,4 +124,4 @@ void NotificationFlag_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

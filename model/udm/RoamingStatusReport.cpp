@@ -16,7 +16,7 @@
 
 #include <sstream>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 RoamingStatusReport::RoamingStatusReport() {
   m_Roaming = false;
@@ -87,4 +87,4 @@ void RoamingStatusReport::setNewServingPlmn(
   m_NewServingPlmn = value;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

@@ -36,7 +36,7 @@
 
 #include <sstream>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 CmInfoReport::CmInfoReport() {
   m_OldCmInfoListIsSet = false;
@@ -161,4 +161,4 @@ void CmInfoReport::setNewCmInfoList(std::vector<std::string> const& value) {
   m_NewCmInfoList = value;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

@@ -36,7 +36,7 @@
 
 #include <sstream>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 MonitoringReport::MonitoringReport() {
   m_ReferenceId                   = 0;
@@ -213,4 +213,4 @@ void MonitoringReport::unsetReachabilityReport() {
   m_ReachabilityReportIsSet = false;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

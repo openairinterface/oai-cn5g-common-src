@@ -47,7 +47,7 @@
 #include "PlmnId.h"
 #include "VgmlcAddress.h"
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -101,6 +101,6 @@ class RegistrationLocationInfo {
   std::vector<oai::model::common::AccessType> m_AccessTypeList;
 };
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm
 
 #endif /* RegistrationLocationInfo_H_ */

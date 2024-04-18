@@ -33,7 +33,7 @@
 
 #include "AmfDeregInfo.h"
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 AmfDeregInfo::AmfDeregInfo() {}
 
@@ -59,4 +59,4 @@ void AmfDeregInfo::setDeregReason(DeregistrationReason const& value) {
   m_DeregReason = value;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

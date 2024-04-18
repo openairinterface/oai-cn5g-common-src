@@ -33,7 +33,7 @@
 
 #include "EpsInterworkingInfo.h"
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 EpsInterworkingInfo::EpsInterworkingInfo() {
   m_EpsIwkPgwsIsSet = false;
@@ -73,4 +73,4 @@ void EpsInterworkingInfo::unsetEpsIwkPgws() {
   m_EpsIwkPgwsIsSet = false;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

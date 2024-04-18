@@ -45,7 +45,7 @@
 #include "NotificationFlag_anyOf.h"
 #include <nlohmann/json.hpp>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 /// <summary>
 /// Possible values are - ACTIVATE: The event notification is activated. -
@@ -85,6 +85,6 @@ class NotificationFlag {
   bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
 };
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm
 
 #endif /* NotificationFlag_H_ */

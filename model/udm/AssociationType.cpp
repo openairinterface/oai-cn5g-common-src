@@ -36,7 +36,7 @@
 
 #include <sstream>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 AssociationType::AssociationType() {}
 
@@ -74,4 +74,4 @@ void to_json(nlohmann::json& j, const AssociationType& o) {
 
 void from_json(const nlohmann::json& j, AssociationType& o) {}
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

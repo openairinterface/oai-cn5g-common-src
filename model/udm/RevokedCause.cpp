@@ -36,7 +36,7 @@
 
 #include <sstream>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 RevokedCause::RevokedCause() {}
 
@@ -74,4 +74,4 @@ void to_json(nlohmann::json& j, const RevokedCause& o) {
 
 void from_json(const nlohmann::json& j, RevokedCause& o) {}
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

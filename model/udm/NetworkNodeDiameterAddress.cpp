@@ -33,7 +33,7 @@
 
 #include "NetworkNodeDiameterAddress.h"
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 NetworkNodeDiameterAddress::NetworkNodeDiameterAddress() {
   m_Name  = "";
@@ -70,4 +70,4 @@ void NetworkNodeDiameterAddress::setRealm(std::string const& value) {
   m_Realm = value;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

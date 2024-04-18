@@ -33,7 +33,7 @@
 
 #include "PcscfRestorationNotification.h"
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 PcscfRestorationNotification::PcscfRestorationNotification() {
   m_Supi = "";
@@ -61,4 +61,4 @@ void PcscfRestorationNotification::setSupi(std::string const& value) {
   m_Supi = value;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

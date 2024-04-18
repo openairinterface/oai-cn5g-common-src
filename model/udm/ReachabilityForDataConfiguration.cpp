@@ -36,7 +36,7 @@
 
 #include <sstream>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 ReachabilityForDataConfiguration::ReachabilityForDataConfiguration() {}
 
@@ -92,4 +92,4 @@ void ReachabilityForDataConfiguration::setReportCfg(
   m_ReportCfg = value;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

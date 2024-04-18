@@ -36,7 +36,7 @@
 
 #include <sstream>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 LossConnectivityCfg::LossConnectivityCfg() {
   m_MaxDetectionTime      = 0;
@@ -103,4 +103,4 @@ void LossConnectivityCfg::unsetMaxDetectionTime() {
   m_MaxDetectionTimeIsSet = false;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

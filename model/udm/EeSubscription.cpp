@@ -36,7 +36,7 @@
 
 #include <sstream>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 EeSubscription::EeSubscription() {
   m_CallbackReference        = "";
@@ -351,4 +351,4 @@ void EeSubscription::unsetSecondCallbackRef() {
   m_SecondCallbackRefIsSet = false;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

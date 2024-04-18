@@ -33,7 +33,7 @@
 
 #include "AmfNon3GppAccessRegistrationModification.h"
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 using namespace oai::model::common;
 
@@ -149,4 +149,4 @@ void AmfNon3GppAccessRegistrationModification::unsetBackupAmfInfo() {
   m_BackupAmfInfoIsSet = false;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

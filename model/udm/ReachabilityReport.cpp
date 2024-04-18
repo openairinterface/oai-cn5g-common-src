@@ -36,7 +36,7 @@
 
 #include <sstream>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 ReachabilityReport::ReachabilityReport() {
   m_AmfInstanceIdIsSet       = false;
@@ -194,4 +194,4 @@ void ReachabilityReport::unsetMaxAvailabilityTime() {
   m_MaxAvailabilityTimeIsSet = false;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

@@ -33,7 +33,7 @@
 
 #include "Amf3GppAccessRegistrationModification.h"
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 using namespace oai::model::common;
 
@@ -212,4 +212,4 @@ void Amf3GppAccessRegistrationModification::unsetNoEeSubscriptionInd() {
   m_NoEeSubscriptionIndIsSet = false;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

@@ -45,7 +45,7 @@
 
 #include "RegistrationLocationInfo.h"
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -102,6 +102,6 @@ class LocationInfo {
   bool m_SupportedFeaturesIsSet;
 };
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm
 
 #endif /* LocationInfo_H_ */

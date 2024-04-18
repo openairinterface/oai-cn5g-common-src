@@ -33,7 +33,7 @@
 
 #include "RegistrationDataSetName.h"
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 RegistrationDataSetName::RegistrationDataSetName() {}
 
@@ -49,4 +49,4 @@ void to_json(nlohmann::json& j, const RegistrationDataSetName& o) {
 
 void from_json(const nlohmann::json& j, RegistrationDataSetName& o) {}
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

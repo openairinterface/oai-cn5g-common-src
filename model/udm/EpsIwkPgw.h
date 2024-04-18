@@ -42,7 +42,7 @@
 #include <nlohmann/json.hpp>
 #include <string>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -77,6 +77,6 @@ class EpsIwkPgw {
   std::string m_SmfInstanceId;
 };
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm
 
 #endif /* EpsIwkPgw_H_ */

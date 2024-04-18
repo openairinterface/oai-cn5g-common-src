@@ -42,7 +42,7 @@
 #include <nlohmann/json.hpp>
 #include <string>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -70,6 +70,6 @@ class PeiUpdateInfo {
   std::string m_Pei;
 };
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm
 
 #endif /* PeiUpdateInfo_H_ */

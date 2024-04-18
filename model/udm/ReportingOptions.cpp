@@ -36,7 +36,7 @@
 
 #include <sstream>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 ReportingOptions::ReportingOptions() {
   m_ReportModeIsSet      = false;
@@ -259,4 +259,4 @@ void ReportingOptions::unsetNotifFlag() {
   m_NotifFlagIsSet = false;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

@@ -36,7 +36,7 @@
 
 #include <sstream>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 MonitoringEvent::MonitoringEvent() {
   m_RevokedCauseIsSet = false;
@@ -112,4 +112,4 @@ void MonitoringEvent::unsetRevokedCause() {
   m_RevokedCauseIsSet = false;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

@@ -41,7 +41,7 @@
 
 #include <nlohmann/json.hpp>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -94,6 +94,6 @@ class CnType_anyOf {
   bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
 };
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm
 
 #endif /* CnType_anyOf_H_ */

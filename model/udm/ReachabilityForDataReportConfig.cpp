@@ -36,7 +36,7 @@
 
 #include <sstream>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 ReachabilityForDataReportConfig::ReachabilityForDataReportConfig() {}
 
@@ -76,4 +76,4 @@ void to_json(nlohmann::json& j, const ReachabilityForDataReportConfig& o) {
 
 void from_json(const nlohmann::json& j, ReachabilityForDataReportConfig& o) {}
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

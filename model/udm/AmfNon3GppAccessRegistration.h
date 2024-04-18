@@ -51,7 +51,7 @@
 #include "ServiceName.h"
 #include "VgmlcAddress.h"
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -218,6 +218,6 @@ class AmfNon3GppAccessRegistration {
   bool m_ContextInfoIsSet;
 };
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm
 
 #endif /* AmfNon3GppAccessRegistration_H_ */

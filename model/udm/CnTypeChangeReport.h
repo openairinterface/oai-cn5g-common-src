@@ -42,7 +42,7 @@
 #include "CnType.h"
 #include <nlohmann/json.hpp>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -97,6 +97,6 @@ class CnTypeChangeReport {
   bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
 };
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm
 
 #endif /* CnTypeChangeReport_H_ */

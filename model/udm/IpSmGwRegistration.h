@@ -44,7 +44,7 @@
 
 #include "NetworkNodeDiameterAddress.h"
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -93,6 +93,6 @@ class IpSmGwRegistration {
   bool m_UnriIndicatorIsSet;
 };
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm
 
 #endif /* IpSmGwRegistration_H_ */

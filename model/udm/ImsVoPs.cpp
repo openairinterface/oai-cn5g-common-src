@@ -33,7 +33,7 @@
 
 #include "ImsVoPs.h"
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 ImsVoPs::ImsVoPs() {}
 
 ImsVoPs::~ImsVoPs() {}
@@ -48,4 +48,4 @@ void to_json(nlohmann::json& j, const ImsVoPs& o) {
 
 void from_json(const nlohmann::json& j, ImsVoPs& o) {}
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

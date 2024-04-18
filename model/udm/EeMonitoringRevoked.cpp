@@ -36,7 +36,7 @@
 
 #include <sstream>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 EeMonitoringRevoked::EeMonitoringRevoked() {}
 
@@ -97,4 +97,4 @@ void EeMonitoringRevoked::setRevokedMonitoringEventList(
   m_RevokedMonitoringEventList = value;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

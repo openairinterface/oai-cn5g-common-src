@@ -45,7 +45,7 @@
 
 #include "EpsIwkPgw.h"
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -76,6 +76,6 @@ class EpsInterworkingInfo {
   bool m_EpsIwkPgwsIsSet;
 };
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm
 
 #endif /* EpsInterworkingInfo_H_ */

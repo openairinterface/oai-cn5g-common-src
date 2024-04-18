@@ -33,7 +33,7 @@
 
 #include "EpsIwkPgw.h"
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 EpsIwkPgw::EpsIwkPgw() {
   m_PgwFqdn       = "";
@@ -70,4 +70,4 @@ void EpsIwkPgw::setSmfInstanceId(std::string const& value) {
   m_SmfInstanceId = value;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

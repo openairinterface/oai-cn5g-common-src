@@ -36,7 +36,7 @@
 
 #include <sstream>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 ReachabilityForSmsConfiguration::ReachabilityForSmsConfiguration() {}
 
@@ -76,4 +76,4 @@ void to_json(nlohmann::json& j, const ReachabilityForSmsConfiguration& o) {
 
 void from_json(const nlohmann::json& j, ReachabilityForSmsConfiguration& o) {}
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

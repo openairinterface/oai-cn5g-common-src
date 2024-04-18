@@ -36,7 +36,7 @@
 
 #include <sstream>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 NotificationFlag::NotificationFlag() {}
 
@@ -74,4 +74,4 @@ void to_json(nlohmann::json& j, const NotificationFlag& o) {
 
 void from_json(const nlohmann::json& j, NotificationFlag& o) {}
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

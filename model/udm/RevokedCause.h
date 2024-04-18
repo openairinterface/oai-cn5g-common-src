@@ -42,7 +42,7 @@
 #include "RevokedCause_anyOf.h"
 #include <nlohmann/json.hpp>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -79,6 +79,6 @@ class RevokedCause {
   bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
 };
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm
 
 #endif /* RevokedCause_H_ */

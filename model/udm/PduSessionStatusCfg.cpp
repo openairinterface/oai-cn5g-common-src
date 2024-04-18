@@ -36,7 +36,7 @@
 
 #include <sstream>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 PduSessionStatusCfg::PduSessionStatusCfg() {
   m_DnnIsSet = false;
@@ -101,4 +101,4 @@ void PduSessionStatusCfg::unsetDnn() {
   m_DnnIsSet = false;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

@@ -33,7 +33,7 @@
 
 #include "LocationInfo.h"
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 LocationInfo::LocationInfo() {
   m_Supi                   = "";
@@ -123,4 +123,4 @@ void LocationInfo::unsetSupportedFeatures() {
   m_SupportedFeaturesIsSet = false;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

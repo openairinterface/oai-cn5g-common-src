@@ -45,7 +45,7 @@
 #include "AccessType.h"
 #include "DeregistrationReason.h"
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -101,6 +101,6 @@ class DeregistrationData {
   bool m_NewSmfInstanceIdIsSet;
 };
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm
 
 #endif /* DeregistrationData_H_ */

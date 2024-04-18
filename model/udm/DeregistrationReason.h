@@ -41,7 +41,7 @@
 
 #include <nlohmann/json.hpp>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -62,6 +62,6 @@ class DeregistrationReason {
  protected:
 };
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm
 
 #endif /* DeregistrationReason_H_ */

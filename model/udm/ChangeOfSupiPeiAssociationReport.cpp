@@ -36,7 +36,7 @@
 
 #include <sstream>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 ChangeOfSupiPeiAssociationReport::ChangeOfSupiPeiAssociationReport() {
   m_NewPei = "";
@@ -97,4 +97,4 @@ void ChangeOfSupiPeiAssociationReport::setNewPei(std::string const& value) {
   m_NewPei = value;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

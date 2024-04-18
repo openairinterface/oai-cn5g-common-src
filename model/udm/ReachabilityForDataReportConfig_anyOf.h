@@ -41,7 +41,7 @@
 
 #include <nlohmann/json.hpp>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -99,6 +99,6 @@ class ReachabilityForDataReportConfig_anyOf {
   bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
 };
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm
 
 #endif /* ReachabilityForDataReportConfig_anyOf_H_ */

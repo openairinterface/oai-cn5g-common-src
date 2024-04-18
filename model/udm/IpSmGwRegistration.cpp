@@ -33,7 +33,7 @@
 
 #include "IpSmGwRegistration.h"
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 IpSmGwRegistration::IpSmGwRegistration() {
   m_IpSmGwMapAddress           = "";
@@ -114,4 +114,4 @@ void IpSmGwRegistration::unsetUnriIndicator() {
   m_UnriIndicatorIsSet = false;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

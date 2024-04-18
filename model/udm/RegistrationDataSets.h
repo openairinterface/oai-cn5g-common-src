@@ -46,7 +46,7 @@
 #include "SmfRegistrationInfo.h"
 #include "SmsfRegistration.h"
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -113,6 +113,6 @@ class RegistrationDataSets {
   bool m_SmsfNon3GppIsSet;
 };
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm
 
 #endif /* RegistrationDataSets_H_ */

@@ -33,7 +33,7 @@
 
 #include "RegistrationDataSets.h"
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 RegistrationDataSets::RegistrationDataSets() {
   m_Amf3GppIsSet         = false;
@@ -149,4 +149,4 @@ void RegistrationDataSets::unsetSmsfNon3Gpp() {
   m_SmsfNon3GppIsSet = false;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

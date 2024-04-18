@@ -36,7 +36,7 @@
 
 #include <sstream>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 using namespace oai::model::common;
 
@@ -230,4 +230,4 @@ void DatalinkReportingConfiguration::unsetDddStatusList() {
   m_DddStatusListIsSet = false;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

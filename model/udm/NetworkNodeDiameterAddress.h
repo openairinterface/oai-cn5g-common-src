@@ -42,7 +42,7 @@
 #include <nlohmann/json.hpp>
 #include <string>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -77,5 +77,5 @@ class NetworkNodeDiameterAddress {
   std::string m_Realm;
 };
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm
 #endif /* NetworkNodeDiameterAddress_H_ */

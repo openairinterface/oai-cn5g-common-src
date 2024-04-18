@@ -33,7 +33,7 @@
 
 #include "TriggerRequest.h"
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 TriggerRequest::TriggerRequest() {
   m_Supi = "";
@@ -61,4 +61,4 @@ void TriggerRequest::setSupi(std::string const& value) {
   m_Supi = value;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

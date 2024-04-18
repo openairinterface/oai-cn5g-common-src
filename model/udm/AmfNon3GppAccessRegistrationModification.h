@@ -47,7 +47,7 @@
 #include "Guami.h"
 #include "ImsVoPs.h"
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -115,6 +115,6 @@ class AmfNon3GppAccessRegistrationModification {
   bool m_BackupAmfInfoIsSet;
 };
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm
 
 #endif /* AmfNon3GppAccessRegistrationModification_H_ */

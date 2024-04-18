@@ -36,7 +36,7 @@
 
 #include <sstream>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 CreatedEeSubscription::CreatedEeSubscription() {
   m_NumberOfUes       = 0;
@@ -195,4 +195,4 @@ void CreatedEeSubscription::unsetEpcStatusInd() {
   m_EpcStatusIndIsSet = false;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

@@ -33,7 +33,7 @@
 
 #include "RegistrationReason.h"
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 RegistrationReason::RegistrationReason() {}
 
@@ -49,4 +49,4 @@ void to_json(nlohmann::json& j, const RegistrationReason& o) {
 
 void from_json(const nlohmann::json& j, RegistrationReason& o) {}
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

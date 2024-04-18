@@ -36,7 +36,7 @@
 #include <stdexcept>
 #include <sstream>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 CnType_anyOf::CnType_anyOf() {}
 
@@ -118,4 +118,4 @@ void CnType_anyOf::setValue(CnType_anyOf::eCnType_anyOf value) {
   m_value = value;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

@@ -44,7 +44,7 @@
 
 #include "SmfRegistration.h"
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -72,6 +72,6 @@ class SmfRegistrationInfo {
   std::vector<SmfRegistration> m_SmfRegistrationList;
 };
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm
 
 #endif /* SmfRegistrationInfo_H_ */

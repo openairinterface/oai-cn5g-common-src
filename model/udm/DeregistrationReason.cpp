@@ -33,7 +33,7 @@
 
 #include "DeregistrationReason.h"
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 DeregistrationReason::DeregistrationReason() {}
 
@@ -49,4 +49,4 @@ void to_json(nlohmann::json& j, const DeregistrationReason& o) {
 
 void from_json(const nlohmann::json& j, DeregistrationReason& o) {}
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

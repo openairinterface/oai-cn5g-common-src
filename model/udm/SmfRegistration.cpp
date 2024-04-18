@@ -33,7 +33,7 @@
 
 #include "SmfRegistration.h"
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 SmfRegistration::SmfRegistration() {
   m_SmfInstanceId                    = "";
@@ -308,4 +308,4 @@ void SmfRegistration::unsetContextInfo() {
   m_ContextInfoIsSet = false;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

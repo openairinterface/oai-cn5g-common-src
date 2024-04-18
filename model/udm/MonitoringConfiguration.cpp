@@ -16,7 +16,7 @@
 
 #include <sstream>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 MonitoringConfiguration::MonitoringConfiguration() {
   m_ImmediateFlag                       = false;
@@ -409,4 +409,4 @@ void MonitoringConfiguration::unsetReachabilityForDataCfg() {
   m_ReachabilityForDataCfgIsSet = false;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

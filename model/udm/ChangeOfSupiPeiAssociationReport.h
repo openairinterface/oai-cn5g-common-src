@@ -42,7 +42,7 @@
 #include <string>
 #include <nlohmann/json.hpp>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -89,6 +89,6 @@ class ChangeOfSupiPeiAssociationReport {
   bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
 };
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm
 
 #endif /* ChangeOfSupiPeiAssociationReport_H_ */

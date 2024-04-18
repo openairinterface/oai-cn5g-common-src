@@ -41,7 +41,7 @@
 
 #include <nlohmann/json.hpp>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -95,6 +95,6 @@ class NotificationFlag_anyOf {
   bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
 };
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm
 
 #endif /* NotificationFlag_anyOf_H_ */

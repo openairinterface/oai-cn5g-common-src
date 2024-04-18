@@ -33,7 +33,7 @@
 
 #include "DeregistrationData.h"
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 DeregistrationData::DeregistrationData() {
   m_AccessTypeIsSet       = false;
@@ -120,4 +120,4 @@ void DeregistrationData::unsetNewSmfInstanceId() {
   m_NewSmfInstanceIdIsSet = false;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

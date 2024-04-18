@@ -33,7 +33,7 @@
 
 #include "SmfRegistrationInfo.h"
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 SmfRegistrationInfo::SmfRegistrationInfo() {}
 
@@ -60,4 +60,4 @@ void SmfRegistrationInfo::setSmfRegistrationList(
   m_SmfRegistrationList = value;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

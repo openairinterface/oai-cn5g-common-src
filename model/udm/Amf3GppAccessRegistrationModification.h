@@ -48,7 +48,7 @@
 #include "Guami.h"
 #include "ImsVoPs.h"
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 /// <summary>
 ///
@@ -143,6 +143,6 @@ class Amf3GppAccessRegistrationModification {
   bool m_NoEeSubscriptionIndIsSet;
 };
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm
 
 #endif /* Amf3GppAccessRegistrationModification_H_ */

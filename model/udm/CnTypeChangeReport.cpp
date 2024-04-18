@@ -36,7 +36,7 @@
 
 #include <sstream>
 
-namespace oai::udm::model {
+namespace oai::model::udm {
 
 CnTypeChangeReport::CnTypeChangeReport() {
   m_OldCnTypeIsSet = false;
@@ -112,4 +112,4 @@ void CnTypeChangeReport::unsetOldCnType() {
   m_OldCnTypeIsSet = false;
 }
 
-}  // namespace oai::udm::model
+}  // namespace oai::model::udm

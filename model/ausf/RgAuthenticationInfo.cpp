@@ -34,9 +34,7 @@
 
 #include "RgAuthenticationInfo.h"
 
-namespace oai {
-namespace ausf_server {
-namespace model {
+namespace oai::model::ausf {
 
 RgAuthenticationInfo::RgAuthenticationInfo() {
   m_Suci             = "";
@@ -73,6 +71,4 @@ void RgAuthenticationInfo::setAuthenticatedInd(bool const value) {
   m_AuthenticatedInd = value;
 }
 
-}  // namespace model
-}  // namespace ausf_server
-}  // namespace oai
+}  // namespace oai::model::ausf

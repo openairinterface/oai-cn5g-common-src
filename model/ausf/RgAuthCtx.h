@@ -45,9 +45,7 @@
 #include "AuthResult.h"
 #include <nlohmann/json.hpp>
 
-namespace oai {
-namespace ausf_server {
-namespace model {
+namespace oai::model::ausf {
 
 /// <summary>
 ///
@@ -94,8 +92,6 @@ class RgAuthCtx {
   bool m_AuthIndIsSet;
 };
 
-}  // namespace model
-}  // namespace ausf_server
-}  // namespace oai
+}  // namespace oai::model::ausf
 
 #endif /* RgAuthCtx_H_ */

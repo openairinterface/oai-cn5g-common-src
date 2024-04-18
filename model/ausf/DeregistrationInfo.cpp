@@ -34,9 +34,7 @@
 
 #include "DeregistrationInfo.h"
 
-namespace oai {
-namespace ausf_server {
-namespace model {
+namespace oai::model::ausf {
 
 DeregistrationInfo::DeregistrationInfo() {
   m_Supi = "";
@@ -64,6 +62,4 @@ void DeregistrationInfo::setSupi(std::string const& value) {
   m_Supi = value;
 }
 
-}  // namespace model
-}  // namespace ausf_server
-}  // namespace oai
+}  // namespace oai::model::ausf

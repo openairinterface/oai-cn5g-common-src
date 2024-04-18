@@ -44,9 +44,7 @@
 #include <string>
 #include <nlohmann/json.hpp>
 
-namespace oai {
-namespace ausf_server {
-namespace model {
+namespace oai::model::ausf {
 
 /// <summary>
 ///
@@ -88,8 +86,6 @@ class Av5gAka {
   std::string m_Autn;
 };
 
-}  // namespace model
-}  // namespace ausf_server
-}  // namespace oai
+}  // namespace oai::model::ausf
 
 #endif /* Av5gAka_H_ */

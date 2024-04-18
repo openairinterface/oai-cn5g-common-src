@@ -34,9 +34,7 @@
 
 #include "EapSession.h"
 
-namespace oai {
-namespace ausf_server {
-namespace model {
+namespace oai::model::ausf {
 
 EapSession::EapSession() {
   m_EapPayload      = "";
@@ -143,6 +141,4 @@ void EapSession::unsetSupi() {
   m_SupiIsSet = false;
 }
 
-}  // namespace model
-}  // namespace ausf_server
-}  // namespace oai
+}  // namespace oai::model::ausf

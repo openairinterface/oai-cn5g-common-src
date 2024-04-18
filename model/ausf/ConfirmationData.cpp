@@ -34,9 +34,7 @@
 
 #include "ConfirmationData.h"
 
-namespace oai {
-namespace ausf_server {
-namespace model {
+namespace oai::model::ausf {
 
 ConfirmationData::ConfirmationData() {
   m_ResStar = "";
@@ -64,6 +62,4 @@ void ConfirmationData::setResStar(std::string const& value) {
   m_ResStar = value;
 }
 
-}  // namespace model
-}  // namespace ausf_server
-}  // namespace oai
+}  // namespace oai::model::ausf

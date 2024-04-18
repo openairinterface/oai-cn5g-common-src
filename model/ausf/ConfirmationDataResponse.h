@@ -45,9 +45,7 @@
 #include <nlohmann/json.hpp>
 #include <string>
 
-namespace oai {
-namespace ausf_server {
-namespace model {
+namespace oai::model::ausf {
 
 /// <summary>
 ///
@@ -99,8 +97,6 @@ class ConfirmationDataResponse {
   bool m_KseafIsSet;
 };
 
-}  // namespace model
-}  // namespace ausf_server
-}  // namespace oai
+}  // namespace oai::model::ausf
 
 #endif /* ConfirmationDataResponse_H_ */

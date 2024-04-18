@@ -34,9 +34,7 @@
 
 #include "ConfirmationDataResponse.h"
 
-namespace oai {
-namespace ausf_server {
-namespace model {
+namespace oai::model::ausf {
 
 ConfirmationDataResponse::ConfirmationDataResponse() {
   m_Supi       = {};
@@ -112,6 +110,4 @@ void ConfirmationDataResponse::unsetKseaf() {
   m_KseafIsSet = false;
 }
 
-}  // namespace model
-}  // namespace ausf_server
-}  // namespace oai
+}  // namespace oai::model::ausf

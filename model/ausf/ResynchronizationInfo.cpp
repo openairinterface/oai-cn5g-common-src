@@ -34,9 +34,7 @@
 
 #include "ResynchronizationInfo.h"
 
-namespace oai {
-namespace ausf_server {
-namespace model {
+namespace oai::model::ausf {
 
 ResynchronizationInfo::ResynchronizationInfo() {
   m_Rand = "";
@@ -73,6 +71,4 @@ void ResynchronizationInfo::setAuts(std::string const& value) {
   m_Auts = value;
 }
 
-}  // namespace model
-}  // namespace ausf_server
-}  // namespace oai
+}  // namespace oai::model::ausf

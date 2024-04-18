@@ -47,9 +47,7 @@
 #include <string>
 #include <vector>
 
-namespace oai {
-namespace ausf_server {
-namespace model {
+namespace oai::model::ausf {
 
 /// <summary>
 ///
@@ -148,8 +146,6 @@ class AuthenticationInfo {
   bool m_N5gcIndIsSet;
 };
 
-}  // namespace model
-}  // namespace ausf_server
-}  // namespace oai
+}  // namespace oai::model::ausf
 
 #endif /* AuthenticationInfo_H_ */

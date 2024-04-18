@@ -34,9 +34,7 @@
 
 #include "Av5gAka.h"
 
-namespace oai {
-namespace ausf_server {
-namespace model {
+namespace oai::model::ausf {
 
 Av5gAka::Av5gAka() {
   m_Rand      = "";
@@ -82,6 +80,4 @@ void Av5gAka::setAutn(std::string const& value) {
   m_Autn = value;
 }
 
-}  // namespace model
-}  // namespace ausf_server
-}  // namespace oai
+}  // namespace oai::model::ausf

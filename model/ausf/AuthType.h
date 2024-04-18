@@ -43,9 +43,7 @@
 
 #include <nlohmann/json.hpp>
 
-namespace oai {
-namespace ausf_server {
-namespace model {
+namespace oai::model::ausf {
 
 /// <summary>
 ///
@@ -66,8 +64,6 @@ class AuthType {
  protected:
 };
 
-}  // namespace model
-}  // namespace ausf_server
-}  // namespace oai
+}  // namespace oai::model::ausf
 
 #endif /* AuthType_H_ */

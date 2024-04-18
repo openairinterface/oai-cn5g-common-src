@@ -48,9 +48,7 @@
 #include <string>
 #include <vector>
 
-namespace oai {
-namespace ausf_server {
-namespace model {
+namespace oai::model::ausf {
 
 using namespace oai::model::common;
 
@@ -117,8 +115,6 @@ class EapSession {
   bool m_SupiIsSet;
 };
 
-}  // namespace model
-}  // namespace ausf_server
-}  // namespace oai
+}  // namespace oai::model::ausf
 
 #endif /* EapSession_H_ */

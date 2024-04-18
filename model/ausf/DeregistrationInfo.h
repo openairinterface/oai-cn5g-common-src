@@ -44,9 +44,7 @@
 #include <nlohmann/json.hpp>
 #include <string>
 
-namespace oai {
-namespace ausf_server {
-namespace model {
+namespace oai::model::ausf {
 
 /// <summary>
 ///
@@ -74,8 +72,6 @@ class DeregistrationInfo {
   std::string m_Supi;
 };
 
-}  // namespace model
-}  // namespace ausf_server
-}  // namespace oai
+}  // namespace oai::model::ausf
 
 #endif /* DeregistrationInfo_H_ */

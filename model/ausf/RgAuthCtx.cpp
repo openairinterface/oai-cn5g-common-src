@@ -34,9 +34,7 @@
 
 #include "RgAuthCtx.h"
 
-namespace oai {
-namespace ausf_server {
-namespace model {
+namespace oai::model::ausf {
 
 RgAuthCtx::RgAuthCtx() {
   m_Supi         = "";
@@ -103,6 +101,4 @@ void RgAuthCtx::unsetAuthInd() {
   m_AuthIndIsSet = false;
 }
 
-}  // namespace model
-}  // namespace ausf_server
-}  // namespace oai
+}  // namespace oai::model::ausf

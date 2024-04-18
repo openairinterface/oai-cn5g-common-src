@@ -49,9 +49,7 @@
 #include <vector>
 #include <nlohmann/json.hpp>
 
-namespace oai {
-namespace ausf_server {
-namespace model {
+namespace oai::model::ausf {
 
 /// <summary>
 ///
@@ -104,8 +102,6 @@ class UEAuthenticationCtx {
   bool m_ServingNetworkNameIsSet;
 };
 
-}  // namespace model
-}  // namespace ausf_server
-}  // namespace oai
+}  // namespace oai::model::ausf
 
 #endif /* UEAuthenticationCtx_H_ */

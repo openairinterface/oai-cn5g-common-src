@@ -34,9 +34,7 @@
 
 #include "UEAuthenticationCtx.h"
 
-namespace oai {
-namespace ausf_server {
-namespace model {
+namespace oai::model::ausf {
 
 using namespace oai::model::common;
 
@@ -103,6 +101,4 @@ void UEAuthenticationCtx::unsetServingNetworkName() {
   m_ServingNetworkNameIsSet = false;
 }
 
-}  // namespace model
-}  // namespace ausf_server
-}  // namespace oai
+}  // namespace oai::model::ausf

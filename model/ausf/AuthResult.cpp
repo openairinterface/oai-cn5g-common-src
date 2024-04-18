@@ -34,9 +34,7 @@
 
 #include "AuthResult.h"
 
-namespace oai {
-namespace ausf_server {
-namespace model {
+namespace oai::model::ausf {
 
 AuthResult::AuthResult() {}
 
@@ -52,6 +50,4 @@ void to_json(nlohmann::json& j, const AuthResult& o) {
 
 void from_json(const nlohmann::json& j, AuthResult& o) {}
 
-}  // namespace model
-}  // namespace ausf_server
-}  // namespace oai
+}  // namespace oai::model::ausf

@@ -44,9 +44,7 @@
 #include <string>
 #include <nlohmann/json.hpp>
 
-namespace oai {
-namespace ausf_server {
-namespace model {
+namespace oai::model::ausf {
 
 /// <summary>
 ///
@@ -74,8 +72,6 @@ class ConfirmationData {
   std::string m_ResStar;
 };
 
-}  // namespace model
-}  // namespace ausf_server
-}  // namespace oai
+}  // namespace oai::model::ausf
 
 #endif /* ConfirmationData_H_ */

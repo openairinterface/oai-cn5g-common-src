@@ -34,9 +34,7 @@
 
 #include "AuthenticationInfo.h"
 
-namespace oai {
-namespace ausf_server {
-namespace model {
+namespace oai::model::ausf {
 using namespace oai::model::common;
 
 AuthenticationInfo::AuthenticationInfo() {
@@ -214,6 +212,4 @@ void AuthenticationInfo::unsetN5gcInd() {
   m_N5gcIndIsSet = false;
 }
 
-}  // namespace model
-}  // namespace ausf_server
-}  // namespace oai
+}  // namespace oai::model::ausf

@@ -25,9 +25,7 @@
 #include <iostream>
 #include <thread>
 
-//#include "logger.hpp"
-
-using namespace oai::event;
+using namespace oai::event_handling;
 
 //------------------------------------------------------------------------------
 task_manager::task_manager(const std::shared_ptr<nf_event>& ev)

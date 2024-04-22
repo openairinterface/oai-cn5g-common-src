@@ -27,7 +27,7 @@ namespace bs2 = boost::signals2;
 
 #include "task_manager.hpp"
 
-namespace oai::event {
+namespace oai::event_handling {
 
 typedef bs2::signal_type<
     void(uint64_t), bs2::keywords::mutex_type<bs2::dummy_mutex>>::type
@@ -61,5 +61,5 @@ class nf_event {
  private:
   task_sig_t task_tick;
 };
-}  // namespace oai::event
+}  // namespace oai::event_handling
 #endif

@@ -27,7 +27,7 @@
 #include <linux/types.h>
 #include <sys/timerfd.h>
 
-namespace oai::event {
+namespace oai::event_handling {
 
 class nf_event;
 class task_manager {
@@ -59,6 +59,6 @@ class task_manager {
   std::shared_ptr<nf_event> event_sub_;
   int sfd;
 };
-}  // namespace oai::event
+}  // namespace oai::event_handling
 
 #endif

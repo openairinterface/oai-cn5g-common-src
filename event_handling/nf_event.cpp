@@ -20,8 +20,10 @@
  */
 
 #include "nf_event.hpp"
+
 using namespace oai::event_handling;
 
+//------------------------------------------------------------------------------
 bs2::connection nf_event::subscribe_task_nf_heartbeat(
     const task_sig_t::slot_type& sig, uint64_t period, uint64_t start) {
   /* Wrap the actual callback in a lambda. The latter checks whether the

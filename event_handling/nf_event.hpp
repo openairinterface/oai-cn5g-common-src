@@ -47,7 +47,6 @@ class nf_event {
 
   friend class task_manager;
 
-  //------------------------------------------------------------------------------
   /*
    * Subscribe to the task tick event
    * @param [const task_sig_t::slot_type &] sig

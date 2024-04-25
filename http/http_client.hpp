@@ -195,7 +195,6 @@ class http_client_curl : public http_client_iface {
   mutable std::shared_mutex m_curl_multi_mutex;
   std::vector<CURL*> handles;
   struct curl_slist* headers;
-  std::mutex mtx;
 
   mutable std::shared_mutex m_curl_handle_promises;
 
@@ -215,7 +214,7 @@ class http_client_curl : public http_client_iface {
   bool initialize(
       const oai::logger::printf_logger& logger, int timeout_ms,
       const std::string& interface, uint8_t http_version);
-  static bool create_instance(
+  static std::shared_ptr<http_client_curl> create_instance(
       const oai::logger::printf_logger& logger, int timeout_ms,
       const std::string& interface, uint8_t http_version);
 

@@ -474,15 +474,21 @@ http_client_curl::~http_client_curl() {
 }
 
 //---------------------------------------------------------------------------------------------
-bool http_client_curl::create_instance(
+std::shared_ptr<http_client_curl> http_client_curl::create_instance(
     const oai::logger::printf_logger& logger, int timeout_ms,
     const std::string& interface, uint8_t http_version) {
+  // If instance does not exits, create a new one
   if (!instance) {
     instance = std::make_shared<http_client_curl>(
         logger, timeout_ms, interface, http_version);
-    return instance->initialize();
+    if (instance->initialize()) {
+      return instance;
+    } else {
+      return nullptr;
+    }
   }
-  return false;
+  // otherwise return the existing one
+  return instance;
 }
 
 //---------------------------------------------------------------------------------------------
@@ -583,14 +589,15 @@ bool http_client_curl::curl_create_handle(
   curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, request.body.length());
   curl_easy_setopt(curl, CURLOPT_POSTFIELDS, request.body.c_str());
 
-  mtx.lock();
-  // Add to the multi handle
-  curl_multi_add_handle(curl_multi, curl);
-  handles.push_back(curl);
-  // The curl cmd will actually be performed in perform_curl_multi
-  perform_curl_multi(
-      0);  // TODO: current time as parameter if curl is performed per event
-  mtx.unlock();
+  {
+    std::unique_lock lock(m_curl_multi_mutex);
+    // Add to the multi handle
+    curl_multi_add_handle(curl_multi, curl);
+    handles.push_back(curl);
+    // The curl cmd will actually be performed in perform_curl_multi
+    perform_curl_multi(
+        0);  // TODO: current time as parameter if curl is performed per event
+  }
 
   return true;
 }

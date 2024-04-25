@@ -112,17 +112,17 @@ class http_client_iface {
 
 class http_client : public http_client_iface {
  private:
-  /**
-   * Sends a synchronous HTTP request (calls send_http_request_async) and waits
-   * @param method
-   * @param request
-   * @return
-   */
   response send_http_request(const method_e& method, const request& request);
 
   response send_simple_http_request(
       const method_e& method, const request& request);
 
+  /**
+   * Sends a synchronous HTTP request and waits
+   * @param method
+   * @param request
+   * @return
+   */
   response send_async_http_request(
       const method_e& method, const request& request);
 

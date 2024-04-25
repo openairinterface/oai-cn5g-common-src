@@ -23,6 +23,7 @@ SET(HTTP_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/http)
 
 include(${SRC_TOP_DIR}/${MOUNTED_COMMON}/logger/logger.cmake)
 #include(${SRC_TOP_DIR}/${MOUNTED_COMMON}/utils/utils.cmake)
+include(${SRC_TOP_DIR}/${MOUNTED_COMMON}/common/common.cmake)
 
 include_directories(${HTTP_DIR})
 

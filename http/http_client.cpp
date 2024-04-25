@@ -29,6 +29,7 @@
  */
 
 #include "http_client.hpp"
+#include "3gpp_29.500.h"
 
 #include <boost/algorithm/string/split.hpp>
 #include <nlohmann/json.hpp>
@@ -113,9 +114,9 @@ http_client::http_client(
   m_request_type = request_type;
 
   m_sbi_logger.info(
-      "HTTP Client successfully initiated on interface %s with HTTP timeout "
-      "%ud s., HTTP version %d",
-      m_interface, m_timeout_ms / 1000, m_http_version);
+      "HTTP Client successfully initiated on interface %s with timeout "
+      "%ld ms, version %d",
+      m_interface, m_timeout_ms, m_http_version);
 
   m_multiPerform = std::make_shared<cpr::MultiPerform>();
 }
@@ -125,12 +126,14 @@ std::shared_ptr<http_client_iface> http_client::create_instance(
     const oai::logger::printf_logger& logger, int timeout_ms,
     const std::string& interface, uint8_t http_version,
     request_type_e request_type) {
+  // If instance does not exits, create a new one
   if (!instance) {
     instance = std::make_shared<http_client>(
         logger, timeout_ms, interface, http_version, request_type);
     return instance;
   }
-  return nullptr;
+  // otherwise return the existing one
+  return instance;
 }
 
 //---------------------------------------------------------------------------------------------
@@ -141,7 +144,6 @@ std::shared_ptr<http_client_iface> http_client::get_instance() {
 //---------------------------------------------------------------------------------------------
 response http_client::send_http_request(
     const method_e& method, const request& request) {
-  m_request_type = request_type_e::MULTI_PERFORM;
   switch (m_request_type) {
     case request_type_e::ASYNC: {
       auto resp = send_async_http_request(method, request);
@@ -302,7 +304,7 @@ response http_client::execute_http_request(
     const std::shared_ptr<cpr::MultiPerform>& multiPerform) {
   response resp;
   if (!multiPerform) {
-    resp.status_code = status_code_e::NO_RESPONSE;
+    resp.status_code = status_code_e::HTTP_STATUS_CODE_0_NO_RESPONSE;
     return resp;
   }
 
@@ -316,7 +318,7 @@ response http_client::execute_http_request(
         "The number of responses is %i and not 1 as expected. The correct "
         "response cannot be identified.",
         responses.size());
-    resp.status_code = status_code_e::NO_RESPONSE;
+    resp.status_code = status_code_e::HTTP_STATUS_CODE_0_NO_RESPONSE;
   } else {
     auto cpr_resp    = responses.at(0);
     resp.status_code = status_code_e(cpr_resp.status_code);
@@ -486,7 +488,6 @@ bool http_client_curl::create_instance(
 //---------------------------------------------------------------------------------------------
 std::shared_ptr<http_client_curl> http_client_curl::get_instance() {
   return instance;
-  return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------

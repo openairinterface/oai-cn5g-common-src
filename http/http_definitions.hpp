@@ -30,10 +30,11 @@
 #pragma once
 #define FMT_HEADER_ONLY
 
-#include <string>
-#include <pistache/http_headers.h>
-#include <fmt/format.h>
 #include <curl/curl.h>
+#include <fmt/format.h>
+#include <pistache/http_headers.h>
+
+#include <string>
 
 namespace oai::http {
 

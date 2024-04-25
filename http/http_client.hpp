@@ -29,18 +29,20 @@
 
 #pragma once
 
-#include <curl/curl.h>
-#include <string>
-#include <mutex>
-#include <shared_mutex>
-#include <unordered_map>
-#include <future>
 #include <cpr/cpr.h>
-#include "http_definitions.hpp"
-#include "logger_base.hpp"
-#include <thread>
+#include <curl/curl.h>
+
 #include <boost/thread.hpp>
 #include <boost/thread/future.hpp>
+#include <future>
+#include <mutex>
+#include <shared_mutex>
+#include <string>
+#include <thread>
+#include <unordered_map>
+
+#include "http_definitions.hpp"
+#include "logger_base.hpp"
 #include "uint_generator.hpp"
 
 namespace oai::http {
@@ -137,10 +139,15 @@ class http_client : public http_client_iface {
    * @return future for the response object
    */
   std::future<response> send_multi_peform_http_request(
-      const method_e& method, const request& request);
+      const method_e& method, const request& request,
+      const std::shared_ptr<cpr::MultiPerform>& multiPerform);
 
   response execute_http_request(
       const std::shared_ptr<cpr::MultiPerform>& multiPerform);
+
+  void prepare_session(
+      const method_e& method, const request& request,
+      std::shared_ptr<cpr::Session>& session);
 
   oai::logger::printf_logger m_sbi_logger;
   int m_timeout_ms;
@@ -161,7 +168,7 @@ class http_client : public http_client_iface {
 
   http_client(http_client const&) = delete;
 
-  static void create_instance(
+  static std::shared_ptr<http_client_iface> create_instance(
       const oai::logger::printf_logger& logger, int timeout_ms,
       const std::string& interface, uint8_t http_version,
       request_type_e request_type = request_type_e::SIMPLE);

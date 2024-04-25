@@ -30,9 +30,9 @@
 
 #include "http_client.hpp"
 
-#include <sstream>
 #include <boost/algorithm/string/split.hpp>
 #include <nlohmann/json.hpp>
+#include <sstream>
 
 namespace json = nlohmann;
 using namespace oai::http;
@@ -121,14 +121,16 @@ http_client::http_client(
 }
 
 //---------------------------------------------------------------------------------------------
-void http_client::create_instance(
+std::shared_ptr<http_client_iface> http_client::create_instance(
     const oai::logger::printf_logger& logger, int timeout_ms,
     const std::string& interface, uint8_t http_version,
     request_type_e request_type) {
   if (!instance) {
     instance = std::make_shared<http_client>(
         logger, timeout_ms, interface, http_version, request_type);
+    return instance;
   }
+  return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------
@@ -146,18 +148,20 @@ response http_client::send_http_request(
       return resp;
     } break;
     case request_type_e::MULTI_ASYNC: {
-      // auto resp = send_multi_async_http_request(method, request);
-      // return resp;
+      // TODO:
     } break;
 
     case request_type_e::MULTI_PERFORM: {
-      auto future = send_multi_peform_http_request(method, request);
+      std::shared_ptr<cpr::MultiPerform> multiPerform =
+          std::make_shared<cpr::MultiPerform>();
+      auto future =
+          send_multi_peform_http_request(method, request, multiPerform);
       future.wait();
       response resp = future.get();
       return resp;
     } break;
     case request_type_e::SIMPLE:
-    default: {
+    default: {  // Use simple HTTP request
     }
   };
 
@@ -172,81 +176,32 @@ response http_client::send_simple_http_request(
   m_sbi_logger.debug("Send a simple HTTP request");
 
   std::shared_ptr<cpr::Session> session = std::make_shared<cpr::Session>();
+  response resp                         = {};
+  cpr::Response cpr_resp                = {};
 
-  response resp = {};
-  // set HTTP version
-  switch (m_http_version) {
-    case 1:
-      session->SetHttpVersion(
-          cpr::HttpVersion(cpr::HttpVersionCode::VERSION_1_1));
-      break;
-    case 2:
-      session->SetHttpVersion(
-          cpr::HttpVersion(cpr::HttpVersionCode::VERSION_2_0_PRIOR_KNOWLEDGE));
-      break;
-  }
-
-  // set Interface
-  session->SetInterface(cpr::Interface{m_interface});
-
-  // set URL
-  cpr::Url url = cpr::Url{request.uri};
-  session->SetUrl(url);
-
-  // set HTTP client timeout
-  session->SetTimeout(cpr::Timeout(m_timeout_ms));
-
-  // set HTTP header (convert pistache header to cpr headers)
-  cpr::Header cpr_header{};
-  for (const auto& pistache_header : request.headers.list()) {
-    std::stringstream ss;
-    pistache_header->write(ss);
-    cpr_header.insert({pistache_header->name(), ss.str()});
-  }
-  cpr_header.insert(
-      {{"Expect", ""}, {"Accept", "application/json"}, {"Charset", "UTF-8"}});
-  session->SetHeader(cpr_header);
+  prepare_session(method, request, session);
 
   // set HTTP method
-  //  std::shared_ptr<cpr::MultiPerform> multiPerform =
-  //     std::make_shared<cpr::MultiPerform>();
   switch (method) {
     case method_e::POST: {
-      session->SetBody(cpr::Body{request.body});
-      cpr::Response cpr_resp = session->Post();
-      resp.status_code       = status_code_e(cpr_resp.status_code);
-      resp.body              = cpr_resp.text;
-      return resp;
-
+      cpr_resp = session->Post();
     } break;
     case method_e::GET: {
-      cpr::Response cpr_resp = session->Get();
-      resp.status_code       = status_code_e(cpr_resp.status_code);
-      resp.body              = cpr_resp.text;
-      return resp;
+      cpr_resp = session->Get();
     } break;
     case method_e::PUT: {
-      session->SetBody(cpr::Body{request.body});
-
-      cpr::Response cpr_resp = session->Put();
-      resp.status_code       = status_code_e(cpr_resp.status_code);
-      resp.body              = cpr_resp.text;
-      return resp;
+      cpr_resp = session->Put();
     } break;
     case method_e::PATCH: {
-      session->SetBody(cpr::Body{request.body});
-      cpr::Response cpr_resp = session->Patch();
-      resp.status_code       = status_code_e(cpr_resp.status_code);
-      resp.body              = cpr_resp.text;
-      return resp;
+      cpr_resp = session->Patch();
     } break;
     case method_e::DELETE: {
-      cpr::Response cpr_resp = session->Delete();
-      resp.status_code       = status_code_e(cpr_resp.status_code);
-      resp.body              = cpr_resp.text;
-      return resp;
+      cpr_resp = session->Delete();
     }
   }
+
+  resp.status_code = status_code_e(cpr_resp.status_code);
+  resp.body        = cpr_resp.text;
 
   m_sbi_logger.trace(request.to_string() + " (%s)", method_to_string(method));
 
@@ -257,134 +212,62 @@ response http_client::send_simple_http_request(
 response http_client::send_async_http_request(
     const method_e& method, const request& request) {
   m_sbi_logger.info("Send an async HTTP request");
+
   std::shared_ptr<cpr::Session> session = std::make_shared<cpr::Session>();
+  response resp                         = {};
+  cpr::Response cpr_resp                = {};
 
-  response resp = {};
-  // set HTTP version
-  switch (m_http_version) {
-    case 1:
-      session->SetHttpVersion(
-          cpr::HttpVersion(cpr::HttpVersionCode::VERSION_1_1));
-      break;
-    case 2:
-      session->SetHttpVersion(
-          cpr::HttpVersion(cpr::HttpVersionCode::VERSION_2_0_PRIOR_KNOWLEDGE));
-      break;
-  }
+  prepare_session(method, request, session);
 
-  // set Interface
-  session->SetInterface(cpr::Interface{m_interface});
-
-  // set URL
-  cpr::Url url = cpr::Url{request.uri};
-  session->SetUrl(url);
-
-  // set HTTP client timeout
-  session->SetTimeout(cpr::Timeout(m_timeout_ms));
-
-  // set HTTP header (convert pistache header to cpr headers)
-  cpr::Header cpr_header{};
-  for (const auto& pistache_header : request.headers.list()) {
-    std::stringstream ss;
-    pistache_header->write(ss);
-    cpr_header.insert({pistache_header->name(), ss.str()});
-  }
-  cpr_header.insert(
-      {{"Expect", ""}, {"Accept", "application/json"}, {"Charset", "UTF-8"}});
-  session->SetHeader(cpr_header);
-
-  // set HTTP method
-  // std::shared_ptr<cpr::MultiPerform> multiPerform =
-  //    std::make_shared<cpr::MultiPerform>();
   switch (method) {
     case method_e::POST: {
-      session->SetBody(cpr::Body{request.body});
-      cpr::AsyncResponse fr = session->PostAsync();
-      auto cpr_resp         = fr.get();
-      resp.status_code      = status_code_e(cpr_resp.status_code);
-      resp.body             = cpr_resp.text;
-      return resp;
-
+      cpr::AsyncResponse async_response = session->PostAsync();
+      cpr_resp                          = async_response.get();
     } break;
     case method_e::GET: {
-      cpr::AsyncResponse fr = session->GetAsync();
-      auto cpr_resp         = fr.get();
-      resp.status_code      = status_code_e(cpr_resp.status_code);
-      resp.body             = cpr_resp.text;
-      return resp;
+      cpr::AsyncResponse async_response = session->GetAsync();
+      cpr_resp                          = async_response.get();
     } break;
     case method_e::PUT: {
-      session->SetBody(cpr::Body{request.body});
-
-      cpr::AsyncResponse fr = session->PutAsync();
-      auto cpr_resp         = fr.get();
-      resp.status_code      = status_code_e(cpr_resp.status_code);
-      resp.body             = cpr_resp.text;
-      return resp;
+      cpr::AsyncResponse async_response = session->PutAsync();
+      cpr_resp                          = async_response.get();
     } break;
     case method_e::PATCH: {
-      session->SetBody(cpr::Body{request.body});
-
-      // multiPerform->AddSession(
-      //    session, cpr::MultiPerform::HttpMethod::PATCH_REQUEST);
+      cpr::AsyncResponse async_response = session->PatchAsync();
+      cpr_resp                          = async_response.get();
     } break;
     case method_e::DELETE: {
-      // multiPerform->AddSession(
-      //    session, cpr::MultiPerform::HttpMethod::DELETE_REQUEST);
+      cpr::AsyncResponse async_response = session->DeleteAsync();
+      cpr_resp                          = async_response.get();
     }
   }
+
+  resp.status_code = status_code_e(cpr_resp.status_code);
+  resp.body        = cpr_resp.text;
 
   m_sbi_logger.trace(request.to_string() + " (%s)", method_to_string(method));
 
   return resp;
-  // return std::async([this] { return execute_http_request(); });
 }
 
 //---------------------------------------------------------------------------------------------
 std::future<response> http_client::send_multi_peform_http_request(
-    const method_e& method, const request& request) {
+    const method_e& method, const request& request,
+    const std::shared_ptr<cpr::MultiPerform>& multiPerform) {
+  m_sbi_logger.info("Send a MultiPerform HTTP request");
   std::shared_ptr<cpr::Session> session = std::make_shared<cpr::Session>();
 
-  // set HTTP version
-  switch (m_http_version) {
-    case 1:
-      session->SetHttpVersion(
-          cpr::HttpVersion(cpr::HttpVersionCode::VERSION_1_1));
-      break;
-    case 2:
-      session->SetHttpVersion(
-          cpr::HttpVersion(cpr::HttpVersionCode::VERSION_2_0_PRIOR_KNOWLEDGE));
-      break;
-  }
+  prepare_session(method, request, session);
 
-  // set Interface
-  session->SetInterface(cpr::Interface{m_interface});
-
-  // set URL
-  cpr::Url url = cpr::Url{request.uri};
-  session->SetUrl(url);
-
-  // set HTTP client timeout
-  session->SetTimeout(cpr::Timeout(m_timeout_ms));
-
-  // set HTTP header (convert pistache header to cpr headers)
-  cpr::Header cpr_header{};
-  for (const auto& pistache_header : request.headers.list()) {
-    std::stringstream ss;
-    pistache_header->write(ss);
-    cpr_header.insert({pistache_header->name(), ss.str()});
-  }
-  cpr_header.insert(
-      {{"Expect", ""}, {"Accept", "application/json"}, {"Charset", "UTF-8"}});
-  session->SetHeader(cpr_header);
-
+  // TODO: Should declare a MultiPerform as a class member so that we can
+  // actually support multiple sessions per MultiPerform (causing issue when
+  // using multi-threading, similar issue with Curl Multi Interface)
+  //  std::shared_ptr<cpr::MultiPerform> multiPerform =
+  //      std::make_shared<cpr::MultiPerform>();
   // set HTTP method
-  std::shared_ptr<cpr::MultiPerform> multiPerform =
-      std::make_shared<cpr::MultiPerform>();
   switch (method) {
     case method_e::POST: {
       session->SetBody(cpr::Body{request.body});
-
       multiPerform->AddSession(
           session, cpr::MultiPerform::HttpMethod::POST_REQUEST);
     } break;
@@ -394,7 +277,6 @@ std::future<response> http_client::send_multi_peform_http_request(
     } break;
     case method_e::PUT: {
       session->SetBody(cpr::Body{request.body});
-
       multiPerform->AddSession(
           session, cpr::MultiPerform::HttpMethod::PUT_REQUEST);
     } break;
@@ -454,6 +336,61 @@ response http_client::execute_http_request(
     }
   }
   return resp;
+}
+
+//---------------------------------------------------------------------------------------------
+void http_client::prepare_session(
+    const method_e& method, const request& request,
+    std::shared_ptr<cpr::Session>& session) {
+  // set HTTP version
+  switch (m_http_version) {
+    case 1:
+      session->SetHttpVersion(
+          cpr::HttpVersion(cpr::HttpVersionCode::VERSION_1_1));
+      break;
+    case 2:
+      session->SetHttpVersion(
+          cpr::HttpVersion(cpr::HttpVersionCode::VERSION_2_0_PRIOR_KNOWLEDGE));
+      break;
+  }
+
+  // set Interface
+  session->SetInterface(cpr::Interface{m_interface});
+
+  // set URL
+  cpr::Url url = cpr::Url{request.uri};
+  session->SetUrl(url);
+
+  // set HTTP client timeout
+  session->SetTimeout(cpr::Timeout(m_timeout_ms));
+
+  // set HTTP header (convert pistache header to cpr headers)
+  cpr::Header cpr_header{};
+  for (const auto& pistache_header : request.headers.list()) {
+    std::stringstream ss;
+    pistache_header->write(ss);
+    cpr_header.insert({pistache_header->name(), ss.str()});
+  }
+  cpr_header.insert(
+      {{"Expect", ""}, {"Accept", "application/json"}, {"Charset", "UTF-8"}});
+  session->SetHeader(cpr_header);
+
+  // set HTTP method
+  switch (method) {
+    case method_e::POST: {
+      session->SetBody(cpr::Body{request.body});
+    } break;
+    case method_e::GET: {
+    } break;
+    case method_e::PUT: {
+      session->SetBody(cpr::Body{request.body});
+    } break;
+    case method_e::PATCH: {
+      session->SetBody(cpr::Body{request.body});
+    } break;
+    case method_e::DELETE: {
+    }
+  }
 }
 
 //---------------------------------------------------------------------------------------------
@@ -649,11 +586,11 @@ bool http_client_curl::curl_create_handle(
   // Add to the multi handle
   curl_multi_add_handle(curl_multi, curl);
   handles.push_back(curl);
-
   // The curl cmd will actually be performed in perform_curl_multi
-  // perform_curl_multi(
-  //    0);  // TODO: current time as parameter if curl is performed per event
+  perform_curl_multi(
+      0);  // TODO: current time as parameter if curl is performed per event
   mtx.unlock();
+
   return true;
 }
 

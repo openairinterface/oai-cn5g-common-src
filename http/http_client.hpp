@@ -139,7 +139,8 @@ class http_client : public http_client_iface {
   std::future<response> send_multi_peform_http_request(
       const method_e& method, const request& request);
 
-  response execute_http_request();
+  response execute_http_request(
+      const std::shared_ptr<cpr::MultiPerform>& multiPerform);
 
   oai::logger::printf_logger m_sbi_logger;
   int m_timeout_ms;
@@ -148,7 +149,7 @@ class http_client : public http_client_iface {
   request_type_e m_request_type;
 
   inline static std::shared_ptr<http_client_iface> instance;
-  std::shared_ptr<cpr::MultiPerform> multiPerform;
+  std::shared_ptr<cpr::MultiPerform> m_multiPerform;
 
  public:
   explicit http_client(
@@ -184,8 +185,10 @@ class http_client_curl : public http_client_iface {
   inline static std::shared_ptr<http_client_curl> instance;
 
   CURLM* curl_multi;
+  mutable std::shared_mutex m_curl_multi_mutex;
   std::vector<CURL*> handles;
   struct curl_slist* headers;
+  std::mutex mtx;
 
   mutable std::shared_mutex m_curl_handle_promises;
 

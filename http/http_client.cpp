@@ -75,6 +75,28 @@ response http_client_iface::send_delete(const request& request) {
 }
 
 //---------------------------------------------------------------------------------------------
+request http_client_iface::prepare_json_request(
+    const std::string& uri, const std::string& body) {
+  request req;
+  req.uri      = uri;
+  json::json j = json::json::parse(body);
+  req.body     = j.dump();
+  req.headers.add<ContentType>(MediaType("application/json"));
+  return req;
+}
+
+//---------------------------------------------------------------------------------------------
+request http_client_iface::prepare_multipart_request(
+    const std::string& uri, const std::string& body) {
+  request req;
+  req.uri  = uri;
+  req.body = body;
+  req.headers.add<ContentType>(MediaType(
+      "multipart/related;boundary=" + std::string(CURL_MIME_BOUNDARY)));
+  return req;
+}
+
+//---------------------------------------------------------------------------------------------
 http_client::~http_client() {
   m_sbi_logger.info("Delete HTTP client instance");
 }
@@ -95,7 +117,7 @@ http_client::http_client(
       "%ud s., HTTP version %d",
       m_interface, m_timeout_ms / 1000, m_http_version);
 
-  multiPerform = std::make_shared<cpr::MultiPerform>();
+  m_multiPerform = std::make_shared<cpr::MultiPerform>();
 }
 
 //---------------------------------------------------------------------------------------------
@@ -186,8 +208,8 @@ response http_client::send_simple_http_request(
   session->SetHeader(cpr_header);
 
   // set HTTP method
-  // std::shared_ptr<cpr::MultiPerform> multiPerform =
-  //    std::make_shared<cpr::MultiPerform>();
+  //  std::shared_ptr<cpr::MultiPerform> multiPerform =
+  //     std::make_shared<cpr::MultiPerform>();
   switch (method) {
     case method_e::POST: {
       session->SetBody(cpr::Body{request.body});
@@ -357,8 +379,8 @@ std::future<response> http_client::send_multi_peform_http_request(
   session->SetHeader(cpr_header);
 
   // set HTTP method
-  // std::shared_ptr<cpr::MultiPerform> multiPerform =
-  //    std::make_shared<cpr::MultiPerform>();
+  std::shared_ptr<cpr::MultiPerform> multiPerform =
+      std::make_shared<cpr::MultiPerform>();
   switch (method) {
     case method_e::POST: {
       session->SetBody(cpr::Body{request.body});
@@ -389,11 +411,13 @@ std::future<response> http_client::send_multi_peform_http_request(
   }
 
   m_sbi_logger.trace(request.to_string() + " (%s)", method_to_string(method));
-  return std::async([this] { return execute_http_request(); });
+  return std::async(
+      [this, multiPerform] { return execute_http_request(multiPerform); });
 }
 
 //---------------------------------------------------------------------------------------------
-response http_client::execute_http_request() {
+response http_client::execute_http_request(
+    const std::shared_ptr<cpr::MultiPerform>& multiPerform) {
   response resp;
   if (!multiPerform) {
     resp.status_code = status_code_e::NO_RESPONSE;
@@ -430,27 +454,6 @@ response http_client::execute_http_request() {
     }
   }
   return resp;
-}
-
-//---------------------------------------------------------------------------------------------
-request http_client_iface::prepare_json_request(
-    const std::string& uri, const std::string& body) {
-  request req;
-  req.uri      = uri;
-  json::json j = json::json::parse(body);
-  req.body     = j.dump();
-  req.headers.add<ContentType>(MediaType("application/json"));
-  return req;
-}
-
-request http_client_iface::prepare_multipart_request(
-    const std::string& uri, const std::string& body) {
-  request req;
-  req.uri  = uri;
-  req.body = body;
-  req.headers.add<ContentType>(MediaType(
-      "multipart/related;boundary=" + std::string(CURL_MIME_BOUNDARY)));
-  return req;
 }
 
 //---------------------------------------------------------------------------------------------
@@ -515,14 +518,14 @@ bool http_client_curl::initialize(
 }
 //---------------------------------------------------------------------------------------------
 http_client_curl::~http_client_curl() {
-  m_sbi_logger.info("Delete HTTP client instance");
+  m_sbi_logger.info("Delete HTTP client CURL instance");
   // Remove handle, free memory
   for (auto h : handles) {
     if (curl_multi) curl_multi_remove_handle(curl_multi, h);
     curl_easy_cleanup(h);
   }
-
   handles.clear();
+
   if (curl_multi) curl_multi_cleanup(curl_multi);
   curl_global_cleanup();
   curl_slist_free_all(headers);
@@ -546,6 +549,7 @@ bool http_client_curl::create_instance(
 //---------------------------------------------------------------------------------------------
 std::shared_ptr<http_client_curl> http_client_curl::get_instance() {
   return instance;
+  return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------
@@ -564,6 +568,7 @@ response http_client_curl::send_http_request(
   if (!curl_create_handle(method, req, res, pid_ptr)) {
     m_sbi_logger.warn("Could not create a new handle to send message");
     remove_promise(promise_id);
+    pid_ptr = nullptr;
     return res;
   }
   // Wait for the response back
@@ -571,6 +576,7 @@ response http_client_curl::send_http_request(
 
   m_sbi_logger.debug("Got result for promise ID %d", promise_id);
   m_sbi_logger.debug("Response data %s", res.body.c_str());
+  pid_ptr = nullptr;
 
   return res;
 }
@@ -595,6 +601,7 @@ uint32_t http_client_curl::get_available_response(
 bool http_client_curl::curl_create_handle(
     const method_e& method, const request& request, response& res,
     uint32_t* promise_id) {
+  m_sbi_logger.error("curl_create_handle");
   // Create handle for a curl request
   CURL* curl = curl_easy_init();
 
@@ -638,14 +645,15 @@ bool http_client_curl::curl_create_handle(
   curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, request.body.length());
   curl_easy_setopt(curl, CURLOPT_POSTFIELDS, request.body.c_str());
 
+  mtx.lock();
   // Add to the multi handle
   curl_multi_add_handle(curl_multi, curl);
   handles.push_back(curl);
 
   // The curl cmd will actually be performed in perform_curl_multi
-  perform_curl_multi(
-      0);  // TODO: current time as parameter if curl is performed per event
-
+  // perform_curl_multi(
+  //    0);  // TODO: current time as parameter if curl is performed per event
+  mtx.unlock();
   return true;
 }
 
@@ -655,6 +663,7 @@ void http_client_curl::perform_curl_multi(uint64_t ms) {
   int still_running = 0;
   int numfds        = 0;
 
+  m_sbi_logger.error("perform_curl_multi");
   CURLMcode code = curl_multi_perform(curl_multi, &still_running);
 
   do {
@@ -683,16 +692,18 @@ void http_client_curl::curl_release_handles() {
 
       if (code != CURLE_OK) {
         m_sbi_logger.debug("CURL error code  %d!", curl_msg->data.result);
-        continue;
-      }
-      // Get HTTP code
-      curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
-      m_sbi_logger.debug("Got response with HTTP code  %d!", http_code);
-      uint32_t* promise_id = nullptr;
-      curl_easy_getinfo(curl, CURLINFO_PRIVATE, &promise_id);
-      if (promise_id) {
-        m_sbi_logger.debug("Prepare to make promise id %d ready!", *promise_id);
-        // trigger_process_response(*promise_id, http_code);
+
+      } else {
+        // Get HTTP code
+        curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
+        m_sbi_logger.debug("Got response with HTTP code  %d!", http_code);
+        uint32_t* promise_id = nullptr;
+        curl_easy_getinfo(curl, CURLINFO_PRIVATE, &promise_id);
+        if (promise_id) {
+          m_sbi_logger.debug(
+              "Prepare to make promise id %d ready!", *promise_id);
+          // trigger_process_response(*promise_id, http_code);
+        }
       }
 
       curl_multi_remove_handle(curl_multi, curl);

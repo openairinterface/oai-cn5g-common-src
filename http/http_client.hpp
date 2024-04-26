@@ -28,8 +28,11 @@
 #include <thread>
 #include <unordered_map>
 
+#include "3gpp_29.500.h"
 #include "http_definitions.hpp"
 #include "logger_base.hpp"
+
+using namespace oai::http;
 
 namespace oai::http {
 

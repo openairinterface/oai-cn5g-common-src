@@ -39,23 +39,7 @@
 #include "3gpp_29.500.h"
 
 namespace oai::http {
-enum class method_e { POST, GET, PUT, PATCH, DELETE };
 
-static std::string method_to_string(method_e method) {
-  switch (method) {
-    case method_e::POST:
-      return "POST";
-    case method_e::GET:
-      return "GET";
-    case method_e::PUT:
-      return "PUT";
-    case method_e::PATCH:
-      return "PATCH";
-    case method_e::DELETE:
-      return "DELETE";
-  }
-  return "";
-}
 // Design choice: We use Pistache headers here because they are type-safe
 // It breaks a bit the abstraction of HTTP layer, but the advantage is greater
 struct response {

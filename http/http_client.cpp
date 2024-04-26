@@ -25,8 +25,6 @@
 #include <nlohmann/json.hpp>
 #include <sstream>
 
-#include "3gpp_29.500.h"
-
 namespace json = nlohmann;
 using namespace oai::http;
 using namespace Pistache::Http::Header;

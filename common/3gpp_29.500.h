@@ -23,6 +23,7 @@
 #define FILE_3GPP_29_500_SEEN
 
 #include <stdint.h>
+
 #include <string>
 #include <vector>
 
@@ -60,6 +61,26 @@ enum class HttpStatusCode : uint16_t {
 };
 
 namespace oai::http {
+
+enum class method_e { POST, GET, PUT, PATCH, DELETE, OPTIONS };
+
+static std::string method_to_string(method_e method) {
+  switch (method) {
+    case method_e::POST:
+      return "POST";
+    case method_e::GET:
+      return "GET";
+    case method_e::PUT:
+      return "PUT";
+    case method_e::PATCH:
+      return "PATCH";
+    case method_e::DELETE:
+      return "DELETE";
+    case method_e::OPTIONS:
+      return "OPTIONS";
+  }
+  return "";
+}
 
 enum class status_code_e : uint32_t {
   HTTP_STATUS_CODE_0_NO_RESPONSE                 = 0,

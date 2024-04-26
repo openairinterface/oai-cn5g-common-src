@@ -25,7 +25,7 @@
 #include "IeConst.hpp"
 #include "common_defs.h"
 #include "logger_base.hpp"
-#include "utils.hpp"
+#include "nas_utils.hpp"
 
 using namespace oai::nas;
 
@@ -101,7 +101,7 @@ int _5gsTrackingAreaIdentity::Encode(uint8_t* buf, int len) {
   // IEI
   encoded_size += Type3NasIe::Encode(buf + encoded_size, len);
   // MCC, MNC
-  encoded_size += utils::encodeMccMnc2Buffer(
+  encoded_size += nas_utils::encodeMccMnc2Buffer(
       mcc_, mnc_, buf + encoded_size, len - encoded_size);
   // TAC
   ENCODE_U24(buf + encoded_size, tac_, encoded_size);
@@ -130,7 +130,7 @@ int _5gsTrackingAreaIdentity::Decode(uint8_t* buf, int len, bool is_iei) {
   // IEI and Length
   decoded_size += Type3NasIe::Decode(buf + decoded_size, len, true);
 
-  decoded_size += utils::decodeMccMncFromBuffer(
+  decoded_size += nas_utils::decodeMccMncFromBuffer(
       mcc_, mnc_, buf + decoded_size, len - decoded_size);
 
   DECODE_U24(buf + decoded_size, tac_, decoded_size);

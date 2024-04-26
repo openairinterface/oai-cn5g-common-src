@@ -55,6 +55,7 @@ http_client::~http_client() {
 //---------------------------------------------------------------------------------------------
 response http_client::send_http_request(
     const method_e& method, const request& request) {
+  m_request_type = request_type_e::MULTI_PERFORM;
   switch (m_request_type) {
     case request_type_e::ASYNC: {
       auto resp = send_async_http_request(method, request);
@@ -70,10 +71,8 @@ response http_client::send_http_request(
       // using multi-threading, similar issue with Curl Multi Interface)
       std::shared_ptr<cpr::MultiPerform> multiPerform =
           std::make_shared<cpr::MultiPerform>();
-      auto future =
-          send_multi_peform_http_request(method, request, multiPerform);
-      future.wait();
-      response resp = future.get();
+      add_session_to_multi_peform(method, request, multiPerform);
+      auto resp = send_multi_peform_http_request(multiPerform);
       return resp;
     } break;
     case request_type_e::SIMPLE:
@@ -87,9 +86,19 @@ response http_client::send_http_request(
 }
 
 //---------------------------------------------------------------------------------------------
+response http_client::send_multi_peform_http_request(
+    const std::shared_ptr<cpr::MultiPerform>& multiPerform) {
+  auto future = std::async(
+      [this, multiPerform] { return execute_http_request(multiPerform); });
+  future.wait();
+  response resp = future.get();
+  return resp;
+}
+
+//---------------------------------------------------------------------------------------------
 response http_client::send_simple_http_request(
     const method_e& method, const request& request) {
-  m_sbi_logger.debug("Send a simple HTTP request");
+  // m_sbi_logger.debug("Send a simple HTTP request");
 
   std::shared_ptr<cpr::Session> session = std::make_shared<cpr::Session>();
   response resp                         = {};
@@ -119,7 +128,8 @@ response http_client::send_simple_http_request(
   resp.status_code = status_code_e(cpr_resp.status_code);
   resp.body        = cpr_resp.text;
 
-  m_sbi_logger.trace(request.to_string() + " (%s)", method_to_string(method));
+  // m_sbi_logger.trace(request.to_string() + " (%s)",
+  // method_to_string(method));
 
   return resp;
 }
@@ -167,10 +177,10 @@ response http_client::send_async_http_request(
 }
 
 //---------------------------------------------------------------------------------------------
-std::future<response> http_client::send_multi_peform_http_request(
+void http_client::add_session_to_multi_peform(
     const method_e& method, const request& request,
     const std::shared_ptr<cpr::MultiPerform>& multiPerform) {
-  m_sbi_logger.info("Send a MultiPerform HTTP request");
+  // m_sbi_logger.info("Send a MultiPerform HTTP request");
   std::shared_ptr<cpr::Session> session = std::make_shared<cpr::Session>();
 
   prepare_session(method, request, session);
@@ -202,10 +212,6 @@ std::future<response> http_client::send_multi_peform_http_request(
           session, cpr::MultiPerform::HttpMethod::DELETE_REQUEST);
     }
   }
-
-  m_sbi_logger.trace(request.to_string() + " (%s)", method_to_string(method));
-  return std::async(
-      [this, multiPerform] { return execute_http_request(multiPerform); });
 }
 
 //---------------------------------------------------------------------------------------------

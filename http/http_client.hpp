@@ -53,28 +53,8 @@ class http_client {
   response send_async_http_request(
       const method_e& method, const request& request);
 
-  /**
-   * Sends an asynchronous HTTP request in a new thread. Non-blocking.
-   * Adds new CURL connections to the connection map or re-uses existing for
-   * same hosts
-   *
-   * Note: Can also later be exposed to the API so that the
-   * applications can directly send asynch HTTP requests and handle it
-   * themselves
-   * @param method method to use for HTTP request
-   * @param request request object
-   * @return future for the response object
-   */
-  std::future<response> send_multi_peform_http_request(
-      const method_e& method, const request& request,
-      const std::shared_ptr<cpr::MultiPerform>& multiPerform);
-
   response execute_http_request(
       const std::shared_ptr<cpr::MultiPerform>& multiPerform);
-
-  void prepare_session(
-      const method_e& method, const request& request,
-      std::shared_ptr<cpr::Session>& session);
 
   oai::logger::printf_logger m_sbi_logger;
   int m_timeout_ms;
@@ -107,6 +87,15 @@ class http_client {
    */
   response send_http_request(const method_e& method, const request& request);
 
+  void add_session_to_multi_peform(
+      const method_e& method, const request& request,
+      const std::shared_ptr<cpr::MultiPerform>& multiPerform);
+  response send_multi_peform_http_request(
+      const std::shared_ptr<cpr::MultiPerform>& multiPerform);
+
+  void prepare_session(
+      const method_e& method, const request& request,
+      std::shared_ptr<cpr::Session>& session);
   /**
    * Sets the correct headers for a JSON request
    * @param uri URI to send the request to

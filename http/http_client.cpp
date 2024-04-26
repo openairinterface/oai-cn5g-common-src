@@ -19,88 +19,18 @@
  *      contact@openairinterface.org
  */
 
-/*! \file http_client.cpp
- \brief
- \author  Tien-Thinh NGUYEN, Stefan Spettel, Lukas Rotheneder
- \company Eurecom, phine.tech
- \date 2023
- \email: Tien-Thinh.Nguyen@eurecom.fr, stefan.spettel@phine.tech,
- lukas.rotheneder@phine.tech
- */
-
 #include "http_client.hpp"
-#include "3gpp_29.500.h"
 
 #include <boost/algorithm/string/split.hpp>
 #include <nlohmann/json.hpp>
 #include <sstream>
 
+#include "3gpp_29.500.h"
+
 namespace json = nlohmann;
 using namespace oai::http;
 using namespace Pistache::Http::Header;
 using namespace Pistache::Http::Mime;
-
-//---------------------------------------------------------------------------------------------
-// To read content of the response from NF
-static std::size_t callback(
-    const char* in, std::size_t size, std::size_t num, std::string* out) {
-  const std::size_t totalBytes(size * num);
-  out->clear();
-  out->append(in, totalBytes);
-  return totalBytes;
-}
-
-//---------------------------------------------------------------------------------------------
-response http_client_iface::send_post(const request& request) {
-  return send_http_request(method_e::POST, request);
-}
-
-//---------------------------------------------------------------------------------------------
-response http_client_iface::send_get(const request& request) {
-  return send_http_request(method_e::GET, request);
-}
-
-//---------------------------------------------------------------------------------------------
-response http_client_iface::send_put(const request& request) {
-  return send_http_request(method_e::PUT, request);
-}
-
-//---------------------------------------------------------------------------------------------
-response http_client_iface::send_patch(const request& request) {
-  return send_http_request(method_e::PATCH, request);
-}
-
-//---------------------------------------------------------------------------------------------
-response http_client_iface::send_delete(const request& request) {
-  return send_http_request(method_e::DELETE, request);
-}
-
-//---------------------------------------------------------------------------------------------
-request http_client_iface::prepare_json_request(
-    const std::string& uri, const std::string& body) {
-  request req;
-  req.uri      = uri;
-  json::json j = json::json::parse(body);
-  req.body     = j.dump();
-  req.headers.add<ContentType>(MediaType("application/json"));
-  return req;
-}
-
-//---------------------------------------------------------------------------------------------
-request http_client_iface::prepare_multipart_request(
-    const std::string& uri, const std::string& body) {
-  request req;
-  req.uri  = uri;
-  req.body = body;
-  req.headers.add<ContentType>(MediaType(
-      "multipart/related;boundary=" + std::string(CURL_MIME_BOUNDARY)));
-  return req;
-}
-
-//---------------------------------------------------------------------------------------------
-http_client::~http_client() {
-  m_sbi_logger.info("Delete HTTP client instance");
-}
 
 //---------------------------------------------------------------------------------------------
 http_client::http_client(
@@ -115,30 +45,13 @@ http_client::http_client(
 
   m_sbi_logger.info(
       "HTTP Client successfully initiated on interface %s with timeout "
-      "%ld ms, version %d",
+      "%ld ms, HTTP version %d",
       m_interface, m_timeout_ms, m_http_version);
-
-  m_multiPerform = std::make_shared<cpr::MultiPerform>();
 }
 
 //---------------------------------------------------------------------------------------------
-std::shared_ptr<http_client_iface> http_client::create_instance(
-    const oai::logger::printf_logger& logger, int timeout_ms,
-    const std::string& interface, uint8_t http_version,
-    request_type_e request_type) {
-  // If instance does not exits, create a new one
-  if (!instance) {
-    instance = std::make_shared<http_client>(
-        logger, timeout_ms, interface, http_version, request_type);
-    return instance;
-  }
-  // otherwise return the existing one
-  return instance;
-}
-
-//---------------------------------------------------------------------------------------------
-std::shared_ptr<http_client_iface> http_client::get_instance() {
-  return instance;
+http_client::~http_client() {
+  m_sbi_logger.info("Delete HTTP client instance");
 }
 
 //---------------------------------------------------------------------------------------------
@@ -150,10 +63,13 @@ response http_client::send_http_request(
       return resp;
     } break;
     case request_type_e::MULTI_ASYNC: {
-      // TODO:
+      // TODO:Use simple HTTP request for the moment
     } break;
 
     case request_type_e::MULTI_PERFORM: {
+      // TODO: Should declare a MultiPerform as a class member so that we can
+      // actually support multiple sessions per MultiPerform (causing issue when
+      // using multi-threading, similar issue with Curl Multi Interface)
       std::shared_ptr<cpr::MultiPerform> multiPerform =
           std::make_shared<cpr::MultiPerform>();
       auto future =
@@ -261,11 +177,6 @@ std::future<response> http_client::send_multi_peform_http_request(
 
   prepare_session(method, request, session);
 
-  // TODO: Should declare a MultiPerform as a class member so that we can
-  // actually support multiple sessions per MultiPerform (causing issue when
-  // using multi-threading, similar issue with Curl Multi Interface)
-  //  std::shared_ptr<cpr::MultiPerform> multiPerform =
-  //      std::make_shared<cpr::MultiPerform>();
   // set HTTP method
   switch (method) {
     case method_e::POST: {
@@ -344,7 +255,7 @@ response http_client::execute_http_request(
 void http_client::prepare_session(
     const method_e& method, const request& request,
     std::shared_ptr<cpr::Session>& session) {
-  // set HTTP version
+  // Set HTTP version
   switch (m_http_version) {
     case 1:
       session->SetHttpVersion(
@@ -356,17 +267,17 @@ void http_client::prepare_session(
       break;
   }
 
-  // set Interface
+  // Set Interface
   session->SetInterface(cpr::Interface{m_interface});
 
-  // set URL
+  // Set URL
   cpr::Url url = cpr::Url{request.uri};
   session->SetUrl(url);
 
-  // set HTTP client timeout
+  // Set HTTP client timeout
   session->SetTimeout(cpr::Timeout(m_timeout_ms));
 
-  // set HTTP header (convert pistache header to cpr headers)
+  // Set HTTP header (convert pistache header to cpr headers)
   cpr::Header cpr_header{};
   for (const auto& pistache_header : request.headers.list()) {
     std::stringstream ss;
@@ -377,7 +288,7 @@ void http_client::prepare_session(
       {{"Expect", ""}, {"Accept", "application/json"}, {"Charset", "UTF-8"}});
   session->SetHeader(cpr_header);
 
-  // set HTTP method
+  // Set HTTP method
   switch (method) {
     case method_e::POST: {
       session->SetBody(cpr::Body{request.body});
@@ -396,296 +307,23 @@ void http_client::prepare_session(
 }
 
 //---------------------------------------------------------------------------------------------
-http_client_curl::http_client_curl(
-    oai::logger::printf_logger logger, int timeout_ms,
-    const std::string& interface, uint8_t http_version)
-    : m_sbi_logger(std::move(logger)) {
-  m_http_version = http_version;
-  m_timeout_ms   = timeout_ms;
-  m_interface    = interface;
-
-  m_sbi_logger.info(
-      "HTTP Client CURL successfully initiated on interface %s with HTTP "
-      "timeout "
-      "%ud s., HTTP version %d",
-      m_interface, m_timeout_ms / 1000, m_http_version);
+request http_client::prepare_json_request(
+    const std::string& uri, const std::string& body) {
+  request req;
+  req.uri      = uri;
+  json::json j = json::json::parse(body);
+  req.body     = j.dump();
+  req.headers.add<ContentType>(MediaType("application/json"));
+  return req;
 }
 
 //---------------------------------------------------------------------------------------------
-bool http_client_curl::initialize() {
-  CURLcode code = curl_global_init(CURL_GLOBAL_DEFAULT);
-  curl_multi    = curl_multi_init();
-  handles       = {};
-  headers       = nullptr;
-  headers       = curl_slist_append(headers, "Accept: application/json");
-  headers       = curl_slist_append(headers, "Charsets: utf-8");
-  headers       = curl_slist_append(headers, "Content-Type: application/json");
-
-  if ((code < 0) or (curl_multi == nullptr) or (headers == nullptr)) {
-    m_sbi_logger.error("Cannot initialize Curl Multi Interface");
-    return false;
-  }
-
-  m_sbi_logger.debug("Initialize Curl Multi Interface successful!");
-  return true;
-}
-
-//---------------------------------------------------------------------------------------------
-bool http_client_curl::initialize(
-    const oai::logger::printf_logger& logger, int timeout_ms,
-    const std::string& interface, uint8_t http_version) {
-  m_sbi_logger   = std::move(logger);
-  m_http_version = http_version;
-  m_timeout_ms   = timeout_ms;
-  m_interface    = interface;
-
-  CURLcode code = curl_global_init(CURL_GLOBAL_DEFAULT);
-  curl_multi    = curl_multi_init();
-  handles       = {};
-  headers       = nullptr;
-  headers       = curl_slist_append(headers, "Accept: application/json");
-  headers       = curl_slist_append(headers, "Charsets: utf-8");
-  headers       = curl_slist_append(headers, "Content-Type: application/json");
-
-  if ((code < 0) or (curl_multi == nullptr) or (headers == nullptr)) {
-    m_sbi_logger.error("Cannot initialize Curl Multi Interface");
-    return false;
-  }
-
-  m_sbi_logger.debug("Initialize Curl Multi Interface successful!");
-  return true;
-}
-//---------------------------------------------------------------------------------------------
-http_client_curl::~http_client_curl() {
-  m_sbi_logger.info("Delete HTTP client CURL instance");
-  // Remove handle, free memory
-  for (auto h : handles) {
-    if (curl_multi) curl_multi_remove_handle(curl_multi, h);
-    curl_easy_cleanup(h);
-  }
-  handles.clear();
-
-  if (curl_multi) curl_multi_cleanup(curl_multi);
-  curl_global_cleanup();
-  curl_slist_free_all(headers);
-
-  headers == nullptr;
-  curl_multi == nullptr;
-}
-
-//---------------------------------------------------------------------------------------------
-std::shared_ptr<http_client_curl> http_client_curl::create_instance(
-    const oai::logger::printf_logger& logger, int timeout_ms,
-    const std::string& interface, uint8_t http_version) {
-  // If instance does not exits, create a new one
-  if (!instance) {
-    instance = std::make_shared<http_client_curl>(
-        logger, timeout_ms, interface, http_version);
-    if (instance->initialize()) {
-      return instance;
-    } else {
-      return nullptr;
-    }
-  }
-  // otherwise return the existing one
-  return instance;
-}
-
-//---------------------------------------------------------------------------------------------
-std::shared_ptr<http_client_curl> http_client_curl::get_instance() {
-  return instance;
-}
-
-//---------------------------------------------------------------------------------------------
-response http_client_curl::send_http_request(
-    const method_e& method, const request& req) {
-  // Generate a promise and associate this promise to the curl handle
-  uint32_t promise_id = generate_promise_id();
-  m_sbi_logger.debug("Promise ID generated %d", promise_id);
-  uint32_t* pid_ptr = &promise_id;
-  boost::shared_ptr<boost::promise<uint32_t>> p =
-      boost::make_shared<boost::promise<uint32_t>>();
-  boost::shared_future<uint32_t> f;
-  f = p->get_future();
-  add_promise(promise_id, p);
-  response res = {};
-  if (!curl_create_handle(method, req, res, pid_ptr)) {
-    m_sbi_logger.warn("Could not create a new handle to send message");
-    remove_promise(promise_id);
-    pid_ptr = nullptr;
-    return res;
-  }
-  // Wait for the response back
-  uint32_t response_code = get_available_response(f);
-
-  m_sbi_logger.debug("Got result for promise ID %d", promise_id);
-  m_sbi_logger.debug("Response data %s", res.body.c_str());
-  pid_ptr = nullptr;
-
-  return res;
-}
-//---------------------------------------------------------------------------------------------
-uint32_t http_client_curl::get_available_response(
-    boost::shared_future<uint32_t>& f) {
-  boost::future_status status;
-  // wait for timeout or ready
-  status = f.wait_for(boost::chrono::milliseconds(m_timeout_ms));
-  if (status == boost::future_status::ready) {
-    assert(f.is_ready());
-    assert(f.has_value());
-    assert(!f.has_exception());
-    uint32_t response_code = f.get();
-    return response_code;
-  } else {
-    return 408;
-  }
-}
-
-//---------------------------------------------------------------------------------------------
-bool http_client_curl::curl_create_handle(
-    const method_e& method, const request& request, response& res,
-    uint32_t* promise_id) {
-  m_sbi_logger.error("curl_create_handle");
-  // Create handle for a curl request
-  CURL* curl = curl_easy_init();
-
-  headers = nullptr;
-  headers = curl_slist_append(headers, "Accept: application/json");
-  headers = curl_slist_append(headers, "Charsets: utf-8");
-
-  if ((curl == nullptr) or (headers == nullptr)) {
-    m_sbi_logger.error("Cannot initialize a new Curl Handle");
-    return false;
-  }
-
-  curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
-  curl_easy_setopt(curl, CURLOPT_URL, request.uri.c_str());
-  curl_easy_setopt(curl, CURLOPT_PRIVATE, promise_id);
-  if (method == method_e::POST)
-    curl_easy_setopt(curl, CURLOPT_POST, 1);
-  else if (method == method_e::PATCH)
-    curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "PATCH");
-  else if (method == method_e::PUT)
-    curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "PUT");
-  else
-    curl_easy_setopt(curl, CURLOPT_HTTPGET, 1);
-
-  curl_easy_setopt(curl, CURLOPT_TIMEOUT_MS, m_timeout_ms);
-  curl_easy_setopt(curl, CURLOPT_INTERFACE, m_interface.c_str());
-
-  if (m_http_version == 2) {
-    curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
-    // We use a self-signed test server, skip verification during debugging
-    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
-    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
-    curl_easy_setopt(
-        curl, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_2_PRIOR_KNOWLEDGE);
-  }
-
-  // Hook up data handling function.
-  curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &callback);
-  curl_easy_setopt(curl, CURLOPT_WRITEDATA, &res.body);
-  curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
-  curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, request.body.length());
-  curl_easy_setopt(curl, CURLOPT_POSTFIELDS, request.body.c_str());
-
-  {
-    std::unique_lock lock(m_curl_multi_mutex);
-    // Add to the multi handle
-    curl_multi_add_handle(curl_multi, curl);
-    handles.push_back(curl);
-    // The curl cmd will actually be performed in perform_curl_multi
-    perform_curl_multi(
-        0);  // TODO: current time as parameter if curl is performed per event
-  }
-
-  return true;
-}
-
-//------------------------------------------------------------------------------
-void http_client_curl::perform_curl_multi(uint64_t ms) {
-  //_unused(ms);
-  int still_running = 0;
-  int numfds        = 0;
-
-  m_sbi_logger.error("perform_curl_multi");
-  CURLMcode code = curl_multi_perform(curl_multi, &still_running);
-
-  do {
-    code = curl_multi_wait(curl_multi, NULL, 0, 200000, &numfds);
-    if (code != CURLM_OK) {
-      // Logger::smf_app().debug("curl_multi_wait() returned %d!", code);
-    }
-    curl_multi_perform(curl_multi, &still_running);
-  } while (still_running);
-
-  curl_release_handles();
-}
-
-//------------------------------------------------------------------------------
-void http_client_curl::curl_release_handles() {
-  CURLMsg* curl_msg = nullptr;
-  CURL* curl        = nullptr;
-  CURLcode code     = {};
-  int http_code     = 0;
-  int msgs_left     = 0;
-
-  while ((curl_msg = curl_multi_info_read(curl_multi, &msgs_left))) {
-    if (curl_msg && curl_msg->msg == CURLMSG_DONE) {
-      curl = curl_msg->easy_handle;
-      code = curl_msg->data.result;
-
-      if (code != CURLE_OK) {
-        m_sbi_logger.debug("CURL error code  %d!", curl_msg->data.result);
-
-      } else {
-        // Get HTTP code
-        curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
-        m_sbi_logger.debug("Got response with HTTP code  %d!", http_code);
-        uint32_t* promise_id = nullptr;
-        curl_easy_getinfo(curl, CURLINFO_PRIVATE, &promise_id);
-        if (promise_id) {
-          m_sbi_logger.debug(
-              "Prepare to make promise id %d ready!", *promise_id);
-          // trigger_process_response(*promise_id, http_code);
-        }
-      }
-
-      curl_multi_remove_handle(curl_multi, curl);
-      curl_easy_cleanup(curl);
-
-      std::vector<CURL*>::iterator it;
-      it = find(handles.begin(), handles.end(), curl);
-      if (it != handles.end()) {
-        handles.erase(it);
-      }
-
-    } else if (curl_msg) {
-      curl = curl_msg->easy_handle;
-      m_sbi_logger.debug("Error after curl_multi_info_read()");
-      curl_multi_remove_handle(curl_multi, curl);
-      curl_easy_cleanup(curl);
-
-      std::vector<CURL*>::iterator it;
-      it = find(handles.begin(), handles.end(), curl);
-      if (it != handles.end()) {
-        handles.erase(it);
-      }
-    } else {
-      m_sbi_logger.debug("curl_msg null");
-    }
-  }
-}
-
-//---------------------------------------------------------------------------------------------
-void http_client_curl::add_promise(
-    uint32_t id, boost::shared_ptr<boost::promise<uint32_t>>& p) {
-  std::unique_lock lock(m_curl_handle_promises);
-  curl_handle_promises.emplace(id, p);
-}
-
-//---------------------------------------------------------------------------------------------
-void http_client_curl::remove_promise(uint32_t id) {
-  std::unique_lock lock(m_curl_handle_promises);
-  curl_handle_promises.erase(id);
+request http_client::prepare_multipart_request(
+    const std::string& uri, const std::string& body) {
+  request req;
+  req.uri  = uri;
+  req.body = body;
+  req.headers.add<ContentType>(MediaType(
+      "multipart/related;boundary=" + std::string(CURL_MIME_BOUNDARY)));
+  return req;
 }

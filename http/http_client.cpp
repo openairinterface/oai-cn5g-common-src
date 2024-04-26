@@ -55,7 +55,6 @@ http_client::~http_client() {
 //---------------------------------------------------------------------------------------------
 response http_client::send_http_request(
     const method_e& method, const request& request) {
-  m_request_type = request_type_e::MULTI_PERFORM;
   switch (m_request_type) {
     case request_type_e::ASYNC: {
       auto resp = send_async_http_request(method, request);

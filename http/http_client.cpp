@@ -72,7 +72,7 @@ response http_client::send_http_request(
           std::make_shared<cpr::MultiPerform>();
       add_session_to_multi_peform(method, request, multiPerform);
       auto resp = send_multi_peform_http_request(multiPerform);
-      return resp;
+      return resp[0];
     } break;
     case request_type_e::SIMPLE:
     default: {  // Use simple HTTP request
@@ -85,19 +85,19 @@ response http_client::send_http_request(
 }
 
 //---------------------------------------------------------------------------------------------
-response http_client::send_multi_peform_http_request(
+std::vector<response> http_client::send_multi_peform_http_request(
     const std::shared_ptr<cpr::MultiPerform>& multiPerform) {
   auto future = std::async(
       [this, multiPerform] { return execute_http_request(multiPerform); });
   future.wait();
-  response resp = future.get();
+  std::vector<response> resp = future.get();
   return resp;
 }
 
 //---------------------------------------------------------------------------------------------
 response http_client::send_simple_http_request(
     const method_e& method, const request& request) {
-  // m_sbi_logger.debug("Send a simple HTTP request");
+  m_sbi_logger.debug("Send a simple HTTP request");
 
   std::shared_ptr<cpr::Session> session = std::make_shared<cpr::Session>();
   response resp                         = {};
@@ -127,8 +127,7 @@ response http_client::send_simple_http_request(
   resp.status_code = status_code_e(cpr_resp.status_code);
   resp.body        = cpr_resp.text;
 
-  // m_sbi_logger.trace(request.to_string() + " (%s)",
-  // method_to_string(method));
+  m_sbi_logger.trace(request.to_string() + " (%s)", method_to_string(method));
 
   return resp;
 }
@@ -214,32 +213,17 @@ void http_client::add_session_to_multi_peform(
 }
 
 //---------------------------------------------------------------------------------------------
-response http_client::execute_http_request(
+std::vector<response> http_client::execute_http_request(
     const std::shared_ptr<cpr::MultiPerform>& multiPerform) {
-  response resp;
-  if (!multiPerform) {
-    resp.status_code = status_code_e::HTTP_STATUS_CODE_0_NO_RESPONSE;
-    return resp;
-  }
-
   std::vector<cpr::Response> responses = multiPerform->Perform();
-
-  if (responses.size() != 1) {
-    // In case multiPerform->Perform() returns also responses from a parallel
-    // executed multiPerform->Perform() call. As far as I know, and based on
-    // tests, this situation should never occur.
-    m_sbi_logger.error(
-        "The number of responses is %i and not 1 as expected. The correct "
-        "response cannot be identified.",
-        responses.size());
-    resp.status_code = status_code_e::HTTP_STATUS_CODE_0_NO_RESPONSE;
-  } else {
-    auto cpr_resp    = responses.at(0);
-    resp.status_code = status_code_e(cpr_resp.status_code);
-    resp.body        = cpr_resp.text;
+  std::vector<response> http_responses;
+  for (const auto& r : responses) {
+    response resp;
+    resp.status_code = status_code_e(r.status_code);
+    resp.body        = r.text;
 
     // convert cpr header to pistache headers
-    for (const auto& h : cpr_resp.header) {
+    for (const auto& h : r.header) {
       try {
         auto pistache_hdr =
             Pistache::Http::Header::Registry::instance().makeHeader(h.first);
@@ -250,8 +234,10 @@ response http_client::execute_http_request(
             "Unknown header from HTTP client: '%s : %s'", h.first, h.second);
       }
     }
+
+    http_responses.push_back(resp);
   }
-  return resp;
+  return http_responses;
 }
 
 //---------------------------------------------------------------------------------------------

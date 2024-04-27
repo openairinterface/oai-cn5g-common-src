@@ -41,20 +41,44 @@ const unsigned int HTTP_TIMEOUT_MS   = 10000;
 
 class http_client {
  private:
+  /*
+   * Sends a synchronous (simple) HTTP request
+   * @param [const method_e&] method: HTTP method
+   * @param [const request&] request: HTTP Request
+   * @return the corresponding Response
+   */
   response send_simple_http_request(
       const method_e& method, const request& request);
 
-  /**
+  /*
    * Sends a synchronous HTTP request and waits
-   * @param method
-   * @param request
-   * @return
+   * @param [const method_e&] method: HTTP method
+   * @param [const request&] request: HTTP Request
+   * @return the corresponding Response
    */
   response send_async_http_request(
       const method_e& method, const request& request);
 
-  response execute_http_request(
+  /*
+   * Execute a MultiPerform request
+   * @param [const std::shared_ptr<cpr::MultiPerform>&] multiPerform:
+   * MultiPerform
+   * @return the list of responses accordingly
+   */
+  std::vector<response> execute_http_request(
       const std::shared_ptr<cpr::MultiPerform>& multiPerform);
+
+  /*
+   * Prepare a session object
+   * @param [const method_e&] method: HTTP method
+   * @param [const request&] request: HTTP Request
+   * @param [std::shared_ptr<cpr::Session>&] session: the corresponding session
+   * object
+   * @return void
+   */
+  void prepare_session(
+      const method_e& method, const request& request,
+      std::shared_ptr<cpr::Session>& session);
 
   oai::logger::printf_logger m_sbi_logger;
   int m_timeout_ms;
@@ -68,8 +92,17 @@ class http_client {
       const std::string& interface, uint8_t http_version,
       request_type_e request_type = request_type_e::SIMPLE);
 
-  ~http_client();
+  virtual ~http_client();
 
+  /*
+   * Get a static instance
+   * @param [const oai::logger::printf_logger&] logger: a logger
+   * @param [int] timeout_ms: HTTP Timeout in ms
+   * @param [const std::string&] interface: Interface's name
+   * @param [uint8_t] http_version: HTTP version
+   * @param [request_type_e ] request_type: Type of HTTP Request
+   * @return an HTTP Client's instance
+   */
   static http_client& get_instance(
       const oai::logger::printf_logger& logger, int timeout_ms,
       const std::string& interface, uint8_t http_version,
@@ -79,27 +112,41 @@ class http_client {
     return instance;
   }
 
-  /**
+  /*
    * Sends a HTTP request
-   * @param method
-   * @param request
-   * @return
+   * @param [const method_e&] method: HTTP method
+   * @param [const request&] request: HTTP Request
+   * @param [const std::shared_ptr<cpr::MultiPerform>&] multiPerform:
+   * MultiPerform
+   * @return the corresponding Response
    */
   response send_http_request(const method_e& method, const request& request);
 
+  /**
+   * Add a session to a MultiPerform
+   * @param [const method_e&] method: HTTP method
+   * @param [const request&] request: HTTP Request
+   * @param [const std::shared_ptr<cpr::MultiPerform>&] multiPerform:
+   * MultiPerform
+   * @return void
+   */
   void add_session_to_multi_peform(
       const method_e& method, const request& request,
       const std::shared_ptr<cpr::MultiPerform>& multiPerform);
-  response send_multi_peform_http_request(
+
+  /**
+   * Execute the respective HTTP request on all sessions in this MultiPerform
+   * @param [const std::shared_ptr<cpr::MultiPerform>&] multiPerform:
+   * MultiPerform
+   * @return the corresponding list of responses
+   */
+  std::vector<response> send_multi_peform_http_request(
       const std::shared_ptr<cpr::MultiPerform>& multiPerform);
 
-  void prepare_session(
-      const method_e& method, const request& request,
-      std::shared_ptr<cpr::Session>& session);
   /**
    * Sets the correct headers for a JSON request
-   * @param uri URI to send the request to
-   * @param body JSON body
+   * @param [const std::string&] uri: URI to send the request to
+   * @param [const std::string&] body: JSON body
    * @return request object
    */
   static request prepare_json_request(
@@ -107,8 +154,9 @@ class http_client {
 
   /**
    * Sets the correct headers for a multipart/related request
-   * @param uri URI to send the request to
-   * @param body multipart/related body (including boundaries)
+   * @param [const std::string&] uri: URI to send the request to
+   * @param [const std::string&] body: body multipart/related body (including
+   * boundaries)
    * @return request object
    */
   static request prepare_multipart_request(

@@ -19,14 +19,6 @@
  *      contact@openairinterface.org
  */
 
-/*! \file http_definitions.hpp
- \brief
- \author Stefan Spettel
- \company phine.tech
- \date 2023
- \email: stefan.spettel@phine.tech
-*/
-
 #pragma once
 #define FMT_HEADER_ONLY
 

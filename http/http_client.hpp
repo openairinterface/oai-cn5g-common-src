@@ -122,20 +122,33 @@ class http_client {
    */
   response send_http_request(const method_e& method, const request& request);
 
-  /**
+  /*
    * Add a session to a MultiPerform
    * @param [const method_e&] method: HTTP method
    * @param [const request&] request: HTTP Request
    * @param [const std::shared_ptr<cpr::MultiPerform>&] multiPerform:
    * MultiPerform
-   * @return void
+   * @return a shared_ptr pointed to the created session
    */
-  void add_session_to_multi_peform(
+  std::shared_ptr<cpr::Session> add_session_to_multi_peform(
       const method_e& method, const request& request,
       const std::shared_ptr<cpr::MultiPerform>& multiPerform);
 
-  /**
-   * Execute the respective HTTP request on all sessions in this MultiPerform
+  /*
+   * Remove a session from a MultiPerform
+   * @param [const std::shared_ptr<cpr::Session>&] session: Session to be
+   * removed
+   * @param [const std::shared_ptr<cpr::MultiPerform>&] multiPerform:
+   * MultiPerform
+   * @return void
+   */
+  void remove_session_from_multi_peform(
+      const std::shared_ptr<cpr::Session>& session,
+      const std::shared_ptr<cpr::MultiPerform>& multiPerform);
+
+  /*
+   * Execute the respective HTTP request on all sessions in this
+   * MultiPerform
    * @param [const std::shared_ptr<cpr::MultiPerform>&] multiPerform:
    * MultiPerform
    * @return the corresponding list of responses
@@ -143,7 +156,7 @@ class http_client {
   std::vector<response> send_multi_peform_http_request(
       const std::shared_ptr<cpr::MultiPerform>& multiPerform);
 
-  /**
+  /*
    * Sets the correct headers for a JSON request
    * @param [const std::string&] uri: URI to send the request to
    * @param [const std::string&] body: JSON body
@@ -152,7 +165,7 @@ class http_client {
   static request prepare_json_request(
       const std::string& uri, const std::string& body);
 
-  /**
+  /*
    * Sets the correct headers for a multipart/related request
    * @param [const std::string&] uri: URI to send the request to
    * @param [const std::string&] body: body multipart/related body (including

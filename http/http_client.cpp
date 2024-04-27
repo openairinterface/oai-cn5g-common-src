@@ -175,10 +175,9 @@ response http_client::send_async_http_request(
 }
 
 //---------------------------------------------------------------------------------------------
-void http_client::add_session_to_multi_peform(
+std::shared_ptr<cpr::Session> http_client::add_session_to_multi_peform(
     const method_e& method, const request& request,
     const std::shared_ptr<cpr::MultiPerform>& multiPerform) {
-  // m_sbi_logger.info("Send a MultiPerform HTTP request");
   std::shared_ptr<cpr::Session> session = std::make_shared<cpr::Session>();
 
   prepare_session(method, request, session);
@@ -210,6 +209,14 @@ void http_client::add_session_to_multi_peform(
           session, cpr::MultiPerform::HttpMethod::DELETE_REQUEST);
     }
   }
+  return session;
+}
+
+//---------------------------------------------------------------------------------------------
+void http_client::remove_session_from_multi_peform(
+    const std::shared_ptr<cpr::Session>& session,
+    const std::shared_ptr<cpr::MultiPerform>& multiPerform) {
+  multiperform.RemoveSession(session);
 }
 
 //---------------------------------------------------------------------------------------------

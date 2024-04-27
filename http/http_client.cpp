@@ -68,10 +68,10 @@ response http_client::send_http_request(
       // TODO: Should declare a MultiPerform as a class member so that we can
       // actually support multiple sessions per MultiPerform (causing issue when
       // using multi-threading, similar issue with Curl Multi Interface)
-      std::shared_ptr<cpr::MultiPerform> multiPerform =
+      std::shared_ptr<cpr::MultiPerform> multi_perform =
           std::make_shared<cpr::MultiPerform>();
-      add_session_to_multi_peform(method, request, multiPerform);
-      auto resp = send_multi_peform_http_request(multiPerform);
+      add_session_to_multi_peform(method, request, multi_perform);
+      auto resp = send_multi_peform_http_request(multi_perform);
       return resp[0];
     } break;
     case request_type_e::SIMPLE:
@@ -86,9 +86,9 @@ response http_client::send_http_request(
 
 //---------------------------------------------------------------------------------------------
 std::vector<response> http_client::send_multi_peform_http_request(
-    const std::shared_ptr<cpr::MultiPerform>& multiPerform) {
+    const std::shared_ptr<cpr::MultiPerform>& multi_perform) {
   auto future = std::async(
-      [this, multiPerform] { return execute_http_request(multiPerform); });
+      [this, multi_perform] { return execute_http_request(multi_perform); });
   future.wait();
   std::vector<response> resp = future.get();
   return resp;
@@ -177,7 +177,7 @@ response http_client::send_async_http_request(
 //---------------------------------------------------------------------------------------------
 std::shared_ptr<cpr::Session> http_client::add_session_to_multi_peform(
     const method_e& method, const request& request,
-    const std::shared_ptr<cpr::MultiPerform>& multiPerform) {
+    const std::shared_ptr<cpr::MultiPerform>& multi_perform) {
   std::shared_ptr<cpr::Session> session = std::make_shared<cpr::Session>();
 
   prepare_session(method, request, session);
@@ -186,26 +186,26 @@ std::shared_ptr<cpr::Session> http_client::add_session_to_multi_peform(
   switch (method) {
     case method_e::POST: {
       session->SetBody(cpr::Body{request.body});
-      multiPerform->AddSession(
+      multi_perform->AddSession(
           session, cpr::MultiPerform::HttpMethod::POST_REQUEST);
     } break;
     case method_e::GET: {
-      multiPerform->AddSession(
+      multi_perform->AddSession(
           session, cpr::MultiPerform::HttpMethod::GET_REQUEST);
     } break;
     case method_e::PUT: {
       session->SetBody(cpr::Body{request.body});
-      multiPerform->AddSession(
+      multi_perform->AddSession(
           session, cpr::MultiPerform::HttpMethod::PUT_REQUEST);
     } break;
     case method_e::PATCH: {
       session->SetBody(cpr::Body{request.body});
 
-      multiPerform->AddSession(
+      multi_perform->AddSession(
           session, cpr::MultiPerform::HttpMethod::PATCH_REQUEST);
     } break;
     case method_e::DELETE: {
-      multiPerform->AddSession(
+      multi_perform->AddSession(
           session, cpr::MultiPerform::HttpMethod::DELETE_REQUEST);
     }
   }
@@ -215,14 +215,14 @@ std::shared_ptr<cpr::Session> http_client::add_session_to_multi_peform(
 //---------------------------------------------------------------------------------------------
 void http_client::remove_session_from_multi_peform(
     const std::shared_ptr<cpr::Session>& session,
-    const std::shared_ptr<cpr::MultiPerform>& multiPerform) {
-  multiperform.RemoveSession(session);
+    const std::shared_ptr<cpr::MultiPerform>& multi_perform) {
+  multi_perform->RemoveSession(session);
 }
 
 //---------------------------------------------------------------------------------------------
 std::vector<response> http_client::execute_http_request(
-    const std::shared_ptr<cpr::MultiPerform>& multiPerform) {
-  std::vector<cpr::Response> responses = multiPerform->Perform();
+    const std::shared_ptr<cpr::MultiPerform>& multi_perform) {
+  std::vector<cpr::Response> responses = multi_perform->Perform();
   std::vector<response> http_responses;
   for (const auto& r : responses) {
     response resp;

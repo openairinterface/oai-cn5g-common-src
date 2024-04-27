@@ -61,12 +61,12 @@ class http_client {
 
   /*
    * Execute a MultiPerform request
-   * @param [const std::shared_ptr<cpr::MultiPerform>&] multiPerform:
+   * @param [const std::shared_ptr<cpr::MultiPerform>&] multi_perform:
    * MultiPerform
    * @return the list of responses accordingly
    */
   std::vector<response> execute_http_request(
-      const std::shared_ptr<cpr::MultiPerform>& multiPerform);
+      const std::shared_ptr<cpr::MultiPerform>& multi_perform);
 
   /*
    * Prepare a session object
@@ -116,7 +116,7 @@ class http_client {
    * Sends a HTTP request
    * @param [const method_e&] method: HTTP method
    * @param [const request&] request: HTTP Request
-   * @param [const std::shared_ptr<cpr::MultiPerform>&] multiPerform:
+   * @param [const std::shared_ptr<cpr::MultiPerform>&] multi_perform:
    * MultiPerform
    * @return the corresponding Response
    */
@@ -126,35 +126,35 @@ class http_client {
    * Add a session to a MultiPerform
    * @param [const method_e&] method: HTTP method
    * @param [const request&] request: HTTP Request
-   * @param [const std::shared_ptr<cpr::MultiPerform>&] multiPerform:
+   * @param [const std::shared_ptr<cpr::MultiPerform>&] multi_perform:
    * MultiPerform
    * @return a shared_ptr pointed to the created session
    */
   std::shared_ptr<cpr::Session> add_session_to_multi_peform(
       const method_e& method, const request& request,
-      const std::shared_ptr<cpr::MultiPerform>& multiPerform);
+      const std::shared_ptr<cpr::MultiPerform>& multi_perform);
 
   /*
    * Remove a session from a MultiPerform
    * @param [const std::shared_ptr<cpr::Session>&] session: Session to be
    * removed
-   * @param [const std::shared_ptr<cpr::MultiPerform>&] multiPerform:
+   * @param [const std::shared_ptr<cpr::MultiPerform>&] multi_perform:
    * MultiPerform
    * @return void
    */
   void remove_session_from_multi_peform(
       const std::shared_ptr<cpr::Session>& session,
-      const std::shared_ptr<cpr::MultiPerform>& multiPerform);
+      const std::shared_ptr<cpr::MultiPerform>& multi_perform);
 
   /*
    * Execute the respective HTTP request on all sessions in this
    * MultiPerform
-   * @param [const std::shared_ptr<cpr::MultiPerform>&] multiPerform:
+   * @param [const std::shared_ptr<cpr::MultiPerform>&] multi_perform:
    * MultiPerform
    * @return the corresponding list of responses
    */
   std::vector<response> send_multi_peform_http_request(
-      const std::shared_ptr<cpr::MultiPerform>& multiPerform);
+      const std::shared_ptr<cpr::MultiPerform>& multi_perform);
 
   /*
    * Sets the correct headers for a JSON request

@@ -26,7 +26,6 @@
 #include <future>
 #include <string>
 #include <thread>
-#include <unordered_map>
 
 #include "3gpp_29.500.h"
 #include "http_definitions.hpp"
@@ -37,7 +36,6 @@ using namespace oai::http;
 namespace oai::http {
 
 const std::string CURL_MIME_BOUNDARY = "----Boundary";
-const unsigned int HTTP_TIMEOUT_MS   = 10000;
 
 class http_client {
  private:

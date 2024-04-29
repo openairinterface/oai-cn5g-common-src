@@ -49,8 +49,8 @@ class HandoverRequest : public NgapMessage {
   void initialize();
   bool decode(Ngap_NGAP_PDU_t* ngapMsgPdu) override;
 
-  void setAmfUeNgapId(const unsigned long& id);  // 40 bits
-  unsigned long getAmfUeNgapId() const;
+  void setAmfUeNgapId(const uint64_t& id);  // 40 bits
+  uint64_t getAmfUeNgapId() const;
 
   void setHandoverType(const long& type);
   // TODO: void getHandoverType(long& type);

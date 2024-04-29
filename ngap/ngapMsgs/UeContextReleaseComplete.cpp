@@ -46,7 +46,7 @@ void UEContextReleaseCompleteMsg::initialize() {
 }
 
 //------------------------------------------------------------------------------
-void UEContextReleaseCompleteMsg::setAmfUeNgapId(const unsigned long& id) {
+void UEContextReleaseCompleteMsg::setAmfUeNgapId(const uint64_t& id) {
   NgapUeMessage::m_AmfUeNgapId.set(id);
   Ngap_UEContextReleaseComplete_IEs* ie =
       (Ngap_UEContextReleaseComplete_IEs*) calloc(

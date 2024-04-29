@@ -45,7 +45,7 @@ void HandoverPreparationFailure::initialize() {
 }
 
 //------------------------------------------------------------------------------
-void HandoverPreparationFailure::setAmfUeNgapId(const unsigned long& id) {
+void HandoverPreparationFailure::setAmfUeNgapId(const uint64_t& id) {
   NgapUeMessage::m_AmfUeNgapId.set(id);
 
   Ngap_HandoverPreparationFailureIEs_t* ie =

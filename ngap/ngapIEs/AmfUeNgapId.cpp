@@ -20,6 +20,7 @@
  */
 
 #include "AmfUeNgapId.hpp"
+#include "logger.hpp"
 
 namespace oai::ngap {
 
@@ -59,7 +60,8 @@ bool AmfUeNgapId::encode(Ngap_AMF_UE_NGAP_ID_t& amf_ue_ngap_id) const {
 
 //------------------------------------------------------------------------------
 bool AmfUeNgapId::decode(const Ngap_AMF_UE_NGAP_ID_t& amf_ue_ngap_id) {
-  if (!amf_ue_ngap_id.buf) return false;
+  if (!amf_ue_ngap_id.buf or (amf_ue_ngap_id.size > 5))
+    return false;  // 5 bytes = 40 bits
 
   m_AmfUeNgapId = 0;
   for (int i = 0; i < amf_ue_ngap_id.size; i++) {

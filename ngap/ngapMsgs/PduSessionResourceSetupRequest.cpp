@@ -86,8 +86,7 @@ bool PduSessionResourceSetupRequestMsg::getUeAggregateMaxBitRate(
   return m_UeAggregateMaxBitRate.value().get(bitRateDl, bitRateUl);
 }
 //------------------------------------------------------------------------------
-void PduSessionResourceSetupRequestMsg::setAmfUeNgapId(
-    const unsigned long& id) {
+void PduSessionResourceSetupRequestMsg::setAmfUeNgapId(const uint64_t& id) {
   NgapUeMessage::m_AmfUeNgapId.set(id);
 
   Ngap_PDUSessionResourceSetupRequestIEs_t* ie =

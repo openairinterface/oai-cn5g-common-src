@@ -48,8 +48,7 @@ void UeRadioCapabilityInfoIndicationMsg::initialize() {
 }
 
 //------------------------------------------------------------------------------
-void UeRadioCapabilityInfoIndicationMsg::setAmfUeNgapId(
-    const unsigned long& id) {
+void UeRadioCapabilityInfoIndicationMsg::setAmfUeNgapId(const uint64_t& id) {
   NgapUeMessage::m_AmfUeNgapId.set(id);
 
   Ngap_UERadioCapabilityInfoIndicationIEs_t* ie =

@@ -120,7 +120,7 @@ int AuthenticationResult::Decode(uint8_t* buf, int len) {
   int decoded_size    = 0;
   int decoded_ie_size = 0;
   // Header
-  decoded_ie_size = ie_header_.Encode(buf, len);
+  decoded_ie_size = ie_header_.Decode(buf, len);
   if (decoded_ie_size == KEncodeDecodeError) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error("Decoding NAS Header error");

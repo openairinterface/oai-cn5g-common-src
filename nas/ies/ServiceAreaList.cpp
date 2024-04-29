@@ -24,7 +24,7 @@
 #include "IeConst.hpp"
 #include "common_defs.h"
 #include "logger_base.hpp"
-#include "utils.hpp"
+#include "nas_utils.hpp"
 
 using namespace oai::nas;
 
@@ -140,7 +140,7 @@ int ServiceAreaList::EncodeType00(
   ENCODE_U8(buf + encoded_size, octet, encoded_size);
 
   // Encode PLMN
-  encoded_size += utils::encodeMccMnc2Buffer(
+  encoded_size += nas_utils::encodeMccMnc2Buffer(
       item.plmn_list[0].mcc, item.plmn_list[0].mnc, buf + encoded_size,
       len - encoded_size);
 
@@ -162,7 +162,7 @@ int ServiceAreaList::EncodeType01(
   ENCODE_U8(buf + encoded_size, octet, encoded_size);
 
   // Encode PLMN
-  encoded_size += utils::encodeMccMnc2Buffer(
+  encoded_size += nas_utils::encodeMccMnc2Buffer(
       item.plmn_list[0].mcc, item.plmn_list[0].mnc, buf + encoded_size,
       len - encoded_size);
 
@@ -188,7 +188,7 @@ int ServiceAreaList::EncodeType10(
 
   for (int i = 0; i < list_size; i++) {
     // Encode PLMN
-    encoded_size += utils::encodeMccMnc2Buffer(
+    encoded_size += nas_utils::encodeMccMnc2Buffer(
         item.plmn_list[i].mcc, item.plmn_list[i].mnc, buf + encoded_size,
         len - encoded_size);
     // Encode TAC
@@ -208,7 +208,7 @@ int ServiceAreaList::EncodeType11(
   ENCODE_U8(buf + encoded_size, octet, encoded_size);
 
   // Encode PLMN
-  encoded_size += utils::encodeMccMnc2Buffer(
+  encoded_size += nas_utils::encodeMccMnc2Buffer(
       item.plmn_list[0].mcc, item.plmn_list[0].mnc, buf + encoded_size,
       len - encoded_size);
 

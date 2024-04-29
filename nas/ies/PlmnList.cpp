@@ -24,7 +24,7 @@
 #include "3gpp_24.501.hpp"
 #include "common_defs.h"
 #include "logger_base.hpp"
-#include "utils.hpp"
+#include "nas_utils.hpp"
 
 using namespace oai::nas;
 
@@ -74,7 +74,7 @@ int PlmnList::Encode(uint8_t* buf, int len) const {
   encoded_size += encoded_header_size;
 
   for (auto it : plmn_list_)
-    encoded_size += utils::encodeMccMnc2Buffer(
+    encoded_size += nas_utils::encodeMccMnc2Buffer(
         it.mcc, it.mnc, buf + encoded_size, len - encoded_size);
 
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
@@ -106,7 +106,7 @@ int PlmnList::Decode(const uint8_t* const buf, int len, bool is_iei) {
   uint8_t len_ie = GetLengthIndicator();
   while (len_ie > 0) {
     nas_plmn_t nas_plmn = {};
-    uint8_t size        = utils::decodeMccMncFromBuffer(
+    uint8_t size        = nas_utils::decodeMccMncFromBuffer(
         nas_plmn.mcc, nas_plmn.mnc, buf + decoded_size, len - decoded_size);
     if (size > 0) {
       len_ie -= size;

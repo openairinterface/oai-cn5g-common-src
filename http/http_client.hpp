@@ -156,7 +156,7 @@ class http_client : public std::enable_shared_from_this<http_client> {
    * @return request object
    */
   static request prepare_json_request(
-      const std::string& uri, const std::string& body);
+      const std::string& uri, const std::string& body = "");
 
   /*
    * Sets the correct headers for a multipart/related request

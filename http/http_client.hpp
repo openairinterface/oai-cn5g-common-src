@@ -31,13 +31,11 @@
 #include "http_definitions.hpp"
 #include "logger_base.hpp"
 
-using namespace oai::http;
-
 namespace oai::http {
 
 const std::string CURL_MIME_BOUNDARY = "----Boundary";
 
-class http_client {
+class http_client : public std::enable_shared_from_this<http_client> {
  private:
   /*
    * Sends a synchronous (simple) HTTP request
@@ -83,6 +81,7 @@ class http_client {
   std::string m_interface;
   uint8_t m_http_version;
   request_type_e m_request_type;
+  inline static std::shared_ptr<http_client> instance;
 
  public:
   explicit http_client(
@@ -101,14 +100,10 @@ class http_client {
    * @param [request_type_e ] request_type: Type of HTTP Request
    * @return an HTTP Client's instance
    */
-  static http_client& get_instance(
+  static std::shared_ptr<http_client> create_instance(
       const oai::logger::printf_logger& logger, int timeout_ms,
       const std::string& interface, uint8_t http_version,
-      request_type_e request_type = request_type_e::SIMPLE) {
-    static http_client instance(
-        logger, timeout_ms, interface, http_version, request_type);
-    return instance;
-  }
+      request_type_e request_type = request_type_e::SIMPLE);
 
   /*
    * Sends a HTTP request

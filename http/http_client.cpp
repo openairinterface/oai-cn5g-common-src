@@ -51,6 +51,21 @@ http_client::~http_client() {
 }
 
 //---------------------------------------------------------------------------------------------
+std::shared_ptr<http_client> http_client::create_instance(
+    const oai::logger::printf_logger& logger, int timeout_ms,
+    const std::string& interface, uint8_t http_version,
+    request_type_e request_type) {
+  // If instance does not exits, create a new one
+  if (!instance) {
+    instance = std::make_shared<http_client>(
+        logger, timeout_ms, interface, http_version, request_type);
+    return instance;
+  }
+  // otherwise return the existing one
+  return instance;
+}
+
+//---------------------------------------------------------------------------------------------
 response http_client::send_http_request(
     const method_e& method, const request& request) {
   switch (m_request_type) {

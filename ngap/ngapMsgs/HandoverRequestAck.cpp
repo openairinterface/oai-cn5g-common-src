@@ -46,7 +46,7 @@ void HandoverRequestAck::initialize() {
 }
 
 //------------------------------------------------------------------------------
-void HandoverRequestAck::setAmfUeNgapId(const unsigned long& id) {
+void HandoverRequestAck::setAmfUeNgapId(const uint64_t& id) {
   NgapUeMessage::m_AmfUeNgapId.set(id);
 
   Ngap_HandoverRequestAcknowledgeIEs_t* ie =

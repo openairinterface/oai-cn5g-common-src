@@ -48,7 +48,7 @@ void UeContextReleaseCommandMsg::initialize() {
 }
 
 //------------------------------------------------------------------------------
-void UeContextReleaseCommandMsg::setAmfUeNgapId(const unsigned long& id) {
+void UeContextReleaseCommandMsg::setAmfUeNgapId(const uint64_t& id) {
   m_AmfUeNgapId.set(id);
   Ngap_UEContextReleaseCommand_IEs_t* ie =
       (Ngap_UEContextReleaseCommand_IEs_t*) calloc(
@@ -70,7 +70,7 @@ void UeContextReleaseCommandMsg::setAmfUeNgapId(const unsigned long& id) {
 }
 
 //------------------------------------------------------------------------------
-bool UeContextReleaseCommandMsg::getAmfUeNgapId(unsigned long& id) const {
+bool UeContextReleaseCommandMsg::getAmfUeNgapId(uint64_t& id) const {
   if (!m_RanUeNgapId.has_value()) {
     id = m_AmfUeNgapId.get();
     return true;
@@ -114,7 +114,7 @@ void UeContextReleaseCommandMsg::setUeNgapIdPair(
 
 //------------------------------------------------------------------------------
 bool UeContextReleaseCommandMsg::getUeNgapIdPair(
-    unsigned long& amfId, uint32_t& ranId) const {
+    uint64_t& amfId, uint32_t& ranId) const {
   if (m_RanUeNgapId.has_value()) {
     amfId = m_AmfUeNgapId.get();
     ranId = m_RanUeNgapId.value().get();

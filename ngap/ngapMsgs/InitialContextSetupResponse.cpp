@@ -47,7 +47,7 @@ void InitialContextSetupResponseMsg::initialize() {
 }
 
 //------------------------------------------------------------------------------
-void InitialContextSetupResponseMsg::setAmfUeNgapId(const unsigned long& id) {
+void InitialContextSetupResponseMsg::setAmfUeNgapId(const uint64_t& id) {
   NgapUeMessage::m_AmfUeNgapId.set(id);
 
   Ngap_InitialContextSetupResponseIEs_t* ie =

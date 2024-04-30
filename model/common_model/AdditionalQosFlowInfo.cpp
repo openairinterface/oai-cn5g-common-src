@@ -41,9 +41,7 @@ bool AdditionalQosFlowInfo::validate(
 }
 
 bool AdditionalQosFlowInfo::operator==(const AdditionalQosFlowInfo& rhs) const {
-  return
-
-      ;
+  return true;
 }
 
 bool AdditionalQosFlowInfo::operator!=(const AdditionalQosFlowInfo& rhs) const {

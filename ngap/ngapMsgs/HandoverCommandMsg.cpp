@@ -55,7 +55,7 @@ void HandoverCommandMsg::initialize() {
 }
 
 //------------------------------------------------------------------------------
-void HandoverCommandMsg::setAmfUeNgapId(const unsigned long& id) {
+void HandoverCommandMsg::setAmfUeNgapId(const uint64_t& id) {
   NgapUeMessage::m_AmfUeNgapId.set(id);
 
   Ngap_HandoverCommandIEs_t* ie =

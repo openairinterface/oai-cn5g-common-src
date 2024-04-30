@@ -42,7 +42,7 @@ class DownlinkUeAssociatedNrppaTransportMsg : public NgapUeMessage {
 
   void initialize();
 
-  void setAmfUeNgapId(const unsigned long& id) override;
+  void setAmfUeNgapId(const uint64_t& id) override;
   void setRanUeNgapId(const uint32_t& id) override;
   bool decode(Ngap_NGAP_PDU_t* ngapMsgPdu) override;
 

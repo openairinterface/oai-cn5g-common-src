@@ -43,7 +43,7 @@ void HandoverNotifyMsg::initialize() {
 }
 
 //------------------------------------------------------------------------------
-void HandoverNotifyMsg::setAmfUeNgapId(const unsigned long& id) {
+void HandoverNotifyMsg::setAmfUeNgapId(const uint64_t& id) {
   NgapUeMessage::m_AmfUeNgapId.set(id);
 
   Ngap_HandoverNotifyIEs_t* ie =

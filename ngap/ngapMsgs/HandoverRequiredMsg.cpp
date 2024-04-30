@@ -46,7 +46,7 @@ void HandoverRequiredMsg::initialize() {
 }
 
 //------------------------------------------------------------------------------
-void HandoverRequiredMsg::setAmfUeNgapId(const unsigned long& id) {
+void HandoverRequiredMsg::setAmfUeNgapId(const uint64_t& id) {
   NgapUeMessage::m_AmfUeNgapId.set(id);
 
   Ngap_HandoverRequiredIEs_t* ie = (Ngap_HandoverRequiredIEs_t*) calloc(

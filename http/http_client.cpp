@@ -137,8 +137,7 @@ response http_client::send_simple_http_request(
     }
   }
 
-  resp.status_code = status_code_e(cpr_resp.status_code);
-  resp.body        = cpr_resp.text;
+  get_response_info(cpr_resp, resp);
 
   m_sbi_logger.trace(request.to_string() + " (%s)", method_to_string(method));
 
@@ -179,9 +178,7 @@ response http_client::send_async_http_request(
     }
   }
 
-  resp.status_code = status_code_e(cpr_resp.status_code);
-  resp.body        = cpr_resp.text;
-
+  get_response_info(cpr_resp, resp);
   m_sbi_logger.trace(request.to_string() + " (%s)", method_to_string(method));
 
   return resp;
@@ -239,22 +236,7 @@ std::vector<response> http_client::execute_http_request(
   std::vector<response> http_responses;
   for (const auto& r : responses) {
     response resp;
-    resp.status_code = status_code_e(r.status_code);
-    resp.body        = r.text;
-
-    // convert cpr header to pistache headers
-    for (const auto& h : r.header) {
-      try {
-        auto pistache_hdr =
-            Pistache::Http::Header::Registry::instance().makeHeader(h.first);
-        pistache_hdr->parse(h.second);
-        resp.headers.add(std::move(pistache_hdr));
-      } catch (std::exception&) {
-        m_sbi_logger.debug(
-            "Unknown header from HTTP client: '%s : %s'", h.first, h.second);
-      }
-    }
-
+    get_response_info(r, resp);
     http_responses.push_back(resp);
   }
   return http_responses;
@@ -311,6 +293,26 @@ void http_client::prepare_session(
       session->SetBody(cpr::Body{request.body});
     } break;
     case method_e::DELETE: {
+    }
+  }
+}
+
+//---------------------------------------------------------------------------------------------
+void http_client::get_response_info(
+    const cpr::Response& cpr_resp, response& resp) {
+  resp.status_code = status_code_e(cpr_resp.status_code);
+  resp.body        = cpr_resp.text;
+
+  // convert cpr header to pistache headers
+  for (const auto& h : cpr_resp.header) {
+    try {
+      auto pistache_hdr =
+          Pistache::Http::Header::Registry::instance().makeHeader(h.first);
+      pistache_hdr->parse(h.second);
+      resp.headers.add(std::move(pistache_hdr));
+    } catch (std::exception&) {
+      m_sbi_logger.debug(
+          "Unknown header from HTTP client: '%s : %s'", h.first, h.second);
     }
   }
 }

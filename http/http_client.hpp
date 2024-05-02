@@ -116,6 +116,14 @@ class http_client : public std::enable_shared_from_this<http_client> {
   response send_http_request(const method_e& method, const request& request);
 
   /*
+   * Get HTTP response info from the corresponding CPR Response
+   * @param [const cpr::Response&] cpr_resp: CPR Response
+   * @param [response&] resp: HTTP Response
+   * @return void
+   */
+  void get_response_info(const cpr::Response& cpr_resp, response& resp);
+
+  /*
    * Add a session to a MultiPerform
    * @param [const method_e&] method: HTTP method
    * @param [const request&] request: HTTP Request

@@ -322,12 +322,9 @@ request http_client::prepare_json_request(
     const std::string& uri, const std::string& body) {
   request req;
   req.uri = uri;
-  try {
-    json::json j = json::json::parse(body);
-    req.body     = j.dump();
+  if (json::json::accept(body)) {
+    req.body = body;
     req.headers.add<ContentType>(MediaType("application/json"));
-  } catch (nlohmann::json::exception& e) {
-  } catch (std::exception& e) {
   }
   return req;
 }

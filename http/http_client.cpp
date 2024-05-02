@@ -322,6 +322,7 @@ request http_client::prepare_json_request(
     const std::string& uri, const std::string& body) {
   request req;
   req.uri = uri;
+  // Check whether body is valid JSON
   if (json::json::accept(body)) {
     req.body = body;
     req.headers.add<ContentType>(MediaType("application/json"));

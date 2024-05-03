@@ -46,6 +46,7 @@ constexpr auto kNumberOfNfRegisterRetries            = 3;
 constexpr auto kNumberOfNfDeregisterRetries          = 3;
 constexpr auto kTimeIntervalBetweenNfRegisterRetries = 1;    // in seconds
 constexpr auto kTimeIntervalBetweenNfDeregisterRetries = 1;  // in seconds
+constexpr auto kNfDefaultHttpRequestTimeout = 1000;          // in Millisecond
 
 constexpr auto kDefaultSbiApiVersion = "v1";
 

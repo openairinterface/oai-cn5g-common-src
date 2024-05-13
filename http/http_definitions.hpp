@@ -35,7 +35,7 @@ namespace oai::http {
 // Design choice: We use Pistache headers here because they are type-safe
 // It breaks a bit the abstraction of HTTP layer, but the advantage is greater
 struct response {
-  oai::http::status_code_e status_code;
+  int status_code;
   std::string body;
   Pistache::Http::Header::Collection headers;
 };

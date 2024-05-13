@@ -300,7 +300,7 @@ void http_client::prepare_session(
 //---------------------------------------------------------------------------------------------
 void http_client::get_response_info(
     const cpr::Response& cpr_resp, response& resp) {
-  resp.status_code = status_code_e(cpr_resp.status_code);
+  resp.status_code = cpr_resp.status_code;
   resp.body        = cpr_resp.text;
 
   // convert cpr header to pistache headers

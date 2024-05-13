@@ -25,40 +25,6 @@
 #include <stdint.h>
 
 #include <string>
-#include <vector>
-
-// TODO: harmonize HTTP Status Code definition
-
-enum class HttpStatusCode : uint16_t {
-  k100Continue               = 100,
-  k200Ok                     = 200,
-  k201Created                = 201,
-  k202Accepted               = 202,
-  k204NoContent              = 204,
-  k300MultipleChoices        = 300,
-  k303SeeOther               = 303,
-  k307TemporaryRedirect      = 307,
-  k308PermanentRedirect      = 308,
-  k400BadRequest             = 400,
-  k401Unauthorized           = 401,
-  k403Forbidden              = 403,
-  k404NotFound               = 404,
-  k405MethodNotAllowed       = 405,
-  k406NotAcceptable          = 406,
-  k408RequestTimeout         = 408,
-  k409Conflict               = 409,
-  k410Gone                   = 410,
-  k411LengthRequired         = 411,
-  k412Precondition_failed    = 412,
-  k413PayloadTooLarge        = 413,
-  k414UriTooLong             = 414,
-  k415UnsupportedMediaTypeNa = 415,
-  k429TooManyRequests        = 429,
-  k500InternalServerError    = 500,
-  k501NotImplemented         = 501,
-  k503ServiceUnavailable     = 503,
-  k504GatewayTimeout         = 504
-};
 
 namespace oai::http {
 
@@ -82,80 +48,112 @@ static std::string method_to_string(method_e method) {
   return "";
 }
 
-enum class status_code_e : uint32_t {
-  HTTP_STATUS_CODE_0_NO_RESPONSE                 = 0,
-  HTTP_STATUS_CODE_100_CONTINUE                  = 100,
-  HTTP_STATUS_CODE_200_OK                        = 200,
-  HTTP_STATUS_CODE_201_CREATED                   = 201,
-  HTTP_STATUS_CODE_202_ACCEPTED                  = 202,
-  HTTP_STATUS_CODE_204_NO_CONTENT                = 204,
-  HTTP_STATUS_CODE_300_MULTIPLE_CHOICES          = 300,
-  HTTP_STATUS_CODE_303_SEE_OTHER                 = 303,
-  HTTP_STATUS_CODE_307_TEMPORARY_REDIRECT        = 307,
-  HTTP_STATUS_CODE_308_PERMANENT_REDIRECT        = 308,
-  HTTP_STATUS_CODE_400_BAD_REQUEST               = 400,
-  HTTP_STATUS_CODE_401_UNAUTHORIZED              = 401,
-  HTTP_STATUS_CODE_403_FORBIDDEN                 = 403,
-  HTTP_STATUS_CODE_404_NOT_FOUND                 = 404,
-  HTTP_STATUS_CODE_405_METHOD_NOT_ALLOWED        = 405,
-  HTTP_STATUS_CODE_406_NOT_ACCEPTABLE            = 406,
-  HTTP_STATUS_CODE_408_REQUEST_TIMEOUT           = 408,
-  HTTP_STATUS_CODE_409_CONFLICT                  = 409,
-  HTTP_STATUS_CODE_410_GONE                      = 410,
-  HTTP_STATUS_CODE_411_LENGTH_REQUIRED           = 411,
-  HTTP_STATUS_CODE_412_PRECONDITION_FAILED       = 412,
-  HTTP_STATUS_CODE_413_PAYLOAD_TOO_LARGE         = 413,
-  HTTP_STATUS_CODE_414_URI_TOO_LONG              = 414,
-  HTTP_STATUS_CODE_415_UNSUPPORTED_MEDIA_TYPE_NA = 415,
-  HTTP_STATUS_CODE_429_TOO_MANY_REQUESTS         = 429,
-  HTTP_STATUS_CODE_500_INTERNAL_SERVER_ERROR     = 500,
-  HTTP_STATUS_CODE_501_NOT_IMPLEMENTED           = 501,
-  HTTP_STATUS_CODE_503_SERVICE_UNAVAILABLE       = 503,
-  HTTP_STATUS_CODE_504_GATEWAY_TIMEOUT           = 504
+// use constexpr to avoid casting from/to int
+struct http_status_code {
+  static constexpr uint16_t NO_RESPONSE            = 0;
+  static constexpr uint16_t CONTINUE               = 100;
+  static constexpr uint16_t OK                     = 200;
+  static constexpr uint16_t CREATED                = 201;
+  static constexpr uint16_t ACCEPTED               = 202;
+  static constexpr uint16_t NO_CONTENT             = 204;
+  static constexpr uint16_t MULTIPLE_CHOICES       = 300;
+  static constexpr uint16_t SEE_OTHER              = 303;
+  static constexpr uint16_t TEMPORARY_REDIRECT     = 307;
+  static constexpr uint16_t PERMANENT_REDIRECT     = 308;
+  static constexpr uint16_t BAD_REQUEST            = 400;
+  static constexpr uint16_t UNAUTHORIZED           = 401;
+  static constexpr uint16_t FORBIDDEN              = 403;
+  static constexpr uint16_t NOT_FOUND              = 404;
+  static constexpr uint16_t METHOD_NOT_ALLOWED     = 405;
+  static constexpr uint16_t NOT_ACCEPTABLE         = 406;
+  static constexpr uint16_t REQUEST_TIMEOUT        = 408;
+  static constexpr uint16_t CONFLICT               = 409;
+  static constexpr uint16_t GONE                   = 410;
+  static constexpr uint16_t LENGTH_REQUIRED        = 411;
+  static constexpr uint16_t PRECONDITION_FAILED    = 412;
+  static constexpr uint16_t PAYLOAD_TOO_LARGE      = 413;
+  static constexpr uint16_t URI_TOO_LONG           = 414;
+  static constexpr uint16_t UNSUPPORTED_MEDIA_TYPE = 415;
+  static constexpr uint16_t TOO_MANY_REQUESTS      = 429;
+  static constexpr uint16_t INTERNAL_SERVER_ERROR  = 500;
+  static constexpr uint16_t NOT_IMPLEMENTED        = 501;
+  static constexpr uint16_t BAD_GATEWAY            = 502;
+  static constexpr uint16_t SERVICE_UNAVAILABLE    = 503;
+  static constexpr uint16_t GATEWAY_TIMEOUT        = 504;
 };
 
-enum protocol_application_error_e {
-  PROTOCOL_APP_ERROR_INVALID_API                      = 0,   // 400 Bad Request
-  PROTOCOL_APP_ERROR_INVALID_MSG_FORMAT               = 1,   // 400 Bad Request
-  PROTOCOL_APP_ERROR_INVALID_QUERY_PARAM              = 2,   // 400 Bad Request
-  PROTOCOL_APP_ERROR_MANDATORY_QUERY_PARAM_INCORRECT  = 3,   // 400 Bad Request
-  PROTOCOL_APP_ERROR_OPTIONAL_QUERY_PARAM_INCORRECT   = 4,   // 400 Bad Request
-  PROTOCOL_APP_ERROR_MANDATORY_QUERY_PARAM_MISSING    = 5,   // 400 Bad Request
-  PROTOCOL_APP_ERROR_MANDATORY_IE_INCORRECT           = 6,   // 400 Bad Request
-  PROTOCOL_APP_ERROR_OPTIONAL_IE_INCORRECT            = 7,   // 400 Bad Request
-  PROTOCOL_APP_ERROR_MANDATORY_IE_MISSING             = 8,   // 400 Bad Request
-  PROTOCOL_APP_ERROR_UNSPECIFIED_MSG_FAILURE          = 9,   // 400 Bad Request
-  PROTOCOL_APP_ERROR_MODIFICATION_NOT_ALLOWED         = 10,  // 403 Forbidden
-  PROTOCOL_APP_ERROR_SUBSCRIPTION_NOT_FOUND           = 11,  // 404 Not Found
-  PROTOCOL_APP_ERROR_RESOURCE_URI_STRUCTURE_NOT_FOUND = 12,  // 404 Not Found
-  PROTOCOL_APP_ERROR_INCORRECT_LENGTH       = 13,  // 411 Length Required
-  PROTOCOL_APP_ERROR_NF_CONGESTION_RISK     = 14,  // 429 Too Many Requests
-  PROTOCOL_APP_ERROR_INSUFFICIENT_RESOURCES = 15,  // 500 Internal Server Error
-  PROTOCOL_APP_ERROR_UNSPECIFIED_NF_FAILURE = 16,  // 500 Internal Server Error
-  PROTOCOL_APP_ERROR_SYSTEM_FAILURE         = 17,  // 500 Internal Server Error
-  PROTOCOL_APP_ERROR_NF_CONGESTION          = 18,  // 503 Service Unavailable
+struct protocol_application_error {
+  // For 400 Bad Request
+  static constexpr uint16_t INVALID_API                     = 0;
+  static constexpr uint16_t INVALID_MSG_FORMAT              = 1;
+  static constexpr uint16_t INVALID_QUERY_PARAM             = 2;
+  static constexpr uint16_t MANDATORY_QUERY_PARAM_INCORRECT = 3;
+  static constexpr uint16_t OPTIONAL_QUERY_PARAM_INCORRECT  = 4;
+  static constexpr uint16_t MANDATORY_QUERY_PARAM_MISSING   = 5;
+  static constexpr uint16_t MANDATORY_IE_INCORRECT          = 6;
+  static constexpr uint16_t OPTIONAL_IE_INCORRECT           = 7;
+  static constexpr uint16_t MANDATORY_IE_MISSING            = 8;
+  static constexpr uint16_t UNSPECIFIED_MSG_FAILURE         = 9;
+  // For 403 Forbidden
+  static constexpr uint16_t MODIFICATION_NOT_ALLOWED = 10;
+  // For 404 Not Found
+  static constexpr uint16_t SUBSCRIPTION_NOT_FOUND           = 11;
+  static constexpr uint16_t RESOURCE_URI_STRUCTURE_NOT_FOUND = 12;
+  // For 411 Length Required
+  static constexpr uint16_t INCORRECT_LENGTH = 13;
+  // For 429 Too Many Requests
+  static constexpr uint16_t NF_CONGESTION_RISK = 14;
+  // For 500 Internal Server Error
+  static constexpr uint16_t INSUFFICIENT_RESOURCES = 15;
+  static constexpr uint16_t UNSPECIFIED_NF_FAILURE = 16;
+  static constexpr uint16_t SYSTEM_FAILURE         = 17;
+  // 503 Service Unavailable
+  static constexpr uint16_t NF_CONGESTION = 18;
 };
 
-static const std::vector<std::string> protocol_application_error_e2str{
-    "INVALID_API",
-    "INVALID_MSG_FORMAT",
-    "INVALID_QUERY_PARAM",
-    "MANDATORY_QUERY_PARAM_INCORRECT",
-    "OPTIONAL_QUERY_PARAM_INCORRECT",
-    "MANDATORY_QUERY_PARAM_MISSING",
-    "MANDATORY_IE_INCORRECT",
-    "OPTIONAL_IE_INCORRECT",
-    "MANDATORY_IE_MISSING",
-    "UNSPECIFIED_MSG_FAILURE",
-    "MODIFICATION_NOT_ALLOWED",
-    "SUBSCRIPTION_NOT_FOUND",
-    "RESOURCE_URI_STRUCTURE_NOT_FOUND",
-    "INCORRECT_LENGTH ",
-    "NF_CONGESTION_RISK",
-    "INSUFFICIENT_RESOURCES",
-    "UNSPECIFIED_NF_FAILURE",
-    "SYSTEM_FAILURE",
-    "NF_CONGESTION"};
+static std::string protocol_application_error_to_string(uint16_t error) {
+  switch (error) {
+    case protocol_application_error::INVALID_API:
+      return "INVALID_API";
+    case protocol_application_error::INVALID_MSG_FORMAT:
+      return "INVALID_MSG_FORMAT";
+    case protocol_application_error::INVALID_QUERY_PARAM:
+      return "INVALID_QUERY_PARAM";
+    case protocol_application_error::MANDATORY_QUERY_PARAM_INCORRECT:
+      return "MANDATORY_QUERY_PARAM_INCORRECT";
+    case protocol_application_error::OPTIONAL_QUERY_PARAM_INCORRECT:
+      return "OPTIONAL_QUERY_PARAM_INCORRECT";
+    case protocol_application_error::MANDATORY_QUERY_PARAM_MISSING:
+      return "MANDATORY_QUERY_PARAM_MISSING";
+    case protocol_application_error::MANDATORY_IE_INCORRECT:
+      return "MANDATORY_IE_INCORRECT";
+    case protocol_application_error::OPTIONAL_IE_INCORRECT:
+      return "OPTIONAL_IE_INCORRECT";
+    case protocol_application_error::MANDATORY_IE_MISSING:
+      return "MANDATORY_IE_MISSING";
+    case protocol_application_error::UNSPECIFIED_MSG_FAILURE:
+      return "UNSPECIFIED_MSG_FAILURE";
+    case protocol_application_error::MODIFICATION_NOT_ALLOWED:
+      return "MODIFICATION_NOT_ALLOWED";
+    case protocol_application_error::SUBSCRIPTION_NOT_FOUND:
+      return "SUBSCRIPTION_NOT_FOUND";
+    case protocol_application_error::RESOURCE_URI_STRUCTURE_NOT_FOUND:
+      return "RESOURCE_URI_STRUCTURE_NOT_FOUND";
+    case protocol_application_error::INCORRECT_LENGTH:
+      return "INCORRECT_LENGTH";
+    case protocol_application_error::NF_CONGESTION_RISK:
+      return "NF_CONGESTION_RISK";
+    case protocol_application_error::INSUFFICIENT_RESOURCES:
+      return "INSUFFICIENT_RESOURCES";
+    case protocol_application_error::UNSPECIFIED_NF_FAILURE:
+      return "UNSPECIFIED_NF_FAILURE";
+    case protocol_application_error::SYSTEM_FAILURE:
+      return "SYSTEM_FAILURE";
+    case protocol_application_error::NF_CONGESTION:
+      return "NF_CONGESTION";
+  }
+  return "UNKNOWN_PROTOCOL_APPLICATION_ERROR";
+}
 
 }  // namespace oai::http
 

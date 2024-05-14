@@ -31,6 +31,8 @@
 #include "http_definitions.hpp"
 #include "logger_base.hpp"
 
+using namespace oai::common::sbi;
+
 namespace oai::http {
 
 const std::string CURL_MIME_BOUNDARY = "----Boundary";

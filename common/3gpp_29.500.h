@@ -26,7 +26,7 @@
 
 #include <string>
 
-namespace oai::http {
+namespace oai::common::sbi {
 
 enum class method_e { POST, GET, PUT, PATCH, DELETE, OPTIONS };
 
@@ -155,6 +155,6 @@ static std::string protocol_application_error_to_string(uint16_t error) {
   return "UNKNOWN_PROTOCOL_APPLICATION_ERROR";
 }
 
-}  // namespace oai::http
+}  // namespace oai::common::sbi
 
 #endif  // FILE_3GPP_29_500_SEEN

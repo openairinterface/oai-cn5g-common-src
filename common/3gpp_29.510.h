@@ -28,6 +28,8 @@
 #include <arpa/inet.h>
 #include "3gpp_23.003.h"
 
+namespace oai::common::sbi {
+
 enum class nf_status_e { REGISTERED = 0, SUSPENDED = 1, UNDISCOVERABLE = 2 };
 
 static const std::vector<std::string> nf_status_e2str = {
@@ -430,4 +432,6 @@ typedef struct patch_item_s {
   }
 } patch_item_t;
 
-#endif
+}  // namespace oai::common::sbi
+
+#endif  // FILE_3GPP_29_510_SEEN

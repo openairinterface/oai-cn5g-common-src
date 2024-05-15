@@ -35,7 +35,7 @@ AmfPointer::~AmfPointer() {}
 
 //------------------------------------------------------------------------------
 bool AmfPointer::set(const std::string& pointer) {
-  uint8_t tmp = utils::fromString<int>(pointer);
+  uint8_t tmp = oai::utils::utils::fromString<int>(pointer);
   if (tmp > kAmfPointerMaxValue) return false;
   m_Pointer = tmp;
   return true;

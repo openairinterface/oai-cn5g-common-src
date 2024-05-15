@@ -28,6 +28,7 @@
 #include "utils.hpp"
 
 using namespace oai::nas;
+using namespace oai::utils;
 
 //------------------------------------------------------------------------------
 _5gsMobileIdentity::_5gsMobileIdentity() : Type6NasIe() {
@@ -500,7 +501,7 @@ int _5gsMobileIdentity::EncodeRoutingIndicator(
 
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Routing Indicator (%s)", routing_indicator.value().c_str());
-  int rooutid = utils::fromString<int>(routing_indicator.value());
+  int rooutid = oai::utils::utils::fromString<int>(routing_indicator.value());
   switch (routing_indicator.value().length()) {
     case 1: {
       *buf = 0xf0 | (0x0f & rooutid);
@@ -567,7 +568,7 @@ int _5gsMobileIdentity::Encode5gSTmsi(uint8_t* buf, int len) {
       encoded_size);
 
   // 5G-TMSI
-  int tmsi = utils::fromString<int>(_5g_s_tmsi_.value()._5g_tmsi);
+  int tmsi = oai::utils::utils::fromString<int>(_5g_s_tmsi_.value()._5g_tmsi);
   ENCODE_U32(buf + encoded_size, tmsi, encoded_size);
 
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)

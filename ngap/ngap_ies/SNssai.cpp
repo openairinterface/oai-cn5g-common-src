@@ -71,7 +71,7 @@ bool SNssai::decodeSd(const Ngap_SD_t& m_sd) {
 
 //------------------------------------------------------------------------------
 void SNssai::setSst(const std::string& sst) {
-  conv::string_to_int8(sst, m_Sst);
+  oai::utils::conv::string_to_int8(sst, m_Sst);
 }
 
 //------------------------------------------------------------------------------

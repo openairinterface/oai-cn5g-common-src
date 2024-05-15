@@ -24,7 +24,7 @@
 
 #include <string>
 
-namespace util {
+namespace oai::utils {
 
 /*
  * Generate the exe absolute path using a specified base_path
@@ -41,5 +41,5 @@ void pid_file_unlock(void);
 
 int lockfile(int fd, int lock_type);
 
-}  // namespace util
+}  // namespace oai::utils
 #endif

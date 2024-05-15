@@ -40,8 +40,8 @@ int nas_utils::encodeMccMnc2Buffer(
     int len) {
   int encoded_size = 0;
   uint8_t value    = 0;
-  int mcc          = utils::fromString<int>(mcc_str);
-  int mnc          = utils::fromString<int>(mnc_str);
+  int mcc          = oai::utils::utils::fromString<int>(mcc_str);
+  int mnc          = oai::utils::utils::fromString<int>(mnc_str);
 
   value = (0x0f & (mcc / 100)) | ((0x0f & ((mcc % 100) / 10)) << 4);
   ENCODE_U8(buf + encoded_size, value, encoded_size);

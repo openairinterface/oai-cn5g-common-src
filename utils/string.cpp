@@ -30,25 +30,7 @@
 
 #include "logger.hpp"
 
-template<class T>
-class Buffer {
- public:
-  explicit Buffer(size_t size) {
-    msize = size;
-    mbuf  = new T[msize];
-  }
-  ~Buffer() {
-    if (mbuf) delete[] mbuf;
-  }
-  T* get() { return mbuf; }
-
- private:
-  Buffer();
-  size_t msize;
-  T* mbuf;
-};
-
-std::string util::string_format(const char* format, ...) {
+std::string oai::utils::string_format(const char* format, ...) {
   va_list args;
 
   va_start(args, format);
@@ -68,7 +50,7 @@ std::string util::string_format(const char* format, ...) {
 // https://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring#217605
 
 // trim from start
-std::string& util::ltrim(std::string& s) {
+std::string& oai::utils::ltrim(std::string& s) {
   s.erase(
       s.begin(),
       std::find_if(
@@ -77,7 +59,7 @@ std::string& util::ltrim(std::string& s) {
 }
 
 // trim from end
-std::string& util::rtrim(std::string& s) {
+std::string& oai::utils::rtrim(std::string& s) {
   s.erase(
       std::find_if(
           s.rbegin(), s.rend(), std::not1(std::ptr_fun<int, int>(std::isspace)))
@@ -87,14 +69,15 @@ std::string& util::rtrim(std::string& s) {
 }
 
 // trim from both ends
-std::string& util::trim(std::string& s) {
-  return util::ltrim(util::rtrim(s));
+std::string& oai::utils::trim(std::string& s) {
+  return oai::utils::ltrim(oai::utils::rtrim(s));
 }
 
 // extract query param from given querystring
 std::string query_param_tmp;
 //
-std::string util::get_query_param(std::string querystring, std::string param) {
+std::string oai::utils::get_query_param(
+    std::string querystring, std::string param) {
   std::regex reList("([^=]*)=([^&]*)&?");
   query_param_tmp.clear();
   std::for_each(

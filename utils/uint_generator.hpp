@@ -25,7 +25,7 @@
 #include <mutex>
 #include <set>
 
-namespace util {
+namespace oai::utils {
 
 template<class UINT>
 class uint_generator {
@@ -114,5 +114,5 @@ class uint_uid_generator {
   }
 };
 
-}  // namespace util
+}  // namespace oai::utils
 #endif  // FILE_UINT_GENERATOR_HPP_SEEN

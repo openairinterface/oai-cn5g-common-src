@@ -26,7 +26,7 @@
 #define BUFFER_SIZE 4096
 
 //------------------------------------------------------------------------------
-int get_inet_addr_infos_from_iface(
+int oai::utils::get_inet_addr_infos_from_iface(
     const std::string& if_name, struct in_addr& inet_addr,
     struct in_addr& inet_network, unsigned int& mtu) {
   struct ifreq ifr;

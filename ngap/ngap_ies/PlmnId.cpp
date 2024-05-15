@@ -45,8 +45,8 @@ PlmnId::~PlmnId() {}
 
 //------------------------------------------------------------------------------
 void PlmnId::set(const std::string& mcc, const std::string& mnc) {
-  int mcc_value = utils::fromString<int>(mcc);
-  int mnc_value = utils::fromString<int>(mnc);
+  int mcc_value = oai::utils::utils::fromString<int>(mcc);
+  int mnc_value = oai::utils::utils::fromString<int>(mnc);
 
   m_MccDigit1 = mcc_value / 100;
   m_MccDigit2 = (mcc_value - m_MccDigit1 * 100) / 10;

@@ -35,7 +35,7 @@ TransportLayerAddress::~TransportLayerAddress() {}
 
 //------------------------------------------------------------------------------
 void TransportLayerAddress::set(const std::string& address) {
-  // m_IpAddress = utils::fromString<long>(address);
+  // m_IpAddress = oai::utils::utils::fromString<long>(address);
   m_IpAddress = address;
 }
 
@@ -76,7 +76,8 @@ bool TransportLayerAddress::encode(
   std::vector<std::string> ipAddress = splite(m_IpAddress, ".");
 
   for (int i = 0; i < transportLayerAddress.size; i++) {
-    transportLayerAddress.buf[i] = utils::fromString<int>(ipAddress[i]);
+    transportLayerAddress.buf[i] =
+        oai::utils::utils::fromString<int>(ipAddress[i]);
   }
 
   return true;

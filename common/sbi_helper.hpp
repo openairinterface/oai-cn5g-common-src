@@ -83,7 +83,7 @@ typedef struct interface_cfg_s {
         std::string addr4_str = {};
         addr4_str             = json_data["addr4"].get<std::string>();
         if (boost::iequals(addr4_str, "read")) {
-          if (get_inet_addr_infos_from_iface(
+          if (oai::utils::get_inet_addr_infos_from_iface(
                   this->if_name, this->addr4, this->network4, this->mtu)) {
             oai::logger::logger_registry::get_logger(LOGGER_COMMON)
                 .error(
@@ -93,12 +93,12 @@ typedef struct interface_cfg_s {
           }
         } else {
           IPV4_STR_ADDR_TO_INADDR(
-              util::trim(addr4_str).c_str(), this->addr4,
+              oai::utils::trim(addr4_str).c_str(), this->addr4,
               "BAD IPv4 ADDRESS FORMAT FOR INTERFACE !");
           if (json_data.find("network4") != json_data.end()) {
             std::string network4_str = json_data["network4"].get<std::string>();
             IPV4_STR_ADDR_TO_INADDR(
-                util::trim(network4_str).c_str(), this->network4,
+                oai::utils::trim(network4_str).c_str(), this->network4,
                 "BAD IPv4 ADDRESS FORMAT FOR INTERFACE !");
           }
           // TODO: addr6

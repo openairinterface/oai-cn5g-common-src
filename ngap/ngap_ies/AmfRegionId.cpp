@@ -35,7 +35,7 @@ AmfRegionId::~AmfRegionId() {}
 
 //------------------------------------------------------------------------------
 void AmfRegionId::set(const std::string& id) {
-  m_RegionId = utils::fromString<int>(id);
+  m_RegionId = oai::utils::utils::fromString<int>(id);
 }
 
 //------------------------------------------------------------------------------

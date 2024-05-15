@@ -35,6 +35,8 @@
 
 #include "logger_base.hpp"
 
+using namespace oai::utils;
+
 static const char hex_to_ascii_table[16] = {
     '0', '1', '2', '3', '4', '5', '6', '7',
     '8', '9', 'a', 'b', 'c', 'd', 'e', 'f',

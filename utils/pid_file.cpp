@@ -36,7 +36,7 @@ int g_fd_pid_file = -1;
 __pid_t g_pid     = -1;
 
 //------------------------------------------------------------------------------
-std::string util::get_exe_absolute_path(
+std::string oai::utils::get_exe_absolute_path(
     const std::string& basepath, const unsigned int instance) {
 #define MAX_FILE_PATH_LENGTH 255
   char pid_file_name[MAX_FILE_PATH_LENGTH + 1] = {0};
@@ -65,14 +65,14 @@ std::string util::get_exe_absolute_path(
 }
 
 //------------------------------------------------------------------------------
-int util::lockfile(int fd, int lock_type) {
+int oai::utils::lockfile(int fd, int lock_type) {
   // lock on fd only, not on file on disk (do not prevent another process from
   // modifying the file)
   return lockf(fd, F_TLOCK, 0);
 }
 
 //------------------------------------------------------------------------------
-bool util::is_pid_file_lock_success(const char* pid_file_name) {
+bool oai::utils::is_pid_file_lock_success(const char* pid_file_name) {
   char pid_dec[64] = {0};
 
   g_fd_pid_file = open(
@@ -87,7 +87,7 @@ bool util::is_pid_file_lock_success(const char* pid_file_name) {
     return false;
   }
 
-  if (0 > util::lockfile(g_fd_pid_file, F_TLOCK)) {
+  if (0 > oai::utils::lockfile(g_fd_pid_file, F_TLOCK)) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error(
             "lockfile filename %s failed %d:%s\n", pid_file_name, errno,
@@ -120,8 +120,8 @@ bool util::is_pid_file_lock_success(const char* pid_file_name) {
 }
 
 //------------------------------------------------------------------------------
-void util::pid_file_unlock(void) {
-  util::lockfile(g_fd_pid_file, F_ULOCK);
+void oai::utils::pid_file_unlock(void) {
+  oai::utils::lockfile(g_fd_pid_file, F_ULOCK);
   close(g_fd_pid_file);
   g_fd_pid_file = -1;
 }

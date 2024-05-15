@@ -30,6 +30,7 @@ extern "C" {
 #include "assertions.h"
 #include "backtrace.h"
 }
+using namespace oai::utils;
 
 //------------------------------------------------------------------------------
 void utils::free_wrapper(void** ptr) {

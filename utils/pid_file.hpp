@@ -21,6 +21,7 @@
 
 #ifndef FILE_PID_FILE_SEEN
 #define FILE_PID_FILE_SEEN
+
 #include <string>
 
 namespace util {

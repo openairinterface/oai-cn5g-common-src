@@ -22,10 +22,12 @@
 #ifndef FILE_3GPP_29_510_SEEN
 #define FILE_3GPP_29_510_SEEN
 
-#include <vector>
-#include <map>
-#include <netinet/in.h>
 #include <arpa/inet.h>
+#include <netinet/in.h>
+
+#include <map>
+#include <vector>
+
 #include "3gpp_23.003.h"
 
 namespace oai::common::sbi {

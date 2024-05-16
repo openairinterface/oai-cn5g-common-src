@@ -24,9 +24,10 @@
 
 #include <stdint.h>
 
-#include "logger_base.hpp"
 #include <nlohmann/json.hpp>
 #include <string>
+
+#include "logger_base.hpp"
 
 const uint32_t SD_NO_VALUE               = 0xFFFFFF;
 const uint8_t SST_MAX_STANDARDIZED_VALUE = 127;

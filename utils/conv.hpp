@@ -19,13 +19,6 @@
  *      contact@openairinterface.org
  */
 
-/*! \file conv.hpp
- * \brief
- \author Stefan Spettel
- \company phine.tech
- \date 2023
- \email: stefan.spettel@phine.tech
- */
 // TODO we should move conversions.hpp and conversion.h in this file and rename
 // it conversions.hpp
 

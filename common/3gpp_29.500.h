@@ -152,7 +152,7 @@ static std::string protocol_application_error_to_string(uint16_t error) {
     case protocol_application_error::NF_CONGESTION:
       return "NF_CONGESTION";
   }
-  return "UNKNOWN_PROTOCOL_APPLICATION_ERROR";
+  return {};
 }
 
 }  // namespace oai::common::sbi

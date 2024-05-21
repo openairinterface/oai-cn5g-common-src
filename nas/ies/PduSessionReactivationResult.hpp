@@ -24,6 +24,9 @@
 #include "Type4NasIe.hpp"
 
 constexpr uint8_t kPduSessionReactivationResultMinimumLength = 4;
+constexpr uint8_t kPduSessionReactivationResultContentMinimumLength =
+    kPduSessionReactivationResultMinimumLength -
+    2;  // Minimum length - 2 octets for IEI/Length
 constexpr uint8_t kPduSessionReactivationResultMaximumLength = 34;
 constexpr auto kPduSessionReactivationResultIeName =
     "PDU Session Reactivation Result";
@@ -36,13 +39,13 @@ class PduSessionReactivationResult : public Type4NasIe {
   PduSessionReactivationResult(uint16_t value);
   ~PduSessionReactivationResult();
 
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+
   static std::string GetIeName() { return kPduSessionReactivationResultIeName; }
 
   void SetValue(uint16_t value);
   uint16_t GetValue() const;
-
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len, bool is_iei);
 
  private:
   uint16_t value_;

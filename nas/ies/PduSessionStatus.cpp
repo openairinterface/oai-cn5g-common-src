@@ -31,14 +31,14 @@ using namespace oai::nas;
 //------------------------------------------------------------------------------
 PduSessionStatus::PduSessionStatus() : Type4NasIe(kIeiPduSessionStatus) {
   value_ = 0;
-  SetLengthIndicator(2);
+  SetLengthIndicator(kPduSessionStatusContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
 PduSessionStatus::PduSessionStatus(uint16_t value)
     : Type4NasIe(kIeiPduSessionStatus) {
   value_ = value;
-  SetLengthIndicator(2);
+  SetLengthIndicator(kPduSessionStatusContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -55,12 +55,12 @@ uint16_t PduSessionStatus::GetValue() const {
 }
 
 //------------------------------------------------------------------------------
-int PduSessionStatus::Encode(uint8_t* buf, int len) {
+int PduSessionStatus::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
   int encoded_size = 0;
-  // IEI and Length
+  // Validate the buffer's length and Encode IEI/Length
   int encoded_header_size = Type4NasIe::Encode(buf + encoded_size, len);
   if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   encoded_size += encoded_header_size;
@@ -74,7 +74,7 @@ int PduSessionStatus::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int PduSessionStatus::Decode(uint8_t* buf, int len, bool is_iei) {
+int PduSessionStatus::Decode(const uint8_t* const buf, int len, bool is_iei) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding %s", GetIeName().c_str());
 

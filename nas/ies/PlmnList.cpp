@@ -30,12 +30,12 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 PlmnList::PlmnList(uint8_t iei) : Type4NasIe(iei) {
-  SetLengthIndicator(0);
+  SetLengthIndicator(kPlmnListContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
 PlmnList::PlmnList() : Type4NasIe() {
-  SetLengthIndicator(0);
+  SetLengthIndicator(kPlmnListContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -52,7 +52,9 @@ void PlmnList::Set(uint8_t iei, const std::vector<nas_plmn_t>& list) {
             3;  // 3 - size of each PLMN
                 // size of the first PLMN is included in kPlmnListMinimumLength
 
-  SetLengthIndicator(length);
+  SetLengthIndicator(
+      (length > kPlmnListContentMinimumLength) ? length :
+                                                 kPlmnListContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -61,20 +63,12 @@ void PlmnList::Get(std::vector<nas_plmn_t>& list) const {
 }
 
 //------------------------------------------------------------------------------
-int PlmnList::Encode(uint8_t* buf, int len) {
+int PlmnList::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
-  int ie_len = GetIeLength();
-
-  if (len < ie_len) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Len is less than %d", ie_len);
-    return KEncodeDecodeError;
-  }
-
   int encoded_size = 0;
-  // IEI and Length
+  // Validate the buffer's length and Encode IEI/Length
   int encoded_header_size = Type4NasIe::Encode(buf + encoded_size, len);
   if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   encoded_size += encoded_header_size;
@@ -89,7 +83,7 @@ int PlmnList::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int PlmnList::Decode(uint8_t* buf, int len, bool is_iei) {
+int PlmnList::Decode(const uint8_t* const buf, int len, bool is_iei) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding %s", GetIeName().c_str());
 

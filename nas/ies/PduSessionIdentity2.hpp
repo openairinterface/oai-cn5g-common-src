@@ -36,10 +36,11 @@ class PduSessionIdentity2 : public Type3NasIe {
   PduSessionIdentity2(uint8_t iei, uint8_t value);
   ~PduSessionIdentity2();
 
-  static std::string GetIeName() { return kPduSessionIdentity2IeName; }
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
 
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len, bool is_option);
+  static std::string GetIeName() { return kPduSessionIdentity2IeName; }
+  uint32_t GetIeLength() const override;
 
   void SetValue(uint8_t value);
   uint8_t GetValue() const;

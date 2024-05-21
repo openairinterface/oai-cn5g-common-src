@@ -25,6 +25,9 @@
 #include "Type4NasIe.hpp"
 
 constexpr uint8_t kPduSessionStatusMinimumLength = 4;
+constexpr uint8_t kPduSessionStatusContentMinimumLength =
+    kPduSessionStatusMinimumLength -
+    2;  // Minimum length - 2 octets for IEI/Length
 constexpr uint8_t kPduSessionStatusMaximumLength = 34;
 constexpr auto kPduSessionStatusIeName           = "PDU Session Status";
 
@@ -36,13 +39,13 @@ class PduSessionStatus : public Type4NasIe {
   PduSessionStatus(uint16_t value);
   ~PduSessionStatus();
 
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+
   static std::string GetIeName() { return kPduSessionStatusIeName; }
 
   void SetValue(uint16_t value);
   uint16_t GetValue() const;
-
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len, bool is_iei);
 
  private:
   uint16_t value_;

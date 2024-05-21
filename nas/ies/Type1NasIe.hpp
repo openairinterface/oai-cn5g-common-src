@@ -36,20 +36,17 @@ class Type1NasIe : public NasIe {
   Type1NasIe(uint8_t iei);
   virtual ~Type1NasIe();
 
-  bool Validate(const int& len) const override;
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = true) override;
+  int Decode(const uint8_t* const buf, int len, bool high_pos, bool is_iei);
 
-  // void SetIei(uint8_t iei);
+  uint32_t GetIeLength() const override;
+  bool Validate(int len) const override;
+
   void Set(bool high_pos, uint8_t value);
   void Set(bool high_pos);
 
   void SetValue(uint8_t value);
-
-  int Encode(uint8_t* buf, const int& len) override;
-  int Decode(
-      const uint8_t* const buf, const int& len, bool is_iei = true) override;
-  int Decode(
-      const uint8_t* const buf, const int& len, const bool& high_pos,
-      bool is_iei);
 
  protected:
   virtual void SetValue() = 0;

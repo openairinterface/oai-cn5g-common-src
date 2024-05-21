@@ -19,39 +19,36 @@
  *      contact@openairinterface.org
  */
 
-#ifndef _UE_STATUS_H_
-#define _UE_STATUS_H_
+#ifndef _NAS_5GMM_MESSAGE_H_
+#define _NAS_5GMM_MESSAGE_H_
 
-#include "Type4NasIe.hpp"
-
-constexpr uint8_t kUeStatusIeLength = 3;
-constexpr uint8_t kUeStatusIeContentLength =
-    kUeStatusIeLength - 2;  // Minimum length - 2 octets for IEI/Length
-constexpr auto kUeStatusIeName = "UE Status";
+#include "3gpp_24.501.hpp"
 
 namespace oai::nas {
 
-class UeStatus : public Type4NasIe {
+class Nas5gmmMessage {
  public:
-  UeStatus();
-  UeStatus(bool n1, bool s1);
-  ~UeStatus();
+  Nas5gmmMessage(){};
+  virtual ~Nas5gmmMessage() {}
 
-  int Encode(uint8_t* buf, int len) const override;
-  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+  // May not be the actual length of the message (by rounding 1/2 octet to 1
+  // octet in some IEs) but always greater than the actual length of the message
+  virtual uint32_t GetLength() const = 0;
+  virtual bool Validate(uint32_t len) const;
 
-  static std::string GetIeName() { return kUeStatusIeName; }
+  virtual int Encode(uint8_t* buf, int len) = 0;
+  virtual int Decode(uint8_t* buf, int len) = 0;
 
-  void SetN1(bool value);
-  bool GetN1() const;
+  void SetHeader(uint8_t security_header_type);
 
-  void SetS1(bool value);
-  bool GetS1() const;
+  void SetMessageName(const std::string& name);
+  std::string GetMessageName() const;
+  void GetMessageName(std::string& name) const;
 
  private:
-  bool n1_;
-  bool s1_;
+  std::string msg_name_;  // non 3GPP IE
 };
+
 }  // namespace oai::nas
 
 #endif

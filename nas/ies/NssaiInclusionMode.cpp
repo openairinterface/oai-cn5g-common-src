@@ -39,7 +39,7 @@ NssaiInclusionMode::NssaiInclusionMode(uint8_t value)
 NssaiInclusionMode::~NssaiInclusionMode(){};
 
 //------------------------------------------------------------------------------
-void NssaiInclusionMode::SetValue(const uint8_t value) {
+void NssaiInclusionMode::SetValue(uint8_t value) {
   SetValue(value);
 }
 

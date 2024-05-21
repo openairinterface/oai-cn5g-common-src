@@ -45,6 +45,11 @@ PduSessionIdentity2::PduSessionIdentity2() : Type3NasIe() {
 PduSessionIdentity2::~PduSessionIdentity2() {}
 
 //------------------------------------------------------------------------------
+uint32_t PduSessionIdentity2::GetIeLength() const {
+  return (kPduSessionIdentity2Length - 1 + Type3NasIe::GetIeLength());
+}
+
+//------------------------------------------------------------------------------
 void PduSessionIdentity2::SetValue(uint8_t value) {
   value_ = value;
 }
@@ -55,7 +60,7 @@ uint8_t PduSessionIdentity2::GetValue() const {
 }
 
 //------------------------------------------------------------------------------
-int PduSessionIdentity2::Encode(uint8_t* buf, int len) {
+int PduSessionIdentity2::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
@@ -80,7 +85,8 @@ int PduSessionIdentity2::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int PduSessionIdentity2::Decode(uint8_t* buf, int len, bool is_iei) {
+int PduSessionIdentity2::Decode(
+    const uint8_t* const buf, int len, bool is_iei) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding %s", GetIeName().c_str());
 

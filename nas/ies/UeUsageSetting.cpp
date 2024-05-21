@@ -31,14 +31,14 @@ using namespace oai::nas;
 //------------------------------------------------------------------------------
 UeUsageSetting::UeUsageSetting() : Type4NasIe(kIeiUeUsageSetting) {
   ues_usage_setting_ = false;
-  SetLengthIndicator(1);
+  SetLengthIndicator(kUeUsageSettingContentLength);
 }
 
 //------------------------------------------------------------------------------
 UeUsageSetting::UeUsageSetting(bool ues_usage_setting)
     : Type4NasIe(kIeiUeUsageSetting) {
   ues_usage_setting_ = ues_usage_setting;
-  SetLengthIndicator(1);
+  SetLengthIndicator(kUeUsageSettingContentLength);
 }
 
 //------------------------------------------------------------------------------
@@ -55,21 +55,12 @@ bool UeUsageSetting::GetValue() const {
 }
 
 //------------------------------------------------------------------------------
-int UeUsageSetting::Encode(uint8_t* buf, int len) {
+int UeUsageSetting::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
-  if (len < kUeUsageSettingLength) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this IE (%d "
-            "octet)",
-            kUeUsageSettingLength);
-    return KEncodeDecodeError;
-  }
-
   int encoded_size = 0;
-  // IEI and Length
+  // Validate the buffer's length and Encode IEI/Length
   int encoded_header_size = Type4NasIe::Encode(buf + encoded_size, len);
   if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   encoded_size += encoded_header_size;
@@ -82,7 +73,7 @@ int UeUsageSetting::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int UeUsageSetting::Decode(uint8_t* buf, int len, bool is_iei) {
+int UeUsageSetting::Decode(const uint8_t* const buf, int len, bool is_iei) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding %s", GetIeName().c_str());
 

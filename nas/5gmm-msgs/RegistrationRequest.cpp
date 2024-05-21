@@ -29,7 +29,9 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 RegistrationRequest::RegistrationRequest()
-    : NasMmPlainHeader(k5gsMobilityManagementMessages, kRegistrationRequest) {
+    : ie_header_(
+          k5gsMobilityManagementMessages, kPlain5gsMessage,
+          kRegistrationRequest) {
   ie_non_current_native_nas_ksi_  = std::nullopt;
   ie_5g_mm_capability_            = std::nullopt;
   ie_ue_security_capability_      = std::nullopt;
@@ -58,8 +60,62 @@ RegistrationRequest::RegistrationRequest()
 RegistrationRequest::~RegistrationRequest() {}
 
 //------------------------------------------------------------------------------
+uint32_t RegistrationRequest::GetLength() const {
+  uint32_t msg_len = 0;
+  msg_len += ie_header_.GetLength();
+  msg_len += ie_5gs_registration_type_.GetIeLength();
+  msg_len += ie_ng_ksi_.GetIeLength();
+  msg_len += ie_5gs_mobile_identity_.GetIeLength();
+  if (ie_non_current_native_nas_ksi_.has_value())
+    msg_len += ie_non_current_native_nas_ksi_.value().GetIeLength();
+  if (ie_5g_mm_capability_.has_value())
+    msg_len += ie_5g_mm_capability_.value().GetIeLength();
+  if (ie_ue_security_capability_.has_value())
+    msg_len += ie_ue_security_capability_.value().GetIeLength();
+  if (ie_requested_nssai_.has_value())
+    msg_len += ie_requested_nssai_.value().GetIeLength();
+  if (ie_last_visited_registered_tai_.has_value())
+    msg_len += ie_last_visited_registered_tai_.value().GetIeLength();
+  if (ie_s1_ue_network_capability_.has_value())
+    msg_len += ie_s1_ue_network_capability_.value().GetIeLength();
+  if (ie_uplink_data_status_.has_value())
+    msg_len += ie_uplink_data_status_.value().GetIeLength();
+  if (ie_pdu_session_status_.has_value())
+    msg_len += ie_pdu_session_status_.value().GetIeLength();
+  if (ie_mico_indication_.has_value())
+    msg_len += ie_mico_indication_.value().GetIeLength();
+  if (ie_ue_status_.has_value()) msg_len += ie_ue_status_.value().GetIeLength();
+  if (ie_additional_guti_.has_value())
+    msg_len += ie_additional_guti_.value().GetIeLength();
+  if (ie_allowed_pdu_session_status_.has_value())
+    msg_len += ie_allowed_pdu_session_status_.value().GetIeLength();
+  if (ie_ues_usage_setting_.has_value())
+    msg_len += ie_ues_usage_setting_.value().GetIeLength();
+  if (ie_5gs_drx_parameters_.has_value())
+    msg_len += ie_5gs_drx_parameters_.value().GetIeLength();
+  if (ie_eps_nas_message_container_.has_value())
+    msg_len += ie_eps_nas_message_container_.value().GetIeLength();
+  if (ie_ladn_indication_.has_value())
+    msg_len += ie_ladn_indication_.value().GetIeLength();
+  if (ie_payload_container_type_.has_value())
+    msg_len += ie_payload_container_type_.value().GetIeLength();
+  if (ie_payload_container_.has_value())
+    msg_len += ie_payload_container_.value().GetIeLength();
+  if (ie_network_slicing_indication_.has_value())
+    msg_len += ie_network_slicing_indication_.value().GetIeLength();
+  if (ie_5gs_update_type_.has_value())
+    msg_len += ie_5gs_update_type_.value().GetIeLength();
+  if (ie_nas_message_container_.has_value())
+    msg_len += ie_nas_message_container_.value().GetIeLength();
+  if (ie_eps_bearer_context_status_.has_value())
+    msg_len += ie_eps_bearer_context_status_.value().GetIeLength();
+
+  return msg_len;
+}
+
+//------------------------------------------------------------------------------
 void RegistrationRequest::SetHeader(uint8_t security_header_type) {
-  NasMmPlainHeader::SetSecurityHeaderType(security_header_type);
+  ie_header_.SetSecurityHeaderType(security_header_type);
 }
 
 //------------------------------------------------------------------------------
@@ -568,8 +624,7 @@ int RegistrationRequest::Encode(uint8_t* buf, int len) {
   int encoded_ie_size = 0;
 
   // Header
-  if ((encoded_ie_size = NasMmPlainHeader::Encode(buf, len)) ==
-      KEncodeDecodeError) {
+  if ((encoded_ie_size = ie_header_.Encode(buf, len)) == KEncodeDecodeError) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error("Encoding NAS Header error");
     return KEncodeDecodeError;
@@ -775,7 +830,7 @@ int RegistrationRequest::Decode(uint8_t* buf, int len) {
   int decoded_ie_size = 0;
 
   // Header
-  decoded_ie_size = NasMmPlainHeader::Decode(buf, len);
+  decoded_ie_size = ie_header_.Decode(buf, len);
   if (decoded_ie_size == KEncodeDecodeError) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error("Decoding NAS Header error");

@@ -24,8 +24,10 @@
 
 #include "Type4NasIe.hpp"
 
-constexpr uint8_t k5gsRegistrationResultLength        = 3;
-constexpr uint8_t k5gsRegistrationResultContentLength = 1;
+constexpr uint8_t k5gsRegistrationResultLength = 3;
+constexpr uint8_t k5gsRegistrationResultContentLength =
+    k5gsRegistrationResultLength -
+    2;  // Minimum length - 2 bytes for IEI/Length
 constexpr auto k5gsRegistrationResultIeName = "5GS Registration Result";
 
 namespace oai::nas {
@@ -39,10 +41,10 @@ class _5gsRegistrationResult : public Type4NasIe {
       uint8_t iei, bool emergency, bool nssaa, bool sms, uint8_t value);
   ~_5gsRegistrationResult();
 
-  static std::string GetIeName() { return k5gsRegistrationResultIeName; }
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
 
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len, bool is_iei);
+  static std::string GetIeName() { return k5gsRegistrationResultIeName; }
 
   void SetValue(uint8_t value);
   uint8_t GetValue() const;

@@ -29,12 +29,12 @@ using namespace oai::nas;
 //------------------------------------------------------------------------------
 AuthenticationParameterAutn::AuthenticationParameterAutn(uint8_t iei)
     : Type4NasIe(iei), value_() {
-  SetLengthIndicator(0);
+  SetLengthIndicator(kAuthenticationParameterAutnValueLength);
 }
 
 //------------------------------------------------------------------------------
 AuthenticationParameterAutn::AuthenticationParameterAutn(
-    const uint8_t iei, uint8_t value[kAuthenticationParameterAutnValueLength])
+    uint8_t iei, uint8_t value[kAuthenticationParameterAutnValueLength])
     : Type4NasIe(iei) {
   for (int i = 0; i < kAuthenticationParameterAutnValueLength; i++) {
     this->value_[i] = value[i];
@@ -45,26 +45,19 @@ AuthenticationParameterAutn::AuthenticationParameterAutn(
 //------------------------------------------------------------------------------
 AuthenticationParameterAutn::AuthenticationParameterAutn()
     : Type4NasIe(), value_() {
-  SetLengthIndicator(0);
+  SetLengthIndicator(kAuthenticationParameterAutnValueLength);
 }
 
 //------------------------------------------------------------------------------
 AuthenticationParameterAutn::~AuthenticationParameterAutn() {}
 
 //------------------------------------------------------------------------------
-int AuthenticationParameterAutn::Encode(uint8_t* buf, int len) {
+int AuthenticationParameterAutn::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
-  int ie_len = GetIeLength();
-
-  if (len < ie_len) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Len is less than %d", ie_len);
-    return KEncodeDecodeError;
-  }
 
   int encoded_size = 0;
-  // IEI and Length
+  // Validate the buffer's length and Encode IEI/Length
   int encoded_header_size = Type4NasIe::Encode(buf + encoded_size, len);
   if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   encoded_size += encoded_header_size;
@@ -82,7 +75,8 @@ int AuthenticationParameterAutn::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int AuthenticationParameterAutn::Decode(uint8_t* buf, int len, bool is_iei) {
+int AuthenticationParameterAutn::Decode(
+    const uint8_t* const buf, int len, bool is_iei) {
   uint8_t decoded_size = 0;
   uint8_t octet        = 0;
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)

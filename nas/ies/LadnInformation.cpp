@@ -30,7 +30,7 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 LadnInformation::LadnInformation() : Type6NasIe(kIeiLadnInformation) {
-  SetLengthIndicator(0);
+  SetLengthIndicator(kLadnInformationContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -39,18 +39,30 @@ LadnInformation::~LadnInformation() {}
 //------------------------------------------------------------------------------
 void LadnInformation::Set(const std::vector<Ladn>& value) {
   ladn_list_.assign(value.begin(), value.end());
+
+  int length   = 0;
+  uint8_t size = (value.size() > kLadnInformationMaximumSupportedLadns) ?
+                     kLadnInformationMaximumSupportedLadns :
+                     value.size();
+  for (int i = 0; i < size; i++) {
+    ladn_list_.push_back(value.at(i));
+    length += value.at(i).GetLength();
+  }
+  SetLengthIndicator(length);
 }
 
 //------------------------------------------------------------------------------
 void LadnInformation::Add(const Ladn& value) {
-  // TODO: Check maximum items  - 8
-  ladn_list_.push_back(value);
-  int ie_len = GetIeLength();
-  ie_len += value.GetLength();
+  if (ladn_list_.size() < kLadnInformationMaximumSupportedLadns) {
+    int ie_len = GetIeLength();
+    ladn_list_.push_back(value);
+    ie_len += value.GetLength();
+    SetLengthIndicator(ie_len);
+  }
 }
 
 //------------------------------------------------------------------------------
-int LadnInformation::Encode(uint8_t* buf, int len) {
+int LadnInformation::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
@@ -89,7 +101,7 @@ int LadnInformation::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int LadnInformation::Decode(uint8_t* buf, int len, bool is_iei) {
+int LadnInformation::Decode(const uint8_t* const buf, int len, bool is_iei) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding EPS_NAS_Message_Container");
   int decoded_size = 0;

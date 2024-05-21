@@ -28,8 +28,6 @@
 
 namespace util {
 
-std::string string_format(const char* format, ...);
-
 std::string& ltrim(std::string& s);
 // trim from end
 std::string& rtrim(std::string& s);

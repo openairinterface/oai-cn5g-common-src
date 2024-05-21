@@ -41,6 +41,11 @@ EpsNasSecurityAlgorithms::EpsNasSecurityAlgorithms(
 EpsNasSecurityAlgorithms::~EpsNasSecurityAlgorithms() {}
 
 //------------------------------------------------------------------------------
+uint32_t EpsNasSecurityAlgorithms::GetIeLength() const {
+  return (kEpsNasSecurityAlgorithmsLength - 1 + Type3NasIe::GetIeLength());
+}
+
+//------------------------------------------------------------------------------
 void EpsNasSecurityAlgorithms::SetTypeOfCipheringAlgorithm(uint8_t value) {
   type_of_ciphering_algorithm_ = value & 0x07;
 }
@@ -68,6 +73,7 @@ void EpsNasSecurityAlgorithms::Set(
   type_of_ciphering_algorithm_            = ciphering & 0x0f;
   type_of_integrity_protection_algorithm_ = integrity_protection & 0x0f;
 }
+
 //------------------------------------------------------------------------------
 void EpsNasSecurityAlgorithms::Get(
     uint8_t& ciphering, uint8_t& integrity_protection) const {
@@ -76,7 +82,7 @@ void EpsNasSecurityAlgorithms::Get(
 }
 
 //------------------------------------------------------------------------------
-int EpsNasSecurityAlgorithms::Encode(uint8_t* buf, int len) {
+int EpsNasSecurityAlgorithms::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
@@ -105,7 +111,8 @@ int EpsNasSecurityAlgorithms::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int EpsNasSecurityAlgorithms::Decode(uint8_t* buf, int len, bool is_iei) {
+int EpsNasSecurityAlgorithms::Decode(
+    const uint8_t* const buf, int len, bool is_iei) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding %s", GetIeName().c_str());
 

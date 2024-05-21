@@ -27,24 +27,28 @@
 #include "Type6NasIe.hpp"
 #include "_5gsTrackingAreaIdList.hpp"
 
-constexpr uint8_t kLadnInformationMinimumLength  = 3;
-constexpr uint16_t kLadnInformationMaximumLength = 1715;
-constexpr auto kLadnInformationIeName            = "LADN Information";
+constexpr uint8_t kLadnInformationMinimumLength = 3;
+constexpr uint8_t kLadnInformationContentMinimumLength =
+    kLadnInformationMinimumLength -
+    3;  // Minimum length - 3 octets for IEI/Length
+constexpr uint16_t kLadnInformationMaximumLength        = 1715;
+constexpr uint8_t kLadnInformationMaximumSupportedLadns = 8;
+constexpr auto kLadnInformationIeName                   = "LADN Information";
 
 namespace oai::nas {
 
-class LadnInformation : Type6NasIe {
+class LadnInformation : public Type6NasIe {
  public:
   LadnInformation();
   ~LadnInformation();
+
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
 
   static std::string GetIeName() { return kLadnInformationIeName; }
 
   void Set(const std::vector<Ladn>& value);
   void Add(const Ladn& value);
-
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len, bool is_option);
 
  private:
   std::vector<Ladn> ladn_list_;

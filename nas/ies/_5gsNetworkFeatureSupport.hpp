@@ -25,6 +25,9 @@
 #include "Type4NasIe.hpp"
 
 constexpr uint8_t k5gsNetworkFeatureSupportMinimumLength = 3;
+constexpr uint8_t k5gsNetworkFeatureSupportContentMinimumLength =
+    k5gsNetworkFeatureSupportMinimumLength -
+    2;  // Minimum length - 2 octets for IEI/Length
 constexpr uint8_t k5gsNetworkFeatureSupportMaximumLength = 5;
 constexpr auto k5gsNetworkFeatureSupportIeName = "5GS Network Feature Support";
 
@@ -37,13 +40,13 @@ class _5gsNetworkFeatureSupport : public Type4NasIe {
   _5gsNetworkFeatureSupport(uint8_t value, uint8_t value2);
   ~_5gsNetworkFeatureSupport();
 
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+
   static std::string GetIeName() { return k5gsNetworkFeatureSupportIeName; }
 
   void SetValue(uint8_t value, uint8_t value2);
   // uint8_t GetValue() const;
-
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len, bool is_option);
 
  private:
   uint8_t value_;

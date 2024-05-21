@@ -34,13 +34,14 @@ class _5gsTrackingAreaIdentity : public Type3NasIe {
   _5gsTrackingAreaIdentity();
   _5gsTrackingAreaIdentity(uint8_t iei) = delete;
   _5gsTrackingAreaIdentity(
-      const std::string& mcc, const std::string& mnc, const uint32_t& tac);
+      const std::string& mcc, const std::string& mnc, uint32_t tac);
   ~_5gsTrackingAreaIdentity();
 
-  static std::string GetIeName() { return k5gsTrackingAreaIdentityIeName; }
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = true);
 
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len, bool is_iei = true);
+  static std::string GetIeName() { return k5gsTrackingAreaIdentityIeName; }
+  uint32_t GetIeLength() const override;
 
   void SetTac(uint32_t value);
   uint32_t GetTac() const;

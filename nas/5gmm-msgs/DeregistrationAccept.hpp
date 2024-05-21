@@ -26,17 +26,20 @@
 
 namespace oai::nas {
 
-class DeregistrationAccept : public NasMmPlainHeader {
+class DeregistrationAccept : public Nas5gmmMessage {
  public:
   DeregistrationAccept(bool is_ue_originating = true);
   ~DeregistrationAccept();
 
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len);
+  int Encode(uint8_t* buf, int len) override;
+  int Decode(uint8_t* buf, int len) override;
+
+  uint32_t GetLength() const override;
 
   void SetHeader(uint8_t security_header_type);
 
  private:
+  NasMmPlainHeader ie_header_;  // Mandatory
 };
 
 }  // namespace oai::nas

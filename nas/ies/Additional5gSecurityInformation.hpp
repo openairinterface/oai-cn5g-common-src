@@ -25,6 +25,9 @@
 #include "Type4NasIe.hpp"
 
 constexpr uint8_t kAdditional5gSecurityInformationLength = 3;
+constexpr uint8_t kAdditional5gSecurityInformationContentLength =
+    kAdditional5gSecurityInformationLength -
+    2;  // Minimum length - 2 octets for IEI/Length
 constexpr auto kAdditional5gSecurityInformationIeName =
     "Additional 5G Security Information";
 
@@ -36,12 +39,12 @@ class Additional5gSecurityInformation : public Type4NasIe {
   Additional5gSecurityInformation(bool RINMR, bool HDP);
   ~Additional5gSecurityInformation();
 
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+
   static std::string GetIeName() {
     return kAdditional5gSecurityInformationIeName;
   }
-
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len, bool is_iei);
 
   void SetRinmr(bool value);
   bool GetRinmr() const;

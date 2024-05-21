@@ -46,15 +46,13 @@ AuthenticationParameterRand::AuthenticationParameterRand(
 //------------------------------------------------------------------------------
 AuthenticationParameterRand::~AuthenticationParameterRand() {}
 
-/*
 //------------------------------------------------------------------------------
-uint8_t* AuthenticationParameterRand::GetValue() {
-  return value_;
+uint32_t AuthenticationParameterRand::GetIeLength() const {
+  return (kAuthenticationParameterRandLength - 1 + Type3NasIe::GetIeLength());
 }
-*/
 
 //------------------------------------------------------------------------------
-int AuthenticationParameterRand::Encode(uint8_t* buf, int len) {
+int AuthenticationParameterRand::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
@@ -81,7 +79,8 @@ int AuthenticationParameterRand::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int AuthenticationParameterRand::Decode(uint8_t* buf, int len, bool is_iei) {
+int AuthenticationParameterRand::Decode(
+    const uint8_t* const buf, int len, bool is_iei) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding %s", GetIeName().c_str());
 

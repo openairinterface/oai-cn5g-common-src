@@ -25,7 +25,9 @@
 #include "Type4NasIe.hpp"
 
 constexpr uint8_t k5gsUpdateTypeLength = 3;
-constexpr auto k5gsUpdateTypeIeName    = "5GS Update Type";
+constexpr uint8_t k5gsUpdateTypeContentLength =
+    k5gsUpdateTypeLength - 2;  // Minimum length - 2 octets for IEI/Length
+constexpr auto k5gsUpdateTypeIeName = "5GS Update Type";
 
 namespace oai::nas {
 
@@ -35,6 +37,9 @@ class _5gsUpdateType : public Type4NasIe {
   _5gsUpdateType(
       uint8_t eps_PNB_CIoT, uint8_t _5gs_PNB_CIoT, bool ng_RAN, bool sms);
   ~_5gsUpdateType();
+
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
 
   static std::string GetIeName() { return k5gsUpdateTypeIeName; }
 
@@ -49,9 +54,6 @@ class _5gsUpdateType : public Type4NasIe {
 
   void SetSms(uint8_t value);
   bool GetSms() const;
-
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len, bool is_option);
 
  private:
   uint8_t eps_pnb_ciot_;   // bit 4,5

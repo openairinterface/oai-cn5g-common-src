@@ -71,12 +71,12 @@ bool UpTransportLayerInformation::encode(
       (Ngap_GTPTunnel_t*) calloc(1, sizeof(Ngap_GTPTunnel_t));
   if (!gtpTunnel) return false;
   if (!m_TransportLayerAddress.encode(gtpTunnel->transportLayerAddress)) {
-    utils::free_wrapper((void**) &gtpTunnel);
+    oai::utils::utils::free_wrapper((void**) &gtpTunnel);
     return false;
   }
 
   if (!m_GtpTeid.encode(gtpTunnel->gTP_TEID)) {
-    utils::free_wrapper((void**) &gtpTunnel);
+    oai::utils::utils::free_wrapper((void**) &gtpTunnel);
     return false;
   }
   upTransportLayerInfo.choice.gTPTunnel = gtpTunnel;

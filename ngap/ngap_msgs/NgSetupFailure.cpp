@@ -54,7 +54,7 @@ void NgSetupFailureMsg::addCauseIe() {
 
   if (!m_Cause.encode(ie->value.choice.Cause)) {
     Logger::ngap().error("Encode NGAP Cause IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -74,7 +74,7 @@ void NgSetupFailureMsg::addTimeToWaitIE() {
 
   if (!m_TimeToWait.value().encode(ie->value.choice.TimeToWait)) {
     Logger::ngap().error("Encode NGAP Cause IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 

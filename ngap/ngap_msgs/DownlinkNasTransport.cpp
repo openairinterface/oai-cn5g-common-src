@@ -61,7 +61,7 @@ void DownLinkNasTransportMsg::setAmfUeNgapId(const uint64_t& id) {
       NgapUeMessage::m_AmfUeNgapId.encode(ie->value.choice.AMF_UE_NGAP_ID);
   if (!ret) {
     Logger::ngap().error("Encode AMF_UE_NGAP_ID IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -84,7 +84,7 @@ void DownLinkNasTransportMsg::setRanUeNgapId(const uint32_t& ranUeNgapId) {
       NgapUeMessage::m_RanUeNgapId.encode(ie->value.choice.RAN_UE_NGAP_ID);
   if (!ret) {
     Logger::ngap().error("Encode RAN_UE_NGAP_ID IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -108,7 +108,7 @@ void DownLinkNasTransportMsg::setOldAmf(const std::string& name) {
   int ret = m_OldAmf.value().encode(ie->value.choice.AMFName);
   if (!ret) {
     Logger::ngap().error("Encode oldAmfName IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -141,7 +141,7 @@ bool DownLinkNasTransportMsg::setRanPagingPriority(
       m_RanPagingPriority.value().encode(ie->value.choice.RANPagingPriority);
   if (!ret) {
     Logger::ngap().error("Encode RANPagingPriority IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return false;
   }
 
@@ -175,7 +175,7 @@ void DownLinkNasTransportMsg::setNasPdu(const bstring& pdu) {
   int ret = m_NasPdu.encode(ie->value.choice.NAS_PDU);
   if (!ret) {
     Logger::ngap().error("Encode NAS_PDU IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -206,7 +206,7 @@ void DownLinkNasTransportMsg::setMobilityRestrictionList(
       ie->value.choice.MobilityRestrictionList);
   if (!ret) {
     Logger::ngap().error("Encode MobilityRestrictionList IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -242,7 +242,7 @@ void DownLinkNasTransportMsg::setUeAggregateMaxBitRate(
       ie->value.choice.UEAggregateMaximumBitRate);
   if (!ret) {
     Logger::ngap().error("Encode UEAggregateMaximumBitRate IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -276,7 +276,7 @@ void DownLinkNasTransportMsg::setIndex2RatFrequencySelectionPriority(
   int ret = m_IndexToRfsp.value().encode(ie->value.choice.IndexToRFSP);
   if (!ret) {
     Logger::ngap().error("Encode IndexToRFSP IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -308,7 +308,7 @@ void DownLinkNasTransportMsg::setAllowedNssai(
   int ret = m_AllowedNssai.value().encode(ie->value.choice.AllowedNSSAI);
   if (!ret) {
     Logger::ngap().error("Encode AllowedNSSAI IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 

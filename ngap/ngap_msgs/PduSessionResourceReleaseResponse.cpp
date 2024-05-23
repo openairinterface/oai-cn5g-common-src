@@ -63,7 +63,7 @@ void PduSessionResourceReleaseResponseMsg::setAmfUeNgapId(const uint64_t& id) {
       NgapUeMessage::m_AmfUeNgapId.encode(ie->value.choice.AMF_UE_NGAP_ID);
   if (!ret) {
     Logger::nas_mm().warn("Encode AMF_UE_NGAP_ID IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -89,7 +89,7 @@ void PduSessionResourceReleaseResponseMsg::setRanUeNgapId(
       NgapUeMessage::m_RanUeNgapId.encode(ie->value.choice.RAN_UE_NGAP_ID);
   if (!ret) {
     Logger::nas_mm().warn("Encode RAN_UE_NGAP_ID IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -128,7 +128,7 @@ void PduSessionResourceReleaseResponseMsg::setPduSessionResourceReleasedList(
   if (!ret) {
     Logger::nas_mm().warn(
         "Encode PDUSessionResourceReleasedListRelRes IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -184,7 +184,7 @@ void PduSessionResourceReleaseResponseMsg::setUserLocationInfoNr(
       ie->value.choice.UserLocationInformation);
   if (!ret) {
     Logger::nas_mm().warn("Encode UserLocationInformation IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -192,7 +192,7 @@ void PduSessionResourceReleaseResponseMsg::setUserLocationInfoNr(
       &m_PduSessionResourceReleaseResponseIes->protocolIEs.list, ie);
   if (ret != 0)
     Logger::nas_mm().warn("Encode UserLocationInformation IE error");
-  // utils::free_wrapper((void**) &ie);
+  // oai::utils::utils::free_wrapper((void**) &ie);
 }
 
 //------------------------------------------------------------------------------

@@ -59,7 +59,7 @@ void UEContextReleaseCompleteMsg::setAmfUeNgapId(const uint64_t& id) {
       NgapUeMessage::m_AmfUeNgapId.encode(ie->value.choice.AMF_UE_NGAP_ID);
   if (!ret) {
     Logger::ngap().error("Encode NGAP AMF_UE_NGAP_ID IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
   ret = ASN_SEQUENCE_ADD(&m_UEContextReleaseCompleteIes->protocolIEs.list, ie);
@@ -80,7 +80,7 @@ void UEContextReleaseCompleteMsg::setRanUeNgapId(const uint32_t& ranUeNgapId) {
       NgapUeMessage::m_RanUeNgapId.encode(ie->value.choice.RAN_UE_NGAP_ID);
   if (!ret) {
     Logger::ngap().error("Encode NGAP RAN_UE_NGAP_ID IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
   ret = ASN_SEQUENCE_ADD(&m_UEContextReleaseCompleteIes->protocolIEs.list, ie);
@@ -114,7 +114,7 @@ void UEContextReleaseCompleteMsg::setUserLocationInfoNr(
       ie->value.choice.UserLocationInformation);
   if (!ret) {
     Logger::ngap().error("Encode NGAP UserLocationInformation IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -187,7 +187,7 @@ void UEContextReleaseCompleteMsg::setPduSessionResourceCxtRelCplList(
   if (!ret) {
     Logger::ngap().error(
         "Encode NGAP PDUSessionResourceReleasedListRelRes IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 

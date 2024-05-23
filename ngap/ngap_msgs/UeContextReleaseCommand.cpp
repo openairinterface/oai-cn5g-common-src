@@ -62,7 +62,7 @@ void UeContextReleaseCommandMsg::setAmfUeNgapId(const uint64_t& id) {
   if (!ret) {
     Logger::ngap().error("Encode NGAP AMF_UE_NGAP_ID IE error");
 
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
   ret = ASN_SEQUENCE_ADD(&m_UEContextReleaseCommandIes->protocolIEs.list, ie);
@@ -98,14 +98,14 @@ void UeContextReleaseCommandMsg::setUeNgapIdPair(
       ie->value.choice.UE_NGAP_IDs.choice.uE_NGAP_ID_pair->aMF_UE_NGAP_ID);
   if (!ret) {
     Logger::ngap().error("Encode NGAP AMF_UE_NGAP_ID IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
   ret = m_RanUeNgapId.value().encode(
       ie->value.choice.UE_NGAP_IDs.choice.uE_NGAP_ID_pair->rAN_UE_NGAP_ID);
   if (!ret) {
     Logger::ngap().error("Encode NGAP RAN_UE_NGAP_ID IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
   ret = ASN_SEQUENCE_ADD(&m_UEContextReleaseCommandIes->protocolIEs.list, ie);

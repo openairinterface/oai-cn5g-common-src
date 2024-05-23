@@ -48,7 +48,7 @@ bool UeAssociatedLogicalNgConnectionItem::setAmfUeNgapId(const uint64_t& id) {
   if (!ret) {
     Logger::ngap().error("Encode AMF_UE_NGAP_ID IE error");
   }
-  utils::free_wrapper((void**) &ie);
+  oai::utils::utils::free_wrapper((void**) &ie);
   return true;
 }
 
@@ -77,7 +77,7 @@ void UeAssociatedLogicalNgConnectionItem::setRanUeNgapId(
   if (!ret) {
     Logger::ngap().error("Encode RAN_UE_NGAP_ID IE error");
   }
-  utils::free_wrapper((void**) &ie);
+  oai::utils::utils::free_wrapper((void**) &ie);
   return;
 }
 

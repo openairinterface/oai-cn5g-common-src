@@ -62,7 +62,7 @@ void InitialContextSetupResponseMsg::setAmfUeNgapId(const uint64_t& id) {
       NgapUeMessage::m_AmfUeNgapId.encode(ie->value.choice.AMF_UE_NGAP_ID);
   if (!ret) {
     Logger::ngap().error("Encode AMF_UE_NGAP_ID IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -88,7 +88,7 @@ void InitialContextSetupResponseMsg::setRanUeNgapId(
       NgapUeMessage::m_RanUeNgapId.encode(ie->value.choice.RAN_UE_NGAP_ID);
   if (!ret) {
     Logger::ngap().error("Encode RAN_UE_NGAP_ID IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -128,7 +128,7 @@ void InitialContextSetupResponseMsg::setPduSessionResourceSetupResponseList(
       ie->value.choice.PDUSessionResourceSetupListCxtRes);
   if (!ret) {
     Logger::ngap().error("Encode PDUSessionResourceSetupListCxtRes IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -172,7 +172,7 @@ void InitialContextSetupResponseMsg::setPduSessionResourceFailedToSetupList(
   if (!ret) {
     Logger::ngap().error(
         "Encode PDUSessionResourceFailedToSetupListCxtRes IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 

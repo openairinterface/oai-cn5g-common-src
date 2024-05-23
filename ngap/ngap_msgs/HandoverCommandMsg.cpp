@@ -68,7 +68,7 @@ void HandoverCommandMsg::setAmfUeNgapId(const uint64_t& id) {
       NgapUeMessage::m_AmfUeNgapId.encode(ie->value.choice.AMF_UE_NGAP_ID);
   if (!ret) {
     Logger::ngap().error("Encode AMF_UE_NGAP_ID IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -90,7 +90,7 @@ void HandoverCommandMsg::setRanUeNgapId(const uint32_t& ranUeNgapId) {
       NgapUeMessage::m_RanUeNgapId.encode(ie->value.choice.RAN_UE_NGAP_ID);
   if (!ret) {
     Logger::ngap().error("Encode RAN_UE_NGAP_ID IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -129,7 +129,7 @@ void HandoverCommandMsg::setNasSecurityParametersFromNgRan(
   if (!amf_conv::octet_string_copy(
           ie->value.choice.NASSecurityParametersFromNGRAN,
           m_NasSecurityParametersFromNgRan.value())) {
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -163,7 +163,7 @@ void HandoverCommandMsg::setPduSessionResourceHandoverList(
   if (!m_PduSessionResourceHandoverList.value().encode(
           ie->value.choice.PDUSessionResourceHandoverList)) {
     Logger::ngap().error("Encode PDUSessionResourceHandoverListItem IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -200,7 +200,7 @@ void HandoverCommandMsg::setPduSessionResourceToReleaseListHOCmd(
           ie->value.choice.PDUSessionResourceToReleaseListHOCmd)) {
     Logger::ngap().error(
         "Encode PDUSessionResourceToReleaseListHOCmd IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 

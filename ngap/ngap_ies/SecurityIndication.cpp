@@ -93,12 +93,12 @@ bool SecurityIndication::encode(
             1, sizeof(Ngap_MaximumIntegrityProtectedDataRate_t));
     if (!maxIPDataRate) return false;
     if (!m_MaximumIntegrityProtectedDataRateUl.value().encode(*maxIPDataRate)) {
-      utils::free_wrapper((void**) &maxIPDataRate);
+      oai::utils::utils::free_wrapper((void**) &maxIPDataRate);
       return false;
     }
 
     securityIndication.maximumIntegrityProtectedDataRate_UL = maxIPDataRate;
-    // utils::free_wrapper((void**) &maxIPDataRate);
+    // oai::utils::utils::free_wrapper((void**) &maxIPDataRate);
   }
   // TODO: check maximumIntegrityProtectedDataRateDl
 

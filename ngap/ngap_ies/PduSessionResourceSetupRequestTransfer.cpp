@@ -63,7 +63,7 @@ void PduSessionResourceSetupRequestTransferIE::
       ie->value.choice.PDUSessionAggregateMaximumBitRate);
   if (!ret) {
     Logger::ngap().error("Encode PDUSessionAggregateMaximumBitRate IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -71,7 +71,7 @@ void PduSessionResourceSetupRequestTransferIE::
       &m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list, ie);
   if (ret != 0)
     Logger::ngap().error("Encode PDUSessionAggregateMaximumBitRate IE error");
-  // utils::free_wrapper((void**) &ie);
+  // oai::utils::utils::free_wrapper((void**) &ie);
 }
 
 //------------------------------------------------------------------------------
@@ -95,7 +95,7 @@ void PduSessionResourceSetupRequestTransferIE::setUlNgUUpTnlInformation(
       ie->value.choice.UPTransportLayerInformation);
   if (!ret) {
     Logger::ngap().error("Encode UPTransportLayerInformation IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -103,7 +103,7 @@ void PduSessionResourceSetupRequestTransferIE::setUlNgUUpTnlInformation(
       &m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list, ie);
   if (ret != 0)
     Logger::ngap().error("Encode UPTransportLayerInformation IE error");
-  // utils::free_wrapper((void**) &ie);
+  // oai::utils::utils::free_wrapper((void**) &ie);
 }
 
 //------------------------------------------------------------------------------
@@ -124,7 +124,7 @@ void PduSessionResourceSetupRequestTransferIE::setDataForwardingNotPossible() {
 
   if (!ret) {
     Logger::ngap().error("Encode DataForwardingNotPossible IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -132,7 +132,7 @@ void PduSessionResourceSetupRequestTransferIE::setDataForwardingNotPossible() {
       &m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list, ie);
   if (ret != 0)
     Logger::ngap().error("Encode DataForwardingNotPossible IE error");
-  // utils::free_wrapper((void**) &ie);
+  // oai::utils::utils::free_wrapper((void**) &ie);
 }
 
 //------------------------------------------------------------------------------
@@ -151,14 +151,14 @@ void PduSessionResourceSetupRequestTransferIE::setPduSessionType(
   int ret = m_PduSessionType.encode(ie->value.choice.PDUSessionType);
   if (!ret) {
     Logger::ngap().error("Encode PDUSessionType IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
   ret = ASN_SEQUENCE_ADD(
       &m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list, ie);
   if (ret != 0) Logger::ngap().error("Encode PDUSessionType IE error");
-  // utils::free_wrapper((void**) &ie);
+  // oai::utils::utils::free_wrapper((void**) &ie);
 }
 
 //------------------------------------------------------------------------------
@@ -193,14 +193,14 @@ void PduSessionResourceSetupRequestTransferIE::setSecurityIndication(
       m_SecurityIndication.value().encode(ie->value.choice.SecurityIndication);
   if (!ret) {
     Logger::ngap().error("Encode SecurityIndication IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
   ret = ASN_SEQUENCE_ADD(
       &m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list, ie);
   if (ret != 0) Logger::ngap().error("Encode SecurityIndication IE error");
-  // utils::free_wrapper((void**) &ie);
+  // oai::utils::utils::free_wrapper((void**) &ie);
 }
 
 //------------------------------------------------------------------------------
@@ -230,14 +230,14 @@ void PduSessionResourceSetupRequestTransferIE::setSecurityIndication(
       m_SecurityIndication.value().encode(ie->value.choice.SecurityIndication);
   if (!ret) {
     Logger::ngap().error("Encode SecurityIndication IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
   ret = ASN_SEQUENCE_ADD(
       &m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list, ie);
   if (ret != 0) Logger::ngap().error("Encode SecurityIndication IE error");
-  // utils::free_wrapper((void**) &ie);
+  // oai::utils::utils::free_wrapper((void**) &ie);
 }
 
 //------------------------------------------------------------------------------
@@ -256,14 +256,14 @@ void PduSessionResourceSetupRequestTransferIE::setNetworkInstance(
   int ret = m_NetworkInstance.value().encode(ie->value.choice.NetworkInstance);
   if (!ret) {
     Logger::ngap().error("Encode NetworkInstance IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
   ret = ASN_SEQUENCE_ADD(
       &m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list, ie);
   if (ret != 0) Logger::ngap().error("Encode NetworkInstance IE error");
-  // utils::free_wrapper((void**) &ie);
+  // oai::utils::utils::free_wrapper((void**) &ie);
 }
 
 //------------------------------------------------------------------------------
@@ -429,14 +429,14 @@ void PduSessionResourceSetupRequestTransferIE::setQosFlowSetupRequestList(
       ie->value.choice.QosFlowSetupRequestList);
   if (!ret) {
     Logger::ngap().error("Encode QosFlowSetupRequestList IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
   ret = ASN_SEQUENCE_ADD(
       &m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list, ie);
   if (ret != 0) Logger::ngap().error("Encode QosFlowSetupRequestList IE error");
-  // utils::free_wrapper((void**) &ie);
+  // oai::utils::utils::free_wrapper((void**) &ie);
 }
 
 //------------------------------------------------------------------------------

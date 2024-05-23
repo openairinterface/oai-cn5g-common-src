@@ -31,15 +31,20 @@ using namespace oai::nas;
 //------------------------------------------------------------------------------
 LadnIndication::LadnIndication() : Type6NasIe(kIeiLadnIndication) {
   ladn_ = {};
+  SetLengthIndicator(kLadnIndicationContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
 LadnIndication::LadnIndication(const std::vector<bstring>& ladn)
     : Type6NasIe(kIeiLadnIndication) {
-  int length = 0;
-  ladn_.assign(ladn.begin(), ladn.end());
-  for (int i = 0; i < ladn.size(); i++) {
-    length = length + blength(ladn.at(i));
+  int length   = 0;
+  uint8_t size = (ladn.size() > kLadnIndicationMaximumSupportedLadns) ?
+                     kLadnIndicationMaximumSupportedLadns :
+                     ladn.size();
+  for (int i = 0; i < size; i++) {
+    bstring ladnItem = bstrcpy(ladn.at(i));
+    ladn_.push_back(ladnItem);
+    length += blength(ladn.at(i));
   }
   SetLengthIndicator(length);
 }
@@ -53,23 +58,13 @@ void LadnIndication::GetValue(std::vector<bstring>& ladn) const {
 }
 
 //------------------------------------------------------------------------------
-int LadnIndication::Encode(uint8_t* buf, int len) {
+int LadnIndication::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
-  int ie_len = GetIeLength();
-
-  if (len < ie_len) {  // Length of the content + IEI/Len
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Size of the buffer is not enough to store this IE (IE len %d)",
-            ie_len);
-    return KEncodeDecodeError;
-  }
-
   int encoded_size = 0;
 
-  // IEI and Length (later)
+  // Validate the buffer's length and Encode IEI/Length (later)
   int len_pos = 0;
   int encoded_header_size =
       Type6NasIe::Encode(buf + encoded_size, len, len_pos);
@@ -92,7 +87,7 @@ int LadnIndication::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int LadnIndication::Decode(uint8_t* buf, int len, bool is_iei) {
+int LadnIndication::Decode(const uint8_t* const buf, int len, bool is_iei) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding %s", GetIeName().c_str());
   int decoded_size = 0;

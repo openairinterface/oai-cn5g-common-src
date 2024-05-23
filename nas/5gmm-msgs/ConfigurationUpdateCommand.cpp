@@ -27,8 +27,9 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 ConfigurationUpdateCommand::ConfigurationUpdateCommand()
-    : NasMmPlainHeader(
-          k5gsMobilityManagementMessages, kConfigurationUpdateCommand) {
+    : ie_header_(
+          k5gsMobilityManagementMessages, kPlain5gsMessage,
+          kConfigurationUpdateCommand) {
   ie_configuration_update_indication_ = std::nullopt;
   ie_5g_guti_                         = std::nullopt;
   ie_full_name_for_network_           = std::nullopt;
@@ -39,8 +40,23 @@ ConfigurationUpdateCommand::ConfigurationUpdateCommand()
 ConfigurationUpdateCommand::~ConfigurationUpdateCommand() {}
 
 //------------------------------------------------------------------------------
+uint32_t ConfigurationUpdateCommand::GetLength() const {
+  uint32_t msg_len = 0;
+  msg_len += ie_header_.GetLength();
+  if (ie_configuration_update_indication_.has_value())
+    msg_len += ie_configuration_update_indication_.value().GetIeLength();
+  if (ie_5g_guti_.has_value()) msg_len += ie_5g_guti_.value().GetIeLength();
+  if (ie_full_name_for_network_.has_value())
+    msg_len += ie_full_name_for_network_.value().GetIeLength();
+  if (ie_short_name_for_network_.has_value())
+    msg_len += ie_short_name_for_network_.value().GetIeLength();
+
+  return msg_len;
+}
+
+//------------------------------------------------------------------------------
 void ConfigurationUpdateCommand::SetHeader(uint8_t security_header_type) {
-  NasMmPlainHeader::SetSecurityHeaderType(security_header_type);
+  ie_header_.SetSecurityHeaderType(security_header_type);
 }
 
 //------------------------------------------------------------------------------
@@ -128,8 +144,7 @@ int ConfigurationUpdateCommand::Encode(uint8_t* buf, int len) {
   int encoded_ie_size = 0;
 
   // Header
-  if ((encoded_ie_size = NasMmPlainHeader::Encode(buf, len)) ==
-      KEncodeDecodeError) {
+  if ((encoded_ie_size = ie_header_.Encode(buf, len)) == KEncodeDecodeError) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error("Encoding NAS Header error");
     return KEncodeDecodeError;
@@ -174,7 +189,7 @@ int ConfigurationUpdateCommand::Decode(uint8_t* buf, int len) {
   int decoded_ie_size = 0;
 
   // Header
-  decoded_ie_size = NasMmPlainHeader::Decode(buf, len);
+  decoded_ie_size = ie_header_.Decode(buf, len);
   if (decoded_ie_size == KEncodeDecodeError) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error("Decoding NAS Header error");

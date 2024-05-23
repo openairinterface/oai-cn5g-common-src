@@ -38,9 +38,9 @@ class conv {
   static std::string toString(const struct in_addr& inaddr);
   static std::string toString(const struct in6_addr& in6addr);
   static std::string mccToString(
-      const uint8_t digit1, const uint8_t digit2, const uint8_t digit3);
+      uint8_t digit1, uint8_t digit2, uint8_t digit3);
   static std::string mncToString(
-      const uint8_t digit1, const uint8_t digit2, const uint8_t digit3);
+      uint8_t digit1, uint8_t digit2, uint8_t digit3);
   // from /tags/ueId to .tags.ueId for MongoDB
   static void to_mongodb_path(std::string& input);
   static std::string uint8_to_hex_string(const uint8_t* v, const size_t s);
@@ -50,7 +50,7 @@ class conv {
   static bool string_to_int8(const std::string& str, uint8_t& value);
   static bool string_to_int32(const std::string& str, uint32_t& value);
   static bool string_to_int(
-      const std::string& str, uint32_t& value, const uint8_t& base);
+      const std::string& str, uint32_t& value, uint8_t base);
   static bool string_hex_to_int(const std::string& value_str, uint32_t& value);
   static uint32_t string_hex_to_int(const std::string& value_str);
   static void int_to_string_hex(

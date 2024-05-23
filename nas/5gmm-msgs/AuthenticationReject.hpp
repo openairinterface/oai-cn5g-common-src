@@ -26,20 +26,23 @@
 
 namespace oai::nas {
 
-class AuthenticationReject : public NasMmPlainHeader {
+class AuthenticationReject : public Nas5gmmMessage {
  public:
   AuthenticationReject();
   ~AuthenticationReject();
 
-  void SetHeader(uint8_t security_header_type);
+  int Encode(uint8_t* buf, int len) override;
+  int Decode(uint8_t* buf, int len) override;
 
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len);
+  uint32_t GetLength() const override;
+
+  void SetHeader(uint8_t security_header_type);
 
   void SetEapMessage(const bstring& eap);
   // TODO: Get
 
  private:
+  NasMmPlainHeader ie_header_;  // Mandatory
   std::optional<EapMessage> ie_eap_message_;
 };
 

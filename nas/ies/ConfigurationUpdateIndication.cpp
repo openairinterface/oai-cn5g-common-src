@@ -25,12 +25,14 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 ConfigurationUpdateIndication::ConfigurationUpdateIndication()
-    : Type1NasIe(false), red_(false), ack_(false) {}
+    : Type1NasIe(false), red_(false), ack_(false) {
+  ConfigurationUpdateIndication::SetValue();
+}
 
 //------------------------------------------------------------------------------
 ConfigurationUpdateIndication::ConfigurationUpdateIndication(bool red, bool ack)
     : Type1NasIe(false), red_(red), ack_(ack) {
-  SetValue();
+  ConfigurationUpdateIndication::SetValue();
 }
 
 //------------------------------------------------------------------------------
@@ -39,7 +41,7 @@ ConfigurationUpdateIndication::~ConfigurationUpdateIndication() {}
 //------------------------------------------------------------------------------
 void ConfigurationUpdateIndication::SetRed(bool red) {
   red_ = red;
-  SetValue();
+  ConfigurationUpdateIndication::SetValue();
 }
 
 //------------------------------------------------------------------------------
@@ -50,7 +52,7 @@ void ConfigurationUpdateIndication::GetRed(bool& red) const {
 //------------------------------------------------------------------------------
 void ConfigurationUpdateIndication::SetAck(bool ack) {
   ack_ = ack;
-  SetValue();
+  ConfigurationUpdateIndication::SetValue();
 }
 
 //------------------------------------------------------------------------------
@@ -71,13 +73,13 @@ void ConfigurationUpdateIndication::GetValue() {
 }
 
 //------------------------------------------------------------------------------
-int ConfigurationUpdateIndication::Encode(uint8_t* buf, int len) {
-  SetValue();
+int ConfigurationUpdateIndication::Encode(uint8_t* buf, int len) const {
   return Type1NasIe::Encode(buf, len);
 }
 
 //------------------------------------------------------------------------------
-int ConfigurationUpdateIndication::Decode(uint8_t* buf, int len, bool is_iei) {
+int ConfigurationUpdateIndication::Decode(
+    const uint8_t* const buf, int len, bool is_iei) {
   int decoded_size = Type1NasIe::Decode(buf, len, is_iei);
   if (decoded_size == KEncodeDecodeError) return KEncodeDecodeError;
   GetValue();

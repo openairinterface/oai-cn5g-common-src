@@ -26,13 +26,15 @@
 
 namespace oai::nas {
 
-class IdentityResponse : public NasMmPlainHeader {
+class IdentityResponse : public Nas5gmmMessage {
  public:
   IdentityResponse();
   ~IdentityResponse();
 
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len);
+  int Encode(uint8_t* buf, int len) override;
+  int Decode(uint8_t* buf, int len) override;
+
+  uint32_t GetLength() const override;
 
   void SetHeader(uint8_t security_header_type);
 
@@ -53,6 +55,7 @@ class IdentityResponse : public NasMmPlainHeader {
   void Set5gSTmsi();
 
  private:
+  NasMmPlainHeader ie_header_;             // Mandatory
   _5gsMobileIdentity ie_mobile_identity_;  // Mandatory
 };
 

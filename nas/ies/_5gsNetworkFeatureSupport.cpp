@@ -33,7 +33,7 @@ _5gsNetworkFeatureSupport::_5gsNetworkFeatureSupport()
     : Type4NasIe(kIei5gsNetworkFeatureSupport) {
   value_  = 0;
   value2_ = 0;
-  SetLengthIndicator(1);  // With mimimum length of 3
+  SetLengthIndicator(k5gsNetworkFeatureSupportContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -41,7 +41,7 @@ _5gsNetworkFeatureSupport::_5gsNetworkFeatureSupport(uint8_t value)
     : Type4NasIe(kIei5gsNetworkFeatureSupport) {
   value_  = value;
   value2_ = 0;
-  SetLengthIndicator(1);  // With mimimum length of 3
+  SetLengthIndicator(k5gsNetworkFeatureSupportContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -60,29 +60,16 @@ _5gsNetworkFeatureSupport::~_5gsNetworkFeatureSupport() {}
 void _5gsNetworkFeatureSupport::SetValue(uint8_t value, uint8_t value2) {
   value_  = value;
   value2_ = value2;
+  SetLengthIndicator(2);
 }
 
-/*
 //------------------------------------------------------------------------------
-uint8_t _5gsNetworkFeatureSupport::GetValue() {
-  return value_;
-}
-*/
-
-//------------------------------------------------------------------------------
-int _5gsNetworkFeatureSupport::Encode(uint8_t* buf, int len) {
+int _5gsNetworkFeatureSupport::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
-  int ie_len = GetIeLength();
-
-  if (len < ie_len) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Len is less than %d", ie_len);
-    return KEncodeDecodeError;
-  }
 
   int encoded_size = 0;
-  // IEI and Length
+  // Validate the buffer's length and Encode IEI/Length
   int encoded_header_size = Type4NasIe::Encode(buf + encoded_size, len);
   if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   encoded_size += encoded_header_size;
@@ -106,7 +93,8 @@ int _5gsNetworkFeatureSupport::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int _5gsNetworkFeatureSupport::Decode(uint8_t* buf, int len, bool is_iei) {
+int _5gsNetworkFeatureSupport::Decode(
+    const uint8_t* const buf, int len, bool is_iei) {
   if (len < k5gsNetworkFeatureSupportMinimumLength) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error(

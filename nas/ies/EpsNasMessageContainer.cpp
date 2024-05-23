@@ -30,13 +30,18 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 EpsNasMessageContainer::EpsNasMessageContainer()
-    : Type6NasIe(kIeiEpsNasMessageContainer), value_() {}
+    : Type6NasIe(kIeiEpsNasMessageContainer), value_() {
+  SetLengthIndicator(kEpsNasMessageContainerContentMinimumLength);
+}
 
 //------------------------------------------------------------------------------
 EpsNasMessageContainer::EpsNasMessageContainer(const bstring& value)
     : Type6NasIe(kIeiEpsNasMessageContainer) {
   value_ = bstrcpy(value);
-  SetLengthIndicator(blength(value_));
+  SetLengthIndicator(
+      (blength(value_) > kEpsNasMessageContainerContentMinimumLength) ?
+          blength(value_) :
+          kEpsNasMessageContainerContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -48,23 +53,13 @@ void EpsNasMessageContainer::GetValue(bstring& value) const {
 }
 
 //------------------------------------------------------------------------------
-int EpsNasMessageContainer::Encode(uint8_t* buf, int len) {
+int EpsNasMessageContainer::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
-  int ie_len = GetIeLength();
-
-  if (len < ie_len) {  // Length of the content + IEI/Len
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Size of the buffer is not enough to store this IE (IE len %d)",
-            ie_len);
-    return KEncodeDecodeError;
-  }
-
   int encoded_size = 0;
 
-  // IEI and Length (later)
+  // Validate the buffer's length and Encode IEI/Length (later)
   int len_pos = 0;
   int encoded_header_size =
       Type6NasIe::Encode(buf + encoded_size, len, len_pos);
@@ -84,7 +79,8 @@ int EpsNasMessageContainer::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int EpsNasMessageContainer::Decode(uint8_t* buf, int len, bool is_iei) {
+int EpsNasMessageContainer::Decode(
+    const uint8_t* const buf, int len, bool is_iei) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding EpsNasMessageContainer");
   int decoded_size = 0;

@@ -35,6 +35,9 @@ class ConfigurationUpdateIndication : public Type1NasIe {
   ConfigurationUpdateIndication(bool red, bool ack);
   ~ConfigurationUpdateIndication();
 
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+
   static std::string GetIeName() {
     return kConfigurationUpdateIndicationIeName;
   }
@@ -44,9 +47,6 @@ class ConfigurationUpdateIndication : public Type1NasIe {
 
   void SetAck(bool value);
   void GetAck(bool& value) const;
-
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len, bool is_iei);
 
  private:
   bool red_;

@@ -31,7 +31,7 @@ UeSecurityCapability::UeSecurityCapability() : Type4NasIe() {
   _5g_ia_ = 0;
   eea_    = std::nullopt;
   eia_    = std::nullopt;
-  SetLengthIndicator(2);
+  SetLengthIndicator(kUeSecurityCapabilityContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -40,7 +40,7 @@ UeSecurityCapability::UeSecurityCapability(uint8_t iei) : Type4NasIe(iei) {
   _5g_ia_ = 0;
   eea_    = std::nullopt;
   eia_    = std::nullopt;
-  SetLengthIndicator(2);
+  SetLengthIndicator(kUeSecurityCapabilityContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -50,7 +50,7 @@ UeSecurityCapability::UeSecurityCapability(uint8_t _5g_ea, uint8_t _5g_ia)
   _5g_ia_ = _5g_ia;
   eea_    = std::nullopt;
   eia_    = std::nullopt;
-  SetLengthIndicator(2);
+  SetLengthIndicator(kUeSecurityCapabilityContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -61,7 +61,7 @@ UeSecurityCapability::UeSecurityCapability(
   _5g_ia_ = _5g_ia;
   eea_    = std::nullopt;
   eia_    = std::nullopt;
-  SetLengthIndicator(2);
+  SetLengthIndicator(kUeSecurityCapabilityContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -89,6 +89,7 @@ UeSecurityCapability::UeSecurityCapability(
 //------------------------------------------------------------------------------
 UeSecurityCapability::~UeSecurityCapability() {}
 
+//------------------------------------------------------------------------------
 void UeSecurityCapability::operator=(
     const UeSecurityCapability& ue_security_capability) {
   UeSecurityCapability m_ue_security_capability;
@@ -171,21 +172,12 @@ void UeSecurityCapability::Set(
 }
 
 //------------------------------------------------------------------------------
-int UeSecurityCapability::Encode(uint8_t* buf, int len) {
+int UeSecurityCapability::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
-  int ie_len = GetIeLength();
-
-  if (len < ie_len) {  // Length of the content + IEI/Len
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Size of the buffer is not enough to store this IE (IE len %d)",
-            ie_len);
-    return KEncodeDecodeError;
-  }
 
   int encoded_size = 0;
-  // IEI and Length
+  // Validate the buffer's length and Encode IEI/Length
   int encoded_header_size = Type4NasIe::Encode(buf + encoded_size, len);
   if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   encoded_size += encoded_header_size;
@@ -210,7 +202,8 @@ int UeSecurityCapability::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int UeSecurityCapability::Decode(uint8_t* buf, int len, bool is_iei) {
+int UeSecurityCapability::Decode(
+    const uint8_t* const buf, int len, bool is_iei) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding %s", GetIeName().c_str());
 

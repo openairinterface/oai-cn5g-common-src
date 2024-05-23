@@ -32,8 +32,15 @@ class Type6NasIe : public NasIe {
   Type6NasIe(uint8_t iei);
   virtual ~Type6NasIe();
 
-  bool Validate(const int& len) const override;
-  bool ValidateHeader(const int& len) const;
+  int Encode(uint8_t* buf, int len) const override;
+  int Encode(
+      uint8_t* buf, int len,
+      int& len_pos) const;  // Use this function to encode IE lengh later
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+
+  uint32_t GetIeLength() const override;
+  bool Validate(int len) const override;
+  bool ValidateHeader(int len) const;
 
   void SetIei(uint8_t iei);
 
@@ -41,16 +48,7 @@ class Type6NasIe : public NasIe {
   void GetLengthIndicator(uint16_t& li) const;
   uint16_t GetLengthIndicator() const;
 
-  uint16_t GetIeLength() const;
-
   uint8_t GetHeaderLength() const;
-
-  int Encode(uint8_t* buf, const int& len) override;
-  int Encode(
-      uint8_t* buf, const int& len,
-      int& len_pos);  // Use this function to encode IE lengh later
-  int Decode(
-      const uint8_t* const buf, const int& len, bool is_iei = false) override;
 
  protected:
   std::optional<uint8_t> iei_;  // IEI present in format TLV-E

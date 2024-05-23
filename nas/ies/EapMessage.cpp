@@ -29,19 +29,21 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 EapMessage::EapMessage() : Type6NasIe(), eap_() {
-  SetLengthIndicator(0);
+  SetLengthIndicator(kEapMessageContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
 EapMessage::EapMessage(uint8_t iei) : Type6NasIe(iei), eap_() {
-  SetLengthIndicator(0);
+  SetLengthIndicator(kEapMessageContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
-EapMessage::EapMessage(const uint8_t iei, const bstring& eap)
-    : Type6NasIe(iei) {
+EapMessage::EapMessage(uint8_t iei, const bstring& eap) : Type6NasIe(iei) {
   eap_ = bstrcpy(eap);
-  SetLengthIndicator(blength(eap));
+  SetLengthIndicator(
+      (blength(eap_) > kEapMessageContentMinimumLength) ?
+          blength(eap_) :
+          kEapMessageContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -50,6 +52,10 @@ EapMessage::~EapMessage() {}
 //------------------------------------------------------------------------------
 void EapMessage::SetValue(const bstring& eap) {
   eap_ = bstrcpy(eap);
+  SetLengthIndicator(
+      (blength(eap_) > kEapMessageContentMinimumLength) ?
+          blength(eap_) :
+          kEapMessageContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -58,22 +64,12 @@ void EapMessage::GetValue(bstring& eap) const {
 }
 
 //------------------------------------------------------------------------------
-int EapMessage::Encode(uint8_t* buf, int len) {
+int EapMessage::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
-  int ie_len = GetIeLength();
-
-  if (len < ie_len) {  // Length of the content + IEI/Len
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Size of the buffer is not enough to store this IE (IE len %d)",
-            ie_len);
-    return KEncodeDecodeError;
-  }
-
   int encoded_size = 0;
-  // IEI and Length (later)
+  // Validate the buffer's length and Encode IEI/Length (later)
   int len_pos = 0;
   int encoded_header_size =
       Type6NasIe::Encode(buf + encoded_size, len, len_pos);
@@ -94,7 +90,7 @@ int EapMessage::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int EapMessage::Decode(uint8_t* buf, int len, bool is_iei) {
+int EapMessage::Decode(const uint8_t* const buf, int len, bool is_iei) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding %s", GetIeName().c_str());
   int decoded_size = 0;

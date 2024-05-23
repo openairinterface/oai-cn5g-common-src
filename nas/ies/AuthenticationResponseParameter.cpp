@@ -27,7 +27,7 @@ using namespace oai::nas;
 //------------------------------------------------------------------------------
 AuthenticationResponseParameter::AuthenticationResponseParameter()
     : Type4NasIe(kIeiAuthenticationResponseParameter), res_or_res_star_() {
-  SetLengthIndicator(4);  // Minimum length for the content (RES or RES*)
+  SetLengthIndicator(kAuthenticationResponseParameterContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -35,7 +35,11 @@ AuthenticationResponseParameter::AuthenticationResponseParameter(
     const bstring& para)
     : Type4NasIe(kIeiAuthenticationResponseParameter) {
   res_or_res_star_ = bstrcpy(para);
-  SetLengthIndicator(blength(res_or_res_star_));
+  SetLengthIndicator(
+      (blength(res_or_res_star_) >
+       kAuthenticationResponseParameterContentMinimumLength) ?
+          blength(res_or_res_star_) :
+          kAuthenticationResponseParameterContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -44,6 +48,11 @@ AuthenticationResponseParameter::~AuthenticationResponseParameter() {}
 //------------------------------------------------------------------------------
 void AuthenticationResponseParameter::SetValue(const bstring& para) {
   res_or_res_star_ = bstrcpy(para);
+  SetLengthIndicator(
+      (blength(res_or_res_star_) >
+       kAuthenticationResponseParameterContentMinimumLength) ?
+          blength(res_or_res_star_) :
+          kAuthenticationResponseParameterContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -52,19 +61,12 @@ void AuthenticationResponseParameter::GetValue(bstring& para) const {
 }
 
 //------------------------------------------------------------------------------
-int AuthenticationResponseParameter::Encode(uint8_t* buf, int len) {
+int AuthenticationResponseParameter::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
-  int ie_len = GetIeLength();
-
-  if (len < ie_len) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Len is less than %d", ie_len);
-    return KEncodeDecodeError;
-  }
 
   int encoded_size = 0;
-  // IEI and Length
+  // Validate the buffer's length and Encode IEI/Length
   int encoded_header_size = Type4NasIe::Encode(buf + encoded_size, len);
   if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   encoded_size += encoded_header_size;
@@ -81,7 +83,7 @@ int AuthenticationResponseParameter::Encode(uint8_t* buf, int len) {
 
 //------------------------------------------------------------------------------
 int AuthenticationResponseParameter::Decode(
-    uint8_t* buf, int len, bool is_iei) {
+    const uint8_t* const buf, int len, bool is_iei) {
   if (len < kAuthenticationResponseParameterMinimumLength) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error(

@@ -34,7 +34,7 @@ _5gsUpdateType::_5gsUpdateType() : Type4NasIe(kIei5gsUpdateType) {
   _5gs_pnb_ciot_ = 0;
   ng_ran_        = false;
   sms_           = false;
-  SetLengthIndicator(1);
+  SetLengthIndicator(k5gsUpdateTypeContentLength);
 }
 
 //------------------------------------------------------------------------------
@@ -45,7 +45,7 @@ _5gsUpdateType::_5gsUpdateType(
   _5gs_pnb_ciot_ = _5gs_PNB_CIoT;
   ng_ran_        = ng_RAN;
   sms_           = sms;
-  SetLengthIndicator(1);
+  SetLengthIndicator(k5gsUpdateTypeContentLength);
 }
 
 //------------------------------------------------------------------------------
@@ -92,21 +92,12 @@ bool _5gsUpdateType::GetSms() const {
 }
 
 //------------------------------------------------------------------------------
-int _5gsUpdateType::Encode(uint8_t* buf, int len) {
+int _5gsUpdateType::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
-  int ie_len = GetIeLength();
-
-  if (len < ie_len) {  // Length of the content + IEI/Len
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Size of the buffer is not enough to store this IE (IE len %d)",
-            ie_len);
-    return KEncodeDecodeError;
-  }
 
   int encoded_size = 0;
-  // IEI and Length
+  // Validate the buffer's length and Encode IEI/Length
   int encoded_header_size = Type4NasIe::Encode(buf + encoded_size, len);
   if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   encoded_size += encoded_header_size;
@@ -121,7 +112,7 @@ int _5gsUpdateType::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int _5gsUpdateType::Decode(uint8_t* buf, int len, bool is_iei) {
+int _5gsUpdateType::Decode(const uint8_t* const buf, int len, bool is_iei) {
   if (len < k5gsUpdateTypeLength) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error(

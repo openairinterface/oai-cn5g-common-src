@@ -27,7 +27,10 @@
 #include "Struct.hpp"
 #include "Type4NasIe.hpp"
 
-constexpr uint8_t k5gsTrackingAreaIdListMinimumLength        = 9;
+constexpr uint8_t k5gsTrackingAreaIdListMinimumLength = 9;
+constexpr uint8_t k5gsTrackingAreaIdListContentMinimumLength =
+    k5gsTrackingAreaIdListMinimumLength -
+    2;  // Minimum length - 2 octets for IEI/Length
 constexpr uint8_t k5gsTrackingAreaIdListMaximumLength        = 114;
 constexpr uint8_t k5gsTrackingAreaIdListMaximumSupportedTAIs = 16;
 constexpr auto k5gsTrackingAreaIdListIeName = "5GS Tracking Area Identity List";
@@ -39,7 +42,7 @@ class _5gsTrackingAreaIdList : public Type4NasIe {
   _5gsTrackingAreaIdList();
   _5gsTrackingAreaIdList(bool iei);
   _5gsTrackingAreaIdList(const std::vector<p_tai_t>& tai_list);
-  int Encode(uint8_t* buf, int len);
+  int Encode(uint8_t* buf, int len) const override;
 
   static std::string GetIeName() { return k5gsTrackingAreaIdListIeName; }
 
@@ -47,9 +50,9 @@ class _5gsTrackingAreaIdList : public Type4NasIe {
   std::vector<p_tai_t> tai_list_;
 
  private:
-  int EncodeType00(p_tai_t item, uint8_t* buf, int len);
-  int EncodeType01(p_tai_t item, uint8_t* buf, int len);
-  int EncodeType10(p_tai_t item, uint8_t* buf, int len);
+  int EncodeType00(p_tai_t item, uint8_t* buf, int len) const;
+  int EncodeType01(p_tai_t item, uint8_t* buf, int len) const;
+  int EncodeType10(p_tai_t item, uint8_t* buf, int len) const;
 };
 
 }  // namespace oai::nas

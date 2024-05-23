@@ -28,7 +28,7 @@ Additional5gSecurityInformation::Additional5gSecurityInformation()
     : Type4NasIe(kIeiAdditional5gSecurityInformation) {
   rinmr_ = false;
   hdp_   = false;
-  SetLengthIndicator(1);
+  SetLengthIndicator(kAdditional5gSecurityInformationContentLength);
 }
 
 //------------------------------------------------------------------------------
@@ -37,7 +37,7 @@ Additional5gSecurityInformation::Additional5gSecurityInformation(
     : Type4NasIe(kIeiAdditional5gSecurityInformation) {
   rinmr_ = rinmr;
   hdp_   = hdp;
-  SetLengthIndicator(1);
+  SetLengthIndicator(kAdditional5gSecurityInformationContentLength);
 }
 
 //------------------------------------------------------------------------------
@@ -64,19 +64,12 @@ bool Additional5gSecurityInformation::GetHdp() const {
 }
 
 //------------------------------------------------------------------------------
-int Additional5gSecurityInformation::Encode(uint8_t* buf, int len) {
+int Additional5gSecurityInformation::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
-  int ie_len = GetIeLength();
-
-  if (len < ie_len) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Len is less than %d", ie_len);
-    return KEncodeDecodeError;
-  }
 
   int encoded_size = 0;
-  // IEI and Length
+  // Validate the buffer's length and Encode IEI/Length
   int encoded_header_size = Type4NasIe::Encode(buf + encoded_size, len);
   if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   encoded_size += encoded_header_size;
@@ -95,7 +88,7 @@ int Additional5gSecurityInformation::Encode(uint8_t* buf, int len) {
 
 //------------------------------------------------------------------------------
 int Additional5gSecurityInformation::Decode(
-    uint8_t* buf, int len, bool is_iei) {
+    const uint8_t* const buf, int len, bool is_iei) {
   if (len < kAdditional5gSecurityInformationLength) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error(

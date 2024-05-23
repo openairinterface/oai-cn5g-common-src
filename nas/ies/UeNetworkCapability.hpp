@@ -25,6 +25,9 @@
 #include "Type4NasIe.hpp"
 
 constexpr uint8_t kUeNetworkCapabilityMinimumLength = 4;
+constexpr uint8_t kUeNetworkCapabilityContentMinimumLength =
+    kUeNetworkCapabilityMinimumLength -
+    2;  // Minimum length - 2 octets for IEI/Length
 constexpr uint8_t kUeNetworkCapabilityMaximumLength = 15;
 constexpr auto kUeNetworkCapabilityIeName           = "UE Network Capability";
 
@@ -37,6 +40,9 @@ class UeNetworkCapability : public Type4NasIe {
   UeNetworkCapability(uint8_t iei, uint8_t eea, uint8_t eia);
   ~UeNetworkCapability();
 
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = true);
+
   static std::string GetIeName() { return kUeNetworkCapabilityIeName; }
 
   void SetEea(uint8_t value);
@@ -44,9 +50,6 @@ class UeNetworkCapability : public Type4NasIe {
 
   uint8_t GetEea() const;
   uint8_t GetEia() const;
-
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len, bool is_option = true);
 
  private:
   uint8_t eea_;  // Mandatory

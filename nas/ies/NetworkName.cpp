@@ -35,22 +35,21 @@ extern "C" {
 using namespace oai::nas;
 
 //------------------------------------------------------------------------------
-NetworkName::NetworkName() {
-  iei_                  = 0;
-  length_               = kNetworkNameMinimumLength;
+NetworkName::NetworkName() : Type4NasIe() {
   coding_scheme_        = 0;
   add_ci_               = false;
   number_of_spare_bits_ = 0;
   text_string_          = nullptr;
+  SetLengthIndicator(kNetworkNameContentMinimumLength);
 }
+
 //------------------------------------------------------------------------------
-NetworkName::NetworkName(uint8_t iei) {
-  iei_                  = iei;
-  length_               = kNetworkNameMinimumLength;
+NetworkName::NetworkName(uint8_t iei) : Type4NasIe(iei) {
   coding_scheme_        = 0;
   add_ci_               = false;
   number_of_spare_bits_ = 0;
   text_string_          = nullptr;
+  SetLengthIndicator(kNetworkNameContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -62,6 +61,7 @@ NetworkName::~NetworkName() {
 void NetworkName::SetIei(uint8_t iei) {
   iei_ = iei;
 }
+
 //------------------------------------------------------------------------------
 void NetworkName::NetworkName::SetCodingScheme(uint8_t value) {
   coding_scheme_ = value & 0x07;
@@ -102,31 +102,26 @@ void NetworkName::SetTextString(const std::string& str) {
 
   text_string_ = blk2bstr(packed_str, 7);
   utils::free_wrapper((void**) &packed_str);
-  length_ = 1 + blength(text_string_);
+  SetLengthIndicator(1 + blength(text_string_));
 }
 
 //------------------------------------------------------------------------------
 void NetworkName::SetTextString(const bstring& str) {
   text_string_ = bstrcpy(str);
-  length_      = 1 + blength(text_string_);
+  SetLengthIndicator(1 + blength(text_string_));
 }
 
 //------------------------------------------------------------------------------
-int NetworkName::Encode(uint8_t* buf, int len) {
+int NetworkName::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding NetworkName");
 
-  if (len < kNetworkNameMinimumLength) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("len is less than %d", length_);
-    return -1;
-  }
-
   int encoded_size = 0;
-  if (iei_) {
-    ENCODE_U8(buf + encoded_size, iei_, encoded_size);  // IEI
-  }
-  ENCODE_U8(buf + encoded_size, length_, encoded_size);  // length
+
+  // Validate the buffer's length and Encode IEI/Length
+  int encoded_header_size = Type4NasIe::Encode(buf + encoded_size, len);
+  if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
+  encoded_size += encoded_header_size;
 
   // Octet 3
   uint8_t octet = 0;
@@ -144,7 +139,7 @@ int NetworkName::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int NetworkName::Decode(uint8_t* buf, int len, bool is_option) {
-  // TODO
+int NetworkName::Decode(const uint8_t* const buf, int len, bool is_iei) {
+  // TODO: to be implemented
   return -1;
 }

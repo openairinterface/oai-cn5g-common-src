@@ -36,10 +36,10 @@ class MicoIndication : public Type1NasIeFormatTv {
   MicoIndication(bool sprti, bool raai);
   ~MicoIndication();
 
-  static std::string GetIeName() { return kMicoIndicationIeName; }
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
 
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len, bool is_option);
+  static std::string GetIeName() { return kMicoIndicationIeName; }
 
   void SetSprti(bool value);
   bool GetSprti() const;

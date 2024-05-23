@@ -25,6 +25,9 @@
 #include "Type4NasIe.hpp"
 
 constexpr uint8_t kAuthenticationResponseParameterMinimumLength = 6;
+constexpr uint8_t kAuthenticationResponseParameterContentMinimumLength =
+    kAuthenticationResponseParameterMinimumLength -
+    2;  // Minimum length - 2 octets for IEI/Length
 constexpr uint8_t kAuthenticationResponseParameterMaximumLength = 18;
 constexpr auto kAuthenticationResponseParameterIeName =
     "Authentication Response Parameter";
@@ -37,12 +40,12 @@ class AuthenticationResponseParameter : public Type4NasIe {
   AuthenticationResponseParameter(const bstring& para);
   ~AuthenticationResponseParameter();
 
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+
   static std::string GetIeName() {
     return kAuthenticationResponseParameterIeName;
   }
-
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len, bool is_iei);
 
   void SetValue(const bstring& para);
   void GetValue(bstring& para) const;

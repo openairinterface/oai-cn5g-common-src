@@ -34,12 +34,14 @@ using namespace oai::utils;
 _5gsMobileIdentity::_5gsMobileIdentity() : Type6NasIe() {
   type_of_identity_ = 0;
   ClearIe();
+  SetLengthIndicator(k5gsMobileIdentityContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
 _5gsMobileIdentity::_5gsMobileIdentity(uint8_t iei) : Type6NasIe(iei) {
   type_of_identity_ = 0;
   ClearIe();
+  SetLengthIndicator(k5gsMobileIdentityContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -54,7 +56,7 @@ void _5gsMobileIdentity::ClearIe() {
 }
 
 //------------------------------------------------------------------------------
-int _5gsMobileIdentity::Encode(uint8_t* buf, int len) {
+int _5gsMobileIdentity::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
   switch (type_of_identity_) {
@@ -80,7 +82,7 @@ int _5gsMobileIdentity::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int _5gsMobileIdentity::Decode(uint8_t* buf, int len, bool is_iei) {
+int _5gsMobileIdentity::Decode(const uint8_t* const buf, int len, bool is_iei) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding 5GSMobilityIdentity");
   int decoded_size = 0;
@@ -93,7 +95,7 @@ int _5gsMobileIdentity::Decode(uint8_t* buf, int len, bool is_iei) {
   ie_len = GetLengthIndicator();
 
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded 5GSMobilityIdentity IE length %d", ie_len);
+      .debug("Decoded 5GSMobilityIdentity IE length %ld", ie_len);
   int decoded_size_tmp = 0;
   uint8_t octet        = 0;
 
@@ -131,17 +133,17 @@ int _5gsMobileIdentity::Decode(uint8_t* buf, int len, bool is_iei) {
   }
 
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
+      .debug("Decoded %s, len (%ld)", GetIeName().c_str(), decoded_size);
   return decoded_size;
 }
 
 //------------------------------------------------------------------------------
-int _5gsMobileIdentity::Encode5gGuti(uint8_t* buf, int len) {
+int _5gsMobileIdentity::Encode5gGuti(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding 5G-GUTI IEI 0x%x", iei_.value());
   int encoded_size = 0;
 
-  // IEI and Length
+  // Validate the buffer's length and Encode IEI/Length
   int len_pos = 0;
   int encoded_header_size =
       Type6NasIe::Encode(buf + encoded_size, len, len_pos);
@@ -177,12 +179,12 @@ int _5gsMobileIdentity::Encode5gGuti(uint8_t* buf, int len) {
   ENCODE_U16(buf + len_pos, encoded_size - GetHeaderLength(), encoded_len_ie);
 
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoded 5G-GUTI IE (len %d octets)", encoded_size);
+      .debug("Encoded 5G-GUTI IE (len %ld octets)", encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
-int _5gsMobileIdentity::Decode5gGuti(uint8_t* buf, int len) {
+int _5gsMobileIdentity::Decode5gGuti(const uint8_t* const buf, int len) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding 5GSMobilityIdentity 5G-GUTI");
 
@@ -222,9 +224,8 @@ int _5gsMobileIdentity::Decode5gGuti(uint8_t* buf, int len) {
 
 //------------------------------------------------------------------------------
 void _5gsMobileIdentity::Set5gGuti(
-    const std::string& mcc, const std::string& mnc,
-    const uint8_t& amf_region_id, const uint16_t& amf_set_id,
-    const uint8_t& amf_pointer, const uint32_t& _5g_tmsi) {
+    const std::string& mcc, const std::string& mnc, uint8_t amf_region_id,
+    uint16_t amf_set_id, uint8_t amf_pointer, uint32_t _5g_tmsi) {
   // Clear all identity types first
   ClearIe();
 
@@ -247,14 +248,14 @@ void _5gsMobileIdentity::Get5gGuti(std::optional<_5G_GUTI_t>& guti) const {
 }
 
 //------------------------------------------------------------------------------
-int _5gsMobileIdentity::EncodeSuci(uint8_t* buf, int len) {
+int _5gsMobileIdentity::EncodeSuci(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding SUCI");
 
   if (!supi_format_imsi_.has_value()) return KEncodeDecodeError;
 
   int encoded_size = 0;
-  // IEI and Length
+  // Validate the buffer's length and Encode IEI/Length
   int len_pos = 0;
   int encoded_header_size =
       Type6NasIe::Encode(buf + encoded_size, len, len_pos);
@@ -317,7 +318,8 @@ int _5gsMobileIdentity::EncodeSuci(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int _5gsMobileIdentity::DecodeSuci(uint8_t* buf, int len, int ie_len) {
+int _5gsMobileIdentity::DecodeSuci(
+    const uint8_t* const buf, int len, int ie_len) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding 5GSMobilityIdentity SUCI");
   int decoded_size = 0;
@@ -439,7 +441,7 @@ int _5gsMobileIdentity::DecodeSuci(uint8_t* buf, int len, int ie_len) {
 //------------------------------------------------------------------------------
 void _5gsMobileIdentity::SetSuciWithSupiImsi(
     const std::string& mcc, const std::string& mnc,
-    const std::string& routing_ind, const uint8_t protection_sch_id,
+    const std::string& routing_ind, uint8_t protection_sch_id,
     const std::string& msin) {
   // Clear all identity types first
   ClearIe();
@@ -457,7 +459,7 @@ void _5gsMobileIdentity::SetSuciWithSupiImsi(
   supi_format_imsi_tmp.protection_scheme_id = protection_sch_id;
   supi_format_imsi_tmp.home_network_pki     = kHomeNetworkPki0WhenPsi0;
   supi_format_imsi_tmp.msin                 = msin;
-  SetLengthIndicator(10 + ceil(msin.length() / 2));
+  SetLengthIndicator(8 + ceil(msin.length() / 2));
 
   supi_format_imsi_ = std::optional<SUCI_imsi_t>(supi_format_imsi_tmp);
 }
@@ -465,8 +467,8 @@ void _5gsMobileIdentity::SetSuciWithSupiImsi(
 //------------------------------------------------------------------------------
 void _5gsMobileIdentity::SetSuciWithSupiImsi(
     const std::string& mcc, const std::string& mnc,
-    const std::string& routing_ind, const uint8_t protection_sch_id,
-    const uint8_t home_pki, const std::string& msin_digits) {
+    const std::string& routing_ind, uint8_t protection_sch_id, uint8_t home_pki,
+    const std::string& msin_digits) {
   // Clear all identity types first
   ClearIe();
 
@@ -477,7 +479,7 @@ void _5gsMobileIdentity::SetSuciWithSupiImsi(
   supi_format_imsi_tmp.mcc         = mcc;
   supi_format_imsi_tmp.mnc         = mnc;
   supi_format_imsi_ = std::optional<SUCI_imsi_t>(supi_format_imsi_tmp);
-  // TODO: SetLengthIndicator();
+  SetLengthIndicator(8 + ceil(supi_format_imsi_tmp.msin.length() / 2));
 }
 
 //------------------------------------------------------------------------------
@@ -489,7 +491,7 @@ bool _5gsMobileIdentity::GetSuciWithSupiImsi(SUCI_imsi_t& suci) const {
 
 //------------------------------------------------------------------------------
 int _5gsMobileIdentity::EncodeRoutingIndicator(
-    std::optional<std::string> routing_indicator, uint8_t* buf, int len) {
+    std::optional<std::string> routing_indicator, uint8_t* buf, int len) const {
   int encoded_size = 0;
   if (!routing_indicator.has_value()) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
@@ -535,21 +537,21 @@ int _5gsMobileIdentity::EncodeRoutingIndicator(
 
 //------------------------------------------------------------------------------
 int _5gsMobileIdentity::EncodeMsin(
-    const std::string& msin_str, uint8_t* buf, int len) {
+    const std::string& msin_str, uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .warn("Encode MSIN to Buffer is not implemented yet!");
   return KEncodeDecodeError;
 }
 
 //------------------------------------------------------------------------------
-int _5gsMobileIdentity::Encode5gSTmsi(uint8_t* buf, int len) {
+int _5gsMobileIdentity::Encode5gSTmsi(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding 5GSMobilityIdentity 5G-S-TMSI");
   if (!_5g_s_tmsi_.has_value()) return KEncodeDecodeError;
 
   int encoded_size = 0;
 
-  // IEI and Length
+  // Validate the buffer's length and Encode IEI/Length
   int encoded_header_size = Type6NasIe::Encode(buf + encoded_size, len);
   if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   encoded_size += encoded_header_size;
@@ -577,7 +579,7 @@ int _5gsMobileIdentity::Encode5gSTmsi(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int _5gsMobileIdentity::Decode5gSTmsi(uint8_t* buf, int len) {
+int _5gsMobileIdentity::Decode5gSTmsi(const uint8_t* const buf, int len) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding 5GSMobilityIdentity 5G-S-TMSI");
   int decoded_size            = 0;
@@ -635,7 +637,7 @@ bool _5gsMobileIdentity::Get5gSTmsi(
 }
 
 //------------------------------------------------------------------------------
-int _5gsMobileIdentity::EncodeImeisv(uint8_t* buf, int len) {
+int _5gsMobileIdentity::EncodeImeisv(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding IMEISV IE");
   if (!imeisv_.has_value()) return KEncodeDecodeError;
@@ -682,7 +684,7 @@ int _5gsMobileIdentity::EncodeImeisv(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int _5gsMobileIdentity::DecodeImeisv(uint8_t* buf, int len) {
+int _5gsMobileIdentity::DecodeImeisv(const uint8_t* const buf, int len) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding 5GSMobilityIdentity IMEISV");
   int decoded_size             = 0;
@@ -735,6 +737,7 @@ void _5gsMobileIdentity::SetImeisv(const IMEI_IMEISV_t& imeisv) {
 
   // Set value for IMEISV
   imeisv_ = std::optional<IMEI_IMEISV_t>(imeisv);
+  SetLengthIndicator(1 + imeisv.identity.length() / 2);
 }
 
 //------------------------------------------------------------------------------

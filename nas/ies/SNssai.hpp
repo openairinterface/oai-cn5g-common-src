@@ -26,6 +26,8 @@
 #include "Type4NasIe.hpp"
 
 constexpr uint8_t kSNssaiMinimumLength = 3;
+constexpr uint8_t kSNssaiContentMinimumLength =
+    kSNssaiMinimumLength - 2;  // Minimum length - 2 octets for IEI/Length
 constexpr uint8_t kSNssaiMaximumLength = 10;
 constexpr auto kSNssaiIeName           = "S-NSSAI";
 
@@ -37,18 +39,18 @@ class SNssai : public Type4NasIe {
   SNssai(std::optional<uint8_t> iei, SNSSAI_s snssai);
   ~SNssai();
 
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(uint8_t* buf, int len, const bool is_option = true);
+
   static std::string GetIeName() { return kSNssaiIeName; }
 
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len, const bool is_option = true);
+  uint8_t GetLength();
 
   void GetValue(SNSSAI_t& snssai) const;
 
   void SetSNSSAI(
       std::optional<int8_t> iei, uint8_t sst, uint32_t sd,
       uint8_t mapped_hplmn_sst, uint32_t mapped_hplmn_sd);
-
-  uint8_t GetLength();
 
   std::string ToString();
 

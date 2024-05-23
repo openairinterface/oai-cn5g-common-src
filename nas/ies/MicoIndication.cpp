@@ -71,7 +71,7 @@ bool MicoIndication::GetRaai() const {
 }
 
 //------------------------------------------------------------------------------
-int MicoIndication::Encode(uint8_t* buf, int len) {
+int MicoIndication::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
@@ -98,7 +98,7 @@ int MicoIndication::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int MicoIndication::Decode(uint8_t* buf, int len, bool is_iei) {
+int MicoIndication::Decode(const uint8_t* const buf, int len, bool is_iei) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding %s", GetIeName().c_str());
   if (len < kMicoIndicationIELength) {

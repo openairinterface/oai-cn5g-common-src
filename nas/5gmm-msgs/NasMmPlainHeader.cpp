@@ -36,6 +36,11 @@ NasMmPlainHeader::NasMmPlainHeader(uint8_t epd, uint8_t msg_type)
     : epd_(epd), msg_type_(msg_type) {}
 
 //------------------------------------------------------------------------------
+NasMmPlainHeader::NasMmPlainHeader(
+    uint8_t epd, uint8_t security_header_type, uint8_t msg_type)
+    : epd_(epd), secu_header_type_(security_header_type), msg_type_(msg_type) {}
+
+//------------------------------------------------------------------------------
 NasMmPlainHeader::~NasMmPlainHeader() {}
 
 //------------------------------------------------------------------------------
@@ -77,29 +82,31 @@ void NasMmPlainHeader::SetHeader(
 }
 
 //------------------------------------------------------------------------------
-void NasMmPlainHeader::SetMessageName(const std::string& name) {
-  msg_name_ = name;
+uint32_t NasMmPlainHeader::GetLength() const {
+  return kNasMmPlainHeaderLength;
 }
 
 //------------------------------------------------------------------------------
-std::string NasMmPlainHeader::GetMessageName() const {
-  return msg_name_;
-}
-
-//------------------------------------------------------------------------------
-void NasMmPlainHeader::GetMessageName(std::string& name) const {
-  name = msg_name_;
+bool NasMmPlainHeader::Validate(uint32_t len) const {
+  uint32_t actual_length = GetLength();
+  if (len < actual_length) {
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error(
+            "Buffer length is less than the minimum length of this message "
+            "(0x%x "
+            "octet)",
+            actual_length);
+    return false;
+  }
+  return true;
 }
 
 //------------------------------------------------------------------------------
 int NasMmPlainHeader::Encode(uint8_t* buf, int len) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding NasMmPlainHeader");
-  if (len < kNasMmPlainHeaderLength) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Buffer length is less than %d octets", kNasMmPlainHeaderLength);
-    return KEncodeDecodeError;
-  }
+
+  if (!Validate(len)) return KEncodeDecodeError;
 
   int encoded_size    = 0;
   int encoded_ie_size = 0;

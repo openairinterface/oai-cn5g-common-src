@@ -32,13 +32,13 @@ using namespace oai::nas;
 EpsBearerContextStatus::EpsBearerContextStatus()
     : Type4NasIe(kIeiEpsBearerContextStatus) {
   value_ = 0;
-  SetLengthIndicator(2);
+  SetLengthIndicator(kEpsBearerContextStatusContentLength);
 }
 
 //------------------------------------------------------------------------------
 EpsBearerContextStatus::EpsBearerContextStatus(uint16_t value) {
   value_ = value;
-  SetLengthIndicator(2);
+  SetLengthIndicator(kEpsBearerContextStatusContentLength);
 }
 
 //------------------------------------------------------------------------------
@@ -55,19 +55,12 @@ uint16_t EpsBearerContextStatus::GetValue() const {
 }
 
 //------------------------------------------------------------------------------
-int EpsBearerContextStatus::Encode(uint8_t* buf, int len) {
+int EpsBearerContextStatus::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
-  int ie_len = GetIeLength();
-
-  if (len < ie_len) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Len is less than %d", ie_len);
-    return KEncodeDecodeError;
-  }
 
   int encoded_size = 0;
-  // IEI and Length
+  // Validate the buffer's length and Encode IEI/Length
   int encoded_header_size = Type4NasIe::Encode(buf + encoded_size, len);
   if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   encoded_size += encoded_header_size;
@@ -81,7 +74,8 @@ int EpsBearerContextStatus::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int EpsBearerContextStatus::Decode(uint8_t* buf, int len, bool is_iei) {
+int EpsBearerContextStatus::Decode(
+    const uint8_t* const buf, int len, bool is_iei) {
   if (len < kEpsBearerContextStatusLength) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error(

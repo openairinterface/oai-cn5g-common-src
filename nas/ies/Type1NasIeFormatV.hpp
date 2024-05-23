@@ -34,14 +34,14 @@ class Type1NasIeFormatV : public NasIe {
   Type1NasIeFormatV(bool high_pos, uint8_t value);
   virtual ~Type1NasIeFormatV();
 
-  bool Validate(const int& len) const override;
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool high_pos = false) override;
+
+  uint32_t GetIeLength() const override;
+  bool Validate(int len) const override;
 
   void Set(bool high_pos, uint8_t value);
   void Set(uint8_t value);
-
-  int Encode(uint8_t* buf, const int& len) override;
-  int Decode(
-      const uint8_t* const buf, const int& len, bool high_pos = false) override;
 
  protected:
   bool high_pos_;

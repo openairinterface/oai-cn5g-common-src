@@ -100,21 +100,12 @@ void _5gsRegistrationResult::Set(
 }
 
 //------------------------------------------------------------------------------
-int _5gsRegistrationResult::Encode(uint8_t* buf, int len) {
+int _5gsRegistrationResult::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
-  if (len < k5gsRegistrationResultLength) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this IE (%d "
-            "octet)",
-            k5gsRegistrationResultLength);
-    return KEncodeDecodeError;
-  }
-
   int encoded_size = 0;
-  // IEI and Length
+  // Validate the buffer's length and Encode IEI/Length
   int encoded_header_size = Type4NasIe::Encode(buf + encoded_size, len);
   if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   encoded_size += encoded_header_size;
@@ -131,7 +122,8 @@ int _5gsRegistrationResult::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int _5gsRegistrationResult::Decode(uint8_t* buf, int len, bool is_iei) {
+int _5gsRegistrationResult::Decode(
+    const uint8_t* const buf, int len, bool is_iei) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding %s", GetIeName().c_str());
 

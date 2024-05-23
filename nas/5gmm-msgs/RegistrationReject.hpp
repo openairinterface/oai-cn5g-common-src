@@ -26,17 +26,19 @@
 
 namespace oai::nas {
 
-class RegistrationReject : public NasMmPlainHeader {
+class RegistrationReject : public Nas5gmmMessage {
  public:
   RegistrationReject();
   ~RegistrationReject();
 
+  int Encode(uint8_t* buf, int len) override;
+  int Decode(uint8_t* buf, int len) override;
+
+  uint32_t GetLength() const override;
+
   void SetHeader(uint8_t security_header_type);
   void GetSecurityHeaderType(uint8_t security_header_type);
   bool VerifyHeader();
-
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len);
 
   void Set5gmmCause(uint8_t value);
   // TODO: Get
@@ -54,6 +56,7 @@ class RegistrationReject : public NasMmPlainHeader {
   // TODO: Get
 
  private:
+  NasMmPlainHeader ie_header_;                      // Mandatory
   _5gmmCause ie_5gmm_cause_;                        // Mandatory
   std::optional<GprsTimer2> ie_t3346_value_;        // Optional
   std::optional<GprsTimer2> ie_t3502_value_;        // Optional

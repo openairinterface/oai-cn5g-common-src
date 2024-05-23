@@ -24,6 +24,7 @@
 
 #include "3gpp_24.501.hpp"
 #include "ExtendedProtocolDiscriminator.hpp"
+#include "Nas5gmmMessage.hpp"
 #include "NasMessageType.hpp"
 #include "SecurityHeaderType.hpp"
 
@@ -31,20 +32,21 @@ constexpr uint8_t kNasMmPlainHeaderLength = 3;
 
 namespace oai::nas {
 
-class NasMmPlainHeader {
+class NasMmPlainHeader : public Nas5gmmMessage {
  public:
-  NasMmPlainHeader(){};
+  NasMmPlainHeader() : Nas5gmmMessage(){};
   NasMmPlainHeader(uint8_t epd);
   NasMmPlainHeader(uint8_t epd, uint8_t msg_type);
+  NasMmPlainHeader(uint8_t epd, uint8_t security_header_type, uint8_t msg_type);
   virtual ~NasMmPlainHeader();
 
   void SetHeader(uint8_t epd, uint8_t security_header_type, uint8_t msg_type);
-  void SetMessageName(const std::string& name);
-  std::string GetMessageName() const;
-  void GetMessageName(std::string& name) const;
 
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len);
+  uint32_t GetLength() const override;
+  bool Validate(uint32_t len) const override;
+
+  int Encode(uint8_t* buf, int len) override;
+  int Decode(uint8_t* buf, int len) override;
 
   void SetEpd(uint8_t epd);
   uint8_t GetEpd() const;

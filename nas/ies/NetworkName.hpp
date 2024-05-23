@@ -26,18 +26,24 @@
 
 #include <string>
 
+#include "Type4NasIe.hpp"
 #include "bstrlib.h"
 
 constexpr uint8_t kNetworkNameMinimumLength = 3;
-constexpr auto kNetworkNameIeName           = "Network Name";
+constexpr uint8_t kNetworkNameContentMinimumLength =
+    kNetworkNameMinimumLength - 2;  // Minimum length - 2 octets for IEI/Length
+constexpr auto kNetworkNameIeName = "Network Name";
 
 namespace oai::nas {
 
-class NetworkName {
+class NetworkName : public Type4NasIe {
  public:
   NetworkName();
   NetworkName(uint8_t iei);
   ~NetworkName();
+
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = true) override;
 
   static std::string GetIeName() { return kNetworkNameIeName; }
 
@@ -55,12 +61,9 @@ class NetworkName {
   void SetTextString(const std::string& str);
   void SetTextString(const bstring& str);
 
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len, bool is_option = true);
-
  private:
-  uint8_t iei_;
-  uint16_t length_;
+  // uint8_t iei_;
+  // uint16_t length_;
   uint8_t coding_scheme_;         // octet 3
   uint8_t add_ci_;                // octet 3
   uint8_t number_of_spare_bits_;  // octet 3

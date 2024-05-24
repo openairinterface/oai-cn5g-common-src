@@ -374,7 +374,7 @@ void conv::get_amf_id(
   // AMF Pointer: 6 bits
   uint32_t amf_id_int = 0;
   get_amf_id(amf_region_id, amf_set_id, amf_pointer, amf_id_int);
-  int_to_string_hex(amf_id_int, amf_id);
+  int_to_string_hex(amf_id_int, amf_id, 6);  // AMF ID: 24 bits
 }
 
 //------------------------------------------------------------------------------
@@ -398,5 +398,5 @@ void conv::get_amf_id(
   get_amf_id(
       string_hex_to_int(amf_region_id), string_hex_to_int(amf_set_id),
       string_hex_to_int(amf_pointer), amf_id_int);
-  int_to_string_hex(amf_id_int, amf_id);
+  int_to_string_hex(amf_id_int, amf_id, 6);  // AMF ID: 24 bits
 }

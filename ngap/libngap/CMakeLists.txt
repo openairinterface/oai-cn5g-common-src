@@ -27,3 +27,4 @@ add_library (NGAP_C STATIC
 
 set(NGAP_DIR "${SRC_TOP_DIR}/${MOUNTED_COMMON}/ngap")
 target_include_directories(NGAP_C PUBLIC ${NGAP_DIR}/libngap)
+target_include_directories(NGAP_C PUBLIC ${NGAP_DIR}/libngap_ies)

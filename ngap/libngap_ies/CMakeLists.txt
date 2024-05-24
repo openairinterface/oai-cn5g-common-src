@@ -19,13 +19,12 @@
 #      contact@openairinterface.org
 ################################################################################
 set(NGAP_DIR "${SRC_TOP_DIR}/${MOUNTED_COMMON}/ngap")
-file(GLOB NGAP_lib_c_src_files
+file(GLOB NGAP_lib_c_ies_src_files
   *.c
-   ${NGAP_DIR}/libngap_ies/*.c
 )
-add_library (NGAP_LIB_C STATIC
-  ${NGAP_lib_c_src_files}
+add_library (NGAP_LIB_C_IES STATIC
+  ${NGAP_lib_c_ies_src_files}
 )
 
-
-target_include_directories(NGAP_LIB_C PUBLIC ${NGAP_DIR}/libngap)
+target_include_directories(NGAP_LIB_C_IES PUBLIC ${NGAP_DIR}/libngap)
+target_include_directories(NGAP_LIB_C_IES PUBLIC ${NGAP_DIR}/libngap_ies)

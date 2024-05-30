@@ -70,6 +70,8 @@ class conv {
   static void get_amf_id(
       const std::string& amf_region_id, const std::string& amf_set_id,
       const std::string& amf_pointer, std::string& amf_id);
+  static void convert_string_2_hex(
+      std::string& input_str, std::string& output_str);
 };
 }  // namespace oai::utils
 #endif /* FILE_CONVERSIONS_HPP_SEEN */

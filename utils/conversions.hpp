@@ -57,6 +57,7 @@ class conv {
       uint32_t value, std::string& value_str, uint8_t length = 0);
   static std::string uint32_to_hex_string(uint32_t value);
   static std::string tmsi_to_string(const uint32_t tmsi);
+  static void get_tmsi_from_guti(const std::string& guti, uint32_t& tmsi);
   static void get_amf_id(
       uint8_t amf_region_id, uint16_t amf_set_id, uint8_t amf_pointer,
       uint32_t& amf_id);

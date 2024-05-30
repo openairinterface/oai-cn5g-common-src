@@ -34,6 +34,8 @@
 #include <sstream>
 
 #include "logger_base.hpp"
+#include "output_wrapper.hpp"
+#include "utils.hpp"
 
 using namespace oai::utils;
 
@@ -415,18 +417,18 @@ void conv::convert_string_2_hex(
     std::string& input_str, std::string& output_str) {
   unsigned char* data = (unsigned char*) malloc(input_str.length() + 1);
   if (!data) {
-    oai::utils::utils::free_wrapper((void**) &data);
+    utils::free_wrapper((void**) &data);
     return;
   }
   memset(data, 0, input_str.length() + 1);
   memcpy((void*) data, (void*) input_str.c_str(), input_str.length());
-  output_wrapper::print_buffer(
+  oai::utils::output_wrapper::print_buffer(
       "amf_app", "Data input", data, input_str.length());
 
   char* datahex = (char*) malloc(input_str.length() * 2 + 1);
   if (!datahex) {
-    oai::utils::utils::free_wrapper((void**) &datahex);
-    oai::utils::utils::free_wrapper((void**) &data);
+    utils::free_wrapper((void**) &datahex);
+    utils::free_wrapper((void**) &data);
     return;
   }
   memset(datahex, 0, input_str.length() * 2 + 1);
@@ -435,6 +437,6 @@ void conv::convert_string_2_hex(
     sprintf(datahex + i * 2, "%02x", data[i]);
 
   output_str = reinterpret_cast<char*>(datahex);
-  oai::utils::utils::free_wrapper((void**) &datahex);
-  oai::utils::utils::free_wrapper((void**) &data);
+  utils::free_wrapper((void**) &datahex);
+  utils::free_wrapper((void**) &data);
 }

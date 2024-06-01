@@ -25,6 +25,7 @@
 #include <arpa/inet.h>
 
 #include <string>
+#include "bstrlib.h"
 
 namespace oai::utils {
 
@@ -53,5 +54,26 @@ std::string& rtrim(std::string& s);
 std::string& trim(std::string& s);
 // extract query param from given querystring
 std::string get_query_param(std::string querystring, std::string param);
+
+void string_to_bstring(const std::string& str, bstring bstr);
+bool string_to_dotted(const std::string& str, std::string& dotted);
+bool dotted_to_string(const std::string& dot, std::string& no_dot);
+void string_to_dnn(const std::string& str, bstring bstr);
+
+void ipv4_to_bstring(struct in_addr ipv4_address, bstring str);
+
+void ipv6_to_bstring(struct in6_addr ipv6_address, bstring str);
+
+/*
+ * Create a PDU Address Information in form of a bstring (byte 0-7: IPv6 prefix,
+ * 8-11: Ipv4 Address)
+ * @param [struct in_addr] ipv4_address: IPv4 address
+ * @param [struct in6_addr ] ipv6_address: IPv6 address
+ * @param [bstring] str: store the PDU Address Information
+ * @return void
+ */
+void ipv4v6_to_pdu_address_information(
+    struct in_addr ipv4_address, struct in6_addr ipv6_address, bstring str);
+
 }  // namespace oai::utils
 #endif

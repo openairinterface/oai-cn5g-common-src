@@ -126,7 +126,7 @@ std::string conv::mncToString(uint8_t digit1, uint8_t digit2, uint8_t digit3) {
 }
 
 //------------------------------------------------------------------------------
-struct in_addr conv::fromString(const std::string addr4) {
+struct in_addr conv::fromString(const std::string& addr4) {
   unsigned char buf[sizeof(struct in6_addr)] = {};
   auto ret = inet_pton(AF_INET, addr4.c_str(), buf);
   if (ret != 1) {
@@ -352,4 +352,23 @@ std::string conv::tmsi_to_string(const uint32_t tmsi) {
   }
   s.append(std::to_string(tmsi));
   return s;
+}
+// TODO copied from SMF, but it basically does the same as ascii_to_hex?
+void conv::convert_string_2_hex(
+    const std::string& input_str, std::string& output_str) {
+  unsigned char* data = (unsigned char*) malloc(input_str.length() + 1);
+  memset(data, 0, input_str.length() + 1);
+  memcpy((void*) data, (void*) input_str.c_str(), input_str.length());
+
+  char* datahex = (char*) malloc(input_str.length() * 2 + 1);
+  memset(datahex, 0, input_str.length() * 2 + 1);
+
+  for (int i = 0; i < input_str.length(); i++)
+    sprintf(datahex + i * 2, "%02x", data[i]);
+
+  output_str = reinterpret_cast<char*>(datahex);
+
+  // free memory
+  free(data);
+  free(datahex);
 }

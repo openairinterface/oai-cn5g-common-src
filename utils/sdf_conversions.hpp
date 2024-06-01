@@ -82,5 +82,15 @@ enum class bitrate_unit_e {
 bool parse_bitrate_string(
     const std::string& bitrate, uint16_t& value, bitrate_unit_e& unit);
 
+/**
+ * Parses 3GPP 29.571 BitRate string to a desired unit (e.g. KBPS)
+ * @param bitrate input: bitrate string
+ * @param unit input: unit to convert to
+ * @param value output: bitrate value
+ * @return true if parsing is successful
+ */
+bool parse_bitrate_string_to_unit(
+    const std::string& bitrate, const bitrate_unit_e& unit, uint32_t& value);
+
 }  // namespace oai::utils::sdf_conversions
 #endif /* FILE_CONVERSIONS_HPP_SEEN */

@@ -224,7 +224,7 @@ bool oai::utils::sdf_conversions::parse_bitrate_string_to_unit(
   int bitrate_int_calculated =
       static_cast<std::underlying_type_t<bitrate_unit_e>>(calculated_unit);
 
-  uint8_t diff = bitrate_int_calculated - bitrate_int_goal;
+  int diff = bitrate_int_calculated - bitrate_int_goal;
 
   value = calculated_value;
 

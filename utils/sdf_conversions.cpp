@@ -21,14 +21,14 @@
 
 #include "conversions.hpp"
 #include "sdf_conversions.hpp"
+#include "Helpers.h"
+#include "logger_base.hpp"
 
 #include <regex>
 #include <fmt/format.h>
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/classification.hpp>
-
-#include "logger_base.hpp"
 
 using namespace oai::utils;
 
@@ -131,11 +131,8 @@ sdf_conversions::ip_range sdf_conversions::ip_range::from_string(
 
 bool sdf_conversions::parse_bitrate_string(
     const std::string& bitrate, uint16_t& value, bitrate_unit_e& unit) {
-  // TODO update BANDWIDTH_REGEX in model/Helpers.h with this value, the only
-  // difference is capture groups after resynch with common-src
-  // Here, the space is optional, so "100Mbps" is okay and "100 Mbps", but in
-  // the standard the space is mandatory
-  std::string bandwidth_regex = R"((^\d+(\.\d+)?) ?(bps|Kbps|Mbps|Gbps|Tbps)$)";
+  std::string bandwidth_regex =
+      oai::model::common::helpers::BANDWIDTH_VALIDATION_REGEX;
 
   std::regex re(bandwidth_regex);
   std::smatch matches;

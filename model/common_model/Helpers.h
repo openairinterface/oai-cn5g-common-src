@@ -38,8 +38,10 @@
 
 namespace oai::model::common::helpers {
 
+// Here, the space is optional, so "100Mbps" is okay and "100 Mbps", but in
+// the standard the space is mandatory
 const std::string BANDWIDTH_VALIDATION_REGEX =
-    R"(^\d+(\.\d+)? (bps|Kbps|Mbps|Gbps|Tbps)$)";
+    R"((^\d+(\.\d+)?) ?(bps|Kbps|Mbps|Gbps|Tbps)$)";
 
 class ValidationException : public std::runtime_error {
  public:

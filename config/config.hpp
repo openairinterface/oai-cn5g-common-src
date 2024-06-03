@@ -162,13 +162,13 @@ class config_iface {
 };
 
 class lttng_configuration {
-public:
-  explicit lttng_configuration(const std::string &config_path);
+ public:
+  explicit lttng_configuration(const std::string& config_path);
   void read_from_file();
   bool is_lttng_active() const;
   std::string get_lttng_log_level();
 
-private:
+ private:
   std::string m_config_path{};
   lttng_config m_lttng;
 };

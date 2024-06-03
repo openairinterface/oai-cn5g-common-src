@@ -42,22 +42,22 @@ static const std::string LOGGER_COMMON = "common";
 namespace oai::logger {
 
 class printf_logger {
-private:
+ private:
   bool m_is_lttng_active{false};
   std::shared_ptr<spd_logger> m_spd_logger{nullptr};
   std::shared_ptr<lttng_logger> m_lttng_logger{nullptr};
 
-public:
-  explicit printf_logger(const std::string &nf_name,
-                         const std::string &category, bool log_stdout,
-                         bool log_rot_file, bool isLTTngActive)
+ public:
+  explicit printf_logger(
+      const std::string& nf_name, const std::string& category, bool log_stdout,
+      bool log_rot_file, bool isLTTngActive)
       : m_is_lttng_active(isLTTngActive) {
     if (m_is_lttng_active) {
-      m_lttng_logger = std::make_shared<lttng_logger>(nf_name, category,
-                                                      log_stdout, log_rot_file);
+      m_lttng_logger = std::make_shared<lttng_logger>(
+          nf_name, category, log_stdout, log_rot_file);
     } else {
-      m_spd_logger = std::make_shared<spd_logger>(nf_name, category, log_stdout,
-                                                  log_rot_file);
+      m_spd_logger = std::make_shared<spd_logger>(
+          nf_name, category, log_stdout, log_rot_file);
     }
   }
 
@@ -77,91 +77,96 @@ public:
     }
   }
 
-  template <typename... T>
-  void trace(const std::string &fmt, const T &...args) const {
+  template<typename... T>
+  void trace(const std::string& fmt, const T&... args) const {
     if (m_is_lttng_active)
       m_lttng_logger->log_printf(spdlog::level::trace, fmt, args...);
     else
       m_spd_logger->log_printf(spdlog::level::trace, fmt, args...);
   }
 
-  template <typename... T> void trace(const char *fmt, const T &...args) const {
+  template<typename... T>
+  void trace(const char* fmt, const T&... args) const {
     if (m_is_lttng_active)
       m_lttng_logger->log_printf(spdlog::level::trace, fmt, args...);
     else
       m_spd_logger->log_printf(spdlog::level::trace, fmt, args...);
   }
 
-  template <typename... T>
-  void debug(const std::string &fmt, const T &...args) const {
+  template<typename... T>
+  void debug(const std::string& fmt, const T&... args) const {
     if (m_is_lttng_active)
       m_lttng_logger->log_printf(spdlog::level::debug, fmt, args...);
     else
       m_spd_logger->log_printf(spdlog::level::debug, fmt, args...);
   }
 
-  template <typename... T> void debug(const char *fmt, const T &...args) const {
+  template<typename... T>
+  void debug(const char* fmt, const T&... args) const {
     if (m_is_lttng_active)
       m_lttng_logger->log_printf(spdlog::level::debug, fmt, args...);
     else
       m_spd_logger->log_printf(spdlog::level::debug, fmt, args...);
   }
 
-  template <typename... T>
-  void info(const std::string &fmt, const T &...args) const {
+  template<typename... T>
+  void info(const std::string& fmt, const T&... args) const {
     if (m_is_lttng_active)
       m_lttng_logger->log_printf(spdlog::level::info, fmt, args...);
     else
       m_spd_logger->log_printf(spdlog::level::info, fmt, args...);
   }
 
-  template <typename... T> void info(const char *fmt, const T &...args) const {
+  template<typename... T>
+  void info(const char* fmt, const T&... args) const {
     if (m_is_lttng_active)
       m_lttng_logger->log_printf(spdlog::level::info, fmt, args...);
     else
       m_spd_logger->log_printf(spdlog::level::info, fmt, args...);
   }
 
-  template <typename... T>
-  void startup(const std::string &fmt, const T &...args) const {
+  template<typename... T>
+  void startup(const std::string& fmt, const T&... args) const {
     if (m_is_lttng_active)
       m_lttng_logger->log_printf(spdlog::level::warn, fmt, args...);
     else
       m_spd_logger->log_printf(spdlog::level::warn, fmt, args...);
   }
 
-  template <typename... T>
-  void startup(const char *fmt, const T &...args) const {
+  template<typename... T>
+  void startup(const char* fmt, const T&... args) const {
     if (m_is_lttng_active)
       m_lttng_logger->log_printf(spdlog::level::warn, fmt, args...);
     else
       m_spd_logger->log_printf(spdlog::level::warn, fmt, args...);
   }
 
-  template <typename... T>
-  void warn(const std::string &fmt, const T &...args) const {
+  template<typename... T>
+  void warn(const std::string& fmt, const T&... args) const {
     if (m_is_lttng_active)
       m_lttng_logger->log_printf(spdlog::level::err, fmt, args...);
     else
       m_spd_logger->log_printf(spdlog::level::err, fmt, args...);
   }
 
-  template <typename... T> void warn(const char *fmt, const T &...args) const {
+  template<typename... T>
+  void warn(const char* fmt, const T&... args) const {
     if (m_is_lttng_active)
       m_lttng_logger->log_printf(spdlog::level::err, fmt, args...);
     else
       m_spd_logger->log_printf(spdlog::level::err, fmt, args...);
   }
 
-  template <typename... T>
-  void error(const std::string &fmt, const T &...args) const {
+  template<typename... T>
+  void error(const std::string& fmt, const T&... args) const {
     if (m_is_lttng_active)
       m_lttng_logger->log_printf(spdlog::level::critical, fmt, args...);
     else
       m_spd_logger->log_printf(spdlog::level::critical, fmt, args...);
   }
 
-  template <typename... T> void error(const char *fmt, const T &...args) const {
+  template<typename... T>
+  void error(const char* fmt, const T&... args) const {
     if (m_is_lttng_active)
       m_lttng_logger->log_printf(spdlog::level::trace, fmt, args...);
     else

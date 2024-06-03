@@ -9,8 +9,9 @@
 
 using namespace oai::logger;
 
-spd_logger::spd_logger(const std::string &nf_name, const std::string &category,
-                       bool log_stdout, bool log_rot_file) {
+spd_logger::spd_logger(
+    const std::string& nf_name, const std::string& category, bool log_stdout,
+    bool log_rot_file) {
   // static to use the same sinks for all loggers
   static std::vector<spdlog::sink_ptr> sinks;
 
@@ -37,8 +38,8 @@ spd_logger::spd_logger(const std::string &nf_name, const std::string &category,
   std::stringstream log_format{};
   log_format << "[%Y-%m-%dT%H:%M:%S.%f] [" << nf_name << "] [%n] [%l] %v";
 
-  logger = std::make_shared<spdlog::logger>(category, std::begin(sinks),
-                                            std::end(sinks));
+  logger = std::make_shared<spdlog::logger>(
+      category, std::begin(sinks), std::end(sinks));
 
   // Out of the box the level is debug
   logger->set_level(spdlog::level::debug);

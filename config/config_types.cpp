@@ -775,28 +775,29 @@ nlohmann::json database_config::to_json() {
   return json_data;
 }
 
-bool lttng_config::is_lttng_active() const { return m_is_active.get_value(); }
+bool lttng_config::is_lttng_active() const {
+  return m_is_active.get_value();
+}
 
 std::string lttng_config::get_lttng_log_level() {
   return m_log_level.get_value();
 }
 
-lttng_config::lttng_config(const std::string &name) {
+lttng_config::lttng_config(const std::string& name) {
   m_config_name = name;
-  m_set = false;
-  m_is_active = option_config_value("active", false);
-  m_log_level = string_config_value("level", "debug");
-  m_use_spd = option_config_value("use_spd", false);
+  m_set         = false;
+  m_is_active   = option_config_value("active", false);
+  m_log_level   = string_config_value("level", "debug");
+  m_use_spd     = option_config_value("use_spd", false);
   m_log_level.set_validation_regex(LOG_LVL_VALIDATOR_REGEX);
 }
 
-void lttng_config::from_yaml(const YAML::Node &node) {
+void lttng_config::from_yaml(const YAML::Node& node) {
   m_set = true;
   if (node["active"]) {
     m_is_active.from_yaml(node["active"]);
   }
-  if (!m_is_active.get_value())
-    return;
+  if (!m_is_active.get_value()) return;
 
   if (node["level"]) {
     m_log_level.from_yaml(node["level"]);
@@ -807,21 +808,20 @@ void lttng_config::from_yaml(const YAML::Node &node) {
   }
 }
 
-std::string lttng_config::to_string(const std::string &indent) const {
+std::string lttng_config::to_string(const std::string& indent) const {
   std::string out;
   unsigned int inner_width = get_inner_width(indent.length());
-  out.append(indent).append(fmt::format(BASE_FORMATTER, OUTER_LIST_ELEM,
-                                        NF_CONFIG_HOST_NAME_LABEL, inner_width,
-                                        m_is_active.get_value()));
-  out.append(indent).append(fmt::format(BASE_FORMATTER, OUTER_LIST_ELEM,
-                                        DATABASE_CONFIG_PORT_LABEL, inner_width,
-                                        m_log_level.get_value()));
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, OUTER_LIST_ELEM, NF_CONFIG_HOST_NAME_LABEL, inner_width,
+      m_is_active.get_value()));
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, OUTER_LIST_ELEM, DATABASE_CONFIG_PORT_LABEL, inner_width,
+      m_log_level.get_value()));
   return out;
 }
 
 void lttng_config::validate() {
-  if (!m_set)
-    return;
+  if (!m_set) return;
   m_log_level.validate();
 }
 

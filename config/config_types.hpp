@@ -284,17 +284,17 @@ class nf : public config_type {
 };
 
 class lttng_config : public config_type {
-private:
+ private:
   option_config_value m_is_active{};
   string_config_value m_log_level{};
   option_config_value m_use_spd{};
 
-public:
-  explicit lttng_config(const std::string &name);
-  void from_yaml(const YAML::Node &node) override;
+ public:
+  explicit lttng_config(const std::string& name);
+  void from_yaml(const YAML::Node& node) override;
   bool is_lttng_active() const;
   std::string get_lttng_log_level();
-  [[nodiscard]] std::string to_string(const std::string &indent) const override;
+  [[nodiscard]] std::string to_string(const std::string& indent) const override;
   void validate() override;
 };
 

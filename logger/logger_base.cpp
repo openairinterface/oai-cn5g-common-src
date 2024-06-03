@@ -50,8 +50,8 @@ void logger_registry::register_logger(
 
   auto lock = std::unique_lock(mutex);
 
-  auto logger = printf_logger(nf_name, logger_name, log_stdout, log_rot_file,
-                              m_is_lttng_active);
+  auto logger = printf_logger(
+      nf_name, logger_name, log_stdout, log_rot_file, m_is_lttng_active);
 
   logger_map.insert(std::make_pair<>(logger_name, logger));
 }

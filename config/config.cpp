@@ -36,17 +36,16 @@
 
 using namespace oai::config;
 
-lttng_configuration::lttng_configuration(const std::string &config_path)
+lttng_configuration::lttng_configuration(const std::string& config_path)
     : m_lttng("lttng_config") {
   m_config_path = config_path;
 }
 
 void lttng_configuration::read_from_file() {
   YAML::Node node = YAML::LoadFile(m_config_path);
-  for (const auto &elem : node) {
+  for (const auto& elem : node) {
     auto key = elem.first.as<std::string>();
-    if (key != "lttng")
-      continue;
+    if (key != "lttng") continue;
 
     m_lttng.from_yaml(elem.second);
   }

@@ -31,9 +31,7 @@ using namespace oai::nas;
 //------------------------------------------------------------------------------
 _5gsTrackingAreaIdList::_5gsTrackingAreaIdList()
     : Type4NasIe(kIei5gsTrackingAreaIdentityList), tai_list_() {
-  SetLengthIndicator(
-      k5gsTrackingAreaIdListMinimumLength -
-      2);  // Minimim length - 2 bytes for header
+  SetLengthIndicator(k5gsTrackingAreaIdListContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -42,9 +40,7 @@ _5gsTrackingAreaIdList::_5gsTrackingAreaIdList(bool iei)
   if (iei) {
     SetIei(kIei5gsTrackingAreaIdentityList);
   }
-  SetLengthIndicator(
-      k5gsTrackingAreaIdListMinimumLength -
-      2);  // Minimim length - 2 bytes for header
+  SetLengthIndicator(k5gsTrackingAreaIdListContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -56,29 +52,35 @@ _5gsTrackingAreaIdList::_5gsTrackingAreaIdList(
       (tai_list.size() > k5gsTrackingAreaIdListMaximumSupportedTAIs) ?
           k5gsTrackingAreaIdListMaximumSupportedTAIs :
           tai_list.size();
+  uint8_t ie_len = 0;
   for (int i = 0; i < size; i++) {
     tai_list_.push_back(tai_list[i]);
+    switch (tai_list_[i].type) {
+      case 0x00: {
+        ie_len += 4 + tai_list_[i].tac_list.size() * 3;
+      } break;
+      case 0x01: {
+        ie_len += 7;
+      } break;
+      case 0x10: {
+        ie_len += 1 + tai_list_[i].tac_list.size() * 6;
+      }
+    }
   }
 
   tai_list_ = tai_list;
-  // Don't know Length Indicator for now
+  SetLengthIndicator(ie_len);
 }
 
 //------------------------------------------------------------------------------
-int _5gsTrackingAreaIdList::Encode(uint8_t* buf, int len) {
+int _5gsTrackingAreaIdList::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
-  int ie_len = GetIeLength();
-
-  if (len < ie_len) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Len is less than %d", ie_len);
-    return KEncodeDecodeError;
-  }
 
   int encoded_size = 0;
   // IEI and Length
   int len_pos = 0;
+  // Validate the buffer's length and Encode IEI/Length
   int encoded_header_size =
       Type4NasIe::Encode(buf + encoded_size, len, len_pos);
   if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
@@ -120,7 +122,8 @@ int _5gsTrackingAreaIdList::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int _5gsTrackingAreaIdList::EncodeType00(p_tai_t item, uint8_t* buf, int len) {
+int _5gsTrackingAreaIdList::EncodeType00(
+    p_tai_t item, uint8_t* buf, int len) const {
   int encoded_size = 0;
   // Type of list/Number of elements
   uint8_t octet = 0x00 | (item.type & 0x60) |
@@ -141,13 +144,15 @@ int _5gsTrackingAreaIdList::EncodeType00(p_tai_t item, uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int _5gsTrackingAreaIdList::EncodeType01(p_tai_t item, uint8_t* buf, int len) {
+int _5gsTrackingAreaIdList::EncodeType01(
+    p_tai_t item, uint8_t* buf, int len) const {
   // TODO:
   return KEncodeDecodeError;
 }
 
 //------------------------------------------------------------------------------
-int _5gsTrackingAreaIdList::EncodeType10(p_tai_t item, uint8_t* buf, int len) {
+int _5gsTrackingAreaIdList::EncodeType10(
+    p_tai_t item, uint8_t* buf, int len) const {
   // TODO:
   return KEncodeDecodeError;
 }

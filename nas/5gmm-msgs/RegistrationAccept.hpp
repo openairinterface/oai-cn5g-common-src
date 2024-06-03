@@ -26,17 +26,19 @@
 
 namespace oai::nas {
 
-class RegistrationAccept : public NasMmPlainHeader {
+class RegistrationAccept : public Nas5gmmMessage {
  public:
   RegistrationAccept();
   ~RegistrationAccept();
 
+  int Encode(uint8_t* buf, int len) override;
+  int Decode(uint8_t* buf, int len) override;
+
+  uint32_t GetLength() const override;
+
   void SetHeader(uint8_t security_header_type);
   void GetSecurityHeaderType(uint8_t security_header_type);  // TODO
   bool VerifyHeader();                                       // TODO
-
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len);
 
   void Set5gsRegistrationResult(
       bool emergency, bool nssaa, bool sms, uint8_t value);
@@ -49,8 +51,8 @@ class RegistrationAccept : public NasMmPlainHeader {
       const std::string& msin);
   void SetSuciSupiFormatImsi(
       const std::string& mcc, const std::string& mnc,
-      const std::string& routing_ind, uint8_t protection_sch_id,
-      const uint8_t& hnpki, const std::string& msin);
+      const std::string& routing_ind, uint8_t protection_sch_id, uint8_t hnpki,
+      const std::string& msin);
   void Set5gGuti(
       const std::string& mcc, const std::string& mnc, uint8_t amf_region_id,
       uint16_t amf_set_id, uint8_t amf_pointer, uint32_t tmsi);
@@ -150,6 +152,7 @@ class RegistrationAccept : public NasMmPlainHeader {
   // TODO: Get
 
  private:
+  NasMmPlainHeader ie_header_;                         // Mandatory
   _5gsRegistrationResult ie_5gs_registration_result_;  // Mandatory
 
   std::optional<_5gsMobileIdentity> ie_5g_guti_;       // Optional

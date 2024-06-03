@@ -27,15 +27,17 @@
 
 namespace oai::nas {
 
-class ServiceRequest : public NasMmPlainHeader {
+class ServiceRequest : public Nas5gmmMessage {
  public:
   ServiceRequest();
   ~ServiceRequest();
 
   void SetHeader(uint8_t security_header_type);
 
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len);
+  int Encode(uint8_t* buf, int len) override;
+  int Decode(uint8_t* buf, int len) override;
+
+  uint32_t GetLength() const override;
 
   void SetNgKsi(uint8_t tsc, uint8_t key_set_id);
   void GetNgKsi(uint8_t& ng_ksi) const;
@@ -64,6 +66,7 @@ class ServiceRequest : public NasMmPlainHeader {
   bool GetNasMessageContainer(bstring& nas) const;
 
  private:
+  NasMmPlainHeader ie_header_;       // Mandatory
   NasKeySetIdentifier ie_ng_ksi_;    // Mandatory
   ServiceType ie_service_type_;      // Mandatory
   _5gsMobileIdentity ie_5g_s_tmsi_;  // Mandatory

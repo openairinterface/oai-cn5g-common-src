@@ -34,6 +34,7 @@ Type1NasIeFormatV::Type1NasIeFormatV() : NasIe(), high_pos_(false), value_(0) {}
 Type1NasIeFormatV::Type1NasIeFormatV(bool high_pos) : NasIe(), value_(0) {
   high_pos_ = high_pos;
 }
+
 //------------------------------------------------------------------------------
 Type1NasIeFormatV::Type1NasIeFormatV(bool high_pos, uint8_t value) : NasIe() {
   high_pos_ = high_pos;
@@ -44,7 +45,7 @@ Type1NasIeFormatV::Type1NasIeFormatV(bool high_pos, uint8_t value) : NasIe() {
 Type1NasIeFormatV::~Type1NasIeFormatV() {}
 
 //------------------------------------------------------------------------------
-bool Type1NasIeFormatV::Validate(const int& len) const {
+bool Type1NasIeFormatV::Validate(int len) const {
   if (len < kType1NasIeFormatVLength) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error(
@@ -57,6 +58,11 @@ bool Type1NasIeFormatV::Validate(const int& len) const {
 }
 
 //------------------------------------------------------------------------------
+uint32_t Type1NasIeFormatV::GetIeLength() const {
+  return kType1NasIeFormatVLength;
+}
+
+//------------------------------------------------------------------------------
 void Type1NasIeFormatV::Set(bool high_pos, uint8_t value) {
   high_pos_ = high_pos;
   value_    = value & 0x0f;  // 4 bits
@@ -66,10 +72,9 @@ void Type1NasIeFormatV::Set(bool high_pos, uint8_t value) {
 void Type1NasIeFormatV::Set(uint8_t value) {
   value_ = value & 0x0f;  // 4 bits
 }
+
 //------------------------------------------------------------------------------
-int Type1NasIeFormatV::Encode(uint8_t* buf, const int& len) {
-  // oai::logger::logger_registry::get_logger(LOGGER_COMMON).debug("Encoding
-  // %s", GetIeName().c_str());
+int Type1NasIeFormatV::Encode(uint8_t* buf, int len) const {
   if (!Validate(len)) return KEncodeDecodeError;
 
   int encoded_size = 0;
@@ -88,17 +93,12 @@ int Type1NasIeFormatV::Encode(uint8_t* buf, const int& len) {
 
   ENCODE_U8(buf + encoded_size, octet, encoded_size);
 
-  // oai::logger::logger_registry::get_logger(LOGGER_COMMON).debug(
-  //    "Encoded %s (len %d)", GetIeName().c_str(), encoded_size);
   return 0;  // 1/2 octet
 }
 
 //------------------------------------------------------------------------------
 int Type1NasIeFormatV::Decode(
-    const uint8_t* const buf, const int& len, bool high_pos) {
-  // oai::logger::logger_registry::get_logger(LOGGER_COMMON).debug("Decoding
-  // %s", GetIeName().c_str());
-
+    const uint8_t* const buf, int len, bool high_pos) {
   if (!Validate(len)) return KEncodeDecodeError;
   high_pos_        = high_pos;
   int decoded_size = 0;
@@ -110,7 +110,5 @@ int Type1NasIeFormatV::Decode(
   } else {
     value_ = (octet & 0x0f);
   }
-  // oai::logger::logger_registry::get_logger(LOGGER_COMMON).debug(
-  //     "Decoded %s (len %d)", GetIeName().c_str(), decoded_size);
   return 0;  // 1/2 octet
 }

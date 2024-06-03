@@ -31,9 +31,7 @@ using namespace oai::nas;
 //------------------------------------------------------------------------------
 ServiceAreaList::ServiceAreaList()
     : Type4NasIe(kIei5gsTrackingAreaIdentityList), ie_list_() {
-  SetLengthIndicator(
-      kServiceAreaListMinimumLength -
-      2);  // Minimim length - 2 bytes for header
+  SetLengthIndicator(kServiceAreaListContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -41,9 +39,7 @@ ServiceAreaList::ServiceAreaList(bool iei) : Type4NasIe(), ie_list_() {
   if (iei) {
     SetIei(kIeiServiceAreaList);
   }
-  SetLengthIndicator(
-      kServiceAreaListMinimumLength -
-      2);  // Minimim length - 2 bytes for header
+  SetLengthIndicator(kServiceAreaListContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -51,33 +47,41 @@ ServiceAreaList::ServiceAreaList(
     const std::vector<service_area_list_ie_t>& list)
     : Type4NasIe(kIeiServiceAreaList) {
   // "Allowed type" should be the same in all the partial service area lists
-  for (int i = 0; i < ie_list_.size(); i++) {
-    if (ie_list_[i].type != ie_list_[0].type) return;
+  for (int i = 0; i < list.size(); i++) {
+    if (list[i].type != list[0].type) return;
   }
   // only store the first 16 TAIs
   uint8_t size = (list.size() > kServiceAreaListMaximumSupportedTAIs) ?
                      kServiceAreaListMaximumSupportedTAIs :
                      list.size();
+
+  uint8_t ie_len = 0;
   for (int i = 0; i < size; i++) {
     ie_list_.push_back(list[i]);
+
+    switch (list[i].type) {
+      case 0x00: {
+        ie_len += 4 + list[i].tac_list.size() * 3;
+      } break;
+      case 0x01: {
+        ie_len += 7;
+      } break;
+      case 0x10: {
+        ie_len += 1 + list[i].tac_list.size() * 6;
+      }
+    }
   }
-  // Don't know Length Indicator for now
+
+  SetLengthIndicator(ie_len);
 }
 
 //------------------------------------------------------------------------------
-int ServiceAreaList::Encode(uint8_t* buf, int len) {
+int ServiceAreaList::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
-  int ie_len = GetIeLength();
-
-  if (len < ie_len) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Len is less than %d", ie_len);
-    return KEncodeDecodeError;
-  }
 
   int encoded_size = 0;
-  // IEI and Length
+  // Validate the buffer's length and Encode IEI/Length
   int len_pos = 0;
   int encoded_header_size =
       Type4NasIe::Encode(buf + encoded_size, len, len_pos);
@@ -127,7 +131,7 @@ int ServiceAreaList::Encode(uint8_t* buf, int len) {
 
 //------------------------------------------------------------------------------
 int ServiceAreaList::EncodeType00(
-    service_area_list_ie_t item, uint8_t* buf, int len) {
+    service_area_list_ie_t item, uint8_t* buf, int len) const {
   int encoded_size = 0;
   // Allowed type/Type of list/Number of elements
   uint8_t octet = (item.allowed_type & 0x80) | (item.type & 0x60) |
@@ -149,7 +153,7 @@ int ServiceAreaList::EncodeType00(
 
 //------------------------------------------------------------------------------
 int ServiceAreaList::EncodeType01(
-    service_area_list_ie_t item, uint8_t* buf, int len) {
+    service_area_list_ie_t item, uint8_t* buf, int len) const {
   int encoded_size = 0;
   // Allowed type/Type of list/Number of elements
   uint8_t octet = (item.allowed_type & 0x80) | (item.type & 0x60) |
@@ -170,7 +174,7 @@ int ServiceAreaList::EncodeType01(
 
 //------------------------------------------------------------------------------
 int ServiceAreaList::EncodeType10(
-    service_area_list_ie_t item, uint8_t* buf, int len) {
+    service_area_list_ie_t item, uint8_t* buf, int len) const {
   int encoded_size = 0;
   // Allowed type/Type of list/Number of elements
   uint8_t octet = (item.allowed_type & 0x80) | (item.type & 0x60) |
@@ -196,7 +200,7 @@ int ServiceAreaList::EncodeType10(
 
 //------------------------------------------------------------------------------
 int ServiceAreaList::EncodeType11(
-    service_area_list_ie_t item, uint8_t* buf, int len) {
+    service_area_list_ie_t item, uint8_t* buf, int len) const {
   int encoded_size = 0;
   // Allowed type/Type of list/Number of elements
   uint8_t octet = 0x00 | (item.type & 0x60) |

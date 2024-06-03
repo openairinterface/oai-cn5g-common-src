@@ -24,7 +24,10 @@
 
 #include "Type4NasIe.hpp"
 
-constexpr uint8_t kAdditionalInformationMinimumLength  = 3;
+constexpr uint8_t kAdditionalInformationMinimumLength = 3;
+constexpr uint8_t kAdditionalInformationContentMinimumLength =
+    kAdditionalInformationMinimumLength -
+    2;  // Minimum length - 2 octets for IEI/Length
 constexpr uint16_t kAdditionalInformationMaximumLength = 257;
 constexpr auto kAdditionalInformationIeName = "Additional Information";
 
@@ -36,10 +39,10 @@ class AdditionalInformation : public Type4NasIe {
   AdditionalInformation(const bstring& value);
   ~AdditionalInformation();
 
-  static std::string GetIeName() { return kAdditionalInformationIeName; }
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
 
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len, bool is_iei);
+  static std::string GetIeName() { return kAdditionalInformationIeName; }
 
   void SetValue(const bstring& dnn);
   void GetValue(bstring& dnn) const;

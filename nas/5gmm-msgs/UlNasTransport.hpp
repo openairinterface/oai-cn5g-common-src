@@ -26,15 +26,17 @@
 
 namespace oai::nas {
 
-class UlNasTransport : public NasMmPlainHeader {
+class UlNasTransport : public Nas5gmmMessage {
  public:
   UlNasTransport();
   ~UlNasTransport();
 
   void SetHeader(uint8_t security_header_type);
 
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len);
+  int Encode(uint8_t* buf, int len) override;
+  int Decode(uint8_t* buf, int len) override;
+
+  uint32_t GetLength() const override;
 
   void SetPayloadContainerType(uint8_t value);
   uint8_t GetPayloadContainerType() const;
@@ -68,6 +70,7 @@ class UlNasTransport : public NasMmPlainHeader {
   // TODO: Get
 
  private:
+  NasMmPlainHeader ie_header_;                      // Mandatory
   PayloadContainerType ie_payload_container_type_;  // Mandatory
   PayloadContainer ie_payload_container_;           // Mandatory
 

@@ -73,7 +73,8 @@ int nas_utils::encodeMccMnc2Buffer(
 
 //------------------------------------------------------------------------------
 int nas_utils::decodeMccMncFromBuffer(
-    std::string& mcc_str, std::string& mnc_str, uint8_t* buf, int len) {
+    std::string& mcc_str, std::string& mnc_str, const uint8_t* const buf,
+    int len) {
   if (len < kMccMncLength) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error(

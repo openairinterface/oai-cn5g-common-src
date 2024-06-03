@@ -27,7 +27,9 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 AuthenticationFailure::AuthenticationFailure()
-    : NasMmPlainHeader(k5gsMobilityManagementMessages, kAuthenticationFailure) {
+    : ie_header_(
+          k5gsMobilityManagementMessages, kPlain5gsMessage,
+          kAuthenticationFailure) {
   ie_authentication_failure_parameter_ = std::nullopt;
 }
 
@@ -35,8 +37,19 @@ AuthenticationFailure::AuthenticationFailure()
 AuthenticationFailure::~AuthenticationFailure() {}
 
 //------------------------------------------------------------------------------
+uint32_t AuthenticationFailure::GetLength() const {
+  uint32_t msg_len = 0;
+  msg_len += ie_header_.GetLength();
+  msg_len += ie_5gmm_cause_.GetIeLength();
+  if (ie_authentication_failure_parameter_.has_value())
+    msg_len += ie_authentication_failure_parameter_.value().GetIeLength();
+
+  return msg_len;
+}
+
+//------------------------------------------------------------------------------
 void AuthenticationFailure::SetHeader(uint8_t security_header_type) {
-  NasMmPlainHeader::SetSecurityHeaderType(security_header_type);
+  ie_header_.SetSecurityHeaderType(security_header_type);
 }
 
 //------------------------------------------------------------------------------
@@ -89,23 +102,27 @@ bool AuthenticationFailure::GetAuthenticationFailureParameter(
 int AuthenticationFailure::Encode(uint8_t* buf, int len) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding AuthenticationFailure message");
+
+  if (!Validate(len)) return KEncodeDecodeError;
+
   int encoded_size    = 0;
   int encoded_ie_size = 0;
 
   // Header
-  if ((encoded_ie_size = NasMmPlainHeader::Encode(buf, len)) ==
-      KEncodeDecodeError) {
+  if ((encoded_ie_size = ie_header_.Encode(buf, len)) == KEncodeDecodeError) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error("Encoding NAS Header error");
     return KEncodeDecodeError;
   }
   encoded_size += encoded_ie_size;
 
+  // 5GMM Cause
   if ((encoded_ie_size = NasHelper::Encode(
            ie_5gmm_cause_, buf, len, encoded_size)) == KEncodeDecodeError) {
     return KEncodeDecodeError;
   }
 
+  // Authentication Failure Parameter
   if ((encoded_ie_size = NasHelper::Encode(
            ie_authentication_failure_parameter_, buf, len, encoded_size)) ==
       KEncodeDecodeError) {
@@ -126,7 +143,7 @@ int AuthenticationFailure::Decode(uint8_t* buf, int len) {
   int decoded_ie_size = 0;
 
   // Header
-  decoded_ie_size = NasMmPlainHeader::Decode(buf, len);
+  decoded_ie_size = ie_header_.Decode(buf, len);
   if (decoded_ie_size == KEncodeDecodeError) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error("Decoding NAS Header error");

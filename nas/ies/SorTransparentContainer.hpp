@@ -24,14 +24,16 @@
 
 #include "Type6NasIe.hpp"
 
-constexpr uint8_t kSorTransparentContainerMinimumLength   = 20;
-constexpr uint8_t kSorTransparentContainerIeMinimumLength = 17;
-constexpr uint8_t kSorTransparentContainerIeMacLength     = 16;
+constexpr uint8_t kSorTransparentContainerMinimumLength = 20;
+constexpr uint8_t kSorTransparentContainerContentMinimumLength =
+    kSorTransparentContainerMinimumLength -
+    3;  // Minimum length - 3 octets for IEI/Length
+constexpr uint8_t kSorTransparentContainerIeMacLength = 16;
 constexpr auto kSorTransparentContainerIeName = "SOR Transparent Container";
 
 namespace oai::nas {
 
-class SorTransparentContainer : Type6NasIe {
+class SorTransparentContainer : public Type6NasIe {
  public:
   SorTransparentContainer();
   SorTransparentContainer(
@@ -39,10 +41,10 @@ class SorTransparentContainer : Type6NasIe {
       const uint8_t (&value)[kSorTransparentContainerIeMacLength]);
   ~SorTransparentContainer();
 
-  static std::string GetIeName() { return kSorTransparentContainerIeName; }
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
 
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len, bool is_iei);
+  static std::string GetIeName() { return kSorTransparentContainerIeName; }
 
   void GetValue(uint8_t (&value)[kSorTransparentContainerIeMacLength]) const;
 

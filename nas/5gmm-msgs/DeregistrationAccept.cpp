@@ -27,12 +27,12 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 DeregistrationAccept::DeregistrationAccept(bool is_ue_originating)
-    : NasMmPlainHeader() {
-  NasMmPlainHeader::SetEpd(k5gsMobilityManagementMessages);
+    : ie_header_() {
+  ie_header_.SetEpd(k5gsMobilityManagementMessages);
   if (is_ue_originating) {
-    NasMmPlainHeader::SetMessageType(kDeregistrationAcceptUeOriginating);
+    ie_header_.SetMessageType(kDeregistrationAcceptUeOriginating);
   } else {
-    NasMmPlainHeader::SetMessageType(kDeregistrationAcceptUeTerminated);
+    ie_header_.SetMessageType(kDeregistrationAcceptUeTerminated);
   }
 }
 
@@ -40,8 +40,16 @@ DeregistrationAccept::DeregistrationAccept(bool is_ue_originating)
 DeregistrationAccept::~DeregistrationAccept() {}
 
 //------------------------------------------------------------------------------
+uint32_t DeregistrationAccept::GetLength() const {
+  uint32_t msg_len = 0;
+  msg_len += ie_header_.GetLength();
+
+  return msg_len;
+}
+
+//------------------------------------------------------------------------------
 void DeregistrationAccept::SetHeader(uint8_t security_header_type) {
-  NasMmPlainHeader::SetSecurityHeaderType(security_header_type);
+  ie_header_.SetSecurityHeaderType(security_header_type);
 }
 
 //------------------------------------------------------------------------------
@@ -53,8 +61,7 @@ int DeregistrationAccept::Encode(uint8_t* buf, int len) {
   int encoded_ie_size = 0;
 
   // Header
-  if ((encoded_ie_size = NasMmPlainHeader::Encode(buf, len)) ==
-      KEncodeDecodeError) {
+  if ((encoded_ie_size = ie_header_.Encode(buf, len)) == KEncodeDecodeError) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error("Encoding NAS Header error");
     return KEncodeDecodeError;
@@ -72,7 +79,7 @@ int DeregistrationAccept::Decode(uint8_t* buf, int len) {
   int decoded_result = 0;
 
   // Header
-  decoded_result = NasMmPlainHeader::Decode(buf, len);
+  decoded_result = ie_header_.Decode(buf, len);
   if (decoded_result == KEncodeDecodeError) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error("Decoding NAS Header error");

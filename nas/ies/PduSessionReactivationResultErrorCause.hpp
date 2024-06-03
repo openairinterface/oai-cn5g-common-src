@@ -24,7 +24,10 @@
 
 #include "Type6NasIe.hpp"
 
-constexpr uint8_t kPduSessionReactivationResultErrorCauseMinimumLength  = 5;
+constexpr uint8_t kPduSessionReactivationResultErrorCauseMinimumLength = 5;
+constexpr uint8_t kPduSessionReactivationResultErrorCauseContentMinimumLength =
+    kPduSessionReactivationResultErrorCauseMinimumLength -
+    3;  // Minimum length - 3 octets for IEI/Length
 constexpr uint32_t kPduSessionReactivationResultErrorCauseMaximumLength = 515;
 constexpr auto kPduSessionReactivationResultErrorCauseIeName =
     "PDU Session Reactivation Result Error Cause";
@@ -37,6 +40,9 @@ class PduSessionReactivationResultErrorCause : public Type6NasIe {
   PduSessionReactivationResultErrorCause(uint8_t session_id, uint8_t value);
   ~PduSessionReactivationResultErrorCause();
 
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+
   static std::string GetIeName() {
     return kPduSessionReactivationResultErrorCauseIeName;
   }
@@ -46,9 +52,6 @@ class PduSessionReactivationResultErrorCause : public Type6NasIe {
 
   void SetValue(const std::vector<std::pair<uint8_t, uint8_t>>& value);
   void GetValue(std::vector<std::pair<uint8_t, uint8_t>>& value) const;
-
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len, bool is_option);
 
  private:
   std::vector<std::pair<uint8_t, uint8_t>> pdu_session_id_cause_value_pair_;

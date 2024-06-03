@@ -24,14 +24,13 @@
 #include <vector>
 
 #include "3gpp_24.501.hpp"
-//#include "amf.hpp"
 #include "logger_base.hpp"
 
 using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 Nssai::Nssai(uint8_t iei) : Type4NasIe(iei) {
-  SetLengthIndicator(0);
+  SetLengthIndicator(kNssaiContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -42,11 +41,15 @@ Nssai::Nssai(uint8_t iei, const std::vector<struct SNSSAI_s>& nssai)
   for (int i = 0; i < nssai.size(); i++) {
     length += (1 + nssai[i].length);  // 1 for length IE
   }
-  SetLengthIndicator(length);
+  SetLengthIndicator(
+      (length > kNssaiContentMinimumLength) ? length :
+                                              kNssaiContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
-Nssai::Nssai() : Type4NasIe(), s_nssais_() {}
+Nssai::Nssai() : Type4NasIe(), s_nssais_() {
+  SetLengthIndicator(kNssaiContentMinimumLength);
+}
 
 //------------------------------------------------------------------------------
 Nssai::~Nssai() {}
@@ -57,21 +60,12 @@ void Nssai::GetValue(std::vector<struct SNSSAI_s>& nssai) const {
 }
 
 //------------------------------------------------------------------------------
-int Nssai::Encode(uint8_t* buf, int len) {
+int Nssai::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
-  int ie_len = GetIeLength();
-
-  if (len < ie_len) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the length of this IE (%d octet)",
-            ie_len);
-    return KEncodeDecodeError;
-  }
 
   int encoded_size = 0;
-  // IEI and Length
+  // Validate the buffer's length and Encode IEI/Length
   int encoded_header_size = Type4NasIe::Encode(buf + encoded_size, len);
   if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   encoded_size += encoded_header_size;
@@ -112,7 +106,7 @@ int Nssai::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int Nssai::Decode(uint8_t* buf, int len, bool is_iei) {
+int Nssai::Decode(const uint8_t* const buf, int len, bool is_iei) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding %s", GetIeName().c_str());
   if (len < kNssaiMinimumLength) {
@@ -129,7 +123,6 @@ int Nssai::Decode(uint8_t* buf, int len, bool is_iei) {
 
   // IEI and Length
   int decoded_header_size = Type4NasIe::Decode(buf + decoded_size, len, is_iei);
-  // decoded_size += Type4NasIe::Decode(buf + decoded_size, len, is_iei);
   if (decoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   decoded_size += decoded_header_size;
 

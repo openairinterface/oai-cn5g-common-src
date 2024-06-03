@@ -25,7 +25,10 @@
 #include "Type4NasIe.hpp"
 
 constexpr uint8_t kExtendedDrxParametersLength = 3;
-constexpr auto kExtendedDrxParametersIeName    = "Extended DRX Parameters";
+constexpr uint8_t kExtendedDrxParametersContentLength =
+    kExtendedDrxParametersLength -
+    2;  // Minimum length - 2 octets for IEI/Length
+constexpr auto kExtendedDrxParametersIeName = "Extended DRX Parameters";
 
 namespace oai::nas {
 
@@ -35,10 +38,10 @@ class ExtendedDrxParameters : public Type4NasIe {
   ExtendedDrxParameters(uint8_t paging_time, uint8_t value);
   ~ExtendedDrxParameters();
 
-  static std::string GetIeName() { return kExtendedDrxParametersIeName; }
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
 
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len, bool is_iei);
+  static std::string GetIeName() { return kExtendedDrxParametersIeName; }
 
   void SetValue(uint8_t value);
   uint8_t GetValue() const;

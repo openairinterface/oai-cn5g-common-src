@@ -41,7 +41,6 @@ class RequestType : public Type1NasIeFormatTv {
   uint8_t GetValue() const;
 
  private:
-  uint8_t value_;
 };
 }  // namespace oai::nas
 

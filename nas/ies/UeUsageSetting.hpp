@@ -25,7 +25,9 @@
 #include "Type4NasIe.hpp"
 
 constexpr uint8_t kUeUsageSettingLength = 3;
-constexpr auto kUeUsageSettingIeName    = "UE's Usage Setting";
+constexpr uint8_t kUeUsageSettingContentLength =
+    kUeUsageSettingLength - 2;  // IE length - 2 octets for IEI/Length
+constexpr auto kUeUsageSettingIeName = "UE's Usage Setting";
 
 namespace oai::nas {
 
@@ -35,10 +37,10 @@ class UeUsageSetting : public Type4NasIe {
   UeUsageSetting(bool ues_usage_setting);
   ~UeUsageSetting();
 
-  static std::string GetIeName() { return kUeUsageSettingIeName; }
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = true) override;
 
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len, bool is_iei = true);
+  static std::string GetIeName() { return kUeUsageSettingIeName; }
 
   void SetValue(bool value);
   bool GetValue() const;

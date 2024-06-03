@@ -31,14 +31,14 @@ using namespace oai::nas;
 //------------------------------------------------------------------------------
 UplinkDataStatus::UplinkDataStatus() : Type4NasIe(kIeiUplinkDataStatus) {
   value_ = 0;
-  SetLengthIndicator(2);
+  SetLengthIndicator(kUplinkDataStatusContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
 UplinkDataStatus::UplinkDataStatus(uint16_t value)
     : Type4NasIe(kIeiUplinkDataStatus) {
   value_ = value;
-  SetLengthIndicator(2);
+  SetLengthIndicator(kUplinkDataStatusContentMinimumLength);
 }
 
 //-----------------------------------------------------------------------------
@@ -55,12 +55,12 @@ uint16_t UplinkDataStatus::GetValue() const {
 }
 
 //------------------------------------------------------------------------------
-int UplinkDataStatus::Encode(uint8_t* buf, int len) {
+int UplinkDataStatus::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
   int encoded_size = 0;
-  // IEI and Length
+  // Validate the buffer's length and Encode IEI/Length
   int encoded_header_size = Type4NasIe::Encode(buf + encoded_size, len);
   if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   encoded_size += encoded_header_size;
@@ -74,7 +74,7 @@ int UplinkDataStatus::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int UplinkDataStatus::Decode(uint8_t* buf, int len, bool is_iei) {
+int UplinkDataStatus::Decode(const uint8_t* const buf, int len, bool is_iei) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding %s", GetIeName().c_str());
 

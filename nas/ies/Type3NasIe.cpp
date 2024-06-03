@@ -26,6 +26,7 @@
 #include "logger_base.hpp"
 
 using namespace oai::nas;
+
 //------------------------------------------------------------------------------
 Type3NasIe::Type3NasIe() : NasIe() {
   iei_ = std::nullopt;
@@ -45,7 +46,7 @@ void Type3NasIe::SetIei(uint8_t iei) {
 }
 
 //------------------------------------------------------------------------------
-bool Type3NasIe::Validate(const int& len) const {
+bool Type3NasIe::Validate(int len) const {
   if (iei_.has_value() and (len < kType3NasIeFormatTvLength)) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error(
@@ -58,7 +59,16 @@ bool Type3NasIe::Validate(const int& len) const {
 }
 
 //------------------------------------------------------------------------------
-int Type3NasIe::Encode(uint8_t* buf, const int& len) {
+uint32_t Type3NasIe::GetIeLength() const {
+  if (iei_.has_value()) {
+    return kType3NasIeFormatTvLength;
+  } else {
+    return kType3NasIeFormatTvLength - 1;
+  }
+}
+
+//------------------------------------------------------------------------------
+int Type3NasIe::Encode(uint8_t* buf, int len) const {
   if (!Validate(len)) return KEncodeDecodeError;
 
   int encoded_size = 0;
@@ -70,7 +80,7 @@ int Type3NasIe::Encode(uint8_t* buf, const int& len) {
 }
 
 //------------------------------------------------------------------------------
-int Type3NasIe::Decode(const uint8_t* const buf, const int& len, bool is_iei) {
+int Type3NasIe::Decode(const uint8_t* const buf, int len, bool is_iei) {
   if (!Validate(len)) return KEncodeDecodeError;
 
   int decoded_size = 0;

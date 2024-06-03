@@ -36,14 +36,13 @@ class AuthenticationParameterAutn : public Type4NasIe {
   AuthenticationParameterAutn();
   AuthenticationParameterAutn(uint8_t iei);
   AuthenticationParameterAutn(
-      const uint8_t iei,
-      uint8_t value[kAuthenticationParameterAutnValueLength]);
+      uint8_t iei, uint8_t value[kAuthenticationParameterAutnValueLength]);
   ~AuthenticationParameterAutn();
 
-  static std::string GetIeName() { return kAuthenticationParameterAutnIeName; }
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
 
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len, bool is_option);
+  static std::string GetIeName() { return kAuthenticationParameterAutnIeName; }
 
  private:
   uint8_t value_[kAuthenticationParameterAutnValueLength];

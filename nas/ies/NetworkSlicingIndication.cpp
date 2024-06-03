@@ -29,13 +29,16 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 NetworkSlicingIndication::NetworkSlicingIndication()
-    : Type1NasIeFormatTv(), dcni_(), nssci_() {}
+    : Type1NasIeFormatTv(), dcni_(), nssci_() {
+  SetValue();
+}
 
 //------------------------------------------------------------------------------
 NetworkSlicingIndication::NetworkSlicingIndication(uint8_t iei)
     : Type1NasIeFormatTv(iei) {
   dcni_  = false;
   nssci_ = false;
+  SetValue();
 }
 
 //------------------------------------------------------------------------------
@@ -43,6 +46,7 @@ NetworkSlicingIndication::NetworkSlicingIndication(bool dcni, bool nssci)
     : Type1NasIeFormatTv() {
   dcni_  = dcni;
   nssci_ = nssci;
+  SetValue();
 }
 
 //------------------------------------------------------------------------------
@@ -51,6 +55,7 @@ NetworkSlicingIndication::NetworkSlicingIndication(
     : Type1NasIeFormatTv(iei) {
   dcni_  = dcni;
   nssci_ = nssci;
+  SetValue();
 }
 
 //------------------------------------------------------------------------------
@@ -70,11 +75,13 @@ void NetworkSlicingIndication::GetValue() {
 //------------------------------------------------------------------------------
 void NetworkSlicingIndication::SetDcni(bool value) {
   dcni_ = value;
+  SetValue();
 }
 
 //------------------------------------------------------------------------------
 void NetworkSlicingIndication::SetNssci(bool value) {
   nssci_ = value;
+  SetValue();
 }
 
 //------------------------------------------------------------------------------
@@ -88,13 +95,12 @@ bool NetworkSlicingIndication::GetNssci() const {
 }
 
 //------------------------------------------------------------------------------
-int NetworkSlicingIndication::Encode(uint8_t* buf, int len) {
+int NetworkSlicingIndication::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
   int encoded_size = 0;
-  SetValue();  // Update Value in Type1NasIeFormatTv
-  encoded_size = Type1NasIeFormatTv::Encode(buf, len);
+  encoded_size     = Type1NasIeFormatTv::Encode(buf, len);
 
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
@@ -102,7 +108,8 @@ int NetworkSlicingIndication::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int NetworkSlicingIndication::Decode(uint8_t* buf, int len, bool is_iei) {
+int NetworkSlicingIndication::Decode(
+    const uint8_t* const buf, int len, bool is_iei) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding %s", GetIeName().c_str());
   int decoded_size = 0;

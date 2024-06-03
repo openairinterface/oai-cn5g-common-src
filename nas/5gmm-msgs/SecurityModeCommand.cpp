@@ -27,7 +27,9 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 SecurityModeCommand::SecurityModeCommand()
-    : NasMmPlainHeader(k5gsMobilityManagementMessages, kSecurityModeCommand) {
+    : ie_header_(
+          k5gsMobilityManagementMessages, kPlain5gsMessage,
+          kSecurityModeCommand) {
   ie_imeisv_request_                     = std::nullopt;
   ie_eps_nas_security_algorithms_        = std::nullopt;
   ie_additional_5g_security_information_ = std::nullopt;
@@ -40,8 +42,30 @@ SecurityModeCommand::SecurityModeCommand()
 SecurityModeCommand::~SecurityModeCommand() {}
 
 //------------------------------------------------------------------------------
+uint32_t SecurityModeCommand::GetLength() const {
+  uint32_t msg_len = 0;
+  msg_len += ie_header_.GetLength();
+  msg_len += ie_selected_nas_security_algorithms_.GetIeLength();
+  msg_len += ie_ng_ksi_.GetIeLength();
+  msg_len += ie_ue_security_capability_.GetIeLength();
+  if (ie_imeisv_request_.has_value())
+    msg_len += ie_imeisv_request_.value().GetIeLength();
+  if (ie_eps_nas_security_algorithms_.has_value())
+    msg_len += ie_eps_nas_security_algorithms_.value().GetIeLength();
+  if (ie_additional_5g_security_information_.has_value())
+    msg_len += ie_additional_5g_security_information_.value().GetIeLength();
+  if (ie_eap_message_.has_value())
+    msg_len += ie_eap_message_.value().GetIeLength();
+  if (ie_abba_.has_value()) msg_len += ie_abba_.value().GetIeLength();
+  if (ie_s1_ue_security_capability_.has_value())
+    msg_len += ie_s1_ue_security_capability_.value().GetIeLength();
+
+  return msg_len;
+}
+
+//------------------------------------------------------------------------------
 void SecurityModeCommand::SetHeader(uint8_t security_header_type) {
-  NasMmPlainHeader::SetSecurityHeaderType(security_header_type);
+  ie_header_.SetSecurityHeaderType(security_header_type);
 }
 
 //------------------------------------------------------------------------------
@@ -126,8 +150,7 @@ int SecurityModeCommand::Encode(uint8_t* buf, int len) {
   int encoded_ie_size = 0;
 
   // Header
-  if ((encoded_ie_size = NasMmPlainHeader::Encode(buf, len)) ==
-      KEncodeDecodeError) {
+  if ((encoded_ie_size = ie_header_.Encode(buf, len)) == KEncodeDecodeError) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error("Encoding NAS Header error");
     return KEncodeDecodeError;
@@ -208,7 +231,7 @@ int SecurityModeCommand::Decode(uint8_t* buf, int len) {
   int decoded_ie_size = 0;
 
   // Header
-  decoded_ie_size = NasMmPlainHeader::Decode(buf, len);
+  decoded_ie_size = ie_header_.Decode(buf, len);
   if (decoded_ie_size == KEncodeDecodeError) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error("Decoding NAS Header error");

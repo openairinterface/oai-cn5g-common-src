@@ -26,7 +26,8 @@
 
 constexpr uint8_t kAuthenticationFailureParameterLength = 16;
 constexpr uint8_t kAuthenticationFailureParameterContentLength =
-    kAuthenticationFailureParameterLength - 2;
+    kAuthenticationFailureParameterLength -
+    2;  // Minimum length - 2 bytes for IEI/Length
 constexpr auto kAuthenticationFailureParameterIeName =
     "Authentication Failure Parameter";
 
@@ -38,22 +39,16 @@ class AuthenticationFailureParameter : public Type4NasIe {
   AuthenticationFailureParameter(const bstring& value);
   ~AuthenticationFailureParameter();
 
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+
   static std::string GetIeName() {
     return kAuthenticationFailureParameterIeName;
   }
-
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len, bool is_iei);
-
-  // void SetValue(const uint8_t
-  // (&value)[kAuthenticationFailureParameterContentLength]); void
-  // GetValue(uint8_t (&value)[kAuthenticationFailureParameterContentLength])
-  // const;
   void SetValue(const bstring& value);
   void GetValue(bstring& value) const;
 
  private:
-  // uint8_t value_[kAuthenticationFailureParameterContentLength];
   bstring value_;
 };
 

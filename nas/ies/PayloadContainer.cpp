@@ -31,21 +31,24 @@ using namespace oai::nas;
 PayloadContainer::PayloadContainer() : Type6NasIe() {
   content_  = std::nullopt;
   contents_ = std::nullopt;
-  SetLengthIndicator(0);
+  SetLengthIndicator(kPayloadContainerContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
 PayloadContainer::PayloadContainer(uint8_t iei) : Type6NasIe(iei) {
   content_  = std::nullopt;
   contents_ = std::nullopt;
-  SetLengthIndicator(0);
+  SetLengthIndicator(kPayloadContainerContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
 PayloadContainer::PayloadContainer(const bstring& b) : Type6NasIe() {
   content_  = std::optional<bstring>(b);
   contents_ = std::nullopt;
-  SetLengthIndicator(blength(b));
+  SetLengthIndicator(
+      (blength(b) > kPayloadContainerContentMinimumLength) ?
+          blength(b) :
+          kPayloadContainerContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -53,7 +56,10 @@ PayloadContainer::PayloadContainer(uint8_t iei, const bstring& b)
     : Type6NasIe(iei) {
   content_  = std::optional<bstring>(b);
   contents_ = std::nullopt;
-  SetLengthIndicator(blength(b));
+  SetLengthIndicator(
+      (blength(b) > kPayloadContainerContentMinimumLength) ?
+          blength(b) :
+          kPayloadContainerContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -61,10 +67,9 @@ PayloadContainer::PayloadContainer(
     const std::vector<PayloadContainerEntry>& contents)
     : Type6NasIe() {
   content_ = std::nullopt;
-
+  if (contents.size() == 0) return;
   int length = 1;  // for number of entries
-  // contents_.assign(content_.begin(), content_.end());
-  contents_ = std::optional<std::vector<PayloadContainerEntry>>(contents);
+  contents_  = std::optional<std::vector<PayloadContainerEntry>>(contents);
   for (int i = 0; i < contents.size(); i++) {
     length = length + 2 +
              contents.at(i).length;  // 2 for Length of Payload container entry
@@ -77,10 +82,10 @@ PayloadContainer::PayloadContainer(
     uint8_t iei, const std::vector<PayloadContainerEntry>& contents)
     : Type6NasIe(iei) {
   content_ = std::nullopt;
+  if (contents.size() == 0) return;
 
   int length = 1;  // for number of entries
-  // contents_.assign(content_.begin(), content_.end());
-  contents_ = std::optional<std::vector<PayloadContainerEntry>>(contents);
+  contents_  = std::optional<std::vector<PayloadContainerEntry>>(contents);
   for (int i = 0; i < contents.size(); i++) {
     length = length + 2 +
              contents.at(i).length;  // 2 for Length of Payload container entry
@@ -94,12 +99,16 @@ PayloadContainer::~PayloadContainer() {}
 //------------------------------------------------------------------------------
 void PayloadContainer::SetValue(const bstring& cnt) {
   content_ = std::optional<bstring>(cnt);
-  SetLengthIndicator(blength(cnt));
+  SetLengthIndicator(
+      (blength(cnt) > kPayloadContainerContentMinimumLength) ?
+          blength(cnt) :
+          kPayloadContainerContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
 void PayloadContainer::SetValue(
     const std::vector<PayloadContainerEntry>& content) {
+  if (content.size() == 0) return;
   int length = 1;  // for number of entries
   // contents_.assign(content.begin(), content.end());
   contents_ = std::optional<std::vector<PayloadContainerEntry>>(content);
@@ -123,29 +132,19 @@ bool PayloadContainer::GetValue(
 //------------------------------------------------------------------------------
 bool PayloadContainer::GetValue(bstring& cnt) const {
   if (content_.has_value()) {
-    cnt = content_.value();
+    cnt = bstrcpy(content_.value());
     return true;
   }
   return false;
 }
 
 //------------------------------------------------------------------------------
-int PayloadContainer::Encode(uint8_t* buf, int len, uint8_t type) {
+int PayloadContainer::Encode(uint8_t* buf, int len, uint8_t type) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
-  int ie_len = GetIeLength();
-
-  if (len < ie_len) {  // Length of the content + IEI/Len
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Size of the buffer is not enough to store this IE (IE len %d)",
-            ie_len);
-    return KEncodeDecodeError;
-  }
-
   int encoded_size = 0;
-  // IEI and Length (later)
+  // Validate the buffer's length and Encode IEI/Length
   int len_pos = 0;
   int encoded_header_size =
       Type6NasIe::Encode(buf + encoded_size, len, len_pos);
@@ -198,7 +197,8 @@ int PayloadContainer::Encode(uint8_t* buf, int len, uint8_t type) {
 }
 
 //------------------------------------------------------------------------------
-int PayloadContainer::Decode(uint8_t* buf, int len, bool is_iei, uint8_t type) {
+int PayloadContainer::Decode(
+    const uint8_t* const buf, int len, bool is_iei, uint8_t type) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding %s", GetIeName().c_str());
   int decoded_size = 0;

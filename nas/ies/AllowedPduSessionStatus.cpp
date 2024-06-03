@@ -32,14 +32,14 @@ using namespace oai::nas;
 AllowedPduSessionStatus::AllowedPduSessionStatus()
     : Type4NasIe(kIeiAllowedPduSessionStatus) {
   value_ = 0;
-  SetLengthIndicator(2);
+  SetLengthIndicator(kAllowedPduSessionStatusContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
 AllowedPduSessionStatus::AllowedPduSessionStatus(uint16_t value)
     : Type4NasIe(kIeiAllowedPduSessionStatus) {
   value_ = value;
-  SetLengthIndicator(2);
+  SetLengthIndicator(kAllowedPduSessionStatusContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
@@ -56,19 +56,13 @@ uint16_t AllowedPduSessionStatus::GetValue() const {
 }
 
 //------------------------------------------------------------------------------
-int AllowedPduSessionStatus::Encode(uint8_t* buf, int len) {
+int AllowedPduSessionStatus::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
   int ie_len = GetIeLength();
 
-  if (len < ie_len) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Len is less than %d", ie_len);
-    return KEncodeDecodeError;
-  }
-
   int encoded_size = 0;
-  // IEI and Length
+  // Validate the buffer's length and Encode IEI/Length
   int encoded_header_size = Type4NasIe::Encode(buf + encoded_size, len);
   if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   encoded_size += encoded_header_size;
@@ -88,7 +82,8 @@ int AllowedPduSessionStatus::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int AllowedPduSessionStatus::Decode(uint8_t* buf, int len, bool is_iei) {
+int AllowedPduSessionStatus::Decode(
+    const uint8_t* const buf, int len, bool is_iei) {
   if (len < kAllowedPduSessionStatusMinimumLength) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error(
@@ -105,7 +100,6 @@ int AllowedPduSessionStatus::Decode(uint8_t* buf, int len, bool is_iei) {
 
   // IEI and Length
   int decoded_header_size = Type4NasIe::Decode(buf + decoded_size, len, is_iei);
-  // decoded_size += Type4NasIe::Decode(buf + decoded_size, len, is_iei);
   if (decoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   decoded_size += decoded_header_size;
 

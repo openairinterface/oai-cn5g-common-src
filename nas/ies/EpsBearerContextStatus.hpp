@@ -25,7 +25,9 @@
 #include "Type4NasIe.hpp"
 
 constexpr uint8_t kEpsBearerContextStatusLength = 4;
-constexpr auto kEpsBearerContextStatusIeName    = "EPS Bearer Context Status";
+constexpr uint8_t kEpsBearerContextStatusContentLength =
+    kEpsBearerContextStatusLength - 2;  // Length - 2 octets for IEI/Length
+constexpr auto kEpsBearerContextStatusIeName = "EPS Bearer Context Status";
 
 namespace oai::nas {
 
@@ -35,13 +37,13 @@ class EpsBearerContextStatus : public Type4NasIe {
   EpsBearerContextStatus(uint16_t value);
   ~EpsBearerContextStatus();
 
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+
   static std::string GetIeName() { return kEpsBearerContextStatusIeName; }
 
   void SetValue(uint16_t value);
   uint16_t GetValue() const;
-
-  int Encode(uint8_t* buf, int len);
-  int Decode(uint8_t* buf, int len, bool is_iei);
 
  private:
   uint16_t value_;

@@ -29,8 +29,8 @@
 
 #pragma once
 
-#include "lttng_logger_base.hpp"
 #include "spd_logger_base.hpp"
+#include "lttng_logger_base.hpp"
 #include <cstdarg>
 #include <memory>
 #include <stdexcept>

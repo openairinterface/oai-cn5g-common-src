@@ -33,6 +33,7 @@ class nf_event;
 class task_manager {
  public:
   task_manager(const std::shared_ptr<nf_event>& ev);
+  ~task_manager();
 
   /*
    * Manage the tasks
@@ -58,6 +59,8 @@ class task_manager {
 
   std::shared_ptr<nf_event> event_sub_;
   int sfd;
+  bool terminate;
+  bool terminated;
 };
 }  // namespace oai::event_handling
 

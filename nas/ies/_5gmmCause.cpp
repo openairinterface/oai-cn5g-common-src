@@ -75,7 +75,7 @@ int _5gmmCause::Encode(uint8_t* buf, int len) const {
         .error(
             "Buffer length is less than the minimum length of this IE (%d "
             "octet)",
-			k5gmmCauseMinimumLength);
+            k5gmmCauseMinimumLength);
     return KEncodeDecodeError;
   }
   int encoded_size = 0;

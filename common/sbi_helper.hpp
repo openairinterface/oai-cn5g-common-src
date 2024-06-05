@@ -642,13 +642,13 @@ class sbi_helper {
   // LMF: LMF Notify
   static inline const std::string LmfN2InfoNotifyBase = "/nlmf-n2info-notify/";
   static inline const std::string LmfN2InfoNotifyNrppaCallback =
-      "/nrppa/callback/";
-  static inline const std::string LmfN2InfoNotifyNrppaCallbackSupi =
-      "/nrppa/callback/:supi";
+      "/nrppa/callback";
+  static inline const std::string LmfN2InfoNotifyNrppaCallbackUeContextId =
+      "/nrppa/callback/:ueContextId";
   static inline const std::string LmfNonUeN2InfoNotifyBase =
       "/nlmf-non-ue-n2info-notify/";
   static inline const std::string LmfNonUeN2InfoNotifyNrppaCallback =
-      "/nrppa/callback/";
+      "/nrppa/callback";
 
   /*
    * Get NRF Nfm API Root

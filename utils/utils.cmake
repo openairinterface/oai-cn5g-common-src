@@ -27,6 +27,7 @@ file(GLOB UTILS_SRC_FILES
         ${UTILS_DIR}/*.cpp
         ${UTILS_DIR}/backtrace.c
         ${UTILS_DIR}/bstr/bstrlib.c 
+        ${SRC_TOP_DIR}/${MOUNTED_COMMON}/ngap/libngap/*.c
         )
 
 if (TARGET ${NF_TARGET})

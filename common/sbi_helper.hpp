@@ -610,6 +610,10 @@ class sbi_helper {
   static inline const std::string UdrDrPathExposureDataSubsToNotifySubsId =
       "/exposure-data/subs-to-notify/:subId";
 
+  // UDR: Configuration
+  static inline const std::string UdrConfBase              = "/nudr-oai/";
+  static inline const std::string UdrConfPathConfiguration = "/configuration/";
+
   // UDSF: Data Repository
   static inline const std::string UdsfDrBase = "/nudsf-dr/";
   static inline const std::string UdsfDrBlockCRUDApi =

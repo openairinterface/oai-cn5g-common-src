@@ -39,9 +39,6 @@ const uint8_t SD_LENGTH        = 3;
 
 typedef struct s_nssai  // section 28.4, TS23.003
 {
-  const uint8_t HASH_SEED   = 17;
-  const uint8_t HASH_FACTOR = 31;
-
   uint8_t sst;
   uint32_t sd;
   s_nssai(const uint8_t& m_sst, const uint32_t m_sd) : sst(m_sst), sd(m_sd) {}
@@ -106,13 +103,6 @@ typedef struct s_nssai  // section 28.4, TS23.003
   void from_json(nlohmann::json& json_data) {
     this->sst = json_data["sst"].get<int>();
     this->sd  = json_data["sd"].get<int>();
-  }
-
-  size_t operator()(const s_nssai&) const {
-    size_t res = HASH_SEED;
-    res        = res * HASH_FACTOR + std::hash<uint32_t>()(sd);
-    res        = res * HASH_FACTOR + std::hash<uint32_t>()(sst);
-    return res;
   }
 
 } snssai_t;

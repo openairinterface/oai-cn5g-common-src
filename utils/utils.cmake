@@ -20,7 +20,7 @@
 ################################################################################
 
 SET(UTILS_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/utils)
-include_directories(UTILS_DIR)
+include_directories(${UTILS_DIR})
 include_directories(${SRC_TOP_DIR}/${MOUNTED_COMMON}/ngap/libngap)
 include_directories(${UTILS_DIR}/bstr)
 

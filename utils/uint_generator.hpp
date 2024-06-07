@@ -27,6 +27,52 @@
 
 namespace oai::utils {
 
+template<class UINT, unsigned MIN, unsigned MAX>
+class uint_range_generator {
+ private:
+  UINT uid_generator;
+  std::mutex m_uid_generator;
+
+  std::set<UINT> uid_generated;
+  std::mutex m_uid_generated;
+
+ public:
+  uint_range_generator() : m_uid_generator(), m_uid_generated() {
+    uid_generator = MIN;
+    uid_generated = {};
+  };
+
+  uint_range_generator(uint_range_generator const&) = delete;
+  void operator=(uint_range_generator const&) = delete;
+
+  UINT get_uid() {
+    std::unique_lock<std::mutex> lr(m_uid_generator);
+    UINT uid = uid_generator;
+    while (true) {
+      // may happen race conditions here
+      std::unique_lock<std::mutex> ld(m_uid_generated);
+      if (uid_generated.count(uid) == 0) {
+        uid_generated.insert(uid);
+        if (uid_generator < MAX) {
+          ++uid_generator;
+        } else {
+          uid_generator == MIN;
+        }
+        ld.unlock();
+        lr.unlock();
+        return uid;
+      }
+      uid = ++uid_generator;
+    }
+  }
+
+  void free_uid(UINT uid) {
+    std::unique_lock<std::mutex> l(m_uid_generated);
+    uid_generated.erase(uid);
+    l.unlock();
+  }
+};
+
 template<class UINT>
 class uint_generator {
  private:

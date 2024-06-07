@@ -1364,6 +1364,6 @@ void curl_timeout::validate() {
   m_curl_timeout.validate();
 }
 
-const uint32_t curl_timeout::get() const {
+uint32_t curl_timeout::get() const {
   return m_curl_timeout.get_value();
 }

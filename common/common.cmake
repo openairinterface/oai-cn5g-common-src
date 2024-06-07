@@ -20,7 +20,7 @@
 ################################################################################
 
 SET(COMMON_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/common)
-include_directories(COMMON_DIR)
+include_directories(${COMMON_DIR})
 
 file(GLOB COMMON_SRC_FILES
         ${COMMON_DIR}/*.cpp

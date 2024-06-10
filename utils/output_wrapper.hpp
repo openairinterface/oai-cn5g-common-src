@@ -34,8 +34,6 @@ class output_wrapper {
   static void print_buffer(
       const std::string app, const std::string sink, const uint8_t* buf,
       int len);
-  static void print_asn_msg(
-      const asn_TYPE_descriptor_t* td, const void* struct_ptr);
 };
 }  // namespace oai::utils
 #endif

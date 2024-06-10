@@ -34,10 +34,3 @@ void oai::utils::output_wrapper::print_buffer(
     printf("\n");
   }
 }
-
-//------------------------------------------------------------------------------
-void oai::utils::output_wrapper::print_asn_msg(
-    const asn_TYPE_descriptor_t* td, const void* struct_ptr) {
-  if (Logger::should_log(spdlog::level::debug))
-    asn_fprint(stdout, td, struct_ptr);
-}

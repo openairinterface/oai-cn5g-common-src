@@ -122,8 +122,8 @@ typedef struct nr_cell_identity_s {
 } nr_cell_identity_t;
 
 typedef struct allowed_nssai {
-  uint8_t sST;
-  uint32_t sD : 24;
+  uint8_t sst;
+  uint32_t sd : 24;
 } allowed_nssai;
 
 typedef struct guami_s {

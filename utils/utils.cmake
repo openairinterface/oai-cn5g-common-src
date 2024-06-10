@@ -21,14 +21,12 @@
 
 SET(UTILS_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/utils)
 include_directories(${UTILS_DIR})
-include_directories(${SRC_TOP_DIR}/${MOUNTED_COMMON}/ngap/libngap)
 include_directories(${UTILS_DIR}/bstr)
 
 file(GLOB UTILS_SRC_FILES
         ${UTILS_DIR}/*.cpp
         ${UTILS_DIR}/backtrace.c
         ${UTILS_DIR}/bstr/bstrlib.c 
-        ${SRC_TOP_DIR}/${MOUNTED_COMMON}/ngap/libngap/constr_TYPE.c
         )
 
 if (TARGET ${NF_TARGET})

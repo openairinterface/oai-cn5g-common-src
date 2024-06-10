@@ -24,10 +24,6 @@
 
 #include "logger.hpp"
 
-extern "C" {
-#include "constr_TYPE.h"
-}
-
 namespace oai::utils {
 class output_wrapper {
  public:

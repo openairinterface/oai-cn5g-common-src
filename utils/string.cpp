@@ -29,11 +29,12 @@
 #include <regex>
 
 #include "logger.hpp"
+
 // Licence : https://creativecommons.org/licenses/by-sa/4.0/legalcode
 // https://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring#217605
 
 // trim from start
-std::string& util::ltrim(std::string& s) {
+std::string& oai::utils::ltrim(std::string& s) {
   s.erase(
       s.begin(),
       std::find_if(
@@ -42,7 +43,7 @@ std::string& util::ltrim(std::string& s) {
 }
 
 // trim from end
-std::string& util::rtrim(std::string& s) {
+std::string& oai::utils::rtrim(std::string& s) {
   s.erase(
       std::find_if(
           s.rbegin(), s.rend(), std::not1(std::ptr_fun<int, int>(std::isspace)))
@@ -52,14 +53,15 @@ std::string& util::rtrim(std::string& s) {
 }
 
 // trim from both ends
-std::string& util::trim(std::string& s) {
-  return util::ltrim(util::rtrim(s));
+std::string& oai::utils::trim(std::string& s) {
+  return oai::utils::ltrim(oai::utils::rtrim(s));
 }
 
 // extract query param from given querystring
 std::string query_param_tmp;
 //
-std::string util::get_query_param(std::string querystring, std::string param) {
+std::string oai::utils::get_query_param(
+    std::string querystring, std::string param) {
   std::regex reList("([^=]*)=([^&]*)&?");
   query_param_tmp.clear();
   std::for_each(

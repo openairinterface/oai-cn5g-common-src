@@ -83,7 +83,7 @@ typedef struct interface_cfg_s {
         std::string addr4_str = {};
         addr4_str             = json_data["addr4"].get<std::string>();
         if (boost::iequals(addr4_str, "read")) {
-          if (get_inet_addr_infos_from_iface(
+          if (oai::utils::get_inet_addr_infos_from_iface(
                   this->if_name, this->addr4, this->network4, this->mtu)) {
             oai::logger::logger_registry::get_logger(LOGGER_COMMON)
                 .error(
@@ -93,12 +93,12 @@ typedef struct interface_cfg_s {
           }
         } else {
           IPV4_STR_ADDR_TO_INADDR(
-              util::trim(addr4_str).c_str(), this->addr4,
+              oai::utils::trim(addr4_str).c_str(), this->addr4,
               "BAD IPv4 ADDRESS FORMAT FOR INTERFACE !");
           if (json_data.find("network4") != json_data.end()) {
             std::string network4_str = json_data["network4"].get<std::string>();
             IPV4_STR_ADDR_TO_INADDR(
-                util::trim(network4_str).c_str(), this->network4,
+                oai::utils::trim(network4_str).c_str(), this->network4,
                 "BAD IPv4 ADDRESS FORMAT FOR INTERFACE !");
           }
           // TODO: addr6
@@ -120,7 +120,7 @@ typedef struct interface_cfg_s {
     }
   }
 
-  std::string get_ipv4_root() {
+  std::string get_ipv4_root() const {
     return std::string(inet_ntoa(this->addr4)) + ":" +
            std::to_string(this->port);
   }
@@ -630,6 +630,25 @@ class sbi_helper {
       "/:realmId/:storageId/records/:recordId/meta";
 
   // TODO: UDSF Timer
+
+  // LMF: LMF Location Service
+  static inline const std::string LmfLocBase = "/nlmf-loc/";
+  static inline const std::string LmfLocDetermineLocation =
+      "/determine-location";
+  static inline const std::string LmfLocCancelLocation = "/cancel-location";
+  static inline const std::string LmfLocLocationContextTransfer =
+      "/location-context-transfer";
+
+  // LMF: LMF Notify
+  static inline const std::string LmfN2InfoNotifyBase = "/nlmf-n2info-notify/";
+  static inline const std::string LmfN2InfoNotifyNrppaCallback =
+      "/nrppa/callback";
+  static inline const std::string LmfN2InfoNotifyNrppaCallbackUeContextId =
+      "/nrppa/callback/:ueContextId";
+  static inline const std::string LmfNonUeN2InfoNotifyBase =
+      "/nlmf-non-ue-n2info-notify/";
+  static inline const std::string LmfNonUeN2InfoNotifyNrppaCallback =
+      "/nrppa/callback";
 
   /*
    * Get NRF Nfm API Root

@@ -42,6 +42,7 @@
 #include <boost/algorithm/string/trim.hpp>
 
 using namespace oai::config;
+using namespace oai::utils;
 
 bool config_type::is_set() const {
   return m_set;
@@ -377,7 +378,7 @@ void local_interface::validate() {
   unsigned int _mtu{};
   in_addr _addr4{};
   in_addr _netmask{};
-  if (get_inet_addr_infos_from_iface(
+  if (oai::utils::get_inet_addr_infos_from_iface(
           m_if_name.get_value(), _addr4, _netmask, _mtu) == RETURNerror) {
     throw std::runtime_error(fmt::format(
         "Error in reading network interface {}. Make sure it exists",

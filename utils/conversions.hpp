@@ -25,19 +25,9 @@
 #include <netinet/in.h>
 #include <stdint.h>
 #include <stdlib.h>
-
 #include <string>
 
-/* Used to format an uint32_t containing an ipv4 address */
-#define IN_ADDR_FMT "%u.%u.%u.%u"
-#define PRI_IN_ADDR(aDDRESS)                                                   \
-  (uint8_t)((aDDRESS.s_addr) & 0x000000ff),                                    \
-      (uint8_t) (((aDDRESS.s_addr) & 0x0000ff00) >> 8),                        \
-      (uint8_t) (((aDDRESS.s_addr) & 0x00ff0000) >> 16),                       \
-      (uint8_t) (((aDDRESS.s_addr) & 0xff000000) >> 24)
-
-#define IPV4_ADDR_DISPLAY_8(aDDRESS)                                           \
-  (aDDRESS)[0], (aDDRESS)[1], (aDDRESS)[2], (aDDRESS)[3]
+namespace oai::utils {
 
 class conv {
  public:
@@ -67,5 +57,21 @@ class conv {
       uint32_t value, std::string& value_str, uint8_t length = 0);
   static std::string uint32_to_hex_string(uint32_t value);
   static std::string tmsi_to_string(const uint32_t tmsi);
+  static void get_tmsi_from_guti(const std::string& guti, uint32_t& tmsi);
+  static void get_amf_id(
+      uint8_t amf_region_id, uint16_t amf_set_id, uint8_t amf_pointer,
+      uint32_t& amf_id);
+  static void get_amf_id(
+      uint8_t amf_region_id, uint16_t amf_set_id, uint8_t amf_pointer,
+      std::string& amf_id);
+  static void get_amf_id(
+      const std::string& amf_region_id, const std::string& amf_set_id,
+      const std::string& amf_pointer, uint32_t& amf_id);
+  static void get_amf_id(
+      const std::string& amf_region_id, const std::string& amf_set_id,
+      const std::string& amf_pointer, std::string& amf_id);
+  static void convert_string_2_hex(
+      std::string& input_str, std::string& output_str);
 };
+}  // namespace oai::utils
 #endif /* FILE_CONVERSIONS_HPP_SEEN */

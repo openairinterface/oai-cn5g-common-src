@@ -22,11 +22,15 @@
 #ifndef FILE_3GPP_29_510_SEEN
 #define FILE_3GPP_29_510_SEEN
 
-#include <vector>
-#include <map>
-#include <netinet/in.h>
 #include <arpa/inet.h>
+#include <netinet/in.h>
+
+#include <map>
+#include <vector>
+
 #include "3gpp_23.003.h"
+
+namespace oai::common::sbi {
 
 enum class nf_status_e { REGISTERED = 0, SUSPENDED = 1, UNDISCOVERABLE = 2 };
 
@@ -430,4 +434,6 @@ typedef struct patch_item_s {
   }
 } patch_item_t;
 
-#endif
+}  // namespace oai::common::sbi
+
+#endif  // FILE_3GPP_29_510_SEEN

@@ -26,7 +26,25 @@
 
 #include <string>
 
-namespace util {
+namespace oai::utils {
+
+template<class T>
+class Buffer {
+ public:
+  explicit Buffer(size_t size) {
+    msize = size;
+    mbuf  = new T[msize];
+  }
+  ~Buffer() {
+    if (mbuf) delete[] mbuf;
+  }
+  T* get() { return mbuf; }
+
+ private:
+  Buffer();
+  size_t msize;
+  T* mbuf;
+};
 
 std::string& ltrim(std::string& s);
 // trim from end
@@ -35,5 +53,5 @@ std::string& rtrim(std::string& s);
 std::string& trim(std::string& s);
 // extract query param from given querystring
 std::string get_query_param(std::string querystring, std::string param);
-}  // namespace util
+}  // namespace oai::utils
 #endif

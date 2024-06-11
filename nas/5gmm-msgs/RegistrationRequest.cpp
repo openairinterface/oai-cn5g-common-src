@@ -178,12 +178,13 @@ std::string RegistrationRequest::Get5gGuti() const {
   std::optional<_5G_GUTI_t> guti = std::nullopt;
   ie_5gs_mobile_identity_.Get5gGuti(guti);
   if (!guti.has_value()) return {};
-
-  std::string guti_str = guti.value().mcc + guti.value().mnc +
-                         std::to_string(guti.value().amf_region_id) +
-                         std::to_string(guti.value().amf_set_id) +
-                         std::to_string(guti.value().amf_pointer) +
-                         conv::tmsi_to_string(guti.value()._5g_tmsi);
+  std::string amf_id_str = {};
+  oai::utils::conv::get_amf_id(
+      guti.value().amf_region_id, guti.value().amf_set_id,
+      guti.value().amf_pointer, amf_id_str);
+  std::string guti_str =
+      guti.value().mcc + guti.value().mnc + amf_id_str +
+      oai::utils::conv::tmsi_to_string(guti.value()._5g_tmsi);
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("5G GUTI %s", guti_str.c_str());
   return guti_str;
@@ -196,7 +197,7 @@ void RegistrationRequest::SetAdditionalGuti(
     uint8_t amf_set_id, uint8_t amf_pointer, const std::string& _5g_tmsi) {
   _5gsMobileIdentity ie_additional_guti_tmp = {};
   ie_additional_guti_tmp.SetIei(kIei5gGuti);
-  uint32_t tmsi = utils::fromString<uint32_t>(_5g_tmsi);
+  uint32_t tmsi = oai::utils::utils::fromString<uint32_t>(_5g_tmsi);
   ie_additional_guti_tmp.Set5gGuti(
       mcc, mnc, amf_region_id, amf_set_id, amf_pointer, tmsi);
   ie_additional_guti_ =

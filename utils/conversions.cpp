@@ -34,6 +34,10 @@
 #include <sstream>
 
 #include "logger_base.hpp"
+#include "output_wrapper.hpp"
+#include "utils.hpp"
+
+using namespace oai::utils;
 
 static const char hex_to_ascii_table[16] = {
     '0', '1', '2', '3', '4', '5', '6', '7',
@@ -350,4 +354,89 @@ std::string conv::tmsi_to_string(const uint32_t tmsi) {
   }
   s.append(std::to_string(tmsi));
   return s;
+}
+
+//------------------------------------------------------------------------------
+void conv::get_tmsi_from_guti(const std::string& guti, uint32_t& tmsi) {
+  // Get 8 last characters of GUTI
+  uint8_t len = guti.length();
+  if (len <= kUint32Length) return;
+  std::string tmsi_str = guti.substr(len - kUint32Length);
+  tmsi                 = string_hex_to_int(tmsi_str);
+}
+
+//------------------------------------------------------------------------------
+void conv::get_amf_id(
+    uint8_t amf_region_id, uint16_t amf_set_id, uint8_t amf_pointer,
+    uint32_t& amf_id) {
+  // AMF Region ID: 8bits
+  // AMF Set ID: 10 bits
+  // AMF Pointer: 6 bits
+  amf_id = 0x00ffffff & ((amf_region_id << 16) | ((amf_set_id & 0x03ff) << 6) |
+                         (amf_pointer & 0x3f));
+}
+
+//------------------------------------------------------------------------------
+void conv::get_amf_id(
+    uint8_t amf_region_id, uint16_t amf_set_id, uint8_t amf_pointer,
+    std::string& amf_id) {
+  // AMF Region ID: 8bits
+  // AMF Set ID: 10 bits
+  // AMF Pointer: 6 bits
+  uint32_t amf_id_int = 0;
+  get_amf_id(amf_region_id, amf_set_id, amf_pointer, amf_id_int);
+  int_to_string_hex(amf_id_int, amf_id, 6);  // AMF ID: 24 bits
+}
+
+//------------------------------------------------------------------------------
+void conv::get_amf_id(
+    const std::string& amf_region_id, const std::string& amf_set_id,
+    const std::string& amf_pointer, uint32_t& amf_id) {
+  uint8_t amf_region_id_int = {};
+  uint16_t amf_set_id_int   = {};
+  uint8_t amf_pointer_int   = {};
+
+  get_amf_id(
+      string_hex_to_int(amf_region_id), string_hex_to_int(amf_set_id),
+      string_hex_to_int(amf_pointer), amf_id);
+}
+
+//------------------------------------------------------------------------------
+void conv::get_amf_id(
+    const std::string& amf_region_id, const std::string& amf_set_id,
+    const std::string& amf_pointer, std::string& amf_id) {
+  uint32_t amf_id_int = 0;
+  get_amf_id(
+      string_hex_to_int(amf_region_id), string_hex_to_int(amf_set_id),
+      string_hex_to_int(amf_pointer), amf_id_int);
+  int_to_string_hex(amf_id_int, amf_id, 6);  // AMF ID: 24 bits
+}
+
+//------------------------------------------------------------------------------
+void conv::convert_string_2_hex(
+    std::string& input_str, std::string& output_str) {
+  unsigned char* data = (unsigned char*) malloc(input_str.length() + 1);
+  if (!data) {
+    utils::free_wrapper((void**) &data);
+    return;
+  }
+  memset(data, 0, input_str.length() + 1);
+  memcpy((void*) data, (void*) input_str.c_str(), input_str.length());
+  oai::utils::output_wrapper::print_buffer(
+      "amf_app", "Data input", data, input_str.length());
+
+  char* datahex = (char*) malloc(input_str.length() * 2 + 1);
+  if (!datahex) {
+    utils::free_wrapper((void**) &datahex);
+    utils::free_wrapper((void**) &data);
+    return;
+  }
+  memset(datahex, 0, input_str.length() * 2 + 1);
+
+  for (int i = 0; i < input_str.length(); i++)
+    sprintf(datahex + i * 2, "%02x", data[i]);
+
+  output_str = reinterpret_cast<char*>(datahex);
+  utils::free_wrapper((void**) &datahex);
+  utils::free_wrapper((void**) &data);
 }

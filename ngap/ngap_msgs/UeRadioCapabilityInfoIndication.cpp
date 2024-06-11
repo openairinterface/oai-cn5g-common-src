@@ -63,7 +63,7 @@ void UeRadioCapabilityInfoIndicationMsg::setAmfUeNgapId(const uint64_t& id) {
       NgapUeMessage::m_AmfUeNgapId.encode(ie->value.choice.AMF_UE_NGAP_ID);
   if (!ret) {
     Logger::ngap().error("Encode NGAP AMF_UE_NGAP_ID IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -89,7 +89,7 @@ void UeRadioCapabilityInfoIndicationMsg::setRanUeNgapId(
       NgapUeMessage::m_RanUeNgapId.encode(ie->value.choice.RAN_UE_NGAP_ID);
   if (!ret) {
     Logger::ngap().error("Encode NGAP RAN_UE_NGAP_ID IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -113,7 +113,7 @@ void UeRadioCapabilityInfoIndicationMsg::setUeRadioCapability(
 
   if (!m_UeRadioCapability.encode(ie->value.choice.UERadioCapability)) {
     Logger::ngap().error("Encode NGAP UERadioCapability IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -158,7 +158,7 @@ void UeRadioCapabilityInfoIndicationMsg::setUeRadioCapabilityForPaging(
       ie->value.choice.UERadioCapabilityForPaging);
   if (!ret) {
     Logger::ngap().error("Encode NGAP UERadioCapabilityForPaging IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 

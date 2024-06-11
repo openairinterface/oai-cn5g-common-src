@@ -69,7 +69,7 @@ void NgSetupRequestMsg::setGlobalRanNodeId(
 
   if (!globalRanNodeIdIE.encode(ie->value.choice.GlobalRANNodeID)) {
     Logger::ngap().error("Encode NGAP GlobalRANNodeID IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -94,7 +94,7 @@ void NgSetupRequestMsg::setRanNodeName(const std::string& value) {
 
   if (!m_RanNodeName.value().encode(ie->value.choice.RANNodeName)) {
     Logger::ngap().error("Encode NGAP RANNodeName IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -154,7 +154,7 @@ void NgSetupRequestMsg::setSupportedTaList(
 
   if (!supportedTAListIE.encode(ie->value.choice.SupportedTAList)) {
     Logger::ngap().error("Encode SupportedTAList IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -175,13 +175,13 @@ void NgSetupRequestMsg::setDefaultPagingDrx(const e_Ngap_PagingDRX& value) {
 
   if (!defaultPagingDRXIE.encode(ie->value.choice.PagingDRX)) {
     Logger::ngap().error("Encode DefaultPagingDRX IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
   int ret = ASN_SEQUENCE_ADD(&m_NgSetupRequestIes->protocolIEs.list, ie);
   if (ret != 0) Logger::ngap().error("Encode DefaultPagingDRX IE error");
-  // utils::free_wrapper((void**) &ie);
+  // oai::utils::utils::free_wrapper((void**) &ie);
 }
 
 //------------------------------------------------------------------------------

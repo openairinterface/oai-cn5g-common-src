@@ -63,7 +63,7 @@ void RerouteNasRequest::setAmfUeNgapId(const uint64_t& id) {
   int ret = m_AmfUeNgapId.value().encode(ie->value.choice.AMF_UE_NGAP_ID);
   if (!ret) {
     Logger::ngap().error("Encode AMF_UE_NGAP_ID IE error!");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -91,7 +91,7 @@ void RerouteNasRequest::setRanUeNgapId(const uint32_t& ranUeNgapId) {
   int ret = m_RanUeNgapId.encode(ie->value.choice.RAN_UE_NGAP_ID);
   if (!ret) {
     Logger::ngap().error("Encode RAN_UE_NGAP_ID IE error!");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -132,7 +132,7 @@ void RerouteNasRequest::setAllowedNssai(const std::vector<S_Nssai>& list) {
   int ret = m_AllowedNssai.value().encode(ie->value.choice.AllowedNSSAI);
   if (!ret) {
     Logger::ngap().error("Encode AllowedNSSAI IE error!");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -188,7 +188,7 @@ bool RerouteNasRequest::setAmfSetId(const uint16_t& amfSetId) {
   int ret = m_AmfSetId.encode(ie->value.choice.AMFSetID);
   if (!ret) {
     Logger::ngap().error("Encode AMFSetID IE error!");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return false;
   }
 

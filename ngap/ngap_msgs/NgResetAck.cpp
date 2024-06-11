@@ -39,7 +39,7 @@ NgResetAckMsg::NgResetAckMsg() {
 //------------------------------------------------------------------------------
 NgResetAckMsg::~NgResetAckMsg() {
   if (m_CriticalityDiagnostics)
-    utils::free_wrapper((void**) &m_CriticalityDiagnostics);
+    oai::utils::utils::free_wrapper((void**) &m_CriticalityDiagnostics);
 }
 
 //------------------------------------------------------------------------------
@@ -80,7 +80,7 @@ void NgResetAckMsg::addUeAssociatedLogicalNgConnectionList() {
           ie->value.choice.UE_associatedLogicalNG_connectionList)) {
     Logger::ngap().error(
         "Encode NGAP UE_associatedLogicalNG_connectionList IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 

@@ -56,14 +56,14 @@ bool AssociatedQosFlowList::encode(
         1, sizeof(Ngap_AssociatedQosFlowItem_t));
     if (!ie) return false;
     if (!m_List[i].encode(*ie)) {
-      utils::free_wrapper((void**) &ie);
+      oai::utils::utils::free_wrapper((void**) &ie);
       return false;
     }
     if (ASN_SEQUENCE_ADD(&associatedQosFlowList.list, ie) != 0) {
-      utils::free_wrapper((void**) &ie);
+      oai::utils::utils::free_wrapper((void**) &ie);
       return false;
     }
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
   }
   return true;
 }

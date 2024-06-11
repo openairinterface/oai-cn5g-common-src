@@ -18,20 +18,13 @@
 # For more information about the OpenAirInterface (OAI) Software Alliance:
 #      contact@openairinterface.org
 ################################################################################
+set(NGAP_DIR "${SRC_TOP_DIR}/${MOUNTED_COMMON}/ngap")
+file(GLOB NGAP_lib_c_ies_src_files
+  *.c
+)
+add_library (NGAP_LIB_C_IES STATIC
+  ${NGAP_lib_c_ies_src_files}
+)
 
-SET(UTILS_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/utils)
-include_directories(${UTILS_DIR})
-include_directories(${UTILS_DIR}/bstr)
-
-file(GLOB UTILS_SRC_FILES
-        ${UTILS_DIR}/*.cpp
-        ${UTILS_DIR}/backtrace.c
-        ${UTILS_DIR}/bstr/bstrlib.c 
-        )
-
-if (TARGET ${NF_TARGET})
-target_include_directories(${NF_TARGET} PUBLIC ${UTILS_DIR})
-target_sources(${NF_TARGET} PRIVATE
-        ${UTILS_SRC_FILES}
-        )
-endif()
+target_include_directories(NGAP_LIB_C_IES PUBLIC ${NGAP_DIR}/libngap)
+target_include_directories(NGAP_LIB_C_IES PUBLIC ${NGAP_DIR}/libngap_ies)

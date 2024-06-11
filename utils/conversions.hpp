@@ -57,13 +57,19 @@ class conv {
       uint32_t value, std::string& value_str, uint8_t length = 0);
   static std::string uint32_to_hex_string(uint32_t value);
   static std::string tmsi_to_string(const uint32_t tmsi);
-
-  /*
-   * Convert a string to hex representing this string
-   * @param [const std::string&] input_str Input string
-   * @param [std::string&] output_str String represents string in hex format
-   * @return void
-   */
+  static void get_tmsi_from_guti(const std::string& guti, uint32_t& tmsi);
+  static void get_amf_id(
+      uint8_t amf_region_id, uint16_t amf_set_id, uint8_t amf_pointer,
+      uint32_t& amf_id);
+  static void get_amf_id(
+      uint8_t amf_region_id, uint16_t amf_set_id, uint8_t amf_pointer,
+      std::string& amf_id);
+  static void get_amf_id(
+      const std::string& amf_region_id, const std::string& amf_set_id,
+      const std::string& amf_pointer, uint32_t& amf_id);
+  static void get_amf_id(
+      const std::string& amf_region_id, const std::string& amf_set_id,
+      const std::string& amf_pointer, std::string& amf_id);
   static void convert_string_2_hex(
       const std::string& input_str, std::string& output_str);
 };

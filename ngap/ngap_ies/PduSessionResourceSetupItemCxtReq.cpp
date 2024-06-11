@@ -69,7 +69,7 @@ bool PduSessionResourceSetupItemCxtReq::encode(
         (Ngap_NAS_PDU_t*) calloc(1, sizeof(Ngap_NAS_PDU_t));
     if (!naspdu) return false;
     if (!m_NasPdu.value().encode(*naspdu)) {
-      utils::free_wrapper((void**) &naspdu);
+      oai::utils::utils::free_wrapper((void**) &naspdu);
       return false;
     }
     pduSessionResourceSetupItemCxtReq.nAS_PDU = naspdu;

@@ -60,7 +60,7 @@ void InitialUeMessageMsg::setRanUeNgapId(const uint32_t& value) {
   int ret = m_RanUeNgapId.encode(ie->value.choice.RAN_UE_NGAP_ID);
   if (!ret) {
     Logger::ngap().error("Encode RAN_UE_NGAP_ID IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -81,7 +81,7 @@ void InitialUeMessageMsg::setNasPdu(const bstring& pdu) {
   int ret = m_NasPdu.encode(ie->value.choice.NAS_PDU);
   if (!ret) {
     Logger::ngap().error("Encode NAS PDU IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -112,7 +112,7 @@ void InitialUeMessageMsg::setUserLocationInfoNr(
       ie->value.choice.UserLocationInformation);
   if (!ret) {
     Logger::ngap().error("Encode UserLocationInformation IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -135,7 +135,7 @@ void InitialUeMessageMsg::setRrcEstablishmentCause(
       m_RrcEstablishmentCause.encode(ie->value.choice.RRCEstablishmentCause);
   if (!ret) {
     Logger::ngap().error("Encode RRCEstablishmentCause IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -158,7 +158,7 @@ void InitialUeMessageMsg::setUeContextRequest(
       m_UeContextRequest.value().encode(ie->value.choice.UEContextRequest);
   if (!ret) {
     Logger::ngap().error("Encode UEContextRequest IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 

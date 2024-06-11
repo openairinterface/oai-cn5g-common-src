@@ -64,7 +64,7 @@ void PduSessionResourceReleaseCommandMsg::setAmfUeNgapId(const uint64_t& id) {
       NgapUeMessage::m_AmfUeNgapId.encode(ie->value.choice.AMF_UE_NGAP_ID);
   if (!ret) {
     Logger::nas_mm().warn("Encode AMF_UE_NGAP_ID IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -90,7 +90,7 @@ void PduSessionResourceReleaseCommandMsg::setRanUeNgapId(
       NgapUeMessage::m_RanUeNgapId.encode(ie->value.choice.RAN_UE_NGAP_ID);
   if (!ret) {
     Logger::nas_mm().warn("Encode RAN_UE_NGAP_ID IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -118,7 +118,7 @@ void PduSessionResourceReleaseCommandMsg::setRanPagingPriority(
       m_RanPagingPriority.value().encode(ie->value.choice.RANPagingPriority);
   if (!ret) {
     Logger::nas_mm().warn("Encode RANPagingPriority IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -152,7 +152,7 @@ void PduSessionResourceReleaseCommandMsg::setNasPdu(const bstring& pdu) {
   int ret = m_NasPdu.value().encode(ie->value.choice.NAS_PDU);
   if (!ret) {
     Logger::nas_mm().warn("encode NAS_PDU IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 

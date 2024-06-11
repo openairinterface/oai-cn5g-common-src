@@ -55,7 +55,7 @@ bool DrbSubjectToStatusTransferList::encode(
 
     if (!item.encode(*ie)) {
       Logger::ngap().error("Encode DrbSubjectToStatusTransferList IE error!");
-      utils::free_wrapper((void**) &ie);
+      oai::utils::utils::free_wrapper((void**) &ie);
       return false;
     }
     if (ASN_SEQUENCE_ADD(&drbsSubjectToStatusTransferList.list, ie) != 0) {

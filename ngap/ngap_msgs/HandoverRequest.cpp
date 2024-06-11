@@ -155,7 +155,7 @@ void HandoverRequest::setAmfUeNgapId(const uint64_t& id) {
   int ret = m_AmfUeNgapId.encode(ie->value.choice.AMF_UE_NGAP_ID);
   if (!ret) {
     Logger::ngap().error("Encode AMF_UE_NGAP_ID IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -347,7 +347,7 @@ void HandoverRequest::setPduSessionResourceSetupList(
       ie->value.choice.PDUSessionResourceSetupListHOReq);
   if (!ret) {
     Logger::ngap().error("Encode PDUSessionResourceSetupListSUReq IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 

@@ -88,7 +88,7 @@ void NetworkName::SetTextString(const std::string& str) {
 
   uint8_t* packed_str = (uint8_t*) calloc(7, sizeof(uint8_t));
   if (!packed_str) {
-    utils::free_wrapper((void**) &packed_str);
+    oai::utils::utils::free_wrapper((void**) &packed_str);
     return;
   }
   // Text string = "Testing"
@@ -101,7 +101,7 @@ void NetworkName::SetTextString(const std::string& str) {
   packed_str[6] = 0x01;
 
   text_string_ = blk2bstr(packed_str, 7);
-  utils::free_wrapper((void**) &packed_str);
+  oai::utils::utils::free_wrapper((void**) &packed_str);
   SetLengthIndicator(1 + blength(text_string_));
 }
 

@@ -60,7 +60,7 @@ bool NgSetupResponseMsg::setAmfName(const std::string& name) {
 
   if (!m_AmfName.encode(ie->value.choice.AMFName)) {
     Logger::ngap().error("Encode NGAP AMFName IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return false;
   }
 
@@ -99,7 +99,7 @@ void NgSetupResponseMsg::setGuamiList(std::vector<struct GuamiItem_s>& list) {
 
   if (!m_ServedGuamiList.encode(ie->value.choice.ServedGUAMIList)) {
     Logger::ngap().error("Encode NGAP ServedGUAMIList IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -119,7 +119,7 @@ void NgSetupResponseMsg::setRelativeAmfCapacity(const long& capacity) {
 
   if (!m_RelativeAmfCapacity.encode(ie->value.choice.RelativeAMFCapacity)) {
     Logger::ngap().error("Encode NGAP RelativeAMFCapacity IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -166,7 +166,7 @@ void NgSetupResponseMsg::setPlmnSupportList(
 
   if (!m_PlmnSupportList.encode(ie->value.choice.PLMNSupportList)) {
     Logger::ngap().error("Encode NGAP PLMNSupportList IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -375,7 +375,7 @@ void NgSetupResponseMsg::setUeRetentionInformation(
   if (!m_UeRetentionInformation.value().encode(
           ie->value.choice.UERetentionInformation)) {
     Logger::ngap().error("Encode NGAP UeRetentionInformation IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 

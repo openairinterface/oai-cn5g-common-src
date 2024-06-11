@@ -69,7 +69,7 @@ void InitialContextSetupRequestMsg::setAmfUeNgapId(const uint64_t& id) {
       NgapUeMessage::m_AmfUeNgapId.encode(ie->value.choice.AMF_UE_NGAP_ID);
   if (!ret) {
     Logger::ngap().error("Encode AMF_UE_NGAP_ID IE error!");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -95,7 +95,7 @@ void InitialContextSetupRequestMsg::setRanUeNgapId(
       NgapUeMessage::m_RanUeNgapId.encode(ie->value.choice.RAN_UE_NGAP_ID);
   if (!ret) {
     Logger::ngap().error("Encode RAN_UE_NGAP_ID IE error!");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -120,7 +120,7 @@ void InitialContextSetupRequestMsg::setOldAmf(const std::string& name) {
   int ret = m_OldAmf.value().encode(ie->value.choice.AMFName);
   if (!ret) {
     Logger::ngap().error("Encode oldAmfName IE error!");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -155,7 +155,7 @@ void InitialContextSetupRequestMsg::setUeAggregateMaxBitRate(
       ie->value.choice.UEAggregateMaximumBitRate);
   if (!ret) {
     Logger::ngap().error("Encode UeAggregateMaxBitRate IE error!");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -189,7 +189,7 @@ void InitialContextSetupRequestMsg::setUeAggregateMaxBitRate(
       ie->value.choice.UEAggregateMaximumBitRate);
   if (!ret) {
     Logger::ngap().error("Encode UEAggregateMaximumBitRate IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -253,7 +253,7 @@ void InitialContextSetupRequestMsg::setCoreNetworkAssistanceInfo(
   if (!ret) {
     Logger::ngap().error(
         "Encode CoreNetworkAssistanceInformationForInactive IE error!");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -311,7 +311,7 @@ void InitialContextSetupRequestMsg::setGuami(const guami_full_format_t& value) {
   int ret = m_Guami.encode(ie->value.choice.GUAMI);
   if (!ret) {
     Logger::ngap().error("Encode GUAMI IE error!");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -374,7 +374,7 @@ void InitialContextSetupRequestMsg::setPduSessionResourceSetupRequestList(
       ie->value.choice.PDUSessionResourceSetupListCxtReq);
   if (!ret) {
     Logger::ngap().error("Encode PDUSessionResourceSetupListCxtReq IE error!");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -444,7 +444,7 @@ void InitialContextSetupRequestMsg::setAllowedNssai(
   int ret = m_AllowedNssai.encode(ie->value.choice.AllowedNSSAI);
   if (!ret) {
     Logger::ngap().error("Encode AllowedNSSAI IE error!");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -489,7 +489,7 @@ void InitialContextSetupRequestMsg::setUeSecurityCapability(
       m_UeSecurityCapabilities.encode(ie->value.choice.UESecurityCapabilities);
   if (!ret) {
     Logger::ngap().error("Encode UESecurityCapabilities IE error!");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -527,7 +527,7 @@ void InitialContextSetupRequestMsg::setSecurityKey(
   int ret = m_SecurityKey.encode(ie->value.choice.SecurityKey);
   if (!ret) {
     Logger::ngap().error("Encode SecurityKey IE error!");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -563,7 +563,7 @@ void InitialContextSetupRequestMsg::setMobilityRestrictionList(
       ie->value.choice.MobilityRestrictionList);
   if (!ret) {
     Logger::ngap().error("Encode MobilityRestrictionList IE error!");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -589,7 +589,7 @@ void InitialContextSetupRequestMsg::setNasPdu(const bstring& pdu) {
   int ret = m_NasPdu.value().encode(ie->value.choice.NAS_PDU);
   if (!ret) {
     Logger::ngap().error("Encode NAS PDU error!");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -623,7 +623,7 @@ void InitialContextSetupRequestMsg::setUeRadioCapability(
       m_UeRadioCapability.value().encode(ie->value.choice.UERadioCapability);
   if (!ret) {
     Logger::ngap().error("Encode UERadioCapability IE error!");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -651,7 +651,7 @@ void InitialContextSetupRequestMsg::setMaskedImeisv(const std::string& imeisv) {
   if (!amf_conv::string_2_masked_imeisv(
           imeisv, ie->value.choice.MaskedIMEISV)) {
     Logger::ngap().error("Encode MaskedIMEISV IE error!");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 

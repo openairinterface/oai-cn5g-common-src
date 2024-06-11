@@ -70,12 +70,12 @@ int _5gmmCause::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
-  if (len < k5gmmCauseMaximumLength) {
+  if (len < k5gmmCauseMinimumLength) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error(
             "Buffer length is less than the minimum length of this IE (%d "
             "octet)",
-            k5gmmCauseMaximumLength);
+            k5gmmCauseMinimumLength);
     return KEncodeDecodeError;
   }
   int encoded_size = 0;

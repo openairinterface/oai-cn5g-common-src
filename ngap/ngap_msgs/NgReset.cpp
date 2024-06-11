@@ -54,7 +54,7 @@ void NgResetMsg::setCause(const Cause& c) {
 
   if (!m_Cause.encode(ie->value.choice.Cause)) {
     Logger::ngap().error("Encode NGAP Cause IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
@@ -74,7 +74,7 @@ void NgResetMsg::setResetType(const ResetType& r) {
 
   if (!m_ResetType.encode(ie->value.choice.ResetType)) {
     Logger::ngap().error("Encode NGAP ResetType IE error");
-    utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 

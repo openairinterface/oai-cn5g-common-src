@@ -22,7 +22,7 @@
 #include "PduSessionResourceSetupUnsuccessfulTransfer.hpp"
 
 #include "logger.hpp"
-#include "output_wrapper.hpp"
+#include "ngap_utils.hpp"
 
 namespace oai::ngap {
 
@@ -111,7 +111,7 @@ void PduSessionResourceSetupUnSuccessfulTransferIE::setCauseMisc(
 //------------------------------------------------------------------------------
 int PduSessionResourceSetupUnSuccessfulTransferIE::encode(
     uint8_t* buf, int buf_size) {
-  output_wrapper::output_wrapper::print_asn_msg(
+  ngap_utils::print_asn_msg(
       &asn_DEF_Ngap_PDUSessionResourceSetupUnsuccessfulTransfer,
       m_PduSessionResourceSetupUnsuccessfulTransferIe);
   asn_enc_rval_t er = aper_encode_to_buffer(

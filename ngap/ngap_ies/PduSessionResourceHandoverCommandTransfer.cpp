@@ -24,7 +24,7 @@
 #include <vector>
 
 #include "logger.hpp"
-#include "output_wrapper.hpp"
+#include "ngap_utils.hpp"
 
 namespace oai::ngap {
 
@@ -104,7 +104,7 @@ void PduSessionResourceHandoverCommandTransfer::setUPTransportLayerInformation(
 //------------------------------------------------------------------------------
 int PduSessionResourceHandoverCommandTransfer::encode(
     uint8_t* buf, int buf_size) const {
-  output_wrapper::print_asn_msg(
+  ngap_utils::print_asn_msg(
       &asn_DEF_Ngap_HandoverCommandTransfer, m_HandoverCommandTransferIe);
   asn_enc_rval_t er = aper_encode_to_buffer(
       &asn_DEF_Ngap_HandoverCommandTransfer, NULL, m_HandoverCommandTransferIe,

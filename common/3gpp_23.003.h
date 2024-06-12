@@ -40,7 +40,7 @@ const uint8_t SD_LENGTH  = 3;
 typedef struct s_nssai  // section 28.4, TS23.003
 {
   uint8_t sst;
-  std::string sd;
+  std::string sd = oai::model::common::SD_DEFAULT_VALUE;
   // s_nssai(const uint8_t& m_sst, const uint32_t m_sd) : sst(m_sst), sd(m_sd)
   // {}
   s_nssai(const uint8_t& m_sst, const std::string& m_sd)
@@ -86,6 +86,19 @@ typedef struct s_nssai  // section 28.4, TS23.003
   void from_json(nlohmann::json& json_data) {
     this->sst = json_data["sst"].get<int>();
     this->sd  = json_data["sd"].get<std::string>();
+  }
+
+  [[nodiscard]] uint32_t get_sd_int() const {
+    try {
+      return std::stoul(sd, nullptr, 16);
+    } catch (const std::exception& e) {
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .error(
+              "Error when converting from string to int for S-NSSAI SD, error: "
+              "%s",
+              e.what());
+      return SD_NO_VALUE;
+    }
   }
 
 } snssai_t;

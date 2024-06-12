@@ -25,8 +25,6 @@
 
 namespace json = nlohmann;
 using namespace oai::http;
-using namespace Pistache::Http::Header;
-using namespace Pistache::Http::Mime;
 
 //---------------------------------------------------------------------------------------------
 http_client::http_client(
@@ -268,12 +266,10 @@ void http_client::prepare_session(
   // Set HTTP client timeout
   session->SetTimeout(cpr::Timeout(m_timeout_ms));
 
-  // Set HTTP header (convert pistache header to cpr headers)
+  // Set HTTP header
   cpr::Header cpr_header{};
-  for (const auto& pistache_header : request.headers.list()) {
-    std::stringstream ss;
-    pistache_header->write(ss);
-    cpr_header.insert({pistache_header->name(), ss.str()});
+  for (const auto& h : request.headers) {
+    cpr_header.insert({h.first, h.second});
   }
   cpr_header.insert(
       {{"Expect", ""}, {"Accept", "application/json"}, {"Charset", "UTF-8"}});
@@ -303,13 +299,9 @@ void http_client::get_response_info(
   resp.status_code = cpr_resp.status_code;
   resp.body        = cpr_resp.text;
 
-  // convert cpr header to pistache headers
   for (const auto& h : cpr_resp.header) {
     try {
-      auto pistache_hdr =
-          Pistache::Http::Header::Registry::instance().makeHeader(h.first);
-      pistache_hdr->parse(h.second);
-      resp.headers.add(std::move(pistache_hdr));
+      resp.headers.insert({h.first, h.second});
     } catch (std::exception&) {
       m_sbi_logger.debug(
           "Unknown header from HTTP client: '%s : %s'", h.first, h.second);
@@ -325,7 +317,7 @@ request http_client::prepare_json_request(
   // Check whether body is valid JSON
   if (json::json::accept(body)) {
     req.body = body;
-    req.headers.add<ContentType>(MediaType("application/json"));
+    req.headers.insert({"content-type", "application/json"});
   }
   return req;
 }
@@ -336,7 +328,8 @@ request http_client::prepare_multipart_request(
   request req;
   req.uri  = uri;
   req.body = body;
-  req.headers.add<ContentType>(MediaType(
-      "multipart/related;boundary=" + std::string(CURL_MIME_BOUNDARY)));
+  req.headers.insert(
+      {"content-type",
+       "multipart/related;boundary=" + std::string(CURL_MIME_BOUNDARY)});
   return req;
 }

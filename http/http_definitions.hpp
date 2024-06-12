@@ -22,9 +22,9 @@
 #pragma once
 #define FMT_HEADER_ONLY
 
+#include <cpr/cpr.h>
 #include <curl/curl.h>
 #include <fmt/format.h>
-#include <pistache/http_headers.h>
 
 #include <string>
 
@@ -32,18 +32,16 @@
 
 namespace oai::http {
 
-// Design choice: We use Pistache headers here because they are type-safe
-// It breaks a bit the abstraction of HTTP layer, but the advantage is greater
 struct response {
   int status_code;
   std::string body;
-  Pistache::Http::Header::Collection headers;
+  cpr::Header headers;
 };
 
 struct request {
   std::string uri;
   std::string body;
-  Pistache::Http::Header::Collection headers;
+  cpr::Header headers;
 
   std::string to_string() const {
     return fmt::format("HTTP Request to URI: {}", uri);

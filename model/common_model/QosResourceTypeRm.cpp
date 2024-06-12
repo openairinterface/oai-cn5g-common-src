@@ -41,9 +41,7 @@ bool QosResourceTypeRm::validate(
 }
 
 bool QosResourceTypeRm::operator==(const QosResourceTypeRm& rhs) const {
-  return
-
-      ;
+  return (*this == rhs);
 }
 
 bool QosResourceTypeRm::operator!=(const QosResourceTypeRm& rhs) const {

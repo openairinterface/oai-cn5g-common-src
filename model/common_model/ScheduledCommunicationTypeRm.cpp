@@ -42,9 +42,7 @@ bool ScheduledCommunicationTypeRm::validate(
 
 bool ScheduledCommunicationTypeRm::operator==(
     const ScheduledCommunicationTypeRm& rhs) const {
-  return
-
-      ;
+  return (*this == rhs);
 }
 
 bool ScheduledCommunicationTypeRm::operator!=(

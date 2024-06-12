@@ -40,9 +40,7 @@ bool SscModeRm::validate(
 }
 
 bool SscModeRm::operator==(const SscModeRm& rhs) const {
-  return
-
-      ;
+  return (*this == rhs);
 }
 
 bool SscModeRm::operator!=(const SscModeRm& rhs) const {

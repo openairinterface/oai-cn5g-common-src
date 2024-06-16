@@ -36,6 +36,8 @@ list(APPEND USED_COMMON_MODEL_SRC_FILES
         ${COMMON_MODEL_DIR}/AccessType.cpp
         ${COMMON_MODEL_DIR}/Snssai.cpp
         ${COMMON_MODEL_DIR}/Helpers.cpp
+        ${COMMON_MODEL_DIR}/NFType.cpp
+        ${COMMON_MODEL_DIR}/NFType_anyOf.cpp
         ${COMMON_MODEL_DIR}/PduSessionType.cpp
         ${COMMON_MODEL_DIR}/PduSessionType_anyOf.cpp
         ${COMMON_MODEL_DIR}/Ipv6Prefix.cpp

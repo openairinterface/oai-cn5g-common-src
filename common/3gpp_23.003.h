@@ -40,7 +40,7 @@ const uint8_t SD_LENGTH  = 3;
 typedef struct s_nssai  // section 28.4, TS23.003
 {
   uint8_t sst;
-  std::string sd = "ffffff";
+  std::string sd = oai::model::common::SD_DEFAULT_VALUE;
   // s_nssai(const uint8_t& m_sst, const uint32_t m_sd) : sst(m_sst), sd(m_sd)
   // {}
   s_nssai(const uint8_t& m_sst, const std::string& m_sd)

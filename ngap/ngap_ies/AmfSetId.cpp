@@ -76,7 +76,8 @@ bool AmfSetId::encode(Ngap_AMFSetID_t& amfSetId) const {
 //------------------------------------------------------------------------------
 bool AmfSetId::decode(const Ngap_AMFSetID_t& amfSetId) {
   if (!amfSetId.buf) return false;
-  output_wrapper::print_buffer("ngap", "AMFSetID", amfSetId.buf, amfSetId.size);
+  oai::utils::output_wrapper::print_buffer(
+      "ngap", "AMFSetID", amfSetId.buf, amfSetId.size);
 
   uint16_t temp = 0;
   temp |= amfSetId.buf[0] << 8;

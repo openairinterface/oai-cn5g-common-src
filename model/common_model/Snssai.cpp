@@ -69,7 +69,7 @@ bool Snssai::operator==(const Snssai& rhs) const {
       (getSst() == rhs.getSst()) &&
 
       ((!sdIsSet() && !rhs.sdIsSet()) ||
-       (sdIsSet() && rhs.sdIsSet() && getSd() == rhs.getSd()))
+       (sdIsSet() && rhs.sdIsSet() && getSdInt() == rhs.getSdInt()))
 
           ;
 }
@@ -126,8 +126,7 @@ std::string Snssai::to_string(const int indent_level) const {
   out.append(fmt::format(fmt_title, "snssai:"));
   out.append(fmt::format(fmt_value, "sst", m_Sst));
   if (sdIsSet()) {
-    std::string sd_val = fmt::format("0x{} ({})", m_Sd, getSdInt());
-    out.append(fmt::format(fmt_value, "sd", sd_val));
+    out.append(fmt::format(fmt_value, "sd", getSd()));
   }
   return out;
 }

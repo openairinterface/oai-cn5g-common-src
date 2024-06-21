@@ -22,7 +22,7 @@
 #include "PduSessionResourceHandoverRequiredTransfer.hpp"
 
 #include "logger.hpp"
-#include "output_wrapper.hpp"
+#include "ngap_utils.hpp"
 
 namespace oai::ngap {
 
@@ -56,7 +56,7 @@ void PduSessionResourceHandoverRequiredTransfer::
 //------------------------------------------------------------------------------
 int PduSessionResourceHandoverRequiredTransfer::encode(
     uint8_t* buf, int buf_size) {
-  output_wrapper::print_asn_msg(
+  ngap_utils::print_asn_msg(
       &asn_DEF_Ngap_HandoverRequiredTransfer, m_HandoverRquiredTransferIe);
   asn_enc_rval_t er = aper_encode_to_buffer(
       &asn_DEF_Ngap_HandoverRequiredTransfer, NULL, m_HandoverRquiredTransferIe,

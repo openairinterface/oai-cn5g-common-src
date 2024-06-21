@@ -82,11 +82,12 @@ bool ProblemDetails::validate(
       }
     }
   }
-
+  /*
   if (supportedFeaturesIsSet()) {
     const std::string& value           = m_SupportedFeatures;
     const std::string currentValuePath = _pathPrefix + ".supportedFeatures";
   }
+   */
 
   if (nrfIdIsSet()) {
     const std::string& value           = m_NrfId;
@@ -110,6 +111,7 @@ bool ProblemDetails::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
+    /*
     {  // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
       int i                          = 0;
@@ -120,6 +122,7 @@ bool ProblemDetails::validate(
         i++;
       }
     }
+     */
   }
 
   return success;

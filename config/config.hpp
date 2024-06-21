@@ -199,7 +199,7 @@ class config : public config_iface {
   [[nodiscard]] const std::vector<dnn_config>& get_dnns() const override;
 
   [[nodiscard]] int get_http_version() const override;
-  [[nodiscard]] const uint32_t get_curl_timeout();
+  [[nodiscard]] uint32_t get_curl_timeout() const;
 
   bool init() override;
 

@@ -23,7 +23,7 @@
 
 #include "amf_conversions.hpp"
 #include "logger.hpp"
-#include "output_wrapper.hpp"
+#include "ngap_utils.hpp"
 #include "utils.hpp"
 
 namespace oai::ngap {
@@ -290,7 +290,7 @@ void HandoverRequest::setAllowedNssai(const std::vector<SNssai>& list) {
       Logger::ngap().error(
           "Encode PDUSessionResourceHandoverListItem IE error");
   }
-  output_wrapper::print_asn_msg(&asn_DEF_Ngap_AllowedNSSAI, &m_AllowedNssai);
+  ngap_utils::print_asn_msg(&asn_DEF_Ngap_AllowedNSSAI, &m_AllowedNssai);
   Ngap_HandoverRequestIEs_t* ie =
       (Ngap_HandoverRequestIEs_t*) calloc(1, sizeof(Ngap_HandoverRequestIEs_t));
   ie->id            = Ngap_ProtocolIE_ID_id_AllowedNSSAI;

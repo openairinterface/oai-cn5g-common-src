@@ -24,17 +24,12 @@
 
 #include "logger.hpp"
 
-extern "C" {
-#include "constr_TYPE.h"
-}
-
 namespace oai::utils {
 class output_wrapper {
  public:
   static void print_buffer(
-      const std::string app, const std::string sink, uint8_t* buf, int len);
-  static void print_asn_msg(
-      const asn_TYPE_descriptor_t* td, const void* struct_ptr);
+      const std::string app, const std::string sink, const uint8_t* buf,
+      int len);
 };
 }  // namespace oai::utils
 #endif

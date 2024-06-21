@@ -32,7 +32,7 @@ bool BridgeManagementContainer::validate(std::stringstream& msg) const {
 }
 
 bool BridgeManagementContainer::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream& /*msg*/, const std::string& pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "BridgeManagementContainer" : pathPrefix;

@@ -610,6 +610,10 @@ class sbi_helper {
   static inline const std::string UdrDrPathExposureDataSubsToNotifySubsId =
       "/exposure-data/subs-to-notify/:subId";
 
+  // UDR: Configuration
+  static inline const std::string UdrConfBase              = "/nudr-oai/";
+  static inline const std::string UdrConfPathConfiguration = "/configuration/";
+
   // UDSF: Data Repository
   static inline const std::string UdsfDrBase = "/nudsf-dr/";
   static inline const std::string UdsfDrBlockCRUDApi =
@@ -642,13 +646,13 @@ class sbi_helper {
   // LMF: LMF Notify
   static inline const std::string LmfN2InfoNotifyBase = "/nlmf-n2info-notify/";
   static inline const std::string LmfN2InfoNotifyNrppaCallback =
-      "/nrppa/callback";
+      "/nrppa/callback/";
   static inline const std::string LmfN2InfoNotifyNrppaCallbackUeContextId =
       "/nrppa/callback/:ueContextId";
   static inline const std::string LmfNonUeN2InfoNotifyBase =
       "/nlmf-non-ue-n2info-notify/";
   static inline const std::string LmfNonUeN2InfoNotifyNrppaCallback =
-      "/nrppa/callback";
+      "/nrppa/callback/";
 
   /*
    * Get NRF Nfm API Root

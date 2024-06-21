@@ -26,6 +26,8 @@
 
 #include <nlohmann/json.hpp>
 #include <string>
+#include <Snssai.h>
+#include <boost/algorithm/string.hpp>
 
 #include "logger_base.hpp"
 
@@ -37,24 +39,66 @@ const uint8_t SD_LENGTH  = 3;
 
 typedef struct s_nssai  // section 28.4, TS23.003
 {
-  uint8_t sST;
-  // uint32_t sD:24;
-  std::string sD;
-  // s_nssai(const uint8_t& sst,  const uint32_t sd) : sST(sst), sD(sd) {}
-  s_nssai(const uint8_t& sst, const std::string sd) : sST(sst), sD(sd) {}
-  s_nssai() : sST(), sD() {}
-  s_nssai(const s_nssai& p) : sST(p.sST), sD(p.sD) {}
+  uint8_t sst;
+  std::string sd = oai::model::common::SD_DEFAULT_VALUE;
+  // s_nssai(const uint8_t& m_sst, const uint32_t m_sd) : sst(m_sst), sd(m_sd)
+  // {}
+  s_nssai(const uint8_t& m_sst, const std::string& m_sd)
+      : sst(m_sst), sd(m_sd) {}
+  s_nssai() : sst(), sd() {}
+  s_nssai(const s_nssai& p) : sst(p.sst), sd(p.sd) {}
   bool operator==(const struct s_nssai& s) const {
-    if ((s.sST == this->sST) && (s.sD.compare(this->sD) == 0)) {
+    if ((s.sst == this->sst) && (s.sd == this->sd)) {
       return true;
     } else {
       return false;
     }
   }
-  s_nssai& operator=(const s_nssai& s) {
-    sST = s.sST;
-    sD  = s.sD;
+
+  s_nssai& operator=(const struct s_nssai& s) {
+    sst = s.sst;
+    sd  = s.sd;
     return *this;
+  }
+
+  std::string toString() const {
+    std::string s = {};
+    s.append("SST=").append(std::to_string(sst));
+    s.append(", SD=").append(sd);
+    return s;
+  }
+
+  nlohmann::json to_json() const {
+    nlohmann::json json_data = {};
+    json_data["sst"]         = sst;
+    json_data["sd"]          = sd;
+    return json_data;
+  }
+  // TODO remove, only temporary, in the future only use model SNSSAI
+  oai::model::common::Snssai to_model_snssai() const {
+    oai::model::common::Snssai snssai;
+    snssai.setSst(sst);
+    // TODO this puts a decimal string but SD should be a hex string
+    snssai.setSd(sd);
+    return snssai;
+  }
+
+  void from_json(nlohmann::json& json_data) {
+    this->sst = json_data["sst"].get<int>();
+    this->sd  = json_data["sd"].get<std::string>();
+  }
+
+  [[nodiscard]] uint32_t get_sd_int() const {
+    try {
+      return std::stoul(sd, nullptr, 16);
+    } catch (const std::exception& e) {
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .error(
+              "Error when converting from string to int for S-NSSAI SD, error: "
+              "%s",
+              e.what());
+      return SD_NO_VALUE;
+    }
   }
 
 } snssai_t;
@@ -91,8 +135,8 @@ typedef struct nr_cell_identity_s {
 } nr_cell_identity_t;
 
 typedef struct allowed_nssai {
-  uint8_t sST;
-  uint32_t sD : 24;
+  uint8_t sst;
+  uint32_t sd : 24;
 } allowed_nssai;
 
 typedef struct guami_s {

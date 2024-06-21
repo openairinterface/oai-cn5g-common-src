@@ -370,7 +370,7 @@ int config::get_http_version() const {
   return 1;
 }
 
-const uint32_t config::get_curl_timeout() {
+uint32_t config::get_curl_timeout() const {
   return m_curl_timeout.get();
 }
 

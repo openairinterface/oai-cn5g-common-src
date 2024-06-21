@@ -22,62 +22,13 @@ namespace oai::model::pcf {
 
 FlowDirectionRm::FlowDirectionRm() {}
 
-void FlowDirectionRm::validate() const {
-  std::stringstream msg;
-  if (!validate(msg)) {
-    throw oai::model::common::helpers::ValidationException(msg.str());
-  }
+void to_json(nlohmann::json& j, const FlowDirectionRm& o) {
+  j = nlohmann::json();
+  to_json(j, o.m_value);
 }
 
-bool FlowDirectionRm::validate(std::stringstream& msg) const {
-  return validate(msg, "");
-}
-
-bool FlowDirectionRm::validate(
-    std::stringstream& /* msg */, const std::string& /* pathPrefix */) const {
-  bool success = true;
-  /*
-  const std::string _pathPrefix =
-      pathPrefix.empty() ? "FlowDirectionRm" : pathPrefix;
-  */
-  return success;
-}
-
-bool FlowDirectionRm::operator==(const FlowDirectionRm& rhs) const {
-  return getValue() == rhs.getValue();
-}
-
-bool FlowDirectionRm::operator!=(const FlowDirectionRm& rhs) const {
-  return !(*this == rhs);
-}
-
-void to_json(nlohmann::json& /*j*/, const FlowDirectionRm& /*o*/) {
-  // j = nlohmann::json();
-  std::cout << __PRETTY_FUNCTION__ + std::string{" not implemented"}
-            << std::endl;
-}
-
-void from_json(const nlohmann::json& /*j*/, FlowDirectionRm& /*o*/) {
-  std::cout << __PRETTY_FUNCTION__ + std::string{" not implemented"}
-            << std::endl;
-}
-
-FlowDirection_anyOf FlowDirectionRm::getValue() const {
-  return m_value;
-}
-
-void FlowDirectionRm::setValue(FlowDirection_anyOf value) {
-  m_value = value;
-}
-
-FlowDirection_anyOf::eFlowDirection_anyOf FlowDirectionRm::getEnumValue()
-    const {
-  return m_value.getValue();
-}
-
-void FlowDirectionRm::setEnumValue(
-    FlowDirection_anyOf::eFlowDirection_anyOf value) {
-  m_value.setValue(value);
+void from_json(const nlohmann::json& j, FlowDirectionRm& o) {
+  from_json(j, o.m_value);
 }
 
 }  // namespace oai::model::pcf

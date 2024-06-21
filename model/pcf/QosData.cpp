@@ -212,11 +212,12 @@ bool QosData::validate(
       msg << currentValuePath << ": must be greater than or equal to 1;";
     }
   }
-
+  /*
   if (packetErrorRateIsSet()) {
     const std::string& value           = m_PacketErrorRate;
     const std::string currentValuePath = _pathPrefix + ".packetErrorRate";
   }
+  */
 
   return success;
 }

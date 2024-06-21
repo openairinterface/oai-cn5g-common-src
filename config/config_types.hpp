@@ -467,7 +467,7 @@ class curl_timeout : public config_type {
 
   [[nodiscard]] std::string to_string(const std::string& indent) const override;
   void validate() override;
-  [[nodiscard]] const uint32_t get() const;
+  [[nodiscard]] uint32_t get() const;
 };
 
 }  // namespace oai::config

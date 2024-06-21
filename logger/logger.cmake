@@ -21,6 +21,8 @@
 
 SET(LOGGER_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/logger)
 
+include_directories(${LOGGER_DIR})
+
 ## Logger used in NF_TARGET (main)
 if (TARGET ${NF_TARGET})
 target_include_directories(${NF_TARGET} PUBLIC ${LOGGER_DIR})

@@ -42,20 +42,6 @@ bool AccNetChId::validate(
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AccNetChId" : pathPrefix;
 
-  /* AccNetChaIdValue */ {
-    const int32_t& value               = m_AccNetChaIdValue;
-    const std::string currentValuePath = _pathPrefix + ".accNetChaIdValue";
-
-    if (value < 0) {
-      success = false;
-      msg << currentValuePath << ": must be greater than or equal to 0;";
-    }
-    if (value > 4294967295) {
-      success = false;
-      msg << currentValuePath << ": must be less than or equal to 4294967295;";
-    }
-  }
-
   if (refPccRuleIdsIsSet()) {
     const std::vector<std::string>& value = m_RefPccRuleIds;
     const std::string currentValuePath    = _pathPrefix + ".refPccRuleIds";

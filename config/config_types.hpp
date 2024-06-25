@@ -283,6 +283,21 @@ class nf : public config_type {
   [[nodiscard]] const std::string& get_url() const;
 };
 
+class lttng_config : public config_type {
+ private:
+  option_config_value m_is_active{};
+  string_config_value m_log_level{};
+  option_config_value m_use_spd{};
+
+ public:
+  explicit lttng_config(const std::string& name);
+  void from_yaml(const YAML::Node& node) override;
+  bool is_lttng_active() const;
+  std::string get_lttng_log_level();
+  [[nodiscard]] std::string to_string(const std::string& indent) const override;
+  void validate() override;
+};
+
 class nf_features_config : public config_type {
  private:
   // TODO: either have string or option

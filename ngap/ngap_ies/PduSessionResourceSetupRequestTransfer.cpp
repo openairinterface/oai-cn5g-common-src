@@ -22,7 +22,7 @@
 #include "PduSessionResourceSetupRequestTransfer.hpp"
 
 #include "logger.hpp"
-#include "output_wrapper.hpp"
+#include "ngap_utils.hpp"
 #include "utils.hpp"
 
 namespace oai::ngap {
@@ -442,7 +442,7 @@ void PduSessionResourceSetupRequestTransferIE::setQosFlowSetupRequestList(
 //------------------------------------------------------------------------------
 int PduSessionResourceSetupRequestTransferIE::encode(
     uint8_t* buf, int buf_size) {
-  output_wrapper::print_asn_msg(
+  ngap_utils::print_asn_msg(
       &asn_DEF_Ngap_PDUSessionResourceSetupRequestTransfer,
       m_PduSessionResourceSetupRequestTransferIe);
   asn_enc_rval_t er = aper_encode_to_buffer(

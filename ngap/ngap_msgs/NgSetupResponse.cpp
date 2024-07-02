@@ -145,11 +145,11 @@ void NgSetupResponseMsg::setPlmnSupportList(
       SNssai snssai = {};
       snssai.setSst(list[i].sliceList[j].sst);
 
-      uint32_t sd = SD_NO_VALUE;
       if (!list[i].sliceList[j].sd.empty()) {
-        amf_conv::sd_string_to_int(list[i].sliceList[j].sd, sd);
+        snssai.setSd(list[i].sliceList[j].sd);
+      } else {
+        snssai.setSd(SD_NO_VALUE);
       }
-      snssai.setSd(sd);
       snssais.push_back(snssai);
     }
     plmnSupportItem.set(plmn, snssais);

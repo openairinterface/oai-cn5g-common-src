@@ -425,11 +425,11 @@ void InitialContextSetupRequestMsg::setAllowedNssai(
   for (int i = 0; i < list.size(); i++) {
     SNssai snssai = {};
     snssai.setSst(list[i].sst);
-    uint32_t sd = SD_NO_VALUE;
     if (!list[i].sd.empty()) {
-      amf_conv::sd_string_to_int(list[i].sd, sd);
+      snssai.setSd(list[i].sd);
+    } else {
+      snssai.setSd(SD_NO_VALUE);
     }
-    snssai.setSd(sd);
     snssaiList.push_back(snssai);
   }
   m_AllowedNssai.set(snssaiList);

@@ -22,7 +22,7 @@
 #include "NgapMessage.hpp"
 
 #include "logger.hpp"
-#include "output_wrapper.hpp"
+#include "ngap_utils.hpp"
 
 extern "C" {
 #include "asn_codecs.h"
@@ -515,7 +515,7 @@ void NgapMessage::setMessageType(NgapMessageType messageType) {
 
 //------------------------------------------------------------------------------
 int NgapMessage::Encode(uint8_t* buf, int bufSize) {
-  output_wrapper::print_asn_msg(&asn_DEF_Ngap_NGAP_PDU, ngapPdu);
+  ngap_utils::print_asn_msg(&asn_DEF_Ngap_NGAP_PDU, ngapPdu);
   asn_enc_rval_t er = aper_encode_to_buffer(
       &asn_DEF_Ngap_NGAP_PDU, NULL, ngapPdu, buf, bufSize);
 
@@ -526,7 +526,7 @@ int NgapMessage::Encode(uint8_t* buf, int bufSize) {
 
 //------------------------------------------------------------------------------
 void NgapMessage::encode2NewBuffer(uint8_t*& buf, int& encoded_size) {
-  output_wrapper::print_asn_msg(&asn_DEF_Ngap_NGAP_PDU, ngapPdu);
+  ngap_utils::print_asn_msg(&asn_DEF_Ngap_NGAP_PDU, ngapPdu);
   encoded_size = aper_encode_to_new_buffer(
       &asn_DEF_Ngap_NGAP_PDU, NULL, ngapPdu, (void**) &buf);
   Logger::ngap().debug("Encoded message size ( %d )", encoded_size);

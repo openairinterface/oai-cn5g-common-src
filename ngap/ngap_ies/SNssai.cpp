@@ -90,10 +90,9 @@ std::string SNssai::getSst() const {
 
 //------------------------------------------------------------------------------
 void SNssai::setSd(const std::string& sd_str) {
-  uint32_t sd = SD_NO_VALUE;
-  if (amf_conv::sd_string_to_int(sd_str, sd)) {
-    m_Sd = std::optional<uint32_t>(sd);
-  }
+  snssai_t snssai;
+  snssai.sd = sd_str;
+  m_Sd      = std::optional<uint32_t>(snssai.get_sd_int());
 }
 
 //------------------------------------------------------------------------------
@@ -104,10 +103,10 @@ void SNssai::setSd(const uint32_t& sd) {
 //------------------------------------------------------------------------------
 bool SNssai::getSd(std::string& sd) const {
   if (m_Sd.has_value()) {
-    sd = std::to_string(m_Sd.value());
+    amf_conv::sd_int_to_string_hex(m_Sd.value(), sd);
     return true;
   }
-  sd = std::to_string(SD_NO_VALUE);
+  amf_conv::sd_int_to_string_hex(SD_NO_VALUE, sd);
   return false;
 }
 
@@ -123,10 +122,9 @@ bool SNssai::getSd(uint32_t& sd) const {
 
 //------------------------------------------------------------------------------
 std::string SNssai::getSd() const {
-  if (m_Sd.has_value()) {
-    return std::to_string(m_Sd.value());
-  }
-  return std::to_string(SD_NO_VALUE);
+  std::string sd;
+  getSd(sd);
+  return sd;
 }
 
 //------------------------------------------------------------------------------

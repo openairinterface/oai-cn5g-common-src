@@ -34,7 +34,7 @@ class Snssai {
  public:
   Snssai();
   Snssai(const int32_t& sst) : m_Sst(sst) {
-    m_Sd      = "ffffff";
+    m_Sd      = SD_DEFAULT_VALUE;
     m_SdIsSet = true;
   };
   virtual ~Snssai() = default;

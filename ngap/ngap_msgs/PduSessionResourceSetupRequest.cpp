@@ -221,10 +221,7 @@ void PduSessionResourceSetupRequestMsg::setPduSessionResourceSetupRequestList(
     SNssai SNssai = {};
     SNssai.setSst(list[i].sNssai.sst);
 
-    uint32_t sd_int_value = 0;
-    if (amf_conv::sd_string_to_int(list[i].sNssai.sd, sd_int_value)) {
-      if (sd_int_value != SD_NO_VALUE) SNssai.setSd(list[i].sNssai.sd);
-    }
+    SNssai.setSd(list[i].sNssai.sd);
 
     itemSUReq.set(
         pduSessionId, nasPdu, SNssai,

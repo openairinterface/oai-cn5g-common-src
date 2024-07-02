@@ -113,11 +113,11 @@ void RerouteNasRequest::setAllowedNssai(const std::vector<S_Nssai>& list) {
     SNssai sNssai = {};
     sNssai.setSst(list[i].sst);
 
-    uint32_t sd = SD_NO_VALUE;
     if (!list[i].sd.empty()) {
-      amf_conv::sd_string_to_int(list[i].sd, sd);
+      sNssai.setSd(list[i].sd);
+    } else {
+      sNssai.setSd(SD_NO_VALUE);
     }
-    sNssai.setSd(sd);
     sNssaiList.push_back(sNssai);
   }
   tmp.set(sNssaiList);

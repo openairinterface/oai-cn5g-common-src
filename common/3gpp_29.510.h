@@ -27,6 +27,7 @@
 
 #include <map>
 #include <vector>
+#include <unordered_set>
 
 #include "3gpp_23.003.h"
 
@@ -71,14 +72,85 @@ typedef struct smf_info_s {
 typedef struct dnn_upf_info_item_s {
   std::string dnn;
   std::vector<std::string> dnai_list;
-  // Introduced in R16.8
+  // supported from R16.8
   std::map<std::string, std::string> dnai_nw_instance_list;
   // std::vector<std::string> pdu_session_types
+
+  dnn_upf_info_item_s& operator=(const dnn_upf_info_item_s& d) {
+    dnn                   = d.dnn;
+    dnai_list             = d.dnai_list;
+    dnai_nw_instance_list = d.dnai_nw_instance_list;
+    return *this;
+  }
+
+  bool operator==(const dnn_upf_info_item_s& s) const { return dnn == s.dnn; }
+
+  size_t operator()(const dnn_upf_info_item_s&) const {
+    return std::hash<std::string>()(dnn);
+  }
+
+  std::string to_string() const {
+    std::string s = {};
+
+    s.append("DNN = ").append(dnn).append(", ");
+
+    if (dnai_list.size() > 0) {
+      s.append("DNAI list: {");
+
+      for (const auto& dnai : dnai_list) {
+        s.append("DNAI = ").append(dnai).append(", ");
+      }
+      s.append("}, ");
+    }
+
+    if (dnai_nw_instance_list.size() > 0) {
+      s.append("DNAI NW Instance list: {");
+
+      for (const auto& dnai_nw : dnai_nw_instance_list) {
+        s.append("(")
+            .append(dnai_nw.first)
+            .append(", ")
+            .append(dnai_nw.second)
+            .append("),");
+      }
+      s.append("}, ");
+    }
+    return s;
+  }
+
 } dnn_upf_info_item_t;
 
 typedef struct snssai_upf_info_item_s {
-  snssai_t snssai;
-  std::vector<dnn_upf_info_item_t> dnn_upf_info_list;
+  mutable snssai_t snssai;
+  mutable std::unordered_set<dnn_upf_info_item_t, dnn_upf_info_item_t>
+      dnn_upf_info_list;
+
+  snssai_upf_info_item_s& operator=(const snssai_upf_info_item_s& s) {
+    snssai            = s.snssai;
+    dnn_upf_info_list = s.dnn_upf_info_list;
+    return *this;
+  }
+
+  bool operator==(const snssai_upf_info_item_s& s) const {
+    return (snssai == s.snssai) and (dnn_upf_info_list == s.dnn_upf_info_list);
+  }
+
+  std::string to_string() const {
+    std::string s = {};
+
+    s.append("{" + snssai.toString() + ", ");
+
+    if (dnn_upf_info_list.size() > 0) {
+      s.append("{");
+
+      for (auto dnn_upf : dnn_upf_info_list) {
+        s.append(dnn_upf.to_string());
+      }
+      s.append("}, ");
+    }
+    return s;
+  }
+
 } snssai_upf_info_item_t;
 
 typedef struct interface_upf_info_item_s {
@@ -87,11 +159,44 @@ typedef struct interface_upf_info_item_s {
   std::vector<struct in6_addr> ipv6_addresses;
   std::string endpoint_fqdn;
   std::string network_instance;
+
+  interface_upf_info_item_s& operator=(const interface_upf_info_item_s& i) {
+    interface_type   = i.interface_type;
+    ipv4_addresses   = i.ipv4_addresses;
+    ipv6_addresses   = i.ipv6_addresses;
+    endpoint_fqdn    = i.endpoint_fqdn;
+    network_instance = i.network_instance;
+
+    return *this;
+  }
+
 } interface_upf_info_item_t;
 
 typedef struct upf_info_s {
-  std::vector<snssai_upf_info_item_t> snssai_upf_info_list;
   std::vector<interface_upf_info_item_t> interface_upf_info_list;
+  std::vector<snssai_upf_info_item_t> snssai_upf_info_list;
+
+  upf_info_s& operator=(const upf_info_s& s) {
+    interface_upf_info_list = s.interface_upf_info_list;
+    snssai_upf_info_list    = s.snssai_upf_info_list;
+    return *this;
+  }
+
+  std::string to_string() const {
+    std::string s = {};
+    // TODO: Interface UPF Info List
+    if (!snssai_upf_info_list.empty()) {
+      s.append("S-NSSAI UPF Info: ");
+      for (auto sn : snssai_upf_info_list) {
+        s.append("{" + sn.snssai.toString() + ", ");
+        for (auto d : sn.dnn_upf_info_list) {
+          s.append("{DNN = " + d.dnn + "} ");
+        }
+        s.append("};");
+      }
+    }
+    return s;
+  }
 } upf_info_t;
 
 typedef struct supi_range_s {
@@ -401,7 +506,7 @@ typedef struct nf_service_s {
     s.append(service_instance_id);
     s.append(", Service name: ");
     s.append(service_name);
-    for (auto v : versions) {
+    for (const auto& v : versions) {
       s.append(v.to_string());
     }
     s.append(", Scheme: ");

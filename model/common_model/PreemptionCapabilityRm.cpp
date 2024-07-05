@@ -42,9 +42,7 @@ bool PreemptionCapabilityRm::validate(
 
 bool PreemptionCapabilityRm::operator==(
     const PreemptionCapabilityRm& rhs) const {
-  return
-
-      ;
+  return (*this == rhs);
 }
 
 bool PreemptionCapabilityRm::operator!=(

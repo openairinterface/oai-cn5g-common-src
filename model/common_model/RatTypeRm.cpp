@@ -40,9 +40,7 @@ bool RatTypeRm::validate(
 }
 
 bool RatTypeRm::operator==(const RatTypeRm& rhs) const {
-  return
-
-      ;
+  return (*this == rhs);
 }
 
 bool RatTypeRm::operator!=(const RatTypeRm& rhs) const {

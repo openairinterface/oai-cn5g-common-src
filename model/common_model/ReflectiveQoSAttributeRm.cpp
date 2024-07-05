@@ -42,9 +42,7 @@ bool ReflectiveQoSAttributeRm::validate(
 
 bool ReflectiveQoSAttributeRm::operator==(
     const ReflectiveQoSAttributeRm& rhs) const {
-  return
-
-      ;
+  return (*this == rhs);
 }
 
 bool ReflectiveQoSAttributeRm::operator!=(

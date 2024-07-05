@@ -41,9 +41,7 @@ bool RestrictionTypeRm::validate(
 }
 
 bool RestrictionTypeRm::operator==(const RestrictionTypeRm& rhs) const {
-  return
-
-      ;
+  return (*this == rhs);
 }
 
 bool RestrictionTypeRm::operator!=(const RestrictionTypeRm& rhs) const {

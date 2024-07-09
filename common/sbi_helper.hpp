@@ -262,7 +262,24 @@ class sbi_helper {
   static inline const std::string NssfNsSelectionBase = "/nnssf-nsselection/";
   static inline const std::string NssfNsSelectionPathNetworSliceInformation =
       "/network-slice-information";
-  // TODO: NSSF NSSAI Availability Service
+  static inline const std::string
+      NssfNsSelectionParametersSliceInfoRequestForRegistration =
+          "slice-info-request-for-registration";
+  static inline const std::string
+      NssfNsSelectionParametersSliceInfoRequestForPduSession =
+          "slice-info-request-for-pdu-session";
+
+  // NSSF: NSSAI Availability Service
+  static inline const std::string NssfNssaiAvailabilityBase =
+      "/nnssf-nssaiavailability/";
+  static inline const std::string NssfNssaiAvailabilityPathNfInstanceId =
+      "/nssai-availability/:nfId";
+  static inline const std::string NssfNssaiAvailabilityPathSubscriptions =
+      "/nssai-availability/subscriptions";
+  static inline const std::string NssfNssaiAvailabilityPathSubscriptionId =
+      "/nssai-availability/subscriptions/:subscriptionId";
+  static inline const std::string NssfNssaiAvailabilityPathNssaiAvailability =
+      "/nssai-availability";
 
   // TODO: PCF
 

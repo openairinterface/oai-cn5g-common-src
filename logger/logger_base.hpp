@@ -168,9 +168,9 @@ class printf_logger {
   template<typename... T>
   void error(const char* fmt, const T&... args) const {
     if (m_is_lttng_active)
-      m_lttng_logger->log_printf(spdlog::level::trace, fmt, args...);
+      m_lttng_logger->log_printf(spdlog::level::critical, fmt, args...);
     else
-      m_spd_logger->log_printf(spdlog::level::trace, fmt, args...);
+      m_spd_logger->log_printf(spdlog::level::critical, fmt, args...);
   }
 };
 

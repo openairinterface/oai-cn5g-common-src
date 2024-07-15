@@ -77,6 +77,12 @@ class Snssai {
   bool sdIsSet() const;
   void unsetSd();
 
+  /**
+   * Parses SD int, allowing also 0x values, overwrites SD string with uppercase
+   * HEX
+   */
+  void parse_sd_int_with_hex();
+
   friend void to_json(nlohmann::json& j, const Snssai& o);
   friend void from_json(const nlohmann::json& j, Snssai& o);
 

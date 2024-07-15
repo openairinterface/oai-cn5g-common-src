@@ -430,6 +430,9 @@ class sbi_helper {
       UdrDrPathSubscriptionDataProvisionedDataSmData =
           "/subscription-data/:ueId/:servingPlmnId/provisioned-data/sm-data";
   static inline const std::string
+      UdrDrPathAllSubscriptionDataProvisionedDataSmData =
+          "/subscription-data/provisioned-data/sm-data";
+  static inline const std::string
       UdrDrPathSubscriptionDataProvisionedDataLcsBcaData =
           "/subscription-data/:ueId/:servingPlmnId/provisioned-data/"
           "lcs-bca-data";

@@ -103,7 +103,7 @@ int AuthenticationReject::Decode(uint8_t* buf, int len) {
 
   // IEIs
   uint8_t octet = 0x00;
-  DECODE_U8_VALUE(buf + decoded_size, octet);
+  DECODE_U8_VALUE(buf, octet, decoded_size, len);
   while ((octet != 0x0)) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .debug("Decoding IEI (0x%x)", octet);
@@ -114,7 +114,7 @@ int AuthenticationReject::Decode(uint8_t* buf, int len) {
             KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
-        DECODE_U8_VALUE(buf + decoded_size, octet);
+        DECODE_U8_VALUE(buf, octet, decoded_size, len);
         oai::logger::logger_registry::get_logger(LOGGER_COMMON)
             .debug("Next IEI (0x%x)", octet);
       } break;

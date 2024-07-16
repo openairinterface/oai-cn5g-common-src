@@ -108,7 +108,7 @@ int RegistrationComplete::Decode(uint8_t* buf, int len) {
 
   // Decode other IEs
   uint8_t octet = 0x00;
-  DECODE_U8_VALUE(buf + decoded_size, octet);
+  DECODE_U8_VALUE(buf, octet, decoded_size, len);
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("First option IEI (0x%x)", octet);
   while ((octet != 0x0)) {
@@ -121,7 +121,7 @@ int RegistrationComplete::Decode(uint8_t* buf, int len) {
                  true)) == KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
-        DECODE_U8_VALUE(buf + decoded_size, octet);
+        DECODE_U8_VALUE(buf, octet, decoded_size, len);
         oai::logger::logger_registry::get_logger(LOGGER_COMMON)
             .debug("Next IEI (0x%x)", octet);
       } break;

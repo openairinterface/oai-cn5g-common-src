@@ -55,7 +55,12 @@ typedef enum {
 } error_code_e;
 
 //------------------------------------------------------------------------------
-#define DECODE_U8_VALUE(bUFFER, vALUE) vALUE = *(uint8_t*) (bUFFER);
+#define DECODE_U8_VALUE(bUFFER, vALUE, oFFSET, sIZE)                           \
+  if (oFFSET < sIZE) {                                                         \
+    vALUE = *(uint8_t*) (bUFFER + oFFSET);                                     \
+  } else {                                                                     \
+    vALUE = 0x00;                                                              \
+  }
 
 #define DECODE_U8(bUFFER, vALUE, sIZE)                                         \
   vALUE = *(uint8_t*) (bUFFER);                                                \

@@ -21,8 +21,8 @@
 
 #include "HandoverCommandMsg.hpp"
 
-#include "amf_conversions.hpp"
 #include "logger.hpp"
+#include "ngap_utils.hpp"
 #include "utils.hpp"
 
 extern "C" {
@@ -116,7 +116,7 @@ void HandoverCommandMsg::setHandoverType(const long& type) {
 void HandoverCommandMsg::setNasSecurityParametersFromNgRan(
     const OCTET_STRING_t& nasSecurityParameters) {
   Ngap_NASSecurityParametersFromNGRAN_t tmp = {};
-  amf_conv::octet_string_copy(tmp, nasSecurityParameters);
+  ngap_utils::octet_string_copy(tmp, nasSecurityParameters);
   m_NasSecurityParametersFromNgRan =
       std::optional<Ngap_NASSecurityParametersFromNGRAN_t>(tmp);
 
@@ -126,7 +126,7 @@ void HandoverCommandMsg::setNasSecurityParametersFromNgRan(
   ie->criticality = Ngap_Criticality_reject;
   ie->value.present =
       Ngap_HandoverCommandIEs__value_PR_NASSecurityParametersFromNGRAN;
-  if (!amf_conv::octet_string_copy(
+  if (!ngap_utils::octet_string_copy(
           ie->value.choice.NASSecurityParametersFromNGRAN,
           m_NasSecurityParametersFromNgRan.value())) {
     oai::utils::utils::free_wrapper((void**) &ie);
@@ -142,7 +142,7 @@ void HandoverCommandMsg::setNasSecurityParametersFromNgRan(
 bool HandoverCommandMsg::getNasSecurityParametersFromNgRan(
     OCTET_STRING_t& nasSecurityParameters) const {
   if (!m_NasSecurityParametersFromNgRan.has_value()) return false;
-  return amf_conv::octet_string_copy(
+  return ngap_utils::octet_string_copy(
       nasSecurityParameters, m_NasSecurityParametersFromNgRan.value());
 }
 
@@ -221,7 +221,7 @@ bool HandoverCommandMsg::getPduSessionResourceToReleaseListHOCmd(
 //------------------------------------------------------------------------------
 void HandoverCommandMsg::setTargetToSourceTransparentContainer(
     const OCTET_STRING_t& targetTosource) {
-  amf_conv::octet_string_copy(
+  ngap_utils::octet_string_copy(
       m_TargetToSourceTransparentContainer, targetTosource);
 
   Ngap_HandoverCommandIEs_t* ie =
@@ -230,7 +230,7 @@ void HandoverCommandMsg::setTargetToSourceTransparentContainer(
   ie->criticality = Ngap_Criticality_reject;
   ie->value.present =
       Ngap_HandoverCommandIEs__value_PR_TargetToSource_TransparentContainer;
-  amf_conv::octet_string_copy(
+  ngap_utils::octet_string_copy(
       ie->value.choice.TargetToSource_TransparentContainer, targetTosource);
 
   int ret = ASN_SEQUENCE_ADD(&m_HandoverCommandIes->protocolIEs.list, ie);

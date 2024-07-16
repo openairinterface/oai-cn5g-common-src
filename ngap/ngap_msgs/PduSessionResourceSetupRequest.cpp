@@ -22,8 +22,8 @@
 #include "PduSessionResourceSetupRequest.hpp"
 
 #include "3gpp_23.003.h"
-#include "amf_conversions.hpp"
 #include "logger.hpp"
+#include "ngap_utils.hpp"
 #include "utils.hpp"
 
 namespace oai::ngap {
@@ -213,7 +213,7 @@ void PduSessionResourceSetupRequestMsg::setPduSessionResourceSetupRequestList(
     PduSessionId pduSessionId                  = {};
     pduSessionId.set(list[i].pduSessionId);
     std::optional<NasPdu> nasPdu = std::nullopt;
-    if (amf_conv::check_bstring(list[i].nasPdu)) {
+    if (ngap_utils::check_bstring(list[i].nasPdu)) {
       NasPdu tmp = {};
       tmp.set(list[i].nasPdu);
       nasPdu = std::optional<NasPdu>(tmp);

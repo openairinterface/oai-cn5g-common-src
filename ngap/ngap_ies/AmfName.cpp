@@ -21,7 +21,7 @@
 
 #include "AmfName.hpp"
 
-#include "amf_conversions.hpp"
+#include "ngap_utils.hpp"
 
 namespace oai::ngap {
 
@@ -45,14 +45,14 @@ void AmfName::get(std::string& amf_name) const {
 
 //------------------------------------------------------------------------------
 bool AmfName::encode(Ngap_AMFName_t& amf_name) const {
-  amf_conv::string_2_octet_string(m_AmfName, amf_name);
+  ngap_utils::string_2_octet_string(m_AmfName, amf_name);
   return true;
 }
 
 //------------------------------------------------------------------------------
 bool AmfName::decode(const Ngap_AMFName_t& amf_name) {
   if (!amf_name.buf) return false;
-  amf_conv::octet_string_2_string(amf_name, m_AmfName);
+  ngap_utils::octet_string_2_string(amf_name, m_AmfName);
   return true;
 }
 

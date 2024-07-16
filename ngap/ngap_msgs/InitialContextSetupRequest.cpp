@@ -21,9 +21,8 @@
 
 #include "InitialContextSetupRequest.hpp"
 
-#include "amf.hpp"
-#include "amf_conversions.hpp"
 #include "logger.hpp"
+#include "ngap_utils.hpp"
 #include "utils.hpp"
 
 namespace oai::ngap {
@@ -343,7 +342,7 @@ void InitialContextSetupRequestMsg::setPduSessionResourceSetupRequestList(
     pDUSessionID.set(list[i].pduSessionId);
     std::optional<NasPdu> nAS_PDU = std::nullopt;
 
-    if (amf_conv::check_bstring(list[i].nasPdu)) {
+    if (ngap_utils::check_bstring(list[i].nasPdu)) {
       NasPdu tmp = {};
       tmp.set(list[i].nasPdu);
       nAS_PDU = std::optional<NasPdu>(tmp);
@@ -648,7 +647,7 @@ void InitialContextSetupRequestMsg::setMaskedImeisv(const std::string& imeisv) {
   ie->criticality   = Ngap_Criticality_ignore;
   ie->value.present = Ngap_InitialContextSetupRequestIEs__value_PR_MaskedIMEISV;
 
-  if (!amf_conv::string_2_masked_imeisv(
+  if (!ngap_utils::string_2_masked_imeisv(
           imeisv, ie->value.choice.MaskedIMEISV)) {
     Logger::ngap().error("Encode MaskedIMEISV IE error!");
     oai::utils::utils::free_wrapper((void**) &ie);

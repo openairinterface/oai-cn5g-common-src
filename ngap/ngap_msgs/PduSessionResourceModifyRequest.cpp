@@ -21,8 +21,8 @@
 
 #include "PduSessionResourceModifyRequest.hpp"
 
-#include "amf_conversions.hpp"
 #include "logger.hpp"
+#include "ngap_utils.hpp"
 #include "utils.hpp"
 
 namespace oai::ngap {
@@ -140,7 +140,7 @@ void PduSessionResourceModifyRequestMsg::setPduSessionResourceModifyRequestList(
     PduSessionId pduSessionId = {};
     pduSessionId.set(list[i].pduSessionId);
     NasPdu nasPdu = {};
-    if (amf_conv::check_bstring(list[i].nasPdu)) {
+    if (ngap_utils::check_bstring(list[i].nasPdu)) {
       nasPdu.set(list[i].nasPdu);
     }
     std::optional<SNssai> snssai = std::nullopt;

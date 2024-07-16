@@ -21,8 +21,8 @@
 
 #include "UeRadioCapabilityInfoIndication.hpp"
 
-#include "amf_conversions.hpp"
 #include "logger.hpp"
+#include "ngap_utils.hpp"
 #include "utils.hpp"
 
 namespace oai::ngap {
@@ -132,16 +132,16 @@ void UeRadioCapabilityInfoIndicationMsg::getUeRadioCapability(
 void UeRadioCapabilityInfoIndicationMsg::setUeRadioCapabilityForPaging(
     const OCTET_STRING_t& ueRadioCapabilityForPagingOfNr,
     const OCTET_STRING_t& ueRadioCapabilityForPagingOfEutra) {
-  if (!(amf_conv::check_octet_string(ueRadioCapabilityForPagingOfNr) or
-        amf_conv::check_octet_string(ueRadioCapabilityForPagingOfEutra))) {
+  if (!(ngap_utils::check_octet_string(ueRadioCapabilityForPagingOfNr) or
+        ngap_utils::check_octet_string(ueRadioCapabilityForPagingOfEutra))) {
     return;
   }
   UeRadioCapabilityForPaging tmp = {};
 
-  if (amf_conv::check_octet_string(ueRadioCapabilityForPagingOfNr)) {
+  if (ngap_utils::check_octet_string(ueRadioCapabilityForPagingOfNr)) {
     tmp.setUeRadioCapabilityForPagingOfNr(ueRadioCapabilityForPagingOfNr);
   }
-  if (amf_conv::check_octet_string(ueRadioCapabilityForPagingOfEutra)) {
+  if (ngap_utils::check_octet_string(ueRadioCapabilityForPagingOfEutra)) {
     tmp.setUeRadioCapabilityForPagingOfEutra(ueRadioCapabilityForPagingOfEutra);
   }
   m_UeRadioCapabilityForPaging = std::optional<UeRadioCapabilityForPaging>(tmp);

@@ -21,8 +21,8 @@
 
 #include "DownlinkUeAssociatedNrppaTransport.hpp"
 
-#include "amf_conversions.hpp"
 #include "logger.hpp"
+#include "ngap_utils.hpp"
 #include "utils.hpp"
 
 namespace oai::ngap {
@@ -170,7 +170,7 @@ bool DownlinkUeAssociatedNrppaTransportMsg::decode(
             m_DownlinkUeAssociatedNrppaTransportIes->protocolIEs.list.array[i]
                     ->value.present ==
                 Ngap_DownlinkUEAssociatedNRPPaTransportIEs__value_PR_RoutingID) {
-          amf_conv::octet_string_2_bstring(
+          ngap_utils::octet_string_2_bstring(
               m_DownlinkUeAssociatedNrppaTransportIes->protocolIEs.list
                   .array[i]
                   ->value.choice.RoutingID,
@@ -187,7 +187,7 @@ bool DownlinkUeAssociatedNrppaTransportMsg::decode(
             m_DownlinkUeAssociatedNrppaTransportIes->protocolIEs.list.array[i]
                     ->value.present ==
                 Ngap_DownlinkUEAssociatedNRPPaTransportIEs__value_PR_NRPPa_PDU) {
-          amf_conv::octet_string_2_bstring(
+          ngap_utils::octet_string_2_bstring(
               m_DownlinkUeAssociatedNrppaTransportIes->protocolIEs.list
                   .array[i]
                   ->value.choice.NRPPa_PDU,
@@ -219,7 +219,7 @@ void DownlinkUeAssociatedNrppaTransportMsg::setRoutingId(const bstring& pdu) {
   ie->value.present =
       Ngap_DownlinkUEAssociatedNRPPaTransportIEs__value_PR_RoutingID;
 
-  amf_conv::bstring_2_octet_string(m_RoutingId, ie->value.choice.RoutingID);
+  ngap_utils::bstring_2_octet_string(m_RoutingId, ie->value.choice.RoutingID);
 
   int ret = ASN_SEQUENCE_ADD(
       &m_DownlinkUeAssociatedNrppaTransportIes->protocolIEs.list, ie);
@@ -243,7 +243,7 @@ void DownlinkUeAssociatedNrppaTransportMsg::setNrppaPdu(const bstring& pdu) {
   ie->value.present =
       Ngap_DownlinkUEAssociatedNRPPaTransportIEs__value_PR_NRPPa_PDU;
 
-  amf_conv::bstring_2_octet_string(m_NrppaPdu, ie->value.choice.NRPPa_PDU);
+  ngap_utils::bstring_2_octet_string(m_NrppaPdu, ie->value.choice.NRPPa_PDU);
 
   int ret = ASN_SEQUENCE_ADD(
       &m_DownlinkUeAssociatedNrppaTransportIes->protocolIEs.list, ie);

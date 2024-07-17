@@ -21,8 +21,7 @@
 
 #include "NgSetupResponse.hpp"
 
-#include "amf.hpp"
-#include "amf_conversions.hpp"
+#include "3gpp_23.003.h"
 #include "logger.hpp"
 #include "utils.hpp"
 

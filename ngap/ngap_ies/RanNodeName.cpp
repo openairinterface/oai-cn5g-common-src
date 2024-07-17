@@ -21,7 +21,7 @@
 
 #include "RanNodeName.hpp"
 
-#include "amf_conversions.hpp"
+#include "ngap_utils.hpp"
 
 namespace oai::ngap {
 
@@ -47,14 +47,14 @@ void RanNodeName::get(std::string& value) const {
 
 //------------------------------------------------------------------------------
 bool RanNodeName::encode(Ngap_RANNodeName_t& ranNodeName) const {
-  amf_conv::string_2_octet_string(m_RanNodeName, ranNodeName);
+  ngap_utils::string_2_octet_string(m_RanNodeName, ranNodeName);
   return true;
 }
 
 //------------------------------------------------------------------------------
 bool RanNodeName::decode(const Ngap_RANNodeName_t& ranNodeName) {
   if (!ranNodeName.buf) return false;
-  amf_conv::octet_string_2_string(ranNodeName, m_RanNodeName);
+  ngap_utils::octet_string_2_string(ranNodeName, m_RanNodeName);
   return true;
 }
 

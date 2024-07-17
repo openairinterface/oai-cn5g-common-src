@@ -21,8 +21,10 @@
 
 #include "SNssai.hpp"
 
-#include "amf.hpp"
-#include "amf_conversions.hpp"
+#include "3gpp_23.003.h"
+#include "conversions.hpp"
+#include "ngap_utils.hpp"
+#include "utils.hpp"
 
 namespace oai::ngap {
 
@@ -103,10 +105,10 @@ void SNssai::setSd(const uint32_t& sd) {
 //------------------------------------------------------------------------------
 bool SNssai::getSd(std::string& sd) const {
   if (m_Sd.has_value()) {
-    amf_conv::sd_int_to_string_hex(m_Sd.value(), sd);
+    ngap_utils::sd_int_to_string_hex(m_Sd.value(), sd);
     return true;
   }
-  amf_conv::sd_int_to_string_hex(SD_NO_VALUE, sd);
+  ngap_utils::sd_int_to_string_hex(SD_NO_VALUE, sd);
   return false;
 }
 
@@ -129,7 +131,7 @@ std::string SNssai::getSd() const {
 
 //------------------------------------------------------------------------------
 bool SNssai::encode(Ngap_S_NSSAI_t& s_NSSAI) const {
-  amf_conv::int8_2_octet_string(m_Sst, s_NSSAI.sST);
+  ngap_utils::int8_2_octet_string(m_Sst, s_NSSAI.sST);
   if (m_Sd.has_value() && (m_Sd.value() != SD_NO_VALUE)) {
     s_NSSAI.sD = (Ngap_SD_t*) calloc(1, sizeof(Ngap_SD_t));
     if (!s_NSSAI.sD) return false;
@@ -142,7 +144,7 @@ bool SNssai::encode(Ngap_S_NSSAI_t& s_NSSAI) const {
 
 //------------------------------------------------------------------------------
 bool SNssai::decode(const Ngap_S_NSSAI_t& s_NSSAI) {
-  if (!amf_conv::octet_string_2_int8(s_NSSAI.sST, m_Sst)) return false;
+  if (!ngap_utils::octet_string_2_int8(s_NSSAI.sST, m_Sst)) return false;
   if (s_NSSAI.sD) {
     if (!decodeSd(*s_NSSAI.sD)) return false;
   }

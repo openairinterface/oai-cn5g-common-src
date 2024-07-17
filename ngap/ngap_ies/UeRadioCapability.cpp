@@ -21,7 +21,7 @@
 
 #include "UeRadioCapability.hpp"
 
-#include "amf_conversions.hpp"
+#include "ngap_utils.hpp"
 
 namespace oai::ngap {
 
@@ -31,11 +31,11 @@ UeRadioCapability::UeRadioCapability() {}
 /*
 UeRadioCapability::UeRadioCapability(const OCTET_STRING_t& capability) {
           if (!capability.buf) return;
-          amf_conv::bstring_2_octet_string(m_UeRadioCapability, capability);
+          ngap_utils::bstring_2_octet_string(m_UeRadioCapability, capability);
 }
 
 UeRadioCapability::UeRadioCapability(const bstring& capability) {
-        amf_conv::bstring_2_octet_string(capability, m_UeRadioCapability);
+        ngap_utils::bstring_2_octet_string(capability, m_UeRadioCapability);
 }
 */
 //------------------------------------------------------------------------------
@@ -44,7 +44,7 @@ UeRadioCapability::~UeRadioCapability() {}
 //------------------------------------------------------------------------------
 bool UeRadioCapability::encode(
     Ngap_UERadioCapability_t& ueRadioCapability) const {
-  return amf_conv::bstring_2_octet_string(
+  return ngap_utils::bstring_2_octet_string(
       m_UeRadioCapability, ueRadioCapability);
 }
 
@@ -52,19 +52,19 @@ bool UeRadioCapability::encode(
 bool UeRadioCapability::decode(
     const Ngap_UERadioCapability_t& ueRadioCapability) {
   if (!ueRadioCapability.buf) return false;
-  return amf_conv::octet_string_2_bstring(
+  return ngap_utils::octet_string_2_bstring(
       ueRadioCapability, m_UeRadioCapability);
 }
 
 //------------------------------------------------------------------------------
 bool UeRadioCapability::set(const OCTET_STRING_t& capability) {
-  amf_conv::octet_string_2_bstring(capability, m_UeRadioCapability);
+  ngap_utils::octet_string_2_bstring(capability, m_UeRadioCapability);
   return true;
 }
 
 //------------------------------------------------------------------------------
 bool UeRadioCapability::get(OCTET_STRING_t& capability) const {
-  amf_conv::bstring_2_octet_string(m_UeRadioCapability, capability);
+  ngap_utils::bstring_2_octet_string(m_UeRadioCapability, capability);
   return true;
 }
 

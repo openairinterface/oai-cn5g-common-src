@@ -21,7 +21,6 @@
 
 #include "HandoverRequest.hpp"
 
-#include "amf_conversions.hpp"
 #include "logger.hpp"
 #include "ngap_utils.hpp"
 #include "utils.hpp"
@@ -303,7 +302,7 @@ void HandoverRequest::setAllowedNssai(const std::vector<SNssai>& list) {
 
 //------------------------------------------------------------------------------
 void HandoverRequest::setSecurityContext(const long& count, const bstring& nh) {
-  amf_conv::bstring_2_bit_string(nh, m_SecurityContext.nextHopNH);
+  ngap_utils::bstring_2_bit_string(nh, m_SecurityContext.nextHopNH);
   m_SecurityContext.nextHopChainingCount = count;
 
   Ngap_HandoverRequestIEs_t* ie =
@@ -359,7 +358,7 @@ void HandoverRequest::setPduSessionResourceSetupList(
 //------------------------------------------------------------------------------
 void HandoverRequest::setSourceToTargetTransparentContainer(
     const OCTET_STRING_t& sourceTotarget) {
-  amf_conv::octet_string_copy(
+  ngap_utils::octet_string_copy(
       m_SourceToTargetTransparentContainer, sourceTotarget);
   Ngap_HandoverRequestIEs_t* ie =
       (Ngap_HandoverRequestIEs_t*) calloc(1, sizeof(Ngap_HandoverRequestIEs_t));
@@ -368,7 +367,7 @@ void HandoverRequest::setSourceToTargetTransparentContainer(
   ie->value.present =
       Ngap_HandoverRequestIEs__value_PR_SourceToTarget_TransparentContainer;
 
-  amf_conv::octet_string_copy(
+  ngap_utils::octet_string_copy(
       ie->value.choice.SourceToTarget_TransparentContainer, sourceTotarget);
   int ret = ASN_SEQUENCE_ADD(&m_HandoverRequestIes->protocolIEs.list, ie);
   if (ret != 0)

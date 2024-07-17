@@ -21,7 +21,7 @@
 
 #include "PduSessionResourceItem.hpp"
 
-#include "amf_conversions.hpp"
+#include "ngap_utils.hpp"
 
 namespace oai::ngap {
 
@@ -36,7 +36,7 @@ void PduSessionResourceItem::set(
     const PduSessionId& pduSessionId, const OCTET_STRING_t& resource) {
   m_PduSessionId = pduSessionId;
   // m_Resource = resource;
-  amf_conv::octet_string_copy(m_Resource, resource);
+  ngap_utils::octet_string_copy(m_Resource, resource);
 }
 
 //------------------------------------------------------------------------------
@@ -44,21 +44,21 @@ void PduSessionResourceItem::get(
     PduSessionId& pduSessionId, OCTET_STRING_t& resource) const {
   pduSessionId = m_PduSessionId;
   // resource = m_Resource;
-  amf_conv::octet_string_copy(resource, m_Resource);
+  ngap_utils::octet_string_copy(resource, m_Resource);
 }
 
 //------------------------------------------------------------------------------
 bool PduSessionResourceItem::encode(
     Ngap_PDUSessionID_t& pduSessionId, OCTET_STRING_t& resource) const {
   if (!m_PduSessionId.encode(pduSessionId)) return false;
-  return amf_conv::octet_string_copy(resource, m_Resource);
+  return ngap_utils::octet_string_copy(resource, m_Resource);
 }
 
 //------------------------------------------------------------------------------
 bool PduSessionResourceItem::decode(
     const Ngap_PDUSessionID_t& pduSessionId, const OCTET_STRING_t& resource) {
   if (!m_PduSessionId.decode(pduSessionId)) return false;
-  return amf_conv::octet_string_copy(m_Resource, resource);
+  return ngap_utils::octet_string_copy(m_Resource, resource);
 }
 
 //------------------------------------------------------------------------------

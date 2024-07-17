@@ -172,6 +172,31 @@ void UeSecurityCapability::Set(
 }
 
 //------------------------------------------------------------------------------
+void UeSecurityCapability::SetSpare(uint8_t _octet_7, uint8_t _octet_8) {
+  if (!eea_.has_value() and !eia_.has_value()) {
+    eea_ = std::make_optional<uint8_t>(0x00);
+    eia_ = std::make_optional<uint8_t>(0x00);
+  }
+  octet_7_ = std::optional<uint8_t>(_octet_7);
+  octet_8_ = std::optional<uint8_t>(_octet_8);
+  SetLengthIndicator(6);
+}
+
+//------------------------------------------------------------------------------
+void UeSecurityCapability::SetSpare(
+    uint8_t _octet_7, uint8_t _octet_8, uint8_t _octet_8, uint8_t _octet_10) {
+  if (!eea_.has_value() and !eia_.has_value()) {
+    eea_ = std::make_optional<uint8_t>(0x00);
+    eia_ = std::make_optional<uint8_t>(0x00);
+  }
+  octet_7_  = std::optional<uint8_t>(_octet_7);
+  octet_8_  = std::optional<uint8_t>(_octet_8);
+  octet_9_  = std::optional<uint8_t>(_octet_9);
+  octet_10_ = std::optional<uint8_t>(_octet_10);
+  SetLengthIndicator(8);
+}
+
+//------------------------------------------------------------------------------
 int UeSecurityCapability::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
@@ -191,9 +216,12 @@ int UeSecurityCapability::Encode(uint8_t* buf, int len) const {
     // EEA
     ENCODE_U8(buf + encoded_size, eea_.value(), encoded_size);
   }
-  if (eia_.has_value()) {
+
+  if (eia_.has_value() or
+      eea_.has_value()) {  // According to 3GPP TS 24.501, if octet 5 is
+                           // included, then also octet 6 shall be included.
     // EIA
-    ENCODE_U8(buf + encoded_size, eia_.value(), encoded_size);
+    ENCODE_U8(buf + encoded_size, eia_.value_or(0x00), encoded_size);
   }
 
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)

@@ -91,7 +91,7 @@ void config::read_from_file(const std::string& file_path) {
           m_register_nrf_feature.from_yaml(elem.second);
         } else if (key == NF_CONFIG_HTTP_NAME) {
           m_http_version.from_yaml(elem.second);
-        } else if (key == NF_CONFIG_CURL_TIMEOUT) {
+        } else if (key == NF_CONFIG_HTTP_REQUEST_TIMEOUT) {
           m_http_request_timeout.from_yaml(elem.second);
         } else if (key == m_nf_name) {
           const auto nf_ptr = m_nf_map.find(m_nf_name);

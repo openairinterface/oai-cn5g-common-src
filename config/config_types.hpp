@@ -454,12 +454,12 @@ class nf_http_version : public config_type {
   [[nodiscard]] const std::string& get_http_version() const;
 };
 
-class curl_timeout : public config_type {
+class http_request_timeout : public config_type {
  private:
-  int_config_value m_curl_timeout{};
+  int_config_value m_http_request_timeout{};
 
  public:
-  explicit curl_timeout();
+  explicit http_request_timeout();
 
   void from_yaml(const YAML::Node& node) override;
   nlohmann::json to_json() override;

@@ -29,8 +29,6 @@
 
 using ::testing::Test;
 
-extern std::vector<uint8_t> hexStringToByteArray(const std::string &hexString);
-
 TEST(TestSuiteNasMsg, positiveTestingRegistrationRequest)
 {
     /* Non - Access - Stratum 5GS(NAS)PDU
@@ -92,18 +90,17 @@ TEST(TestSuiteNasMsg, positiveTestingRegistrationRequest)
                 .... .0.. = EIA5: Not supported
                 .... ..0. = EIA6: Not supported
                 .... ...0 = EIA7: Not supported */
-    std::string msg_str =
-        "7e004119000d0102f8290000000000000000112e08802000000000000000";
-    //"1d7e004119000d0100f1100000000000000010002e088020000000000000";
-    auto msg_bin = hexStringToByteArray(msg_str);
+    uint8_t packet_bytes[] = {
+        0x7e, 0x00, 0x41, 0x19, 0x00, 0x0d, 0x01, 0x02,
+        0xf8, 0x29, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x11, 0x2e, 0x08, 0x80, 0x20, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00};
 
     oai::nas::RegistrationRequest rr = {};
-    int decode_result = rr.Decode(msg_bin.data(), msg_bin.size() - 1);
-    EXPECT_EQ(decode_result, msg_bin.size() - 1);
+    int decode_result = rr.Decode(packet_bytes, sizeof(packet_bytes));
+    EXPECT_EQ(decode_result, sizeof(packet_bytes));
 
-    std::cerr << "Msg size " << msg_bin.size() << std::endl;
-    std::cerr << "Msg decoded size " << decode_result << std::endl;
-    std::vector<uint8_t> msg_encoded_bin(msg_bin.size());
+    std::vector<uint8_t> msg_encoded_bin(sizeof(packet_bytes));
     int encode_result = rr.Encode(msg_encoded_bin.data(), msg_encoded_bin.size());
     EXPECT_EQ(encode_result, msg_encoded_bin.size());
 }

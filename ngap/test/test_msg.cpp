@@ -109,7 +109,7 @@ NG Application Protocol (UplinkNASTransport)
         NULL, &asn_DEF_Ngap_NGAP_PDU, (void **)&ngap_msg_pdu, packet_bytes,
         sizeof(packet_bytes), 0, 0);
 
-    Logger::ngap().debug(
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON).debug(
         "Decoded NGAP message, procedure code %d, present %d",
         ngap_msg_pdu->choice.initiatingMessage->procedureCode,
         ngap_msg_pdu->present);

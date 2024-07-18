@@ -61,14 +61,16 @@ void InitialContextSetupFailureMsg::setAmfUeNgapId(const uint64_t& id) {
   int ret =
       NgapUeMessage::m_AmfUeNgapId.encode(ie->value.choice.AMF_UE_NGAP_ID);
   if (!ret) {
-    Logger::ngap().error("Encode AMF_UE_NGAP_ID IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode AMF_UE_NGAP_ID IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
   ret =
       ASN_SEQUENCE_ADD(&m_InitialContextSetupFailureIes->protocolIEs.list, ie);
-  if (ret != 0) Logger::ngap().error("Encode AMF_UE_NGAP_ID IE error");
+  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                    .error("Encode AMF_UE_NGAP_ID IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -87,14 +89,16 @@ void InitialContextSetupFailureMsg::setRanUeNgapId(
   int ret =
       NgapUeMessage::m_RanUeNgapId.encode(ie->value.choice.RAN_UE_NGAP_ID);
   if (!ret) {
-    Logger::ngap().error("Encode RAN_UE_NGAP_ID IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode RAN_UE_NGAP_ID IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
   ret =
       ASN_SEQUENCE_ADD(&m_InitialContextSetupFailureIes->protocolIEs.list, ie);
-  if (ret != 0) Logger::ngap().error("Encode RAN_UE_NGAP_ID IE error");
+  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                    .error("Encode RAN_UE_NGAP_ID IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -129,7 +133,7 @@ void InitialContextSetupFailureMsg::setPduSessionResourceFailedToSetupList(
   int ret = m_PduSessionResourceFailedToSetupFailureList.value().encode(
       ie->value.choice.PDUSessionResourceFailedToSetupListCxtFail);
   if (!ret) {
-    Logger::ngap().error(
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
         "Encode PDUSessionResourceFailedToSetupListCxtFail IE error");
     return;
   }
@@ -137,7 +141,7 @@ void InitialContextSetupFailureMsg::setPduSessionResourceFailedToSetupList(
   ret =
       ASN_SEQUENCE_ADD(&m_InitialContextSetupFailureIes->protocolIEs.list, ie);
   if (ret != 0)
-    Logger::ngap().error(
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
         "Encode PDUSessionResourceFailedToSetupListCxtFail IE error");
 }
 
@@ -157,11 +161,13 @@ bool InitialContextSetupFailureMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           &ngapPdu->choice.unsuccessfulOutcome->value.choice
                .InitialContextSetupFailure;
     } else {
-      Logger::ngap().error("Check InitialContextSetupFailure message error!");
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .error("Check InitialContextSetupFailure message error!");
       return false;
     }
   } else {
-    Logger::ngap().error("MessageType error!");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("MessageType error!");
     return false;
   }
   for (int i = 0; i < m_InitialContextSetupFailureIes->protocolIEs.list.count;
@@ -176,11 +182,13 @@ bool InitialContextSetupFailureMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           if (!NgapUeMessage::m_AmfUeNgapId.decode(
                   m_InitialContextSetupFailureIes->protocolIEs.list.array[i]
                       ->value.choice.AMF_UE_NGAP_ID)) {
-            Logger::ngap().error("Decoded NGAP AMF_UE_NGAP_ID IE error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error("Decoded NGAP AMF_UE_NGAP_ID IE error");
             return false;
           }
         } else {
-          Logger::ngap().error("Decoded NGAP AMF_UE_NGAP_ID IE error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .error("Decoded NGAP AMF_UE_NGAP_ID IE error");
           return false;
         }
       } break;
@@ -193,11 +201,13 @@ bool InitialContextSetupFailureMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           if (!NgapUeMessage::m_RanUeNgapId.decode(
                   m_InitialContextSetupFailureIes->protocolIEs.list.array[i]
                       ->value.choice.RAN_UE_NGAP_ID)) {
-            Logger::ngap().error("Decoded NGAP RAN_UE_NGAP_ID IE error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error("Decoded NGAP RAN_UE_NGAP_ID IE error");
             return false;
           }
         } else {
-          Logger::ngap().error("Decoded NGAP RAN_UE_NGAP_ID IE error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .error("Decoded NGAP RAN_UE_NGAP_ID IE error");
           return false;
         }
       } break;
@@ -212,7 +222,7 @@ bool InitialContextSetupFailureMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
                   m_InitialContextSetupFailureIes->protocolIEs.list.array[i]
                       ->value.choice
                       .PDUSessionResourceFailedToSetupListCxtFail)) {
-            Logger::ngap().error(
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
                 "Decoded NGAP PDUSessionResourceFailedToSetupListCxtFail IE "
                 "error");
             return false;
@@ -221,7 +231,7 @@ bool InitialContextSetupFailureMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
               std::optional<PduSessionResourceFailedToSetupListCxtFail>(tmp);
 
         } else {
-          Logger::ngap().error(
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
               "Decoded NGAP PDUSessionResourceFailedToSetupListCxtFail IE "
               "error");
           return false;
@@ -229,7 +239,8 @@ bool InitialContextSetupFailureMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
       } break;
 
       default: {
-        Logger::ngap().error("Decoded NGAP Message PDU error");
+        oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
+            "Decoded NGAP Message PDU error");
 
         return false;
       }

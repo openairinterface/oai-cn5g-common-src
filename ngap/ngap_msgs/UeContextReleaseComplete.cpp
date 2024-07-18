@@ -58,12 +58,14 @@ void UEContextReleaseCompleteMsg::setAmfUeNgapId(const uint64_t& id) {
   int ret =
       NgapUeMessage::m_AmfUeNgapId.encode(ie->value.choice.AMF_UE_NGAP_ID);
   if (!ret) {
-    Logger::ngap().error("Encode NGAP AMF_UE_NGAP_ID IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode NGAP AMF_UE_NGAP_ID IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
   ret = ASN_SEQUENCE_ADD(&m_UEContextReleaseCompleteIes->protocolIEs.list, ie);
-  if (ret != 0) Logger::ngap().error("Encode NGAP AMF_UE_NGAP_ID IE error");
+  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                    .error("Encode NGAP AMF_UE_NGAP_ID IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -79,12 +81,14 @@ void UEContextReleaseCompleteMsg::setRanUeNgapId(const uint32_t& ranUeNgapId) {
   int ret =
       NgapUeMessage::m_RanUeNgapId.encode(ie->value.choice.RAN_UE_NGAP_ID);
   if (!ret) {
-    Logger::ngap().error("Encode NGAP RAN_UE_NGAP_ID IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode NGAP RAN_UE_NGAP_ID IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
   ret = ASN_SEQUENCE_ADD(&m_UEContextReleaseCompleteIes->protocolIEs.list, ie);
-  if (ret != 0) Logger::ngap().error("Encode NGAP RAN_UE_NGAP_ID IE error");
+  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                    .error("Encode NGAP RAN_UE_NGAP_ID IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -113,7 +117,8 @@ void UEContextReleaseCompleteMsg::setUserLocationInfoNr(
   int ret = m_userLocationInformation.encode(
       ie->value.choice.UserLocationInformation);
   if (!ret) {
-    Logger::ngap().error("Encode NGAP UserLocationInformation IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode NGAP UserLocationInformation IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
@@ -123,7 +128,8 @@ void UEContextReleaseCompleteMsg::setUserLocationInfoNr(
 
   ret = ASN_SEQUENCE_ADD(&m_UEContextReleaseCompleteIes->protocolIEs.list, ie);
   if (ret != 0)
-    Logger::ngap().error("Encode NGAP UserLocationInformation IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode NGAP UserLocationInformation IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -185,7 +191,7 @@ void UEContextReleaseCompleteMsg::setPduSessionResourceCxtRelCplList(
   int ret = m_pduSessionResourceListCxtRelCpl.encode(
       ie->value.choice.PDUSessionResourceListCxtRelCpl);
   if (!ret) {
-    Logger::ngap().error(
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
         "Encode NGAP PDUSessionResourceReleasedListRelRes IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
@@ -197,7 +203,7 @@ void UEContextReleaseCompleteMsg::setPduSessionResourceCxtRelCplList(
 
   ret = ASN_SEQUENCE_ADD(&m_UEContextReleaseCompleteIes->protocolIEs.list, ie);
   if (ret != 0)
-    Logger::ngap().error(
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
         "Encode NGAP PDUSessionResourceReleasedListRelRes IE error");
 }
 
@@ -236,11 +242,12 @@ bool UEContextReleaseCompleteMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
       m_UEContextReleaseCompleteIes = &ngapPdu->choice.successfulOutcome->value
                                            .choice.UEContextReleaseComplete;
     } else {
-      Logger::ngap().error("Check UEContextReleaseComplete message error");
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .error("Check UEContextReleaseComplete message error");
       return false;
     }
   } else {
-    Logger::ngap().error(
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
         "TypeOfMessage of UEContextReleaseComplete is not SuccessfulOutcome");
     return false;
   }
@@ -257,11 +264,13 @@ bool UEContextReleaseCompleteMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           if (!NgapUeMessage::m_AmfUeNgapId.decode(
                   m_UEContextReleaseCompleteIes->protocolIEs.list.array[i]
                       ->value.choice.AMF_UE_NGAP_ID)) {
-            Logger::ngap().error("Decode NGAP AMF_UE_NGAP_ID IE error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
+                "Decode NGAP AMF_UE_NGAP_ID IE error");
             return false;
           }
         } else {
-          Logger::ngap().error("Decode NGAP AMF_UE_NGAP_ID IE error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
+              "Decode NGAP AMF_UE_NGAP_ID IE error");
           return false;
         }
       } break;
@@ -275,11 +284,13 @@ bool UEContextReleaseCompleteMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           if (!NgapUeMessage::m_RanUeNgapId.decode(
                   m_UEContextReleaseCompleteIes->protocolIEs.list.array[i]
                       ->value.choice.RAN_UE_NGAP_ID)) {
-            Logger::ngap().error("Decode NGAP RAN_UE_NGAP_ID IE error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
+                "Decode NGAP RAN_UE_NGAP_ID IE error");
             return false;
           }
         } else {
-          Logger::ngap().error("Decode NGAP RAN_UE_NGAP_ID IE error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
+              "Decode NGAP RAN_UE_NGAP_ID IE error");
           return false;
         }
       } break;
@@ -295,14 +306,15 @@ bool UEContextReleaseCompleteMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           if (!m_userLocationInformation.decode(
                   m_UEContextReleaseCompleteIes->protocolIEs.list.array[i]
                       ->value.choice.UserLocationInformation)) {
-            Logger::ngap().error(
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
                 "Decode NGAP UserLocationInformation IE error");
             return false;
           }
           m_UserLocationInformation =
               std::optional<UserLocationInformation>{m_userLocationInformation};
         } else {
-          Logger::ngap().error("Decode NGAP UserLocationInformation IE error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
+              "Decode NGAP UserLocationInformation IE error");
           return false;
         }
       } break;
@@ -320,7 +332,7 @@ bool UEContextReleaseCompleteMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           if (!m_pduSessionResourceListCxtRelCpl.decode(
                   m_UEContextReleaseCompleteIes->protocolIEs.list.array[i]
                       ->value.choice.PDUSessionResourceListCxtRelCpl)) {
-            Logger::ngap().error(
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
                 "Decode NGAP PDUSessionResourceListCxtRelCpl IE error");
             return false;
           }
@@ -328,7 +340,7 @@ bool UEContextReleaseCompleteMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
               std::optional<PduSessionResourceListCxtRelCpl>{
                   m_pduSessionResourceListCxtRelCpl};
         } else {
-          Logger::ngap().error(
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
               "Decode NGAP PDUSessionResourceListCxtRelCpl IE error");
           return false;
         }
@@ -337,7 +349,7 @@ bool UEContextReleaseCompleteMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         // TODO: Criticality Diagnostics
 
       default: {
-        Logger::ngap().error(
+        oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
             "Unknown IE 0x%x",
             m_UEContextReleaseCompleteIes->protocolIEs.list.array[i]->id);
         return true;

@@ -53,13 +53,15 @@ void NgSetupFailureMsg::addCauseIe() {
   ie->value.present = Ngap_NGSetupFailureIEs__value_PR_Cause;
 
   if (!m_Cause.encode(ie->value.choice.Cause)) {
-    Logger::ngap().error("Encode NGAP Cause IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode NGAP Cause IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
   int ret = ASN_SEQUENCE_ADD(&m_NgSetupFailureIes->protocolIEs.list, ie);
-  if (ret != 0) Logger::ngap().error("Encode NGAP Cause IE error");
+  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                    .error("Encode NGAP Cause IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -73,13 +75,15 @@ void NgSetupFailureMsg::addTimeToWaitIE() {
   ie->value.present = Ngap_NGSetupFailureIEs__value_PR_TimeToWait;
 
   if (!m_TimeToWait.value().encode(ie->value.choice.TimeToWait)) {
-    Logger::ngap().error("Encode NGAP Cause IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode NGAP Cause IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
   int ret = ASN_SEQUENCE_ADD(&m_NgSetupFailureIes->protocolIEs.list, ie);
-  if (ret != 0) Logger::ngap().error("Encode NGAP TimeToWait IE error");
+  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                    .error("Encode NGAP TimeToWait IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -192,11 +196,13 @@ bool NgSetupFailureMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
       m_NgSetupFailureIes =
           &ngapPdu->choice.unsuccessfulOutcome->value.choice.NGSetupFailure;
     } else {
-      Logger::ngap().error("Check NGSetupFailure message error!");
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .error("Check NGSetupFailure message error!");
       return false;
     }
   } else {
-    Logger::ngap().error("MessageType error!");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("MessageType error!");
     return false;
   }
   for (int i = 0; i < m_NgSetupFailureIes->protocolIEs.list.count; i++) {
@@ -208,11 +214,13 @@ bool NgSetupFailureMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
                 Ngap_NGSetupFailureIEs__value_PR_Cause) {
           if (!m_Cause.decode(m_NgSetupFailureIes->protocolIEs.list.array[i]
                                   ->value.choice.Cause)) {
-            Logger::ngap().error("Decoded NGAP Cause IE error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error("Decoded NGAP Cause IE error");
             return false;
           }
         } else {
-          Logger::ngap().error("Decoded NGAP Cause IE error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .error("Decoded NGAP Cause IE error");
           return false;
         }
       } break;
@@ -224,20 +232,24 @@ bool NgSetupFailureMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           TimeToWait tmp = {};
           if (!tmp.decode(m_NgSetupFailureIes->protocolIEs.list.array[i]
                               ->value.choice.TimeToWait)) {
-            Logger::ngap().error("Decoded NGAP TimeToWait IE error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error("Decoded NGAP TimeToWait IE error");
             return false;
           }
           m_TimeToWait = std::optional<TimeToWait>(tmp);
         } else {
-          Logger::ngap().error("Decoded NGAP TimeToWait IE error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .error("Decoded NGAP TimeToWait IE error");
           return false;
         }
       } break;
       case Ngap_ProtocolIE_ID_id_CriticalityDiagnostics: {
-        Logger::ngap().debug("Decoded NGAP CriticalityDiagnostics IE ");
+        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+            .debug("Decoded NGAP CriticalityDiagnostics IE ");
       } break;
       default: {
-        Logger::ngap().error("Decoded NGAP message PDU error");
+        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+            .error("Decoded NGAP message PDU error");
         return false;
       }
     }

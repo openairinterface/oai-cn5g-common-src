@@ -21,7 +21,7 @@
 
 #include "DrbsSubjectToStatusTransferItem.hpp"
 
-#include "logger.hpp"
+#include "logger_base.hpp"
 
 namespace oai::ngap {
 
@@ -76,7 +76,7 @@ bool DrbSubjectToStatusTransferItem::encode(
     return false;
   }
 
-  Logger::ngap().debug(
+  oai::logger::logger_registry::get_logger(LOGGER_COMMON).debug(
       "Encode from DrbSubjectToStatusTransferItem successfully");
   return true;
 }

@@ -21,7 +21,8 @@
 
 #include "NgEnbId.hpp"
 
-extern "C" {
+extern "C"
+{
 #include "conversions.h"
 }
 

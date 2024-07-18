@@ -21,7 +21,7 @@
 
 #include "UserLocationInformation.hpp"
 
-#include "logger.hpp"
+#include "logger_base.hpp"
 
 namespace oai::ngap {
 
@@ -96,7 +96,8 @@ bool UserLocationInformation::encode(
       break;
     }
     default:
-      Logger::ngap().warn("UserLocationInformation encode error!");
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .warn("UserLocationInformation encode error!");
       return false;
   }
   return true;
@@ -125,7 +126,8 @@ bool UserLocationInformation::decode(
       break;
     }
     default:
-      Logger::ngap().warn("UserLocationInformation decode error!");
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .warn("UserLocationInformation decode error!");
       return false;
   }
   return true;

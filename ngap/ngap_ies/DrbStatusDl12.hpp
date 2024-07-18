@@ -23,7 +23,6 @@
 #define _DRB_STATUS_DL12_H_
 
 #include "CountValueForPdcpSn12.hpp"
-#include "logger.hpp"
 
 extern "C" {
 #include "Ngap_DRBStatusDL12.h"

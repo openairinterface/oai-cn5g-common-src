@@ -21,7 +21,7 @@
 
 #include "MessageType.hpp"
 
-#include "logger.hpp"
+#include "logger_base.hpp"
 
 extern "C" {
 #include "Ngap_Criticality.h"
@@ -128,7 +128,7 @@ int MessageType::encode(Ngap_NGAP_PDU_t& pdu) const {
       break;
     }
     case Ngap_NGAP_PDU_PR_NOTHING: {
-      Logger::ngap().debug(
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON).debug(
           "Ngap_NGAP_PDU_PR_NOTHING (messageType encode error)");
       return 0;
     }

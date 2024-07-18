@@ -21,7 +21,7 @@
 
 #include "PduSessionResourceSetupResponseTransfer.hpp"
 
-#include "logger.hpp"
+#include "logger_base.hpp"
 #include "ngap_utils.hpp"
 
 namespace oai::ngap {
@@ -72,7 +72,8 @@ void PduSessionResourceSetupResponseTransferIE::set(
   int ret = m_DlQosFlowPerTnlInformation.encode(
       m_PduSessionResourceSetupResponseTransferIe->dLQosFlowPerTNLInformation);
   if (!ret) {
-    Logger::ngap().error("Encode DLQoSFlowPerTNLInformation IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode DLQoSFlowPerTNLInformation IE error");
     return;
   }
 }
@@ -121,7 +122,7 @@ void PduSessionResourceSetupResponseTransferIE::
 
     int ret = m_AdditionalDlQosFlowPerTnlInformation.value().encode(ie);
     if (!ret) {
-      Logger::ngap().error(
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
           "Encode AdditionalDLQoSFlowPerTNLInformation IE error");
       return;
     }
@@ -150,7 +151,8 @@ void PduSessionResourceSetupResponseTransferIE::setSecurityResult(
       (Ngap_SecurityResult_t*) calloc(1, sizeof(Ngap_SecurityResult_t));
   int ret = m_SecurityResult.value().encode(*ie);
   if (!ret) {
-    Logger::ngap().error("Encode SecurityResult IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode SecurityResult IE error");
     return;
   }
   m_PduSessionResourceSetupResponseTransferIe->securityResult = ie;
@@ -165,7 +167,8 @@ int PduSessionResourceSetupResponseTransferIE::encode(
   asn_enc_rval_t er = aper_encode_to_buffer(
       &asn_DEF_Ngap_PDUSessionResourceSetupResponseTransfer, NULL,
       m_PduSessionResourceSetupResponseTransferIe, buf, buf_size);
-  Logger::ngap().debug("er.encoded %d", er.encoded);
+  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+      .debug("er.encoded %d", er.encoded);
   return er.encoded;
 }
 
@@ -178,22 +181,27 @@ bool PduSessionResourceSetupResponseTransferIE::decode(
       &asn_DEF_Ngap_PDUSessionResourceSetupResponseTransfer,
       (void**) &m_PduSessionResourceSetupResponseTransferIe, buf, buf_size);
   if (rc.code == RC_OK) {
-    Logger::ngap().debug("Decoded successfully");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .debug("Decoded successfully");
   } else if (rc.code == RC_WMORE) {
-    Logger::ngap().debug("More data expected, call again");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .debug("More data expected, call again");
     return false;
   } else {
-    Logger::ngap().error("Failure to decode data");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Failure to decode data");
     return false;
   }
-  Logger::ngap().debug("rc.consumed to decode %d", rc.consumed);
+  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+      .debug("rc.consumed to decode %d", rc.consumed);
   // asn_fprint(stderr, &asn_DEF_Ngap_PDUSessionResourceSetupResponseTransfer,
   // m_PduSessionResourceSetupResponseTransferIe);
 
   if (!m_DlQosFlowPerTnlInformation.decode(
           m_PduSessionResourceSetupResponseTransferIe
               ->dLQosFlowPerTNLInformation)) {
-    Logger::ngap().error("Decode NGAP DLQoSFlowPerTNLInformation IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Decode NGAP DLQoSFlowPerTNLInformation IE error");
     return false;
   }
 
@@ -203,7 +211,7 @@ bool PduSessionResourceSetupResponseTransferIE::decode(
     if (!additional_qos_flow.decode(
             *m_PduSessionResourceSetupResponseTransferIe
                  ->additionalDLQosFlowPerTNLInformation)) {
-      Logger::ngap().error(
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
           "Decode NGAP AdditionalDLQoSFlowPerTNLInformation IE error");
       return false;
     }
@@ -214,7 +222,8 @@ bool PduSessionResourceSetupResponseTransferIE::decode(
     SecurityResult security_result = {};
     if (!security_result.decode(
             *m_PduSessionResourceSetupResponseTransferIe->securityResult)) {
-      Logger::ngap().error("Decode NGAP SecurityResult IE error");
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .error("Decode NGAP SecurityResult IE error");
       return false;
     }
     m_SecurityResult = std::make_optional<SecurityResult>(security_result);

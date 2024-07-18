@@ -21,7 +21,6 @@
 
 #include "PduSessionResourceSetupItemCxtReq.hpp"
 
-#include "logger.hpp"
 #include "utils.hpp"
 
 namespace oai::ngap {

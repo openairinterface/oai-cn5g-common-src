@@ -42,7 +42,8 @@ NgapMessage::NgapMessage() {
 //------------------------------------------------------------------------------
 NgapMessage::~NgapMessage() {
   ASN_STRUCT_FREE(asn_DEF_Ngap_NGAP_PDU, ngapPdu);
-  Logger::ngap().debug("Free NGAP Message PDU");
+  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+      .debug("Free NGAP Message PDU");
 }
 
 //------------------------------------------------------------------------------
@@ -520,7 +521,8 @@ int NgapMessage::Encode(uint8_t* buf, int bufSize) {
       &asn_DEF_Ngap_NGAP_PDU, NULL, ngapPdu, buf, bufSize);
 
   int encoded_size = (er.encoded + 7) >> 3;
-  Logger::ngap().debug("Encoded size (%d)", encoded_size);
+  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+      .debug("Encoded size (%d)", encoded_size);
   return encoded_size;
 }
 
@@ -529,7 +531,8 @@ void NgapMessage::encode2NewBuffer(uint8_t*& buf, int& encoded_size) {
   ngap_utils::print_asn_msg(&asn_DEF_Ngap_NGAP_PDU, ngapPdu);
   encoded_size = aper_encode_to_new_buffer(
       &asn_DEF_Ngap_NGAP_PDU, NULL, ngapPdu, (void**) &buf);
-  Logger::ngap().debug("Encoded message size ( %d )", encoded_size);
+  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+      .debug("Encoded message size ( %d )", encoded_size);
   return;
 }
 

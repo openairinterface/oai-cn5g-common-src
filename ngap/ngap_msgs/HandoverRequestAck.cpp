@@ -60,13 +60,15 @@ void HandoverRequestAck::setAmfUeNgapId(const uint64_t& id) {
   int ret =
       NgapUeMessage::m_AmfUeNgapId.encode(ie->value.choice.AMF_UE_NGAP_ID);
   if (!ret) {
-    Logger::ngap().error("Encode NGAP AMF_UE_NGAP_ID IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode NGAP AMF_UE_NGAP_ID IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
   ret = ASN_SEQUENCE_ADD(&m_HandoverRequestAckIes->protocolIEs.list, ie);
-  if (ret != 0) Logger::ngap().error("Encode NGAP AMF_UE_NGAP_ID IE error");
+  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                    .error("Encode NGAP AMF_UE_NGAP_ID IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -84,13 +86,15 @@ void HandoverRequestAck::setRanUeNgapId(const uint32_t& ranUeNgapId) {
   int ret =
       NgapUeMessage::m_RanUeNgapId.encode(ie->value.choice.RAN_UE_NGAP_ID);
   if (!ret) {
-    Logger::ngap().error("Encode NGAP RAN_UE_NGAP_ID IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode NGAP RAN_UE_NGAP_ID IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
   ret = ASN_SEQUENCE_ADD(&m_HandoverRequestAckIes->protocolIEs.list, ie);
-  if (ret != 0) Logger::ngap().error("Encode NGAP RAN_UE_NGAP_ID IE error");
+  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                    .error("Encode NGAP RAN_UE_NGAP_ID IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -112,7 +116,7 @@ void HandoverRequestAck::setTargetToSourceTransparentContainer(
       ie->value.choice.TargetToSource_TransparentContainer, targetTosource);
   int ret = ASN_SEQUENCE_ADD(&m_HandoverRequestAckIes->protocolIEs.list, ie);
   if (ret != 0)
-    Logger::ngap().error(
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
         "Encode NGAP TargetToSourceTransparentContainer IE error");
 }
 
@@ -151,7 +155,8 @@ void HandoverRequestAck::setPduSessionResourceAdmittedList(
 
   int ret = ASN_SEQUENCE_ADD(&m_HandoverRequestAckIes->protocolIEs.list, ie);
   if (ret != 0)
-    Logger::ngap().error("Encode NGAP PDUSessionResourceAdmittedList IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode NGAP PDUSessionResourceAdmittedList IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -174,7 +179,7 @@ void HandoverRequestAck::setPduSessionResourceFailedToSetupListHOAck(
 
   int ret = ASN_SEQUENCE_ADD(&m_HandoverRequestAckIes->protocolIEs.list, ie);
   if (ret != 0)
-    Logger::ngap().error(
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
         "Encode NGAP PDUSessionResourceFailedToSetupListHOAck IE error");
 }
 
@@ -200,7 +205,7 @@ void HandoverRequestAck::setPduSessionResourceFailedToSetupListHOAck(
 
   int ret = ASN_SEQUENCE_ADD(&m_HandoverRequestAckIes->protocolIEs.list, ie);
   if (ret != 0)
-    Logger::ngap().error(
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
         "Encode NGAP PDUSessionResourceFailedToSetupListHOAck IE error");
 }
 
@@ -228,11 +233,13 @@ bool HandoverRequestAck::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
       m_HandoverRequestAckIes = &ngapPdu->choice.successfulOutcome->value.choice
                                      .HandoverRequestAcknowledge;
     } else {
-      Logger::ngap().error("Check handoverRequestAck message error");
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .error("Check handoverRequestAck message error");
       return false;
     }
   } else {
-    Logger::ngap().error("handoverRequestAck MessageType error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("handoverRequestAck MessageType error");
     return false;
   }
   for (int i = 0; i < m_HandoverRequestAckIes->protocolIEs.list.count; i++) {
@@ -245,11 +252,13 @@ bool HandoverRequestAck::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           if (!NgapUeMessage::m_AmfUeNgapId.decode(
                   m_HandoverRequestAckIes->protocolIEs.list.array[i]
                       ->value.choice.AMF_UE_NGAP_ID)) {
-            Logger::ngap().error("Decoded NGAP AMF_UE_NGAP_ID IE error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error("Decoded NGAP AMF_UE_NGAP_ID IE error");
             return false;
           }
         } else {
-          Logger::ngap().error("Decoded NGAP AMF_UE_NGAP_ID IE error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .error("Decoded NGAP AMF_UE_NGAP_ID IE error");
           return false;
         }
       } break;
@@ -261,11 +270,13 @@ bool HandoverRequestAck::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           if (!NgapUeMessage::m_RanUeNgapId.decode(
                   m_HandoverRequestAckIes->protocolIEs.list.array[i]
                       ->value.choice.RAN_UE_NGAP_ID)) {
-            Logger::ngap().error("Decoded NGAP RAN_UE_NGAP_ID IE error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error("Decoded NGAP RAN_UE_NGAP_ID IE error");
             return false;
           }
         } else {
-          Logger::ngap().error("Decoded NGAP RAN_UE_NGAP_ID IE error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .error("Decoded NGAP RAN_UE_NGAP_ID IE error");
           return false;
         }
       } break;
@@ -277,12 +288,12 @@ bool HandoverRequestAck::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           if (!m_PduSessionResourceAdmittedList.decode(
                   m_HandoverRequestAckIes->protocolIEs.list.array[i]
                       ->value.choice.PDUSessionResourceAdmittedList)) {
-            Logger::ngap().error(
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
                 "Decoded NGAP PDUSessionResourceAdmittedList IE error");
             return false;
           }
         } else {
-          Logger::ngap().error(
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
               "Decoded NGAP PDUSessionResourceAdmittedList IE error");
           return false;
         }
@@ -297,7 +308,7 @@ bool HandoverRequestAck::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           if (!tmp.decode(m_HandoverRequestAckIes->protocolIEs.list.array[i]
                               ->value.choice
                               .PDUSessionResourceFailedToSetupListHOAck)) {
-            Logger::ngap().error(
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
                 "Decoded NGAP PDUSessionResourceFailedToSetupListHOAck IE "
                 "error");
             return false;
@@ -305,7 +316,7 @@ bool HandoverRequestAck::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           m_PduSessionResourceFailedToSetupList =
               std::optional<PduSessionResourceFailedToSetupListHoAck>(tmp);
         } else {
-          Logger::ngap().error(
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
               "Decoded NGAP PDUSessionResourceFailedToSetupListHOAck IE error");
           return false;
         }
@@ -320,14 +331,15 @@ bool HandoverRequestAck::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
               m_HandoverRequestAckIes->protocolIEs.list.array[i]
                   ->value.choice.TargetToSource_TransparentContainer);
         } else {
-          Logger::ngap().error(
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
               "Decoded NGAP m_TargetToSourceTransparentContainer IE error");
 
           return false;
         }
       } break;
       default: {
-        Logger::ngap().error("Decoded NGAP Message PDU error");
+        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+            .error("Decoded NGAP Message PDU error");
         return false;
       }
     }

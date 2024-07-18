@@ -21,7 +21,7 @@
 
 #include "DrbsSubjectToStatusTransferList.hpp"
 
-#include "logger.hpp"
+#include "logger_base.hpp"
 #include "utils.hpp"
 
 namespace oai::ngap {
@@ -54,12 +54,13 @@ bool DrbSubjectToStatusTransferList::encode(
     if (!ie) return false;
 
     if (!item.encode(*ie)) {
-      Logger::ngap().error("Encode DrbSubjectToStatusTransferList IE error!");
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                  .error("Encode DrbSubjectToStatusTransferList IE error!");
       oai::utils::utils::free_wrapper((void**) &ie);
       return false;
     }
     if (ASN_SEQUENCE_ADD(&drbsSubjectToStatusTransferList.list, ie) != 0) {
-      Logger::ngap().error(
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
           "ASN_SEQUENCE_ADD DrbSubjectToStatusTransferList IE error!");
       return false;
     }
@@ -74,7 +75,8 @@ bool DrbSubjectToStatusTransferList::decode(
   for (int i = 0; i < drbsSubjectToStatusTransferList.list.count; i++) {
     DrbSubjectToStatusTransferItem item = {};
     if (!item.decode(*drbsSubjectToStatusTransferList.list.array[i])) {
-      Logger::ngap().error("Decode DrbSubjectToStatusTransferList IE error!");
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .error("Decode DrbSubjectToStatusTransferList IE error!");
       return false;
     }
     m_ItemList.push_back(item);

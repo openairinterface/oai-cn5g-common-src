@@ -19,6 +19,7 @@
  *      contact@openairinterface.org
  */
 #include "RegistrationRequest.hpp"
+#include "ServiceRequest.hpp"
 #include "endian.h"
 
 #include <glog/logging.h>
@@ -98,9 +99,68 @@ TEST(TestSuiteNasMsg, positiveTestingRegistrationRequest)
 
     oai::nas::RegistrationRequest rr = {};
     int decode_result = rr.Decode(packet_bytes, sizeof(packet_bytes));
-    EXPECT_EQ(decode_result, sizeof(packet_bytes));
+    ASSERT_EQ(decode_result, sizeof(packet_bytes));
 
     std::vector<uint8_t> msg_encoded_bin(sizeof(packet_bytes));
     int encode_result = rr.Encode(msg_encoded_bin.data(), msg_encoded_bin.size());
+    EXPECT_EQ(encode_result, msg_encoded_bin.size());
+}
+
+TEST(TestSuiteNasMsg, positiveTestingServiceRequestWithPdu)
+{
+    // initial_ue_msg_service_request_with_pdu
+    uint8_t packet_bytes[] = {
+        // Security protected NAS 5G msg with
+        // Mobility mgmt msg with security header and auth code
+        // 0x7e, 0x01, 0xca, 0x3f, 0x92, 0xbe,
+        // seq no
+        // 0x03,
+        // Plain NAS 5G msg with
+        // Mobility mgmt msg with no security header and msg type
+        0x7e, 0x00, 0x4c,
+        // service type as Mobile Terminated
+        0x20,
+        // 5GS Mobile identity
+        0x00, 0x07, 0xf4, 0x00, 0x40,
+        // Replace TMSI value to be sent
+        // during message tx at position[16]to [19]
+        0xff, 0xff, 0xff, 0xff,
+        // Uplink data status and pdu session status
+        0x40, 0x02, 0x20, 0x00, 0x50, 0x02, 0x20, 0x00};
+
+    oai::nas::ServiceRequest nas_obj = {};
+    int decode_result = nas_obj.Decode(packet_bytes, sizeof(packet_bytes));
+    ASSERT_EQ(decode_result, sizeof(packet_bytes));
+
+    // First quartet
+    uint8_t service_type;
+    nas_obj.GetServiceType(service_type);
+    // pending issue in gitlab EXPECT_EQ(service_type, 0x02);
+
+    // Last quartet
+    uint8_t ng_ksi;
+    nas_obj.GetNgKsi(ng_ksi);
+    EXPECT_EQ(ng_ksi, 0x00);
+
+    uint16_t amf_set_id;
+    uint8_t amf_pointer;
+    std::string tmsi;
+    ASSERT_TRUE(nas_obj.Get5gSTmsi(amf_set_id, amf_pointer, tmsi));
+    EXPECT_EQ(amf_set_id, 0x0001);
+    EXPECT_EQ(amf_pointer, 0x00);
+    // warning base10 format
+    EXPECT_STREQ(tmsi.c_str(), "4294967295");
+
+    uint16_t uplink_data_status;
+    nas_obj.GetUplinkDataStatus(uplink_data_status);
+    EXPECT_EQ(uplink_data_status, 0x2000);
+
+    uint16_t pdu_session_status;
+    nas_obj.GetPduSessionStatus(pdu_session_status);
+    EXPECT_EQ(pdu_session_status, 0x2000);
+
+    std::vector<uint8_t>
+        msg_encoded_bin(sizeof(packet_bytes));
+    int encode_result = nas_obj.Encode(msg_encoded_bin.data(), msg_encoded_bin.size());
     EXPECT_EQ(encode_result, msg_encoded_bin.size());
 }

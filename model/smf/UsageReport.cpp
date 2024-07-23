@@ -7,9 +7,7 @@
 #include "UsageReport.h"
 // #include <sstream>
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 UsageReport::UsageReport() {
   m_SEndID        = 0;
@@ -268,6 +266,4 @@ void UsageReport::unsetURTrigger() {
   m_urTrigIsSet = false;
 }
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

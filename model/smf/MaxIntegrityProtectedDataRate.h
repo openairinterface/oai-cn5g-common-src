@@ -21,9 +21,7 @@
 
 #include <nlohmann/json.hpp>
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 /// <summary>
 /// Possible values are   - 64_KBPS   - MAX_UE_RATE
@@ -46,8 +44,6 @@ class MaxIntegrityProtectedDataRate {
  protected:
 };
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf
 
 #endif /* MaxIntegrityProtectedDataRate_H_ */

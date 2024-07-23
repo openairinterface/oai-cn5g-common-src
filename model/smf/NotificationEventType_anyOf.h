@@ -21,7 +21,7 @@
 
 #include <nlohmann/json.hpp>
 
-namespace oai::smf_server::model {
+namespace oai::model::smf {
 
 /// <summary>
 ///
@@ -79,6 +79,6 @@ class NotificationEventType_anyOf {
           INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::smf_server::model
+}  // namespace oai::model::smf
 
 #endif /* NotificationEventType_anyOf_H_ */

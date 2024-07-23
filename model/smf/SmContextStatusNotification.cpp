@@ -13,9 +13,7 @@
 
 #include "SmContextStatusNotification.h"
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 SmContextStatusNotification::SmContextStatusNotification() {}
 
@@ -41,6 +39,4 @@ void SmContextStatusNotification::setStatusInfo(StatusInfo const& value) {
   m_StatusInfo = value;
 }
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

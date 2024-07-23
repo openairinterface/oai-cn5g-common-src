@@ -13,9 +13,7 @@
 
 #include "NotificationMethod.h"
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 NotificationMethod::NotificationMethod() {}
 
@@ -31,6 +29,4 @@ void to_json(nlohmann::json& j, const NotificationMethod& o) {
 
 void from_json(const nlohmann::json& j, NotificationMethod& o) {}
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

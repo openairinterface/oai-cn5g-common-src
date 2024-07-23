@@ -25,9 +25,7 @@
 
 #include <nlohmann/json.hpp>
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 /// <summary>
 /// Possible values are - REL_DUE_TO_HO - EPS_FALLBACK - REL_DUE_TO_UP_SEC -
@@ -55,8 +53,6 @@ class Cause {
   std::string cause;
 };
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf
 
 #endif /* Cause_H_ */

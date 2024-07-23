@@ -22,9 +22,7 @@
 #include <string>
 #include <nlohmann/json.hpp>
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 /// <summary>
 ///
@@ -66,8 +64,6 @@ class EpsBearerInfo {
   std::string m_BearerLevelQoS;
 };
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf
 
 #endif /* EpsBearerInfo_H_ */

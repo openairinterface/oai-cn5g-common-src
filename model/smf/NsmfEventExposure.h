@@ -27,9 +27,7 @@
 #include "Guami.h"
 #include <nlohmann/json.hpp>
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 /// <summary>
 ///
@@ -226,8 +224,6 @@ class NsmfEventExposure {
   bool m_SupportedFeaturesIsSet;
 };
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf
 
 #endif /* NsmfEventExposure_H_ */

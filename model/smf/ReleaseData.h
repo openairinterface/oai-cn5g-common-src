@@ -28,9 +28,7 @@
 #include <vector>
 #include <nlohmann/json.hpp>
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 /// <summary>
 ///
@@ -126,8 +124,6 @@ class ReleaseData {
   bool m_SecondaryRatUsageInfoIsSet;
 };
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf
 
 #endif /* ReleaseData_H_ */

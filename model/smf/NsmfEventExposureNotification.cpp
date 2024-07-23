@@ -13,9 +13,7 @@
 
 #include "NsmfEventExposureNotification.h"
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 NsmfEventExposureNotification::NsmfEventExposureNotification() {
   m_NotifId = "";
@@ -53,6 +51,4 @@ void NsmfEventExposureNotification::setEventNotifs(
   m_EventNotifs = value;
 }
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

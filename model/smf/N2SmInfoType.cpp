@@ -13,9 +13,7 @@
 
 #include "N2SmInfoType.h"
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 N2SmInfoType::N2SmInfoType() {}
 
@@ -31,6 +29,4 @@ void to_json(nlohmann::json& j, const N2SmInfoType& o) {
 
 void from_json(const nlohmann::json& j, N2SmInfoType& o) {}
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

@@ -22,9 +22,7 @@
 #include "Arp.h"
 #include <nlohmann/json.hpp>
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 /// <summary>
 ///
@@ -59,8 +57,6 @@ class EbiArpMapping {
   oai::model::common::Arp m_Arp;
 };
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf
 
 #endif /* EbiArpMapping_H_ */

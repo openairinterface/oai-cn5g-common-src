@@ -13,9 +13,7 @@
 
 #include "PartialRecordMethod.h"
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 PartialRecordMethod::PartialRecordMethod() {}
 
@@ -31,6 +29,4 @@ void to_json(nlohmann::json& j, const PartialRecordMethod& o) {
 
 void from_json(const nlohmann::json& j, PartialRecordMethod& o) {}
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

@@ -21,9 +21,7 @@
 
 #include <nlohmann/json.hpp>
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 /// <summary>
 /// Possible values are   - EPS_PDN_CONNECTION   - SM_CONTEXT
@@ -44,8 +42,6 @@ class SmContextType {
  protected:
 };
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf
 
 #endif /* SmContextType_H_ */

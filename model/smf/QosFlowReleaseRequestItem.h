@@ -22,9 +22,7 @@
 #include <string>
 #include <nlohmann/json.hpp>
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 /// <summary>
 ///
@@ -71,8 +69,6 @@ class QosFlowReleaseRequestItem {
   bool m_QosFlowDescriptionIsSet;
 };
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf
 
 #endif /* QosFlowReleaseRequestItem_H_ */

@@ -22,7 +22,7 @@
 #include "NotificationEventType_anyOf.h"
 #include <nlohmann/json.hpp>
 
-namespace oai::smf_server::model {
+namespace oai::model::smf {
 
 /// <summary>
 /// Types of events sent in notifications from NRF to subscribed NF Instances
@@ -72,6 +72,6 @@ class NotificationEventType {
   NotificationEventType_anyOf m_value;
 };
 
-}  // namespace oai::smf_server::model
+}  // namespace oai::model::smf
 
 #endif /* NotificationEventType_H_ */

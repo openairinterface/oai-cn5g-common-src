@@ -13,9 +13,7 @@
 
 #include "ExemptionInd.h"
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 ExemptionInd::ExemptionInd() {
   m_DnnCongestion             = false;
@@ -96,6 +94,4 @@ void ExemptionInd::unsetSnssaiDnnCongestion() {
   m_SnssaiDnnCongestionIsSet = false;
 }
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

@@ -27,9 +27,7 @@
 
 #include <nlohmann/json.hpp>
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 /// <summary>
 /// Possible values are - PDU_RES_SETUP_REQ - PDU_RES_SETUP_RSP -
@@ -56,8 +54,6 @@ class N2SmInfoType {
  protected:
 };
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf
 
 #endif /* N2SmInfoType_H_ */

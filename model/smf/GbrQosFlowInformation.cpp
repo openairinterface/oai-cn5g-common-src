@@ -13,9 +13,7 @@
 
 #include "GbrQosFlowInformation.h"
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 using namespace oai::model::common;
 
@@ -133,6 +131,4 @@ void GbrQosFlowInformation::unsetMaxPacketLossRateUl() {
   m_MaxPacketLossRateUlIsSet = false;
 }
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

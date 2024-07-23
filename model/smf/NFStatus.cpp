@@ -13,9 +13,7 @@
 
 #include "NFStatus.h"
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 NFStatus::NFStatus() {}
 
@@ -31,6 +29,4 @@ void to_json(nlohmann::json& j, const NFStatus& o) {
 
 void from_json(const nlohmann::json& j, NFStatus& o) {}
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

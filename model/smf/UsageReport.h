@@ -10,9 +10,7 @@
 #include "msg_pfcp.hpp"
 #include <nlohmann/json.hpp>
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 // TODO: Redefine in separate files
 enum UsageReportTrigger { PERIO = 1, VOLTH, TIMTH, VOLQU, TIMQU };
@@ -137,8 +135,6 @@ class UsageReport {
   bool m_urTrigIsSet;
 };
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf
 
 #endif /* UsageReport_H_ */

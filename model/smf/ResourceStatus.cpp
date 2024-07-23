@@ -13,9 +13,7 @@
 
 #include "ResourceStatus.h"
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 ResourceStatus::ResourceStatus() {}
 
@@ -31,6 +29,4 @@ void to_json(nlohmann::json& j, const ResourceStatus& o) {
 
 void from_json(const nlohmann::json& j, ResourceStatus& o) {}
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

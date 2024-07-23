@@ -13,9 +13,7 @@
 
 #include "NotificationCause.h"
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 NotificationCause::NotificationCause() {}
 
@@ -31,6 +29,4 @@ void to_json(nlohmann::json& j, const NotificationCause& o) {
 
 void from_json(const nlohmann::json& j, NotificationCause& o) {}
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

@@ -13,9 +13,7 @@
 
 #include "RequestIndication.h"
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 RequestIndication::RequestIndication() {}
 
@@ -31,6 +29,4 @@ void to_json(nlohmann::json& j, const RequestIndication& o) {
 
 void from_json(const nlohmann::json& j, RequestIndication& o) {}
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

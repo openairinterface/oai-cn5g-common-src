@@ -16,7 +16,7 @@
 
 #include <sstream>
 
-namespace oai::smf_server::model {
+namespace oai::model::smf {
 
 NotificationData::NotificationData() {
   m_NfInstanceUri       = "";
@@ -120,12 +120,11 @@ void from_json(const nlohmann::json& j, NotificationData& o) {
   }
 }
 
-oai::smf_server::model::NotificationEventType NotificationData::getEvent()
-    const {
+oai::model::smf::NotificationEventType NotificationData::getEvent() const {
   return m_Event;
 }
 void NotificationData::setEvent(
-    oai::smf_server::model::NotificationEventType const& value) {
+    oai::model::smf::NotificationEventType const& value) {
   m_Event = value;
 }
 std::string NotificationData::getNfInstanceUri() const {
@@ -134,11 +133,10 @@ std::string NotificationData::getNfInstanceUri() const {
 void NotificationData::setNfInstanceUri(std::string const& value) {
   m_NfInstanceUri = value;
 }
-oai::smf_server::model::NFProfile NotificationData::getNfProfile() const {
+oai::model::smf::NFProfile NotificationData::getNfProfile() const {
   return m_NfProfile;
 }
-void NotificationData::setNfProfile(
-    oai::smf_server::model::NFProfile const& value) {
+void NotificationData::setNfProfile(oai::model::smf::NFProfile const& value) {
   m_NfProfile      = value;
   m_NfProfileIsSet = true;
 }
@@ -163,12 +161,12 @@ bool NotificationData::profileChangesIsSet() const {
 void NotificationData::unsetProfileChanges() {
   m_ProfileChangesIsSet = false;
 }
-oai::smf_server::model::ConditionEventType NotificationData::getConditionEvent()
+oai::model::smf::ConditionEventType NotificationData::getConditionEvent()
     const {
   return m_ConditionEvent;
 }
 void NotificationData::setConditionEvent(
-    oai::smf_server::model::ConditionEventType const& value) {
+    oai::model::smf::ConditionEventType const& value) {
   m_ConditionEvent      = value;
   m_ConditionEventIsSet = true;
 }
@@ -179,4 +177,4 @@ void NotificationData::unsetConditionEvent() {
   m_ConditionEventIsSet = false;
 }
 
-}  // namespace oai::smf_server::model
+}  // namespace oai::model::smf

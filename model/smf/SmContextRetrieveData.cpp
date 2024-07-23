@@ -13,9 +13,7 @@
 
 #include "SmContextRetrieveData.h"
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 SmContextRetrieveData::SmContextRetrieveData() {
   m_TargetMmeCapIsSet  = false;
@@ -72,6 +70,4 @@ void SmContextRetrieveData::unsetSmContextType() {
   m_SmContextTypeIsSet = false;
 }
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

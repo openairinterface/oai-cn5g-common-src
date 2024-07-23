@@ -14,9 +14,7 @@
 #include <iostream>
 #include "SmContextUpdateMessage.h"
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 SmContextUpdateMessage::SmContextUpdateMessage() {
   m_JsonDataIsSet                  = false;
@@ -96,6 +94,4 @@ void SmContextUpdateMessage::unsetBinaryDataN2SmInformation() {
   m_BinaryDataN2SmInformationIsSet = false;
 }
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

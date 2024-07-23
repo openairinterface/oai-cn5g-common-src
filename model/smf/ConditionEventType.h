@@ -23,7 +23,7 @@
 #include "ConditionEventType_anyOf.h"
 #include <nlohmann/json.hpp>
 
-namespace oai::smf_server::model {
+namespace oai::model::smf {
 
 /// <summary>
 /// Indicates whether a notification is due to the NF Instance to start or stop
@@ -71,6 +71,6 @@ class ConditionEventType {
   ConditionEventType_anyOf m_value;
 };
 
-}  // namespace oai::smf_server::model
+}  // namespace oai::model::smf
 
 #endif /* ConditionEventType_H_ */

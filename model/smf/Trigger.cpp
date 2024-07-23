@@ -13,9 +13,7 @@
 
 #include "Trigger.h"
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 Trigger::Trigger() {
   m_TimeLimit           = 0;
@@ -130,6 +128,4 @@ void Trigger::unsetMaxNumberOfccc() {
   m_MaxNumberOfcccIsSet = false;
 }
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

@@ -21,9 +21,7 @@
 
 #include <nlohmann/json.hpp>
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 /// <summary>
 /// Possible values are - NONE - WITH_N26 - WITHOUT_N26 - IWK_NON_3GPP
@@ -44,8 +42,6 @@ class EpsInterworkingIndication {
  protected:
 };
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf
 
 #endif /* EpsInterworkingIndication_H_ */

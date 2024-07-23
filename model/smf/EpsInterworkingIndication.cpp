@@ -13,9 +13,7 @@
 
 #include "EpsInterworkingIndication.h"
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 EpsInterworkingIndication::EpsInterworkingIndication() {}
 
@@ -31,6 +29,4 @@ void to_json(nlohmann::json& j, const EpsInterworkingIndication& o) {
 
 void from_json(const nlohmann::json& j, EpsInterworkingIndication& o) {}
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

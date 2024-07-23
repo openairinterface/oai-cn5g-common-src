@@ -13,9 +13,7 @@
 
 #include "Cause.h"
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 Cause::Cause() {}
 
@@ -40,6 +38,4 @@ void from_json(const nlohmann::json& j, Cause& o) {
   j.get_to(o.cause);
 }
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

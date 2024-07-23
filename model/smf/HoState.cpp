@@ -13,9 +13,7 @@
 
 #include "HoState.h"
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 HoState::HoState() {}
 
@@ -34,6 +32,4 @@ void from_json(const nlohmann::json& j, HoState& o) {
   o.state = j.get<std::string>();
 }
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

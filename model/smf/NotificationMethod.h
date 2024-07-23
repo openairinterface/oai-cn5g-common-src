@@ -21,9 +21,7 @@
 
 #include <nlohmann/json.hpp>
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 /// <summary>
 /// Possible values are - PERIODIC - ONE_TIME - ON_EVENT_DETECTION
@@ -44,8 +42,6 @@ class NotificationMethod {
  protected:
 };
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf
 
 #endif /* NotificationMethod_H_ */

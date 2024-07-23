@@ -22,9 +22,7 @@
 #include "NotificationCause.h"
 #include <nlohmann/json.hpp>
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 /// <summary>
 ///
@@ -59,8 +57,6 @@ class QosFlowNotifyItem {
   NotificationCause m_NotificationCause;
 };
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf
 
 #endif /* QosFlowNotifyItem_H_ */

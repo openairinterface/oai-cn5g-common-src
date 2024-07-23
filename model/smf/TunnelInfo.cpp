@@ -13,9 +13,7 @@
 
 #include "TunnelInfo.h"
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 TunnelInfo::TunnelInfo() {
   m_Ipv4Addr      = "";
@@ -82,6 +80,4 @@ void TunnelInfo::setGtpTeid(std::string const& value) {
   m_GtpTeid = value;
 }
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

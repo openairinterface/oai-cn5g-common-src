@@ -29,9 +29,7 @@
 #include <vector>
 #include <nlohmann/json.hpp>
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 /// <summary>
 ///
@@ -148,8 +146,6 @@ class SmContextUpdatedData {
   bool m_CauseIsSet;
 };
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf
 
 #endif /* SmContextUpdatedData_H_ */

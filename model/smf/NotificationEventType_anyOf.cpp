@@ -16,7 +16,7 @@
 #include <stdexcept>
 #include <sstream>
 
-namespace oai::smf_server::model {
+namespace oai::model::smf {
 
 NotificationEventType_anyOf::NotificationEventType_anyOf() {}
 
@@ -109,4 +109,4 @@ void NotificationEventType_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::smf_server::model
+}  // namespace oai::model::smf

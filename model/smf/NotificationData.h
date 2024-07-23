@@ -28,7 +28,7 @@
 #include <nlohmann/json.hpp>
 
 // TODO move to common-src (NRF model)
-namespace oai::smf_server::model {
+namespace oai::model::smf {
 
 /// <summary>
 /// Data sent in notifications from NRF to subscribed NF Instances
@@ -65,8 +65,8 @@ class NotificationData {
   /// <summary>
   ///
   /// </summary>
-  oai::smf_server::model::NotificationEventType getEvent() const;
-  void setEvent(oai::smf_server::model::NotificationEventType const& value);
+  oai::model::smf::NotificationEventType getEvent() const;
+  void setEvent(oai::model::smf::NotificationEventType const& value);
   /// <summary>
   ///
   /// </summary>
@@ -75,8 +75,8 @@ class NotificationData {
   /// <summary>
   ///
   /// </summary>
-  oai::smf_server::model::NFProfile getNfProfile() const;
-  void setNfProfile(oai::smf_server::model::NFProfile const& value);
+  oai::model::smf::NFProfile getNfProfile() const;
+  void setNfProfile(oai::model::smf::NFProfile const& value);
   bool nfProfileIsSet() const;
   void unsetNfProfile();
   /// <summary>
@@ -90,9 +90,8 @@ class NotificationData {
   /// <summary>
   ///
   /// </summary>
-  oai::smf_server::model::ConditionEventType getConditionEvent() const;
-  void setConditionEvent(
-      oai::smf_server::model::ConditionEventType const& value);
+  oai::model::smf::ConditionEventType getConditionEvent() const;
+  void setConditionEvent(oai::model::smf::ConditionEventType const& value);
   bool conditionEventIsSet() const;
   void unsetConditionEvent();
 
@@ -100,18 +99,18 @@ class NotificationData {
   friend void from_json(const nlohmann::json& j, NotificationData& o);
 
  protected:
-  oai::smf_server::model::NotificationEventType m_Event;
+  oai::model::smf::NotificationEventType m_Event;
 
   std::string m_NfInstanceUri;
 
-  oai::smf_server::model::NFProfile m_NfProfile;
+  oai::model::smf::NFProfile m_NfProfile;
   bool m_NfProfileIsSet;
   std::vector<oai::model::common::ChangeItem> m_ProfileChanges;
   bool m_ProfileChangesIsSet;
-  oai::smf_server::model::ConditionEventType m_ConditionEvent;
+  oai::model::smf::ConditionEventType m_ConditionEvent;
   bool m_ConditionEventIsSet;
 };
 
-}  // namespace oai::smf_server::model
+}  // namespace oai::model::smf
 
 #endif /* NotificationData_H_ */

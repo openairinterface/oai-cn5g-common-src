@@ -13,9 +13,7 @@
 
 #include "QosFlowAddModifyRequestItem.h"
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 QosFlowAddModifyRequestItem::QosFlowAddModifyRequestItem() {
   m_Qfi                     = 0;
@@ -123,6 +121,4 @@ void QosFlowAddModifyRequestItem::unsetQosFlowProfile() {
   m_QosFlowProfileIsSet = false;
 }
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

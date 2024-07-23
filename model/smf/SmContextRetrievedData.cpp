@@ -13,9 +13,7 @@
 
 #include "SmContextRetrievedData.h"
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 SmContextRetrievedData::SmContextRetrievedData() {
   m_UeEpsPdnConnection = "";
@@ -62,6 +60,4 @@ void SmContextRetrievedData::unsetSmContext() {
   m_SmContextIsSet = false;
 }
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

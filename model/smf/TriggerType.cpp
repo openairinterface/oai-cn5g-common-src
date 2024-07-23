@@ -13,9 +13,7 @@
 
 #include "TriggerType.h"
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 TriggerType::TriggerType() {}
 
@@ -31,6 +29,4 @@ void to_json(nlohmann::json& j, const TriggerType& o) {
 
 void from_json(const nlohmann::json& j, TriggerType& o) {}
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

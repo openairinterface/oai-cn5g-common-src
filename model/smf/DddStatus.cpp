@@ -13,9 +13,7 @@
 
 #include "DddStatus.h"
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 DddStatus::DddStatus() {}
 
@@ -31,6 +29,4 @@ void to_json(nlohmann::json& j, const DddStatus& o) {
 
 void from_json(const nlohmann::json& j, DddStatus& o) {}
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

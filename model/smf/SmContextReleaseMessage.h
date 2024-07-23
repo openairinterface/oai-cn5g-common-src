@@ -23,9 +23,7 @@
 #include <string>
 #include <nlohmann/json.hpp>
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 /// <summary>
 ///
@@ -64,8 +62,6 @@ class SmContextReleaseMessage {
   bool m_BinaryDataN2SmInformationIsSet;
 };
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf
 
 #endif /* Sm_Context_Release_Message_H_ */

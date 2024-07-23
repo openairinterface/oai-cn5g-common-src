@@ -27,9 +27,7 @@
 #include "NonDynamic5Qi.h"
 #include <nlohmann/json.hpp>
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 /// <summary>
 ///
@@ -113,8 +111,6 @@ class QosFlowProfile {
   bool m_AdditionalQosFlowInfoIsSet;
 };
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf
 
 #endif /* QosFlowProfile_H_ */

@@ -13,9 +13,7 @@
 
 #include "QosFlowItem.h"
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 QosFlowItem::QosFlowItem() {
   m_Qfi        = 0;
@@ -62,6 +60,4 @@ void QosFlowItem::unsetCause() {
   m_CauseIsSet = false;
 }
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

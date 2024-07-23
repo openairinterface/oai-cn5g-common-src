@@ -16,7 +16,7 @@
 #include <stdexcept>
 #include <sstream>
 
-namespace oai::smf_server::model {
+namespace oai::model::smf {
 
 ConditionEventType_anyOf::ConditionEventType_anyOf() {}
 
@@ -99,4 +99,4 @@ void ConditionEventType_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::smf_server::model
+}  // namespace oai::model::smf

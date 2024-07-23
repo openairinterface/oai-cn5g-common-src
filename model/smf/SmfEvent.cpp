@@ -13,9 +13,7 @@
 
 #include "SmfEvent.h"
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 SmfEvent::SmfEvent() {}
 
@@ -43,6 +41,4 @@ void from_json(const nlohmann::json& j, SmfEvent& o) {
   o.set_value(j.get<std::string>());
 }
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

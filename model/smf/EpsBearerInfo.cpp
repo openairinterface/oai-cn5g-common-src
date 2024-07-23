@@ -13,9 +13,7 @@
 
 #include "EpsBearerInfo.h"
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 EpsBearerInfo::EpsBearerInfo() {
   m_Ebi = 0;
@@ -59,6 +57,4 @@ void EpsBearerInfo::setBearerLevelQoS(std::string const& value) {
   m_BearerLevelQoS = value;
 }
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

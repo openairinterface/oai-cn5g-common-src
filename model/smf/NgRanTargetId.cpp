@@ -13,9 +13,7 @@
 
 #include "NgRanTargetId.h"
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 using namespace oai::model::common;
 
@@ -51,6 +49,4 @@ void NgRanTargetId::setTai(oai::model::common::Tai const& value) {
   m_Tai = value;
 }
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

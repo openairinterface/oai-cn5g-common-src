@@ -13,9 +13,7 @@
 
 #include "HsmfUpdateData.h"
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 using namespace oai::model::common;
 
@@ -566,6 +564,4 @@ void HsmfUpdateData::unsetMaReleaseInd() {
   m_MaReleaseIndIsSet = false;
 }
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

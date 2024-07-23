@@ -21,7 +21,7 @@
 
 #include <nlohmann/json.hpp>
 
-namespace oai::smf_server::model {
+namespace oai::model::smf {
 
 /// <summary>
 ///
@@ -76,6 +76,6 @@ class ConditionEventType_anyOf {
           INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::smf_server::model
+}  // namespace oai::model::smf
 
 #endif /* ConditionEventType_anyOf_H_ */

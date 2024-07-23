@@ -13,9 +13,7 @@
 
 #include "MmeCapabilities.h"
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 MmeCapabilities::MmeCapabilities() {
   m_NonIpSupported      = false;
@@ -54,6 +52,4 @@ void MmeCapabilities::unsetNonIpSupported() {
   m_NonIpSupportedIsSet = false;
 }
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

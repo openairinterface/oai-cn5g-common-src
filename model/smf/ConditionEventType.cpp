@@ -16,7 +16,7 @@
 
 #include <sstream>
 
-namespace oai::smf_server::model {
+namespace oai::model::smf {
 
 ConditionEventType::ConditionEventType() {}
 
@@ -80,4 +80,4 @@ void ConditionEventType::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::smf_server::model
+}  // namespace oai::model::smf

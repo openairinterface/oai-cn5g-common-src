@@ -13,9 +13,7 @@
 
 #include "EpsPdnCnxInfo.h"
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 EpsPdnCnxInfo::EpsPdnCnxInfo() {
   m_PgwNodeNameIsSet = false;
@@ -61,6 +59,4 @@ void EpsPdnCnxInfo::unsetPgwNodeName() {
   m_PgwNodeNameIsSet = false;
 }
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

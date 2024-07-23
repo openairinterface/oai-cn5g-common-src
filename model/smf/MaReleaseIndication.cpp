@@ -13,9 +13,7 @@
 
 #include "MaReleaseIndication.h"
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 MaReleaseIndication::MaReleaseIndication() {}
 
@@ -31,6 +29,4 @@ void to_json(nlohmann::json& j, const MaReleaseIndication& o) {
 
 void from_json(const nlohmann::json& j, MaReleaseIndication& o) {}
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

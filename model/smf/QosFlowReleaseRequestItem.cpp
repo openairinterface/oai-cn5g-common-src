@@ -13,9 +13,7 @@
 
 #include "QosFlowReleaseRequestItem.h"
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 QosFlowReleaseRequestItem::QosFlowReleaseRequestItem() {
   m_Qfi                     = 0;
@@ -83,6 +81,4 @@ void QosFlowReleaseRequestItem::unsetQosFlowDescription() {
   m_QosFlowDescriptionIsSet = false;
 }
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

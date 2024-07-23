@@ -13,9 +13,7 @@
 
 #include "QosFlowNotifyItem.h"
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 QosFlowNotifyItem::QosFlowNotifyItem() {
   m_Qfi = 0;
@@ -51,6 +49,4 @@ void QosFlowNotifyItem::setNotificationCause(NotificationCause const& value) {
   m_NotificationCause = value;
 }
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

@@ -13,9 +13,7 @@
 
 #include "RequestType.h"
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 RequestType::RequestType() {}
 
@@ -31,6 +29,4 @@ void to_json(nlohmann::json& j, const RequestType& o) {
 
 void from_json(const nlohmann::json& j, RequestType& o) {}
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

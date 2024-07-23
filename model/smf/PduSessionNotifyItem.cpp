@@ -13,9 +13,7 @@
 
 #include "PduSessionNotifyItem.h"
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 PduSessionNotifyItem::PduSessionNotifyItem() {}
 
@@ -42,6 +40,4 @@ void PduSessionNotifyItem::setNotificationCause(
   m_NotificationCause = value;
 }
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

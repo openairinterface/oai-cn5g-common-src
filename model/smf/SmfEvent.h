@@ -24,9 +24,7 @@
 
 #include <nlohmann/json.hpp>
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 /// <summary>
 /// Possible values are - AC_TY_CH: Access Type Change - UP_PATH_CH: UP Path
@@ -55,8 +53,6 @@ class SmfEvent {
   std::string value;
 };
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf
 
 #endif /* SmfEvent_H_ */

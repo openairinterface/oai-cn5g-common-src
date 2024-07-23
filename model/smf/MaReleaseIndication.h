@@ -21,9 +21,7 @@
 
 #include <nlohmann/json.hpp>
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 /// <summary>
 /// Possible values are   - REL_MAPDU_OVER_3GPP   - REL_MAPDU_OVER_N3GPP
@@ -44,8 +42,6 @@ class MaReleaseIndication {
  protected:
 };
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf
 
 #endif /* MaReleaseIndication_H_ */

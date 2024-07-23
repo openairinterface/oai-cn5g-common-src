@@ -13,9 +13,7 @@
 
 #include "QosFlowProfile.h"
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 using namespace oai::model::common;
 
@@ -161,6 +159,4 @@ void QosFlowProfile::unsetAdditionalQosFlowInfo() {
   m_AdditionalQosFlowInfoIsSet = false;
 }
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

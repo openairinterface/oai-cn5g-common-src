@@ -13,9 +13,7 @@
 
 #include "SmContextType.h"
 
-namespace oai {
-namespace smf_server {
-namespace model {
+namespace oai::model::smf {
 
 SmContextType::SmContextType() {}
 
@@ -31,6 +29,4 @@ void to_json(nlohmann::json& j, const SmContextType& o) {
 
 void from_json(const nlohmann::json& j, SmContextType& o) {}
 
-}  // namespace model
-}  // namespace smf_server
-}  // namespace oai
+}  // namespace oai::model::smf

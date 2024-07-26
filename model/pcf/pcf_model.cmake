@@ -19,8 +19,6 @@
 #      contact@openairinterface.org
 ################################################################################
 
-# TODO continue here to compare models, next one is PduSessionRelCause
-
 SET(PCF_MODEL_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/model/pcf)
 
 include_directories(${PCF_MODEL_DIR})

@@ -83,10 +83,12 @@ void NasKeySetIdentifier::SetNasKeyIdentifier(uint8_t id) {
 
 //------------------------------------------------------------------------------
 bool NasKeySetIdentifier::GetTypeOfSecurityContext() const {
+  NasKeySetIdentifier::GetValue();
   return tsc_;
 }
 
 //------------------------------------------------------------------------------
 uint8_t NasKeySetIdentifier::GetNasKeyIdentifier() const {
+  NasKeySetIdentifier::GetValue();
   return key_id_;
 }

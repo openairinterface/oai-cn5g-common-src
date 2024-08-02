@@ -44,10 +44,12 @@ class NasKeySetIdentifier : public Type1NasIe {
   void Get(bool& tsc, uint8_t& key_id);
 
   void SetTypeOfSecurityContext(bool type);
-  bool GetTypeOfSecurityContext();
+  bool GetTypeOfSecurityContext() const;
 
   void SetNasKeyIdentifier(uint8_t id);
-  uint8_t GetNasKeyIdentifier();
+  uint8_t GetNasKeyIdentifier() const;
+
+  uint8_t GetNgKsi() const;
 
  private:
   void SetValue() override;

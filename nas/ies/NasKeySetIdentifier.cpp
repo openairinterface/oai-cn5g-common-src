@@ -72,23 +72,29 @@ void NasKeySetIdentifier::GetValue() {
 //------------------------------------------------------------------------------
 void NasKeySetIdentifier::SetTypeOfSecurityContext(bool type) {
   tsc_ = type;
-  NasKeySetIdentifier::SetValue();  // Update value
+  SetValue();  // Update value
 }
 
 //------------------------------------------------------------------------------
 void NasKeySetIdentifier::SetNasKeyIdentifier(uint8_t id) {
   key_id_ = 0x07 & id;
-  NasKeySetIdentifier::SetValue();  // Update value
+  SetValue();  // Update value
 }
 
 //------------------------------------------------------------------------------
-bool NasKeySetIdentifier::GetTypeOfSecurityContext() {
-  NasKeySetIdentifier::GetValue();
+bool NasKeySetIdentifier::GetTypeOfSecurityContext() const {
   return tsc_;
 }
 
 //------------------------------------------------------------------------------
-uint8_t NasKeySetIdentifier::GetNasKeyIdentifier() {
-  NasKeySetIdentifier::GetValue();
+uint8_t NasKeySetIdentifier::GetNasKeyIdentifier() const {
   return key_id_;
+}
+
+//------------------------------------------------------------------------------
+uint8_t NasKeySetIdentifier::GetNgKsi() const {
+  if (tsc_)
+    return 0b1000 | (0x07 & key_id_);
+  else
+    return 0x07 & key_id_;
 }

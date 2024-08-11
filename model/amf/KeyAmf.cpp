@@ -12,6 +12,9 @@
  */
 
 #include "KeyAmf.h"
+#include "Helpers.h"
+
+#include <sstream>
 
 namespace oai::model::amf {
 
@@ -19,10 +22,37 @@ KeyAmf::KeyAmf() {
   m_KeyVal = "";
 }
 
-KeyAmf::~KeyAmf() {}
+void KeyAmf::validate() const {
+  std::stringstream msg;
+  if (!validate(msg)) {
+    throw oai::model::common::helpers::ValidationException(msg.str());
+  }
+}
 
-void KeyAmf::validate() {
-  // TODO: implement validation
+bool KeyAmf::validate(std::stringstream& msg) const {
+  return validate(msg, "");
+}
+
+bool KeyAmf::validate(
+    std::stringstream& msg, const std::string& pathPrefix) const {
+  bool success                  = true;
+  const std::string _pathPrefix = pathPrefix.empty() ? "KeyAmf" : pathPrefix;
+
+  return success;
+}
+
+bool KeyAmf::operator==(const KeyAmf& rhs) const {
+  return
+
+      (getKeyType() == rhs.getKeyType()) &&
+
+      (getKeyVal() == rhs.getKeyVal())
+
+          ;
+}
+
+bool KeyAmf::operator!=(const KeyAmf& rhs) const {
+  return !(*this == rhs);
 }
 
 void to_json(nlohmann::json& j, const KeyAmf& o) {
@@ -36,10 +66,10 @@ void from_json(const nlohmann::json& j, KeyAmf& o) {
   j.at("keyVal").get_to(o.m_KeyVal);
 }
 
-KeyAmfType KeyAmf::getKeyType() const {
+oai::model::amf::KeyAmfType KeyAmf::getKeyType() const {
   return m_KeyType;
 }
-void KeyAmf::setKeyType(KeyAmfType const& value) {
+void KeyAmf::setKeyType(oai::model::amf::KeyAmfType const& value) {
   m_KeyType = value;
 }
 std::string KeyAmf::getKeyVal() const {

@@ -19,6 +19,7 @@
 #ifndef ScType_H_
 #define ScType_H_
 
+#include "ScType_anyOf.h"
 #include <nlohmann/json.hpp>
 
 namespace oai::model::amf {
@@ -29,17 +30,43 @@ namespace oai::model::amf {
 class ScType {
  public:
   ScType();
-  virtual ~ScType();
+  virtual ~ScType() = default;
 
-  void validate();
+  /// <summary>
+  /// Validate the current data in the model. Throws a ValidationException on
+  /// failure.
+  /// </summary>
+  void validate() const;
+
+  /// <summary>
+  /// Validate the current data in the model. Returns false on error and writes
+  /// an error message into the given stringstream.
+  /// </summary>
+  bool validate(std::stringstream& msg) const;
+
+  /// <summary>
+  /// Helper overload for validate. Used when one model stores another model and
+  /// calls it's validate. Not meant to be called outside that case.
+  /// </summary>
+  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+
+  bool operator==(const ScType& rhs) const;
+  bool operator!=(const ScType& rhs) const;
 
   /////////////////////////////////////////////
   /// ScType members
 
+  ScType_anyOf getValue() const;
+  void setValue(ScType_anyOf value);
+  ScType_anyOf::eScType_anyOf getEnumValue() const;
+  void setEnumValue(ScType_anyOf::eScType_anyOf value);
   friend void to_json(nlohmann::json& j, const ScType& o);
   friend void from_json(const nlohmann::json& j, ScType& o);
+  friend void to_json(nlohmann::json& j, const ScType_anyOf& o);
+  friend void from_json(const nlohmann::json& j, ScType_anyOf& o);
 
  protected:
+  ScType_anyOf m_value;
 };
 
 }  // namespace oai::model::amf

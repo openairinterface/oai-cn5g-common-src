@@ -31,9 +31,28 @@ namespace oai::model::amf {
 class KeyAmf {
  public:
   KeyAmf();
-  virtual ~KeyAmf();
+  virtual ~KeyAmf() = default;
 
-  void validate();
+  /// <summary>
+  /// Validate the current data in the model. Throws a ValidationException on
+  /// failure.
+  /// </summary>
+  void validate() const;
+
+  /// <summary>
+  /// Validate the current data in the model. Returns false on error and writes
+  /// an error message into the given stringstream.
+  /// </summary>
+  bool validate(std::stringstream& msg) const;
+
+  /// <summary>
+  /// Helper overload for validate. Used when one model stores another model and
+  /// calls it's validate. Not meant to be called outside that case.
+  /// </summary>
+  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+
+  bool operator==(const KeyAmf& rhs) const;
+  bool operator!=(const KeyAmf& rhs) const;
 
   /////////////////////////////////////////////
   /// KeyAmf members
@@ -41,8 +60,8 @@ class KeyAmf {
   /// <summary>
   ///
   /// </summary>
-  KeyAmfType getKeyType() const;
-  void setKeyType(KeyAmfType const& value);
+  oai::model::amf::KeyAmfType getKeyType() const;
+  void setKeyType(oai::model::amf::KeyAmfType const& value);
   /// <summary>
   ///
   /// </summary>
@@ -53,7 +72,7 @@ class KeyAmf {
   friend void from_json(const nlohmann::json& j, KeyAmf& o);
 
  protected:
-  KeyAmfType m_KeyType;
+  oai::model::amf::KeyAmfType m_KeyType;
 
   std::string m_KeyVal;
 };

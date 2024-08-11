@@ -12,21 +12,69 @@
  */
 
 #include "ScType.h"
+#include "Helpers.h"
+
+#include <sstream>
 
 namespace oai::model::amf {
 
 ScType::ScType() {}
 
-ScType::~ScType() {}
+void ScType::validate() const {
+  std::stringstream msg;
+  if (!validate(msg)) {
+    throw oai::model::common::helpers::ValidationException(msg.str());
+  }
+}
 
-void ScType::validate() {
-  // TODO: implement validation
+bool ScType::validate(std::stringstream& msg) const {
+  return validate(msg, "");
+}
+
+bool ScType::validate(
+    std::stringstream& msg, const std::string& pathPrefix) const {
+  bool success                  = true;
+  const std::string _pathPrefix = pathPrefix.empty() ? "ScType" : pathPrefix;
+
+  if (!m_value.validate(msg)) {
+    success = false;
+  }
+  return success;
+}
+
+bool ScType::operator==(const ScType& rhs) const {
+  return
+
+      getValue() == rhs.getValue();
+}
+
+bool ScType::operator!=(const ScType& rhs) const {
+  return !(*this == rhs);
 }
 
 void to_json(nlohmann::json& j, const ScType& o) {
   j = nlohmann::json();
+  to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, ScType& o) {}
+void from_json(const nlohmann::json& j, ScType& o) {
+  from_json(j, o.m_value);
+}
+
+ScType_anyOf ScType::getValue() const {
+  return m_value;
+}
+
+void ScType::setValue(ScType_anyOf value) {
+  m_value = value;
+}
+
+ScType_anyOf::eScType_anyOf ScType::getEnumValue() const {
+  return m_value.getValue();
+}
+
+void ScType::setEnumValue(ScType_anyOf::eScType_anyOf value) {
+  m_value.setValue(value);
+}
 
 }  // namespace oai::model::amf

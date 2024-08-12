@@ -84,7 +84,7 @@ void NetworkName::SetTextString(const std::string& str) {
   // str = "Testing";
   // std::string packed_str;
   // util::sms_packing(str, packed_str);
-  // amf_conv::string_2_bstring(packed_str, text_string_);
+  // string_2_bstring(packed_str, text_string_);
 
   uint8_t* packed_str = (uint8_t*) calloc(7, sizeof(uint8_t));
   if (!packed_str) {

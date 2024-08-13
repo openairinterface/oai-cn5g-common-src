@@ -254,7 +254,7 @@ constexpr uint8_t KAccessTypeNon3gppAccess = 0x02;
 //------------------------------------------------------------------------------
 // lengths/name of the NAS IEs
 
-//
+// NAS IE
 constexpr uint8_t kType1NasIeLength         = 1;
 constexpr uint8_t kType1NasIeFormatTvLength = 1;
 constexpr uint8_t kType1NasIeFormatVLength  = 1;
@@ -417,21 +417,21 @@ constexpr uint8_t kAuthenticationFailureParameterContentLength =
 constexpr auto kAuthenticationFailureParameterIeName =
     "Authentication Failure Parameter";
 
-//
+// Authentication Parameter AUTN
 constexpr uint8_t kAuthenticationParameterAutnLength = 18;
 constexpr uint8_t kAuthenticationParameterAutnValueLength =
     kAuthenticationParameterAutnLength - 2;
 constexpr auto kAuthenticationParameterAutnIeName =
     "Authentication Parameter AUTN";
 
-//
+// Authentication Parameter RAND
 constexpr uint8_t kAuthenticationParameterRandLength = 17;
 constexpr uint8_t kAuthenticationParameterRandValueLength =
     kAuthenticationParameterRandLength - 1;
 constexpr auto kAuthenticationParameterRandIeName =
     "Authentication Parameter RAND";
 
-//
+// Authentication Response Parameter
 constexpr uint8_t kAuthenticationResponseParameterMinimumLength = 6;
 constexpr uint8_t kAuthenticationResponseParameterContentMinimumLength =
     kAuthenticationResponseParameterMinimumLength -
@@ -440,34 +440,34 @@ constexpr uint8_t kAuthenticationResponseParameterMaximumLength = 18;
 constexpr auto kAuthenticationResponseParameterIeName =
     "Authentication Response Parameter";
 
-//
+// Configuration Update Indication
 constexpr auto kConfigurationUpdateIndicationIeName =
     "Configuration Update Indication";
 
-//
+// Control Plane Service Type
 constexpr auto kControlPlaneServiceTypeIeName = "Control Plane Service Type";
 
-//
+// DNN
 constexpr uint8_t kDnnMinimumLength = 3;
 constexpr uint8_t kDnnContentMinimumLength =
     kDnnMinimumLength - 2;  // Minimum length - 2 octets for IEI/Length
 constexpr uint8_t kDnnMaximumLength = 102;
 constexpr auto kDnnIeName           = "DNN";
 
-//
+// EAP Message
 constexpr uint8_t kEapMessageMinimumLength = 7;
 constexpr uint8_t kEapMessageContentMinimumLength =
     kEapMessageMinimumLength - 3;  // Minimum length - 3 octets for IEI/Length
 constexpr uint16_t kEapMessageMaximumLength = 1503;
 constexpr auto kEapMessageIeName            = "EAP Message";
 
-//
+// EPS Bearer Context Status
 constexpr uint8_t kEpsBearerContextStatusLength = 4;
 constexpr uint8_t kEpsBearerContextStatusContentLength =
     kEpsBearerContextStatusLength - 2;  // Length - 2 octets for IEI/Length
 constexpr auto kEpsBearerContextStatusIeName = "EPS Bearer Context Status";
 
-//
+// EPS NAS Message Container
 constexpr uint8_t kEpsNasMessageContainerMinimumLength = 4;
 constexpr uint8_t kEpsNasMessageContainerContentMinimumLength =
     kEpsNasMessageContainerMinimumLength -
@@ -475,40 +475,40 @@ constexpr uint8_t kEpsNasMessageContainerContentMinimumLength =
 constexpr uint8_t kEpsNasMessageContainer    = 253;
 constexpr auto kEpsNasMessageContainerIeName = "EPS NAS Message Container";
 
-//
+// EPS NAS Security Algorithms
 constexpr uint8_t kEpsNasSecurityAlgorithmsLength = 2;
 constexpr auto kEpsNasSecurityAlgorithmsIeName = "EPS NAS Security Algorithms";
 
-//
+// Extended DRX Parameters
 constexpr uint8_t kExtendedDrxParametersLength = 3;
 constexpr uint8_t kExtendedDrxParametersContentLength =
     kExtendedDrxParametersLength -
     2;  // Minimum length - 2 octets for IEI/Length
 constexpr auto kExtendedDrxParametersIeName = "Extended DRX Parameters";
 
-//
+// Extended Protocol Discriminator
 constexpr uint8_t kExtendedProtocolDiscriminatorLength = 1;
 constexpr auto kExtendedProtocolDiscriminatorIeName =
     "Extended Protocol Discriminator";
 
-//
+// GPRS Timer 2
 constexpr uint8_t kGprsTimer2Length = 3;
 constexpr uint8_t kGprsTimer2ContentLength =
     kGprsTimer2Length - 2;  // Length - 2 octets for IEI/Length
 constexpr auto kGprsTimer2IeName = "GPRS Timer 2";
 
-//
+// GPRS Timer 3
 constexpr uint8_t kGprsTimer3Length = 3;
 constexpr uint8_t kGprsTimer3ContentLength =
     kGprsTimer3Length - 2;  // Length - 2 octets for IEI/Length
 constexpr auto kGprsTimer3IeName = "GPRS Timer 3";
 
-//
+// IMEISV Request
 constexpr auto kImeisvRequestIeName = "IMEISV Request";
 
 // LADN
 
-//
+// LADN Indication
 constexpr uint8_t kLadnIndicationMinimumLength = 3;
 constexpr uint8_t kLadnIndicationContentMinimumLength =
     kLadnIndicationMinimumLength -
@@ -517,7 +517,7 @@ constexpr uint16_t kLadnIndicationMaximumLength        = 811;
 constexpr uint8_t kLadnIndicationMaximumSupportedLadns = 8;
 constexpr auto kLadnIndicationIeName                   = "LADN Indication";
 
-//
+// LADN Information
 constexpr uint8_t kLadnInformationMinimumLength = 3;
 constexpr uint8_t kLadnInformationContentMinimumLength =
     kLadnInformationMinimumLength -
@@ -526,17 +526,17 @@ constexpr uint16_t kLadnInformationMaximumLength        = 1715;
 constexpr uint8_t kLadnInformationMaximumSupportedLadns = 8;
 constexpr auto kLadnInformationIeName                   = "LADN Information";
 
-//
+// MA PDU Session Information
 constexpr auto kMaPduSessionInformationIeName = "MA PDU Session Information";
 
-//
+// MICO Indication
 constexpr uint8_t kMicoIndicationIELength = 1;
 constexpr auto kMicoIndicationIeName      = "MICO Indication";
 
-//
+// NAS Key Set Identifier
 constexpr auto kNasKeySetIdentifierName = "NAS Key Set Identifier";
 
-//
+// NAS Message Container
 constexpr uint8_t kNasMessageContainerMinimumLength = 3;
 constexpr uint8_t kNasMessageContainerContentMinimumLength =
     kNasMessageContainerMinimumLength -
@@ -544,41 +544,41 @@ constexpr uint8_t kNasMessageContainerContentMinimumLength =
 constexpr uint32_t kNasMessageContainerMaximumLength = 65535;
 constexpr auto kNasMessageContainerIeName            = "NAS Message Container";
 
-//
+// NAS Message Type
 constexpr uint8_t kNasMessageTypeIeSize = 1;
 constexpr auto kNasMessageTypeIeName    = "NAS Message Type";
 
-//
+// NAS Security Algorithms
 constexpr uint8_t kNasSecurityAlgorithmsLength = 2;
 constexpr auto kNasSecurityAlgorithmsIeName    = "NAS Security Algorithms";
 
-//
+// Network Name
 constexpr uint8_t kNetworkNameMinimumLength = 3;
 constexpr uint8_t kNetworkNameContentMinimumLength =
     kNetworkNameMinimumLength - 2;  // Minimum length - 2 octets for IEI/Length
 constexpr auto kNetworkNameIeName = "Network Name";
 
-//
+// Network Slicing Indication
 constexpr uint8_t kNetworkSlicingIndicationLength = 1;
 constexpr auto kNetworkSlicingIndicationIeName = "Network Slicing Indication";
 
-//
+// Non-3GPP NW Provided Policies
 constexpr uint8_t kNon3gppNwProvidedPoliciesLength = 1;
 constexpr auto kNon3gppNwProvidedPoliciesIeName =
     "Non-3GPP NW Provided Policies";
 
-//
+// NSSAI
 constexpr uint8_t kNssaiMinimumLength = 4;
 constexpr uint8_t kNssaiContentMinimumLength =
     kNssaiMinimumLength - 2;  // Minimum length - 2 octets for IEI/Length
 constexpr uint8_t kNssaiMaximumLength = 146;
 constexpr auto kNssaiIeName           = "NSSAI";
 
-//
+// NSSAI Inclusion Mode
 constexpr uint8_t kNssaiInclusionModeLength = 1;
 constexpr auto kNssaiInclusionModeIeName    = "NSSAI Inclusion Mode";
 
-//
+// Payload Container
 constexpr uint8_t kPayloadContainerMinimumLength = 4;
 constexpr uint8_t kPayloadContainerContentMinimumLength =
     kPayloadContainerMinimumLength -
@@ -586,15 +586,15 @@ constexpr uint8_t kPayloadContainerContentMinimumLength =
 constexpr uint32_t kPayloadContainerMaximumLength = 65538;
 constexpr auto kPayloadContainerIeName            = "Payload Container";
 
-//
+// Payload Container Type
 constexpr uint8_t kPayloadContainerTypeLength = 1;
 constexpr auto kPayloadContainerTypeIeName    = "Payload Container Type";
 
-//
+// PDU Session Identity 2
 constexpr uint8_t kPduSessionIdentity2Length = 2;
 constexpr auto kPduSessionIdentity2IeName    = "PDU Session Identity 2";
 
-//
+// PDU Session Reactivation Result
 constexpr uint8_t kPduSessionReactivationResultMinimumLength = 4;
 constexpr uint8_t kPduSessionReactivationResultContentMinimumLength =
     kPduSessionReactivationResultMinimumLength -
@@ -603,7 +603,7 @@ constexpr uint8_t kPduSessionReactivationResultMaximumLength = 34;
 constexpr auto kPduSessionReactivationResultIeName =
     "PDU Session Reactivation Result";
 
-//
+// PDU Session Reactivation Result Error Cause
 constexpr uint8_t kPduSessionReactivationResultErrorCauseMinimumLength = 5;
 constexpr uint8_t kPduSessionReactivationResultErrorCauseContentMinimumLength =
     kPduSessionReactivationResultErrorCauseMinimumLength -
@@ -612,7 +612,7 @@ constexpr uint32_t kPduSessionReactivationResultErrorCauseMaximumLength = 515;
 constexpr auto kPduSessionReactivationResultErrorCauseIeName =
     "PDU Session Reactivation Result Error Cause";
 
-//
+// PDU Session Status
 constexpr uint8_t kPduSessionStatusMinimumLength = 4;
 constexpr uint8_t kPduSessionStatusContentMinimumLength =
     kPduSessionStatusMinimumLength -
@@ -620,14 +620,14 @@ constexpr uint8_t kPduSessionStatusContentMinimumLength =
 constexpr uint8_t kPduSessionStatusMaximumLength = 34;
 constexpr auto kPduSessionStatusIeName           = "PDU Session Status";
 
-//
+// PLMN List
 constexpr uint8_t kPlmnListMinimumLength = 5;
 constexpr uint8_t kPlmnListContentMinimumLength =
     kPlmnListMinimumLength - 2;  // Minimum length - 2 octets for IEI/Length
 constexpr uint8_t kPlmnListMaximumLength = 47;
 constexpr auto kPlmnListIeName           = "PLMN List";
 
-//
+// Rejected NSSAI
 constexpr uint8_t kRejectedNssaiMinimumLength = 4;
 constexpr uint8_t kRejectedNssaiContentMinimumLength =
     kRejectedNssaiMinimumLength -
@@ -637,14 +637,14 @@ constexpr auto kRejectedNssaiIeName           = "Rejected NSSAI";
 
 // RejectedSNssai
 
-//
+// Release Assistance Indication
 constexpr auto kReleaseAssistanceIndicationIeName =
     "Release Assistance Indication";
 
-//
+// Request Type
 constexpr auto kRequestTypeIeName = "Request Type";
 
-//
+// S1 UE Security Capability
 constexpr uint8_t kS1UeSecurityCapabilityMinimumLength = 4;
 constexpr uint8_t kS1UeSecurityCapabilityContentMinimumLength =
     kS1UeSecurityCapabilityMinimumLength -
@@ -652,11 +652,11 @@ constexpr uint8_t kS1UeSecurityCapabilityContentMinimumLength =
 constexpr uint8_t kS1UeSecurityCapabilityMaximumLength = 7;
 constexpr auto kS1UeSecurityCapabilityIeName = "S1 UE Security Capability";
 
-//
+// Security Header Type
 constexpr uint8_t kSecurityHeaderTypeLength = 1;
 constexpr auto kSecurityHeaderTypeIeName    = "Security Header Type";
 
-//
+// Service Area List
 constexpr uint8_t kServiceAreaListMinimumLength = 6;
 constexpr uint8_t kServiceAreaListContentMinimumLength =
     kServiceAreaListMinimumLength -
@@ -665,17 +665,17 @@ constexpr uint8_t kServiceAreaListMaximumLength        = 114;
 constexpr uint8_t kServiceAreaListMaximumSupportedTAIs = 16;
 constexpr auto kServiceAreaListIeName                  = "Service Area List";
 
-//
+// Service Type
 constexpr auto kServiceTypeIeName = "Service Type";
 
-//
+// S-NSSAI
 constexpr uint8_t kSNssaiMinimumLength = 3;
 constexpr uint8_t kSNssaiContentMinimumLength =
     kSNssaiMinimumLength - 2;  // Minimum length - 2 octets for IEI/Length
 constexpr uint8_t kSNssaiMaximumLength = 10;
 constexpr auto kSNssaiIeName           = "S-NSSAI";
 
-//
+// SOR Transparent Container
 constexpr uint8_t kSorTransparentContainerMinimumLength = 20;
 constexpr uint8_t kSorTransparentContainerContentMinimumLength =
     kSorTransparentContainerMinimumLength -
@@ -683,7 +683,7 @@ constexpr uint8_t kSorTransparentContainerContentMinimumLength =
 constexpr uint8_t kSorTransparentContainerIeMacLength = 16;
 constexpr auto kSorTransparentContainerIeName = "SOR Transparent Container";
 
-//
+// UE Network Capability
 constexpr uint8_t kUeNetworkCapabilityMinimumLength = 4;
 constexpr uint8_t kUeNetworkCapabilityContentMinimumLength =
     kUeNetworkCapabilityMinimumLength -
@@ -691,14 +691,14 @@ constexpr uint8_t kUeNetworkCapabilityContentMinimumLength =
 constexpr uint8_t kUeNetworkCapabilityMaximumLength = 15;
 constexpr auto kUeNetworkCapabilityIeName           = "UE Network Capability";
 
-//
+// UE Radio Capability ID
 constexpr uint8_t kUeRadioCapabilityIdMinimumLength = 4;
 constexpr uint8_t kUeRadioCapabilityIdContentMinimumLength =
     kUeRadioCapabilityIdMinimumLength -
     2;  // Minimum length - 2 octets for IEI/Length
 constexpr auto kUeRadioCapabilityIdIeName = "UE Radio Capability ID";
 
-//
+// UE Security Capability
 constexpr uint8_t kUeSecurityCapabilityMinimumLength = 4;
 constexpr uint8_t kUeSecurityCapabilityContentMinimumLength =
     kUeSecurityCapabilityMinimumLength -
@@ -706,19 +706,19 @@ constexpr uint8_t kUeSecurityCapabilityContentMinimumLength =
 constexpr uint8_t kUeSecurityCapabilityMaximumLength = 10;
 constexpr auto kUeSecurityCapabilityIeName           = "UE Security Capability";
 
-//
+// UE Status
 constexpr uint8_t kUeStatusIeLength = 3;
 constexpr uint8_t kUeStatusIeContentLength =
     kUeStatusIeLength - 2;  // Minimum length - 2 octets for IEI/Length
 constexpr auto kUeStatusIeName = "UE Status";
 
-//
+// UE's Usage Setting
 constexpr uint8_t kUeUsageSettingLength = 3;
 constexpr uint8_t kUeUsageSettingContentLength =
     kUeUsageSettingLength - 2;  // IE length - 2 octets for IEI/Length
 constexpr auto kUeUsageSettingIeName = "UE's Usage Setting";
 
-//
+// Uplink Data Status
 constexpr uint8_t kUplinkDataStatusMinimumLength = 4;
 constexpr uint8_t kUplinkDataStatusContentMinimumLength =
     kUplinkDataStatusMinimumLength -

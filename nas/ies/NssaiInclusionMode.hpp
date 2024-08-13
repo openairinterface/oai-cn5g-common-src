@@ -24,9 +24,6 @@
 
 #include "Type1NasIeFormatTv.hpp"
 
-constexpr uint8_t kNssaiInclusionModeLength = 1;
-constexpr auto kNssaiInclusionModeIeName    = "NSSAI Inclusion Mode";
-
 namespace oai::nas {
 
 class NssaiInclusionMode : public Type1NasIeFormatTv {

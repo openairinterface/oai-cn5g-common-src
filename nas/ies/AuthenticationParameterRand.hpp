@@ -24,12 +24,6 @@
 
 #include "Type3NasIe.hpp"
 
-constexpr uint8_t kAuthenticationParameterRandLength = 17;
-constexpr uint8_t kAuthenticationParameterRandValueLength =
-    kAuthenticationParameterRandLength - 1;
-constexpr auto kAuthenticationParameterRandIeName =
-    "Authentication Parameter RAND";
-
 namespace oai::nas {
 
 class AuthenticationParameterRand : public Type3NasIe {

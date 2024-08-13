@@ -24,7 +24,6 @@
 
 #include "NasIe.hpp"
 
-constexpr uint8_t kType3NasIeFormatTvLength = 1;
 namespace oai::nas {
 
 class Type3NasIe : public NasIe {

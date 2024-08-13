@@ -24,12 +24,6 @@
 
 #include "Type6NasIe.hpp"
 
-constexpr uint8_t kEapMessageMinimumLength = 7;
-constexpr uint8_t kEapMessageContentMinimumLength =
-    kEapMessageMinimumLength - 3;  // Minimum length - 3 octets for IEI/Length
-constexpr uint16_t kEapMessageMaximumLength = 1503;
-constexpr auto kEapMessageIeName            = "EAP Message";
-
 namespace oai::nas {
 
 class EapMessage : public Type6NasIe {

@@ -24,9 +24,6 @@
 
 #include "Type3NasIe.hpp"
 
-constexpr uint8_t kNasSecurityAlgorithmsLength = 2;
-constexpr auto kNasSecurityAlgorithmsIeName    = "NAS Security Algorithms";
-
 namespace oai::nas {
 
 class NasSecurityAlgorithms : public Type3NasIe {

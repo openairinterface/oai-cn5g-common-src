@@ -24,8 +24,6 @@
 
 #include "Type1NasIe.hpp"
 
-constexpr auto kControlPlaneServiceTypeIeName = "Control Plane Service Type";
-
 namespace oai::nas {
 
 class ControlPlaneServiceType : public Type1NasIe {

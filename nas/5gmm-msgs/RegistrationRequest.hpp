@@ -79,6 +79,7 @@ class RegistrationRequest : public Nas5gmmMessage {
   // TODO: 5GMM Capability as an array[]
   void Set5gmmCapability(uint8_t value);
   bool Get5gmmCapability(uint8_t& value) const;
+  std::array<uint8_t, 13> Get5gmmCapability() const;
 
   void SetUeSecurityCapability(uint8_t ea, uint8_t ia);
   void SetUeSecurityCapability(

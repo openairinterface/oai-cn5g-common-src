@@ -252,6 +252,481 @@ constexpr uint8_t KAccessType3gppAccess    = 0x01;
 constexpr uint8_t KAccessTypeNon3gppAccess = 0x02;
 
 //------------------------------------------------------------------------------
+// lengths/name of the NAS IEs
+
+//
+constexpr uint8_t kType1NasIeLength         = 1;
+constexpr uint8_t kType1NasIeFormatTvLength = 1;
+constexpr uint8_t kType1NasIeFormatVLength  = 1;
+constexpr uint8_t kType2NasIeFormatTLength  = 1;
+constexpr uint8_t kType3NasIeFormatTvLength = 1;
+
+// 5GMM Capability
+constexpr uint8_t k5gmmCapabilityMinimumLength = 3;
+constexpr uint8_t k5gmmCapabilityContentMinimumLength =
+    k5gmmCapabilityMinimumLength -
+    2;  // Minimum length - 2 octets for IEI/Length
+constexpr uint8_t k5gmmCapabilityMaximumLength = 15;
+constexpr auto k5gmmCapabilityIeName           = "5GMM Capability";
+
+// 5GMM Cause
+enum class _5gmmCauseEnum {
+  kIllegalUE                                       = 0b00000011,
+  kPeiNotAccepted                                  = 0b00000101,
+  kIllegalMe                                       = 0b00000110,
+  k5gsServicesNotAllowed                           = 0b00000111,
+  kUeIdentityCannotBeDerivedByTheNetwork           = 0b00001001,
+  kImplicitlyDe_registered                         = 0b00001010,
+  kPlmnNotAllowed                                  = 0b00001011,
+  kTrackingAreaNotAllowed                          = 0b00001100,
+  kRoamingNotAllowedInThisTrackingArea             = 0b00001101,
+  kNoSuitableCellsInTrackingArea                   = 0b00001111,
+  kMacFailure                                      = 0b00010100,
+  kSynchFailure                                    = 0b00010101,
+  kCongestion                                      = 0b00010110,
+  kUeSecurityCapabilitiesMismatch                  = 0b00010111,
+  KSecurityModeRejectedUnspecified                 = 0b00011000,
+  kNon_5GAuthenticationUnacceptable                = 0b00011010,
+  kN1ModeNotAllowed                                = 0b00011011,
+  kRestrictedServiceArea                           = 0b00011100,
+  kRedirectionToEpcRequired                        = 0b00011111,
+  kLandNotAvailable                                = 0b00101011,
+  kMaximumNumberOfPduSessionsReached               = 0b01000001,
+  kInsufficientResourcesForSpecificSliceAndDnn     = 0b01000011,
+  kInsufficientResourcesForSpecificSlice           = 0b01000101,
+  kNgKsiAlreadyInUse                               = 0b01000111,
+  kNon_3gppAccessTo5gcnNotAllowed                  = 0b01001000,
+  kServingNetworkNotAuthorized                     = 0b01001001,
+  kTemporarilyNotAuthorizedForThisSnpn             = 0b01001010,
+  kPermanentlyNotAuthorizedForThisSnpn             = 0b01001011,
+  kPayloadWasNotForwarded                          = 0b01011010,
+  kDnnNotSupportedOrNotSubscribedInTheSlice        = 0b01011011,
+  kInsufficientUser_PlaneResourcesForThePduSession = 0b01011100,
+  kSemanticallyIncorrectMessage                    = 0b01011111,
+  kInvalidMandatoryInformation                     = 0b01100000,
+  kMessageTypeNon_ExistentOrNotImplemented         = 0b01100001,
+  kMessageTypeNotCompatibleWithTheProtocolState    = 0b01100010,
+  kInformationElementNon_ExistentOrNotImplemented  = 0b01100011,
+  kConditionalIEError                              = 0b01100100,
+  kMessageNotCompatibleWithTheProtocolState        = 0b01100101,
+  kProtocolError_Unspecified                       = 0b01101111
+};
+constexpr uint8_t k5gmmCauseMinimumLength = 1;
+constexpr uint8_t k5gmmCauseMaximumLength = 2;
+constexpr auto k5gmmCauseIeName           = "5GMM Cause";
+
+// 5GS Deregistration Type
+typedef struct _5gs_deregistration_type_s {
+  uint8_t iei : 4;
+  uint8_t switch_off : 1;
+  uint8_t re_registration_required : 1;
+  uint8_t access_type : 2;
+} _5gs_deregistration_type_t;
+constexpr auto k5gsDeregistrationTypeIeName = "5GS De-registration Type";
+
+// 5GS DRX Parameters
+constexpr uint8_t k5gsDrxParametersLength = 3;
+constexpr uint8_t k5gsDrxParametersContentLength =
+    k5gsDrxParametersLength - 2;  // Length - 2 octets for IEI/Length
+constexpr auto k5gsDrxParametersIeName = "5GS DRX Parameters";
+
+// 5GS Identity Type
+constexpr auto k5gsIdentityTypeIeName = "5GS Identity Type";
+
+// 5GS Mobile Identity
+constexpr uint8_t k5gsMobileIdentityMinimumLength = 4;
+constexpr uint8_t k5gsMobileIdentityContentMinimumLength =
+    k5gsMobileIdentityMinimumLength -
+    3;  // Minimum length - 3 octets for IEI/Length
+constexpr uint8_t k5gsMobileIdentityIe5gGutiLength  = 11;
+constexpr uint8_t k5gsMobileIdentityIe5gSTmsiLength = 7;
+constexpr auto k5gsMobileIdentityIeName             = "5GS Mobile Identity";
+
+// 5GS Network Feature Support
+constexpr uint8_t k5gsNetworkFeatureSupportMinimumLength = 3;
+constexpr uint8_t k5gsNetworkFeatureSupportContentMinimumLength =
+    k5gsNetworkFeatureSupportMinimumLength -
+    2;  // Minimum length - 2 octets for IEI/Length
+constexpr uint8_t k5gsNetworkFeatureSupportMaximumLength = 5;
+constexpr auto k5gsNetworkFeatureSupportIeName = "5GS Network Feature Support";
+
+// 5GS Registration Result
+constexpr uint8_t k5gsRegistrationResultLength = 3;
+constexpr uint8_t k5gsRegistrationResultContentLength =
+    k5gsRegistrationResultLength -
+    2;  // Minimum length - 2 bytes for IEI/Length
+constexpr auto k5gsRegistrationResultIeName = "5GS Registration Result";
+
+// 5GS Registration Type
+constexpr auto k5gsRegistrationTypeName = "5GS Registration Type";
+
+// 5GS Tracking Area Identity
+constexpr uint8_t k5gsTrackingAreaIdentityLength = 7;
+constexpr auto k5gsTrackingAreaIdentityIeName    = "5GS Tracking Area Identity";
+
+// 5GS Tracking Area Identity List
+constexpr uint8_t k5gsTrackingAreaIdListMinimumLength = 9;
+constexpr uint8_t k5gsTrackingAreaIdListContentMinimumLength =
+    k5gsTrackingAreaIdListMinimumLength -
+    2;  // Minimum length - 2 octets for IEI/Length
+constexpr uint8_t k5gsTrackingAreaIdListMaximumLength        = 114;
+constexpr uint8_t k5gsTrackingAreaIdListMaximumSupportedTAIs = 16;
+constexpr auto k5gsTrackingAreaIdListIeName = "5GS Tracking Area Identity List";
+
+// 5GS Update Type
+constexpr uint8_t k5gsUpdateTypeLength = 3;
+constexpr uint8_t k5gsUpdateTypeContentLength =
+    k5gsUpdateTypeLength - 2;  // Minimum length - 2 octets for IEI/Length
+constexpr auto k5gsUpdateTypeIeName = "5GS Update Type";
+
+// ABBA
+constexpr uint8_t kAbbaMinimumLength = 4;
+constexpr uint8_t kAbbaContentMinimumLength =
+    kAbbaMinimumLength - 2;  // Minimum length - 2 octets for IEI/Length
+constexpr auto kAbbaIeName = "Abba";
+
+// Additional 5G Security Information
+constexpr uint8_t kAdditional5gSecurityInformationLength = 3;
+constexpr uint8_t kAdditional5gSecurityInformationContentLength =
+    kAdditional5gSecurityInformationLength -
+    2;  // Minimum length - 2 octets for IEI/Length
+constexpr auto kAdditional5gSecurityInformationIeName =
+    "Additional 5G Security Information";
+
+// Additional Information
+constexpr uint8_t kAdditionalInformationMinimumLength = 3;
+constexpr uint8_t kAdditionalInformationContentMinimumLength =
+    kAdditionalInformationMinimumLength -
+    2;  // Minimum length - 2 octets for IEI/Length
+constexpr uint16_t kAdditionalInformationMaximumLength = 257;
+constexpr auto kAdditionalInformationIeName = "Additional Information";
+
+// Allowed PDU Session Status
+constexpr uint8_t kAllowedPduSessionStatusMinimumLength = 4;
+constexpr uint8_t kAllowedPduSessionStatusContentMinimumLength =
+    kAllowedPduSessionStatusMinimumLength -
+    2;  // Minimum length - 2 octets for IEI/Length
+constexpr uint8_t kAllowedPduSessionStatusMaximumLength = 34;
+constexpr auto kAllowedPduSessionStatusIeName = "Allowed PDU Session Status";
+
+// Authentication Failure Parameter
+constexpr uint8_t kAuthenticationFailureParameterLength = 16;
+constexpr uint8_t kAuthenticationFailureParameterContentLength =
+    kAuthenticationFailureParameterLength -
+    2;  // Minimum length - 2 bytes for IEI/Length
+constexpr auto kAuthenticationFailureParameterIeName =
+    "Authentication Failure Parameter";
+
+//
+constexpr uint8_t kAuthenticationParameterAutnLength = 18;
+constexpr uint8_t kAuthenticationParameterAutnValueLength =
+    kAuthenticationParameterAutnLength - 2;
+constexpr auto kAuthenticationParameterAutnIeName =
+    "Authentication Parameter AUTN";
+
+//
+constexpr uint8_t kAuthenticationParameterRandLength = 17;
+constexpr uint8_t kAuthenticationParameterRandValueLength =
+    kAuthenticationParameterRandLength - 1;
+constexpr auto kAuthenticationParameterRandIeName =
+    "Authentication Parameter RAND";
+
+//
+constexpr uint8_t kAuthenticationResponseParameterMinimumLength = 6;
+constexpr uint8_t kAuthenticationResponseParameterContentMinimumLength =
+    kAuthenticationResponseParameterMinimumLength -
+    2;  // Minimum length - 2 octets for IEI/Length
+constexpr uint8_t kAuthenticationResponseParameterMaximumLength = 18;
+constexpr auto kAuthenticationResponseParameterIeName =
+    "Authentication Response Parameter";
+
+//
+constexpr auto kConfigurationUpdateIndicationIeName =
+    "Configuration Update Indication";
+
+//
+constexpr auto kControlPlaneServiceTypeIeName = "Control Plane Service Type";
+
+//
+constexpr uint8_t kDnnMinimumLength = 3;
+constexpr uint8_t kDnnContentMinimumLength =
+    kDnnMinimumLength - 2;  // Minimum length - 2 octets for IEI/Length
+constexpr uint8_t kDnnMaximumLength = 102;
+constexpr auto kDnnIeName           = "DNN";
+
+//
+constexpr uint8_t kEapMessageMinimumLength = 7;
+constexpr uint8_t kEapMessageContentMinimumLength =
+    kEapMessageMinimumLength - 3;  // Minimum length - 3 octets for IEI/Length
+constexpr uint16_t kEapMessageMaximumLength = 1503;
+constexpr auto kEapMessageIeName            = "EAP Message";
+
+//
+constexpr uint8_t kEpsBearerContextStatusLength = 4;
+constexpr uint8_t kEpsBearerContextStatusContentLength =
+    kEpsBearerContextStatusLength - 2;  // Length - 2 octets for IEI/Length
+constexpr auto kEpsBearerContextStatusIeName = "EPS Bearer Context Status";
+
+//
+constexpr uint8_t kEpsNasMessageContainerMinimumLength = 4;
+constexpr uint8_t kEpsNasMessageContainerContentMinimumLength =
+    kEpsNasMessageContainerMinimumLength -
+    3;  // Minimum length - 3 octets for IEI/Length
+constexpr uint8_t kEpsNasMessageContainer    = 253;
+constexpr auto kEpsNasMessageContainerIeName = "EPS NAS Message Container";
+
+//
+constexpr uint8_t kEpsNasSecurityAlgorithmsLength = 2;
+constexpr auto kEpsNasSecurityAlgorithmsIeName = "EPS NAS Security Algorithms";
+
+//
+constexpr uint8_t kExtendedDrxParametersLength = 3;
+constexpr uint8_t kExtendedDrxParametersContentLength =
+    kExtendedDrxParametersLength -
+    2;  // Minimum length - 2 octets for IEI/Length
+constexpr auto kExtendedDrxParametersIeName = "Extended DRX Parameters";
+
+//
+constexpr uint8_t kExtendedProtocolDiscriminatorLength = 1;
+constexpr auto kExtendedProtocolDiscriminatorIeName =
+    "Extended Protocol Discriminator";
+
+//
+constexpr uint8_t kGprsTimer2Length = 3;
+constexpr uint8_t kGprsTimer2ContentLength =
+    kGprsTimer2Length - 2;  // Length - 2 octets for IEI/Length
+constexpr auto kGprsTimer2IeName = "GPRS Timer 2";
+
+//
+constexpr uint8_t kGprsTimer3Length = 3;
+constexpr uint8_t kGprsTimer3ContentLength =
+    kGprsTimer3Length - 2;  // Length - 2 octets for IEI/Length
+constexpr auto kGprsTimer3IeName = "GPRS Timer 3";
+
+//
+constexpr auto kImeisvRequestIeName = "IMEISV Request";
+
+// LADN
+
+//
+constexpr uint8_t kLadnIndicationMinimumLength = 3;
+constexpr uint8_t kLadnIndicationContentMinimumLength =
+    kLadnIndicationMinimumLength -
+    3;  // Minimum length - 3 octets for IEI/Length
+constexpr uint16_t kLadnIndicationMaximumLength        = 811;
+constexpr uint8_t kLadnIndicationMaximumSupportedLadns = 8;
+constexpr auto kLadnIndicationIeName                   = "LADN Indication";
+
+//
+constexpr uint8_t kLadnInformationMinimumLength = 3;
+constexpr uint8_t kLadnInformationContentMinimumLength =
+    kLadnInformationMinimumLength -
+    3;  // Minimum length - 3 octets for IEI/Length
+constexpr uint16_t kLadnInformationMaximumLength        = 1715;
+constexpr uint8_t kLadnInformationMaximumSupportedLadns = 8;
+constexpr auto kLadnInformationIeName                   = "LADN Information";
+
+//
+constexpr auto kMaPduSessionInformationIeName = "MA PDU Session Information";
+
+//
+constexpr uint8_t kMicoIndicationIELength = 1;
+constexpr auto kMicoIndicationIeName      = "MICO Indication";
+
+//
+constexpr auto kNasKeySetIdentifierName = "NAS Key Set Identifier";
+
+//
+constexpr uint8_t kNasMessageContainerMinimumLength = 3;
+constexpr uint8_t kNasMessageContainerContentMinimumLength =
+    kNasMessageContainerMinimumLength -
+    3;  // Minimum length - 3 octets for IEI/Length
+constexpr uint32_t kNasMessageContainerMaximumLength = 65535;
+constexpr auto kNasMessageContainerIeName            = "NAS Message Container";
+
+//
+constexpr uint8_t kNasMessageTypeIeSize = 1;
+constexpr auto kNasMessageTypeIeName    = "NAS Message Type";
+
+//
+constexpr uint8_t kNasSecurityAlgorithmsLength = 2;
+constexpr auto kNasSecurityAlgorithmsIeName    = "NAS Security Algorithms";
+
+//
+constexpr uint8_t kNetworkNameMinimumLength = 3;
+constexpr uint8_t kNetworkNameContentMinimumLength =
+    kNetworkNameMinimumLength - 2;  // Minimum length - 2 octets for IEI/Length
+constexpr auto kNetworkNameIeName = "Network Name";
+
+//
+constexpr uint8_t kNetworkSlicingIndicationLength = 1;
+constexpr auto kNetworkSlicingIndicationIeName = "Network Slicing Indication";
+
+//
+constexpr uint8_t kNon3gppNwProvidedPoliciesLength = 1;
+constexpr auto kNon3gppNwProvidedPoliciesIeName =
+    "Non-3GPP NW Provided Policies";
+
+//
+constexpr uint8_t kNssaiMinimumLength = 4;
+constexpr uint8_t kNssaiContentMinimumLength =
+    kNssaiMinimumLength - 2;  // Minimum length - 2 octets for IEI/Length
+constexpr uint8_t kNssaiMaximumLength = 146;
+constexpr auto kNssaiIeName           = "NSSAI";
+
+//
+constexpr uint8_t kNssaiInclusionModeLength = 1;
+constexpr auto kNssaiInclusionModeIeName    = "NSSAI Inclusion Mode";
+
+//
+constexpr uint8_t kPayloadContainerMinimumLength = 4;
+constexpr uint8_t kPayloadContainerContentMinimumLength =
+    kPayloadContainerMinimumLength -
+    3;  // Minimum length - 3 octets for IEI/Length
+constexpr uint32_t kPayloadContainerMaximumLength = 65538;
+constexpr auto kPayloadContainerIeName            = "Payload Container";
+
+//
+constexpr uint8_t kPayloadContainerTypeLength = 1;
+constexpr auto kPayloadContainerTypeIeName    = "Payload Container Type";
+
+//
+constexpr uint8_t kPduSessionIdentity2Length = 2;
+constexpr auto kPduSessionIdentity2IeName    = "PDU Session Identity 2";
+
+//
+constexpr uint8_t kPduSessionReactivationResultMinimumLength = 4;
+constexpr uint8_t kPduSessionReactivationResultContentMinimumLength =
+    kPduSessionReactivationResultMinimumLength -
+    2;  // Minimum length - 2 octets for IEI/Length
+constexpr uint8_t kPduSessionReactivationResultMaximumLength = 34;
+constexpr auto kPduSessionReactivationResultIeName =
+    "PDU Session Reactivation Result";
+
+//
+constexpr uint8_t kPduSessionReactivationResultErrorCauseMinimumLength = 5;
+constexpr uint8_t kPduSessionReactivationResultErrorCauseContentMinimumLength =
+    kPduSessionReactivationResultErrorCauseMinimumLength -
+    3;  // Minimum length - 3 octets for IEI/Length
+constexpr uint32_t kPduSessionReactivationResultErrorCauseMaximumLength = 515;
+constexpr auto kPduSessionReactivationResultErrorCauseIeName =
+    "PDU Session Reactivation Result Error Cause";
+
+//
+constexpr uint8_t kPduSessionStatusMinimumLength = 4;
+constexpr uint8_t kPduSessionStatusContentMinimumLength =
+    kPduSessionStatusMinimumLength -
+    2;  // Minimum length - 2 octets for IEI/Length
+constexpr uint8_t kPduSessionStatusMaximumLength = 34;
+constexpr auto kPduSessionStatusIeName           = "PDU Session Status";
+
+//
+constexpr uint8_t kPlmnListMinimumLength = 5;
+constexpr uint8_t kPlmnListContentMinimumLength =
+    kPlmnListMinimumLength - 2;  // Minimum length - 2 octets for IEI/Length
+constexpr uint8_t kPlmnListMaximumLength = 47;
+constexpr auto kPlmnListIeName           = "PLMN List";
+
+//
+constexpr uint8_t kRejectedNssaiMinimumLength = 4;
+constexpr uint8_t kRejectedNssaiContentMinimumLength =
+    kRejectedNssaiMinimumLength -
+    2;  // Minimum length - 2 octets for IEI/Length
+constexpr uint8_t kRejectedNssaiMaximumLength = 42;
+constexpr auto kRejectedNssaiIeName           = "Rejected NSSAI";
+
+// RejectedSNssai
+
+//
+constexpr auto kReleaseAssistanceIndicationIeName =
+    "Release Assistance Indication";
+
+//
+constexpr auto kRequestTypeIeName = "Request Type";
+
+//
+constexpr uint8_t kS1UeSecurityCapabilityMinimumLength = 4;
+constexpr uint8_t kS1UeSecurityCapabilityContentMinimumLength =
+    kS1UeSecurityCapabilityMinimumLength -
+    2;  // Minimum length - 2 octets for IEI/Length
+constexpr uint8_t kS1UeSecurityCapabilityMaximumLength = 7;
+constexpr auto kS1UeSecurityCapabilityIeName = "S1 UE Security Capability";
+
+//
+constexpr uint8_t kSecurityHeaderTypeLength = 1;
+constexpr auto kSecurityHeaderTypeIeName    = "Security Header Type";
+
+//
+constexpr uint8_t kServiceAreaListMinimumLength = 6;
+constexpr uint8_t kServiceAreaListContentMinimumLength =
+    kServiceAreaListMinimumLength -
+    2;  // Minimum length - 2 octets for IEI/Length
+constexpr uint8_t kServiceAreaListMaximumLength        = 114;
+constexpr uint8_t kServiceAreaListMaximumSupportedTAIs = 16;
+constexpr auto kServiceAreaListIeName                  = "Service Area List";
+
+//
+constexpr auto kServiceTypeIeName = "Service Type";
+
+//
+constexpr uint8_t kSNssaiMinimumLength = 3;
+constexpr uint8_t kSNssaiContentMinimumLength =
+    kSNssaiMinimumLength - 2;  // Minimum length - 2 octets for IEI/Length
+constexpr uint8_t kSNssaiMaximumLength = 10;
+constexpr auto kSNssaiIeName           = "S-NSSAI";
+
+//
+constexpr uint8_t kSorTransparentContainerMinimumLength = 20;
+constexpr uint8_t kSorTransparentContainerContentMinimumLength =
+    kSorTransparentContainerMinimumLength -
+    3;  // Minimum length - 3 octets for IEI/Length
+constexpr uint8_t kSorTransparentContainerIeMacLength = 16;
+constexpr auto kSorTransparentContainerIeName = "SOR Transparent Container";
+
+//
+constexpr uint8_t kUeNetworkCapabilityMinimumLength = 4;
+constexpr uint8_t kUeNetworkCapabilityContentMinimumLength =
+    kUeNetworkCapabilityMinimumLength -
+    2;  // Minimum length - 2 octets for IEI/Length
+constexpr uint8_t kUeNetworkCapabilityMaximumLength = 15;
+constexpr auto kUeNetworkCapabilityIeName           = "UE Network Capability";
+
+//
+constexpr uint8_t kUeRadioCapabilityIdMinimumLength = 4;
+constexpr uint8_t kUeRadioCapabilityIdContentMinimumLength =
+    kUeRadioCapabilityIdMinimumLength -
+    2;  // Minimum length - 2 octets for IEI/Length
+constexpr auto kUeRadioCapabilityIdIeName = "UE Radio Capability ID";
+
+//
+constexpr uint8_t kUeSecurityCapabilityMinimumLength = 4;
+constexpr uint8_t kUeSecurityCapabilityContentMinimumLength =
+    kUeSecurityCapabilityMinimumLength -
+    2;  // Minimum length - 2 octets for IEI/Length
+constexpr uint8_t kUeSecurityCapabilityMaximumLength = 10;
+constexpr auto kUeSecurityCapabilityIeName           = "UE Security Capability";
+
+//
+constexpr uint8_t kUeStatusIeLength = 3;
+constexpr uint8_t kUeStatusIeContentLength =
+    kUeStatusIeLength - 2;  // Minimum length - 2 octets for IEI/Length
+constexpr auto kUeStatusIeName = "UE Status";
+
+//
+constexpr uint8_t kUeUsageSettingLength = 3;
+constexpr uint8_t kUeUsageSettingContentLength =
+    kUeUsageSettingLength - 2;  // IE length - 2 octets for IEI/Length
+constexpr auto kUeUsageSettingIeName = "UE's Usage Setting";
+
+//
+constexpr uint8_t kUplinkDataStatusMinimumLength = 4;
+constexpr uint8_t kUplinkDataStatusContentMinimumLength =
+    kUplinkDataStatusMinimumLength -
+    2;  // Minimum length - 2 octets for IEI/Length
+constexpr uint8_t kUplinkDataStatusMaximumLength = 34;
+constexpr auto kUplinkDataStatusIeName           = "Uplink Data Status";
+
+//------------------------------------------------------------------------------
 enum class _5g_ia_e {
   _5G_IA0 = 0,
   _5G_IA1 = 1,

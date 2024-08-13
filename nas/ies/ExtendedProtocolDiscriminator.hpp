@@ -24,10 +24,6 @@
 
 #include "NasIe.hpp"
 
-constexpr uint8_t kExtendedProtocolDiscriminatorLength = 1;
-constexpr auto kExtendedProtocolDiscriminatorIeName =
-    "Extended Protocol Discriminator";
-
 namespace oai::nas {
 
 class ExtendedProtocolDiscriminator : public NasIe {

@@ -24,13 +24,6 @@
 
 #include "Type4NasIe.hpp"
 
-constexpr uint8_t kAuthenticationFailureParameterLength = 16;
-constexpr uint8_t kAuthenticationFailureParameterContentLength =
-    kAuthenticationFailureParameterLength -
-    2;  // Minimum length - 2 bytes for IEI/Length
-constexpr auto kAuthenticationFailureParameterIeName =
-    "Authentication Failure Parameter";
-
 namespace oai::nas {
 
 class AuthenticationFailureParameter : public Type4NasIe {

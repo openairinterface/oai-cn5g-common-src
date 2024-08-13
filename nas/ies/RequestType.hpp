@@ -25,8 +25,6 @@
 #include "NasIe.hpp"
 #include "Type1NasIeFormatTv.hpp"
 
-constexpr auto kRequestTypeIeName = "Request Type";
-
 namespace oai::nas {
 
 class RequestType : public Type1NasIeFormatTv {

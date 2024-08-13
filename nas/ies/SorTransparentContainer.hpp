@@ -24,13 +24,6 @@
 
 #include "Type6NasIe.hpp"
 
-constexpr uint8_t kSorTransparentContainerMinimumLength = 20;
-constexpr uint8_t kSorTransparentContainerContentMinimumLength =
-    kSorTransparentContainerMinimumLength -
-    3;  // Minimum length - 3 octets for IEI/Length
-constexpr uint8_t kSorTransparentContainerIeMacLength = 16;
-constexpr auto kSorTransparentContainerIeName = "SOR Transparent Container";
-
 namespace oai::nas {
 
 class SorTransparentContainer : public Type6NasIe {

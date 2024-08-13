@@ -25,12 +25,6 @@
 #include "NasIeHeader.hpp"
 #include "Type4NasIe.hpp"
 
-constexpr uint8_t kNssaiMinimumLength = 4;
-constexpr uint8_t kNssaiContentMinimumLength =
-    kNssaiMinimumLength - 2;  // Minimum length - 2 octets for IEI/Length
-constexpr uint8_t kNssaiMaximumLength = 146;
-constexpr auto kNssaiIeName           = "NSSAI";
-
 namespace oai::nas {
 
 class Nssai : public Type4NasIe {

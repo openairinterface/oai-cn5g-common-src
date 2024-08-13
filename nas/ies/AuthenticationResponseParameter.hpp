@@ -24,14 +24,6 @@
 
 #include "Type4NasIe.hpp"
 
-constexpr uint8_t kAuthenticationResponseParameterMinimumLength = 6;
-constexpr uint8_t kAuthenticationResponseParameterContentMinimumLength =
-    kAuthenticationResponseParameterMinimumLength -
-    2;  // Minimum length - 2 octets for IEI/Length
-constexpr uint8_t kAuthenticationResponseParameterMaximumLength = 18;
-constexpr auto kAuthenticationResponseParameterIeName =
-    "Authentication Response Parameter";
-
 namespace oai::nas {
 
 class AuthenticationResponseParameter : public Type4NasIe {

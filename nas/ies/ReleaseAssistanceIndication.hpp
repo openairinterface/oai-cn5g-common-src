@@ -24,9 +24,6 @@
 
 #include "Type1NasIeFormatTv.hpp"
 
-constexpr auto kReleaseAssistanceIndicationIeName =
-    "Release Assistance Indication";
-
 namespace oai::nas {
 
 class ReleaseAssistanceIndication : public Type1NasIeFormatTv {

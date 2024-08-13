@@ -24,9 +24,6 @@
 
 #include "Type3NasIe.hpp"
 
-constexpr uint8_t kEpsNasSecurityAlgorithmsLength = 2;
-constexpr auto kEpsNasSecurityAlgorithmsIeName = "EPS NAS Security Algorithms";
-
 namespace oai::nas {
 
 class EpsNasSecurityAlgorithms : public Type3NasIe {

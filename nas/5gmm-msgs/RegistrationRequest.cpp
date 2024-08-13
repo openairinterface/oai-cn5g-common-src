@@ -269,6 +269,14 @@ bool RegistrationRequest::Get5gmmCapability(uint8_t& value) const {
 }
 
 //------------------------------------------------------------------------------
+std::array<uint8_t, 13> RegistrationRequest::Get5gmmCapability() const {
+  if (ie_5g_mm_capability_.has_value()) {
+    return ie_5g_mm_capability_.value().GetValue();
+  } else
+    return std::array<uint8_t, 13>{};
+}
+
+//------------------------------------------------------------------------------
 void RegistrationRequest::SetUeSecurityCapability(uint8_t ea, uint8_t ia) {
   ie_ue_security_capability_ = std::make_optional<UeSecurityCapability>(
       kIeiUeSecurityCapability, ea, ia);

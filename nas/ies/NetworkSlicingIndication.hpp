@@ -24,9 +24,6 @@
 
 #include "Type1NasIeFormatTv.hpp"
 
-constexpr uint8_t kNetworkSlicingIndicationLength = 1;
-constexpr auto kNetworkSlicingIndicationIeName = "Network Slicing Indication";
-
 namespace oai::nas {
 
 class NetworkSlicingIndication : public Type1NasIeFormatTv {

@@ -24,8 +24,6 @@
 
 #include "Type1NasIe.hpp"
 
-constexpr auto kServiceTypeIeName = "Service Type";
-
 namespace oai::nas {
 
 class ServiceType : public Type1NasIe {

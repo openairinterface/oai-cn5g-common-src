@@ -61,6 +61,18 @@ uint8_t _5gmmCapability::GetOctet3() const {
 }
 
 //------------------------------------------------------------------------------
+std::array<uint8_t, 13> _5gmmCapability::GetValue() const {
+  std::array<uint8_t, 13> tmp = {};
+  tmp[0]                      = octet3_;
+  if (octet4_.has_value()) tmp[1] = octet4_.value();
+  if (octet5_.has_value()) tmp[2] = octet5_.value();
+  for (uint8_t i = 3; i < 13; i++) {
+    if (octets6_15[i - 3].has_value()) tmp[i] = octets6_15[i - 3].value();
+  }
+  return tmp;
+}
+
+//------------------------------------------------------------------------------
 int _5gmmCapability::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());

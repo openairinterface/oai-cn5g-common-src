@@ -24,11 +24,6 @@
 
 #include "Type4NasIe.hpp"
 
-constexpr uint8_t kGprsTimer3Length = 3;
-constexpr uint8_t kGprsTimer3ContentLength =
-    kGprsTimer3Length - 2;  // Length - 2 octets for IEI/Length
-constexpr auto kGprsTimer3IeName = "GPRS Timer 3";
-
 namespace oai::nas {
 
 class GprsTimer3 : public Type4NasIe {

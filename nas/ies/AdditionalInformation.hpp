@@ -24,13 +24,6 @@
 
 #include "Type4NasIe.hpp"
 
-constexpr uint8_t kAdditionalInformationMinimumLength = 3;
-constexpr uint8_t kAdditionalInformationContentMinimumLength =
-    kAdditionalInformationMinimumLength -
-    2;  // Minimum length - 2 octets for IEI/Length
-constexpr uint16_t kAdditionalInformationMaximumLength = 257;
-constexpr auto kAdditionalInformationIeName = "Additional Information";
-
 namespace oai::nas {
 
 class AdditionalInformation : public Type4NasIe {

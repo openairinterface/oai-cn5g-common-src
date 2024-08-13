@@ -24,8 +24,6 @@
 
 #include "Type1NasIeFormatTv.hpp"
 
-constexpr auto kMaPduSessionInformationIeName = "MA PDU Session Information";
-
 namespace oai::nas {
 
 class MaPduSessionInformation : public Type1NasIeFormatTv {

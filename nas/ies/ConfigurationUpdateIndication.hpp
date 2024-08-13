@@ -24,9 +24,6 @@
 
 #include "Type1NasIe.hpp"
 
-constexpr auto kConfigurationUpdateIndicationIeName =
-    "Configuration Update Indication";
-
 namespace oai::nas {
 
 class ConfigurationUpdateIndication : public Type1NasIe {

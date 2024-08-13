@@ -23,12 +23,6 @@
 
 #include "Type4NasIe.hpp"
 
-constexpr uint8_t kAuthenticationParameterAutnLength = 18;
-constexpr uint8_t kAuthenticationParameterAutnValueLength =
-    kAuthenticationParameterAutnLength - 2;
-constexpr auto kAuthenticationParameterAutnIeName =
-    "Authentication Parameter AUTN";
-
 namespace oai::nas {
 
 class AuthenticationParameterAutn : public Type4NasIe {

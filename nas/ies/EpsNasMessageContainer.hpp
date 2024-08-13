@@ -24,13 +24,6 @@
 
 #include "Type6NasIe.hpp"
 
-constexpr uint8_t kEpsNasMessageContainerMinimumLength = 4;
-constexpr uint8_t kEpsNasMessageContainerContentMinimumLength =
-    kEpsNasMessageContainerMinimumLength -
-    3;  // Minimum length - 3 octets for IEI/Length
-constexpr uint8_t kEpsNasMessageContainer    = 253;
-constexpr auto kEpsNasMessageContainerIeName = "EPS NAS Message Container";
-
 namespace oai::nas {
 
 class EpsNasMessageContainer : public Type6NasIe {

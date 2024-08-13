@@ -24,11 +24,6 @@
 
 #include "Type4NasIe.hpp"
 
-constexpr uint8_t kAbbaMinimumLength = 4;
-constexpr uint8_t kAbbaContentMinimumLength =
-    kAbbaMinimumLength - 2;  // Minimum length - 2 octets for IEI/Length
-constexpr auto kAbbaIeName = "Abba";
-
 namespace oai::nas {
 
 class Abba : public Type4NasIe {

@@ -24,8 +24,6 @@
 
 #include "Type1NasIeFormatTv.hpp"
 
-constexpr auto k5gsRegistrationTypeName = "5GS Registration Type";
-
 namespace oai::nas {
 
 class _5gsRegistrationType : public Type1NasIeFormatTv {

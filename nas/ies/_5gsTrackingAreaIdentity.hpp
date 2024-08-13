@@ -24,9 +24,6 @@
 
 #include "Type3NasIe.hpp"
 
-constexpr uint8_t k5gsTrackingAreaIdentityLength = 7;
-constexpr auto k5gsTrackingAreaIdentityIeName    = "5GS Tracking Area Identity";
-
 namespace oai::nas {
 
 class _5gsTrackingAreaIdentity : public Type3NasIe {

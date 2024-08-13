@@ -24,9 +24,6 @@
 
 #include "Type1NasIeFormatTv.hpp"
 
-constexpr uint8_t kPayloadContainerTypeLength = 1;
-constexpr auto kPayloadContainerTypeIeName    = "Payload Container Type";
-
 namespace oai::nas {
 
 class PayloadContainerType : public Type1NasIeFormatTv {

@@ -25,14 +25,6 @@
 #include "Type1NasIeFormatTv.hpp"
 
 namespace oai::nas {
-typedef struct _5gs_deregistration_type_s {
-  uint8_t iei : 4;
-  uint8_t switch_off : 1;
-  uint8_t re_registration_required : 1;
-  uint8_t access_type : 2;
-} _5gs_deregistration_type_t;
-
-constexpr auto k5gsDeregistrationTypeIeName = "5GS De-registration Type";
 
 class _5gsDeregistrationType : public Type1NasIeFormatTv {
  public:

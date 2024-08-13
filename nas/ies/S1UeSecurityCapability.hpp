@@ -24,13 +24,6 @@
 
 #include "Type4NasIe.hpp"
 
-constexpr uint8_t kS1UeSecurityCapabilityMinimumLength = 4;
-constexpr uint8_t kS1UeSecurityCapabilityContentMinimumLength =
-    kS1UeSecurityCapabilityMinimumLength -
-    2;  // Minimum length - 2 octets for IEI/Length
-constexpr uint8_t kS1UeSecurityCapabilityMaximumLength = 7;
-constexpr auto kS1UeSecurityCapabilityIeName = "S1 UE Security Capability";
-
 namespace oai::nas {
 
 class S1UeSecurityCapability : public Type4NasIe {

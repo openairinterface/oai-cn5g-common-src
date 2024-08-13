@@ -24,8 +24,6 @@
 
 #include "Type1NasIe.hpp"
 
-constexpr auto kNasKeySetIdentifierName = "NAS Key Set Identifier";
-
 namespace oai::nas {
 
 class NasKeySetIdentifier : public Type1NasIe {

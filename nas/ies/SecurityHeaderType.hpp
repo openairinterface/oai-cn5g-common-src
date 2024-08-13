@@ -24,9 +24,6 @@
 
 #include "NasIe.hpp"
 
-constexpr uint8_t kSecurityHeaderTypeLength = 1;
-constexpr auto kSecurityHeaderTypeIeName    = "Security Header Type";
-
 namespace oai::nas {
 
 class SecurityHeaderType : public NasIe {

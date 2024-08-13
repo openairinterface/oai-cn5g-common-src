@@ -24,14 +24,6 @@
 
 #include "Type6NasIe.hpp"
 
-constexpr uint8_t kLadnIndicationMinimumLength = 3;
-constexpr uint8_t kLadnIndicationContentMinimumLength =
-    kLadnIndicationMinimumLength -
-    3;  // Minimum length - 3 octets for IEI/Length
-constexpr uint16_t kLadnIndicationMaximumLength        = 811;
-constexpr uint8_t kLadnIndicationMaximumSupportedLadns = 8;
-constexpr auto kLadnIndicationIeName                   = "LADN Indication";
-
 namespace oai::nas {
 
 class LadnIndication : public Type6NasIe {

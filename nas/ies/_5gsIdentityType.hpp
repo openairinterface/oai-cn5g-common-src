@@ -24,8 +24,6 @@
 
 #include "Type1NasIeFormatTv.hpp"
 
-constexpr auto k5gsIdentityTypeIeName = "5GS Identity Type";
-
 namespace oai::nas {
 
 class _5gsIdentityType : public Type1NasIeFormatTv {

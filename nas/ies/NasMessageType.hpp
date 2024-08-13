@@ -24,9 +24,6 @@
 
 #include "NasIe.hpp"
 
-constexpr uint8_t kNasMessageTypeIeSize = 1;
-constexpr auto kNasMessageTypeIeName    = "NAS Message Type";
-
 namespace oai::nas {
 
 class NasMessageType : public NasIe {

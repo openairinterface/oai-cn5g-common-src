@@ -29,11 +29,6 @@
 #include "Type4NasIe.hpp"
 #include "bstrlib.h"
 
-constexpr uint8_t kNetworkNameMinimumLength = 3;
-constexpr uint8_t kNetworkNameContentMinimumLength =
-    kNetworkNameMinimumLength - 2;  // Minimum length - 2 octets for IEI/Length
-constexpr auto kNetworkNameIeName = "Network Name";
-
 namespace oai::nas {
 
 class NetworkName : public Type4NasIe {

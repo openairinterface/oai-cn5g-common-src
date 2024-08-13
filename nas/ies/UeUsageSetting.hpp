@@ -24,11 +24,6 @@
 
 #include "Type4NasIe.hpp"
 
-constexpr uint8_t kUeUsageSettingLength = 3;
-constexpr uint8_t kUeUsageSettingContentLength =
-    kUeUsageSettingLength - 2;  // IE length - 2 octets for IEI/Length
-constexpr auto kUeUsageSettingIeName = "UE's Usage Setting";
-
 namespace oai::nas {
 
 class UeUsageSetting : public Type4NasIe {

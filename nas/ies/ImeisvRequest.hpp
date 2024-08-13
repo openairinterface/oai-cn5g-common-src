@@ -24,8 +24,6 @@
 
 #include "Type1NasIeFormatTv.hpp"
 
-constexpr auto kImeisvRequestIeName = "IMEISV Request";
-
 namespace oai::nas {
 
 class ImeisvRequest : public Type1NasIeFormatTv {

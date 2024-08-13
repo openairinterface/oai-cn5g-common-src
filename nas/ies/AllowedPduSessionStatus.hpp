@@ -24,13 +24,6 @@
 
 #include "Type4NasIe.hpp"
 
-constexpr uint8_t kAllowedPduSessionStatusMinimumLength = 4;
-constexpr uint8_t kAllowedPduSessionStatusContentMinimumLength =
-    kAllowedPduSessionStatusMinimumLength -
-    2;  // Minimum length - 2 octets for IEI/Length
-constexpr uint8_t kAllowedPduSessionStatusMaximumLength = 34;
-constexpr auto kAllowedPduSessionStatusIeName = "Allowed PDU Session Status";
-
 namespace oai::nas {
 
 class AllowedPduSessionStatus : public Type4NasIe {

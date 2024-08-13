@@ -24,9 +24,6 @@
 
 #include "Type1NasIeFormatTv.hpp"
 
-constexpr uint8_t kMicoIndicationIELength = 1;
-constexpr auto kMicoIndicationIeName      = "MICO Indication";
-
 namespace oai::nas {
 
 class MicoIndication : public Type1NasIeFormatTv {

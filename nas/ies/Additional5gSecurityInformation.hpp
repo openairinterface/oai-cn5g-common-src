@@ -24,13 +24,6 @@
 
 #include "Type4NasIe.hpp"
 
-constexpr uint8_t kAdditional5gSecurityInformationLength = 3;
-constexpr uint8_t kAdditional5gSecurityInformationContentLength =
-    kAdditional5gSecurityInformationLength -
-    2;  // Minimum length - 2 octets for IEI/Length
-constexpr auto kAdditional5gSecurityInformationIeName =
-    "Additional 5G Security Information";
-
 namespace oai::nas {
 
 class Additional5gSecurityInformation : public Type4NasIe {

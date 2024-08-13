@@ -24,10 +24,6 @@
 
 #include "Type1NasIeFormatTv.hpp"
 
-constexpr uint8_t kNon3gppNwProvidedPoliciesLength = 1;
-constexpr auto kNon3gppNwProvidedPoliciesIeName =
-    "Non-3GPP NW Provided Policies";
-
 namespace oai::nas {
 
 class Non3gppNwProvidedPolicies : public Type1NasIeFormatTv {

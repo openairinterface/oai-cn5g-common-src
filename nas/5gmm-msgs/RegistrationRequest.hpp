@@ -76,10 +76,10 @@ class RegistrationRequest : public Nas5gmmMessage {
   void SetNonCurrentNativeNasKSI(uint8_t tsc, uint8_t key_set_id);
   bool GetNonCurrentNativeNasKSI(uint8_t& value) const;
 
-  // TODO: 5GMM Capability as an array[]
   void Set5gmmCapability(uint8_t value);
   bool Get5gmmCapability(uint8_t& value) const;
-  std::array<uint8_t, 13> Get5gmmCapability() const;
+  std::array<uint8_t, k5gmmCapabilityContentMaximumLength> Get5gmmCapability()
+      const;
 
   void SetUeSecurityCapability(uint8_t ea, uint8_t ia);
   void SetUeSecurityCapability(

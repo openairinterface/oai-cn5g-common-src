@@ -266,8 +266,9 @@ constexpr uint8_t k5gmmCapabilityMinimumLength = 3;
 constexpr uint8_t k5gmmCapabilityContentMinimumLength =
     k5gmmCapabilityMinimumLength -
     2;  // Minimum length - 2 octets for IEI/Length
-constexpr uint8_t k5gmmCapabilityMaximumLength = 15;
-constexpr auto k5gmmCapabilityIeName           = "5GMM Capability";
+constexpr uint8_t k5gmmCapabilityContentMaximumLength =
+    13;  // 15 including 2 octets for IEI/Length
+constexpr auto k5gmmCapabilityIeName = "5GMM Capability";
 
 // 5GMM Cause
 enum class _5gmmCauseEnum {
@@ -703,8 +704,9 @@ constexpr uint8_t kUeSecurityCapabilityMinimumLength = 4;
 constexpr uint8_t kUeSecurityCapabilityContentMinimumLength =
     kUeSecurityCapabilityMinimumLength -
     2;  // Minimum length - 2 octets for IEI/Length
-constexpr uint8_t kUeSecurityCapabilityMaximumLength = 10;
-constexpr auto kUeSecurityCapabilityIeName           = "UE Security Capability";
+constexpr uint8_t kUeSecurityCapabilityContentMaximumLength =
+    8;  // 10 including 2 octets for IEI/Length
+constexpr auto kUeSecurityCapabilityIeName = "UE Security Capability";
 
 // UE Status
 constexpr uint8_t kUeStatusIeLength = 3;

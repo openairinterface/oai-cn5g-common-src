@@ -59,12 +59,18 @@ class UeSecurityCapability : public Type4NasIe {
   void Set(uint8_t _5g_ea, uint8_t _5g_ia);
   void Set(uint8_t _5g_ea, uint8_t _5g_ia, uint8_t eea, uint8_t eia);
 
+  std::array<uint8_t, kUeSecurityCapabilityContentMaximumLength> GetValue()
+      const;
+
  private:
   uint8_t _5g_ea_;              // 3rd octet, Mandatory
   uint8_t _5g_ia_;              // 4th octet, Mandatory
   std::optional<uint8_t> eea_;  // 5th octet, Optional
   std::optional<uint8_t> eia_;  // 6th octet, Optional
   // Spare
+  std::array<
+      std::optional<uint8_t>, kUeSecurityCapabilityContentMaximumLength - 4>
+      octets7_10;
 };
 
 }  // namespace oai::nas

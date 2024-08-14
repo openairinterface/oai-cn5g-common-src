@@ -172,6 +172,20 @@ void UeSecurityCapability::Set(
 }
 
 //------------------------------------------------------------------------------
+std::array<uint8_t, kUeSecurityCapabilityContentMaximumLength>
+UeSecurityCapability::GetValue() const {
+  std::array<uint8_t, kUeSecurityCapabilityContentMaximumLength> tmp = {};
+  tmp[0]                                                             = _5g_ea_;
+  tmp[1]                                                             = _5g_ia_;
+  if (eea_.has_value()) tmp[2] = eea_.value();
+  if (eia_.has_value()) tmp[3] = eia_.value();
+  for (uint8_t i = 4; i < kUeSecurityCapabilityContentMaximumLength; i++) {
+    if (octets7_10[i - 4].has_value()) tmp[i] = octets7_10[i - 4].value();
+  }
+  return tmp;
+}
+
+//------------------------------------------------------------------------------
 int UeSecurityCapability::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());

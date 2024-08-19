@@ -18,12 +18,7 @@
  * For more information about the OpenAirInterface (OAI) Software Alliance:
  *      contact@openairinterface.org
  */
-/*! \file itti_msg.hpp
-   \brief
-   \author  Lionel GAUTHIER
-   \date 2018
-   \email: lionel.gauthier@eurecom.fr
-*/
+
 #ifndef SRC_ITTI_ITTI_MSG_HPP_INCLUDED_
 #define SRC_ITTI_ITTI_MSG_HPP_INCLUDED_
 

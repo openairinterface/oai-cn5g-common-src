@@ -126,7 +126,7 @@ class pfcp_l4_stack : public udp_application {
   static const uint8_t version = 2;
   pfcp_l4_stack(
       const std::string& ip_address, const unsigned short port_num,
-      const util::thread_sched_params& sched_params);
+      const oai::utils::thread_sched_params& sched_params);
   virtual void handle_receive(
       char* recv_buffer, const std::size_t bytes_transferred,
       endpoint& remote_endpoint);

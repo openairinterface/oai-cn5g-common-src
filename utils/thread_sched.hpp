@@ -19,19 +19,13 @@
  *      contact@openairinterface.org
  */
 
-/*! \file thread_sched.hpp
-  \brief
-  \company Eurecom
-  \email: lionel.gauthier@eurecom.fr
-*/
-
 #ifndef FILE_THREAD_SCHED_HPP_SEEN
 #define FILE_THREAD_SCHED_HPP_SEEN
 
 #include <sched.h>
 #include "logger.hpp"
 
-namespace util {
+namespace oai::utils {
 
 class thread_sched_params {
  public:
@@ -47,5 +41,5 @@ class thread_sched_params {
   void apply(const int task_id, const oai::logger::printf_logger& logger) const;
 };
 
-}  // namespace util
+}  // namespace oai::utils
 #endif /* FILE_THREAD_SCHED_HPP_SEEN */

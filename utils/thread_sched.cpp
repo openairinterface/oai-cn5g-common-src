@@ -19,16 +19,10 @@
  *      contact@openairinterface.org
  */
 
-/*! \file thread_sched.cpp
-  \brief
-  \company Eurecom
-  \email: lionel.gauthier@eurecom.fr
-*/
-
 #include "thread_sched.hpp"
 
 //------------------------------------------------------------------------------
-void util::thread_sched_params::apply(
+void oai::utils::thread_sched_params::apply(
     const int task_id, const oai::logger::printf_logger& logger) const {
   if (cpu_id >= 0) {
     cpu_set_t cpuset;

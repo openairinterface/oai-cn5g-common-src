@@ -41,7 +41,7 @@ static itti_timer null_timer(
 
 //------------------------------------------------------------------------------
 void itti_mw::timer_manager_task(
-    const util::thread_sched_params& sched_params) {
+    const oai::utils::thread_sched_params& sched_params) {
   Logger::itti().info("Starting timer_manager_task");
   sched_params.apply(TASK_ITTI_TIMER, Logger::itti());
   while (true) {
@@ -120,6 +120,7 @@ itti_mw::itti_mw()
 
 //------------------------------------------------------------------------------
 itti_mw::~itti_mw() {
+  Logger::itti().info("~itti()");
   // Making sure the timer thread has finished.
   // detach is not good since we don't control when the thread will end.
   // we also start a dummy timer for the loop to exit
@@ -137,10 +138,12 @@ itti_mw::~itti_mw() {
       delete itti_task_ctxts[t];
     }
   }
+
+  Logger::itti().info("~itti() Done!");
 }
 
 //------------------------------------------------------------------------------
-void itti_mw::start(const util::thread_sched_params& sched_params) {
+void itti_mw::start(const oai::utils::thread_sched_params& sched_params) {
   Logger::itti().startup("Starting...");
   timer_thread = std::thread(timer_manager_task, sched_params);
   Logger::itti().startup("Started");

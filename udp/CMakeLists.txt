@@ -19,15 +19,16 @@
 #      contact@openairinterface.org
 ################################################################################
 include_directories(${SRC_TOP_DIR}/common)
-include_directories(${SRC_TOP_DIR}/itti)
 include_directories(${SRC_TOP_DIR}/common/utils)
+include_directories(${SRC_TOP_DIR}/itti)
+include_directories(${SRC_TOP_DIR}/${MOUNTED_COMMON}/pfcp)
 include_directories(${SRC_TOP_DIR}/${MOUNTED_COMMON}/udp)
 include_directories(${SRC_TOP_DIR}/${MOUNTED_COMMON}/logger)
-include_directories(${SRC_TOP_DIR}/${MOUNTED_COMMON}/pfcp)
 include_directories(${SRC_TOP_DIR}/${MOUNTED_COMMON}/utils)
-include_directories(${SRC_TOP_DIR}/${MOUNTED_COMMON}/utils/bstr)
+#include_directories(${SRC_TOP_DIR}/../build/ext/folly/include)
 
-add_library(PFCP STATIC
-    3gpp_29.244.cpp
-    pfcp.cpp
-    )
+add_library (UDP STATIC
+  udp.cpp
+  )
+
+  

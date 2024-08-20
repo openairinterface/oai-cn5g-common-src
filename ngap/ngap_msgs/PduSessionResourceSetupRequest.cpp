@@ -22,7 +22,7 @@
 #include "PduSessionResourceSetupRequest.hpp"
 
 #include "3gpp_23.003.h"
-#include "logger.hpp"
+#include "logger_base.hpp"
 #include "ngap_utils.hpp"
 #include "utils.hpp"
 

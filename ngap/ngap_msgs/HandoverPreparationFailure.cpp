@@ -21,7 +21,7 @@
 
 #include "HandoverPreparationFailure.hpp"
 
-#include "logger.hpp"
+#include "logger_base.hpp"
 #include "utils.hpp"
 
 namespace oai::ngap {

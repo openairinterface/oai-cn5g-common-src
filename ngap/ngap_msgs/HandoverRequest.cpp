@@ -21,7 +21,7 @@
 
 #include "HandoverRequest.hpp"
 
-#include "logger.hpp"
+#include "logger_base.hpp"
 #include "ngap_utils.hpp"
 #include "utils.hpp"
 

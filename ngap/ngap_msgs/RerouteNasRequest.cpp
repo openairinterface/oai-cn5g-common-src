@@ -23,7 +23,7 @@
 
 #include "3gpp_23.003.h"
 #include "common_defs.h"
-#include "logger.hpp"
+#include "logger_base.hpp"
 #include "utils.hpp"
 
 namespace oai::ngap {

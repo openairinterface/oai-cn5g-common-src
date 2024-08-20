@@ -32,7 +32,6 @@
 #include "msg_pfcp.hpp"
 #include "serializable.hpp"
 #include "string.hpp"
-// #include <fmt/format.h> conflicts with spdlog
 #include <iostream>
 #include <memory>
 #include <sstream>

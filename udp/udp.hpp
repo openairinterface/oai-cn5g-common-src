@@ -44,7 +44,7 @@
 #include <vector>
 #include <pthread.h>
 
-using namspace oai::logger;
+using namespace oai::logger;
 
 class udp_application {
  public:

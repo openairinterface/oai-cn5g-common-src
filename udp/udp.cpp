@@ -21,7 +21,11 @@
 
 #include "udp.hpp"
 
+#include "logger_base.hpp"
+
 #include <cstdlib>
+
+using namespace oai::logger;
 
 //------------------------------------------------------------------------------
 void udp_application::handle_receive(

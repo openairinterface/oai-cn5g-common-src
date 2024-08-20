@@ -18,18 +18,17 @@
 # For more information about the OpenAirInterface (OAI) Software Alliance:
 #      contact@openairinterface.org
 ################################################################################
-include_directories(${SRC_TOP_DIR}/common)
-include_directories(${SRC_TOP_DIR}/${MOUNTED_COMMON}/itti)
-include_directories(${SRC_TOP_DIR}/${MOUNTED_COMMON}/3gpp)
-include_directories(${SRC_TOP_DIR}/${MOUNTED_COMMON}/common)
-include_directories(${SRC_TOP_DIR}/common/utils)
-include_directories(${SRC_TOP_DIR}/${MOUNTED_COMMON}/udp)
-include_directories(${SRC_TOP_DIR}/${MOUNTED_COMMON}/logger)
-include_directories(${SRC_TOP_DIR}/${MOUNTED_COMMON}/pfcp)
-include_directories(${SRC_TOP_DIR}/${MOUNTED_COMMON}/utils)
-include_directories(${SRC_TOP_DIR}/${MOUNTED_COMMON}/utils/bstr)
 
-add_library(PFCP STATIC
-    3gpp_29.244.cpp
-    pfcp.cpp
-    )
+SET(3GPP_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/3gpp)
+include_directories(${3GPP_DIR})
+
+file(GLOB 3GPP_SRC_FILES
+        ${3GPP_DIR}/*.cpp
+        )
+
+if (TARGET ${NF_TARGET})
+target_include_directories(${NF_TARGET} PUBLIC ${3GPP_DIR})
+target_sources(${NF_TARGET} PRIVATE
+        ${3GPP_SRC_FILES}
+        )
+endif()

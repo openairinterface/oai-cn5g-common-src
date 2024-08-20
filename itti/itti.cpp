@@ -19,7 +19,7 @@
  *      contact@openairinterface.org
  */
 
-#include "logger.hpp"
+#include "logger_base.hpp"
 #include "itti.hpp"
 #include "common_defs.h"
 #include <sys/epoll.h>
@@ -37,11 +37,14 @@ static itti_timer null_timer(
 //------------------------------------------------------------------------------
 void itti_mw::timer_manager_task(
     const oai::utils::thread_sched_params& sched_params) {
-  Logger::itti().info("Starting timer_manager_task");
-  sched_params.apply(TASK_ITTI_TIMER, Logger::itti());
+  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+      .info("Starting timer_manager_task");
+  sched_params.apply(
+      TASK_ITTI_TIMER, oai::logger::logger_registry::get_logger(LOGGER_COMMON));
   while (true) {
     if (itti_inst->terminate) {
-      Logger::itti().info("timer_manager_task is stopped!");
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .info("timer_manager_task is stopped!");
       itti_inst->terminate = false;
       return;
     } else {
@@ -50,7 +53,8 @@ void itti_mw::timer_manager_task(
         itti_inst->c_timers.wait(lx);
       }
       if (itti_inst->terminate) {
-        Logger::itti().info("timer_manager_task is stopped!");
+        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+            .info("timer_manager_task is stopped!");
         itti_inst->terminate = false;
         return;
       }
@@ -115,7 +119,7 @@ itti_mw::itti_mw()
 
 //------------------------------------------------------------------------------
 itti_mw::~itti_mw() {
-  Logger::itti().info("~itti()");
+  oai::logger::logger_registry::get_logger(LOGGER_COMMON).info("~itti()");
   // Making sure the timer thread has finished.
   // detach is not good since we don't control when the thread will end.
   // we also start a dummy timer for the loop to exit
@@ -134,14 +138,15 @@ itti_mw::~itti_mw() {
     }
   }
 
-  Logger::itti().info("~itti() Done!");
+  oai::logger::logger_registry::get_logger(LOGGER_COMMON).info("~itti() Done!");
 }
 
 //------------------------------------------------------------------------------
 void itti_mw::start(const oai::utils::thread_sched_params& sched_params) {
-  Logger::itti().startup("Starting...");
+  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+      .startup("Starting...");
   timer_thread = std::thread(timer_manager_task, sched_params);
-  Logger::itti().startup("Started");
+  oai::logger::logger_registry::get_logger(LOGGER_COMMON).startup("Started");
 }
 //------------------------------------------------------------------------------
 timer_id_t itti_mw::increment_timer_id() {
@@ -157,7 +162,8 @@ unsigned int itti_mw::increment_message_number() {
 int itti_mw::create_task(
     const task_id_t task_id, void (*start_routine)(void*), void* args_p) {
   if (nullptr == start_routine) {
-    Logger::itti().error("Null start routine for task %d", task_id);
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Null start routine for task %d", task_id);
     return RETURNerror;
   }
   if ((TASK_FIRST <= task_id) && (TASK_MAX > task_id)) {
@@ -177,10 +183,12 @@ int itti_mw::create_task(
         usleep(1000);
       return 0;
     } else {
-      Logger::itti().error("Try to start an already started task %d", task_id);
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .error("Try to start an already started task %d", task_id);
     }
   } else {
-    Logger::itti().error("Bad task id %d", task_id);
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Bad task id %d", task_id);
   }
   return RETURNerror;
 }
@@ -195,11 +203,13 @@ int itti_mw::notify_task_ready(const task_id_t task_id) {
       return RETURNok;
     }
     itti_task_ctxts[task_id]->m_state.unlock();
-    Logger::itti().error(
-        "Notify task ready, bad state %d",
-        itti_task_ctxts[task_id]->task_state);
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error(
+            "Notify task ready, bad state %d",
+            itti_task_ctxts[task_id]->task_state);
   } else {
-    Logger::itti().error("Notify task ready, task not starting %d", task_id);
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Notify task ready, task not starting %d", task_id);
   }
   return RETURNerror;
 }
@@ -220,17 +230,20 @@ int itti_mw::send_msg(std::shared_ptr<itti_msg> message) {
       } else if (
           itti_task_ctxts[message->destination]->task_state ==
           TASK_STATE_ENDED) {
-        Logger::itti().warn(
-            "Unicast message number %lu can not be sent from %d to %d, ended "
-            "destination task!",
-            message->msg_num, message->origin, message->destination);
+        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+            .warn(
+                "Unicast message number %lu can not be sent from %d to %d, "
+                "ended "
+                "destination task!",
+                message->msg_num, message->origin, message->destination);
         return RETURNerror;
       }
     } else {
-      Logger::itti().warn(
-          "Unicast message number %lu can not be sent from %d to %d, not "
-          "started destination task!",
-          message->msg_num, message->origin, message->destination);
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .warn(
+              "Unicast message number %lu can not be sent from %d to %d, not "
+              "started destination task!",
+              message->msg_num, message->origin, message->destination);
     }
   } else if (message->destination == TASK_ALL) {
     return send_broadcast_msg(message);
@@ -248,16 +261,18 @@ int itti_mw::send_broadcast_msg(std::shared_ptr<itti_msg> message) {
           itti_task_ctxts[t]->msg_queue.push(message);
           itti_task_ctxts[t]->c_queue.notify_one();
         } else if (itti_task_ctxts[t]->task_state == TASK_STATE_ENDED) {
-          Logger::itti().warn(
-              "Broadcast message number %lu can not be sent from %d to %d, "
-              "ended destination task!",
-              message->msg_num, message->origin, t);
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .warn(
+                  "Broadcast message number %lu can not be sent from %d to %d, "
+                  "ended destination task!",
+                  message->msg_num, message->origin, t);
         } else {
-          Logger::itti().warn(
-              "Broadcast message number %lu can not be sent from %d to %d, "
-              "unknown state %d !",
-              message->msg_num, message->origin, t,
-              itti_task_ctxts[t]->task_state);
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .warn(
+                  "Broadcast message number %lu can not be sent from %d to %d, "
+                  "unknown state %d !",
+                  message->msg_num, message->origin, t,
+                  itti_task_ctxts[t]->task_state);
         }
       }
     }
@@ -290,7 +305,8 @@ std::shared_ptr<itti_msg> itti_mw::receive_msg(task_id_t task_id) {
       return msg;
     }
   }
-  Logger::itti().warn("received message failed, bad task id");
+  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+      .warn("received message failed, bad task id");
   return nullptr;
 }
 
@@ -312,7 +328,8 @@ std::shared_ptr<itti_msg> itti_mw::poll_msg(task_id_t task_id) {
 
 //------------------------------------------------------------------------------
 void itti_mw::wait_tasks_end(void) {
-  Logger::itti().info("Waiting ITTI tasks closed");
+  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+      .info("Waiting ITTI tasks closed");
   for (int task_idx = TASK_FIRST; task_idx < TASK_MAX; task_idx++) {
     if (itti_task_ctxts[task_idx]) {
       if (itti_task_ctxts[task_idx]->thread.joinable()) {
@@ -323,7 +340,8 @@ void itti_mw::wait_tasks_end(void) {
       }
     }
   }
-  Logger::itti().info("All ITTI tasks closed");
+  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+      .info("All ITTI tasks closed");
 }
 
 //------------------------------------------------------------------------------
@@ -369,6 +387,7 @@ int itti_mw::timer_remove(timer_id_t timer_id) {
       ++it;
     }
   }
-  Logger::itti().trace("Removing timer 0x%lx: Not found", timer_id);
+  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+      .trace("Removing timer 0x%lx: Not found", timer_id);
   return RETURNerror;
 }

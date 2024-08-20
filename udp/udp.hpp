@@ -19,12 +19,6 @@
  *      contact@openairinterface.org
  */
 
-/*! \file udp.hpp
-  \brief
-  \author Lionel Gauthier
-  \company Eurecom
-  \email: lionel.gauthier@eurecom.fr
-*/
 #ifndef FILE_UDP_HPP_SEEN
 #define FILE_UDP_HPP_SEEN
 
@@ -32,6 +26,7 @@
 #include "endpoint.hpp"
 #include "itti.hpp"
 #include "thread_sched.hpp"
+#include "logger_base.hpp"
 
 #include <folly/MPMCQueue.h>
 #include <arpa/inet.h>
@@ -77,14 +72,16 @@ class udp_server {
         work_pool_(nullptr) {
     socket_ = create_socket(address, port_);
     if (socket_ > 0) {
-      Logger::udp().debug(
-          "udp_server::udp_server(%s:%d)",
-          oai::utils::conv::toString(address).c_str(), port_);
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .debug(
+              "udp_server::udp_server(%s:%d)",
+              oai::utils::conv::toString(address).c_str(), port_);
       sa_family = AF_INET;
     } else {
-      Logger::udp().error(
-          "udp_server::udp_server(%s:%d)",
-          oai::utils::conv::toString(address).c_str(), port_);
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .error(
+              "udp_server::udp_server(%s:%d)",
+              oai::utils::conv::toString(address).c_str(), port_);
       std::this_thread::sleep_for(std::chrono::milliseconds(500));
       throw std::system_error(
           socket_, std::generic_category(), "GTPV1-U socket creation failed!");
@@ -100,14 +97,16 @@ class udp_server {
     terminateRL_ = false;
     terminateWL_ = false;
     if (socket_ > 0) {
-      Logger::udp().debug(
-          "udp_server::udp_server(%s:%d)",
-          oai::utils::conv::toString(address).c_str(), port_);
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .debug(
+              "udp_server::udp_server(%s:%d)",
+              oai::utils::conv::toString(address).c_str(), port_);
       sa_family = AF_INET6;
     } else {
-      Logger::udp().error(
-          "udp_server::udp_server(%s:%d)",
-          oai::utils::conv::toString(address).c_str(), port_);
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .error(
+              "udp_server::udp_server(%s:%d)",
+              oai::utils::conv::toString(address).c_str(), port_);
       std::this_thread::sleep_for(std::chrono::milliseconds(500));
       throw std::system_error(
           socket_, std::generic_category(), "GTPV1-U socket creation failed!");
@@ -123,9 +122,11 @@ class udp_server {
     terminateRL_ = false;
     terminateWL_ = false;
     if (socket_ > 0) {
-      Logger::udp().debug("udp_server::udp_server(%s:%d)", address, port_);
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .debug("udp_server::udp_server(%s:%d)", address, port_);
     } else {
-      Logger::udp().error("udp_server::udp_server(%s:%d)", address, port_);
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .error("udp_server::udp_server(%s:%d)", address, port_);
       std::this_thread::sleep_for(std::chrono::milliseconds(500));
       throw std::system_error(
           socket_, std::generic_category(), "GTPV1-U socket creation failed!");
@@ -135,7 +136,8 @@ class udp_server {
   ~udp_server() {
     int res;
 
-    Logger::udp().info("Starting the udp_server destruction");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .info("Starting the udp_server destruction");
     stop();
 
     // closing a socket is not enough for a blocking API call to stop.
@@ -149,7 +151,8 @@ class udp_server {
     // now we can close the socket
     res = close(socket_);
     if (res != 0) {
-      Logger::udp().error("close on socket_ failed %s", strerror(errno));
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .error("close on socket_ failed %s", strerror(errno));
     }
 
     // Joining on all threads for completion
@@ -161,7 +164,8 @@ class udp_server {
     if (work_pool_) delete work_pool_;
     if (recv_buffer_alloc_) free(recv_buffer_alloc_);
     // free(udp_packet_q_item_alloc_);
-    Logger::udp().info("Finished the udp_server destruction");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .info("Finished the udp_server destruction");
   }
 
   void udp_read_loop(
@@ -177,7 +181,8 @@ class udp_server {
         (struct sockaddr*) &r_endpoint.addr_storage,
         r_endpoint.addr_storage_len);
     if (bytes_written != num_bytes) {
-      Logger::udp().error("sendto failed(%d:%s)\n", errno, strerror(errno));
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .error("sendto failed(%d:%s)\n", errno, strerror(errno));
     }
   }
 
@@ -188,7 +193,8 @@ class udp_server {
         socket_, send_buffer, num_bytes, 0, (struct sockaddr*) &r_endpoint,
         sizeof(struct sockaddr_in));
     if (bytes_written != num_bytes) {
-      Logger::udp().error("sendto failed(%d:%s)\n", errno, strerror(errno));
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .error("sendto failed(%d:%s)\n", errno, strerror(errno));
     }
   }
 
@@ -199,7 +205,8 @@ class udp_server {
         socket_, send_buffer, num_bytes, 0, (struct sockaddr*) &r_endpoint,
         sizeof(struct sockaddr_in6));
     if (bytes_written != num_bytes) {
-      Logger::udp().error("sendto failed(%d:%s)\n", errno, strerror(errno));
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .error("sendto failed(%d:%s)\n", errno, strerror(errno));
     }
   }
 

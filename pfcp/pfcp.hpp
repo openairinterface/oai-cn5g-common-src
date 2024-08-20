@@ -19,12 +19,6 @@
  *      contact@openairinterface.org
  */
 
-/*! \file pfcp.hpp
-  \brief
-  \author Lionel Gauthier
-  \company Eurecom
-  \email: lionel.gauthier@eurecom.fr
-*/
 #ifndef FILE_PFCP_HPP_SEEN
 #define FILE_PFCP_HPP_SEEN
 

@@ -23,7 +23,7 @@
 #define FILE_THREAD_SCHED_HPP_SEEN
 
 #include <sched.h>
-#include "logger.hpp"
+#include "logger_base.hpp"
 
 namespace oai::utils {
 

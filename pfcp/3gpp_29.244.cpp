@@ -19,13 +19,6 @@
  *      contact@openairinterface.org
  */
 
-/*! \file 3gpp_129.244.cpp
-  \brief
-  \author Lionel Gauthier
-  \company Eurecom
-  \email: lionel.gauthier@eurecom.fr
-*/
-
 #include "3gpp_29.244.hpp"
 
 #include <string>
@@ -931,14 +924,15 @@ pfcp_ie* pfcp_ie::new_pfcp_ie_from_stream(std::istream& is) {
       } break;
 
       default:
-        Logger::pfcp().error(
-            "Unknown PFCP IE type %d (length %d)", tlv.get_type(),
-            tlv.get_length());
+        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+            .error(
+                "Unknown PFCP IE type %d (length %d)", tlv.get_type(),
+                tlv.get_length());
         return nullptr;
     }
   } else {
-    Logger::pfcp().error(
-        "PFCP IE type %d length %d", tlv.get_type(), tlv.get_length());
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("PFCP IE type %d length %d", tlv.get_type(), tlv.get_length());
     return nullptr;
   }
 }

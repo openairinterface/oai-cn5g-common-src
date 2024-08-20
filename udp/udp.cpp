@@ -21,9 +21,9 @@
 
 #include "udp.hpp"
 
-#include "logger_base.hpp"
-
 #include <cstdlib>
+
+#include "logger_base.hpp"
 
 using namespace oai::logger;
 

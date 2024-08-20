@@ -20,9 +20,10 @@
  */
 
 #include "3gpp_29.244.hpp"
-#include "logger_base.hpp"
 
 #include <string>
+
+#include "logger_base.hpp"
 
 using namespace pfcp;
 

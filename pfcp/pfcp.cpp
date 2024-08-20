@@ -21,9 +21,9 @@
 
 #include "pfcp.hpp"
 
-#include "logger_base.hpp"
-
 #include <cstdlib>
+
+#include "logger_base.hpp"
 
 using namespace pfcp;
 using namespace std;

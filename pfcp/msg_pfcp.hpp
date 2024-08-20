@@ -22,11 +22,11 @@
 #ifndef MSG_PFCP_HPP_INCLUDED_
 #define MSG_PFCP_HPP_INCLUDED_
 
-#include "3gpp_29.244.h"
-#include "common_defs.h"
-
 #include <utility>
 #include <vector>
+
+#include "3gpp_29.244.h"
+#include "common_defs.h"
 
 // Only Grouped IEs of this namespace
 namespace pfcp {

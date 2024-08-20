@@ -22,15 +22,16 @@
 #ifndef FILE_3GPP_29_244_HPP_SEEN
 #define FILE_3GPP_29_244_HPP_SEEN
 
+#include <arpa/inet.h>
+#include <endian.h>
+
+#include <cstring>
+#include <exception>
+
 #include "3gpp_29.244.h"
 #include "msg_pfcp.hpp"
 #include "serializable.hpp"
 #include "string.hpp"
-
-#include <arpa/inet.h>
-#include <cstring>
-#include <endian.h>
-#include <exception>
 // #include <fmt/format.h> conflicts with spdlog
 #include <iostream>
 #include <memory>

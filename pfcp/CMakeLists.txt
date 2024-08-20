@@ -18,7 +18,7 @@
 # For more information about the OpenAirInterface (OAI) Software Alliance:
 #      contact@openairinterface.org
 ################################################################################
-include_directories(${SRC_TOP_DIR}/common)
+#include_directories(${SRC_TOP_DIR}/common)
 include_directories(${SRC_TOP_DIR}/${MOUNTED_COMMON}/itti)
 include_directories(${SRC_TOP_DIR}/${MOUNTED_COMMON}/3gpp)
 include_directories(${SRC_TOP_DIR}/${MOUNTED_COMMON}/common)

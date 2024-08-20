@@ -19,15 +19,9 @@
  *      contact@openairinterface.org
  */
 
-/*! \file 3gpp_29.274.h
-  \brief
-  \author Lionel Gauthier
-  \company Eurecom
-  \email: lionel.gauthier@eurecom.fr
-*/
-
 #ifndef FILE_3GPP_29_274_SEEN
 #define FILE_3GPP_29_274_SEEN
+
 #include "common_root_types.h"
 #include "3gpp_24.008.h"
 #include "3gpp_commons.h"

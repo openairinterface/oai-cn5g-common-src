@@ -31,8 +31,8 @@
 #include "3gpp_29.274.h"
 #include "common_root_types.h"
 #include "conversions.hpp"
-#include "logger.hpp"  // for fmt::format in spdlog
-
+//#include "logger_base.hpp"  // for fmt::format in spdlog
+#include <fmt/format.h>
 #include <arpa/inet.h>
 #include <stdint.h>
 #include <string>

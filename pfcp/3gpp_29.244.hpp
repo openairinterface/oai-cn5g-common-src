@@ -23,7 +23,6 @@
 #define FILE_3GPP_29_244_HPP_SEEN
 
 #include "3gpp_29.244.h"
-#include "logger.hpp"
 #include "msg_pfcp.hpp"
 #include "serializable.hpp"
 #include "string.hpp"

@@ -172,7 +172,7 @@ bool sdf_conversions::parse_bitrate_string(
     while (bw_value > UINT16_MAX) {
       if (bitrate_int == 6) {
         oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .warn("Bitrate cannot be higher than %d x 256 PBPS", bw_value);
+            .warn("Bitrate cannot be higher than %lf x 256 PBPS", bw_value);
       }
       if (bitrate_int == 5) {
         bw_value = bw_value / 256;
@@ -185,8 +185,10 @@ bool sdf_conversions::parse_bitrate_string(
     // Here we have to handle the fractional part, as 3GPP also allows that
     // we check if bw_value has fractional parts
     while (long(bw_value) != bw_value) {
-      if (bitrate_int == 1 || (long(bw_value / 1000) > (UINT16_MAX / 1000))) {
+      if (bitrate_int == 1 || bw_value * 1000 > UINT16_MAX) {
         // we possibly cant make it smaller, so we just cut it off
+        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .warn("Bitrate value is limited to uint 16. Value is cut of to %ld", long(bw_value + 0.5));
         break;
       }
       bw_value = bw_value * 1000;

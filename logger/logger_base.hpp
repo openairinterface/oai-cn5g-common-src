@@ -172,6 +172,140 @@ class printf_logger {
     else
       m_spd_logger->log_printf(spdlog::level::critical, fmt, args...);
   }
+
+  // With UE info, used to debug with multiple UEs
+  template<typename... T>
+  void traces(const std::string& fmt, const T&... args) const {
+    if (m_is_lttng_active)
+      m_lttng_logger->log_printf(spdlog::level::trace, fmt, args...);
+    else {
+      std::string fmt_ue = "[UE %s]";
+      fmt_ue.append(fmt);
+      m_spd_logger->log_printf(spdlog::level::trace, fmt_ue, args...);
+    }
+  }
+
+  template<typename... T>
+  void traces(const char* fmt, const T&... args) const {
+    if (m_is_lttng_active)
+      m_lttng_logger->log_printf(spdlog::level::trace, fmt, args...);
+    else {
+      std::string fmt_ue = "[UE %s]";
+      fmt_ue += fmt;
+      m_spd_logger->log_printf(spdlog::level::trace, fmt_ue.c_str(), args...);
+    }
+  }
+
+  template<typename... T>
+  void debugs(const std::string& fmt, const T&... args) const {
+    if (m_is_lttng_active)
+      m_lttng_logger->log_printf(spdlog::level::debug, fmt, args...);
+    else {
+      std::string fmt_ue = "[UE %s]";
+      fmt_ue.append(fmt);
+      m_spd_logger->log_printf(spdlog::level::debug, fmt_ue, args...);
+    }
+  }
+
+  template<typename... T>
+  void debugs(const char* fmt, const T&... args) const {
+    if (m_is_lttng_active)
+      m_lttng_logger->log_printf(spdlog::level::debug, fmt, args...);
+    else {
+      std::string fmt_ue = "[UE %s]";
+      fmt_ue.append(fmt);
+      m_spd_logger->log_printf(spdlog::level::debug, fmt_ue.c_str(), args...);
+    }
+  }
+
+  template<typename... T>
+  void infos(const std::string& fmt, const T&... args) const {
+    if (m_is_lttng_active)
+      m_lttng_logger->log_printf(spdlog::level::info, fmt, args...);
+    else {
+      std::string fmt_ue = "[UE %s]";
+      fmt_ue.append(fmt);
+      m_spd_logger->log_printf(spdlog::level::info, fmt_ue, args...);
+    }
+  }
+
+  template<typename... T>
+  void infos(const char* fmt, const T&... args) const {
+    if (m_is_lttng_active)
+      m_lttng_logger->log_printf(spdlog::level::info, fmt, args...);
+    else {
+      std::string fmt_ue = "[UE %s]";
+      fmt_ue.append(fmt);
+      m_spd_logger->log_printf(spdlog::level::info, fmt_ue, args...);
+    }
+  }
+
+  template<typename... T>
+  void startups(const std::string& fmt, const T&... args) const {
+    if (m_is_lttng_active)
+      m_lttng_logger->log_printf(spdlog::level::warn, fmt, args...);
+    else {
+      std::string fmt_ue = "[UE %s]";
+      fmt_ue.append(fmt);
+      m_spd_logger->log_printf(spdlog::level::warn, fmt_ue, args...);
+    }
+  }
+
+  template<typename... T>
+  void startups(const char* fmt, const T&... args) const {
+    if (m_is_lttng_active)
+      m_lttng_logger->log_printf(spdlog::level::warn, fmt, args...);
+    else {
+      std::string fmt_ue = "[UE %s]";
+      fmt_ue.append(fmt);
+      m_spd_logger->log_printf(spdlog::level::warn, fmt_ue.c_str(), args...);
+    }
+  }
+
+  template<typename... T>
+  void warns(const std::string& fmt, const T&... args) const {
+    if (m_is_lttng_active)
+      m_lttng_logger->log_printf(spdlog::level::err, fmt, args...);
+    else {
+      std::string fmt_ue = "[UE %s]";
+      fmt_ue.append(fmt);
+      m_spd_logger->log_printf(spdlog::level::err, fmt_ue, args...);
+    }
+  }
+
+  template<typename... T>
+  void warns(const char* fmt, const T&... args) const {
+    if (m_is_lttng_active)
+      m_lttng_logger->log_printf(spdlog::level::err, fmt, args...);
+    else {
+      std::string fmt_ue = "[UE %s]";
+      fmt_ue.append(fmt);
+      m_spd_logger->log_printf(spdlog::level::err, fmt_ue.c_str(), args...);
+    }
+  }
+
+  template<typename... T>
+  void errors(const std::string& fmt, const T&... args) const {
+    if (m_is_lttng_active)
+      m_lttng_logger->log_printf(spdlog::level::critical, fmt, args...);
+    else {
+      std::string fmt_ue = "[UE %s]";
+      fmt_ue.append(fmt);
+      m_spd_logger->log_printf(spdlog::level::critical, fmt_ue, args...);
+    }
+  }
+
+  template<typename... T>
+  void errors(const char* fmt, const T&... args) const {
+    if (m_is_lttng_active)
+      m_lttng_logger->log_printf(spdlog::level::critical, fmt, args...);
+    else {
+      std::string fmt_ue = "[UE %s]";
+      fmt_ue.append(fmt);
+      m_spd_logger->log_printf(
+          spdlog::level::critical, fmt_ue.c_str(), args...);
+    }
+  }
 };
 
 class logger_registry {

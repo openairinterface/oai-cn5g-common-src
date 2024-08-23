@@ -24,7 +24,7 @@ extern "C"
 #include "Ngap_NGAP-PDU.h"
 }
 #include "UplinkNasTransport.hpp"
-
+#include "ngap_utils.hpp"
 #include <glog/logging.h>
 #include <gtest/gtest.h>
 
@@ -36,7 +36,7 @@ extern std::vector<uint8_t> hexStringToByteArray(const std::string &hexString);
 
 TEST(TestSuiteNGAPMsg, positiveTestingRegistrationRequest)
 {
-    char packet_bytes[] = {
+    uint8_t packet_bytes[] = {
         0x00, 0x2e, 0x40, 0x3c, 0x00, 0x00, 0x04, 0x00,
         0x0a, 0x00, 0x02, 0x00, 0x01, 0x00, 0x55, 0x00,
         0x02, 0x00, 0x01, 0x00, 0x26, 0x00, 0x16, 0x15,
@@ -109,11 +109,7 @@ NG Application Protocol (UplinkNASTransport)
         NULL, &asn_DEF_Ngap_NGAP_PDU, (void **)&ngap_msg_pdu, packet_bytes,
         sizeof(packet_bytes), 0, 0);
 
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON).debug(
-        "Decoded NGAP message, procedure code %d, present %d",
-        ngap_msg_pdu->choice.initiatingMessage->procedureCode,
-        ngap_msg_pdu->present);
-    ngap_utils::print_asn_msg(&asn_DEF_Ngap_NGAP_PDU, ngap_msg_pdu);
+    oai::ngap::ngap_utils::print_asn_msg(&asn_DEF_Ngap_NGAP_PDU, ngap_msg_pdu);
 
     oai::ngap::UplinkNasTransportMsg *uplink_nas_transport = new oai::ngap::UplinkNasTransportMsg();
     EXPECT_NE(uplink_nas_transport->decode(ngap_msg_pdu), 0);

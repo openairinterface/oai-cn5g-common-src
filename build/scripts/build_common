@@ -124,6 +124,10 @@ function main()
         run_unit_tests=1
         shift;
         ;;
+      --gtest* | --rerun-failed | --output-on-failure)
+        gtest_args="$gtest_args $1"
+        shift;
+        ;;    
       *)
         echo "Unknown option $1"
         help
@@ -194,7 +198,7 @@ function main()
   ret=$?;[[ $ret -ne 0 ]] && return $ret
 
   if [ $run_unit_tests -ne 0 ]; then
-    cd $OPENAIRCN_DIR/build/common/build/test && ctest
+    cd $OPENAIRCN_DIR/build/common/build/test && ctest $gtest_args
     return $?
   fi
   return 0

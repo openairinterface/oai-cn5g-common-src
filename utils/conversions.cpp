@@ -296,7 +296,7 @@ bool conv::string_to_int(
 
 //------------------------------------------------------------------------------
 void conv::int_to_string_hex(
-    uint32_t value, std::string& value_str, uint8_t length) {
+    uint64_t value, std::string& value_str, uint8_t length) {
   std::stringstream stream_str;
   if (length > 0) {
     stream_str << std::setfill('0') << std::setw(length) << std::hex << value;

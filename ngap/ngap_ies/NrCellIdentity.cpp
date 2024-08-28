@@ -71,6 +71,6 @@ bool NrCellIdentity::decode(const Ngap_NRCellIdentity_t& nrCellIdentity) {
 
 //------------------------------------------------------------------------------
 uint64_t NrCellIdentity::get() const {
-  return (m_NrCellIdentity && 0x0fffffffff);  // Get 36 LSB
+  return (m_NrCellIdentity & 0x0fffffffff);  // Get 36 LSB
 }
 }  // namespace oai::ngap

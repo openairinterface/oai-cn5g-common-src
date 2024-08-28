@@ -188,7 +188,9 @@ bool sdf_conversions::parse_bitrate_string(
       if (bitrate_int == 1 || bw_value * 1000 > UINT16_MAX) {
         // we possibly cant make it smaller, so we just cut it off
         oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                .warn("Bitrate value is limited to uint 16. Value is cut of to %ld", long(bw_value + 0.5));
+            .warn(
+                "Bitrate value is limited to uint 16. Value is cut of to %ld",
+                long(bw_value + 0.5));
         break;
       }
       bw_value = bw_value * 1000;

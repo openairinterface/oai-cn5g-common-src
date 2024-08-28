@@ -21,7 +21,6 @@
 
 #include "AmfStatusIndication.hpp"
 
-#include "amf.hpp"
 #include "logger.hpp"
 #include "utils.hpp"
 

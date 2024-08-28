@@ -21,7 +21,9 @@
 
 #include "FiveGSTmsi.hpp"
 
-#include "amf_conversions.hpp"
+#include <arpa/inet.h>
+
+#include "conversions.hpp"
 
 using namespace oai::ngap;
 
@@ -84,9 +86,9 @@ bool FiveGSTmsi::decode(const Ngap_FiveG_S_TMSI_t& pdu) {
   uint16_t firstPartTmsi =
       0xffff & (((amfSetIdValue & 0x03ff) << 6) | (amfPointerValue & 0x3f));
   std::string firstPartTmsiStr = {};
-  amf_conv::int_to_string_hex(firstPartTmsi, firstPartTmsiStr, 4);
+  oai::utils::conv::int_to_string_hex(firstPartTmsi, firstPartTmsiStr, 4);
 
-  m_TmsiValue = amf_conv::tmsi_to_string(tmsi);
+  m_TmsiValue = oai::utils::conv::tmsi_to_string(tmsi);
   m_5gSTmsi   = firstPartTmsiStr + m_TmsiValue;
   return true;
 }

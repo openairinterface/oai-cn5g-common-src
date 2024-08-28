@@ -21,7 +21,7 @@
 
 #include "UeRadioCapabilityForPagingOfEutra.hpp"
 
-#include "amf_conversions.hpp"
+#include "ngap_utils.hpp"
 
 namespace oai::ngap {
 
@@ -35,7 +35,7 @@ UeRadioCapabilityForPagingOfEutra::~UeRadioCapabilityForPagingOfEutra() {}
 bool UeRadioCapabilityForPagingOfEutra::encode(
     Ngap_UERadioCapabilityForPagingOfEUTRA_t& ueRadioCapabilityForPagingOfEutra)
     const {
-  return amf_conv::octet_string_copy(
+  return ngap_utils::octet_string_copy(
       ueRadioCapabilityForPagingOfEutra, m_UeRadioCapability);
 }
 
@@ -43,28 +43,28 @@ bool UeRadioCapabilityForPagingOfEutra::encode(
 bool UeRadioCapabilityForPagingOfEutra::decode(
     const Ngap_UERadioCapabilityForPagingOfEUTRA_t&
         ueRadioCapabilityForPagingOfEutra) {
-  return amf_conv::octet_string_copy(
+  return ngap_utils::octet_string_copy(
       m_UeRadioCapability, ueRadioCapabilityForPagingOfEutra);
 }
 
 //------------------------------------------------------------------------------
 bool UeRadioCapabilityForPagingOfEutra::set(const OCTET_STRING_t& capability) {
-  return amf_conv::octet_string_copy(m_UeRadioCapability, capability);
+  return ngap_utils::octet_string_copy(m_UeRadioCapability, capability);
 }
 
 //------------------------------------------------------------------------------
 bool UeRadioCapabilityForPagingOfEutra::get(OCTET_STRING_t& capability) const {
-  return amf_conv::octet_string_copy(capability, m_UeRadioCapability);
+  return ngap_utils::octet_string_copy(capability, m_UeRadioCapability);
 }
 
 //------------------------------------------------------------------------------
 bool UeRadioCapabilityForPagingOfEutra::set(const bstring& capability) {
-  return amf_conv::bstring_2_octet_string(capability, m_UeRadioCapability);
+  return ngap_utils::bstring_2_octet_string(capability, m_UeRadioCapability);
 }
 
 //------------------------------------------------------------------------------
 bool UeRadioCapabilityForPagingOfEutra::get(bstring& capability) const {
-  return amf_conv::octet_string_2_bstring(m_UeRadioCapability, capability);
+  return ngap_utils::octet_string_2_bstring(m_UeRadioCapability, capability);
 }
 
 }  // namespace oai::ngap

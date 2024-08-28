@@ -21,8 +21,8 @@
 
 #include "HandoverRequestAck.hpp"
 
-#include "amf_conversions.hpp"
 #include "logger.hpp"
+#include "ngap_utils.hpp"
 #include "utils.hpp"
 
 namespace oai::ngap {
@@ -108,7 +108,7 @@ void HandoverRequestAck::setTargetToSourceTransparentContainer(
   ie->criticality = Ngap_Criticality_reject;
   ie->value.present =
       Ngap_HandoverRequestAcknowledgeIEs__value_PR_TargetToSource_TransparentContainer;
-  amf_conv::octet_string_copy(
+  ngap_utils::octet_string_copy(
       ie->value.choice.TargetToSource_TransparentContainer, targetTosource);
   int ret = ASN_SEQUENCE_ADD(&m_HandoverRequestAckIes->protocolIEs.list, ie);
   if (ret != 0)
@@ -315,7 +315,7 @@ bool HandoverRequestAck::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
                 Ngap_Criticality_reject &&
             m_HandoverRequestAckIes->protocolIEs.list.array[i]->value.present ==
                 Ngap_HandoverRequestAcknowledgeIEs__value_PR_TargetToSource_TransparentContainer) {
-          amf_conv::octet_string_copy(
+          ngap_utils::octet_string_copy(
               m_TargetToSourceTransparentContainer,
               m_HandoverRequestAckIes->protocolIEs.list.array[i]
                   ->value.choice.TargetToSource_TransparentContainer);

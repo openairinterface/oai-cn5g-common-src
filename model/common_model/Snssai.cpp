@@ -130,8 +130,26 @@ std::string Snssai::to_string(const int indent_level) const {
   }
   return out;
 }
+
 int32_t Snssai::getSdInt() const {
   return std::stoi(m_Sd, nullptr, 16);
+}
+
+void Snssai::parse_sd_int_with_hex() {
+  std::string sd_to_use = m_Sd;
+  if (m_Sd.size() > 2) {
+    std::string sd_substr = m_Sd.substr(0, 2);
+    if (sd_substr == "0x" || sd_substr == "0X") {
+      sd_to_use = m_Sd.substr(2, m_Sd.length());
+    }
+  }
+  try {
+    uint32_t sd_parsed = std::stoi(sd_to_use, nullptr, 16);
+    m_Sd               = fmt::format("{0:06X}", sd_parsed);
+  } catch (const std::exception& e) {
+    // If conversion failed, we do nothing, as then later the validation will
+    // fail
+  }
 }
 
 }  // namespace oai::model::common

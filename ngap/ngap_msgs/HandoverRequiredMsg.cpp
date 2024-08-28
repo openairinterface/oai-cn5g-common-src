@@ -21,8 +21,8 @@
 
 #include "HandoverRequiredMsg.hpp"
 
-#include "amf_conversions.hpp"
 #include "logger.hpp"
+#include "ngap_utils.hpp"
 #include "utils.hpp"
 
 namespace oai::ngap {
@@ -271,7 +271,7 @@ bool HandoverRequiredMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
                 Ngap_Criticality_reject &&
             m_HandoverRequiredIes->protocolIEs.list.array[i]->value.present ==
                 Ngap_HandoverRequiredIEs__value_PR_SourceToTarget_TransparentContainer) {
-          amf_conv::octet_string_copy(
+          ngap_utils::octet_string_copy(
               m_SourceToTargetTransparentContainer,
               m_HandoverRequiredIes->protocolIEs.list.array[i]
                   ->value.choice.SourceToTarget_TransparentContainer);

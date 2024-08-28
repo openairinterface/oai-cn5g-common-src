@@ -21,7 +21,7 @@
 
 #include "PduSessionResourceFailedToSetupItemSURes.hpp"
 
-#include "amf_conversions.hpp"
+#include "ngap_utils.hpp"
 
 namespace oai::ngap {
 
@@ -53,7 +53,7 @@ bool PduSessionResourceFailedToSetupItemSURes::encode(
     Ngap_PDUSessionResourceFailedToSetupItemSURes_t& pduSessionResourceItem)
     const {
   if (!m_PduSessionId.encode(pduSessionResourceItem.pDUSessionID)) return false;
-  amf_conv::octet_string_copy(
+  ngap_utils::octet_string_copy(
       pduSessionResourceItem.pDUSessionResourceSetupUnsuccessfulTransfer,
       m_PduSessionResourceSetupUnsuccessfulTransfer);
 
@@ -65,7 +65,7 @@ bool PduSessionResourceFailedToSetupItemSURes::decode(
     const Ngap_PDUSessionResourceFailedToSetupItemSURes_t&
         pduSessionResourceItem) {
   if (!m_PduSessionId.decode(pduSessionResourceItem.pDUSessionID)) return false;
-  amf_conv::octet_string_copy(
+  ngap_utils::octet_string_copy(
       m_PduSessionResourceSetupUnsuccessfulTransfer,
       pduSessionResourceItem.pDUSessionResourceSetupUnsuccessfulTransfer);
   return true;

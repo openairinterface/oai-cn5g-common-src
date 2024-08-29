@@ -74,12 +74,12 @@ class pfcp_tlv : public stream_serializable {
     os.write(reinterpret_cast<const char*>(&ns_type), sizeof(ns_type));
     auto ns_length = htobe16(length);
     os.write(reinterpret_cast<const char*>(&ns_length), sizeof(ns_length));
-    // if (type & 0x8000) {
-    //   auto ns_enterprise_id = htobe16(enterprise_id);
-    //   os.write(
-    //       reinterpret_cast<const char*>(&ns_enterprise_id),
-    //       sizeof(ns_enterprise_id));
-    // }
+    if (type & 0x8000) {
+      auto ns_enterprise_id = htobe16(enterprise_id);
+      os.write(
+          reinterpret_cast<const char*>(&ns_enterprise_id),
+          sizeof(ns_enterprise_id));
+    }
   }
 
   void load_from(std::istream& is) {

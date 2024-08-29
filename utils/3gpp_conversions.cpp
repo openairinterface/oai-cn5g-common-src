@@ -35,6 +35,8 @@
 #include <ctype.h>
 #include <inttypes.h>
 
+using namespace oai::utils;
+
 //------------------------------------------------------------------------------
 void xgpp_conv::paa_to_pfcp_ue_ip_address(
     const paa_t& paa, pfcp::ue_ip_address_t& ue_ip_address) {

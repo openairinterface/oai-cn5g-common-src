@@ -36,7 +36,7 @@
 #include <string>
 #include <thread>
 
-namespace util {
+namespace oai::utils {
 
 class async_shell_cmd {
  private:
@@ -54,5 +54,5 @@ class async_shell_cmd {
       const char* src_file, const int src_line, const std::string& cmd_str);
 };
 
-}  // namespace util
+}  // namespace oai::utils
 #endif /* FILE_ASYNC_SHELL_CMD_HPP_SEEN */

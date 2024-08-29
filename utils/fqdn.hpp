@@ -25,9 +25,13 @@
  \company Eurecom
  \email:
  */
+
 #ifndef FILE_FQDN_HPP_SEEN
 #define FILE_FQDN_HPP_SEEN
+
 #include <string>
+
+namespace oai::utils {
 class fqdn {
  public:
   /*
@@ -41,5 +45,5 @@ class fqdn {
       const std::string& host_name, std::string& address, uint32_t& port,
       uint8_t& addr_type, const std::string& protocol = "http");
 };
-
+}  // namespace oai::utils
 #endif /* FILE_FQDN_HPP_SEEN */

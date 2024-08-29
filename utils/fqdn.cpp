@@ -29,6 +29,9 @@
 #define MAX_NB_RESOLVE_TRIES 4
 #define TIME_IN_SECS_BETWEEN_TRIES 2
 
+using namespace oai::utils;
+
+//------------------------------------------------------------------------------
 bool fqdn::resolve(
     const std::string& host_name, std::string& address, uint32_t& port,
     uint8_t& addr_type, const std::string& protocol) {

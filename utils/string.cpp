@@ -143,7 +143,7 @@ void oai::utils::ipv6_to_bstring(struct in6_addr ipv6_address, bstring str) {
   char str_addr6[INET6_ADDRSTRLEN];
   if (inet_ntop(AF_INET6, &ipv6_address, str_addr6, sizeof(str_addr6))) {
     std::string ipv6_addr_str((char*) str_addr6, INET6_ADDRSTRLEN);
-    // oai::logger::logger_registry::get_logger(LOGGER_COMMON).info(" Ipv6
+    // oai::logger::logger_common::common().info(" Ipv6
     // address....: %s", ipv6_addr_str.c_str());
     unsigned char buf_in6_addr[sizeof(struct in6_addr)];
     if (inet_pton(
@@ -162,7 +162,7 @@ void oai::utils::ipv4v6_to_pdu_address_information(
 
   if (inet_ntop(AF_INET6, &ipv6_address, str_addr6, sizeof(str_addr6))) {
     std::string ipv6_addr_str((char*) str_addr6, INET6_ADDRSTRLEN);
-    // oai::logger::logger_registry::get_logger(LOGGER_COMMON).info(" Ipv6
+    // oai::logger::logger_common::common().info(" Ipv6
     // address....: %s", ipv6_addr_str.c_str());
     unsigned char buf_in6_addr[sizeof(struct in6_addr)];
     if (inet_pton(

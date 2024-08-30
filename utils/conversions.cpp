@@ -38,6 +38,7 @@
 #include "utils.hpp"
 
 using namespace oai::utils;
+using namespace oai::logger;
 
 static const char hex_to_ascii_table[16] = {
     '0', '1', '2', '3', '4', '5', '6', '7',
@@ -132,9 +133,8 @@ struct in_addr conv::fromString(const std::string& addr4) {
   unsigned char buf[sizeof(struct in6_addr)] = {};
   auto ret = inet_pton(AF_INET, addr4.c_str(), buf);
   if (ret != 1) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            __PRETTY_FUNCTION__ + std::string{" Failed to convert "} + addr4);
+    logger_common::common().error(
+        __PRETTY_FUNCTION__ + std::string{" Failed to convert "} + addr4);
   }
   struct in_addr* ia = (struct in_addr*) buf;
   return *ia;
@@ -251,8 +251,8 @@ bool conv::string_to_int8(const std::string& str, uint8_t& value) {
   try {
     value = (uint8_t) std::stoi(str);
   } catch (const std::exception& e) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Error when converting from string to int, error: %s", e.what());
+    logger_common::common().error(
+        "Error when converting from string to int, error: %s", e.what());
     return false;
   }
   return true;
@@ -264,8 +264,8 @@ bool conv::string_to_int32(const std::string& str, uint32_t& value) {
   try {
     value = (uint32_t) std::stoi(str);
   } catch (const std::exception& e) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Error when converting from string to int, error: %s", e.what());
+    logger_common::common().error(
+        "Error when converting from string to int, error: %s", e.what());
     return false;
   }
   return true;
@@ -276,8 +276,7 @@ bool conv::string_to_int(
     const std::string& str, uint32_t& value, uint8_t base) {
   if (str.empty()) return false;
   if ((base != 10) or (base != 16)) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .warn("Only support Dec or Hex string value");
+    logger_common::common().warn("Only support Dec or Hex string value");
     return false;
   }
   if (base == 16) {
@@ -287,8 +286,8 @@ bool conv::string_to_int(
   try {
     value = std::stoul(str, nullptr, base);
   } catch (const std::exception& e) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Error when converting from string to int, error: %s", e.what());
+    logger_common::common().error(
+        "Error when converting from string to int, error: %s", e.what());
     return false;
   }
   return true;
@@ -315,8 +314,8 @@ bool conv::string_hex_to_int(const std::string& value_str, uint32_t& value) {
   try {
     value = std::stoul(value_str, nullptr, base);
   } catch (const std::exception& e) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Error when converting from string to int, error: %s", e.what());
+    logger_common::common().error(
+        "Error when converting from string to int, error: %s", e.what());
     return false;
   }
   return true;
@@ -330,8 +329,8 @@ uint32_t conv::string_hex_to_int(const std::string& value_str) {
   try {
     value = std::stoul(value_str, nullptr, base);
   } catch (const std::exception& e) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Error when converting from string to int, error: %s", e.what());
+    logger_common::common().error(
+        "Error when converting from string to int, error: %s", e.what());
     value = {};
   }
   return value;

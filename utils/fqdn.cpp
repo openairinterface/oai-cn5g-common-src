@@ -30,19 +30,18 @@
 #define TIME_IN_SECS_BETWEEN_TRIES 2
 
 using namespace oai::utils;
+using namespace oai::logger;
 
 //------------------------------------------------------------------------------
 bool fqdn::resolve(
     const std::string& host_name, std::string& address, uint32_t& port,
     uint8_t& addr_type, const std::string& protocol) {
   int tries = 0;
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Resolving a DNS (name %s)", host_name.c_str());
+  logger_common::common().debug("Resolving a DNS (name %s)", host_name.c_str());
   while (tries < MAX_NB_RESOLVE_TRIES) {
     try {
       boost::asio::io_context io_context = {};
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .debug("Resolving DNS Try #%u", tries);
+      logger_common::common().debug("Resolving DNS Try #%u", tries);
 
       boost::asio::ip::tcp::resolver resolver{io_context};
       boost::asio::ip::tcp::resolver::results_type endpoints =
@@ -54,10 +53,9 @@ bool fqdn::resolve(
         boost::asio::ip::tcp::endpoint endpoint = *it;
         address = endpoint.address().to_string();
         port    = endpoint.port();
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug(
-                "Resolved a DNS (name %s, protocol %s): Ip Addr %s, port %u",
-                host_name.c_str(), protocol.c_str(), address.c_str(), port);
+        logger_common::common().debug(
+            "Resolved a DNS (name %s, protocol %s): Ip Addr %s, port %u",
+            host_name.c_str(), protocol.c_str(), address.c_str(), port);
         if (endpoint.address().is_v4()) {
           addr_type = 0;
         } else {

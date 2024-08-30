@@ -29,10 +29,8 @@
 #include "3gpp_29.510.h"
 #include "3gpp_24.501.hpp"
 
-#include <boost/algorithm/string.hpp>
 #include <stdlib.h>
 #include <stdint.h>
-#include <stdbool.h>
 #include <ctype.h>
 #include <inttypes.h>
 

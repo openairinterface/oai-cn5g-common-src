@@ -30,6 +30,7 @@
 #include <boost/algorithm/string.hpp>
 
 #include "logger_base.hpp"
+using namespace oai::logger;
 
 const uint32_t SD_NO_VALUE               = 0xFFFFFF;
 const uint8_t SST_MAX_STANDARDIZED_VALUE = 127;
@@ -92,11 +93,10 @@ typedef struct s_nssai  // section 28.4, TS23.003
     try {
       return std::stoul(sd, nullptr, 16);
     } catch (const std::exception& e) {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .error(
-              "Error when converting from string to int for S-NSSAI SD, error: "
-              "%s",
-              e.what());
+      logger_common::common().error(
+          "Error when converting from string to int for S-NSSAI SD, error: "
+          "%s",
+          e.what());
       return SD_NO_VALUE;
     }
   }
@@ -185,8 +185,7 @@ typedef struct guami_full_format_s {
         this->amf_pointer = json_data["amf_pointer"].get<int>();
       }
     } catch (std::exception& e) {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .error("%s", e.what());
+      logger_common::common().error("%s", e.what());
     }
   }
 } guami_full_format_t;

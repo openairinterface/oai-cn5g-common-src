@@ -30,7 +30,6 @@
 #pragma once
 
 #include "string"
-#include "pdu_session_type.hpp"
 #include "3gpp_24.501.hpp"
 #include <netinet/in.h>
 #include <vector>

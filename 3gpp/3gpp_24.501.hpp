@@ -24,6 +24,8 @@
 
 #include <string>
 #include <arpa/inet.h>
+#include <vector>
+#include <nlohmann/json.hpp>
 #include "3gpp_24.007.hpp"
 
 //------------------------------------------------------------------------------

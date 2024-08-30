@@ -630,6 +630,8 @@ typedef struct ebi_s {
   }
 } ebi_t;
 //-------------------------------------
+
+/*
 // 8.9 IP Address
 typedef struct ip_address_s {
   bool is_ipv4;  // if not ipv4, then it is ipv6
@@ -638,6 +640,7 @@ typedef struct ip_address_s {
     struct in6_addr ipv6_address;
   } address;
 } ip_address_t;
+*/
 //-------------------------------------
 // 8.10 Mobile Equipment Identity (MEI)
 // The ME Identity field contains either the IMEI or the IMEISV as defined in

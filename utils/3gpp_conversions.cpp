@@ -27,6 +27,7 @@
  */
 #include "3gpp_conversions.hpp"
 #include "3gpp_29.510.h"
+#include "3gpp_24.501.hpp"
 
 #include <boost/algorithm/string.hpp>
 #include <stdlib.h>
@@ -38,27 +39,105 @@
 using namespace oai::utils;
 
 //------------------------------------------------------------------------------
-void xgpp_conv::paa_to_pfcp_ue_ip_address(
-    const paa_t& paa, pfcp::ue_ip_address_t& ue_ip_address) {
-  switch (paa.pdn_type.pdn_type) {
+void xgpp_conv::pdu_session_type_to_pdn_type(
+    const pdu_session_type_t& pdu_session_type, pdn_type_t& pdn_type) {
+  switch (pdu_session_type.pdu_session_type) {
+    case PDU_SESSION_TYPE_E_IPV4:
+      pdn_type.pdn_type = PDN_TYPE_E_IPV4;
+      break;
+    case PDU_SESSION_TYPE_E_IPV6:
+      pdn_type.pdn_type = PDN_TYPE_E_IPV6;
+      break;
+    case PDU_SESSION_TYPE_E_IPV4V6:
+      pdn_type.pdn_type = PDN_TYPE_E_IPV4V6;
+      break;
+    case PDU_SESSION_TYPE_E_UNSTRUCTURED:
+      pdn_type.pdn_type = PDN_TYPE_E_NON_IP;
+      break;
+    case PDU_SESSION_TYPE_E_ETHERNET:
+      pdn_type.pdn_type = PDN_TYPE_E_ETHERNET;
+      break;
+    default:
+      pdn_type.pdn_type = PDN_TYPE_E_UNKNOWN;
+      break;
+  }
+}
+
+//------------------------------------------------------------------------------
+void xgpp_conv::pdn_type_to_pdu_session_type(
+    const pdn_type_t& pdn_type, pdu_session_type_t& pdu_session_type) {
+  switch (pdn_type.pdn_type) {
     case PDN_TYPE_E_IPV4:
-      ue_ip_address.v4           = 1;
-      ue_ip_address.ipv4_address = paa.ipv4_address;
+      pdu_session_type.pdu_session_type = PDU_SESSION_TYPE_E_IPV4;
       break;
     case PDN_TYPE_E_IPV6:
+      pdu_session_type.pdu_session_type = PDU_SESSION_TYPE_E_IPV6;
+      break;
+    case PDN_TYPE_E_IPV4V6:
+      pdu_session_type.pdu_session_type = PDU_SESSION_TYPE_E_IPV4V6;
+      break;
+    case PDN_TYPE_E_NON_IP:
+      pdu_session_type.pdu_session_type = PDU_SESSION_TYPE_E_UNSTRUCTURED;
+      break;
+    case PDN_TYPE_E_ETHERNET:
+      pdu_session_type.pdu_session_type = PDU_SESSION_TYPE_E_ETHERNET;
+      break;
+    default:
+      pdu_session_type.pdu_session_type = PDU_SESSION_TYPE_E_UNKNOWN;
+      break;
+  }
+}
+
+//------------------------------------------------------------------------------
+void xgpp_conv::paa_to_pfcp_ue_ip_address(
+    const paa_t& paa, pfcp::ue_ip_address_t& ue_ip_address) {
+  switch (paa.pdu_session_type.pdu_session_type) {
+    case PDU_SESSION_TYPE_E_IPV4:
+      ue_ip_address.v4           = 1;
+      ue_ip_address.ipv4_address = paa.ipv4_address;
+      break;
+    case PDU_SESSION_TYPE_E_IPV6:
       ue_ip_address.v6           = 1;
       ue_ip_address.ipv6_address = paa.ipv6_address;
       break;
-    case PDN_TYPE_E_IPV4V6:
+    case PDU_SESSION_TYPE_E_IPV4V6:
       ue_ip_address.v4           = 1;
       ue_ip_address.v6           = 1;
       ue_ip_address.ipv4_address = paa.ipv4_address;
       ue_ip_address.ipv6_address = paa.ipv6_address;
       break;
-    case PDN_TYPE_E_NON_IP:
+    case PDU_SESSION_TYPE_E_UNSTRUCTURED:
+    case PDU_SESSION_TYPE_E_ETHERNET:
     default:;
   }
 }
+
+//------------------------------------------------------------------------------
+void xgpp_conv::pdu_session_ip_to_pfcp_ue_ip_address(
+    const pdu_session_type_t& pdu_session_type,
+    const struct in_addr& ipv4_address, const struct in6_addr ipv6_address,
+    pfcp::ue_ip_address_t& ue_ip_address) {
+  switch (pdu_session_type.pdu_session_type) {
+    case PDU_SESSION_TYPE_E_IPV4:
+      ue_ip_address.v4           = 1;
+      ue_ip_address.ipv4_address = ipv4_address;
+      break;
+    case PDU_SESSION_TYPE_E_IPV6:
+      ue_ip_address.v6           = 1;
+      ue_ip_address.ipv6_address = ipv6_address;
+      break;
+    case PDU_SESSION_TYPE_E_IPV4V6:
+      ue_ip_address.v4           = 1;
+      ue_ip_address.v6           = 1;
+      ue_ip_address.ipv4_address = ipv4_address;
+      ue_ip_address.ipv6_address = ipv6_address;
+      break;
+    case PDU_SESSION_TYPE_E_UNSTRUCTURED:
+    case PDU_SESSION_TYPE_E_ETHERNET:
+    default:;
+  }
+}
+
 //------------------------------------------------------------------------------
 void xgpp_conv::pdn_ip_to_pfcp_ue_ip_address(
     const pdn_type_t& pdn_type, const struct in_addr& ipv4_address,
@@ -82,6 +161,7 @@ void xgpp_conv::pdn_ip_to_pfcp_ue_ip_address(
     default:;
   }
 }
+
 //------------------------------------------------------------------------------
 void xgpp_conv::pfcp_to_core_fteid(
     const pfcp::fteid_t& pfteid, fteid_t& fteid) {

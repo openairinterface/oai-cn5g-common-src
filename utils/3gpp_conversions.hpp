@@ -32,14 +32,23 @@
 #include "3gpp_29.274.h"
 #include "3gpp_29.244.h"
 #include "3gpp_29.281.h"
+#include "3gpp_24.501.hpp"
 #include "endpoint.hpp"
 
 namespace oai::utils {
 
 class xgpp_conv {
  public:
+  static void pdu_session_type_to_pdn_type(
+      const pdu_session_type_t& pdu_session_type, pdn_type_t& pdn_type);
+  static void pdn_type_to_pdu_session_type(
+      const pdn_type_t& pdn_type, pdu_session_type_t& pdu_session_type);
   static void paa_to_pfcp_ue_ip_address(
       const paa_t& paa, pfcp::ue_ip_address_t& ue_ip_address);
+  static void pdu_session_ip_to_pfcp_ue_ip_address(
+      const pdu_session_type_t& pdu_session_type,
+      const struct in_addr& ipv4_address, const struct in6_addr ipv6_address,
+      pfcp::ue_ip_address_t& ue_ip_address);
   static void pdn_ip_to_pfcp_ue_ip_address(
       const pdn_type_t& pdn_type, const struct in_addr& ipv4_address,
       const struct in6_addr ipv6_address, pfcp::ue_ip_address_t& ue_ip_address);

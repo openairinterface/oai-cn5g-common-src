@@ -882,12 +882,14 @@ typedef struct indication_s {
 //-------------------------------------
 // 8.34 PDN Type
 enum pdn_type_e {
+  PDN_TYPE_E_UNKNOWN  = 0,
   PDN_TYPE_E_IPV4     = 1,
   PDN_TYPE_E_IPV6     = 2,
   PDN_TYPE_E_IPV4V6   = 3,
   PDN_TYPE_E_NON_IP   = 4,
   PDN_TYPE_E_ETHERNET = 5
 };
+
 static const std::vector<std::string> pdn_type_e2str = {
     "Error", "IPV4", "IPV6", "IPV4V6", "NON_IP"};
 

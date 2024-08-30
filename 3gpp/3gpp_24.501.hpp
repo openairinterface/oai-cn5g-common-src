@@ -23,7 +23,7 @@
 #define _3GPP_TS_24501_H_
 
 #include <string>
-
+#include <arpa/inet.h>
 #include "3gpp_24.007.hpp"
 
 //------------------------------------------------------------------------------
@@ -460,4 +460,42 @@ typedef struct pdu_session_type_s {
 
 } pdu_session_type_t;
 
+// 8.14 PDU Session (UE IP) Address Allocation (PAA)
+struct paa_s {
+  pdu_session_type_t pdu_session_type;
+  uint8_t ipv6_prefix_length;
+  struct in6_addr ipv6_address;
+  struct in_addr ipv4_address;
+
+  //------------------------------------------------------------------------------
+  bool is_ip_assigned() {
+    switch (pdu_session_type.pdu_session_type) {
+      case PDU_SESSION_TYPE_E_IPV4:
+        if (ipv4_address.s_addr) return true;
+        return false;
+        break;
+      case PDU_SESSION_TYPE_E_IPV6:
+        if (ipv6_address.s6_addr32[0] | ipv6_address.s6_addr32[1] |
+            ipv6_address.s6_addr32[2] | ipv6_address.s6_addr32[3])
+          return true;
+        return false;
+        break;
+      case PDU_SESSION_TYPE_E_IPV4V6:
+        // TODO
+        if (ipv4_address.s_addr) return true;
+        if (ipv6_address.s6_addr32[0] | ipv6_address.s6_addr32[1] |
+            ipv6_address.s6_addr32[2] | ipv6_address.s6_addr32[3])
+          return true;
+        return false;
+        break;
+      case PDU_SESSION_TYPE_E_UNSTRUCTURED:
+      case PDU_SESSION_TYPE_E_ETHERNET:
+      case PDU_SESSION_TYPE_E_RESERVED:
+      default:
+        return false;
+    }
+  }
+};
+
+typedef struct paa_s paa_t;
 #endif

@@ -33,15 +33,14 @@ class NrCellIdentity {
   NrCellIdentity();
   virtual ~NrCellIdentity();
 
-  unsigned long get() const;
-  void set(const unsigned long& nrCellIdentity);
+  uint64_t get() const;
+  void set(const uint64_t& nrCellIdentity);
 
   bool encode(Ngap_NRCellIdentity_t& nrCellIdentity) const;
   bool decode(const Ngap_NRCellIdentity_t& nrCellIdentity);
 
  private:
-  unsigned long
-      m_NrCellIdentity;  // TODO: only 32 bits while NRCELL is a bitstring(36)
+  uint64_t m_NrCellIdentity;
 };
 }  // namespace oai::ngap
 

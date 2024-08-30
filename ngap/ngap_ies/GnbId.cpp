@@ -69,7 +69,8 @@ bool GnbId::get(gNBId_t& gnbId) const {
 //------------------------------------------------------------------------------
 bool GnbId::get(uint32_t& id) const {
   if (m_GnbId.has_value()) {
-    id = m_GnbId.value().id;
+    uint32_t tmp = m_GnbId.value().id;
+    id           = tmp >> (NGAP_GNB_ID_SIZE_MAX - m_GnbId.value().bitLength);
     return true;
   }
   return false;
@@ -82,10 +83,11 @@ bool GnbId::encode(Ngap_GNB_ID_t& gnbId) const {
     return true;
   }
 
-  gnbId.present                   = Ngap_GNB_ID_PR_gNB_ID;
-  gnbId.choice.gNB_ID.size        = 4;  // TODO: to be vefified
-  gnbId.choice.gNB_ID.bits_unused = 32 - m_GnbId.value().bitLength;
-  gnbId.choice.gNB_ID.buf         = (uint8_t*) calloc(1, 4 * sizeof(uint8_t));
+  gnbId.present            = Ngap_GNB_ID_PR_gNB_ID;
+  gnbId.choice.gNB_ID.size = 4;  // TODO: to be vefified
+  gnbId.choice.gNB_ID.bits_unused =
+      NGAP_GNB_ID_SIZE_MAX - m_GnbId.value().bitLength;
+  gnbId.choice.gNB_ID.buf = (uint8_t*) calloc(1, 4 * sizeof(uint8_t));
   if (!gnbId.choice.gNB_ID.buf) return false;
   gnbId.choice.gNB_ID.buf[3] = m_GnbId.value().id & 0x000000ff;
   gnbId.choice.gNB_ID.buf[2] = (m_GnbId.value().id & 0x0000ff00) >> 8;
@@ -105,7 +107,7 @@ bool GnbId::decode(const Ngap_GNB_ID_t& gnbId) {
   tmp.id |= gnbId.choice.gNB_ID.buf[1] << 16;
   tmp.id |= gnbId.choice.gNB_ID.buf[2] << 8;
   tmp.id |= gnbId.choice.gNB_ID.buf[3];
-  tmp.bitLength = 32 - gnbId.choice.gNB_ID.bits_unused;
+  tmp.bitLength = NGAP_GNB_ID_SIZE_MAX - gnbId.choice.gNB_ID.bits_unused;
 
   m_GnbId   = std::optional<gNBId_t>(tmp);
   m_Present = Ngap_GNB_ID_PR_gNB_ID;

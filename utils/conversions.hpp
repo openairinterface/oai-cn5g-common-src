@@ -54,7 +54,7 @@ class conv {
   static bool string_hex_to_int(const std::string& value_str, uint32_t& value);
   static uint32_t string_hex_to_int(const std::string& value_str);
   static void int_to_string_hex(
-      uint32_t value, std::string& value_str, uint8_t length = 0);
+      uint64_t value, std::string& value_str, uint8_t length = 0);
   static std::string uint32_to_hex_string(uint32_t value);
   static std::string tmsi_to_string(const uint32_t tmsi);
   static void get_tmsi_from_guti(const std::string& guti, uint32_t& tmsi);

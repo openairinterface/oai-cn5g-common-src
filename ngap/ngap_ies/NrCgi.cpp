@@ -38,7 +38,7 @@ void NrCgi::set(const PlmnId& plmnId, const NrCellIdentity& nrCellIdentity) {
 //------------------------------------------------------------------------------
 void NrCgi::set(
     const std::string& mcc, const std::string& mnc,
-    const unsigned long& nrCellIdentity) {
+    const uint64_t& nrCellIdentity) {
   m_PlmnId.set(mcc, mnc);
   m_NrCellIdentity.set(nrCellIdentity);
 }

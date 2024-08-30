@@ -882,10 +882,11 @@ typedef struct indication_s {
 //-------------------------------------
 // 8.34 PDN Type
 enum pdn_type_e {
-  PDN_TYPE_E_IPV4   = 1,
-  PDN_TYPE_E_IPV6   = 2,
-  PDN_TYPE_E_IPV4V6 = 3,
-  PDN_TYPE_E_NON_IP = 4,
+  PDN_TYPE_E_IPV4     = 1,
+  PDN_TYPE_E_IPV6     = 2,
+  PDN_TYPE_E_IPV4V6   = 3,
+  PDN_TYPE_E_NON_IP   = 4,
+  PDN_TYPE_E_ETHERNET = 5
 };
 static const std::vector<std::string> pdn_type_e2str = {
     "Error", "IPV4", "IPV6", "IPV4V6", "NON_IP"};
@@ -904,42 +905,6 @@ typedef struct pdn_type_s {
   const std::string& toString() const { return pdn_type_e2str.at(pdn_type); }
 } pdn_type_t;
 
-//-------------------------------------
-// 8.14 PDN Address Allocation (PAA)
-struct paa_s {
-  pdn_type_t pdn_type;
-  uint8_t ipv6_prefix_length;
-  struct in6_addr ipv6_address;
-  struct in_addr ipv4_address;
-  //------------------------------------------------------------------------------
-  bool is_ip_assigned() {
-    switch (pdn_type.pdn_type) {
-      case PDN_TYPE_E_IPV4:
-        if (ipv4_address.s_addr) return true;
-        return false;
-        break;
-      case PDN_TYPE_E_IPV6:
-        if (ipv6_address.s6_addr32[0] | ipv6_address.s6_addr32[1] |
-            ipv6_address.s6_addr32[2] | ipv6_address.s6_addr32[3])
-          return true;
-        return false;
-        break;
-      case PDN_TYPE_E_IPV4V6:
-        // TODO
-        if (ipv4_address.s_addr) return true;
-        if (ipv6_address.s6_addr32[0] | ipv6_address.s6_addr32[1] |
-            ipv6_address.s6_addr32[2] | ipv6_address.s6_addr32[3])
-          return true;
-        return false;
-        break;
-      case PDN_TYPE_E_NON_IP:
-      default:
-        return false;
-    }
-  }
-};
-
-typedef struct paa_s paa_t;
 //-------------------------------------
 // 8.15 Bearer Quality of Service (Bearer QoS)
 #define PRE_EMPTION_CAPABILITY_ENABLED (0x0)

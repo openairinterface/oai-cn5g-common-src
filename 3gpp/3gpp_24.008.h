@@ -24,6 +24,7 @@
 
 #include <stdint.h>
 #include <string>
+#include <vector>
 
 //------------------------------------------------------------------------------
 // 10.5.1.3 Location Area Identification

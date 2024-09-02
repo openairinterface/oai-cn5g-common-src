@@ -444,9 +444,9 @@ void conv::convert_string_2_hex(
 void conv::fix_primitive_json_values(nlohmann::json& j, bool parse_hex_values) {
   for (const auto& elem : j.items()) {
     if (elem.value().is_primitive()) {
-      // we have to hardcode SD value here, because of the stupid 3GPP format
-      // without leading 0x -> There is no way how we can detect this
-      // automatically so then, stoi just takes base 10 and we have wrong values
+      // we have to hardcode SD value here, since 3GPP format doesn't include
+      // prefix 0x -> There is no way how we can detect this automatically so
+      // then, stoi just takes base 10 and we have wrong values
       if (elem.key() == "sd") continue;
 
       try {

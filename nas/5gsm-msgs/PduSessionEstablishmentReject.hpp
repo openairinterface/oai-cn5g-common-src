@@ -19,8 +19,8 @@
  *      contact@openairinterface.org
  */
 
-#ifndef _PDU_SESSION_ESTABLISHMENT_ACCEPT_H_
-#define _PDU_SESSION_ESTABLISHMENT_ACCEPT_H_
+#ifndef _PDU_SESSION_ESTABLISHMENT_REJECT_H_
+#define _PDU_SESSION_ESTABLISHMENT_REJECT_H_
 
 #include <bstrlib.h>
 
@@ -31,10 +31,10 @@
 
 namespace oai::nas {
 
-class PduSessionEstablishmentAccept : public Nas5gsmHeader {
+class PduSessionEstablishmentReject : public Nas5gsmHeader {
  public:
-  PduSessionEstablishmentAccept();
-  ~PduSessionEstablishmentAccept();
+  PduSessionEstablishmentReject();
+  ~PduSessionEstablishmentReject();
 
   int Encode(uint8_t* buf, int len) override;
   int Decode(uint8_t* buf, int len) override;
@@ -44,31 +44,15 @@ class PduSessionEstablishmentAccept : public Nas5gsmHeader {
  private:
   // Mandatory
   Nas5gsmHeader ie_header_;
-  // Selected PDU session type
-  // Selected SSC mode
-  // Authorized QoS rules
-  // Session AMBR
+  // 5GSM cause
 
   // Optional
-
-  // 5GSM cause
-  // PDU address
-  // RQ timer value
-  // S-NSSAI
-  // Always-on PDU session indication
-  // Mapped EPS bearer contexts
+  // Back-off timer value
+  // Allowed SSC mode
   // EAP message
-  // Authorized QoS flow descriptions
-  // Extended protocol configuration
+  // 5GSM congestion re-attempt indicator
   // Extended protocol configuration options
-  // DNN
-  // 5GSM network feature support
-  // Serving PLMN rate control
-  // ATSSS container
-  // Control plane only indication
-  // IP header compression
-  // IP header compression configuration configuration
-  // Ethernet header compression configuration
+  // Re-attempt indicator
 };
 
 }  // namespace oai::nas

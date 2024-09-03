@@ -45,16 +45,9 @@ int oai::utils::get_inet_addr_infos_from_iface(
   strcpy(ifr.ifr_name, (const char*) if_name.c_str());
   if (ioctl(fd, SIOCGIFADDR, &ifr)) {
     close(fd);
-<<<<<<< HEAD
     logger_common::system().error(
         "Failed to probe %s inet addr: error %s\n", if_name.c_str(),
         strerror(errno));
-=======
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Failed to probe %s inet addr: error %s\n", if_name.c_str(),
-            strerror(errno));
->>>>>>> 6017a5c (logging compilation)
     return RETURNerror;
   }
   struct sockaddr_in* ipaddr = (struct sockaddr_in*) &ifr.ifr_addr;

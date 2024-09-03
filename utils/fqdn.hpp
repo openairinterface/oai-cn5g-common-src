@@ -19,17 +19,31 @@
  *      contact@openairinterface.org
  */
 
-#ifndef _OUTPUT_WRAPPER_H
-#define _OUTPUT_WRAPPER_H
+/*! \file fqdn.hpp
+ \brief
+ \author
+ \company Eurecom
+ \email:
+ */
+
+#ifndef FILE_FQDN_HPP_SEEN
+#define FILE_FQDN_HPP_SEEN
 
 #include <string>
 
 namespace oai::utils {
-class output_wrapper {
+class fqdn {
  public:
-  static void print_buffer(
-      const std::string app, const std::string sink, const uint8_t* buf,
-      int len);
+  /*
+   * Resolve a DNS name to get host's IP Addr
+   * @param [const std::string &] host_name: host's name/url
+   * @param [const std::string &] protocol: protocol
+   * @param [uint8_t &] addr_type: addr_type (Ipv4/v6)
+   * @return void
+   */
+  static bool resolve(
+      const std::string& host_name, std::string& address, uint32_t& port,
+      uint8_t& addr_type, const std::string& protocol = "http");
 };
 }  // namespace oai::utils
-#endif
+#endif /* FILE_FQDN_HPP_SEEN */

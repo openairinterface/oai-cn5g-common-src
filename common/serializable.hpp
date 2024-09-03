@@ -19,17 +19,17 @@
  *      contact@openairinterface.org
  */
 
-#ifndef _OUTPUT_WRAPPER_H
-#define _OUTPUT_WRAPPER_H
+#ifndef FILE_SERIALIZABLE_HPP_SEEN
+#define FILE_SERIALIZABLE_HPP_SEEN
 
 #include <string>
+#include <iostream>
 
-namespace oai::utils {
-class output_wrapper {
+class stream_serializable {
  public:
-  static void print_buffer(
-      const std::string app, const std::string sink, const uint8_t* buf,
-      int len);
+  virtual void dump_to(std::ostream& os)   = 0;
+  virtual void load_from(std::istream& is) = 0;
+  // virtual ~serializable() = 0;
 };
-}  // namespace oai::utils
-#endif
+
+#endif /* FILE_SERIALIZABLE_HPP_SEEN */

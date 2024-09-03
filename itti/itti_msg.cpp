@@ -19,17 +19,28 @@
  *      contact@openairinterface.org
  */
 
-#ifndef _OUTPUT_WRAPPER_H
-#define _OUTPUT_WRAPPER_H
+#include "itti_msg.hpp"
+#include "itti.hpp"
 
-#include <string>
+extern itti_mw* itti_inst;
 
-namespace oai::utils {
-class output_wrapper {
- public:
-  static void print_buffer(
-      const std::string app, const std::string sink, const uint8_t* buf,
-      int len);
+itti_msg::itti_msg()
+    : msg_type(ITTI_MSG_TYPE_NONE), origin(TASK_NONE), destination(TASK_NONE) {
+  msg_num = itti_inst->increment_message_number();
 };
-}  // namespace oai::utils
-#endif
+
+itti_msg::itti_msg(
+    const itti_msg_type_t msg_type, task_id_t origin, task_id_t destination)
+    : msg_type(msg_type), origin(origin), destination(destination) {
+  msg_num = itti_inst->increment_message_number();
+};
+
+itti_msg::itti_msg(const itti_msg& i)
+    : msg_type(i.msg_type),
+      msg_num(i.msg_num),
+      origin(i.origin),
+      destination(i.destination){};
+
+const char* itti_msg::get_msg_name() {
+  return "UNINITIALIZED";
+}

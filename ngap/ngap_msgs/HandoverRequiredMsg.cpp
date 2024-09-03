@@ -133,7 +133,7 @@ bool HandoverRequiredMsg::getPduSessionResourceList(
 //------------------------------------------------------------------------------
 bool HandoverRequiredMsg::getDirectForwardingPathAvailability(
     long& value) const {
-  if (m_DirectForwardingPathAvailability.has_value()) return false;
+  if (!m_DirectForwardingPathAvailability.has_value()) return false;
   value = m_DirectForwardingPathAvailability.value();
   return true;
 }

@@ -30,6 +30,7 @@ set (  PACKAGE_NAME                    "COMMON" )
 set (NAS_TEST_DIR   ${NAS_DIR}/test)
 set (NGAP_TEST_DIR  ${NGAP_DIR}/test)
 
+include_directories(${3GPP_DIR})
 include_directories(${COMMON_DIR})
 include_directories(${LOGGER_DIR})
 include_directories(${MODEL_DIR}/common_model)

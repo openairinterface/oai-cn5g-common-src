@@ -21,6 +21,7 @@
 cmake_minimum_required (VERSION 3.22.1)
 project( NAS )
 
+include_directories(${3GPP_DIR})
 include_directories(${COMMON_DIR})
 include_directories(${LOGGER_DIR})
 include_directories(${MODEL_DIR}/common_model)

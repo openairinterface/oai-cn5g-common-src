@@ -19,17 +19,14 @@
  *      contact@openairinterface.org
  */
 
-#ifndef _OUTPUT_WRAPPER_H
-#define _OUTPUT_WRAPPER_H
+#ifndef FILE_3GPP_COMMONS_SEEN
+#define FILE_3GPP_COMMONS_SEEN
 
-#include <string>
+#include <stdint.h>
 
-namespace oai::utils {
-class output_wrapper {
- public:
-  static void print_buffer(
-      const std::string app, const std::string sink, const uint8_t* buf,
-      int len);
-};
-}  // namespace oai::utils
-#endif
+// 8.2 Recovery
+typedef struct recovery_s {
+  uint8_t restart_counter;
+} recovery_t;
+
+#endif /* FILE_3GPP_COMMONS_SEEN */

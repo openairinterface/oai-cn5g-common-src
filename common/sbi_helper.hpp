@@ -37,6 +37,8 @@
 
 namespace oai::common::sbi {
 
+using namespace oai::logger;
+
 constexpr auto kNumberOfFirstConnectionRetries       = 10;
 constexpr auto kNumberOfConnectionRetries            = 3;
 constexpr auto kNfDefaultCurlTimeout                 = 1000;  // in Millisecond
@@ -85,10 +87,9 @@ typedef struct interface_cfg_s {
         if (boost::iequals(addr4_str, "read")) {
           if (oai::utils::get_inet_addr_infos_from_iface(
                   this->if_name, this->addr4, this->network4, this->mtu)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                .error(
-                    "Could not read %s network interface configuration",
-                    this->if_name);
+            logger_common::common().error(
+                "Could not read %s network interface configuration",
+                this->if_name);
             return;
           }
         } else {
@@ -115,8 +116,7 @@ typedef struct interface_cfg_s {
         }
       }
     } catch (std::exception& e) {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .error("%s", e.what());
+      logger_common::common().error("%s", e.what());
     }
   }
 
@@ -149,8 +149,7 @@ typedef struct nf_addr_s {
         this->api_version = json_data["api_version"].get<std::string>();
       }
     } catch (std::exception& e) {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .error("%s", e.what());
+      logger_common::common().error("%s", e.what());
     }
   }
 

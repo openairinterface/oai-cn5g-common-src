@@ -27,6 +27,9 @@
 #include <stdlib.h>
 #include <string>
 
+#include "nlohmann/json.hpp"
+#include "yaml-cpp/yaml.h"
+
 namespace oai::utils {
 
 class conv {
@@ -72,6 +75,16 @@ class conv {
       const std::string& amf_pointer, std::string& amf_id);
   static void convert_string_2_hex(
       const std::string& input_str, std::string& output_str);
+
+  /**
+   * Replaces primitive JSON string values with integers or bools if possible
+   * @param j
+   */
+  static void fix_primitive_json_values(
+      nlohmann::json& j, bool parse_hex_values = false);
+
+  static nlohmann::json yaml_to_json(
+      const YAML::Node& node, bool parse_hex_values = false);
 };
 }  // namespace oai::utils
 #endif /* FILE_CONVERSIONS_HPP_SEEN */

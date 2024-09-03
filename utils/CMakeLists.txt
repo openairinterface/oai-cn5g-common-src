@@ -21,7 +21,9 @@
 cmake_minimum_required (VERSION 3.22.1)
 project( UTILS )
 
+include_directories(${3GPP_DIR})
 include_directories(${COMMON_DIR})
+include_directories(${ITTI_DIR})
 include_directories(${MODEL_DIR}/common_model)
 include_directories(${UTILS_DIR})
 include_directories(${UTILS_DIR}/bstr)

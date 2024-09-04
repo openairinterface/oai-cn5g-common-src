@@ -103,10 +103,15 @@ check_install_common_deps() {
     PACKAGE_LIST="\
       $specific_packages \
       googletest-tools \
+      libgoogle-glog-dev \
+      libgtest-dev \
       libtool \
       pkg-config"
   elif [[ "$OS_BASEDISTRO" == "fedora" ]]; then
     PACKAGE_LIST="\
+      boost-devel \
+      glog \
+      gtest \
       libtool \
       libasan"
   else

@@ -37,5 +37,5 @@ file(GLOB UTILS_src_files
 
 add_library(UTILS STATIC ${UTILS_src_files})
 
-target_link_libraries( UTILS -Wl,--start-group LOGGER -lfmt -Wl,--end-group )
+target_link_libraries( UTILS -Wl,--start-group LOGGER -lfmt -lyaml-cpp -Wl,--end-group )
 

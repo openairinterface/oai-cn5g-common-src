@@ -162,6 +162,22 @@ typedef struct _5G_S_TMSI_s {
 
 // TODO: 5GS mobile identity information element for type of identity "MAC
 // address"
+
+typedef struct packet_filter_type_1 {
+  uint8_t packet_filter_id : 4;
+};
+
+typedef struct {
+  uint8_t component_type;
+  bstring component_value;
+} PacketFilterContents;
+
+typedef struct packet_filter_type_1 {
+  uint8_t packet_filter_direction : 2;
+  uint8_t packet_filter_id : 4;
+  uint8_t length;
+};
+
 }  // namespace oai::nas
 
 #endif

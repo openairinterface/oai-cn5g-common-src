@@ -22,10 +22,6 @@
 #ifndef _PDU_SESSION_ESTABLISHMENT_ACCEPT_H_
 #define _PDU_SESSION_ESTABLISHMENT_ACCEPT_H_
 
-#include <bstrlib.h>
-
-#include <vector>
-
 #include "NasIeHeader.hpp"
 #include "Nas5gsmHeader.hpp"
 
@@ -44,8 +40,8 @@ class PduSessionEstablishmentAccept : public Nas5gsmHeader {
  private:
   // Mandatory
   Nas5gsmHeader ie_header_;
-  // Selected PDU session type
-  // Selected SSC mode
+  PduSessionType ie_selected_pdu_session_type_;
+  SscMode ie_selected_ssc_mode;
   // Authorized QoS rules
   // Session AMBR
 

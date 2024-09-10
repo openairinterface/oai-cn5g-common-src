@@ -31,7 +31,7 @@
 
 #include "itti_msg.hpp"
 
-namespace oai::utils {
+namespace oai::itti {
 class itti_async_shell_cmd : public itti_msg {
  public:
   itti_async_shell_cmd(
@@ -56,5 +56,5 @@ class itti_async_shell_cmd : public itti_msg {
   std::string src_file;
   int src_line;
 };
-}  // namespace oai::utils
+}  // namespace oai::itti
 #endif /* FILE_ITTI_ASYNC_SHELL_CMD_SEEN */

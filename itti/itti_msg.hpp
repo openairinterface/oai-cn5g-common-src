@@ -25,6 +25,7 @@
 #include <stdint.h>
 #include <utility>
 
+namespace oai::itti {
 typedef enum {
   TASK_FIRST      = 0,
   TASK_ITTI_TIMER = TASK_FIRST,
@@ -293,5 +294,5 @@ class itti_msg_terminate : public itti_msg {
   virtual ~itti_msg_terminate(){};
   static const char* get_msg_name() { return "TERMINATE"; };
 };
-
+}  // namespace oai::itti
 #endif /* SRC_ITTI_ITTI_MSG_HPP_INCLUDED_ */

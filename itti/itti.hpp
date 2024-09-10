@@ -34,6 +34,8 @@
 #include "itti_msg.hpp"
 #include "thread_sched.hpp"
 
+namespace oai::itti {
+
 typedef volatile enum task_state_s {
   TASK_STATE_NOT_CONFIGURED,
   TASK_STATE_STARTING,
@@ -226,4 +228,5 @@ class itti_mw {
   static void signal_handler(int signum);
 };
 
+}  // namespace oai::itti
 #endif /* SRC_OAI_ITTI_ITTI_HPP_INCLUDED_ */

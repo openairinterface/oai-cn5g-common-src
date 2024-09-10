@@ -30,6 +30,7 @@
 #include <csignal>
 
 using namespace oai::logger;
+using namespace oai::itti;
 
 extern itti_mw* itti_inst;
 

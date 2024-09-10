@@ -45,8 +45,9 @@
 
 #include <stdexcept>
 
-using namespace oai::utils;
+using namespace oai::itti;
 using namespace oai::logger;
+using namespace oai::utils;
 
 extern itti_mw* itti_inst;
 void async_cmd_task(void*);

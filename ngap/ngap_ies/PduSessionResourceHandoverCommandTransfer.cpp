@@ -60,15 +60,18 @@ void PduSessionResourceHandoverCommandTransfer::setQosFlowToBeForwardedList(
       std::make_optional<QosFlowToBeForwardedList>(qosList);
   int ret = m_QosFlowToBeForwardedList.value().encode(
       m_HandoverCommandTransferIe->qosFlowToBeForwardedList);
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON).debug(
-      "Number of QoS flows in the list %d",
-      m_HandoverCommandTransferIe->qosFlowToBeForwardedList->list.count);
+  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+      .debug(
+          "Number of QoS flows in the list %d",
+          m_HandoverCommandTransferIe->qosFlowToBeForwardedList->list.count);
   if (m_HandoverCommandTransferIe->qosFlowToBeForwardedList->list.array) {
     if (m_HandoverCommandTransferIe->qosFlowToBeForwardedList->list.array[0]) {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON).debug(
-          "QFI in the list %d",
-          m_HandoverCommandTransferIe->qosFlowToBeForwardedList->list.array[0]
-              ->qosFlowIdentifier);
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .debug(
+              "QFI in the list %d",
+              m_HandoverCommandTransferIe->qosFlowToBeForwardedList->list
+                  .array[0]
+                  ->qosFlowIdentifier);
     }
   }
 

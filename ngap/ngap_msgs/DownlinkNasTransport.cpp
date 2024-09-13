@@ -67,8 +67,9 @@ void DownLinkNasTransportMsg::setAmfUeNgapId(const uint64_t& id) {
   }
 
   ret = ASN_SEQUENCE_ADD(&m_DownLinkNasTransportIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode AMF_UE_NGAP_ID IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode AMF_UE_NGAP_ID IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -92,8 +93,9 @@ void DownLinkNasTransportMsg::setRanUeNgapId(const uint32_t& ranUeNgapId) {
   }
 
   ret = ASN_SEQUENCE_ADD(&m_DownLinkNasTransportIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode RAN_UE_NGAP_ID IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode RAN_UE_NGAP_ID IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -118,8 +120,9 @@ void DownLinkNasTransportMsg::setOldAmf(const std::string& name) {
   }
 
   ret = ASN_SEQUENCE_ADD(&m_DownLinkNasTransportIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode oldAmfName IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode oldAmfName IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -189,8 +192,9 @@ void DownLinkNasTransportMsg::setNasPdu(const bstring& pdu) {
   }
 
   ret = ASN_SEQUENCE_ADD(&m_DownLinkNasTransportIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode NAS_PDU IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode NAS_PDU IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -296,8 +300,9 @@ void DownLinkNasTransportMsg::setIndex2RatFrequencySelectionPriority(
   }
 
   ret = ASN_SEQUENCE_ADD(&m_DownLinkNasTransportIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode IndexToRFSP IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode IndexToRFSP IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -330,8 +335,9 @@ void DownLinkNasTransportMsg::setAllowedNssai(
   }
 
   ret = ASN_SEQUENCE_ADD(&m_DownLinkNasTransportIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode AllowedNSSAI IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode AllowedNSSAI IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -475,8 +481,8 @@ bool DownLinkNasTransportMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           MobilityRestrictionList tmp = {};
           if (!tmp.decode(m_DownLinkNasTransportIes->protocolIEs.list.array[i]
                               ->value.choice.MobilityRestrictionList)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-                "Decode NGAP MobilityRestrictionList IE error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error("Decode NGAP MobilityRestrictionList IE error");
             return false;
           }
           m_MobilityRestrictionList =
@@ -518,14 +524,14 @@ bool DownLinkNasTransportMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           UeAggregateMaxBitRate tmp = {};
           if (!tmp.decode(m_DownLinkNasTransportIes->protocolIEs.list.array[i]
                               ->value.choice.UEAggregateMaximumBitRate)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-                "Decode NGAP UEAggregateMaximumBitRate IE error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error("Decode NGAP UEAggregateMaximumBitRate IE error");
             return false;
           }
           m_UeAggregateMaxBitRate = std::optional<UeAggregateMaxBitRate>(tmp);
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-              "Decode NGAP UEAggregateMaximumBitRate IE error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .error("Decode NGAP UEAggregateMaximumBitRate IE error");
           return false;
         }
       } break;

@@ -45,15 +45,15 @@ bool PduSessionResourceHandoverRequestAckTransfer::decode(
       &asn_DEF_Ngap_HandoverRequestAcknowledgeTransfer,
       (void**) &m_HandoverRequestAcknowledegTransferIe, buf, buf_size);
   if (rc.code == RC_OK) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON).debug(
-        "Decoded handoverRequestAcknowledegTransfer successfully");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .debug("Decoded handoverRequestAcknowledegTransfer successfully");
   } else if (rc.code == RC_WMORE) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .debug("More data expected, call again");
     return false;
   } else {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON).debug(
-        "Failure to decode handoverRequestAcknowledegTransfer data");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .debug("Failure to decode handoverRequestAcknowledegTransfer data");
     // return false;
   }
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)

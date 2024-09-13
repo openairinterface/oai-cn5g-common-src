@@ -65,8 +65,9 @@ void HandoverRequiredMsg::setAmfUeNgapId(const uint64_t& id) {
   }
 
   ret = ASN_SEQUENCE_ADD(&m_HandoverRequiredIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode AMF_UE_NGAP_ID IE error!");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode AMF_UE_NGAP_ID IE error!");
 }
 
 //------------------------------------------------------------------------------
@@ -89,8 +90,9 @@ void HandoverRequiredMsg::setRanUeNgapId(const uint32_t& ranUeNgapId) {
   }
 
   ret = ASN_SEQUENCE_ADD(&m_HandoverRequiredIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode RAN_UE_NGAP_ID IE error!");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode RAN_UE_NGAP_ID IE error!");
 }
 
 //------------------------------------------------------------------------------
@@ -257,8 +259,8 @@ bool HandoverRequiredMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
                   m_HandoverRequiredIes->protocolIEs.list.array[i]
                       ->value.choice.DirectForwardingPathAvailability);
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-              "Decoded NGAP DirectForwardingPathAvailability IE error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .error("Decoded NGAP DirectForwardingPathAvailability IE error");
           return false;
         }
       } break;
@@ -270,13 +272,14 @@ bool HandoverRequiredMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           if (!m_PduSessionResourceList.decode(
                   m_HandoverRequiredIes->protocolIEs.list.array[i]
                       ->value.choice.PDUSessionResourceListHORqd)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-                "Decoded NGAP PDUSessionResourceSetupListCxtRes IE error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error(
+                    "Decoded NGAP PDUSessionResourceSetupListCxtRes IE error");
             return false;
           }
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-              "Decoded NGAP PDUSessionResourceSetupListCxtRes IE error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .error("Decoded NGAP PDUSessionResourceSetupListCxtRes IE error");
           return false;
         }
       } break;
@@ -290,14 +293,15 @@ bool HandoverRequiredMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
               m_HandoverRequiredIes->protocolIEs.list.array[i]
                   ->value.choice.SourceToTarget_TransparentContainer);
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-              "Decoded NGAP SourceToTarget_TransparentContainer IE error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .error(
+                  "Decoded NGAP SourceToTarget_TransparentContainer IE error");
           return false;
         }
       } break;
       default: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-            "Decoded NGAP message PDU error");
+        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+            .error("Decoded NGAP message PDU error");
         return false;
       }
     }

@@ -75,8 +75,9 @@ void InitialContextSetupRequestMsg::setAmfUeNgapId(const uint64_t& id) {
 
   ret =
       ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode AMF_UE_NGAP_ID IE error!");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode AMF_UE_NGAP_ID IE error!");
 }
 
 //------------------------------------------------------------------------------
@@ -103,8 +104,9 @@ void InitialContextSetupRequestMsg::setRanUeNgapId(
 
   ret =
       ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode RAN_UE_NGAP_ID IE error!");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode RAN_UE_NGAP_ID IE error!");
 }
 
 //------------------------------------------------------------------------------
@@ -130,8 +132,9 @@ void InitialContextSetupRequestMsg::setOldAmf(const std::string& name) {
 
   ret =
       ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode oldAmfName IE error!");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode oldAmfName IE error!");
 }
 
 //------------------------------------------------------------------------------
@@ -167,8 +170,9 @@ void InitialContextSetupRequestMsg::setUeAggregateMaxBitRate(
 
   ret =
       ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode UeAggregateMaxBitRate IE error!");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode UeAggregateMaxBitRate IE error!");
 }
 
 //------------------------------------------------------------------------------
@@ -260,8 +264,8 @@ void InitialContextSetupRequestMsg::setCoreNetworkAssistanceInfo(
   int ret = m_CoreNetworkAssistanceInformationForInactive.value().encode(
       ie->value.choice.CoreNetworkAssistanceInformationForInactive);
   if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-        "Encode CoreNetworkAssistanceInformationForInactive IE error!");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode CoreNetworkAssistanceInformationForInactive IE error!");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
@@ -269,8 +273,8 @@ void InitialContextSetupRequestMsg::setCoreNetworkAssistanceInfo(
   ret =
       ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-        "Encode CoreNetworkAssistanceInformation IE error!");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode CoreNetworkAssistanceInformation IE error!");
 }
 
 //------------------------------------------------------------------------------
@@ -328,8 +332,9 @@ void InitialContextSetupRequestMsg::setGuami(const guami_full_format_t& value) {
 
   ret =
       ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode GUAMI IE error!");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode GUAMI IE error!");
 }
 
 //------------------------------------------------------------------------------
@@ -465,8 +470,9 @@ void InitialContextSetupRequestMsg::setAllowedNssai(
 
   ret =
       ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode AllowedNSSAI IE error!");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode AllowedNSSAI IE error!");
 }
 
 //------------------------------------------------------------------------------
@@ -512,8 +518,9 @@ void InitialContextSetupRequestMsg::setUeSecurityCapability(
 
   ret =
       ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode UESecurityCapabilities IE error!");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode UESecurityCapabilities IE error!");
 }
 
 //------------------------------------------------------------------------------
@@ -552,8 +559,9 @@ void InitialContextSetupRequestMsg::setSecurityKey(
 
   ret =
       ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode SecurityKey IE error!");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode SecurityKey IE error!");
 }
 
 //------------------------------------------------------------------------------
@@ -618,8 +626,9 @@ void InitialContextSetupRequestMsg::setNasPdu(const bstring& pdu) {
 
   ret =
       ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode NAS PDU error!");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode NAS PDU error!");
 }
 
 //------------------------------------------------------------------------------
@@ -654,8 +663,9 @@ void InitialContextSetupRequestMsg::setUeRadioCapability(
 
   ret =
       ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode UERadioCapability IE error!");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode UERadioCapability IE error!");
 }
 
 //------------------------------------------------------------------------------
@@ -684,8 +694,9 @@ void InitialContextSetupRequestMsg::setMaskedImeisv(const std::string& imeisv) {
 
   int ret =
       ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode MaskedIMEISV IE error!");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode MaskedIMEISV IE error!");
 }
 
 //------------------------------------------------------------------------------
@@ -785,14 +796,14 @@ bool InitialContextSetupRequestMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           if (!tmp.decode(
                   m_InitialContextSetupRequestIes->protocolIEs.list.array[i]
                       ->value.choice.UEAggregateMaximumBitRate)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-                "Decoded NGAP UEAggregateMaximumBitRate IE error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error("Decoded NGAP UEAggregateMaximumBitRate IE error");
             return false;
           }
           m_UeAggregateMaxBitRate = std::optional<UeAggregateMaxBitRate>(tmp);
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-              "Decoded NGAP UEAggregateMaximumBitRate IE error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .error("Decoded NGAP UEAggregateMaximumBitRate IE error");
           return false;
         }
       } break;
@@ -808,16 +819,18 @@ bool InitialContextSetupRequestMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
                   m_InitialContextSetupRequestIes->protocolIEs.list.array[i]
                       ->value.choice
                       .CoreNetworkAssistanceInformationForInactive)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-                "Decoded NGAP CoreNetworkAssistanceInformationForInactive IE "
-                "error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error(
+                    "Decoded NGAP CoreNetworkAssistanceInformationForInactive "
+                    "IE "
+                    "error");
             return false;
           }
           m_CoreNetworkAssistanceInformationForInactive =
               std::optional<CoreNetworkAssistanceInformationForInactive>(tmp);
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-              "Decoded NGAP CoreNetworkAssistanceInformation IE error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .error("Decoded NGAP CoreNetworkAssistanceInformation IE error");
           return false;
         }
       } break;
@@ -830,14 +843,14 @@ bool InitialContextSetupRequestMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           if (!m_Guami.decode(
                   m_InitialContextSetupRequestIes->protocolIEs.list.array[i]
                       ->value.choice.GUAMI)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-                "Decoded NGAP GUAMI IE error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error("Decoded NGAP GUAMI IE error");
 
             return false;
           }
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-              "Decoded NGAP GUAMI IE error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .error("Decoded NGAP GUAMI IE error");
           return false;
         }
       } break;
@@ -851,15 +864,16 @@ bool InitialContextSetupRequestMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           if (!tmp.decode(
                   m_InitialContextSetupRequestIes->protocolIEs.list.array[i]
                       ->value.choice.PDUSessionResourceSetupListCxtReq)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-                "Decoded NGAP PDUSessionResourceSetupListCxtReq IE error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error(
+                    "Decoded NGAP PDUSessionResourceSetupListCxtReq IE error");
             return false;
           }
           m_PduSessionResourceSetupRequestList =
               std::optional<PduSessionResourceSetupListCxtReq>(tmp);
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-              "Decoded NGAP PDUSessionResourceSetupListCxtReq IE error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .error("Decoded NGAP PDUSessionResourceSetupListCxtReq IE error");
           return false;
         }
       } break;
@@ -872,13 +886,13 @@ bool InitialContextSetupRequestMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           if (!m_AllowedNssai.decode(
                   m_InitialContextSetupRequestIes->protocolIEs.list.array[i]
                       ->value.choice.AllowedNSSAI)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-                "Decoded NGAP AllowedNSSAI IE error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error("Decoded NGAP AllowedNSSAI IE error");
             return false;
           }
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-              "Decoded NGAP AllowedNSSAI IE error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .error("Decoded NGAP AllowedNSSAI IE error");
           return false;
         }
       } break;
@@ -891,13 +905,13 @@ bool InitialContextSetupRequestMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           if (!m_UeSecurityCapabilities.decode(
                   m_InitialContextSetupRequestIes->protocolIEs.list.array[i]
                       ->value.choice.UESecurityCapabilities)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-                "Decoded NGAP UESecurityCapabilities IE error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error("Decoded NGAP UESecurityCapabilities IE error");
             return false;
           }
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-              "Decoded NGAP UESecurityCapabilities IE error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .error("Decoded NGAP UESecurityCapabilities IE error");
           return false;
         }
       } break;
@@ -910,13 +924,13 @@ bool InitialContextSetupRequestMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           if (!m_SecurityKey.decode(
                   m_InitialContextSetupRequestIes->protocolIEs.list.array[i]
                       ->value.choice.SecurityKey)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-                "Decoded NGAP SecurityKey IE error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error("Decoded NGAP SecurityKey IE error");
             return false;
           }
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-              "Decoded NGAP SecurityKey IE error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .error("Decoded NGAP SecurityKey IE error");
           return false;
         }
       } break;
@@ -930,21 +944,21 @@ bool InitialContextSetupRequestMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           if (!tmp.decode(
                   m_InitialContextSetupRequestIes->protocolIEs.list.array[i]
                       ->value.choice.NAS_PDU)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-                "Decoded NGAP NasPdu IE error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error("Decoded NGAP NasPdu IE error");
             return false;
           }
           m_NasPdu = std::optional<NasPdu>(tmp);
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-              "Decoded NGAP NAS_PDU IE error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .error("Decoded NGAP NAS_PDU IE error");
           return false;
         }
       } break;
 
       default: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-            "Decoded NGAP Message PDU error");
+        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+            .error("Decoded NGAP Message PDU error");
         return false;
       }
     }

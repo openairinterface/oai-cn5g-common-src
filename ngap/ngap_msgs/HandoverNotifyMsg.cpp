@@ -62,8 +62,9 @@ void HandoverNotifyMsg::setAmfUeNgapId(const uint64_t& id) {
   }
 
   ret = ASN_SEQUENCE_ADD(&m_HandoverNotifyIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode AMF_UE_NGAP_ID IE error!");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode AMF_UE_NGAP_ID IE error!");
 }
 
 //------------------------------------------------------------------------------
@@ -86,8 +87,9 @@ void HandoverNotifyMsg::setRanUeNgapId(const uint32_t& ranUeNgapId) {
   }
 
   ret = ASN_SEQUENCE_ADD(&m_HandoverNotifyIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode RAN_UE_NGAP_ID IE error!");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode RAN_UE_NGAP_ID IE error!");
 }
 
 //------------------------------------------------------------------------------
@@ -117,8 +119,9 @@ void HandoverNotifyMsg::setUserLocationInfoNr(
   }
 
   ret = ASN_SEQUENCE_ADD(&m_HandoverNotifyIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode UserLocationInformation IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode UserLocationInformation IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -214,19 +217,19 @@ bool HandoverNotifyMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           if (!m_UserLocationInformation.decode(
                   m_HandoverNotifyIes->protocolIEs.list.array[i]
                       ->value.choice.UserLocationInformation)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-                "Decoded NGAP UserLocationInformation IE error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error("Decoded NGAP UserLocationInformation IE error");
             return false;
           }
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-              "Decoded NGAP UserLocationInformation IE error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .error("Decoded NGAP UserLocationInformation IE error");
           return false;
         }
       } break;
       default: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-            "Decoded NGAP message PDU error");
+        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+            .error("Decoded NGAP message PDU error");
         return false;
       }
     }

@@ -85,7 +85,7 @@ bool DrbStatusDl::decode(const Ngap_DRBStatusDL_t& dl) {
     DrbStatusDl18 dl18 = {};
     if (!dl18.decode(*dl.choice.dRBStatusDL18)) {
       oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                  .error("Decode DRBStatusDL18 IE error");
+          .error("Decode DRBStatusDL18 IE error");
       return false;
     }
     m_Dl18 = std::make_optional<DrbStatusDl18>(dl18);
@@ -93,7 +93,7 @@ bool DrbStatusDl::decode(const Ngap_DRBStatusDL_t& dl) {
     DrbStatusDl12 dl12 = {};
     if (!dl12.decode(*dl.choice.dRBStatusDL12)) {
       oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                  .error("Decode DRBStatusDL12 IE error");
+          .error("Decode DRBStatusDL12 IE error");
       return false;
     }
     m_Dl12 = std::make_optional<DrbStatusDl12>(dl12);

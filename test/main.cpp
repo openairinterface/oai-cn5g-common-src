@@ -22,16 +22,13 @@
 #include "logger_base.hpp"
 #include <gtest/gtest.h>
 
-std::vector<uint8_t> hexStringToByteArray(const std::string &hexString)
-{
+std::vector<uint8_t> hexStringToByteArray(const std::string& hexString) {
   std::vector<uint8_t> byteArray;
-  if (hexString.length() % 2 == 1)
-  {
+  if (hexString.length() % 2 == 1) {
     throw std::invalid_argument("Hex string to convert is not byte aligned");
   }
   // Loop through the hex string, two characters at a time
-  for (size_t i = 0; i < hexString.length(); i += 2)
-  {
+  for (size_t i = 0; i < hexString.length(); i += 2) {
     // Extract two characters representing a byte
     std::string byteString = hexString.substr(i, 2);
 
@@ -45,8 +42,7 @@ std::vector<uint8_t> hexStringToByteArray(const std::string &hexString)
   return byteArray;
 }
 
-int main(int argc, char **argv)
-{
+int main(int argc, char** argv) {
   ::testing::InitGoogleTest(&argc, argv);
 
   oai::logger::logger_registry::register_logger(

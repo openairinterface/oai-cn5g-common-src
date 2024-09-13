@@ -74,8 +74,8 @@ bool AmfStatusIndication::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
       return false;
     }
   } else {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-        "MessageType error, ngapPdu->present %d", ngapPdu->present);
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("MessageType error, ngapPdu->present %d", ngapPdu->present);
     return false;
   }
 

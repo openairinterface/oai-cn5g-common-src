@@ -60,8 +60,9 @@ void NgResetMsg::setCause(const Cause& c) {
   }
 
   int ret = ASN_SEQUENCE_ADD(&m_NgResetIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode NGAP Cause IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode NGAP Cause IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -82,8 +83,9 @@ void NgResetMsg::setResetType(const ResetType& r) {
   }
 
   int ret = ASN_SEQUENCE_ADD(&m_NgResetIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode NGAP ResetType IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode NGAP ResetType IE error");
 }
 
 //------------------------------------------------------------------------------

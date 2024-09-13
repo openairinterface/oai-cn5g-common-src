@@ -107,8 +107,9 @@ void NgSetupResponseMsg::setGuamiList(std::vector<struct GuamiItem_s>& list) {
   }
 
   int ret = ASN_SEQUENCE_ADD(&m_NgSetupResponsIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode NGAP ServedGUAMIList IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode NGAP ServedGUAMIList IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -143,8 +144,8 @@ void NgSetupResponseMsg::setPlmnSupportList(
     PlmnSupportItem plmnSupportItem = {};
     PlmnId plmn                     = {};
     plmn.set(list[i].mcc, list[i].mnc);
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON).debug(
-        "MCC %s, MNC %s", list[i].mcc.c_str(), list[i].mnc.c_str());
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .debug("MCC %s, MNC %s", list[i].mcc.c_str(), list[i].mnc.c_str());
 
     std::vector<SNssai> snssais;
     for (int j = 0; j < list[i].sliceList.size(); j++) {
@@ -178,8 +179,9 @@ void NgSetupResponseMsg::setPlmnSupportList(
   }
 
   int ret = ASN_SEQUENCE_ADD(&m_NgSetupResponsIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode NGAP PLMNSupportList IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode NGAP PLMNSupportList IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -202,8 +204,8 @@ bool NgSetupResponseMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
       return false;
     }
   } else {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-        "MessageType error, ngapPdu->present %d", ngapPdu->present);
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("MessageType error, ngapPdu->present %d", ngapPdu->present);
     return false;
   }
   for (int i = 0; i < m_NgSetupResponsIes->protocolIEs.list.count; i++) {
@@ -215,13 +217,13 @@ bool NgSetupResponseMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
                 Ngap_NGSetupResponseIEs__value_PR_AMFName) {
           if (!m_AmfName.decode(m_NgSetupResponsIes->protocolIEs.list.array[i]
                                     ->value.choice.AMFName)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-                "Decoded NGAP AMFName error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error("Decoded NGAP AMFName error");
             return false;
           }
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-              "Decoded NGAP AMFName error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .error("Decoded NGAP AMFName error");
           return false;
         }
       } break;
@@ -233,13 +235,13 @@ bool NgSetupResponseMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           if (!m_ServedGuamiList.decode(
                   m_NgSetupResponsIes->protocolIEs.list.array[i]
                       ->value.choice.ServedGUAMIList)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-                "Decoded NGAP ServedGUAMIList error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error("Decoded NGAP ServedGUAMIList error");
             return false;
           }
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-              "Decoded NGAP ServedGUAMIList error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .error("Decoded NGAP ServedGUAMIList error");
           return false;
         }
       } break;
@@ -251,13 +253,13 @@ bool NgSetupResponseMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           if (!m_RelativeAmfCapacity.decode(
                   m_NgSetupResponsIes->protocolIEs.list.array[i]
                       ->value.choice.RelativeAMFCapacity)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-                "Decoded NGAP RelativeAMFCapacity error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error("Decoded NGAP RelativeAMFCapacity error");
             return false;
           }
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-              "Decoded NGAP RelativeAMFCapacity error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .error("Decoded NGAP RelativeAMFCapacity error");
           return false;
         }
       } break;
@@ -269,13 +271,13 @@ bool NgSetupResponseMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           if (!m_PlmnSupportList.decode(
                   m_NgSetupResponsIes->protocolIEs.list.array[i]
                       ->value.choice.PLMNSupportList)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-                "Decoded NGAP PLMNSupportList error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error("Decoded NGAP PLMNSupportList error");
             return false;
           }
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-              "Decoded NGAP PLMNSupportList error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .error("Decoded NGAP PLMNSupportList error");
           return false;
         }
       } break;
@@ -287,25 +289,25 @@ bool NgSetupResponseMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           UeRetentionInformation tmp = {};
           if (!tmp.decode(m_NgSetupResponsIes->protocolIEs.list.array[i]
                               ->value.choice.UERetentionInformation)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-                "Decoded NGAP UeRetentionInformation IE error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error("Decoded NGAP UeRetentionInformation IE error");
             return false;
           }
           m_UeRetentionInformation =
               std::make_optional<UeRetentionInformation>(tmp);
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-              "Decoded NGAP UeRetentionInformation IE error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .error("Decoded NGAP UeRetentionInformation IE error");
           return false;
         }
       } break;
       case Ngap_ProtocolIE_ID_id_CriticalityDiagnostics: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON).debug(
-            "Decoded NGAP CriticalityDiagnostics");
+        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+            .debug("Decoded NGAP CriticalityDiagnostics");
       } break;
       default: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-            "Decoded NGAP Message PDU error");
+        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+            .error("Decoded NGAP Message PDU error");
         return false;
       }
     }
@@ -394,16 +396,16 @@ void NgSetupResponseMsg::setUeRetentionInformation(
 
   if (!m_UeRetentionInformation.value().encode(
           ie->value.choice.UERetentionInformation)) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-        "Encode NGAP UeRetentionInformation IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode NGAP UeRetentionInformation IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
   int ret = ASN_SEQUENCE_ADD(&m_NgSetupResponsIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-        "Encode NGAP UeRetentionInformation IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode NGAP UeRetentionInformation IE error");
 }
 
 //------------------------------------------------------------------------------

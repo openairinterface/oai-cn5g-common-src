@@ -55,13 +55,13 @@ bool DrbSubjectToStatusTransferList::encode(
 
     if (!item.encode(*ie)) {
       oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                  .error("Encode DrbSubjectToStatusTransferList IE error!");
+          .error("Encode DrbSubjectToStatusTransferList IE error!");
       oai::utils::utils::free_wrapper((void**) &ie);
       return false;
     }
     if (ASN_SEQUENCE_ADD(&drbsSubjectToStatusTransferList.list, ie) != 0) {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-          "ASN_SEQUENCE_ADD DrbSubjectToStatusTransferList IE error!");
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .error("ASN_SEQUENCE_ADD DrbSubjectToStatusTransferList IE error!");
       return false;
     }
   }

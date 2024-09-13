@@ -128,8 +128,8 @@ int MessageType::encode(Ngap_NGAP_PDU_t& pdu) const {
       break;
     }
     case Ngap_NGAP_PDU_PR_NOTHING: {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON).debug(
-          "Ngap_NGAP_PDU_PR_NOTHING (messageType encode error)");
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .debug("Ngap_NGAP_PDU_PR_NOTHING (messageType encode error)");
       return 0;
     }
   }

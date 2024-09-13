@@ -67,8 +67,9 @@ void UeContextReleaseCommandMsg::setAmfUeNgapId(const uint64_t& id) {
     return;
   }
   ret = ASN_SEQUENCE_ADD(&m_UEContextReleaseCommandIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode NGAP AMF_UE_NGAP_ID IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode NGAP AMF_UE_NGAP_ID IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -113,8 +114,9 @@ void UeContextReleaseCommandMsg::setUeNgapIdPair(
     return;
   }
   ret = ASN_SEQUENCE_ADD(&m_UEContextReleaseCommandIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode NGAP RAN_UE_NGAP_ID IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode NGAP RAN_UE_NGAP_ID IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -153,8 +155,9 @@ void UeContextReleaseCommandMsg::addCauseIe() {
   m_CauseValue.encode(ie->value.choice.Cause);
   int ret =
       ASN_SEQUENCE_ADD(&m_UEContextReleaseCommandIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                   .error("Encode NGAP Cause IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode NGAP Cause IE error");
 }
 
 //------------------------------------------------------------------------------

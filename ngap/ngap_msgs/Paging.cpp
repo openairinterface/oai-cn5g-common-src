@@ -102,8 +102,10 @@ bool PagingMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       default: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON).warn(
-            "Not decoded IE %d", m_PagingIes->protocolIEs.list.array[i]->id);
+        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+            .warn(
+                "Not decoded IE %d",
+                m_PagingIes->protocolIEs.list.array[i]->id);
 
         return true;
       }
@@ -132,8 +134,9 @@ void PagingMsg::setUePagingIdentity(
   }
 
   ret = ASN_SEQUENCE_ADD(&m_PagingIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode NGAP UEPagingIdentity IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode NGAP UEPagingIdentity IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -182,8 +185,9 @@ void PagingMsg::setTaiListForPaging(const std::vector<Tai_t>& list) {
   }
 
   ret = ASN_SEQUENCE_ADD(&m_PagingIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode NGAP TAIListForPaging IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode NGAP TAIListForPaging IE error");
 }
 
 //------------------------------------------------------------------------------

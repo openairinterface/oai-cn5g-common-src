@@ -118,8 +118,9 @@ int CriticalityDiagnostics::encode(
     return 1;
   }
   int ret = ASN_SEQUENCE_ADD(&ngSetupFailure.protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode CriticalityDiagnostics IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode CriticalityDiagnostics IE error");
   return ret;
 }
 

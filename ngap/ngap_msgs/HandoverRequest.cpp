@@ -166,8 +166,9 @@ void HandoverRequest::setAmfUeNgapId(const uint64_t& id) {
   }
 
   ret = ASN_SEQUENCE_ADD(&m_HandoverRequestIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode AMF_UE_NGAP_ID IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode AMF_UE_NGAP_ID IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -180,8 +181,9 @@ void HandoverRequest::setHandoverType(const long& type)  // 0--intra5gs
   ie->value.present = Ngap_HandoverRequestIEs__value_PR_HandoverType;
   ie->value.choice.HandoverType = type;
   int ret = ASN_SEQUENCE_ADD(&m_HandoverRequestIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode HandoverType IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode HandoverType IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -197,8 +199,9 @@ void HandoverRequest::setCause(
   m_Cause.set(value);
   m_Cause.encode(ie->value.choice.Cause);
   int ret = ASN_SEQUENCE_ADD(&m_HandoverRequestIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode Cause IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode Cause IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -236,8 +239,9 @@ void HandoverRequest::setUeSecurityCapabilities(
   m_UeSecurityCapabilities.encode((ie->value.choice.UESecurityCapabilities));
 
   int ret = ASN_SEQUENCE_ADD(&m_HandoverRequestIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode UESecurityCapabilities IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode UESecurityCapabilities IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -253,8 +257,9 @@ void HandoverRequest::setGuami(
   m_Guami.encode(ie->value.choice.GUAMI);
 
   int ret = ASN_SEQUENCE_ADD(&m_HandoverRequestIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode GUAMI IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode GUAMI IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -271,8 +276,9 @@ void HandoverRequest::setGuami(
 
   int ret = ASN_SEQUENCE_ADD(&m_HandoverRequestIes->protocolIEs.list, ie);
 
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode GUAMI IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode GUAMI IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -289,8 +295,9 @@ void HandoverRequest::setGuami(
 
   int ret = ASN_SEQUENCE_ADD(&m_HandoverRequestIes->protocolIEs.list, ie);
 
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode GUAMI IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode GUAMI IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -301,8 +308,8 @@ void HandoverRequest::setAllowedNssai(const std::vector<SNssai>& list) {
     it.encode(item->s_NSSAI);
     int ret = ASN_SEQUENCE_ADD(&m_AllowedNssai.list, item);
     if (ret != 0)
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-          "Encode PDUSessionResourceHandoverListItem IE error");
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .error("Encode PDUSessionResourceHandoverListItem IE error");
   }
   ngap_utils::print_asn_msg(&asn_DEF_Ngap_AllowedNSSAI, &m_AllowedNssai);
   Ngap_HandoverRequestIEs_t* ie =
@@ -312,8 +319,9 @@ void HandoverRequest::setAllowedNssai(const std::vector<SNssai>& list) {
   ie->value.present = Ngap_HandoverRequestIEs__value_PR_AllowedNSSAI;
   ie->value.choice.AllowedNSSAI = m_AllowedNssai;
   int ret = ASN_SEQUENCE_ADD(&m_HandoverRequestIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-                    "Encode AllowedNSSAI IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode AllowedNSSAI IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -328,8 +336,9 @@ void HandoverRequest::setSecurityContext(const long& count, const bstring& nh) {
   ie->value.present = Ngap_HandoverRequestIEs__value_PR_SecurityContext;
   ie->value.choice.SecurityContext = m_SecurityContext;
   int ret = ASN_SEQUENCE_ADD(&m_HandoverRequestIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-                    "Encode SecurityContext IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode SecurityContext IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -390,8 +399,8 @@ void HandoverRequest::setSourceToTargetTransparentContainer(
       ie->value.choice.SourceToTarget_TransparentContainer, sourceTotarget);
   int ret = ASN_SEQUENCE_ADD(&m_HandoverRequestIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-        "Encode m_SourceToTargetTransparentContainer IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode m_SourceToTargetTransparentContainer IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -409,8 +418,9 @@ void HandoverRequest::setMobilityRestrictionList(const PlmnId& plmn_id) {
   m_MobilityRestrictionList.value().encode(
       ie->value.choice.MobilityRestrictionList);
   int ret = ASN_SEQUENCE_ADD(&m_HandoverRequestIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode MobilityRestrictionList IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode MobilityRestrictionList IE error");
 }
 
 }  // namespace oai::ngap

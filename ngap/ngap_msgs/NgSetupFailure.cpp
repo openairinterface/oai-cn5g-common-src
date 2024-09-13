@@ -60,8 +60,9 @@ void NgSetupFailureMsg::addCauseIe() {
   }
 
   int ret = ASN_SEQUENCE_ADD(&m_NgSetupFailureIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode NGAP Cause IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode NGAP Cause IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -82,8 +83,9 @@ void NgSetupFailureMsg::addTimeToWaitIE() {
   }
 
   int ret = ASN_SEQUENCE_ADD(&m_NgSetupFailureIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode NGAP TimeToWait IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode NGAP TimeToWait IE error");
 }
 
 //------------------------------------------------------------------------------

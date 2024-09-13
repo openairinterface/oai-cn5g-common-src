@@ -74,8 +74,9 @@ void HandoverCommandMsg::setAmfUeNgapId(const uint64_t& id) {
   }
 
   ret = ASN_SEQUENCE_ADD(&m_HandoverCommandIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode AMF_UE_NGAP_ID IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode AMF_UE_NGAP_ID IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -98,8 +99,9 @@ void HandoverCommandMsg::setRanUeNgapId(const uint32_t& ranUeNgapId) {
   }
 
   ret = ASN_SEQUENCE_ADD(&m_HandoverCommandIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode RAN_UE_NGAP_ID IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode RAN_UE_NGAP_ID IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -113,8 +115,9 @@ void HandoverCommandMsg::setHandoverType(const long& type) {
   ie->value.choice.HandoverType = type;
   int ret = ASN_SEQUENCE_ADD(&m_HandoverCommandIes->protocolIEs.list, ie);
 
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode HandoverType IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode HandoverType IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -206,16 +209,16 @@ void HandoverCommandMsg::setPduSessionResourceToReleaseListHOCmd(
 
   if (!m_PduSessionResourceToReleaseListHOCmd.value().encode(
           ie->value.choice.PDUSessionResourceToReleaseListHOCmd)) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-        "Encode PDUSessionResourceToReleaseListHOCmd IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode PDUSessionResourceToReleaseListHOCmd IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
   int ret = ASN_SEQUENCE_ADD(&m_HandoverCommandIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-        "Encode PDUSessionResourceToReleaseListHOCmd IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode PDUSessionResourceToReleaseListHOCmd IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -242,8 +245,9 @@ void HandoverCommandMsg::setTargetToSourceTransparentContainer(
       ie->value.choice.TargetToSource_TransparentContainer, targetTosource);
 
   int ret = ASN_SEQUENCE_ADD(&m_HandoverCommandIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode HandoverType IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode HandoverType IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -338,13 +342,13 @@ bool HandoverCommandMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
             m_PduSessionResourceHandoverList =
                 std::optional<PduSessionResourceHandoverList>(tmp);
           } else {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-                "Decoded NGAP PDUSessionResourceHandoverList IE error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error("Decoded NGAP PDUSessionResourceHandoverList IE error");
             return false;
           }
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-              "Decoded NGAP PDUSessionResourceHandoverList IE error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .error("Decoded NGAP PDUSessionResourceHandoverList IE error");
           return false;
         }
       } break;
@@ -360,14 +364,17 @@ bool HandoverCommandMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
             m_PduSessionResourceToReleaseListHOCmd =
                 std::optional<PduSessionResourceToReleaseListHandoverCmd>(tmp);
           } else {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-                "Decoded NGAP PDUSessionResourceToReleaseListHOCmd IE error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error(
+                    "Decoded NGAP PDUSessionResourceToReleaseListHOCmd IE "
+                    "error");
             return false;
           }
 
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-              "Decoded NGAP PDUSessionResourceToReleaseListHOCmd IE error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .error(
+                  "Decoded NGAP PDUSessionResourceToReleaseListHOCmd IE error");
           return false;
         }
       } break;
@@ -377,8 +384,9 @@ bool HandoverCommandMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
             m_HandoverCommandIes->protocolIEs.list.array[i]->value.present ==
                 Ngap_HandoverCommandIEs__value_PR_TargetToSource_TransparentContainer) {
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-              "Decoded NGAP TargetToSource_TransparentContainer IE error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .error(
+                  "Decoded NGAP TargetToSource_TransparentContainer IE error");
           return false;
         }
       } break;

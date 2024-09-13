@@ -49,8 +49,8 @@ void RanStatusTransferTransparentContainer::setDrbSubjectList(
 bool RanStatusTransferTransparentContainer::encode(
     Ngap_RANStatusTransfer_TransparentContainer_t& ranStatusTransfer) const {
   if (!m_DrbList.encode(ranStatusTransfer.dRBsSubjectToStatusTransferList)) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-        "Encode RANStatusTransferTransparentContainer IE error!");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode RANStatusTransferTransparentContainer IE error!");
     return false;
   }
   return true;
@@ -60,8 +60,8 @@ bool RanStatusTransferTransparentContainer::encode(
 bool RanStatusTransferTransparentContainer::decode(
     const Ngap_RANStatusTransfer_TransparentContainer_t& ranStatusTransfer) {
   if (!m_DrbList.decode(ranStatusTransfer.dRBsSubjectToStatusTransferList)) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-        "Decode RANStatusTransferTransparentContainer IE error!");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Decode RANStatusTransferTransparentContainer IE error!");
     return false;
   }
   return true;

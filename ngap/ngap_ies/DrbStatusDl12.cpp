@@ -54,7 +54,7 @@ bool DrbStatusDl12::encode(Ngap_DRBStatusDL12_t& dl12) const {
 bool DrbStatusDl12::decode(const Ngap_DRBStatusDL12_t& dl12) {
   if (!m_DlCountValue.decode(dl12.dL_COUNTValue)) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                .error("Decode DrbStatusDl12 IE error");
+        .error("Decode DrbStatusDl12 IE error");
     return false;
   }
   return true;

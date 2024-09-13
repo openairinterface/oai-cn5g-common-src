@@ -73,12 +73,15 @@ bool PduSessionResourceHandoverRequiredTransfer::decode(
       NULL, ATS_ALIGNED_CANONICAL_PER, &asn_DEF_Ngap_HandoverRequiredTransfer,
       (void**) &m_HandoverRquiredTransferIe, buf, buf_size);
   if (rc.code == RC_OK) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON).debug("Decoded successfully");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .debug("Decoded successfully");
   } else if (rc.code == RC_WMORE) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON).debug("More data expected, call again");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .debug("More data expected, call again");
     return false;
   } else {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON).debug("Failure to decode data");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .debug("Failure to decode data");
     return false;
   }
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)

@@ -211,8 +211,8 @@ bool PduSessionResourceSetupResponseTransferIE::decode(
     if (!additional_qos_flow.decode(
             *m_PduSessionResourceSetupResponseTransferIe
                  ->additionalDLQosFlowPerTNLInformation)) {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-          "Decode NGAP AdditionalDLQoSFlowPerTNLInformation IE error");
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .error("Decode NGAP AdditionalDLQoSFlowPerTNLInformation IE error");
       return false;
     }
     m_AdditionalDlQosFlowPerTnlInformation =

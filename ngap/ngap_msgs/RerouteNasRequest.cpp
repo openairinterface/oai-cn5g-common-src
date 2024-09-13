@@ -68,8 +68,9 @@ void RerouteNasRequest::setAmfUeNgapId(const uint64_t& id) {
   }
 
   ret = ASN_SEQUENCE_ADD(&m_RerouteNASRequestIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode AMF_UE_NGAP_ID IE error!");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode AMF_UE_NGAP_ID IE error!");
 }
 
 //------------------------------------------------------------------------------
@@ -98,8 +99,9 @@ void RerouteNasRequest::setRanUeNgapId(const uint32_t& ranUeNgapId) {
   }
 
   ret = ASN_SEQUENCE_ADD(&m_RerouteNASRequestIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode RAN_UE_NGAP_ID IE error!");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode RAN_UE_NGAP_ID IE error!");
 }
 
 //------------------------------------------------------------------------------
@@ -141,8 +143,9 @@ void RerouteNasRequest::setAllowedNssai(const std::vector<S_Nssai>& list) {
   }
 
   ret = ASN_SEQUENCE_ADD(&m_RerouteNASRequestIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode AllowedNSSAI IE error!");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode AllowedNSSAI IE error!");
 }
 
 //------------------------------------------------------------------------------
@@ -171,8 +174,9 @@ void RerouteNasRequest::setNgapMessage(const OCTET_STRING_t& message) {
   ie->value.choice.OCTET_STRING = message;
 
   int ret = ASN_SEQUENCE_ADD(&m_RerouteNASRequestIes->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode NGAP Message IE error!");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode NGAP Message IE error!");
 }
 
 //------------------------------------------------------------------------------
@@ -194,7 +198,7 @@ bool RerouteNasRequest::setAmfSetId(const uint16_t& amfSetId) {
   int ret = m_AmfSetId.encode(ie->value.choice.AMFSetID);
   if (!ret) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                .error("Encode AMFSetID IE error!");
+        .error("Encode AMFSetID IE error!");
     oai::utils::utils::free_wrapper((void**) &ie);
     return false;
   }

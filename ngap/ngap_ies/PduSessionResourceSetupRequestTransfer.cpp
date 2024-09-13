@@ -164,8 +164,9 @@ void PduSessionResourceSetupRequestTransferIE::setPduSessionType(
 
   ret = ASN_SEQUENCE_ADD(
       &m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode PDUSessionType IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode PDUSessionType IE error");
   // oai::utils::utils::free_wrapper((void**) &ie);
 }
 
@@ -208,8 +209,9 @@ void PduSessionResourceSetupRequestTransferIE::setSecurityIndication(
 
   ret = ASN_SEQUENCE_ADD(
       &m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode SecurityIndication IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode SecurityIndication IE error");
   // oai::utils::utils::free_wrapper((void**) &ie);
 }
 
@@ -247,8 +249,9 @@ void PduSessionResourceSetupRequestTransferIE::setSecurityIndication(
 
   ret = ASN_SEQUENCE_ADD(
       &m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode SecurityIndication IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode SecurityIndication IE error");
   // oai::utils::utils::free_wrapper((void**) &ie);
 }
 
@@ -275,8 +278,9 @@ void PduSessionResourceSetupRequestTransferIE::setNetworkInstance(
 
   ret = ASN_SEQUENCE_ADD(
       &m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode NetworkInstance IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode NetworkInstance IE error");
   // oai::utils::utils::free_wrapper((void**) &ie);
 }
 
@@ -450,8 +454,9 @@ void PduSessionResourceSetupRequestTransferIE::setQosFlowSetupRequestList(
 
   ret = ASN_SEQUENCE_ADD(
       &m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list, ie);
-  if (ret != 0) oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error("Encode QosFlowSetupRequestList IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode QosFlowSetupRequestList IE error");
   // oai::utils::utils::free_wrapper((void**) &ie);
 }
 
@@ -514,16 +519,17 @@ bool PduSessionResourceSetupRequestTransferIE::decode(
                   m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list
                       .array[i]
                       ->value.choice.PDUSessionAggregateMaximumBitRate)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-                "Decode NGAP PDUSessionAggregateMaximumBitRate IE error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error(
+                    "Decode NGAP PDUSessionAggregateMaximumBitRate IE error");
             return false;
           }
           m_PduSessionAggregateMaximumBitRateIe =
               std::make_optional<PduSessionAggregateMaximumBitRate>(
                   aggregate_maximum_bit_rate);
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-              "Decode NGAP PDUSessionAggregateMaximumBitRate IE error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .error("Decode NGAP PDUSessionAggregateMaximumBitRate IE error");
           return false;
         }
       } break;
@@ -539,14 +545,14 @@ bool PduSessionResourceSetupRequestTransferIE::decode(
                   m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list
                       .array[i]
                       ->value.choice.UPTransportLayerInformation)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-                "Decode NGAP UPTransportLayerInformation IE error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error("Decode NGAP UPTransportLayerInformation IE error");
 
             return false;
           }
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-              "Decode NGAP UPTransportLayerInformation IE error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .error("Decode NGAP UPTransportLayerInformation IE error");
           return false;
         }
       } break;
@@ -563,16 +569,16 @@ bool PduSessionResourceSetupRequestTransferIE::decode(
                   m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list
                       .array[i]
                       ->value.choice.DataForwardingNotPossible)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-                "Decode NGAP DataForwardingNotPossible IE error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error("Decode NGAP DataForwardingNotPossible IE error");
             return false;
           }
           m_DataForwardingNotPossible =
               std::make_optional<DataForwardingNotPossible>(
                   data_forwarding_not_possible);
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-              "Decode NGAP DataForwardingNotPossible IE error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .error("Decode NGAP DataForwardingNotPossible IE error");
           return false;
         }
       } break;
@@ -638,7 +644,7 @@ bool PduSessionResourceSetupRequestTransferIE::decode(
                       .array[i]
                       ->value.choice.NetworkInstance)) {
             oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                        .error("Decode NGAP NetworkInstance IE error");
+                .error("Decode NGAP NetworkInstance IE error");
             return false;
           }
           m_NetworkInstance =
@@ -661,8 +667,8 @@ bool PduSessionResourceSetupRequestTransferIE::decode(
                   m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list
                       .array[i]
                       ->value.choice.QosFlowSetupRequestList)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-                "Decode NGAP QosFlowSetupRequestList IE error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error("Decode NGAP QosFlowSetupRequestList IE error");
             return false;
           }
         } else {
@@ -673,9 +679,10 @@ bool PduSessionResourceSetupRequestTransferIE::decode(
       } break;
 
       default: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
-            "Decode NGAP message PduSessionResourceSetupRequestTransferIE "
-            "error");
+        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+            .error(
+                "Decode NGAP message PduSessionResourceSetupRequestTransferIE "
+                "error");
         return false;
       }
     }

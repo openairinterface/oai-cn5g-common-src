@@ -19,7 +19,7 @@
  *      contact@openairinterface.org
  */
 
-#include "Ladn.hpp"
+#include "QosRule.hpp"
 
 #include "3gpp_24.501.hpp"
 #include "IeConst.hpp"
@@ -29,30 +29,160 @@
 using namespace oai::nas;
 
 //------------------------------------------------------------------------------
-Ladn::Ladn() : dnn_(false), ta_list_(false) {}
+QosRule::QosRule() : length_(kQosRuleMinimumLength) {}
 
 //------------------------------------------------------------------------------
-Ladn::~Ladn() {}
+QosRule::~QosRule() {}
 
 //------------------------------------------------------------------------------
-void Ladn::Set(const Dnn& value) {
-  dnn_ = value;
+uint16_t QosRule::GetLength() const {
+  return length_;
 }
 
 //------------------------------------------------------------------------------
-void Ladn::Set(const _5gsTrackingAreaIdList& value) {
-  ta_list_ = value;
+void QosRule::SetQosRuleId(uint8_t rule_id) {
+  qos_rule_id_ = rule_id;
 }
 
 //------------------------------------------------------------------------------
-uint32_t Ladn::GetLength() const {
-  return (dnn_.GetIeLength() + ta_list_.GetIeLength());
+void QosRule::GetQosRuleId(uint8_t& rule_id) const {
+  rule_id = qos_rule_id_;
 }
 
 //------------------------------------------------------------------------------
-int Ladn::Encode(uint8_t* buf, int len) const {
+uint8_t QosRule::GetQosRuleId() const {
+  return qos_rule_id_;
+}
+
+//------------------------------------------------------------------------------
+void QosRule::SetRuleOperationCode(uint8_t code) {
+  rule_operation_code_ = code & 0x07;  // 3 bits
+}
+
+//------------------------------------------------------------------------------
+void QosRule::GetRuleOperationCode(uint8_t& code) const {
+  code = rule_operation_code_;
+}
+
+//------------------------------------------------------------------------------
+uint8_t QosRule::GetRuleOperationCode() const {
+  return rule_operation_code_;
+}
+
+//------------------------------------------------------------------------------
+void QosRule::SetDqrBit(bool dqr) {
+  dqr_bit_ = dqr;
+}
+//------------------------------------------------------------------------------
+void QosRule::GetDqrBit(bool& dqr) const {
+  dqr = dqr_bit_;
+}
+
+//------------------------------------------------------------------------------
+bool QosRule::GetDqrBit() const {
+  return dqr_bit_;
+}
+
+//------------------------------------------------------------------------------
+void QosRule::SetNumberOfPacketFilter(uint8_t no_pf) {
+  number_of_packet_filters_ = no_pf & 0x0f;  // 4 bits
+}
+
+//------------------------------------------------------------------------------
+void QosRule::GetNumberOfPacketFilter(uint8_t& no_pf) const {
+  no_pf = number_of_packet_filters_;
+}
+//------------------------------------------------------------------------------
+uint8_t QosRule::GetNumberOfPacketFilter() const {
+  return number_of_packet_filters_;
+}
+
+//------------------------------------------------------------------------------
+void QosRule::SetPacketFilterModifyAndDeleteList(
+    const std::vector<PacketFilterModifyAndDelete>& list) {
+  pf_modify_and_delete_list_ =
+      std::make_optional<std::vector<PacketFilterModifyAndDelete>>(list);
+}
+
+//------------------------------------------------------------------------------
+void QosRule::GetPacketFilterModifyAndDeleteList(
+    std::optional<std::vector<PacketFilterModifyAndDelete>>& list) const {
+  list = pf_modify_and_delete_list_;
+}
+//------------------------------------------------------------------------------
+std::optional<std::vector<PacketFilterModifyAndDelete>>
+QosRule::GetPacketFilterModifyAndDeleteList() const {
+  return pf_modify_and_delete_list_;
+}
+
+//------------------------------------------------------------------------------
+void QosRule::SetPacketFilterCreateAndModifyAndReplaceList(
+    const std::vector<PacketFilterCreateAndModifyAndReplace>& list) {
+  pf_create_and_modify_and_replace_list_ =
+      std::make_optional<std::vector<PacketFilterCreateAndModifyAndReplace>>(
+          list);
+}
+
+//------------------------------------------------------------------------------
+void QosRule::GetPacketFilterCreateAndModifyAndReplaceList(
+    std::optional<std::vector<PacketFilterCreateAndModifyAndReplace>>& list)
+    const {
+  list = pf_create_and_modify_and_replace_list_;
+}
+
+std::optional<std::vector<PacketFilterCreateAndModifyAndReplace>>
+QosRule::GetPacketFilterCreateAndModifyAndReplaceList() const {
+  return pf_create_and_modify_and_replace_list_;
+}
+
+//------------------------------------------------------------------------------
+void QosRule::SetPrecedence(uint8_t precedence) {
+  precedence_ = precedence;
+}
+
+//------------------------------------------------------------------------------
+void QosRule::GetPrecedence(uint8_t& precedence) const {
+  precedence = precedence_;
+}
+//------------------------------------------------------------------------------
+uint8_t QosRule::GetPrecedence() const {
+  return precedence_;
+}
+
+//------------------------------------------------------------------------------
+void QosRule::SetSegregation(bool segregation) {
+  segregation_ = segregation;
+}
+
+//------------------------------------------------------------------------------
+void QosRule::GetSegregation(bool& segregation) const {
+  segregation = segregation_;
+}
+
+//------------------------------------------------------------------------------
+bool QosRule::GetSegregation() const {
+  return segregation_;
+}
+
+//------------------------------------------------------------------------------
+void QosRule::SetQfi(uint8_t qfi) {
+  qfi_ = qfi & 0x3f;  // 10 bits
+}
+
+//------------------------------------------------------------------------------
+void QosRule::GetQfi(uint8_t& qfi) const {
+  qfi = qfi_;
+}
+
+//------------------------------------------------------------------------------
+uint8_t QosRule::GetQfi() const {
+  return qfi_;
+}
+
+//------------------------------------------------------------------------------
+int QosRule::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoding LADN");
+      .debug("Encoding QosRule");
 
   int ie_len = dnn_.GetIeLength();
   ie_len += ta_list_.GetIeLength();
@@ -67,28 +197,21 @@ int Ladn::Encode(uint8_t* buf, int len) const {
 
   int encoded_size    = 0;
   int encoded_ie_size = 0;
-
-  encoded_ie_size = dnn_.Encode(buf + encoded_size, len);
-  if (encoded_ie_size == KEncodeDecodeError) return KEncodeDecodeError;
-  encoded_size += encoded_ie_size;
-
-  encoded_ie_size = ta_list_.Encode(buf + encoded_size, len);
-  if (encoded_ie_size == KEncodeDecodeError) return KEncodeDecodeError;
-  encoded_size += encoded_ie_size;
+  // TODO:
 
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoded LADN, len (%d)", encoded_size);
+      .debug("Encoded QosRule, len (%d)", encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
-int Ladn::Decode(uint8_t* buf, int len) {
+int QosRule::Decode(uint8_t* buf, int len) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoding LADN");
+      .debug("Decoding QosRule");
   int decoded_size = 0;
   // TODO:
 
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded LADN (len %d)", decoded_size);
+      .debug("Decoded QosRule (len %d)", decoded_size);
   return decoded_size;
 }

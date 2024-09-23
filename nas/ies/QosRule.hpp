@@ -25,7 +25,24 @@
 #include "NasIeHeader.hpp"
 
 namespace oai::nas {
-constexpr uint8_t kQosRuleMinimumLength = 7;
+constexpr uint8_t kQosRuleMinimumLength = 4;
+
+constexpr uint8_t kQosRuleRuleOperationCodeReserved000           = 0;  // 0b000
+constexpr uint8_t kQosRuleRuleOperationCodeCreateNewQosRule      = 1;  // 0b001
+constexpr uint8_t kQosRuleRuleOperationCodeDeleteExistingQosRule = 2;  // 0b010
+constexpr uint8_t
+    kQosRuleRuleOperationCodeModifyExistingQosRuleAndAddPacketFilters =
+        3;  // 0b011
+constexpr uint8_t
+    kQosRuleRuleOperationCodeModifyExistingQosRuleAndReplaceAllPacketFilters =
+        4;  // 0b100
+constexpr uint8_t
+    kQosRuleRuleOperationCodeModifyExistingQosRuleAndDeletePacketFilters =
+        5;  // 0b101
+constexpr uint8_t
+    kQosRuleRuleOperationCodeModifyExistingQosRuleWithoutModifyingPacketFilters =
+        6;                                                   // 110
+constexpr uint8_t kQosRuleRuleOperationCodeReserved111 = 7;  // 111
 
 class QosRule {
  public:
@@ -36,6 +53,7 @@ class QosRule {
   int Decode(uint8_t* buf, int len);
 
   uint16_t GetLength() const;
+  void SetLength();
 
   void SetQosRuleId(uint8_t rule_id);
   void GetQosRuleId(uint8_t& rule_id) const;
@@ -69,16 +87,16 @@ class QosRule {
   GetPacketFilterCreateAndModifyAndReplaceList() const;
 
   void SetPrecedence(uint8_t precedence);
-  void GetPrecedence(uint8_t& precedence) const;
-  uint8_t GetPrecedence() const;
+  void GetPrecedence(std::optional<uint8_t>& precedence) const;
+  std::optional<uint8_t> GetPrecedence() const;
 
   void SetSegregation(bool segregation);
   void GetSegregation(bool& segregation) const;
   bool GetSegregation() const;
 
   void SetQfi(uint8_t qfi);
-  void GetQfi(uint8_t& qfi) const;
-  uint8_t GetQfi() const;
+  void GetQfi(std::optional<uint8_t>& qfi) const;
+  std::optional<uint8_t> GetQfi() const;
 
  private:
   uint8_t qos_rule_id_;
@@ -91,7 +109,7 @@ class QosRule {
   std::optional<std::vector<PacketFilterCreateAndModifyAndReplace>>
       pf_create_and_modify_and_replace_list_;
   std::optional<uint8_t> precedence_;
-  std::optional<uint8_t> segregation_;
+  bool segregation_;
   std::optional<uint8_t> qfi_;
 };
 

@@ -40,6 +40,32 @@ uint16_t QosRule::GetLength() const {
 }
 
 //------------------------------------------------------------------------------
+void QosRule::SetLength() {
+  // Calculate the actual length
+  length_ = kQosRuleMinimumLength;
+  for (int i = 0; i < number_of_packet_filters_; i++) {
+    if (rule_operation_code_ ==
+        kQosRuleRuleOperationCodeModifyExistingQosRuleAndDeletePacketFilters) {
+      length_++;  // 1 octet for each packet filter
+    } else if (
+        (rule_operation_code_ == kQosRuleRuleOperationCodeCreateNewQosRule) or
+        (rule_operation_code_ ==
+         kQosRuleRuleOperationCodeModifyExistingQosRuleAndAddPacketFilters) or
+        (rule_operation_code_ ==
+         kQosRuleRuleOperationCodeModifyExistingQosRuleAndReplaceAllPacketFilters)) {
+      if (pf_create_and_modify_and_replace_list_.has_value()) {
+        for (auto p : pf_create_and_modify_and_replace_list_.value()) {
+          length_ +=
+              1;  // octet 8- packet filter direction + packet filter identifier
+          length_ += 1;                 // length of packet filter
+          length_ += p.content.length;  // packet filter content
+        }
+      }
+    }
+  }
+}
+
+//------------------------------------------------------------------------------
 void QosRule::SetQosRuleId(uint8_t rule_id) {
   qos_rule_id_ = rule_id;
 }
@@ -102,6 +128,7 @@ void QosRule::SetPacketFilterModifyAndDeleteList(
     const std::vector<PacketFilterModifyAndDelete>& list) {
   pf_modify_and_delete_list_ =
       std::make_optional<std::vector<PacketFilterModifyAndDelete>>(list);
+  SetLength();
 }
 
 //------------------------------------------------------------------------------
@@ -121,6 +148,7 @@ void QosRule::SetPacketFilterCreateAndModifyAndReplaceList(
   pf_create_and_modify_and_replace_list_ =
       std::make_optional<std::vector<PacketFilterCreateAndModifyAndReplace>>(
           list);
+  SetLength();
 }
 
 //------------------------------------------------------------------------------
@@ -137,21 +165,23 @@ QosRule::GetPacketFilterCreateAndModifyAndReplaceList() const {
 
 //------------------------------------------------------------------------------
 void QosRule::SetPrecedence(uint8_t precedence) {
-  precedence_ = precedence;
+  precedence_ = std::make_optional<uint8_t>(precedence);
+  SetLength();
 }
 
 //------------------------------------------------------------------------------
-void QosRule::GetPrecedence(uint8_t& precedence) const {
+void QosRule::GetPrecedence(std::optional<uint8_t>& precedence) const {
   precedence = precedence_;
 }
 //------------------------------------------------------------------------------
-uint8_t QosRule::GetPrecedence() const {
+std::optional<uint8_t> QosRule::GetPrecedence() const {
   return precedence_;
 }
 
 //------------------------------------------------------------------------------
 void QosRule::SetSegregation(bool segregation) {
   segregation_ = segregation;
+  SetLength();
 }
 
 //------------------------------------------------------------------------------
@@ -167,15 +197,16 @@ bool QosRule::GetSegregation() const {
 //------------------------------------------------------------------------------
 void QosRule::SetQfi(uint8_t qfi) {
   qfi_ = qfi & 0x3f;  // 10 bits
+  SetLength();
 }
 
 //------------------------------------------------------------------------------
-void QosRule::GetQfi(uint8_t& qfi) const {
+void QosRule::GetQfi(std::optional<uint8_t>& qfi) const {
   qfi = qfi_;
 }
 
 //------------------------------------------------------------------------------
-uint8_t QosRule::GetQfi() const {
+std::optional<uint8_t> QosRule::GetQfi() const {
   return qfi_;
 }
 
@@ -184,20 +215,64 @@ int QosRule::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding QosRule");
 
-  int ie_len = dnn_.GetIeLength();
-  ie_len += ta_list_.GetIeLength();
+  int encoded_size = 0;
 
-  if (len < ie_len) {  // Length of the content + IEI/Len
+  // Validate the buffer's length and Encode IEI/Length (later)
+  if (len < length_) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .error(
-            "Size of the buffer is not enough to store this IE (IE len %d)",
-            ie_len);
+            "Buffer length is less than the length of this IE (%d "
+            "octet)",
+            length_);
     return KEncodeDecodeError;
   }
 
-  int encoded_size    = 0;
-  int encoded_ie_size = 0;
-  // TODO:
+  // QoS Rule Identifier
+  ENCODE_U8(buf + encoded_size, qos_rule_id_, encoded_size);
+
+  // Length
+  ENCODE_U16(buf + encoded_size, GetLength(), encoded_size);
+
+  // Octet 7 - Rule operation code, DQR bit, Number of packet filters
+  uint8_t octet_7 = ((rule_operation_code_ & 0x07) << 5) | (dqr_bit_ << 4) |
+                    (number_of_packet_filters_ & 0x0f);
+  ENCODE_U8(buf + encoded_size, octet_7, encoded_size);
+
+  // Paket filter list
+  for (int i = 0; i < number_of_packet_filters_; i++) {
+    if (rule_operation_code_ ==
+        kQosRuleRuleOperationCodeModifyExistingQosRuleAndDeletePacketFilters) {
+      if (pf_modify_and_delete_list_.has_value()) {
+        for (auto p : pf_modify_and_delete_list_.value()) {
+          ENCODE_U8(
+              buf + encoded_size, (p.packet_filter_id & 0x0f), encoded_size);
+        }
+      }
+
+    } else if (
+        (rule_operation_code_ == kQosRuleRuleOperationCodeCreateNewQosRule) or
+        (rule_operation_code_ ==
+         kQosRuleRuleOperationCodeModifyExistingQosRuleAndAddPacketFilters) or
+        (rule_operation_code_ ==
+         kQosRuleRuleOperationCodeModifyExistingQosRuleAndReplaceAllPacketFilters)) {
+      if (pf_create_and_modify_and_replace_list_.has_value()) {
+        for (auto p : pf_create_and_modify_and_replace_list_.value()) {
+          uint8_t octet_8 =
+              ((p.packet_filter_direction & 0x03) << 4) |
+              (p.packet_filter_id & 0x0f);  // octet 8- packet filter direction
+                                            // + packet filter identifier
+          ENCODE_U8(buf + encoded_size, octet_8, encoded_size);
+          ENCODE_U8(
+              buf + encoded_size, p.content.length,
+              encoded_size);  // length of packet filter
+          int encoded_content_size = encode_bstring(
+              p.content.content, (buf + encoded_size),
+              len - encoded_size);  // packet filter content
+          encoded_size += encoded_content_size;
+        }
+      }
+    }
+  }
 
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoded QosRule, len (%d)", encoded_size);
@@ -208,8 +283,74 @@ int QosRule::Encode(uint8_t* buf, int len) const {
 int QosRule::Decode(uint8_t* buf, int len) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding QosRule");
+  if (len < kQosRuleMinimumLength) {
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error(
+            "Buffer length is less than the minimum length of this IE (%d "
+            "octet)",
+            kQosRuleMinimumLength);
+    return KEncodeDecodeError;
+  }
+
   int decoded_size = 0;
-  // TODO:
+
+  // QoS Rule Identifier
+  DECODE_U8(buf + decoded_size, qos_rule_id_, decoded_size);
+
+  // Length
+  DECODE_U16(buf + decoded_size, length_, decoded_size);
+
+  // Octet 7 - Rule operation code, DQR bit, Number of packet filters
+  uint8_t octet_7 = {};
+  DECODE_U8(buf + decoded_size, octet_7, decoded_size);
+  rule_operation_code_      = octet_7 >> 5;
+  dqr_bit_                  = (octet_7 >> 4) & 0x01;
+  number_of_packet_filters_ = octet_7 & 0x0f;
+
+  // Packet filter list
+
+  if (rule_operation_code_ ==
+      kQosRuleRuleOperationCodeModifyExistingQosRuleAndDeletePacketFilters) {
+    std::vector<PacketFilterModifyAndDelete> pf_modify_and_delete_list;
+    for (int i = 0; i < number_of_packet_filters_; i++) {
+      PacketFilterModifyAndDelete pf = {};
+      DECODE_U8(buf + decoded_size, pf.packet_filter_id, decoded_size);
+      pf_modify_and_delete_list.push_back(pf);
+    }
+    pf_modify_and_delete_list_ =
+        std::make_optional<std::vector<PacketFilterModifyAndDelete>>(
+            pf_modify_and_delete_list);
+  }
+  if ((rule_operation_code_ == kQosRuleRuleOperationCodeCreateNewQosRule) or
+      (rule_operation_code_ ==
+       kQosRuleRuleOperationCodeModifyExistingQosRuleAndAddPacketFilters) or
+      (rule_operation_code_ ==
+       kQosRuleRuleOperationCodeModifyExistingQosRuleAndReplaceAllPacketFilters)) {
+    std::vector<PacketFilterCreateAndModifyAndReplace>
+        pf_create_and_modify_and_replace_list;
+    for (int i = 0; i < number_of_packet_filters_; i++) {
+      PacketFilterCreateAndModifyAndReplace pf = {};
+      uint8_t octet_8 = {};  // octet 8- packet filter direction
+                             // + packet filter identifier
+      DECODE_U8(buf + decoded_size, octet_8, decoded_size);
+      pf.packet_filter_direction = (octet_8 >> 4) & 0x03;
+      pf.packet_filter_id        = octet_8 & 0x0f;
+
+      DECODE_U8(
+          buf + decoded_size, pf.content.length,
+          decoded_size);  // length of packet filter
+
+      // Content
+      decode_bstring(
+          &pf.content.content, pf.content.length, (buf + decoded_size),
+          len - decoded_size);
+      decoded_size += pf.content.length;
+      pf_create_and_modify_and_replace_list.push_back(pf);
+    }
+    pf_create_and_modify_and_replace_list_ =
+        std::make_optional<std::vector<PacketFilterCreateAndModifyAndReplace>>(
+            pf_create_and_modify_and_replace_list);
+  }
 
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoded QosRule (len %d)", decoded_size);

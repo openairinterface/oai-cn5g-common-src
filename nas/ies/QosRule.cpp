@@ -280,7 +280,7 @@ int QosRule::Encode(uint8_t* buf, int len) const {
 }
 
 //------------------------------------------------------------------------------
-int QosRule::Decode(uint8_t* buf, int len) {
+int QosRule::Decode(const uint8_t* const buf, int len) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding QosRule");
   if (len < kQosRuleMinimumLength) {

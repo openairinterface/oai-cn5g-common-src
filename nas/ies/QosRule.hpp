@@ -50,7 +50,7 @@ class QosRule {
   ~QosRule();
 
   int Encode(uint8_t* buf, int len) const;
-  int Decode(uint8_t* buf, int len);
+  int Decode(const uint8_t* const buf, int len);
 
   uint16_t GetLength() const;
   void SetLength();

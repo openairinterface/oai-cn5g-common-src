@@ -22,8 +22,8 @@
 #ifndef _PDU_SESSION_ESTABLISHMENT_ACCEPT_H_
 #define _PDU_SESSION_ESTABLISHMENT_ACCEPT_H_
 
-#include "NasIeHeader.hpp"
 #include "Nas5gsmHeader.hpp"
+#include "NasIeHeader.hpp"
 
 namespace oai::nas {
 
@@ -41,14 +41,13 @@ class PduSessionEstablishmentAccept : public Nas5gsmHeader {
   // Mandatory
   Nas5gsmHeader ie_header_;
   PduSessionType ie_selected_pdu_session_type_;
-  SscMode ie_selected_ssc_mode;
-  // Authorized QoS rules
-  // Session AMBR
+  SscMode ie_selected_ssc_mode_;
+  QosRules ie_authorized_qos_rules_;
+  SessionAmbr ie_session_ambr_;
 
   // Optional
-
-  // 5GSM cause
-  // PDU address
+  std::optional<_5gsmCause> ie_5gsm_cause_;
+  std::optional<PduAddress> ie_pdu_address_;
   // RQ timer value
   // S-NSSAI
   // Always-on PDU session indication

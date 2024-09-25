@@ -21,7 +21,7 @@
 
 #include "NgReset.hpp"
 
-#include "logger.hpp"
+#include "logger_base.hpp"
 #include "utils.hpp"
 
 namespace oai::ngap {
@@ -53,13 +53,16 @@ void NgResetMsg::setCause(const Cause& c) {
   ie->value.present = Ngap_NGResetIEs__value_PR_Cause;
 
   if (!m_Cause.encode(ie->value.choice.Cause)) {
-    Logger::ngap().error("Encode NGAP Cause IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode NGAP Cause IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
   int ret = ASN_SEQUENCE_ADD(&m_NgResetIes->protocolIEs.list, ie);
-  if (ret != 0) Logger::ngap().error("Encode NGAP Cause IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode NGAP Cause IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -73,13 +76,16 @@ void NgResetMsg::setResetType(const ResetType& r) {
   ie->value.present = Ngap_NGResetIEs__value_PR_ResetType;
 
   if (!m_ResetType.encode(ie->value.choice.ResetType)) {
-    Logger::ngap().error("Encode NGAP ResetType IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode NGAP ResetType IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
   int ret = ASN_SEQUENCE_ADD(&m_NgResetIes->protocolIEs.list, ie);
-  if (ret != 0) Logger::ngap().error("Encode NGAP ResetType IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode NGAP ResetType IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -122,11 +128,13 @@ bool NgResetMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
                     Ngap_NGResetIEs__value_PR_Cause) {
               if (!m_Cause.decode(m_NgResetIes->protocolIEs.list.array[i]
                                       ->value.choice.Cause)) {
-                Logger::ngap().error("Decoded NGAP Cause IE error");
+                oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                    .error("Decoded NGAP Cause IE error");
                 return false;
               }
             } else {
-              Logger::ngap().error("Decoded NGAP Cause IE error");
+              oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                  .error("Decoded NGAP Cause IE error");
               return false;
             }
           } break;
@@ -137,28 +145,33 @@ bool NgResetMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
                     Ngap_NGResetIEs__value_PR_ResetType) {
               if (!m_ResetType.decode(m_NgResetIes->protocolIEs.list.array[i]
                                           ->value.choice.ResetType)) {
-                Logger::ngap().error("Decoded NGAP ResetType IE error");
+                oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                    .error("Decoded NGAP ResetType IE error");
                 return false;
               }
 
             } else {
-              Logger::ngap().error("Decoded NGAP ResetType IE error");
+              oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                  .error("Decoded NGAP ResetType IE error");
               return false;
             }
           } break;
 
           default: {
-            Logger::ngap().error("Decoded NGAP message PDU IE error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error("Decoded NGAP message PDU IE error");
             return false;
           }
         }
       }
     } else {
-      Logger::ngap().error("Check NGReset message error!");
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .error("Check NGReset message error!");
       return false;
     }
   } else {
-    Logger::ngap().error("Check NGReset message error!");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Check NGReset message error!");
     return false;
   }
   return true;

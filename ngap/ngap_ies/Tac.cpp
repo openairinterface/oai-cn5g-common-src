@@ -21,7 +21,7 @@
 
 #include "Tac.hpp"
 
-#include "logger.hpp"
+#include "logger_base.hpp"
 
 namespace oai::ngap {
 
@@ -61,7 +61,8 @@ bool TAC::decode(const Ngap_TAC_t& tac) {
   for (int i = 0; i < tac.size; i++) {
     m_Tac |= tac.buf[i] << ((tac.size - 1 - i) * 8);
   }
-  Logger::ngap().debug("Received TAC 0x%x", m_Tac);
+  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+      .debug("Received TAC 0x%x", m_Tac);
   return true;
 }
 

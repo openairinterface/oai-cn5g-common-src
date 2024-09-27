@@ -32,12 +32,13 @@ NrCellIdentity::NrCellIdentity() {
 NrCellIdentity::~NrCellIdentity() {}
 
 //------------------------------------------------------------------------------
-void NrCellIdentity::set(const unsigned long& nrCellIdentity) {
+void NrCellIdentity::set(const uint64_t& nrCellIdentity) {
   m_NrCellIdentity = nrCellIdentity;
 }
 
 //------------------------------------------------------------------------------
 bool NrCellIdentity::encode(Ngap_NRCellIdentity_t& nrCellIdentity) const {
+  // NR Cell ID is defined as BIT STRING (SIZE(36))
   nrCellIdentity.bits_unused = 4;
   nrCellIdentity.size        = 5;
   nrCellIdentity.buf = (uint8_t*) calloc(1, sizeof(uint32_t) + sizeof(uint8_t));
@@ -54,6 +55,7 @@ bool NrCellIdentity::encode(Ngap_NRCellIdentity_t& nrCellIdentity) const {
 //------------------------------------------------------------------------------
 bool NrCellIdentity::decode(const Ngap_NRCellIdentity_t& nrCellIdentity) {
   if (!nrCellIdentity.buf) return false;
+  if (nrCellIdentity.size < 5) return false;
 
   m_NrCellIdentity = nrCellIdentity.buf[0];
   m_NrCellIdentity = m_NrCellIdentity << 32;
@@ -62,11 +64,13 @@ bool NrCellIdentity::decode(const Ngap_NRCellIdentity_t& nrCellIdentity) {
   m_NrCellIdentity |= nrCellIdentity.buf[3] << 8;
   m_NrCellIdentity |= nrCellIdentity.buf[4];
 
+  m_NrCellIdentity =
+      m_NrCellIdentity >> 4;  // 36 bits, so number of unused bits = 4
   return true;
 }
 
 //------------------------------------------------------------------------------
-unsigned long NrCellIdentity::get() const {
-  return m_NrCellIdentity;
+uint64_t NrCellIdentity::get() const {
+  return (m_NrCellIdentity & 0x0fffffffff);  // Get 36 LSB
 }
 }  // namespace oai::ngap

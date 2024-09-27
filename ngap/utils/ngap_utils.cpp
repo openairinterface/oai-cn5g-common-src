@@ -24,13 +24,13 @@
 #include <fmt/format.h>
 
 #include "conversions.hpp"
-#include "logger.hpp"
+#include "logger_base.hpp"
 
 namespace oai::ngap {
 //------------------------------------------------------------------------------
 void ngap_utils::print_asn_msg(
     const asn_TYPE_descriptor_t* td, const void* struct_ptr) {
-  if (Logger::should_log(spdlog::level::debug))
+  if (oai::logger::logger_registry::should_log(spdlog::level::debug))
     asn_fprint(stdout, td, struct_ptr);
 }
 

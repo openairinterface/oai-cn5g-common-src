@@ -42,7 +42,7 @@ class NrCgi {
 
   void set(
       const std::string& mcc, const std::string& mnc,
-      const unsigned long& nrCellIdentity);
+      const uint64_t& nrCellIdentity);
 
   void set(const struct NrCgi_s& cig);
   void get(struct NrCgi_s& cig) const;

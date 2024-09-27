@@ -91,7 +91,7 @@ typedef struct GuamiItem_s {
 typedef struct NrCgi_s {
   std::string mcc;
   std::string mnc;
-  unsigned long nrCellId;
+  uint64_t nrCellId;
 } NrCgi_t;
 
 typedef struct Tai_s {

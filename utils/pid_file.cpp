@@ -22,7 +22,6 @@
 #include "pid_file.hpp"
 
 #include <errno.h>
-//#include <fcntl.h>
 #include <libgen.h>
 #include <stdio.h>
 #include <string.h>
@@ -30,7 +29,9 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#include "logger.hpp"
+#include "logger_base.hpp"
+
+using namespace oai::logger;
 
 int g_fd_pid_file = -1;
 __pid_t g_pid     = -1;
@@ -80,18 +81,16 @@ bool oai::utils::is_pid_file_lock_success(const char* pid_file_name) {
       S_IRUSR | S_IWUSR | S_IRGRP |
           S_IROTH); /* Read/write by owner, read by grp, others */
   if (0 > g_fd_pid_file) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "open filename %s failed %d:%s\n", pid_file_name, errno,
-            strerror(errno));
+    logger_common::common().error(
+        "open filename %s failed %d:%s\n", pid_file_name, errno,
+        strerror(errno));
     return false;
   }
 
   if (0 > oai::utils::lockfile(g_fd_pid_file, F_TLOCK)) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "lockfile filename %s failed %d:%s\n", pid_file_name, errno,
-            strerror(errno));
+    logger_common::common().error(
+        "lockfile filename %s failed %d:%s\n", pid_file_name, errno,
+        strerror(errno));
     if (EACCES == errno || EAGAIN == errno) {
       close(g_fd_pid_file);
     }
@@ -99,10 +98,8 @@ bool oai::utils::is_pid_file_lock_success(const char* pid_file_name) {
   }
   // fruncate file content
   if (ftruncate(g_fd_pid_file, 0)) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "truncate %s failed %d:%s\n", pid_file_name, errno,
-            strerror(errno));
+    logger_common::common().error(
+        "truncate %s failed %d:%s\n", pid_file_name, errno, strerror(errno));
     close(g_fd_pid_file);
     return false;
   }
@@ -110,10 +107,9 @@ bool oai::utils::is_pid_file_lock_success(const char* pid_file_name) {
   g_pid = getpid();
   snprintf(pid_dec, 64 /* should be big enough */, "%ld", (long) g_pid);
   if ((ssize_t) -1 == write(g_fd_pid_file, pid_dec, strlen(pid_dec))) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "write PID to filename %s failed %d:%s\n", pid_file_name, errno,
-            strerror(errno));
+    logger_common::common().error(
+        "write PID to filename %s failed %d:%s\n", pid_file_name, errno,
+        strerror(errno));
     return false;
   }
   return true;

@@ -23,6 +23,7 @@ SET(UTILS_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/utils)
 include_directories(${UTILS_DIR})
 include_directories(${UTILS_DIR}/bstr)
 include_directories(${SRC_TOP_DIR}/${MOUNTED_COMMON}/ngap/libngap)
+include_directories(${SRC_TOP_DIR}/${MOUNTED_COMMON}/3gpp)
 
 file(GLOB UTILS_SRC_FILES
         ${UTILS_DIR}/*.cpp

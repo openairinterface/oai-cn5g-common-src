@@ -139,6 +139,12 @@ void oai::utils::ipv4_to_bstring(struct in_addr ipv4_address, bstring str) {
   memcpy(str->data, bitstream_addr, sizeof(bitstream_addr));
 }
 
+bool oai::utils::bstring_to_ipv4(bstring str, struct in_addr ipv4_address) {
+  if ((str->slen != 4) or (str->data == nullptr)) return false;
+  ipv4_address.s_addr = *((uint32_t*) str->data);
+  return true;
+}
+
 void oai::utils::ipv6_to_bstring(struct in6_addr ipv6_address, bstring str) {
   char str_addr6[INET6_ADDRSTRLEN];
   if (inet_ntop(AF_INET6, &ipv6_address, str_addr6, sizeof(str_addr6))) {
@@ -153,6 +159,14 @@ void oai::utils::ipv6_to_bstring(struct in6_addr ipv6_address, bstring str) {
       memcpy(str->data, buf_in6_addr, sizeof(buf_in6_addr));
     }
   }
+}
+
+bool oai::utils::bstring_to_ipv6(bstring str, struct in6_addr ipv6_address) {
+  if ((str->slen != sizeof(struct in6_addr)) or (str->data == nullptr))
+    return false;
+  unsigned char buf_in6_addr[sizeof(struct in6_addr)];
+  memcpy(ipv6_address.s6_addr, str->data, sizeof(buf_in6_addr));
+  return true;
 }
 
 void oai::utils::ipv4v6_to_pdu_address_information(
@@ -180,6 +194,20 @@ void oai::utils::ipv4v6_to_pdu_address_information(
 
   str->slen = 12;
   memcpy(str->data, bitstream_addr, sizeof(bitstream_addr));
+}
+
+bool oai::utils::pdu_address_information_to_ipv4v6(
+    bstring str, struct in_addr ipv4_address, struct in6_addr ipv6_address) {
+  uint8_t size_str = 12;  // 4 for Ipv4 and 8 for interface identifier for the
+                          // IPv6 link local address
+  if ((str->slen != size_str) or (str->data == nullptr)) return false;
+  // 4 octets for IPv4
+  unsigned char buf_in_addr[4];
+  memcpy(buf_in_addr, str->data, 4);
+  ipv4_address.s_addr = *((uint32_t*) buf_in_addr);
+  // 8 octets for interface identifier for the IPv6 link local address
+  memcpy(ipv6_address.s6_addr, str->data + 4, 8);
+  return true;
 }
 
 void oai::utils::string_to_dnn(const std::string& str, bstring bstr) {

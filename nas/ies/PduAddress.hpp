@@ -46,6 +46,7 @@ class PduAddress : public Type4NasIe {
   int Decode(const uint8_t* const buf, int len, bool is_iei = true) override;
 
   static std::string GetIeName() { return kPduAddressIeName; }
+  bool Validate(int len) const;
 
   void SetSi6lla(bool si6lla);
   bool GetSi6lla() const;

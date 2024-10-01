@@ -110,16 +110,16 @@ bool QosRule::GetDqrBit() const {
 }
 
 //------------------------------------------------------------------------------
-void QosRule::SetNumberOfPacketFilter(uint8_t no_pf) {
+void QosRule::SetNumberOfPacketFilters(uint8_t no_pf) {
   number_of_packet_filters_ = no_pf & 0x0f;  // 4 bits
 }
 
 //------------------------------------------------------------------------------
-void QosRule::GetNumberOfPacketFilter(uint8_t& no_pf) const {
+void QosRule::GetNumberOfPacketFilters(uint8_t& no_pf) const {
   no_pf = number_of_packet_filters_;
 }
 //------------------------------------------------------------------------------
-uint8_t QosRule::GetNumberOfPacketFilter() const {
+uint8_t QosRule::GetNumberOfPacketFilters() const {
   return number_of_packet_filters_;
 }
 
@@ -196,7 +196,7 @@ bool QosRule::GetSegregation() const {
 
 //------------------------------------------------------------------------------
 void QosRule::SetQfi(uint8_t qfi) {
-  qfi_ = qfi & 0x3f;  // 10 bits
+  qfi_ = qfi & 0x3f;  // 6 bits
   SetLength();
 }
 

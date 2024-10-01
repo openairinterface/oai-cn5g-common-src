@@ -37,6 +37,9 @@ class PduSessionEstablishmentAccept : public Nas5gsmHeader {
 
   uint32_t GetLength() const override;
 
+  void SetSNssai(const SNSSAI_s& snssai);
+  bool GetSNssai(SNSSAI_s& snssai) const;
+
  private:
   // Mandatory
   Nas5gsmHeader ie_header_;
@@ -48,22 +51,23 @@ class PduSessionEstablishmentAccept : public Nas5gsmHeader {
   // Optional
   std::optional<_5gsmCause> ie_5gsm_cause_;
   std::optional<PduAddress> ie_pdu_address_;
-  // RQ timer value
-  // S-NSSAI
-  // Always-on PDU session indication
-  // Mapped EPS bearer contexts
-  // EAP message
+  std::optional<GprsTimer> ie_gprs_timer_;
+  std::optional<SNssai> ie_s_nssai_;
+  std::optional<AlwaysOnPduSessionIndication>
+      ie_always_on_pdu_session_indication_;
+  // TODO: Mapped EPS bearer contexts
+  std::optional<EapMessage> ie_eap_message_;
   // Authorized QoS flow descriptions
-  // Extended protocol configuration
+  std::optional<QosFlowDescriptions> ie_authorized_qos_flow_descriptions_;
   // Extended protocol configuration options
-  // DNN
-  // 5GSM network feature support
-  // Serving PLMN rate control
-  // ATSSS container
-  // Control plane only indication
-  // IP header compression
-  // IP header compression configuration configuration
-  // Ethernet header compression configuration
+  std::optional<Dnn> ie_dnn_;
+  // TODO: 5GSM network feature support
+  // TODO: Serving PLMN rate control
+  // TODO: ATSSS container
+  // TODO: Control plane only indication
+  // TODO: IP header compression
+  // TODO: IP header compression configuration configuration
+  // TODO: Ethernet header compression configuration
 };
 
 }  // namespace oai::nas

@@ -22,7 +22,11 @@
 #ifndef _QOS_RULE_H_
 #define _QOS_RULE_H_
 
-#include "NasIeHeader.hpp"
+#include <cstdint>
+#include <vector>
+#include <optional>
+
+#include "Struct.hpp"
 
 namespace oai::nas {
 constexpr uint8_t kQosRuleMinimumLength = 4;
@@ -67,9 +71,9 @@ class QosRule {
   void GetDqrBit(bool& dqr) const;
   bool GetDqrBit() const;
 
-  void SetNumberOfPacketFilter(uint8_t no_pf);
-  void GetNumberOfPacketFilter(uint8_t& no_pf) const;
-  uint8_t GetNumberOfPacketFilter() const;
+  void SetNumberOfPacketFilters(uint8_t no_pf);
+  void GetNumberOfPacketFilters(uint8_t& no_pf) const;
+  uint8_t GetNumberOfPacketFilters() const;
 
   void SetPacketFilterModifyAndDeleteList(
       const std::vector<PacketFilterModifyAndDelete>& list);

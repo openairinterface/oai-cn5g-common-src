@@ -19,42 +19,38 @@
  *      contact@openairinterface.org
  */
 
-#ifndef _QOS_RULES_H_
-#define _QOS_RULES_H_
+#ifndef _GPRS_TIMER_H_
+#define _GPRS_TIMER_H_
 
-#include "Type6NasIe.hpp"
-#include "QosRule.hpp"
+#include "Type3NasIe.hpp"
 
-constexpr uint8_t kQosRulesMinimumLength = 7;
-constexpr uint8_t kQosRulesContentMinimumLength =
-    kQosRulesMinimumLength - 3;  // Minimum length - 3 octets for IEI/Length
-constexpr uint32_t kQosRulesMaximumLength = 65538;
-constexpr auto kQosRulesIeName            = "QoS Rules";
+constexpr uint8_t kGprsTimerLength = 2;
+constexpr uint8_t kGprsTimerContentLength =
+    kGprsTimerLength - 1;  // Length - 1 octets for IEI
+constexpr auto kGprsTimerIeName = "GPRS Timer";
 
 namespace oai::nas {
-using namespace oai::nas;
-class QosRules : public Type6NasIe {
+
+class GprsTimer : public Type3NasIe {
  public:
-  QosRules();
-  QosRules(uint8_t iei);
-  QosRules(uint8_t iei, const std::vector<QosRule>& qos_rules);
-  QosRules(const std::vector<QosRule>& qos_rules);
-  ~QosRules();
+  GprsTimer(uint8_t iei);
+  GprsTimer(uint8_t iei, uint8_t value);
+  ~GprsTimer();
 
-  int Encode(uint8_t* buf, int len, uint8_t type) const;
-  int Decode(const uint8_t* const buf, int len, bool is_iei, uint8_t type);
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
 
-  static std::string GetIeName() { return kQosRulesIeName; }
+  static std::string GetIeName() { return kGprsTimerIeName; }
+  uint32_t GetIeLength() const override;
 
-  void Set(const std::vector<QosRule>& rules);
-  void Get(std::vector<QosRule>& rules) const;
+  void Set(uint8_t _iei, uint8_t value);
 
-  void AddQosRule(const QosRule& rule);
+  void SetValue(uint8_t value);
+  uint8_t GetValue() const;
 
  private:
-  std::vector<QosRule> qos_rules_;
+  uint8_t value_;
 };
-
 }  // namespace oai::nas
 
 #endif

@@ -19,7 +19,7 @@
  *      contact@openairinterface.org
  */
 
-#include "QosRules.hpp"
+#include "QosFlowDescriptions.hpp"
 
 #include "3gpp_24.501.hpp"
 #include "common_defs.h"
@@ -28,73 +28,87 @@
 using namespace oai::nas;
 
 //------------------------------------------------------------------------------
-QosRules::QosRules() : Type6NasIe(), qos_rules_() {
-  SetLengthIndicator(kQosRulesContentMinimumLength);
+QosFlowDescriptions::QosFlowDescriptions()
+    : Type6NasIe(), qos_flow_descriptions_() {
+  SetLengthIndicator(kQosFlowDescriptionsContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
-QosRules::QosRules(uint8_t iei) : Type6NasIe(iei) {
-  SetLengthIndicator(kQosRulesContentMinimumLength);
+QosFlowDescriptions::QosFlowDescriptions(uint8_t iei) : Type6NasIe(iei) {
+  SetLengthIndicator(kQosFlowDescriptionsContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
-QosRules::QosRules(const std::vector<QosRule>& qos_rules) : Type6NasIe() {
+QosFlowDescriptions::QosFlowDescriptions(
+    const std::vector<QosFlowDescription>& qos_flow_descriptions)
+    : Type6NasIe() {
   uint32_t length = 0;  // not include 3 first octets: 1 for IE , 2 for length,
-  for (auto qos : qos_rules) {
+  for (auto qos : qos_flow_descriptions) {
     length += qos.GetLength();
   }
   SetLengthIndicator(
-      (length > kQosRulesContentMinimumLength) ? length :
-                                                 kQosRulesContentMinimumLength);
+      (length > kQosFlowDescriptionsContentMinimumLength) ?
+          length :
+          kQosFlowDescriptionsContentMinimumLength);
 
-  qos_rules_.assign(qos_rules.begin(), qos_rules.end());
+  qos_flow_descriptions_.assign(
+      qos_flow_descriptions.begin(), qos_flow_descriptions.end());
 }
 
 //------------------------------------------------------------------------------
-QosRules::QosRules(uint8_t iei, const std::vector<QosRule>& qos_rules)
+QosFlowDescriptions::QosFlowDescriptions(
+    uint8_t iei, const std::vector<QosFlowDescription>& qos_flow_descriptions)
     : Type6NasIe(iei) {
   uint32_t length = 0;  // not include 3 first octets: 1 for IE , 2 for length,
-  for (auto qos : qos_rules) {
+  for (auto qos : qos_flow_descriptions) {
     length += qos.GetLength() +
               3;  // 1 for QoS rule identifier and 2 for length of QoS rule
   }
   SetLengthIndicator(
-      (length > kQosRulesContentMinimumLength) ? length :
-                                                 kQosRulesContentMinimumLength);
-  qos_rules_.assign(qos_rules.begin(), qos_rules.end());
+      (length > kQosFlowDescriptionsContentMinimumLength) ?
+          length :
+          kQosFlowDescriptionsContentMinimumLength);
+
+  qos_flow_descriptions_.assign(
+      qos_flow_descriptions.begin(), qos_flow_descriptions.end());
 }
 
 //------------------------------------------------------------------------------
-QosRules::~QosRules() {}
+QosFlowDescriptions::~QosFlowDescriptions() {}
 
 //------------------------------------------------------------------------------
-void QosRules::Set(const std::vector<QosRule>& qos_rules) {
-  if (qos_rules.size() == 0) return;
+void QosFlowDescriptions::Set(
+    const std::vector<QosFlowDescription>& qos_flow_descriptions) {
+  if (qos_flow_descriptions.size() == 0) return;
 
   uint32_t length = 0;  // not include 3 first octets: 1 for IE , 2 for length,
-  for (auto qos : qos_rules) {
+  for (auto qos : qos_flow_descriptions) {
     length += qos.GetLength() +
               3;  // 1 for QoS rule identifier and 2 for length of QoS rule
   }
 
   SetLengthIndicator(length);
 
-  qos_rules_.assign(qos_rules.begin(), qos_rules.end());
+  qos_flow_descriptions_.assign(
+      qos_flow_descriptions.begin(), qos_flow_descriptions.end());
 }
 
 //------------------------------------------------------------------------------
-void QosRules::Get(std::vector<QosRule>& qos_rules) const {
-  qos_rules.assign(qos_rules_.begin(), qos_rules_.end());
+void QosFlowDescriptions::Get(
+    std::vector<QosFlowDescription>& qos_flow_descriptions) const {
+  qos_flow_descriptions.assign(
+      qos_flow_descriptions_.begin(), qos_flow_descriptions_.end());
   return;
 }
 
 //------------------------------------------------------------------------------
-void QosRules::AddQosRule(const QosRule& rule) {
-  qos_rules_.push_back(rule);
+void QosFlowDescriptions::AddQosFlowDescription(
+    const QosFlowDescription& rule) {
+  qos_flow_descriptions_.push_back(rule);
 }
 
 //------------------------------------------------------------------------------
-int QosRules::Encode(uint8_t* buf, int len, uint8_t type) const {
+int QosFlowDescriptions::Encode(uint8_t* buf, int len, uint8_t type) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
@@ -105,11 +119,11 @@ int QosRules::Encode(uint8_t* buf, int len, uint8_t type) const {
       Type6NasIe::Encode(buf + encoded_size, len, len_pos);
   if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   encoded_size += encoded_header_size;
-  for (const auto& q : qos_rules_) {
-    int encoded_qos_rule_size =
+  for (const auto& q : qos_flow_descriptions_) {
+    int encoded_qos_flow_size =
         q.Encode(buf + encoded_size, len - encoded_size);
-    if (encoded_qos_rule_size == KEncodeDecodeError) return KEncodeDecodeError;
-    encoded_size += encoded_qos_rule_size;
+    if (encoded_qos_flow_size == KEncodeDecodeError) return KEncodeDecodeError;
+    encoded_size += encoded_qos_flow_size;
   }
 
   // Encode length
@@ -122,7 +136,7 @@ int QosRules::Encode(uint8_t* buf, int len, uint8_t type) const {
 }
 
 //------------------------------------------------------------------------------
-int QosRules::Decode(
+int QosFlowDescriptions::Decode(
     const uint8_t* const buf, int len, bool is_iei, uint8_t type) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding %s", GetIeName().c_str());
@@ -133,18 +147,18 @@ int QosRules::Decode(
   int decoded_header_size = Type6NasIe::Decode(buf + decoded_size, len, is_iei);
   if (decoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   decoded_size += decoded_header_size;
-  qos_rules_.clear();
+  qos_flow_descriptions_.clear();
 
   uint16_t length           = GetLengthIndicator();
   uint16_t decoded_qos_rule = length;
   while (length > 0) {
-    QosRule qos_rule = {};
-    int decoded_qos_rule_size =
-        qos_rule.Decode(buf + decoded_size, len - decoded_size);
-    if (decoded_qos_rule_size == KEncodeDecodeError) break;
-    decoded_size += decoded_qos_rule_size;
-    length -= decoded_qos_rule_size;
-    qos_rules_.push_back(qos_rule);
+    QosFlowDescription qos_flow = {};
+    int decoded_qos_flow_size =
+        qos_flow.Decode(buf + decoded_size, len - decoded_size);
+    if (decoded_qos_flow_size == KEncodeDecodeError) break;
+    decoded_size += decoded_qos_flow_size;
+    length -= decoded_qos_flow_size;
+    qos_flow_descriptions_.push_back(qos_flow);
   }
 
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)

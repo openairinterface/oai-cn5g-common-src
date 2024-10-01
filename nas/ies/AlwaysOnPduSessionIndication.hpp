@@ -19,40 +19,35 @@
  *      contact@openairinterface.org
  */
 
-#ifndef _QOS_RULES_H_
-#define _QOS_RULES_H_
+#ifndef _ALWAYS_ON_PDU_SESSION_INDICATION_H_
+#define _ALWAYS_ON_PDU_SESSION_INDICATION_H_
 
-#include "Type6NasIe.hpp"
-#include "QosRule.hpp"
+#include "Type1NasIeFormatTv.hpp"
 
-constexpr uint8_t kQosRulesMinimumLength = 7;
-constexpr uint8_t kQosRulesContentMinimumLength =
-    kQosRulesMinimumLength - 3;  // Minimum length - 3 octets for IEI/Length
-constexpr uint32_t kQosRulesMaximumLength = 65538;
-constexpr auto kQosRulesIeName            = "QoS Rules";
+constexpr auto kAlwaysOnPduSessionIndicationIeName =
+    "Always-on PDU Session Indication";
 
 namespace oai::nas {
-using namespace oai::nas;
-class QosRules : public Type6NasIe {
+
+class AlwaysOnPduSessionIndication : public Type1NasIeFormatTv {
  public:
-  QosRules();
-  QosRules(uint8_t iei);
-  QosRules(uint8_t iei, const std::vector<QosRule>& qos_rules);
-  QosRules(const std::vector<QosRule>& qos_rules);
-  ~QosRules();
+  AlwaysOnPduSessionIndication();
+  AlwaysOnPduSessionIndication(uint8_t type);
+  AlwaysOnPduSessionIndication(uint8_t iei, uint8_t type);
+  virtual ~AlwaysOnPduSessionIndication();
 
-  int Encode(uint8_t* buf, int len, uint8_t type) const;
-  int Decode(const uint8_t* const buf, int len, bool is_iei, uint8_t type);
+  static std::string GetIeName() { return kAlwaysOnPduSessionIndicationIeName; }
 
-  static std::string GetIeName() { return kQosRulesIeName; }
+  void SetValue();
+  void GetValue();
 
-  void Set(const std::vector<QosRule>& rules);
-  void Get(std::vector<QosRule>& rules) const;
+  void Set(uint8_t iei, bool apsi);
 
-  void AddQosRule(const QosRule& rule);
+  void SetApsi(bool apsi);
+  bool IsApsi();
 
  private:
-  std::vector<QosRule> qos_rules_;
+  bool apsi_;
 };
 
 }  // namespace oai::nas

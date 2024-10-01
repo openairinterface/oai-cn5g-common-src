@@ -127,6 +127,7 @@ constexpr uint8_t kEquivalentPlmns = 0x4A;
 constexpr uint8_t kIeiPduSessionStatus         = 0x50;
 constexpr uint8_t kIei5gsUpdateType            = 0x53;
 constexpr uint8_t kIeiEpsNasSecurityAlgorithms = 0x57;
+constexpr uint8_t kIei5gsmCause                = 0x59;
 constexpr uint8_t kT3346Value                  = 0x5f;
 
 constexpr uint8_t kIeiEpsBearerContextStatus = 0x60;

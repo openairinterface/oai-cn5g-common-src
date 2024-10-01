@@ -22,8 +22,8 @@
 #ifndef _QOS_RULES_H_
 #define _QOS_RULES_H_
 
-#include "Type6NasIe.hpp"
 #include "QosRule.hpp"
+#include "Type6NasIe.hpp"
 
 constexpr uint8_t kQosRulesMinimumLength = 7;
 constexpr uint8_t kQosRulesContentMinimumLength =
@@ -41,8 +41,8 @@ class QosRules : public Type6NasIe {
   QosRules(const std::vector<QosRule>& qos_rules);
   ~QosRules();
 
-  int Encode(uint8_t* buf, int len, uint8_t type) const;
-  int Decode(const uint8_t* const buf, int len, bool is_iei, uint8_t type);
+  int Encode(uint8_t* buf, int len) const;
+  int Decode(const uint8_t* const buf, int len, bool is_iei);
 
   static std::string GetIeName() { return kQosRulesIeName; }
 

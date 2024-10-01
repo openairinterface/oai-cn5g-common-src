@@ -73,6 +73,7 @@
 #include "PlmnList.hpp"
 #include "ProcedureTransactionIdentity.hpp"
 #include "QosFlowDescription.hpp"
+#include "QosFlowDescriptions.hpp"
 #include "QosRule.hpp"
 #include "QosRules.hpp"
 #include "RejectedNssai.hpp"

@@ -22,8 +22,8 @@
 #ifndef _QOS_FLOW_DESCRIPTIONS_H_
 #define _QOS_FLOW_DESCRIPTIONS_H_
 
-#include "Type6NasIe.hpp"
 #include "QosFlowDescription.hpp"
+#include "Type6NasIe.hpp"
 
 constexpr uint8_t kQosFlowDescriptionsMinimumLength = 6;
 constexpr uint8_t kQosFlowDescriptionsContentMinimumLength =
@@ -42,8 +42,8 @@ class QosFlowDescriptions : public Type6NasIe {
   QosFlowDescriptions(const std::vector<QosFlowDescription>& qos_rules);
   ~QosFlowDescriptions();
 
-  int Encode(uint8_t* buf, int len, uint8_t type) const;
-  int Decode(const uint8_t* const buf, int len, bool is_iei, uint8_t type);
+  int Encode(uint8_t* buf, int len) const;
+  int Decode(const uint8_t* const buf, int len, bool is_iei);
 
   static std::string GetIeName() { return kQosFlowDescriptionsIeName; }
 

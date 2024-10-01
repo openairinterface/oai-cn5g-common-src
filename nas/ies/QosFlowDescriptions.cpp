@@ -108,7 +108,7 @@ void QosFlowDescriptions::AddQosFlowDescription(
 }
 
 //------------------------------------------------------------------------------
-int QosFlowDescriptions::Encode(uint8_t* buf, int len, uint8_t type) const {
+int QosFlowDescriptions::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Encoding %s", GetIeName().c_str());
 
@@ -137,7 +137,7 @@ int QosFlowDescriptions::Encode(uint8_t* buf, int len, uint8_t type) const {
 
 //------------------------------------------------------------------------------
 int QosFlowDescriptions::Decode(
-    const uint8_t* const buf, int len, bool is_iei, uint8_t type) {
+    const uint8_t* const buf, int len, bool is_iei) {
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("Decoding %s", GetIeName().c_str());
   int decoded_size = 0;

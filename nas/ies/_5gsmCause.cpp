@@ -27,7 +27,7 @@
 using namespace oai::nas;
 
 //------------------------------------------------------------------------------
-_5gsmCause::_5gsmCause(uint8_t iei) : Type3NasIe(iei) {
+_5gsmCause::_5gsmCause(uint8_t iei) : Type3NasIe(kIei5gsmCause) {
   value_ = 0;
 }
 

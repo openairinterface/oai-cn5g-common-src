@@ -77,6 +77,7 @@
 #include "QosFlowDescriptions.hpp"
 #include "QosRule.hpp"
 #include "QosRules.hpp"
+#include "ReAttemptIndicator.hpp"
 #include "RejectedNssai.hpp"
 #include "ReleaseAssistanceIndication.hpp"
 #include "RequestType.hpp"

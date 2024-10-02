@@ -22,8 +22,6 @@
 #include "PduSessionModificationReject.hpp"
 
 #include "NasHelper.hpp"
-#include "conversions.hpp"
-#include "utils.hpp"
 
 using namespace oai::nas;
 
@@ -74,6 +72,7 @@ void PduSessionModificationReject::SetBackOffTimerValue(
   ie_back_off_timer_value_ =
       std::make_optional<GprsTimer3>(back_off_timer_value);
 }
+
 //------------------------------------------------------------------------------
 void PduSessionModificationReject::GetBackOffTimerValue(
     std::optional<GprsTimer3>& back_off_timer_value) const {
@@ -86,6 +85,7 @@ void PduSessionModificationReject::Set5gsmCongestionReAttemptIndicator(
   ie_5gsm_congestion_re_attempt_indicator_ =
       std::make_optional<_5gsmCongestionReAttemptIndicator>(indicator);
 }
+
 //------------------------------------------------------------------------------
 void PduSessionModificationReject::Get5gsmCongestionReAttemptIndicator(
     std::optional<_5gsmCongestionReAttemptIndicator>& indicator) const {
@@ -111,6 +111,7 @@ void PduSessionModificationReject::SetReAttemptIndicator(
   ie_re_attempt_indicator_ =
       std::make_optional<ReAttemptIndicator>(re_attempt_indicator);
 }
+
 //------------------------------------------------------------------------------
 void PduSessionModificationReject::GetReAttemptIndicator(
     std::optional<ReAttemptIndicator>& re_attempt_indicator) const {
@@ -188,7 +189,7 @@ int PduSessionModificationReject::Decode(uint8_t* buf, int len) {
   }
   decoded_size += decoded_ie_size;
 
-  //
+  // 5GSM Cause
   if ((decoded_ie_size =
            NasHelper::Decode(ie_5gsm_cause_, buf, len, decoded_size, false)) ==
       KEncodeDecodeError) {

@@ -22,8 +22,6 @@
 #include "PduSessionEstablishmentAccept.hpp"
 
 #include "NasHelper.hpp"
-#include "conversions.hpp"
-#include "utils.hpp"
 
 using namespace oai::nas;
 
@@ -91,6 +89,7 @@ void PduSessionEstablishmentAccept::SetSelectedSscMode(
     const SscMode& ssc_mode) {
   ie_selected_ssc_mode_ = ssc_mode;
 }
+
 //------------------------------------------------------------------------------
 void PduSessionEstablishmentAccept::GetSelectedSscMode(
     SscMode& ssc_mode) const {
@@ -102,17 +101,19 @@ void PduSessionEstablishmentAccept::SetAuthorizedQosRules(
     const QosRules& qos_rules) {
   ie_authorized_qos_rules_ = qos_rules;
 }
+
 //------------------------------------------------------------------------------
 void PduSessionEstablishmentAccept::GetAuthorizedQosRules(
     QosRules& qos_rules) const {
   qos_rules = ie_authorized_qos_rules_;
 }
-//------------------------------------------------------------------------------
 
+//------------------------------------------------------------------------------
 void PduSessionEstablishmentAccept::SetSessionAmbr(
     const SessionAmbr& session_ambr) {
   ie_session_ambr_ = session_ambr;
 }
+
 //------------------------------------------------------------------------------
 void PduSessionEstablishmentAccept::GetSessionAmbr(
     SessionAmbr& session_ambr) const {
@@ -125,6 +126,7 @@ void PduSessionEstablishmentAccept::Set5gsmCause(
   ie_5gsm_cause_ = std::make_optional<_5gsmCause>(_5gsm_cause);
   ie_5gsm_cause_.value().SetIei(kIei5gsmCause);
 }
+
 //------------------------------------------------------------------------------
 void PduSessionEstablishmentAccept::Get5gsmCause(
     std::optional<_5gsmCause>& _5gsm_cause) const {
@@ -148,20 +150,24 @@ void PduSessionEstablishmentAccept::SetRqTimerValue(
     const GprsTimer& gprs_timer) {
   ie_gprs_timer_ = std::make_optional<GprsTimer>(gprs_timer);
 }
+
 //------------------------------------------------------------------------------
 void PduSessionEstablishmentAccept::GetRqTimerValue(
     std::optional<GprsTimer>& gprs_timer) const {
   gprs_timer = ie_gprs_timer_;
 }
+
 //------------------------------------------------------------------------------
 void PduSessionEstablishmentAccept::SetSNssai(const SNssai& snssai) {
   ie_s_nssai_ = std::make_optional<SNssai>(snssai);
 }
+
 //------------------------------------------------------------------------------
 void PduSessionEstablishmentAccept::GetSNssai(
     std::optional<SNssai>& snssai) const {
   snssai = ie_s_nssai_;
 }
+
 //------------------------------------------------------------------------------
 void PduSessionEstablishmentAccept::SetAlwaysOnPduSessionIndication(
     const AlwaysOnPduSessionIndication& always_on_pdu_session_indication) {
@@ -169,6 +175,7 @@ void PduSessionEstablishmentAccept::SetAlwaysOnPduSessionIndication(
       std::make_optional<AlwaysOnPduSessionIndication>(
           always_on_pdu_session_indication);
 }
+
 //------------------------------------------------------------------------------
 void PduSessionEstablishmentAccept::GetAlwaysOnPduSessionIndication(
     std::optional<AlwaysOnPduSessionIndication>&
@@ -181,6 +188,7 @@ void PduSessionEstablishmentAccept::SetEapMessage(
     const EapMessage& eap_message) {
   ie_eap_message_ = std::make_optional<EapMessage>(eap_message);
 }
+
 //------------------------------------------------------------------------------
 void PduSessionEstablishmentAccept::GetEapMessage(
     std::optional<EapMessage>& eap_message) const {
@@ -193,6 +201,7 @@ void PduSessionEstablishmentAccept::SetAuthorizedQosFlowDescriptions(
   ie_authorized_qos_flow_descriptions_ =
       std::make_optional<QosFlowDescriptions>(flow_descriptions);
 }
+
 //------------------------------------------------------------------------------
 void PduSessionEstablishmentAccept::GetAuthorizedQosFlowDescriptions(
     std::optional<QosFlowDescriptions>& flow_descriptions) const {
@@ -216,6 +225,7 @@ void PduSessionEstablishmentAccept::GetExtendedProtocolConfigurationOptions(
 void PduSessionEstablishmentAccept::SetDnn(const Dnn& dnn) {
   ie_dnn_ = std::make_optional<Dnn>(dnn);
 }
+
 //------------------------------------------------------------------------------
 void PduSessionEstablishmentAccept::GetDnn(std::optional<Dnn>& dnn) const {
   dnn = ie_dnn_;

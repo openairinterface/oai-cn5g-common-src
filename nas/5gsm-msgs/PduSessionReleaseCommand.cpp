@@ -22,8 +22,6 @@
 #include "PduSessionReleaseCommand.hpp"
 
 #include "NasHelper.hpp"
-#include "conversions.hpp"
-#include "utils.hpp"
 
 using namespace oai::nas;
 
@@ -74,6 +72,7 @@ void PduSessionReleaseCommand::SetBackOffTimerValue(
   ie_back_off_timer_value_ =
       std::make_optional<GprsTimer3>(back_off_timer_value);
 }
+
 //------------------------------------------------------------------------------
 void PduSessionReleaseCommand::GetBackOffTimerValue(
     std::optional<GprsTimer3>& back_off_timer_value) const {
@@ -84,6 +83,7 @@ void PduSessionReleaseCommand::GetBackOffTimerValue(
 void PduSessionReleaseCommand::SetEapMessage(const EapMessage& eap_message) {
   ie_eap_message_ = std::make_optional<EapMessage>(eap_message);
 }
+
 //------------------------------------------------------------------------------
 void PduSessionReleaseCommand::GetEapMessage(
     std::optional<EapMessage>& eap_message) const {
@@ -96,6 +96,7 @@ void PduSessionReleaseCommand::Set5gsmCongestionReAttemptIndicator(
   ie_5gsm_congestion_re_attempt_indicator_ =
       std::make_optional<_5gsmCongestionReAttemptIndicator>(indicator);
 }
+
 //------------------------------------------------------------------------------
 void PduSessionReleaseCommand::Get5gsmCongestionReAttemptIndicator(
     std::optional<_5gsmCongestionReAttemptIndicator>& indicator) const {
@@ -183,12 +184,13 @@ int PduSessionReleaseCommand::Decode(uint8_t* buf, int len) {
   }
   decoded_size += decoded_ie_size;
 
-  //
+  // 5GSM Cause
   if ((decoded_ie_size =
            NasHelper::Decode(ie_5gsm_cause_, buf, len, decoded_size, false)) ==
       KEncodeDecodeError) {
     return KEncodeDecodeError;
   }
+
   // Decode other IEs
   uint8_t octet = 0x00;
   DECODE_U8_VALUE(buf, octet, decoded_size, len);

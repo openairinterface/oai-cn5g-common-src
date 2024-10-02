@@ -22,8 +22,6 @@
 #include "PduSessionModificationRequest.hpp"
 
 #include "NasHelper.hpp"
-#include "conversions.hpp"
-#include "utils.hpp"
 
 using namespace oai::nas;
 
@@ -96,6 +94,7 @@ void PduSessionModificationRequest::Set5gsmCause(
   ie_5gsm_cause_ = std::make_optional<_5gsmCause>(_5gsm_cause);
   ie_5gsm_cause_.value().SetIei(kIei5gsmCause);
 }
+
 //------------------------------------------------------------------------------
 void PduSessionModificationRequest::Get5gsmCause(
     std::optional<_5gsmCause>& _5gsm_cause) const {
@@ -146,6 +145,7 @@ void PduSessionModificationRequest::SetRequestedQosRules(
     const QosRules& qos_rules) {
   ie_requested_qos_rules_ = std::make_optional<QosRules>(qos_rules);
 }
+
 //------------------------------------------------------------------------------
 void PduSessionModificationRequest::GetRequestedQosRules(
     std::optional<QosRules>& qos_rules) const {
@@ -158,6 +158,7 @@ void PduSessionModificationRequest::SetRequestedQosFlowDescriptions(
   ie_requested_qos_flow_descriptions_ =
       std::make_optional<QosFlowDescriptions>(flow_descriptions);
 }
+
 //------------------------------------------------------------------------------
 void PduSessionModificationRequest::GetRequestedQosFlowDescriptions(
     std::optional<QosFlowDescriptions>& flow_descriptions) const {
@@ -238,6 +239,7 @@ int PduSessionModificationRequest::Encode(uint8_t* buf, int len) {
       KEncodeDecodeError) {
     return KEncodeDecodeError;
   }
+
   // TODO: Mapped EPS bearer contexts
   // Extended protocol configuration options
   if ((encoded_ie_size = NasHelper::Encode(
@@ -245,6 +247,7 @@ int PduSessionModificationRequest::Encode(uint8_t* buf, int len) {
            encoded_size)) == KEncodeDecodeError) {
     return KEncodeDecodeError;
   }
+
   // TODO: Port management information container
   // TODO: Header compression configuration
   // TODO: Ethernet header compression configuration

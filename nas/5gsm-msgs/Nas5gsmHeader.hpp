@@ -29,15 +29,19 @@ constexpr uint8_t kNas5gsmHeaderLength = 4;
 
 namespace oai::nas {
 
-class Nas5gsmHeader :public Nas5gsmMessage{
+class Nas5gsmHeader : public Nas5gsmMessage {
  public:
-  Nas5gsmHeader(): Nas5gsmMessage(){};
+  Nas5gsmHeader() : Nas5gsmMessage(){};
   virtual ~Nas5gsmHeader() {}
 
-  Nas5gsmHeader(uint8_t epd, uint8_t pdu_session_id, uint16_t procedure_transaction_id, uint8_t msg_type);
+  Nas5gsmHeader(
+      uint8_t epd, uint8_t pdu_session_id, uint16_t procedure_transaction_id,
+      uint8_t msg_type);
   Nas5gsmHeader(uint8_t epd, uint8_t msg_type);
 
-  void SetHeader(uint8_t epd, uint8_t pdu_session_id, uint16_t procedure_transaction_id, uint8_t msg_type);
+  void SetHeader(
+      uint8_t epd, uint8_t pdu_session_id, uint16_t procedure_transaction_id,
+      uint8_t msg_type);
 
   uint32_t GetLength() const override;
   bool Validate(uint32_t len) const;
@@ -58,13 +62,12 @@ class Nas5gsmHeader :public Nas5gsmMessage{
   uint8_t GetMessageType() const;
 
  private:
-  ExtendedProtocolDiscriminator ie_epd_;    // Mandatory
-  PduSessionIdentity ie_pdu_session_id_;  //Mandatory
-  ProcedureTransactionIdentity ie_procedure_transaction_id_; //Mandatory
-  NasMessageType ie_msg_type_;  // Mandatory
+  ExtendedProtocolDiscriminator ie_epd_;                      // Mandatory
+  PduSessionIdentity ie_pdu_session_id_;                      // Mandatory
+  ProcedureTransactionIdentity ie_procedure_transaction_id_;  // Mandatory
+  NasMessageType ie_msg_type_;                                // Mandatory
 
   std::string ie_msg_name_;  // non 3GPP IE
-
 };
 
 }  // namespace oai::nas

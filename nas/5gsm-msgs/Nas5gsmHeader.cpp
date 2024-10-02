@@ -29,16 +29,23 @@
 using namespace oai::nas;
 
 //------------------------------------------------------------------------------
-Nas5gsmHeader::Nas5gsmHeader(uint8_t epd, uint8_t pdu_session_id, uint16_t procedure_transaction_id, uint8_t msg_type)
-    : Nas5gsmMessage(), ie_epd_(epd), ie_pdu_session_id_(pdu_session_id),ie_procedure_transaction_id_(procedure_transaction_id), ie_msg_type_(msg_type) {
-}
+Nas5gsmHeader::Nas5gsmHeader(
+    uint8_t epd, uint8_t pdu_session_id, uint16_t procedure_transaction_id,
+    uint8_t msg_type)
+    : Nas5gsmMessage(),
+      ie_epd_(epd),
+      ie_pdu_session_id_(pdu_session_id),
+      ie_procedure_transaction_id_(procedure_transaction_id),
+      ie_msg_type_(msg_type) {}
 
 //------------------------------------------------------------------------------
-Nas5gsmHeader::Nas5gsmHeader(uint8_t epd, uint8_t msg_type): Nas5gsmMessage(), ie_epd_(epd), ie_msg_type_(msg_type){
-}
+Nas5gsmHeader::Nas5gsmHeader(uint8_t epd, uint8_t msg_type)
+    : Nas5gsmMessage(), ie_epd_(epd), ie_msg_type_(msg_type) {}
 
 //------------------------------------------------------------------------------
-void Nas5gsmHeader::SetHeader(uint8_t epd, uint8_t pdu_session_id, uint16_t procedure_transaction_id, uint8_t msg_type) {
+void Nas5gsmHeader::SetHeader(
+    uint8_t epd, uint8_t pdu_session_id, uint16_t procedure_transaction_id,
+    uint8_t msg_type) {
   ie_epd_.Set(epd);
   ie_pdu_session_id_.Set(pdu_session_id);
   ie_procedure_transaction_id_.Set(procedure_transaction_id);
@@ -57,26 +64,27 @@ uint8_t Nas5gsmHeader::GetEpd() const {
 
 //------------------------------------------------------------------------------
 void Nas5gsmHeader::SetPduSessionIdentity(uint8_t pdu_session_id) {
-	  ie_pdu_session_id_.Set(pdu_session_id);
+  ie_pdu_session_id_.Set(pdu_session_id);
 }
 
 //------------------------------------------------------------------------------
 uint8_t Nas5gsmHeader::GetPduSessionIdentity() const {
-	return ie_pdu_session_id_.Get();
+  return ie_pdu_session_id_.Get();
 }
 
 //------------------------------------------------------------------------------
-void Nas5gsmHeader::SetProcedureTransactionIdentity(uint16_t procedure_transaction_id) {
-	ie_procedure_transaction_id_.Set(procedure_transaction_id);
+void Nas5gsmHeader::SetProcedureTransactionIdentity(
+    uint16_t procedure_transaction_id) {
+  ie_procedure_transaction_id_.Set(procedure_transaction_id);
 }
 //------------------------------------------------------------------------------
 uint16_t Nas5gsmHeader::GetProcedureTransactionIdentity() const {
-	return ie_procedure_transaction_id_.Get();
+  return ie_procedure_transaction_id_.Get();
 }
 
 //------------------------------------------------------------------------------
 void Nas5gsmHeader::SetMessageType(uint8_t type) {
-	ie_msg_type_.Set(type);
+  ie_msg_type_.Set(type);
 }
 
 //------------------------------------------------------------------------------
@@ -120,12 +128,13 @@ int Nas5gsmHeader::Encode(uint8_t* buf, int len) {
   }
 
   if ((encoded_ie_size = NasHelper::Encode(
-		  ie_pdu_session_id_, buf, len, encoded_size)) == KEncodeDecodeError) {
+           ie_pdu_session_id_, buf, len, encoded_size)) == KEncodeDecodeError) {
     return KEncodeDecodeError;
   }
 
   if ((encoded_ie_size = NasHelper::Encode(
-		  ie_procedure_transaction_id_, buf, len, encoded_size)) == KEncodeDecodeError) {
+           ie_procedure_transaction_id_, buf, len, encoded_size)) ==
+      KEncodeDecodeError) {
     return KEncodeDecodeError;
   }
 
@@ -159,13 +168,13 @@ int Nas5gsmHeader::Decode(uint8_t* buf, int len) {
   }
 
   if ((decoded_ie_size = NasHelper::Decode(
-		  ie_pdu_session_id_, buf, len, decoded_size, true)) ==
+           ie_pdu_session_id_, buf, len, decoded_size, true)) ==
       KEncodeDecodeError) {
     return KEncodeDecodeError;
   }
 
   if ((decoded_ie_size = NasHelper::Decode(
-		  ie_procedure_transaction_id_, buf, len, decoded_size, true)) ==
+           ie_procedure_transaction_id_, buf, len, decoded_size, true)) ==
       KEncodeDecodeError) {
     return KEncodeDecodeError;
   }

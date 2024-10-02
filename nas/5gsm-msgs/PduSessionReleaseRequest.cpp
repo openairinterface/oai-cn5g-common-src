@@ -22,8 +22,6 @@
 #include "PduSessionReleaseRequest.hpp"
 
 #include "NasHelper.hpp"
-#include "conversions.hpp"
-#include "utils.hpp"
 
 using namespace oai::nas;
 
@@ -57,6 +55,7 @@ void PduSessionReleaseRequest::Set5gsmCause(const _5gsmCause& _5gsm_cause) {
   ie_5gsm_cause_ = std::make_optional<_5gsmCause>(_5gsm_cause);
   ie_5gsm_cause_.value().SetIei(kIei5gsmCause);
 }
+
 //------------------------------------------------------------------------------
 void PduSessionReleaseRequest::Get5gsmCause(
     std::optional<_5gsmCause>& _5gsm_cause) const {

@@ -29,22 +29,21 @@ namespace oai::nas {
 
 class Nas5gsmMessage {
  public:
-	  Nas5gsmMessage(){};
-	  virtual ~Nas5gsmMessage() {}
+  Nas5gsmMessage(){};
+  virtual ~Nas5gsmMessage() {}
 
-	  virtual uint32_t GetLength() const = 0;
-	  virtual bool Validate(uint32_t len) const;
+  virtual uint32_t GetLength() const = 0;
+  virtual bool Validate(uint32_t len) const;
 
-	  virtual int Encode(uint8_t* buf, int len) = 0;
-	  virtual int Decode(uint8_t* buf, int len) = 0;
+  virtual int Encode(uint8_t* buf, int len) = 0;
+  virtual int Decode(uint8_t* buf, int len) = 0;
 
-	  void SetMessageName(const std::string& name);
-	  std::string GetMessageName() const;
-	  void GetMessageName(std::string& name) const;
+  void SetMessageName(const std::string& name);
+  std::string GetMessageName() const;
+  void GetMessageName(std::string& name) const;
 
  private:
   std::string ie_msg_name_;  // non 3GPP IE
-
 };
 
 }  // namespace oai::nas

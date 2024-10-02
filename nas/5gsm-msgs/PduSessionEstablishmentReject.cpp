@@ -22,8 +22,6 @@
 #include "PduSessionEstablishmentReject.hpp"
 
 #include "NasHelper.hpp"
-#include "conversions.hpp"
-#include "utils.hpp"
 
 using namespace oai::nas;
 
@@ -83,6 +81,7 @@ void PduSessionEstablishmentReject::SetBackOffTimerValue(
   ie_back_off_timer_value_ =
       std::make_optional<GprsTimer3>(back_off_timer_value);
 }
+
 //------------------------------------------------------------------------------
 void PduSessionEstablishmentReject::GetBackOffTimerValue(
     std::optional<GprsTimer3>& back_off_timer_value) const {
@@ -106,6 +105,7 @@ void PduSessionEstablishmentReject::SetEapMessage(
     const EapMessage& eap_message) {
   ie_eap_message_ = std::make_optional<EapMessage>(eap_message);
 }
+
 //------------------------------------------------------------------------------
 void PduSessionEstablishmentReject::GetEapMessage(
     std::optional<EapMessage>& eap_message) const {
@@ -118,6 +118,7 @@ void PduSessionEstablishmentReject::Set5gsmCongestionReAttemptIndicator(
   ie_5gsm_congestion_re_attempt_indicator_ =
       std::make_optional<_5gsmCongestionReAttemptIndicator>(indicator);
 }
+
 //------------------------------------------------------------------------------
 void PduSessionEstablishmentReject::Get5gsmCongestionReAttemptIndicator(
     std::optional<_5gsmCongestionReAttemptIndicator>& indicator) const {
@@ -143,6 +144,7 @@ void PduSessionEstablishmentReject::SetReAttemptIndicator(
   ie_re_attempt_indicator_ =
       std::make_optional<ReAttemptIndicator>(re_attempt_indicator);
 }
+
 //------------------------------------------------------------------------------
 void PduSessionEstablishmentReject::GetReAttemptIndicator(
     std::optional<ReAttemptIndicator>& re_attempt_indicator) const {

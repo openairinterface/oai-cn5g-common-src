@@ -22,8 +22,6 @@
 #include "PduSessionModificationCommand.hpp"
 
 #include "NasHelper.hpp"
-#include "conversions.hpp"
-#include "utils.hpp"
 
 using namespace oai::nas;
 
@@ -73,6 +71,7 @@ void PduSessionModificationCommand::Set5gsmCause(
   ie_5gsm_cause_ = std::make_optional<_5gsmCause>(_5gsm_cause);
   ie_5gsm_cause_.value().SetIei(kIei5gsmCause);
 }
+
 //------------------------------------------------------------------------------
 void PduSessionModificationCommand::Get5gsmCause(
     std::optional<_5gsmCause>& _5gsm_cause) const {
@@ -83,6 +82,7 @@ void PduSessionModificationCommand::SetSessionAmbr(
     const SessionAmbr& session_ambr) {
   ie_session_ambr_ = std::make_optional<SessionAmbr>(session_ambr);
 }
+
 //------------------------------------------------------------------------------
 void PduSessionModificationCommand::GetSessionAmbr(
     std::optional<SessionAmbr>& session_ambr) const {
@@ -94,6 +94,7 @@ void PduSessionModificationCommand::SetRqTimerValue(
     const GprsTimer& rq_timer_value) {
   ie_rq_timer_value_ = std::make_optional<GprsTimer>(rq_timer_value);
 }
+
 //------------------------------------------------------------------------------
 void PduSessionModificationCommand::GetRqTimerValue(
     std::optional<GprsTimer>& rq_timer_value) const {
@@ -107,6 +108,7 @@ void PduSessionModificationCommand::SetAlwaysOnPduSessionIndication(
       std::make_optional<AlwaysOnPduSessionIndication>(
           always_on_pdu_session_indication);
 }
+
 //------------------------------------------------------------------------------
 void PduSessionModificationCommand::GetAlwaysOnPduSessionIndication(
     std::optional<AlwaysOnPduSessionIndication>&
@@ -119,6 +121,7 @@ void PduSessionModificationCommand::SetAuthorizedQosRules(
     const QosRules& qos_rules) {
   ie_authorized_qos_rules_ = std::make_optional<QosRules>(qos_rules);
 }
+
 //------------------------------------------------------------------------------
 void PduSessionModificationCommand::GetAuthorizedQosRules(
     std::optional<QosRules>& qos_rules) const {
@@ -131,6 +134,7 @@ void PduSessionModificationCommand::SetAuthorizedQosFlowDescriptions(
   ie_authorized_qos_flow_descriptions_ =
       std::make_optional<QosFlowDescriptions>(flow_descriptions);
 }
+
 //------------------------------------------------------------------------------
 void PduSessionModificationCommand::GetAuthorizedQosFlowDescriptions(
     std::optional<QosFlowDescriptions>& flow_descriptions) const {
@@ -164,7 +168,7 @@ int PduSessionModificationCommand::Encode(uint8_t* buf, int len) {
   }
   encoded_size += encoded_ie_size;
 
-  //
+  // 5GSM Cause
   if ((encoded_ie_size = NasHelper::Encode(
            ie_5gsm_cause_, buf, len, encoded_size)) == KEncodeDecodeError) {
     return KEncodeDecodeError;

@@ -22,8 +22,6 @@
 #include "PduSessionEstablishmentRequest.hpp"
 
 #include "NasHelper.hpp"
-#include "conversions.hpp"
-#include "utils.hpp"
 
 using namespace oai::nas;
 
@@ -67,6 +65,7 @@ uint32_t PduSessionEstablishmentRequest::GetLength() const {
     msg_len += ie_ip_header_compression_configuration_.value().GetIeLength();
   return msg_len;
 }
+
 //------------------------------------------------------------------------------
 void PduSessionEstablishmentRequest::SetPduSessionIdentity(
     uint8_t pdu_session_id) {
@@ -181,6 +180,7 @@ void PduSessionEstablishmentRequest::SetExtendedProtocolConfigurationOptions(
   ie_extended_protocol_configuration_options_ =
       std::make_optional<ExtendedProtocolConfigurationOptions>(options);
 }
+
 //------------------------------------------------------------------------------
 std::optional<ExtendedProtocolConfigurationOptions>
 PduSessionEstablishmentRequest::GetExtendedProtocolConfigurationOptions() {

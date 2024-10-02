@@ -45,7 +45,7 @@ bool Nas5gsmMessage::Validate(uint32_t len) const {
 
 //------------------------------------------------------------------------------
 void Nas5gsmMessage::SetMessageName(const std::string& name) {
-	ie_msg_name_ = name;
+  ie_msg_name_ = name;
 }
 
 //------------------------------------------------------------------------------

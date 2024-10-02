@@ -22,8 +22,6 @@
 #include "PduSessionAuthenticationResult.hpp"
 
 #include "NasHelper.hpp"
-#include "conversions.hpp"
-#include "utils.hpp"
 
 using namespace oai::nas;
 
@@ -56,6 +54,7 @@ void PduSessionAuthenticationResult::SetEapMessage(
   ie_eap_message_ = eap_message;
   ie_eap_message_.SetIei(kIeiEapMessage);
 }
+
 //------------------------------------------------------------------------------
 void PduSessionAuthenticationResult::GetEapMessage(
     EapMessage& eap_message) const {

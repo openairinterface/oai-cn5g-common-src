@@ -19,40 +19,30 @@
  *      contact@openairinterface.org
  */
 
-#ifndef _PDU_SESSION_ESTABLISHMENT_REJECT_H_
-#define _PDU_SESSION_ESTABLISHMENT_REJECT_H_
+#ifndef _ALLOWED_SSC_MODE_H_
+#define _ALLOWED_SSC_MODE_H_
 
-#include <bstrlib.h>
+#include "Type1NasIeFormatTv.hpp"
 
-#include <vector>
-
-#include "Nas5gsmHeader.hpp"
-#include "NasIeHeader.hpp"
+constexpr auto kAllowedSscModeName = "Allowed SSC Mode";
 
 namespace oai::nas {
 
-class PduSessionEstablishmentReject : public Nas5gsmHeader {
+class AllowedSscMode : public Type1NasIeFormatTv {
  public:
-  PduSessionEstablishmentReject();
-  ~PduSessionEstablishmentReject();
+  AllowedSscMode();
+  AllowedSscMode(uint8_t type);
+  AllowedSscMode(uint8_t iei, uint8_t type);
+  virtual ~AllowedSscMode();
 
-  int Encode(uint8_t* buf, int len) override;
-  int Decode(uint8_t* buf, int len) override;
+  static std::string GetIeName() { return kAllowedSscModeName; }
 
-  uint32_t GetLength() const override;
+  void SetValue(uint8_t value);
+  uint8_t GetValue() const;
 
- private:
-  Nas5gsmHeader ie_header_;   // Mandatory
-  _5gsmCause ie_5gsm_cause_;  // Mandatory
-
-  std::optional<GprsTimer3> ie_back_off_timer_value_;  // Optional
-  std::optional<AllowedSscMode> ie_allowed_ssc_mode_;  // Optional
-  std::optional<EapMessage> ie_eap_message_;           // Optional
-  std::optional<_5gsmCongestionReAttemptIndicator>
-      ie_5gsm_congestion_re_attempt_indicator_;
-  std::optional<ExtendedProtocolConfigurationOptions>
-      ie_extended_protocol_configuration_options_;  // Optional
-  // TODO: Re-attempt indicator // Optional
+  bool IsSscMode1Allowed() const;
+  bool IsSscMode2Allowed() const;
+  bool IsSscMode3Allowed() const;
 };
 
 }  // namespace oai::nas

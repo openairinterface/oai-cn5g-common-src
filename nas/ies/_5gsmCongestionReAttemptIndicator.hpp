@@ -19,40 +19,38 @@
  *      contact@openairinterface.org
  */
 
-#ifndef _PDU_SESSION_ESTABLISHMENT_REJECT_H_
-#define _PDU_SESSION_ESTABLISHMENT_REJECT_H_
+#ifndef _5GSM_CONGESTION_RE_ATTEMPT_INDICATOR_H_
+#define _5GSM_CONGESTION_RE_ATTEMPT_INDICATOR_H_
 
-#include <bstrlib.h>
+#include "Type4NasIe.hpp"
 
-#include <vector>
-
-#include "Nas5gsmHeader.hpp"
-#include "NasIeHeader.hpp"
+constexpr uint8_t k5gsmCongestionReAttemptIndicatorLength = 3;
+constexpr uint8_t k5gsmCongestionReAttemptIndicatorContentLength =
+    k5gsmCongestionReAttemptIndicatorLength -
+    2;  // Minimum length - 2 octets for IEI/Length
+constexpr auto k5gsmCongestionReAttemptIndicatorIeName =
+    "5GSM congestion re-attempt indicator";
 
 namespace oai::nas {
 
-class PduSessionEstablishmentReject : public Nas5gsmHeader {
+class _5gsmCongestionReAttemptIndicator : public Type4NasIe {
  public:
-  PduSessionEstablishmentReject();
-  ~PduSessionEstablishmentReject();
+  _5gsmCongestionReAttemptIndicator();
+  _5gsmCongestionReAttemptIndicator(bool abo);
+  ~_5gsmCongestionReAttemptIndicator();
 
-  int Encode(uint8_t* buf, int len) override;
-  int Decode(uint8_t* buf, int len) override;
+  int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei = true) override;
 
-  uint32_t GetLength() const override;
+  static std::string GetIeName() {
+    return k5gsmCongestionReAttemptIndicatorIeName;
+  }
+
+  void SetAbo(bool abo);
+  bool GetAbo() const;
 
  private:
-  Nas5gsmHeader ie_header_;   // Mandatory
-  _5gsmCause ie_5gsm_cause_;  // Mandatory
-
-  std::optional<GprsTimer3> ie_back_off_timer_value_;  // Optional
-  std::optional<AllowedSscMode> ie_allowed_ssc_mode_;  // Optional
-  std::optional<EapMessage> ie_eap_message_;           // Optional
-  std::optional<_5gsmCongestionReAttemptIndicator>
-      ie_5gsm_congestion_re_attempt_indicator_;
-  std::optional<ExtendedProtocolConfigurationOptions>
-      ie_extended_protocol_configuration_options_;  // Optional
-  // TODO: Re-attempt indicator // Optional
+  bool abo_;
 };
 
 }  // namespace oai::nas

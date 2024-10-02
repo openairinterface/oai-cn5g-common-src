@@ -23,6 +23,7 @@
 #include "Additional5gSecurityInformation.hpp"
 #include "AdditionalInformation.hpp"
 #include "AllowedPduSessionStatus.hpp"
+#include "AllowedSscMode.hpp"
 #include "AlwaysOnPduSessionIndication.hpp"
 #include "AlwaysOnPduSessionRequested.hpp"
 #include "AuthenticationFailureParameter.hpp"
@@ -107,3 +108,4 @@
 #include "_5gsUpdateType.hpp"
 #include "_5gsmCapability.hpp"
 #include "_5gsmCause.hpp"
+#include "_5gsmCongestionReAttemptIndicator.hpp"

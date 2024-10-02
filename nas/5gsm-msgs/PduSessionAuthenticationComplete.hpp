@@ -22,10 +22,6 @@
 #ifndef _PDU_SESSION_AUTHENTICATION_COMPLETE_H_
 #define _PDU_SESSION_AUTHENTICATION_COMPLETE_H_
 
-#include <bstrlib.h>
-
-#include <vector>
-
 #include "Nas5gsmHeader.hpp"
 #include "NasIeHeader.hpp"
 

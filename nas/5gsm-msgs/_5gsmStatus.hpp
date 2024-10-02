@@ -22,10 +22,6 @@
 #ifndef __5GSM_STATUS_H_
 #define __5GSM_STATUS_H_
 
-#include <bstrlib.h>
-
-#include <vector>
-
 #include "Nas5gsmHeader.hpp"
 #include "NasIeHeader.hpp"
 

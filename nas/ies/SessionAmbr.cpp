@@ -108,8 +108,7 @@ uint16_t SessionAmbr::GetSessionAmbrForUplink() const {
 
 //------------------------------------------------------------------------------
 int SessionAmbr::Encode(uint8_t* buf, int len) const {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Encoding %s", GetIeName().c_str());
   int ie_len = GetIeLength();
 
   int encoded_size = 0;
@@ -128,25 +127,23 @@ int SessionAmbr::Encode(uint8_t* buf, int len) const {
   // Session-AMBR for uplink
   ENCODE_U16(buf + encoded_size, session_ambr_for_uplink_, encoded_size);
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
 int SessionAmbr::Decode(const uint8_t* const buf, int len, bool is_iei) {
   if (len < kSessionAmbrLength) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this IE (%d "
-            "octet)",
-            kSessionAmbrLength);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the minimum length of this IE (%d "
+        "octet)",
+        kSessionAmbrLength);
     return KEncodeDecodeError;
   }
 
   uint8_t decoded_size = 0;
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Decoding %s", GetIeName().c_str());
 
   // IEI and Length
   int decoded_header_size = Type4NasIe::Decode(buf + decoded_size, len, is_iei);
@@ -163,16 +160,14 @@ int SessionAmbr::Decode(const uint8_t* const buf, int len, bool is_iei) {
   // Session-AMBR for uplink
   DECODE_U16(buf + decoded_size, session_ambr_for_uplink_, decoded_size);
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug(
-          "Decoded %s, Session-AMBR for Downlink: 0x%x, Unit: 0x%x",
-          GetIeName().c_str(), session_ambr_for_downlink_, unit_for_downlink_);
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug(
-          "Decoded %s, Session-AMBR for Uplink: 0x%x, Unit: 0x%x",
-          GetIeName().c_str(), session_ambr_for_uplink_, unit_for_uplink_);
+  oai::logger::logger_common::nas().debug(
+      "Decoded %s, Session-AMBR for Downlink: 0x%x, Unit: 0x%x",
+      GetIeName().c_str(), session_ambr_for_downlink_, unit_for_downlink_);
+  oai::logger::logger_common::nas().debug(
+      "Decoded %s, Session-AMBR for Uplink: 0x%x, Unit: 0x%x",
+      GetIeName().c_str(), session_ambr_for_uplink_, unit_for_uplink_);
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
   return decoded_size;
 }

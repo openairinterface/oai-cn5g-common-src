@@ -57,11 +57,10 @@ uint16_t ProcedureTransactionIdentity::Get() const {
 //------------------------------------------------------------------------------
 bool ProcedureTransactionIdentity::Validate(int len) const {
   if (len < kProcedureTransactionIdentityLength) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this IE (%d "
-            "octet)",
-            kProcedureTransactionIdentityLength);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the minimum length of this IE (%d "
+        "octet)",
+        kProcedureTransactionIdentityLength);
     return false;
   }
   return true;
@@ -69,15 +68,13 @@ bool ProcedureTransactionIdentity::Validate(int len) const {
 
 //------------------------------------------------------------------------------
 int ProcedureTransactionIdentity::Encode(uint8_t* buf, int len) const {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Encoding %s", GetIeName().c_str());
 
   if (len < kProcedureTransactionIdentityLength) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this IE (%d "
-            "octet)",
-            kProcedureTransactionIdentityLength);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the minimum length of this IE (%d "
+        "octet)",
+        kProcedureTransactionIdentityLength);
     return KEncodeDecodeError;
   }
   int encoded_size = 0;
@@ -85,23 +82,21 @@ int ProcedureTransactionIdentity::Encode(uint8_t* buf, int len) const {
   // Value
   ENCODE_U16(buf + encoded_size, value_, encoded_size);
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
 int ProcedureTransactionIdentity::Decode(
     const uint8_t* const buf, int len, bool is_iei) {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Decoding %s", GetIeName().c_str());
 
   if (len < kProcedureTransactionIdentityLength) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this IE (%d "
-            "octet)",
-            kProcedureTransactionIdentityLength);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the minimum length of this IE (%d "
+        "octet)",
+        kProcedureTransactionIdentityLength);
     return KEncodeDecodeError;
   }
 
@@ -109,9 +104,8 @@ int ProcedureTransactionIdentity::Decode(
   // Value
   DECODE_U16(buf + decoded_size, value_, decoded_size);
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded value 0x%x", value_);
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
+  oai::logger::logger_common::nas().debug("Decoded value 0x%x", value_);
+  oai::logger::logger_common::nas().debug(
+      "Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
   return decoded_size;
 }

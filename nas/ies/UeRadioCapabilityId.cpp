@@ -63,8 +63,7 @@ void UeRadioCapabilityId::GetValue(bstring& value) const {
 
 //------------------------------------------------------------------------------
 int UeRadioCapabilityId::Encode(uint8_t* buf, int len) const {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Encoding %s", GetIeName().c_str());
   int encoded_size = 0;
 
   // Validate the buffer's length and Encode IEI, Length (later)
@@ -82,16 +81,15 @@ int UeRadioCapabilityId::Encode(uint8_t* buf, int len) const {
   int encoded_len_ie = 0;
   ENCODE_U16(buf + len_pos, encoded_size - GetHeaderLength(), encoded_len_ie);
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
 int UeRadioCapabilityId::Decode(
     const uint8_t* const buf, int len, bool is_iei) {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Decoding %s", GetIeName().c_str());
   int decoded_size = 0;
 
   // IEI and Length
@@ -102,8 +100,8 @@ int UeRadioCapabilityId::Decode(
   ie_len          = GetLengthIndicator();
 
   if (len < GetIeLength()) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Len is less than %d", GetIeLength());
+    oai::logger::logger_common::nas().error(
+        "Len is less than %d", GetIeLength());
     return KEncodeDecodeError;
   }
 
@@ -111,13 +109,11 @@ int UeRadioCapabilityId::Decode(
   decode_bstring(&value_, ie_len, (buf + decoded_size), len - decoded_size);
   decoded_size += ie_len;
   for (int i = 0; i < ie_len; i++) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .debug(
-            "Decoded NasMessageContainer value 0x%x",
-            (uint8_t) value_->data[i]);
+    oai::logger::logger_common::nas().debug(
+        "Decoded NasMessageContainer value 0x%x", (uint8_t) value_->data[i]);
   }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
   return decoded_size;
 }

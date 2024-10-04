@@ -57,8 +57,7 @@ uint16_t AllowedPduSessionStatus::GetValue() const {
 
 //------------------------------------------------------------------------------
 int AllowedPduSessionStatus::Encode(uint8_t* buf, int len) const {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Encoding %s", GetIeName().c_str());
   int ie_len = GetIeLength();
 
   int encoded_size = 0;
@@ -76,8 +75,8 @@ int AllowedPduSessionStatus::Encode(uint8_t* buf, int len) const {
     ENCODE_U8(buf + encoded_size, spare, encoded_size);
   }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded %s, len (%d)", GetIeName().c_str(), encoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Decoded %s, len (%d)", GetIeName().c_str(), encoded_size);
   return encoded_size;
 }
 
@@ -85,18 +84,16 @@ int AllowedPduSessionStatus::Encode(uint8_t* buf, int len) const {
 int AllowedPduSessionStatus::Decode(
     const uint8_t* const buf, int len, bool is_iei) {
   if (len < kAllowedPduSessionStatusMinimumLength) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this IE (%d "
-            "octet)",
-            kAllowedPduSessionStatusMinimumLength);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the minimum length of this IE (%d "
+        "octet)",
+        kAllowedPduSessionStatusMinimumLength);
     return KEncodeDecodeError;
   }
 
   uint8_t decoded_size = 0;
   uint8_t octet        = 0;
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Decoding %s", GetIeName().c_str());
 
   // IEI and Length
   int decoded_header_size = Type4NasIe::Decode(buf + decoded_size, len, is_iei);
@@ -112,9 +109,9 @@ int AllowedPduSessionStatus::Decode(
     DECODE_U8(buf + decoded_size, spare, decoded_size);
   }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded %s (value 0x%4x)", GetIeName().c_str(), value_);
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Decoded %s (value 0x%4x)", GetIeName().c_str(), value_);
+  oai::logger::logger_common::nas().debug(
+      "Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
   return decoded_size;
 }

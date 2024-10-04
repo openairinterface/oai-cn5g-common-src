@@ -90,12 +90,11 @@ uint32_t NasMmPlainHeader::GetLength() const {
 bool NasMmPlainHeader::Validate(uint32_t len) const {
   uint32_t actual_length = GetLength();
   if (len < actual_length) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this message "
-            "(0x%x "
-            "octet)",
-            actual_length);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the minimum length of this message "
+        "(0x%x "
+        "octet)",
+        actual_length);
     return false;
   }
   return true;
@@ -103,8 +102,7 @@ bool NasMmPlainHeader::Validate(uint32_t len) const {
 
 //------------------------------------------------------------------------------
 int NasMmPlainHeader::Encode(uint8_t* buf, int len) {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoding NasMmPlainHeader");
+  oai::logger::logger_common::nas().debug("Encoding NasMmPlainHeader");
 
   if (!Validate(len)) return KEncodeDecodeError;
 
@@ -126,22 +124,21 @@ int NasMmPlainHeader::Encode(uint8_t* buf, int len) {
     return KEncodeDecodeError;
   }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoded NasMmPlainHeader (len %d octets)", encoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Encoded NasMmPlainHeader (len %d octets)", encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
 int NasMmPlainHeader::Decode(uint8_t* buf, int len) {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoding NasMmPlainHeader");
+  oai::logger::logger_common::nas().debug("Decoding NasMmPlainHeader");
 
   int decoded_size    = 0;
   int decoded_ie_size = 0;
 
   if (len < kNasMmPlainHeaderLength) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Buffer length is less than %d octets", kNasMmPlainHeaderLength);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than %d octets", kNasMmPlainHeaderLength);
     return KEncodeDecodeError;
   }
 
@@ -161,7 +158,7 @@ int NasMmPlainHeader::Decode(uint8_t* buf, int len) {
     return KEncodeDecodeError;
   }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded NasMmPlainHeader len (%d octets)", decoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Decoded NasMmPlainHeader len (%d octets)", decoded_size);
   return decoded_size;
 }

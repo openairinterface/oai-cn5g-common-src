@@ -173,8 +173,7 @@ void UeSecurityCapability::Set(
 
 //------------------------------------------------------------------------------
 int UeSecurityCapability::Encode(uint8_t* buf, int len) const {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Encoding %s", GetIeName().c_str());
 
   int encoded_size = 0;
   // Validate the buffer's length and Encode IEI/Length
@@ -196,23 +195,21 @@ int UeSecurityCapability::Encode(uint8_t* buf, int len) const {
     ENCODE_U8(buf + encoded_size, eia_.value(), encoded_size);
   }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
 int UeSecurityCapability::Decode(
     const uint8_t* const buf, int len, bool is_iei) {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Decoding %s", GetIeName().c_str());
 
   if (len < kUeSecurityCapabilityMinimumLength) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this IE (%d "
-            "octet)",
-            kUeSecurityCapabilityMinimumLength);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the minimum length of this IE (%d "
+        "octet)",
+        kUeSecurityCapabilityMinimumLength);
     return KEncodeDecodeError;
   }
 
@@ -248,19 +245,17 @@ int UeSecurityCapability::Decode(
     DECODE_U8(buf + decoded_size, spare, decoded_size);
   }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("5G EA 0x%x, 5G IA 0x%x", _5g_ea_, _5g_ia_);
+  oai::logger::logger_common::nas().debug(
+      "5G EA 0x%x, 5G IA 0x%x", _5g_ea_, _5g_ia_);
   if (eea_.has_value()) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .debug("EEA 0x%x", eea_.value());
+    oai::logger::logger_common::nas().debug("EEA 0x%x", eea_.value());
   }
 
   if (eia_.has_value()) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .debug("EIA 0x%x", eia_.value());
+    oai::logger::logger_common::nas().debug("EIA 0x%x", eia_.value());
   }
 
   return decoded_size;

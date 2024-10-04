@@ -61,8 +61,7 @@ void Nssai::GetValue(std::vector<struct SNSSAI_s>& nssai) const {
 
 //------------------------------------------------------------------------------
 int Nssai::Encode(uint8_t* buf, int len) const {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Encoding %s", GetIeName().c_str());
 
   int encoded_size = 0;
   // Validate the buffer's length and Encode IEI/Length
@@ -80,8 +79,8 @@ int Nssai::Encode(uint8_t* buf, int len) const {
     if (s_nssais_.at(i).sd != SD_NO_VALUE) {
       len_s_nssai += SD_LENGTH;
       ENCODE_U24(buf + encoded_size, s_nssais_.at(i).sd, encoded_size);
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .debug("Encoded Nssai SD (0x%x)", s_nssais_.at(i).sd);
+      oai::logger::logger_common::nas().debug(
+          "Encoded Nssai SD (0x%x)", s_nssais_.at(i).sd);
     }
     if (s_nssais_.at(i).length > (SST_LENGTH + SD_LENGTH)) {
       if (s_nssais_.at(i).mHplmnSst != -1) {
@@ -100,21 +99,19 @@ int Nssai::Encode(uint8_t* buf, int len) const {
         buf + encoded_size - len_s_nssai - 1, len_s_nssai, encoded_size_tmp);
   }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoded Nssai len (%d)", encoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Encoded Nssai len (%d)", encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
 int Nssai::Decode(const uint8_t* const buf, int len, bool is_iei) {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Decoding %s", GetIeName().c_str());
   if (len < kNssaiMinimumLength) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this IE (%d "
-            "octet)",
-            kNssaiMinimumLength);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the minimum length of this IE (%d "
+        "octet)",
+        kNssaiMinimumLength);
     return KEncodeDecodeError;
   }
 
@@ -186,11 +183,11 @@ int Nssai::Decode(const uint8_t* const buf, int len, bool is_iei) {
   }
 
   for (int i = 0; i < s_nssais_.size(); i++) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .debug("Decoded Nssai %s", s_nssais_.at(i).ToString().c_str());
+    oai::logger::logger_common::nas().debug(
+        "Decoded Nssai %s", s_nssais_.at(i).ToString().c_str());
   }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
   return decoded_size;
 }

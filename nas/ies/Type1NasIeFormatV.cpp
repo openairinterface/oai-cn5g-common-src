@@ -47,11 +47,10 @@ Type1NasIeFormatV::~Type1NasIeFormatV() {}
 //------------------------------------------------------------------------------
 bool Type1NasIeFormatV::Validate(int len) const {
   if (len < kType1NasIeFormatVLength) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this IE (%d "
-            "octet)",
-            kType1NasIeFormatVLength);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the minimum length of this IE (%d "
+        "octet)",
+        kType1NasIeFormatVLength);
     return false;
   }
   return true;

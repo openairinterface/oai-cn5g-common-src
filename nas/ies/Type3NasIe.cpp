@@ -48,11 +48,10 @@ void Type3NasIe::SetIei(uint8_t iei) {
 //------------------------------------------------------------------------------
 bool Type3NasIe::Validate(int len) const {
   if (iei_.has_value() and (len < kType3NasIeFormatTvLength)) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this IE (%d "
-            "octet)",
-            kType3NasIeFormatTvLength);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the minimum length of this IE (%d "
+        "octet)",
+        kType3NasIeFormatTvLength);
     return false;
   }
   return true;

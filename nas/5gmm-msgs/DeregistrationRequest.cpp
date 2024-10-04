@@ -93,11 +93,10 @@ void DeregistrationRequest::SetSuciSupiFormatImsi(
     const std::string& routing_ind, uint8_t protection_sch_id,
     const std::string& msin) {
   if (protection_sch_id != kNullScheme) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Encoding SUCI and SUPI format for IMSI error, please choose "
-            "correct "
-            "protection scheme");
+    oai::logger::logger_common::nas().error(
+        "Encoding SUCI and SUPI format for IMSI error, please choose "
+        "correct "
+        "protection scheme");
     return;
   } else {
     ie_5gs_mobility_id_.SetSuciWithSupiImsi(
@@ -128,8 +127,7 @@ std::string DeregistrationRequest::Get5gGuti() const {
       std::to_string(guti.value().amf_set_id) +
       std::to_string(guti.value().amf_pointer) +
       oai::utils::conv::tmsi_to_string(guti.value()._5g_tmsi);
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("5G GUTI %s", guti_str.c_str());
+  oai::logger::logger_common::nas().debug("5G GUTI %s", guti_str.c_str());
   return guti_str;
 }
 
@@ -152,16 +150,15 @@ void DeregistrationRequest::Set5gSTmsi() {}
 
 //------------------------------------------------------------------------------
 int DeregistrationRequest::Encode(uint8_t* buf, int len) {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoding DeregistrationRequest message");
+  oai::logger::logger_common::nas().debug(
+      "Encoding DeregistrationRequest message");
 
   int encoded_size    = 0;
   int encoded_ie_size = 0;
 
   // Header
   if ((encoded_ie_size = ie_header_.Encode(buf, len)) == KEncodeDecodeError) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encoding NAS Header error");
+    oai::logger::logger_common::nas().error("Encoding NAS Header error");
     return KEncodeDecodeError;
   }
   encoded_size += encoded_ie_size;
@@ -186,15 +183,15 @@ int DeregistrationRequest::Encode(uint8_t* buf, int len) {
     return KEncodeDecodeError;
   }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoded DeregistrationRequest message len (%d)", encoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Encoded DeregistrationRequest message len (%d)", encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
 int DeregistrationRequest::Decode(uint8_t* buf, int len) {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoding DeregistrationRequest message");
+  oai::logger::logger_common::nas().debug(
+      "Decoding DeregistrationRequest message");
 
   int decoded_size    = 0;
   int decoded_ie_size = 0;
@@ -202,8 +199,7 @@ int DeregistrationRequest::Decode(uint8_t* buf, int len) {
   // Header
   decoded_ie_size = ie_header_.Decode(buf, len);
   if (decoded_ie_size == KEncodeDecodeError) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Decoding NAS Header error");
+    oai::logger::logger_common::nas().error("Decoding NAS Header error");
     return KEncodeDecodeError;
   }
   decoded_size += decoded_ie_size;
@@ -228,7 +224,7 @@ int DeregistrationRequest::Decode(uint8_t* buf, int len) {
     return KEncodeDecodeError;
   }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded DeregistrationRequest message (len %d)", decoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Decoded DeregistrationRequest message (len %d)", decoded_size);
   return decoded_size;
 }

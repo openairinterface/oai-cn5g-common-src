@@ -45,11 +45,10 @@ SecurityHeaderType::~SecurityHeaderType() {}
 //------------------------------------------------------------------------------
 bool SecurityHeaderType::Validate(int len) const {
   if (len < kSecurityHeaderTypeLength) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this IE (%d "
-            "octet)",
-            kSecurityHeaderTypeLength);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the minimum length of this IE (%d "
+        "octet)",
+        kSecurityHeaderTypeLength);
     return false;
   }
   return true;

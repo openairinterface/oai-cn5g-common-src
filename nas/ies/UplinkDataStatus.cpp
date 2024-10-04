@@ -56,8 +56,7 @@ uint16_t UplinkDataStatus::GetValue() const {
 
 //------------------------------------------------------------------------------
 int UplinkDataStatus::Encode(uint8_t* buf, int len) const {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Encoding %s", GetIeName().c_str());
 
   int encoded_size = 0;
   // Validate the buffer's length and Encode IEI/Length
@@ -68,15 +67,14 @@ int UplinkDataStatus::Encode(uint8_t* buf, int len) const {
   // Value
   ENCODE_U16(buf + encoded_size, value_, encoded_size);
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
 int UplinkDataStatus::Decode(const uint8_t* const buf, int len, bool is_iei) {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Decoding %s", GetIeName().c_str());
 
   int decoded_size = 0;
 
@@ -87,9 +85,8 @@ int UplinkDataStatus::Decode(const uint8_t* const buf, int len, bool is_iei) {
 
   DECODE_U16(buf + decoded_size, value_, decoded_size);
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug(
-          "Decoded %s, value 0x%x len %d", GetIeName().c_str(), value_,
-          decoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Decoded %s, value 0x%x len %d", GetIeName().c_str(), value_,
+      decoded_size);
   return decoded_size;
 }

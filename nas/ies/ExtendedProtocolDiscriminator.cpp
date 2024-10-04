@@ -37,11 +37,10 @@ ExtendedProtocolDiscriminator::~ExtendedProtocolDiscriminator() {}
 //------------------------------------------------------------------------------
 bool ExtendedProtocolDiscriminator::Validate(int len) const {
   if (len < kExtendedProtocolDiscriminatorLength) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this IE (%d "
-            "octet)",
-            kExtendedProtocolDiscriminatorLength);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the minimum length of this IE (%d "
+        "octet)",
+        kExtendedProtocolDiscriminatorLength);
     return false;
   }
   return true;

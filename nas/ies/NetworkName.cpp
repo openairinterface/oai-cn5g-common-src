@@ -113,8 +113,7 @@ void NetworkName::SetTextString(const bstring& str) {
 
 //------------------------------------------------------------------------------
 int NetworkName::Encode(uint8_t* buf, int len) const {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoding NetworkName");
+  oai::logger::logger_common::nas().debug("Encoding NetworkName");
 
   int encoded_size = 0;
 
@@ -133,8 +132,8 @@ int NetworkName::Encode(uint8_t* buf, int len) const {
       encode_bstring(text_string_, (buf + encoded_size), len - encoded_size);
   encoded_size += size;
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoded NetworkName (len %d)", encoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Encoded NetworkName (len %d)", encoded_size);
   return encoded_size;
 }
 

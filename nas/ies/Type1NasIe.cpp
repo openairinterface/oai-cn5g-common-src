@@ -75,11 +75,10 @@ void Type1NasIe::Set(bool high_pos) {
 //------------------------------------------------------------------------------
 bool Type1NasIe::Validate(int len) const {
   if (len < kType1NasIeLength) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this IE (%d "
-            "octet)",
-            kType1NasIeLength);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the minimum length of this IE (%d "
+        "octet)",
+        kType1NasIeLength);
     return false;
   }
   return true;

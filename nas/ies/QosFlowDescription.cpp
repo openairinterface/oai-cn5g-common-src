@@ -132,18 +132,16 @@ QosFlowDescription::GetParametersList() const {
 
 //------------------------------------------------------------------------------
 int QosFlowDescription::Encode(uint8_t* buf, int len) const {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoding QosFlowDescription");
+  oai::logger::logger_common::nas().debug("Encoding QosFlowDescription");
 
   int encoded_size = 0;
 
   // Validate the buffer's length and Encode IEI/Length (later)
   if (len < length_) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the length of this IE (%d "
-            "octet)",
-            length_);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the length of this IE (%d "
+        "octet)",
+        length_);
     return KEncodeDecodeError;
   }
 
@@ -177,21 +175,19 @@ int QosFlowDescription::Encode(uint8_t* buf, int len) const {
     encoded_size += encoded_content_size;
   }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoded QosFlowDescription, len (%d)", encoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Encoded QosFlowDescription, len (%d)", encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
 int QosFlowDescription::Decode(const uint8_t* const buf, int len) {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoding QosFlowDescription");
+  oai::logger::logger_common::nas().debug("Decoding QosFlowDescription");
   if (len < kQosFlowDescriptionMinimumLength) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this IE (%d "
-            "octet)",
-            kQosFlowDescriptionMinimumLength);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the minimum length of this IE (%d "
+        "octet)",
+        kQosFlowDescriptionMinimumLength);
     return KEncodeDecodeError;
   }
 
@@ -235,7 +231,7 @@ int QosFlowDescription::Decode(const uint8_t* const buf, int len) {
       std::make_optional<std::vector<QosFlowDescriptionsParameter>>(
           parameters_list);
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded QosFlowDescription (len %d)", decoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Decoded QosFlowDescription (len %d)", decoded_size);
   return decoded_size;
 }

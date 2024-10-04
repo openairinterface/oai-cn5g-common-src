@@ -58,8 +58,7 @@ uint8_t _5gsmCapability::GetOctet3() const {
 
 //------------------------------------------------------------------------------
 int _5gsmCapability::Encode(uint8_t* buf, int len) const {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Encoding %s", GetIeName().c_str());
   int ie_len = GetIeLength();
 
   int encoded_size = 0;
@@ -77,26 +76,24 @@ int _5gsmCapability::Encode(uint8_t* buf, int len) const {
     ENCODE_U8(buf + encoded_size, spare, encoded_size);
   }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
 int _5gsmCapability::Decode(const uint8_t* const buf, int len, bool is_iei) {
   if (len < k5gsmCapabilityMinimumLength) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this IE (%d "
-            "octet)",
-            k5gsmCapabilityMinimumLength);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the minimum length of this IE (%d "
+        "octet)",
+        k5gsmCapabilityMinimumLength);
     return KEncodeDecodeError;
   }
 
   uint8_t decoded_size = 0;
   uint8_t octet        = 0;
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Decoding %s", GetIeName().c_str());
 
   // IEI and Length
   int decoded_header_size = Type4NasIe::Decode(buf + decoded_size, len, is_iei);
@@ -110,9 +107,9 @@ int _5gsmCapability::Decode(const uint8_t* const buf, int len, bool is_iei) {
     DECODE_U8(buf + decoded_size, spare, decoded_size);
   }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded %s, Octet3 value (0x%x)", GetIeName().c_str(), octet3_);
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Decoded %s, Octet3 value (0x%x)", GetIeName().c_str(), octet3_);
+  oai::logger::logger_common::nas().debug(
+      "Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
   return decoded_size;
 }

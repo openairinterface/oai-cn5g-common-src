@@ -55,8 +55,7 @@ void SorTransparentContainer::GetValue(
 
 //------------------------------------------------------------------------------
 int SorTransparentContainer::Encode(uint8_t* buf, int len) const {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Encoding %s", GetIeName().c_str());
 
   int ie_len = GetIeLength();
 
@@ -86,8 +85,8 @@ int SorTransparentContainer::Encode(uint8_t* buf, int len) const {
   int encoded_len_ie = 0;
   ENCODE_U16(buf + len_pos, encoded_size - GetHeaderLength(), encoded_len_ie);
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
   return encoded_size;
 }
 
@@ -95,18 +94,16 @@ int SorTransparentContainer::Encode(uint8_t* buf, int len) const {
 int SorTransparentContainer::Decode(
     const uint8_t* const buf, int len, bool is_iei) {
   if (len < kSorTransparentContainerMinimumLength) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this IE (%d "
-            "octet)",
-            kSorTransparentContainerMinimumLength);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the minimum length of this IE (%d "
+        "octet)",
+        kSorTransparentContainerMinimumLength);
     return KEncodeDecodeError;
   }
 
   uint8_t decoded_size = 0;
   uint8_t octet        = 0;
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Decoding %s", GetIeName().c_str());
 
   // IEI and Length
   int decoded_header_size = Type6NasIe::Decode(buf + decoded_size, len, is_iei);
@@ -127,15 +124,13 @@ int SorTransparentContainer::Decode(
     DECODE_U8(buf + decoded_size, spare, decoded_size);
   }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded SOR-MAC-I");
+  oai::logger::logger_common::nas().debug("Decoded SOR-MAC-I");
 
   for (int j = 0; j < 16; j++) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .debug("Value 0x%2x", sor_mac_i_[j]);
+    oai::logger::logger_common::nas().debug("Value 0x%2x", sor_mac_i_[j]);
   }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
   return decoded_size;
 }

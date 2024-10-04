@@ -37,11 +37,10 @@ NasMessageType::~NasMessageType() {}
 //------------------------------------------------------------------------------
 bool NasMessageType::Validate(int len) const {
   if (len < kNasMessageTypeIeSize) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this IE (%d "
-            "octet)",
-            kNasMessageTypeIeSize);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the minimum length of this IE (%d "
+        "octet)",
+        kNasMessageTypeIeSize);
     return false;
   }
   return true;

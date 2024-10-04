@@ -47,11 +47,10 @@ void Type1NasIeFormatTv::SetIei(uint8_t iei) {
 //------------------------------------------------------------------------------
 bool Type1NasIeFormatTv::Validate(int len) const {
   if (len < kType1NasIeFormatTvLength) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this IE (%d "
-            "octet)",
-            kType1NasIeFormatTvLength);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the minimum length of this IE (%d "
+        "octet)",
+        kType1NasIeFormatTvLength);
     return false;
   }
   return true;

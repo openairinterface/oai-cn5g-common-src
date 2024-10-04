@@ -96,30 +96,28 @@ bool NetworkSlicingIndication::GetNssci() const {
 
 //------------------------------------------------------------------------------
 int NetworkSlicingIndication::Encode(uint8_t* buf, int len) const {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Encoding %s", GetIeName().c_str());
 
   int encoded_size = 0;
   encoded_size     = Type1NasIeFormatTv::Encode(buf, len);
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
 int NetworkSlicingIndication::Decode(
     const uint8_t* const buf, int len, bool is_iei) {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Decoding %s", GetIeName().c_str());
   int decoded_size = 0;
   decoded_size     = Type1NasIeFormatTv::Decode(buf, len, is_iei);
   // Get DCNI/NSSCI from value
   GetValue();
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("DCNI 0x%x, NSSCI 0x%x", dcni_, nssci_);
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
+  oai::logger::logger_common::nas().debug(
+      "DCNI 0x%x, NSSCI 0x%x", dcni_, nssci_);
+  oai::logger::logger_common::nas().debug(
+      "Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
   return decoded_size;
 }

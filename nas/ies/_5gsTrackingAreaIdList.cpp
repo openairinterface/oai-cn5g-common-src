@@ -74,8 +74,7 @@ _5gsTrackingAreaIdList::_5gsTrackingAreaIdList(
 
 //------------------------------------------------------------------------------
 int _5gsTrackingAreaIdList::Encode(uint8_t* buf, int len) const {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Encoding %s", GetIeName().c_str());
 
   int encoded_size = 0;
   // IEI and Length
@@ -116,8 +115,8 @@ int _5gsTrackingAreaIdList::Encode(uint8_t* buf, int len) const {
   int encoded_len_ie = 0;
   ENCODE_U8(buf + len_pos, encoded_size - GetHeaderLength(), encoded_len_ie);
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
   return encoded_size;
 }
 

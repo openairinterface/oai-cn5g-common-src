@@ -212,18 +212,16 @@ std::optional<uint8_t> QosRule::GetQfi() const {
 
 //------------------------------------------------------------------------------
 int QosRule::Encode(uint8_t* buf, int len) const {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoding QosRule");
+  oai::logger::logger_common::nas().debug("Encoding QosRule");
 
   int encoded_size = 0;
 
   // Validate the buffer's length and Encode IEI/Length (later)
   if (len < length_) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the length of this IE (%d "
-            "octet)",
-            length_);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the length of this IE (%d "
+        "octet)",
+        length_);
     return KEncodeDecodeError;
   }
 
@@ -274,21 +272,19 @@ int QosRule::Encode(uint8_t* buf, int len) const {
     }
   }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoded QosRule, len (%d)", encoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Encoded QosRule, len (%d)", encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
 int QosRule::Decode(const uint8_t* const buf, int len) {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoding QosRule");
+  oai::logger::logger_common::nas().debug("Decoding QosRule");
   if (len < kQosRuleMinimumLength) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this IE (%d "
-            "octet)",
-            kQosRuleMinimumLength);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the minimum length of this IE (%d "
+        "octet)",
+        kQosRuleMinimumLength);
     return KEncodeDecodeError;
   }
 
@@ -352,7 +348,7 @@ int QosRule::Decode(const uint8_t* const buf, int len) {
             pf_create_and_modify_and_replace_list);
   }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded QosRule (len %d)", decoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Decoded QosRule (len %d)", decoded_size);
   return decoded_size;
 }

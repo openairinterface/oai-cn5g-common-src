@@ -67,8 +67,7 @@ bool UeStatus::GetN1() const {
 
 //------------------------------------------------------------------------------
 int UeStatus::Encode(uint8_t* buf, int len) const {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Encoding %s", GetIeName().c_str());
 
   int encoded_size = 0;
   // Validate the buffer's length and Encode IEI/Length
@@ -79,22 +78,20 @@ int UeStatus::Encode(uint8_t* buf, int len) const {
   uint8_t octet = 0x03 & (s1_ | (n1_ << 1));
   ENCODE_U8(buf + encoded_size, octet, encoded_size);
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
 int UeStatus::Decode(const uint8_t* const buf, int len, bool is_iei) {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Decoding %s", GetIeName().c_str());
 
   if (len < kUeStatusIeLength) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this IE (%d "
-            "octet)",
-            kUeStatusIeLength);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the minimum length of this IE (%d "
+        "octet)",
+        kUeStatusIeLength);
     return KEncodeDecodeError;
   }
 
@@ -110,10 +107,9 @@ int UeStatus::Decode(const uint8_t* const buf, int len, bool is_iei) {
   n1_ = octet & 0x02;
   s1_ = octet & 0x01;
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("N1 0x%x, S1 0x%x", n1_, s1_);
+  oai::logger::logger_common::nas().debug("N1 0x%x, S1 0x%x", n1_, s1_);
   return decoded_size;
 }

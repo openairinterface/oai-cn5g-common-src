@@ -21,7 +21,7 @@
 
 #include "PduSessionResourceHandoverRequestAckTransfer.hpp"
 
-#include "logger.hpp"
+#include "logger_base.hpp"
 
 namespace oai::ngap {
 
@@ -45,28 +45,32 @@ bool PduSessionResourceHandoverRequestAckTransfer::decode(
       &asn_DEF_Ngap_HandoverRequestAcknowledgeTransfer,
       (void**) &m_HandoverRequestAcknowledegTransferIe, buf, buf_size);
   if (rc.code == RC_OK) {
-    Logger::ngap().debug(
-        "Decoded handoverRequestAcknowledegTransfer successfully");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .debug("Decoded handoverRequestAcknowledegTransfer successfully");
   } else if (rc.code == RC_WMORE) {
-    Logger::ngap().debug("More data expected, call again");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .debug("More data expected, call again");
     return false;
   } else {
-    Logger::ngap().debug(
-        "Failure to decode handoverRequestAcknowledegTransfer data");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .debug("Failure to decode handoverRequestAcknowledegTransfer data");
     // return false;
   }
-  Logger::ngap().debug("rc.consumed to decode: %d", rc.consumed);
+  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+      .debug("rc.consumed to decode: %d", rc.consumed);
 
   if (!m_DlForwardingUpTnlInformation.decode(
           *m_HandoverRequestAcknowledegTransferIe
                ->dLForwardingUP_TNLInformation)) {
-    Logger::ngap().error("Decode NGAP DL_NGU_UP_TNLInformation IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Decode NGAP DL_NGU_UP_TNLInformation IE error");
     return false;
   }
 
   if (!m_QosFlowSetupResponseList.decode(
           m_HandoverRequestAcknowledegTransferIe->qosFlowSetupResponseList)) {
-    Logger::ngap().error("Decode NGAP QosFlowSetupResponseList IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Decode NGAP QosFlowSetupResponseList IE error");
     return false;
   }
   return true;

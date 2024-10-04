@@ -21,7 +21,7 @@
 
 #include "GlobalRanNodeId.hpp"
 
-#include "logger.hpp"
+#include "logger_base.hpp"
 
 namespace oai::ngap {
 
@@ -98,7 +98,8 @@ bool GlobalRanNodeId::encode(Ngap_GlobalRANNodeID_t& globalRANNodeID) const {
       break;
     }
     default:
-      Logger::ngap().warn("GlobalRanNodeId Present encode error!");
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .warn("GlobalRanNodeId Present encode error!");
       return false;
   }
   return true;
@@ -117,16 +118,19 @@ bool GlobalRanNodeId::decode(const Ngap_GlobalRANNodeID_t& globalRANNodeID) {
     }
     case Ngap_GlobalRANNodeID_PR_globalNgENB_ID: {
       // TODO:
-      Logger::ngap().warn("GlobalRANNodeID Present is globalNgENB!");
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .warn("GlobalRANNodeID Present is globalNgENB!");
       break;
     }
     case Ngap_GlobalRANNodeID_PR_globalN3IWF_ID: {
       // TODO:
-      Logger::ngap().warn("GlobalRANNodeID Present is globalN3IWF!");
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .warn("GlobalRANNodeID Present is globalN3IWF!");
       break;
     }
     default:
-      Logger::ngap().warn("GlobalRanNodeId Present decode error!");
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .warn("GlobalRanNodeId Present decode error!");
       return false;
   }
   return true;

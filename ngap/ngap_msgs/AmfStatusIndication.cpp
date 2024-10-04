@@ -21,7 +21,7 @@
 
 #include "AmfStatusIndication.hpp"
 
-#include "logger.hpp"
+#include "logger_base.hpp"
 #include "utils.hpp"
 
 namespace oai::ngap {
@@ -69,12 +69,13 @@ bool AmfStatusIndication::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
       m_AmfStatusIndicationIEs =
           &ngapPdu->choice.initiatingMessage->value.choice.AMFStatusIndication;
     } else {
-      Logger::ngap().error("Check AMFStatusIndication message error");
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .error("Check AMFStatusIndication message error");
       return false;
     }
   } else {
-    Logger::ngap().error(
-        "MessageType error, ngapPdu->present %d", ngapPdu->present);
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("MessageType error, ngapPdu->present %d", ngapPdu->present);
     return false;
   }
 
@@ -89,16 +90,19 @@ bool AmfStatusIndication::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           if (!m_UnavailableGuamiList.decode(
                   m_AmfStatusIndicationIEs->protocolIEs.list.array[i]
                       ->value.choice.UnavailableGUAMIList)) {
-            Logger::ngap().error("Decoded NGAP UnavailableGUAMIList error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error("Decoded NGAP UnavailableGUAMIList error");
             return false;
           }
         } else {
-          Logger::ngap().error("Decoded NGAP UnavailableGUAMIList error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .error("Decoded NGAP UnavailableGUAMIList error");
           return false;
         }
       } break;
       default: {
-        Logger::ngap().error("Decoded NGAP Message PDU error");
+        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+            .error("Decoded NGAP Message PDU error");
         return false;
       }
     }

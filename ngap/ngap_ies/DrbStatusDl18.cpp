@@ -20,6 +20,7 @@
  */
 
 #include "DrbStatusDl18.hpp"
+#include "logger_base.hpp"
 
 namespace oai::ngap {
 
@@ -42,7 +43,8 @@ void DrbStatusDl18::set(const CountValueForPdcpSn18& value) {
 //------------------------------------------------------------------------------
 bool DrbStatusDl18::encode(Ngap_DRBStatusDL18_t& dl18) const {
   if (!m_DlCountValue.encode(dl18.dL_COUNTValue)) {
-    Logger::ngap().error("Encode DRBStatusDL18 IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode DRBStatusDL18 IE error");
     return false;
   }
   return true;
@@ -51,7 +53,8 @@ bool DrbStatusDl18::encode(Ngap_DRBStatusDL18_t& dl18) const {
 //------------------------------------------------------------------------------
 bool DrbStatusDl18::decode(const Ngap_DRBStatusDL18_t& dl18) {
   if (!m_DlCountValue.decode(dl18.dL_COUNTValue)) {
-    Logger::ngap().error("Decode DRBStatusDL18 IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Decode DRBStatusDL18 IE error");
     return false;
   }
   return true;

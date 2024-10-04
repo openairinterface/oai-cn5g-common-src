@@ -21,7 +21,7 @@
 
 #include "PduSessionResourceHandoverRequiredTransfer.hpp"
 
-#include "logger.hpp"
+#include "logger_base.hpp"
 #include "ngap_utils.hpp"
 
 namespace oai::ngap {
@@ -61,7 +61,8 @@ int PduSessionResourceHandoverRequiredTransfer::encode(
   asn_enc_rval_t er = aper_encode_to_buffer(
       &asn_DEF_Ngap_HandoverRequiredTransfer, NULL, m_HandoverRquiredTransferIe,
       buf, buf_size);
-  Logger::ngap().debug("er.encoded %d", er.encoded);
+  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+      .debug("er.encoded %d", er.encoded);
   return er.encoded;
 }
 
@@ -72,15 +73,19 @@ bool PduSessionResourceHandoverRequiredTransfer::decode(
       NULL, ATS_ALIGNED_CANONICAL_PER, &asn_DEF_Ngap_HandoverRequiredTransfer,
       (void**) &m_HandoverRquiredTransferIe, buf, buf_size);
   if (rc.code == RC_OK) {
-    Logger::ngap().debug("Decoded successfully");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .debug("Decoded successfully");
   } else if (rc.code == RC_WMORE) {
-    Logger::ngap().debug("More data expected, call again");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .debug("More data expected, call again");
     return false;
   } else {
-    Logger::ngap().debug("Failure to decode data");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .debug("Failure to decode data");
     return false;
   }
-  Logger::ngap().debug("rc.consumed to decode %d", rc.consumed);
+  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+      .debug("rc.consumed to decode %d", rc.consumed);
 
   // asn_fprint(stderr, &asn_DEF_Ngap_PDUSessionResourceSetupResponseTransfer,
   // pduSessionResourceSetupResponseTransferIEs);

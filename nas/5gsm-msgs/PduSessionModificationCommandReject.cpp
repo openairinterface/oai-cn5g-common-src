@@ -77,14 +77,13 @@ void PduSessionModificationCommandReject::
 
 //------------------------------------------------------------------------------
 int PduSessionModificationCommandReject::Encode(uint8_t* buf, int len) {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoding PduSessionModificationCommandReject message");
+  oai::logger::logger_common::nas().debug(
+      "Encoding PduSessionModificationCommandReject message");
   int encoded_size    = 0;
   int encoded_ie_size = 0;
   // Header
   if ((encoded_ie_size = ie_header_.Encode(buf, len)) == KEncodeDecodeError) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encoding NAS Header error");
+    oai::logger::logger_common::nas().error("Encoding NAS Header error");
     return KEncodeDecodeError;
   }
   encoded_size += encoded_ie_size;
@@ -102,25 +101,23 @@ int PduSessionModificationCommandReject::Encode(uint8_t* buf, int len) {
     return KEncodeDecodeError;
   }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug(
-          "Encoded PduSessionModificationCommandReject message len (%d)",
-          encoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Encoded PduSessionModificationCommandReject message len (%d)",
+      encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
 int PduSessionModificationCommandReject::Decode(uint8_t* buf, int len) {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoding PduSessionModificationCommandReject message");
+  oai::logger::logger_common::nas().debug(
+      "Decoding PduSessionModificationCommandReject message");
   int decoded_size    = 0;
   int decoded_ie_size = 0;
 
   // Header
   decoded_ie_size = ie_header_.Decode(buf, len);
   if (decoded_ie_size == KEncodeDecodeError) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Decoding NAS Header error");
+    oai::logger::logger_common::nas().error("Decoding NAS Header error");
     return KEncodeDecodeError;
   }
   decoded_size += decoded_ie_size;
@@ -134,30 +131,27 @@ int PduSessionModificationCommandReject::Decode(uint8_t* buf, int len) {
   // Decode other IEs
   uint8_t octet = 0x00;
   DECODE_U8_VALUE(buf, octet, decoded_size, len);
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("First option IEI (0x%x)", octet);
+  oai::logger::logger_common::nas().debug("First option IEI (0x%x)", octet);
   bool flag = false;
   while ((octet != 0x0)) {
     switch (octet) {
       case kIeiExtendedProtocolConfigurationOptions: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug(
-                "Decoding IEI 0x%x", kIeiExtendedProtocolConfigurationOptions);
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI 0x%x", kIeiExtendedProtocolConfigurationOptions);
         if ((decoded_ie_size = NasHelper::Decode(
                  ie_extended_protocol_configuration_options_, buf, len,
                  decoded_size, true)) == KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI (0x%x)", octet);
+        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
       } break;
 
       default: {
         // TODO:
         if (flag) {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .warn("Unknown IEI 0x%x, stop decoding...", octet);
+          oai::logger::logger_common::nas().warn(
+              "Unknown IEI 0x%x, stop decoding...", octet);
           // Stop decoding
           octet = 0x00;
         }
@@ -165,9 +159,8 @@ int PduSessionModificationCommandReject::Decode(uint8_t* buf, int len) {
     }
   }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug(
-          "Decoded PduSessionModificationCommandReject message len (%d)",
-          decoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Decoded PduSessionModificationCommandReject message len (%d)",
+      decoded_size);
   return decoded_size;
 }

@@ -34,8 +34,8 @@ class NasHelper {
       std::optional<T>& ie, uint8_t*& buf, int& len,
       int& encoded_size) noexcept {
     if (!ie.has_value()) {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .debug("IE %s is not available", T::GetIeName().c_str());
+      oai::logger::logger_common::nas().debug(
+          "IE %s is not available", T::GetIeName().c_str());
       return KEncodeDecodeOK;
     } else {
       int encoded_ie_size =
@@ -44,8 +44,8 @@ class NasHelper {
         encoded_size += encoded_ie_size;
         return KEncodeDecodeOK;
       } else {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .error("Encoding %s error", T::GetIeName().c_str());
+        oai::logger::logger_common::nas().error(
+            "Encoding %s error", T::GetIeName().c_str());
         return KEncodeDecodeError;
       }
     }
@@ -59,8 +59,8 @@ class NasHelper {
       encoded_size += encoded_ie_size;
       return KEncodeDecodeOK;
     } else {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .error("Encoding %s error", T::GetIeName().c_str());
+      oai::logger::logger_common::nas().error(
+          "Encoding %s error", T::GetIeName().c_str());
       return KEncodeDecodeError;
     }
   }
@@ -73,8 +73,8 @@ class NasHelper {
     int decoded_result =
         ie_tmp.Decode(buf + decoded_size, len - decoded_size, iei);
     if (decoded_result == KEncodeDecodeError) {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .error("Decoding %s error", T::GetIeName().c_str());
+      oai::logger::logger_common::nas().error(
+          "Decoding %s error", T::GetIeName().c_str());
       return KEncodeDecodeError;
     }
     decoded_size += decoded_result;
@@ -90,8 +90,8 @@ class NasHelper {
     int decoded_result =
         ie_tmp.Decode(buf + decoded_size, len - decoded_size, iei);
     if (decoded_result == KEncodeDecodeError) {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .error("Decoding %s error", T::GetIeName().c_str());
+      oai::logger::logger_common::nas().error(
+          "Decoding %s error", T::GetIeName().c_str());
       return KEncodeDecodeError;
     }
     decoded_size += decoded_result;
@@ -107,8 +107,8 @@ class NasHelper {
     int decoded_result =
         ie_tmp.Decode(buf + decoded_size, len - decoded_size, high_pos, iei);
     if (decoded_result == KEncodeDecodeError) {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .error("Decoding %s error", T::GetIeName().c_str());
+      oai::logger::logger_common::nas().error(
+          "Decoding %s error", T::GetIeName().c_str());
       return KEncodeDecodeError;
     }
     decoded_size += decoded_result;
@@ -121,8 +121,8 @@ class NasHelper {
       T& ie, uint8_t*& buf, int& len, int& decoded_size, bool iei) noexcept {
     int decoded_result = ie.Decode(buf + decoded_size, len - decoded_size, iei);
     if (decoded_result == KEncodeDecodeError) {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .error("Decoding %s error", T::GetIeName().c_str());
+      oai::logger::logger_common::nas().error(
+          "Decoding %s error", T::GetIeName().c_str());
       return KEncodeDecodeError;
     }
     decoded_size += decoded_result;
@@ -136,8 +136,8 @@ class NasHelper {
     int decoded_result =
         ie.Decode(buf + decoded_size, len - decoded_size, high_pos, iei);
     if (decoded_result == KEncodeDecodeError) {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .error("Decoding %s error", T::GetIeName().c_str());
+      oai::logger::logger_common::nas().error(
+          "Decoding %s error", T::GetIeName().c_str());
       return KEncodeDecodeError;
     }
     decoded_size += decoded_result;

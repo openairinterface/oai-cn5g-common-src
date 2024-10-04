@@ -180,14 +180,13 @@ void PduSessionModificationRequest::GetExtendedProtocolConfigurationOptions(
 
 //------------------------------------------------------------------------------
 int PduSessionModificationRequest::Encode(uint8_t* buf, int len) {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoding PduSessionModificationRequest message");
+  oai::logger::logger_common::nas().debug(
+      "Encoding PduSessionModificationRequest message");
   int encoded_size    = 0;
   int encoded_ie_size = 0;
   // Header
   if ((encoded_ie_size = ie_header_.Encode(buf, len)) == KEncodeDecodeError) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encoding NAS Header error");
+    oai::logger::logger_common::nas().error("Encoding NAS Header error");
     return KEncodeDecodeError;
   }
   encoded_size += encoded_ie_size;
@@ -252,25 +251,22 @@ int PduSessionModificationRequest::Encode(uint8_t* buf, int len) {
   // TODO: Header compression configuration
   // TODO: Ethernet header compression configuration
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug(
-          "Encoded PduSessionModificationRequest message len (%d)",
-          encoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Encoded PduSessionModificationRequest message len (%d)", encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
 int PduSessionModificationRequest::Decode(uint8_t* buf, int len) {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoding PduSessionModificationRequest message");
+  oai::logger::logger_common::nas().debug(
+      "Decoding PduSessionModificationRequest message");
   int decoded_size    = 0;
   int decoded_ie_size = 0;
 
   // Header
   decoded_ie_size = ie_header_.Decode(buf, len);
   if (decoded_ie_size == KEncodeDecodeError) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Decoding NAS Header error");
+    oai::logger::logger_common::nas().error("Decoding NAS Header error");
     return KEncodeDecodeError;
   }
   decoded_size += decoded_ie_size;
@@ -278,22 +274,20 @@ int PduSessionModificationRequest::Decode(uint8_t* buf, int len) {
   // Decode other IEs
   uint8_t octet = 0x00;
   DECODE_U8_VALUE(buf, octet, decoded_size, len);
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("First option IEI (0x%x)", octet);
+  oai::logger::logger_common::nas().debug("First option IEI (0x%x)", octet);
   bool flag = false;
   while ((octet != 0x0)) {
     switch ((octet & 0xf0) >> 4) {
       case kIeiAlwaysOnPduSessionRequested: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Decoding IEI 0x%x", kIeiAlwaysOnPduSessionRequested);
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI 0x%x", kIeiAlwaysOnPduSessionRequested);
         if ((decoded_ie_size = NasHelper::Decode(
                  ie_always_on_pdu_session_requested_, buf, len, decoded_size,
                  true)) == KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI (0x%x)", octet);
+        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
       } break;
 
       default: {
@@ -303,116 +297,106 @@ int PduSessionModificationRequest::Decode(uint8_t* buf, int len) {
 
     switch (octet) {
       case kIei5gsmCapability: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Decoding IEI 0x%x", kIei5gsmCapability);
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI 0x%x", kIei5gsmCapability);
         if ((decoded_ie_size = NasHelper::Decode(
                  ie_5gsm_capability_, buf, len, decoded_size, true)) ==
             KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI (0x%x)", octet);
+        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
       } break;
 
       case kIei5gsmCause: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Decoding IEI 0x%x", kIei5gsmCause);
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI 0x%x", kIei5gsmCause);
         if ((decoded_ie_size = NasHelper::Decode(
                  ie_5gsm_cause_, buf, len, decoded_size, true)) ==
             KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI (0x%x)", octet);
+        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
       } break;
 
       case kIeiMaximumNumberOfSupportedPacketFilters: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug(
-                "Decoding IEI 0x%x", kIeiMaximumNumberOfSupportedPacketFilters);
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI 0x%x", kIeiMaximumNumberOfSupportedPacketFilters);
         if ((decoded_ie_size = NasHelper::Decode(
                  ie_maximum_number_of_supported_packet_filters_, buf, len,
                  decoded_size, true)) == KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI (0x%x)", octet);
+        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
       } break;
 
       case kIeiAlwaysOnPduSessionRequested: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Decoding IEI 0x%x", kIeiAlwaysOnPduSessionRequested);
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI 0x%x", kIeiAlwaysOnPduSessionRequested);
         if ((decoded_ie_size = NasHelper::Decode(
                  ie_always_on_pdu_session_requested_, buf, len, decoded_size,
                  true)) == KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI (0x%x)", octet);
+        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
       } break;
 
       case kIeiIntegrityProtectionMaximumDataRate: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Decoding IEI 0x%x", kIeiIntegrityProtectionMaximumDataRate);
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI 0x%x", kIeiIntegrityProtectionMaximumDataRate);
         if ((decoded_ie_size = NasHelper::Decode(
                  ie_integrity_protection_maximum_data_rate_, buf, len,
                  decoded_size, true)) == KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI (0x%x)", octet);
+        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
       } break;
 
       case kIeiRequestedQosRules: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Decoding IEI 0x%x", kIeiRequestedQosRules);
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI 0x%x", kIeiRequestedQosRules);
         if ((decoded_ie_size = NasHelper::Decode(
                  ie_requested_qos_rules_, buf, len, decoded_size, true)) ==
             KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI (0x%x)", octet);
+        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
       } break;
 
       case kIeiRequestedQosFlowDescriptions: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Decoding IEI 0x%x", kIeiRequestedQosFlowDescriptions);
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI 0x%x", kIeiRequestedQosFlowDescriptions);
         if ((decoded_ie_size = NasHelper::Decode(
                  ie_requested_qos_flow_descriptions_, buf, len, decoded_size,
                  true)) == KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI (0x%x)", octet);
+        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
       } break;
 
       case kIeiExtendedProtocolConfigurationOptions: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug(
-                "Decoding IEI 0x%x", kIeiExtendedProtocolConfigurationOptions);
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI 0x%x", kIeiExtendedProtocolConfigurationOptions);
         if ((decoded_ie_size = NasHelper::Decode(
                  ie_extended_protocol_configuration_options_, buf, len,
                  decoded_size, true)) == KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI (0x%x)", octet);
+        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
       } break;
 
       default: {
         // TODO:
         if (flag) {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .warn("Unknown IEI 0x%x, stop decoding...", octet);
+          oai::logger::logger_common::nas().warn(
+              "Unknown IEI 0x%x, stop decoding...", octet);
           // Stop decoding
           octet = 0x00;
         }
@@ -420,9 +404,7 @@ int PduSessionModificationRequest::Decode(uint8_t* buf, int len) {
     }
   }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug(
-          "Decoded PduSessionModificationRequest message len (%d)",
-          decoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Decoded PduSessionModificationRequest message len (%d)", decoded_size);
   return decoded_size;
 }

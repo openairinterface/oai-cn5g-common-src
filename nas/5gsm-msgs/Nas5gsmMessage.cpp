@@ -32,12 +32,11 @@ using namespace oai::nas;
 bool Nas5gsmMessage::Validate(uint32_t len) const {
   uint32_t actual_length = GetLength();
   if (len < actual_length) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this message "
-            "(0x%x "
-            "octet)",
-            actual_length);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the minimum length of this message "
+        "(0x%x "
+        "octet)",
+        actual_length);
     return false;
   }
   return true;

@@ -22,8 +22,6 @@
 #include "_5gsmStatus.hpp"
 
 #include "NasHelper.hpp"
-#include "conversions.hpp"
-#include "utils.hpp"
 
 using namespace oai::nas;
 
@@ -55,14 +53,12 @@ void _5gsmStatus::Get5gsmCause(_5gsmCause& _5gsm_cause) const {
 
 //------------------------------------------------------------------------------
 int _5gsmStatus::Encode(uint8_t* buf, int len) {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoding _5gsmStatus message");
+  oai::logger::logger_common::nas().debug("Encoding _5gsmStatus message");
   int encoded_size    = 0;
   int encoded_ie_size = 0;
   // Header
   if ((encoded_ie_size = ie_header_.Encode(buf, len)) == KEncodeDecodeError) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encoding NAS Header error");
+    oai::logger::logger_common::nas().error("Encoding NAS Header error");
     return KEncodeDecodeError;
   }
   encoded_size += encoded_ie_size;
@@ -73,23 +69,21 @@ int _5gsmStatus::Encode(uint8_t* buf, int len) {
     return KEncodeDecodeError;
   }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoded _5gsmStatus message len (%d)", encoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Encoded _5gsmStatus message len (%d)", encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
 int _5gsmStatus::Decode(uint8_t* buf, int len) {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoding _5gsmStatus message");
+  oai::logger::logger_common::nas().debug("Decoding _5gsmStatus message");
   int decoded_size    = 0;
   int decoded_ie_size = 0;
 
   // Header
   decoded_ie_size = ie_header_.Decode(buf, len);
   if (decoded_ie_size == KEncodeDecodeError) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Decoding NAS Header error");
+    oai::logger::logger_common::nas().error("Decoding NAS Header error");
     return KEncodeDecodeError;
   }
   decoded_size += decoded_ie_size;
@@ -101,7 +95,7 @@ int _5gsmStatus::Decode(uint8_t* buf, int len) {
     return KEncodeDecodeError;
   }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded _5gsmStatus message len (%d)", decoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Decoded _5gsmStatus message len (%d)", decoded_size);
   return decoded_size;
 }

@@ -185,15 +185,7 @@ typedef struct {
   uint8_t length;
   bstring content;
 } QosFlowDescriptionsParameter;
-/*
-typedef struct {
-  uint8_t qfi:6;
-  uint8_t operation_code:2;
-  bool e;
-  uint8_t number_of_parameters;
-  std::vector<QosFlowDescriptionsParameter> parameters_list;
-} QosFlowDescriptions;
-*/
+
 }  // namespace oai::nas
 
 #endif

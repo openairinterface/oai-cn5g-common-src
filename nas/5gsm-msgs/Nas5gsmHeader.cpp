@@ -101,12 +101,11 @@ uint32_t Nas5gsmHeader::GetLength() const {
 bool Nas5gsmHeader::Validate(uint32_t len) const {
   uint32_t actual_length = GetLength();
   if (len < actual_length) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this message "
-            "(0x%x "
-            "octet)",
-            actual_length);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the minimum length of this message "
+        "(0x%x "
+        "octet)",
+        actual_length);
     return false;
   }
   return true;
@@ -114,8 +113,7 @@ bool Nas5gsmHeader::Validate(uint32_t len) const {
 
 //------------------------------------------------------------------------------
 int Nas5gsmHeader::Encode(uint8_t* buf, int len) {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoding Nas5gsmHeader");
+  oai::logger::logger_common::nas().debug("Encoding Nas5gsmHeader");
 
   if (!Validate(len)) return KEncodeDecodeError;
 
@@ -143,22 +141,21 @@ int Nas5gsmHeader::Encode(uint8_t* buf, int len) {
     return KEncodeDecodeError;
   }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoded Nas5gsmHeader (len %d octets)", encoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Encoded Nas5gsmHeader (len %d octets)", encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
 int Nas5gsmHeader::Decode(uint8_t* buf, int len) {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoding Nas5gsmHeader");
+  oai::logger::logger_common::nas().debug("Decoding Nas5gsmHeader");
 
   int decoded_size    = 0;
   int decoded_ie_size = 0;
 
   if (len < kNas5gsmHeaderLength) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Buffer length is less than %d octets", kNas5gsmHeaderLength);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than %d octets", kNas5gsmHeaderLength);
     return KEncodeDecodeError;
   }
 
@@ -184,7 +181,7 @@ int Nas5gsmHeader::Decode(uint8_t* buf, int len) {
     return KEncodeDecodeError;
   }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded Nas5gsmHeader len (%d octets)", decoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Decoded Nas5gsmHeader len (%d octets)", decoded_size);
   return decoded_size;
 }

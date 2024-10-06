@@ -23,8 +23,10 @@
 #define _AUTHENTICATION_RESPONSE_H_
 
 #include "NasIeHeader.hpp"
+#include "NasMmPlainHeader.hpp"
 
 namespace oai::nas {
+using namespace oai::nas;
 
 class AuthenticationResponse : public Nas5gmmMessage {
  public:
@@ -45,7 +47,7 @@ class AuthenticationResponse : public Nas5gmmMessage {
   bool GetEapMessage(bstring& eap) const;
 
  private:
-  NasMmPlainHeader ie_header_;  // Mandatory
+  oai::nas::NasMmPlainHeader ie_header_;  // Mandatory
   std::optional<AuthenticationResponseParameter>
       ie_authentication_response_parameter_;  // Optional
   std::optional<EapMessage> ie_eap_message_;  // Optional

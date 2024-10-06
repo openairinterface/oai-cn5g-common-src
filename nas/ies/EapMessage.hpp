@@ -38,7 +38,7 @@ class EapMessage : public Type6NasIe {
   EapMessage(uint8_t iei);
   EapMessage(const bstring& eap);
   EapMessage(uint8_t iei, const bstring& eap);
-  ~EapMessage();
+  virtual ~EapMessage();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

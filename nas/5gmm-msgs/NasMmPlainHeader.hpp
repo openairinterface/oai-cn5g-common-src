@@ -31,6 +31,7 @@
 constexpr uint8_t kNasMmPlainHeaderLength = 3;
 
 namespace oai::nas {
+using namespace oai::nas;
 
 class NasMmPlainHeader : public Nas5gmmMessage {
  public:

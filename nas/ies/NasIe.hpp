@@ -23,7 +23,6 @@
 #define _NAS_IE_H_
 
 #include <stdint.h>
-
 #include <optional>
 #include <vector>
 

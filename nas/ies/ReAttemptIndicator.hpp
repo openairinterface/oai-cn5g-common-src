@@ -35,7 +35,7 @@ class ReAttemptIndicator : public Type4NasIe {
  public:
   ReAttemptIndicator();
   ReAttemptIndicator(bool eplmnc, bool ratc);
-  ~ReAttemptIndicator();
+  virtual ~ReAttemptIndicator();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = true) override;

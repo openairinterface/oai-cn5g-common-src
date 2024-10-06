@@ -22,6 +22,8 @@
 #ifndef _TYPE3_NAS_IE_H_
 #define _TYPE3_NAS_IE_H_
 
+#include <optional>
+
 #include "NasIe.hpp"
 
 constexpr uint8_t kType3NasIeFormatTvLength = 1;

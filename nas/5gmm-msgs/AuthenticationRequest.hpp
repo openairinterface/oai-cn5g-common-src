@@ -23,9 +23,10 @@
 #define _AUTHENTICATION_REQUEST_H_
 
 #include "NasIeHeader.hpp"
+#include "NasMmPlainHeader.hpp"
 
 namespace oai::nas {
-
+using namespace oai::nas;
 class AuthenticationRequest : public Nas5gmmMessage {
  public:
   AuthenticationRequest();

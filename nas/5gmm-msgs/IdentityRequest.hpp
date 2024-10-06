@@ -23,6 +23,7 @@
 #define _IDENTITY_REQUEST_H_
 
 #include "NasIeHeader.hpp"
+#include "NasMmPlainHeader.hpp"
 
 namespace oai::nas {
 

@@ -21,6 +21,12 @@
 
 #include "Additional5gSecurityInformation.hpp"
 
+#include "IeConst.hpp"
+
+#include <optional>
+
+#include "logger_base.hpp"
+
 using namespace oai::nas;
 
 //------------------------------------------------------------------------------

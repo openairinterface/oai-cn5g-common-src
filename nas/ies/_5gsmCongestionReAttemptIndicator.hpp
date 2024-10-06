@@ -37,7 +37,7 @@ class _5gsmCongestionReAttemptIndicator : public Type4NasIe {
  public:
   _5gsmCongestionReAttemptIndicator();
   _5gsmCongestionReAttemptIndicator(bool abo);
-  ~_5gsmCongestionReAttemptIndicator();
+  virtual ~_5gsmCongestionReAttemptIndicator();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = true) override;

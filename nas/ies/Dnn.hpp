@@ -19,8 +19,8 @@
  *      contact@openairinterface.org
  */
 
-#ifndef _DNN_H_
-#define _DNN_H_
+#ifndef _DNN_HPP_
+#define _DNN_HPP_
 
 #include "Type4NasIe.hpp"
 

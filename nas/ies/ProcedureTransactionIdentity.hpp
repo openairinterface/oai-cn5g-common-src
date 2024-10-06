@@ -34,7 +34,7 @@ class ProcedureTransactionIdentity : public NasIe {
  public:
   ProcedureTransactionIdentity();
   ProcedureTransactionIdentity(uint16_t value);
-  ~ProcedureTransactionIdentity();
+  virtual ~ProcedureTransactionIdentity();
 
   bool Validate(int len) const override;
 

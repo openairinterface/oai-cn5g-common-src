@@ -23,6 +23,7 @@
 #define _REGISTRATION_ACCEPT_H_
 
 #include "NasIeHeader.hpp"
+#include "NasMmPlainHeader.hpp"
 
 namespace oai::nas {
 

@@ -33,7 +33,7 @@ class PduSessionIdentity : public NasIe {
  public:
   PduSessionIdentity();
   PduSessionIdentity(uint8_t value);
-  ~PduSessionIdentity();
+  virtual ~PduSessionIdentity();
 
   bool Validate(int len) const override;
 

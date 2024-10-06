@@ -22,6 +22,8 @@
 #ifndef _TYPE1_NAS_IE_H_
 #define _TYPE1_NAS_IE_H_
 
+#include <optional>
+
 #include "NasIe.hpp"
 
 constexpr uint8_t kType1NasIeLength = 1;

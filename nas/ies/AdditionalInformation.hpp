@@ -22,6 +22,12 @@
 #ifndef _ADDITIONAL_INFORMATION_H_
 #define _ADDITIONAL_INFORMATION_H_
 
+extern "C" {
+#include "TLVDecoder.h"
+#include "TLVEncoder.h"
+#include "bstrlib.h"
+}
+
 #include "Type4NasIe.hpp"
 
 constexpr uint8_t kAdditionalInformationMinimumLength = 3;

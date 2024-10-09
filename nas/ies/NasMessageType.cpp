@@ -32,7 +32,7 @@ NasMessageType::NasMessageType(uint8_t message_type)
     : NasIe(), message_type_(message_type) {}
 
 //------------------------------------------------------------------------------
-NasMessageType::~NasMessageType() {}
+// NasMessageType::~NasMessageType() {}
 
 //------------------------------------------------------------------------------
 bool NasMessageType::Validate(int len) const {

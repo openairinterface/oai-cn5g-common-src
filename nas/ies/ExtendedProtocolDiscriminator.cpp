@@ -32,7 +32,7 @@ ExtendedProtocolDiscriminator::ExtendedProtocolDiscriminator(uint8_t epd)
     : NasIe(), epd_(epd) {}
 
 //------------------------------------------------------------------------------
-ExtendedProtocolDiscriminator::~ExtendedProtocolDiscriminator() {}
+// ExtendedProtocolDiscriminator::~ExtendedProtocolDiscriminator() {}
 
 //------------------------------------------------------------------------------
 bool ExtendedProtocolDiscriminator::Validate(int len) const {

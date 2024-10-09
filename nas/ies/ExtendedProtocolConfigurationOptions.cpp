@@ -43,7 +43,8 @@ ExtendedProtocolConfigurationOptions::ExtendedProtocolConfigurationOptions(
 }
 
 //------------------------------------------------------------------------------
-ExtendedProtocolConfigurationOptions::~ExtendedProtocolConfigurationOptions() {}
+// ExtendedProtocolConfigurationOptions::~ExtendedProtocolConfigurationOptions()
+// {}
 
 //------------------------------------------------------------------------------
 void ExtendedProtocolConfigurationOptions::GetValue(bstring& content) const {

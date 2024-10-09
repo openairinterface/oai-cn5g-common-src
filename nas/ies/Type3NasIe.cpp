@@ -38,7 +38,7 @@ Type3NasIe::Type3NasIe(uint8_t iei) : NasIe() {
 }
 
 //------------------------------------------------------------------------------
-Type3NasIe::~Type3NasIe() {}
+// Type3NasIe::~Type3NasIe() {}
 
 //------------------------------------------------------------------------------
 void Type3NasIe::SetIei(uint8_t iei) {

@@ -39,7 +39,7 @@ Type6NasIe::Type6NasIe(uint8_t iei) : NasIe() {
 }
 
 //------------------------------------------------------------------------------
-Type6NasIe::~Type6NasIe() {}
+// Type6NasIe::~Type6NasIe() {}
 
 //------------------------------------------------------------------------------
 void Type6NasIe::SetIei(uint8_t iei) {

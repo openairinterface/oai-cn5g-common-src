@@ -36,7 +36,7 @@ ServiceAccept::ServiceAccept()
   ie_t3448_value_                                 = std::nullopt;
 }
 
-ServiceAccept::~ServiceAccept() {}
+// ServiceAccept::~ServiceAccept() {}
 
 //------------------------------------------------------------------------------
 uint32_t ServiceAccept::GetLength() const {

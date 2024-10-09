@@ -38,7 +38,7 @@ class PduSessionReactivationResultErrorCause : public Type6NasIe {
  public:
   PduSessionReactivationResultErrorCause();
   PduSessionReactivationResultErrorCause(uint8_t session_id, uint8_t value);
-  ~PduSessionReactivationResultErrorCause();
+  virtual ~PduSessionReactivationResultErrorCause() = default;
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

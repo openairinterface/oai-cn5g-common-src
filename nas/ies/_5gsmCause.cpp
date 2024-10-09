@@ -42,7 +42,7 @@ _5gsmCause::_5gsmCause(uint8_t iei, uint8_t value) : Type3NasIe(iei) {
 }
 
 //------------------------------------------------------------------------------
-_5gsmCause::~_5gsmCause(){};
+//_5gsmCause::~_5gsmCause(){};
 
 //------------------------------------------------------------------------------
 uint32_t _5gsmCause::GetIeLength() const {

@@ -30,7 +30,7 @@ namespace oai::nas {
 class RegistrationReject : public Nas5gmmMessage {
  public:
   RegistrationReject();
-  ~RegistrationReject();
+  virtual ~RegistrationReject();
 
   int Encode(uint8_t* buf, int len) override;
   int Decode(uint8_t* buf, int len) override;

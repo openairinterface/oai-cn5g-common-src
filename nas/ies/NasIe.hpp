@@ -42,7 +42,7 @@ namespace oai::nas {
 class NasIe {
  public:
   NasIe();
-  virtual ~NasIe();
+  virtual ~NasIe() = default;
 
   virtual int Encode(uint8_t* buf, int len) const = 0;
   virtual int Decode(

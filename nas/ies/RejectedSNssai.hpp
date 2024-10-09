@@ -32,7 +32,7 @@ class RejectedSNssai {
  public:
   RejectedSNssai();
   RejectedSNssai(uint8_t cause, uint8_t sst, uint32_t sd);
-  ~RejectedSNssai();
+  virtual ~RejectedSNssai();
 
   int Encode(uint8_t* buf, int len) const;
   int Decode(const uint8_t* const buf, int len);

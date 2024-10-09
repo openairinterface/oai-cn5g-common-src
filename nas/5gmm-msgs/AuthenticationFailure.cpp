@@ -34,7 +34,7 @@ AuthenticationFailure::AuthenticationFailure()
 }
 
 //------------------------------------------------------------------------------
-AuthenticationFailure::~AuthenticationFailure() {}
+// AuthenticationFailure::~AuthenticationFailure() {}
 
 //------------------------------------------------------------------------------
 uint32_t AuthenticationFailure::GetLength() const {

@@ -38,7 +38,7 @@ class ExtendedProtocolConfigurationOptions : public Type6NasIe {
  public:
   ExtendedProtocolConfigurationOptions();
   ExtendedProtocolConfigurationOptions(const bstring& value);
-  virtual ~ExtendedProtocolConfigurationOptions();
+  virtual ~ExtendedProtocolConfigurationOptions() = default;
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

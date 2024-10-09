@@ -19,8 +19,8 @@
  *      contact@openairinterface.org
  */
 
-#ifndef _SOR_TRANSPARENT_CONTAINER_H_
-#define _SOR_TRANSPARENT_CONTAINER_H_
+#ifndef _SOR_TRANSPARENT_CONTAINER_HPP_
+#define _SOR_TRANSPARENT_CONTAINER_HPP_
 
 #include "Type6NasIe.hpp"
 

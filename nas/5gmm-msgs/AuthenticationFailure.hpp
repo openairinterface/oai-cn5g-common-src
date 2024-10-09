@@ -31,7 +31,7 @@ using namespace oai::nas;
 class AuthenticationFailure : public Nas5gmmMessage {
  public:
   AuthenticationFailure();
-  ~AuthenticationFailure();
+  virtual ~AuthenticationFailure() = default;
 
   int Encode(uint8_t* buf, int len) override;
   int Decode(uint8_t* buf, int len) override;

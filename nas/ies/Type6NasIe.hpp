@@ -32,7 +32,7 @@ class Type6NasIe : public NasIe {
  public:
   Type6NasIe();
   Type6NasIe(uint8_t iei);
-  virtual ~Type6NasIe();
+  virtual ~Type6NasIe() = default;
 
   int Encode(uint8_t* buf, int len) const override;
   int Encode(

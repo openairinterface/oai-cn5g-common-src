@@ -34,7 +34,7 @@ class ExtendedProtocolDiscriminator : public NasIe {
  public:
   ExtendedProtocolDiscriminator(){};  // TODO: = delete;
   ExtendedProtocolDiscriminator(uint8_t epd);
-  virtual ~ExtendedProtocolDiscriminator();
+  virtual ~ExtendedProtocolDiscriminator() = default;
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = true) override;

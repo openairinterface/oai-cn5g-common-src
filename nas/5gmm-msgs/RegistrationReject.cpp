@@ -38,7 +38,12 @@ RegistrationReject::RegistrationReject()
 }
 
 //------------------------------------------------------------------------------
-RegistrationReject::~RegistrationReject() {}
+RegistrationReject::~RegistrationReject() {
+  ie_t3346_value_    = std::nullopt;
+  ie_t3502_value_    = std::nullopt;
+  ie_eap_message_    = std::nullopt;
+  ie_rejected_nssai_ = std::nullopt;
+}
 
 //------------------------------------------------------------------------------
 uint32_t RegistrationReject::GetLength() const {

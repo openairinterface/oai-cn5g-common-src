@@ -19,8 +19,8 @@
  *      contact@openairinterface.org
  */
 
-#ifndef _NSSAI_H_
-#define _NSSAI_H_
+#ifndef _NSSAI_HPP_
+#define _NSSAI_HPP_
 
 #include "NasIeHeader.hpp"
 #include "Type4NasIe.hpp"

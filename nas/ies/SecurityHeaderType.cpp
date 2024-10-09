@@ -40,7 +40,7 @@ SecurityHeaderType::SecurityHeaderType(uint8_t secu_header_type) : NasIe() {
 }
 
 //------------------------------------------------------------------------------
-SecurityHeaderType::~SecurityHeaderType() {}
+// SecurityHeaderType::~SecurityHeaderType() {}
 
 //------------------------------------------------------------------------------
 bool SecurityHeaderType::Validate(int len) const {

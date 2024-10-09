@@ -49,8 +49,8 @@ PduSessionReactivationResultErrorCause::PduSessionReactivationResultErrorCause(
 }
 
 //------------------------------------------------------------------------------
-PduSessionReactivationResultErrorCause::
-    ~PduSessionReactivationResultErrorCause() {}
+// PduSessionReactivationResultErrorCause::
+//    ~PduSessionReactivationResultErrorCause() {}
 
 //------------------------------------------------------------------------------
 void PduSessionReactivationResultErrorCause::SetValue(

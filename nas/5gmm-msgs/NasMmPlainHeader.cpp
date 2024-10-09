@@ -41,7 +41,7 @@ NasMmPlainHeader::NasMmPlainHeader(
     : epd_(epd), secu_header_type_(security_header_type), msg_type_(msg_type) {}
 
 //------------------------------------------------------------------------------
-NasMmPlainHeader::~NasMmPlainHeader() {}
+// NasMmPlainHeader::~NasMmPlainHeader() {}
 
 //------------------------------------------------------------------------------
 void NasMmPlainHeader::SetEpd(uint8_t epd) {

@@ -29,7 +29,9 @@ RejectedNssai::RejectedNssai(uint8_t iei) : Type4NasIe(iei) {
 }
 
 //------------------------------------------------------------------------------
-RejectedNssai::~RejectedNssai() {}
+RejectedNssai::~RejectedNssai() {
+  rejected_nssais_.clear();
+}
 
 //------------------------------------------------------------------------------
 void RejectedNssai::SetRejectedSNssais(

@@ -37,7 +37,7 @@ GprsTimer3::GprsTimer3(uint8_t iei, uint8_t unit, uint8_t value)
 }
 
 //------------------------------------------------------------------------------
-GprsTimer3::~GprsTimer3() {}
+// GprsTimer3::~GprsTimer3() {}
 
 //------------------------------------------------------------------------------
 void GprsTimer3::SetValue(uint8_t unit, uint8_t value) {

@@ -28,7 +28,8 @@
 using namespace oai::nas;
 
 //------------------------------------------------------------------------------
-EapMessage::EapMessage() : Type6NasIe(), eap_() {
+EapMessage::EapMessage() : Type6NasIe() {
+  eap_ = nullptr;
   SetLengthIndicator(kEapMessageContentMinimumLength);
 }
 
@@ -47,7 +48,9 @@ EapMessage::EapMessage(uint8_t iei, const bstring& eap) : Type6NasIe(iei) {
 }
 
 //------------------------------------------------------------------------------
-EapMessage::~EapMessage() {}
+EapMessage::~EapMessage() {
+  eap_ = nullptr;
+}
 
 //------------------------------------------------------------------------------
 void EapMessage::SetValue(const bstring& eap) {

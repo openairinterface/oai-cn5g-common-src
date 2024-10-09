@@ -42,7 +42,7 @@ PduSessionReactivationResult::PduSessionReactivationResult(uint16_t value)
 }
 
 //------------------------------------------------------------------------------
-PduSessionReactivationResult::~PduSessionReactivationResult() {}
+// PduSessionReactivationResult::~PduSessionReactivationResult() {}
 
 //------------------------------------------------------------------------------
 void PduSessionReactivationResult::SetValue(uint16_t value) {

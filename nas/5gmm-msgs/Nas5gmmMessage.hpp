@@ -29,7 +29,7 @@ namespace oai::nas {
 class Nas5gmmMessage {
  public:
   Nas5gmmMessage(){};
-  virtual ~Nas5gmmMessage() {}
+  virtual ~Nas5gmmMessage() = default;
 
   // May not be the actual length of the message (by rounding 1/2 octet to 1
   // octet in some IEs) but always greater than the actual length of the message

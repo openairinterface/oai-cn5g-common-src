@@ -37,7 +37,7 @@ AuthenticationFailureParameter::AuthenticationFailureParameter(
 }
 
 //------------------------------------------------------------------------------
-AuthenticationFailureParameter::~AuthenticationFailureParameter() {}
+// AuthenticationFailureParameter::~AuthenticationFailureParameter() {}
 
 //------------------------------------------------------------------------------
 void AuthenticationFailureParameter::SetValue(const bstring& value) {

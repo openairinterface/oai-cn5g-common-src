@@ -23,7 +23,9 @@
 #define _3GPP_TS_24501_H_
 
 #include <string>
-
+#include <arpa/inet.h>
+#include <vector>
+#include <nlohmann/json.hpp>
 #include "3gpp_24.007.hpp"
 
 //------------------------------------------------------------------------------
@@ -393,4 +395,109 @@ static _5g_ea_e get_5g_ea(std::string ea) {
   }
   return _5g_ea_e::_5G_EA0;
 }
+
+// PDU Session Type value
+enum pdu_session_type_e {
+  PDU_SESSION_TYPE_E_UNKNOWN      = 0,
+  PDU_SESSION_TYPE_E_IPV4         = 1,
+  PDU_SESSION_TYPE_E_IPV6         = 2,
+  PDU_SESSION_TYPE_E_IPV4V6       = 3,
+  PDU_SESSION_TYPE_E_UNSTRUCTURED = 4,
+  PDU_SESSION_TYPE_E_ETHERNET     = 5,
+  PDU_SESSION_TYPE_E_RESERVED     = 7,
+};
+
+static const std::vector<std::string> pdu_session_type_e2str = {
+    "Error",        "IPV4",     "IPV6",   "IPV4V6",
+    "UNSTRUCTURED", "ETHERNET", "IPV4V6", "RESERVED"};
+
+typedef struct pdu_session_type_s {
+  uint8_t pdu_session_type;
+  pdu_session_type_s() : pdu_session_type(PDU_SESSION_TYPE_E_IPV4) {}
+  pdu_session_type_s(const uint8_t& p) : pdu_session_type(p) {}
+  pdu_session_type_s(const struct pdu_session_type_s& p) = default;
+  pdu_session_type_s(const std::string& s) {
+    if (s == "IPV4") {
+      pdu_session_type = pdu_session_type_e::PDU_SESSION_TYPE_E_IPV4;
+    } else if (s == "IPV6") {
+      pdu_session_type = pdu_session_type_e::PDU_SESSION_TYPE_E_IPV6;
+    } else if (s == "IPV4V6") {
+      pdu_session_type = pdu_session_type_e::PDU_SESSION_TYPE_E_IPV4V6;
+    } else {
+      pdu_session_type =
+          pdu_session_type_e::PDU_SESSION_TYPE_E_IPV4;  // Default value
+    }
+  }
+  bool operator==(const struct pdu_session_type_s& p) const {
+    return (p.pdu_session_type == pdu_session_type);
+  }
+  //------------------------------------------------------------------------------
+  bool operator==(const pdu_session_type_e& p) const {
+    return (p == pdu_session_type);
+  }
+  //------------------------------------------------------------------------------
+  const std::string& to_string() const {
+    return pdu_session_type_e2str.at(pdu_session_type);
+  }
+  //------------------------------------------------------------------------------
+  nlohmann::json to_json() const {
+    nlohmann::json json_data = {};
+    json_data                = to_string();
+    return json_data;
+  }
+  //------------------------------------------------------------------------------
+  void from_json(nlohmann::json& json_data) {
+    std::string pdu_session_type_str = json_data.get<std::string>();
+    if (pdu_session_type_str == "IPV4") {
+      pdu_session_type = pdu_session_type_e::PDU_SESSION_TYPE_E_IPV4;
+    } else if (pdu_session_type_str == "IPV6") {
+      pdu_session_type = pdu_session_type_e::PDU_SESSION_TYPE_E_IPV6;
+    } else if (pdu_session_type_str == "IPV4V6") {
+      pdu_session_type = pdu_session_type_e::PDU_SESSION_TYPE_E_IPV4V6;
+    } else {
+      pdu_session_type =
+          pdu_session_type_e::PDU_SESSION_TYPE_E_IPV4;  // Default value
+    }
+  }
+
+} pdu_session_type_t;
+
+// 8.14 PDU Session (UE IP) Address Allocation (PAA)
+struct paa_s {
+  pdu_session_type_t pdu_session_type;
+  uint8_t ipv6_prefix_length;
+  struct in6_addr ipv6_address;
+  struct in_addr ipv4_address;
+
+  //------------------------------------------------------------------------------
+  bool is_ip_assigned() {
+    switch (pdu_session_type.pdu_session_type) {
+      case PDU_SESSION_TYPE_E_IPV4:
+        if (ipv4_address.s_addr) return true;
+        return false;
+        break;
+      case PDU_SESSION_TYPE_E_IPV6:
+        if (ipv6_address.s6_addr32[0] | ipv6_address.s6_addr32[1] |
+            ipv6_address.s6_addr32[2] | ipv6_address.s6_addr32[3])
+          return true;
+        return false;
+        break;
+      case PDU_SESSION_TYPE_E_IPV4V6:
+        // TODO
+        if (ipv4_address.s_addr) return true;
+        if (ipv6_address.s6_addr32[0] | ipv6_address.s6_addr32[1] |
+            ipv6_address.s6_addr32[2] | ipv6_address.s6_addr32[3])
+          return true;
+        return false;
+        break;
+      case PDU_SESSION_TYPE_E_UNSTRUCTURED:
+      case PDU_SESSION_TYPE_E_ETHERNET:
+      case PDU_SESSION_TYPE_E_RESERVED:
+      default:
+        return false;
+    }
+  }
+};
+
+typedef struct paa_s paa_t;
 #endif

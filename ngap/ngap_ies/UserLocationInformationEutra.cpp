@@ -21,7 +21,7 @@
 
 #include "UserLocationInformationEutra.hpp"
 
-#include "logger.hpp"
+#include "logger_base.hpp"
 
 namespace oai::ngap {
 
@@ -48,11 +48,13 @@ void UserLocationInformationEutra::get(EutraCgi& eutraCgi, Tai& tai) const {
 bool UserLocationInformationEutra::encode(
     Ngap_UserLocationInformationEUTRA_t& userLocationInformation) const {
   if (!m_EutraCgi.encode(userLocationInformation.eUTRA_CGI)) {
-    Logger::ngap().warn("Encode eUTRA_CGI IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .warn("Encode eUTRA_CGI IE error");
     return false;
   }
   if (!m_Tai.encode(userLocationInformation.tAI)) {
-    Logger::ngap().warn("Encode Tai IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .warn("Encode Tai IE error");
     return false;
   }
   return true;
@@ -62,12 +64,14 @@ bool UserLocationInformationEutra::encode(
 bool UserLocationInformationEutra::decode(
     const Ngap_UserLocationInformationEUTRA_t& userLocationInformation) {
   if (!m_EutraCgi.decode(userLocationInformation.eUTRA_CGI)) {
-    Logger::ngap().warn("Decode eUTRA_CGI IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .warn("Decode eUTRA_CGI IE error");
     return false;
   }
 
   if (!m_Tai.decode(userLocationInformation.tAI)) {
-    Logger::ngap().warn("Decode Tai IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .warn("Decode Tai IE error");
     return false;
   }
   return true;

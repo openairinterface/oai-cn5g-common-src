@@ -38,6 +38,7 @@
 #include "utils.hpp"
 
 using namespace oai::utils;
+using namespace oai::logger;
 
 static const char hex_to_ascii_table[16] = {
     '0', '1', '2', '3', '4', '5', '6', '7',
@@ -132,9 +133,8 @@ struct in_addr conv::fromString(const std::string& addr4) {
   unsigned char buf[sizeof(struct in6_addr)] = {};
   auto ret = inet_pton(AF_INET, addr4.c_str(), buf);
   if (ret != 1) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            __PRETTY_FUNCTION__ + std::string{" Failed to convert "} + addr4);
+    logger_common::common().error(
+        __PRETTY_FUNCTION__ + std::string{" Failed to convert "} + addr4);
   }
   struct in_addr* ia = (struct in_addr*) buf;
   return *ia;
@@ -251,8 +251,8 @@ bool conv::string_to_int8(const std::string& str, uint8_t& value) {
   try {
     value = (uint8_t) std::stoi(str);
   } catch (const std::exception& e) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Error when converting from string to int, error: %s", e.what());
+    logger_common::common().error(
+        "Error when converting from string to int, error: %s", e.what());
     return false;
   }
   return true;
@@ -264,8 +264,8 @@ bool conv::string_to_int32(const std::string& str, uint32_t& value) {
   try {
     value = (uint32_t) std::stoi(str);
   } catch (const std::exception& e) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Error when converting from string to int, error: %s", e.what());
+    logger_common::common().error(
+        "Error when converting from string to int, error: %s", e.what());
     return false;
   }
   return true;
@@ -276,8 +276,7 @@ bool conv::string_to_int(
     const std::string& str, uint32_t& value, uint8_t base) {
   if (str.empty()) return false;
   if ((base != 10) or (base != 16)) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .warn("Only support Dec or Hex string value");
+    logger_common::common().warn("Only support Dec or Hex string value");
     return false;
   }
   if (base == 16) {
@@ -287,8 +286,8 @@ bool conv::string_to_int(
   try {
     value = std::stoul(str, nullptr, base);
   } catch (const std::exception& e) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Error when converting from string to int, error: %s", e.what());
+    logger_common::common().error(
+        "Error when converting from string to int, error: %s", e.what());
     return false;
   }
   return true;
@@ -296,7 +295,7 @@ bool conv::string_to_int(
 
 //------------------------------------------------------------------------------
 void conv::int_to_string_hex(
-    uint32_t value, std::string& value_str, uint8_t length) {
+    uint64_t value, std::string& value_str, uint8_t length) {
   std::stringstream stream_str;
   if (length > 0) {
     stream_str << std::setfill('0') << std::setw(length) << std::hex << value;
@@ -315,8 +314,8 @@ bool conv::string_hex_to_int(const std::string& value_str, uint32_t& value) {
   try {
     value = std::stoul(value_str, nullptr, base);
   } catch (const std::exception& e) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Error when converting from string to int, error: %s", e.what());
+    logger_common::common().error(
+        "Error when converting from string to int, error: %s", e.what());
     return false;
   }
   return true;
@@ -330,8 +329,8 @@ uint32_t conv::string_hex_to_int(const std::string& value_str) {
   try {
     value = std::stoul(value_str, nullptr, base);
   } catch (const std::exception& e) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Error when converting from string to int, error: %s", e.what());
+    logger_common::common().error(
+        "Error when converting from string to int, error: %s", e.what());
     value = {};
   }
   return value;
@@ -439,4 +438,55 @@ void conv::convert_string_2_hex(
   output_str = reinterpret_cast<char*>(datahex);
   utils::free_wrapper((void**) &datahex);
   utils::free_wrapper((void**) &data);
+}
+
+//------------------------------------------------------------------------------
+void conv::fix_primitive_json_values(nlohmann::json& j, bool parse_hex_values) {
+  for (const auto& elem : j.items()) {
+    if (elem.value().is_primitive()) {
+      // we have to hardcode SD value here, since 3GPP format doesn't include
+      // prefix 0x -> There is no way how we can detect this automatically so
+      // then, stoi just takes base 10 and we have wrong values
+      if (elem.key() == "sd") continue;
+
+      try {
+        std::string e = elem.value();
+        if (e == "true") j[elem.key()] = true;
+        if (e == "false") j[elem.key()] = false;
+        // rfind returns 0 if string starts with 0x
+        // we have to handle this here, because otherwise "0x123" is evaluated
+        // as 0 int with base 10
+        if (e.rfind("0x", 0) == 0) {
+          if (parse_hex_values) {
+            int val       = std::stoi(e, nullptr, 16);
+            j[elem.key()] = val;
+          } else {
+            // we do not parse the int and keep a string value
+            continue;
+          }
+        } else {
+          size_t chars_processed = 0;
+          int val                = std::stoi(e, &chars_processed);
+          if (chars_processed != e.length()) throw std::invalid_argument("");
+          j[elem.key()] = val;  // replace with int
+        }
+      } catch (std::invalid_argument& ex) {
+      } catch (std::exception& e) {
+      }
+    } else {
+      fix_primitive_json_values(elem.value(), parse_hex_values);
+    }
+  }
+}
+
+//------------------------------------------------------------------------------
+nlohmann::json conv::yaml_to_json(
+    const YAML::Node& node, bool parse_hex_values) {
+  YAML::Emitter emitter;
+  emitter << YAML::DoubleQuoted << YAML::Flow << YAML::BeginSeq << node;
+  std::string json_string(emitter.c_str() + 1);
+  nlohmann::json j = nlohmann::json::parse(json_string);
+  // this is a bit hacky but the problem is that YAML emits ints as strings
+  fix_primitive_json_values(j, parse_hex_values);
+  return j;
 }

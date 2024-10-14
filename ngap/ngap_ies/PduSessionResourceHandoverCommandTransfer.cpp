@@ -23,7 +23,7 @@
 
 #include <vector>
 
-#include "logger.hpp"
+#include "logger_base.hpp"
 #include "ngap_utils.hpp"
 
 namespace oai::ngap {
@@ -60,20 +60,24 @@ void PduSessionResourceHandoverCommandTransfer::setQosFlowToBeForwardedList(
       std::make_optional<QosFlowToBeForwardedList>(qosList);
   int ret = m_QosFlowToBeForwardedList.value().encode(
       m_HandoverCommandTransferIe->qosFlowToBeForwardedList);
-  Logger::ngap().debug(
-      "Number of QoS flows in the list %d",
-      m_HandoverCommandTransferIe->qosFlowToBeForwardedList->list.count);
+  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+      .debug(
+          "Number of QoS flows in the list %d",
+          m_HandoverCommandTransferIe->qosFlowToBeForwardedList->list.count);
   if (m_HandoverCommandTransferIe->qosFlowToBeForwardedList->list.array) {
     if (m_HandoverCommandTransferIe->qosFlowToBeForwardedList->list.array[0]) {
-      Logger::ngap().debug(
-          "QFI in the list %d",
-          m_HandoverCommandTransferIe->qosFlowToBeForwardedList->list.array[0]
-              ->qosFlowIdentifier);
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .debug(
+              "QFI in the list %d",
+              m_HandoverCommandTransferIe->qosFlowToBeForwardedList->list
+                  .array[0]
+                  ->qosFlowIdentifier);
     }
   }
 
   if (!ret) {
-    Logger::ngap().debug("Encode QosFlowToBeForwardedList IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .debug("Encode QosFlowToBeForwardedList IE error");
     return;
   }
 }
@@ -96,7 +100,8 @@ void PduSessionResourceHandoverCommandTransfer::setUPTransportLayerInformation(
   int ret = m_DlForwardingUpTnlInformation.value().encode(
       *m_HandoverCommandTransferIe->dLForwardingUP_TNLInformation);
   if (!ret) {
-    Logger::ngap().debug("Encode dLForwardingUP_TNLInformation IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .debug("Encode dLForwardingUP_TNLInformation IE error");
     return;
   }
 }
@@ -109,7 +114,8 @@ int PduSessionResourceHandoverCommandTransfer::encode(
   asn_enc_rval_t er = aper_encode_to_buffer(
       &asn_DEF_Ngap_HandoverCommandTransfer, NULL, m_HandoverCommandTransferIe,
       buf, buf_size);
-  Logger::ngap().debug("er.encoded( %d)", er.encoded);
+  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+      .debug("er.encoded( %d)", er.encoded);
   return er.encoded;
 }
 

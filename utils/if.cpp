@@ -21,9 +21,11 @@
 #include <sys/ioctl.h>
 
 #include "common_defs.h"
-#include "logger.hpp"
+#include "logger_base.hpp"
 
 #define BUFFER_SIZE 4096
+
+using namespace oai::logger;
 
 //------------------------------------------------------------------------------
 int oai::utils::get_inet_addr_infos_from_iface(
@@ -43,7 +45,7 @@ int oai::utils::get_inet_addr_infos_from_iface(
   strcpy(ifr.ifr_name, (const char*) if_name.c_str());
   if (ioctl(fd, SIOCGIFADDR, &ifr)) {
     close(fd);
-    Logger::system().error(
+    logger_common::system().error(
         "Failed to probe %s inet addr: error %s\n", if_name.c_str(),
         strerror(errno));
     return RETURNerror;
@@ -64,7 +66,7 @@ int oai::utils::get_inet_addr_infos_from_iface(
   strcpy(ifr.ifr_name, (const char*) if_name.c_str());
   if (ioctl(fd, SIOCGIFNETMASK, &ifr)) {
     close(fd);
-    Logger::system().error(
+    logger_common::system().error(
         "Failed to probe %s inet netmask: error %s\n", if_name.c_str(),
         strerror(errno));
     return RETURNerror;
@@ -84,7 +86,7 @@ int oai::utils::get_inet_addr_infos_from_iface(
   // strncpy(ifr.ifr_name, (const char *)if_name.c_str(), IFNAMSIZ-1);
   strcpy(ifr.ifr_name, (const char*) if_name.c_str());
   if (ioctl(fd, SIOCGIFMTU, &ifr)) {
-    Logger::system().error(
+    logger_common::system().error(
         "Failed to probe %s MTU: error %s\n", if_name.c_str(), strerror(errno));
   } else {
     mtu = ifr.ifr_mtu;

@@ -37,7 +37,11 @@
 #include <unordered_map>
 #include <vector>
 
-static const std::string LOGGER_COMMON = "common";
+static const std::string ASYNC_CMD           = "asc_cmd";
+static const std::string LOGGER_COMMON       = "common";
+static const std::string LOGGER_COMMON_PFCP  = "pfcp   ";
+static const std::string SYSTEM              = "system ";
+static const std::string LOGGER_COMMON_UTILS = "utils";
 
 namespace oai::logger {
 
@@ -50,7 +54,7 @@ class printf_logger {
  public:
   explicit printf_logger(
       const std::string& nf_name, const std::string& category, bool log_stdout,
-      bool log_rot_file, bool isLTTngActive)
+      bool log_rot_file, bool isLTTngActive = false)
       : m_is_lttng_active(isLTTngActive) {
     if (m_is_lttng_active) {
       m_lttng_logger = std::make_shared<lttng_logger>(
@@ -205,7 +209,34 @@ class logger_common {
   logger_common(
       const std::string& name, const bool log_stdout, const bool log_rot_file) {
     oai::logger::logger_registry::register_logger(
+        name, ASYNC_CMD, log_stdout, log_rot_file);
+    oai::logger::logger_registry::register_logger(
         name, LOGGER_COMMON, log_stdout, log_rot_file);
+    oai::logger::logger_registry::register_logger(
+        name, LOGGER_COMMON_PFCP, log_stdout, log_rot_file);
+    oai::logger::logger_registry::register_logger(
+        name, SYSTEM, log_stdout, log_rot_file);
+    oai::logger::logger_registry::register_logger(
+        name, LOGGER_COMMON_UTILS, log_stdout, log_rot_file);
+  }
+  static bool should_log(spdlog::level::level_enum level) {
+    return oai::logger::logger_registry::should_log(level);
+  }
+
+  static const oai::logger::printf_logger& async_cmd() {
+    return oai::logger::logger_registry::get_logger(ASYNC_CMD);
+  }
+  static const oai::logger::printf_logger& common() {
+    return oai::logger::logger_registry::get_logger(LOGGER_COMMON);
+  }
+  static const oai::logger::printf_logger& pfcp() {
+    return oai::logger::logger_registry::get_logger(LOGGER_COMMON_PFCP);
+  }
+  static const oai::logger::printf_logger& system() {
+    return oai::logger::logger_registry::get_logger(SYSTEM);
+  }
+  static const oai::logger::printf_logger& utils() {
+    return oai::logger::logger_registry::get_logger(LOGGER_COMMON_UTILS);
   }
 };
 

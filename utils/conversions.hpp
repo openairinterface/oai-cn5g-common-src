@@ -27,6 +27,9 @@
 #include <stdlib.h>
 #include <string>
 
+#include "nlohmann/json.hpp"
+#include "yaml-cpp/yaml.h"
+
 namespace oai::utils {
 
 class conv {
@@ -54,7 +57,7 @@ class conv {
   static bool string_hex_to_int(const std::string& value_str, uint32_t& value);
   static uint32_t string_hex_to_int(const std::string& value_str);
   static void int_to_string_hex(
-      uint32_t value, std::string& value_str, uint8_t length = 0);
+      uint64_t value, std::string& value_str, uint8_t length = 0);
   static std::string uint32_to_hex_string(uint32_t value);
   static std::string tmsi_to_string(const uint32_t tmsi);
   static void get_tmsi_from_guti(const std::string& guti, uint32_t& tmsi);
@@ -72,6 +75,16 @@ class conv {
       const std::string& amf_pointer, std::string& amf_id);
   static void convert_string_2_hex(
       const std::string& input_str, std::string& output_str);
+
+  /**
+   * Replaces primitive JSON string values with integers or bools if possible
+   * @param j
+   */
+  static void fix_primitive_json_values(
+      nlohmann::json& j, bool parse_hex_values = false);
+
+  static nlohmann::json yaml_to_json(
+      const YAML::Node& node, bool parse_hex_values = false);
 };
 }  // namespace oai::utils
 #endif /* FILE_CONVERSIONS_HPP_SEEN */

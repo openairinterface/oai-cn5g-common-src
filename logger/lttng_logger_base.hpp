@@ -5,7 +5,9 @@
 #include <stdexcept>
 #include <vector>
 
-#define SPDLOG_FMT_EXTERNAL
+#ifndef SPDLOG_FMT_EXTERNAL
+#define SPDLOG_FMT_EXTERNAL 1
+#endif
 
 #include <fmt/printf.h>
 #include <spdlog/common.h>

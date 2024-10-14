@@ -31,6 +31,7 @@
 #include <boost/algorithm/string/classification.hpp>
 
 using namespace oai::utils;
+using namespace oai::logger;
 
 sdf_conversions::sdf_filter sdf_conversions::sdf_filter::from_string(
     const std::string& filter_string) {
@@ -46,11 +47,10 @@ sdf_conversions::sdf_filter sdf_conversions::sdf_filter::from_string(
   std::regex re(regex);
   std::smatch matches;
   if (!std::regex_match(filter_string, matches, re)) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "SDF Filter %s cannot be parsed, does not follow the "
-            "specification, use default filter",
-            filter_string);
+    logger_common::common().error(
+        "SDF Filter %s cannot be parsed, does not follow the "
+        "specification, use default filter",
+        filter_string);
     return filter;
   }
   std::string proto = matches[1];
@@ -137,10 +137,9 @@ bool sdf_conversions::parse_bitrate_string(
   std::regex re(bandwidth_regex);
   std::smatch matches;
   if (!std::regex_match(bitrate, matches, re)) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Bitrate %s cannot be parsed, does not follow the specification",
-            bitrate);
+    logger_common::common().error(
+        "Bitrate %s cannot be parsed, does not follow the specification",
+        bitrate);
     return false;
   }
 
@@ -171,8 +170,8 @@ bool sdf_conversions::parse_bitrate_string(
     // Here we convert up so that there is enough space in the int buffer
     while (bw_value > UINT16_MAX) {
       if (bitrate_int == 6) {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .warn("Bitrate cannot be higher than %d x 256 PBPS", bw_value);
+        logger_common::common().warn(
+            "Bitrate cannot be higher than %lf x 256 PBPS", bw_value);
       }
       if (bitrate_int == 5) {
         bw_value = bw_value / 256;
@@ -185,8 +184,11 @@ bool sdf_conversions::parse_bitrate_string(
     // Here we have to handle the fractional part, as 3GPP also allows that
     // we check if bw_value has fractional parts
     while (long(bw_value) != bw_value) {
-      if (bitrate_int == 1 || (long(bw_value / 1000) > (UINT16_MAX / 1000))) {
+      if (bitrate_int == 1 || bw_value * 1000 > UINT16_MAX) {
         // we possibly cant make it smaller, so we just cut it off
+        logger_common::common().warn(
+            "Bitrate value is limited to uint 16. Value is cut of to %ld",
+            long(bw_value + 0.5));
         break;
       }
       bw_value = bw_value * 1000;
@@ -197,10 +199,9 @@ bool sdf_conversions::parse_bitrate_string(
     unit  = static_cast<bitrate_unit_e>(bitrate_int);
     return true;
   } catch (std::invalid_argument&) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Bitrate value part %s is not a number, cannot parse.",
-            string_bw_value);
+    logger_common::common().error(
+        "Bitrate value part %s is not a number, cannot parse.",
+        string_bw_value);
     return false;
   }
 }

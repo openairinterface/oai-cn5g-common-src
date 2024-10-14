@@ -21,7 +21,7 @@
 
 #include "QosFlowToBeForwardedList.hpp"
 
-#include "logger.hpp"
+#include "logger_base.hpp"
 
 namespace oai::ngap {
 
@@ -48,13 +48,16 @@ bool QosFlowToBeForwardedList::encode(
             1, sizeof(Ngap_QosFlowToBeForwardedItem_t));
     if (!response) return false;
     if (!m_ItemList[i].encode(*response)) {
-      Logger::ngap().debug("Encode QosFlowTowardedItem error");
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .debug("Encode QosFlowTowardedItem error");
       return false;
     }
-    Logger::ngap().debug("QFI %d", response->qosFlowIdentifier);
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .debug("QFI %d", response->qosFlowIdentifier);
 
     if (ASN_SEQUENCE_ADD(&qosList->list, response) != 0) {
-      Logger::ngap().debug("Encode QosFlowTowardedList error");
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .debug("Encode QosFlowTowardedList error");
       return false;
     }
   }

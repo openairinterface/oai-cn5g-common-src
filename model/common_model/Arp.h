@@ -76,7 +76,6 @@ class Arp {
   friend void to_json(nlohmann::json& j, const Arp& o);
   friend void from_json(const nlohmann::json& j, Arp& o);
 
- protected:
   int32_t m_PriorityLevel;
 
   oai::model::common::PreemptionCapability m_PreemptCap;

@@ -88,7 +88,6 @@ class Snssai {
 
   [[nodiscard]] std::string to_string(int indent_level) const;
 
- protected:
   int32_t m_Sst;
 
   std::string m_Sd;

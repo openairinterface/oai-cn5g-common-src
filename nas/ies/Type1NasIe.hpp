@@ -46,9 +46,8 @@ class Type1NasIe : public NasIe {
   void Set(bool high_pos, uint8_t value);
   void Set(bool high_pos);
 
-  void SetValue(uint8_t value);
-
  protected:
+  void SetValue(uint8_t value);
   virtual void SetValue() = 0;
   virtual void GetValue() = 0;
 

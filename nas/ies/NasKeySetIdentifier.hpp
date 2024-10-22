@@ -49,6 +49,8 @@ class NasKeySetIdentifier : public Type1NasIe {
   void SetNasKeyIdentifier(uint8_t id);
   uint8_t GetNasKeyIdentifier() const;
 
+  uint8_t GetNgKsi() const;
+
  private:
   void SetValue() override;
   void GetValue() override;

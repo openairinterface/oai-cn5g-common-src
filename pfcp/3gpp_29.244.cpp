@@ -773,18 +773,17 @@ pfcp_ie* pfcp_ie::new_pfcp_ie_from_stream(std::istream& is) {
         //        ie;
         //      }
         //      break;
-        //    case PFCP_IE_ETHERNET_PACKET_FILTER: {
-        //        pfcp_ethernet_packet_filter_ie *ie = new
-        //        pfcp_ethernet_packet_filter_ie(tlv); ie->load_from(is); return
-        //        ie;
-        //      }
-        //      break;
-        //    case PFCP_IE_MAC_ADDRESS: {
-        //        pfcp_mac_address_ie *ie = new pfcp_mac_address_ie(tlv);
-        //        ie->load_from(is);
-        //        return ie;
-        //      }
-        //      break;
+        // TODO [ETH-PDU] PFCP_IE_ETHERNET_PACKET_FILTER
+        case PFCP_IE_ETHERNET_PACKET_FILTER: {
+          pfcp_ethernet_packet_filter_ie *ie = new
+          pfcp_ethernet_packet_filter_ie(tlv); ie->load_from(is); return
+          ie;
+        } break;
+        case PFCP_IE_MAC_ADDRESS: {
+          pfcp_mac_address_ie *ie = new pfcp_mac_address_ie(tlv);
+          ie->load_from(is);
+          return ie;
+        } break;
         //    case PFCP_IE_C_TAG: {
         //        pfcp_c_tag_ie *ie = new pfcp_c_tag_ie(tlv);
         //        ie->load_from(is);
@@ -797,29 +796,26 @@ pfcp_ie* pfcp_ie::new_pfcp_ie_from_stream(std::istream& is) {
         //        return ie;
         //      }
         //      break;
-        //    case PFCP_IE_ETHERTYPE: {
-        //        pfcp_ethertype_ie *ie = new pfcp_ethertype_ie(tlv);
-        //        ie->load_from(is);
-        //        return ie;
-        //      }
-        //      break;
+        case PFCP_IE_ETHERTYPE: {
+          pfcp_ethertype_ie *ie = new pfcp_ethertype_ie(tlv);
+          ie->load_from(is);
+          return ie;
+        } break;
         //    case PFCP_IE_PROXYING: {
         //        pfcp_proxying_ie *ie = new pfcp_proxying_ie(tlv);
         //        ie->load_from(is);
         //        return ie;
         //      }
         //      break;
-        //    case PFCP_IE_ETHERNET_FILTER_ID: {
-        //        pfcp_ethernet_filter_id_ie *ie = new
-        //        pfcp_ethernet_filter_id_ie(tlv); ie->load_from(is); return ie;
-        //      }
-        //      break;
-        //    case PFCP_IE_ETHERNET_FILTER_PROPERTIES: {
-        //        pfcp_ethernet_filter_properties_ie *ie = new
-        //        pfcp_ethernet_filter_properties_ie(tlv); ie->load_from(is);
-        //        return ie;
-        //      }
-        //      break;
+        case PFCP_IE_ETHERNET_FILTER_ID: {
+          pfcp_ethernet_filter_id_ie *ie = new
+          pfcp_ethernet_filter_id_ie(tlv); ie->load_from(is); return ie;
+        } break;
+        case PFCP_IE_ETHERNET_FILTER_PROPERTIES: {
+          pfcp_ethernet_filter_properties_ie *ie = new
+          pfcp_ethernet_filter_properties_ie(tlv); ie->load_from(is);
+          return ie;
+        } break;
         //    case PFCP_IE_SUGGESTED_BUFFERING_PACKETS_COUNT: {
         //        pfcp_suggested_buffering_packets_count_ie *ie = new
         //        pfcp_suggested_buffering_packets_count_ie(tlv);
@@ -832,13 +828,13 @@ pfcp_ie* pfcp_ie::new_pfcp_ie_from_stream(std::istream& is) {
         ie->load_from(is);
         return ie;
       } break;
-        //    case PFCP_IE_ETHERNET_PDU_SESSION_INFORMATION: {
-        //        pfcp_ethernet_pdu_session_information_ie *ie = new
-        //        pfcp_ethernet_pdu_session_information_ie(tlv);
-        //        ie->load_from(is);
-        //        return ie;
-        //      }
-        //      break;
+      // TODO [ETH-PDU] PFCP_IE_ETHERNET_PDU_SESSION_INFORMATION
+      case PFCP_IE_ETHERNET_PDU_SESSION_INFORMATION: {
+        pfcp_ethernet_pdu_session_information_ie *ie = new
+        pfcp_ethernet_pdu_session_information_ie(tlv);
+        ie->load_from(is);
+        return ie;
+      } break;
         //    case PFCP_IE_ETHERNET_TRAFFIC_INFORMATION: {
         //        pfcp_ethernet_traffic_information_ie *ie = new
         //        pfcp_ethernet_traffic_information_ie(tlv); ie->load_from(is);

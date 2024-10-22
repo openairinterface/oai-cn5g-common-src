@@ -1685,6 +1685,7 @@ class pdi : public pfcp::pfcp_ies_container {
   std::pair<bool, pfcp::traffic_endpoint_id_t> traffic_endpoint_id;
   std::pair<bool, pfcp::sdf_filter_t> sdf_filter;
   std::pair<bool, pfcp::application_id_t> application_id;
+  std::pair<bool, pfcp::ethernet_pdu_session_information_t> ethernet_pdu_session_information;
   std::pair<bool, pfcp::ethernet_packet_filter> ethernet_packet_filter;
   std::pair<bool, pfcp::qfi_t> qfi;
   std::pair<bool, pfcp::framed_route_t> framed_route;
@@ -1700,6 +1701,7 @@ class pdi : public pfcp::pfcp_ies_container {
         traffic_endpoint_id(),
         sdf_filter(),
         application_id(),
+        ethernet_pdu_session_information(),
         ethernet_packet_filter(),
         qfi(),
         framed_route(),
@@ -1714,6 +1716,7 @@ class pdi : public pfcp::pfcp_ies_container {
         traffic_endpoint_id(p.traffic_endpoint_id),
         sdf_filter(p.sdf_filter),
         application_id(p.application_id),
+        ethernet_pdu_session_information(p.ethernet_pdu_session_information),
         ethernet_packet_filter(p.ethernet_packet_filter),
         qfi(p.qfi),
         framed_route(p.framed_route),
@@ -1748,6 +1751,10 @@ class pdi : public pfcp::pfcp_ies_container {
   void set(const pfcp::application_id_t& v) {
     application_id.first  = true;
     application_id.second = v;
+  }
+  void set(const pfcp::ethernet_pdu_session_information_t& v) {
+    ethernet_pdu_session_information.first  = true;
+    ethernet_pdu_session_information.second = v;
   }
   void set(const pfcp::ethernet_packet_filter& v) {
     ethernet_packet_filter.first  = true;
@@ -1819,6 +1826,13 @@ class pdi : public pfcp::pfcp_ies_container {
   bool get(pfcp::application_id_t& v) const {
     if (application_id.first) {
       v = application_id.second;
+      return true;
+    }
+    return false;
+  }
+  bool get(pfcp::ethernet_pdu_session_information_t& v) const {
+    if (ethernet_pdu_session_information.first) {
+      v = ethernet_pdu_session_information.second;
       return true;
     }
     return false;

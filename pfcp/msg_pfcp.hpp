@@ -1685,7 +1685,8 @@ class pdi : public pfcp::pfcp_ies_container {
   std::pair<bool, pfcp::traffic_endpoint_id_t> traffic_endpoint_id;
   std::pair<bool, pfcp::sdf_filter_t> sdf_filter;
   std::pair<bool, pfcp::application_id_t> application_id;
-  std::pair<bool, pfcp::ethernet_pdu_session_information_t> ethernet_pdu_session_information;
+  std::pair<bool, pfcp::ethernet_pdu_session_information_t>
+      ethernet_pdu_session_information;
   std::pair<bool, pfcp::ethernet_packet_filter> ethernet_packet_filter;
   std::pair<bool, pfcp::qfi_t> qfi;
   std::pair<bool, pfcp::framed_route_t> framed_route;

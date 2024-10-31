@@ -28,6 +28,7 @@
 #include "3gpp_conversions.hpp"
 #include "3gpp_29.510.h"
 #include "3gpp_24.501.hpp"
+#include "logger_base.hpp"
 
 #include <stdlib.h>
 #include <stdint.h>
@@ -59,6 +60,65 @@ void xgpp_conv::pdu_session_type_to_pdn_type(
       pdn_type.pdn_type = PDN_TYPE_E_UNKNOWN;
       break;
   }
+}
+
+//------------------------------------------------------------------------------
+// Same for 29.244
+void xgpp_conv::pdu_session_type_to_pdn_type(
+    const pdu_session_type_t& pdu_session_type, pfcp::pdn_type_t& pdn_type) {
+  switch (pdu_session_type.pdu_session_type) {
+    case PDU_SESSION_TYPE_E_IPV4:
+      pdn_type.pdn_type = pfcp::pdn_type_value_e::IPV4;
+      break;
+    case PDU_SESSION_TYPE_E_IPV6:
+      pdn_type.pdn_type = pfcp::pdn_type_value_e::IPV6;
+      break;
+    case PDU_SESSION_TYPE_E_IPV4V6:
+      pdn_type.pdn_type = pfcp::pdn_type_value_e::IPV4V6;
+      break;
+    case PDU_SESSION_TYPE_E_UNSTRUCTURED:
+      pdn_type.pdn_type = pfcp::pdn_type_value_e::NON_IP;
+      break;
+    case PDU_SESSION_TYPE_E_ETHERNET:
+      pdn_type.pdn_type = pfcp::pdn_type_value_e::ETHERNET;
+      break;
+    default:
+      pdn_type.pdn_type = 0;
+      break;
+  }
+}
+
+//------------------------------------------------------------------------------
+void xgpp_conv::ethType_to_pcfp_ethertype(
+    const std::string& ethType, pfcp::ethertype_t& ethertype) {
+  // Check if the ethType string is exactly 4 characters long
+  if (ethType.size() != 4) {
+    oai::logger::logger_common::common().error(
+        "ethType must be a 4-digit hexadecimal number.");
+    return;
+  }
+
+  // Check if each character in ethType is a valid hex digit
+  for (char c : ethType) {
+    if (!std::isxdigit(c)) {
+      oai::logger::logger_common::common().error(
+          "ethType contains non-hexadecimal characters.");
+      return;
+    }
+  }
+
+  // Convert the 4-digit hex string to a uint16_t
+  uint16_t value;
+  std::istringstream iss(ethType);
+  iss >> std::hex >> value;
+
+  if (iss.fail()) {
+    oai::logger::logger_common::common().error(
+        "Failed to convert ethType to uint16_t.");
+    return;
+  }
+
+  ethertype.ethertype = value;
 }
 
 //------------------------------------------------------------------------------

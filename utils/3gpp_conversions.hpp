@@ -41,6 +41,10 @@ class xgpp_conv {
  public:
   static void pdu_session_type_to_pdn_type(
       const pdu_session_type_t& pdu_session_type, pdn_type_t& pdn_type);
+  static void pdu_session_type_to_pdn_type(
+      const pdu_session_type_t& pdu_session_type, pfcp::pdn_type_t& pdn_type);
+  static void ethType_to_pcfp_ethertype(
+      const std::string& ethType, pfcp::ethertype_t& ethertype);
   static void pdn_type_to_pdu_session_type(
       const pdn_type_t& pdn_type, pdu_session_type_t& pdu_session_type);
   static void paa_to_pfcp_ue_ip_address(

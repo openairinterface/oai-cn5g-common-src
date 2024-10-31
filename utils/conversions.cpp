@@ -27,6 +27,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <regex>
 
 #include <boost/algorithm/string.hpp>
 #include <iomanip>
@@ -489,4 +490,33 @@ nlohmann::json conv::yaml_to_json(
   // this is a bit hacky but the problem is that YAML emits ints as strings
   fix_primitive_json_values(j, parse_hex_values);
   return j;
+}
+
+//------------------------------------------------------------------------------
+void conv::string_to_uint_mac_address(
+    const std::string& mac_address_str, uint8_t mac_address[6],
+    char delimiter) {
+  std::string delStr(1, delimiter);
+  std::regex macRegex("^([0-9a-fA-F]{2})(" + delStr + "([0-9a-fA-F]{2})){5}$");
+
+  // Check if the string matches the MAC address pattern
+  if (!std::regex_match(mac_address_str, macRegex)) {
+    oai::logger::logger_common::common().error(
+        "%s: Invalid MAC address format. Expected format: XX" + delStr + "XX" +
+            delStr + "XX" + delStr + "XX" + delStr + "XX" + delStr + "XX",
+        mac_address_str);
+    return;
+  }
+
+  // Parse the MAC address
+  std::istringstream iss(mac_address_str);
+  std::string byteStr;
+  int index = 0;
+
+  // Read each hexadecimal byte, split by delimiter
+  while (std::getline(iss, byteStr, delimiter) && index < 6) {
+    // Convert the hex string to an uint8_t and store in the array
+    mac_address[index] = static_cast<uint8_t>(std::stoul(byteStr, nullptr, 16));
+    ++index;
+  }
 }

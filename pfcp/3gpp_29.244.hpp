@@ -548,13 +548,11 @@ inline void ipv4_address_load_from(
 }
 
 inline void mac_address_dump_to(
-  std::ostream& os, const uint8_t mac_address[], int size) {
+    std::ostream& os, const uint8_t mac_address[], int size) {
   if (size <= 0) {
     return;
   }
-  os.write(
-      reinterpret_cast<const char*>(mac_address),
-      size);
+  os.write(reinterpret_cast<const char*>(mac_address), size);
 }
 
 inline void mac_address_load_from(
@@ -7788,7 +7786,7 @@ class pfcp_qfi_ie : public pfcp_ie {
 //-------------------------------------
 // IE MAC_ADDRESS
 class pfcp_mac_address_ie : public pfcp_ie {
-public:
+ public:
   union {
     struct {
       uint8_t sour : 1;
@@ -7804,123 +7802,149 @@ public:
   uint8_t upper_source_mac_address[6];
   uint8_t upper_destination_mac_address[6];
 
- //--------
- explicit pfcp_mac_address_ie(const pfcp::mac_address_t& b) :
- pfcp_ie(PFCP_IE_MAC_ADDRESS){
-   u1.b                = 0;
-   u1.bf.sour = b.sour;
-   u1.bf.dest = b.dest;
-   u1.bf.usou = b.usou;
-   u1.bf.udes = b.udes;
-   memset(source_mac_address, 0, sizeof(source_mac_address));
-   memset(destination_mac_address, 0, sizeof(destination_mac_address));
-   memset(upper_source_mac_address, 0, sizeof(upper_source_mac_address));
-   memset(upper_destination_mac_address, 0, sizeof(upper_destination_mac_address));
-   tlv.set_length(1);
-   if (u1.bf.sour) {
-    tlv.add_length(6);
-    memcpy(source_mac_address, b.source_mac_address, sizeof(source_mac_address));
-   }
-   if (u1.bf.dest) {
-    tlv.add_length(6);
-    memcpy(destination_mac_address, b.destination_mac_address, sizeof(destination_mac_address));
-   }
-   if (u1.bf.sour && u1.bf.usou) {
-    tlv.add_length(6);
-    memcpy(upper_source_mac_address, b.upper_source_mac_address, sizeof(upper_source_mac_address));
-   }
-   if (u1.bf.dest && u1.bf.udes) {
-    tlv.add_length(6);
-    memcpy(upper_destination_mac_address, b.upper_destination_mac_address, sizeof(upper_destination_mac_address));
-   }
- }
- //--------
- pfcp_mac_address_ie() : pfcp_ie(PFCP_IE_MAC_ADDRESS){
-   u1.b                = 0;
-   memset(source_mac_address, 0, sizeof(source_mac_address));
-   memset(destination_mac_address, 0, sizeof(destination_mac_address));
-   memset(upper_source_mac_address, 0, sizeof(upper_source_mac_address));
-   memset(upper_destination_mac_address, 0, sizeof(upper_destination_mac_address));
-   tlv.set_length(1);
- }
- //--------
- explicit pfcp_mac_address_ie(const pfcp_tlv& t) : pfcp_ie(t) {};
- //--------
- void to_core_type(pfcp::mac_address_t& b) {
-   b = {};
-   b.sour   = u1.bf.sour;
-   b.dest   = u1.bf.dest;
-   b.usou   = u1.bf.usou;
-   b.udes   = u1.bf.udes;
-   if (u1.bf.sour) {
-    memcpy(source_mac_address, b.source_mac_address, sizeof(source_mac_address));
-   }
-   if (u1.bf.dest) {
-    memcpy(destination_mac_address, b.destination_mac_address, sizeof(destination_mac_address));
-   }
-   if (u1.bf.sour && u1.bf.usou) {
-    memcpy(upper_source_mac_address, b.upper_source_mac_address, sizeof(upper_source_mac_address));
-   }
-   if (u1.bf.dest && u1.bf.udes) {
-    memcpy(upper_destination_mac_address, b.upper_destination_mac_address, sizeof(upper_destination_mac_address));
-   }
- }
- //--------
- void dump_to(std::ostream& os) {
-   uint16_t check_length = 1;
-   if (u1.bf.sour) check_length += 6;
-   if (u1.bf.dest) check_length += 6;
-   if (u1.bf.sour && u1.bf.usou) check_length += 6;
-   if (u1.bf.dest && u1.bf.udes) check_length += 6;
-   tlv.set_length(check_length);
-   tlv.dump_to(os);
-   os.write(reinterpret_cast<const char*>(&u1.b), sizeof(u1.b));
-   // TODO [ETH-PDU] check if there is need for htobe conversion
-   if (u1.bf.sour) {
-    mac_address_dump_to(os, source_mac_address, sizeof(source_mac_address));
-   }
-   if (u1.bf.dest) {
-    mac_address_dump_to(os, destination_mac_address, sizeof(destination_mac_address));
-   }
-   if (u1.bf.sour && u1.bf.usou) {
-    mac_address_dump_to(os, upper_source_mac_address, sizeof(upper_source_mac_address));
-   }
-   if (u1.bf.dest && u1.bf.udes) {
-    mac_address_dump_to(os, upper_destination_mac_address, sizeof(upper_destination_mac_address));
-   }
- }
- //--------
- void load_from(std::istream& is) {
-   //tlv.load_from(is);
-   is.read(reinterpret_cast<char*>(&u1.b), sizeof(u1.b));
-   uint16_t check_length = 1;
-   if (u1.bf.sour) check_length += 6;
-   if (u1.bf.dest) check_length += 6;
-   if (u1.bf.sour && u1.bf.usou) check_length += 6;
-   if (u1.bf.dest && u1.bf.udes) check_length += 6;
-   if (tlv.get_length() != check_length) {
-     throw pfcp_tlv_bad_length_exception(tlv.type, tlv.get_length(),
-     __FILE__, __LINE__);
-   }
-   if (u1.bf.sour) {
-    mac_address_load_from(is, source_mac_address, sizeof(source_mac_address));
-   }
-   if (u1.bf.dest) {
-    mac_address_load_from(is, destination_mac_address, sizeof(destination_mac_address));
-   }
-   if (u1.bf.sour && u1.bf.usou) {
-    mac_address_load_from(is, upper_source_mac_address, sizeof(upper_source_mac_address));
-   }
-   if (u1.bf.dest && u1.bf.udes) {
-    mac_address_load_from(is, upper_destination_mac_address, sizeof(upper_destination_mac_address));
-   }
- }
- //--------
- void to_core_type(pfcp_ies_container& s) {
-     pfcp::mac_address_t mac_address = {};
-     to_core_type(mac_address);
-     s.set(mac_address);
- }
+  //--------
+  explicit pfcp_mac_address_ie(const pfcp::mac_address_t& b)
+      : pfcp_ie(PFCP_IE_MAC_ADDRESS) {
+    u1.b       = 0;
+    u1.bf.sour = b.sour;
+    u1.bf.dest = b.dest;
+    u1.bf.usou = b.usou;
+    u1.bf.udes = b.udes;
+    memset(source_mac_address, 0, sizeof(source_mac_address));
+    memset(destination_mac_address, 0, sizeof(destination_mac_address));
+    memset(upper_source_mac_address, 0, sizeof(upper_source_mac_address));
+    memset(
+        upper_destination_mac_address, 0,
+        sizeof(upper_destination_mac_address));
+    tlv.set_length(1);
+    if (u1.bf.sour) {
+      tlv.add_length(6);
+      memcpy(
+          source_mac_address, b.source_mac_address, sizeof(source_mac_address));
+    }
+    if (u1.bf.dest) {
+      tlv.add_length(6);
+      memcpy(
+          destination_mac_address, b.destination_mac_address,
+          sizeof(destination_mac_address));
+    }
+    if (u1.bf.sour && u1.bf.usou) {
+      tlv.add_length(6);
+      memcpy(
+          upper_source_mac_address, b.upper_source_mac_address,
+          sizeof(upper_source_mac_address));
+    }
+    if (u1.bf.dest && u1.bf.udes) {
+      tlv.add_length(6);
+      memcpy(
+          upper_destination_mac_address, b.upper_destination_mac_address,
+          sizeof(upper_destination_mac_address));
+    }
+  }
+  //--------
+  pfcp_mac_address_ie() : pfcp_ie(PFCP_IE_MAC_ADDRESS) {
+    u1.b = 0;
+    memset(source_mac_address, 0, sizeof(source_mac_address));
+    memset(destination_mac_address, 0, sizeof(destination_mac_address));
+    memset(upper_source_mac_address, 0, sizeof(upper_source_mac_address));
+    memset(
+        upper_destination_mac_address, 0,
+        sizeof(upper_destination_mac_address));
+    tlv.set_length(1);
+  }
+  //--------
+  explicit pfcp_mac_address_ie(const pfcp_tlv& t) : pfcp_ie(t){};
+  //--------
+  void to_core_type(pfcp::mac_address_t& b) {
+    b      = {};
+    b.sour = u1.bf.sour;
+    b.dest = u1.bf.dest;
+    b.usou = u1.bf.usou;
+    b.udes = u1.bf.udes;
+    if (u1.bf.sour) {
+      memcpy(
+          source_mac_address, b.source_mac_address, sizeof(source_mac_address));
+    }
+    if (u1.bf.dest) {
+      memcpy(
+          destination_mac_address, b.destination_mac_address,
+          sizeof(destination_mac_address));
+    }
+    if (u1.bf.sour && u1.bf.usou) {
+      memcpy(
+          upper_source_mac_address, b.upper_source_mac_address,
+          sizeof(upper_source_mac_address));
+    }
+    if (u1.bf.dest && u1.bf.udes) {
+      memcpy(
+          upper_destination_mac_address, b.upper_destination_mac_address,
+          sizeof(upper_destination_mac_address));
+    }
+  }
+  //--------
+  void dump_to(std::ostream& os) {
+    uint16_t check_length = 1;
+    if (u1.bf.sour) check_length += 6;
+    if (u1.bf.dest) check_length += 6;
+    if (u1.bf.sour && u1.bf.usou) check_length += 6;
+    if (u1.bf.dest && u1.bf.udes) check_length += 6;
+    tlv.set_length(check_length);
+    tlv.dump_to(os);
+    os.write(reinterpret_cast<const char*>(&u1.b), sizeof(u1.b));
+    // TODO [ETH-PDU] check if there is need for htobe conversion
+    if (u1.bf.sour) {
+      mac_address_dump_to(os, source_mac_address, sizeof(source_mac_address));
+    }
+    if (u1.bf.dest) {
+      mac_address_dump_to(
+          os, destination_mac_address, sizeof(destination_mac_address));
+    }
+    if (u1.bf.sour && u1.bf.usou) {
+      mac_address_dump_to(
+          os, upper_source_mac_address, sizeof(upper_source_mac_address));
+    }
+    if (u1.bf.dest && u1.bf.udes) {
+      mac_address_dump_to(
+          os, upper_destination_mac_address,
+          sizeof(upper_destination_mac_address));
+    }
+  }
+  //--------
+  void load_from(std::istream& is) {
+    // tlv.load_from(is);
+    is.read(reinterpret_cast<char*>(&u1.b), sizeof(u1.b));
+    uint16_t check_length = 1;
+    if (u1.bf.sour) check_length += 6;
+    if (u1.bf.dest) check_length += 6;
+    if (u1.bf.sour && u1.bf.usou) check_length += 6;
+    if (u1.bf.dest && u1.bf.udes) check_length += 6;
+    if (tlv.get_length() != check_length) {
+      throw pfcp_tlv_bad_length_exception(
+          tlv.type, tlv.get_length(), __FILE__, __LINE__);
+    }
+    if (u1.bf.sour) {
+      mac_address_load_from(is, source_mac_address, sizeof(source_mac_address));
+    }
+    if (u1.bf.dest) {
+      mac_address_load_from(
+          is, destination_mac_address, sizeof(destination_mac_address));
+    }
+    if (u1.bf.sour && u1.bf.usou) {
+      mac_address_load_from(
+          is, upper_source_mac_address, sizeof(upper_source_mac_address));
+    }
+    if (u1.bf.dest && u1.bf.udes) {
+      mac_address_load_from(
+          is, upper_destination_mac_address,
+          sizeof(upper_destination_mac_address));
+    }
+  }
+  //--------
+  void to_core_type(pfcp_ies_container& s) {
+    pfcp::mac_address_t mac_address = {};
+    to_core_type(mac_address);
+    s.set(mac_address);
+  }
 };
 ////-------------------------------------
 //// IE C_TAG
@@ -8016,49 +8040,47 @@ public:
 //-------------------------------------
 // IE ETHERTYPE
 class pfcp_ethertype_ie : public pfcp_ie {
-public:
- uint16_t ethertype;
+ public:
+  uint16_t ethertype;
 
- //--------
- explicit pfcp_ethertype_ie(const pfcp::ethertype_t& b) : pfcp_ie(PFCP_IE_ETHERTYPE){
-   ethertype = b.ethertype;
-   tlv.set_length(sizeof(ethertype));
- }
- //--------
- pfcp_ethertype_ie() : pfcp_ie(PFCP_IE_ETHERTYPE){
-   ethertype = 0;
-   tlv.set_length(sizeof(ethertype));
- }
- //--------
- explicit pfcp_ethertype_ie(const pfcp_tlv& t) : pfcp_ie(t) {
-   ethertype = 0;
- };
- //--------
- void to_core_type(pfcp::ethertype_t& b) {
-   b.ethertype = ethertype;
- }
- //--------
- void dump_to(std::ostream& os) {
-   tlv.dump_to(os);
-   auto be_ethertype = htobe16(ethertype);
-   os.write(reinterpret_cast<const char*>(&be_ethertype), sizeof(be_ethertype));
- }
- //--------
- void load_from(std::istream& is) {
-   //tlv.load_from(is);
-   if (tlv.get_length() != sizeof(ethertype)) {
-     throw pfcp_tlv_bad_length_exception(tlv.type, tlv.get_length(),
-     __FILE__, __LINE__);
-   }
-   is.read(reinterpret_cast<char*>(&ethertype), sizeof(ethertype));
-   ethertype = be16toh(ethertype);
- }
- //--------
- void to_core_type(pfcp_ies_container& s) {
-     pfcp::ethertype_t ethertype = {};
-     to_core_type(ethertype);
-     s.set(ethertype);
- }
+  //--------
+  explicit pfcp_ethertype_ie(const pfcp::ethertype_t& b)
+      : pfcp_ie(PFCP_IE_ETHERTYPE) {
+    ethertype = b.ethertype;
+    tlv.set_length(sizeof(ethertype));
+  }
+  //--------
+  pfcp_ethertype_ie() : pfcp_ie(PFCP_IE_ETHERTYPE) {
+    ethertype = 0;
+    tlv.set_length(sizeof(ethertype));
+  }
+  //--------
+  explicit pfcp_ethertype_ie(const pfcp_tlv& t) : pfcp_ie(t) { ethertype = 0; };
+  //--------
+  void to_core_type(pfcp::ethertype_t& b) { b.ethertype = ethertype; }
+  //--------
+  void dump_to(std::ostream& os) {
+    tlv.dump_to(os);
+    auto be_ethertype = htobe16(ethertype);
+    os.write(
+        reinterpret_cast<const char*>(&be_ethertype), sizeof(be_ethertype));
+  }
+  //--------
+  void load_from(std::istream& is) {
+    // tlv.load_from(is);
+    if (tlv.get_length() != sizeof(ethertype)) {
+      throw pfcp_tlv_bad_length_exception(
+          tlv.type, tlv.get_length(), __FILE__, __LINE__);
+    }
+    is.read(reinterpret_cast<char*>(&ethertype), sizeof(ethertype));
+    ethertype = be16toh(ethertype);
+  }
+  //--------
+  void to_core_type(pfcp_ies_container& s) {
+    pfcp::ethertype_t ethertype = {};
+    to_core_type(ethertype);
+    s.set(ethertype);
+  }
 };
 ////-------------------------------------
 //// IE PROXYING
@@ -8108,55 +8130,59 @@ public:
 ////-------------------------------------
 // IE ETHERNET_FILTER_ID
 class pfcp_ethernet_filter_id_ie : public pfcp_ie {
-public:
- uint32_t ethernet_filter_id;
+ public:
+  uint32_t ethernet_filter_id;
 
- //--------
- explicit pfcp_ethernet_filter_id_ie(const pfcp::ethernet_filter_id_t& b) :
- pfcp_ie(PFCP_IE_ETHERNET_FILTER_ID){
-   ethernet_filter_id = b.ethernet_filter_id;
-   tlv.set_length(sizeof(ethernet_filter_id));
- }
- //--------
- pfcp_ethernet_filter_id_ie() : pfcp_ie(PFCP_IE_ETHERNET_FILTER_ID){
-   ethernet_filter_id = 0;
-   tlv.set_length(sizeof(ethernet_filter_id));
- }
- //--------
- explicit pfcp_ethernet_filter_id_ie(const pfcp_tlv& t) : pfcp_ie(t) {
-   ethernet_filter_id = 0;
- };
- //--------
- void to_core_type(pfcp::ethernet_filter_id_t& b) {
-   b.ethernet_filter_id = ethernet_filter_id;
- }
- //--------
- void dump_to(std::ostream& os) {
-   tlv.dump_to(os);
-   auto be_ethernet_filter_id = htobe32(ethernet_filter_id);
-   os.write(reinterpret_cast<const char*>(&be_ethernet_filter_id), sizeof(be_ethernet_filter_id));
- }
- //--------
- void load_from(std::istream& is) {
-   //tlv.load_from(is);
-   if (tlv.get_length() != sizeof(ethernet_filter_id)) {
-     throw pfcp_tlv_bad_length_exception(tlv.type, tlv.get_length(),
-     __FILE__, __LINE__);
-   }
-   is.read(reinterpret_cast<char*>(&ethernet_filter_id), sizeof(ethernet_filter_id));
-   ethernet_filter_id = be32toh(ethernet_filter_id);
- }
- //--------
- void to_core_type(pfcp_ies_container& s) {
-     pfcp::ethernet_filter_id_t ethernet_filter_id = {};
-     to_core_type(ethernet_filter_id);
-     s.set(ethernet_filter_id);
- }
+  //--------
+  explicit pfcp_ethernet_filter_id_ie(const pfcp::ethernet_filter_id_t& b)
+      : pfcp_ie(PFCP_IE_ETHERNET_FILTER_ID) {
+    ethernet_filter_id = b.ethernet_filter_id;
+    tlv.set_length(sizeof(ethernet_filter_id));
+  }
+  //--------
+  pfcp_ethernet_filter_id_ie() : pfcp_ie(PFCP_IE_ETHERNET_FILTER_ID) {
+    ethernet_filter_id = 0;
+    tlv.set_length(sizeof(ethernet_filter_id));
+  }
+  //--------
+  explicit pfcp_ethernet_filter_id_ie(const pfcp_tlv& t) : pfcp_ie(t) {
+    ethernet_filter_id = 0;
+  };
+  //--------
+  void to_core_type(pfcp::ethernet_filter_id_t& b) {
+    b.ethernet_filter_id = ethernet_filter_id;
+  }
+  //--------
+  void dump_to(std::ostream& os) {
+    tlv.dump_to(os);
+    auto be_ethernet_filter_id = htobe32(ethernet_filter_id);
+    os.write(
+        reinterpret_cast<const char*>(&be_ethernet_filter_id),
+        sizeof(be_ethernet_filter_id));
+  }
+  //--------
+  void load_from(std::istream& is) {
+    // tlv.load_from(is);
+    if (tlv.get_length() != sizeof(ethernet_filter_id)) {
+      throw pfcp_tlv_bad_length_exception(
+          tlv.type, tlv.get_length(), __FILE__, __LINE__);
+    }
+    is.read(
+        reinterpret_cast<char*>(&ethernet_filter_id),
+        sizeof(ethernet_filter_id));
+    ethernet_filter_id = be32toh(ethernet_filter_id);
+  }
+  //--------
+  void to_core_type(pfcp_ies_container& s) {
+    pfcp::ethernet_filter_id_t ethernet_filter_id = {};
+    to_core_type(ethernet_filter_id);
+    s.set(ethernet_filter_id);
+  }
 };
 //-------------------------------------
 // IE ETHERNET_FILTER_PROPERTIES
 class pfcp_ethernet_filter_properties_ie : public pfcp_ie {
-public:
+ public:
   union {
     struct {
       uint8_t bide : 1;
@@ -8165,101 +8191,104 @@ public:
     uint8_t b;
   } u1;
 
- //--------
- explicit pfcp_ethernet_filter_properties_ie(const pfcp::ethernet_filter_properties_t&
- b) : pfcp_ie(PFCP_IE_ETHERNET_FILTER_PROPERTIES){
-   u1.b = 0;
-   u1.bf.bide = b.bide;
-   tlv.set_length(1);
- }
- //--------
- pfcp_ethernet_filter_properties_ie() :
- pfcp_ie(PFCP_IE_ETHERNET_FILTER_PROPERTIES){
-   u1.b = 0;
-   tlv.set_length(1);
- }
- //--------
- explicit pfcp_ethernet_filter_properties_ie(const pfcp_tlv& t) : pfcp_ie(t) {};
- //--------
- void to_core_type(pfcp::ethernet_filter_properties_t& b) {
-  b.bide = u1.bf.bide;
- }
- //--------
- void dump_to(std::ostream& os) {
-   tlv.dump_to(os);
-   os.write(reinterpret_cast<const char*>(&u1.b), sizeof(u1.b));
- }
- //--------
- void load_from(std::istream& is) {
-   //tlv.load_from(is);
-   if (tlv.get_length() != 1) {
-     throw pfcp_tlv_bad_length_exception(tlv.type, tlv.get_length(),
-     __FILE__, __LINE__);
-   }
-   is.read(reinterpret_cast<char*>(&u1.b), sizeof(u1.b));
- }
- //--------
- void to_core_type(pfcp_ies_container& s) {
-     pfcp::ethernet_filter_properties_t ethernet_filter_properties = {};
-     to_core_type(ethernet_filter_properties);
-     s.set(ethernet_filter_properties);
- }
+  //--------
+  explicit pfcp_ethernet_filter_properties_ie(
+      const pfcp::ethernet_filter_properties_t& b)
+      : pfcp_ie(PFCP_IE_ETHERNET_FILTER_PROPERTIES) {
+    u1.b       = 0;
+    u1.bf.bide = b.bide;
+    tlv.set_length(1);
+  }
+  //--------
+  pfcp_ethernet_filter_properties_ie()
+      : pfcp_ie(PFCP_IE_ETHERNET_FILTER_PROPERTIES) {
+    u1.b = 0;
+    tlv.set_length(1);
+  }
+  //--------
+  explicit pfcp_ethernet_filter_properties_ie(const pfcp_tlv& t) : pfcp_ie(t){};
+  //--------
+  void to_core_type(pfcp::ethernet_filter_properties_t& b) {
+    b.bide = u1.bf.bide;
+  }
+  //--------
+  void dump_to(std::ostream& os) {
+    tlv.dump_to(os);
+    os.write(reinterpret_cast<const char*>(&u1.b), sizeof(u1.b));
+  }
+  //--------
+  void load_from(std::istream& is) {
+    // tlv.load_from(is);
+    if (tlv.get_length() != 1) {
+      throw pfcp_tlv_bad_length_exception(
+          tlv.type, tlv.get_length(), __FILE__, __LINE__);
+    }
+    is.read(reinterpret_cast<char*>(&u1.b), sizeof(u1.b));
+  }
+  //--------
+  void to_core_type(pfcp_ies_container& s) {
+    pfcp::ethernet_filter_properties_t ethernet_filter_properties = {};
+    to_core_type(ethernet_filter_properties);
+    s.set(ethernet_filter_properties);
+  }
 };
 
 //-------------------------------------
 // IE ETHERNET_PACKET_FILTER
 class pfcp_ethernet_packet_filter_ie : public pfcp_grouped_ie {
-public:
- //--------
- explicit pfcp_ethernet_packet_filter_ie(const pfcp::ethernet_packet_filter& b) :
- pfcp_grouped_ie(PFCP_IE_ETHERNET_PACKET_FILTER){
-   tlv.set_length(0);
-   // ........
-  if (b.ethernet_filter_id.first) {
-    std::shared_ptr<pfcp_ethernet_filter_id_ie> sie(
-        new pfcp_ethernet_filter_id_ie(b.ethernet_filter_id.second));
-    add_ie(sie);
+ public:
+  //--------
+  explicit pfcp_ethernet_packet_filter_ie(const pfcp::ethernet_packet_filter& b)
+      : pfcp_grouped_ie(PFCP_IE_ETHERNET_PACKET_FILTER) {
+    tlv.set_length(0);
+    // ........
+    if (b.ethernet_filter_id.first) {
+      std::shared_ptr<pfcp_ethernet_filter_id_ie> sie(
+          new pfcp_ethernet_filter_id_ie(b.ethernet_filter_id.second));
+      add_ie(sie);
+    }
+    if (b.ethernet_filter_properties.first) {
+      std::shared_ptr<pfcp_ethernet_filter_properties_ie> sie(
+          new pfcp_ethernet_filter_properties_ie(
+              b.ethernet_filter_properties.second));
+      add_ie(sie);
+    }
+    if (b.mac_address.first) {
+      std::shared_ptr<pfcp_mac_address_ie> sie(
+          new pfcp_mac_address_ie(b.mac_address.second));
+      add_ie(sie);
+    }
+    if (b.ethertype.first) {
+      std::shared_ptr<pfcp_ethertype_ie> sie(
+          new pfcp_ethertype_ie(b.ethertype.second));
+      add_ie(sie);
+    }
+    // TODO [ETH-PDU] c_tag
+    // TODO [ETH-PDU] s_tag
+    if (b.sdf_filter.first) {
+      std::shared_ptr<pfcp_sdf_filter_ie> sie(
+          new pfcp_sdf_filter_ie(b.sdf_filter.second));
+      add_ie(sie);
+    }
   }
-  if (b.ethernet_filter_properties.first) {
-    std::shared_ptr<pfcp_ethernet_filter_properties_ie> sie(
-        new pfcp_ethernet_filter_properties_ie(b.ethernet_filter_properties.second));
-    add_ie(sie);
-  }
-  if (b.mac_address.first) {
-    std::shared_ptr<pfcp_mac_address_ie> sie(
-        new pfcp_mac_address_ie(b.mac_address.second));
-    add_ie(sie);
-  }
-  if (b.ethertype.first) {
-    std::shared_ptr<pfcp_ethertype_ie> sie(
-        new pfcp_ethertype_ie(b.ethertype.second));
-    add_ie(sie);
-  }
-  // TODO [ETH-PDU] c_tag
-  // TODO [ETH-PDU] s_tag
-  if (b.sdf_filter.first) {
-    std::shared_ptr<pfcp_sdf_filter_ie> sie(
-        new pfcp_sdf_filter_ie(b.sdf_filter.second));
-    add_ie(sie);
-  }
-
- }
- //--------
- pfcp_ethernet_packet_filter_ie() : pfcp_grouped_ie(PFCP_IE_ETHERNET_PACKET_FILTER) {}
- //--------
- explicit pfcp_ethernet_packet_filter_ie(const pfcp_tlv& t) : pfcp_grouped_ie(t) {}
- //--------
- void to_core_type(pfcp::ethernet_packet_filter& c) {
+  //--------
+  pfcp_ethernet_packet_filter_ie()
+      : pfcp_grouped_ie(PFCP_IE_ETHERNET_PACKET_FILTER) {}
+  //--------
+  explicit pfcp_ethernet_packet_filter_ie(const pfcp_tlv& t)
+      : pfcp_grouped_ie(t) {}
+  //--------
+  void to_core_type(pfcp::ethernet_packet_filter& c) {
     for (auto sie : ies) {
       sie.get()->to_core_type(c);
     }
- }
- //--------
- void to_core_type(pfcp_ies_container& s) {
-     pfcp::ethernet_packet_filter ethernet_packet_filter = {};
-     to_core_type(ethernet_packet_filter);
-     s.set(ethernet_packet_filter);
- }
+  }
+  //--------
+  void to_core_type(pfcp_ies_container& s) {
+    pfcp::ethernet_packet_filter ethernet_packet_filter = {};
+    to_core_type(ethernet_packet_filter);
+    s.set(ethernet_packet_filter);
+  }
 };
 ////-------------------------------------
 //// IE SUGGESTED_BUFFERING_PACKETS_COUNT
@@ -8515,8 +8544,8 @@ class pfcp_user_id_ie : public pfcp_ie {
 //-------------------------------------
 // IE ETHERNET_PDU_SESSION_INFORMATION
 class pfcp_ethernet_pdu_session_information_ie : public pfcp_ie {
-public:
- union {
+ public:
+  union {
     struct {
       uint8_t ethi : 1;
       uint8_t spare : 7;
@@ -8524,49 +8553,50 @@ public:
     uint8_t b;
   } u1;
 
- //--------
- explicit pfcp_ethernet_pdu_session_information_ie(const
- pfcp::ethernet_pdu_session_information_t& b) :
- pfcp_ie(PFCP_IE_ETHERNET_PDU_SESSION_INFORMATION){
-   u1.b = 0;
-   u1.bf.ethi = b.ethi;
-   tlv.set_length(1);
- }
- //--------
- pfcp_ethernet_pdu_session_information_ie() :
- pfcp_ie(PFCP_IE_ETHERNET_PDU_SESSION_INFORMATION){
-   u1.b = 0;
-   tlv.set_length(1);
- }
- //--------
- explicit pfcp_ethernet_pdu_session_information_ie(const pfcp_tlv& t) : pfcp_ie(t) {
-   u1.b = 0;
- };
- //--------
- void to_core_type(pfcp::ethernet_pdu_session_information_t& b) {
-   b.ethi = u1.bf.ethi;
- }
- //--------
- void dump_to(std::ostream& os) {
-   tlv.dump_to(os);
-   os.write(reinterpret_cast<const char*>(&u1.b), sizeof(u1.b));
- }
- //--------
- void load_from(std::istream& is) {
-   //tlv.load_from(is);
-   if (tlv.get_length() != 1) {
-     throw pfcp_tlv_bad_length_exception(tlv.type, tlv.get_length(),
-     __FILE__, __LINE__);
-   }
-   is.read(reinterpret_cast<char*>(&u1.b), sizeof(u1.b));
- }
- //--------
- void to_core_type(pfcp_ies_container& s) {
-     pfcp::ethernet_pdu_session_information_t
-     ethernet_pdu_session_information = {};
-     to_core_type(ethernet_pdu_session_information);
-     s.set(ethernet_pdu_session_information);
- }
+  //--------
+  explicit pfcp_ethernet_pdu_session_information_ie(
+      const pfcp::ethernet_pdu_session_information_t& b)
+      : pfcp_ie(PFCP_IE_ETHERNET_PDU_SESSION_INFORMATION) {
+    u1.b       = 0;
+    u1.bf.ethi = b.ethi;
+    tlv.set_length(1);
+  }
+  //--------
+  pfcp_ethernet_pdu_session_information_ie()
+      : pfcp_ie(PFCP_IE_ETHERNET_PDU_SESSION_INFORMATION) {
+    u1.b = 0;
+    tlv.set_length(1);
+  }
+  //--------
+  explicit pfcp_ethernet_pdu_session_information_ie(const pfcp_tlv& t)
+      : pfcp_ie(t) {
+    u1.b = 0;
+  };
+  //--------
+  void to_core_type(pfcp::ethernet_pdu_session_information_t& b) {
+    b.ethi = u1.bf.ethi;
+  }
+  //--------
+  void dump_to(std::ostream& os) {
+    tlv.dump_to(os);
+    os.write(reinterpret_cast<const char*>(&u1.b), sizeof(u1.b));
+  }
+  //--------
+  void load_from(std::istream& is) {
+    // tlv.load_from(is);
+    if (tlv.get_length() != 1) {
+      throw pfcp_tlv_bad_length_exception(
+          tlv.type, tlv.get_length(), __FILE__, __LINE__);
+    }
+    is.read(reinterpret_cast<char*>(&u1.b), sizeof(u1.b));
+  }
+  //--------
+  void to_core_type(pfcp_ies_container& s) {
+    pfcp::ethernet_pdu_session_information_t ethernet_pdu_session_information =
+        {};
+    to_core_type(ethernet_pdu_session_information);
+    s.set(ethernet_pdu_session_information);
+  }
 };
 ////-------------------------------------
 //// IE ETHERNET_TRAFFIC_INFORMATION
@@ -9307,12 +9337,13 @@ class pfcp_pdi_ie : public pfcp_grouped_ie {
     }
     if (b.ethernet_pdu_session_information.first) {
       std::shared_ptr<pfcp_ethernet_pdu_session_information_ie> sie(
-              new pfcp_ethernet_pdu_session_information_ie(b.ethernet_pdu_session_information.second));
+          new pfcp_ethernet_pdu_session_information_ie(
+              b.ethernet_pdu_session_information.second));
       add_ie(sie);
     }
     if (b.ethernet_packet_filter.first) {
       std::shared_ptr<pfcp_ethernet_packet_filter_ie> sie(
-        new pfcp_ethernet_packet_filter_ie(b.ethernet_packet_filter.second));
+          new pfcp_ethernet_packet_filter_ie(b.ethernet_packet_filter.second));
       add_ie(sie);
     }
     if (b.qfi.first) {

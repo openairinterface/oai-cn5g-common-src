@@ -75,6 +75,8 @@ class conv {
       const std::string& amf_pointer, std::string& amf_id);
   static void convert_string_2_hex(
       const std::string& input_str, std::string& output_str);
+  static void string_to_uint_mac_address(
+      const std::string& macStr, uint8_t source_mac_address[6], char delimiter);
 
   /**
    * Replaces primitive JSON string values with integers or bools if possible

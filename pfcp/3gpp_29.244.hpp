@@ -7808,6 +7808,10 @@ public:
  explicit pfcp_mac_address_ie(const pfcp::mac_address_t& b) :
  pfcp_ie(PFCP_IE_MAC_ADDRESS){
    u1.b                = 0;
+   u1.bf.sour = b.sour;
+   u1.bf.dest = b.dest;
+   u1.bf.usou = b.usou;
+   u1.bf.udes = b.udes;
    memset(source_mac_address, 0, sizeof(source_mac_address));
    memset(destination_mac_address, 0, sizeof(destination_mac_address));
    memset(upper_source_mac_address, 0, sizeof(upper_source_mac_address));
@@ -9299,6 +9303,11 @@ class pfcp_pdi_ie : public pfcp_grouped_ie {
     if (b.application_id.first) {
       std::shared_ptr<pfcp_application_id_ie> sie(
           new pfcp_application_id_ie(b.application_id.second));
+      add_ie(sie);
+    }
+    if (b.ethernet_pdu_session_information.first) {
+      std::shared_ptr<pfcp_ethernet_pdu_session_information_ie> sie(
+              new pfcp_ethernet_pdu_session_information_ie(b.ethernet_pdu_session_information.second));
       add_ie(sie);
     }
     if (b.ethernet_packet_filter.first) {

@@ -151,6 +151,7 @@ int Type1NasIe::Decode(
     }
   }
 
+  GetValue();  // Update value in the derived classes
   if (is_iei) {
     return decoded_size;  // 1 octet
   } else {

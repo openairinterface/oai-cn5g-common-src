@@ -205,7 +205,6 @@ class QosData {
   friend void to_json(nlohmann::json& j, const QosData& o);
   friend void from_json(const nlohmann::json& j, QosData& o);
 
- protected:
   std::string m_QosId;
 
   int32_t m_r_5qi;

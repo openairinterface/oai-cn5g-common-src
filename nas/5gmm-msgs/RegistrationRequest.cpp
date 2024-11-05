@@ -140,8 +140,7 @@ void RegistrationRequest::SetNgKsi(uint8_t tsc, uint8_t key_set_id) {
 
 //------------------------------------------------------------------------------
 bool RegistrationRequest::GetNgKsi(uint8_t& ng_ksi) const {
-  ng_ksi = (ie_ng_ksi_.GetTypeOfSecurityContext()) |
-           ie_ng_ksi_.GetNasKeyIdentifier();
+  ng_ksi = ie_ng_ksi_.GetNgKsi();
   return true;
 }
 
@@ -241,9 +240,7 @@ void RegistrationRequest::SetNonCurrentNativeNasKSI(
 //------------------------------------------------------------------------------
 bool RegistrationRequest::GetNonCurrentNativeNasKSI(uint8_t& value) const {
   if (ie_non_current_native_nas_ksi_.has_value()) {
-    value |=
-        (ie_non_current_native_nas_ksi_.value().GetTypeOfSecurityContext()) |
-        (ie_non_current_native_nas_ksi_.value().GetNasKeyIdentifier());
+    value |= ie_non_current_native_nas_ksi_.value().GetNgKsi();
     return true;
   } else {
     return false;

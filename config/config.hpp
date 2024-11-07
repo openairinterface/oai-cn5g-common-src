@@ -57,7 +57,7 @@ const std::string HOSTNAME_VALIDATOR_REGEX =
 const std::string API_VERSION_REGEX = "v1|v2";
 const std::string HOST_VALIDATOR_REGEX =
     IPV4_ADDRESS_VALIDATOR_REGEX + "|" + HOSTNAME_VALIDATOR_REGEX;
-const std::string PDU_SESSION_TYPE_REGEX = "IPV4|IPV6|IPV4V6";
+const std::string PDU_SESSION_TYPE_REGEX = "IPV4|IPV6|IPV4V6|ETHERNET";
 
 const uint16_t PORT_MIN_VALUE = 1;
 const uint16_t PORT_MAX_VALUE = 65535;

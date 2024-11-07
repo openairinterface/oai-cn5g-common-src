@@ -294,3 +294,22 @@ bool xgpp_conv::endpoint_to_gtp_u_peer_address(
       return false;
   }
 }
+
+//------------------------------------------------------------------------------
+u_int8_t xgpp_conv::pdu_session_type_to_ngap_pdu_session_type(
+    u_int8_t pdu_session_type_24_501) {
+  switch (pdu_session_type_24_501) {
+    case pdu_session_type_e::PDU_SESSION_TYPE_E_IPV4:
+      return 0;
+    case pdu_session_type_e::PDU_SESSION_TYPE_E_IPV6:
+      return 1;
+    case pdu_session_type_e::PDU_SESSION_TYPE_E_IPV4V6:
+      return 2;
+    case pdu_session_type_e::PDU_SESSION_TYPE_E_ETHERNET:
+      return 3;
+    case pdu_session_type_e::PDU_SESSION_TYPE_E_UNSTRUCTURED:
+      return 4;
+    default:
+      return 5;
+  }
+}

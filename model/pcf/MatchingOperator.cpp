@@ -49,10 +49,7 @@ bool MatchingOperator::validate(std::stringstream& msg, const std::string& pathP
 
 bool MatchingOperator::operator==(const MatchingOperator& rhs) const
 {
-    return
-    
-    
-    ;
+    return true; // TODO
 }
 
 bool MatchingOperator::operator!=(const MatchingOperator& rhs) const

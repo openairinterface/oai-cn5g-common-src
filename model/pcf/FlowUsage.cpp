@@ -49,10 +49,7 @@ bool FlowUsage::validate(std::stringstream& msg, const std::string& pathPrefix) 
 
 bool FlowUsage::operator==(const FlowUsage& rhs) const
 {
-    return
-    
-    
-    ;
+    return true; // TODO
 }
 
 bool FlowUsage::operator!=(const FlowUsage& rhs) const

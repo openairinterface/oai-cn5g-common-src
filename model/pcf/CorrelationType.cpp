@@ -49,10 +49,7 @@ bool CorrelationType::validate(std::stringstream& msg, const std::string& pathPr
 
 bool CorrelationType::operator==(const CorrelationType& rhs) const
 {
-    return
-    
-    
-    ;
+    return true; // TODO
 }
 
 bool CorrelationType::operator!=(const CorrelationType& rhs) const

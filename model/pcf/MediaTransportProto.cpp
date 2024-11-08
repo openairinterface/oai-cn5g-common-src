@@ -49,10 +49,7 @@ bool MediaTransportProto::validate(std::stringstream& msg, const std::string& pa
 
 bool MediaTransportProto::operator==(const MediaTransportProto& rhs) const
 {
-    return
-    
-    
-    ;
+    return true; // TODO
 }
 
 bool MediaTransportProto::operator!=(const MediaTransportProto& rhs) const

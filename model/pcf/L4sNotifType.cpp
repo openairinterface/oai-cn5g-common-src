@@ -49,10 +49,7 @@ bool L4sNotifType::validate(std::stringstream& msg, const std::string& pathPrefi
 
 bool L4sNotifType::operator==(const L4sNotifType& rhs) const
 {
-    return
-    
-    
-    ;
+    return true; // TODO
 }
 
 bool L4sNotifType::operator!=(const L4sNotifType& rhs) const

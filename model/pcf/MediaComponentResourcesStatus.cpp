@@ -49,10 +49,7 @@ bool MediaComponentResourcesStatus::validate(std::stringstream& msg, const std::
 
 bool MediaComponentResourcesStatus::operator==(const MediaComponentResourcesStatus& rhs) const
 {
-    return
-    
-    
-    ;
+    return true; // TODO
 }
 
 bool MediaComponentResourcesStatus::operator!=(const MediaComponentResourcesStatus& rhs) const

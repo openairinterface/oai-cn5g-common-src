@@ -49,10 +49,7 @@ bool MediaType::validate(std::stringstream& msg, const std::string& pathPrefix) 
 
 bool MediaType::operator==(const MediaType& rhs) const
 {
-    return
-    
-    
-    ;
+    return true; // TODO
 }
 
 bool MediaType::operator!=(const MediaType& rhs) const

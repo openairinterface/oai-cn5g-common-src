@@ -49,10 +49,7 @@ bool MpsAction::validate(std::stringstream& msg, const std::string& pathPrefix) 
 
 bool MpsAction::operator==(const MpsAction& rhs) const
 {
-    return
-    
-    
-    ;
+    return true; // TODO
 }
 
 bool MpsAction::operator!=(const MpsAction& rhs) const

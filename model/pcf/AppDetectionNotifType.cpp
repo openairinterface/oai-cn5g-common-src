@@ -49,10 +49,7 @@ bool AppDetectionNotifType::validate(std::stringstream& msg, const std::string& 
 
 bool AppDetectionNotifType::operator==(const AppDetectionNotifType& rhs) const
 {
-    return
-    
-    
-    ;
+    return true; // TODO
 }
 
 bool AppDetectionNotifType::operator!=(const AppDetectionNotifType& rhs) const

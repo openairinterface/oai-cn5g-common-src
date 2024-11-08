@@ -49,10 +49,7 @@ bool FinalUnitAction::validate(std::stringstream& msg, const std::string& pathPr
 
 bool FinalUnitAction::operator==(const FinalUnitAction& rhs) const
 {
-    return
-    
-    
-    ;
+    return true; // TODO
 }
 
 bool FinalUnitAction::operator!=(const FinalUnitAction& rhs) const

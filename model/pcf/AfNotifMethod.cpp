@@ -49,10 +49,7 @@ bool AfNotifMethod::validate(std::stringstream& msg, const std::string& pathPref
 
 bool AfNotifMethod::operator==(const AfNotifMethod& rhs) const
 {
-    return
-    
-    
-    ;
+    return true; // TODO
 }
 
 bool AfNotifMethod::operator!=(const AfNotifMethod& rhs) const

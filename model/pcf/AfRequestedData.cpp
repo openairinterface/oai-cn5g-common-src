@@ -49,10 +49,7 @@ bool AfRequestedData::validate(std::stringstream& msg, const std::string& pathPr
 
 bool AfRequestedData::operator==(const AfRequestedData& rhs) const
 {
-    return
-    
-    
-    ;
+    return true; // TODO
 }
 
 bool AfRequestedData::operator!=(const AfRequestedData& rhs) const

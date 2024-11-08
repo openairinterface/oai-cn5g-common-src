@@ -49,10 +49,7 @@ bool AfEvent::validate(std::stringstream& msg, const std::string& pathPrefix) co
 
 bool AfEvent::operator==(const AfEvent& rhs) const
 {
-    return
-    
-    
-    ;
+    return true; // TODO
 }
 
 bool AfEvent::operator!=(const AfEvent& rhs) const

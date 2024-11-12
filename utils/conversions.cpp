@@ -447,7 +447,7 @@ void conv::fix_primitive_json_values(nlohmann::json& j, bool parse_hex_values) {
       // we have to hardcode SD value here, since 3GPP format doesn't include
       // prefix 0x -> There is no way how we can detect this automatically so
       // then, stoi just takes base 10 and we have wrong values
-      if (elem.key() == "sd" or elem.key() == "ethType") continue;
+      if (elem.key() == "sd" || elem.key() == "ethType") continue;
 
       try {
         std::string e = elem.value();

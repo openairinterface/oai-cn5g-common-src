@@ -49,10 +49,7 @@ bool UplinkDownlinkSupport::validate(std::stringstream& msg, const std::string& 
 
 bool UplinkDownlinkSupport::operator==(const UplinkDownlinkSupport& rhs) const
 {
-    return
-    
-    
-    ;
+    return true; // TODO
 }
 
 bool UplinkDownlinkSupport::operator!=(const UplinkDownlinkSupport& rhs) const

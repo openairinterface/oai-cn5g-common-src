@@ -49,10 +49,7 @@ bool RequiredAccessInfo::validate(std::stringstream& msg, const std::string& pat
 
 bool RequiredAccessInfo::operator==(const RequiredAccessInfo& rhs) const
 {
-    return
-    
-    
-    ;
+    return true; // TODO
 }
 
 bool RequiredAccessInfo::operator!=(const RequiredAccessInfo& rhs) const

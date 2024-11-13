@@ -49,10 +49,7 @@ bool ServAuthInfo::validate(std::stringstream& msg, const std::string& pathPrefi
 
 bool ServAuthInfo::operator==(const ServAuthInfo& rhs) const
 {
-    return
-    
-    
-    ;
+    return true; // TODO
 }
 
 bool ServAuthInfo::operator!=(const ServAuthInfo& rhs) const

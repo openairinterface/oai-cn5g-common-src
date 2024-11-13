@@ -49,10 +49,7 @@ bool PduSessionStatus::validate(std::stringstream& msg, const std::string& pathP
 
 bool PduSessionStatus::operator==(const PduSessionStatus& rhs) const
 {
-    return
-    
-    
-    ;
+    return true; // TODO
 }
 
 bool PduSessionStatus::operator!=(const PduSessionStatus& rhs) const

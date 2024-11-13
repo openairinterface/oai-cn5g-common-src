@@ -49,10 +49,7 @@ bool PreemptionControlInformation::validate(std::stringstream& msg, const std::s
 
 bool PreemptionControlInformation::operator==(const PreemptionControlInformation& rhs) const
 {
-    return
-    
-    
-    ;
+    return true; // TODO
 }
 
 bool PreemptionControlInformation::operator!=(const PreemptionControlInformation& rhs) const

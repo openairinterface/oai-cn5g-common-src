@@ -49,10 +49,7 @@ bool RtpHeaderExtType::validate(std::stringstream& msg, const std::string& pathP
 
 bool RtpHeaderExtType::operator==(const RtpHeaderExtType& rhs) const
 {
-    return
-    
-    
-    ;
+    return true; // TODO
 }
 
 bool RtpHeaderExtType::operator!=(const RtpHeaderExtType& rhs) const

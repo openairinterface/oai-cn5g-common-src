@@ -49,10 +49,7 @@ bool SatelliteBackhaulCategory::validate(std::stringstream& msg, const std::stri
 
 bool SatelliteBackhaulCategory::operator==(const SatelliteBackhaulCategory& rhs) const
 {
-    return
-    
-    
-    ;
+    return true; // TODO
 }
 
 bool SatelliteBackhaulCategory::operator!=(const SatelliteBackhaulCategory& rhs) const

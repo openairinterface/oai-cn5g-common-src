@@ -49,10 +49,7 @@ bool ServiceInfoStatus::validate(std::stringstream& msg, const std::string& path
 
 bool ServiceInfoStatus::operator==(const ServiceInfoStatus& rhs) const
 {
-    return
-    
-    
-    ;
+    return true; // TODO
 }
 
 bool ServiceInfoStatus::operator!=(const ServiceInfoStatus& rhs) const

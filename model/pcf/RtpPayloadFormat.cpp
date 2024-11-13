@@ -49,10 +49,7 @@ bool RtpPayloadFormat::validate(std::stringstream& msg, const std::string& pathP
 
 bool RtpPayloadFormat::operator==(const RtpPayloadFormat& rhs) const
 {
-    return
-    
-    
-    ;
+    return true; // TODO
 }
 
 bool RtpPayloadFormat::operator!=(const RtpPayloadFormat& rhs) const

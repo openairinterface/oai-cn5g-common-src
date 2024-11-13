@@ -49,10 +49,7 @@ bool NoProfileMatchReason::validate(std::stringstream& msg, const std::string& p
 
 bool NoProfileMatchReason::operator==(const NoProfileMatchReason& rhs) const
 {
-    return
-    
-    
-    ;
+    return true; // TODO
 }
 
 bool NoProfileMatchReason::operator!=(const NoProfileMatchReason& rhs) const

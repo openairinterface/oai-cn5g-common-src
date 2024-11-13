@@ -49,10 +49,7 @@ bool PrioritySharingIndicator::validate(std::stringstream& msg, const std::strin
 
 bool PrioritySharingIndicator::operator==(const PrioritySharingIndicator& rhs) const
 {
-    return
-    
-    
-    ;
+    return true; // TODO
 }
 
 bool PrioritySharingIndicator::operator!=(const PrioritySharingIndicator& rhs) const

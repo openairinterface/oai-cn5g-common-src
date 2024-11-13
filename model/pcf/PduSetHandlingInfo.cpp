@@ -49,10 +49,7 @@ bool PduSetHandlingInfo::validate(std::stringstream& msg, const std::string& pat
 
 bool PduSetHandlingInfo::operator==(const PduSetHandlingInfo& rhs) const
 {
-    return
-    
-    
-    ;
+    return true; // TODO
 }
 
 bool PduSetHandlingInfo::operator!=(const PduSetHandlingInfo& rhs) const

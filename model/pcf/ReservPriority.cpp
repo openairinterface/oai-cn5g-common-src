@@ -49,10 +49,7 @@ bool ReservPriority::validate(std::stringstream& msg, const std::string& pathPre
 
 bool ReservPriority::operator==(const ReservPriority& rhs) const
 {
-    return
-    
-    
-    ;
+    return true; // TODO
 }
 
 bool ReservPriority::operator!=(const ReservPriority& rhs) const

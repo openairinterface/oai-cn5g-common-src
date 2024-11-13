@@ -49,10 +49,7 @@ bool QosMonitoringParamType::validate(std::stringstream& msg, const std::string&
 
 bool QosMonitoringParamType::operator==(const QosMonitoringParamType& rhs) const
 {
-    return
-    
-    
-    ;
+    return true; // TODO
 }
 
 bool QosMonitoringParamType::operator!=(const QosMonitoringParamType& rhs) const

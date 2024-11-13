@@ -49,10 +49,7 @@ bool Rsn::validate(std::stringstream& msg, const std::string& pathPrefix) const
 
 bool Rsn::operator==(const Rsn& rhs) const
 {
-    return
-    
-    
-    ;
+    return true; // TODO
 }
 
 bool Rsn::operator!=(const Rsn& rhs) const

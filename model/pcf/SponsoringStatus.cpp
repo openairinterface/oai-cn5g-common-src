@@ -49,10 +49,7 @@ bool SponsoringStatus::validate(std::stringstream& msg, const std::string& pathP
 
 bool SponsoringStatus::operator==(const SponsoringStatus& rhs) const
 {
-    return
-    
-    
-    ;
+    return true; // TODO
 }
 
 bool SponsoringStatus::operator!=(const SponsoringStatus& rhs) const

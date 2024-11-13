@@ -49,10 +49,7 @@ bool SipForkingIndication::validate(std::stringstream& msg, const std::string& p
 
 bool SipForkingIndication::operator==(const SipForkingIndication& rhs) const
 {
-    return
-    
-    
-    ;
+    return true; // TODO
 }
 
 bool SipForkingIndication::operator!=(const SipForkingIndication& rhs) const

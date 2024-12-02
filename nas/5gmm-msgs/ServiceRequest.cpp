@@ -72,8 +72,7 @@ void ServiceRequest::SetNgKsi(uint8_t tsc, uint8_t key_set_id) {
 
 //------------------------------------------------------------------------------
 void ServiceRequest::GetNgKsi(uint8_t& ng_ksi) const {
-  ng_ksi = (ie_ng_ksi_.GetTypeOfSecurityContext()) |
-           ie_ng_ksi_.GetNasKeyIdentifier();
+  ng_ksi = ie_ng_ksi_.GetNgKsi();
 }
 
 //------------------------------------------------------------------------------

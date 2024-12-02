@@ -21,7 +21,7 @@
 
 #include "NgapUeMessage.hpp"
 
-#include "logger.hpp"
+#include "logger_base.hpp"
 
 namespace oai::ngap {
 

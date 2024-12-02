@@ -22,7 +22,7 @@
 #ifndef FILE_NGAP_UTILS_HPP_SEEN
 #define FILE_NGAP_UTILS_HPP_SEEN
 
-#include "logger.hpp"
+#include "logger_base.hpp"
 #include "utils.hpp"
 
 extern "C" {

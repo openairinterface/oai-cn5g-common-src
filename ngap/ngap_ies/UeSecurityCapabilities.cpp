@@ -21,8 +21,6 @@
 
 #include "UeSecurityCapabilities.hpp"
 
-#include "conversions.h"
-
 namespace oai::ngap {
 
 //------------------------------------------------------------------------------

@@ -67,7 +67,6 @@ class PreemptionCapability {
   friend void to_json(nlohmann::json& j, const PreemptionCapability_anyOf& o);
   friend void from_json(const nlohmann::json& j, PreemptionCapability_anyOf& o);
 
- protected:
   PreemptionCapability_anyOf m_value;
 };
 

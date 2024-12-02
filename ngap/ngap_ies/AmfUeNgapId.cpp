@@ -20,7 +20,6 @@
  */
 
 #include "AmfUeNgapId.hpp"
-#include "logger.hpp"
 
 namespace oai::ngap {
 

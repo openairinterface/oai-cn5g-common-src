@@ -21,7 +21,7 @@
 
 #include "InitialUeMessage.hpp"
 
-#include "logger.hpp"
+#include "logger_base.hpp"
 #include "utils.hpp"
 
 namespace oai::ngap {
@@ -59,13 +59,16 @@ void InitialUeMessageMsg::setRanUeNgapId(const uint32_t& value) {
 
   int ret = m_RanUeNgapId.encode(ie->value.choice.RAN_UE_NGAP_ID);
   if (!ret) {
-    Logger::ngap().error("Encode RAN_UE_NGAP_ID IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode RAN_UE_NGAP_ID IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
   ret = ASN_SEQUENCE_ADD(&m_InitialUEMessageIes->protocolIEs.list, ie);
-  if (ret != 0) Logger::ngap().error("Encode RAN_UE_NGAP_ID IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode RAN_UE_NGAP_ID IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -80,13 +83,16 @@ void InitialUeMessageMsg::setNasPdu(const bstring& pdu) {
 
   int ret = m_NasPdu.encode(ie->value.choice.NAS_PDU);
   if (!ret) {
-    Logger::ngap().error("Encode NAS PDU IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode NAS PDU IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
   ret = ASN_SEQUENCE_ADD(&m_InitialUEMessageIes->protocolIEs.list, ie);
-  if (ret != 0) Logger::ngap().error("Encode NAS PDU IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode NAS PDU IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -111,13 +117,16 @@ void InitialUeMessageMsg::setUserLocationInfoNr(
   int ret = m_UserLocationInformation.encode(
       ie->value.choice.UserLocationInformation);
   if (!ret) {
-    Logger::ngap().error("Encode UserLocationInformation IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode UserLocationInformation IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
   ret = ASN_SEQUENCE_ADD(&m_InitialUEMessageIes->protocolIEs.list, ie);
-  if (ret != 0) Logger::ngap().error("Encode UserLocationInformation IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode UserLocationInformation IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -134,13 +143,16 @@ void InitialUeMessageMsg::setRrcEstablishmentCause(
   int ret =
       m_RrcEstablishmentCause.encode(ie->value.choice.RRCEstablishmentCause);
   if (!ret) {
-    Logger::ngap().error("Encode RRCEstablishmentCause IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode RRCEstablishmentCause IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
   ret = ASN_SEQUENCE_ADD(&m_InitialUEMessageIes->protocolIEs.list, ie);
-  if (ret != 0) Logger::ngap().error("Encode RRCEstablishmentCause IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode RRCEstablishmentCause IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -157,13 +169,16 @@ void InitialUeMessageMsg::setUeContextRequest(
   int ret =
       m_UeContextRequest.value().encode(ie->value.choice.UEContextRequest);
   if (!ret) {
-    Logger::ngap().error("Encode UEContextRequest IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode UEContextRequest IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
   ret = ASN_SEQUENCE_ADD(&m_InitialUEMessageIes->protocolIEs.list, ie);
-  if (ret != 0) Logger::ngap().error("Encode UEContextRequest IE error");
+  if (ret != 0)
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode UEContextRequest IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -203,11 +218,13 @@ bool InitialUeMessageMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
       m_InitialUEMessageIes =
           &ngapPdu->choice.initiatingMessage->value.choice.InitialUEMessage;
     } else {
-      Logger::ngap().error("Check InitialUEMessage message error");
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .error("Check InitialUEMessage message error");
       return false;
     }
   } else {
-    Logger::ngap().error("Check MessageType error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Check MessageType error");
     return false;
   }
   for (int i = 0; i < m_InitialUEMessageIes->protocolIEs.list.count; i++) {
@@ -220,13 +237,16 @@ bool InitialUeMessageMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           if (!m_RanUeNgapId.decode(
                   m_InitialUEMessageIes->protocolIEs.list.array[i]
                       ->value.choice.RAN_UE_NGAP_ID)) {
-            Logger::ngap().error("Decoded NGAP RAN_UE_NGAP_ID IE error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error("Decoded NGAP RAN_UE_NGAP_ID IE error");
             return false;
           }
-          Logger::ngap().debug("Received RanUeNgapId %d ", m_RanUeNgapId.get());
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .debug("Received RanUeNgapId %d ", m_RanUeNgapId.get());
 
         } else {
-          Logger::ngap().error("Decoded NGAP RAN_UE_NGAP_ID IE error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .error("Decoded NGAP RAN_UE_NGAP_ID IE error");
           return false;
         }
       } break;
@@ -237,11 +257,13 @@ bool InitialUeMessageMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
                 Ngap_InitialUEMessage_IEs__value_PR_NAS_PDU) {
           if (!m_NasPdu.decode(m_InitialUEMessageIes->protocolIEs.list.array[i]
                                    ->value.choice.NAS_PDU)) {
-            Logger::ngap().error("Decoded NGAP NAS_PDU IE error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error("Decoded NGAP NAS_PDU IE error");
             return false;
           }
         } else {
-          Logger::ngap().error("Decoded NGAP NAS_PDU IE error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .error("Decoded NGAP NAS_PDU IE error");
           return false;
         }
       } break;
@@ -254,12 +276,13 @@ bool InitialUeMessageMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           if (!m_UserLocationInformation.decode(
                   m_InitialUEMessageIes->protocolIEs.list.array[i]
                       ->value.choice.UserLocationInformation)) {
-            Logger::ngap().error(
-                "Decoded NGAP UserLocationInformation IE error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error("Decoded NGAP UserLocationInformation IE error");
             return false;
           }
         } else {
-          Logger::ngap().error("Decoded NGAP UserLocationInformation IE error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .error("Decoded NGAP UserLocationInformation IE error");
           return false;
         }
       } break;
@@ -271,11 +294,13 @@ bool InitialUeMessageMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           if (!m_RrcEstablishmentCause.decode(
                   m_InitialUEMessageIes->protocolIEs.list.array[i]
                       ->value.choice.RRCEstablishmentCause)) {
-            Logger::ngap().error("Decoded NGAP RRCEstablishmentCause IE error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error("Decoded NGAP RRCEstablishmentCause IE error");
             return false;
           }
         } else {
-          Logger::ngap().error("Decoded NGAP RRCEstablishmentCause IE error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .error("Decoded NGAP RRCEstablishmentCause IE error");
           return false;
         }
       } break;
@@ -287,12 +312,14 @@ bool InitialUeMessageMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           UeContextRequest tmp = {};
           if (!tmp.decode(m_InitialUEMessageIes->protocolIEs.list.array[i]
                               ->value.choice.UEContextRequest)) {
-            Logger::ngap().error("Decoded NGAP UEContextRequest IE error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error("Decoded NGAP UEContextRequest IE error");
             return false;
           }
           m_UeContextRequest = std::optional<UeContextRequest>(tmp);
         } else {
-          Logger::ngap().error("Decoded NGAP UEContextRequest IE error");
+          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+              .error("Decoded NGAP UEContextRequest IE error");
           return false;
         }
 
@@ -306,7 +333,8 @@ bool InitialUeMessageMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           FiveGSTmsi tmp = {};
           if (!tmp.decode(m_InitialUEMessageIes->protocolIEs.list.array[i]
                               ->value.choice.FiveG_S_TMSI)) {
-            Logger::ngap().error("Decoded NGAP FiveG_S_TMSI IE error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error("Decoded NGAP FiveG_S_TMSI IE error");
             return false;
           }
           m_FiveGSTmsi = std::optional<FiveGSTmsi>(tmp);
@@ -320,7 +348,8 @@ bool InitialUeMessageMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           AmfSetId tmp = {};
           if (!tmp.decode(m_InitialUEMessageIes->protocolIEs.list.array[i]
                               ->value.choice.AMFSetID)) {
-            Logger::ngap().error("Decoded NGAP AMF Set ID IE error");
+            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+                .error("Decoded NGAP AMF Set ID IE error");
             return false;
           }
           m_AmfSetId = std::optional<AmfSetId>(tmp);
@@ -328,9 +357,10 @@ bool InitialUeMessageMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
 
       } break;
       default: {
-        Logger::ngap().warn(
-            "Not decoded IE %d",
-            m_InitialUEMessageIes->protocolIEs.list.array[i]->id);
+        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+            .warn(
+                "Not decoded IE %d",
+                m_InitialUEMessageIes->protocolIEs.list.array[i]->id);
         return true;
       }
     }

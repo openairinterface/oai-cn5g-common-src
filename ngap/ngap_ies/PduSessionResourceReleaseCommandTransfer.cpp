@@ -21,7 +21,7 @@
 
 #include "PduSessionResourceReleaseCommandTransfer.hpp"
 
-#include "logger.hpp"
+#include "logger_base.hpp"
 #include "ngap_utils.hpp"
 
 namespace oai::ngap {
@@ -52,7 +52,8 @@ void PduSessionResourceReleaseCommandTransfer::setCauseRadioNetwork(
   int ret =
       m_CauseValue.encode(m_PduSessionResourceReleaseCommandTransferIe->cause);
   if (!ret) {
-    Logger::ngap().error("Encode CauseRadioNetwork IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode CauseRadioNetwork IE error");
     return;
   }
 }
@@ -66,7 +67,8 @@ void PduSessionResourceReleaseCommandTransfer::setCauseTransport(
   int ret =
       m_CauseValue.encode(m_PduSessionResourceReleaseCommandTransferIe->cause);
   if (!ret) {
-    Logger::ngap().error("Encode CauseTransport IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode CauseTransport IE error");
     return;
   }
 }
@@ -80,7 +82,8 @@ void PduSessionResourceReleaseCommandTransfer::setCauseNas(
   int ret =
       m_CauseValue.encode(m_PduSessionResourceReleaseCommandTransferIe->cause);
   if (!ret) {
-    Logger::ngap().error("Encode CauseNas IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode CauseNas IE error");
     return;
   }
 }
@@ -94,7 +97,8 @@ void PduSessionResourceReleaseCommandTransfer::setCauseProtocol(
   int ret =
       m_CauseValue.encode(m_PduSessionResourceReleaseCommandTransferIe->cause);
   if (!ret) {
-    Logger::ngap().error("Encode CauseProtocol IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode CauseProtocol IE error");
     return;
   }
 }
@@ -108,7 +112,8 @@ void PduSessionResourceReleaseCommandTransfer::setCauseMisc(
   int ret =
       m_CauseValue.encode(m_PduSessionResourceReleaseCommandTransferIe->cause);
   if (!ret) {
-    Logger::ngap().error("Encode CauseMisc IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Encode CauseMisc IE error");
     return;
   }
 }
@@ -122,7 +127,8 @@ int PduSessionResourceReleaseCommandTransfer::encode(
   asn_enc_rval_t er = aper_encode_to_buffer(
       &asn_DEF_Ngap_PDUSessionResourceReleaseCommandTransfer, NULL,
       m_PduSessionResourceReleaseCommandTransferIe, buf, buf_size);
-  Logger::ngap().debug("er.encoded( %d)", er.encoded);
+  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+      .debug("er.encoded( %d)", er.encoded);
   return er.encoded;
 }
 
@@ -135,23 +141,28 @@ bool PduSessionResourceReleaseCommandTransfer::decode(
       (void**) &m_PduSessionResourceReleaseCommandTransferIe, buf, buf_size);
 
   if (rc.code == RC_OK) {
-    Logger::ngap().debug("Decoded successfully");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .debug("Decoded successfully");
   } else if (rc.code == RC_WMORE) {
-    Logger::ngap().debug("More data expected, call again");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .debug("More data expected, call again");
     return false;
   } else {
-    Logger::ngap().debug("Failure to decode data");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .debug("Failure to decode data");
     return false;
   }
 
-  Logger::ngap().debug("rc.consumed to decode %d", rc.consumed);
+  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+      .debug("rc.consumed to decode %d", rc.consumed);
   // asn_fprint(stderr,
   // &asn_DEF_Ngap_PDUSessionResourceSetupUnsuccessfulTransfer,
   // pduSessionResourceSetupUnsuccessfulTransferIEs);
 
   if (!m_CauseValue.decode(
           m_PduSessionResourceReleaseCommandTransferIe->cause)) {
-    Logger::ngap().error("Decode Cause IE error");
+    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+        .error("Decode Cause IE error");
     return false;
   }
   return true;

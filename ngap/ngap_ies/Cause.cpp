@@ -21,7 +21,7 @@
 
 #include "Cause.hpp"
 
-#include "logger.hpp"
+#include "logger_base.hpp"
 
 namespace oai::ngap {
 
@@ -69,7 +69,8 @@ bool Cause::encode(Ngap_Cause_t& cause) const {
       break;
     }
     default: {
-      Logger::ngap().warn("Cause Present error!");
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .warn("Cause Present error!");
       return false;
       break;
     }
@@ -97,7 +98,8 @@ bool Cause::decode(const Ngap_Cause_t& cause) {
       m_CauseValue = cause.choice.misc;
     } break;
     default: {
-      Logger::ngap().warn("Cause Present error!");
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .warn("Cause Present error!");
       return false;
     }
   }

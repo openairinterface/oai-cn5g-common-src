@@ -293,6 +293,9 @@ void local_interface::from_yaml(const YAML::Node& node) {
   if (node["interface_name"]) {
     m_if_name.from_yaml(node["interface_name"]);
   }
+  if (node["ip_override"]) {
+    m_ip_override.from_yaml(node["ip_override"]);
+  }
   m_set                = true;
   m_is_local_interface = true;
 }
@@ -386,6 +389,13 @@ void local_interface::validate() {
   }
   m_mtu   = _mtu;
   m_addr4 = _addr4;
+
+  m_ip_override.validate();
+  if (m_ip_override.is_set()) {
+    m_addr4_override = safe_convert_ip(m_ip_override.get_value());
+  } else {
+    m_addr4_override = {0};
+  }
 }
 
 const std::string& local_interface::get_host() const {
@@ -398,6 +408,10 @@ const std::string& local_interface::get_if_name() const {
 
 const in_addr& local_interface::get_addr4() const {
   return m_addr4;
+}
+
+const in_addr& local_interface::get_addr4ov() const {
+  return m_addr4_override;
 }
 
 const in6_addr& local_interface::get_addr6() const {

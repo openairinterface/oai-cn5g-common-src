@@ -8901,21 +8901,17 @@ class pfcp_framed_route_ie : public pfcp_ie {
   std::string framed_route;
 
   //--------
-  pfcp_framed_route_ie(const pfcp::framed_route_t& b) :
-  pfcp_ie(PFCP_IE_FRAMED_ROUTE){
+  pfcp_framed_route_ie(const pfcp::framed_route_t& b)
+      : pfcp_ie(PFCP_IE_FRAMED_ROUTE) {
     framed_route = b.framed_route;
     tlv.set_length(framed_route.size());
   }
   //--------
-  pfcp_framed_route_ie() : pfcp_ie(PFCP_IE_FRAMED_ROUTE){
-    tlv.set_length(0);
-  }
+  pfcp_framed_route_ie() : pfcp_ie(PFCP_IE_FRAMED_ROUTE) { tlv.set_length(0); }
   //--------
-  pfcp_framed_route_ie(const pfcp_tlv& t) : pfcp_ie(t) {};
+  pfcp_framed_route_ie(const pfcp_tlv& t) : pfcp_ie(t){};
   //--------
-  void to_core_type(pfcp::framed_route_t& b) {
-  b.framed_route = framed_route;
-  }
+  void to_core_type(pfcp::framed_route_t& b) { b.framed_route = framed_route; }
   //--------
   void dump_to(std::ostream& os) {
     tlv.dump_to(os);
@@ -8923,7 +8919,7 @@ class pfcp_framed_route_ie : public pfcp_ie {
   }
   //--------
   void load_from(std::istream& is) {
-    //tlv.load_from(is);
+    // tlv.load_from(is);
     char e[tlv.get_length()];
     is.read(e, tlv.get_length());
     framed_route.assign(e, tlv.get_length());
@@ -9172,16 +9168,17 @@ class pfcp_pdi_ie : public pfcp_grouped_ie {
     }
     if (b.framed_route.first) {
       for (auto framed_route : b.framed_route.second) {
-        std::shared_ptr<pfcp_framed_route_ie> sie(new pfcp_framed_route_ie(framed_route));
+        std::shared_ptr<pfcp_framed_route_ie> sie(
+            new pfcp_framed_route_ie(framed_route));
         add_ie(sie);
       }
     }
 
-    // if (b.framed_routing.first) {std::shared_ptr<pfcp_framed_routing_ie> sie(new
-    // pfcp_framed_routing_ie(b.framed_routing.second)); add_ie(sie);} if
-    // (b.framed_ipv6_route.first) {std::shared_ptr<pfcp_framed_ipv6_route_ie>
-    // sie(new pfcp_framed_ipv6_route_ie(b.framed_ipv6_route.second));
-    // add_ie(sie);}
+    // if (b.framed_routing.first) {std::shared_ptr<pfcp_framed_routing_ie>
+    // sie(new pfcp_framed_routing_ie(b.framed_routing.second)); add_ie(sie);}
+    // if (b.framed_ipv6_route.first)
+    // {std::shared_ptr<pfcp_framed_ipv6_route_ie> sie(new
+    // pfcp_framed_ipv6_route_ie(b.framed_ipv6_route.second)); add_ie(sie);}
   }
   //--------
   pfcp_pdi_ie() : pfcp_grouped_ie(PFCP_IE_PDI) {}

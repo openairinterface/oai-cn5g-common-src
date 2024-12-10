@@ -896,11 +896,10 @@ pfcp_ie* pfcp_ie::new_pfcp_ie_from_stream(std::istream& is) {
         //      }
         //      break;
       case PFCP_IE_FRAMED_ROUTE: {
-          pfcp_framed_route_ie *ie = new pfcp_framed_route_ie(tlv);
-          ie->load_from(is);
-          return ie;
-      }
-      break;
+        pfcp_framed_route_ie* ie = new pfcp_framed_route_ie(tlv);
+        ie->load_from(is);
+        return ie;
+      } break;
         //    case PFCP_IE_FRAMED_ROUTING: {
         //        pfcp_framed_routing_ie *ie = new pfcp_framed_routing_ie(tlv);
         //        ie->load_from(is);

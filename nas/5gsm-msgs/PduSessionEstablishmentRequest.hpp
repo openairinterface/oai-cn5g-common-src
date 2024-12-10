@@ -22,8 +22,8 @@
 #ifndef _PDU_SESSION_ESTABLISHMENT_REQUEST_H_
 #define _PDU_SESSION_ESTABLISHMENT_REQUEST_H_
 
-#include "NasIeHeader.hpp"
 #include "Nas5gsmHeader.hpp"
+#include "NasIeHeader.hpp"
 #include "NasMessage.hpp"
 
 namespace oai::nas {

@@ -24,9 +24,9 @@
 
 #include "3gpp_24.501.hpp"
 #include "ExtendedProtocolDiscriminator.hpp"
+#include "NasMessageType.hpp"
 #include "PduSessionIdentity.hpp"
 #include "ProcedureTransactionIdentity.hpp"
-#include "NasMessageType.hpp"
 
 constexpr uint8_t kNas5gsmHeaderLength = 4;
 

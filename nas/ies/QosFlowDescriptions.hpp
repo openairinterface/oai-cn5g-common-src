@@ -40,7 +40,7 @@ class QosFlowDescriptions : public Type6NasIe {
   QosFlowDescriptions(
       uint8_t iei, const std::vector<QosFlowDescription>& qos_rules);
   QosFlowDescriptions(const std::vector<QosFlowDescription>& qos_rules);
-  ~QosFlowDescriptions();
+  virtual ~QosFlowDescriptions();
 
   int Encode(uint8_t* buf, int len) const;
   int Decode(const uint8_t* const buf, int len, bool is_iei);

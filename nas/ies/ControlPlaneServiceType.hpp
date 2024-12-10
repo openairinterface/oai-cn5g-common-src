@@ -32,7 +32,7 @@ class ControlPlaneServiceType : public Type1NasIe {
  public:
   ControlPlaneServiceType();
   ControlPlaneServiceType(uint8_t value);
-  ~ControlPlaneServiceType();
+  virtual ~ControlPlaneServiceType();
 
   static std::string GetIeName() { return kControlPlaneServiceTypeIeName; }
 

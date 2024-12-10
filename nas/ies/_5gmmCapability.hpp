@@ -37,7 +37,7 @@ class _5gmmCapability : public Type4NasIe {
  public:
   _5gmmCapability();
   _5gmmCapability(uint8_t iei, uint8_t octet3);
-  ~_5gmmCapability();
+  virtual ~_5gmmCapability();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = true) override;

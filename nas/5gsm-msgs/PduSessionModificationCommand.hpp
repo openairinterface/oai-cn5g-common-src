@@ -31,7 +31,7 @@ namespace oai::nas {
 class PduSessionModificationCommand : public NasMessage {
  public:
   PduSessionModificationCommand();
-  ~PduSessionModificationCommand();
+  virtual ~PduSessionModificationCommand();
 
   int Encode(uint8_t* buf, int len) override;
   int Decode(uint8_t* buf, int len) override;

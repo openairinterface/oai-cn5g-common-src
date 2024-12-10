@@ -38,7 +38,7 @@ class AuthenticationResponseParameter : public Type4NasIe {
  public:
   AuthenticationResponseParameter();
   AuthenticationResponseParameter(const bstring& para);
-  ~AuthenticationResponseParameter();
+  virtual ~AuthenticationResponseParameter();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

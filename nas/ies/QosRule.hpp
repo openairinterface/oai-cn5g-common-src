@@ -51,7 +51,7 @@ constexpr uint8_t kQosRuleRuleOperationCodeReserved111 = 7;  // 111
 class QosRule {
  public:
   QosRule();
-  ~QosRule();
+  virtual ~QosRule();
 
   int Encode(uint8_t* buf, int len) const;
   int Decode(const uint8_t* const buf, int len);

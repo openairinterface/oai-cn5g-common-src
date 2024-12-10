@@ -33,7 +33,7 @@ class EpsNasSecurityAlgorithms : public Type3NasIe {
  public:
   EpsNasSecurityAlgorithms();
   EpsNasSecurityAlgorithms(uint8_t ciphering, uint8_t integrity_protection);
-  ~EpsNasSecurityAlgorithms();
+  virtual ~EpsNasSecurityAlgorithms();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

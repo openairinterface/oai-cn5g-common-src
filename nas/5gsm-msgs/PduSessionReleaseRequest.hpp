@@ -31,7 +31,7 @@ namespace oai::nas {
 class PduSessionReleaseRequest : public NasMessage {
  public:
   PduSessionReleaseRequest();
-  ~PduSessionReleaseRequest();
+  virtual ~PduSessionReleaseRequest();
 
   int Encode(uint8_t* buf, int len) override;
   int Decode(uint8_t* buf, int len) override;

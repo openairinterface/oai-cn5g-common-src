@@ -42,7 +42,7 @@ class SessionAmbr : public Type4NasIe {
       uint8_t iei, uint8_t unit_for_downlink,
       uint16_t session_ambr_for_downlink, uint8_t unit_for_uplink,
       uint16_t session_ambr_for_uplink);
-  ~SessionAmbr();
+  virtual ~SessionAmbr();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = true) override;

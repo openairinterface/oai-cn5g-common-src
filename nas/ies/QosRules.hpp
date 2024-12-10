@@ -39,7 +39,7 @@ class QosRules : public Type6NasIe {
   QosRules(uint8_t iei);
   QosRules(uint8_t iei, const std::vector<QosRule>& qos_rules);
   QosRules(const std::vector<QosRule>& qos_rules);
-  ~QosRules();
+  virtual ~QosRules();
 
   int Encode(uint8_t* buf, int len) const;
   int Decode(const uint8_t* const buf, int len, bool is_iei);

@@ -38,7 +38,7 @@ class Nssai : public Type4NasIe {
   Nssai();
   Nssai(uint8_t iei);
   Nssai(uint8_t iei, const std::vector<struct SNSSAI_s>& nssai);
-  ~Nssai();
+  virtual ~Nssai();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

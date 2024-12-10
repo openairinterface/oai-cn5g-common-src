@@ -31,7 +31,7 @@ namespace oai::nas {
 class PduSessionAuthenticationComplete : public NasMessage {
  public:
   PduSessionAuthenticationComplete();
-  ~PduSessionAuthenticationComplete();
+  virtual ~PduSessionAuthenticationComplete();
 
   int Encode(uint8_t* buf, int len) override;
   int Decode(uint8_t* buf, int len) override;

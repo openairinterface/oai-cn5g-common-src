@@ -35,7 +35,7 @@ class _5gsDrxParameters : public Type4NasIe {
  public:
   _5gsDrxParameters();
   _5gsDrxParameters(uint8_t value);
-  ~_5gsDrxParameters();
+  virtual ~_5gsDrxParameters();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

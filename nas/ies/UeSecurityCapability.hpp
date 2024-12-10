@@ -43,7 +43,7 @@ class UeSecurityCapability : public Type4NasIe {
       uint8_t iei, uint8_t _5g_ea, uint8_t _5g_ia, uint8_t eea, uint8_t eia);
   UeSecurityCapability(
       uint8_t _5g_ea, uint8_t _5g_ia, uint8_t eea, uint8_t eia);
-  ~UeSecurityCapability();
+  virtual ~UeSecurityCapability();
   void operator=(const UeSecurityCapability& ue_security_capability);
 
   int Encode(uint8_t* buf, int len) const override;

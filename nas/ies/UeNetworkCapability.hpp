@@ -38,7 +38,7 @@ class UeNetworkCapability : public Type4NasIe {
   UeNetworkCapability();
   UeNetworkCapability(uint8_t iei);
   UeNetworkCapability(uint8_t iei, uint8_t eea, uint8_t eia);
-  ~UeNetworkCapability();
+  virtual ~UeNetworkCapability();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = true);

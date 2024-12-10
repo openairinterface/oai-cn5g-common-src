@@ -37,7 +37,7 @@ class Dnn : public Type4NasIe {
   Dnn();
   Dnn(const bstring& dnn);
   Dnn(bool iei);
-  ~Dnn();
+  virtual ~Dnn();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

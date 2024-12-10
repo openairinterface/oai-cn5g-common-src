@@ -40,7 +40,7 @@ class PduAddress : public Type4NasIe {
  public:
   PduAddress();
   PduAddress(uint8_t iei);
-  ~PduAddress();
+  virtual ~PduAddress();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = true) override;

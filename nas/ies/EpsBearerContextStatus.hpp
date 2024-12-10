@@ -35,7 +35,7 @@ class EpsBearerContextStatus : public Type4NasIe {
  public:
   EpsBearerContextStatus();
   EpsBearerContextStatus(uint16_t value);
-  ~EpsBearerContextStatus();
+  virtual ~EpsBearerContextStatus();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

@@ -31,7 +31,7 @@ namespace oai::nas {
 class PduSessionEstablishmentAccept : public NasMessage {
  public:
   PduSessionEstablishmentAccept();
-  ~PduSessionEstablishmentAccept();
+  virtual ~PduSessionEstablishmentAccept();
 
   int Encode(uint8_t* buf, int len) override;
   int Decode(uint8_t* buf, int len) override;

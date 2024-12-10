@@ -36,7 +36,7 @@ class UeRadioCapabilityId : public Type4NasIe {
  public:
   UeRadioCapabilityId();
   UeRadioCapabilityId(const bstring& value);
-  ~UeRadioCapabilityId();
+  virtual ~UeRadioCapabilityId();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

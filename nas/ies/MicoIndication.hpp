@@ -34,7 +34,7 @@ class MicoIndication : public Type1NasIeFormatTv {
   MicoIndication();
   MicoIndication(uint8_t _iei, bool sprti, bool raai);
   MicoIndication(bool sprti, bool raai);
-  ~MicoIndication();
+  virtual ~MicoIndication();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

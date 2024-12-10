@@ -31,7 +31,7 @@ namespace oai::nas {
 class _5gsmStatus : public NasMessage {
  public:
   _5gsmStatus();
-  ~_5gsmStatus();
+  virtual ~_5gsmStatus();
 
   int Encode(uint8_t* buf, int len) override;
   int Decode(uint8_t* buf, int len) override;

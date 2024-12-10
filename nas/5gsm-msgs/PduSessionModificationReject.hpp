@@ -31,7 +31,7 @@ namespace oai::nas {
 class PduSessionModificationReject : public NasMessage {
  public:
   PduSessionModificationReject();
-  ~PduSessionModificationReject();
+  virtual ~PduSessionModificationReject();
 
   int Encode(uint8_t* buf, int len) override;
   int Decode(uint8_t* buf, int len) override;

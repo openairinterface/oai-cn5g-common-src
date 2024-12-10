@@ -32,7 +32,7 @@ using namespace oai::nas;
 class Ladn {
  public:
   Ladn();
-  ~Ladn();
+  virtual ~Ladn();
 
   int Encode(uint8_t* buf, int len) const;
   int Decode(uint8_t* buf, int len);

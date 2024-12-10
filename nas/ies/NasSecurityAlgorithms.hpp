@@ -36,7 +36,7 @@ class NasSecurityAlgorithms : public Type3NasIe {
   NasSecurityAlgorithms(uint8_t ciphering, uint8_t integrity_protection);
   NasSecurityAlgorithms(
       uint8_t iei, uint8_t ciphering, uint8_t integrity_protection);
-  ~NasSecurityAlgorithms();
+  virtual ~NasSecurityAlgorithms();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

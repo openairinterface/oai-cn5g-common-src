@@ -37,7 +37,7 @@ class SNssai : public Type4NasIe {
  public:
   SNssai(std::optional<uint8_t> iei);
   SNssai(std::optional<uint8_t> iei, SNSSAI_s snssai);
-  ~SNssai();
+  virtual ~SNssai();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(uint8_t* buf, int len, const bool is_option = true);

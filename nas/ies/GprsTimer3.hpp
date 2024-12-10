@@ -33,6 +33,7 @@ namespace oai::nas {
 
 class GprsTimer3 : public Type4NasIe {
  public:
+  GprsTimer3(){};
   GprsTimer3(uint8_t iei);
   GprsTimer3(uint8_t iei, uint8_t unit, uint8_t value);
   virtual ~GprsTimer3() = default;

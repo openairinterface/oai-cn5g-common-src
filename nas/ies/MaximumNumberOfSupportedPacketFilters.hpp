@@ -37,7 +37,7 @@ class MaximumNumberOfSupportedPacketFilters : public Type3NasIe {
   MaximumNumberOfSupportedPacketFilters();
   MaximumNumberOfSupportedPacketFilters(uint8_t iei);
   MaximumNumberOfSupportedPacketFilters(uint8_t _iei, uint16_t value);
-  ~MaximumNumberOfSupportedPacketFilters();
+  virtual ~MaximumNumberOfSupportedPacketFilters();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

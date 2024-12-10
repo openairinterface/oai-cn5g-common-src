@@ -38,7 +38,7 @@ class PduDnRequestContainer : public Type4NasIe {
   PduDnRequestContainer();
   PduDnRequestContainer(const bstring& PduDnRequestContainer);
   PduDnRequestContainer(bool iei);
-  ~PduDnRequestContainer();
+  virtual ~PduDnRequestContainer();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

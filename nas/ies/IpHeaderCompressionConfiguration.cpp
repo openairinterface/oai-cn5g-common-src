@@ -40,11 +40,9 @@ IpHeaderCompressionConfiguration::IpHeaderCompressionConfiguration(uint8_t iei)
 
 //------------------------------------------------------------------------------
 IpHeaderCompressionConfiguration::IpHeaderCompressionConfiguration()
-    : Type4NasIe(kIeiIpHeaderCompressionConfiguration),
-      octet3_(),
-      max_cid_(),
-      _context_setup_parameters_type_(),
-      context_setup_parameters_container_() {
+    : Type4NasIe(kIeiIpHeaderCompressionConfiguration), octet3_(), max_cid_() {
+  _context_setup_parameters_type_     = std::nullopt;
+  context_setup_parameters_container_ = nullptr;
   SetLengthIndicator(kIpHeaderCompressionConfigurationMinimumLength);
 }
 

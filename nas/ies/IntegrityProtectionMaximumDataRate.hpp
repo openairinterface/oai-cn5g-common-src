@@ -38,7 +38,7 @@ class IntegrityProtectionMaximumDataRate : public Type3NasIe {
   IntegrityProtectionMaximumDataRate(uint8_t iei);
   IntegrityProtectionMaximumDataRate(
       uint8_t iei, uint8_t uplink, uint8_t downlink);
-  ~IntegrityProtectionMaximumDataRate();
+  virtual ~IntegrityProtectionMaximumDataRate();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

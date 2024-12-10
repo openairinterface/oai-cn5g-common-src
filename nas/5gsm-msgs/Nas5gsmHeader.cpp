@@ -32,15 +32,13 @@ using namespace oai::nas;
 Nas5gsmHeader::Nas5gsmHeader(
     uint8_t epd, uint8_t pdu_session_id, uint16_t procedure_transaction_id,
     uint8_t msg_type)
-    : Nas5gsmMessage(),
-      ie_epd_(epd),
+    : ie_epd_(epd),
       ie_pdu_session_id_(pdu_session_id),
       ie_procedure_transaction_id_(procedure_transaction_id),
       ie_msg_type_(msg_type) {}
 
 //------------------------------------------------------------------------------
-Nas5gsmHeader::Nas5gsmHeader(uint8_t epd, uint8_t msg_type)
-    : Nas5gsmMessage(), ie_epd_(epd), ie_msg_type_(msg_type) {}
+Nas5gsmHeader::Nas5gsmHeader(uint8_t epd, uint8_t msg_type) {}
 
 //------------------------------------------------------------------------------
 void Nas5gsmHeader::SetHeader(

@@ -24,10 +24,11 @@
 
 #include "Nas5gsmHeader.hpp"
 #include "NasIeHeader.hpp"
+#include "NasMessage.hpp"
 
 namespace oai::nas {
 
-class PduSessionReleaseReject : public Nas5gsmHeader {
+class PduSessionReleaseReject : public NasMessage {
  public:
   PduSessionReleaseReject();
   ~PduSessionReleaseReject();

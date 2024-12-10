@@ -19,45 +19,31 @@
  *      contact@openairinterface.org
  */
 
-#ifndef EXTENDED_PROTOCOL_DISCRIMINATOR_HPP_
-#define EXTENDED_PROTOCOL_DISCRIMINATOR_HPP_
+#ifndef _NAS_MESSAGE_H_
+#define _NAS_MESSAGE_H_
 
-#include "NasIe.hpp"
-
-constexpr uint8_t kExtendedProtocolDiscriminatorLength = 1;
-constexpr auto kExtendedProtocolDiscriminatorIeName =
-    "Extended Protocol Discriminator";
-
+#include "3gpp_24.501.hpp"
 namespace oai::nas {
 
-class ExtendedProtocolDiscriminator : public NasIe {
+class NasMessage {
  public:
-  ExtendedProtocolDiscriminator(){};  // TODO: = delete;
-  ExtendedProtocolDiscriminator(uint8_t epd);
-  virtual ~ExtendedProtocolDiscriminator() = default;
+  NasMessage(){};
+  virtual ~NasMessage() = default;
 
-  ExtendedProtocolDiscriminator& operator=(
-      const struct ExtendedProtocolDiscriminator& epd) {
-    epd_ = epd.epd_;
-    return *this;
-  }
+  // May not be the actual length of the message (by rounding 1/2 octet to 1
+  // octet in some IEs) but always greater than the actual length of the message
+  virtual uint32_t GetLength() const = 0;
+  virtual bool Validate(uint32_t len) const;
 
-  int Encode(uint8_t* buf, int len) const override;
-  int Decode(const uint8_t* const buf, int len, bool is_iei = true) override;
+  virtual int Encode(uint8_t* buf, int len) = 0;
+  virtual int Decode(uint8_t* buf, int len) = 0;
 
-  static std::string GetIeName() {
-    return kExtendedProtocolDiscriminatorIeName;
-  }
-
-  uint32_t GetIeLength() const override;
-  bool Validate(int len) const override;
-
-  void Set(uint8_t epd);
-  void Get(uint8_t& epd) const;
-  uint8_t Get() const;
+  void SetMessageName(const std::string& name);
+  std::string GetMessageName() const;
+  void GetMessageName(std::string& name) const;
 
  private:
-  uint8_t epd_;
+  std::string msg_name_;  // non 3GPP IE
 };
 
 }  // namespace oai::nas

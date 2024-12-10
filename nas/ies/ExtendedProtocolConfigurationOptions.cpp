@@ -30,7 +30,8 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 ExtendedProtocolConfigurationOptions::ExtendedProtocolConfigurationOptions()
-    : Type6NasIe(kIeiExtendedProtocolConfigurationOptions), content_() {
+    : Type6NasIe(kIeiExtendedProtocolConfigurationOptions) {
+  content_ = nullptr;
   SetLengthIndicator(kExtendedProtocolConfigurationOptionsContentMinimumLength);
 }
 

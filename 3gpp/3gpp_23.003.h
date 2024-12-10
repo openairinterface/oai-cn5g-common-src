@@ -64,8 +64,8 @@ typedef struct s_nssai  // section 28.4, TS23.003
 
   std::string toString() const {
     std::string s = {};
-    s.append("SST=").append(std::to_string(sst));
-    s.append(", SD=").append(sd);
+    s.append("sst, sd: ").append(std::to_string(sst));
+    s.append(", ").append(sd);
     return s;
   }
 

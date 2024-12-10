@@ -24,10 +24,11 @@
 
 #include "Nas5gsmHeader.hpp"
 #include "NasIeHeader.hpp"
+#include "NasMessage.hpp"
 
 namespace oai::nas {
 
-class PduSessionReleaseComplete : public Nas5gsmHeader {
+class PduSessionReleaseComplete : public NasMessage {
  public:
   PduSessionReleaseComplete();
   ~PduSessionReleaseComplete();

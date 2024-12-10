@@ -24,13 +24,14 @@
 
 #include "Nas5gsmHeader.hpp"
 #include "NasIeHeader.hpp"
+#include "NasMessage.hpp"
 
 namespace oai::nas {
 
-class PduSessionEstablishmentReject : public Nas5gsmHeader {
+class PduSessionEstablishmentReject : public NasMessage {
  public:
   PduSessionEstablishmentReject();
-  ~PduSessionEstablishmentReject();
+  virtual ~PduSessionEstablishmentReject();
 
   int Encode(uint8_t* buf, int len) override;
   int Decode(uint8_t* buf, int len) override;

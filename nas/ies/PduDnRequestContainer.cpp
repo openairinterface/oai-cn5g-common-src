@@ -27,7 +27,8 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 PduDnRequestContainer::PduDnRequestContainer()
-    : Type4NasIe(kIeiSmPduDnRequestContainer), pdu_dn_request_container_() {
+    : Type4NasIe(kIeiSmPduDnRequestContainer) {
+  pdu_dn_request_container_ = nullptr;
   SetLengthIndicator(kPduDnRequestContainerContentMinimumLength);
 }
 

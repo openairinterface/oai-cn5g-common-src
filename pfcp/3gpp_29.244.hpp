@@ -5646,7 +5646,7 @@ class pfcp_outer_header_removal_ie : public pfcp_ie {
   }
   //--------
   explicit pfcp_outer_header_removal_ie(const pfcp_tlv& t) : pfcp_ie(t) {
-    outer_header_removal_description = 0;
+    outer_header_removal_description    = 0;
     pdu_session_container_to_be_deleted = 0;
   };
   //--------

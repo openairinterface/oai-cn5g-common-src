@@ -55,10 +55,17 @@ sdf_conversions::sdf_filter sdf_conversions::sdf_filter::from_string(
   }
   std::string proto = matches[1];
   if (!proto.empty() && proto != "ip") {
-    filter.protocol_identifier     = std::stoi(proto);
-    filter.use_protocol_identifier = true;
-    filter.default_filter          = false;
-    filter.filter_components++;
+    try {
+      filter.protocol_identifier     = std::stoi(proto);
+      filter.use_protocol_identifier = true;
+      filter.default_filter          = false;
+      filter.filter_components++;
+    } catch (const std::invalid_argument& e) {
+      logger_common::common().error(
+          "Invalid protocol: '" + proto +
+          "'. Only 'ip' or protocol numbers are allowed. Protocol filter is "
+          "not considered.");
+    }
   }
 
   std::string src_ip = matches[2];

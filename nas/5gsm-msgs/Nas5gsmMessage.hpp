@@ -19,38 +19,43 @@
  *      contact@openairinterface.org
  */
 
-#ifndef _PDU_SESSION_AUTHENTICATION_RESULT_H_
-#define _PDU_SESSION_AUTHENTICATION_RESULT_H_
+#ifndef _NAS_5GSM_MESSAGE_H_
+#define _NAS_5GSM_MESSAGE_H_
 
-#include "Nas5gsmMessage.hpp"
-#include "NasIeHeader.hpp"
+#include "Nas5gsmHeader.hpp"
+#include "NasMessage.hpp"
 
 namespace oai::nas {
 
-class PduSessionAuthenticationResult : public Nas5gsmMessage {
+class Nas5gsmMessage : public NasMessage {
  public:
-  PduSessionAuthenticationResult();
-  virtual ~PduSessionAuthenticationResult();
+  Nas5gsmMessage(){};
+  virtual ~Nas5gsmMessage(){};
+
+  Nas5gsmMessage(
+      uint8_t epd, uint8_t pdu_session_id, uint16_t procedure_transaction_id,
+      uint8_t msg_type);
+  Nas5gsmMessage(uint8_t epd, uint8_t msg_type);
+
+  Nas5gsmMessage& operator=(const struct Nas5gsmMessage& nas_msg) {
+    ie_header_ = nas_msg.ie_header_;
+    return *this;
+  }
+
+  void SetHeader(
+      uint8_t epd, uint8_t pdu_session_id, uint16_t procedure_transaction_id,
+      uint8_t msg_type);
+
+  Nas5gsmHeader GetHeader() const;
+  void GetHeader(Nas5gsmHeader& nas_header) const;
+
+  uint32_t GetLength() const override;
 
   int Encode(uint8_t* buf, int len) override;
   int Decode(uint8_t* buf, int len) override;
 
-  uint32_t GetLength() const override;
-
-  void SetEapMessage(const EapMessage& eap_message);
-  void GetEapMessage(EapMessage& eap_message) const;
-
-  void SetExtendedProtocolConfigurationOptions(
-      const ExtendedProtocolConfigurationOptions& options);
-  void GetExtendedProtocolConfigurationOptions(
-      std::optional<ExtendedProtocolConfigurationOptions>& options) const;
-
- private:
-  // Nas5gsmHeader ie_header_;    // Mandatory
-  EapMessage ie_eap_message_;  // Mandatory
-
-  std::optional<ExtendedProtocolConfigurationOptions>
-      ie_extended_protocol_configuration_options_;  // Optional
+ protected:
+  Nas5gsmHeader ie_header_;  // Mandatory
 };
 
 }  // namespace oai::nas

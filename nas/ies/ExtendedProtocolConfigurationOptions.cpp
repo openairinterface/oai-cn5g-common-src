@@ -25,31 +25,75 @@
 #include "IeConst.hpp"
 #include "common_defs.h"
 #include "logger_base.hpp"
+#include "conversions.hpp"
 
 using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 ExtendedProtocolConfigurationOptions::ExtendedProtocolConfigurationOptions()
-    : Type6NasIe(kIeiExtendedProtocolConfigurationOptions) {
-  content_ = nullptr;
+    : Type6NasIe(kIeiExtendedProtocolConfigurationOptions), ext_(1), spare_(0) {
   SetLengthIndicator(kExtendedProtocolConfigurationOptionsContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
-ExtendedProtocolConfigurationOptions::ExtendedProtocolConfigurationOptions(
-    const bstring& content)
-    : Type6NasIe(kIeiExtendedProtocolConfigurationOptions) {
-  content_ = bstrcpy(content);
-  SetLengthIndicator(blength(content));
+void ExtendedProtocolConfigurationOptions::SetConfigurationProtocol(
+    uint8_t configuration_protocol) {
+  configuration_protocol_ = configuration_protocol;
 }
 
 //------------------------------------------------------------------------------
-// ExtendedProtocolConfigurationOptions::~ExtendedProtocolConfigurationOptions()
-// {}
+void ExtendedProtocolConfigurationOptions::GetConfigurationProtocol(
+    uint8_t& configuration_protocol) const {
+  configuration_protocol = configuration_protocol_;
+}
 
 //------------------------------------------------------------------------------
-void ExtendedProtocolConfigurationOptions::GetValue(bstring& content) const {
-  content = bstrcpy(content_);
+bool ExtendedProtocolConfigurationOptions::AddProtocolOrContainerId(
+    const pco_protocol_or_container_id_t& id) {
+  uint32_t new_length =
+      GetLengthIndicator() + id.length_of_protocol_id_contents + 3;
+  if (new_length > kExtendedProtocolConfigurationOptionsMaximumLength)
+    return false;
+  protocol_or_container_ids.push_back(id);
+  SetLengthIndicator(new_length);
+  return true;
+}
+
+//------------------------------------------------------------------------------
+void ExtendedProtocolConfigurationOptions::GetProtocolOrContainerIds(
+    std::vector<pco_protocol_or_container_id_t>& ids) const {
+  ids.assign(
+      protocol_or_container_ids.begin(), protocol_or_container_ids.end());
+}
+
+//------------------------------------------------------------------------------
+void ExtendedProtocolConfigurationOptions::SetProtocolOrContainerIds(
+    const std::vector<pco_protocol_or_container_id_t>& ids) {
+  protocol_or_container_ids.assign(ids.begin(), ids.end());
+}
+
+//------------------------------------------------------------------------------
+void ExtendedProtocolConfigurationOptions::Get(
+    protocol_configuration_options_t& conf_opt) const {
+  conf_opt.ext                    = ext_;
+  conf_opt.spare                  = spare_;
+  conf_opt.configuration_protocol = configuration_protocol_;
+  conf_opt.protocol_or_container_ids.assign(
+      protocol_or_container_ids.begin(), protocol_or_container_ids.end());
+  conf_opt.num_protocol_or_container_id = protocol_or_container_ids.size();
+}
+
+//------------------------------------------------------------------------------
+protocol_configuration_options_t ExtendedProtocolConfigurationOptions::Get()
+    const {
+  protocol_configuration_options_t conf_opt = {};
+  conf_opt.ext                              = ext_;
+  conf_opt.spare                            = spare_;
+  conf_opt.configuration_protocol           = configuration_protocol_;
+  conf_opt.protocol_or_container_ids.assign(
+      protocol_or_container_ids.begin(), protocol_or_container_ids.end());
+  conf_opt.num_protocol_or_container_id = protocol_or_container_ids.size();
+  return conf_opt;
 }
 
 //------------------------------------------------------------------------------
@@ -58,15 +102,37 @@ int ExtendedProtocolConfigurationOptions::Encode(uint8_t* buf, int len) const {
   int encoded_size = 0;
 
   // Validate the buffer's length and Encode IEI/Length (later)
-  int len_pos = 0;
-  int encoded_header_size =
-      Type6NasIe::Encode(buf + encoded_size, len, len_pos);
-  if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
-  encoded_size += encoded_header_size;
+  int len_pos         = 0;
+  int encoded_ie_size = Type6NasIe::Encode(buf + encoded_size, len, len_pos);
+  if (encoded_ie_size == KEncodeDecodeError) return KEncodeDecodeError;
+  encoded_size += encoded_ie_size;
 
-  // Value
-  int size = encode_bstring(content_, (buf + encoded_size), len - encoded_size);
-  encoded_size += size;
+  // Octet3
+  uint8_t octet3 = {};
+  octet3         = 0x80 | spare_ | configuration_protocol_;
+  ENCODE_U8(buf + encoded_size, octet3, encoded_size);
+  // uint32_t new_length = GetLengthIndicator();
+  for (int i = 0; i < protocol_or_container_ids.size(); i++) {
+    ENCODE_U16(
+        buf + encoded_size, protocol_or_container_ids[i].protocol_id,
+        encoded_size);
+    ENCODE_U8(
+        buf + encoded_size,
+        protocol_or_container_ids[i].length_of_protocol_id_contents,
+        encoded_size);
+    bstring b_str = nullptr;
+  oai:
+    utils::conv::string_to_bstring(
+        protocol_or_container_ids[i].protocol_id_contents, b_str);
+    encoded_ie_size =
+        encode_bstring(b_str, (buf + encoded_size), len - encoded_size);
+    encoded_size += encoded_ie_size;
+    // Calulate the new length
+    //  new_length +=
+    //  protocol_or_container_ids[i].length_of_protocol_id_contents + 3; //2 for
+    //  ID and 1 for length
+  }
+  // SetLengthIndicator(new_length);
 
   // Encode length
   int encoded_len_ie = 0;
@@ -96,13 +162,25 @@ int ExtendedProtocolConfigurationOptions::Decode(
     return KEncodeDecodeError;
   }
 
-  // Value
-  decode_bstring(&content_, ie_len, (buf + decoded_size), len - decoded_size);
-  decoded_size += ie_len;
-  for (int i = 0; i < ie_len; i++) {
-    oai::logger::logger_common::nas().debug(
-        "Decoded ExtendedProtocolConfigurationOptions value 0x%x",
-        (uint8_t) content_->data[i]);
+  // Octet 3
+  uint8_t octet3 = {};
+  DECODE_U8(buf + decoded_size, octet3, decoded_size);
+  configuration_protocol_ = octet3 & 0x07;
+
+  // Decode Protocol/Container list
+  while (decoded_size < GetIeLength()) {
+    pco_protocol_or_container_id_t pco_id = {};
+    DECODE_U16(buf + decoded_size, pco_id.protocol_id, decoded_size);
+    DECODE_U8(
+        buf + decoded_size, pco_id.length_of_protocol_id_contents,
+        decoded_size);
+    bstring b_str = nullptr;
+    decode_bstring(
+        &b_str, pco_id.length_of_protocol_id_contents, (buf + decoded_size),
+        len - decoded_size);
+  oai:
+    utils::conv::bstring_to_string(b_str, pco_id.protocol_id_contents);
+    protocol_or_container_ids.push_back(pco_id);
   }
 
   oai::logger::logger_common::nas().debug(

@@ -22,13 +22,12 @@
 #ifndef _PDU_SESSION_MODIFICATION_COMMAND_H_
 #define _PDU_SESSION_MODIFICATION_COMMAND_H_
 
-#include "Nas5gsmHeader.hpp"
+#include "Nas5gsmMessage.hpp"
 #include "NasIeHeader.hpp"
-#include "NasMessage.hpp"
 
 namespace oai::nas {
 
-class PduSessionModificationCommand : public NasMessage {
+class PduSessionModificationCommand : public Nas5gsmMessage {
  public:
   PduSessionModificationCommand();
   virtual ~PduSessionModificationCommand();
@@ -75,7 +74,7 @@ class PduSessionModificationCommand : public NasMessage {
   // TODO: Ethernet header compression configuration
 
  private:
-  Nas5gsmHeader ie_header_;  // Mandatory
+  // Nas5gsmHeader ie_header_;  // Mandatory
 
   std::optional<_5gsmCause> ie_5gsm_cause_;  // Optional
   std::optional<SessionAmbr> ie_session_ambr_;

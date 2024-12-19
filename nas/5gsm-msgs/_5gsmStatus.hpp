@@ -22,13 +22,12 @@
 #ifndef __5GSM_STATUS_H_
 #define __5GSM_STATUS_H_
 
-#include "Nas5gsmHeader.hpp"
+#include "Nas5gsmMessage.hpp"
 #include "NasIeHeader.hpp"
-#include "NasMessage.hpp"
 
 namespace oai::nas {
 
-class _5gsmStatus : public NasMessage {
+class _5gsmStatus : public Nas5gsmMessage {
  public:
   _5gsmStatus();
   virtual ~_5gsmStatus();
@@ -42,7 +41,7 @@ class _5gsmStatus : public NasMessage {
   void Get5gsmCause(_5gsmCause& _5gsm_cause) const;
 
  private:
-  Nas5gsmHeader ie_header_;   // Mandatory
+  // Header is defined in Nas5gsmMessage
   _5gsmCause ie_5gsm_cause_;  // Mandatory
 };
 

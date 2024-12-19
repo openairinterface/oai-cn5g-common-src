@@ -19,84 +19,82 @@
  *      contact@openairinterface.org
  */
 
-#include "_5gsmStatus.hpp"
+#include "Nas5gsmMessage.hpp"
 
 #include "NasHelper.hpp"
+#include "common_defs.h"
+#include "logger_base.hpp"
 
 using namespace oai::nas;
 
 //------------------------------------------------------------------------------
-_5gsmStatus::_5gsmStatus()
-    : Nas5gsmMessage(k5gsSessionManagementMessages, k5gsmStatus) {}
+Nas5gsmMessage::Nas5gsmMessage(
+    uint8_t epd, uint8_t pdu_session_id, uint16_t procedure_transaction_id,
+    uint8_t msg_type)
+    : ie_header_(epd, pdu_session_id, procedure_transaction_id, msg_type) {}
 
 //------------------------------------------------------------------------------
-_5gsmStatus::~_5gsmStatus() {}
+Nas5gsmMessage::Nas5gsmMessage(uint8_t epd, uint8_t msg_type)
+    : ie_header_(epd, msg_type) {}
 
 //------------------------------------------------------------------------------
-uint32_t _5gsmStatus::GetLength() const {
-  uint32_t msg_len = 0;
-  msg_len += Nas5gsmMessage::GetLength();
-  msg_len += ie_5gsm_cause_.GetIeLength();
-
-  return msg_len;
+void Nas5gsmMessage::SetHeader(
+    uint8_t epd, uint8_t pdu_session_id, uint16_t procedure_transaction_id,
+    uint8_t msg_type) {
+  ie_header_.SetHeader(epd, pdu_session_id, procedure_transaction_id, msg_type);
 }
 
 //------------------------------------------------------------------------------
-void _5gsmStatus::Set5gsmCause(const _5gsmCause& _5gsm_cause) {
-  ie_5gsm_cause_ = _5gsm_cause;
+Nas5gsmHeader Nas5gsmMessage::GetHeader() const {
+  return ie_header_;
 }
 
 //------------------------------------------------------------------------------
-void _5gsmStatus::Get5gsmCause(_5gsmCause& _5gsm_cause) const {
-  _5gsm_cause = ie_5gsm_cause_;
+void Nas5gsmMessage::GetHeader(Nas5gsmHeader& nas_header) const {
+  nas_header = ie_header_;
 }
 
 //------------------------------------------------------------------------------
-int _5gsmStatus::Encode(uint8_t* buf, int len) {
-  oai::logger::logger_common::nas().debug("Encoding _5gsmStatus message");
+uint32_t Nas5gsmMessage::GetLength() const {
+  return ie_header_.GetLength();
+}
+
+//------------------------------------------------------------------------------
+int Nas5gsmMessage::Encode(uint8_t* buf, int len) {
+  oai::logger::logger_common::nas().debug("Encoding Nas5gsmMessage");
+
+  if (!Validate(len)) return KEncodeDecodeError;
+
   int encoded_size    = 0;
   int encoded_ie_size = 0;
   // Header
-  if ((encoded_ie_size = Nas5gsmMessage::Encode(buf, len)) ==
-      KEncodeDecodeError) {
+  if ((encoded_ie_size = ie_header_.Encode(buf, len)) == KEncodeDecodeError) {
     oai::logger::logger_common::nas().error("Encoding NAS Header error");
     return KEncodeDecodeError;
   }
   encoded_size += encoded_ie_size;
 
-  // 5GSM cause
-  if ((encoded_ie_size = NasHelper::Encode(
-           ie_5gsm_cause_, buf, len, encoded_size)) == KEncodeDecodeError) {
-    return KEncodeDecodeError;
-  }
-
   oai::logger::logger_common::nas().debug(
-      "Encoded _5gsmStatus message len (%d)", encoded_size);
+      "Encoded Nas5gsmMessage (len %d octets)", encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
-int _5gsmStatus::Decode(uint8_t* buf, int len) {
-  oai::logger::logger_common::nas().debug("Decoding _5gsmStatus message");
+int Nas5gsmMessage::Decode(uint8_t* buf, int len) {
+  oai::logger::logger_common::nas().debug("Decoding Nas5gsmMessage");
+
   int decoded_size    = 0;
   int decoded_ie_size = 0;
 
   // Header
-  decoded_ie_size = Nas5gsmMessage::Decode(buf, len);
+  decoded_ie_size = ie_header_.Decode(buf, len);
   if (decoded_ie_size == KEncodeDecodeError) {
     oai::logger::logger_common::nas().error("Decoding NAS Header error");
     return KEncodeDecodeError;
   }
   decoded_size += decoded_ie_size;
 
-  // 5GSM cause
-  if ((decoded_ie_size =
-           NasHelper::Decode(ie_5gsm_cause_, buf, len, decoded_size, false)) ==
-      KEncodeDecodeError) {
-    return KEncodeDecodeError;
-  }
-
   oai::logger::logger_common::nas().debug(
-      "Decoded _5gsmStatus message len (%d)", decoded_size);
+      "Decoded Nas5gsmMessage len (%d octets)", decoded_size);
   return decoded_size;
 }

@@ -72,11 +72,11 @@ uint8_t Nas5gsmHeader::GetPduSessionIdentity() const {
 
 //------------------------------------------------------------------------------
 void Nas5gsmHeader::SetProcedureTransactionIdentity(
-    uint16_t procedure_transaction_id) {
+    uint8_t procedure_transaction_id) {
   ie_procedure_transaction_id_.Set(procedure_transaction_id);
 }
 //------------------------------------------------------------------------------
-uint16_t Nas5gsmHeader::GetProcedureTransactionIdentity() const {
+uint8_t Nas5gsmHeader::GetProcedureTransactionIdentity() const {
   return ie_procedure_transaction_id_.Get();
 }
 

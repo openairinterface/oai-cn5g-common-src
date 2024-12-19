@@ -22,13 +22,12 @@
 #ifndef _PDU_SESSION_ESTABLISHMENT_ACCEPT_H_
 #define _PDU_SESSION_ESTABLISHMENT_ACCEPT_H_
 
-#include "Nas5gsmHeader.hpp"
+#include "Nas5gsmMessage.hpp"
 #include "NasIeHeader.hpp"
-#include "NasMessage.hpp"
 
 namespace oai::nas {
 
-class PduSessionEstablishmentAccept : public NasMessage {
+class PduSessionEstablishmentAccept : public Nas5gsmMessage {
  public:
   PduSessionEstablishmentAccept();
   virtual ~PduSessionEstablishmentAccept();
@@ -85,7 +84,7 @@ class PduSessionEstablishmentAccept : public NasMessage {
   void GetDnn(std::optional<Dnn>& dnn) const;
 
  private:
-  Nas5gsmHeader ie_header_;                      // Mandatory
+  // Nas5gsmHeader ie_header_;                      // Mandatory
   PduSessionType ie_selected_pdu_session_type_;  // Mandatory
   SscMode ie_selected_ssc_mode_;                 // Mandatory
   QosRules ie_authorized_qos_rules_;             // Mandatory

@@ -22,13 +22,12 @@
 #ifndef _PDU_SESSION_ESTABLISHMENT_REQUEST_H_
 #define _PDU_SESSION_ESTABLISHMENT_REQUEST_H_
 
-#include "Nas5gsmHeader.hpp"
+#include "Nas5gsmMessage.hpp"
 #include "NasIeHeader.hpp"
-#include "NasMessage.hpp"
 
 namespace oai::nas {
 
-class PduSessionEstablishmentRequest : public NasMessage {
+class PduSessionEstablishmentRequest : public Nas5gsmMessage {
  public:
   PduSessionEstablishmentRequest();
   virtual ~PduSessionEstablishmentRequest();
@@ -73,7 +72,7 @@ class PduSessionEstablishmentRequest : public NasMessage {
   void SetExtendedProtocolConfigurationOptions(
       const ExtendedProtocolConfigurationOptions& options);
   std::optional<ExtendedProtocolConfigurationOptions>
-  GetExtendedProtocolConfigurationOptions();
+  GetExtendedProtocolConfigurationOptions() const;
 
   void SetIpHeaderCompressionConfiguration(
       const IpHeaderCompressionConfiguration& configuration);
@@ -81,7 +80,6 @@ class PduSessionEstablishmentRequest : public NasMessage {
   GetIpHeaderCompressionConfiguration() const;
 
  private:
-  Nas5gsmHeader ie_header_;  // Mandatory
   IntegrityProtectionMaximumDataRate
       ie_integrity_protection_maximum_data_rate_;      // Mandatory
   std::optional<PduSessionType> ie_pdu_session_type_;  // Optional

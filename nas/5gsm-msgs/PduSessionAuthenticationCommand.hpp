@@ -22,13 +22,12 @@
 #ifndef _PDU_SESSION_AUTHENTICATION_COMMAND_H_
 #define _PDU_SESSION_AUTHENTICATION_COMMAND_H_
 
-#include "Nas5gsmHeader.hpp"
+#include "Nas5gsmMessage.hpp"
 #include "NasIeHeader.hpp"
-#include "NasMessage.hpp"
 
 namespace oai::nas {
 
-class PduSessionAuthenticationCommand : public NasMessage {
+class PduSessionAuthenticationCommand : public Nas5gsmMessage {
  public:
   PduSessionAuthenticationCommand();
   virtual ~PduSessionAuthenticationCommand();
@@ -47,7 +46,7 @@ class PduSessionAuthenticationCommand : public NasMessage {
       std::optional<ExtendedProtocolConfigurationOptions>& options) const;
 
  private:
-  Nas5gsmHeader ie_header_;    // Mandatory
+  // Nas5gsmHeader ie_header_;    // Mandatory
   EapMessage ie_eap_message_;  // Mandatory
 
   std::optional<ExtendedProtocolConfigurationOptions>

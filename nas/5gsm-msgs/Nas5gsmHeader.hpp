@@ -66,8 +66,8 @@ class Nas5gsmHeader {
   void SetPduSessionIdentity(uint8_t pdu_session_id);
   uint8_t GetPduSessionIdentity() const;
 
-  void SetProcedureTransactionIdentity(uint16_t procedure_transaction_id);
-  uint16_t GetProcedureTransactionIdentity() const;
+  void SetProcedureTransactionIdentity(uint8_t procedure_transaction_id);
+  uint8_t GetProcedureTransactionIdentity() const;
 
   void SetMessageType(uint8_t type);
   uint8_t GetMessageType() const;

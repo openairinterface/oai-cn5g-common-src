@@ -27,7 +27,7 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 PduSessionModificationRequest::PduSessionModificationRequest()
-    : ie_header_(
+    : Nas5gsmMessage(
           k5gsSessionManagementMessages, kPduSessionModificationRequest) {
   ie_5gsm_capability_                            = std::nullopt;
   ie_5gsm_cause_                                 = std::nullopt;
@@ -45,7 +45,7 @@ PduSessionModificationRequest::~PduSessionModificationRequest() {}
 //------------------------------------------------------------------------------
 uint32_t PduSessionModificationRequest::GetLength() const {
   uint32_t msg_len = 0;
-  msg_len += ie_header_.GetLength();
+  msg_len += Nas5gsmMessage::GetLength();
 
   if (ie_5gsm_capability_.has_value())
     msg_len += ie_5gsm_capability_.value().GetIeLength();
@@ -185,7 +185,8 @@ int PduSessionModificationRequest::Encode(uint8_t* buf, int len) {
   int encoded_size    = 0;
   int encoded_ie_size = 0;
   // Header
-  if ((encoded_ie_size = ie_header_.Encode(buf, len)) == KEncodeDecodeError) {
+  if ((encoded_ie_size = Nas5gsmMessage::Encode(buf, len)) ==
+      KEncodeDecodeError) {
     oai::logger::logger_common::nas().error("Encoding NAS Header error");
     return KEncodeDecodeError;
   }
@@ -264,7 +265,7 @@ int PduSessionModificationRequest::Decode(uint8_t* buf, int len) {
   int decoded_ie_size = 0;
 
   // Header
-  decoded_ie_size = ie_header_.Decode(buf, len);
+  decoded_ie_size = Nas5gsmMessage::Decode(buf, len);
   if (decoded_ie_size == KEncodeDecodeError) {
     oai::logger::logger_common::nas().error("Decoding NAS Header error");
     return KEncodeDecodeError;

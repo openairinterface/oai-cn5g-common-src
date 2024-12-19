@@ -26,7 +26,7 @@
 using namespace oai::nas;
 
 //------------------------------------------------------------------------------
-ProcedureTransactionIdentity::ProcedureTransactionIdentity(uint16_t value)
+ProcedureTransactionIdentity::ProcedureTransactionIdentity(uint8_t value)
     : NasIe() {
   value_ = value;
 }
@@ -45,12 +45,12 @@ uint32_t ProcedureTransactionIdentity::GetIeLength() const {
 }
 
 //------------------------------------------------------------------------------
-void ProcedureTransactionIdentity::Set(uint16_t value) {
+void ProcedureTransactionIdentity::Set(uint8_t value) {
   value_ = value;
 }
 
 //------------------------------------------------------------------------------
-uint16_t ProcedureTransactionIdentity::Get() const {
+uint8_t ProcedureTransactionIdentity::Get() const {
   return value_;
 }
 
@@ -80,7 +80,7 @@ int ProcedureTransactionIdentity::Encode(uint8_t* buf, int len) const {
   int encoded_size = 0;
 
   // Value
-  ENCODE_U16(buf + encoded_size, value_, encoded_size);
+  ENCODE_U8(buf + encoded_size, value_, encoded_size);
 
   oai::logger::logger_common::nas().debug(
       "Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
@@ -102,7 +102,7 @@ int ProcedureTransactionIdentity::Decode(
 
   int decoded_size = 0;
   // Value
-  DECODE_U16(buf + decoded_size, value_, decoded_size);
+  DECODE_U8(buf + decoded_size, value_, decoded_size);
 
   oai::logger::logger_common::nas().debug("Decoded value 0x%x", value_);
   oai::logger::logger_common::nas().debug(

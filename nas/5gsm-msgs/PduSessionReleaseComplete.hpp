@@ -22,13 +22,12 @@
 #ifndef _PDU_SESSION_RELEASE_COMPLETE_H_
 #define _PDU_SESSION_RELEASE_COMPLETE_H_
 
-#include "Nas5gsmHeader.hpp"
+#include "Nas5gsmMessage.hpp"
 #include "NasIeHeader.hpp"
-#include "NasMessage.hpp"
 
 namespace oai::nas {
 
-class PduSessionReleaseComplete : public NasMessage {
+class PduSessionReleaseComplete : public Nas5gsmMessage {
  public:
   PduSessionReleaseComplete();
   virtual ~PduSessionReleaseComplete();
@@ -47,7 +46,7 @@ class PduSessionReleaseComplete : public NasMessage {
       std::optional<ExtendedProtocolConfigurationOptions>& options) const;
 
  private:
-  Nas5gsmHeader ie_header_;  // Mandatory
+  // Nas5gsmHeader ie_header_;  // Mandatory
 
   std::optional<_5gsmCause> ie_5gsm_cause_;  // Optional
   std::optional<ExtendedProtocolConfigurationOptions>

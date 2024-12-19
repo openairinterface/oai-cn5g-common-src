@@ -22,13 +22,12 @@
 #ifndef _PDU_SESSION_RELEASE_COMMAND_H_
 #define _PDU_SESSION_RELEASE_COMMAND_H_
 
-#include "Nas5gsmHeader.hpp"
+#include "Nas5gsmMessage.hpp"
 #include "NasIeHeader.hpp"
-#include "NasMessage.hpp"
 
 namespace oai::nas {
 
-class PduSessionReleaseCommand : public NasMessage {
+class PduSessionReleaseCommand : public Nas5gsmMessage {
  public:
   PduSessionReleaseCommand();
   virtual ~PduSessionReleaseCommand();
@@ -61,7 +60,7 @@ class PduSessionReleaseCommand : public NasMessage {
   // TODO: Access Type
 
  private:
-  Nas5gsmHeader ie_header_;   // Mandatory
+  // Nas5gsmHeader ie_header_;   // Mandatory
   _5gsmCause ie_5gsm_cause_;  // Mandatory
 
   std::optional<GprsTimer3> ie_back_off_timer_value_;  // Optional

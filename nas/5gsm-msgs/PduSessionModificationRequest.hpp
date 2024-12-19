@@ -22,13 +22,12 @@
 #ifndef _PDU_SESSION_MODIFICATION_REQUEST_H_
 #define _PDU_SESSION_MODIFICATION_REQUEST_H_
 
-#include "Nas5gsmHeader.hpp"
+#include "Nas5gsmMessage.hpp"
 #include "NasIeHeader.hpp"
-#include "NasMessage.hpp"
 
 namespace oai::nas {
 
-class PduSessionModificationRequest : public NasMessage {
+class PduSessionModificationRequest : public Nas5gsmMessage {
  public:
   PduSessionModificationRequest();
   virtual ~PduSessionModificationRequest();
@@ -74,7 +73,7 @@ class PduSessionModificationRequest : public NasMessage {
       std::optional<ExtendedProtocolConfigurationOptions>& options) const;
 
  private:
-  Nas5gsmHeader ie_header_;  // Mandatory
+  // Nas5gsmHeader ie_header_;  // Mandatory
 
   std::optional<_5gsmCapability> ie_5gsm_capability_;  // Optional
   std::optional<_5gsmCause> ie_5gsm_cause_;            // Optional

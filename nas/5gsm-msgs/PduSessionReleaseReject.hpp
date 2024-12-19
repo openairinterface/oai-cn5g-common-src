@@ -22,13 +22,12 @@
 #ifndef _PDU_SESSION_RELEASE_REJECT_H_
 #define _PDU_SESSION_RELEASE_REJECT_H_
 
-#include "Nas5gsmHeader.hpp"
+#include "Nas5gsmMessage.hpp"
 #include "NasIeHeader.hpp"
-#include "NasMessage.hpp"
 
 namespace oai::nas {
 
-class PduSessionReleaseReject : public NasMessage {
+class PduSessionReleaseReject : public Nas5gsmMessage {
  public:
   PduSessionReleaseReject();
   virtual ~PduSessionReleaseReject();
@@ -47,7 +46,7 @@ class PduSessionReleaseReject : public NasMessage {
       std::optional<ExtendedProtocolConfigurationOptions>& options) const;
 
  private:
-  Nas5gsmHeader ie_header_;   // Mandatory
+  // Nas5gsmHeader ie_header_;   // Mandatory
   _5gsmCause ie_5gsm_cause_;  // Mandatory
 
   std::optional<ExtendedProtocolConfigurationOptions>

@@ -33,7 +33,7 @@ namespace oai::nas {
 class ProcedureTransactionIdentity : public NasIe {
  public:
   ProcedureTransactionIdentity();
-  ProcedureTransactionIdentity(uint16_t value);
+  ProcedureTransactionIdentity(uint8_t value);
   virtual ~ProcedureTransactionIdentity();
 
   bool Validate(int len) const override;
@@ -44,11 +44,11 @@ class ProcedureTransactionIdentity : public NasIe {
   static std::string GetIeName() { return kProcedureTransactionIdentityIeName; }
   uint32_t GetIeLength() const override;
 
-  void Set(uint16_t value);
-  uint16_t Get() const;
+  void Set(uint8_t value);
+  uint8_t Get() const;
 
  private:
-  uint16_t value_;
+  uint8_t value_;
 };
 }  // namespace oai::nas
 

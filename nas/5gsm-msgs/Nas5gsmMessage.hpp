@@ -45,6 +45,7 @@ class Nas5gsmMessage : public NasMessage {
   void SetHeader(
       uint8_t epd, uint8_t pdu_session_id, uint16_t procedure_transaction_id,
       uint8_t msg_type);
+  void SetHeader(uint8_t pdu_session_id, uint16_t procedure_transaction_id);
 
   Nas5gsmHeader GetHeader() const;
   void GetHeader(Nas5gsmHeader& nas_header) const;

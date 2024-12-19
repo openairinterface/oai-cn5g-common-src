@@ -38,7 +38,8 @@ Nas5gsmHeader::Nas5gsmHeader(
       ie_msg_type_(msg_type) {}
 
 //------------------------------------------------------------------------------
-Nas5gsmHeader::Nas5gsmHeader(uint8_t epd, uint8_t msg_type) {}
+Nas5gsmHeader::Nas5gsmHeader(uint8_t epd, uint8_t msg_type)
+    : ie_epd_(epd), ie_msg_type_(msg_type) {}
 
 //------------------------------------------------------------------------------
 void Nas5gsmHeader::SetHeader(

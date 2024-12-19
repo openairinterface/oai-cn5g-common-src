@@ -45,6 +45,13 @@ void Nas5gsmMessage::SetHeader(
 }
 
 //------------------------------------------------------------------------------
+void Nas5gsmMessage::SetHeader(
+    uint8_t pdu_session_id, uint16_t procedure_transaction_id) {
+  ie_header_.SetPduSessionIdentity(pdu_session_id);
+  ie_header_.SetProcedureTransactionIdentity(procedure_transaction_id);
+}
+
+//------------------------------------------------------------------------------
 Nas5gsmHeader Nas5gsmMessage::GetHeader() const {
   return ie_header_;
 }

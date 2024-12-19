@@ -26,7 +26,7 @@
 using namespace oai::nas;
 
 //------------------------------------------------------------------------------
-AllowedSscMode::AllowedSscMode() : Type1NasIeFormatTv() {}
+AllowedSscMode::AllowedSscMode() : Type1NasIeFormatTv(kIeiAllowedSscMode) {}
 
 //------------------------------------------------------------------------------
 AllowedSscMode::AllowedSscMode(uint8_t iei) : Type1NasIeFormatTv(iei) {}

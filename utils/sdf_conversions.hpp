@@ -53,6 +53,8 @@ struct sdf_filter {
   // as I understood the spec, there is only one IP range (not like for ports)
   ip_range src_ip_range;
   std::vector<port_range> src_port_ranges;
+  ip_range dst_ip_range;
+  std::vector<port_range> dst_port_ranges;
   int filter_components = 0;
   // TODO there are some more things in RFC 6733 but this should cover most
   // cases

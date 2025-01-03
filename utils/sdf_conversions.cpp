@@ -41,7 +41,7 @@ sdf_conversions::sdf_filter sdf_conversions::sdf_filter::from_string(
 
   // example for parsing: permit out ip from 1.2.3.4/24 80,433-500 to assigned
 
-  std::string regex = "permit out (\\S*) from (\\S*) ?(.*)? to assigned";
+  std::string regex = "permit out (\\S*) from (\\S*) ?(.*)? to (\\S*) ?(.*)?";
   //                               proto        src   ports
 
   std::regex re(regex);
@@ -82,6 +82,29 @@ sdf_conversions::sdf_filter sdf_conversions::sdf_filter::from_string(
       }
     }
   }
+
+  std::string dst_ip = matches[4];
+  if (!dst_ip.empty() && dst_ip != "assigned") {
+    filter.dst_ip_range   = ip_range::from_string(dst_ip);
+    filter.default_filter = false;
+    filter.filter_components++;
+  }
+
+  std::string dst_ports = matches[5];
+  if (!dst_ports.empty()) {
+    std::vector<std::string> splits;
+    boost::split(
+        splits, dst_ports, boost::is_any_of(","), boost::token_compress_on);
+    for (auto& split : splits) {
+      boost::trim(split);
+      port_range range = port_range::from_string(split);
+      if (range.use_port_range) {
+        filter.dst_port_ranges.push_back(range);
+        filter.filter_components++;
+      }
+    }
+  }
+
   return filter;
 }
 
@@ -111,7 +134,7 @@ sdf_conversions::ip_range sdf_conversions::ip_range::from_string(
   boost::split(
       splits, ip_string, boost::is_any_of("/"), boost::token_compress_on);
 
-  if (splits[0] == "any") {
+  if (splits[0] == "any" or splits[0] == "assigned") {
     range.use_ip_range = false;
     return range;
   }

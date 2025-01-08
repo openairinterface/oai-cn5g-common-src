@@ -719,5 +719,15 @@ class sbi_helper {
    */
   static void get_fmt_format_form(
       const std::string& input_str, std::string& output_str);
+
+  /*
+   * Parse the query and get the list of parameters
+   * @param [const std::string& ] query: Query
+   * @param [std::map<std::string, std::string>& ] parameters: Map of parameters
+   * (name, value)
+   * @return void
+   */
+  static void parse_query(
+      const std::string& query, std::map<std::string, std::string>& parameters);
 };
 }  // namespace oai::common::sbi

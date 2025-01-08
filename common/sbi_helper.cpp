@@ -71,3 +71,19 @@ void sbi_helper::get_fmt_format_form(
   output_str = std::regex_replace(
       tmp, e_last_parameter, "{}", std::regex_constants::match_any);
 }
+
+//---------------------------------------------------------------------------------------------
+void sbi_helper::parse_query(
+    const std::string& query_string,
+    std::map<std::string, std::string>& parameters) {
+  std::regex param_reg("([^=]*)=([^&]*)&?");
+
+  std::for_each(
+      std::sregex_iterator(query_string.begin(), query_string.end(), param_reg),
+      std::sregex_iterator(), [&parameters](std::smatch match) {
+        parameters.insert(std::pair<std::string, std::string>(
+            match[1].str().c_str(), match[2].str().c_str()));
+        return;
+      });
+  return;
+}

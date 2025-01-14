@@ -169,11 +169,17 @@ typedef struct {
 } PacketFilterModifyAndDelete;
 
 typedef struct {
+  uint8_t type;
+  bstring value;
+} PacketFilterComponent;
+
+typedef struct {
   uint8_t length;
-  bstring content;
+  std::vector<PacketFilterComponent> packet_filter_components;
 } PacketFilterContents;
 
 typedef struct {
+  // Spare: 2 bits
   uint8_t packet_filter_direction : 2;
   uint8_t packet_filter_id : 4;
   PacketFilterContents content;

@@ -435,7 +435,7 @@ void conv::convert_string_2_hex(
   memset(data, 0, input_str.length() + 1);
   memcpy((void*) data, (void*) input_str.c_str(), input_str.length());
   oai::utils::output_wrapper::print_buffer(
-      "amf_app", "Data input", data, input_str.length());
+      {}, "Data input", data, input_str.length());
 
   char* datahex = (char*) malloc(input_str.length() * 2 + 1);
   if (!datahex) {

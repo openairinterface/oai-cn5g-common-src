@@ -164,6 +164,21 @@ QosRule::GetPacketFilterCreateAndModifyAndReplaceList() const {
 }
 
 //------------------------------------------------------------------------------
+void QosRule::AddPacketFilterCreateAndModifyAndReplace(
+    const PacketFilterCreateAndModifyAndReplace& packet_filter) {
+  if (pf_create_and_modify_and_replace_list_.has_value()) {
+    pf_create_and_modify_and_replace_list_.value().push_back(packet_filter);
+  } else {
+    std::vector<PacketFilterCreateAndModifyAndReplace> packet_filter_list;
+    packet_filter_list.push_back(packet_filter);
+    pf_create_and_modify_and_replace_list_ =
+        std::make_optional<std::vector<PacketFilterCreateAndModifyAndReplace>>(
+            packet_filter_list);
+  }
+  SetLength();
+}
+
+//------------------------------------------------------------------------------
 void QosRule::SetPrecedence(uint8_t precedence) {
   precedence_ = std::make_optional<uint8_t>(precedence);
   SetLength();
@@ -254,7 +269,7 @@ int QosRule::Encode(uint8_t* buf, int len) const {
         (rule_operation_code_ ==
          kQosRuleRuleOperationCodeModifyExistingQosRuleAndReplaceAllPacketFilters)) {
       if (pf_create_and_modify_and_replace_list_.has_value()) {
-        for (auto p : pf_create_and_modify_and_replace_list_.value()) {
+        for (auto const& p : pf_create_and_modify_and_replace_list_.value()) {
           uint8_t octet_8 =
               ((p.packet_filter_direction & 0x03) << 4) |
               (p.packet_filter_id & 0x0f);  // octet 8- packet filter direction
@@ -263,10 +278,14 @@ int QosRule::Encode(uint8_t* buf, int len) const {
           ENCODE_U8(
               buf + encoded_size, p.content.length,
               encoded_size);  // length of packet filter
-          int encoded_content_size = encode_bstring(
-              p.content.content, (buf + encoded_size),
-              len - encoded_size);  // packet filter content
-          encoded_size += encoded_content_size;
+
+          for (auto const& pc : p.content.packet_filter_components) {
+            ENCODE_U8(buf + encoded_size, pc.type, encoded_size);
+            int encoded_content_size = encode_bstring(
+                pc.value, (buf + encoded_size),
+                len - encoded_size);  // packet filter content
+            encoded_size += encoded_content_size;
+          }
         }
       }
     }
@@ -335,12 +354,111 @@ int QosRule::Decode(const uint8_t* const buf, int len) {
       DECODE_U8(
           buf + decoded_size, pf.content.length,
           decoded_size);  // length of packet filter
+      uint8_t packet_filter_length = pf.content.length;
+      while (packet_filter_length > 0) {
+        PacketFilterComponent pc = {};
+        DECODE_U8(buf + decoded_size, pc.type, decoded_size);
+        packet_filter_length -= 1;
 
-      // Content
-      decode_bstring(
-          &pf.content.content, pf.content.length, (buf + decoded_size),
-          len - decoded_size);
-      decoded_size += pf.content.length;
+        uint8_t decoded_ie_size = 0;
+        switch (pc.type) {
+          case kQosRulePfctiMatchAllType: {
+            // not include the packet filter component value field
+          } break;
+
+          case kQosRulePfctiIpv4RemoteAddressType:
+          case kQosRulePfctiIpv4LocalAddressType: {
+            decoded_ie_size = decode_bstring(
+                &pc.value, 8, (buf + decoded_size), len - decoded_size);
+            // sequence of a four octet IPv4 address field and a four octet IPv4
+            // address mask field
+          } break;
+
+          case kQosRulePfctiIpv6RemoveAddressOrPrefixLengthType:
+          case kQosRulePfctiIpv6LocalAddressOrPrefixLengthType: {
+            decoded_ie_size = decode_bstring(
+                &pc.value, 17, (buf + decoded_size), len - decoded_size);
+            // sequence of a sixteen octet IPv6 address field and one octet
+            // prefix length field
+          } break;
+
+          case kQosRulePfctiProtocolIdentifierOrNextHeaderType: {
+            decoded_ie_size = decode_bstring(
+                &pc.value, 1, (buf + decoded_size), len - decoded_size);
+            // IPv4 protocol identifier or Ipv6 next header
+
+          } break;
+          case kQosRulePfctiSingleLocalPortType:
+          case kQosRulePfctiSingleRemotePortType: {
+            // two octets which specify a port number
+            decoded_ie_size = decode_bstring(
+                &pc.value, 2, (buf + decoded_size), len - decoded_size);
+          } break;
+          case kQosRulePfctiLocalPortRangeType:
+          case kQosRulePfctiRemotePortRangeType: {
+            // sequence of a two octet port range low limit field and a two
+            // octet port range high limit field
+            decoded_ie_size = decode_bstring(
+                &pc.value, 4, (buf + decoded_size), len - decoded_size);
+          } break;
+          case kQosRulePfctiSecurityParameterIndexType: {
+            // four octets which specify the IPSec security parameter index
+            decoded_ie_size = decode_bstring(
+                &pc.value, 4, (buf + decoded_size), len - decoded_size);
+          } break;
+          case kQosRulePfctiTypeOfServiceOrTrafficClassType: {
+            // sequence of a one octet type-of-service/traffic class field and a
+            // one  octet type-of-service/traffic class mask field
+            decoded_ie_size = decode_bstring(
+                &pc.value, 2, (buf + decoded_size), len - decoded_size);
+          } break;
+          case kQosRulePfctiFlowLabelType: {
+            // three octets which specify the IPv6 flow label
+            decoded_ie_size = decode_bstring(
+                &pc.value, 3, (buf + decoded_size), len - decoded_size);
+          } break;
+
+          case kQosRulePfctiDestinationMacAddressType:
+          case kQosRulePfctiSourceMacAddressType: {
+            // 6 octets which specify a MAC address
+            decoded_ie_size = decode_bstring(
+                &pc.value, 6, (buf + decoded_size), len - decoded_size);
+          } break;
+          case kQosRulePfcti8021qCtagVidType: {
+            // two octets which specify the VID of the customer-VLAN tag (C-TAG)
+            decoded_ie_size = decode_bstring(
+                &pc.value, 2, (buf + decoded_size), len - decoded_size);
+          } break;
+          case kQosRulePfcti8021qStagVidType: {
+            // two octets which specify the VID of the service-VLAN tag (S-TAG)
+            decoded_ie_size = decode_bstring(
+                &pc.value, 2, (buf + decoded_size), len - decoded_size);
+          } break;
+          case kQosRulePfcti8021qCtagPcpOrDeiType: {
+            // one octet which specifies the 802.1Q C-TAG PCP and DEI
+            decoded_ie_size = decode_bstring(
+                &pc.value, 1, (buf + decoded_size), len - decoded_size);
+          } break;
+          case kQosRulePfcti8021qStagPcpOrDeiType: {
+            // one octet which specifies the 802.1Q S-TAG PCP
+            decoded_ie_size = decode_bstring(
+                &pc.value, 1, (buf + decoded_size), len - decoded_size);
+          } break;
+          case kQosRulePfctiEthertypeType: {
+            // two octets which specify an ethertype
+            decoded_ie_size = decode_bstring(
+                &pc.value, 2, (buf + decoded_size), len - decoded_size);
+          } break;
+          default: {
+          } break;
+        }
+
+        if (decoded_ie_size > 0) {
+          decoded_size += decoded_ie_size;
+          packet_filter_length -= decoded_ie_size;
+        }
+      }
+
       pf_create_and_modify_and_replace_list.push_back(pf);
     }
     pf_create_and_modify_and_replace_list_ =

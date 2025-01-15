@@ -51,6 +51,16 @@ constexpr uint8_t
         6;                                                              // 110
 constexpr uint8_t kQosFlowDescriptionRuleOperationCodeReserved111 = 7;  // 111
 
+// Parameter Identifier
+constexpr uint8_t kQosFlowDescriptionParameterIdentifier5qi             = 0x01;
+constexpr uint8_t kQosFlowDescriptionParameterIdentifierGfbrUplink      = 0x02;
+constexpr uint8_t kQosFlowDescriptionParameterIdentifierGfbrDownlink    = 0x03;
+constexpr uint8_t kQosFlowDescriptionParameterIdentifierMfbrUplink      = 0x04;
+constexpr uint8_t kQosFlowDescriptionParameterIdentifierMfbrDownlink    = 0x05;
+constexpr uint8_t kQosFlowDescriptionParameterIdentifierAveragingWindow = 0x06;
+constexpr uint8_t kQosFlowDescriptionParameterIdentifierEpsBearerIdentity =
+    0x07;
+
 class QosFlowDescription {
  public:
   QosFlowDescription();

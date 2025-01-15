@@ -192,6 +192,11 @@ typedef struct {
   bstring content;
 } QosFlowDescriptionsParameter;
 
+typedef struct {
+  uint8_t unit;
+  uint16_t value;
+} BitRate;
+
 }  // namespace oai::nas
 
 #endif

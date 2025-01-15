@@ -187,12 +187,6 @@ typedef struct {
 
 // QoS Flow Description-related IEs
 typedef struct {
-  uint8_t parameter_id;
-  uint8_t length;
-  bstring content;
-} QosFlowDescriptionsParameter;
-
-typedef struct {
   uint8_t unit;
   uint16_t value;
 } BitRate;

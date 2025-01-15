@@ -26,6 +26,7 @@
 #include <vector>
 #include <optional>
 #include "Struct.hpp"
+#include "QosFlowDescriptionParameter.hpp"
 
 namespace oai::nas {
 constexpr uint8_t kQosFlowDescriptionMinimumLength = 3;
@@ -50,16 +51,6 @@ constexpr uint8_t
     kQosFlowDescriptionRuleOperationCodeModifyExistingQosFlowDescriptionWithoutModifyingPacketFilters =
         6;                                                              // 110
 constexpr uint8_t kQosFlowDescriptionRuleOperationCodeReserved111 = 7;  // 111
-
-// Parameter Identifier
-constexpr uint8_t kQosFlowDescriptionParameterIdentifier5qi             = 0x01;
-constexpr uint8_t kQosFlowDescriptionParameterIdentifierGfbrUplink      = 0x02;
-constexpr uint8_t kQosFlowDescriptionParameterIdentifierGfbrDownlink    = 0x03;
-constexpr uint8_t kQosFlowDescriptionParameterIdentifierMfbrUplink      = 0x04;
-constexpr uint8_t kQosFlowDescriptionParameterIdentifierMfbrDownlink    = 0x05;
-constexpr uint8_t kQosFlowDescriptionParameterIdentifierAveragingWindow = 0x06;
-constexpr uint8_t kQosFlowDescriptionParameterIdentifierEpsBearerIdentity =
-    0x07;
 
 class QosFlowDescription {
  public:
@@ -88,18 +79,16 @@ class QosFlowDescription {
   void GetNumberOfParameters(uint8_t& no_parameters) const;
   uint8_t GetNumberOfParameters() const;
 
-  void SetParametersList(const std::vector<QosFlowDescriptionsParameter>& list);
-  void GetParametersList(
-      std::optional<std::vector<QosFlowDescriptionsParameter>>& list) const;
-  std::optional<std::vector<QosFlowDescriptionsParameter>> GetParametersList()
-      const;
+  void SetParametersList(const std::vector<QosFlowDescriptionParameter>& list);
+  void GetParametersList(std::vector<QosFlowDescriptionParameter>& list) const;
+  std::vector<QosFlowDescriptionParameter> GetParametersList() const;
 
  private:
   uint16_t length_;
   uint8_t qfi_;
   uint8_t operation_code_;
   bool e_bit_;
-  std::optional<std::vector<QosFlowDescriptionsParameter>> parameters_list_;
+  std::vector<QosFlowDescriptionParameter> parameters_list_;
 };
 
 }  // namespace oai::nas

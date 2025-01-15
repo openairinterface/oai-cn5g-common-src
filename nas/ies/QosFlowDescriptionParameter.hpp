@@ -30,6 +30,7 @@
 namespace oai::nas {
 constexpr uint8_t kQosFlowDescriptionParameterMinimumLength =
     3;  // 1 for Identifier, 1 for length and at least 1 for contents
+
 // Parameter Identifier
 constexpr uint8_t kQosFlowDescriptionParameterIdentifier5qi             = 0x01;
 constexpr uint8_t kQosFlowDescriptionParameterIdentifierGfbrUplink      = 0x02;
@@ -49,7 +50,9 @@ class QosFlowDescriptionParameter {
   int Decode(const uint8_t* const buf, int len);
 
   uint8_t GetLength() const;
-  void SetLength();
+
+  uint8_t GetContentsLength() const;
+  void SetContentsLength();
 
   void SetIdentifier(uint8_t id);
   void GetIdentifier(uint8_t& id) const;

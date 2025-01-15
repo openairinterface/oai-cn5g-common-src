@@ -30,7 +30,7 @@ using namespace oai::nas;
 //------------------------------------------------------------------------------
 QosFlowDescriptionParameter::QosFlowDescriptionParameter()
     : length_(0), contents_() {
-  SetLength();
+  SetContentsLength();
 }
 
 //------------------------------------------------------------------------------
@@ -38,11 +38,17 @@ QosFlowDescriptionParameter::~QosFlowDescriptionParameter() {}
 
 //------------------------------------------------------------------------------
 uint8_t QosFlowDescriptionParameter::GetLength() const {
+  return (length_ + 2);  // 1 for parameter identifier, 1 for length and actual
+                         // length of the contents
+}
+
+//------------------------------------------------------------------------------
+uint8_t QosFlowDescriptionParameter::GetContentsLength() const {
   return length_;
 }
 
 //------------------------------------------------------------------------------
-void QosFlowDescriptionParameter::SetLength() {
+void QosFlowDescriptionParameter::SetContentsLength() {
   // Calculate the actual length
   length_ = blength(contents_);
 }
@@ -65,7 +71,7 @@ uint8_t QosFlowDescriptionParameter::GetIdentifier() const {
 //------------------------------------------------------------------------------
 void QosFlowDescriptionParameter::SetContents(const bstring& contents) {
   contents_ = contents;
-  SetLength();
+  SetContentsLength();
 }
 
 //------------------------------------------------------------------------------
@@ -229,7 +235,7 @@ int QosFlowDescriptionParameter::Encode(uint8_t* buf, int len) const {
   int encoded_size = 0;
 
   // Validate the buffer's length and Encode IEI/Length (later)
-  if (len < length_) {
+  if (len < GetLength()) {
     oai::logger::logger_common::nas().error(
         "Buffer length is less than the length of this IE (%d "
         "octet)",

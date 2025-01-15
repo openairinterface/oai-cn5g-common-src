@@ -42,12 +42,12 @@ uint16_t QosFlowDescription::GetLength() const {
 //------------------------------------------------------------------------------
 void QosFlowDescription::SetLength() {
   // Calculate the actual length
-  length_ = kQosFlowDescriptionMinimumLength;
-  if (parameters_list_.has_value()) {
-    for (auto p : parameters_list_.value()) {
-      length_ +=
-          p.length +
-          2;  // 2: 1 for parameter id, 1 for length of parameter contents
+  length_ = kQosFlowDescriptionMinimumLength;  // Including  Octet 4,5,6
+                                               // (Figure 9.11.4.12.2@3GPP
+                                               // TS 24.501, Rel 16.14.0)
+  if (parameters_list_.size() > 0) {
+    for (auto p : parameters_list_) {
+      length_ += p.GetLength();
     }
   }
 }
@@ -99,34 +99,28 @@ bool QosFlowDescription::GetEBit() const {
 
 //------------------------------------------------------------------------------
 void QosFlowDescription::GetNumberOfParameters(uint8_t& no_parameters) const {
-  if (parameters_list_.has_value()) {
-    no_parameters = parameters_list_.value().size();
-  }
+  no_parameters = parameters_list_.size();
 }
 //------------------------------------------------------------------------------
 uint8_t QosFlowDescription::GetNumberOfParameters() const {
-  if (parameters_list_.has_value())
-    return parameters_list_.value().size();
-  else
-    return 0;
+  return parameters_list_.size();
 }
 
 //------------------------------------------------------------------------------
 void QosFlowDescription::SetParametersList(
-    const std::vector<QosFlowDescriptionsParameter>& list) {
-  parameters_list_ =
-      std::make_optional<std::vector<QosFlowDescriptionsParameter>>(list);
+    const std::vector<QosFlowDescriptionParameter>& list) {
+  parameters_list_ = list;
   SetLength();
 }
 
 //------------------------------------------------------------------------------
 void QosFlowDescription::GetParametersList(
-    std::optional<std::vector<QosFlowDescriptionsParameter>>& list) const {
+    std::vector<QosFlowDescriptionParameter>& list) const {
   list = parameters_list_;
 }
 //------------------------------------------------------------------------------
-std::optional<std::vector<QosFlowDescriptionsParameter>>
-QosFlowDescription::GetParametersList() const {
+std::vector<QosFlowDescriptionParameter> QosFlowDescription::GetParametersList()
+    const {
   return parameters_list_;
 }
 
@@ -153,26 +147,18 @@ int QosFlowDescription::Encode(uint8_t* buf, int len) const {
   uint8_t octet5 = (operation_code_ & 0x07) << 5;
   ENCODE_U8(buf + encoded_size, octet5, encoded_size);
 
-  uint8_t number_of_parameters = 0;
-  if (parameters_list_.has_value())
-    number_of_parameters = parameters_list_.value().size();
+  uint8_t number_of_parameters = parameters_list_.size();
 
   // Octet 6: spare + e (1 bit) + number of parameters (6 bits)
   uint8_t octet6 = (e_bit_ << 7) | (number_of_parameters & 0x3f);
   ENCODE_U8(buf + encoded_size, octet6, encoded_size);
 
-  if (!parameters_list_.has_value()) return encoded_size;
+  if (parameters_list_.size() == 0) return encoded_size;
 
   // Parameter lists
-  for (auto p : parameters_list_.value()) {
-    // Parameter identifier
-    ENCODE_U8(buf + encoded_size, p.parameter_id, encoded_size);
-    // Length of parameter contents
-    ENCODE_U8(buf + encoded_size, p.length, encoded_size);
-    // Parameter contents
-    int encoded_content_size =
-        encode_bstring(p.content, (buf + encoded_size), len - encoded_size);
-    encoded_size += encoded_content_size;
+  for (auto p : parameters_list_) {
+    int encoded_size_ie = p.Encode(buf + encoded_size, len - encoded_size);
+    if (encoded_size_ie > 0) encoded_size += encoded_size_ie;
   }
 
   oai::logger::logger_common::nas().debug(
@@ -210,26 +196,17 @@ int QosFlowDescription::Decode(const uint8_t* const buf, int len) {
   uint8_t number_of_parameters = octet6 & 0x3f;  // 6 bits
 
   // Parameters list
-  std::vector<QosFlowDescriptionsParameter> parameters_list;
+  parameters_list_.clear();
   for (int i = 0; i < number_of_parameters; i++) {
-    QosFlowDescriptionsParameter parameter = {};
+    QosFlowDescriptionParameter parameter = {};
+    int decoded_parameter_size =
+        parameter.Decode(buf + decoded_size, len - decoded_size);
 
-    // Parameter identifier
-    DECODE_U8(buf + decoded_size, parameter.parameter_id, decoded_size);
-
-    // Length of parameter contents
-    DECODE_U8(buf + decoded_size, parameter.length, decoded_size);
-    // Parameter contents
-    uint8_t decoded_bstring_size = decode_bstring(
-        &parameter.content, parameter.length, (buf + decoded_size),
-        len - decoded_size);
-    if (decoded_bstring_size > 0) decoded_size += parameter.length;
-    parameters_list.push_back(parameter);
+    if (decoded_parameter_size > 0) {
+      decoded_size += decoded_parameter_size;
+      parameters_list_.push_back(parameter);
+    }
   }
-
-  parameters_list_ =
-      std::make_optional<std::vector<QosFlowDescriptionsParameter>>(
-          parameters_list);
 
   oai::logger::logger_common::nas().debug(
       "Decoded QosFlowDescription (len %d)", decoded_size);

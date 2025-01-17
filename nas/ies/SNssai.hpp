@@ -50,7 +50,7 @@ class SNssai : public Type4NasIe {
 
   void SetSNSSAI(
       std::optional<int8_t> iei, uint8_t sst, uint32_t sd,
-      uint8_t mapped_hplmn_sst, uint32_t mapped_hplmn_sd);
+      uint8_t mapped_hplmn_sst = 0, uint32_t mapped_hplmn_sd = 0);
 
   std::string ToString();
 

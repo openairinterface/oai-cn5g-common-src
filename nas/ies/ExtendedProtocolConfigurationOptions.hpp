@@ -56,6 +56,7 @@ class ExtendedProtocolConfigurationOptions : public Type6NasIe {
   void SetProtocolOrContainerIds(
       const std::vector<pco_protocol_or_container_id_t>& ids);
 
+  void Set(const protocol_configuration_options_t& conf_opt);
   void Get(protocol_configuration_options_t& conf_opt) const;
   protocol_configuration_options_t Get() const;
 

@@ -24,10 +24,12 @@
 
 #include "Type1NasIeFormatTv.hpp"
 
+namespace oai::nas {
+
 constexpr auto kAlwaysOnPduSessionIndicationIeName =
     "Always-on PDU Session Indication";
-
-namespace oai::nas {
+constexpr uint8_t kAlwaysOnPduSessionNotAllowed = 0;
+constexpr uint8_t kAlwaysOnPduSessionRequired   = 1;
 
 class AlwaysOnPduSessionIndication : public Type1NasIeFormatTv {
  public:

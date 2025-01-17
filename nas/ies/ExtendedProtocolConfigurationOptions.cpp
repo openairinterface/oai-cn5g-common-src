@@ -73,6 +73,17 @@ void ExtendedProtocolConfigurationOptions::SetProtocolOrContainerIds(
 }
 
 //------------------------------------------------------------------------------
+void ExtendedProtocolConfigurationOptions::Set(
+    const protocol_configuration_options_t& conf_opt) {
+  ext_                    = conf_opt.ext;
+  spare_                  = conf_opt.spare;
+  configuration_protocol_ = conf_opt.configuration_protocol;
+  protocol_or_container_ids.assign(
+      conf_opt.protocol_or_container_ids.begin(),
+      conf_opt.protocol_or_container_ids.end());
+}
+
+//------------------------------------------------------------------------------
 void ExtendedProtocolConfigurationOptions::Get(
     protocol_configuration_options_t& conf_opt) const {
   conf_opt.ext                    = ext_;

@@ -84,6 +84,7 @@ class QosFlowDescriptionParameter {
 
   // TODO: Averaging window
   // TODO: EPS bearer identity
+  std::optional<BitRate> GetBitRate() const;
 
  private:
   uint8_t identifier_;
@@ -91,7 +92,6 @@ class QosFlowDescriptionParameter {
   bstring contents_;
 
   void SetBitRate(const BitRate& bit_rate);
-  std::optional<BitRate> GetBitRate() const;
 };
 
 }  // namespace oai::nas

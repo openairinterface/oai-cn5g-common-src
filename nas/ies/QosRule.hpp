@@ -31,6 +31,13 @@
 namespace oai::nas {
 constexpr uint8_t kQosRuleMinimumLength = 4;
 
+// Segregation
+constexpr uint8_t kQosRuleSegregationNotRequested = 0;
+constexpr uint8_t kQosRuleSegregationRequested    = 1;
+// DRQ bit
+constexpr uint8_t kQosRuleTheQosRuleIsNotTheDefaultQosRule = 0;
+constexpr uint8_t kQosRuleTheQosRuleIsTheDefaultQosRule    = 1;
+
 constexpr uint8_t kQosRuleRuleOperationCodeReserved000           = 0;  // 0b000
 constexpr uint8_t kQosRuleRuleOperationCodeCreateNewQosRule      = 1;  // 0b001
 constexpr uint8_t kQosRuleRuleOperationCodeDeleteExistingQosRule = 2;  // 0b010

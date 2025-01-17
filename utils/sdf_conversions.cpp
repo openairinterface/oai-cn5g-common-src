@@ -23,6 +23,8 @@
 #include "sdf_conversions.hpp"
 #include "Helpers.h"
 #include "logger_base.hpp"
+#include "3gpp_commons.h"
+#include "Struct.hpp"
 
 #include <regex>
 #include <fmt/format.h>
@@ -197,6 +199,64 @@ bool sdf_conversions::parse_bitrate_string(
     // we round up because it is described in 3GPP 29.244
     value = long(bw_value + 0.5);
     unit  = static_cast<bitrate_unit_e>(bitrate_int);
+    return true;
+  } catch (std::invalid_argument&) {
+    logger_common::common().error(
+        "Bitrate value part %s is not a number, cannot parse.",
+        string_bw_value);
+    return false;
+  }
+}
+
+bool oai::utils::sdf_conversions::parse_bitrate_string(
+    const std::string& bit_rate_str, oai::nas::BitRate& bit_rate) {
+  std::string bandwidth_regex =
+      oai::model::common::helpers::BANDWIDTH_VALIDATION_REGEX;
+
+  std::regex re(bandwidth_regex);
+  std::smatch matches;
+  if (!std::regex_match(bit_rate_str, matches, re)) {
+    logger_common::common().error(
+        "Bitrate %s cannot be parsed, does not follow the specification",
+        bit_rate_str);
+    return false;
+  }
+
+  std::string string_bw_value = matches[1];
+  // matches[2] is the fractional part but that is included in matches[1]
+  // already
+  std::string string_unit = matches[3];
+
+  try {
+    double bw_value = std::stod(string_bw_value);
+
+    if (string_unit == "bps") {
+      bit_rate.unit = kBitRateUnitValueIsIncrementedInMultiplesOf1Kbps;
+      bw_value      = bw_value / 1000;
+    } else if (string_unit == "Kbps") {
+      bit_rate.unit = kBitRateUnitValueIsIncrementedInMultiplesOf1Kbps;
+    } else if (string_unit == "Mbps") {
+      bit_rate.unit = kBitRateUnitValueIsIncrementedInMultiplesOf1Mbps;
+    } else if (string_unit == "Gbps") {
+      bit_rate.unit = kBitRateUnitValueIsIncrementedInMultiplesOf1Gbps;
+    } else if (string_unit == "Tbps") {
+      bit_rate.unit = kBitRateUnitValueIsIncrementedInMultiplesOf1Tbps;
+    } else if (string_unit == "Pbps") {
+      bit_rate.unit = kBitRateUnitValueIsIncrementedInMultiplesOf1Pbps;
+    }
+
+    while (bw_value > UINT16_MAX) {
+      if (bit_rate.unit == kBitRateUnitValueIsIncrementedInMultiplesOf256Pbps) {
+        logger_common::common().warn(
+            "Bitrate cannot be higher than %lf x 256 PBPS", bw_value);
+        return false;
+      }
+      bw_value = bw_value / 4;
+      bit_rate.unit++;
+    }
+
+    // we round up because it is described in 3GPP 29.244
+    bit_rate.value = long(bw_value + 0.5);
     return true;
   } catch (std::invalid_argument&) {
     logger_common::common().error(

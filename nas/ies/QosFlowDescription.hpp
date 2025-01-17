@@ -52,6 +52,10 @@ constexpr uint8_t
         6;                                                              // 110
 constexpr uint8_t kQosFlowDescriptionRuleOperationCodeReserved111 = 7;  // 111
 
+// Ebit
+constexpr uint8_t kQosFlowDescriptionEBitReserved                 = 0;
+constexpr uint8_t kQosFlowDescriptionEBitParametersListIsIncluded = 1;
+
 class QosFlowDescription {
  public:
   QosFlowDescription();

@@ -25,6 +25,7 @@
 #include <netinet/in.h>
 #include <string>
 #include <vector>
+#include "Struct.hpp"
 
 namespace oai::utils::sdf_conversions {
 
@@ -82,6 +83,8 @@ enum class bitrate_unit_e {
 bool parse_bitrate_string(
     const std::string& bitrate, uint16_t& value, bitrate_unit_e& unit);
 
+bool parse_bitrate_string(
+    const std::string& bitrate, oai::nas::BitRate& bit_rate);
 /**
  * Parses 3GPP 29.571 BitRate string to a desired unit (e.g. KBPS)
  * @param bitrate input: bitrate string

@@ -232,7 +232,7 @@ bool oai::utils::sdf_conversions::parse_bitrate_string(
 
     if (string_unit == "bps") {
       bit_rate.unit = kBitRateUnitValueIsIncrementedInMultiplesOf1Kbps;
-      bw_value      = bw_value / 1000;
+      bw_value      = bw_value / 1024;
     } else if (string_unit == "Kbps") {
       bit_rate.unit = kBitRateUnitValueIsIncrementedInMultiplesOf1Kbps;
     } else if (string_unit == "Mbps") {

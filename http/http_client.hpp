@@ -35,7 +35,7 @@ using namespace oai::common::sbi;
 
 namespace oai::http {
 
-const std::string CURL_MIME_BOUNDARY = "----Boundary";
+const std::string MIME_BOUNDARY = "----Boundary";
 
 class http_client : public std::enable_shared_from_this<http_client> {
  private:

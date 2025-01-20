@@ -47,28 +47,39 @@ PduSessionEstablishmentAccept::~PduSessionEstablishmentAccept() {}
 uint32_t PduSessionEstablishmentAccept::GetLength() const {
   uint32_t msg_len = 0;
   msg_len += Nas5gsmMessage::GetLength();
-  msg_len += ie_selected_pdu_session_type_.GetIeLength();
-  msg_len += ie_selected_ssc_mode_.GetIeLength();
+  // msg_len += ie_selected_pdu_session_type_.GetIeLength();
+  // msg_len += ie_selected_ssc_mode_.GetIeLength();
+  msg_len += 1;  // 1/2 octet for Selected PDU session type and 1/2 octet for
+                 // Selected SSC mode
   msg_len += ie_authorized_qos_rules_.GetIeLength();
   msg_len += ie_session_ambr_.GetIeLength();
 
   if (ie_5gsm_cause_.has_value())
     msg_len += ie_5gsm_cause_.value().GetIeLength();
+
   if (ie_pdu_address_.has_value())
     msg_len += ie_pdu_address_.value().GetIeLength();
+
   if (ie_gprs_timer_.has_value())
     msg_len += ie_gprs_timer_.value().GetIeLength();
+
   if (ie_s_nssai_.has_value()) msg_len += ie_s_nssai_.value().GetIeLength();
+
   if (ie_always_on_pdu_session_indication_.has_value())
     msg_len += ie_always_on_pdu_session_indication_.value().GetIeLength();
+
   if (ie_eap_message_.has_value())
     msg_len += ie_eap_message_.value().GetIeLength();
+
   if (ie_authorized_qos_flow_descriptions_.has_value())
     msg_len += ie_authorized_qos_flow_descriptions_.value().GetIeLength();
+
   if (ie_extended_protocol_configuration_options_.has_value())
     msg_len +=
         ie_extended_protocol_configuration_options_.value().GetIeLength();
+
   if (ie_dnn_.has_value()) msg_len += ie_dnn_.value().GetIeLength();
+
   return msg_len;
 }
 
@@ -258,6 +269,8 @@ int PduSessionEstablishmentAccept::Encode(uint8_t* buf, int len) {
       KEncodeDecodeError) {
     return KEncodeDecodeError;
   }
+  encoded_size++;  // 1/2 forSelected PDU session type, 1/2 octet for Selected
+                   // SSC mode
 
   // Authorized QoS rules
   if ((encoded_ie_size = NasHelper::Encode(

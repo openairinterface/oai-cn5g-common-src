@@ -31,7 +31,7 @@ Type4NasIe::Type4NasIe() : NasIe() {
 
 //------------------------------------------------------------------------------
 Type4NasIe::Type4NasIe(uint8_t iei) : NasIe() {
-  iei_ = std::optional<uint8_t>(iei);
+  iei_ = std::make_optional<uint8_t>(iei);
   li_  = 0;
 }
 
@@ -40,7 +40,7 @@ Type4NasIe::Type4NasIe(uint8_t iei) : NasIe() {
 
 //------------------------------------------------------------------------------
 void Type4NasIe::SetIei(uint8_t iei) {
-  iei_ = std::optional<uint8_t>(iei);
+  iei_ = std::make_optional<uint8_t>(iei);
 }
 
 //------------------------------------------------------------------------------

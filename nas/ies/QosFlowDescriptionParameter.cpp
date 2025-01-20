@@ -89,6 +89,7 @@ void QosFlowDescriptionParameter::Set5qi(uint8_t _5qi) {
   identifier_ = kQosFlowDescriptionParameterIdentifier5qi;
   length_     = 1;
   contents_   = blk2bstr(&_5qi, 1);
+  SetContentsLength();
 }
 
 //------------------------------------------------------------------------------
@@ -119,6 +120,7 @@ void QosFlowDescriptionParameter::SetBitRate(const BitRate& bit_rate) {
   content[1] = bit_rate.value >> 8;                  // 8 most significant bits
   content[2] = (uint8_t) (bit_rate.value & 0x00ff);  // 8 less significant bits
   contents_  = blk2bstr(&content, 3);
+  SetContentsLength();
 }
 //------------------------------------------------------------------------------
 std::optional<BitRate> QosFlowDescriptionParameter::GetBitRate() const {

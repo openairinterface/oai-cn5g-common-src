@@ -61,8 +61,7 @@ QosFlowDescriptions::QosFlowDescriptions(
     : Type6NasIe(iei) {
   uint32_t length = 0;  // not include 3 first octets: 1 for IE , 2 for length,
   for (auto qos : qos_flow_descriptions) {
-    length += qos.GetLength() +
-              3;  // 1 for QoS rule identifier and 2 for length of QoS rule
+    length += qos.GetLength();
   }
   SetLengthIndicator(
       (length > kQosFlowDescriptionsContentMinimumLength) ?
@@ -83,8 +82,7 @@ void QosFlowDescriptions::Set(
 
   uint32_t length = 0;  // not include 3 first octets: 1 for IE , 2 for length,
   for (auto qos : qos_flow_descriptions) {
-    length += qos.GetLength() +
-              3;  // 1 for QoS rule identifier and 2 for length of QoS rule
+    length += qos.GetLength();
   }
 
   SetLengthIndicator(length);
@@ -105,6 +103,9 @@ void QosFlowDescriptions::Get(
 void QosFlowDescriptions::AddQosFlowDescription(
     const QosFlowDescription& rule) {
   qos_flow_descriptions_.push_back(rule);
+  uint32_t length = 0;  // not include 3 first octets: 1 for IE , 2 for length
+  length += rule.GetLength();
+  SetLengthIndicator(length);
 }
 
 //------------------------------------------------------------------------------

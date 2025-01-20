@@ -55,8 +55,7 @@ QosRules::QosRules(uint8_t iei, const std::vector<QosRule>& qos_rules)
     : Type6NasIe(iei) {
   uint32_t length = 0;  // not include 3 first octets: 1 for IE , 2 for length,
   for (auto qos : qos_rules) {
-    length += qos.GetLength() +
-              3;  // 1 for QoS rule identifier and 2 for length of QoS rule
+    length += qos.GetLength();
   }
   SetLengthIndicator(
       (length > kQosRulesContentMinimumLength) ? length :
@@ -73,8 +72,7 @@ void QosRules::Set(const std::vector<QosRule>& qos_rules) {
 
   uint32_t length = 0;  // not include 3 first octets: 1 for IE , 2 for length,
   for (auto qos : qos_rules) {
-    length += qos.GetLength() +
-              3;  // 1 for QoS rule identifier and 2 for length of QoS rule
+    length += qos.GetLength();
   }
 
   SetLengthIndicator(length);

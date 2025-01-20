@@ -58,7 +58,10 @@ bool Type1NasIeFormatTv::Validate(int len) const {
 
 //------------------------------------------------------------------------------
 uint32_t Type1NasIeFormatTv::GetIeLength() const {
-  return kType1NasIeFormatTvLength;
+  if (iei_.has_value())
+    return kType1NasIeFormatTvLength;
+  else
+    return 0;
 }
 
 //------------------------------------------------------------------------------
@@ -85,8 +88,11 @@ int Type1NasIeFormatTv::Encode(uint8_t* buf, int len) const {
   ENCODE_U8(buf + encoded_size, octet, encoded_size);
 
   if (iei_.has_value()) {
+    oai::logger::logger_common::nas().debug(
+        "Encoded Type1NasIeFormatTv, len (%d)", encoded_size);
     return encoded_size;  // 1 octet
   } else {
+    oai::logger::logger_common::nas().debug("Encoded Type1NasIeFormatTv len 0");
     return 0;  // 1/2 octet
   }
 }

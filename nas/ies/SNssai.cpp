@@ -26,6 +26,14 @@
 using namespace oai::nas;
 
 //------------------------------------------------------------------------------
+SNssai::SNssai(uint8_t iei) : Type4NasIe(iei) {
+  sst_              = 0;
+  sd_               = SD_NO_VALUE;
+  mapped_hplmn_sst_ = 0;
+  mapped_hplmn_sd_  = SD_NO_VALUE;
+  SetLengthIndicator(1);  // SST
+}
+//------------------------------------------------------------------------------
 SNssai::SNssai(std::optional<uint8_t> iei) : Type4NasIe() {
   if (iei_.has_value()) {
     SetIei(iei.value());
@@ -43,17 +51,19 @@ SNssai::SNssai(std::optional<uint8_t> iei, SNSSAI_s snssai) {
   if (iei_.has_value()) {
     SetIei(iei.value());
   }
-
+  uint8_t actual_length = 0;
   // SST
   sst_ = snssai.sst;
+  actual_length += SST_LENGTH;
 
   uint8_t len = snssai.length;
   len -= 1;
 
-  // SD
+  // mappedHPLMN SD
   if (len == SD_LENGTH + SST_LENGTH + SD_LENGTH) {
     mapped_hplmn_sd_ = snssai.mHplmnSd;
     len -= SD_LENGTH;
+    actual_length += SD_LENGTH;
   } else {
     mapped_hplmn_sd_ = SD_NO_VALUE;
   }
@@ -62,19 +72,21 @@ SNssai::SNssai(std::optional<uint8_t> iei, SNSSAI_s snssai) {
   if (len == SD_LENGTH + SST_LENGTH) {
     mapped_hplmn_sst_ = snssai.mHplmnSst;
     len -= SST_LENGTH;
+    actual_length += SST_LENGTH;
   } else {
     mapped_hplmn_sst_ = 0;
   }
 
-  // mappedHPLMN SD
+  //  SD
   if (len == SD_LENGTH) {
     sd_ = snssai.sd;
     len -= SD_LENGTH;
+    actual_length += SD_LENGTH;
   } else {
     sd_ = SD_NO_VALUE;
   }
 
-  SetLengthIndicator(snssai.length);
+  SetLengthIndicator(actual_length);
 }
 
 //------------------------------------------------------------------------------
@@ -113,6 +125,36 @@ void SNssai::GetValue(SNSSAI_t& snssai) const {
 
   // Length
   snssai.length = len;
+}
+
+//------------------------------------------------------------------------------
+void SNssai::SetSNSSAI(
+    uint8_t sst, uint32_t sd, uint8_t mapped_hplmn_sst,
+    uint32_t mapped_hplmn_sd) {
+  uint8_t length = 0;
+  // SST
+  sst_ = sst;
+  length += SST_LENGTH;
+
+  // SD
+  sd_ = sd;
+  if (sd_ != SD_NO_VALUE) {
+    length += SD_LENGTH;
+  }
+
+  // mappedHPLMN SST
+  mapped_hplmn_sst_ = mapped_hplmn_sst;
+  if (mapped_hplmn_sst_ > 0) {
+    length += SST_LENGTH;
+  }
+
+  // mappedHPLMN SD
+  mapped_hplmn_sd_ = mapped_hplmn_sd;
+  if (mapped_hplmn_sd_ != SD_NO_VALUE) {
+    length += SD_LENGTH;
+  }
+
+  SetLengthIndicator(length);
 }
 
 //------------------------------------------------------------------------------
@@ -177,6 +219,9 @@ int SNssai::Encode(uint8_t* buf, int len) const {
   int encoded_header_size = Type4NasIe::Encode(buf + encoded_size, len);
   if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   encoded_size += encoded_header_size;
+
+  oai::logger::logger_common::nas().debug(
+      "Encoded header %s, len (%d)", GetIeName().c_str(), encoded_size);
 
   // SST
   ENCODE_U8(buf + encoded_size, sst_, encoded_size);

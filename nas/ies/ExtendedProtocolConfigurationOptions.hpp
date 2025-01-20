@@ -47,6 +47,8 @@ class ExtendedProtocolConfigurationOptions : public Type6NasIe {
     return kExtendedProtocolConfigurationOptionsIeName;
   }
 
+  void SetLength();
+
   void SetConfigurationProtocol(uint8_t configuration_protocol);
   void GetConfigurationProtocol(uint8_t& configuration_protocol) const;
 

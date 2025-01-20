@@ -46,7 +46,14 @@ PduAddress::~PduAddress() {}
 //------------------------------------------------------------------------------
 bool PduAddress::Validate(int len) const {
   // Validate length/IE
-  if (!Type4NasIe::Validate(len)) return false;
+  if (!Type4NasIe::Validate(len)) {
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the length of the header (IEI/Length) "
+        "of "
+        "this IE (%d octet(s))",
+        len);
+    return false;
+  }
   // Validate PDU session type value
   if (pdu_session_type_ == kPduAddressPduSessionTypeIpv4) {
     if (!ipv4_address_.has_value()) return false;
@@ -56,7 +63,7 @@ bool PduAddress::Validate(int len) const {
     if (!ipv4_address_.has_value()) return false;
     if (!ipv6_address_.has_value()) return false;
   }
-  return false;
+  return true;
 }
 //------------------------------------------------------------------------------
 void PduAddress::SetSi6lla(bool si6lla) {
@@ -85,6 +92,7 @@ std::optional<struct in_addr> PduAddress::GetIpv4Address() const {
 //------------------------------------------------------------------------------
 void PduAddress::SetIpv6Address(struct in6_addr ipv6_address) {
   ipv6_address_ = std::make_optional<struct in6_addr>(ipv6_address);
+  SetLengthIndicator(9);  // TODO: Remove hardcoded value
 }
 //------------------------------------------------------------------------------
 std::optional<struct in6_addr> PduAddress::GetIpv6Address() const {
@@ -96,6 +104,7 @@ void PduAddress::SetIpv4v6Address(
     struct in_addr ipv4_address, struct in6_addr ipv6_address) {
   ipv4_address_ = std::make_optional<struct in_addr>(ipv4_address);
   ipv6_address_ = std::make_optional<struct in6_addr>(ipv6_address);
+  SetLengthIndicator(13);  // TODO: Remove hardcoded value
 }
 
 //------------------------------------------------------------------------------
@@ -123,7 +132,14 @@ int PduAddress::Encode(uint8_t* buf, int len) const {
   oai::logger::logger_common::nas().debug("Encoding %s", GetIeName().c_str());
 
   // Validate the IE first
-  if (!Validate(len)) return KEncodeDecodeError;
+  if (!Validate(len)) {
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the length of the header (IEI/Length) "
+        "of "
+        "this IE (%d octet(s))",
+        len);
+    return KEncodeDecodeError;
+  }
 
   int ie_len = GetIeLength();
 
@@ -141,6 +157,7 @@ int PduAddress::Encode(uint8_t* buf, int len) const {
   bstring str;
   if (pdu_session_type_ == kPduAddressPduSessionTypeIpv4) {
     if (ipv4_address_.has_value()) {
+      str = bfromcstralloc(4, "\0");
       oai::utils::ipv4_to_bstring(ipv4_address_.value(), str);
     }
   } else if (pdu_session_type_ == kPduAddressPduSessionTypeIpv6) {
@@ -151,6 +168,7 @@ int PduAddress::Encode(uint8_t* buf, int len) const {
     oai::utils::ipv4v6_to_pdu_address_information(
         ipv4_address_.value(), ipv6_address_.value(), str);
   }
+
   int size = encode_bstring(str, (buf + encoded_size), len - encoded_size);
   encoded_size += size;
 

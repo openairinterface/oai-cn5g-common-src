@@ -36,6 +36,21 @@ ExtendedProtocolConfigurationOptions::ExtendedProtocolConfigurationOptions()
 }
 
 //------------------------------------------------------------------------------
+void ExtendedProtocolConfigurationOptions::SetLength() {
+  // Calculate the actual length
+  uint32_t length = kExtendedProtocolConfigurationOptionsMinimumLength;
+
+  if (protocol_or_container_ids.size() > 0) {
+    for (auto p : protocol_or_container_ids) {
+      length +=
+          (p.length_of_protocol_id_contents +
+           3);  // 2 for protocol ID, 1 for Length of protocol ID contents
+    }
+  }
+  SetLengthIndicator(length);
+}
+
+//------------------------------------------------------------------------------
 void ExtendedProtocolConfigurationOptions::SetConfigurationProtocol(
     uint8_t configuration_protocol) {
   configuration_protocol_ = configuration_protocol;
@@ -70,6 +85,7 @@ void ExtendedProtocolConfigurationOptions::GetProtocolOrContainerIds(
 void ExtendedProtocolConfigurationOptions::SetProtocolOrContainerIds(
     const std::vector<pco_protocol_or_container_id_t>& ids) {
   protocol_or_container_ids.assign(ids.begin(), ids.end());
+  SetLength();
 }
 
 //------------------------------------------------------------------------------
@@ -81,6 +97,7 @@ void ExtendedProtocolConfigurationOptions::Set(
   protocol_or_container_ids.assign(
       conf_opt.protocol_or_container_ids.begin(),
       conf_opt.protocol_or_container_ids.end());
+  SetLength();
 }
 
 //------------------------------------------------------------------------------

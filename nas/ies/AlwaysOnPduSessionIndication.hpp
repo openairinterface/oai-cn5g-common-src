@@ -34,7 +34,7 @@ constexpr uint8_t kAlwaysOnPduSessionRequired   = 1;
 class AlwaysOnPduSessionIndication : public Type1NasIeFormatTv {
  public:
   AlwaysOnPduSessionIndication();
-  AlwaysOnPduSessionIndication(uint8_t type);
+  AlwaysOnPduSessionIndication(uint8_t iei);
   AlwaysOnPduSessionIndication(uint8_t iei, uint8_t type);
   virtual ~AlwaysOnPduSessionIndication();
 

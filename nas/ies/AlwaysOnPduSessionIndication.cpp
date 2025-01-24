@@ -27,17 +27,18 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 AlwaysOnPduSessionIndication::AlwaysOnPduSessionIndication()
-    : Type1NasIeFormatTv() {}
+    : Type1NasIeFormatTv(), apsi_(false) {}
 
 //------------------------------------------------------------------------------
 AlwaysOnPduSessionIndication::AlwaysOnPduSessionIndication(uint8_t iei)
-    : Type1NasIeFormatTv(iei) {}
+    : Type1NasIeFormatTv(iei), apsi_(false) {}
 
 //------------------------------------------------------------------------------
 AlwaysOnPduSessionIndication::AlwaysOnPduSessionIndication(
     uint8_t iei, uint8_t value)
     : Type1NasIeFormatTv(iei) {
-  Type1NasIeFormatTv::SetValue(value & 0x0f);
+  Type1NasIeFormatTv::SetValue(0x01 & value);
+  apsi_ = (0x01 & value_);
 }
 
 //------------------------------------------------------------------------------

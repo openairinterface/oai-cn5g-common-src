@@ -40,6 +40,8 @@ class SNssai : public Type4NasIe {
   SNssai(std::optional<uint8_t> iei, SNSSAI_s snssai);
   virtual ~SNssai();
 
+  void Clear();
+
   int Encode(uint8_t* buf, int len) const override;
   int Decode(uint8_t* buf, int len, const bool is_option = true);
 
@@ -54,7 +56,7 @@ class SNssai : public Type4NasIe {
       std::optional<int8_t> iei, uint8_t sst, uint32_t sd,
       uint8_t mapped_hplmn_sst = 0, uint32_t mapped_hplmn_sd = SD_NO_VALUE);
 
-  std::string ToString();
+  std::string ToString() const;
 
  private:
   uint8_t sst_;

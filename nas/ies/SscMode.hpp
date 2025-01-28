@@ -22,13 +22,13 @@
 #ifndef _SSC_MODE_H_
 #define _SSC_MODE_H_
 
-#include "Type1NasIeFormatTv.hpp"
+#include "Type1NasIe.hpp"
 
 constexpr auto kSscModeName = "SSC Mode";
 
 namespace oai::nas {
 
-class SscMode : public Type1NasIeFormatTv {
+class SscMode : public Type1NasIe {
  public:
   SscMode();
   SscMode(uint8_t type);
@@ -37,8 +37,15 @@ class SscMode : public Type1NasIeFormatTv {
 
   static std::string GetIeName() { return kSscModeName; }
 
-  void SetValue(uint8_t value);
-  uint8_t GetValue() const;
+  void Set(bool high_pos);
+
+  void SetSscMode(uint8_t value);
+  uint8_t GetSscMode();
+
+ private:
+  void SetValue() override;
+  void GetValue() override;
+  uint8_t ssc_mode_;  // 3 bits
 };
 
 }  // namespace oai::nas

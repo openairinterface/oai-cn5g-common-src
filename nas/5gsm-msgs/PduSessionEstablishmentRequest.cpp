@@ -332,7 +332,7 @@ int PduSessionEstablishmentRequest::Decode(uint8_t* buf, int len) {
         oai::logger::logger_common::nas().debug(
             "Decoding IEI 0x%x", kIeiSscMode);
         if ((decoded_ie_size = NasHelper::Decode(
-                 ie_ssc_mode_, buf, len, decoded_size, true)) ==
+                 ie_ssc_mode_, buf, len, decoded_size, true, false)) ==
             KEncodeDecodeError) {
           return KEncodeDecodeError;
         }

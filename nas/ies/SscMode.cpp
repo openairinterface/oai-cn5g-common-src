@@ -26,25 +26,42 @@
 using namespace oai::nas;
 
 //------------------------------------------------------------------------------
-SscMode::SscMode() : Type1NasIeFormatTv() {}
+SscMode::SscMode() : Type1NasIe() {}
 
 //------------------------------------------------------------------------------
-SscMode::SscMode(uint8_t iei) : Type1NasIeFormatTv(iei) {}
+SscMode::SscMode(uint8_t iei) : Type1NasIe(iei) {}
 
 //------------------------------------------------------------------------------
-SscMode::SscMode(uint8_t iei, uint8_t value) : Type1NasIeFormatTv(iei) {
-  Type1NasIeFormatTv::SetValue(value & 0x07);
+SscMode::SscMode(uint8_t iei, uint8_t value) : Type1NasIe(iei) {
+  Type1NasIe::SetValue(value & 0x07);
 }
 
 //------------------------------------------------------------------------------
 SscMode::~SscMode() {}
 
 //------------------------------------------------------------------------------
-void SscMode::SetValue(uint8_t value) {
-  Type1NasIeFormatTv::SetValue(value & 0x07);
+void SscMode::Set(bool high_pos) {
+  Type1NasIe::Set(high_pos);
 }
 
 //------------------------------------------------------------------------------
-uint8_t SscMode::GetValue() const {
-  return Type1NasIeFormatTv::GetValue() & 0x07;
+void SscMode::SetSscMode(uint8_t value) {
+  ssc_mode_ = value & 0x07;
+  Type1NasIe::SetValue(ssc_mode_);
+}
+
+//------------------------------------------------------------------------------
+uint8_t SscMode::GetSscMode() {
+  GetValue();
+  return ssc_mode_;
+}
+
+//------------------------------------------------------------------------------
+void SscMode::SetValue() {
+  Type1NasIe::SetValue(ssc_mode_);
+}
+
+//------------------------------------------------------------------------------
+void SscMode::GetValue() {
+  ssc_mode_ = value_ & 0x07;  // 3 bits
 }

@@ -150,7 +150,7 @@ int QosFlowDescription::Encode(uint8_t* buf, int len) const {
   uint8_t number_of_parameters = parameters_list_.size();
 
   // Octet 6: spare + e (1 bit) + number of parameters (6 bits)
-  uint8_t octet6 = (e_bit_ << 7) | (number_of_parameters & 0x3f);
+  uint8_t octet6 = (e_bit_ << 6) | (number_of_parameters & 0x3f);
   ENCODE_U8(buf + encoded_size, octet6, encoded_size);
 
   if (parameters_list_.size() == 0) return encoded_size;

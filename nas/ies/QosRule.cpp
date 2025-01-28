@@ -42,7 +42,7 @@ uint16_t QosRule::GetLength() const {
 //------------------------------------------------------------------------------
 void QosRule::SetLength() {
   // Calculate the actual length
-  length_ = kQosRuleMinimumLength;
+  length_ = 1;  // Rule Operation Code + DQR + Number of packet filters
   for (int i = 0; i < number_of_packet_filters_; i++) {
     if (rule_operation_code_ ==
         kQosRuleRuleOperationCodeModifyExistingQosRuleAndDeletePacketFilters) {
@@ -63,6 +63,9 @@ void QosRule::SetLength() {
       }
     }
   }
+
+  if (precedence_.has_value()) length_ += 1;
+  if (segregation_ or qfi_.has_value()) length_ += 1;
 }
 
 //------------------------------------------------------------------------------
@@ -290,6 +293,17 @@ int QosRule::Encode(uint8_t* buf, int len) const {
       }
     }
   }
+
+  // Precedence
+  if (precedence_.has_value())
+    ENCODE_U8(buf + encoded_size, precedence_.value(), encoded_size);
+  // Segregation + QFI
+  uint8_t octet_segregation_qfi = {};
+  if (segregation_) octet_segregation_qfi = 0b01000000;
+  if (qfi_.has_value())
+    octet_segregation_qfi = octet_segregation_qfi | (qfi_.value() & 0x03f);
+  if (segregation_ or qfi_.has_value())
+    ENCODE_U8(buf + encoded_size, octet_segregation_qfi, encoded_size);
 
   oai::logger::logger_common::nas().debug(
       "Encoded QosRule, len (%d)", encoded_size);

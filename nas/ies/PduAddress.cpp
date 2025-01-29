@@ -162,9 +162,11 @@ int PduAddress::Encode(uint8_t* buf, int len) const {
     }
   } else if (pdu_session_type_ == kPduAddressPduSessionTypeIpv6) {
     if (ipv6_address_.has_value()) {
+      str = bfromcstralloc(8, "\0");
       oai::utils::ipv6_to_bstring(ipv6_address_.value(), str);
     }
   } else if (pdu_session_type_ == kPduAddressPduSessionTypeIpv4v6) {
+    str = bfromcstralloc(12, "\0");
     oai::utils::ipv4v6_to_pdu_address_information(
         ipv4_address_.value(), ipv6_address_.value(), str);
   }

@@ -34,7 +34,7 @@ namespace oai::ngap {
 class QosFlowToBeForwardedList {
  public:
   QosFlowToBeForwardedList();
-  virtual ~QosFlowToBeForwardedList();
+  virtual ~QosFlowToBeForwardedList(){};
 
   void set(const std::vector<QosFlowToBeForwardedItem>& qosList);
   // TODO: get

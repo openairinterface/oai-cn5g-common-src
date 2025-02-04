@@ -40,6 +40,7 @@
 static const std::string ASYNC_CMD           = "asc_cmd";
 static const std::string LOGGER_COMMON       = "common";
 static const std::string LOGGER_COMMON_NAS   = "nas";
+static const std::string LOGGER_COMMON_NGAP  = "ngap";
 static const std::string LOGGER_COMMON_PFCP  = "pfcp   ";
 static const std::string SYSTEM              = "system ";
 static const std::string LOGGER_COMMON_UTILS = "utils";
@@ -216,6 +217,8 @@ class logger_common {
     oai::logger::logger_registry::register_logger(
         name, LOGGER_COMMON_NAS, log_stdout, log_rot_file);
     oai::logger::logger_registry::register_logger(
+        name, LOGGER_COMMON_NGAP, log_stdout, log_rot_file);
+    oai::logger::logger_registry::register_logger(
         name, LOGGER_COMMON_PFCP, log_stdout, log_rot_file);
     oai::logger::logger_registry::register_logger(
         name, SYSTEM, log_stdout, log_rot_file);
@@ -234,6 +237,9 @@ class logger_common {
   }
   static const oai::logger::printf_logger& nas() {
     return oai::logger::logger_registry::get_logger(LOGGER_COMMON_NAS);
+  }
+  static const oai::logger::printf_logger& ngap() {
+    return oai::logger::logger_registry::get_logger(LOGGER_COMMON_NGAP);
   }
   static const oai::logger::printf_logger& pfcp() {
     return oai::logger::logger_registry::get_logger(LOGGER_COMMON_PFCP);

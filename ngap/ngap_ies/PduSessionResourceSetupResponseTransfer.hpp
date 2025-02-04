@@ -39,10 +39,14 @@ class PduSessionResourceSetupResponseTransferIE {
   PduSessionResourceSetupResponseTransferIE();
   virtual ~PduSessionResourceSetupResponseTransferIE();
 
-  void set(
+  void setDlQosFlowPerTnlInformation(
+      const QosFlowPerTnlInformation& qosFlowPerTnlInformation);
+  void getDlQosFlowPerTnlInformation(
+      QosFlowPerTnlInformation& qosFlowPerTnlInformation) const;
+  void setDlQosFlowPerTnlInformation(
       const GtpTunnel_t& upTransportLayerInfo,
       const std::vector<AssociatedQosFlow_t>& list);
-  bool get(
+  void getDlQosFlowPerTnlInformation(
       GtpTunnel_t& upTransportLayerInfo,
       std::vector<AssociatedQosFlow_t>& list) const;
 
@@ -62,14 +66,14 @@ class PduSessionResourceSetupResponseTransferIE {
   bool decode(uint8_t* buf, int buf_size);  // TODO: remove naked pointer
 
  private:
-  Ngap_PDUSessionResourceSetupResponseTransfer_t*
-      m_PduSessionResourceSetupResponseTransferIe;
+  Ngap_PDUSessionResourceSetupResponseTransfer_t* m_Ie;
 
   QosFlowPerTnlInformation m_DlQosFlowPerTnlInformation;  // Mandatory
   std::optional<QosFlowPerTnlInformationList>
       m_AdditionalDlQosFlowPerTnlInformation;
   std::optional<SecurityResult> m_SecurityResult;  // Optional
-  // TODO: QoS Flow Failed to Setup List
+  // TODO: Security Result (Optional)
+  // TODO: QoS Flow Failed to Setup List (Optional)
 };
 
 }  // namespace oai::ngap

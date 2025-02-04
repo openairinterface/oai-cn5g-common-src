@@ -29,9 +29,8 @@ namespace oai::ngap {
 //------------------------------------------------------------------------------
 PduSessionResourceSetupResponseTransferIE::
     PduSessionResourceSetupResponseTransferIE() {
-  m_PduSessionResourceSetupResponseTransferIe =
-      (Ngap_PDUSessionResourceSetupResponseTransfer_t*) calloc(
-          1, sizeof(Ngap_PDUSessionResourceSetupResponseTransfer_t));
+  m_Ie = (Ngap_PDUSessionResourceSetupResponseTransfer_t*) calloc(
+      1, sizeof(Ngap_PDUSessionResourceSetupResponseTransfer_t));
   m_AdditionalDlQosFlowPerTnlInformation = std::nullopt;
   m_SecurityResult                       = std::nullopt;
 }
@@ -41,7 +40,27 @@ PduSessionResourceSetupResponseTransferIE::
     ~PduSessionResourceSetupResponseTransferIE() {}
 
 //------------------------------------------------------------------------------
-void PduSessionResourceSetupResponseTransferIE::set(
+void PduSessionResourceSetupResponseTransferIE::setDlQosFlowPerTnlInformation(
+    const QosFlowPerTnlInformation& qosFlowPerTnlInformation) {
+  m_DlQosFlowPerTnlInformation = qosFlowPerTnlInformation;
+
+  int ret =
+      m_DlQosFlowPerTnlInformation.encode(m_Ie->dLQosFlowPerTNLInformation);
+  if (!ret) {
+    oai::logger::logger_common::ngap().error(
+        "Encode DLQoSFlowPerTNLInformation IE error");
+    return;
+  }
+}
+
+//------------------------------------------------------------------------------
+void PduSessionResourceSetupResponseTransferIE::getDlQosFlowPerTnlInformation(
+    QosFlowPerTnlInformation& qosFlowPerTnlInformation) const {
+  qosFlowPerTnlInformation = m_DlQosFlowPerTnlInformation;
+}
+
+//------------------------------------------------------------------------------
+void PduSessionResourceSetupResponseTransferIE::setDlQosFlowPerTnlInformation(
     const GtpTunnel_t& upTransportLayerInfo,
     const std::vector<AssociatedQosFlow_t>& list) {
   UpTransportLayerInformation upTransportLayerInformation = {};
@@ -69,12 +88,51 @@ void PduSessionResourceSetupResponseTransferIE::set(
   m_DlQosFlowPerTnlInformation.set(
       upTransportLayerInformation, associatedQosFlowList);
 
-  int ret = m_DlQosFlowPerTnlInformation.encode(
-      m_PduSessionResourceSetupResponseTransferIe->dLQosFlowPerTNLInformation);
+  int ret =
+      m_DlQosFlowPerTnlInformation.encode(m_Ie->dLQosFlowPerTNLInformation);
   if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode DLQoSFlowPerTNLInformation IE error");
+    oai::logger::logger_common::ngap().error(
+        "Encode DLQoSFlowPerTNLInformation IE error");
     return;
+  }
+}
+
+//------------------------------------------------------------------------------
+void PduSessionResourceSetupResponseTransferIE::getDlQosFlowPerTnlInformation(
+    GtpTunnel_t& upTransportLayerInfo,
+    std::vector<AssociatedQosFlow_t>& list) const {
+  UpTransportLayerInformation upTransportLayerInformation = {};
+  AssociatedQosFlowList associatedQosFlowList             = {};
+  m_DlQosFlowPerTnlInformation.get(
+      upTransportLayerInformation, associatedQosFlowList);
+  TransportLayerAddress transportLayerAddress = {};
+  GtpTeid gtpTeid                             = {};
+  upTransportLayerInformation.get(transportLayerAddress, gtpTeid);
+  transportLayerAddress.get(upTransportLayerInfo.ipAddress);
+  gtpTeid.get(upTransportLayerInfo.gtpTeid);
+
+  std::vector<AssociatedQosFlowItem> vector_associated_qos_flow_item;
+  associatedQosFlowList.get(vector_associated_qos_flow_item);
+  for (int i = 0; i < vector_associated_qos_flow_item.size(); i++) {
+    AssociatedQosFlow_t AssociatedQosFlow_str;
+    long m_qosFlowMappingIndication;
+    QosFlowIdentifier qosFlowIdentifier = {};
+    vector_associated_qos_flow_item[i].get(
+        m_qosFlowMappingIndication, qosFlowIdentifier);
+    qosFlowIdentifier.get(AssociatedQosFlow_str.qosFlowIdentifier);
+    if (m_qosFlowMappingIndication < 0) {
+      AssociatedQosFlow_str.qosFlowMappingIndication = nullptr;
+    } else {
+      AssociatedQosFlow_str.qosFlowMappingIndication =
+          (e_Ngap_AssociatedQosFlowItem__qosFlowMappingIndication*) calloc(
+              1,
+              sizeof(e_Ngap_AssociatedQosFlowItem__qosFlowMappingIndication));
+      *AssociatedQosFlow_str.qosFlowMappingIndication =
+          (e_Ngap_AssociatedQosFlowItem__qosFlowMappingIndication)
+              m_qosFlowMappingIndication;
+    }
+
+    list.push_back(AssociatedQosFlow_str);
   }
 }
 
@@ -122,14 +180,22 @@ void PduSessionResourceSetupResponseTransferIE::
 
     int ret = m_AdditionalDlQosFlowPerTnlInformation.value().encode(ie);
     if (!ret) {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON).error(
+      oai::logger::logger_common::ngap().error(
           "Encode AdditionalDLQoSFlowPerTNLInformation IE error");
       return;
     }
-    m_PduSessionResourceSetupResponseTransferIe
+    m_Ie
         ->additionalDLQosFlowPerTNLInformation = ie;
         */
   // TODO
+}
+
+//------------------------------------------------------------------------------
+bool PduSessionResourceSetupResponseTransferIE::
+    getAdditionalDLQoSFlowPerTNLInformation(
+        QosFlowPerTnlInformationList& additionDlQoSFlowPerTnlInformation)
+        const {
+  return true;
 }
 
 //------------------------------------------------------------------------------
@@ -151,134 +217,10 @@ void PduSessionResourceSetupResponseTransferIE::setSecurityResult(
       (Ngap_SecurityResult_t*) calloc(1, sizeof(Ngap_SecurityResult_t));
   int ret = m_SecurityResult.value().encode(*ie);
   if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode SecurityResult IE error");
+    oai::logger::logger_common::ngap().error("Encode SecurityResult IE error");
     return;
   }
-  m_PduSessionResourceSetupResponseTransferIe->securityResult = ie;
-}
-
-//------------------------------------------------------------------------------
-int PduSessionResourceSetupResponseTransferIE::encode(
-    uint8_t* buf, int buf_size) {
-  ngap_utils::print_asn_msg(
-      &asn_DEF_Ngap_PDUSessionResourceSetupResponseTransfer,
-      m_PduSessionResourceSetupResponseTransferIe);
-  asn_enc_rval_t er = aper_encode_to_buffer(
-      &asn_DEF_Ngap_PDUSessionResourceSetupResponseTransfer, NULL,
-      m_PduSessionResourceSetupResponseTransferIe, buf, buf_size);
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("er.encoded %d", er.encoded);
-  return er.encoded;
-}
-
-//------------------------------------------------------------------------------
-// Decapsulation
-bool PduSessionResourceSetupResponseTransferIE::decode(
-    uint8_t* buf, int buf_size) {
-  asn_dec_rval_t rc = asn_decode(
-      NULL, ATS_ALIGNED_CANONICAL_PER,
-      &asn_DEF_Ngap_PDUSessionResourceSetupResponseTransfer,
-      (void**) &m_PduSessionResourceSetupResponseTransferIe, buf, buf_size);
-  if (rc.code == RC_OK) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .debug("Decoded successfully");
-  } else if (rc.code == RC_WMORE) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .debug("More data expected, call again");
-    return false;
-  } else {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Failure to decode data");
-    return false;
-  }
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("rc.consumed to decode %d", rc.consumed);
-  // asn_fprint(stderr, &asn_DEF_Ngap_PDUSessionResourceSetupResponseTransfer,
-  // m_PduSessionResourceSetupResponseTransferIe);
-
-  if (!m_DlQosFlowPerTnlInformation.decode(
-          m_PduSessionResourceSetupResponseTransferIe
-              ->dLQosFlowPerTNLInformation)) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Decode NGAP DLQoSFlowPerTNLInformation IE error");
-    return false;
-  }
-
-  if (m_PduSessionResourceSetupResponseTransferIe
-          ->additionalDLQosFlowPerTNLInformation) {
-    QosFlowPerTnlInformationList additional_qos_flow = {};
-    if (!additional_qos_flow.decode(
-            *m_PduSessionResourceSetupResponseTransferIe
-                 ->additionalDLQosFlowPerTNLInformation)) {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .error("Decode NGAP AdditionalDLQoSFlowPerTNLInformation IE error");
-      return false;
-    }
-    m_AdditionalDlQosFlowPerTnlInformation =
-        std::make_optional<QosFlowPerTnlInformationList>(additional_qos_flow);
-  }
-  if (m_PduSessionResourceSetupResponseTransferIe->securityResult) {
-    SecurityResult security_result = {};
-    if (!security_result.decode(
-            *m_PduSessionResourceSetupResponseTransferIe->securityResult)) {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .error("Decode NGAP SecurityResult IE error");
-      return false;
-    }
-    m_SecurityResult = std::make_optional<SecurityResult>(security_result);
-  }
-
-  return true;
-}
-
-//------------------------------------------------------------------------------
-bool PduSessionResourceSetupResponseTransferIE::get(
-    GtpTunnel_t& upTransportLayerInfo,
-    std::vector<AssociatedQosFlow_t>& list) const {
-  UpTransportLayerInformation upTransportLayerInformation = {};
-  AssociatedQosFlowList associatedQosFlowList             = {};
-  m_DlQosFlowPerTnlInformation.get(
-      upTransportLayerInformation, associatedQosFlowList);
-  TransportLayerAddress transportLayerAddress = {};
-  GtpTeid gtpTeid                             = {};
-  upTransportLayerInformation.get(transportLayerAddress, gtpTeid);
-  transportLayerAddress.get(upTransportLayerInfo.ipAddress);
-  gtpTeid.get(upTransportLayerInfo.gtpTeid);
-
-  std::vector<AssociatedQosFlowItem> vector_associated_qos_flow_item;
-  associatedQosFlowList.get(vector_associated_qos_flow_item);
-  for (int i = 0; i < vector_associated_qos_flow_item.size(); i++) {
-    AssociatedQosFlow_t AssociatedQosFlow_str;
-    long m_qosFlowMappingIndication;
-    QosFlowIdentifier qosFlowIdentifier = {};
-    vector_associated_qos_flow_item[i].get(
-        m_qosFlowMappingIndication, qosFlowIdentifier);
-    qosFlowIdentifier.get(AssociatedQosFlow_str.qosFlowIdentifier);
-    if (m_qosFlowMappingIndication < 0) {
-      AssociatedQosFlow_str.qosFlowMappingIndication = NULL;
-    } else {
-      AssociatedQosFlow_str.qosFlowMappingIndication =
-          (e_Ngap_AssociatedQosFlowItem__qosFlowMappingIndication*) calloc(
-              1,
-              sizeof(e_Ngap_AssociatedQosFlowItem__qosFlowMappingIndication));
-      *AssociatedQosFlow_str.qosFlowMappingIndication =
-          (e_Ngap_AssociatedQosFlowItem__qosFlowMappingIndication)
-              m_qosFlowMappingIndication;
-    }
-
-    list.push_back(AssociatedQosFlow_str);
-  }
-
-  return true;
-}
-
-//------------------------------------------------------------------------------
-bool PduSessionResourceSetupResponseTransferIE::
-    getAdditionalDLQoSFlowPerTNLInformation(
-        QosFlowPerTnlInformationList& additionDlQoSFlowPerTnlInformation)
-        const {
-  return true;
+  m_Ie->securityResult = ie;
 }
 
 //------------------------------------------------------------------------------
@@ -298,4 +240,69 @@ bool PduSessionResourceSetupResponseTransferIE::getSecurityResult(
 
   return true;
 }
+
+//------------------------------------------------------------------------------
+int PduSessionResourceSetupResponseTransferIE::encode(
+    uint8_t* buf, int buf_size) {
+  ngap_utils::print_asn_msg(
+      &asn_DEF_Ngap_PDUSessionResourceSetupResponseTransfer, m_Ie);
+  asn_enc_rval_t er = aper_encode_to_buffer(
+      &asn_DEF_Ngap_PDUSessionResourceSetupResponseTransfer, nullptr, m_Ie, buf,
+      buf_size);
+  oai::logger::logger_common::ngap().debug("er.encoded %d", er.encoded);
+  return er.encoded;
+}
+
+//------------------------------------------------------------------------------
+// Decapsulation
+bool PduSessionResourceSetupResponseTransferIE::decode(
+    uint8_t* buf, int buf_size) {
+  asn_dec_rval_t rc = asn_decode(
+      nullptr, ATS_ALIGNED_CANONICAL_PER,
+      &asn_DEF_Ngap_PDUSessionResourceSetupResponseTransfer, (void**) &m_Ie,
+      buf, buf_size);
+  if (rc.code == RC_OK) {
+    oai::logger::logger_common::ngap().debug("Decoded successfully");
+  } else if (rc.code == RC_WMORE) {
+    oai::logger::logger_common::ngap().debug("More data expected, call again");
+    return false;
+  } else {
+    oai::logger::logger_common::ngap().error("Failure to decode data");
+    return false;
+  }
+  oai::logger::logger_common::ngap().debug(
+      "rc.consumed to decode %d", rc.consumed);
+  // asn_fprint(stderr, &asn_DEF_Ngap_PDUSessionResourceSetupResponseTransfer,
+  // m_Ie);
+
+  if (!m_DlQosFlowPerTnlInformation.decode(m_Ie->dLQosFlowPerTNLInformation)) {
+    oai::logger::logger_common::ngap().error(
+        "Decode NGAP DLQoSFlowPerTNLInformation IE error");
+    return false;
+  }
+
+  if (m_Ie->additionalDLQosFlowPerTNLInformation) {
+    QosFlowPerTnlInformationList additional_qos_flow = {};
+    if (!additional_qos_flow.decode(
+            *m_Ie->additionalDLQosFlowPerTNLInformation)) {
+      oai::logger::logger_common::ngap().error(
+          "Decode NGAP AdditionalDLQoSFlowPerTNLInformation IE error");
+      return false;
+    }
+    m_AdditionalDlQosFlowPerTnlInformation =
+        std::make_optional<QosFlowPerTnlInformationList>(additional_qos_flow);
+  }
+  if (m_Ie->securityResult) {
+    SecurityResult security_result = {};
+    if (!security_result.decode(*m_Ie->securityResult)) {
+      oai::logger::logger_common::ngap().error(
+          "Decode NGAP SecurityResult IE error");
+      return false;
+    }
+    m_SecurityResult = std::make_optional<SecurityResult>(security_result);
+  }
+
+  return true;
+}
+
 }  // namespace oai::ngap

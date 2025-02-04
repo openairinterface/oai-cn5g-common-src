@@ -43,16 +43,18 @@ namespace oai::ngap {
 class PduSessionResourceSetupRequestTransferIE {
  public:
   PduSessionResourceSetupRequestTransferIE();
-  virtual ~PduSessionResourceSetupRequestTransferIE();
+  virtual ~PduSessionResourceSetupRequestTransferIE(){};
 
   void setPduSessionAggregateMaximumBitRate(
       const long& bitRateDl, const long& bitRateUl);
-  bool getPduSessionAggregateMaximumBitRate(
-      long& bitRateDl, long& bitRateUl) const;
+  void setPduSessionAggregateMaximumBitRate(
+      const PduSessionAggregateMaximumBitRate& maxBitRate);
+  void getPduSessionAggregateMaximumBitRate(
+      std::optional<PduSessionAggregateMaximumBitRate>& maxBitRate) const;
 
-  void setUlNgUUpTnlInformation(GtpTunnel_t upTnlInfo);
+  void setUlNgUUpTnlInformation(const GtpTunnel_t& upTnlInfo);
+  void setUlNgUUpTnlInformation(const UpTransportLayerInformation& upTnlInfo);
   bool getUlNgUUpTnlInformation(GtpTunnel_t& upTnlInfo) const;
-
   // void
   // setAdditionalUlNgUUpTnlInformation(std::vector<GtpTunnel>list);
   // bool
@@ -65,41 +67,61 @@ class PduSessionResourceSetupRequestTransferIE {
   bool getPduSessionType(long& type) const;
 
   void setSecurityIndication(
-      e_Ngap_IntegrityProtectionIndication integrity_protection,
-      e_Ngap_ConfidentialityProtectionIndication confidentiality_protection,
+      e_Ngap_IntegrityProtectionIndication integrityProtectionIndication,
+      e_Ngap_ConfidentialityProtectionIndication
+          confidentialityProtectionIndication,
       e_Ngap_MaximumIntegrityProtectedDataRate maxIntProtDataRate);
   void setSecurityIndication(
-      e_Ngap_IntegrityProtectionIndication integrity_protection,
-      e_Ngap_ConfidentialityProtectionIndication confidentiality_protection);
+      e_Ngap_IntegrityProtectionIndication integrityProtectionIndication,
+      e_Ngap_ConfidentialityProtectionIndication
+          confidentialityProtectionIndication);
   bool getSecurityIndication(
-      long& integrity_protection, long& confidentiality_protection,
+      long& integrityProtectionIndication,
+      long& confidentialityProtectionIndication,
       long& maxIntProtDataRate) const;
+  void getSecurityIndication(
+      std::optional<SecurityIndication>& securityIndication) const;
 
   void setNetworkInstance(const long& value);
   bool getNetworkInstance(long& value) const;
+  void getNetworkInstance(
+      std::optional<NetworkInstance>& networkInstance) const;
 
   void setQosFlowSetupRequestList(std::vector<QosFlowSetupReq_t> list);
   bool getQosFlowSetupRequestList(std::vector<QosFlowSetupReq_t>& list) const;
+  void setQosFlowSetupRequestList(const QosFlowSetupRequestList& list);
+  void getQosFlowSetupRequestList(QosFlowSetupRequestList& list) const;
 
   int encode(uint8_t* buf, int buf_size);   // TODO: remove naked pointer
   bool decode(uint8_t* buf, int buf_size);  // TODO: remove naked pointer
 
  private:
-  Ngap_PDUSessionResourceSetupRequestTransfer_t*
-      m_PduSessionResourceSetupRequestTransferIe;
+  Ngap_PDUSessionResourceSetupRequestTransfer_t* m_Ie;
 
+  // PDU Session Aggregate Maximum Bit Rate (optional)
   std::optional<PduSessionAggregateMaximumBitRate>
-      m_PduSessionAggregateMaximumBitRateIe;                  // Optional
-  UpTransportLayerInformation m_UpTransportLayerInformation;  // Mandatory
-  // TODO: Additional UL NG-U UP TNL Information //Optional
-  std::optional<DataForwardingNotPossible>
-      m_DataForwardingNotPossible;                         // Optional
-  PduSessionType m_PduSessionType;                         // Mandatory
-  std::optional<SecurityIndication> m_SecurityIndication;  // Optional
-  std::optional<NetworkInstance> m_NetworkInstance;        // Optional
-  QosFlowSetupRequestList m_QosFlowSetupRequestList;       // Mandatory
-  // TODO: Common Network Instance //Optional
-  // TODO: Direct Forwarding Path Availability //Optional
+      m_PduSessionAggregateMaximumBitRateIe;
+  // UL NG-U UP TNL Information (Mandatory)
+  UpTransportLayerInformation m_UpTransportLayerInformation;
+  // Additional UL NG-U UP TNL Information (Optional)
+  std::vector<UpTransportLayerInformation> m_UpTransportLayerInformationList;
+  // Data Forwarding Not Possible (Optional)
+  std::optional<DataForwardingNotPossible> m_DataForwardingNotPossible;
+  // PDU Session Type (Mandatory)
+  PduSessionType m_PduSessionType;
+  // Security Indication (Optional)
+  std::optional<SecurityIndication> m_SecurityIndication;
+  // Network Instance (Optional)
+  std::optional<NetworkInstance> m_NetworkInstance;
+  // QoS Flow Setup Request List (Mandatory 1..)
+  QosFlowSetupRequestList m_QosFlowSetupRequestList;
+  // TODO: Common Network Instance
+  // TODO: Direct Forwarding Path Availability
+
+  void addUlNgUUpTnlInformation();
+  void addPduSessionAggregateMaximumBitRate();
+  void addSecurityIndication();
+  void addQosFlowSetupRequestList();
 };
 
 }  // namespace oai::ngap

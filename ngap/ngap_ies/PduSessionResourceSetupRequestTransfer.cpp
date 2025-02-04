@@ -30,18 +30,13 @@ namespace oai::ngap {
 //------------------------------------------------------------------------------
 PduSessionResourceSetupRequestTransferIE::
     PduSessionResourceSetupRequestTransferIE() {
-  m_PduSessionResourceSetupRequestTransferIe =
-      (Ngap_PDUSessionResourceSetupRequestTransfer_t*) calloc(
-          1, sizeof(Ngap_PDUSessionResourceSetupRequestTransfer_t));
+  m_Ie = (Ngap_PDUSessionResourceSetupRequestTransfer_t*) calloc(
+      1, sizeof(Ngap_PDUSessionResourceSetupRequestTransfer_t));
   m_PduSessionAggregateMaximumBitRateIe = std::nullopt;
   m_DataForwardingNotPossible           = std::nullopt;
   m_SecurityIndication                  = std::nullopt;
   m_NetworkInstance                     = std::nullopt;
 }
-
-//------------------------------------------------------------------------------
-PduSessionResourceSetupRequestTransferIE::
-    ~PduSessionResourceSetupRequestTransferIE() {}
 
 //------------------------------------------------------------------------------
 void PduSessionResourceSetupRequestTransferIE::
@@ -50,6 +45,33 @@ void PduSessionResourceSetupRequestTransferIE::
   m_PduSessionAggregateMaximumBitRateIe =
       std::make_optional<PduSessionAggregateMaximumBitRate>(
           bitRateDl, bitRateUl);
+
+  // Add to the PduSessionResourceSetupRequestTransferIe->protocolIEs.list
+  addPduSessionAggregateMaximumBitRate();
+}
+
+//------------------------------------------------------------------------------
+void PduSessionResourceSetupRequestTransferIE::
+    setPduSessionAggregateMaximumBitRate(
+        const PduSessionAggregateMaximumBitRate& maxBitRate) {
+  m_PduSessionAggregateMaximumBitRateIe =
+      std::make_optional<PduSessionAggregateMaximumBitRate>(maxBitRate);
+
+  // Add to the PduSessionResourceSetupRequestTransferIe->protocolIEs.list
+  addPduSessionAggregateMaximumBitRate();
+}
+
+//------------------------------------------------------------------------------
+void PduSessionResourceSetupRequestTransferIE::
+    getPduSessionAggregateMaximumBitRate(
+        std::optional<PduSessionAggregateMaximumBitRate>& maxBitRate) const {
+  maxBitRate = m_PduSessionAggregateMaximumBitRateIe;
+}
+
+//------------------------------------------------------------------------------
+void PduSessionResourceSetupRequestTransferIE::
+    addPduSessionAggregateMaximumBitRate() {
+  if (!m_PduSessionAggregateMaximumBitRateIe.has_value()) return;
 
   Ngap_PDUSessionResourceSetupRequestTransferIEs_t* ie =
       (Ngap_PDUSessionResourceSetupRequestTransferIEs_t*) calloc(
@@ -62,29 +84,55 @@ void PduSessionResourceSetupRequestTransferIE::
   int ret = m_PduSessionAggregateMaximumBitRateIe.value().encode(
       ie->value.choice.PDUSessionAggregateMaximumBitRate);
   if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode PDUSessionAggregateMaximumBitRate IE error");
+    oai::logger::logger_common::ngap().error(
+        "Encode PDUSessionAggregateMaximumBitRate IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
-  ret = ASN_SEQUENCE_ADD(
-      &m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list, ie);
+  ret = ASN_SEQUENCE_ADD(&m_Ie->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode PDUSessionAggregateMaximumBitRate IE error");
+    oai::logger::logger_common::ngap().error(
+        "Encode PDUSessionAggregateMaximumBitRate IE error");
   // oai::utils::utils::free_wrapper((void**) &ie);
 }
 
 //------------------------------------------------------------------------------
 void PduSessionResourceSetupRequestTransferIE::setUlNgUUpTnlInformation(
-    GtpTunnel_t upTnlInfo) {
+    const GtpTunnel_t& upTnlInfo) {
   TransportLayerAddress transportLayerAddress = {};
   transportLayerAddress.set(upTnlInfo.ipAddress);
   GtpTeid gtpTeid = {};
   gtpTeid.set(upTnlInfo.gtpTeid);
   m_UpTransportLayerInformation.set(transportLayerAddress, gtpTeid);
 
+  // Add to the PduSessionResourceSetupRequestTransferIe->protocolIEs.list
+  addUlNgUUpTnlInformation();
+}
+
+//------------------------------------------------------------------------------
+void PduSessionResourceSetupRequestTransferIE::setUlNgUUpTnlInformation(
+    const UpTransportLayerInformation& upTnlInfo) {
+  m_UpTransportLayerInformation = upTnlInfo;
+  // Add to the PduSessionResourceSetupRequestTransferIe->protocolIEs.list
+  addUlNgUUpTnlInformation();
+}
+
+//------------------------------------------------------------------------------
+bool PduSessionResourceSetupRequestTransferIE::getUlNgUUpTnlInformation(
+    GtpTunnel_t& upTnlInfo) const {
+  TransportLayerAddress transportLayerAddress = {};
+  GtpTeid gtpTeid                             = {};
+  if (!m_UpTransportLayerInformation.get(transportLayerAddress, gtpTeid))
+    return false;
+  if (!transportLayerAddress.get(upTnlInfo.ipAddress)) return false;
+  if (!gtpTeid.get(upTnlInfo.gtpTeid)) return false;
+
+  return true;
+}
+
+//------------------------------------------------------------------------------
+void PduSessionResourceSetupRequestTransferIE::addUlNgUUpTnlInformation() {
   Ngap_PDUSessionResourceSetupRequestTransferIEs_t* ie =
       (Ngap_PDUSessionResourceSetupRequestTransferIEs_t*) calloc(
           1, sizeof(Ngap_PDUSessionResourceSetupRequestTransferIEs_t));
@@ -96,17 +144,16 @@ void PduSessionResourceSetupRequestTransferIE::setUlNgUUpTnlInformation(
   int ret = m_UpTransportLayerInformation.encode(
       ie->value.choice.UPTransportLayerInformation);
   if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode UPTransportLayerInformation IE error");
+    oai::logger::logger_common::ngap().error(
+        "Encode UPTransportLayerInformation IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
-  ret = ASN_SEQUENCE_ADD(
-      &m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list, ie);
+  ret = ASN_SEQUENCE_ADD(&m_Ie->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode UPTransportLayerInformation IE error");
+    oai::logger::logger_common::ngap().error(
+        "Encode UPTransportLayerInformation IE error");
   // oai::utils::utils::free_wrapper((void**) &ie);
 }
 
@@ -127,18 +174,25 @@ void PduSessionResourceSetupRequestTransferIE::setDataForwardingNotPossible() {
       std::make_optional<DataForwardingNotPossible>(tmp);
 
   if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode DataForwardingNotPossible IE error");
+    oai::logger::logger_common::ngap().error(
+        "Encode DataForwardingNotPossible IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
-  ret = ASN_SEQUENCE_ADD(
-      &m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list, ie);
+  ret = ASN_SEQUENCE_ADD(&m_Ie->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode DataForwardingNotPossible IE error");
+    oai::logger::logger_common::ngap().error(
+        "Encode DataForwardingNotPossible IE error");
   // oai::utils::utils::free_wrapper((void**) &ie);
+}
+
+//------------------------------------------------------------------------------
+bool PduSessionResourceSetupRequestTransferIE::getDataForwardingNotPossible()
+    const {
+  if (!m_DataForwardingNotPossible.has_value()) return false;
+
+  return true;
 }
 
 //------------------------------------------------------------------------------
@@ -156,18 +210,23 @@ void PduSessionResourceSetupRequestTransferIE::setPduSessionType(
 
   int ret = m_PduSessionType.encode(ie->value.choice.PDUSessionType);
   if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode PDUSessionType IE error");
+    oai::logger::logger_common::ngap().error("Encode PDUSessionType IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
-  ret = ASN_SEQUENCE_ADD(
-      &m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list, ie);
+  ret = ASN_SEQUENCE_ADD(&m_Ie->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode PDUSessionType IE error");
+    oai::logger::logger_common::ngap().error("Encode PDUSessionType IE error");
   // oai::utils::utils::free_wrapper((void**) &ie);
+}
+
+//------------------------------------------------------------------------------
+bool PduSessionResourceSetupRequestTransferIE::getPduSessionType(
+    long& type) const {
+  if (!m_PduSessionType.get(type)) return false;
+
+  return true;
 }
 
 //------------------------------------------------------------------------------
@@ -190,29 +249,8 @@ void PduSessionResourceSetupRequestTransferIE::setSecurityIndication(
       integrityProtectionIndication, confidentialityProtectionIndication,
       maximumIntegrityProtectedDataRate, maximumIntegrityProtectedDataRate);
 
-  Ngap_PDUSessionResourceSetupRequestTransferIEs_t* ie =
-      (Ngap_PDUSessionResourceSetupRequestTransferIEs_t*) calloc(
-          1, sizeof(Ngap_PDUSessionResourceSetupRequestTransferIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_SecurityIndication;
-  ie->criticality = Ngap_Criticality_reject;
-  ie->value.present =
-      Ngap_PDUSessionResourceSetupRequestTransferIEs__value_PR_SecurityIndication;
-
-  int ret =
-      m_SecurityIndication.value().encode(ie->value.choice.SecurityIndication);
-  if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode SecurityIndication IE error");
-    oai::utils::utils::free_wrapper((void**) &ie);
-    return;
-  }
-
-  ret = ASN_SEQUENCE_ADD(
-      &m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list, ie);
-  if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode SecurityIndication IE error");
-  // oai::utils::utils::free_wrapper((void**) &ie);
+  // Add to the PduSessionResourceSetupRequestTransferIe->protocolIEs.list
+  addSecurityIndication();
 }
 
 //------------------------------------------------------------------------------
@@ -230,6 +268,50 @@ void PduSessionResourceSetupRequestTransferIE::setSecurityIndication(
       integrityProtectionIndication, confidentialityProtectionIndication,
       std::nullopt, std::nullopt);
 
+  // Add to the PduSessionResourceSetupRequestTransferIe->protocolIEs.list
+  addSecurityIndication();
+}
+
+//------------------------------------------------------------------------------
+bool PduSessionResourceSetupRequestTransferIE::getSecurityIndication(
+    long& integrityProtectionIndication,
+    long& confidentialityProtectionIndication, long& maxIntProtDataRate) const {
+  if (!m_SecurityIndication.has_value()) return false;
+
+  IntegrityProtectionIndication m_integrityProtectionIndication = {};
+  ConfidentialityProtectionIndication m_confidentialityProtectionIndication =
+      {};
+  std::optional<MaximumIntegrityProtectedDataRate>
+      m_maximumIntegrityProtectedDataRateUl = std::nullopt;
+  std::optional<MaximumIntegrityProtectedDataRate>
+      m_maximumIntegrityProtectedDataRateDl = std::nullopt;
+
+  m_SecurityIndication.value().get(
+      m_integrityProtectionIndication, m_confidentialityProtectionIndication,
+      m_maximumIntegrityProtectedDataRateUl,
+      m_maximumIntegrityProtectedDataRateDl);
+
+  if (!m_integrityProtectionIndication.get(integrityProtectionIndication))
+    return false;
+  if (!m_confidentialityProtectionIndication.get(
+          confidentialityProtectionIndication))
+    return false;
+  if (m_maximumIntegrityProtectedDataRateUl.has_value())
+    m_maximumIntegrityProtectedDataRateUl.value().get(maxIntProtDataRate);
+  else
+    maxIntProtDataRate = -1;
+
+  return true;
+}
+
+//------------------------------------------------------------------------------
+void PduSessionResourceSetupRequestTransferIE::getSecurityIndication(
+    std::optional<SecurityIndication>& securityIndication) const {
+  securityIndication = m_SecurityIndication;
+}
+
+//------------------------------------------------------------------------------
+void PduSessionResourceSetupRequestTransferIE::addSecurityIndication() {
   Ngap_PDUSessionResourceSetupRequestTransferIEs_t* ie =
       (Ngap_PDUSessionResourceSetupRequestTransferIEs_t*) calloc(
           1, sizeof(Ngap_PDUSessionResourceSetupRequestTransferIEs_t));
@@ -241,17 +323,16 @@ void PduSessionResourceSetupRequestTransferIE::setSecurityIndication(
   int ret =
       m_SecurityIndication.value().encode(ie->value.choice.SecurityIndication);
   if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode SecurityIndication IE error");
+    oai::logger::logger_common::ngap().error(
+        "Encode SecurityIndication IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
-  ret = ASN_SEQUENCE_ADD(
-      &m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list, ie);
+  ret = ASN_SEQUENCE_ADD(&m_Ie->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode SecurityIndication IE error");
+    oai::logger::logger_common::ngap().error(
+        "Encode SecurityIndication IE error");
   // oai::utils::utils::free_wrapper((void**) &ie);
 }
 
@@ -270,18 +351,31 @@ void PduSessionResourceSetupRequestTransferIE::setNetworkInstance(
 
   int ret = m_NetworkInstance.value().encode(ie->value.choice.NetworkInstance);
   if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode NetworkInstance IE error");
+    oai::logger::logger_common::ngap().error("Encode NetworkInstance IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
-  ret = ASN_SEQUENCE_ADD(
-      &m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list, ie);
+  ret = ASN_SEQUENCE_ADD(&m_Ie->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode NetworkInstance IE error");
+    oai::logger::logger_common::ngap().error("Encode NetworkInstance IE error");
   // oai::utils::utils::free_wrapper((void**) &ie);
+}
+
+//------------------------------------------------------------------------------
+bool PduSessionResourceSetupRequestTransferIE::getNetworkInstance(
+    long& value) const {
+  if (!m_NetworkInstance.has_value()) return false;
+
+  if (!m_NetworkInstance.value().get(value)) return false;
+
+  return true;
+}
+
+//------------------------------------------------------------------------------
+void PduSessionResourceSetupRequestTransferIE::getNetworkInstance(
+    std::optional<NetworkInstance>& networkInstance) const {
+  networkInstance = m_NetworkInstance;
 }
 
 //------------------------------------------------------------------------------
@@ -297,7 +391,7 @@ void PduSessionResourceSetupRequestTransferIE::setQosFlowSetupRequestList(
     if (list[i].qflqp.qosc.nonDynamic5qi) {
       FiveQI fiveqi                                    = {};
       std::optional<PriorityLevelQos> priorityLevelQos = std::nullopt;
-      std::optional<AveragingWindow> averaging_window  = std::nullopt;
+      std::optional<AveragingWindow> averagingWindow   = std::nullopt;
       std::optional<MaximumDataBurstVolume> maximumDataBurstVolume =
           std::nullopt;
 
@@ -310,7 +404,7 @@ void PduSessionResourceSetupRequestTransferIE::setQosFlowSetupRequestList(
       if (list[i].qflqp.qosc.nonDynamic5qi->averagingWindow) {
         AveragingWindow tmp = {};
         tmp.set(*list[i].qflqp.qosc.nonDynamic5qi->averagingWindow);
-        averaging_window = std::make_optional<AveragingWindow>(tmp);
+        averagingWindow = std::make_optional<AveragingWindow>(tmp);
       }
       if (list[i].qflqp.qosc.nonDynamic5qi->maximumDataBurstVolume) {
         MaximumDataBurstVolume tmp = {};
@@ -321,16 +415,16 @@ void PduSessionResourceSetupRequestTransferIE::setQosFlowSetupRequestList(
 
       NonDynamic5qiDescriptor nonDynamic5qiDescriptor = {};
       nonDynamic5qiDescriptor.set(
-          fiveqi, priorityLevelQos, averaging_window, maximumDataBurstVolume);
+          fiveqi, priorityLevelQos, averagingWindow, maximumDataBurstVolume);
 
       qosCharacteristics.set(nonDynamic5qiDescriptor);
     } else {
-      PriorityLevelQos priorityLevelQos               = {};
-      PacketDelayBudget packetDelayBudget             = {};
-      PacketErrorRate packetErrorRate                 = {};
-      std::optional<FiveQI> fiveqi                    = std::nullopt;
-      std::optional<DelayCritical> delayCritical      = std::nullopt;
-      std::optional<AveragingWindow> averaging_window = std::nullopt;
+      PriorityLevelQos priorityLevelQos              = {};
+      PacketDelayBudget packetDelayBudget            = {};
+      PacketErrorRate packetErrorRate                = {};
+      std::optional<FiveQI> fiveqi                   = std::nullopt;
+      std::optional<DelayCritical> delayCritical     = std::nullopt;
+      std::optional<AveragingWindow> averagingWindow = std::nullopt;
       std::optional<MaximumDataBurstVolume> maximumDataBurstVolume =
           std::nullopt;
 
@@ -352,7 +446,7 @@ void PduSessionResourceSetupRequestTransferIE::setQosFlowSetupRequestList(
       if (list[i].qflqp.qosc.dynamic5qi->averagingWindow) {
         AveragingWindow tmp = {};
         tmp.set(*list[i].qflqp.qosc.dynamic5qi->averagingWindow);
-        averaging_window = std::make_optional<AveragingWindow>(tmp);
+        averagingWindow = std::make_optional<AveragingWindow>(tmp);
       }
       if (list[i].qflqp.qosc.dynamic5qi->maximumDataBurstVolume) {
         MaximumDataBurstVolume tmp = {};
@@ -364,7 +458,7 @@ void PduSessionResourceSetupRequestTransferIE::setQosFlowSetupRequestList(
       Dynamic5qiDescriptor dynamic5qiDescriptor = {};
       dynamic5qiDescriptor.set(
           priorityLevelQos, packetDelayBudget, packetErrorRate, fiveqi,
-          delayCritical, averaging_window, maximumDataBurstVolume);
+          delayCritical, averagingWindow, maximumDataBurstVolume);
 
       qosCharacteristics.set(dynamic5qiDescriptor);
     }
@@ -435,341 +529,8 @@ void PduSessionResourceSetupRequestTransferIE::setQosFlowSetupRequestList(
 
   m_QosFlowSetupRequestList.set(itemListVector);
 
-  Ngap_PDUSessionResourceSetupRequestTransferIEs_t* ie =
-      (Ngap_PDUSessionResourceSetupRequestTransferIEs_t*) calloc(
-          1, sizeof(Ngap_PDUSessionResourceSetupRequestTransferIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_QosFlowSetupRequestList;
-  ie->criticality = Ngap_Criticality_reject;
-  ie->value.present =
-      Ngap_PDUSessionResourceSetupRequestTransferIEs__value_PR_QosFlowSetupRequestList;
-
-  int ret = m_QosFlowSetupRequestList.encode(
-      ie->value.choice.QosFlowSetupRequestList);
-  if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode QosFlowSetupRequestList IE error");
-    oai::utils::utils::free_wrapper((void**) &ie);
-    return;
-  }
-
-  ret = ASN_SEQUENCE_ADD(
-      &m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list, ie);
-  if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode QosFlowSetupRequestList IE error");
-  // oai::utils::utils::free_wrapper((void**) &ie);
-}
-
-//------------------------------------------------------------------------------
-int PduSessionResourceSetupRequestTransferIE::encode(
-    uint8_t* buf, int buf_size) {
-  ngap_utils::print_asn_msg(
-      &asn_DEF_Ngap_PDUSessionResourceSetupRequestTransfer,
-      m_PduSessionResourceSetupRequestTransferIe);
-  asn_enc_rval_t er = aper_encode_to_buffer(
-      &asn_DEF_Ngap_PDUSessionResourceSetupRequestTransfer, NULL,
-      m_PduSessionResourceSetupRequestTransferIe, buf, buf_size);
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("er.encoded( %d)", er.encoded);
-  // asn_fprint(stderr, er.failed_type, er.structure_ptr);
-  return er.encoded;
-}
-
-//------------------------------------------------------------------------------
-// Decapsulation
-bool PduSessionResourceSetupRequestTransferIE::decode(
-    uint8_t* buf, int buf_size) {
-  asn_dec_rval_t rc = asn_decode(
-      NULL, ATS_ALIGNED_CANONICAL_PER,
-      &asn_DEF_Ngap_PDUSessionResourceSetupRequestTransfer,
-      (void**) &m_PduSessionResourceSetupRequestTransferIe, buf, buf_size);
-  if (rc.code == RC_OK) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .debug("Decoded successfully");
-  } else if (rc.code == RC_WMORE) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .debug("More data expected, call again");
-    return false;
-  } else {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .debug("Failure to decode data");
-    return false;
-  }
-
-  // asn_fprint(stderr, &asn_DEF_Ngap_PDUSessionResourceSetupRequestTransfer,
-  // m_PduSessionResourceSetupRequestTransferIe);
-
-  for (int i = 0;
-       i < m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list.count;
-       i++) {
-    switch (
-        m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list.array[i]
-            ->id) {
-      case Ngap_ProtocolIE_ID_id_PDUSessionAggregateMaximumBitRate: {
-        if (m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list
-                    .array[i]
-                    ->criticality == Ngap_Criticality_reject &&
-            m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list
-                    .array[i]
-                    ->value.present ==
-                Ngap_PDUSessionResourceSetupRequestTransferIEs__value_PR_PDUSessionAggregateMaximumBitRate) {
-          PduSessionAggregateMaximumBitRate aggregate_maximum_bit_rate = {};
-
-          if (!aggregate_maximum_bit_rate.decode(
-                  m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list
-                      .array[i]
-                      ->value.choice.PDUSessionAggregateMaximumBitRate)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                .error(
-                    "Decode NGAP PDUSessionAggregateMaximumBitRate IE error");
-            return false;
-          }
-          m_PduSessionAggregateMaximumBitRateIe =
-              std::make_optional<PduSessionAggregateMaximumBitRate>(
-                  aggregate_maximum_bit_rate);
-        } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .error("Decode NGAP PDUSessionAggregateMaximumBitRate IE error");
-          return false;
-        }
-      } break;
-      case Ngap_ProtocolIE_ID_id_UL_NGU_UP_TNLInformation: {
-        if (m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list
-                    .array[i]
-                    ->criticality == Ngap_Criticality_reject &&
-            m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list
-                    .array[i]
-                    ->value.present ==
-                Ngap_PDUSessionResourceSetupRequestTransferIEs__value_PR_UPTransportLayerInformation) {
-          if (!m_UpTransportLayerInformation.decode(
-                  m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list
-                      .array[i]
-                      ->value.choice.UPTransportLayerInformation)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                .error("Decode NGAP UPTransportLayerInformation IE error");
-
-            return false;
-          }
-        } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .error("Decode NGAP UPTransportLayerInformation IE error");
-          return false;
-        }
-      } break;
-      case Ngap_ProtocolIE_ID_id_DataForwardingNotPossible: {
-        if ((m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list
-                 .array[i]
-                 ->criticality) == Ngap_Criticality_reject &&
-            (m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list
-                 .array[i]
-                 ->value.present ==
-             Ngap_PDUSessionResourceSetupRequestTransferIEs__value_PR_DataForwardingNotPossible)) {
-          DataForwardingNotPossible data_forwarding_not_possible = {};
-          if (!data_forwarding_not_possible.decode(
-                  m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list
-                      .array[i]
-                      ->value.choice.DataForwardingNotPossible)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                .error("Decode NGAP DataForwardingNotPossible IE error");
-            return false;
-          }
-          m_DataForwardingNotPossible =
-              std::make_optional<DataForwardingNotPossible>(
-                  data_forwarding_not_possible);
-        } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .error("Decode NGAP DataForwardingNotPossible IE error");
-          return false;
-        }
-      } break;
-      case Ngap_ProtocolIE_ID_id_PDUSessionType: {
-        if (m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list
-                    .array[i]
-                    ->criticality == Ngap_Criticality_reject &&
-            m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list
-                    .array[i]
-                    ->value.present ==
-                Ngap_PDUSessionResourceSetupRequestTransferIEs__value_PR_PDUSessionType) {
-          if (!m_PduSessionType.decode(
-                  m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list
-                      .array[i]
-                      ->value.choice.PDUSessionType)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                .error("Decode NGAP PDUSessionType IE error");
-            return false;
-          }
-        } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .error("Decode NGAP PDUSessionType IE error");
-          return false;
-        }
-      } break;
-      case Ngap_ProtocolIE_ID_id_SecurityIndication: {
-        if (m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list
-                    .array[i]
-                    ->criticality == Ngap_Criticality_reject &&
-            m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list
-                    .array[i]
-                    ->value.present ==
-                Ngap_PDUSessionResourceSetupRequestTransferIEs__value_PR_SecurityIndication) {
-          SecurityIndication security_indication = {};
-          if (!security_indication.decode(
-                  m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list
-                      .array[i]
-                      ->value.choice.SecurityIndication)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                .error("Decode NGAP SecurityIndication IE error");
-
-            return false;
-          }
-          m_SecurityIndication =
-              std::make_optional<SecurityIndication>(security_indication);
-        } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .error("Decode NGAP SecurityIndication IE error");
-          return false;
-        }
-      } break;
-      case Ngap_ProtocolIE_ID_id_NetworkInstance: {
-        if (m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list
-                    .array[i]
-                    ->criticality == Ngap_Criticality_reject &&
-            m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list
-                    .array[i]
-                    ->value.present ==
-                Ngap_PDUSessionResourceSetupRequestTransferIEs__value_PR_NetworkInstance) {
-          NetworkInstance network_instance = {};
-          if (!network_instance.decode(
-                  m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list
-                      .array[i]
-                      ->value.choice.NetworkInstance)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                .error("Decode NGAP NetworkInstance IE error");
-            return false;
-          }
-          m_NetworkInstance =
-              std::make_optional<NetworkInstance>(network_instance);
-        } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .error("Decode NGAP NetworkInstance IE error");
-          return false;
-        }
-      } break;
-      case Ngap_ProtocolIE_ID_id_QosFlowSetupRequestList: {
-        if (m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list
-                    .array[i]
-                    ->criticality == Ngap_Criticality_reject &&
-            m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list
-                    .array[i]
-                    ->value.present ==
-                Ngap_PDUSessionResourceSetupRequestTransferIEs__value_PR_QosFlowSetupRequestList) {
-          if (!m_QosFlowSetupRequestList.decode(
-                  m_PduSessionResourceSetupRequestTransferIe->protocolIEs.list
-                      .array[i]
-                      ->value.choice.QosFlowSetupRequestList)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                .error("Decode NGAP QosFlowSetupRequestList IE error");
-            return false;
-          }
-        } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .error("Decode NGAP QosFlowSetupRequestList IE error");
-          return false;
-        }
-      } break;
-
-      default: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .error(
-                "Decode NGAP message PduSessionResourceSetupRequestTransferIE "
-                "error");
-        return false;
-      }
-    }
-  }
-
-  return true;
-}
-
-//------------------------------------------------------------------------------
-bool PduSessionResourceSetupRequestTransferIE::
-    getPduSessionAggregateMaximumBitRate(
-        long& bitRateDl, long& bitRateUl) const {
-  if (!m_PduSessionAggregateMaximumBitRateIe.has_value()) return false;
-
-  if (!m_PduSessionAggregateMaximumBitRateIe.value().get(bitRateDl, bitRateUl))
-    return false;
-
-  return true;
-}
-
-//------------------------------------------------------------------------------
-bool PduSessionResourceSetupRequestTransferIE::getUlNgUUpTnlInformation(
-    GtpTunnel_t& upTnlInfo) const {
-  TransportLayerAddress transportLayerAddress = {};
-  GtpTeid gtpTeid                             = {};
-  if (!m_UpTransportLayerInformation.get(transportLayerAddress, gtpTeid))
-    return false;
-  if (!transportLayerAddress.get(upTnlInfo.ipAddress)) return false;
-  if (!gtpTeid.get(upTnlInfo.gtpTeid)) return false;
-
-  return true;
-}
-
-//------------------------------------------------------------------------------
-bool PduSessionResourceSetupRequestTransferIE::getDataForwardingNotPossible()
-    const {
-  if (!m_DataForwardingNotPossible.has_value()) return false;
-
-  return true;
-}
-
-//------------------------------------------------------------------------------
-bool PduSessionResourceSetupRequestTransferIE::getPduSessionType(
-    long& type) const {
-  if (!m_PduSessionType.get(type)) return false;
-
-  return true;
-}
-
-//------------------------------------------------------------------------------
-bool PduSessionResourceSetupRequestTransferIE::getSecurityIndication(
-    long& integrity_protection, long& confidentiality_protection,
-    long& maxIntProtDataRate) const {
-  if (!m_SecurityIndication.has_value()) return false;
-
-  IntegrityProtectionIndication m_integrityProtectionIndication = {};
-  ConfidentialityProtectionIndication m_confidentialityProtectionIndication =
-      {};
-  std::optional<MaximumIntegrityProtectedDataRate>
-      m_maximumIntegrityProtectedDataRateUl = std::nullopt;
-  std::optional<MaximumIntegrityProtectedDataRate>
-      m_maximumIntegrityProtectedDataRateDl = std::nullopt;
-
-  m_SecurityIndication.value().get(
-      m_integrityProtectionIndication, m_confidentialityProtectionIndication,
-      m_maximumIntegrityProtectedDataRateUl,
-      m_maximumIntegrityProtectedDataRateDl);
-
-  if (!m_integrityProtectionIndication.get(integrity_protection)) return false;
-  if (!m_confidentialityProtectionIndication.get(confidentiality_protection))
-    return false;
-  if (m_maximumIntegrityProtectedDataRateUl.has_value())
-    m_maximumIntegrityProtectedDataRateUl.value().get(maxIntProtDataRate);
-  else
-    maxIntProtDataRate = -1;
-
-  return true;
-}
-
-//------------------------------------------------------------------------------
-bool PduSessionResourceSetupRequestTransferIE::getNetworkInstance(
-    long& value) const {
-  if (!m_NetworkInstance.has_value()) return false;
-
-  if (!m_NetworkInstance.value().get(value)) return false;
-
-  return true;
+  // Add to the PduSessionResourceSetupRequestTransferIe->protocolIEs.list
+  addQosFlowSetupRequestList();
 }
 
 //------------------------------------------------------------------------------
@@ -805,13 +566,13 @@ bool PduSessionResourceSetupRequestTransferIE::getQosFlowSetupRequestList(
       qosCharacteristics.get(nonDynamic5qiDescriptor);
       FiveQI fiveqi                                    = {};
       std::optional<PriorityLevelQos> priorityLevelQos = std::nullopt;
-      std::optional<AveragingWindow> averaging_window  = std::nullopt;
+      std::optional<AveragingWindow> averagingWindow   = std::nullopt;
       std::optional<MaximumDataBurstVolume> maximumDataBurstVolume =
           std::nullopt;
 
       if (nonDynamic5qiDescriptor.has_value())
         nonDynamic5qiDescriptor.value().get(
-            fiveqi, priorityLevelQos, averaging_window, maximumDataBurstVolume);
+            fiveqi, priorityLevelQos, averagingWindow, maximumDataBurstVolume);
 
       fiveqi.get(qosFlowSetupReq.qflqp.qosc.nonDynamic5qi->_5qi);
 
@@ -824,10 +585,10 @@ bool PduSessionResourceSetupRequestTransferIE::getQosFlowSetupRequestList(
         qosFlowSetupReq.qflqp.qosc.nonDynamic5qi->priorityLevelQos = NULL;
       }
 
-      if (averaging_window.has_value()) {
+      if (averagingWindow.has_value()) {
         qosFlowSetupReq.qflqp.qosc.nonDynamic5qi->averagingWindow =
             (long*) calloc(1, sizeof(long));
-        averaging_window.value().get(
+        averagingWindow.value().get(
             *qosFlowSetupReq.qflqp.qosc.nonDynamic5qi->averagingWindow);
       } else {
         qosFlowSetupReq.qflqp.qosc.nonDynamic5qi->averagingWindow = NULL;
@@ -852,15 +613,15 @@ bool PduSessionResourceSetupRequestTransferIE::getQosFlowSetupRequestList(
       PacketDelayBudget packetDelayBudget = {};
       PacketErrorRate packetErrorRate     = {};
 
-      std::optional<FiveQI> fiveqi                    = std::nullopt;
-      std::optional<DelayCritical> delayCritical      = std::nullopt;
-      std::optional<AveragingWindow> averaging_window = std::nullopt;
+      std::optional<FiveQI> fiveqi                   = std::nullopt;
+      std::optional<DelayCritical> delayCritical     = std::nullopt;
+      std::optional<AveragingWindow> averagingWindow = std::nullopt;
       std::optional<MaximumDataBurstVolume> maximumDataBurstVolume =
           std::nullopt;
       if (dynamic5qiDescriptor.has_value())
         dynamic5qiDescriptor.value().get(
             priorityLevelQos, packetDelayBudget, packetErrorRate, fiveqi,
-            delayCritical, averaging_window, maximumDataBurstVolume);
+            delayCritical, averagingWindow, maximumDataBurstVolume);
 
       priorityLevelQos.get(
           qosFlowSetupReq.qflqp.qosc.dynamic5qi->priorityLevelQos);
@@ -887,10 +648,10 @@ bool PduSessionResourceSetupRequestTransferIE::getQosFlowSetupRequestList(
         qosFlowSetupReq.qflqp.qosc.dynamic5qi->delayCritical = NULL;
       }
 
-      if (averaging_window.has_value()) {
+      if (averagingWindow.has_value()) {
         qosFlowSetupReq.qflqp.qosc.dynamic5qi->averagingWindow =
             (long*) calloc(1, sizeof(long));
-        averaging_window.value().get(
+        averagingWindow.value().get(
             *qosFlowSetupReq.qflqp.qosc.dynamic5qi->averagingWindow);
       } else {
         qosFlowSetupReq.qflqp.qosc.dynamic5qi->averagingWindow = NULL;
@@ -987,6 +748,237 @@ bool PduSessionResourceSetupRequestTransferIE::getQosFlowSetupRequestList(
     }
 
     list.push_back(qosFlowSetupReq);
+  }
+
+  return true;
+}
+
+//------------------------------------------------------------------------------
+void PduSessionResourceSetupRequestTransferIE::setQosFlowSetupRequestList(
+    const QosFlowSetupRequestList& list) {
+  m_QosFlowSetupRequestList = list;
+
+  // Add to the PduSessionResourceSetupRequestTransferIe->protocolIEs.list
+  addQosFlowSetupRequestList();
+}
+
+//------------------------------------------------------------------------------
+void PduSessionResourceSetupRequestTransferIE::getQosFlowSetupRequestList(
+    QosFlowSetupRequestList& list) const {
+  list = m_QosFlowSetupRequestList;
+}
+
+//------------------------------------------------------------------------------
+void PduSessionResourceSetupRequestTransferIE::addQosFlowSetupRequestList() {
+  Ngap_PDUSessionResourceSetupRequestTransferIEs_t* ie =
+      (Ngap_PDUSessionResourceSetupRequestTransferIEs_t*) calloc(
+          1, sizeof(Ngap_PDUSessionResourceSetupRequestTransferIEs_t));
+  ie->id          = Ngap_ProtocolIE_ID_id_QosFlowSetupRequestList;
+  ie->criticality = Ngap_Criticality_reject;
+  ie->value.present =
+      Ngap_PDUSessionResourceSetupRequestTransferIEs__value_PR_QosFlowSetupRequestList;
+
+  int ret = m_QosFlowSetupRequestList.encode(
+      ie->value.choice.QosFlowSetupRequestList);
+  if (!ret) {
+    oai::logger::logger_common::ngap().error(
+        "Encode QosFlowSetupRequestList IE error");
+    oai::utils::utils::free_wrapper((void**) &ie);
+    return;
+  }
+
+  ret = ASN_SEQUENCE_ADD(&m_Ie->protocolIEs.list, ie);
+  if (ret != 0)
+    oai::logger::logger_common::ngap().error(
+        "Encode QosFlowSetupRequestList IE error");
+  // oai::utils::utils::free_wrapper((void**) &ie);
+}
+
+//------------------------------------------------------------------------------
+int PduSessionResourceSetupRequestTransferIE::encode(
+    uint8_t* buf, int buf_size) {
+  ngap_utils::print_asn_msg(
+      &asn_DEF_Ngap_PDUSessionResourceSetupRequestTransfer, m_Ie);
+  asn_enc_rval_t er = aper_encode_to_buffer(
+      &asn_DEF_Ngap_PDUSessionResourceSetupRequestTransfer, NULL, m_Ie, buf,
+      buf_size);
+  oai::logger::logger_common::ngap().debug("er.encoded( %d)", er.encoded);
+  // asn_fprint(stderr, er.failed_type, er.structure_ptr);
+  return er.encoded;
+}
+
+//------------------------------------------------------------------------------
+bool PduSessionResourceSetupRequestTransferIE::decode(
+    uint8_t* buf, int buf_size) {
+  asn_dec_rval_t rc = asn_decode(
+      NULL, ATS_ALIGNED_CANONICAL_PER,
+      &asn_DEF_Ngap_PDUSessionResourceSetupRequestTransfer, (void**) &m_Ie, buf,
+      buf_size);
+  if (rc.code == RC_OK) {
+    oai::logger::logger_common::ngap().debug("Decoded successfully");
+  } else if (rc.code == RC_WMORE) {
+    oai::logger::logger_common::ngap().debug("More data expected, call again");
+    return false;
+  } else {
+    oai::logger::logger_common::ngap().debug("Failure to decode data");
+    return false;
+  }
+
+  // asn_fprint(stderr, &asn_DEF_Ngap_PDUSessionResourceSetupRequestTransfer,
+  // m_Ie);
+
+  for (int i = 0; i < m_Ie->protocolIEs.list.count; i++) {
+    switch (m_Ie->protocolIEs.list.array[i]->id) {
+      case Ngap_ProtocolIE_ID_id_PDUSessionAggregateMaximumBitRate: {
+        if (m_Ie->protocolIEs.list.array[i]->criticality ==
+                Ngap_Criticality_reject &&
+            m_Ie->protocolIEs.list.array[i]->value.present ==
+                Ngap_PDUSessionResourceSetupRequestTransferIEs__value_PR_PDUSessionAggregateMaximumBitRate) {
+          PduSessionAggregateMaximumBitRate aggregate_maximum_bit_rate = {};
+
+          if (!aggregate_maximum_bit_rate.decode(
+                  m_Ie->protocolIEs.list.array[i]
+                      ->value.choice.PDUSessionAggregateMaximumBitRate)) {
+            oai::logger::logger_common::ngap().error(
+                "Decode NGAP PDUSessionAggregateMaximumBitRate IE error");
+            return false;
+          }
+          m_PduSessionAggregateMaximumBitRateIe =
+              std::make_optional<PduSessionAggregateMaximumBitRate>(
+                  aggregate_maximum_bit_rate);
+        } else {
+          oai::logger::logger_common::ngap().error(
+              "Decode NGAP PDUSessionAggregateMaximumBitRate IE error");
+          return false;
+        }
+      } break;
+      case Ngap_ProtocolIE_ID_id_UL_NGU_UP_TNLInformation: {
+        if (m_Ie->protocolIEs.list.array[i]->criticality ==
+                Ngap_Criticality_reject &&
+            m_Ie->protocolIEs.list.array[i]->value.present ==
+                Ngap_PDUSessionResourceSetupRequestTransferIEs__value_PR_UPTransportLayerInformation) {
+          if (!m_UpTransportLayerInformation.decode(
+                  m_Ie->protocolIEs.list.array[i]
+                      ->value.choice.UPTransportLayerInformation)) {
+            oai::logger::logger_common::ngap().error(
+                "Decode NGAP UPTransportLayerInformation IE error");
+
+            return false;
+          }
+        } else {
+          oai::logger::logger_common::ngap().error(
+              "Decode NGAP UPTransportLayerInformation IE error");
+          return false;
+        }
+      } break;
+      case Ngap_ProtocolIE_ID_id_DataForwardingNotPossible: {
+        if ((m_Ie->protocolIEs.list.array[i]->criticality) ==
+                Ngap_Criticality_reject &&
+            (m_Ie->protocolIEs.list.array[i]->value.present ==
+             Ngap_PDUSessionResourceSetupRequestTransferIEs__value_PR_DataForwardingNotPossible)) {
+          DataForwardingNotPossible data_forwarding_not_possible = {};
+          if (!data_forwarding_not_possible.decode(
+                  m_Ie->protocolIEs.list.array[i]
+                      ->value.choice.DataForwardingNotPossible)) {
+            oai::logger::logger_common::ngap().error(
+                "Decode NGAP DataForwardingNotPossible IE error");
+            return false;
+          }
+          m_DataForwardingNotPossible =
+              std::make_optional<DataForwardingNotPossible>(
+                  data_forwarding_not_possible);
+        } else {
+          oai::logger::logger_common::ngap().error(
+              "Decode NGAP DataForwardingNotPossible IE error");
+          return false;
+        }
+      } break;
+      case Ngap_ProtocolIE_ID_id_PDUSessionType: {
+        if (m_Ie->protocolIEs.list.array[i]->criticality ==
+                Ngap_Criticality_reject &&
+            m_Ie->protocolIEs.list.array[i]->value.present ==
+                Ngap_PDUSessionResourceSetupRequestTransferIEs__value_PR_PDUSessionType) {
+          if (!m_PduSessionType.decode(m_Ie->protocolIEs.list.array[i]
+                                           ->value.choice.PDUSessionType)) {
+            oai::logger::logger_common::ngap().error(
+                "Decode NGAP PDUSessionType IE error");
+            return false;
+          }
+        } else {
+          oai::logger::logger_common::ngap().error(
+              "Decode NGAP PDUSessionType IE error");
+          return false;
+        }
+      } break;
+      case Ngap_ProtocolIE_ID_id_SecurityIndication: {
+        if (m_Ie->protocolIEs.list.array[i]->criticality ==
+                Ngap_Criticality_reject &&
+            m_Ie->protocolIEs.list.array[i]->value.present ==
+                Ngap_PDUSessionResourceSetupRequestTransferIEs__value_PR_SecurityIndication) {
+          SecurityIndication security_indication = {};
+          if (!security_indication.decode(
+                  m_Ie->protocolIEs.list.array[i]
+                      ->value.choice.SecurityIndication)) {
+            oai::logger::logger_common::ngap().error(
+                "Decode NGAP SecurityIndication IE error");
+
+            return false;
+          }
+          m_SecurityIndication =
+              std::make_optional<SecurityIndication>(security_indication);
+        } else {
+          oai::logger::logger_common::ngap().error(
+              "Decode NGAP SecurityIndication IE error");
+          return false;
+        }
+      } break;
+      case Ngap_ProtocolIE_ID_id_NetworkInstance: {
+        if (m_Ie->protocolIEs.list.array[i]->criticality ==
+                Ngap_Criticality_reject &&
+            m_Ie->protocolIEs.list.array[i]->value.present ==
+                Ngap_PDUSessionResourceSetupRequestTransferIEs__value_PR_NetworkInstance) {
+          NetworkInstance network_instance = {};
+          if (!network_instance.decode(m_Ie->protocolIEs.list.array[i]
+                                           ->value.choice.NetworkInstance)) {
+            oai::logger::logger_common::ngap().error(
+                "Decode NGAP NetworkInstance IE error");
+            return false;
+          }
+          m_NetworkInstance =
+              std::make_optional<NetworkInstance>(network_instance);
+        } else {
+          oai::logger::logger_common::ngap().error(
+              "Decode NGAP NetworkInstance IE error");
+          return false;
+        }
+      } break;
+      case Ngap_ProtocolIE_ID_id_QosFlowSetupRequestList: {
+        if (m_Ie->protocolIEs.list.array[i]->criticality ==
+                Ngap_Criticality_reject &&
+            m_Ie->protocolIEs.list.array[i]->value.present ==
+                Ngap_PDUSessionResourceSetupRequestTransferIEs__value_PR_QosFlowSetupRequestList) {
+          if (!m_QosFlowSetupRequestList.decode(
+                  m_Ie->protocolIEs.list.array[i]
+                      ->value.choice.QosFlowSetupRequestList)) {
+            oai::logger::logger_common::ngap().error(
+                "Decode NGAP QosFlowSetupRequestList IE error");
+            return false;
+          }
+        } else {
+          oai::logger::logger_common::ngap().error(
+              "Decode NGAP QosFlowSetupRequestList IE error");
+          return false;
+        }
+      } break;
+      // TODO: Common Network Instance
+      // TODO: Direct Forwarding Path Availability
+      default: {
+        oai::logger::logger_common::ngap().error(
+            "Decode NGAP message PduSessionResourceSetupRequestTransferIE "
+            "error");
+        return false;
+      }
+    }
   }
 
   return true;

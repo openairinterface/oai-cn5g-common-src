@@ -19,7 +19,7 @@
  *      contact@openairinterface.org
  */
 
-#include "PduSessionResourceModifyRequestTransfer.hpp"
+#include "PduSessionResourceModifyResponseTransfer.hpp"
 
 #include "logger_base.hpp"
 #include "ngap_utils.hpp"
@@ -28,217 +28,86 @@
 namespace oai::ngap {
 
 //------------------------------------------------------------------------------
-PduSessionResourceModifyRequestTransferIE::
-    PduSessionResourceModifyRequestTransferIE() {
-  m_Ie = (Ngap_PDUSessionResourceModifyRequestTransfer_t*) calloc(
-      1, sizeof(Ngap_PDUSessionResourceModifyRequestTransfer_t));
-  m_PduSessionAggregateMaximumBitRateIe = std::nullopt;
-  m_NetworkInstance                     = std::nullopt;
+PduSessionResourceModifyResponseTransferIE::
+    PduSessionResourceModifyResponseTransferIE() {
+  m_Ie = (Ngap_PDUSessionResourceModifyResponseTransfer_t*) calloc(
+      1, sizeof(Ngap_PDUSessionResourceModifyResponseTransfer_t));
+  m_DlNgUUpTnlInformation          = std::nullopt;
+  m_UlNgUUpTnlInformation          = std::nullopt;
+  m_QosFlowAddOrModifyResponseList = std::nullopt;
+  m_QosFlowFailedToAddOrModifyList = std::nullopt;
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceModifyRequestTransferIE::
-    setPduSessionAggregateMaximumBitRate(
-        const long& bitRateDl, const long& bitRateUl) {
-  m_PduSessionAggregateMaximumBitRateIe =
-      std::make_optional<PduSessionAggregateMaximumBitRate>(
-          bitRateDl, bitRateUl);
-
-  // Add to the PduSessionResourceModifyRequestTransferIE->protocolIEs.list
-  addPduSessionAggregateMaximumBitRate();
+void PduSessionResourceModifyResponseTransferIE::setDlNgUUpTnlInformation(
+    const UpTransportLayerInformation& dlNgUUpTnlInformation) {
+  m_DlNgUUpTnlInformation =
+      std::make_optional<UpTransportLayerInformation>(dlNgUUpTnlInformation);
+}
+//------------------------------------------------------------------------------
+void PduSessionResourceModifyResponseTransferIE::getDlNgUUpTnlInformation(
+    std::optional<UpTransportLayerInformation>& dlNgUUpTnlInformation) const {
+  dlNgUUpTnlInformation = m_DlNgUUpTnlInformation;
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceModifyRequestTransferIE::
-    setPduSessionAggregateMaximumBitRate(
-        const PduSessionAggregateMaximumBitRate& maxBitRate) {
-  m_PduSessionAggregateMaximumBitRateIe =
-      std::make_optional<PduSessionAggregateMaximumBitRate>(maxBitRate);
-
-  // Add to the PduSessionResourceModifyRequestTransferIE->protocolIEs.list
-  addPduSessionAggregateMaximumBitRate();
+void PduSessionResourceModifyResponseTransferIE::setUlNgUUpTnlInformation(
+    const UpTransportLayerInformation& ulNgUUpTnlInformation) {
+  m_UlNgUUpTnlInformation =
+      std::make_optional<UpTransportLayerInformation>(ulNgUUpTnlInformation);
+}
+//------------------------------------------------------------------------------
+void PduSessionResourceModifyResponseTransferIE::getUlNgUUpTnlInformation(
+    std::optional<UpTransportLayerInformation>& ulNgUUpTnlInformation) const {
+  ulNgUUpTnlInformation = m_UlNgUUpTnlInformation;
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceModifyRequestTransferIE::
-    getPduSessionAggregateMaximumBitRate(
-        std::optional<PduSessionAggregateMaximumBitRate>& maxBitRate) const {
-  maxBitRate = m_PduSessionAggregateMaximumBitRateIe;
+void PduSessionResourceModifyResponseTransferIE::
+    setQosFlowAddOrModifyResponseList(
+        const std::vector<QosFlowAddOrModifyResponseItem> list) {
+  QosFlowAddOrModifyResponseList qosFlowAddOrModifyResponseList = {};
+  qosFlowAddOrModifyResponseList.set(list);
+  m_QosFlowAddOrModifyResponseList =
+      std::make_optional<QosFlowAddOrModifyResponseList>(
+          qosFlowAddOrModifyResponseList);
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceModifyRequestTransferIE::
-    addPduSessionAggregateMaximumBitRate() {
-  if (!m_PduSessionAggregateMaximumBitRateIe.has_value()) return;
-
-  Ngap_PDUSessionResourceModifyRequestTransferIEs_t* ie =
-      (Ngap_PDUSessionResourceModifyRequestTransferIEs_t*) calloc(
-          1, sizeof(Ngap_PDUSessionResourceModifyRequestTransferIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_PDUSessionAggregateMaximumBitRate;
-  ie->criticality = Ngap_Criticality_reject;
-  ie->value.present =
-      Ngap_PDUSessionResourceModifyRequestTransferIEs__value_PR_PDUSessionAggregateMaximumBitRate;
-
-  int ret = m_PduSessionAggregateMaximumBitRateIe.value().encode(
-      ie->value.choice.PDUSessionAggregateMaximumBitRate);
-  if (!ret) {
-    oai::logger::logger_common::ngap().error(
-        "Encode PDUSessionAggregateMaximumBitRate IE error");
-    oai::utils::utils::free_wrapper((void**) &ie);
-    return;
-  }
-
-  ret = ASN_SEQUENCE_ADD(&m_Ie->protocolIEs.list, ie);
-  if (ret != 0)
-    oai::logger::logger_common::ngap().error(
-        "Encode PDUSessionAggregateMaximumBitRate IE error");
-  // oai::utils::utils::free_wrapper((void**) &ie);
+void PduSessionResourceModifyResponseTransferIE::
+    setQosFlowAddOrModifyResponseList(
+        const QosFlowAddOrModifyResponseList& list) {
+  m_QosFlowAddOrModifyResponseList =
+      std::make_optional<QosFlowAddOrModifyResponseList>(list);
 }
-
 //------------------------------------------------------------------------------
-void PduSessionResourceModifyRequestTransferIE::setUlNgUUpTnlModifyList(
-    const UlNgUUpTnlModifyList& ulNgUUpTnlModifyList) {
-  m_UlNgUUpTnlModifyList =
-      std::make_optional<UlNgUUpTnlModifyList>(ulNgUUpTnlModifyList);
-
-  Ngap_PDUSessionResourceModifyRequestTransferIEs_t* ie =
-      (Ngap_PDUSessionResourceModifyRequestTransferIEs_t*) calloc(
-          1, sizeof(Ngap_PDUSessionResourceModifyRequestTransferIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_UL_NGU_UP_TNLModifyList;
-  ie->criticality = Ngap_Criticality_reject;
-  ie->value.present =
-      Ngap_PDUSessionResourceModifyRequestTransferIEs__value_PR_UL_NGU_UP_TNLModifyList;
-
-  int ret = m_UlNgUUpTnlModifyList.value().encode(
-      ie->value.choice.UL_NGU_UP_TNLModifyList);
-  if (!ret) {
-    oai::logger::logger_common::ngap().error(
-        "Encode UL_NGU_UP_TNLModifyList IE error");
-    oai::utils::utils::free_wrapper((void**) &ie);
-    return;
-  }
-
-  ret = ASN_SEQUENCE_ADD(&m_Ie->protocolIEs.list, ie);
-  if (ret != 0)
-    oai::logger::logger_common::ngap().error(
-        "Encode UL_NGU_UP_TNLModifyList IE error");
-  // oai::utils::utils::free_wrapper((void**) &ie);
-}
-
-//------------------------------------------------------------------------------
-void PduSessionResourceModifyRequestTransferIE::getUlNgUUpTnlModifyList(
-    std::optional<UlNgUUpTnlModifyList>& ulNgUUpTnlModifyList) const {
-  ulNgUUpTnlModifyList = m_UlNgUUpTnlModifyList;
-}
-
-//------------------------------------------------------------------------------
-void PduSessionResourceModifyRequestTransferIE::setNetworkInstance(
-    const long& value) {
-  m_NetworkInstance = std::make_optional<NetworkInstance>(value);
-
-  Ngap_PDUSessionResourceModifyRequestTransferIEs_t* ie =
-      (Ngap_PDUSessionResourceModifyRequestTransferIEs_t*) calloc(
-          1, sizeof(Ngap_PDUSessionResourceModifyRequestTransferIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_NetworkInstance;
-  ie->criticality = Ngap_Criticality_reject;
-  ie->value.present =
-      Ngap_PDUSessionResourceModifyRequestTransferIEs__value_PR_NetworkInstance;
-
-  int ret = m_NetworkInstance.value().encode(ie->value.choice.NetworkInstance);
-  if (!ret) {
-    oai::logger::logger_common::ngap().error("Encode NetworkInstance IE error");
-    oai::utils::utils::free_wrapper((void**) &ie);
-    return;
-  }
-
-  ret = ASN_SEQUENCE_ADD(&m_Ie->protocolIEs.list, ie);
-  if (ret != 0)
-    oai::logger::logger_common::ngap().error("Encode NetworkInstance IE error");
-  // oai::utils::utils::free_wrapper((void**) &ie);
-}
-
-//------------------------------------------------------------------------------
-bool PduSessionResourceModifyRequestTransferIE::getNetworkInstance(
-    long& value) const {
-  if (!m_NetworkInstance.has_value()) return false;
-
-  if (!m_NetworkInstance.value().get(value)) return false;
-
-  return true;
-}
-
-//------------------------------------------------------------------------------
-void PduSessionResourceModifyRequestTransferIE::getNetworkInstance(
-    std::optional<NetworkInstance>& networkInstance) const {
-  networkInstance = m_NetworkInstance;
-}
-
-//------------------------------------------------------------------------------
-void PduSessionResourceModifyRequestTransferIE::
-    setQosFlowAddOrModifyRequestList(
-        const std::vector<QosFlowAddOrModifyRequestItem> list) {
-  QosFlowAddOrModifyRequestList qosFlowAddOrModifyRequestList;
-  qosFlowAddOrModifyRequestList.set(list);
-  m_QosFlowAddOrModifyRequestList =
-      std::make_optional<QosFlowAddOrModifyRequestList>(
-          qosFlowAddOrModifyRequestList);
-
-  // Add to the PduSessionResourceModifyRequestTransferIE->protocolIEs.list
-  addQosFlowAddOrModifyRequestList();
-}
-
-//------------------------------------------------------------------------------
-void PduSessionResourceModifyRequestTransferIE::
-    setQosFlowAddOrModifyRequestList(
-        const QosFlowAddOrModifyRequestList& list) {
-  m_QosFlowAddOrModifyRequestList =
-      std::make_optional<QosFlowAddOrModifyRequestList>(list);
-
-  // Add to the PduSessionResourceModifyRequestTransferIE->protocolIEs.list
-  addQosFlowAddOrModifyRequestList();
-}
-
-//------------------------------------------------------------------------------
-void PduSessionResourceModifyRequestTransferIE::
+void PduSessionResourceModifyResponseTransferIE::
     getQosFlowAddOrModifyRequestList(
-        std::optional<QosFlowAddOrModifyRequestList>& list) const {
-  list = m_QosFlowAddOrModifyRequestList;
+        std::optional<QosFlowAddOrModifyResponseList>& list) const {
+  list = m_QosFlowAddOrModifyResponseList;
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceModifyRequestTransferIE::
-    addQosFlowAddOrModifyRequestList() {
-  Ngap_PDUSessionResourceModifyRequestTransferIEs_t* ie =
-      (Ngap_PDUSessionResourceModifyRequestTransferIEs_t*) calloc(
-          1, sizeof(Ngap_PDUSessionResourceModifyRequestTransferIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_QosFlowAddOrModifyRequestList;
-  ie->criticality = Ngap_Criticality_reject;
-  ie->value.present =
-      Ngap_PDUSessionResourceModifyRequestTransferIEs__value_PR_QosFlowAddOrModifyRequestList;
-
-  int ret = m_QosFlowAddOrModifyRequestList.value().encode(
-      ie->value.choice.QosFlowAddOrModifyRequestList);
-  if (!ret) {
-    oai::logger::logger_common::ngap().error(
-        "Encode QosFlowAddOrModifyRequestList IE error");
-    oai::utils::utils::free_wrapper((void**) &ie);
-    return;
-  }
-
-  ret = ASN_SEQUENCE_ADD(&m_Ie->protocolIEs.list, ie);
-  if (ret != 0)
-    oai::logger::logger_common::ngap().error(
-        "Encode QosFlowAddOrModifyRequestList IE error");
-  // oai::utils::utils::free_wrapper((void**) &ie);
+void PduSessionResourceModifyResponseTransferIE::
+    setQosFlowFailedToAddOrModifyList(
+        const QosFlowListWithCause& qosFlowFailedToAddOrModifyList) {
+  m_QosFlowFailedToAddOrModifyList = qosFlowFailedToAddOrModifyList;
+}
+//------------------------------------------------------------------------------
+void PduSessionResourceModifyResponseTransferIE::
+    getQosFlowFailedToAddOrModifyList(
+        std::optional<QosFlowListWithCause>& qosFlowFailedToAddOrModifyList)
+        const {
+  qosFlowFailedToAddOrModifyList = m_QosFlowFailedToAddOrModifyList;
 }
 
 //------------------------------------------------------------------------------
-int PduSessionResourceModifyRequestTransferIE::encode(
+int PduSessionResourceModifyResponseTransferIE::encode(
     uint8_t* buf, int buf_size) {
   ngap_utils::print_asn_msg(
-      &asn_DEF_Ngap_PDUSessionResourceModifyRequestTransfer, m_Ie);
+      &asn_DEF_Ngap_PDUSessionResourceModifyResponseTransfer, m_Ie);
   asn_enc_rval_t er = aper_encode_to_buffer(
-      &asn_DEF_Ngap_PDUSessionResourceModifyRequestTransfer, NULL, m_Ie, buf,
+      &asn_DEF_Ngap_PDUSessionResourceModifyResponseTransfer, NULL, m_Ie, buf,
       buf_size);
   oai::logger::logger_common::ngap().debug("er.encoded( %d)", er.encoded);
   // asn_fprint(stderr, er.failed_type, er.structure_ptr);
@@ -246,11 +115,11 @@ int PduSessionResourceModifyRequestTransferIE::encode(
 }
 
 //------------------------------------------------------------------------------
-bool PduSessionResourceModifyRequestTransferIE::decode(
+bool PduSessionResourceModifyResponseTransferIE::decode(
     uint8_t* buf, int buf_size) {
   asn_dec_rval_t rc = asn_decode(
       NULL, ATS_ALIGNED_CANONICAL_PER,
-      &asn_DEF_Ngap_PDUSessionResourceModifyRequestTransfer, (void**) &m_Ie,
+      &asn_DEF_Ngap_PDUSessionResourceModifyResponseTransfer, (void**) &m_Ie,
       buf, buf_size);
   if (rc.code == RC_OK) {
     oai::logger::logger_common::ngap().debug("Decoded successfully");
@@ -262,113 +131,59 @@ bool PduSessionResourceModifyRequestTransferIE::decode(
     return false;
   }
 
-  // asn_fprint(stderr, &asn_DEF_Ngap_PDUSessionResourceSetupRequestTransfer,
+  // asn_fprint(stderr, &asn_DEF_Ngap_PDUSessionResourceModifyResponseTransfer,
   // m_Ie);
 
-  for (int i = 0; i < m_Ie->protocolIEs.list.count; i++) {
-    switch (m_Ie->protocolIEs.list.array[i]->id) {
-      case Ngap_ProtocolIE_ID_id_PDUSessionAggregateMaximumBitRate: {
-        if (m_Ie->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_reject &&
-            m_Ie->protocolIEs.list.array[i]->value.present ==
-                Ngap_PDUSessionResourceModifyRequestTransferIEs__value_PR_PDUSessionAggregateMaximumBitRate) {
-          PduSessionAggregateMaximumBitRate aggregateMaximumBitRate = {};
+  // Decode DL NG-U UP TNL Information
 
-          if (!aggregateMaximumBitRate.decode(
-                  m_Ie->protocolIEs.list.array[i]
-                      ->value.choice.PDUSessionAggregateMaximumBitRate)) {
-            oai::logger::logger_common::ngap().error(
-                "Decode NGAP PDUSessionAggregateMaximumBitRate IE error");
-            return false;
-          }
-          m_PduSessionAggregateMaximumBitRateIe =
-              std::make_optional<PduSessionAggregateMaximumBitRate>(
-                  aggregateMaximumBitRate);
-        } else {
-          oai::logger::logger_common::ngap().error(
-              "Decode NGAP PDUSessionAggregateMaximumBitRate IE error");
-          return false;
-        }
-      } break;
-      case Ngap_ProtocolIE_ID_id_UL_NGU_UP_TNLModifyList: {
-        if (m_Ie->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_reject &&
-            m_Ie->protocolIEs.list.array[i]->value.present ==
-                Ngap_PDUSessionResourceModifyRequestTransferIEs__value_PR_UL_NGU_UP_TNLModifyList) {
-          UlNgUUpTnlModifyList ulNgUUpTnlModifyList = {};
-          if (!ulNgUUpTnlModifyList.decode(
-                  m_Ie->protocolIEs.list.array[i]
-                      ->value.choice.UL_NGU_UP_TNLModifyList)) {
-            oai::logger::logger_common::ngap().error(
-                "Decode NGAP UPTransportLayerInformation IE error");
-            return false;
-          }
-          m_UlNgUUpTnlModifyList =
-              std::make_optional<UlNgUUpTnlModifyList>(ulNgUUpTnlModifyList);
-        } else {
-          oai::logger::logger_common::ngap().error(
-              "Decode NGAP UPTransportLayerInformation IE error");
-          return false;
-        }
-      } break;
-
-      case Ngap_ProtocolIE_ID_id_NetworkInstance: {
-        if (m_Ie->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_reject &&
-            m_Ie->protocolIEs.list.array[i]->value.present ==
-                Ngap_PDUSessionResourceModifyRequestTransferIEs__value_PR_NetworkInstance) {
-          NetworkInstance networkInstance = {};
-          if (!networkInstance.decode(m_Ie->protocolIEs.list.array[i]
-                                          ->value.choice.NetworkInstance)) {
-            oai::logger::logger_common::ngap().error(
-                "Decode NGAP NetworkInstance IE error");
-            return false;
-          }
-          m_NetworkInstance =
-              std::make_optional<NetworkInstance>(networkInstance);
-        } else {
-          oai::logger::logger_common::ngap().error(
-              "Decode NGAP NetworkInstance IE error");
-          return false;
-        }
-      } break;
-      case Ngap_ProtocolIE_ID_id_QosFlowAddOrModifyRequestList: {
-        if (m_Ie->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_reject &&
-            m_Ie->protocolIEs.list.array[i]->value.present ==
-                Ngap_PDUSessionResourceModifyRequestTransferIEs__value_PR_QosFlowAddOrModifyRequestList) {
-          QosFlowAddOrModifyRequestList qosFlowAddOrModifyRequestList = {};
-          if (!qosFlowAddOrModifyRequestList.decode(
-                  m_Ie->protocolIEs.list.array[i]
-                      ->value.choice.QosFlowAddOrModifyRequestList)) {
-            oai::logger::logger_common::ngap().error(
-                "Decode NGAP QosFlowSetupRequestList IE error");
-            return false;
-          }
-          m_QosFlowAddOrModifyRequestList =
-              std::make_optional<QosFlowAddOrModifyRequestList>(
-                  qosFlowAddOrModifyRequestList);
-
-        } else {
-          oai::logger::logger_common::ngap().error(
-              "Decode NGAP QosFlowSetupRequestList IE error");
-          return false;
-        }
-      } break;
-      // TODO: QoS Flow to Release List (Optional)
-      // TODO: Additional UL NG-U UP TNL Information (Optional)
-      // TODO: Common Network Instance (Optional)
-      // TODO: Additional Redundant UL NG-U UP TNL Information (Optional)
-      // TODO: Redundant Common Network Instance (Optional)
-      // TODO: Redundant UL NG-U UP TNL Information (Optional)
-      // TODO: Security Indication (Optional)
-      default: {
-        oai::logger::logger_common::ngap().error(
-            "Decode NGAP message PduSessionResourceModifyRequestTransferIE "
-            "error");
-        return false;
-      }
+  if (m_Ie->dL_NGU_UP_TNLInformation) {
+    UpTransportLayerInformation dlNgUUpTnlInformation = {};
+    if (!dlNgUUpTnlInformation.decode(*m_Ie->dL_NGU_UP_TNLInformation)) {
+      oai::logger::logger_common::ngap().error(
+          "Failure to decode DL NG-U UP TNL Information IE");
+      return false;
     }
+    m_DlNgUUpTnlInformation =
+        std::make_optional<UpTransportLayerInformation>(dlNgUUpTnlInformation);
+  }
+
+  // Decode UL NG-U UP TNL Information
+  if (m_Ie->uL_NGU_UP_TNLInformation) {
+    UpTransportLayerInformation ulNgUUpTnlInformation = {};
+    if (!ulNgUUpTnlInformation.decode(*m_Ie->uL_NGU_UP_TNLInformation)) {
+      oai::logger::logger_common::ngap().error(
+          "Failure to decode UL NG-U UP TNL Information IE");
+      return false;
+    }
+    m_UlNgUUpTnlInformation =
+        std::make_optional<UpTransportLayerInformation>(ulNgUUpTnlInformation);
+  }
+
+  // Decode QoS Flow Add or Modify Response List
+  if (m_Ie->qosFlowAddOrModifyResponseList) {
+    QosFlowAddOrModifyResponseList qosFlowAddOrModifyResponseList = {};
+    if (!qosFlowAddOrModifyResponseList.decode(
+            *m_Ie->qosFlowAddOrModifyResponseList)) {
+      oai::logger::logger_common::ngap().error(
+          "Failure to decode QoS Flow Add or Modify Response List IE");
+      return false;
+    }
+    m_QosFlowAddOrModifyResponseList =
+        std::make_optional<QosFlowAddOrModifyResponseList>(
+            qosFlowAddOrModifyResponseList);
+  }
+
+  // Decode QoS Flow Failed to Add or Modify List
+  if (m_Ie->qosFlowFailedToAddOrModifyList) {
+    QosFlowListWithCause qosFlowFailedToAddOrModifyList = {};
+    if (!qosFlowFailedToAddOrModifyList.decode(
+            *m_Ie->qosFlowFailedToAddOrModifyList)) {
+      oai::logger::logger_common::ngap().error(
+          "Failure to decode QoS Flow Failed to Add or Modify List IE");
+      return false;
+    }
+    m_QosFlowFailedToAddOrModifyList = std::make_optional<QosFlowListWithCause>(
+        qosFlowFailedToAddOrModifyList);
   }
 
   return true;

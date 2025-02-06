@@ -22,12 +22,13 @@
 #ifndef _PDU_SESSION_RESOURCE_MODIFY_RESPONSE_TRANSFER_H_
 #define _PDU_SESSION_RESOURCE_MODIFY_RESPONSE_TRANSFER_H_
 
+#include <memory>
 #include <vector>
 
 #include "NgapIesStruct.hpp"
+#include "QosFlowAddOrModifyResponseList.hpp"
 #include "QosFlowListWithCause.hpp"
 #include "UpTransportLayerInformation.hpp"
-#include "QosFlowAddOrModifyResponseList.hpp"
 
 extern "C" {
 #include "Ngap_PDUSessionResourceModifyResponseTransfer.h"
@@ -44,14 +45,12 @@ class PduSessionResourceModifyResponseTransferIE {
   void setDlNgUUpTnlInformation(
       const UpTransportLayerInformation& dlNgUUpTnlInformation);
   void getDlNgUUpTnlInformation(
-      const std::optional<UpTransportLayerInformation>& dlNgUUpTnlInformation)
-      const;
+      std::optional<UpTransportLayerInformation>& dlNgUUpTnlInformation) const;
 
   void setUlNgUUpTnlInformation(
       const UpTransportLayerInformation& ulNgUUpTnlInformation);
   void getUlNgUUpTnlInformation(
-      const std::optional<UpTransportLayerInformation>& ulNgUUpTnlInformation)
-      const;
+      std::optional<UpTransportLayerInformation>& ulNgUUpTnlInformation) const;
 
   void setQosFlowAddOrModifyResponseList(
       const std::vector<QosFlowAddOrModifyResponseItem> list);
@@ -61,9 +60,10 @@ class PduSessionResourceModifyResponseTransferIE {
       std::optional<QosFlowAddOrModifyResponseList>& list) const;
 
   void setQosFlowFailedToAddOrModifyList(
-      const QosFlowListWithCause& qosFlowListWithCause);
+      const QosFlowListWithCause& qosFlowFailedToAddOrModifyList);
   void getQosFlowFailedToAddOrModifyList(
-      std::optional<QosFlowListWithCause>& qosFlowListWithCause) const;
+      std::optional<QosFlowListWithCause>& qosFlowFailedToAddOrModifyList)
+      const;
 
   int encode(uint8_t* buf, int buf_size);   // TODO: remove naked pointer
   bool decode(uint8_t* buf, int buf_size);  // TODO: remove naked pointer
@@ -81,7 +81,7 @@ class PduSessionResourceModifyResponseTransferIE {
       m_QosFlowAddOrModifyResponseList;
   // TODO: Additional DL QoS Flow per TNL Information
   // QoS Flow Failed to Add or Modify List
-  std::optional<QosFlowListWithCause> m_QosFlowListWithCause;
+  std::optional<QosFlowListWithCause> m_QosFlowFailedToAddOrModifyList;
 
   // Additional NG-U UP TNL Information
   // Redundant DL NG-U UP TNL Information

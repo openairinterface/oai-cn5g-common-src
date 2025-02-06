@@ -22,6 +22,8 @@
 #ifndef _QOS_FLOW_LIST_WITH_CAUSE_H_
 #define _QOS_FLOW_LIST_WITH_CAUSE_H_
 
+#include <vector>
+
 #include "QosFlowWithCauseItem.hpp"
 
 extern "C" {

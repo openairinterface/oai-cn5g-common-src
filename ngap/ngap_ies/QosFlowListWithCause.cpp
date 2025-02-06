@@ -52,7 +52,7 @@ bool QosFlowListWithCause::encode(
         1, sizeof(Ngap_QosFlowWithCauseItem_t));
     if (!item) return false;
     if (!l.encode(*item)) return false;
-    if (ASN_SEQUENCE_ADD(&list.list, item) != 0) return false;
+    if (ASN_SEQUENCE_ADD(&QosFlowListWithCause.list, item) != 0) return false;
   }
   return true;
 }
@@ -61,9 +61,9 @@ bool QosFlowListWithCause::encode(
 bool QosFlowListWithCause::decode(
     const Ngap_QosFlowListWithCause_t& QosFlowListWithCause) {
   m_ItemList.clear();
-  for (int i = 0; i < list.list.count; i++) {
+  for (int i = 0; i < QosFlowListWithCause.list.count; i++) {
     QosFlowWithCauseItem item = {};
-    if (!item.decode(*list.list.array[i])) return false;
+    if (!item.decode(*QosFlowListWithCause.list.array[i])) return false;
     m_ItemList.push_back(item);
   }
   return true;

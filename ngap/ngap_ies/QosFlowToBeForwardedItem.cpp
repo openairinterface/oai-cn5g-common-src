@@ -30,16 +30,32 @@ QosFlowToBeForwardedItem::QosFlowToBeForwardedItem() {}
 QosFlowToBeForwardedItem::~QosFlowToBeForwardedItem() {}
 
 //------------------------------------------------------------------------------
-void QosFlowToBeForwardedItem::set(const QosFlowIdentifier& qfi) {
-  m_Qfi = qfi;
+void QosFlowToBeForwardedItem::setQosFlowIdentifier(
+    const QosFlowIdentifier& qosFlowIdentifier) {
+  m_QosFlowIdentifier = qosFlowIdentifier;
+}
+
+//------------------------------------------------------------------------------
+bool QosFlowToBeForwardedItem::getQosFlowIdentifier(
+    QosFlowIdentifier& qosFlowIdentifier) const {
+  qosFlowIdentifier = m_QosFlowIdentifier;
+  return true;
 }
 
 //------------------------------------------------------------------------------
 bool QosFlowToBeForwardedItem::encode(
-    Ngap_QosFlowToBeForwardedItem_t& qosFlowItem) const {
-  if (!m_Qfi.encode(qosFlowItem.qosFlowIdentifier)) {
+    Ngap_QosFlowToBeForwardedItem_t& item) const {
+  if (!m_QosFlowIdentifier.encode(item.qosFlowIdentifier)) {
     return false;
   }
   return true;
 }
+
+//------------------------------------------------------------------------------
+bool QosFlowToBeForwardedItem::decode(
+    const Ngap_QosFlowToBeForwardedItem_t& item) {
+  if (!m_QosFlowIdentifier.decode(item.qosFlowIdentifier)) return false;
+  return true;
+}
+
 }  // namespace oai::ngap

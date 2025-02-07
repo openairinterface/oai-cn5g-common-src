@@ -36,11 +36,11 @@ class QosFlowToBeForwardedList {
   QosFlowToBeForwardedList();
   virtual ~QosFlowToBeForwardedList(){};
 
-  void set(const std::vector<QosFlowToBeForwardedItem>& qosList);
-  // TODO: get
+  void set(const std::vector<QosFlowToBeForwardedItem>& list);
+  void get(std::vector<QosFlowToBeForwardedItem>& list) const;
 
-  bool encode(Ngap_QosFlowToBeForwardedList*& qosList) const;
-  // TODO: decode
+  bool encode(Ngap_QosFlowToBeForwardedList*& list) const;
+  bool decode(const Ngap_QosFlowToBeForwardedList& list);
 
  private:
   std::vector<QosFlowToBeForwardedItem> m_ItemList;

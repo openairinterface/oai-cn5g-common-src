@@ -272,24 +272,25 @@ int QosRule::Encode(uint8_t* buf, int len) const {
         (rule_operation_code_ ==
          kQosRuleRuleOperationCodeModifyExistingQosRuleAndReplaceAllPacketFilters)) {
       if (pf_create_and_modify_and_replace_list_.has_value()) {
-        for (auto const& p : pf_create_and_modify_and_replace_list_.value()) {
-          uint8_t octet_8 =
-              ((p.packet_filter_direction & 0x03) << 4) |
-              (p.packet_filter_id & 0x0f);  // octet 8- packet filter direction
-                                            // + packet filter identifier
-          ENCODE_U8(buf + encoded_size, octet_8, encoded_size);
-          ENCODE_U8(
-              buf + encoded_size, p.content.length,
-              encoded_size);  // length of packet filter
+//        for (auto const& p : pf_create_and_modify_and_replace_list_.value()) {
+        auto p = pf_create_and_modify_and_replace_list_.value()[i];
+        uint8_t octet_8 =
+            ((p.packet_filter_direction & 0x03) << 4) |
+            (p.packet_filter_id & 0x0f);  // octet 8- packet filter direction
+                                          // + packet filter identifier
+        ENCODE_U8(buf + encoded_size, octet_8, encoded_size);
+        ENCODE_U8(
+            buf + encoded_size, p.content.length,
+            encoded_size);  // length of packet filter
 
-          for (auto const& pc : p.content.packet_filter_components) {
-            ENCODE_U8(buf + encoded_size, pc.type, encoded_size);
-            int encoded_content_size = encode_bstring(
-                pc.value, (buf + encoded_size),
-                len - encoded_size);  // packet filter content
-            encoded_size += encoded_content_size;
-          }
+        for (auto const& pc : p.content.packet_filter_components) {
+          ENCODE_U8(buf + encoded_size, pc.type, encoded_size);
+          int encoded_content_size = encode_bstring(
+              pc.value, (buf + encoded_size),
+              len - encoded_size);  // packet filter content
+          encoded_size += encoded_content_size;
         }
+//        }
       }
     }
   }

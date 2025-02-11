@@ -272,7 +272,6 @@ int QosRule::Encode(uint8_t* buf, int len) const {
         (rule_operation_code_ ==
          kQosRuleRuleOperationCodeModifyExistingQosRuleAndReplaceAllPacketFilters)) {
       if (pf_create_and_modify_and_replace_list_.has_value()) {
-//        for (auto const& p : pf_create_and_modify_and_replace_list_.value()) {
         auto p = pf_create_and_modify_and_replace_list_.value()[i];
         uint8_t octet_8 =
             ((p.packet_filter_direction & 0x03) << 4) |
@@ -290,7 +289,6 @@ int QosRule::Encode(uint8_t* buf, int len) const {
               len - encoded_size);  // packet filter content
           encoded_size += encoded_content_size;
         }
-//        }
       }
     }
   }

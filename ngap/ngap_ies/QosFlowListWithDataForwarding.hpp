@@ -31,22 +31,21 @@ extern "C" {
 #include "Ngap_QosFlowListWithDataForwarding.h"
 }
 
-constexpr uint8_t kMaxNoQoSFlows = 64;
-
 namespace oai::ngap {
 class QosFlowListWithDataForwarding {
  public:
   QosFlowListWithDataForwarding();
   virtual ~QosFlowListWithDataForwarding();
 
-  void set(const std::vector<QosFlowItemWithDataForWarding>& list);
-  void get(std::vector<QosFlowItemWithDataForWarding>& list) const;
+  void set(const std::vector<QosFlowItemWithDataForwarding>& list);
+  void get(std::vector<QosFlowItemWithDataForwarding>& list) const;
 
-  bool decode(
-      const Ngap_QosFlowListWithDataForwarding_t& qosFlowSetupResponseList);
+  bool decode(const Ngap_QosFlowListWithDataForwarding_t& list);
+  bool encode(Ngap_QosFlowListWithDataForwarding_t& list) const;
 
  private:
-  std::vector<QosFlowItemWithDataForWarding> m_ItemList;
+  std::vector<QosFlowItemWithDataForwarding> m_ItemList;
+  constexpr static uint8_t KMaxNoOfQosFlows = 64;
 };
 }  // namespace oai::ngap
 #endif

@@ -23,6 +23,7 @@
 #define _PDU_SESSION_RESOURCE_HANDOVER_REQUEST_ACK_TRANSFER_H_
 
 #include "NgapIesStruct.hpp"
+#include "QosFlowItemWithDataForwarding.hpp"
 #include "QosFlowListWithDataForwarding.hpp"
 #include "QosFlowPerTnlInformation.hpp"
 #include "SecurityResult.hpp"
@@ -39,25 +40,63 @@ class PduSessionResourceHandoverRequestAckTransfer {
   PduSessionResourceHandoverRequestAckTransfer();
   virtual ~PduSessionResourceHandoverRequestAckTransfer();
 
-  bool getUpTransportLayerInformation2(GtpTunnel_t*& upTnlInfo);
+  // DL NG-U UP TNL Information
+  void setDlNgUUpTnlInformation(
+      const UpTransportLayerInformation& dlNgUUpTnlInformation);
+  void getDlNgUUpTnlInformation(
+      UpTransportLayerInformation& dlNgUUpTnlInformation) const;
+
+  // DL Forwarding UP TNL Information
+  void setDlForwardingUpTnlInformation(
+      const UpTransportLayerInformation& dlForwardingUpTnlInformation);
+  void getDlForwardingUpTnlInformation(
+      std::optional<UpTransportLayerInformation>& dlForwardingUpTnlInformation)
+      const;
+  bool getDlForwardingUpTnlInformation(GtpTunnel_t*& upTnlInfo);
+
+  // TODO: Security Result
+
+  // QoS Flow Setup Response List
+  void setQosFlowSetupResponseList(
+      const std::vector<QosFlowItemWithDataForwarding>& list);
+  void setQosFlowSetupResponseList(const QosFlowListWithDataForwarding& list);
   bool getQosFlowSetupResponseList(
       std::vector<QosFlowLItemWithDataForwarding_t>& list) const;
+  void getQosFlowSetupResponseList(
+      std::optional<QosFlowListWithDataForwarding>& list) const;
 
+  // TODO: QoS Flow Failed to Setup List
+  // TODO: Data Forwarding Response DRB List
+  // TODO: Additional DL UP TNL Information for HO List
+  // TODO: UL Forwarding UP TNL Information
+  // TODO: Additional UL Forwarding UP TNL Information
+  // TODO: Data Forwarding Response E-RAB List
+  // TODO: Redundant DL NG-U UP TNL Information
+  // TODO: Used RSN Information
+  // TODO: Global RAN Node ID of Secondary NG-RAN Node
+
+  int encode(uint8_t* buf, int buf_size);   // TODO: remove naked pointer
   bool decode(uint8_t* buf, int buf_size);  // TODO: remove naked pointer
 
  private:
   Ngap_HandoverRequestAcknowledgeTransfer_t*
       m_HandoverRequestAcknowledegTransferIe;
-  // TODO: DL NG-U UP TNL Information //Mandatory
-  UpTransportLayerInformation m_DlForwardingUpTnlInformation;  // Mandatory
-  // TODO: Security Result //Optional
+  // DL NG-U UP TNL Information (Mandatory)
+  UpTransportLayerInformation m_DlNgUUpTnlInformation;
+  // DL Forwarding UP TNL Information (Optional)
+  std::optional<UpTransportLayerInformation> m_DlForwardingUpTnlInformation;
+  // TODO: Security Result (Optional)
+  // QoS Flow Setup Response List (Mandatory)
   QosFlowListWithDataForwarding m_QosFlowSetupResponseList;  // Mandatory
-  // TODO: QoS Flow Failed to Setup List //Optional
-  // TODO: Data Forwarding Response DRB List //Optional
+  // TODO: QoS Flow Failed to Setup List (Optional)
+  // TODO: Data Forwarding Response DRB List (Optional)
   // TODO: Additional DL UP TNL Information for HO List //Range 0..1
-  // TODO: UL Forwarding UP TNL Information //Optional
-  // TODO: Additional UL Forwarding UP TNL Information
-  // TODO: Data Forwarding Response E-RAB List //Optional
+  // TODO: UL Forwarding UP TNL Information (Optional)
+  // TODO: Additional UL Forwarding UP TNL Information (Optional)
+  // TODO: Data Forwarding Response E-RAB List (Optional)
+  // TODO: Redundant DL NG-U UP TNL Information (Optional)
+  // TODO: Used RSN Information (Optional)
+  // TODO: Global RAN Node ID of Secondary NG-RAN Node (Optional)
 };
 }  // namespace oai::ngap
 

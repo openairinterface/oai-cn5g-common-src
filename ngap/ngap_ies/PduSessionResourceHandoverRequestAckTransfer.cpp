@@ -38,6 +38,47 @@ PduSessionResourceHandoverRequestAckTransfer::
     ~PduSessionResourceHandoverRequestAckTransfer() {}
 
 //------------------------------------------------------------------------------
+void PduSessionResourceHandoverRequestAckTransfer::setDlNgUUpTnlInformation(
+    const UpTransportLayerInformation& dlNgUUpTnlInformation) {
+  m_DlNgUUpTnlInformation = dlNgUUpTnlInformation;
+}
+
+//------------------------------------------------------------------------------
+void PduSessionResourceHandoverRequestAckTransfer::getDlNgUUpTnlInformation(
+    UpTransportLayerInformation& dlNgUUpTnlInformation) const {
+  dlNgUUpTnlInformation = m_DlNgUUpTnlInformation;
+}
+
+//------------------------------------------------------------------------------
+void PduSessionResourceHandoverRequestAckTransfer::
+    setDlForwardingUpTnlInformation(
+        const UpTransportLayerInformation& dlForwardingUpTnlInformation) {
+  m_DlForwardingUpTnlInformation =
+      std::make_optional<UpTransportLayerInformation>(
+          dlForwardingUpTnlInformation);
+}
+//------------------------------------------------------------------------------
+void PduSessionResourceHandoverRequestAckTransfer::
+    getDlForwardingUpTnlInformation(std::optional<UpTransportLayerInformation>&
+                                        dlForwardingUpTnlInformation) const {
+  dlForwardingUpTnlInformation = m_DlForwardingUpTnlInformation;
+}
+
+//------------------------------------------------------------------------------
+int PduSessionResourceHandoverRequestAckTransfer::encode(
+    uint8_t* buf, int buf_size) {
+  ngap_utils::print_asn_msg(
+      &asn_DEF_Ngap_HandoverRequestAcknowledgeTransfer,
+      m_HandoverRequestAcknowledegTransferIe);
+  asn_enc_rval_t er = aper_encode_to_buffer(
+      &asn_DEF_Ngap_HandoverRequestAcknowledgeTransfer, NULL,
+      m_HandoverRequestAcknowledegTransferIe, buf, buf_size);
+  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+      .debug("er.encoded %d", er.encoded);
+  return er.encoded;
+}
+
+//------------------------------------------------------------------------------
 bool PduSessionResourceHandoverRequestAckTransfer::decode(
     uint8_t* buf, int buf_size) {
   asn_dec_rval_t rc = asn_decode(
@@ -59,12 +100,26 @@ bool PduSessionResourceHandoverRequestAckTransfer::decode(
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("rc.consumed to decode: %d", rc.consumed);
 
-  if (!m_DlForwardingUpTnlInformation.decode(
-          *m_HandoverRequestAcknowledegTransferIe
-               ->dLForwardingUP_TNLInformation)) {
+  if (!m_DlNgUUpTnlInformation.decode(
+          m_HandoverRequestAcknowledegTransferIe->dL_NGU_UP_TNLInformation)) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Decode NGAP DL_NGU_UP_TNLInformation IE error");
+        .error("Decode NGAP DL NG-U UP TNL Information IE error");
     return false;
+  }
+
+  if (m_HandoverRequestAcknowledegTransferIe->dLForwardingUP_TNLInformation) {
+    UpTransportLayerInformation dlForwardingUpTnlInformation = {};
+
+    if (!dlForwardingUpTnlInformation.decode(
+            *m_HandoverRequestAcknowledegTransferIe
+                 ->dLForwardingUP_TNLInformation)) {
+      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+          .error("Decode NGAP  DL Forwarding UP TNL Information IE error");
+      return false;
+    }
+    m_DlForwardingUpTnlInformation =
+        std::make_optional<UpTransportLayerInformation>(
+            dlForwardingUpTnlInformation);
   }
 
   if (!m_QosFlowSetupResponseList.decode(
@@ -76,33 +131,4 @@ bool PduSessionResourceHandoverRequestAckTransfer::decode(
   return true;
 }
 
-//------------------------------------------------------------------------------
-bool PduSessionResourceHandoverRequestAckTransfer::
-    getUpTransportLayerInformation2(GtpTunnel_t*& upTnlInfo) {
-  if (!m_DlForwardingUpTnlInformation.decode(
-          *m_HandoverRequestAcknowledegTransferIe
-               ->dLForwardingUP_TNLInformation))
-    return false;
-  TransportLayerAddress m_transportLayerAddress = {};
-  GtpTeid m_gtpTeid                             = {};
-  if (!m_DlForwardingUpTnlInformation.get(m_transportLayerAddress, m_gtpTeid))
-    return false;
-  if (!m_transportLayerAddress.get(upTnlInfo->ipAddress)) return false;
-  if (!m_gtpTeid.get(upTnlInfo->gtpTeid)) return false;
-  return true;
-}
-
-//------------------------------------------------------------------------------
-bool PduSessionResourceHandoverRequestAckTransfer::getQosFlowSetupResponseList(
-    std::vector<QosFlowLItemWithDataForwarding_t>& list) const {
-  std::vector<QosFlowItemWithDataForWarding> m_qosflowitemwithdataforwarding;
-  m_QosFlowSetupResponseList.get(m_qosflowitemwithdataforwarding);
-  for (int i = 0; i < m_qosflowitemwithdataforwarding.size(); i++) {
-    QosFlowLItemWithDataForwarding_t item;
-    m_qosflowitemwithdataforwarding[i].getQosFlowIdentifier(
-        item.qosFlowIdentifier);
-    list.push_back(item);
-  }
-  return true;
-}
 }  // namespace oai::ngap

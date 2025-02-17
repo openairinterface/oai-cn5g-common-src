@@ -51,6 +51,7 @@ class PduSessionResourceHandoverRequiredTransfer {
 
  private:
   Ngap_HandoverRequiredTransfer_t* m_HandoverRquiredTransferIe;
+
   std::optional<Ngap_DirectForwardingPathAvailability_t>
       m_DirectForwardingPathAvailability;  // Optional
 };

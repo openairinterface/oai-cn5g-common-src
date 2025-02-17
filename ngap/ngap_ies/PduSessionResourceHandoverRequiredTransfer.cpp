@@ -54,6 +54,18 @@ void PduSessionResourceHandoverRequiredTransfer::
 }
 
 //------------------------------------------------------------------------------
+bool PduSessionResourceHandoverRequiredTransfer::
+    getDirectForwardingPathAvailability(
+        long& directForwardingPathAvailability) const {
+  if (m_DirectForwardingPathAvailability.has_value()) {
+    directForwardingPathAvailability =
+        (long) m_DirectForwardingPathAvailability.value();
+    return true;
+  }
+  return false;
+}
+
+//------------------------------------------------------------------------------
 int PduSessionResourceHandoverRequiredTransfer::encode(
     uint8_t* buf, int buf_size) {
   ngap_utils::print_asn_msg(
@@ -93,18 +105,6 @@ bool PduSessionResourceHandoverRequiredTransfer::decode(
   }
 
   return true;
-}
-
-//------------------------------------------------------------------------------
-bool PduSessionResourceHandoverRequiredTransfer::
-    getDirectForwardingPathAvailability(
-        long& directForwardingPathAvailability) const {
-  if (m_DirectForwardingPathAvailability.has_value()) {
-    directForwardingPathAvailability =
-        (long) m_DirectForwardingPathAvailability.value();
-    return true;
-  }
-  return false;
 }
 
 }  // namespace oai::ngap

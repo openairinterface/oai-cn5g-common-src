@@ -22,6 +22,7 @@
 #include "PduSessionResourceHandoverRequestAckTransfer.hpp"
 
 #include "logger_base.hpp"
+#include "ngap_utils.hpp"
 
 namespace oai::ngap {
 
@@ -73,8 +74,7 @@ int PduSessionResourceHandoverRequestAckTransfer::encode(
   asn_enc_rval_t er = aper_encode_to_buffer(
       &asn_DEF_Ngap_HandoverRequestAcknowledgeTransfer, NULL,
       m_HandoverRequestAcknowledegTransferIe, buf, buf_size);
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("er.encoded %d", er.encoded);
+  oai::logger::logger_common::ngap().debug("er.encoded %d", er.encoded);
   return er.encoded;
 }
 
@@ -86,24 +86,23 @@ bool PduSessionResourceHandoverRequestAckTransfer::decode(
       &asn_DEF_Ngap_HandoverRequestAcknowledgeTransfer,
       (void**) &m_HandoverRequestAcknowledegTransferIe, buf, buf_size);
   if (rc.code == RC_OK) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .debug("Decoded handoverRequestAcknowledegTransfer successfully");
+    oai::logger::logger_common::ngap().debug(
+        "Decoded handoverRequestAcknowledegTransfer successfully");
   } else if (rc.code == RC_WMORE) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .debug("More data expected, call again");
+    oai::logger::logger_common::ngap().debug("More data expected, call again");
     return false;
   } else {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .debug("Failure to decode handoverRequestAcknowledegTransfer data");
+    oai::logger::logger_common::ngap().debug(
+        "Failure to decode handoverRequestAcknowledegTransfer data");
     // return false;
   }
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("rc.consumed to decode: %d", rc.consumed);
+  oai::logger::logger_common::ngap().debug(
+      "rc.consumed to decode: %d", rc.consumed);
 
   if (!m_DlNgUUpTnlInformation.decode(
           m_HandoverRequestAcknowledegTransferIe->dL_NGU_UP_TNLInformation)) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Decode NGAP DL NG-U UP TNL Information IE error");
+    oai::logger::logger_common::ngap().error(
+        "Decode NGAP DL NG-U UP TNL Information IE error");
     return false;
   }
 
@@ -113,8 +112,8 @@ bool PduSessionResourceHandoverRequestAckTransfer::decode(
     if (!dlForwardingUpTnlInformation.decode(
             *m_HandoverRequestAcknowledegTransferIe
                  ->dLForwardingUP_TNLInformation)) {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .error("Decode NGAP  DL Forwarding UP TNL Information IE error");
+      oai::logger::logger_common::ngap().error(
+          "Decode NGAP  DL Forwarding UP TNL Information IE error");
       return false;
     }
     m_DlForwardingUpTnlInformation =
@@ -124,8 +123,8 @@ bool PduSessionResourceHandoverRequestAckTransfer::decode(
 
   if (!m_QosFlowSetupResponseList.decode(
           m_HandoverRequestAcknowledegTransferIe->qosFlowSetupResponseList)) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Decode NGAP QosFlowSetupResponseList IE error");
+    oai::logger::logger_common::ngap().error(
+        "Decode NGAP QosFlowSetupResponseList IE error");
     return false;
   }
   return true;

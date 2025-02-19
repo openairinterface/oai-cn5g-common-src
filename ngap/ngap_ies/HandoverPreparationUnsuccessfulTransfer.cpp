@@ -118,7 +118,6 @@ int HandoverPreparationUnsuccessfulTransfer::encode(
 }
 
 //------------------------------------------------------------------------------
-// Decapsulation
 bool HandoverPreparationUnsuccessfulTransfer::decode(
     uint8_t* buf, int buf_size) {
   asn_dec_rval_t rc = asn_decode(

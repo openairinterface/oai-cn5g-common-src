@@ -28,8 +28,8 @@
 namespace oai::ngap {
 
 //------------------------------------------------------------------------------
-PduSessionResourceSetupRequestTransferIE::
-    PduSessionResourceSetupRequestTransferIE() {
+PduSessionResourceSetupRequestTransfer::
+    PduSessionResourceSetupRequestTransfer() {
   m_Ie = (Ngap_PDUSessionResourceSetupRequestTransfer_t*) calloc(
       1, sizeof(Ngap_PDUSessionResourceSetupRequestTransfer_t));
   m_PduSessionAggregateMaximumBitRateIe = std::nullopt;
@@ -39,39 +39,39 @@ PduSessionResourceSetupRequestTransferIE::
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceSetupRequestTransferIE::
+bool PduSessionResourceSetupRequestTransfer::
     setPduSessionAggregateMaximumBitRate(
         const long& bitRateDl, const long& bitRateUl) {
   m_PduSessionAggregateMaximumBitRateIe =
       std::make_optional<PduSessionAggregateMaximumBitRate>(
           bitRateDl, bitRateUl);
 
-  // Add to the PduSessionResourceSetupRequestTransferIe->protocolIEs.list
-  addPduSessionAggregateMaximumBitRate();
+  // Add to the m_Ie->protocolIEs.list
+  return addPduSessionAggregateMaximumBitRate();
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceSetupRequestTransferIE::
+bool PduSessionResourceSetupRequestTransfer::
     setPduSessionAggregateMaximumBitRate(
         const PduSessionAggregateMaximumBitRate& maxBitRate) {
   m_PduSessionAggregateMaximumBitRateIe =
       std::make_optional<PduSessionAggregateMaximumBitRate>(maxBitRate);
 
-  // Add to the PduSessionResourceSetupRequestTransferIe->protocolIEs.list
-  addPduSessionAggregateMaximumBitRate();
+  // Add to the m_Ie->protocolIEs.list
+  return addPduSessionAggregateMaximumBitRate();
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceSetupRequestTransferIE::
+void PduSessionResourceSetupRequestTransfer::
     getPduSessionAggregateMaximumBitRate(
         std::optional<PduSessionAggregateMaximumBitRate>& maxBitRate) const {
   maxBitRate = m_PduSessionAggregateMaximumBitRateIe;
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceSetupRequestTransferIE::
+bool PduSessionResourceSetupRequestTransfer::
     addPduSessionAggregateMaximumBitRate() {
-  if (!m_PduSessionAggregateMaximumBitRateIe.has_value()) return;
+  if (!m_PduSessionAggregateMaximumBitRateIe.has_value()) return false;
 
   Ngap_PDUSessionResourceSetupRequestTransferIEs_t* ie =
       (Ngap_PDUSessionResourceSetupRequestTransferIEs_t*) calloc(
@@ -87,18 +87,21 @@ void PduSessionResourceSetupRequestTransferIE::
     oai::logger::logger_common::ngap().error(
         "Encode PDUSessionAggregateMaximumBitRate IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
-    return;
+    return false;
   }
 
   ret = ASN_SEQUENCE_ADD(&m_Ie->protocolIEs.list, ie);
-  if (ret != 0)
+  if (ret != 0) {
     oai::logger::logger_common::ngap().error(
         "Encode PDUSessionAggregateMaximumBitRate IE error");
-  // oai::utils::utils::free_wrapper((void**) &ie);
+    // oai::utils::utils::free_wrapper((void**) &ie);
+    return false;
+  }
+  return true;
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceSetupRequestTransferIE::setUlNgUUpTnlInformation(
+bool PduSessionResourceSetupRequestTransfer::setUlNgUUpTnlInformation(
     const GtpTunnel_t& upTnlInfo) {
   TransportLayerAddress transportLayerAddress = {};
   transportLayerAddress.set(upTnlInfo.ipAddress);
@@ -106,20 +109,20 @@ void PduSessionResourceSetupRequestTransferIE::setUlNgUUpTnlInformation(
   gtpTeid.set(upTnlInfo.gtpTeid);
   m_UpTransportLayerInformation.set(transportLayerAddress, gtpTeid);
 
-  // Add to the PduSessionResourceSetupRequestTransferIe->protocolIEs.list
-  addUlNgUUpTnlInformation();
+  // Add to the m_Ie->protocolIEs.list
+  return addUlNgUUpTnlInformation();
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceSetupRequestTransferIE::setUlNgUUpTnlInformation(
+bool PduSessionResourceSetupRequestTransfer::setUlNgUUpTnlInformation(
     const UpTransportLayerInformation& upTnlInfo) {
   m_UpTransportLayerInformation = upTnlInfo;
-  // Add to the PduSessionResourceSetupRequestTransferIe->protocolIEs.list
-  addUlNgUUpTnlInformation();
+  // Add to the m_Ie->protocolIEs.list
+  return addUlNgUUpTnlInformation();
 }
 
 //------------------------------------------------------------------------------
-bool PduSessionResourceSetupRequestTransferIE::getUlNgUUpTnlInformation(
+bool PduSessionResourceSetupRequestTransfer::getUlNgUUpTnlInformation(
     GtpTunnel_t& upTnlInfo) const {
   TransportLayerAddress transportLayerAddress = {};
   GtpTeid gtpTeid                             = {};
@@ -132,7 +135,7 @@ bool PduSessionResourceSetupRequestTransferIE::getUlNgUUpTnlInformation(
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceSetupRequestTransferIE::addUlNgUUpTnlInformation() {
+bool PduSessionResourceSetupRequestTransfer::addUlNgUUpTnlInformation() {
   Ngap_PDUSessionResourceSetupRequestTransferIEs_t* ie =
       (Ngap_PDUSessionResourceSetupRequestTransferIEs_t*) calloc(
           1, sizeof(Ngap_PDUSessionResourceSetupRequestTransferIEs_t));
@@ -147,18 +150,21 @@ void PduSessionResourceSetupRequestTransferIE::addUlNgUUpTnlInformation() {
     oai::logger::logger_common::ngap().error(
         "Encode UPTransportLayerInformation IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
-    return;
+    return false;
   }
 
   ret = ASN_SEQUENCE_ADD(&m_Ie->protocolIEs.list, ie);
-  if (ret != 0)
+  if (ret != 0) {
     oai::logger::logger_common::ngap().error(
         "Encode UPTransportLayerInformation IE error");
-  // oai::utils::utils::free_wrapper((void**) &ie);
+    // oai::utils::utils::free_wrapper((void**) &ie);
+    return false;
+  }
+  return true;
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceSetupRequestTransferIE::setDataForwardingNotPossible() {
+bool PduSessionResourceSetupRequestTransfer::setDataForwardingNotPossible() {
   DataForwardingNotPossible tmp = {};
 
   Ngap_PDUSessionResourceSetupRequestTransferIEs_t* ie =
@@ -177,18 +183,21 @@ void PduSessionResourceSetupRequestTransferIE::setDataForwardingNotPossible() {
     oai::logger::logger_common::ngap().error(
         "Encode DataForwardingNotPossible IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
-    return;
+    return false;
   }
 
   ret = ASN_SEQUENCE_ADD(&m_Ie->protocolIEs.list, ie);
-  if (ret != 0)
+  if (ret != 0) {
     oai::logger::logger_common::ngap().error(
         "Encode DataForwardingNotPossible IE error");
-  // oai::utils::utils::free_wrapper((void**) &ie);
+    // oai::utils::utils::free_wrapper((void**) &ie);
+    return false;
+  }
+  return true;
 }
 
 //------------------------------------------------------------------------------
-bool PduSessionResourceSetupRequestTransferIE::getDataForwardingNotPossible()
+bool PduSessionResourceSetupRequestTransfer::getDataForwardingNotPossible()
     const {
   if (!m_DataForwardingNotPossible.has_value()) return false;
 
@@ -196,7 +205,7 @@ bool PduSessionResourceSetupRequestTransferIE::getDataForwardingNotPossible()
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceSetupRequestTransferIE::setPduSessionType(
+bool PduSessionResourceSetupRequestTransfer::setPduSessionType(
     e_Ngap_PDUSessionType type) {
   m_PduSessionType.set(type);
 
@@ -212,17 +221,20 @@ void PduSessionResourceSetupRequestTransferIE::setPduSessionType(
   if (!ret) {
     oai::logger::logger_common::ngap().error("Encode PDUSessionType IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
-    return;
+    return false;
   }
 
   ret = ASN_SEQUENCE_ADD(&m_Ie->protocolIEs.list, ie);
-  if (ret != 0)
+  if (ret != 0) {
     oai::logger::logger_common::ngap().error("Encode PDUSessionType IE error");
-  // oai::utils::utils::free_wrapper((void**) &ie);
+    // oai::utils::utils::free_wrapper((void**) &ie);
+    return false;
+  }
+  return true;
 }
 
 //------------------------------------------------------------------------------
-bool PduSessionResourceSetupRequestTransferIE::getPduSessionType(
+bool PduSessionResourceSetupRequestTransfer::getPduSessionType(
     long& type) const {
   if (!m_PduSessionType.get(type)) return false;
 
@@ -230,7 +242,7 @@ bool PduSessionResourceSetupRequestTransferIE::getPduSessionType(
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceSetupRequestTransferIE::setSecurityIndication(
+bool PduSessionResourceSetupRequestTransfer::setSecurityIndication(
     e_Ngap_IntegrityProtectionIndication eIntegrityProtectionIndication,
     e_Ngap_ConfidentialityProtectionIndication
         eConfidentialityProtectionIndication,
@@ -249,12 +261,12 @@ void PduSessionResourceSetupRequestTransferIE::setSecurityIndication(
       integrityProtectionIndication, confidentialityProtectionIndication,
       maximumIntegrityProtectedDataRate, maximumIntegrityProtectedDataRate);
 
-  // Add to the PduSessionResourceSetupRequestTransferIe->protocolIEs.list
-  addSecurityIndication();
+  // Add to the m_Ie->protocolIEs.list
+  return addSecurityIndication();
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceSetupRequestTransferIE::setSecurityIndication(
+bool PduSessionResourceSetupRequestTransfer::setSecurityIndication(
     e_Ngap_IntegrityProtectionIndication eIntegrityProtectionIndication,
     e_Ngap_ConfidentialityProtectionIndication
         eConfidentialityProtectionIndication) {
@@ -268,12 +280,12 @@ void PduSessionResourceSetupRequestTransferIE::setSecurityIndication(
       integrityProtectionIndication, confidentialityProtectionIndication,
       std::nullopt, std::nullopt);
 
-  // Add to the PduSessionResourceSetupRequestTransferIe->protocolIEs.list
-  addSecurityIndication();
+  // Add to the m_Ie->protocolIEs.list
+  return addSecurityIndication();
 }
 
 //------------------------------------------------------------------------------
-bool PduSessionResourceSetupRequestTransferIE::getSecurityIndication(
+bool PduSessionResourceSetupRequestTransfer::getSecurityIndication(
     long& integrityProtectionIndication,
     long& confidentialityProtectionIndication, long& maxIntProtDataRate) const {
   if (!m_SecurityIndication.has_value()) return false;
@@ -305,13 +317,13 @@ bool PduSessionResourceSetupRequestTransferIE::getSecurityIndication(
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceSetupRequestTransferIE::getSecurityIndication(
+void PduSessionResourceSetupRequestTransfer::getSecurityIndication(
     std::optional<SecurityIndication>& securityIndication) const {
   securityIndication = m_SecurityIndication;
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceSetupRequestTransferIE::addSecurityIndication() {
+bool PduSessionResourceSetupRequestTransfer::addSecurityIndication() {
   Ngap_PDUSessionResourceSetupRequestTransferIEs_t* ie =
       (Ngap_PDUSessionResourceSetupRequestTransferIEs_t*) calloc(
           1, sizeof(Ngap_PDUSessionResourceSetupRequestTransferIEs_t));
@@ -326,18 +338,21 @@ void PduSessionResourceSetupRequestTransferIE::addSecurityIndication() {
     oai::logger::logger_common::ngap().error(
         "Encode SecurityIndication IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
-    return;
+    return false;
   }
 
   ret = ASN_SEQUENCE_ADD(&m_Ie->protocolIEs.list, ie);
-  if (ret != 0)
+  if (ret != 0) {
     oai::logger::logger_common::ngap().error(
         "Encode SecurityIndication IE error");
-  // oai::utils::utils::free_wrapper((void**) &ie);
+    // oai::utils::utils::free_wrapper((void**) &ie);
+    return false;
+  }
+  return true;
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceSetupRequestTransferIE::setNetworkInstance(
+bool PduSessionResourceSetupRequestTransfer::setNetworkInstance(
     const long& value) {
   m_NetworkInstance = std::make_optional<NetworkInstance>(value);
 
@@ -353,17 +368,20 @@ void PduSessionResourceSetupRequestTransferIE::setNetworkInstance(
   if (!ret) {
     oai::logger::logger_common::ngap().error("Encode NetworkInstance IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
-    return;
+    return false;
   }
 
   ret = ASN_SEQUENCE_ADD(&m_Ie->protocolIEs.list, ie);
-  if (ret != 0)
+  if (ret != 0) {
     oai::logger::logger_common::ngap().error("Encode NetworkInstance IE error");
-  // oai::utils::utils::free_wrapper((void**) &ie);
+    // oai::utils::utils::free_wrapper((void**) &ie);
+    return false;
+  }
+  return true;
 }
 
 //------------------------------------------------------------------------------
-bool PduSessionResourceSetupRequestTransferIE::getNetworkInstance(
+bool PduSessionResourceSetupRequestTransfer::getNetworkInstance(
     long& value) const {
   if (!m_NetworkInstance.has_value()) return false;
 
@@ -373,13 +391,13 @@ bool PduSessionResourceSetupRequestTransferIE::getNetworkInstance(
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceSetupRequestTransferIE::getNetworkInstance(
+void PduSessionResourceSetupRequestTransfer::getNetworkInstance(
     std::optional<NetworkInstance>& networkInstance) const {
   networkInstance = m_NetworkInstance;
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceSetupRequestTransferIE::setQosFlowSetupRequestList(
+bool PduSessionResourceSetupRequestTransfer::setQosFlowSetupRequestList(
     std::vector<QosFlowSetupReq_t> list) {
   std::vector<QosFlowSetupRequestItem> itemListVector;
 
@@ -529,12 +547,12 @@ void PduSessionResourceSetupRequestTransferIE::setQosFlowSetupRequestList(
 
   m_QosFlowSetupRequestList.set(itemListVector);
 
-  // Add to the PduSessionResourceSetupRequestTransferIe->protocolIEs.list
-  addQosFlowSetupRequestList();
+  // Add to the m_Ie->protocolIEs.list
+  return addQosFlowSetupRequestList();
 }
 
 //------------------------------------------------------------------------------
-bool PduSessionResourceSetupRequestTransferIE::getQosFlowSetupRequestList(
+bool PduSessionResourceSetupRequestTransfer::getQosFlowSetupRequestList(
     std::vector<QosFlowSetupReq_t>& list) const {
   std::vector<QosFlowSetupRequestItem> itemListVector;
   m_QosFlowSetupRequestList.get(itemListVector);
@@ -754,22 +772,22 @@ bool PduSessionResourceSetupRequestTransferIE::getQosFlowSetupRequestList(
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceSetupRequestTransferIE::setQosFlowSetupRequestList(
+bool PduSessionResourceSetupRequestTransfer::setQosFlowSetupRequestList(
     const QosFlowSetupRequestList& list) {
   m_QosFlowSetupRequestList = list;
 
-  // Add to the PduSessionResourceSetupRequestTransferIe->protocolIEs.list
-  addQosFlowSetupRequestList();
+  // Add to the m_Ie->protocolIEs.list
+  return addQosFlowSetupRequestList();
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceSetupRequestTransferIE::getQosFlowSetupRequestList(
+void PduSessionResourceSetupRequestTransfer::getQosFlowSetupRequestList(
     QosFlowSetupRequestList& list) const {
   list = m_QosFlowSetupRequestList;
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceSetupRequestTransferIE::addQosFlowSetupRequestList() {
+bool PduSessionResourceSetupRequestTransfer::addQosFlowSetupRequestList() {
   Ngap_PDUSessionResourceSetupRequestTransferIEs_t* ie =
       (Ngap_PDUSessionResourceSetupRequestTransferIEs_t*) calloc(
           1, sizeof(Ngap_PDUSessionResourceSetupRequestTransferIEs_t));
@@ -784,19 +802,21 @@ void PduSessionResourceSetupRequestTransferIE::addQosFlowSetupRequestList() {
     oai::logger::logger_common::ngap().error(
         "Encode QosFlowSetupRequestList IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
-    return;
+    return false;
   }
 
   ret = ASN_SEQUENCE_ADD(&m_Ie->protocolIEs.list, ie);
-  if (ret != 0)
+  if (ret != 0) {
     oai::logger::logger_common::ngap().error(
         "Encode QosFlowSetupRequestList IE error");
-  // oai::utils::utils::free_wrapper((void**) &ie);
+    // oai::utils::utils::free_wrapper((void**) &ie);
+    return false;
+  }
+  return true;
 }
 
 //------------------------------------------------------------------------------
-int PduSessionResourceSetupRequestTransferIE::encode(
-    uint8_t* buf, int buf_size) {
+int PduSessionResourceSetupRequestTransfer::encode(uint8_t* buf, int buf_size) {
   ngap_utils::print_asn_msg(
       &asn_DEF_Ngap_PDUSessionResourceSetupRequestTransfer, m_Ie);
   asn_enc_rval_t er = aper_encode_to_buffer(
@@ -808,7 +828,7 @@ int PduSessionResourceSetupRequestTransferIE::encode(
 }
 
 //------------------------------------------------------------------------------
-bool PduSessionResourceSetupRequestTransferIE::decode(
+bool PduSessionResourceSetupRequestTransfer::decode(
     uint8_t* buf, int buf_size) {
   asn_dec_rval_t rc = asn_decode(
       NULL, ATS_ALIGNED_CANONICAL_PER,
@@ -974,7 +994,7 @@ bool PduSessionResourceSetupRequestTransferIE::decode(
       // TODO: Direct Forwarding Path Availability
       default: {
         oai::logger::logger_common::ngap().error(
-            "Decode NGAP message PduSessionResourceSetupRequestTransferIE "
+            "Decode NGAP message PduSessionResourceSetupRequestTransfer "
             "error");
         return false;
       }

@@ -41,8 +41,9 @@ ControlPlaneServiceRequest::~ControlPlaneServiceRequest() {}
 uint32_t ControlPlaneServiceRequest::GetLength() const {
   uint32_t msg_len = 0;
   msg_len += ie_header_.GetLength();
-  msg_len += ie_control_plane_service_type_.GetIeLength();
-  msg_len += ie_ng_ksi_.GetIeLength();
+  // msg_len += ie_control_plane_service_type_.GetIeLength();
+  // msg_len += ie_ng_ksi_.GetIeLength();
+  msg_len += 1;  // 1/2 for Control plane service type + 1/2 for ngKSI
   if (ie_pdu_session_status_.has_value())
     msg_len += ie_pdu_session_status_.value().GetIeLength();
   if (ie_uplink_data_status_.has_value())
@@ -157,8 +158,9 @@ int ControlPlaneServiceRequest::Encode(uint8_t* buf, int len) {
       (encoded_ie_size != 0)) {  // 1/2 octet
     return KEncodeDecodeError;
   }
-  if ((encoded_ie_size = NasHelper::Encode(
-           ie_ng_ksi_, buf, len, encoded_size)) == KEncodeDecodeError) {
+  encoded_ie_size = NasHelper::Encode(ie_ng_ksi_, buf, len, encoded_size);
+  if ((encoded_ie_size == KEncodeDecodeError) or
+      (encoded_ie_size != 0)) {  // 1/2 octet
     return KEncodeDecodeError;
   }
   encoded_size++;  // 1/2 for Control Plane Service Type, 1/2 octet for ngKSI
@@ -215,24 +217,15 @@ int ControlPlaneServiceRequest::Decode(uint8_t* buf, int len) {
   decoded_size += decoded_ie_size;
 
   // Control Plane service type + ngKSI
-  if ((decoded_ie_size = NasHelper::Decode(
-           ie_control_plane_service_type_, buf, len, decoded_size, false,
-           false)) == KEncodeDecodeError) {
-    return KEncodeDecodeError;
-  }
-  if ((decoded_ie_size = NasHelper::Decode(
-           ie_ng_ksi_, buf, len, decoded_size, true, false)) ==
-      KEncodeDecodeError) {
-    return KEncodeDecodeError;
-  }
-
   decoded_ie_size = ie_control_plane_service_type_.Decode(
       buf + decoded_size, len - decoded_size, false, false);
-  if (decoded_ie_size == KEncodeDecodeError) return KEncodeDecodeError;
+  if ((decoded_ie_size == KEncodeDecodeError) or (decoded_ie_size != 0))
+    return KEncodeDecodeError;
 
   decoded_ie_size =
       ie_ng_ksi_.Decode(buf + decoded_size, len - decoded_size, true, false);
-  if (decoded_ie_size == KEncodeDecodeError) return KEncodeDecodeError;
+  if ((decoded_ie_size == KEncodeDecodeError) or (decoded_ie_size != 0))
+    return KEncodeDecodeError;
   decoded_size++;  // 1/2 for Control Plane Service Type, 1/2 octet for ngKSI
 
   // Decode other IEs

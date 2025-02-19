@@ -39,8 +39,9 @@ DeregistrationRequest::~DeregistrationRequest() {}
 uint32_t DeregistrationRequest::GetLength() const {
   uint32_t msg_len = 0;
   msg_len += ie_header_.GetLength();
-  msg_len += ie_deregistration_type_.GetIeLength();
-  msg_len += ie_ng_ksi_.GetIeLength();
+  // msg_len += ie_deregistration_type_.GetIeLength();
+  // msg_len += ie_ng_ksi_.GetIeLength();
+  msg_len += 1;  // 1/2 for Deregistration type + 1/2 for ngKSI
   msg_len += ie_5gs_mobility_id_.GetIeLength();
 
   return msg_len;
@@ -163,14 +164,15 @@ int DeregistrationRequest::Encode(uint8_t* buf, int len) {
   encoded_size += encoded_ie_size;
 
   // De-registration Type and ngKSI
-  encoded_ie_size = NasHelper::Encode(ie_ng_ksi_, buf, len, encoded_size);
+  encoded_ie_size =
+      NasHelper::Encode(ie_deregistration_type_, buf, len, encoded_size);
   // only 1/2 octet
   if ((encoded_ie_size == KEncodeDecodeError) or (encoded_ie_size != 0)) {
     return KEncodeDecodeError;
   }
-
-  if ((encoded_ie_size = NasHelper::Encode(
-           ie_ng_ksi_, buf, len, encoded_size)) == KEncodeDecodeError) {
+  encoded_ie_size = NasHelper::Encode(ie_ng_ksi_, buf, len, encoded_size);
+  // only 1/2 octet
+  if ((encoded_ie_size == KEncodeDecodeError) or (encoded_ie_size != 0)) {
     return KEncodeDecodeError;
   }
   encoded_size++;  // 1/2 octet for Deregistration Type, 1/2 for ngKSI
@@ -204,15 +206,15 @@ int DeregistrationRequest::Decode(uint8_t* buf, int len) {
   decoded_size += decoded_ie_size;
 
   // De-registration Type + ngKSI
-  if ((decoded_ie_size = NasHelper::Decode(
-           ie_deregistration_type_, buf, len, decoded_size, false)) ==
-      KEncodeDecodeError) {
+  decoded_ie_size =
+      NasHelper::Decode(ie_deregistration_type_, buf, len, decoded_size, false);
+  if ((decoded_ie_size == KEncodeDecodeError) or (decoded_ie_size != 0)) {
     return KEncodeDecodeError;
   }
-  if ((decoded_ie_size = NasHelper::Decode(
-           ie_ng_ksi_, buf, len, decoded_size, true,
-           false)) ==  // 4 higher bits
-      KEncodeDecodeError) {
+  decoded_ie_size = NasHelper::Decode(
+      ie_ng_ksi_, buf, len, decoded_size, true,
+      false);  // 4 higher bits
+  if ((decoded_ie_size == KEncodeDecodeError) or (decoded_ie_size != 0)) {
     return KEncodeDecodeError;
   }
   decoded_size++;  // 1/2 octet for De-registration Type, 1/2 ngKSI

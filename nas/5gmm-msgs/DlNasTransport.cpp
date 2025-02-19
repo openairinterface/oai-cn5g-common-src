@@ -43,7 +43,8 @@ DlNasTransport::~DlNasTransport() {}
 uint32_t DlNasTransport::GetLength() const {
   uint32_t msg_len = 0;
   msg_len += ie_header_.GetLength();
-  msg_len += ie_payload_container_type_.GetIeLength();
+  // msg_len += ie_payload_container_type_.GetIeLength();
+  msg_len += 1;  // 1/2 for Payload container type + 1/2 for Spare half octet
   msg_len += ie_payload_container_.GetIeLength();
   if (ie_pdu_session_identity_2_.has_value())
     msg_len += ie_pdu_session_identity_2_.value().GetIeLength();
@@ -121,7 +122,6 @@ int DlNasTransport::Encode(uint8_t* buf, int len) {
       KEncodeDecodeError) {
     return KEncodeDecodeError;
   }
-
   if (encoded_ie_size == 0)
     // Spare half octet
     encoded_size++;  // 1/2 octet + 1/2 octet for Payload container type

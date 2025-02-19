@@ -39,7 +39,8 @@ DeregistrationRequestUeTerminated::~DeregistrationRequestUeTerminated() {}
 uint32_t DeregistrationRequestUeTerminated::GetLength() const {
   uint32_t msg_len = 0;
   msg_len += ie_header_.GetLength();
-  msg_len += ie_deregistration_type_.GetIeLength();
+  // msg_len += ie_deregistration_type_.GetIeLength();
+  msg_len += 1;  // 1/2 for De-registration type + 1/2 for Spare half octet
   if (ie_5gmm_cause_.has_value())
     msg_len += ie_5gmm_cause_.value().GetIeLength();
   if (ie_t3346_value_.has_value())
@@ -126,9 +127,8 @@ int DeregistrationRequestUeTerminated::Encode(uint8_t* buf, int len) {
   if ((encoded_ie_size == KEncodeDecodeError) or (encoded_ie_size != 0)) {
     return KEncodeDecodeError;
   }
-  if (encoded_ie_size == 0)
-    encoded_size++;  // 1/2 octet for Deregistration Type, 1/2 for Spare half
-                     // octet
+  encoded_size++;  // 1/2 octet for Deregistration Type, 1/2 for Spare half
+                   // octet
 
   // 5GMM Cause
   if ((encoded_ie_size = NasHelper::Encode(
@@ -172,14 +172,13 @@ int DeregistrationRequestUeTerminated::Decode(uint8_t* buf, int len) {
   decoded_size += decoded_ie_size;
 
   // De-registration Type +  Spare half octet
-  if ((decoded_ie_size = NasHelper::Decode(
-           ie_deregistration_type_, buf, len, decoded_size, false)) ==
-      KEncodeDecodeError) {
+  decoded_ie_size =
+      NasHelper::Decode(ie_deregistration_type_, buf, len, decoded_size, false);
+  if ((decoded_ie_size == KEncodeDecodeError) or (decoded_ie_size != 0)) {
     return KEncodeDecodeError;
   }
-  if (decoded_ie_size == 0)
-    decoded_size++;  // 1/2 octet for De-registration Type, 1/2 for Spare half
-                     // octet
+  decoded_size++;  // 1/2 octet for De-registration Type, 1/2 for Spare half
+                   // octet
 
   // Decode other IEs
   uint8_t octet = 0x00;

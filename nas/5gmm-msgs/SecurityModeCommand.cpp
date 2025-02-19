@@ -46,7 +46,8 @@ uint32_t SecurityModeCommand::GetLength() const {
   uint32_t msg_len = 0;
   msg_len += ie_header_.GetLength();
   msg_len += ie_selected_nas_security_algorithms_.GetIeLength();
-  msg_len += ie_ng_ksi_.GetIeLength();
+  // msg_len += ie_ng_ksi_.GetIeLength();
+  msg_len += 1;  // 1/2 octet for ngKSI and 1/2 octet for Spare half octet
   msg_len += ie_ue_security_capability_.GetIeLength();
   if (ie_imeisv_request_.has_value())
     msg_len += ie_imeisv_request_.value().GetIeLength();

@@ -37,7 +37,8 @@ IdentityRequest::~IdentityRequest() {}
 uint32_t IdentityRequest::GetLength() const {
   uint32_t msg_len = 0;
   msg_len += ie_header_.GetLength();
-  msg_len += ie_5gs_identity_type_.GetIeLength();
+  // msg_len += ie_5gs_identity_type_.GetIeLength();
+  msg_len += 1;  // Identity type 1/2 + Spare half octet 1/2
 
   return msg_len;
 }

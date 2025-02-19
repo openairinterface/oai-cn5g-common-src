@@ -42,8 +42,9 @@ ServiceRequest::~ServiceRequest() {}
 uint32_t ServiceRequest::GetLength() const {
   uint32_t msg_len = 0;
   msg_len += ie_header_.GetLength();
-  msg_len += ie_ng_ksi_.GetIeLength();
-  msg_len += ie_service_type_.GetIeLength();
+  // msg_len += ie_ng_ksi_.GetIeLength();
+  // msg_len += ie_service_type_.GetIeLength();
+  msg_len += 1;  // 1/2 octet for ngKSI + 1/2 octet for Service type
   msg_len += ie_5g_s_tmsi_.GetIeLength();
 
   if (ie_uplink_data_status_.has_value())
@@ -202,12 +203,12 @@ int ServiceRequest::Encode(uint8_t* buf, int len) {
       (encoded_ie_size != 0)) {  // 1/2 octet
     return KEncodeDecodeError;
   }
-  if ((encoded_ie_size = NasHelper::Encode(
-           ie_service_type_, buf, len, encoded_size)) == KEncodeDecodeError) {
+  encoded_ie_size = NasHelper::Encode(ie_service_type_, buf, len, encoded_size);
+  if ((encoded_ie_size == KEncodeDecodeError) or
+      (encoded_ie_size != 0)) {  // 1/2 octet
     return KEncodeDecodeError;
   }
-  if (encoded_ie_size == 0)
-    encoded_size++;  // 1/2 octet for ngKSI, 1/2 for Service Type
+  encoded_size++;  // 1/2 octet for ngKSI, 1/2 for Service Type
 
   // 5G-S-TMSI
   if ((encoded_ie_size = NasHelper::Encode(
@@ -269,13 +270,12 @@ int ServiceRequest::Decode(uint8_t* buf, int len) {
   if ((decoded_ie_size == KEncodeDecodeError) or (decoded_ie_size != 0)) {
     return KEncodeDecodeError;
   }
-  if ((decoded_ie_size = NasHelper::Decode(
-           ie_service_type_, buf, len, decoded_size, true, false)) ==
-      KEncodeDecodeError) {
+  decoded_ie_size =
+      NasHelper::Decode(ie_service_type_, buf, len, decoded_size, true, false);
+  if ((decoded_ie_size == KEncodeDecodeError) or (decoded_ie_size != 0)) {
     return KEncodeDecodeError;
   }
-  if (decoded_ie_size == 0)
-    decoded_size++;  // 1/2 octet for ngKSI, 1/2 for Service Type
+  decoded_size++;  // 1/2 octet for ngKSI, 1/2 for Service Type
 
   // 5G-S-TMSI
   if ((decoded_ie_size =

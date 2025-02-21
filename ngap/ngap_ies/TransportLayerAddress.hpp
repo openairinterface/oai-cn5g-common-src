@@ -36,7 +36,7 @@ class TransportLayerAddress {
   virtual ~TransportLayerAddress();
 
   void set(const std::string& address);
-  bool get(std::string& address) const;
+  void get(std::string& address) const;
 
   bool encode(Ngap_TransportLayerAddress_t& transportLayerAddress) const;
   bool decode(const Ngap_TransportLayerAddress_t& transportLayerAddress);

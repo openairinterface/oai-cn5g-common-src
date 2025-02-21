@@ -35,16 +35,12 @@ TransportLayerAddress::~TransportLayerAddress() {}
 
 //------------------------------------------------------------------------------
 void TransportLayerAddress::set(const std::string& address) {
-  // m_IpAddress = oai::utils::utils::fromString<long>(address);
   m_IpAddress = address;
 }
 
 //------------------------------------------------------------------------------
-bool TransportLayerAddress::get(std::string& address) const {
-  // address = to_string(m_IpAddress);
+void TransportLayerAddress::get(std::string& address) const {
   address = m_IpAddress;
-
-  return true;
 }
 
 //------------------------------------------------------------------------------

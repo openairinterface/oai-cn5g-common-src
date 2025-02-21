@@ -126,9 +126,8 @@ bool PduSessionResourceSetupRequestTransfer::getUlNgUUpTnlInformation(
     GtpTunnel_t& upTnlInfo) const {
   TransportLayerAddress transportLayerAddress = {};
   GtpTeid gtpTeid                             = {};
-  if (!m_UpTransportLayerInformation.get(transportLayerAddress, gtpTeid))
-    return false;
-  if (!transportLayerAddress.get(upTnlInfo.ipAddress)) return false;
+  m_UpTransportLayerInformation.get(transportLayerAddress, gtpTeid);
+  transportLayerAddress.get(upTnlInfo.ipAddress);
   if (!gtpTeid.get(upTnlInfo.gtpTeid)) return false;
 
   return true;

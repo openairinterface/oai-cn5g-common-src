@@ -284,6 +284,16 @@ bool PduSessionResourceSetupRequestTransfer::setSecurityIndication(
 }
 
 //------------------------------------------------------------------------------
+bool PduSessionResourceSetupRequestTransfer::setSecurityIndication(
+    const SecurityIndication& securityIndication) {
+  m_SecurityIndication =
+      std::make_optional<SecurityIndication>(securityIndication);
+
+  // Add to the m_Ie->protocolIEs.list
+  return addSecurityIndication();
+}
+
+//------------------------------------------------------------------------------
 bool PduSessionResourceSetupRequestTransfer::getSecurityIndication(
     long& integrityProtectionIndication,
     long& confidentialityProtectionIndication, long& maxIntProtDataRate) const {

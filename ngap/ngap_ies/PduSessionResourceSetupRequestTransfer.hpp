@@ -78,6 +78,7 @@ class PduSessionResourceSetupRequestTransfer {
       e_Ngap_IntegrityProtectionIndication integrityProtectionIndication,
       e_Ngap_ConfidentialityProtectionIndication
           confidentialityProtectionIndication);
+  bool setSecurityIndication(const SecurityIndication& securityIndication);
   bool getSecurityIndication(
       long& integrityProtectionIndication,
       long& confidentialityProtectionIndication,

@@ -40,7 +40,8 @@ AuthenticationResult::~AuthenticationResult() {}
 uint32_t AuthenticationResult::GetLength() const {
   uint32_t msg_len = 0;
   msg_len += ie_header_.GetLength();
-  msg_len += ie_ng_ksi_.GetIeLength();
+  // msg_len += ie_ng_ksi_.GetIeLength();
+  msg_len += 1;  // 1/2 for ngKSI + 1/2 for Spare half octet
   msg_len += ie_eap_message_.GetIeLength();
   if (ie_abba_.has_value()) msg_len += ie_abba_.value().GetIeLength();
 

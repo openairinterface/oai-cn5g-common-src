@@ -63,8 +63,9 @@ RegistrationRequest::~RegistrationRequest() {}
 uint32_t RegistrationRequest::GetLength() const {
   uint32_t msg_len = 0;
   msg_len += ie_header_.GetLength();
-  msg_len += ie_5gs_registration_type_.GetIeLength();
-  msg_len += ie_ng_ksi_.GetIeLength();
+  // msg_len += ie_5gs_registration_type_.GetIeLength();
+  // msg_len += ie_ng_ksi_.GetIeLength();
+  msg_len += 1;  // 1/2 for 5GS registration type + 1/2 for ngKSI
   msg_len += ie_5gs_mobile_identity_.GetIeLength();
   if (ie_non_current_native_nas_ksi_.has_value())
     msg_len += ie_non_current_native_nas_ksi_.value().GetIeLength();
@@ -627,20 +628,17 @@ int RegistrationRequest::Encode(uint8_t* buf, int len) {
   encoded_size += encoded_ie_size;
 
   // 5GS Registration Type
-  if ((encoded_ie_size = NasHelper::Encode(
-           ie_5gs_registration_type_, buf, len, encoded_size)) ==
-      KEncodeDecodeError) {
+  encoded_ie_size =
+      NasHelper::Encode(ie_5gs_registration_type_, buf, len, encoded_size);
+  if ((encoded_ie_size == KEncodeDecodeError) or (encoded_ie_size != 0)) {
     return KEncodeDecodeError;
   }
-
   //  ngKSI
-  if ((encoded_ie_size = NasHelper::Encode(
-           ie_ng_ksi_, buf, len, encoded_size)) == KEncodeDecodeError) {
+  encoded_ie_size = NasHelper::Encode(ie_ng_ksi_, buf, len, encoded_size);
+  if ((encoded_ie_size == KEncodeDecodeError) or (encoded_ie_size != 0)) {
     return KEncodeDecodeError;
   }
-  // Spare half octet
-  if (encoded_ie_size == 0)
-    encoded_size++;  // 1/2 for 5GS registration type and 1/2 for ngKSI
+  encoded_size++;  // 1/2 for 5GS registration type and 1/2 for ngKSI
 
   // 5GS Mobile Identity
   if ((encoded_ie_size = NasHelper::Encode(
@@ -833,20 +831,19 @@ int RegistrationRequest::Decode(uint8_t* buf, int len) {
   decoded_size += decoded_ie_size;
 
   // Registration Type and Ng KSI
-  if ((decoded_ie_size = NasHelper::Decode(
-           ie_5gs_registration_type_, buf, len, decoded_size, false)) ==
-      KEncodeDecodeError) {
+  decoded_ie_size = NasHelper::Decode(
+      ie_5gs_registration_type_, buf, len, decoded_size, false);
+  if ((decoded_ie_size == KEncodeDecodeError) or (decoded_ie_size != 0)) {
     return KEncodeDecodeError;
   }
-  if ((decoded_ie_size = NasHelper::Decode(
-           ie_ng_ksi_, buf, len, decoded_size, true,
-           false)) ==  // high, 1/2 octet
-      KEncodeDecodeError) {
+  decoded_ie_size = NasHelper::Decode(
+      ie_ng_ksi_, buf, len, decoded_size, true,
+      false);  // high, 1/2 octet
+  if ((decoded_ie_size == KEncodeDecodeError) or (decoded_ie_size != 0)) {
     return KEncodeDecodeError;
   }
-  if (decoded_ie_size == 0)
-    decoded_size++;  // 1/2 octet for ie_5gs_registration_type_, 1/2 octet for
-                     // ie_ng_ksi
+  decoded_size++;  // 1/2 octet for ie_5gs_registration_type_, 1/2 octet for
+                   // ie_ng_ksi
 
   if ((decoded_ie_size = NasHelper::Decode(
            ie_5gs_mobile_identity_, buf, len, decoded_size, false)) ==

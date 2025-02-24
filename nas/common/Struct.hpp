@@ -186,10 +186,7 @@ typedef struct {
 } PacketFilterCreateAndModifyAndReplace;
 
 // QoS Flow Description-related IEs
-typedef struct {
-  uint8_t unit;
-  uint16_t value;
-} BitRate;
+
 }  // namespace oai::nas
 
 #endif

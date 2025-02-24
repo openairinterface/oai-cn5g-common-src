@@ -19,18 +19,20 @@
  *      contact@openairinterface.org
  */
 
-#include "conversions.hpp"
 #include "sdf_conversions.hpp"
-#include "Helpers.h"
-#include "logger_base.hpp"
-#include "3gpp_commons.h"
-#include "Struct.hpp"
 
-#include <regex>
 #include <fmt/format.h>
+
+#include <boost/algorithm/string/classification.hpp>
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/trim.hpp>
-#include <boost/algorithm/string/classification.hpp>
+#include <regex>
+
+#include "3gpp_commons.h"
+#include "Helpers.h"
+#include "Struct.hpp"
+#include "conversions.hpp"
+#include "logger_base.hpp"
 
 using namespace oai::utils;
 using namespace oai::logger;
@@ -232,7 +234,7 @@ bool sdf_conversions::parse_bitrate_string(
 }
 
 bool oai::utils::sdf_conversions::parse_bitrate_string(
-    const std::string& bit_rate_str, oai::nas::BitRate& bit_rate) {
+    const std::string& bit_rate_str, BitRate& bit_rate) {
   std::string bandwidth_regex =
       oai::model::common::helpers::BANDWIDTH_VALIDATION_REGEX;
 

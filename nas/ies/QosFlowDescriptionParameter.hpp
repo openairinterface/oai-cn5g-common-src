@@ -23,8 +23,10 @@
 #define _QOS_FLOW_DESCRIPTION_PARAMETER_H_
 
 #include <cstdint>
-#include <vector>
 #include <optional>
+#include <vector>
+
+#include "3gpp_commons.h"
 #include "Struct.hpp"
 
 namespace oai::nas {

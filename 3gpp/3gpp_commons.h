@@ -72,4 +72,9 @@ constexpr uint8_t kBitRateUnitValueIsIncrementedInMultiplesOf64Pbps =
 constexpr uint8_t kBitRateUnitValueIsIncrementedInMultiplesOf256Pbps =
     0b00011001;
 
+typedef struct {
+  uint8_t unit;
+  uint16_t value;
+} BitRate;
+
 #endif /* FILE_3GPP_COMMONS_SEEN */

@@ -22,6 +22,7 @@
 #include "QosFlowDescriptionParameter.hpp"
 
 #include "3gpp_24.501.hpp"
+#include "3gpp_commons.h"
 #include "common_defs.h"
 #include "logger_base.hpp"
 

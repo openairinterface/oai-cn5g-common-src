@@ -75,8 +75,8 @@ class PduSessionResourceHandoverRequestAckTransfer {
   // TODO: Used RSN Information
   // TODO: Global RAN Node ID of Secondary NG-RAN Node
 
-  int encode(uint8_t* buf, int bufSize);   // TODO: remove naked pointer
-  bool decode(uint8_t* buf, int bufSize);  // TODO: remove naked pointer
+  int encode(uint8_t* buf, int bufSize);
+  bool decode(uint8_t* buf, int bufSize);
 
  private:
   Ngap_HandoverRequestAcknowledgeTransfer_t*

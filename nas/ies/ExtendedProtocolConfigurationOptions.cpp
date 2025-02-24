@@ -202,12 +202,20 @@ int ExtendedProtocolConfigurationOptions::Decode(
     DECODE_U8(
         buf + decoded_size, pco_id.length_of_protocol_id_contents,
         decoded_size);
-    bstring b_str = nullptr;
-    decode_bstring(
-        &b_str, pco_id.length_of_protocol_id_contents, (buf + decoded_size),
-        len - decoded_size);
-  oai:
-    utils::conv::bstring_to_string(b_str, pco_id.protocol_id_contents);
+    if (pco_id.length_of_protocol_id_contents > 0) {
+      bstring b_str = nullptr;
+
+      int decoded_bstring_size = decode_bstring(
+          &b_str, pco_id.length_of_protocol_id_contents, (buf + decoded_size),
+          len - decoded_size);
+      if (decoded_bstring_size > 0) {
+      oai:
+        utils::conv::bstring_to_string(b_str, pco_id.protocol_id_contents);
+        decoded_size += pco_id.length_of_protocol_id_contents;
+      }
+    }
+    oai::logger::logger_common::nas().debug(
+        "Decoded PCO ID 0x%x", pco_id.protocol_id);
     protocol_or_container_ids.push_back(pco_id);
   }
 

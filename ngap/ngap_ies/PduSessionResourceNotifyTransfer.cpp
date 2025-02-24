@@ -99,23 +99,22 @@ void PduSessionResourceNotifyTransferIE::getQosFlowFeedbackList(
 }
 
 //------------------------------------------------------------------------------
-int PduSessionResourceNotifyTransferIE::encode(uint8_t* buf, int buf_size) {
+int PduSessionResourceNotifyTransferIE::encode(uint8_t* buf, int bufSize) {
   ngap_utils::print_asn_msg(
       &asn_DEF_Ngap_PDUSessionResourceNotifyTransfer, m_Ie);
   asn_enc_rval_t er = aper_encode_to_buffer(
-      &asn_DEF_Ngap_PDUSessionResourceNotifyTransfer, NULL, m_Ie, buf,
-      buf_size);
+      &asn_DEF_Ngap_PDUSessionResourceNotifyTransfer, NULL, m_Ie, buf, bufSize);
   oai::logger::logger_common::ngap().debug("er.encoded( %d)", er.encoded);
   // asn_fprint(stderr, er.failed_type, er.structure_ptr);
   return er.encoded;
 }
 
 //------------------------------------------------------------------------------
-bool PduSessionResourceNotifyTransferIE::decode(uint8_t* buf, int buf_size) {
+bool PduSessionResourceNotifyTransferIE::decode(uint8_t* buf, int bufSize) {
   asn_dec_rval_t rc = asn_decode(
       NULL, ATS_ALIGNED_CANONICAL_PER,
       &asn_DEF_Ngap_PDUSessionResourceNotifyTransfer, (void**) &m_Ie, buf,
-      buf_size);
+      bufSize);
   if (rc.code == RC_OK) {
     oai::logger::logger_common::ngap().debug("Decoded successfully");
   } else if (rc.code == RC_WMORE) {

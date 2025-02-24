@@ -126,24 +126,24 @@ long PduSessionResourceNotifyReleasedTransfer::getCause() const {
 
 //------------------------------------------------------------------------------
 int PduSessionResourceNotifyReleasedTransfer::encode(
-    uint8_t* buf, int buf_size) {
+    uint8_t* buf, int bufSize) {
   ngap_utils::print_asn_msg(
       &asn_DEF_Ngap_PDUSessionResourceNotifyReleasedTransfer,
       m_PduSessionResourceNotifyReleasedTransferIe);
   asn_enc_rval_t er = aper_encode_to_buffer(
       &asn_DEF_Ngap_PDUSessionResourceNotifyReleasedTransfer, NULL,
-      m_PduSessionResourceNotifyReleasedTransferIe, buf, buf_size);
+      m_PduSessionResourceNotifyReleasedTransferIe, buf, bufSize);
   oai::logger::logger_common::ngap().debug("er.encoded( %d)", er.encoded);
   return er.encoded;
 }
 
 //------------------------------------------------------------------------------
 bool PduSessionResourceNotifyReleasedTransfer::decode(
-    uint8_t* buf, int buf_size) {
+    uint8_t* buf, int bufSize) {
   asn_dec_rval_t rc = asn_decode(
       NULL, ATS_ALIGNED_CANONICAL_PER,
       &asn_DEF_Ngap_PDUSessionResourceNotifyReleasedTransfer,
-      (void**) &m_PduSessionResourceNotifyReleasedTransferIe, buf, buf_size);
+      (void**) &m_PduSessionResourceNotifyReleasedTransferIe, buf, bufSize);
 
   if (rc.code == RC_OK) {
     oai::logger::logger_common::ngap().debug("Decoded successfully");

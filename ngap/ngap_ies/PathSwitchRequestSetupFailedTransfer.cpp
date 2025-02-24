@@ -123,23 +123,23 @@ long PathSwitchRequestSetupFailedTransfer::getCause() const {
 }
 
 //------------------------------------------------------------------------------
-int PathSwitchRequestSetupFailedTransfer::encode(uint8_t* buf, int buf_size) {
+int PathSwitchRequestSetupFailedTransfer::encode(uint8_t* buf, int bufSize) {
   ngap_utils::print_asn_msg(
       &asn_DEF_Ngap_PathSwitchRequestSetupFailedTransfer,
       m_PathSwitchRequestSetupFailedTransferIe);
   asn_enc_rval_t er = aper_encode_to_buffer(
       &asn_DEF_Ngap_PathSwitchRequestSetupFailedTransfer, NULL,
-      m_PathSwitchRequestSetupFailedTransferIe, buf, buf_size);
+      m_PathSwitchRequestSetupFailedTransferIe, buf, bufSize);
   oai::logger::logger_common::ngap().debug("er.encoded( %d)", er.encoded);
   return er.encoded;
 }
 
 //------------------------------------------------------------------------------
-bool PathSwitchRequestSetupFailedTransfer::decode(uint8_t* buf, int buf_size) {
+bool PathSwitchRequestSetupFailedTransfer::decode(uint8_t* buf, int bufSize) {
   asn_dec_rval_t rc = asn_decode(
       NULL, ATS_ALIGNED_CANONICAL_PER,
       &asn_DEF_Ngap_PathSwitchRequestSetupFailedTransfer,
-      (void**) &m_PathSwitchRequestSetupFailedTransferIe, buf, buf_size);
+      (void**) &m_PathSwitchRequestSetupFailedTransferIe, buf, bufSize);
 
   if (rc.code == RC_OK) {
     oai::logger::logger_common::ngap().debug("Decoded successfully");

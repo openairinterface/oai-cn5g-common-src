@@ -67,22 +67,22 @@ bool PduSessionResourceHandoverRequiredTransfer::
 
 //------------------------------------------------------------------------------
 int PduSessionResourceHandoverRequiredTransfer::encode(
-    uint8_t* buf, int buf_size) {
+    uint8_t* buf, int bufSize) {
   ngap_utils::print_asn_msg(
       &asn_DEF_Ngap_HandoverRequiredTransfer, m_HandoverRquiredTransferIe);
   asn_enc_rval_t er = aper_encode_to_buffer(
       &asn_DEF_Ngap_HandoverRequiredTransfer, NULL, m_HandoverRquiredTransferIe,
-      buf, buf_size);
+      buf, bufSize);
   oai::logger::logger_common::ngap().debug("er.encoded %d", er.encoded);
   return er.encoded;
 }
 
 //------------------------------------------------------------------------------
 bool PduSessionResourceHandoverRequiredTransfer::decode(
-    uint8_t* buf, int buf_size) {
+    uint8_t* buf, int bufSize) {
   asn_dec_rval_t rc = asn_decode(
       NULL, ATS_ALIGNED_CANONICAL_PER, &asn_DEF_Ngap_HandoverRequiredTransfer,
-      (void**) &m_HandoverRquiredTransferIe, buf, buf_size);
+      (void**) &m_HandoverRquiredTransferIe, buf, bufSize);
   if (rc.code == RC_OK) {
     oai::logger::logger_common::ngap().debug("Decoded successfully");
   } else if (rc.code == RC_WMORE) {

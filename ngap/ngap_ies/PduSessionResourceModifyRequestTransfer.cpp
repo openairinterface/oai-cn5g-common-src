@@ -234,12 +234,12 @@ void PduSessionResourceModifyRequestTransferIE::
 
 //------------------------------------------------------------------------------
 int PduSessionResourceModifyRequestTransferIE::encode(
-    uint8_t* buf, int buf_size) {
+    uint8_t* buf, int bufSize) {
   ngap_utils::print_asn_msg(
       &asn_DEF_Ngap_PDUSessionResourceModifyRequestTransfer, m_Ie);
   asn_enc_rval_t er = aper_encode_to_buffer(
       &asn_DEF_Ngap_PDUSessionResourceModifyRequestTransfer, NULL, m_Ie, buf,
-      buf_size);
+      bufSize);
   oai::logger::logger_common::ngap().debug("er.encoded( %d)", er.encoded);
   // asn_fprint(stderr, er.failed_type, er.structure_ptr);
   return er.encoded;
@@ -247,11 +247,11 @@ int PduSessionResourceModifyRequestTransferIE::encode(
 
 //------------------------------------------------------------------------------
 bool PduSessionResourceModifyRequestTransferIE::decode(
-    uint8_t* buf, int buf_size) {
+    uint8_t* buf, int bufSize) {
   asn_dec_rval_t rc = asn_decode(
       NULL, ATS_ALIGNED_CANONICAL_PER,
       &asn_DEF_Ngap_PDUSessionResourceModifyRequestTransfer, (void**) &m_Ie,
-      buf, buf_size);
+      buf, bufSize);
   if (rc.code == RC_OK) {
     oai::logger::logger_common::ngap().debug("Decoded successfully");
   } else if (rc.code == RC_WMORE) {

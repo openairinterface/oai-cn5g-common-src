@@ -144,10 +144,10 @@ void PduSessionResourceHandoverCommandTransfer::getQosFlowToBeForwardedList(
 
 //------------------------------------------------------------------------------
 int PduSessionResourceHandoverCommandTransfer::encode(
-    uint8_t* buf, int buf_size) const {
+    uint8_t* buf, int bufSize) const {
   ngap_utils::print_asn_msg(&asn_DEF_Ngap_HandoverCommandTransfer, m_Ie);
   asn_enc_rval_t er = aper_encode_to_buffer(
-      &asn_DEF_Ngap_HandoverCommandTransfer, NULL, m_Ie, buf, buf_size);
+      &asn_DEF_Ngap_HandoverCommandTransfer, NULL, m_Ie, buf, bufSize);
   oai::logger::logger_registry::get_logger(LOGGER_COMMON)
       .debug("er.encoded( %d)", er.encoded);
   return er.encoded;
@@ -155,10 +155,10 @@ int PduSessionResourceHandoverCommandTransfer::encode(
 
 //------------------------------------------------------------------------------
 bool PduSessionResourceHandoverCommandTransfer::decode(
-    uint8_t* buf, int buf_size) {
+    uint8_t* buf, int bufSize) {
   asn_dec_rval_t rc = asn_decode(
       NULL, ATS_ALIGNED_CANONICAL_PER, &asn_DEF_Ngap_HandoverCommandTransfer,
-      (void**) &m_Ie, buf, buf_size);
+      (void**) &m_Ie, buf, bufSize);
   if (rc.code == RC_OK) {
     oai::logger::logger_common::ngap().debug("Decoded successfully");
   } else if (rc.code == RC_WMORE) {

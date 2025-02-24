@@ -52,8 +52,8 @@ class PduSessionResourceHandoverCommandTransfer {
   void getQosFlowToBeForwardedList(
       std::optional<QosFlowToBeForwardedList>& list) const;
 
-  int encode(uint8_t* buf, int buf_size) const;  // TODO: remove naked pointer
-  bool decode(uint8_t* buf, int buf_size);       // TODO: remove naked pointer
+  int encode(uint8_t* buf, int bufSize) const;
+  bool decode(uint8_t* buf, int bufSize);
 
  private:
   Ngap_HandoverCommandTransfer_t* m_Ie;

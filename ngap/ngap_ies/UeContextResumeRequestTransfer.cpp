@@ -58,23 +58,23 @@ void UeContextResumeRequestTransfer::getQosFlowFailedToResumeList(
 }
 
 //------------------------------------------------------------------------------
-int UeContextResumeRequestTransfer::encode(uint8_t* buf, int buf_size) {
+int UeContextResumeRequestTransfer::encode(uint8_t* buf, int bufSize) {
   ngap_utils::print_asn_msg(
       &asn_DEF_Ngap_UEContextResumeRequestTransfer,
       m_UeContextResumeRequestTransferIe);
   asn_enc_rval_t er = aper_encode_to_buffer(
       &asn_DEF_Ngap_UEContextResumeRequestTransfer, NULL,
-      m_UeContextResumeRequestTransferIe, buf, buf_size);
+      m_UeContextResumeRequestTransferIe, buf, bufSize);
   oai::logger::logger_common::ngap().debug("er.encoded %d", er.encoded);
   return er.encoded;
 }
 
 //------------------------------------------------------------------------------
-bool UeContextResumeRequestTransfer::decode(uint8_t* buf, int buf_size) {
+bool UeContextResumeRequestTransfer::decode(uint8_t* buf, int bufSize) {
   asn_dec_rval_t rc = asn_decode(
       NULL, ATS_ALIGNED_CANONICAL_PER,
       &asn_DEF_Ngap_UEContextResumeRequestTransfer,
-      (void**) &m_UeContextResumeRequestTransferIe, buf, buf_size);
+      (void**) &m_UeContextResumeRequestTransferIe, buf, bufSize);
   if (rc.code == RC_OK) {
     oai::logger::logger_common::ngap().debug(
         "Decoded UeContextResumeRequestTransfer successfully");

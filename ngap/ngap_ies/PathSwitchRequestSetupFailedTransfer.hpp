@@ -46,8 +46,8 @@ class PathSwitchRequestSetupFailedTransfer {
   long getChoiceOfCause() const;
   long getCause() const;
 
-  int encode(uint8_t* buf, int buf_size);   // TODO: remove naked pointer
-  bool decode(uint8_t* buf, int buf_size);  // TODO: remove naked pointer
+  int encode(uint8_t* buf, int bufSize);
+  bool decode(uint8_t* buf, int bufSize);
 
  private:
   Ngap_PathSwitchRequestSetupFailedTransfer_t*

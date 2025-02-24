@@ -105,25 +105,24 @@ void HandoverPreparationUnsuccessfulTransfer::setCauseMisc(
 }
 
 //------------------------------------------------------------------------------
-int HandoverPreparationUnsuccessfulTransfer::encode(
-    uint8_t* buf, int buf_size) {
+int HandoverPreparationUnsuccessfulTransfer::encode(uint8_t* buf, int bufSize) {
   ngap_utils::print_asn_msg(
       &asn_DEF_Ngap_HandoverPreparationUnsuccessfulTransfer,
       m_HandoverPreparationUnsuccessfulTransferIe);
   asn_enc_rval_t er = aper_encode_to_buffer(
       &asn_DEF_Ngap_HandoverPreparationUnsuccessfulTransfer, NULL,
-      m_HandoverPreparationUnsuccessfulTransferIe, buf, buf_size);
+      m_HandoverPreparationUnsuccessfulTransferIe, buf, bufSize);
   oai::logger::logger_common::ngap().debug("er.encoded( %d)", er.encoded);
   return er.encoded;
 }
 
 //------------------------------------------------------------------------------
 bool HandoverPreparationUnsuccessfulTransfer::decode(
-    uint8_t* buf, int buf_size) {
+    uint8_t* buf, int bufSize) {
   asn_dec_rval_t rc = asn_decode(
       NULL, ATS_ALIGNED_CANONICAL_PER,
       &asn_DEF_Ngap_HandoverPreparationUnsuccessfulTransfer,
-      (void**) &m_HandoverPreparationUnsuccessfulTransferIe, buf, buf_size);
+      (void**) &m_HandoverPreparationUnsuccessfulTransferIe, buf, bufSize);
 
   if (rc.code == RC_OK) {
     oai::logger::logger_common::ngap().debug("Decoded successfully");

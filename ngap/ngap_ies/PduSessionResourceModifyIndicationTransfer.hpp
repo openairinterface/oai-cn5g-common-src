@@ -49,8 +49,8 @@ class PduSessionResourceModifyIndicationTransfer {
   void getAdditionalDlQosFlowPerTnlInformation(
       std::optional<QosFlowPerTnlInformationList>& list) const;
 
-  int encode(uint8_t* buf, int buf_size);   // TODO: remove naked pointer
-  bool decode(uint8_t* buf, int buf_size);  // TODO: remove naked pointer
+  int encode(uint8_t* buf, int bufSize);   // TODO: remove naked pointer
+  bool decode(uint8_t* buf, int bufSize);  // TODO: remove naked pointer
 
  private:
   Ngap_PDUSessionResourceModifyIndicationTransfer_t* m_Ie;

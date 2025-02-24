@@ -107,7 +107,7 @@ bool PduSessionResourceSetupRequestTransfer::setUlNgUUpTnlInformation(
   transportLayerAddress.set(upTnlInfo.ipAddress);
   GtpTeid gtpTeid = {};
   gtpTeid.set(upTnlInfo.gtpTeid);
-  m_UpTransportLayerInformation.set(transportLayerAddress, gtpTeid);
+  m_UlNgUUpTnlInformation.set(transportLayerAddress, gtpTeid);
 
   // Add to the m_Ie->protocolIEs.list
   return addUlNgUUpTnlInformation();
@@ -116,7 +116,7 @@ bool PduSessionResourceSetupRequestTransfer::setUlNgUUpTnlInformation(
 //------------------------------------------------------------------------------
 bool PduSessionResourceSetupRequestTransfer::setUlNgUUpTnlInformation(
     const UpTransportLayerInformation& upTnlInfo) {
-  m_UpTransportLayerInformation = upTnlInfo;
+  m_UlNgUUpTnlInformation = upTnlInfo;
   // Add to the m_Ie->protocolIEs.list
   return addUlNgUUpTnlInformation();
 }
@@ -126,7 +126,7 @@ bool PduSessionResourceSetupRequestTransfer::getUlNgUUpTnlInformation(
     GtpTunnel_t& upTnlInfo) const {
   TransportLayerAddress transportLayerAddress = {};
   GtpTeid gtpTeid                             = {};
-  m_UpTransportLayerInformation.get(transportLayerAddress, gtpTeid);
+  m_UlNgUUpTnlInformation.get(transportLayerAddress, gtpTeid);
   transportLayerAddress.get(upTnlInfo.ipAddress);
   if (!gtpTeid.get(upTnlInfo.gtpTeid)) return false;
 
@@ -143,7 +143,7 @@ bool PduSessionResourceSetupRequestTransfer::addUlNgUUpTnlInformation() {
   ie->value.present =
       Ngap_PDUSessionResourceSetupRequestTransferIEs__value_PR_UPTransportLayerInformation;
 
-  int ret = m_UpTransportLayerInformation.encode(
+  int ret = m_UlNgUUpTnlInformation.encode(
       ie->value.choice.UPTransportLayerInformation);
   if (!ret) {
     oai::logger::logger_common::ngap().error(
@@ -885,7 +885,7 @@ bool PduSessionResourceSetupRequestTransfer::decode(uint8_t* buf, int bufSize) {
                 Ngap_Criticality_reject &&
             m_Ie->protocolIEs.list.array[i]->value.present ==
                 Ngap_PDUSessionResourceSetupRequestTransferIEs__value_PR_UPTransportLayerInformation) {
-          if (!m_UpTransportLayerInformation.decode(
+          if (!m_UlNgUUpTnlInformation.decode(
                   m_Ie->protocolIEs.list.array[i]
                       ->value.choice.UPTransportLayerInformation)) {
             oai::logger::logger_common::ngap().error(

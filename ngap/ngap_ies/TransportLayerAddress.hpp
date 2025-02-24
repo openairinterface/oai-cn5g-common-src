@@ -23,6 +23,8 @@
 #define _TRANSPORT_LAYER_ADDRESS_H_
 
 #include <string>
+#include <netinet/in.h>
+#include <optional>
 
 extern "C" {
 #include "Ngap_TransportLayerAddress.h"
@@ -30,19 +32,39 @@ extern "C" {
 
 namespace oai::ngap {
 
+struct TransportLayerAddressType {
+  constexpr static uint8_t kTransportLayerAddressTypeIpv4   = 1;
+  constexpr static uint8_t kTransportLayerAddressTypeIpv6   = 2;
+  constexpr static uint8_t kTransportLayerAddressTypeIpv4v6 = 3;
+};
+
 class TransportLayerAddress {
  public:
   TransportLayerAddress();
   virtual ~TransportLayerAddress();
 
-  void set(const std::string& address);
-  void get(std::string& address) const;
+  void SetAddressType(uint8_t pdu_session_type);
+  uint8_t GetAddressType() const;
+
+  void SetIpv4Address(const struct in_addr& ipv4_address);
+  std::optional<struct in_addr> GetIpv4Address() const;
+
+  void SetIpv6Address(struct in6_addr ipv6_address);
+  std::optional<struct in6_addr> GetIpv6Address() const;
+
+  void SetIpv4v6Address(
+      struct in_addr ipv4_address, struct in6_addr ipv6_address);
+  void GetIpv4v6Address(
+      std::optional<struct in_addr>& ipv4_address,
+      std::optional<struct in6_addr>& ipv6_address) const;
 
   bool encode(Ngap_TransportLayerAddress_t& transportLayerAddress) const;
   bool decode(const Ngap_TransportLayerAddress_t& transportLayerAddress);
 
  private:
-  std::string m_IpAddress;
+  uint8_t m_AddressType;
+  std::optional<struct in_addr> ipv4_address_;
+  std::optional<struct in6_addr> ipv6_address_;
 };
 
 }  // namespace oai::ngap

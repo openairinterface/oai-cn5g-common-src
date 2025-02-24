@@ -111,7 +111,7 @@ class PduSessionResourceSetupRequestTransfer {
   std::optional<PduSessionAggregateMaximumBitRate>
       m_PduSessionAggregateMaximumBitRateIe;
   // UL NG-U UP TNL Information (Mandatory)
-  UpTransportLayerInformation m_UpTransportLayerInformation;
+  UpTransportLayerInformation m_UlNgUUpTnlInformation;
   // Additional UL NG-U UP TNL Information (Optional)
   std::vector<UpTransportLayerInformation> m_UpTransportLayerInformationList;
   // Data Forwarding Not Possible (Optional)

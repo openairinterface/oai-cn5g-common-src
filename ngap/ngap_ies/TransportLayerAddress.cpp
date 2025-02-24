@@ -24,57 +24,89 @@
 #include <vector>
 
 #include "utils.hpp"
+#include "ngap_utils.hpp"
+#include "string.hpp"
 
 namespace oai::ngap {
 
 //------------------------------------------------------------------------------
-TransportLayerAddress::TransportLayerAddress() {}
+TransportLayerAddress::TransportLayerAddress() {
+  ipv4_address_ = std::nullopt;
+  ipv6_address_ = std::nullopt;
+}
 
 //------------------------------------------------------------------------------
 TransportLayerAddress::~TransportLayerAddress() {}
 
 //------------------------------------------------------------------------------
-void TransportLayerAddress::set(const std::string& address) {
-  m_IpAddress = address;
+void TransportLayerAddress::SetAddressType(uint8_t address_type) {
+  m_AddressType = address_type;  // 3 bits
+}
+//------------------------------------------------------------------------------
+uint8_t TransportLayerAddress::GetAddressType() const {
+  return m_AddressType;
+}
+//------------------------------------------------------------------------------
+void TransportLayerAddress::SetIpv4Address(const struct in_addr& ipv4_address) {
+  ipv4_address_ = std::make_optional<struct in_addr>(ipv4_address);
+  m_AddressType = TransportLayerAddressType::kTransportLayerAddressTypeIpv4;
+}
+//------------------------------------------------------------------------------
+std::optional<struct in_addr> TransportLayerAddress::GetIpv4Address() const {
+  return ipv4_address_;
+}
+//------------------------------------------------------------------------------
+void TransportLayerAddress::SetIpv6Address(struct in6_addr ipv6_address) {
+  ipv6_address_ = std::make_optional<struct in6_addr>(ipv6_address);
+  m_AddressType = TransportLayerAddressType::kTransportLayerAddressTypeIpv6;
+}
+//------------------------------------------------------------------------------
+std::optional<struct in6_addr> TransportLayerAddress::GetIpv6Address() const {
+  return ipv6_address_;
 }
 
 //------------------------------------------------------------------------------
-void TransportLayerAddress::get(std::string& address) const {
-  address = m_IpAddress;
+void TransportLayerAddress::SetIpv4v6Address(
+    struct in_addr ipv4_address, struct in6_addr ipv6_address) {
+  ipv4_address_ = std::make_optional<struct in_addr>(ipv4_address);
+  ipv6_address_ = std::make_optional<struct in6_addr>(ipv6_address);
+  m_AddressType = TransportLayerAddressType::kTransportLayerAddressTypeIpv4v6;
 }
 
 //------------------------------------------------------------------------------
-std::vector<std::string> splite(const std::string& s, const std::string& c) {
-  std::string::size_type pos1, pos2;
-  std::vector<std::string> v;
-  pos2 = s.find(c);
-  pos1 = 0;
-  while (std::string::npos != pos2) {
-    v.push_back(s.substr(pos1, pos2 - pos1));
-
-    pos1 = pos2 + c.size();
-    pos2 = s.find(c, pos1);
-  }
-  if (pos1 != s.length()) {
-    v.push_back(s.substr(pos1));
-  }
-  return v;
+void TransportLayerAddress::GetIpv4v6Address(
+    std::optional<struct in_addr>& ipv4_address,
+    std::optional<struct in6_addr>& ipv6_address) const {
+  ipv4_address = ipv4_address_;
+  ipv6_address = ipv6_address_;
 }
 
 //------------------------------------------------------------------------------
 bool TransportLayerAddress::encode(
     Ngap_TransportLayerAddress_t& transportLayerAddress) const {
-  transportLayerAddress.size        = sizeof(uint32_t);
-  transportLayerAddress.bits_unused = 0;
-  transportLayerAddress.buf = (uint8_t*) calloc(1, transportLayerAddress.size);
-  if (!transportLayerAddress.buf) return false;
-
-  std::vector<std::string> ipAddress = splite(m_IpAddress, ".");
-
-  for (int i = 0; i < transportLayerAddress.size; i++) {
-    transportLayerAddress.buf[i] =
-        oai::utils::utils::fromString<int>(ipAddress[i]);
+  bstring str;
+  if (m_AddressType ==
+      TransportLayerAddressType::kTransportLayerAddressTypeIpv4) {
+    if (ipv4_address_.has_value()) {
+      str = bfromcstralloc(4, "\0");
+      oai::utils::ipv4_to_bstring(ipv4_address_.value(), str);
+    }
+  } else if (
+      m_AddressType ==
+      TransportLayerAddressType::kTransportLayerAddressTypeIpv6) {
+    if (ipv6_address_.has_value()) {
+      str = bfromcstralloc(8, "\0");
+      oai::utils::ipv6_to_bstring(ipv6_address_.value(), str);
+    }
+  } else if (
+      m_AddressType ==
+      TransportLayerAddressType::kTransportLayerAddressTypeIpv4v6) {
+    str = bfromcstralloc(12, "\0");
+    oai::utils::ipv4v6_to_pdu_address_information(
+        ipv4_address_.value(), ipv6_address_.value(), str);
   }
+
+  ngap_utils::bstring_2_bit_string(str, transportLayerAddress);
 
   return true;
 }
@@ -84,10 +116,18 @@ bool TransportLayerAddress::decode(
     const Ngap_TransportLayerAddress_t& transportLayerAddress) {
   if (!transportLayerAddress.buf) return false;
 
-  m_IpAddress = std::to_string(transportLayerAddress.buf[0]);
-  for (int i = 1; i < transportLayerAddress.size; i++) {
-    m_IpAddress =
-        m_IpAddress + '.' + std::to_string(transportLayerAddress.buf[i]);
+  switch (transportLayerAddress.size) {
+    case 16: {  // 128 bits, ipv6 addr
+                // TODO:
+    } break;
+    case 20: {  // 160 bits, both IPv4 and IPv6 addresses, IPv4 address is
+                // contained in the first 32
+                // TODO:
+    } break;
+    case 4:  // 32 bits, Ipv4
+    default: {
+      // TODO:
+    }
   }
 
   return true;

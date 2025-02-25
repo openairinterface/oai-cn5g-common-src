@@ -23,9 +23,9 @@
 
 #include <vector>
 
-#include "utils.hpp"
 #include "ngap_utils.hpp"
 #include "string.hpp"
+#include "utils.hpp"
 
 namespace oai::ngap {
 
@@ -39,8 +39,18 @@ TransportLayerAddress::TransportLayerAddress() {
 TransportLayerAddress::~TransportLayerAddress() {}
 
 //------------------------------------------------------------------------------
+void TransportLayerAddress::set(const std::string& address) {
+  m_IpAddress = address;
+}
+
+//------------------------------------------------------------------------------
+void TransportLayerAddress::get(std::string& address) const {
+  address = m_IpAddress;
+}
+
+//------------------------------------------------------------------------------
 void TransportLayerAddress::SetAddressType(uint8_t address_type) {
-  m_AddressType = address_type;  // 3 bits
+  m_AddressType = address_type;
 }
 //------------------------------------------------------------------------------
 uint8_t TransportLayerAddress::GetAddressType() const {
@@ -82,6 +92,24 @@ void TransportLayerAddress::GetIpv4v6Address(
 }
 
 //------------------------------------------------------------------------------
+std::vector<std::string> splite(const std::string& s, const std::string& c) {
+  std::string::size_type pos1, pos2;
+  std::vector<std::string> v;
+  pos2 = s.find(c);
+  pos1 = 0;
+  while (std::string::npos != pos2) {
+    v.push_back(s.substr(pos1, pos2 - pos1));
+
+    pos1 = pos2 + c.size();
+    pos2 = s.find(c, pos1);
+  }
+  if (pos1 != s.length()) {
+    v.push_back(s.substr(pos1));
+  }
+  return v;
+}
+
+//------------------------------------------------------------------------------
 bool TransportLayerAddress::encode(
     Ngap_TransportLayerAddress_t& transportLayerAddress) const {
   bstring str;
@@ -95,14 +123,14 @@ bool TransportLayerAddress::encode(
       m_AddressType ==
       TransportLayerAddressType::kTransportLayerAddressTypeIpv6) {
     if (ipv6_address_.has_value()) {
-      str = bfromcstralloc(8, "\0");
+      str = bfromcstralloc(16, "\0");
       oai::utils::ipv6_to_bstring(ipv6_address_.value(), str);
     }
   } else if (
       m_AddressType ==
       TransportLayerAddressType::kTransportLayerAddressTypeIpv4v6) {
-    str = bfromcstralloc(12, "\0");
-    oai::utils::ipv4v6_to_pdu_address_information(
+    str = bfromcstralloc(20, "\0");
+    oai::utils::ipv4v6_to_transport_layer_address(
         ipv4_address_.value(), ipv6_address_.value(), str);
   }
 
@@ -117,16 +145,36 @@ bool TransportLayerAddress::decode(
   if (!transportLayerAddress.buf) return false;
 
   switch (transportLayerAddress.size) {
+    case 4: {  // 32 bits, Ipv4
+      struct in_addr ipv4_address;
+      ipv4_address.s_addr = *((uint32_t*) transportLayerAddress.buf);
+      ipv4_address_       = std::make_optional<struct in_addr>(ipv4_address);
+      m_AddressType = TransportLayerAddressType::kTransportLayerAddressTypeIpv4;
+    } break;
     case 16: {  // 128 bits, ipv6 addr
-                // TODO:
+      struct in6_addr ipv6_address;
+      memcpy(ipv6_address.s6_addr, transportLayerAddress.buf, 16);
+      ipv6_address_ = std::make_optional<struct in6_addr>(ipv6_address);
+      m_AddressType = TransportLayerAddressType::kTransportLayerAddressTypeIpv6;
     } break;
     case 20: {  // 160 bits, both IPv4 and IPv6 addresses, IPv4 address is
                 // contained in the first 32
-                // TODO:
+      // Ipv4
+      struct in_addr ipv4_address;
+      unsigned char ipv4_addr_str[4];
+      memcpy(ipv4_addr_str, transportLayerAddress.buf, 4);
+      ipv4_address.s_addr = *((uint32_t*) ipv4_addr_str);
+      ipv4_address_       = std::make_optional<struct in_addr>(ipv4_address);
+      // Ipv6
+      struct in6_addr ipv6_address;
+      memcpy(ipv6_address.s6_addr, transportLayerAddress.buf + 4, 16);
+      ipv6_address_ = std::make_optional<struct in6_addr>(ipv6_address);
+      m_AddressType =
+          TransportLayerAddressType::kTransportLayerAddressTypeIpv4v6;
     } break;
-    case 4:  // 32 bits, Ipv4
     default: {
       // TODO:
+      return false;
     }
   }
 

@@ -102,12 +102,8 @@ bool PduSessionResourceSetupRequestTransfer::
 
 //------------------------------------------------------------------------------
 bool PduSessionResourceSetupRequestTransfer::setUlNgUUpTnlInformation(
-    const GtpTunnel_t& upTnlInfo) {
-  TransportLayerAddress transportLayerAddress = {};
-  transportLayerAddress.set(upTnlInfo.ipAddress);
-  GtpTeid gtpTeid = {};
-  gtpTeid.set(upTnlInfo.gtpTeid);
-  m_UlNgUUpTnlInformation.set(transportLayerAddress, gtpTeid);
+    const GtpTunnel& upTnlInfo) {
+  m_UlNgUUpTnlInformation.set(upTnlInfo);
 
   // Add to the m_Ie->protocolIEs.list
   return addUlNgUUpTnlInformation();
@@ -123,14 +119,16 @@ bool PduSessionResourceSetupRequestTransfer::setUlNgUUpTnlInformation(
 
 //------------------------------------------------------------------------------
 bool PduSessionResourceSetupRequestTransfer::getUlNgUUpTnlInformation(
-    GtpTunnel_t& upTnlInfo) const {
-  TransportLayerAddress transportLayerAddress = {};
-  GtpTeid gtpTeid                             = {};
-  m_UlNgUUpTnlInformation.get(transportLayerAddress, gtpTeid);
-  transportLayerAddress.get(upTnlInfo.ipAddress);
-  if (!gtpTeid.get(upTnlInfo.gtpTeid)) return false;
+    GtpTunnel& upTnlInfo) const {
+  std::optional<GtpTunnel> gtpTunnel = std::nullopt;
 
-  return true;
+  m_UlNgUUpTnlInformation.get(gtpTunnel);
+  if (gtpTunnel.has_value()) {
+    upTnlInfo = gtpTunnel.value();
+    return true;
+  }
+
+  return false;
 }
 
 //------------------------------------------------------------------------------

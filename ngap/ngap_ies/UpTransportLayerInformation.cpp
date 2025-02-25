@@ -41,9 +41,7 @@ UpTransportLayerInformation::~UpTransportLayerInformation() {}
 void UpTransportLayerInformation::set(
     const TransportLayerAddress& transportLayerAddress,
     const GtpTeid& gtpTeid) {
-  m_TransportLayerAddress = transportLayerAddress;
-  m_GtpTeid               = gtpTeid;
-  GtpTunnel gtpTunnel     = {};
+  GtpTunnel gtpTunnel = {};
   gtpTunnel.set(transportLayerAddress, gtpTeid);
   m_GtpTunnel = std::make_optional<GtpTunnel>(gtpTunnel);
 }
@@ -51,8 +49,6 @@ void UpTransportLayerInformation::set(
 //------------------------------------------------------------------------------
 bool UpTransportLayerInformation::get(
     TransportLayerAddress& transportLayerAddress, GtpTeid& gtpTeid) const {
-  transportLayerAddress = m_TransportLayerAddress;
-  gtpTeid               = m_GtpTeid;
   if (m_GtpTunnel.has_value()) {
     m_GtpTunnel.value().get(transportLayerAddress, gtpTeid);
     return true;
@@ -65,7 +61,6 @@ bool UpTransportLayerInformation::get(
 //------------------------------------------------------------------------------
 void UpTransportLayerInformation::set(const GtpTunnel& gtpTunnel) {
   m_GtpTunnel = std::make_optional<GtpTunnel>(gtpTunnel);
-  gtpTunnel.get(m_TransportLayerAddress, m_GtpTeid);
 }
 
 //------------------------------------------------------------------------------
@@ -105,7 +100,6 @@ bool UpTransportLayerInformation::decode(
   if (!gtpTunnel.decode(*upTransportLayerInfo.choice.gTPTunnel)) false;
 
   m_GtpTunnel = std::make_optional<GtpTunnel>(gtpTunnel);
-  gtpTunnel.get(m_TransportLayerAddress, m_GtpTeid);
 
   return true;
 }

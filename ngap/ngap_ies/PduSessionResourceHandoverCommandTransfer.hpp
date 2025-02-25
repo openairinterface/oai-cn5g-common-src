@@ -37,7 +37,7 @@ class PduSessionResourceHandoverCommandTransfer {
   PduSessionResourceHandoverCommandTransfer();
   virtual ~PduSessionResourceHandoverCommandTransfer();
 
-  void setDlForwardingUpTnlInformation(const GtpTunnel_t& upTransportLayerInfo);
+  void setDlForwardingUpTnlInformation(const GtpTunnel& upTransportLayerInfo);
   void setDlForwardingUpTnlInformation(
       const UpTransportLayerInformation& dlForwardingUpTnlInformation);
   void getDlForwardingUpTnlInformation(

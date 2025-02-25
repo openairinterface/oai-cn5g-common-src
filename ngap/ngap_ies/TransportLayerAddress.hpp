@@ -22,9 +22,10 @@
 #ifndef _TRANSPORT_LAYER_ADDRESS_H_
 #define _TRANSPORT_LAYER_ADDRESS_H_
 
-#include <string>
 #include <netinet/in.h>
+
 #include <optional>
+#include <string>
 
 extern "C" {
 #include "Ngap_TransportLayerAddress.h"
@@ -42,6 +43,9 @@ class TransportLayerAddress {
  public:
   TransportLayerAddress();
   virtual ~TransportLayerAddress();
+
+  void set(const std::string& address);
+  void get(std::string& address) const;
 
   void SetAddressType(uint8_t pdu_session_type);
   uint8_t GetAddressType() const;
@@ -62,6 +66,7 @@ class TransportLayerAddress {
   bool decode(const Ngap_TransportLayerAddress_t& transportLayerAddress);
 
  private:
+  std::string m_IpAddress;
   uint8_t m_AddressType;
   std::optional<struct in_addr> ipv4_address_;
   std::optional<struct in6_addr> ipv6_address_;

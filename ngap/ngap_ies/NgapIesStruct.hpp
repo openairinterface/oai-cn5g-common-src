@@ -138,11 +138,6 @@ typedef struct {
 } PDUSessionResourceCxtRelCplItem_t;
 
 typedef struct {
-  std::string ipAddress;
-  uint32_t gtpTeid;
-} GtpTunnel_t;
-
-typedef struct {
   long _5qi;
   long* priorityLevelQos;
   long* averagingWindow;

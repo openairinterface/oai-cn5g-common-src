@@ -163,7 +163,11 @@ int PduAddress::Encode(uint8_t* buf, int len) const {
   } else if (pdu_session_type_ == kPduAddressPduSessionTypeIpv6) {
     if (ipv6_address_.has_value()) {
       str = bfromcstralloc(8, "\0");
-      oai::utils::ipv6_to_bstring(ipv6_address_.value(), str);
+      // 8 octets for interface identifier for the IPv6 link local address
+      unsigned char bitstream_addr[8];
+      for (int i = 0; i < 8; i++)
+        bitstream_addr[i] = (uint8_t) ((ipv6_address_.value()).s6_addr[i + 8]);
+      memcpy(str->data, bitstream_addr, sizeof(bitstream_addr));
     }
   } else if (pdu_session_type_ == kPduAddressPduSessionTypeIpv4v6) {
     str = bfromcstralloc(12, "\0");
@@ -216,11 +220,12 @@ int PduAddress::Decode(const uint8_t* const buf, int len, bool is_iei) {
     ipv4_address_ = std::make_optional<struct in_addr>(ipv4_address);
   } else if (pdu_session_type_ == kPduAddressPduSessionTypeIpv6) {
     decoded_bstring_size =
-        decode_bstring(&str, 16, (buf + decoded_size), len - decoded_size);
-    if (decoded_bstring_size != 16) return KEncodeDecodeError;
-    decoded_size += 16;
+        decode_bstring(&str, 8, (buf + decoded_size), len - decoded_size);
+    if (decoded_bstring_size != 8) return KEncodeDecodeError;
+    decoded_size += 8;
     struct in6_addr ipv6_address;
-    oai::utils::bstring_to_ipv6(str, ipv6_address);
+    // 8 octets for interface identifier for the IPv6 link local address
+    for (int i = 0; i < 8; i++) ipv6_address.s6_addr[i + 8] = str->data[i];
     ipv6_address_ = std::make_optional<struct in6_addr>(ipv6_address);
   } else if (pdu_session_type_ == kPduAddressPduSessionTypeIpv4v6) {
     decoded_bstring_size =

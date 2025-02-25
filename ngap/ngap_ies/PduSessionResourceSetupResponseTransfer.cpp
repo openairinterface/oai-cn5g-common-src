@@ -61,14 +61,10 @@ void PduSessionResourceSetupResponseTransferIE::getDlQosFlowPerTnlInformation(
 
 //------------------------------------------------------------------------------
 void PduSessionResourceSetupResponseTransferIE::setDlQosFlowPerTnlInformation(
-    const GtpTunnel_t& upTransportLayerInfo,
+    const GtpTunnel& upTransportLayerInfo,
     const std::vector<AssociatedQosFlow_t>& list) {
   UpTransportLayerInformation upTransportLayerInformation = {};
-  TransportLayerAddress transportLayerAddress             = {};
-  GtpTeid gtpTeid                                         = {};
-  transportLayerAddress.set(upTransportLayerInfo.ipAddress);
-  gtpTeid.set(upTransportLayerInfo.gtpTeid);
-  upTransportLayerInformation.set(transportLayerAddress, gtpTeid);
+  upTransportLayerInformation.set(upTransportLayerInfo);
 
   AssociatedQosFlowList associatedQosFlowList = {};
   std::vector<AssociatedQosFlowItem> flowItemVector;
@@ -99,17 +95,17 @@ void PduSessionResourceSetupResponseTransferIE::setDlQosFlowPerTnlInformation(
 
 //------------------------------------------------------------------------------
 void PduSessionResourceSetupResponseTransferIE::getDlQosFlowPerTnlInformation(
-    GtpTunnel_t& upTransportLayerInfo,
+    GtpTunnel& upTransportLayerInfo,
     std::vector<AssociatedQosFlow_t>& list) const {
   UpTransportLayerInformation upTransportLayerInformation = {};
   AssociatedQosFlowList associatedQosFlowList             = {};
   m_DlQosFlowPerTnlInformation.get(
       upTransportLayerInformation, associatedQosFlowList);
-  TransportLayerAddress transportLayerAddress = {};
-  GtpTeid gtpTeid                             = {};
-  upTransportLayerInformation.get(transportLayerAddress, gtpTeid);
-  transportLayerAddress.get(upTransportLayerInfo.ipAddress);
-  gtpTeid.get(upTransportLayerInfo.gtpTeid);
+
+  std::optional<GtpTunnel> upTransportLayerInfo_opt = std::nullopt;
+  upTransportLayerInformation.get(upTransportLayerInfo_opt);
+  if (upTransportLayerInfo_opt.has_value())
+    upTransportLayerInfo = upTransportLayerInfo_opt.value();
 
   std::vector<AssociatedQosFlowItem> vector_associated_qos_flow_item;
   associatedQosFlowList.get(vector_associated_qos_flow_item);

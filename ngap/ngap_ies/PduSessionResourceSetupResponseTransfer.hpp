@@ -44,10 +44,10 @@ class PduSessionResourceSetupResponseTransferIE {
   void getDlQosFlowPerTnlInformation(
       QosFlowPerTnlInformation& qosFlowPerTnlInformation) const;
   void setDlQosFlowPerTnlInformation(
-      const GtpTunnel_t& upTransportLayerInfo,
+      const GtpTunnel& upTransportLayerInfo,
       const std::vector<AssociatedQosFlow_t>& list);
   void getDlQosFlowPerTnlInformation(
-      GtpTunnel_t& upTransportLayerInfo,
+      GtpTunnel& upTransportLayerInfo,
       std::vector<AssociatedQosFlow_t>& list) const;
 
   void setAdditionalDLQoSFlowPerTNLInformation(

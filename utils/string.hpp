@@ -78,5 +78,16 @@ void ipv4v6_to_pdu_address_information(
     struct in_addr ipv4_address, struct in6_addr ipv6_address, bstring str);
 bool pdu_address_information_to_ipv4v6(
     bstring str, struct in_addr ipv4_address, struct in6_addr ipv6_address);
+
+/*
+ * Create a Transport Layer Address in form of a bstring (160 bits, in which
+case the IPv4 address is contained in the first 32 bits)
+ * @param [struct in_addr] ipv4_address: IPv4 address
+ * @param [struct in6_addr ] ipv6_address: IPv6 address
+ * @param [bstring] str: store the Transport Layer Address
+ * @return void
+ */
+void ipv4v6_to_transport_layer_address(
+    struct in_addr ipv4_address, struct in6_addr ipv6_address, bstring str);
 }  // namespace oai::utils
 #endif

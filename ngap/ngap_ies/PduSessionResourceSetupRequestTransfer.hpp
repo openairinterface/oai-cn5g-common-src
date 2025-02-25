@@ -54,9 +54,9 @@ class PduSessionResourceSetupRequestTransfer {
       std::optional<PduSessionAggregateMaximumBitRate>& maxBitRate) const;
 
   // UL NG-U UP TNL Information (Mandatory)
-  bool setUlNgUUpTnlInformation(const GtpTunnel_t& upTnlInfo);
+  bool setUlNgUUpTnlInformation(const GtpTunnel& upTnlInfo);
   bool setUlNgUUpTnlInformation(const UpTransportLayerInformation& upTnlInfo);
-  bool getUlNgUUpTnlInformation(GtpTunnel_t& upTnlInfo) const;
+  bool getUlNgUUpTnlInformation(GtpTunnel& upTnlInfo) const;
 
   // TODO: Additional UL NG-U UP TNL Information (Optional)
 

@@ -52,7 +52,7 @@ class PduSessionResourceHandoverRequestAckTransfer {
   void getDlForwardingUpTnlInformation(
       std::optional<UpTransportLayerInformation>& dlForwardingUpTnlInformation)
       const;
-  bool getDlForwardingUpTnlInformation(GtpTunnel_t*& upTnlInfo);
+  bool getDlForwardingUpTnlInformation(GtpTunnel*& upTnlInfo);
 
   // TODO: Security Result
 

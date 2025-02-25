@@ -43,13 +43,9 @@ PduSessionResourceHandoverCommandTransfer::
 
 //------------------------------------------------------------------------------
 void PduSessionResourceHandoverCommandTransfer::setDlForwardingUpTnlInformation(
-    const GtpTunnel_t& upTransportLayerInfo) {
-  UpTransportLayerInformation tmp               = {};
-  TransportLayerAddress m_transportLayerAddress = {};
-  GtpTeid m_gtpTeid                             = {};
-  m_transportLayerAddress.set(upTransportLayerInfo.ipAddress);
-  m_gtpTeid.set(upTransportLayerInfo.gtpTeid);
-  tmp.set(m_transportLayerAddress, m_gtpTeid);
+    const GtpTunnel& upTransportLayerInfo) {
+  UpTransportLayerInformation tmp = {};
+  tmp.set(upTransportLayerInfo);
   m_DlForwardingUpTnlInformation =
       std::make_optional<UpTransportLayerInformation>(tmp);
 

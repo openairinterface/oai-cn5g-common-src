@@ -44,21 +44,18 @@ class TransportLayerAddress {
   TransportLayerAddress();
   virtual ~TransportLayerAddress();
 
-  void set(const std::string& address);
-  void get(std::string& address) const;
+  void setAddressType(uint8_t pdu_session_type);
+  uint8_t getAddressType() const;
 
-  void SetAddressType(uint8_t pdu_session_type);
-  uint8_t GetAddressType() const;
+  void setIpv4Address(const struct in_addr& ipv4_address);
+  std::optional<struct in_addr> getIpv4Address() const;
 
-  void SetIpv4Address(const struct in_addr& ipv4_address);
-  std::optional<struct in_addr> GetIpv4Address() const;
+  void setIpv6Address(struct in6_addr ipv6_address);
+  std::optional<struct in6_addr> getIpv6Address() const;
 
-  void SetIpv6Address(struct in6_addr ipv6_address);
-  std::optional<struct in6_addr> GetIpv6Address() const;
-
-  void SetIpv4v6Address(
+  void setIpv4v6Address(
       struct in_addr ipv4_address, struct in6_addr ipv6_address);
-  void GetIpv4v6Address(
+  void getIpv4v6Address(
       std::optional<struct in_addr>& ipv4_address,
       std::optional<struct in6_addr>& ipv6_address) const;
 
@@ -66,7 +63,6 @@ class TransportLayerAddress {
   bool decode(const Ngap_TransportLayerAddress_t& transportLayerAddress);
 
  private:
-  std::string m_IpAddress;
   uint8_t m_AddressType;
   std::optional<struct in_addr> ipv4_address_;
   std::optional<struct in6_addr> ipv6_address_;

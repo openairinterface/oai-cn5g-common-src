@@ -39,44 +39,34 @@ TransportLayerAddress::TransportLayerAddress() {
 TransportLayerAddress::~TransportLayerAddress() {}
 
 //------------------------------------------------------------------------------
-void TransportLayerAddress::set(const std::string& address) {
-  m_IpAddress = address;
-}
-
-//------------------------------------------------------------------------------
-void TransportLayerAddress::get(std::string& address) const {
-  address = m_IpAddress;
-}
-
-//------------------------------------------------------------------------------
-void TransportLayerAddress::SetAddressType(uint8_t address_type) {
+void TransportLayerAddress::setAddressType(uint8_t address_type) {
   m_AddressType = address_type;
 }
 //------------------------------------------------------------------------------
-uint8_t TransportLayerAddress::GetAddressType() const {
+uint8_t TransportLayerAddress::getAddressType() const {
   return m_AddressType;
 }
 //------------------------------------------------------------------------------
-void TransportLayerAddress::SetIpv4Address(const struct in_addr& ipv4_address) {
+void TransportLayerAddress::setIpv4Address(const struct in_addr& ipv4_address) {
   ipv4_address_ = std::make_optional<struct in_addr>(ipv4_address);
   m_AddressType = TransportLayerAddressType::kTransportLayerAddressTypeIpv4;
 }
 //------------------------------------------------------------------------------
-std::optional<struct in_addr> TransportLayerAddress::GetIpv4Address() const {
+std::optional<struct in_addr> TransportLayerAddress::getIpv4Address() const {
   return ipv4_address_;
 }
 //------------------------------------------------------------------------------
-void TransportLayerAddress::SetIpv6Address(struct in6_addr ipv6_address) {
+void TransportLayerAddress::setIpv6Address(struct in6_addr ipv6_address) {
   ipv6_address_ = std::make_optional<struct in6_addr>(ipv6_address);
   m_AddressType = TransportLayerAddressType::kTransportLayerAddressTypeIpv6;
 }
 //------------------------------------------------------------------------------
-std::optional<struct in6_addr> TransportLayerAddress::GetIpv6Address() const {
+std::optional<struct in6_addr> TransportLayerAddress::getIpv6Address() const {
   return ipv6_address_;
 }
 
 //------------------------------------------------------------------------------
-void TransportLayerAddress::SetIpv4v6Address(
+void TransportLayerAddress::setIpv4v6Address(
     struct in_addr ipv4_address, struct in6_addr ipv6_address) {
   ipv4_address_ = std::make_optional<struct in_addr>(ipv4_address);
   ipv6_address_ = std::make_optional<struct in6_addr>(ipv6_address);
@@ -84,7 +74,7 @@ void TransportLayerAddress::SetIpv4v6Address(
 }
 
 //------------------------------------------------------------------------------
-void TransportLayerAddress::GetIpv4v6Address(
+void TransportLayerAddress::getIpv4v6Address(
     std::optional<struct in_addr>& ipv4_address,
     std::optional<struct in6_addr>& ipv6_address) const {
   ipv4_address = ipv4_address_;

@@ -47,9 +47,12 @@ class GbrQosFlowInformation {
   void set(
       const long& maximumFlowBitRateDl, const long& maximumFlowBitRateUl,
       const long& guaranteedFlowBitRateDl, const long& guaranteedFlowBitRateUl,
-      const std::optional<NotificationControl>& notificationControl,
-      const std::optional<PacketLossRate>& maximumPacketLossRateDl,
-      const std::optional<PacketLossRate>& maximumPacketLossRateUl);
+      const std::optional<NotificationControl>& notificationControl =
+          std::nullopt,
+      const std::optional<PacketLossRate>& maximumPacketLossRateDl =
+          std::nullopt,
+      const std::optional<PacketLossRate>& maximumPacketLossRateUl =
+          std::nullopt);
   bool get(
       long& maximumFlowBitRateDl, long& maximumFlowBitRateUl,
       long& guaranteedFlowBitRateDl, long& guaranteedFlowBitRateUl,

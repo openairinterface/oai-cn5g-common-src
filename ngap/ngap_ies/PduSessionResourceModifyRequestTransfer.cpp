@@ -28,8 +28,8 @@
 namespace oai::ngap {
 
 //------------------------------------------------------------------------------
-PduSessionResourceModifyRequestTransferIE::
-    PduSessionResourceModifyRequestTransferIE() {
+PduSessionResourceModifyRequestTransfer::
+    PduSessionResourceModifyRequestTransfer() {
   m_Ie = (Ngap_PDUSessionResourceModifyRequestTransfer_t*) calloc(
       1, sizeof(Ngap_PDUSessionResourceModifyRequestTransfer_t));
   m_PduSessionAggregateMaximumBitRateIe = std::nullopt;
@@ -37,37 +37,37 @@ PduSessionResourceModifyRequestTransferIE::
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceModifyRequestTransferIE::
+void PduSessionResourceModifyRequestTransfer::
     setPduSessionAggregateMaximumBitRate(
         const long& bitRateDl, const long& bitRateUl) {
   m_PduSessionAggregateMaximumBitRateIe =
       std::make_optional<PduSessionAggregateMaximumBitRate>(
           bitRateDl, bitRateUl);
 
-  // Add to the PduSessionResourceModifyRequestTransferIE->protocolIEs.list
+  // Add to the PduSessionResourceModifyRequestTransfer->protocolIEs.list
   addPduSessionAggregateMaximumBitRate();
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceModifyRequestTransferIE::
+void PduSessionResourceModifyRequestTransfer::
     setPduSessionAggregateMaximumBitRate(
         const PduSessionAggregateMaximumBitRate& maxBitRate) {
   m_PduSessionAggregateMaximumBitRateIe =
       std::make_optional<PduSessionAggregateMaximumBitRate>(maxBitRate);
 
-  // Add to the PduSessionResourceModifyRequestTransferIE->protocolIEs.list
+  // Add to the PduSessionResourceModifyRequestTransfer->protocolIEs.list
   addPduSessionAggregateMaximumBitRate();
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceModifyRequestTransferIE::
+void PduSessionResourceModifyRequestTransfer::
     getPduSessionAggregateMaximumBitRate(
         std::optional<PduSessionAggregateMaximumBitRate>& maxBitRate) const {
   maxBitRate = m_PduSessionAggregateMaximumBitRateIe;
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceModifyRequestTransferIE::
+void PduSessionResourceModifyRequestTransfer::
     addPduSessionAggregateMaximumBitRate() {
   if (!m_PduSessionAggregateMaximumBitRateIe.has_value()) return;
 
@@ -96,7 +96,7 @@ void PduSessionResourceModifyRequestTransferIE::
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceModifyRequestTransferIE::setUlNgUUpTnlModifyList(
+void PduSessionResourceModifyRequestTransfer::setUlNgUUpTnlModifyList(
     const UlNgUUpTnlModifyList& ulNgUUpTnlModifyList) {
   m_UlNgUUpTnlModifyList =
       std::make_optional<UlNgUUpTnlModifyList>(ulNgUUpTnlModifyList);
@@ -126,13 +126,13 @@ void PduSessionResourceModifyRequestTransferIE::setUlNgUUpTnlModifyList(
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceModifyRequestTransferIE::getUlNgUUpTnlModifyList(
+void PduSessionResourceModifyRequestTransfer::getUlNgUUpTnlModifyList(
     std::optional<UlNgUUpTnlModifyList>& ulNgUUpTnlModifyList) const {
   ulNgUUpTnlModifyList = m_UlNgUUpTnlModifyList;
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceModifyRequestTransferIE::setNetworkInstance(
+void PduSessionResourceModifyRequestTransfer::setNetworkInstance(
     const long& value) {
   m_NetworkInstance = std::make_optional<NetworkInstance>(value);
 
@@ -158,7 +158,7 @@ void PduSessionResourceModifyRequestTransferIE::setNetworkInstance(
 }
 
 //------------------------------------------------------------------------------
-bool PduSessionResourceModifyRequestTransferIE::getNetworkInstance(
+bool PduSessionResourceModifyRequestTransfer::getNetworkInstance(
     long& value) const {
   if (!m_NetworkInstance.has_value()) return false;
 
@@ -168,45 +168,42 @@ bool PduSessionResourceModifyRequestTransferIE::getNetworkInstance(
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceModifyRequestTransferIE::getNetworkInstance(
+void PduSessionResourceModifyRequestTransfer::getNetworkInstance(
     std::optional<NetworkInstance>& networkInstance) const {
   networkInstance = m_NetworkInstance;
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceModifyRequestTransferIE::
-    setQosFlowAddOrModifyRequestList(
-        const std::vector<QosFlowAddOrModifyRequestItem> list) {
+void PduSessionResourceModifyRequestTransfer::setQosFlowAddOrModifyRequestList(
+    const std::vector<QosFlowAddOrModifyRequestItem> list) {
   QosFlowAddOrModifyRequestList qosFlowAddOrModifyRequestList;
   qosFlowAddOrModifyRequestList.set(list);
   m_QosFlowAddOrModifyRequestList =
       std::make_optional<QosFlowAddOrModifyRequestList>(
           qosFlowAddOrModifyRequestList);
 
-  // Add to the PduSessionResourceModifyRequestTransferIE->protocolIEs.list
+  // Add to the PduSessionResourceModifyRequestTransfer->protocolIEs.list
   addQosFlowAddOrModifyRequestList();
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceModifyRequestTransferIE::
-    setQosFlowAddOrModifyRequestList(
-        const QosFlowAddOrModifyRequestList& list) {
+void PduSessionResourceModifyRequestTransfer::setQosFlowAddOrModifyRequestList(
+    const QosFlowAddOrModifyRequestList& list) {
   m_QosFlowAddOrModifyRequestList =
       std::make_optional<QosFlowAddOrModifyRequestList>(list);
 
-  // Add to the PduSessionResourceModifyRequestTransferIE->protocolIEs.list
+  // Add to the PduSessionResourceModifyRequestTransfer->protocolIEs.list
   addQosFlowAddOrModifyRequestList();
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceModifyRequestTransferIE::
-    getQosFlowAddOrModifyRequestList(
-        std::optional<QosFlowAddOrModifyRequestList>& list) const {
+void PduSessionResourceModifyRequestTransfer::getQosFlowAddOrModifyRequestList(
+    std::optional<QosFlowAddOrModifyRequestList>& list) const {
   list = m_QosFlowAddOrModifyRequestList;
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceModifyRequestTransferIE::
+void PduSessionResourceModifyRequestTransfer::
     addQosFlowAddOrModifyRequestList() {
   Ngap_PDUSessionResourceModifyRequestTransferIEs_t* ie =
       (Ngap_PDUSessionResourceModifyRequestTransferIEs_t*) calloc(
@@ -233,8 +230,7 @@ void PduSessionResourceModifyRequestTransferIE::
 }
 
 //------------------------------------------------------------------------------
-int PduSessionResourceModifyRequestTransferIE::encode(
-    uint8_t* buf, int bufSize) {
+int PduSessionResourceModifyRequestTransfer::encode(uint8_t* buf, int bufSize) {
   ngap_utils::print_asn_msg(
       &asn_DEF_Ngap_PDUSessionResourceModifyRequestTransfer, m_Ie);
   asn_enc_rval_t er = aper_encode_to_buffer(
@@ -246,7 +242,7 @@ int PduSessionResourceModifyRequestTransferIE::encode(
 }
 
 //------------------------------------------------------------------------------
-bool PduSessionResourceModifyRequestTransferIE::decode(
+bool PduSessionResourceModifyRequestTransfer::decode(
     uint8_t* buf, int bufSize) {
   asn_dec_rval_t rc = asn_decode(
       NULL, ATS_ALIGNED_CANONICAL_PER,
@@ -364,7 +360,7 @@ bool PduSessionResourceModifyRequestTransferIE::decode(
       // TODO: Security Indication (Optional)
       default: {
         oai::logger::logger_common::ngap().error(
-            "Decode NGAP message PduSessionResourceModifyRequestTransferIE "
+            "Decode NGAP message PduSessionResourceModifyRequestTransfer "
             "error");
         return false;
       }

@@ -28,7 +28,7 @@
 namespace oai::ngap {
 
 //------------------------------------------------------------------------------
-PduSessionResourceNotifyTransferIE::PduSessionResourceNotifyTransferIE() {
+PduSessionResourceNotifyTransfer::PduSessionResourceNotifyTransfer() {
   m_Ie = (Ngap_PDUSessionResourceNotifyTransfer_t*) calloc(
       1, sizeof(Ngap_PDUSessionResourceNotifyTransfer_t));
   m_QosFlowNotifyList   = std::nullopt;
@@ -37,7 +37,7 @@ PduSessionResourceNotifyTransferIE::PduSessionResourceNotifyTransferIE() {
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceNotifyTransferIE::setQosFlowNotifyList(
+void PduSessionResourceNotifyTransfer::setQosFlowNotifyList(
     const std::vector<QosFlowNotifyItem> list) {
   QosFlowNotifyList qosFlowNotifyList = {};
   qosFlowNotifyList.set(list);
@@ -46,19 +46,19 @@ void PduSessionResourceNotifyTransferIE::setQosFlowNotifyList(
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceNotifyTransferIE::setQosFlowNotifyList(
+void PduSessionResourceNotifyTransfer::setQosFlowNotifyList(
     const QosFlowNotifyList& list) {
   m_QosFlowNotifyList = std::make_optional<QosFlowNotifyList>(list);
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceNotifyTransferIE::getQosFlowNotifyList(
+void PduSessionResourceNotifyTransfer::getQosFlowNotifyList(
     std::optional<QosFlowNotifyList>& list) const {
   list = m_QosFlowNotifyList;
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceNotifyTransferIE::setQosFlowReleasedList(
+void PduSessionResourceNotifyTransfer::setQosFlowReleasedList(
     const std::vector<QosFlowWithCauseItem> list) {
   QosFlowListWithCause qosFlowReleasedList = {};
   qosFlowReleasedList.set(list);
@@ -67,19 +67,19 @@ void PduSessionResourceNotifyTransferIE::setQosFlowReleasedList(
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceNotifyTransferIE::setQosFlowReleasedList(
+void PduSessionResourceNotifyTransfer::setQosFlowReleasedList(
     const QosFlowListWithCause& list) {
   m_QosFlowReleasedList = std::make_optional<QosFlowListWithCause>(list);
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceNotifyTransferIE::getQosFlowReleasedList(
+void PduSessionResourceNotifyTransfer::getQosFlowReleasedList(
     std::optional<QosFlowListWithCause>& list) const {
   list = m_QosFlowReleasedList;
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceNotifyTransferIE::setQosFlowFeedbackList(
+void PduSessionResourceNotifyTransfer::setQosFlowFeedbackList(
     const std::vector<QosFlowFeedbackItem> list) {
   QosFlowFeedbackList qosFlowFeedbackList = {};
   qosFlowFeedbackList.set(list);
@@ -88,18 +88,18 @@ void PduSessionResourceNotifyTransferIE::setQosFlowFeedbackList(
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceNotifyTransferIE::setQosFlowFeedbackList(
+void PduSessionResourceNotifyTransfer::setQosFlowFeedbackList(
     const QosFlowFeedbackList& list) {
   m_QosFlowFeedbackList = std::make_optional<QosFlowFeedbackList>(list);
 }
 //------------------------------------------------------------------------------
-void PduSessionResourceNotifyTransferIE::getQosFlowFeedbackList(
+void PduSessionResourceNotifyTransfer::getQosFlowFeedbackList(
     std::optional<QosFlowFeedbackList>& list) const {
   list = m_QosFlowFeedbackList;
 }
 
 //------------------------------------------------------------------------------
-int PduSessionResourceNotifyTransferIE::encode(uint8_t* buf, int bufSize) {
+int PduSessionResourceNotifyTransfer::encode(uint8_t* buf, int bufSize) {
   ngap_utils::print_asn_msg(
       &asn_DEF_Ngap_PDUSessionResourceNotifyTransfer, m_Ie);
   asn_enc_rval_t er = aper_encode_to_buffer(
@@ -110,7 +110,7 @@ int PduSessionResourceNotifyTransferIE::encode(uint8_t* buf, int bufSize) {
 }
 
 //------------------------------------------------------------------------------
-bool PduSessionResourceNotifyTransferIE::decode(uint8_t* buf, int bufSize) {
+bool PduSessionResourceNotifyTransfer::decode(uint8_t* buf, int bufSize) {
   asn_dec_rval_t rc = asn_decode(
       NULL, ATS_ALIGNED_CANONICAL_PER,
       &asn_DEF_Ngap_PDUSessionResourceNotifyTransfer, (void**) &m_Ie, buf,

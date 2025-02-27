@@ -34,10 +34,10 @@ extern "C" {
 
 namespace oai::ngap {
 
-class PduSessionResourceSetupResponseTransferIE {
+class PduSessionResourceSetupResponseTransfer {
  public:
-  PduSessionResourceSetupResponseTransferIE();
-  virtual ~PduSessionResourceSetupResponseTransferIE();
+  PduSessionResourceSetupResponseTransfer();
+  virtual ~PduSessionResourceSetupResponseTransfer();
 
   void setDlQosFlowPerTnlInformation(
       const QosFlowPerTnlInformation& qosFlowPerTnlInformation);

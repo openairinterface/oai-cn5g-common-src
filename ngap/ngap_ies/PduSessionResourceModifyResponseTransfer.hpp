@@ -37,10 +37,10 @@ extern "C" {
 
 namespace oai::ngap {
 
-class PduSessionResourceModifyResponseTransferIE {
+class PduSessionResourceModifyResponseTransfer {
  public:
-  PduSessionResourceModifyResponseTransferIE();
-  virtual ~PduSessionResourceModifyResponseTransferIE(){};
+  PduSessionResourceModifyResponseTransfer();
+  virtual ~PduSessionResourceModifyResponseTransfer(){};
 
   void setDlNgUUpTnlInformation(
       const UpTransportLayerInformation& dlNgUUpTnlInformation);

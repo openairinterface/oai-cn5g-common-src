@@ -827,7 +827,7 @@ int PduSessionResourceSetupRequestTransfer::encode(uint8_t* buf, int bufSize) {
   ngap_utils::print_asn_msg(
       &asn_DEF_Ngap_PDUSessionResourceSetupRequestTransfer, m_Ie);
   asn_enc_rval_t er = aper_encode_to_buffer(
-      &asn_DEF_Ngap_PDUSessionResourceSetupRequestTransfer, NULL, m_Ie, buf,
+      &asn_DEF_Ngap_PDUSessionResourceSetupRequestTransfer, nullptr, m_Ie, buf,
       bufSize);
   oai::logger::logger_common::ngap().debug("er.encoded( %d)", er.encoded);
   // asn_fprint(stderr, er.failed_type, er.structure_ptr);

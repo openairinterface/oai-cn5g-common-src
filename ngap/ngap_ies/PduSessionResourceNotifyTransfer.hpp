@@ -37,10 +37,10 @@ extern "C" {
 
 namespace oai::ngap {
 
-class PduSessionResourceNotifyTransferIE {
+class PduSessionResourceNotifyTransfer {
  public:
-  PduSessionResourceNotifyTransferIE();
-  virtual ~PduSessionResourceNotifyTransferIE(){};
+  PduSessionResourceNotifyTransfer();
+  virtual ~PduSessionResourceNotifyTransfer(){};
 
   void setQosFlowNotifyList(const std::vector<QosFlowNotifyItem> list);
   void setQosFlowNotifyList(const QosFlowNotifyList& list);

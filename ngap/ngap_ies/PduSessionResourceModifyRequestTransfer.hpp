@@ -38,10 +38,10 @@ extern "C" {
 
 namespace oai::ngap {
 
-class PduSessionResourceModifyRequestTransferIE {
+class PduSessionResourceModifyRequestTransfer {
  public:
-  PduSessionResourceModifyRequestTransferIE();
-  virtual ~PduSessionResourceModifyRequestTransferIE(){};
+  PduSessionResourceModifyRequestTransfer();
+  virtual ~PduSessionResourceModifyRequestTransfer(){};
 
   void setPduSessionAggregateMaximumBitRate(
       const long& bitRateDl, const long& bitRateUl);

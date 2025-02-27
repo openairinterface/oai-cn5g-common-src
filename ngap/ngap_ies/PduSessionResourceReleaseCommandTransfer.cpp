@@ -44,6 +44,17 @@ PduSessionResourceReleaseCommandTransfer::
 }
 
 //------------------------------------------------------------------------------
+void PduSessionResourceReleaseCommandTransfer::setCause(const Cause& cause) {
+  m_CauseValue = cause;
+  int ret =
+      m_CauseValue.encode(m_PduSessionResourceReleaseCommandTransferIe->cause);
+  if (!ret) {
+    oai::logger::logger_common::ngap().error("Encode Cause IE error");
+    return;
+  }
+}
+
+//------------------------------------------------------------------------------
 void PduSessionResourceReleaseCommandTransfer::setCauseRadioNetwork(
     e_Ngap_CauseRadioNetwork causeValue) {
   m_CauseValue.setChoiceOfCause(Ngap_Cause_PR_radioNetwork);

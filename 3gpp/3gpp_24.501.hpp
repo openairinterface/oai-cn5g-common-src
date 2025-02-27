@@ -236,10 +236,6 @@ constexpr uint8_t kSecurityProtected5gsNasMessageHeaderLength =
 // 1 octet for Sequence number
 
 //------------------------------------------------------------------------------
-constexpr int KEncodeDecodeError = -1;
-constexpr int KEncodeDecodeOK    = 0;
-
-//------------------------------------------------------------------------------
 constexpr int kT3502TimerDefaultValueMin = 12;  // 12 minutes
 
 // Table 10.3.1 @3GPP TS 24.501 V16.1.0 (2019-06)

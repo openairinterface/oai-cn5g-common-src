@@ -22,7 +22,7 @@
 #include "_5gmmCause.hpp"
 
 #include "3gpp_24.501.hpp"
-#include "common_defs.h"
+#include "common_defs.hpp"
 #include "logger_base.hpp"
 using namespace oai::nas;
 

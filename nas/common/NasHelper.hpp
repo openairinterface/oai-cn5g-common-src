@@ -23,6 +23,7 @@
 
 #include <optional>
 
+#include "common_defs.hpp"
 #include "logger_base.hpp"
 
 namespace oai::nas {

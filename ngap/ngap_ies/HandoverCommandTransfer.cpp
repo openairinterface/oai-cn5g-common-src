@@ -19,7 +19,7 @@
  *      contact@openairinterface.org
  */
 
-#include "PduSessionResourceHandoverCommandTransfer.hpp"
+#include "HandoverCommandTransfer.hpp"
 
 #include <vector>
 
@@ -29,8 +29,7 @@
 namespace oai::ngap {
 
 //------------------------------------------------------------------------------
-PduSessionResourceHandoverCommandTransfer::
-    PduSessionResourceHandoverCommandTransfer() {
+HandoverCommandTransfer::HandoverCommandTransfer() {
   m_Ie = (Ngap_HandoverCommandTransfer_t*) calloc(
       1, sizeof(Ngap_HandoverCommandTransfer_t));
   m_DlForwardingUpTnlInformation = std::nullopt;
@@ -38,11 +37,10 @@ PduSessionResourceHandoverCommandTransfer::
 }
 
 //------------------------------------------------------------------------------
-PduSessionResourceHandoverCommandTransfer::
-    ~PduSessionResourceHandoverCommandTransfer() {}
+HandoverCommandTransfer::~HandoverCommandTransfer() {}
 
 //------------------------------------------------------------------------------
-void PduSessionResourceHandoverCommandTransfer::setDlForwardingUpTnlInformation(
+void HandoverCommandTransfer::setDlForwardingUpTnlInformation(
     const GtpTunnel& upTransportLayerInfo) {
   UpTransportLayerInformation tmp = {};
   tmp.set(upTransportLayerInfo);
@@ -62,21 +60,21 @@ void PduSessionResourceHandoverCommandTransfer::setDlForwardingUpTnlInformation(
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceHandoverCommandTransfer::setDlForwardingUpTnlInformation(
+void HandoverCommandTransfer::setDlForwardingUpTnlInformation(
     const UpTransportLayerInformation& dlForwardingUpTnlInformation) {
   m_DlForwardingUpTnlInformation =
       std::make_optional<UpTransportLayerInformation>(
           dlForwardingUpTnlInformation);
 }
 //------------------------------------------------------------------------------
-void PduSessionResourceHandoverCommandTransfer::getDlForwardingUpTnlInformation(
+void HandoverCommandTransfer::getDlForwardingUpTnlInformation(
     std::optional<UpTransportLayerInformation>& dlForwardingUpTnlInformation)
     const {
   dlForwardingUpTnlInformation = m_DlForwardingUpTnlInformation;
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceHandoverCommandTransfer::setQosFlowToBeForwardedList(
+void HandoverCommandTransfer::setQosFlowToBeForwardedList(
     const std::vector<QosFlowToBeForwardedItem_t>& list) {
   QosFlowToBeForwardedList qosList = {};
 
@@ -117,7 +115,7 @@ void PduSessionResourceHandoverCommandTransfer::setQosFlowToBeForwardedList(
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceHandoverCommandTransfer::setQosFlowToBeForwardedList(
+void HandoverCommandTransfer::setQosFlowToBeForwardedList(
     const std::vector<QosFlowToBeForwardedItem> list) {
   QosFlowToBeForwardedList qosFlowToBeForwardedList = {};
   qosFlowToBeForwardedList.set(list);
@@ -126,21 +124,20 @@ void PduSessionResourceHandoverCommandTransfer::setQosFlowToBeForwardedList(
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceHandoverCommandTransfer::setQosFlowToBeForwardedList(
+void HandoverCommandTransfer::setQosFlowToBeForwardedList(
     const QosFlowToBeForwardedList& list) {
   m_QosFlowToBeForwardedList =
       std::make_optional<QosFlowToBeForwardedList>(list);
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceHandoverCommandTransfer::getQosFlowToBeForwardedList(
+void HandoverCommandTransfer::getQosFlowToBeForwardedList(
     std::optional<QosFlowToBeForwardedList>& list) const {
   list = m_QosFlowToBeForwardedList;
 }
 
 //------------------------------------------------------------------------------
-int PduSessionResourceHandoverCommandTransfer::encode(
-    uint8_t* buf, int bufSize) const {
+int HandoverCommandTransfer::encode(uint8_t* buf, int bufSize) const {
   ngap_utils::print_asn_msg(&asn_DEF_Ngap_HandoverCommandTransfer, m_Ie);
   asn_enc_rval_t er = aper_encode_to_buffer(
       &asn_DEF_Ngap_HandoverCommandTransfer, NULL, m_Ie, buf, bufSize);
@@ -150,8 +147,7 @@ int PduSessionResourceHandoverCommandTransfer::encode(
 }
 
 //------------------------------------------------------------------------------
-bool PduSessionResourceHandoverCommandTransfer::decode(
-    uint8_t* buf, int bufSize) {
+bool HandoverCommandTransfer::decode(uint8_t* buf, int bufSize) {
   asn_dec_rval_t rc = asn_decode(
       NULL, ATS_ALIGNED_CANONICAL_PER, &asn_DEF_Ngap_HandoverCommandTransfer,
       (void**) &m_Ie, buf, bufSize);

@@ -37,6 +37,7 @@ class HandoverPreparationUnsuccessfulTransfer {
   HandoverPreparationUnsuccessfulTransfer();
   virtual ~HandoverPreparationUnsuccessfulTransfer();
 
+  void setCause(const Cause& cause);
   void setCauseRadioNetwork(e_Ngap_CauseRadioNetwork causeValue);
   void setCauseTransport(e_Ngap_CauseTransport causeValue);
   void setCauseNas(e_Ngap_CauseNas causeValue);

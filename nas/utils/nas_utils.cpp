@@ -22,6 +22,7 @@
 #include "nas_utils.hpp"
 
 #include "3gpp_24.501.hpp"
+#include "common_defs.hpp"
 #include "common_defs.h"
 #include "logger_base.hpp"
 #include "utils.hpp"

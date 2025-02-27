@@ -19,8 +19,8 @@
  *      contact@openairinterface.org
  */
 
-#ifndef _PDU_SESSION_RESOURCE_HANDOVER_COMMAND_TRANSFER_H_
-#define _PDU_SESSION_RESOURCE_HANDOVER_COMMAND_TRANSFER_H_
+#ifndef _HANDOVER_COMMAND_TRANSFER_H_
+#define _HANDOVER_COMMAND_TRANSFER_H_
 
 #include "NgapIesStruct.hpp"
 #include "QosFlowToBeForwardedList.hpp"
@@ -32,10 +32,10 @@ extern "C" {
 }
 
 namespace oai::ngap {
-class PduSessionResourceHandoverCommandTransfer {
+class HandoverCommandTransfer {
  public:
-  PduSessionResourceHandoverCommandTransfer();
-  virtual ~PduSessionResourceHandoverCommandTransfer();
+  HandoverCommandTransfer();
+  virtual ~HandoverCommandTransfer();
 
   void setDlForwardingUpTnlInformation(const GtpTunnel& upTransportLayerInfo);
   void setDlForwardingUpTnlInformation(

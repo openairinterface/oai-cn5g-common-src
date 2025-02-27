@@ -46,6 +46,11 @@ void AssociatedQosFlowItem::set(const QosFlowIdentifier& qosFlowIdentifier) {
 }
 
 //------------------------------------------------------------------------------
+void AssociatedQosFlowItem::get(QosFlowIdentifier& qosFlowIdentifier) const {
+  qosFlowIdentifier = m_QosFlowIdentifier;
+}
+
+//------------------------------------------------------------------------------
 bool AssociatedQosFlowItem::get(
     long& qosFlowMappingIndication,
     QosFlowIdentifier& qosFlowIdentifier) const {

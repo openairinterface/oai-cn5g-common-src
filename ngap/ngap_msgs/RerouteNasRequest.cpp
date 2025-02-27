@@ -22,7 +22,7 @@
 #include "RerouteNasRequest.hpp"
 
 #include "3gpp_23.003.h"
-#include "common_defs.h"
+#include "common_defs.hpp"
 #include "logger_base.hpp"
 #include "utils.hpp"
 

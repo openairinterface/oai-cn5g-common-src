@@ -21,7 +21,7 @@
 
 #include "NetworkName.hpp"
 
-#include "common_defs.h"
+#include "common_defs.hpp"
 #include "conversions.hpp"
 #include "logger_base.hpp"
 #include "string.hpp"

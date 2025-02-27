@@ -39,6 +39,17 @@ HandoverPreparationUnsuccessfulTransfer::
     ~HandoverPreparationUnsuccessfulTransfer() {}
 
 //------------------------------------------------------------------------------
+void HandoverPreparationUnsuccessfulTransfer::setCause(const Cause& cause) {
+  m_Cause = cause;
+  int ret = m_Cause.encode(m_HandoverPreparationUnsuccessfulTransferIe->cause);
+  if (!ret) {
+    oai::logger::logger_common::ngap().error(
+        "Encode CauseRadioNetwork IE error");
+    return;
+  }
+}
+
+//------------------------------------------------------------------------------
 void HandoverPreparationUnsuccessfulTransfer::setCauseRadioNetwork(
     e_Ngap_CauseRadioNetwork causeValue) {
   m_Cause.setChoiceOfCause(Ngap_Cause_PR_radioNetwork);

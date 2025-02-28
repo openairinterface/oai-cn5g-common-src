@@ -18,7 +18,7 @@
 #For more information about the OpenAirInterface(OAI) Software Alliance:
 #contact @openairinterface.org
 ################################################################################
-set(NGAP_SM_DIR "${SRC_TOP_DIR}/ngap")
+set(NGAP_DIR "${SRC_TOP_DIR}/ngap")
 enable_testing()
 include(GoogleTest)
 
@@ -34,7 +34,7 @@ include_directories(${NGAP_DIR}/utils)
 include_directories(${UTILS_DIR})
 include_directories(${UTILS_DIR}/bstr)
 
-file(GLOB NGAP_SM_src_files
+file(GLOB NGAP_src_files
     ${NGAP_DIR}/libngap/*.c
     ${NGAP_DIR}/libngap_ies/*.c
     ${NGAP_DIR}/ngap_ies/*.cpp
@@ -42,7 +42,7 @@ file(GLOB NGAP_SM_src_files
     ${NGAP_DIR}/utils/*.cpp
 )
 
-add_library(NGAP_SM STATIC ${NGAP_SM_src_files})
+add_library(NGAP STATIC ${NGAP_src_files})
 
-target_link_libraries( NGAP_SM -Wl,--start-group LOGGER COMMON -lfmt -lspdlog -Wl,--end-group )
+target_link_libraries( NGAP -Wl,--start-group LOGGER COMMON -lfmt -lspdlog -Wl,--end-group )
 

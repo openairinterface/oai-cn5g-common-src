@@ -27,19 +27,19 @@
 namespace oai::ngap {
 
 //------------------------------------------------------------------------------
-PduSessionResourceSetupUnSuccessfulTransfer::
-    PduSessionResourceSetupUnSuccessfulTransfer() {
+PduSessionResourceSetupUnsuccessfulTransfer::
+    PduSessionResourceSetupUnsuccessfulTransfer() {
   m_PduSessionResourceSetupUnsuccessfulTransferIe =
       (Ngap_PDUSessionResourceSetupUnsuccessfulTransfer_t*) calloc(
           1, sizeof(Ngap_PDUSessionResourceSetupUnsuccessfulTransfer_t));
 }
 
 //------------------------------------------------------------------------------
-PduSessionResourceSetupUnSuccessfulTransfer::
-    ~PduSessionResourceSetupUnSuccessfulTransfer() {}
+PduSessionResourceSetupUnsuccessfulTransfer::
+    ~PduSessionResourceSetupUnsuccessfulTransfer() {}
 
 //------------------------------------------------------------------------------
-void PduSessionResourceSetupUnSuccessfulTransfer::setCauseRadioNetwork(
+void PduSessionResourceSetupUnsuccessfulTransfer::setCauseRadioNetwork(
     e_Ngap_CauseRadioNetwork causeValue) {
   m_Cause.setChoiceOfCause(Ngap_Cause_PR_radioNetwork);
   m_Cause.set(causeValue);
@@ -54,7 +54,7 @@ void PduSessionResourceSetupUnSuccessfulTransfer::setCauseRadioNetwork(
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceSetupUnSuccessfulTransfer::setCauseTransport(
+void PduSessionResourceSetupUnsuccessfulTransfer::setCauseTransport(
     e_Ngap_CauseTransport causeValue) {
   m_Cause.setChoiceOfCause(Ngap_Cause_PR_transport);
   m_Cause.set(causeValue);
@@ -68,7 +68,7 @@ void PduSessionResourceSetupUnSuccessfulTransfer::setCauseTransport(
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceSetupUnSuccessfulTransfer::setCauseNas(
+void PduSessionResourceSetupUnsuccessfulTransfer::setCauseNas(
     e_Ngap_CauseNas causeValue) {
   m_Cause.setChoiceOfCause(Ngap_Cause_PR_nas);
   m_Cause.set(causeValue);
@@ -82,7 +82,7 @@ void PduSessionResourceSetupUnSuccessfulTransfer::setCauseNas(
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceSetupUnSuccessfulTransfer::setCauseProtocol(
+void PduSessionResourceSetupUnsuccessfulTransfer::setCauseProtocol(
     e_Ngap_CauseProtocol causeValue) {
   m_Cause.setChoiceOfCause(Ngap_Cause_PR_protocol);
   m_Cause.set(causeValue);
@@ -96,7 +96,7 @@ void PduSessionResourceSetupUnSuccessfulTransfer::setCauseProtocol(
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceSetupUnSuccessfulTransfer::setCauseMisc(
+void PduSessionResourceSetupUnsuccessfulTransfer::setCauseMisc(
     e_Ngap_CauseMisc causeValue) {
   m_Cause.setChoiceOfCause(Ngap_Cause_PR_misc);
   m_Cause.set(causeValue);
@@ -110,7 +110,7 @@ void PduSessionResourceSetupUnSuccessfulTransfer::setCauseMisc(
 }
 
 //------------------------------------------------------------------------------
-int PduSessionResourceSetupUnSuccessfulTransfer::encode(
+int PduSessionResourceSetupUnsuccessfulTransfer::encode(
     uint8_t* buf, int bufSize) {
   ngap_utils::print_asn_msg(
       &asn_DEF_Ngap_PDUSessionResourceSetupUnsuccessfulTransfer,
@@ -124,7 +124,7 @@ int PduSessionResourceSetupUnSuccessfulTransfer::encode(
 
 //------------------------------------------------------------------------------
 // Decapsulation
-bool PduSessionResourceSetupUnSuccessfulTransfer::decode(
+bool PduSessionResourceSetupUnsuccessfulTransfer::decode(
     uint8_t* buf, int bufSize) {
   asn_dec_rval_t rc = asn_decode(
       NULL, ATS_ALIGNED_CANONICAL_PER,
@@ -156,12 +156,12 @@ bool PduSessionResourceSetupUnSuccessfulTransfer::decode(
 }
 
 //------------------------------------------------------------------------------
-long PduSessionResourceSetupUnSuccessfulTransfer::getChoiceOfCause() const {
+long PduSessionResourceSetupUnsuccessfulTransfer::getChoiceOfCause() const {
   return m_Cause.getChoiceOfCause();
 }
 
 //------------------------------------------------------------------------------
-long PduSessionResourceSetupUnSuccessfulTransfer::getCause() const {
+long PduSessionResourceSetupUnsuccessfulTransfer::getCause() const {
   return m_Cause.get();
 }
 }  // namespace oai::ngap

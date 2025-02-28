@@ -571,7 +571,7 @@ bool PduSessionResourceSetupRequestTransfer::getQosFlowSetupRequestList(
     itemListVector[i].get(qosFlowIdentifier, qosFlowLevelQosParameters);
 
     QosFlowSetupReq_t qosFlowSetupReq;
-    if (!qosFlowIdentifier.get(qosFlowSetupReq.qosFlowId)) return false;
+    qosFlowIdentifier.get(qosFlowSetupReq.qosFlowId);
     QosCharacteristics qosCharacteristics                        = {};
     AllocationAndRetentionPriority arp                           = {};
     std::optional<GbrQosFlowInformation> gbrQosFlowInformation   = std::nullopt;

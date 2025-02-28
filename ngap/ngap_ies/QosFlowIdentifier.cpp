@@ -37,11 +37,12 @@ void QosFlowIdentifier::set(const long& value) {
 }
 
 //------------------------------------------------------------------------------
-bool QosFlowIdentifier::get(long& value) const {
+void QosFlowIdentifier::get(long& value) const {
   value = m_QosFlowIdentifier;
-  return true;
 }
 
+//------------------------------------------------------------------------------
+long QosFlowIdentifier::get() const {}
 //------------------------------------------------------------------------------
 bool QosFlowIdentifier::encode(
     Ngap_QosFlowIdentifier_t& qosFlowIdentifier) const {

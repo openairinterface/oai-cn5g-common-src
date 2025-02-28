@@ -19,7 +19,7 @@
  *      contact@openairinterface.org
  */
 
-#include "PduSessionResourceHandoverRequestAckTransfer.hpp"
+#include "HandoverRequestAcknowledgeTransfer.hpp"
 
 #include "logger_base.hpp"
 #include "ngap_utils.hpp"
@@ -27,47 +27,43 @@
 namespace oai::ngap {
 
 //------------------------------------------------------------------------------
-PduSessionResourceHandoverRequestAckTransfer::
-    PduSessionResourceHandoverRequestAckTransfer() {
+HandoverRequestAcknowledgeTransfer::HandoverRequestAcknowledgeTransfer() {
   m_HandoverRequestAcknowledegTransferIe =
       (Ngap_HandoverRequestAcknowledgeTransfer_t*) calloc(
           1, sizeof(Ngap_HandoverRequestAcknowledgeTransfer_t));
 }
 
 //------------------------------------------------------------------------------
-PduSessionResourceHandoverRequestAckTransfer::
-    ~PduSessionResourceHandoverRequestAckTransfer() {}
+HandoverRequestAcknowledgeTransfer::~HandoverRequestAcknowledgeTransfer() {}
 
 //------------------------------------------------------------------------------
-void PduSessionResourceHandoverRequestAckTransfer::setDlNgUUpTnlInformation(
+void HandoverRequestAcknowledgeTransfer::setDlNgUUpTnlInformation(
     const UpTransportLayerInformation& dlNgUUpTnlInformation) {
   m_DlNgUUpTnlInformation = dlNgUUpTnlInformation;
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceHandoverRequestAckTransfer::getDlNgUUpTnlInformation(
+void HandoverRequestAcknowledgeTransfer::getDlNgUUpTnlInformation(
     UpTransportLayerInformation& dlNgUUpTnlInformation) const {
   dlNgUUpTnlInformation = m_DlNgUUpTnlInformation;
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceHandoverRequestAckTransfer::
-    setDlForwardingUpTnlInformation(
-        const UpTransportLayerInformation& dlForwardingUpTnlInformation) {
+void HandoverRequestAcknowledgeTransfer::setDlForwardingUpTnlInformation(
+    const UpTransportLayerInformation& dlForwardingUpTnlInformation) {
   m_DlForwardingUpTnlInformation =
       std::make_optional<UpTransportLayerInformation>(
           dlForwardingUpTnlInformation);
 }
 //------------------------------------------------------------------------------
-void PduSessionResourceHandoverRequestAckTransfer::
-    getDlForwardingUpTnlInformation(std::optional<UpTransportLayerInformation>&
-                                        dlForwardingUpTnlInformation) const {
+void HandoverRequestAcknowledgeTransfer::getDlForwardingUpTnlInformation(
+    std::optional<UpTransportLayerInformation>& dlForwardingUpTnlInformation)
+    const {
   dlForwardingUpTnlInformation = m_DlForwardingUpTnlInformation;
 }
 
 //------------------------------------------------------------------------------
-int PduSessionResourceHandoverRequestAckTransfer::encode(
-    uint8_t* buf, int bufSize) {
+int HandoverRequestAcknowledgeTransfer::encode(uint8_t* buf, int bufSize) {
   ngap_utils::print_asn_msg(
       &asn_DEF_Ngap_HandoverRequestAcknowledgeTransfer,
       m_HandoverRequestAcknowledegTransferIe);
@@ -79,8 +75,7 @@ int PduSessionResourceHandoverRequestAckTransfer::encode(
 }
 
 //------------------------------------------------------------------------------
-bool PduSessionResourceHandoverRequestAckTransfer::decode(
-    uint8_t* buf, int bufSize) {
+bool HandoverRequestAcknowledgeTransfer::decode(uint8_t* buf, int bufSize) {
   asn_dec_rval_t rc = asn_decode(
       NULL, ATS_ALIGNED_CANONICAL_PER,
       &asn_DEF_Ngap_HandoverRequestAcknowledgeTransfer,

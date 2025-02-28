@@ -19,8 +19,8 @@
  *      contact@openairinterface.org
  */
 
-#ifndef _PDU_SESSION_RESOURCE_HANDOVER_REQUEST_ACK_TRANSFER_H_
-#define _PDU_SESSION_RESOURCE_HANDOVER_REQUEST_ACK_TRANSFER_H_
+#ifndef _HANDOVER_REQUEST_ACKNOWLEDGE_TRANSFER_H_
+#define _HANDOVER_REQUEST_ACKNOWLEDGE_TRANSFER_H_
 
 #include "NgapIesStruct.hpp"
 #include "QosFlowItemWithDataForwarding.hpp"
@@ -35,10 +35,10 @@ extern "C" {
 }
 
 namespace oai::ngap {
-class PduSessionResourceHandoverRequestAckTransfer {
+class HandoverRequestAcknowledgeTransfer {
  public:
-  PduSessionResourceHandoverRequestAckTransfer();
-  virtual ~PduSessionResourceHandoverRequestAckTransfer();
+  HandoverRequestAcknowledgeTransfer();
+  virtual ~HandoverRequestAcknowledgeTransfer();
 
   // DL NG-U UP TNL Information
   void setDlNgUUpTnlInformation(
@@ -87,7 +87,7 @@ class PduSessionResourceHandoverRequestAckTransfer {
   std::optional<UpTransportLayerInformation> m_DlForwardingUpTnlInformation;
   // TODO: Security Result (Optional)
   // QoS Flow Setup Response List (Mandatory)
-  QosFlowListWithDataForwarding m_QosFlowSetupResponseList;  // Mandatory
+  QosFlowListWithDataForwarding m_QosFlowSetupResponseList;
   // TODO: QoS Flow Failed to Setup List (Optional)
   // TODO: Data Forwarding Response DRB List (Optional)
   // TODO: Additional DL UP TNL Information for HO List //Range 0..1

@@ -32,10 +32,10 @@ extern "C" {
 
 namespace oai::ngap {
 
-class PduSessionResourceSetupUnSuccessfulTransfer {
+class PduSessionResourceSetupUnsuccessfulTransfer {
  public:
-  PduSessionResourceSetupUnSuccessfulTransfer();
-  virtual ~PduSessionResourceSetupUnSuccessfulTransfer();
+  PduSessionResourceSetupUnsuccessfulTransfer();
+  virtual ~PduSessionResourceSetupUnsuccessfulTransfer();
 
   void setCauseRadioNetwork(e_Ngap_CauseRadioNetwork causeValue);
   void setCauseTransport(e_Ngap_CauseTransport causeValue);

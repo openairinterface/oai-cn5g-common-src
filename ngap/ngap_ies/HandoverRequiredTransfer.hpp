@@ -19,8 +19,8 @@
  *      contact@openairinterface.org
  */
 
-#ifndef _PDU_SESSION_RESOURCE_HANDOVER_REQUIRED_TRANSFER_H_
-#define _PDU_SESSION_RESOURCE_HANDOVER_REQUIRED_TRANSFER_H_
+#ifndef _HANDOVER_REQUIRED_TRANSFER_H_
+#define _HANDOVER_REQUIRED_TRANSFER_H_
 
 #include <optional>
 
@@ -35,16 +35,17 @@ extern "C" {
 
 namespace oai::ngap {
 
-class PduSessionResourceHandoverRequiredTransfer {
+class HandoverRequiredTransfer {
  public:
-  PduSessionResourceHandoverRequiredTransfer();
-  virtual ~PduSessionResourceHandoverRequiredTransfer();
+  HandoverRequiredTransfer();
+  virtual ~HandoverRequiredTransfer();
 
   void setDirectForwardingPathAvailability(
       const Ngap_DirectForwardingPathAvailability_t&
           directForwardingPathAvailability);
   bool getDirectForwardingPathAvailability(
       long& directForwardingPathAvailability) const;
+  std::optional<long> getDirectForwardingPathAvailability() const;
 
   int encode(uint8_t* buf, int bufSize);
   bool decode(uint8_t* buf, int bufSize);

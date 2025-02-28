@@ -19,7 +19,7 @@
  *      contact@openairinterface.org
  */
 
-#include "PduSessionResourceHandoverRequiredTransfer.hpp"
+#include "HandoverRequiredTransfer.hpp"
 
 #include "logger_base.hpp"
 #include "ngap_utils.hpp"
@@ -27,22 +27,19 @@
 namespace oai::ngap {
 
 //------------------------------------------------------------------------------
-PduSessionResourceHandoverRequiredTransfer::
-    PduSessionResourceHandoverRequiredTransfer() {
+HandoverRequiredTransfer::HandoverRequiredTransfer() {
   m_HandoverRquiredTransferIe = (Ngap_HandoverRequiredTransfer_t*) calloc(
       1, sizeof(Ngap_HandoverRequiredTransfer_t));
   m_DirectForwardingPathAvailability = std::nullopt;
 }
 
 //------------------------------------------------------------------------------
-PduSessionResourceHandoverRequiredTransfer::
-    ~PduSessionResourceHandoverRequiredTransfer() {}
+HandoverRequiredTransfer::~HandoverRequiredTransfer() {}
 
 //------------------------------------------------------------------------------
-void PduSessionResourceHandoverRequiredTransfer::
-    setDirectForwardingPathAvailability(
-        const Ngap_DirectForwardingPathAvailability_t&
-            directForwardingPathAvailability) {
+void HandoverRequiredTransfer::setDirectForwardingPathAvailability(
+    const Ngap_DirectForwardingPathAvailability_t&
+        directForwardingPathAvailability) {
   m_DirectForwardingPathAvailability =
       std::make_optional<Ngap_DirectForwardingPathAvailability_t>(
           directForwardingPathAvailability);
@@ -54,9 +51,8 @@ void PduSessionResourceHandoverRequiredTransfer::
 }
 
 //------------------------------------------------------------------------------
-bool PduSessionResourceHandoverRequiredTransfer::
-    getDirectForwardingPathAvailability(
-        long& directForwardingPathAvailability) const {
+bool HandoverRequiredTransfer::getDirectForwardingPathAvailability(
+    long& directForwardingPathAvailability) const {
   if (m_DirectForwardingPathAvailability.has_value()) {
     directForwardingPathAvailability =
         (long) m_DirectForwardingPathAvailability.value();
@@ -66,8 +62,12 @@ bool PduSessionResourceHandoverRequiredTransfer::
 }
 
 //------------------------------------------------------------------------------
-int PduSessionResourceHandoverRequiredTransfer::encode(
-    uint8_t* buf, int bufSize) {
+std::optional<long>
+HandoverRequiredTransfer::getDirectForwardingPathAvailability() const {
+  return m_DirectForwardingPathAvailability;
+}
+//------------------------------------------------------------------------------
+int HandoverRequiredTransfer::encode(uint8_t* buf, int bufSize) {
   ngap_utils::print_asn_msg(
       &asn_DEF_Ngap_HandoverRequiredTransfer, m_HandoverRquiredTransferIe);
   asn_enc_rval_t er = aper_encode_to_buffer(
@@ -78,8 +78,7 @@ int PduSessionResourceHandoverRequiredTransfer::encode(
 }
 
 //------------------------------------------------------------------------------
-bool PduSessionResourceHandoverRequiredTransfer::decode(
-    uint8_t* buf, int bufSize) {
+bool HandoverRequiredTransfer::decode(uint8_t* buf, int bufSize) {
   asn_dec_rval_t rc = asn_decode(
       NULL, ATS_ALIGNED_CANONICAL_PER, &asn_DEF_Ngap_HandoverRequiredTransfer,
       (void**) &m_HandoverRquiredTransferIe, buf, bufSize);

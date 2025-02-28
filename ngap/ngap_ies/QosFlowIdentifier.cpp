@@ -42,7 +42,10 @@ void QosFlowIdentifier::get(long& value) const {
 }
 
 //------------------------------------------------------------------------------
-long QosFlowIdentifier::get() const {}
+long QosFlowIdentifier::get() const {
+  return m_QosFlowIdentifier;
+}
+
 //------------------------------------------------------------------------------
 bool QosFlowIdentifier::encode(
     Ngap_QosFlowIdentifier_t& qosFlowIdentifier) const {

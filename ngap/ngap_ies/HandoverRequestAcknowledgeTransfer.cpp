@@ -63,6 +63,28 @@ void HandoverRequestAcknowledgeTransfer::getDlForwardingUpTnlInformation(
 }
 
 //------------------------------------------------------------------------------
+void HandoverRequestAcknowledgeTransfer::setQosFlowSetupResponseList(
+    const std::vector<QosFlowItemWithDataForwarding>& list) {
+  m_QosFlowSetupResponseList.set(list);
+}
+
+//------------------------------------------------------------------------------
+void HandoverRequestAcknowledgeTransfer::setQosFlowSetupResponseList(
+    const QosFlowListWithDataForwarding& list) {
+  m_QosFlowSetupResponseList = list;
+}
+//------------------------------------------------------------------------------
+void HandoverRequestAcknowledgeTransfer::getQosFlowSetupResponseList(
+    std::vector<QosFlowItemWithDataForwarding>& list) const {
+  m_QosFlowSetupResponseList.get(list);
+}
+//------------------------------------------------------------------------------
+void HandoverRequestAcknowledgeTransfer::getQosFlowSetupResponseList(
+    QosFlowListWithDataForwarding& list) const {
+  list = m_QosFlowSetupResponseList;
+}
+
+//------------------------------------------------------------------------------
 int HandoverRequestAcknowledgeTransfer::encode(uint8_t* buf, int bufSize) {
   ngap_utils::print_asn_msg(
       &asn_DEF_Ngap_HandoverRequestAcknowledgeTransfer,

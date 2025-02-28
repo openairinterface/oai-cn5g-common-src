@@ -60,10 +60,9 @@ class HandoverRequestAcknowledgeTransfer {
   void setQosFlowSetupResponseList(
       const std::vector<QosFlowItemWithDataForwarding>& list);
   void setQosFlowSetupResponseList(const QosFlowListWithDataForwarding& list);
-  bool getQosFlowSetupResponseList(
-      std::vector<QosFlowLItemWithDataForwarding_t>& list) const;
   void getQosFlowSetupResponseList(
-      std::optional<QosFlowListWithDataForwarding>& list) const;
+      std::vector<QosFlowItemWithDataForwarding>& list) const;
+  void getQosFlowSetupResponseList(QosFlowListWithDataForwarding& list) const;
 
   // TODO: QoS Flow Failed to Setup List
   // TODO: Data Forwarding Response DRB List

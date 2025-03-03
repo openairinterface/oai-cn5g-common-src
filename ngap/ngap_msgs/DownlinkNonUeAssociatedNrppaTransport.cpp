@@ -31,6 +31,8 @@ namespace oai::ngap {
 DownlinkNonUeAssociatedNrppaTransportMsg::
     DownlinkNonUeAssociatedNrppaTransportMsg()
     : NgapMessage() {
+  m_RoutingId = nullptr;
+  m_NrppaPdu  = nullptr;
   setMessageType(NgapMessageType::DOWNLINK_NON_UE_ASSOCIATED_NRPPA_TRANSPORT);
   initialize();
 }

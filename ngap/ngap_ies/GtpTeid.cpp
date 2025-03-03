@@ -50,7 +50,7 @@ bool GtpTeid::encode(Ngap_GTP_TEID_t& gtpTeid) const {
   if (!gtpTeid.buf) return false;
 
   for (int i = 0; i < gtpTeid.size; i++) {
-    gtpTeid.buf[i] = (m_GtpTeid >> (gtpTeid.size - i - 1) * 8) & 0xff;
+    gtpTeid.buf[i] = (m_GtpTeid >> ((gtpTeid.size - i - 1) * 8)) & 0xff;
   }
 
   return true;

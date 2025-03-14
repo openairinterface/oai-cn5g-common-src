@@ -139,6 +139,20 @@ int PduSessionResourceReleaseCommandTransfer::encode(
 }
 
 //------------------------------------------------------------------------------
+void PduSessionResourceReleaseCommandTransfer::encode2NewBuffer(
+    uint8_t*& buf, int& encoded_size) {
+  ngap_utils::print_asn_msg(
+      &asn_DEF_Ngap_PDUSessionResourceReleaseCommandTransfer,
+      m_PduSessionResourceReleaseCommandTransferIe);
+  encoded_size = aper_encode_to_new_buffer(
+      &asn_DEF_Ngap_PDUSessionResourceReleaseCommandTransfer, NULL,
+      m_PduSessionResourceReleaseCommandTransferIe, (void**) &buf);
+  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
+      .debug("Encoded message size ( %d )", encoded_size);
+  return;
+}
+
+//------------------------------------------------------------------------------
 bool PduSessionResourceReleaseCommandTransfer::decode(
     uint8_t* buf, int bufSize) {
   asn_dec_rval_t rc = asn_decode(

@@ -48,6 +48,7 @@ class PduSessionResourceReleaseCommandTransfer {
   long getCause() const;
 
   int encode(uint8_t* buf, int bufSize);
+  void encode2NewBuffer(uint8_t*& buf, int& encoded_size);
   bool decode(uint8_t* buf, int bufSize);
 
  private:

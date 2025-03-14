@@ -102,8 +102,9 @@ bool AmfStatusIndication::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
       } break;
       default: {
         oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .error("Decoded NGAP Message PDU error");
-        return false;
+            .warn(
+                "Unsupported IE (ID 0x%x)",
+                m_AmfStatusIndicationIEs->protocolIEs.list.array[i]->id);
       }
     }
   }

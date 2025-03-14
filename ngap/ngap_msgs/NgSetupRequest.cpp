@@ -308,8 +308,9 @@ bool NgSetupRequestMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           } break;
           default: {
             oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                .error("Decoded NGAP message PDU error");
-            return false;
+                .warn(
+                    "Unsupported IE (ID 0x%x)",
+                    m_NgSetupRequestIes->protocolIEs.list.array[i]->id);
           }
         }
       }

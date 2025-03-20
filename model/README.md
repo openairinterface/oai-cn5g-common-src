@@ -50,3 +50,7 @@ Finally, we can generate the models, in this example we generate the common mode
 ```
 docker run --rm -v ${PWD}:/local openapitools/openapi-generator-cli:v6.0.1 generate -c /local/config.json -i /local/TS29571_CommonData.yaml -g cpp-pistache-server -o /local/out
 ```
+
+### Release 17
+Using openapi-generator-cli-7.12.0-20250227.084950-68.jar
+

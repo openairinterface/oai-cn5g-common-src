@@ -272,7 +272,7 @@ int QosRule::Encode(uint8_t* buf, int len) const {
         (rule_operation_code_ ==
          kQosRuleRuleOperationCodeModifyExistingQosRuleAndReplaceAllPacketFilters)) {
       if (pf_create_and_modify_and_replace_list_.has_value()) {
-        auto p = pf_create_and_modify_and_replace_list_.value()[i];
+        auto p = (pf_create_and_modify_and_replace_list_.value())[i];
         uint8_t octet_8 =
             ((p.packet_filter_direction & 0x03) << 4) |
             (p.packet_filter_id & 0x0f);  // octet 8- packet filter direction

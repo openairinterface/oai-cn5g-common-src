@@ -89,6 +89,9 @@ void QosRules::Get(std::vector<QosRule>& qos_rules) const {
 //------------------------------------------------------------------------------
 void QosRules::AddQosRule(const QosRule& rule) {
   qos_rules_.push_back(rule);
+  uint32_t length = GetLengthIndicator();
+  length += rule.GetLength();
+  SetLengthIndicator(length);
 }
 
 //------------------------------------------------------------------------------

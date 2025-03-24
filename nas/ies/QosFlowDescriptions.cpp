@@ -103,7 +103,7 @@ void QosFlowDescriptions::Get(
 void QosFlowDescriptions::AddQosFlowDescription(
     const QosFlowDescription& rule) {
   qos_flow_descriptions_.push_back(rule);
-  uint32_t length = 0;  // not include 3 first octets: 1 for IE , 2 for length
+  uint32_t length = GetLengthIndicator();
   length += rule.GetLength();
   SetLengthIndicator(length);
 }

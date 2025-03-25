@@ -61,16 +61,14 @@ void RerouteNasRequest::setAmfUeNgapId(const uint64_t& id) {
 
   int ret = m_AmfUeNgapId.value().encode(ie->value.choice.AMF_UE_NGAP_ID);
   if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode AMF_UE_NGAP_ID IE error!");
+    oai::logger::logger_common::ngap().error("Encode AMF_UE_NGAP_ID IE error!");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
   ret = ASN_SEQUENCE_ADD(&m_RerouteNASRequestIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode AMF_UE_NGAP_ID IE error!");
+    oai::logger::logger_common::ngap().error("Encode AMF_UE_NGAP_ID IE error!");
 }
 
 //------------------------------------------------------------------------------
@@ -92,16 +90,14 @@ void RerouteNasRequest::setRanUeNgapId(const uint32_t& ranUeNgapId) {
 
   int ret = m_RanUeNgapId.encode(ie->value.choice.RAN_UE_NGAP_ID);
   if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode RAN_UE_NGAP_ID IE error!");
+    oai::logger::logger_common::ngap().error("Encode RAN_UE_NGAP_ID IE error!");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
   ret = ASN_SEQUENCE_ADD(&m_RerouteNASRequestIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode RAN_UE_NGAP_ID IE error!");
+    oai::logger::logger_common::ngap().error("Encode RAN_UE_NGAP_ID IE error!");
 }
 
 //------------------------------------------------------------------------------
@@ -136,16 +132,14 @@ void RerouteNasRequest::setAllowedNssai(const std::vector<S_Nssai>& list) {
 
   int ret = m_AllowedNssai.value().encode(ie->value.choice.AllowedNSSAI);
   if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode AllowedNSSAI IE error!");
+    oai::logger::logger_common::ngap().error("Encode AllowedNSSAI IE error!");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
   ret = ASN_SEQUENCE_ADD(&m_RerouteNASRequestIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode AllowedNSSAI IE error!");
+    oai::logger::logger_common::ngap().error("Encode AllowedNSSAI IE error!");
 }
 
 //------------------------------------------------------------------------------
@@ -175,8 +169,7 @@ void RerouteNasRequest::setNgapMessage(const OCTET_STRING_t& message) {
 
   int ret = ASN_SEQUENCE_ADD(&m_RerouteNASRequestIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode NGAP Message IE error!");
+    oai::logger::logger_common::ngap().error("Encode NGAP Message IE error!");
 }
 
 //------------------------------------------------------------------------------
@@ -197,16 +190,14 @@ bool RerouteNasRequest::setAmfSetId(const uint16_t& amfSetId) {
 
   int ret = m_AmfSetId.encode(ie->value.choice.AMFSetID);
   if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode AMFSetID IE error!");
+    oai::logger::logger_common::ngap().error("Encode AMFSetID IE error!");
     oai::utils::utils::free_wrapper((void**) &ie);
     return false;
   }
 
   ret = ASN_SEQUENCE_ADD(&m_RerouteNASRequestIes->protocolIEs.list, ie);
   if (ret != 0) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode AMFSetID IE error!");
+    oai::logger::logger_common::ngap().error("Encode AMFSetID IE error!");
     return false;
   }
   return true;
@@ -232,13 +223,12 @@ bool RerouteNasRequest::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
       m_RerouteNASRequestIes =
           &ngapPdu->choice.initiatingMessage->value.choice.RerouteNASRequest;
     } else {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .error("Check RerouteNASRequest message error!");
+      oai::logger::logger_common::ngap().error(
+          "Check RerouteNASRequest message error!");
       return false;
     }
   } else {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("MessageType error!");
+    oai::logger::logger_common::ngap().error("MessageType error!");
     return false;
   }
   for (int i = 0; i < m_RerouteNASRequestIes->protocolIEs.list.count; i++) {
@@ -251,14 +241,14 @@ bool RerouteNasRequest::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           AmfUeNgapId tmp = {};
           if (!tmp.decode(m_RerouteNASRequestIes->protocolIEs.list.array[i]
                               ->value.choice.AMF_UE_NGAP_ID)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                .error("Decoded NGAP AMF_UE_NGAP_ID IE error");
+            oai::logger::logger_common::ngap().error(
+                "Decoded NGAP AMF_UE_NGAP_ID IE error");
             return false;
           }
           m_AmfUeNgapId = std::optional<AmfUeNgapId>(tmp);
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .error("Decoded NGAP AMF_UE_NGAP_ID IE error");
+          oai::logger::logger_common::ngap().error(
+              "Decoded NGAP AMF_UE_NGAP_ID IE error");
           return false;
         }
       } break;
@@ -270,13 +260,13 @@ bool RerouteNasRequest::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           if (!m_RanUeNgapId.decode(
                   m_RerouteNASRequestIes->protocolIEs.list.array[i]
                       ->value.choice.RAN_UE_NGAP_ID)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                .error("Decoded NGAP RAN_UE_NGAP_ID IE error");
+            oai::logger::logger_common::ngap().error(
+                "Decoded NGAP RAN_UE_NGAP_ID IE error");
             return false;
           }
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .error("Decoded NGAP RAN_UE_NGAP_ID IE error");
+          oai::logger::logger_common::ngap().error(
+              "Decoded NGAP RAN_UE_NGAP_ID IE error");
           return false;
         }
       } break;
@@ -288,8 +278,8 @@ bool RerouteNasRequest::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
                 Ngap_RerouteNASRequest_IEs__value_PR_OCTET_STRING) {
           m_NgapMessage = m_RerouteNASRequestIes->protocolIEs.list.array[i]
                               ->value.choice.OCTET_STRING;
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .error("Decoded NGAP Message IE error");
+          oai::logger::logger_common::ngap().error(
+              "Decoded NGAP Message IE error");
         }
       } break;
 
@@ -301,13 +291,13 @@ bool RerouteNasRequest::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           if (!m_AmfSetId.decode(
                   m_RerouteNASRequestIes->protocolIEs.list.array[i]
                       ->value.choice.AMFSetID)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                .error("Decoded NGAP AMFSetID error");
+            oai::logger::logger_common::ngap().error(
+                "Decoded NGAP AMFSetID error");
             return false;
           }
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .error("Decoded NGAP AMFSetID IE error");
+          oai::logger::logger_common::ngap().error(
+              "Decoded NGAP AMFSetID IE error");
           return false;
         }
       } break;
@@ -321,20 +311,20 @@ bool RerouteNasRequest::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           if (!m_AllowedNssai->decode(
                   m_RerouteNASRequestIes->protocolIEs.list.array[i]
                       ->value.choice.AllowedNSSAI)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                .error("Decoded NGAP AllowedNSSAI IE error");
+            oai::logger::logger_common::ngap().error(
+                "Decoded NGAP AllowedNSSAI IE error");
             return false;
           }
           m_AllowedNssai = std::optional<AllowedNSSAI>(tmp);
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .error("Decoded NGAP AllowedNSSAI IE error");
+          oai::logger::logger_common::ngap().error(
+              "Decoded NGAP AllowedNSSAI IE error");
           return false;
         }
       } break;
       default: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .error("Decoded NGAP Message PDU error");
+        oai::logger::logger_common::ngap().error(
+            "Decoded NGAP Message PDU error");
         return false;
       }
     }

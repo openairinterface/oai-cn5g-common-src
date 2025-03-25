@@ -53,8 +53,8 @@ void HandoverCommandTransfer::setDlForwardingUpTnlInformation(
   int ret = m_DlForwardingUpTnlInformation.value().encode(
       *m_Ie->dLForwardingUP_TNLInformation);
   if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .debug("Encode dLForwardingUP_TNLInformation IE error");
+    oai::logger::logger_common::ngap().debug(
+        "Encode dLForwardingUP_TNLInformation IE error");
     return;
   }
 }
@@ -94,22 +94,20 @@ void HandoverCommandTransfer::setQosFlowToBeForwardedList(
       std::make_optional<QosFlowToBeForwardedList>(qosList);
   int ret =
       m_QosFlowToBeForwardedList.value().encode(m_Ie->qosFlowToBeForwardedList);
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug(
-          "Number of QoS flows in the list %d",
-          m_Ie->qosFlowToBeForwardedList->list.count);
+  oai::logger::logger_common::ngap().debug(
+      "Number of QoS flows in the list %d",
+      m_Ie->qosFlowToBeForwardedList->list.count);
   if (m_Ie->qosFlowToBeForwardedList->list.array) {
     if (m_Ie->qosFlowToBeForwardedList->list.array[0]) {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .debug(
-              "QFI in the list %d",
-              m_Ie->qosFlowToBeForwardedList->list.array[0]->qosFlowIdentifier);
+      oai::logger::logger_common::ngap().debug(
+          "QFI in the list %d",
+          m_Ie->qosFlowToBeForwardedList->list.array[0]->qosFlowIdentifier);
     }
   }
 
   if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .debug("Encode QosFlowToBeForwardedList IE error");
+    oai::logger::logger_common::ngap().debug(
+        "Encode QosFlowToBeForwardedList IE error");
     return;
   }
 }
@@ -141,8 +139,7 @@ int HandoverCommandTransfer::encode(uint8_t* buf, int bufSize) const {
   ngap_utils::print_asn_msg(&asn_DEF_Ngap_HandoverCommandTransfer, m_Ie);
   asn_enc_rval_t er = aper_encode_to_buffer(
       &asn_DEF_Ngap_HandoverCommandTransfer, NULL, m_Ie, buf, bufSize);
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("er.encoded( %d)", er.encoded);
+  oai::logger::logger_common::ngap().debug("er.encoded( %d)", er.encoded);
   return er.encoded;
 }
 

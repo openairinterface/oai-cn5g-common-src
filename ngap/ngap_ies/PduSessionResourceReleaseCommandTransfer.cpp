@@ -147,8 +147,8 @@ void PduSessionResourceReleaseCommandTransfer::encode2NewBuffer(
   encoded_size = aper_encode_to_new_buffer(
       &asn_DEF_Ngap_PDUSessionResourceReleaseCommandTransfer, NULL,
       m_PduSessionResourceReleaseCommandTransferIe, (void**) &buf);
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoded message size ( %d )", encoded_size);
+  oai::logger::logger_common::ngap().debug(
+      "Encoded message size ( %d )", encoded_size);
   return;
 }
 

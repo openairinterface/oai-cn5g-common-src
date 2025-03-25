@@ -69,8 +69,7 @@ bool Cause::encode(Ngap_Cause_t& cause) const {
       break;
     }
     default: {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .warn("Cause Present error!");
+      oai::logger::logger_common::ngap().warn("Cause Present error!");
       return false;
       break;
     }
@@ -98,8 +97,7 @@ bool Cause::decode(const Ngap_Cause_t& cause) {
       m_CauseValue = cause.choice.misc;
     } break;
     default: {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .warn("Cause Present error!");
+      oai::logger::logger_common::ngap().warn("Cause Present error!");
       return false;
     }
   }

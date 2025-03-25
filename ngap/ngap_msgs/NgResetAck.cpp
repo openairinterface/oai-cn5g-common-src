@@ -78,16 +78,16 @@ void NgResetAckMsg::addUeAssociatedLogicalNgConnectionList() {
 
   if (!m_UeAssociatedLogicalNgConnectionList.value().encode(
           ie->value.choice.UE_associatedLogicalNG_connectionList)) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode NGAP UE_associatedLogicalNG_connectionList IE error");
+    oai::logger::logger_common::ngap().error(
+        "Encode NGAP UE_associatedLogicalNG_connectionList IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
   int ret = ASN_SEQUENCE_ADD(&m_NgResetAckIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode NGAP UE_associatedLogicalNG_connectionList IE error");
+    oai::logger::logger_common::ngap().error(
+        "Encode NGAP UE_associatedLogicalNG_connectionList IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -115,19 +115,17 @@ bool NgResetAckMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
               if (!tmp.decode(m_NgResetAckIes->protocolIEs.list.array[i]
                                   ->value.choice
                                   .UE_associatedLogicalNG_connectionList)) {
-                oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                    .error(
-                        "Decoded NGAP UE_associatedLogicalNG_connectionList IE "
-                        "error");
+                oai::logger::logger_common::ngap().error(
+                    "Decoded NGAP UE_associatedLogicalNG_connectionList IE "
+                    "error");
                 return false;
               }
               m_UeAssociatedLogicalNgConnectionList =
                   std::make_optional<UeAssociatedLogicalNgConnectionList>(tmp);
             } else {
-              oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                  .error(
-                      "Decoded NGAP UE_associatedLogicalNG_connectionList IE "
-                      "error");
+              oai::logger::logger_common::ngap().error(
+                  "Decoded NGAP UE_associatedLogicalNG_connectionList IE "
+                  "error");
               return false;
             }
           } break;
@@ -135,20 +133,19 @@ bool NgResetAckMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
             // TODO:
           } break;
           default: {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                .error("Decoded NGAP NGResetAck message PDU IE error");
+            oai::logger::logger_common::ngap().error(
+                "Decoded NGAP NGResetAck message PDU IE error");
             return false;
           }
         }
       }
     } else {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .error("Check NGResetAck message error!");
+      oai::logger::logger_common::ngap().error(
+          "Check NGResetAck message error!");
       return false;
     }
   } else {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Check NGResetAck message error!");
+    oai::logger::logger_common::ngap().error("Check NGResetAck message error!");
     return false;
   }
   return true;

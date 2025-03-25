@@ -61,8 +61,7 @@ bool TAC::decode(const Ngap_TAC_t& tac) {
   for (int i = 0; i < tac.size; i++) {
     m_Tac |= tac.buf[i] << ((tac.size - 1 - i) * 8);
   }
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Received TAC 0x%x", m_Tac);
+  oai::logger::logger_common::ngap().debug("Received TAC 0x%x", m_Tac);
   return true;
 }
 

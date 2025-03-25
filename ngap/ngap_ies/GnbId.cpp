@@ -44,8 +44,7 @@ void GnbId::set(const gNBId_t& gnbId) {
 bool GnbId::set(const uint32_t& id, const uint8_t& bitLength) {
   if (!((bitLength >= NGAP_GNB_ID_SIZE_MIN) &&
         (bitLength <= NGAP_GNB_ID_SIZE_MAX))) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .warn("gNBID length out of range!");
+    oai::logger::logger_common::ngap().warn("gNBID length out of range!");
     return false;
   }
 

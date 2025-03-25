@@ -61,8 +61,8 @@ void PduSessionResourceModifyResponseMsg::setAmfUeNgapId(const uint64_t& id) {
   int ret =
       NgapUeMessage::m_AmfUeNgapId.encode(ie->value.choice.AMF_UE_NGAP_ID);
   if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode NGAP AMF_UE_NGAP_ID IE error");
+    oai::logger::logger_common::ngap().error(
+        "Encode NGAP AMF_UE_NGAP_ID IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
@@ -70,8 +70,8 @@ void PduSessionResourceModifyResponseMsg::setAmfUeNgapId(const uint64_t& id) {
   ret = ASN_SEQUENCE_ADD(
       &pduSessionResourceModifyResponseIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode NGAP AMF_UE_NGAP_ID IE error");
+    oai::logger::logger_common::ngap().error(
+        "Encode NGAP AMF_UE_NGAP_ID IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -90,8 +90,8 @@ void PduSessionResourceModifyResponseMsg::setRanUeNgapId(
   int ret =
       NgapUeMessage::m_RanUeNgapId.encode(ie->value.choice.RAN_UE_NGAP_ID);
   if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode NGAP RAN_UE_NGAP_ID IE error");
+    oai::logger::logger_common::ngap().error(
+        "Encode NGAP RAN_UE_NGAP_ID IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
@@ -99,8 +99,8 @@ void PduSessionResourceModifyResponseMsg::setRanUeNgapId(
   ret = ASN_SEQUENCE_ADD(
       &pduSessionResourceModifyResponseIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode NGAP RAN_UE_NGAP_ID IE error");
+    oai::logger::logger_common::ngap().error(
+        "Encode NGAP RAN_UE_NGAP_ID IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -135,8 +135,8 @@ void PduSessionResourceModifyResponseMsg::
   int ret = m_PduSessionResourceModifyList.value().encode(
       ie->value.choice.PDUSessionResourceModifyListModRes);
   if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode NGAP PDUSessionResourceModifyListModRes IE error");
+    oai::logger::logger_common::ngap().error(
+        "Encode NGAP PDUSessionResourceModifyListModRes IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
@@ -144,8 +144,8 @@ void PduSessionResourceModifyResponseMsg::
   ret = ASN_SEQUENCE_ADD(
       &pduSessionResourceModifyResponseIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode NGAP PDUSessionResourceSetupListSUReq IE error");
+    oai::logger::logger_common::ngap().error(
+        "Encode NGAP PDUSessionResourceSetupListSUReq IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -184,14 +184,13 @@ bool PduSessionResourceModifyResponseMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           &ngapPdu->choice.successfulOutcome->value.choice
                .PDUSessionResourceModifyResponse;
     } else {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .error("Check PDUSessionResourceModifyResponse message error!");
+      oai::logger::logger_common::ngap().error(
+          "Check PDUSessionResourceModifyResponse message error!");
 
       return false;
     }
   } else {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("MessageType error!");
+    oai::logger::logger_common::ngap().error("MessageType error!");
     return false;
   }
 
@@ -209,13 +208,13 @@ bool PduSessionResourceModifyResponseMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
                   pduSessionResourceModifyResponseIes->protocolIEs.list
                       .array[i]
                       ->value.choice.AMF_UE_NGAP_ID)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                .error("Decoded NGAP AMF_UE_NGAP_ID IE error");
+            oai::logger::logger_common::ngap().error(
+                "Decoded NGAP AMF_UE_NGAP_ID IE error");
             return false;
           }
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .error("Decoded NGAP AMF_UE_NGAP_ID IE error");
+          oai::logger::logger_common::ngap().error(
+              "Decoded NGAP AMF_UE_NGAP_ID IE error");
           return false;
         }
       } break;
@@ -229,13 +228,13 @@ bool PduSessionResourceModifyResponseMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
                   pduSessionResourceModifyResponseIes->protocolIEs.list
                       .array[i]
                       ->value.choice.RAN_UE_NGAP_ID)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                .error("Decoded NGAP RAN_UE_NGAP_ID IE error");
+            oai::logger::logger_common::ngap().error(
+                "Decoded NGAP RAN_UE_NGAP_ID IE error");
             return false;
           }
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .error("Decoded NGAP RAN_UE_NGAP_ID IE error");
+          oai::logger::logger_common::ngap().error(
+              "Decoded NGAP RAN_UE_NGAP_ID IE error");
           return false;
         }
       } break;
@@ -250,25 +249,23 @@ bool PduSessionResourceModifyResponseMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
                   pduSessionResourceModifyResponseIes->protocolIEs.list
                       .array[i]
                       ->value.choice.PDUSessionResourceModifyListModRes)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                .error(
-                    "Decoded NGAP PDUSessionResourceModifyListModRes IE error");
+            oai::logger::logger_common::ngap().error(
+                "Decoded NGAP PDUSessionResourceModifyListModRes IE error");
             return false;
           }
           m_PduSessionResourceModifyList =
               std::optional<PduSessionResourceModifyListModRes>(item_list);
 
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .error(
-                  "Decoded NGAP PDUSessionResourceModifyListModRes IE error");
+          oai::logger::logger_common::ngap().error(
+              "Decoded NGAP PDUSessionResourceModifyListModRes IE error");
 
           return false;
         }
       } break;
       default: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .error("Decoded NGAP Message PDU error");
+        oai::logger::logger_common::ngap().error(
+            "Decoded NGAP Message PDU error");
 
         return false;
       }

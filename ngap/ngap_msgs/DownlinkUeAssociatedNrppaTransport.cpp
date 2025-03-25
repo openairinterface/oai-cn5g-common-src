@@ -60,8 +60,7 @@ void DownlinkUeAssociatedNrppaTransportMsg::setAmfUeNgapId(const uint64_t& id) {
   int ret =
       NgapUeMessage::m_AmfUeNgapId.encode(ie->value.choice.AMF_UE_NGAP_ID);
   if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode AMF_UE_NGAP_ID IE error");
+    oai::logger::logger_common::ngap().error("Encode AMF_UE_NGAP_ID IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
@@ -69,8 +68,7 @@ void DownlinkUeAssociatedNrppaTransportMsg::setAmfUeNgapId(const uint64_t& id) {
   ret = ASN_SEQUENCE_ADD(
       &m_DownlinkUeAssociatedNrppaTransportIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode AMF_UE_NGAP_ID IE error");
+    oai::logger::logger_common::ngap().error("Encode AMF_UE_NGAP_ID IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -89,8 +87,7 @@ void DownlinkUeAssociatedNrppaTransportMsg::setRanUeNgapId(
   int ret =
       NgapUeMessage::m_RanUeNgapId.encode(ie->value.choice.RAN_UE_NGAP_ID);
   if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode RAN_UE_NGAP_ID IE error");
+    oai::logger::logger_common::ngap().error("Encode RAN_UE_NGAP_ID IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
@@ -98,8 +95,7 @@ void DownlinkUeAssociatedNrppaTransportMsg::setRanUeNgapId(
   ret = ASN_SEQUENCE_ADD(
       &m_DownlinkUeAssociatedNrppaTransportIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode RAN_UE_NGAP_ID IE error");
+    oai::logger::logger_common::ngap().error("Encode RAN_UE_NGAP_ID IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -119,13 +115,13 @@ bool DownlinkUeAssociatedNrppaTransportMsg::decode(
           &ngapPdu->choice.initiatingMessage->value.choice
                .DownlinkUEAssociatedNRPPaTransport;
     } else {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .error("Decode NGAP DownlinkUEAssociatedNRPPaTransport error");
+      oai::logger::logger_common::ngap().error(
+          "Decode NGAP DownlinkUEAssociatedNRPPaTransport error");
       return false;
     }
   } else {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Decode NGAP MessageType IE error");
+    oai::logger::logger_common::ngap().error(
+        "Decode NGAP MessageType IE error");
     return false;
   }
 
@@ -144,13 +140,13 @@ bool DownlinkUeAssociatedNrppaTransportMsg::decode(
                   m_DownlinkUeAssociatedNrppaTransportIes->protocolIEs.list
                       .array[i]
                       ->value.choice.AMF_UE_NGAP_ID)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                .error("Decode NGAP AMF_UE_NGAP_ID IE error");
+            oai::logger::logger_common::ngap().error(
+                "Decode NGAP AMF_UE_NGAP_ID IE error");
             return false;
           }
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .error("Decode NGAP AMF_UE_NGAP_ID IE error");
+          oai::logger::logger_common::ngap().error(
+              "Decode NGAP AMF_UE_NGAP_ID IE error");
           return false;
         }
       } break;
@@ -164,13 +160,13 @@ bool DownlinkUeAssociatedNrppaTransportMsg::decode(
                   m_DownlinkUeAssociatedNrppaTransportIes->protocolIEs.list
                       .array[i]
                       ->value.choice.RAN_UE_NGAP_ID)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                .error("Decode NGAP RAN_UE_NGAP_ID IE error");
+            oai::logger::logger_common::ngap().error(
+                "Decode NGAP RAN_UE_NGAP_ID IE error");
             return false;
           }
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .error("Decode NGAP RAN_UE_NGAP_ID IE error");
+          oai::logger::logger_common::ngap().error(
+              "Decode NGAP RAN_UE_NGAP_ID IE error");
           return false;
         }
       } break;
@@ -187,8 +183,8 @@ bool DownlinkUeAssociatedNrppaTransportMsg::decode(
                   ->value.choice.RoutingID,
               m_RoutingId);
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .error("Decode NGAP RoutingID IE error");
+          oai::logger::logger_common::ngap().error(
+              "Decode NGAP RoutingID IE error");
           return false;
         }
 
@@ -205,15 +201,15 @@ bool DownlinkUeAssociatedNrppaTransportMsg::decode(
                   ->value.choice.NRPPa_PDU,
               m_NrppaPdu);
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .error("Decode NGAP NRPPa PDU IE error");
+          oai::logger::logger_common::ngap().error(
+              "Decode NGAP NRPPa PDU IE error");
           return false;
         }
       } break;
 
       default: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .error("Decode NGAP message PDU error");
+        oai::logger::logger_common::ngap().error(
+            "Decode NGAP message PDU error");
         return false;
       }
     }
@@ -238,8 +234,7 @@ void DownlinkUeAssociatedNrppaTransportMsg::setRoutingId(const bstring& pdu) {
   int ret = ASN_SEQUENCE_ADD(
       &m_DownlinkUeAssociatedNrppaTransportIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode RoutingID IE error");
+    oai::logger::logger_common::ngap().error("Encode RoutingID IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -264,8 +259,7 @@ void DownlinkUeAssociatedNrppaTransportMsg::setNrppaPdu(const bstring& pdu) {
   int ret = ASN_SEQUENCE_ADD(
       &m_DownlinkUeAssociatedNrppaTransportIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode NRPPa_PDU IE error");
+    oai::logger::logger_common::ngap().error("Encode NRPPa_PDU IE error");
 }
 
 //------------------------------------------------------------------------------

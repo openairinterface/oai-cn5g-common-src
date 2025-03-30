@@ -39,7 +39,10 @@ class PlmnId {
   void get(std::string& mcc, std::string& mnc) const;
 
   void getMcc(std::string& mcc) const;
+  std::string getMcc() const;
+
   void getMnc(std::string& mnc) const;
+  std::string getMnc() const;
 
   bool encode(Ngap_PLMNIdentity_t&) const;
   bool decode(const Ngap_PLMNIdentity_t&);

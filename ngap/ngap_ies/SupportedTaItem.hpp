@@ -40,9 +40,11 @@ class SupportedTaItem {
 
   void setTac(const TAC& m_tac);
   void getTac(TAC& m_tac) const;
+  TAC getTac() const;
 
   void setBroadcastPlmnList(const std::vector<BroadcastPlmnItem>& list);
-  void getBroadcastPlmnList(std::vector<BroadcastPlmnItem>& list);
+  void getBroadcastPlmnList(std::vector<BroadcastPlmnItem>& list) const;
+  std::vector<BroadcastPlmnItem> getBroadcastPlmnList() const;
 
   bool encode(Ngap_SupportedTAItem_t& ta) const;
   bool decode(const Ngap_SupportedTAItem_t& ta);

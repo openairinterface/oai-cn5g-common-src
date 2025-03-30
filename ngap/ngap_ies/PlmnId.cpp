@@ -78,6 +78,12 @@ void PlmnId::getMcc(std::string& mcc) const {
   }
 }
 
+std::string PlmnId::getMcc() const {
+  std::string mcc = {};
+  getMcc(mcc);
+  return mcc;
+}
+
 //------------------------------------------------------------------------------
 void PlmnId::getMnc(std::string& mnc) const {
   int m_mnc = 0;
@@ -93,6 +99,12 @@ void PlmnId::getMnc(std::string& mnc) const {
   mnc = std::to_string(m_mnc);
 }
 
+//------------------------------------------------------------------------------
+std::string PlmnId::getMnc() const {
+  std::string mnc = {};
+  getMnc(mnc);
+  return mnc;
+}
 //------------------------------------------------------------------------------
 bool PlmnId::encode(Ngap_PLMNIdentity_t& plmn) const {
   plmn.size = 3;  // OCTET_STRING(SIZE(3))  9.3.3.5, 3gpp ts 38.413 V15.4.0

@@ -86,10 +86,14 @@ void SNssai::getSst(std::string& sst) const {
 }
 
 //------------------------------------------------------------------------------
-std::string SNssai::getSst() const {
+std::string SNssai::getSstStr() const {
   return std::to_string(m_Sst);
 }
 
+//------------------------------------------------------------------------------
+void SNssai::getSst(uint8_t& sst) const {
+  sst = m_Sst;
+}
 //------------------------------------------------------------------------------
 void SNssai::setSd(const std::string& sd_str) {
   snssai_t snssai;
@@ -129,6 +133,13 @@ std::string SNssai::getSd() const {
   return sd;
 }
 
+//------------------------------------------------------------------------------
+uint32_t SNssai::getSdInt() const {
+  if (m_Sd.has_value()) {
+    return m_Sd.value();
+  }
+  return SD_NO_VALUE;
+}
 //------------------------------------------------------------------------------
 bool SNssai::encode(Ngap_S_NSSAI_t& s_NSSAI) const {
   ngap_utils::int8_2_octet_string(m_Sst, s_NSSAI.sST);

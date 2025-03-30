@@ -40,9 +40,11 @@ class SNssai {
 
   void setSst(const std::string& sst);
   void getSst(std::string& sst) const;
-  std::string getSst() const;
 
   void setSst(const uint8_t& sst);
+  void getSst(uint8_t& sst) const;
+
+  std::string getSstStr() const;
 
   void setSd(const std::string& sd_str);
   bool getSd(std::string& sd) const;
@@ -50,6 +52,7 @@ class SNssai {
 
   void setSd(const uint32_t& sd);
   bool getSd(uint32_t& sd) const;
+  uint32_t getSdInt() const;
 
   bool encodeSd(Ngap_SD_t&) const;
   bool decodeSd(const Ngap_SD_t&);

@@ -29,18 +29,19 @@
 using namespace oai::nas;
 
 //------------------------------------------------------------------------------
-QosRule::QosRule() : length_(kQosRuleMinimumLength) {}
+QosRule::QosRule()
+    : length_(kQosRuleMinimumLength), segregation_(false), dqr_bit_(false) {}
 
 //------------------------------------------------------------------------------
 QosRule::~QosRule() {}
 
 //------------------------------------------------------------------------------
-uint16_t QosRule::GetLength() const {
+uint16_t QosRule::GetLengthIndicator() const {
   return length_;
 }
 
 //------------------------------------------------------------------------------
-void QosRule::SetLength() {
+void QosRule::SetLengthIndicator() {
   // Calculate the actual length
   length_ = 1;  // Rule Operation Code + DQR + Number of packet filters
   for (int i = 0; i < number_of_packet_filters_; i++) {
@@ -66,6 +67,12 @@ void QosRule::SetLength() {
 
   if (precedence_.has_value()) length_ += 1;
   if (segregation_ or qfi_.has_value()) length_ += 1;
+}
+
+//------------------------------------------------------------------------------
+uint16_t QosRule::GetIeLength() const {
+  return (
+      GetLengthIndicator() + 3);  // 1 for QoS rule ID, 2 for length of QoSRule
 }
 
 //------------------------------------------------------------------------------
@@ -131,7 +138,7 @@ void QosRule::SetPacketFilterModifyAndDeleteList(
     const std::vector<PacketFilterModifyAndDelete>& list) {
   pf_modify_and_delete_list_ =
       std::make_optional<std::vector<PacketFilterModifyAndDelete>>(list);
-  SetLength();
+  SetLengthIndicator();
 }
 
 //------------------------------------------------------------------------------
@@ -151,7 +158,7 @@ void QosRule::SetPacketFilterCreateAndModifyAndReplaceList(
   pf_create_and_modify_and_replace_list_ =
       std::make_optional<std::vector<PacketFilterCreateAndModifyAndReplace>>(
           list);
-  SetLength();
+  SetLengthIndicator();
 }
 
 //------------------------------------------------------------------------------
@@ -178,13 +185,13 @@ void QosRule::AddPacketFilterCreateAndModifyAndReplace(
         std::make_optional<std::vector<PacketFilterCreateAndModifyAndReplace>>(
             packet_filter_list);
   }
-  SetLength();
+  SetLengthIndicator();
 }
 
 //------------------------------------------------------------------------------
 void QosRule::SetPrecedence(uint8_t precedence) {
   precedence_ = std::make_optional<uint8_t>(precedence);
-  SetLength();
+  SetLengthIndicator();
 }
 
 //------------------------------------------------------------------------------
@@ -199,7 +206,7 @@ std::optional<uint8_t> QosRule::GetPrecedence() const {
 //------------------------------------------------------------------------------
 void QosRule::SetSegregation(bool segregation) {
   segregation_ = segregation;
-  SetLength();
+  SetLengthIndicator();
 }
 
 //------------------------------------------------------------------------------
@@ -215,7 +222,7 @@ bool QosRule::GetSegregation() const {
 //------------------------------------------------------------------------------
 void QosRule::SetQfi(uint8_t qfi) {
   qfi_ = qfi & 0x3f;  // 6 bits
-  SetLength();
+  SetLengthIndicator();
 }
 
 //------------------------------------------------------------------------------
@@ -247,7 +254,7 @@ int QosRule::Encode(uint8_t* buf, int len) const {
   ENCODE_U8(buf + encoded_size, qos_rule_id_, encoded_size);
 
   // Length
-  ENCODE_U16(buf + encoded_size, GetLength(), encoded_size);
+  ENCODE_U16(buf + encoded_size, GetLengthIndicator(), encoded_size);
 
   // Octet 7 - Rule operation code, DQR bit, Number of packet filters
   uint8_t octet_7 = ((rule_operation_code_ & 0x07) << 5) | (dqr_bit_ << 4) |

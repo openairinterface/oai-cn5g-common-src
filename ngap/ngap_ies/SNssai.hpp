@@ -43,6 +43,7 @@ class SNssai {
 
   void setSst(const uint8_t& sst);
   void getSst(uint8_t& sst) const;
+  uint8_t getSst() const;
 
   std::string getSstStr() const;
 

@@ -94,6 +94,12 @@ std::string SNssai::getSstStr() const {
 void SNssai::getSst(uint8_t& sst) const {
   sst = m_Sst;
 }
+
+//------------------------------------------------------------------------------
+uint8_t SNssai::getSst() const {
+  return m_Sst;
+}
+
 //------------------------------------------------------------------------------
 void SNssai::setSd(const std::string& sd_str) {
   snssai_t snssai;

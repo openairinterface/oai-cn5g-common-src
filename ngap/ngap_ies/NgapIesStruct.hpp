@@ -221,11 +221,6 @@ typedef struct {
 
 typedef struct {
   uint8_t pduSessionId;
-  S_Nssai sNssai;
-  OCTET_STRING_t pduSessionResourceSetupRequestTransfer;
-} PDUSessionResourceSetupItem_t;
-typedef struct {
-  uint8_t pduSessionId;
   OCTET_STRING_t handoverRequestAcknowledgeTransfer;
 } PDUSessionResourceAdmittedItem_t;
 

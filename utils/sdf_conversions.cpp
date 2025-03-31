@@ -80,6 +80,7 @@ sdf_conversions::sdf_filter sdf_conversions::sdf_filter::from_string(
       port_range range = port_range::from_string(split);
       if (range.use_port_range) {
         filter.src_port_ranges.push_back(range);
+        filter.default_filter = false;
         filter.filter_components++;
       }
     }
@@ -102,6 +103,7 @@ sdf_conversions::sdf_filter sdf_conversions::sdf_filter::from_string(
       port_range range = port_range::from_string(split);
       if (range.use_port_range) {
         filter.dst_port_ranges.push_back(range);
+        filter.default_filter = false;
         filter.filter_components++;
       }
     }

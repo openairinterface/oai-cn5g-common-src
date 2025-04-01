@@ -68,17 +68,6 @@ typedef struct S_Nssai_s {
   }
 } S_Nssai;
 
-typedef struct PlmnSliceSupport_s {
-  std::string mcc;
-  std::string mnc;
-  std::vector<S_Nssai> sliceList;
-} PlmnSliceSupport_t;
-
-typedef struct SupportedTaItem_s {
-  uint32_t tac;
-  std::vector<PlmnSliceSupport_t> plmnSliceSupportList;
-} SupportedTaItem_t;
-
 typedef struct GuamiItem_s {
   std::string mcc;
   std::string mnc;

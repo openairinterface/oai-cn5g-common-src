@@ -19,43 +19,34 @@
  *      contact@openairinterface.org
  */
 
-#ifndef _PLMN_SUPPORT_ITEM_H_
-#define _PLMN_SUPPORT_ITEM_H_
+#ifndef _SLICE_SUPPORT_LIST_H_
+#define _SLICE_SUPPORT_LIST_H_
 
 #include <vector>
 
-#include "PlmnId.hpp"
 #include "SNssai.hpp"
-#include "SliceSupportList.hpp"
 
 extern "C" {
-#include "Ngap_PLMNSupportItem.h"
+#include "Ngap_SliceSupportList.h"
+#include "Ngap_SliceSupportItem.h"
 }
 
 namespace oai::ngap {
 
-class PlmnSupportItem {
+class SliceSupportList {
  public:
-  PlmnSupportItem();
-  virtual ~PlmnSupportItem();
+  SliceSupportList();
+  virtual ~SliceSupportList();
 
-  void set(const PlmnId& plmnId, const std::vector<SNssai>& sNssais);
-  void get(PlmnId& plmnId, std::vector<SNssai>& sNssais) const;
+  void setSliceSupportItems(const std::vector<SNssai>& items);
+  void getSliceSupportItems(std::vector<SNssai>& items) const;
 
-  void setPlmn(const PlmnId& plmnId);
-  void getPlmn(PlmnId& plmnId) const;
-
-  void setSliceSupportList(const SliceSupportList& sliceSupportList);
-  void getSliceSupportList(SliceSupportList& sliceSupportList) const;
-
-  bool encode(Ngap_PLMNSupportItem_t&) const;
-  bool decode(const Ngap_PLMNSupportItem_t&);
+  bool encode(Ngap_SliceSupportList_t& SliceSupportList) const;
+  bool decode(const Ngap_SliceSupportList_t& SliceSupportList);
 
  private:
-  PlmnId m_PlmnId;                      // Mandatory
-  SliceSupportList m_SliceSupportList;  // Mandatory
+  std::vector<SNssai> m_SliceSupportItems;
 };
-
 }  // namespace oai::ngap
 
 #endif

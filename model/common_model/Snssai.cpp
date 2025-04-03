@@ -108,7 +108,8 @@ std::string Snssai::getSd() const {
   return m_Sd;
 }
 void Snssai::setSd(std::string const& value) {
-  m_Sd      = value;
+  m_Sd = value;
+  parse_sd_int_with_hex();
   m_SdIsSet = true;
 }
 

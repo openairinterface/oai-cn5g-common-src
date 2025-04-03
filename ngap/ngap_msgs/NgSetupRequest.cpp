@@ -304,9 +304,12 @@ bool NgSetupRequestMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
             }
           } break;
           default: {
-            oai::logger::logger_common::ngap().error(
-                "Decoded NGAP message PDU error");
-            return false;
+            if (m_NgSetupRequestIes->protocolIEs.list.array[i]->criticality !=
+                Ngap_Criticality_ignore) {
+              oai::logger::logger_common::ngap().error(
+                  "Decoded NGAP message PDU error");
+              return false;
+            }
           }
         }
       }

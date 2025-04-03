@@ -89,6 +89,7 @@ void from_json(const nlohmann::json& j, Snssai& o) {
   if (j.find("sd") != j.end()) {
     o.m_SdIsSet = true;
     j.at("sd").get_to(o.m_Sd);
+    o.parse_sd_int_with_hex();
   } else {
     // TODO this is not strictly standard-compliant
     o.m_Sd      = SD_DEFAULT_VALUE;

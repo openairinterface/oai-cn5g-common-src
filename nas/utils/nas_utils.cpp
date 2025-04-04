@@ -43,6 +43,7 @@ int nas_utils::encodeMccMnc2Buffer(
   int mcc          = oai::utils::utils::fromString<int>(mcc_str);
   int mnc          = oai::utils::utils::fromString<int>(mnc_str);
 
+  // MCC digit 2, MCC digit 1
   value = (0x0f & (mcc / 100)) | ((0x0f & ((mcc % 100) / 10)) << 4);
   ENCODE_U8(buf + encoded_size, value, encoded_size);
 
@@ -51,18 +52,22 @@ int nas_utils::encodeMccMnc2Buffer(
   if (!(mnc / 100)) {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .debug("Encoding MNC 2 digits");
+    // bit 5-8 is coded as 1111, MCC digit 3
     value = (0x0f & (mcc % 10)) | 0xf0;
     ENCODE_U8(buf + encoded_size, value, encoded_size);
 
+    // MNC digit 2, MNC digit 1
     value = (0x0f & ((mnc % 100) / 10)) | ((0x0f & (mnc % 10)) << 4);
     ENCODE_U8(buf + encoded_size, value, encoded_size);
 
   } else {
     oai::logger::logger_registry::get_logger(LOGGER_COMMON)
         .debug("Encoding MNC 3 digits");
+    // MNC digit 3, MCC digit 3
     value = (0x0f & (mcc % 10)) | ((0x0f & (mnc % 10)) << 4);
     ENCODE_U8(buf + encoded_size, value, encoded_size);
 
+    // MNC digit 2, MNC digit 1
     value = ((0x0f & ((mnc % 100) / 10)) << 4) | (0x0f & (mnc / 100));
     ENCODE_U8(buf + encoded_size, value, encoded_size);
   }
@@ -97,16 +102,20 @@ int nas_utils::decodeMccMncFromBuffer(
   if ((octet & 0xf0) == 0xf0) {
     DECODE_U8(buf + decoded_size, octet, decoded_size);
     mnc += ((octet & 0x0f) * 10 + ((octet & 0xf0) >> 4));
+    mnc_str = std::to_string(mnc);
+    if (mnc < 10) {
+      mnc_str = "0" + mnc_str;
+    }
   } else {
     mnc += ((octet & 0xf0) >> 4);
     DECODE_U8(buf + decoded_size, octet, decoded_size);
-
     mnc += ((octet & 0x0f) * 100 + ((octet & 0xf0) >> 4) * 10);
-  }
-
-  mnc_str = std::to_string(mnc);
-  if (mnc < 10) {
-    mnc_str = "0" + mnc_str;
+    mnc_str = std::to_string(mnc);
+    if (mnc < 10) {
+      mnc_str = "00" + mnc_str;
+    } else if (mnc < 100) {
+      mnc_str = "0" + mnc_str;
+    }
   }
 
   mcc_str = std::to_string(mcc);

@@ -83,14 +83,20 @@ void PlmnId::getMnc(std::string& mnc) const {
   int m_mnc = 0;
   if (m_MncDigit3 == 0xf) {
     m_mnc = m_MncDigit1 * 10 + m_MncDigit2;
+    mnc   = std::to_string(m_mnc);
     if (m_MncDigit1 == 0) {
-      mnc = "0" + std::to_string(m_mnc);
-      return;
+      mnc = "0" + mnc;
     }
   } else {
     m_mnc = m_MncDigit3 * 100 + m_MncDigit1 * 10 + m_MncDigit2;
+    mnc   = std::to_string(m_mnc);
+    if (m_MncDigit3 == 0) {
+      if (m_MncDigit1 == 0)
+        mnc = "00" + mnc;
+      else
+        mnc = "0" + mnc;
+    }
   }
-  mnc = std::to_string(m_mnc);
 }
 
 //------------------------------------------------------------------------------

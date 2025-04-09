@@ -35,10 +35,6 @@ CoreNetworkAssistanceInformationForInactive::
 }
 
 //------------------------------------------------------------------------------
-CoreNetworkAssistanceInformationForInactive::
-    ~CoreNetworkAssistanceInformationForInactive() {}
-
-//------------------------------------------------------------------------------
 void CoreNetworkAssistanceInformationForInactive::set(
     const UeIdentityIndexValue& ueIdentityIndexValue,
     const DefaultPagingDrx& pagingDrx,

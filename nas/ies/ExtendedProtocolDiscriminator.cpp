@@ -22,7 +22,7 @@
 #include "ExtendedProtocolDiscriminator.hpp"
 
 #include "3gpp_24.501.hpp"
-#include "common_defs.h"
+#include "common_defs.hpp"
 #include "logger_base.hpp"
 
 using namespace oai::nas;
@@ -32,16 +32,15 @@ ExtendedProtocolDiscriminator::ExtendedProtocolDiscriminator(uint8_t epd)
     : NasIe(), epd_(epd) {}
 
 //------------------------------------------------------------------------------
-ExtendedProtocolDiscriminator::~ExtendedProtocolDiscriminator() {}
+// ExtendedProtocolDiscriminator::~ExtendedProtocolDiscriminator() {}
 
 //------------------------------------------------------------------------------
 bool ExtendedProtocolDiscriminator::Validate(int len) const {
   if (len < kExtendedProtocolDiscriminatorLength) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this IE (%d "
-            "octet)",
-            kExtendedProtocolDiscriminatorLength);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the minimum length of this IE (%d "
+        "octet)",
+        kExtendedProtocolDiscriminatorLength);
     return false;
   }
   return true;

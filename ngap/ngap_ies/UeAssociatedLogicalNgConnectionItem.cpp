@@ -46,8 +46,7 @@ bool UeAssociatedLogicalNgConnectionItem::setAmfUeNgapId(const uint64_t& id) {
 
   int ret = m_AmfUeNgapId.value().encode(ie->value.choice.AMF_UE_NGAP_ID);
   if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode AMF_UE_NGAP_ID IE error");
+    oai::logger::logger_common::ngap().error("Encode AMF_UE_NGAP_ID IE error");
   }
   oai::utils::utils::free_wrapper((void**) &ie);
   return true;
@@ -76,8 +75,7 @@ void UeAssociatedLogicalNgConnectionItem::setRanUeNgapId(
 
   int ret = m_RanUeNgapId.value().encode(ie->value.choice.RAN_UE_NGAP_ID);
   if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode RAN_UE_NGAP_ID IE error");
+    oai::logger::logger_common::ngap().error("Encode RAN_UE_NGAP_ID IE error");
   }
   oai::utils::utils::free_wrapper((void**) &ie);
   return;
@@ -120,8 +118,8 @@ bool UeAssociatedLogicalNgConnectionItem::decode(
   if (item.aMF_UE_NGAP_ID) {
     AmfUeNgapId tmp = {};
     if (!tmp.decode(*item.aMF_UE_NGAP_ID)) {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .error("Decoded NGAP AmfUeNgapId IE error");
+      oai::logger::logger_common::ngap().error(
+          "Decoded NGAP AmfUeNgapId IE error");
       return false;
     }
     m_AmfUeNgapId = std::optional<AmfUeNgapId>(tmp);
@@ -130,8 +128,8 @@ bool UeAssociatedLogicalNgConnectionItem::decode(
   if (item.rAN_UE_NGAP_ID) {
     RanUeNgapId tmp = {};
     if (!tmp.decode(*item.rAN_UE_NGAP_ID)) {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .error("Decoded NGAP RAN_UE_NGAP_ID IE error");
+      oai::logger::logger_common::ngap().error(
+          "Decoded NGAP RAN_UE_NGAP_ID IE error");
       return false;
     }
     m_RanUeNgapId = std::optional<RanUeNgapId>(tmp);

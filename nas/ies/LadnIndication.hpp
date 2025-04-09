@@ -38,7 +38,7 @@ class LadnIndication : public Type6NasIe {
  public:
   LadnIndication();
   LadnIndication(const std::vector<bstring>& ladn);
-  ~LadnIndication();
+  virtual ~LadnIndication();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

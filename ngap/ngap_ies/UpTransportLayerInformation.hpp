@@ -52,8 +52,6 @@ class UpTransportLayerInformation {
   bool decode(const Ngap_UPTransportLayerInformation_t& upTransportLayerInfo);
 
  private:
-  TransportLayerAddress m_TransportLayerAddress;  // TODO: should be removed
-  GtpTeid m_GtpTeid;                              // TODO: should be removed
   std::optional<GtpTunnel> m_GtpTunnel;
 };
 

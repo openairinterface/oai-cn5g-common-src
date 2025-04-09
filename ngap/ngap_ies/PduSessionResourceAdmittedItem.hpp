@@ -23,7 +23,7 @@
 #define PDU_SESSION_RESOURCE_ADMITTED_ITEM_H_
 
 #include "PduSessionId.hpp"
-#include "PduSessionResourceHandoverRequestAckTransfer.hpp"
+#include "HandoverRequestAcknowledgeTransfer.hpp"
 
 extern "C" {
 #include "Ngap_PDUSessionResourceAdmittedItem.h"

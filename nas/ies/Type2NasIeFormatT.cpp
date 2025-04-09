@@ -22,7 +22,7 @@
 #include "Type2NasIeFormatT.hpp"
 
 #include "3gpp_24.501.hpp"
-#include "common_defs.h"
+#include "common_defs.hpp"
 #include "logger_base.hpp"
 
 using namespace oai::nas;
@@ -42,11 +42,10 @@ Type2NasIeFormatT::~Type2NasIeFormatT() {}
 //------------------------------------------------------------------------------
 bool Type2NasIeFormatT::Validate(int len) const {
   if (len < kType2NasIeFormatTLength) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this IE (%d "
-            "octet)",
-            kType2NasIeFormatTLength);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the minimum length of this IE (%d "
+        "octet)",
+        kType2NasIeFormatTLength);
     return false;
   }
   return true;

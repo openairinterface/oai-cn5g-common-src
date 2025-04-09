@@ -23,7 +23,7 @@
 
 #include "3gpp_24.501.hpp"
 #include "IeConst.hpp"
-#include "common_defs.h"
+#include "common_defs.hpp"
 #include "logger_base.hpp"
 
 using namespace oai::nas;
@@ -63,16 +63,14 @@ void LadnInformation::Add(const Ladn& value) {
 
 //------------------------------------------------------------------------------
 int LadnInformation::Encode(uint8_t* buf, int len) const {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Encoding %s", GetIeName().c_str());
 
   int ie_len = GetIeLength();
 
   if (len < ie_len) {  // Length of the content + IEI/Len
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Size of the buffer is not enough to store this IE (IE len %d)",
-            ie_len);
+    oai::logger::logger_common::nas().error(
+        "Size of the buffer is not enough to store this IE (IE len %d)",
+        ie_len);
     return KEncodeDecodeError;
   }
 
@@ -95,15 +93,14 @@ int LadnInformation::Encode(uint8_t* buf, int len) const {
     int encoded_len_ie = 0;
     ENCODE_U16(buf + len_pos, encoded_size - GetHeaderLength(), encoded_len_ie);
   */
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
 int LadnInformation::Decode(const uint8_t* const buf, int len, bool is_iei) {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoding EPS_NAS_Message_Container");
+  oai::logger::logger_common::nas().debug("Decoding EPS_NAS_Message_Container");
   int decoded_size = 0;
 
   // IEI and Length
@@ -126,13 +123,13 @@ int LadnInformation::Decode(const uint8_t* const buf, int len, bool is_iei) {
 
     for (int i = 0; i < LADN.size(); i++) {
       for (int j = 0; j < blength(LADN.at(i)); j++) {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON).debug(
+        oai::logger::logger_common::nas().debug(
             "Decoded LadnInformation value (0x%x)",
             (uint8_t) LADN.at(i)->data[j]);
       }
     }
   */
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded EPS_NAS_Message_Container (len %d)", decoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Decoded EPS_NAS_Message_Container (len %d)", decoded_size);
   return decoded_size;
 }

@@ -34,7 +34,7 @@ class Non3gppNwProvidedPolicies : public Type1NasIeFormatTv {
  public:
   Non3gppNwProvidedPolicies();
   Non3gppNwProvidedPolicies(uint8_t value);
-  ~Non3gppNwProvidedPolicies();
+  virtual ~Non3gppNwProvidedPolicies();
 
   static std::string GetIeName() { return kNon3gppNwProvidedPoliciesIeName; }
 

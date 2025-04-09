@@ -37,7 +37,7 @@ class UplinkDataStatus : public Type4NasIe {
  public:
   UplinkDataStatus();
   UplinkDataStatus(uint16_t value);
-  ~UplinkDataStatus();
+  virtual ~UplinkDataStatus();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

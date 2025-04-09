@@ -22,7 +22,7 @@
 #include "SecurityHeaderType.hpp"
 
 #include "3gpp_24.501.hpp"
-#include "common_defs.h"
+#include "common_defs.hpp"
 #include "logger_base.hpp"
 
 using namespace oai::nas;
@@ -40,16 +40,15 @@ SecurityHeaderType::SecurityHeaderType(uint8_t secu_header_type) : NasIe() {
 }
 
 //------------------------------------------------------------------------------
-SecurityHeaderType::~SecurityHeaderType() {}
+// SecurityHeaderType::~SecurityHeaderType() {}
 
 //------------------------------------------------------------------------------
 bool SecurityHeaderType::Validate(int len) const {
   if (len < kSecurityHeaderTypeLength) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this IE (%d "
-            "octet)",
-            kSecurityHeaderTypeLength);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the minimum length of this IE (%d "
+        "octet)",
+        kSecurityHeaderTypeLength);
     return false;
   }
   return true;

@@ -22,6 +22,12 @@
 #ifndef _ADDITIONAL_INFORMATION_H_
 #define _ADDITIONAL_INFORMATION_H_
 
+extern "C" {
+#include "TLVDecoder.h"
+#include "TLVEncoder.h"
+#include "bstrlib.h"
+}
+
 #include "Type4NasIe.hpp"
 
 constexpr uint8_t kAdditionalInformationMinimumLength = 3;
@@ -37,7 +43,7 @@ class AdditionalInformation : public Type4NasIe {
  public:
   AdditionalInformation();
   AdditionalInformation(const bstring& value);
-  ~AdditionalInformation();
+  virtual ~AdditionalInformation();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

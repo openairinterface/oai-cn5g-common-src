@@ -30,7 +30,7 @@ namespace oai::ngap {
 class CountValueForPdcpSn12 {
  public:
   CountValueForPdcpSn12();
-  virtual ~CountValueForPdcpSn12();
+  virtual ~CountValueForPdcpSn12(){};
 
   void set(const long& pDCP, const long& hfn_PDCP);
   void get(long& pDCP, long& hFN_PDCP) const;

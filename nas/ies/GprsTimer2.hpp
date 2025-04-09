@@ -35,7 +35,7 @@ class GprsTimer2 : public Type4NasIe {
  public:
   GprsTimer2(uint8_t iei);
   GprsTimer2(uint8_t iei, uint8_t value);
-  ~GprsTimer2();
+  virtual ~GprsTimer2() = default;
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

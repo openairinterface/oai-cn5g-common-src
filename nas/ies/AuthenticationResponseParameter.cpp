@@ -62,8 +62,7 @@ void AuthenticationResponseParameter::GetValue(bstring& para) const {
 
 //------------------------------------------------------------------------------
 int AuthenticationResponseParameter::Encode(uint8_t* buf, int len) const {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Encoding %s", GetIeName().c_str());
 
   int encoded_size = 0;
   // Validate the buffer's length and Encode IEI/Length
@@ -76,8 +75,8 @@ int AuthenticationResponseParameter::Encode(uint8_t* buf, int len) const {
       res_or_res_star_, (buf + encoded_size), len - encoded_size);
   encoded_size += size;
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
   return encoded_size;
 }
 
@@ -85,18 +84,16 @@ int AuthenticationResponseParameter::Encode(uint8_t* buf, int len) const {
 int AuthenticationResponseParameter::Decode(
     const uint8_t* const buf, int len, bool is_iei) {
   if (len < kAuthenticationResponseParameterMinimumLength) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this IE (%d "
-            "octet)",
-            kAuthenticationResponseParameterMinimumLength);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the minimum length of this IE (%d "
+        "octet)",
+        kAuthenticationResponseParameterMinimumLength);
     return KEncodeDecodeError;
   }
 
   uint8_t decoded_size = 0;
   uint8_t octet        = 0;
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Decoding %s", GetIeName().c_str());
 
   // IEI and Length
   int decoded_header_size = Type4NasIe::Decode(buf + decoded_size, len, is_iei);
@@ -110,11 +107,11 @@ int AuthenticationResponseParameter::Decode(
   decoded_size += ie_len;
 
   for (int i = 0; i < ie_len; i++) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .debug("Decoded value 0x%x", (uint8_t) res_or_res_star_->data[i]);
+    oai::logger::logger_common::nas().debug(
+        "Decoded value 0x%x", (uint8_t) res_or_res_star_->data[i]);
   }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
   return decoded_size;
 }

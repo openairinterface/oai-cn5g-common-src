@@ -33,7 +33,7 @@ class NssaiInclusionMode : public Type1NasIeFormatTv {
  public:
   NssaiInclusionMode();
   NssaiInclusionMode(uint8_t value);
-  ~NssaiInclusionMode();
+  virtual ~NssaiInclusionMode();
 
   static std::string GetIeName() { return kNssaiInclusionModeIeName; }
 

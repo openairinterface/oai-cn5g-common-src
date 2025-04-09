@@ -32,7 +32,7 @@ class MaPduSessionInformation : public Type1NasIeFormatTv {
  public:
   MaPduSessionInformation();
   MaPduSessionInformation(uint8_t value);
-  ~MaPduSessionInformation();
+  virtual ~MaPduSessionInformation();
 
   static std::string GetIeName() { return kMaPduSessionInformationIeName; }
 

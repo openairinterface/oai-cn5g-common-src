@@ -37,7 +37,7 @@ class PduSessionReactivationResult : public Type4NasIe {
  public:
   PduSessionReactivationResult();
   PduSessionReactivationResult(uint16_t value);
-  ~PduSessionReactivationResult();
+  virtual ~PduSessionReactivationResult() = default;
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

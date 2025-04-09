@@ -63,8 +63,7 @@ void PduSessionResourceReleaseCommandMsg::setAmfUeNgapId(const uint64_t& id) {
   int ret =
       NgapUeMessage::m_AmfUeNgapId.encode(ie->value.choice.AMF_UE_NGAP_ID);
   if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .warn("Encode AMF_UE_NGAP_ID IE error");
+    oai::logger::logger_common::ngap().warn("Encode AMF_UE_NGAP_ID IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
@@ -72,8 +71,7 @@ void PduSessionResourceReleaseCommandMsg::setAmfUeNgapId(const uint64_t& id) {
   ret = ASN_SEQUENCE_ADD(
       &m_PduSessionResourceReleaseCommandIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .warn("Encode AMF_UE_NGAP_ID IE error");
+    oai::logger::logger_common::ngap().warn("Encode AMF_UE_NGAP_ID IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -92,8 +90,7 @@ void PduSessionResourceReleaseCommandMsg::setRanUeNgapId(
   int ret =
       NgapUeMessage::m_RanUeNgapId.encode(ie->value.choice.RAN_UE_NGAP_ID);
   if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .warn("Encode RAN_UE_NGAP_ID IE error");
+    oai::logger::logger_common::ngap().warn("Encode RAN_UE_NGAP_ID IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
@@ -101,8 +98,7 @@ void PduSessionResourceReleaseCommandMsg::setRanUeNgapId(
   ret = ASN_SEQUENCE_ADD(
       &m_PduSessionResourceReleaseCommandIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .warn("Encode RAN_UE_NGAP_ID IE error");
+    oai::logger::logger_common::ngap().warn("Encode RAN_UE_NGAP_ID IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -123,8 +119,8 @@ void PduSessionResourceReleaseCommandMsg::setRanPagingPriority(
   int ret =
       m_RanPagingPriority.value().encode(ie->value.choice.RANPagingPriority);
   if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .warn("Encode RANPagingPriority IE error");
+    oai::logger::logger_common::ngap().warn(
+        "Encode RANPagingPriority IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
@@ -132,8 +128,8 @@ void PduSessionResourceReleaseCommandMsg::setRanPagingPriority(
   ret = ASN_SEQUENCE_ADD(
       &m_PduSessionResourceReleaseCommandIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .warn("Encode RANPagingPriority IE error");
+    oai::logger::logger_common::ngap().warn(
+        "Encode RANPagingPriority IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -160,8 +156,7 @@ void PduSessionResourceReleaseCommandMsg::setNasPdu(const bstring& pdu) {
 
   int ret = m_NasPdu.value().encode(ie->value.choice.NAS_PDU);
   if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .warn("encode NAS_PDU IE error");
+    oai::logger::logger_common::ngap().warn("encode NAS_PDU IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
@@ -169,8 +164,7 @@ void PduSessionResourceReleaseCommandMsg::setNasPdu(const bstring& pdu) {
   ret = ASN_SEQUENCE_ADD(
       &m_PduSessionResourceReleaseCommandIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .warn("Encode NAS_PDU IE error");
+    oai::logger::logger_common::ngap().warn("Encode NAS_PDU IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -207,16 +201,16 @@ void PduSessionResourceReleaseCommandMsg::setPduSessionResourceToReleaseList(
   int ret = m_PduSessionResourceToReleaseList.encode(
       ie->value.choice.PDUSessionResourceToReleaseListRelCmd);
   if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .warn("Encode PDUSessionResourceToReleaseListRelCmd IE error");
+    oai::logger::logger_common::ngap().warn(
+        "Encode PDUSessionResourceToReleaseListRelCmd IE error");
     return;
   }
 
   ret = ASN_SEQUENCE_ADD(
       &m_PduSessionResourceReleaseCommandIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .warn("Encode PDUSessionResourceToReleaseListRelCmd IE error");
+    oai::logger::logger_common::ngap().warn(
+        "Encode PDUSessionResourceToReleaseListRelCmd IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -254,13 +248,12 @@ bool PduSessionResourceReleaseCommandMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           &ngapPdu->choice.initiatingMessage->value.choice
                .PDUSessionResourceReleaseCommand;
     } else {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .warn("Check PDUSessionResourceReleaseCommand message error!");
+      oai::logger::logger_common::ngap().warn(
+          "Check PDUSessionResourceReleaseCommand message error!");
       return false;
     }
   } else {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .warn("MessageType error");
+    oai::logger::logger_common::ngap().warn("MessageType error");
     return false;
   }
 
@@ -278,13 +271,13 @@ bool PduSessionResourceReleaseCommandMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
                   m_PduSessionResourceReleaseCommandIes->protocolIEs.list
                       .array[i]
                       ->value.choice.AMF_UE_NGAP_ID)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                .warn("Decoded NGAP AMF_UE_NGAP_ID IE error");
+            oai::logger::logger_common::ngap().warn(
+                "Decoded NGAP AMF_UE_NGAP_ID IE error");
             return false;
           }
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .warn("Decoded NGAP AMF_UE_NGAP_ID IE error");
+          oai::logger::logger_common::ngap().warn(
+              "Decoded NGAP AMF_UE_NGAP_ID IE error");
           return false;
         }
       } break;
@@ -299,13 +292,13 @@ bool PduSessionResourceReleaseCommandMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
                   m_PduSessionResourceReleaseCommandIes->protocolIEs.list
                       .array[i]
                       ->value.choice.RAN_UE_NGAP_ID)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                .warn("Decoded NGAP RAN_UE_NGAP_ID IE error");
+            oai::logger::logger_common::ngap().warn(
+                "Decoded NGAP RAN_UE_NGAP_ID IE error");
             return false;
           }
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .warn("Decoded NGAP RAN_UE_NGAP_ID IE error");
+          oai::logger::logger_common::ngap().warn(
+              "Decoded NGAP RAN_UE_NGAP_ID IE error");
           return false;
         }
       } break;
@@ -321,14 +314,14 @@ bool PduSessionResourceReleaseCommandMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
                   m_PduSessionResourceReleaseCommandIes->protocolIEs.list
                       .array[i]
                       ->value.choice.RANPagingPriority)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                .warn("Decoded NGAP RANPagingPriority IE error");
+            oai::logger::logger_common::ngap().warn(
+                "Decoded NGAP RANPagingPriority IE error");
             return false;
           }
           m_RanPagingPriority = std::optional<RanPagingPriority>(tmp);
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .warn("Decoded NGAP RANPagingPriority IE error");
+          oai::logger::logger_common::ngap().warn(
+              "Decoded NGAP RANPagingPriority IE error");
           return false;
         }
       } break;
@@ -344,14 +337,14 @@ bool PduSessionResourceReleaseCommandMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
                   m_PduSessionResourceReleaseCommandIes->protocolIEs.list
                       .array[i]
                       ->value.choice.NAS_PDU)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                .warn("Decoded NGAP NAS_PDU IE error");
+            oai::logger::logger_common::ngap().warn(
+                "Decoded NGAP NAS_PDU IE error");
             return false;
           }
           m_NasPdu = std::optional<NasPdu>(tmp);
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .warn("Decoded NGAP NAS_PDU IE error");
+          oai::logger::logger_common::ngap().warn(
+              "Decoded NGAP NAS_PDU IE error");
           return false;
         }
       } break;
@@ -366,23 +359,21 @@ bool PduSessionResourceReleaseCommandMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
                   m_PduSessionResourceReleaseCommandIes->protocolIEs.list
                       .array[i]
                       ->value.choice.PDUSessionResourceToReleaseListRelCmd)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                .warn(
-                    "Decoded NGAP PDUSessionResourceToReleaseListRelCmd IE "
-                    "error");
+            oai::logger::logger_common::ngap().warn(
+                "Decoded NGAP PDUSessionResourceToReleaseListRelCmd IE "
+                "error");
             return false;
           }
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .warn(
-                  "Decoded NGAP PDUSessionResourceToReleaseListRelCmd IE "
-                  "error");
+          oai::logger::logger_common::ngap().warn(
+              "Decoded NGAP PDUSessionResourceToReleaseListRelCmd IE "
+              "error");
           return false;
         }
       } break;
       default: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .warn("Decoded NGAP message PDU error");
+        oai::logger::logger_common::ngap().warn(
+            "Decoded NGAP message PDU error");
         return false;
       }
     }

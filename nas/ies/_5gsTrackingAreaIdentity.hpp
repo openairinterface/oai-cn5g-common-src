@@ -35,7 +35,7 @@ class _5gsTrackingAreaIdentity : public Type3NasIe {
   _5gsTrackingAreaIdentity(uint8_t iei) = delete;
   _5gsTrackingAreaIdentity(
       const std::string& mcc, const std::string& mnc, uint32_t tac);
-  ~_5gsTrackingAreaIdentity();
+  virtual ~_5gsTrackingAreaIdentity();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = true);

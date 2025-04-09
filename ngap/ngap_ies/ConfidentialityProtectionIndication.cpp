@@ -29,9 +29,6 @@ ConfidentialityProtectionIndication::ConfidentialityProtectionIndication() {
 }
 
 //------------------------------------------------------------------------------
-ConfidentialityProtectionIndication::~ConfidentialityProtectionIndication() {}
-
-//------------------------------------------------------------------------------
 void ConfidentialityProtectionIndication::set(
     const e_Ngap_ConfidentialityProtectionIndication& indication) {
   m_Indication = indication;

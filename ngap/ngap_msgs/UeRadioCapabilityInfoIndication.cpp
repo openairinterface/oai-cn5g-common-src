@@ -62,8 +62,8 @@ void UeRadioCapabilityInfoIndicationMsg::setAmfUeNgapId(const uint64_t& id) {
   int ret =
       NgapUeMessage::m_AmfUeNgapId.encode(ie->value.choice.AMF_UE_NGAP_ID);
   if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode NGAP AMF_UE_NGAP_ID IE error");
+    oai::logger::logger_common::ngap().error(
+        "Encode NGAP AMF_UE_NGAP_ID IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
@@ -71,8 +71,8 @@ void UeRadioCapabilityInfoIndicationMsg::setAmfUeNgapId(const uint64_t& id) {
   ret = ASN_SEQUENCE_ADD(
       &m_UeRadioCapabilityInfoIndicationIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode NGAP AMF_UE_NGAP_ID IE error");
+    oai::logger::logger_common::ngap().error(
+        "Encode NGAP AMF_UE_NGAP_ID IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -91,8 +91,8 @@ void UeRadioCapabilityInfoIndicationMsg::setRanUeNgapId(
   int ret =
       NgapUeMessage::m_RanUeNgapId.encode(ie->value.choice.RAN_UE_NGAP_ID);
   if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode NGAP RAN_UE_NGAP_ID IE error");
+    oai::logger::logger_common::ngap().error(
+        "Encode NGAP RAN_UE_NGAP_ID IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
@@ -100,8 +100,8 @@ void UeRadioCapabilityInfoIndicationMsg::setRanUeNgapId(
   ret = ASN_SEQUENCE_ADD(
       &m_UeRadioCapabilityInfoIndicationIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode NGAP RAN_UE_NGAP_ID IE error");
+    oai::logger::logger_common::ngap().error(
+        "Encode NGAP RAN_UE_NGAP_ID IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -118,8 +118,8 @@ void UeRadioCapabilityInfoIndicationMsg::setUeRadioCapability(
       Ngap_UERadioCapabilityInfoIndicationIEs__value_PR_UERadioCapability;
 
   if (!m_UeRadioCapability.encode(ie->value.choice.UERadioCapability)) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode NGAP UERadioCapability IE error");
+    oai::logger::logger_common::ngap().error(
+        "Encode NGAP UERadioCapability IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
@@ -127,8 +127,8 @@ void UeRadioCapabilityInfoIndicationMsg::setUeRadioCapability(
   int ret = ASN_SEQUENCE_ADD(
       &m_UeRadioCapabilityInfoIndicationIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode NGAP UERadioCapability IE error");
+    oai::logger::logger_common::ngap().error(
+        "Encode NGAP UERadioCapability IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -166,8 +166,8 @@ void UeRadioCapabilityInfoIndicationMsg::setUeRadioCapabilityForPaging(
   int ret = m_UeRadioCapabilityForPaging.value().encode(
       ie->value.choice.UERadioCapabilityForPaging);
   if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode NGAP UERadioCapabilityForPaging IE error");
+    oai::logger::logger_common::ngap().error(
+        "Encode NGAP UERadioCapabilityForPaging IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
@@ -175,8 +175,8 @@ void UeRadioCapabilityInfoIndicationMsg::setUeRadioCapabilityForPaging(
   ret = ASN_SEQUENCE_ADD(
       &m_UeRadioCapabilityInfoIndicationIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode NGAP UERadioCapabilityForPaging IE error");
+    oai::logger::logger_common::ngap().error(
+        "Encode NGAP UERadioCapabilityForPaging IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -207,13 +207,12 @@ bool UeRadioCapabilityInfoIndicationMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           &ngapPdu->choice.initiatingMessage->value.choice
                .UERadioCapabilityInfoIndication;
     } else {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .error("Check UERadioCapabilityInfoIndication message error!");
+      oai::logger::logger_common::ngap().error(
+          "Check UERadioCapabilityInfoIndication message error!");
       return false;
     }
   } else {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("MessageType error!");
+    oai::logger::logger_common::ngap().error("MessageType error!");
     return false;
   }
   for (int i = 0;
@@ -230,13 +229,13 @@ bool UeRadioCapabilityInfoIndicationMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
                   m_UeRadioCapabilityInfoIndicationIes->protocolIEs.list
                       .array[i]
                       ->value.choice.AMF_UE_NGAP_ID)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                .error("Decoded NGAP AMF_UE_NGAP_ID IE error");
+            oai::logger::logger_common::ngap().error(
+                "Decoded NGAP AMF_UE_NGAP_ID IE error");
             return false;
           }
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .error("Decoded NGAP AMF_UE_NGAP_ID IE error");
+          oai::logger::logger_common::ngap().error(
+              "Decoded NGAP AMF_UE_NGAP_ID IE error");
           return false;
         }
       } break;
@@ -250,13 +249,13 @@ bool UeRadioCapabilityInfoIndicationMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
                   m_UeRadioCapabilityInfoIndicationIes->protocolIEs.list
                       .array[i]
                       ->value.choice.RAN_UE_NGAP_ID)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                .error("Decoded NGAP RAN_UE_NGAP_ID IE error");
+            oai::logger::logger_common::ngap().error(
+                "Decoded NGAP RAN_UE_NGAP_ID IE error");
             return false;
           }
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .error("Decoded NGAP RAN_UE_NGAP_ID IE error");
+          oai::logger::logger_common::ngap().error(
+              "Decoded NGAP RAN_UE_NGAP_ID IE error");
           return false;
         }
       } break;
@@ -270,8 +269,8 @@ bool UeRadioCapabilityInfoIndicationMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
               m_UeRadioCapabilityInfoIndicationIes->protocolIEs.list.array[i]
                   ->value.choice.UERadioCapability);
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .error("Decoded NGAP UERadioCapability IE error");
+          oai::logger::logger_common::ngap().error(
+              "Decoded NGAP UERadioCapability IE error");
           return false;
         }
       } break;
@@ -285,21 +284,21 @@ bool UeRadioCapabilityInfoIndicationMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           if (!tmp.decode(m_UeRadioCapabilityInfoIndicationIes->protocolIEs.list
                               .array[i]
                               ->value.choice.UERadioCapabilityForPaging)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                .error("Decoded NGAP UERadioCapabilityForPaging IE error");
+            oai::logger::logger_common::ngap().error(
+                "Decoded NGAP UERadioCapabilityForPaging IE error");
             return false;
           }
           m_UeRadioCapabilityForPaging =
               std::optional<UeRadioCapabilityForPaging>(tmp);
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .error("Decoded NGAP UERadioCapabilityForPaging IE error");
+          oai::logger::logger_common::ngap().error(
+              "Decoded NGAP UERadioCapabilityForPaging IE error");
           return false;
         }
       } break;
       default: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .error("Decoded NGAP message PDU error");
+        oai::logger::logger_common::ngap().error(
+            "Decoded NGAP message PDU error");
         return false;
       }
     }

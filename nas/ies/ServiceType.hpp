@@ -32,7 +32,7 @@ class ServiceType : public Type1NasIe {
  public:
   ServiceType();
   ServiceType(uint8_t value);
-  ~ServiceType();
+  virtual ~ServiceType();
 
   static std::string GetIeName() { return kServiceTypeIeName; }
 

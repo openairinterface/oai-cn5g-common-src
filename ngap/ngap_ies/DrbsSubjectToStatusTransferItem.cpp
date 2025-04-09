@@ -76,8 +76,8 @@ bool DrbSubjectToStatusTransferItem::encode(
     return false;
   }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encode from DrbSubjectToStatusTransferItem successfully");
+  oai::logger::logger_common::ngap().debug(
+      "Encode from DrbSubjectToStatusTransferItem successfully");
   return true;
 }
 }  // namespace oai::ngap

@@ -35,7 +35,7 @@ class UeStatus : public Type4NasIe {
  public:
   UeStatus();
   UeStatus(bool n1, bool s1);
-  ~UeStatus();
+  virtual ~UeStatus();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

@@ -29,7 +29,6 @@ CountValueForPdcpSn18::CountValueForPdcpSn18() {
 }
 
 //------------------------------------------------------------------------------
-CountValueForPdcpSn18::~CountValueForPdcpSn18() {}
 void CountValueForPdcpSn18::set(const long& pDCP, const long& hfn_PDCP) {
   m_Pdcp    = pDCP;
   m_HfnPdcp = hfn_PDCP;

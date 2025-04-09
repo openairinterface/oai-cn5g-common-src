@@ -35,7 +35,7 @@ class UeUsageSetting : public Type4NasIe {
  public:
   UeUsageSetting();
   UeUsageSetting(bool ues_usage_setting);
-  ~UeUsageSetting();
+  virtual ~UeUsageSetting();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = true) override;

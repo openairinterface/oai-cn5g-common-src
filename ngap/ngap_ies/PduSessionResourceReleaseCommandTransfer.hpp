@@ -37,6 +37,7 @@ class PduSessionResourceReleaseCommandTransfer {
   PduSessionResourceReleaseCommandTransfer();
   virtual ~PduSessionResourceReleaseCommandTransfer();
 
+  void setCause(const Cause& cause);
   void setCauseRadioNetwork(e_Ngap_CauseRadioNetwork causeValue);
   void setCauseTransport(e_Ngap_CauseTransport causeValue);
   void setCauseNas(e_Ngap_CauseNas causeValue);
@@ -46,8 +47,9 @@ class PduSessionResourceReleaseCommandTransfer {
   long getChoiceOfCause() const;
   long getCause() const;
 
-  int encode(uint8_t* buf, int buf_size);   // TODO: remove naked pointer
-  bool decode(uint8_t* buf, int buf_size);  // TODO: remove naked pointer
+  int encode(uint8_t* buf, int bufSize);
+  void encode2NewBuffer(uint8_t*& buf, int& encoded_size);
+  bool decode(uint8_t* buf, int bufSize);
 
  private:
   Ngap_PDUSessionResourceReleaseCommandTransfer_t*

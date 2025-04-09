@@ -33,7 +33,7 @@ class ConfigurationUpdateIndication : public Type1NasIe {
  public:
   ConfigurationUpdateIndication();
   ConfigurationUpdateIndication(bool red, bool ack);
-  ~ConfigurationUpdateIndication();
+  virtual ~ConfigurationUpdateIndication();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

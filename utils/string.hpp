@@ -25,6 +25,7 @@
 #include <arpa/inet.h>
 
 #include <string>
+
 #include "bstrlib.h"
 
 namespace oai::utils {
@@ -61,9 +62,10 @@ bool dotted_to_string(const std::string& dot, std::string& no_dot);
 void string_to_dnn(const std::string& str, bstring bstr);
 
 void ipv4_to_bstring(struct in_addr ipv4_address, bstring str);
+bool bstring_to_ipv4(bstring str, struct in_addr ipv4_address);
 
 void ipv6_to_bstring(struct in6_addr ipv6_address, bstring str);
-
+bool bstring_to_ipv6(bstring str, struct in6_addr ipv6_address);
 /*
  * Create a PDU Address Information in form of a bstring (byte 0-7: IPv6 prefix,
  * 8-11: Ipv4 Address)
@@ -74,6 +76,18 @@ void ipv6_to_bstring(struct in6_addr ipv6_address, bstring str);
  */
 void ipv4v6_to_pdu_address_information(
     struct in_addr ipv4_address, struct in6_addr ipv6_address, bstring str);
+bool pdu_address_information_to_ipv4v6(
+    bstring str, struct in_addr ipv4_address, struct in6_addr ipv6_address);
 
+/*
+ * Create a Transport Layer Address in form of a bstring (160 bits, in which
+case the IPv4 address is contained in the first 32 bits)
+ * @param [struct in_addr] ipv4_address: IPv4 address
+ * @param [struct in6_addr ] ipv6_address: IPv6 address
+ * @param [bstring] str: store the Transport Layer Address
+ * @return void
+ */
+void ipv4v6_to_transport_layer_address(
+    struct in_addr ipv4_address, struct in6_addr ipv6_address, bstring str);
 }  // namespace oai::utils
 #endif

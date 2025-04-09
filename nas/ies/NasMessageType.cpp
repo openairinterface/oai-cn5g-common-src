@@ -22,7 +22,7 @@
 #include "NasMessageType.hpp"
 
 #include "3gpp_24.501.hpp"
-#include "common_defs.h"
+#include "common_defs.hpp"
 #include "logger_base.hpp"
 
 using namespace oai::nas;
@@ -32,16 +32,15 @@ NasMessageType::NasMessageType(uint8_t message_type)
     : NasIe(), message_type_(message_type) {}
 
 //------------------------------------------------------------------------------
-NasMessageType::~NasMessageType() {}
+// NasMessageType::~NasMessageType() {}
 
 //------------------------------------------------------------------------------
 bool NasMessageType::Validate(int len) const {
   if (len < kNasMessageTypeIeSize) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this IE (%d "
-            "octet)",
-            kNasMessageTypeIeSize);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the minimum length of this IE (%d "
+        "octet)",
+        kNasMessageTypeIeSize);
     return false;
   }
   return true;

@@ -57,16 +57,14 @@ void UplinkRanStatusTransfer::setAmfUeNgapId(const uint64_t& id) {
   int ret =
       NgapUeMessage::m_AmfUeNgapId.encode(ie->value.choice.AMF_UE_NGAP_ID);
   if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode AMF_UE_NGAP_ID IE error!");
+    oai::logger::logger_common::ngap().error("Encode AMF_UE_NGAP_ID IE error!");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
   ret = ASN_SEQUENCE_ADD(&m_UplinkRanStatusTransferIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode AMF_UE_NGAP_ID IE error!");
+    oai::logger::logger_common::ngap().error("Encode AMF_UE_NGAP_ID IE error!");
 }
 
 //------------------------------------------------------------------------------
@@ -83,16 +81,14 @@ void UplinkRanStatusTransfer::setRanUeNgapId(const uint32_t& ranUeNgapId) {
   int ret =
       NgapUeMessage::m_RanUeNgapId.encode(ie->value.choice.RAN_UE_NGAP_ID);
   if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode RAN_UE_NGAP_ID IE error!");
+    oai::logger::logger_common::ngap().error("Encode RAN_UE_NGAP_ID IE error!");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
   ret = ASN_SEQUENCE_ADD(&m_UplinkRanStatusTransferIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode RAN_UE_NGAP_ID IE error!");
+    oai::logger::logger_common::ngap().error("Encode RAN_UE_NGAP_ID IE error!");
 }
 
 //------------------------------------------------------------------------------
@@ -111,16 +107,15 @@ void UplinkRanStatusTransfer::setRanStatusTransferTransparentContainer(
   int ret = m_RanStatusTransferTransparentContainer.encode(
       ie->value.choice.RANStatusTransfer_TransparentContainer);
   if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode RANStatusTransfer_TransparentContainer IE error!");
+    oai::logger::logger_common::ngap().error(
+        "Encode RANStatusTransfer_TransparentContainer IE error!");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
   ret = ASN_SEQUENCE_ADD(&m_UplinkRanStatusTransferIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode RAN_UE_NGAP_ID IE error!");
+    oai::logger::logger_common::ngap().error("Encode RAN_UE_NGAP_ID IE error!");
 }
 
 //------------------------------------------------------------------------------
@@ -143,13 +138,13 @@ bool UplinkRanStatusTransfer::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
       m_UplinkRanStatusTransferIes = &ngapPdu->choice.initiatingMessage->value
                                           .choice.UplinkRANStatusTransfer;
     } else {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .error("Check UplinkRANStatusTransfer message error");
+      oai::logger::logger_common::ngap().error(
+          "Check UplinkRANStatusTransfer message error");
       return false;
     }
   } else {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("UplinkRANStatusTransfer message type error");
+    oai::logger::logger_common::ngap().error(
+        "UplinkRANStatusTransfer message type error");
     return false;
   }
   for (int i = 0; i < m_UplinkRanStatusTransferIes->protocolIEs.list.count;
@@ -164,13 +159,13 @@ bool UplinkRanStatusTransfer::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           if (!NgapUeMessage::m_AmfUeNgapId.decode(
                   m_UplinkRanStatusTransferIes->protocolIEs.list.array[i]
                       ->value.choice.AMF_UE_NGAP_ID)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                .error("Decoded NGAP AMF_UE_NGAP_ID IE error");
+            oai::logger::logger_common::ngap().error(
+                "Decoded NGAP AMF_UE_NGAP_ID IE error");
             return false;
           }
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .error("Decoded NGAP AMF_UE_NGAP_ID IE error");
+          oai::logger::logger_common::ngap().error(
+              "Decoded NGAP AMF_UE_NGAP_ID IE error");
           return false;
         }
       } break;
@@ -183,13 +178,13 @@ bool UplinkRanStatusTransfer::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           if (!NgapUeMessage::m_RanUeNgapId.decode(
                   m_UplinkRanStatusTransferIes->protocolIEs.list.array[i]
                       ->value.choice.RAN_UE_NGAP_ID)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                .error("Decoded NGAP RAN_UE_NGAP_ID IE error");
+            oai::logger::logger_common::ngap().error(
+                "Decoded NGAP RAN_UE_NGAP_ID IE error");
             return false;
           }
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .error("Decoded NGAP RAN_UE_NGAP_ID IE error");
+          oai::logger::logger_common::ngap().error(
+              "Decoded NGAP RAN_UE_NGAP_ID IE error");
           return false;
         }
       } break;
@@ -202,26 +197,23 @@ bool UplinkRanStatusTransfer::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           if (!m_RanStatusTransferTransparentContainer.decode(
                   m_UplinkRanStatusTransferIes->protocolIEs.list.array[i]
                       ->value.choice.RANStatusTransfer_TransparentContainer)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                .error(
-                    "Decoded NGAP RANStatusTransfer_TransparentContainer IE "
-                    "error");
+            oai::logger::logger_common::ngap().error(
+                "Decoded NGAP RANStatusTransfer_TransparentContainer IE "
+                "error");
             return false;
           }
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .error(
-                  "Decoded NGAP RANStatusTransfer_TransparentContainer IE "
-                  "error");
+          oai::logger::logger_common::ngap().error(
+              "Decoded NGAP RANStatusTransfer_TransparentContainer IE "
+              "error");
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .error(
-                  "Decoded NGAP RANStatusTransfer_TransparentContainer IE "
-                  "error");
+          oai::logger::logger_common::ngap().error(
+              "Decoded NGAP RANStatusTransfer_TransparentContainer IE "
+              "error");
         }
       } break;
       default: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .error("Decoded NGAP message PDU error");
+        oai::logger::logger_common::ngap().error(
+            "Decoded NGAP message PDU error");
         return false;
       }
     }

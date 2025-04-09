@@ -22,7 +22,7 @@
 #include "Type1NasIeFormatTv.hpp"
 
 #include "3gpp_24.501.hpp"
-#include "common_defs.h"
+#include "common_defs.hpp"
 #include "logger_base.hpp"
 
 using namespace oai::nas;
@@ -47,11 +47,10 @@ void Type1NasIeFormatTv::SetIei(uint8_t iei) {
 //------------------------------------------------------------------------------
 bool Type1NasIeFormatTv::Validate(int len) const {
   if (len < kType1NasIeFormatTvLength) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this IE (%d "
-            "octet)",
-            kType1NasIeFormatTvLength);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the minimum length of this IE (%d "
+        "octet)",
+        kType1NasIeFormatTvLength);
     return false;
   }
   return true;
@@ -59,7 +58,10 @@ bool Type1NasIeFormatTv::Validate(int len) const {
 
 //------------------------------------------------------------------------------
 uint32_t Type1NasIeFormatTv::GetIeLength() const {
-  return kType1NasIeFormatTvLength;
+  if (iei_.has_value())
+    return kType1NasIeFormatTvLength;
+  else
+    return 0;
 }
 
 //------------------------------------------------------------------------------
@@ -86,8 +88,11 @@ int Type1NasIeFormatTv::Encode(uint8_t* buf, int len) const {
   ENCODE_U8(buf + encoded_size, octet, encoded_size);
 
   if (iei_.has_value()) {
+    oai::logger::logger_common::nas().debug(
+        "Encoded Type1NasIeFormatTv, len (%d)", encoded_size);
     return encoded_size;  // 1 octet
   } else {
+    oai::logger::logger_common::nas().debug("Encoded Type1NasIeFormatTv len 0");
     return 0;  // 1/2 octet
   }
 }

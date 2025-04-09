@@ -43,7 +43,7 @@ class AssociatedQosFlowItem {
       const;
 
   void set(const QosFlowIdentifier& qosFlowIdentifier);
-  // TODO: Get
+  void get(QosFlowIdentifier& qosFlowIdentifier) const;
 
   bool encode(Ngap_AssociatedQosFlowItem_t& associatedQosFlowItem) const;
   bool decode(const Ngap_AssociatedQosFlowItem_t& associatedQosFlowItem);

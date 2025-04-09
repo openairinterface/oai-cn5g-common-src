@@ -35,7 +35,7 @@ class NetworkSlicingIndication : public Type1NasIeFormatTv {
   NetworkSlicingIndication(uint8_t iei);
   NetworkSlicingIndication(uint8_t iei, bool dcni, bool nssci);
   NetworkSlicingIndication(bool dcni, bool nssci);
-  ~NetworkSlicingIndication();
+  virtual ~NetworkSlicingIndication();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

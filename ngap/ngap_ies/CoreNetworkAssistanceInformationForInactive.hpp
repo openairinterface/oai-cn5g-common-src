@@ -39,7 +39,7 @@ namespace oai::ngap {
 class CoreNetworkAssistanceInformationForInactive {
  public:
   CoreNetworkAssistanceInformationForInactive();
-  virtual ~CoreNetworkAssistanceInformationForInactive();
+  virtual ~CoreNetworkAssistanceInformationForInactive(){};
 
   void set(
       const UeIdentityIndexValue& ueIdentityIndexValue,

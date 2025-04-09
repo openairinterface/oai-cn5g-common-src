@@ -37,7 +37,7 @@ class AllowedPduSessionStatus : public Type4NasIe {
  public:
   AllowedPduSessionStatus();
   AllowedPduSessionStatus(uint16_t value);
-  ~AllowedPduSessionStatus();
+  virtual ~AllowedPduSessionStatus();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

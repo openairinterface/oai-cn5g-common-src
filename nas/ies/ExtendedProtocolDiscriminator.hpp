@@ -19,8 +19,8 @@
  *      contact@openairinterface.org
  */
 
-#ifndef EXTENDED_PROTOCOL_DISCRIMINATOR_H_
-#define EXTENDED_PROTOCOL_DISCRIMINATOR_H_
+#ifndef EXTENDED_PROTOCOL_DISCRIMINATOR_HPP_
+#define EXTENDED_PROTOCOL_DISCRIMINATOR_HPP_
 
 #include "NasIe.hpp"
 
@@ -34,7 +34,13 @@ class ExtendedProtocolDiscriminator : public NasIe {
  public:
   ExtendedProtocolDiscriminator(){};  // TODO: = delete;
   ExtendedProtocolDiscriminator(uint8_t epd);
-  virtual ~ExtendedProtocolDiscriminator();
+  virtual ~ExtendedProtocolDiscriminator() = default;
+
+  ExtendedProtocolDiscriminator& operator=(
+      const struct ExtendedProtocolDiscriminator& epd) {
+    epd_ = epd.epd_;
+    return *this;
+  }
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = true) override;

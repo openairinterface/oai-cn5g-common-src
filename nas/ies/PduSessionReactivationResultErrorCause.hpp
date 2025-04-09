@@ -19,8 +19,8 @@
  *      contact@openairinterface.org
  */
 
-#ifndef _PDU_SESSION_REACTIVATION_RESULT_ERROR_CAUSE_H_
-#define _PDU_SESSION_REACTIVATION_RESULT_ERROR_CAUSE_H_
+#ifndef _PDU_SESSION_REACTIVATION_RESULT_ERROR_CAUSE_HPP_
+#define _PDU_SESSION_REACTIVATION_RESULT_ERROR_CAUSE_HPP_
 
 #include "Type6NasIe.hpp"
 
@@ -38,7 +38,7 @@ class PduSessionReactivationResultErrorCause : public Type6NasIe {
  public:
   PduSessionReactivationResultErrorCause();
   PduSessionReactivationResultErrorCause(uint8_t session_id, uint8_t value);
-  ~PduSessionReactivationResultErrorCause();
+  virtual ~PduSessionReactivationResultErrorCause() = default;
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

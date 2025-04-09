@@ -38,7 +38,7 @@ class _5gsNetworkFeatureSupport : public Type4NasIe {
   _5gsNetworkFeatureSupport();
   _5gsNetworkFeatureSupport(uint8_t value);
   _5gsNetworkFeatureSupport(uint8_t value, uint8_t value2);
-  ~_5gsNetworkFeatureSupport();
+  virtual ~_5gsNetworkFeatureSupport();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

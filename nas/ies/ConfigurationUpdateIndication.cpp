@@ -25,13 +25,13 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 ConfigurationUpdateIndication::ConfigurationUpdateIndication()
-    : Type1NasIe(false), red_(false), ack_(false) {
+    : Type1NasIe(kIeiConfigurationUpdateIndication), red_(false), ack_(false) {
   ConfigurationUpdateIndication::SetValue();
 }
 
 //------------------------------------------------------------------------------
 ConfigurationUpdateIndication::ConfigurationUpdateIndication(bool red, bool ack)
-    : Type1NasIe(false), red_(red), ack_(ack) {
+    : Type1NasIe(kIeiConfigurationUpdateIndication), red_(red), ack_(ack) {
   ConfigurationUpdateIndication::SetValue();
 }
 

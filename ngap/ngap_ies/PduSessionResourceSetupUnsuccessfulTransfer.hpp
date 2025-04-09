@@ -32,10 +32,10 @@ extern "C" {
 
 namespace oai::ngap {
 
-class PduSessionResourceSetupUnSuccessfulTransferIE {
+class PduSessionResourceSetupUnsuccessfulTransfer {
  public:
-  PduSessionResourceSetupUnSuccessfulTransferIE();
-  virtual ~PduSessionResourceSetupUnSuccessfulTransferIE();
+  PduSessionResourceSetupUnsuccessfulTransfer();
+  virtual ~PduSessionResourceSetupUnsuccessfulTransfer();
 
   void setCauseRadioNetwork(e_Ngap_CauseRadioNetwork causeValue);
   void setCauseTransport(e_Ngap_CauseTransport causeValue);
@@ -45,8 +45,8 @@ class PduSessionResourceSetupUnSuccessfulTransferIE {
   long getChoiceOfCause() const;
   long getCause() const;
 
-  int encode(uint8_t* buf, int buf_size);   // TODO: remove naked pointer
-  bool decode(uint8_t* buf, int buf_size);  // TODO: remove naked pointer
+  int encode(uint8_t* buf, int bufSize);
+  bool decode(uint8_t* buf, int bufSize);
 
  private:
   Ngap_PDUSessionResourceSetupUnsuccessfulTransfer_t*

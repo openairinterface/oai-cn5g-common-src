@@ -29,7 +29,7 @@ namespace oai::nas {
 class Nas5gmmMessage {
  public:
   Nas5gmmMessage(){};
-  virtual ~Nas5gmmMessage() {}
+  virtual ~Nas5gmmMessage() = default;
 
   // May not be the actual length of the message (by rounding 1/2 octet to 1
   // octet in some IEs) but always greater than the actual length of the message
@@ -38,8 +38,6 @@ class Nas5gmmMessage {
 
   virtual int Encode(uint8_t* buf, int len) = 0;
   virtual int Decode(uint8_t* buf, int len) = 0;
-
-  void SetHeader(uint8_t security_header_type);
 
   void SetMessageName(const std::string& name);
   std::string GetMessageName() const;

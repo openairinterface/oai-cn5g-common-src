@@ -23,13 +23,15 @@
 #define _SERVICE_ACCEPT_H_
 
 #include "NasIeHeader.hpp"
+#include "NasMmPlainHeader.hpp"
 
 namespace oai::nas {
+using namespace oai::nas;
 
 class ServiceAccept : public Nas5gmmMessage {
  public:
   ServiceAccept();
-  ~ServiceAccept();
+  virtual ~ServiceAccept() = default;
 
   void SetHeader(uint8_t security_header_type);
 

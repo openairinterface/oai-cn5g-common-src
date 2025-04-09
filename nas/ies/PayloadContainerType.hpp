@@ -34,7 +34,7 @@ class PayloadContainerType : public Type1NasIeFormatTv {
   PayloadContainerType();
   PayloadContainerType(uint8_t value);
   PayloadContainerType(uint8_t iei, uint8_t value);
-  ~PayloadContainerType();
+  virtual ~PayloadContainerType();
 
   static std::string GetIeName() { return kPayloadContainerTypeIeName; }
 

@@ -40,7 +40,7 @@ namespace oai::nas {
 class LadnInformation : public Type6NasIe {
  public:
   LadnInformation();
-  ~LadnInformation();
+  virtual ~LadnInformation();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

@@ -39,7 +39,7 @@ class _5gsRegistrationResult : public Type4NasIe {
   _5gsRegistrationResult(bool emergency, bool nssaa, bool sms, uint8_t value);
   _5gsRegistrationResult(
       uint8_t iei, bool emergency, bool nssaa, bool sms, uint8_t value);
-  ~_5gsRegistrationResult();
+  virtual ~_5gsRegistrationResult();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

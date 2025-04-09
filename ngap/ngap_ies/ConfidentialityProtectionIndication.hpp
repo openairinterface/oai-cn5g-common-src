@@ -31,7 +31,7 @@ namespace oai::ngap {
 class ConfidentialityProtectionIndication {
  public:
   ConfidentialityProtectionIndication();
-  virtual ~ConfidentialityProtectionIndication();
+  virtual ~ConfidentialityProtectionIndication(){};
 
   void set(const e_Ngap_ConfidentialityProtectionIndication& indication);
   bool get(long& indication) const;

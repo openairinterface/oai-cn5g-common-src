@@ -23,8 +23,10 @@
 #define _AUTHENTICATION_REJECT_H_
 
 #include "NasIeHeader.hpp"
+#include "NasMmPlainHeader.hpp"
 
 namespace oai::nas {
+using namespace oai::nas;
 
 class AuthenticationReject : public Nas5gmmMessage {
  public:

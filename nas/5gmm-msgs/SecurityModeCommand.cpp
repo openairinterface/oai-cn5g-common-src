@@ -46,7 +46,8 @@ uint32_t SecurityModeCommand::GetLength() const {
   uint32_t msg_len = 0;
   msg_len += ie_header_.GetLength();
   msg_len += ie_selected_nas_security_algorithms_.GetIeLength();
-  msg_len += ie_ng_ksi_.GetIeLength();
+  // msg_len += ie_ng_ksi_.GetIeLength();
+  msg_len += 1;  // 1/2 octet for ngKSI and 1/2 octet for Spare half octet
   msg_len += ie_ue_security_capability_.GetIeLength();
   if (ie_imeisv_request_.has_value())
     msg_len += ie_imeisv_request_.value().GetIeLength();
@@ -144,15 +145,14 @@ void SecurityModeCommand::SetS1UeSecurityCapability(uint8_t eea, uint8_t eia) {
 
 //------------------------------------------------------------------------------
 int SecurityModeCommand::Encode(uint8_t* buf, int len) {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoding SecurityModeCommand message");
+  oai::logger::logger_common::nas().debug(
+      "Encoding SecurityModeCommand message");
   int encoded_size    = 0;
   int encoded_ie_size = 0;
 
   // Header
   if ((encoded_ie_size = ie_header_.Encode(buf, len)) == KEncodeDecodeError) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encoding NAS Header error");
+    oai::logger::logger_common::nas().error("Encoding NAS Header error");
     return KEncodeDecodeError;
   }
   encoded_size += encoded_ie_size;
@@ -218,23 +218,22 @@ int SecurityModeCommand::Encode(uint8_t* buf, int len) {
     return KEncodeDecodeError;
   }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoded SecurityModeCommand message len (%d)", encoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Encoded SecurityModeCommand message len (%d)", encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
 int SecurityModeCommand::Decode(uint8_t* buf, int len) {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoding SecurityModeCommand message");
+  oai::logger::logger_common::nas().debug(
+      "Decoding SecurityModeCommand message");
   int decoded_size    = 0;
   int decoded_ie_size = 0;
 
   // Header
   decoded_ie_size = ie_header_.Decode(buf, len);
   if (decoded_ie_size == KEncodeDecodeError) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Decoding NAS Header error");
+    oai::logger::logger_common::nas().error("Decoding NAS Header error");
     return KEncodeDecodeError;
   }
   decoded_size += decoded_ie_size;
@@ -262,30 +261,26 @@ int SecurityModeCommand::Decode(uint8_t* buf, int len) {
     return KEncodeDecodeError;
   }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded_size (%d)", decoded_size);
+  oai::logger::logger_common::nas().debug("Decoded_size (%d)", decoded_size);
 
   // Decode other IEs
   uint8_t octet = 0x00;
   DECODE_U8_VALUE(buf, octet, decoded_size, len);
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("First option IEI (0x%x)", octet);
+  oai::logger::logger_common::nas().debug("First option IEI (0x%x)", octet);
   bool flag = false;
   while ((octet != 0x0)) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .debug("IEI 0x%x", octet);
+    oai::logger::logger_common::nas().debug("IEI 0x%x", octet);
     switch ((octet & 0xf0) >> 4) {
       case kIeiImeisvRequest: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Decoding IEI 0x%x", kIeiImeisvRequest);
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI 0x%x", kIeiImeisvRequest);
         if ((decoded_ie_size = NasHelper::Decode(
                  ie_imeisv_request_, buf, len, decoded_size, true)) ==
             KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI (0x%x)", octet);
+        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
       } break;
       default: {
         flag = true;
@@ -294,82 +289,76 @@ int SecurityModeCommand::Decode(uint8_t* buf, int len) {
 
     switch (octet) {
       case kIeiEpsNasSecurityAlgorithms: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("decoding IEI 0x%x", kIeiEpsNasSecurityAlgorithms);
+        oai::logger::logger_common::nas().debug(
+            "decoding IEI 0x%x", kIeiEpsNasSecurityAlgorithms);
         if ((decoded_ie_size = NasHelper::Decode(
                  ie_eps_nas_security_algorithms_, buf, len, decoded_size,
                  true)) == KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI (0x%x)", octet);
+        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
       } break;
 
       case kIeiAdditional5gSecurityInformation: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("decoding IEI 0x%x", kIeiAdditional5gSecurityInformation);
+        oai::logger::logger_common::nas().debug(
+            "decoding IEI 0x%x", kIeiAdditional5gSecurityInformation);
         if ((decoded_ie_size = NasHelper::Decode(
                  ie_additional_5g_security_information_, buf, len, decoded_size,
                  true)) == KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI (0x%x)", octet);
+        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
       } break;
 
       case kIeiEapMessage: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Decoding IEI 0x%x", kIeiEapMessage);
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI 0x%x", kIeiEapMessage);
         if ((decoded_ie_size = NasHelper::Decode(
                  ie_eap_message_, buf, len, decoded_size, true)) ==
             KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI (0x%x)", octet);
+        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
       } break;
 
       case kIeiAbba: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Decoding IEI 0x%x", kIeiAbba);
+        oai::logger::logger_common::nas().debug("Decoding IEI 0x%x", kIeiAbba);
         if ((decoded_ie_size =
                  NasHelper::Decode(ie_abba_, buf, len, decoded_size, true)) ==
             KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI (0x%x)", octet);
+        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
       } break;
 
       case kIeiS1UeSecurityCapability: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Decoding IEI 0x%x", kIeiS1UeSecurityCapability);
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI 0x%x", kIeiS1UeSecurityCapability);
         if ((decoded_ie_size = NasHelper::Decode(
                  ie_s1_ue_security_capability_, buf, len, decoded_size,
                  true)) == KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI (0x%x)", octet);
+        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
       } break;
 
       default: {
         // TODO:
         if (flag) {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .warn("Unknown IEI 0x%x, stop decoding...", octet);
+          oai::logger::logger_common::nas().warn(
+              "Unknown IEI 0x%x, stop decoding...", octet);
           // Stop decoding
           octet = 0x00;
         }
       } break;
     }
   }
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded SecurityModeCommand message len (%d)", decoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Decoded SecurityModeCommand message len (%d)", decoded_size);
   return decoded_size;
 }

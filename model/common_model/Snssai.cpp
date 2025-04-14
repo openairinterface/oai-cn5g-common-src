@@ -147,7 +147,7 @@ void Snssai::parse_sd_int_with_hex() {
   }
   try {
     uint32_t sd_parsed = std::stoi(sd_to_use, nullptr, 16);
-    m_Sd               = fmt::format("{0:06X}", sd_parsed);
+    m_Sd               = fmt::format("{0:06x}", sd_parsed);
   } catch (const std::exception& e) {
     // If conversion failed, we do nothing, as then later the validation will
     // fail

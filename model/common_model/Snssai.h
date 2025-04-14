@@ -79,7 +79,7 @@ class Snssai {
   void unsetSd();
 
   /**
-   * Parses SD int, allowing also 0x values, overwrites SD string with uppercase
+   * Parses SD int, allowing also 0x values, overwrites SD string with lowercase
    * HEX
    */
   void parse_sd_int_with_hex();

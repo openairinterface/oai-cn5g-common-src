@@ -29,7 +29,9 @@
 using namespace oai::nas;
 
 //------------------------------------------------------------------------------
-QosFlowDescription::QosFlowDescription() : e_bit_(false), length_(0) {}
+QosFlowDescription::QosFlowDescription() : e_bit_(false) {
+  SetLength();
+}
 
 //------------------------------------------------------------------------------
 QosFlowDescription::~QosFlowDescription() {}

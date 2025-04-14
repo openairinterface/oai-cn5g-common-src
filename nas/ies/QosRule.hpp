@@ -85,8 +85,10 @@ class QosRule {
   int Encode(uint8_t* buf, int len) const;
   int Decode(const uint8_t* const buf, int len);
 
-  uint16_t GetLength() const;
-  void SetLength();
+  uint16_t GetLengthIndicator() const;
+  void SetLengthIndicator();
+
+  uint16_t GetIeLength() const;
 
   void SetQosRuleId(uint8_t rule_id);
   void GetQosRuleId(uint8_t& rule_id) const;

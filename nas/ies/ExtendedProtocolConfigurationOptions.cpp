@@ -38,7 +38,11 @@ ExtendedProtocolConfigurationOptions::ExtendedProtocolConfigurationOptions()
 //------------------------------------------------------------------------------
 void ExtendedProtocolConfigurationOptions::SetLength() {
   // Calculate the actual length
-  uint32_t length = kExtendedProtocolConfigurationOptionsMinimumLength;
+  uint32_t length =
+      kExtendedProtocolConfigurationOptionsContentMinimumLength;  // Extension
+                                                                  // and
+                                                                  // Configuration
+                                                                  // Protocol;
 
   if (protocol_or_container_ids.size() > 0) {
     for (auto p : protocol_or_container_ids) {

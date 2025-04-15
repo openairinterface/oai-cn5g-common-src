@@ -134,11 +134,11 @@ std::string Snssai::to_string(const int indent_level) const {
 }
 
 int32_t Snssai::getSdInt() const {
-  uint32_t sd_int = 0xffffff;
+  uint32_t sd_int = SD_DEFAULT_VALUE_INT;
   try {
     sd_int = std::stoi(m_Sd, nullptr, 16);
   } catch (const std::exception& e) {
-    sd_int = 0xffffff;
+    sd_int = SD_DEFAULT_VALUE_INT;
   }
   return sd_int;
 }

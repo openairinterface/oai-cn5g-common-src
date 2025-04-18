@@ -26,6 +26,8 @@
 #include <curl/curl.h>
 #include <fmt/format.h>
 
+#include <nlohmann/json.hpp>
+
 #include <string>
 
 #include "3gpp_29.500.h"
@@ -36,6 +38,14 @@ struct response {
   int status_code;
   std::string body;
   cpr::Header headers;
+  nlohmann::json get_json() const {
+    nlohmann::json json_data = {};
+    try {
+      json_data = nlohmann::json::parse(body);
+    } catch (nlohmann::json::exception& e) {
+    }
+    return json_data;
+  }
 };
 
 struct request {

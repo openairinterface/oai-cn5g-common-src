@@ -24,8 +24,10 @@
 
 namespace oai::model::common {
 
-const std::string SD_VALIDATION_REGEX = "^[A-Fa-f0-9]{6}$";
-const std::string SD_DEFAULT_VALUE    = "FFFFFF";
+const std::string SD_VALIDATION_REGEX =
+    "((^|, )(^[A-Fa-f0-9]{6}$|0(x|X)^[A-Fa-f0-9]{6}$))+$";
+const std::string SD_DEFAULT_VALUE  = "FFFFFF";
+const uint32_t SD_DEFAULT_VALUE_INT = 0xFFFFFF;
 
 /// <summary>
 ///
@@ -78,7 +80,7 @@ class Snssai {
   void unsetSd();
 
   /**
-   * Parses SD int, allowing also 0x values, overwrites SD string with uppercase
+   * Parses SD int, allowing also 0x values, overwrites SD string with lowercase
    * HEX
    */
   void parse_sd_int_with_hex();

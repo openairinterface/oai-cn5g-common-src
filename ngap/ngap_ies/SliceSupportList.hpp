@@ -19,41 +19,34 @@
  *      contact@openairinterface.org
  */
 
-#ifndef _SUPPORTED_TA_ITEM_H
-#define _SUPPORTED_TA_ITEM_H
+#ifndef _SLICE_SUPPORT_LIST_H_
+#define _SLICE_SUPPORT_LIST_H_
 
 #include <vector>
 
-#include "BroadcastPlmnItem.hpp"
-#include "Tac.hpp"
+#include "SNssai.hpp"
 
 extern "C" {
-#include "Ngap_SupportedTAItem.h"
+#include "Ngap_SliceSupportList.h"
+#include "Ngap_SliceSupportItem.h"
 }
 
 namespace oai::ngap {
 
-class SupportedTaItem {
+class SliceSupportList {
  public:
-  SupportedTaItem();
-  virtual ~SupportedTaItem();
+  SliceSupportList();
+  virtual ~SliceSupportList();
 
-  void setTac(const TAC& m_tac);
-  void getTac(TAC& m_tac) const;
-  TAC getTac() const;
+  void setSliceSupportItems(const std::vector<SNssai>& items);
+  void getSliceSupportItems(std::vector<SNssai>& items) const;
 
-  void setBroadcastPlmnList(const std::vector<BroadcastPlmnItem>& list);
-  void getBroadcastPlmnList(std::vector<BroadcastPlmnItem>& list) const;
-  std::vector<BroadcastPlmnItem> getBroadcastPlmnList() const;
-
-  bool encode(Ngap_SupportedTAItem_t& ta) const;
-  bool decode(const Ngap_SupportedTAItem_t& ta);
+  bool encode(Ngap_SliceSupportList_t& SliceSupportList) const;
+  bool decode(const Ngap_SliceSupportList_t& SliceSupportList);
 
  private:
-  TAC m_Tac;                                           // Mandatory
-  std::vector<BroadcastPlmnItem> m_BroadcastPlmnList;  // Mandatory
+  std::vector<SNssai> m_SliceSupportItems;
 };
-
 }  // namespace oai::ngap
 
 #endif

@@ -52,8 +52,8 @@ class NgSetupRequestMsg : public NgapMessage {
   void setRanNodeName(const std::string& ranNodeName);
   bool getRanNodeName(std::string& name) const;
 
-  void setSupportedTaList(const std::vector<struct SupportedTaItem_s>& list);
-  bool getSupportedTaList(std::vector<struct SupportedTaItem_s>& list) const;
+  void setSupportedTaList(const std::vector<SupportedTaItem>& list);
+  bool getSupportedTaList(std::vector<SupportedTaItem>& list) const;
 
   void setDefaultPagingDrx(const e_Ngap_PagingDRX& value);
   e_Ngap_PagingDRX getDefaultPagingDrx() const;

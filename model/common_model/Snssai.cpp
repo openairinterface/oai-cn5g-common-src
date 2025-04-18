@@ -89,6 +89,7 @@ void from_json(const nlohmann::json& j, Snssai& o) {
   if (j.find("sd") != j.end()) {
     o.m_SdIsSet = true;
     j.at("sd").get_to(o.m_Sd);
+    o.parse_sd_int_with_hex();
   } else {
     // TODO this is not strictly standard-compliant
     o.m_Sd      = SD_DEFAULT_VALUE;
@@ -107,7 +108,8 @@ std::string Snssai::getSd() const {
   return m_Sd;
 }
 void Snssai::setSd(std::string const& value) {
-  m_Sd      = value;
+  m_Sd = value;
+  parse_sd_int_with_hex();
   m_SdIsSet = true;
 }
 
@@ -132,7 +134,13 @@ std::string Snssai::to_string(const int indent_level) const {
 }
 
 int32_t Snssai::getSdInt() const {
-  return std::stoi(m_Sd, nullptr, 16);
+  uint32_t sd_int = SD_DEFAULT_VALUE_INT;
+  try {
+    sd_int = std::stoi(m_Sd, nullptr, 16);
+  } catch (const std::exception& e) {
+    sd_int = SD_DEFAULT_VALUE_INT;
+  }
+  return sd_int;
 }
 
 void Snssai::parse_sd_int_with_hex() {
@@ -145,7 +153,7 @@ void Snssai::parse_sd_int_with_hex() {
   }
   try {
     uint32_t sd_parsed = std::stoi(sd_to_use, nullptr, 16);
-    m_Sd               = fmt::format("{0:06X}", sd_parsed);
+    m_Sd               = fmt::format("{0:06x}", sd_parsed);
   } catch (const std::exception& e) {
     // If conversion failed, we do nothing, as then later the validation will
     // fail

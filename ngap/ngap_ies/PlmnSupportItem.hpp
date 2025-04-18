@@ -26,6 +26,7 @@
 
 #include "PlmnId.hpp"
 #include "SNssai.hpp"
+#include "SliceSupportList.hpp"
 
 extern "C" {
 #include "Ngap_PLMNSupportItem.h"
@@ -41,12 +42,18 @@ class PlmnSupportItem {
   void set(const PlmnId& plmnId, const std::vector<SNssai>& sNssais);
   void get(PlmnId& plmnId, std::vector<SNssai>& sNssais) const;
 
+  void setPlmn(const PlmnId& plmnId);
+  void getPlmn(PlmnId& plmnId) const;
+
+  void setSliceSupportList(const SliceSupportList& sliceSupportList);
+  void getSliceSupportList(SliceSupportList& sliceSupportList) const;
+
   bool encode(Ngap_PLMNSupportItem_t&) const;
   bool decode(const Ngap_PLMNSupportItem_t&);
 
  private:
-  PlmnId m_PlmnId;                         // Mandatory
-  std::vector<SNssai> m_SliceSupportList;  // Mandatory
+  PlmnId m_PlmnId;                      // Mandatory
+  SliceSupportList m_SliceSupportList;  // Mandatory
 };
 
 }  // namespace oai::ngap

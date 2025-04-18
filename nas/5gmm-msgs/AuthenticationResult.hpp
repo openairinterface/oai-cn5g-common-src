@@ -23,6 +23,7 @@
 #define _AUTHENTICATION_RESULT_H_
 
 #include "NasIeHeader.hpp"
+#include "NasMmPlainHeader.hpp"
 
 namespace oai::nas {
 

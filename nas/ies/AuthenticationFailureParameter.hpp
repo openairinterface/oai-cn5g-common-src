@@ -37,7 +37,7 @@ class AuthenticationFailureParameter : public Type4NasIe {
  public:
   AuthenticationFailureParameter();
   AuthenticationFailureParameter(const bstring& value);
-  ~AuthenticationFailureParameter();
+  virtual ~AuthenticationFailureParameter() = default;
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

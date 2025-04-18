@@ -64,8 +64,7 @@ uint8_t ExtendedDrxParameters::GetPagingTime() const {
 
 //------------------------------------------------------------------------------
 int ExtendedDrxParameters::Encode(uint8_t* buf, int len) const {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Encoding %s", GetIeName().c_str());
 
   int encoded_size = 0;
   // Validate the buffer's length and Encode IEI/Length
@@ -77,8 +76,8 @@ int ExtendedDrxParameters::Encode(uint8_t* buf, int len) const {
   uint8_t octet = (0x0F & e_drx_value_) | ((paging_time_ & 0x0f) << 4);
   ENCODE_U8(buf + encoded_size, octet, encoded_size);
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
   return encoded_size;
 }
 
@@ -86,18 +85,16 @@ int ExtendedDrxParameters::Encode(uint8_t* buf, int len) const {
 int ExtendedDrxParameters::Decode(
     const uint8_t* const buf, int len, bool is_iei) {
   if (len < kExtendedDrxParametersLength) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this IE (%d "
-            "octet)",
-            kExtendedDrxParametersLength);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the minimum length of this IE (%d "
+        "octet)",
+        kExtendedDrxParametersLength);
     return KEncodeDecodeError;
   }
 
   uint8_t decoded_size = 0;
   uint8_t octet        = 0;
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Decoding %s", GetIeName().c_str());
 
   // IEI and Length
   int decoded_header_size = Type4NasIe::Decode(buf + decoded_size, len, is_iei);
@@ -109,11 +106,10 @@ int ExtendedDrxParameters::Decode(
   e_drx_value_ = octet & 0x0f;
   paging_time_ = (octet & 0xf0) >> 4;
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug(
-          "Decoded %s, Paging Time Window 0x%x, eDRX value 0x%x",
-          GetIeName().c_str(), paging_time_, e_drx_value_);
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Decoded %s, Paging Time Window 0x%x, eDRX value 0x%x",
+      GetIeName().c_str(), paging_time_, e_drx_value_);
+  oai::logger::logger_common::nas().debug(
+      "Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
   return decoded_size;
 }

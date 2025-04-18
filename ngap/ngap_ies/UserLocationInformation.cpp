@@ -96,8 +96,8 @@ bool UserLocationInformation::encode(
       break;
     }
     default:
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .warn("UserLocationInformation encode error!");
+      oai::logger::logger_common::ngap().warn(
+          "UserLocationInformation encode error!");
       return false;
   }
   return true;
@@ -126,8 +126,8 @@ bool UserLocationInformation::decode(
       break;
     }
     default:
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .warn("UserLocationInformation decode error!");
+      oai::logger::logger_common::ngap().warn(
+          "UserLocationInformation decode error!");
       return false;
   }
   return true;

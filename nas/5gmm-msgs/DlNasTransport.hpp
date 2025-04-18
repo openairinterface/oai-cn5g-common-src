@@ -23,8 +23,10 @@
 #define _DL_NAS_TRANSPORT_H_
 
 #include "NasIeHeader.hpp"
+#include "NasMmPlainHeader.hpp"
 
 namespace oai::nas {
+using namespace oai::nas;
 
 class DlNasTransport : public Nas5gmmMessage {
  public:

@@ -33,7 +33,7 @@ class SecurityHeaderType : public NasIe {
  public:
   SecurityHeaderType(uint8_t secu_header_type);
   SecurityHeaderType();
-  virtual ~SecurityHeaderType();
+  virtual ~SecurityHeaderType() = default;
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

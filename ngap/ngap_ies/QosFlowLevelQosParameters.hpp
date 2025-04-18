@@ -42,10 +42,12 @@ class QosFlowLevelQosParameters {
   void set(
       const QosCharacteristics& qosCharacteristics,
       const AllocationAndRetentionPriority& allocationAndRetentionPriority,
-      const std::optional<GbrQosFlowInformation>& gbrQosFlowInformation,
-      const std::optional<ReflectiveQosAttribute>& reflectiveQosAttribute,
+      const std::optional<GbrQosFlowInformation>& gbrQosFlowInformation =
+          std::nullopt,
+      const std::optional<ReflectiveQosAttribute>& reflectiveQosAttribute =
+          std::nullopt,
       const std::optional<AdditionalQosFlowInformation>&
-          additionalQosFlowInformation);
+          additionalQosFlowInformation = std::nullopt);
 
   void get(
       QosCharacteristics& qosCharacteristics,

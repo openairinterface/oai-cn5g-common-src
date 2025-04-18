@@ -63,8 +63,9 @@ RegistrationRequest::~RegistrationRequest() {}
 uint32_t RegistrationRequest::GetLength() const {
   uint32_t msg_len = 0;
   msg_len += ie_header_.GetLength();
-  msg_len += ie_5gs_registration_type_.GetIeLength();
-  msg_len += ie_ng_ksi_.GetIeLength();
+  // msg_len += ie_5gs_registration_type_.GetIeLength();
+  // msg_len += ie_ng_ksi_.GetIeLength();
+  msg_len += 1;  // 1/2 for 5GS registration type + 1/2 for ngKSI
   msg_len += ie_5gs_mobile_identity_.GetIeLength();
   if (ie_non_current_native_nas_ksi_.has_value())
     msg_len += ie_non_current_native_nas_ksi_.value().GetIeLength();
@@ -140,8 +141,7 @@ void RegistrationRequest::SetNgKsi(uint8_t tsc, uint8_t key_set_id) {
 
 //------------------------------------------------------------------------------
 bool RegistrationRequest::GetNgKsi(uint8_t& ng_ksi) const {
-  ng_ksi = (ie_ng_ksi_.GetTypeOfSecurityContext()) |
-           ie_ng_ksi_.GetNasKeyIdentifier();
+  ng_ksi = ie_ng_ksi_.GetNgKsi();
   return true;
 }
 
@@ -151,10 +151,9 @@ void RegistrationRequest::SetSuciSupiFormatImsi(
     const std::string& routing_ind, uint8_t protection_sch_id,
     const std::string& msin) {
   if (protection_sch_id != kNullScheme) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "encoding suci and supi format for imsi error, please choose right "
-            "interface");
+    oai::logger::logger_common::nas().error(
+        "encoding suci and supi format for imsi error, please choose right "
+        "interface");
     return;
   } else {
     ie_5gs_mobile_identity_.SetSuciWithSupiImsi(
@@ -185,8 +184,7 @@ std::string RegistrationRequest::Get5gGuti() const {
   std::string guti_str =
       guti.value().mcc + guti.value().mnc + amf_id_str +
       oai::utils::conv::tmsi_to_string(guti.value()._5g_tmsi);
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("5G GUTI %s", guti_str.c_str());
+  oai::logger::logger_common::nas().debug("5G GUTI %s", guti_str.c_str());
   return guti_str;
 }
 
@@ -243,9 +241,7 @@ void RegistrationRequest::SetNonCurrentNativeNasKSI(
 //------------------------------------------------------------------------------
 bool RegistrationRequest::GetNonCurrentNativeNasKSI(uint8_t& value) const {
   if (ie_non_current_native_nas_ksi_.has_value()) {
-    value |=
-        (ie_non_current_native_nas_ksi_.value().GetTypeOfSecurityContext()) |
-        (ie_non_current_native_nas_ksi_.value().GetNasKeyIdentifier());
+    value |= ie_non_current_native_nas_ksi_.value().GetNgKsi();
     return true;
   } else {
     return false;
@@ -619,34 +615,30 @@ bool RegistrationRequest::GetEpsBearerContextStatus(uint16_t& value) const {
 
 //------------------------------------------------------------------------------
 int RegistrationRequest::Encode(uint8_t* buf, int len) {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoding RegistrationRequest message");
+  oai::logger::logger_common::nas().debug(
+      "Encoding RegistrationRequest message");
   int encoded_size    = 0;
   int encoded_ie_size = 0;
 
   // Header
   if ((encoded_ie_size = ie_header_.Encode(buf, len)) == KEncodeDecodeError) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encoding NAS Header error");
+    oai::logger::logger_common::nas().error("Encoding NAS Header error");
     return KEncodeDecodeError;
   }
   encoded_size += encoded_ie_size;
 
   // 5GS Registration Type
-  if ((encoded_ie_size = NasHelper::Encode(
-           ie_5gs_registration_type_, buf, len, encoded_size)) ==
-      KEncodeDecodeError) {
+  encoded_ie_size =
+      NasHelper::Encode(ie_5gs_registration_type_, buf, len, encoded_size);
+  if ((encoded_ie_size == KEncodeDecodeError) or (encoded_ie_size != 0)) {
     return KEncodeDecodeError;
   }
-
   //  ngKSI
-  if ((encoded_ie_size = NasHelper::Encode(
-           ie_ng_ksi_, buf, len, encoded_size)) == KEncodeDecodeError) {
+  encoded_ie_size = NasHelper::Encode(ie_ng_ksi_, buf, len, encoded_size);
+  if ((encoded_ie_size == KEncodeDecodeError) or (encoded_ie_size != 0)) {
     return KEncodeDecodeError;
   }
-  // Spare half octet
-  if (encoded_ie_size == 0)
-    encoded_size++;  // 1/2 for 5GS registration type and 1/2 for ngKSI
+  encoded_size++;  // 1/2 for 5GS registration type and 1/2 for ngKSI
 
   // 5GS Mobile Identity
   if ((encoded_ie_size = NasHelper::Encode(
@@ -775,15 +767,15 @@ int RegistrationRequest::Encode(uint8_t* buf, int len) {
 
   // TODO: use NAS helper
   if (!ie_payload_container_ or !ie_payload_container_type_) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .debug("IE %s is not available", PayloadContainer::GetIeName().c_str());
+    oai::logger::logger_common::nas().debug(
+        "IE %s is not available", PayloadContainer::GetIeName().c_str());
   } else {
     if ((encoded_ie_size = ie_payload_container_->Encode(
              buf + encoded_size, len - encoded_size,
              ie_payload_container_type_.value().GetValue())) ==
         KEncodeDecodeError) {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .error("Encoding %s error", PayloadContainer::GetIeName().c_str());
+      oai::logger::logger_common::nas().error(
+          "Encoding %s error", PayloadContainer::GetIeName().c_str());
       return KEncodeDecodeError;
     } else {
       encoded_size += encoded_ie_size;
@@ -818,42 +810,40 @@ int RegistrationRequest::Encode(uint8_t* buf, int len) {
     return KEncodeDecodeError;
   }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("encoded RegistrationRequest message len(%d)", encoded_size);
+  oai::logger::logger_common::nas().debug(
+      "encoded RegistrationRequest message len(%d)", encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
 int RegistrationRequest::Decode(uint8_t* buf, int len) {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoding RegistrationRequest message");
+  oai::logger::logger_common::nas().debug(
+      "Decoding RegistrationRequest message");
   int decoded_size    = 0;
   int decoded_ie_size = 0;
 
   // Header
   decoded_ie_size = ie_header_.Decode(buf, len);
   if (decoded_ie_size == KEncodeDecodeError) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Decoding NAS Header error");
+    oai::logger::logger_common::nas().error("Decoding NAS Header error");
     return KEncodeDecodeError;
   }
   decoded_size += decoded_ie_size;
 
   // Registration Type and Ng KSI
-  if ((decoded_ie_size = NasHelper::Decode(
-           ie_5gs_registration_type_, buf, len, decoded_size, false)) ==
-      KEncodeDecodeError) {
+  decoded_ie_size = NasHelper::Decode(
+      ie_5gs_registration_type_, buf, len, decoded_size, false);
+  if ((decoded_ie_size == KEncodeDecodeError) or (decoded_ie_size != 0)) {
     return KEncodeDecodeError;
   }
-  if ((decoded_ie_size = NasHelper::Decode(
-           ie_ng_ksi_, buf, len, decoded_size, true,
-           false)) ==  // high, 1/2 octet
-      KEncodeDecodeError) {
+  decoded_ie_size = NasHelper::Decode(
+      ie_ng_ksi_, buf, len, decoded_size, true,
+      false);  // high, 1/2 octet
+  if ((decoded_ie_size == KEncodeDecodeError) or (decoded_ie_size != 0)) {
     return KEncodeDecodeError;
   }
-  if (decoded_ie_size == 0)
-    decoded_size++;  // 1/2 octet for ie_5gs_registration_type_, 1/2 octet for
-                     // ie_ng_ksi
+  decoded_size++;  // 1/2 octet for ie_5gs_registration_type_, 1/2 octet for
+                   // ie_ng_ksi
 
   if ((decoded_ie_size = NasHelper::Decode(
            ie_5gs_mobile_identity_, buf, len, decoded_size, false)) ==
@@ -864,63 +854,57 @@ int RegistrationRequest::Decode(uint8_t* buf, int len) {
   // Decode other IEs
   uint8_t octet = 0x00;
   DECODE_U8_VALUE(buf, octet, decoded_size, len);
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("First option IEI 0x%x", octet);
+  oai::logger::logger_common::nas().debug("First option IEI 0x%x", octet);
   bool flag = false;
   while ((octet != 0x0)) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .debug("IEI 0x%x", octet);
+    oai::logger::logger_common::nas().debug("IEI 0x%x", octet);
     switch ((octet & 0xf0) >> 4) {
       case kIeiNasKeySetIdentifier: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Decoding IEI 0x%x", kIeiNasKeySetIdentifier);
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI 0x%x", kIeiNasKeySetIdentifier);
         if ((decoded_ie_size = NasHelper::Decode(
                  ie_non_current_native_nas_ksi_, buf, len, decoded_size, false,
                  true)) == KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI 0x%x", octet);
+        oai::logger::logger_common::nas().debug("Next IEI 0x%x", octet);
       } break;
 
       case kIeiMicoIndication: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Decoding IEI 0x%x", kIeiMicoIndication);
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI 0x%x", kIeiMicoIndication);
         if ((decoded_ie_size = NasHelper::Decode(
                  ie_mico_indication_, buf, len, decoded_size, true)) ==
             KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI 0x%x", octet);
+        oai::logger::logger_common::nas().debug("Next IEI 0x%x", octet);
       } break;
 
       case kIeiPayloadContainerType: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Decoding IEI 0x%x", kIeiPayloadContainerType);
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI 0x%x", kIeiPayloadContainerType);
         if ((decoded_ie_size = NasHelper::Decode(
                  ie_payload_container_type_, buf, len, decoded_size, true)) ==
             KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI 0x%x", octet);
+        oai::logger::logger_common::nas().debug("Next IEI 0x%x", octet);
       } break;
 
       case kIeiNetworkSlicingIndication: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Decoding IEI 0x%x", kIeiNetworkSlicingIndication);
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI 0x%x", kIeiNetworkSlicingIndication);
         if ((decoded_ie_size = NasHelper::Decode(
                  ie_network_slicing_indication_, buf, len, decoded_size,
                  true)) == KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI 0x%x", octet);
+        oai::logger::logger_common::nas().debug("Next IEI 0x%x", octet);
       } break;
 
       default: {
@@ -930,190 +914,176 @@ int RegistrationRequest::Decode(uint8_t* buf, int len) {
 
     switch (octet) {
       case kIei5gmmCapability: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Decoding IEI 0x%x", kIei5gmmCapability);
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI 0x%x", kIei5gmmCapability);
         if ((decoded_ie_size = NasHelper::Decode(
                  ie_5g_mm_capability_, buf, len, decoded_size, true)) ==
             KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI 0x%x", octet);
+        oai::logger::logger_common::nas().debug("Next IEI 0x%x", octet);
       } break;
 
       case kIeiUeSecurityCapability: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Decoding IEI 0x%x", kIeiUeSecurityCapability);
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI 0x%x", kIeiUeSecurityCapability);
         if ((decoded_ie_size = NasHelper::Decode(
                  ie_ue_security_capability_, buf, len, decoded_size, true)) ==
             KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI 0x%x", octet);
+        oai::logger::logger_common::nas().debug("Next IEI 0x%x", octet);
       } break;
 
       case kIeiNSSAIRequested: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Decoding IEI %d", kIeiNSSAIRequested);
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI %d", kIeiNSSAIRequested);
         if ((decoded_ie_size = NasHelper::Decode(
                  ie_requested_nssai_, buf, len, decoded_size, true)) ==
             KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI 0x%x", octet);
+        oai::logger::logger_common::nas().debug("Next IEI 0x%x", octet);
       } break;
 
       case kIei5gsTrackingAreaIdentity: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Decoding IEI 0x%x", kIei5gsTrackingAreaIdentity);
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI 0x%x", kIei5gsTrackingAreaIdentity);
         if ((decoded_ie_size = NasHelper::Decode(
                  ie_last_visited_registered_tai_, buf, len, decoded_size,
                  true)) == KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI 0x%x", octet);
+        oai::logger::logger_common::nas().debug("Next IEI 0x%x", octet);
       } break;
 
       case kIeiUeNetworkCapability: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Decoding IEI 0x%x", kIeiUeNetworkCapability);
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI 0x%x", kIeiUeNetworkCapability);
         if ((decoded_ie_size = NasHelper::Decode(
                  ie_s1_ue_network_capability_, buf, len, decoded_size, true)) ==
             KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI 0x%x", octet);
+        oai::logger::logger_common::nas().debug("Next IEI 0x%x", octet);
       } break;
 
       case kIeiUplinkDataStatus: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Decoding IEI 0x%x", kIeiUplinkDataStatus);
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI 0x%x", kIeiUplinkDataStatus);
         if ((decoded_ie_size = NasHelper::Decode(
                  ie_uplink_data_status_, buf, len, decoded_size, true)) ==
             KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI 0x%x", octet);
+        oai::logger::logger_common::nas().debug("Next IEI 0x%x", octet);
       } break;
 
       case kIeiPduSessionStatus: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Decoding IEI 0x%x", kIeiPduSessionStatus);
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI 0x%x", kIeiPduSessionStatus);
         if ((decoded_ie_size = NasHelper::Decode(
                  ie_pdu_session_status_, buf, len, decoded_size, true)) ==
             KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI 0x%x", octet);
+        oai::logger::logger_common::nas().debug("Next IEI 0x%x", octet);
       } break;
 
       case kIeiUeStatus: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Decoding IEI 0x%x", kIeiUeStatus);
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI 0x%x", kIeiUeStatus);
         if ((decoded_ie_size = NasHelper::Decode(
                  ie_ue_status_, buf, len, decoded_size, true)) ==
             KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI 0x%x", octet);
+        oai::logger::logger_common::nas().debug("Next IEI 0x%x", octet);
       } break;
 
       case kIei5gGuti: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Decoding IEI 0x%x", kIei5gGuti);
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI 0x%x", kIei5gGuti);
         if ((decoded_ie_size = NasHelper::Decode(
                  ie_additional_guti_, buf, len, decoded_size, true)) ==
             KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI 0x%x", octet);
+        oai::logger::logger_common::nas().debug("Next IEI 0x%x", octet);
       } break;
 
       case kIeiAllowedPduSessionStatus: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Decoding IEI 0x%x", kIeiAllowedPduSessionStatus);
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI 0x%x", kIeiAllowedPduSessionStatus);
         if ((decoded_ie_size = NasHelper::Decode(
                  ie_allowed_pdu_session_status_, buf, len, decoded_size,
                  true)) == KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI 0x%x", octet);
+        oai::logger::logger_common::nas().debug("Next IEI 0x%x", octet);
       } break;
 
       case kIeiUeUsageSetting: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Decoding IEI 0x%x", kIeiUeUsageSetting);
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI 0x%x", kIeiUeUsageSetting);
         if ((decoded_ie_size = NasHelper::Decode(
                  ie_ues_usage_setting_, buf, len, decoded_size, true)) ==
             KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI 0x%x", octet);
+        oai::logger::logger_common::nas().debug("Next IEI 0x%x", octet);
       } break;
 
       case kIei5gsDrxParameters: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Decoding IEI 0x%x", kIei5gsDrxParameters);
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI 0x%x", kIei5gsDrxParameters);
         if ((decoded_ie_size = NasHelper::Decode(
                  ie_5gs_drx_parameters_, buf, len, decoded_size, true)) ==
             KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI 0x%x", octet);
+        oai::logger::logger_common::nas().debug("Next IEI 0x%x", octet);
       } break;
 
       case kIeiEpsNasMessageContainer: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Decoding IEI 0x%x", kIeiEpsNasMessageContainer);
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI 0x%x", kIeiEpsNasMessageContainer);
         if ((decoded_ie_size = NasHelper::Decode(
                  ie_eps_nas_message_container_, buf, len, decoded_size,
                  true)) == KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI 0x%x", octet);
+        oai::logger::logger_common::nas().debug("Next IEI 0x%x", octet);
       } break;
 
       case kIeiLadnIndication: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Decoding IEI 0x%x", kIeiLadnIndication);
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI 0x%x", kIeiLadnIndication);
         if ((decoded_ie_size = NasHelper::Decode(
                  ie_ladn_indication_, buf, len, decoded_size, true)) ==
             KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI 0x%x", octet);
+        oai::logger::logger_common::nas().debug("Next IEI 0x%x", octet);
       } break;
 
       case kIeiPayloadContainer: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Decoding IEI 0x%x", kIeiPayloadContainer);
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI 0x%x", kIeiPayloadContainer);
         PayloadContainer ie_payload_container_tmp = {};
         // TODO: verified type of Payload container
         if ((decoded_ie_size = ie_payload_container_tmp.Decode(
@@ -1125,61 +1095,57 @@ int RegistrationRequest::Decode(uint8_t* buf, int len) {
         ie_payload_container_ =
             std::optional<PayloadContainer>(ie_payload_container_tmp);
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI 0x%x", octet);
+        oai::logger::logger_common::nas().debug("Next IEI 0x%x", octet);
       } break;
 
       case 0x53: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Decoding IEI 0x%x", kIei5gsUpdateType);
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI 0x%x", kIei5gsUpdateType);
         if ((decoded_ie_size = NasHelper::Decode(
                  ie_5gs_update_type_, buf, len, decoded_size, true)) ==
             KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI 0x%x", octet);
+        oai::logger::logger_common::nas().debug("Next IEI 0x%x", octet);
       } break;
 
       case kIeiNasMessageContainer: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Decoding IEI 0x%x", kIeiNasMessageContainer);
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI 0x%x", kIeiNasMessageContainer);
         if ((decoded_ie_size = NasHelper::Decode(
                  ie_nas_message_container_, buf, len, decoded_size, true)) ==
             KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI 0x%x", octet);
+        oai::logger::logger_common::nas().debug("Next IEI 0x%x", octet);
       } break;
 
       case kIeiEpsBearerContextStatus: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Decoding IEI 0x%x", kIeiEpsBearerContextStatus);
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI 0x%x", kIeiEpsBearerContextStatus);
         if ((decoded_ie_size = NasHelper::Decode(
                  ie_eps_bearer_context_status_, buf, len, decoded_size,
                  true)) == KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI 0x%x", octet);
+        oai::logger::logger_common::nas().debug("Next IEI 0x%x", octet);
       } break;
 
       default: {
         // TODO:
         if (flag) {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .warn("Unknown IEI 0x%x, stop decoding...", octet);
+          oai::logger::logger_common::nas().warn(
+              "Unknown IEI 0x%x, stop decoding...", octet);
           // Stop decoding
           octet = 0x00;
         }
       } break;
     }
   }
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded RegistrationRequest message (len %d)", decoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Decoded RegistrationRequest message (len %d)", decoded_size);
   return decoded_size;
 }

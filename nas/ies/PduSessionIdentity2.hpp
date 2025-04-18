@@ -34,7 +34,7 @@ class PduSessionIdentity2 : public Type3NasIe {
   PduSessionIdentity2();
   PduSessionIdentity2(uint8_t iei);
   PduSessionIdentity2(uint8_t iei, uint8_t value);
-  ~PduSessionIdentity2();
+  virtual ~PduSessionIdentity2();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

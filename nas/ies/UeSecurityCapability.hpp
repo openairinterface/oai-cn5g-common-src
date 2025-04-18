@@ -43,7 +43,7 @@ class UeSecurityCapability : public Type4NasIe {
       uint8_t iei, uint8_t _5g_ea, uint8_t _5g_ia, uint8_t eea, uint8_t eia);
   UeSecurityCapability(
       uint8_t _5g_ea, uint8_t _5g_ia, uint8_t eea, uint8_t eia);
-  ~UeSecurityCapability();
+  virtual ~UeSecurityCapability();
   void operator=(const UeSecurityCapability& ue_security_capability);
 
   int Encode(uint8_t* buf, int len) const override;
@@ -59,19 +59,28 @@ class UeSecurityCapability : public Type4NasIe {
 
   void SetEea(uint8_t value);
   bool GetEea(uint8_t& value) const;
+  void GetEea(std::optional<uint8_t>& value) const;
 
   void SetEia(uint8_t value);
   bool GetEia(uint8_t& value) const;
+  void GetEia(std::optional<uint8_t>& value) const;
+
+  void SetOctet_7_8(uint16_t value);
+  void GetOctet_7_8(std::optional<uint16_t>& value) const;
+
+  void SetOctet_9_10(uint16_t value);
+  void GetOctet_9_10(std::optional<uint16_t>& value) const;
 
   void Set(uint8_t _5g_ea, uint8_t _5g_ia);
   void Set(uint8_t _5g_ea, uint8_t _5g_ia, uint8_t eea, uint8_t eia);
 
  private:
-  uint8_t _5g_ea_;              // 3rd octet, Mandatory
-  uint8_t _5g_ia_;              // 4th octet, Mandatory
-  std::optional<uint8_t> eea_;  // 5th octet, Optional
-  std::optional<uint8_t> eia_;  // 6th octet, Optional
-  // Spare
+  uint8_t _5g_ea_;                      // 3rd octet, Mandatory
+  uint8_t _5g_ia_;                      // 4th octet, Mandatory
+  std::optional<uint8_t> eea_;          // 5th octet, Optional
+  std::optional<uint8_t> eia_;          // 6th octet, Optional
+  std::optional<uint16_t> octet_7_8_;   // 7th, 8th octets, Optional
+  std::optional<uint16_t> octet_9_10_;  // 9th, 10th octets, Optional
 };
 
 }  // namespace oai::nas

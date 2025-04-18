@@ -34,7 +34,8 @@ class QosFlowIdentifier {
   virtual ~QosFlowIdentifier();
 
   void set(const long& value);
-  bool get(long& value) const;
+  void get(long& value) const;
+  long get() const;
 
   bool encode(Ngap_QosFlowIdentifier_t&) const;
   bool decode(const Ngap_QosFlowIdentifier_t&);

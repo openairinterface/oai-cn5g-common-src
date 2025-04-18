@@ -41,6 +41,13 @@ class BroadcastPlmnItem {
   void set(const PlmnId& plmn, const std::vector<SNssai>& sliceList);
   void get(PlmnId& plmn, std::vector<SNssai>& sliceList) const;
 
+  PlmnId getPlmn() const;
+  void setPlmn(const PlmnId& plmn);
+
+  std::vector<SNssai> getSNssai() const;
+  void setSNssai(const std::vector<SNssai>& sliceList);
+  void addSNssai(const SNssai snssai);
+
   bool encode(Ngap_BroadcastPLMNItem_t&) const;
   bool decode(const Ngap_BroadcastPLMNItem_t&);
 

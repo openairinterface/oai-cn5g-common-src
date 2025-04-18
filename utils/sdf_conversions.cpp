@@ -19,16 +19,20 @@
  *      contact@openairinterface.org
  */
 
-#include "conversions.hpp"
 #include "sdf_conversions.hpp"
-#include "Helpers.h"
-#include "logger_base.hpp"
 
-#include <regex>
 #include <fmt/format.h>
+
+#include <boost/algorithm/string/classification.hpp>
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/trim.hpp>
-#include <boost/algorithm/string/classification.hpp>
+#include <regex>
+
+#include "3gpp_commons.h"
+#include "Helpers.h"
+#include "Struct.hpp"
+#include "conversions.hpp"
+#include "logger_base.hpp"
 
 using namespace oai::utils;
 using namespace oai::logger;
@@ -41,7 +45,7 @@ sdf_conversions::sdf_filter sdf_conversions::sdf_filter::from_string(
 
   // example for parsing: permit out ip from 1.2.3.4/24 80,433-500 to assigned
 
-  std::string regex = "permit out (\\S*) from (\\S*) ?(.*)? to assigned";
+  std::string regex = "permit out (\\S*) from (\\S*) ?(.*)? to (\\S*) ?(.*)?";
   //                               proto        src   ports
 
   std::regex re(regex);
@@ -55,10 +59,17 @@ sdf_conversions::sdf_filter sdf_conversions::sdf_filter::from_string(
   }
   std::string proto = matches[1];
   if (!proto.empty() && proto != "ip") {
-    filter.protocol_identifier     = std::stoi(proto);
-    filter.use_protocol_identifier = true;
-    filter.default_filter          = false;
-    filter.filter_components++;
+    try {
+      filter.protocol_identifier     = std::stoi(proto);
+      filter.use_protocol_identifier = true;
+      filter.default_filter          = false;
+      filter.filter_components++;
+    } catch (const std::invalid_argument& e) {
+      logger_common::common().error(
+          "Invalid protocol: '" + proto +
+          "'. Only 'ip' or protocol numbers are allowed. Protocol filter is "
+          "not considered.");
+    }
   }
 
   std::string src_ip = matches[2];
@@ -78,10 +89,35 @@ sdf_conversions::sdf_filter sdf_conversions::sdf_filter::from_string(
       port_range range = port_range::from_string(split);
       if (range.use_port_range) {
         filter.src_port_ranges.push_back(range);
+        filter.default_filter = false;
         filter.filter_components++;
       }
     }
   }
+
+  std::string dst_ip = matches[4];
+  if (!dst_ip.empty() && dst_ip != "assigned") {
+    filter.dst_ip_range   = ip_range::from_string(dst_ip);
+    filter.default_filter = false;
+    filter.filter_components++;
+  }
+
+  std::string dst_ports = matches[5];
+  if (!dst_ports.empty()) {
+    std::vector<std::string> splits;
+    boost::split(
+        splits, dst_ports, boost::is_any_of(","), boost::token_compress_on);
+    for (auto& split : splits) {
+      boost::trim(split);
+      port_range range = port_range::from_string(split);
+      if (range.use_port_range) {
+        filter.dst_port_ranges.push_back(range);
+        filter.default_filter = false;
+        filter.filter_components++;
+      }
+    }
+  }
+
   return filter;
 }
 
@@ -111,7 +147,7 @@ sdf_conversions::ip_range sdf_conversions::ip_range::from_string(
   boost::split(
       splits, ip_string, boost::is_any_of("/"), boost::token_compress_on);
 
-  if (splits[0] == "any") {
+  if (splits[0] == "any" or splits[0] == "assigned") {
     range.use_ip_range = false;
     return range;
   }
@@ -197,6 +233,64 @@ bool sdf_conversions::parse_bitrate_string(
     // we round up because it is described in 3GPP 29.244
     value = long(bw_value + 0.5);
     unit  = static_cast<bitrate_unit_e>(bitrate_int);
+    return true;
+  } catch (std::invalid_argument&) {
+    logger_common::common().error(
+        "Bitrate value part %s is not a number, cannot parse.",
+        string_bw_value);
+    return false;
+  }
+}
+
+bool oai::utils::sdf_conversions::parse_bitrate_string(
+    const std::string& bit_rate_str, BitRate& bit_rate) {
+  std::string bandwidth_regex =
+      oai::model::common::helpers::BANDWIDTH_VALIDATION_REGEX;
+
+  std::regex re(bandwidth_regex);
+  std::smatch matches;
+  if (!std::regex_match(bit_rate_str, matches, re)) {
+    logger_common::common().error(
+        "Bitrate %s cannot be parsed, does not follow the specification",
+        bit_rate_str);
+    return false;
+  }
+
+  std::string string_bw_value = matches[1];
+  // matches[2] is the fractional part but that is included in matches[1]
+  // already
+  std::string string_unit = matches[3];
+
+  try {
+    double bw_value = std::stod(string_bw_value);
+
+    if (string_unit == "bps") {
+      bit_rate.unit = kBitRateUnitValueIsIncrementedInMultiplesOf1Kbps;
+      bw_value      = bw_value / 1024;
+    } else if (string_unit == "Kbps") {
+      bit_rate.unit = kBitRateUnitValueIsIncrementedInMultiplesOf1Kbps;
+    } else if (string_unit == "Mbps") {
+      bit_rate.unit = kBitRateUnitValueIsIncrementedInMultiplesOf1Mbps;
+    } else if (string_unit == "Gbps") {
+      bit_rate.unit = kBitRateUnitValueIsIncrementedInMultiplesOf1Gbps;
+    } else if (string_unit == "Tbps") {
+      bit_rate.unit = kBitRateUnitValueIsIncrementedInMultiplesOf1Tbps;
+    } else if (string_unit == "Pbps") {
+      bit_rate.unit = kBitRateUnitValueIsIncrementedInMultiplesOf1Pbps;
+    }
+
+    while (bw_value > UINT16_MAX) {
+      if (bit_rate.unit == kBitRateUnitValueIsIncrementedInMultiplesOf256Pbps) {
+        logger_common::common().warn(
+            "Bitrate cannot be higher than %lf x 256 PBPS", bw_value);
+        return false;
+      }
+      bw_value = bw_value / 4;
+      bit_rate.unit++;
+    }
+
+    // we round up because it is described in 3GPP 29.244
+    bit_rate.value = long(bw_value + 0.5);
     return true;
   } catch (std::invalid_argument&) {
     logger_common::common().error(

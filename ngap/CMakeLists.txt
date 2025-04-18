@@ -18,7 +18,7 @@
 #For more information about the OpenAirInterface(OAI) Software Alliance:
 #contact @openairinterface.org
 ################################################################################
-cmake_minimum_required (VERSION 3.22.1)
+set(NGAP_DIR "${SRC_TOP_DIR}/ngap")
 enable_testing()
 include(GoogleTest)
 

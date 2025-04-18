@@ -30,7 +30,9 @@ extern "C" {
 namespace oai::ngap {
 
 //------------------------------------------------------------------------------
-UpTransportLayerInformation::UpTransportLayerInformation() {}
+UpTransportLayerInformation::UpTransportLayerInformation() {
+  m_GtpTunnel = std::nullopt;
+}
 
 //------------------------------------------------------------------------------
 UpTransportLayerInformation::~UpTransportLayerInformation() {}
@@ -39,16 +41,20 @@ UpTransportLayerInformation::~UpTransportLayerInformation() {}
 void UpTransportLayerInformation::set(
     const TransportLayerAddress& transportLayerAddress,
     const GtpTeid& gtpTeid) {
-  m_TransportLayerAddress = transportLayerAddress;
-  m_GtpTeid               = gtpTeid;
+  GtpTunnel gtpTunnel = {};
+  gtpTunnel.set(transportLayerAddress, gtpTeid);
+  m_GtpTunnel = std::make_optional<GtpTunnel>(gtpTunnel);
 }
 
 //------------------------------------------------------------------------------
 bool UpTransportLayerInformation::get(
     TransportLayerAddress& transportLayerAddress, GtpTeid& gtpTeid) const {
-  transportLayerAddress = m_TransportLayerAddress;
-  gtpTeid               = m_GtpTeid;
-
+  if (m_GtpTunnel.has_value()) {
+    m_GtpTunnel.value().get(transportLayerAddress, gtpTeid);
+    return true;
+  } else {
+    return false;
+  }
   return true;
 }
 
@@ -70,15 +76,14 @@ bool UpTransportLayerInformation::encode(
   Ngap_GTPTunnel_t* gtpTunnel =
       (Ngap_GTPTunnel_t*) calloc(1, sizeof(Ngap_GTPTunnel_t));
   if (!gtpTunnel) return false;
-  if (!m_TransportLayerAddress.encode(gtpTunnel->transportLayerAddress)) {
+
+  if (!m_GtpTunnel.has_value()) return false;
+
+  if (!m_GtpTunnel.value().encode(*gtpTunnel)) {
     oai::utils::utils::free_wrapper((void**) &gtpTunnel);
     return false;
   }
 
-  if (!m_GtpTeid.encode(gtpTunnel->gTP_TEID)) {
-    oai::utils::utils::free_wrapper((void**) &gtpTunnel);
-    return false;
-  }
   upTransportLayerInfo.choice.gTPTunnel = gtpTunnel;
   return true;
 }
@@ -91,11 +96,10 @@ bool UpTransportLayerInformation::decode(
     return false;
   if (!upTransportLayerInfo.choice.gTPTunnel) return false;
 
-  if (!m_TransportLayerAddress.decode(
-          upTransportLayerInfo.choice.gTPTunnel->transportLayerAddress))
-    false;
-  if (!m_GtpTeid.decode(upTransportLayerInfo.choice.gTPTunnel->gTP_TEID))
-    return false;
+  GtpTunnel gtpTunnel = {};
+  if (!gtpTunnel.decode(*upTransportLayerInfo.choice.gTPTunnel)) false;
+
+  m_GtpTunnel = std::make_optional<GtpTunnel>(gtpTunnel);
 
   return true;
 }

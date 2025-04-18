@@ -23,6 +23,7 @@
 #define _UL_NAS_TRANSPORT_H_
 
 #include "NasIeHeader.hpp"
+#include "NasMmPlainHeader.hpp"
 
 namespace oai::nas {
 

@@ -37,7 +37,7 @@ class AuthenticationParameterAutn : public Type4NasIe {
   AuthenticationParameterAutn(uint8_t iei);
   AuthenticationParameterAutn(
       uint8_t iei, uint8_t value[kAuthenticationParameterAutnValueLength]);
-  ~AuthenticationParameterAutn();
+  virtual ~AuthenticationParameterAutn();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

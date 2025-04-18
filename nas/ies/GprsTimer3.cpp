@@ -37,7 +37,7 @@ GprsTimer3::GprsTimer3(uint8_t iei, uint8_t unit, uint8_t value)
 }
 
 //------------------------------------------------------------------------------
-GprsTimer3::~GprsTimer3() {}
+// GprsTimer3::~GprsTimer3() {}
 
 //------------------------------------------------------------------------------
 void GprsTimer3::SetValue(uint8_t unit, uint8_t value) {
@@ -57,8 +57,7 @@ uint8_t GprsTimer3::GetValue() const {
 
 //------------------------------------------------------------------------------
 int GprsTimer3::Encode(uint8_t* buf, int len) const {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Encoding %s", GetIeName().c_str());
 
   int encoded_size = 0;
   // Validate the buffer's length and Encode IEI/Length
@@ -70,26 +69,24 @@ int GprsTimer3::Encode(uint8_t* buf, int len) const {
   uint8_t octet = (unit_ << 5) | (value_ & 0x1f);
   ENCODE_U8(buf + encoded_size, octet, encoded_size);
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
 int GprsTimer3::Decode(const uint8_t* const buf, int len, bool is_iei) {
   if (len < kGprsTimer3Length) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this IE (%d "
-            "octet)",
-            kGprsTimer3Length);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the minimum length of this IE (%d "
+        "octet)",
+        kGprsTimer3Length);
     return KEncodeDecodeError;
   }
 
   uint8_t decoded_size = 0;
   uint8_t octet        = 0;
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Decoding %s", GetIeName().c_str());
 
   // IEI and Length
   int decoded_header_size = Type4NasIe::Decode(buf + decoded_size, len, is_iei);
@@ -100,11 +97,9 @@ int GprsTimer3::Decode(const uint8_t* const buf, int len, bool is_iei) {
   unit_  = (octet & 0xe0) >> 5;
   value_ = octet & 0x1f;
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug(
-          "Decoded %s, Unit 0x%x, Value 0x%x", GetIeName().c_str(), unit_,
-          value_);
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Decoded %s, Unit 0x%x, Value 0x%x", GetIeName().c_str(), unit_, value_);
+  oai::logger::logger_common::nas().debug(
+      "Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
   return decoded_size;
 }

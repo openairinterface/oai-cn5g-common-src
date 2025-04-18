@@ -23,6 +23,7 @@
 #define _SECURITY_MODE_COMMAND_H_
 
 #include "NasIeHeader.hpp"
+#include "NasMmPlainHeader.hpp"
 
 namespace oai::nas {
 

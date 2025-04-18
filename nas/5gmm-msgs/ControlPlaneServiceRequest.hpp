@@ -24,8 +24,10 @@
 
 #include "NasIeHeader.hpp"
 #include "bstrlib.h"
+#include "NasMmPlainHeader.hpp"
 
 namespace oai::nas {
+using namespace oai::nas;
 
 class ControlPlaneServiceRequest : public Nas5gmmMessage {
  public:

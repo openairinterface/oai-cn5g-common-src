@@ -26,17 +26,27 @@
 using namespace oai::nas;
 
 //------------------------------------------------------------------------------
+SNssai::SNssai(uint8_t iei) : Type4NasIe(iei) {
+  Clear();
+  SetLengthIndicator(1);  // SST
+}
+
+//------------------------------------------------------------------------------
 SNssai::SNssai(std::optional<uint8_t> iei) : Type4NasIe() {
   if (iei_.has_value()) {
     SetIei(iei.value());
   }
+  Clear();
+  SetLengthIndicator(1);  // SST
+}
+
+//------------------------------------------------------------------------------
+void SNssai::Clear() {
   sst_              = 0;
   sd_               = SD_NO_VALUE;
   mapped_hplmn_sst_ = 0;
   mapped_hplmn_sd_  = SD_NO_VALUE;
-  SetLengthIndicator(1);  // SST
 }
-
 //------------------------------------------------------------------------------
 SNssai::SNssai(std::optional<uint8_t> iei, SNSSAI_s snssai) {
   // IEI
@@ -44,16 +54,22 @@ SNssai::SNssai(std::optional<uint8_t> iei, SNSSAI_s snssai) {
     SetIei(iei.value());
   }
 
+  // Clear SST/SD value
+  Clear();
+
+  uint8_t actual_length = 0;
   // SST
   sst_ = snssai.sst;
+  actual_length += SST_LENGTH;
 
   uint8_t len = snssai.length;
   len -= 1;
 
-  // SD
+  // mappedHPLMN SD
   if (len == SD_LENGTH + SST_LENGTH + SD_LENGTH) {
     mapped_hplmn_sd_ = snssai.mHplmnSd;
     len -= SD_LENGTH;
+    actual_length += SD_LENGTH;
   } else {
     mapped_hplmn_sd_ = SD_NO_VALUE;
   }
@@ -62,19 +78,21 @@ SNssai::SNssai(std::optional<uint8_t> iei, SNSSAI_s snssai) {
   if (len == SD_LENGTH + SST_LENGTH) {
     mapped_hplmn_sst_ = snssai.mHplmnSst;
     len -= SST_LENGTH;
+    actual_length += SST_LENGTH;
   } else {
     mapped_hplmn_sst_ = 0;
   }
 
-  // mappedHPLMN SD
+  //  SD
   if (len == SD_LENGTH) {
     sd_ = snssai.sd;
     len -= SD_LENGTH;
+    actual_length += SD_LENGTH;
   } else {
     sd_ = SD_NO_VALUE;
   }
 
-  SetLengthIndicator(snssai.length);
+  SetLengthIndicator(actual_length);
 }
 
 //------------------------------------------------------------------------------
@@ -117,13 +135,13 @@ void SNssai::GetValue(SNSSAI_t& snssai) const {
 
 //------------------------------------------------------------------------------
 void SNssai::SetSNSSAI(
-    std::optional<int8_t> iei, uint8_t sst, uint32_t sd,
-    uint8_t mapped_hplmn_sst, uint32_t mapped_hplmn_sd) {
-  // IEI
-  if (iei_.has_value()) {
-    SetIei(iei.value());
-  }
+    uint8_t sst, uint32_t sd, uint8_t mapped_hplmn_sst,
+    uint32_t mapped_hplmn_sd) {
   uint8_t length = 0;
+
+  // Clear SST/SD value
+  Clear();
+
   // SST
   sst_ = sst;
   length += SST_LENGTH;
@@ -135,8 +153,8 @@ void SNssai::SetSNSSAI(
   }
 
   // mappedHPLMN SST
-  mapped_hplmn_sst_ = mapped_hplmn_sst;
   if (mapped_hplmn_sst_ > 0) {
+    mapped_hplmn_sst_ = mapped_hplmn_sst;
     length += SST_LENGTH;
   }
 
@@ -150,7 +168,19 @@ void SNssai::SetSNSSAI(
 }
 
 //------------------------------------------------------------------------------
-std::string SNssai::ToString() {
+void SNssai::SetSNSSAI(
+    std::optional<int8_t> iei, uint8_t sst, uint32_t sd,
+    uint8_t mapped_hplmn_sst, uint32_t mapped_hplmn_sd) {
+  // IEI
+  if (iei_.has_value()) {
+    SetIei(iei.value());
+  }
+
+  SetSNSSAI(sst, sd, mapped_hplmn_sst, mapped_hplmn_sd);
+}
+
+//------------------------------------------------------------------------------
+std::string SNssai::ToString() const {
   std::string s;
   s.append(fmt::format("SST {:#x}", sst_));
 
@@ -170,8 +200,7 @@ std::string SNssai::ToString() {
 
 //------------------------------------------------------------------------------
 int SNssai::Encode(uint8_t* buf, int len) const {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Encoding %s", GetIeName().c_str());
 
   int encoded_size = 0;
   // Validate the buffer's length and Encode IEI/Length
@@ -179,49 +208,53 @@ int SNssai::Encode(uint8_t* buf, int len) const {
   if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   encoded_size += encoded_header_size;
 
+  oai::logger::logger_common::nas().debug(
+      "Encoded header %s, len (%d)", GetIeName().c_str(), encoded_size);
+
   // SST
   ENCODE_U8(buf + encoded_size, sst_, encoded_size);
 
   // SD
-  if (sd_ != SD_NO_VALUE) ENCODE_U24(buf + encoded_size, sd_, encoded_size);
+  if (sd_ != SD_NO_VALUE) {
+    ENCODE_U24(buf + encoded_size, sd_, encoded_size);
+  }
 
   // mappedHPLMN SST
-  if (mapped_hplmn_sst_ > 0)
+  if (mapped_hplmn_sst_ > 0) {
     ENCODE_U8(buf + encoded_size, mapped_hplmn_sst_, encoded_size);
+  }
 
   // mappedHPLMN SD
-  if (mapped_hplmn_sd_ != SD_NO_VALUE)
+  if (mapped_hplmn_sd_ != SD_NO_VALUE) {
     ENCODE_U24(buf + encoded_size, mapped_hplmn_sd_, encoded_size);
+  }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
 int SNssai::Decode(uint8_t* buf, int len, const bool is_iei) {
   if (len < kSNssaiMinimumLength) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this IE (%d "
-            "octet)",
-            kSNssaiMinimumLength);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the minimum length of this IE (%d "
+        "octet)",
+        kSNssaiMinimumLength);
     return KEncodeDecodeError;
   }
 
   uint8_t decoded_size = 0;
   uint8_t octet        = 0;
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Decoding %s", GetIeName().c_str());
 
   // IEI and Length
   int decoded_header_size = Type4NasIe::Decode(buf + decoded_size, len, is_iei);
   if (decoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   decoded_size += decoded_header_size;
 
-  sd_               = SD_NO_VALUE;
-  mapped_hplmn_sst_ = 0;
-  mapped_hplmn_sd_  = SD_NO_VALUE;
+  // Clear SST/SD value
+  Clear();
 
   switch (GetLengthIndicator()) {
     case 1: {
@@ -253,9 +286,9 @@ int SNssai::Decode(uint8_t* buf, int len, const bool is_iei) {
     } break;
   }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded S-NSSAI %s", ToString().c_str());
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Decoded S-NSSAI %s", ToString().c_str());
+  oai::logger::logger_common::nas().debug(
+      "Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
   return decoded_size;
 }

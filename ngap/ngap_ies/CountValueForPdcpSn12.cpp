@@ -29,7 +29,6 @@ CountValueForPdcpSn12::CountValueForPdcpSn12() {
 }
 
 //------------------------------------------------------------------------------
-CountValueForPdcpSn12::~CountValueForPdcpSn12() {}
 void CountValueForPdcpSn12::set(const long& pDCP, const long& hfn_PDCP) {
   m_Pdcp    = pDCP;
   m_HfnPdcp = hfn_PDCP;

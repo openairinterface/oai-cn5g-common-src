@@ -34,7 +34,7 @@ class NasKeySetIdentifier : public Type1NasIe {
   NasKeySetIdentifier(uint8_t iei, bool tsc, uint8_t key_id);
   NasKeySetIdentifier(bool tsc,
                       uint8_t key_id);  // Default: low position
-  ~NasKeySetIdentifier();
+  virtual ~NasKeySetIdentifier();
 
   static std::string GetIeName() { return kNasKeySetIdentifierName; }
 
@@ -48,6 +48,8 @@ class NasKeySetIdentifier : public Type1NasIe {
 
   void SetNasKeyIdentifier(uint8_t id);
   uint8_t GetNasKeyIdentifier() const;
+
+  uint8_t GetNgKsi() const;
 
  private:
   void SetValue() override;

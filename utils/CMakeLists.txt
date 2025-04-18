@@ -28,6 +28,8 @@ include_directories(${MODEL_DIR}/common_model)
 include_directories(${UTILS_DIR})
 include_directories(${UTILS_DIR}/bstr)
 include_directories(${LOGGER_DIR})
+include_directories(${NAS_DIR}/common)
+include_directories(${NAS_DIR}/utils)
 
 file(GLOB UTILS_src_files
     ${UTILS_DIR}/bstr/*.c

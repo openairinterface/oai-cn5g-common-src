@@ -78,7 +78,7 @@ class _5gmmCause : public Type3NasIe {
   _5gmmCause();
   _5gmmCause(uint8_t iei);
   _5gmmCause(uint8_t _iei, uint8_t value);
-  ~_5gmmCause();
+  virtual ~_5gmmCause() = default;
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

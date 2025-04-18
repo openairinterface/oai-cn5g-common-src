@@ -33,7 +33,7 @@ class RequestType : public Type1NasIeFormatTv {
  public:
   RequestType();
   RequestType(uint8_t value);
-  ~RequestType();
+  virtual ~RequestType();
 
   static std::string GetIeName() { return kRequestTypeIeName; }
 

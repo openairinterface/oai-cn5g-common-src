@@ -22,7 +22,7 @@
 #include "Type1NasIe.hpp"
 
 #include "3gpp_24.501.hpp"
-#include "common_defs.h"
+#include "common_defs.hpp"
 #include "logger_base.hpp"
 
 using namespace oai::nas;
@@ -75,11 +75,10 @@ void Type1NasIe::Set(bool high_pos) {
 //------------------------------------------------------------------------------
 bool Type1NasIe::Validate(int len) const {
   if (len < kType1NasIeLength) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this IE (%d "
-            "octet)",
-            kType1NasIeLength);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the minimum length of this IE (%d "
+        "octet)",
+        kType1NasIeLength);
     return false;
   }
   return true;
@@ -87,7 +86,10 @@ bool Type1NasIe::Validate(int len) const {
 
 //------------------------------------------------------------------------------
 uint32_t Type1NasIe::GetIeLength() const {
-  return kType1NasIeLength;
+  if (iei_.has_value())
+    return kType1NasIeLength;
+  else
+    return 0;
 }
 
 //------------------------------------------------------------------------------
@@ -152,6 +154,7 @@ int Type1NasIe::Decode(
     }
   }
 
+  GetValue();  // Update value in the derived classes
   if (is_iei) {
     return decoded_size;  // 1 octet
   } else {

@@ -40,7 +40,7 @@ class _5gsDeregistrationType : public Type1NasIeFormatTv {
   _5gsDeregistrationType(uint8_t iei);
   _5gsDeregistrationType(uint8_t iei, uint8_t value);
   _5gsDeregistrationType(_5gs_deregistration_type_t type);
-  ~_5gsDeregistrationType();
+  virtual ~_5gsDeregistrationType();
 
   static std::string GetIeName() { return k5gsDeregistrationTypeIeName; }
 

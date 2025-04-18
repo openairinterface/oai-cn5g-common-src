@@ -40,7 +40,8 @@ AuthenticationResult::~AuthenticationResult() {}
 uint32_t AuthenticationResult::GetLength() const {
   uint32_t msg_len = 0;
   msg_len += ie_header_.GetLength();
-  msg_len += ie_ng_ksi_.GetIeLength();
+  // msg_len += ie_ng_ksi_.GetIeLength();
+  msg_len += 1;  // 1/2 for ngKSI + 1/2 for Spare half octet
   msg_len += ie_eap_message_.GetIeLength();
   if (ie_abba_.has_value()) msg_len += ie_abba_.value().GetIeLength();
 
@@ -71,8 +72,8 @@ void AuthenticationResult::SetEapMessage(const bstring& eap) {
 
 //------------------------------------------------------------------------------
 int AuthenticationResult::Encode(uint8_t* buf, int len) {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoding AuthenticationResult message");
+  oai::logger::logger_common::nas().debug(
+      "Encoding AuthenticationResult message");
 
   if (!Validate(len)) return KEncodeDecodeError;
 
@@ -81,8 +82,7 @@ int AuthenticationResult::Encode(uint8_t* buf, int len) {
 
   // Header
   if ((encoded_ie_size = ie_header_.Encode(buf, len)) == KEncodeDecodeError) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encoding NAS Header error");
+    oai::logger::logger_common::nas().error("Encoding NAS Header error");
     return KEncodeDecodeError;
   }
   encoded_size += encoded_ie_size;
@@ -108,22 +108,21 @@ int AuthenticationResult::Encode(uint8_t* buf, int len) {
     return KEncodeDecodeError;
   }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoded AuthenticationResult message len (%d)", encoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Encoded AuthenticationResult message len (%d)", encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
 int AuthenticationResult::Decode(uint8_t* buf, int len) {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoding AuthenticationResult message");
+  oai::logger::logger_common::nas().debug(
+      "Decoding AuthenticationResult message");
   int decoded_size    = 0;
   int decoded_ie_size = 0;
   // Header
   decoded_ie_size = ie_header_.Decode(buf, len);
   if (decoded_ie_size == KEncodeDecodeError) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Decoding NAS Header error");
+    oai::logger::logger_common::nas().error("Decoding NAS Header error");
     return KEncodeDecodeError;
   }
   decoded_size += decoded_ie_size;
@@ -144,17 +143,14 @@ int AuthenticationResult::Decode(uint8_t* buf, int len) {
     return KEncodeDecodeError;
   }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded_size (%d)", decoded_size);
+  oai::logger::logger_common::nas().debug("Decoded_size (%d)", decoded_size);
 
   // Decode other IEs
   uint8_t octet = 0x00;
   DECODE_U8_VALUE(buf, octet, decoded_size, len);
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("First option IEI (0x%x)", octet);
+  oai::logger::logger_common::nas().debug("First option IEI (0x%x)", octet);
   while ((octet != 0x0)) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .debug("Decoding IEI 0x%x", octet);
+    oai::logger::logger_common::nas().debug("Decoding IEI 0x%x", octet);
     switch (octet) {
       case kIeiAbba: {
         if ((decoded_ie_size =
@@ -163,20 +159,19 @@ int AuthenticationResult::Decode(uint8_t* buf, int len) {
           return KEncodeDecodeError;
         }
         DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .debug("Next IEI (0x%x)", octet);
+        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
       } break;
 
       default: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .warn("Unknown IEI 0x%x, stop decoding...", octet);
+        oai::logger::logger_common::nas().warn(
+            "Unknown IEI 0x%x, stop decoding...", octet);
         // Stop decoding
         octet = 0x00;
       } break;
     }
   }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded AuthenticationResult message len (%d)", decoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Decoded AuthenticationResult message len (%d)", decoded_size);
   return decoded_size;
 }

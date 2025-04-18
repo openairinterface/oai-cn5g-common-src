@@ -37,7 +37,7 @@ class Additional5gSecurityInformation : public Type4NasIe {
  public:
   Additional5gSecurityInformation();
   Additional5gSecurityInformation(bool RINMR, bool HDP);
-  ~Additional5gSecurityInformation();
+  virtual ~Additional5gSecurityInformation();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

@@ -345,6 +345,19 @@ std::string conv::uint32_to_hex_string(uint32_t value) {
 }
 
 //------------------------------------------------------------------------------
+void conv::bstring_to_string(const bstring& b_str, std::string& str) {
+  if (!b_str) return;
+  auto b = bstrcpy(b_str);
+  // std::string str_tmp((char*) bdata(b) , blength(b));
+  str.assign((char*) bdata(b), blength(b));
+}
+
+//------------------------------------------------------------------------------
+void conv::string_to_bstring(const std::string& str, bstring& b_str) {
+  b_str = blk2bstr(str.c_str(), str.length());
+}
+
+//------------------------------------------------------------------------------
 std::string conv::tmsi_to_string(const uint32_t tmsi) {
   std::string s        = {};
   std::string tmsi_str = uint32_to_hex_string(tmsi);
@@ -423,7 +436,7 @@ void conv::convert_string_2_hex(
   memset(data, 0, input_str.length() + 1);
   memcpy((void*) data, (void*) input_str.c_str(), input_str.length());
   oai::utils::output_wrapper::print_buffer(
-      "amf_app", "Data input", data, input_str.length());
+      {}, "Data input", data, input_str.length());
 
   char* datahex = (char*) malloc(input_str.length() * 2 + 1);
   if (!datahex) {

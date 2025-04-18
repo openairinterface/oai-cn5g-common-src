@@ -23,13 +23,12 @@
 #define _NAS_IE_H_
 
 #include <stdint.h>
-
 #include <optional>
 #include <vector>
 
 #include "3gpp_24.501.hpp"
 #include "IeConst.hpp"
-#include "common_defs.h"
+#include "common_defs.hpp"
 #include "logger_base.hpp"
 
 extern "C" {
@@ -43,7 +42,7 @@ namespace oai::nas {
 class NasIe {
  public:
   NasIe();
-  virtual ~NasIe();
+  virtual ~NasIe() = default;
 
   virtual int Encode(uint8_t* buf, int len) const = 0;
   virtual int Decode(

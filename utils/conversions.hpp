@@ -26,6 +26,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string>
+#include "bstrlib.h"
 
 #include "nlohmann/json.hpp"
 #include "yaml-cpp/yaml.h"
@@ -49,7 +50,6 @@ class conv {
   static std::string uint8_to_hex_string(const uint8_t* v, const size_t s);
   static void hex_str_to_uint8(const char* string, uint8_t* des);
   static std::string url_decode(std::string& value);
-
   static bool string_to_int8(const std::string& str, uint8_t& value);
   static bool string_to_int32(const std::string& str, uint32_t& value);
   static bool string_to_int(
@@ -59,6 +59,8 @@ class conv {
   static void int_to_string_hex(
       uint64_t value, std::string& value_str, uint8_t length = 0);
   static std::string uint32_to_hex_string(uint32_t value);
+  static void bstring_to_string(const bstring& b_str, std::string& str);
+  static void string_to_bstring(const std::string& str, bstring& b_str);
   static std::string tmsi_to_string(const uint32_t tmsi);
   static void get_tmsi_from_guti(const std::string& guti, uint32_t& tmsi);
   static void get_amf_id(

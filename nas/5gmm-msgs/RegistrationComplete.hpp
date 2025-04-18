@@ -23,8 +23,10 @@
 #define _REGISTRATION_COMPLETE_H_
 
 #include "NasIeHeader.hpp"
+#include "NasMmPlainHeader.hpp"
 
 namespace oai::nas {
+using namespace oai::nas;
 
 class RegistrationComplete : public Nas5gmmMessage {
  public:

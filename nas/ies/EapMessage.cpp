@@ -22,13 +22,14 @@
 #include "EapMessage.hpp"
 
 #include "3gpp_24.501.hpp"
-#include "common_defs.h"
+#include "common_defs.hpp"
 #include "logger_base.hpp"
 
 using namespace oai::nas;
 
 //------------------------------------------------------------------------------
-EapMessage::EapMessage() : Type6NasIe(), eap_() {
+EapMessage::EapMessage() : Type6NasIe() {
+  eap_ = nullptr;
   SetLengthIndicator(kEapMessageContentMinimumLength);
 }
 
@@ -47,7 +48,9 @@ EapMessage::EapMessage(uint8_t iei, const bstring& eap) : Type6NasIe(iei) {
 }
 
 //------------------------------------------------------------------------------
-EapMessage::~EapMessage() {}
+EapMessage::~EapMessage() {
+  eap_ = nullptr;
+}
 
 //------------------------------------------------------------------------------
 void EapMessage::SetValue(const bstring& eap) {
@@ -65,8 +68,7 @@ void EapMessage::GetValue(bstring& eap) const {
 
 //------------------------------------------------------------------------------
 int EapMessage::Encode(uint8_t* buf, int len) const {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Encoding %s", GetIeName().c_str());
 
   int encoded_size = 0;
   // Validate the buffer's length and Encode IEI/Length (later)
@@ -84,15 +86,14 @@ int EapMessage::Encode(uint8_t* buf, int len) const {
   int encoded_len_ie = 0;
   ENCODE_U16(buf + len_pos, encoded_size - GetHeaderLength(), encoded_len_ie);
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
 int EapMessage::Decode(const uint8_t* const buf, int len, bool is_iei) {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Decoding %s", GetIeName().c_str());
   int decoded_size = 0;
 
   // IEI and Length
@@ -103,8 +104,7 @@ int EapMessage::Decode(const uint8_t* const buf, int len, bool is_iei) {
   ie_len = GetLengthIndicator();
 
   if (len < GetIeLength()) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Len is less than %d", ie_len);
+    oai::logger::logger_common::nas().error("Len is less than %d", ie_len);
     return KEncodeDecodeError;
   }
 
@@ -112,12 +112,11 @@ int EapMessage::Decode(const uint8_t* const buf, int len, bool is_iei) {
   decode_bstring(&eap_, ie_len, (buf + decoded_size), len - decoded_size);
   decoded_size += ie_len;
   for (int i = 0; i < ie_len; i++) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .debug(
-            "Decoded NasMessageContainer value 0x%x", (uint8_t) eap_->data[i]);
+    oai::logger::logger_common::nas().debug(
+        "Decoded NasMessageContainer value 0x%x", (uint8_t) eap_->data[i]);
   }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded %s (len %d)", GetIeName().c_str(), decoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Decoded %s (len %d)", GetIeName().c_str(), decoded_size);
   return decoded_size;
 }

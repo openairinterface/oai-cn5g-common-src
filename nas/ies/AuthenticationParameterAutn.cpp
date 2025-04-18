@@ -22,7 +22,7 @@
 #include "AuthenticationParameterAutn.hpp"
 
 #include "3gpp_24.501.hpp"
-#include "common_defs.h"
+#include "common_defs.hpp"
 #include "logger_base.hpp"
 using namespace oai::nas;
 
@@ -53,8 +53,7 @@ AuthenticationParameterAutn::~AuthenticationParameterAutn() {}
 
 //------------------------------------------------------------------------------
 int AuthenticationParameterAutn::Encode(uint8_t* buf, int len) const {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Encoding %s", GetIeName().c_str());
 
   int encoded_size = 0;
   // Validate the buffer's length and Encode IEI/Length
@@ -69,8 +68,8 @@ int AuthenticationParameterAutn::Encode(uint8_t* buf, int len) const {
     ENCODE_U8(buf + encoded_size, value_[i], encoded_size);
   }
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoded AuthenticationParameterAutn len (%d)", encoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Encoded AuthenticationParameterAutn len (%d)", encoded_size);
   return encoded_size;
 }
 
@@ -79,8 +78,7 @@ int AuthenticationParameterAutn::Decode(
     const uint8_t* const buf, int len, bool is_iei) {
   uint8_t decoded_size = 0;
   uint8_t octet        = 0;
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Decoding %s", GetIeName().c_str());
 
   // IEI and Length
   int decoded_header_size = Type4NasIe::Decode(buf + decoded_size, len, is_iei);
@@ -94,10 +92,10 @@ int AuthenticationParameterAutn::Decode(
     DECODE_U8(buf + decoded_size, value_[i], decoded_size);
   }
   for (int j = 0; j < kAuthenticationParameterAutnValueLength; j++) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .debug("Decoded AuthenticationParameterAutn value (0x%2x)", value_[j]);
+    oai::logger::logger_common::nas().debug(
+        "Decoded AuthenticationParameterAutn value (0x%2x)", value_[j]);
   }
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
   return decoded_size;
 }

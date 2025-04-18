@@ -24,37 +24,65 @@
 namespace oai::ngap {
 
 //------------------------------------------------------------------------------
-QosFlowItemWithDataForWarding::QosFlowItemWithDataForWarding() {
+QosFlowItemWithDataForwarding::QosFlowItemWithDataForwarding() {
   m_DataForwardingAccepted = std::nullopt;
 }
 
 //------------------------------------------------------------------------------
-QosFlowItemWithDataForWarding::~QosFlowItemWithDataForWarding() {}
+QosFlowItemWithDataForwarding::~QosFlowItemWithDataForwarding() {}
 
-void QosFlowItemWithDataForWarding::set(
-    const QosFlowIdentifier& qfi,
+//------------------------------------------------------------------------------
+void QosFlowItemWithDataForwarding::set(
+    const QosFlowIdentifier& qosFlowIdentifier,
     const std::optional<long>& dataForwardingAccepted) {
-  m_Qfi                    = qfi;
+  m_QosFlowIdentifier      = qosFlowIdentifier;
   m_DataForwardingAccepted = dataForwardingAccepted;
 }
+
 //------------------------------------------------------------------------------
-void QosFlowItemWithDataForWarding::getQosFlowIdentifier(
-    Ngap_QosFlowIdentifier_t& qfi) const {
-  long value = {};
-  if (m_Qfi.get(value)) {
-    qfi = (Ngap_QosFlowIdentifier_t) value;
-  }
+void QosFlowItemWithDataForwarding::setQosFlowIdentifier(
+    const QosFlowIdentifier& qosFlowIdentifier) {
+  m_QosFlowIdentifier = qosFlowIdentifier;
 }
 
 //------------------------------------------------------------------------------
-bool QosFlowItemWithDataForWarding::decode(
-    const Ngap_QosFlowItemWithDataForwarding_t& qosFlowItem) {
-  if (!m_Qfi.decode(qosFlowItem.qosFlowIdentifier)) {
+void QosFlowItemWithDataForwarding::getQosFlowIdentifier(
+    QosFlowIdentifier& qosFlowIdentifier) const {
+  qosFlowIdentifier = m_QosFlowIdentifier;
+}
+
+//------------------------------------------------------------------------------
+void QosFlowItemWithDataForwarding::setDataForwardingAccepted(
+    long dataForwardingAccepted) {
+  m_DataForwardingAccepted = std::make_optional<long>(dataForwardingAccepted);
+}
+
+//------------------------------------------------------------------------------
+void QosFlowItemWithDataForwarding::getDataForwardingAccepted(
+    std::optional<long>& dataForwardingAccepted) const {
+  dataForwardingAccepted = m_DataForwardingAccepted;
+}
+//------------------------------------------------------------------------------
+bool QosFlowItemWithDataForwarding::encode(
+    Ngap_QosFlowItemWithDataForwarding_t& item) const {
+  if (!m_QosFlowIdentifier.encode(item.qosFlowIdentifier)) return false;
+  if (m_DataForwardingAccepted.has_value()) {
+    item.dataForwardingAccepted  = (long*) calloc(1, sizeof(long));
+    *item.dataForwardingAccepted = m_DataForwardingAccepted.value();
+  }
+
+  return true;
+}
+
+//------------------------------------------------------------------------------
+bool QosFlowItemWithDataForwarding::decode(
+    const Ngap_QosFlowItemWithDataForwarding_t& item) {
+  if (!m_QosFlowIdentifier.decode(item.qosFlowIdentifier)) {
     return false;
   }
-  if (qosFlowItem.dataForwardingAccepted)
+  if (item.dataForwardingAccepted)
     m_DataForwardingAccepted =
-        std::make_optional<long>(*qosFlowItem.dataForwardingAccepted);
+        std::make_optional<long>(*item.dataForwardingAccepted);
   return true;
 }
 }  // namespace oai::ngap

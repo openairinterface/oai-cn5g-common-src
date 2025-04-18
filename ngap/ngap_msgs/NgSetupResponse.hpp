@@ -53,8 +53,8 @@ class NgSetupResponseMsg : public NgapMessage {
   void setRelativeAmfCapacity(const long& capacity);
   long getRelativeAmfCapacity() const;
 
-  void setPlmnSupportList(const std::vector<PlmnSliceSupport_t>& list);
-  bool getPlmnSupportList(std::vector<PlmnSliceSupport_t>& list) const;
+  void setPlmnSupportList(const PlmnSupportList& list);
+  void getPlmnSupportList(PlmnSupportList& list) const;
 
   void setUeRetentionInformation(const UeRetentionInformation& value);
   void getUeRetentionInformation(

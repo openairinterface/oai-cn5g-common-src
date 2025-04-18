@@ -31,6 +31,7 @@
 constexpr uint8_t kNasMmPlainHeaderLength = 3;
 
 namespace oai::nas {
+using namespace oai::nas;
 
 class NasMmPlainHeader : public Nas5gmmMessage {
  public:
@@ -38,7 +39,7 @@ class NasMmPlainHeader : public Nas5gmmMessage {
   NasMmPlainHeader(uint8_t epd);
   NasMmPlainHeader(uint8_t epd, uint8_t msg_type);
   NasMmPlainHeader(uint8_t epd, uint8_t security_header_type, uint8_t msg_type);
-  virtual ~NasMmPlainHeader();
+  virtual ~NasMmPlainHeader() = default;
 
   void SetHeader(uint8_t epd, uint8_t security_header_type, uint8_t msg_type);
 

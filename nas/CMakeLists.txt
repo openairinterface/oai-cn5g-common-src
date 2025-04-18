@@ -33,6 +33,7 @@ include_directories(${UTILS_DIR})
 include_directories(${UTILS_DIR}/bstr)
 
 file(GLOB NAS_src_files
+    ${NAS_DIR}/common/*.cpp
     ${NAS_DIR}/5gmm-msgs/*.cpp
     ${NAS_DIR}/ies/*.cpp
     ${NAS_DIR}/utils/*.cpp

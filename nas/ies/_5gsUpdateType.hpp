@@ -36,7 +36,7 @@ class _5gsUpdateType : public Type4NasIe {
   _5gsUpdateType();
   _5gsUpdateType(
       uint8_t eps_PNB_CIoT, uint8_t _5gs_PNB_CIoT, bool ng_RAN, bool sms);
-  ~_5gsUpdateType();
+  virtual ~_5gsUpdateType();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

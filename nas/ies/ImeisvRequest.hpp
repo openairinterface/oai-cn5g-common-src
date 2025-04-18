@@ -32,7 +32,7 @@ class ImeisvRequest : public Type1NasIeFormatTv {
  public:
   ImeisvRequest();
   ImeisvRequest(uint8_t value);
-  ~ImeisvRequest();
+  virtual ~ImeisvRequest();
 
   static std::string GetIeName() { return kImeisvRequestIeName; }
 

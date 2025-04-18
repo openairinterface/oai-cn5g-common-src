@@ -19,8 +19,8 @@
  *      contact@openairinterface.org
  */
 
-#ifndef _SOR_TRANSPARENT_CONTAINER_H_
-#define _SOR_TRANSPARENT_CONTAINER_H_
+#ifndef _SOR_TRANSPARENT_CONTAINER_HPP_
+#define _SOR_TRANSPARENT_CONTAINER_HPP_
 
 #include "Type6NasIe.hpp"
 
@@ -39,7 +39,7 @@ class SorTransparentContainer : public Type6NasIe {
   SorTransparentContainer(
       uint8_t header,
       const uint8_t (&value)[kSorTransparentContainerIeMacLength]);
-  ~SorTransparentContainer();
+  virtual ~SorTransparentContainer();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

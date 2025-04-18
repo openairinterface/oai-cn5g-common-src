@@ -23,8 +23,10 @@
 #define _IDENTITY_RESPONSE_H_
 
 #include "NasIeHeader.hpp"
+#include "NasMmPlainHeader.hpp"
 
 namespace oai::nas {
+using namespace oai::nas;
 
 class IdentityResponse : public Nas5gmmMessage {
  public:

@@ -76,13 +76,12 @@ bool HandoverRequest::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
       m_HandoverRequestIes =
           &ngapPdu->choice.initiatingMessage->value.choice.HandoverRequest;
     } else {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .error("Check HandoverRequest error");
+      oai::logger::logger_common::ngap().error("Check HandoverRequest error");
       return false;
     }
   } else {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("HandoverRequest MessageType error");
+    oai::logger::logger_common::ngap().error(
+        "HandoverRequest MessageType error");
     return false;
   }
   for (int i = 0; i < m_HandoverRequestIes->protocolIEs.list.count; i++) {
@@ -95,13 +94,13 @@ bool HandoverRequest::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           if (!m_AmfUeNgapId.decode(
                   m_HandoverRequestIes->protocolIEs.list.array[i]
                       ->value.choice.AMF_UE_NGAP_ID)) {
-            oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-                .error("Decode NGAP AMF_UE_NGAP_ID IE error");
+            oai::logger::logger_common::ngap().error(
+                "Decode NGAP AMF_UE_NGAP_ID IE error");
             return false;
           }
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .error("Decode NGAP AMF_UE_NGAP_ID IE error");
+          oai::logger::logger_common::ngap().error(
+              "Decode NGAP AMF_UE_NGAP_ID IE error");
           return false;
         }
       } break;
@@ -113,8 +112,8 @@ bool HandoverRequest::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           m_HandoverType = m_HandoverRequestIes->protocolIEs.list.array[i]
                                ->value.choice.HandoverType;
         } else {
-          oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-              .error("Decode NGAP Handover Type IE error");
+          oai::logger::logger_common::ngap().error(
+              "Decode NGAP Handover Type IE error");
           return false;
         }
       } break;
@@ -137,8 +136,8 @@ bool HandoverRequest::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         // TODO: Redirection for Voice EPS Fallback
         // TODO: CN Assisted RAN Parameters Tuning
       default: {
-        oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-            .error("Decode NGAP HandoverRequest PDU error");
+        oai::logger::logger_common::ngap().error(
+            "Decode NGAP HandoverRequest PDU error");
         return false;
       }
     }
@@ -159,16 +158,14 @@ void HandoverRequest::setAmfUeNgapId(const uint64_t& id) {
 
   int ret = m_AmfUeNgapId.encode(ie->value.choice.AMF_UE_NGAP_ID);
   if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode AMF_UE_NGAP_ID IE error");
+    oai::logger::logger_common::ngap().error("Encode AMF_UE_NGAP_ID IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
   ret = ASN_SEQUENCE_ADD(&m_HandoverRequestIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode AMF_UE_NGAP_ID IE error");
+    oai::logger::logger_common::ngap().error("Encode AMF_UE_NGAP_ID IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -182,8 +179,7 @@ void HandoverRequest::setHandoverType(const long& type)  // 0--intra5gs
   ie->value.choice.HandoverType = type;
   int ret = ASN_SEQUENCE_ADD(&m_HandoverRequestIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode HandoverType IE error");
+    oai::logger::logger_common::ngap().error("Encode HandoverType IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -200,8 +196,7 @@ void HandoverRequest::setCause(
   m_Cause.encode(ie->value.choice.Cause);
   int ret = ASN_SEQUENCE_ADD(&m_HandoverRequestIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode Cause IE error");
+    oai::logger::logger_common::ngap().error("Encode Cause IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -220,8 +215,8 @@ void HandoverRequest::setUeAggregateMaximumBitRate(
 
   int ret = ASN_SEQUENCE_ADD(&m_HandoverRequestIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode UEAggregateMaximumBitRate IE error");
+    oai::logger::logger_common::ngap().error(
+        "Encode UEAggregateMaximumBitRate IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -240,8 +235,8 @@ void HandoverRequest::setUeSecurityCapabilities(
 
   int ret = ASN_SEQUENCE_ADD(&m_HandoverRequestIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode UESecurityCapabilities IE error");
+    oai::logger::logger_common::ngap().error(
+        "Encode UESecurityCapabilities IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -258,8 +253,7 @@ void HandoverRequest::setGuami(
 
   int ret = ASN_SEQUENCE_ADD(&m_HandoverRequestIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode GUAMI IE error");
+    oai::logger::logger_common::ngap().error("Encode GUAMI IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -277,8 +271,7 @@ void HandoverRequest::setGuami(
   int ret = ASN_SEQUENCE_ADD(&m_HandoverRequestIes->protocolIEs.list, ie);
 
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode GUAMI IE error");
+    oai::logger::logger_common::ngap().error("Encode GUAMI IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -296,8 +289,7 @@ void HandoverRequest::setGuami(
   int ret = ASN_SEQUENCE_ADD(&m_HandoverRequestIes->protocolIEs.list, ie);
 
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode GUAMI IE error");
+    oai::logger::logger_common::ngap().error("Encode GUAMI IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -308,8 +300,8 @@ void HandoverRequest::setAllowedNssai(const std::vector<SNssai>& list) {
     it.encode(item->s_NSSAI);
     int ret = ASN_SEQUENCE_ADD(&m_AllowedNssai.list, item);
     if (ret != 0)
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .error("Encode PDUSessionResourceHandoverListItem IE error");
+      oai::logger::logger_common::ngap().error(
+          "Encode PDUSessionResourceHandoverListItem IE error");
   }
   ngap_utils::print_asn_msg(&asn_DEF_Ngap_AllowedNSSAI, &m_AllowedNssai);
   Ngap_HandoverRequestIEs_t* ie =
@@ -320,8 +312,7 @@ void HandoverRequest::setAllowedNssai(const std::vector<SNssai>& list) {
   ie->value.choice.AllowedNSSAI = m_AllowedNssai;
   int ret = ASN_SEQUENCE_ADD(&m_HandoverRequestIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode AllowedNSSAI IE error");
+    oai::logger::logger_common::ngap().error("Encode AllowedNSSAI IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -337,8 +328,7 @@ void HandoverRequest::setSecurityContext(const long& count, const bstring& nh) {
   ie->value.choice.SecurityContext = m_SecurityContext;
   int ret = ASN_SEQUENCE_ADD(&m_HandoverRequestIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode SecurityContext IE error");
+    oai::logger::logger_common::ngap().error("Encode SecurityContext IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -371,16 +361,16 @@ void HandoverRequest::setPduSessionResourceSetupList(
   int ret = m_PduSessionResourceSetupList.encode(
       ie->value.choice.PDUSessionResourceSetupListHOReq);
   if (!ret) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode PDUSessionResourceSetupListSUReq IE error");
+    oai::logger::logger_common::ngap().error(
+        "Encode PDUSessionResourceSetupListSUReq IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
   ret = ASN_SEQUENCE_ADD(&m_HandoverRequestIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode PDUSessionResourceSetupListSUReq IE error");
+    oai::logger::logger_common::ngap().error(
+        "Encode PDUSessionResourceSetupListSUReq IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -399,8 +389,8 @@ void HandoverRequest::setSourceToTargetTransparentContainer(
       ie->value.choice.SourceToTarget_TransparentContainer, sourceTotarget);
   int ret = ASN_SEQUENCE_ADD(&m_HandoverRequestIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode m_SourceToTargetTransparentContainer IE error");
+    oai::logger::logger_common::ngap().error(
+        "Encode m_SourceToTargetTransparentContainer IE error");
 }
 
 //------------------------------------------------------------------------------
@@ -419,8 +409,8 @@ void HandoverRequest::setMobilityRestrictionList(const PlmnId& plmn_id) {
       ie->value.choice.MobilityRestrictionList);
   int ret = ASN_SEQUENCE_ADD(&m_HandoverRequestIes->protocolIEs.list, ie);
   if (ret != 0)
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error("Encode MobilityRestrictionList IE error");
+    oai::logger::logger_common::ngap().error(
+        "Encode MobilityRestrictionList IE error");
 }
 
 }  // namespace oai::ngap

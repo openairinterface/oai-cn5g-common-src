@@ -22,6 +22,8 @@
 #ifndef _TYPE3_NAS_IE_H_
 #define _TYPE3_NAS_IE_H_
 
+#include <optional>
+
 #include "NasIe.hpp"
 
 constexpr uint8_t kType3NasIeFormatTvLength = 1;
@@ -31,7 +33,7 @@ class Type3NasIe : public NasIe {
  public:
   Type3NasIe();
   Type3NasIe(uint8_t iei);
-  virtual ~Type3NasIe();
+  virtual ~Type3NasIe() = default;
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

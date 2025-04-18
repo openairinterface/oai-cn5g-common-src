@@ -31,9 +31,9 @@ namespace oai::nas {
 
 class NasMessageType : public NasIe {
  public:
-  NasMessageType(){};  // TODO: = delete;
+  NasMessageType() : NasIe(){};  // TODO: = delete;
   NasMessageType(uint8_t message_type);
-  virtual ~NasMessageType();
+  virtual ~NasMessageType(){};
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

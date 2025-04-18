@@ -34,14 +34,17 @@ class QosFlowToBeForwardedItem {
   QosFlowToBeForwardedItem();
   virtual ~QosFlowToBeForwardedItem();
 
-  void set(const QosFlowIdentifier& qfi);
+  void setQosFlowIdentifier(const QosFlowIdentifier& qosFlowIdentifier);
+  bool getQosFlowIdentifier(QosFlowIdentifier& qosFlowIdentifier) const;
+
   // TODO: Get
 
-  bool encode(Ngap_QosFlowToBeForwardedItem_t& qosFlowItem) const;
+  bool encode(Ngap_QosFlowToBeForwardedItem_t& item) const;
+  bool decode(const Ngap_QosFlowToBeForwardedItem_t& item);
   // TODO: decode
 
  private:
-  QosFlowIdentifier m_Qfi;  // Mandatory
+  QosFlowIdentifier m_QosFlowIdentifier;  // Mandatory
 };
 }  // namespace oai::ngap
 #endif

@@ -22,8 +22,8 @@
 #ifndef _PAYLOAD_CONTAINER_H_
 #define _PAYLOAD_CONTAINER_H_
 
-#include "NasIeHeader.hpp"
 #include "Type6NasIe.hpp"
+#include "Struct.hpp"
 
 constexpr uint8_t kPayloadContainerMinimumLength = 4;
 constexpr uint8_t kPayloadContainerContentMinimumLength =
@@ -42,7 +42,7 @@ class PayloadContainer : public Type6NasIe {
   PayloadContainer(const std::vector<PayloadContainerEntry>& content);
   PayloadContainer(
       uint8_t iei, const std::vector<PayloadContainerEntry>& content);
-  ~PayloadContainer();
+  virtual ~PayloadContainer();
 
   int Encode(uint8_t* buf, int len, uint8_t type) const;
   int Decode(const uint8_t* const buf, int len, bool is_iei, uint8_t type);

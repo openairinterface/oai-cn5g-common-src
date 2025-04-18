@@ -29,9 +29,6 @@ ConfidentialityProtectionResult::ConfidentialityProtectionResult() {
 }
 
 //------------------------------------------------------------------------------
-ConfidentialityProtectionResult::~ConfidentialityProtectionResult() {}
-
-//------------------------------------------------------------------------------
 void ConfidentialityProtectionResult::set(
     const e_Ngap_ConfidentialityProtectionResult& value) {
   m_ConfidentialityProtectionResult = value;

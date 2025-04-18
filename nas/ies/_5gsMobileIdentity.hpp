@@ -42,7 +42,7 @@ class _5gsMobileIdentity : public Type6NasIe {
  public:
   _5gsMobileIdentity();
   _5gsMobileIdentity(uint8_t iei);
-  ~_5gsMobileIdentity();
+  virtual ~_5gsMobileIdentity();
 
   // Common
   int Encode(uint8_t* buf, int len) const override;

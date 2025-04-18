@@ -37,7 +37,7 @@ class PlmnList : public Type4NasIe {
  public:
   PlmnList();
   PlmnList(uint8_t iei);
-  ~PlmnList();
+  virtual ~PlmnList();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

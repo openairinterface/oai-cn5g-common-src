@@ -64,8 +64,8 @@ typedef struct s_nssai  // section 28.4, TS23.003
 
   std::string toString() const {
     std::string s = {};
-    s.append("SST=").append(std::to_string(sst));
-    s.append(", SD=").append(sd);
+    s.append("sst, sd: ").append(std::to_string(sst));
+    s.append(", ").append(sd);
     return s;
   }
 
@@ -133,11 +133,6 @@ typedef struct nr_cell_identity_s {
   uint32_t gnb_id;
   uint8_t cell_id : 4;
 } nr_cell_identity_t;
-
-typedef struct allowed_nssai {
-  uint8_t sst;
-  uint32_t sd : 24;
-} allowed_nssai;
 
 typedef struct guami_s {
   plmn_t plmn;

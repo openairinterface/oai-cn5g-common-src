@@ -26,7 +26,9 @@
 namespace oai::ngap {
 
 //------------------------------------------------------------------------------
-UeRadioCapability::UeRadioCapability() {}
+UeRadioCapability::UeRadioCapability() {
+  m_UeRadioCapability = nullptr;
+}
 
 /*
 UeRadioCapability::UeRadioCapability(const OCTET_STRING_t& capability) {

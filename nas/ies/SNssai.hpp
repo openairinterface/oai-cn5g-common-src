@@ -35,24 +35,28 @@ namespace oai::nas {
 
 class SNssai : public Type4NasIe {
  public:
+  SNssai(uint8_t iei);
   SNssai(std::optional<uint8_t> iei);
   SNssai(std::optional<uint8_t> iei, SNSSAI_s snssai);
-  ~SNssai();
+  virtual ~SNssai();
+
+  void Clear();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(uint8_t* buf, int len, const bool is_option = true);
 
   static std::string GetIeName() { return kSNssaiIeName; }
 
-  uint8_t GetLength();
-
   void GetValue(SNSSAI_t& snssai) const;
 
   void SetSNSSAI(
+      uint8_t sst, uint32_t sd, uint8_t mapped_hplmn_sst = 0,
+      uint32_t mapped_hplmn_sd = SD_NO_VALUE);
+  void SetSNSSAI(
       std::optional<int8_t> iei, uint8_t sst, uint32_t sd,
-      uint8_t mapped_hplmn_sst, uint32_t mapped_hplmn_sd);
+      uint8_t mapped_hplmn_sst = 0, uint32_t mapped_hplmn_sd = SD_NO_VALUE);
 
-  std::string ToString();
+  std::string ToString() const;
 
  private:
   uint8_t sst_;

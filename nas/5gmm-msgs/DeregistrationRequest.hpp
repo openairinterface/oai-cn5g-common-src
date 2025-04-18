@@ -23,8 +23,10 @@
 #define _DEREGISTRATION_REQUEST_H_
 
 #include "NasIeHeader.hpp"
+#include "NasMmPlainHeader.hpp"
 
 namespace oai::nas {
+using namespace oai::nas;
 
 class DeregistrationRequest : public Nas5gmmMessage {
  public:

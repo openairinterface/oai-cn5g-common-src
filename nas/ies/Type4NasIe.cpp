@@ -31,16 +31,16 @@ Type4NasIe::Type4NasIe() : NasIe() {
 
 //------------------------------------------------------------------------------
 Type4NasIe::Type4NasIe(uint8_t iei) : NasIe() {
-  iei_ = std::optional<uint8_t>(iei);
+  iei_ = std::make_optional<uint8_t>(iei);
   li_  = 0;
 }
 
 //------------------------------------------------------------------------------
-Type4NasIe::~Type4NasIe() {}
+// Type4NasIe::~Type4NasIe() {}
 
 //------------------------------------------------------------------------------
 void Type4NasIe::SetIei(uint8_t iei) {
-  iei_ = std::optional<uint8_t>(iei);
+  iei_ = std::make_optional<uint8_t>(iei);
 }
 
 //------------------------------------------------------------------------------
@@ -78,10 +78,9 @@ bool Type4NasIe::Validate(int len) const {
   uint32_t ie_len = GetIeLength();  // Length of the content + IEI/Len
 
   if (len < ie_len) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the length of this IE (%ld octet(s))",
-            ie_len);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the length of this IE (%ld octet(s))",
+        ie_len);
     return false;
   }
   return true;
@@ -91,12 +90,11 @@ bool Type4NasIe::Validate(int len) const {
 bool Type4NasIe::ValidateHeader(int len) const {
   int header_len = GetHeaderLength();  // Length of IEI/Len
   if (len < header_len) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the length of the header (IEI/Length) "
-            "of "
-            "this IE (%d octet(s))",
-            header_len);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the length of the header (IEI/Length) "
+        "of "
+        "this IE (%d octet(s))",
+        header_len);
     return false;
   }
   return true;

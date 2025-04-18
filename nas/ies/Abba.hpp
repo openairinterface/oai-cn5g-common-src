@@ -37,7 +37,7 @@ class Abba : public Type4NasIe {
   Abba(uint8_t iei);
   Abba(uint8_t length, uint8_t* value);
   Abba(uint8_t iei, uint8_t length, uint8_t* value);
-  ~Abba();
+  virtual ~Abba();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

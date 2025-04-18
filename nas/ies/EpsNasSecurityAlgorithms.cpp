@@ -83,15 +83,13 @@ void EpsNasSecurityAlgorithms::Get(
 
 //------------------------------------------------------------------------------
 int EpsNasSecurityAlgorithms::Encode(uint8_t* buf, int len) const {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Encoding %s", GetIeName().c_str());
 
   if (len < kEpsNasSecurityAlgorithmsLength) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this IE (%d "
-            "octet)",
-            kEpsNasSecurityAlgorithmsLength);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the minimum length of this IE (%d "
+        "octet)",
+        kEpsNasSecurityAlgorithmsLength);
     return KEncodeDecodeError;
   }
   int encoded_size = 0;
@@ -105,23 +103,21 @@ int EpsNasSecurityAlgorithms::Encode(uint8_t* buf, int len) const {
 
   ENCODE_U8(buf + encoded_size, octet, encoded_size);
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
 int EpsNasSecurityAlgorithms::Decode(
     const uint8_t* const buf, int len, bool is_iei) {
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoding %s", GetIeName().c_str());
+  oai::logger::logger_common::nas().debug("Decoding %s", GetIeName().c_str());
 
   if (len < kEpsNasSecurityAlgorithmsLength) {
-    oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-        .error(
-            "Buffer length is less than the minimum length of this IE (%d "
-            "octet)",
-            kEpsNasSecurityAlgorithmsLength);
+    oai::logger::logger_common::nas().error(
+        "Buffer length is less than the minimum length of this IE (%d "
+        "octet)",
+        kEpsNasSecurityAlgorithmsLength);
     return KEncodeDecodeError;
   }
 
@@ -136,7 +132,7 @@ int EpsNasSecurityAlgorithms::Decode(
   type_of_ciphering_algorithm_            = (octet & 0x70) >> 4;
   type_of_integrity_protection_algorithm_ = octet & 0x07;
 
-  oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-      .debug("Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
+  oai::logger::logger_common::nas().debug(
+      "Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
   return decoded_size;
 }

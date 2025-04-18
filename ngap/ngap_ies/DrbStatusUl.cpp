@@ -63,8 +63,7 @@ bool DrbStatusUl::encode(Ngap_DRBStatusUL_t& ul) const {
     ul.choice.dRBStatusUL18 =
         (Ngap_DRBStatusUL18_t*) calloc(1, sizeof(Ngap_DRBStatusUL18_t));
     if (!m_Ul18.value().encode(*ul.choice.dRBStatusUL18)) {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .error("Encode DRBStatusUL18 IE error");
+      oai::logger::logger_common::ngap().error("Encode DRBStatusUL18 IE error");
       return false;
     }
   } else if (m_Ul12.has_value()) {
@@ -72,8 +71,7 @@ bool DrbStatusUl::encode(Ngap_DRBStatusUL_t& ul) const {
     ul.choice.dRBStatusUL12 =
         (Ngap_DRBStatusUL12_t*) calloc(1, sizeof(Ngap_DRBStatusUL12_t));
     if (!m_Ul12.value().encode(*ul.choice.dRBStatusUL12)) {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .error("Encode DRBStatusUL18 IE error");
+      oai::logger::logger_common::ngap().error("Encode DRBStatusUL18 IE error");
       return false;
     }
   }
@@ -86,16 +84,14 @@ bool DrbStatusUl::decode(const Ngap_DRBStatusUL_t& ul) {
   if (ul.present == Ngap_DRBStatusUL_PR_dRBStatusUL18) {
     DrbStatusUl18 item = {};
     if (!item.decode(*ul.choice.dRBStatusUL18)) {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .error("Decode DRBStatusUL18 IE error");
+      oai::logger::logger_common::ngap().error("Decode DRBStatusUL18 IE error");
       return false;
     }
     m_Ul18 = std::make_optional<DrbStatusUl18>(item);
   } else if (ul.present == Ngap_DRBStatusUL_PR_dRBStatusUL12) {
     DrbStatusUl12 item = {};
     if (!item.decode(*ul.choice.dRBStatusUL12)) {
-      oai::logger::logger_registry::get_logger(LOGGER_COMMON)
-          .error("Decode DRBStatusUL12 IE error");
+      oai::logger::logger_common::ngap().error("Decode DRBStatusUL12 IE error");
       return false;
     }
     m_Ul12 = std::make_optional<DrbStatusUl12>(item);

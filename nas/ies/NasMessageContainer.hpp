@@ -37,7 +37,7 @@ class NasMessageContainer : public Type6NasIe {
  public:
   NasMessageContainer();
   NasMessageContainer(const bstring& value);
-  ~NasMessageContainer();
+  virtual ~NasMessageContainer();
 
   int Encode(uint8_t* buf, int len) const override;
   int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;

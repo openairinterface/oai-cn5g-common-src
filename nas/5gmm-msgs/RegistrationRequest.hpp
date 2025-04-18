@@ -27,6 +27,7 @@
 #include <vector>
 
 #include "NasIeHeader.hpp"
+#include "NasMmPlainHeader.hpp"
 
 namespace oai::nas {
 

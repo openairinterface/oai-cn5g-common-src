@@ -33,23 +33,29 @@ extern "C" {
 
 namespace oai::ngap {
 
-class QosFlowItemWithDataForWarding {
+class QosFlowItemWithDataForwarding {
  public:
-  QosFlowItemWithDataForWarding();
-  virtual ~QosFlowItemWithDataForWarding();
+  QosFlowItemWithDataForwarding();
+  virtual ~QosFlowItemWithDataForwarding();
 
   void set(
       const QosFlowIdentifier& qfi,
       const std::optional<long>& dataForwardingAccepted);
 
-  void getQosFlowIdentifier(Ngap_QosFlowIdentifier_t& qfi) const;
+  void setQosFlowIdentifier(const QosFlowIdentifier& qosFlowIdentifier);
+  void getQosFlowIdentifier(QosFlowIdentifier& qosFlowIdentifier) const;
 
-  bool decode(const Ngap_QosFlowItemWithDataForwarding_t& qosFlowItem);
-  // TODO: encode
+  void setDataForwardingAccepted(long dataForwardingAccepted);
+  void getDataForwardingAccepted(
+      std::optional<long>& dataForwardingAccepted) const;
+
+  bool encode(Ngap_QosFlowItemWithDataForwarding_t&) const;
+  bool decode(const Ngap_QosFlowItemWithDataForwarding_t&);
 
  private:
-  QosFlowIdentifier m_Qfi;                       // Mandatory
+  QosFlowIdentifier m_QosFlowIdentifier;         // Mandatory
   std::optional<long> m_DataForwardingAccepted;  // Optional
+  // TODO: Current QoS Parameters Set Index
 };
 }  // namespace oai::ngap
 

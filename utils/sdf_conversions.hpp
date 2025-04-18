@@ -23,8 +23,12 @@
 #define FILE_SDF_CONVERSIONS_HPP_SEEN
 
 #include <netinet/in.h>
+
 #include <string>
 #include <vector>
+
+#include "3gpp_commons.h"
+#include "Struct.hpp"
 
 namespace oai::utils::sdf_conversions {
 
@@ -53,6 +57,8 @@ struct sdf_filter {
   // as I understood the spec, there is only one IP range (not like for ports)
   ip_range src_ip_range;
   std::vector<port_range> src_port_ranges;
+  ip_range dst_ip_range;
+  std::vector<port_range> dst_port_ranges;
   int filter_components = 0;
   // TODO there are some more things in RFC 6733 but this should cover most
   // cases
@@ -82,6 +88,7 @@ enum class bitrate_unit_e {
 bool parse_bitrate_string(
     const std::string& bitrate, uint16_t& value, bitrate_unit_e& unit);
 
+bool parse_bitrate_string(const std::string& bitrate, BitRate& bit_rate);
 /**
  * Parses 3GPP 29.571 BitRate string to a desired unit (e.g. KBPS)
  * @param bitrate input: bitrate string

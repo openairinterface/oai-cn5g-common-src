@@ -68,17 +68,6 @@ typedef struct S_Nssai_s {
   }
 } S_Nssai;
 
-typedef struct PlmnSliceSupport_s {
-  std::string mcc;
-  std::string mnc;
-  std::vector<S_Nssai> sliceList;
-} PlmnSliceSupport_t;
-
-typedef struct SupportedTaItem_s {
-  uint32_t tac;
-  std::vector<PlmnSliceSupport_t> plmnSliceSupportList;
-} SupportedTaItem_t;
-
 typedef struct GuamiItem_s {
   std::string mcc;
   std::string mnc;
@@ -136,11 +125,6 @@ typedef struct {
 typedef struct {
   uint8_t pduSessionId;
 } PDUSessionResourceCxtRelCplItem_t;
-
-typedef struct {
-  std::string ipAddress;
-  uint32_t gtpTeid;
-} GtpTunnel_t;
 
 typedef struct {
   long _5qi;
@@ -224,11 +208,6 @@ typedef struct {
   OCTET_STRING_t handoverRequiredTransfer;
 } PDUSessionResourceItem_t;
 
-typedef struct {
-  uint8_t pduSessionId;
-  S_Nssai sNssai;
-  OCTET_STRING_t pduSessionResourceSetupRequestTransfer;
-} PDUSessionResourceSetupItem_t;
 typedef struct {
   uint8_t pduSessionId;
   OCTET_STRING_t handoverRequestAcknowledgeTransfer;

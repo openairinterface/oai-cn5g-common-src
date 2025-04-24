@@ -133,34 +133,8 @@ void NgSetupResponseMsg::setRelativeAmfCapacity(const long& capacity) {
 }
 
 //------------------------------------------------------------------------------
-void NgSetupResponseMsg::setPlmnSupportList(
-    const std::vector<PlmnSliceSupport_t>& list) {
-  std::vector<PlmnSupportItem> plmnSupportItems;
-
-  for (int i = 0; i < list.size(); i++) {
-    PlmnSupportItem plmnSupportItem = {};
-    PlmnId plmn                     = {};
-    plmn.set(list[i].mcc, list[i].mnc);
-    oai::logger::logger_common::ngap().debug(
-        "MCC %s, MNC %s", list[i].mcc.c_str(), list[i].mnc.c_str());
-
-    std::vector<SNssai> snssais;
-    for (int j = 0; j < list[i].sliceList.size(); j++) {
-      SNssai snssai = {};
-      snssai.setSst(list[i].sliceList[j].sst);
-
-      if (!list[i].sliceList[j].sd.empty()) {
-        snssai.setSd(list[i].sliceList[j].sd);
-      } else {
-        snssai.setSd(SD_NO_VALUE);
-      }
-      snssais.push_back(snssai);
-    }
-    plmnSupportItem.set(plmn, snssais);
-    plmnSupportItems.push_back(plmnSupportItem);
-  }
-
-  m_PlmnSupportList.set(plmnSupportItems);
+void NgSetupResponseMsg::setPlmnSupportList(const PlmnSupportList& list) {
+  m_PlmnSupportList = list;
 
   Ngap_NGSetupResponseIEs_t* ie =
       (Ngap_NGSetupResponseIEs_t*) calloc(1, sizeof(Ngap_NGSetupResponseIEs_t));
@@ -351,33 +325,8 @@ long NgSetupResponseMsg::getRelativeAmfCapacity() const {
 }
 
 //------------------------------------------------------------------------------
-bool NgSetupResponseMsg::getPlmnSupportList(
-    std::vector<PlmnSliceSupport_t>& list) const {
-  std::vector<PlmnSupportItem> plmnsupportItemItems;
-  m_PlmnSupportList.get(plmnsupportItemItems);
-
-  for (std::vector<PlmnSupportItem>::iterator it =
-           std::begin(plmnsupportItemItems);
-       it < std::end(plmnsupportItemItems); ++it) {
-    PlmnSliceSupport_t plmnSliceSupport = {};
-    PlmnId plmn                         = {};
-    std::vector<SNssai> snssais;
-
-    it->get(plmn, snssais);
-    plmn.getMcc(plmnSliceSupport.mcc);
-    plmn.getMnc(plmnSliceSupport.mnc);
-    for (std::vector<SNssai>::iterator it = std::begin(snssais);
-         it < std::end(snssais); ++it) {
-      S_Nssai snssai = {};
-      it->getSst(snssai.sst);
-      it->getSd(snssai.sd);
-      plmnSliceSupport.sliceList.push_back(snssai);
-    }
-
-    list.push_back(plmnSliceSupport);
-  }
-
-  return true;
+void NgSetupResponseMsg::getPlmnSupportList(PlmnSupportList& list) const {
+  list = m_PlmnSupportList;
 }
 
 //------------------------------------------------------------------------------

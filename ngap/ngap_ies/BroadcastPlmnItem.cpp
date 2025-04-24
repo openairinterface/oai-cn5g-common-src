@@ -52,6 +52,31 @@ void BroadcastPlmnItem::get(
 }
 
 //------------------------------------------------------------------------------
+PlmnId BroadcastPlmnItem::getPlmn() const {
+  return m_Plmn;
+}
+
+//------------------------------------------------------------------------------
+void BroadcastPlmnItem::setPlmn(const PlmnId& plmn) {
+  m_Plmn = plmn;
+}
+
+//------------------------------------------------------------------------------
+std::vector<SNssai> BroadcastPlmnItem::getSNssai() const {
+  return m_SupportedSliceList;
+}
+
+//------------------------------------------------------------------------------
+void BroadcastPlmnItem::setSNssai(const std::vector<SNssai>& sliceList) {
+  m_SupportedSliceList = sliceList;
+}
+
+//------------------------------------------------------------------------------
+void BroadcastPlmnItem::addSNssai(const SNssai snssai) {
+  m_SupportedSliceList.push_back(snssai);
+}
+
+//------------------------------------------------------------------------------
 bool BroadcastPlmnItem::encode(Ngap_BroadcastPLMNItem_t& plmnItem) const {
   if (!m_Plmn.encode(plmnItem.pLMNIdentity)) return false;
 

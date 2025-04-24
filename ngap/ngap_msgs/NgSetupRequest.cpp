@@ -110,14 +110,16 @@ void NgSetupRequestMsg::setRanNodeName(const std::string& value) {
 
 //------------------------------------------------------------------------------
 void NgSetupRequestMsg::setSupportedTaList(
-    const std::vector<struct SupportedTaItem_s>& list) {
+    const std::vector<SupportedTaItem>& list) {
   if (list.size() == 0) {
     oai::logger::logger_common::ngap().warn("List of Supported Items is empty");
     return;
   }
 
   SupportedTaList supportedTAListIE = {};
-  std::vector<SupportedTaItem> supportedTaItems;
+
+  /*
+   std::vector<SupportedTaItem> supportedTaItems;
 
   for (int i = 0; i < list.size(); i++) {
     SupportedTaItem item = {};
@@ -150,7 +152,8 @@ void NgSetupRequestMsg::setSupportedTaList(
 
     supportedTaItems.push_back(item);
   }
-  supportedTAListIE.setSupportedTaItems(supportedTaItems);
+  */
+  supportedTAListIE.setSupportedTaItems(list);
 
   Ngap_NGSetupRequestIEs_t* ie =
       (Ngap_NGSetupRequestIEs_t*) calloc(1, sizeof(Ngap_NGSetupRequestIEs_t));
@@ -365,45 +368,8 @@ bool NgSetupRequestMsg::getRanNodeName(std::string& name) const {
 
 //------------------------------------------------------------------------------
 bool NgSetupRequestMsg::getSupportedTaList(
-    std::vector<struct SupportedTaItem_s>& list) const {
-  std::vector<SupportedTaItem> supportedTaItems;
-  m_SupportedTaList.getSupportedTaItems(supportedTaItems);
-
-  for (std::vector<SupportedTaItem>::iterator it = std::begin(supportedTaItems);
-       it < std::end(supportedTaItems); ++it) {
-    TAC tac = {};
-    it->getTac(tac);
-
-    SupportedTaItem_t supporteditem_data = {};
-    supporteditem_data.tac               = tac.get();
-
-    std::vector<BroadcastPlmnItem> broadcastPLMNItems;
-    it->getBroadcastPlmnList(broadcastPLMNItems);
-
-    for (std::vector<BroadcastPlmnItem>::iterator it =
-             std::begin(broadcastPLMNItems);
-         it < std::end(broadcastPLMNItems); ++it) {
-      PlmnId plmnId_decode = {};
-      std::vector<SNssai> snssai_decode;
-
-      it->get(plmnId_decode, snssai_decode);
-
-      PlmnSliceSupport_t broadcastplmn_data = {};
-      plmnId_decode.getMcc(broadcastplmn_data.mcc);
-      plmnId_decode.getMnc(broadcastplmn_data.mnc);
-
-      for (std::vector<SNssai>::iterator it = std::begin(snssai_decode);
-           it < std::end(snssai_decode); ++it) {
-        S_Nssai slicesupport_data = {};
-        it->getSst(slicesupport_data.sst);
-        it->getSd(slicesupport_data.sd);
-        broadcastplmn_data.sliceList.push_back(slicesupport_data);
-      }
-      supporteditem_data.plmnSliceSupportList.push_back(broadcastplmn_data);
-    }
-    list.push_back(supporteditem_data);
-  }
-
+    std::vector<SupportedTaItem>& list) const {
+  m_SupportedTaList.getSupportedTaItems(list);
   return true;
 }
 

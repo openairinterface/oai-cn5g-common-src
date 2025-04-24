@@ -134,11 +134,6 @@ typedef struct nr_cell_identity_s {
   uint8_t cell_id : 4;
 } nr_cell_identity_t;
 
-typedef struct allowed_nssai {
-  uint8_t sst;
-  uint32_t sd : 24;
-} allowed_nssai;
-
 typedef struct guami_s {
   plmn_t plmn;
   std::string amf_id;

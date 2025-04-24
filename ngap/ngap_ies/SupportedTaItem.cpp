@@ -47,6 +47,11 @@ void SupportedTaItem::getTac(TAC& m_tac) const {
 }
 
 //------------------------------------------------------------------------------
+TAC SupportedTaItem::getTac() const {
+  return m_Tac;
+}
+
+//------------------------------------------------------------------------------
 void SupportedTaItem::setBroadcastPlmnList(
     const std::vector<BroadcastPlmnItem>& list) {
   m_BroadcastPlmnList = list;
@@ -54,8 +59,13 @@ void SupportedTaItem::setBroadcastPlmnList(
 
 //------------------------------------------------------------------------------
 void SupportedTaItem::getBroadcastPlmnList(
-    std::vector<BroadcastPlmnItem>& list) {
+    std::vector<BroadcastPlmnItem>& list) const {
   list = m_BroadcastPlmnList;
+}
+
+//------------------------------------------------------------------------------
+std::vector<BroadcastPlmnItem> SupportedTaItem::getBroadcastPlmnList() const {
+  return m_BroadcastPlmnList;
 }
 
 //------------------------------------------------------------------------------

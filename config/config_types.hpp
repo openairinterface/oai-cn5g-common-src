@@ -470,4 +470,19 @@ class http_request_timeout : public config_type {
   [[nodiscard]] uint32_t get() const;
 };
 
+class nf_enable_tls : public config_type {
+ private:
+  option_config_value m_enable_tls{};
+
+ public:
+  explicit nf_enable_tls();
+
+  void from_yaml(const YAML::Node& node) override;
+  nlohmann::json to_json() override;
+  bool from_json(const nlohmann::json& json_data) override;
+
+  [[nodiscard]] std::string to_string(const std::string& indent) const override;
+  [[nodiscard]] bool enable_tls() const;
+};
+
 }  // namespace oai::config

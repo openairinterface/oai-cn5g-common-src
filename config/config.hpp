@@ -77,6 +77,8 @@ const std::string LMF_CONFIG_NAME  = "lmf";
 const std::string LOG_LEVEL_CONFIG_NAME   = "log_level";
 const std::string REGISTER_NF_CONFIG_NAME = "register_nf";
 const std::string NF_LIST_CONFIG_NAME     = "nfs";
+const std::string ENABLE_TLS_CONFIG       = "enable_tls";
+const std::string ENABLE_TLS_CONFIG_LABEL = "Enable TLS";
 
 // NF
 constexpr auto NF_CONFIG_HOST_NAME       = "host";
@@ -146,6 +148,8 @@ class config_iface {
 
   [[nodiscard]] virtual const std::string& log_level() const = 0;
 
+  [[nodiscard]] virtual bool enable_tls() const = 0;
+
   [[nodiscard]] virtual const nf& local() const = 0;
 
   [[nodiscard]] virtual std::shared_ptr<nf> get_local() const = 0;
@@ -192,6 +196,8 @@ class config : public config_iface {
 
   [[nodiscard]] const std::string& log_level() const override;
 
+  [[nodiscard]] bool enable_tls() const override;
+
   [[nodiscard]] const nf& local() const override;
   [[nodiscard]] std::shared_ptr<nf> get_local() const override;
   [[nodiscard]] std::shared_ptr<nf> get_nf(
@@ -227,6 +233,7 @@ class config : public config_iface {
 
   nf_features_config m_log_level_feature;
   nf_http_version m_http_version;
+  nf_enable_tls m_enable_tls;
   http_request_timeout m_http_request_timeout;
 
   std::shared_ptr<nf> m_local_nf;

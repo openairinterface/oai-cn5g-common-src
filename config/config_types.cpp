@@ -1420,3 +1420,44 @@ void http_request_timeout::validate() {
 uint32_t http_request_timeout::get() const {
   return m_http_request_timeout.get_value();
 }
+
+nf_enable_tls::nf_enable_tls() {
+  m_set         = false;
+  m_enable_tls  = option_config_value(ENABLE_TLS_CONFIG, false);
+  m_config_name = ENABLE_TLS_CONFIG_LABEL;
+}
+
+void nf_enable_tls::from_yaml(const YAML::Node& node) {
+  m_set = true;
+  m_enable_tls.from_yaml(node);
+}
+
+nlohmann::json nf_enable_tls::to_json() {
+  nlohmann::json json_data = {};
+  json_data                = m_enable_tls.to_json();
+  return json_data;
+}
+
+bool nf_enable_tls::from_json(const nlohmann::json& json_data) {
+  try {
+    m_enable_tls.from_json(json_data);
+  } catch (nlohmann::detail::exception& e) {
+    // TODO:
+  } catch (std::exception& e) {
+    // TODO:
+  }
+  return false;
+}
+
+std::string nf_enable_tls::to_string(const std::string& indent) const {
+  std::string out;
+  unsigned int inner_width = get_inner_width(indent.length());
+  out.append(indent).append(fmt::format(
+      BASE_FORMATTER, OUTER_LIST_ELEM, m_config_name, inner_width,
+      m_enable_tls.to_string("")));
+  return out;
+}
+
+bool nf_enable_tls::enable_tls() const {
+  return m_enable_tls.get_value();
+}

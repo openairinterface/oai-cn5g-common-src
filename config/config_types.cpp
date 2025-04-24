@@ -525,7 +525,7 @@ const std::string& sbi_interface::get_url() const {
 void sbi_interface::set_url() {
   m_url = "";
   // this is easily adaptable to HTTPS, just add a flag, and we change the URL
-  m_url.append("http://")
+  m_url.append("https://")
       .append(get_host())
       .append(":")
       .append(std::to_string(get_port()));

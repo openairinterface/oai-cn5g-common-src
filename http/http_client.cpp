@@ -21,6 +21,9 @@
 
 #include "http_client.hpp"
 
+#include "cpr/ssl_ctx.h"
+#include "cpr/ssl_options.h"
+
 #include <nlohmann/json.hpp>
 
 namespace json = nlohmann;
@@ -32,10 +35,11 @@ http_client::http_client(
     const std::string& interface, uint8_t http_version,
     request_type_e request_type)
     : m_sbi_logger(std::move(logger)) {
-  m_http_version = http_version;
-  m_timeout_ms   = timeout_ms;
-  m_interface    = interface;
-  m_request_type = request_type;
+  m_http_version    = http_version;
+  m_timeout_ms      = timeout_ms;
+  m_interface       = interface;
+  m_request_type    = request_type;
+  m_public_key_path = std::nullopt;
 
   m_sbi_logger.info(
       "HTTP Client successfully initiated on interface %s with timeout "
@@ -291,6 +295,20 @@ void http_client::prepare_session(
     case method_e::DELETE: {
     }
   }
+
+  // TEST: SET SSL/TLS version
+  cpr::SslOptions sslOpts =
+      cpr::Ssl(cpr::ssl::ALPN{false}, cpr::ssl::NPN{false});
+  sslOpts.SetOption(cpr::ssl::TLSv1_2{});
+  sslOpts.SetOption(cpr::ssl::VerifyHost{false});
+  sslOpts.SetOption(cpr::ssl::VerifyPeer{false});
+  sslOpts.SetOption(cpr::ssl::VerifyStatus{false});
+
+  sslOpts.SetOption(cpr::ssl::PinnedPublicKey{"/etc/ssl/certs/nrf.pem"});
+  session->SetSslOptions(sslOpts);
+
+  session->SetVerbose(cpr::Verbose{true});
+  // session->SetVerifySsl(false);
 }
 
 //---------------------------------------------------------------------------------------------
@@ -333,3 +351,8 @@ request http_client::prepare_multipart_request(
        "multipart/related;boundary=" + std::string(MIME_BOUNDARY)});
   return req;
 }
+
+//---------------------------------------------------------------------------------------------
+/*void http_client::enable_tls(std::string public_key_path){
+
+}*/

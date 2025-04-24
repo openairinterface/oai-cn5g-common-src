@@ -26,6 +26,7 @@
 #include <future>
 #include <string>
 #include <thread>
+#include <optional>
 
 #include "3gpp_29.500.h"
 #include "http_definitions.hpp"
@@ -83,6 +84,8 @@ class http_client : public std::enable_shared_from_this<http_client> {
   std::string m_interface;
   uint8_t m_http_version;
   request_type_e m_request_type;
+  std::optional<std::string>
+      m_public_key_path;  // store the public key path when TLS is enabled
   inline static std::shared_ptr<http_client> instance;
 
  public:

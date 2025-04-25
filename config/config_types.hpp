@@ -473,6 +473,9 @@ class http_request_timeout : public config_type {
 class nf_enable_tls : public config_type {
  private:
   option_config_value m_enable_tls{};
+  string_config_value m_cert_certificate_path;
+  string_config_value m_cert_key_path;
+  string_config_value m_cert_pem_path;
 
  public:
   explicit nf_enable_tls();

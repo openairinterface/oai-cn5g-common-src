@@ -64,7 +64,7 @@ config::config(
     bool log_rot_file)
     : m_register_nrf_feature(REGISTER_NF_CONFIG_NAME, nf_name, false),
       m_log_level_feature(LOG_LEVEL_CONFIG_NAME, nf_name, std::string("info")),
-      m_tls(),
+      m_tls_config(),
       m_http_version(),
       m_http_request_timeout(),
       m_database(DATABASE_CONFIG) {
@@ -93,7 +93,7 @@ void config::read_from_file(const std::string& file_path) {
         } else if (key == NF_CONFIG_HTTP_NAME) {
           m_http_version.from_yaml(elem.second);
         } else if (key == NF_CONFIG_TLS_NAME) {
-          m_tls.from_yaml(elem.second);
+          m_tls_config.from_yaml(elem.second);
         } else if (key == NF_CONFIG_HTTP_REQUEST_TIMEOUT) {
           m_http_request_timeout.from_yaml(elem.second);
         } else if (key == m_nf_name) {
@@ -174,7 +174,7 @@ void config::to_json(nlohmann::json& json_data) {
       m_log_level_feature.to_json();
   json_data[m_register_nrf_feature.get_config_name()] =
       m_register_nrf_feature.to_json();
-  json_data[m_tls.get_config_name()] = m_tls.to_json();
+  json_data[m_tls_config.get_config_name()] = m_tls_config.to_json();
   json_data[m_http_request_timeout.get_config_name()] =
       m_http_request_timeout.to_json();
   if (m_database.is_set()) {
@@ -199,8 +199,8 @@ bool config::from_json(const nlohmann::json& json_data) {
           json_data[m_register_nrf_feature.get_config_name()]);
     }
 
-    if (json_data.find(m_tls.get_config_name()) != json_data.end()) {
-      m_tls.from_json(json_data[m_tls.get_config_name()]);
+    if (json_data.find(m_tls_config.get_config_name()) != json_data.end()) {
+      m_tls_config.from_json(json_data[m_tls_config.get_config_name()]);
     }
 
     if (json_data.find(m_http_request_timeout.get_config_name()) !=
@@ -272,7 +272,7 @@ std::string config::to_string() const {
   out.append(m_log_level_feature.to_string(indent));
   out.append(m_register_nrf_feature.to_string(indent));
   out.append(m_http_version.to_string(indent));
-  out.append(m_tls.to_string(indent));
+  out.append(m_tls_config.to_string(indent));
   out.append(m_http_request_timeout.to_string(indent));
 
   out.append(m_local_nf->to_string(indent));
@@ -345,7 +345,11 @@ const std::string& config::log_level() const {
 }
 
 bool config::enable_tls() const {
-  return m_tls.enable_tls();
+  return m_tls_config.enable_tls();
+}
+
+const tls_config& config::get_tls_config() const {
+  return m_tls_config;
 }
 
 const nf& config::local() const {

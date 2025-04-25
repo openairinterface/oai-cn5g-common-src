@@ -207,6 +207,7 @@ class config : public config_iface {
   [[nodiscard]] const std::string& log_level() const override;
 
   [[nodiscard]] bool enable_tls() const override;
+  [[nodiscard]] const tls_config& get_tls_config() const;
 
   [[nodiscard]] const nf& local() const override;
   [[nodiscard]] std::shared_ptr<nf> get_local() const override;
@@ -243,7 +244,7 @@ class config : public config_iface {
 
   nf_features_config m_log_level_feature;
   nf_http_version m_http_version;
-  nf_enable_tls m_tls;
+  tls_config m_tls_config;
   http_request_timeout m_http_request_timeout;
 
   std::shared_ptr<nf> m_local_nf;

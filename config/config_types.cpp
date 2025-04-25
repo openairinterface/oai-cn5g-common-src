@@ -1421,7 +1421,7 @@ uint32_t http_request_timeout::get() const {
   return m_http_request_timeout.get_value();
 }
 
-nf_enable_tls::nf_enable_tls() {
+tls_config::tls_config() {
   m_set                   = false;
   m_enable_tls            = option_config_value(TLS_ENABLE_TLS, false);
   m_config_name           = NF_CONFIG_TLS_LABLE;
@@ -1430,7 +1430,7 @@ nf_enable_tls::nf_enable_tls() {
   m_cert_pem_path         = string_config_value(TLS_CERT_PEM_PATH, "");
 }
 
-void nf_enable_tls::from_yaml(const YAML::Node& node) {
+void tls_config::from_yaml(const YAML::Node& node) {
   m_set = true;
   if (node[TLS_ENABLE_TLS]) {
     m_enable_tls.from_yaml(node[TLS_ENABLE_TLS]);
@@ -1448,7 +1448,7 @@ void nf_enable_tls::from_yaml(const YAML::Node& node) {
   }
 }
 
-nlohmann::json nf_enable_tls::to_json() {
+nlohmann::json tls_config::to_json() {
   nlohmann::json json_data                  = {};
   json_data[m_enable_tls.get_config_name()] = m_enable_tls.to_json();
   if (m_enable_tls.get_value()) {
@@ -1460,7 +1460,7 @@ nlohmann::json nf_enable_tls::to_json() {
   return json_data;
 }
 
-bool nf_enable_tls::from_json(const nlohmann::json& json_data) {
+bool tls_config::from_json(const nlohmann::json& json_data) {
   try {
     if (json_data.find(m_enable_tls.get_config_name()) != json_data.end()) {
       m_enable_tls.from_json(json_data[m_enable_tls.get_config_name()]);
@@ -1488,7 +1488,7 @@ bool nf_enable_tls::from_json(const nlohmann::json& json_data) {
   return false;
 }
 
-std::string nf_enable_tls::to_string(const std::string& indent) const {
+std::string tls_config::to_string(const std::string& indent) const {
   std::string out;
   unsigned int inner_width = get_inner_width(indent.length());
   out.append(indent).append(NF_CONFIG_TLS_LABLE).append(":\n");
@@ -1513,6 +1513,18 @@ std::string nf_enable_tls::to_string(const std::string& indent) const {
   return out;
 }
 
-bool nf_enable_tls::enable_tls() const {
+bool tls_config::enable_tls() const {
   return m_enable_tls.get_value();
+}
+
+const std::string& tls_config::get_cert_certificate_path() const {
+  return m_cert_certificate_path.get_value();
+}
+
+const std::string& tls_config::get_cert_key_path() const {
+  return m_cert_key_path.get_value();
+}
+
+const std::string& tls_config::get_cert_pem_path() const {
+  return m_cert_pem_path.get_value();
 }

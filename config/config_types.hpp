@@ -235,7 +235,7 @@ class sbi_interface : public local_interface {
   string_config_value m_api_version;
   std::string m_url;
 
-  void set_url();
+  void set_url(bool enable_tls = false);
 
  public:
   explicit sbi_interface(
@@ -243,6 +243,7 @@ class sbi_interface : public local_interface {
       const std::string& api_version, const std::string& interface_name);
 
   sbi_interface() = default;
+  // sbi_interface& operator=(const struct sbi_interface& s);
 
   void from_yaml(const YAML::Node& node) override;
   nlohmann::json to_json() override;
@@ -251,7 +252,7 @@ class sbi_interface : public local_interface {
   void validate() override;
 
   [[nodiscard]] const std::string& get_api_version() const;
-  [[nodiscard]] const std::string& get_url() const;
+  [[nodiscard]] std::string get_url(bool enable_tls = false) const;
 };
 
 enum class interface_type_e { n1, n4 };
@@ -262,9 +263,6 @@ class nf : public config_type {
  private:
   sbi_interface m_sbi;
   string_config_value m_host;
-
-  std::string m_url;  // Moved from SBI interface
-  void set_url();     // Moved from SBI interface
 
  public:
   explicit nf(
@@ -280,7 +278,7 @@ class nf : public config_type {
   void validate() override;
   [[nodiscard]] const sbi_interface& get_sbi() const;
   [[nodiscard]] const std::string& get_host() const;
-  [[nodiscard]] const std::string& get_url() const;
+  [[nodiscard]] std::string get_url(bool enable_tls = false) const;
 };
 
 class lttng_config : public config_type {

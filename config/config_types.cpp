@@ -442,6 +442,17 @@ sbi_interface::sbi_interface(
   set_url();
 }
 
+/*
+sbi_interface& sbi_interface::operator=(const sbi_interface& s) {
+        m_config_name = s.m_config_name;
+          m_host        = s.m_host;
+          m_api_version = s.m_api_version;
+          m_set = s.m_set;
+          set_url();
+  return *this;
+}
+*/
+
 void sbi_interface::from_yaml(const YAML::Node& node) {
   local_interface::from_yaml(node);
   set_is_local_interface(false);
@@ -518,17 +529,18 @@ const std::string& sbi_interface::get_api_version() const {
   return m_api_version.get_value();
 }
 
-const std::string& sbi_interface::get_url() const {
-  return m_url;
+std::string sbi_interface::get_url(bool enable_tls) const {
+  std::string url = "";
+  if (enable_tls)
+    url.append("https://").append(m_url);
+  else
+    url.append("http://").append(m_url);
+  return url;
 }
 
-void sbi_interface::set_url() {
+void sbi_interface::set_url(bool enable_tls) {
   m_url = "";
-  // this is easily adaptable to HTTPS, just add a flag, and we change the URL
-  m_url.append("https://")
-      .append(get_host())
-      .append(":")
-      .append(std::to_string(get_port()));
+  m_url.append(get_host()).append(":").append(std::to_string(get_port()));
 }
 
 nf::nf(
@@ -539,7 +551,6 @@ nf::nf(
   m_sbi         = sbi;
   m_set         = true;
   m_host.set_validation_regex(HOST_VALIDATOR_REGEX);
-  set_url();
 }
 
 void nf::from_yaml(const YAML::Node& node) {
@@ -551,7 +562,6 @@ void nf::from_yaml(const YAML::Node& node) {
     m_sbi.from_yaml(node["sbi"]);
   }
   m_set = true;
-  set_url();
 }
 
 nlohmann::json nf::to_json() {
@@ -564,10 +574,6 @@ bool nf::from_json(const nlohmann::json& json_data) {
   try {
     if (json_data.find(m_sbi.get_config_name()) != json_data.end()) {
       m_sbi.from_json(json_data[m_sbi.get_config_name()]);
-    }
-
-    if (json_data.find("url") != json_data.end()) {
-      m_url = json_data["url"].get<std::string>();
     }
 
   } catch (nlohmann::detail::exception& e) {
@@ -616,12 +622,8 @@ const std::string& nf::get_host() const {
   return m_host.get_value();
 }
 
-const std::string& nf::get_url() const {
-  return m_url;
-}
-
-void nf::set_url() {
-  m_url = m_sbi.get_url();
+std::string nf::get_url(bool enable_tls) const {
+  return m_sbi.get_url(enable_tls);
 }
 
 nf_features_config::nf_features_config(

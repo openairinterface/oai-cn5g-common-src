@@ -468,12 +468,15 @@ class http_request_timeout : public config_type {
   [[nodiscard]] uint32_t get() const;
 };
 
-class nf_enable_tls : public config_type {
+class tls_config : public config_type {
  private:
   option_config_value m_enable_tls{};
+  string_config_value m_cert_certificate_path;
+  string_config_value m_cert_key_path;
+  string_config_value m_cert_pem_path;
 
  public:
-  explicit nf_enable_tls();
+  explicit tls_config();
 
   void from_yaml(const YAML::Node& node) override;
   nlohmann::json to_json() override;
@@ -481,6 +484,9 @@ class nf_enable_tls : public config_type {
 
   [[nodiscard]] std::string to_string(const std::string& indent) const override;
   [[nodiscard]] bool enable_tls() const;
+  [[nodiscard]] const std::string& get_cert_certificate_path() const;
+  [[nodiscard]] const std::string& get_cert_key_path() const;
+  [[nodiscard]] const std::string& get_cert_pem_path() const;
 };
 
 }  // namespace oai::config

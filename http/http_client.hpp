@@ -110,8 +110,8 @@ class http_client : public std::enable_shared_from_this<http_client> {
   static std::shared_ptr<http_client> create_instance(
       const oai::logger::printf_logger& logger, int timeout_ms,
       const std::string& interface, uint8_t http_version,
-      request_type_e request_type = request_type_e::SIMPLE,
-      bool enable_tls             = false);
+      bool enable_tls             = false,
+      request_type_e request_type = request_type_e::SIMPLE);
 
   /*
    * Sends a HTTP request

@@ -32,12 +32,13 @@ using namespace oai::http;
 //---------------------------------------------------------------------------------------------
 http_client::http_client(
     oai::logger::printf_logger logger, int timeout_ms,
-    const std::string& interface, uint8_t http_version,
+    const std::string& interface, uint8_t http_version, bool enable_tls,
     request_type_e request_type)
     : m_sbi_logger(std::move(logger)) {
   m_http_version    = http_version;
   m_timeout_ms      = timeout_ms;
   m_interface       = interface;
+  m_enable_tls      = enable_tls;
   m_request_type    = request_type;
   m_public_key_path = std::nullopt;
 
@@ -55,12 +56,12 @@ http_client::~http_client() {
 //---------------------------------------------------------------------------------------------
 std::shared_ptr<http_client> http_client::create_instance(
     const oai::logger::printf_logger& logger, int timeout_ms,
-    const std::string& interface, uint8_t http_version,
+    const std::string& interface, uint8_t http_version, bool enable_tls,
     request_type_e request_type) {
   // If instance does not exits, create a new one
   if (!instance) {
     instance = std::make_shared<http_client>(
-        logger, timeout_ms, interface, http_version, request_type);
+        logger, timeout_ms, interface, http_version, enable_tls, request_type);
     return instance;
   }
   // otherwise return the existing one
@@ -296,19 +297,21 @@ void http_client::prepare_session(
     }
   }
 
-  // TEST: SET SSL/TLS version
-  cpr::SslOptions sslOpts =
-      cpr::Ssl(cpr::ssl::ALPN{false}, cpr::ssl::NPN{false});
-  sslOpts.SetOption(cpr::ssl::TLSv1_2{});
-  sslOpts.SetOption(cpr::ssl::VerifyHost{false});
-  sslOpts.SetOption(cpr::ssl::VerifyPeer{false});
-  sslOpts.SetOption(cpr::ssl::VerifyStatus{false});
+  // Enable SSL/TLS
+  if (m_enable_tls) {
+    cpr::SslOptions sslOpts =
+        cpr::Ssl(cpr::ssl::ALPN{false}, cpr::ssl::NPN{false});
+    sslOpts.SetOption(cpr::ssl::TLSv1_2{});
+    sslOpts.SetOption(cpr::ssl::VerifyHost{false});
+    sslOpts.SetOption(cpr::ssl::VerifyPeer{false});
+    sslOpts.SetOption(cpr::ssl::VerifyStatus{false});
 
-  sslOpts.SetOption(cpr::ssl::PinnedPublicKey{"/etc/ssl/certs/nrf.pem"});
-  session->SetSslOptions(sslOpts);
+    // sslOpts.SetOption(cpr::ssl::PinnedPublicKey{"/etc/ssl/certs/nrf.pem"});
+    // session->SetSslOptions(sslOpts);
 
-  session->SetVerbose(cpr::Verbose{true});
-  // session->SetVerifySsl(false);
+    session->SetVerbose(cpr::Verbose{true});
+    session->SetVerifySsl(false);
+  }
 }
 
 //---------------------------------------------------------------------------------------------

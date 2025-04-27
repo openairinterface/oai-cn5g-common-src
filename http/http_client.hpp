@@ -84,6 +84,7 @@ class http_client : public std::enable_shared_from_this<http_client> {
   std::string m_interface;
   uint8_t m_http_version;
   request_type_e m_request_type;
+  bool m_enable_tls;
   std::optional<std::string>
       m_public_key_path;  // store the public key path when TLS is enabled
   inline static std::shared_ptr<http_client> instance;
@@ -92,6 +93,7 @@ class http_client : public std::enable_shared_from_this<http_client> {
   explicit http_client(
       oai::logger::printf_logger logger, int timeout_ms,
       const std::string& interface, uint8_t http_version,
+      bool enable_tls             = false,
       request_type_e request_type = request_type_e::SIMPLE);
 
   virtual ~http_client();
@@ -108,7 +110,8 @@ class http_client : public std::enable_shared_from_this<http_client> {
   static std::shared_ptr<http_client> create_instance(
       const oai::logger::printf_logger& logger, int timeout_ms,
       const std::string& interface, uint8_t http_version,
-      request_type_e request_type = request_type_e::SIMPLE);
+      request_type_e request_type = request_type_e::SIMPLE,
+      bool enable_tls             = false);
 
   /*
    * Sends a HTTP request

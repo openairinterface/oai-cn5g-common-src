@@ -82,6 +82,18 @@ const std::string NF_LIST_CONFIG_NAME     = "nfs";
 constexpr auto NF_CONFIG_HOST_NAME       = "host";
 constexpr auto NF_CONFIG_HOST_NAME_LABEL = "Host";
 
+// TLS
+constexpr auto NF_CONFIG_TLS_NAME                 = "tls";
+constexpr auto NF_CONFIG_TLS_LABLE                = "TLS";
+const std::string TLS_ENABLE_TLS                  = "enable_tls";
+const std::string TLS_ENABLE_TLS_LABEL            = "Enable TLS";
+const std::string TLS_CERT_CERTIFICATE_PATH       = "cert_certificate_path";
+const std::string TLS_CERT_CERTIFICATE_PATH_LABEL = "Cert Certificate Path";
+const std::string TLS_CERT_KEY_PATH               = "cert_key_path";
+const std::string TLS_CERT_KEY_PATH_LABEL         = "Cert Key Path";
+const std::string TLS_CERT_PEM_PATH               = "cert_pem_path";
+const std::string TLS_CERT_PEM_PATH_LABEL         = "Cert PEM Path";
+
 // Database (AMF/UDR): should be moved to UDR when we drop minimal deployment
 // scenario (only AMF/SMF/UPF)
 constexpr auto DATABASE_CONFIG                          = "database";
@@ -146,6 +158,8 @@ class config_iface {
 
   [[nodiscard]] virtual const std::string& log_level() const = 0;
 
+  [[nodiscard]] virtual bool enable_tls() const = 0;
+
   [[nodiscard]] virtual const nf& local() const = 0;
 
   [[nodiscard]] virtual std::shared_ptr<nf> get_local() const = 0;
@@ -192,6 +206,9 @@ class config : public config_iface {
 
   [[nodiscard]] const std::string& log_level() const override;
 
+  [[nodiscard]] bool enable_tls() const override;
+  [[nodiscard]] const tls_config& get_tls_config() const;
+
   [[nodiscard]] const nf& local() const override;
   [[nodiscard]] std::shared_ptr<nf> get_local() const override;
   [[nodiscard]] std::shared_ptr<nf> get_nf(
@@ -227,6 +244,7 @@ class config : public config_iface {
 
   nf_features_config m_log_level_feature;
   nf_http_version m_http_version;
+  tls_config m_tls_config;
   http_request_timeout m_http_request_timeout;
 
   std::shared_ptr<nf> m_local_nf;

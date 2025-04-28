@@ -301,16 +301,17 @@ void http_client::prepare_session(
   if (m_enable_tls) {
     cpr::SslOptions sslOpts =
         cpr::Ssl(cpr::ssl::ALPN{false}, cpr::ssl::NPN{false});
-    sslOpts.SetOption(cpr::ssl::TLSv1_2{});
+    sslOpts.SetOption(cpr::ssl::TLSv1_0{});
     sslOpts.SetOption(cpr::ssl::VerifyHost{false});
     sslOpts.SetOption(cpr::ssl::VerifyPeer{false});
     sslOpts.SetOption(cpr::ssl::VerifyStatus{false});
 
-    // sslOpts.SetOption(cpr::ssl::PinnedPublicKey{"/etc/ssl/certs/nrf.pem"});
+    // TODO: Use public key
     // session->SetSslOptions(sslOpts);
 
     session->SetVerbose(cpr::Verbose{true});
-    session->SetVerifySsl(false);
+    session->SetVerifySsl(false);  // TODO: Don't verify SSL for the moment, but
+                                   // should enable this in the future
   }
 }
 

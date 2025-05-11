@@ -213,12 +213,17 @@ class sbi_helper {
   static inline const std::string AmfConfBase              = "/namf-oai/";
   static inline const std::string AmfConfPathConfiguration = "/configuration/";
   // AMF Status Notify
-  static inline const std::string AmfStatusNotifBase = "/namf-status-notfify/";
+  static inline const std::string AmfStatusNotifBase = "/namf-status-notify/";
   static inline const std::string AmfStatusNotifPathPduSessionRelease =
       "/pdu-session-release/callback/";
   static inline const std::string
       AmfStatusNotifPathPduSessionReleasePduSessionId =
           "/pdu-session-release/callback/:ueContextId/:pduSessionId";
+
+  // AMF callback for AMF registration for 3GPP access
+  static inline const std::string AmfCallbackBase = "/namf-callback/";
+  static inline const std::string AmfCallbackPathDeregistrationNotification =
+      ":ueId/deregistration-notification";
 
   // AUSF: UEAuthentication
   static inline const std::string AusfAuthBase = "/nausf-auth/";

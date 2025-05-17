@@ -30,7 +30,6 @@
 
 #include "3gpp_commons.h"
 #include "Helpers.h"
-#include "Struct.hpp"
 #include "conversions.hpp"
 #include "logger_base.hpp"
 

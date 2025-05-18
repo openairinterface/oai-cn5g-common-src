@@ -28,7 +28,6 @@
 #include <vector>
 
 #include "3gpp_commons.h"
-#include "Struct.hpp"
 
 namespace oai::utils::sdf_conversions {
 

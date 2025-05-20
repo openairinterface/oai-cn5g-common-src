@@ -32,7 +32,7 @@
 namespace oai::utils {
 
 constexpr uint8_t kMccMncLength           = 3;
-constexpr uint32_t KFutureStatusTimeoutMs = 1000;
+constexpr uint32_t KFutureStatusTimeoutMs = 100;
 
 class utils {
  public:

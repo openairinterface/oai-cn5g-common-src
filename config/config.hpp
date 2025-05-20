@@ -122,7 +122,7 @@ constexpr auto NF_CONFIG_HTTP_LABEL = "HTTP Version";
 constexpr auto NF_CONFIG_HTTP_REQUEST_TIMEOUT       = "http_request_timeout";
 constexpr auto NF_CONFIG_HTTP_REQUEST_TIMEOUT_LABEL = "HTTP Request Timeout";
 constexpr uint32_t NF_CONFIG_HTTP_REQUEST_TIMEOUT_DEFAULT_VALUE =
-    500;  // in milliseconds
+    150;  // in milliseconds
 constexpr uint32_t NF_CONFIG_HTTP_REQUEST_TIMEOUT_MIN_VALUE =
     10;  // in milliseconds
 constexpr uint32_t NF_CONFIG_HTTP_REQUEST_TIMEOUT_MAX_VALUE =

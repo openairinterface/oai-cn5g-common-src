@@ -111,7 +111,7 @@ void to_json(nlohmann::json& j, const ConfirmationDataResponse& o) {
 }
 
 void from_json(const nlohmann::json& j, ConfirmationDataResponse& o) {
-  j.at("authResult").get_to(o.m_AuthResult);
+  // j.at("authResult").get_to(o.m_AuthResult);
   if (j.find("supi") != j.end()) {
     j.at("supi").get_to(o.m_Supi);
     o.m_SupiIsSet = true;

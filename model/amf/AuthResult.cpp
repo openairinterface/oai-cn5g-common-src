@@ -16,7 +16,7 @@
 #include <stdexcept>
 #include <sstream>
 
-namespace oai::model::ausf {
+namespace oai::model::amf {
 
 AuthResult::AuthResult() {}
 
@@ -98,4 +98,4 @@ void AuthResult::setValue(AuthResult::eAuthResult value) {
   m_value = value;
 }
 
-}  // namespace oai::model::ausf
+}  // namespace oai::model::amf

@@ -21,7 +21,7 @@
 
 #include <nlohmann/json.hpp>
 
-namespace oai::model::ausf {
+namespace oai::model::amf {
 
 /// <summary>
 /// Indicates the result of the authentication.
@@ -76,6 +76,6 @@ class AuthResult {
       AuthResult::eAuthResult::INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::ausf
+}  // namespace oai::model::amf
 
 #endif /* AuthResult_H_ */

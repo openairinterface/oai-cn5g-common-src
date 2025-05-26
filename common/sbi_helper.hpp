@@ -290,6 +290,8 @@ class sbi_helper {
   // SMF: SMF PDU Session Service
   static inline const std::string SmfPduSessionBase = "/nsmf-pdusession/";
   static inline const std::string SmfPduSessionPathSmContexts = "/sm-contexts";
+  static inline const std::string SmfPduSessionPathSmContextsCreate =
+      "/sm-contexts/:smContextRef";
   static inline const std::string SmfPduSessionPathSmContextsRetrieve =
       "/sm-contexts/:smContextRef/retrieve";
   static inline const std::string SmfPduSessionPathSmContextsModify =

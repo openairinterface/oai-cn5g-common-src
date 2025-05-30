@@ -21,6 +21,9 @@
 
 #include "http_client.hpp"
 
+#include "cpr/ssl_ctx.h"
+#include "cpr/ssl_options.h"
+
 #include <nlohmann/json.hpp>
 
 namespace json = nlohmann;
@@ -29,13 +32,15 @@ using namespace oai::http;
 //---------------------------------------------------------------------------------------------
 http_client::http_client(
     oai::logger::printf_logger logger, int timeout_ms,
-    const std::string& interface, uint8_t http_version,
+    const std::string& interface, uint8_t http_version, bool enable_tls,
     request_type_e request_type)
     : m_sbi_logger(std::move(logger)) {
-  m_http_version = http_version;
-  m_timeout_ms   = timeout_ms;
-  m_interface    = interface;
-  m_request_type = request_type;
+  m_http_version    = http_version;
+  m_timeout_ms      = timeout_ms;
+  m_interface       = interface;
+  m_enable_tls      = enable_tls;
+  m_request_type    = request_type;
+  m_public_key_path = std::nullopt;
 
   m_sbi_logger.info(
       "HTTP Client successfully initiated on interface %s with timeout "
@@ -51,12 +56,12 @@ http_client::~http_client() {
 //---------------------------------------------------------------------------------------------
 std::shared_ptr<http_client> http_client::create_instance(
     const oai::logger::printf_logger& logger, int timeout_ms,
-    const std::string& interface, uint8_t http_version,
+    const std::string& interface, uint8_t http_version, bool enable_tls,
     request_type_e request_type) {
   // If instance does not exits, create a new one
   if (!instance) {
     instance = std::make_shared<http_client>(
-        logger, timeout_ms, interface, http_version, request_type);
+        logger, timeout_ms, interface, http_version, enable_tls, request_type);
     return instance;
   }
   // otherwise return the existing one
@@ -291,6 +296,23 @@ void http_client::prepare_session(
     case method_e::DELETE: {
     }
   }
+
+  // Enable SSL/TLS
+  if (m_enable_tls) {
+    cpr::SslOptions sslOpts =
+        cpr::Ssl(cpr::ssl::ALPN{false}, cpr::ssl::NPN{false});
+    sslOpts.SetOption(cpr::ssl::TLSv1_0{});
+    sslOpts.SetOption(cpr::ssl::VerifyHost{false});
+    sslOpts.SetOption(cpr::ssl::VerifyPeer{false});
+    sslOpts.SetOption(cpr::ssl::VerifyStatus{false});
+
+    // TODO: Use public key
+    // session->SetSslOptions(sslOpts);
+
+    session->SetVerbose(cpr::Verbose{true});
+    session->SetVerifySsl(false);  // TODO: Don't verify SSL for the moment, but
+                                   // should enable this in the future
+  }
 }
 
 //---------------------------------------------------------------------------------------------
@@ -333,3 +355,8 @@ request http_client::prepare_multipart_request(
        "multipart/related;boundary=" + std::string(MIME_BOUNDARY)});
   return req;
 }
+
+//---------------------------------------------------------------------------------------------
+/*void http_client::enable_tls(std::string public_key_path){
+
+}*/

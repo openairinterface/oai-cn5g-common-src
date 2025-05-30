@@ -442,6 +442,17 @@ sbi_interface::sbi_interface(
   set_url();
 }
 
+/*
+sbi_interface& sbi_interface::operator=(const sbi_interface& s) {
+        m_config_name = s.m_config_name;
+          m_host        = s.m_host;
+          m_api_version = s.m_api_version;
+          m_set = s.m_set;
+          set_url();
+  return *this;
+}
+*/
+
 void sbi_interface::from_yaml(const YAML::Node& node) {
   local_interface::from_yaml(node);
   set_is_local_interface(false);
@@ -518,17 +529,18 @@ const std::string& sbi_interface::get_api_version() const {
   return m_api_version.get_value();
 }
 
-const std::string& sbi_interface::get_url() const {
-  return m_url;
+std::string sbi_interface::get_url(bool enable_tls) const {
+  std::string url = "";
+  if (enable_tls)
+    url.append("https://").append(m_url);
+  else
+    url.append("http://").append(m_url);
+  return url;
 }
 
-void sbi_interface::set_url() {
+void sbi_interface::set_url(bool enable_tls) {
   m_url = "";
-  // this is easily adaptable to HTTPS, just add a flag, and we change the URL
-  m_url.append("http://")
-      .append(get_host())
-      .append(":")
-      .append(std::to_string(get_port()));
+  m_url.append(get_host()).append(":").append(std::to_string(get_port()));
 }
 
 nf::nf(
@@ -539,7 +551,6 @@ nf::nf(
   m_sbi         = sbi;
   m_set         = true;
   m_host.set_validation_regex(HOST_VALIDATOR_REGEX);
-  set_url();
 }
 
 void nf::from_yaml(const YAML::Node& node) {
@@ -551,7 +562,6 @@ void nf::from_yaml(const YAML::Node& node) {
     m_sbi.from_yaml(node["sbi"]);
   }
   m_set = true;
-  set_url();
 }
 
 nlohmann::json nf::to_json() {
@@ -564,10 +574,6 @@ bool nf::from_json(const nlohmann::json& json_data) {
   try {
     if (json_data.find(m_sbi.get_config_name()) != json_data.end()) {
       m_sbi.from_json(json_data[m_sbi.get_config_name()]);
-    }
-
-    if (json_data.find("url") != json_data.end()) {
-      m_url = json_data["url"].get<std::string>();
     }
 
   } catch (nlohmann::detail::exception& e) {
@@ -616,12 +622,8 @@ const std::string& nf::get_host() const {
   return m_host.get_value();
 }
 
-const std::string& nf::get_url() const {
-  return m_url;
-}
-
-void nf::set_url() {
-  m_url = m_sbi.get_url();
+std::string nf::get_url(bool enable_tls) const {
+  return m_sbi.get_url(enable_tls);
 }
 
 nf_features_config::nf_features_config(
@@ -1419,4 +1421,112 @@ void http_request_timeout::validate() {
 
 uint32_t http_request_timeout::get() const {
   return m_http_request_timeout.get_value();
+}
+
+tls_config::tls_config() {
+  m_set                   = false;
+  m_enable_tls            = option_config_value(TLS_ENABLE_TLS, false);
+  m_config_name           = NF_CONFIG_TLS_LABLE;
+  m_cert_certificate_path = string_config_value(TLS_CERT_CERTIFICATE_PATH, "");
+  m_cert_key_path         = string_config_value(TLS_CERT_KEY_PATH, "");
+  m_cert_pem_path         = string_config_value(TLS_CERT_PEM_PATH, "");
+}
+
+void tls_config::from_yaml(const YAML::Node& node) {
+  m_set = true;
+  if (node[TLS_ENABLE_TLS]) {
+    m_enable_tls.from_yaml(node[TLS_ENABLE_TLS]);
+  }
+  if (m_enable_tls.get_value()) {
+    if (node[TLS_CERT_CERTIFICATE_PATH]) {
+      m_cert_certificate_path.from_yaml(node[TLS_CERT_CERTIFICATE_PATH]);
+    }
+    if (node[TLS_CERT_KEY_PATH]) {
+      m_cert_key_path.from_yaml(node[TLS_CERT_KEY_PATH]);
+    }
+    if (node[TLS_CERT_PEM_PATH]) {
+      m_cert_pem_path.from_yaml(node[TLS_CERT_PEM_PATH]);
+    }
+  }
+}
+
+nlohmann::json tls_config::to_json() {
+  nlohmann::json json_data                  = {};
+  json_data[m_enable_tls.get_config_name()] = m_enable_tls.to_json();
+  if (m_enable_tls.get_value()) {
+    json_data[m_cert_certificate_path.get_config_name()] =
+        m_cert_certificate_path.to_json();
+    json_data[m_cert_key_path.get_config_name()] = m_cert_key_path.to_json();
+    json_data[m_cert_pem_path.get_config_name()] = m_cert_pem_path.to_json();
+  }
+  return json_data;
+}
+
+bool tls_config::from_json(const nlohmann::json& json_data) {
+  try {
+    if (json_data.find(m_enable_tls.get_config_name()) != json_data.end()) {
+      m_enable_tls.from_json(json_data[m_enable_tls.get_config_name()]);
+    }
+
+    if (json_data.find(m_cert_certificate_path.get_config_name()) !=
+        json_data.end()) {
+      m_cert_certificate_path.from_json(
+          json_data[m_cert_certificate_path.get_config_name()]);
+    }
+
+    if (json_data.find(m_cert_key_path.get_config_name()) != json_data.end()) {
+      m_cert_key_path.from_json(json_data[m_cert_key_path.get_config_name()]);
+    }
+
+    if (json_data.find(m_cert_pem_path.get_config_name()) != json_data.end()) {
+      m_cert_pem_path.from_json(json_data[m_cert_pem_path.get_config_name()]);
+    }
+
+  } catch (nlohmann::detail::exception& e) {
+    // TODO:
+  } catch (std::exception& e) {
+    // TODO:
+  }
+  return false;
+}
+
+std::string tls_config::to_string(const std::string& indent) const {
+  std::string out;
+  unsigned int inner_width = get_inner_width(indent.length());
+  out.append(indent).append(NF_CONFIG_TLS_LABLE).append(":\n");
+
+  out.append(indent).append(indent).append(fmt::format(
+      BASE_FORMATTER, OUTER_LIST_ELEM, TLS_ENABLE_TLS_LABEL, inner_width,
+      m_enable_tls.to_string("")));
+
+  if (m_enable_tls.get_value()) {
+    out.append(indent).append(indent).append(fmt::format(
+        BASE_FORMATTER, OUTER_LIST_ELEM, TLS_CERT_CERTIFICATE_PATH_LABEL,
+        inner_width, m_cert_certificate_path.get_value()));
+
+    out.append(indent).append(indent).append(fmt::format(
+        BASE_FORMATTER, OUTER_LIST_ELEM, TLS_CERT_KEY_PATH_LABEL, inner_width,
+        m_cert_key_path.get_value()));
+
+    out.append(indent).append(indent).append(fmt::format(
+        BASE_FORMATTER, OUTER_LIST_ELEM, TLS_CERT_PEM_PATH_LABEL, inner_width,
+        m_cert_pem_path.get_value()));
+  }
+  return out;
+}
+
+bool tls_config::enable_tls() const {
+  return m_enable_tls.get_value();
+}
+
+const std::string& tls_config::get_cert_certificate_path() const {
+  return m_cert_certificate_path.get_value();
+}
+
+const std::string& tls_config::get_cert_key_path() const {
+  return m_cert_key_path.get_value();
+}
+
+const std::string& tls_config::get_cert_pem_path() const {
+  return m_cert_pem_path.get_value();
 }

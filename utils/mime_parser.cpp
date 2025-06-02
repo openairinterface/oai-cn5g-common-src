@@ -20,7 +20,7 @@
  */
 
 #include "mime_parser.hpp"
-#include "logger.hpp"
+#include "logger_base.hpp"
 #include "conversions.hpp"
 #include "utils.hpp"
 #include <boost/algorithm/string/find.hpp>
@@ -32,7 +32,8 @@ using namespace oai::utils;
 bool mime_parser::parse(const std::string& str) {
   std::string str_tmp = str;
   std::string CRLF    = "\r\n";
-  Logger::smf_app().debug("Parsing the message with Simple Parser");
+  oai::logger::logger_common::common().debug(
+      "Parsing the message with Simple Parser");
 
   // Convert all Content-Type to lowercase content-type
   boost::algorithm::ireplace_all(str_tmp, "Content-Type", "content-type");
@@ -46,7 +47,8 @@ bool mime_parser::parse(const std::string& str) {
 
   std::string boundary_str =
       str_tmp.substr(2, content_type_pos - 4);  // 2 for -- and 2 for CRLF
-  Logger::smf_app().debug("Boundary: %s", boundary_str.c_str());
+  oai::logger::logger_common::common().debug(
+      "Boundary: %s", boundary_str.c_str());
   std::string boundary_full = "--" + boundary_str + CRLF;
   std::string last_boundary = "--" + boundary_str + "--";
 
@@ -63,7 +65,8 @@ bool mime_parser::parse(const std::string& str) {
       break;
     p.content_type = str_tmp.substr(
         content_type_pos + 14, crlf_pos - (content_type_pos + 14));
-    Logger::smf_app().debug("Content Type: %s", p.content_type.c_str());
+    oai::logger::logger_common::common().debug(
+        "Content Type: %s", p.content_type.c_str());
 
     crlf_pos =
         str_tmp.find(CRLF + CRLF, content_type_pos);  // beginning of content
@@ -73,7 +76,7 @@ bool mime_parser::parse(const std::string& str) {
     }
     if (boundary_pos > 0) {
       p.body = str_tmp.substr(crlf_pos + 4, boundary_pos - 2 - (crlf_pos + 4));
-      Logger::smf_app().debug("Body: %s", p.body.c_str());
+      oai::logger::logger_common::common().debug("Body: %s", p.body.c_str());
       mime_parts.push_back(p);
     }
   }
@@ -97,8 +100,9 @@ unsigned char* mime_parser::format_string_as_hex(const std::string& str) {
   unsigned char* data_hex = (uint8_t*) malloc(str_len / 2 + 1);
   oai::utils::conv::ascii_to_hex(data_hex, (const char*) data);
 
-  Logger::smf_app().debug("Input string (%d bytes): %s ", str_len, str.c_str());
-  Logger::smf_app().debug("Data (formatted):");
+  oai::logger::logger_common::common().debug(
+      "Input string (%d bytes): %s ", str_len, str.c_str());
+  oai::logger::logger_common::common().debug("Data (formatted):");
   if (Logger::should_log(spdlog::level::debug)) {
     for (int i = 0; i < str_len / 2; i++) printf(" %02x ", data_hex[i]);
     printf("\n");

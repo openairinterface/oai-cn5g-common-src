@@ -419,6 +419,8 @@ typedef struct pdu_session_type_s {
       pdu_session_type = pdu_session_type_e::PDU_SESSION_TYPE_E_IPV6;
     } else if (s == "IPV4V6") {
       pdu_session_type = pdu_session_type_e::PDU_SESSION_TYPE_E_IPV4V6;
+    } else if (s == "ETHERNET") {
+      pdu_session_type = pdu_session_type_e::PDU_SESSION_TYPE_E_ETHERNET;
     } else {
       pdu_session_type =
           pdu_session_type_e::PDU_SESSION_TYPE_E_IPV4;  // Default value
@@ -450,6 +452,8 @@ typedef struct pdu_session_type_s {
       pdu_session_type = pdu_session_type_e::PDU_SESSION_TYPE_E_IPV6;
     } else if (pdu_session_type_str == "IPV4V6") {
       pdu_session_type = pdu_session_type_e::PDU_SESSION_TYPE_E_IPV4V6;
+    } else if (pdu_session_type_str == "ETHERNET") {
+      pdu_session_type = pdu_session_type_e::PDU_SESSION_TYPE_E_ETHERNET;
     } else {
       pdu_session_type =
           pdu_session_type_e::PDU_SESSION_TYPE_E_IPV4;  // Default value

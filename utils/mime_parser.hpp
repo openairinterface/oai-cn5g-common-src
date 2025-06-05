@@ -22,11 +22,17 @@
 #ifndef FILE_MIME_PARSER_HPP_SEEN
 #define FILE_MIME_PARSER_HPP_SEEN
 
+#include <unordered_map>
 #include <string>
-#include <map>
 #include <vector>
+#include <optional>
 
 namespace oai::utils {
+
+constexpr auto JSON_CONTENT_ID_MIME = "root";
+constexpr auto N1_SM_CONTENT_ID     = "n1SmMsg";
+constexpr auto N2_SM_CONTENT_ID     = "n2msg";
+constexpr auto N2_NRPPa_CONTENT_ID  = "n2NrppaMsg";
 
 enum class multipart_related_content_part_e { JSON = 0, NAS = 1, NGAP = 2 };
 
@@ -35,6 +41,7 @@ static const std::vector<std::string> multipart_related_content_part_e2str = {
 
 typedef struct mime_part {
   std::string content_type;
+  std::string content_id;
   std::string body;
 } mime_part;
 
@@ -48,12 +55,32 @@ class mime_parser {
    */
   bool parse(const std::string& str);
 
+  uint8_t parse(
+      std::string input, std::string& jsonData, std::string& n1sm,
+      std::string& n2sm);
+
+  /*
+   * Get content of a Mime part with corresponding Content ID
+   * @param [const std::string&] content_id: Content ID
+   * @param [std::string&] content: Mime content
+   * @return true if content with Content ID exist, otherwise false
+   */
+  bool get(const std::string& content_id, std::string& content);
+
+  /*
+   * Get content of a Mime part with corresponding Content ID
+   * @param [const std::string&] content_id: Content ID
+   * @param [std::optional<std::string>&] content: Mime content
+   * @return true if content with Content ID exist, otherwise false
+   */
+  void get(const std::string& content_id, std::optional<std::string>& content);
+
   /*
    * Get vector of Mime parts
    * @param [std::vector<mime_part> &] parts: store vector of Mime parts
    * @return void
    */
-  void get_mime_parts(std::vector<mime_part>& parts) const;
+  void get_mime_parts(std::unordered_map<std::string, mime_part>& parts) const;
 
   /*
    * Represent a string as hex
@@ -93,7 +120,7 @@ class mime_parser {
       std::string json_format = "application/json");
 
  private:
-  std::vector<mime_part> mime_parts;
+  std::unordered_map<std::string, mime_part> mime_parts;
 };
 }  // namespace oai::utils
 

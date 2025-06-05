@@ -25,6 +25,7 @@
 #include "utils.hpp"
 #include <boost/algorithm/string/find.hpp>
 #include <boost/algorithm/string/replace.hpp>
+#include <boost/algorithm/string.hpp>
 
 using namespace oai::utils;
 
@@ -33,7 +34,7 @@ bool mime_parser::parse(const std::string& str) {
   std::string str_tmp = str;
   std::string CRLF    = "\r\n";
   oai::logger::logger_common::common().debug(
-      "Parsing the message with Simple Parser");
+      "Parsing the message with the Simple Parser");
 
   // Convert all Content-Type to lowercase content-type
   boost::algorithm::ireplace_all(str_tmp, "Content-Type", "content-type");
@@ -68,8 +69,30 @@ bool mime_parser::parse(const std::string& str) {
     oai::logger::logger_common::common().debug(
         "Content Type: %s", p.content_type.c_str());
 
-    crlf_pos =
-        str_tmp.find(CRLF + CRLF, content_type_pos);  // beginning of content
+    // if (p.content_type.compare("application/json") == 0) {
+    if (boost::iequals(p.content_type, "application/json") or
+        boost::iequals(p.content_type, "application/problem+json")) {
+      p.content_id = JSON_CONTENT_ID_MIME;
+      crlf_pos =
+          str_tmp.find(CRLF + CRLF, content_type_pos);  // beginning of content
+    } else {
+      std::size_t content_id_pos = str_tmp.find("Content-Id", content_type_pos);
+
+      if ((content_id_pos == std::string::npos)) {
+        return false;
+      } else {
+        crlf_pos = str_tmp.find(CRLF, content_id_pos);
+        if (crlf_pos == std::string::npos) return false;
+        p.content_id =
+            str_tmp.substr(content_id_pos + 12, crlf_pos - content_id_pos - 12);
+        crlf_pos =
+            str_tmp.find(CRLF + CRLF, content_id_pos);  // beginning of content
+      }
+    }
+
+    oai::logger::logger_common::common().debug(
+        "Content Id: %s", p.content_id.c_str());
+
     boundary_pos = str_tmp.find(boundary_full, crlf_pos);
     if (boundary_pos == std::string::npos) {
       boundary_pos = str_tmp.find(last_boundary, crlf_pos);
@@ -77,16 +100,52 @@ bool mime_parser::parse(const std::string& str) {
     if (boundary_pos > 0) {
       p.body = str_tmp.substr(crlf_pos + 4, boundary_pos - 2 - (crlf_pos + 4));
       oai::logger::logger_common::common().debug("Body: %s", p.body.c_str());
-      mime_parts.push_back(p);
+      mime_parts[p.content_id] = p;
     }
   }
   return true;
 }
 
 //------------------------------------------------------------------------------
-void mime_parser::get_mime_parts(std::vector<mime_part>& parts) const {
+uint8_t mime_parser::parse(
+    std::string input, std::string& jsonData, std::string& n1sm,
+    std::string& n2sm) {
+  if (!parse(input)) return 0;
+  uint8_t size = mime_parts.size();
+  if (mime_parts.count(JSON_CONTENT_ID_MIME) != 0) {
+    jsonData = mime_parts[JSON_CONTENT_ID_MIME].body;
+  }
+  if (mime_parts.count(N1_SM_CONTENT_ID) != 0) {
+    n1sm = mime_parts[N1_SM_CONTENT_ID].body;
+  }
+  if (mime_parts.count(N2_SM_CONTENT_ID) != 0) {
+    n2sm = mime_parts[N2_SM_CONTENT_ID].body;
+  }
+  return size;
+}
+
+//------------------------------------------------------------------------------
+bool mime_parser::get(const std::string& content_id, std::string& content) {
+  if (mime_parts.count(content_id) != 0) {
+    content = mime_parts[content_id].body;
+    return true;
+  }
+  return false;
+}
+
+//------------------------------------------------------------------------------
+void mime_parser::get(
+    const std::string& content_id, std::optional<std::string>& content) {
+  if (mime_parts.count(content_id) != 0) {
+    content = std::make_optional<std::string>(mime_parts[content_id].body);
+  }
+}
+
+//------------------------------------------------------------------------------
+void mime_parser::get_mime_parts(
+    std::unordered_map<std::string, mime_part>& parts) const {
   for (auto it : mime_parts) {
-    parts.push_back(it);
+    parts[it.first] = it.second;
   }
 }
 
@@ -103,7 +162,7 @@ unsigned char* mime_parser::format_string_as_hex(const std::string& str) {
   oai::logger::logger_common::common().debug(
       "Input string (%d bytes): %s ", str_len, str.c_str());
   oai::logger::logger_common::common().debug("Data (formatted):");
-  if (Logger::should_log(spdlog::level::debug)) {
+  if (oai::logger::logger_common::should_log(spdlog::level::debug)) {
     for (int i = 0; i < str_len / 2; i++) printf(" %02x ", data_hex[i]);
     printf("\n");
   }
@@ -135,13 +194,13 @@ void mime_parser::create_multipart_related_content(
   body.append("--" + boundary + CRLF);
   body.append(
       "Content-Type: application/vnd.3gpp.5gnas" + CRLF +
-      "Content-Id: n1SmMsg" + CRLF);
+      "Content-Id: " + N1_SM_CONTENT_ID + CRLF);
   body.append(CRLF);
   body.append(std::string((char*) n1_msg_hex, n1_message.length() / 2) + CRLF);
   body.append("--" + boundary + CRLF);
   body.append(
-      "Content-Type: application/vnd.3gpp.ngap" + CRLF + "Content-Id: n2msg" +
-      CRLF);
+      "Content-Type: application/vnd.3gpp.ngap" + CRLF +
+      "Content-Id: " + N2_SM_CONTENT_ID + CRLF);
   body.append(CRLF);
   body.append(std::string((char*) n2_msg_hex, n2_message.length() / 2) + CRLF);
   body.append("--" + boundary + "--" + CRLF);
@@ -171,11 +230,11 @@ void mime_parser::create_multipart_related_content(
   if (content_type == multipart_related_content_part_e::NAS) {  // NAS
     body.append(
         "Content-Type: application/vnd.3gpp.5gnas" + CRLF +
-        "Content-Id: n1SmMsg" + CRLF);
+        "Content-Id: " + N1_SM_CONTENT_ID + CRLF);
   } else if (content_type == multipart_related_content_part_e::NGAP) {  // NGAP
     body.append(
-        "Content-Type: application/vnd.3gpp.ngap" + CRLF + "Content-Id: n2msg" +
-        CRLF);
+        "Content-Type: application/vnd.3gpp.ngap" + CRLF +
+        "Content-Id: " + N2_SM_CONTENT_ID + CRLF);
   }
   body.append(CRLF);
   body.append(std::string((char*) msg_hex, message.length() / 2) + CRLF);

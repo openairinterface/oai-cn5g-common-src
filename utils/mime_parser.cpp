@@ -36,8 +36,9 @@ bool mime_parser::parse(const std::string& str) {
   oai::logger::logger_common::common().debug(
       "Parsing the message with the Simple Parser");
 
-  // Convert all Content-Type to lowercase content-type
+  // Convert all Content-Type/Content-Id to lowercase content-type/content-id
   boost::algorithm::ireplace_all(str_tmp, "Content-Type", "content-type");
+  boost::algorithm::ireplace_all(str_tmp, "Content-Id", "content-id");
 
   // find boundary
   std::size_t content_type_pos = str_tmp.find("content-type");  // first part
@@ -76,7 +77,7 @@ bool mime_parser::parse(const std::string& str) {
       crlf_pos =
           str_tmp.find(CRLF + CRLF, content_type_pos);  // beginning of content
     } else {
-      std::size_t content_id_pos = str_tmp.find("Content-Id", content_type_pos);
+      std::size_t content_id_pos = str_tmp.find("content-id", content_type_pos);
 
       if ((content_id_pos == std::string::npos)) {
         return false;

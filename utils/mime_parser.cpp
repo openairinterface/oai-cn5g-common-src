@@ -70,16 +70,16 @@ bool mime_parser::parse(const std::string& str) {
     oai::logger::logger_common::common().debug(
         "Content Type: %s", p.content_type.c_str());
 
-    // if (p.content_type.compare("application/json") == 0) {
     if (boost::iequals(p.content_type, "application/json") or
         boost::iequals(p.content_type, "application/problem+json")) {
       p.content_id = JSON_CONTENT_ID_MIME;
       crlf_pos =
           str_tmp.find(CRLF + CRLF, content_type_pos);  // beginning of content
     } else {
-      std::size_t content_id_pos = str_tmp.find("content-id", content_type_pos);
+      std::size_t content_id_pos = str_tmp.find("content-id", boundary_pos);
 
       if ((content_id_pos == std::string::npos)) {
+        oai::logger::logger_common::common().warn("There's no content id");
         return false;
       } else {
         crlf_pos = str_tmp.find(CRLF, content_id_pos);
@@ -167,10 +167,9 @@ unsigned char* mime_parser::format_string_as_hex(const std::string& str) {
     for (int i = 0; i < str_len / 2; i++) printf(" %02x ", data_hex[i]);
     printf("\n");
   }
+
   // free memory
-  // oai::utils::utils::free_wrapper((void**) &data);
-  free(data);
-  data = NULL;
+  oai::utils::utils::free_wrapper((void**) &data);
 
   return data_hex;
 }
@@ -180,8 +179,6 @@ void mime_parser::create_multipart_related_content(
     std::string& body, const std::string& json_part, const std::string boundary,
     const std::string& n1_message, const std::string& n2_message,
     std::string json_format) {
-  // TODO: provide Content-Ids as function parameters
-
   // format string as hex
   unsigned char* n1_msg_hex = format_string_as_hex(n1_message);
   unsigned char* n2_msg_hex = format_string_as_hex(n2_message);
@@ -193,15 +190,18 @@ void mime_parser::create_multipart_related_content(
   body.append(json_part + CRLF);
 
   body.append("--" + boundary + CRLF);
-  body.append(
-      "Content-Type: application/vnd.3gpp.5gnas" + CRLF +
-      "Content-Id: " + N1_SM_CONTENT_ID + CRLF);
+  body.append("Content-Type: ")
+      .append(MIME_CONTENT_TYPE_NAS)
+      .append(CRLF)
+      .append("Content-Id: ")
+      .append(N1_SM_CONTENT_ID + CRLF);
   body.append(CRLF);
   body.append(std::string((char*) n1_msg_hex, n1_message.length() / 2) + CRLF);
   body.append("--" + boundary + CRLF);
-  body.append(
-      "Content-Type: application/vnd.3gpp.ngap" + CRLF +
-      "Content-Id: " + N2_SM_CONTENT_ID + CRLF);
+  body.append("Content-Type: ")
+      .append(MIME_CONTENT_TYPE_NGAP + CRLF)
+      .append("Content-Id: ")
+      .append(N2_SM_CONTENT_ID + CRLF);
   body.append(CRLF);
   body.append(std::string((char*) n2_msg_hex, n2_message.length() / 2) + CRLF);
   body.append("--" + boundary + "--" + CRLF);
@@ -217,7 +217,6 @@ void mime_parser::create_multipart_related_content(
     const std::string& message,
     const multipart_related_content_part_e content_type,
     std::string json_format) {
-  // TODO: provide Content-Id as function parameters
   // format string as hex
   unsigned char* msg_hex = format_string_as_hex(message);
 
@@ -229,13 +228,15 @@ void mime_parser::create_multipart_related_content(
 
   body.append("--" + boundary + CRLF);
   if (content_type == multipart_related_content_part_e::NAS) {  // NAS
-    body.append(
-        "Content-Type: application/vnd.3gpp.5gnas" + CRLF +
-        "Content-Id: " + N1_SM_CONTENT_ID + CRLF);
+    body.append("Content-Type: ")
+        .append(MIME_CONTENT_TYPE_NAS + CRLF)
+        .append("Content-Id: ")
+        .append(N1_SM_CONTENT_ID + CRLF);
   } else if (content_type == multipart_related_content_part_e::NGAP) {  // NGAP
-    body.append(
-        "Content-Type: application/vnd.3gpp.ngap" + CRLF +
-        "Content-Id: " + N2_SM_CONTENT_ID + CRLF);
+    body.append("Content-Type: ")
+        .append(MIME_CONTENT_TYPE_NGAP + CRLF)
+        .append("Content-Id: ")
+        .append(N2_SM_CONTENT_ID + CRLF);
   }
   body.append(CRLF);
   body.append(std::string((char*) msg_hex, message.length() / 2) + CRLF);

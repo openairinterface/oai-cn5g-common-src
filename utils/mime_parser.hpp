@@ -29,10 +29,12 @@
 
 namespace oai::utils {
 
-constexpr auto JSON_CONTENT_ID_MIME = "root";
-constexpr auto N1_SM_CONTENT_ID     = "n1SmMsg";
-constexpr auto N2_SM_CONTENT_ID     = "n2msg";
-constexpr auto N2_NRPPa_CONTENT_ID  = "n2NrppaMsg";
+constexpr auto JSON_CONTENT_ID_MIME   = "root";
+constexpr auto N1_SM_CONTENT_ID       = "n1SmMsg";
+constexpr auto N2_SM_CONTENT_ID       = "n2msg";
+constexpr auto N2_NRPPa_CONTENT_ID    = "n2NrppaMsg";
+constexpr auto MIME_CONTENT_TYPE_NAS  = "application/vnd.3gpp.5gnas";
+constexpr auto MIME_CONTENT_TYPE_NGAP = "application/vnd.3gpp.ngap";
 
 enum class multipart_related_content_part_e { JSON = 0, NAS = 1, NGAP = 2 };
 

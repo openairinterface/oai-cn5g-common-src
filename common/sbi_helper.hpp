@@ -312,6 +312,11 @@ class sbi_helper {
       "/pdu-sessions/:pduSessionRef/transfer-mo-data";
   // TODO: SMF: Session Management Event Exposure Service
 
+  // SMF callback
+  static inline const std::string SmfCallbackBase = "/namf-callback/";
+  static inline const std::string SmfCallbackPathSdmSubscription =
+      ":ueId/sdm-notification";
+
   // UDM: Subscriber Data Management
   static inline const std::string UdmSdmBase           = "/nudm-sdm/";
   static inline const std::string UdmSdmPathSupi       = "/:supi";

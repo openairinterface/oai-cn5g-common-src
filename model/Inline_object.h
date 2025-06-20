@@ -23,7 +23,7 @@
 #include "UeContextCreateData.h"
 #include <nlohmann/json.hpp>
 
-namespace oai::model::amf {
+namespace oai::_3gpp::model {
 
 /// <summary>
 ///
@@ -207,6 +207,6 @@ class Inline_object {
   bool m_BinaryDataN2InformationExt16IsSet;
 };
 
-}  // namespace oai::model::amf
+}  // namespace oai::_3gpp::model
 
 #endif /* Inline_object_H_ */

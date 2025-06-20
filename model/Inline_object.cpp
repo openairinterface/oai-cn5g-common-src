@@ -13,7 +13,7 @@
 
 #include "Inline_object.h"
 
-namespace oai::model::amf {
+namespace oai::_3gpp::model {
 
 Inline_object::Inline_object() {
   m_JsonDataIsSet                     = false;

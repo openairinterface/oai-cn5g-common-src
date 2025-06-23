@@ -398,4 +398,4 @@ void Inline_object::unsetBinaryDataN2InformationExt16() {
   m_BinaryDataN2InformationExt16IsSet = false;
 }
 
-}  // namespace oai::model::amf
+}  // namespace oai::_3gpp::model

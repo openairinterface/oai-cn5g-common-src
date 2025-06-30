@@ -42,9 +42,7 @@ bool StationaryIndicationRm::validate(
 
 bool StationaryIndicationRm::operator==(
     const StationaryIndicationRm& rhs) const {
-  return
-
-      ;
+  return (*this == rhs);
 }
 
 bool StationaryIndicationRm::operator!=(

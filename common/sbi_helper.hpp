@@ -313,7 +313,7 @@ class sbi_helper {
   // TODO: SMF: Session Management Event Exposure Service
 
   // SMF callback
-  static inline const std::string SmfCallbackBase = "/namf-callback/";
+  static inline const std::string SmfCallbackBase = "/nsmf-callback/";
   static inline const std::string SmfCallbackPathSdmSubscription =
       ":ueId/sdm-notification";
 

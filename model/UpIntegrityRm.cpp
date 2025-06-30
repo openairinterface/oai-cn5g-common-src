@@ -41,9 +41,7 @@ bool UpIntegrityRm::validate(
 }
 
 bool UpIntegrityRm::operator==(const UpIntegrityRm& rhs) const {
-  return
-
-      ;
+  return (*this == rhs);
 }
 
 bool UpIntegrityRm::operator!=(const UpIntegrityRm& rhs) const {

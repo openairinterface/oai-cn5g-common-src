@@ -41,9 +41,7 @@ bool StorageOutcome::validate(
 }
 
 bool StorageOutcome::operator==(const StorageOutcome& rhs) const {
-  return
-
-      ;
+  return (*this == rhs);
 }
 
 bool StorageOutcome::operator!=(const StorageOutcome& rhs) const {

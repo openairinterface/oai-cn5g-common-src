@@ -41,9 +41,7 @@ bool TraceDepthRm::validate(
 }
 
 bool TraceDepthRm::operator==(const TraceDepthRm& rhs) const {
-  return
-
-      ;
+  return (*this == rhs);
 }
 
 bool TraceDepthRm::operator!=(const TraceDepthRm& rhs) const {

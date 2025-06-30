@@ -41,9 +41,7 @@ bool SteeringContainer::validate(
 }
 
 bool SteeringContainer::operator==(const SteeringContainer& rhs) const {
-  return
-
-      ;
+  return (*this == rhs);
 }
 
 bool SteeringContainer::operator!=(const SteeringContainer& rhs) const {

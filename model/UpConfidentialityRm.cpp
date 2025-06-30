@@ -41,9 +41,7 @@ bool UpConfidentialityRm::validate(
 }
 
 bool UpConfidentialityRm::operator==(const UpConfidentialityRm& rhs) const {
-  return
-
-      ;
+  return (*this == rhs);
 }
 
 bool UpConfidentialityRm::operator!=(const UpConfidentialityRm& rhs) const {

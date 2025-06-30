@@ -41,9 +41,7 @@ bool Update_ueId_parameter::validate(
 }
 
 bool Update_ueId_parameter::operator==(const Update_ueId_parameter& rhs) const {
-  return
-
-      ;
+  return (*this == rhs);
 }
 
 bool Update_ueId_parameter::operator!=(const Update_ueId_parameter& rhs) const {

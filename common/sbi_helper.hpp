@@ -34,6 +34,7 @@
 #include "if.hpp"
 #include "logger_base.hpp"
 #include "string.hpp"
+#include "config_types.hpp"
 
 namespace oai::common::sbi {
 
@@ -695,6 +696,26 @@ class sbi_helper {
       const nf_addr_t& nrf_addr, std::string& api_root);
 
   /*
+   * Get NRF Nfm API Root
+   * @param [const oai::config::sbi_interface& ] nrf: NRF's Addr info
+   * @param [bool ] enable_tls: TLS option
+   * @param [std::string& ] api_root: NRF's API Root
+   * @return void
+   */
+  static void get_nrf_nfm_api_root(
+      const oai::config::sbi_interface& nrf, bool enable_tls,
+      std::string& api_root);
+
+  /*
+   * Get NRF Nfm API Root
+   * @param [const oai::config::sbi_interface& ] nrf: NRF's Addr info
+   * @param [bool ] enable_tls: TLS option
+   * @return NRF's API Root
+   */
+  static std::string get_nrf_nfm_api_root(
+      const oai::config::sbi_interface& nrf, bool enable_tls);
+
+  /*
    * Get NRF NF Register URI
    * @param [const nf_addr_t& ] nrf_addr: NRF's Addr info
    * @param [const std::string& ] nf_instance: NF instance Id
@@ -704,6 +725,17 @@ class sbi_helper {
   static void get_nrf_nf_instance_uri(
       const nf_addr_t& nrf_addr, const std::string& nf_instance,
       std::string& uri);
+
+  /*
+   * Get NRF NF Register URI
+   * @param [const oai::config::sbi_interface& ] nrf: NRF's Addr info
+   * @param [bool ] enable_tls: TLS option
+   * @param [const std::string& ] nf_instance: NF instance Id
+   * @return NRF NF Register URI
+   */
+  static std::string get_nrf_nf_instance_uri(
+      const oai::config::sbi_interface& nrf, bool enable_tls,
+      const std::string& nf_instance);
 
   /*
    * Get NRF Disc API Root

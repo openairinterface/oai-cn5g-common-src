@@ -1470,12 +1470,12 @@ bool AccessAndMobilitySubscriptionData::mdtConfigurationIsSet() const {
 void AccessAndMobilitySubscriptionData::unsetMdtConfiguration() {
   m_MdtConfigurationIsSet = false;
 }
-oai::_3gpp::model::TraceData_1 AccessAndMobilitySubscriptionData::getTraceData()
+oai::_3gpp::model::TraceData AccessAndMobilitySubscriptionData::getTraceData()
     const {
   return m_TraceData;
 }
 void AccessAndMobilitySubscriptionData::setTraceData(
-    oai::_3gpp::model::TraceData_1 const& value) {
+    oai::_3gpp::model::TraceData const& value) {
   m_TraceData      = value;
   m_TraceDataIsSet = true;
 }

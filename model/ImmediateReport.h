@@ -35,7 +35,7 @@
 #include "SmsManagementSubscriptionData.h"
 #include "MbsSubscriptionData.h"
 #include "SmfSelectionSubscriptionData.h"
-#include "TraceData_1.h"
+#include "TraceData.h"
 #include "UeContextInSmfData.h"
 #include <nlohmann/json.hpp>
 
@@ -127,8 +127,8 @@ class ImmediateReport {
   /// <summary>
   ///
   /// </summary>
-  oai::_3gpp::model::TraceData_1 getTraceData() const;
-  void setTraceData(oai::_3gpp::model::TraceData_1 const& value);
+  oai::_3gpp::model::TraceData getTraceData() const;
+  void setTraceData(oai::_3gpp::model::TraceData const& value);
   bool traceDataIsSet() const;
   void unsetTraceData();
   /// <summary>
@@ -209,7 +209,7 @@ class ImmediateReport {
   bool m_SmsSubsDataIsSet;
   oai::_3gpp::model::SmSubsData m_SmData;
   bool m_SmDataIsSet;
-  oai::_3gpp::model::TraceData_1 m_TraceData;
+  oai::_3gpp::model::TraceData m_TraceData;
   bool m_TraceDataIsSet;
   oai::_3gpp::model::SmsManagementSubscriptionData m_SmsMngData;
   bool m_SmsMngDataIsSet;

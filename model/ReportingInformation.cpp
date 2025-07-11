@@ -216,12 +216,12 @@ bool ReportingInformation::immRepIsSet() const {
 void ReportingInformation::unsetImmRep() {
   m_ImmRepIsSet = false;
 }
-oai::_3gpp::model::NotificationMethod_1 ReportingInformation::getNotifMethod()
+oai::_3gpp::model::NotificationMethod ReportingInformation::getNotifMethod()
     const {
   return m_NotifMethod;
 }
 void ReportingInformation::setNotifMethod(
-    oai::_3gpp::model::NotificationMethod_1 const& value) {
+    oai::_3gpp::model::NotificationMethod const& value) {
   m_NotifMethod      = value;
   m_NotifMethodIsSet = true;
 }

@@ -11,13 +11,13 @@
  * the class manually.
  */
 /*
- * TransportProtocol_1_anyOf.h
+ * TransportProtocol_anyOf.h
  *
  *
  */
 
-#ifndef TransportProtocol_1_anyOf_H_
-#define TransportProtocol_1_anyOf_H_
+#ifndef TransportProtocol_anyOf_H_
+#define TransportProtocol_anyOf_H_
 
 #include <nlohmann/json.hpp>
 
@@ -26,12 +26,12 @@ namespace oai::_3gpp::model {
 /// <summary>
 ///
 /// </summary>
-class TransportProtocol_1_anyOf {
+class TransportProtocol_anyOf {
  public:
-  TransportProtocol_1_anyOf();
-  virtual ~TransportProtocol_1_anyOf() = default;
+  TransportProtocol_anyOf();
+  virtual ~TransportProtocol_anyOf() = default;
 
-  enum class eTransportProtocol_1_anyOf {
+  enum class eTransportProtocol_anyOf {
     // To have a valid default value.
     // Avoiding name clashes with user defined
     // enum values
@@ -57,24 +57,24 @@ class TransportProtocol_1_anyOf {
   /// </summary>
   bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
 
-  bool operator==(const TransportProtocol_1_anyOf& rhs) const;
-  bool operator!=(const TransportProtocol_1_anyOf& rhs) const;
+  bool operator==(const TransportProtocol_anyOf& rhs) const;
+  bool operator!=(const TransportProtocol_anyOf& rhs) const;
 
   /////////////////////////////////////////////
-  /// TransportProtocol_1_anyOf members
+  /// TransportProtocol_anyOf members
 
-  TransportProtocol_1_anyOf::eTransportProtocol_1_anyOf getValue() const;
-  void setValue(TransportProtocol_1_anyOf::eTransportProtocol_1_anyOf value);
+  TransportProtocol_anyOf::eTransportProtocol_anyOf getValue() const;
+  void setValue(TransportProtocol_anyOf::eTransportProtocol_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const TransportProtocol_1_anyOf& o);
-  friend void from_json(const nlohmann::json& j, TransportProtocol_1_anyOf& o);
+  friend void to_json(nlohmann::json& j, const TransportProtocol_anyOf& o);
+  friend void from_json(const nlohmann::json& j, TransportProtocol_anyOf& o);
 
  protected:
-  TransportProtocol_1_anyOf::eTransportProtocol_1_anyOf m_value =
-      TransportProtocol_1_anyOf::eTransportProtocol_1_anyOf::
+  TransportProtocol_anyOf::eTransportProtocol_anyOf m_value =
+      TransportProtocol_anyOf::eTransportProtocol_anyOf::
           INVALID_VALUE_OPENAPI_GENERATED;
 };
 
 }  // namespace oai::_3gpp::model
 
-#endif /* TransportProtocol_1_anyOf_H_ */
+#endif /* TransportProtocol_anyOf_H_ */

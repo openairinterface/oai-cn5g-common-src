@@ -19,7 +19,7 @@
 #ifndef SmPolicySnssaiData_H_
 #define SmPolicySnssaiData_H_
 
-#include "SliceMbr_1.h"
+#include "SliceMbr.h"
 #include <map>
 #include "Snssai.h"
 #include "SmPolicyDnnData.h"
@@ -77,8 +77,8 @@ class SmPolicySnssaiData {
   /// <summary>
   ///
   /// </summary>
-  oai::_3gpp::model::SliceMbr_1 getUeSliceMbr() const;
-  void setUeSliceMbr(oai::_3gpp::model::SliceMbr_1 const& value);
+  oai::_3gpp::model::SliceMbr getUeSliceMbr() const;
+  void setUeSliceMbr(oai::_3gpp::model::SliceMbr const& value);
   bool ueSliceMbrIsSet() const;
   void unsetUeSliceMbr();
 
@@ -90,7 +90,7 @@ class SmPolicySnssaiData {
 
   std::map<std::string, oai::_3gpp::model::SmPolicyDnnData> m_SmPolicyDnnData;
   bool m_SmPolicyDnnDataIsSet;
-  oai::_3gpp::model::SliceMbr_1 m_UeSliceMbr;
+  oai::_3gpp::model::SliceMbr m_UeSliceMbr;
   bool m_UeSliceMbrIsSet;
 };
 

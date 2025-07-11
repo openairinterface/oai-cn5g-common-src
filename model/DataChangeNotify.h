@@ -21,7 +21,7 @@
 #define DataChangeNotify_H_
 
 #include "NotifyItem.h"
-#include "SdmSubscription_1.h"
+#include "SdmSubscription.h"
 #include <string>
 #include "SubscriptionDataSubscriptions.h"
 #include <vector>
@@ -86,17 +86,17 @@ class DataChangeNotify {
   /// <summary>
   ///
   /// </summary>
-  oai::_3gpp::model::SdmSubscription_1 getSdmSubscription() const;
-  void setSdmSubscription(oai::_3gpp::model::SdmSubscription_1 const& value);
+  oai::_3gpp::model::SdmSubscription getSdmSubscription() const;
+  void setSdmSubscription(oai::_3gpp::model::SdmSubscription const& value);
   bool sdmSubscriptionIsSet() const;
   void unsetSdmSubscription();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::_3gpp::model::SdmSubscription_1>
+  std::vector<oai::_3gpp::model::SdmSubscription>
   getAdditionalSdmSubscriptions() const;
   void setAdditionalSdmSubscriptions(
-      std::vector<oai::_3gpp::model::SdmSubscription_1> const& value);
+      std::vector<oai::_3gpp::model::SdmSubscription> const& value);
   bool additionalSdmSubscriptionsIsSet() const;
   void unsetAdditionalSdmSubscriptions();
   /// <summary>
@@ -120,9 +120,9 @@ class DataChangeNotify {
   bool m_UeIdIsSet;
   std::vector<oai::_3gpp::model::NotifyItem> m_NotifyItems;
   bool m_NotifyItemsIsSet;
-  oai::_3gpp::model::SdmSubscription_1 m_SdmSubscription;
+  oai::_3gpp::model::SdmSubscription m_SdmSubscription;
   bool m_SdmSubscriptionIsSet;
-  std::vector<oai::_3gpp::model::SdmSubscription_1>
+  std::vector<oai::_3gpp::model::SdmSubscription>
       m_AdditionalSdmSubscriptions;
   bool m_AdditionalSdmSubscriptionsIsSet;
   std::vector<oai::_3gpp::model::SubscriptionDataSubscriptions>

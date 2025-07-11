@@ -24,7 +24,7 @@
 #include "PduSessionType.h"
 #include "Snssai.h"
 #include <vector>
-#include "IpAddress_1.h"
+#include "IpAddress.h"
 #include <nlohmann/json.hpp>
 
 namespace oai::_3gpp::model {
@@ -109,17 +109,17 @@ class r_5GVnGroupData {
   /// <summary>
   ///
   /// </summary>
-  oai::_3gpp::model::IpAddress_1 getDnAaaAddress() const;
-  void setDnAaaAddress(oai::_3gpp::model::IpAddress_1 const& value);
+  oai::_3gpp::model::IpAddress getDnAaaAddress() const;
+  void setDnAaaAddress(oai::_3gpp::model::IpAddress const& value);
   bool dnAaaAddressIsSet() const;
   void unsetDnAaaAddress();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::_3gpp::model::IpAddress_1> getAdditionalDnAaaAddresses()
+  std::vector<oai::_3gpp::model::IpAddress> getAdditionalDnAaaAddresses()
       const;
   void setAdditionalDnAaaAddresses(
-      std::vector<oai::_3gpp::model::IpAddress_1> const& value);
+      std::vector<oai::_3gpp::model::IpAddress> const& value);
   bool additionalDnAaaAddressesIsSet() const;
   void unsetAdditionalDnAaaAddresses();
   /// <summary>
@@ -146,9 +146,9 @@ class r_5GVnGroupData {
   bool m_SecondaryAuthIsSet;
   bool m_DnAaaIpAddressAllocation;
   bool m_DnAaaIpAddressAllocationIsSet;
-  oai::_3gpp::model::IpAddress_1 m_DnAaaAddress;
+  oai::_3gpp::model::IpAddress m_DnAaaAddress;
   bool m_DnAaaAddressIsSet;
-  std::vector<oai::_3gpp::model::IpAddress_1> m_AdditionalDnAaaAddresses;
+  std::vector<oai::_3gpp::model::IpAddress> m_AdditionalDnAaaAddresses;
   bool m_AdditionalDnAaaAddressesIsSet;
   std::string m_DnAaaFqdn;
   bool m_DnAaaFqdnIsSet;

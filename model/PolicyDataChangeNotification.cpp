@@ -503,11 +503,11 @@ bool PolicyDataChangeNotification::usageMonIdIsSet() const {
 void PolicyDataChangeNotification::unsetUsageMonId() {
   m_UsageMonIdIsSet = false;
 }
-oai::_3gpp::model::PlmnId_1 PolicyDataChangeNotification::getPlmnId() const {
+oai::_3gpp::model::PlmnId PolicyDataChangeNotification::getPlmnId() const {
   return m_PlmnId;
 }
 void PolicyDataChangeNotification::setPlmnId(
-    oai::_3gpp::model::PlmnId_1 const& value) {
+    oai::_3gpp::model::PlmnId const& value) {
   m_PlmnId      = value;
   m_PlmnIdIsSet = true;
 }

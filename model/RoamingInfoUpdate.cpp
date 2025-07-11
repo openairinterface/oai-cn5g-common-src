@@ -86,11 +86,11 @@ bool RoamingInfoUpdate::roamingIsSet() const {
 void RoamingInfoUpdate::unsetRoaming() {
   m_RoamingIsSet = false;
 }
-oai::_3gpp::model::PlmnId_1 RoamingInfoUpdate::getServingPlmn() const {
+oai::_3gpp::model::PlmnId RoamingInfoUpdate::getServingPlmn() const {
   return m_ServingPlmn;
 }
 void RoamingInfoUpdate::setServingPlmn(
-    oai::_3gpp::model::PlmnId_1 const& value) {
+    oai::_3gpp::model::PlmnId const& value) {
   m_ServingPlmn = value;
 }
 

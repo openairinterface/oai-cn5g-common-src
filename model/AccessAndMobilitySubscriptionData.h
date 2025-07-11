@@ -44,7 +44,7 @@
 #include "Nssai.h"
 #include "AmbrRm.h"
 #include "ServiceAreaRestriction.h"
-#include "TraceData_1.h"
+#include "TraceData.h"
 #include "AccessAndMobilitySubscriptionData_subscribedDnnList_inner.h"
 #include "PlmnRestriction.h"
 #include <nlohmann/json.hpp>
@@ -324,8 +324,8 @@ class AccessAndMobilitySubscriptionData {
   /// <summary>
   ///
   /// </summary>
-  oai::_3gpp::model::TraceData_1 getTraceData() const;
-  void setTraceData(oai::_3gpp::model::TraceData_1 const& value);
+  oai::_3gpp::model::TraceData getTraceData() const;
+  void setTraceData(oai::_3gpp::model::TraceData const& value);
   bool traceDataIsSet() const;
   void unsetTraceData();
   /// <summary>
@@ -570,7 +570,7 @@ class AccessAndMobilitySubscriptionData {
   bool m_MdtUserConsentIsSet;
   oai::_3gpp::model::MdtConfiguration m_MdtConfiguration;
   bool m_MdtConfigurationIsSet;
-  oai::_3gpp::model::TraceData_1 m_TraceData;
+  oai::_3gpp::model::TraceData m_TraceData;
   bool m_TraceDataIsSet;
   oai::_3gpp::model::CagData m_CagData;
   bool m_CagDataIsSet;

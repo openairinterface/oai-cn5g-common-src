@@ -571,11 +571,11 @@ bool AccessAndMobilityData::roamingStatusTsIsSet() const {
 void AccessAndMobilityData::unsetRoamingStatusTs() {
   m_RoamingStatusTsIsSet = false;
 }
-oai::_3gpp::model::PlmnId_1 AccessAndMobilityData::getCurrentPlmn() const {
+oai::_3gpp::model::PlmnId AccessAndMobilityData::getCurrentPlmn() const {
   return m_CurrentPlmn;
 }
 void AccessAndMobilityData::setCurrentPlmn(
-    oai::_3gpp::model::PlmnId_1 const& value) {
+    oai::_3gpp::model::PlmnId const& value) {
   m_CurrentPlmn      = value;
   m_CurrentPlmnIsSet = true;
 }

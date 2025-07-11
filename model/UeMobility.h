@@ -21,7 +21,7 @@
 
 #include "LocationInfo.h"
 #include <string>
-#include "ScheduledCommunicationTime_1.h"
+#include "ScheduledCommunicationTime.h"
 #include <vector>
 #include <nlohmann/json.hpp>
 
@@ -69,9 +69,9 @@ class UeMobility {
   /// <summary>
   ///
   /// </summary>
-  oai::_3gpp::model::ScheduledCommunicationTime_1 getRecurringTime() const;
+  oai::_3gpp::model::ScheduledCommunicationTime getRecurringTime() const;
   void setRecurringTime(
-      oai::_3gpp::model::ScheduledCommunicationTime_1 const& value);
+      oai::_3gpp::model::ScheduledCommunicationTime const& value);
   bool recurringTimeIsSet() const;
   void unsetRecurringTime();
   /// <summary>
@@ -102,7 +102,7 @@ class UeMobility {
  protected:
   std::string m_Ts;
   bool m_TsIsSet;
-  oai::_3gpp::model::ScheduledCommunicationTime_1 m_RecurringTime;
+  oai::_3gpp::model::ScheduledCommunicationTime m_RecurringTime;
   bool m_RecurringTimeIsSet;
   int32_t m_Duration;
   bool m_DurationIsSet;

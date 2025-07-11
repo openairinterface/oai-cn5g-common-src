@@ -21,7 +21,7 @@
 #define IpEndPoint_H_
 
 #include <string>
-#include "TransportProtocol_1.h"
+#include "TransportProtocol.h"
 #include "Ipv6Addr.h"
 #include <nlohmann/json.hpp>
 
@@ -78,8 +78,8 @@ class IpEndPoint {
   /// <summary>
   ///
   /// </summary>
-  oai::_3gpp::model::TransportProtocol_1 getTransport() const;
-  void setTransport(oai::_3gpp::model::TransportProtocol_1 const& value);
+  oai::_3gpp::model::TransportProtocol getTransport() const;
+  void setTransport(oai::_3gpp::model::TransportProtocol const& value);
   bool transportIsSet() const;
   void unsetTransport();
   /// <summary>
@@ -98,7 +98,7 @@ class IpEndPoint {
   bool m_Ipv4AddressIsSet;
   oai::_3gpp::model::Ipv6Addr m_Ipv6Address;
   bool m_Ipv6AddressIsSet;
-  oai::_3gpp::model::TransportProtocol_1 m_Transport;
+  oai::_3gpp::model::TransportProtocol m_Transport;
   bool m_TransportIsSet;
   int32_t m_Port;
   bool m_PortIsSet;

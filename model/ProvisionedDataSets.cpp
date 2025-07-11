@@ -436,12 +436,12 @@ bool ProvisionedDataSets::niddAuthDataIsSet() const {
 void ProvisionedDataSets::unsetNiddAuthData() {
   m_NiddAuthDataIsSet = false;
 }
-oai::_3gpp::model::MbsSubscriptionData_1
+oai::_3gpp::model::MbsSubscriptionData
 ProvisionedDataSets::getMbsSubscriptionData() const {
   return m_MbsSubscriptionData;
 }
 void ProvisionedDataSets::setMbsSubscriptionData(
-    oai::_3gpp::model::MbsSubscriptionData_1 const& value) {
+    oai::_3gpp::model::MbsSubscriptionData const& value) {
   m_MbsSubscriptionData      = value;
   m_MbsSubscriptionDataIsSet = true;
 }

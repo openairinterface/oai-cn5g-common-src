@@ -339,12 +339,12 @@ bool SessionManagementSubscriptionData::odbPacketServicesIsSet() const {
 void SessionManagementSubscriptionData::unsetOdbPacketServices() {
   m_OdbPacketServicesIsSet = false;
 }
-oai::_3gpp::model::TraceData_1 SessionManagementSubscriptionData::getTraceData()
+oai::_3gpp::model::TraceData SessionManagementSubscriptionData::getTraceData()
     const {
   return m_TraceData;
 }
 void SessionManagementSubscriptionData::setTraceData(
-    oai::_3gpp::model::TraceData_1 const& value) {
+    oai::_3gpp::model::TraceData const& value) {
   m_TraceData      = value;
   m_TraceDataIsSet = true;
 }

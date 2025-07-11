@@ -27,7 +27,7 @@
 #include "EeProfileData.h"
 #include "V2xSubscriptionData.h"
 #include "TraceData.h"
-#include "MbsSubscriptionData_1.h"
+#include "MbsSubscriptionData.h"
 #include "LcsBroadcastAssistanceTypesData.h"
 #include "ProseSubscriptionData.h"
 #include "SmSubsData.h"
@@ -183,9 +183,9 @@ class ProvisionedDataSets {
   /// <summary>
   ///
   /// </summary>
-  oai::_3gpp::model::MbsSubscriptionData_1 getMbsSubscriptionData() const;
+  oai::_3gpp::model::MbsSubscriptionData getMbsSubscriptionData() const;
   void setMbsSubscriptionData(
-      oai::_3gpp::model::MbsSubscriptionData_1 const& value);
+      oai::_3gpp::model::MbsSubscriptionData const& value);
   bool mbsSubscriptionDataIsSet() const;
   void unsetMbsSubscriptionData();
 
@@ -223,7 +223,7 @@ class ProvisionedDataSets {
   bool m_PpProfileDataIsSet;
   oai::_3gpp::model::AuthorizationData m_NiddAuthData;
   bool m_NiddAuthDataIsSet;
-  oai::_3gpp::model::MbsSubscriptionData_1 m_MbsSubscriptionData;
+  oai::_3gpp::model::MbsSubscriptionData m_MbsSubscriptionData;
   bool m_MbsSubscriptionDataIsSet;
 };
 

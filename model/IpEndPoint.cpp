@@ -144,11 +144,11 @@ bool IpEndPoint::ipv6AddressIsSet() const {
 void IpEndPoint::unsetIpv6Address() {
   m_Ipv6AddressIsSet = false;
 }
-oai::_3gpp::model::TransportProtocol_1 IpEndPoint::getTransport() const {
+oai::_3gpp::model::TransportProtocol IpEndPoint::getTransport() const {
   return m_Transport;
 }
 void IpEndPoint::setTransport(
-    oai::_3gpp::model::TransportProtocol_1 const& value) {
+    oai::_3gpp::model::TransportProtocol const& value) {
   m_Transport      = value;
   m_TransportIsSet = true;
 }

@@ -20,7 +20,7 @@
 #define SmsManagementSubscriptionData_H_
 
 #include <string>
-#include "TraceData_1.h"
+#include "TraceData.h"
 #include <vector>
 #include <nlohmann/json.hpp>
 
@@ -130,8 +130,8 @@ class SmsManagementSubscriptionData {
   /// <summary>
   ///
   /// </summary>
-  oai::_3gpp::model::TraceData_1 getTraceData() const;
-  void setTraceData(oai::_3gpp::model::TraceData_1 const& value);
+  oai::_3gpp::model::TraceData getTraceData() const;
+  void setTraceData(oai::_3gpp::model::TraceData const& value);
   bool traceDataIsSet() const;
   void unsetTraceData();
 
@@ -157,7 +157,7 @@ class SmsManagementSubscriptionData {
   bool m_MoSmsBarringRoamingIsSet;
   std::vector<std::string> m_SharedSmsMngDataIds;
   bool m_SharedSmsMngDataIdsIsSet;
-  oai::_3gpp::model::TraceData_1 m_TraceData;
+  oai::_3gpp::model::TraceData m_TraceData;
   bool m_TraceDataIsSet;
 };
 

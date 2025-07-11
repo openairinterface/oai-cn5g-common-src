@@ -178,11 +178,11 @@ bool LocationArea::civicAddressesIsSet() const {
 void LocationArea::unsetCivicAddresses() {
   m_CivicAddressesIsSet = false;
 }
-oai::_3gpp::model::NetworkAreaInfo_1 LocationArea::getNwAreaInfo() const {
+oai::_3gpp::model::NetworkAreaInfo LocationArea::getNwAreaInfo() const {
   return m_NwAreaInfo;
 }
 void LocationArea::setNwAreaInfo(
-    oai::_3gpp::model::NetworkAreaInfo_1 const& value) {
+    oai::_3gpp::model::NetworkAreaInfo const& value) {
   m_NwAreaInfo      = value;
   m_NwAreaInfoIsSet = true;
 }

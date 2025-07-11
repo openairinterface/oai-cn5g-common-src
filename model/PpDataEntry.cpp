@@ -56,7 +56,7 @@ bool PpDataEntry::validate(
   }
 
   if (additionalEcsAddrConfigInfosIsSet()) {
-    const std::vector<oai::_3gpp::model::EcsAddrConfigInfo_1>& value =
+    const std::vector<oai::_3gpp::model::EcsAddrConfigInfo>& value =
         m_AdditionalEcsAddrConfigInfos;
     const std::string currentValuePath =
         _pathPrefix + ".additionalEcsAddrConfigInfos";
@@ -68,7 +68,7 @@ bool PpDataEntry::validate(
     {  // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
       int i                          = 0;
-      for (const oai::_3gpp::model::EcsAddrConfigInfo_1& value : value) {
+      for (const oai::_3gpp::model::EcsAddrConfigInfo& value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -255,12 +255,12 @@ bool PpDataEntry::supportedFeaturesIsSet() const {
 void PpDataEntry::unsetSupportedFeatures() {
   m_SupportedFeaturesIsSet = false;
 }
-oai::_3gpp::model::EcsAddrConfigInfo_1 PpDataEntry::getEcsAddrConfigInfo()
+oai::_3gpp::model::EcsAddrConfigInfo PpDataEntry::getEcsAddrConfigInfo()
     const {
   return m_EcsAddrConfigInfo;
 }
 void PpDataEntry::setEcsAddrConfigInfo(
-    oai::_3gpp::model::EcsAddrConfigInfo_1 const& value) {
+    oai::_3gpp::model::EcsAddrConfigInfo const& value) {
   m_EcsAddrConfigInfo      = value;
   m_EcsAddrConfigInfoIsSet = true;
 }
@@ -270,12 +270,12 @@ bool PpDataEntry::ecsAddrConfigInfoIsSet() const {
 void PpDataEntry::unsetEcsAddrConfigInfo() {
   m_EcsAddrConfigInfoIsSet = false;
 }
-std::vector<oai::_3gpp::model::EcsAddrConfigInfo_1>
+std::vector<oai::_3gpp::model::EcsAddrConfigInfo>
 PpDataEntry::getAdditionalEcsAddrConfigInfos() const {
   return m_AdditionalEcsAddrConfigInfos;
 }
 void PpDataEntry::setAdditionalEcsAddrConfigInfos(
-    std::vector<oai::_3gpp::model::EcsAddrConfigInfo_1> const& value) {
+    std::vector<oai::_3gpp::model::EcsAddrConfigInfo> const& value) {
   m_AdditionalEcsAddrConfigInfos      = value;
   m_AdditionalEcsAddrConfigInfosIsSet = true;
 }
@@ -285,11 +285,11 @@ bool PpDataEntry::additionalEcsAddrConfigInfosIsSet() const {
 void PpDataEntry::unsetAdditionalEcsAddrConfigInfos() {
   m_AdditionalEcsAddrConfigInfosIsSet = false;
 }
-oai::_3gpp::model::EcRestriction_1 PpDataEntry::getEcRestriction() const {
+oai::_3gpp::model::EcRestriction PpDataEntry::getEcRestriction() const {
   return m_EcRestriction;
 }
 void PpDataEntry::setEcRestriction(
-    oai::_3gpp::model::EcRestriction_1 const& value) {
+    oai::_3gpp::model::EcRestriction const& value) {
   m_EcRestriction      = value;
   m_EcRestrictionIsSet = true;
 }

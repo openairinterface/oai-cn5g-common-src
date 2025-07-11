@@ -45,7 +45,7 @@ bool TrafficDescriptorComponents::validate(
       pathPrefix.empty() ? "TrafficDescriptorComponents" : pathPrefix;
 
   if (appDescsIsSet()) {
-    const std::map<std::string, oai::_3gpp::model::AppDescriptor_1>& value =
+    const std::map<std::string, oai::_3gpp::model::AppDescriptor>& value =
         m_AppDescs;
     const std::string currentValuePath = _pathPrefix + ".appDescs";
   }
@@ -236,12 +236,12 @@ void from_json(const nlohmann::json& j, TrafficDescriptorComponents& o) {
   }
 }
 
-std::map<std::string, oai::_3gpp::model::AppDescriptor_1>
+std::map<std::string, oai::_3gpp::model::AppDescriptor>
 TrafficDescriptorComponents::getAppDescs() const {
   return m_AppDescs;
 }
 void TrafficDescriptorComponents::setAppDescs(
-    std::map<std::string, oai::_3gpp::model::AppDescriptor_1> const& value) {
+    std::map<std::string, oai::_3gpp::model::AppDescriptor> const& value) {
   m_AppDescs      = value;
   m_AppDescsIsSet = true;
 }

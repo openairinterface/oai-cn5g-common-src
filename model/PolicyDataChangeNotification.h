@@ -28,7 +28,7 @@
 #include "Snssai.h"
 #include <vector>
 #include "AmPolicyData.h"
-#include "PlmnId_1.h"
+#include "PlmnId.h"
 #include <map>
 #include "NotificationItem.h"
 #include "UsageMonData.h"
@@ -172,8 +172,8 @@ class PolicyDataChangeNotification {
   /// <summary>
   ///
   /// </summary>
-  oai::_3gpp::model::PlmnId_1 getPlmnId() const;
-  void setPlmnId(oai::_3gpp::model::PlmnId_1 const& value);
+  oai::_3gpp::model::PlmnId getPlmnId() const;
+  void setPlmnId(oai::_3gpp::model::PlmnId const& value);
   bool plmnIdIsSet() const;
   void unsetPlmnId();
   /// <summary>
@@ -245,7 +245,7 @@ class PolicyDataChangeNotification {
   bool m_BdtRefIdIsSet;
   std::string m_UsageMonId;
   bool m_UsageMonIdIsSet;
-  oai::_3gpp::model::PlmnId_1 m_PlmnId;
+  oai::_3gpp::model::PlmnId m_PlmnId;
   bool m_PlmnIdIsSet;
   std::vector<std::string> m_DelResources;
   bool m_DelResourcesIsSet;

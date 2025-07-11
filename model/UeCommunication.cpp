@@ -298,12 +298,12 @@ bool UeCommunication::tsVarianceIsSet() const {
 void UeCommunication::unsetTsVariance() {
   m_TsVarianceIsSet = false;
 }
-oai::_3gpp::model::ScheduledCommunicationTime_1
+oai::_3gpp::model::ScheduledCommunicationTime
 UeCommunication::getRecurringTime() const {
   return m_RecurringTime;
 }
 void UeCommunication::setRecurringTime(
-    oai::_3gpp::model::ScheduledCommunicationTime_1 const& value) {
+    oai::_3gpp::model::ScheduledCommunicationTime const& value) {
   m_RecurringTime      = value;
   m_RecurringTimeIsSet = true;
 }

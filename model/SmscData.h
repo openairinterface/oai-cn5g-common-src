@@ -21,7 +21,7 @@
 #define SmscData_H_
 
 #include <string>
-#include "NetworkNodeDiameterAddress_1.h"
+#include "NetworkNodeDiameterAddress.h"
 #include <nlohmann/json.hpp>
 
 namespace oai::_3gpp::model {
@@ -69,10 +69,10 @@ class SmscData {
   /// <summary>
   ///
   /// </summary>
-  oai::_3gpp::model::NetworkNodeDiameterAddress_1 getSmscDiameterAddress()
+  oai::_3gpp::model::NetworkNodeDiameterAddress getSmscDiameterAddress()
       const;
   void setSmscDiameterAddress(
-      oai::_3gpp::model::NetworkNodeDiameterAddress_1 const& value);
+      oai::_3gpp::model::NetworkNodeDiameterAddress const& value);
   bool smscDiameterAddressIsSet() const;
   void unsetSmscDiameterAddress();
 
@@ -82,7 +82,7 @@ class SmscData {
  protected:
   std::string m_SmscMapAddress;
   bool m_SmscMapAddressIsSet;
-  oai::_3gpp::model::NetworkNodeDiameterAddress_1 m_SmscDiameterAddress;
+  oai::_3gpp::model::NetworkNodeDiameterAddress m_SmscDiameterAddress;
   bool m_SmscDiameterAddressIsSet;
 };
 

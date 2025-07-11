@@ -11,13 +11,13 @@
  * the class manually.
  */
 /*
- * NotificationMethod_1_anyOf.h
+ * NotificationMethod_anyOf.h
  *
  *
  */
 
-#ifndef NotificationMethod_1_anyOf_H_
-#define NotificationMethod_1_anyOf_H_
+#ifndef NotificationMethod_anyOf_H_
+#define NotificationMethod_anyOf_H_
 
 #include <nlohmann/json.hpp>
 
@@ -26,12 +26,12 @@ namespace oai::_3gpp::model {
 /// <summary>
 ///
 /// </summary>
-class NotificationMethod_1_anyOf {
+class NotificationMethod_anyOf {
  public:
-  NotificationMethod_1_anyOf();
-  virtual ~NotificationMethod_1_anyOf() = default;
+  NotificationMethod_anyOf();
+  virtual ~NotificationMethod_anyOf() = default;
 
-  enum class eNotificationMethod_1_anyOf {
+  enum class eNotificationMethod_anyOf {
     // To have a valid default value.
     // Avoiding name clashes with user defined
     // enum values
@@ -59,24 +59,24 @@ class NotificationMethod_1_anyOf {
   /// </summary>
   bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
 
-  bool operator==(const NotificationMethod_1_anyOf& rhs) const;
-  bool operator!=(const NotificationMethod_1_anyOf& rhs) const;
+  bool operator==(const NotificationMethod_anyOf& rhs) const;
+  bool operator!=(const NotificationMethod_anyOf& rhs) const;
 
   /////////////////////////////////////////////
-  /// NotificationMethod_1_anyOf members
+  /// NotificationMethod_anyOf members
 
-  NotificationMethod_1_anyOf::eNotificationMethod_1_anyOf getValue() const;
-  void setValue(NotificationMethod_1_anyOf::eNotificationMethod_1_anyOf value);
+  NotificationMethod_anyOf::eNotificationMethod_anyOf getValue() const;
+  void setValue(NotificationMethod_anyOf::eNotificationMethod_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const NotificationMethod_1_anyOf& o);
-  friend void from_json(const nlohmann::json& j, NotificationMethod_1_anyOf& o);
+  friend void to_json(nlohmann::json& j, const NotificationMethod_anyOf& o);
+  friend void from_json(const nlohmann::json& j, NotificationMethod_anyOf& o);
 
  protected:
-  NotificationMethod_1_anyOf::eNotificationMethod_1_anyOf m_value =
-      NotificationMethod_1_anyOf::eNotificationMethod_1_anyOf::
+  NotificationMethod_anyOf::eNotificationMethod_anyOf m_value =
+      NotificationMethod_anyOf::eNotificationMethod_anyOf::
           INVALID_VALUE_OPENAPI_GENERATED;
 };
 
 }  // namespace oai::_3gpp::model
 
-#endif /* NotificationMethod_1_anyOf_H_ */
+#endif /* NotificationMethod_anyOf_H_ */

@@ -20,11 +20,11 @@
 #define EeSubscriptionExt_H_
 
 #include "HssSubscriptionInfo.h"
-#include "MonitoringConfiguration_1.h"
+#include "MonitoringConfiguration.h"
 #include "SmfSubscriptionInfo.h"
 #include "ContextInfo.h"
 #include <string>
-#include "ReportingOptions_1.h"
+#include "ReportingOptions.h"
 #include <map>
 #include "AmfSubscriptionInfo.h"
 #include <vector>
@@ -73,16 +73,16 @@ class EeSubscriptionExt {
   /// A map (list of key-value pairs where ReferenceId serves as key) of
   /// MonitoringConfigurations
   /// </summary>
-  std::map<std::string, oai::_3gpp::model::MonitoringConfiguration_1>
+  std::map<std::string, oai::_3gpp::model::MonitoringConfiguration>
   getMonitoringConfigurations() const;
   void setMonitoringConfigurations(
-      std::map<std::string, oai::_3gpp::model::MonitoringConfiguration_1> const&
+      std::map<std::string, oai::_3gpp::model::MonitoringConfiguration> const&
           value);
   /// <summary>
   ///
   /// </summary>
-  oai::_3gpp::model::ReportingOptions_1 getReportingOptions() const;
-  void setReportingOptions(oai::_3gpp::model::ReportingOptions_1 const& value);
+  oai::_3gpp::model::ReportingOptions getReportingOptions() const;
+  void setReportingOptions(oai::_3gpp::model::ReportingOptions const& value);
   bool reportingOptionsIsSet() const;
   void unsetReportingOptions();
   /// <summary>
@@ -225,10 +225,10 @@ class EeSubscriptionExt {
  protected:
   std::string m_CallbackReference;
 
-  std::map<std::string, oai::_3gpp::model::MonitoringConfiguration_1>
+  std::map<std::string, oai::_3gpp::model::MonitoringConfiguration>
       m_MonitoringConfigurations;
 
-  oai::_3gpp::model::ReportingOptions_1 m_ReportingOptions;
+  oai::_3gpp::model::ReportingOptions m_ReportingOptions;
   bool m_ReportingOptionsIsSet;
   std::string m_SupportedFeatures;
   bool m_SupportedFeaturesIsSet;

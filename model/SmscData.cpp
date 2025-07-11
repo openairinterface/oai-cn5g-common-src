@@ -97,12 +97,12 @@ bool SmscData::smscMapAddressIsSet() const {
 void SmscData::unsetSmscMapAddress() {
   m_SmscMapAddressIsSet = false;
 }
-oai::_3gpp::model::NetworkNodeDiameterAddress_1
+oai::_3gpp::model::NetworkNodeDiameterAddress
 SmscData::getSmscDiameterAddress() const {
   return m_SmscDiameterAddress;
 }
 void SmscData::setSmscDiameterAddress(
-    oai::_3gpp::model::NetworkNodeDiameterAddress_1 const& value) {
+    oai::_3gpp::model::NetworkNodeDiameterAddress const& value) {
   m_SmscDiameterAddress      = value;
   m_SmscDiameterAddressIsSet = true;
 }

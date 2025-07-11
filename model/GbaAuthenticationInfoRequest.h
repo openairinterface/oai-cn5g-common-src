@@ -19,7 +19,7 @@
 #ifndef GbaAuthenticationInfoRequest_H_
 #define GbaAuthenticationInfoRequest_H_
 
-#include "ResynchronizationInfo_1.h"
+#include "ResynchronizationInfo.h"
 #include <string>
 #include "GbaAuthType.h"
 #include <nlohmann/json.hpp>
@@ -66,9 +66,9 @@ class GbaAuthenticationInfoRequest {
   /// <summary>
   ///
   /// </summary>
-  oai::_3gpp::model::ResynchronizationInfo_1 getResynchronizationInfo() const;
+  oai::_3gpp::model::ResynchronizationInfo getResynchronizationInfo() const;
   void setResynchronizationInfo(
-      oai::_3gpp::model::ResynchronizationInfo_1 const& value);
+      oai::_3gpp::model::ResynchronizationInfo const& value);
   bool resynchronizationInfoIsSet() const;
   void unsetResynchronizationInfo();
   /// <summary>
@@ -99,7 +99,7 @@ class GbaAuthenticationInfoRequest {
  protected:
   oai::_3gpp::model::GbaAuthType m_AuthType;
 
-  oai::_3gpp::model::ResynchronizationInfo_1 m_ResynchronizationInfo;
+  oai::_3gpp::model::ResynchronizationInfo m_ResynchronizationInfo;
   bool m_ResynchronizationInfoIsSet;
   std::string m_SupportedFeatures;
   bool m_SupportedFeaturesIsSet;

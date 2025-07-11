@@ -21,7 +21,7 @@
 
 #include <string>
 #include "AppDescriptor.h"
-#include "PduSessionTypes_1.h"
+#include "PduSessionTypes.h"
 #include "Snssai.h"
 #include <vector>
 #include <nlohmann/json.hpp>
@@ -63,8 +63,8 @@ class VnGroupData {
   /// <summary>
   ///
   /// </summary>
-  oai::_3gpp::model::PduSessionTypes_1 getPduSessionTypes() const;
-  void setPduSessionTypes(oai::_3gpp::model::PduSessionTypes_1 const& value);
+  oai::_3gpp::model::PduSessionTypes getPduSessionTypes() const;
+  void setPduSessionTypes(oai::_3gpp::model::PduSessionTypes const& value);
   bool pduSessionTypesIsSet() const;
   void unsetPduSessionTypes();
   /// <summary>
@@ -99,7 +99,7 @@ class VnGroupData {
   friend void from_json(const nlohmann::json& j, VnGroupData& o);
 
  protected:
-  oai::_3gpp::model::PduSessionTypes_1 m_PduSessionTypes;
+  oai::_3gpp::model::PduSessionTypes m_PduSessionTypes;
   bool m_PduSessionTypesIsSet;
   std::string m_Dnn;
   bool m_DnnIsSet;

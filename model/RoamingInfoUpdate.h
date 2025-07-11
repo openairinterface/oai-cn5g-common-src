@@ -19,7 +19,7 @@
 #ifndef RoamingInfoUpdate_H_
 #define RoamingInfoUpdate_H_
 
-#include "PlmnId_1.h"
+#include "PlmnId.h"
 #include <nlohmann/json.hpp>
 
 namespace oai::_3gpp::model {
@@ -66,8 +66,8 @@ class RoamingInfoUpdate {
   /// <summary>
   ///
   /// </summary>
-  oai::_3gpp::model::PlmnId_1 getServingPlmn() const;
-  void setServingPlmn(oai::_3gpp::model::PlmnId_1 const& value);
+  oai::_3gpp::model::PlmnId getServingPlmn() const;
+  void setServingPlmn(oai::_3gpp::model::PlmnId const& value);
 
   friend void to_json(nlohmann::json& j, const RoamingInfoUpdate& o);
   friend void from_json(const nlohmann::json& j, RoamingInfoUpdate& o);
@@ -75,7 +75,7 @@ class RoamingInfoUpdate {
  protected:
   bool m_Roaming;
   bool m_RoamingIsSet;
-  oai::_3gpp::model::PlmnId_1 m_ServingPlmn;
+  oai::_3gpp::model::PlmnId m_ServingPlmn;
 };
 
 }  // namespace oai::_3gpp::model

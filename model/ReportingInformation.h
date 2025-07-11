@@ -19,7 +19,7 @@
 #ifndef ReportingInformation_H_
 #define ReportingInformation_H_
 
-#include "NotificationMethod_1.h"
+#include "NotificationMethod.h"
 #include "NotificationFlag.h"
 #include "PartitioningCriteria.h"
 #include <string>
@@ -70,8 +70,8 @@ class ReportingInformation {
   /// <summary>
   ///
   /// </summary>
-  oai::_3gpp::model::NotificationMethod_1 getNotifMethod() const;
-  void setNotifMethod(oai::_3gpp::model::NotificationMethod_1 const& value);
+  oai::_3gpp::model::NotificationMethod getNotifMethod() const;
+  void setNotifMethod(oai::_3gpp::model::NotificationMethod const& value);
   bool notifMethodIsSet() const;
   void unsetNotifMethod();
   /// <summary>
@@ -133,7 +133,7 @@ class ReportingInformation {
  protected:
   bool m_ImmRep;
   bool m_ImmRepIsSet;
-  oai::_3gpp::model::NotificationMethod_1 m_NotifMethod;
+  oai::_3gpp::model::NotificationMethod m_NotifMethod;
   bool m_NotifMethodIsSet;
   int32_t m_MaxReportNbr;
   bool m_MaxReportNbrIsSet;

@@ -19,7 +19,7 @@
 #ifndef TrafficDescriptorComponents_H_
 #define TrafficDescriptorComponents_H_
 
-#include "AppDescriptor_1.h"
+#include "AppDescriptor.h"
 #include "EthFlowDescription.h"
 #include <string>
 #include "ConnectionCapabilities.h"
@@ -65,9 +65,9 @@ class TrafficDescriptorComponents {
   /// Describes the operation systems and the corresponding applications for
   /// each operation systems. The key of map is osId.
   /// </summary>
-  std::map<std::string, oai::_3gpp::model::AppDescriptor_1> getAppDescs() const;
+  std::map<std::string, oai::_3gpp::model::AppDescriptor> getAppDescs() const;
   void setAppDescs(
-      std::map<std::string, oai::_3gpp::model::AppDescriptor_1> const& value);
+      std::map<std::string, oai::_3gpp::model::AppDescriptor> const& value);
   bool appDescsIsSet() const;
   void unsetAppDescs();
   /// <summary>
@@ -118,7 +118,7 @@ class TrafficDescriptorComponents {
       const nlohmann::json& j, TrafficDescriptorComponents& o);
 
  protected:
-  std::map<std::string, oai::_3gpp::model::AppDescriptor_1> m_AppDescs;
+  std::map<std::string, oai::_3gpp::model::AppDescriptor> m_AppDescs;
   bool m_AppDescsIsSet;
   std::vector<std::string> m_FlowDescs;
   bool m_FlowDescsIsSet;

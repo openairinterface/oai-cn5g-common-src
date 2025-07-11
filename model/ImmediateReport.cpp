@@ -321,11 +321,11 @@ bool ImmediateReport::smDataIsSet() const {
 void ImmediateReport::unsetSmData() {
   m_SmDataIsSet = false;
 }
-oai::_3gpp::model::TraceData_1 ImmediateReport::getTraceData() const {
+oai::_3gpp::model::TraceData ImmediateReport::getTraceData() const {
   return m_TraceData;
 }
 void ImmediateReport::setTraceData(
-    oai::_3gpp::model::TraceData_1 const& value) {
+    oai::_3gpp::model::TraceData const& value) {
   m_TraceData      = value;
   m_TraceDataIsSet = true;
 }

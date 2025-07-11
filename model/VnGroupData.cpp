@@ -123,11 +123,11 @@ void from_json(const nlohmann::json& j, VnGroupData& o) {
   }
 }
 
-oai::_3gpp::model::PduSessionTypes_1 VnGroupData::getPduSessionTypes() const {
+oai::_3gpp::model::PduSessionTypes VnGroupData::getPduSessionTypes() const {
   return m_PduSessionTypes;
 }
 void VnGroupData::setPduSessionTypes(
-    oai::_3gpp::model::PduSessionTypes_1 const& value) {
+    oai::_3gpp::model::PduSessionTypes const& value) {
   m_PduSessionTypes      = value;
   m_PduSessionTypesIsSet = true;
 }

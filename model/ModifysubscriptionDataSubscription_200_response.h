@@ -22,7 +22,7 @@
 #include "HssSubscriptionInfo.h"
 #include "ReportItem.h"
 #include "PatchResult.h"
-#include "SdmSubscription_1.h"
+#include "SdmSubscription.h"
 #include <string>
 #include "SubscriptionDataSubscriptions.h"
 #include <vector>
@@ -104,8 +104,8 @@ class ModifysubscriptionDataSubscription_200_response {
   /// <summary>
   ///
   /// </summary>
-  oai::_3gpp::model::SdmSubscription_1 getSdmSubscription() const;
-  void setSdmSubscription(oai::_3gpp::model::SdmSubscription_1 const& value);
+  oai::_3gpp::model::SdmSubscription getSdmSubscription() const;
+  void setSdmSubscription(oai::_3gpp::model::SdmSubscription const& value);
   bool sdmSubscriptionIsSet() const;
   void unsetSdmSubscription();
   /// <summary>
@@ -171,7 +171,7 @@ class ModifysubscriptionDataSubscription_200_response {
 
   std::string m_Expiry;
   bool m_ExpiryIsSet;
-  oai::_3gpp::model::SdmSubscription_1 m_SdmSubscription;
+  oai::_3gpp::model::SdmSubscription m_SdmSubscription;
   bool m_SdmSubscriptionIsSet;
   oai::_3gpp::model::HssSubscriptionInfo m_HssSubscriptionInfo;
   bool m_HssSubscriptionInfoIsSet;

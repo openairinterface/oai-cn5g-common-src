@@ -21,7 +21,7 @@
 
 #include "RmInfo.h"
 #include "UeReachability.h"
-#include "PlmnId_1.h"
+#include "PlmnIdh"
 #include "RatType.h"
 #include "SmsSupport.h"
 #include <string>
@@ -181,8 +181,8 @@ class AccessAndMobilityData {
   /// <summary>
   ///
   /// </summary>
-  oai::_3gpp::model::PlmnId_1 getCurrentPlmn() const;
-  void setCurrentPlmn(oai::_3gpp::model::PlmnId_1 const& value);
+  oai::_3gpp::model::PlmnId getCurrentPlmn() const;
+  void setCurrentPlmn(oai::_3gpp::model::PlmnId const& value);
   bool currentPlmnIsSet() const;
   void unsetCurrentPlmn();
   /// <summary>
@@ -268,7 +268,7 @@ class AccessAndMobilityData {
   bool m_RoamingStatusIsSet;
   std::string m_RoamingStatusTs;
   bool m_RoamingStatusTsIsSet;
-  oai::_3gpp::model::PlmnId_1 m_CurrentPlmn;
+  oai::_3gpp::model::PlmnId m_CurrentPlmn;
   bool m_CurrentPlmnIsSet;
   std::string m_CurrentPlmnTs;
   bool m_CurrentPlmnTsIsSet;

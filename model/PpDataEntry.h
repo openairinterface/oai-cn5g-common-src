@@ -19,8 +19,8 @@
 #ifndef PpDataEntry_H_
 #define PpDataEntry_H_
 
-#include "EcsAddrConfigInfo_1.h"
-#include "EcRestriction_1.h"
+#include "EcsAddrConfigInfo.h"
+#include "EcRestriction.h"
 #include <string>
 #include "CommunicationCharacteristicsAF.h"
 #include <vector>
@@ -113,25 +113,25 @@ class PpDataEntry {
   /// <summary>
   ///
   /// </summary>
-  oai::_3gpp::model::EcsAddrConfigInfo_1 getEcsAddrConfigInfo() const;
+  oai::_3gpp::model::EcsAddrConfigInfo getEcsAddrConfigInfo() const;
   void setEcsAddrConfigInfo(
-      oai::_3gpp::model::EcsAddrConfigInfo_1 const& value);
+      oai::_3gpp::model::EcsAddrConfigInfo const& value);
   bool ecsAddrConfigInfoIsSet() const;
   void unsetEcsAddrConfigInfo();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::_3gpp::model::EcsAddrConfigInfo_1>
+  std::vector<oai::_3gpp::model::EcsAddrConfigInfo>
   getAdditionalEcsAddrConfigInfos() const;
   void setAdditionalEcsAddrConfigInfos(
-      std::vector<oai::_3gpp::model::EcsAddrConfigInfo_1> const& value);
+      std::vector<oai::_3gpp::model::EcsAddrConfigInfo> const& value);
   bool additionalEcsAddrConfigInfosIsSet() const;
   void unsetAdditionalEcsAddrConfigInfos();
   /// <summary>
   ///
   /// </summary>
-  oai::_3gpp::model::EcRestriction_1 getEcRestriction() const;
-  void setEcRestriction(oai::_3gpp::model::EcRestriction_1 const& value);
+  oai::_3gpp::model::EcRestriction getEcRestriction() const;
+  void setEcRestriction(oai::_3gpp::model::EcRestriction const& value);
   bool ecRestrictionIsSet() const;
   void unsetEcRestriction();
 
@@ -150,12 +150,12 @@ class PpDataEntry {
   bool m_MtcProviderInformationIsSet;
   std::string m_SupportedFeatures;
   bool m_SupportedFeaturesIsSet;
-  oai::_3gpp::model::EcsAddrConfigInfo_1 m_EcsAddrConfigInfo;
+  oai::_3gpp::model::EcsAddrConfigInfo m_EcsAddrConfigInfo;
   bool m_EcsAddrConfigInfoIsSet;
-  std::vector<oai::_3gpp::model::EcsAddrConfigInfo_1>
+  std::vector<oai::_3gpp::model::EcsAddrConfigInfo>
       m_AdditionalEcsAddrConfigInfos;
   bool m_AdditionalEcsAddrConfigInfosIsSet;
-  oai::_3gpp::model::EcRestriction_1 m_EcRestriction;
+  oai::_3gpp::model::EcRestriction m_EcRestriction;
   bool m_EcRestrictionIsSet;
 };
 

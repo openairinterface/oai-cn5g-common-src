@@ -22,7 +22,7 @@
 #include "TrafficCharacterization.h"
 #include <string>
 #include "AppListForUeComm.h"
-#include "ScheduledCommunicationTime_1.h"
+#include "ScheduledCommunicationTime.h"
 #include "SessInactTimerForUeComm.h"
 #include <nlohmann/json.hpp>
 
@@ -105,9 +105,9 @@ class UeCommunication {
   /// <summary>
   ///
   /// </summary>
-  oai::_3gpp::model::ScheduledCommunicationTime_1 getRecurringTime() const;
+  oai::_3gpp::model::ScheduledCommunicationTime getRecurringTime() const;
   void setRecurringTime(
-      oai::_3gpp::model::ScheduledCommunicationTime_1 const& value);
+      oai::_3gpp::model::ScheduledCommunicationTime const& value);
   bool recurringTimeIsSet() const;
   void unsetRecurringTime();
   /// <summary>
@@ -171,7 +171,7 @@ class UeCommunication {
   bool m_TsIsSet;
   float m_TsVariance;
   bool m_TsVarianceIsSet;
-  oai::_3gpp::model::ScheduledCommunicationTime_1 m_RecurringTime;
+  oai::_3gpp::model::ScheduledCommunicationTime m_RecurringTime;
   bool m_RecurringTimeIsSet;
   oai::_3gpp::model::TrafficCharacterization m_TrafChar;
   bool m_TrafCharIsSet;

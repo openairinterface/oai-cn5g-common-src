@@ -11,33 +11,33 @@
  * the class manually.
  */
 
-#include "NotificationMethod_1_anyOf.h"
+#include "NotificationMethod_anyOf.h"
 #include "Helpers.h"
 #include <stdexcept>
 #include <sstream>
 
 namespace oai::_3gpp::model {
 
-NotificationMethod_1_anyOf::NotificationMethod_1_anyOf() {}
+NotificationMethod_anyOf::NotificationMethod_anyOf() {}
 
-void NotificationMethod_1_anyOf::validate() const {
+void NotificationMethod_anyOf::validate() const {
   std::stringstream msg;
   if (!validate(msg)) {
     throw oai::_3gpp::model::helpers::ValidationException(msg.str());
   }
 }
 
-bool NotificationMethod_1_anyOf::validate(std::stringstream& msg) const {
+bool NotificationMethod_anyOf::validate(std::stringstream& msg) const {
   return validate(msg, "");
 }
 
-bool NotificationMethod_1_anyOf::validate(
+bool NotificationMethod_anyOf::validate(
     std::stringstream& msg, const std::string& pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
-      pathPrefix.empty() ? "NotificationMethod_1_anyOf" : pathPrefix;
+      pathPrefix.empty() ? "NotificationMethod_anyOf" : pathPrefix;
 
-  if (m_value == NotificationMethod_1_anyOf::eNotificationMethod_1_anyOf::
+  if (m_value == NotificationMethod_anyOf::eNotificationMethod_anyOf::
                      INVALID_VALUE_OPENAPI_GENERATED) {
     success = false;
     msg << _pathPrefix << ": has no value;";
@@ -46,65 +46,65 @@ bool NotificationMethod_1_anyOf::validate(
   return success;
 }
 
-bool NotificationMethod_1_anyOf::operator==(
-    const NotificationMethod_1_anyOf& rhs) const {
+bool NotificationMethod_anyOf::operator==(
+    const NotificationMethod_anyOf& rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool NotificationMethod_1_anyOf::operator!=(
-    const NotificationMethod_1_anyOf& rhs) const {
+bool NotificationMethod_anyOf::operator!=(
+    const NotificationMethod_anyOf& rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const NotificationMethod_1_anyOf& o) {
+void to_json(nlohmann::json& j, const NotificationMethod_anyOf& o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case NotificationMethod_1_anyOf::eNotificationMethod_1_anyOf::
+    case NotificationMethod_anyOf::eNotificationMethod_anyOf::
         INVALID_VALUE_OPENAPI_GENERATED:
       j = "INVALID_VALUE_OPENAPI_GENERATED";
       break;
-    case NotificationMethod_1_anyOf::eNotificationMethod_1_anyOf::PERIODIC:
+    case NotificationMethod_anyOf::eNotificationMethod_anyOf::PERIODIC:
       j = "PERIODIC";
       break;
-    case NotificationMethod_1_anyOf::eNotificationMethod_1_anyOf::ONE_TIME:
+    case NotificationMethod_anyOf::eNotificationMethod_anyOf::ONE_TIME:
       j = "ONE_TIME";
       break;
-    case NotificationMethod_1_anyOf::eNotificationMethod_1_anyOf::
+    case NotificationMethod_anyOf::eNotificationMethod_anyOf::
         ON_EVENT_DETECTION:
       j = "ON_EVENT_DETECTION";
       break;
   }
 }
 
-void from_json(const nlohmann::json& j, NotificationMethod_1_anyOf& o) {
+void from_json(const nlohmann::json& j, NotificationMethod_anyOf& o) {
   auto s = j.get<std::string>();
   if (s == "PERIODIC") {
     o.setValue(
-        NotificationMethod_1_anyOf::eNotificationMethod_1_anyOf::PERIODIC);
+        NotificationMethod_anyOf::eNotificationMethod_anyOf::PERIODIC);
   } else if (s == "ONE_TIME") {
     o.setValue(
-        NotificationMethod_1_anyOf::eNotificationMethod_1_anyOf::ONE_TIME);
+        NotificationMethod_anyOf::eNotificationMethod_anyOf::ONE_TIME);
   } else if (s == "ON_EVENT_DETECTION") {
-    o.setValue(NotificationMethod_1_anyOf::eNotificationMethod_1_anyOf::
+    o.setValue(NotificationMethod_anyOf::eNotificationMethod_anyOf::
                    ON_EVENT_DETECTION);
   } else {
     std::stringstream ss;
     ss << "Unexpected value " << s << " in json"
        << " cannot be converted to enum of type"
-       << " NotificationMethod_1_anyOf::eNotificationMethod_1_anyOf";
+       << " NotificationMethod_anyOf::eNotificationMethod_anyOf";
     throw std::invalid_argument(ss.str());
   }
 }
 
-NotificationMethod_1_anyOf::eNotificationMethod_1_anyOf
-NotificationMethod_1_anyOf::getValue() const {
+NotificationMethod_anyOf::eNotificationMethod_anyOf
+NotificationMethod_anyOf::getValue() const {
   return m_value;
 }
-void NotificationMethod_1_anyOf::setValue(
-    NotificationMethod_1_anyOf::eNotificationMethod_1_anyOf value) {
+void NotificationMethod_anyOf::setValue(
+    NotificationMethod_anyOf::eNotificationMethod_anyOf value) {
   m_value = value;
 }
 

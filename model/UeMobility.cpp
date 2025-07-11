@@ -146,12 +146,12 @@ bool UeMobility::tsIsSet() const {
 void UeMobility::unsetTs() {
   m_TsIsSet = false;
 }
-oai::_3gpp::model::ScheduledCommunicationTime_1 UeMobility::getRecurringTime()
+oai::_3gpp::model::ScheduledCommunicationTime UeMobility::getRecurringTime()
     const {
   return m_RecurringTime;
 }
 void UeMobility::setRecurringTime(
-    oai::_3gpp::model::ScheduledCommunicationTime_1 const& value) {
+    oai::_3gpp::model::ScheduledCommunicationTime const& value) {
   m_RecurringTime      = value;
   m_RecurringTimeIsSet = true;
 }

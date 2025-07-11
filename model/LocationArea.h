@@ -22,7 +22,7 @@
 #include "CivicAddress.h"
 #include "GeographicArea.h"
 #include "UmtTime.h"
-#include "NetworkAreaInfo_1.h"
+#include "NetworkAreaInfo.h"
 #include <vector>
 #include <nlohmann/json.hpp>
 
@@ -79,8 +79,8 @@ class LocationArea {
   /// <summary>
   ///
   /// </summary>
-  oai::_3gpp::model::NetworkAreaInfo_1 getNwAreaInfo() const;
-  void setNwAreaInfo(oai::_3gpp::model::NetworkAreaInfo_1 const& value);
+  oai::_3gpp::model::NetworkAreaInfo getNwAreaInfo() const;
+  void setNwAreaInfo(oai::_3gpp::model::NetworkAreaInfo const& value);
   bool nwAreaInfoIsSet() const;
   void unsetNwAreaInfo();
   /// <summary>
@@ -99,7 +99,7 @@ class LocationArea {
   bool m_GeographicAreasIsSet;
   std::vector<oai::_3gpp::model::CivicAddress> m_CivicAddresses;
   bool m_CivicAddressesIsSet;
-  oai::_3gpp::model::NetworkAreaInfo_1 m_NwAreaInfo;
+  oai::_3gpp::model::NetworkAreaInfo m_NwAreaInfo;
   bool m_NwAreaInfoIsSet;
   oai::_3gpp::model::UmtTime m_UmtTime;
   bool m_UmtTimeIsSet;

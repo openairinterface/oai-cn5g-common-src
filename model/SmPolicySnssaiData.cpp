@@ -110,11 +110,11 @@ bool SmPolicySnssaiData::smPolicyDnnDataIsSet() const {
 void SmPolicySnssaiData::unsetSmPolicyDnnData() {
   m_SmPolicyDnnDataIsSet = false;
 }
-oai::_3gpp::model::SliceMbr_1 SmPolicySnssaiData::getUeSliceMbr() const {
+oai::_3gpp::model::SliceMbr SmPolicySnssaiData::getUeSliceMbr() const {
   return m_UeSliceMbr;
 }
 void SmPolicySnssaiData::setUeSliceMbr(
-    oai::_3gpp::model::SliceMbr_1 const& value) {
+    oai::_3gpp::model::SliceMbr const& value) {
   m_UeSliceMbr      = value;
   m_UeSliceMbrIsSet = true;
 }

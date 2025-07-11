@@ -55,7 +55,7 @@ bool SharedData::validate(
   }
 
   if (sharedDnnConfigurationsIsSet()) {
-    const std::map<std::string, oai::_3gpp::model::DnnConfiguration_1>& value =
+    const std::map<std::string, oai::_3gpp::model::DnnConfiguration>& value =
         m_SharedDnnConfigurations;
     const std::string currentValuePath =
         _pathPrefix + ".sharedDnnConfigurations";
@@ -209,12 +209,12 @@ std::string SharedData::getSharedDataId() const {
 void SharedData::setSharedDataId(std::string const& value) {
   m_SharedDataId = value;
 }
-oai::_3gpp::model::AccessAndMobilitySubscriptionData_1
+oai::_3gpp::model::AccessAndMobilitySubscriptionData
 SharedData::getSharedAmData() const {
   return m_SharedAmData;
 }
 void SharedData::setSharedAmData(
-    oai::_3gpp::model::AccessAndMobilitySubscriptionData_1 const& value) {
+    oai::_3gpp::model::AccessAndMobilitySubscriptionData const& value) {
   m_SharedAmData      = value;
   m_SharedAmDataIsSet = true;
 }
@@ -224,12 +224,12 @@ bool SharedData::sharedAmDataIsSet() const {
 void SharedData::unsetSharedAmData() {
   m_SharedAmDataIsSet = false;
 }
-oai::_3gpp::model::SmsSubscriptionData_1 SharedData::getSharedSmsSubsData()
+oai::_3gpp::model::SmsSubscriptionData SharedData::getSharedSmsSubsData()
     const {
   return m_SharedSmsSubsData;
 }
 void SharedData::setSharedSmsSubsData(
-    oai::_3gpp::model::SmsSubscriptionData_1 const& value) {
+    oai::_3gpp::model::SmsSubscriptionData const& value) {
   m_SharedSmsSubsData      = value;
   m_SharedSmsSubsDataIsSet = true;
 }
@@ -239,12 +239,12 @@ bool SharedData::sharedSmsSubsDataIsSet() const {
 void SharedData::unsetSharedSmsSubsData() {
   m_SharedSmsSubsDataIsSet = false;
 }
-oai::_3gpp::model::SmsManagementSubscriptionData_1
+oai::_3gpp::model::SmsManagementSubscriptionData
 SharedData::getSharedSmsMngSubsData() const {
   return m_SharedSmsMngSubsData;
 }
 void SharedData::setSharedSmsMngSubsData(
-    oai::_3gpp::model::SmsManagementSubscriptionData_1 const& value) {
+    oai::_3gpp::model::SmsManagementSubscriptionData const& value) {
   m_SharedSmsMngSubsData      = value;
   m_SharedSmsMngSubsDataIsSet = true;
 }
@@ -254,12 +254,12 @@ bool SharedData::sharedSmsMngSubsDataIsSet() const {
 void SharedData::unsetSharedSmsMngSubsData() {
   m_SharedSmsMngSubsDataIsSet = false;
 }
-std::map<std::string, oai::_3gpp::model::DnnConfiguration_1>
+std::map<std::string, oai::_3gpp::model::DnnConfiguration>
 SharedData::getSharedDnnConfigurations() const {
   return m_SharedDnnConfigurations;
 }
 void SharedData::setSharedDnnConfigurations(
-    std::map<std::string, oai::_3gpp::model::DnnConfiguration_1> const& value) {
+    std::map<std::string, oai::_3gpp::model::DnnConfiguration> const& value) {
   m_SharedDnnConfigurations      = value;
   m_SharedDnnConfigurationsIsSet = true;
 }
@@ -329,12 +329,12 @@ bool SharedData::treatmentInstructionsIsSet() const {
 void SharedData::unsetTreatmentInstructions() {
   m_TreatmentInstructionsIsSet = false;
 }
-oai::_3gpp::model::SessionManagementSubscriptionData_1
+oai::_3gpp::model::SessionManagementSubscriptionData
 SharedData::getSharedSmSubsData() const {
   return m_SharedSmSubsData;
 }
 void SharedData::setSharedSmSubsData(
-    oai::_3gpp::model::SessionManagementSubscriptionData_1 const& value) {
+    oai::_3gpp::model::SessionManagementSubscriptionData const& value) {
   m_SharedSmSubsData      = value;
   m_SharedSmSubsDataIsSet = true;
 }
@@ -344,12 +344,12 @@ bool SharedData::sharedSmSubsDataIsSet() const {
 void SharedData::unsetSharedSmSubsData() {
   m_SharedSmSubsDataIsSet = false;
 }
-oai::_3gpp::model::EcsAddrConfigInfo_1 SharedData::getSharedEcsAddrConfigInfo()
+oai::_3gpp::model::EcsAddrConfigInfo SharedData::getSharedEcsAddrConfigInfo()
     const {
   return m_SharedEcsAddrConfigInfo;
 }
 void SharedData::setSharedEcsAddrConfigInfo(
-    oai::_3gpp::model::EcsAddrConfigInfo_1 const& value) {
+    oai::_3gpp::model::EcsAddrConfigInfo const& value) {
   m_SharedEcsAddrConfigInfo      = value;
   m_SharedEcsAddrConfigInfoIsSet = true;
 }

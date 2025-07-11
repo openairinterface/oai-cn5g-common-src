@@ -21,7 +21,7 @@
 #ifndef PlmnRouteSelectionDescriptor_H_
 #define PlmnRouteSelectionDescriptor_H_
 
-#include "PlmnId_1.h"
+#include "PlmnId.h"
 #include "SnssaiRouteSelectionDescriptor.h"
 #include <vector>
 #include <nlohmann/json.hpp>
@@ -65,8 +65,8 @@ class PlmnRouteSelectionDescriptor {
   /// <summary>
   ///
   /// </summary>
-  oai::_3gpp::model::PlmnId_1 getServingPlmn() const;
-  void setServingPlmn(oai::_3gpp::model::PlmnId_1 const& value);
+  oai::_3gpp::model::PlmnId getServingPlmn() const;
+  void setServingPlmn(oai::_3gpp::model::PlmnId const& value);
   /// <summary>
   ///
   /// </summary>
@@ -83,7 +83,7 @@ class PlmnRouteSelectionDescriptor {
       const nlohmann::json& j, PlmnRouteSelectionDescriptor& o);
 
  protected:
-  oai::_3gpp::model::PlmnId_1 m_ServingPlmn;
+  oai::_3gpp::model::PlmnId m_ServingPlmn;
 
   std::vector<oai::_3gpp::model::SnssaiRouteSelectionDescriptor>
       m_SnssaiRouteSelDescs;

@@ -243,12 +243,12 @@ bool SubscriptionDataSubscriptions::expiryIsSet() const {
 void SubscriptionDataSubscriptions::unsetExpiry() {
   m_ExpiryIsSet = false;
 }
-oai::_3gpp::model::SdmSubscription_1
+oai::_3gpp::model::SdmSubscription
 SubscriptionDataSubscriptions::getSdmSubscription() const {
   return m_SdmSubscription;
 }
 void SubscriptionDataSubscriptions::setSdmSubscription(
-    oai::_3gpp::model::SdmSubscription_1 const& value) {
+    oai::_3gpp::model::SdmSubscription const& value) {
   m_SdmSubscription      = value;
   m_SdmSubscriptionIsSet = true;
 }

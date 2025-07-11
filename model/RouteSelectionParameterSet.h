@@ -21,7 +21,7 @@
 #define RouteSelectionParameterSet_H_
 
 #include <string>
-#include "Tai_1.h"
+#include "Tai.h"
 #include "Snssai.h"
 #include <vector>
 #include "GeographicalArea.h"
@@ -105,9 +105,9 @@ class RouteSelectionParameterSet {
   /// attribute is  applicable only within the 5GC and it shall not be included
   /// in the request messages of  untrusted AFs for URSP guidance.
   /// </summary>
-  std::vector<oai::_3gpp::model::Tai_1> getSpatialValidityTais() const;
+  std::vector<oai::_3gpp::model::Tai> getSpatialValidityTais() const;
   void setSpatialValidityTais(
-      std::vector<oai::_3gpp::model::Tai_1> const& value);
+      std::vector<oai::_3gpp::model::Tai> const& value);
   bool spatialValidityTaisIsSet() const;
   void unsetSpatialValidityTais();
 
@@ -123,7 +123,7 @@ class RouteSelectionParameterSet {
   bool m_PrecedenceIsSet;
   std::vector<oai::_3gpp::model::GeographicalArea> m_SpatialValidityAreas;
   bool m_SpatialValidityAreasIsSet;
-  std::vector<oai::_3gpp::model::Tai_1> m_SpatialValidityTais;
+  std::vector<oai::_3gpp::model::Tai> m_SpatialValidityTais;
   bool m_SpatialValidityTaisIsSet;
 };
 

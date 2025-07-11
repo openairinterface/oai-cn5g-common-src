@@ -95,7 +95,7 @@ bool DataChangeNotify::validate(
   }
 
   if (additionalSdmSubscriptionsIsSet()) {
-    const std::vector<oai::_3gpp::model::SdmSubscription_1>& value =
+    const std::vector<oai::_3gpp::model::SdmSubscription>& value =
         m_AdditionalSdmSubscriptions;
     const std::string currentValuePath =
         _pathPrefix + ".additionalSdmSubscriptions";
@@ -107,7 +107,7 @@ bool DataChangeNotify::validate(
     {  // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
       int i                          = 0;
-      for (const oai::_3gpp::model::SdmSubscription_1& value : value) {
+      for (const oai::_3gpp::model::SdmSubscription& value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -277,12 +277,12 @@ bool DataChangeNotify::notifyItemsIsSet() const {
 void DataChangeNotify::unsetNotifyItems() {
   m_NotifyItemsIsSet = false;
 }
-oai::_3gpp::model::SdmSubscription_1 DataChangeNotify::getSdmSubscription()
+oai::_3gpp::model::SdmSubscription DataChangeNotify::getSdmSubscription()
     const {
   return m_SdmSubscription;
 }
 void DataChangeNotify::setSdmSubscription(
-    oai::_3gpp::model::SdmSubscription_1 const& value) {
+    oai::_3gpp::model::SdmSubscription const& value) {
   m_SdmSubscription      = value;
   m_SdmSubscriptionIsSet = true;
 }
@@ -292,12 +292,12 @@ bool DataChangeNotify::sdmSubscriptionIsSet() const {
 void DataChangeNotify::unsetSdmSubscription() {
   m_SdmSubscriptionIsSet = false;
 }
-std::vector<oai::_3gpp::model::SdmSubscription_1>
+std::vector<oai::_3gpp::model::SdmSubscription>
 DataChangeNotify::getAdditionalSdmSubscriptions() const {
   return m_AdditionalSdmSubscriptions;
 }
 void DataChangeNotify::setAdditionalSdmSubscriptions(
-    std::vector<oai::_3gpp::model::SdmSubscription_1> const& value) {
+    std::vector<oai::_3gpp::model::SdmSubscription> const& value) {
   m_AdditionalSdmSubscriptions      = value;
   m_AdditionalSdmSubscriptionsIsSet = true;
 }

@@ -98,7 +98,7 @@ bool r_5GVnGroupData::validate(
   }
 
   if (additionalDnAaaAddressesIsSet()) {
-    const std::vector<oai::_3gpp::model::IpAddress_1>& value =
+    const std::vector<oai::_3gpp::model::IpAddress>& value =
         m_AdditionalDnAaaAddresses;
     const std::string currentValuePath =
         _pathPrefix + ".additionalDnAaaAddresses";
@@ -110,7 +110,7 @@ bool r_5GVnGroupData::validate(
     {  // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
       int i                          = 0;
-      for (const oai::_3gpp::model::IpAddress_1& value : value) {
+      for (const oai::_3gpp::model::IpAddress& value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -305,11 +305,11 @@ bool r_5GVnGroupData::dnAaaIpAddressAllocationIsSet() const {
 void r_5GVnGroupData::unsetDnAaaIpAddressAllocation() {
   m_DnAaaIpAddressAllocationIsSet = false;
 }
-oai::_3gpp::model::IpAddress_1 r_5GVnGroupData::getDnAaaAddress() const {
+oai::_3gpp::model::IpAddress r_5GVnGroupData::getDnAaaAddress() const {
   return m_DnAaaAddress;
 }
 void r_5GVnGroupData::setDnAaaAddress(
-    oai::_3gpp::model::IpAddress_1 const& value) {
+    oai::_3gpp::model::IpAddress const& value) {
   m_DnAaaAddress      = value;
   m_DnAaaAddressIsSet = true;
 }
@@ -319,7 +319,7 @@ bool r_5GVnGroupData::dnAaaAddressIsSet() const {
 void r_5GVnGroupData::unsetDnAaaAddress() {
   m_DnAaaAddressIsSet = false;
 }
-std::vector<oai::_3gpp::model::IpAddress_1>
+std::vector<oai::_3gpp::model::IpAddress>
 r_5GVnGroupData::getAdditionalDnAaaAddresses() const {
   return m_AdditionalDnAaaAddresses;
 }

@@ -100,12 +100,12 @@ void GbaAuthenticationInfoRequest::setAuthType(
     oai::_3gpp::model::GbaAuthType const& value) {
   m_AuthType = value;
 }
-oai::_3gpp::model::ResynchronizationInfo_1
+oai::_3gpp::model::ResynchronizationInfo
 GbaAuthenticationInfoRequest::getResynchronizationInfo() const {
   return m_ResynchronizationInfo;
 }
 void GbaAuthenticationInfoRequest::setResynchronizationInfo(
-    oai::_3gpp::model::ResynchronizationInfo_1 const& value) {
+    oai::_3gpp::model::ResynchronizationInfo const& value) {
   m_ResynchronizationInfo      = value;
   m_ResynchronizationInfoIsSet = true;
 }

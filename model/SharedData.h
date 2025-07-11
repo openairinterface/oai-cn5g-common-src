@@ -19,18 +19,18 @@
 #ifndef SharedData_H_
 #define SharedData_H_
 
-#include "EcsAddrConfigInfo_1.h"
-#include "SessionManagementSubscriptionData_1.h"
+#include "EcsAddrConfigInfo.h"
+#include "SessionManagementSubscriptionData.h"
 #include "VnGroupData.h"
-#include "SmsManagementSubscriptionData_1.h"
-#include "DnnConfiguration_1.h"
+#include "SmsManagementSubscriptionData.h"
+#include "DnnConfiguration.h"
 #include <string>
-#include "SmsSubscriptionData_1.h"
+#include "SmsSubscriptionData.h"
 #include "SnssaiInfo.h"
 #include "SharedDataTreatmentInstruction.h"
 #include <map>
 #include "TraceData.h"
-#include "AccessAndMobilitySubscriptionData_1.h"
+#include "AccessAndMobilitySubscriptionData.h"
 #include <nlohmann/json.hpp>
 
 namespace oai::_3gpp::model {
@@ -75,37 +75,37 @@ class SharedData {
   /// <summary>
   ///
   /// </summary>
-  oai::_3gpp::model::AccessAndMobilitySubscriptionData_1 getSharedAmData()
+  oai::_3gpp::model::AccessAndMobilitySubscriptionData getSharedAmData()
       const;
   void setSharedAmData(
-      oai::_3gpp::model::AccessAndMobilitySubscriptionData_1 const& value);
+      oai::_3gpp::model::AccessAndMobilitySubscriptionData const& value);
   bool sharedAmDataIsSet() const;
   void unsetSharedAmData();
   /// <summary>
   ///
   /// </summary>
-  oai::_3gpp::model::SmsSubscriptionData_1 getSharedSmsSubsData() const;
+  oai::_3gpp::model::SmsSubscriptionData getSharedSmsSubsData() const;
   void setSharedSmsSubsData(
-      oai::_3gpp::model::SmsSubscriptionData_1 const& value);
+      oai::_3gpp::model::SmsSubscriptionData const& value);
   bool sharedSmsSubsDataIsSet() const;
   void unsetSharedSmsSubsData();
   /// <summary>
   ///
   /// </summary>
-  oai::_3gpp::model::SmsManagementSubscriptionData_1 getSharedSmsMngSubsData()
+  oai::_3gpp::model::SmsManagementSubscriptionData getSharedSmsMngSubsData()
       const;
   void setSharedSmsMngSubsData(
-      oai::_3gpp::model::SmsManagementSubscriptionData_1 const& value);
+      oai::_3gpp::model::SmsManagementSubscriptionData const& value);
   bool sharedSmsMngSubsDataIsSet() const;
   void unsetSharedSmsMngSubsData();
   /// <summary>
   /// A map(list of key-value pairs) where Dnn, or optionally the Wildcard DNN,
   /// serves as key of DnnConfiguration
   /// </summary>
-  std::map<std::string, oai::_3gpp::model::DnnConfiguration_1>
+  std::map<std::string, oai::_3gpp::model::DnnConfiguration>
   getSharedDnnConfigurations() const;
   void setSharedDnnConfigurations(
-      std::map<std::string, oai::_3gpp::model::DnnConfiguration_1> const&
+      std::map<std::string, oai::_3gpp::model::DnnConfiguration> const&
           value);
   bool sharedDnnConfigurationsIsSet() const;
   void unsetSharedDnnConfigurations();
@@ -150,18 +150,18 @@ class SharedData {
   /// <summary>
   ///
   /// </summary>
-  oai::_3gpp::model::SessionManagementSubscriptionData_1 getSharedSmSubsData()
+  oai::_3gpp::model::SessionManagementSubscriptionData getSharedSmSubsData()
       const;
   void setSharedSmSubsData(
-      oai::_3gpp::model::SessionManagementSubscriptionData_1 const& value);
+      oai::_3gpp::model::SessionManagementSubscriptionData const& value);
   bool sharedSmSubsDataIsSet() const;
   void unsetSharedSmSubsData();
   /// <summary>
   ///
   /// </summary>
-  oai::_3gpp::model::EcsAddrConfigInfo_1 getSharedEcsAddrConfigInfo() const;
+  oai::_3gpp::model::EcsAddrConfigInfo getSharedEcsAddrConfigInfo() const;
   void setSharedEcsAddrConfigInfo(
-      oai::_3gpp::model::EcsAddrConfigInfo_1 const& value);
+      oai::_3gpp::model::EcsAddrConfigInfoconst& value);
   bool sharedEcsAddrConfigInfoIsSet() const;
   void unsetSharedEcsAddrConfigInfo();
 
@@ -171,13 +171,13 @@ class SharedData {
  protected:
   std::string m_SharedDataId;
 
-  oai::_3gpp::model::AccessAndMobilitySubscriptionData_1 m_SharedAmData;
+  oai::_3gpp::model::AccessAndMobilitySubscriptionData m_SharedAmData;
   bool m_SharedAmDataIsSet;
-  oai::_3gpp::model::SmsSubscriptionData_1 m_SharedSmsSubsData;
+  oai::_3gpp::model::SmsSubscriptionData m_SharedSmsSubsData;
   bool m_SharedSmsSubsDataIsSet;
-  oai::_3gpp::model::SmsManagementSubscriptionData_1 m_SharedSmsMngSubsData;
+  oai::_3gpp::model::SmsManagementSubscriptionData m_SharedSmsMngSubsData;
   bool m_SharedSmsMngSubsDataIsSet;
-  std::map<std::string, oai::_3gpp::model::DnnConfiguration_1>
+  std::map<std::string, oai::_3gpp::model::DnnConfiguration>
       m_SharedDnnConfigurations;
   bool m_SharedDnnConfigurationsIsSet;
   oai::_3gpp::model::TraceData m_SharedTraceData;
@@ -189,9 +189,9 @@ class SharedData {
   std::map<std::string, oai::_3gpp::model::SharedDataTreatmentInstruction>
       m_TreatmentInstructions;
   bool m_TreatmentInstructionsIsSet;
-  oai::_3gpp::model::SessionManagementSubscriptionData_1 m_SharedSmSubsData;
+  oai::_3gpp::model::SessionManagementSubscriptionData m_SharedSmSubsData;
   bool m_SharedSmSubsDataIsSet;
-  oai::_3gpp::model::EcsAddrConfigInfo_1 m_SharedEcsAddrConfigInfo;
+  oai::_3gpp::model::EcsAddrConfigInfo m_SharedEcsAddrConfigInfo;
   bool m_SharedEcsAddrConfigInfoIsSet;
 };
 

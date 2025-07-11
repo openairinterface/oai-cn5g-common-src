@@ -67,7 +67,7 @@ bool EeSubscriptionExt::validate(
       pathPrefix.empty() ? "EeSubscriptionExt" : pathPrefix;
 
   /* MonitoringConfigurations */ {
-    const std::map<std::string, oai::_3gpp::model::MonitoringConfiguration_1>&
+    const std::map<std::string, oai::_3gpp::model::MonitoringConfiguration>&
         value = m_MonitoringConfigurations;
     const std::string currentValuePath =
         _pathPrefix + ".monitoringConfigurations";
@@ -380,21 +380,21 @@ std::string EeSubscriptionExt::getCallbackReference() const {
 void EeSubscriptionExt::setCallbackReference(std::string const& value) {
   m_CallbackReference = value;
 }
-std::map<std::string, oai::_3gpp::model::MonitoringConfiguration_1>
+std::map<std::string, oai::_3gpp::model::MonitoringConfiguration>
 EeSubscriptionExt::getMonitoringConfigurations() const {
   return m_MonitoringConfigurations;
 }
 void EeSubscriptionExt::setMonitoringConfigurations(
-    std::map<std::string, oai::_3gpp::model::MonitoringConfiguration_1> const&
+    std::map<std::string, oai::_3gpp::model::MonitoringConfiguration> const&
         value) {
   m_MonitoringConfigurations = value;
 }
-oai::_3gpp::model::ReportingOptions_1 EeSubscriptionExt::getReportingOptions()
+oai::_3gpp::model::ReportingOptions EeSubscriptionExt::getReportingOptions()
     const {
   return m_ReportingOptions;
 }
 void EeSubscriptionExt::setReportingOptions(
-    oai::_3gpp::model::ReportingOptions_1 const& value) {
+    oai::_3gpp::model::ReportingOptions const& value) {
   m_ReportingOptions      = value;
   m_ReportingOptionsIsSet = true;
 }

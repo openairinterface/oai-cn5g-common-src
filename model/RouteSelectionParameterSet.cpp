@@ -81,7 +81,7 @@ bool RouteSelectionParameterSet::validate(
   }
 
   if (spatialValidityTaisIsSet()) {
-    const std::vector<oai::_3gpp::model::Tai_1>& value = m_SpatialValidityTais;
+    const std::vector<oai::_3gpp::model::Tai>& value = m_SpatialValidityTais;
     const std::string currentValuePath = _pathPrefix + ".spatialValidityTais";
 
     if (value.size() < 1) {
@@ -91,7 +91,7 @@ bool RouteSelectionParameterSet::validate(
     {  // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
       int i                          = 0;
-      for (const oai::_3gpp::model::Tai_1& value : value) {
+      for (const oai::_3gpp::model::Tai& value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -227,12 +227,12 @@ bool RouteSelectionParameterSet::spatialValidityAreasIsSet() const {
 void RouteSelectionParameterSet::unsetSpatialValidityAreas() {
   m_SpatialValidityAreasIsSet = false;
 }
-std::vector<oai::_3gpp::model::Tai_1>
+std::vector<oai::_3gpp::model::Tai>
 RouteSelectionParameterSet::getSpatialValidityTais() const {
   return m_SpatialValidityTais;
 }
 void RouteSelectionParameterSet::setSpatialValidityTais(
-    std::vector<oai::_3gpp::model::Tai_1> const& value) {
+    std::vector<oai::_3gpp::model::Tai> const& value) {
   m_SpatialValidityTais      = value;
   m_SpatialValidityTaisIsSet = true;
 }

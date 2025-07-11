@@ -293,12 +293,12 @@ bool SmsManagementSubscriptionData::sharedSmsMngDataIdsIsSet() const {
 void SmsManagementSubscriptionData::unsetSharedSmsMngDataIds() {
   m_SharedSmsMngDataIdsIsSet = false;
 }
-oai::_3gpp::model::TraceData_1 SmsManagementSubscriptionData::getTraceData()
+oai::_3gpp::model::TraceData SmsManagementSubscriptionData::getTraceData()
     const {
   return m_TraceData;
 }
 void SmsManagementSubscriptionData::setTraceData(
-    oai::_3gpp::model::TraceData_1 const& value) {
+    oai::_3gpp::model::TraceData const& value) {
   m_TraceData      = value;
   m_TraceDataIsSet = true;
 }

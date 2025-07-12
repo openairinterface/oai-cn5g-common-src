@@ -75,8 +75,7 @@ class SharedData {
   /// <summary>
   ///
   /// </summary>
-  oai::_3gpp::model::AccessAndMobilitySubscriptionData getSharedAmData()
-      const;
+  oai::_3gpp::model::AccessAndMobilitySubscriptionData getSharedAmData() const;
   void setSharedAmData(
       oai::_3gpp::model::AccessAndMobilitySubscriptionData const& value);
   bool sharedAmDataIsSet() const;
@@ -105,8 +104,7 @@ class SharedData {
   std::map<std::string, oai::_3gpp::model::DnnConfiguration>
   getSharedDnnConfigurations() const;
   void setSharedDnnConfigurations(
-      std::map<std::string, oai::_3gpp::model::DnnConfiguration> const&
-          value);
+      std::map<std::string, oai::_3gpp::model::DnnConfiguration> const& value);
   bool sharedDnnConfigurationsIsSet() const;
   void unsetSharedDnnConfigurations();
   /// <summary>
@@ -161,7 +159,7 @@ class SharedData {
   /// </summary>
   oai::_3gpp::model::EcsAddrConfigInfo getSharedEcsAddrConfigInfo() const;
   void setSharedEcsAddrConfigInfo(
-      oai::_3gpp::model::EcsAddrConfigInfoconst& value);
+      oai::_3gpp::model::EcsAddrConfigInfo const& value);
   bool sharedEcsAddrConfigInfoIsSet() const;
   void unsetSharedEcsAddrConfigInfo();
 

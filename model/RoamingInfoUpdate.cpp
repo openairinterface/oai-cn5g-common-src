@@ -89,8 +89,7 @@ void RoamingInfoUpdate::unsetRoaming() {
 oai::_3gpp::model::PlmnId RoamingInfoUpdate::getServingPlmn() const {
   return m_ServingPlmn;
 }
-void RoamingInfoUpdate::setServingPlmn(
-    oai::_3gpp::model::PlmnId const& value) {
+void RoamingInfoUpdate::setServingPlmn(oai::_3gpp::model::PlmnId const& value) {
   m_ServingPlmn = value;
 }
 

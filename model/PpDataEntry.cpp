@@ -255,8 +255,7 @@ bool PpDataEntry::supportedFeaturesIsSet() const {
 void PpDataEntry::unsetSupportedFeatures() {
   m_SupportedFeaturesIsSet = false;
 }
-oai::_3gpp::model::EcsAddrConfigInfo PpDataEntry::getEcsAddrConfigInfo()
-    const {
+oai::_3gpp::model::EcsAddrConfigInfo PpDataEntry::getEcsAddrConfigInfo() const {
   return m_EcsAddrConfigInfo;
 }
 void PpDataEntry::setEcsAddrConfigInfo(

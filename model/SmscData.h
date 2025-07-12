@@ -69,8 +69,7 @@ class SmscData {
   /// <summary>
   ///
   /// </summary>
-  oai::_3gpp::model::NetworkNodeDiameterAddress getSmscDiameterAddress()
-      const;
+  oai::_3gpp::model::NetworkNodeDiameterAddress getSmscDiameterAddress() const;
   void setSmscDiameterAddress(
       oai::_3gpp::model::NetworkNodeDiameterAddress const& value);
   bool smscDiameterAddressIsSet() const;

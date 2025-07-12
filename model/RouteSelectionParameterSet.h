@@ -106,8 +106,7 @@ class RouteSelectionParameterSet {
   /// in the request messages of  untrusted AFs for URSP guidance.
   /// </summary>
   std::vector<oai::_3gpp::model::Tai> getSpatialValidityTais() const;
-  void setSpatialValidityTais(
-      std::vector<oai::_3gpp::model::Tai> const& value);
+  void setSpatialValidityTais(std::vector<oai::_3gpp::model::Tai> const& value);
   bool spatialValidityTaisIsSet() const;
   void unsetSpatialValidityTais();
 

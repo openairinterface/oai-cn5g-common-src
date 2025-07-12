@@ -101,8 +101,7 @@ void from_json(const nlohmann::json& j, PlmnRouteSelectionDescriptor& o) {
   }
 }
 
-oai::_3gpp::model::PlmnId PlmnRouteSelectionDescriptor::getServingPlmn()
-    const {
+oai::_3gpp::model::PlmnId PlmnRouteSelectionDescriptor::getServingPlmn() const {
   return m_ServingPlmn;
 }
 void PlmnRouteSelectionDescriptor::setServingPlmn(

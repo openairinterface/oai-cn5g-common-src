@@ -116,8 +116,7 @@ class r_5GVnGroupData {
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::_3gpp::model::IpAddress> getAdditionalDnAaaAddresses()
-      const;
+  std::vector<oai::_3gpp::model::IpAddress> getAdditionalDnAaaAddresses() const;
   void setAdditionalDnAaaAddresses(
       std::vector<oai::_3gpp::model::IpAddress> const& value);
   bool additionalDnAaaAddressesIsSet() const;

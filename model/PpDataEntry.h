@@ -114,8 +114,7 @@ class PpDataEntry {
   ///
   /// </summary>
   oai::_3gpp::model::EcsAddrConfigInfo getEcsAddrConfigInfo() const;
-  void setEcsAddrConfigInfo(
-      oai::_3gpp::model::EcsAddrConfigInfo const& value);
+  void setEcsAddrConfigInfo(oai::_3gpp::model::EcsAddrConfigInfo const& value);
   bool ecsAddrConfigInfoIsSet() const;
   void unsetEcsAddrConfigInfo();
   /// <summary>

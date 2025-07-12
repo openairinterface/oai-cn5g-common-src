@@ -122,8 +122,7 @@ class DataChangeNotify {
   bool m_NotifyItemsIsSet;
   oai::_3gpp::model::SdmSubscription m_SdmSubscription;
   bool m_SdmSubscriptionIsSet;
-  std::vector<oai::_3gpp::model::SdmSubscription>
-      m_AdditionalSdmSubscriptions;
+  std::vector<oai::_3gpp::model::SdmSubscription> m_AdditionalSdmSubscriptions;
   bool m_AdditionalSdmSubscriptionsIsSet;
   std::vector<oai::_3gpp::model::SubscriptionDataSubscriptions>
       m_SubscriptionDataSubscriptions;

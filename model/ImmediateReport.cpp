@@ -324,8 +324,7 @@ void ImmediateReport::unsetSmData() {
 oai::_3gpp::model::TraceData ImmediateReport::getTraceData() const {
   return m_TraceData;
 }
-void ImmediateReport::setTraceData(
-    oai::_3gpp::model::TraceData const& value) {
+void ImmediateReport::setTraceData(oai::_3gpp::model::TraceData const& value) {
   m_TraceData      = value;
   m_TraceDataIsSet = true;
 }

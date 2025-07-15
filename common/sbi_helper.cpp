@@ -63,8 +63,7 @@ void sbi_helper::get_nrf_nf_instance_uri(
 std::string sbi_helper::get_nrf_nf_instance_uri(
     const oai::config::sbi_interface& nrf, bool enable_tls,
     const std::string& nf_instance) {
-  std::string nrf_api_root = {};
-  get_nrf_nfm_api_root(nrf, enable_tls);
+  std::string nrf_api_root        = get_nrf_nfm_api_root(nrf, enable_tls);
   std::string path_nf_instance_id = {};
   get_fmt_format_form(
       sbi_helper::NrfNfmPathNfInstancesNfInstanceId, path_nf_instance_id);

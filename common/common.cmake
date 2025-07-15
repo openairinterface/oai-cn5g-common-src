@@ -23,6 +23,7 @@ SET(COMMON_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/common)
 include_directories(${COMMON_DIR})
 include_directories(${SRC_TOP_DIR}/${MOUNTED_COMMON}/model/common_model)
 include_directories(${SRC_TOP_DIR}/${MOUNTED_COMMON}/config)
+include_directories(${SRC_TOP_DIR}/${MOUNTED_COMMON}/3gpp)
 
 file(GLOB COMMON_SRC_FILES
         ${COMMON_DIR}/*.cpp

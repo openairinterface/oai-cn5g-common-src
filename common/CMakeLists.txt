@@ -23,6 +23,7 @@ project( COMMON )
 
 include_directories(${COMMON_DIR})
 include_directories(${CONFIG_DIR})
+include_directories(${3GPP_DIR})
 include_directories(${LOGGER_DIR})
 include_directories(${UTILS_DIR})
 include_directories(${UTILS_DIR}/bstr)

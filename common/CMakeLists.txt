@@ -22,6 +22,7 @@ cmake_minimum_required (VERSION 3.22.1)
 project( COMMON )
 
 include_directories(${COMMON_DIR})
+include_directories(${CONFIG_DIR})
 include_directories(${LOGGER_DIR})
 include_directories(${UTILS_DIR})
 include_directories(${UTILS_DIR}/bstr)

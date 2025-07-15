@@ -385,11 +385,6 @@ void local_interface::validate() {
         m_if_name.get_value()));
   }
 
-  unsigned char buf_in_addr[sizeof(struct in_addr)];
-  if (inet_pton(AF_INET, "20.100.1.250", buf_in_addr) == 1) {
-    memcpy(&_addr4, buf_in_addr, sizeof(struct in_addr));
-  }
-
   m_mtu   = _mtu;
   m_addr4 = _addr4;
 }

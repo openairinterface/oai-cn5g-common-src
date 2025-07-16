@@ -33,6 +33,21 @@ void sbi_helper::get_nrf_nfm_api_root(
 }
 
 //---------------------------------------------------------------------------------------------
+void sbi_helper::get_nrf_nfm_api_root(
+    const oai::config::sbi_interface& nrf, bool enable_tls,
+    std::string& api_root) {
+  api_root =
+      nrf.get_url(enable_tls) + sbi_helper::NrfNfmBase + nrf.get_api_version();
+}
+
+//---------------------------------------------------------------------------------------------
+std::string sbi_helper::get_nrf_nfm_api_root(
+    const oai::config::sbi_interface& nrf, bool enable_tls) {
+  return nrf.get_url(enable_tls) + sbi_helper::NrfNfmBase +
+         nrf.get_api_version();
+}
+
+//---------------------------------------------------------------------------------------------
 void sbi_helper::get_nrf_nf_instance_uri(
     const nf_addr_t& nrf_addr, const std::string& nf_instance,
     std::string& uri) {
@@ -42,6 +57,17 @@ void sbi_helper::get_nrf_nf_instance_uri(
   get_fmt_format_form(
       sbi_helper::NrfNfmPathNfInstancesNfInstanceId, path_nf_instance_id);
   uri = nrf_api_root + fmt::format(path_nf_instance_id, nf_instance);
+}
+
+//---------------------------------------------------------------------------------------------
+std::string sbi_helper::get_nrf_nf_instance_uri(
+    const oai::config::sbi_interface& nrf, bool enable_tls,
+    const std::string& nf_instance) {
+  std::string nrf_api_root        = get_nrf_nfm_api_root(nrf, enable_tls);
+  std::string path_nf_instance_id = {};
+  get_fmt_format_form(
+      sbi_helper::NrfNfmPathNfInstancesNfInstanceId, path_nf_instance_id);
+  return nrf_api_root + fmt::format(path_nf_instance_id, nf_instance);
 }
 
 //---------------------------------------------------------------------------------------------

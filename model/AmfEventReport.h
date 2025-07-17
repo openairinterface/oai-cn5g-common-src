@@ -238,6 +238,20 @@ class AmfEventReport {
   /// <summary>
   ///
   /// </summary>
+  uint32_t getRanUeNgapId() const;
+  void setRanUeNgapId(uint32_t const value);
+  bool ranUeNgapIdIsSet() const;
+  void unsetRanUeNgapId();
+  /// <summary>
+  ///
+  /// </summary>
+  long getAmfUeNgapId() const;
+  void setAmfUeNgapId(long const value);
+  bool amfUeNgapIdIsSet() const;
+  void unsetAmfUeNgapId();
+  /// <summary>
+  ///
+  /// </summary>
   int32_t getNumberOfUes() const;
   void setNumberOfUes(int32_t const value);
   bool numberOfUesIsSet() const;
@@ -376,6 +390,10 @@ class AmfEventReport {
   bool m_CommFailureIsSet;
   oai::_3gpp::model::LossOfConnectivityReason m_LossOfConnectReason;
   bool m_LossOfConnectReasonIsSet;
+  uint32_t m_RanUeNgapId;
+  bool m_RanUeNgapIdIsSet;
+  long m_AmfUeNgapId;
+  bool m_AmfUeNgapIdIsSet;
   int32_t m_NumberOfUes;
   bool m_NumberOfUesIsSet;
   std::vector<oai::_3gpp::model::r_5GsUserStateInfo> m_r_5gsUserStateList;

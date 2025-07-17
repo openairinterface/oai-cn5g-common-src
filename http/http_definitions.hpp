@@ -60,4 +60,8 @@ struct request {
 
 enum class request_type_e { SIMPLE, ASYNC, MULTI_ASYNC, MULTI_PERFORM };
 
+constexpr auto kSbiResponseJsonData         = "jsonData";
+constexpr auto kSbiResponseHttpResponseCode = "httpResponseCode";
+constexpr auto kSbiResponseHeaderLocation   = "httpResponseLocation";
+
 }  // namespace oai::http

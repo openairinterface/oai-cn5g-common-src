@@ -80,7 +80,7 @@ class UEAuthenticationCtx {
   /// <summary>
   /// A map(list of key-value pairs) where member serves as key
   /// </summary>
-  std::map<std::string, oai::_3gpp::model::LinksValueSchema> getLinks() const;
+  std::map<std::string, oai::_3gpp::model::LinksValueSchema>& getLinks();
   void setLinks(
       std::map<std::string, oai::_3gpp::model::LinksValueSchema> const& value);
   /// <summary>

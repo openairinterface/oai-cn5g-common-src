@@ -55,8 +55,6 @@ bool UEAuthenticationCtx::operator==(const UEAuthenticationCtx& rhs) const {
 
       (getR5gAuthData() == rhs.getR5gAuthData()) &&
 
-      (getLinks() == rhs.getLinks()) &&
-
       ((!servingNetworkNameIsSet() && !rhs.servingNetworkNameIsSet()) ||
        (servingNetworkNameIsSet() && rhs.servingNetworkNameIsSet() &&
         getServingNetworkName() == rhs.getServingNetworkName()))
@@ -102,8 +100,8 @@ void UEAuthenticationCtx::setR5gAuthData(
     oai::_3gpp::model::UEAuthenticationCtx_5gAuthData const& value) {
   m_r_5gAuthData = value;
 }
-std::map<std::string, oai::_3gpp::model::LinksValueSchema>
-UEAuthenticationCtx::getLinks() const {
+std::map<std::string, oai::_3gpp::model::LinksValueSchema>&
+UEAuthenticationCtx::getLinks() {
   return m__links;
 }
 void UEAuthenticationCtx::setLinks(

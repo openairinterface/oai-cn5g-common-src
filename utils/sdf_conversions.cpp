@@ -167,7 +167,7 @@ sdf_conversions::ip_range sdf_conversions::ip_range::from_string(
 bool sdf_conversions::parse_bitrate_string(
     const std::string& bitrate, uint16_t& value, bitrate_unit_e& unit) {
   std::string bandwidth_regex =
-      oai::model::common::helpers::BANDWIDTH_VALIDATION_REGEX;
+      oai::_3gpp::model::helpers::BANDWIDTH_VALIDATION_REGEX;
 
   std::regex re(bandwidth_regex);
   std::smatch matches;
@@ -244,7 +244,7 @@ bool sdf_conversions::parse_bitrate_string(
 bool oai::utils::sdf_conversions::parse_bitrate_string(
     const std::string& bit_rate_str, BitRate& bit_rate) {
   std::string bandwidth_regex =
-      oai::model::common::helpers::BANDWIDTH_VALIDATION_REGEX;
+      oai::_3gpp::model::helpers::BANDWIDTH_VALIDATION_REGEX;
 
   std::regex re(bandwidth_regex);
   std::smatch matches;

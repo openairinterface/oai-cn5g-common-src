@@ -41,7 +41,7 @@ const uint8_t SD_LENGTH  = 3;
 typedef struct s_nssai  // section 28.4, TS23.003
 {
   uint8_t sst;
-  std::string sd = oai::model::common::SD_DEFAULT_VALUE;
+  std::string sd = oai::_3gpp::model::SD_DEFAULT_VALUE;
   // s_nssai(const uint8_t& m_sst, const uint32_t m_sd) : sst(m_sst), sd(m_sd)
   // {}
   s_nssai(const uint8_t& m_sst, const std::string& m_sd)
@@ -76,8 +76,8 @@ typedef struct s_nssai  // section 28.4, TS23.003
     return json_data;
   }
   // TODO remove, only temporary, in the future only use model SNSSAI
-  oai::model::common::Snssai to_model_snssai() const {
-    oai::model::common::Snssai snssai;
+  oai::_3gpp::model::Snssai to_model_snssai() const {
+    oai::_3gpp::model::Snssai snssai;
     snssai.setSst(sst);
     // TODO this puts a decimal string but SD should be a hex string
     snssai.setSd(sd);

@@ -24,7 +24,7 @@ include(GoogleTest)
 
 include_directories(${COMMON_DIR})
 include_directories(${LOGGER_DIR})
-include_directories(${MODEL_DIR}/common_model)
+include_directories(${MODEL_DIR})
 include_directories(${NGAP_DIR}/libngap)
 include_directories(${NGAP_DIR}/libngap_ies)
 include_directories(${NGAP_DIR}/ngap_ies)

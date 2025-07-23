@@ -222,7 +222,7 @@ file(GLOB AMF_MODEL_SRC_FILES
         ${COMMON_MODEL_DIR}/TransportProtocol_anyOf.cpp
         ${COMMON_MODEL_DIR}/TwapId.cpp
         ${COMMON_MODEL_DIR}/UserLocation.cpp
-        ${COMMON_MODEL_DIR}/UtraLocation.cpp  
+        ${COMMON_MODEL_DIR}/UtraLocation.cpp 
 )
 
 ## CONFIG used in NF_TARGET (main)

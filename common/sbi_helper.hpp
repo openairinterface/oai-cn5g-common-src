@@ -221,10 +221,13 @@ class sbi_helper {
       AmfStatusNotifPathPduSessionReleasePduSessionId =
           "/pdu-session-release/callback/:ueContextId/:pduSessionId";
 
-  // AMF callback for AMF registration for 3GPP access
+  // AMF callback
   static inline const std::string AmfCallbackBase = "/namf-callback/";
   static inline const std::string AmfCallbackPathDeregistrationNotification =
-      ":ueId/deregistration-notification";
+      "/:ueId/deregistration-notification";  // for AMF registration for 3GPP
+                                             // access
+  static inline const std::string AmfCallbackPathPolicyUpdateNotification =
+      "/:ueId/PolicyUpdateNotification";  // for PolicyUpdateNotification
 
   // AUSF: UEAuthentication
   static inline const std::string AusfAuthBase = "/nausf-auth/";

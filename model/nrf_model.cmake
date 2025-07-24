@@ -533,6 +533,12 @@ file(GLOB NRF_MODEL_SRC_FILES
 	${COMMON_MODEL_DIR}/TnapId.cpp
 	${COMMON_MODEL_DIR}/CnAssistedRanPara.cpp
 	${COMMON_MODEL_DIR}/PolicyReqTrigger_anyOf.cpp
+	${COMMON_MODEL_DIR}/PolicyAssociation.cpp
+	${COMMON_MODEL_DIR}/PolicyAssociationRequest.cpp 
+	${COMMON_MODEL_DIR}/RequestTrigger.cpp
+	${COMMON_MODEL_DIR}/UeSliceMbr.cpp
+	${COMMON_MODEL_DIR}/NwdafData.cpp
+	${COMMON_MODEL_DIR}/RequestTrigger_anyOf.cpp                
 	${COMMON_MODEL_DIR}/PresenceState.cpp
 	${COMMON_MODEL_DIR}/UeAuth.cpp
 	${COMMON_MODEL_DIR}/RmState.cpp

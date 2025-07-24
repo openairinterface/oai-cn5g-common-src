@@ -287,6 +287,13 @@ class sbi_helper {
       "/nssai-availability";
 
   // TODO: PCF
+  static inline const std::string PcfAmPolicyControlBase =
+      "/npcf-am-policy-control/";
+  static inline const std::string PcfAmPolicyControlPathPolicies = "/policies";
+  static inline const std::string PcfAmPolicyControlPathPoliciesAssoId =
+      "/policies/{polAssoId}";
+  static inline const std::string PcfAmPolicyControlPathPoliciesAssoIdUpdate =
+      "/policies/{polAssoId}/update";
 
   // SMF: SMF PDU Session Service
   static inline const std::string SmfPduSessionBase = "/nsmf-pdusession/";

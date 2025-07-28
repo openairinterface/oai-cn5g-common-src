@@ -535,6 +535,9 @@ file(GLOB NRF_MODEL_SRC_FILES
 	${COMMON_MODEL_DIR}/PolicyReqTrigger_anyOf.cpp
 	${COMMON_MODEL_DIR}/PolicyAssociation.cpp
 	${COMMON_MODEL_DIR}/PolicyAssociationRequest.cpp 
+	${COMMON_MODEL_DIR}/PolicyAssociationUpdateRequest.cpp
+	${COMMON_MODEL_DIR}/PolicyUpdate.cpp
+	${COMMON_MODEL_DIR}/PresenceInfoRm.cpp	
 	${COMMON_MODEL_DIR}/RequestTrigger.cpp
 	${COMMON_MODEL_DIR}/UeSliceMbr.cpp
 	${COMMON_MODEL_DIR}/NwdafData.cpp

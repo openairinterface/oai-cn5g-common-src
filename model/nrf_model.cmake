@@ -106,6 +106,7 @@ file(GLOB NRF_MODEL_SRC_FILES
         ${COMMON_MODEL_DIR}/Helpers.cpp
         ${COMMON_MODEL_DIR}/Ipv6Addr.cpp
         ${COMMON_MODEL_DIR}/Ipv6Prefix.cpp
+        ${COMMON_MODEL_DIR}/PduSession.cpp
         ${COMMON_MODEL_DIR}/PduSessionType.cpp
         ${COMMON_MODEL_DIR}/PduSessionType_anyOf.cpp
         ${COMMON_MODEL_DIR}/AtsssCapability.cpp
@@ -124,7 +125,6 @@ file(GLOB NRF_MODEL_SRC_FILES
         ${COMMON_MODEL_DIR}/DnfUnit.cpp
         ${COMMON_MODEL_DIR}/Atom.cpp  
         ${COMMON_MODEL_DIR}/LinksValueSchema.cpp
-
         ${COMMON_MODEL_DIR}/AccessTokenClaims_aud.cpp
         ${COMMON_MODEL_DIR}/SuciInfo.cpp
         ${COMMON_MODEL_DIR}/DataSetId_anyOf.cpp
@@ -496,6 +496,7 @@ file(GLOB NRF_MODEL_SRC_FILES
 	${COMMON_MODEL_DIR}/N3gaLocation.cpp
 	${COMMON_MODEL_DIR}/GeraLocation.cpp
 	${COMMON_MODEL_DIR}/NwdafRegistrationInfo.cpp
+	${COMMON_MODEL_DIR}/UeContextInSmfData.cpp	
 	${COMMON_MODEL_DIR}/UeContextInSmfDataSubFilter.cpp
 	${COMMON_MODEL_DIR}/VnGroupData.cpp
 	${COMMON_MODEL_DIR}/SharedDataTreatmentInstruction.cpp
@@ -792,10 +793,8 @@ file(GLOB NRF_MODEL_SRC_FILES
 	${COMMON_MODEL_DIR}/FlowInfo.cpp
 	${COMMON_MODEL_DIR}/TrafficInformation.cpp
 	${COMMON_MODEL_DIR}/ProseDirectAllowed_anyOf.cpp
-	
-	
-	
-	
+        ${COMMON_MODEL_DIR}/PgwInfo.cpp
+        ${COMMON_MODEL_DIR}/EmergencyInfo.cpp	
         )
         
 

@@ -20,6 +20,7 @@
 ################################################################################
 
 include(${SRC_TOP_DIR}/${MOUNTED_COMMON}/model/common_model.cmake)
+include(${SRC_TOP_DIR}/${MOUNTED_COMMON}/model/nrf_model.cmake)
 
 SET(AMF_MODEL_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/model)
 

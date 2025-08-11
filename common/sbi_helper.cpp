@@ -77,6 +77,13 @@ void sbi_helper::get_nrf_disc_api_root(
 }
 
 //---------------------------------------------------------------------------------------------
+std::string sbi_helper::get_nrf_disc_api_root(
+    const oai::config::sbi_interface& nrf, bool enable_tls) {
+  return nrf.get_url(enable_tls) + sbi_helper::NrfDiscBase +
+         nrf.get_api_version();
+}
+
+//---------------------------------------------------------------------------------------------
 void sbi_helper::get_nrf_disc_search_nf_instances_uri(
     const nf_addr_t& nrf_addr, std::string& uri) {
   std::string api_root = {};

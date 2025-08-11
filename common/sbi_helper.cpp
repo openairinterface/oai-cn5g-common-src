@@ -92,6 +92,13 @@ void sbi_helper::get_nrf_disc_search_nf_instances_uri(
 }
 
 //---------------------------------------------------------------------------------------------
+std::string sbi_helper::get_nrf_disc_search_nf_instances_uri(
+    const oai::config::sbi_interface& nrf, bool enable_tls) {
+  std::string api_root = get_nrf_disc_api_root(nrf, enable_tls);
+  return api_root + NrfDiscPathNfInstances;
+}
+
+//---------------------------------------------------------------------------------------------
 void sbi_helper::get_fmt_format_form(
     const std::string& input_str, std::string& output_str) {
   // First replace request parameters (except the last one) with {}

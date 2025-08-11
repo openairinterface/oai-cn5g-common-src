@@ -765,6 +765,16 @@ class sbi_helper {
       const nf_addr_t& nrf_addr, std::string& uri);
 
   /*
+   * Get NRF NF Discovery SearchNFInstances URI
+   * @param [const oai::config::sbi_interface& ] nrf: NRF's Addr info
+   * @param [bool ] enable_tls: TLS option
+   * @return NRF Discovery Search NFInstances URI
+   */
+
+  static std::string get_nrf_disc_search_nf_instances_uri(
+      const oai::config::sbi_interface& nrf, bool enable_tls);
+
+  /*
    * Get FMT format from an input string (3GPP format)
    * @param [const std::string& ] input_str: Input string
    * @param [std::string& ] output_str: Output string

@@ -426,6 +426,26 @@ void conv::get_amf_id(
 }
 
 //------------------------------------------------------------------------------
+std::string conv::tmsi_to_guti(
+    const std::string& mcc, const std::string& mnc, uint8_t region_id,
+    const std::string& _5g_s_tmsi) {
+  std::string region_id_str = {};
+  int_to_string_hex(region_id, region_id_str, 2);  // Region ID: 8 bits
+  return {mcc + mnc + region_id_str + _5g_s_tmsi};
+}
+
+//------------------------------------------------------------------------------
+std::string conv::tmsi_to_guti(
+    const std::string& mcc, const std::string& mnc, uint8_t region_id,
+    uint16_t amf_set_id, uint8_t amf_pointer, const std::string& tmsi) {
+  uint32_t amf_id        = {};
+  std::string amf_id_str = {};
+  get_amf_id(region_id, amf_set_id, amf_pointer, amf_id);
+  int_to_string_hex(amf_id, amf_id_str, 6);  // AMF ID: 24 bits
+  return {mcc + mnc + amf_id_str + tmsi};
+}
+
+//------------------------------------------------------------------------------
 void conv::convert_string_2_hex(
     const std::string& input_str, std::string& output_str) {
   unsigned char* data = (unsigned char*) malloc(input_str.length() + 1);

@@ -75,6 +75,12 @@ class conv {
   static void get_amf_id(
       const std::string& amf_region_id, const std::string& amf_set_id,
       const std::string& amf_pointer, std::string& amf_id);
+  static std::string tmsi_to_guti(
+      const std::string& mcc, const std::string& mnc, uint8_t region_id,
+      const std::string& _5g_s_tmsi);
+  static std::string tmsi_to_guti(
+      const std::string& mcc, const std::string& mnc, uint8_t region_id,
+      uint16_t amf_set_id, uint8_t amf_pointer, const std::string& tmsi);
   static void convert_string_2_hex(
       const std::string& input_str, std::string& output_str);
   static void string_to_uint_mac_address(

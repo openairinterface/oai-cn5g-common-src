@@ -120,13 +120,10 @@ std::string DeregistrationRequest::Get5gGuti() const {
   std::optional<_5G_GUTI_t> guti = std::nullopt;
   ie_5gs_mobility_id_.Get5gGuti(guti);
   if (!guti.has_value()) return {};
-
-  std::string guti_str =
-      guti.value().mcc + guti.value().mnc +
-      std::to_string(guti.value().amf_region_id) +
-      std::to_string(guti.value().amf_set_id) +
-      std::to_string(guti.value().amf_pointer) +
-      oai::utils::conv::tmsi_to_string(guti.value()._5g_tmsi);
+  std::string guti_str = oai::utils::conv::tmsi_to_guti(
+      guti.value().mcc, guti.value().mnc, guti.value().amf_region_id,
+      guti.value().amf_set_id, guti.value().amf_pointer,
+      oai::utils::conv::tmsi_to_string(guti.value()._5g_tmsi));
   oai::logger::logger_common::nas().debug("5G GUTI %s", guti_str.c_str());
   return guti_str;
 }

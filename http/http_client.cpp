@@ -333,13 +333,14 @@ void http_client::get_response_info(
 
 //---------------------------------------------------------------------------------------------
 request http_client::prepare_json_request(
-    const std::string& uri, const std::string& body) {
+    const std::string& uri, const std::string& body,
+    const std::string& content_type) {
   request req;
   req.uri = uri;
   // Check whether body is valid JSON
   if (json::json::accept(body)) {
     req.body = body;
-    req.headers.insert({"content-type", "application/json"});
+    req.headers.insert({"content-type", content_type});
   }
   return req;
 }

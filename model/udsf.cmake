@@ -19,11 +19,11 @@
 #      contact@openairinterface.org
 ################################################################################
 
-include(${SRC_TOP_DIR}/${MOUNTED_COMMON}/model/common_model/common_model.cmake)
+include(${SRC_TOP_DIR}/${MOUNTED_COMMON}/model/common_model.cmake)
 
 SET(UDSF_MODEL_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/model/udsf)
 
-set(COMMON_MODEL_SRC_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/model/common_model)
+set(COMMON_MODEL_SRC_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/model)
 
 include_directories(${UDSF_MODEL_DIR})
 

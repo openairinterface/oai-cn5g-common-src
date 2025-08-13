@@ -21,10 +21,10 @@
 
 
 SET(NSSF_MODEL_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/model/nssf)
-set(COMMON_MODEL_SRC_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/model/common_model)
+set(COMMON_MODEL_SRC_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/model)
 
 include(${COMMON_MODEL_SRC_DIR}/common_model.cmake)
-include(${SRC_TOP_DIR}/${MOUNTED_COMMON}/model/nrf/nrf_model.cmake)
+include(${SRC_TOP_DIR}/${MOUNTED_COMMON}/model/nrf_model.cmake)
 
 
 include_directories(${NSSF_MODEL_DIR})

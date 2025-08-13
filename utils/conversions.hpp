@@ -80,6 +80,9 @@ class conv {
   static void string_to_uint_mac_address(
       const std::string& macStr, uint8_t source_mac_address[6], char delimiter);
 
+  static std::string home_network_gprs(
+      const std::string& mnc, const std::string& mcc);
+
   /**
    * Replaces primitive JSON string values with integers or bools if possible
    * @param j

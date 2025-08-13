@@ -533,3 +533,16 @@ void conv::string_to_uint_mac_address(
     ++index;
   }
 }
+
+//------------------------------------------------------------------------------
+std::string conv::home_network_gprs(
+    const std::string& mnc, const std::string& mcc) {
+  // '.mnc(\d{3})\.mcc(\d{3})\.gprs'
+  std::string s;
+
+  s.append(".mnc").append(mnc);
+  s.append(".mcc").append(mcc);
+  s.append(".gprs");
+
+  return s;
+}

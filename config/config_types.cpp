@@ -384,6 +384,7 @@ void local_interface::validate() {
         "Error in reading network interface {}. Make sure it exists",
         m_if_name.get_value()));
   }
+
   m_mtu   = _mtu;
   m_addr4 = _addr4;
 }

@@ -301,6 +301,8 @@ class sbi_helper {
   // SMF: SMF PDU Session Service
   static inline const std::string SmfPduSessionBase = "/nsmf-pdusession/";
   static inline const std::string SmfPduSessionPathSmContexts = "/sm-contexts";
+  static inline const std::string SmfPduSessionPathSmContextsUpdate =
+      "/sm-contexts/";
   static inline const std::string SmfPduSessionPathSmContextsCreate =
       "/sm-contexts/:smContextRef";
   static inline const std::string SmfPduSessionPathSmContextsRetrieve =
@@ -321,12 +323,30 @@ class sbi_helper {
       "/pdu-sessions/:pduSessionRef/retrieve";
   static inline const std::string SmfPduSessionPathPduSessionsTransferMoData =
       "/pdu-sessions/:pduSessionRef/transfer-mo-data";
-  // TODO: SMF: Session Management Event Exposure Service
-
+  // SMF: Session Management Event Exposure Service
+  static inline const std::string SmfEventExposureBase =
+      "/nsmf_event-exposure/";
+  static inline const std::string SmfEventExposurePathSubscriptions =
+      "/subscriptions";
+  static inline const std::string
+      SmfEventExposurePathSubscriptionsSubscriptionId = "/subscriptions/:subId";
   // SMF callback
   static inline const std::string SmfCallbackBase = "/nsmf-callback/";
   static inline const std::string SmfCallbackPathSdmSubscription =
       ":ueId/sdm-notification";
+  static inline const std::string SmfCallbackPathN1N2MessageTransferFailure =
+      "/callback/N1N2MsgTxfrFailureNotification/:ueId";
+  static inline const std::string SmfCallbackPathSmPolicyAssociation =
+      ":associationId/sm-policy-control-notify";
+  // SMF Status Notify
+  static inline const std::string SmfStatusNotifyBase =
+      "/nsmf-nfstatus-notify/";
+  static inline const std::string SmfStatusNotifyPathSubscriptions =
+      "/subscriptions";
+
+  // SMF Configuration Service
+  static inline const std::string SmfConfBase              = "/nsmf-oai/";
+  static inline const std::string SmfConfPathConfiguration = "/configuration";
 
   // UDM: Subscriber Data Management
   static inline const std::string UdmSdmBase           = "/nudm-sdm/";

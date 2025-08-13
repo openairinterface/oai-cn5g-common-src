@@ -208,6 +208,60 @@ constexpr uint8_t k5gmmCauseMessageNotCompatible                   = 101;
 constexpr uint8_t k5gmmCauseProtocolErrorUnspecified               = 111;
 
 //------------------------------------------------------------------------------
+// 5G SM CAUSE value for 5GS session management (Annex B)
+constexpr uint8_t k5gsmCauseUnknown = 0;  // User-defined value
+// Causes related to nature of request
+constexpr uint8_t k5gsmCauseOperatorDeterminedBarring                   = 8;
+constexpr uint8_t k5gsmCauseInsufficientResources                       = 26;
+constexpr uint8_t k5gsmCauseMissingOrUnknownDnn                         = 27;
+constexpr uint8_t k5gsmCauseUnknownPduSessionType                       = 28;
+constexpr uint8_t k5gsmCauseUserAuthenticationOrAuthorizationFailed     = 29;
+constexpr uint8_t k5gsmCauseRequestRejectedUnspecified                  = 31;
+constexpr uint8_t k5gsmCauseServiceOptionNotSupported                   = 32;
+constexpr uint8_t k5gsmCauseRequestedServiceOptionNotSubscribed         = 33;
+constexpr uint8_t k5gsmCausePtiAlreadyInUse                             = 35;
+constexpr uint8_t k5gsmCauseRegularDeactivation                         = 36;
+constexpr uint8_t k5gsmCause5gsQosNotAccepted                           = 37;
+constexpr uint8_t k5gsmCauseNetworkFailure                              = 38;
+constexpr uint8_t k5gsmCauseReactivationRequested                       = 39;
+constexpr uint8_t k5gsmCauseSematicErrorInTheTftOperation               = 41;
+constexpr uint8_t k5gsmCauseSyntacticErrorInTheTftOperation             = 42;
+constexpr uint8_t k5gsmCauseInvalidPduSessionIdentity                   = 43;
+constexpr uint8_t k5gsmCauseSematicErrorsInPacketFilters                = 44;
+constexpr uint8_t k5gsmCauseSyntacticalErrorsInPacketFilters            = 45;
+constexpr uint8_t k5gsmCauseOutOfLandServiceArea                        = 46;
+constexpr uint8_t k5gsmCausePtiMismatch                                 = 47;
+constexpr uint8_t k5gsmCausePduSessionTypeIpv4OnlyAllowed               = 50;
+constexpr uint8_t k5gsmCausePduSessionTypeIpv6OnlyAllowed               = 51;
+constexpr uint8_t k5gsmCausePduSessionDoesNotExist                      = 54;
+constexpr uint8_t k5gsmCausePduSessionTypeIpv4v6OnlyAllowed             = 57;
+constexpr uint8_t k5gsmCausePduSessionTypeUnstructuredOnlyAllowed       = 58;
+constexpr uint8_t k5gsmCauseUnsupportedQfiValue                         = 59;
+constexpr uint8_t k5gsmCausePduSessionTypeEthernetOnlyAllowed           = 61;
+constexpr uint8_t k5gsmCauseInsufficientResourcesForSpecificSliceAndDnn = 67;
+constexpr uint8_t k5gsmCauseNotSupportedSscMode                         = 68;
+constexpr uint8_t k5gsmCauseInsufficientResourcesForSpecificSlice       = 69;
+constexpr uint8_t k5gsmCauseMissingOrUnknownDnnInASlice                 = 70;
+constexpr uint8_t k5gsmCauseInvalidPtiValue                             = 81;
+constexpr uint8_t
+    k5gsmCauseMaximumDataRatePerUeForUserPlaneIntegrityProtectionIsTooLow = 82;
+constexpr uint8_t k5gsmCauseSemanticErrorInTheQosOperation                = 83;
+constexpr uint8_t k5gsmCauseSyntacticalErrorInTheQosOperation             = 84;
+constexpr uint8_t k5gsmCauseInvalidMappedEpsBearerIdentity                = 85;
+constexpr uint8_t k5gsmCauseUasServicesNotAllowed                         = 86;
+
+// Protocol errors (e.g., unknown message)
+constexpr uint8_t k5gsmCauseSemanticallyIncorrectMessage                  = 95;
+constexpr uint8_t k5gsmCauseInvalidMandatoryInformation                   = 96;
+constexpr uint8_t k5gsmCauseMessageTypeNonExistentOrNotImplemented        = 97;
+constexpr uint8_t k5gsmCauseMessageTypeNotCompatibleWithTheProtocolState  = 98;
+constexpr uint8_t k5gsmCauseInformationElementNonExistentOrNotImplemented = 99;
+constexpr uint8_t k5gsmCauseConditionalIeError                            = 100;
+constexpr uint8_t k5gsmCauseMessageNotCompatibleWithTheProtocolState      = 101;
+constexpr uint8_t k5gsmCauseProtocolErrorUnspecified                      = 111;
+constexpr uint8_t k5gsmCauseRequestAccepted = 255;  // User-defined value
+
+//------------------------------------------------------------------------------
 // UL NAS TRANSPORT payload container type
 constexpr uint8_t kN1SmInformation         = 0x01;
 constexpr uint8_t kSmsContainer            = 0x02;
@@ -462,6 +516,38 @@ typedef struct pdu_session_type_s {
 
 } pdu_session_type_t;
 
+struct pdu_session_status_t {
+  static constexpr uint8_t Inactive             = 0;
+  static constexpr uint8_t InactivePending      = 1;
+  static constexpr uint8_t ModificationPending  = 2;
+  static constexpr uint8_t EstablishmentPending = 3;
+  static constexpr uint8_t Active               = 4;
+};
+
+static std::string get_pdu_session_status_str(uint8_t status) {
+  switch (status) {
+    case pdu_session_status_t::Inactive: {
+      return "PDU Session Status Inactive";
+    } break;
+    case pdu_session_status_t::InactivePending: {
+      return "PDU Session Status Inactive Pending";
+    } break;
+    case pdu_session_status_t::ModificationPending: {
+      return "PDU Session Status Modification Pending";
+    } break;
+    case pdu_session_status_t::EstablishmentPending: {
+      return "PDU Session Status Establishment Pending";
+    } break;
+    case pdu_session_status_t::Active: {
+      return "PDU Session Status Active";
+    } break;
+    default: {
+      return "PDU Session Status Unknown";  // Unknown status
+    }
+  }
+  return "PDU Session Status Unknown";
+}
+
 // 8.14 PDU Session (UE IP) Address Allocation (PAA)
 struct paa_s {
   pdu_session_type_t pdu_session_type;
@@ -499,5 +585,27 @@ struct paa_s {
   }
 };
 
+// see Table 9.11.4.12.1: QoS flow descriptions information element
+typedef struct flow_bit_rate_type_s {
+  uint8_t unit;
+  uint16_t value;
+} flow_bit_rate_type_t;
+
+// Guaranteed Flow Bit Rate
+typedef struct gfbr_s {
+  flow_bit_rate_type_t uplink;
+  flow_bit_rate_type_t donwlink;
+} gfbr_t;
+
+// Maximum Flow Bit Rate
+typedef struct mfbr_s {
+  flow_bit_rate_type_t uplink;
+  flow_bit_rate_type_t donwlink;
+} mfbr_t;
+
 typedef struct paa_s paa_t;
+
+constexpr uint8_t kNumberRetransmissionTimesT3591 = 4;
+constexpr uint8_t kNumberRetransmissionTimesT3592 = 4;
+
 #endif

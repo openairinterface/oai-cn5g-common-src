@@ -19,7 +19,7 @@
 #      contact@openairinterface.org
 ################################################################################
 
-SET(SMF_MODEL_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/model/smf)
+SET(SMF_MODEL_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/model)
 
 include_directories(${SMF_MODEL_DIR})
 

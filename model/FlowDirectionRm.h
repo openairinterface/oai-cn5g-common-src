@@ -29,39 +29,13 @@ namespace oai::_3gpp::model {
 /// This data type is defined in the same way as the \&quot;FlowDirection\&quot;
 /// data type, with the only difference that it allows null value.
 /// </summary>
-class FlowDirectionRm {
+class FlowDirectionRm : public FlowDirection {
  public:
   FlowDirectionRm();
   virtual ~FlowDirectionRm() = default;
 
-  /// <summary>
-  /// Validate the current data in the model. Throws a ValidationException on
-  /// failure.
-  /// </summary>
-  void validate() const;
-
-  /// <summary>
-  /// Validate the current data in the model. Returns false on error and writes
-  /// an error message into the given stringstream.
-  /// </summary>
-  bool validate(std::stringstream& msg) const;
-
-  /// <summary>
-  /// Helper overload for validate. Used when one model stores another model and
-  /// calls it's validate. Not meant to be called outside that case.
-  /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
-
-  bool operator==(const FlowDirectionRm& rhs) const;
-  bool operator!=(const FlowDirectionRm& rhs) const;
-
-  /////////////////////////////////////////////
-  /// FlowDirectionRm members
-
   friend void to_json(nlohmann::json& j, const FlowDirectionRm& o);
   friend void from_json(const nlohmann::json& j, FlowDirectionRm& o);
-
- protected:
 };
 
 }  // namespace oai::_3gpp::model

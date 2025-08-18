@@ -60,11 +60,15 @@ bool RequestedQos::validate(
   if (gbrUlIsSet()) {
     const std::string& value           = m_GbrUl;
     const std::string currentValuePath = _pathPrefix + ".gbrUl";
+    success &= helpers::validate_regex(
+        helpers::BANDWIDTH_VALIDATION_REGEX, value, msg, currentValuePath);
   }
 
   if (gbrDlIsSet()) {
     const std::string& value           = m_GbrDl;
     const std::string currentValuePath = _pathPrefix + ".gbrDl";
+    success &= helpers::validate_regex(
+        helpers::BANDWIDTH_VALIDATION_REGEX, value, msg, currentValuePath);
   }
 
   return success;

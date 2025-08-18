@@ -92,21 +92,29 @@ bool QosData::validate(
   if (maxbrUlIsSet()) {
     const std::string& value           = m_MaxbrUl;
     const std::string currentValuePath = _pathPrefix + ".maxbrUl";
+    success &= helpers::validate_regex(
+        helpers::BANDWIDTH_VALIDATION_REGEX, value, msg, currentValuePath);
   }
 
   if (maxbrDlIsSet()) {
     const std::string& value           = m_MaxbrDl;
     const std::string currentValuePath = _pathPrefix + ".maxbrDl";
+    success &= helpers::validate_regex(
+        helpers::BANDWIDTH_VALIDATION_REGEX, value, msg, currentValuePath);
   }
 
   if (gbrUlIsSet()) {
     const std::string& value           = m_GbrUl;
     const std::string currentValuePath = _pathPrefix + ".gbrUl";
+    success &= helpers::validate_regex(
+        helpers::BANDWIDTH_VALIDATION_REGEX, value, msg, currentValuePath);
   }
 
   if (gbrDlIsSet()) {
     const std::string& value           = m_GbrDl;
     const std::string currentValuePath = _pathPrefix + ".gbrDl";
+    success &= helpers::validate_regex(
+        helpers::BANDWIDTH_VALIDATION_REGEX, value, msg, currentValuePath);
   }
 
   if (priorityLevelIsSet()) {
@@ -202,11 +210,12 @@ bool QosData::validate(
       msg << currentValuePath << ": must be greater than or equal to 1;";
     }
   }
-
+  /*
   if (packetErrorRateIsSet()) {
     const std::string& value           = m_PacketErrorRate;
     const std::string currentValuePath = _pathPrefix + ".packetErrorRate";
   }
+  */
 
   return success;
 }
@@ -324,7 +333,9 @@ void to_json(nlohmann::json& j, const QosData& o) {
 }
 
 void from_json(const nlohmann::json& j, QosData& o) {
-  j.at("qosId").get_to(o.m_QosId);
+  if (j.find("qosId") != j.end()) {
+    j.at("qosId").get_to(o.m_QosId);
+  }
   if (j.find("5qi") != j.end()) {
     j.at("5qi").get_to(o.m_r_5qi);
     o.m_r_5qiIsSet = true;

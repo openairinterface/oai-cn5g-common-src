@@ -124,8 +124,8 @@ public:
     /// <summary>
     /// 
     /// </summary>
-    std::vector<oai::_3gpp::model::std::string> getDnaiList() const;
-    void setDnaiList(std::vector<oai::_3gpp::model::std::string> const& value);
+    std::vector<std::string> getDnaiList() const;
+    void setDnaiList(std::vector<std::string> const& value);
     bool dnaiListIsSet() const;
     void unsetDnaiList();
     /// <summary>
@@ -162,7 +162,7 @@ protected:
     bool m_TaiListIsSet;
     std::vector<oai::_3gpp::model::TaiRange> m_TaiRangeList;
     bool m_TaiRangeListIsSet;
-    std::vector<oai::_3gpp::model::std::string> m_DnaiList;
+    std::vector<std::string> m_DnaiList;
     bool m_DnaiListIsSet;
     std::vector<oai::_3gpp::model::UnTrustAfInfo> m_UnTrustAfInfoList;
     bool m_UnTrustAfInfoListIsSet;

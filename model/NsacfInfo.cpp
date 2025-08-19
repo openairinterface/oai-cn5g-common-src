@@ -101,7 +101,7 @@ bool NsacfInfo::validate(std::stringstream& msg, const std::string& pathPrefix) 
          
     if (nsacSaiListIsSet())
     {
-        const std::vector<oai::_3gpp::model::std::string>& value = m_NsacSaiList;
+        const std::vector<std::string>& value = m_NsacSaiList;
         const std::string currentValuePath = _pathPrefix + ".nsacSaiList";
                 
         
@@ -229,11 +229,11 @@ void NsacfInfo::unsetTaiRangeList()
 {
     m_TaiRangeListIsSet = false;
 }
-std::vector<oai::_3gpp::model::std::string> NsacfInfo::getNsacSaiList() const
+std::vector<std::string> NsacfInfo::getNsacSaiList() const
 {
     return m_NsacSaiList;
 }
-void NsacfInfo::setNsacSaiList(std::vector<oai::_3gpp::model::std::string> const& value)
+void NsacfInfo::setNsacSaiList(std::vector<std::string> const& value)
 {
     m_NsacSaiList = value;
     m_NsacSaiListIsSet = true;

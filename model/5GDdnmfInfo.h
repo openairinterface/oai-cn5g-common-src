@@ -15,8 +15,8 @@
  * Information of an 5G DDNMF NF Instance
  */
 
-#ifndef 5GDdnmfInfo_H_
-#define 5GDdnmfInfo_H_
+#ifndef _5GDdnmfInfo_H_
+#define _5GDdnmfInfo_H_
 
 
 #include "PlmnId.h"
@@ -74,4 +74,4 @@ protected:
 
 } // namespace oai::_3gpp::model
 
-#endif /* 5GDdnmfInfo_H_ */
+#endif /* _5GDdnmfInfo_H_ */

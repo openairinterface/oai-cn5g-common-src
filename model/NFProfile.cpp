@@ -354,7 +354,7 @@ bool NFProfile::validate(std::stringstream& msg, const std::string& pathPrefix) 
          
     if (ipv4AddressesIsSet())
     {
-        const std::vector<oai::_3gpp::model::std::string>& value = m_Ipv4Addresses;
+        const std::vector<std::string>& value = m_Ipv4Addresses;
         const std::string currentValuePath = _pathPrefix + ".ipv4Addresses";
                 
         
@@ -766,7 +766,7 @@ bool NFProfile::validate(std::stringstream& msg, const std::string& pathPrefix) 
                  
     if (nfSetIdListIsSet())
     {
-        const std::vector<oai::_3gpp::model::std::string>& value = m_NfSetIdList;
+        const std::vector<std::string>& value = m_NfSetIdList;
         const std::string currentValuePath = _pathPrefix + ".nfSetIdList";
                 
         
@@ -818,7 +818,7 @@ bool NFProfile::validate(std::stringstream& msg, const std::string& pathPrefix) 
                  
     if (nfSetRecoveryTimeListIsSet())
     {
-        const std::map<std::string, oai::_3gpp::model::std::string>& value = m_NfSetRecoveryTimeList;
+        const std::map<std::string, std::string>& value = m_NfSetRecoveryTimeList;
         const std::string currentValuePath = _pathPrefix + ".nfSetRecoveryTimeList";
                 
         
@@ -827,7 +827,7 @@ bool NFProfile::validate(std::stringstream& msg, const std::string& pathPrefix) 
          
     if (serviceSetRecoveryTimeListIsSet())
     {
-        const std::map<std::string, oai::_3gpp::model::std::string>& value = m_ServiceSetRecoveryTimeList;
+        const std::map<std::string, std::string>& value = m_ServiceSetRecoveryTimeList;
         const std::string currentValuePath = _pathPrefix + ".serviceSetRecoveryTimeList";
                 
         
@@ -934,7 +934,7 @@ bool NFProfile::validate(std::stringstream& msg, const std::string& pathPrefix) 
                  
     if (hniListIsSet())
     {
-        const std::vector<oai::_3gpp::model::std::string>& value = m_HniList;
+        const std::vector<std::string>& value = m_HniList;
         const std::string currentValuePath = _pathPrefix + ".hniList";
                 
         
@@ -2034,11 +2034,11 @@ void NFProfile::unsetInterPlmnFqdn()
 {
     m_InterPlmnFqdnIsSet = false;
 }
-std::vector<oai::_3gpp::model::std::string> NFProfile::getIpv4Addresses() const
+std::vector<std::string> NFProfile::getIpv4Addresses() const
 {
     return m_Ipv4Addresses;
 }
-void NFProfile::setIpv4Addresses(std::vector<oai::_3gpp::model::std::string> const& value)
+void NFProfile::setIpv4Addresses(std::vector<std::string> const& value)
 {
     m_Ipv4Addresses = value;
     m_Ipv4AddressesIsSet = true;
@@ -2850,11 +2850,11 @@ void NFProfile::unsetGmlcInfo()
 {
     m_GmlcInfoIsSet = false;
 }
-std::vector<oai::_3gpp::model::std::string> NFProfile::getNfSetIdList() const
+std::vector<std::string> NFProfile::getNfSetIdList() const
 {
     return m_NfSetIdList;
 }
-void NFProfile::setNfSetIdList(std::vector<oai::_3gpp::model::std::string> const& value)
+void NFProfile::setNfSetIdList(std::vector<std::string> const& value)
 {
     m_NfSetIdList = value;
     m_NfSetIdListIsSet = true;
@@ -2918,11 +2918,11 @@ void NFProfile::unsetOlcHSupportInd()
 {
     m_OlcHSupportIndIsSet = false;
 }
-std::map<std::string, oai::_3gpp::model::std::string> NFProfile::getNfSetRecoveryTimeList() const
+std::map<std::string, std::string> NFProfile::getNfSetRecoveryTimeList() const
 {
     return m_NfSetRecoveryTimeList;
 }
-void NFProfile::setNfSetRecoveryTimeList(std::map<std::string, oai::_3gpp::model::std::string> const& value)
+void NFProfile::setNfSetRecoveryTimeList(std::map<std::string, std::string> const& value)
 {
     m_NfSetRecoveryTimeList = value;
     m_NfSetRecoveryTimeListIsSet = true;
@@ -2935,11 +2935,11 @@ void NFProfile::unsetNfSetRecoveryTimeList()
 {
     m_NfSetRecoveryTimeListIsSet = false;
 }
-std::map<std::string, oai::_3gpp::model::std::string> NFProfile::getServiceSetRecoveryTimeList() const
+std::map<std::string, std::string> NFProfile::getServiceSetRecoveryTimeList() const
 {
     return m_ServiceSetRecoveryTimeList;
 }
-void NFProfile::setServiceSetRecoveryTimeList(std::map<std::string, oai::_3gpp::model::std::string> const& value)
+void NFProfile::setServiceSetRecoveryTimeList(std::map<std::string, std::string> const& value)
 {
     m_ServiceSetRecoveryTimeList = value;
     m_ServiceSetRecoveryTimeListIsSet = true;
@@ -3224,11 +3224,11 @@ void NFProfile::unsetNssaafInfo()
 {
     m_NssaafInfoIsSet = false;
 }
-std::vector<oai::_3gpp::model::std::string> NFProfile::getHniList() const
+std::vector<std::string> NFProfile::getHniList() const
 {
     return m_HniList;
 }
-void NFProfile::setHniList(std::vector<oai::_3gpp::model::std::string> const& value)
+void NFProfile::setHniList(std::vector<std::string> const& value)
 {
     m_HniList = value;
     m_HniListIsSet = true;

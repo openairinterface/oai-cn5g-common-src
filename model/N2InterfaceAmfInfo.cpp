@@ -50,7 +50,7 @@ bool N2InterfaceAmfInfo::validate(std::stringstream& msg, const std::string& pat
          
     if (ipv4EndpointAddressIsSet())
     {
-        const std::vector<oai::_3gpp::model::std::string>& value = m_Ipv4EndpointAddress;
+        const std::vector<std::string>& value = m_Ipv4EndpointAddress;
         const std::string currentValuePath = _pathPrefix + ".ipv4EndpointAddress";
                 
         
@@ -176,11 +176,11 @@ void from_json(const nlohmann::json& j, N2InterfaceAmfInfo& o)
     
 }
 
-std::vector<oai::_3gpp::model::std::string> N2InterfaceAmfInfo::getIpv4EndpointAddress() const
+std::vector<std::string> N2InterfaceAmfInfo::getIpv4EndpointAddress() const
 {
     return m_Ipv4EndpointAddress;
 }
-void N2InterfaceAmfInfo::setIpv4EndpointAddress(std::vector<oai::_3gpp::model::std::string> const& value)
+void N2InterfaceAmfInfo::setIpv4EndpointAddress(std::vector<std::string> const& value)
 {
     m_Ipv4EndpointAddress = value;
     m_Ipv4EndpointAddressIsSet = true;

@@ -233,7 +233,7 @@ bool SmfInfo::validate(std::stringstream& msg, const std::string& pathPrefix) co
              
     if (pgwFqdnListIsSet())
     {
-        const std::vector<oai::_3gpp::model::std::string>& value = m_PgwFqdnList;
+        const std::vector<std::string>& value = m_PgwFqdnList;
         const std::string currentValuePath = _pathPrefix + ".pgwFqdnList";
                 
         
@@ -536,11 +536,11 @@ void SmfInfo::unsetVsmfSupportInd()
 {
     m_VsmfSupportIndIsSet = false;
 }
-std::vector<oai::_3gpp::model::std::string> SmfInfo::getPgwFqdnList() const
+std::vector<std::string> SmfInfo::getPgwFqdnList() const
 {
     return m_PgwFqdnList;
 }
-void SmfInfo::setPgwFqdnList(std::vector<oai::_3gpp::model::std::string> const& value)
+void SmfInfo::setPgwFqdnList(std::vector<std::string> const& value)
 {
     m_PgwFqdnList = value;
     m_PgwFqdnListIsSet = true;

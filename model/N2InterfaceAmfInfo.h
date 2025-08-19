@@ -63,8 +63,8 @@ public:
     /// <summary>
     /// 
     /// </summary>
-    std::vector<oai::_3gpp::model::std::string> getIpv4EndpointAddress() const;
-    void setIpv4EndpointAddress(std::vector<oai::_3gpp::model::std::string> const& value);
+    std::vector<std::string> getIpv4EndpointAddress() const;
+    void setIpv4EndpointAddress(std::vector<std::string> const& value);
     bool ipv4EndpointAddressIsSet() const;
     void unsetIpv4EndpointAddress();
     /// <summary>
@@ -85,7 +85,7 @@ public:
     friend void to_json(nlohmann::json& j, const N2InterfaceAmfInfo& o);
     friend void from_json(const nlohmann::json& j, N2InterfaceAmfInfo& o);
 protected:
-    std::vector<oai::_3gpp::model::std::string> m_Ipv4EndpointAddress;
+    std::vector<std::string> m_Ipv4EndpointAddress;
     bool m_Ipv4EndpointAddressIsSet;
     std::vector<oai::_3gpp::model::Ipv6Addr> m_Ipv6EndpointAddress;
     bool m_Ipv6EndpointAddressIsSet;

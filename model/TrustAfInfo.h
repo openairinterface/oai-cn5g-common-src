@@ -85,8 +85,8 @@ public:
     /// <summary>
     /// 
     /// </summary>
-    std::vector<oai::_3gpp::model::std::string> getInternalGroupId() const;
-    void setInternalGroupId(std::vector<oai::_3gpp::model::std::string> const& value);
+    std::vector<std::string> getInternalGroupId() const;
+    void setInternalGroupId(std::vector<std::string> const& value);
     bool internalGroupIdIsSet() const;
     void unsetInternalGroupId();
     /// <summary>
@@ -106,7 +106,7 @@ protected:
     bool m_AfEventsIsSet;
     std::vector<std::string> m_AppIds;
     bool m_AppIdsIsSet;
-    std::vector<oai::_3gpp::model::std::string> m_InternalGroupId;
+    std::vector<std::string> m_InternalGroupId;
     bool m_InternalGroupIdIsSet;
     bool m_MappingInd;
     bool m_MappingIndIsSet;

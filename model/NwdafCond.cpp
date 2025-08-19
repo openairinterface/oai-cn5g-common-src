@@ -184,7 +184,7 @@ bool NwdafCond::validate(std::stringstream& msg, const std::string& pathPrefix) 
          
     if (servingNfSetIdListIsSet())
     {
-        const std::vector<oai::_3gpp::model::std::string>& value = m_ServingNfSetIdList;
+        const std::vector<std::string>& value = m_ServingNfSetIdList;
         const std::string currentValuePath = _pathPrefix + ".servingNfSetIdList";
                 
         
@@ -429,11 +429,11 @@ void NwdafCond::unsetServingNfTypeList()
 {
     m_ServingNfTypeListIsSet = false;
 }
-std::vector<oai::_3gpp::model::std::string> NwdafCond::getServingNfSetIdList() const
+std::vector<std::string> NwdafCond::getServingNfSetIdList() const
 {
     return m_ServingNfSetIdList;
 }
-void NwdafCond::setServingNfSetIdList(std::vector<oai::_3gpp::model::std::string> const& value)
+void NwdafCond::setServingNfSetIdList(std::vector<std::string> const& value)
 {
     m_ServingNfSetIdList = value;
     m_ServingNfSetIdListIsSet = true;

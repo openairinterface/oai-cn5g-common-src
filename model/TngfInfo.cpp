@@ -50,7 +50,7 @@ bool TngfInfo::validate(std::stringstream& msg, const std::string& pathPrefix) c
          
     if (ipv4EndpointAddressesIsSet())
     {
-        const std::vector<oai::_3gpp::model::std::string>& value = m_Ipv4EndpointAddresses;
+        const std::vector<std::string>& value = m_Ipv4EndpointAddresses;
         const std::string currentValuePath = _pathPrefix + ".ipv4EndpointAddresses";
                 
         
@@ -176,11 +176,11 @@ void from_json(const nlohmann::json& j, TngfInfo& o)
     
 }
 
-std::vector<oai::_3gpp::model::std::string> TngfInfo::getIpv4EndpointAddresses() const
+std::vector<std::string> TngfInfo::getIpv4EndpointAddresses() const
 {
     return m_Ipv4EndpointAddresses;
 }
-void TngfInfo::setIpv4EndpointAddresses(std::vector<oai::_3gpp::model::std::string> const& value)
+void TngfInfo::setIpv4EndpointAddresses(std::vector<std::string> const& value)
 {
     m_Ipv4EndpointAddresses = value;
     m_Ipv4EndpointAddressesIsSet = true;

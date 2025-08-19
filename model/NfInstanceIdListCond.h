@@ -62,13 +62,13 @@ public:
     /// <summary>
     /// 
     /// </summary>
-    std::vector<oai::_3gpp::model::std::string> getNfInstanceIdList() const;
-    void setNfInstanceIdList(std::vector<oai::_3gpp::model::std::string> const& value);
+    std::vector<std::string> getNfInstanceIdList() const;
+    void setNfInstanceIdList(std::vector<std::string> const& value);
 
     friend void to_json(nlohmann::json& j, const NfInstanceIdListCond& o);
     friend void from_json(const nlohmann::json& j, NfInstanceIdListCond& o);
 protected:
-    std::vector<oai::_3gpp::model::std::string> m_NfInstanceIdList;
+    std::vector<std::string> m_NfInstanceIdList;
 
     
 };

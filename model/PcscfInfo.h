@@ -73,8 +73,8 @@ public:
     /// <summary>
     /// 
     /// </summary>
-    std::vector<oai::_3gpp::model::std::string> getDnnList() const;
-    void setDnnList(std::vector<oai::_3gpp::model::std::string> const& value);
+    std::vector<std::string> getDnnList() const;
+    void setDnnList(std::vector<std::string> const& value);
     bool dnnListIsSet() const;
     void unsetDnnList();
     /// <summary>
@@ -87,8 +87,8 @@ public:
     /// <summary>
     /// 
     /// </summary>
-    std::vector<oai::_3gpp::model::std::string> getGmIpv4Addresses() const;
-    void setGmIpv4Addresses(std::vector<oai::_3gpp::model::std::string> const& value);
+    std::vector<std::string> getGmIpv4Addresses() const;
+    void setGmIpv4Addresses(std::vector<std::string> const& value);
     bool gmIpv4AddressesIsSet() const;
     void unsetGmIpv4Addresses();
     /// <summary>
@@ -108,8 +108,8 @@ public:
     /// <summary>
     /// 
     /// </summary>
-    std::vector<oai::_3gpp::model::std::string> getMwIpv4Addresses() const;
-    void setMwIpv4Addresses(std::vector<oai::_3gpp::model::std::string> const& value);
+    std::vector<std::string> getMwIpv4Addresses() const;
+    void setMwIpv4Addresses(std::vector<std::string> const& value);
     bool mwIpv4AddressesIsSet() const;
     void unsetMwIpv4Addresses();
     /// <summary>
@@ -139,17 +139,17 @@ public:
 protected:
     std::vector<oai::_3gpp::model::AccessType> m_AccessType;
     bool m_AccessTypeIsSet;
-    std::vector<oai::_3gpp::model::std::string> m_DnnList;
+    std::vector<std::string> m_DnnList;
     bool m_DnnListIsSet;
     std::string m_GmFqdn;
     bool m_GmFqdnIsSet;
-    std::vector<oai::_3gpp::model::std::string> m_GmIpv4Addresses;
+    std::vector<std::string> m_GmIpv4Addresses;
     bool m_GmIpv4AddressesIsSet;
     std::vector<oai::_3gpp::model::Ipv6Addr> m_GmIpv6Addresses;
     bool m_GmIpv6AddressesIsSet;
     std::string m_MwFqdn;
     bool m_MwFqdnIsSet;
-    std::vector<oai::_3gpp::model::std::string> m_MwIpv4Addresses;
+    std::vector<std::string> m_MwIpv4Addresses;
     bool m_MwIpv4AddressesIsSet;
     std::vector<oai::_3gpp::model::Ipv6Addr> m_MwIpv6Addresses;
     bool m_MwIpv6AddressesIsSet;

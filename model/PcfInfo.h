@@ -73,8 +73,8 @@ public:
     /// <summary>
     /// 
     /// </summary>
-    std::vector<oai::_3gpp::model::std::string> getDnnList() const;
-    void setDnnList(std::vector<oai::_3gpp::model::std::string> const& value);
+    std::vector<std::string> getDnnList() const;
+    void setDnnList(std::vector<std::string> const& value);
     bool dnnListIsSet() const;
     void unsetDnnList();
     /// <summary>
@@ -139,7 +139,7 @@ public:
 protected:
     std::string m_GroupId;
     bool m_GroupIdIsSet;
-    std::vector<oai::_3gpp::model::std::string> m_DnnList;
+    std::vector<std::string> m_DnnList;
     bool m_DnnListIsSet;
     std::vector<oai::_3gpp::model::SupiRange> m_SupiRanges;
     bool m_SupiRangesIsSet;

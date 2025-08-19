@@ -66,8 +66,8 @@ public:
     /// <summary>
     /// 
     /// </summary>
-    std::vector<oai::_3gpp::model::std::string> getDnnList() const;
-    void setDnnList(std::vector<oai::_3gpp::model::std::string> const& value);
+    std::vector<std::string> getDnnList() const;
+    void setDnnList(std::vector<std::string> const& value);
     bool dnnListIsSet() const;
     void unsetDnnList();
     /// <summary>
@@ -130,7 +130,7 @@ public:
     friend void to_json(nlohmann::json& j, const BsfInfo& o);
     friend void from_json(const nlohmann::json& j, BsfInfo& o);
 protected:
-    std::vector<oai::_3gpp::model::std::string> m_DnnList;
+    std::vector<std::string> m_DnnList;
     bool m_DnnListIsSet;
     std::vector<std::string> m_IpDomainList;
     bool m_IpDomainListIsSet;

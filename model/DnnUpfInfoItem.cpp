@@ -54,7 +54,7 @@ bool DnnUpfInfoItem::validate(std::stringstream& msg, const std::string& pathPre
              
     if (dnaiListIsSet())
     {
-        const std::vector<oai::_3gpp::model::std::string>& value = m_DnaiList;
+        const std::vector<std::string>& value = m_DnaiList;
         const std::string currentValuePath = _pathPrefix + ".dnaiList";
                 
         
@@ -327,11 +327,11 @@ void DnnUpfInfoItem::setDnn(std::string const& value)
 {
     m_Dnn = value;
 }
-std::vector<oai::_3gpp::model::std::string> DnnUpfInfoItem::getDnaiList() const
+std::vector<std::string> DnnUpfInfoItem::getDnaiList() const
 {
     return m_DnaiList;
 }
-void DnnUpfInfoItem::setDnaiList(std::vector<oai::_3gpp::model::std::string> const& value)
+void DnnUpfInfoItem::setDnaiList(std::vector<std::string> const& value)
 {
     m_DnaiList = value;
     m_DnaiListIsSet = true;

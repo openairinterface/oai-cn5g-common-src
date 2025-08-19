@@ -227,8 +227,8 @@ public:
     /// <summary>
     /// 
     /// </summary>
-    std::vector<oai::_3gpp::model::std::string> getNfServiceSetIdList() const;
-    void setNfServiceSetIdList(std::vector<oai::_3gpp::model::std::string> const& value);
+    std::vector<std::string> getNfServiceSetIdList() const;
+    void setNfServiceSetIdList(std::vector<std::string> const& value);
     bool nfServiceSetIdListIsSet() const;
     void unsetNfServiceSetIdList();
     /// <summary>
@@ -323,7 +323,7 @@ protected:
     bool m_RecoveryTimeIsSet;
     std::string m_SupportedFeatures;
     bool m_SupportedFeaturesIsSet;
-    std::vector<oai::_3gpp::model::std::string> m_NfServiceSetIdList;
+    std::vector<std::string> m_NfServiceSetIdList;
     bool m_NfServiceSetIdListIsSet;
     std::vector<oai::_3gpp::model::ExtSnssai> m_SNssais;
     bool m_SNssaisIsSet;

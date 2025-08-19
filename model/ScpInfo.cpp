@@ -104,7 +104,7 @@ bool ScpInfo::validate(std::stringstream& msg, const std::string& pathPrefix) co
          
     if (ipv4AddressesIsSet())
     {
-        const std::vector<oai::_3gpp::model::std::string>& value = m_Ipv4Addresses;
+        const std::vector<std::string>& value = m_Ipv4Addresses;
         const std::string currentValuePath = _pathPrefix + ".ipv4Addresses";
                 
         
@@ -208,7 +208,7 @@ bool ScpInfo::validate(std::stringstream& msg, const std::string& pathPrefix) co
          
     if (servedNfSetIdListIsSet())
     {
-        const std::vector<oai::_3gpp::model::std::string>& value = m_ServedNfSetIdList;
+        const std::vector<std::string>& value = m_ServedNfSetIdList;
         const std::string currentValuePath = _pathPrefix + ".servedNfSetIdList";
                 
         
@@ -530,11 +530,11 @@ void ScpInfo::unsetAddressDomains()
 {
     m_AddressDomainsIsSet = false;
 }
-std::vector<oai::_3gpp::model::std::string> ScpInfo::getIpv4Addresses() const
+std::vector<std::string> ScpInfo::getIpv4Addresses() const
 {
     return m_Ipv4Addresses;
 }
-void ScpInfo::setIpv4Addresses(std::vector<oai::_3gpp::model::std::string> const& value)
+void ScpInfo::setIpv4Addresses(std::vector<std::string> const& value)
 {
     m_Ipv4Addresses = value;
     m_Ipv4AddressesIsSet = true;
@@ -598,11 +598,11 @@ void ScpInfo::unsetIpv6PrefixRanges()
 {
     m_Ipv6PrefixRangesIsSet = false;
 }
-std::vector<oai::_3gpp::model::std::string> ScpInfo::getServedNfSetIdList() const
+std::vector<std::string> ScpInfo::getServedNfSetIdList() const
 {
     return m_ServedNfSetIdList;
 }
-void ScpInfo::setServedNfSetIdList(std::vector<oai::_3gpp::model::std::string> const& value)
+void ScpInfo::setServedNfSetIdList(std::vector<std::string> const& value)
 {
     m_ServedNfSetIdList = value;
     m_ServedNfSetIdListIsSet = true;

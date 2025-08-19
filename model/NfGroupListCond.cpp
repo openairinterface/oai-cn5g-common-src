@@ -48,7 +48,7 @@ bool NfGroupListCond::validate(std::stringstream& msg, const std::string& pathPr
                  
     
     /* NfGroupIdList */ {
-        const std::vector<oai::_3gpp::model::std::string>& value = m_NfGroupIdList;
+        const std::vector<std::string>& value = m_NfGroupIdList;
         const std::string currentValuePath = _pathPrefix + ".nfGroupIdList";
                 
         
@@ -130,11 +130,11 @@ void NfGroupListCond::setNfType(std::string const& value)
 {
     m_NfType = value;
 }
-std::vector<oai::_3gpp::model::std::string> NfGroupListCond::getNfGroupIdList() const
+std::vector<std::string> NfGroupListCond::getNfGroupIdList() const
 {
     return m_NfGroupIdList;
 }
-void NfGroupListCond::setNfGroupIdList(std::vector<oai::_3gpp::model::std::string> const& value)
+void NfGroupListCond::setNfGroupIdList(std::vector<std::string> const& value)
 {
     m_NfGroupIdList = value;
 }

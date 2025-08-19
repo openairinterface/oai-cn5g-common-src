@@ -94,8 +94,8 @@ public:
     /// <summary>
     /// 
     /// </summary>
-    std::vector<oai::_3gpp::model::std::string> getNfInstanceIdList() const;
-    void setNfInstanceIdList(std::vector<oai::_3gpp::model::std::string> const& value);
+    std::vector<std::string> getNfInstanceIdList() const;
+    void setNfInstanceIdList(std::vector<std::string> const& value);
     /// <summary>
     /// 
     /// </summary>
@@ -141,8 +141,8 @@ public:
     /// <summary>
     /// 
     /// </summary>
-    std::vector<oai::_3gpp::model::std::string> getNfGroupIdList() const;
-    void setNfGroupIdList(std::vector<oai::_3gpp::model::std::string> const& value);
+    std::vector<std::string> getNfGroupIdList() const;
+    void setNfGroupIdList(std::vector<std::string> const& value);
     /// <summary>
     /// NF Set Identifier (see clause 28.12 of 3GPP TS 23.003), formatted as the following string \&quot;set&lt;Set ID&gt;.&lt;nftype&gt;set.5gc.mnc&lt;MNC&gt;.mcc&lt;MCC&gt;\&quot;, or  \&quot;set&lt;SetID&gt;.&lt;NFType&gt;set.5gc.nid&lt;NID&gt;.mnc&lt;MNC&gt;.mcc&lt;MCC&gt;\&quot; with  &lt;MCC&gt; encoded as defined in clause 5.4.2 (\&quot;Mcc\&quot; data type definition)  &lt;MNC&gt; encoding the Mobile Network Code part of the PLMN, comprising 3 digits.    If there are only 2 significant digits in the MNC, one \&quot;0\&quot; digit shall be inserted    at the left side to fill the 3 digits coding of MNC.  Pattern: &#39;^[0-9]{3}$&#39; &lt;NFType&gt; encoded as a value defined in Table 6.1.6.3.3-1 of 3GPP TS 29.510 but    with lower case characters &lt;Set ID&gt; encoded as a string of characters consisting of    alphabetic characters (A-Z and a-z), digits (0-9) and/or the hyphen (-) and that    shall end with either an alphabetic character or a digit.  
     /// </summary>
@@ -203,8 +203,8 @@ public:
     /// <summary>
     /// 
     /// </summary>
-    std::vector<oai::_3gpp::model::std::string> getServingNfSetIdList() const;
-    void setServingNfSetIdList(std::vector<oai::_3gpp::model::std::string> const& value);
+    std::vector<std::string> getServingNfSetIdList() const;
+    void setServingNfSetIdList(std::vector<std::string> const& value);
     bool servingNfSetIdListIsSet() const;
     void unsetServingNfSetIdList();
     /// <summary>
@@ -255,7 +255,7 @@ public:
 protected:
     std::string m_NfInstanceId;
 
-    std::vector<oai::_3gpp::model::std::string> m_NfInstanceIdList;
+    std::vector<std::string> m_NfInstanceIdList;
 
     std::string m_NfType;
 
@@ -273,7 +273,7 @@ protected:
     bool m_NsiListIsSet;
     std::string m_NfGroupId;
 
-    std::vector<oai::_3gpp::model::std::string> m_NfGroupIdList;
+    std::vector<std::string> m_NfGroupIdList;
 
     std::string m_NfSetId;
 
@@ -293,7 +293,7 @@ protected:
     bool m_TaiRangeListIsSet;
     std::vector<oai::_3gpp::model::NFType> m_ServingNfTypeList;
     bool m_ServingNfTypeListIsSet;
-    std::vector<oai::_3gpp::model::std::string> m_ServingNfSetIdList;
+    std::vector<std::string> m_ServingNfSetIdList;
     bool m_ServingNfSetIdListIsSet;
     std::vector<oai::_3gpp::model::MlAnalyticsInfo> m_MlAnalyticsList;
     bool m_MlAnalyticsListIsSet;

@@ -160,7 +160,7 @@ bool NwdafInfo::validate(std::stringstream& msg, const std::string& pathPrefix) 
                  
     if (servingNfSetIdListIsSet())
     {
-        const std::vector<oai::_3gpp::model::std::string>& value = m_ServingNfSetIdList;
+        const std::vector<std::string>& value = m_ServingNfSetIdList;
         const std::string currentValuePath = _pathPrefix + ".servingNfSetIdList";
                 
         
@@ -455,11 +455,11 @@ void NwdafInfo::unsetAnalyticsDelay()
 {
     m_AnalyticsDelayIsSet = false;
 }
-std::vector<oai::_3gpp::model::std::string> NwdafInfo::getServingNfSetIdList() const
+std::vector<std::string> NwdafInfo::getServingNfSetIdList() const
 {
     return m_ServingNfSetIdList;
 }
-void NwdafInfo::setServingNfSetIdList(std::vector<oai::_3gpp::model::std::string> const& value)
+void NwdafInfo::setServingNfSetIdList(std::vector<std::string> const& value)
 {
     m_ServingNfSetIdList = value;
     m_ServingNfSetIdListIsSet = true;

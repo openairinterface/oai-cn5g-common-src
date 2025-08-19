@@ -37,7 +37,6 @@
 #include "MbSmfInfo.h"
 #include "NssaafInfo.h"
 #include "EasdfInfo.h"
-#include "Object.h"
 #include <map>
 #include "PlmnSnssai.h"
 #include "BsfInfo.h"
@@ -192,8 +191,8 @@ public:
     /// <summary>
     /// 
     /// </summary>
-    std::vector<oai::_3gpp::model::std::string> getIpv4Addresses() const;
-    void setIpv4Addresses(std::vector<oai::_3gpp::model::std::string> const& value);
+    std::vector<std::string> getIpv4Addresses() const;
+    void setIpv4Addresses(std::vector<std::string> const& value);
     bool ipv4AddressesIsSet() const;
     void unsetIpv4Addresses();
     /// <summary>
@@ -528,8 +527,8 @@ public:
     /// <summary>
     /// 
     /// </summary>
-    std::vector<oai::_3gpp::model::std::string> getNfSetIdList() const;
-    void setNfSetIdList(std::vector<oai::_3gpp::model::std::string> const& value);
+    std::vector<std::string> getNfSetIdList() const;
+    void setNfSetIdList(std::vector<std::string> const& value);
     bool nfSetIdListIsSet() const;
     void unsetNfSetIdList();
     /// <summary>
@@ -556,15 +555,15 @@ public:
     /// <summary>
     /// A map (list of key-value pairs) where NfSetId serves as key of DateTime
     /// </summary>
-    std::map<std::string, oai::_3gpp::model::std::string> getNfSetRecoveryTimeList() const;
-    void setNfSetRecoveryTimeList(std::map<std::string, oai::_3gpp::model::std::string> const& value);
+    std::map<std::string, std::string> getNfSetRecoveryTimeList() const;
+    void setNfSetRecoveryTimeList(std::map<std::string, std::string> const& value);
     bool nfSetRecoveryTimeListIsSet() const;
     void unsetNfSetRecoveryTimeList();
     /// <summary>
     /// A map (list of key-value pairs) where NfServiceSetId serves as key of DateTime 
     /// </summary>
-    std::map<std::string, oai::_3gpp::model::std::string> getServiceSetRecoveryTimeList() const;
-    void setServiceSetRecoveryTimeList(std::map<std::string, oai::_3gpp::model::std::string> const& value);
+    std::map<std::string, std::string> getServiceSetRecoveryTimeList() const;
+    void setServiceSetRecoveryTimeList(std::map<std::string, std::string> const& value);
     bool serviceSetRecoveryTimeListIsSet() const;
     void unsetServiceSetRecoveryTimeList();
     /// <summary>
@@ -682,8 +681,8 @@ public:
     /// <summary>
     /// 
     /// </summary>
-    std::vector<oai::_3gpp::model::std::string> getHniList() const;
-    void setHniList(std::vector<oai::_3gpp::model::std::string> const& value);
+    std::vector<std::string> getHniList() const;
+    void setHniList(std::vector<std::string> const& value);
     bool hniListIsSet() const;
     void unsetHniList();
     /// <summary>
@@ -730,7 +729,7 @@ protected:
     bool m_FqdnIsSet;
     std::string m_InterPlmnFqdn;
     bool m_InterPlmnFqdnIsSet;
-    std::vector<oai::_3gpp::model::std::string> m_Ipv4Addresses;
+    std::vector<std::string> m_Ipv4Addresses;
     bool m_Ipv4AddressesIsSet;
     std::vector<oai::_3gpp::model::Ipv6Addr> m_Ipv6Addresses;
     bool m_Ipv6AddressesIsSet;
@@ -826,7 +825,7 @@ protected:
     bool m_LmfInfoIsSet;
     oai::_3gpp::model::GmlcInfo m_GmlcInfo;
     bool m_GmlcInfoIsSet;
-    std::vector<oai::_3gpp::model::std::string> m_NfSetIdList;
+    std::vector<std::string> m_NfSetIdList;
     bool m_NfSetIdListIsSet;
     std::vector<std::string> m_ServingScope;
     bool m_ServingScopeIsSet;
@@ -834,9 +833,9 @@ protected:
     bool m_LcHSupportIndIsSet;
     bool m_OlcHSupportInd;
     bool m_OlcHSupportIndIsSet;
-    std::map<std::string, oai::_3gpp::model::std::string> m_NfSetRecoveryTimeList;
+    std::map<std::string, std::string> m_NfSetRecoveryTimeList;
     bool m_NfSetRecoveryTimeListIsSet;
-    std::map<std::string, oai::_3gpp::model::std::string> m_ServiceSetRecoveryTimeList;
+    std::map<std::string, std::string> m_ServiceSetRecoveryTimeList;
     bool m_ServiceSetRecoveryTimeListIsSet;
     std::vector<std::string> m_ScpDomains;
     bool m_ScpDomainsIsSet;
@@ -870,7 +869,7 @@ protected:
     bool m_TrustAfInfoIsSet;
     oai::_3gpp::model::NssaafInfo m_NssaafInfo;
     bool m_NssaafInfoIsSet;
-    std::vector<oai::_3gpp::model::std::string> m_HniList;
+    std::vector<std::string> m_HniList;
     bool m_HniListIsSet;
     oai::_3gpp::model::IwmscInfo m_IwmscInfo;
     bool m_IwmscInfoIsSet;

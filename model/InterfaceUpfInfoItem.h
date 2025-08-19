@@ -69,8 +69,8 @@ public:
     /// <summary>
     /// 
     /// </summary>
-    std::vector<oai::_3gpp::model::std::string> getIpv4EndpointAddresses() const;
-    void setIpv4EndpointAddresses(std::vector<oai::_3gpp::model::std::string> const& value);
+    std::vector<std::string> getIpv4EndpointAddresses() const;
+    void setIpv4EndpointAddresses(std::vector<std::string> const& value);
     bool ipv4EndpointAddressesIsSet() const;
     void unsetIpv4EndpointAddresses();
     /// <summary>
@@ -100,7 +100,7 @@ public:
 protected:
     oai::_3gpp::model::UPInterfaceType m_InterfaceType;
 
-    std::vector<oai::_3gpp::model::std::string> m_Ipv4EndpointAddresses;
+    std::vector<std::string> m_Ipv4EndpointAddresses;
     bool m_Ipv4EndpointAddressesIsSet;
     std::vector<oai::_3gpp::model::Ipv6Addr> m_Ipv6EndpointAddresses;
     bool m_Ipv6EndpointAddressesIsSet;

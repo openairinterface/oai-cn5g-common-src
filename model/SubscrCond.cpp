@@ -66,7 +66,7 @@ bool SubscrCond::validate(std::stringstream& msg, const std::string& pathPrefix)
              
     
     /* NfInstanceIdList */ {
-        const std::vector<oai::_3gpp::model::std::string>& value = m_NfInstanceIdList;
+        const std::vector<std::string>& value = m_NfInstanceIdList;
         const std::string currentValuePath = _pathPrefix + ".nfInstanceIdList";
                 
         
@@ -186,7 +186,7 @@ bool SubscrCond::validate(std::stringstream& msg, const std::string& pathPrefix)
              
     
     /* NfGroupIdList */ {
-        const std::vector<oai::_3gpp::model::std::string>& value = m_NfGroupIdList;
+        const std::vector<std::string>& value = m_NfGroupIdList;
         const std::string currentValuePath = _pathPrefix + ".nfGroupIdList";
                 
         
@@ -394,7 +394,7 @@ bool SubscrCond::validate(std::stringstream& msg, const std::string& pathPrefix)
          
     if (servingNfSetIdListIsSet())
     {
-        const std::vector<oai::_3gpp::model::std::string>& value = m_ServingNfSetIdList;
+        const std::vector<std::string>& value = m_ServingNfSetIdList;
         const std::string currentValuePath = _pathPrefix + ".servingNfSetIdList";
                 
         
@@ -788,11 +788,11 @@ void SubscrCond::setNfInstanceId(std::string const& value)
 {
     m_NfInstanceId = value;
 }
-std::vector<oai::_3gpp::model::std::string> SubscrCond::getNfInstanceIdList() const
+std::vector<std::string> SubscrCond::getNfInstanceIdList() const
 {
     return m_NfInstanceIdList;
 }
-void SubscrCond::setNfInstanceIdList(std::vector<oai::_3gpp::model::std::string> const& value)
+void SubscrCond::setNfInstanceIdList(std::vector<std::string> const& value)
 {
     m_NfInstanceIdList = value;
 }
@@ -869,11 +869,11 @@ void SubscrCond::setNfGroupId(std::string const& value)
 {
     m_NfGroupId = value;
 }
-std::vector<oai::_3gpp::model::std::string> SubscrCond::getNfGroupIdList() const
+std::vector<std::string> SubscrCond::getNfGroupIdList() const
 {
     return m_NfGroupIdList;
 }
-void SubscrCond::setNfGroupIdList(std::vector<oai::_3gpp::model::std::string> const& value)
+void SubscrCond::setNfGroupIdList(std::vector<std::string> const& value)
 {
     m_NfGroupIdList = value;
 }
@@ -1003,11 +1003,11 @@ void SubscrCond::unsetServingNfTypeList()
 {
     m_ServingNfTypeListIsSet = false;
 }
-std::vector<oai::_3gpp::model::std::string> SubscrCond::getServingNfSetIdList() const
+std::vector<std::string> SubscrCond::getServingNfSetIdList() const
 {
     return m_ServingNfSetIdList;
 }
-void SubscrCond::setServingNfSetIdList(std::vector<oai::_3gpp::model::std::string> const& value)
+void SubscrCond::setServingNfSetIdList(std::vector<std::string> const& value)
 {
     m_ServingNfSetIdList = value;
     m_ServingNfSetIdListIsSet = true;

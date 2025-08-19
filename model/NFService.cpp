@@ -413,7 +413,7 @@ bool NFService::validate(std::stringstream& msg, const std::string& pathPrefix) 
          
     if (nfServiceSetIdListIsSet())
     {
-        const std::vector<oai::_3gpp::model::std::string>& value = m_NfServiceSetIdList;
+        const std::vector<std::string>& value = m_NfServiceSetIdList;
         const std::string currentValuePath = _pathPrefix + ".nfServiceSetIdList";
                 
         
@@ -1155,11 +1155,11 @@ void NFService::unsetSupportedFeatures()
 {
     m_SupportedFeaturesIsSet = false;
 }
-std::vector<oai::_3gpp::model::std::string> NFService::getNfServiceSetIdList() const
+std::vector<std::string> NFService::getNfServiceSetIdList() const
 {
     return m_NfServiceSetIdList;
 }
-void NFService::setNfServiceSetIdList(std::vector<oai::_3gpp::model::std::string> const& value)
+void NFService::setNfServiceSetIdList(std::vector<std::string> const& value)
 {
     m_NfServiceSetIdList = value;
     m_NfServiceSetIdListIsSet = true;

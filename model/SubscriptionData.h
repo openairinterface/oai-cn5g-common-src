@@ -178,15 +178,15 @@ public:
     /// <summary>
     /// 
     /// </summary>
-    oai::_3gpp::model::std::string getRequesterFeatures() const;
-    void setRequesterFeatures(oai::_3gpp::model::std::string const& value);
+    std::string getRequesterFeatures() const;
+    void setRequesterFeatures(std::string const& value);
     bool requesterFeaturesIsSet() const;
     void unsetRequesterFeatures();
     /// <summary>
     /// 
     /// </summary>
-    oai::_3gpp::model::std::string getNrfSupportedFeatures() const;
-    void setNrfSupportedFeatures(oai::_3gpp::model::std::string const& value);
+    std::string getNrfSupportedFeatures() const;
+    void setNrfSupportedFeatures(std::string const& value);
     bool nrfSupportedFeaturesIsSet() const;
     void unsetNrfSupportedFeatures();
     /// <summary>
@@ -253,9 +253,9 @@ protected:
     bool m_ReqSnpnListIsSet;
     std::vector<std::string> m_ServingScope;
     bool m_ServingScopeIsSet;
-    oai::_3gpp::model::std::string m_RequesterFeatures;
+    std::string m_RequesterFeatures;
     bool m_RequesterFeaturesIsSet;
-    oai::_3gpp::model::std::string m_NrfSupportedFeatures;
+    std::string m_NrfSupportedFeatures;
     bool m_NrfSupportedFeaturesIsSet;
     std::string m_HnrfUri;
     bool m_HnrfUriIsSet;

@@ -72,8 +72,8 @@ public:
     /// <summary>
     /// 
     /// </summary>
-    std::vector<oai::_3gpp::model::std::string> getServingNfSetIdList() const;
-    void setServingNfSetIdList(std::vector<oai::_3gpp::model::std::string> const& value);
+    std::vector<std::string> getServingNfSetIdList() const;
+    void setServingNfSetIdList(std::vector<std::string> const& value);
     bool servingNfSetIdListIsSet() const;
     void unsetServingNfSetIdList();
     /// <summary>
@@ -96,7 +96,7 @@ public:
 protected:
     std::vector<oai::_3gpp::model::NFType> m_ServingNfTypeList;
     bool m_ServingNfTypeListIsSet;
-    std::vector<oai::_3gpp::model::std::string> m_ServingNfSetIdList;
+    std::vector<std::string> m_ServingNfSetIdList;
     bool m_ServingNfSetIdListIsSet;
     std::vector<oai::_3gpp::model::Tai> m_TaiList;
     bool m_TaiListIsSet;

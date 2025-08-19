@@ -46,7 +46,7 @@ bool NfInstanceIdListCond::validate(std::stringstream& msg, const std::string& p
          
     
     /* NfInstanceIdList */ {
-        const std::vector<oai::_3gpp::model::std::string>& value = m_NfInstanceIdList;
+        const std::vector<std::string>& value = m_NfInstanceIdList;
         const std::string currentValuePath = _pathPrefix + ".nfInstanceIdList";
                 
         
@@ -102,11 +102,11 @@ void from_json(const nlohmann::json& j, NfInstanceIdListCond& o)
     
 }
 
-std::vector<oai::_3gpp::model::std::string> NfInstanceIdListCond::getNfInstanceIdList() const
+std::vector<std::string> NfInstanceIdListCond::getNfInstanceIdList() const
 {
     return m_NfInstanceIdList;
 }
-void NfInstanceIdListCond::setNfInstanceIdList(std::vector<oai::_3gpp::model::std::string> const& value)
+void NfInstanceIdListCond::setNfInstanceIdList(std::vector<std::string> const& value)
 {
     m_NfInstanceIdList = value;
 }

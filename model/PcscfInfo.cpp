@@ -86,7 +86,7 @@ bool PcscfInfo::validate(std::stringstream& msg, const std::string& pathPrefix) 
          
     if (dnnListIsSet())
     {
-        const std::vector<oai::_3gpp::model::std::string>& value = m_DnnList;
+        const std::vector<std::string>& value = m_DnnList;
         const std::string currentValuePath = _pathPrefix + ".dnnList";
                 
         
@@ -131,7 +131,7 @@ bool PcscfInfo::validate(std::stringstream& msg, const std::string& pathPrefix) 
          
     if (gmIpv4AddressesIsSet())
     {
-        const std::vector<oai::_3gpp::model::std::string>& value = m_GmIpv4Addresses;
+        const std::vector<std::string>& value = m_GmIpv4Addresses;
         const std::string currentValuePath = _pathPrefix + ".gmIpv4Addresses";
                 
         
@@ -202,7 +202,7 @@ bool PcscfInfo::validate(std::stringstream& msg, const std::string& pathPrefix) 
          
     if (mwIpv4AddressesIsSet())
     {
-        const std::vector<oai::_3gpp::model::std::string>& value = m_MwIpv4Addresses;
+        const std::vector<std::string>& value = m_MwIpv4Addresses;
         const std::string currentValuePath = _pathPrefix + ".mwIpv4Addresses";
                 
         
@@ -448,11 +448,11 @@ void PcscfInfo::unsetAccessType()
 {
     m_AccessTypeIsSet = false;
 }
-std::vector<oai::_3gpp::model::std::string> PcscfInfo::getDnnList() const
+std::vector<std::string> PcscfInfo::getDnnList() const
 {
     return m_DnnList;
 }
-void PcscfInfo::setDnnList(std::vector<oai::_3gpp::model::std::string> const& value)
+void PcscfInfo::setDnnList(std::vector<std::string> const& value)
 {
     m_DnnList = value;
     m_DnnListIsSet = true;
@@ -482,11 +482,11 @@ void PcscfInfo::unsetGmFqdn()
 {
     m_GmFqdnIsSet = false;
 }
-std::vector<oai::_3gpp::model::std::string> PcscfInfo::getGmIpv4Addresses() const
+std::vector<std::string> PcscfInfo::getGmIpv4Addresses() const
 {
     return m_GmIpv4Addresses;
 }
-void PcscfInfo::setGmIpv4Addresses(std::vector<oai::_3gpp::model::std::string> const& value)
+void PcscfInfo::setGmIpv4Addresses(std::vector<std::string> const& value)
 {
     m_GmIpv4Addresses = value;
     m_GmIpv4AddressesIsSet = true;
@@ -533,11 +533,11 @@ void PcscfInfo::unsetMwFqdn()
 {
     m_MwFqdnIsSet = false;
 }
-std::vector<oai::_3gpp::model::std::string> PcscfInfo::getMwIpv4Addresses() const
+std::vector<std::string> PcscfInfo::getMwIpv4Addresses() const
 {
     return m_MwIpv4Addresses;
 }
-void PcscfInfo::setMwIpv4Addresses(std::vector<oai::_3gpp::model::std::string> const& value)
+void PcscfInfo::setMwIpv4Addresses(std::vector<std::string> const& value)
 {
     m_MwIpv4Addresses = value;
     m_MwIpv4AddressesIsSet = true;

@@ -121,8 +121,8 @@ public:
     /// <summary>
     /// 
     /// </summary>
-    std::vector<oai::_3gpp::model::std::string> getPgwFqdnList() const;
-    void setPgwFqdnList(std::vector<oai::_3gpp::model::std::string> const& value);
+    std::vector<std::string> getPgwFqdnList() const;
+    void setPgwFqdnList(std::vector<std::string> const& value);
     bool pgwFqdnListIsSet() const;
     void unsetPgwFqdnList();
     /// <summary>
@@ -166,7 +166,7 @@ protected:
     bool m_PriorityIsSet;
     bool m_VsmfSupportInd;
     bool m_VsmfSupportIndIsSet;
-    std::vector<oai::_3gpp::model::std::string> m_PgwFqdnList;
+    std::vector<std::string> m_PgwFqdnList;
     bool m_PgwFqdnListIsSet;
     bool m_SmfOnboardingCapability;
     bool m_SmfOnboardingCapabilityIsSet;

@@ -84,8 +84,8 @@ public:
     /// <summary>
     /// 
     /// </summary>
-    std::vector<oai::_3gpp::model::std::string> getNsacSaiList() const;
-    void setNsacSaiList(std::vector<oai::_3gpp::model::std::string> const& value);
+    std::vector<std::string> getNsacSaiList() const;
+    void setNsacSaiList(std::vector<std::string> const& value);
     bool nsacSaiListIsSet() const;
     void unsetNsacSaiList();
 
@@ -98,7 +98,7 @@ protected:
     bool m_TaiListIsSet;
     std::vector<oai::_3gpp::model::TaiRange> m_TaiRangeList;
     bool m_TaiRangeListIsSet;
-    std::vector<oai::_3gpp::model::std::string> m_NsacSaiList;
+    std::vector<std::string> m_NsacSaiList;
     bool m_NsacSaiListIsSet;
     
 };

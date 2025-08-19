@@ -130,7 +130,7 @@ bool TrustAfInfo::validate(std::stringstream& msg, const std::string& pathPrefix
          
     if (internalGroupIdIsSet())
     {
-        const std::vector<oai::_3gpp::model::std::string>& value = m_InternalGroupId;
+        const std::vector<std::string>& value = m_InternalGroupId;
         const std::string currentValuePath = _pathPrefix + ".internalGroupId";
                 
         
@@ -282,11 +282,11 @@ void TrustAfInfo::unsetAppIds()
 {
     m_AppIdsIsSet = false;
 }
-std::vector<oai::_3gpp::model::std::string> TrustAfInfo::getInternalGroupId() const
+std::vector<std::string> TrustAfInfo::getInternalGroupId() const
 {
     return m_InternalGroupId;
 }
-void TrustAfInfo::setInternalGroupId(std::vector<oai::_3gpp::model::std::string> const& value)
+void TrustAfInfo::setInternalGroupId(std::vector<std::string> const& value)
 {
     m_InternalGroupId = value;
     m_InternalGroupIdIsSet = true;

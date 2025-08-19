@@ -52,7 +52,7 @@ bool InterfaceUpfInfoItem::validate(std::stringstream& msg, const std::string& p
              
     if (ipv4EndpointAddressesIsSet())
     {
-        const std::vector<oai::_3gpp::model::std::string>& value = m_Ipv4EndpointAddresses;
+        const std::vector<std::string>& value = m_Ipv4EndpointAddresses;
         const std::string currentValuePath = _pathPrefix + ".ipv4EndpointAddresses";
                 
         
@@ -201,11 +201,11 @@ void InterfaceUpfInfoItem::setInterfaceType(oai::_3gpp::model::UPInterfaceType c
 {
     m_InterfaceType = value;
 }
-std::vector<oai::_3gpp::model::std::string> InterfaceUpfInfoItem::getIpv4EndpointAddresses() const
+std::vector<std::string> InterfaceUpfInfoItem::getIpv4EndpointAddresses() const
 {
     return m_Ipv4EndpointAddresses;
 }
-void InterfaceUpfInfoItem::setIpv4EndpointAddresses(std::vector<oai::_3gpp::model::std::string> const& value)
+void InterfaceUpfInfoItem::setIpv4EndpointAddresses(std::vector<std::string> const& value)
 {
     m_Ipv4EndpointAddresses = value;
     m_Ipv4EndpointAddressesIsSet = true;

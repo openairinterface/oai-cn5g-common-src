@@ -777,11 +777,11 @@ void SubscriptionData::unsetServingScope()
 {
     m_ServingScopeIsSet = false;
 }
-oai::_3gpp::model::std::string SubscriptionData::getRequesterFeatures() const
+std::string SubscriptionData::getRequesterFeatures() const
 {
     return m_RequesterFeatures;
 }
-void SubscriptionData::setRequesterFeatures(oai::_3gpp::model::std::string const& value)
+void SubscriptionData::setRequesterFeatures(std::string const& value)
 {
     m_RequesterFeatures = value;
     m_RequesterFeaturesIsSet = true;
@@ -794,11 +794,11 @@ void SubscriptionData::unsetRequesterFeatures()
 {
     m_RequesterFeaturesIsSet = false;
 }
-oai::_3gpp::model::std::string SubscriptionData::getNrfSupportedFeatures() const
+std::string SubscriptionData::getNrfSupportedFeatures() const
 {
     return m_NrfSupportedFeatures;
 }
-void SubscriptionData::setNrfSupportedFeatures(oai::_3gpp::model::std::string const& value)
+void SubscriptionData::setNrfSupportedFeatures(std::string const& value)
 {
     m_NrfSupportedFeatures = value;
     m_NrfSupportedFeaturesIsSet = true;

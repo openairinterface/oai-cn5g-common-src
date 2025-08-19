@@ -61,7 +61,7 @@ bool PcfInfo::validate(std::stringstream& msg, const std::string& pathPrefix) co
              
     if (dnnListIsSet())
     {
-        const std::vector<oai::_3gpp::model::std::string>& value = m_DnnList;
+        const std::vector<std::string>& value = m_DnnList;
         const std::string currentValuePath = _pathPrefix + ".dnnList";
                 
         
@@ -319,11 +319,11 @@ void PcfInfo::unsetGroupId()
 {
     m_GroupIdIsSet = false;
 }
-std::vector<oai::_3gpp::model::std::string> PcfInfo::getDnnList() const
+std::vector<std::string> PcfInfo::getDnnList() const
 {
     return m_DnnList;
 }
-void PcfInfo::setDnnList(std::vector<oai::_3gpp::model::std::string> const& value)
+void PcfInfo::setDnnList(std::vector<std::string> const& value)
 {
     m_DnnList = value;
     m_DnnListIsSet = true;

@@ -67,8 +67,8 @@ public:
     /// <summary>
     /// 
     /// </summary>
-    std::vector<oai::_3gpp::model::std::string> getDnaiList() const;
-    void setDnaiList(std::vector<oai::_3gpp::model::std::string> const& value);
+    std::vector<std::string> getDnaiList() const;
+    void setDnaiList(std::vector<std::string> const& value);
     bool dnaiListIsSet() const;
     void unsetDnaiList();
 
@@ -77,7 +77,7 @@ public:
 protected:
     std::string m_Dnn;
 
-    std::vector<oai::_3gpp::model::std::string> m_DnaiList;
+    std::vector<std::string> m_DnaiList;
     bool m_DnaiListIsSet;
     
 };

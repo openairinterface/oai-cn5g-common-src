@@ -129,7 +129,7 @@ bool DccfCond::validate(std::stringstream& msg, const std::string& pathPrefix) c
          
     if (servingNfSetIdListIsSet())
     {
-        const std::vector<oai::_3gpp::model::std::string>& value = m_ServingNfSetIdList;
+        const std::vector<std::string>& value = m_ServingNfSetIdList;
         const std::string currentValuePath = _pathPrefix + ".servingNfSetIdList";
                 
         
@@ -284,11 +284,11 @@ void DccfCond::unsetServingNfTypeList()
 {
     m_ServingNfTypeListIsSet = false;
 }
-std::vector<oai::_3gpp::model::std::string> DccfCond::getServingNfSetIdList() const
+std::vector<std::string> DccfCond::getServingNfSetIdList() const
 {
     return m_ServingNfSetIdList;
 }
-void DccfCond::setServingNfSetIdList(std::vector<oai::_3gpp::model::std::string> const& value)
+void DccfCond::setServingNfSetIdList(std::vector<std::string> const& value)
 {
     m_ServingNfSetIdList = value;
     m_ServingNfSetIdListIsSet = true;

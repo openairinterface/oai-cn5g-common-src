@@ -72,8 +72,8 @@ public:
     /// <summary>
     /// 
     /// </summary>
-    std::vector<oai::_3gpp::model::std::string> getNfGroupIdList() const;
-    void setNfGroupIdList(std::vector<oai::_3gpp::model::std::string> const& value);
+    std::vector<std::string> getNfGroupIdList() const;
+    void setNfGroupIdList(std::vector<std::string> const& value);
 
     friend void to_json(nlohmann::json& j, const NfGroupListCond& o);
     friend void from_json(const nlohmann::json& j, NfGroupListCond& o);
@@ -82,7 +82,7 @@ protected:
 
     std::string m_NfType;
 
-    std::vector<oai::_3gpp::model::std::string> m_NfGroupIdList;
+    std::vector<std::string> m_NfGroupIdList;
 
     
 };

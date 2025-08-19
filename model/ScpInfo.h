@@ -99,8 +99,8 @@ public:
     /// <summary>
     /// 
     /// </summary>
-    std::vector<oai::_3gpp::model::std::string> getIpv4Addresses() const;
-    void setIpv4Addresses(std::vector<oai::_3gpp::model::std::string> const& value);
+    std::vector<std::string> getIpv4Addresses() const;
+    void setIpv4Addresses(std::vector<std::string> const& value);
     bool ipv4AddressesIsSet() const;
     void unsetIpv4Addresses();
     /// <summary>
@@ -127,8 +127,8 @@ public:
     /// <summary>
     /// 
     /// </summary>
-    std::vector<oai::_3gpp::model::std::string> getServedNfSetIdList() const;
-    void setServedNfSetIdList(std::vector<oai::_3gpp::model::std::string> const& value);
+    std::vector<std::string> getServedNfSetIdList() const;
+    void setServedNfSetIdList(std::vector<std::string> const& value);
     bool servedNfSetIdListIsSet() const;
     void unsetServedNfSetIdList();
     /// <summary>
@@ -171,7 +171,7 @@ protected:
     bool m_ScpPortsIsSet;
     std::vector<std::string> m_AddressDomains;
     bool m_AddressDomainsIsSet;
-    std::vector<oai::_3gpp::model::std::string> m_Ipv4Addresses;
+    std::vector<std::string> m_Ipv4Addresses;
     bool m_Ipv4AddressesIsSet;
     std::vector<oai::_3gpp::model::Ipv6Prefix> m_Ipv6Prefixes;
     bool m_Ipv6PrefixesIsSet;
@@ -179,7 +179,7 @@ protected:
     bool m_Ipv4AddrRangesIsSet;
     std::vector<oai::_3gpp::model::Ipv6PrefixRange> m_Ipv6PrefixRanges;
     bool m_Ipv6PrefixRangesIsSet;
-    std::vector<oai::_3gpp::model::std::string> m_ServedNfSetIdList;
+    std::vector<std::string> m_ServedNfSetIdList;
     bool m_ServedNfSetIdListIsSet;
     std::vector<oai::_3gpp::model::PlmnId> m_RemotePlmnList;
     bool m_RemotePlmnListIsSet;

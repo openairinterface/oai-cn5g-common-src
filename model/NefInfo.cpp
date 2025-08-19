@@ -189,7 +189,7 @@ bool NefInfo::validate(std::stringstream& msg, const std::string& pathPrefix) co
          
     if (dnaiListIsSet())
     {
-        const std::vector<oai::_3gpp::model::std::string>& value = m_DnaiList;
+        const std::vector<std::string>& value = m_DnaiList;
         const std::string currentValuePath = _pathPrefix + ".dnaiList";
                 
         
@@ -512,11 +512,11 @@ void NefInfo::unsetTaiRangeList()
 {
     m_TaiRangeListIsSet = false;
 }
-std::vector<oai::_3gpp::model::std::string> NefInfo::getDnaiList() const
+std::vector<std::string> NefInfo::getDnaiList() const
 {
     return m_DnaiList;
 }
-void NefInfo::setDnaiList(std::vector<oai::_3gpp::model::std::string> const& value)
+void NefInfo::setDnaiList(std::vector<std::string> const& value)
 {
     m_DnaiList = value;
     m_DnaiListIsSet = true;

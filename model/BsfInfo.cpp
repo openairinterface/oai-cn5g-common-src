@@ -58,7 +58,7 @@ bool BsfInfo::validate(std::stringstream& msg, const std::string& pathPrefix) co
          
     if (dnnListIsSet())
     {
-        const std::vector<oai::_3gpp::model::std::string>& value = m_DnnList;
+        const std::vector<std::string>& value = m_DnnList;
         const std::string currentValuePath = _pathPrefix + ".dnnList";
                 
         
@@ -367,11 +367,11 @@ void from_json(const nlohmann::json& j, BsfInfo& o)
     
 }
 
-std::vector<oai::_3gpp::model::std::string> BsfInfo::getDnnList() const
+std::vector<std::string> BsfInfo::getDnnList() const
 {
     return m_DnnList;
 }
-void BsfInfo::setDnnList(std::vector<oai::_3gpp::model::std::string> const& value)
+void BsfInfo::setDnnList(std::vector<std::string> const& value)
 {
     m_DnnList = value;
     m_DnnListIsSet = true;

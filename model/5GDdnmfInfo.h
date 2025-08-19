@@ -10,29 +10,29 @@
 * Do not edit the class manually.
 */
 /*
- * UriScheme.h
+ * 5GDdnmfInfo.h
  *
- * HTTP and HTTPS URI scheme.
+ * Information of an 5G DDNMF NF Instance
  */
 
-#ifndef UriScheme_H_
-#define UriScheme_H_
+#ifndef 5GDdnmfInfo_H_
+#define 5GDdnmfInfo_H_
 
 
-#include "UriScheme_anyOf.h"
+#include "PlmnId.h"
 #include <nlohmann/json.hpp>
 
 namespace oai::_3gpp::model
 {
 
 /// <summary>
-/// HTTP and HTTPS URI scheme.
+/// Information of an 5G DDNMF NF Instance
 /// </summary>
-class  UriScheme
+class  5GDdnmfInfo
 {
 public:
-    UriScheme();
-    virtual ~UriScheme() = default;
+    5GDdnmfInfo();
+    virtual ~5GDdnmfInfo() = default;
 
 
     /// <summary>
@@ -52,25 +52,26 @@ public:
     /// </summary>
     bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
 
-    bool operator==(const UriScheme& rhs) const;
-    bool operator!=(const UriScheme& rhs) const;
+    bool operator==(const 5GDdnmfInfo& rhs) const;
+    bool operator!=(const 5GDdnmfInfo& rhs) const;
 
     /////////////////////////////////////////////
-    /// UriScheme members
+    /// 5GDdnmfInfo members
 
+    /// <summary>
+    /// 
+    /// </summary>
+    oai::_3gpp::model::PlmnId getPlmnId() const;
+    void setPlmnId(oai::_3gpp::model::PlmnId const& value);
 
-    UriScheme_anyOf getValue() const;
-    void setValue(UriScheme_anyOf value);
-    UriScheme_anyOf::eUriScheme_anyOf getEnumValue() const;
-    void setEnumValue(UriScheme_anyOf::eUriScheme_anyOf value);
-    friend void to_json(nlohmann::json& j, const UriScheme& o);
-    friend void from_json(const nlohmann::json& j, UriScheme& o);
-    friend void to_json(nlohmann::json& j, const UriScheme_anyOf& o);
-    friend void from_json(const nlohmann::json& j, UriScheme_anyOf& o);
+    friend void to_json(nlohmann::json& j, const 5GDdnmfInfo& o);
+    friend void from_json(const nlohmann::json& j, 5GDdnmfInfo& o);
 protected:
-    UriScheme_anyOf m_value;
+    oai::_3gpp::model::PlmnId m_PlmnId;
+
+    
 };
 
 } // namespace oai::_3gpp::model
 
-#endif /* UriScheme_H_ */
+#endif /* 5GDdnmfInfo_H_ */

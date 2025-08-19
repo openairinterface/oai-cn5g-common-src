@@ -11,7 +11,7 @@
 */
 
 
-#include "NfSetCond.h"
+#include "5GDdnmfInfo.h"
 #include "Helpers.h"
 
 #include <sstream>
@@ -19,13 +19,12 @@
 namespace oai::_3gpp::model
 {
 
-NfSetCond::NfSetCond()
+5GDdnmfInfo::5GDdnmfInfo()
 {
-    m_NfSetId = "";
     
 }
 
-void NfSetCond::validate() const
+void 5GDdnmfInfo::validate() const
 {
     std::stringstream msg;
     if (!validate(msg))
@@ -34,56 +33,56 @@ void NfSetCond::validate() const
     }
 }
 
-bool NfSetCond::validate(std::stringstream& msg) const
+bool 5GDdnmfInfo::validate(std::stringstream& msg) const
 {
     return validate(msg, "");
 }
 
-bool NfSetCond::validate(std::stringstream& msg, const std::string& pathPrefix) const
+bool 5GDdnmfInfo::validate(std::stringstream& msg, const std::string& pathPrefix) const
 {
     bool success = true;
-    const std::string _pathPrefix = pathPrefix.empty() ? "NfSetCond" : pathPrefix;
+    const std::string _pathPrefix = pathPrefix.empty() ? "5GDdnmfInfo" : pathPrefix;
 
         
     return success;
 }
 
-bool NfSetCond::operator==(const NfSetCond& rhs) const
+bool 5GDdnmfInfo::operator==(const 5GDdnmfInfo& rhs) const
 {
     return
     
     
-    (getNfSetId() == rhs.getNfSetId())
+    (getPlmnId() == rhs.getPlmnId())
     
     
     ;
 }
 
-bool NfSetCond::operator!=(const NfSetCond& rhs) const
+bool 5GDdnmfInfo::operator!=(const 5GDdnmfInfo& rhs) const
 {
     return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const NfSetCond& o)
+void to_json(nlohmann::json& j, const 5GDdnmfInfo& o)
 {
     j = nlohmann::json();
-    j["nfSetId"] = o.m_NfSetId;
+    j["plmnId"] = o.m_PlmnId;
     
 }
 
-void from_json(const nlohmann::json& j, NfSetCond& o)
+void from_json(const nlohmann::json& j, 5GDdnmfInfo& o)
 {
-    j.at("nfSetId").get_to(o.m_NfSetId);
+    j.at("plmnId").get_to(o.m_PlmnId);
     
 }
 
-std::string NfSetCond::getNfSetId() const
+oai::_3gpp::model::PlmnId 5GDdnmfInfo::getPlmnId() const
 {
-    return m_NfSetId;
+    return m_PlmnId;
 }
-void NfSetCond::setNfSetId(std::string const& value)
+void 5GDdnmfInfo::setPlmnId(oai::_3gpp::model::PlmnId const& value)
 {
-    m_NfSetId = value;
+    m_PlmnId = value;
 }
 
 

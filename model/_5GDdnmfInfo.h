@@ -28,11 +28,11 @@ namespace oai::_3gpp::model
 /// <summary>
 /// Information of an 5G DDNMF NF Instance
 /// </summary>
-class  5GDdnmfInfo
+class  _5GDdnmfInfo
 {
 public:
-    5GDdnmfInfo();
-    virtual ~5GDdnmfInfo() = default;
+    _5GDdnmfInfo();
+    virtual ~_5GDdnmfInfo() = default;
 
 
     /// <summary>
@@ -52,11 +52,11 @@ public:
     /// </summary>
     bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
 
-    bool operator==(const 5GDdnmfInfo& rhs) const;
-    bool operator!=(const 5GDdnmfInfo& rhs) const;
+    bool operator==(const _5GDdnmfInfo& rhs) const;
+    bool operator!=(const _5GDdnmfInfo& rhs) const;
 
     /////////////////////////////////////////////
-    /// 5GDdnmfInfo members
+    /// _5GDdnmfInfo members
 
     /// <summary>
     /// 
@@ -64,8 +64,8 @@ public:
     oai::_3gpp::model::PlmnId getPlmnId() const;
     void setPlmnId(oai::_3gpp::model::PlmnId const& value);
 
-    friend void to_json(nlohmann::json& j, const 5GDdnmfInfo& o);
-    friend void from_json(const nlohmann::json& j, 5GDdnmfInfo& o);
+    friend void to_json(nlohmann::json& j, const _5GDdnmfInfo& o);
+    friend void from_json(const nlohmann::json& j, _5GDdnmfInfo& o);
 protected:
     oai::_3gpp::model::PlmnId m_PlmnId;
 

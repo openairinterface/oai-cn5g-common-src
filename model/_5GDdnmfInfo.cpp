@@ -11,7 +11,7 @@
 */
 
 
-#include "5GDdnmfInfo.h"
+#include "_5GDdnmfInfo.h"
 #include "Helpers.h"
 
 #include <sstream>
@@ -19,12 +19,12 @@
 namespace oai::_3gpp::model
 {
 
-5GDdnmfInfo::5GDdnmfInfo()
+_5GDdnmfInfo::_5GDdnmfInfo()
 {
     
 }
 
-void 5GDdnmfInfo::validate() const
+void _5GDdnmfInfo::validate() const
 {
     std::stringstream msg;
     if (!validate(msg))
@@ -33,21 +33,21 @@ void 5GDdnmfInfo::validate() const
     }
 }
 
-bool 5GDdnmfInfo::validate(std::stringstream& msg) const
+bool _5GDdnmfInfo::validate(std::stringstream& msg) const
 {
     return validate(msg, "");
 }
 
-bool 5GDdnmfInfo::validate(std::stringstream& msg, const std::string& pathPrefix) const
+bool _5GDdnmfInfo::validate(std::stringstream& msg, const std::string& pathPrefix) const
 {
     bool success = true;
-    const std::string _pathPrefix = pathPrefix.empty() ? "5GDdnmfInfo" : pathPrefix;
+    const std::string _pathPrefix = pathPrefix.empty() ? "_5GDdnmfInfo" : pathPrefix;
 
         
     return success;
 }
 
-bool 5GDdnmfInfo::operator==(const 5GDdnmfInfo& rhs) const
+bool _5GDdnmfInfo::operator==(const _5GDdnmfInfo& rhs) const
 {
     return
     
@@ -58,29 +58,29 @@ bool 5GDdnmfInfo::operator==(const 5GDdnmfInfo& rhs) const
     ;
 }
 
-bool 5GDdnmfInfo::operator!=(const 5GDdnmfInfo& rhs) const
+bool _5GDdnmfInfo::operator!=(const _5GDdnmfInfo& rhs) const
 {
     return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const 5GDdnmfInfo& o)
+void to_json(nlohmann::json& j, const _5GDdnmfInfo& o)
 {
     j = nlohmann::json();
     j["plmnId"] = o.m_PlmnId;
     
 }
 
-void from_json(const nlohmann::json& j, 5GDdnmfInfo& o)
+void from_json(const nlohmann::json& j, _5GDdnmfInfo& o)
 {
     j.at("plmnId").get_to(o.m_PlmnId);
     
 }
 
-oai::_3gpp::model::PlmnId 5GDdnmfInfo::getPlmnId() const
+oai::_3gpp::model::PlmnId _5GDdnmfInfo::getPlmnId() const
 {
     return m_PlmnId;
 }
-void 5GDdnmfInfo::setPlmnId(oai::_3gpp::model::PlmnId const& value)
+void _5GDdnmfInfo::setPlmnId(oai::_3gpp::model::PlmnId const& value)
 {
     m_PlmnId = value;
 }

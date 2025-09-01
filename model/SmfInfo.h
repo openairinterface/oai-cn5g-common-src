@@ -147,6 +147,8 @@ class SmfInfo {
   bool smfUPRPCapabilityIsSet() const;
   void unsetSmfUPRPCapability();
 
+  [[nodiscard]] std::string to_string(int indent_level) const;
+
   friend void to_json(nlohmann::json& j, const SmfInfo& o);
   friend void from_json(const nlohmann::json& j, SmfInfo& o);
 

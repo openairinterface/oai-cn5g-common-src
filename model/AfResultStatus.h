@@ -23,7 +23,6 @@
 #ifndef AfResultStatus_H_
 #define AfResultStatus_H_
 
-#include "AfResultStatus_anyOf.h"
 #include <nlohmann/json.hpp>
 
 namespace oai::_3gpp::model {
@@ -64,17 +63,10 @@ class AfResultStatus {
   /////////////////////////////////////////////
   /// AfResultStatus members
 
-  AfResultStatus_anyOf getValue() const;
-  void setValue(AfResultStatus_anyOf value);
-  AfResultStatus_anyOf::eAfResultStatus_anyOf getEnumValue() const;
-  void setEnumValue(AfResultStatus_anyOf::eAfResultStatus_anyOf value);
   friend void to_json(nlohmann::json& j, const AfResultStatus& o);
   friend void from_json(const nlohmann::json& j, AfResultStatus& o);
-  friend void to_json(nlohmann::json& j, const AfResultStatus_anyOf& o);
-  friend void from_json(const nlohmann::json& j, AfResultStatus_anyOf& o);
 
  protected:
-  AfResultStatus_anyOf m_value;
 };
 
 }  // namespace oai::_3gpp::model

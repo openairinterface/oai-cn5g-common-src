@@ -1,7 +1,7 @@
 /**
- * NRF NFManagement Service
- * NRF NFManagement Service.   © 2024, 3GPP Organizational Partners (ARIB, ATIS,
- * CCSA, ETSI, TSDSI, TTA, TTC).   All rights reserved.
+ * Common Data Types
+ * Common Data Types for Service Based Interfaces. © 2022, 3GPP Organizational
+ * Partners (ARIB, ATIS, CCSA, ETSI, TSDSI, TTA, TTC). All rights reserved.
  *
  * The version of the OpenAPI document: 1.2.7
  *
@@ -28,7 +28,7 @@ PatchItem::PatchItem() {
 void PatchItem::validate() const {
   std::stringstream msg;
   if (!validate(msg)) {
-    throw org::openapitools::server::helpers::ValidationException(msg.str());
+    throw oai::_3gpp::model::helpers::ValidationException(msg.str());
   }
 }
 
@@ -37,7 +37,7 @@ bool PatchItem::validate(std::stringstream& msg) const {
 }
 
 bool PatchItem::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream& /* msg */, const std::string& pathPrefix) const {
   bool success                  = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "PatchItem" : pathPrefix;
 
@@ -110,25 +110,18 @@ bool PatchItem::fromIsSet() const {
 void PatchItem::unsetFrom() {
   m_FromIsSet = false;
 }
-/*
-oai::_3gpp::model::AnyType PatchItem::getValue() const
-{
-    return m_Value;
+std::string PatchItem::getValue() const {
+  return m_Value;
 }
-void PatchItem::setValue(oai::_3gpp::model::AnyType const& value)
-{
-    m_Value = value;
-    m_ValueIsSet = true;
+void PatchItem::setValue(std::string const& value) {
+  m_Value      = value;
+  m_ValueIsSet = true;
 }
-
-bool PatchItem::valueIsSet() const
-{
-    return m_ValueIsSet;
+bool PatchItem::valueIsSet() const {
+  return m_ValueIsSet;
 }
-void PatchItem::unsetValue()
-{
-    m_ValueIsSet = false;
+void PatchItem::unsetValue() {
+  m_ValueIsSet = false;
 }
-*/
 
 }  // namespace oai::_3gpp::model

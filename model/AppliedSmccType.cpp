@@ -23,7 +23,7 @@ AppliedSmccType::AppliedSmccType() {}
 void AppliedSmccType::validate() const {
   std::stringstream msg;
   if (!validate(msg)) {
-    throw oai::_3gpp::model::helpers::ValidationException(msg.str());
+    throw org::openapitools::server::helpers::ValidationException(msg.str());
   }
 }
 
@@ -37,16 +37,13 @@ bool AppliedSmccType::validate(
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AppliedSmccType" : pathPrefix;
 
-  if (!m_value.validate(msg)) {
-    success = false;
-  }
   return success;
 }
 
 bool AppliedSmccType::operator==(const AppliedSmccType& rhs) const {
   return
 
-      getValue() == rhs.getValue();
+      ;
 }
 
 bool AppliedSmccType::operator!=(const AppliedSmccType& rhs) const {
@@ -54,30 +51,9 @@ bool AppliedSmccType::operator!=(const AppliedSmccType& rhs) const {
 }
 
 void to_json(nlohmann::json& j, const AppliedSmccType& o) {
-  j = nlohmann::json();
-  to_json(j, o.m_value);
+  j = nlohmann::json::object();
 }
 
-void from_json(const nlohmann::json& j, AppliedSmccType& o) {
-  from_json(j, o.m_value);
-}
-
-AppliedSmccType_anyOf AppliedSmccType::getValue() const {
-  return m_value;
-}
-
-void AppliedSmccType::setValue(AppliedSmccType_anyOf value) {
-  m_value = value;
-}
-
-AppliedSmccType_anyOf::eAppliedSmccType_anyOf AppliedSmccType::getEnumValue()
-    const {
-  return m_value.getValue();
-}
-
-void AppliedSmccType::setEnumValue(
-    AppliedSmccType_anyOf::eAppliedSmccType_anyOf value) {
-  m_value.setValue(value);
-}
+void from_json(const nlohmann::json& j, AppliedSmccType& o) {}
 
 }  // namespace oai::_3gpp::model

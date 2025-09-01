@@ -65,6 +65,7 @@ class PreemptionCapability {
   PreemptionCapability_anyOf::ePreemptionCapability_anyOf getEnumValue() const;
   void setEnumValue(
       PreemptionCapability_anyOf::ePreemptionCapability_anyOf value);
+  std::string getEnumString() const;
   friend void to_json(nlohmann::json& j, const PreemptionCapability& o);
   friend void from_json(const nlohmann::json& j, PreemptionCapability& o);
   friend void to_json(nlohmann::json& j, const PreemptionCapability_anyOf& o);

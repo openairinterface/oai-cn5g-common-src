@@ -29,7 +29,7 @@ AckOfNotify::AckOfNotify() {
 void AckOfNotify::validate() const {
   std::stringstream msg;
   if (!validate(msg)) {
-    throw oai::_3gpp::model::helpers::ValidationException(msg.str());
+    throw org::openapitools::server::helpers::ValidationException(msg.str());
   }
 }
 
@@ -43,6 +43,10 @@ bool AckOfNotify::validate(
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AckOfNotify" : pathPrefix;
 
+  if (!m_AckResult.validate(msg, _pathPrefix + ".ackResult")) {
+    msg << _pathPrefix << ": AckResult is invalid;";
+    success = false;
+  }
   if (supiIsSet()) {
     const std::string& value           = m_Supi;
     const std::string currentValuePath = _pathPrefix + ".supi";
@@ -77,7 +81,7 @@ bool AckOfNotify::operator!=(const AckOfNotify& rhs) const {
 }
 
 void to_json(nlohmann::json& j, const AckOfNotify& o) {
-  j              = nlohmann::json();
+  j              = nlohmann::json::object();
   j["notifId"]   = o.m_NotifId;
   j["ackResult"] = o.m_AckResult;
   if (o.supiIsSet()) j["supi"] = o.m_Supi;

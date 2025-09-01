@@ -19,8 +19,8 @@
  *      contact@openairinterface.org
  */
 
-#ifndef _PDU_SESSION_TYPE_H_
-#define _PDU_SESSION_TYPE_H_
+#ifndef _PDU_SESSION_TYPE_NGAP_H_
+#define _PDU_SESSION_TYPE_NGAP_H_
 
 extern "C" {
 #include "Ngap_PDUSessionType.h"

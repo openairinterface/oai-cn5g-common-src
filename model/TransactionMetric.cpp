@@ -23,7 +23,7 @@ TransactionMetric::TransactionMetric() {}
 void TransactionMetric::validate() const {
   std::stringstream msg;
   if (!validate(msg)) {
-    throw oai::_3gpp::model::helpers::ValidationException(msg.str());
+    throw org::openapitools::server::helpers::ValidationException(msg.str());
   }
 }
 

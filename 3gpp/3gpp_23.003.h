@@ -27,6 +27,7 @@
 #include <nlohmann/json.hpp>
 #include <string>
 #include <Snssai.h>
+#include <ExtSnssai.h>
 #include <boost/algorithm/string.hpp>
 
 #include "logger_base.hpp"
@@ -78,6 +79,14 @@ typedef struct s_nssai  // section 28.4, TS23.003
   // TODO remove, only temporary, in the future only use model SNSSAI
   oai::_3gpp::model::Snssai to_model_snssai() const {
     oai::_3gpp::model::Snssai snssai;
+    snssai.setSst(sst);
+    // TODO this puts a decimal string but SD should be a hex string
+    snssai.setSd(sd);
+    return snssai;
+  }
+
+  oai::_3gpp::model::ExtSnssai to_model_ext_snssai() const {
+    oai::_3gpp::model::ExtSnssai snssai;
     snssai.setSst(sst);
     // TODO this puts a decimal string but SD should be a hex string
     snssai.setSd(sd);

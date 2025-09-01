@@ -20,7 +20,6 @@
 #ifndef AppliedSmccType_H_
 #define AppliedSmccType_H_
 
-#include "AppliedSmccType_anyOf.h"
 #include <nlohmann/json.hpp>
 
 namespace oai::_3gpp::model {
@@ -58,17 +57,10 @@ class AppliedSmccType {
   /////////////////////////////////////////////
   /// AppliedSmccType members
 
-  AppliedSmccType_anyOf getValue() const;
-  void setValue(AppliedSmccType_anyOf value);
-  AppliedSmccType_anyOf::eAppliedSmccType_anyOf getEnumValue() const;
-  void setEnumValue(AppliedSmccType_anyOf::eAppliedSmccType_anyOf value);
   friend void to_json(nlohmann::json& j, const AppliedSmccType& o);
   friend void from_json(const nlohmann::json& j, AppliedSmccType& o);
-  friend void to_json(nlohmann::json& j, const AppliedSmccType_anyOf& o);
-  friend void from_json(const nlohmann::json& j, AppliedSmccType_anyOf& o);
 
  protected:
-  AppliedSmccType_anyOf m_value;
 };
 
 }  // namespace oai::_3gpp::model

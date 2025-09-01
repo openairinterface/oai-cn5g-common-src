@@ -1,7 +1,7 @@
 /**
- * NRF NFManagement Service
- * NRF NFManagement Service.   © 2024, 3GPP Organizational Partners (ARIB, ATIS,
- * CCSA, ETSI, TSDSI, TTA, TTC).   All rights reserved.
+ * Common Data Types
+ * Common Data Types for Service Based Interfaces. © 2022, 3GPP Organizational
+ * Partners (ARIB, ATIS, CCSA, ETSI, TSDSI, TTA, TTC). All rights reserved.
  *
  * The version of the OpenAPI document: 1.2.7
  *
@@ -13,12 +13,13 @@
 /*
  * PatchItem.h
  *
- * it contains information on data to be changed.
+ *
  */
 
 #ifndef PatchItem_H_
 #define PatchItem_H_
 
+#include <nlohmann/json.hpp>
 #include <string>
 #include "PatchOperation.h"
 #include <nlohmann/json.hpp>
@@ -26,7 +27,7 @@
 namespace oai::_3gpp::model {
 
 /// <summary>
-/// it contains information on data to be changed.
+///
 /// </summary>
 class PatchItem {
  public:
@@ -63,16 +64,12 @@ class PatchItem {
   oai::_3gpp::model::PatchOperation getOp() const;
   void setOp(oai::_3gpp::model::PatchOperation const& value);
   /// <summary>
-  /// contains a JSON pointer value (as defined in IETF RFC 6901) that
-  /// references a location of a resource on which the patch operation shall be
-  /// performed.
+  ///
   /// </summary>
   std::string getPath() const;
   void setPath(std::string const& value);
   /// <summary>
-  /// indicates the path of the source JSON element (according to JSON Pointer
-  /// syntax) being moved or copied to the location indicated by the
-  /// \&quot;path\&quot; attribute.
+  ///
   /// </summary>
   std::string getFrom() const;
   void setFrom(std::string const& value);
@@ -81,11 +78,11 @@ class PatchItem {
   /// <summary>
   ///
   /// </summary>
-  /*  oai::_3gpp::model::AnyType getValue() const;
-    void setValue(oai::_3gpp::model::AnyType const& value);
-    bool valueIsSet() const;
-    void unsetValue();
-*/
+  std::string getValue() const;
+  void setValue(std::string const& value);
+  bool valueIsSet() const;
+  void unsetValue();
+
   friend void to_json(nlohmann::json& j, const PatchItem& o);
   friend void from_json(const nlohmann::json& j, PatchItem& o);
 
@@ -96,7 +93,7 @@ class PatchItem {
 
   std::string m_From;
   bool m_FromIsSet;
-  // oai::_3gpp::model::AnyType m_Value;
+  std::string m_Value;
   bool m_ValueIsSet;
 };
 

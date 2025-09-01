@@ -28,7 +28,7 @@ AfResultInfo::AfResultInfo() {
 void AfResultInfo::validate() const {
   std::stringstream msg;
   if (!validate(msg)) {
-    throw oai::_3gpp::model::helpers::ValidationException(msg.str());
+    throw org::openapitools::server::helpers::ValidationException(msg.str());
   }
 }
 
@@ -42,6 +42,10 @@ bool AfResultInfo::validate(
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AfResultInfo" : pathPrefix;
 
+  if (!m_AfStatus.validate(msg, _pathPrefix + ".afStatus")) {
+    msg << _pathPrefix << ": AfStatus is invalid;";
+    success = false;
+  }
   if (easIpReplaceInfosIsSet()) {
     const std::vector<oai::_3gpp::model::EasIpReplacementInfo>& value =
         m_EasIpReplaceInfos;
@@ -95,7 +99,7 @@ bool AfResultInfo::operator!=(const AfResultInfo& rhs) const {
 }
 
 void to_json(nlohmann::json& j, const AfResultInfo& o) {
-  j             = nlohmann::json();
+  j             = nlohmann::json::object();
   j["afStatus"] = o.m_AfStatus;
   if (o.trafficRouteIsSet()) j["trafficRoute"] = o.m_TrafficRoute;
   if (o.upBuffIndIsSet()) j["upBuffInd"] = o.m_UpBuffInd;

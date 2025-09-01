@@ -75,6 +75,10 @@ PreemptionCapability::getEnumValue() const {
   return m_value.getValue();
 }
 
+std::string PreemptionCapability::getEnumString() const {
+  return helpers::enumToString(m_value);
+}
+
 void PreemptionCapability::setEnumValue(
     PreemptionCapability_anyOf::ePreemptionCapability_anyOf value) {
   m_value.setValue(value);

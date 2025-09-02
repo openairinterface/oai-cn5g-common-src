@@ -29,7 +29,7 @@ ChangeItem::ChangeItem() {
 void ChangeItem::validate() const {
   std::stringstream msg;
   if (!validate(msg)) {
-    throw org::openapitools::server::helpers::ValidationException(msg.str());
+    throw oai::_3gpp::model::helpers::ValidationException(msg.str());
   }
 }
 
@@ -87,6 +87,7 @@ void from_json(const nlohmann::json& j, ChangeItem& o) {
     j.at("from").get_to(o.m_From);
     o.m_FromIsSet = true;
   }
+
   if (j.find("origValue") != j.end()) {
     j.at("origValue").get_to(o.m_OrigValue);
     o.m_OrigValueIsSet = true;
@@ -123,41 +124,31 @@ void ChangeItem::unsetFrom() {
   m_FromIsSet = false;
 }
 
-/*
-oai::_3gpp::model::AnyType ChangeItem::getOrigValue() const
-{
-    return m_OrigValue;
+nlohmann::json ChangeItem::getOrigValue() const {
+  return m_OrigValue;
 }
-void ChangeItem::setOrigValue(oai::_3gpp::model::AnyType const& value)
-{
-    m_OrigValue = value;
-    m_OrigValueIsSet = true;
+void ChangeItem::setOrigValue(nlohmann::json const& value) {
+  m_OrigValue      = value;
+  m_OrigValueIsSet = true;
 }
-bool ChangeItem::origValueIsSet() const
-{
-    return m_OrigValueIsSet;
+bool ChangeItem::origValueIsSet() const {
+  return m_OrigValueIsSet;
 }
-void ChangeItem::unsetOrigValue()
-{
-    m_OrigValueIsSet = false;
+void ChangeItem::unsetOrigValue() {
+  m_OrigValueIsSet = false;
 }
-oai::_3gpp::model::AnyType ChangeItem::getNewValue() const
-{
-    return m_NewValue;
+nlohmann::json ChangeItem::getNewValue() const {
+  return m_NewValue;
 }
-void ChangeItem::setNewValue(oai::_3gpp::model::AnyType const& value)
-{
-    m_NewValue = value;
-    m_NewValueIsSet = true;
+void ChangeItem::setNewValue(nlohmann::json const& value) {
+  m_NewValue      = value;
+  m_NewValueIsSet = true;
 }
-bool ChangeItem::newValueIsSet() const
-{
-    return m_NewValueIsSet;
+bool ChangeItem::newValueIsSet() const {
+  return m_NewValueIsSet;
 }
-void ChangeItem::unsetNewValue()
-{
-    m_NewValueIsSet = false;
+void ChangeItem::unsetNewValue() {
+  m_NewValueIsSet = false;
 }
-*/
 
 }  // namespace oai::_3gpp::model

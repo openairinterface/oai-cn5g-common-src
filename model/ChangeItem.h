@@ -80,21 +80,19 @@ class ChangeItem {
   void setFrom(std::string const& value);
   bool fromIsSet() const;
   void unsetFrom();
+  /// </summary>
+  nlohmann::json getOrigValue() const;
+  void setOrigValue(nlohmann::json const& value);
+  bool origValueIsSet() const;
+  void unsetOrigValue();
   /// <summary>
   ///
   /// </summary>
-  /*    oai::_3gpp::model::AnyType getOrigValue() const;
-      void setOrigValue(oai::_3gpp::model::AnyType const& value);
-      bool origValueIsSet() const;
-      void unsetOrigValue();
-      /// <summary>
-      ///
-      /// </summary>
-      oai::_3gpp::model::AnyType getNewValue() const;
-      void setNewValue(oai::_3gpp::model::AnyType const& value);
-      bool newValueIsSet() const;
-      void unsetNewValue();
-  */
+  nlohmann::json getNewValue() const;
+  void setNewValue(nlohmann::json const& value);
+  bool newValueIsSet() const;
+  void unsetNewValue();
+
   friend void to_json(nlohmann::json& j, const ChangeItem& o);
   friend void from_json(const nlohmann::json& j, ChangeItem& o);
 
@@ -105,10 +103,10 @@ class ChangeItem {
 
   std::string m_From;
   bool m_FromIsSet;
-  //    oai::_3gpp::model::AnyType m_OrigValue;
-  //    bool m_OrigValueIsSet;
-  //    oai::_3gpp::model::AnyType m_NewValue;
-  //    bool m_NewValueIsSet;
+  nlohmann::json m_OrigValue;
+  bool m_OrigValueIsSet;
+  nlohmann::json m_NewValue;
+  bool m_NewValueIsSet;
 };
 
 }  // namespace oai::_3gpp::model

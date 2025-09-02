@@ -23,7 +23,7 @@ N1MessageClass::N1MessageClass() {}
 void N1MessageClass::validate() const {
   std::stringstream msg;
   if (!validate(msg)) {
-    throw org::openapitools::server::helpers::ValidationException(msg.str());
+    throw oai::_3gpp::model::helpers::ValidationException(msg.str());
   }
 }
 

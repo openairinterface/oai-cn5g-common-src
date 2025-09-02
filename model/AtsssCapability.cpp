@@ -30,7 +30,7 @@ AtsssCapability::AtsssCapability() {
 void AtsssCapability::validate() const {
   std::stringstream msg;
   if (!validate(msg)) {
-    throw org::openapitools::server::helpers::ValidationException(msg.str());
+    throw oai::_3gpp::model::helpers::ValidationException(msg.str());
   }
 }
 

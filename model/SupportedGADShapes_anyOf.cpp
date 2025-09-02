@@ -23,7 +23,7 @@ SupportedGADShapes_anyOf::SupportedGADShapes_anyOf() {}
 void SupportedGADShapes_anyOf::validate() const {
   std::stringstream msg;
   if (!validate(msg)) {
-    throw org::openapitools::server::helpers::ValidationException(msg.str());
+    throw oai::_3gpp::model::helpers::ValidationException(msg.str());
   }
 }
 

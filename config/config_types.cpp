@@ -384,6 +384,9 @@ void local_interface::validate() {
         "Error in reading network interface {}. Make sure it exists",
         m_if_name.get_value()));
   }
+  
+  //Hardcoded IP for testing with Keysight
+  inet_pton(AF_INET, "20.100.1.250", &_addr4);
 
   m_mtu   = _mtu;
   m_addr4 = _addr4;

@@ -182,8 +182,7 @@ bool fromStringValue(const std::string& inStr, oai::_3gpp::model::Tai& value) {
 
 bool fromStringValue(
     const std::string& inStr, oai::_3gpp::model::UeContextInfoClass& value) {
-  nlohmann::json json_value = nlohmann::json::parse(inStr);
-  from_json(json_value, value);
+  nlohmann::json::parse(inStr.c_str()).get_to(value);
   return true;
 }
 

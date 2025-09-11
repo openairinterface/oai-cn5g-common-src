@@ -374,6 +374,10 @@ file(GLOB AMF_MODEL_SRC_FILES
         ${COMMON_MODEL_DIR}/UtraLocation.cpp
         ${COMMON_MODEL_DIR}/V2xInformation.cpp
         ${COMMON_MODEL_DIR}/VgmlcAddress.cpp
+        ${COMMON_MODEL_DIR}/UeContextInfo.cpp
+        ${COMMON_MODEL_DIR}/UeContextInfoClass.cpp
+        ${COMMON_MODEL_DIR}/UeContextInfoClass_anyOf.cpp
+                
 )
 
 ## CONFIG used in NF_TARGET (main)

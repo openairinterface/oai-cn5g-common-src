@@ -209,7 +209,10 @@ class sbi_helper {
       "/:ueContextId/cancel-pos-info";
   static inline const std::string AmflocPathDetermineLocation =
       "/determine-location";
-  // TODO: AMF: Mobile Terminated Service
+  // AMF: Mobile Terminated Service
+  static inline const std::string AmfMTBase = "/namf-mt/";
+  static inline const std::string AmfMTPathDomainSelection =
+      "/ue-contexts/:ueContextId";
   // AMF Configuration Service
   static inline const std::string AmfConfBase              = "/namf-oai/";
   static inline const std::string AmfConfPathConfiguration = "/configuration/";
@@ -812,5 +815,15 @@ class sbi_helper {
    */
   static void get_fmt_format_form(
       const std::string& input_str, std::string& output_str);
+
+  /*
+   * Parse query string from a HTTP request to a map
+   * @param [const std::string& ] query_string: query string
+   * @param [std::map<std::string, std::string>& ] parameters: map of parameters
+   * @return void
+   */
+  static void parse_query(
+      const std::string& query_string,
+      std::map<std::string, std::string>& parameters);
 };
 }  // namespace oai::common::sbi

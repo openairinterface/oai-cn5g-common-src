@@ -156,6 +156,7 @@ bool fromStringValue(
   from_json(json_value, value);
   return true;
 }
+
 bool fromStringValue(
     const std::string& inStr, oai::_3gpp::model::Snssai& value) {
   nlohmann::json json_value = nlohmann::json::parse(inStr);
@@ -176,6 +177,13 @@ bool fromStringValue(
 
 bool fromStringValue(const std::string& inStr, oai::_3gpp::model::Tai& value) {
   nlohmann::json::parse(inStr.c_str()).get_to(value);
+  return true;
+}
+
+bool fromStringValue(
+    const std::string& inStr, oai::_3gpp::model::UeContextInfoClass& value) {
+  nlohmann::json json_value = nlohmann::json::parse(inStr);
+  from_json(json_value, value);
   return true;
 }
 

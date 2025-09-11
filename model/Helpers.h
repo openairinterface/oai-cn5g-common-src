@@ -31,6 +31,7 @@
 #include "PlmnId.h"
 #include "Snssai.h"
 #include "Tai.h"
+#include "UeContextInfoClass.h"
 
 namespace oai::_3gpp::model::helpers {
 
@@ -123,6 +124,8 @@ bool fromStringValue(
 bool fromStringValue(
     const std::string& inStr, oai::_3gpp::model::NFType& value);
 bool fromStringValue(const std::string& inStr, oai::_3gpp::model::Tai& value);
+bool fromStringValue(
+    const std::string& inStr, oai::_3gpp::model::UeContextInfoClass& value);
 
 template<typename T>
 bool fromStringValue(

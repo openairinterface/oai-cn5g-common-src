@@ -19,7 +19,7 @@
 #      contact@openairinterface.org
 ################################################################################
 
-SET(PCF_MODEL_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/model/pcf)
+SET(PCF_MODEL_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/model)
 
 include_directories(${PCF_MODEL_DIR})
 

@@ -377,7 +377,9 @@ file(GLOB AMF_MODEL_SRC_FILES
         ${COMMON_MODEL_DIR}/UeContextInfo.cpp
         ${COMMON_MODEL_DIR}/UeContextInfoClass.cpp
         ${COMMON_MODEL_DIR}/UeContextInfoClass_anyOf.cpp
-                
+        ${COMMON_MODEL_DIR}/ProvideLocInfo.cpp
+        ${COMMON_MODEL_DIR}/RequestLocInfo.cpp              
+                        
 )
 
 ## CONFIG used in NF_TARGET (main)

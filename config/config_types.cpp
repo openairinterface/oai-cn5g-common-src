@@ -275,7 +275,7 @@ void int_config_value::set_validation_interval(int min, int max) {
 
 local_interface::local_interface(
     const std::string& name, const std::string& host, uint16_t port,
-    const std::string& if_name) {
+    const std::string& if_name, const std::string& addr4) {
   m_host        = string_config_value("host", host);
   m_config_name = name;
   m_if_name     = string_config_value("interface_name", if_name);
@@ -284,6 +284,10 @@ local_interface::local_interface(
   m_host.set_validation_regex(HOST_VALIDATOR_REGEX);
   m_set                = true;
   m_is_local_interface = true;
+  if (!addr4.empty()) {
+    m_addr4        = safe_convert_ip(addr4);
+    m_addr4_is_set = true;
+  }
 }
 
 void local_interface::from_yaml(const YAML::Node& node) {
@@ -293,6 +297,13 @@ void local_interface::from_yaml(const YAML::Node& node) {
   if (node["interface_name"]) {
     m_if_name.from_yaml(node["interface_name"]);
   }
+  if (node["ipv4_addr"]) {
+    std::string ipv4_addr = {};
+    ipv4_addr             = node["ipv4_addr"].as<std::string>();
+    m_addr4               = safe_convert_ip(ipv4_addr);
+    m_addr4_is_set        = true;
+  }
+
   m_set                = true;
   m_is_local_interface = true;
 }
@@ -385,8 +396,10 @@ void local_interface::validate() {
         m_if_name.get_value()));
   }
 
-  m_mtu   = _mtu;
-  m_addr4 = _addr4;
+  m_mtu = _mtu;
+  if (!m_addr4_is_set) {
+    m_addr4 = _addr4;
+  }
 }
 
 const std::string& local_interface::get_host() const {

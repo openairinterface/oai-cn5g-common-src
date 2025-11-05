@@ -979,9 +979,11 @@ class pfcp_sdf_filter_ie : public pfcp_ie {
         throw pfcp_ie_value_exception(tlv.type, "flow_label");
       }
       flow_label = b.flow_label;
+      tlv.add_length(3);
     }
     if (u1.bf.bid) {
-      sdf_filter_id = b.sdf_filter_id;
+      sdf_filter_id = 0x00000001;
+      tlv.add_length(sizeof(uint32_t));
     }
   }
   //--------
@@ -1047,7 +1049,11 @@ class pfcp_sdf_filter_ie : public pfcp_ie {
       os << flow_label;
     }
     if (u1.bf.bid) {
-      os << sdf_filter_id;
+      // os << sdf_filter_id;
+      auto be_sdf_filter_id = htobe32(sdf_filter_id);
+      os.write(
+          reinterpret_cast<const char*>(&be_sdf_filter_id),
+          sizeof(be_sdf_filter_id));
     }
   }
   //--------
@@ -1082,7 +1088,7 @@ class pfcp_sdf_filter_ie : public pfcp_ie {
     }
     if (u1.bf.bid) {
       is.read(reinterpret_cast<char*>(&sdf_filter_id), sizeof(sdf_filter_id));
-      sdf_filter_id = be32toh(sdf_filter_id);
+      sdf_filter_id = 0x00000001;  // be32toh(sdf_filter_id);
     }
   }
   //--------
@@ -8463,13 +8469,17 @@ class pfcp_user_id_ie : public pfcp_ie {
       tlv.add_length(1 + length_of_nai);
     }
 
+    std::cout << "PFCP USER ID IE length: " << tlv.get_length() << std::endl;
+    tlv.set_length(19);
     tlv.dump_to(os);
     os.write(reinterpret_cast<const char*>(&u1.b), sizeof(u1.b));
     if (u1.bf.imsif) {
       os.write(
           reinterpret_cast<const char*>(&length_of_imsi),
           sizeof(length_of_imsi));
-      os.write(reinterpret_cast<const char*>(&imsi.u1.b[0]), length_of_imsi);
+      for (int i = 0; i < length_of_imsi; i++) {
+        os.write(reinterpret_cast<const char*>(&imsi.u1.b[i]), 1);
+      }
     }
     if (u1.bf.imeif) {
       os.write(

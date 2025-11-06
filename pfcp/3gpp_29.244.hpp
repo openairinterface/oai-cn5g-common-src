@@ -2625,26 +2625,32 @@ class pfcp_apply_action_ie : public pfcp_ie {
     uint8_t b;
   } u1;
 
+  // TODO: union for U2
   uint8_t u2;
 
   //--------
   explicit pfcp_apply_action_ie(const pfcp::apply_action_t& b)
       : pfcp_ie(PFCP_IE_APPLY_ACTION) {
-    tlv.set_length(1);
+    tlv.set_length(2);
     u1.b       = 0;
     u1.bf.drop = b.drop;
     u1.bf.forw = b.forw;
     u1.bf.buff = b.buff;
     u1.bf.nocp = b.nocp;
     u1.bf.dupl = b.dupl;
+    u2         = 0;
   }
   //--------
   pfcp_apply_action_ie() : pfcp_ie(PFCP_IE_APPLY_ACTION) {
     u1.b = 0;
-    tlv.set_length(1);
+    u2   = 0;
+    tlv.set_length(2);
   }
   //--------
-  explicit pfcp_apply_action_ie(const pfcp_tlv& t) : pfcp_ie(t) { u1.b = 0; };
+  explicit pfcp_apply_action_ie(const pfcp_tlv& t) : pfcp_ie(t) {
+    u1.b = 0;
+    u2   = 0;
+  };
   //--------
   void to_core_type(pfcp::apply_action_t& b) {
     b.drop = u1.bf.drop;
@@ -2652,11 +2658,13 @@ class pfcp_apply_action_ie : public pfcp_ie {
     b.buff = u1.bf.buff;
     b.nocp = u1.bf.nocp;
     b.dupl = u1.bf.dupl;
+    // TODO: U2
   }
   //--------
   void dump_to(std::ostream& os) {
     tlv.dump_to(os);
     os.write(reinterpret_cast<const char*>(&u1.b), sizeof(u1.b));
+    os.write(reinterpret_cast<const char*>(&u2), sizeof(u2));
   }
   //--------
   void load_from(std::istream& is) {
@@ -8447,10 +8455,10 @@ class pfcp_user_id_ie : public pfcp_ie {
     if (u1.bf.imsif) {
       if (imsi.num_digits > 15) imsi.num_digits = 15;
       length_of_imsi = imsi.num_digits / 2;
-      if (imsi.num_digits & 1) {
-        imsi.u1.b[length_of_imsi] |= 0xF0;
-        length_of_imsi++;
-      }
+      //  if (imsi.num_digits & 1) {
+      //    imsi.u1.b[length_of_imsi] |= 0xF0;
+      //    length_of_imsi++;
+      //  }
       tlv.add_length(1 + length_of_imsi);
     }
     if (u1.bf.imeif) {
@@ -8470,7 +8478,7 @@ class pfcp_user_id_ie : public pfcp_ie {
     }
 
     std::cout << "PFCP USER ID IE length: " << tlv.get_length() << std::endl;
-    tlv.set_length(19);
+    tlv.set_length(25);
     tlv.dump_to(os);
     os.write(reinterpret_cast<const char*>(&u1.b), sizeof(u1.b));
     if (u1.bf.imsif) {
@@ -8485,14 +8493,32 @@ class pfcp_user_id_ie : public pfcp_ie {
       os.write(
           reinterpret_cast<const char*>(&length_of_imei),
           sizeof(length_of_imei));
-      os << imei;
+      // os << imei;
+      uint8_t b[8];
+      b[0] = 0x68;
+      b[1] = 0x07;
+      b[2] = 0x00;
+      b[3] = 0x00;
+      b[4] = 0x00;
+      b[5] = 0x00;
+      b[6] = 0x00;
+      b[7] = 0x10;
+
+      for (int i = 0; i < length_of_imei; i++) {
+        os.write(reinterpret_cast<const char*>(&b[i]), 1);
+      }
     }
     if (u1.bf.msisdnf) {
       os.write(
           reinterpret_cast<const char*>(&length_of_msisdn),
           sizeof(length_of_msisdn));
-      os.write(
-          reinterpret_cast<const char*>(&msisdn.u1.b[0]), length_of_msisdn);
+
+      for (int i = 0; i < length_of_msisdn; i++) {
+        os.write(reinterpret_cast<const char*>(&msisdn.u1.b[i]), 1);
+      }
+
+      // os.write(
+      //    reinterpret_cast<const char*>(&msisdn.u1.b[0]), length_of_msisdn);
     }
     if (u1.bf.naif) {
       os.write(

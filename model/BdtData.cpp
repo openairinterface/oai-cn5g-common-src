@@ -230,10 +230,10 @@ bool BdtData::bdtRefIdIsSet() const {
 void BdtData::unsetBdtRefId() {
   m_BdtRefIdIsSet = false;
 }
-oai::_3gpp::model::NetworkAreaInfo_2 BdtData::getNwAreaInfo() const {
+oai::_3gpp::model::NetworkAreaInfo BdtData::getNwAreaInfo() const {
   return m_NwAreaInfo;
 }
-void BdtData::setNwAreaInfo(oai::_3gpp::model::NetworkAreaInfo_2 const& value) {
+void BdtData::setNwAreaInfo(oai::_3gpp::model::NetworkAreaInfo const& value) {
   m_NwAreaInfo      = value;
   m_NwAreaInfoIsSet = true;
 }

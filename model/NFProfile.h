@@ -486,11 +486,10 @@ class NFProfile {
   /// <summary>
   ///
   /// </summary>
-  /*    oai::_3gpp::model::Object getCustomInfo() const;
-      void setCustomInfo(oai::_3gpp::model::Object const& value);
-      bool customInfoIsSet() const;
-      void unsetCustomInfo();
-   */
+  nlohmann::json getCustomInfo() const;
+  void setCustomInfo(nlohmann::json const& value);
+  bool customInfoIsSet() const;
+  void unsetCustomInfo();
   /// <summary>
   /// string with format &#39;date-time&#39; as defined in OpenAPI.
   /// </summary>
@@ -863,7 +862,7 @@ class NFProfile {
   bool m_PcscfInfoListIsSet;
   std::map<std::string, oai::_3gpp::model::HssInfo> m_HssInfoList;
   bool m_HssInfoListIsSet;
-  //    oai::_3gpp::model::Object m_CustomInfo;
+  nlohmann::json m_CustomInfo;
   bool m_CustomInfoIsSet;
   std::string m_RecoveryTime;
   bool m_RecoveryTimeIsSet;

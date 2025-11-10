@@ -13,6 +13,7 @@
 
 #include "DnnSmfInfoItem.h"
 #include "Helpers.h"
+#include "config.hpp"
 
 #include <sstream>
 
@@ -111,6 +112,13 @@ bool DnnSmfInfoItem::dnaiListIsSet() const {
 }
 void DnnSmfInfoItem::unsetDnaiList() {
   m_DnaiListIsSet = false;
+}
+
+std::string DnnSmfInfoItem::to_string(int indent_level) const {
+  std::string out;
+  std::string fmt_value = oai::config::get_value_formatter(indent_level);
+  out.append(fmt::format(fmt_value, "dnn", m_Dnn));
+  return out;
 }
 
 }  // namespace oai::_3gpp::model

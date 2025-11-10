@@ -13,6 +13,7 @@
 
 #include "SnssaiUpfInfoItem.h"
 #include "Helpers.h"
+#include "config.hpp"
 
 #include <sstream>
 

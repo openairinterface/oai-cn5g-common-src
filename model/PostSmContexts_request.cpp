@@ -50,8 +50,7 @@ bool PostSmContexts_request::operator==(
   return
 
       ((!jsonDataIsSet() && !rhs.jsonDataIsSet()) ||
-       (jsonDataIsSet() && rhs.jsonDataIsSet() &&
-        getJsonData() == rhs.getJsonData())) &&
+       (jsonDataIsSet() && rhs.jsonDataIsSet())) &&
 
       ((!binaryDataN1SmMessageIsSet() && !rhs.binaryDataN1SmMessageIsSet()) ||
        (binaryDataN1SmMessageIsSet() && rhs.binaryDataN1SmMessageIsSet() &&

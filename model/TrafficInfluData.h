@@ -28,7 +28,7 @@
 #include "Snssai.h"
 #include "TemporalValidity.h"
 #include <vector>
-#include "NetworkAreaInfo_2.h"
+#include "NetworkAreaInfo.h"
 #include <nlohmann/json.hpp>
 
 namespace oai::_3gpp::model {
@@ -195,8 +195,8 @@ class TrafficInfluData {
   /// <summary>
   ///
   /// </summary>
-  oai::_3gpp::model::NetworkAreaInfo_2 getNwAreaInfo() const;
-  void setNwAreaInfo(oai::_3gpp::model::NetworkAreaInfo_2 const& value);
+  oai::_3gpp::model::NetworkAreaInfo getNwAreaInfo() const;
+  void setNwAreaInfo(oai::_3gpp::model::NetworkAreaInfo const& value);
   bool nwAreaInfoIsSet() const;
   void unsetNwAreaInfo();
   /// <summary>
@@ -331,7 +331,7 @@ class TrafficInfluData {
   bool m_ValidEndTimeIsSet;
   std::vector<oai::_3gpp::model::TemporalValidity> m_TempValidities;
   bool m_TempValiditiesIsSet;
-  oai::_3gpp::model::NetworkAreaInfo_2 m_NwAreaInfo;
+  oai::_3gpp::model::NetworkAreaInfo m_NwAreaInfo;
   bool m_NwAreaInfoIsSet;
   std::string m_UpPathChgNotifUri;
   bool m_UpPathChgNotifUriIsSet;

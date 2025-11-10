@@ -40,9 +40,7 @@ bool IpIndex::validate(
 }
 
 bool IpIndex::operator==(const IpIndex& rhs) const {
-  return
-
-      ;
+  return (*this == rhs);
 }
 
 bool IpIndex::operator!=(const IpIndex& rhs) const {

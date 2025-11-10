@@ -13,6 +13,7 @@
 
 #include "UpfInfo.h"
 #include "Helpers.h"
+#include "config.hpp"
 
 #include <sstream>
 
@@ -43,31 +44,24 @@ UpfInfo::UpfInfo() {
   m_SupportedPfcpFeatures      = "";
   m_SupportedPfcpFeaturesIsSet = false;
 }
-
 void UpfInfo::validate(bool check_snssai) const {
   std::stringstream msg;
   if (!validate(msg, check_snssai)) {
-    throw oai::_3gpp::model::ValidationException(msg.str());
+    throw oai::_3gpp::model::helpers::ValidationException(msg.str());
   }
 }
 
-void UpfInfo::validate() const {
-  std::stringstream msg;
-  if (!validate(msg)) {
-    throw oai::_3gpp::model::ValidationException(msg.str());
-  }
-}
-
-bool UpfInfo::validate(std::stringstream& msg) const {
-  return validate(msg, "");
+bool UpfInfo::validate(std::stringstream& msg, bool check_snssai) const {
+  return validate(msg, "", check_snssai);
 }
 
 bool UpfInfo::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream& msg, const std::string& pathPrefix,
+    bool check_snssai) const {
   bool success                  = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "UpfInfo" : pathPrefix;
 
-  /* SNssaiUpfInfoList */ {
+  if (check_snssai) {
     const std::vector<oai::_3gpp::model::SnssaiUpfInfoItem>& value =
         m_SNssaiUpfInfoList;
     const std::string currentValuePath = _pathPrefix + ".sNssaiUpfInfoList";
@@ -177,29 +171,6 @@ bool UpfInfo::validate(
             oldValuePath + "[" + std::to_string(i) + "]";
 
         success = value.validate(msg, currentValuePath + ".taiList") && success;
-
-        i++;
-      }
-    }
-  }
-
-  if (taiRangeListIsSet()) {
-    const std::vector<oai::_3gpp::model::TaiRange>& value = m_TaiRangeList;
-    const std::string currentValuePath = _pathPrefix + ".taiRangeList";
-
-    if (value.size() < 1) {
-      success = false;
-      msg << currentValuePath << ": must have at least 1 elements;";
-    }
-    {  // Recursive validation of array elements
-      const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::_3gpp::model::TaiRange& value : value) {
-        const std::string currentValuePath =
-            oldValuePath + "[" + std::to_string(i) + "]";
-
-        success =
-            value.validate(msg, currentValuePath + ".taiRangeList") && success;
 
         i++;
       }

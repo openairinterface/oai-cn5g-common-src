@@ -41,9 +41,7 @@ bool AppliedSmccType::validate(
 }
 
 bool AppliedSmccType::operator==(const AppliedSmccType& rhs) const {
-  return
-
-      ;
+  return (*this == rhs);
 }
 
 bool AppliedSmccType::operator!=(const AppliedSmccType& rhs) const {

@@ -41,9 +41,7 @@ bool AfResultStatus::validate(
 }
 
 bool AfResultStatus::operator==(const AfResultStatus& rhs) const {
-  return
-
-      ;
+  return (*this == rhs);
 }
 
 bool AfResultStatus::operator!=(const AfResultStatus& rhs) const {

@@ -93,6 +93,7 @@ class InterfaceUpfInfoItem {
   void setNetworkInstance(std::string const& value);
   bool networkInstanceIsSet() const;
   void unsetNetworkInstance();
+  [[nodiscard]] std::string to_string(int indent_level) const;
 
   friend void to_json(nlohmann::json& j, const InterfaceUpfInfoItem& o);
   friend void from_json(const nlohmann::json& j, InterfaceUpfInfoItem& o);

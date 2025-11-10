@@ -726,11 +726,11 @@ bool TrafficInfluData::tempValiditiesIsSet() const {
 void TrafficInfluData::unsetTempValidities() {
   m_TempValiditiesIsSet = false;
 }
-oai::_3gpp::model::NetworkAreaInfo_2 TrafficInfluData::getNwAreaInfo() const {
+oai::_3gpp::model::NetworkAreaInfo TrafficInfluData::getNwAreaInfo() const {
   return m_NwAreaInfo;
 }
 void TrafficInfluData::setNwAreaInfo(
-    oai::_3gpp::model::NetworkAreaInfo_2 const& value) {
+    oai::_3gpp::model::NetworkAreaInfo const& value) {
   m_NwAreaInfo      = value;
   m_NwAreaInfoIsSet = true;
 }

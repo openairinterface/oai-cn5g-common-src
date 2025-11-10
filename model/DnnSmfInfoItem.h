@@ -74,6 +74,7 @@ class DnnSmfInfoItem {
   void setDnaiList(std::vector<std::string> const& value);
   bool dnaiListIsSet() const;
   void unsetDnaiList();
+  [[nodiscard]] std::string to_string(int indent_level) const;
 
   friend void to_json(nlohmann::json& j, const DnnSmfInfoItem& o);
   friend void from_json(const nlohmann::json& j, DnnSmfInfoItem& o);

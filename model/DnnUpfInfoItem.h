@@ -126,6 +126,7 @@ class DnnUpfInfoItem {
   void setDnaiNwInstanceList(std::map<std::string, std::string> const& value);
   bool dnaiNwInstanceListIsSet() const;
   void unsetDnaiNwInstanceList();
+  [[nodiscard]] std::string to_string(int indent_level) const;
 
   friend void to_json(nlohmann::json& j, const DnnUpfInfoItem& o);
   friend void from_json(const nlohmann::json& j, DnnUpfInfoItem& o);

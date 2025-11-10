@@ -41,9 +41,7 @@ bool DlDataDeliveryStatus::validate(
 }
 
 bool DlDataDeliveryStatus::operator==(const DlDataDeliveryStatus& rhs) const {
-  return
-
-      ;
+  return (*this == rhs);
 }
 
 bool DlDataDeliveryStatus::operator!=(const DlDataDeliveryStatus& rhs) const {

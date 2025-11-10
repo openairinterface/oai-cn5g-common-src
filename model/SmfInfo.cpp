@@ -13,6 +13,7 @@
 
 #include "SmfInfo.h"
 #include "Helpers.h"
+#include "config.hpp"
 
 #include <sstream>
 

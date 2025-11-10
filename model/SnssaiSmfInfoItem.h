@@ -19,8 +19,8 @@
 #ifndef SnssaiSmfInfoItem_H_
 #define SnssaiSmfInfoItem_H_
 
+#include "ExtSnssai.h"
 #include "DnnSmfInfoItem.h"
-#include "Snssai.h"
 #include <vector>
 #include <nlohmann/json.hpp>
 
@@ -61,8 +61,8 @@ class SnssaiSmfInfoItem {
   /// <summary>
   ///
   /// </summary>
-  oai::_3gpp::model::Snssai getSNssai() const;
-  void setSNssai(oai::_3gpp::model::Snssai const& value);
+  oai::_3gpp::model::ExtSnssai getSNssai() const;
+  void setSNssai(oai::_3gpp::model::ExtSnssai const& value);
   /// <summary>
   ///
   /// </summary>
@@ -76,7 +76,7 @@ class SnssaiSmfInfoItem {
   [[nodiscard]] std::string to_string(int indent_level) const;
 
  protected:
-  oai::_3gpp::model::Snssai m_SNssai;
+  oai::_3gpp::model::ExtSnssai m_SNssai;
 
   std::vector<oai::_3gpp::model::DnnSmfInfoItem> m_DnnSmfInfoList;
 };

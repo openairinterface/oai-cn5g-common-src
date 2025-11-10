@@ -56,7 +56,7 @@ bool AccessType::operator!=(const AccessType& rhs) const {
 }
 
 void to_json(nlohmann::json& j, const AccessType& o) {
-  j = nlohmann::json::object();
+  j = nlohmann::json();
 
   switch (o.getValue()) {
     case AccessType::eAccessType::INVALID_VALUE_OPENAPI_GENERATED:

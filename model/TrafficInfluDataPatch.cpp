@@ -496,12 +496,12 @@ bool TrafficInfluDataPatch::tempValiditiesIsSet() const {
 void TrafficInfluDataPatch::unsetTempValidities() {
   m_TempValiditiesIsSet = false;
 }
-oai::_3gpp::model::NetworkAreaInfo_2 TrafficInfluDataPatch::getNwAreaInfo()
+oai::_3gpp::model::NetworkAreaInfo TrafficInfluDataPatch::getNwAreaInfo()
     const {
   return m_NwAreaInfo;
 }
 void TrafficInfluDataPatch::setNwAreaInfo(
-    oai::_3gpp::model::NetworkAreaInfo_2 const& value) {
+    oai::_3gpp::model::NetworkAreaInfo const& value) {
   m_NwAreaInfo      = value;
   m_NwAreaInfoIsSet = true;
 }

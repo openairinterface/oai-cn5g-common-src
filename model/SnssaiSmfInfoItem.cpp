@@ -95,10 +95,10 @@ void from_json(const nlohmann::json& j, SnssaiSmfInfoItem& o) {
   j.at("dnnSmfInfoList").get_to(o.m_DnnSmfInfoList);
 }
 
-oai::_3gpp::model::Snssai SnssaiSmfInfoItem::getSNssai() const {
+oai::_3gpp::model::ExtSnssai SnssaiSmfInfoItem::getSNssai() const {
   return m_SNssai;
 }
-void SnssaiSmfInfoItem::setSNssai(oai::_3gpp::model::Snssai const& value) {
+void SnssaiSmfInfoItem::setSNssai(oai::_3gpp::model::ExtSnssai const& value) {
   m_SNssai = value;
 }
 std::vector<oai::_3gpp::model::DnnSmfInfoItem>

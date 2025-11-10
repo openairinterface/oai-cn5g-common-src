@@ -48,8 +48,7 @@ bool ReleaseSmContext_request::operator==(
   return
 
       ((!jsonDataIsSet() && !rhs.jsonDataIsSet()) ||
-       (jsonDataIsSet() && rhs.jsonDataIsSet() &&
-        getJsonData() == rhs.getJsonData())) &&
+       (jsonDataIsSet() && rhs.jsonDataIsSet())) &&
 
       ((!binaryDataN2SmInformationIsSet() &&
         !rhs.binaryDataN2SmInformationIsSet()) ||

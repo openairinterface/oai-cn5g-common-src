@@ -21,7 +21,7 @@
 
 #include "RmInfo.h"
 #include "UeReachability.h"
-#include "PlmnIdh"
+#include "PlmnId.h"
 #include "RatType.h"
 #include "SmsSupport.h"
 #include <string>

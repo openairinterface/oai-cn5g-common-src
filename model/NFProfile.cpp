@@ -2306,25 +2306,19 @@ bool NFProfile::hssInfoListIsSet() const {
 void NFProfile::unsetHssInfoList() {
   m_HssInfoListIsSet = false;
 }
-/*
-oai::_3gpp::model::Object NFProfile::getCustomInfo() const
-{
-    return m_CustomInfo;
+nlohmann::json NFProfile::getCustomInfo() const {
+  return m_CustomInfo;
 }
-void NFProfile::setCustomInfo(oai::_3gpp::model::Object const& value)
-{
-    m_CustomInfo = value;
-    m_CustomInfoIsSet = true;
+void NFProfile::setCustomInfo(nlohmann::json const& value) {
+  m_CustomInfo      = value;
+  m_CustomInfoIsSet = true;
 }
-bool NFProfile::customInfoIsSet() const
-{
-    return m_CustomInfoIsSet;
+bool NFProfile::customInfoIsSet() const {
+  return m_CustomInfoIsSet;
 }
-void NFProfile::unsetCustomInfo()
-{
-    m_CustomInfoIsSet = false;
+void NFProfile::unsetCustomInfo() {
+  m_CustomInfoIsSet = false;
 }
-*/
 std::string NFProfile::getRecoveryTime() const {
   return m_RecoveryTime;
 }

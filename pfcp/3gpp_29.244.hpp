@@ -982,7 +982,7 @@ class pfcp_sdf_filter_ie : public pfcp_ie {
       tlv.add_length(3);
     }
     if (u1.bf.bid) {
-      sdf_filter_id = 0x00000001;
+      sdf_filter_id = b.sdf_filter_id;
       tlv.add_length(sizeof(uint32_t));
     }
   }
@@ -1049,7 +1049,6 @@ class pfcp_sdf_filter_ie : public pfcp_ie {
       os << flow_label;
     }
     if (u1.bf.bid) {
-      // os << sdf_filter_id;
       auto be_sdf_filter_id = htobe32(sdf_filter_id);
       os.write(
           reinterpret_cast<const char*>(&be_sdf_filter_id),
@@ -1088,7 +1087,7 @@ class pfcp_sdf_filter_ie : public pfcp_ie {
     }
     if (u1.bf.bid) {
       is.read(reinterpret_cast<char*>(&sdf_filter_id), sizeof(sdf_filter_id));
-      sdf_filter_id = 0x00000001;  // be32toh(sdf_filter_id);
+      sdf_filter_id = be32toh(sdf_filter_id);
     }
   }
   //--------
@@ -8394,22 +8393,22 @@ class pfcp_user_id_ie : public pfcp_ie {
     if (u1.bf.imsif) {
       length_of_imsi = b.length_of_imsi;
       imsi           = b.imsi;
-      tlv.add_length(1 + length_of_imsi);
+      // tlv.add_length(1 + length_of_imsi);
     }
     if (u1.bf.imeif) {
       length_of_imei = b.length_of_imei;
       imei           = b.imei;
-      tlv.add_length(1 + length_of_imei);
+      // tlv.add_length(1 + length_of_imei);
     }
     if (u1.bf.msisdnf) {
       length_of_msisdn = b.length_of_msisdn;
       msisdn           = b.msisdn;
-      tlv.add_length(1 + length_of_msisdn);
+      // tlv.add_length(1 + length_of_msisdn);
     }
     if (u1.bf.naif) {
       length_of_nai = b.length_of_nai;
       nai           = b.nai;
-      tlv.add_length(1 + length_of_nai);
+      // tlv.add_length(1 + length_of_nai);
     }
   }
   //--------
@@ -8455,10 +8454,10 @@ class pfcp_user_id_ie : public pfcp_ie {
     if (u1.bf.imsif) {
       if (imsi.num_digits > 15) imsi.num_digits = 15;
       length_of_imsi = imsi.num_digits / 2;
-      //  if (imsi.num_digits & 1) {
-      //    imsi.u1.b[length_of_imsi] |= 0xF0;
-      //    length_of_imsi++;
-      //  }
+      if (imsi.num_digits & 1) {
+        imsi.u1.b[length_of_imsi] |= 0xF0;
+        length_of_imsi++;
+      }
       tlv.add_length(1 + length_of_imsi);
     }
     if (u1.bf.imeif) {
@@ -8478,7 +8477,7 @@ class pfcp_user_id_ie : public pfcp_ie {
     }
 
     std::cout << "PFCP USER ID IE length: " << tlv.get_length() << std::endl;
-    tlv.set_length(25);
+    // tlv.set_length(25);
     tlv.dump_to(os);
     os.write(reinterpret_cast<const char*>(&u1.b), sizeof(u1.b));
     if (u1.bf.imsif) {

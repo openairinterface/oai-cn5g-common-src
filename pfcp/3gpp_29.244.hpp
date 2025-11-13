@@ -8393,22 +8393,22 @@ class pfcp_user_id_ie : public pfcp_ie {
     if (u1.bf.imsif) {
       length_of_imsi = b.length_of_imsi;
       imsi           = b.imsi;
-      // tlv.add_length(1 + length_of_imsi);
+      tlv.add_length(1 + length_of_imsi);
     }
     if (u1.bf.imeif) {
       length_of_imei = b.length_of_imei;
       imei           = b.imei;
-      // tlv.add_length(1 + length_of_imei);
+      tlv.add_length(1 + length_of_imei);
     }
     if (u1.bf.msisdnf) {
       length_of_msisdn = b.length_of_msisdn;
       msisdn           = b.msisdn;
-      // tlv.add_length(1 + length_of_msisdn);
+      tlv.add_length(1 + length_of_msisdn);
     }
     if (u1.bf.naif) {
       length_of_nai = b.length_of_nai;
       nai           = b.nai;
-      // tlv.add_length(1 + length_of_nai);
+      tlv.add_length(1 + length_of_nai);
     }
   }
   //--------
@@ -8466,10 +8466,10 @@ class pfcp_user_id_ie : public pfcp_ie {
     if (u1.bf.msisdnf) {
       if (msisdn.num_digits > 15) msisdn.num_digits = 15;
       length_of_msisdn = msisdn.num_digits / 2;
-      if (msisdn.num_digits & 1) {
-        msisdn.u1.b[length_of_msisdn] |= 0xF0;
-        length_of_msisdn++;
-      }
+      // if (msisdn.num_digits & 1) {
+      //   msisdn.u1.b[length_of_msisdn] |= 0xF0;
+      //   length_of_msisdn++;
+      // }
       tlv.add_length(1 + length_of_msisdn);
     }
     if (u1.bf.naif) {
@@ -8477,7 +8477,7 @@ class pfcp_user_id_ie : public pfcp_ie {
     }
 
     std::cout << "PFCP USER ID IE length: " << tlv.get_length() << std::endl;
-    // tlv.set_length(25);
+    tlv.set_length(25);
     tlv.dump_to(os);
     os.write(reinterpret_cast<const char*>(&u1.b), sizeof(u1.b));
     if (u1.bf.imsif) {

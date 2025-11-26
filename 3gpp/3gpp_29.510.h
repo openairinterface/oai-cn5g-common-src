@@ -499,6 +499,7 @@ typedef struct nf_service_s {
   std::string scheme;
   std::string nf_service_status;
   std::vector<ip_endpoint_t> ip_endpoints;
+  std::string api_prefix;
 
   std::string to_string() const {
     std::string s = {};
@@ -517,6 +518,8 @@ typedef struct nf_service_s {
     for (auto endpoint : ip_endpoints) {
       s.append(endpoint.to_string());
     }
+    s.append(", apiPrefix: ");
+    s.append(api_prefix);
     return s;
   }
 } nf_service_t;

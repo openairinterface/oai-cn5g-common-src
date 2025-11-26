@@ -532,10 +532,10 @@ const std::string& sbi_interface::get_api_version() const {
 
 std::string sbi_interface::get_url(bool enable_tls) const {
   std::string url = "";
-  if (enable_tls)
-    url.append("https://").append(m_url);
-  else
-    url.append("http://").append(m_url);
+  // if (enable_tls)
+  // url.append("https://").append(m_url);
+  // else
+  url.append("http://").append(m_url);
   return url;
 }
 

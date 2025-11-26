@@ -353,7 +353,7 @@ request http_client::prepare_multipart_request(
   req.body = body;
   req.headers.insert(
       {"content-type",
-       "multipart/related;boundary=" + std::string(MIME_BOUNDARY)});
+       "multipart/related; boundary=" + std::string(MIME_BOUNDARY)});
   return req;
 }
 

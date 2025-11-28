@@ -894,7 +894,7 @@ enum pdn_type_e {
 };
 
 static const std::vector<std::string> pdn_type_e2str = {
-    "Error", "IPV4", "IPV6", "IPV4V6", "NON_IP"};
+    "Error", "IPV4", "IPV6", "IPV4V6", "NON_IP", "ETHERNET"};
 
 typedef struct pdn_type_s {
   uint8_t pdn_type;

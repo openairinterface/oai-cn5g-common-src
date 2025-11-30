@@ -202,11 +202,12 @@ class local_interface : public config_type {
   string_config_value m_if_name{};
   unsigned int m_mtu{};
   bool m_is_local_interface = false;
+  bool m_addr4_is_set       = false;
 
  public:
   explicit local_interface(
       const std::string& name, const std::string& host, uint16_t port,
-      const std::string& if_name);
+      const std::string& if_name, const std::string& addr4 = "");
 
   local_interface() = default;
 

@@ -36,7 +36,8 @@ using namespace oai::common::sbi;
 
 namespace oai::http {
 
-const std::string MIME_BOUNDARY = "----Boundary";
+const std::string MIME_BOUNDARY =
+    "4171741c97b6b99bb8b0654222e19a16f700440c7cc8ffb20d3ec83ee599";
 
 class http_client : public std::enable_shared_from_this<http_client> {
  private:

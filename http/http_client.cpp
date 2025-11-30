@@ -299,19 +299,28 @@ void http_client::prepare_session(
 
   // Enable SSL/TLS
   if (m_enable_tls) {
-    cpr::SslOptions sslOpts =
-        cpr::Ssl(cpr::ssl::ALPN{false}, cpr::ssl::NPN{false});
-    sslOpts.SetOption(cpr::ssl::TLSv1_0{});
-    sslOpts.SetOption(cpr::ssl::VerifyHost{false});
-    sslOpts.SetOption(cpr::ssl::VerifyPeer{false});
-    sslOpts.SetOption(cpr::ssl::VerifyStatus{false});
+    //    cpr::SslOptions sslOpts =
+    //       cpr::Ssl(cpr::ssl::ALPN{false}, cpr::ssl::NPN{false});
+
+    cpr::SslOptions sslOpts = cpr::Ssl(cpr::ssl::PinnedPublicKey{
+        "/home/maserati/cn5g/oai-interoperability-opensource-cn/free5gc/cert/"
+        "ausf.pem"});
+
+    // cpr::SslOptions sslOpts =
+    // cpr::Ssl(cpr::ssl::CertFile{"/home/maserati/cn5g/oai-interoperability-opensource-cn/free5gc/cert/amf.pem"},
+    // cpr::ssl::KeyFile{"/home/maserati/cn5g/oai-interoperability-opensource-cn/free5gc/cert/amf.key"});
+
+    sslOpts.SetOption(cpr::ssl::TLSv1{});
+    // sslOpts.SetOption(cpr::ssl::VerifyHost{false});
+    // sslOpts.SetOption(cpr::ssl::VerifyPeer{false});
+    // sslOpts.SetOption(cpr::ssl::VerifyStatus{false});
 
     // TODO: Use public key
-    // session->SetSslOptions(sslOpts);
+    session->SetSslOptions(sslOpts);
 
     session->SetVerbose(cpr::Verbose{true});
-    session->SetVerifySsl(false);  // TODO: Don't verify SSL for the moment, but
-                                   // should enable this in the future
+    session->SetVerifySsl(true);  // TODO: Don't verify SSL for the moment, but
+                                  // should enable this in the future
   }
 }
 
@@ -353,7 +362,7 @@ request http_client::prepare_multipart_request(
   req.body = body;
   req.headers.insert(
       {"content-type",
-       "multipart/related;boundary=" + std::string(MIME_BOUNDARY)});
+       "multipart/related; boundary=" + std::string(MIME_BOUNDARY)});
   return req;
 }
 

@@ -193,14 +193,14 @@ void mime_parser::create_multipart_related_content(
   body.append("Content-Type: ")
       .append(MIME_CONTENT_TYPE_NAS)
       .append(CRLF)
-      .append("Content-Id: ")
+      .append("Content-ID: ")
       .append(N1_SM_CONTENT_ID + CRLF);
   body.append(CRLF);
   body.append(std::string((char*) n1_msg_hex, n1_message.length() / 2) + CRLF);
   body.append("--" + boundary + CRLF);
   body.append("Content-Type: ")
       .append(MIME_CONTENT_TYPE_NGAP + CRLF)
-      .append("Content-Id: ")
+      .append("Content-ID: ")
       .append(N2_SM_CONTENT_ID + CRLF);
   body.append(CRLF);
   body.append(std::string((char*) n2_msg_hex, n2_message.length() / 2) + CRLF);
@@ -230,12 +230,12 @@ void mime_parser::create_multipart_related_content(
   if (content_type == multipart_related_content_part_e::NAS) {  // NAS
     body.append("Content-Type: ")
         .append(MIME_CONTENT_TYPE_NAS + CRLF)
-        .append("Content-Id: ")
+        .append("Content-ID: ")
         .append(N1_SM_CONTENT_ID + CRLF);
   } else if (content_type == multipart_related_content_part_e::NGAP) {  // NGAP
     body.append("Content-Type: ")
         .append(MIME_CONTENT_TYPE_NGAP + CRLF)
-        .append("Content-Id: ")
+        .append("Content-ID: ")
         .append(N2_SM_CONTENT_ID + CRLF);
   }
   body.append(CRLF);

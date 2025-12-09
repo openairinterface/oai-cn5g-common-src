@@ -355,8 +355,8 @@ bool PduSessionResourceSetupResponseMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
 
       default: {
         // TODO: support NR location
-        oai::logger::logger_common::ngap().error(
-            "Decoded NGAP message PDU error!");
+        // oai::logger::logger_common::ngap().error(
+        //    "Decoded NGAP message PDU error!");
         return true;
       }
     }

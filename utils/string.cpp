@@ -106,7 +106,7 @@ bool oai::utils::string_to_dotted(const std::string& str, std::string& dotted) {
 bool oai::utils::dotted_to_string(const std::string& dot, std::string& no_dot) {
   // uint8_t should be enough, but uint16 if length > 255.
   uint16_t offset = 0;
-  bool result     = true;
+  bool result     = false;
   no_dot          = {};
 
   while (offset < dot.length()) {
@@ -118,12 +118,18 @@ bool oai::utils::dotted_to_string(const std::string& dot, std::string& no_dot) {
         no_dot.append(&dot[offset + 1], dot[offset]);
       }
       offset = offset + 1 + dot[offset];
+      result = true;
     } else {
       // should not happen, consume bytes
       no_dot.push_back(dot[offset++]);
       result = false;
     }
   }
+
+  if (dot.length() != no_dot.length() + 1) {
+    result = false;
+  }
+
   return result;
 };
 

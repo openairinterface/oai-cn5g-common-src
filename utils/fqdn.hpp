@@ -30,6 +30,7 @@
 #define FILE_FQDN_HPP_SEEN
 
 #include <string>
+#include <cstdint>
 #include "3gpp_29.244.h"
 
 namespace oai::utils {

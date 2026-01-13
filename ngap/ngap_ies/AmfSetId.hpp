@@ -22,6 +22,8 @@
 #define _AMF_SET_ID_H_
 
 #include <string>
+#include <cstdint>
+
 constexpr uint16_t kAmfSetIdMaxValue = 1023;
 
 extern "C" {

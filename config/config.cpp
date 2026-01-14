@@ -308,8 +308,8 @@ void config::display() const {
   std::stringstream ss(to_string());
   std::string line;
 
-  logger::logger_registry::get_logger(LOGGER_NAME)
-      .info("==== OPENAIRINTERFACE %s v%s ====", m_nf_name, PACKAGE_VERSION);
+  // logger::logger_registry::get_logger(LOGGER_NAME)
+  //     .info("==== OPENAIRINTERFACE %s v%s ====", m_nf_name, PACKAGE_VERSION);
 
   while (std::getline(ss, line)) {
     logger::logger_registry::get_logger(LOGGER_NAME).info(line);

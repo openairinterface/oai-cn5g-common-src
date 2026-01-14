@@ -30,15 +30,16 @@ namespace json = nlohmann;
 using namespace oai::http;
 
 //---------------------------------------------------------------------------------------------
-http_client::http_client(oai::logger::printf_logger logger, int timeout_ms,
-                         const std::string &interface, uint8_t http_version,
-                         bool enable_tls, request_type_e request_type)
+http_client::http_client(
+    oai::logger::printf_logger logger, int timeout_ms,
+    const std::string& interface, uint8_t http_version, bool enable_tls,
+    request_type_e request_type)
     : m_sbi_logger(std::move(logger)) {
-  m_http_version = http_version;
-  m_timeout_ms = timeout_ms;
-  m_interface = interface;
-  m_enable_tls = enable_tls;
-  m_request_type = request_type;
+  m_http_version    = http_version;
+  m_timeout_ms      = timeout_ms;
+  m_interface       = interface;
+  m_enable_tls      = enable_tls;
+  m_request_type    = request_type;
   m_public_key_path = std::nullopt;
 
   m_sbi_logger.info(
@@ -53,11 +54,10 @@ http_client::~http_client() {
 }
 
 //---------------------------------------------------------------------------------------------
-std::shared_ptr<http_client>
-http_client::create_instance(const oai::logger::printf_logger &logger,
-                             int timeout_ms, const std::string &interface,
-                             uint8_t http_version, bool enable_tls,
-                             request_type_e request_type) {
+std::shared_ptr<http_client> http_client::create_instance(
+    const oai::logger::printf_logger& logger, int timeout_ms,
+    const std::string& interface, uint8_t http_version, bool enable_tls,
+    request_type_e request_type) {
   // If instance does not exits, create a new one
   if (!instance) {
     instance = std::make_shared<http_client>(
@@ -69,30 +69,30 @@ http_client::create_instance(const oai::logger::printf_logger &logger,
 }
 
 //---------------------------------------------------------------------------------------------
-response http_client::send_http_request(const method_e &method,
-                                        const request &request) {
+response http_client::send_http_request(
+    const method_e& method, const request& request) {
   switch (m_request_type) {
-  case request_type_e::ASYNC: {
-    auto resp = send_async_http_request(method, request);
-    return resp;
-  } break;
-  case request_type_e::MULTI_ASYNC: {
-    // TODO:Use simple HTTP request for the moment
-  } break;
+    case request_type_e::ASYNC: {
+      auto resp = send_async_http_request(method, request);
+      return resp;
+    } break;
+    case request_type_e::MULTI_ASYNC: {
+      // TODO:Use simple HTTP request for the moment
+    } break;
 
-  case request_type_e::MULTI_PERFORM: {
-    // TODO: Should declare a MultiPerform as a class member so that we can
-    // actually support multiple sessions per MultiPerform (causing issue when
-    // using multi-threading, similar issue with Curl Multi Interface)
-    std::shared_ptr<cpr::MultiPerform> multi_perform =
-        std::make_shared<cpr::MultiPerform>();
-    add_session_to_multi_peform(method, request, multi_perform);
-    auto resp = send_multi_peform_http_request(multi_perform);
-    return resp[0];
-  } break;
-  case request_type_e::SIMPLE:
-  default: { // Use simple HTTP request
-  }
+    case request_type_e::MULTI_PERFORM: {
+      // TODO: Should declare a MultiPerform as a class member so that we can
+      // actually support multiple sessions per MultiPerform (causing issue when
+      // using multi-threading, similar issue with Curl Multi Interface)
+      std::shared_ptr<cpr::MultiPerform> multi_perform =
+          std::make_shared<cpr::MultiPerform>();
+      add_session_to_multi_peform(method, request, multi_perform);
+      auto resp = send_multi_peform_http_request(multi_perform);
+      return resp[0];
+    } break;
+    case request_type_e::SIMPLE:
+    default: {  // Use simple HTTP request
+    }
   };
 
   // By default using a simple HTTP request
@@ -102,7 +102,7 @@ response http_client::send_http_request(const method_e &method,
 
 //---------------------------------------------------------------------------------------------
 std::vector<response> http_client::send_multi_peform_http_request(
-    const std::shared_ptr<cpr::MultiPerform> &multi_perform) {
+    const std::shared_ptr<cpr::MultiPerform>& multi_perform) {
   auto future = std::async(
       [this, multi_perform] { return execute_http_request(multi_perform); });
   future.wait();
@@ -111,33 +111,33 @@ std::vector<response> http_client::send_multi_peform_http_request(
 }
 
 //---------------------------------------------------------------------------------------------
-response http_client::send_simple_http_request(const method_e &method,
-                                               const request &request) {
+response http_client::send_simple_http_request(
+    const method_e& method, const request& request) {
   m_sbi_logger.debug("Send a simple HTTP request");
 
   std::shared_ptr<cpr::Session> session = std::make_shared<cpr::Session>();
-  response resp = {};
-  cpr::Response cpr_resp = {};
+  response resp                         = {};
+  cpr::Response cpr_resp                = {};
 
   prepare_session(method, request, session);
 
   // set HTTP method
   switch (method) {
-  case method_e::POST: {
-    cpr_resp = session->Post();
-  } break;
-  case method_e::GET: {
-    cpr_resp = session->Get();
-  } break;
-  case method_e::PUT: {
-    cpr_resp = session->Put();
-  } break;
-  case method_e::PATCH: {
-    cpr_resp = session->Patch();
-  } break;
-  case method_e::DELETE: {
-    cpr_resp = session->Delete();
-  }
+    case method_e::POST: {
+      cpr_resp = session->Post();
+    } break;
+    case method_e::GET: {
+      cpr_resp = session->Get();
+    } break;
+    case method_e::PUT: {
+      cpr_resp = session->Put();
+    } break;
+    case method_e::PATCH: {
+      cpr_resp = session->Patch();
+    } break;
+    case method_e::DELETE: {
+      cpr_resp = session->Delete();
+    }
   }
 
   get_response_info(cpr_resp, resp);
@@ -148,37 +148,37 @@ response http_client::send_simple_http_request(const method_e &method,
 }
 
 //---------------------------------------------------------------------------------------------
-response http_client::send_async_http_request(const method_e &method,
-                                              const request &request) {
+response http_client::send_async_http_request(
+    const method_e& method, const request& request) {
   m_sbi_logger.info("Send an async HTTP request");
 
   std::shared_ptr<cpr::Session> session = std::make_shared<cpr::Session>();
-  response resp = {};
-  cpr::Response cpr_resp = {};
+  response resp                         = {};
+  cpr::Response cpr_resp                = {};
 
   prepare_session(method, request, session);
 
   switch (method) {
-  case method_e::POST: {
-    cpr::AsyncResponse async_response = session->PostAsync();
-    cpr_resp = async_response.get();
-  } break;
-  case method_e::GET: {
-    cpr::AsyncResponse async_response = session->GetAsync();
-    cpr_resp = async_response.get();
-  } break;
-  case method_e::PUT: {
-    cpr::AsyncResponse async_response = session->PutAsync();
-    cpr_resp = async_response.get();
-  } break;
-  case method_e::PATCH: {
-    cpr::AsyncResponse async_response = session->PatchAsync();
-    cpr_resp = async_response.get();
-  } break;
-  case method_e::DELETE: {
-    cpr::AsyncResponse async_response = session->DeleteAsync();
-    cpr_resp = async_response.get();
-  }
+    case method_e::POST: {
+      cpr::AsyncResponse async_response = session->PostAsync();
+      cpr_resp                          = async_response.get();
+    } break;
+    case method_e::GET: {
+      cpr::AsyncResponse async_response = session->GetAsync();
+      cpr_resp                          = async_response.get();
+    } break;
+    case method_e::PUT: {
+      cpr::AsyncResponse async_response = session->PutAsync();
+      cpr_resp                          = async_response.get();
+    } break;
+    case method_e::PATCH: {
+      cpr::AsyncResponse async_response = session->PatchAsync();
+      cpr_resp                          = async_response.get();
+    } break;
+    case method_e::DELETE: {
+      cpr::AsyncResponse async_response = session->DeleteAsync();
+      cpr_resp                          = async_response.get();
+    }
   }
 
   get_response_info(cpr_resp, resp);
@@ -189,55 +189,55 @@ response http_client::send_async_http_request(const method_e &method,
 
 //---------------------------------------------------------------------------------------------
 std::shared_ptr<cpr::Session> http_client::add_session_to_multi_peform(
-    const method_e &method, const request &request,
-    const std::shared_ptr<cpr::MultiPerform> &multi_perform) {
+    const method_e& method, const request& request,
+    const std::shared_ptr<cpr::MultiPerform>& multi_perform) {
   std::shared_ptr<cpr::Session> session = std::make_shared<cpr::Session>();
 
   prepare_session(method, request, session);
 
   // set HTTP method
   switch (method) {
-  case method_e::POST: {
-    session->SetBody(cpr::Body{request.body});
-    multi_perform->AddSession(session,
-                              cpr::MultiPerform::HttpMethod::POST_REQUEST);
-  } break;
-  case method_e::GET: {
-    multi_perform->AddSession(session,
-                              cpr::MultiPerform::HttpMethod::GET_REQUEST);
-  } break;
-  case method_e::PUT: {
-    session->SetBody(cpr::Body{request.body});
-    multi_perform->AddSession(session,
-                              cpr::MultiPerform::HttpMethod::PUT_REQUEST);
-  } break;
-  case method_e::PATCH: {
-    session->SetBody(cpr::Body{request.body});
+    case method_e::POST: {
+      session->SetBody(cpr::Body{request.body});
+      multi_perform->AddSession(
+          session, cpr::MultiPerform::HttpMethod::POST_REQUEST);
+    } break;
+    case method_e::GET: {
+      multi_perform->AddSession(
+          session, cpr::MultiPerform::HttpMethod::GET_REQUEST);
+    } break;
+    case method_e::PUT: {
+      session->SetBody(cpr::Body{request.body});
+      multi_perform->AddSession(
+          session, cpr::MultiPerform::HttpMethod::PUT_REQUEST);
+    } break;
+    case method_e::PATCH: {
+      session->SetBody(cpr::Body{request.body});
 
-    multi_perform->AddSession(session,
-                              cpr::MultiPerform::HttpMethod::PATCH_REQUEST);
-  } break;
-  case method_e::DELETE: {
-    multi_perform->AddSession(session,
-                              cpr::MultiPerform::HttpMethod::DELETE_REQUEST);
-  }
+      multi_perform->AddSession(
+          session, cpr::MultiPerform::HttpMethod::PATCH_REQUEST);
+    } break;
+    case method_e::DELETE: {
+      multi_perform->AddSession(
+          session, cpr::MultiPerform::HttpMethod::DELETE_REQUEST);
+    }
   }
   return session;
 }
 
 //---------------------------------------------------------------------------------------------
 void http_client::remove_session_from_multi_peform(
-    const std::shared_ptr<cpr::Session> &session,
-    const std::shared_ptr<cpr::MultiPerform> &multi_perform) {
+    const std::shared_ptr<cpr::Session>& session,
+    const std::shared_ptr<cpr::MultiPerform>& multi_perform) {
   multi_perform->RemoveSession(session);
 }
 
 //---------------------------------------------------------------------------------------------
 std::vector<response> http_client::execute_http_request(
-    const std::shared_ptr<cpr::MultiPerform> &multi_perform) {
+    const std::shared_ptr<cpr::MultiPerform>& multi_perform) {
   std::vector<cpr::Response> responses = multi_perform->Perform();
   std::vector<response> http_responses;
-  for (const auto &r : responses) {
+  for (const auto& r : responses) {
     response resp;
     get_response_info(r, resp);
     http_responses.push_back(resp);
@@ -246,19 +246,19 @@ std::vector<response> http_client::execute_http_request(
 }
 
 //---------------------------------------------------------------------------------------------
-void http_client::prepare_session(const method_e &method,
-                                  const request &request,
-                                  std::shared_ptr<cpr::Session> &session) {
+void http_client::prepare_session(
+    const method_e& method, const request& request,
+    std::shared_ptr<cpr::Session>& session) {
   // Set HTTP version
   switch (m_http_version) {
-  case 1:
-    session->SetHttpVersion(
-        cpr::HttpVersion(cpr::HttpVersionCode::VERSION_1_1));
-    break;
-  case 2:
-    session->SetHttpVersion(
-        cpr::HttpVersion(cpr::HttpVersionCode::VERSION_2_0_PRIOR_KNOWLEDGE));
-    break;
+    case 1:
+      session->SetHttpVersion(
+          cpr::HttpVersion(cpr::HttpVersionCode::VERSION_1_1));
+      break;
+    case 2:
+      session->SetHttpVersion(
+          cpr::HttpVersion(cpr::HttpVersionCode::VERSION_2_0_PRIOR_KNOWLEDGE));
+      break;
   }
 
   // Set Interface
@@ -273,7 +273,7 @@ void http_client::prepare_session(const method_e &method,
 
   // Set HTTP header
   cpr::Header cpr_header{};
-  for (const auto &h : request.headers) {
+  for (const auto& h : request.headers) {
     cpr_header.insert({h.first, h.second});
   }
   cpr_header.insert(
@@ -282,19 +282,19 @@ void http_client::prepare_session(const method_e &method,
 
   // Set HTTP method
   switch (method) {
-  case method_e::POST: {
-    session->SetBody(cpr::Body{request.body});
-  } break;
-  case method_e::GET: {
-  } break;
-  case method_e::PUT: {
-    session->SetBody(cpr::Body{request.body});
-  } break;
-  case method_e::PATCH: {
-    session->SetBody(cpr::Body{request.body});
-  } break;
-  case method_e::DELETE: {
-  }
+    case method_e::POST: {
+      session->SetBody(cpr::Body{request.body});
+    } break;
+    case method_e::GET: {
+    } break;
+    case method_e::PUT: {
+      session->SetBody(cpr::Body{request.body});
+    } break;
+    case method_e::PATCH: {
+      session->SetBody(cpr::Body{request.body});
+    } break;
+    case method_e::DELETE: {
+    }
   }
 
   // Enable SSL/TLS
@@ -309,31 +309,31 @@ void http_client::prepare_session(const method_e &method,
     // session->SetSslOptions(sslOpts);
 
     session->SetVerbose(cpr::Verbose{true});
-    session->SetVerifySsl(false); // TODO: Don't verify SSL for the moment, but
-                                  // should enable this in the future
+    session->SetVerifySsl(false);  // TODO: Don't verify SSL for the moment, but
+                                   // should enable this in the future
   }
 }
 
 //---------------------------------------------------------------------------------------------
-void http_client::get_response_info(const cpr::Response &cpr_resp,
-                                    response &resp) {
+void http_client::get_response_info(
+    const cpr::Response& cpr_resp, response& resp) {
   resp.status_code = cpr_resp.status_code;
-  resp.body = cpr_resp.text;
+  resp.body        = cpr_resp.text;
 
-  for (const auto &h : cpr_resp.header) {
+  for (const auto& h : cpr_resp.header) {
     try {
       resp.headers.insert({h.first, h.second});
-    } catch (std::exception &) {
-      m_sbi_logger.debug("Unknown header from HTTP client: '%s : %s'", h.first,
-                         h.second);
+    } catch (std::exception&) {
+      m_sbi_logger.debug(
+          "Unknown header from HTTP client: '%s : %s'", h.first, h.second);
     }
   }
 }
 
 //---------------------------------------------------------------------------------------------
-request http_client::prepare_json_request(const std::string &uri,
-                                          const std::string &body,
-                                          const std::string &content_type) {
+request http_client::prepare_json_request(
+    const std::string& uri, const std::string& body,
+    const std::string& content_type) {
   request req;
   req.uri = uri;
   // Check whether body is valid JSON
@@ -345,13 +345,14 @@ request http_client::prepare_json_request(const std::string &uri,
 }
 
 //---------------------------------------------------------------------------------------------
-request http_client::prepare_multipart_request(const std::string &uri,
-                                               const std::string &body) {
+request http_client::prepare_multipart_request(
+    const std::string& uri, const std::string& body) {
   request req;
-  req.uri = uri;
+  req.uri  = uri;
   req.body = body;
-  req.headers.insert({"content-type", "multipart/related;boundary=" +
-                                          std::string(MIME_BOUNDARY)});
+  req.headers.insert(
+      {"content-type",
+       "multipart/related;boundary=" + std::string(MIME_BOUNDARY)});
   return req;
 }
 

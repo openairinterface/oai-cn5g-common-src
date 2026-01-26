@@ -452,7 +452,8 @@ int _5gsMobileIdentity::DecodeSuci(
               scheme_output_length);
           std::string scheme_ouput_str = "";
 
-          scheme_output = reinterpret_cast<char*>((char*) bdata(scheme_output));
+          scheme_ouput_str =
+              reinterpret_cast<char*>((char*) bdata(scheme_output));
         }
 
         // TODO:

@@ -26,6 +26,7 @@
 #include "logger_base.hpp"
 #include "nas_utils.hpp"
 #include "utils.hpp"
+#include "output_wrapper.hpp"
 
 using namespace oai::nas;
 using namespace oai::utils;
@@ -283,22 +284,30 @@ int _5gsMobileIdentity::EncodeSuci(uint8_t* buf, int len) const {
       buf + encoded_size, supi_format_imsi_.value().home_network_pki,
       encoded_size);
 
-  // MSIN
+  if (supi_format_imsi_.value().protection_scheme_id != kNullScheme) {
+    oai::logger::logger_common::nas().error(
+        "Encoding SUCI with protection scheme other than Null scheme is not "
+        "implemented");
+    return KEncodeDecodeError;
+  }
+
+  // Null Sheme: MSIN
   std::string msin   = {};
   uint8_t digit_low  = 0;
   uint8_t digit_high = 0;
-  for (int i = 0; i < supi_format_imsi_.value().msin.length() / 2; i++) {
+  for (int i = 0; i < supi_format_imsi_.value().scheme_output.length() / 2;
+       i++) {
     conv::string_to_int8(
-        supi_format_imsi_.value().msin.substr(i, 1), digit_low);
+        supi_format_imsi_.value().scheme_output.substr(i, 1), digit_low);
     conv::string_to_int8(
-        supi_format_imsi_.value().msin.substr(i + 1, 1), digit_high);
+        supi_format_imsi_.value().scheme_output.substr(i + 1, 1), digit_high);
     uint8_t octet = (0xf0 & (digit_high << 4)) | (digit_low & 0x0f);
     ENCODE_U8(buf + encoded_size, octet, encoded_size);
   }
-  if (supi_format_imsi_.value().msin.length() % 2 != 0) {
+  if (supi_format_imsi_.value().scheme_output.length() % 2 != 0) {
     conv::string_to_int8(
-        supi_format_imsi_.value().msin.substr(
-            supi_format_imsi_.value().msin.length() - 1, 1),
+        supi_format_imsi_.value().scheme_output.substr(
+            supi_format_imsi_.value().scheme_output.length() - 1, 1),
         digit_low);
     uint8_t octet = 0xf0 | (digit_low & 0x0f);
     ENCODE_U8(buf + encoded_size, octet, encoded_size);
@@ -355,7 +364,7 @@ int _5gsMobileIdentity::DecodeSuci(
         std::string result = {};
         for (int i = 0; i < 4; i++) {
           if (digit[i] >= 0x00 && digit[i] <= 0x09)
-            result += (const std::string) (std::to_string(digit[i]));
+            result += (const std::string)(std::to_string(digit[i]));
           else if (digit[i] == 0x0f)
             break;
           else
@@ -373,42 +382,81 @@ int _5gsMobileIdentity::DecodeSuci(
       // Protection scheme Id
       DECODE_U8(buf + decoded_size, octet, decoded_size);
       supi_format_imsi_tmp.protection_scheme_id = 0x0f & octet;
+      oai::logger::logger_common::nas().debug(
+          "Decoded Protection Scheme ID %d",
+          supi_format_imsi_tmp.protection_scheme_id);
+
       // Home network public key identifier
       DECODE_U8(buf + decoded_size, octet, decoded_size);
       supi_format_imsi_tmp.home_network_pki = octet;
+      oai::logger::logger_common::nas().debug(
+          "Decoded Home Network Public Key Identifier %d",
+          supi_format_imsi_tmp.home_network_pki);
 
-      // MSIN
-      std::string msin = {};
-      // TODO: get MSIN according to Protection Scheme ID to support
-      // ECIES scheme profile A/B
-      uint8_t digit_low  = 0;
-      uint8_t digit_high = 0;
-      int numMsin        = ie_len - decoded_size;
-      for (int i = 0; i < (numMsin - 1); i++) {
+      // Null scheme
+      if (supi_format_imsi_tmp.protection_scheme_id == 0) {
+        // MSIN
+        std::string msin = {};
+        // TODO: get MSIN according to Protection Scheme ID to support
+        // ECIES scheme profile A/B
+        uint8_t digit_low  = 0;
+        uint8_t digit_high = 0;
+        int numMsin        = ie_len - decoded_size;
+        for (int i = 0; i < (numMsin - 1); i++) {
+          DECODE_U8(buf + decoded_size, octet, decoded_size);
+          digit_high = (octet & 0xf0) >> 4;
+          digit_low  = octet & 0x0f;
+          msin +=
+              ((const std::string)(std::to_string(digit_low)) +
+               (const std::string)(std::to_string(digit_high)));
+        }
+
+        // Verify if the MSIN includes an odd number of digits,
+        // bits 5 to 8 of the last octet shall be coded as "1111"
         DECODE_U8(buf + decoded_size, octet, decoded_size);
         digit_high = (octet & 0xf0) >> 4;
         digit_low  = octet & 0x0f;
-        msin +=
-            ((const std::string) (std::to_string(digit_low)) +
-             (const std::string) (std::to_string(digit_high)));
-      }
+        if (digit_high != 0x0f) {
+          msin +=
+              ((const std::string)(std::to_string(digit_low)) +
+               (const std::string)(std::to_string(digit_high)));
+        } else {
+          msin += (const std::string)(std::to_string(digit_low));
+        }
 
-      // Verify if the MSIN includes an odd number of digits,
-      // bits 5 to 8 of the last octet shall be coded as "1111"
-      DECODE_U8(buf + decoded_size, octet, decoded_size);
-      digit_high = (octet & 0xf0) >> 4;
-      digit_low  = octet & 0x0f;
-      if (digit_high != 0x0f) {
-        msin +=
-            ((const std::string) (std::to_string(digit_low)) +
-             (const std::string) (std::to_string(digit_high)));
+        supi_format_imsi_tmp.scheme_output = msin;
+
+        oai::logger::logger_common::nas().debug(
+            "Decoding SUCI with Null Scheme, decoded MSIN %s",
+            supi_format_imsi_tmp.scheme_output.c_str());
       } else {
-        msin += (const std::string) (std::to_string(digit_low));
-      }
+        oai::logger::logger_common::nas().debug(
+            "Decoding SUCI with Protection Scheme ID %d",
+            supi_format_imsi_tmp.protection_scheme_id);
 
-      supi_format_imsi_tmp.msin = msin;
-      oai::logger::logger_common::nas().debug(
-          "Decoded MSIN %s", supi_format_imsi_tmp.msin.c_str());
+        // Scheme Output
+
+        int scheme_output_length = ie_len - decoded_size;
+
+        bstring scheme_output = nullptr;
+        decode_bstring(
+            &scheme_output, scheme_output_length, (buf + decoded_size),
+            ie_len - decoded_size);
+        decoded_size += scheme_output_length;
+
+        if (scheme_output_length > 0) {
+          oai::logger::logger_common::nas().debug(
+              "Decoded Scheme Output (len %d octets)", scheme_output_length);
+          oai::utils::output_wrapper::print_buffer(
+              "amf_n1", "DATA", (uint8_t*) bdata(scheme_output),
+              scheme_output_length);
+          std::string scheme_ouput_str = "";
+
+          scheme_output = reinterpret_cast<char*>((char*) bdata(scheme_output));
+        }
+
+        // TODO:
+      }
 
       supi_format_imsi_ = std::optional<SUCI_imsi_t>(supi_format_imsi_tmp);
       oai::logger::logger_common::nas().debug(
@@ -449,7 +497,7 @@ void _5gsMobileIdentity::SetSuciWithSupiImsi(
       std::optional<std::string>(routing_ind);
   supi_format_imsi_tmp.protection_scheme_id = protection_sch_id;
   supi_format_imsi_tmp.home_network_pki     = kHomeNetworkPki0WhenPsi0;
-  supi_format_imsi_tmp.msin                 = msin;
+  supi_format_imsi_tmp.scheme_output        = msin;
   SetLengthIndicator(8 + ceil(msin.length() / 2));
 
   supi_format_imsi_ = std::optional<SUCI_imsi_t>(supi_format_imsi_tmp);
@@ -470,7 +518,7 @@ void _5gsMobileIdentity::SetSuciWithSupiImsi(
   supi_format_imsi_tmp.mcc         = mcc;
   supi_format_imsi_tmp.mnc         = mnc;
   supi_format_imsi_ = std::optional<SUCI_imsi_t>(supi_format_imsi_tmp);
-  SetLengthIndicator(8 + ceil(supi_format_imsi_tmp.msin.length() / 2));
+  SetLengthIndicator(8 + ceil(supi_format_imsi_tmp.scheme_output.length() / 2));
 }
 
 //------------------------------------------------------------------------------
@@ -690,15 +738,15 @@ int _5gsMobileIdentity::DecodeImeisv(const uint8_t* const buf, int len) {
     digit_high = (octet & 0xf0) >> 4;
     digit_low  = octet & 0x0f;
     if (i == 0) {
-      imeisv_tmp.identity += (const std::string) (std::to_string(
+      imeisv_tmp.identity += (const std::string)(std::to_string(
           digit_high));  // octet 4 (Identity digit 1 4bits, odd/even indic 1
                          // bit, type of identity 3 bits)
     } else if (i < (len - 1)) {
       imeisv_tmp.identity +=
-          ((const std::string) (std::to_string(digit_low)) +
-           (const std::string) (std::to_string(digit_high)));
+          ((const std::string)(std::to_string(digit_low)) +
+           (const std::string)(std::to_string(digit_high)));
     } else {  // Bits 5 to 8 of the last octet: end mark coded as "1111"
-      imeisv_tmp.identity += (const std::string) (std::to_string(digit_low));
+      imeisv_tmp.identity += (const std::string)(std::to_string(digit_low));
       if (digit_high != 0x0f) {
         oai::logger::logger_common::nas().warn(
             "IMEISV: Bits 5 to 8 of the last octet should filled with an "

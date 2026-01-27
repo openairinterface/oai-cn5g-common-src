@@ -83,6 +83,9 @@ class conv {
       uint16_t amf_set_id, uint8_t amf_pointer, const std::string& tmsi);
   static void convert_string_2_hex(
       const std::string& input_str, std::string& output_str);
+  static void convert_bstring_2_hex(
+      const bstring& input_bstr, std::string& output_str);
+
   static void string_to_uint_mac_address(
       const std::string& macStr, uint8_t source_mac_address[6], char delimiter);
 

@@ -435,7 +435,6 @@ int _5gsMobileIdentity::DecodeSuci(
             supi_format_imsi_tmp.protection_scheme_id);
 
         // Scheme Output
-
         int scheme_output_length = ie_len - decoded_size;
 
         bstring scheme_output = nullptr;
@@ -450,13 +449,21 @@ int _5gsMobileIdentity::DecodeSuci(
           oai::utils::output_wrapper::print_buffer(
               "amf_n1", "DATA", (uint8_t*) bdata(scheme_output),
               scheme_output_length);
+
           std::string scheme_ouput_str = "";
 
-          scheme_ouput_str =
-              reinterpret_cast<char*>((char*) bdata(scheme_output));
-        }
+          oai::utils::conv::convert_bstring_2_hex(
+              scheme_output, scheme_ouput_str);
 
-        // TODO:
+          oai::logger::logger_common::nas().debug(
+              "Decoded Scheme Output %s", scheme_ouput_str);
+
+          supi_format_imsi_tmp.scheme_output = scheme_ouput_str;
+
+          oai::logger::logger_common::nas().debug(
+              "Decoding SUCI with Null Scheme, decoded MSIN %s",
+              supi_format_imsi_tmp.scheme_output.c_str());
+        }
       }
 
       supi_format_imsi_ = std::optional<SUCI_imsi_t>(supi_format_imsi_tmp);

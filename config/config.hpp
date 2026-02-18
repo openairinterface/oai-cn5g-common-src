@@ -78,6 +78,9 @@ const std::string LOG_LEVEL_CONFIG_NAME   = "log_level";
 const std::string REGISTER_NF_CONFIG_NAME = "register_nf";
 const std::string NF_LIST_CONFIG_NAME     = "nfs";
 
+const std::string NF_CONFIG_DISCOVER_NF       = "discover_nf";
+const std::string NF_CONFIG_DISCOVER_NF_LABEL = "Discover NF";
+
 // NF
 constexpr auto NF_CONFIG_HOST_NAME       = "host";
 constexpr auto NF_CONFIG_HOST_NAME_LABEL = "Host";
@@ -155,6 +158,7 @@ class config_iface {
   virtual ~config_iface() = default;
 
   [[nodiscard]] virtual bool register_nrf() const = 0;
+  [[nodiscard]] virtual bool discover_nf() const  = 0;
 
   [[nodiscard]] virtual const std::string& log_level() const = 0;
 
@@ -203,6 +207,7 @@ class config : public config_iface {
   [[nodiscard]] std::string to_string() const override;
 
   [[nodiscard]] bool register_nrf() const override;
+  [[nodiscard]] bool discover_nf() const override;
 
   [[nodiscard]] const std::string& log_level() const override;
 
@@ -235,6 +240,7 @@ class config : public config_iface {
   std::string m_nf_name;
   std::vector<dnn_config> m_dnns;
   nf_features_config m_register_nrf_feature;
+  option_config_value m_discover_nf;
 
   virtual void update_used_nfs();
   bool add_nf(const std::string& name, const std::shared_ptr<nf>& nf_ptr);

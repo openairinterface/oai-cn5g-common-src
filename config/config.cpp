@@ -63,6 +63,7 @@ config::config(
     const std::string& config_path, const std::string& nf_name, bool log_stdout,
     bool log_rot_file)
     : m_register_nrf_feature(REGISTER_NF_CONFIG_NAME, nf_name, false),
+      m_discover_nf(NF_CONFIG_DISCOVER_NF, false),
       m_log_level_feature(LOG_LEVEL_CONFIG_NAME, nf_name, std::string("info")),
       m_tls_config(),
       m_http_version(),
@@ -90,6 +91,8 @@ void config::read_from_file(const std::string& file_path) {
           m_log_level_feature.from_yaml(elem.second);
         } else if (key == REGISTER_NF_CONFIG_NAME) {
           m_register_nrf_feature.from_yaml(elem.second);
+        } else if (key == NF_CONFIG_DISCOVER_NF) {
+          m_discover_nf.from_yaml(elem.second);
         } else if (key == NF_CONFIG_HTTP_NAME) {
           m_http_version.from_yaml(elem.second);
         } else if (key == NF_CONFIG_TLS_NAME) {
@@ -174,7 +177,8 @@ void config::to_json(nlohmann::json& json_data) {
       m_log_level_feature.to_json();
   json_data[m_register_nrf_feature.get_config_name()] =
       m_register_nrf_feature.to_json();
-  json_data[m_tls_config.get_config_name()] = m_tls_config.to_json();
+  json_data[m_discover_nf.get_config_name()] = m_discover_nf.to_json();
+  json_data[m_tls_config.get_config_name()]  = m_tls_config.to_json();
   json_data[m_http_request_timeout.get_config_name()] =
       m_http_request_timeout.to_json();
   if (m_database.is_set()) {
@@ -197,6 +201,10 @@ bool config::from_json(const nlohmann::json& json_data) {
         json_data.end()) {
       m_register_nrf_feature.from_json(
           json_data[m_register_nrf_feature.get_config_name()]);
+    }
+
+    if (json_data.find(m_discover_nf.get_config_name()) != json_data.end()) {
+      m_discover_nf.from_json(json_data[m_discover_nf.get_config_name()]);
     }
 
     if (json_data.find(m_tls_config.get_config_name()) != json_data.end()) {
@@ -271,6 +279,7 @@ std::string config::to_string() const {
   std::string indent = fmt::format("{:<{}}", "", INDENT_WIDTH);
   out.append(m_log_level_feature.to_string(indent));
   out.append(m_register_nrf_feature.to_string(indent));
+  out.append(m_discover_nf.to_string(indent));
   out.append(m_http_version.to_string(indent));
   out.append(m_tls_config.to_string(indent));
   out.append(m_http_request_timeout.to_string(indent));
@@ -338,6 +347,10 @@ bool config::init() {
 
 bool config::register_nrf() const {
   return m_register_nrf_feature.get_option();
+}
+
+bool config::discover_nf() const {
+  return m_discover_nf.get_value();
 }
 
 const std::string& config::log_level() const {
@@ -409,7 +422,7 @@ void config::update_used_nfs() {
     } else {
       auto used_nf = m_used_sbi_values.find(nf.first);
       if (used_nf == m_used_sbi_values.end()) {
-        nf.second->m_set = false;
+        nf.second->unset_config();  // m_set = false;
       }
       // If we register to NRF; we unset all other NFs
       // Assume that each NF is discovered via NRF.
@@ -418,7 +431,8 @@ void config::update_used_nfs() {
       }
       // If we do not register NRF, we unset NRF
       if (!register_nrf() && nf.first == NRF_CONFIG_NAME) {
-        nf.second->m_set = false;
+        // nf.second->m_set = false;
+        nf.second->set_config();
       }
     }
   }

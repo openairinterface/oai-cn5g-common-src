@@ -71,6 +71,7 @@ bool ngap_utils::bstring_2_bit_string(
 
 //------------------------------------------------------------------------------
 void ngap_utils::sd_int_to_string_hex(uint32_t sd, std::string& sd_str) {
+  sd     = sd & 0x00ffffff;  // Get the last 24 bits
   sd_str = fmt::format("{0:06X}", sd);
 }
 

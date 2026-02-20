@@ -352,7 +352,9 @@ bool PduSessionResourceSetupResponseMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           return false;
         }
       } break;
-
+      case Ngap_ProtocolIE_ID_id_UserLocationInformation: {
+        // TODO: add decoding for USER LOCATION INFORMATION
+      } break;
       default: {
         oai::logger::logger_common::ngap().error(
             "Decoded NGAP message PDU error!");

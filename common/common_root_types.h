@@ -34,9 +34,17 @@ typedef uint32_t teid_t;
 #define INVALID_TEID ((teid_t) 0x00000000)
 #define UNASSIGNED_TEID ((teid_t) 0x00000000)
 
+// Common Rule IDs for PDRs, FARs, QERs,
+#define RULE_FMT "0x%" PRIx32
+
+// Common IDs
+#define ID16_FMT "0x%" PRIx16
+#define ID8_FMT "0x%" PRIx16
+
 // SEIDs
 typedef uint64_t seid_t;
 #define SEID_FMT "0x%" PRIx64
+#define SEID_FMTH "0x%" PRIu64
 #define SEID_SCAN_FMT SCNx64
 #define INVALID_SEID ((seid_t) 0x00000000)
 #define UNASSIGNED_SEID ((seid_t) 0x00000000)

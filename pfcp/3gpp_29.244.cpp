@@ -296,11 +296,11 @@ pfcp_ie* pfcp_ie::new_pfcp_ie_from_stream(std::istream& is) {
         //        return ie;
         //      }
         //      break;
-        //    case PFCP_IE_PFCPSMREQ_FLAGS: {
-        //        pfcp_pfcpsmreq_flags_ie *ie = new
-        //        pfcp_pfcpsmreq_flags_ie(tlv); ie->load_from(is); return ie;
-        //      }
-        //      break;
+      case PFCP_IE_PFCPSMREQ_FLAGS: {
+        pfcp_pfcpsmreq_flags_ie* ie = new pfcp_pfcpsmreq_flags_ie(tlv);
+        ie->load_from(is);
+        return ie;
+      } break;
         //    case PFCP_IE_PFCPSRRSP_FLAGS: {
         //        pfcp_pfcpsrrsp_flags_ie *ie = new
         //        pfcp_pfcpsrrsp_flags_ie(tlv); ie->load_from(is); return ie;
@@ -587,12 +587,12 @@ pfcp_ie* pfcp_ie::new_pfcp_ie_from_stream(std::istream& is) {
         //        return ie;
         //      }
         //      break;
-        //    case PFCP_IE_MEASUREMENT_INFORMATION: {
-        //        pfcp_measurement_information_ie *ie = new
-        //        pfcp_measurement_information_ie(tlv); ie->load_from(is);
-        //        return ie;
-        //      }
-        //      break;
+      case PFCP_IE_MEASUREMENT_INFORMATION: {
+        pfcp_measurement_information_ie* ie =
+            new pfcp_measurement_information_ie(tlv);
+        ie->load_from(is);
+        return ie;
+      } break;
         //    case PFCP_IE_NODE_REPORT_TYPE: {
         //        pfcp_node_report_type_ie *ie = new
         //        pfcp_node_report_type_ie(tlv); ie->load_from(is); return ie;

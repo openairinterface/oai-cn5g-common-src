@@ -148,8 +148,9 @@ typedef struct SUCI_imsi_s {
   std::optional<std::string> routing_indicator;  //"1234"
   uint8_t protection_scheme_id : 4;              // 0000
   uint8_t home_network_pki;                      // 00000000
-  std::string msin;  // two types of coding; BCD & hexadecimal
-} SUCI_imsi_t;       // SUPI format "IMSI"
+  std::string scheme_output;  // MSIN with BCD coding (Null scheme) or
+                              // hexadecimal digits (. ECIES scheme profile A/B)
+} SUCI_imsi_t;                // SUPI format "IMSI"
 
 // TODO: SUCI and SUPI format "Network specific identifier"
 

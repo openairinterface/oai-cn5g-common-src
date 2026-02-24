@@ -475,6 +475,30 @@ void conv::convert_string_2_hex(
 }
 
 //------------------------------------------------------------------------------
+void conv::convert_bstring_2_hex(
+    const bstring& input_bstr, std::string& output_str) {
+  if (!input_bstr) return;
+
+  int size_bstr = blength(input_bstr);
+  oai::utils::output_wrapper::print_buffer(
+      {}, "Data input", (uint8_t*) bdata(input_bstr), size_bstr);
+
+  char* datahex = (char*) malloc(size_bstr * 2 + 1);
+
+  if (!datahex) {
+    utils::free_wrapper((void**) &datahex);
+    return;
+  }
+  memset(datahex, 0, size_bstr * 2 + 1);
+
+  for (int i = 0; i < size_bstr; i++)
+    sprintf(datahex + i * 2, "%02x", ((uint8_t*) bdata(input_bstr))[i]);
+
+  output_str = reinterpret_cast<char*>(datahex);
+  utils::free_wrapper((void**) &datahex);
+}
+
+//------------------------------------------------------------------------------
 void conv::fix_primitive_json_values(nlohmann::json& j, bool parse_hex_values) {
   for (const auto& elem : j.items()) {
     if (elem.value().is_primitive()) {

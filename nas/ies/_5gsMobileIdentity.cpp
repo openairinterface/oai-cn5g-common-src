@@ -395,78 +395,48 @@ int _5gsMobileIdentity::DecodeSuci(
           supi_format_imsi_tmp.home_network_pki);
 
       // Null scheme
-      if (supi_format_imsi_tmp.protection_scheme_id == 0) {
-        // MSIN
-        std::string msin = {};
-        // TODO: get MSIN according to Protection Scheme ID to support
-        // ECIES scheme profile A/B
-        uint8_t digit_low  = 0;
-        uint8_t digit_high = 0;
-        int numMsin        = ie_len - decoded_size;
-        for (int i = 0; i < (numMsin - 1); i++) {
-          DECODE_U8(buf + decoded_size, octet, decoded_size);
-          digit_high = (octet & 0xf0) >> 4;
-          digit_low  = octet & 0x0f;
-          msin +=
-              ((const std::string) (std::to_string(digit_low)) +
-               (const std::string) (std::to_string(digit_high)));
-        }
-
-        // Verify if the MSIN includes an odd number of digits,
-        // bits 5 to 8 of the last octet shall be coded as "1111"
+      // if (supi_format_imsi_tmp.protection_scheme_id == 0) {
+      // MSIN
+      std::string msin = {};
+      // TODO: get MSIN according to Protection Scheme ID to support
+      // ECIES scheme profile A/B
+      uint8_t digit_low  = 0;
+      uint8_t digit_high = 0;
+      int numMsin        = ie_len - decoded_size;
+      for (int i = 0; i < (numMsin - 1); i++) {
         DECODE_U8(buf + decoded_size, octet, decoded_size);
         digit_high = (octet & 0xf0) >> 4;
         digit_low  = octet & 0x0f;
-        if (digit_high != 0x0f) {
-          msin +=
-              ((const std::string) (std::to_string(digit_low)) +
-               (const std::string) (std::to_string(digit_high)));
-        } else {
-          msin += (const std::string) (std::to_string(digit_low));
-        }
-
-        supi_format_imsi_tmp.scheme_output = msin;
-
-        oai::logger::logger_common::nas().debug(
-            "Decoding SUCI with Null Scheme, decoded MSIN %s",
-            supi_format_imsi_tmp.scheme_output.c_str());
-      } else {
-        oai::logger::logger_common::nas().debug(
-            "Decoding SUCI with Protection Scheme ID %d",
-            supi_format_imsi_tmp.protection_scheme_id);
-
-        // Scheme Output
-        int scheme_output_length = ie_len - decoded_size;
-
-        bstring scheme_output = nullptr;
-        decode_bstring(
-            &scheme_output, scheme_output_length, (buf + decoded_size),
-            ie_len - decoded_size);
-        decoded_size += scheme_output_length;
-
-        if (scheme_output_length > 0) {
-          oai::logger::logger_common::nas().debug(
-              "Decoded Scheme Output (len %d octets)", scheme_output_length);
-          oai::utils::output_wrapper::print_buffer(
-              "amf_n1", "DATA", (uint8_t*) bdata(scheme_output),
-              scheme_output_length);
-
-          std::string scheme_ouput_str = "";
-
-          oai::utils::conv::convert_bstring_2_hex(
-              scheme_output, scheme_ouput_str);
-
-          oai::logger::logger_common::nas().debug(
-              "Decoded Scheme Output %s", scheme_ouput_str);
-
-          supi_format_imsi_tmp.scheme_output = scheme_ouput_str;
-
-          oai::logger::logger_common::nas().debug(
-              "Decoding SUCI with Null Scheme, decoded MSIN %s",
-              supi_format_imsi_tmp.scheme_output.c_str());
-        }
+        msin +=
+            ((const std::string) (std::to_string(digit_low)) +
+             (const std::string) (std::to_string(digit_high)));
       }
 
+      // Verify if the MSIN includes an odd number of digits,
+      // bits 5 to 8 of the last octet shall be coded as "1111"
+      DECODE_U8(buf + decoded_size, octet, decoded_size);
+      digit_high = (octet & 0xf0) >> 4;
+      digit_low  = octet & 0x0f;
+      if (digit_high != 0x0f) {
+        msin +=
+            ((const std::string) (std::to_string(digit_low)) +
+             (const std::string) (std::to_string(digit_high)));
+      } else {
+        msin += (const std::string) (std::to_string(digit_low));
+      }
+
+      supi_format_imsi_tmp.scheme_output = msin;
+
+      oai::logger::logger_common::nas().debug(
+          "Decoding SUCI with Null Scheme, decoded MSIN %s",
+          supi_format_imsi_tmp.scheme_output.c_str());
+      /*   } else {
+           oai::logger::logger_common::nas().debug(
+               "Decoding SUCI with Protection Scheme ID %d",
+               supi_format_imsi_tmp.protection_scheme_id);
+
+         }
+   */
       supi_format_imsi_ = std::optional<SUCI_imsi_t>(supi_format_imsi_tmp);
       oai::logger::logger_common::nas().debug(
           "Decoded 5GSMobilityIdentity SUCI SUPI format IMSI (len %d)",

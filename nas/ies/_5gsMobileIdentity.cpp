@@ -251,6 +251,8 @@ int _5gsMobileIdentity::EncodeSuci(uint8_t* buf, int len) const {
 
   if (!supi_format_imsi_.has_value()) return KEncodeDecodeError;
 
+  SUCI_imsi_t supi_format_imsi_value = supi_format_imsi_.value();
+
   int encoded_size = 0;
   // Validate the buffer's length and Encode IEI/Length
   int len_pos = 0;
@@ -266,25 +268,25 @@ int _5gsMobileIdentity::EncodeSuci(uint8_t* buf, int len) const {
 
   // MCC/MNC
   encoded_size += nas_utils::encodeMccMnc2Buffer(
-      supi_format_imsi_.value().mcc, supi_format_imsi_.value().mnc,
+      supi_format_imsi_value.mcc, supi_format_imsi_value.mnc,
       buf + encoded_size, len - encoded_size);
 
   // Routing Indicator
   encoded_size += EncodeRoutingIndicator(
-      supi_format_imsi_.value().routing_indicator, buf + encoded_size,
+      supi_format_imsi_value.routing_indicator, buf + encoded_size,
       len - encoded_size);
 
   // Protection Scheme
   ENCODE_U8(
-      buf + encoded_size, 0x0f & supi_format_imsi_.value().protection_scheme_id,
+      buf + encoded_size, 0x0f & supi_format_imsi_value.protection_scheme_id,
       encoded_size);
 
   // Home Network Public Key Identifier
   ENCODE_U8(
-      buf + encoded_size, supi_format_imsi_.value().home_network_pki,
+      buf + encoded_size, supi_format_imsi_value.home_network_pki,
       encoded_size);
 
-  if (supi_format_imsi_.value().protection_scheme_id != kNullScheme) {
+  if (supi_format_imsi_value.protection_scheme_id != kNullScheme) {
     oai::logger::logger_common::nas().error(
         "Encoding SUCI with protection scheme other than Null scheme is not "
         "implemented");
@@ -296,19 +298,18 @@ int _5gsMobileIdentity::EncodeSuci(uint8_t* buf, int len) const {
   std::string msin   = {};
   uint8_t digit_low  = 0;
   uint8_t digit_high = 0;
-  for (int i = 0; i < supi_format_imsi_.value().scheme_output.length() / 2;
-       i++) {
+  for (int i = 0; i < supi_format_imsi_value.scheme_output.length() / 2; i++) {
     conv::string_to_int8(
-        supi_format_imsi_.value().scheme_output.substr(i, 1), digit_low);
+        supi_format_imsi_value.scheme_output.substr(i, 1), digit_low);
     conv::string_to_int8(
-        supi_format_imsi_.value().scheme_output.substr(i + 1, 1), digit_high);
+        supi_format_imsi_value.scheme_output.substr(i + 1, 1), digit_high);
     uint8_t octet = (0xf0 & (digit_high << 4)) | (digit_low & 0x0f);
     ENCODE_U8(buf + encoded_size, octet, encoded_size);
   }
-  if (supi_format_imsi_.value().scheme_output.length() % 2 != 0) {
+  if (supi_format_imsi_value.scheme_output.length() % 2 != 0) {
     conv::string_to_int8(
-        supi_format_imsi_.value().scheme_output.substr(
-            supi_format_imsi_.value().scheme_output.length() - 1, 1),
+        supi_format_imsi_value.scheme_output.substr(
+            supi_format_imsi_value.scheme_output.length() - 1, 1),
         digit_low);
     uint8_t octet = 0xf0 | (digit_low & 0x0f);
     ENCODE_U8(buf + encoded_size, octet, encoded_size);

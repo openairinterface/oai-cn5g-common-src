@@ -149,28 +149,29 @@ int _5gsMobileIdentity::Encode5gGuti(uint8_t* buf, int len) const {
   if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   encoded_size += encoded_header_size;
 
+  _5G_GUTI_t _5g_guti_value = _5g_guti_.value();
   // Type of Identity
   ENCODE_U8(
       buf + encoded_size, 0xf0 | k5gGuti,
       encoded_size);  // Type of Identity
   // MCC/MNC
   encoded_size += nas_utils::encodeMccMnc2Buffer(
-      _5g_guti_.value().mcc, _5g_guti_.value().mnc, buf + encoded_size,
+      _5g_guti_value.mcc, _5g_guti_value.mnc, buf + encoded_size,
       len - encoded_size);
   // AMF Region ID
-  ENCODE_U8(buf + encoded_size, _5g_guti_.value().amf_region_id, encoded_size);
+  ENCODE_U8(buf + encoded_size, _5g_guti_value.amf_region_id, encoded_size);
   // AMF Set Id/AMF pointer
   ENCODE_U8(
-      buf + encoded_size, ((_5g_guti_.value().amf_set_id & 0x03ff) >> 2),
+      buf + encoded_size, ((_5g_guti_value.amf_set_id & 0x03ff) >> 2),
       encoded_size);
   ENCODE_U8(
       buf + encoded_size,
-      ((_5g_guti_.value().amf_pointer & 0x3f) |
-       ((_5g_guti_.value().amf_set_id & 0x0003) << 6)),
+      ((_5g_guti_value.amf_pointer & 0x3f) |
+       ((_5g_guti_value.amf_set_id & 0x0003) << 6)),
       encoded_size);
 
   // TMSI: 4 octets
-  uint32_t tmsi = _5g_guti_.value()._5g_tmsi;
+  uint32_t tmsi = _5g_guti_value._5g_tmsi;
   ENCODE_U32(buf + encoded_size, tmsi, encoded_size);
 
   // Encode length
@@ -552,32 +553,35 @@ int _5gsMobileIdentity::EncodeRoutingIndicator(
 
   oai::logger::logger_common::nas().debug(
       "Routing Indicator (%s)", routing_indicator.value().c_str());
-  int rooutid = oai::utils::utils::fromString<int>(routing_indicator.value());
+  int routing_id_int =
+      oai::utils::utils::fromString<int>(routing_indicator.value());
   switch (routing_indicator.value().length()) {
     case 1: {
-      *buf = 0xf0 | (0x0f & rooutid);
+      *buf = 0xf0 | (0x0f & routing_id_int);
       encoded_size++;
       *(buf + encoded_size) = 0xff;
       encoded_size++;
     } break;
     case 2: {
-      *buf = (0x0f & (rooutid / 10)) | ((0x0f & (rooutid % 10)) << 4);
+      *buf = (0x0f & (routing_id_int / 10)) |
+             ((0x0f & (routing_id_int % 10)) << 4);
       encoded_size++;
       *(buf + encoded_size) = 0xff;
       encoded_size++;
     } break;
     case 3: {
-      *buf = (0x0f & (rooutid / 100)) | ((0x0f & ((rooutid % 100) / 10)) << 4);
+      *buf = (0x0f & (routing_id_int / 100)) |
+             ((0x0f & ((routing_id_int % 100) / 10)) << 4);
       encoded_size++;
-      *(buf + encoded_size) = 0xf0 | (0x0f & (rooutid % 10));
+      *(buf + encoded_size) = 0xf0 | (0x0f & (routing_id_int % 10));
       encoded_size++;
     } break;
     case 4: {
-      *buf =
-          (0x0f & (rooutid / 1000)) | ((0x0f & ((rooutid % 1000) / 100)) << 4);
+      *buf = (0x0f & (routing_id_int / 1000)) |
+             ((0x0f & ((routing_id_int % 1000) / 100)) << 4);
       encoded_size++;
-      *(buf + encoded_size) =
-          (0x0f & ((rooutid % 100) / 10)) | ((0x0f & (rooutid % 10)) << 4);
+      *(buf + encoded_size) = (0x0f & ((routing_id_int % 100) / 10)) |
+                              ((0x0f & (routing_id_int % 10)) << 4);
       encoded_size++;
     } break;
   }
@@ -598,6 +602,8 @@ int _5gsMobileIdentity::Encode5gSTmsi(uint8_t* buf, int len) const {
       "Encoding 5GSMobilityIdentity 5G-S-TMSI");
   if (!_5g_s_tmsi_.has_value()) return KEncodeDecodeError;
 
+  _5G_S_TMSI_t _5g_s_tmsi_value = _5g_s_tmsi_.value();
+
   int encoded_size = 0;
 
   // Validate the buffer's length and Encode IEI/Length
@@ -610,16 +616,16 @@ int _5gsMobileIdentity::Encode5gSTmsi(uint8_t* buf, int len) const {
 
   // AMF Set ID and AMF Pointer
   ENCODE_U8(
-      buf + encoded_size, ((_5g_s_tmsi_.value().amf_set_id) & 0x03fc) >> 2,
+      buf + encoded_size, ((_5g_s_tmsi_value.amf_set_id) & 0x03fc) >> 2,
       encoded_size);
   ENCODE_U8(
       buf + encoded_size,
-      (((_5g_s_tmsi_.value().amf_set_id) & 0x0003) << 6) |
-          ((_5g_s_tmsi_.value().amf_pointer) & 0x3f),
+      (((_5g_s_tmsi_value.amf_set_id) & 0x0003) << 6) |
+          ((_5g_s_tmsi_value.amf_pointer) & 0x3f),
       encoded_size);
 
   // 5G-TMSI
-  int tmsi = oai::utils::utils::fromString<int>(_5g_s_tmsi_.value()._5g_tmsi);
+  int tmsi = oai::utils::utils::fromString<int>(_5g_s_tmsi_value._5g_tmsi);
   ENCODE_U32(buf + encoded_size, tmsi, encoded_size);
 
   oai::logger::logger_common::nas().debug(
@@ -698,23 +704,24 @@ int _5gsMobileIdentity::EncodeImeisv(uint8_t* buf, int len) const {
   if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   encoded_size += encoded_header_size;
 
+  IMEI_IMEISV_t imeisv_value = imeisv_.value();
+
   uint8_t octet = {0};
 
   uint8_t digit_low  = 0;
   uint8_t digit_high = 0;
 
   int i = 0;
-  while (i < imeisv_.value().identity.length()) {
+  while (i < imeisv_value.identity.length()) {
     if (i == 0) {
       digit_low = 0x07 & kImeisv;  // TODO: odd/even indic
-      conv::string_to_int8(imeisv_.value().identity.substr(i, 1), digit_high);
-    } else if (i < imeisv_.value().identity.length() - 1) {
-      conv::string_to_int8(imeisv_.value().identity.substr(i, 1), digit_low);
-      conv::string_to_int8(
-          imeisv_.value().identity.substr(i + 1, 1), digit_high);
+      conv::string_to_int8(imeisv_value.identity.substr(i, 1), digit_high);
+    } else if (i < imeisv_value.identity.length() - 1) {
+      conv::string_to_int8(imeisv_value.identity.substr(i, 1), digit_low);
+      conv::string_to_int8(imeisv_value.identity.substr(i + 1, 1), digit_high);
       i++;
-    } else if (i == imeisv_.value().identity.length() - 1) {
-      conv::string_to_int8(imeisv_.value().identity.substr(i, 1), digit_low);
+    } else if (i == imeisv_value.identity.length() - 1) {
+      conv::string_to_int8(imeisv_value.identity.substr(i, 1), digit_low);
       digit_high = 0x0f;
     }
     uint8_t octet = (0xf0 & (digit_high << 4)) | (digit_low & 0x0f);

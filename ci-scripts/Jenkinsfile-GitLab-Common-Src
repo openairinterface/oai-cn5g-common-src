@@ -283,7 +283,8 @@ def prepareWorkspaceMergeCase() {
   echo "\u2692\uFE0F PREPARING WORKSPACE \u2692\uFE0F"
   sh "git clean -x -d -f > /dev/null 2>&1"
   if ("MERGE".equals(env.gitlabActionType)) {
-    sh "./ci-scripts/doGitLabMerge.sh --src-branch ${env.gitlabSourceBranch} --src-commit ${env.gitlabMergeRequestLastCommit} --target-branch ${env.gitlabTargetBranch} --target-commit ${GIT_COMMIT}"
+    def targetCommit = sh(script: "git ls-remote origin ${env.gitlabTargetBranch} | awk '{print \$1}'", returnStdout: true).trim()
+    sh "./ci-scripts/doGitLabMerge.sh --src-branch ${env.gitlabSourceBranch} --src-commit ${env.gitlabMergeRequestLastCommit} --target-branch ${env.gitlabTargetBranch} --target-commit ${targetCommit}"
   }
   sh "mkdir -p archives"
 }

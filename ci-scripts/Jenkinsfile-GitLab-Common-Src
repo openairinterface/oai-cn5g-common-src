@@ -48,6 +48,7 @@ gitlabTriggerType = env.gitlabActionType ?: 'PUSH'
 amf_common_src_commit = params.amf_common_src_commit
 smf_common_src_commit = params.smf_common_src_commit
 udm_common_src_commit = params.udm_common_src_commit
+main_common_src_commit = params.main_common_src_commit
 
 //-------------------------------------------------------------------------------
 
@@ -147,13 +148,30 @@ pipeline {
             // For push events (including build with parameters events on the CI)
             // We will need to ensure to push NFs to 'develop' first
             nfList.each { nf ->
+              if (nf == "AMF") {
               nfCommitList.add("develop")
               commonSrcCommitMap[nf] = shortenShaOne
+              }
+              else {
+                nfCommitList.add("develop")
+                commonSrcCommitMap[nf] = main_common_src_commit
+              }
             }
             // Treat AMF, SMF, UDM as exception and override if a different common src commit is provided
             ["AMF","SMF","UDM"].each { nf ->
             def paramValue = params["${nf.toLowerCase()}_common_src_commit"]
-            if (paramValue) commonSrcCommitMap[nf] = paramValue
+            if (paramValue)
+            {
+              if (nf == "AMF")
+              {
+                def gitBranchName = env.GIT_BRANCH?.tokenize('/')?.last()
+                if (gitBranchName != "develop") // if push to develop, AMF uses shortenShaOne
+                commonSrcCommitMap[nf] = paramValue
+              }
+              else {
+                commonSrcCommitMap[nf] = paramValue // SMF and UDM do not currenly build on either main or develop
+              }
+            }
             }
             echo "\uD83D\uDE80 THIS IS A PUSH REQUEST \uD83D\uDE80"
             echo "Git Branch     : ${GIT_BRANCH}"

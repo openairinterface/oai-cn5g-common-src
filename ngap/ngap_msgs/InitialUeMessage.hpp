@@ -67,7 +67,7 @@ class InitialUeMessageMsg : public NgapMessage {
   bool setAmfSetId(uint16_t);
 
   void setUeContextRequest(const e_Ngap_UEContextRequest& ueCtxReq);
-  int getUeContextRequest() const;
+  bool getUeContextRequest() const;
 
   void setAllowedNssai(const AllowedNSSAI& allowedNssai);
   bool getAllowedNssai(AllowedNSSAI& allowedNssai) const;

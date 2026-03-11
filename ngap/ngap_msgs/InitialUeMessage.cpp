@@ -397,11 +397,11 @@ int InitialUeMessageMsg::getRrcEstablishmentCause() const {
 }
 
 //------------------------------------------------------------------------------
-int InitialUeMessageMsg::getUeContextRequest() const {
+bool InitialUeMessageMsg::getUeContextRequest() const {
   if (m_UeContextRequest.has_value()) {
-    return m_UeContextRequest.value().get();
+    return true;  // m_UeContextRequest.value().get()
   } else {
-    return -1;
+    return false;
   }
 }
 

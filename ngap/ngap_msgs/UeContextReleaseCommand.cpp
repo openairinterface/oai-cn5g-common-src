@@ -83,7 +83,7 @@ bool UeContextReleaseCommandMsg::getAmfUeNgapId(uint64_t& id) const {
 
 //------------------------------------------------------------------------------
 void UeContextReleaseCommandMsg::setUeNgapIdPair(
-    const unsigned long& amfId, const uint32_t& ranId) {
+    const uint64_t& amfId, const uint32_t& ranId) {
   m_AmfUeNgapId.set(amfId);
   RanUeNgapId tmp = {};
   tmp.set(ranId);

@@ -30,6 +30,7 @@
 #define FILE_FQDN_HPP_SEEN
 
 #include <string>
+#include <cstdint>
 
 namespace oai::utils {
 class fqdn {

@@ -1,4 +1,7 @@
 /*
+ * SPDX-License-Identifier: LicenseRef-CSSL-1.0
+ */
+/*
 This header file contains LTTng tracepoint definitions. The NF_TRACE_EVENT macro
 is used to define tracepoints for different log types within a specified Network
 Function (NF_TRACE). The events are defined for log types like warn, info,

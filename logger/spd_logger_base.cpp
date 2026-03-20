@@ -1,3 +1,6 @@
+/*
+ * SPDX-License-Identifier: LicenseRef-CSSL-1.0
+ */
 #include "spd_logger_base.hpp"
 #include <fmt/printf.h>
 #include <spdlog/sinks/rotating_file_sink.h>

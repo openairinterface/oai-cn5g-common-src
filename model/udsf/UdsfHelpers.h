@@ -1,3 +1,6 @@
+/*
+ * SPDX-License-Identifier: LicenseRef-CSSL-1.0
+ */
 #ifndef Udsf_Helpers_H_
 #define Udsf_Helpers_H_
 

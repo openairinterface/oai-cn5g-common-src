@@ -21,7 +21,7 @@ For more details, visit the [OAI Website](https://openairinterface.org/oai-cssl/
 The full text of `Collaborative Standards Software License v1.0` is also included in the [LICENSE](LICENSE)
 file at the root of this repository.
 
-Certain files in the repository are using 2 Clause BSD.
+Certain files in the repository are using 2 Clause BSD and documentation is distributed under Creative Commons Attribution 4.0 International license.
 
 # Collaborative work
 

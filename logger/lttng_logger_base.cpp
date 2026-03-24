@@ -1,3 +1,6 @@
+/*
+ * SPDX-License-Identifier: LicenseRef-CSSL-1.0
+ */
 #include "lttng_logger_base.hpp"
 
 using namespace oai::logger;

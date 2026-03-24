@@ -1,22 +1,5 @@
 /*
- * Licensed to the OpenAirInterface (OAI) Software Alliance under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The OpenAirInterface Software Alliance licenses this file to You under
- * the OAI Public License, Version 1.1  (the "License"); you may not use this
- * file except in compliance with the License. You may obtain a copy of the
- * License at
- *
- *      http://www.openairinterface.org/?page_id=698
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *-------------------------------------------------------------------------------
- * For more information about the OpenAirInterface (OAI) Software Alliance:
- *      contact@openairinterface.org
+ * SPDX-License-Identifier: LicenseRef-CSSL-1.0
  */
 
 #include "_5gsMobileIdentity.hpp"
@@ -355,7 +338,7 @@ int _5gsMobileIdentity::DecodeSuci(
         std::string result = {};
         for (int i = 0; i < 4; i++) {
           if (digit[i] >= 0x00 && digit[i] <= 0x09)
-            result += (const std::string) (std::to_string(digit[i]));
+            result += (const std::string)(std::to_string(digit[i]));
           else if (digit[i] == 0x0f)
             break;
           else
@@ -389,8 +372,8 @@ int _5gsMobileIdentity::DecodeSuci(
         digit_high = (octet & 0xf0) >> 4;
         digit_low  = octet & 0x0f;
         msin +=
-            ((const std::string) (std::to_string(digit_low)) +
-             (const std::string) (std::to_string(digit_high)));
+            ((const std::string)(std::to_string(digit_low)) +
+             (const std::string)(std::to_string(digit_high)));
       }
 
       // Verify if the MSIN includes an odd number of digits,
@@ -400,10 +383,10 @@ int _5gsMobileIdentity::DecodeSuci(
       digit_low  = octet & 0x0f;
       if (digit_high != 0x0f) {
         msin +=
-            ((const std::string) (std::to_string(digit_low)) +
-             (const std::string) (std::to_string(digit_high)));
+            ((const std::string)(std::to_string(digit_low)) +
+             (const std::string)(std::to_string(digit_high)));
       } else {
-        msin += (const std::string) (std::to_string(digit_low));
+        msin += (const std::string)(std::to_string(digit_low));
       }
 
       supi_format_imsi_tmp.msin = msin;
@@ -690,15 +673,15 @@ int _5gsMobileIdentity::DecodeImeisv(const uint8_t* const buf, int len) {
     digit_high = (octet & 0xf0) >> 4;
     digit_low  = octet & 0x0f;
     if (i == 0) {
-      imeisv_tmp.identity += (const std::string) (std::to_string(
+      imeisv_tmp.identity += (const std::string)(std::to_string(
           digit_high));  // octet 4 (Identity digit 1 4bits, odd/even indic 1
                          // bit, type of identity 3 bits)
     } else if (i < (len - 1)) {
       imeisv_tmp.identity +=
-          ((const std::string) (std::to_string(digit_low)) +
-           (const std::string) (std::to_string(digit_high)));
+          ((const std::string)(std::to_string(digit_low)) +
+           (const std::string)(std::to_string(digit_high)));
     } else {  // Bits 5 to 8 of the last octet: end mark coded as "1111"
-      imeisv_tmp.identity += (const std::string) (std::to_string(digit_low));
+      imeisv_tmp.identity += (const std::string)(std::to_string(digit_low));
       if (digit_high != 0x0f) {
         oai::logger::logger_common::nas().warn(
             "IMEISV: Bits 5 to 8 of the last octet should filled with an "

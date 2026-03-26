@@ -19,9 +19,9 @@
 #ifndef PositioningMethodAndUsage_H_
 #define PositioningMethodAndUsage_H_
 
-#include "Usage.h"
 #include "PositioningMethod.h"
 #include "PositioningMode.h"
+#include "Usage.h"
 #include <nlohmann/json.hpp>
 
 namespace oai::model::lmf {
@@ -30,7 +30,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class PositioningMethodAndUsage {
- public:
+public:
   PositioningMethodAndUsage();
   virtual ~PositioningMethodAndUsage() = default;
 
@@ -44,16 +44,16 @@ class PositioningMethodAndUsage {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const PositioningMethodAndUsage& rhs) const;
-  bool operator!=(const PositioningMethodAndUsage& rhs) const;
+  bool operator==(const PositioningMethodAndUsage &rhs) const;
+  bool operator!=(const PositioningMethodAndUsage &rhs) const;
 
   /////////////////////////////////////////////
   /// PositioningMethodAndUsage members
@@ -62,17 +62,17 @@ class PositioningMethodAndUsage {
   ///
   /// </summary>
   oai::model::lmf::PositioningMethod getMethod() const;
-  void setMethod(oai::model::lmf::PositioningMethod const& value);
+  void setMethod(oai::model::lmf::PositioningMethod const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::lmf::PositioningMode getMode() const;
-  void setMode(oai::model::lmf::PositioningMode const& value);
+  void setMode(oai::model::lmf::PositioningMode const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::lmf::Usage getUsage() const;
-  void setUsage(oai::model::lmf::Usage const& value);
+  void setUsage(oai::model::lmf::Usage const &value);
   /// <summary>
   ///
   /// </summary>
@@ -81,10 +81,10 @@ class PositioningMethodAndUsage {
   bool methodCodeIsSet() const;
   void unsetMethodCode();
 
-  friend void to_json(nlohmann::json& j, const PositioningMethodAndUsage& o);
-  friend void from_json(const nlohmann::json& j, PositioningMethodAndUsage& o);
+  friend void to_json(nlohmann::json &j, const PositioningMethodAndUsage &o);
+  friend void from_json(const nlohmann::json &j, PositioningMethodAndUsage &o);
 
- protected:
+protected:
   oai::model::lmf::PositioningMethod m_Method;
 
   oai::model::lmf::PositioningMode m_Mode;
@@ -95,6 +95,6 @@ class PositioningMethodAndUsage {
   bool m_MethodCodeIsSet;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* PositioningMethodAndUsage_H_ */

@@ -19,13 +19,13 @@
 #ifndef NrLocationRm_H_
 #define NrLocationRm_H_
 
-#include "Ncgi.h"
-#include "Tai.h"
-#include <string>
 #include "GlobalRanNodeId.h"
+#include "Ncgi.h"
 #include "NrLocation.h"
 #include "NullValue.h"
+#include "Tai.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::common {
 
@@ -33,7 +33,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class NrLocationRm {
- public:
+public:
   NrLocationRm();
   virtual ~NrLocationRm() = default;
 
@@ -47,16 +47,16 @@ class NrLocationRm {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const NrLocationRm& rhs) const;
-  bool operator!=(const NrLocationRm& rhs) const;
+  bool operator==(const NrLocationRm &rhs) const;
+  bool operator!=(const NrLocationRm &rhs) const;
 
   /////////////////////////////////////////////
   /// NrLocationRm members
@@ -65,12 +65,12 @@ class NrLocationRm {
   ///
   /// </summary>
   oai::model::common::Tai getTai() const;
-  void setTai(oai::model::common::Tai const& value);
+  void setTai(oai::model::common::Tai const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ncgi getNcgi() const;
-  void setNcgi(oai::model::common::Ncgi const& value);
+  void setNcgi(oai::model::common::Ncgi const &value);
   /// <summary>
   ///
   /// </summary>
@@ -89,35 +89,35 @@ class NrLocationRm {
   ///
   /// </summary>
   std::string getUeLocationTimestamp() const;
-  void setUeLocationTimestamp(std::string const& value);
+  void setUeLocationTimestamp(std::string const &value);
   bool ueLocationTimestampIsSet() const;
   void unsetUeLocationTimestamp();
   /// <summary>
   ///
   /// </summary>
   std::string getGeographicalInformation() const;
-  void setGeographicalInformation(std::string const& value);
+  void setGeographicalInformation(std::string const &value);
   bool geographicalInformationIsSet() const;
   void unsetGeographicalInformation();
   /// <summary>
   ///
   /// </summary>
   std::string getGeodeticInformation() const;
-  void setGeodeticInformation(std::string const& value);
+  void setGeodeticInformation(std::string const &value);
   bool geodeticInformationIsSet() const;
   void unsetGeodeticInformation();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::GlobalRanNodeId getGlobalGnbId() const;
-  void setGlobalGnbId(oai::model::common::GlobalRanNodeId const& value);
+  void setGlobalGnbId(oai::model::common::GlobalRanNodeId const &value);
   bool globalGnbIdIsSet() const;
   void unsetGlobalGnbId();
 
-  friend void to_json(nlohmann::json& j, const NrLocationRm& o);
-  friend void from_json(const nlohmann::json& j, NrLocationRm& o);
+  friend void to_json(nlohmann::json &j, const NrLocationRm &o);
+  friend void from_json(const nlohmann::json &j, NrLocationRm &o);
 
- protected:
+protected:
   oai::model::common::Tai m_Tai;
 
   oai::model::common::Ncgi m_Ncgi;
@@ -136,6 +136,6 @@ class NrLocationRm {
   bool m_GlobalGnbIdIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* NrLocationRm_H_ */

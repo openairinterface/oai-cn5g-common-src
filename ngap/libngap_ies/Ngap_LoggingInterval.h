@@ -20,16 +20,16 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_LoggingInterval {
-  Ngap_LoggingInterval_ms320    = 0,
-  Ngap_LoggingInterval_ms640    = 1,
-  Ngap_LoggingInterval_ms1280   = 2,
-  Ngap_LoggingInterval_ms2560   = 3,
-  Ngap_LoggingInterval_ms5120   = 4,
-  Ngap_LoggingInterval_ms10240  = 5,
-  Ngap_LoggingInterval_ms20480  = 6,
-  Ngap_LoggingInterval_ms30720  = 7,
-  Ngap_LoggingInterval_ms40960  = 8,
-  Ngap_LoggingInterval_ms61440  = 9,
+  Ngap_LoggingInterval_ms320 = 0,
+  Ngap_LoggingInterval_ms640 = 1,
+  Ngap_LoggingInterval_ms1280 = 2,
+  Ngap_LoggingInterval_ms2560 = 3,
+  Ngap_LoggingInterval_ms5120 = 4,
+  Ngap_LoggingInterval_ms10240 = 5,
+  Ngap_LoggingInterval_ms20480 = 6,
+  Ngap_LoggingInterval_ms30720 = 7,
+  Ngap_LoggingInterval_ms40960 = 8,
+  Ngap_LoggingInterval_ms61440 = 9,
   Ngap_LoggingInterval_infinity = 10
   /*
    * Enumeration is extensible

@@ -41,7 +41,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class DnnConfiguration {
- public:
+public:
   DnnConfiguration();
   virtual ~DnnConfiguration();
 
@@ -54,12 +54,12 @@ class DnnConfiguration {
   ///
   /// </summary>
   PduSessionTypes getPduSessionTypes() const;
-  void setPduSessionTypes(PduSessionTypes const& value);
+  void setPduSessionTypes(PduSessionTypes const &value);
   /// <summary>
   ///
   /// </summary>
   SscModes getSscModes() const;
-  void setSscModes(SscModes const& value);
+  void setSscModes(SscModes const &value);
   /// <summary>
   ///
   /// </summary>
@@ -71,41 +71,41 @@ class DnnConfiguration {
   ///
   /// </summary>
   oai::model::common::SubscribedDefaultQos get5gQosProfile() const;
-  void set5gQosProfile(oai::model::common::SubscribedDefaultQos const& value);
+  void set5gQosProfile(oai::model::common::SubscribedDefaultQos const &value);
   bool _5gQosProfileIsSet() const;
   void unset_5gQosProfile();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ambr getSessionAmbr() const;
-  void setSessionAmbr(oai::model::common::Ambr const& value);
+  void setSessionAmbr(oai::model::common::Ambr const &value);
   bool sessionAmbrIsSet() const;
   void unsetSessionAmbr();
   /// <summary>
   ///
   /// </summary>
   std::string get3gppChargingCharacteristics() const;
-  void set3gppChargingCharacteristics(std::string const& value);
+  void set3gppChargingCharacteristics(std::string const &value);
   bool _3gppChargingCharacteristicsIsSet() const;
   void unset_3gppChargingCharacteristics();
   /// <summary>
   ///
   /// </summary>
-  std::vector<IpAddress>& getStaticIpAddress();
+  std::vector<IpAddress> &getStaticIpAddress();
   bool staticIpAddressIsSet() const;
   void unsetStaticIpAddress();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::UpSecurity getUpSecurity() const;
-  void setUpSecurity(oai::model::common::UpSecurity const& value);
+  void setUpSecurity(oai::model::common::UpSecurity const &value);
   bool upSecurityIsSet() const;
   void unsetUpSecurity();
   /// <summary>
   ///
   /// </summary>
   PduSessionContinuityInd getPduSessionContinuityInd() const;
-  void setPduSessionContinuityInd(PduSessionContinuityInd const& value);
+  void setPduSessionContinuityInd(PduSessionContinuityInd const &value);
   bool pduSessionContinuityIndIsSet() const;
   void unsetPduSessionContinuityInd();
   /// <summary>
@@ -119,21 +119,21 @@ class DnnConfiguration {
   ///
   /// </summary>
   std::string getNiddNefId() const;
-  void setNiddNefId(std::string const& value);
+  void setNiddNefId(std::string const &value);
   bool niddNefIdIsSet() const;
   void unsetNiddNefId();
   /// <summary>
   ///
   /// </summary>
   NiddInformation getNiddInfo() const;
-  void setNiddInfo(NiddInformation const& value);
+  void setNiddInfo(NiddInformation const &value);
   bool niddInfoIsSet() const;
   void unsetNiddInfo();
 
-  friend void to_json(nlohmann::json& j, const DnnConfiguration& o);
-  friend void from_json(const nlohmann::json& j, DnnConfiguration& o);
+  friend void to_json(nlohmann::json &j, const DnnConfiguration &o);
+  friend void from_json(const nlohmann::json &j, DnnConfiguration &o);
 
- protected:
+protected:
   PduSessionTypes m_PduSessionTypes;
 
   SscModes m_SscModes;
@@ -160,6 +160,6 @@ class DnnConfiguration {
   bool m_NiddInfoIsSet;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* DnnConfiguration_H_ */

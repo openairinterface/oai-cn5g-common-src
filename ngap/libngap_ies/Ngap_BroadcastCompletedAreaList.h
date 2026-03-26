@@ -43,13 +43,13 @@ struct Ngap_ProtocolIE_SingleContainer;
 typedef struct Ngap_BroadcastCompletedAreaList {
   Ngap_BroadcastCompletedAreaList_PR present;
   union Ngap_BroadcastCompletedAreaList_u {
-    struct Ngap_CellIDBroadcastEUTRA* cellIDBroadcastEUTRA;
-    struct Ngap_TAIBroadcastEUTRA* tAIBroadcastEUTRA;
-    struct Ngap_EmergencyAreaIDBroadcastEUTRA* emergencyAreaIDBroadcastEUTRA;
-    struct Ngap_CellIDBroadcastNR* cellIDBroadcastNR;
-    struct Ngap_TAIBroadcastNR* tAIBroadcastNR;
-    struct Ngap_EmergencyAreaIDBroadcastNR* emergencyAreaIDBroadcastNR;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_CellIDBroadcastEUTRA *cellIDBroadcastEUTRA;
+    struct Ngap_TAIBroadcastEUTRA *tAIBroadcastEUTRA;
+    struct Ngap_EmergencyAreaIDBroadcastEUTRA *emergencyAreaIDBroadcastEUTRA;
+    struct Ngap_CellIDBroadcastNR *cellIDBroadcastNR;
+    struct Ngap_TAIBroadcastNR *tAIBroadcastNR;
+    struct Ngap_EmergencyAreaIDBroadcastNR *emergencyAreaIDBroadcastNR;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

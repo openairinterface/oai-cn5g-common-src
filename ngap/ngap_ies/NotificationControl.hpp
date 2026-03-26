@@ -12,20 +12,20 @@ extern "C" {
 namespace oai::ngap {
 
 class NotificationControl {
- public:
+public:
   NotificationControl();
   virtual ~NotificationControl();
 
-  void set(const e_Ngap_NotificationControl& value);
-  bool get(e_Ngap_NotificationControl& value) const;
+  void set(const e_Ngap_NotificationControl &value);
+  bool get(e_Ngap_NotificationControl &value) const;
 
-  bool encode(Ngap_NotificationControl_t&) const;
-  bool decode(const Ngap_NotificationControl_t&);
+  bool encode(Ngap_NotificationControl_t &) const;
+  bool decode(const Ngap_NotificationControl_t &);
 
- private:
+private:
   long m_NotificationControl;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

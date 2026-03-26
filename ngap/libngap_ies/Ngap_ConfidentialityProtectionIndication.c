@@ -30,9 +30,7 @@ asn_per_constraints_t
           !defined(ASN_DISABLE_APER_SUPPORT) */
 static const asn_INTEGER_enum_map_t
     asn_MAP_Ngap_ConfidentialityProtectionIndication_value2enum_1[] = {
-        {0, 8, "required"},
-        {1, 9, "preferred"},
-        {2, 10, "not-needed"}
+        {0, 8, "required"}, {1, 9, "preferred"}, {2, 10, "not-needed"}
         /* This list is extensible */
 };
 static const unsigned int

@@ -27,12 +27,12 @@ void PolicyDecisionFailureCode::validate() const {
   }
 }
 
-bool PolicyDecisionFailureCode::validate(std::stringstream& msg) const {
+bool PolicyDecisionFailureCode::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool PolicyDecisionFailureCode::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool PolicyDecisionFailureCode::validate(std::stringstream &msg,
+                                         const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PolicyDecisionFailureCode" : pathPrefix;
@@ -44,23 +44,23 @@ bool PolicyDecisionFailureCode::validate(
 }
 
 bool PolicyDecisionFailureCode::operator==(
-    const PolicyDecisionFailureCode& rhs) const {
+    const PolicyDecisionFailureCode &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
 bool PolicyDecisionFailureCode::operator!=(
-    const PolicyDecisionFailureCode& rhs) const {
+    const PolicyDecisionFailureCode &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PolicyDecisionFailureCode& o) {
+void to_json(nlohmann::json &j, const PolicyDecisionFailureCode &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, PolicyDecisionFailureCode& o) {
+void from_json(const nlohmann::json &j, PolicyDecisionFailureCode &o) {
   from_json(j, o.m_value);
 }
 
@@ -83,4 +83,4 @@ void PolicyDecisionFailureCode::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

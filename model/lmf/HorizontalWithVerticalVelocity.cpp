@@ -19,9 +19,9 @@
 namespace oai::model::lmf {
 
 HorizontalWithVerticalVelocity::HorizontalWithVerticalVelocity() {
-  m_HSpeed  = 0.0f;
+  m_HSpeed = 0.0f;
   m_Bearing = 0;
-  m_VSpeed  = 0.0f;
+  m_VSpeed = 0.0f;
 }
 
 void HorizontalWithVerticalVelocity::validate() const {
@@ -31,18 +31,18 @@ void HorizontalWithVerticalVelocity::validate() const {
   }
 }
 
-bool HorizontalWithVerticalVelocity::validate(std::stringstream& msg) const {
+bool HorizontalWithVerticalVelocity::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool HorizontalWithVerticalVelocity::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "HorizontalWithVerticalVelocity" : pathPrefix;
 
   /* HSpeed */ {
-    const float& value                 = m_HSpeed;
+    const float &value = m_HSpeed;
     const std::string currentValuePath = _pathPrefix + ".hSpeed";
 
     if (value < static_cast<float>(0)) {
@@ -56,7 +56,7 @@ bool HorizontalWithVerticalVelocity::validate(
   }
 
   /* Bearing */ {
-    const int32_t& value               = m_Bearing;
+    const int32_t &value = m_Bearing;
     const std::string currentValuePath = _pathPrefix + ".bearing";
 
     if (value < 0) {
@@ -70,7 +70,7 @@ bool HorizontalWithVerticalVelocity::validate(
   }
 
   /* VSpeed */ {
-    const float& value                 = m_VSpeed;
+    const float &value = m_VSpeed;
     const std::string currentValuePath = _pathPrefix + ".vSpeed";
 
     if (value < static_cast<float>(0)) {
@@ -87,7 +87,7 @@ bool HorizontalWithVerticalVelocity::validate(
 }
 
 bool HorizontalWithVerticalVelocity::operator==(
-    const HorizontalWithVerticalVelocity& rhs) const {
+    const HorizontalWithVerticalVelocity &rhs) const {
   return
 
       (getHSpeed() == rhs.getHSpeed()) &&
@@ -102,40 +102,34 @@ bool HorizontalWithVerticalVelocity::operator==(
 }
 
 bool HorizontalWithVerticalVelocity::operator!=(
-    const HorizontalWithVerticalVelocity& rhs) const {
+    const HorizontalWithVerticalVelocity &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const HorizontalWithVerticalVelocity& o) {
-  j               = nlohmann::json();
-  j["hSpeed"]     = o.m_HSpeed;
-  j["bearing"]    = o.m_Bearing;
-  j["vSpeed"]     = o.m_VSpeed;
+void to_json(nlohmann::json &j, const HorizontalWithVerticalVelocity &o) {
+  j = nlohmann::json();
+  j["hSpeed"] = o.m_HSpeed;
+  j["bearing"] = o.m_Bearing;
+  j["vSpeed"] = o.m_VSpeed;
   j["vDirection"] = o.m_VDirection;
 }
 
-void from_json(const nlohmann::json& j, HorizontalWithVerticalVelocity& o) {
+void from_json(const nlohmann::json &j, HorizontalWithVerticalVelocity &o) {
   j.at("hSpeed").get_to(o.m_HSpeed);
   j.at("bearing").get_to(o.m_Bearing);
   j.at("vSpeed").get_to(o.m_VSpeed);
   j.at("vDirection").get_to(o.m_VDirection);
 }
 
-float HorizontalWithVerticalVelocity::getHSpeed() const {
-  return m_HSpeed;
-}
+float HorizontalWithVerticalVelocity::getHSpeed() const { return m_HSpeed; }
 void HorizontalWithVerticalVelocity::setHSpeed(float const value) {
   m_HSpeed = value;
 }
-int32_t HorizontalWithVerticalVelocity::getBearing() const {
-  return m_Bearing;
-}
+int32_t HorizontalWithVerticalVelocity::getBearing() const { return m_Bearing; }
 void HorizontalWithVerticalVelocity::setBearing(int32_t const value) {
   m_Bearing = value;
 }
-float HorizontalWithVerticalVelocity::getVSpeed() const {
-  return m_VSpeed;
-}
+float HorizontalWithVerticalVelocity::getVSpeed() const { return m_VSpeed; }
 void HorizontalWithVerticalVelocity::setVSpeed(float const value) {
   m_VSpeed = value;
 }
@@ -144,8 +138,8 @@ HorizontalWithVerticalVelocity::getVDirection() const {
   return m_VDirection;
 }
 void HorizontalWithVerticalVelocity::setVDirection(
-    oai::model::lmf::VerticalDirection const& value) {
+    oai::model::lmf::VerticalDirection const &value) {
   m_VDirection = value;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

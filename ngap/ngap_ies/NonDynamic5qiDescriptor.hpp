@@ -19,34 +19,32 @@ extern "C" {
 namespace oai::ngap {
 
 class NonDynamic5qiDescriptor {
- public:
+public:
   NonDynamic5qiDescriptor();
   NonDynamic5qiDescriptor(
-      const FiveQI& fiveQI,
-      const std::optional<PriorityLevelQos>& priorityLevelQos,
-      const std::optional<AveragingWindow>& averagingWindow,
-      const std::optional<MaximumDataBurstVolume>& maximumDataBurstVolume);
+      const FiveQI &fiveQI,
+      const std::optional<PriorityLevelQos> &priorityLevelQos,
+      const std::optional<AveragingWindow> &averagingWindow,
+      const std::optional<MaximumDataBurstVolume> &maximumDataBurstVolume);
   virtual ~NonDynamic5qiDescriptor();
 
-  void set(
-      const FiveQI& fiveQI,
-      const std::optional<PriorityLevelQos>& priorityLevelQos,
-      const std::optional<AveragingWindow>& averagingWindow,
-      const std::optional<MaximumDataBurstVolume>& maximumDataBurstVolume);
-  void get(
-      FiveQI& fiveQI, std::optional<PriorityLevelQos>& priorityLevelQos,
-      std::optional<AveragingWindow>& averagingWindow,
-      std::optional<MaximumDataBurstVolume>& maximumDataBurstVolume) const;
+  void set(const FiveQI &fiveQI,
+           const std::optional<PriorityLevelQos> &priorityLevelQos,
+           const std::optional<AveragingWindow> &averagingWindow,
+           const std::optional<MaximumDataBurstVolume> &maximumDataBurstVolume);
+  void get(FiveQI &fiveQI, std::optional<PriorityLevelQos> &priorityLevelQos,
+           std::optional<AveragingWindow> &averagingWindow,
+           std::optional<MaximumDataBurstVolume> &maximumDataBurstVolume) const;
 
-  bool encode(Ngap_NonDynamic5QIDescriptor_t&) const;
-  bool decode(const Ngap_NonDynamic5QIDescriptor_t&);
+  bool encode(Ngap_NonDynamic5QIDescriptor_t &) const;
+  bool decode(const Ngap_NonDynamic5QIDescriptor_t &);
 
- private:
-  FiveQI m_FiveQI;                                                 // Mandatory
-  std::optional<PriorityLevelQos> m_PriorityLevelQos;              // Optional
-  std::optional<AveragingWindow> m_AveragingWindow;                // Optional
-  std::optional<MaximumDataBurstVolume> m_MaximumDataBurstVolume;  // Optional
+private:
+  FiveQI m_FiveQI;                                                // Mandatory
+  std::optional<PriorityLevelQos> m_PriorityLevelQos;             // Optional
+  std::optional<AveragingWindow> m_AveragingWindow;               // Optional
+  std::optional<MaximumDataBurstVolume> m_MaximumDataBurstVolume; // Optional
 };
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

@@ -28,7 +28,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class CoreNetworkType {
- public:
+public:
   CoreNetworkType();
   virtual ~CoreNetworkType() = default;
 
@@ -42,17 +42,17 @@ class CoreNetworkType {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  virtual bool validate(
-      std::stringstream& msg, const std::string& pathPrefix) const;
+  virtual bool validate(std::stringstream &msg,
+                        const std::string &pathPrefix) const;
 
-  bool operator==(const CoreNetworkType& rhs) const;
-  bool operator!=(const CoreNetworkType& rhs) const;
+  bool operator==(const CoreNetworkType &rhs) const;
+  bool operator!=(const CoreNetworkType &rhs) const;
 
   /////////////////////////////////////////////
   /// CoreNetworkType members
@@ -61,15 +61,15 @@ class CoreNetworkType {
   void setValue(CoreNetworkType_anyOf value);
   CoreNetworkType_anyOf::eCoreNetworkType_anyOf getEnumValue() const;
   void setEnumValue(CoreNetworkType_anyOf::eCoreNetworkType_anyOf value);
-  friend void to_json(nlohmann::json& j, const CoreNetworkType& o);
-  friend void from_json(const nlohmann::json& j, CoreNetworkType& o);
-  friend void to_json(nlohmann::json& j, const CoreNetworkType_anyOf& o);
-  friend void from_json(const nlohmann::json& j, CoreNetworkType_anyOf& o);
+  friend void to_json(nlohmann::json &j, const CoreNetworkType &o);
+  friend void from_json(const nlohmann::json &j, CoreNetworkType &o);
+  friend void to_json(nlohmann::json &j, const CoreNetworkType_anyOf &o);
+  friend void from_json(const nlohmann::json &j, CoreNetworkType_anyOf &o);
 
- protected:
+protected:
   CoreNetworkType_anyOf m_value;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* CoreNetworkType_H_ */

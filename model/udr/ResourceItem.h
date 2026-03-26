@@ -34,7 +34,7 @@ namespace oai::udr::model {
 /// occurs in a fragment (subset of resource data) of a given resource.
 /// </summary>
 class ResourceItem {
- public:
+public:
   ResourceItem();
   virtual ~ResourceItem();
 
@@ -47,22 +47,22 @@ class ResourceItem {
   ///
   /// </summary>
   std::string getMonResourceUri() const;
-  void setMonResourceUri(std::string const& value);
+  void setMonResourceUri(std::string const &value);
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getItems();
-  void setItems(std::vector<std::string> const& value);
+  std::vector<std::string> &getItems();
+  void setItems(std::vector<std::string> const &value);
 
-  friend void to_json(nlohmann::json& j, const ResourceItem& o);
-  friend void from_json(const nlohmann::json& j, ResourceItem& o);
+  friend void to_json(nlohmann::json &j, const ResourceItem &o);
+  friend void from_json(const nlohmann::json &j, ResourceItem &o);
 
- protected:
+protected:
   std::string m_MonResourceUri;
 
   std::vector<std::string> m_Items;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* ResourceItem_H_ */

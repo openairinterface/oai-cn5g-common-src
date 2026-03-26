@@ -30,7 +30,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class HssAuthenticationVectors {
- public:
+public:
   HssAuthenticationVectors();
   virtual ~HssAuthenticationVectors();
 
@@ -39,12 +39,12 @@ class HssAuthenticationVectors {
   /////////////////////////////////////////////
   /// HssAuthenticationVectors members
 
-  friend void to_json(nlohmann::json& j, const HssAuthenticationVectors& o);
-  friend void from_json(const nlohmann::json& j, HssAuthenticationVectors& o);
+  friend void to_json(nlohmann::json &j, const HssAuthenticationVectors &o);
+  friend void from_json(const nlohmann::json &j, HssAuthenticationVectors &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* HssAuthenticationVectors_H_ */

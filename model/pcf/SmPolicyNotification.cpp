@@ -19,8 +19,8 @@
 namespace oai::model::pcf {
 
 SmPolicyNotification::SmPolicyNotification() {
-  m_ResourceUri           = "";
-  m_ResourceUriIsSet      = false;
+  m_ResourceUri = "";
+  m_ResourceUriIsSet = false;
   m_SmPolicyDecisionIsSet = false;
 }
 
@@ -31,12 +31,12 @@ void SmPolicyNotification::validate() const {
   }
 }
 
-bool SmPolicyNotification::validate(std::stringstream& msg) const {
+bool SmPolicyNotification::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool SmPolicyNotification::validate(
-    std::stringstream& /* msg */, const std::string& /* pathPrefix */) const {
+    std::stringstream & /* msg */, const std::string & /* pathPrefix */) const {
   bool success = true;
   /*
   const std::string _pathPrefix =
@@ -45,7 +45,7 @@ bool SmPolicyNotification::validate(
   return success;
 }
 
-bool SmPolicyNotification::operator==(const SmPolicyNotification& rhs) const {
+bool SmPolicyNotification::operator==(const SmPolicyNotification &rhs) const {
   return
 
       ((!resourceUriIsSet() && !rhs.resourceUriIsSet()) ||
@@ -59,17 +59,19 @@ bool SmPolicyNotification::operator==(const SmPolicyNotification& rhs) const {
           ;
 }
 
-bool SmPolicyNotification::operator!=(const SmPolicyNotification& rhs) const {
+bool SmPolicyNotification::operator!=(const SmPolicyNotification &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const SmPolicyNotification& o) {
+void to_json(nlohmann::json &j, const SmPolicyNotification &o) {
   j = nlohmann::json();
-  if (o.resourceUriIsSet()) j["resourceUri"] = o.m_ResourceUri;
-  if (o.smPolicyDecisionIsSet()) j["smPolicyDecision"] = o.m_SmPolicyDecision;
+  if (o.resourceUriIsSet())
+    j["resourceUri"] = o.m_ResourceUri;
+  if (o.smPolicyDecisionIsSet())
+    j["smPolicyDecision"] = o.m_SmPolicyDecision;
 }
 
-void from_json(const nlohmann::json& j, SmPolicyNotification& o) {
+void from_json(const nlohmann::json &j, SmPolicyNotification &o) {
   if (j.find("resourceUri") != j.end()) {
     j.at("resourceUri").get_to(o.m_ResourceUri);
     o.m_ResourceUriIsSet = true;
@@ -83,23 +85,21 @@ void from_json(const nlohmann::json& j, SmPolicyNotification& o) {
 std::string SmPolicyNotification::getResourceUri() const {
   return m_ResourceUri;
 }
-void SmPolicyNotification::setResourceUri(std::string const& value) {
-  m_ResourceUri      = value;
+void SmPolicyNotification::setResourceUri(std::string const &value) {
+  m_ResourceUri = value;
   m_ResourceUriIsSet = true;
 }
 bool SmPolicyNotification::resourceUriIsSet() const {
   return m_ResourceUriIsSet;
 }
-void SmPolicyNotification::unsetResourceUri() {
-  m_ResourceUriIsSet = false;
-}
-oai::model::pcf::SmPolicyDecision SmPolicyNotification::getSmPolicyDecision()
-    const {
+void SmPolicyNotification::unsetResourceUri() { m_ResourceUriIsSet = false; }
+oai::model::pcf::SmPolicyDecision
+SmPolicyNotification::getSmPolicyDecision() const {
   return m_SmPolicyDecision;
 }
 void SmPolicyNotification::setSmPolicyDecision(
-    oai::model::pcf::SmPolicyDecision const& value) {
-  m_SmPolicyDecision      = value;
+    oai::model::pcf::SmPolicyDecision const &value) {
+  m_SmPolicyDecision = value;
   m_SmPolicyDecisionIsSet = true;
 }
 bool SmPolicyNotification::smPolicyDecisionIsSet() const {
@@ -109,4 +109,4 @@ void SmPolicyNotification::unsetSmPolicyDecision() {
   m_SmPolicyDecisionIsSet = false;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

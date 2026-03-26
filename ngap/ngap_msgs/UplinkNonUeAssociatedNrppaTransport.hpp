@@ -14,29 +14,29 @@ extern "C" {
 namespace oai::ngap {
 
 class UplinkNonUeAssociatedNrppaTransportMsg : public NgapMessage {
- public:
+public:
   UplinkNonUeAssociatedNrppaTransportMsg();
   virtual ~UplinkNonUeAssociatedNrppaTransportMsg();
 
   void initialize();
 
-  bool decode(Ngap_NGAP_PDU_t* ngapMsgPdu) override;
+  bool decode(Ngap_NGAP_PDU_t *ngapMsgPdu) override;
 
-  void setRoutingId(const OCTET_STRING_t& pdu);
-  void getRoutingId(OCTET_STRING_t& pdu) const;
+  void setRoutingId(const OCTET_STRING_t &pdu);
+  void getRoutingId(OCTET_STRING_t &pdu) const;
   OCTET_STRING_t getRoutingId() const;
 
-  void setNrppaPdu(const OCTET_STRING_t& pdu);
-  void getNrppaPdu(OCTET_STRING_t& pdu) const;
+  void setNrppaPdu(const OCTET_STRING_t &pdu);
+  void getNrppaPdu(OCTET_STRING_t &pdu) const;
   OCTET_STRING_t getNrppaPdu() const;
 
- private:
-  Ngap_UplinkNonUEAssociatedNRPPaTransport_t*
-      m_UplinkNonUeAssociatedNrppaTransportIes;
+private:
+  Ngap_UplinkNonUEAssociatedNRPPaTransport_t
+      *m_UplinkNonUeAssociatedNrppaTransportIes;
 
-  OCTET_STRING_t m_RoutingId;  // Mandatory
-  OCTET_STRING_t m_NrppaPdu;   // Mandatory
+  OCTET_STRING_t m_RoutingId; // Mandatory
+  OCTET_STRING_t m_NrppaPdu;  // Mandatory
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

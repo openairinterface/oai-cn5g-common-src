@@ -8,9 +8,9 @@ namespace oai::ngap {
 
 //------------------------------------------------------------------------------
 Dynamic5qiDescriptor::Dynamic5qiDescriptor() {
-  m_FiveQI                 = std::nullopt;
-  m_DelayCritical          = std::nullopt;
-  m_AveragingWindow        = std::nullopt;
+  m_FiveQI = std::nullopt;
+  m_DelayCritical = std::nullopt;
+  m_AveragingWindow = std::nullopt;
   m_MaximumDataBurstVolume = std::nullopt;
 }
 
@@ -19,15 +19,15 @@ Dynamic5qiDescriptor::~Dynamic5qiDescriptor() {}
 
 //------------------------------------------------------------------------------
 void Dynamic5qiDescriptor::set(
-    const PriorityLevelQos& priorityLevelQos,
-    const PacketDelayBudget& packetDelayBudget,
-    const PacketErrorRate& packetErrorRate, const std::optional<FiveQI>& fiveQI,
-    const std::optional<DelayCritical>& delayCritical,
-    const std::optional<AveragingWindow>& averagingWindow,
-    const std::optional<MaximumDataBurstVolume>& maximumDataBurstVolume) {
-  m_PriorityLevelQos  = priorityLevelQos;
+    const PriorityLevelQos &priorityLevelQos,
+    const PacketDelayBudget &packetDelayBudget,
+    const PacketErrorRate &packetErrorRate, const std::optional<FiveQI> &fiveQI,
+    const std::optional<DelayCritical> &delayCritical,
+    const std::optional<AveragingWindow> &averagingWindow,
+    const std::optional<MaximumDataBurstVolume> &maximumDataBurstVolume) {
+  m_PriorityLevelQos = priorityLevelQos;
   m_PacketDelayBudget = packetDelayBudget;
-  m_PacketErrorRate   = packetErrorRate;
+  m_PacketErrorRate = packetErrorRate;
 
   m_FiveQI = fiveQI;
 
@@ -44,18 +44,18 @@ void Dynamic5qiDescriptor::set(
 
 //------------------------------------------------------------------------------
 bool Dynamic5qiDescriptor::get(
-    PriorityLevelQos& priorityLevelQos, PacketDelayBudget& packetDelayBudget,
-    PacketErrorRate& packetErrorRate, std::optional<FiveQI>& fiveQI,
-    std::optional<DelayCritical>& delayCritical,
-    std::optional<AveragingWindow>& averagingWindow,
-    std::optional<MaximumDataBurstVolume>& maximumDataBurstVolume) const {
-  priorityLevelQos  = m_PriorityLevelQos;
+    PriorityLevelQos &priorityLevelQos, PacketDelayBudget &packetDelayBudget,
+    PacketErrorRate &packetErrorRate, std::optional<FiveQI> &fiveQI,
+    std::optional<DelayCritical> &delayCritical,
+    std::optional<AveragingWindow> &averagingWindow,
+    std::optional<MaximumDataBurstVolume> &maximumDataBurstVolume) const {
+  priorityLevelQos = m_PriorityLevelQos;
   packetDelayBudget = m_PacketDelayBudget;
-  packetErrorRate   = m_PacketErrorRate;
+  packetErrorRate = m_PacketErrorRate;
 
-  fiveQI                 = m_FiveQI;
-  delayCritical          = m_DelayCritical;
-  averagingWindow        = m_AveragingWindow;
+  fiveQI = m_FiveQI;
+  delayCritical = m_DelayCritical;
+  averagingWindow = m_AveragingWindow;
   maximumDataBurstVolume = m_MaximumDataBurstVolume;
 
   return true;
@@ -63,7 +63,7 @@ bool Dynamic5qiDescriptor::get(
 
 //------------------------------------------------------------------------------
 bool Dynamic5qiDescriptor::encode(
-    Ngap_Dynamic5QIDescriptor_t& dynamic5QIDescriptor) const {
+    Ngap_Dynamic5QIDescriptor_t &dynamic5QIDescriptor) const {
   if (!m_PriorityLevelQos.encode(dynamic5QIDescriptor.priorityLevelQos))
     return false;
   if (!m_PacketDelayBudget.encode(dynamic5QIDescriptor.packetDelayBudget))
@@ -72,31 +72,39 @@ bool Dynamic5qiDescriptor::encode(
     return false;
 
   if (m_FiveQI.has_value()) {
-    Ngap_FiveQI_t* fq = (Ngap_FiveQI_t*) calloc(1, sizeof(Ngap_FiveQI_t));
-    if (!fq) return false;
-    if (!m_FiveQI.value().encode(*fq)) return false;
+    Ngap_FiveQI_t *fq = (Ngap_FiveQI_t *)calloc(1, sizeof(Ngap_FiveQI_t));
+    if (!fq)
+      return false;
+    if (!m_FiveQI.value().encode(*fq))
+      return false;
     dynamic5QIDescriptor.fiveQI = fq;
   }
   if (m_DelayCritical.has_value()) {
-    Ngap_DelayCritical_t* dc =
-        (Ngap_DelayCritical_t*) calloc(1, sizeof(Ngap_DelayCritical_t));
-    if (!dc) return false;
-    if (!m_DelayCritical.value().encode(*dc)) return false;
+    Ngap_DelayCritical_t *dc =
+        (Ngap_DelayCritical_t *)calloc(1, sizeof(Ngap_DelayCritical_t));
+    if (!dc)
+      return false;
+    if (!m_DelayCritical.value().encode(*dc))
+      return false;
     dynamic5QIDescriptor.delayCritical = dc;
   }
   if (m_AveragingWindow.has_value()) {
-    Ngap_AveragingWindow_t* aw =
-        (Ngap_AveragingWindow_t*) calloc(1, sizeof(Ngap_AveragingWindow_t));
-    if (!aw) return false;
-    if (!m_AveragingWindow.value().encode(*aw)) return false;
+    Ngap_AveragingWindow_t *aw =
+        (Ngap_AveragingWindow_t *)calloc(1, sizeof(Ngap_AveragingWindow_t));
+    if (!aw)
+      return false;
+    if (!m_AveragingWindow.value().encode(*aw))
+      return false;
     dynamic5QIDescriptor.averagingWindow = aw;
   }
   if (m_MaximumDataBurstVolume.has_value()) {
-    Ngap_MaximumDataBurstVolume_t* mdbv =
-        (Ngap_MaximumDataBurstVolume_t*) calloc(
+    Ngap_MaximumDataBurstVolume_t *mdbv =
+        (Ngap_MaximumDataBurstVolume_t *)calloc(
             1, sizeof(Ngap_MaximumDataBurstVolume_t));
-    if (!mdbv) return false;
-    if (!m_MaximumDataBurstVolume.value().encode(*mdbv)) return false;
+    if (!mdbv)
+      return false;
+    if (!m_MaximumDataBurstVolume.value().encode(*mdbv))
+      return false;
     dynamic5QIDescriptor.maximumDataBurstVolume = mdbv;
   }
 
@@ -105,7 +113,7 @@ bool Dynamic5qiDescriptor::encode(
 
 //------------------------------------------------------------------------------
 bool Dynamic5qiDescriptor::decode(
-    const Ngap_Dynamic5QIDescriptor_t& dynamic5QIDescriptor) {
+    const Ngap_Dynamic5QIDescriptor_t &dynamic5QIDescriptor) {
   if (!m_PriorityLevelQos.decode(dynamic5QIDescriptor.priorityLevelQos))
     return false;
   if (!m_PacketDelayBudget.decode(dynamic5QIDescriptor.packetDelayBudget))
@@ -115,25 +123,29 @@ bool Dynamic5qiDescriptor::decode(
 
   if (dynamic5QIDescriptor.fiveQI) {
     FiveQI tmp = {};
-    if (!tmp.decode(*dynamic5QIDescriptor.fiveQI)) return false;
+    if (!tmp.decode(*dynamic5QIDescriptor.fiveQI))
+      return false;
     m_FiveQI = std::make_optional<FiveQI>(tmp);
   }
   if (dynamic5QIDescriptor.delayCritical) {
     DelayCritical tmp = {};
-    if (!tmp.decode(*dynamic5QIDescriptor.delayCritical)) return false;
+    if (!tmp.decode(*dynamic5QIDescriptor.delayCritical))
+      return false;
     m_DelayCritical = std::make_optional<DelayCritical>(tmp);
   }
   if (dynamic5QIDescriptor.averagingWindow) {
     AveragingWindow tmp = {};
-    if (!tmp.decode(*dynamic5QIDescriptor.averagingWindow)) return false;
+    if (!tmp.decode(*dynamic5QIDescriptor.averagingWindow))
+      return false;
     m_AveragingWindow = std::make_optional<AveragingWindow>(tmp);
   }
   if (dynamic5QIDescriptor.maximumDataBurstVolume) {
     MaximumDataBurstVolume tmp = {};
-    if (!tmp.decode(*dynamic5QIDescriptor.maximumDataBurstVolume)) return false;
+    if (!tmp.decode(*dynamic5QIDescriptor.maximumDataBurstVolume))
+      return false;
     m_MaximumDataBurstVolume = std::make_optional<MaximumDataBurstVolume>(tmp);
   }
 
   return true;
 }
-}  // namespace oai::ngap
+} // namespace oai::ngap

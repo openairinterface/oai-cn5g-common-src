@@ -21,9 +21,9 @@ extern "C" {
 /* Dependencies */
 typedef enum Ngap_CellSize {
   Ngap_CellSize_verysmall = 0,
-  Ngap_CellSize_small     = 1,
-  Ngap_CellSize_medium    = 2,
-  Ngap_CellSize_large     = 3
+  Ngap_CellSize_small = 1,
+  Ngap_CellSize_medium = 2,
+  Ngap_CellSize_large = 3
   /*
    * Enumeration is extensible
    */

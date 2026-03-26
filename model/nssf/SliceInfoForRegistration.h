@@ -34,7 +34,7 @@ namespace model {
 ///
 /// </summary>
 class SliceInfoForRegistration {
- public:
+public:
   SliceInfoForRegistration();
   virtual ~SliceInfoForRegistration() = default;
 
@@ -48,16 +48,16 @@ class SliceInfoForRegistration {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const SliceInfoForRegistration& rhs) const;
-  bool operator!=(const SliceInfoForRegistration& rhs) const;
+  bool operator==(const SliceInfoForRegistration &rhs) const;
+  bool operator!=(const SliceInfoForRegistration &rhs) const;
 
   /////////////////////////////////////////////
   /// SliceInfoForRegistration members
@@ -66,36 +66,36 @@ class SliceInfoForRegistration {
   ///
   /// </summary>
   std::vector<SubscribedSnssai> getSubscribedNssai() const;
-  void setSubscribedNssai(std::vector<SubscribedSnssai> const& value);
+  void setSubscribedNssai(std::vector<SubscribedSnssai> const &value);
   bool subscribedNssaiIsSet() const;
   void unsetSubscribedNssai();
   /// <summary>
   ///
   /// </summary>
   AllowedNssai getAllowedNssaiCurrentAccess() const;
-  void setAllowedNssaiCurrentAccess(AllowedNssai const& value);
+  void setAllowedNssaiCurrentAccess(AllowedNssai const &value);
   bool allowedNssaiCurrentAccessIsSet() const;
   void unsetAllowedNssaiCurrentAccess();
   /// <summary>
   ///
   /// </summary>
   AllowedNssai getAllowedNssaiOtherAccess() const;
-  void setAllowedNssaiOtherAccess(AllowedNssai const& value);
+  void setAllowedNssaiOtherAccess(AllowedNssai const &value);
   bool allowedNssaiOtherAccessIsSet() const;
   void unsetAllowedNssaiOtherAccess();
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::common::Snssai> getSNssaiForMapping() const;
-  void setSNssaiForMapping(
-      std::vector<oai::model::common::Snssai> const& value);
+  void
+  setSNssaiForMapping(std::vector<oai::model::common::Snssai> const &value);
   bool sNssaiForMappingIsSet() const;
   void unsetSNssaiForMapping();
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::common::Snssai> getRequestedNssai() const;
-  void setRequestedNssai(std::vector<oai::model::common::Snssai> const& value);
+  void setRequestedNssai(std::vector<oai::model::common::Snssai> const &value);
   bool requestedNssaiIsSet() const;
   void unsetRequestedNssai();
   /// <summary>
@@ -109,7 +109,7 @@ class SliceInfoForRegistration {
   ///
   /// </summary>
   std::vector<MappingOfSnssai> getMappingOfNssai() const;
-  void setMappingOfNssai(std::vector<MappingOfSnssai> const& value);
+  void setMappingOfNssai(std::vector<MappingOfSnssai> const &value);
   bool mappingOfNssaiIsSet() const;
   void unsetMappingOfNssai();
   /// <summary>
@@ -120,10 +120,10 @@ class SliceInfoForRegistration {
   bool requestMappingIsSet() const;
   void unsetRequestMapping();
 
-  friend void to_json(nlohmann::json& j, const SliceInfoForRegistration& o);
-  friend void from_json(const nlohmann::json& j, SliceInfoForRegistration& o);
+  friend void to_json(nlohmann::json &j, const SliceInfoForRegistration &o);
+  friend void from_json(const nlohmann::json &j, SliceInfoForRegistration &o);
 
- protected:
+protected:
   std::vector<SubscribedSnssai> m_SubscribedNssai;
   bool m_SubscribedNssaiIsSet;
   AllowedNssai m_AllowedNssaiCurrentAccess;
@@ -142,8 +142,8 @@ class SliceInfoForRegistration {
   bool m_RequestMappingIsSet;
 };
 
-}  // namespace model
-}  // namespace nssf_server
-}  // namespace oai
+} // namespace model
+} // namespace nssf_server
+} // namespace oai
 
 #endif /* SliceInfoForRegistration_H_ */

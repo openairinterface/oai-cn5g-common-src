@@ -14,19 +14,19 @@ QosFlowModifyConfirmItem::~QosFlowModifyConfirmItem() {}
 
 //------------------------------------------------------------------------------
 void QosFlowModifyConfirmItem::setQosFlowIdentifier(
-    const QosFlowIdentifier& qosFlowIdentifier) {
+    const QosFlowIdentifier &qosFlowIdentifier) {
   m_QosFlowIdentifier = qosFlowIdentifier;
 }
 
 //------------------------------------------------------------------------------
 void QosFlowModifyConfirmItem::getQosFlowIdentifier(
-    QosFlowIdentifier& qosFlowIdentifier) const {
+    QosFlowIdentifier &qosFlowIdentifier) const {
   qosFlowIdentifier = m_QosFlowIdentifier;
 }
 
 //------------------------------------------------------------------------------
 bool QosFlowModifyConfirmItem::encode(
-    Ngap_QosFlowModifyConfirmItem_t& QosFlowModifyConfirmItem) const {
+    Ngap_QosFlowModifyConfirmItem_t &QosFlowModifyConfirmItem) const {
   if (!m_QosFlowIdentifier.encode(QosFlowModifyConfirmItem.qosFlowIdentifier))
     return false;
   return true;
@@ -34,9 +34,9 @@ bool QosFlowModifyConfirmItem::encode(
 
 //------------------------------------------------------------------------------
 bool QosFlowModifyConfirmItem::decode(
-    const Ngap_QosFlowModifyConfirmItem_t& QosFlowModifyConfirmItem) {
+    const Ngap_QosFlowModifyConfirmItem_t &QosFlowModifyConfirmItem) {
   if (!m_QosFlowIdentifier.decode(QosFlowModifyConfirmItem.qosFlowIdentifier))
     return false;
   return true;
 }
-}  // namespace oai::ngap
+} // namespace oai::ngap

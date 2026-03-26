@@ -36,8 +36,8 @@ PduSessionReactivationResultErrorCause::PduSessionReactivationResultErrorCause(
 //    ~PduSessionReactivationResultErrorCause() {}
 
 //------------------------------------------------------------------------------
-void PduSessionReactivationResultErrorCause::SetValue(
-    uint8_t session_id, uint8_t cause) {
+void PduSessionReactivationResultErrorCause::SetValue(uint8_t session_id,
+                                                      uint8_t cause) {
   std::pair<uint8_t, uint8_t> value = std::make_pair(session_id, cause);
   pdu_session_id_cause_value_pair_.clear();
   pdu_session_id_cause_value_pair_.push_back(value);
@@ -45,14 +45,15 @@ void PduSessionReactivationResultErrorCause::SetValue(
 
 //------------------------------------------------------------------------------
 void PduSessionReactivationResultErrorCause::SetValue(
-    const std::vector<std::pair<uint8_t, uint8_t>>& value) {
-  if (value.size() > 0) pdu_session_id_cause_value_pair_ = value;
+    const std::vector<std::pair<uint8_t, uint8_t>> &value) {
+  if (value.size() > 0)
+    pdu_session_id_cause_value_pair_ = value;
   SetLengthIndicator(value.size() * 2);
 }
 
 //------------------------------------------------------------------------------
-std::pair<uint8_t, uint8_t> PduSessionReactivationResultErrorCause::GetValue()
-    const {
+std::pair<uint8_t, uint8_t>
+PduSessionReactivationResultErrorCause::GetValue() const {
   if (pdu_session_id_cause_value_pair_.size() > 0) {
     return pdu_session_id_cause_value_pair_[0];
   }
@@ -60,8 +61,8 @@ std::pair<uint8_t, uint8_t> PduSessionReactivationResultErrorCause::GetValue()
 }
 
 //------------------------------------------------------------------------------
-int PduSessionReactivationResultErrorCause::Encode(
-    uint8_t* buf, int len) const {
+int PduSessionReactivationResultErrorCause::Encode(uint8_t *buf,
+                                                   int len) const {
   oai::logger::logger_common::nas().debug("Encoding %s", GetIeName().c_str());
 
   int encoded_size = 0;
@@ -69,11 +70,12 @@ int PduSessionReactivationResultErrorCause::Encode(
   int len_pos = 0;
   int encoded_header_size =
       Type6NasIe::Encode(buf + encoded_size, len, len_pos);
-  if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
+  if (encoded_header_size == KEncodeDecodeError)
+    return KEncodeDecodeError;
   encoded_size += encoded_header_size;
 
   // PDU Session ID/Cause Value
-  for (const auto& i : pdu_session_id_cause_value_pair_) {
+  for (const auto &i : pdu_session_id_cause_value_pair_) {
     ENCODE_U8(buf + encoded_size, i.first, encoded_size);
     ENCODE_U8(buf + encoded_size, i.second, encoded_size);
   }
@@ -82,21 +84,22 @@ int PduSessionReactivationResultErrorCause::Encode(
   int encoded_len_ie = 0;
   ENCODE_U16(buf + len_pos, encoded_size - GetHeaderLength(), encoded_len_ie);
 
-  oai::logger::logger_common::nas().debug(
-      "Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
+  oai::logger::logger_common::nas().debug("Encoded %s, len (%d)",
+                                          GetIeName().c_str(), encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
-int PduSessionReactivationResultErrorCause::Decode(
-    const uint8_t* const buf, int len, bool is_iei) {
+int PduSessionReactivationResultErrorCause::Decode(const uint8_t *const buf,
+                                                   int len, bool is_iei) {
   oai::logger::logger_common::nas().debug("Decoding %s", GetIeName().c_str());
   int decoded_size = 0;
 
   // IEI and Length
-  uint16_t ie_len         = 0;
+  uint16_t ie_len = 0;
   int decoded_header_size = Type6NasIe::Decode(buf + decoded_size, len, is_iei);
-  if (decoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
+  if (decoded_header_size == KEncodeDecodeError)
+    return KEncodeDecodeError;
   decoded_size += decoded_header_size;
   ie_len = GetLengthIndicator();
 
@@ -104,7 +107,7 @@ int PduSessionReactivationResultErrorCause::Decode(
   pdu_session_id_cause_value_pair_.clear();
   while (decoded_size < ie_len - 2) {
     uint8_t pdu_session_id = {};
-    uint8_t cause_value    = {};
+    uint8_t cause_value = {};
     DECODE_U8(buf + decoded_size, pdu_session_id, decoded_size);
     DECODE_U8(buf + decoded_size, cause_value, decoded_size);
     std::pair<uint8_t, uint8_t> value =
@@ -112,12 +115,12 @@ int PduSessionReactivationResultErrorCause::Decode(
     pdu_session_id_cause_value_pair_.push_back(value);
   }
 
-  for (const auto& i : pdu_session_id_cause_value_pair_) {
-    oai::logger::logger_common::nas().debug(
-        "PDU Session ID 0x%x, Cause Value", i.first, i.second);
+  for (const auto &i : pdu_session_id_cause_value_pair_) {
+    oai::logger::logger_common::nas().debug("PDU Session ID 0x%x, Cause Value",
+                                            i.first, i.second);
   }
 
-  oai::logger::logger_common::nas().debug(
-      "Decoded %s (len %d)", GetIeName().c_str(), decoded_size);
+  oai::logger::logger_common::nas().debug("Decoded %s (len %d)",
+                                          GetIeName().c_str(), decoded_size);
   return decoded_size;
 }

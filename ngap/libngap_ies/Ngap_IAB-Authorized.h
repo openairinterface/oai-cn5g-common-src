@@ -20,7 +20,7 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_IAB_Authorized {
-  Ngap_IAB_Authorized_authorized     = 0,
+  Ngap_IAB_Authorized_authorized = 0,
   Ngap_IAB_Authorized_not_authorized = 1
   /*
    * Enumeration is extensible

@@ -27,17 +27,17 @@ void Polygon::validate() const {
   }
 }
 
-bool Polygon::validate(std::stringstream& msg) const {
+bool Polygon::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool Polygon::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool Polygon::validate(std::stringstream &msg,
+                       const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "Polygon" : pathPrefix;
 
   /* PointList */ {
-    const std::vector<oai::model::lmf::GeographicalCoordinates>& value =
+    const std::vector<oai::model::lmf::GeographicalCoordinates> &value =
         m_PointList;
     const std::string currentValuePath = _pathPrefix + ".pointList";
 
@@ -49,10 +49,10 @@ bool Polygon::validate(
       success = false;
       msg << currentValuePath << ": must have at most 15 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::lmf::GeographicalCoordinates& value : value) {
+      int i = 0;
+      for (const oai::model::lmf::GeographicalCoordinates &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -67,7 +67,7 @@ bool Polygon::validate(
   return success;
 }
 
-bool Polygon::operator==(const Polygon& rhs) const {
+bool Polygon::operator==(const Polygon &rhs) const {
   return
 
       (getShape() == rhs.getShape()) &&
@@ -77,17 +77,15 @@ bool Polygon::operator==(const Polygon& rhs) const {
           ;
 }
 
-bool Polygon::operator!=(const Polygon& rhs) const {
-  return !(*this == rhs);
-}
+bool Polygon::operator!=(const Polygon &rhs) const { return !(*this == rhs); }
 
-void to_json(nlohmann::json& j, const Polygon& o) {
-  j              = nlohmann::json();
-  j["shape"]     = o.m_Shape;
+void to_json(nlohmann::json &j, const Polygon &o) {
+  j = nlohmann::json();
+  j["shape"] = o.m_Shape;
   j["pointList"] = o.m_PointList;
 }
 
-void from_json(const nlohmann::json& j, Polygon& o) {
+void from_json(const nlohmann::json &j, Polygon &o) {
   j.at("shape").get_to(o.m_Shape);
   j.at("pointList").get_to(o.m_PointList);
 }
@@ -95,16 +93,16 @@ void from_json(const nlohmann::json& j, Polygon& o) {
 oai::model::lmf::SupportedGADShapes Polygon::getShape() const {
   return m_Shape;
 }
-void Polygon::setShape(oai::model::lmf::SupportedGADShapes const& value) {
+void Polygon::setShape(oai::model::lmf::SupportedGADShapes const &value) {
   m_Shape = value;
 }
-std::vector<oai::model::lmf::GeographicalCoordinates> Polygon::getPointList()
-    const {
+std::vector<oai::model::lmf::GeographicalCoordinates>
+Polygon::getPointList() const {
   return m_PointList;
 }
 void Polygon::setPointList(
-    std::vector<oai::model::lmf::GeographicalCoordinates> const& value) {
+    std::vector<oai::model::lmf::GeographicalCoordinates> const &value) {
   m_PointList = value;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

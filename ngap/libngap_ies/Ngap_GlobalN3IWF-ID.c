@@ -68,7 +68,7 @@ asn_TYPE_member_t asn_MBR_Ngap_GlobalN3IWF_ID_1[] = {
      0, /* No default value */
      "iE-Extensions"},
 };
-static const int asn_MAP_Ngap_GlobalN3IWF_ID_oms_1[]            = {2};
+static const int asn_MAP_Ngap_GlobalN3IWF_ID_oms_1[] = {2};
 static const ber_tlv_tag_t asn_DEF_Ngap_GlobalN3IWF_ID_tags_1[] = {
     (ASN_TAG_CLASS_UNIVERSAL | (16 << 2))};
 static const asn_TYPE_tag2member_t asn_MAP_Ngap_GlobalN3IWF_ID_tag2el_1[] = {

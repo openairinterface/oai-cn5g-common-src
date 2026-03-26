@@ -14,25 +14,25 @@ QosFlowNotifyItem::~QosFlowNotifyItem() {}
 
 //------------------------------------------------------------------------------
 void QosFlowNotifyItem::setQosFlowIdentifier(
-    const QosFlowIdentifier& qosFlowIdentifier) {
+    const QosFlowIdentifier &qosFlowIdentifier) {
   m_QosFlowIdentifier = qosFlowIdentifier;
 }
 
 //------------------------------------------------------------------------------
 void QosFlowNotifyItem::getQosFlowIdentifier(
-    QosFlowIdentifier& qosFlowIdentifier) const {
+    QosFlowIdentifier &qosFlowIdentifier) const {
   qosFlowIdentifier = m_QosFlowIdentifier;
 }
 
 //------------------------------------------------------------------------------
 void QosFlowNotifyItem::setNotificationCause(
-    const NotificationCause& notificationCause) {
+    const NotificationCause &notificationCause) {
   m_NotificationCause = notificationCause;
 }
 
 //------------------------------------------------------------------------------
 void QosFlowNotifyItem::getNotificationCause(
-    NotificationCause& notificationCause) const {
+    NotificationCause &notificationCause) const {
   notificationCause = m_NotificationCause;
 }
 
@@ -53,7 +53,7 @@ QosFlowNotifyItem::getCurrentQoSParametersSetIndex(std::optional<uint32_t>&
 
 //------------------------------------------------------------------------------
 bool QosFlowNotifyItem::encode(
-    Ngap_QosFlowNotifyItem_t& QosFlowNotifyItem) const {
+    Ngap_QosFlowNotifyItem_t &QosFlowNotifyItem) const {
   if (!m_QosFlowIdentifier.encode(QosFlowNotifyItem.qosFlowIdentifier))
     return false;
 
@@ -65,7 +65,7 @@ bool QosFlowNotifyItem::encode(
 
 //------------------------------------------------------------------------------
 bool QosFlowNotifyItem::decode(
-    const Ngap_QosFlowNotifyItem_t& QosFlowNotifyItem) {
+    const Ngap_QosFlowNotifyItem_t &QosFlowNotifyItem) {
   if (!m_QosFlowIdentifier.decode(QosFlowNotifyItem.qosFlowIdentifier))
     return false;
 
@@ -74,4 +74,4 @@ bool QosFlowNotifyItem::decode(
 
   return true;
 }
-}  // namespace oai::ngap
+} // namespace oai::ngap

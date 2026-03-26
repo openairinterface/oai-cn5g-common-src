@@ -32,7 +32,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class LocationReportingConfiguration {
- public:
+public:
   LocationReportingConfiguration();
   virtual ~LocationReportingConfiguration();
 
@@ -57,23 +57,23 @@ class LocationReportingConfiguration {
   ///
   /// </summary>
   LocationAccuracy getAccuracy() const;
-  void setAccuracy(LocationAccuracy const& value);
+  void setAccuracy(LocationAccuracy const &value);
   bool accuracyIsSet() const;
   void unsetAccuracy();
   /// <summary>
   ///
   /// </summary>
   LocationAccuracy getN3gppAccuracy() const;
-  void setN3gppAccuracy(LocationAccuracy const& value);
+  void setN3gppAccuracy(LocationAccuracy const &value);
   bool n3gppAccuracyIsSet() const;
   void unsetN3gppAccuracy();
 
-  friend void to_json(
-      nlohmann::json& j, const LocationReportingConfiguration& o);
-  friend void from_json(
-      const nlohmann::json& j, LocationReportingConfiguration& o);
+  friend void to_json(nlohmann::json &j,
+                      const LocationReportingConfiguration &o);
+  friend void from_json(const nlohmann::json &j,
+                        LocationReportingConfiguration &o);
 
- protected:
+protected:
   bool m_CurrentLocation;
 
   bool m_OneTime;
@@ -84,6 +84,6 @@ class LocationReportingConfiguration {
   bool m_N3gppAccuracyIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* LocationReportingConfiguration_H_ */

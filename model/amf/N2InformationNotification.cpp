@@ -16,13 +16,13 @@
 namespace oai::model::amf {
 
 N2InformationNotification::N2InformationNotification() {
-  m_N2NotifySubscriptionId    = "";
-  m_N2InfoContainerIsSet      = false;
+  m_N2NotifySubscriptionId = "";
+  m_N2InfoContainerIsSet = false;
   m_ToReleaseSessionListIsSet = false;
-  m_LcsCorrelationId          = "";
-  m_LcsCorrelationIdIsSet     = false;
-  m_NotifyReasonIsSet         = false;
-  m_SmfChangeIndIsSet         = false;
+  m_LcsCorrelationId = "";
+  m_LcsCorrelationIdIsSet = false;
+  m_NotifyReasonIsSet = false;
+  m_SmfChangeIndIsSet = false;
 }
 
 N2InformationNotification::~N2InformationNotification() {}
@@ -31,18 +31,22 @@ void N2InformationNotification::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const N2InformationNotification& o) {
-  j                           = nlohmann::json();
+void to_json(nlohmann::json &j, const N2InformationNotification &o) {
+  j = nlohmann::json();
   j["n2NotifySubscriptionId"] = o.m_N2NotifySubscriptionId;
-  if (o.n2InfoContainerIsSet()) j["n2InfoContainer"] = o.m_N2InfoContainer;
+  if (o.n2InfoContainerIsSet())
+    j["n2InfoContainer"] = o.m_N2InfoContainer;
   if (o.toReleaseSessionListIsSet())
     j["toReleaseSessionList"] = o.m_ToReleaseSessionList;
-  if (o.lcsCorrelationIdIsSet()) j["lcsCorrelationId"] = o.m_LcsCorrelationId;
-  if (o.notifyReasonIsSet()) j["notifyReason"] = o.m_NotifyReason;
-  if (o.smfChangeIndIsSet()) j["smfChangeInd"] = o.m_SmfChangeInd;
+  if (o.lcsCorrelationIdIsSet())
+    j["lcsCorrelationId"] = o.m_LcsCorrelationId;
+  if (o.notifyReasonIsSet())
+    j["notifyReason"] = o.m_NotifyReason;
+  if (o.smfChangeIndIsSet())
+    j["smfChangeInd"] = o.m_SmfChangeInd;
 }
 
-void from_json(const nlohmann::json& j, N2InformationNotification& o) {
+void from_json(const nlohmann::json &j, N2InformationNotification &o) {
   j.at("n2NotifySubscriptionId").get_to(o.m_N2NotifySubscriptionId);
   if (j.find("n2InfoContainer") != j.end()) {
     j.at("n2InfoContainer").get_to(o.m_N2InfoContainer);
@@ -70,15 +74,15 @@ std::string N2InformationNotification::getN2NotifySubscriptionId() const {
   return m_N2NotifySubscriptionId;
 }
 void N2InformationNotification::setN2NotifySubscriptionId(
-    std::string const& value) {
+    std::string const &value) {
   m_N2NotifySubscriptionId = value;
 }
 N2InfoContainer N2InformationNotification::getN2InfoContainer() const {
   return m_N2InfoContainer;
 }
 void N2InformationNotification::setN2InfoContainer(
-    N2InfoContainer const& value) {
-  m_N2InfoContainer      = value;
+    N2InfoContainer const &value) {
+  m_N2InfoContainer = value;
   m_N2InfoContainerIsSet = true;
 }
 bool N2InformationNotification::n2InfoContainerIsSet() const {
@@ -87,7 +91,7 @@ bool N2InformationNotification::n2InfoContainerIsSet() const {
 void N2InformationNotification::unsetN2InfoContainer() {
   m_N2InfoContainerIsSet = false;
 }
-std::vector<int32_t>& N2InformationNotification::getToReleaseSessionList() {
+std::vector<int32_t> &N2InformationNotification::getToReleaseSessionList() {
   return m_ToReleaseSessionList;
 }
 bool N2InformationNotification::toReleaseSessionListIsSet() const {
@@ -99,8 +103,8 @@ void N2InformationNotification::unsetToReleaseSessionList() {
 std::string N2InformationNotification::getLcsCorrelationId() const {
   return m_LcsCorrelationId;
 }
-void N2InformationNotification::setLcsCorrelationId(std::string const& value) {
-  m_LcsCorrelationId      = value;
+void N2InformationNotification::setLcsCorrelationId(std::string const &value) {
+  m_LcsCorrelationId = value;
   m_LcsCorrelationIdIsSet = true;
 }
 bool N2InformationNotification::lcsCorrelationIdIsSet() const {
@@ -113,8 +117,8 @@ N2InfoNotifyReason N2InformationNotification::getNotifyReason() const {
   return m_NotifyReason;
 }
 void N2InformationNotification::setNotifyReason(
-    N2InfoNotifyReason const& value) {
-  m_NotifyReason      = value;
+    N2InfoNotifyReason const &value) {
+  m_NotifyReason = value;
   m_NotifyReasonIsSet = true;
 }
 bool N2InformationNotification::notifyReasonIsSet() const {
@@ -127,8 +131,8 @@ SmfChangeIndication N2InformationNotification::getSmfChangeInd() const {
   return m_SmfChangeInd;
 }
 void N2InformationNotification::setSmfChangeInd(
-    SmfChangeIndication const& value) {
-  m_SmfChangeInd      = value;
+    SmfChangeIndication const &value) {
+  m_SmfChangeInd = value;
   m_SmfChangeIndIsSet = true;
 }
 bool N2InformationNotification::smfChangeIndIsSet() const {
@@ -138,4 +142,4 @@ void N2InformationNotification::unsetSmfChangeInd() {
   m_SmfChangeIndIsSet = false;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

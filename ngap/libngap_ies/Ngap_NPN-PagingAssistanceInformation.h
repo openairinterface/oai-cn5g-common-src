@@ -33,8 +33,8 @@ struct Ngap_ProtocolIE_SingleContainer;
 typedef struct Ngap_NPN_PagingAssistanceInformation {
   Ngap_NPN_PagingAssistanceInformation_PR present;
   union Ngap_NPN_PagingAssistanceInformation_u {
-    struct Ngap_Allowed_PNI_NPN_List* pNI_NPN_PagingAssistance;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_Allowed_PNI_NPN_List *pNI_NPN_PagingAssistance;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

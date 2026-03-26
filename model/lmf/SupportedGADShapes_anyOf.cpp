@@ -13,8 +13,8 @@
 
 #include "SupportedGADShapes_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::lmf {
 
@@ -27,12 +27,12 @@ void SupportedGADShapes_anyOf::validate() const {
   }
 }
 
-bool SupportedGADShapes_anyOf::validate(std::stringstream& msg) const {
+bool SupportedGADShapes_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool SupportedGADShapes_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool SupportedGADShapes_anyOf::validate(std::stringstream &msg,
+                                        const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "SupportedGADShapes_anyOf" : pathPrefix;
@@ -47,53 +47,53 @@ bool SupportedGADShapes_anyOf::validate(
 }
 
 bool SupportedGADShapes_anyOf::operator==(
-    const SupportedGADShapes_anyOf& rhs) const {
+    const SupportedGADShapes_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool SupportedGADShapes_anyOf::operator!=(
-    const SupportedGADShapes_anyOf& rhs) const {
+    const SupportedGADShapes_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const SupportedGADShapes_anyOf& o) {
+void to_json(nlohmann::json &j, const SupportedGADShapes_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case SupportedGADShapes_anyOf::eSupportedGADShapes_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case SupportedGADShapes_anyOf::eSupportedGADShapes_anyOf::POINT:
-      j = "POINT";
-      break;
-    case SupportedGADShapes_anyOf::eSupportedGADShapes_anyOf::
-        POINT_UNCERTAINTY_CIRCLE:
-      j = "POINT_UNCERTAINTY_CIRCLE";
-      break;
-    case SupportedGADShapes_anyOf::eSupportedGADShapes_anyOf::
-        POINT_UNCERTAINTY_ELLIPSE:
-      j = "POINT_UNCERTAINTY_ELLIPSE";
-      break;
-    case SupportedGADShapes_anyOf::eSupportedGADShapes_anyOf::POLYGON:
-      j = "POLYGON";
-      break;
-    case SupportedGADShapes_anyOf::eSupportedGADShapes_anyOf::POINT_ALTITUDE:
-      j = "POINT_ALTITUDE";
-      break;
-    case SupportedGADShapes_anyOf::eSupportedGADShapes_anyOf::
-        POINT_ALTITUDE_UNCERTAINTY:
-      j = "POINT_ALTITUDE_UNCERTAINTY";
-      break;
-    case SupportedGADShapes_anyOf::eSupportedGADShapes_anyOf::ELLIPSOID_ARC:
-      j = "ELLIPSOID_ARC";
-      break;
+  case SupportedGADShapes_anyOf::eSupportedGADShapes_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case SupportedGADShapes_anyOf::eSupportedGADShapes_anyOf::POINT:
+    j = "POINT";
+    break;
+  case SupportedGADShapes_anyOf::eSupportedGADShapes_anyOf::
+      POINT_UNCERTAINTY_CIRCLE:
+    j = "POINT_UNCERTAINTY_CIRCLE";
+    break;
+  case SupportedGADShapes_anyOf::eSupportedGADShapes_anyOf::
+      POINT_UNCERTAINTY_ELLIPSE:
+    j = "POINT_UNCERTAINTY_ELLIPSE";
+    break;
+  case SupportedGADShapes_anyOf::eSupportedGADShapes_anyOf::POLYGON:
+    j = "POLYGON";
+    break;
+  case SupportedGADShapes_anyOf::eSupportedGADShapes_anyOf::POINT_ALTITUDE:
+    j = "POINT_ALTITUDE";
+    break;
+  case SupportedGADShapes_anyOf::eSupportedGADShapes_anyOf::
+      POINT_ALTITUDE_UNCERTAINTY:
+    j = "POINT_ALTITUDE_UNCERTAINTY";
+    break;
+  case SupportedGADShapes_anyOf::eSupportedGADShapes_anyOf::ELLIPSOID_ARC:
+    j = "ELLIPSOID_ARC";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, SupportedGADShapes_anyOf& o) {
+void from_json(const nlohmann::json &j, SupportedGADShapes_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "POINT") {
     o.setValue(SupportedGADShapes_anyOf::eSupportedGADShapes_anyOf::POINT);
@@ -132,4 +132,4 @@ void SupportedGADShapes_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

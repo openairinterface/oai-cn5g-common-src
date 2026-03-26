@@ -19,9 +19,7 @@
 namespace oai::model::pcf {
 using namespace oai::model::common;
 
-AdditionalAccessInfo::AdditionalAccessInfo() {
-  m_RatTypeIsSet = false;
-}
+AdditionalAccessInfo::AdditionalAccessInfo() { m_RatTypeIsSet = false; }
 
 void AdditionalAccessInfo::validate() const {
   std::stringstream msg;
@@ -30,12 +28,12 @@ void AdditionalAccessInfo::validate() const {
   }
 }
 
-bool AdditionalAccessInfo::validate(std::stringstream& msg) const {
+bool AdditionalAccessInfo::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AdditionalAccessInfo::validate(
-    std::stringstream& /* msg */, const std::string& pathPrefix) const {
+bool AdditionalAccessInfo::validate(std::stringstream & /* msg */,
+                                    const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AdditionalAccessInfo" : pathPrefix;
@@ -43,7 +41,7 @@ bool AdditionalAccessInfo::validate(
   return success;
 }
 
-bool AdditionalAccessInfo::operator==(const AdditionalAccessInfo& rhs) const {
+bool AdditionalAccessInfo::operator==(const AdditionalAccessInfo &rhs) const {
   return
 
       (getAccessType() == rhs.getAccessType()) &&
@@ -55,17 +53,18 @@ bool AdditionalAccessInfo::operator==(const AdditionalAccessInfo& rhs) const {
           ;
 }
 
-bool AdditionalAccessInfo::operator!=(const AdditionalAccessInfo& rhs) const {
+bool AdditionalAccessInfo::operator!=(const AdditionalAccessInfo &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AdditionalAccessInfo& o) {
-  j               = nlohmann::json();
+void to_json(nlohmann::json &j, const AdditionalAccessInfo &o) {
+  j = nlohmann::json();
   j["accessType"] = o.m_AccessType;
-  if (o.ratTypeIsSet()) j["ratType"] = o.m_RatType;
+  if (o.ratTypeIsSet())
+    j["ratType"] = o.m_RatType;
 }
 
-void from_json(const nlohmann::json& j, AdditionalAccessInfo& o) {
+void from_json(const nlohmann::json &j, AdditionalAccessInfo &o) {
   j.at("accessType").get_to(o.m_AccessType);
   if (j.find("ratType") != j.end()) {
     j.at("ratType").get_to(o.m_RatType);
@@ -73,24 +72,16 @@ void from_json(const nlohmann::json& j, AdditionalAccessInfo& o) {
   }
 }
 
-AccessType AdditionalAccessInfo::getAccessType() const {
-  return m_AccessType;
-}
-void AdditionalAccessInfo::setAccessType(AccessType const& value) {
+AccessType AdditionalAccessInfo::getAccessType() const { return m_AccessType; }
+void AdditionalAccessInfo::setAccessType(AccessType const &value) {
   m_AccessType = value;
 }
-RatType AdditionalAccessInfo::getRatType() const {
-  return m_RatType;
-}
-void AdditionalAccessInfo::setRatType(RatType const& value) {
-  m_RatType      = value;
+RatType AdditionalAccessInfo::getRatType() const { return m_RatType; }
+void AdditionalAccessInfo::setRatType(RatType const &value) {
+  m_RatType = value;
   m_RatTypeIsSet = true;
 }
-bool AdditionalAccessInfo::ratTypeIsSet() const {
-  return m_RatTypeIsSet;
-}
-void AdditionalAccessInfo::unsetRatType() {
-  m_RatTypeIsSet = false;
-}
+bool AdditionalAccessInfo::ratTypeIsSet() const { return m_RatTypeIsSet; }
+void AdditionalAccessInfo::unsetRatType() { m_RatTypeIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

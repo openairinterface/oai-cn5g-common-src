@@ -27,7 +27,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class NonDynamic5Qi {
- public:
+public:
   NonDynamic5Qi();
   virtual ~NonDynamic5Qi() = default;
 
@@ -41,16 +41,16 @@ class NonDynamic5Qi {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const NonDynamic5Qi& rhs) const;
-  bool operator!=(const NonDynamic5Qi& rhs) const;
+  bool operator==(const NonDynamic5Qi &rhs) const;
+  bool operator!=(const NonDynamic5Qi &rhs) const;
 
   /////////////////////////////////////////////
   /// NonDynamic5Qi members
@@ -98,10 +98,10 @@ class NonDynamic5Qi {
   bool cnPacketDelayBudgetUlIsSet() const;
   void unsetCnPacketDelayBudgetUl();
 
-  friend void to_json(nlohmann::json& j, const NonDynamic5Qi& o);
-  friend void from_json(const nlohmann::json& j, NonDynamic5Qi& o);
+  friend void to_json(nlohmann::json &j, const NonDynamic5Qi &o);
+  friend void from_json(const nlohmann::json &j, NonDynamic5Qi &o);
 
- protected:
+protected:
   int32_t m_PriorityLevel;
   bool m_PriorityLevelIsSet;
   int32_t m_AverWindow;
@@ -116,6 +116,6 @@ class NonDynamic5Qi {
   bool m_CnPacketDelayBudgetUlIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* NonDynamic5Qi_H_ */

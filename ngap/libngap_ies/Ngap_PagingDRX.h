@@ -20,8 +20,8 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_PagingDRX {
-  Ngap_PagingDRX_v32  = 0,
-  Ngap_PagingDRX_v64  = 1,
+  Ngap_PagingDRX_v32 = 0,
+  Ngap_PagingDRX_v64 = 1,
   Ngap_PagingDRX_v128 = 2,
   Ngap_PagingDRX_v256 = 3
   /*

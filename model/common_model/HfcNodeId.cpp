@@ -18,9 +18,7 @@
 
 namespace oai::model::common {
 
-HfcNodeId::HfcNodeId() {
-  m_HfcNId = "";
-}
+HfcNodeId::HfcNodeId() { m_HfcNId = ""; }
 
 void HfcNodeId::validate() const {
   std::stringstream msg;
@@ -29,17 +27,17 @@ void HfcNodeId::validate() const {
   }
 }
 
-bool HfcNodeId::validate(std::stringstream& msg) const {
+bool HfcNodeId::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool HfcNodeId::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool HfcNodeId::validate(std::stringstream &msg,
+                         const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "HfcNodeId" : pathPrefix;
 
   /* HfcNId */ {
-    const std::string& value           = m_HfcNId;
+    const std::string &value = m_HfcNId;
     const std::string currentValuePath = _pathPrefix + ".hfcNId";
 
     if (value.length() > 6) {
@@ -51,7 +49,7 @@ bool HfcNodeId::validate(
   return success;
 }
 
-bool HfcNodeId::operator==(const HfcNodeId& rhs) const {
+bool HfcNodeId::operator==(const HfcNodeId &rhs) const {
   return
 
       (getHfcNId() == rhs.getHfcNId())
@@ -59,24 +57,20 @@ bool HfcNodeId::operator==(const HfcNodeId& rhs) const {
           ;
 }
 
-bool HfcNodeId::operator!=(const HfcNodeId& rhs) const {
+bool HfcNodeId::operator!=(const HfcNodeId &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const HfcNodeId& o) {
-  j           = nlohmann::json();
+void to_json(nlohmann::json &j, const HfcNodeId &o) {
+  j = nlohmann::json();
   j["hfcNId"] = o.m_HfcNId;
 }
 
-void from_json(const nlohmann::json& j, HfcNodeId& o) {
+void from_json(const nlohmann::json &j, HfcNodeId &o) {
   j.at("hfcNId").get_to(o.m_HfcNId);
 }
 
-std::string HfcNodeId::getHfcNId() const {
-  return m_HfcNId;
-}
-void HfcNodeId::setHfcNId(std::string const& value) {
-  m_HfcNId = value;
-}
+std::string HfcNodeId::getHfcNId() const { return m_HfcNId; }
+void HfcNodeId::setHfcNId(std::string const &value) { m_HfcNId = value; }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

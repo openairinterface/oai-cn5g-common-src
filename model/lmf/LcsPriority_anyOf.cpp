@@ -13,8 +13,8 @@
 
 #include "LcsPriority_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::lmf {
 
@@ -27,12 +27,12 @@ void LcsPriority_anyOf::validate() const {
   }
 }
 
-bool LcsPriority_anyOf::validate(std::stringstream& msg) const {
+bool LcsPriority_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool LcsPriority_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool LcsPriority_anyOf::validate(std::stringstream &msg,
+                                 const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "LcsPriority_anyOf" : pathPrefix;
@@ -46,33 +46,33 @@ bool LcsPriority_anyOf::validate(
   return success;
 }
 
-bool LcsPriority_anyOf::operator==(const LcsPriority_anyOf& rhs) const {
+bool LcsPriority_anyOf::operator==(const LcsPriority_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool LcsPriority_anyOf::operator!=(const LcsPriority_anyOf& rhs) const {
+bool LcsPriority_anyOf::operator!=(const LcsPriority_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const LcsPriority_anyOf& o) {
+void to_json(nlohmann::json &j, const LcsPriority_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case LcsPriority_anyOf::eLcsPriority_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case LcsPriority_anyOf::eLcsPriority_anyOf::HIGHEST_PRIORITY:
-      j = "HIGHEST_PRIORITY";
-      break;
-    case LcsPriority_anyOf::eLcsPriority_anyOf::NORMAL_PRIORITY:
-      j = "NORMAL_PRIORITY";
-      break;
+  case LcsPriority_anyOf::eLcsPriority_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case LcsPriority_anyOf::eLcsPriority_anyOf::HIGHEST_PRIORITY:
+    j = "HIGHEST_PRIORITY";
+    break;
+  case LcsPriority_anyOf::eLcsPriority_anyOf::NORMAL_PRIORITY:
+    j = "NORMAL_PRIORITY";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, LcsPriority_anyOf& o) {
+void from_json(const nlohmann::json &j, LcsPriority_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "HIGHEST_PRIORITY") {
     o.setValue(LcsPriority_anyOf::eLcsPriority_anyOf::HIGHEST_PRIORITY);
@@ -94,4 +94,4 @@ void LcsPriority_anyOf::setValue(LcsPriority_anyOf::eLcsPriority_anyOf value) {
   m_value = value;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

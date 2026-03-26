@@ -20,8 +20,8 @@ namespace oai::model::common {
 
 PduSessionTypeRm::PduSessionTypeRm() {}
 
-bool PduSessionTypeRm::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool PduSessionTypeRm::validate(std::stringstream &msg,
+                                const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PduSessionTypeRm" : pathPrefix;
@@ -29,7 +29,7 @@ bool PduSessionTypeRm::validate(
   return success;
 }
 
-void to_json(nlohmann::json& j, const PduSessionTypeRm& o) {
+void to_json(nlohmann::json &j, const PduSessionTypeRm &o) {
   j = nlohmann::json();
 
   if (o.getEnumValue() == PduSessionType_anyOf::ePduSessionType_anyOf::
@@ -40,7 +40,7 @@ void to_json(nlohmann::json& j, const PduSessionTypeRm& o) {
   }
 }
 
-void from_json(const nlohmann::json& j, PduSessionTypeRm& o) {
+void from_json(const nlohmann::json &j, PduSessionTypeRm &o) {
   if (j.is_null()) {
     o.setEnumValue(PduSessionType_anyOf::ePduSessionType_anyOf::
                        INVALID_VALUE_OPENAPI_GENERATED);
@@ -49,4 +49,4 @@ void from_json(const nlohmann::json& j, PduSessionTypeRm& o) {
   }
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

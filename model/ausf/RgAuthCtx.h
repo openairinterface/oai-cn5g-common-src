@@ -24,9 +24,9 @@
 #ifndef RgAuthCtx_H_
 #define RgAuthCtx_H_
 
-#include <string>
 #include "AuthResult.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::ausf {
 
@@ -34,7 +34,7 @@ namespace oai::model::ausf {
 ///
 /// </summary>
 class RgAuthCtx {
- public:
+public:
   RgAuthCtx();
   virtual ~RgAuthCtx();
 
@@ -47,12 +47,12 @@ class RgAuthCtx {
   ///
   /// </summary>
   AuthResult getAuthResult() const;
-  void setAuthResult(AuthResult const& value);
+  void setAuthResult(AuthResult const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getSupi() const;
-  void setSupi(std::string const& value);
+  void setSupi(std::string const &value);
   bool supiIsSet() const;
   void unsetSupi();
   /// <summary>
@@ -63,10 +63,10 @@ class RgAuthCtx {
   bool authIndIsSet() const;
   void unsetAuthInd();
 
-  friend void to_json(nlohmann::json& j, const RgAuthCtx& o);
-  friend void from_json(const nlohmann::json& j, RgAuthCtx& o);
+  friend void to_json(nlohmann::json &j, const RgAuthCtx &o);
+  friend void from_json(const nlohmann::json &j, RgAuthCtx &o);
 
- protected:
+protected:
   AuthResult m_AuthResult;
 
   std::string m_Supi;
@@ -75,6 +75,6 @@ class RgAuthCtx {
   bool m_AuthIndIsSet;
 };
 
-}  // namespace oai::model::ausf
+} // namespace oai::model::ausf
 
 #endif /* RgAuthCtx_H_ */

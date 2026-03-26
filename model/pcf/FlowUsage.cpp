@@ -27,30 +27,30 @@ void FlowUsage::validate() const {
   }
 }
 
-bool FlowUsage::validate(std::stringstream& msg) const {
+bool FlowUsage::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool FlowUsage::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool FlowUsage::validate(std::stringstream &msg,
+                         const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "FlowUsage" : pathPrefix;
 
   return success;
 }
 
-bool FlowUsage::operator==(const FlowUsage& rhs) const {
-  return true;  // TODO
+bool FlowUsage::operator==(const FlowUsage &rhs) const {
+  return true; // TODO
 }
 
-bool FlowUsage::operator!=(const FlowUsage& rhs) const {
+bool FlowUsage::operator!=(const FlowUsage &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const FlowUsage& o) {
+void to_json(nlohmann::json &j, const FlowUsage &o) {
   j = nlohmann::json::object();
 }
 
-void from_json(const nlohmann::json& j, FlowUsage& o) {}
+void from_json(const nlohmann::json &j, FlowUsage &o) {}
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

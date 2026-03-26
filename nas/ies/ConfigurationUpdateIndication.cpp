@@ -28,9 +28,7 @@ void ConfigurationUpdateIndication::SetRed(bool red) {
 }
 
 //------------------------------------------------------------------------------
-void ConfigurationUpdateIndication::GetRed(bool& red) const {
-  red = red_;
-}
+void ConfigurationUpdateIndication::GetRed(bool &red) const { red = red_; }
 
 //------------------------------------------------------------------------------
 void ConfigurationUpdateIndication::SetAck(bool ack) {
@@ -39,9 +37,7 @@ void ConfigurationUpdateIndication::SetAck(bool ack) {
 }
 
 //------------------------------------------------------------------------------
-void ConfigurationUpdateIndication::GetAck(bool& ack) const {
-  ack = ack_;
-}
+void ConfigurationUpdateIndication::GetAck(bool &ack) const { ack = ack_; }
 
 //------------------------------------------------------------------------------
 void ConfigurationUpdateIndication::SetValue() {
@@ -56,15 +52,16 @@ void ConfigurationUpdateIndication::GetValue() {
 }
 
 //------------------------------------------------------------------------------
-int ConfigurationUpdateIndication::Encode(uint8_t* buf, int len) const {
+int ConfigurationUpdateIndication::Encode(uint8_t *buf, int len) const {
   return Type1NasIe::Encode(buf, len);
 }
 
 //------------------------------------------------------------------------------
-int ConfigurationUpdateIndication::Decode(
-    const uint8_t* const buf, int len, bool is_iei) {
+int ConfigurationUpdateIndication::Decode(const uint8_t *const buf, int len,
+                                          bool is_iei) {
   int decoded_size = Type1NasIe::Decode(buf, len, is_iei);
-  if (decoded_size == KEncodeDecodeError) return KEncodeDecodeError;
+  if (decoded_size == KEncodeDecodeError)
+    return KEncodeDecodeError;
   GetValue();
   return decoded_size;
 }

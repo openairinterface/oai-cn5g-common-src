@@ -19,13 +19,13 @@
 namespace oai::model::pcf {
 
 RanNasRelCause::RanNasRelCause() {
-  m_NgApCauseIsSet   = false;
-  m_r_5gMmCause      = 0;
+  m_NgApCauseIsSet = false;
+  m_r_5gMmCause = 0;
   m_r_5gMmCauseIsSet = false;
-  m_r_5gSmCause      = 0;
+  m_r_5gSmCause = 0;
   m_r_5gSmCauseIsSet = false;
-  m_EpsCause         = "";
-  m_EpsCauseIsSet    = false;
+  m_EpsCause = "";
+  m_EpsCauseIsSet = false;
 }
 
 void RanNasRelCause::validate() const {
@@ -35,18 +35,18 @@ void RanNasRelCause::validate() const {
   }
 }
 
-bool RanNasRelCause::validate(std::stringstream& msg) const {
+bool RanNasRelCause::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool RanNasRelCause::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool RanNasRelCause::validate(std::stringstream &msg,
+                              const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "RanNasRelCause" : pathPrefix;
 
   if (r5gMmCauseIsSet()) {
-    const int32_t& value               = m_r_5gMmCause;
+    const int32_t &value = m_r_5gMmCause;
     const std::string currentValuePath = _pathPrefix + ".r5gMmCause";
 
     if (value < 0) {
@@ -56,7 +56,7 @@ bool RanNasRelCause::validate(
   }
 
   if (r5gSmCauseIsSet()) {
-    const int32_t& value               = m_r_5gSmCause;
+    const int32_t &value = m_r_5gSmCause;
     const std::string currentValuePath = _pathPrefix + ".r5gSmCause";
 
     if (value < 0) {
@@ -68,7 +68,7 @@ bool RanNasRelCause::validate(
   return success;
 }
 
-bool RanNasRelCause::operator==(const RanNasRelCause& rhs) const {
+bool RanNasRelCause::operator==(const RanNasRelCause &rhs) const {
   return
 
       ((!ngApCauseIsSet() && !rhs.ngApCauseIsSet()) ||
@@ -90,19 +90,23 @@ bool RanNasRelCause::operator==(const RanNasRelCause& rhs) const {
           ;
 }
 
-bool RanNasRelCause::operator!=(const RanNasRelCause& rhs) const {
+bool RanNasRelCause::operator!=(const RanNasRelCause &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const RanNasRelCause& o) {
+void to_json(nlohmann::json &j, const RanNasRelCause &o) {
   j = nlohmann::json();
-  if (o.ngApCauseIsSet()) j["ngApCause"] = o.m_NgApCause;
-  if (o.r5gMmCauseIsSet()) j["5gMmCause"] = o.m_r_5gMmCause;
-  if (o.r5gSmCauseIsSet()) j["5gSmCause"] = o.m_r_5gSmCause;
-  if (o.epsCauseIsSet()) j["epsCause"] = o.m_EpsCause;
+  if (o.ngApCauseIsSet())
+    j["ngApCause"] = o.m_NgApCause;
+  if (o.r5gMmCauseIsSet())
+    j["5gMmCause"] = o.m_r_5gMmCause;
+  if (o.r5gSmCauseIsSet())
+    j["5gSmCause"] = o.m_r_5gSmCause;
+  if (o.epsCauseIsSet())
+    j["epsCause"] = o.m_EpsCause;
 }
 
-void from_json(const nlohmann::json& j, RanNasRelCause& o) {
+void from_json(const nlohmann::json &j, RanNasRelCause &o) {
   if (j.find("ngApCause") != j.end()) {
     j.at("ngApCause").get_to(o.m_NgApCause);
     o.m_NgApCauseIsSet = true;
@@ -124,54 +128,32 @@ void from_json(const nlohmann::json& j, RanNasRelCause& o) {
 oai::model::common::NgApCause RanNasRelCause::getNgApCause() const {
   return m_NgApCause;
 }
-void RanNasRelCause::setNgApCause(oai::model::common::NgApCause const& value) {
-  m_NgApCause      = value;
+void RanNasRelCause::setNgApCause(oai::model::common::NgApCause const &value) {
+  m_NgApCause = value;
   m_NgApCauseIsSet = true;
 }
-bool RanNasRelCause::ngApCauseIsSet() const {
-  return m_NgApCauseIsSet;
-}
-void RanNasRelCause::unsetNgApCause() {
-  m_NgApCauseIsSet = false;
-}
-int32_t RanNasRelCause::getR5gMmCause() const {
-  return m_r_5gMmCause;
-}
+bool RanNasRelCause::ngApCauseIsSet() const { return m_NgApCauseIsSet; }
+void RanNasRelCause::unsetNgApCause() { m_NgApCauseIsSet = false; }
+int32_t RanNasRelCause::getR5gMmCause() const { return m_r_5gMmCause; }
 void RanNasRelCause::setR5gMmCause(int32_t const value) {
-  m_r_5gMmCause      = value;
+  m_r_5gMmCause = value;
   m_r_5gMmCauseIsSet = true;
 }
-bool RanNasRelCause::r5gMmCauseIsSet() const {
-  return m_r_5gMmCauseIsSet;
-}
-void RanNasRelCause::unsetr_5gMmCause() {
-  m_r_5gMmCauseIsSet = false;
-}
-int32_t RanNasRelCause::getR5gSmCause() const {
-  return m_r_5gSmCause;
-}
+bool RanNasRelCause::r5gMmCauseIsSet() const { return m_r_5gMmCauseIsSet; }
+void RanNasRelCause::unsetr_5gMmCause() { m_r_5gMmCauseIsSet = false; }
+int32_t RanNasRelCause::getR5gSmCause() const { return m_r_5gSmCause; }
 void RanNasRelCause::setR5gSmCause(int32_t const value) {
-  m_r_5gSmCause      = value;
+  m_r_5gSmCause = value;
   m_r_5gSmCauseIsSet = true;
 }
-bool RanNasRelCause::r5gSmCauseIsSet() const {
-  return m_r_5gSmCauseIsSet;
-}
-void RanNasRelCause::unsetr_5gSmCause() {
-  m_r_5gSmCauseIsSet = false;
-}
-std::string RanNasRelCause::getEpsCause() const {
-  return m_EpsCause;
-}
-void RanNasRelCause::setEpsCause(std::string const& value) {
-  m_EpsCause      = value;
+bool RanNasRelCause::r5gSmCauseIsSet() const { return m_r_5gSmCauseIsSet; }
+void RanNasRelCause::unsetr_5gSmCause() { m_r_5gSmCauseIsSet = false; }
+std::string RanNasRelCause::getEpsCause() const { return m_EpsCause; }
+void RanNasRelCause::setEpsCause(std::string const &value) {
+  m_EpsCause = value;
   m_EpsCauseIsSet = true;
 }
-bool RanNasRelCause::epsCauseIsSet() const {
-  return m_EpsCauseIsSet;
-}
-void RanNasRelCause::unsetEpsCause() {
-  m_EpsCauseIsSet = false;
-}
+bool RanNasRelCause::epsCauseIsSet() const { return m_EpsCauseIsSet; }
+void RanNasRelCause::unsetEpsCause() { m_EpsCauseIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

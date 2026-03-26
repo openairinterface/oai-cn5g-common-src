@@ -21,8 +21,8 @@ namespace oai::model::nrf {
 TngfInfo::TngfInfo() {
   m_Ipv4EndpointAddressesIsSet = false;
   m_Ipv6EndpointAddressesIsSet = false;
-  m_EndpointFqdn               = "";
-  m_EndpointFqdnIsSet          = false;
+  m_EndpointFqdn = "";
+  m_EndpointFqdnIsSet = false;
 }
 
 void TngfInfo::validate() const {
@@ -32,27 +32,27 @@ void TngfInfo::validate() const {
   }
 }
 
-bool TngfInfo::validate(std::stringstream& msg) const {
+bool TngfInfo::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool TngfInfo::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool TngfInfo::validate(std::stringstream &msg,
+                        const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "TngfInfo" : pathPrefix;
 
   if (ipv4EndpointAddressesIsSet()) {
-    const std::vector<std::string>& value = m_Ipv4EndpointAddresses;
+    const std::vector<std::string> &value = m_Ipv4EndpointAddresses;
     const std::string currentValuePath = _pathPrefix + ".ipv4EndpointAddresses";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const std::string& value : value) {
+      int i = 0;
+      for (const std::string &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -62,7 +62,7 @@ bool TngfInfo::validate(
   }
 
   if (ipv6EndpointAddressesIsSet()) {
-    const std::vector<oai::model::common::Ipv6Addr>& value =
+    const std::vector<oai::model::common::Ipv6Addr> &value =
         m_Ipv6EndpointAddresses;
     const std::string currentValuePath = _pathPrefix + ".ipv6EndpointAddresses";
 
@@ -70,10 +70,10 @@ bool TngfInfo::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::Ipv6Addr& value : value) {
+      int i = 0;
+      for (const oai::model::common::Ipv6Addr &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -89,7 +89,7 @@ bool TngfInfo::validate(
   return success;
 }
 
-bool TngfInfo::operator==(const TngfInfo& rhs) const {
+bool TngfInfo::operator==(const TngfInfo &rhs) const {
   return
 
       ((!ipv4EndpointAddressesIsSet() && !rhs.ipv4EndpointAddressesIsSet()) ||
@@ -107,20 +107,19 @@ bool TngfInfo::operator==(const TngfInfo& rhs) const {
           ;
 }
 
-bool TngfInfo::operator!=(const TngfInfo& rhs) const {
-  return !(*this == rhs);
-}
+bool TngfInfo::operator!=(const TngfInfo &rhs) const { return !(*this == rhs); }
 
-void to_json(nlohmann::json& j, const TngfInfo& o) {
+void to_json(nlohmann::json &j, const TngfInfo &o) {
   j = nlohmann::json();
   if (o.ipv4EndpointAddressesIsSet() || !o.m_Ipv4EndpointAddresses.empty())
     j["ipv4EndpointAddresses"] = o.m_Ipv4EndpointAddresses;
   if (o.ipv6EndpointAddressesIsSet() || !o.m_Ipv6EndpointAddresses.empty())
     j["ipv6EndpointAddresses"] = o.m_Ipv6EndpointAddresses;
-  if (o.endpointFqdnIsSet()) j["endpointFqdn"] = o.m_EndpointFqdn;
+  if (o.endpointFqdnIsSet())
+    j["endpointFqdn"] = o.m_EndpointFqdn;
 }
 
-void from_json(const nlohmann::json& j, TngfInfo& o) {
+void from_json(const nlohmann::json &j, TngfInfo &o) {
   if (j.find("ipv4EndpointAddresses") != j.end()) {
     j.at("ipv4EndpointAddresses").get_to(o.m_Ipv4EndpointAddresses);
     o.m_Ipv4EndpointAddressesIsSet = true;
@@ -138,8 +137,8 @@ void from_json(const nlohmann::json& j, TngfInfo& o) {
 std::vector<std::string> TngfInfo::getIpv4EndpointAddresses() const {
   return m_Ipv4EndpointAddresses;
 }
-void TngfInfo::setIpv4EndpointAddresses(std::vector<std::string> const& value) {
-  m_Ipv4EndpointAddresses      = value;
+void TngfInfo::setIpv4EndpointAddresses(std::vector<std::string> const &value) {
+  m_Ipv4EndpointAddresses = value;
   m_Ipv4EndpointAddressesIsSet = true;
 }
 bool TngfInfo::ipv4EndpointAddressesIsSet() const {
@@ -148,13 +147,13 @@ bool TngfInfo::ipv4EndpointAddressesIsSet() const {
 void TngfInfo::unsetIpv4EndpointAddresses() {
   m_Ipv4EndpointAddressesIsSet = false;
 }
-std::vector<oai::model::common::Ipv6Addr> TngfInfo::getIpv6EndpointAddresses()
-    const {
+std::vector<oai::model::common::Ipv6Addr>
+TngfInfo::getIpv6EndpointAddresses() const {
   return m_Ipv6EndpointAddresses;
 }
 void TngfInfo::setIpv6EndpointAddresses(
-    std::vector<oai::model::common::Ipv6Addr> const& value) {
-  m_Ipv6EndpointAddresses      = value;
+    std::vector<oai::model::common::Ipv6Addr> const &value) {
+  m_Ipv6EndpointAddresses = value;
   m_Ipv6EndpointAddressesIsSet = true;
 }
 bool TngfInfo::ipv6EndpointAddressesIsSet() const {
@@ -163,18 +162,12 @@ bool TngfInfo::ipv6EndpointAddressesIsSet() const {
 void TngfInfo::unsetIpv6EndpointAddresses() {
   m_Ipv6EndpointAddressesIsSet = false;
 }
-std::string TngfInfo::getEndpointFqdn() const {
-  return m_EndpointFqdn;
-}
-void TngfInfo::setEndpointFqdn(std::string const& value) {
-  m_EndpointFqdn      = value;
+std::string TngfInfo::getEndpointFqdn() const { return m_EndpointFqdn; }
+void TngfInfo::setEndpointFqdn(std::string const &value) {
+  m_EndpointFqdn = value;
   m_EndpointFqdnIsSet = true;
 }
-bool TngfInfo::endpointFqdnIsSet() const {
-  return m_EndpointFqdnIsSet;
-}
-void TngfInfo::unsetEndpointFqdn() {
-  m_EndpointFqdnIsSet = false;
-}
+bool TngfInfo::endpointFqdnIsSet() const { return m_EndpointFqdnIsSet; }
+void TngfInfo::unsetEndpointFqdn() { m_EndpointFqdnIsSet = false; }
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

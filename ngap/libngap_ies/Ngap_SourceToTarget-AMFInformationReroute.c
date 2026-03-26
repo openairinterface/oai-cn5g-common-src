@@ -12,8 +12,8 @@
 asn_TYPE_member_t asn_MBR_Ngap_SourceToTarget_AMFInformationReroute_1[] = {
     {ATF_POINTER,
      4,
-     offsetof(
-         struct Ngap_SourceToTarget_AMFInformationReroute, configuredNSSAI),
+     offsetof(struct Ngap_SourceToTarget_AMFInformationReroute,
+              configuredNSSAI),
      (ASN_TAG_CLASS_CONTEXT | (0 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_ConfiguredNSSAI,
@@ -32,8 +32,8 @@ asn_TYPE_member_t asn_MBR_Ngap_SourceToTarget_AMFInformationReroute_1[] = {
      "configuredNSSAI"},
     {ATF_POINTER,
      3,
-     offsetof(
-         struct Ngap_SourceToTarget_AMFInformationReroute, rejectedNSSAIinPLMN),
+     offsetof(struct Ngap_SourceToTarget_AMFInformationReroute,
+              rejectedNSSAIinPLMN),
      (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_RejectedNSSAIinPLMN,
@@ -52,8 +52,8 @@ asn_TYPE_member_t asn_MBR_Ngap_SourceToTarget_AMFInformationReroute_1[] = {
      "rejectedNSSAIinPLMN"},
     {ATF_POINTER,
      2,
-     offsetof(
-         struct Ngap_SourceToTarget_AMFInformationReroute, rejectedNSSAIinTA),
+     offsetof(struct Ngap_SourceToTarget_AMFInformationReroute,
+              rejectedNSSAIinTA),
      (ASN_TAG_CLASS_CONTEXT | (2 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_RejectedNSSAIinTA,

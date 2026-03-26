@@ -8,8 +8,8 @@
 
 #include "Ngap_SONConfigurationTransfer.h"
 
-#include "Ngap_XnTNLConfigurationInfo.h"
 #include "Ngap_ProtocolExtensionContainer.h"
+#include "Ngap_XnTNLConfigurationInfo.h"
 asn_TYPE_member_t asn_MBR_Ngap_SONConfigurationTransfer_1[] = {
     {ATF_NOFLAGS,
      0,

@@ -20,8 +20,8 @@ namespace oai::model::common {
 
 CoreNetworkTypeRm::CoreNetworkTypeRm() {}
 
-bool CoreNetworkTypeRm::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool CoreNetworkTypeRm::validate(std::stringstream &msg,
+                                 const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "CoreNetworkTypeRm" : pathPrefix;
@@ -29,7 +29,7 @@ bool CoreNetworkTypeRm::validate(
   return success;
 }
 
-void to_json(nlohmann::json& j, const CoreNetworkTypeRm& o) {
+void to_json(nlohmann::json &j, const CoreNetworkTypeRm &o) {
   j = nlohmann::json();
   if (o.m_value.getValue() == CoreNetworkType_anyOf::eCoreNetworkType_anyOf::
                                   INVALID_VALUE_OPENAPI_GENERATED) {
@@ -39,7 +39,7 @@ void to_json(nlohmann::json& j, const CoreNetworkTypeRm& o) {
   }
 }
 
-void from_json(const nlohmann::json& j, CoreNetworkTypeRm& o) {
+void from_json(const nlohmann::json &j, CoreNetworkTypeRm &o) {
   if (j.is_null()) {
     o.m_value.setValue(CoreNetworkType_anyOf::eCoreNetworkType_anyOf::
                            INVALID_VALUE_OPENAPI_GENERATED);
@@ -48,4 +48,4 @@ void from_json(const nlohmann::json& j, CoreNetworkTypeRm& o) {
   }
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

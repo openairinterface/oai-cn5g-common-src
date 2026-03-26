@@ -30,7 +30,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class LocationPrivacyInd {
- public:
+public:
   LocationPrivacyInd();
   virtual ~LocationPrivacyInd();
 
@@ -39,12 +39,12 @@ class LocationPrivacyInd {
   /////////////////////////////////////////////
   /// LocationPrivacyInd members
 
-  friend void to_json(nlohmann::json& j, const LocationPrivacyInd& o);
-  friend void from_json(const nlohmann::json& j, LocationPrivacyInd& o);
+  friend void to_json(nlohmann::json &j, const LocationPrivacyInd &o);
+  friend void from_json(const nlohmann::json &j, LocationPrivacyInd &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* LocationPrivacyInd_H_ */

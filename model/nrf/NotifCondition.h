@@ -19,9 +19,9 @@
 #ifndef NotifCondition_H_
 #define NotifCondition_H_
 
+#include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
-#include <nlohmann/json.hpp>
 
 namespace oai::model::nrf {
 
@@ -29,7 +29,7 @@ namespace oai::model::nrf {
 ///
 /// </summary>
 class NotifCondition {
- public:
+public:
   NotifCondition();
   virtual ~NotifCondition();
 
@@ -41,28 +41,28 @@ class NotifCondition {
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getMonitoredAttributes();
-  void setMonitoredAttributes(std::vector<std::string> const& value);
+  std::vector<std::string> &getMonitoredAttributes();
+  void setMonitoredAttributes(std::vector<std::string> const &value);
   bool monitoredAttributesIsSet() const;
   void unsetMonitoredAttributes();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getUnmonitoredAttributes();
-  void setUnmonitoredAttributes(std::vector<std::string> const& value);
+  std::vector<std::string> &getUnmonitoredAttributes();
+  void setUnmonitoredAttributes(std::vector<std::string> const &value);
   bool unmonitoredAttributesIsSet() const;
   void unsetUnmonitoredAttributes();
 
-  friend void to_json(nlohmann::json& j, const NotifCondition& o);
-  friend void from_json(const nlohmann::json& j, NotifCondition& o);
+  friend void to_json(nlohmann::json &j, const NotifCondition &o);
+  friend void from_json(const nlohmann::json &j, NotifCondition &o);
 
- protected:
+protected:
   std::vector<std::string> m_MonitoredAttributes;
   bool m_MonitoredAttributesIsSet;
   std::vector<std::string> m_UnmonitoredAttributes;
   bool m_UnmonitoredAttributesIsSet;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* NotifCondition_H_ */

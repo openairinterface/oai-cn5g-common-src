@@ -27,12 +27,12 @@ void AccuracyFulfilmentIndicator::validate() const {
   }
 }
 
-bool AccuracyFulfilmentIndicator::validate(std::stringstream& msg) const {
+bool AccuracyFulfilmentIndicator::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool AccuracyFulfilmentIndicator::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AccuracyFulfilmentIndicator" : pathPrefix;
@@ -44,28 +44,28 @@ bool AccuracyFulfilmentIndicator::validate(
 }
 
 bool AccuracyFulfilmentIndicator::operator==(
-    const AccuracyFulfilmentIndicator& rhs) const {
+    const AccuracyFulfilmentIndicator &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
 bool AccuracyFulfilmentIndicator::operator!=(
-    const AccuracyFulfilmentIndicator& rhs) const {
+    const AccuracyFulfilmentIndicator &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AccuracyFulfilmentIndicator& o) {
+void to_json(nlohmann::json &j, const AccuracyFulfilmentIndicator &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, AccuracyFulfilmentIndicator& o) {
+void from_json(const nlohmann::json &j, AccuracyFulfilmentIndicator &o) {
   from_json(j, o.m_value);
 }
 
-AccuracyFulfilmentIndicator_anyOf AccuracyFulfilmentIndicator::getValue()
-    const {
+AccuracyFulfilmentIndicator_anyOf
+AccuracyFulfilmentIndicator::getValue() const {
   return m_value;
 }
 
@@ -85,4 +85,4 @@ void AccuracyFulfilmentIndicator::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

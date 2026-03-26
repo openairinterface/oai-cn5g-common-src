@@ -20,9 +20,9 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_HandoverType {
-  Ngap_HandoverType_intra5gs      = 0,
+  Ngap_HandoverType_intra5gs = 0,
   Ngap_HandoverType_fivegs_to_eps = 1,
-  Ngap_HandoverType_eps_to_5gs    = 2,
+  Ngap_HandoverType_eps_to_5gs = 2,
   /*
    * Enumeration is extensible
    */

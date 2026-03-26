@@ -19,7 +19,7 @@
 namespace oai::model::udsf {
 
 SearchCondition::SearchCondition() {
-  m_SchemaId      = "";
+  m_SchemaId = "";
   m_SchemaIdIsSet = false;
 }
 
@@ -30,28 +30,28 @@ void SearchCondition::validate() const {
   }
 }
 
-bool SearchCondition::validate(std::stringstream& msg) const {
+bool SearchCondition::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool SearchCondition::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool SearchCondition::validate(std::stringstream &msg,
+                               const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "SearchCondition" : pathPrefix;
 
   /* Units */ {
-    const std::vector<oai::model::udsf::SearchComparison>& value = m_Units;
+    const std::vector<oai::model::udsf::SearchComparison> &value = m_Units;
     const std::string currentValuePath = _pathPrefix + ".units";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::udsf::SearchComparison& value : value) {
+      int i = 0;
+      for (const oai::model::udsf::SearchComparison &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -65,7 +65,7 @@ bool SearchCondition::validate(
   return success;
 }
 
-bool SearchCondition::operator==(const SearchCondition& rhs) const {
+bool SearchCondition::operator==(const SearchCondition &rhs) const {
   return
 
       (getCond() == rhs.getCond()) && (getUnits() == rhs.getUnits()) &&
@@ -74,18 +74,19 @@ bool SearchCondition::operator==(const SearchCondition& rhs) const {
         getSchemaId() == rhs.getSchemaId()));
 }
 
-bool SearchCondition::operator!=(const SearchCondition& rhs) const {
+bool SearchCondition::operator!=(const SearchCondition &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const SearchCondition& o) {
-  j          = nlohmann::json();
-  j["cond"]  = o.m_Cond;
+void to_json(nlohmann::json &j, const SearchCondition &o) {
+  j = nlohmann::json();
+  j["cond"] = o.m_Cond;
   j["units"] = o.m_Units;
-  if (o.schemaIdIsSet()) j["schemaId"] = o.m_SchemaId;
+  if (o.schemaIdIsSet())
+    j["schemaId"] = o.m_SchemaId;
 }
 
-void from_json(const nlohmann::json& j, SearchCondition& o) {
+void from_json(const nlohmann::json &j, SearchCondition &o) {
   j.at("cond").get_to(o.m_Cond);
   j.at("units").get_to(o.m_Units);
   if (j.find("schemaId") != j.end()) {
@@ -98,29 +99,23 @@ oai::model::udsf::ConditionOperator SearchCondition::getCond() const {
   return m_Cond;
 }
 void SearchCondition::setCond(
-    oai::model::udsf::ConditionOperator const& value) {
+    oai::model::udsf::ConditionOperator const &value) {
   m_Cond = value;
 }
-std::vector<oai::model::udsf::SearchComparison> SearchCondition::getUnits()
-    const {
+std::vector<oai::model::udsf::SearchComparison>
+SearchCondition::getUnits() const {
   return m_Units;
 }
 void SearchCondition::setUnits(
-    std::vector<oai::model::udsf::SearchComparison> const& value) {
+    std::vector<oai::model::udsf::SearchComparison> const &value) {
   m_Units = value;
 }
-std::string SearchCondition::getSchemaId() const {
-  return m_SchemaId;
-}
-void SearchCondition::setSchemaId(std::string const& value) {
-  m_SchemaId      = value;
+std::string SearchCondition::getSchemaId() const { return m_SchemaId; }
+void SearchCondition::setSchemaId(std::string const &value) {
+  m_SchemaId = value;
   m_SchemaIdIsSet = true;
 }
-bool SearchCondition::schemaIdIsSet() const {
-  return m_SchemaIdIsSet;
-}
-void SearchCondition::unsetSchemaId() {
-  m_SchemaIdIsSet = false;
-}
+bool SearchCondition::schemaIdIsSet() const { return m_SchemaIdIsSet; }
+void SearchCondition::unsetSchemaId() { m_SchemaIdIsSet = false; }
 
-}  // namespace oai::model::udsf
+} // namespace oai::model::udsf

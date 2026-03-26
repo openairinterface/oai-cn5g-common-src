@@ -27,7 +27,7 @@ namespace oai::model::nrf {
 ///
 /// </summary>
 class NotificationType {
- public:
+public:
   NotificationType();
   virtual ~NotificationType();
 
@@ -36,12 +36,12 @@ class NotificationType {
   /////////////////////////////////////////////
   /// NotificationType members
 
-  friend void to_json(nlohmann::json& j, const NotificationType& o);
-  friend void from_json(const nlohmann::json& j, NotificationType& o);
+  friend void to_json(nlohmann::json &j, const NotificationType &o);
+  friend void from_json(const nlohmann::json &j, NotificationType &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* NotificationType_H_ */

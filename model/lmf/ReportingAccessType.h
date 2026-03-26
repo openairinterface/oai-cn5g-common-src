@@ -28,7 +28,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class ReportingAccessType {
- public:
+public:
   ReportingAccessType();
   virtual ~ReportingAccessType() = default;
 
@@ -42,16 +42,16 @@ class ReportingAccessType {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const ReportingAccessType& rhs) const;
-  bool operator!=(const ReportingAccessType& rhs) const;
+  bool operator==(const ReportingAccessType &rhs) const;
+  bool operator!=(const ReportingAccessType &rhs) const;
 
   /////////////////////////////////////////////
   /// ReportingAccessType members
@@ -59,17 +59,17 @@ class ReportingAccessType {
   ReportingAccessType_anyOf getValue() const;
   void setValue(ReportingAccessType_anyOf value);
   ReportingAccessType_anyOf::eReportingAccessType_anyOf getEnumValue() const;
-  void setEnumValue(
-      ReportingAccessType_anyOf::eReportingAccessType_anyOf value);
-  friend void to_json(nlohmann::json& j, const ReportingAccessType& o);
-  friend void from_json(const nlohmann::json& j, ReportingAccessType& o);
-  friend void to_json(nlohmann::json& j, const ReportingAccessType_anyOf& o);
-  friend void from_json(const nlohmann::json& j, ReportingAccessType_anyOf& o);
+  void
+  setEnumValue(ReportingAccessType_anyOf::eReportingAccessType_anyOf value);
+  friend void to_json(nlohmann::json &j, const ReportingAccessType &o);
+  friend void from_json(const nlohmann::json &j, ReportingAccessType &o);
+  friend void to_json(nlohmann::json &j, const ReportingAccessType_anyOf &o);
+  friend void from_json(const nlohmann::json &j, ReportingAccessType_anyOf &o);
 
- protected:
+protected:
   ReportingAccessType_anyOf m_value;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* ReportingAccessType_H_ */

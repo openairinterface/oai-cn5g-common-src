@@ -19,11 +19,11 @@
 namespace oai::model::common {
 
 BatteryIndicationRm::BatteryIndicationRm() {
-  m_BatteryInd           = false;
-  m_BatteryIndIsSet      = false;
-  m_ReplaceableInd       = false;
-  m_ReplaceableIndIsSet  = false;
-  m_RechargeableInd      = false;
+  m_BatteryInd = false;
+  m_BatteryIndIsSet = false;
+  m_ReplaceableInd = false;
+  m_ReplaceableIndIsSet = false;
+  m_RechargeableInd = false;
   m_RechargeableIndIsSet = false;
 }
 
@@ -34,12 +34,12 @@ void BatteryIndicationRm::validate() const {
   }
 }
 
-bool BatteryIndicationRm::validate(std::stringstream& msg) const {
+bool BatteryIndicationRm::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool BatteryIndicationRm::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool BatteryIndicationRm::validate(std::stringstream &msg,
+                                   const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "BatteryIndicationRm" : pathPrefix;
@@ -47,7 +47,7 @@ bool BatteryIndicationRm::validate(
   return success;
 }
 
-bool BatteryIndicationRm::operator==(const BatteryIndicationRm& rhs) const {
+bool BatteryIndicationRm::operator==(const BatteryIndicationRm &rhs) const {
   return
 
       ((!batteryIndIsSet() && !rhs.batteryIndIsSet()) ||
@@ -65,18 +65,21 @@ bool BatteryIndicationRm::operator==(const BatteryIndicationRm& rhs) const {
           ;
 }
 
-bool BatteryIndicationRm::operator!=(const BatteryIndicationRm& rhs) const {
+bool BatteryIndicationRm::operator!=(const BatteryIndicationRm &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const BatteryIndicationRm& o) {
+void to_json(nlohmann::json &j, const BatteryIndicationRm &o) {
   j = nlohmann::json();
-  if (o.batteryIndIsSet()) j["batteryInd"] = o.m_BatteryInd;
-  if (o.replaceableIndIsSet()) j["replaceableInd"] = o.m_ReplaceableInd;
-  if (o.rechargeableIndIsSet()) j["rechargeableInd"] = o.m_RechargeableInd;
+  if (o.batteryIndIsSet())
+    j["batteryInd"] = o.m_BatteryInd;
+  if (o.replaceableIndIsSet())
+    j["replaceableInd"] = o.m_ReplaceableInd;
+  if (o.rechargeableIndIsSet())
+    j["rechargeableInd"] = o.m_RechargeableInd;
 }
 
-void from_json(const nlohmann::json& j, BatteryIndicationRm& o) {
+void from_json(const nlohmann::json &j, BatteryIndicationRm &o) {
   if (j.find("batteryInd") != j.end()) {
     j.at("batteryInd").get_to(o.m_BatteryInd);
     o.m_BatteryIndIsSet = true;
@@ -91,24 +94,16 @@ void from_json(const nlohmann::json& j, BatteryIndicationRm& o) {
   }
 }
 
-bool BatteryIndicationRm::isBatteryInd() const {
-  return m_BatteryInd;
-}
+bool BatteryIndicationRm::isBatteryInd() const { return m_BatteryInd; }
 void BatteryIndicationRm::setBatteryInd(bool const value) {
-  m_BatteryInd      = value;
+  m_BatteryInd = value;
   m_BatteryIndIsSet = true;
 }
-bool BatteryIndicationRm::batteryIndIsSet() const {
-  return m_BatteryIndIsSet;
-}
-void BatteryIndicationRm::unsetBatteryInd() {
-  m_BatteryIndIsSet = false;
-}
-bool BatteryIndicationRm::isReplaceableInd() const {
-  return m_ReplaceableInd;
-}
+bool BatteryIndicationRm::batteryIndIsSet() const { return m_BatteryIndIsSet; }
+void BatteryIndicationRm::unsetBatteryInd() { m_BatteryIndIsSet = false; }
+bool BatteryIndicationRm::isReplaceableInd() const { return m_ReplaceableInd; }
 void BatteryIndicationRm::setReplaceableInd(bool const value) {
-  m_ReplaceableInd      = value;
+  m_ReplaceableInd = value;
   m_ReplaceableIndIsSet = true;
 }
 bool BatteryIndicationRm::replaceableIndIsSet() const {
@@ -121,7 +116,7 @@ bool BatteryIndicationRm::isRechargeableInd() const {
   return m_RechargeableInd;
 }
 void BatteryIndicationRm::setRechargeableInd(bool const value) {
-  m_RechargeableInd      = value;
+  m_RechargeableInd = value;
   m_RechargeableIndIsSet = true;
 }
 bool BatteryIndicationRm::rechargeableIndIsSet() const {
@@ -131,4 +126,4 @@ void BatteryIndicationRm::unsetRechargeableInd() {
   m_RechargeableIndIsSet = false;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

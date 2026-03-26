@@ -19,10 +19,10 @@
 #ifndef ArpRm_H_
 #define ArpRm_H_
 
+#include "Arp.h"
+#include "NullValue.h"
 #include "PreemptionCapability.h"
 #include "PreemptionVulnerability.h"
-#include "NullValue.h"
-#include "Arp.h"
 #include <nlohmann/json.hpp>
 
 namespace oai::model::common {
@@ -31,7 +31,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class ArpRm {
- public:
+public:
   ArpRm();
   virtual ~ArpRm() = default;
 
@@ -45,16 +45,16 @@ class ArpRm {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const ArpRm& rhs) const;
-  bool operator!=(const ArpRm& rhs) const;
+  bool operator==(const ArpRm &rhs) const;
+  bool operator!=(const ArpRm &rhs) const;
 
   /////////////////////////////////////////////
   /// ArpRm members
@@ -68,17 +68,17 @@ class ArpRm {
   ///
   /// </summary>
   oai::model::common::PreemptionCapability getPreemptCap() const;
-  void setPreemptCap(oai::model::common::PreemptionCapability const& value);
+  void setPreemptCap(oai::model::common::PreemptionCapability const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::PreemptionVulnerability getPreemptVuln() const;
-  void setPreemptVuln(oai::model::common::PreemptionVulnerability const& value);
+  void setPreemptVuln(oai::model::common::PreemptionVulnerability const &value);
 
-  friend void to_json(nlohmann::json& j, const ArpRm& o);
-  friend void from_json(const nlohmann::json& j, ArpRm& o);
+  friend void to_json(nlohmann::json &j, const ArpRm &o);
+  friend void from_json(const nlohmann::json &j, ArpRm &o);
 
- protected:
+protected:
   int32_t m_PriorityLevel;
 
   oai::model::common::PreemptionCapability m_PreemptCap;
@@ -86,6 +86,6 @@ class ArpRm {
   oai::model::common::PreemptionVulnerability m_PreemptVuln;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* ArpRm_H_ */

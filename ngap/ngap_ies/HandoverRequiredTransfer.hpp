@@ -19,26 +19,26 @@ extern "C" {
 namespace oai::ngap {
 
 class HandoverRequiredTransfer {
- public:
+public:
   HandoverRequiredTransfer();
   virtual ~HandoverRequiredTransfer();
 
   void setDirectForwardingPathAvailability(
-      const Ngap_DirectForwardingPathAvailability_t&
-          directForwardingPathAvailability);
+      const Ngap_DirectForwardingPathAvailability_t
+          &directForwardingPathAvailability);
   bool getDirectForwardingPathAvailability(
-      long& directForwardingPathAvailability) const;
+      long &directForwardingPathAvailability) const;
   std::optional<long> getDirectForwardingPathAvailability() const;
 
-  int encode(uint8_t* buf, int bufSize);
-  bool decode(uint8_t* buf, int bufSize);
+  int encode(uint8_t *buf, int bufSize);
+  bool decode(uint8_t *buf, int bufSize);
 
- private:
-  Ngap_HandoverRequiredTransfer_t* m_HandoverRquiredTransferIe;
+private:
+  Ngap_HandoverRequiredTransfer_t *m_HandoverRquiredTransferIe;
 
   std::optional<Ngap_DirectForwardingPathAvailability_t>
-      m_DirectForwardingPathAvailability;  // Optional
+      m_DirectForwardingPathAvailability; // Optional
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

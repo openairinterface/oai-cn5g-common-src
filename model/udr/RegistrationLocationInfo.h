@@ -36,7 +36,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class RegistrationLocationInfo {
- public:
+public:
   RegistrationLocationInfo();
   virtual ~RegistrationLocationInfo();
 
@@ -49,32 +49,32 @@ class RegistrationLocationInfo {
   ///
   /// </summary>
   std::string getAmfInstanceId() const;
-  void setAmfInstanceId(std::string const& value);
+  void setAmfInstanceId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::PlmnId getPlmnId() const;
-  void setPlmnId(oai::model::common::PlmnId const& value);
+  void setPlmnId(oai::model::common::PlmnId const &value);
   bool plmnIdIsSet() const;
   void unsetPlmnId();
   /// <summary>
   ///
   /// </summary>
   VgmlcAddress getVgmlcAddress() const;
-  void setVgmlcAddress(VgmlcAddress const& value);
+  void setVgmlcAddress(VgmlcAddress const &value);
   bool vgmlcAddressIsSet() const;
   void unsetVgmlcAddress();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::AccessType>& getAccessTypeList();
-  void setAccessTypeList(
-      std::vector<oai::model::common::AccessType> const& value);
+  std::vector<oai::model::common::AccessType> &getAccessTypeList();
+  void
+  setAccessTypeList(std::vector<oai::model::common::AccessType> const &value);
 
-  friend void to_json(nlohmann::json& j, const RegistrationLocationInfo& o);
-  friend void from_json(const nlohmann::json& j, RegistrationLocationInfo& o);
+  friend void to_json(nlohmann::json &j, const RegistrationLocationInfo &o);
+  friend void from_json(const nlohmann::json &j, RegistrationLocationInfo &o);
 
- protected:
+protected:
   std::string m_AmfInstanceId;
 
   oai::model::common::PlmnId m_PlmnId;
@@ -84,6 +84,6 @@ class RegistrationLocationInfo {
   std::vector<oai::model::common::AccessType> m_AccessTypeList;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* RegistrationLocationInfo_H_ */

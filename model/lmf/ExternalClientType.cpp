@@ -27,12 +27,12 @@ void ExternalClientType::validate() const {
   }
 }
 
-bool ExternalClientType::validate(std::stringstream& msg) const {
+bool ExternalClientType::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ExternalClientType::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ExternalClientType::validate(std::stringstream &msg,
+                                  const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ExternalClientType" : pathPrefix;
@@ -43,22 +43,22 @@ bool ExternalClientType::validate(
   return success;
 }
 
-bool ExternalClientType::operator==(const ExternalClientType& rhs) const {
+bool ExternalClientType::operator==(const ExternalClientType &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool ExternalClientType::operator!=(const ExternalClientType& rhs) const {
+bool ExternalClientType::operator!=(const ExternalClientType &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ExternalClientType& o) {
+void to_json(nlohmann::json &j, const ExternalClientType &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, ExternalClientType& o) {
+void from_json(const nlohmann::json &j, ExternalClientType &o) {
   from_json(j, o.m_value);
 }
 
@@ -80,4 +80,4 @@ void ExternalClientType::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

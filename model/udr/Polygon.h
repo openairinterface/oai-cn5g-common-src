@@ -36,7 +36,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class Polygon {
- public:
+public:
   Polygon();
   virtual ~Polygon();
 
@@ -49,22 +49,22 @@ class Polygon {
   ///
   /// </summary>
   SupportedGADShapes getShape() const;
-  void setShape(SupportedGADShapes const& value);
+  void setShape(SupportedGADShapes const &value);
   /// <summary>
   ///
   /// </summary>
-  std::vector<GeographicalCoordinates>& getPointList();
-  void setPointList(std::vector<GeographicalCoordinates> const& value);
+  std::vector<GeographicalCoordinates> &getPointList();
+  void setPointList(std::vector<GeographicalCoordinates> const &value);
 
-  friend void to_json(nlohmann::json& j, const Polygon& o);
-  friend void from_json(const nlohmann::json& j, Polygon& o);
+  friend void to_json(nlohmann::json &j, const Polygon &o);
+  friend void from_json(const nlohmann::json &j, Polygon &o);
 
- protected:
+protected:
   SupportedGADShapes m_Shape;
 
   std::vector<GeographicalCoordinates> m_PointList;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* Polygon_H_ */

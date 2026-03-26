@@ -34,30 +34,31 @@ static const int permitted_alphabet_code2value_1[74] = {
     109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122,
 };
 
-static int check_permitted_alphabet_1(const void* sptr) {
-  const int* table = permitted_alphabet_table_1;
+static int check_permitted_alphabet_1(const void *sptr) {
+  const int *table = permitted_alphabet_table_1;
   /* The underlying type is PrintableString */
-  const PrintableString_t* st = (const PrintableString_t*) sptr;
-  const uint8_t* ch           = st->buf;
-  const uint8_t* end          = ch + st->size;
+  const PrintableString_t *st = (const PrintableString_t *)sptr;
+  const uint8_t *ch = st->buf;
+  const uint8_t *end = ch + st->size;
 
   for (; ch < end; ch++) {
     uint8_t cv = *ch;
-    if (!table[cv]) return -1;
+    if (!table[cv])
+      return -1;
   }
   return 0;
 }
 
-int Ngap_RANNodeName_constraint(
-    const asn_TYPE_descriptor_t* td, const void* sptr,
-    asn_app_constraint_failed_f* ctfailcb, void* app_key) {
-  const PrintableString_t* st = (const PrintableString_t*) sptr;
+int Ngap_RANNodeName_constraint(const asn_TYPE_descriptor_t *td,
+                                const void *sptr,
+                                asn_app_constraint_failed_f *ctfailcb,
+                                void *app_key) {
+  const PrintableString_t *st = (const PrintableString_t *)sptr;
   size_t size;
 
   if (!sptr) {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: value not given (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: value not given (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 
@@ -67,9 +68,8 @@ int Ngap_RANNodeName_constraint(
     /* Constraint check succeeded */
     return 0;
   } else {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: constraint failed (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: constraint failed (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 }

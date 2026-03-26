@@ -21,10 +21,10 @@ namespace nssf_server {
 namespace model {
 
 NssaiAvailabilityInfo::NssaiAvailabilityInfo() {
-  m_SupportedFeatures      = "";
+  m_SupportedFeatures = "";
   m_SupportedFeaturesIsSet = false;
-  m_AmfSetId               = "";
-  m_AmfSetIdIsSet          = false;
+  m_AmfSetId = "";
+  m_AmfSetIdIsSet = false;
 }
 
 void NssaiAvailabilityInfo::validate() const {
@@ -35,18 +35,18 @@ void NssaiAvailabilityInfo::validate() const {
   // }
 }
 
-bool NssaiAvailabilityInfo::validate(std::stringstream& msg) const {
+bool NssaiAvailabilityInfo::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool NssaiAvailabilityInfo::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool NssaiAvailabilityInfo::validate(std::stringstream &msg,
+                                     const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "NssaiAvailabilityInfo" : pathPrefix;
 
   /* SupportedNssaiAvailabilityData */ {
-    const std::vector<SupportedNssaiAvailabilityData>& value =
+    const std::vector<SupportedNssaiAvailabilityData> &value =
         m_SupportedNssaiAvailabilityData;
     const std::string currentValuePath =
         _pathPrefix + ".supportedNssaiAvailabilityData";
@@ -55,17 +55,16 @@ bool NssaiAvailabilityInfo::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const SupportedNssaiAvailabilityData& value : value) {
+      int i = 0;
+      for (const SupportedNssaiAvailabilityData &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
-        success =
-            value.validate(
-                msg, currentValuePath + ".supportedNssaiAvailabilityData") &&
-            success;
+        success = value.validate(msg, currentValuePath +
+                                          ".supportedNssaiAvailabilityData") &&
+                  success;
 
         i++;
       }
@@ -73,19 +72,19 @@ bool NssaiAvailabilityInfo::validate(
   }
 
   if (supportedFeaturesIsSet()) {
-    const std::string& value           = m_SupportedFeatures;
+    const std::string &value = m_SupportedFeatures;
     const std::string currentValuePath = _pathPrefix + ".supportedFeatures";
   }
 
   if (amfSetIdIsSet()) {
-    const std::string& value           = m_AmfSetId;
+    const std::string &value = m_AmfSetId;
     const std::string currentValuePath = _pathPrefix + ".amfSetId";
   }
 
   return success;
 }
 
-bool NssaiAvailabilityInfo::operator==(const NssaiAvailabilityInfo& rhs) const {
+bool NssaiAvailabilityInfo::operator==(const NssaiAvailabilityInfo &rhs) const {
   return
 
       (getSupportedNssaiAvailabilityData() ==
@@ -102,19 +101,20 @@ bool NssaiAvailabilityInfo::operator==(const NssaiAvailabilityInfo& rhs) const {
           ;
 }
 
-bool NssaiAvailabilityInfo::operator!=(const NssaiAvailabilityInfo& rhs) const {
+bool NssaiAvailabilityInfo::operator!=(const NssaiAvailabilityInfo &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const NssaiAvailabilityInfo& o) {
-  j                                   = nlohmann::json();
+void to_json(nlohmann::json &j, const NssaiAvailabilityInfo &o) {
+  j = nlohmann::json();
   j["supportedNssaiAvailabilityData"] = o.m_SupportedNssaiAvailabilityData;
   if (o.supportedFeaturesIsSet())
     j["supportedFeatures"] = o.m_SupportedFeatures;
-  if (o.amfSetIdIsSet()) j["amfSetId"] = o.m_AmfSetId;
+  if (o.amfSetIdIsSet())
+    j["amfSetId"] = o.m_AmfSetId;
 }
 
-void from_json(const nlohmann::json& j, NssaiAvailabilityInfo& o) {
+void from_json(const nlohmann::json &j, NssaiAvailabilityInfo &o) {
   j.at("supportedNssaiAvailabilityData")
       .get_to(o.m_SupportedNssaiAvailabilityData);
   if (j.find("supportedFeatures") != j.end()) {
@@ -132,14 +132,14 @@ NssaiAvailabilityInfo::getSupportedNssaiAvailabilityData() const {
   return m_SupportedNssaiAvailabilityData;
 }
 void NssaiAvailabilityInfo::setSupportedNssaiAvailabilityData(
-    std::vector<SupportedNssaiAvailabilityData> const& value) {
+    std::vector<SupportedNssaiAvailabilityData> const &value) {
   m_SupportedNssaiAvailabilityData = value;
 }
 std::string NssaiAvailabilityInfo::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
-void NssaiAvailabilityInfo::setSupportedFeatures(std::string const& value) {
-  m_SupportedFeatures      = value;
+void NssaiAvailabilityInfo::setSupportedFeatures(std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool NssaiAvailabilityInfo::supportedFeaturesIsSet() const {
@@ -148,20 +148,14 @@ bool NssaiAvailabilityInfo::supportedFeaturesIsSet() const {
 void NssaiAvailabilityInfo::unsetSupportedFeatures() {
   m_SupportedFeaturesIsSet = false;
 }
-std::string NssaiAvailabilityInfo::getAmfSetId() const {
-  return m_AmfSetId;
-}
-void NssaiAvailabilityInfo::setAmfSetId(std::string const& value) {
-  m_AmfSetId      = value;
+std::string NssaiAvailabilityInfo::getAmfSetId() const { return m_AmfSetId; }
+void NssaiAvailabilityInfo::setAmfSetId(std::string const &value) {
+  m_AmfSetId = value;
   m_AmfSetIdIsSet = true;
 }
-bool NssaiAvailabilityInfo::amfSetIdIsSet() const {
-  return m_AmfSetIdIsSet;
-}
-void NssaiAvailabilityInfo::unsetAmfSetId() {
-  m_AmfSetIdIsSet = false;
-}
+bool NssaiAvailabilityInfo::amfSetIdIsSet() const { return m_AmfSetIdIsSet; }
+void NssaiAvailabilityInfo::unsetAmfSetId() { m_AmfSetIdIsSet = false; }
 
-}  // namespace model
-}  // namespace nssf_server
-}  // namespace oai
+} // namespace model
+} // namespace nssf_server
+} // namespace oai

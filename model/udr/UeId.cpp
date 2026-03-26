@@ -19,7 +19,7 @@
 namespace oai::udr::model {
 
 UeId::UeId() {
-  m_Supi          = "";
+  m_Supi = "";
   m_GpsiListIsSet = false;
 }
 
@@ -29,13 +29,14 @@ void UeId::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const UeId& o) {
-  j         = nlohmann::json();
+void to_json(nlohmann::json &j, const UeId &o) {
+  j = nlohmann::json();
   j["supi"] = o.m_Supi;
-  if (o.gpsiListIsSet() || !o.m_GpsiList.empty()) j["gpsiList"] = o.m_GpsiList;
+  if (o.gpsiListIsSet() || !o.m_GpsiList.empty())
+    j["gpsiList"] = o.m_GpsiList;
 }
 
-void from_json(const nlohmann::json& j, UeId& o) {
+void from_json(const nlohmann::json &j, UeId &o) {
   j.at("supi").get_to(o.m_Supi);
   if (j.find("gpsiList") != j.end()) {
     j.at("gpsiList").get_to(o.m_GpsiList);
@@ -43,24 +44,14 @@ void from_json(const nlohmann::json& j, UeId& o) {
   }
 }
 
-std::string UeId::getSupi() const {
-  return m_Supi;
-}
-void UeId::setSupi(std::string const& value) {
-  m_Supi = value;
-}
-std::vector<std::string>& UeId::getGpsiList() {
-  return m_GpsiList;
-}
-void UeId::setGpsiList(std::vector<std::string> const& value) {
-  m_GpsiList      = value;
+std::string UeId::getSupi() const { return m_Supi; }
+void UeId::setSupi(std::string const &value) { m_Supi = value; }
+std::vector<std::string> &UeId::getGpsiList() { return m_GpsiList; }
+void UeId::setGpsiList(std::vector<std::string> const &value) {
+  m_GpsiList = value;
   m_GpsiListIsSet = true;
 }
-bool UeId::gpsiListIsSet() const {
-  return m_GpsiListIsSet;
-}
-void UeId::unsetGpsiList() {
-  m_GpsiListIsSet = false;
-}
+bool UeId::gpsiListIsSet() const { return m_GpsiListIsSet; }
+void UeId::unsetGpsiList() { m_GpsiListIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

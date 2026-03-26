@@ -8,14 +8,13 @@
 
 #include "Ngap_UEContextResumeResponseTransfer.h"
 
-#include "Ngap_QosFlowListWithCause.h"
 #include "Ngap_ProtocolExtensionContainer.h"
+#include "Ngap_QosFlowListWithCause.h"
 static asn_TYPE_member_t asn_MBR_Ngap_UEContextResumeResponseTransfer_1[] = {
     {ATF_POINTER,
      2,
-     offsetof(
-         struct Ngap_UEContextResumeResponseTransfer,
-         qosFlowFailedToResumeList),
+     offsetof(struct Ngap_UEContextResumeResponseTransfer,
+              qosFlowFailedToResumeList),
      (ASN_TAG_CLASS_CONTEXT | (0 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_QosFlowListWithCause,

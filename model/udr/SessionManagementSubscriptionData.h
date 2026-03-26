@@ -40,7 +40,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class SessionManagementSubscriptionData {
- public:
+public:
   SessionManagementSubscriptionData();
   virtual ~SessionManagementSubscriptionData();
 
@@ -53,88 +53,88 @@ class SessionManagementSubscriptionData {
   ///
   /// </summary>
   oai::model::common::Snssai getSingleNssai() const;
-  void setSingleNssai(oai::model::common::Snssai const& value);
+  void setSingleNssai(oai::model::common::Snssai const &value);
   /// <summary>
   /// A map (list of key-value pairs where Dnn, or optionally the Wildcard DNN,
   /// serves as key) of DnnConfigurations
   /// </summary>
-  std::map<std::string, DnnConfiguration>& getDnnConfigurations();
-  void setDnnConfigurations(
-      std::map<std::string, DnnConfiguration> const& value);
+  std::map<std::string, DnnConfiguration> &getDnnConfigurations();
+  void
+  setDnnConfigurations(std::map<std::string, DnnConfiguration> const &value);
   bool dnnConfigurationsIsSet() const;
   void unsetDnnConfigurations();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getInternalGroupIds();
-  void setInternalGroupIds(std::vector<std::string> const& value);
+  std::vector<std::string> &getInternalGroupIds();
+  void setInternalGroupIds(std::vector<std::string> const &value);
   bool internalGroupIdsIsSet() const;
   void unsetInternalGroupIds();
   /// <summary>
   ///
   /// </summary>
-  std::map<std::string, std::string>& getSharedVnGroupDataIds();
-  void setSharedVnGroupDataIds(std::map<std::string, std::string> const& value);
+  std::map<std::string, std::string> &getSharedVnGroupDataIds();
+  void setSharedVnGroupDataIds(std::map<std::string, std::string> const &value);
   bool sharedVnGroupDataIdsIsSet() const;
   void unsetSharedVnGroupDataIds();
   /// <summary>
   ///
   /// </summary>
   std::string getSharedDnnConfigurationsId() const;
-  void setSharedDnnConfigurationsId(std::string const& value);
+  void setSharedDnnConfigurationsId(std::string const &value);
   bool sharedDnnConfigurationsIdIsSet() const;
   void unsetSharedDnnConfigurationsId();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::OdbPacketServices getOdbPacketServices() const;
-  void setOdbPacketServices(oai::model::common::OdbPacketServices const& value);
+  void setOdbPacketServices(oai::model::common::OdbPacketServices const &value);
   bool odbPacketServicesIsSet() const;
   void unsetOdbPacketServices();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::TraceData getTraceData() const;
-  void setTraceData(oai::model::common::TraceData const& value);
+  void setTraceData(oai::model::common::TraceData const &value);
   bool traceDataIsSet() const;
   void unsetTraceData();
   /// <summary>
   ///
   /// </summary>
   std::string getSharedTraceDataId() const;
-  void setSharedTraceDataId(std::string const& value);
+  void setSharedTraceDataId(std::string const &value);
   bool sharedTraceDataIdIsSet() const;
   void unsetSharedTraceDataId();
   /// <summary>
   ///
   /// </summary>
-  std::map<std::string, ExpectedUeBehaviourData>& getExpectedUeBehavioursList();
+  std::map<std::string, ExpectedUeBehaviourData> &getExpectedUeBehavioursList();
   void setExpectedUeBehavioursList(
-      std::map<std::string, ExpectedUeBehaviourData> const& value);
+      std::map<std::string, ExpectedUeBehaviourData> const &value);
   bool expectedUeBehavioursListIsSet() const;
   void unsetExpectedUeBehavioursList();
   /// <summary>
   ///
   /// </summary>
-  std::map<std::string, SuggestedPacketNumDl>& getSuggestedPacketNumDlList();
+  std::map<std::string, SuggestedPacketNumDl> &getSuggestedPacketNumDlList();
   void setSuggestedPacketNumDlList(
-      std::map<std::string, SuggestedPacketNumDl> const& value);
+      std::map<std::string, SuggestedPacketNumDl> const &value);
   bool suggestedPacketNumDlListIsSet() const;
   void unsetSuggestedPacketNumDlList();
   /// <summary>
   ///
   /// </summary>
   std::string getR3gppChargingCharacteristics() const;
-  void setR3gppChargingCharacteristics(std::string const& value);
+  void setR3gppChargingCharacteristics(std::string const &value);
   bool r3gppChargingCharacteristicsIsSet() const;
   void unsetr_3gppChargingCharacteristics();
 
-  friend void to_json(
-      nlohmann::json& j, const SessionManagementSubscriptionData& o);
-  friend void from_json(
-      const nlohmann::json& j, SessionManagementSubscriptionData& o);
+  friend void to_json(nlohmann::json &j,
+                      const SessionManagementSubscriptionData &o);
+  friend void from_json(const nlohmann::json &j,
+                        SessionManagementSubscriptionData &o);
 
- protected:
+protected:
   oai::model::common::Snssai m_SingleNssai;
   std::map<std::string, DnnConfiguration> m_DnnConfigurations;
   bool m_DnnConfigurationsIsSet;
@@ -158,6 +158,6 @@ class SessionManagementSubscriptionData {
   bool m_r_3gppChargingCharacteristicsIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* SessionManagementSubscriptionData_H_ */

@@ -16,8 +16,8 @@
 namespace oai::model::amf {
 
 N2InformationTransferRspData::N2InformationTransferRspData() {
-  m_PwsRspDataIsSet        = false;
-  m_SupportedFeatures      = "";
+  m_PwsRspDataIsSet = false;
+  m_SupportedFeatures = "";
   m_SupportedFeaturesIsSet = false;
 }
 
@@ -27,15 +27,16 @@ void N2InformationTransferRspData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const N2InformationTransferRspData& o) {
-  j           = nlohmann::json();
+void to_json(nlohmann::json &j, const N2InformationTransferRspData &o) {
+  j = nlohmann::json();
   j["result"] = o.m_Result;
-  if (o.pwsRspDataIsSet()) j["pwsRspData"] = o.m_PwsRspData;
+  if (o.pwsRspDataIsSet())
+    j["pwsRspData"] = o.m_PwsRspData;
   if (o.supportedFeaturesIsSet())
     j["supportedFeatures"] = o.m_SupportedFeatures;
 }
 
-void from_json(const nlohmann::json& j, N2InformationTransferRspData& o) {
+void from_json(const nlohmann::json &j, N2InformationTransferRspData &o) {
   j.at("result").get_to(o.m_Result);
   if (j.find("pwsRspData") != j.end()) {
     j.at("pwsRspData").get_to(o.m_PwsRspData);
@@ -51,14 +52,14 @@ N2InformationTransferResult N2InformationTransferRspData::getResult() const {
   return m_Result;
 }
 void N2InformationTransferRspData::setResult(
-    N2InformationTransferResult const& value) {
+    N2InformationTransferResult const &value) {
   m_Result = value;
 }
 PWSResponseData N2InformationTransferRspData::getPwsRspData() const {
   return m_PwsRspData;
 }
-void N2InformationTransferRspData::setPwsRspData(PWSResponseData const& value) {
-  m_PwsRspData      = value;
+void N2InformationTransferRspData::setPwsRspData(PWSResponseData const &value) {
+  m_PwsRspData = value;
   m_PwsRspDataIsSet = true;
 }
 bool N2InformationTransferRspData::pwsRspDataIsSet() const {
@@ -71,8 +72,8 @@ std::string N2InformationTransferRspData::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
 void N2InformationTransferRspData::setSupportedFeatures(
-    std::string const& value) {
-  m_SupportedFeatures      = value;
+    std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool N2InformationTransferRspData::supportedFeaturesIsSet() const {
@@ -82,4 +83,4 @@ void N2InformationTransferRspData::unsetSupportedFeatures() {
   m_SupportedFeaturesIsSet = false;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

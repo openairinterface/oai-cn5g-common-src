@@ -13,7 +13,7 @@ namespace oai::ngap {
 PduSessionResourceNotifyReleasedTransfer::
     PduSessionResourceNotifyReleasedTransfer() {
   m_PduSessionResourceNotifyReleasedTransferIe =
-      (Ngap_PDUSessionResourceNotifyReleasedTransfer_t*) calloc(
+      (Ngap_PDUSessionResourceNotifyReleasedTransfer_t *)calloc(
           1, sizeof(Ngap_PDUSessionResourceNotifyReleasedTransfer_t));
 }
 
@@ -108,8 +108,8 @@ long PduSessionResourceNotifyReleasedTransfer::getCause() const {
 }
 
 //------------------------------------------------------------------------------
-int PduSessionResourceNotifyReleasedTransfer::encode(
-    uint8_t* buf, int bufSize) {
+int PduSessionResourceNotifyReleasedTransfer::encode(uint8_t *buf,
+                                                     int bufSize) {
   ngap_utils::print_asn_msg(
       &asn_DEF_Ngap_PDUSessionResourceNotifyReleasedTransfer,
       m_PduSessionResourceNotifyReleasedTransferIe);
@@ -121,12 +121,12 @@ int PduSessionResourceNotifyReleasedTransfer::encode(
 }
 
 //------------------------------------------------------------------------------
-bool PduSessionResourceNotifyReleasedTransfer::decode(
-    uint8_t* buf, int bufSize) {
+bool PduSessionResourceNotifyReleasedTransfer::decode(uint8_t *buf,
+                                                      int bufSize) {
   asn_dec_rval_t rc = asn_decode(
       NULL, ATS_ALIGNED_CANONICAL_PER,
       &asn_DEF_Ngap_PDUSessionResourceNotifyReleasedTransfer,
-      (void**) &m_PduSessionResourceNotifyReleasedTransferIe, buf, bufSize);
+      (void **)&m_PduSessionResourceNotifyReleasedTransferIe, buf, bufSize);
 
   if (rc.code == RC_OK) {
     oai::logger::logger_common::ngap().debug("Decoded successfully");
@@ -138,8 +138,8 @@ bool PduSessionResourceNotifyReleasedTransfer::decode(
     return false;
   }
 
-  oai::logger::logger_common::ngap().debug(
-      "rc.consumed to decode %d", rc.consumed);
+  oai::logger::logger_common::ngap().debug("rc.consumed to decode %d",
+                                           rc.consumed);
   // asn_fprint(stderr,
   // &asn_DEF_Ngap_PDUSessionResourceNotifyReleasedTransfer,
   // m_PduSessionResourceNotifyReleasedTransferIe);
@@ -152,4 +152,4 @@ bool PduSessionResourceNotifyReleasedTransfer::decode(
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

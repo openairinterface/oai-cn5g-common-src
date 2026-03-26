@@ -19,17 +19,17 @@
 namespace oai::model::lmf {
 
 MotionEventInfo::MotionEventInfo() {
-  m_LinearDistance            = 0;
-  m_OccurrenceInfoIsSet       = false;
-  m_MinimumInterval           = 0;
-  m_MinimumIntervalIsSet      = false;
-  m_MaximumInterval           = 0;
-  m_MaximumIntervalIsSet      = false;
-  m_SamplingInterval          = 0;
-  m_SamplingIntervalIsSet     = false;
-  m_ReportingDuration         = 0;
-  m_ReportingDurationIsSet    = false;
-  m_ReportingLocationReq      = true;
+  m_LinearDistance = 0;
+  m_OccurrenceInfoIsSet = false;
+  m_MinimumInterval = 0;
+  m_MinimumIntervalIsSet = false;
+  m_MaximumInterval = 0;
+  m_MaximumIntervalIsSet = false;
+  m_SamplingInterval = 0;
+  m_SamplingIntervalIsSet = false;
+  m_ReportingDuration = 0;
+  m_ReportingDurationIsSet = false;
+  m_ReportingLocationReq = true;
   m_ReportingLocationReqIsSet = false;
 }
 
@@ -40,18 +40,18 @@ void MotionEventInfo::validate() const {
   }
 }
 
-bool MotionEventInfo::validate(std::stringstream& msg) const {
+bool MotionEventInfo::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool MotionEventInfo::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool MotionEventInfo::validate(std::stringstream &msg,
+                               const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "MotionEventInfo" : pathPrefix;
 
   /* LinearDistance */ {
-    const int32_t& value               = m_LinearDistance;
+    const int32_t &value = m_LinearDistance;
     const std::string currentValuePath = _pathPrefix + ".linearDistance";
 
     if (value < 1) {
@@ -65,7 +65,7 @@ bool MotionEventInfo::validate(
   }
 
   if (minimumIntervalIsSet()) {
-    const int32_t& value               = m_MinimumInterval;
+    const int32_t &value = m_MinimumInterval;
     const std::string currentValuePath = _pathPrefix + ".minimumInterval";
 
     if (value < 1) {
@@ -79,7 +79,7 @@ bool MotionEventInfo::validate(
   }
 
   if (maximumIntervalIsSet()) {
-    const int32_t& value               = m_MaximumInterval;
+    const int32_t &value = m_MaximumInterval;
     const std::string currentValuePath = _pathPrefix + ".maximumInterval";
 
     if (value < 1) {
@@ -93,7 +93,7 @@ bool MotionEventInfo::validate(
   }
 
   if (samplingIntervalIsSet()) {
-    const int32_t& value               = m_SamplingInterval;
+    const int32_t &value = m_SamplingInterval;
     const std::string currentValuePath = _pathPrefix + ".samplingInterval";
 
     if (value < 1) {
@@ -107,7 +107,7 @@ bool MotionEventInfo::validate(
   }
 
   if (reportingDurationIsSet()) {
-    const int32_t& value               = m_ReportingDuration;
+    const int32_t &value = m_ReportingDuration;
     const std::string currentValuePath = _pathPrefix + ".reportingDuration";
 
     if (value < 1) {
@@ -123,7 +123,7 @@ bool MotionEventInfo::validate(
   return success;
 }
 
-bool MotionEventInfo::operator==(const MotionEventInfo& rhs) const {
+bool MotionEventInfo::operator==(const MotionEventInfo &rhs) const {
   return
 
       (getLinearDistance() == rhs.getLinearDistance()) &&
@@ -155,24 +155,28 @@ bool MotionEventInfo::operator==(const MotionEventInfo& rhs) const {
           ;
 }
 
-bool MotionEventInfo::operator!=(const MotionEventInfo& rhs) const {
+bool MotionEventInfo::operator!=(const MotionEventInfo &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const MotionEventInfo& o) {
-  j                   = nlohmann::json();
+void to_json(nlohmann::json &j, const MotionEventInfo &o) {
+  j = nlohmann::json();
   j["linearDistance"] = o.m_LinearDistance;
-  if (o.occurrenceInfoIsSet()) j["occurrenceInfo"] = o.m_OccurrenceInfo;
-  if (o.minimumIntervalIsSet()) j["minimumInterval"] = o.m_MinimumInterval;
-  if (o.maximumIntervalIsSet()) j["maximumInterval"] = o.m_MaximumInterval;
-  if (o.samplingIntervalIsSet()) j["samplingInterval"] = o.m_SamplingInterval;
+  if (o.occurrenceInfoIsSet())
+    j["occurrenceInfo"] = o.m_OccurrenceInfo;
+  if (o.minimumIntervalIsSet())
+    j["minimumInterval"] = o.m_MinimumInterval;
+  if (o.maximumIntervalIsSet())
+    j["maximumInterval"] = o.m_MaximumInterval;
+  if (o.samplingIntervalIsSet())
+    j["samplingInterval"] = o.m_SamplingInterval;
   if (o.reportingDurationIsSet())
     j["reportingDuration"] = o.m_ReportingDuration;
   if (o.reportingLocationReqIsSet())
     j["reportingLocationReq"] = o.m_ReportingLocationReq;
 }
 
-void from_json(const nlohmann::json& j, MotionEventInfo& o) {
+void from_json(const nlohmann::json &j, MotionEventInfo &o) {
   j.at("linearDistance").get_to(o.m_LinearDistance);
   if (j.find("occurrenceInfo") != j.end()) {
     j.at("occurrenceInfo").get_to(o.m_OccurrenceInfo);
@@ -200,9 +204,7 @@ void from_json(const nlohmann::json& j, MotionEventInfo& o) {
   }
 }
 
-int32_t MotionEventInfo::getLinearDistance() const {
-  return m_LinearDistance;
-}
+int32_t MotionEventInfo::getLinearDistance() const { return m_LinearDistance; }
 void MotionEventInfo::setLinearDistance(int32_t const value) {
   m_LinearDistance = value;
 }
@@ -210,47 +212,41 @@ oai::model::lmf::OccurrenceInfo MotionEventInfo::getOccurrenceInfo() const {
   return m_OccurrenceInfo;
 }
 void MotionEventInfo::setOccurrenceInfo(
-    oai::model::lmf::OccurrenceInfo const& value) {
-  m_OccurrenceInfo      = value;
+    oai::model::lmf::OccurrenceInfo const &value) {
+  m_OccurrenceInfo = value;
   m_OccurrenceInfoIsSet = true;
 }
 bool MotionEventInfo::occurrenceInfoIsSet() const {
   return m_OccurrenceInfoIsSet;
 }
-void MotionEventInfo::unsetOccurrenceInfo() {
-  m_OccurrenceInfoIsSet = false;
-}
+void MotionEventInfo::unsetOccurrenceInfo() { m_OccurrenceInfoIsSet = false; }
 int32_t MotionEventInfo::getMinimumInterval() const {
   return m_MinimumInterval;
 }
 void MotionEventInfo::setMinimumInterval(int32_t const value) {
-  m_MinimumInterval      = value;
+  m_MinimumInterval = value;
   m_MinimumIntervalIsSet = true;
 }
 bool MotionEventInfo::minimumIntervalIsSet() const {
   return m_MinimumIntervalIsSet;
 }
-void MotionEventInfo::unsetMinimumInterval() {
-  m_MinimumIntervalIsSet = false;
-}
+void MotionEventInfo::unsetMinimumInterval() { m_MinimumIntervalIsSet = false; }
 int32_t MotionEventInfo::getMaximumInterval() const {
   return m_MaximumInterval;
 }
 void MotionEventInfo::setMaximumInterval(int32_t const value) {
-  m_MaximumInterval      = value;
+  m_MaximumInterval = value;
   m_MaximumIntervalIsSet = true;
 }
 bool MotionEventInfo::maximumIntervalIsSet() const {
   return m_MaximumIntervalIsSet;
 }
-void MotionEventInfo::unsetMaximumInterval() {
-  m_MaximumIntervalIsSet = false;
-}
+void MotionEventInfo::unsetMaximumInterval() { m_MaximumIntervalIsSet = false; }
 int32_t MotionEventInfo::getSamplingInterval() const {
   return m_SamplingInterval;
 }
 void MotionEventInfo::setSamplingInterval(int32_t const value) {
-  m_SamplingInterval      = value;
+  m_SamplingInterval = value;
   m_SamplingIntervalIsSet = true;
 }
 bool MotionEventInfo::samplingIntervalIsSet() const {
@@ -263,7 +259,7 @@ int32_t MotionEventInfo::getReportingDuration() const {
   return m_ReportingDuration;
 }
 void MotionEventInfo::setReportingDuration(int32_t const value) {
-  m_ReportingDuration      = value;
+  m_ReportingDuration = value;
   m_ReportingDurationIsSet = true;
 }
 bool MotionEventInfo::reportingDurationIsSet() const {
@@ -276,7 +272,7 @@ bool MotionEventInfo::isReportingLocationReq() const {
   return m_ReportingLocationReq;
 }
 void MotionEventInfo::setReportingLocationReq(bool const value) {
-  m_ReportingLocationReq      = value;
+  m_ReportingLocationReq = value;
   m_ReportingLocationReqIsSet = true;
 }
 bool MotionEventInfo::reportingLocationReqIsSet() const {
@@ -286,4 +282,4 @@ void MotionEventInfo::unsetReportingLocationReq() {
   m_ReportingLocationReqIsSet = false;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

@@ -8,15 +8,14 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 EpsNasSecurityAlgorithms::EpsNasSecurityAlgorithms()
-    : Type3NasIe(kIeiEpsNasSecurityAlgorithms),
-      type_of_ciphering_algorithm_(),
+    : Type3NasIe(kIeiEpsNasSecurityAlgorithms), type_of_ciphering_algorithm_(),
       type_of_integrity_protection_algorithm_() {}
 
 //------------------------------------------------------------------------------
-EpsNasSecurityAlgorithms::EpsNasSecurityAlgorithms(
-    uint8_t ciphering, uint8_t integrity_protection)
+EpsNasSecurityAlgorithms::EpsNasSecurityAlgorithms(uint8_t ciphering,
+                                                   uint8_t integrity_protection)
     : Type3NasIe(kIeiEpsNasSecurityAlgorithms) {
-  type_of_ciphering_algorithm_            = ciphering & 0x07;
+  type_of_ciphering_algorithm_ = ciphering & 0x07;
   type_of_integrity_protection_algorithm_ = integrity_protection & 0x07;
 }
 
@@ -45,27 +44,27 @@ uint8_t EpsNasSecurityAlgorithms::GetTypeOfCipheringAlgorithm() const {
 }
 
 //------------------------------------------------------------------------------
-uint8_t EpsNasSecurityAlgorithms::GetTypeOfIntegrityProtectionAlgorithm()
-    const {
+uint8_t
+EpsNasSecurityAlgorithms::GetTypeOfIntegrityProtectionAlgorithm() const {
   return type_of_integrity_protection_algorithm_;
 }
 
 //------------------------------------------------------------------------------
-void EpsNasSecurityAlgorithms::Set(
-    uint8_t ciphering, uint8_t integrity_protection) {
-  type_of_ciphering_algorithm_            = ciphering & 0x0f;
+void EpsNasSecurityAlgorithms::Set(uint8_t ciphering,
+                                   uint8_t integrity_protection) {
+  type_of_ciphering_algorithm_ = ciphering & 0x0f;
   type_of_integrity_protection_algorithm_ = integrity_protection & 0x0f;
 }
 
 //------------------------------------------------------------------------------
-void EpsNasSecurityAlgorithms::Get(
-    uint8_t& ciphering, uint8_t& integrity_protection) const {
-  ciphering            = type_of_ciphering_algorithm_;
+void EpsNasSecurityAlgorithms::Get(uint8_t &ciphering,
+                                   uint8_t &integrity_protection) const {
+  ciphering = type_of_ciphering_algorithm_;
   integrity_protection = type_of_integrity_protection_algorithm_;
 }
 
 //------------------------------------------------------------------------------
-int EpsNasSecurityAlgorithms::Encode(uint8_t* buf, int len) const {
+int EpsNasSecurityAlgorithms::Encode(uint8_t *buf, int len) const {
   oai::logger::logger_common::nas().debug("Encoding %s", GetIeName().c_str());
 
   if (len < kEpsNasSecurityAlgorithmsLength) {
@@ -81,19 +80,19 @@ int EpsNasSecurityAlgorithms::Encode(uint8_t* buf, int len) const {
   encoded_size += Type3NasIe::Encode(buf + encoded_size, len);
 
   uint8_t octet = 0;
-  octet         = ((type_of_ciphering_algorithm_ & 0x07) << 4) |
+  octet = ((type_of_ciphering_algorithm_ & 0x07) << 4) |
           (type_of_integrity_protection_algorithm_ & 0x07);
 
   ENCODE_U8(buf + encoded_size, octet, encoded_size);
 
-  oai::logger::logger_common::nas().debug(
-      "Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
+  oai::logger::logger_common::nas().debug("Encoded %s, len (%d)",
+                                          GetIeName().c_str(), encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
-int EpsNasSecurityAlgorithms::Decode(
-    const uint8_t* const buf, int len, bool is_iei) {
+int EpsNasSecurityAlgorithms::Decode(const uint8_t *const buf, int len,
+                                     bool is_iei) {
   oai::logger::logger_common::nas().debug("Decoding %s", GetIeName().c_str());
 
   if (len < kEpsNasSecurityAlgorithmsLength) {
@@ -112,10 +111,10 @@ int EpsNasSecurityAlgorithms::Decode(
   uint8_t octet = 0;
   DECODE_U8(buf + decoded_size, octet, decoded_size);
 
-  type_of_ciphering_algorithm_            = (octet & 0x70) >> 4;
+  type_of_ciphering_algorithm_ = (octet & 0x70) >> 4;
   type_of_integrity_protection_algorithm_ = octet & 0x07;
 
-  oai::logger::logger_common::nas().debug(
-      "Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
+  oai::logger::logger_common::nas().debug("Decoded %s, len (%d)",
+                                          GetIeName().c_str(), decoded_size);
   return decoded_size;
 }

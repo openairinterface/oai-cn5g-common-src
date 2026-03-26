@@ -21,9 +21,9 @@
 
 #include "IdentityRange.h"
 #include "SupiRange.h"
+#include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
-#include <nlohmann/json.hpp>
 
 namespace oai::model::nrf {
 
@@ -31,7 +31,7 @@ namespace oai::model::nrf {
 ///
 /// </summary>
 class UdmInfo {
- public:
+public:
   UdmInfo();
   virtual ~UdmInfo();
 
@@ -44,43 +44,43 @@ class UdmInfo {
   ///
   /// </summary>
   std::string getGroupId() const;
-  void setGroupId(std::string const& value);
+  void setGroupId(std::string const &value);
   bool groupIdIsSet() const;
   void unsetGroupId();
   /// <summary>
   ///
   /// </summary>
-  std::vector<SupiRange>& getSupiRanges();
-  void setSupiRanges(std::vector<SupiRange> const& value);
+  std::vector<SupiRange> &getSupiRanges();
+  void setSupiRanges(std::vector<SupiRange> const &value);
   bool supiRangesIsSet() const;
   void unsetSupiRanges();
   /// <summary>
   ///
   /// </summary>
-  std::vector<IdentityRange>& getGpsiRanges();
-  void setGpsiRanges(std::vector<IdentityRange> const& value);
+  std::vector<IdentityRange> &getGpsiRanges();
+  void setGpsiRanges(std::vector<IdentityRange> const &value);
   bool gpsiRangesIsSet() const;
   void unsetGpsiRanges();
   /// <summary>
   ///
   /// </summary>
-  std::vector<IdentityRange>& getExternalGroupIdentifiersRanges();
-  void setExternalGroupIdentifiersRanges(
-      std::vector<IdentityRange> const& value);
+  std::vector<IdentityRange> &getExternalGroupIdentifiersRanges();
+  void
+  setExternalGroupIdentifiersRanges(std::vector<IdentityRange> const &value);
   bool externalGroupIdentifiersRangesIsSet() const;
   void unsetExternalGroupIdentifiersRanges();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getRoutingIndicators();
-  void setRoutingIndicators(std::vector<std::string> const& value);
+  std::vector<std::string> &getRoutingIndicators();
+  void setRoutingIndicators(std::vector<std::string> const &value);
   bool routingIndicatorsIsSet() const;
   void unsetRoutingIndicators();
 
-  friend void to_json(nlohmann::json& j, const UdmInfo& o);
-  friend void from_json(const nlohmann::json& j, UdmInfo& o);
+  friend void to_json(nlohmann::json &j, const UdmInfo &o);
+  friend void from_json(const nlohmann::json &j, UdmInfo &o);
 
- protected:
+protected:
   std::string m_GroupId;
   bool m_GroupIdIsSet;
   std::vector<SupiRange> m_SupiRanges;
@@ -93,6 +93,6 @@ class UdmInfo {
   bool m_RoutingIndicatorsIsSet;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* UdmInfo_H_ */

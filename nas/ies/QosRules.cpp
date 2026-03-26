@@ -21,28 +21,28 @@ QosRules::QosRules(uint8_t iei) : Type6NasIe(iei) {
 }
 
 //------------------------------------------------------------------------------
-QosRules::QosRules(const std::vector<QosRule>& qos_rules) : Type6NasIe() {
-  uint32_t length = 0;  // not include 3 first octets: 1 for IE , 2 for length,
+QosRules::QosRules(const std::vector<QosRule> &qos_rules) : Type6NasIe() {
+  uint32_t length = 0; // not include 3 first octets: 1 for IE , 2 for length,
   for (auto qos : qos_rules) {
     length += qos.GetIeLength();
   }
-  SetLengthIndicator(
-      (length > kQosRulesContentMinimumLength) ? length :
-                                                 kQosRulesContentMinimumLength);
+  SetLengthIndicator((length > kQosRulesContentMinimumLength)
+                         ? length
+                         : kQosRulesContentMinimumLength);
 
   qos_rules_.assign(qos_rules.begin(), qos_rules.end());
 }
 
 //------------------------------------------------------------------------------
-QosRules::QosRules(uint8_t iei, const std::vector<QosRule>& qos_rules)
+QosRules::QosRules(uint8_t iei, const std::vector<QosRule> &qos_rules)
     : Type6NasIe(iei) {
-  uint32_t length = 0;  // not include 3 first octets: 1 for IE , 2 for length,
+  uint32_t length = 0; // not include 3 first octets: 1 for IE , 2 for length,
   for (auto qos : qos_rules) {
     length += qos.GetIeLength();
   }
-  SetLengthIndicator(
-      (length > kQosRulesContentMinimumLength) ? length :
-                                                 kQosRulesContentMinimumLength);
+  SetLengthIndicator((length > kQosRulesContentMinimumLength)
+                         ? length
+                         : kQosRulesContentMinimumLength);
   qos_rules_.assign(qos_rules.begin(), qos_rules.end());
 }
 
@@ -50,10 +50,11 @@ QosRules::QosRules(uint8_t iei, const std::vector<QosRule>& qos_rules)
 QosRules::~QosRules() {}
 
 //------------------------------------------------------------------------------
-void QosRules::Set(const std::vector<QosRule>& qos_rules) {
-  if (qos_rules.size() == 0) return;
+void QosRules::Set(const std::vector<QosRule> &qos_rules) {
+  if (qos_rules.size() == 0)
+    return;
 
-  uint32_t length = 0;  // not include 3 first octets: 1 for IE , 2 for length,
+  uint32_t length = 0; // not include 3 first octets: 1 for IE , 2 for length,
   for (auto qos : qos_rules) {
     length += qos.GetIeLength();
   }
@@ -64,13 +65,13 @@ void QosRules::Set(const std::vector<QosRule>& qos_rules) {
 }
 
 //------------------------------------------------------------------------------
-void QosRules::Get(std::vector<QosRule>& qos_rules) const {
+void QosRules::Get(std::vector<QosRule> &qos_rules) const {
   qos_rules.assign(qos_rules_.begin(), qos_rules_.end());
   return;
 }
 
 //------------------------------------------------------------------------------
-void QosRules::AddQosRule(const QosRule& rule) {
+void QosRules::AddQosRule(const QosRule &rule) {
   qos_rules_.push_back(rule);
   uint32_t length = GetLengthIndicator();
   length += rule.GetIeLength();
@@ -78,7 +79,7 @@ void QosRules::AddQosRule(const QosRule& rule) {
 }
 
 //------------------------------------------------------------------------------
-int QosRules::Encode(uint8_t* buf, int len) const {
+int QosRules::Encode(uint8_t *buf, int len) const {
   oai::logger::logger_common::nas().debug("Encoding %s", GetIeName().c_str());
 
   int encoded_size = 0;
@@ -86,12 +87,14 @@ int QosRules::Encode(uint8_t* buf, int len) const {
   int len_pos = 0;
   int encoded_header_size =
       Type6NasIe::Encode(buf + encoded_size, len, len_pos);
-  if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
+  if (encoded_header_size == KEncodeDecodeError)
+    return KEncodeDecodeError;
   encoded_size += encoded_header_size;
-  for (const auto& q : qos_rules_) {
+  for (const auto &q : qos_rules_) {
     int encoded_qos_rule_size =
         q.Encode(buf + encoded_size, len - encoded_size);
-    if (encoded_qos_rule_size == KEncodeDecodeError) return KEncodeDecodeError;
+    if (encoded_qos_rule_size == KEncodeDecodeError)
+      return KEncodeDecodeError;
     encoded_size += encoded_qos_rule_size;
   }
 
@@ -99,36 +102,38 @@ int QosRules::Encode(uint8_t* buf, int len) const {
   int encoded_len_ie = 0;
   ENCODE_U16(buf + len_pos, encoded_size - GetHeaderLength(), encoded_len_ie);
 
-  oai::logger::logger_common::nas().debug(
-      "Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
+  oai::logger::logger_common::nas().debug("Encoded %s, len (%d)",
+                                          GetIeName().c_str(), encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
-int QosRules::Decode(const uint8_t* const buf, int len, bool is_iei) {
+int QosRules::Decode(const uint8_t *const buf, int len, bool is_iei) {
   oai::logger::logger_common::nas().debug("Decoding %s", GetIeName().c_str());
   int decoded_size = 0;
 
   // IEI and Length
-  uint16_t ie_len         = 0;
+  uint16_t ie_len = 0;
   int decoded_header_size = Type6NasIe::Decode(buf + decoded_size, len, is_iei);
-  if (decoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
+  if (decoded_header_size == KEncodeDecodeError)
+    return KEncodeDecodeError;
   decoded_size += decoded_header_size;
   qos_rules_.clear();
 
-  uint16_t length           = GetLengthIndicator();
+  uint16_t length = GetLengthIndicator();
   uint16_t decoded_qos_rule = length;
   while (length > 0) {
     QosRule qos_rule = {};
     int decoded_qos_rule_size =
         qos_rule.Decode(buf + decoded_size, len - decoded_size);
-    if (decoded_qos_rule_size == KEncodeDecodeError) break;
+    if (decoded_qos_rule_size == KEncodeDecodeError)
+      break;
     decoded_size += decoded_qos_rule_size;
     length -= decoded_qos_rule_size;
     qos_rules_.push_back(qos_rule);
   }
 
-  oai::logger::logger_common::nas().debug(
-      "Decoded %s (len %d)", GetIeName().c_str(), decoded_size);
+  oai::logger::logger_common::nas().debug("Decoded %s (len %d)",
+                                          GetIeName().c_str(), decoded_size);
   return decoded_size;
 }

@@ -19,9 +19,9 @@
 #ifndef RequestedUsageData_H_
 #define RequestedUsageData_H_
 
+#include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
-#include <nlohmann/json.hpp>
 
 namespace oai::model::pcf {
 
@@ -29,7 +29,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class RequestedUsageData {
- public:
+public:
   RequestedUsageData();
   virtual ~RequestedUsageData() = default;
 
@@ -43,16 +43,16 @@ class RequestedUsageData {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const RequestedUsageData& rhs) const;
-  bool operator!=(const RequestedUsageData& rhs) const;
+  bool operator==(const RequestedUsageData &rhs) const;
+  bool operator!=(const RequestedUsageData &rhs) const;
 
   /////////////////////////////////////////////
   /// RequestedUsageData members
@@ -63,7 +63,7 @@ class RequestedUsageData {
   /// attribute shall only be provided when allUmIds is not set to true.
   /// </summary>
   std::vector<std::string> getRefUmIds() const;
-  void setRefUmIds(std::vector<std::string> const& value);
+  void setRefUmIds(std::vector<std::string> const &value);
   bool refUmIdsIsSet() const;
   void unsetRefUmIds();
   /// <summary>
@@ -77,16 +77,16 @@ class RequestedUsageData {
   bool allUmIdsIsSet() const;
   void unsetAllUmIds();
 
-  friend void to_json(nlohmann::json& j, const RequestedUsageData& o);
-  friend void from_json(const nlohmann::json& j, RequestedUsageData& o);
+  friend void to_json(nlohmann::json &j, const RequestedUsageData &o);
+  friend void from_json(const nlohmann::json &j, RequestedUsageData &o);
 
- protected:
+protected:
   std::vector<std::string> m_RefUmIds;
   bool m_RefUmIdsIsSet;
   bool m_AllUmIds;
   bool m_AllUmIdsIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* RequestedUsageData_H_ */

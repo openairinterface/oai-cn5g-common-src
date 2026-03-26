@@ -11,28 +11,28 @@
 namespace oai::nas {
 
 class PduSessionModificationComplete : public Nas5gsmMessage {
- public:
+public:
   PduSessionModificationComplete();
   virtual ~PduSessionModificationComplete();
 
-  int Encode(uint8_t* buf, int len) override;
-  int Decode(uint8_t* buf, int len) override;
+  int Encode(uint8_t *buf, int len) override;
+  int Decode(uint8_t *buf, int len) override;
 
   uint32_t GetLength() const override;
 
   void SetExtendedProtocolConfigurationOptions(
-      const ExtendedProtocolConfigurationOptions& options);
+      const ExtendedProtocolConfigurationOptions &options);
   void GetExtendedProtocolConfigurationOptions(
-      std::optional<ExtendedProtocolConfigurationOptions>& options) const;
+      std::optional<ExtendedProtocolConfigurationOptions> &options) const;
 
- private:
+private:
   // Nas5gsmHeader ie_header_;  // Mandatory
 
   std::optional<ExtendedProtocolConfigurationOptions>
-      ie_extended_protocol_configuration_options_;  // Optional
+      ie_extended_protocol_configuration_options_; // Optional
   // TODO: Port management information container // Optional
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

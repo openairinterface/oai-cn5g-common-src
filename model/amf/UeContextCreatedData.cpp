@@ -17,10 +17,10 @@ namespace oai::model::amf {
 
 UeContextCreatedData::UeContextCreatedData() {
   m_FailedSessionListIsSet = false;
-  m_SupportedFeatures      = "";
+  m_SupportedFeatures = "";
   m_SupportedFeaturesIsSet = false;
-  m_PcfReselectedInd       = false;
-  m_PcfReselectedIndIsSet  = false;
+  m_PcfReselectedInd = false;
+  m_PcfReselectedIndIsSet = false;
 }
 
 UeContextCreatedData::~UeContextCreatedData() {}
@@ -29,19 +29,20 @@ void UeContextCreatedData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const UeContextCreatedData& o) {
-  j                       = nlohmann::json();
-  j["ueContext"]          = o.m_UeContext;
+void to_json(nlohmann::json &j, const UeContextCreatedData &o) {
+  j = nlohmann::json();
+  j["ueContext"] = o.m_UeContext;
   j["targetToSourceData"] = o.m_TargetToSourceData;
-  j["pduSessionList"]     = o.m_PduSessionList;
+  j["pduSessionList"] = o.m_PduSessionList;
   if (o.failedSessionListIsSet())
     j["failedSessionList"] = o.m_FailedSessionList;
   if (o.supportedFeaturesIsSet())
     j["supportedFeatures"] = o.m_SupportedFeatures;
-  if (o.pcfReselectedIndIsSet()) j["pcfReselectedInd"] = o.m_PcfReselectedInd;
+  if (o.pcfReselectedIndIsSet())
+    j["pcfReselectedInd"] = o.m_PcfReselectedInd;
 }
 
-void from_json(const nlohmann::json& j, UeContextCreatedData& o) {
+void from_json(const nlohmann::json &j, UeContextCreatedData &o) {
   j.at("ueContext").get_to(o.m_UeContext);
   j.at("targetToSourceData").get_to(o.m_TargetToSourceData);
   j.at("pduSessionList").get_to(o.m_PduSessionList);
@@ -59,22 +60,20 @@ void from_json(const nlohmann::json& j, UeContextCreatedData& o) {
   }
 }
 
-UeContext UeContextCreatedData::getUeContext() const {
-  return m_UeContext;
-}
-void UeContextCreatedData::setUeContext(UeContext const& value) {
+UeContext UeContextCreatedData::getUeContext() const { return m_UeContext; }
+void UeContextCreatedData::setUeContext(UeContext const &value) {
   m_UeContext = value;
 }
 N2InfoContent UeContextCreatedData::getTargetToSourceData() const {
   return m_TargetToSourceData;
 }
-void UeContextCreatedData::setTargetToSourceData(N2InfoContent const& value) {
+void UeContextCreatedData::setTargetToSourceData(N2InfoContent const &value) {
   m_TargetToSourceData = value;
 }
-std::vector<N2SmInformation>& UeContextCreatedData::getPduSessionList() {
+std::vector<N2SmInformation> &UeContextCreatedData::getPduSessionList() {
   return m_PduSessionList;
 }
-std::vector<N2SmInformation>& UeContextCreatedData::getFailedSessionList() {
+std::vector<N2SmInformation> &UeContextCreatedData::getFailedSessionList() {
   return m_FailedSessionList;
 }
 bool UeContextCreatedData::failedSessionListIsSet() const {
@@ -86,8 +85,8 @@ void UeContextCreatedData::unsetFailedSessionList() {
 std::string UeContextCreatedData::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
-void UeContextCreatedData::setSupportedFeatures(std::string const& value) {
-  m_SupportedFeatures      = value;
+void UeContextCreatedData::setSupportedFeatures(std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool UeContextCreatedData::supportedFeaturesIsSet() const {
@@ -100,7 +99,7 @@ bool UeContextCreatedData::isPcfReselectedInd() const {
   return m_PcfReselectedInd;
 }
 void UeContextCreatedData::setPcfReselectedInd(bool const value) {
-  m_PcfReselectedInd      = value;
+  m_PcfReselectedInd = value;
   m_PcfReselectedIndIsSet = true;
 }
 bool UeContextCreatedData::pcfReselectedIndIsSet() const {
@@ -110,4 +109,4 @@ void UeContextCreatedData::unsetPcfReselectedInd() {
   m_PcfReselectedIndIsSet = false;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

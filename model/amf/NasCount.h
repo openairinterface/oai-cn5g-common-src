@@ -29,7 +29,7 @@ namespace model {
 ///
 /// </summary>
 class NasCount {
- public:
+public:
   NasCount();
   virtual ~NasCount();
 
@@ -38,14 +38,14 @@ class NasCount {
   /////////////////////////////////////////////
   /// NasCount members
 
-  friend void to_json(nlohmann::json& j, const NasCount& o);
-  friend void from_json(const nlohmann::json& j, NasCount& o);
+  friend void to_json(nlohmann::json &j, const NasCount &o);
+  friend void from_json(const nlohmann::json &j, NasCount &o);
 
- protected:
+protected:
 };
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+} // namespace model
+} // namespace udm
+} // namespace oai
 
 #endif /* NasCount_H_ */

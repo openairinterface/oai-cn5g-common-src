@@ -27,7 +27,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class LocationFilter_anyOf {
- public:
+public:
   LocationFilter_anyOf();
   virtual ~LocationFilter_anyOf() = default;
 
@@ -53,10 +53,10 @@ class LocationFilter_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const LocationFilter_anyOf& rhs) const;
-  bool operator!=(const LocationFilter_anyOf& rhs) const;
+  bool operator==(const LocationFilter_anyOf &rhs) const;
+  bool operator!=(const LocationFilter_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// LocationFilter_anyOf members
@@ -64,18 +64,18 @@ class LocationFilter_anyOf {
   LocationFilter_anyOf::eLocationFilter_anyOf getValue() const;
   void setValue(LocationFilter_anyOf::eLocationFilter_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const LocationFilter_anyOf& o);
-  friend void from_json(const nlohmann::json& j, LocationFilter_anyOf& o);
+  friend void to_json(nlohmann::json &j, const LocationFilter_anyOf &o);
+  friend void from_json(const nlohmann::json &j, LocationFilter_anyOf &o);
 
- protected:
+protected:
   LocationFilter_anyOf::eLocationFilter_anyOf m_value = LocationFilter_anyOf::
       eLocationFilter_anyOf::INVALID_VALUE_OPENAPI_GENERATED;
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* LocationFilter_anyOf_H_ */

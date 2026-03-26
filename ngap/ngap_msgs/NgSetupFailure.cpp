@@ -29,15 +29,15 @@ void NgSetupFailureMsg::initialize() {
 
 //------------------------------------------------------------------------------
 void NgSetupFailureMsg::addCauseIe() {
-  Ngap_NGSetupFailureIEs_t* ie =
-      (Ngap_NGSetupFailureIEs_t*) calloc(1, sizeof(Ngap_NGSetupFailureIEs_t));
-  ie->id            = Ngap_ProtocolIE_ID_id_Cause;
-  ie->criticality   = Ngap_Criticality_ignore;
+  Ngap_NGSetupFailureIEs_t *ie =
+      (Ngap_NGSetupFailureIEs_t *)calloc(1, sizeof(Ngap_NGSetupFailureIEs_t));
+  ie->id = Ngap_ProtocolIE_ID_id_Cause;
+  ie->criticality = Ngap_Criticality_ignore;
   ie->value.present = Ngap_NGSetupFailureIEs__value_PR_Cause;
 
   if (!m_Cause.encode(ie->value.choice.Cause)) {
     oai::logger::logger_common::ngap().error("Encode NGAP Cause IE error");
-    oai::utils::utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void **)&ie);
     return;
   }
 
@@ -48,17 +48,18 @@ void NgSetupFailureMsg::addCauseIe() {
 
 //------------------------------------------------------------------------------
 void NgSetupFailureMsg::addTimeToWaitIE() {
-  if (!m_TimeToWait.has_value()) return;
+  if (!m_TimeToWait.has_value())
+    return;
 
-  Ngap_NGSetupFailureIEs_t* ie =
-      (Ngap_NGSetupFailureIEs_t*) calloc(1, sizeof(Ngap_NGSetupFailureIEs_t));
-  ie->id            = Ngap_ProtocolIE_ID_id_TimeToWait;
-  ie->criticality   = Ngap_Criticality_ignore;
+  Ngap_NGSetupFailureIEs_t *ie =
+      (Ngap_NGSetupFailureIEs_t *)calloc(1, sizeof(Ngap_NGSetupFailureIEs_t));
+  ie->id = Ngap_ProtocolIE_ID_id_TimeToWait;
+  ie->criticality = Ngap_Criticality_ignore;
   ie->value.present = Ngap_NGSetupFailureIEs__value_PR_TimeToWait;
 
   if (!m_TimeToWait.value().encode(ie->value.choice.TimeToWait)) {
     oai::logger::logger_common::ngap().error("Encode NGAP Cause IE error");
-    oai::utils::utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void **)&ie);
     return;
   }
 
@@ -68,9 +69,8 @@ void NgSetupFailureMsg::addTimeToWaitIE() {
 }
 
 //------------------------------------------------------------------------------
-void NgSetupFailureMsg::set(
-    const e_Ngap_CauseRadioNetwork& causeValue,
-    const e_Ngap_TimeToWait& timeToWait) {
+void NgSetupFailureMsg::set(const e_Ngap_CauseRadioNetwork &causeValue,
+                            const e_Ngap_TimeToWait &timeToWait) {
   m_Cause.setChoiceOfCause(Ngap_Cause_PR_radioNetwork);
   m_Cause.set(causeValue);
   addCauseIe();
@@ -81,16 +81,15 @@ void NgSetupFailureMsg::set(
 
 //------------------------------------------------------------------------------
 void NgSetupFailureMsg::setCauseRadioNetwork(
-    const e_Ngap_CauseRadioNetwork& causeValue) {
+    const e_Ngap_CauseRadioNetwork &causeValue) {
   m_Cause.setChoiceOfCause(Ngap_Cause_PR_radioNetwork);
   m_Cause.set(causeValue);
   addCauseIe();
 }
 
 //------------------------------------------------------------------------------
-void NgSetupFailureMsg::set(
-    const e_Ngap_CauseTransport& causeValue,
-    const e_Ngap_TimeToWait& timeToWait) {
+void NgSetupFailureMsg::set(const e_Ngap_CauseTransport &causeValue,
+                            const e_Ngap_TimeToWait &timeToWait) {
   m_Cause.setChoiceOfCause(Ngap_Cause_PR_transport);
   m_Cause.set(causeValue);
   addCauseIe();
@@ -101,15 +100,15 @@ void NgSetupFailureMsg::set(
 
 //------------------------------------------------------------------------------
 void NgSetupFailureMsg::setCauseTransport(
-    const e_Ngap_CauseTransport& causeValue) {
+    const e_Ngap_CauseTransport &causeValue) {
   m_Cause.setChoiceOfCause(Ngap_Cause_PR_transport);
   m_Cause.set(causeValue);
   addCauseIe();
 }
 
 //------------------------------------------------------------------------------
-void NgSetupFailureMsg::set(
-    const e_Ngap_CauseNas& causeValue, const e_Ngap_TimeToWait& timeToWait) {
+void NgSetupFailureMsg::set(const e_Ngap_CauseNas &causeValue,
+                            const e_Ngap_TimeToWait &timeToWait) {
   m_Cause.setChoiceOfCause(Ngap_Cause_PR_nas);
   m_Cause.set(causeValue);
   addCauseIe();
@@ -119,16 +118,15 @@ void NgSetupFailureMsg::set(
 }
 
 //------------------------------------------------------------------------------
-void NgSetupFailureMsg::setCauseNas(const e_Ngap_CauseNas& causeValue) {
+void NgSetupFailureMsg::setCauseNas(const e_Ngap_CauseNas &causeValue) {
   m_Cause.setChoiceOfCause(Ngap_Cause_PR_nas);
   m_Cause.set(causeValue);
   addCauseIe();
 }
 
 //------------------------------------------------------------------------------
-void NgSetupFailureMsg::set(
-    const e_Ngap_CauseProtocol& causeValue,
-    const e_Ngap_TimeToWait& timeToWait) {
+void NgSetupFailureMsg::set(const e_Ngap_CauseProtocol &causeValue,
+                            const e_Ngap_TimeToWait &timeToWait) {
   m_Cause.setChoiceOfCause(Ngap_Cause_PR_protocol);
   m_Cause.set(causeValue);
   addCauseIe();
@@ -139,15 +137,15 @@ void NgSetupFailureMsg::set(
 
 //------------------------------------------------------------------------------
 void NgSetupFailureMsg::setCauseProtocol(
-    const e_Ngap_CauseProtocol& causeValue) {
+    const e_Ngap_CauseProtocol &causeValue) {
   m_Cause.setChoiceOfCause(Ngap_Cause_PR_protocol);
   m_Cause.set(causeValue);
   addCauseIe();
 }
 
 //------------------------------------------------------------------------------
-void NgSetupFailureMsg::set(
-    const e_Ngap_CauseMisc& causeValue, const e_Ngap_TimeToWait& timeToWait) {
+void NgSetupFailureMsg::set(const e_Ngap_CauseMisc &causeValue,
+                            const e_Ngap_TimeToWait &timeToWait) {
   m_Cause.setChoiceOfCause(Ngap_Cause_PR_misc);
   m_Cause.set(causeValue);
   addCauseIe();
@@ -157,14 +155,14 @@ void NgSetupFailureMsg::set(
 }
 
 //------------------------------------------------------------------------------
-void NgSetupFailureMsg::setCauseMisc(const e_Ngap_CauseMisc& causeValue) {
+void NgSetupFailureMsg::setCauseMisc(const e_Ngap_CauseMisc &causeValue) {
   m_Cause.setChoiceOfCause(Ngap_Cause_PR_misc);
   m_Cause.set(causeValue);
   addCauseIe();
 }
 
 //------------------------------------------------------------------------------
-bool NgSetupFailureMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
+bool NgSetupFailureMsg::decode(Ngap_NGAP_PDU_t *ngapMsgPdu) {
   ngapPdu = ngapMsgPdu;
   if (ngapPdu->present == Ngap_NGAP_PDU_PR_unsuccessfulOutcome) {
     if (ngapPdu->choice.unsuccessfulOutcome &&
@@ -187,51 +185,50 @@ bool NgSetupFailureMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
   }
   for (int i = 0; i < m_NgSetupFailureIes->protocolIEs.list.count; i++) {
     switch (m_NgSetupFailureIes->protocolIEs.list.array[i]->id) {
-      case Ngap_ProtocolIE_ID_id_Cause: {
-        if (m_NgSetupFailureIes->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_ignore &&
-            m_NgSetupFailureIes->protocolIEs.list.array[i]->value.present ==
-                Ngap_NGSetupFailureIEs__value_PR_Cause) {
-          if (!m_Cause.decode(m_NgSetupFailureIes->protocolIEs.list.array[i]
-                                  ->value.choice.Cause)) {
-            oai::logger::logger_common::ngap().error(
-                "Decoded NGAP Cause IE error");
-            return false;
-          }
-        } else {
+    case Ngap_ProtocolIE_ID_id_Cause: {
+      if (m_NgSetupFailureIes->protocolIEs.list.array[i]->criticality ==
+              Ngap_Criticality_ignore &&
+          m_NgSetupFailureIes->protocolIEs.list.array[i]->value.present ==
+              Ngap_NGSetupFailureIEs__value_PR_Cause) {
+        if (!m_Cause.decode(m_NgSetupFailureIes->protocolIEs.list.array[i]
+                                ->value.choice.Cause)) {
           oai::logger::logger_common::ngap().error(
               "Decoded NGAP Cause IE error");
           return false;
         }
-      } break;
-      case Ngap_ProtocolIE_ID_id_TimeToWait: {
-        if (m_NgSetupFailureIes->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_ignore &&
-            m_NgSetupFailureIes->protocolIEs.list.array[i]->value.present ==
-                Ngap_NGSetupFailureIEs__value_PR_TimeToWait) {
-          TimeToWait tmp = {};
-          if (!tmp.decode(m_NgSetupFailureIes->protocolIEs.list.array[i]
-                              ->value.choice.TimeToWait)) {
-            oai::logger::logger_common::ngap().error(
-                "Decoded NGAP TimeToWait IE error");
-            return false;
-          }
-          m_TimeToWait = std::optional<TimeToWait>(tmp);
-        } else {
+      } else {
+        oai::logger::logger_common::ngap().error("Decoded NGAP Cause IE error");
+        return false;
+      }
+    } break;
+    case Ngap_ProtocolIE_ID_id_TimeToWait: {
+      if (m_NgSetupFailureIes->protocolIEs.list.array[i]->criticality ==
+              Ngap_Criticality_ignore &&
+          m_NgSetupFailureIes->protocolIEs.list.array[i]->value.present ==
+              Ngap_NGSetupFailureIEs__value_PR_TimeToWait) {
+        TimeToWait tmp = {};
+        if (!tmp.decode(m_NgSetupFailureIes->protocolIEs.list.array[i]
+                            ->value.choice.TimeToWait)) {
           oai::logger::logger_common::ngap().error(
               "Decoded NGAP TimeToWait IE error");
           return false;
         }
-      } break;
-      case Ngap_ProtocolIE_ID_id_CriticalityDiagnostics: {
-        oai::logger::logger_common::ngap().debug(
-            "Decoded NGAP CriticalityDiagnostics IE ");
-      } break;
-      default: {
+        m_TimeToWait = std::optional<TimeToWait>(tmp);
+      } else {
         oai::logger::logger_common::ngap().error(
-            "Decoded NGAP message PDU error");
+            "Decoded NGAP TimeToWait IE error");
         return false;
       }
+    } break;
+    case Ngap_ProtocolIE_ID_id_CriticalityDiagnostics: {
+      oai::logger::logger_common::ngap().debug(
+          "Decoded NGAP CriticalityDiagnostics IE ");
+    } break;
+    default: {
+      oai::logger::logger_common::ngap().error(
+          "Decoded NGAP message PDU error");
+      return false;
+    }
     }
   }
 
@@ -239,7 +236,7 @@ bool NgSetupFailureMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
 }
 
 //------------------------------------------------------------------------------
-bool NgSetupFailureMsg::getCauseType(Ngap_Cause_PR& causePresent) const {
+bool NgSetupFailureMsg::getCauseType(Ngap_Cause_PR &causePresent) const {
   if (m_Cause.getChoiceOfCause() < 0) {
     return false;
   }
@@ -249,64 +246,64 @@ bool NgSetupFailureMsg::getCauseType(Ngap_Cause_PR& causePresent) const {
 
 //------------------------------------------------------------------------------
 bool NgSetupFailureMsg::getCauseRadioNetwork(
-    e_Ngap_CauseRadioNetwork& causeRadioNetwork) const {
+    e_Ngap_CauseRadioNetwork &causeRadioNetwork) const {
   if (m_Cause.get() < 0) {
     return false;
   }
-  causeRadioNetwork = (e_Ngap_CauseRadioNetwork) m_Cause.get();
+  causeRadioNetwork = (e_Ngap_CauseRadioNetwork)m_Cause.get();
   return true;
 }
 
 //------------------------------------------------------------------------------
 bool NgSetupFailureMsg::getCauseTransport(
-    e_Ngap_CauseTransport& causeTransport) const {
+    e_Ngap_CauseTransport &causeTransport) const {
   if (m_Cause.get() < 0) {
     return false;
   }
-  causeTransport = (e_Ngap_CauseTransport) m_Cause.get();
+  causeTransport = (e_Ngap_CauseTransport)m_Cause.get();
   return true;
 }
 
 //------------------------------------------------------------------------------
-bool NgSetupFailureMsg::getCauseNas(e_Ngap_CauseNas& causeNas) const {
+bool NgSetupFailureMsg::getCauseNas(e_Ngap_CauseNas &causeNas) const {
   if (m_Cause.get() < 0) {
     return false;
   }
-  causeNas = (e_Ngap_CauseNas) m_Cause.get();
+  causeNas = (e_Ngap_CauseNas)m_Cause.get();
   return true;
 }
 
 //------------------------------------------------------------------------------
 bool NgSetupFailureMsg::getCauseProtocol(
-    e_Ngap_CauseProtocol& causeProtocol) const {
+    e_Ngap_CauseProtocol &causeProtocol) const {
   if (m_Cause.get() < 0) {
     return false;
   }
-  causeProtocol = (e_Ngap_CauseProtocol) m_Cause.get();
+  causeProtocol = (e_Ngap_CauseProtocol)m_Cause.get();
   return true;
 }
 
 //------------------------------------------------------------------------------
-bool NgSetupFailureMsg::getCauseMisc(e_Ngap_CauseMisc& causeMisc) const {
+bool NgSetupFailureMsg::getCauseMisc(e_Ngap_CauseMisc &causeMisc) const {
   if (m_Cause.get() < 0) {
     return false;
   }
-  causeMisc = (e_Ngap_CauseMisc) m_Cause.get();
+  causeMisc = (e_Ngap_CauseMisc)m_Cause.get();
   return true;
 }
 
 //------------------------------------------------------------------------------
-void NgSetupFailureMsg::setTimeToWait(const e_Ngap_TimeToWait& time) {
+void NgSetupFailureMsg::setTimeToWait(const e_Ngap_TimeToWait &time) {
   m_TimeToWait = std::make_optional<TimeToWait>(time);
 }
 
 //------------------------------------------------------------------------------
-bool NgSetupFailureMsg::getTimeToWait(e_Ngap_TimeToWait& time) const {
+bool NgSetupFailureMsg::getTimeToWait(e_Ngap_TimeToWait &time) const {
   if (m_TimeToWait.has_value()) {
     return false;
   }
-  time = (e_Ngap_TimeToWait) m_TimeToWait.value().get();
+  time = (e_Ngap_TimeToWait)m_TimeToWait.value().get();
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

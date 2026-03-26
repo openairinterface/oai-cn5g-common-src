@@ -19,7 +19,7 @@
 namespace oai::model::udsf {
 
 SearchComparison::SearchComparison() {
-  m_Tag   = "";
+  m_Tag = "";
   m_Value = "";
 }
 
@@ -30,12 +30,12 @@ void SearchComparison::validate() const {
   }
 }
 
-bool SearchComparison::validate(std::stringstream& msg) const {
+bool SearchComparison::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool SearchComparison::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool SearchComparison::validate(std::stringstream &msg,
+                                const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "SearchComparison" : pathPrefix;
@@ -43,7 +43,7 @@ bool SearchComparison::validate(
   return success;
 }
 
-bool SearchComparison::operator==(const SearchComparison& rhs) const {
+bool SearchComparison::operator==(const SearchComparison &rhs) const {
   return
 
       (getOp() == rhs.getOp()) &&
@@ -55,18 +55,18 @@ bool SearchComparison::operator==(const SearchComparison& rhs) const {
           ;
 }
 
-bool SearchComparison::operator!=(const SearchComparison& rhs) const {
+bool SearchComparison::operator!=(const SearchComparison &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const SearchComparison& o) {
-  j          = nlohmann::json();
-  j["op"]    = o.m_Op;
-  j["tag"]   = o.m_Tag;
+void to_json(nlohmann::json &j, const SearchComparison &o) {
+  j = nlohmann::json();
+  j["op"] = o.m_Op;
+  j["tag"] = o.m_Tag;
   j["value"] = o.m_Value;
 }
 
-void from_json(const nlohmann::json& j, SearchComparison& o) {
+void from_json(const nlohmann::json &j, SearchComparison &o) {
   j.at("op").get_to(o.m_Op);
   j.at("tag").get_to(o.m_Tag);
   j.at("value").get_to(o.m_Value);
@@ -76,20 +76,12 @@ oai::model::udsf::ComparisonOperator SearchComparison::getOp() const {
   return m_Op;
 }
 void SearchComparison::setOp(
-    oai::model::udsf::ComparisonOperator const& value) {
+    oai::model::udsf::ComparisonOperator const &value) {
   m_Op = value;
 }
-std::string SearchComparison::getTag() const {
-  return m_Tag;
-}
-void SearchComparison::setTag(std::string const& value) {
-  m_Tag = value;
-}
-std::string SearchComparison::getValue() const {
-  return m_Value;
-}
-void SearchComparison::setValue(std::string const& value) {
-  m_Value = value;
-}
+std::string SearchComparison::getTag() const { return m_Tag; }
+void SearchComparison::setTag(std::string const &value) { m_Tag = value; }
+std::string SearchComparison::getValue() const { return m_Value; }
+void SearchComparison::setValue(std::string const &value) { m_Value = value; }
 
-}  // namespace oai::model::udsf
+} // namespace oai::model::udsf

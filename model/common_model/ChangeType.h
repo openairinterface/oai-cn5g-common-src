@@ -28,7 +28,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class ChangeType {
- public:
+public:
   ChangeType();
   virtual ~ChangeType() = default;
 
@@ -42,16 +42,16 @@ class ChangeType {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const ChangeType& rhs) const;
-  bool operator!=(const ChangeType& rhs) const;
+  bool operator==(const ChangeType &rhs) const;
+  bool operator!=(const ChangeType &rhs) const;
 
   /////////////////////////////////////////////
   /// ChangeType members
@@ -60,15 +60,15 @@ class ChangeType {
   void setValue(ChangeType_anyOf value);
   ChangeType_anyOf::eChangeType_anyOf getEnumValue() const;
   void setEnumValue(ChangeType_anyOf::eChangeType_anyOf value);
-  friend void to_json(nlohmann::json& j, const ChangeType& o);
-  friend void from_json(const nlohmann::json& j, ChangeType& o);
-  friend void to_json(nlohmann::json& j, const ChangeType_anyOf& o);
-  friend void from_json(const nlohmann::json& j, ChangeType_anyOf& o);
+  friend void to_json(nlohmann::json &j, const ChangeType &o);
+  friend void from_json(const nlohmann::json &j, ChangeType &o);
+  friend void to_json(nlohmann::json &j, const ChangeType_anyOf &o);
+  friend void from_json(const nlohmann::json &j, ChangeType_anyOf &o);
 
- protected:
+protected:
   ChangeType_anyOf m_value;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* ChangeType_H_ */

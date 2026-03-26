@@ -31,7 +31,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class ValidTimePeriod {
- public:
+public:
   ValidTimePeriod();
   virtual ~ValidTimePeriod();
 
@@ -44,27 +44,27 @@ class ValidTimePeriod {
   ///
   /// </summary>
   std::string getStartTime() const;
-  void setStartTime(std::string const& value);
+  void setStartTime(std::string const &value);
   bool startTimeIsSet() const;
   void unsetStartTime();
   /// <summary>
   ///
   /// </summary>
   std::string getEndTime() const;
-  void setEndTime(std::string const& value);
+  void setEndTime(std::string const &value);
   bool endTimeIsSet() const;
   void unsetEndTime();
 
-  friend void to_json(nlohmann::json& j, const ValidTimePeriod& o);
-  friend void from_json(const nlohmann::json& j, ValidTimePeriod& o);
+  friend void to_json(nlohmann::json &j, const ValidTimePeriod &o);
+  friend void from_json(const nlohmann::json &j, ValidTimePeriod &o);
 
- protected:
+protected:
   std::string m_StartTime;
   bool m_StartTimeIsSet;
   std::string m_EndTime;
   bool m_EndTimeIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* ValidTimePeriod_H_ */

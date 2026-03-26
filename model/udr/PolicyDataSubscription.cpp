@@ -19,13 +19,13 @@
 namespace oai::udr::model {
 
 PolicyDataSubscription::PolicyDataSubscription() {
-  m_NotificationUri        = "";
-  m_NotifId                = "";
-  m_NotifIdIsSet           = false;
-  m_MonResItemsIsSet       = false;
-  m_Expiry                 = "";
-  m_ExpiryIsSet            = false;
-  m_SupportedFeatures      = "";
+  m_NotificationUri = "";
+  m_NotifId = "";
+  m_NotifIdIsSet = false;
+  m_MonResItemsIsSet = false;
+  m_Expiry = "";
+  m_ExpiryIsSet = false;
+  m_SupportedFeatures = "";
   m_SupportedFeaturesIsSet = false;
 }
 
@@ -35,19 +35,21 @@ void PolicyDataSubscription::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const PolicyDataSubscription& o) {
-  j                    = nlohmann::json();
+void to_json(nlohmann::json &j, const PolicyDataSubscription &o) {
+  j = nlohmann::json();
   j["notificationUri"] = o.m_NotificationUri;
-  if (o.notifIdIsSet()) j["notifId"] = o.m_NotifId;
+  if (o.notifIdIsSet())
+    j["notifId"] = o.m_NotifId;
   j["monitoredResourceUris"] = o.m_MonitoredResourceUris;
   if (o.monResItemsIsSet() || !o.m_MonResItems.empty())
     j["monResItems"] = o.m_MonResItems;
-  if (o.expiryIsSet()) j["expiry"] = o.m_Expiry;
+  if (o.expiryIsSet())
+    j["expiry"] = o.m_Expiry;
   if (o.supportedFeaturesIsSet())
     j["supportedFeatures"] = o.m_SupportedFeatures;
 }
 
-void from_json(const nlohmann::json& j, PolicyDataSubscription& o) {
+void from_json(const nlohmann::json &j, PolicyDataSubscription &o) {
   j.at("notificationUri").get_to(o.m_NotificationUri);
   if (j.find("notifId") != j.end()) {
     j.at("notifId").get_to(o.m_NotifId);
@@ -71,61 +73,47 @@ void from_json(const nlohmann::json& j, PolicyDataSubscription& o) {
 std::string PolicyDataSubscription::getNotificationUri() const {
   return m_NotificationUri;
 }
-void PolicyDataSubscription::setNotificationUri(std::string const& value) {
+void PolicyDataSubscription::setNotificationUri(std::string const &value) {
   m_NotificationUri = value;
 }
-std::string PolicyDataSubscription::getNotifId() const {
-  return m_NotifId;
-}
-void PolicyDataSubscription::setNotifId(std::string const& value) {
-  m_NotifId      = value;
+std::string PolicyDataSubscription::getNotifId() const { return m_NotifId; }
+void PolicyDataSubscription::setNotifId(std::string const &value) {
+  m_NotifId = value;
   m_NotifIdIsSet = true;
 }
-bool PolicyDataSubscription::notifIdIsSet() const {
-  return m_NotifIdIsSet;
-}
-void PolicyDataSubscription::unsetNotifId() {
-  m_NotifIdIsSet = false;
-}
-std::vector<std::string>& PolicyDataSubscription::getMonitoredResourceUris() {
+bool PolicyDataSubscription::notifIdIsSet() const { return m_NotifIdIsSet; }
+void PolicyDataSubscription::unsetNotifId() { m_NotifIdIsSet = false; }
+std::vector<std::string> &PolicyDataSubscription::getMonitoredResourceUris() {
   return m_MonitoredResourceUris;
 }
 void PolicyDataSubscription::setMonitoredResourceUris(
-    std::vector<std::string> const& value) {
+    std::vector<std::string> const &value) {
   m_MonitoredResourceUris = value;
 }
-std::vector<ResourceItem>& PolicyDataSubscription::getMonResItems() {
+std::vector<ResourceItem> &PolicyDataSubscription::getMonResItems() {
   return m_MonResItems;
 }
 void PolicyDataSubscription::setMonResItems(
-    std::vector<ResourceItem> const& value) {
-  m_MonResItems      = value;
+    std::vector<ResourceItem> const &value) {
+  m_MonResItems = value;
   m_MonResItemsIsSet = true;
 }
 bool PolicyDataSubscription::monResItemsIsSet() const {
   return m_MonResItemsIsSet;
 }
-void PolicyDataSubscription::unsetMonResItems() {
-  m_MonResItemsIsSet = false;
-}
-std::string PolicyDataSubscription::getExpiry() const {
-  return m_Expiry;
-}
-void PolicyDataSubscription::setExpiry(std::string const& value) {
-  m_Expiry      = value;
+void PolicyDataSubscription::unsetMonResItems() { m_MonResItemsIsSet = false; }
+std::string PolicyDataSubscription::getExpiry() const { return m_Expiry; }
+void PolicyDataSubscription::setExpiry(std::string const &value) {
+  m_Expiry = value;
   m_ExpiryIsSet = true;
 }
-bool PolicyDataSubscription::expiryIsSet() const {
-  return m_ExpiryIsSet;
-}
-void PolicyDataSubscription::unsetExpiry() {
-  m_ExpiryIsSet = false;
-}
+bool PolicyDataSubscription::expiryIsSet() const { return m_ExpiryIsSet; }
+void PolicyDataSubscription::unsetExpiry() { m_ExpiryIsSet = false; }
 std::string PolicyDataSubscription::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
-void PolicyDataSubscription::setSupportedFeatures(std::string const& value) {
-  m_SupportedFeatures      = value;
+void PolicyDataSubscription::setSupportedFeatures(std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool PolicyDataSubscription::supportedFeaturesIsSet() const {
@@ -135,4 +123,4 @@ void PolicyDataSubscription::unsetSupportedFeatures() {
   m_SupportedFeaturesIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

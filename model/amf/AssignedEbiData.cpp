@@ -16,8 +16,8 @@
 namespace oai::model::amf {
 
 AssignedEbiData::AssignedEbiData() {
-  m_PduSessionId         = 0;
-  m_FailedArpListIsSet   = false;
+  m_PduSessionId = 0;
+  m_FailedArpListIsSet = false;
   m_ReleasedEbiListIsSet = false;
 }
 
@@ -27,15 +27,17 @@ void AssignedEbiData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const AssignedEbiData& o) {
-  j                    = nlohmann::json();
-  j["pduSessionId"]    = o.m_PduSessionId;
+void to_json(nlohmann::json &j, const AssignedEbiData &o) {
+  j = nlohmann::json();
+  j["pduSessionId"] = o.m_PduSessionId;
   j["assignedEbiList"] = o.m_AssignedEbiList;
-  if (o.failedArpListIsSet()) j["failedArpList"] = o.m_FailedArpList;
-  if (o.releasedEbiListIsSet()) j["releasedEbiList"] = o.m_ReleasedEbiList;
+  if (o.failedArpListIsSet())
+    j["failedArpList"] = o.m_FailedArpList;
+  if (o.releasedEbiListIsSet())
+    j["releasedEbiList"] = o.m_ReleasedEbiList;
 }
 
-void from_json(const nlohmann::json& j, AssignedEbiData& o) {
+void from_json(const nlohmann::json &j, AssignedEbiData &o) {
   j.at("pduSessionId").get_to(o.m_PduSessionId);
   j.at("assignedEbiList").get_to(o.m_AssignedEbiList);
   if (j.find("failedArpList") != j.end()) {
@@ -48,32 +50,26 @@ void from_json(const nlohmann::json& j, AssignedEbiData& o) {
   }
 }
 
-int32_t AssignedEbiData::getPduSessionId() const {
-  return m_PduSessionId;
-}
+int32_t AssignedEbiData::getPduSessionId() const { return m_PduSessionId; }
 void AssignedEbiData::setPduSessionId(int32_t const value) {
   m_PduSessionId = value;
 }
-std::vector<EbiArpMapping>& AssignedEbiData::getAssignedEbiList() {
+std::vector<EbiArpMapping> &AssignedEbiData::getAssignedEbiList() {
   return m_AssignedEbiList;
 }
-std::vector<oai::model::common::Arp>& AssignedEbiData::getFailedArpList() {
+std::vector<oai::model::common::Arp> &AssignedEbiData::getFailedArpList() {
   return m_FailedArpList;
 }
 bool AssignedEbiData::failedArpListIsSet() const {
   return m_FailedArpListIsSet;
 }
-void AssignedEbiData::unsetFailedArpList() {
-  m_FailedArpListIsSet = false;
-}
-std::vector<int32_t>& AssignedEbiData::getReleasedEbiList() {
+void AssignedEbiData::unsetFailedArpList() { m_FailedArpListIsSet = false; }
+std::vector<int32_t> &AssignedEbiData::getReleasedEbiList() {
   return m_ReleasedEbiList;
 }
 bool AssignedEbiData::releasedEbiListIsSet() const {
   return m_ReleasedEbiListIsSet;
 }
-void AssignedEbiData::unsetReleasedEbiList() {
-  m_ReleasedEbiListIsSet = false;
-}
+void AssignedEbiData::unsetReleasedEbiList() { m_ReleasedEbiListIsSet = false; }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

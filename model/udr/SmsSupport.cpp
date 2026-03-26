@@ -26,10 +26,8 @@ void SmsSupport::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const SmsSupport& o) {
-  j = nlohmann::json();
-}
+void to_json(nlohmann::json &j, const SmsSupport &o) { j = nlohmann::json(); }
 
-void from_json(const nlohmann::json& j, SmsSupport& o) {}
+void from_json(const nlohmann::json &j, SmsSupport &o) {}
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

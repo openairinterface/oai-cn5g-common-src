@@ -25,7 +25,7 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_CompletedCellsInTAI-EUTRA-Item */
 typedef struct Ngap_CompletedCellsInTAI_EUTRA_Item {
   Ngap_EUTRA_CGI_t eUTRA_CGI;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

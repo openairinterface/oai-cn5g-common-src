@@ -3,8 +3,8 @@
  * All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#include <asn_internal.h>
 #include <INTEGER.h>
+#include <asn_internal.h>
 #include <errno.h>
 #include <inttypes.h>
 
@@ -93,40 +93,39 @@ asn_TYPE_descriptor_t asn_DEF_INTEGER = {
 /*
  * INTEGER specific human-readable output.
  */
-ssize_t INTEGER__dump(
-    const asn_TYPE_descriptor_t* td, const INTEGER_t* st,
-    asn_app_consume_bytes_f* cb, void* app_key, int plainOrXER) {
-  const asn_INTEGER_specifics_t* specs =
-      (const asn_INTEGER_specifics_t*) td->specifics;
+ssize_t INTEGER__dump(const asn_TYPE_descriptor_t *td, const INTEGER_t *st,
+                      asn_app_consume_bytes_f *cb, void *app_key,
+                      int plainOrXER) {
+  const asn_INTEGER_specifics_t *specs =
+      (const asn_INTEGER_specifics_t *)td->specifics;
   char scratch[32];
-  uint8_t* buf     = st->buf;
-  uint8_t* buf_end = st->buf + st->size;
+  uint8_t *buf = st->buf;
+  uint8_t *buf_end = st->buf + st->size;
   intmax_t value;
   ssize_t wrote = 0;
-  char* p;
+  char *p;
   int ret;
 
   if (specs && specs->field_unsigned)
-    ret = asn_INTEGER2umax(st, (uintmax_t*) &value);
+    ret = asn_INTEGER2umax(st, (uintmax_t *)&value);
   else
     ret = asn_INTEGER2imax(st, &value);
 
   /* Simple case: the integer size is small */
   if (ret == 0) {
-    const asn_INTEGER_enum_map_t* el;
-    el = (value >= 0 || !specs || !specs->field_unsigned) ?
-             INTEGER_map_value2enum(specs, value) :
-             0;
+    const asn_INTEGER_enum_map_t *el;
+    el = (value >= 0 || !specs || !specs->field_unsigned)
+             ? INTEGER_map_value2enum(specs, value)
+             : 0;
     if (el) {
       if (plainOrXER == 0)
-        return asn__format_to_callback(
-            cb, app_key, "%" ASN_PRIdMAX " (%s)", value, el->enum_name);
+        return asn__format_to_callback(cb, app_key, "%" ASN_PRIdMAX " (%s)",
+                                       value, el->enum_name);
       else
         return asn__format_to_callback(cb, app_key, "<%s/>", el->enum_name);
     } else if (plainOrXER && specs && specs->strict_enumeration) {
-      ASN_DEBUG(
-          "ASN.1 forbids dealing with "
-          "unknown value of ENUMERATED type");
+      ASN_DEBUG("ASN.1 forbids dealing with "
+                "unknown value of ENUMERATED type");
       errno = EPERM;
       return -1;
     } else {
@@ -140,9 +139,8 @@ ssize_t INTEGER__dump(
      * Here and earlier, we cannot encode the ENUMERATED values
      * if there is no corresponding identifier.
      */
-    ASN_DEBUG(
-        "ASN.1 forbids dealing with "
-        "unknown value of ENUMERATED type");
+    ASN_DEBUG("ASN.1 forbids dealing with "
+              "unknown value of ENUMERATED type");
     errno = EPERM;
     return -1;
   }
@@ -150,10 +148,11 @@ ssize_t INTEGER__dump(
   /* Output in the long xx:yy:zz... format */
   /* TODO: replace with generic algorithm (Knuth TAOCP Vol 2, 4.3.1) */
   for (p = scratch; buf < buf_end; buf++) {
-    const char* const h2c = "0123456789ABCDEF";
-    if ((p - scratch) >= (ssize_t) (sizeof(scratch) - 4)) {
+    const char *const h2c = "0123456789ABCDEF";
+    if ((p - scratch) >= (ssize_t)(sizeof(scratch) - 4)) {
       /* Flush buffer */
-      if (cb(scratch, p - scratch, app_key) < 0) return -1;
+      if (cb(scratch, p - scratch, app_key) < 0)
+        return -1;
       wrote += p - scratch;
       p = scratch;
     }
@@ -161,16 +160,17 @@ ssize_t INTEGER__dump(
     *p++ = h2c[*buf & 0x0F];
     *p++ = 0x3a; /* ":" */
   }
-  if (p != scratch) p--; /* Remove the last ":" */
+  if (p != scratch)
+    p--; /* Remove the last ":" */
 
   wrote += p - scratch;
   return (cb(scratch, p - scratch, app_key) < 0) ? -1 : wrote;
 }
 
-static int INTEGER__compar_value2enum(const void* kp, const void* am) {
-  long a                           = *(const long*) kp;
-  const asn_INTEGER_enum_map_t* el = (const asn_INTEGER_enum_map_t*) am;
-  long b                           = el->nat_value;
+static int INTEGER__compar_value2enum(const void *kp, const void *am) {
+  long a = *(const long *)kp;
+  const asn_INTEGER_enum_map_t *el = (const asn_INTEGER_enum_map_t *)am;
+  long b = el->nat_value;
   if (a < b)
     return -1;
   else if (a == b)
@@ -179,22 +179,23 @@ static int INTEGER__compar_value2enum(const void* kp, const void* am) {
     return 1;
 }
 
-const asn_INTEGER_enum_map_t* INTEGER_map_value2enum(
-    const asn_INTEGER_specifics_t* specs, long value) {
+const asn_INTEGER_enum_map_t *
+INTEGER_map_value2enum(const asn_INTEGER_specifics_t *specs, long value) {
   int count = specs ? specs->map_count : 0;
-  if (!count) return 0;
-  return (asn_INTEGER_enum_map_t*) bsearch(
-      &value, specs->value2enum, count, sizeof(specs->value2enum[0]),
-      INTEGER__compar_value2enum);
+  if (!count)
+    return 0;
+  return (asn_INTEGER_enum_map_t *)bsearch(&value, specs->value2enum, count,
+                                           sizeof(specs->value2enum[0]),
+                                           INTEGER__compar_value2enum);
 }
 
-static intmax_t asn__integer_convert(const uint8_t* b, const uint8_t* end) {
+static intmax_t asn__integer_convert(const uint8_t *b, const uint8_t *end) {
   uintmax_t value;
 
   /* Perform the sign initialization */
   /* Actually value = -(*b >> 7); gains nothing, yet unreadable! */
   if ((*b >> 7)) {
-    value = (uintmax_t) (-1);
+    value = (uintmax_t)(-1);
   } else {
     value = 0;
   }
@@ -207,7 +208,7 @@ static intmax_t asn__integer_convert(const uint8_t* b, const uint8_t* end) {
   return value;
 }
 
-int asn_INTEGER2imax(const INTEGER_t* iptr, intmax_t* lptr) {
+int asn_INTEGER2imax(const INTEGER_t *iptr, intmax_t *lptr) {
   uint8_t *b, *end;
   size_t size;
 
@@ -218,12 +219,12 @@ int asn_INTEGER2imax(const INTEGER_t* iptr, intmax_t* lptr) {
   }
 
   /* Cache the begin/end of the buffer */
-  b    = iptr->buf; /* Start of the INTEGER buffer */
+  b = iptr->buf; /* Start of the INTEGER buffer */
   size = iptr->size;
-  end  = b + size; /* Where to stop */
+  end = b + size; /* Where to stop */
 
   if (size > sizeof(intmax_t)) {
-    uint8_t* end1 = end - 1;
+    uint8_t *end1 = end - 1;
     /*
      * Slightly more advanced processing,
      * able to process INTEGERs with >sizeof(intmax_t) bytes
@@ -233,12 +234,14 @@ int asn_INTEGER2imax(const INTEGER_t* iptr, intmax_t* lptr) {
     /* Skip out the insignificant leading bytes */
     for (; b < end1; b++) {
       switch (*b) {
-        case 0x00:
-          if ((b[1] & 0x80) == 0) continue;
-          break;
-        case 0xff:
-          if ((b[1] & 0x80) != 0) continue;
-          break;
+      case 0x00:
+        if ((b[1] & 0x80) == 0)
+          continue;
+        break;
+      case 0xff:
+        if ((b[1] & 0x80) != 0)
+          continue;
+        break;
       }
       break;
     }
@@ -263,7 +266,7 @@ int asn_INTEGER2imax(const INTEGER_t* iptr, intmax_t* lptr) {
 
 /* FIXME: negative INTEGER values are silently interpreted as large unsigned
  * ones. */
-int asn_INTEGER2umax(const INTEGER_t* iptr, uintmax_t* lptr) {
+int asn_INTEGER2umax(const INTEGER_t *iptr, uintmax_t *lptr) {
   uint8_t *b, *end;
   uintmax_t value;
   size_t size;
@@ -273,9 +276,9 @@ int asn_INTEGER2umax(const INTEGER_t* iptr, uintmax_t* lptr) {
     return -1;
   }
 
-  b    = iptr->buf;
+  b = iptr->buf;
   size = iptr->size;
-  end  = b + size;
+  end = b + size;
 
   /* If all extra leading bytes are zeroes, ignore them */
   for (; size > sizeof(value); b++, size--) {
@@ -287,42 +290,45 @@ int asn_INTEGER2umax(const INTEGER_t* iptr, uintmax_t* lptr) {
   }
 
   /* Conversion engine */
-  for (value = 0; b < end; b++) value = (value << 8) | *b;
+  for (value = 0; b < end; b++)
+    value = (value << 8) | *b;
 
   *lptr = value;
   return 0;
 }
 
-int asn_umax2INTEGER(INTEGER_t* st, uintmax_t value) {
-  uint8_t* buf;
-  uint8_t* end;
-  uint8_t* b;
+int asn_umax2INTEGER(INTEGER_t *st, uintmax_t value) {
+  uint8_t *buf;
+  uint8_t *end;
+  uint8_t *b;
   int shr;
 
-  if (value <= ((~(uintmax_t) 0) >> 1)) {
+  if (value <= ((~(uintmax_t)0) >> 1)) {
     return asn_imax2INTEGER(st, value);
   }
 
-  buf = (uint8_t*) MALLOC(1 + sizeof(value));
-  if (!buf) return -1;
+  buf = (uint8_t *)MALLOC(1 + sizeof(value));
+  if (!buf)
+    return -1;
 
-  end    = buf + (sizeof(value) + 1);
+  end = buf + (sizeof(value) + 1);
   buf[0] = 0; /* INTEGERs are signed. 0-byte indicates positive. */
   for (b = buf + 1, shr = (sizeof(value) - 1) * 8; b < end; shr -= 8, b++)
-    *b = (uint8_t) (value >> shr);
+    *b = (uint8_t)(value >> shr);
 
-  if (st->buf) FREEMEM(st->buf);
-  st->buf  = buf;
+  if (st->buf)
+    FREEMEM(st->buf);
+  st->buf = buf;
   st->size = 1 + sizeof(value);
 
   return 0;
 }
 
-int asn_imax2INTEGER(INTEGER_t* st, intmax_t value) {
+int asn_imax2INTEGER(INTEGER_t *st, intmax_t value) {
   uint8_t *buf, *bp;
-  uint8_t* p;
-  uint8_t* pstart;
-  uint8_t* pend1;
+  uint8_t *p;
+  uint8_t *pstart;
+  uint8_t *pend1;
   int littleEndian = 1; /* Run-time detection */
   int add;
 
@@ -331,17 +337,18 @@ int asn_imax2INTEGER(INTEGER_t* st, intmax_t value) {
     return -1;
   }
 
-  buf = (uint8_t*) (long*) MALLOC(sizeof(value));
-  if (!buf) return -1;
+  buf = (uint8_t *)(long *)MALLOC(sizeof(value));
+  if (!buf)
+    return -1;
 
-  if (*(char*) &littleEndian) {
-    pstart = (uint8_t*) &value + sizeof(value) - 1;
-    pend1  = (uint8_t*) &value;
-    add    = -1;
+  if (*(char *)&littleEndian) {
+    pstart = (uint8_t *)&value + sizeof(value) - 1;
+    pend1 = (uint8_t *)&value;
+    add = -1;
   } else {
-    pstart = (uint8_t*) &value;
-    pend1  = pstart + sizeof(value) - 1;
-    add    = 1;
+    pstart = (uint8_t *)&value;
+    pend1 = pstart + sizeof(value) - 1;
+    add = 1;
   }
 
   /*
@@ -352,26 +359,30 @@ int asn_imax2INTEGER(INTEGER_t* st, intmax_t value) {
    */
   for (p = pstart; p != pend1; p += add) {
     switch (*p) {
-      case 0x00:
-        if ((*(p + add) & 0x80) == 0) continue;
-        break;
-      case 0xff:
-        if ((*(p + add) & 0x80)) continue;
-        break;
+    case 0x00:
+      if ((*(p + add) & 0x80) == 0)
+        continue;
+      break;
+    case 0xff:
+      if ((*(p + add) & 0x80))
+        continue;
+      break;
     }
     break;
   }
   /* Copy the integer body */
-  for (bp = buf, pend1 += add; p != pend1; p += add) *bp++ = *p;
+  for (bp = buf, pend1 += add; p != pend1; p += add)
+    *bp++ = *p;
 
-  if (st->buf) FREEMEM(st->buf);
-  st->buf  = buf;
+  if (st->buf)
+    FREEMEM(st->buf);
+  st->buf = buf;
   st->size = bp - buf;
 
   return 0;
 }
 
-int asn_INTEGER2long(const INTEGER_t* iptr, long* l) {
+int asn_INTEGER2long(const INTEGER_t *iptr, long *l) {
   intmax_t v;
   if (asn_INTEGER2imax(iptr, &v) == 0) {
     if (v < LONG_MIN || v > LONG_MAX) {
@@ -385,7 +396,7 @@ int asn_INTEGER2long(const INTEGER_t* iptr, long* l) {
   }
 }
 
-int asn_INTEGER2ulong(const INTEGER_t* iptr, unsigned long* l) {
+int asn_INTEGER2ulong(const INTEGER_t *iptr, unsigned long *l) {
   uintmax_t v;
   if (asn_INTEGER2umax(iptr, &v) == 0) {
     if (v > ULONG_MAX) {
@@ -399,42 +410,45 @@ int asn_INTEGER2ulong(const INTEGER_t* iptr, unsigned long* l) {
   }
 }
 
-int asn_long2INTEGER(INTEGER_t* st, long value) {
+int asn_long2INTEGER(INTEGER_t *st, long value) {
   return asn_imax2INTEGER(st, value);
 }
 
-int asn_ulong2INTEGER(INTEGER_t* st, unsigned long value) {
+int asn_ulong2INTEGER(INTEGER_t *st, unsigned long value) {
   return asn_imax2INTEGER(st, value);
 }
 
-int asn_uint642INTEGER(INTEGER_t* st, uint64_t value) {
-  uint8_t* buf;
-  uint8_t* end;
-  uint8_t* b;
+int asn_uint642INTEGER(INTEGER_t *st, uint64_t value) {
+  uint8_t *buf;
+  uint8_t *end;
+  uint8_t *b;
   int shr;
 
-  if (value <= INT64_MAX) return asn_int642INTEGER(st, value);
+  if (value <= INT64_MAX)
+    return asn_int642INTEGER(st, value);
 
-  buf = (uint8_t*) MALLOC(1 + sizeof(value));
-  if (!buf) return -1;
+  buf = (uint8_t *)MALLOC(1 + sizeof(value));
+  if (!buf)
+    return -1;
 
-  end    = buf + (sizeof(value) + 1);
+  end = buf + (sizeof(value) + 1);
   buf[0] = 0;
   for (b = buf + 1, shr = (sizeof(value) - 1) * 8; b < end; shr -= 8, b++)
-    *b = (uint8_t) (value >> shr);
+    *b = (uint8_t)(value >> shr);
 
-  if (st->buf) FREEMEM(st->buf);
-  st->buf  = buf;
+  if (st->buf)
+    FREEMEM(st->buf);
+  st->buf = buf;
   st->size = 1 + sizeof(value);
 
   return 0;
 }
 
-int asn_int642INTEGER(INTEGER_t* st, int64_t value) {
+int asn_int642INTEGER(INTEGER_t *st, int64_t value) {
   uint8_t *buf, *bp;
-  uint8_t* p;
-  uint8_t* pstart;
-  uint8_t* pend1;
+  uint8_t *p;
+  uint8_t *pstart;
+  uint8_t *pend1;
   int littleEndian = 1; /* Run-time detection */
   int add;
 
@@ -443,17 +457,18 @@ int asn_int642INTEGER(INTEGER_t* st, int64_t value) {
     return -1;
   }
 
-  buf = (uint8_t*) MALLOC(sizeof(value));
-  if (!buf) return -1;
+  buf = (uint8_t *)MALLOC(sizeof(value));
+  if (!buf)
+    return -1;
 
-  if (*(char*) &littleEndian) {
-    pstart = (uint8_t*) &value + sizeof(value) - 1;
-    pend1  = (uint8_t*) &value;
-    add    = -1;
+  if (*(char *)&littleEndian) {
+    pstart = (uint8_t *)&value + sizeof(value) - 1;
+    pend1 = (uint8_t *)&value;
+    add = -1;
   } else {
-    pstart = (uint8_t*) &value;
-    pend1  = pstart + sizeof(value) - 1;
-    add    = 1;
+    pstart = (uint8_t *)&value;
+    pend1 = pstart + sizeof(value) - 1;
+    add = 1;
   }
 
   /*
@@ -464,20 +479,24 @@ int asn_int642INTEGER(INTEGER_t* st, int64_t value) {
    */
   for (p = pstart; p != pend1; p += add) {
     switch (*p) {
-      case 0x00:
-        if ((*(p + add) & 0x80) == 0) continue;
-        break;
-      case 0xff:
-        if ((*(p + add) & 0x80)) continue;
-        break;
+    case 0x00:
+      if ((*(p + add) & 0x80) == 0)
+        continue;
+      break;
+    case 0xff:
+      if ((*(p + add) & 0x80))
+        continue;
+      break;
     }
     break;
   }
   /* Copy the integer body */
-  for (pstart = p, bp = buf, pend1 += add; p != pend1; p += add) *bp++ = *p;
+  for (pstart = p, bp = buf, pend1 += add; p != pend1; p += add)
+    *bp++ = *p;
 
-  if (st->buf) FREEMEM(st->buf);
-  st->buf  = buf;
+  if (st->buf)
+    FREEMEM(st->buf);
+  st->buf = buf;
   st->size = bp - buf;
 
   return 0;
@@ -489,28 +508,29 @@ int asn_int642INTEGER(INTEGER_t* st, int64_t value) {
  * same (*end) pointer.
  * WARNING: This behavior is different from the standard strtol/strtoimax(3).
  */
-enum asn_strtox_result_e asn_strtoimax_lim(
-    const char* str, const char** end, intmax_t* intp) {
+enum asn_strtox_result_e asn_strtoimax_lim(const char *str, const char **end,
+                                           intmax_t *intp) {
   int sign = 1;
   intmax_t value;
 
-  const intmax_t asn1_intmax_max = ((~(uintmax_t) 0) >> 1);
-  const intmax_t upper_boundary  = asn1_intmax_max / 10;
-  intmax_t last_digit_max        = asn1_intmax_max % 10;
+  const intmax_t asn1_intmax_max = ((~(uintmax_t)0) >> 1);
+  const intmax_t upper_boundary = asn1_intmax_max / 10;
+  intmax_t last_digit_max = asn1_intmax_max % 10;
 
-  if (str >= *end) return ASN_STRTOX_ERROR_INVAL;
+  if (str >= *end)
+    return ASN_STRTOX_ERROR_INVAL;
 
   switch (*str) {
-    case '-':
-      last_digit_max++;
-      sign = -1;
-      /* FALL THROUGH */
-    case '+':
-      str++;
-      if (str >= *end) {
-        *end = str;
-        return ASN_STRTOX_EXPECT_MORE;
-      }
+  case '-':
+    last_digit_max++;
+    sign = -1;
+    /* FALL THROUGH */
+  case '+':
+    str++;
+    if (str >= *end) {
+      *end = str;
+      return ASN_STRTOX_EXPECT_MORE;
+    }
   }
 
   for (value = 0; str < (*end); str++) {
@@ -523,7 +543,7 @@ enum asn_strtox_result_e asn_strtoimax_lim(
           if (sign > 0) {
             value = value * 10 + d;
           } else {
-            sign  = 1;
+            sign = 1;
             value = -value * 10 - d;
           }
           str += 1;
@@ -547,13 +567,13 @@ enum asn_strtox_result_e asn_strtoimax_lim(
         return ASN_STRTOX_ERROR_RANGE;
       }
     } else {
-      *end  = str;
+      *end = str;
       *intp = sign * value;
       return ASN_STRTOX_EXTRA_DATA;
     }
   }
 
-  *end  = str;
+  *end = str;
   *intp = sign * value;
   return ASN_STRTOX_OK;
 }
@@ -564,25 +584,26 @@ enum asn_strtox_result_e asn_strtoimax_lim(
  * same (*end) pointer.
  * WARNING: This behavior is different from the standard strtoul/strtoumax(3).
  */
-enum asn_strtox_result_e asn_strtoumax_lim(
-    const char* str, const char** end, uintmax_t* uintp) {
+enum asn_strtox_result_e asn_strtoumax_lim(const char *str, const char **end,
+                                           uintmax_t *uintp) {
   uintmax_t value;
 
-  const uintmax_t asn1_uintmax_max = ((~(uintmax_t) 0));
-  const uintmax_t upper_boundary   = asn1_uintmax_max / 10;
-  uintmax_t last_digit_max         = asn1_uintmax_max % 10;
+  const uintmax_t asn1_uintmax_max = ((~(uintmax_t)0));
+  const uintmax_t upper_boundary = asn1_uintmax_max / 10;
+  uintmax_t last_digit_max = asn1_uintmax_max % 10;
 
-  if (str >= *end) return ASN_STRTOX_ERROR_INVAL;
+  if (str >= *end)
+    return ASN_STRTOX_ERROR_INVAL;
 
   switch (*str) {
-    case '-':
-      return ASN_STRTOX_ERROR_INVAL;
-    case '+':
-      str++;
-      if (str >= *end) {
-        *end = str;
-        return ASN_STRTOX_EXPECT_MORE;
-      }
+  case '-':
+    return ASN_STRTOX_ERROR_INVAL;
+  case '+':
+    str++;
+    if (str >= *end) {
+      *end = str;
+      return ASN_STRTOX_EXPECT_MORE;
+    }
   }
 
   for (value = 0; str < (*end); str++) {
@@ -614,91 +635,93 @@ enum asn_strtox_result_e asn_strtoumax_lim(
         return ASN_STRTOX_ERROR_RANGE;
       }
     } else {
-      *end   = str;
+      *end = str;
       *uintp = value;
       return ASN_STRTOX_EXTRA_DATA;
     }
   }
 
-  *end   = str;
+  *end = str;
   *uintp = value;
   return ASN_STRTOX_OK;
 }
 
-enum asn_strtox_result_e asn_strtol_lim(
-    const char* str, const char** end, long* lp) {
+enum asn_strtox_result_e asn_strtol_lim(const char *str, const char **end,
+                                        long *lp) {
   intmax_t value;
   switch (asn_strtoimax_lim(str, end, &value)) {
-    case ASN_STRTOX_ERROR_RANGE:
+  case ASN_STRTOX_ERROR_RANGE:
+    return ASN_STRTOX_ERROR_RANGE;
+  case ASN_STRTOX_ERROR_INVAL:
+    return ASN_STRTOX_ERROR_INVAL;
+  case ASN_STRTOX_EXPECT_MORE:
+    return ASN_STRTOX_EXPECT_MORE;
+  case ASN_STRTOX_OK:
+    if (value >= LONG_MIN && value <= LONG_MAX) {
+      *lp = value;
+      return ASN_STRTOX_OK;
+    } else {
       return ASN_STRTOX_ERROR_RANGE;
-    case ASN_STRTOX_ERROR_INVAL:
-      return ASN_STRTOX_ERROR_INVAL;
-    case ASN_STRTOX_EXPECT_MORE:
-      return ASN_STRTOX_EXPECT_MORE;
-    case ASN_STRTOX_OK:
-      if (value >= LONG_MIN && value <= LONG_MAX) {
-        *lp = value;
-        return ASN_STRTOX_OK;
-      } else {
-        return ASN_STRTOX_ERROR_RANGE;
-      }
-    case ASN_STRTOX_EXTRA_DATA:
-      if (value >= LONG_MIN && value <= LONG_MAX) {
-        *lp = value;
-        return ASN_STRTOX_EXTRA_DATA;
-      } else {
-        return ASN_STRTOX_ERROR_RANGE;
-      }
+    }
+  case ASN_STRTOX_EXTRA_DATA:
+    if (value >= LONG_MIN && value <= LONG_MAX) {
+      *lp = value;
+      return ASN_STRTOX_EXTRA_DATA;
+    } else {
+      return ASN_STRTOX_ERROR_RANGE;
+    }
   }
 
   assert(!"Unreachable");
   return ASN_STRTOX_ERROR_INVAL;
 }
 
-enum asn_strtox_result_e asn_strtoul_lim(
-    const char* str, const char** end, unsigned long* ulp) {
+enum asn_strtox_result_e asn_strtoul_lim(const char *str, const char **end,
+                                         unsigned long *ulp) {
   uintmax_t value;
   switch (asn_strtoumax_lim(str, end, &value)) {
-    case ASN_STRTOX_ERROR_RANGE:
+  case ASN_STRTOX_ERROR_RANGE:
+    return ASN_STRTOX_ERROR_RANGE;
+  case ASN_STRTOX_ERROR_INVAL:
+    return ASN_STRTOX_ERROR_INVAL;
+  case ASN_STRTOX_EXPECT_MORE:
+    return ASN_STRTOX_EXPECT_MORE;
+  case ASN_STRTOX_OK:
+    if (value <= ULONG_MAX) {
+      *ulp = value;
+      return ASN_STRTOX_OK;
+    } else {
       return ASN_STRTOX_ERROR_RANGE;
-    case ASN_STRTOX_ERROR_INVAL:
-      return ASN_STRTOX_ERROR_INVAL;
-    case ASN_STRTOX_EXPECT_MORE:
-      return ASN_STRTOX_EXPECT_MORE;
-    case ASN_STRTOX_OK:
-      if (value <= ULONG_MAX) {
-        *ulp = value;
-        return ASN_STRTOX_OK;
-      } else {
-        return ASN_STRTOX_ERROR_RANGE;
-      }
-    case ASN_STRTOX_EXTRA_DATA:
-      if (value <= ULONG_MAX) {
-        *ulp = value;
-        return ASN_STRTOX_EXTRA_DATA;
-      } else {
-        return ASN_STRTOX_ERROR_RANGE;
-      }
+    }
+  case ASN_STRTOX_EXTRA_DATA:
+    if (value <= ULONG_MAX) {
+      *ulp = value;
+      return ASN_STRTOX_EXTRA_DATA;
+    } else {
+      return ASN_STRTOX_ERROR_RANGE;
+    }
   }
 
   assert(!"Unreachable");
   return ASN_STRTOX_ERROR_INVAL;
 }
 
-int INTEGER_compare(
-    const asn_TYPE_descriptor_t* td, const void* aptr, const void* bptr) {
-  const INTEGER_t* a = aptr;
-  const INTEGER_t* b = bptr;
+int INTEGER_compare(const asn_TYPE_descriptor_t *td, const void *aptr,
+                    const void *bptr) {
+  const INTEGER_t *a = aptr;
+  const INTEGER_t *b = bptr;
 
-  (void) td;
+  (void)td;
 
   if (a && b) {
     if (a->size && b->size) {
       int sign_a = (a->buf[0] & 0x80) ? -1 : 1;
       int sign_b = (b->buf[0] & 0x80) ? -1 : 1;
 
-      if (sign_a < sign_b) return -1;
-      if (sign_a > sign_b) return 1;
+      if (sign_a < sign_b)
+        return -1;
+      if (sign_a > sign_b)
+        return 1;
 
       /* The shortest integer wins, unless comparing negatives */
       if (a->size < b->size) {

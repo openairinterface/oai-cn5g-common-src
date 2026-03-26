@@ -27,7 +27,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class TriggerType {
- public:
+public:
   TriggerType();
   virtual ~TriggerType();
 
@@ -36,12 +36,12 @@ class TriggerType {
   /////////////////////////////////////////////
   /// TriggerType members
 
-  friend void to_json(nlohmann::json& j, const TriggerType& o);
-  friend void from_json(const nlohmann::json& j, TriggerType& o);
+  friend void to_json(nlohmann::json &j, const TriggerType &o);
+  friend void from_json(const nlohmann::json &j, TriggerType &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* TriggerType_H_ */

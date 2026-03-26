@@ -20,9 +20,9 @@ namespace oai::model::pcf {
 
 ResourcesAllocationInfo::ResourcesAllocationInfo() {
   m_McResourcStatusIsSet = false;
-  m_FlowsIsSet           = false;
-  m_AltSerReq            = "";
-  m_AltSerReqIsSet       = false;
+  m_FlowsIsSet = false;
+  m_AltSerReq = "";
+  m_AltSerReqIsSet = false;
 }
 
 void ResourcesAllocationInfo::validate() const {
@@ -32,28 +32,28 @@ void ResourcesAllocationInfo::validate() const {
   }
 }
 
-bool ResourcesAllocationInfo::validate(std::stringstream& msg) const {
+bool ResourcesAllocationInfo::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ResourcesAllocationInfo::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ResourcesAllocationInfo::validate(std::stringstream &msg,
+                                       const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ResourcesAllocationInfo" : pathPrefix;
 
   if (flowsIsSet()) {
-    const std::vector<oai::model::pcf::Flows>& value = m_Flows;
-    const std::string currentValuePath               = _pathPrefix + ".flows";
+    const std::vector<oai::model::pcf::Flows> &value = m_Flows;
+    const std::string currentValuePath = _pathPrefix + ".flows";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::Flows& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::Flows &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -68,7 +68,7 @@ bool ResourcesAllocationInfo::validate(
 }
 
 bool ResourcesAllocationInfo::operator==(
-    const ResourcesAllocationInfo& rhs) const {
+    const ResourcesAllocationInfo &rhs) const {
   return
 
       ((!mcResourcStatusIsSet() && !rhs.mcResourcStatusIsSet()) ||
@@ -86,18 +86,21 @@ bool ResourcesAllocationInfo::operator==(
 }
 
 bool ResourcesAllocationInfo::operator!=(
-    const ResourcesAllocationInfo& rhs) const {
+    const ResourcesAllocationInfo &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ResourcesAllocationInfo& o) {
+void to_json(nlohmann::json &j, const ResourcesAllocationInfo &o) {
   j = nlohmann::json::object();
-  if (o.mcResourcStatusIsSet()) j["mcResourcStatus"] = o.m_McResourcStatus;
-  if (o.flowsIsSet() || !o.m_Flows.empty()) j["flows"] = o.m_Flows;
-  if (o.altSerReqIsSet()) j["altSerReq"] = o.m_AltSerReq;
+  if (o.mcResourcStatusIsSet())
+    j["mcResourcStatus"] = o.m_McResourcStatus;
+  if (o.flowsIsSet() || !o.m_Flows.empty())
+    j["flows"] = o.m_Flows;
+  if (o.altSerReqIsSet())
+    j["altSerReq"] = o.m_AltSerReq;
 }
 
-void from_json(const nlohmann::json& j, ResourcesAllocationInfo& o) {
+void from_json(const nlohmann::json &j, ResourcesAllocationInfo &o) {
   if (j.find("mcResourcStatus") != j.end()) {
     j.at("mcResourcStatus").get_to(o.m_McResourcStatus);
     o.m_McResourcStatusIsSet = true;
@@ -117,8 +120,8 @@ ResourcesAllocationInfo::getMcResourcStatus() const {
   return m_McResourcStatus;
 }
 void ResourcesAllocationInfo::setMcResourcStatus(
-    oai::model::pcf::MediaComponentResourcesStatus const& value) {
-  m_McResourcStatus      = value;
+    oai::model::pcf::MediaComponentResourcesStatus const &value) {
+  m_McResourcStatus = value;
   m_McResourcStatusIsSet = true;
 }
 bool ResourcesAllocationInfo::mcResourcStatusIsSet() const {
@@ -131,28 +134,22 @@ std::vector<oai::model::pcf::Flows> ResourcesAllocationInfo::getFlows() const {
   return m_Flows;
 }
 void ResourcesAllocationInfo::setFlows(
-    std::vector<oai::model::pcf::Flows> const& value) {
-  m_Flows      = value;
+    std::vector<oai::model::pcf::Flows> const &value) {
+  m_Flows = value;
   m_FlowsIsSet = true;
 }
-bool ResourcesAllocationInfo::flowsIsSet() const {
-  return m_FlowsIsSet;
-}
-void ResourcesAllocationInfo::unsetFlows() {
-  m_FlowsIsSet = false;
-}
+bool ResourcesAllocationInfo::flowsIsSet() const { return m_FlowsIsSet; }
+void ResourcesAllocationInfo::unsetFlows() { m_FlowsIsSet = false; }
 std::string ResourcesAllocationInfo::getAltSerReq() const {
   return m_AltSerReq;
 }
-void ResourcesAllocationInfo::setAltSerReq(std::string const& value) {
-  m_AltSerReq      = value;
+void ResourcesAllocationInfo::setAltSerReq(std::string const &value) {
+  m_AltSerReq = value;
   m_AltSerReqIsSet = true;
 }
 bool ResourcesAllocationInfo::altSerReqIsSet() const {
   return m_AltSerReqIsSet;
 }
-void ResourcesAllocationInfo::unsetAltSerReq() {
-  m_AltSerReqIsSet = false;
-}
+void ResourcesAllocationInfo::unsetAltSerReq() { m_AltSerReqIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

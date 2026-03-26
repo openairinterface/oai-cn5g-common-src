@@ -13,8 +13,8 @@
 
 #include "FlowStatus_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::pcf {
 
@@ -27,12 +27,12 @@ void FlowStatus_anyOf::validate() const {
   }
 }
 
-bool FlowStatus_anyOf::validate(std::stringstream& msg) const {
+bool FlowStatus_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool FlowStatus_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool FlowStatus_anyOf::validate(std::stringstream &msg,
+                                const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "FlowStatus_anyOf" : pathPrefix;
@@ -46,42 +46,42 @@ bool FlowStatus_anyOf::validate(
   return success;
 }
 
-bool FlowStatus_anyOf::operator==(const FlowStatus_anyOf& rhs) const {
+bool FlowStatus_anyOf::operator==(const FlowStatus_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool FlowStatus_anyOf::operator!=(const FlowStatus_anyOf& rhs) const {
+bool FlowStatus_anyOf::operator!=(const FlowStatus_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const FlowStatus_anyOf& o) {
+void to_json(nlohmann::json &j, const FlowStatus_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case FlowStatus_anyOf::eFlowStatus_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case FlowStatus_anyOf::eFlowStatus_anyOf::ENABLED_UPLINK:
-      j = "ENABLED-UPLINK";
-      break;
-    case FlowStatus_anyOf::eFlowStatus_anyOf::ENABLED_DOWNLINK:
-      j = "ENABLED-DOWNLINK";
-      break;
-    case FlowStatus_anyOf::eFlowStatus_anyOf::ENABLED:
-      j = "ENABLED";
-      break;
-    case FlowStatus_anyOf::eFlowStatus_anyOf::DISABLED:
-      j = "DISABLED";
-      break;
-    case FlowStatus_anyOf::eFlowStatus_anyOf::REMOVED:
-      j = "REMOVED";
-      break;
+  case FlowStatus_anyOf::eFlowStatus_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case FlowStatus_anyOf::eFlowStatus_anyOf::ENABLED_UPLINK:
+    j = "ENABLED-UPLINK";
+    break;
+  case FlowStatus_anyOf::eFlowStatus_anyOf::ENABLED_DOWNLINK:
+    j = "ENABLED-DOWNLINK";
+    break;
+  case FlowStatus_anyOf::eFlowStatus_anyOf::ENABLED:
+    j = "ENABLED";
+    break;
+  case FlowStatus_anyOf::eFlowStatus_anyOf::DISABLED:
+    j = "DISABLED";
+    break;
+  case FlowStatus_anyOf::eFlowStatus_anyOf::REMOVED:
+    j = "REMOVED";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, FlowStatus_anyOf& o) {
+void from_json(const nlohmann::json &j, FlowStatus_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "ENABLED-UPLINK") {
     o.setValue(FlowStatus_anyOf::eFlowStatus_anyOf::ENABLED_UPLINK);
@@ -109,4 +109,4 @@ void FlowStatus_anyOf::setValue(FlowStatus_anyOf::eFlowStatus_anyOf value) {
   m_value = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

@@ -35,9 +35,9 @@ struct Ngap_ProtocolIE_SingleContainer;
 typedef struct Ngap_MDTModeNr {
   Ngap_MDTModeNr_PR present;
   union Ngap_MDTModeNr_u {
-    struct Ngap_ImmediateMDTNr* immediateMDTNr;
-    struct Ngap_LoggedMDTNr* loggedMDTNr;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_ImmediateMDTNr *immediateMDTNr;
+    struct Ngap_LoggedMDTNr *loggedMDTNr;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

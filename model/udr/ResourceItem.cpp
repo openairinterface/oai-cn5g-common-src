@@ -18,9 +18,7 @@
 
 namespace oai::udr::model {
 
-ResourceItem::ResourceItem() {
-  m_MonResourceUri = "";
-}
+ResourceItem::ResourceItem() { m_MonResourceUri = ""; }
 
 ResourceItem::~ResourceItem() {}
 
@@ -28,28 +26,24 @@ void ResourceItem::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const ResourceItem& o) {
-  j                   = nlohmann::json();
+void to_json(nlohmann::json &j, const ResourceItem &o) {
+  j = nlohmann::json();
   j["monResourceUri"] = o.m_MonResourceUri;
-  j["items"]          = o.m_Items;
+  j["items"] = o.m_Items;
 }
 
-void from_json(const nlohmann::json& j, ResourceItem& o) {
+void from_json(const nlohmann::json &j, ResourceItem &o) {
   j.at("monResourceUri").get_to(o.m_MonResourceUri);
   j.at("items").get_to(o.m_Items);
 }
 
-std::string ResourceItem::getMonResourceUri() const {
-  return m_MonResourceUri;
-}
-void ResourceItem::setMonResourceUri(std::string const& value) {
+std::string ResourceItem::getMonResourceUri() const { return m_MonResourceUri; }
+void ResourceItem::setMonResourceUri(std::string const &value) {
   m_MonResourceUri = value;
 }
-std::vector<std::string>& ResourceItem::getItems() {
-  return m_Items;
-}
-void ResourceItem::setItems(std::vector<std::string> const& value) {
+std::vector<std::string> &ResourceItem::getItems() { return m_Items; }
+void ResourceItem::setItems(std::vector<std::string> const &value) {
   m_Items = value;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

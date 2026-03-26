@@ -7,9 +7,7 @@
 namespace oai::ngap {
 
 //------------------------------------------------------------------------------
-PduSessionType::PduSessionType() {
-  m_PduSessionType = 0;
-}
+PduSessionType::PduSessionType() { m_PduSessionType = 0; }
 
 //------------------------------------------------------------------------------
 PduSessionType::~PduSessionType() {}
@@ -20,24 +18,24 @@ void PduSessionType::set(e_Ngap_PDUSessionType pduSessionType) {
 }
 
 //------------------------------------------------------------------------------
-bool PduSessionType::get(long& pduSessionType) const {
+bool PduSessionType::get(long &pduSessionType) const {
   pduSessionType = m_PduSessionType;
 
   return true;
 }
 
 //------------------------------------------------------------------------------
-bool PduSessionType::encode(Ngap_PDUSessionType_t& type) const {
+bool PduSessionType::encode(Ngap_PDUSessionType_t &type) const {
   type = m_PduSessionType;
 
   return true;
 }
 
 //------------------------------------------------------------------------------
-bool PduSessionType::decode(const Ngap_PDUSessionType_t& type) {
+bool PduSessionType::decode(const Ngap_PDUSessionType_t &type) {
   m_PduSessionType = type;
 
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

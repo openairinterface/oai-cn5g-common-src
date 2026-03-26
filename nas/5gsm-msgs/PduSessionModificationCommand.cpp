@@ -10,14 +10,14 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 PduSessionModificationCommand::PduSessionModificationCommand()
-    : Nas5gsmMessage(
-          k5gsSessionManagementMessages, kPduSessionModificationCommand) {
-  ie_5gsm_cause_                              = std::nullopt;
-  ie_session_ambr_                            = std::nullopt;
-  ie_rq_timer_value_                          = std::nullopt;
-  ie_always_on_pdu_session_indication_        = std::nullopt;
-  ie_authorized_qos_rules_                    = std::nullopt;
-  ie_authorized_qos_flow_descriptions_        = std::nullopt;
+    : Nas5gsmMessage(k5gsSessionManagementMessages,
+                     kPduSessionModificationCommand) {
+  ie_5gsm_cause_ = std::nullopt;
+  ie_session_ambr_ = std::nullopt;
+  ie_rq_timer_value_ = std::nullopt;
+  ie_always_on_pdu_session_indication_ = std::nullopt;
+  ie_authorized_qos_rules_ = std::nullopt;
+  ie_authorized_qos_flow_descriptions_ = std::nullopt;
   ie_extended_protocol_configuration_options_ = std::nullopt;
 }
 
@@ -50,43 +50,43 @@ uint32_t PduSessionModificationCommand::GetLength() const {
 
 //------------------------------------------------------------------------------
 void PduSessionModificationCommand::Set5gsmCause(
-    const _5gsmCause& _5gsm_cause) {
+    const _5gsmCause &_5gsm_cause) {
   ie_5gsm_cause_ = std::make_optional<_5gsmCause>(_5gsm_cause);
   ie_5gsm_cause_.value().SetIei(kIei5gsmCause);
 }
 
 //------------------------------------------------------------------------------
 void PduSessionModificationCommand::Get5gsmCause(
-    std::optional<_5gsmCause>& _5gsm_cause) const {
+    std::optional<_5gsmCause> &_5gsm_cause) const {
   _5gsm_cause = ie_5gsm_cause_;
 }
 
 void PduSessionModificationCommand::SetSessionAmbr(
-    const SessionAmbr& session_ambr) {
+    const SessionAmbr &session_ambr) {
   ie_session_ambr_ = std::make_optional<SessionAmbr>(session_ambr);
 }
 
 //------------------------------------------------------------------------------
 void PduSessionModificationCommand::GetSessionAmbr(
-    std::optional<SessionAmbr>& session_ambr) const {
+    std::optional<SessionAmbr> &session_ambr) const {
   session_ambr = ie_session_ambr_;
 }
 
 //------------------------------------------------------------------------------
 void PduSessionModificationCommand::SetRqTimerValue(
-    const GprsTimer& rq_timer_value) {
+    const GprsTimer &rq_timer_value) {
   ie_rq_timer_value_ = std::make_optional<GprsTimer>(rq_timer_value);
 }
 
 //------------------------------------------------------------------------------
 void PduSessionModificationCommand::GetRqTimerValue(
-    std::optional<GprsTimer>& rq_timer_value) const {
+    std::optional<GprsTimer> &rq_timer_value) const {
   rq_timer_value = ie_rq_timer_value_;
 }
 
 //------------------------------------------------------------------------------
 void PduSessionModificationCommand::SetAlwaysOnPduSessionIndication(
-    const AlwaysOnPduSessionIndication& always_on_pdu_session_indication) {
+    const AlwaysOnPduSessionIndication &always_on_pdu_session_indication) {
   ie_always_on_pdu_session_indication_ =
       std::make_optional<AlwaysOnPduSessionIndication>(
           always_on_pdu_session_indication);
@@ -94,54 +94,54 @@ void PduSessionModificationCommand::SetAlwaysOnPduSessionIndication(
 
 //------------------------------------------------------------------------------
 void PduSessionModificationCommand::GetAlwaysOnPduSessionIndication(
-    std::optional<AlwaysOnPduSessionIndication>&
-        always_on_pdu_session_indication) const {
+    std::optional<AlwaysOnPduSessionIndication>
+        &always_on_pdu_session_indication) const {
   always_on_pdu_session_indication = ie_always_on_pdu_session_indication_;
 }
 
 //------------------------------------------------------------------------------
 void PduSessionModificationCommand::SetAuthorizedQosRules(
-    const QosRules& qos_rules) {
+    const QosRules &qos_rules) {
   ie_authorized_qos_rules_ = std::make_optional<QosRules>(qos_rules);
 }
 
 //------------------------------------------------------------------------------
 void PduSessionModificationCommand::GetAuthorizedQosRules(
-    std::optional<QosRules>& qos_rules) const {
+    std::optional<QosRules> &qos_rules) const {
   qos_rules = ie_authorized_qos_rules_;
 }
 
 //------------------------------------------------------------------------------
 void PduSessionModificationCommand::SetAuthorizedQosFlowDescriptions(
-    const QosFlowDescriptions& flow_descriptions) {
+    const QosFlowDescriptions &flow_descriptions) {
   ie_authorized_qos_flow_descriptions_ =
       std::make_optional<QosFlowDescriptions>(flow_descriptions);
 }
 
 //------------------------------------------------------------------------------
 void PduSessionModificationCommand::GetAuthorizedQosFlowDescriptions(
-    std::optional<QosFlowDescriptions>& flow_descriptions) const {
+    std::optional<QosFlowDescriptions> &flow_descriptions) const {
   flow_descriptions = ie_authorized_qos_flow_descriptions_;
 }
 
 //------------------------------------------------------------------------------
 void PduSessionModificationCommand::SetExtendedProtocolConfigurationOptions(
-    const ExtendedProtocolConfigurationOptions& options) {
+    const ExtendedProtocolConfigurationOptions &options) {
   ie_extended_protocol_configuration_options_ =
       std::make_optional<ExtendedProtocolConfigurationOptions>(options);
 }
 
 //------------------------------------------------------------------------------
 void PduSessionModificationCommand::GetExtendedProtocolConfigurationOptions(
-    std::optional<ExtendedProtocolConfigurationOptions>& options) const {
+    std::optional<ExtendedProtocolConfigurationOptions> &options) const {
   options = ie_extended_protocol_configuration_options_;
 }
 
 //------------------------------------------------------------------------------
-int PduSessionModificationCommand::Encode(uint8_t* buf, int len) {
+int PduSessionModificationCommand::Encode(uint8_t *buf, int len) {
   oai::logger::logger_common::nas().debug(
       "Encoding PduSessionModificationCommand message");
-  int encoded_size    = 0;
+  int encoded_size = 0;
   int encoded_ie_size = 0;
   // Header
   if ((encoded_ie_size = Nas5gsmMessage::Encode(buf, len)) ==
@@ -170,15 +170,15 @@ int PduSessionModificationCommand::Encode(uint8_t* buf, int len) {
   }
 
   // Always-on PDU session indication
-  if ((encoded_ie_size = NasHelper::Encode(
-           ie_always_on_pdu_session_indication_, buf, len, encoded_size)) ==
+  if ((encoded_ie_size = NasHelper::Encode(ie_always_on_pdu_session_indication_,
+                                           buf, len, encoded_size)) ==
       KEncodeDecodeError) {
     return KEncodeDecodeError;
   }
 
   // Authorized QoS rules
-  if ((encoded_ie_size = NasHelper::Encode(
-           ie_authorized_qos_rules_, buf, len, encoded_size)) ==
+  if ((encoded_ie_size = NasHelper::Encode(ie_authorized_qos_rules_, buf, len,
+                                           encoded_size)) ==
       KEncodeDecodeError) {
     return KEncodeDecodeError;
   }
@@ -186,16 +186,16 @@ int PduSessionModificationCommand::Encode(uint8_t* buf, int len) {
   // TODO: Mapped EPS bearer contexts
 
   // Authorized QoS flow descriptions
-  if ((encoded_ie_size = NasHelper::Encode(
-           ie_authorized_qos_flow_descriptions_, buf, len, encoded_size)) ==
+  if ((encoded_ie_size = NasHelper::Encode(ie_authorized_qos_flow_descriptions_,
+                                           buf, len, encoded_size)) ==
       KEncodeDecodeError) {
     return KEncodeDecodeError;
   }
 
   // Extended protocol configuration options
-  if ((encoded_ie_size = NasHelper::Encode(
-           ie_extended_protocol_configuration_options_, buf, len,
-           encoded_size)) == KEncodeDecodeError) {
+  if ((encoded_ie_size =
+           NasHelper::Encode(ie_extended_protocol_configuration_options_, buf,
+                             len, encoded_size)) == KEncodeDecodeError) {
     return KEncodeDecodeError;
   }
 
@@ -211,10 +211,10 @@ int PduSessionModificationCommand::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int PduSessionModificationCommand::Decode(uint8_t* buf, int len) {
+int PduSessionModificationCommand::Decode(uint8_t *buf, int len) {
   oai::logger::logger_common::nas().debug(
       "Decoding PduSessionModificationCommand message");
-  int decoded_size    = 0;
+  int decoded_size = 0;
   int decoded_ie_size = 0;
 
   // Header
@@ -232,112 +232,112 @@ int PduSessionModificationCommand::Decode(uint8_t* buf, int len) {
   bool flag = false;
   while ((octet != 0x0)) {
     switch ((octet & 0xf0) >> 4) {
-      case kIeiAlwaysOnPduSessionIndication: {
-        oai::logger::logger_common::nas().debug(
-            "Decoding IEI 0x%x", kIeiAlwaysOnPduSessionIndication);
-        if ((decoded_ie_size = NasHelper::Decode(
-                 ie_always_on_pdu_session_indication_, buf, len, decoded_size,
-                 true)) == KEncodeDecodeError) {
-          return KEncodeDecodeError;
-        }
-        DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
-      } break;
-        // TODO: Control plane only indication
-
-      default: {
-        flag = true;
+    case kIeiAlwaysOnPduSessionIndication: {
+      oai::logger::logger_common::nas().debug("Decoding IEI 0x%x",
+                                              kIeiAlwaysOnPduSessionIndication);
+      if ((decoded_ie_size =
+               NasHelper::Decode(ie_always_on_pdu_session_indication_, buf, len,
+                                 decoded_size, true)) == KEncodeDecodeError) {
+        return KEncodeDecodeError;
       }
+      DECODE_U8_VALUE(buf, octet, decoded_size, len);
+      oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
+    } break;
+      // TODO: Control plane only indication
+
+    default: {
+      flag = true;
+    }
     }
 
     switch (octet) {
-      case kIei5gsmCause: {
-        oai::logger::logger_common::nas().debug(
-            "Decoding IEI 0x%x", kIei5gsmCause);
-        if ((decoded_ie_size = NasHelper::Decode(
-                 ie_5gsm_cause_, buf, len, decoded_size, true)) ==
-            KEncodeDecodeError) {
-          return KEncodeDecodeError;
-        }
-        DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
-      } break;
+    case kIei5gsmCause: {
+      oai::logger::logger_common::nas().debug("Decoding IEI 0x%x",
+                                              kIei5gsmCause);
+      if ((decoded_ie_size = NasHelper::Decode(ie_5gsm_cause_, buf, len,
+                                               decoded_size, true)) ==
+          KEncodeDecodeError) {
+        return KEncodeDecodeError;
+      }
+      DECODE_U8_VALUE(buf, octet, decoded_size, len);
+      oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
+    } break;
 
-      case kIeiSessionAmbr: {
-        oai::logger::logger_common::nas().debug(
-            "Decoding IEI 0x%x", kIeiSessionAmbr);
-        if ((decoded_ie_size = NasHelper::Decode(
-                 ie_session_ambr_, buf, len, decoded_size, true)) ==
-            KEncodeDecodeError) {
-          return KEncodeDecodeError;
-        }
-        DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
-      } break;
+    case kIeiSessionAmbr: {
+      oai::logger::logger_common::nas().debug("Decoding IEI 0x%x",
+                                              kIeiSessionAmbr);
+      if ((decoded_ie_size = NasHelper::Decode(ie_session_ambr_, buf, len,
+                                               decoded_size, true)) ==
+          KEncodeDecodeError) {
+        return KEncodeDecodeError;
+      }
+      DECODE_U8_VALUE(buf, octet, decoded_size, len);
+      oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
+    } break;
 
-      case kIeiRqTimerValue: {
-        oai::logger::logger_common::nas().debug(
-            "Decoding IEI 0x%x", kIeiRqTimerValue);
-        if ((decoded_ie_size = NasHelper::Decode(
-                 ie_rq_timer_value_, kIeiRqTimerValue, buf, len, decoded_size,
-                 true)) == KEncodeDecodeError) {
-          return KEncodeDecodeError;
-        }
-        DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
-      } break;
+    case kIeiRqTimerValue: {
+      oai::logger::logger_common::nas().debug("Decoding IEI 0x%x",
+                                              kIeiRqTimerValue);
+      if ((decoded_ie_size =
+               NasHelper::Decode(ie_rq_timer_value_, kIeiRqTimerValue, buf, len,
+                                 decoded_size, true)) == KEncodeDecodeError) {
+        return KEncodeDecodeError;
+      }
+      DECODE_U8_VALUE(buf, octet, decoded_size, len);
+      oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
+    } break;
 
-      case kIeiAuthorizedQosRules: {
-        oai::logger::logger_common::nas().debug(
-            "Decoding IEI 0x%x", kIeiAuthorizedQosRules);
-        if ((decoded_ie_size = NasHelper::Decode(
-                 ie_authorized_qos_rules_, buf, len, decoded_size, true)) ==
-            KEncodeDecodeError) {
-          return KEncodeDecodeError;
-        }
-        DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
-      } break;
+    case kIeiAuthorizedQosRules: {
+      oai::logger::logger_common::nas().debug("Decoding IEI 0x%x",
+                                              kIeiAuthorizedQosRules);
+      if ((decoded_ie_size = NasHelper::Decode(ie_authorized_qos_rules_, buf,
+                                               len, decoded_size, true)) ==
+          KEncodeDecodeError) {
+        return KEncodeDecodeError;
+      }
+      DECODE_U8_VALUE(buf, octet, decoded_size, len);
+      oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
+    } break;
 
-      case kIeiAuthorizedQosFlowDescriptions: {
-        oai::logger::logger_common::nas().debug(
-            "Decoding IEI 0x%x", kIeiAuthorizedQosFlowDescriptions);
-        if ((decoded_ie_size = NasHelper::Decode(
-                 ie_authorized_qos_flow_descriptions_, buf, len, decoded_size,
-                 true)) == KEncodeDecodeError) {
-          return KEncodeDecodeError;
-        }
-        DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
-      } break;
+    case kIeiAuthorizedQosFlowDescriptions: {
+      oai::logger::logger_common::nas().debug(
+          "Decoding IEI 0x%x", kIeiAuthorizedQosFlowDescriptions);
+      if ((decoded_ie_size =
+               NasHelper::Decode(ie_authorized_qos_flow_descriptions_, buf, len,
+                                 decoded_size, true)) == KEncodeDecodeError) {
+        return KEncodeDecodeError;
+      }
+      DECODE_U8_VALUE(buf, octet, decoded_size, len);
+      oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
+    } break;
 
-      case kIeiExtendedProtocolConfigurationOptions: {
-        oai::logger::logger_common::nas().debug(
-            "Decoding IEI 0x%x", kIeiExtendedProtocolConfigurationOptions);
-        if ((decoded_ie_size = NasHelper::Decode(
-                 ie_extended_protocol_configuration_options_, buf, len,
-                 decoded_size, true)) == KEncodeDecodeError) {
-          return KEncodeDecodeError;
-        }
-        DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
-      } break;
+    case kIeiExtendedProtocolConfigurationOptions: {
+      oai::logger::logger_common::nas().debug(
+          "Decoding IEI 0x%x", kIeiExtendedProtocolConfigurationOptions);
+      if ((decoded_ie_size = NasHelper::Decode(
+               ie_extended_protocol_configuration_options_, buf, len,
+               decoded_size, true)) == KEncodeDecodeError) {
+        return KEncodeDecodeError;
+      }
+      DECODE_U8_VALUE(buf, octet, decoded_size, len);
+      oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
+    } break;
 
-        // TODO: ATSSS container
-        // TODO: IP header compression configuration
-        // TODO: Port management information container
-        // TODO: Serving PLMN rate control
-        // TODO: Ethernet header compression configuration
+      // TODO: ATSSS container
+      // TODO: IP header compression configuration
+      // TODO: Port management information container
+      // TODO: Serving PLMN rate control
+      // TODO: Ethernet header compression configuration
 
-      default: {
-        // TODO:
-        if (flag) {
-          oai::logger::logger_common::nas().warn(
-              "Unknown IEI 0x%x, stop decoding...", octet);
-          // Stop decoding
-          octet = 0x00;
-        }
-      } break;
+    default: {
+      // TODO:
+      if (flag) {
+        oai::logger::logger_common::nas().warn(
+            "Unknown IEI 0x%x, stop decoding...", octet);
+        // Stop decoding
+        octet = 0x00;
+      }
+    } break;
     }
   }
 

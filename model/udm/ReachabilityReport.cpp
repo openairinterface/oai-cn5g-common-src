@@ -22,9 +22,9 @@
 namespace oai::model::udm {
 
 ReachabilityReport::ReachabilityReport() {
-  m_AmfInstanceIdIsSet       = false;
-  m_AccessTypeListIsSet      = false;
-  m_ReachabilityIsSet        = false;
+  m_AmfInstanceIdIsSet = false;
+  m_AccessTypeListIsSet = false;
+  m_ReachabilityIsSet = false;
   m_MaxAvailabilityTimeIsSet = false;
 }
 
@@ -35,28 +35,28 @@ void ReachabilityReport::validate() const {
   }
 }
 
-bool ReachabilityReport::validate(std::stringstream& msg) const {
+bool ReachabilityReport::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ReachabilityReport::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ReachabilityReport::validate(std::stringstream &msg,
+                                  const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ReachabilityReport" : pathPrefix;
 
   if (accessTypeListIsSet()) {
-    const std::vector<std::string>& value = m_AccessTypeList;
-    const std::string currentValuePath    = _pathPrefix + ".accessTypeList";
+    const std::vector<std::string> &value = m_AccessTypeList;
+    const std::string currentValuePath = _pathPrefix + ".accessTypeList";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const std::string& value : value) {
+      int i = 0;
+      for (const std::string &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -68,7 +68,7 @@ bool ReachabilityReport::validate(
   return success;
 }
 
-bool ReachabilityReport::operator==(const ReachabilityReport& rhs) const {
+bool ReachabilityReport::operator==(const ReachabilityReport &rhs) const {
   return
 
       ((!amfInstanceIdIsSet() && !rhs.amfInstanceIdIsSet()) ||
@@ -90,21 +90,23 @@ bool ReachabilityReport::operator==(const ReachabilityReport& rhs) const {
           ;
 }
 
-bool ReachabilityReport::operator!=(const ReachabilityReport& rhs) const {
+bool ReachabilityReport::operator!=(const ReachabilityReport &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ReachabilityReport& o) {
+void to_json(nlohmann::json &j, const ReachabilityReport &o) {
   j = nlohmann::json();
-  if (o.amfInstanceIdIsSet()) j["amfInstanceId"] = o.m_AmfInstanceId;
+  if (o.amfInstanceIdIsSet())
+    j["amfInstanceId"] = o.m_AmfInstanceId;
   if (o.accessTypeListIsSet() || !o.m_AccessTypeList.empty())
     j["accessTypeList"] = o.m_AccessTypeList;
-  if (o.reachabilityIsSet()) j["reachability"] = o.m_Reachability;
+  if (o.reachabilityIsSet())
+    j["reachability"] = o.m_Reachability;
   if (o.maxAvailabilityTimeIsSet())
     j["maxAvailabilityTime"] = o.m_MaxAvailabilityTime;
 }
 
-void from_json(const nlohmann::json& j, ReachabilityReport& o) {
+void from_json(const nlohmann::json &j, ReachabilityReport &o) {
   if (j.find("amfInstanceId") != j.end()) {
     j.at("amfInstanceId").get_to(o.m_AmfInstanceId);
     o.m_AmfInstanceIdIsSet = true;
@@ -126,22 +128,20 @@ void from_json(const nlohmann::json& j, ReachabilityReport& o) {
 std::string ReachabilityReport::getAmfInstanceId() const {
   return m_AmfInstanceId;
 }
-void ReachabilityReport::setAmfInstanceId(std::string const& value) {
-  m_AmfInstanceId      = value;
+void ReachabilityReport::setAmfInstanceId(std::string const &value) {
+  m_AmfInstanceId = value;
   m_AmfInstanceIdIsSet = true;
 }
 bool ReachabilityReport::amfInstanceIdIsSet() const {
   return m_AmfInstanceIdIsSet;
 }
-void ReachabilityReport::unsetAmfInstanceId() {
-  m_AmfInstanceIdIsSet = false;
-}
+void ReachabilityReport::unsetAmfInstanceId() { m_AmfInstanceIdIsSet = false; }
 std::vector<std::string> ReachabilityReport::getAccessTypeList() const {
   return m_AccessTypeList;
 }
 void ReachabilityReport::setAccessTypeList(
-    std::vector<std::string> const& value) {
-  m_AccessTypeList      = value;
+    std::vector<std::string> const &value) {
+  m_AccessTypeList = value;
   m_AccessTypeListIsSet = true;
 }
 bool ReachabilityReport::accessTypeListIsSet() const {
@@ -153,21 +153,19 @@ void ReachabilityReport::unsetAccessTypeList() {
 std::string ReachabilityReport::getReachability() const {
   return m_Reachability;
 }
-void ReachabilityReport::setReachability(std::string const& value) {
-  m_Reachability      = value;
+void ReachabilityReport::setReachability(std::string const &value) {
+  m_Reachability = value;
   m_ReachabilityIsSet = true;
 }
 bool ReachabilityReport::reachabilityIsSet() const {
   return m_ReachabilityIsSet;
 }
-void ReachabilityReport::unsetReachability() {
-  m_ReachabilityIsSet = false;
-}
+void ReachabilityReport::unsetReachability() { m_ReachabilityIsSet = false; }
 std::string ReachabilityReport::getMaxAvailabilityTime() const {
   return m_MaxAvailabilityTime;
 }
-void ReachabilityReport::setMaxAvailabilityTime(std::string const& value) {
-  m_MaxAvailabilityTime      = value;
+void ReachabilityReport::setMaxAvailabilityTime(std::string const &value) {
+  m_MaxAvailabilityTime = value;
   m_MaxAvailabilityTimeIsSet = true;
 }
 bool ReachabilityReport::maxAvailabilityTimeIsSet() const {
@@ -177,4 +175,4 @@ void ReachabilityReport::unsetMaxAvailabilityTime() {
   m_MaxAvailabilityTimeIsSet = false;
 }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

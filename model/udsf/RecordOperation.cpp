@@ -27,12 +27,12 @@ void RecordOperation::validate() const {
   }
 }
 
-bool RecordOperation::validate(std::stringstream& msg) const {
+bool RecordOperation::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool RecordOperation::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool RecordOperation::validate(std::stringstream &msg,
+                               const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "RecordOperation" : pathPrefix;
@@ -40,18 +40,18 @@ bool RecordOperation::validate(
   return success;
 }
 
-bool RecordOperation::operator==(const RecordOperation& rhs) const {
+bool RecordOperation::operator==(const RecordOperation &rhs) const {
   return (*this == rhs);
 }
 
-bool RecordOperation::operator!=(const RecordOperation& rhs) const {
+bool RecordOperation::operator!=(const RecordOperation &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const RecordOperation& o) {
+void to_json(nlohmann::json &j, const RecordOperation &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, RecordOperation& o) {}
+void from_json(const nlohmann::json &j, RecordOperation &o) {}
 
-}  // namespace oai::model::udsf
+} // namespace oai::model::udsf

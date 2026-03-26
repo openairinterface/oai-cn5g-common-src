@@ -7,31 +7,31 @@
 
 #include <stdint.h>
 
-#include <nlohmann/json.hpp>
-#include <string>
 #include <Snssai.h>
 #include <boost/algorithm/string.hpp>
+#include <nlohmann/json.hpp>
+#include <string>
 
 #include "logger_base.hpp"
 using namespace oai::logger;
 
-const uint32_t SD_NO_VALUE               = 0xFFFFFF;
+const uint32_t SD_NO_VALUE = 0xFFFFFF;
 const uint8_t SST_MAX_STANDARDIZED_VALUE = 127;
 
 const uint8_t SST_LENGTH = 1;
-const uint8_t SD_LENGTH  = 3;
+const uint8_t SD_LENGTH = 3;
 
-typedef struct s_nssai  // section 28.4, TS23.003
+typedef struct s_nssai // section 28.4, TS23.003
 {
   uint8_t sst;
   std::string sd = oai::model::common::SD_DEFAULT_VALUE;
   // s_nssai(const uint8_t& m_sst, const uint32_t m_sd) : sst(m_sst), sd(m_sd)
   // {}
-  s_nssai(const uint8_t& m_sst, const std::string& m_sd)
+  s_nssai(const uint8_t &m_sst, const std::string &m_sd)
       : sst(m_sst), sd(m_sd) {}
   s_nssai() : sst(), sd() {}
-  s_nssai(const s_nssai& p) : sst(p.sst), sd(p.sd) {}
-  bool operator==(const struct s_nssai& s) const {
+  s_nssai(const s_nssai &p) : sst(p.sst), sd(p.sd) {}
+  bool operator==(const struct s_nssai &s) const {
     if ((s.sst == this->sst) && (s.sd == this->sd)) {
       return true;
     } else {
@@ -39,9 +39,9 @@ typedef struct s_nssai  // section 28.4, TS23.003
     }
   }
 
-  s_nssai& operator=(const struct s_nssai& s) {
+  s_nssai &operator=(const struct s_nssai &s) {
     sst = s.sst;
-    sd  = s.sd;
+    sd = s.sd;
     return *this;
   }
 
@@ -54,8 +54,8 @@ typedef struct s_nssai  // section 28.4, TS23.003
 
   nlohmann::json to_json() const {
     nlohmann::json json_data = {};
-    json_data["sst"]         = sst;
-    json_data["sd"]          = sd;
+    json_data["sst"] = sst;
+    json_data["sd"] = sd;
     return json_data;
   }
   // TODO remove, only temporary, in the future only use model SNSSAI
@@ -67,15 +67,15 @@ typedef struct s_nssai  // section 28.4, TS23.003
     return snssai;
   }
 
-  void from_json(nlohmann::json& json_data) {
+  void from_json(nlohmann::json &json_data) {
     this->sst = json_data["sst"].get<int>();
-    this->sd  = json_data["sd"].get<std::string>();
+    this->sd = json_data["sd"].get<std::string>();
   }
 
   [[nodiscard]] uint32_t get_sd_int() const {
     try {
       return std::stoul(sd, nullptr, 16);
-    } catch (const std::exception& e) {
+    } catch (const std::exception &e) {
       logger_common::common().error(
           "Error when converting from string to int for S-NSSAI SD, error: "
           "%s",
@@ -91,9 +91,9 @@ typedef struct plmn_s {
   std::string mnc;
 } plmn_t;
 
-#define INVALID_TAC_0000 (uint16_t) 0x0000
-#define INVALID_TAC_FFFE (uint16_t) 0xFFFE
-#define INVALID_TAC (uint32_t) 0x00000000
+#define INVALID_TAC_0000 (uint16_t)0x0000
+#define INVALID_TAC_FFFE (uint16_t)0xFFFE
+#define INVALID_TAC (uint32_t)0x00000000
 
 typedef uint16_t tac_t;
 typedef struct tai_s {
@@ -109,7 +109,7 @@ typedef struct eci_s {
 
 typedef struct cgi_s {
   plmn_t plmn;
-  ci_t cell_identity;  // 28 bits
+  ci_t cell_identity; // 28 bits
 } cgi_t;
 
 typedef struct nr_cell_identity_s {
@@ -137,15 +137,15 @@ typedef struct guami_full_format_s {
 
   nlohmann::json to_json() const {
     nlohmann::json json_data = {};
-    json_data["mcc"]         = this->mcc;
-    json_data["mnc"]         = this->mnc;
-    json_data["region_id"]   = this->region_id;
-    json_data["amf_set_id"]  = this->amf_set_id;
+    json_data["mcc"] = this->mcc;
+    json_data["mnc"] = this->mnc;
+    json_data["region_id"] = this->region_id;
+    json_data["amf_set_id"] = this->amf_set_id;
     json_data["amf_pointer"] = this->amf_pointer;
     return json_data;
   }
 
-  void from_json(nlohmann::json& json_data) {
+  void from_json(nlohmann::json &json_data) {
     try {
       if (json_data.find("mcc") != json_data.end()) {
         this->mcc = json_data["mcc"].get<std::string>();
@@ -162,7 +162,7 @@ typedef struct guami_full_format_s {
       if (json_data.find("amf_pointer") != json_data.end()) {
         this->amf_pointer = json_data["amf_pointer"].get<int>();
       }
-    } catch (std::exception& e) {
+    } catch (std::exception &e) {
       logger_common::common().error("%s", e.what());
     }
   }

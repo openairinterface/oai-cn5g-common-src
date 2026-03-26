@@ -2,8 +2,8 @@
  * Copyright (c) 2017 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#include <asn_internal.h>
 #include <OPEN_TYPE.h>
+#include <asn_internal.h>
 #include <constr_CHOICE.h>
 
 asn_TYPE_operation_t asn_OP_OPEN_TYPE = {

@@ -27,7 +27,7 @@ namespace oai::model::smf {
 /// Possible values are - NONE - PREPARING - PREPARED - COMPLETED - CANCELLED
 /// </summary>
 class HoState {
- public:
+public:
   HoState();
   virtual ~HoState();
 
@@ -37,12 +37,12 @@ class HoState {
   /// HoState members
   std::string state;
 
-  friend void to_json(nlohmann::json& j, const HoState& o);
-  friend void from_json(const nlohmann::json& j, HoState& o);
+  friend void to_json(nlohmann::json &j, const HoState &o);
+  friend void from_json(const nlohmann::json &j, HoState &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* HoState_H_ */

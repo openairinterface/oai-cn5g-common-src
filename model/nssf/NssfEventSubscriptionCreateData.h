@@ -34,7 +34,7 @@ namespace model {
 ///
 /// </summary>
 class NssfEventSubscriptionCreateData {
- public:
+public:
   NssfEventSubscriptionCreateData();
   virtual ~NssfEventSubscriptionCreateData() = default;
 
@@ -48,16 +48,16 @@ class NssfEventSubscriptionCreateData {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const NssfEventSubscriptionCreateData& rhs) const;
-  bool operator!=(const NssfEventSubscriptionCreateData& rhs) const;
+  bool operator==(const NssfEventSubscriptionCreateData &rhs) const;
+  bool operator!=(const NssfEventSubscriptionCreateData &rhs) const;
 
   /////////////////////////////////////////////
   /// NssfEventSubscriptionCreateData members
@@ -66,52 +66,52 @@ class NssfEventSubscriptionCreateData {
   ///
   /// </summary>
   std::string getNfNssaiAvailabilityUri() const;
-  void setNfNssaiAvailabilityUri(std::string const& value);
+  void setNfNssaiAvailabilityUri(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::common::Tai> getTaiList() const;
-  void setTaiList(std::vector<oai::model::common::Tai> const& value);
+  void setTaiList(std::vector<oai::model::common::Tai> const &value);
   /// <summary>
   ///
   /// </summary>
   NssfEventType getEvent() const;
-  void setEvent(NssfEventType const& value);
+  void setEvent(NssfEventType const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getExpiry() const;
-  void setExpiry(std::string const& value);
+  void setExpiry(std::string const &value);
   bool expiryIsSet() const;
   void unsetExpiry();
   /// <summary>
   ///
   /// </summary>
   std::string getAmfSetId() const;
-  void setAmfSetId(std::string const& value);
+  void setAmfSetId(std::string const &value);
   bool amfSetIdIsSet() const;
   void unsetAmfSetId();
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::nrf::TaiRange> getTaiRangeList() const;
-  void setTaiRangeList(std::vector<oai::model::nrf::TaiRange> const& value);
+  void setTaiRangeList(std::vector<oai::model::nrf::TaiRange> const &value);
   bool taiRangeListIsSet() const;
   void unsetTaiRangeList();
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
 
-  friend void to_json(
-      nlohmann::json& j, const NssfEventSubscriptionCreateData& o);
-  friend void from_json(
-      const nlohmann::json& j, NssfEventSubscriptionCreateData& o);
+  friend void to_json(nlohmann::json &j,
+                      const NssfEventSubscriptionCreateData &o);
+  friend void from_json(const nlohmann::json &j,
+                        NssfEventSubscriptionCreateData &o);
 
- protected:
+protected:
   std::string m_NfNssaiAvailabilityUri;
 
   std::vector<oai::model::common::Tai> m_TaiList;
@@ -128,8 +128,8 @@ class NssfEventSubscriptionCreateData {
   bool m_SupportedFeaturesIsSet;
 };
 
-}  // namespace model
-}  // namespace nssf_server
-}  // namespace oai
+} // namespace model
+} // namespace nssf_server
+} // namespace oai
 
 #endif /* NssfEventSubscriptionCreateData_H_ */

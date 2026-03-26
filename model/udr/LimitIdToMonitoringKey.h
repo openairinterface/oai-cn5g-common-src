@@ -34,7 +34,7 @@ namespace oai::udr::model {
 /// given S-NSSAI and DNN.
 /// </summary>
 class LimitIdToMonitoringKey {
- public:
+public:
   LimitIdToMonitoringKey();
   virtual ~LimitIdToMonitoringKey();
 
@@ -47,25 +47,25 @@ class LimitIdToMonitoringKey {
   ///
   /// </summary>
   std::string getLimitId() const;
-  void setLimitId(std::string const& value);
+  void setLimitId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getMonkey();
-  void setMonkey(std::vector<std::string> const& value);
+  std::vector<std::string> &getMonkey();
+  void setMonkey(std::vector<std::string> const &value);
   bool monkeyIsSet() const;
   void unsetMonkey();
 
-  friend void to_json(nlohmann::json& j, const LimitIdToMonitoringKey& o);
-  friend void from_json(const nlohmann::json& j, LimitIdToMonitoringKey& o);
+  friend void to_json(nlohmann::json &j, const LimitIdToMonitoringKey &o);
+  friend void from_json(const nlohmann::json &j, LimitIdToMonitoringKey &o);
 
- protected:
+protected:
   std::string m_LimitId;
 
   std::vector<std::string> m_Monkey;
   bool m_MonkeyIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* LimitIdToMonitoringKey_H_ */

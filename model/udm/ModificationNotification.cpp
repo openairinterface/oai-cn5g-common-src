@@ -26,18 +26,18 @@ void ModificationNotification::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const ModificationNotification& o) {
-  j                = nlohmann::json();
+void to_json(nlohmann::json &j, const ModificationNotification &o) {
+  j = nlohmann::json();
   j["notifyItems"] = o.m_NotifyItems;
 }
 
-void from_json(const nlohmann::json& j, ModificationNotification& o) {
+void from_json(const nlohmann::json &j, ModificationNotification &o) {
   j.at("notifyItems").get_to(o.m_NotifyItems);
 }
 
-std::vector<oai::model::common::NotifyItem>&
+std::vector<oai::model::common::NotifyItem> &
 ModificationNotification::getNotifyItems() {
   return m_NotifyItems;
 }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

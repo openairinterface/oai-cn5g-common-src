@@ -11,7 +11,7 @@ using namespace oai::nas;
 //------------------------------------------------------------------------------
 PduSessionReleaseRequest::PduSessionReleaseRequest()
     : Nas5gsmMessage(k5gsSessionManagementMessages, kPduSessionReleaseRequest) {
-  ie_5gsm_cause_                              = std::nullopt;
+  ie_5gsm_cause_ = std::nullopt;
   ie_extended_protocol_configuration_options_ = std::nullopt;
 }
 
@@ -34,35 +34,35 @@ uint32_t PduSessionReleaseRequest::GetLength() const {
 }
 
 //------------------------------------------------------------------------------
-void PduSessionReleaseRequest::Set5gsmCause(const _5gsmCause& _5gsm_cause) {
+void PduSessionReleaseRequest::Set5gsmCause(const _5gsmCause &_5gsm_cause) {
   ie_5gsm_cause_ = std::make_optional<_5gsmCause>(_5gsm_cause);
   ie_5gsm_cause_.value().SetIei(kIei5gsmCause);
 }
 
 //------------------------------------------------------------------------------
 void PduSessionReleaseRequest::Get5gsmCause(
-    std::optional<_5gsmCause>& _5gsm_cause) const {
+    std::optional<_5gsmCause> &_5gsm_cause) const {
   _5gsm_cause = ie_5gsm_cause_;
 }
 
 //------------------------------------------------------------------------------
 void PduSessionReleaseRequest::SetExtendedProtocolConfigurationOptions(
-    const ExtendedProtocolConfigurationOptions& options) {
+    const ExtendedProtocolConfigurationOptions &options) {
   ie_extended_protocol_configuration_options_ =
       std::make_optional<ExtendedProtocolConfigurationOptions>(options);
 }
 
 //------------------------------------------------------------------------------
 void PduSessionReleaseRequest::GetExtendedProtocolConfigurationOptions(
-    std::optional<ExtendedProtocolConfigurationOptions>& options) const {
+    std::optional<ExtendedProtocolConfigurationOptions> &options) const {
   options = ie_extended_protocol_configuration_options_;
 }
 
 //------------------------------------------------------------------------------
-int PduSessionReleaseRequest::Encode(uint8_t* buf, int len) {
+int PduSessionReleaseRequest::Encode(uint8_t *buf, int len) {
   oai::logger::logger_common::nas().debug(
       "Encoding PduSessionReleaseRequest message");
-  int encoded_size    = 0;
+  int encoded_size = 0;
   int encoded_ie_size = 0;
   // Header
   if ((encoded_ie_size = Nas5gsmMessage::Encode(buf, len)) ==
@@ -79,9 +79,9 @@ int PduSessionReleaseRequest::Encode(uint8_t* buf, int len) {
   }
 
   // Extended protocol configuration options
-  if ((encoded_ie_size = NasHelper::Encode(
-           ie_extended_protocol_configuration_options_, buf, len,
-           encoded_size)) == KEncodeDecodeError) {
+  if ((encoded_ie_size =
+           NasHelper::Encode(ie_extended_protocol_configuration_options_, buf,
+                             len, encoded_size)) == KEncodeDecodeError) {
     return KEncodeDecodeError;
   }
 
@@ -91,10 +91,10 @@ int PduSessionReleaseRequest::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int PduSessionReleaseRequest::Decode(uint8_t* buf, int len) {
+int PduSessionReleaseRequest::Decode(uint8_t *buf, int len) {
   oai::logger::logger_common::nas().debug(
       "Decoding PduSessionReleaseRequest message");
-  int decoded_size    = 0;
+  int decoded_size = 0;
   int decoded_ie_size = 0;
 
   // Header
@@ -112,39 +112,39 @@ int PduSessionReleaseRequest::Decode(uint8_t* buf, int len) {
   bool flag = false;
   while ((octet != 0x0)) {
     switch (octet) {
-      case kIei5gsmCause: {
-        oai::logger::logger_common::nas().debug(
-            "Decoding IEI 0x%x", kIei5gsmCause);
-        if ((decoded_ie_size = NasHelper::Decode(
-                 ie_5gsm_cause_, buf, len, decoded_size, true)) ==
-            KEncodeDecodeError) {
-          return KEncodeDecodeError;
-        }
-        DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
-      } break;
+    case kIei5gsmCause: {
+      oai::logger::logger_common::nas().debug("Decoding IEI 0x%x",
+                                              kIei5gsmCause);
+      if ((decoded_ie_size = NasHelper::Decode(ie_5gsm_cause_, buf, len,
+                                               decoded_size, true)) ==
+          KEncodeDecodeError) {
+        return KEncodeDecodeError;
+      }
+      DECODE_U8_VALUE(buf, octet, decoded_size, len);
+      oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
+    } break;
 
-      case kIeiExtendedProtocolConfigurationOptions: {
-        oai::logger::logger_common::nas().debug(
-            "Decoding IEI 0x%x", kIeiExtendedProtocolConfigurationOptions);
-        if ((decoded_ie_size = NasHelper::Decode(
-                 ie_extended_protocol_configuration_options_, buf, len,
-                 decoded_size, true)) == KEncodeDecodeError) {
-          return KEncodeDecodeError;
-        }
-        DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
-      } break;
+    case kIeiExtendedProtocolConfigurationOptions: {
+      oai::logger::logger_common::nas().debug(
+          "Decoding IEI 0x%x", kIeiExtendedProtocolConfigurationOptions);
+      if ((decoded_ie_size = NasHelper::Decode(
+               ie_extended_protocol_configuration_options_, buf, len,
+               decoded_size, true)) == KEncodeDecodeError) {
+        return KEncodeDecodeError;
+      }
+      DECODE_U8_VALUE(buf, octet, decoded_size, len);
+      oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
+    } break;
 
-      default: {
-        // TODO:
-        if (flag) {
-          oai::logger::logger_common::nas().warn(
-              "Unknown IEI 0x%x, stop decoding...", octet);
-          // Stop decoding
-          octet = 0x00;
-        }
-      } break;
+    default: {
+      // TODO:
+      if (flag) {
+        oai::logger::logger_common::nas().warn(
+            "Unknown IEI 0x%x, stop decoding...", octet);
+        // Stop decoding
+        octet = 0x00;
+      }
+    } break;
     }
   }
 

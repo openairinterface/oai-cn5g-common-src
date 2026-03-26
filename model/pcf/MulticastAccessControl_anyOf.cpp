@@ -13,8 +13,8 @@
 
 #include "MulticastAccessControl_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::pcf {
 
@@ -27,12 +27,12 @@ void MulticastAccessControl_anyOf::validate() const {
   }
 }
 
-bool MulticastAccessControl_anyOf::validate(std::stringstream& msg) const {
+bool MulticastAccessControl_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool MulticastAccessControl_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "MulticastAccessControl_anyOf" : pathPrefix;
@@ -47,36 +47,35 @@ bool MulticastAccessControl_anyOf::validate(
 }
 
 bool MulticastAccessControl_anyOf::operator==(
-    const MulticastAccessControl_anyOf& rhs) const {
+    const MulticastAccessControl_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool MulticastAccessControl_anyOf::operator!=(
-    const MulticastAccessControl_anyOf& rhs) const {
+    const MulticastAccessControl_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const MulticastAccessControl_anyOf& o) {
+void to_json(nlohmann::json &j, const MulticastAccessControl_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case MulticastAccessControl_anyOf::eMulticastAccessControl_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case MulticastAccessControl_anyOf::eMulticastAccessControl_anyOf::ALLOWED:
-      j = "ALLOWED";
-      break;
-    case MulticastAccessControl_anyOf::eMulticastAccessControl_anyOf::
-        NOT_ALLOWED:
-      j = "NOT_ALLOWED";
-      break;
+  case MulticastAccessControl_anyOf::eMulticastAccessControl_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case MulticastAccessControl_anyOf::eMulticastAccessControl_anyOf::ALLOWED:
+    j = "ALLOWED";
+    break;
+  case MulticastAccessControl_anyOf::eMulticastAccessControl_anyOf::NOT_ALLOWED:
+    j = "NOT_ALLOWED";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, MulticastAccessControl_anyOf& o) {
+void from_json(const nlohmann::json &j, MulticastAccessControl_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "ALLOWED") {
     o.setValue(
@@ -102,4 +101,4 @@ void MulticastAccessControl_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

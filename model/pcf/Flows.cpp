@@ -20,8 +20,8 @@ namespace oai::model::pcf {
 
 Flows::Flows() {
   m_ContVersIsSet = false;
-  m_FNumsIsSet    = false;
-  m_MedCompN      = 0;
+  m_FNumsIsSet = false;
+  m_MedCompN = 0;
 }
 
 void Flows::validate() const {
@@ -31,27 +31,25 @@ void Flows::validate() const {
   }
 }
 
-bool Flows::validate(std::stringstream& msg) const {
-  return validate(msg, "");
-}
+bool Flows::validate(std::stringstream &msg) const { return validate(msg, ""); }
 
-bool Flows::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool Flows::validate(std::stringstream &msg,
+                     const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "Flows" : pathPrefix;
 
   if (contVersIsSet()) {
-    const std::vector<int32_t>& value  = m_ContVers;
+    const std::vector<int32_t> &value = m_ContVers;
     const std::string currentValuePath = _pathPrefix + ".contVers";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const int32_t& value : value) {
+      int i = 0;
+      for (const int32_t &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -61,17 +59,17 @@ bool Flows::validate(
   }
 
   if (fNumsIsSet()) {
-    const std::vector<int32_t>& value  = m_FNums;
+    const std::vector<int32_t> &value = m_FNums;
     const std::string currentValuePath = _pathPrefix + ".fNums";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const int32_t& value : value) {
+      int i = 0;
+      for (const int32_t &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -83,7 +81,7 @@ bool Flows::validate(
   return success;
 }
 
-bool Flows::operator==(const Flows& rhs) const {
+bool Flows::operator==(const Flows &rhs) const {
   return
 
       ((!contVersIsSet() && !rhs.contVersIsSet()) ||
@@ -98,18 +96,18 @@ bool Flows::operator==(const Flows& rhs) const {
           ;
 }
 
-bool Flows::operator!=(const Flows& rhs) const {
-  return !(*this == rhs);
-}
+bool Flows::operator!=(const Flows &rhs) const { return !(*this == rhs); }
 
-void to_json(nlohmann::json& j, const Flows& o) {
+void to_json(nlohmann::json &j, const Flows &o) {
   j = nlohmann::json::object();
-  if (o.contVersIsSet() || !o.m_ContVers.empty()) j["contVers"] = o.m_ContVers;
-  if (o.fNumsIsSet() || !o.m_FNums.empty()) j["fNums"] = o.m_FNums;
+  if (o.contVersIsSet() || !o.m_ContVers.empty())
+    j["contVers"] = o.m_ContVers;
+  if (o.fNumsIsSet() || !o.m_FNums.empty())
+    j["fNums"] = o.m_FNums;
   j["medCompN"] = o.m_MedCompN;
 }
 
-void from_json(const nlohmann::json& j, Flows& o) {
+void from_json(const nlohmann::json &j, Flows &o) {
   if (j.find("contVers") != j.end()) {
     j.at("contVers").get_to(o.m_ContVers);
     o.m_ContVersIsSet = true;
@@ -121,37 +119,21 @@ void from_json(const nlohmann::json& j, Flows& o) {
   j.at("medCompN").get_to(o.m_MedCompN);
 }
 
-std::vector<int32_t> Flows::getContVers() const {
-  return m_ContVers;
-}
+std::vector<int32_t> Flows::getContVers() const { return m_ContVers; }
 void Flows::setContVers(std::vector<int32_t> const value) {
-  m_ContVers      = value;
+  m_ContVers = value;
   m_ContVersIsSet = true;
 }
-bool Flows::contVersIsSet() const {
-  return m_ContVersIsSet;
-}
-void Flows::unsetContVers() {
-  m_ContVersIsSet = false;
-}
-std::vector<int32_t> Flows::getFNums() const {
-  return m_FNums;
-}
+bool Flows::contVersIsSet() const { return m_ContVersIsSet; }
+void Flows::unsetContVers() { m_ContVersIsSet = false; }
+std::vector<int32_t> Flows::getFNums() const { return m_FNums; }
 void Flows::setFNums(std::vector<int32_t> const value) {
-  m_FNums      = value;
+  m_FNums = value;
   m_FNumsIsSet = true;
 }
-bool Flows::fNumsIsSet() const {
-  return m_FNumsIsSet;
-}
-void Flows::unsetFNums() {
-  m_FNumsIsSet = false;
-}
-int32_t Flows::getMedCompN() const {
-  return m_MedCompN;
-}
-void Flows::setMedCompN(int32_t const value) {
-  m_MedCompN = value;
-}
+bool Flows::fNumsIsSet() const { return m_FNumsIsSet; }
+void Flows::unsetFNums() { m_FNumsIsSet = false; }
+int32_t Flows::getMedCompN() const { return m_MedCompN; }
+void Flows::setMedCompN(int32_t const value) { m_MedCompN = value; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

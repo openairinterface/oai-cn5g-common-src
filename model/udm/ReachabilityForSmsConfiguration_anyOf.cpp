@@ -16,8 +16,8 @@
 
 #include "ReachabilityForSmsConfiguration_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::udm {
 
@@ -33,12 +33,12 @@ void ReachabilityForSmsConfiguration_anyOf::validate() const {
 }
 
 bool ReachabilityForSmsConfiguration_anyOf::validate(
-    std::stringstream& msg) const {
+    std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool ReachabilityForSmsConfiguration_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ReachabilityForSmsConfiguration_anyOf" : pathPrefix;
@@ -54,39 +54,39 @@ bool ReachabilityForSmsConfiguration_anyOf::validate(
 }
 
 bool ReachabilityForSmsConfiguration_anyOf::operator==(
-    const ReachabilityForSmsConfiguration_anyOf& rhs) const {
+    const ReachabilityForSmsConfiguration_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool ReachabilityForSmsConfiguration_anyOf::operator!=(
-    const ReachabilityForSmsConfiguration_anyOf& rhs) const {
+    const ReachabilityForSmsConfiguration_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(
-    nlohmann::json& j, const ReachabilityForSmsConfiguration_anyOf& o) {
+void to_json(nlohmann::json &j,
+             const ReachabilityForSmsConfiguration_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case ReachabilityForSmsConfiguration_anyOf::
-        eReachabilityForSmsConfiguration_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case ReachabilityForSmsConfiguration_anyOf::
-        eReachabilityForSmsConfiguration_anyOf::NAS:
-      j = "REACHABILITY_FOR_SMS_OVER_NAS";
-      break;
-    case ReachabilityForSmsConfiguration_anyOf::
-        eReachabilityForSmsConfiguration_anyOf::IP:
-      j = "REACHABILITY_FOR_SMS_OVER_IP";
-      break;
+  case ReachabilityForSmsConfiguration_anyOf::
+      eReachabilityForSmsConfiguration_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case ReachabilityForSmsConfiguration_anyOf::
+      eReachabilityForSmsConfiguration_anyOf::NAS:
+    j = "REACHABILITY_FOR_SMS_OVER_NAS";
+    break;
+  case ReachabilityForSmsConfiguration_anyOf::
+      eReachabilityForSmsConfiguration_anyOf::IP:
+    j = "REACHABILITY_FOR_SMS_OVER_IP";
+    break;
   }
 }
 
-void from_json(
-    const nlohmann::json& j, ReachabilityForSmsConfiguration_anyOf& o) {
+void from_json(const nlohmann::json &j,
+               ReachabilityForSmsConfiguration_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "REACHABILITY_FOR_SMS_OVER_NAS") {
     o.setValue(ReachabilityForSmsConfiguration_anyOf::
@@ -114,4 +114,4 @@ void ReachabilityForSmsConfiguration_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

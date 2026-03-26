@@ -19,7 +19,7 @@
 namespace oai::model::common {
 
 Pc5QoSPara::Pc5QoSPara() {
-  m_Pc5LinkAmbr      = "";
+  m_Pc5LinkAmbr = "";
   m_Pc5LinkAmbrIsSet = false;
 }
 
@@ -30,25 +30,25 @@ void Pc5QoSPara::validate() const {
   }
 }
 
-bool Pc5QoSPara::validate(std::stringstream& msg) const {
+bool Pc5QoSPara::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool Pc5QoSPara::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool Pc5QoSPara::validate(std::stringstream &msg,
+                          const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "Pc5QoSPara" : pathPrefix;
 
   /* Pc5QosFlowList */ {
-    const std::vector<oai::model::common::Pc5QosFlowItem>& value =
+    const std::vector<oai::model::common::Pc5QosFlowItem> &value =
         m_Pc5QosFlowList;
     const std::string currentValuePath = _pathPrefix + ".pc5QosFlowList";
 
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::Pc5QosFlowItem& value : value) {
+      int i = 0;
+      for (const oai::model::common::Pc5QosFlowItem &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -61,14 +61,14 @@ bool Pc5QoSPara::validate(
   }
 
   if (pc5LinkAmbrIsSet()) {
-    const std::string& value           = m_Pc5LinkAmbr;
+    const std::string &value = m_Pc5LinkAmbr;
     const std::string currentValuePath = _pathPrefix + ".pc5LinkAmbr";
   }
 
   return success;
 }
 
-bool Pc5QoSPara::operator==(const Pc5QoSPara& rhs) const {
+bool Pc5QoSPara::operator==(const Pc5QoSPara &rhs) const {
   return
 
       (getPc5QosFlowList() == rhs.getPc5QosFlowList()) &&
@@ -80,17 +80,18 @@ bool Pc5QoSPara::operator==(const Pc5QoSPara& rhs) const {
           ;
 }
 
-bool Pc5QoSPara::operator!=(const Pc5QoSPara& rhs) const {
+bool Pc5QoSPara::operator!=(const Pc5QoSPara &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const Pc5QoSPara& o) {
-  j                   = nlohmann::json();
+void to_json(nlohmann::json &j, const Pc5QoSPara &o) {
+  j = nlohmann::json();
   j["pc5QosFlowList"] = o.m_Pc5QosFlowList;
-  if (o.pc5LinkAmbrIsSet()) j["pc5LinkAmbr"] = o.m_Pc5LinkAmbr;
+  if (o.pc5LinkAmbrIsSet())
+    j["pc5LinkAmbr"] = o.m_Pc5LinkAmbr;
 }
 
-void from_json(const nlohmann::json& j, Pc5QoSPara& o) {
+void from_json(const nlohmann::json &j, Pc5QoSPara &o) {
   j.at("pc5QosFlowList").get_to(o.m_Pc5QosFlowList);
   if (j.find("pc5LinkAmbr") != j.end()) {
     j.at("pc5LinkAmbr").get_to(o.m_Pc5LinkAmbr);
@@ -98,26 +99,20 @@ void from_json(const nlohmann::json& j, Pc5QoSPara& o) {
   }
 }
 
-std::vector<oai::model::common::Pc5QosFlowItem> Pc5QoSPara::getPc5QosFlowList()
-    const {
+std::vector<oai::model::common::Pc5QosFlowItem>
+Pc5QoSPara::getPc5QosFlowList() const {
   return m_Pc5QosFlowList;
 }
 void Pc5QoSPara::setPc5QosFlowList(
-    std::vector<oai::model::common::Pc5QosFlowItem> const& value) {
+    std::vector<oai::model::common::Pc5QosFlowItem> const &value) {
   m_Pc5QosFlowList = value;
 }
-std::string Pc5QoSPara::getPc5LinkAmbr() const {
-  return m_Pc5LinkAmbr;
-}
-void Pc5QoSPara::setPc5LinkAmbr(std::string const& value) {
-  m_Pc5LinkAmbr      = value;
+std::string Pc5QoSPara::getPc5LinkAmbr() const { return m_Pc5LinkAmbr; }
+void Pc5QoSPara::setPc5LinkAmbr(std::string const &value) {
+  m_Pc5LinkAmbr = value;
   m_Pc5LinkAmbrIsSet = true;
 }
-bool Pc5QoSPara::pc5LinkAmbrIsSet() const {
-  return m_Pc5LinkAmbrIsSet;
-}
-void Pc5QoSPara::unsetPc5LinkAmbr() {
-  m_Pc5LinkAmbrIsSet = false;
-}
+bool Pc5QoSPara::pc5LinkAmbrIsSet() const { return m_Pc5LinkAmbrIsSet; }
+void Pc5QoSPara::unsetPc5LinkAmbr() { m_Pc5LinkAmbrIsSet = false; }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

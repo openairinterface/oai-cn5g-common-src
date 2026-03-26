@@ -14,17 +14,17 @@ extern "C" {
 
 namespace oai::ngap {
 class UeContextSuspendRequestTransfer {
- public:
+public:
   UeContextSuspendRequestTransfer();
   virtual ~UeContextSuspendRequestTransfer();
 
-  int encode(uint8_t* buf, int bufSize);
-  bool decode(uint8_t* buf, int bufSize);
+  int encode(uint8_t *buf, int bufSize);
+  bool decode(uint8_t *buf, int bufSize);
 
- private:
-  Ngap_UEContextSuspendRequestTransfer_t* m_UeContextSuspendRequestTransferIe;
+private:
+  Ngap_UEContextSuspendRequestTransfer_t *m_UeContextSuspendRequestTransferIe;
   // TODO: Suspend Indicator (Optional)
 };
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

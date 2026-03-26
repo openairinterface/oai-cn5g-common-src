@@ -13,8 +13,8 @@
 
 #include "AccessType.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::common {
 
@@ -27,12 +27,12 @@ void AccessType::validate() const {
   }
 }
 
-bool AccessType::validate(std::stringstream& msg) const {
+bool AccessType::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AccessType::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool AccessType::validate(std::stringstream &msg,
+                          const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AccessType" : pathPrefix;
@@ -45,34 +45,34 @@ bool AccessType::validate(
   return success;
 }
 
-bool AccessType::operator==(const AccessType& rhs) const {
+bool AccessType::operator==(const AccessType &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool AccessType::operator!=(const AccessType& rhs) const {
+bool AccessType::operator!=(const AccessType &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AccessType& o) {
+void to_json(nlohmann::json &j, const AccessType &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case AccessType::eAccessType::INVALID_VALUE_OPENAPI_GENERATED:
-    case AccessType::eAccessType::NULL_VALUE:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case AccessType::eAccessType::_3GPP_ACCESS:
-      j = "3GPP_ACCESS";
-      break;
-    case AccessType::eAccessType::NON_3GPP_ACCESS:
-      j = "NON_3GPP_ACCESS";
-      break;
+  case AccessType::eAccessType::INVALID_VALUE_OPENAPI_GENERATED:
+  case AccessType::eAccessType::NULL_VALUE:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case AccessType::eAccessType::_3GPP_ACCESS:
+    j = "3GPP_ACCESS";
+    break;
+  case AccessType::eAccessType::NON_3GPP_ACCESS:
+    j = "NON_3GPP_ACCESS";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, AccessType& o) {
+void from_json(const nlohmann::json &j, AccessType &o) {
   auto s = j.get<std::string>();
   if (s == "3GPP_ACCESS") {
     o.setValue(AccessType::eAccessType::_3GPP_ACCESS);
@@ -87,11 +87,7 @@ void from_json(const nlohmann::json& j, AccessType& o) {
   }
 }
 
-AccessType::eAccessType AccessType::getValue() const {
-  return m_value;
-}
-void AccessType::setValue(AccessType::eAccessType value) {
-  m_value = value;
-}
+AccessType::eAccessType AccessType::getValue() const { return m_value; }
+void AccessType::setValue(AccessType::eAccessType value) { m_value = value; }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

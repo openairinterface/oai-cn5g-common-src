@@ -20,9 +20,9 @@ namespace oai::udr::model {
 
 DatalinkReportingConfiguration::DatalinkReportingConfiguration() {
   m_DddTrafficDesIsSet = false;
-  m_Dnn                = "";
-  m_DnnIsSet           = false;
-  m_SliceIsSet         = false;
+  m_Dnn = "";
+  m_DnnIsSet = false;
+  m_SliceIsSet = false;
   m_DddStatusListIsSet = false;
 }
 
@@ -32,17 +32,19 @@ void DatalinkReportingConfiguration::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const DatalinkReportingConfiguration& o) {
+void to_json(nlohmann::json &j, const DatalinkReportingConfiguration &o) {
   j = nlohmann::json();
   if (o.dddTrafficDesIsSet() || !o.m_DddTrafficDes.empty())
     j["dddTrafficDes"] = o.m_DddTrafficDes;
-  if (o.dnnIsSet()) j["dnn"] = o.m_Dnn;
-  if (o.sliceIsSet()) j["slice"] = o.m_Slice;
+  if (o.dnnIsSet())
+    j["dnn"] = o.m_Dnn;
+  if (o.sliceIsSet())
+    j["slice"] = o.m_Slice;
   if (o.dddStatusListIsSet() || !o.m_DddStatusList.empty())
     j["dddStatusList"] = o.m_DddStatusList;
 }
 
-void from_json(const nlohmann::json& j, DatalinkReportingConfiguration& o) {
+void from_json(const nlohmann::json &j, DatalinkReportingConfiguration &o) {
   if (j.find("dddTrafficDes") != j.end()) {
     j.at("dddTrafficDes").get_to(o.m_DddTrafficDes);
     o.m_DddTrafficDesIsSet = true;
@@ -61,13 +63,13 @@ void from_json(const nlohmann::json& j, DatalinkReportingConfiguration& o) {
   }
 }
 
-std::vector<oai::model::common::DddTrafficDescriptor>&
+std::vector<oai::model::common::DddTrafficDescriptor> &
 DatalinkReportingConfiguration::getDddTrafficDes() {
   return m_DddTrafficDes;
 }
 void DatalinkReportingConfiguration::setDddTrafficDes(
-    std::vector<oai::model::common::DddTrafficDescriptor> const& value) {
-  m_DddTrafficDes      = value;
+    std::vector<oai::model::common::DddTrafficDescriptor> const &value) {
+  m_DddTrafficDes = value;
   m_DddTrafficDesIsSet = true;
 }
 bool DatalinkReportingConfiguration::dddTrafficDesIsSet() const {
@@ -76,40 +78,30 @@ bool DatalinkReportingConfiguration::dddTrafficDesIsSet() const {
 void DatalinkReportingConfiguration::unsetDddTrafficDes() {
   m_DddTrafficDesIsSet = false;
 }
-std::string DatalinkReportingConfiguration::getDnn() const {
-  return m_Dnn;
-}
-void DatalinkReportingConfiguration::setDnn(std::string const& value) {
-  m_Dnn      = value;
+std::string DatalinkReportingConfiguration::getDnn() const { return m_Dnn; }
+void DatalinkReportingConfiguration::setDnn(std::string const &value) {
+  m_Dnn = value;
   m_DnnIsSet = true;
 }
-bool DatalinkReportingConfiguration::dnnIsSet() const {
-  return m_DnnIsSet;
-}
-void DatalinkReportingConfiguration::unsetDnn() {
-  m_DnnIsSet = false;
-}
+bool DatalinkReportingConfiguration::dnnIsSet() const { return m_DnnIsSet; }
+void DatalinkReportingConfiguration::unsetDnn() { m_DnnIsSet = false; }
 oai::model::common::Snssai DatalinkReportingConfiguration::getSlice() const {
   return m_Slice;
 }
 void DatalinkReportingConfiguration::setSlice(
-    oai::model::common::Snssai const& value) {
-  m_Slice      = value;
+    oai::model::common::Snssai const &value) {
+  m_Slice = value;
   m_SliceIsSet = true;
 }
-bool DatalinkReportingConfiguration::sliceIsSet() const {
-  return m_SliceIsSet;
-}
-void DatalinkReportingConfiguration::unsetSlice() {
-  m_SliceIsSet = false;
-}
-std::vector<oai::model::common::DlDataDeliveryStatus>&
+bool DatalinkReportingConfiguration::sliceIsSet() const { return m_SliceIsSet; }
+void DatalinkReportingConfiguration::unsetSlice() { m_SliceIsSet = false; }
+std::vector<oai::model::common::DlDataDeliveryStatus> &
 DatalinkReportingConfiguration::getDddStatusList() {
   return m_DddStatusList;
 }
 void DatalinkReportingConfiguration::setDddStatusList(
-    std::vector<oai::model::common::DlDataDeliveryStatus> const& value) {
-  m_DddStatusList      = value;
+    std::vector<oai::model::common::DlDataDeliveryStatus> const &value) {
+  m_DddStatusList = value;
   m_DddStatusListIsSet = true;
 }
 bool DatalinkReportingConfiguration::dddStatusListIsSet() const {
@@ -119,4 +111,4 @@ void DatalinkReportingConfiguration::unsetDddStatusList() {
   m_DddStatusListIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

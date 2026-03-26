@@ -28,7 +28,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class HorizontalWithVerticalVelocity {
- public:
+public:
   HorizontalWithVerticalVelocity();
   virtual ~HorizontalWithVerticalVelocity() = default;
 
@@ -42,16 +42,16 @@ class HorizontalWithVerticalVelocity {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const HorizontalWithVerticalVelocity& rhs) const;
-  bool operator!=(const HorizontalWithVerticalVelocity& rhs) const;
+  bool operator==(const HorizontalWithVerticalVelocity &rhs) const;
+  bool operator!=(const HorizontalWithVerticalVelocity &rhs) const;
 
   /////////////////////////////////////////////
   /// HorizontalWithVerticalVelocity members
@@ -75,14 +75,14 @@ class HorizontalWithVerticalVelocity {
   ///
   /// </summary>
   oai::model::lmf::VerticalDirection getVDirection() const;
-  void setVDirection(oai::model::lmf::VerticalDirection const& value);
+  void setVDirection(oai::model::lmf::VerticalDirection const &value);
 
-  friend void to_json(
-      nlohmann::json& j, const HorizontalWithVerticalVelocity& o);
-  friend void from_json(
-      const nlohmann::json& j, HorizontalWithVerticalVelocity& o);
+  friend void to_json(nlohmann::json &j,
+                      const HorizontalWithVerticalVelocity &o);
+  friend void from_json(const nlohmann::json &j,
+                        HorizontalWithVerticalVelocity &o);
 
- protected:
+protected:
   float m_HSpeed;
 
   int32_t m_Bearing;
@@ -92,6 +92,6 @@ class HorizontalWithVerticalVelocity {
   oai::model::lmf::VerticalDirection m_VDirection;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* HorizontalWithVerticalVelocity_H_ */

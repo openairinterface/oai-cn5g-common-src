@@ -30,7 +30,7 @@ namespace oai::model::common {
 /// Identifies the UE is mobile
 /// </summary>
 class StationaryIndication {
- public:
+public:
   StationaryIndication();
   virtual ~StationaryIndication() = default;
 
@@ -44,16 +44,16 @@ class StationaryIndication {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const StationaryIndication& rhs) const;
-  bool operator!=(const StationaryIndication& rhs) const;
+  bool operator==(const StationaryIndication &rhs) const;
+  bool operator!=(const StationaryIndication &rhs) const;
 
   /////////////////////////////////////////////
   /// StationaryIndication members
@@ -61,17 +61,17 @@ class StationaryIndication {
   StationaryIndication_anyOf getValue() const;
   void setValue(StationaryIndication_anyOf value);
   StationaryIndication_anyOf::eStationaryIndication_anyOf getEnumValue() const;
-  void setEnumValue(
-      StationaryIndication_anyOf::eStationaryIndication_anyOf value);
-  friend void to_json(nlohmann::json& j, const StationaryIndication& o);
-  friend void from_json(const nlohmann::json& j, StationaryIndication& o);
-  friend void to_json(nlohmann::json& j, const StationaryIndication_anyOf& o);
-  friend void from_json(const nlohmann::json& j, StationaryIndication_anyOf& o);
+  void
+  setEnumValue(StationaryIndication_anyOf::eStationaryIndication_anyOf value);
+  friend void to_json(nlohmann::json &j, const StationaryIndication &o);
+  friend void from_json(const nlohmann::json &j, StationaryIndication &o);
+  friend void to_json(nlohmann::json &j, const StationaryIndication_anyOf &o);
+  friend void from_json(const nlohmann::json &j, StationaryIndication_anyOf &o);
 
- protected:
+protected:
   StationaryIndication_anyOf m_value;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* StationaryIndication_H_ */

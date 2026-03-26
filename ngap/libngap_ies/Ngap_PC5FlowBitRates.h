@@ -26,7 +26,7 @@ struct Ngap_ProtocolExtensionContainer;
 typedef struct Ngap_PC5FlowBitRates {
   Ngap_BitRate_t guaranteedFlowBitRate;
   Ngap_BitRate_t maximumFlowBitRate;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

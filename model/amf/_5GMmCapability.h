@@ -27,7 +27,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class _5GMmCapability {
- public:
+public:
   _5GMmCapability();
   virtual ~_5GMmCapability();
 
@@ -36,12 +36,12 @@ class _5GMmCapability {
   /////////////////////////////////////////////
   /// AccessType members
 
-  friend void to_json(nlohmann::json& j, const _5GMmCapability& o);
-  friend void from_json(const nlohmann::json& j, _5GMmCapability& o);
+  friend void to_json(nlohmann::json &j, const _5GMmCapability &o);
+  friend void from_json(const nlohmann::json &j, _5GMmCapability &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* 5GMmCapability_H_ */

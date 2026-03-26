@@ -19,14 +19,14 @@
 namespace oai::model::pcf {
 
 AccumulatedUsage::AccumulatedUsage() {
-  m_Duration            = 0;
-  m_DurationIsSet       = false;
-  m_TotalVolume         = 0L;
-  m_TotalVolumeIsSet    = false;
-  m_DownlinkVolume      = 0L;
+  m_Duration = 0;
+  m_DurationIsSet = false;
+  m_TotalVolume = 0L;
+  m_TotalVolumeIsSet = false;
+  m_DownlinkVolume = 0L;
   m_DownlinkVolumeIsSet = false;
-  m_UplinkVolume        = 0L;
-  m_UplinkVolumeIsSet   = false;
+  m_UplinkVolume = 0L;
+  m_UplinkVolumeIsSet = false;
 }
 
 void AccumulatedUsage::validate() const {
@@ -36,18 +36,18 @@ void AccumulatedUsage::validate() const {
   }
 }
 
-bool AccumulatedUsage::validate(std::stringstream& msg) const {
+bool AccumulatedUsage::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AccumulatedUsage::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool AccumulatedUsage::validate(std::stringstream &msg,
+                                const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AccumulatedUsage" : pathPrefix;
 
   if (durationIsSet()) {
-    const int32_t& value               = m_Duration;
+    const int32_t &value = m_Duration;
     const std::string currentValuePath = _pathPrefix + ".duration";
 
     if (value < 0) {
@@ -57,7 +57,7 @@ bool AccumulatedUsage::validate(
   }
 
   if (totalVolumeIsSet()) {
-    const int64_t& value               = m_TotalVolume;
+    const int64_t &value = m_TotalVolume;
     const std::string currentValuePath = _pathPrefix + ".totalVolume";
 
     if (value < 0ll) {
@@ -67,7 +67,7 @@ bool AccumulatedUsage::validate(
   }
 
   if (downlinkVolumeIsSet()) {
-    const int64_t& value               = m_DownlinkVolume;
+    const int64_t &value = m_DownlinkVolume;
     const std::string currentValuePath = _pathPrefix + ".downlinkVolume";
 
     if (value < 0ll) {
@@ -77,7 +77,7 @@ bool AccumulatedUsage::validate(
   }
 
   if (uplinkVolumeIsSet()) {
-    const int64_t& value               = m_UplinkVolume;
+    const int64_t &value = m_UplinkVolume;
     const std::string currentValuePath = _pathPrefix + ".uplinkVolume";
 
     if (value < 0ll) {
@@ -89,7 +89,7 @@ bool AccumulatedUsage::validate(
   return success;
 }
 
-bool AccumulatedUsage::operator==(const AccumulatedUsage& rhs) const {
+bool AccumulatedUsage::operator==(const AccumulatedUsage &rhs) const {
   return
 
       ((!durationIsSet() && !rhs.durationIsSet()) ||
@@ -111,19 +111,23 @@ bool AccumulatedUsage::operator==(const AccumulatedUsage& rhs) const {
           ;
 }
 
-bool AccumulatedUsage::operator!=(const AccumulatedUsage& rhs) const {
+bool AccumulatedUsage::operator!=(const AccumulatedUsage &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AccumulatedUsage& o) {
+void to_json(nlohmann::json &j, const AccumulatedUsage &o) {
   j = nlohmann::json::object();
-  if (o.durationIsSet()) j["duration"] = o.m_Duration;
-  if (o.totalVolumeIsSet()) j["totalVolume"] = o.m_TotalVolume;
-  if (o.downlinkVolumeIsSet()) j["downlinkVolume"] = o.m_DownlinkVolume;
-  if (o.uplinkVolumeIsSet()) j["uplinkVolume"] = o.m_UplinkVolume;
+  if (o.durationIsSet())
+    j["duration"] = o.m_Duration;
+  if (o.totalVolumeIsSet())
+    j["totalVolume"] = o.m_TotalVolume;
+  if (o.downlinkVolumeIsSet())
+    j["downlinkVolume"] = o.m_DownlinkVolume;
+  if (o.uplinkVolumeIsSet())
+    j["uplinkVolume"] = o.m_UplinkVolume;
 }
 
-void from_json(const nlohmann::json& j, AccumulatedUsage& o) {
+void from_json(const nlohmann::json &j, AccumulatedUsage &o) {
   if (j.find("duration") != j.end()) {
     j.at("duration").get_to(o.m_Duration);
     o.m_DurationIsSet = true;
@@ -142,57 +146,35 @@ void from_json(const nlohmann::json& j, AccumulatedUsage& o) {
   }
 }
 
-int32_t AccumulatedUsage::getDuration() const {
-  return m_Duration;
-}
+int32_t AccumulatedUsage::getDuration() const { return m_Duration; }
 void AccumulatedUsage::setDuration(int32_t const value) {
-  m_Duration      = value;
+  m_Duration = value;
   m_DurationIsSet = true;
 }
-bool AccumulatedUsage::durationIsSet() const {
-  return m_DurationIsSet;
-}
-void AccumulatedUsage::unsetDuration() {
-  m_DurationIsSet = false;
-}
-int64_t AccumulatedUsage::getTotalVolume() const {
-  return m_TotalVolume;
-}
+bool AccumulatedUsage::durationIsSet() const { return m_DurationIsSet; }
+void AccumulatedUsage::unsetDuration() { m_DurationIsSet = false; }
+int64_t AccumulatedUsage::getTotalVolume() const { return m_TotalVolume; }
 void AccumulatedUsage::setTotalVolume(int64_t const value) {
-  m_TotalVolume      = value;
+  m_TotalVolume = value;
   m_TotalVolumeIsSet = true;
 }
-bool AccumulatedUsage::totalVolumeIsSet() const {
-  return m_TotalVolumeIsSet;
-}
-void AccumulatedUsage::unsetTotalVolume() {
-  m_TotalVolumeIsSet = false;
-}
-int64_t AccumulatedUsage::getDownlinkVolume() const {
-  return m_DownlinkVolume;
-}
+bool AccumulatedUsage::totalVolumeIsSet() const { return m_TotalVolumeIsSet; }
+void AccumulatedUsage::unsetTotalVolume() { m_TotalVolumeIsSet = false; }
+int64_t AccumulatedUsage::getDownlinkVolume() const { return m_DownlinkVolume; }
 void AccumulatedUsage::setDownlinkVolume(int64_t const value) {
-  m_DownlinkVolume      = value;
+  m_DownlinkVolume = value;
   m_DownlinkVolumeIsSet = true;
 }
 bool AccumulatedUsage::downlinkVolumeIsSet() const {
   return m_DownlinkVolumeIsSet;
 }
-void AccumulatedUsage::unsetDownlinkVolume() {
-  m_DownlinkVolumeIsSet = false;
-}
-int64_t AccumulatedUsage::getUplinkVolume() const {
-  return m_UplinkVolume;
-}
+void AccumulatedUsage::unsetDownlinkVolume() { m_DownlinkVolumeIsSet = false; }
+int64_t AccumulatedUsage::getUplinkVolume() const { return m_UplinkVolume; }
 void AccumulatedUsage::setUplinkVolume(int64_t const value) {
-  m_UplinkVolume      = value;
+  m_UplinkVolume = value;
   m_UplinkVolumeIsSet = true;
 }
-bool AccumulatedUsage::uplinkVolumeIsSet() const {
-  return m_UplinkVolumeIsSet;
-}
-void AccumulatedUsage::unsetUplinkVolume() {
-  m_UplinkVolumeIsSet = false;
-}
+bool AccumulatedUsage::uplinkVolumeIsSet() const { return m_UplinkVolumeIsSet; }
+void AccumulatedUsage::unsetUplinkVolume() { m_UplinkVolumeIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

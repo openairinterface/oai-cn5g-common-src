@@ -32,7 +32,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class UeId {
- public:
+public:
   UeId();
   virtual ~UeId();
 
@@ -45,25 +45,25 @@ class UeId {
   ///
   /// </summary>
   std::string getSupi() const;
-  void setSupi(std::string const& value);
+  void setSupi(std::string const &value);
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getGpsiList();
-  void setGpsiList(std::vector<std::string> const& value);
+  std::vector<std::string> &getGpsiList();
+  void setGpsiList(std::vector<std::string> const &value);
   bool gpsiListIsSet() const;
   void unsetGpsiList();
 
-  friend void to_json(nlohmann::json& j, const UeId& o);
-  friend void from_json(const nlohmann::json& j, UeId& o);
+  friend void to_json(nlohmann::json &j, const UeId &o);
+  friend void from_json(const nlohmann::json &j, UeId &o);
 
- protected:
+protected:
   std::string m_Supi;
 
   std::vector<std::string> m_GpsiList;
   bool m_GpsiListIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* UeId_H_ */

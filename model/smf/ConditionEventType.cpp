@@ -27,12 +27,12 @@ void ConditionEventType::validate() const {
   }
 }
 
-bool ConditionEventType::validate(std::stringstream& msg) const {
+bool ConditionEventType::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ConditionEventType::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ConditionEventType::validate(std::stringstream &msg,
+                                  const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ConditionEventType" : pathPrefix;
@@ -43,22 +43,22 @@ bool ConditionEventType::validate(
   return success;
 }
 
-bool ConditionEventType::operator==(const ConditionEventType& rhs) const {
+bool ConditionEventType::operator==(const ConditionEventType &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool ConditionEventType::operator!=(const ConditionEventType& rhs) const {
+bool ConditionEventType::operator!=(const ConditionEventType &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ConditionEventType& o) {
+void to_json(nlohmann::json &j, const ConditionEventType &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, ConditionEventType& o) {
+void from_json(const nlohmann::json &j, ConditionEventType &o) {
   from_json(j, o.m_value);
 }
 
@@ -80,4 +80,4 @@ void ConditionEventType::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

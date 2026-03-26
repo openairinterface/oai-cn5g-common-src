@@ -27,7 +27,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class VerticalDirection {
- public:
+public:
   VerticalDirection();
   virtual ~VerticalDirection() = default;
 
@@ -50,16 +50,16 @@ class VerticalDirection {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const VerticalDirection& rhs) const;
-  bool operator!=(const VerticalDirection& rhs) const;
+  bool operator==(const VerticalDirection &rhs) const;
+  bool operator!=(const VerticalDirection &rhs) const;
 
   /////////////////////////////////////////////
   /// VerticalDirection members
@@ -67,14 +67,14 @@ class VerticalDirection {
   VerticalDirection::eVerticalDirection getValue() const;
   void setValue(VerticalDirection::eVerticalDirection value);
 
-  friend void to_json(nlohmann::json& j, const VerticalDirection& o);
-  friend void from_json(const nlohmann::json& j, VerticalDirection& o);
+  friend void to_json(nlohmann::json &j, const VerticalDirection &o);
+  friend void from_json(const nlohmann::json &j, VerticalDirection &o);
 
- protected:
+protected:
   VerticalDirection::eVerticalDirection m_value =
       VerticalDirection::eVerticalDirection::INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* VerticalDirection_H_ */

@@ -27,12 +27,12 @@ void SatelliteBackhaulCategory::validate() const {
   }
 }
 
-bool SatelliteBackhaulCategory::validate(std::stringstream& msg) const {
+bool SatelliteBackhaulCategory::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool SatelliteBackhaulCategory::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool SatelliteBackhaulCategory::validate(std::stringstream &msg,
+                                         const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "SatelliteBackhaulCategory" : pathPrefix;
@@ -41,19 +41,19 @@ bool SatelliteBackhaulCategory::validate(
 }
 
 bool SatelliteBackhaulCategory::operator==(
-    const SatelliteBackhaulCategory& rhs) const {
-  return true;  // TODO
+    const SatelliteBackhaulCategory &rhs) const {
+  return true; // TODO
 }
 
 bool SatelliteBackhaulCategory::operator!=(
-    const SatelliteBackhaulCategory& rhs) const {
+    const SatelliteBackhaulCategory &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const SatelliteBackhaulCategory& o) {
+void to_json(nlohmann::json &j, const SatelliteBackhaulCategory &o) {
   j = nlohmann::json::object();
 }
 
-void from_json(const nlohmann::json& j, SatelliteBackhaulCategory& o) {}
+void from_json(const nlohmann::json &j, SatelliteBackhaulCategory &o) {}
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

@@ -12,7 +12,7 @@ constexpr auto kPduSessionTypeName = "PDU Session Type";
 namespace oai::nas {
 
 class PduSessionType : public Type1NasIeFormatTv {
- public:
+public:
   PduSessionType();
   PduSessionType(uint8_t type);
   PduSessionType(uint8_t iei, uint8_t type);
@@ -24,6 +24,6 @@ class PduSessionType : public Type1NasIeFormatTv {
   uint8_t GetValue() const;
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

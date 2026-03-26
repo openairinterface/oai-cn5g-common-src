@@ -22,39 +22,38 @@ extern "C" {
 namespace oai::ngap {
 
 class Dynamic5qiDescriptor {
- public:
+public:
   Dynamic5qiDescriptor();
   virtual ~Dynamic5qiDescriptor();
 
-  void set(
-      const PriorityLevelQos& priorityLevelQos,
-      const PacketDelayBudget& packetDelayBudget,
-      const PacketErrorRate& packetErrorRate,
-      const std::optional<FiveQI>& fiveQI,
-      const std::optional<DelayCritical>& delayCritical,
-      const std::optional<AveragingWindow>& averagingWindow,
-      const std::optional<MaximumDataBurstVolume>& maximumDataBurstVolume);
+  void set(const PriorityLevelQos &priorityLevelQos,
+           const PacketDelayBudget &packetDelayBudget,
+           const PacketErrorRate &packetErrorRate,
+           const std::optional<FiveQI> &fiveQI,
+           const std::optional<DelayCritical> &delayCritical,
+           const std::optional<AveragingWindow> &averagingWindow,
+           const std::optional<MaximumDataBurstVolume> &maximumDataBurstVolume);
 
-  bool get(
-      PriorityLevelQos& priorityLevelQos, PacketDelayBudget& packetDelayBudget,
-      PacketErrorRate& packetErrorRate, std::optional<FiveQI>& fiveQI,
-      std::optional<DelayCritical>& delayCritical,
-      std::optional<AveragingWindow>& averagingWindow,
-      std::optional<MaximumDataBurstVolume>& maximumDataBurstVolume) const;
+  bool get(PriorityLevelQos &priorityLevelQos,
+           PacketDelayBudget &packetDelayBudget,
+           PacketErrorRate &packetErrorRate, std::optional<FiveQI> &fiveQI,
+           std::optional<DelayCritical> &delayCritical,
+           std::optional<AveragingWindow> &averagingWindow,
+           std::optional<MaximumDataBurstVolume> &maximumDataBurstVolume) const;
 
-  bool encode(Ngap_Dynamic5QIDescriptor_t&) const;
-  bool decode(const Ngap_Dynamic5QIDescriptor_t&);
+  bool encode(Ngap_Dynamic5QIDescriptor_t &) const;
+  bool decode(const Ngap_Dynamic5QIDescriptor_t &);
 
- private:
-  PriorityLevelQos m_PriorityLevelQos;    // Mandatory
-  PacketDelayBudget m_PacketDelayBudget;  // Mandatory
-  PacketErrorRate m_PacketErrorRate;      // Mandatory
+private:
+  PriorityLevelQos m_PriorityLevelQos;   // Mandatory
+  PacketDelayBudget m_PacketDelayBudget; // Mandatory
+  PacketErrorRate m_PacketErrorRate;     // Mandatory
 
-  std::optional<FiveQI> m_FiveQI;                    // Optional
-  std::optional<DelayCritical> m_DelayCritical;      // Conditional
-  std::optional<AveragingWindow> m_AveragingWindow;  // Conditional
-  std::optional<MaximumDataBurstVolume> m_MaximumDataBurstVolume;  // Optional
+  std::optional<FiveQI> m_FiveQI;                                 // Optional
+  std::optional<DelayCritical> m_DelayCritical;                   // Conditional
+  std::optional<AveragingWindow> m_AveragingWindow;               // Conditional
+  std::optional<MaximumDataBurstVolume> m_MaximumDataBurstVolume; // Optional
 };
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

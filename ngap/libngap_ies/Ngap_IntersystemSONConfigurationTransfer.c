@@ -31,9 +31,8 @@ asn_TYPE_member_t asn_MBR_Ngap_IntersystemSONConfigurationTransfer_1[] = {
      "transferType"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_IntersystemSONConfigurationTransfer,
-         intersystemSONInformation),
+     offsetof(struct Ngap_IntersystemSONConfigurationTransfer,
+              intersystemSONInformation),
      (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
      +1, /* EXPLICIT tag at current level */
      &asn_DEF_Ngap_IntersystemSONInformation,

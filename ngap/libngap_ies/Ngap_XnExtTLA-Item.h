@@ -25,9 +25,9 @@ struct Ngap_ProtocolExtensionContainer;
 
 /* Ngap_XnExtTLA-Item */
 typedef struct Ngap_XnExtTLA_Item {
-  Ngap_TransportLayerAddress_t* iPsecTLA;                /* OPTIONAL */
-  struct Ngap_XnGTP_TLAs* gTP_TLAs;                      /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  Ngap_TransportLayerAddress_t *iPsecTLA;                /* OPTIONAL */
+  struct Ngap_XnGTP_TLAs *gTP_TLAs;                      /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

@@ -31,7 +31,7 @@ namespace oai::udr::model {
 /// Contains the UE policy section.
 /// </summary>
 class UePolicySection {
- public:
+public:
   UePolicySection();
   virtual ~UePolicySection();
 
@@ -44,22 +44,22 @@ class UePolicySection {
   ///
   /// </summary>
   std::string getUePolicySectionInfo() const;
-  void setUePolicySectionInfo(std::string const& value);
+  void setUePolicySectionInfo(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getUpsi() const;
-  void setUpsi(std::string const& value);
+  void setUpsi(std::string const &value);
 
-  friend void to_json(nlohmann::json& j, const UePolicySection& o);
-  friend void from_json(const nlohmann::json& j, UePolicySection& o);
+  friend void to_json(nlohmann::json &j, const UePolicySection &o);
+  friend void from_json(const nlohmann::json &j, UePolicySection &o);
 
- protected:
+protected:
   std::string m_UePolicySectionInfo;
 
   std::string m_Upsi;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* UePolicySection_H_ */

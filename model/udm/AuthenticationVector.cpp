@@ -19,13 +19,13 @@
 namespace oai::model::udm {
 
 AuthenticationVector::AuthenticationVector() {
-  m_Rand     = "";
-  m_Xres     = "";
-  m_Autn     = "";
-  m_CkPrime  = "";
-  m_IkPrime  = "";
+  m_Rand = "";
+  m_Xres = "";
+  m_Autn = "";
+  m_CkPrime = "";
+  m_IkPrime = "";
   m_XresStar = "";
-  m_Kausf    = "";
+  m_Kausf = "";
 }
 
 AuthenticationVector::~AuthenticationVector() {}
@@ -34,19 +34,19 @@ void AuthenticationVector::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const AuthenticationVector& o) {
-  j             = nlohmann::json();
-  j["avType"]   = o.m_AvType;
-  j["rand"]     = o.m_Rand;
-  j["xres"]     = o.m_Xres;
-  j["autn"]     = o.m_Autn;
-  j["ckPrime"]  = o.m_CkPrime;
-  j["ikPrime"]  = o.m_IkPrime;
+void to_json(nlohmann::json &j, const AuthenticationVector &o) {
+  j = nlohmann::json();
+  j["avType"] = o.m_AvType;
+  j["rand"] = o.m_Rand;
+  j["xres"] = o.m_Xres;
+  j["autn"] = o.m_Autn;
+  j["ckPrime"] = o.m_CkPrime;
+  j["ikPrime"] = o.m_IkPrime;
   j["xresStar"] = o.m_XresStar;
-  j["kausf"]    = o.m_Kausf;
+  j["kausf"] = o.m_Kausf;
 }
 
-void from_json(const nlohmann::json& j, AuthenticationVector& o) {
+void from_json(const nlohmann::json &j, AuthenticationVector &o) {
   j.at("avType").get_to(o.m_AvType);
   j.at("rand").get_to(o.m_Rand);
   j.at("xres").get_to(o.m_Xres);
@@ -57,53 +57,29 @@ void from_json(const nlohmann::json& j, AuthenticationVector& o) {
   j.at("kausf").get_to(o.m_Kausf);
 }
 
-AvType AuthenticationVector::getAvType() const {
-  return m_AvType;
-}
-void AuthenticationVector::setAvType(AvType const& value) {
-  m_AvType = value;
-}
-std::string AuthenticationVector::getRand() const {
-  return m_Rand;
-}
-void AuthenticationVector::setRand(std::string const& value) {
-  m_Rand = value;
-}
-std::string AuthenticationVector::getXres() const {
-  return m_Xres;
-}
-void AuthenticationVector::setXres(std::string const& value) {
-  m_Xres = value;
-}
-std::string AuthenticationVector::getAutn() const {
-  return m_Autn;
-}
-void AuthenticationVector::setAutn(std::string const& value) {
-  m_Autn = value;
-}
-std::string AuthenticationVector::getCkPrime() const {
-  return m_CkPrime;
-}
-void AuthenticationVector::setCkPrime(std::string const& value) {
+AvType AuthenticationVector::getAvType() const { return m_AvType; }
+void AuthenticationVector::setAvType(AvType const &value) { m_AvType = value; }
+std::string AuthenticationVector::getRand() const { return m_Rand; }
+void AuthenticationVector::setRand(std::string const &value) { m_Rand = value; }
+std::string AuthenticationVector::getXres() const { return m_Xres; }
+void AuthenticationVector::setXres(std::string const &value) { m_Xres = value; }
+std::string AuthenticationVector::getAutn() const { return m_Autn; }
+void AuthenticationVector::setAutn(std::string const &value) { m_Autn = value; }
+std::string AuthenticationVector::getCkPrime() const { return m_CkPrime; }
+void AuthenticationVector::setCkPrime(std::string const &value) {
   m_CkPrime = value;
 }
-std::string AuthenticationVector::getIkPrime() const {
-  return m_IkPrime;
-}
-void AuthenticationVector::setIkPrime(std::string const& value) {
+std::string AuthenticationVector::getIkPrime() const { return m_IkPrime; }
+void AuthenticationVector::setIkPrime(std::string const &value) {
   m_IkPrime = value;
 }
-std::string AuthenticationVector::getXresStar() const {
-  return m_XresStar;
-}
-void AuthenticationVector::setXresStar(std::string const& value) {
+std::string AuthenticationVector::getXresStar() const { return m_XresStar; }
+void AuthenticationVector::setXresStar(std::string const &value) {
   m_XresStar = value;
 }
-std::string AuthenticationVector::getKausf() const {
-  return m_Kausf;
-}
-void AuthenticationVector::setKausf(std::string const& value) {
+std::string AuthenticationVector::getKausf() const { return m_Kausf; }
+void AuthenticationVector::setKausf(std::string const &value) {
   m_Kausf = value;
 }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

@@ -24,9 +24,9 @@ struct Ngap_ProtocolExtensionContainer;
 
 /* Ngap_SecondaryRATDataUsageReportTransfer */
 typedef struct Ngap_SecondaryRATDataUsageReportTransfer {
-  struct Ngap_SecondaryRATUsageInformation*
-      secondaryRATUsageInformation;                      /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_SecondaryRATUsageInformation
+      *secondaryRATUsageInformation;                     /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

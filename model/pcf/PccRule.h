@@ -19,14 +19,14 @@
 #ifndef PccRule_H_
 #define PccRule_H_
 
-#include "DownlinkDataNotificationControl.h"
-#include "TscaiInputContainer.h"
-#include <string>
-#include "FlowInformation.h"
 #include "AfSigProtocol.h"
-#include <vector>
+#include "DownlinkDataNotificationControl.h"
 #include "DownlinkDataNotificationControlRm.h"
+#include "FlowInformation.h"
+#include "TscaiInputContainer.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::pcf {
 
@@ -34,7 +34,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class PccRule {
- public:
+public:
   PccRule();
   virtual ~PccRule() = default;
 
@@ -48,16 +48,16 @@ class PccRule {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const PccRule& rhs) const;
-  bool operator!=(const PccRule& rhs) const;
+  bool operator==(const PccRule &rhs) const;
+  bool operator!=(const PccRule &rhs) const;
 
   /////////////////////////////////////////////
   /// PccRule members
@@ -66,21 +66,21 @@ class PccRule {
   /// An array of IP flow packet filter information.
   /// </summary>
   std::vector<oai::model::pcf::FlowInformation> getFlowInfos() const;
-  void setFlowInfos(std::vector<oai::model::pcf::FlowInformation> const& value);
+  void setFlowInfos(std::vector<oai::model::pcf::FlowInformation> const &value);
   bool flowInfosIsSet() const;
   void unsetFlowInfos();
   /// <summary>
   /// A reference to the application detection filter configured at the UPF.
   /// </summary>
   std::string getAppId() const;
-  void setAppId(std::string const& value);
+  void setAppId(std::string const &value);
   bool appIdIsSet() const;
   void unsetAppId();
   /// <summary>
   ///
   /// </summary>
   std::string getAppDescriptor() const;
-  void setAppDescriptor(std::string const& value);
+  void setAppDescriptor(std::string const &value);
   bool appDescriptorIsSet() const;
   void unsetAppDescriptor();
   /// <summary>
@@ -94,7 +94,7 @@ class PccRule {
   /// Univocally identifies the PCC rule within a PDU session.
   /// </summary>
   std::string getPccRuleId() const;
-  void setPccRuleId(std::string const& value);
+  void setPccRuleId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
@@ -106,7 +106,7 @@ class PccRule {
   ///
   /// </summary>
   oai::model::pcf::AfSigProtocol getAfSigProtocol() const;
-  void setAfSigProtocol(oai::model::pcf::AfSigProtocol const& value);
+  void setAfSigProtocol(oai::model::pcf::AfSigProtocol const &value);
   bool afSigProtocolIsSet() const;
   void unsetAfSigProtocol();
   /// <summary>
@@ -121,7 +121,7 @@ class PccRule {
   /// in subclause 5.6.2.8.
   /// </summary>
   std::vector<std::string> getRefQosData() const;
-  void setRefQosData(std::vector<std::string> const& value);
+  void setRefQosData(std::vector<std::string> const &value);
   bool refQosDataIsSet() const;
   void unsetRefQosData();
   /// <summary>
@@ -129,7 +129,7 @@ class PccRule {
   /// parameter sets of the service data flow.
   /// </summary>
   std::vector<std::string> getRefAltQosParams() const;
-  void setRefAltQosParams(std::vector<std::string> const& value);
+  void setRefAltQosParams(std::vector<std::string> const &value);
   bool refAltQosParamsIsSet() const;
   void unsetRefAltQosParams();
   /// <summary>
@@ -137,7 +137,7 @@ class PccRule {
   /// described in subclause 5.6.2.10.
   /// </summary>
   std::vector<std::string> getRefTcData() const;
-  void setRefTcData(std::vector<std::string> const& value);
+  void setRefTcData(std::vector<std::string> const &value);
   bool refTcDataIsSet() const;
   void unsetRefTcData();
   /// <summary>
@@ -145,7 +145,7 @@ class PccRule {
   /// described in subclause 5.6.2.11.
   /// </summary>
   std::vector<std::string> getRefChgData() const;
-  void setRefChgData(std::vector<std::string> const& value);
+  void setRefChgData(std::vector<std::string> const &value);
   bool refChgDataIsSet() const;
   void unsetRefChgData();
   /// <summary>
@@ -154,7 +154,7 @@ class PccRule {
   /// chgId described in subclause 5.6.2.11.
   /// </summary>
   std::vector<std::string> getRefChgN3gData() const;
-  void setRefChgN3gData(std::vector<std::string> const& value);
+  void setRefChgN3gData(std::vector<std::string> const &value);
   bool refChgN3gDataIsSet() const;
   void unsetRefChgN3gData();
   /// <summary>
@@ -162,7 +162,7 @@ class PccRule {
   /// described in subclause 5.6.2.12.
   /// </summary>
   std::vector<std::string> getRefUmData() const;
-  void setRefUmData(std::vector<std::string> const& value);
+  void setRefUmData(std::vector<std::string> const &value);
   bool refUmDataIsSet() const;
   void unsetRefUmData();
   /// <summary>
@@ -171,7 +171,7 @@ class PccRule {
   /// umId described in subclause 5.6.2.12.
   /// </summary>
   std::vector<std::string> getRefUmN3gData() const;
-  void setRefUmN3gData(std::vector<std::string> const& value);
+  void setRefUmN3gData(std::vector<std::string> const &value);
   bool refUmN3gDataIsSet() const;
   void unsetRefUmN3gData();
   /// <summary>
@@ -179,7 +179,7 @@ class PccRule {
   /// subclause 5.6.2.9.
   /// </summary>
   std::string getRefCondData() const;
-  void setRefCondData(std::string const& value);
+  void setRefCondData(std::string const &value);
   bool refCondDataIsSet() const;
   void unsetRefCondData();
   /// <summary>
@@ -187,7 +187,7 @@ class PccRule {
   /// described in subclause 5.6.2.40.
   /// </summary>
   std::vector<std::string> getRefQosMon() const;
-  void setRefQosMon(std::vector<std::string> const& value);
+  void setRefQosMon(std::vector<std::string> const &value);
   bool refQosMonIsSet() const;
   void unsetRefQosMon();
   /// <summary>
@@ -201,22 +201,22 @@ class PccRule {
   ///
   /// </summary>
   oai::model::pcf::TscaiInputContainer getTscaiInputDl() const;
-  void setTscaiInputDl(oai::model::pcf::TscaiInputContainer const& value);
+  void setTscaiInputDl(oai::model::pcf::TscaiInputContainer const &value);
   bool tscaiInputDlIsSet() const;
   void unsetTscaiInputDl();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::TscaiInputContainer getTscaiInputUl() const;
-  void setTscaiInputUl(oai::model::pcf::TscaiInputContainer const& value);
+  void setTscaiInputUl(oai::model::pcf::TscaiInputContainer const &value);
   bool tscaiInputUlIsSet() const;
   void unsetTscaiInputUl();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::DownlinkDataNotificationControl getDdNotifCtrl() const;
-  void setDdNotifCtrl(
-      oai::model::pcf::DownlinkDataNotificationControl const& value);
+  void
+  setDdNotifCtrl(oai::model::pcf::DownlinkDataNotificationControl const &value);
   bool ddNotifCtrlIsSet() const;
   void unsetDdNotifCtrl();
   /// <summary>
@@ -224,7 +224,7 @@ class PccRule {
   /// </summary>
   oai::model::pcf::DownlinkDataNotificationControlRm getDdNotifCtrl2() const;
   void setDdNotifCtrl2(
-      oai::model::pcf::DownlinkDataNotificationControlRm const& value);
+      oai::model::pcf::DownlinkDataNotificationControlRm const &value);
   bool ddNotifCtrl2IsSet() const;
   void unsetDdNotifCtrl2();
   /// <summary>
@@ -237,10 +237,10 @@ class PccRule {
 
   [[nodiscard]] std::string getFirstFlowDescription() const;
 
-  friend void to_json(nlohmann::json& j, const PccRule& o);
-  friend void from_json(const nlohmann::json& j, PccRule& o);
+  friend void to_json(nlohmann::json &j, const PccRule &o);
+  friend void from_json(const nlohmann::json &j, PccRule &o);
 
- protected:
+protected:
   std::vector<oai::model::pcf::FlowInformation> m_FlowInfos;
   bool m_FlowInfosIsSet;
   std::string m_AppId;
@@ -289,6 +289,6 @@ class PccRule {
   bool m_DisUeNotifIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* PccRule_H_ */

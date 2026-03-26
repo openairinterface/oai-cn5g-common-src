@@ -22,8 +22,8 @@
 
 #include "Flows.h"
 #include "L4sNotifType.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::pcf {
 
@@ -32,7 +32,7 @@ namespace oai::model::pcf {
 /// available again in 5GS.
 /// </summary>
 class L4sSupport {
- public:
+public:
   L4sSupport();
   virtual ~L4sSupport() = default;
 
@@ -46,16 +46,16 @@ class L4sSupport {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const L4sSupport& rhs) const;
-  bool operator!=(const L4sSupport& rhs) const;
+  bool operator==(const L4sSupport &rhs) const;
+  bool operator!=(const L4sSupport &rhs) const;
 
   /////////////////////////////////////////////
   /// L4sSupport members
@@ -64,25 +64,25 @@ class L4sSupport {
   ///
   /// </summary>
   oai::model::pcf::L4sNotifType getNotifType() const;
-  void setNotifType(oai::model::pcf::L4sNotifType const& value);
+  void setNotifType(oai::model::pcf::L4sNotifType const &value);
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::pcf::Flows> getFlows() const;
-  void setFlows(std::vector<oai::model::pcf::Flows> const& value);
+  void setFlows(std::vector<oai::model::pcf::Flows> const &value);
   bool flowsIsSet() const;
   void unsetFlows();
 
-  friend void to_json(nlohmann::json& j, const L4sSupport& o);
-  friend void from_json(const nlohmann::json& j, L4sSupport& o);
+  friend void to_json(nlohmann::json &j, const L4sSupport &o);
+  friend void from_json(const nlohmann::json &j, L4sSupport &o);
 
- protected:
+protected:
   oai::model::pcf::L4sNotifType m_NotifType;
 
   std::vector<oai::model::pcf::Flows> m_Flows;
   bool m_FlowsIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* L4sSupport_H_ */

@@ -19,10 +19,10 @@
 namespace oai::model::pcf {
 
 RouteInformation::RouteInformation() {
-  m_Ipv4Addr      = "";
+  m_Ipv4Addr = "";
   m_Ipv4AddrIsSet = false;
   m_Ipv6AddrIsSet = false;
-  m_PortNumber    = 0;
+  m_PortNumber = 0;
 }
 
 void RouteInformation::validate() const {
@@ -32,12 +32,12 @@ void RouteInformation::validate() const {
   }
 }
 
-bool RouteInformation::validate(std::stringstream& msg) const {
+bool RouteInformation::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool RouteInformation::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool RouteInformation::validate(std::stringstream &msg,
+                                const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "RouteInformation" : pathPrefix;
@@ -50,7 +50,7 @@ bool RouteInformation::validate(
   */
 
   /* PortNumber */ {
-    const int32_t& value               = m_PortNumber;
+    const int32_t &value = m_PortNumber;
     const std::string currentValuePath = _pathPrefix + ".portNumber";
 
     if (value < 0) {
@@ -62,7 +62,7 @@ bool RouteInformation::validate(
   return success;
 }
 
-bool RouteInformation::operator==(const RouteInformation& rhs) const {
+bool RouteInformation::operator==(const RouteInformation &rhs) const {
   return
 
       ((!ipv4AddrIsSet() && !rhs.ipv4AddrIsSet()) ||
@@ -78,18 +78,20 @@ bool RouteInformation::operator==(const RouteInformation& rhs) const {
           ;
 }
 
-bool RouteInformation::operator!=(const RouteInformation& rhs) const {
+bool RouteInformation::operator!=(const RouteInformation &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const RouteInformation& o) {
+void to_json(nlohmann::json &j, const RouteInformation &o) {
   j = nlohmann::json();
-  if (o.ipv4AddrIsSet()) j["ipv4Addr"] = o.m_Ipv4Addr;
-  if (o.ipv6AddrIsSet()) j["ipv6Addr"] = o.m_Ipv6Addr;
+  if (o.ipv4AddrIsSet())
+    j["ipv4Addr"] = o.m_Ipv4Addr;
+  if (o.ipv6AddrIsSet())
+    j["ipv6Addr"] = o.m_Ipv6Addr;
   j["portNumber"] = o.m_PortNumber;
 }
 
-void from_json(const nlohmann::json& j, RouteInformation& o) {
+void from_json(const nlohmann::json &j, RouteInformation &o) {
   if (j.find("ipv4Addr") != j.end()) {
     j.at("ipv4Addr").get_to(o.m_Ipv4Addr);
     o.m_Ipv4AddrIsSet = true;
@@ -101,37 +103,25 @@ void from_json(const nlohmann::json& j, RouteInformation& o) {
   j.at("portNumber").get_to(o.m_PortNumber);
 }
 
-std::string RouteInformation::getIpv4Addr() const {
-  return m_Ipv4Addr;
-}
-void RouteInformation::setIpv4Addr(std::string const& value) {
-  m_Ipv4Addr      = value;
+std::string RouteInformation::getIpv4Addr() const { return m_Ipv4Addr; }
+void RouteInformation::setIpv4Addr(std::string const &value) {
+  m_Ipv4Addr = value;
   m_Ipv4AddrIsSet = true;
 }
-bool RouteInformation::ipv4AddrIsSet() const {
-  return m_Ipv4AddrIsSet;
-}
-void RouteInformation::unsetIpv4Addr() {
-  m_Ipv4AddrIsSet = false;
-}
+bool RouteInformation::ipv4AddrIsSet() const { return m_Ipv4AddrIsSet; }
+void RouteInformation::unsetIpv4Addr() { m_Ipv4AddrIsSet = false; }
 oai::model::common::Ipv6Addr RouteInformation::getIpv6Addr() const {
   return m_Ipv6Addr;
 }
-void RouteInformation::setIpv6Addr(oai::model::common::Ipv6Addr const& value) {
-  m_Ipv6Addr      = value;
+void RouteInformation::setIpv6Addr(oai::model::common::Ipv6Addr const &value) {
+  m_Ipv6Addr = value;
   m_Ipv6AddrIsSet = true;
 }
-bool RouteInformation::ipv6AddrIsSet() const {
-  return m_Ipv6AddrIsSet;
-}
-void RouteInformation::unsetIpv6Addr() {
-  m_Ipv6AddrIsSet = false;
-}
-int32_t RouteInformation::getPortNumber() const {
-  return m_PortNumber;
-}
+bool RouteInformation::ipv6AddrIsSet() const { return m_Ipv6AddrIsSet; }
+void RouteInformation::unsetIpv6Addr() { m_Ipv6AddrIsSet = false; }
+int32_t RouteInformation::getPortNumber() const { return m_PortNumber; }
 void RouteInformation::setPortNumber(int32_t const value) {
   m_PortNumber = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

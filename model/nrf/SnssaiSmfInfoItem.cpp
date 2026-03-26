@@ -28,12 +28,12 @@ void SnssaiSmfInfoItem::validate() const {
   }
 }
 
-bool SnssaiSmfInfoItem::validate(std::stringstream& msg) const {
+bool SnssaiSmfInfoItem::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool SnssaiSmfInfoItem::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool SnssaiSmfInfoItem::validate(std::stringstream &msg,
+                                 const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "SnssaiSmfInfoItem" : pathPrefix;
@@ -44,7 +44,7 @@ bool SnssaiSmfInfoItem::validate(
   }
 
   /* DnnSmfInfoList */ {
-    const std::vector<oai::model::nrf::DnnSmfInfoItem>& value =
+    const std::vector<oai::model::nrf::DnnSmfInfoItem> &value =
         m_DnnSmfInfoList;
     const std::string currentValuePath = _pathPrefix + ".dnnSmfInfoList";
 
@@ -52,10 +52,10 @@ bool SnssaiSmfInfoItem::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::nrf::DnnSmfInfoItem& value : value) {
+      int i = 0;
+      for (const oai::model::nrf::DnnSmfInfoItem &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -70,7 +70,7 @@ bool SnssaiSmfInfoItem::validate(
   return success;
 }
 
-bool SnssaiSmfInfoItem::operator==(const SnssaiSmfInfoItem& rhs) const {
+bool SnssaiSmfInfoItem::operator==(const SnssaiSmfInfoItem &rhs) const {
   return
 
       (getSNssai() == rhs.getSNssai()) &&
@@ -80,17 +80,17 @@ bool SnssaiSmfInfoItem::operator==(const SnssaiSmfInfoItem& rhs) const {
           ;
 }
 
-bool SnssaiSmfInfoItem::operator!=(const SnssaiSmfInfoItem& rhs) const {
+bool SnssaiSmfInfoItem::operator!=(const SnssaiSmfInfoItem &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const SnssaiSmfInfoItem& o) {
-  j                   = nlohmann::json::object();
-  j["sNssai"]         = o.m_SNssai;
+void to_json(nlohmann::json &j, const SnssaiSmfInfoItem &o) {
+  j = nlohmann::json::object();
+  j["sNssai"] = o.m_SNssai;
   j["dnnSmfInfoList"] = o.m_DnnSmfInfoList;
 }
 
-void from_json(const nlohmann::json& j, SnssaiSmfInfoItem& o) {
+void from_json(const nlohmann::json &j, SnssaiSmfInfoItem &o) {
   j.at("sNssai").get_to(o.m_SNssai);
   j.at("dnnSmfInfoList").get_to(o.m_DnnSmfInfoList);
 }
@@ -98,7 +98,7 @@ void from_json(const nlohmann::json& j, SnssaiSmfInfoItem& o) {
 oai::model::common::Snssai SnssaiSmfInfoItem::getSNssai() const {
   return m_SNssai;
 }
-void SnssaiSmfInfoItem::setSNssai(oai::model::common::Snssai const& value) {
+void SnssaiSmfInfoItem::setSNssai(oai::model::common::Snssai const &value) {
   m_SNssai = value;
 }
 std::vector<oai::model::nrf::DnnSmfInfoItem>
@@ -106,7 +106,7 @@ SnssaiSmfInfoItem::getDnnSmfInfoList() const {
   return m_DnnSmfInfoList;
 }
 void SnssaiSmfInfoItem::setDnnSmfInfoList(
-    std::vector<oai::model::nrf::DnnSmfInfoItem> const& value) {
+    std::vector<oai::model::nrf::DnnSmfInfoItem> const &value) {
   m_DnnSmfInfoList = value;
 }
 
@@ -119,11 +119,11 @@ std::string SnssaiSmfInfoItem::to_string(int indent_level) const {
   if (!m_DnnSmfInfoList.empty()) {
     fmt_title = oai::config::get_title_formatter(indent_level + 1);
     out.append(fmt::format(fmt_title, "dnns:"));
-    for (const auto& dnn : m_DnnSmfInfoList) {
+    for (const auto &dnn : m_DnnSmfInfoList) {
       out.append(dnn.to_string(indent_level + 2));
     }
   }
   return out;
 }
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

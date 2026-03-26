@@ -8,11 +8,11 @@
 
 #include "Ngap_LoggedMDTNr.h"
 
-#include "Ngap_BluetoothMeasurementConfiguration.h"
-#include "Ngap_WLANMeasurementConfiguration.h"
-#include "Ngap_SensorMeasurementConfiguration.h"
 #include "Ngap_AreaScopeOfNeighCellsList.h"
+#include "Ngap_BluetoothMeasurementConfiguration.h"
 #include "Ngap_ProtocolExtensionContainer.h"
+#include "Ngap_SensorMeasurementConfiguration.h"
+#include "Ngap_WLANMeasurementConfiguration.h"
 asn_TYPE_member_t asn_MBR_Ngap_LoggedMDTNr_1[] = {
     {ATF_NOFLAGS,
      0,
@@ -167,7 +167,7 @@ asn_TYPE_member_t asn_MBR_Ngap_LoggedMDTNr_1[] = {
      0, /* No default value */
      "iE-Extensions"},
 };
-static const int asn_MAP_Ngap_LoggedMDTNr_oms_1[]            = {3, 4, 5, 6, 7};
+static const int asn_MAP_Ngap_LoggedMDTNr_oms_1[] = {3, 4, 5, 6, 7};
 static const ber_tlv_tag_t asn_DEF_Ngap_LoggedMDTNr_tags_1[] = {
     (ASN_TAG_CLASS_UNIVERSAL | (16 << 2))};
 static const asn_TYPE_tag2member_t asn_MAP_Ngap_LoggedMDTNr_tag2el_1[] = {

@@ -19,13 +19,13 @@
 #ifndef AccessTokenReq_H_
 #define AccessTokenReq_H_
 
-#include "PlmnIdNid.h"
 #include "NFType.h"
 #include "PlmnId.h"
-#include <string>
+#include "PlmnIdNid.h"
 #include "Snssai.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::common {
 
@@ -33,7 +33,7 @@ namespace oai::model::common {
 /// Contains information related to the access token request
 /// </summary>
 class AccessTokenReq {
- public:
+public:
   AccessTokenReq();
   virtual ~AccessTokenReq() = default;
 
@@ -47,16 +47,16 @@ class AccessTokenReq {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const AccessTokenReq& rhs) const;
-  bool operator!=(const AccessTokenReq& rhs) const;
+  bool operator==(const AccessTokenReq &rhs) const;
+  bool operator!=(const AccessTokenReq &rhs) const;
 
   /////////////////////////////////////////////
   /// AccessTokenReq members
@@ -65,117 +65,117 @@ class AccessTokenReq {
   ///
   /// </summary>
   std::string getGrantType() const;
-  void setGrantType(std::string const& value);
+  void setGrantType(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getNfInstanceId() const;
-  void setNfInstanceId(std::string const& value);
+  void setNfInstanceId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::NFType getNfType() const;
-  void setNfType(oai::model::common::NFType const& value);
+  void setNfType(oai::model::common::NFType const &value);
   bool nfTypeIsSet() const;
   void unsetNfType();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::NFType getTargetNfType() const;
-  void setTargetNfType(oai::model::common::NFType const& value);
+  void setTargetNfType(oai::model::common::NFType const &value);
   bool targetNfTypeIsSet() const;
   void unsetTargetNfType();
   /// <summary>
   ///
   /// </summary>
   std::string getScope() const;
-  void setScope(std::string const& value);
+  void setScope(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getTargetNfInstanceId() const;
-  void setTargetNfInstanceId(std::string const& value);
+  void setTargetNfInstanceId(std::string const &value);
   bool targetNfInstanceIdIsSet() const;
   void unsetTargetNfInstanceId();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::PlmnId getRequesterPlmn() const;
-  void setRequesterPlmn(oai::model::common::PlmnId const& value);
+  void setRequesterPlmn(oai::model::common::PlmnId const &value);
   bool requesterPlmnIsSet() const;
   void unsetRequesterPlmn();
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::common::PlmnId> getRequesterPlmnList() const;
-  void setRequesterPlmnList(
-      std::vector<oai::model::common::PlmnId> const& value);
+  void
+  setRequesterPlmnList(std::vector<oai::model::common::PlmnId> const &value);
   bool requesterPlmnListIsSet() const;
   void unsetRequesterPlmnList();
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::common::Snssai> getRequesterSnssaiList() const;
-  void setRequesterSnssaiList(
-      std::vector<oai::model::common::Snssai> const& value);
+  void
+  setRequesterSnssaiList(std::vector<oai::model::common::Snssai> const &value);
   bool requesterSnssaiListIsSet() const;
   void unsetRequesterSnssaiList();
   /// <summary>
   /// Fully Qualified Domain Name
   /// </summary>
   std::string getRequesterFqdn() const;
-  void setRequesterFqdn(std::string const& value);
+  void setRequesterFqdn(std::string const &value);
   bool requesterFqdnIsSet() const;
   void unsetRequesterFqdn();
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::common::PlmnIdNid> getRequesterSnpnList() const;
-  void setRequesterSnpnList(
-      std::vector<oai::model::common::PlmnIdNid> const& value);
+  void
+  setRequesterSnpnList(std::vector<oai::model::common::PlmnIdNid> const &value);
   bool requesterSnpnListIsSet() const;
   void unsetRequesterSnpnList();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::PlmnId getTargetPlmn() const;
-  void setTargetPlmn(oai::model::common::PlmnId const& value);
+  void setTargetPlmn(oai::model::common::PlmnId const &value);
   bool targetPlmnIsSet() const;
   void unsetTargetPlmn();
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::common::Snssai> getTargetSnssaiList() const;
-  void setTargetSnssaiList(
-      std::vector<oai::model::common::Snssai> const& value);
+  void
+  setTargetSnssaiList(std::vector<oai::model::common::Snssai> const &value);
   bool targetSnssaiListIsSet() const;
   void unsetTargetSnssaiList();
   /// <summary>
   ///
   /// </summary>
   std::vector<std::string> getTargetNsiList() const;
-  void setTargetNsiList(std::vector<std::string> const& value);
+  void setTargetNsiList(std::vector<std::string> const &value);
   bool targetNsiListIsSet() const;
   void unsetTargetNsiList();
   /// <summary>
   ///
   /// </summary>
   std::string getTargetNfSetId() const;
-  void setTargetNfSetId(std::string const& value);
+  void setTargetNfSetId(std::string const &value);
   bool targetNfSetIdIsSet() const;
   void unsetTargetNfSetId();
   /// <summary>
   ///
   /// </summary>
   std::string getTargetNfServiceSetId() const;
-  void setTargetNfServiceSetId(std::string const& value);
+  void setTargetNfServiceSetId(std::string const &value);
   bool targetNfServiceSetIdIsSet() const;
   void unsetTargetNfServiceSetId();
 
-  friend void to_json(nlohmann::json& j, const AccessTokenReq& o);
-  friend void from_json(const nlohmann::json& j, AccessTokenReq& o);
+  friend void to_json(nlohmann::json &j, const AccessTokenReq &o);
+  friend void from_json(const nlohmann::json &j, AccessTokenReq &o);
 
- protected:
+protected:
   std::string m_Grant_type;
 
   std::string m_NfInstanceId;
@@ -210,6 +210,6 @@ class AccessTokenReq {
   bool m_TargetNfServiceSetIdIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* AccessTokenReq_H_ */

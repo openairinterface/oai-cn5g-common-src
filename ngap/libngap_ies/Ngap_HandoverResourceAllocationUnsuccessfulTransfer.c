@@ -14,8 +14,8 @@ static asn_TYPE_member_t
     asn_MBR_Ngap_HandoverResourceAllocationUnsuccessfulTransfer_1[] = {
         {ATF_NOFLAGS,
          0,
-         offsetof(
-             struct Ngap_HandoverResourceAllocationUnsuccessfulTransfer, cause),
+         offsetof(struct Ngap_HandoverResourceAllocationUnsuccessfulTransfer,
+                  cause),
          (ASN_TAG_CLASS_CONTEXT | (0 << 2)),
          +1, /* EXPLICIT tag at current level */
          &asn_DEF_Ngap_Cause,
@@ -34,9 +34,8 @@ static asn_TYPE_member_t
          "cause"},
         {ATF_POINTER,
          2,
-         offsetof(
-             struct Ngap_HandoverResourceAllocationUnsuccessfulTransfer,
-             criticalityDiagnostics),
+         offsetof(struct Ngap_HandoverResourceAllocationUnsuccessfulTransfer,
+                  criticalityDiagnostics),
          (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
          -1, /* IMPLICIT tag at current level */
          &asn_DEF_Ngap_CriticalityDiagnostics,
@@ -55,9 +54,8 @@ static asn_TYPE_member_t
          "criticalityDiagnostics"},
         {ATF_POINTER,
          1,
-         offsetof(
-             struct Ngap_HandoverResourceAllocationUnsuccessfulTransfer,
-             iE_Extensions),
+         offsetof(struct Ngap_HandoverResourceAllocationUnsuccessfulTransfer,
+                  iE_Extensions),
          (ASN_TAG_CLASS_CONTEXT | (2 << 2)),
          -1, /* IMPLICIT tag at current level */
          &asn_DEF_Ngap_ProtocolExtensionContainer_9666P99,
@@ -76,8 +74,8 @@ static asn_TYPE_member_t
          "iE-Extensions"},
 };
 static const int
-    asn_MAP_Ngap_HandoverResourceAllocationUnsuccessfulTransfer_oms_1[] = {
-        1, 2};
+    asn_MAP_Ngap_HandoverResourceAllocationUnsuccessfulTransfer_oms_1[] = {1,
+                                                                           2};
 static const ber_tlv_tag_t
     asn_DEF_Ngap_HandoverResourceAllocationUnsuccessfulTransfer_tags_1[] = {
         (ASN_TAG_CLASS_UNIVERSAL | (16 << 2))};
@@ -91,9 +89,8 @@ static const asn_TYPE_tag2member_t
 static asn_SEQUENCE_specifics_t
     asn_SPC_Ngap_HandoverResourceAllocationUnsuccessfulTransfer_specs_1 = {
         sizeof(struct Ngap_HandoverResourceAllocationUnsuccessfulTransfer),
-        offsetof(
-            struct Ngap_HandoverResourceAllocationUnsuccessfulTransfer,
-            _asn_ctx),
+        offsetof(struct Ngap_HandoverResourceAllocationUnsuccessfulTransfer,
+                 _asn_ctx),
         asn_MAP_Ngap_HandoverResourceAllocationUnsuccessfulTransfer_tag2el_1,
         3, /* Count of tags in the map */
         asn_MAP_Ngap_HandoverResourceAllocationUnsuccessfulTransfer_oms_1, /* Optional

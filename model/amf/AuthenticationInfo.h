@@ -31,7 +31,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class AuthenticationInfo {
- public:
+public:
   AuthenticationInfo();
   virtual ~AuthenticationInfo();
 
@@ -44,17 +44,17 @@ class AuthenticationInfo {
   ///
   /// </summary>
   std::string getSupiOrSuci() const;
-  void setSupiOrSuci(std::string const& value);
+  void setSupiOrSuci(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getServingNetworkName() const;
-  void setServingNetworkName(std::string const& value);
+  void setServingNetworkName(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   ResynchronizationInfo getResynchronizationInfo() const;
-  void setResynchronizationInfo(ResynchronizationInfo const& value);
+  void setResynchronizationInfo(ResynchronizationInfo const &value);
   bool resynchronizationInfoIsSet() const;
   void unsetResynchronizationInfo();
   //  /// <summary>
@@ -100,10 +100,10 @@ class AuthenticationInfo {
   //  bool n5gcIndIsSet() const;
   //  void unsetN5gcInd();
 
-  friend void to_json(nlohmann::json& j, const AuthenticationInfo& o);
-  friend void from_json(const nlohmann::json& j, AuthenticationInfo& o);
+  friend void to_json(nlohmann::json &j, const AuthenticationInfo &o);
+  friend void from_json(const nlohmann::json &j, AuthenticationInfo &o);
 
- protected:
+protected:
   std::string m_SupiOrSuci;
 
   std::string m_ServingNetworkName;
@@ -124,6 +124,6 @@ class AuthenticationInfo {
   //  bool m_N5gcIndIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* AuthenticationInfo_H_ */

@@ -28,7 +28,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class LossOfConnectivityReason {
- public:
+public:
   LossOfConnectivityReason();
   virtual ~LossOfConnectivityReason() = default;
 
@@ -42,28 +42,28 @@ class LossOfConnectivityReason {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const LossOfConnectivityReason& rhs) const;
-  bool operator!=(const LossOfConnectivityReason& rhs) const;
+  bool operator==(const LossOfConnectivityReason &rhs) const;
+  bool operator!=(const LossOfConnectivityReason &rhs) const;
 
   /////////////////////////////////////////////
   /// LossOfConnectivityReason members
 
   void set_value(std::string value);
-  void get_value(std::string& value) const;
+  void get_value(std::string &value) const;
   std::string get_value() const;
 
-  friend void to_json(nlohmann::json& j, const LossOfConnectivityReason& o);
-  friend void from_json(const nlohmann::json& j, LossOfConnectivityReason& o);
+  friend void to_json(nlohmann::json &j, const LossOfConnectivityReason &o);
+  friend void from_json(const nlohmann::json &j, LossOfConnectivityReason &o);
 
- protected:
+protected:
   std::string value;
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* LossOfConnectivityReason_H_ */

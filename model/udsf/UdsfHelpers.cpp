@@ -20,31 +20,31 @@ const std::regex regexRfc3339_date(R"(^(\d{4})\-(\d{2})\-(\d{2})$)");
 const std::regex regexRfc3339_date_time(
     R"(^(\d{4})\-(\d{2})\-(\d{2})[Tt](\d{2}):(\d{2}):(\d{2})(\.\d+)?([Zz]|([\+\-])(\d{2}):(\d{2}))$)");
 
-bool fromStringValue(
-    const std::string& inStr, oai::model::udsf::ClientId& value) {
+bool fromStringValue(const std::string &inStr,
+                     oai::model::udsf::ClientId &value) {
   nlohmann::json::parse(inStr).get_to(value);
   return true;
 }
 
-bool fromStringValue(
-    const std::string& inStr, oai::model::udsf::SearchExpression& value) {
+bool fromStringValue(const std::string &inStr,
+                     oai::model::udsf::SearchExpression &value) {
   nlohmann::json::parse(inStr).get_to(value);
   return true;
 }
 
-bool fromStringValue(
-    const std::string& inStr, oai::model::udsf::RetrieveRecords& value) {
+bool fromStringValue(const std::string &inStr,
+                     oai::model::udsf::RetrieveRecords &value) {
   value.set(inStr);
   // nlohmann::json::parse(inStr).get_to(value);
   return true;
 }
 
 void fromPistacheToStdStringOptional(
-    const Pistache::Optional<Pistache::Http::Header::Raw>& inOpt,
-    std::optional<std::string>& outOpt) {
+    const Pistache::Optional<Pistache::Http::Header::Raw> &inOpt,
+    std::optional<std::string> &outOpt) {
   if (!inOpt.isEmpty()) {
     outOpt = std::optional<std::string>(inOpt.get().value());
   }
 }
 
-}  // namespace oai::model::common::helpers
+} // namespace oai::model::common::helpers

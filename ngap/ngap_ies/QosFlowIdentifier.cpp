@@ -7,31 +7,23 @@
 namespace oai::ngap {
 
 //------------------------------------------------------------------------------
-QosFlowIdentifier::QosFlowIdentifier() {
-  m_QosFlowIdentifier = 0;
-}
+QosFlowIdentifier::QosFlowIdentifier() { m_QosFlowIdentifier = 0; }
 
 //------------------------------------------------------------------------------
 QosFlowIdentifier::~QosFlowIdentifier() {}
 
 //------------------------------------------------------------------------------
-void QosFlowIdentifier::set(const long& value) {
-  m_QosFlowIdentifier = value;
-}
+void QosFlowIdentifier::set(const long &value) { m_QosFlowIdentifier = value; }
 
 //------------------------------------------------------------------------------
-void QosFlowIdentifier::get(long& value) const {
-  value = m_QosFlowIdentifier;
-}
+void QosFlowIdentifier::get(long &value) const { value = m_QosFlowIdentifier; }
 
 //------------------------------------------------------------------------------
-long QosFlowIdentifier::get() const {
-  return m_QosFlowIdentifier;
-}
+long QosFlowIdentifier::get() const { return m_QosFlowIdentifier; }
 
 //------------------------------------------------------------------------------
 bool QosFlowIdentifier::encode(
-    Ngap_QosFlowIdentifier_t& qosFlowIdentifier) const {
+    Ngap_QosFlowIdentifier_t &qosFlowIdentifier) const {
   qosFlowIdentifier = m_QosFlowIdentifier;
 
   return true;
@@ -39,9 +31,9 @@ bool QosFlowIdentifier::encode(
 
 //------------------------------------------------------------------------------
 bool QosFlowIdentifier::decode(
-    const Ngap_QosFlowIdentifier_t& qosFlowIdentifier) {
+    const Ngap_QosFlowIdentifier_t &qosFlowIdentifier) {
   m_QosFlowIdentifier = qosFlowIdentifier;
 
   return true;
 }
-}  // namespace oai::ngap
+} // namespace oai::ngap

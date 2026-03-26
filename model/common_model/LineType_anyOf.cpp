@@ -13,8 +13,8 @@
 
 #include "LineType_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::common {
 
@@ -27,12 +27,12 @@ void LineType_anyOf::validate() const {
   }
 }
 
-bool LineType_anyOf::validate(std::stringstream& msg) const {
+bool LineType_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool LineType_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool LineType_anyOf::validate(std::stringstream &msg,
+                              const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "LineType_anyOf" : pathPrefix;
@@ -46,33 +46,33 @@ bool LineType_anyOf::validate(
   return success;
 }
 
-bool LineType_anyOf::operator==(const LineType_anyOf& rhs) const {
+bool LineType_anyOf::operator==(const LineType_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool LineType_anyOf::operator!=(const LineType_anyOf& rhs) const {
+bool LineType_anyOf::operator!=(const LineType_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const LineType_anyOf& o) {
+void to_json(nlohmann::json &j, const LineType_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case LineType_anyOf::eLineType_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case LineType_anyOf::eLineType_anyOf::DSL:
-      j = "DSL";
-      break;
-    case LineType_anyOf::eLineType_anyOf::PON:
-      j = "PON";
-      break;
+  case LineType_anyOf::eLineType_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case LineType_anyOf::eLineType_anyOf::DSL:
+    j = "DSL";
+    break;
+  case LineType_anyOf::eLineType_anyOf::PON:
+    j = "PON";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, LineType_anyOf& o) {
+void from_json(const nlohmann::json &j, LineType_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "DSL") {
     o.setValue(LineType_anyOf::eLineType_anyOf::DSL);
@@ -94,4 +94,4 @@ void LineType_anyOf::setValue(LineType_anyOf::eLineType_anyOf value) {
   m_value = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

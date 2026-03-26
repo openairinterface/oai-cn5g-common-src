@@ -19,11 +19,11 @@
 namespace oai::udr::model {
 
 GroupIdentifiers::GroupIdentifiers() {
-  m_ExtGroupId      = "";
+  m_ExtGroupId = "";
   m_ExtGroupIdIsSet = false;
-  m_IntGroupId      = "";
+  m_IntGroupId = "";
   m_IntGroupIdIsSet = false;
-  m_UeIdListIsSet   = false;
+  m_UeIdListIsSet = false;
 }
 
 GroupIdentifiers::~GroupIdentifiers() {}
@@ -32,14 +32,17 @@ void GroupIdentifiers::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const GroupIdentifiers& o) {
+void to_json(nlohmann::json &j, const GroupIdentifiers &o) {
   j = nlohmann::json();
-  if (o.extGroupIdIsSet()) j["extGroupId"] = o.m_ExtGroupId;
-  if (o.intGroupIdIsSet()) j["intGroupId"] = o.m_IntGroupId;
-  if (o.ueIdListIsSet() || !o.m_UeIdList.empty()) j["ueIdList"] = o.m_UeIdList;
+  if (o.extGroupIdIsSet())
+    j["extGroupId"] = o.m_ExtGroupId;
+  if (o.intGroupIdIsSet())
+    j["intGroupId"] = o.m_IntGroupId;
+  if (o.ueIdListIsSet() || !o.m_UeIdList.empty())
+    j["ueIdList"] = o.m_UeIdList;
 }
 
-void from_json(const nlohmann::json& j, GroupIdentifiers& o) {
+void from_json(const nlohmann::json &j, GroupIdentifiers &o) {
   if (j.find("extGroupId") != j.end()) {
     j.at("extGroupId").get_to(o.m_ExtGroupId);
     o.m_ExtGroupIdIsSet = true;
@@ -54,44 +57,26 @@ void from_json(const nlohmann::json& j, GroupIdentifiers& o) {
   }
 }
 
-std::string GroupIdentifiers::getExtGroupId() const {
-  return m_ExtGroupId;
-}
-void GroupIdentifiers::setExtGroupId(std::string const& value) {
-  m_ExtGroupId      = value;
+std::string GroupIdentifiers::getExtGroupId() const { return m_ExtGroupId; }
+void GroupIdentifiers::setExtGroupId(std::string const &value) {
+  m_ExtGroupId = value;
   m_ExtGroupIdIsSet = true;
 }
-bool GroupIdentifiers::extGroupIdIsSet() const {
-  return m_ExtGroupIdIsSet;
-}
-void GroupIdentifiers::unsetExtGroupId() {
-  m_ExtGroupIdIsSet = false;
-}
-std::string GroupIdentifiers::getIntGroupId() const {
-  return m_IntGroupId;
-}
-void GroupIdentifiers::setIntGroupId(std::string const& value) {
-  m_IntGroupId      = value;
+bool GroupIdentifiers::extGroupIdIsSet() const { return m_ExtGroupIdIsSet; }
+void GroupIdentifiers::unsetExtGroupId() { m_ExtGroupIdIsSet = false; }
+std::string GroupIdentifiers::getIntGroupId() const { return m_IntGroupId; }
+void GroupIdentifiers::setIntGroupId(std::string const &value) {
+  m_IntGroupId = value;
   m_IntGroupIdIsSet = true;
 }
-bool GroupIdentifiers::intGroupIdIsSet() const {
-  return m_IntGroupIdIsSet;
-}
-void GroupIdentifiers::unsetIntGroupId() {
-  m_IntGroupIdIsSet = false;
-}
-std::vector<UeId>& GroupIdentifiers::getUeIdList() {
-  return m_UeIdList;
-}
-void GroupIdentifiers::setUeIdList(std::vector<UeId> const& value) {
-  m_UeIdList      = value;
+bool GroupIdentifiers::intGroupIdIsSet() const { return m_IntGroupIdIsSet; }
+void GroupIdentifiers::unsetIntGroupId() { m_IntGroupIdIsSet = false; }
+std::vector<UeId> &GroupIdentifiers::getUeIdList() { return m_UeIdList; }
+void GroupIdentifiers::setUeIdList(std::vector<UeId> const &value) {
+  m_UeIdList = value;
   m_UeIdListIsSet = true;
 }
-bool GroupIdentifiers::ueIdListIsSet() const {
-  return m_UeIdListIsSet;
-}
-void GroupIdentifiers::unsetUeIdList() {
-  m_UeIdListIsSet = false;
-}
+bool GroupIdentifiers::ueIdListIsSet() const { return m_UeIdListIsSet; }
+void GroupIdentifiers::unsetUeIdList() { m_UeIdListIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

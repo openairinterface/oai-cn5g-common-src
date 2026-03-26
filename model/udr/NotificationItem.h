@@ -36,7 +36,7 @@ namespace oai::udr::model {
 /// (subset of resource data) of a given resource.
 /// </summary>
 class NotificationItem {
- public:
+public:
   NotificationItem();
   virtual ~NotificationItem();
 
@@ -49,22 +49,22 @@ class NotificationItem {
   ///
   /// </summary>
   std::string getResourceId() const;
-  void setResourceId(std::string const& value);
+  void setResourceId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
-  std::vector<UpdatedItem>& getNotifItems();
-  void setNotifItems(std::vector<UpdatedItem> const& value);
+  std::vector<UpdatedItem> &getNotifItems();
+  void setNotifItems(std::vector<UpdatedItem> const &value);
 
-  friend void to_json(nlohmann::json& j, const NotificationItem& o);
-  friend void from_json(const nlohmann::json& j, NotificationItem& o);
+  friend void to_json(nlohmann::json &j, const NotificationItem &o);
+  friend void from_json(const nlohmann::json &j, NotificationItem &o);
 
- protected:
+protected:
   std::string m_ResourceId;
 
   std::vector<UpdatedItem> m_NotifItems;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* NotificationItem_H_ */

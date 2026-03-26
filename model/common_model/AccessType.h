@@ -27,7 +27,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class AccessType {
- public:
+public:
   AccessType();
   virtual ~AccessType() = default;
 
@@ -51,17 +51,17 @@ class AccessType {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  virtual bool validate(
-      std::stringstream& msg, const std::string& pathPrefix) const;
+  virtual bool validate(std::stringstream &msg,
+                        const std::string &pathPrefix) const;
 
-  bool operator==(const AccessType& rhs) const;
-  bool operator!=(const AccessType& rhs) const;
+  bool operator==(const AccessType &rhs) const;
+  bool operator!=(const AccessType &rhs) const;
 
   /////////////////////////////////////////////
   /// AccessType members
@@ -69,14 +69,14 @@ class AccessType {
   AccessType::eAccessType getValue() const;
   void setValue(AccessType::eAccessType value);
 
-  friend void to_json(nlohmann::json& j, const AccessType& o);
-  friend void from_json(const nlohmann::json& j, AccessType& o);
+  friend void to_json(nlohmann::json &j, const AccessType &o);
+  friend void from_json(const nlohmann::json &j, AccessType &o);
 
- protected:
+protected:
   AccessType::eAccessType m_value =
       AccessType::eAccessType::INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* AccessType_H_ */

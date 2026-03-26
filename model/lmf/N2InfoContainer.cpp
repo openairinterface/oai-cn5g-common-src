@@ -19,11 +19,11 @@
 namespace oai::model::lmf {
 
 N2InfoContainer::N2InfoContainer() {
-  m_SmInfoIsSet    = false;
-  m_RanInfoIsSet   = false;
+  m_SmInfoIsSet = false;
+  m_RanInfoIsSet = false;
   m_NrppaInfoIsSet = false;
-  m_PwsInfoIsSet   = false;
-  m_V2xInfoIsSet   = false;
+  m_PwsInfoIsSet = false;
+  m_V2xInfoIsSet = false;
 }
 
 void N2InfoContainer::validate() const {
@@ -33,12 +33,12 @@ void N2InfoContainer::validate() const {
   }
 }
 
-bool N2InfoContainer::validate(std::stringstream& msg) const {
+bool N2InfoContainer::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool N2InfoContainer::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool N2InfoContainer::validate(std::stringstream &msg,
+                               const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "N2InfoContainer" : pathPrefix;
@@ -46,7 +46,7 @@ bool N2InfoContainer::validate(
   return success;
 }
 
-bool N2InfoContainer::operator==(const N2InfoContainer& rhs) const {
+bool N2InfoContainer::operator==(const N2InfoContainer &rhs) const {
   return
 
       (getN2InformationClass() == rhs.getN2InformationClass()) &&
@@ -74,21 +74,26 @@ bool N2InfoContainer::operator==(const N2InfoContainer& rhs) const {
           ;
 }
 
-bool N2InfoContainer::operator!=(const N2InfoContainer& rhs) const {
+bool N2InfoContainer::operator!=(const N2InfoContainer &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const N2InfoContainer& o) {
-  j                       = nlohmann::json();
+void to_json(nlohmann::json &j, const N2InfoContainer &o) {
+  j = nlohmann::json();
   j["n2InformationClass"] = o.m_N2InformationClass;
-  if (o.smInfoIsSet()) j["smInfo"] = o.m_SmInfo;
-  if (o.ranInfoIsSet()) j["ranInfo"] = o.m_RanInfo;
-  if (o.nrppaInfoIsSet()) j["nrppaInfo"] = o.m_NrppaInfo;
-  if (o.pwsInfoIsSet()) j["pwsInfo"] = o.m_PwsInfo;
-  if (o.v2xInfoIsSet()) j["v2xInfo"] = o.m_V2xInfo;
+  if (o.smInfoIsSet())
+    j["smInfo"] = o.m_SmInfo;
+  if (o.ranInfoIsSet())
+    j["ranInfo"] = o.m_RanInfo;
+  if (o.nrppaInfoIsSet())
+    j["nrppaInfo"] = o.m_NrppaInfo;
+  if (o.pwsInfoIsSet())
+    j["pwsInfo"] = o.m_PwsInfo;
+  if (o.v2xInfoIsSet())
+    j["v2xInfo"] = o.m_V2xInfo;
 }
 
-void from_json(const nlohmann::json& j, N2InfoContainer& o) {
+void from_json(const nlohmann::json &j, N2InfoContainer &o) {
   j.at("n2InformationClass").get_to(o.m_N2InformationClass);
   if (j.find("smInfo") != j.end()) {
     j.at("smInfo").get_to(o.m_SmInfo);
@@ -112,80 +117,60 @@ void from_json(const nlohmann::json& j, N2InfoContainer& o) {
   }
 }
 
-oai::model::lmf::N2InformationClass N2InfoContainer::getN2InformationClass()
-    const {
+oai::model::lmf::N2InformationClass
+N2InfoContainer::getN2InformationClass() const {
   return m_N2InformationClass;
 }
 void N2InfoContainer::setN2InformationClass(
-    oai::model::lmf::N2InformationClass const& value) {
+    oai::model::lmf::N2InformationClass const &value) {
   m_N2InformationClass = value;
 }
 oai::model::lmf::N2SmInformation N2InfoContainer::getSmInfo() const {
   return m_SmInfo;
 }
-void N2InfoContainer::setSmInfo(oai::model::lmf::N2SmInformation const& value) {
-  m_SmInfo      = value;
+void N2InfoContainer::setSmInfo(oai::model::lmf::N2SmInformation const &value) {
+  m_SmInfo = value;
   m_SmInfoIsSet = true;
 }
-bool N2InfoContainer::smInfoIsSet() const {
-  return m_SmInfoIsSet;
-}
-void N2InfoContainer::unsetSmInfo() {
-  m_SmInfoIsSet = false;
-}
+bool N2InfoContainer::smInfoIsSet() const { return m_SmInfoIsSet; }
+void N2InfoContainer::unsetSmInfo() { m_SmInfoIsSet = false; }
 oai::model::lmf::N2RanInformation N2InfoContainer::getRanInfo() const {
   return m_RanInfo;
 }
 void N2InfoContainer::setRanInfo(
-    oai::model::lmf::N2RanInformation const& value) {
-  m_RanInfo      = value;
+    oai::model::lmf::N2RanInformation const &value) {
+  m_RanInfo = value;
   m_RanInfoIsSet = true;
 }
-bool N2InfoContainer::ranInfoIsSet() const {
-  return m_RanInfoIsSet;
-}
-void N2InfoContainer::unsetRanInfo() {
-  m_RanInfoIsSet = false;
-}
+bool N2InfoContainer::ranInfoIsSet() const { return m_RanInfoIsSet; }
+void N2InfoContainer::unsetRanInfo() { m_RanInfoIsSet = false; }
 oai::model::lmf::NrppaInformation N2InfoContainer::getNrppaInfo() const {
   return m_NrppaInfo;
 }
 void N2InfoContainer::setNrppaInfo(
-    oai::model::lmf::NrppaInformation const& value) {
-  m_NrppaInfo      = value;
+    oai::model::lmf::NrppaInformation const &value) {
+  m_NrppaInfo = value;
   m_NrppaInfoIsSet = true;
 }
-bool N2InfoContainer::nrppaInfoIsSet() const {
-  return m_NrppaInfoIsSet;
-}
-void N2InfoContainer::unsetNrppaInfo() {
-  m_NrppaInfoIsSet = false;
-}
+bool N2InfoContainer::nrppaInfoIsSet() const { return m_NrppaInfoIsSet; }
+void N2InfoContainer::unsetNrppaInfo() { m_NrppaInfoIsSet = false; }
 oai::model::lmf::PwsInformation N2InfoContainer::getPwsInfo() const {
   return m_PwsInfo;
 }
-void N2InfoContainer::setPwsInfo(oai::model::lmf::PwsInformation const& value) {
-  m_PwsInfo      = value;
+void N2InfoContainer::setPwsInfo(oai::model::lmf::PwsInformation const &value) {
+  m_PwsInfo = value;
   m_PwsInfoIsSet = true;
 }
-bool N2InfoContainer::pwsInfoIsSet() const {
-  return m_PwsInfoIsSet;
-}
-void N2InfoContainer::unsetPwsInfo() {
-  m_PwsInfoIsSet = false;
-}
+bool N2InfoContainer::pwsInfoIsSet() const { return m_PwsInfoIsSet; }
+void N2InfoContainer::unsetPwsInfo() { m_PwsInfoIsSet = false; }
 oai::model::lmf::V2xInformation N2InfoContainer::getV2xInfo() const {
   return m_V2xInfo;
 }
-void N2InfoContainer::setV2xInfo(oai::model::lmf::V2xInformation const& value) {
-  m_V2xInfo      = value;
+void N2InfoContainer::setV2xInfo(oai::model::lmf::V2xInformation const &value) {
+  m_V2xInfo = value;
   m_V2xInfoIsSet = true;
 }
-bool N2InfoContainer::v2xInfoIsSet() const {
-  return m_V2xInfoIsSet;
-}
-void N2InfoContainer::unsetV2xInfo() {
-  m_V2xInfoIsSet = false;
-}
+bool N2InfoContainer::v2xInfoIsSet() const { return m_V2xInfoIsSet; }
+void N2InfoContainer::unsetV2xInfo() { m_V2xInfoIsSet = false; }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

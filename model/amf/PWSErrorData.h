@@ -27,7 +27,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class PWSErrorData {
- public:
+public:
   PWSErrorData();
   virtual ~PWSErrorData();
 
@@ -42,13 +42,13 @@ class PWSErrorData {
   int32_t getNamfCause() const;
   void setNamfCause(int32_t const value);
 
-  friend void to_json(nlohmann::json& j, const PWSErrorData& o);
-  friend void from_json(const nlohmann::json& j, PWSErrorData& o);
+  friend void to_json(nlohmann::json &j, const PWSErrorData &o);
+  friend void from_json(const nlohmann::json &j, PWSErrorData &o);
 
- protected:
+protected:
   int32_t m_NamfCause;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* PWSErrorData_H_ */

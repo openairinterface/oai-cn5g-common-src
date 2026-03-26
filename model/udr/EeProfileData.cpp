@@ -20,8 +20,8 @@ namespace oai::udr::model {
 
 EeProfileData::EeProfileData() {
   m_RestrictedEventTypesIsSet = false;
-  m_SupportedFeatures         = "";
-  m_SupportedFeaturesIsSet    = false;
+  m_SupportedFeatures = "";
+  m_SupportedFeaturesIsSet = false;
 }
 
 EeProfileData::~EeProfileData() {}
@@ -30,7 +30,7 @@ void EeProfileData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const EeProfileData& o) {
+void to_json(nlohmann::json &j, const EeProfileData &o) {
   j = nlohmann::json();
   if (o.restrictedEventTypesIsSet() || !o.m_RestrictedEventTypes.empty())
     j["restrictedEventTypes"] = o.m_RestrictedEventTypes;
@@ -38,7 +38,7 @@ void to_json(nlohmann::json& j, const EeProfileData& o) {
     j["supportedFeatures"] = o.m_SupportedFeatures;
 }
 
-void from_json(const nlohmann::json& j, EeProfileData& o) {
+void from_json(const nlohmann::json &j, EeProfileData &o) {
   if (j.find("restrictedEventTypes") != j.end()) {
     j.at("restrictedEventTypes").get_to(o.m_RestrictedEventTypes);
     o.m_RestrictedEventTypesIsSet = true;
@@ -49,12 +49,12 @@ void from_json(const nlohmann::json& j, EeProfileData& o) {
   }
 }
 
-std::vector<EventType>& EeProfileData::getRestrictedEventTypes() {
+std::vector<EventType> &EeProfileData::getRestrictedEventTypes() {
   return m_RestrictedEventTypes;
 }
 void EeProfileData::setRestrictedEventTypes(
-    std::vector<EventType> const& value) {
-  m_RestrictedEventTypes      = value;
+    std::vector<EventType> const &value) {
+  m_RestrictedEventTypes = value;
   m_RestrictedEventTypesIsSet = true;
 }
 bool EeProfileData::restrictedEventTypesIsSet() const {
@@ -66,8 +66,8 @@ void EeProfileData::unsetRestrictedEventTypes() {
 std::string EeProfileData::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
-void EeProfileData::setSupportedFeatures(std::string const& value) {
-  m_SupportedFeatures      = value;
+void EeProfileData::setSupportedFeatures(std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool EeProfileData::supportedFeaturesIsSet() const {
@@ -77,4 +77,4 @@ void EeProfileData::unsetSupportedFeatures() {
   m_SupportedFeaturesIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

@@ -35,9 +35,9 @@ struct Ngap_ProtocolIE_SingleContainer;
 typedef struct Ngap_AMFPagingTarget {
   Ngap_AMFPagingTarget_PR present;
   union Ngap_AMFPagingTarget_u {
-    struct Ngap_GlobalRANNodeID* globalRANNodeID;
-    struct Ngap_TAI* tAI;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_GlobalRANNodeID *globalRANNodeID;
+    struct Ngap_TAI *tAI;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

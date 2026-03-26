@@ -32,9 +32,8 @@ static asn_TYPE_member_t
          "cause"},
         {ATF_POINTER,
          1,
-         offsetof(
-             struct Ngap_PDUSessionResourceNotifyReleasedTransfer,
-             iE_Extensions),
+         offsetof(struct Ngap_PDUSessionResourceNotifyReleasedTransfer,
+                  iE_Extensions),
          (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
          -1, /* IMPLICIT tag at current level */
          &asn_DEF_Ngap_ProtocolExtensionContainer_9666P174,
@@ -65,8 +64,8 @@ static const asn_TYPE_tag2member_t
 static asn_SEQUENCE_specifics_t
     asn_SPC_Ngap_PDUSessionResourceNotifyReleasedTransfer_specs_1 = {
         sizeof(struct Ngap_PDUSessionResourceNotifyReleasedTransfer),
-        offsetof(
-            struct Ngap_PDUSessionResourceNotifyReleasedTransfer, _asn_ctx),
+        offsetof(struct Ngap_PDUSessionResourceNotifyReleasedTransfer,
+                 _asn_ctx),
         asn_MAP_Ngap_PDUSessionResourceNotifyReleasedTransfer_tag2el_1,
         2, /* Count of tags in the map */
         asn_MAP_Ngap_PDUSessionResourceNotifyReleasedTransfer_oms_1, /* Optional

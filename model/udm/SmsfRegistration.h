@@ -35,7 +35,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class SmsfRegistration {
- public:
+public:
   SmsfRegistration();
   virtual ~SmsfRegistration();
 
@@ -48,59 +48,59 @@ class SmsfRegistration {
   ///
   /// </summary>
   std::string getSmsfInstanceId() const;
-  void setSmsfInstanceId(std::string const& value);
+  void setSmsfInstanceId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getSmsfSetId() const;
-  void setSmsfSetId(std::string const& value);
+  void setSmsfSetId(std::string const &value);
   bool smsfSetIdIsSet() const;
   void unsetSmsfSetId();
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::PlmnId getPlmnId() const;
-  void setPlmnId(oai::model::common::PlmnId const& value);
+  void setPlmnId(oai::model::common::PlmnId const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getSmsfMAPAddress() const;
-  void setSmsfMAPAddress(std::string const& value);
+  void setSmsfMAPAddress(std::string const &value);
   bool smsfMAPAddressIsSet() const;
   void unsetSmsfMAPAddress();
   /// <summary>
   ///
   /// </summary>
   NetworkNodeDiameterAddress getSmsfDiameterAddress() const;
-  void setSmsfDiameterAddress(NetworkNodeDiameterAddress const& value);
+  void setSmsfDiameterAddress(NetworkNodeDiameterAddress const &value);
   bool smsfDiameterAddressIsSet() const;
   void unsetSmsfDiameterAddress();
   /// <summary>
   ///
   /// </summary>
   std::string getRegistrationTime() const;
-  void setRegistrationTime(std::string const& value);
+  void setRegistrationTime(std::string const &value);
   bool registrationTimeIsSet() const;
   void unsetRegistrationTime();
   /// <summary>
   ///
   /// </summary>
   ContextInfo getContextInfo() const;
-  void setContextInfo(ContextInfo const& value);
+  void setContextInfo(ContextInfo const &value);
   bool contextInfoIsSet() const;
   void unsetContextInfo();
 
-  friend void to_json(nlohmann::json& j, const SmsfRegistration& o);
-  friend void from_json(const nlohmann::json& j, SmsfRegistration& o);
+  friend void to_json(nlohmann::json &j, const SmsfRegistration &o);
+  friend void from_json(const nlohmann::json &j, SmsfRegistration &o);
 
- protected:
+protected:
   std::string m_SmsfInstanceId;
 
   std::string m_SmsfSetId;
@@ -119,6 +119,6 @@ class SmsfRegistration {
   bool m_ContextInfoIsSet;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* SmsfRegistration_H_ */

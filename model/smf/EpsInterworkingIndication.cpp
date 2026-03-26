@@ -23,10 +23,10 @@ void EpsInterworkingIndication::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const EpsInterworkingIndication& o) {
+void to_json(nlohmann::json &j, const EpsInterworkingIndication &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, EpsInterworkingIndication& o) {}
+void from_json(const nlohmann::json &j, EpsInterworkingIndication &o) {}
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

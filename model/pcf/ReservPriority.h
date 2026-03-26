@@ -27,7 +27,7 @@ namespace oai::model::pcf {
 /// Indicates the reservation priority.
 /// </summary>
 class ReservPriority {
- public:
+public:
   ReservPriority();
   virtual ~ReservPriority() = default;
 
@@ -41,26 +41,26 @@ class ReservPriority {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const ReservPriority& rhs) const;
-  bool operator!=(const ReservPriority& rhs) const;
+  bool operator==(const ReservPriority &rhs) const;
+  bool operator!=(const ReservPriority &rhs) const;
 
   /////////////////////////////////////////////
   /// ReservPriority members
 
-  friend void to_json(nlohmann::json& j, const ReservPriority& o);
-  friend void from_json(const nlohmann::json& j, ReservPriority& o);
+  friend void to_json(nlohmann::json &j, const ReservPriority &o);
+  friend void from_json(const nlohmann::json &j, ReservPriority &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* ReservPriority_H_ */

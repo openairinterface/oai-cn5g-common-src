@@ -19,9 +19,9 @@
 namespace oai::model::common {
 
 MbsfnArea::MbsfnArea() {
-  m_MbsfnAreaId           = 0;
-  m_MbsfnAreaIdIsSet      = false;
-  m_CarrierFrequency      = 0;
+  m_MbsfnAreaId = 0;
+  m_MbsfnAreaIdIsSet = false;
+  m_CarrierFrequency = 0;
   m_CarrierFrequencyIsSet = false;
 }
 
@@ -32,17 +32,17 @@ void MbsfnArea::validate() const {
   }
 }
 
-bool MbsfnArea::validate(std::stringstream& msg) const {
+bool MbsfnArea::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool MbsfnArea::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool MbsfnArea::validate(std::stringstream &msg,
+                         const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "MbsfnArea" : pathPrefix;
 
   if (mbsfnAreaIdIsSet()) {
-    const int32_t& value               = m_MbsfnAreaId;
+    const int32_t &value = m_MbsfnAreaId;
     const std::string currentValuePath = _pathPrefix + ".mbsfnAreaId";
 
     if (value < 0) {
@@ -56,7 +56,7 @@ bool MbsfnArea::validate(
   }
 
   if (carrierFrequencyIsSet()) {
-    const int32_t& value               = m_CarrierFrequency;
+    const int32_t &value = m_CarrierFrequency;
     const std::string currentValuePath = _pathPrefix + ".carrierFrequency";
 
     if (value < 0) {
@@ -72,7 +72,7 @@ bool MbsfnArea::validate(
   return success;
 }
 
-bool MbsfnArea::operator==(const MbsfnArea& rhs) const {
+bool MbsfnArea::operator==(const MbsfnArea &rhs) const {
   return
 
       ((!mbsfnAreaIdIsSet() && !rhs.mbsfnAreaIdIsSet()) ||
@@ -86,17 +86,19 @@ bool MbsfnArea::operator==(const MbsfnArea& rhs) const {
           ;
 }
 
-bool MbsfnArea::operator!=(const MbsfnArea& rhs) const {
+bool MbsfnArea::operator!=(const MbsfnArea &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const MbsfnArea& o) {
+void to_json(nlohmann::json &j, const MbsfnArea &o) {
   j = nlohmann::json();
-  if (o.mbsfnAreaIdIsSet()) j["mbsfnAreaId"] = o.m_MbsfnAreaId;
-  if (o.carrierFrequencyIsSet()) j["carrierFrequency"] = o.m_CarrierFrequency;
+  if (o.mbsfnAreaIdIsSet())
+    j["mbsfnAreaId"] = o.m_MbsfnAreaId;
+  if (o.carrierFrequencyIsSet())
+    j["carrierFrequency"] = o.m_CarrierFrequency;
 }
 
-void from_json(const nlohmann::json& j, MbsfnArea& o) {
+void from_json(const nlohmann::json &j, MbsfnArea &o) {
   if (j.find("mbsfnAreaId") != j.end()) {
     j.at("mbsfnAreaId").get_to(o.m_MbsfnAreaId);
     o.m_MbsfnAreaIdIsSet = true;
@@ -107,31 +109,21 @@ void from_json(const nlohmann::json& j, MbsfnArea& o) {
   }
 }
 
-int32_t MbsfnArea::getMbsfnAreaId() const {
-  return m_MbsfnAreaId;
-}
+int32_t MbsfnArea::getMbsfnAreaId() const { return m_MbsfnAreaId; }
 void MbsfnArea::setMbsfnAreaId(int32_t const value) {
-  m_MbsfnAreaId      = value;
+  m_MbsfnAreaId = value;
   m_MbsfnAreaIdIsSet = true;
 }
-bool MbsfnArea::mbsfnAreaIdIsSet() const {
-  return m_MbsfnAreaIdIsSet;
-}
-void MbsfnArea::unsetMbsfnAreaId() {
-  m_MbsfnAreaIdIsSet = false;
-}
-int32_t MbsfnArea::getCarrierFrequency() const {
-  return m_CarrierFrequency;
-}
+bool MbsfnArea::mbsfnAreaIdIsSet() const { return m_MbsfnAreaIdIsSet; }
+void MbsfnArea::unsetMbsfnAreaId() { m_MbsfnAreaIdIsSet = false; }
+int32_t MbsfnArea::getCarrierFrequency() const { return m_CarrierFrequency; }
 void MbsfnArea::setCarrierFrequency(int32_t const value) {
-  m_CarrierFrequency      = value;
+  m_CarrierFrequency = value;
   m_CarrierFrequencyIsSet = true;
 }
 bool MbsfnArea::carrierFrequencyIsSet() const {
   return m_CarrierFrequencyIsSet;
 }
-void MbsfnArea::unsetCarrierFrequency() {
-  m_CarrierFrequencyIsSet = false;
-}
+void MbsfnArea::unsetCarrierFrequency() { m_CarrierFrequencyIsSet = false; }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

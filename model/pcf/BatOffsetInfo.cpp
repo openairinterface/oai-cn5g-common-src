@@ -20,9 +20,9 @@ namespace oai::model::pcf {
 
 BatOffsetInfo::BatOffsetInfo() {
   m_RanBatOffsetNotif = 0;
-  m_AdjPeriod         = 0;
-  m_AdjPeriodIsSet    = false;
-  m_FlowsIsSet        = false;
+  m_AdjPeriod = 0;
+  m_AdjPeriodIsSet = false;
+  m_FlowsIsSet = false;
 }
 
 void BatOffsetInfo::validate() const {
@@ -32,18 +32,18 @@ void BatOffsetInfo::validate() const {
   }
 }
 
-bool BatOffsetInfo::validate(std::stringstream& msg) const {
+bool BatOffsetInfo::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool BatOffsetInfo::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool BatOffsetInfo::validate(std::stringstream &msg,
+                             const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "BatOffsetInfo" : pathPrefix;
 
   if (adjPeriodIsSet()) {
-    const int32_t& value               = m_AdjPeriod;
+    const int32_t &value = m_AdjPeriod;
     const std::string currentValuePath = _pathPrefix + ".adjPeriod";
 
     if (value < 0) {
@@ -53,17 +53,17 @@ bool BatOffsetInfo::validate(
   }
 
   if (flowsIsSet()) {
-    const std::vector<oai::model::pcf::Flows>& value = m_Flows;
-    const std::string currentValuePath               = _pathPrefix + ".flows";
+    const std::vector<oai::model::pcf::Flows> &value = m_Flows;
+    const std::string currentValuePath = _pathPrefix + ".flows";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::Flows& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::Flows &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -77,7 +77,7 @@ bool BatOffsetInfo::validate(
   return success;
 }
 
-bool BatOffsetInfo::operator==(const BatOffsetInfo& rhs) const {
+bool BatOffsetInfo::operator==(const BatOffsetInfo &rhs) const {
   return
 
       (getRanBatOffsetNotif() == rhs.getRanBatOffsetNotif()) &&
@@ -92,18 +92,20 @@ bool BatOffsetInfo::operator==(const BatOffsetInfo& rhs) const {
           ;
 }
 
-bool BatOffsetInfo::operator!=(const BatOffsetInfo& rhs) const {
+bool BatOffsetInfo::operator!=(const BatOffsetInfo &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const BatOffsetInfo& o) {
-  j                      = nlohmann::json::object();
+void to_json(nlohmann::json &j, const BatOffsetInfo &o) {
+  j = nlohmann::json::object();
   j["ranBatOffsetNotif"] = o.m_RanBatOffsetNotif;
-  if (o.adjPeriodIsSet()) j["adjPeriod"] = o.m_AdjPeriod;
-  if (o.flowsIsSet() || !o.m_Flows.empty()) j["flows"] = o.m_Flows;
+  if (o.adjPeriodIsSet())
+    j["adjPeriod"] = o.m_AdjPeriod;
+  if (o.flowsIsSet() || !o.m_Flows.empty())
+    j["flows"] = o.m_Flows;
 }
 
-void from_json(const nlohmann::json& j, BatOffsetInfo& o) {
+void from_json(const nlohmann::json &j, BatOffsetInfo &o) {
   j.at("ranBatOffsetNotif").get_to(o.m_RanBatOffsetNotif);
   if (j.find("adjPeriod") != j.end()) {
     j.at("adjPeriod").get_to(o.m_AdjPeriod);
@@ -121,31 +123,21 @@ int32_t BatOffsetInfo::getRanBatOffsetNotif() const {
 void BatOffsetInfo::setRanBatOffsetNotif(int32_t const value) {
   m_RanBatOffsetNotif = value;
 }
-int32_t BatOffsetInfo::getAdjPeriod() const {
-  return m_AdjPeriod;
-}
+int32_t BatOffsetInfo::getAdjPeriod() const { return m_AdjPeriod; }
 void BatOffsetInfo::setAdjPeriod(int32_t const value) {
-  m_AdjPeriod      = value;
+  m_AdjPeriod = value;
   m_AdjPeriodIsSet = true;
 }
-bool BatOffsetInfo::adjPeriodIsSet() const {
-  return m_AdjPeriodIsSet;
-}
-void BatOffsetInfo::unsetAdjPeriod() {
-  m_AdjPeriodIsSet = false;
-}
+bool BatOffsetInfo::adjPeriodIsSet() const { return m_AdjPeriodIsSet; }
+void BatOffsetInfo::unsetAdjPeriod() { m_AdjPeriodIsSet = false; }
 std::vector<oai::model::pcf::Flows> BatOffsetInfo::getFlows() const {
   return m_Flows;
 }
-void BatOffsetInfo::setFlows(std::vector<oai::model::pcf::Flows> const& value) {
-  m_Flows      = value;
+void BatOffsetInfo::setFlows(std::vector<oai::model::pcf::Flows> const &value) {
+  m_Flows = value;
   m_FlowsIsSet = true;
 }
-bool BatOffsetInfo::flowsIsSet() const {
-  return m_FlowsIsSet;
-}
-void BatOffsetInfo::unsetFlows() {
-  m_FlowsIsSet = false;
-}
+bool BatOffsetInfo::flowsIsSet() const { return m_FlowsIsSet; }
+void BatOffsetInfo::unsetFlows() { m_FlowsIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

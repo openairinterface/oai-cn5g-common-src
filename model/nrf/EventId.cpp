@@ -23,10 +23,8 @@ void EventId::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const EventId& o) {
-  j = nlohmann::json();
-}
+void to_json(nlohmann::json &j, const EventId &o) { j = nlohmann::json(); }
 
-void from_json(const nlohmann::json& j, EventId& o) {}
+void from_json(const nlohmann::json &j, EventId &o) {}
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

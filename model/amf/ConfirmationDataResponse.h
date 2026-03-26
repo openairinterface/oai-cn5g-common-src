@@ -19,11 +19,11 @@
 #ifndef ConfirmationDataResponse_H_
 #define ConfirmationDataResponse_H_
 
-#include "ServerAddressingInfo.h"
-#include <string>
 #include "AuthResult.h"
-#include <vector>
+#include "ServerAddressingInfo.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::amf {
 
@@ -31,7 +31,7 @@ namespace oai::model::amf {
 /// Contains the result of the authentication
 /// </summary>
 class ConfirmationDataResponse {
- public:
+public:
   ConfirmationDataResponse();
   virtual ~ConfirmationDataResponse() = default;
 
@@ -45,16 +45,16 @@ class ConfirmationDataResponse {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const ConfirmationDataResponse& rhs) const;
-  bool operator!=(const ConfirmationDataResponse& rhs) const;
+  bool operator==(const ConfirmationDataResponse &rhs) const;
+  bool operator!=(const ConfirmationDataResponse &rhs) const;
 
   /////////////////////////////////////////////
   /// ConfirmationDataResponse members
@@ -63,7 +63,7 @@ class ConfirmationDataResponse {
   ///
   /// </summary>
   AuthResult getAuthResult() const;
-  void setAuthResult(AuthResult const& value);
+  void setAuthResult(AuthResult const &value);
   /// <summary>
   /// String identifying a Supi that shall contain either an IMSI, a network
   /// specific identifier, a Global Cable Identifier (GCI) or a Global Line
@@ -82,28 +82,28 @@ class ConfirmationDataResponse {
   /// defined in 3GPP TS 29.501.
   /// </summary>
   std::string getSupi() const;
-  void setSupi(std::string const& value);
+  void setSupi(std::string const &value);
   bool supiIsSet() const;
   void unsetSupi();
   /// <summary>
   /// Contains the Kseaf.
   /// </summary>
   std::string getKseaf() const;
-  void setKseaf(std::string const& value);
+  void setKseaf(std::string const &value);
   bool kseafIsSet() const;
   void unsetKseaf();
   /// <summary>
   ///
   /// </summary>
   std::vector<ServerAddressingInfo> getPvsInfo() const;
-  void setPvsInfo(std::vector<ServerAddressingInfo> const& value);
+  void setPvsInfo(std::vector<ServerAddressingInfo> const &value);
   bool pvsInfoIsSet() const;
   void unsetPvsInfo();
 
-  friend void to_json(nlohmann::json& j, const ConfirmationDataResponse& o);
-  friend void from_json(const nlohmann::json& j, ConfirmationDataResponse& o);
+  friend void to_json(nlohmann::json &j, const ConfirmationDataResponse &o);
+  friend void from_json(const nlohmann::json &j, ConfirmationDataResponse &o);
 
- protected:
+protected:
   AuthResult m_AuthResult;
 
   std::string m_Supi;
@@ -114,6 +114,6 @@ class ConfirmationDataResponse {
   bool m_PvsInfoIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* ConfirmationDataResponse_H_ */

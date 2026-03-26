@@ -29,8 +29,7 @@ static asn_per_constraints_t asn_PER_type_Ngap_dapsresponseindicator_constr_2
           !defined(ASN_DISABLE_APER_SUPPORT) */
 static const asn_INTEGER_enum_map_t
     asn_MAP_Ngap_dapsresponseindicator_value2enum_2[] = {
-        {0, 16, "daps-ho-accepted"},
-        {1, 20, "daps-ho-not-accepted"}
+        {0, 16, "daps-ho-accepted"}, {1, 20, "daps-ho-not-accepted"}
         /* This list is extensible */
 };
 static const unsigned int asn_MAP_Ngap_dapsresponseindicator_enum2value_2[] = {
@@ -117,7 +116,7 @@ asn_TYPE_member_t asn_MBR_Ngap_DAPSResponseInfo_1[] = {
      0, /* No default value */
      "iE-Extensions"},
 };
-static const int asn_MAP_Ngap_DAPSResponseInfo_oms_1[]            = {1};
+static const int asn_MAP_Ngap_DAPSResponseInfo_oms_1[] = {1};
 static const ber_tlv_tag_t asn_DEF_Ngap_DAPSResponseInfo_tags_1[] = {
     (ASN_TAG_CLASS_UNIVERSAL | (16 << 2))};
 static const asn_TYPE_tag2member_t asn_MAP_Ngap_DAPSResponseInfo_tag2el_1[] = {

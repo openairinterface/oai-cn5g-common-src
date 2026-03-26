@@ -20,12 +20,12 @@
 #define ErrorReport_H_
 
 #include "PolicyDecisionFailureCode.h"
+#include "ProblemDetails.h"
 #include "RuleReport.h"
 #include "SessionRuleReport.h"
+#include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
-#include "ProblemDetails.h"
-#include <nlohmann/json.hpp>
 
 namespace oai::model::pcf {
 
@@ -33,7 +33,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class ErrorReport {
- public:
+public:
   ErrorReport();
   virtual ~ErrorReport() = default;
 
@@ -47,16 +47,16 @@ class ErrorReport {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const ErrorReport& rhs) const;
-  bool operator!=(const ErrorReport& rhs) const;
+  bool operator==(const ErrorReport &rhs) const;
+  bool operator!=(const ErrorReport &rhs) const;
 
   /////////////////////////////////////////////
   /// ErrorReport members
@@ -65,14 +65,14 @@ class ErrorReport {
   ///
   /// </summary>
   oai::model::common::ProblemDetails getError() const;
-  void setError(oai::model::common::ProblemDetails const& value);
+  void setError(oai::model::common::ProblemDetails const &value);
   bool errorIsSet() const;
   void unsetError();
   /// <summary>
   /// Used to report the PCC rule failure.
   /// </summary>
   std::vector<oai::model::pcf::RuleReport> getRuleReports() const;
-  void setRuleReports(std::vector<oai::model::pcf::RuleReport> const& value);
+  void setRuleReports(std::vector<oai::model::pcf::RuleReport> const &value);
   bool ruleReportsIsSet() const;
   void unsetRuleReports();
   /// <summary>
@@ -80,7 +80,7 @@ class ErrorReport {
   /// </summary>
   std::vector<oai::model::pcf::SessionRuleReport> getSessRuleReports() const;
   void setSessRuleReports(
-      std::vector<oai::model::pcf::SessionRuleReport> const& value);
+      std::vector<oai::model::pcf::SessionRuleReport> const &value);
   bool sessRuleReportsIsSet() const;
   void unsetSessRuleReports();
   /// <summary>
@@ -89,21 +89,21 @@ class ErrorReport {
   std::vector<oai::model::pcf::PolicyDecisionFailureCode>
   getPolDecFailureReports() const;
   void setPolDecFailureReports(
-      std::vector<oai::model::pcf::PolicyDecisionFailureCode> const& value);
+      std::vector<oai::model::pcf::PolicyDecisionFailureCode> const &value);
   bool polDecFailureReportsIsSet() const;
   void unsetPolDecFailureReports();
   /// <summary>
   ///
   /// </summary>
   std::string getAltQosParamId() const;
-  void setAltQosParamId(std::string const& value);
+  void setAltQosParamId(std::string const &value);
   bool altQosParamIdIsSet() const;
   void unsetAltQosParamId();
 
-  friend void to_json(nlohmann::json& j, const ErrorReport& o);
-  friend void from_json(const nlohmann::json& j, ErrorReport& o);
+  friend void to_json(nlohmann::json &j, const ErrorReport &o);
+  friend void from_json(const nlohmann::json &j, ErrorReport &o);
 
- protected:
+protected:
   oai::model::common::ProblemDetails m_Error;
   bool m_ErrorIsSet;
   std::vector<oai::model::pcf::RuleReport> m_RuleReports;
@@ -117,6 +117,6 @@ class ErrorReport {
   bool m_AltQosParamIdIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* ErrorReport_H_ */

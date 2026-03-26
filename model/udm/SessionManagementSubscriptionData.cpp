@@ -19,14 +19,14 @@
 namespace oai::model::udm {
 
 SessionManagementSubscriptionData::SessionManagementSubscriptionData() {
-  m_DnnConfigurationsIsSet         = false;
-  m_InternalGroupIdsIsSet          = false;
-  m_SharedDnnConfigurationsId      = "";
+  m_DnnConfigurationsIsSet = false;
+  m_InternalGroupIdsIsSet = false;
+  m_SharedDnnConfigurationsId = "";
   m_SharedDnnConfigurationsIdIsSet = false;
-  m_OdbPacketServicesIsSet         = false;
-  m_TraceDataIsSet                 = false;
-  m_SharedTraceDataId              = "";
-  m_SharedTraceDataIdIsSet         = false;
+  m_OdbPacketServicesIsSet = false;
+  m_TraceDataIsSet = false;
+  m_SharedTraceDataId = "";
+  m_SharedTraceDataIdIsSet = false;
 }
 
 SessionManagementSubscriptionData::~SessionManagementSubscriptionData() {}
@@ -35,22 +35,24 @@ void SessionManagementSubscriptionData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const SessionManagementSubscriptionData& o) {
-  j                = nlohmann::json();
+void to_json(nlohmann::json &j, const SessionManagementSubscriptionData &o) {
+  j = nlohmann::json();
   j["singleNssai"] = o.m_SingleNssai;
   if (o.dnnConfigurationsIsSet())
     j["dnnConfigurations"] = o.m_DnnConfigurations;
-  if (o.internalGroupIdsIsSet()) j["internalGroupIds"] = o.m_InternalGroupIds;
+  if (o.internalGroupIdsIsSet())
+    j["internalGroupIds"] = o.m_InternalGroupIds;
   if (o.sharedDnnConfigurationsIdIsSet())
     j["sharedDnnConfigurationsId"] = o.m_SharedDnnConfigurationsId;
   if (o.odbPacketServicesIsSet())
     j["odbPacketServices"] = o.m_OdbPacketServices;
-  if (o.traceDataIsSet()) j["traceData"] = o.m_TraceData;
+  if (o.traceDataIsSet())
+    j["traceData"] = o.m_TraceData;
   if (o.sharedTraceDataIdIsSet())
     j["sharedTraceDataId"] = o.m_SharedTraceDataId;
 }
 
-void from_json(const nlohmann::json& j, SessionManagementSubscriptionData& o) {
+void from_json(const nlohmann::json &j, SessionManagementSubscriptionData &o) {
   j.at("singleNssai").get_to(o.m_SingleNssai);
   if (j.find("dnnConfigurations") != j.end()) {
     j.at("dnnConfigurations").get_to(o.m_DnnConfigurations);
@@ -78,15 +80,15 @@ void from_json(const nlohmann::json& j, SessionManagementSubscriptionData& o) {
   }
 }
 
-oai::model::common::Snssai SessionManagementSubscriptionData::getSingleNssai()
-    const {
+oai::model::common::Snssai
+SessionManagementSubscriptionData::getSingleNssai() const {
   return m_SingleNssai;
 }
 void SessionManagementSubscriptionData::setSingleNssai(
-    oai::model::common::Snssai const& value) {
+    oai::model::common::Snssai const &value) {
   m_SingleNssai = value;
 }
-std::map<std::string, DnnConfiguration>&
+std::map<std::string, DnnConfiguration> &
 SessionManagementSubscriptionData::getDnnConfigurations() {
   return m_DnnConfigurations;
 }
@@ -103,13 +105,14 @@ void SessionManagementSubscriptionData::insertDnnConfiguration(
       std::pair<std::string, DnnConfiguration>(str, dnnConfiguration));
 }
 
-DnnConfiguration SessionManagementSubscriptionData::getDnnConfiguration(
-    std::string str) {
-  if (m_DnnConfigurations.count(str) > 0) return m_DnnConfigurations.at(str);
+DnnConfiguration
+SessionManagementSubscriptionData::getDnnConfiguration(std::string str) {
+  if (m_DnnConfigurations.count(str) > 0)
+    return m_DnnConfigurations.at(str);
   return DnnConfiguration();
 }
 
-std::vector<std::string>&
+std::vector<std::string> &
 SessionManagementSubscriptionData::getInternalGroupIds() {
   return m_InternalGroupIds;
 }
@@ -119,13 +122,13 @@ bool SessionManagementSubscriptionData::internalGroupIdsIsSet() const {
 void SessionManagementSubscriptionData::unsetInternalGroupIds() {
   m_InternalGroupIdsIsSet = false;
 }
-std::string SessionManagementSubscriptionData::getSharedDnnConfigurationsId()
-    const {
+std::string
+SessionManagementSubscriptionData::getSharedDnnConfigurationsId() const {
   return m_SharedDnnConfigurationsId;
 }
 void SessionManagementSubscriptionData::setSharedDnnConfigurationsId(
-    std::string const& value) {
-  m_SharedDnnConfigurationsId      = value;
+    std::string const &value) {
+  m_SharedDnnConfigurationsId = value;
   m_SharedDnnConfigurationsIdIsSet = true;
 }
 bool SessionManagementSubscriptionData::sharedDnnConfigurationsIdIsSet() const {
@@ -139,8 +142,8 @@ SessionManagementSubscriptionData::getOdbPacketServices() const {
   return m_OdbPacketServices;
 }
 void SessionManagementSubscriptionData::setOdbPacketServices(
-    oai::model::common::OdbPacketServices const& value) {
-  m_OdbPacketServices      = value;
+    oai::model::common::OdbPacketServices const &value) {
+  m_OdbPacketServices = value;
   m_OdbPacketServicesIsSet = true;
 }
 bool SessionManagementSubscriptionData::odbPacketServicesIsSet() const {
@@ -149,13 +152,13 @@ bool SessionManagementSubscriptionData::odbPacketServicesIsSet() const {
 void SessionManagementSubscriptionData::unsetOdbPacketServices() {
   m_OdbPacketServicesIsSet = false;
 }
-oai::model::common::TraceData SessionManagementSubscriptionData::getTraceData()
-    const {
+oai::model::common::TraceData
+SessionManagementSubscriptionData::getTraceData() const {
   return m_TraceData;
 }
 void SessionManagementSubscriptionData::setTraceData(
-    oai::model::common::TraceData const& value) {
-  m_TraceData      = value;
+    oai::model::common::TraceData const &value) {
+  m_TraceData = value;
   m_TraceDataIsSet = true;
 }
 bool SessionManagementSubscriptionData::traceDataIsSet() const {
@@ -168,8 +171,8 @@ std::string SessionManagementSubscriptionData::getSharedTraceDataId() const {
   return m_SharedTraceDataId;
 }
 void SessionManagementSubscriptionData::setSharedTraceDataId(
-    std::string const& value) {
-  m_SharedTraceDataId      = value;
+    std::string const &value) {
+  m_SharedTraceDataId = value;
   m_SharedTraceDataIdIsSet = true;
 }
 bool SessionManagementSubscriptionData::sharedTraceDataIdIsSet() const {
@@ -179,4 +182,4 @@ void SessionManagementSubscriptionData::unsetSharedTraceDataId() {
   m_SharedTraceDataIdIsSet = false;
 }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

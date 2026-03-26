@@ -32,8 +32,8 @@ asn_TYPE_member_t asn_MBR_Ngap_QosFlowLevelQosParameters_1[] = {
      "qosCharacteristics"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_QosFlowLevelQosParameters, allocationAndRetentionPriority),
+     offsetof(struct Ngap_QosFlowLevelQosParameters,
+              allocationAndRetentionPriority),
      (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_AllocationAndRetentionPriority,
@@ -90,8 +90,8 @@ asn_TYPE_member_t asn_MBR_Ngap_QosFlowLevelQosParameters_1[] = {
      "reflectiveQosAttribute"},
     {ATF_POINTER,
      2,
-     offsetof(
-         struct Ngap_QosFlowLevelQosParameters, additionalQosFlowInformation),
+     offsetof(struct Ngap_QosFlowLevelQosParameters,
+              additionalQosFlowInformation),
      (ASN_TAG_CLASS_CONTEXT | (4 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_AdditionalQosFlowInformation,

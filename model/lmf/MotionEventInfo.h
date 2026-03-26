@@ -28,7 +28,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class MotionEventInfo {
- public:
+public:
   MotionEventInfo();
   virtual ~MotionEventInfo() = default;
 
@@ -42,16 +42,16 @@ class MotionEventInfo {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const MotionEventInfo& rhs) const;
-  bool operator!=(const MotionEventInfo& rhs) const;
+  bool operator==(const MotionEventInfo &rhs) const;
+  bool operator!=(const MotionEventInfo &rhs) const;
 
   /////////////////////////////////////////////
   /// MotionEventInfo members
@@ -65,7 +65,7 @@ class MotionEventInfo {
   ///
   /// </summary>
   oai::model::lmf::OccurrenceInfo getOccurrenceInfo() const;
-  void setOccurrenceInfo(oai::model::lmf::OccurrenceInfo const& value);
+  void setOccurrenceInfo(oai::model::lmf::OccurrenceInfo const &value);
   bool occurrenceInfoIsSet() const;
   void unsetOccurrenceInfo();
   /// <summary>
@@ -104,10 +104,10 @@ class MotionEventInfo {
   bool reportingLocationReqIsSet() const;
   void unsetReportingLocationReq();
 
-  friend void to_json(nlohmann::json& j, const MotionEventInfo& o);
-  friend void from_json(const nlohmann::json& j, MotionEventInfo& o);
+  friend void to_json(nlohmann::json &j, const MotionEventInfo &o);
+  friend void from_json(const nlohmann::json &j, MotionEventInfo &o);
 
- protected:
+protected:
   int32_t m_LinearDistance;
 
   oai::model::lmf::OccurrenceInfo m_OccurrenceInfo;
@@ -124,6 +124,6 @@ class MotionEventInfo {
   bool m_ReportingLocationReqIsSet;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* MotionEventInfo_H_ */

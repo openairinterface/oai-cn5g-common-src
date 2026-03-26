@@ -21,7 +21,7 @@ extern "C" {
 /* Dependencies */
 typedef enum Ngap_ExpectedUEMobility {
   Ngap_ExpectedUEMobility_stationary = 0,
-  Ngap_ExpectedUEMobility_mobile     = 1
+  Ngap_ExpectedUEMobility_mobile = 1
   /*
    * Enumeration is extensible
    */

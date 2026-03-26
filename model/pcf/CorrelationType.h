@@ -27,7 +27,7 @@ namespace oai::model::pcf {
 /// Indicates that a common DNAI or common EAS should be selected.
 /// </summary>
 class CorrelationType {
- public:
+public:
   CorrelationType();
   virtual ~CorrelationType() = default;
 
@@ -41,26 +41,26 @@ class CorrelationType {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const CorrelationType& rhs) const;
-  bool operator!=(const CorrelationType& rhs) const;
+  bool operator==(const CorrelationType &rhs) const;
+  bool operator!=(const CorrelationType &rhs) const;
 
   /////////////////////////////////////////////
   /// CorrelationType members
 
-  friend void to_json(nlohmann::json& j, const CorrelationType& o);
-  friend void from_json(const nlohmann::json& j, CorrelationType& o);
+  friend void to_json(nlohmann::json &j, const CorrelationType &o);
+  friend void from_json(const nlohmann::json &j, CorrelationType &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* CorrelationType_H_ */

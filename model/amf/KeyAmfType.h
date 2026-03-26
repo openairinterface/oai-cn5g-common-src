@@ -27,7 +27,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class KeyAmfType {
- public:
+public:
   KeyAmfType();
   virtual ~KeyAmfType();
 
@@ -36,12 +36,12 @@ class KeyAmfType {
   /////////////////////////////////////////////
   /// KeyAmfType members
 
-  friend void to_json(nlohmann::json& j, const KeyAmfType& o);
-  friend void from_json(const nlohmann::json& j, KeyAmfType& o);
+  friend void to_json(nlohmann::json &j, const KeyAmfType &o);
+  friend void from_json(const nlohmann::json &j, KeyAmfType &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* KeyAmfType_H_ */

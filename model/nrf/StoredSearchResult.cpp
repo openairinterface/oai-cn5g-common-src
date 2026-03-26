@@ -23,20 +23,20 @@ void StoredSearchResult::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const StoredSearchResult& o) {
-  j                = nlohmann::json();
+void to_json(nlohmann::json &j, const StoredSearchResult &o) {
+  j = nlohmann::json();
   j["nfInstances"] = o.m_NfInstances;
 }
 
-void from_json(const nlohmann::json& j, StoredSearchResult& o) {
+void from_json(const nlohmann::json &j, StoredSearchResult &o) {
   j.at("nfInstances").get_to(o.m_NfInstances);
 }
 
-std::vector<NFProfile>& StoredSearchResult::getNfInstances() {
+std::vector<NFProfile> &StoredSearchResult::getNfInstances() {
   return m_NfInstances;
 }
-void StoredSearchResult::setNfInstances(std::vector<NFProfile> const& value) {
+void StoredSearchResult::setNfInstances(std::vector<NFProfile> const &value) {
   m_NfInstances = value;
 }
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

@@ -12,8 +12,8 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_DRB-ID.h"
 #include "Ngap_DAPSResponseInfo.h"
+#include "Ngap_DRB-ID.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -27,7 +27,7 @@ struct Ngap_ProtocolExtensionContainer;
 typedef struct Ngap_DAPSResponseInfoItem {
   Ngap_DRB_ID_t dRB_ID;
   Ngap_DAPSResponseInfo_t dAPSResponseInfo;
-  struct Ngap_ProtocolExtensionContainer* iE_Extension; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extension; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

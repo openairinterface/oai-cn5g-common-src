@@ -19,9 +19,9 @@
 #ifndef SearchComparison_H_
 #define SearchComparison_H_
 
-#include <string>
 #include "ComparisonOperator.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::udsf {
 
@@ -29,7 +29,7 @@ namespace oai::model::udsf {
 /// A comparison to apply on tag/values pairs.
 /// </summary>
 class SearchComparison {
- public:
+public:
   SearchComparison();
   virtual ~SearchComparison() = default;
 
@@ -43,16 +43,16 @@ class SearchComparison {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const SearchComparison& rhs) const;
-  bool operator!=(const SearchComparison& rhs) const;
+  bool operator==(const SearchComparison &rhs) const;
+  bool operator!=(const SearchComparison &rhs) const;
 
   /////////////////////////////////////////////
   /// SearchComparison members
@@ -61,22 +61,22 @@ class SearchComparison {
   ///
   /// </summary>
   oai::model::udsf::ComparisonOperator getOp() const;
-  void setOp(oai::model::udsf::ComparisonOperator const& value);
+  void setOp(oai::model::udsf::ComparisonOperator const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getTag() const;
-  void setTag(std::string const& value);
+  void setTag(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getValue() const;
-  void setValue(std::string const& value);
+  void setValue(std::string const &value);
 
-  friend void to_json(nlohmann::json& j, const SearchComparison& o);
-  friend void from_json(const nlohmann::json& j, SearchComparison& o);
+  friend void to_json(nlohmann::json &j, const SearchComparison &o);
+  friend void from_json(const nlohmann::json &j, SearchComparison &o);
 
- protected:
+protected:
   oai::model::udsf::ComparisonOperator m_Op;
 
   std::string m_Tag;
@@ -84,6 +84,6 @@ class SearchComparison {
   std::string m_Value;
 };
 
-}  // namespace oai::model::udsf
+} // namespace oai::model::udsf
 
 #endif /* SearchComparison_H_ */

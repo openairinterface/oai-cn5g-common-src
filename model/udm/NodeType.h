@@ -30,7 +30,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class NodeType {
- public:
+public:
   NodeType();
   virtual ~NodeType();
 
@@ -39,12 +39,12 @@ class NodeType {
   /////////////////////////////////////////////
   /// NodeType members
 
-  friend void to_json(nlohmann::json& j, const NodeType& o);
-  friend void from_json(const nlohmann::json& j, NodeType& o);
+  friend void to_json(nlohmann::json &j, const NodeType &o);
+  friend void from_json(const nlohmann::json &j, NodeType &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* NodeType_H_ */

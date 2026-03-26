@@ -15,21 +15,21 @@ UserLocationInformationEutra::UserLocationInformationEutra() {}
 UserLocationInformationEutra::~UserLocationInformationEutra() {}
 
 //------------------------------------------------------------------------------
-void UserLocationInformationEutra::set(
-    const EutraCgi& eutraCgi, const Tai& tai) {
+void UserLocationInformationEutra::set(const EutraCgi &eutraCgi,
+                                       const Tai &tai) {
   m_EutraCgi = eutraCgi;
-  m_Tai      = tai;
+  m_Tai = tai;
 }
 
 //------------------------------------------------------------------------------
-void UserLocationInformationEutra::get(EutraCgi& eutraCgi, Tai& tai) const {
+void UserLocationInformationEutra::get(EutraCgi &eutraCgi, Tai &tai) const {
   eutraCgi = m_EutraCgi;
-  tai      = m_Tai;
+  tai = m_Tai;
 }
 
 //------------------------------------------------------------------------------
 bool UserLocationInformationEutra::encode(
-    Ngap_UserLocationInformationEUTRA_t& userLocationInformation) const {
+    Ngap_UserLocationInformationEUTRA_t &userLocationInformation) const {
   if (!m_EutraCgi.encode(userLocationInformation.eUTRA_CGI)) {
     oai::logger::logger_common::ngap().warn("Encode eUTRA_CGI IE error");
     return false;
@@ -43,7 +43,7 @@ bool UserLocationInformationEutra::encode(
 
 //------------------------------------------------------------------------------
 bool UserLocationInformationEutra::decode(
-    const Ngap_UserLocationInformationEUTRA_t& userLocationInformation) {
+    const Ngap_UserLocationInformationEUTRA_t &userLocationInformation) {
   if (!m_EutraCgi.decode(userLocationInformation.eUTRA_CGI)) {
     oai::logger::logger_common::ngap().warn("Decode eUTRA_CGI IE error");
     return false;
@@ -55,4 +55,4 @@ bool UserLocationInformationEutra::decode(
   }
   return true;
 }
-}  // namespace oai::ngap
+} // namespace oai::ngap

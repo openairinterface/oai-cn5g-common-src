@@ -21,10 +21,10 @@
 
 #include "Av5gAka.h"
 #include "LinksValueSchema.h"
-#include <string>
 #include <map>
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::amf {
 
@@ -32,7 +32,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class UEAuthenticationCtx {
- public:
+public:
   UEAuthenticationCtx();
   virtual ~UEAuthenticationCtx();
 
@@ -45,30 +45,30 @@ class UEAuthenticationCtx {
   ///
   /// </summary>
   std::string getAuthType() const;
-  void setAuthType(std::string const& value);
+  void setAuthType(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   Av5gAka getR5gAuthData() const;
-  void setR5gAuthData(Av5gAka const& value);
+  void setR5gAuthData(Av5gAka const &value);
   /// <summary>
   ///
   /// </summary>
-  std::map<std::string, oai::model::common::LinksValueSchema>& getLinks();
+  std::map<std::string, oai::model::common::LinksValueSchema> &getLinks();
   void setLinks(
-      std::map<std::string, oai::model::common::LinksValueSchema> const& value);
+      std::map<std::string, oai::model::common::LinksValueSchema> const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getServingNetworkName() const;
-  void setServingNetworkName(std::string const& value);
+  void setServingNetworkName(std::string const &value);
   bool servingNetworkNameIsSet() const;
   void unsetServingNetworkName();
 
-  friend void to_json(nlohmann::json& j, const UEAuthenticationCtx& o);
-  friend void from_json(const nlohmann::json& j, UEAuthenticationCtx& o);
+  friend void to_json(nlohmann::json &j, const UEAuthenticationCtx &o);
+  friend void from_json(const nlohmann::json &j, UEAuthenticationCtx &o);
 
- protected:
+protected:
   std::string m_AuthType;
 
   Av5gAka m_r_5gAuthData;
@@ -79,6 +79,6 @@ class UEAuthenticationCtx {
   bool m_ServingNetworkNameIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* UEAuthenticationCtx_H_ */

@@ -20,8 +20,8 @@ namespace oai::model::common {
 
 AccessTypeRm::AccessTypeRm() {}
 
-bool AccessTypeRm::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool AccessTypeRm::validate(std::stringstream &msg,
+                            const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AccessTypeRm" : pathPrefix;
@@ -34,26 +34,26 @@ bool AccessTypeRm::validate(
   return success;
 }
 
-void to_json(nlohmann::json& j, const AccessTypeRm& o) {
+void to_json(nlohmann::json &j, const AccessTypeRm &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case AccessType::eAccessType::INVALID_VALUE_OPENAPI_GENERATED:
-      j = nullptr;
-      break;
-    case AccessType::eAccessType::_3GPP_ACCESS:
-      j = "3GPP_ACCESS";
-      break;
-    case AccessType::eAccessType::NON_3GPP_ACCESS:
-      j = "NON_3GPP_ACCESS";
-      break;
-    case AccessType::eAccessType::NULL_VALUE:
-      j = nullptr;
-      break;
+  case AccessType::eAccessType::INVALID_VALUE_OPENAPI_GENERATED:
+    j = nullptr;
+    break;
+  case AccessType::eAccessType::_3GPP_ACCESS:
+    j = "3GPP_ACCESS";
+    break;
+  case AccessType::eAccessType::NON_3GPP_ACCESS:
+    j = "NON_3GPP_ACCESS";
+    break;
+  case AccessType::eAccessType::NULL_VALUE:
+    j = nullptr;
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, AccessTypeRm& o) {
+void from_json(const nlohmann::json &j, AccessTypeRm &o) {
   if (!j) {
     o.setValue(AccessType::eAccessType::NULL_VALUE);
     return;
@@ -75,4 +75,4 @@ void from_json(const nlohmann::json& j, AccessTypeRm& o) {
   }
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

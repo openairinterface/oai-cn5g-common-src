@@ -8,7 +8,7 @@ namespace oai::ngap {
 
 //------------------------------------------------------------------------------
 PacketErrorRate::PacketErrorRate() {
-  m_Scalar   = 0;
+  m_Scalar = 0;
   m_Exponent = 0;
 }
 
@@ -16,32 +16,32 @@ PacketErrorRate::PacketErrorRate() {
 PacketErrorRate::~PacketErrorRate() {}
 
 //------------------------------------------------------------------------------
-void PacketErrorRate::set(const long& scalar, const long& exponent) {
-  m_Scalar   = scalar;
+void PacketErrorRate::set(const long &scalar, const long &exponent) {
+  m_Scalar = scalar;
   m_Exponent = exponent;
 }
 
 //------------------------------------------------------------------------------
-bool PacketErrorRate::get(long& scalar, long& exponent) const {
-  scalar   = m_Scalar;
+bool PacketErrorRate::get(long &scalar, long &exponent) const {
+  scalar = m_Scalar;
   exponent = m_Exponent;
 
   return true;
 }
 
 //------------------------------------------------------------------------------
-bool PacketErrorRate::encode(Ngap_PacketErrorRate_t& per) const {
-  per.pERScalar   = m_Scalar;
+bool PacketErrorRate::encode(Ngap_PacketErrorRate_t &per) const {
+  per.pERScalar = m_Scalar;
   per.pERExponent = m_Exponent;
 
   return true;
 }
 
 //------------------------------------------------------------------------------
-bool PacketErrorRate::decode(const Ngap_PacketErrorRate_t& per) {
-  m_Scalar   = per.pERScalar;
+bool PacketErrorRate::decode(const Ngap_PacketErrorRate_t &per) {
+  m_Scalar = per.pERScalar;
   m_Exponent = per.pERExponent;
 
   return true;
 }
-}  // namespace oai::ngap
+} // namespace oai::ngap

@@ -29,7 +29,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class N2SmInformation {
- public:
+public:
   N2SmInformation();
   virtual ~N2SmInformation() = default;
 
@@ -43,16 +43,16 @@ class N2SmInformation {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const N2SmInformation& rhs) const;
-  bool operator!=(const N2SmInformation& rhs) const;
+  bool operator==(const N2SmInformation &rhs) const;
+  bool operator!=(const N2SmInformation &rhs) const;
 
   /////////////////////////////////////////////
   /// N2SmInformation members
@@ -66,28 +66,28 @@ class N2SmInformation {
   ///
   /// </summary>
   oai::model::amf::N2InfoContent getN2InfoContent() const;
-  void setN2InfoContent(oai::model::amf::N2InfoContent const& value);
+  void setN2InfoContent(oai::model::amf::N2InfoContent const &value);
   bool n2InfoContentIsSet() const;
   void unsetN2InfoContent();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Snssai getSNssai() const;
-  void setSNssai(oai::model::common::Snssai const& value);
+  void setSNssai(oai::model::common::Snssai const &value);
   bool sNssaiIsSet() const;
   void unsetSNssai();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Snssai getHomePlmnSnssai() const;
-  void setHomePlmnSnssai(oai::model::common::Snssai const& value);
+  void setHomePlmnSnssai(oai::model::common::Snssai const &value);
   bool homePlmnSnssaiIsSet() const;
   void unsetHomePlmnSnssai();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Snssai getIwkSnssai() const;
-  void setIwkSnssai(oai::model::common::Snssai const& value);
+  void setIwkSnssai(oai::model::common::Snssai const &value);
   bool iwkSnssaiIsSet() const;
   void unsetIwkSnssai();
   /// <summary>
@@ -98,10 +98,10 @@ class N2SmInformation {
   bool subjectToHoIsSet() const;
   void unsetSubjectToHo();
 
-  friend void to_json(nlohmann::json& j, const N2SmInformation& o);
-  friend void from_json(const nlohmann::json& j, N2SmInformation& o);
+  friend void to_json(nlohmann::json &j, const N2SmInformation &o);
+  friend void from_json(const nlohmann::json &j, N2SmInformation &o);
 
- protected:
+protected:
   int32_t m_PduSessionId;
 
   oai::model::amf::N2InfoContent m_N2InfoContent;
@@ -116,6 +116,6 @@ class N2SmInformation {
   bool m_SubjectToHoIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* N2SmInformation_H_ */

@@ -27,12 +27,12 @@ void Ipv6Addr::validate() const {
   }
 }
 
-bool Ipv6Addr::validate(std::stringstream& msg) const {
+bool Ipv6Addr::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool Ipv6Addr::validate(
-    std::stringstream& /* msg */, const std::string& /* pathPrefix */) const {
+bool Ipv6Addr::validate(std::stringstream & /* msg */,
+                        const std::string & /* pathPrefix */) const {
   bool success = true;
   /*
   const std::string _pathPrefix = pathPrefix.empty() ? "Ipv6Addr" : pathPrefix;
@@ -40,28 +40,20 @@ bool Ipv6Addr::validate(
   return success;
 }
 
-bool Ipv6Addr::operator==(const Ipv6Addr& rhs) const {
+bool Ipv6Addr::operator==(const Ipv6Addr &rhs) const {
   return getIpv6Addr() == rhs.getIpv6Addr();
 }
 
-bool Ipv6Addr::operator!=(const Ipv6Addr& rhs) const {
-  return !(*this == rhs);
-}
+bool Ipv6Addr::operator!=(const Ipv6Addr &rhs) const { return !(*this == rhs); }
 
-void to_json(nlohmann::json& j, const Ipv6Addr& o) {
+void to_json(nlohmann::json &j, const Ipv6Addr &o) {
   j = nlohmann::json();
   j = o.getIpv6Addr();
 }
 
-void from_json(const nlohmann::json& j, Ipv6Addr& o) {
-  o.setIpv6Addr(j);
-}
+void from_json(const nlohmann::json &j, Ipv6Addr &o) { o.setIpv6Addr(j); }
 
-std::string Ipv6Addr::getIpv6Addr() const {
-  return m_Ipv6Addr;
-}
-void Ipv6Addr::setIpv6Addr(std::string const& value) {
-  m_Ipv6Addr = value;
-}
+std::string Ipv6Addr::getIpv6Addr() const { return m_Ipv6Addr; }
+void Ipv6Addr::setIpv6Addr(std::string const &value) { m_Ipv6Addr = value; }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

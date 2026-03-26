@@ -28,36 +28,33 @@ EpsBearerContextStatus::EpsBearerContextStatus(uint16_t value) {
 EpsBearerContextStatus::~EpsBearerContextStatus() {}
 
 //------------------------------------------------------------------------------
-void EpsBearerContextStatus::SetValue(uint16_t value) {
-  value_ = value;
-}
+void EpsBearerContextStatus::SetValue(uint16_t value) { value_ = value; }
 
 //------------------------------------------------------------------------------
-uint16_t EpsBearerContextStatus::GetValue() const {
-  return value_;
-}
+uint16_t EpsBearerContextStatus::GetValue() const { return value_; }
 
 //------------------------------------------------------------------------------
-int EpsBearerContextStatus::Encode(uint8_t* buf, int len) const {
+int EpsBearerContextStatus::Encode(uint8_t *buf, int len) const {
   oai::logger::logger_common::nas().debug("Encoding %s", GetIeName().c_str());
 
   int encoded_size = 0;
   // Validate the buffer's length and Encode IEI/Length
   int encoded_header_size = Type4NasIe::Encode(buf + encoded_size, len);
-  if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
+  if (encoded_header_size == KEncodeDecodeError)
+    return KEncodeDecodeError;
   encoded_size += encoded_header_size;
 
   // Value
   ENCODE_U16(buf + encoded_size, value_, encoded_size);
 
-  oai::logger::logger_common::nas().debug(
-      "Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
+  oai::logger::logger_common::nas().debug("Encoded %s, len (%d)",
+                                          GetIeName().c_str(), encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
-int EpsBearerContextStatus::Decode(
-    const uint8_t* const buf, int len, bool is_iei) {
+int EpsBearerContextStatus::Decode(const uint8_t *const buf, int len,
+                                   bool is_iei) {
   if (len < kEpsBearerContextStatusLength) {
     oai::logger::logger_common::nas().error(
         "Buffer length is less than the minimum length of this IE (%d "
@@ -67,20 +64,21 @@ int EpsBearerContextStatus::Decode(
   }
 
   uint8_t decoded_size = 0;
-  uint8_t octet        = 0;
+  uint8_t octet = 0;
   oai::logger::logger_common::nas().debug("Decoding %s", GetIeName().c_str());
 
   // IEI and Length
   int decoded_header_size = Type4NasIe::Decode(buf + decoded_size, len, is_iei);
-  if (decoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
+  if (decoded_header_size == KEncodeDecodeError)
+    return KEncodeDecodeError;
   decoded_size += decoded_header_size;
 
   // Value
-  DECODE_U16(buf + decoded_size, value_, decoded_size);  // for IE
+  DECODE_U16(buf + decoded_size, value_, decoded_size); // for IE
 
   oai::logger::logger_common::nas().debug(
       "EPS_Bearer_Context_Status, value 0x%0x", value_);
-  oai::logger::logger_common::nas().debug(
-      "Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
+  oai::logger::logger_common::nas().debug("Decoded %s, len (%d)",
+                                          GetIeName().c_str(), decoded_size);
   return decoded_size;
 }

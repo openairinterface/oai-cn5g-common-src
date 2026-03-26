@@ -20,8 +20,8 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_IntegrityProtectionIndication {
-  Ngap_IntegrityProtectionIndication_required   = 0,
-  Ngap_IntegrityProtectionIndication_preferred  = 1,
+  Ngap_IntegrityProtectionIndication_required = 0,
+  Ngap_IntegrityProtectionIndication_preferred = 1,
   Ngap_IntegrityProtectionIndication_not_needed = 2
   /*
    * Enumeration is extensible

@@ -19,8 +19,8 @@
 namespace oai::model::common {
 
 SubscribedDefaultQos::SubscribedDefaultQos() {
-  m_r_5qi              = 0;
-  m_PriorityLevel      = 0;
+  m_r_5qi = 0;
+  m_PriorityLevel = 0;
   m_PriorityLevelIsSet = false;
 }
 
@@ -31,18 +31,18 @@ void SubscribedDefaultQos::validate() const {
   }
 }
 
-bool SubscribedDefaultQos::validate(std::stringstream& msg) const {
+bool SubscribedDefaultQos::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool SubscribedDefaultQos::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool SubscribedDefaultQos::validate(std::stringstream &msg,
+                                    const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "SubscribedDefaultQos" : pathPrefix;
 
   /* r_5qi */ {
-    const int32_t& value               = m_r_5qi;
+    const int32_t &value = m_r_5qi;
     const std::string currentValuePath = _pathPrefix + ".r5qi";
 
     if (value < 0) {
@@ -56,7 +56,7 @@ bool SubscribedDefaultQos::validate(
   }
 
   if (priorityLevelIsSet()) {
-    const int32_t& value               = m_PriorityLevel;
+    const int32_t &value = m_PriorityLevel;
     const std::string currentValuePath = _pathPrefix + ".priorityLevel";
 
     if (value < 1) {
@@ -72,7 +72,7 @@ bool SubscribedDefaultQos::validate(
   return success;
 }
 
-bool SubscribedDefaultQos::operator==(const SubscribedDefaultQos& rhs) const {
+bool SubscribedDefaultQos::operator==(const SubscribedDefaultQos &rhs) const {
   return
 
       (getR5qi() == rhs.getR5qi()) &&
@@ -86,18 +86,19 @@ bool SubscribedDefaultQos::operator==(const SubscribedDefaultQos& rhs) const {
           ;
 }
 
-bool SubscribedDefaultQos::operator!=(const SubscribedDefaultQos& rhs) const {
+bool SubscribedDefaultQos::operator!=(const SubscribedDefaultQos &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const SubscribedDefaultQos& o) {
-  j        = nlohmann::json();
+void to_json(nlohmann::json &j, const SubscribedDefaultQos &o) {
+  j = nlohmann::json();
   j["5qi"] = o.m_r_5qi;
   j["arp"] = o.m_Arp;
-  if (o.priorityLevelIsSet()) j["priorityLevel"] = o.m_PriorityLevel;
+  if (o.priorityLevelIsSet())
+    j["priorityLevel"] = o.m_PriorityLevel;
 }
 
-void from_json(const nlohmann::json& j, SubscribedDefaultQos& o) {
+void from_json(const nlohmann::json &j, SubscribedDefaultQos &o) {
   j.at("5qi").get_to(o.m_r_5qi);
   j.at("arp").get_to(o.m_Arp);
   if (j.find("priorityLevel") != j.end()) {
@@ -106,23 +107,17 @@ void from_json(const nlohmann::json& j, SubscribedDefaultQos& o) {
   }
 }
 
-int32_t SubscribedDefaultQos::getR5qi() const {
-  return m_r_5qi;
-}
-void SubscribedDefaultQos::setR5qi(int32_t const value) {
-  m_r_5qi = value;
-}
-oai::model::common::Arp SubscribedDefaultQos::getArp() const {
-  return m_Arp;
-}
-void SubscribedDefaultQos::setArp(oai::model::common::Arp const& value) {
+int32_t SubscribedDefaultQos::getR5qi() const { return m_r_5qi; }
+void SubscribedDefaultQos::setR5qi(int32_t const value) { m_r_5qi = value; }
+oai::model::common::Arp SubscribedDefaultQos::getArp() const { return m_Arp; }
+void SubscribedDefaultQos::setArp(oai::model::common::Arp const &value) {
   m_Arp = value;
 }
 int32_t SubscribedDefaultQos::getPriorityLevel() const {
   return m_PriorityLevel;
 }
 void SubscribedDefaultQos::setPriorityLevel(int32_t const value) {
-  m_PriorityLevel      = value;
+  m_PriorityLevel = value;
   m_PriorityLevelIsSet = true;
 }
 bool SubscribedDefaultQos::priorityLevelIsSet() const {
@@ -132,4 +127,4 @@ void SubscribedDefaultQos::unsetPriorityLevel() {
   m_PriorityLevelIsSet = false;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

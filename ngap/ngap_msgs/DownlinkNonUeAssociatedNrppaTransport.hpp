@@ -14,27 +14,27 @@ extern "C" {
 namespace oai::ngap {
 
 class DownlinkNonUeAssociatedNrppaTransportMsg : public NgapMessage {
- public:
+public:
   DownlinkNonUeAssociatedNrppaTransportMsg();
   virtual ~DownlinkNonUeAssociatedNrppaTransportMsg();
 
   void initialize();
 
-  bool decode(Ngap_NGAP_PDU_t* ngapMsgPdu) override;
+  bool decode(Ngap_NGAP_PDU_t *ngapMsgPdu) override;
 
-  void setRoutingId(const bstring& pdu);
-  void getRoutingId(bstring& pdu) const;
+  void setRoutingId(const bstring &pdu);
+  void getRoutingId(bstring &pdu) const;
 
-  void setNrppaPdu(const bstring& pdu);
-  void getNrppaPdu(bstring& pdu) const;
+  void setNrppaPdu(const bstring &pdu);
+  void getNrppaPdu(bstring &pdu) const;
 
- private:
-  Ngap_DownlinkNonUEAssociatedNRPPaTransport_t*
-      m_DownlinkNonUeAssociatedNrppaTransportIes;
+private:
+  Ngap_DownlinkNonUEAssociatedNRPPaTransport_t
+      *m_DownlinkNonUeAssociatedNrppaTransportIes;
 
-  bstring m_RoutingId;  // Mandatory
-  bstring m_NrppaPdu;   // Mandatory
+  bstring m_RoutingId; // Mandatory
+  bstring m_NrppaPdu;  // Mandatory
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

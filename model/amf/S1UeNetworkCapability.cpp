@@ -25,12 +25,12 @@ void S1UeNetworkCapability::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const S1UeNetworkCapability& o) {
+void to_json(nlohmann::json &j, const S1UeNetworkCapability &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, S1UeNetworkCapability& o) {}
+void from_json(const nlohmann::json &j, S1UeNetworkCapability &o) {}
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+} // namespace model
+} // namespace udm
+} // namespace oai

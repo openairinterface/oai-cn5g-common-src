@@ -33,8 +33,8 @@ struct Ngap_ProtocolIE_SingleContainer;
 typedef struct Ngap_UPTransportLayerInformation {
   Ngap_UPTransportLayerInformation_PR present;
   union Ngap_UPTransportLayerInformation_u {
-    struct Ngap_GTPTunnel* gTPTunnel;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_GTPTunnel *gTPTunnel;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

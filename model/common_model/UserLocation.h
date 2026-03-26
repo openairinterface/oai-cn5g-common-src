@@ -21,9 +21,9 @@
 
 #include "EutraLocation.h"
 #include "GeraLocation.h"
+#include "N3gaLocation.h"
 #include "NrLocation.h"
 #include "UtraLocation.h"
-#include "N3gaLocation.h"
 #include <nlohmann/json.hpp>
 
 namespace oai::model::common {
@@ -32,7 +32,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class UserLocation {
- public:
+public:
   UserLocation();
   virtual ~UserLocation() = default;
 
@@ -46,16 +46,16 @@ class UserLocation {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const UserLocation& rhs) const;
-  bool operator!=(const UserLocation& rhs) const;
+  bool operator==(const UserLocation &rhs) const;
+  bool operator!=(const UserLocation &rhs) const;
 
   /////////////////////////////////////////////
   /// UserLocation members
@@ -64,42 +64,42 @@ class UserLocation {
   ///
   /// </summary>
   oai::model::common::EutraLocation getEutraLocation() const;
-  void setEutraLocation(oai::model::common::EutraLocation const& value);
+  void setEutraLocation(oai::model::common::EutraLocation const &value);
   bool eutraLocationIsSet() const;
   void unsetEutraLocation();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::NrLocation getNrLocation() const;
-  void setNrLocation(oai::model::common::NrLocation const& value);
+  void setNrLocation(oai::model::common::NrLocation const &value);
   bool nrLocationIsSet() const;
   void unsetNrLocation();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::N3gaLocation getN3gaLocation() const;
-  void setN3gaLocation(oai::model::common::N3gaLocation const& value);
+  void setN3gaLocation(oai::model::common::N3gaLocation const &value);
   bool n3gaLocationIsSet() const;
   void unsetN3gaLocation();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::UtraLocation getUtraLocation() const;
-  void setUtraLocation(oai::model::common::UtraLocation const& value);
+  void setUtraLocation(oai::model::common::UtraLocation const &value);
   bool utraLocationIsSet() const;
   void unsetUtraLocation();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::GeraLocation getGeraLocation() const;
-  void setGeraLocation(oai::model::common::GeraLocation const& value);
+  void setGeraLocation(oai::model::common::GeraLocation const &value);
   bool geraLocationIsSet() const;
   void unsetGeraLocation();
 
-  friend void to_json(nlohmann::json& j, const UserLocation& o);
-  friend void from_json(const nlohmann::json& j, UserLocation& o);
+  friend void to_json(nlohmann::json &j, const UserLocation &o);
+  friend void from_json(const nlohmann::json &j, UserLocation &o);
 
- protected:
+protected:
   oai::model::common::EutraLocation m_EutraLocation;
   bool m_EutraLocationIsSet;
   oai::model::common::NrLocation m_NrLocation;
@@ -112,6 +112,6 @@ class UserLocation {
   bool m_GeraLocationIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* UserLocation_H_ */

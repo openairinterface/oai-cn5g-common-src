@@ -13,8 +13,8 @@
 
 #include "OdbPacketServices_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::common {
 
@@ -27,12 +27,12 @@ void OdbPacketServices_anyOf::validate() const {
   }
 }
 
-bool OdbPacketServices_anyOf::validate(std::stringstream& msg) const {
+bool OdbPacketServices_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool OdbPacketServices_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool OdbPacketServices_anyOf::validate(std::stringstream &msg,
+                                       const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "OdbPacketServices_anyOf" : pathPrefix;
@@ -47,41 +47,41 @@ bool OdbPacketServices_anyOf::validate(
 }
 
 bool OdbPacketServices_anyOf::operator==(
-    const OdbPacketServices_anyOf& rhs) const {
+    const OdbPacketServices_anyOf &rhs) const {
   return getValue() == rhs.getValue();
 }
 
 bool OdbPacketServices_anyOf::operator!=(
-    const OdbPacketServices_anyOf& rhs) const {
+    const OdbPacketServices_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const OdbPacketServices_anyOf& o) {
+void to_json(nlohmann::json &j, const OdbPacketServices_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case OdbPacketServices_anyOf::eOdbPacketServices_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case OdbPacketServices_anyOf::eOdbPacketServices_anyOf::ALL_PACKET_SERVICES:
-      j = "ALL_PACKET_SERVICES";
-      break;
-    case OdbPacketServices_anyOf::eOdbPacketServices_anyOf::
-        ROAMER_ACCESS_HPLMN_AP:
-      j = "ROAMER_ACCESS_HPLMN_AP";
-      break;
-    case OdbPacketServices_anyOf::eOdbPacketServices_anyOf::
-        ROAMER_ACCESS_VPLMN_AP:
-      j = "ROAMER_ACCESS_VPLMN_AP";
-      break;
-    case OdbPacketServices_anyOf::eOdbPacketServices_anyOf::NULL_VALUE:
-      j = nullptr;
-      break;
+  case OdbPacketServices_anyOf::eOdbPacketServices_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case OdbPacketServices_anyOf::eOdbPacketServices_anyOf::ALL_PACKET_SERVICES:
+    j = "ALL_PACKET_SERVICES";
+    break;
+  case OdbPacketServices_anyOf::eOdbPacketServices_anyOf::
+      ROAMER_ACCESS_HPLMN_AP:
+    j = "ROAMER_ACCESS_HPLMN_AP";
+    break;
+  case OdbPacketServices_anyOf::eOdbPacketServices_anyOf::
+      ROAMER_ACCESS_VPLMN_AP:
+    j = "ROAMER_ACCESS_VPLMN_AP";
+    break;
+  case OdbPacketServices_anyOf::eOdbPacketServices_anyOf::NULL_VALUE:
+    j = nullptr;
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, OdbPacketServices_anyOf& o) {
+void from_json(const nlohmann::json &j, OdbPacketServices_anyOf &o) {
   if (j.is_null()) {
     o.setValue(OdbPacketServices_anyOf::eOdbPacketServices_anyOf::NULL_VALUE);
     return;
@@ -120,4 +120,4 @@ void OdbPacketServices_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

@@ -12,21 +12,21 @@ extern "C" {
 namespace oai::ngap {
 
 class RanUeNgapId {
- public:
+public:
   RanUeNgapId();
   RanUeNgapId(uint32_t);
   virtual ~RanUeNgapId();
 
-  void set(const uint32_t&);
+  void set(const uint32_t &);
   uint32_t get() const;
 
-  bool encode(Ngap_RAN_UE_NGAP_ID_t&) const;
-  bool decode(const Ngap_RAN_UE_NGAP_ID_t&);
+  bool encode(Ngap_RAN_UE_NGAP_ID_t &) const;
+  bool decode(const Ngap_RAN_UE_NGAP_ID_t &);
 
- private:
+private:
   uint32_t m_Id;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

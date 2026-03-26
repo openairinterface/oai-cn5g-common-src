@@ -19,17 +19,17 @@
 namespace oai::model::pcf {
 
 PduSessionTsnBridge::PduSessionTsnBridge() {
-  m_TsnBridgeManContIsSet    = false;
-  m_TsnPortManContDsttIsSet  = false;
+  m_TsnBridgeManContIsSet = false;
+  m_TsnPortManContDsttIsSet = false;
   m_TsnPortManContNwttsIsSet = false;
-  m_UeIpv4Addr               = "";
-  m_UeIpv4AddrIsSet          = false;
-  m_Dnn                      = "";
-  m_DnnIsSet                 = false;
-  m_SnssaiIsSet              = false;
-  m_IpDomain                 = "";
-  m_IpDomainIsSet            = false;
-  m_UeIpv6AddrPrefixIsSet    = false;
+  m_UeIpv4Addr = "";
+  m_UeIpv4AddrIsSet = false;
+  m_Dnn = "";
+  m_DnnIsSet = false;
+  m_SnssaiIsSet = false;
+  m_IpDomain = "";
+  m_IpDomainIsSet = false;
+  m_UeIpv6AddrPrefixIsSet = false;
 }
 
 void PduSessionTsnBridge::validate() const {
@@ -39,12 +39,12 @@ void PduSessionTsnBridge::validate() const {
   }
 }
 
-bool PduSessionTsnBridge::validate(std::stringstream& msg) const {
+bool PduSessionTsnBridge::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool PduSessionTsnBridge::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool PduSessionTsnBridge::validate(std::stringstream &msg,
+                                   const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PduSessionTsnBridge" : pathPrefix;
@@ -54,7 +54,7 @@ bool PduSessionTsnBridge::validate(
     success = false;
   }
   if (tsnPortManContNwttsIsSet()) {
-    const std::vector<oai::model::pcf::PortManagementContainer>& value =
+    const std::vector<oai::model::pcf::PortManagementContainer> &value =
         m_TsnPortManContNwtts;
     const std::string currentValuePath = _pathPrefix + ".tsnPortManContNwtts";
 
@@ -62,10 +62,10 @@ bool PduSessionTsnBridge::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::PortManagementContainer& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::PortManagementContainer &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -79,14 +79,14 @@ bool PduSessionTsnBridge::validate(
   }
 
   if (ueIpv4AddrIsSet()) {
-    const std::string& value           = m_UeIpv4Addr;
+    const std::string &value = m_UeIpv4Addr;
     const std::string currentValuePath = _pathPrefix + ".ueIpv4Addr";
   }
 
   return success;
 }
 
-bool PduSessionTsnBridge::operator==(const PduSessionTsnBridge& rhs) const {
+bool PduSessionTsnBridge::operator==(const PduSessionTsnBridge &rhs) const {
   return
 
       (getTsnBridgeInfo() == rhs.getTsnBridgeInfo()) &&
@@ -125,26 +125,32 @@ bool PduSessionTsnBridge::operator==(const PduSessionTsnBridge& rhs) const {
           ;
 }
 
-bool PduSessionTsnBridge::operator!=(const PduSessionTsnBridge& rhs) const {
+bool PduSessionTsnBridge::operator!=(const PduSessionTsnBridge &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PduSessionTsnBridge& o) {
-  j                  = nlohmann::json::object();
+void to_json(nlohmann::json &j, const PduSessionTsnBridge &o) {
+  j = nlohmann::json::object();
   j["tsnBridgeInfo"] = o.m_TsnBridgeInfo;
-  if (o.tsnBridgeManContIsSet()) j["tsnBridgeManCont"] = o.m_TsnBridgeManCont;
+  if (o.tsnBridgeManContIsSet())
+    j["tsnBridgeManCont"] = o.m_TsnBridgeManCont;
   if (o.tsnPortManContDsttIsSet())
     j["tsnPortManContDstt"] = o.m_TsnPortManContDstt;
   if (o.tsnPortManContNwttsIsSet() || !o.m_TsnPortManContNwtts.empty())
     j["tsnPortManContNwtts"] = o.m_TsnPortManContNwtts;
-  if (o.ueIpv4AddrIsSet()) j["ueIpv4Addr"] = o.m_UeIpv4Addr;
-  if (o.dnnIsSet()) j["dnn"] = o.m_Dnn;
-  if (o.snssaiIsSet()) j["snssai"] = o.m_Snssai;
-  if (o.ipDomainIsSet()) j["ipDomain"] = o.m_IpDomain;
-  if (o.ueIpv6AddrPrefixIsSet()) j["ueIpv6AddrPrefix"] = o.m_UeIpv6AddrPrefix;
+  if (o.ueIpv4AddrIsSet())
+    j["ueIpv4Addr"] = o.m_UeIpv4Addr;
+  if (o.dnnIsSet())
+    j["dnn"] = o.m_Dnn;
+  if (o.snssaiIsSet())
+    j["snssai"] = o.m_Snssai;
+  if (o.ipDomainIsSet())
+    j["ipDomain"] = o.m_IpDomain;
+  if (o.ueIpv6AddrPrefixIsSet())
+    j["ueIpv6AddrPrefix"] = o.m_UeIpv6AddrPrefix;
 }
 
-void from_json(const nlohmann::json& j, PduSessionTsnBridge& o) {
+void from_json(const nlohmann::json &j, PduSessionTsnBridge &o) {
   j.at("tsnBridgeInfo").get_to(o.m_TsnBridgeInfo);
   if (j.find("tsnBridgeManCont") != j.end()) {
     j.at("tsnBridgeManCont").get_to(o.m_TsnBridgeManCont);
@@ -184,7 +190,7 @@ oai::model::pcf::TsnBridgeInfo PduSessionTsnBridge::getTsnBridgeInfo() const {
   return m_TsnBridgeInfo;
 }
 void PduSessionTsnBridge::setTsnBridgeInfo(
-    oai::model::pcf::TsnBridgeInfo const& value) {
+    oai::model::pcf::TsnBridgeInfo const &value) {
   m_TsnBridgeInfo = value;
 }
 oai::model::pcf::BridgeManagementContainer
@@ -192,8 +198,8 @@ PduSessionTsnBridge::getTsnBridgeManCont() const {
   return m_TsnBridgeManCont;
 }
 void PduSessionTsnBridge::setTsnBridgeManCont(
-    oai::model::pcf::BridgeManagementContainer const& value) {
-  m_TsnBridgeManCont      = value;
+    oai::model::pcf::BridgeManagementContainer const &value) {
+  m_TsnBridgeManCont = value;
   m_TsnBridgeManContIsSet = true;
 }
 bool PduSessionTsnBridge::tsnBridgeManContIsSet() const {
@@ -207,8 +213,8 @@ PduSessionTsnBridge::getTsnPortManContDstt() const {
   return m_TsnPortManContDstt;
 }
 void PduSessionTsnBridge::setTsnPortManContDstt(
-    oai::model::pcf::PortManagementContainer const& value) {
-  m_TsnPortManContDstt      = value;
+    oai::model::pcf::PortManagementContainer const &value) {
+  m_TsnPortManContDstt = value;
   m_TsnPortManContDsttIsSet = true;
 }
 bool PduSessionTsnBridge::tsnPortManContDsttIsSet() const {
@@ -222,8 +228,8 @@ PduSessionTsnBridge::getTsnPortManContNwtts() const {
   return m_TsnPortManContNwtts;
 }
 void PduSessionTsnBridge::setTsnPortManContNwtts(
-    std::vector<oai::model::pcf::PortManagementContainer> const& value) {
-  m_TsnPortManContNwtts      = value;
+    std::vector<oai::model::pcf::PortManagementContainer> const &value) {
+  m_TsnPortManContNwtts = value;
   m_TsnPortManContNwttsIsSet = true;
 }
 bool PduSessionTsnBridge::tsnPortManContNwttsIsSet() const {
@@ -232,64 +238,42 @@ bool PduSessionTsnBridge::tsnPortManContNwttsIsSet() const {
 void PduSessionTsnBridge::unsetTsnPortManContNwtts() {
   m_TsnPortManContNwttsIsSet = false;
 }
-std::string PduSessionTsnBridge::getUeIpv4Addr() const {
-  return m_UeIpv4Addr;
-}
-void PduSessionTsnBridge::setUeIpv4Addr(std::string const& value) {
-  m_UeIpv4Addr      = value;
+std::string PduSessionTsnBridge::getUeIpv4Addr() const { return m_UeIpv4Addr; }
+void PduSessionTsnBridge::setUeIpv4Addr(std::string const &value) {
+  m_UeIpv4Addr = value;
   m_UeIpv4AddrIsSet = true;
 }
-bool PduSessionTsnBridge::ueIpv4AddrIsSet() const {
-  return m_UeIpv4AddrIsSet;
-}
-void PduSessionTsnBridge::unsetUeIpv4Addr() {
-  m_UeIpv4AddrIsSet = false;
-}
-std::string PduSessionTsnBridge::getDnn() const {
-  return m_Dnn;
-}
-void PduSessionTsnBridge::setDnn(std::string const& value) {
-  m_Dnn      = value;
+bool PduSessionTsnBridge::ueIpv4AddrIsSet() const { return m_UeIpv4AddrIsSet; }
+void PduSessionTsnBridge::unsetUeIpv4Addr() { m_UeIpv4AddrIsSet = false; }
+std::string PduSessionTsnBridge::getDnn() const { return m_Dnn; }
+void PduSessionTsnBridge::setDnn(std::string const &value) {
+  m_Dnn = value;
   m_DnnIsSet = true;
 }
-bool PduSessionTsnBridge::dnnIsSet() const {
-  return m_DnnIsSet;
-}
-void PduSessionTsnBridge::unsetDnn() {
-  m_DnnIsSet = false;
-}
+bool PduSessionTsnBridge::dnnIsSet() const { return m_DnnIsSet; }
+void PduSessionTsnBridge::unsetDnn() { m_DnnIsSet = false; }
 oai::model::common::Snssai PduSessionTsnBridge::getSnssai() const {
   return m_Snssai;
 }
-void PduSessionTsnBridge::setSnssai(oai::model::common::Snssai const& value) {
-  m_Snssai      = value;
+void PduSessionTsnBridge::setSnssai(oai::model::common::Snssai const &value) {
+  m_Snssai = value;
   m_SnssaiIsSet = true;
 }
-bool PduSessionTsnBridge::snssaiIsSet() const {
-  return m_SnssaiIsSet;
-}
-void PduSessionTsnBridge::unsetSnssai() {
-  m_SnssaiIsSet = false;
-}
-std::string PduSessionTsnBridge::getIpDomain() const {
-  return m_IpDomain;
-}
-void PduSessionTsnBridge::setIpDomain(std::string const& value) {
-  m_IpDomain      = value;
+bool PduSessionTsnBridge::snssaiIsSet() const { return m_SnssaiIsSet; }
+void PduSessionTsnBridge::unsetSnssai() { m_SnssaiIsSet = false; }
+std::string PduSessionTsnBridge::getIpDomain() const { return m_IpDomain; }
+void PduSessionTsnBridge::setIpDomain(std::string const &value) {
+  m_IpDomain = value;
   m_IpDomainIsSet = true;
 }
-bool PduSessionTsnBridge::ipDomainIsSet() const {
-  return m_IpDomainIsSet;
-}
-void PduSessionTsnBridge::unsetIpDomain() {
-  m_IpDomainIsSet = false;
-}
+bool PduSessionTsnBridge::ipDomainIsSet() const { return m_IpDomainIsSet; }
+void PduSessionTsnBridge::unsetIpDomain() { m_IpDomainIsSet = false; }
 oai::model::pcf::Ipv6Prefix PduSessionTsnBridge::getUeIpv6AddrPrefix() const {
   return m_UeIpv6AddrPrefix;
 }
 void PduSessionTsnBridge::setUeIpv6AddrPrefix(
-    oai::model::pcf::Ipv6Prefix const& value) {
-  m_UeIpv6AddrPrefix      = value;
+    oai::model::pcf::Ipv6Prefix const &value) {
+  m_UeIpv6AddrPrefix = value;
   m_UeIpv6AddrPrefixIsSet = true;
 }
 bool PduSessionTsnBridge::ueIpv6AddrPrefixIsSet() const {
@@ -299,4 +283,4 @@ void PduSessionTsnBridge::unsetUeIpv6AddrPrefix() {
   m_UeIpv6AddrPrefixIsSet = false;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

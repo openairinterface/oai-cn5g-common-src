@@ -18,9 +18,7 @@
 
 namespace oai::udr::model {
 
-NotificationItem::NotificationItem() {
-  m_ResourceId = "";
-}
+NotificationItem::NotificationItem() { m_ResourceId = ""; }
 
 NotificationItem::~NotificationItem() {}
 
@@ -28,28 +26,26 @@ void NotificationItem::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const NotificationItem& o) {
-  j               = nlohmann::json();
+void to_json(nlohmann::json &j, const NotificationItem &o) {
+  j = nlohmann::json();
   j["resourceId"] = o.m_ResourceId;
   j["notifItems"] = o.m_NotifItems;
 }
 
-void from_json(const nlohmann::json& j, NotificationItem& o) {
+void from_json(const nlohmann::json &j, NotificationItem &o) {
   j.at("resourceId").get_to(o.m_ResourceId);
   j.at("notifItems").get_to(o.m_NotifItems);
 }
 
-std::string NotificationItem::getResourceId() const {
-  return m_ResourceId;
-}
-void NotificationItem::setResourceId(std::string const& value) {
+std::string NotificationItem::getResourceId() const { return m_ResourceId; }
+void NotificationItem::setResourceId(std::string const &value) {
   m_ResourceId = value;
 }
-std::vector<UpdatedItem>& NotificationItem::getNotifItems() {
+std::vector<UpdatedItem> &NotificationItem::getNotifItems() {
   return m_NotifItems;
 }
-void NotificationItem::setNotifItems(std::vector<UpdatedItem> const& value) {
+void NotificationItem::setNotifItems(std::vector<UpdatedItem> const &value) {
   m_NotifItems = value;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

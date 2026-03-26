@@ -19,7 +19,7 @@
 namespace oai::udr::model {
 
 CagInfo::CagInfo() {
-  m_CagOnlyIndicator      = false;
+  m_CagOnlyIndicator = false;
   m_CagOnlyIndicatorIsSet = false;
 }
 
@@ -29,13 +29,14 @@ void CagInfo::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const CagInfo& o) {
-  j                   = nlohmann::json();
+void to_json(nlohmann::json &j, const CagInfo &o) {
+  j = nlohmann::json();
   j["allowedCagList"] = o.m_AllowedCagList;
-  if (o.cagOnlyIndicatorIsSet()) j["cagOnlyIndicator"] = o.m_CagOnlyIndicator;
+  if (o.cagOnlyIndicatorIsSet())
+    j["cagOnlyIndicator"] = o.m_CagOnlyIndicator;
 }
 
-void from_json(const nlohmann::json& j, CagInfo& o) {
+void from_json(const nlohmann::json &j, CagInfo &o) {
   j.at("allowedCagList").get_to(o.m_AllowedCagList);
   if (j.find("cagOnlyIndicator") != j.end()) {
     j.at("cagOnlyIndicator").get_to(o.m_CagOnlyIndicator);
@@ -43,24 +44,18 @@ void from_json(const nlohmann::json& j, CagInfo& o) {
   }
 }
 
-std::vector<std::string>& CagInfo::getAllowedCagList() {
+std::vector<std::string> &CagInfo::getAllowedCagList() {
   return m_AllowedCagList;
 }
-void CagInfo::setAllowedCagList(std::vector<std::string> const& value) {
+void CagInfo::setAllowedCagList(std::vector<std::string> const &value) {
   m_AllowedCagList = value;
 }
-bool CagInfo::isCagOnlyIndicator() const {
-  return m_CagOnlyIndicator;
-}
+bool CagInfo::isCagOnlyIndicator() const { return m_CagOnlyIndicator; }
 void CagInfo::setCagOnlyIndicator(bool const value) {
-  m_CagOnlyIndicator      = value;
+  m_CagOnlyIndicator = value;
   m_CagOnlyIndicatorIsSet = true;
 }
-bool CagInfo::cagOnlyIndicatorIsSet() const {
-  return m_CagOnlyIndicatorIsSet;
-}
-void CagInfo::unsetCagOnlyIndicator() {
-  m_CagOnlyIndicatorIsSet = false;
-}
+bool CagInfo::cagOnlyIndicatorIsSet() const { return m_CagOnlyIndicatorIsSet; }
+void CagInfo::unsetCagOnlyIndicator() { m_CagOnlyIndicatorIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

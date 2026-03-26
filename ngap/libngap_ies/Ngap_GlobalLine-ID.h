@@ -26,8 +26,8 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_GlobalLine-ID */
 typedef struct Ngap_GlobalLine_ID {
   Ngap_GlobalLineIdentity_t globalLineIdentity;
-  Ngap_LineType_t* lineType;                             /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  Ngap_LineType_t *lineType;                             /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

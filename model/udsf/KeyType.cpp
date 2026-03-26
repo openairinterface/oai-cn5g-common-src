@@ -27,45 +27,35 @@ void KeyType::validate() const {
   }
 }
 
-bool KeyType::validate(std::stringstream& msg) const {
+bool KeyType::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool KeyType::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool KeyType::validate(std::stringstream &msg,
+                       const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "KeyType" : pathPrefix;
 
   return success;
 }
 
-bool KeyType::operator==(const KeyType& rhs) const {
-  return (*this == rhs);
-}
+bool KeyType::operator==(const KeyType &rhs) const { return (*this == rhs); }
 
-bool KeyType::operator!=(const KeyType& rhs) const {
-  return !(*this == rhs);
-}
+bool KeyType::operator!=(const KeyType &rhs) const { return !(*this == rhs); }
 
-void KeyType::get(std::string& kt) const {
-  kt = value;
-}
+void KeyType::get(std::string &kt) const { kt = value; }
 
-std::string KeyType::get() const {
-  return value;
-}
+std::string KeyType::get() const { return value; }
 
-void KeyType::set(const std::string& kt) {
-  value = kt;
-}
+void KeyType::set(const std::string &kt) { value = kt; }
 
-void to_json(nlohmann::json& j, const KeyType& o) {
+void to_json(nlohmann::json &j, const KeyType &o) {
   j = nlohmann::json();
   j = o.get();
 }
 
-void from_json(const nlohmann::json& j, KeyType& o) {
+void from_json(const nlohmann::json &j, KeyType &o) {
   o.set(j.get<std::string>());
 }
 
-}  // namespace oai::model::udsf
+} // namespace oai::model::udsf

@@ -12,7 +12,7 @@ constexpr auto kImeisvRequestIeName = "IMEISV Request";
 namespace oai::nas {
 
 class ImeisvRequest : public Type1NasIeFormatTv {
- public:
+public:
   ImeisvRequest();
   ImeisvRequest(uint8_t value);
   virtual ~ImeisvRequest();
@@ -22,8 +22,8 @@ class ImeisvRequest : public Type1NasIeFormatTv {
   void Set(uint8_t value);
   uint8_t Get() const;
 
- private:
+private:
 };
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

@@ -35,7 +35,7 @@ namespace oai::model::smf {
 /// INSUFFICIENT_UP_RESOURCES - PDU_SESSION_HANDED_OVER
 /// </summary>
 class Cause {
- public:
+public:
   Cause();
   virtual ~Cause();
 
@@ -44,15 +44,15 @@ class Cause {
   /////////////////////////////////////////////
   /// Cause members
   std::string getValue() const;
-  void setValue(const std::string& value);
+  void setValue(const std::string &value);
 
-  friend void to_json(nlohmann::json& j, const Cause& o);
-  friend void from_json(const nlohmann::json& j, Cause& o);
+  friend void to_json(nlohmann::json &j, const Cause &o);
+  friend void from_json(const nlohmann::json &j, Cause &o);
 
- protected:
+protected:
   std::string cause;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* Cause_H_ */

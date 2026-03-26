@@ -13,8 +13,8 @@
 
 #include "PcfAtsssCapability_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::pcf {
 
@@ -27,12 +27,12 @@ void AtsssCapability_anyOf::validate() const {
   }
 }
 
-bool AtsssCapability_anyOf::validate(std::stringstream& msg) const {
+bool AtsssCapability_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AtsssCapability_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool AtsssCapability_anyOf::validate(std::stringstream &msg,
+                                     const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AtsssCapability_anyOf" : pathPrefix;
@@ -46,46 +46,46 @@ bool AtsssCapability_anyOf::validate(
   return success;
 }
 
-bool AtsssCapability_anyOf::operator==(const AtsssCapability_anyOf& rhs) const {
+bool AtsssCapability_anyOf::operator==(const AtsssCapability_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool AtsssCapability_anyOf::operator!=(const AtsssCapability_anyOf& rhs) const {
+bool AtsssCapability_anyOf::operator!=(const AtsssCapability_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AtsssCapability_anyOf& o) {
+void to_json(nlohmann::json &j, const AtsssCapability_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case AtsssCapability_anyOf::eAtsssCapability_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case AtsssCapability_anyOf::eAtsssCapability_anyOf::
-        MPTCP_ATSSS_LL_WITH_ASMODE_UL:
-      j = "MPTCP_ATSSS_LL_WITH_ASMODE_UL";
-      break;
-    case AtsssCapability_anyOf::eAtsssCapability_anyOf::
-        MPTCP_ATSSS_LL_WITH_EXSDMODE_DL_ASMODE_UL:
-      j = "MPTCP_ATSSS_LL_WITH_EXSDMODE_DL_ASMODE_UL";
-      break;
-    case AtsssCapability_anyOf::eAtsssCapability_anyOf::
-        MPTCP_ATSSS_LL_WITH_ASMODE_DLUL:
-      j = "MPTCP_ATSSS_LL_WITH_ASMODE_DLUL";
-      break;
-    case AtsssCapability_anyOf::eAtsssCapability_anyOf::ATSSS_LL:
-      j = "ATSSS_LL";
-      break;
-    case AtsssCapability_anyOf::eAtsssCapability_anyOf::MPTCP_ATSSS_LL:
-      j = "MPTCP_ATSSS_LL";
-      break;
+  case AtsssCapability_anyOf::eAtsssCapability_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case AtsssCapability_anyOf::eAtsssCapability_anyOf::
+      MPTCP_ATSSS_LL_WITH_ASMODE_UL:
+    j = "MPTCP_ATSSS_LL_WITH_ASMODE_UL";
+    break;
+  case AtsssCapability_anyOf::eAtsssCapability_anyOf::
+      MPTCP_ATSSS_LL_WITH_EXSDMODE_DL_ASMODE_UL:
+    j = "MPTCP_ATSSS_LL_WITH_EXSDMODE_DL_ASMODE_UL";
+    break;
+  case AtsssCapability_anyOf::eAtsssCapability_anyOf::
+      MPTCP_ATSSS_LL_WITH_ASMODE_DLUL:
+    j = "MPTCP_ATSSS_LL_WITH_ASMODE_DLUL";
+    break;
+  case AtsssCapability_anyOf::eAtsssCapability_anyOf::ATSSS_LL:
+    j = "ATSSS_LL";
+    break;
+  case AtsssCapability_anyOf::eAtsssCapability_anyOf::MPTCP_ATSSS_LL:
+    j = "MPTCP_ATSSS_LL";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, AtsssCapability_anyOf& o) {
+void from_json(const nlohmann::json &j, AtsssCapability_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "MPTCP_ATSSS_LL_WITH_ASMODE_UL") {
     o.setValue(AtsssCapability_anyOf::eAtsssCapability_anyOf::
@@ -109,8 +109,8 @@ void from_json(const nlohmann::json& j, AtsssCapability_anyOf& o) {
   }
 }
 
-AtsssCapability_anyOf::eAtsssCapability_anyOf AtsssCapability_anyOf::getValue()
-    const {
+AtsssCapability_anyOf::eAtsssCapability_anyOf
+AtsssCapability_anyOf::getValue() const {
   return m_value;
 }
 void AtsssCapability_anyOf::setValue(
@@ -118,4 +118,4 @@ void AtsssCapability_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

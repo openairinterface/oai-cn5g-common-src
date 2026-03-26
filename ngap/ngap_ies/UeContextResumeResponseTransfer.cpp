@@ -12,7 +12,7 @@ namespace oai::ngap {
 //------------------------------------------------------------------------------
 UeContextResumeResponseTransfer::UeContextResumeResponseTransfer() {
   m_UeContextResumeResponseTransferIe =
-      (Ngap_UEContextResumeResponseTransfer_t*) calloc(
+      (Ngap_UEContextResumeResponseTransfer_t *)calloc(
           1, sizeof(Ngap_UEContextResumeResponseTransfer_t));
 }
 
@@ -30,34 +30,33 @@ void UeContextResumeResponseTransfer::setQosFlowFailedToResumeList(
 
 //------------------------------------------------------------------------------
 void UeContextResumeResponseTransfer::setQosFlowFailedToResumeList(
-    const QosFlowListWithCause& list) {
+    const QosFlowListWithCause &list) {
   m_QosFlowFailedToResumeList = std::make_optional<QosFlowListWithCause>(list);
 }
 
 //------------------------------------------------------------------------------
 void UeContextResumeResponseTransfer::getQosFlowFailedToResumeList(
-    std::optional<QosFlowListWithCause>& list) const {
+    std::optional<QosFlowListWithCause> &list) const {
   list = m_QosFlowFailedToResumeList;
 }
 
 //------------------------------------------------------------------------------
-int UeContextResumeResponseTransfer::encode(uint8_t* buf, int bufSize) {
-  ngap_utils::print_asn_msg(
-      &asn_DEF_Ngap_UEContextResumeResponseTransfer,
-      m_UeContextResumeResponseTransferIe);
-  asn_enc_rval_t er = aper_encode_to_buffer(
-      &asn_DEF_Ngap_UEContextResumeResponseTransfer, NULL,
-      m_UeContextResumeResponseTransferIe, buf, bufSize);
+int UeContextResumeResponseTransfer::encode(uint8_t *buf, int bufSize) {
+  ngap_utils::print_asn_msg(&asn_DEF_Ngap_UEContextResumeResponseTransfer,
+                            m_UeContextResumeResponseTransferIe);
+  asn_enc_rval_t er =
+      aper_encode_to_buffer(&asn_DEF_Ngap_UEContextResumeResponseTransfer, NULL,
+                            m_UeContextResumeResponseTransferIe, buf, bufSize);
   oai::logger::logger_common::ngap().debug("er.encoded %d", er.encoded);
   return er.encoded;
 }
 
 //------------------------------------------------------------------------------
-bool UeContextResumeResponseTransfer::decode(uint8_t* buf, int bufSize) {
-  asn_dec_rval_t rc = asn_decode(
-      NULL, ATS_ALIGNED_CANONICAL_PER,
-      &asn_DEF_Ngap_UEContextResumeResponseTransfer,
-      (void**) &m_UeContextResumeResponseTransferIe, buf, bufSize);
+bool UeContextResumeResponseTransfer::decode(uint8_t *buf, int bufSize) {
+  asn_dec_rval_t rc =
+      asn_decode(NULL, ATS_ALIGNED_CANONICAL_PER,
+                 &asn_DEF_Ngap_UEContextResumeResponseTransfer,
+                 (void **)&m_UeContextResumeResponseTransferIe, buf, bufSize);
   if (rc.code == RC_OK) {
     oai::logger::logger_common::ngap().debug(
         "Decoded handoverRequestAcknowledegTransfer successfully");
@@ -69,8 +68,8 @@ bool UeContextResumeResponseTransfer::decode(uint8_t* buf, int bufSize) {
         "Failure to decode handoverRequestAcknowledegTransfer data");
     // return false;
   }
-  oai::logger::logger_common::ngap().debug(
-      "rc.consumed to decode: %d", rc.consumed);
+  oai::logger::logger_common::ngap().debug("rc.consumed to decode: %d",
+                                           rc.consumed);
 
   if (m_UeContextResumeResponseTransferIe->qosFlowFailedToResumeList) {
     QosFlowListWithCause qosFlowFailedToResumeList = {};
@@ -88,4 +87,4 @@ bool UeContextResumeResponseTransfer::decode(uint8_t* buf, int bufSize) {
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

@@ -28,11 +28,11 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_AlternativeQoSParaSetItem */
 typedef struct Ngap_AlternativeQoSParaSetItem {
   Ngap_AlternativeQoSParaSetIndex_t alternativeQoSParaSetIndex;
-  Ngap_BitRate_t* guaranteedFlowBitRateDL;               /* OPTIONAL */
-  Ngap_BitRate_t* guaranteedFlowBitRateUL;               /* OPTIONAL */
-  Ngap_PacketDelayBudget_t* packetDelayBudget;           /* OPTIONAL */
-  struct Ngap_PacketErrorRate* packetErrorRate;          /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  Ngap_BitRate_t *guaranteedFlowBitRateDL;               /* OPTIONAL */
+  Ngap_BitRate_t *guaranteedFlowBitRateUL;               /* OPTIONAL */
+  Ngap_PacketDelayBudget_t *packetDelayBudget;           /* OPTIONAL */
+  struct Ngap_PacketErrorRate *packetErrorRate;          /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

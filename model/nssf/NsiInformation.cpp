@@ -21,12 +21,12 @@ namespace nssf_server {
 namespace model {
 
 NsiInformation::NsiInformation() {
-  m_NrfId                  = "";
-  m_NsiId                  = "";
-  m_NsiIdIsSet             = false;
-  m_NrfNfMgtUri            = "";
-  m_NrfNfMgtUriIsSet       = false;
-  m_NrfAccessTokenUri      = "";
+  m_NrfId = "";
+  m_NsiId = "";
+  m_NsiIdIsSet = false;
+  m_NrfNfMgtUri = "";
+  m_NrfNfMgtUriIsSet = false;
+  m_NrfAccessTokenUri = "";
   m_NrfAccessTokenUriIsSet = false;
 }
 
@@ -38,12 +38,12 @@ void NsiInformation::validate() const {
   // }
 }
 
-bool NsiInformation::validate(std::stringstream& msg) const {
+bool NsiInformation::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool NsiInformation::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool NsiInformation::validate(std::stringstream &msg,
+                              const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "NsiInformation" : pathPrefix;
@@ -51,7 +51,7 @@ bool NsiInformation::validate(
   return success;
 }
 
-bool NsiInformation::operator==(const NsiInformation& rhs) const {
+bool NsiInformation::operator==(const NsiInformation &rhs) const {
   return
 
       (getNrfId() == rhs.getNrfId()) &&
@@ -70,20 +70,22 @@ bool NsiInformation::operator==(const NsiInformation& rhs) const {
           ;
 }
 
-bool NsiInformation::operator!=(const NsiInformation& rhs) const {
+bool NsiInformation::operator!=(const NsiInformation &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const NsiInformation& o) {
-  j          = nlohmann::json();
+void to_json(nlohmann::json &j, const NsiInformation &o) {
+  j = nlohmann::json();
   j["nrfId"] = o.m_NrfId;
-  if (o.nsiIdIsSet()) j["nsiId"] = o.m_NsiId;
-  if (o.nrfNfMgtUriIsSet()) j["nrfNfMgtUri"] = o.m_NrfNfMgtUri;
+  if (o.nsiIdIsSet())
+    j["nsiId"] = o.m_NsiId;
+  if (o.nrfNfMgtUriIsSet())
+    j["nrfNfMgtUri"] = o.m_NrfNfMgtUri;
   if (o.nrfAccessTokenUriIsSet())
     j["nrfAccessTokenUri"] = o.m_NrfAccessTokenUri;
 }
 
-void from_json(const nlohmann::json& j, NsiInformation& o) {
+void from_json(const nlohmann::json &j, NsiInformation &o) {
   j.at("nrfId").get_to(o.m_NrfId);
   if (j.find("nsiId") != j.end()) {
     j.at("nsiId").get_to(o.m_NsiId);
@@ -99,43 +101,27 @@ void from_json(const nlohmann::json& j, NsiInformation& o) {
   }
 }
 
-std::string NsiInformation::getNrfId() const {
-  return m_NrfId;
-}
-void NsiInformation::setNrfId(std::string const& value) {
-  m_NrfId = value;
-}
-std::string NsiInformation::getNsiId() const {
-  return m_NsiId;
-}
-void NsiInformation::setNsiId(std::string const& value) {
-  m_NsiId      = value;
+std::string NsiInformation::getNrfId() const { return m_NrfId; }
+void NsiInformation::setNrfId(std::string const &value) { m_NrfId = value; }
+std::string NsiInformation::getNsiId() const { return m_NsiId; }
+void NsiInformation::setNsiId(std::string const &value) {
+  m_NsiId = value;
   m_NsiIdIsSet = true;
 }
-bool NsiInformation::nsiIdIsSet() const {
-  return m_NsiIdIsSet;
-}
-void NsiInformation::unsetNsiId() {
-  m_NsiIdIsSet = false;
-}
-std::string NsiInformation::getNrfNfMgtUri() const {
-  return m_NrfNfMgtUri;
-}
-void NsiInformation::setNrfNfMgtUri(std::string const& value) {
-  m_NrfNfMgtUri      = value;
+bool NsiInformation::nsiIdIsSet() const { return m_NsiIdIsSet; }
+void NsiInformation::unsetNsiId() { m_NsiIdIsSet = false; }
+std::string NsiInformation::getNrfNfMgtUri() const { return m_NrfNfMgtUri; }
+void NsiInformation::setNrfNfMgtUri(std::string const &value) {
+  m_NrfNfMgtUri = value;
   m_NrfNfMgtUriIsSet = true;
 }
-bool NsiInformation::nrfNfMgtUriIsSet() const {
-  return m_NrfNfMgtUriIsSet;
-}
-void NsiInformation::unsetNrfNfMgtUri() {
-  m_NrfNfMgtUriIsSet = false;
-}
+bool NsiInformation::nrfNfMgtUriIsSet() const { return m_NrfNfMgtUriIsSet; }
+void NsiInformation::unsetNrfNfMgtUri() { m_NrfNfMgtUriIsSet = false; }
 std::string NsiInformation::getNrfAccessTokenUri() const {
   return m_NrfAccessTokenUri;
 }
-void NsiInformation::setNrfAccessTokenUri(std::string const& value) {
-  m_NrfAccessTokenUri      = value;
+void NsiInformation::setNrfAccessTokenUri(std::string const &value) {
+  m_NrfAccessTokenUri = value;
   m_NrfAccessTokenUriIsSet = true;
 }
 bool NsiInformation::nrfAccessTokenUriIsSet() const {
@@ -145,6 +131,6 @@ void NsiInformation::unsetNrfAccessTokenUri() {
   m_NrfAccessTokenUriIsSet = false;
 }
 
-}  // namespace model
-}  // namespace nssf_server
-}  // namespace oai
+} // namespace model
+} // namespace nssf_server
+} // namespace oai

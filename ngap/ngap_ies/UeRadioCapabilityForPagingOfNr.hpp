@@ -14,25 +14,25 @@ extern "C" {
 namespace oai::ngap {
 
 class UeRadioCapabilityForPagingOfNr {
- public:
+public:
   UeRadioCapabilityForPagingOfNr();
   virtual ~UeRadioCapabilityForPagingOfNr();
 
-  bool set(const OCTET_STRING_t& capability);
-  bool get(OCTET_STRING_t& capability) const;
+  bool set(const OCTET_STRING_t &capability);
+  bool get(OCTET_STRING_t &capability) const;
 
-  bool set(const bstring& capability);
-  bool get(bstring& capability) const;
+  bool set(const bstring &capability);
+  bool get(bstring &capability) const;
 
-  bool encode(Ngap_UERadioCapabilityForPagingOfNR_t&
-                  ueRadioCapabilityForPagingOfNr) const;
-  bool decode(const Ngap_UERadioCapabilityForPagingOfNR_t&
-                  ueRadioCapabilityForPagingOfNr);
+  bool encode(Ngap_UERadioCapabilityForPagingOfNR_t
+                  &ueRadioCapabilityForPagingOfNr) const;
+  bool decode(const Ngap_UERadioCapabilityForPagingOfNR_t
+                  &ueRadioCapabilityForPagingOfNr);
 
- private:
+private:
   OCTET_STRING_t m_UeRadioCapability;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

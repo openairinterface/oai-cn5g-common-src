@@ -13,8 +13,8 @@
 
 #include "PolicyDecisionFailureCode_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::pcf {
 
@@ -27,12 +27,12 @@ void PolicyDecisionFailureCode_anyOf::validate() const {
   }
 }
 
-bool PolicyDecisionFailureCode_anyOf::validate(std::stringstream& msg) const {
+bool PolicyDecisionFailureCode_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool PolicyDecisionFailureCode_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PolicyDecisionFailureCode_anyOf" : pathPrefix;
@@ -48,53 +48,53 @@ bool PolicyDecisionFailureCode_anyOf::validate(
 }
 
 bool PolicyDecisionFailureCode_anyOf::operator==(
-    const PolicyDecisionFailureCode_anyOf& rhs) const {
+    const PolicyDecisionFailureCode_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool PolicyDecisionFailureCode_anyOf::operator!=(
-    const PolicyDecisionFailureCode_anyOf& rhs) const {
+    const PolicyDecisionFailureCode_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PolicyDecisionFailureCode_anyOf& o) {
+void to_json(nlohmann::json &j, const PolicyDecisionFailureCode_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case PolicyDecisionFailureCode_anyOf::ePolicyDecisionFailureCode_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case PolicyDecisionFailureCode_anyOf::ePolicyDecisionFailureCode_anyOf::
-        TRA_CTRL_DECS_ERR:
-      j = "TRA_CTRL_DECS_ERR";
-      break;
-    case PolicyDecisionFailureCode_anyOf::ePolicyDecisionFailureCode_anyOf::
-        QOS_DECS_ERR:
-      j = "QOS_DECS_ERR";
-      break;
-    case PolicyDecisionFailureCode_anyOf::ePolicyDecisionFailureCode_anyOf::
-        CHG_DECS_ERR:
-      j = "CHG_DECS_ERR";
-      break;
-    case PolicyDecisionFailureCode_anyOf::ePolicyDecisionFailureCode_anyOf::
-        USA_MON_DECS_ERR:
-      j = "USA_MON_DECS_ERR";
-      break;
-    case PolicyDecisionFailureCode_anyOf::ePolicyDecisionFailureCode_anyOf::
-        QOS_MON_DECS_ERR:
-      j = "QOS_MON_DECS_ERR";
-      break;
-    case PolicyDecisionFailureCode_anyOf::ePolicyDecisionFailureCode_anyOf::
-        CON_DATA_ERR:
-      j = "CON_DATA_ERR";
-      break;
+  case PolicyDecisionFailureCode_anyOf::ePolicyDecisionFailureCode_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case PolicyDecisionFailureCode_anyOf::ePolicyDecisionFailureCode_anyOf::
+      TRA_CTRL_DECS_ERR:
+    j = "TRA_CTRL_DECS_ERR";
+    break;
+  case PolicyDecisionFailureCode_anyOf::ePolicyDecisionFailureCode_anyOf::
+      QOS_DECS_ERR:
+    j = "QOS_DECS_ERR";
+    break;
+  case PolicyDecisionFailureCode_anyOf::ePolicyDecisionFailureCode_anyOf::
+      CHG_DECS_ERR:
+    j = "CHG_DECS_ERR";
+    break;
+  case PolicyDecisionFailureCode_anyOf::ePolicyDecisionFailureCode_anyOf::
+      USA_MON_DECS_ERR:
+    j = "USA_MON_DECS_ERR";
+    break;
+  case PolicyDecisionFailureCode_anyOf::ePolicyDecisionFailureCode_anyOf::
+      QOS_MON_DECS_ERR:
+    j = "QOS_MON_DECS_ERR";
+    break;
+  case PolicyDecisionFailureCode_anyOf::ePolicyDecisionFailureCode_anyOf::
+      CON_DATA_ERR:
+    j = "CON_DATA_ERR";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, PolicyDecisionFailureCode_anyOf& o) {
+void from_json(const nlohmann::json &j, PolicyDecisionFailureCode_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "TRA_CTRL_DECS_ERR") {
     o.setValue(PolicyDecisionFailureCode_anyOf::
@@ -132,4 +132,4 @@ void PolicyDecisionFailureCode_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

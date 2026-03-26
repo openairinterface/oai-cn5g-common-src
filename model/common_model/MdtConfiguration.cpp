@@ -19,36 +19,36 @@
 namespace oai::model::common {
 
 MdtConfiguration::MdtConfiguration() {
-  m_ReportTypeIsSet               = false;
-  m_AreaScopeIsSet                = false;
-  m_MeasurementLteListIsSet       = false;
-  m_MeasurementNrListIsSet        = false;
-  m_SensorMeasurementListIsSet    = false;
-  m_ReportingTriggerListIsSet     = false;
-  m_ReportIntervalIsSet           = false;
-  m_ReportIntervalNrIsSet         = false;
-  m_ReportAmountIsSet             = false;
-  m_EventThresholdRsrp            = 0;
-  m_EventThresholdRsrpIsSet       = false;
-  m_EventThresholdRsrpNr          = 0;
-  m_EventThresholdRsrpNrIsSet     = false;
-  m_EventThresholdRsrq            = 0;
-  m_EventThresholdRsrqIsSet       = false;
-  m_EventThresholdRsrqNr          = 0;
-  m_EventThresholdRsrqNrIsSet     = false;
-  m_EventListIsSet                = false;
-  m_LoggingIntervalIsSet          = false;
-  m_LoggingIntervalNrIsSet        = false;
-  m_LoggingDurationIsSet          = false;
-  m_LoggingDurationNrIsSet        = false;
-  m_PositioningMethodIsSet        = false;
+  m_ReportTypeIsSet = false;
+  m_AreaScopeIsSet = false;
+  m_MeasurementLteListIsSet = false;
+  m_MeasurementNrListIsSet = false;
+  m_SensorMeasurementListIsSet = false;
+  m_ReportingTriggerListIsSet = false;
+  m_ReportIntervalIsSet = false;
+  m_ReportIntervalNrIsSet = false;
+  m_ReportAmountIsSet = false;
+  m_EventThresholdRsrp = 0;
+  m_EventThresholdRsrpIsSet = false;
+  m_EventThresholdRsrpNr = 0;
+  m_EventThresholdRsrpNrIsSet = false;
+  m_EventThresholdRsrq = 0;
+  m_EventThresholdRsrqIsSet = false;
+  m_EventThresholdRsrqNr = 0;
+  m_EventThresholdRsrqNrIsSet = false;
+  m_EventListIsSet = false;
+  m_LoggingIntervalIsSet = false;
+  m_LoggingIntervalNrIsSet = false;
+  m_LoggingDurationIsSet = false;
+  m_LoggingDurationNrIsSet = false;
+  m_PositioningMethodIsSet = false;
   m_AddPositioningMethodListIsSet = false;
-  m_CollectionPeriodRmmLteIsSet   = false;
-  m_CollectionPeriodRmmNrIsSet    = false;
-  m_MeasurementPeriodLteIsSet     = false;
-  m_MdtAllowedPlmnIdListIsSet     = false;
-  m_MbsfnAreaListIsSet            = false;
-  m_InterFreqTargetListIsSet      = false;
+  m_CollectionPeriodRmmLteIsSet = false;
+  m_CollectionPeriodRmmNrIsSet = false;
+  m_MeasurementPeriodLteIsSet = false;
+  m_MdtAllowedPlmnIdListIsSet = false;
+  m_MbsfnAreaListIsSet = false;
+  m_InterFreqTargetListIsSet = false;
 }
 
 void MdtConfiguration::validate() const {
@@ -58,25 +58,25 @@ void MdtConfiguration::validate() const {
   }
 }
 
-bool MdtConfiguration::validate(std::stringstream& msg) const {
+bool MdtConfiguration::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool MdtConfiguration::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool MdtConfiguration::validate(std::stringstream &msg,
+                                const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "MdtConfiguration" : pathPrefix;
 
   if (measurementLteListIsSet()) {
-    const std::vector<oai::model::common::MeasurementLteForMdt>& value =
+    const std::vector<oai::model::common::MeasurementLteForMdt> &value =
         m_MeasurementLteList;
     const std::string currentValuePath = _pathPrefix + ".measurementLteList";
 
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::MeasurementLteForMdt& value : value) {
+      int i = 0;
+      for (const oai::model::common::MeasurementLteForMdt &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -90,7 +90,7 @@ bool MdtConfiguration::validate(
   }
 
   if (measurementNrListIsSet()) {
-    const std::vector<oai::model::common::MeasurementNrForMdt>& value =
+    const std::vector<oai::model::common::MeasurementNrForMdt> &value =
         m_MeasurementNrList;
     const std::string currentValuePath = _pathPrefix + ".measurementNrList";
 
@@ -98,10 +98,10 @@ bool MdtConfiguration::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::MeasurementNrForMdt& value : value) {
+      int i = 0;
+      for (const oai::model::common::MeasurementNrForMdt &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -115,7 +115,7 @@ bool MdtConfiguration::validate(
   }
 
   if (sensorMeasurementListIsSet()) {
-    const std::vector<oai::model::common::SensorMeasurement>& value =
+    const std::vector<oai::model::common::SensorMeasurement> &value =
         m_SensorMeasurementList;
     const std::string currentValuePath = _pathPrefix + ".sensorMeasurementList";
 
@@ -123,10 +123,10 @@ bool MdtConfiguration::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::SensorMeasurement& value : value) {
+      int i = 0;
+      for (const oai::model::common::SensorMeasurement &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -140,7 +140,7 @@ bool MdtConfiguration::validate(
   }
 
   if (reportingTriggerListIsSet()) {
-    const std::vector<oai::model::common::ReportingTrigger>& value =
+    const std::vector<oai::model::common::ReportingTrigger> &value =
         m_ReportingTriggerList;
     const std::string currentValuePath = _pathPrefix + ".reportingTriggerList";
 
@@ -148,10 +148,10 @@ bool MdtConfiguration::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::ReportingTrigger& value : value) {
+      int i = 0;
+      for (const oai::model::common::ReportingTrigger &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -165,7 +165,7 @@ bool MdtConfiguration::validate(
   }
 
   if (eventThresholdRsrpIsSet()) {
-    const int32_t& value               = m_EventThresholdRsrp;
+    const int32_t &value = m_EventThresholdRsrp;
     const std::string currentValuePath = _pathPrefix + ".eventThresholdRsrp";
 
     if (value < 0) {
@@ -179,7 +179,7 @@ bool MdtConfiguration::validate(
   }
 
   if (eventThresholdRsrpNrIsSet()) {
-    const int32_t& value               = m_EventThresholdRsrpNr;
+    const int32_t &value = m_EventThresholdRsrpNr;
     const std::string currentValuePath = _pathPrefix + ".eventThresholdRsrpNr";
 
     if (value < 0) {
@@ -193,7 +193,7 @@ bool MdtConfiguration::validate(
   }
 
   if (eventThresholdRsrqIsSet()) {
-    const int32_t& value               = m_EventThresholdRsrq;
+    const int32_t &value = m_EventThresholdRsrq;
     const std::string currentValuePath = _pathPrefix + ".eventThresholdRsrq";
 
     if (value < 0) {
@@ -207,7 +207,7 @@ bool MdtConfiguration::validate(
   }
 
   if (eventThresholdRsrqNrIsSet()) {
-    const int32_t& value               = m_EventThresholdRsrqNr;
+    const int32_t &value = m_EventThresholdRsrqNr;
     const std::string currentValuePath = _pathPrefix + ".eventThresholdRsrqNr";
 
     if (value < 0) {
@@ -221,17 +221,17 @@ bool MdtConfiguration::validate(
   }
 
   if (eventListIsSet()) {
-    const std::vector<oai::model::common::EventForMdt>& value = m_EventList;
+    const std::vector<oai::model::common::EventForMdt> &value = m_EventList;
     const std::string currentValuePath = _pathPrefix + ".eventList";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::EventForMdt& value : value) {
+      int i = 0;
+      for (const oai::model::common::EventForMdt &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -244,7 +244,7 @@ bool MdtConfiguration::validate(
   }
 
   if (addPositioningMethodListIsSet()) {
-    const std::vector<oai::model::common::PositioningMethodMdt>& value =
+    const std::vector<oai::model::common::PositioningMethodMdt> &value =
         m_AddPositioningMethodList;
     const std::string currentValuePath =
         _pathPrefix + ".addPositioningMethodList";
@@ -253,15 +253,15 @@ bool MdtConfiguration::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::PositioningMethodMdt& value : value) {
+      int i = 0;
+      for (const oai::model::common::PositioningMethodMdt &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
-        success = value.validate(
-                      msg, currentValuePath + ".addPositioningMethodList") &&
+        success = value.validate(msg, currentValuePath +
+                                          ".addPositioningMethodList") &&
                   success;
 
         i++;
@@ -270,7 +270,7 @@ bool MdtConfiguration::validate(
   }
 
   if (mdtAllowedPlmnIdListIsSet()) {
-    const std::vector<oai::model::common::PlmnId>& value =
+    const std::vector<oai::model::common::PlmnId> &value =
         m_MdtAllowedPlmnIdList;
     const std::string currentValuePath = _pathPrefix + ".mdtAllowedPlmnIdList";
 
@@ -282,10 +282,10 @@ bool MdtConfiguration::validate(
       success = false;
       msg << currentValuePath << ": must have at most 16 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::PlmnId& value : value) {
+      int i = 0;
+      for (const oai::model::common::PlmnId &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -299,7 +299,7 @@ bool MdtConfiguration::validate(
   }
 
   if (mbsfnAreaListIsSet()) {
-    const std::vector<oai::model::common::MbsfnArea>& value = m_MbsfnAreaList;
+    const std::vector<oai::model::common::MbsfnArea> &value = m_MbsfnAreaList;
     const std::string currentValuePath = _pathPrefix + ".mbsfnAreaList";
 
     if (value.size() < 1) {
@@ -310,10 +310,10 @@ bool MdtConfiguration::validate(
       success = false;
       msg << currentValuePath << ": must have at most 8 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::MbsfnArea& value : value) {
+      int i = 0;
+      for (const oai::model::common::MbsfnArea &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -326,7 +326,7 @@ bool MdtConfiguration::validate(
   }
 
   if (interFreqTargetListIsSet()) {
-    const std::vector<oai::model::common::InterFreqTargetInfo>& value =
+    const std::vector<oai::model::common::InterFreqTargetInfo> &value =
         m_InterFreqTargetList;
     const std::string currentValuePath = _pathPrefix + ".interFreqTargetList";
 
@@ -338,10 +338,10 @@ bool MdtConfiguration::validate(
       success = false;
       msg << currentValuePath << ": must have at most 8 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::InterFreqTargetInfo& value : value) {
+      int i = 0;
+      for (const oai::model::common::InterFreqTargetInfo &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -357,7 +357,7 @@ bool MdtConfiguration::validate(
   return success;
 }
 
-bool MdtConfiguration::operator==(const MdtConfiguration& rhs) const {
+bool MdtConfiguration::operator==(const MdtConfiguration &rhs) const {
   return
 
       (getJobType() == rhs.getJobType()) &&
@@ -471,15 +471,17 @@ bool MdtConfiguration::operator==(const MdtConfiguration& rhs) const {
           ;
 }
 
-bool MdtConfiguration::operator!=(const MdtConfiguration& rhs) const {
+bool MdtConfiguration::operator!=(const MdtConfiguration &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const MdtConfiguration& o) {
-  j            = nlohmann::json();
+void to_json(nlohmann::json &j, const MdtConfiguration &o) {
+  j = nlohmann::json();
   j["jobType"] = o.m_JobType;
-  if (o.reportTypeIsSet()) j["reportType"] = o.m_ReportType;
-  if (o.areaScopeIsSet()) j["areaScope"] = o.m_AreaScope;
+  if (o.reportTypeIsSet())
+    j["reportType"] = o.m_ReportType;
+  if (o.areaScopeIsSet())
+    j["areaScope"] = o.m_AreaScope;
   if (o.measurementLteListIsSet() || !o.m_MeasurementLteList.empty())
     j["measurementLteList"] = o.m_MeasurementLteList;
   if (o.measurementNrListIsSet() || !o.m_MeasurementNrList.empty())
@@ -488,9 +490,12 @@ void to_json(nlohmann::json& j, const MdtConfiguration& o) {
     j["sensorMeasurementList"] = o.m_SensorMeasurementList;
   if (o.reportingTriggerListIsSet() || !o.m_ReportingTriggerList.empty())
     j["reportingTriggerList"] = o.m_ReportingTriggerList;
-  if (o.reportIntervalIsSet()) j["reportInterval"] = o.m_ReportInterval;
-  if (o.reportIntervalNrIsSet()) j["reportIntervalNr"] = o.m_ReportIntervalNr;
-  if (o.reportAmountIsSet()) j["reportAmount"] = o.m_ReportAmount;
+  if (o.reportIntervalIsSet())
+    j["reportInterval"] = o.m_ReportInterval;
+  if (o.reportIntervalNrIsSet())
+    j["reportIntervalNr"] = o.m_ReportIntervalNr;
+  if (o.reportAmountIsSet())
+    j["reportAmount"] = o.m_ReportAmount;
   if (o.eventThresholdRsrpIsSet())
     j["eventThresholdRsrp"] = o.m_EventThresholdRsrp;
   if (o.eventThresholdRsrpNrIsSet())
@@ -501,10 +506,12 @@ void to_json(nlohmann::json& j, const MdtConfiguration& o) {
     j["eventThresholdRsrqNr"] = o.m_EventThresholdRsrqNr;
   if (o.eventListIsSet() || !o.m_EventList.empty())
     j["eventList"] = o.m_EventList;
-  if (o.loggingIntervalIsSet()) j["loggingInterval"] = o.m_LoggingInterval;
+  if (o.loggingIntervalIsSet())
+    j["loggingInterval"] = o.m_LoggingInterval;
   if (o.loggingIntervalNrIsSet())
     j["loggingIntervalNr"] = o.m_LoggingIntervalNr;
-  if (o.loggingDurationIsSet()) j["loggingDuration"] = o.m_LoggingDuration;
+  if (o.loggingDurationIsSet())
+    j["loggingDuration"] = o.m_LoggingDuration;
   if (o.loggingDurationNrIsSet())
     j["loggingDurationNr"] = o.m_LoggingDurationNr;
   if (o.positioningMethodIsSet())
@@ -526,7 +533,7 @@ void to_json(nlohmann::json& j, const MdtConfiguration& o) {
     j["interFreqTargetList"] = o.m_InterFreqTargetList;
 }
 
-void from_json(const nlohmann::json& j, MdtConfiguration& o) {
+void from_json(const nlohmann::json &j, MdtConfiguration &o) {
   j.at("jobType").get_to(o.m_JobType);
   if (j.find("reportType") != j.end()) {
     j.at("reportType").get_to(o.m_ReportType);
@@ -637,44 +644,36 @@ void from_json(const nlohmann::json& j, MdtConfiguration& o) {
 oai::model::common::JobType MdtConfiguration::getJobType() const {
   return m_JobType;
 }
-void MdtConfiguration::setJobType(oai::model::common::JobType const& value) {
+void MdtConfiguration::setJobType(oai::model::common::JobType const &value) {
   m_JobType = value;
 }
 oai::model::common::ReportTypeMdt MdtConfiguration::getReportType() const {
   return m_ReportType;
 }
 void MdtConfiguration::setReportType(
-    oai::model::common::ReportTypeMdt const& value) {
-  m_ReportType      = value;
+    oai::model::common::ReportTypeMdt const &value) {
+  m_ReportType = value;
   m_ReportTypeIsSet = true;
 }
-bool MdtConfiguration::reportTypeIsSet() const {
-  return m_ReportTypeIsSet;
-}
-void MdtConfiguration::unsetReportType() {
-  m_ReportTypeIsSet = false;
-}
+bool MdtConfiguration::reportTypeIsSet() const { return m_ReportTypeIsSet; }
+void MdtConfiguration::unsetReportType() { m_ReportTypeIsSet = false; }
 oai::model::common::AreaScope MdtConfiguration::getAreaScope() const {
   return m_AreaScope;
 }
 void MdtConfiguration::setAreaScope(
-    oai::model::common::AreaScope const& value) {
-  m_AreaScope      = value;
+    oai::model::common::AreaScope const &value) {
+  m_AreaScope = value;
   m_AreaScopeIsSet = true;
 }
-bool MdtConfiguration::areaScopeIsSet() const {
-  return m_AreaScopeIsSet;
-}
-void MdtConfiguration::unsetAreaScope() {
-  m_AreaScopeIsSet = false;
-}
+bool MdtConfiguration::areaScopeIsSet() const { return m_AreaScopeIsSet; }
+void MdtConfiguration::unsetAreaScope() { m_AreaScopeIsSet = false; }
 std::vector<oai::model::common::MeasurementLteForMdt>
 MdtConfiguration::getMeasurementLteList() const {
   return m_MeasurementLteList;
 }
 void MdtConfiguration::setMeasurementLteList(
-    std::vector<oai::model::common::MeasurementLteForMdt> const& value) {
-  m_MeasurementLteList      = value;
+    std::vector<oai::model::common::MeasurementLteForMdt> const &value) {
+  m_MeasurementLteList = value;
   m_MeasurementLteListIsSet = true;
 }
 bool MdtConfiguration::measurementLteListIsSet() const {
@@ -688,8 +687,8 @@ MdtConfiguration::getMeasurementNrList() const {
   return m_MeasurementNrList;
 }
 void MdtConfiguration::setMeasurementNrList(
-    std::vector<oai::model::common::MeasurementNrForMdt> const& value) {
-  m_MeasurementNrList      = value;
+    std::vector<oai::model::common::MeasurementNrForMdt> const &value) {
+  m_MeasurementNrList = value;
   m_MeasurementNrListIsSet = true;
 }
 bool MdtConfiguration::measurementNrListIsSet() const {
@@ -703,8 +702,8 @@ MdtConfiguration::getSensorMeasurementList() const {
   return m_SensorMeasurementList;
 }
 void MdtConfiguration::setSensorMeasurementList(
-    std::vector<oai::model::common::SensorMeasurement> const& value) {
-  m_SensorMeasurementList      = value;
+    std::vector<oai::model::common::SensorMeasurement> const &value) {
+  m_SensorMeasurementList = value;
   m_SensorMeasurementListIsSet = true;
 }
 bool MdtConfiguration::sensorMeasurementListIsSet() const {
@@ -718,8 +717,8 @@ MdtConfiguration::getReportingTriggerList() const {
   return m_ReportingTriggerList;
 }
 void MdtConfiguration::setReportingTriggerList(
-    std::vector<oai::model::common::ReportingTrigger> const& value) {
-  m_ReportingTriggerList      = value;
+    std::vector<oai::model::common::ReportingTrigger> const &value) {
+  m_ReportingTriggerList = value;
   m_ReportingTriggerListIsSet = true;
 }
 bool MdtConfiguration::reportingTriggerListIsSet() const {
@@ -728,28 +727,26 @@ bool MdtConfiguration::reportingTriggerListIsSet() const {
 void MdtConfiguration::unsetReportingTriggerList() {
   m_ReportingTriggerListIsSet = false;
 }
-oai::model::common::ReportIntervalMdt MdtConfiguration::getReportInterval()
-    const {
+oai::model::common::ReportIntervalMdt
+MdtConfiguration::getReportInterval() const {
   return m_ReportInterval;
 }
 void MdtConfiguration::setReportInterval(
-    oai::model::common::ReportIntervalMdt const& value) {
-  m_ReportInterval      = value;
+    oai::model::common::ReportIntervalMdt const &value) {
+  m_ReportInterval = value;
   m_ReportIntervalIsSet = true;
 }
 bool MdtConfiguration::reportIntervalIsSet() const {
   return m_ReportIntervalIsSet;
 }
-void MdtConfiguration::unsetReportInterval() {
-  m_ReportIntervalIsSet = false;
-}
-oai::model::common::ReportIntervalNrMdt MdtConfiguration::getReportIntervalNr()
-    const {
+void MdtConfiguration::unsetReportInterval() { m_ReportIntervalIsSet = false; }
+oai::model::common::ReportIntervalNrMdt
+MdtConfiguration::getReportIntervalNr() const {
   return m_ReportIntervalNr;
 }
 void MdtConfiguration::setReportIntervalNr(
-    oai::model::common::ReportIntervalNrMdt const& value) {
-  m_ReportIntervalNr      = value;
+    oai::model::common::ReportIntervalNrMdt const &value) {
+  m_ReportIntervalNr = value;
   m_ReportIntervalNrIsSet = true;
 }
 bool MdtConfiguration::reportIntervalNrIsSet() const {
@@ -762,21 +759,17 @@ oai::model::common::ReportAmountMdt MdtConfiguration::getReportAmount() const {
   return m_ReportAmount;
 }
 void MdtConfiguration::setReportAmount(
-    oai::model::common::ReportAmountMdt const& value) {
-  m_ReportAmount      = value;
+    oai::model::common::ReportAmountMdt const &value) {
+  m_ReportAmount = value;
   m_ReportAmountIsSet = true;
 }
-bool MdtConfiguration::reportAmountIsSet() const {
-  return m_ReportAmountIsSet;
-}
-void MdtConfiguration::unsetReportAmount() {
-  m_ReportAmountIsSet = false;
-}
+bool MdtConfiguration::reportAmountIsSet() const { return m_ReportAmountIsSet; }
+void MdtConfiguration::unsetReportAmount() { m_ReportAmountIsSet = false; }
 int32_t MdtConfiguration::getEventThresholdRsrp() const {
   return m_EventThresholdRsrp;
 }
 void MdtConfiguration::setEventThresholdRsrp(int32_t const value) {
-  m_EventThresholdRsrp      = value;
+  m_EventThresholdRsrp = value;
   m_EventThresholdRsrpIsSet = true;
 }
 bool MdtConfiguration::eventThresholdRsrpIsSet() const {
@@ -789,7 +782,7 @@ int32_t MdtConfiguration::getEventThresholdRsrpNr() const {
   return m_EventThresholdRsrpNr;
 }
 void MdtConfiguration::setEventThresholdRsrpNr(int32_t const value) {
-  m_EventThresholdRsrpNr      = value;
+  m_EventThresholdRsrpNr = value;
   m_EventThresholdRsrpNrIsSet = true;
 }
 bool MdtConfiguration::eventThresholdRsrpNrIsSet() const {
@@ -802,7 +795,7 @@ int32_t MdtConfiguration::getEventThresholdRsrq() const {
   return m_EventThresholdRsrq;
 }
 void MdtConfiguration::setEventThresholdRsrq(int32_t const value) {
-  m_EventThresholdRsrq      = value;
+  m_EventThresholdRsrq = value;
   m_EventThresholdRsrqIsSet = true;
 }
 bool MdtConfiguration::eventThresholdRsrqIsSet() const {
@@ -815,7 +808,7 @@ int32_t MdtConfiguration::getEventThresholdRsrqNr() const {
   return m_EventThresholdRsrqNr;
 }
 void MdtConfiguration::setEventThresholdRsrqNr(int32_t const value) {
-  m_EventThresholdRsrqNr      = value;
+  m_EventThresholdRsrqNr = value;
   m_EventThresholdRsrqNrIsSet = true;
 }
 bool MdtConfiguration::eventThresholdRsrqNrIsSet() const {
@@ -824,28 +817,24 @@ bool MdtConfiguration::eventThresholdRsrqNrIsSet() const {
 void MdtConfiguration::unsetEventThresholdRsrqNr() {
   m_EventThresholdRsrqNrIsSet = false;
 }
-std::vector<oai::model::common::EventForMdt> MdtConfiguration::getEventList()
-    const {
+std::vector<oai::model::common::EventForMdt>
+MdtConfiguration::getEventList() const {
   return m_EventList;
 }
 void MdtConfiguration::setEventList(
-    std::vector<oai::model::common::EventForMdt> const& value) {
-  m_EventList      = value;
+    std::vector<oai::model::common::EventForMdt> const &value) {
+  m_EventList = value;
   m_EventListIsSet = true;
 }
-bool MdtConfiguration::eventListIsSet() const {
-  return m_EventListIsSet;
-}
-void MdtConfiguration::unsetEventList() {
-  m_EventListIsSet = false;
-}
-oai::model::common::LoggingIntervalMdt MdtConfiguration::getLoggingInterval()
-    const {
+bool MdtConfiguration::eventListIsSet() const { return m_EventListIsSet; }
+void MdtConfiguration::unsetEventList() { m_EventListIsSet = false; }
+oai::model::common::LoggingIntervalMdt
+MdtConfiguration::getLoggingInterval() const {
   return m_LoggingInterval;
 }
 void MdtConfiguration::setLoggingInterval(
-    oai::model::common::LoggingIntervalMdt const& value) {
-  m_LoggingInterval      = value;
+    oai::model::common::LoggingIntervalMdt const &value) {
+  m_LoggingInterval = value;
   m_LoggingIntervalIsSet = true;
 }
 bool MdtConfiguration::loggingIntervalIsSet() const {
@@ -859,8 +848,8 @@ MdtConfiguration::getLoggingIntervalNr() const {
   return m_LoggingIntervalNr;
 }
 void MdtConfiguration::setLoggingIntervalNr(
-    oai::model::common::LoggingIntervalNrMdt const& value) {
-  m_LoggingIntervalNr      = value;
+    oai::model::common::LoggingIntervalNrMdt const &value) {
+  m_LoggingIntervalNr = value;
   m_LoggingIntervalNrIsSet = true;
 }
 bool MdtConfiguration::loggingIntervalNrIsSet() const {
@@ -869,13 +858,13 @@ bool MdtConfiguration::loggingIntervalNrIsSet() const {
 void MdtConfiguration::unsetLoggingIntervalNr() {
   m_LoggingIntervalNrIsSet = false;
 }
-oai::model::common::LoggingDurationMdt MdtConfiguration::getLoggingDuration()
-    const {
+oai::model::common::LoggingDurationMdt
+MdtConfiguration::getLoggingDuration() const {
   return m_LoggingDuration;
 }
 void MdtConfiguration::setLoggingDuration(
-    oai::model::common::LoggingDurationMdt const& value) {
-  m_LoggingDuration      = value;
+    oai::model::common::LoggingDurationMdt const &value) {
+  m_LoggingDuration = value;
   m_LoggingDurationIsSet = true;
 }
 bool MdtConfiguration::loggingDurationIsSet() const {
@@ -889,8 +878,8 @@ MdtConfiguration::getLoggingDurationNr() const {
   return m_LoggingDurationNr;
 }
 void MdtConfiguration::setLoggingDurationNr(
-    oai::model::common::LoggingDurationNrMdt const& value) {
-  m_LoggingDurationNr      = value;
+    oai::model::common::LoggingDurationNrMdt const &value) {
+  m_LoggingDurationNr = value;
   m_LoggingDurationNrIsSet = true;
 }
 bool MdtConfiguration::loggingDurationNrIsSet() const {
@@ -904,8 +893,8 @@ MdtConfiguration::getPositioningMethod() const {
   return m_PositioningMethod;
 }
 void MdtConfiguration::setPositioningMethod(
-    oai::model::common::PositioningMethodMdt const& value) {
-  m_PositioningMethod      = value;
+    oai::model::common::PositioningMethodMdt const &value) {
+  m_PositioningMethod = value;
   m_PositioningMethodIsSet = true;
 }
 bool MdtConfiguration::positioningMethodIsSet() const {
@@ -919,8 +908,8 @@ MdtConfiguration::getAddPositioningMethodList() const {
   return m_AddPositioningMethodList;
 }
 void MdtConfiguration::setAddPositioningMethodList(
-    std::vector<oai::model::common::PositioningMethodMdt> const& value) {
-  m_AddPositioningMethodList      = value;
+    std::vector<oai::model::common::PositioningMethodMdt> const &value) {
+  m_AddPositioningMethodList = value;
   m_AddPositioningMethodListIsSet = true;
 }
 bool MdtConfiguration::addPositioningMethodListIsSet() const {
@@ -934,8 +923,8 @@ MdtConfiguration::getCollectionPeriodRmmLte() const {
   return m_CollectionPeriodRmmLte;
 }
 void MdtConfiguration::setCollectionPeriodRmmLte(
-    oai::model::common::CollectionPeriodRmmLteMdt const& value) {
-  m_CollectionPeriodRmmLte      = value;
+    oai::model::common::CollectionPeriodRmmLteMdt const &value) {
+  m_CollectionPeriodRmmLte = value;
   m_CollectionPeriodRmmLteIsSet = true;
 }
 bool MdtConfiguration::collectionPeriodRmmLteIsSet() const {
@@ -949,8 +938,8 @@ MdtConfiguration::getCollectionPeriodRmmNr() const {
   return m_CollectionPeriodRmmNr;
 }
 void MdtConfiguration::setCollectionPeriodRmmNr(
-    oai::model::common::CollectionPeriodRmmNrMdt const& value) {
-  m_CollectionPeriodRmmNr      = value;
+    oai::model::common::CollectionPeriodRmmNrMdt const &value) {
+  m_CollectionPeriodRmmNr = value;
   m_CollectionPeriodRmmNrIsSet = true;
 }
 bool MdtConfiguration::collectionPeriodRmmNrIsSet() const {
@@ -964,8 +953,8 @@ MdtConfiguration::getMeasurementPeriodLte() const {
   return m_MeasurementPeriodLte;
 }
 void MdtConfiguration::setMeasurementPeriodLte(
-    oai::model::common::MeasurementPeriodLteMdt const& value) {
-  m_MeasurementPeriodLte      = value;
+    oai::model::common::MeasurementPeriodLteMdt const &value) {
+  m_MeasurementPeriodLte = value;
   m_MeasurementPeriodLteIsSet = true;
 }
 bool MdtConfiguration::measurementPeriodLteIsSet() const {
@@ -979,8 +968,8 @@ MdtConfiguration::getMdtAllowedPlmnIdList() const {
   return m_MdtAllowedPlmnIdList;
 }
 void MdtConfiguration::setMdtAllowedPlmnIdList(
-    std::vector<oai::model::common::PlmnId> const& value) {
-  m_MdtAllowedPlmnIdList      = value;
+    std::vector<oai::model::common::PlmnId> const &value) {
+  m_MdtAllowedPlmnIdList = value;
   m_MdtAllowedPlmnIdListIsSet = true;
 }
 bool MdtConfiguration::mdtAllowedPlmnIdListIsSet() const {
@@ -989,28 +978,26 @@ bool MdtConfiguration::mdtAllowedPlmnIdListIsSet() const {
 void MdtConfiguration::unsetMdtAllowedPlmnIdList() {
   m_MdtAllowedPlmnIdListIsSet = false;
 }
-std::vector<oai::model::common::MbsfnArea> MdtConfiguration::getMbsfnAreaList()
-    const {
+std::vector<oai::model::common::MbsfnArea>
+MdtConfiguration::getMbsfnAreaList() const {
   return m_MbsfnAreaList;
 }
 void MdtConfiguration::setMbsfnAreaList(
-    std::vector<oai::model::common::MbsfnArea> const& value) {
-  m_MbsfnAreaList      = value;
+    std::vector<oai::model::common::MbsfnArea> const &value) {
+  m_MbsfnAreaList = value;
   m_MbsfnAreaListIsSet = true;
 }
 bool MdtConfiguration::mbsfnAreaListIsSet() const {
   return m_MbsfnAreaListIsSet;
 }
-void MdtConfiguration::unsetMbsfnAreaList() {
-  m_MbsfnAreaListIsSet = false;
-}
+void MdtConfiguration::unsetMbsfnAreaList() { m_MbsfnAreaListIsSet = false; }
 std::vector<oai::model::common::InterFreqTargetInfo>
 MdtConfiguration::getInterFreqTargetList() const {
   return m_InterFreqTargetList;
 }
 void MdtConfiguration::setInterFreqTargetList(
-    std::vector<oai::model::common::InterFreqTargetInfo> const& value) {
-  m_InterFreqTargetList      = value;
+    std::vector<oai::model::common::InterFreqTargetInfo> const &value) {
+  m_InterFreqTargetList = value;
   m_InterFreqTargetListIsSet = true;
 }
 bool MdtConfiguration::interFreqTargetListIsSet() const {
@@ -1020,4 +1007,4 @@ void MdtConfiguration::unsetInterFreqTargetList() {
   m_InterFreqTargetListIsSet = false;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

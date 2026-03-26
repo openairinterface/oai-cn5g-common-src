@@ -20,9 +20,7 @@ PduSessionIdentity2::PduSessionIdentity2(uint8_t iei, uint8_t value)
 }
 
 //------------------------------------------------------------------------------
-PduSessionIdentity2::PduSessionIdentity2() : Type3NasIe() {
-  value_ = 0;
-}
+PduSessionIdentity2::PduSessionIdentity2() : Type3NasIe() { value_ = 0; }
 
 //------------------------------------------------------------------------------
 PduSessionIdentity2::~PduSessionIdentity2() {}
@@ -33,17 +31,13 @@ uint32_t PduSessionIdentity2::GetIeLength() const {
 }
 
 //------------------------------------------------------------------------------
-void PduSessionIdentity2::SetValue(uint8_t value) {
-  value_ = value;
-}
+void PduSessionIdentity2::SetValue(uint8_t value) { value_ = value; }
 
 //------------------------------------------------------------------------------
-uint8_t PduSessionIdentity2::GetValue() const {
-  return value_;
-}
+uint8_t PduSessionIdentity2::GetValue() const { return value_; }
 
 //------------------------------------------------------------------------------
-int PduSessionIdentity2::Encode(uint8_t* buf, int len) const {
+int PduSessionIdentity2::Encode(uint8_t *buf, int len) const {
   oai::logger::logger_common::nas().debug("Encoding %s", GetIeName().c_str());
 
   if (len < kPduSessionIdentity2Length) {
@@ -60,14 +54,14 @@ int PduSessionIdentity2::Encode(uint8_t* buf, int len) const {
   // Value
   ENCODE_U8(buf + encoded_size, value_, encoded_size);
 
-  oai::logger::logger_common::nas().debug(
-      "Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
+  oai::logger::logger_common::nas().debug("Encoded %s, len (%d)",
+                                          GetIeName().c_str(), encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
-int PduSessionIdentity2::Decode(
-    const uint8_t* const buf, int len, bool is_iei) {
+int PduSessionIdentity2::Decode(const uint8_t *const buf, int len,
+                                bool is_iei) {
   oai::logger::logger_common::nas().debug("Decoding %s", GetIeName().c_str());
 
   if (len < kPduSessionIdentity2Length) {
@@ -85,7 +79,7 @@ int PduSessionIdentity2::Decode(
   DECODE_U8(buf + decoded_size, value_, decoded_size);
 
   oai::logger::logger_common::nas().debug("Decoded value 0x%x", value_);
-  oai::logger::logger_common::nas().debug(
-      "Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
+  oai::logger::logger_common::nas().debug("Decoded %s, len (%d)",
+                                          GetIeName().c_str(), decoded_size);
   return decoded_size;
 }

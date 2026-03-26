@@ -20,7 +20,7 @@
 namespace oai::model::ausf {
 
 RgAuthenticationInfo::RgAuthenticationInfo() {
-  m_Suci             = "";
+  m_Suci = "";
   m_AuthenticatedInd = false;
 }
 
@@ -30,23 +30,19 @@ void RgAuthenticationInfo::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const RgAuthenticationInfo& o) {
-  j                     = nlohmann::json();
-  j["suci"]             = o.m_Suci;
+void to_json(nlohmann::json &j, const RgAuthenticationInfo &o) {
+  j = nlohmann::json();
+  j["suci"] = o.m_Suci;
   j["authenticatedInd"] = o.m_AuthenticatedInd;
 }
 
-void from_json(const nlohmann::json& j, RgAuthenticationInfo& o) {
+void from_json(const nlohmann::json &j, RgAuthenticationInfo &o) {
   j.at("suci").get_to(o.m_Suci);
   j.at("authenticatedInd").get_to(o.m_AuthenticatedInd);
 }
 
-std::string RgAuthenticationInfo::getSuci() const {
-  return m_Suci;
-}
-void RgAuthenticationInfo::setSuci(std::string const& value) {
-  m_Suci = value;
-}
+std::string RgAuthenticationInfo::getSuci() const { return m_Suci; }
+void RgAuthenticationInfo::setSuci(std::string const &value) { m_Suci = value; }
 bool RgAuthenticationInfo::isAuthenticatedInd() const {
   return m_AuthenticatedInd;
 }
@@ -54,4 +50,4 @@ void RgAuthenticationInfo::setAuthenticatedInd(bool const value) {
   m_AuthenticatedInd = value;
 }
 
-}  // namespace oai::model::ausf
+} // namespace oai::model::ausf

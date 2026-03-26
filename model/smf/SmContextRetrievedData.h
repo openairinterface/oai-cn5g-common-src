@@ -20,8 +20,8 @@
 #define SmContextRetrievedData_H_
 
 #include "SmContext.h"
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::smf {
 
@@ -29,7 +29,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class SmContextRetrievedData {
- public:
+public:
   SmContextRetrievedData();
   virtual ~SmContextRetrievedData();
 
@@ -42,25 +42,25 @@ class SmContextRetrievedData {
   ///
   /// </summary>
   std::string getUeEpsPdnConnection() const;
-  void setUeEpsPdnConnection(std::string const& value);
+  void setUeEpsPdnConnection(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   SmContext getSmContext() const;
-  void setSmContext(SmContext const& value);
+  void setSmContext(SmContext const &value);
   bool smContextIsSet() const;
   void unsetSmContext();
 
-  friend void to_json(nlohmann::json& j, const SmContextRetrievedData& o);
-  friend void from_json(const nlohmann::json& j, SmContextRetrievedData& o);
+  friend void to_json(nlohmann::json &j, const SmContextRetrievedData &o);
+  friend void from_json(const nlohmann::json &j, SmContextRetrievedData &o);
 
- protected:
+protected:
   std::string m_UeEpsPdnConnection;
 
   SmContext m_SmContext;
   bool m_SmContextIsSet;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* SmContextRetrievedData_H_ */

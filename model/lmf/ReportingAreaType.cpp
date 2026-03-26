@@ -27,12 +27,12 @@ void ReportingAreaType::validate() const {
   }
 }
 
-bool ReportingAreaType::validate(std::stringstream& msg) const {
+bool ReportingAreaType::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ReportingAreaType::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ReportingAreaType::validate(std::stringstream &msg,
+                                 const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ReportingAreaType" : pathPrefix;
@@ -43,28 +43,26 @@ bool ReportingAreaType::validate(
   return success;
 }
 
-bool ReportingAreaType::operator==(const ReportingAreaType& rhs) const {
+bool ReportingAreaType::operator==(const ReportingAreaType &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool ReportingAreaType::operator!=(const ReportingAreaType& rhs) const {
+bool ReportingAreaType::operator!=(const ReportingAreaType &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ReportingAreaType& o) {
+void to_json(nlohmann::json &j, const ReportingAreaType &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, ReportingAreaType& o) {
+void from_json(const nlohmann::json &j, ReportingAreaType &o) {
   from_json(j, o.m_value);
 }
 
-ReportingAreaType_anyOf ReportingAreaType::getValue() const {
-  return m_value;
-}
+ReportingAreaType_anyOf ReportingAreaType::getValue() const { return m_value; }
 
 void ReportingAreaType::setValue(ReportingAreaType_anyOf value) {
   m_value = value;
@@ -80,4 +78,4 @@ void ReportingAreaType::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

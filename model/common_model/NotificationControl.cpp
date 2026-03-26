@@ -27,12 +27,12 @@ void NotificationControl::validate() const {
   }
 }
 
-bool NotificationControl::validate(std::stringstream& msg) const {
+bool NotificationControl::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool NotificationControl::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool NotificationControl::validate(std::stringstream &msg,
+                                   const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "NotificationControl" : pathPrefix;
@@ -43,22 +43,22 @@ bool NotificationControl::validate(
   return success;
 }
 
-bool NotificationControl::operator==(const NotificationControl& rhs) const {
+bool NotificationControl::operator==(const NotificationControl &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool NotificationControl::operator!=(const NotificationControl& rhs) const {
+bool NotificationControl::operator!=(const NotificationControl &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const NotificationControl& o) {
+void to_json(nlohmann::json &j, const NotificationControl &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, NotificationControl& o) {
+void from_json(const nlohmann::json &j, NotificationControl &o) {
   from_json(j, o.m_value);
 }
 
@@ -80,4 +80,4 @@ void NotificationControl::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

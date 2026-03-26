@@ -13,8 +13,8 @@
 
 #include "RmState_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::amf {
 
@@ -27,12 +27,12 @@ void RmState_anyOf::validate() const {
   }
 }
 
-bool RmState_anyOf::validate(std::stringstream& msg) const {
+bool RmState_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool RmState_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool RmState_anyOf::validate(std::stringstream &msg,
+                             const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "RmState_anyOf" : pathPrefix;
@@ -46,33 +46,33 @@ bool RmState_anyOf::validate(
   return success;
 }
 
-bool RmState_anyOf::operator==(const RmState_anyOf& rhs) const {
+bool RmState_anyOf::operator==(const RmState_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool RmState_anyOf::operator!=(const RmState_anyOf& rhs) const {
+bool RmState_anyOf::operator!=(const RmState_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const RmState_anyOf& o) {
+void to_json(nlohmann::json &j, const RmState_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case RmState_anyOf::eRmState_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case RmState_anyOf::eRmState_anyOf::REGISTERED:
-      j = "REGISTERED";
-      break;
-    case RmState_anyOf::eRmState_anyOf::DEREGISTERED:
-      j = "DEREGISTERED";
-      break;
+  case RmState_anyOf::eRmState_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case RmState_anyOf::eRmState_anyOf::REGISTERED:
+    j = "REGISTERED";
+    break;
+  case RmState_anyOf::eRmState_anyOf::DEREGISTERED:
+    j = "DEREGISTERED";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, RmState_anyOf& o) {
+void from_json(const nlohmann::json &j, RmState_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "REGISTERED") {
     o.setValue(RmState_anyOf::eRmState_anyOf::REGISTERED);
@@ -94,4 +94,4 @@ void RmState_anyOf::setValue(RmState_anyOf::eRmState_anyOf value) {
   m_value = value;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

@@ -19,9 +19,9 @@
 #ifndef WirelineArea_H_
 #define WirelineArea_H_
 
+#include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
-#include <nlohmann/json.hpp>
 
 namespace oai::model::common {
 
@@ -29,7 +29,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class WirelineArea {
- public:
+public:
   WirelineArea();
   virtual ~WirelineArea() = default;
 
@@ -43,16 +43,16 @@ class WirelineArea {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const WirelineArea& rhs) const;
-  bool operator!=(const WirelineArea& rhs) const;
+  bool operator==(const WirelineArea &rhs) const;
+  bool operator!=(const WirelineArea &rhs) const;
 
   /////////////////////////////////////////////
   /// WirelineArea members
@@ -61,35 +61,35 @@ class WirelineArea {
   ///
   /// </summary>
   std::vector<std::string> getGlobalLineIds() const;
-  void setGlobalLineIds(std::vector<std::string> const& value);
+  void setGlobalLineIds(std::vector<std::string> const &value);
   bool globalLineIdsIsSet() const;
   void unsetGlobalLineIds();
   /// <summary>
   ///
   /// </summary>
   std::vector<std::string> getHfcNIds() const;
-  void setHfcNIds(std::vector<std::string> const& value);
+  void setHfcNIds(std::vector<std::string> const &value);
   bool hfcNIdsIsSet() const;
   void unsetHfcNIds();
   /// <summary>
   ///
   /// </summary>
   std::string getAreaCodeB() const;
-  void setAreaCodeB(std::string const& value);
+  void setAreaCodeB(std::string const &value);
   bool areaCodeBIsSet() const;
   void unsetAreaCodeB();
   /// <summary>
   ///
   /// </summary>
   std::string getAreaCodeC() const;
-  void setAreaCodeC(std::string const& value);
+  void setAreaCodeC(std::string const &value);
   bool areaCodeCIsSet() const;
   void unsetAreaCodeC();
 
-  friend void to_json(nlohmann::json& j, const WirelineArea& o);
-  friend void from_json(const nlohmann::json& j, WirelineArea& o);
+  friend void to_json(nlohmann::json &j, const WirelineArea &o);
+  friend void from_json(const nlohmann::json &j, WirelineArea &o);
 
- protected:
+protected:
   std::vector<std::string> m_GlobalLineIds;
   bool m_GlobalLineIdsIsSet;
   std::vector<std::string> m_HfcNIds;
@@ -100,6 +100,6 @@ class WirelineArea {
   bool m_AreaCodeCIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* WirelineArea_H_ */

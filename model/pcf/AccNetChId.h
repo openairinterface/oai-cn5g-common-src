@@ -19,9 +19,9 @@
 #ifndef AccNetChId_H_
 #define AccNetChId_H_
 
+#include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
-#include <nlohmann/json.hpp>
 
 namespace oai::model::pcf {
 
@@ -29,7 +29,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class AccNetChId {
- public:
+public:
   AccNetChId();
   virtual ~AccNetChId() = default;
 
@@ -43,16 +43,16 @@ class AccNetChId {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const AccNetChId& rhs) const;
-  bool operator!=(const AccNetChId& rhs) const;
+  bool operator==(const AccNetChId &rhs) const;
+  bool operator!=(const AccNetChId &rhs) const;
 
   /////////////////////////////////////////////
   /// AccNetChId members
@@ -67,7 +67,7 @@ class AccNetChId {
   /// Access Network Charging Identifier.
   /// </summary>
   std::vector<std::string> getRefPccRuleIds() const;
-  void setRefPccRuleIds(std::vector<std::string> const& value);
+  void setRefPccRuleIds(std::vector<std::string> const &value);
   bool refPccRuleIdsIsSet() const;
   void unsetRefPccRuleIds();
   /// <summary>
@@ -79,10 +79,10 @@ class AccNetChId {
   bool sessionChScopeIsSet() const;
   void unsetSessionChScope();
 
-  friend void to_json(nlohmann::json& j, const AccNetChId& o);
-  friend void from_json(const nlohmann::json& j, AccNetChId& o);
+  friend void to_json(nlohmann::json &j, const AccNetChId &o);
+  friend void from_json(const nlohmann::json &j, AccNetChId &o);
 
- protected:
+protected:
   uint32_t m_AccNetChaIdValue;
 
   std::vector<std::string> m_RefPccRuleIds;
@@ -91,6 +91,6 @@ class AccNetChId {
   bool m_SessionChScopeIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* AccNetChId_H_ */

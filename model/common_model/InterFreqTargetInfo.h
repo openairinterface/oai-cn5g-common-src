@@ -19,8 +19,8 @@
 #ifndef InterFreqTargetInfo_H_
 #define InterFreqTargetInfo_H_
 
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::common {
 
@@ -28,7 +28,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class InterFreqTargetInfo {
- public:
+public:
   InterFreqTargetInfo();
   virtual ~InterFreqTargetInfo() = default;
 
@@ -42,16 +42,16 @@ class InterFreqTargetInfo {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const InterFreqTargetInfo& rhs) const;
-  bool operator!=(const InterFreqTargetInfo& rhs) const;
+  bool operator==(const InterFreqTargetInfo &rhs) const;
+  bool operator!=(const InterFreqTargetInfo &rhs) const;
 
   /////////////////////////////////////////////
   /// InterFreqTargetInfo members
@@ -69,16 +69,16 @@ class InterFreqTargetInfo {
   bool cellIdListIsSet() const;
   void unsetCellIdList();
 
-  friend void to_json(nlohmann::json& j, const InterFreqTargetInfo& o);
-  friend void from_json(const nlohmann::json& j, InterFreqTargetInfo& o);
+  friend void to_json(nlohmann::json &j, const InterFreqTargetInfo &o);
+  friend void from_json(const nlohmann::json &j, InterFreqTargetInfo &o);
 
- protected:
+protected:
   int32_t m_DlCarrierFreq;
 
   std::vector<int32_t> m_CellIdList;
   bool m_CellIdListIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* InterFreqTargetInfo_H_ */

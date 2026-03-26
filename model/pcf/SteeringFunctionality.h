@@ -34,7 +34,7 @@ namespace oai::model::pcf {
 /// support traffic steering, switching and splitting.
 /// </summary>
 class SteeringFunctionality {
- public:
+public:
   SteeringFunctionality();
   virtual ~SteeringFunctionality() = default;
 
@@ -48,36 +48,36 @@ class SteeringFunctionality {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const SteeringFunctionality& rhs) const;
-  bool operator!=(const SteeringFunctionality& rhs) const;
+  bool operator==(const SteeringFunctionality &rhs) const;
+  bool operator!=(const SteeringFunctionality &rhs) const;
 
   /////////////////////////////////////////////
   /// SteeringFunctionality members
 
   SteeringFunctionality_anyOf getValue() const;
   void setValue(SteeringFunctionality_anyOf value);
-  SteeringFunctionality_anyOf::eSteeringFunctionality_anyOf getEnumValue()
-      const;
-  void setEnumValue(
-      SteeringFunctionality_anyOf::eSteeringFunctionality_anyOf value);
-  friend void to_json(nlohmann::json& j, const SteeringFunctionality& o);
-  friend void from_json(const nlohmann::json& j, SteeringFunctionality& o);
-  friend void to_json(nlohmann::json& j, const SteeringFunctionality_anyOf& o);
-  friend void from_json(
-      const nlohmann::json& j, SteeringFunctionality_anyOf& o);
+  SteeringFunctionality_anyOf::eSteeringFunctionality_anyOf
+  getEnumValue() const;
+  void
+  setEnumValue(SteeringFunctionality_anyOf::eSteeringFunctionality_anyOf value);
+  friend void to_json(nlohmann::json &j, const SteeringFunctionality &o);
+  friend void from_json(const nlohmann::json &j, SteeringFunctionality &o);
+  friend void to_json(nlohmann::json &j, const SteeringFunctionality_anyOf &o);
+  friend void from_json(const nlohmann::json &j,
+                        SteeringFunctionality_anyOf &o);
 
- protected:
+protected:
   SteeringFunctionality_anyOf m_value;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* SteeringFunctionality_H_ */

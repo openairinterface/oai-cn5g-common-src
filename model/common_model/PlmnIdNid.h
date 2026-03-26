@@ -19,8 +19,8 @@
 #ifndef PlmnIdNid_H_
 #define PlmnIdNid_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::common {
 
@@ -28,7 +28,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class PlmnIdNid {
- public:
+public:
   PlmnIdNid();
   virtual ~PlmnIdNid() = default;
 
@@ -42,16 +42,16 @@ class PlmnIdNid {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const PlmnIdNid& rhs) const;
-  bool operator!=(const PlmnIdNid& rhs) const;
+  bool operator==(const PlmnIdNid &rhs) const;
+  bool operator!=(const PlmnIdNid &rhs) const;
 
   /////////////////////////////////////////////
   /// PlmnIdNid members
@@ -60,24 +60,24 @@ class PlmnIdNid {
   ///
   /// </summary>
   std::string getMcc() const;
-  void setMcc(std::string const& value);
+  void setMcc(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getMnc() const;
-  void setMnc(std::string const& value);
+  void setMnc(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getNid() const;
-  void setNid(std::string const& value);
+  void setNid(std::string const &value);
   bool nidIsSet() const;
   void unsetNid();
 
-  friend void to_json(nlohmann::json& j, const PlmnIdNid& o);
-  friend void from_json(const nlohmann::json& j, PlmnIdNid& o);
+  friend void to_json(nlohmann::json &j, const PlmnIdNid &o);
+  friend void from_json(const nlohmann::json &j, PlmnIdNid &o);
 
- protected:
+protected:
   std::string m_Mcc;
 
   std::string m_Mnc;
@@ -86,6 +86,6 @@ class PlmnIdNid {
   bool m_NidIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* PlmnIdNid_H_ */

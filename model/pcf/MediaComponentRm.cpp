@@ -19,79 +19,79 @@
 namespace oai::model::pcf {
 
 MediaComponentRm::MediaComponentRm() {
-  m_AfAppId                  = "";
-  m_AfAppIdIsSet             = false;
-  m_AfRoutReqIsSet           = false;
-  m_AfSfcReqIsSet            = false;
-  m_QosReference             = "";
-  m_QosReferenceIsSet        = false;
-  m_AltSerReqsIsSet          = false;
-  m_AltSerReqsDataIsSet      = false;
-  m_DisUeNotif               = false;
-  m_DisUeNotifIsSet          = false;
-  m_ContVer                  = 0;
-  m_ContVerIsSet             = false;
-  m_CodecsIsSet              = false;
-  m_DesMaxLatency            = 0.0f;
-  m_DesMaxLatencyIsSet       = false;
-  m_DesMaxLoss               = 0.0f;
-  m_DesMaxLossIsSet          = false;
-  m_FlusId                   = "";
-  m_FlusIdIsSet              = false;
-  m_FStatusIsSet             = false;
-  m_MarBwDl                  = "";
-  m_MarBwDlIsSet             = false;
-  m_MarBwUl                  = "";
-  m_MarBwUlIsSet             = false;
-  m_MaxPacketLossRateDl      = 0;
+  m_AfAppId = "";
+  m_AfAppIdIsSet = false;
+  m_AfRoutReqIsSet = false;
+  m_AfSfcReqIsSet = false;
+  m_QosReference = "";
+  m_QosReferenceIsSet = false;
+  m_AltSerReqsIsSet = false;
+  m_AltSerReqsDataIsSet = false;
+  m_DisUeNotif = false;
+  m_DisUeNotifIsSet = false;
+  m_ContVer = 0;
+  m_ContVerIsSet = false;
+  m_CodecsIsSet = false;
+  m_DesMaxLatency = 0.0f;
+  m_DesMaxLatencyIsSet = false;
+  m_DesMaxLoss = 0.0f;
+  m_DesMaxLossIsSet = false;
+  m_FlusId = "";
+  m_FlusIdIsSet = false;
+  m_FStatusIsSet = false;
+  m_MarBwDl = "";
+  m_MarBwDlIsSet = false;
+  m_MarBwUl = "";
+  m_MarBwUlIsSet = false;
+  m_MaxPacketLossRateDl = 0;
   m_MaxPacketLossRateDlIsSet = false;
-  m_MaxPacketLossRateUl      = 0;
+  m_MaxPacketLossRateUl = 0;
   m_MaxPacketLossRateUlIsSet = false;
-  m_MaxSuppBwDl              = "";
-  m_MaxSuppBwDlIsSet         = false;
-  m_MaxSuppBwUl              = "";
-  m_MaxSuppBwUlIsSet         = false;
-  m_MedCompN                 = 0;
-  m_MedSubCompsIsSet         = false;
-  m_MedTypeIsSet             = false;
-  m_MinDesBwDl               = "";
-  m_MinDesBwDlIsSet          = false;
-  m_MinDesBwUl               = "";
-  m_MinDesBwUlIsSet          = false;
-  m_MirBwDl                  = "";
-  m_MirBwDlIsSet             = false;
-  m_MirBwUl                  = "";
-  m_MirBwUlIsSet             = false;
-  m_PreemptCapIsSet          = false;
-  m_PreemptVulnIsSet         = false;
-  m_PrioSharingIndIsSet      = false;
-  m_ResPrioIsSet             = false;
-  m_RrBw                     = "";
-  m_RrBwIsSet                = false;
-  m_RsBw                     = "";
-  m_RsBwIsSet                = false;
-  m_SharingKeyDl             = 0;
-  m_SharingKeyDlIsSet        = false;
-  m_SharingKeyUl             = 0;
-  m_SharingKeyUlIsSet        = false;
-  m_TsnQosIsSet              = false;
-  m_TscaiInputDlIsSet        = false;
-  m_TscaiInputUlIsSet        = false;
-  m_TscaiTimeDom             = 0;
-  m_TscaiTimeDomIsSet        = false;
-  m_CapBatAdaptation         = false;
-  m_CapBatAdaptationIsSet    = false;
-  m_RTLatencyInd             = false;
-  m_RTLatencyIndIsSet        = false;
-  m_PduSetQosDlIsSet         = false;
-  m_PduSetQosUlIsSet         = false;
-  m_ProtoDescDlIsSet         = false;
-  m_ProtoDescUlIsSet         = false;
-  m_PeriodUl                 = 0;
-  m_PeriodUlIsSet            = false;
-  m_PeriodDl                 = 0;
-  m_PeriodDlIsSet            = false;
-  m_L4sIndIsSet              = false;
+  m_MaxSuppBwDl = "";
+  m_MaxSuppBwDlIsSet = false;
+  m_MaxSuppBwUl = "";
+  m_MaxSuppBwUlIsSet = false;
+  m_MedCompN = 0;
+  m_MedSubCompsIsSet = false;
+  m_MedTypeIsSet = false;
+  m_MinDesBwDl = "";
+  m_MinDesBwDlIsSet = false;
+  m_MinDesBwUl = "";
+  m_MinDesBwUlIsSet = false;
+  m_MirBwDl = "";
+  m_MirBwDlIsSet = false;
+  m_MirBwUl = "";
+  m_MirBwUlIsSet = false;
+  m_PreemptCapIsSet = false;
+  m_PreemptVulnIsSet = false;
+  m_PrioSharingIndIsSet = false;
+  m_ResPrioIsSet = false;
+  m_RrBw = "";
+  m_RrBwIsSet = false;
+  m_RsBw = "";
+  m_RsBwIsSet = false;
+  m_SharingKeyDl = 0;
+  m_SharingKeyDlIsSet = false;
+  m_SharingKeyUl = 0;
+  m_SharingKeyUlIsSet = false;
+  m_TsnQosIsSet = false;
+  m_TscaiInputDlIsSet = false;
+  m_TscaiInputUlIsSet = false;
+  m_TscaiTimeDom = 0;
+  m_TscaiTimeDomIsSet = false;
+  m_CapBatAdaptation = false;
+  m_CapBatAdaptationIsSet = false;
+  m_RTLatencyInd = false;
+  m_RTLatencyIndIsSet = false;
+  m_PduSetQosDlIsSet = false;
+  m_PduSetQosUlIsSet = false;
+  m_ProtoDescDlIsSet = false;
+  m_ProtoDescUlIsSet = false;
+  m_PeriodUl = 0;
+  m_PeriodUlIsSet = false;
+  m_PeriodDl = 0;
+  m_PeriodDlIsSet = false;
+  m_L4sIndIsSet = false;
 }
 
 void MediaComponentRm::validate() const {
@@ -101,28 +101,28 @@ void MediaComponentRm::validate() const {
   }
 }
 
-bool MediaComponentRm::validate(std::stringstream& msg) const {
+bool MediaComponentRm::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool MediaComponentRm::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool MediaComponentRm::validate(std::stringstream &msg,
+                                const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "MediaComponentRm" : pathPrefix;
 
   if (altSerReqsIsSet()) {
-    const std::vector<std::string>& value = m_AltSerReqs;
-    const std::string currentValuePath    = _pathPrefix + ".altSerReqs";
+    const std::vector<std::string> &value = m_AltSerReqs;
+    const std::string currentValuePath = _pathPrefix + ".altSerReqs";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const std::string& value : value) {
+      int i = 0;
+      for (const std::string &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -132,18 +132,18 @@ bool MediaComponentRm::validate(
   }
 
   if (altSerReqsDataIsSet()) {
-    const std::vector<oai::model::pcf::AlternativeServiceRequirementsData>&
-        value                          = m_AltSerReqsData;
+    const std::vector<oai::model::pcf::AlternativeServiceRequirementsData>
+        &value = m_AltSerReqsData;
     const std::string currentValuePath = _pathPrefix + ".altSerReqsData";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::AlternativeServiceRequirementsData& value :
+      int i = 0;
+      for (const oai::model::pcf::AlternativeServiceRequirementsData &value :
            value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
@@ -157,8 +157,8 @@ bool MediaComponentRm::validate(
   }
 
   if (codecsIsSet()) {
-    const std::vector<std::string>& value = m_Codecs;
-    const std::string currentValuePath    = _pathPrefix + ".codecs";
+    const std::vector<std::string> &value = m_Codecs;
+    const std::string currentValuePath = _pathPrefix + ".codecs";
 
     if (value.size() < 1) {
       success = false;
@@ -168,10 +168,10 @@ bool MediaComponentRm::validate(
       success = false;
       msg << currentValuePath << ": must have at most 2 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const std::string& value : value) {
+      int i = 0;
+      for (const std::string &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -181,17 +181,17 @@ bool MediaComponentRm::validate(
   }
 
   if (marBwDlIsSet()) {
-    const std::string& value           = m_MarBwDl;
+    const std::string &value = m_MarBwDl;
     const std::string currentValuePath = _pathPrefix + ".marBwDl";
   }
 
   if (marBwUlIsSet()) {
-    const std::string& value           = m_MarBwUl;
+    const std::string &value = m_MarBwUl;
     const std::string currentValuePath = _pathPrefix + ".marBwUl";
   }
 
   if (maxPacketLossRateDlIsSet()) {
-    const int32_t& value               = m_MaxPacketLossRateDl;
+    const int32_t &value = m_MaxPacketLossRateDl;
     const std::string currentValuePath = _pathPrefix + ".maxPacketLossRateDl";
 
     if (value < 0) {
@@ -205,7 +205,7 @@ bool MediaComponentRm::validate(
   }
 
   if (maxPacketLossRateUlIsSet()) {
-    const int32_t& value               = m_MaxPacketLossRateUl;
+    const int32_t &value = m_MaxPacketLossRateUl;
     const std::string currentValuePath = _pathPrefix + ".maxPacketLossRateUl";
 
     if (value < 0) {
@@ -219,53 +219,53 @@ bool MediaComponentRm::validate(
   }
 
   if (maxSuppBwDlIsSet()) {
-    const std::string& value           = m_MaxSuppBwDl;
+    const std::string &value = m_MaxSuppBwDl;
     const std::string currentValuePath = _pathPrefix + ".maxSuppBwDl";
   }
 
   if (maxSuppBwUlIsSet()) {
-    const std::string& value           = m_MaxSuppBwUl;
+    const std::string &value = m_MaxSuppBwUl;
     const std::string currentValuePath = _pathPrefix + ".maxSuppBwUl";
   }
 
   if (medSubCompsIsSet()) {
-    const std::map<std::string, oai::model::pcf::MediaSubComponentRm>& value =
+    const std::map<std::string, oai::model::pcf::MediaSubComponentRm> &value =
         m_MedSubComps;
     const std::string currentValuePath = _pathPrefix + ".medSubComps";
   }
 
   if (minDesBwDlIsSet()) {
-    const std::string& value           = m_MinDesBwDl;
+    const std::string &value = m_MinDesBwDl;
     const std::string currentValuePath = _pathPrefix + ".minDesBwDl";
   }
 
   if (minDesBwUlIsSet()) {
-    const std::string& value           = m_MinDesBwUl;
+    const std::string &value = m_MinDesBwUl;
     const std::string currentValuePath = _pathPrefix + ".minDesBwUl";
   }
 
   if (mirBwDlIsSet()) {
-    const std::string& value           = m_MirBwDl;
+    const std::string &value = m_MirBwDl;
     const std::string currentValuePath = _pathPrefix + ".mirBwDl";
   }
 
   if (mirBwUlIsSet()) {
-    const std::string& value           = m_MirBwUl;
+    const std::string &value = m_MirBwUl;
     const std::string currentValuePath = _pathPrefix + ".mirBwUl";
   }
 
   if (rrBwIsSet()) {
-    const std::string& value           = m_RrBw;
+    const std::string &value = m_RrBw;
     const std::string currentValuePath = _pathPrefix + ".rrBw";
   }
 
   if (rsBwIsSet()) {
-    const std::string& value           = m_RsBw;
+    const std::string &value = m_RsBw;
     const std::string currentValuePath = _pathPrefix + ".rsBw";
   }
 
   if (sharingKeyDlIsSet()) {
-    const int32_t& value               = m_SharingKeyDl;
+    const int32_t &value = m_SharingKeyDl;
     const std::string currentValuePath = _pathPrefix + ".sharingKeyDl";
 
     if (value < 0) {
@@ -279,7 +279,7 @@ bool MediaComponentRm::validate(
   }
 
   if (sharingKeyUlIsSet()) {
-    const int32_t& value               = m_SharingKeyUl;
+    const int32_t &value = m_SharingKeyUl;
     const std::string currentValuePath = _pathPrefix + ".sharingKeyUl";
 
     if (value < 0) {
@@ -293,7 +293,7 @@ bool MediaComponentRm::validate(
   }
 
   if (tscaiTimeDomIsSet()) {
-    const int32_t& value               = m_TscaiTimeDom;
+    const int32_t &value = m_TscaiTimeDom;
     const std::string currentValuePath = _pathPrefix + ".tscaiTimeDom";
 
     if (value < 0) {
@@ -305,7 +305,7 @@ bool MediaComponentRm::validate(
   return success;
 }
 
-bool MediaComponentRm::operator==(const MediaComponentRm& rhs) const {
+bool MediaComponentRm::operator==(const MediaComponentRm &rhs) const {
   return
 
       ((!afAppIdIsSet() && !rhs.afAppIdIsSet()) ||
@@ -494,67 +494,108 @@ bool MediaComponentRm::operator==(const MediaComponentRm& rhs) const {
           ;
 }
 
-bool MediaComponentRm::operator!=(const MediaComponentRm& rhs) const {
+bool MediaComponentRm::operator!=(const MediaComponentRm &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const MediaComponentRm& o) {
+void to_json(nlohmann::json &j, const MediaComponentRm &o) {
   j = nlohmann::json::object();
-  if (o.afAppIdIsSet()) j["afAppId"] = o.m_AfAppId;
-  if (o.afRoutReqIsSet()) j["afRoutReq"] = o.m_AfRoutReq;
-  if (o.afSfcReqIsSet()) j["afSfcReq"] = o.m_AfSfcReq;
-  if (o.qosReferenceIsSet()) j["qosReference"] = o.m_QosReference;
+  if (o.afAppIdIsSet())
+    j["afAppId"] = o.m_AfAppId;
+  if (o.afRoutReqIsSet())
+    j["afRoutReq"] = o.m_AfRoutReq;
+  if (o.afSfcReqIsSet())
+    j["afSfcReq"] = o.m_AfSfcReq;
+  if (o.qosReferenceIsSet())
+    j["qosReference"] = o.m_QosReference;
   if (o.altSerReqsIsSet() || !o.m_AltSerReqs.empty())
     j["altSerReqs"] = o.m_AltSerReqs;
   if (o.altSerReqsDataIsSet() || !o.m_AltSerReqsData.empty())
     j["altSerReqsData"] = o.m_AltSerReqsData;
-  if (o.disUeNotifIsSet()) j["disUeNotif"] = o.m_DisUeNotif;
-  if (o.contVerIsSet()) j["contVer"] = o.m_ContVer;
-  if (o.codecsIsSet() || !o.m_Codecs.empty()) j["codecs"] = o.m_Codecs;
-  if (o.desMaxLatencyIsSet()) j["desMaxLatency"] = o.m_DesMaxLatency;
-  if (o.desMaxLossIsSet()) j["desMaxLoss"] = o.m_DesMaxLoss;
-  if (o.flusIdIsSet()) j["flusId"] = o.m_FlusId;
-  if (o.fStatusIsSet()) j["fStatus"] = o.m_FStatus;
-  if (o.marBwDlIsSet()) j["marBwDl"] = o.m_MarBwDl;
-  if (o.marBwUlIsSet()) j["marBwUl"] = o.m_MarBwUl;
+  if (o.disUeNotifIsSet())
+    j["disUeNotif"] = o.m_DisUeNotif;
+  if (o.contVerIsSet())
+    j["contVer"] = o.m_ContVer;
+  if (o.codecsIsSet() || !o.m_Codecs.empty())
+    j["codecs"] = o.m_Codecs;
+  if (o.desMaxLatencyIsSet())
+    j["desMaxLatency"] = o.m_DesMaxLatency;
+  if (o.desMaxLossIsSet())
+    j["desMaxLoss"] = o.m_DesMaxLoss;
+  if (o.flusIdIsSet())
+    j["flusId"] = o.m_FlusId;
+  if (o.fStatusIsSet())
+    j["fStatus"] = o.m_FStatus;
+  if (o.marBwDlIsSet())
+    j["marBwDl"] = o.m_MarBwDl;
+  if (o.marBwUlIsSet())
+    j["marBwUl"] = o.m_MarBwUl;
   if (o.maxPacketLossRateDlIsSet())
     j["maxPacketLossRateDl"] = o.m_MaxPacketLossRateDl;
   if (o.maxPacketLossRateUlIsSet())
     j["maxPacketLossRateUl"] = o.m_MaxPacketLossRateUl;
-  if (o.maxSuppBwDlIsSet()) j["maxSuppBwDl"] = o.m_MaxSuppBwDl;
-  if (o.maxSuppBwUlIsSet()) j["maxSuppBwUl"] = o.m_MaxSuppBwUl;
+  if (o.maxSuppBwDlIsSet())
+    j["maxSuppBwDl"] = o.m_MaxSuppBwDl;
+  if (o.maxSuppBwUlIsSet())
+    j["maxSuppBwUl"] = o.m_MaxSuppBwUl;
   j["medCompN"] = o.m_MedCompN;
   if (o.medSubCompsIsSet() || !o.m_MedSubComps.empty())
     j["medSubComps"] = o.m_MedSubComps;
-  if (o.medTypeIsSet()) j["medType"] = o.m_MedType;
-  if (o.minDesBwDlIsSet()) j["minDesBwDl"] = o.m_MinDesBwDl;
-  if (o.minDesBwUlIsSet()) j["minDesBwUl"] = o.m_MinDesBwUl;
-  if (o.mirBwDlIsSet()) j["mirBwDl"] = o.m_MirBwDl;
-  if (o.mirBwUlIsSet()) j["mirBwUl"] = o.m_MirBwUl;
-  if (o.preemptCapIsSet()) j["preemptCap"] = o.m_PreemptCap;
-  if (o.preemptVulnIsSet()) j["preemptVuln"] = o.m_PreemptVuln;
-  if (o.prioSharingIndIsSet()) j["prioSharingInd"] = o.m_PrioSharingInd;
-  if (o.resPrioIsSet()) j["resPrio"] = o.m_ResPrio;
-  if (o.rrBwIsSet()) j["rrBw"] = o.m_RrBw;
-  if (o.rsBwIsSet()) j["rsBw"] = o.m_RsBw;
-  if (o.sharingKeyDlIsSet()) j["sharingKeyDl"] = o.m_SharingKeyDl;
-  if (o.sharingKeyUlIsSet()) j["sharingKeyUl"] = o.m_SharingKeyUl;
-  if (o.tsnQosIsSet()) j["tsnQos"] = o.m_TsnQos;
-  if (o.tscaiInputDlIsSet()) j["tscaiInputDl"] = o.m_TscaiInputDl;
-  if (o.tscaiInputUlIsSet()) j["tscaiInputUl"] = o.m_TscaiInputUl;
-  if (o.tscaiTimeDomIsSet()) j["tscaiTimeDom"] = o.m_TscaiTimeDom;
-  if (o.capBatAdaptationIsSet()) j["capBatAdaptation"] = o.m_CapBatAdaptation;
-  if (o.rTLatencyIndIsSet()) j["rTLatencyInd"] = o.m_RTLatencyInd;
-  if (o.pduSetQosDlIsSet()) j["pduSetQosDl"] = o.m_PduSetQosDl;
-  if (o.pduSetQosUlIsSet()) j["pduSetQosUl"] = o.m_PduSetQosUl;
-  if (o.protoDescDlIsSet()) j["protoDescDl"] = o.m_ProtoDescDl;
-  if (o.protoDescUlIsSet()) j["protoDescUl"] = o.m_ProtoDescUl;
-  if (o.periodUlIsSet()) j["periodUl"] = o.m_PeriodUl;
-  if (o.periodDlIsSet()) j["periodDl"] = o.m_PeriodDl;
-  if (o.l4sIndIsSet()) j["l4sInd"] = o.m_L4sInd;
+  if (o.medTypeIsSet())
+    j["medType"] = o.m_MedType;
+  if (o.minDesBwDlIsSet())
+    j["minDesBwDl"] = o.m_MinDesBwDl;
+  if (o.minDesBwUlIsSet())
+    j["minDesBwUl"] = o.m_MinDesBwUl;
+  if (o.mirBwDlIsSet())
+    j["mirBwDl"] = o.m_MirBwDl;
+  if (o.mirBwUlIsSet())
+    j["mirBwUl"] = o.m_MirBwUl;
+  if (o.preemptCapIsSet())
+    j["preemptCap"] = o.m_PreemptCap;
+  if (o.preemptVulnIsSet())
+    j["preemptVuln"] = o.m_PreemptVuln;
+  if (o.prioSharingIndIsSet())
+    j["prioSharingInd"] = o.m_PrioSharingInd;
+  if (o.resPrioIsSet())
+    j["resPrio"] = o.m_ResPrio;
+  if (o.rrBwIsSet())
+    j["rrBw"] = o.m_RrBw;
+  if (o.rsBwIsSet())
+    j["rsBw"] = o.m_RsBw;
+  if (o.sharingKeyDlIsSet())
+    j["sharingKeyDl"] = o.m_SharingKeyDl;
+  if (o.sharingKeyUlIsSet())
+    j["sharingKeyUl"] = o.m_SharingKeyUl;
+  if (o.tsnQosIsSet())
+    j["tsnQos"] = o.m_TsnQos;
+  if (o.tscaiInputDlIsSet())
+    j["tscaiInputDl"] = o.m_TscaiInputDl;
+  if (o.tscaiInputUlIsSet())
+    j["tscaiInputUl"] = o.m_TscaiInputUl;
+  if (o.tscaiTimeDomIsSet())
+    j["tscaiTimeDom"] = o.m_TscaiTimeDom;
+  if (o.capBatAdaptationIsSet())
+    j["capBatAdaptation"] = o.m_CapBatAdaptation;
+  if (o.rTLatencyIndIsSet())
+    j["rTLatencyInd"] = o.m_RTLatencyInd;
+  if (o.pduSetQosDlIsSet())
+    j["pduSetQosDl"] = o.m_PduSetQosDl;
+  if (o.pduSetQosUlIsSet())
+    j["pduSetQosUl"] = o.m_PduSetQosUl;
+  if (o.protoDescDlIsSet())
+    j["protoDescDl"] = o.m_ProtoDescDl;
+  if (o.protoDescUlIsSet())
+    j["protoDescUl"] = o.m_ProtoDescUl;
+  if (o.periodUlIsSet())
+    j["periodUl"] = o.m_PeriodUl;
+  if (o.periodDlIsSet())
+    j["periodDl"] = o.m_PeriodDl;
+  if (o.l4sIndIsSet())
+    j["l4sInd"] = o.m_L4sInd;
 }
 
-void from_json(const nlohmann::json& j, MediaComponentRm& o) {
+void from_json(const nlohmann::json &j, MediaComponentRm &o) {
   if (j.find("afAppId") != j.end()) {
     j.at("afAppId").get_to(o.m_AfAppId);
     o.m_AfAppIdIsSet = true;
@@ -742,211 +783,137 @@ void from_json(const nlohmann::json& j, MediaComponentRm& o) {
   }
 }
 
-std::string MediaComponentRm::getAfAppId() const {
-  return m_AfAppId;
-}
-void MediaComponentRm::setAfAppId(std::string const& value) {
-  m_AfAppId      = value;
+std::string MediaComponentRm::getAfAppId() const { return m_AfAppId; }
+void MediaComponentRm::setAfAppId(std::string const &value) {
+  m_AfAppId = value;
   m_AfAppIdIsSet = true;
 }
-bool MediaComponentRm::afAppIdIsSet() const {
-  return m_AfAppIdIsSet;
-}
-void MediaComponentRm::unsetAfAppId() {
-  m_AfAppIdIsSet = false;
-}
+bool MediaComponentRm::afAppIdIsSet() const { return m_AfAppIdIsSet; }
+void MediaComponentRm::unsetAfAppId() { m_AfAppIdIsSet = false; }
 oai::model::pcf::AfRoutingRequirementRm MediaComponentRm::getAfRoutReq() const {
   return m_AfRoutReq;
 }
 void MediaComponentRm::setAfRoutReq(
-    oai::model::pcf::AfRoutingRequirementRm const& value) {
-  m_AfRoutReq      = value;
+    oai::model::pcf::AfRoutingRequirementRm const &value) {
+  m_AfRoutReq = value;
   m_AfRoutReqIsSet = true;
 }
-bool MediaComponentRm::afRoutReqIsSet() const {
-  return m_AfRoutReqIsSet;
-}
-void MediaComponentRm::unsetAfRoutReq() {
-  m_AfRoutReqIsSet = false;
-}
+bool MediaComponentRm::afRoutReqIsSet() const { return m_AfRoutReqIsSet; }
+void MediaComponentRm::unsetAfRoutReq() { m_AfRoutReqIsSet = false; }
 oai::model::pcf::AfSfcRequirement MediaComponentRm::getAfSfcReq() const {
   return m_AfSfcReq;
 }
 void MediaComponentRm::setAfSfcReq(
-    oai::model::pcf::AfSfcRequirement const& value) {
-  m_AfSfcReq      = value;
+    oai::model::pcf::AfSfcRequirement const &value) {
+  m_AfSfcReq = value;
   m_AfSfcReqIsSet = true;
 }
-bool MediaComponentRm::afSfcReqIsSet() const {
-  return m_AfSfcReqIsSet;
-}
-void MediaComponentRm::unsetAfSfcReq() {
-  m_AfSfcReqIsSet = false;
-}
-std::string MediaComponentRm::getQosReference() const {
-  return m_QosReference;
-}
-void MediaComponentRm::setQosReference(std::string const& value) {
-  m_QosReference      = value;
+bool MediaComponentRm::afSfcReqIsSet() const { return m_AfSfcReqIsSet; }
+void MediaComponentRm::unsetAfSfcReq() { m_AfSfcReqIsSet = false; }
+std::string MediaComponentRm::getQosReference() const { return m_QosReference; }
+void MediaComponentRm::setQosReference(std::string const &value) {
+  m_QosReference = value;
   m_QosReferenceIsSet = true;
 }
-bool MediaComponentRm::qosReferenceIsSet() const {
-  return m_QosReferenceIsSet;
-}
-void MediaComponentRm::unsetQosReference() {
-  m_QosReferenceIsSet = false;
-}
+bool MediaComponentRm::qosReferenceIsSet() const { return m_QosReferenceIsSet; }
+void MediaComponentRm::unsetQosReference() { m_QosReferenceIsSet = false; }
 std::vector<std::string> MediaComponentRm::getAltSerReqs() const {
   return m_AltSerReqs;
 }
-void MediaComponentRm::setAltSerReqs(std::vector<std::string> const& value) {
-  m_AltSerReqs      = value;
+void MediaComponentRm::setAltSerReqs(std::vector<std::string> const &value) {
+  m_AltSerReqs = value;
   m_AltSerReqsIsSet = true;
 }
-bool MediaComponentRm::altSerReqsIsSet() const {
-  return m_AltSerReqsIsSet;
-}
-void MediaComponentRm::unsetAltSerReqs() {
-  m_AltSerReqsIsSet = false;
-}
+bool MediaComponentRm::altSerReqsIsSet() const { return m_AltSerReqsIsSet; }
+void MediaComponentRm::unsetAltSerReqs() { m_AltSerReqsIsSet = false; }
 std::vector<oai::model::pcf::AlternativeServiceRequirementsData>
 MediaComponentRm::getAltSerReqsData() const {
   return m_AltSerReqsData;
 }
 void MediaComponentRm::setAltSerReqsData(
-    std::vector<oai::model::pcf::AlternativeServiceRequirementsData> const&
-        value) {
-  m_AltSerReqsData      = value;
+    std::vector<oai::model::pcf::AlternativeServiceRequirementsData> const
+        &value) {
+  m_AltSerReqsData = value;
   m_AltSerReqsDataIsSet = true;
 }
 bool MediaComponentRm::altSerReqsDataIsSet() const {
   return m_AltSerReqsDataIsSet;
 }
-void MediaComponentRm::unsetAltSerReqsData() {
-  m_AltSerReqsDataIsSet = false;
-}
-bool MediaComponentRm::isDisUeNotif() const {
-  return m_DisUeNotif;
-}
+void MediaComponentRm::unsetAltSerReqsData() { m_AltSerReqsDataIsSet = false; }
+bool MediaComponentRm::isDisUeNotif() const { return m_DisUeNotif; }
 void MediaComponentRm::setDisUeNotif(bool const value) {
-  m_DisUeNotif      = value;
+  m_DisUeNotif = value;
   m_DisUeNotifIsSet = true;
 }
-bool MediaComponentRm::disUeNotifIsSet() const {
-  return m_DisUeNotifIsSet;
-}
-void MediaComponentRm::unsetDisUeNotif() {
-  m_DisUeNotifIsSet = false;
-}
-int32_t MediaComponentRm::getContVer() const {
-  return m_ContVer;
-}
+bool MediaComponentRm::disUeNotifIsSet() const { return m_DisUeNotifIsSet; }
+void MediaComponentRm::unsetDisUeNotif() { m_DisUeNotifIsSet = false; }
+int32_t MediaComponentRm::getContVer() const { return m_ContVer; }
 void MediaComponentRm::setContVer(int32_t const value) {
-  m_ContVer      = value;
+  m_ContVer = value;
   m_ContVerIsSet = true;
 }
-bool MediaComponentRm::contVerIsSet() const {
-  return m_ContVerIsSet;
-}
-void MediaComponentRm::unsetContVer() {
-  m_ContVerIsSet = false;
-}
+bool MediaComponentRm::contVerIsSet() const { return m_ContVerIsSet; }
+void MediaComponentRm::unsetContVer() { m_ContVerIsSet = false; }
 std::vector<std::string> MediaComponentRm::getCodecs() const {
   return m_Codecs;
 }
-void MediaComponentRm::setCodecs(std::vector<std::string> const& value) {
-  m_Codecs      = value;
+void MediaComponentRm::setCodecs(std::vector<std::string> const &value) {
+  m_Codecs = value;
   m_CodecsIsSet = true;
 }
-bool MediaComponentRm::codecsIsSet() const {
-  return m_CodecsIsSet;
-}
-void MediaComponentRm::unsetCodecs() {
-  m_CodecsIsSet = false;
-}
-float MediaComponentRm::getDesMaxLatency() const {
-  return m_DesMaxLatency;
-}
+bool MediaComponentRm::codecsIsSet() const { return m_CodecsIsSet; }
+void MediaComponentRm::unsetCodecs() { m_CodecsIsSet = false; }
+float MediaComponentRm::getDesMaxLatency() const { return m_DesMaxLatency; }
 void MediaComponentRm::setDesMaxLatency(float const value) {
-  m_DesMaxLatency      = value;
+  m_DesMaxLatency = value;
   m_DesMaxLatencyIsSet = true;
 }
 bool MediaComponentRm::desMaxLatencyIsSet() const {
   return m_DesMaxLatencyIsSet;
 }
-void MediaComponentRm::unsetDesMaxLatency() {
-  m_DesMaxLatencyIsSet = false;
-}
-float MediaComponentRm::getDesMaxLoss() const {
-  return m_DesMaxLoss;
-}
+void MediaComponentRm::unsetDesMaxLatency() { m_DesMaxLatencyIsSet = false; }
+float MediaComponentRm::getDesMaxLoss() const { return m_DesMaxLoss; }
 void MediaComponentRm::setDesMaxLoss(float const value) {
-  m_DesMaxLoss      = value;
+  m_DesMaxLoss = value;
   m_DesMaxLossIsSet = true;
 }
-bool MediaComponentRm::desMaxLossIsSet() const {
-  return m_DesMaxLossIsSet;
-}
-void MediaComponentRm::unsetDesMaxLoss() {
-  m_DesMaxLossIsSet = false;
-}
-std::string MediaComponentRm::getFlusId() const {
-  return m_FlusId;
-}
-void MediaComponentRm::setFlusId(std::string const& value) {
-  m_FlusId      = value;
+bool MediaComponentRm::desMaxLossIsSet() const { return m_DesMaxLossIsSet; }
+void MediaComponentRm::unsetDesMaxLoss() { m_DesMaxLossIsSet = false; }
+std::string MediaComponentRm::getFlusId() const { return m_FlusId; }
+void MediaComponentRm::setFlusId(std::string const &value) {
+  m_FlusId = value;
   m_FlusIdIsSet = true;
 }
-bool MediaComponentRm::flusIdIsSet() const {
-  return m_FlusIdIsSet;
-}
-void MediaComponentRm::unsetFlusId() {
-  m_FlusIdIsSet = false;
-}
+bool MediaComponentRm::flusIdIsSet() const { return m_FlusIdIsSet; }
+void MediaComponentRm::unsetFlusId() { m_FlusIdIsSet = false; }
 oai::model::pcf::FlowStatus MediaComponentRm::getFStatus() const {
   return m_FStatus;
 }
-void MediaComponentRm::setFStatus(oai::model::pcf::FlowStatus const& value) {
-  m_FStatus      = value;
+void MediaComponentRm::setFStatus(oai::model::pcf::FlowStatus const &value) {
+  m_FStatus = value;
   m_FStatusIsSet = true;
 }
-bool MediaComponentRm::fStatusIsSet() const {
-  return m_FStatusIsSet;
-}
-void MediaComponentRm::unsetFStatus() {
-  m_FStatusIsSet = false;
-}
-std::string MediaComponentRm::getMarBwDl() const {
-  return m_MarBwDl;
-}
-void MediaComponentRm::setMarBwDl(std::string const& value) {
-  m_MarBwDl      = value;
+bool MediaComponentRm::fStatusIsSet() const { return m_FStatusIsSet; }
+void MediaComponentRm::unsetFStatus() { m_FStatusIsSet = false; }
+std::string MediaComponentRm::getMarBwDl() const { return m_MarBwDl; }
+void MediaComponentRm::setMarBwDl(std::string const &value) {
+  m_MarBwDl = value;
   m_MarBwDlIsSet = true;
 }
-bool MediaComponentRm::marBwDlIsSet() const {
-  return m_MarBwDlIsSet;
-}
-void MediaComponentRm::unsetMarBwDl() {
-  m_MarBwDlIsSet = false;
-}
-std::string MediaComponentRm::getMarBwUl() const {
-  return m_MarBwUl;
-}
-void MediaComponentRm::setMarBwUl(std::string const& value) {
-  m_MarBwUl      = value;
+bool MediaComponentRm::marBwDlIsSet() const { return m_MarBwDlIsSet; }
+void MediaComponentRm::unsetMarBwDl() { m_MarBwDlIsSet = false; }
+std::string MediaComponentRm::getMarBwUl() const { return m_MarBwUl; }
+void MediaComponentRm::setMarBwUl(std::string const &value) {
+  m_MarBwUl = value;
   m_MarBwUlIsSet = true;
 }
-bool MediaComponentRm::marBwUlIsSet() const {
-  return m_MarBwUlIsSet;
-}
-void MediaComponentRm::unsetMarBwUl() {
-  m_MarBwUlIsSet = false;
-}
+bool MediaComponentRm::marBwUlIsSet() const { return m_MarBwUlIsSet; }
+void MediaComponentRm::unsetMarBwUl() { m_MarBwUlIsSet = false; }
 int32_t MediaComponentRm::getMaxPacketLossRateDl() const {
   return m_MaxPacketLossRateDl;
 }
 void MediaComponentRm::setMaxPacketLossRateDl(int32_t const value) {
-  m_MaxPacketLossRateDl      = value;
+  m_MaxPacketLossRateDl = value;
   m_MaxPacketLossRateDlIsSet = true;
 }
 bool MediaComponentRm::maxPacketLossRateDlIsSet() const {
@@ -959,7 +926,7 @@ int32_t MediaComponentRm::getMaxPacketLossRateUl() const {
   return m_MaxPacketLossRateUl;
 }
 void MediaComponentRm::setMaxPacketLossRateUl(int32_t const value) {
-  m_MaxPacketLossRateUl      = value;
+  m_MaxPacketLossRateUl = value;
   m_MaxPacketLossRateUlIsSet = true;
 }
 bool MediaComponentRm::maxPacketLossRateUlIsSet() const {
@@ -968,289 +935,183 @@ bool MediaComponentRm::maxPacketLossRateUlIsSet() const {
 void MediaComponentRm::unsetMaxPacketLossRateUl() {
   m_MaxPacketLossRateUlIsSet = false;
 }
-std::string MediaComponentRm::getMaxSuppBwDl() const {
-  return m_MaxSuppBwDl;
-}
-void MediaComponentRm::setMaxSuppBwDl(std::string const& value) {
-  m_MaxSuppBwDl      = value;
+std::string MediaComponentRm::getMaxSuppBwDl() const { return m_MaxSuppBwDl; }
+void MediaComponentRm::setMaxSuppBwDl(std::string const &value) {
+  m_MaxSuppBwDl = value;
   m_MaxSuppBwDlIsSet = true;
 }
-bool MediaComponentRm::maxSuppBwDlIsSet() const {
-  return m_MaxSuppBwDlIsSet;
-}
-void MediaComponentRm::unsetMaxSuppBwDl() {
-  m_MaxSuppBwDlIsSet = false;
-}
-std::string MediaComponentRm::getMaxSuppBwUl() const {
-  return m_MaxSuppBwUl;
-}
-void MediaComponentRm::setMaxSuppBwUl(std::string const& value) {
-  m_MaxSuppBwUl      = value;
+bool MediaComponentRm::maxSuppBwDlIsSet() const { return m_MaxSuppBwDlIsSet; }
+void MediaComponentRm::unsetMaxSuppBwDl() { m_MaxSuppBwDlIsSet = false; }
+std::string MediaComponentRm::getMaxSuppBwUl() const { return m_MaxSuppBwUl; }
+void MediaComponentRm::setMaxSuppBwUl(std::string const &value) {
+  m_MaxSuppBwUl = value;
   m_MaxSuppBwUlIsSet = true;
 }
-bool MediaComponentRm::maxSuppBwUlIsSet() const {
-  return m_MaxSuppBwUlIsSet;
-}
-void MediaComponentRm::unsetMaxSuppBwUl() {
-  m_MaxSuppBwUlIsSet = false;
-}
-int32_t MediaComponentRm::getMedCompN() const {
-  return m_MedCompN;
-}
-void MediaComponentRm::setMedCompN(int32_t const value) {
-  m_MedCompN = value;
-}
+bool MediaComponentRm::maxSuppBwUlIsSet() const { return m_MaxSuppBwUlIsSet; }
+void MediaComponentRm::unsetMaxSuppBwUl() { m_MaxSuppBwUlIsSet = false; }
+int32_t MediaComponentRm::getMedCompN() const { return m_MedCompN; }
+void MediaComponentRm::setMedCompN(int32_t const value) { m_MedCompN = value; }
 std::map<std::string, oai::model::pcf::MediaSubComponentRm>
 MediaComponentRm::getMedSubComps() const {
   return m_MedSubComps;
 }
 void MediaComponentRm::setMedSubComps(
-    std::map<std::string, oai::model::pcf::MediaSubComponentRm> const& value) {
-  m_MedSubComps      = value;
+    std::map<std::string, oai::model::pcf::MediaSubComponentRm> const &value) {
+  m_MedSubComps = value;
   m_MedSubCompsIsSet = true;
 }
-bool MediaComponentRm::medSubCompsIsSet() const {
-  return m_MedSubCompsIsSet;
-}
-void MediaComponentRm::unsetMedSubComps() {
-  m_MedSubCompsIsSet = false;
-}
+bool MediaComponentRm::medSubCompsIsSet() const { return m_MedSubCompsIsSet; }
+void MediaComponentRm::unsetMedSubComps() { m_MedSubCompsIsSet = false; }
 oai::model::pcf::MediaType MediaComponentRm::getMedType() const {
   return m_MedType;
 }
-void MediaComponentRm::setMedType(oai::model::pcf::MediaType const& value) {
-  m_MedType      = value;
+void MediaComponentRm::setMedType(oai::model::pcf::MediaType const &value) {
+  m_MedType = value;
   m_MedTypeIsSet = true;
 }
-bool MediaComponentRm::medTypeIsSet() const {
-  return m_MedTypeIsSet;
-}
-void MediaComponentRm::unsetMedType() {
-  m_MedTypeIsSet = false;
-}
-std::string MediaComponentRm::getMinDesBwDl() const {
-  return m_MinDesBwDl;
-}
-void MediaComponentRm::setMinDesBwDl(std::string const& value) {
-  m_MinDesBwDl      = value;
+bool MediaComponentRm::medTypeIsSet() const { return m_MedTypeIsSet; }
+void MediaComponentRm::unsetMedType() { m_MedTypeIsSet = false; }
+std::string MediaComponentRm::getMinDesBwDl() const { return m_MinDesBwDl; }
+void MediaComponentRm::setMinDesBwDl(std::string const &value) {
+  m_MinDesBwDl = value;
   m_MinDesBwDlIsSet = true;
 }
-bool MediaComponentRm::minDesBwDlIsSet() const {
-  return m_MinDesBwDlIsSet;
-}
-void MediaComponentRm::unsetMinDesBwDl() {
-  m_MinDesBwDlIsSet = false;
-}
-std::string MediaComponentRm::getMinDesBwUl() const {
-  return m_MinDesBwUl;
-}
-void MediaComponentRm::setMinDesBwUl(std::string const& value) {
-  m_MinDesBwUl      = value;
+bool MediaComponentRm::minDesBwDlIsSet() const { return m_MinDesBwDlIsSet; }
+void MediaComponentRm::unsetMinDesBwDl() { m_MinDesBwDlIsSet = false; }
+std::string MediaComponentRm::getMinDesBwUl() const { return m_MinDesBwUl; }
+void MediaComponentRm::setMinDesBwUl(std::string const &value) {
+  m_MinDesBwUl = value;
   m_MinDesBwUlIsSet = true;
 }
-bool MediaComponentRm::minDesBwUlIsSet() const {
-  return m_MinDesBwUlIsSet;
-}
-void MediaComponentRm::unsetMinDesBwUl() {
-  m_MinDesBwUlIsSet = false;
-}
-std::string MediaComponentRm::getMirBwDl() const {
-  return m_MirBwDl;
-}
-void MediaComponentRm::setMirBwDl(std::string const& value) {
-  m_MirBwDl      = value;
+bool MediaComponentRm::minDesBwUlIsSet() const { return m_MinDesBwUlIsSet; }
+void MediaComponentRm::unsetMinDesBwUl() { m_MinDesBwUlIsSet = false; }
+std::string MediaComponentRm::getMirBwDl() const { return m_MirBwDl; }
+void MediaComponentRm::setMirBwDl(std::string const &value) {
+  m_MirBwDl = value;
   m_MirBwDlIsSet = true;
 }
-bool MediaComponentRm::mirBwDlIsSet() const {
-  return m_MirBwDlIsSet;
-}
-void MediaComponentRm::unsetMirBwDl() {
-  m_MirBwDlIsSet = false;
-}
-std::string MediaComponentRm::getMirBwUl() const {
-  return m_MirBwUl;
-}
-void MediaComponentRm::setMirBwUl(std::string const& value) {
-  m_MirBwUl      = value;
+bool MediaComponentRm::mirBwDlIsSet() const { return m_MirBwDlIsSet; }
+void MediaComponentRm::unsetMirBwDl() { m_MirBwDlIsSet = false; }
+std::string MediaComponentRm::getMirBwUl() const { return m_MirBwUl; }
+void MediaComponentRm::setMirBwUl(std::string const &value) {
+  m_MirBwUl = value;
   m_MirBwUlIsSet = true;
 }
-bool MediaComponentRm::mirBwUlIsSet() const {
-  return m_MirBwUlIsSet;
-}
-void MediaComponentRm::unsetMirBwUl() {
-  m_MirBwUlIsSet = false;
-}
-oai::model::common::PreemptionCapability MediaComponentRm::getPreemptCap()
-    const {
+bool MediaComponentRm::mirBwUlIsSet() const { return m_MirBwUlIsSet; }
+void MediaComponentRm::unsetMirBwUl() { m_MirBwUlIsSet = false; }
+oai::model::common::PreemptionCapability
+MediaComponentRm::getPreemptCap() const {
   return m_PreemptCap;
 }
 void MediaComponentRm::setPreemptCap(
-    oai::model::common::PreemptionCapability const& value) {
-  m_PreemptCap      = value;
+    oai::model::common::PreemptionCapability const &value) {
+  m_PreemptCap = value;
   m_PreemptCapIsSet = true;
 }
-bool MediaComponentRm::preemptCapIsSet() const {
-  return m_PreemptCapIsSet;
-}
-void MediaComponentRm::unsetPreemptCap() {
-  m_PreemptCapIsSet = false;
-}
-oai::model::common::PreemptionVulnerability MediaComponentRm::getPreemptVuln()
-    const {
+bool MediaComponentRm::preemptCapIsSet() const { return m_PreemptCapIsSet; }
+void MediaComponentRm::unsetPreemptCap() { m_PreemptCapIsSet = false; }
+oai::model::common::PreemptionVulnerability
+MediaComponentRm::getPreemptVuln() const {
   return m_PreemptVuln;
 }
 void MediaComponentRm::setPreemptVuln(
-    oai::model::common::PreemptionVulnerability const& value) {
-  m_PreemptVuln      = value;
+    oai::model::common::PreemptionVulnerability const &value) {
+  m_PreemptVuln = value;
   m_PreemptVulnIsSet = true;
 }
-bool MediaComponentRm::preemptVulnIsSet() const {
-  return m_PreemptVulnIsSet;
-}
-void MediaComponentRm::unsetPreemptVuln() {
-  m_PreemptVulnIsSet = false;
-}
-oai::model::pcf::PrioritySharingIndicator MediaComponentRm::getPrioSharingInd()
-    const {
+bool MediaComponentRm::preemptVulnIsSet() const { return m_PreemptVulnIsSet; }
+void MediaComponentRm::unsetPreemptVuln() { m_PreemptVulnIsSet = false; }
+oai::model::pcf::PrioritySharingIndicator
+MediaComponentRm::getPrioSharingInd() const {
   return m_PrioSharingInd;
 }
 void MediaComponentRm::setPrioSharingInd(
-    oai::model::pcf::PrioritySharingIndicator const& value) {
-  m_PrioSharingInd      = value;
+    oai::model::pcf::PrioritySharingIndicator const &value) {
+  m_PrioSharingInd = value;
   m_PrioSharingIndIsSet = true;
 }
 bool MediaComponentRm::prioSharingIndIsSet() const {
   return m_PrioSharingIndIsSet;
 }
-void MediaComponentRm::unsetPrioSharingInd() {
-  m_PrioSharingIndIsSet = false;
-}
+void MediaComponentRm::unsetPrioSharingInd() { m_PrioSharingIndIsSet = false; }
 oai::model::pcf::ReservPriority MediaComponentRm::getResPrio() const {
   return m_ResPrio;
 }
 void MediaComponentRm::setResPrio(
-    oai::model::pcf::ReservPriority const& value) {
-  m_ResPrio      = value;
+    oai::model::pcf::ReservPriority const &value) {
+  m_ResPrio = value;
   m_ResPrioIsSet = true;
 }
-bool MediaComponentRm::resPrioIsSet() const {
-  return m_ResPrioIsSet;
-}
-void MediaComponentRm::unsetResPrio() {
-  m_ResPrioIsSet = false;
-}
-std::string MediaComponentRm::getRrBw() const {
-  return m_RrBw;
-}
-void MediaComponentRm::setRrBw(std::string const& value) {
-  m_RrBw      = value;
+bool MediaComponentRm::resPrioIsSet() const { return m_ResPrioIsSet; }
+void MediaComponentRm::unsetResPrio() { m_ResPrioIsSet = false; }
+std::string MediaComponentRm::getRrBw() const { return m_RrBw; }
+void MediaComponentRm::setRrBw(std::string const &value) {
+  m_RrBw = value;
   m_RrBwIsSet = true;
 }
-bool MediaComponentRm::rrBwIsSet() const {
-  return m_RrBwIsSet;
-}
-void MediaComponentRm::unsetRrBw() {
-  m_RrBwIsSet = false;
-}
-std::string MediaComponentRm::getRsBw() const {
-  return m_RsBw;
-}
-void MediaComponentRm::setRsBw(std::string const& value) {
-  m_RsBw      = value;
+bool MediaComponentRm::rrBwIsSet() const { return m_RrBwIsSet; }
+void MediaComponentRm::unsetRrBw() { m_RrBwIsSet = false; }
+std::string MediaComponentRm::getRsBw() const { return m_RsBw; }
+void MediaComponentRm::setRsBw(std::string const &value) {
+  m_RsBw = value;
   m_RsBwIsSet = true;
 }
-bool MediaComponentRm::rsBwIsSet() const {
-  return m_RsBwIsSet;
-}
-void MediaComponentRm::unsetRsBw() {
-  m_RsBwIsSet = false;
-}
-int32_t MediaComponentRm::getSharingKeyDl() const {
-  return m_SharingKeyDl;
-}
+bool MediaComponentRm::rsBwIsSet() const { return m_RsBwIsSet; }
+void MediaComponentRm::unsetRsBw() { m_RsBwIsSet = false; }
+int32_t MediaComponentRm::getSharingKeyDl() const { return m_SharingKeyDl; }
 void MediaComponentRm::setSharingKeyDl(int32_t const value) {
-  m_SharingKeyDl      = value;
+  m_SharingKeyDl = value;
   m_SharingKeyDlIsSet = true;
 }
-bool MediaComponentRm::sharingKeyDlIsSet() const {
-  return m_SharingKeyDlIsSet;
-}
-void MediaComponentRm::unsetSharingKeyDl() {
-  m_SharingKeyDlIsSet = false;
-}
-int32_t MediaComponentRm::getSharingKeyUl() const {
-  return m_SharingKeyUl;
-}
+bool MediaComponentRm::sharingKeyDlIsSet() const { return m_SharingKeyDlIsSet; }
+void MediaComponentRm::unsetSharingKeyDl() { m_SharingKeyDlIsSet = false; }
+int32_t MediaComponentRm::getSharingKeyUl() const { return m_SharingKeyUl; }
 void MediaComponentRm::setSharingKeyUl(int32_t const value) {
-  m_SharingKeyUl      = value;
+  m_SharingKeyUl = value;
   m_SharingKeyUlIsSet = true;
 }
-bool MediaComponentRm::sharingKeyUlIsSet() const {
-  return m_SharingKeyUlIsSet;
-}
-void MediaComponentRm::unsetSharingKeyUl() {
-  m_SharingKeyUlIsSet = false;
-}
+bool MediaComponentRm::sharingKeyUlIsSet() const { return m_SharingKeyUlIsSet; }
+void MediaComponentRm::unsetSharingKeyUl() { m_SharingKeyUlIsSet = false; }
 oai::model::pcf::TsnQosContainerRm MediaComponentRm::getTsnQos() const {
   return m_TsnQos;
 }
 void MediaComponentRm::setTsnQos(
-    oai::model::pcf::TsnQosContainerRm const& value) {
-  m_TsnQos      = value;
+    oai::model::pcf::TsnQosContainerRm const &value) {
+  m_TsnQos = value;
   m_TsnQosIsSet = true;
 }
-bool MediaComponentRm::tsnQosIsSet() const {
-  return m_TsnQosIsSet;
-}
-void MediaComponentRm::unsetTsnQos() {
-  m_TsnQosIsSet = false;
-}
+bool MediaComponentRm::tsnQosIsSet() const { return m_TsnQosIsSet; }
+void MediaComponentRm::unsetTsnQos() { m_TsnQosIsSet = false; }
 oai::model::pcf::TscaiInputContainer MediaComponentRm::getTscaiInputDl() const {
   return m_TscaiInputDl;
 }
 void MediaComponentRm::setTscaiInputDl(
-    oai::model::pcf::TscaiInputContainer const& value) {
-  m_TscaiInputDl      = value;
+    oai::model::pcf::TscaiInputContainer const &value) {
+  m_TscaiInputDl = value;
   m_TscaiInputDlIsSet = true;
 }
-bool MediaComponentRm::tscaiInputDlIsSet() const {
-  return m_TscaiInputDlIsSet;
-}
-void MediaComponentRm::unsetTscaiInputDl() {
-  m_TscaiInputDlIsSet = false;
-}
+bool MediaComponentRm::tscaiInputDlIsSet() const { return m_TscaiInputDlIsSet; }
+void MediaComponentRm::unsetTscaiInputDl() { m_TscaiInputDlIsSet = false; }
 oai::model::pcf::TscaiInputContainer MediaComponentRm::getTscaiInputUl() const {
   return m_TscaiInputUl;
 }
 void MediaComponentRm::setTscaiInputUl(
-    oai::model::pcf::TscaiInputContainer const& value) {
-  m_TscaiInputUl      = value;
+    oai::model::pcf::TscaiInputContainer const &value) {
+  m_TscaiInputUl = value;
   m_TscaiInputUlIsSet = true;
 }
-bool MediaComponentRm::tscaiInputUlIsSet() const {
-  return m_TscaiInputUlIsSet;
-}
-void MediaComponentRm::unsetTscaiInputUl() {
-  m_TscaiInputUlIsSet = false;
-}
-int32_t MediaComponentRm::getTscaiTimeDom() const {
-  return m_TscaiTimeDom;
-}
+bool MediaComponentRm::tscaiInputUlIsSet() const { return m_TscaiInputUlIsSet; }
+void MediaComponentRm::unsetTscaiInputUl() { m_TscaiInputUlIsSet = false; }
+int32_t MediaComponentRm::getTscaiTimeDom() const { return m_TscaiTimeDom; }
 void MediaComponentRm::setTscaiTimeDom(int32_t const value) {
-  m_TscaiTimeDom      = value;
+  m_TscaiTimeDom = value;
   m_TscaiTimeDomIsSet = true;
 }
-bool MediaComponentRm::tscaiTimeDomIsSet() const {
-  return m_TscaiTimeDomIsSet;
-}
-void MediaComponentRm::unsetTscaiTimeDom() {
-  m_TscaiTimeDomIsSet = false;
-}
-bool MediaComponentRm::isCapBatAdaptation() const {
-  return m_CapBatAdaptation;
-}
+bool MediaComponentRm::tscaiTimeDomIsSet() const { return m_TscaiTimeDomIsSet; }
+void MediaComponentRm::unsetTscaiTimeDom() { m_TscaiTimeDomIsSet = false; }
+bool MediaComponentRm::isCapBatAdaptation() const { return m_CapBatAdaptation; }
 void MediaComponentRm::setCapBatAdaptation(bool const value) {
-  m_CapBatAdaptation      = value;
+  m_CapBatAdaptation = value;
   m_CapBatAdaptationIsSet = true;
 }
 bool MediaComponentRm::capBatAdaptationIsSet() const {
@@ -1259,114 +1120,76 @@ bool MediaComponentRm::capBatAdaptationIsSet() const {
 void MediaComponentRm::unsetCapBatAdaptation() {
   m_CapBatAdaptationIsSet = false;
 }
-bool MediaComponentRm::isRTLatencyInd() const {
-  return m_RTLatencyInd;
-}
+bool MediaComponentRm::isRTLatencyInd() const { return m_RTLatencyInd; }
 void MediaComponentRm::setRTLatencyInd(bool const value) {
-  m_RTLatencyInd      = value;
+  m_RTLatencyInd = value;
   m_RTLatencyIndIsSet = true;
 }
-bool MediaComponentRm::rTLatencyIndIsSet() const {
-  return m_RTLatencyIndIsSet;
-}
-void MediaComponentRm::unsetRTLatencyInd() {
-  m_RTLatencyIndIsSet = false;
-}
+bool MediaComponentRm::rTLatencyIndIsSet() const { return m_RTLatencyIndIsSet; }
+void MediaComponentRm::unsetRTLatencyInd() { m_RTLatencyIndIsSet = false; }
 oai::model::pcf::PduSetQosPara MediaComponentRm::getPduSetQosDl() const {
   return m_PduSetQosDl;
 }
 void MediaComponentRm::setPduSetQosDl(
-    oai::model::pcf::PduSetQosPara const& value) {
-  m_PduSetQosDl      = value;
+    oai::model::pcf::PduSetQosPara const &value) {
+  m_PduSetQosDl = value;
   m_PduSetQosDlIsSet = true;
 }
-bool MediaComponentRm::pduSetQosDlIsSet() const {
-  return m_PduSetQosDlIsSet;
-}
-void MediaComponentRm::unsetPduSetQosDl() {
-  m_PduSetQosDlIsSet = false;
-}
+bool MediaComponentRm::pduSetQosDlIsSet() const { return m_PduSetQosDlIsSet; }
+void MediaComponentRm::unsetPduSetQosDl() { m_PduSetQosDlIsSet = false; }
 oai::model::pcf::PduSetQosPara MediaComponentRm::getPduSetQosUl() const {
   return m_PduSetQosUl;
 }
 void MediaComponentRm::setPduSetQosUl(
-    oai::model::pcf::PduSetQosPara const& value) {
-  m_PduSetQosUl      = value;
+    oai::model::pcf::PduSetQosPara const &value) {
+  m_PduSetQosUl = value;
   m_PduSetQosUlIsSet = true;
 }
-bool MediaComponentRm::pduSetQosUlIsSet() const {
-  return m_PduSetQosUlIsSet;
-}
-void MediaComponentRm::unsetPduSetQosUl() {
-  m_PduSetQosUlIsSet = false;
-}
+bool MediaComponentRm::pduSetQosUlIsSet() const { return m_PduSetQosUlIsSet; }
+void MediaComponentRm::unsetPduSetQosUl() { m_PduSetQosUlIsSet = false; }
 oai::model::pcf::ProtocolDescription MediaComponentRm::getProtoDescDl() const {
   return m_ProtoDescDl;
 }
 void MediaComponentRm::setProtoDescDl(
-    oai::model::pcf::ProtocolDescription const& value) {
-  m_ProtoDescDl      = value;
+    oai::model::pcf::ProtocolDescription const &value) {
+  m_ProtoDescDl = value;
   m_ProtoDescDlIsSet = true;
 }
-bool MediaComponentRm::protoDescDlIsSet() const {
-  return m_ProtoDescDlIsSet;
-}
-void MediaComponentRm::unsetProtoDescDl() {
-  m_ProtoDescDlIsSet = false;
-}
+bool MediaComponentRm::protoDescDlIsSet() const { return m_ProtoDescDlIsSet; }
+void MediaComponentRm::unsetProtoDescDl() { m_ProtoDescDlIsSet = false; }
 oai::model::pcf::ProtocolDescription MediaComponentRm::getProtoDescUl() const {
   return m_ProtoDescUl;
 }
 void MediaComponentRm::setProtoDescUl(
-    oai::model::pcf::ProtocolDescription const& value) {
-  m_ProtoDescUl      = value;
+    oai::model::pcf::ProtocolDescription const &value) {
+  m_ProtoDescUl = value;
   m_ProtoDescUlIsSet = true;
 }
-bool MediaComponentRm::protoDescUlIsSet() const {
-  return m_ProtoDescUlIsSet;
-}
-void MediaComponentRm::unsetProtoDescUl() {
-  m_ProtoDescUlIsSet = false;
-}
-int32_t MediaComponentRm::getPeriodUl() const {
-  return m_PeriodUl;
-}
+bool MediaComponentRm::protoDescUlIsSet() const { return m_ProtoDescUlIsSet; }
+void MediaComponentRm::unsetProtoDescUl() { m_ProtoDescUlIsSet = false; }
+int32_t MediaComponentRm::getPeriodUl() const { return m_PeriodUl; }
 void MediaComponentRm::setPeriodUl(int32_t const value) {
-  m_PeriodUl      = value;
+  m_PeriodUl = value;
   m_PeriodUlIsSet = true;
 }
-bool MediaComponentRm::periodUlIsSet() const {
-  return m_PeriodUlIsSet;
-}
-void MediaComponentRm::unsetPeriodUl() {
-  m_PeriodUlIsSet = false;
-}
-int32_t MediaComponentRm::getPeriodDl() const {
-  return m_PeriodDl;
-}
+bool MediaComponentRm::periodUlIsSet() const { return m_PeriodUlIsSet; }
+void MediaComponentRm::unsetPeriodUl() { m_PeriodUlIsSet = false; }
+int32_t MediaComponentRm::getPeriodDl() const { return m_PeriodDl; }
 void MediaComponentRm::setPeriodDl(int32_t const value) {
-  m_PeriodDl      = value;
+  m_PeriodDl = value;
   m_PeriodDlIsSet = true;
 }
-bool MediaComponentRm::periodDlIsSet() const {
-  return m_PeriodDlIsSet;
-}
-void MediaComponentRm::unsetPeriodDl() {
-  m_PeriodDlIsSet = false;
-}
+bool MediaComponentRm::periodDlIsSet() const { return m_PeriodDlIsSet; }
+void MediaComponentRm::unsetPeriodDl() { m_PeriodDlIsSet = false; }
 oai::model::pcf::UplinkDownlinkSupport MediaComponentRm::getL4sInd() const {
   return m_L4sInd;
 }
 void MediaComponentRm::setL4sInd(
-    oai::model::pcf::UplinkDownlinkSupport const& value) {
-  m_L4sInd      = value;
+    oai::model::pcf::UplinkDownlinkSupport const &value) {
+  m_L4sInd = value;
   m_L4sIndIsSet = true;
 }
-bool MediaComponentRm::l4sIndIsSet() const {
-  return m_L4sIndIsSet;
-}
-void MediaComponentRm::unsetL4sInd() {
-  m_L4sIndIsSet = false;
-}
+bool MediaComponentRm::l4sIndIsSet() const { return m_L4sIndIsSet; }
+void MediaComponentRm::unsetL4sInd() { m_L4sIndIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

@@ -8,13 +8,13 @@
 
 #include "Ngap_TSCTrafficCharacteristics.h"
 
-#include "Ngap_TSCAssistanceInformation.h"
 #include "Ngap_ProtocolExtensionContainer.h"
+#include "Ngap_TSCAssistanceInformation.h"
 asn_TYPE_member_t asn_MBR_Ngap_TSCTrafficCharacteristics_1[] = {
     {ATF_POINTER,
      3,
-     offsetof(
-         struct Ngap_TSCTrafficCharacteristics, tSCAssistanceInformationDL),
+     offsetof(struct Ngap_TSCTrafficCharacteristics,
+              tSCAssistanceInformationDL),
      (ASN_TAG_CLASS_CONTEXT | (0 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_TSCAssistanceInformation,
@@ -33,8 +33,8 @@ asn_TYPE_member_t asn_MBR_Ngap_TSCTrafficCharacteristics_1[] = {
      "tSCAssistanceInformationDL"},
     {ATF_POINTER,
      2,
-     offsetof(
-         struct Ngap_TSCTrafficCharacteristics, tSCAssistanceInformationUL),
+     offsetof(struct Ngap_TSCTrafficCharacteristics,
+              tSCAssistanceInformationUL),
      (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_TSCAssistanceInformation,

@@ -27,12 +27,12 @@ void PositioningMode::validate() const {
   }
 }
 
-bool PositioningMode::validate(std::stringstream& msg) const {
+bool PositioningMode::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool PositioningMode::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool PositioningMode::validate(std::stringstream &msg,
+                               const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PositioningMode" : pathPrefix;
@@ -43,35 +43,31 @@ bool PositioningMode::validate(
   return success;
 }
 
-bool PositioningMode::operator==(const PositioningMode& rhs) const {
+bool PositioningMode::operator==(const PositioningMode &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool PositioningMode::operator!=(const PositioningMode& rhs) const {
+bool PositioningMode::operator!=(const PositioningMode &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PositioningMode& o) {
+void to_json(nlohmann::json &j, const PositioningMode &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, PositioningMode& o) {
+void from_json(const nlohmann::json &j, PositioningMode &o) {
   from_json(j, o.m_value);
 }
 
-PositioningMode_anyOf PositioningMode::getValue() const {
-  return m_value;
-}
+PositioningMode_anyOf PositioningMode::getValue() const { return m_value; }
 
-void PositioningMode::setValue(PositioningMode_anyOf value) {
-  m_value = value;
-}
+void PositioningMode::setValue(PositioningMode_anyOf value) { m_value = value; }
 
-PositioningMode_anyOf::ePositioningMode_anyOf PositioningMode::getEnumValue()
-    const {
+PositioningMode_anyOf::ePositioningMode_anyOf
+PositioningMode::getEnumValue() const {
   return m_value.getValue();
 }
 
@@ -80,4 +76,4 @@ void PositioningMode::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

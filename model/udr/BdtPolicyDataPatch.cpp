@@ -18,9 +18,7 @@
 
 namespace oai::udr::model {
 
-BdtPolicyDataPatch::BdtPolicyDataPatch() {
-  m_BdtRefId = "";
-}
+BdtPolicyDataPatch::BdtPolicyDataPatch() { m_BdtRefId = ""; }
 
 BdtPolicyDataPatch::~BdtPolicyDataPatch() {}
 
@@ -28,20 +26,18 @@ void BdtPolicyDataPatch::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const BdtPolicyDataPatch& o) {
-  j             = nlohmann::json();
+void to_json(nlohmann::json &j, const BdtPolicyDataPatch &o) {
+  j = nlohmann::json();
   j["bdtRefId"] = o.m_BdtRefId;
 }
 
-void from_json(const nlohmann::json& j, BdtPolicyDataPatch& o) {
+void from_json(const nlohmann::json &j, BdtPolicyDataPatch &o) {
   j.at("bdtRefId").get_to(o.m_BdtRefId);
 }
 
-std::string BdtPolicyDataPatch::getBdtRefId() const {
-  return m_BdtRefId;
-}
-void BdtPolicyDataPatch::setBdtRefId(std::string const& value) {
+std::string BdtPolicyDataPatch::getBdtRefId() const { return m_BdtRefId; }
+void BdtPolicyDataPatch::setBdtRefId(std::string const &value) {
   m_BdtRefId = value;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

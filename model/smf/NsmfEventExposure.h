@@ -20,12 +20,12 @@
 #define NsmfEventExposure_H_
 
 #include "EventSubscription.h"
-#include "NotificationMethod.h"
-#include <string>
-#include "Ipv6Addr.h"
-#include <vector>
 #include "Guami.h"
+#include "Ipv6Addr.h"
+#include "NotificationMethod.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::smf {
 
@@ -33,7 +33,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class NsmfEventExposure {
- public:
+public:
   NsmfEventExposure();
   virtual ~NsmfEventExposure();
 
@@ -46,14 +46,14 @@ class NsmfEventExposure {
   ///
   /// </summary>
   std::string getSupi() const;
-  void setSupi(std::string const& value);
+  void setSupi(std::string const &value);
   bool supiIsSet() const;
   void unsetSupi();
   /// <summary>
   ///
   /// </summary>
   std::string getGpsi() const;
-  void setGpsi(std::string const& value);
+  void setGpsi(std::string const &value);
   bool gpsiIsSet() const;
   void unsetGpsi();
   /// <summary>
@@ -69,7 +69,7 @@ class NsmfEventExposure {
   ///
   /// </summary>
   std::string getGroupId() const;
-  void setGroupId(std::string const& value);
+  void setGroupId(std::string const &value);
   bool groupIdIsSet() const;
   void unsetGroupId();
   /// <summary>
@@ -87,40 +87,40 @@ class NsmfEventExposure {
   /// be designated as \&quot;SubId\&quot;.
   /// </summary>
   std::string getSubId() const;
-  void setSubId(std::string const& value);
+  void setSubId(std::string const &value);
   bool subIdIsSet() const;
   void unsetSubId();
   /// <summary>
   /// Notification Correlation ID assigned by the NF service consumer.
   /// </summary>
   std::string getNotifId() const;
-  void setNotifId(std::string const& value);
+  void setNotifId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getNotifUri() const;
-  void setNotifUri(std::string const& value);
+  void setNotifUri(std::string const &value);
   /// <summary>
   /// Alternate or backup IPv4 Addess(es) where to send Notifications.
   /// </summary>
-  std::vector<std::string>& getAltNotifIpv4Addrs();
-  void setAltNotifIpv4Addrs(std::vector<std::string> const& value);
+  std::vector<std::string> &getAltNotifIpv4Addrs();
+  void setAltNotifIpv4Addrs(std::vector<std::string> const &value);
   bool altNotifIpv4AddrsIsSet() const;
   void unsetAltNotifIpv4Addrs();
   /// <summary>
   /// Alternate or backup IPv6 Addess(es) where to send Notifications.
   /// </summary>
-  std::vector<oai::model::common::Ipv6Addr>& getAltNotifIpv6Addrs();
-  void setAltNotifIpv6Addrs(
-      std::vector<oai::model::common::Ipv6Addr> const& value);
+  std::vector<oai::model::common::Ipv6Addr> &getAltNotifIpv6Addrs();
+  void
+  setAltNotifIpv6Addrs(std::vector<oai::model::common::Ipv6Addr> const &value);
   bool altNotifIpv6AddrsIsSet() const;
   void unsetAltNotifIpv6Addrs();
   /// <summary>
   /// Subscribed events
   /// </summary>
   std::vector<EventSubscription> getEventSubs() const;
-  void getEventSubs(std::vector<EventSubscription>&) const;
-  void setEventSubs(std::vector<EventSubscription> const& value);
+  void getEventSubs(std::vector<EventSubscription> &) const;
+  void setEventSubs(std::vector<EventSubscription> const &value);
   /// <summary>
   ///
   /// </summary>
@@ -132,7 +132,7 @@ class NsmfEventExposure {
   ///
   /// </summary>
   NotificationMethod getNotifMethod() const;
-  void setNotifMethod(NotificationMethod const& value);
+  void setNotifMethod(NotificationMethod const &value);
   bool notifMethodIsSet() const;
   void unsetNotifMethod();
   /// <summary>
@@ -146,7 +146,7 @@ class NsmfEventExposure {
   ///
   /// </summary>
   std::string getExpiry() const;
-  void setExpiry(std::string const& value);
+  void setExpiry(std::string const &value);
   bool expiryIsSet() const;
   void unsetExpiry();
   /// <summary>
@@ -160,7 +160,7 @@ class NsmfEventExposure {
   ///
   /// </summary>
   oai::model::common::Guami getGuami() const;
-  void setGuami(oai::model::common::Guami const& value);
+  void setGuami(oai::model::common::Guami const &value);
   bool guamiIsSet() const;
   void unsetGuami();
   /// <summary>
@@ -169,21 +169,21 @@ class NsmfEventExposure {
   /// subscribed events.
   /// </summary>
   std::string getServiveName() const;
-  void setServiveName(std::string const& value);
+  void setServiveName(std::string const &value);
   bool serviveNameIsSet() const;
   void unsetServiveName();
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
 
-  friend void to_json(nlohmann::json& j, const NsmfEventExposure& o);
-  friend void from_json(const nlohmann::json& j, NsmfEventExposure& o);
+  friend void to_json(nlohmann::json &j, const NsmfEventExposure &o);
+  friend void from_json(const nlohmann::json &j, NsmfEventExposure &o);
 
- protected:
+protected:
   std::string m_Supi;
   bool m_SupiIsSet;
   std::string m_Gpsi;
@@ -224,6 +224,6 @@ class NsmfEventExposure {
   bool m_SupportedFeaturesIsSet;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* NsmfEventExposure_H_ */

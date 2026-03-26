@@ -30,12 +30,12 @@ void PlmnId::validate() const {
   }
 }
 
-bool PlmnId::validate(std::stringstream& msg) const {
+bool PlmnId::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool PlmnId::validate(
-    std::stringstream& /* msg */, const std::string& /* pathPrefix */) const {
+bool PlmnId::validate(std::stringstream & /* msg */,
+                      const std::string & /* pathPrefix */) const {
   bool success = true;
   /*
   const std::string _pathPrefix = pathPrefix.empty() ? "PlmnId" : pathPrefix;
@@ -55,7 +55,7 @@ bool PlmnId::validate(
   return success;
 }
 
-bool PlmnId::operator==(const PlmnId& rhs) const {
+bool PlmnId::operator==(const PlmnId &rhs) const {
   return
 
       (getMcc() == rhs.getMcc()) &&
@@ -65,32 +65,22 @@ bool PlmnId::operator==(const PlmnId& rhs) const {
           ;
 }
 
-bool PlmnId::operator!=(const PlmnId& rhs) const {
-  return !(*this == rhs);
-}
+bool PlmnId::operator!=(const PlmnId &rhs) const { return !(*this == rhs); }
 
-void to_json(nlohmann::json& j, const PlmnId& o) {
-  j        = nlohmann::json();
+void to_json(nlohmann::json &j, const PlmnId &o) {
+  j = nlohmann::json();
   j["mcc"] = o.m_Mcc;
   j["mnc"] = o.m_Mnc;
 }
 
-void from_json(const nlohmann::json& j, PlmnId& o) {
+void from_json(const nlohmann::json &j, PlmnId &o) {
   j.at("mcc").get_to(o.m_Mcc);
   j.at("mnc").get_to(o.m_Mnc);
 }
 
-std::string PlmnId::getMcc() const {
-  return m_Mcc;
-}
-void PlmnId::setMcc(std::string const& value) {
-  m_Mcc = value;
-}
-std::string PlmnId::getMnc() const {
-  return m_Mnc;
-}
-void PlmnId::setMnc(std::string const& value) {
-  m_Mnc = value;
-}
+std::string PlmnId::getMcc() const { return m_Mcc; }
+void PlmnId::setMcc(std::string const &value) { m_Mcc = value; }
+std::string PlmnId::getMnc() const { return m_Mnc; }
+void PlmnId::setMnc(std::string const &value) { m_Mnc = value; }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

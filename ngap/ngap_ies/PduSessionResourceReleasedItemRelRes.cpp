@@ -14,8 +14,8 @@ PduSessionResourceReleasedItemRelRes::~PduSessionResourceReleasedItemRelRes() {}
 
 //------------------------------------------------------------------------------
 void PduSessionResourceReleasedItemRelRes::set(
-    const PduSessionId& pduSessionId,
-    const OCTET_STRING_t& pduSessionResourceReleaseResponseTransfer) {
+    const PduSessionId &pduSessionId,
+    const OCTET_STRING_t &pduSessionResourceReleaseResponseTransfer) {
   m_PduSessionId = pduSessionId;
   m_PduSessionResourceReleaseResponseTransfer =
       pduSessionResourceReleaseResponseTransfer;
@@ -23,8 +23,8 @@ void PduSessionResourceReleasedItemRelRes::set(
 
 //------------------------------------------------------------------------------
 void PduSessionResourceReleasedItemRelRes::get(
-    PduSessionId& pduSessionId,
-    OCTET_STRING_t& pduSessionResourceReleaseResponseTransfer) const {
+    PduSessionId &pduSessionId,
+    OCTET_STRING_t &pduSessionResourceReleaseResponseTransfer) const {
   pduSessionId = m_PduSessionId;
   pduSessionResourceReleaseResponseTransfer =
       m_PduSessionResourceReleaseResponseTransfer;
@@ -32,8 +32,9 @@ void PduSessionResourceReleasedItemRelRes::get(
 
 //------------------------------------------------------------------------------
 bool PduSessionResourceReleasedItemRelRes::encode(
-    Ngap_PDUSessionResourceReleasedItemRelRes_t& pduSessionResourceItem) const {
-  if (!m_PduSessionId.encode(pduSessionResourceItem.pDUSessionID)) return false;
+    Ngap_PDUSessionResourceReleasedItemRelRes_t &pduSessionResourceItem) const {
+  if (!m_PduSessionId.encode(pduSessionResourceItem.pDUSessionID))
+    return false;
 
   pduSessionResourceItem.pDUSessionResourceReleaseResponseTransfer =
       m_PduSessionResourceReleaseResponseTransfer;
@@ -43,7 +44,7 @@ bool PduSessionResourceReleasedItemRelRes::encode(
 
 //------------------------------------------------------------------------------
 bool PduSessionResourceReleasedItemRelRes::decode(
-    const Ngap_PDUSessionResourceReleasedItemRelRes_t& pduSessionResourceItem) {
+    const Ngap_PDUSessionResourceReleasedItemRelRes_t &pduSessionResourceItem) {
   m_PduSessionId.set(pduSessionResourceItem.pDUSessionID);
   m_PduSessionResourceReleaseResponseTransfer =
       pduSessionResourceItem.pDUSessionResourceReleaseResponseTransfer;
@@ -51,4 +52,4 @@ bool PduSessionResourceReleasedItemRelRes::decode(
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

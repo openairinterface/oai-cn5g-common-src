@@ -16,11 +16,11 @@
 namespace oai::model::smf {
 
 QosFlowSetupItem::QosFlowSetupItem() {
-  m_Qfi                     = 0;
-  m_Ebi                     = 0;
-  m_EbiIsSet                = false;
+  m_Qfi = 0;
+  m_Ebi = 0;
+  m_EbiIsSet = false;
   m_QosFlowDescriptionIsSet = false;
-  m_QosFlowProfileIsSet     = false;
+  m_QosFlowProfileIsSet = false;
 }
 
 QosFlowSetupItem::~QosFlowSetupItem() {}
@@ -29,17 +29,19 @@ void QosFlowSetupItem::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const QosFlowSetupItem& o) {
-  j             = nlohmann::json();
-  j["qfi"]      = o.m_Qfi;
+void to_json(nlohmann::json &j, const QosFlowSetupItem &o) {
+  j = nlohmann::json();
+  j["qfi"] = o.m_Qfi;
   j["qosRules"] = o.m_QosRules;
-  if (o.ebiIsSet()) j["ebi"] = o.m_Ebi;
+  if (o.ebiIsSet())
+    j["ebi"] = o.m_Ebi;
   if (o.qosFlowDescriptionIsSet())
     j["qosFlowDescription"] = o.m_QosFlowDescription;
-  if (o.qosFlowProfileIsSet()) j["qosFlowProfile"] = o.m_QosFlowProfile;
+  if (o.qosFlowProfileIsSet())
+    j["qosFlowProfile"] = o.m_QosFlowProfile;
 }
 
-void from_json(const nlohmann::json& j, QosFlowSetupItem& o) {
+void from_json(const nlohmann::json &j, QosFlowSetupItem &o) {
   j.at("qfi").get_to(o.m_Qfi);
   j.at("qosRules").get_to(o.m_QosRules);
   if (j.find("ebi") != j.end()) {
@@ -56,36 +58,24 @@ void from_json(const nlohmann::json& j, QosFlowSetupItem& o) {
   }
 }
 
-int32_t QosFlowSetupItem::getQfi() const {
-  return m_Qfi;
-}
-void QosFlowSetupItem::setQfi(int32_t const value) {
-  m_Qfi = value;
-}
-std::string QosFlowSetupItem::getQosRules() const {
-  return m_QosRules;
-}
-void QosFlowSetupItem::setQosRules(std::string const& value) {
+int32_t QosFlowSetupItem::getQfi() const { return m_Qfi; }
+void QosFlowSetupItem::setQfi(int32_t const value) { m_Qfi = value; }
+std::string QosFlowSetupItem::getQosRules() const { return m_QosRules; }
+void QosFlowSetupItem::setQosRules(std::string const &value) {
   m_QosRules = value;
 }
-int32_t QosFlowSetupItem::getEbi() const {
-  return m_Ebi;
-}
+int32_t QosFlowSetupItem::getEbi() const { return m_Ebi; }
 void QosFlowSetupItem::setEbi(int32_t const value) {
-  m_Ebi      = value;
+  m_Ebi = value;
   m_EbiIsSet = true;
 }
-bool QosFlowSetupItem::ebiIsSet() const {
-  return m_EbiIsSet;
-}
-void QosFlowSetupItem::unsetEbi() {
-  m_EbiIsSet = false;
-}
+bool QosFlowSetupItem::ebiIsSet() const { return m_EbiIsSet; }
+void QosFlowSetupItem::unsetEbi() { m_EbiIsSet = false; }
 std::string QosFlowSetupItem::getQosFlowDescription() const {
   return m_QosFlowDescription;
 }
-void QosFlowSetupItem::setQosFlowDescription(std::string const& value) {
-  m_QosFlowDescription      = value;
+void QosFlowSetupItem::setQosFlowDescription(std::string const &value) {
+  m_QosFlowDescription = value;
   m_QosFlowDescriptionIsSet = true;
 }
 bool QosFlowSetupItem::qosFlowDescriptionIsSet() const {
@@ -97,15 +87,13 @@ void QosFlowSetupItem::unsetQosFlowDescription() {
 QosFlowProfile QosFlowSetupItem::getQosFlowProfile() const {
   return m_QosFlowProfile;
 }
-void QosFlowSetupItem::setQosFlowProfile(QosFlowProfile const& value) {
-  m_QosFlowProfile      = value;
+void QosFlowSetupItem::setQosFlowProfile(QosFlowProfile const &value) {
+  m_QosFlowProfile = value;
   m_QosFlowProfileIsSet = true;
 }
 bool QosFlowSetupItem::qosFlowProfileIsSet() const {
   return m_QosFlowProfileIsSet;
 }
-void QosFlowSetupItem::unsetQosFlowProfile() {
-  m_QosFlowProfileIsSet = false;
-}
+void QosFlowSetupItem::unsetQosFlowProfile() { m_QosFlowProfileIsSet = false; }
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

@@ -28,10 +28,7 @@ asn_per_constraints_t asn_PER_type_Ngap_QosMonitoringRequest_constr_1
           !defined(ASN_DISABLE_APER_SUPPORT) */
 static const asn_INTEGER_enum_map_t
     asn_MAP_Ngap_QosMonitoringRequest_value2enum_1[] = {
-        {0, 2, "ul"},
-        {1, 2, "dl"},
-        {2, 4, "both"},
-        {3, 4, "stop"}
+        {0, 2, "ul"}, {1, 2, "dl"}, {2, 4, "both"}, {3, 4, "stop"}
         /* This list is extensible */
 };
 static const unsigned int asn_MAP_Ngap_QosMonitoringRequest_enum2value_1[] = {

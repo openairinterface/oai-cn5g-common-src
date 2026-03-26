@@ -9,10 +9,9 @@
 
 namespace oai::utils {
 class output_wrapper {
- public:
-  static void print_buffer(
-      const std::string app, const std::string sink, const uint8_t* buf,
-      int len);
+public:
+  static void print_buffer(const std::string app, const std::string sink,
+                           const uint8_t *buf, int len);
 };
-}  // namespace oai::utils
+} // namespace oai::utils
 #endif

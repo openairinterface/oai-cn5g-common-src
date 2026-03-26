@@ -27,12 +27,12 @@ void RuleOperation::validate() const {
   }
 }
 
-bool RuleOperation::validate(std::stringstream& msg) const {
+bool RuleOperation::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool RuleOperation::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool RuleOperation::validate(std::stringstream &msg,
+                             const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "RuleOperation" : pathPrefix;
@@ -43,32 +43,28 @@ bool RuleOperation::validate(
   return success;
 }
 
-bool RuleOperation::operator==(const RuleOperation& rhs) const {
+bool RuleOperation::operator==(const RuleOperation &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool RuleOperation::operator!=(const RuleOperation& rhs) const {
+bool RuleOperation::operator!=(const RuleOperation &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const RuleOperation& o) {
+void to_json(nlohmann::json &j, const RuleOperation &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, RuleOperation& o) {
+void from_json(const nlohmann::json &j, RuleOperation &o) {
   from_json(j, o.m_value);
 }
 
-RuleOperation_anyOf RuleOperation::getValue() const {
-  return m_value;
-}
+RuleOperation_anyOf RuleOperation::getValue() const { return m_value; }
 
-void RuleOperation::setValue(RuleOperation_anyOf value) {
-  m_value = value;
-}
+void RuleOperation::setValue(RuleOperation_anyOf value) { m_value = value; }
 
 RuleOperation_anyOf::eRuleOperation_anyOf RuleOperation::getEnumValue() const {
   return m_value.getValue();
@@ -79,4 +75,4 @@ void RuleOperation::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

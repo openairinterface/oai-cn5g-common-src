@@ -14,21 +14,24 @@ PduSessionResourceModifyListModRes::~PduSessionResourceModifyListModRes() {}
 
 //------------------------------------------------------------------------------
 void PduSessionResourceModifyListModRes::set(
-    const std::vector<PduSessionResourceModifyItemModRes>& list) {
+    const std::vector<PduSessionResourceModifyItemModRes> &list) {
   m_ItemList = list;
 }
 
 //------------------------------------------------------------------------------
 bool PduSessionResourceModifyListModRes::encode(
-    Ngap_PDUSessionResourceModifyListModRes_t& list) const {
+    Ngap_PDUSessionResourceModifyListModRes_t &list) const {
   for (auto pdu : m_ItemList) {
-    Ngap_PDUSessionResourceModifyItemModRes_t* item =
-        (Ngap_PDUSessionResourceModifyItemModRes_t*) calloc(
+    Ngap_PDUSessionResourceModifyItemModRes_t *item =
+        (Ngap_PDUSessionResourceModifyItemModRes_t *)calloc(
             1, sizeof(Ngap_PDUSessionResourceModifyItemModRes_t));
 
-    if (!item) return false;
-    if (!pdu.encode(*item)) return false;
-    if (ASN_SEQUENCE_ADD(&list.list, item) != 0) return false;
+    if (!item)
+      return false;
+    if (!pdu.encode(*item))
+      return false;
+    if (ASN_SEQUENCE_ADD(&list.list, item) != 0)
+      return false;
   }
 
   return true;
@@ -36,8 +39,8 @@ bool PduSessionResourceModifyListModRes::encode(
 
 //------------------------------------------------------------------------------
 bool PduSessionResourceModifyListModRes::decode(
-    const Ngap_PDUSessionResourceModifyListModRes_t&
-        pdu_session_resource_modify_list_mod_res) {
+    const Ngap_PDUSessionResourceModifyListModRes_t
+        &pdu_session_resource_modify_list_mod_res) {
   uint32_t num_pdu_sessions =
       pdu_session_resource_modify_list_mod_res.list.count;
 
@@ -54,8 +57,8 @@ bool PduSessionResourceModifyListModRes::decode(
 
 //------------------------------------------------------------------------------
 void PduSessionResourceModifyListModRes::get(
-    std::vector<PduSessionResourceModifyItemModRes>& list) const {
+    std::vector<PduSessionResourceModifyItemModRes> &list) const {
   list = m_ItemList;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

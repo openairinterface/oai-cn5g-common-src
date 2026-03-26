@@ -27,12 +27,12 @@ void PositioningMethodMdt::validate() const {
   }
 }
 
-bool PositioningMethodMdt::validate(std::stringstream& msg) const {
+bool PositioningMethodMdt::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool PositioningMethodMdt::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool PositioningMethodMdt::validate(std::stringstream &msg,
+                                    const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PositioningMethodMdt" : pathPrefix;
@@ -43,22 +43,22 @@ bool PositioningMethodMdt::validate(
   return success;
 }
 
-bool PositioningMethodMdt::operator==(const PositioningMethodMdt& rhs) const {
+bool PositioningMethodMdt::operator==(const PositioningMethodMdt &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool PositioningMethodMdt::operator!=(const PositioningMethodMdt& rhs) const {
+bool PositioningMethodMdt::operator!=(const PositioningMethodMdt &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PositioningMethodMdt& o) {
+void to_json(nlohmann::json &j, const PositioningMethodMdt &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, PositioningMethodMdt& o) {
+void from_json(const nlohmann::json &j, PositioningMethodMdt &o) {
   from_json(j, o.m_value);
 }
 
@@ -80,4 +80,4 @@ void PositioningMethodMdt::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

@@ -27,30 +27,24 @@ void Rsn::validate() const {
   }
 }
 
-bool Rsn::validate(std::stringstream& msg) const {
-  return validate(msg, "");
-}
+bool Rsn::validate(std::stringstream &msg) const { return validate(msg, ""); }
 
-bool Rsn::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool Rsn::validate(std::stringstream &msg,
+                   const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "Rsn" : pathPrefix;
 
   return success;
 }
 
-bool Rsn::operator==(const Rsn& rhs) const {
-  return true;  // TODO
+bool Rsn::operator==(const Rsn &rhs) const {
+  return true; // TODO
 }
 
-bool Rsn::operator!=(const Rsn& rhs) const {
-  return !(*this == rhs);
-}
+bool Rsn::operator!=(const Rsn &rhs) const { return !(*this == rhs); }
 
-void to_json(nlohmann::json& j, const Rsn& o) {
-  j = nlohmann::json::object();
-}
+void to_json(nlohmann::json &j, const Rsn &o) { j = nlohmann::json::object(); }
 
-void from_json(const nlohmann::json& j, Rsn& o) {}
+void from_json(const nlohmann::json &j, Rsn &o) {}
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

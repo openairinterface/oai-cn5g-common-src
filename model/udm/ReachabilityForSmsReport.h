@@ -22,9 +22,9 @@
 #ifndef ReachabilityForSmsReport_H_
 #define ReachabilityForSmsReport_H_
 
-#include <string>
 #include "AccessType.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::udm {
 
@@ -32,7 +32,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class ReachabilityForSmsReport {
- public:
+public:
   ReachabilityForSmsReport();
   virtual ~ReachabilityForSmsReport() = default;
 
@@ -46,10 +46,10 @@ class ReachabilityForSmsReport {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const ReachabilityForSmsReport& rhs) const;
-  bool operator!=(const ReachabilityForSmsReport& rhs) const;
+  bool operator==(const ReachabilityForSmsReport &rhs) const;
+  bool operator!=(const ReachabilityForSmsReport &rhs) const;
 
   /////////////////////////////////////////////
   /// ReachabilityForSmsReport members
@@ -58,19 +58,19 @@ class ReachabilityForSmsReport {
   ///
   /// </summary>
   oai::model::common::AccessType getSmsfAccessType() const;
-  void setSmsfAccessType(oai::model::common::AccessType const& value);
+  void setSmsfAccessType(oai::model::common::AccessType const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getMaxAvailabilityTime() const;
-  void setMaxAvailabilityTime(std::string const& value);
+  void setMaxAvailabilityTime(std::string const &value);
   bool maxAvailabilityTimeIsSet() const;
   void unsetMaxAvailabilityTime();
 
-  friend void to_json(nlohmann::json& j, const ReachabilityForSmsReport& o);
-  friend void from_json(const nlohmann::json& j, ReachabilityForSmsReport& o);
+  friend void to_json(nlohmann::json &j, const ReachabilityForSmsReport &o);
+  friend void from_json(const nlohmann::json &j, ReachabilityForSmsReport &o);
 
- protected:
+protected:
   oai::model::common::AccessType m_SmsfAccessType;
 
   std::string m_MaxAvailabilityTime;
@@ -78,9 +78,9 @@ class ReachabilityForSmsReport {
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* ReachabilityForSmsReport_H_ */

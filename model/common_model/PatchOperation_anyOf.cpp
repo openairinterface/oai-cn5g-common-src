@@ -13,8 +13,8 @@
 
 #include "PatchOperation_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::common {
 
@@ -27,12 +27,12 @@ void PatchOperation_anyOf::validate() const {
   }
 }
 
-bool PatchOperation_anyOf::validate(std::stringstream& msg) const {
+bool PatchOperation_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool PatchOperation_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool PatchOperation_anyOf::validate(std::stringstream &msg,
+                                    const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PatchOperation_anyOf" : pathPrefix;
@@ -46,46 +46,46 @@ bool PatchOperation_anyOf::validate(
   return success;
 }
 
-bool PatchOperation_anyOf::operator==(const PatchOperation_anyOf& rhs) const {
+bool PatchOperation_anyOf::operator==(const PatchOperation_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool PatchOperation_anyOf::operator!=(const PatchOperation_anyOf& rhs) const {
+bool PatchOperation_anyOf::operator!=(const PatchOperation_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PatchOperation_anyOf& o) {
+void to_json(nlohmann::json &j, const PatchOperation_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case PatchOperation_anyOf::ePatchOperation_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case PatchOperation_anyOf::ePatchOperation_anyOf::ADD:
-      j = "add";
-      break;
-    case PatchOperation_anyOf::ePatchOperation_anyOf::COPY:
-      j = "copy";
-      break;
-    case PatchOperation_anyOf::ePatchOperation_anyOf::MOVE:
-      j = "move";
-      break;
-    case PatchOperation_anyOf::ePatchOperation_anyOf::REMOVE:
-      j = "remove";
-      break;
-    case PatchOperation_anyOf::ePatchOperation_anyOf::REPLACE:
-      j = "replace";
-      break;
-    case PatchOperation_anyOf::ePatchOperation_anyOf::TEST:
-      j = "test";
-      break;
+  case PatchOperation_anyOf::ePatchOperation_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case PatchOperation_anyOf::ePatchOperation_anyOf::ADD:
+    j = "add";
+    break;
+  case PatchOperation_anyOf::ePatchOperation_anyOf::COPY:
+    j = "copy";
+    break;
+  case PatchOperation_anyOf::ePatchOperation_anyOf::MOVE:
+    j = "move";
+    break;
+  case PatchOperation_anyOf::ePatchOperation_anyOf::REMOVE:
+    j = "remove";
+    break;
+  case PatchOperation_anyOf::ePatchOperation_anyOf::REPLACE:
+    j = "replace";
+    break;
+  case PatchOperation_anyOf::ePatchOperation_anyOf::TEST:
+    j = "test";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, PatchOperation_anyOf& o) {
+void from_json(const nlohmann::json &j, PatchOperation_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "add") {
     o.setValue(PatchOperation_anyOf::ePatchOperation_anyOf::ADD);
@@ -111,8 +111,8 @@ void from_json(const nlohmann::json& j, PatchOperation_anyOf& o) {
   }
 }
 
-PatchOperation_anyOf::ePatchOperation_anyOf PatchOperation_anyOf::getValue()
-    const {
+PatchOperation_anyOf::ePatchOperation_anyOf
+PatchOperation_anyOf::getValue() const {
   return m_value;
 }
 void PatchOperation_anyOf::setValue(
@@ -120,4 +120,4 @@ void PatchOperation_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

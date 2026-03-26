@@ -24,11 +24,11 @@ struct Ngap_ProtocolExtensionContainer;
 
 /* Ngap_TSCTrafficCharacteristics */
 typedef struct Ngap_TSCTrafficCharacteristics {
-  struct Ngap_TSCAssistanceInformation*
-      tSCAssistanceInformationDL; /* OPTIONAL */
-  struct Ngap_TSCAssistanceInformation*
-      tSCAssistanceInformationUL;                        /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_TSCAssistanceInformation
+      *tSCAssistanceInformationDL; /* OPTIONAL */
+  struct Ngap_TSCAssistanceInformation
+      *tSCAssistanceInformationUL;                       /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

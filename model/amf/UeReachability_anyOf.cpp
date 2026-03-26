@@ -13,8 +13,8 @@
 
 #include "UeReachability_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::amf {
 
@@ -27,12 +27,12 @@ void UeReachability_anyOf::validate() const {
   }
 }
 
-bool UeReachability_anyOf::validate(std::stringstream& msg) const {
+bool UeReachability_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool UeReachability_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool UeReachability_anyOf::validate(std::stringstream &msg,
+                                    const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "UeReachability_anyOf" : pathPrefix;
@@ -46,37 +46,37 @@ bool UeReachability_anyOf::validate(
   return success;
 }
 
-bool UeReachability_anyOf::operator==(const UeReachability_anyOf& rhs) const {
+bool UeReachability_anyOf::operator==(const UeReachability_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool UeReachability_anyOf::operator!=(const UeReachability_anyOf& rhs) const {
+bool UeReachability_anyOf::operator!=(const UeReachability_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const UeReachability_anyOf& o) {
+void to_json(nlohmann::json &j, const UeReachability_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case UeReachability_anyOf::eUeReachability_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case UeReachability_anyOf::eUeReachability_anyOf::UNREACHABLE:
-      j = "UNREACHABLE";
-      break;
-    case UeReachability_anyOf::eUeReachability_anyOf::REACHABLE:
-      j = "REACHABLE";
-      break;
-    case UeReachability_anyOf::eUeReachability_anyOf::REGULATORY_ONLY:
-      j = "REGULATORY_ONLY";
-      break;
+  case UeReachability_anyOf::eUeReachability_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case UeReachability_anyOf::eUeReachability_anyOf::UNREACHABLE:
+    j = "UNREACHABLE";
+    break;
+  case UeReachability_anyOf::eUeReachability_anyOf::REACHABLE:
+    j = "REACHABLE";
+    break;
+  case UeReachability_anyOf::eUeReachability_anyOf::REGULATORY_ONLY:
+    j = "REGULATORY_ONLY";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, UeReachability_anyOf& o) {
+void from_json(const nlohmann::json &j, UeReachability_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "UNREACHABLE") {
     o.setValue(UeReachability_anyOf::eUeReachability_anyOf::UNREACHABLE);
@@ -93,8 +93,8 @@ void from_json(const nlohmann::json& j, UeReachability_anyOf& o) {
   }
 }
 
-UeReachability_anyOf::eUeReachability_anyOf UeReachability_anyOf::getValue()
-    const {
+UeReachability_anyOf::eUeReachability_anyOf
+UeReachability_anyOf::getValue() const {
   return m_value;
 }
 void UeReachability_anyOf::setValue(
@@ -102,4 +102,4 @@ void UeReachability_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

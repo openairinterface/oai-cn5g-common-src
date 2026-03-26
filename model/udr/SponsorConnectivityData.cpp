@@ -26,20 +26,20 @@ void SponsorConnectivityData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const SponsorConnectivityData& o) {
-  j           = nlohmann::json();
+void to_json(nlohmann::json &j, const SponsorConnectivityData &o) {
+  j = nlohmann::json();
   j["aspIds"] = o.m_AspIds;
 }
 
-void from_json(const nlohmann::json& j, SponsorConnectivityData& o) {
+void from_json(const nlohmann::json &j, SponsorConnectivityData &o) {
   j.at("aspIds").get_to(o.m_AspIds);
 }
 
-std::vector<std::string>& SponsorConnectivityData::getAspIds() {
+std::vector<std::string> &SponsorConnectivityData::getAspIds() {
   return m_AspIds;
 }
-void SponsorConnectivityData::setAspIds(std::vector<std::string> const& value) {
+void SponsorConnectivityData::setAspIds(std::vector<std::string> const &value) {
   m_AspIds = value;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

@@ -30,7 +30,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class PrivacyCheckRelatedAction {
- public:
+public:
   PrivacyCheckRelatedAction();
   virtual ~PrivacyCheckRelatedAction();
 
@@ -39,12 +39,12 @@ class PrivacyCheckRelatedAction {
   /////////////////////////////////////////////
   /// PrivacyCheckRelatedAction members
 
-  friend void to_json(nlohmann::json& j, const PrivacyCheckRelatedAction& o);
-  friend void from_json(const nlohmann::json& j, PrivacyCheckRelatedAction& o);
+  friend void to_json(nlohmann::json &j, const PrivacyCheckRelatedAction &o);
+  friend void from_json(const nlohmann::json &j, PrivacyCheckRelatedAction &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* PrivacyCheckRelatedAction_H_ */

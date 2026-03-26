@@ -20,7 +20,7 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_NotificationCause {
-  Ngap_NotificationCause_fulfilled     = 0,
+  Ngap_NotificationCause_fulfilled = 0,
   Ngap_NotificationCause_not_fulfilled = 1
   /*
    * Enumeration is extensible

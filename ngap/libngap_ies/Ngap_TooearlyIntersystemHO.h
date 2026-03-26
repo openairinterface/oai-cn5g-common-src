@@ -28,8 +28,8 @@ struct Ngap_ProtocolExtensionContainer;
 typedef struct Ngap_TooearlyIntersystemHO {
   Ngap_EUTRA_CGI_t sourcecellID;
   Ngap_NGRAN_CGI_t failurecellID;
-  struct Ngap_UERLFReportContainer* uERLFReportContainer; /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions;  /* OPTIONAL */
+  struct Ngap_UERLFReportContainer *uERLFReportContainer; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions;  /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

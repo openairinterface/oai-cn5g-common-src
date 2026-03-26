@@ -29,7 +29,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class EventReportMessage {
- public:
+public:
   EventReportMessage();
   virtual ~EventReportMessage() = default;
 
@@ -43,16 +43,16 @@ class EventReportMessage {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const EventReportMessage& rhs) const;
-  bool operator!=(const EventReportMessage& rhs) const;
+  bool operator==(const EventReportMessage &rhs) const;
+  bool operator!=(const EventReportMessage &rhs) const;
 
   /////////////////////////////////////////////
   /// EventReportMessage members
@@ -61,22 +61,22 @@ class EventReportMessage {
   ///
   /// </summary>
   oai::model::lmf::EventClass getEventClass() const;
-  void setEventClass(oai::model::lmf::EventClass const& value);
+  void setEventClass(oai::model::lmf::EventClass const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::RefToBinaryData getEventContent() const;
-  void setEventContent(oai::model::common::RefToBinaryData const& value);
+  void setEventContent(oai::model::common::RefToBinaryData const &value);
 
-  friend void to_json(nlohmann::json& j, const EventReportMessage& o);
-  friend void from_json(const nlohmann::json& j, EventReportMessage& o);
+  friend void to_json(nlohmann::json &j, const EventReportMessage &o);
+  friend void from_json(const nlohmann::json &j, EventReportMessage &o);
 
- protected:
+protected:
   oai::model::lmf::EventClass m_EventClass;
 
   oai::model::common::RefToBinaryData m_EventContent;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* EventReportMessage_H_ */

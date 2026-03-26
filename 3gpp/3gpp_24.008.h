@@ -17,14 +17,14 @@
 #define LOCATION_AREA_IDENTIFICATION_IE_MAX_LENGTH 6
 
 #define INVALID_LAC_0000                                                       \
-  (uint16_t) 0x0000 /*!< \brief  This LAC can be coded using a full            \
-                       hexadecimal representation except for the following     \
-                       reserved hexadecimal values: 0000, and FFFE.   */
+  (uint16_t)0x0000 /*!< \brief  This LAC can be coded using a full             \
+                      hexadecimal representation except for the following      \
+                      reserved hexadecimal values: 0000, and FFFE.   */
 
 #define INVALID_LAC_FFFE                                                       \
-  (uint16_t) 0xFFFE /*!< \brief  This LAC can be coded using a full            \
-                       hexadecimal representation except for the following     \
-                       reserved hexadecimal values: 0000, and FFFE.   */
+  (uint16_t)0xFFFE /*!< \brief  This LAC can be coded using a full             \
+                      hexadecimal representation except for the following      \
+                      reserved hexadecimal values: 0000, and FFFE.   */
 
 //------------------------------------------------------------------------------
 // 10.5.6.3 Protocol configuration options
@@ -152,11 +152,11 @@ typedef struct protocol_configuration_options_s {
 typedef uint8_t packet_flow_identifier_t;
 
 int encode_packet_flow_identifier_ie(
-    packet_flow_identifier_t* packetflowidentifier, const bool iei_present,
-    uint8_t* buffer, const uint32_t len);
+    packet_flow_identifier_t *packetflowidentifier, const bool iei_present,
+    uint8_t *buffer, const uint32_t len);
 int decode_packet_flow_identifier_ie(
-    packet_flow_identifier_t* packetflowidentifier, const bool iei_present,
-    uint8_t* buffer, const uint32_t len);
+    packet_flow_identifier_t *packetflowidentifier, const bool iei_present,
+    uint8_t *buffer, const uint32_t len);
 
 //------------------------------------------------------------------------------
 // 10.5.6.12 Traffic Flow Template
@@ -311,10 +311,10 @@ typedef union {
 } packet_filter_list_t;
 
 typedef struct parameter_s {
-#define PARAMETER_IDENTIFIER_AUTHORIZATION_TOKEN 0x01  // Authorization Token
-#define PARAMETER_IDENTIFIER_FLOW_IDENTIFIER 0x02      // Flow Identifier
+#define PARAMETER_IDENTIFIER_AUTHORIZATION_TOKEN 0x01 // Authorization Token
+#define PARAMETER_IDENTIFIER_FLOW_IDENTIFIER 0x02     // Flow Identifier
 #define PARAMETER_IDENTIFIER_PACKET_FILTER_IDENTIFIER                          \
-  0x03  // Packet Filter Identifier
+  0x03 // Packet Filter Identifier
   uint8_t parameteridentifier;
   uint8_t length;
   std::string contents;
@@ -322,7 +322,7 @@ typedef struct parameter_s {
 
 typedef struct parameters_list_s {
   uint8_t num_parameters;
-#define TRAFFIC_FLOW_TEMPLATE_NB_PARAMETERS_MAX 16  // TODO or may use []
+#define TRAFFIC_FLOW_TEMPLATE_NB_PARAMETERS_MAX 16 // TODO or may use []
   parameter_t parameter[TRAFFIC_FLOW_TEMPLATE_NB_PARAMETERS_MAX];
 } parameters_list_t;
 
@@ -344,10 +344,10 @@ typedef struct traffic_flow_template_s {
   uint8_t numberofpacketfilters : 4;
   packet_filter_list_t packetfilterlist;
   parameters_list_t
-      parameterslist;  // The parameters list contains a variable number of
-                       // parameters that may be transferred. If the parameters
-                       // list is included, the E bit is set to 1; otherwise,
-                       // the E bit is set to 0.
+      parameterslist; // The parameters list contains a variable number of
+                      // parameters that may be transferred. If the parameters
+                      // list is included, the E bit is set to 1; otherwise,
+                      // the E bit is set to 0.
 } traffic_flow_template_t;
 
 #define TFT_ENCODE_IEI_TRUE true

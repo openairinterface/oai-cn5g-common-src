@@ -20,8 +20,8 @@
 #define SmPolicyNotification_H_
 
 #include "SmPolicyDecision.h"
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::pcf {
 
@@ -29,7 +29,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class SmPolicyNotification {
- public:
+public:
   SmPolicyNotification();
   virtual ~SmPolicyNotification() = default;
 
@@ -43,16 +43,16 @@ class SmPolicyNotification {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const SmPolicyNotification& rhs) const;
-  bool operator!=(const SmPolicyNotification& rhs) const;
+  bool operator==(const SmPolicyNotification &rhs) const;
+  bool operator!=(const SmPolicyNotification &rhs) const;
 
   /////////////////////////////////////////////
   /// SmPolicyNotification members
@@ -61,27 +61,27 @@ class SmPolicyNotification {
   ///
   /// </summary>
   std::string getResourceUri() const;
-  void setResourceUri(std::string const& value);
+  void setResourceUri(std::string const &value);
   bool resourceUriIsSet() const;
   void unsetResourceUri();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::SmPolicyDecision getSmPolicyDecision() const;
-  void setSmPolicyDecision(oai::model::pcf::SmPolicyDecision const& value);
+  void setSmPolicyDecision(oai::model::pcf::SmPolicyDecision const &value);
   bool smPolicyDecisionIsSet() const;
   void unsetSmPolicyDecision();
 
-  friend void to_json(nlohmann::json& j, const SmPolicyNotification& o);
-  friend void from_json(const nlohmann::json& j, SmPolicyNotification& o);
+  friend void to_json(nlohmann::json &j, const SmPolicyNotification &o);
+  friend void from_json(const nlohmann::json &j, SmPolicyNotification &o);
 
- protected:
+protected:
   std::string m_ResourceUri;
   bool m_ResourceUriIsSet;
   oai::model::pcf::SmPolicyDecision m_SmPolicyDecision;
   bool m_SmPolicyDecisionIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* SmPolicyNotification_H_ */

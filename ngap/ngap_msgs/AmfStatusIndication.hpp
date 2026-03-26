@@ -17,21 +17,21 @@ extern "C" {
 namespace oai::ngap {
 
 class AmfStatusIndication : public NgapMessage {
- public:
+public:
   AmfStatusIndication();
   virtual ~AmfStatusIndication();
 
   void initialize();
 
-  void setUnavailableGuamiList(const UnavailableGuamiList& list);
-  void getUnavailableGuamiList(UnavailableGuamiList& list) const;
+  void setUnavailableGuamiList(const UnavailableGuamiList &list);
+  void getUnavailableGuamiList(UnavailableGuamiList &list) const;
 
-  bool decode(Ngap_NGAP_PDU_t* ngapMsgPdu) override;
+  bool decode(Ngap_NGAP_PDU_t *ngapMsgPdu) override;
 
- private:
-  Ngap_AMFStatusIndication_t* m_AmfStatusIndicationIEs;
+private:
+  Ngap_AMFStatusIndication_t *m_AmfStatusIndicationIEs;
 
-  UnavailableGuamiList m_UnavailableGuamiList;  // Mandatory
+  UnavailableGuamiList m_UnavailableGuamiList; // Mandatory
 };
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

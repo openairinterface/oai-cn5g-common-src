@@ -16,12 +16,12 @@
 namespace oai::model::nrf {
 
 UdrInfo::UdrInfo() {
-  m_GroupId                             = "";
-  m_GroupIdIsSet                        = false;
-  m_SupiRangesIsSet                     = false;
-  m_GpsiRangesIsSet                     = false;
+  m_GroupId = "";
+  m_GroupIdIsSet = false;
+  m_SupiRangesIsSet = false;
+  m_GpsiRangesIsSet = false;
   m_ExternalGroupIdentifiersRangesIsSet = false;
-  m_SupportedDataSetsIsSet              = false;
+  m_SupportedDataSetsIsSet = false;
 }
 
 UdrInfo::~UdrInfo() {}
@@ -30,9 +30,10 @@ void UdrInfo::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const UdrInfo& o) {
+void to_json(nlohmann::json &j, const UdrInfo &o) {
   j = nlohmann::json();
-  if (o.groupIdIsSet()) j["groupId"] = o.m_GroupId;
+  if (o.groupIdIsSet())
+    j["groupId"] = o.m_GroupId;
   if (o.supiRangesIsSet() || !o.m_SupiRanges.empty())
     j["supiRanges"] = o.m_SupiRanges;
   if (o.gpsiRangesIsSet() || !o.m_GpsiRanges.empty())
@@ -44,7 +45,7 @@ void to_json(nlohmann::json& j, const UdrInfo& o) {
     j["supportedDataSets"] = o.m_SupportedDataSets;
 }
 
-void from_json(const nlohmann::json& j, UdrInfo& o) {
+void from_json(const nlohmann::json &j, UdrInfo &o) {
   if (j.find("groupId") != j.end()) {
     j.at("groupId").get_to(o.m_GroupId);
     o.m_GroupIdIsSet = true;
@@ -68,51 +69,33 @@ void from_json(const nlohmann::json& j, UdrInfo& o) {
   }
 }
 
-std::string UdrInfo::getGroupId() const {
-  return m_GroupId;
-}
-void UdrInfo::setGroupId(std::string const& value) {
-  m_GroupId      = value;
+std::string UdrInfo::getGroupId() const { return m_GroupId; }
+void UdrInfo::setGroupId(std::string const &value) {
+  m_GroupId = value;
   m_GroupIdIsSet = true;
 }
-bool UdrInfo::groupIdIsSet() const {
-  return m_GroupIdIsSet;
-}
-void UdrInfo::unsetGroupId() {
-  m_GroupIdIsSet = false;
-}
-std::vector<SupiRange>& UdrInfo::getSupiRanges() {
-  return m_SupiRanges;
-}
-void UdrInfo::setSupiRanges(std::vector<SupiRange> const& value) {
-  m_SupiRanges      = value;
+bool UdrInfo::groupIdIsSet() const { return m_GroupIdIsSet; }
+void UdrInfo::unsetGroupId() { m_GroupIdIsSet = false; }
+std::vector<SupiRange> &UdrInfo::getSupiRanges() { return m_SupiRanges; }
+void UdrInfo::setSupiRanges(std::vector<SupiRange> const &value) {
+  m_SupiRanges = value;
   m_SupiRangesIsSet = true;
 }
-bool UdrInfo::supiRangesIsSet() const {
-  return m_SupiRangesIsSet;
-}
-void UdrInfo::unsetSupiRanges() {
-  m_SupiRangesIsSet = false;
-}
-std::vector<IdentityRange>& UdrInfo::getGpsiRanges() {
-  return m_GpsiRanges;
-}
-void UdrInfo::setGpsiRanges(std::vector<IdentityRange> const& value) {
-  m_GpsiRanges      = value;
+bool UdrInfo::supiRangesIsSet() const { return m_SupiRangesIsSet; }
+void UdrInfo::unsetSupiRanges() { m_SupiRangesIsSet = false; }
+std::vector<IdentityRange> &UdrInfo::getGpsiRanges() { return m_GpsiRanges; }
+void UdrInfo::setGpsiRanges(std::vector<IdentityRange> const &value) {
+  m_GpsiRanges = value;
   m_GpsiRangesIsSet = true;
 }
-bool UdrInfo::gpsiRangesIsSet() const {
-  return m_GpsiRangesIsSet;
-}
-void UdrInfo::unsetGpsiRanges() {
-  m_GpsiRangesIsSet = false;
-}
-std::vector<IdentityRange>& UdrInfo::getExternalGroupIdentifiersRanges() {
+bool UdrInfo::gpsiRangesIsSet() const { return m_GpsiRangesIsSet; }
+void UdrInfo::unsetGpsiRanges() { m_GpsiRangesIsSet = false; }
+std::vector<IdentityRange> &UdrInfo::getExternalGroupIdentifiersRanges() {
   return m_ExternalGroupIdentifiersRanges;
 }
 void UdrInfo::setExternalGroupIdentifiersRanges(
-    std::vector<IdentityRange> const& value) {
-  m_ExternalGroupIdentifiersRanges      = value;
+    std::vector<IdentityRange> const &value) {
+  m_ExternalGroupIdentifiersRanges = value;
   m_ExternalGroupIdentifiersRangesIsSet = true;
 }
 bool UdrInfo::externalGroupIdentifiersRangesIsSet() const {
@@ -121,18 +104,16 @@ bool UdrInfo::externalGroupIdentifiersRangesIsSet() const {
 void UdrInfo::unsetExternalGroupIdentifiersRanges() {
   m_ExternalGroupIdentifiersRangesIsSet = false;
 }
-std::vector<DataSetId>& UdrInfo::getSupportedDataSets() {
+std::vector<DataSetId> &UdrInfo::getSupportedDataSets() {
   return m_SupportedDataSets;
 }
-void UdrInfo::setSupportedDataSets(std::vector<DataSetId> const& value) {
-  m_SupportedDataSets      = value;
+void UdrInfo::setSupportedDataSets(std::vector<DataSetId> const &value) {
+  m_SupportedDataSets = value;
   m_SupportedDataSetsIsSet = true;
 }
 bool UdrInfo::supportedDataSetsIsSet() const {
   return m_SupportedDataSetsIsSet;
 }
-void UdrInfo::unsetSupportedDataSets() {
-  m_SupportedDataSetsIsSet = false;
-}
+void UdrInfo::unsetSupportedDataSets() { m_SupportedDataSetsIsSet = false; }
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

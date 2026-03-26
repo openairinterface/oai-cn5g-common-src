@@ -27,12 +27,12 @@ void AmfUpdatedEventSubscription::validate() const {
   }
 }
 
-bool AmfUpdatedEventSubscription::validate(std::stringstream& msg) const {
+bool AmfUpdatedEventSubscription::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool AmfUpdatedEventSubscription::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AmfUpdatedEventSubscription" : pathPrefix;
@@ -41,7 +41,7 @@ bool AmfUpdatedEventSubscription::validate(
 }
 
 bool AmfUpdatedEventSubscription::operator==(
-    const AmfUpdatedEventSubscription& rhs) const {
+    const AmfUpdatedEventSubscription &rhs) const {
   return
 
       (getSubscription() == rhs.getSubscription())
@@ -50,16 +50,16 @@ bool AmfUpdatedEventSubscription::operator==(
 }
 
 bool AmfUpdatedEventSubscription::operator!=(
-    const AmfUpdatedEventSubscription& rhs) const {
+    const AmfUpdatedEventSubscription &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AmfUpdatedEventSubscription& o) {
-  j                 = nlohmann::json();
+void to_json(nlohmann::json &j, const AmfUpdatedEventSubscription &o) {
+  j = nlohmann::json();
   j["subscription"] = o.m_Subscription;
 }
 
-void from_json(const nlohmann::json& j, AmfUpdatedEventSubscription& o) {
+void from_json(const nlohmann::json &j, AmfUpdatedEventSubscription &o) {
   j.at("subscription").get_to(o.m_Subscription);
 }
 
@@ -67,8 +67,8 @@ AmfEventSubscription AmfUpdatedEventSubscription::getSubscription() const {
   return m_Subscription;
 }
 void AmfUpdatedEventSubscription::setSubscription(
-    AmfEventSubscription const& value) {
+    AmfEventSubscription const &value) {
   m_Subscription = value;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

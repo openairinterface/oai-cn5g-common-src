@@ -20,7 +20,7 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_MaximumIntegrityProtectedDataRate {
-  Ngap_MaximumIntegrityProtectedDataRate_bitrate64kbs    = 0,
+  Ngap_MaximumIntegrityProtectedDataRate_bitrate64kbs = 0,
   Ngap_MaximumIntegrityProtectedDataRate_maximum_UE_rate = 1
   /*
    * Enumeration is extensible

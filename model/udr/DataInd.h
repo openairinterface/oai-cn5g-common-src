@@ -30,7 +30,7 @@ namespace oai::udr::model {
 /// Possible values are - PFD - IPTV - BDT - SVC_PARAM
 /// </summary>
 class DataInd {
- public:
+public:
   DataInd();
   virtual ~DataInd();
 
@@ -39,12 +39,12 @@ class DataInd {
   /////////////////////////////////////////////
   /// DataInd members
 
-  friend void to_json(nlohmann::json& j, const DataInd& o);
-  friend void from_json(const nlohmann::json& j, DataInd& o);
+  friend void to_json(nlohmann::json &j, const DataInd &o);
+  friend void from_json(const nlohmann::json &j, DataInd &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* DataInd_H_ */

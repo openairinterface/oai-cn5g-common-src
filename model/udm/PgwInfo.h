@@ -33,7 +33,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class PgwInfo {
- public:
+public:
   PgwInfo();
   virtual ~PgwInfo();
 
@@ -46,24 +46,24 @@ class PgwInfo {
   ///
   /// </summary>
   std::string getDnn() const;
-  void setDnn(std::string const& value);
+  void setDnn(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getPgwFqdn() const;
-  void setPgwFqdn(std::string const& value);
+  void setPgwFqdn(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::PlmnId getPlmnId() const;
-  void setPlmnId(oai::model::common::PlmnId const& value);
+  void setPlmnId(oai::model::common::PlmnId const &value);
   bool plmnIdIsSet() const;
   void unsetPlmnId();
 
-  friend void to_json(nlohmann::json& j, const PgwInfo& o);
-  friend void from_json(const nlohmann::json& j, PgwInfo& o);
+  friend void to_json(nlohmann::json &j, const PgwInfo &o);
+  friend void from_json(const nlohmann::json &j, PgwInfo &o);
 
- protected:
+protected:
   std::string m_Dnn;
 
   std::string m_PgwFqdn;
@@ -72,6 +72,6 @@ class PgwInfo {
   bool m_PlmnIdIsSet;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* PgwInfo_H_ */

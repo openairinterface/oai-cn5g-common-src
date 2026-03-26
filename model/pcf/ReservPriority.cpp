@@ -27,12 +27,12 @@ void ReservPriority::validate() const {
   }
 }
 
-bool ReservPriority::validate(std::stringstream& msg) const {
+bool ReservPriority::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ReservPriority::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ReservPriority::validate(std::stringstream &msg,
+                              const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ReservPriority" : pathPrefix;
@@ -40,18 +40,18 @@ bool ReservPriority::validate(
   return success;
 }
 
-bool ReservPriority::operator==(const ReservPriority& rhs) const {
-  return true;  // TODO
+bool ReservPriority::operator==(const ReservPriority &rhs) const {
+  return true; // TODO
 }
 
-bool ReservPriority::operator!=(const ReservPriority& rhs) const {
+bool ReservPriority::operator!=(const ReservPriority &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ReservPriority& o) {
+void to_json(nlohmann::json &j, const ReservPriority &o) {
   j = nlohmann::json::object();
 }
 
-void from_json(const nlohmann::json& j, ReservPriority& o) {}
+void from_json(const nlohmann::json &j, ReservPriority &o) {}
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

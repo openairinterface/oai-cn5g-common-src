@@ -12,22 +12,22 @@ extern "C" {
 namespace oai::ngap {
 
 class PeriodicRegistrationUpdateTimer {
- public:
+public:
   PeriodicRegistrationUpdateTimer();
   virtual ~PeriodicRegistrationUpdateTimer();
 
   void set(uint8_t updateTimer);
-  void get(uint8_t& updateTimer) const;
+  void get(uint8_t &updateTimer) const;
 
-  bool encode(Ngap_PeriodicRegistrationUpdateTimer_t&
-                  periodicRegistrationUpdateTimer) const;
+  bool encode(Ngap_PeriodicRegistrationUpdateTimer_t
+                  &periodicRegistrationUpdateTimer) const;
   bool decode(
       Ngap_PeriodicRegistrationUpdateTimer_t periodicRegistrationUpdateTimer);
 
- private:
+private:
   uint8_t m_UpdateTimer;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

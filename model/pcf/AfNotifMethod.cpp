@@ -27,12 +27,12 @@ void AfNotifMethod::validate() const {
   }
 }
 
-bool AfNotifMethod::validate(std::stringstream& msg) const {
+bool AfNotifMethod::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AfNotifMethod::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool AfNotifMethod::validate(std::stringstream &msg,
+                             const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AfNotifMethod" : pathPrefix;
@@ -40,18 +40,18 @@ bool AfNotifMethod::validate(
   return success;
 }
 
-bool AfNotifMethod::operator==(const AfNotifMethod& rhs) const {
-  return true;  // TODO
+bool AfNotifMethod::operator==(const AfNotifMethod &rhs) const {
+  return true; // TODO
 }
 
-bool AfNotifMethod::operator!=(const AfNotifMethod& rhs) const {
+bool AfNotifMethod::operator!=(const AfNotifMethod &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AfNotifMethod& o) {
+void to_json(nlohmann::json &j, const AfNotifMethod &o) {
   j = nlohmann::json::object();
 }
 
-void from_json(const nlohmann::json& j, AfNotifMethod& o) {}
+void from_json(const nlohmann::json &j, AfNotifMethod &o) {}
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

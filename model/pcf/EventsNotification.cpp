@@ -19,46 +19,46 @@
 namespace oai::model::pcf {
 
 EventsNotification::EventsNotification() {
-  m_AdReportsIsSet                 = false;
-  m_AccessTypeIsSet                = false;
-  m_AddAccessInfoIsSet             = false;
-  m_RelAccessInfoIsSet             = false;
-  m_AnChargAddrIsSet               = false;
-  m_AnChargIdsIsSet                = false;
-  m_AnGwAddrIsSet                  = false;
-  m_L4sReportsIsSet                = false;
-  m_EvSubsUri                      = "";
+  m_AdReportsIsSet = false;
+  m_AccessTypeIsSet = false;
+  m_AddAccessInfoIsSet = false;
+  m_RelAccessInfoIsSet = false;
+  m_AnChargAddrIsSet = false;
+  m_AnChargIdsIsSet = false;
+  m_AnGwAddrIsSet = false;
+  m_L4sReportsIsSet = false;
+  m_EvSubsUri = "";
   m_FailedResourcAllocReportsIsSet = false;
-  m_SuccResourcAllocReportsIsSet   = false;
-  m_NoNetLocSuppIsSet              = false;
-  m_OutOfCredReportsIsSet          = false;
-  m_PlmnIdIsSet                    = false;
-  m_QncReportsIsSet                = false;
-  m_QosMonReportsIsSet             = false;
-  m_QosMonDatRateRepsIsSet         = false;
-  m_PdvMonReportsIsSet             = false;
-  m_CongestReportsIsSet            = false;
-  m_RttMonReportsIsSet             = false;
-  m_RanNasRelCausesIsSet           = false;
-  m_RatTypeIsSet                   = false;
-  m_SatBackhaulCategoryIsSet       = false;
-  m_UeLocIsSet                     = false;
-  m_UeLocTime                      = "";
-  m_UeLocTimeIsSet                 = false;
-  m_UeTimeZone                     = "";
-  m_UeTimeZoneIsSet                = false;
-  m_UsgRepIsSet                    = false;
-  m_UrspEnfRepIsSet                = false;
-  m_SscModeIsSet                   = false;
-  m_UeReqDnn                       = "";
-  m_UeReqDnnIsSet                  = false;
-  m_RedundantPduSessionInfoIsSet   = false;
-  m_TsnBridgeManContIsSet          = false;
-  m_TsnPortManContDsttIsSet        = false;
-  m_TsnPortManContNwttsIsSet       = false;
-  m_Ipv4AddrListIsSet              = false;
-  m_Ipv6PrefixListIsSet            = false;
-  m_BatOffsetInfoIsSet             = false;
+  m_SuccResourcAllocReportsIsSet = false;
+  m_NoNetLocSuppIsSet = false;
+  m_OutOfCredReportsIsSet = false;
+  m_PlmnIdIsSet = false;
+  m_QncReportsIsSet = false;
+  m_QosMonReportsIsSet = false;
+  m_QosMonDatRateRepsIsSet = false;
+  m_PdvMonReportsIsSet = false;
+  m_CongestReportsIsSet = false;
+  m_RttMonReportsIsSet = false;
+  m_RanNasRelCausesIsSet = false;
+  m_RatTypeIsSet = false;
+  m_SatBackhaulCategoryIsSet = false;
+  m_UeLocIsSet = false;
+  m_UeLocTime = "";
+  m_UeLocTimeIsSet = false;
+  m_UeTimeZone = "";
+  m_UeTimeZoneIsSet = false;
+  m_UsgRepIsSet = false;
+  m_UrspEnfRepIsSet = false;
+  m_SscModeIsSet = false;
+  m_UeReqDnn = "";
+  m_UeReqDnnIsSet = false;
+  m_RedundantPduSessionInfoIsSet = false;
+  m_TsnBridgeManContIsSet = false;
+  m_TsnPortManContDsttIsSet = false;
+  m_TsnPortManContNwttsIsSet = false;
+  m_Ipv4AddrListIsSet = false;
+  m_Ipv6PrefixListIsSet = false;
+  m_BatOffsetInfoIsSet = false;
 }
 
 void EventsNotification::validate() const {
@@ -68,28 +68,28 @@ void EventsNotification::validate() const {
   }
 }
 
-bool EventsNotification::validate(std::stringstream& msg) const {
+bool EventsNotification::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool EventsNotification::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool EventsNotification::validate(std::stringstream &msg,
+                                  const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "EventsNotification" : pathPrefix;
 
   if (adReportsIsSet()) {
-    const std::vector<oai::model::pcf::AppDetectionReport>& value = m_AdReports;
+    const std::vector<oai::model::pcf::AppDetectionReport> &value = m_AdReports;
     const std::string currentValuePath = _pathPrefix + ".adReports";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::AppDetectionReport& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::AppDetectionReport &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -102,7 +102,7 @@ bool EventsNotification::validate(
   }
 
   if (anChargIdsIsSet()) {
-    const std::vector<oai::model::pcf::AccessNetChargingIdentifier>& value =
+    const std::vector<oai::model::pcf::AccessNetChargingIdentifier> &value =
         m_AnChargIds;
     const std::string currentValuePath = _pathPrefix + ".anChargIds";
 
@@ -110,10 +110,10 @@ bool EventsNotification::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::AccessNetChargingIdentifier& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::AccessNetChargingIdentifier &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -126,17 +126,17 @@ bool EventsNotification::validate(
   }
 
   if (l4sReportsIsSet()) {
-    const std::vector<oai::model::pcf::L4sSupport>& value = m_L4sReports;
+    const std::vector<oai::model::pcf::L4sSupport> &value = m_L4sReports;
     const std::string currentValuePath = _pathPrefix + ".l4sReports";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::L4sSupport& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::L4sSupport &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -149,17 +149,17 @@ bool EventsNotification::validate(
   }
 
   /* EvNotifs */ {
-    const std::vector<oai::model::pcf::AfEventNotification>& value = m_EvNotifs;
+    const std::vector<oai::model::pcf::AfEventNotification> &value = m_EvNotifs;
     const std::string currentValuePath = _pathPrefix + ".evNotifs";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::AfEventNotification& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::AfEventNotification &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -172,7 +172,7 @@ bool EventsNotification::validate(
   }
 
   if (failedResourcAllocReportsIsSet()) {
-    const std::vector<oai::model::pcf::ResourcesAllocationInfo>& value =
+    const std::vector<oai::model::pcf::ResourcesAllocationInfo> &value =
         m_FailedResourcAllocReports;
     const std::string currentValuePath =
         _pathPrefix + ".failedResourcAllocReports";
@@ -181,15 +181,15 @@ bool EventsNotification::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::ResourcesAllocationInfo& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::ResourcesAllocationInfo &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
-        success = value.validate(
-                      msg, currentValuePath + ".failedResourcAllocReports") &&
+        success = value.validate(msg, currentValuePath +
+                                          ".failedResourcAllocReports") &&
                   success;
 
         i++;
@@ -198,7 +198,7 @@ bool EventsNotification::validate(
   }
 
   if (succResourcAllocReportsIsSet()) {
-    const std::vector<oai::model::pcf::ResourcesAllocationInfo>& value =
+    const std::vector<oai::model::pcf::ResourcesAllocationInfo> &value =
         m_SuccResourcAllocReports;
     const std::string currentValuePath =
         _pathPrefix + ".succResourcAllocReports";
@@ -207,15 +207,15 @@ bool EventsNotification::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::ResourcesAllocationInfo& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::ResourcesAllocationInfo &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
-        success = value.validate(
-                      msg, currentValuePath + ".succResourcAllocReports") &&
+        success = value.validate(msg, currentValuePath +
+                                          ".succResourcAllocReports") &&
                   success;
 
         i++;
@@ -224,7 +224,7 @@ bool EventsNotification::validate(
   }
 
   if (outOfCredReportsIsSet()) {
-    const std::vector<oai::model::pcf::OutOfCreditInformation>& value =
+    const std::vector<oai::model::pcf::OutOfCreditInformation> &value =
         m_OutOfCredReports;
     const std::string currentValuePath = _pathPrefix + ".outOfCredReports";
 
@@ -232,10 +232,10 @@ bool EventsNotification::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::OutOfCreditInformation& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::OutOfCreditInformation &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -248,7 +248,7 @@ bool EventsNotification::validate(
   }
 
   if (qncReportsIsSet()) {
-    const std::vector<oai::model::pcf::QosNotificationControlInfo>& value =
+    const std::vector<oai::model::pcf::QosNotificationControlInfo> &value =
         m_QncReports;
     const std::string currentValuePath = _pathPrefix + ".qncReports";
 
@@ -256,10 +256,10 @@ bool EventsNotification::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::QosNotificationControlInfo& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::QosNotificationControlInfo &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -272,7 +272,7 @@ bool EventsNotification::validate(
   }
 
   if (qosMonReportsIsSet()) {
-    const std::vector<oai::model::pcf::QosMonitoringReport>& value =
+    const std::vector<oai::model::pcf::QosMonitoringReport> &value =
         m_QosMonReports;
     const std::string currentValuePath = _pathPrefix + ".qosMonReports";
 
@@ -280,10 +280,10 @@ bool EventsNotification::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::QosMonitoringReport& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::QosMonitoringReport &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -296,7 +296,7 @@ bool EventsNotification::validate(
   }
 
   if (qosMonDatRateRepsIsSet()) {
-    const std::vector<oai::model::pcf::QosMonitoringReport>& value =
+    const std::vector<oai::model::pcf::QosMonitoringReport> &value =
         m_QosMonDatRateReps;
     const std::string currentValuePath = _pathPrefix + ".qosMonDatRateReps";
 
@@ -304,10 +304,10 @@ bool EventsNotification::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::QosMonitoringReport& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::QosMonitoringReport &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -321,7 +321,7 @@ bool EventsNotification::validate(
   }
 
   if (pdvMonReportsIsSet()) {
-    const std::vector<oai::model::pcf::PdvMonitoringReport>& value =
+    const std::vector<oai::model::pcf::PdvMonitoringReport> &value =
         m_PdvMonReports;
     const std::string currentValuePath = _pathPrefix + ".pdvMonReports";
 
@@ -329,10 +329,10 @@ bool EventsNotification::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::PdvMonitoringReport& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::PdvMonitoringReport &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -345,7 +345,7 @@ bool EventsNotification::validate(
   }
 
   if (congestReportsIsSet()) {
-    const std::vector<oai::model::pcf::QosMonitoringReport>& value =
+    const std::vector<oai::model::pcf::QosMonitoringReport> &value =
         m_CongestReports;
     const std::string currentValuePath = _pathPrefix + ".congestReports";
 
@@ -353,10 +353,10 @@ bool EventsNotification::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::QosMonitoringReport& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::QosMonitoringReport &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -369,7 +369,7 @@ bool EventsNotification::validate(
   }
 
   if (rttMonReportsIsSet()) {
-    const std::vector<oai::model::pcf::QosMonitoringReport>& value =
+    const std::vector<oai::model::pcf::QosMonitoringReport> &value =
         m_RttMonReports;
     const std::string currentValuePath = _pathPrefix + ".rttMonReports";
 
@@ -377,10 +377,10 @@ bool EventsNotification::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::QosMonitoringReport& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::QosMonitoringReport &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -393,7 +393,7 @@ bool EventsNotification::validate(
   }
 
   if (ranNasRelCausesIsSet()) {
-    const std::vector<oai::model::pcf::RanNasRelCause>& value =
+    const std::vector<oai::model::pcf::RanNasRelCause> &value =
         m_RanNasRelCauses;
     const std::string currentValuePath = _pathPrefix + ".ranNasRelCauses";
 
@@ -401,10 +401,10 @@ bool EventsNotification::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::RanNasRelCause& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::RanNasRelCause &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -417,7 +417,7 @@ bool EventsNotification::validate(
   }
 
   if (tsnPortManContNwttsIsSet()) {
-    const std::vector<oai::model::pcf::PortManagementContainer>& value =
+    const std::vector<oai::model::pcf::PortManagementContainer> &value =
         m_TsnPortManContNwtts;
     const std::string currentValuePath = _pathPrefix + ".tsnPortManContNwtts";
 
@@ -425,10 +425,10 @@ bool EventsNotification::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::PortManagementContainer& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::PortManagementContainer &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -442,17 +442,17 @@ bool EventsNotification::validate(
   }
 
   if (ipv4AddrListIsSet()) {
-    const std::vector<std::string>& value = m_Ipv4AddrList;
-    const std::string currentValuePath    = _pathPrefix + ".ipv4AddrList";
+    const std::vector<std::string> &value = m_Ipv4AddrList;
+    const std::string currentValuePath = _pathPrefix + ".ipv4AddrList";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const std::string& value : value) {
+      int i = 0;
+      for (const std::string &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -462,17 +462,17 @@ bool EventsNotification::validate(
   }
 
   if (ipv6PrefixListIsSet()) {
-    const std::vector<oai::model::common::Ipv6Prefix>& value = m_Ipv6PrefixList;
+    const std::vector<oai::model::common::Ipv6Prefix> &value = m_Ipv6PrefixList;
     const std::string currentValuePath = _pathPrefix + ".ipv6PrefixList";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::Ipv6Prefix& value : value) {
+      int i = 0;
+      for (const oai::model::common::Ipv6Prefix &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -487,7 +487,7 @@ bool EventsNotification::validate(
   return success;
 }
 
-bool EventsNotification::operator==(const EventsNotification& rhs) const {
+bool EventsNotification::operator==(const EventsNotification &rhs) const {
   return
 
       ((!adReportsIsSet() && !rhs.adReportsIsSet()) ||
@@ -645,34 +645,41 @@ bool EventsNotification::operator==(const EventsNotification& rhs) const {
           ;
 }
 
-bool EventsNotification::operator!=(const EventsNotification& rhs) const {
+bool EventsNotification::operator!=(const EventsNotification &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const EventsNotification& o) {
+void to_json(nlohmann::json &j, const EventsNotification &o) {
   j = nlohmann::json::object();
   if (o.adReportsIsSet() || !o.m_AdReports.empty())
     j["adReports"] = o.m_AdReports;
-  if (o.accessTypeIsSet()) j["accessType"] = o.m_AccessType;
-  if (o.addAccessInfoIsSet()) j["addAccessInfo"] = o.m_AddAccessInfo;
-  if (o.relAccessInfoIsSet()) j["relAccessInfo"] = o.m_RelAccessInfo;
-  if (o.anChargAddrIsSet()) j["anChargAddr"] = o.m_AnChargAddr;
+  if (o.accessTypeIsSet())
+    j["accessType"] = o.m_AccessType;
+  if (o.addAccessInfoIsSet())
+    j["addAccessInfo"] = o.m_AddAccessInfo;
+  if (o.relAccessInfoIsSet())
+    j["relAccessInfo"] = o.m_RelAccessInfo;
+  if (o.anChargAddrIsSet())
+    j["anChargAddr"] = o.m_AnChargAddr;
   if (o.anChargIdsIsSet() || !o.m_AnChargIds.empty())
     j["anChargIds"] = o.m_AnChargIds;
-  if (o.anGwAddrIsSet()) j["anGwAddr"] = o.m_AnGwAddr;
+  if (o.anGwAddrIsSet())
+    j["anGwAddr"] = o.m_AnGwAddr;
   if (o.l4sReportsIsSet() || !o.m_L4sReports.empty())
     j["l4sReports"] = o.m_L4sReports;
   j["evSubsUri"] = o.m_EvSubsUri;
-  j["evNotifs"]  = o.m_EvNotifs;
+  j["evNotifs"] = o.m_EvNotifs;
   if (o.failedResourcAllocReportsIsSet() ||
       !o.m_FailedResourcAllocReports.empty())
     j["failedResourcAllocReports"] = o.m_FailedResourcAllocReports;
   if (o.succResourcAllocReportsIsSet() || !o.m_SuccResourcAllocReports.empty())
     j["succResourcAllocReports"] = o.m_SuccResourcAllocReports;
-  if (o.noNetLocSuppIsSet()) j["noNetLocSupp"] = o.m_NoNetLocSupp;
+  if (o.noNetLocSuppIsSet())
+    j["noNetLocSupp"] = o.m_NoNetLocSupp;
   if (o.outOfCredReportsIsSet() || !o.m_OutOfCredReports.empty())
     j["outOfCredReports"] = o.m_OutOfCredReports;
-  if (o.plmnIdIsSet()) j["plmnId"] = o.m_PlmnId;
+  if (o.plmnIdIsSet())
+    j["plmnId"] = o.m_PlmnId;
   if (o.qncReportsIsSet() || !o.m_QncReports.empty())
     j["qncReports"] = o.m_QncReports;
   if (o.qosMonReportsIsSet() || !o.m_QosMonReports.empty())
@@ -687,19 +694,28 @@ void to_json(nlohmann::json& j, const EventsNotification& o) {
     j["rttMonReports"] = o.m_RttMonReports;
   if (o.ranNasRelCausesIsSet() || !o.m_RanNasRelCauses.empty())
     j["ranNasRelCauses"] = o.m_RanNasRelCauses;
-  if (o.ratTypeIsSet()) j["ratType"] = o.m_RatType;
+  if (o.ratTypeIsSet())
+    j["ratType"] = o.m_RatType;
   if (o.satBackhaulCategoryIsSet())
     j["satBackhaulCategory"] = o.m_SatBackhaulCategory;
-  if (o.ueLocIsSet()) j["ueLoc"] = o.m_UeLoc;
-  if (o.ueLocTimeIsSet()) j["ueLocTime"] = o.m_UeLocTime;
-  if (o.ueTimeZoneIsSet()) j["ueTimeZone"] = o.m_UeTimeZone;
-  if (o.usgRepIsSet()) j["usgRep"] = o.m_UsgRep;
-  if (o.urspEnfRepIsSet()) j["urspEnfRep"] = o.m_UrspEnfRep;
-  if (o.sscModeIsSet()) j["sscMode"] = o.m_SscMode;
-  if (o.ueReqDnnIsSet()) j["ueReqDnn"] = o.m_UeReqDnn;
+  if (o.ueLocIsSet())
+    j["ueLoc"] = o.m_UeLoc;
+  if (o.ueLocTimeIsSet())
+    j["ueLocTime"] = o.m_UeLocTime;
+  if (o.ueTimeZoneIsSet())
+    j["ueTimeZone"] = o.m_UeTimeZone;
+  if (o.usgRepIsSet())
+    j["usgRep"] = o.m_UsgRep;
+  if (o.urspEnfRepIsSet())
+    j["urspEnfRep"] = o.m_UrspEnfRep;
+  if (o.sscModeIsSet())
+    j["sscMode"] = o.m_SscMode;
+  if (o.ueReqDnnIsSet())
+    j["ueReqDnn"] = o.m_UeReqDnn;
   if (o.redundantPduSessionInfoIsSet())
     j["redundantPduSessionInfo"] = o.m_RedundantPduSessionInfo;
-  if (o.tsnBridgeManContIsSet()) j["tsnBridgeManCont"] = o.m_TsnBridgeManCont;
+  if (o.tsnBridgeManContIsSet())
+    j["tsnBridgeManCont"] = o.m_TsnBridgeManCont;
   if (o.tsnPortManContDsttIsSet())
     j["tsnPortManContDstt"] = o.m_TsnPortManContDstt;
   if (o.tsnPortManContNwttsIsSet() || !o.m_TsnPortManContNwtts.empty())
@@ -708,10 +724,11 @@ void to_json(nlohmann::json& j, const EventsNotification& o) {
     j["ipv4AddrList"] = o.m_Ipv4AddrList;
   if (o.ipv6PrefixListIsSet() || !o.m_Ipv6PrefixList.empty())
     j["ipv6PrefixList"] = o.m_Ipv6PrefixList;
-  if (o.batOffsetInfoIsSet()) j["batOffsetInfo"] = o.m_BatOffsetInfo;
+  if (o.batOffsetInfoIsSet())
+    j["batOffsetInfo"] = o.m_BatOffsetInfo;
 }
 
-void from_json(const nlohmann::json& j, EventsNotification& o) {
+void from_json(const nlohmann::json &j, EventsNotification &o) {
   if (j.find("adReports") != j.end()) {
     j.at("adReports").get_to(o.m_AdReports);
     o.m_AdReportsIsSet = true;
@@ -865,123 +882,93 @@ EventsNotification::getAdReports() const {
   return m_AdReports;
 }
 void EventsNotification::setAdReports(
-    std::vector<oai::model::pcf::AppDetectionReport> const& value) {
-  m_AdReports      = value;
+    std::vector<oai::model::pcf::AppDetectionReport> const &value) {
+  m_AdReports = value;
   m_AdReportsIsSet = true;
 }
-bool EventsNotification::adReportsIsSet() const {
-  return m_AdReportsIsSet;
-}
-void EventsNotification::unsetAdReports() {
-  m_AdReportsIsSet = false;
-}
+bool EventsNotification::adReportsIsSet() const { return m_AdReportsIsSet; }
+void EventsNotification::unsetAdReports() { m_AdReportsIsSet = false; }
 oai::model::common::AccessType EventsNotification::getAccessType() const {
   return m_AccessType;
 }
 void EventsNotification::setAccessType(
-    oai::model::common::AccessType const& value) {
-  m_AccessType      = value;
+    oai::model::common::AccessType const &value) {
+  m_AccessType = value;
   m_AccessTypeIsSet = true;
 }
-bool EventsNotification::accessTypeIsSet() const {
-  return m_AccessTypeIsSet;
-}
-void EventsNotification::unsetAccessType() {
-  m_AccessTypeIsSet = false;
-}
-oai::model::pcf::AdditionalAccessInfo EventsNotification::getAddAccessInfo()
-    const {
+bool EventsNotification::accessTypeIsSet() const { return m_AccessTypeIsSet; }
+void EventsNotification::unsetAccessType() { m_AccessTypeIsSet = false; }
+oai::model::pcf::AdditionalAccessInfo
+EventsNotification::getAddAccessInfo() const {
   return m_AddAccessInfo;
 }
 void EventsNotification::setAddAccessInfo(
-    oai::model::pcf::AdditionalAccessInfo const& value) {
-  m_AddAccessInfo      = value;
+    oai::model::pcf::AdditionalAccessInfo const &value) {
+  m_AddAccessInfo = value;
   m_AddAccessInfoIsSet = true;
 }
 bool EventsNotification::addAccessInfoIsSet() const {
   return m_AddAccessInfoIsSet;
 }
-void EventsNotification::unsetAddAccessInfo() {
-  m_AddAccessInfoIsSet = false;
-}
-oai::model::pcf::AdditionalAccessInfo EventsNotification::getRelAccessInfo()
-    const {
+void EventsNotification::unsetAddAccessInfo() { m_AddAccessInfoIsSet = false; }
+oai::model::pcf::AdditionalAccessInfo
+EventsNotification::getRelAccessInfo() const {
   return m_RelAccessInfo;
 }
 void EventsNotification::setRelAccessInfo(
-    oai::model::pcf::AdditionalAccessInfo const& value) {
-  m_RelAccessInfo      = value;
+    oai::model::pcf::AdditionalAccessInfo const &value) {
+  m_RelAccessInfo = value;
   m_RelAccessInfoIsSet = true;
 }
 bool EventsNotification::relAccessInfoIsSet() const {
   return m_RelAccessInfoIsSet;
 }
-void EventsNotification::unsetRelAccessInfo() {
-  m_RelAccessInfoIsSet = false;
-}
-oai::model::pcf::AccNetChargingAddress EventsNotification::getAnChargAddr()
-    const {
+void EventsNotification::unsetRelAccessInfo() { m_RelAccessInfoIsSet = false; }
+oai::model::pcf::AccNetChargingAddress
+EventsNotification::getAnChargAddr() const {
   return m_AnChargAddr;
 }
 void EventsNotification::setAnChargAddr(
-    oai::model::pcf::AccNetChargingAddress const& value) {
-  m_AnChargAddr      = value;
+    oai::model::pcf::AccNetChargingAddress const &value) {
+  m_AnChargAddr = value;
   m_AnChargAddrIsSet = true;
 }
-bool EventsNotification::anChargAddrIsSet() const {
-  return m_AnChargAddrIsSet;
-}
-void EventsNotification::unsetAnChargAddr() {
-  m_AnChargAddrIsSet = false;
-}
+bool EventsNotification::anChargAddrIsSet() const { return m_AnChargAddrIsSet; }
+void EventsNotification::unsetAnChargAddr() { m_AnChargAddrIsSet = false; }
 std::vector<oai::model::pcf::AccessNetChargingIdentifier>
 EventsNotification::getAnChargIds() const {
   return m_AnChargIds;
 }
 void EventsNotification::setAnChargIds(
-    std::vector<oai::model::pcf::AccessNetChargingIdentifier> const& value) {
-  m_AnChargIds      = value;
+    std::vector<oai::model::pcf::AccessNetChargingIdentifier> const &value) {
+  m_AnChargIds = value;
   m_AnChargIdsIsSet = true;
 }
-bool EventsNotification::anChargIdsIsSet() const {
-  return m_AnChargIdsIsSet;
-}
-void EventsNotification::unsetAnChargIds() {
-  m_AnChargIdsIsSet = false;
-}
+bool EventsNotification::anChargIdsIsSet() const { return m_AnChargIdsIsSet; }
+void EventsNotification::unsetAnChargIds() { m_AnChargIdsIsSet = false; }
 oai::model::pcf::AnGwAddress EventsNotification::getAnGwAddr() const {
   return m_AnGwAddr;
 }
 void EventsNotification::setAnGwAddr(
-    oai::model::pcf::AnGwAddress const& value) {
-  m_AnGwAddr      = value;
+    oai::model::pcf::AnGwAddress const &value) {
+  m_AnGwAddr = value;
   m_AnGwAddrIsSet = true;
 }
-bool EventsNotification::anGwAddrIsSet() const {
-  return m_AnGwAddrIsSet;
-}
-void EventsNotification::unsetAnGwAddr() {
-  m_AnGwAddrIsSet = false;
-}
-std::vector<oai::model::pcf::L4sSupport> EventsNotification::getL4sReports()
-    const {
+bool EventsNotification::anGwAddrIsSet() const { return m_AnGwAddrIsSet; }
+void EventsNotification::unsetAnGwAddr() { m_AnGwAddrIsSet = false; }
+std::vector<oai::model::pcf::L4sSupport>
+EventsNotification::getL4sReports() const {
   return m_L4sReports;
 }
 void EventsNotification::setL4sReports(
-    std::vector<oai::model::pcf::L4sSupport> const& value) {
-  m_L4sReports      = value;
+    std::vector<oai::model::pcf::L4sSupport> const &value) {
+  m_L4sReports = value;
   m_L4sReportsIsSet = true;
 }
-bool EventsNotification::l4sReportsIsSet() const {
-  return m_L4sReportsIsSet;
-}
-void EventsNotification::unsetL4sReports() {
-  m_L4sReportsIsSet = false;
-}
-std::string EventsNotification::getEvSubsUri() const {
-  return m_EvSubsUri;
-}
-void EventsNotification::setEvSubsUri(std::string const& value) {
+bool EventsNotification::l4sReportsIsSet() const { return m_L4sReportsIsSet; }
+void EventsNotification::unsetL4sReports() { m_L4sReportsIsSet = false; }
+std::string EventsNotification::getEvSubsUri() const { return m_EvSubsUri; }
+void EventsNotification::setEvSubsUri(std::string const &value) {
   m_EvSubsUri = value;
 }
 std::vector<oai::model::pcf::AfEventNotification>
@@ -989,7 +976,7 @@ EventsNotification::getEvNotifs() const {
   return m_EvNotifs;
 }
 void EventsNotification::setEvNotifs(
-    std::vector<oai::model::pcf::AfEventNotification> const& value) {
+    std::vector<oai::model::pcf::AfEventNotification> const &value) {
   m_EvNotifs = value;
 }
 std::vector<oai::model::pcf::ResourcesAllocationInfo>
@@ -997,8 +984,8 @@ EventsNotification::getFailedResourcAllocReports() const {
   return m_FailedResourcAllocReports;
 }
 void EventsNotification::setFailedResourcAllocReports(
-    std::vector<oai::model::pcf::ResourcesAllocationInfo> const& value) {
-  m_FailedResourcAllocReports      = value;
+    std::vector<oai::model::pcf::ResourcesAllocationInfo> const &value) {
+  m_FailedResourcAllocReports = value;
   m_FailedResourcAllocReportsIsSet = true;
 }
 bool EventsNotification::failedResourcAllocReportsIsSet() const {
@@ -1012,8 +999,8 @@ EventsNotification::getSuccResourcAllocReports() const {
   return m_SuccResourcAllocReports;
 }
 void EventsNotification::setSuccResourcAllocReports(
-    std::vector<oai::model::pcf::ResourcesAllocationInfo> const& value) {
-  m_SuccResourcAllocReports      = value;
+    std::vector<oai::model::pcf::ResourcesAllocationInfo> const &value) {
+  m_SuccResourcAllocReports = value;
   m_SuccResourcAllocReportsIsSet = true;
 }
 bool EventsNotification::succResourcAllocReportsIsSet() const {
@@ -1022,28 +1009,26 @@ bool EventsNotification::succResourcAllocReportsIsSet() const {
 void EventsNotification::unsetSuccResourcAllocReports() {
   m_SuccResourcAllocReportsIsSet = false;
 }
-oai::model::pcf::NetLocAccessSupport EventsNotification::getNoNetLocSupp()
-    const {
+oai::model::pcf::NetLocAccessSupport
+EventsNotification::getNoNetLocSupp() const {
   return m_NoNetLocSupp;
 }
 void EventsNotification::setNoNetLocSupp(
-    oai::model::pcf::NetLocAccessSupport const& value) {
-  m_NoNetLocSupp      = value;
+    oai::model::pcf::NetLocAccessSupport const &value) {
+  m_NoNetLocSupp = value;
   m_NoNetLocSuppIsSet = true;
 }
 bool EventsNotification::noNetLocSuppIsSet() const {
   return m_NoNetLocSuppIsSet;
 }
-void EventsNotification::unsetNoNetLocSupp() {
-  m_NoNetLocSuppIsSet = false;
-}
+void EventsNotification::unsetNoNetLocSupp() { m_NoNetLocSuppIsSet = false; }
 std::vector<oai::model::pcf::OutOfCreditInformation>
 EventsNotification::getOutOfCredReports() const {
   return m_OutOfCredReports;
 }
 void EventsNotification::setOutOfCredReports(
-    std::vector<oai::model::pcf::OutOfCreditInformation> const& value) {
-  m_OutOfCredReports      = value;
+    std::vector<oai::model::pcf::OutOfCreditInformation> const &value) {
+  m_OutOfCredReports = value;
   m_OutOfCredReportsIsSet = true;
 }
 bool EventsNotification::outOfCredReportsIsSet() const {
@@ -1055,53 +1040,43 @@ void EventsNotification::unsetOutOfCredReports() {
 oai::model::common::PlmnIdNid EventsNotification::getPlmnId() const {
   return m_PlmnId;
 }
-void EventsNotification::setPlmnId(oai::model::common::PlmnIdNid const& value) {
-  m_PlmnId      = value;
+void EventsNotification::setPlmnId(oai::model::common::PlmnIdNid const &value) {
+  m_PlmnId = value;
   m_PlmnIdIsSet = true;
 }
-bool EventsNotification::plmnIdIsSet() const {
-  return m_PlmnIdIsSet;
-}
-void EventsNotification::unsetPlmnId() {
-  m_PlmnIdIsSet = false;
-}
+bool EventsNotification::plmnIdIsSet() const { return m_PlmnIdIsSet; }
+void EventsNotification::unsetPlmnId() { m_PlmnIdIsSet = false; }
 std::vector<oai::model::pcf::QosNotificationControlInfo>
 EventsNotification::getQncReports() const {
   return m_QncReports;
 }
 void EventsNotification::setQncReports(
-    std::vector<oai::model::pcf::QosNotificationControlInfo> const& value) {
-  m_QncReports      = value;
+    std::vector<oai::model::pcf::QosNotificationControlInfo> const &value) {
+  m_QncReports = value;
   m_QncReportsIsSet = true;
 }
-bool EventsNotification::qncReportsIsSet() const {
-  return m_QncReportsIsSet;
-}
-void EventsNotification::unsetQncReports() {
-  m_QncReportsIsSet = false;
-}
+bool EventsNotification::qncReportsIsSet() const { return m_QncReportsIsSet; }
+void EventsNotification::unsetQncReports() { m_QncReportsIsSet = false; }
 std::vector<oai::model::pcf::QosMonitoringReport>
 EventsNotification::getQosMonReports() const {
   return m_QosMonReports;
 }
 void EventsNotification::setQosMonReports(
-    std::vector<oai::model::pcf::QosMonitoringReport> const& value) {
-  m_QosMonReports      = value;
+    std::vector<oai::model::pcf::QosMonitoringReport> const &value) {
+  m_QosMonReports = value;
   m_QosMonReportsIsSet = true;
 }
 bool EventsNotification::qosMonReportsIsSet() const {
   return m_QosMonReportsIsSet;
 }
-void EventsNotification::unsetQosMonReports() {
-  m_QosMonReportsIsSet = false;
-}
+void EventsNotification::unsetQosMonReports() { m_QosMonReportsIsSet = false; }
 std::vector<oai::model::pcf::QosMonitoringReport>
 EventsNotification::getQosMonDatRateReps() const {
   return m_QosMonDatRateReps;
 }
 void EventsNotification::setQosMonDatRateReps(
-    std::vector<oai::model::pcf::QosMonitoringReport> const& value) {
-  m_QosMonDatRateReps      = value;
+    std::vector<oai::model::pcf::QosMonitoringReport> const &value) {
+  m_QosMonDatRateReps = value;
   m_QosMonDatRateRepsIsSet = true;
 }
 bool EventsNotification::qosMonDatRateRepsIsSet() const {
@@ -1115,23 +1090,21 @@ EventsNotification::getPdvMonReports() const {
   return m_PdvMonReports;
 }
 void EventsNotification::setPdvMonReports(
-    std::vector<oai::model::pcf::PdvMonitoringReport> const& value) {
-  m_PdvMonReports      = value;
+    std::vector<oai::model::pcf::PdvMonitoringReport> const &value) {
+  m_PdvMonReports = value;
   m_PdvMonReportsIsSet = true;
 }
 bool EventsNotification::pdvMonReportsIsSet() const {
   return m_PdvMonReportsIsSet;
 }
-void EventsNotification::unsetPdvMonReports() {
-  m_PdvMonReportsIsSet = false;
-}
+void EventsNotification::unsetPdvMonReports() { m_PdvMonReportsIsSet = false; }
 std::vector<oai::model::pcf::QosMonitoringReport>
 EventsNotification::getCongestReports() const {
   return m_CongestReports;
 }
 void EventsNotification::setCongestReports(
-    std::vector<oai::model::pcf::QosMonitoringReport> const& value) {
-  m_CongestReports      = value;
+    std::vector<oai::model::pcf::QosMonitoringReport> const &value) {
+  m_CongestReports = value;
   m_CongestReportsIsSet = true;
 }
 bool EventsNotification::congestReportsIsSet() const {
@@ -1145,23 +1118,21 @@ EventsNotification::getRttMonReports() const {
   return m_RttMonReports;
 }
 void EventsNotification::setRttMonReports(
-    std::vector<oai::model::pcf::QosMonitoringReport> const& value) {
-  m_RttMonReports      = value;
+    std::vector<oai::model::pcf::QosMonitoringReport> const &value) {
+  m_RttMonReports = value;
   m_RttMonReportsIsSet = true;
 }
 bool EventsNotification::rttMonReportsIsSet() const {
   return m_RttMonReportsIsSet;
 }
-void EventsNotification::unsetRttMonReports() {
-  m_RttMonReportsIsSet = false;
-}
+void EventsNotification::unsetRttMonReports() { m_RttMonReportsIsSet = false; }
 std::vector<oai::model::pcf::RanNasRelCause>
 EventsNotification::getRanNasRelCauses() const {
   return m_RanNasRelCauses;
 }
 void EventsNotification::setRanNasRelCauses(
-    std::vector<oai::model::pcf::RanNasRelCause> const& value) {
-  m_RanNasRelCauses      = value;
+    std::vector<oai::model::pcf::RanNasRelCause> const &value) {
+  m_RanNasRelCauses = value;
   m_RanNasRelCausesIsSet = true;
 }
 bool EventsNotification::ranNasRelCausesIsSet() const {
@@ -1173,23 +1144,19 @@ void EventsNotification::unsetRanNasRelCauses() {
 oai::model::common::RatType EventsNotification::getRatType() const {
   return m_RatType;
 }
-void EventsNotification::setRatType(oai::model::common::RatType const& value) {
-  m_RatType      = value;
+void EventsNotification::setRatType(oai::model::common::RatType const &value) {
+  m_RatType = value;
   m_RatTypeIsSet = true;
 }
-bool EventsNotification::ratTypeIsSet() const {
-  return m_RatTypeIsSet;
-}
-void EventsNotification::unsetRatType() {
-  m_RatTypeIsSet = false;
-}
+bool EventsNotification::ratTypeIsSet() const { return m_RatTypeIsSet; }
+void EventsNotification::unsetRatType() { m_RatTypeIsSet = false; }
 oai::model::pcf::SatelliteBackhaulCategory
 EventsNotification::getSatBackhaulCategory() const {
   return m_SatBackhaulCategory;
 }
 void EventsNotification::setSatBackhaulCategory(
-    oai::model::pcf::SatelliteBackhaulCategory const& value) {
-  m_SatBackhaulCategory      = value;
+    oai::model::pcf::SatelliteBackhaulCategory const &value) {
+  m_SatBackhaulCategory = value;
   m_SatBackhaulCategoryIsSet = true;
 }
 bool EventsNotification::satBackhaulCategoryIsSet() const {
@@ -1202,102 +1169,66 @@ oai::model::common::UserLocation EventsNotification::getUeLoc() const {
   return m_UeLoc;
 }
 void EventsNotification::setUeLoc(
-    oai::model::common::UserLocation const& value) {
-  m_UeLoc      = value;
+    oai::model::common::UserLocation const &value) {
+  m_UeLoc = value;
   m_UeLocIsSet = true;
 }
-bool EventsNotification::ueLocIsSet() const {
-  return m_UeLocIsSet;
-}
-void EventsNotification::unsetUeLoc() {
-  m_UeLocIsSet = false;
-}
-std::string EventsNotification::getUeLocTime() const {
-  return m_UeLocTime;
-}
-void EventsNotification::setUeLocTime(std::string const& value) {
-  m_UeLocTime      = value;
+bool EventsNotification::ueLocIsSet() const { return m_UeLocIsSet; }
+void EventsNotification::unsetUeLoc() { m_UeLocIsSet = false; }
+std::string EventsNotification::getUeLocTime() const { return m_UeLocTime; }
+void EventsNotification::setUeLocTime(std::string const &value) {
+  m_UeLocTime = value;
   m_UeLocTimeIsSet = true;
 }
-bool EventsNotification::ueLocTimeIsSet() const {
-  return m_UeLocTimeIsSet;
-}
-void EventsNotification::unsetUeLocTime() {
-  m_UeLocTimeIsSet = false;
-}
-std::string EventsNotification::getUeTimeZone() const {
-  return m_UeTimeZone;
-}
-void EventsNotification::setUeTimeZone(std::string const& value) {
-  m_UeTimeZone      = value;
+bool EventsNotification::ueLocTimeIsSet() const { return m_UeLocTimeIsSet; }
+void EventsNotification::unsetUeLocTime() { m_UeLocTimeIsSet = false; }
+std::string EventsNotification::getUeTimeZone() const { return m_UeTimeZone; }
+void EventsNotification::setUeTimeZone(std::string const &value) {
+  m_UeTimeZone = value;
   m_UeTimeZoneIsSet = true;
 }
-bool EventsNotification::ueTimeZoneIsSet() const {
-  return m_UeTimeZoneIsSet;
-}
-void EventsNotification::unsetUeTimeZone() {
-  m_UeTimeZoneIsSet = false;
-}
+bool EventsNotification::ueTimeZoneIsSet() const { return m_UeTimeZoneIsSet; }
+void EventsNotification::unsetUeTimeZone() { m_UeTimeZoneIsSet = false; }
 oai::model::pcf::AccumulatedUsage EventsNotification::getUsgRep() const {
   return m_UsgRep;
 }
 void EventsNotification::setUsgRep(
-    oai::model::pcf::AccumulatedUsage const& value) {
-  m_UsgRep      = value;
+    oai::model::pcf::AccumulatedUsage const &value) {
+  m_UsgRep = value;
   m_UsgRepIsSet = true;
 }
-bool EventsNotification::usgRepIsSet() const {
-  return m_UsgRepIsSet;
-}
-void EventsNotification::unsetUsgRep() {
-  m_UsgRepIsSet = false;
-}
-std::string EventsNotification::getUrspEnfRep() const {
-  return m_UrspEnfRep;
-}
-void EventsNotification::setUrspEnfRep(std::string const& value) {
-  m_UrspEnfRep      = value;
+bool EventsNotification::usgRepIsSet() const { return m_UsgRepIsSet; }
+void EventsNotification::unsetUsgRep() { m_UsgRepIsSet = false; }
+std::string EventsNotification::getUrspEnfRep() const { return m_UrspEnfRep; }
+void EventsNotification::setUrspEnfRep(std::string const &value) {
+  m_UrspEnfRep = value;
   m_UrspEnfRepIsSet = true;
 }
-bool EventsNotification::urspEnfRepIsSet() const {
-  return m_UrspEnfRepIsSet;
-}
-void EventsNotification::unsetUrspEnfRep() {
-  m_UrspEnfRepIsSet = false;
-}
+bool EventsNotification::urspEnfRepIsSet() const { return m_UrspEnfRepIsSet; }
+void EventsNotification::unsetUrspEnfRep() { m_UrspEnfRepIsSet = false; }
 oai::model::common::SscMode EventsNotification::getSscMode() const {
   return m_SscMode;
 }
-void EventsNotification::setSscMode(oai::model::common::SscMode const& value) {
-  m_SscMode      = value;
+void EventsNotification::setSscMode(oai::model::common::SscMode const &value) {
+  m_SscMode = value;
   m_SscModeIsSet = true;
 }
-bool EventsNotification::sscModeIsSet() const {
-  return m_SscModeIsSet;
-}
-void EventsNotification::unsetSscMode() {
-  m_SscModeIsSet = false;
-}
-std::string EventsNotification::getUeReqDnn() const {
-  return m_UeReqDnn;
-}
-void EventsNotification::setUeReqDnn(std::string const& value) {
-  m_UeReqDnn      = value;
+bool EventsNotification::sscModeIsSet() const { return m_SscModeIsSet; }
+void EventsNotification::unsetSscMode() { m_SscModeIsSet = false; }
+std::string EventsNotification::getUeReqDnn() const { return m_UeReqDnn; }
+void EventsNotification::setUeReqDnn(std::string const &value) {
+  m_UeReqDnn = value;
   m_UeReqDnnIsSet = true;
 }
-bool EventsNotification::ueReqDnnIsSet() const {
-  return m_UeReqDnnIsSet;
-}
-void EventsNotification::unsetUeReqDnn() {
-  m_UeReqDnnIsSet = false;
-}
+bool EventsNotification::ueReqDnnIsSet() const { return m_UeReqDnnIsSet; }
+void EventsNotification::unsetUeReqDnn() { m_UeReqDnnIsSet = false; }
 oai::model::pcf::RedundantPduSessionInformation
 EventsNotification::getRedundantPduSessionInfo() const {
   return m_RedundantPduSessionInfo;
 }
 void EventsNotification::setRedundantPduSessionInfo(
-    oai::model::pcf::RedundantPduSessionInformation const& value) {
-  m_RedundantPduSessionInfo      = value;
+    oai::model::pcf::RedundantPduSessionInformation const &value) {
+  m_RedundantPduSessionInfo = value;
   m_RedundantPduSessionInfoIsSet = true;
 }
 bool EventsNotification::redundantPduSessionInfoIsSet() const {
@@ -1311,8 +1242,8 @@ EventsNotification::getTsnBridgeManCont() const {
   return m_TsnBridgeManCont;
 }
 void EventsNotification::setTsnBridgeManCont(
-    oai::model::pcf::BridgeManagementContainer const& value) {
-  m_TsnBridgeManCont      = value;
+    oai::model::pcf::BridgeManagementContainer const &value) {
+  m_TsnBridgeManCont = value;
   m_TsnBridgeManContIsSet = true;
 }
 bool EventsNotification::tsnBridgeManContIsSet() const {
@@ -1326,8 +1257,8 @@ EventsNotification::getTsnPortManContDstt() const {
   return m_TsnPortManContDstt;
 }
 void EventsNotification::setTsnPortManContDstt(
-    oai::model::pcf::PortManagementContainer const& value) {
-  m_TsnPortManContDstt      = value;
+    oai::model::pcf::PortManagementContainer const &value) {
+  m_TsnPortManContDstt = value;
   m_TsnPortManContDsttIsSet = true;
 }
 bool EventsNotification::tsnPortManContDsttIsSet() const {
@@ -1341,8 +1272,8 @@ EventsNotification::getTsnPortManContNwtts() const {
   return m_TsnPortManContNwtts;
 }
 void EventsNotification::setTsnPortManContNwtts(
-    std::vector<oai::model::pcf::PortManagementContainer> const& value) {
-  m_TsnPortManContNwtts      = value;
+    std::vector<oai::model::pcf::PortManagementContainer> const &value) {
+  m_TsnPortManContNwtts = value;
   m_TsnPortManContNwttsIsSet = true;
 }
 bool EventsNotification::tsnPortManContNwttsIsSet() const {
@@ -1355,23 +1286,21 @@ std::vector<std::string> EventsNotification::getIpv4AddrList() const {
   return m_Ipv4AddrList;
 }
 void EventsNotification::setIpv4AddrList(
-    std::vector<std::string> const& value) {
-  m_Ipv4AddrList      = value;
+    std::vector<std::string> const &value) {
+  m_Ipv4AddrList = value;
   m_Ipv4AddrListIsSet = true;
 }
 bool EventsNotification::ipv4AddrListIsSet() const {
   return m_Ipv4AddrListIsSet;
 }
-void EventsNotification::unsetIpv4AddrList() {
-  m_Ipv4AddrListIsSet = false;
-}
+void EventsNotification::unsetIpv4AddrList() { m_Ipv4AddrListIsSet = false; }
 std::vector<oai::model::common::Ipv6Prefix>
 EventsNotification::getIpv6PrefixList() const {
   return m_Ipv6PrefixList;
 }
 void EventsNotification::setIpv6PrefixList(
-    std::vector<oai::model::common::Ipv6Prefix> const& value) {
-  m_Ipv6PrefixList      = value;
+    std::vector<oai::model::common::Ipv6Prefix> const &value) {
+  m_Ipv6PrefixList = value;
   m_Ipv6PrefixListIsSet = true;
 }
 bool EventsNotification::ipv6PrefixListIsSet() const {
@@ -1384,15 +1313,13 @@ oai::model::pcf::BatOffsetInfo EventsNotification::getBatOffsetInfo() const {
   return m_BatOffsetInfo;
 }
 void EventsNotification::setBatOffsetInfo(
-    oai::model::pcf::BatOffsetInfo const& value) {
-  m_BatOffsetInfo      = value;
+    oai::model::pcf::BatOffsetInfo const &value) {
+  m_BatOffsetInfo = value;
   m_BatOffsetInfoIsSet = true;
 }
 bool EventsNotification::batOffsetInfoIsSet() const {
   return m_BatOffsetInfoIsSet;
 }
-void EventsNotification::unsetBatOffsetInfo() {
-  m_BatOffsetInfoIsSet = false;
-}
+void EventsNotification::unsetBatOffsetInfo() { m_BatOffsetInfoIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

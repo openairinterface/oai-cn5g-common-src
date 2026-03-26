@@ -16,17 +16,17 @@
 namespace oai::model::amf {
 
 Inline_object::Inline_object() {
-  m_JsonDataIsSet                     = false;
-  m_BinaryDataN2InformationIsSet      = false;
-  m_BinaryDataN2InformationExt1IsSet  = false;
-  m_BinaryDataN2InformationExt2IsSet  = false;
-  m_BinaryDataN2InformationExt3IsSet  = false;
-  m_BinaryDataN2InformationExt4IsSet  = false;
-  m_BinaryDataN2InformationExt5IsSet  = false;
-  m_BinaryDataN2InformationExt6IsSet  = false;
-  m_BinaryDataN2InformationExt7IsSet  = false;
-  m_BinaryDataN2InformationExt8IsSet  = false;
-  m_BinaryDataN2InformationExt9IsSet  = false;
+  m_JsonDataIsSet = false;
+  m_BinaryDataN2InformationIsSet = false;
+  m_BinaryDataN2InformationExt1IsSet = false;
+  m_BinaryDataN2InformationExt2IsSet = false;
+  m_BinaryDataN2InformationExt3IsSet = false;
+  m_BinaryDataN2InformationExt4IsSet = false;
+  m_BinaryDataN2InformationExt5IsSet = false;
+  m_BinaryDataN2InformationExt6IsSet = false;
+  m_BinaryDataN2InformationExt7IsSet = false;
+  m_BinaryDataN2InformationExt8IsSet = false;
+  m_BinaryDataN2InformationExt9IsSet = false;
   m_BinaryDataN2InformationExt10IsSet = false;
   m_BinaryDataN2InformationExt11IsSet = false;
   m_BinaryDataN2InformationExt12IsSet = false;
@@ -42,9 +42,10 @@ void Inline_object::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const Inline_object& o) {
+void to_json(nlohmann::json &j, const Inline_object &o) {
   j = nlohmann::json();
-  if (o.jsonDataIsSet()) j["jsonData"] = o.m_JsonData;
+  if (o.jsonDataIsSet())
+    j["jsonData"] = o.m_JsonData;
   if (o.binaryDataN2InformationIsSet())
     j["binaryDataN2Information"] = o.m_BinaryDataN2Information;
   if (o.binaryDataN2InformationExt1IsSet())
@@ -81,7 +82,7 @@ void to_json(nlohmann::json& j, const Inline_object& o) {
     j["binaryDataN2InformationExt16"] = o.m_BinaryDataN2InformationExt16;
 }
 
-void from_json(const nlohmann::json& j, Inline_object& o) {
+void from_json(const nlohmann::json &j, Inline_object &o) {
   if (j.find("jsonData") != j.end()) {
     j.at("jsonData").get_to(o.m_JsonData);
     o.m_JsonDataIsSet = true;
@@ -163,24 +164,18 @@ void from_json(const nlohmann::json& j, Inline_object& o) {
   }
 }
 
-UeContextCreateData Inline_object::getJsonData() const {
-  return m_JsonData;
-}
-void Inline_object::setJsonData(UeContextCreateData const& value) {
-  m_JsonData      = value;
+UeContextCreateData Inline_object::getJsonData() const { return m_JsonData; }
+void Inline_object::setJsonData(UeContextCreateData const &value) {
+  m_JsonData = value;
   m_JsonDataIsSet = true;
 }
-bool Inline_object::jsonDataIsSet() const {
-  return m_JsonDataIsSet;
-}
-void Inline_object::unsetJsonData() {
-  m_JsonDataIsSet = false;
-}
+bool Inline_object::jsonDataIsSet() const { return m_JsonDataIsSet; }
+void Inline_object::unsetJsonData() { m_JsonDataIsSet = false; }
 std::string Inline_object::getBinaryDataN2Information() const {
   return m_BinaryDataN2Information;
 }
-void Inline_object::setBinaryDataN2Information(std::string const& value) {
-  m_BinaryDataN2Information      = value;
+void Inline_object::setBinaryDataN2Information(std::string const &value) {
+  m_BinaryDataN2Information = value;
   m_BinaryDataN2InformationIsSet = true;
 }
 bool Inline_object::binaryDataN2InformationIsSet() const {
@@ -192,8 +187,8 @@ void Inline_object::unsetBinaryDataN2Information() {
 std::string Inline_object::getBinaryDataN2InformationExt1() const {
   return m_BinaryDataN2InformationExt1;
 }
-void Inline_object::setBinaryDataN2InformationExt1(std::string const& value) {
-  m_BinaryDataN2InformationExt1      = value;
+void Inline_object::setBinaryDataN2InformationExt1(std::string const &value) {
+  m_BinaryDataN2InformationExt1 = value;
   m_BinaryDataN2InformationExt1IsSet = true;
 }
 bool Inline_object::binaryDataN2InformationExt1IsSet() const {
@@ -205,8 +200,8 @@ void Inline_object::unsetBinaryDataN2InformationExt1() {
 std::string Inline_object::getBinaryDataN2InformationExt2() const {
   return m_BinaryDataN2InformationExt2;
 }
-void Inline_object::setBinaryDataN2InformationExt2(std::string const& value) {
-  m_BinaryDataN2InformationExt2      = value;
+void Inline_object::setBinaryDataN2InformationExt2(std::string const &value) {
+  m_BinaryDataN2InformationExt2 = value;
   m_BinaryDataN2InformationExt2IsSet = true;
 }
 bool Inline_object::binaryDataN2InformationExt2IsSet() const {
@@ -218,8 +213,8 @@ void Inline_object::unsetBinaryDataN2InformationExt2() {
 std::string Inline_object::getBinaryDataN2InformationExt3() const {
   return m_BinaryDataN2InformationExt3;
 }
-void Inline_object::setBinaryDataN2InformationExt3(std::string const& value) {
-  m_BinaryDataN2InformationExt3      = value;
+void Inline_object::setBinaryDataN2InformationExt3(std::string const &value) {
+  m_BinaryDataN2InformationExt3 = value;
   m_BinaryDataN2InformationExt3IsSet = true;
 }
 bool Inline_object::binaryDataN2InformationExt3IsSet() const {
@@ -231,8 +226,8 @@ void Inline_object::unsetBinaryDataN2InformationExt3() {
 std::string Inline_object::getBinaryDataN2InformationExt4() const {
   return m_BinaryDataN2InformationExt4;
 }
-void Inline_object::setBinaryDataN2InformationExt4(std::string const& value) {
-  m_BinaryDataN2InformationExt4      = value;
+void Inline_object::setBinaryDataN2InformationExt4(std::string const &value) {
+  m_BinaryDataN2InformationExt4 = value;
   m_BinaryDataN2InformationExt4IsSet = true;
 }
 bool Inline_object::binaryDataN2InformationExt4IsSet() const {
@@ -244,8 +239,8 @@ void Inline_object::unsetBinaryDataN2InformationExt4() {
 std::string Inline_object::getBinaryDataN2InformationExt5() const {
   return m_BinaryDataN2InformationExt5;
 }
-void Inline_object::setBinaryDataN2InformationExt5(std::string const& value) {
-  m_BinaryDataN2InformationExt5      = value;
+void Inline_object::setBinaryDataN2InformationExt5(std::string const &value) {
+  m_BinaryDataN2InformationExt5 = value;
   m_BinaryDataN2InformationExt5IsSet = true;
 }
 bool Inline_object::binaryDataN2InformationExt5IsSet() const {
@@ -257,8 +252,8 @@ void Inline_object::unsetBinaryDataN2InformationExt5() {
 std::string Inline_object::getBinaryDataN2InformationExt6() const {
   return m_BinaryDataN2InformationExt6;
 }
-void Inline_object::setBinaryDataN2InformationExt6(std::string const& value) {
-  m_BinaryDataN2InformationExt6      = value;
+void Inline_object::setBinaryDataN2InformationExt6(std::string const &value) {
+  m_BinaryDataN2InformationExt6 = value;
   m_BinaryDataN2InformationExt6IsSet = true;
 }
 bool Inline_object::binaryDataN2InformationExt6IsSet() const {
@@ -270,8 +265,8 @@ void Inline_object::unsetBinaryDataN2InformationExt6() {
 std::string Inline_object::getBinaryDataN2InformationExt7() const {
   return m_BinaryDataN2InformationExt7;
 }
-void Inline_object::setBinaryDataN2InformationExt7(std::string const& value) {
-  m_BinaryDataN2InformationExt7      = value;
+void Inline_object::setBinaryDataN2InformationExt7(std::string const &value) {
+  m_BinaryDataN2InformationExt7 = value;
   m_BinaryDataN2InformationExt7IsSet = true;
 }
 bool Inline_object::binaryDataN2InformationExt7IsSet() const {
@@ -283,8 +278,8 @@ void Inline_object::unsetBinaryDataN2InformationExt7() {
 std::string Inline_object::getBinaryDataN2InformationExt8() const {
   return m_BinaryDataN2InformationExt8;
 }
-void Inline_object::setBinaryDataN2InformationExt8(std::string const& value) {
-  m_BinaryDataN2InformationExt8      = value;
+void Inline_object::setBinaryDataN2InformationExt8(std::string const &value) {
+  m_BinaryDataN2InformationExt8 = value;
   m_BinaryDataN2InformationExt8IsSet = true;
 }
 bool Inline_object::binaryDataN2InformationExt8IsSet() const {
@@ -296,8 +291,8 @@ void Inline_object::unsetBinaryDataN2InformationExt8() {
 std::string Inline_object::getBinaryDataN2InformationExt9() const {
   return m_BinaryDataN2InformationExt9;
 }
-void Inline_object::setBinaryDataN2InformationExt9(std::string const& value) {
-  m_BinaryDataN2InformationExt9      = value;
+void Inline_object::setBinaryDataN2InformationExt9(std::string const &value) {
+  m_BinaryDataN2InformationExt9 = value;
   m_BinaryDataN2InformationExt9IsSet = true;
 }
 bool Inline_object::binaryDataN2InformationExt9IsSet() const {
@@ -309,8 +304,8 @@ void Inline_object::unsetBinaryDataN2InformationExt9() {
 std::string Inline_object::getBinaryDataN2InformationExt10() const {
   return m_BinaryDataN2InformationExt10;
 }
-void Inline_object::setBinaryDataN2InformationExt10(std::string const& value) {
-  m_BinaryDataN2InformationExt10      = value;
+void Inline_object::setBinaryDataN2InformationExt10(std::string const &value) {
+  m_BinaryDataN2InformationExt10 = value;
   m_BinaryDataN2InformationExt10IsSet = true;
 }
 bool Inline_object::binaryDataN2InformationExt10IsSet() const {
@@ -322,8 +317,8 @@ void Inline_object::unsetBinaryDataN2InformationExt10() {
 std::string Inline_object::getBinaryDataN2InformationExt11() const {
   return m_BinaryDataN2InformationExt11;
 }
-void Inline_object::setBinaryDataN2InformationExt11(std::string const& value) {
-  m_BinaryDataN2InformationExt11      = value;
+void Inline_object::setBinaryDataN2InformationExt11(std::string const &value) {
+  m_BinaryDataN2InformationExt11 = value;
   m_BinaryDataN2InformationExt11IsSet = true;
 }
 bool Inline_object::binaryDataN2InformationExt11IsSet() const {
@@ -335,8 +330,8 @@ void Inline_object::unsetBinaryDataN2InformationExt11() {
 std::string Inline_object::getBinaryDataN2InformationExt12() const {
   return m_BinaryDataN2InformationExt12;
 }
-void Inline_object::setBinaryDataN2InformationExt12(std::string const& value) {
-  m_BinaryDataN2InformationExt12      = value;
+void Inline_object::setBinaryDataN2InformationExt12(std::string const &value) {
+  m_BinaryDataN2InformationExt12 = value;
   m_BinaryDataN2InformationExt12IsSet = true;
 }
 bool Inline_object::binaryDataN2InformationExt12IsSet() const {
@@ -348,8 +343,8 @@ void Inline_object::unsetBinaryDataN2InformationExt12() {
 std::string Inline_object::getBinaryDataN2InformationExt13() const {
   return m_BinaryDataN2InformationExt13;
 }
-void Inline_object::setBinaryDataN2InformationExt13(std::string const& value) {
-  m_BinaryDataN2InformationExt13      = value;
+void Inline_object::setBinaryDataN2InformationExt13(std::string const &value) {
+  m_BinaryDataN2InformationExt13 = value;
   m_BinaryDataN2InformationExt13IsSet = true;
 }
 bool Inline_object::binaryDataN2InformationExt13IsSet() const {
@@ -361,8 +356,8 @@ void Inline_object::unsetBinaryDataN2InformationExt13() {
 std::string Inline_object::getBinaryDataN2InformationExt14() const {
   return m_BinaryDataN2InformationExt14;
 }
-void Inline_object::setBinaryDataN2InformationExt14(std::string const& value) {
-  m_BinaryDataN2InformationExt14      = value;
+void Inline_object::setBinaryDataN2InformationExt14(std::string const &value) {
+  m_BinaryDataN2InformationExt14 = value;
   m_BinaryDataN2InformationExt14IsSet = true;
 }
 bool Inline_object::binaryDataN2InformationExt14IsSet() const {
@@ -374,8 +369,8 @@ void Inline_object::unsetBinaryDataN2InformationExt14() {
 std::string Inline_object::getBinaryDataN2InformationExt15() const {
   return m_BinaryDataN2InformationExt15;
 }
-void Inline_object::setBinaryDataN2InformationExt15(std::string const& value) {
-  m_BinaryDataN2InformationExt15      = value;
+void Inline_object::setBinaryDataN2InformationExt15(std::string const &value) {
+  m_BinaryDataN2InformationExt15 = value;
   m_BinaryDataN2InformationExt15IsSet = true;
 }
 bool Inline_object::binaryDataN2InformationExt15IsSet() const {
@@ -387,8 +382,8 @@ void Inline_object::unsetBinaryDataN2InformationExt15() {
 std::string Inline_object::getBinaryDataN2InformationExt16() const {
   return m_BinaryDataN2InformationExt16;
 }
-void Inline_object::setBinaryDataN2InformationExt16(std::string const& value) {
-  m_BinaryDataN2InformationExt16      = value;
+void Inline_object::setBinaryDataN2InformationExt16(std::string const &value) {
+  m_BinaryDataN2InformationExt16 = value;
   m_BinaryDataN2InformationExt16IsSet = true;
 }
 bool Inline_object::binaryDataN2InformationExt16IsSet() const {
@@ -398,4 +393,4 @@ void Inline_object::unsetBinaryDataN2InformationExt16() {
   m_BinaryDataN2InformationExt16IsSet = false;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

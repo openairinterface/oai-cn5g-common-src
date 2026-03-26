@@ -30,12 +30,12 @@ void RoamingIndication_anyOf::validate() const {
   // }
 }
 
-bool RoamingIndication_anyOf::validate(std::stringstream& msg) const {
+bool RoamingIndication_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool RoamingIndication_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool RoamingIndication_anyOf::validate(std::stringstream &msg,
+                                       const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "RoamingIndication_anyOf" : pathPrefix;
@@ -50,38 +50,38 @@ bool RoamingIndication_anyOf::validate(
 }
 
 bool RoamingIndication_anyOf::operator==(
-    const RoamingIndication_anyOf& rhs) const {
+    const RoamingIndication_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool RoamingIndication_anyOf::operator!=(
-    const RoamingIndication_anyOf& rhs) const {
+    const RoamingIndication_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const RoamingIndication_anyOf& o) {
+void to_json(nlohmann::json &j, const RoamingIndication_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case RoamingIndication_anyOf::eRoamingIndication_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case RoamingIndication_anyOf::eRoamingIndication_anyOf::NON_ROAMING:
-      j = "NON_ROAMING";
-      break;
-    case RoamingIndication_anyOf::eRoamingIndication_anyOf::LOCAL_BREAKOUT:
-      j = "LOCAL_BREAKOUT";
-      break;
-    case RoamingIndication_anyOf::eRoamingIndication_anyOf::HOME_ROUTED_ROAMING:
-      j = "HOME_ROUTED_ROAMING";
-      break;
+  case RoamingIndication_anyOf::eRoamingIndication_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case RoamingIndication_anyOf::eRoamingIndication_anyOf::NON_ROAMING:
+    j = "NON_ROAMING";
+    break;
+  case RoamingIndication_anyOf::eRoamingIndication_anyOf::LOCAL_BREAKOUT:
+    j = "LOCAL_BREAKOUT";
+    break;
+  case RoamingIndication_anyOf::eRoamingIndication_anyOf::HOME_ROUTED_ROAMING:
+    j = "HOME_ROUTED_ROAMING";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, RoamingIndication_anyOf& o) {
+void from_json(const nlohmann::json &j, RoamingIndication_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "NON_ROAMING") {
     o.setValue(RoamingIndication_anyOf::eRoamingIndication_anyOf::NON_ROAMING);
@@ -109,6 +109,6 @@ void RoamingIndication_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace model
-}  // namespace nssf_server
-}  // namespace oai
+} // namespace model
+} // namespace nssf_server
+} // namespace oai

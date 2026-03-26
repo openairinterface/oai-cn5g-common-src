@@ -27,7 +27,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class ResponseTime_anyOf {
- public:
+public:
   ResponseTime_anyOf();
   virtual ~ResponseTime_anyOf() = default;
 
@@ -51,16 +51,16 @@ class ResponseTime_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const ResponseTime_anyOf& rhs) const;
-  bool operator!=(const ResponseTime_anyOf& rhs) const;
+  bool operator==(const ResponseTime_anyOf &rhs) const;
+  bool operator!=(const ResponseTime_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// ResponseTime_anyOf members
@@ -68,14 +68,14 @@ class ResponseTime_anyOf {
   ResponseTime_anyOf::eResponseTime_anyOf getValue() const;
   void setValue(ResponseTime_anyOf::eResponseTime_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const ResponseTime_anyOf& o);
-  friend void from_json(const nlohmann::json& j, ResponseTime_anyOf& o);
+  friend void to_json(nlohmann::json &j, const ResponseTime_anyOf &o);
+  friend void from_json(const nlohmann::json &j, ResponseTime_anyOf &o);
 
- protected:
+protected:
   ResponseTime_anyOf::eResponseTime_anyOf m_value =
       ResponseTime_anyOf::eResponseTime_anyOf::INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* ResponseTime_anyOf_H_ */

@@ -8,14 +8,13 @@
 
 #include "Ngap_AdditionalDLUPTNLInformationForHOItem.h"
 
-#include "Ngap_UPTransportLayerInformation.h"
 #include "Ngap_ProtocolExtensionContainer.h"
+#include "Ngap_UPTransportLayerInformation.h"
 asn_TYPE_member_t asn_MBR_Ngap_AdditionalDLUPTNLInformationForHOItem_1[] = {
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_AdditionalDLUPTNLInformationForHOItem,
-         additionalDL_NGU_UP_TNLInformation),
+     offsetof(struct Ngap_AdditionalDLUPTNLInformationForHOItem,
+              additionalDL_NGU_UP_TNLInformation),
      (ASN_TAG_CLASS_CONTEXT | (0 << 2)),
      +1, /* EXPLICIT tag at current level */
      &asn_DEF_Ngap_UPTransportLayerInformation,
@@ -34,9 +33,8 @@ asn_TYPE_member_t asn_MBR_Ngap_AdditionalDLUPTNLInformationForHOItem_1[] = {
      "additionalDL-NGU-UP-TNLInformation"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_AdditionalDLUPTNLInformationForHOItem,
-         additionalQosFlowSetupResponseList),
+     offsetof(struct Ngap_AdditionalDLUPTNLInformationForHOItem,
+              additionalQosFlowSetupResponseList),
      (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_QosFlowListWithDataForwarding,
@@ -55,9 +53,8 @@ asn_TYPE_member_t asn_MBR_Ngap_AdditionalDLUPTNLInformationForHOItem_1[] = {
      "additionalQosFlowSetupResponseList"},
     {ATF_POINTER,
      2,
-     offsetof(
-         struct Ngap_AdditionalDLUPTNLInformationForHOItem,
-         additionalDLForwardingUPTNLInformation),
+     offsetof(struct Ngap_AdditionalDLUPTNLInformationForHOItem,
+              additionalDLForwardingUPTNLInformation),
      (ASN_TAG_CLASS_CONTEXT | (2 << 2)),
      +1, /* EXPLICIT tag at current level */
      &asn_DEF_Ngap_UPTransportLayerInformation,

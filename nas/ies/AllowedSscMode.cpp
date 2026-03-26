@@ -34,16 +34,10 @@ uint8_t AllowedSscMode::GetValue() const {
 }
 
 //------------------------------------------------------------------------------
-bool AllowedSscMode::IsSscMode1Allowed() const {
-  return (value_ & 0x01);
-}
+bool AllowedSscMode::IsSscMode1Allowed() const { return (value_ & 0x01); }
 
 //------------------------------------------------------------------------------
-bool AllowedSscMode::IsSscMode2Allowed() const {
-  return (value_ & 0x02);
-}
+bool AllowedSscMode::IsSscMode2Allowed() const { return (value_ & 0x02); }
 
 //------------------------------------------------------------------------------
-bool AllowedSscMode::IsSscMode3Allowed() const {
-  return (value_ & 0x04);
-}
+bool AllowedSscMode::IsSscMode3Allowed() const { return (value_ & 0x04); }

@@ -20,9 +20,9 @@
 #define MetaSchema_H_
 
 #include "TagType.h"
+#include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
-#include <nlohmann/json.hpp>
 
 namespace oai::model::udsf {
 
@@ -30,7 +30,7 @@ namespace oai::model::udsf {
 /// Defines the Meta Schema
 /// </summary>
 class MetaSchema {
- public:
+public:
   MetaSchema();
   virtual ~MetaSchema() = default;
 
@@ -44,16 +44,16 @@ class MetaSchema {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const MetaSchema& rhs) const;
-  bool operator!=(const MetaSchema& rhs) const;
+  bool operator==(const MetaSchema &rhs) const;
+  bool operator!=(const MetaSchema &rhs) const;
 
   /////////////////////////////////////////////
   /// MetaSchema members
@@ -62,22 +62,22 @@ class MetaSchema {
   /// Represents the Identifier of a Meta schema.
   /// </summary>
   std::string getSchemaId() const;
-  void setSchemaId(std::string const& value);
+  void setSchemaId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::udsf::TagType> getMetaTags() const;
-  void setMetaTags(std::vector<oai::model::udsf::TagType> const& value);
+  void setMetaTags(std::vector<oai::model::udsf::TagType> const &value);
 
-  friend void to_json(nlohmann::json& j, const MetaSchema& o);
-  friend void from_json(const nlohmann::json& j, MetaSchema& o);
+  friend void to_json(nlohmann::json &j, const MetaSchema &o);
+  friend void from_json(const nlohmann::json &j, MetaSchema &o);
 
- protected:
+protected:
   std::string m_SchemaId;
 
   std::vector<oai::model::udsf::TagType> m_MetaTags;
 };
 
-}  // namespace oai::model::udsf
+} // namespace oai::model::udsf
 
 #endif /* MetaSchema_H_ */

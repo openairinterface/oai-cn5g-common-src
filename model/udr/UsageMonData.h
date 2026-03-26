@@ -38,7 +38,7 @@ namespace oai::udr::model {
 /// Contains remain allowed usage data for a subscriber.
 /// </summary>
 class UsageMonData {
- public:
+public:
   UsageMonData();
   virtual ~UsageMonData();
 
@@ -51,47 +51,47 @@ class UsageMonData {
   ///
   /// </summary>
   std::string getLimitId() const;
-  void setLimitId(std::string const& value);
+  void setLimitId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
-  std::map<std::string, UsageMonDataScope>& getScopes();
-  void setScopes(std::map<std::string, UsageMonDataScope> const& value);
+  std::map<std::string, UsageMonDataScope> &getScopes();
+  void setScopes(std::map<std::string, UsageMonDataScope> const &value);
   bool scopesIsSet() const;
   void unsetScopes();
   /// <summary>
   ///
   /// </summary>
   UsageMonLevel getUmLevel() const;
-  void setUmLevel(UsageMonLevel const& value);
+  void setUmLevel(UsageMonLevel const &value);
   bool umLevelIsSet() const;
   void unsetUmLevel();
   /// <summary>
   ///
   /// </summary>
   UsageThreshold getAllowedUsage() const;
-  void setAllowedUsage(UsageThreshold const& value);
+  void setAllowedUsage(UsageThreshold const &value);
   bool allowedUsageIsSet() const;
   void unsetAllowedUsage();
   /// <summary>
   ///
   /// </summary>
   TimePeriod getResetTime() const;
-  void setResetTime(TimePeriod const& value);
+  void setResetTime(TimePeriod const &value);
   bool resetTimeIsSet() const;
   void unsetResetTime();
   /// <summary>
   ///
   /// </summary>
   std::string getSuppFeat() const;
-  void setSuppFeat(std::string const& value);
+  void setSuppFeat(std::string const &value);
   bool suppFeatIsSet() const;
   void unsetSuppFeat();
 
-  friend void to_json(nlohmann::json& j, const UsageMonData& o);
-  friend void from_json(const nlohmann::json& j, UsageMonData& o);
+  friend void to_json(nlohmann::json &j, const UsageMonData &o);
+  friend void from_json(const nlohmann::json &j, UsageMonData &o);
 
- protected:
+protected:
   std::string m_LimitId;
 
   std::map<std::string, UsageMonDataScope> m_Scopes;
@@ -106,6 +106,6 @@ class UsageMonData {
   bool m_SuppFeatIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* UsageMonData_H_ */

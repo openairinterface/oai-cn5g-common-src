@@ -25,7 +25,7 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_AreaOfInterestRANNodeItem */
 typedef struct Ngap_AreaOfInterestRANNodeItem {
   Ngap_GlobalRANNodeID_t globalRANNodeID;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

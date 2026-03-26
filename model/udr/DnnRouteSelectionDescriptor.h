@@ -37,7 +37,7 @@ namespace oai::udr::model {
 /// ATSSS information) per DNN
 /// </summary>
 class DnnRouteSelectionDescriptor {
- public:
+public:
   DnnRouteSelectionDescriptor();
   virtual ~DnnRouteSelectionDescriptor();
 
@@ -50,20 +50,20 @@ class DnnRouteSelectionDescriptor {
   ///
   /// </summary>
   std::string getDnn() const;
-  void setDnn(std::string const& value);
+  void setDnn(std::string const &value);
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::SscMode>& getSscModes();
-  void setSscModes(std::vector<oai::model::common::SscMode> const& value);
+  std::vector<oai::model::common::SscMode> &getSscModes();
+  void setSscModes(std::vector<oai::model::common::SscMode> const &value);
   bool sscModesIsSet() const;
   void unsetSscModes();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::PduSessionType>& getPduSessTypes();
-  void setPduSessTypes(
-      std::vector<oai::model::common::PduSessionType> const& value);
+  std::vector<oai::model::common::PduSessionType> &getPduSessTypes();
+  void
+  setPduSessTypes(std::vector<oai::model::common::PduSessionType> const &value);
   bool pduSessTypesIsSet() const;
   void unsetPduSessTypes();
   /// <summary>
@@ -76,11 +76,11 @@ class DnnRouteSelectionDescriptor {
   bool atsssInfoIsSet() const;
   void unsetAtsssInfo();
 
-  friend void to_json(nlohmann::json& j, const DnnRouteSelectionDescriptor& o);
-  friend void from_json(
-      const nlohmann::json& j, DnnRouteSelectionDescriptor& o);
+  friend void to_json(nlohmann::json &j, const DnnRouteSelectionDescriptor &o);
+  friend void from_json(const nlohmann::json &j,
+                        DnnRouteSelectionDescriptor &o);
 
- protected:
+protected:
   std::string m_Dnn;
 
   std::vector<oai::model::common::SscMode> m_SscModes;
@@ -91,6 +91,6 @@ class DnnRouteSelectionDescriptor {
   bool m_AtsssInfoIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* DnnRouteSelectionDescriptor_H_ */

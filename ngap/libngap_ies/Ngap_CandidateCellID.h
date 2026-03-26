@@ -25,7 +25,7 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_CandidateCellID */
 typedef struct Ngap_CandidateCellID {
   Ngap_NR_CGI_t candidateCellID;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

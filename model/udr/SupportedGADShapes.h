@@ -30,7 +30,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class SupportedGADShapes {
- public:
+public:
   SupportedGADShapes();
   virtual ~SupportedGADShapes();
 
@@ -39,12 +39,12 @@ class SupportedGADShapes {
   /////////////////////////////////////////////
   /// SupportedGADShapes members
 
-  friend void to_json(nlohmann::json& j, const SupportedGADShapes& o);
-  friend void from_json(const nlohmann::json& j, SupportedGADShapes& o);
+  friend void to_json(nlohmann::json &j, const SupportedGADShapes &o);
+  friend void from_json(const nlohmann::json &j, SupportedGADShapes &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* SupportedGADShapes_H_ */

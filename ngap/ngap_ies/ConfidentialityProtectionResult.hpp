@@ -12,20 +12,20 @@ extern "C" {
 namespace oai::ngap {
 
 class ConfidentialityProtectionResult {
- public:
+public:
   ConfidentialityProtectionResult();
   virtual ~ConfidentialityProtectionResult(){};
 
-  void set(const e_Ngap_ConfidentialityProtectionResult& value);
-  bool get(long& value) const;
+  void set(const e_Ngap_ConfidentialityProtectionResult &value);
+  bool get(long &value) const;
 
-  bool encode(Ngap_ConfidentialityProtectionResult_t&) const;
-  bool decode(const Ngap_ConfidentialityProtectionResult_t&);
+  bool encode(Ngap_ConfidentialityProtectionResult_t &) const;
+  bool decode(const Ngap_ConfidentialityProtectionResult_t &);
 
- private:
+private:
   long m_ConfidentialityProtectionResult;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

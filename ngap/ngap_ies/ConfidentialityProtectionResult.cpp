@@ -13,12 +13,12 @@ ConfidentialityProtectionResult::ConfidentialityProtectionResult() {
 
 //------------------------------------------------------------------------------
 void ConfidentialityProtectionResult::set(
-    const e_Ngap_ConfidentialityProtectionResult& value) {
+    const e_Ngap_ConfidentialityProtectionResult &value) {
   m_ConfidentialityProtectionResult = value;
 }
 
 //------------------------------------------------------------------------------
-bool ConfidentialityProtectionResult::get(long& value) const {
+bool ConfidentialityProtectionResult::get(long &value) const {
   value = m_ConfidentialityProtectionResult;
 
   return true;
@@ -26,7 +26,7 @@ bool ConfidentialityProtectionResult::get(long& value) const {
 
 //------------------------------------------------------------------------------
 bool ConfidentialityProtectionResult::encode(
-    Ngap_ConfidentialityProtectionResult_t& value) const {
+    Ngap_ConfidentialityProtectionResult_t &value) const {
   value = m_ConfidentialityProtectionResult;
 
   return true;
@@ -34,9 +34,9 @@ bool ConfidentialityProtectionResult::encode(
 
 //------------------------------------------------------------------------------
 bool ConfidentialityProtectionResult::decode(
-    const Ngap_ConfidentialityProtectionResult_t& value) {
+    const Ngap_ConfidentialityProtectionResult_t &value) {
   m_ConfidentialityProtectionResult = value;
 
   return true;
 }
-}  // namespace oai::ngap
+} // namespace oai::ngap

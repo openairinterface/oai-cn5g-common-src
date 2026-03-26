@@ -23,18 +23,18 @@ void AmfStatusChangeNotification::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const AmfStatusChangeNotification& o) {
-  j                      = nlohmann::json();
+void to_json(nlohmann::json &j, const AmfStatusChangeNotification &o) {
+  j = nlohmann::json();
   j["amfStatusInfoList"] = o.m_AmfStatusInfoList;
 }
 
-void from_json(const nlohmann::json& j, AmfStatusChangeNotification& o) {
+void from_json(const nlohmann::json &j, AmfStatusChangeNotification &o) {
   j.at("amfStatusInfoList").get_to(o.m_AmfStatusInfoList);
 }
 
-std::vector<AmfStatusInfo>&
+std::vector<AmfStatusInfo> &
 AmfStatusChangeNotification::getAmfStatusInfoList() {
   return m_AmfStatusInfoList;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

@@ -20,20 +20,20 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_M6report_Interval {
-  Ngap_M6report_Interval_ms120   = 0,
-  Ngap_M6report_Interval_ms240   = 1,
-  Ngap_M6report_Interval_ms480   = 2,
-  Ngap_M6report_Interval_ms640   = 3,
-  Ngap_M6report_Interval_ms1024  = 4,
-  Ngap_M6report_Interval_ms2048  = 5,
-  Ngap_M6report_Interval_ms5120  = 6,
+  Ngap_M6report_Interval_ms120 = 0,
+  Ngap_M6report_Interval_ms240 = 1,
+  Ngap_M6report_Interval_ms480 = 2,
+  Ngap_M6report_Interval_ms640 = 3,
+  Ngap_M6report_Interval_ms1024 = 4,
+  Ngap_M6report_Interval_ms2048 = 5,
+  Ngap_M6report_Interval_ms5120 = 6,
   Ngap_M6report_Interval_ms10240 = 7,
   Ngap_M6report_Interval_ms20480 = 8,
   Ngap_M6report_Interval_ms40960 = 9,
-  Ngap_M6report_Interval_min1    = 10,
-  Ngap_M6report_Interval_min6    = 11,
-  Ngap_M6report_Interval_min12   = 12,
-  Ngap_M6report_Interval_min30   = 13
+  Ngap_M6report_Interval_min1 = 10,
+  Ngap_M6report_Interval_min6 = 11,
+  Ngap_M6report_Interval_min12 = 12,
+  Ngap_M6report_Interval_min30 = 13
   /*
    * Enumeration is extensible
    */

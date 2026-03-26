@@ -19,8 +19,8 @@
 #ifndef AssignEbiError_H_
 #define AssignEbiError_H_
 
-#include "ProblemDetails.h"
 #include "AssignEbiFailed.h"
+#include "ProblemDetails.h"
 #include <nlohmann/json.hpp>
 
 namespace oai::model::amf {
@@ -29,7 +29,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class AssignEbiError {
- public:
+public:
   AssignEbiError();
   virtual ~AssignEbiError();
 
@@ -42,22 +42,22 @@ class AssignEbiError {
   ///
   /// </summary>
   oai::model::common::ProblemDetails getError() const;
-  void setError(oai::model::common::ProblemDetails const& value);
+  void setError(oai::model::common::ProblemDetails const &value);
   /// <summary>
   ///
   /// </summary>
   AssignEbiFailed getFailureDetails() const;
-  void setFailureDetails(AssignEbiFailed const& value);
+  void setFailureDetails(AssignEbiFailed const &value);
 
-  friend void to_json(nlohmann::json& j, const AssignEbiError& o);
-  friend void from_json(const nlohmann::json& j, AssignEbiError& o);
+  friend void to_json(nlohmann::json &j, const AssignEbiError &o);
+  friend void from_json(const nlohmann::json &j, AssignEbiError &o);
 
- protected:
+protected:
   oai::model::common::ProblemDetails m_Error;
 
   AssignEbiFailed m_FailureDetails;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* AssignEbiError_H_ */

@@ -19,22 +19,22 @@
 namespace oai::model::common {
 
 N3gaLocation::N3gaLocation() {
-  m_N3gppTaiIsSet       = false;
-  m_N3IwfId             = "";
-  m_N3IwfIdIsSet        = false;
-  m_UeIpv4Addr          = "";
-  m_UeIpv4AddrIsSet     = false;
-  m_UeIpv6AddrIsSet     = false;
-  m_PortNumber          = 0;
-  m_PortNumberIsSet     = false;
-  m_TnapIdIsSet         = false;
-  m_ProtocolIsSet       = false;
-  m_TwapIdIsSet         = false;
-  m_HfcNodeIdIsSet      = false;
-  m_GliIsSet            = false;
+  m_N3gppTaiIsSet = false;
+  m_N3IwfId = "";
+  m_N3IwfIdIsSet = false;
+  m_UeIpv4Addr = "";
+  m_UeIpv4AddrIsSet = false;
+  m_UeIpv6AddrIsSet = false;
+  m_PortNumber = 0;
+  m_PortNumberIsSet = false;
+  m_TnapIdIsSet = false;
+  m_ProtocolIsSet = false;
+  m_TwapIdIsSet = false;
+  m_HfcNodeIdIsSet = false;
+  m_GliIsSet = false;
   m_W5gbanLineTypeIsSet = false;
-  m_Gci                 = "";
-  m_GciIsSet            = false;
+  m_Gci = "";
+  m_GciIsSet = false;
 }
 
 void N3gaLocation::validate() const {
@@ -44,12 +44,12 @@ void N3gaLocation::validate() const {
   }
 }
 
-bool N3gaLocation::validate(std::stringstream& msg) const {
+bool N3gaLocation::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool N3gaLocation::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool N3gaLocation::validate(std::stringstream &msg,
+                            const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "N3gaLocation" : pathPrefix;
@@ -65,7 +65,7 @@ bool N3gaLocation::validate(
   }
   */
   if (portNumberIsSet()) {
-    const int32_t& value               = m_PortNumber;
+    const int32_t &value = m_PortNumber;
     const std::string currentValuePath = _pathPrefix + ".portNumber";
 
     if (value < 0) {
@@ -77,7 +77,7 @@ bool N3gaLocation::validate(
   return success;
 }
 
-bool N3gaLocation::operator==(const N3gaLocation& rhs) const {
+bool N3gaLocation::operator==(const N3gaLocation &rhs) const {
   return
 
       ((!n3gppTaiIsSet() && !rhs.n3gppTaiIsSet()) ||
@@ -129,27 +129,39 @@ bool N3gaLocation::operator==(const N3gaLocation& rhs) const {
           ;
 }
 
-bool N3gaLocation::operator!=(const N3gaLocation& rhs) const {
+bool N3gaLocation::operator!=(const N3gaLocation &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const N3gaLocation& o) {
+void to_json(nlohmann::json &j, const N3gaLocation &o) {
   j = nlohmann::json();
-  if (o.n3gppTaiIsSet()) j["n3gppTai"] = o.m_N3gppTai;
-  if (o.n3IwfIdIsSet()) j["n3IwfId"] = o.m_N3IwfId;
-  if (o.ueIpv4AddrIsSet()) j["ueIpv4Addr"] = o.m_UeIpv4Addr;
-  if (o.ueIpv6AddrIsSet()) j["ueIpv6Addr"] = o.m_UeIpv6Addr;
-  if (o.portNumberIsSet()) j["portNumber"] = o.m_PortNumber;
-  if (o.tnapIdIsSet()) j["tnapId"] = o.m_TnapId;
-  if (o.protocolIsSet()) j["protocol"] = o.m_Protocol;
-  if (o.twapIdIsSet()) j["twapId"] = o.m_TwapId;
-  if (o.hfcNodeIdIsSet()) j["hfcNodeId"] = o.m_HfcNodeId;
-  if (o.gliIsSet()) j["gli"] = o.m_Gli;
-  if (o.w5gbanLineTypeIsSet()) j["w5gbanLineType"] = o.m_W5gbanLineType;
-  if (o.gciIsSet()) j["gci"] = o.m_Gci;
+  if (o.n3gppTaiIsSet())
+    j["n3gppTai"] = o.m_N3gppTai;
+  if (o.n3IwfIdIsSet())
+    j["n3IwfId"] = o.m_N3IwfId;
+  if (o.ueIpv4AddrIsSet())
+    j["ueIpv4Addr"] = o.m_UeIpv4Addr;
+  if (o.ueIpv6AddrIsSet())
+    j["ueIpv6Addr"] = o.m_UeIpv6Addr;
+  if (o.portNumberIsSet())
+    j["portNumber"] = o.m_PortNumber;
+  if (o.tnapIdIsSet())
+    j["tnapId"] = o.m_TnapId;
+  if (o.protocolIsSet())
+    j["protocol"] = o.m_Protocol;
+  if (o.twapIdIsSet())
+    j["twapId"] = o.m_TwapId;
+  if (o.hfcNodeIdIsSet())
+    j["hfcNodeId"] = o.m_HfcNodeId;
+  if (o.gliIsSet())
+    j["gli"] = o.m_Gli;
+  if (o.w5gbanLineTypeIsSet())
+    j["w5gbanLineType"] = o.m_W5gbanLineType;
+  if (o.gciIsSet())
+    j["gci"] = o.m_Gci;
 }
 
-void from_json(const nlohmann::json& j, N3gaLocation& o) {
+void from_json(const nlohmann::json &j, N3gaLocation &o) {
   if (j.find("n3gppTai") != j.end()) {
     j.at("n3gppTai").get_to(o.m_N3gppTai);
     o.m_N3gppTaiIsSet = true;
@@ -200,163 +212,99 @@ void from_json(const nlohmann::json& j, N3gaLocation& o) {
   }
 }
 
-oai::model::common::Tai N3gaLocation::getN3gppTai() const {
-  return m_N3gppTai;
-}
-void N3gaLocation::setN3gppTai(oai::model::common::Tai const& value) {
-  m_N3gppTai      = value;
+oai::model::common::Tai N3gaLocation::getN3gppTai() const { return m_N3gppTai; }
+void N3gaLocation::setN3gppTai(oai::model::common::Tai const &value) {
+  m_N3gppTai = value;
   m_N3gppTaiIsSet = true;
 }
-bool N3gaLocation::n3gppTaiIsSet() const {
-  return m_N3gppTaiIsSet;
-}
-void N3gaLocation::unsetN3gppTai() {
-  m_N3gppTaiIsSet = false;
-}
-std::string N3gaLocation::getN3IwfId() const {
-  return m_N3IwfId;
-}
-void N3gaLocation::setN3IwfId(std::string const& value) {
-  m_N3IwfId      = value;
+bool N3gaLocation::n3gppTaiIsSet() const { return m_N3gppTaiIsSet; }
+void N3gaLocation::unsetN3gppTai() { m_N3gppTaiIsSet = false; }
+std::string N3gaLocation::getN3IwfId() const { return m_N3IwfId; }
+void N3gaLocation::setN3IwfId(std::string const &value) {
+  m_N3IwfId = value;
   m_N3IwfIdIsSet = true;
 }
-bool N3gaLocation::n3IwfIdIsSet() const {
-  return m_N3IwfIdIsSet;
-}
-void N3gaLocation::unsetN3IwfId() {
-  m_N3IwfIdIsSet = false;
-}
-std::string N3gaLocation::getUeIpv4Addr() const {
-  return m_UeIpv4Addr;
-}
-void N3gaLocation::setUeIpv4Addr(std::string const& value) {
-  m_UeIpv4Addr      = value;
+bool N3gaLocation::n3IwfIdIsSet() const { return m_N3IwfIdIsSet; }
+void N3gaLocation::unsetN3IwfId() { m_N3IwfIdIsSet = false; }
+std::string N3gaLocation::getUeIpv4Addr() const { return m_UeIpv4Addr; }
+void N3gaLocation::setUeIpv4Addr(std::string const &value) {
+  m_UeIpv4Addr = value;
   m_UeIpv4AddrIsSet = true;
 }
-bool N3gaLocation::ueIpv4AddrIsSet() const {
-  return m_UeIpv4AddrIsSet;
-}
-void N3gaLocation::unsetUeIpv4Addr() {
-  m_UeIpv4AddrIsSet = false;
-}
+bool N3gaLocation::ueIpv4AddrIsSet() const { return m_UeIpv4AddrIsSet; }
+void N3gaLocation::unsetUeIpv4Addr() { m_UeIpv4AddrIsSet = false; }
 oai::model::common::Ipv6Addr N3gaLocation::getUeIpv6Addr() const {
   return m_UeIpv6Addr;
 }
-void N3gaLocation::setUeIpv6Addr(oai::model::common::Ipv6Addr const& value) {
-  m_UeIpv6Addr      = value;
+void N3gaLocation::setUeIpv6Addr(oai::model::common::Ipv6Addr const &value) {
+  m_UeIpv6Addr = value;
   m_UeIpv6AddrIsSet = true;
 }
-bool N3gaLocation::ueIpv6AddrIsSet() const {
-  return m_UeIpv6AddrIsSet;
-}
-void N3gaLocation::unsetUeIpv6Addr() {
-  m_UeIpv6AddrIsSet = false;
-}
-int32_t N3gaLocation::getPortNumber() const {
-  return m_PortNumber;
-}
+bool N3gaLocation::ueIpv6AddrIsSet() const { return m_UeIpv6AddrIsSet; }
+void N3gaLocation::unsetUeIpv6Addr() { m_UeIpv6AddrIsSet = false; }
+int32_t N3gaLocation::getPortNumber() const { return m_PortNumber; }
 void N3gaLocation::setPortNumber(int32_t const value) {
-  m_PortNumber      = value;
+  m_PortNumber = value;
   m_PortNumberIsSet = true;
 }
-bool N3gaLocation::portNumberIsSet() const {
-  return m_PortNumberIsSet;
-}
-void N3gaLocation::unsetPortNumber() {
-  m_PortNumberIsSet = false;
-}
-oai::model::common::TnapId N3gaLocation::getTnapId() const {
-  return m_TnapId;
-}
-void N3gaLocation::setTnapId(oai::model::common::TnapId const& value) {
-  m_TnapId      = value;
+bool N3gaLocation::portNumberIsSet() const { return m_PortNumberIsSet; }
+void N3gaLocation::unsetPortNumber() { m_PortNumberIsSet = false; }
+oai::model::common::TnapId N3gaLocation::getTnapId() const { return m_TnapId; }
+void N3gaLocation::setTnapId(oai::model::common::TnapId const &value) {
+  m_TnapId = value;
   m_TnapIdIsSet = true;
 }
-bool N3gaLocation::tnapIdIsSet() const {
-  return m_TnapIdIsSet;
-}
-void N3gaLocation::unsetTnapId() {
-  m_TnapIdIsSet = false;
-}
+bool N3gaLocation::tnapIdIsSet() const { return m_TnapIdIsSet; }
+void N3gaLocation::unsetTnapId() { m_TnapIdIsSet = false; }
 oai::model::common::TransportProtocol N3gaLocation::getProtocol() const {
   return m_Protocol;
 }
 void N3gaLocation::setProtocol(
-    oai::model::common::TransportProtocol const& value) {
-  m_Protocol      = value;
+    oai::model::common::TransportProtocol const &value) {
+  m_Protocol = value;
   m_ProtocolIsSet = true;
 }
-bool N3gaLocation::protocolIsSet() const {
-  return m_ProtocolIsSet;
-}
-void N3gaLocation::unsetProtocol() {
-  m_ProtocolIsSet = false;
-}
-oai::model::common::TwapId N3gaLocation::getTwapId() const {
-  return m_TwapId;
-}
-void N3gaLocation::setTwapId(oai::model::common::TwapId const& value) {
-  m_TwapId      = value;
+bool N3gaLocation::protocolIsSet() const { return m_ProtocolIsSet; }
+void N3gaLocation::unsetProtocol() { m_ProtocolIsSet = false; }
+oai::model::common::TwapId N3gaLocation::getTwapId() const { return m_TwapId; }
+void N3gaLocation::setTwapId(oai::model::common::TwapId const &value) {
+  m_TwapId = value;
   m_TwapIdIsSet = true;
 }
-bool N3gaLocation::twapIdIsSet() const {
-  return m_TwapIdIsSet;
-}
-void N3gaLocation::unsetTwapId() {
-  m_TwapIdIsSet = false;
-}
+bool N3gaLocation::twapIdIsSet() const { return m_TwapIdIsSet; }
+void N3gaLocation::unsetTwapId() { m_TwapIdIsSet = false; }
 oai::model::common::HfcNodeId N3gaLocation::getHfcNodeId() const {
   return m_HfcNodeId;
 }
-void N3gaLocation::setHfcNodeId(oai::model::common::HfcNodeId const& value) {
-  m_HfcNodeId      = value;
+void N3gaLocation::setHfcNodeId(oai::model::common::HfcNodeId const &value) {
+  m_HfcNodeId = value;
   m_HfcNodeIdIsSet = true;
 }
-bool N3gaLocation::hfcNodeIdIsSet() const {
-  return m_HfcNodeIdIsSet;
-}
-void N3gaLocation::unsetHfcNodeId() {
-  m_HfcNodeIdIsSet = false;
-}
-std::string N3gaLocation::getGli() const {
-  return m_Gli;
-}
-void N3gaLocation::setGli(std::string const& value) {
-  m_Gli      = value;
+bool N3gaLocation::hfcNodeIdIsSet() const { return m_HfcNodeIdIsSet; }
+void N3gaLocation::unsetHfcNodeId() { m_HfcNodeIdIsSet = false; }
+std::string N3gaLocation::getGli() const { return m_Gli; }
+void N3gaLocation::setGli(std::string const &value) {
+  m_Gli = value;
   m_GliIsSet = true;
 }
-bool N3gaLocation::gliIsSet() const {
-  return m_GliIsSet;
-}
-void N3gaLocation::unsetGli() {
-  m_GliIsSet = false;
-}
+bool N3gaLocation::gliIsSet() const { return m_GliIsSet; }
+void N3gaLocation::unsetGli() { m_GliIsSet = false; }
 oai::model::common::LineType N3gaLocation::getW5gbanLineType() const {
   return m_W5gbanLineType;
 }
 void N3gaLocation::setW5gbanLineType(
-    oai::model::common::LineType const& value) {
-  m_W5gbanLineType      = value;
+    oai::model::common::LineType const &value) {
+  m_W5gbanLineType = value;
   m_W5gbanLineTypeIsSet = true;
 }
-bool N3gaLocation::w5gbanLineTypeIsSet() const {
-  return m_W5gbanLineTypeIsSet;
-}
-void N3gaLocation::unsetW5gbanLineType() {
-  m_W5gbanLineTypeIsSet = false;
-}
-std::string N3gaLocation::getGci() const {
-  return m_Gci;
-}
-void N3gaLocation::setGci(std::string const& value) {
-  m_Gci      = value;
+bool N3gaLocation::w5gbanLineTypeIsSet() const { return m_W5gbanLineTypeIsSet; }
+void N3gaLocation::unsetW5gbanLineType() { m_W5gbanLineTypeIsSet = false; }
+std::string N3gaLocation::getGci() const { return m_Gci; }
+void N3gaLocation::setGci(std::string const &value) {
+  m_Gci = value;
   m_GciIsSet = true;
 }
-bool N3gaLocation::gciIsSet() const {
-  return m_GciIsSet;
-}
-void N3gaLocation::unsetGci() {
-  m_GciIsSet = false;
-}
+bool N3gaLocation::gciIsSet() const { return m_GciIsSet; }
+void N3gaLocation::unsetGci() { m_GciIsSet = false; }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

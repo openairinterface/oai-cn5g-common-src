@@ -25,10 +25,10 @@ struct Ngap_ProtocolExtensionContainer;
 
 /* Ngap_ScheduledCommunicationTime */
 typedef struct Ngap_ScheduledCommunicationTime {
-  BIT_STRING_t* dayofWeek;                               /* OPTIONAL */
-  long* timeofDayStart;                                  /* OPTIONAL */
-  long* timeofDayEnd;                                    /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  BIT_STRING_t *dayofWeek;                               /* OPTIONAL */
+  long *timeofDayStart;                                  /* OPTIONAL */
+  long *timeofDayEnd;                                    /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

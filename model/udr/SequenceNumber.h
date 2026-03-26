@@ -36,7 +36,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class SequenceNumber {
- public:
+public:
   SequenceNumber();
   virtual ~SequenceNumber();
 
@@ -49,20 +49,20 @@ class SequenceNumber {
   ///
   /// </summary>
   std::string getSqnScheme() const;
-  void setSqnScheme(std::string const& value);
+  void setSqnScheme(std::string const &value);
   bool sqnSchemeIsSet() const;
   void unsetSqnScheme();
   /// <summary>
   ///
   /// </summary>
   std::string getSqn() const;
-  void setSqn(std::string const& value);
+  void setSqn(std::string const &value);
   bool sqnIsSet() const;
   void unsetSqn();
   /// <summary>
   ///
   /// </summary>
-  std::map<std::string, int32_t>& getLastIndexes();
+  std::map<std::string, int32_t> &getLastIndexes();
   void setLastIndexes(std::map<std::string, int32_t> const value);
   bool lastIndexesIsSet() const;
   void unsetLastIndexes();
@@ -77,14 +77,14 @@ class SequenceNumber {
   ///
   /// </summary>
   Sign getDifSign() const;
-  void setDifSign(Sign const& value);
+  void setDifSign(Sign const &value);
   bool difSignIsSet() const;
   void unsetDifSign();
 
-  friend void to_json(nlohmann::json& j, const SequenceNumber& o);
-  friend void from_json(const nlohmann::json& j, SequenceNumber& o);
+  friend void to_json(nlohmann::json &j, const SequenceNumber &o);
+  friend void from_json(const nlohmann::json &j, SequenceNumber &o);
 
- protected:
+protected:
   std::string m_SqnScheme;
   bool m_SqnSchemeIsSet;
   std::string m_Sqn;
@@ -97,6 +97,6 @@ class SequenceNumber {
   bool m_DifSignIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* SequenceNumber_H_ */

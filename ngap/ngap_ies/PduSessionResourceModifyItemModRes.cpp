@@ -14,8 +14,8 @@ PduSessionResourceModifyItemModRes::~PduSessionResourceModifyItemModRes() {}
 
 //------------------------------------------------------------------------------
 void PduSessionResourceModifyItemModRes::set(
-    const PduSessionId& pduSessionId,
-    const OCTET_STRING_t& pduSessionResourceModifyResponseTransfer) {
+    const PduSessionId &pduSessionId,
+    const OCTET_STRING_t &pduSessionResourceModifyResponseTransfer) {
   m_PduSessionId = pduSessionId;
   m_PduSessionResourceModifyResponseTransfer =
       pduSessionResourceModifyResponseTransfer;
@@ -23,8 +23,9 @@ void PduSessionResourceModifyItemModRes::set(
 
 //------------------------------------------------------------------------------
 bool PduSessionResourceModifyItemModRes::encode(
-    Ngap_PDUSessionResourceModifyItemModRes_t& pduSessionResourceItem) const {
-  if (!m_PduSessionId.encode(pduSessionResourceItem.pDUSessionID)) return false;
+    Ngap_PDUSessionResourceModifyItemModRes_t &pduSessionResourceItem) const {
+  if (!m_PduSessionId.encode(pduSessionResourceItem.pDUSessionID))
+    return false;
 
   pduSessionResourceItem.pDUSessionResourceModifyResponseTransfer =
       m_PduSessionResourceModifyResponseTransfer;
@@ -34,8 +35,9 @@ bool PduSessionResourceModifyItemModRes::encode(
 
 //------------------------------------------------------------------------------
 bool PduSessionResourceModifyItemModRes::decode(
-    const Ngap_PDUSessionResourceModifyItemModRes_t& pduSessionResourceItem) {
-  if (!m_PduSessionId.decode(pduSessionResourceItem.pDUSessionID)) return false;
+    const Ngap_PDUSessionResourceModifyItemModRes_t &pduSessionResourceItem) {
+  if (!m_PduSessionId.decode(pduSessionResourceItem.pDUSessionID))
+    return false;
 
   m_PduSessionResourceModifyResponseTransfer =
       pduSessionResourceItem.pDUSessionResourceModifyResponseTransfer;
@@ -45,11 +47,11 @@ bool PduSessionResourceModifyItemModRes::decode(
 
 //------------------------------------------------------------------------------
 void PduSessionResourceModifyItemModRes::get(
-    PduSessionId& pduSessionId,
-    OCTET_STRING_t& pduSessionResourceModifyResponseTransfer) const {
+    PduSessionId &pduSessionId,
+    OCTET_STRING_t &pduSessionResourceModifyResponseTransfer) const {
   pduSessionId = m_PduSessionId;
   pduSessionResourceModifyResponseTransfer =
       m_PduSessionResourceModifyResponseTransfer;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

@@ -19,10 +19,9 @@
 #ifndef PatchItem_H_
 #define PatchItem_H_
 
-#include <nlohmann/json.hpp>
-#include <string>
 #include "PatchOperation.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::common {
 
@@ -30,7 +29,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class PatchItem {
- public:
+public:
   PatchItem();
   virtual ~PatchItem() = default;
 
@@ -44,16 +43,16 @@ class PatchItem {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const PatchItem& rhs) const;
-  bool operator!=(const PatchItem& rhs) const;
+  bool operator==(const PatchItem &rhs) const;
+  bool operator!=(const PatchItem &rhs) const;
 
   /////////////////////////////////////////////
   /// PatchItem members
@@ -62,31 +61,31 @@ class PatchItem {
   ///
   /// </summary>
   oai::model::common::PatchOperation getOp() const;
-  void setOp(oai::model::common::PatchOperation const& value);
+  void setOp(oai::model::common::PatchOperation const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getPath() const;
-  void setPath(std::string const& value);
+  void setPath(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getFrom() const;
-  void setFrom(std::string const& value);
+  void setFrom(std::string const &value);
   bool fromIsSet() const;
   void unsetFrom();
   /// <summary>
   ///
   /// </summary>
   std::string getValue() const;
-  void setValue(std::string const& value);
+  void setValue(std::string const &value);
   bool valueIsSet() const;
   void unsetValue();
 
-  friend void to_json(nlohmann::json& j, const PatchItem& o);
-  friend void from_json(const nlohmann::json& j, PatchItem& o);
+  friend void to_json(nlohmann::json &j, const PatchItem &o);
+  friend void from_json(const nlohmann::json &j, PatchItem &o);
 
- protected:
+protected:
   oai::model::common::PatchOperation m_Op;
 
   std::string m_Path;
@@ -97,6 +96,6 @@ class PatchItem {
   bool m_ValueIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* PatchItem_H_ */

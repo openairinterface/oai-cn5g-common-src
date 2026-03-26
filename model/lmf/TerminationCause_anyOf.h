@@ -27,7 +27,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class TerminationCause_anyOf {
- public:
+public:
   TerminationCause_anyOf();
   virtual ~TerminationCause_anyOf() = default;
 
@@ -51,16 +51,16 @@ class TerminationCause_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const TerminationCause_anyOf& rhs) const;
-  bool operator!=(const TerminationCause_anyOf& rhs) const;
+  bool operator==(const TerminationCause_anyOf &rhs) const;
+  bool operator!=(const TerminationCause_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// TerminationCause_anyOf members
@@ -68,15 +68,15 @@ class TerminationCause_anyOf {
   TerminationCause_anyOf::eTerminationCause_anyOf getValue() const;
   void setValue(TerminationCause_anyOf::eTerminationCause_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const TerminationCause_anyOf& o);
-  friend void from_json(const nlohmann::json& j, TerminationCause_anyOf& o);
+  friend void to_json(nlohmann::json &j, const TerminationCause_anyOf &o);
+  friend void from_json(const nlohmann::json &j, TerminationCause_anyOf &o);
 
- protected:
+protected:
   TerminationCause_anyOf::eTerminationCause_anyOf m_value =
       TerminationCause_anyOf::eTerminationCause_anyOf::
           INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* TerminationCause_anyOf_H_ */

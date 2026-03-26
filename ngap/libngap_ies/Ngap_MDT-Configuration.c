@@ -8,8 +8,8 @@
 
 #include "Ngap_MDT-Configuration.h"
 
-#include "Ngap_MDT-Configuration-NR.h"
 #include "Ngap_MDT-Configuration-EUTRA.h"
+#include "Ngap_MDT-Configuration-NR.h"
 #include "Ngap_ProtocolExtensionContainer.h"
 asn_TYPE_member_t asn_MBR_Ngap_MDT_Configuration_1[] = {
     {ATF_POINTER,
@@ -70,7 +70,7 @@ asn_TYPE_member_t asn_MBR_Ngap_MDT_Configuration_1[] = {
      0, /* No default value */
      "iE-Extensions"},
 };
-static const int asn_MAP_Ngap_MDT_Configuration_oms_1[]            = {0, 1, 2};
+static const int asn_MAP_Ngap_MDT_Configuration_oms_1[] = {0, 1, 2};
 static const ber_tlv_tag_t asn_DEF_Ngap_MDT_Configuration_tags_1[] = {
     (ASN_TAG_CLASS_UNIVERSAL | (16 << 2))};
 static const asn_TYPE_tag2member_t asn_MAP_Ngap_MDT_Configuration_tag2el_1[] = {

@@ -22,11 +22,7 @@ NssaiInclusionMode::NssaiInclusionMode(uint8_t value)
 NssaiInclusionMode::~NssaiInclusionMode(){};
 
 //------------------------------------------------------------------------------
-void NssaiInclusionMode::SetValue(uint8_t value) {
-  SetValue(value);
-}
+void NssaiInclusionMode::SetValue(uint8_t value) { SetValue(value); }
 
 //------------------------------------------------------------------------------
-uint8_t NssaiInclusionMode::GetValue() const {
-  return GetValue();
-}
+uint8_t NssaiInclusionMode::GetValue() const { return GetValue(); }

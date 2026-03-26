@@ -29,7 +29,7 @@ typedef struct Ngap_CriticalityDiagnostics_IE_Item {
   Ngap_Criticality_t iECriticality;
   Ngap_ProtocolIE_ID_t iE_ID;
   Ngap_TypeOfError_t typeOfError;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

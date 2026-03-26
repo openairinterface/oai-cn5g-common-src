@@ -21,19 +21,19 @@ struct asn_ioc_cell_s;
 typedef struct asn_ioc_set_s {
   size_t rows_count;
   size_t columns_count;
-  const struct asn_ioc_cell_s* rows;
+  const struct asn_ioc_cell_s *rows;
 } asn_ioc_set_t;
 
 typedef struct asn_ioc_cell_s {
-  const char* field_name; /* Is equal to corresponding column_name */
+  const char *field_name; /* Is equal to corresponding column_name */
   enum {
     aioc__undefined = 0,
     aioc__value,
     aioc__type,
     aioc__open_type,
   } cell_kind;
-  struct asn_TYPE_descriptor_s* type_descriptor;
-  const void* value_sptr;
+  struct asn_TYPE_descriptor_s *type_descriptor;
+  const void *value_sptr;
   struct {
     size_t types_count;
     struct {

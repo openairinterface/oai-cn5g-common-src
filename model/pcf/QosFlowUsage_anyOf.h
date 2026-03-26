@@ -27,7 +27,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class QosFlowUsage_anyOf {
- public:
+public:
   QosFlowUsage_anyOf();
   virtual ~QosFlowUsage_anyOf() = default;
 
@@ -50,16 +50,16 @@ class QosFlowUsage_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const QosFlowUsage_anyOf& rhs) const;
-  bool operator!=(const QosFlowUsage_anyOf& rhs) const;
+  bool operator==(const QosFlowUsage_anyOf &rhs) const;
+  bool operator!=(const QosFlowUsage_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// QosFlowUsage_anyOf members
@@ -67,14 +67,14 @@ class QosFlowUsage_anyOf {
   QosFlowUsage_anyOf::eQosFlowUsage_anyOf getValue() const;
   void setValue(QosFlowUsage_anyOf::eQosFlowUsage_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const QosFlowUsage_anyOf& o);
-  friend void from_json(const nlohmann::json& j, QosFlowUsage_anyOf& o);
+  friend void to_json(nlohmann::json &j, const QosFlowUsage_anyOf &o);
+  friend void from_json(const nlohmann::json &j, QosFlowUsage_anyOf &o);
 
- protected:
+protected:
   QosFlowUsage_anyOf::eQosFlowUsage_anyOf m_value =
       QosFlowUsage_anyOf::eQosFlowUsage_anyOf::INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* QosFlowUsage_anyOf_H_ */

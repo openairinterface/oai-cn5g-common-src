@@ -19,8 +19,8 @@
 #ifndef Av5gAka_H_
 #define Av5gAka_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::amf {
 
@@ -28,7 +28,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class Av5gAka {
- public:
+public:
   Av5gAka();
   virtual ~Av5gAka();
 
@@ -41,22 +41,22 @@ class Av5gAka {
   ///
   /// </summary>
   std::string getRand() const;
-  void setRand(std::string const& value);
+  void setRand(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getHxresStar() const;
-  void setHxresStar(std::string const& value);
+  void setHxresStar(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getAutn() const;
-  void setAutn(std::string const& value);
+  void setAutn(std::string const &value);
 
-  friend void to_json(nlohmann::json& j, const Av5gAka& o);
-  friend void from_json(const nlohmann::json& j, Av5gAka& o);
+  friend void to_json(nlohmann::json &j, const Av5gAka &o);
+  friend void from_json(const nlohmann::json &j, Av5gAka &o);
 
- protected:
+protected:
   std::string m_Rand;
 
   std::string m_HxresStar;
@@ -64,6 +64,6 @@ class Av5gAka {
   std::string m_Autn;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* Av5gAka_H_ */

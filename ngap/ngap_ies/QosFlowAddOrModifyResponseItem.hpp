@@ -15,12 +15,12 @@ extern "C" {
 namespace oai::ngap {
 
 class QosFlowAddOrModifyResponseItem {
- public:
+public:
   QosFlowAddOrModifyResponseItem();
   virtual ~QosFlowAddOrModifyResponseItem();
 
-  void setQosFlowIdentifier(const QosFlowIdentifier& qosFlowIdentifier);
-  void getQosFlowIdentifier(QosFlowIdentifier& qosFlowIdentifier) const;
+  void setQosFlowIdentifier(const QosFlowIdentifier &qosFlowIdentifier);
+  void getQosFlowIdentifier(QosFlowIdentifier &qosFlowIdentifier) const;
 
   /*
   void setCurrentQoSParametersSetIndex(uint32_t&
@@ -28,15 +28,15 @@ class QosFlowAddOrModifyResponseItem {
   void getCurrentQoSParametersSetIndex(std::optional<uint32_t>&
                   currentQoSParametersSetIndex) const;
 */
-  bool encode(Ngap_QosFlowAddOrModifyResponseItem_t&) const;
-  bool decode(const Ngap_QosFlowAddOrModifyResponseItem_t&);
+  bool encode(Ngap_QosFlowAddOrModifyResponseItem_t &) const;
+  bool decode(const Ngap_QosFlowAddOrModifyResponseItem_t &);
 
- private:
-  QosFlowIdentifier m_QosFlowIdentifier;  // Mandatory
-                                          // std::optional<uint32_t>
+private:
+  QosFlowIdentifier m_QosFlowIdentifier; // Mandatory
+                                         // std::optional<uint32_t>
   //     m_CurrentQoSParametersSetIndex;  // Optional
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

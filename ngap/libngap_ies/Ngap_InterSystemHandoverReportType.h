@@ -35,9 +35,9 @@ struct Ngap_ProtocolIE_SingleContainer;
 typedef struct Ngap_InterSystemHandoverReportType {
   Ngap_InterSystemHandoverReportType_PR present;
   union Ngap_InterSystemHandoverReportType_u {
-    struct Ngap_TooearlyIntersystemHO* tooearlyIntersystemHO;
-    struct Ngap_IntersystemUnnecessaryHO* intersystemUnnecessaryHO;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_TooearlyIntersystemHO *tooearlyIntersystemHO;
+    struct Ngap_IntersystemUnnecessaryHO *intersystemUnnecessaryHO;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

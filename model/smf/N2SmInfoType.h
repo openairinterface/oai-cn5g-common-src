@@ -39,7 +39,7 @@ namespace oai::model::smf {
 /// HANDOVER_RES_ALLOC_FAIL - SECONDARY_RAT_USAGE
 /// </summary>
 class N2SmInfoType {
- public:
+public:
   N2SmInfoType();
   virtual ~N2SmInfoType();
 
@@ -48,12 +48,12 @@ class N2SmInfoType {
   /////////////////////////////////////////////
   /// N2SmInfoType members
 
-  friend void to_json(nlohmann::json& j, const N2SmInfoType& o);
-  friend void from_json(const nlohmann::json& j, N2SmInfoType& o);
+  friend void to_json(nlohmann::json &j, const N2SmInfoType &o);
+  friend void from_json(const nlohmann::json &j, N2SmInfoType &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* N2SmInfoType_H_ */

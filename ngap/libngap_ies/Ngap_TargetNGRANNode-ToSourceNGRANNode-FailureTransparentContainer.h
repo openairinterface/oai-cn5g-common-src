@@ -25,8 +25,8 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_TargetNGRANNode-ToSourceNGRANNode-FailureTransparentContainer */
 typedef struct
     Ngap_TargetNGRANNode_ToSourceNGRANNode_FailureTransparentContainer {
-  struct Ngap_Cell_CAGInformation* cell_CAGInformation;  /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_Cell_CAGInformation *cell_CAGInformation;  /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

@@ -19,11 +19,11 @@
 namespace oai::udr::model {
 
 OperatorSpecificDataContainer::OperatorSpecificDataContainer() {
-  m_DataType                = "";
-  m_DataTypeDefinition      = "";
+  m_DataType = "";
+  m_DataTypeDefinition = "";
   m_DataTypeDefinitionIsSet = false;
-  m_SupportedFeatures       = "";
-  m_SupportedFeaturesIsSet  = false;
+  m_SupportedFeatures = "";
+  m_SupportedFeaturesIsSet = false;
 }
 
 OperatorSpecificDataContainer::~OperatorSpecificDataContainer() {}
@@ -32,8 +32,8 @@ void OperatorSpecificDataContainer::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const OperatorSpecificDataContainer& o) {
-  j             = nlohmann::json();
+void to_json(nlohmann::json &j, const OperatorSpecificDataContainer &o) {
+  j = nlohmann::json();
   j["dataType"] = o.m_DataType;
   if (o.dataTypeDefinitionIsSet())
     j["dataTypeDefinition"] = o.m_DataTypeDefinition;
@@ -42,7 +42,7 @@ void to_json(nlohmann::json& j, const OperatorSpecificDataContainer& o) {
     j["supportedFeatures"] = o.m_SupportedFeatures;
 }
 
-void from_json(const nlohmann::json& j, OperatorSpecificDataContainer& o) {
+void from_json(const nlohmann::json &j, OperatorSpecificDataContainer &o) {
   j.at("dataType").get_to(o.m_DataType);
   if (j.find("dataTypeDefinition") != j.end()) {
     j.at("dataTypeDefinition").get_to(o.m_DataTypeDefinition);
@@ -58,15 +58,15 @@ void from_json(const nlohmann::json& j, OperatorSpecificDataContainer& o) {
 std::string OperatorSpecificDataContainer::getDataType() const {
   return m_DataType;
 }
-void OperatorSpecificDataContainer::setDataType(std::string const& value) {
+void OperatorSpecificDataContainer::setDataType(std::string const &value) {
   m_DataType = value;
 }
 std::string OperatorSpecificDataContainer::getDataTypeDefinition() const {
   return m_DataTypeDefinition;
 }
 void OperatorSpecificDataContainer::setDataTypeDefinition(
-    std::string const& value) {
-  m_DataTypeDefinition      = value;
+    std::string const &value) {
+  m_DataTypeDefinition = value;
   m_DataTypeDefinitionIsSet = true;
 }
 bool OperatorSpecificDataContainer::dataTypeDefinitionIsSet() const {
@@ -90,8 +90,8 @@ std::string OperatorSpecificDataContainer::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
 void OperatorSpecificDataContainer::setSupportedFeatures(
-    std::string const& value) {
-  m_SupportedFeatures      = value;
+    std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool OperatorSpecificDataContainer::supportedFeaturesIsSet() const {
@@ -101,4 +101,4 @@ void OperatorSpecificDataContainer::unsetSupportedFeatures() {
   m_SupportedFeaturesIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

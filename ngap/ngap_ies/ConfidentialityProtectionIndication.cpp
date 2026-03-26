@@ -13,12 +13,12 @@ ConfidentialityProtectionIndication::ConfidentialityProtectionIndication() {
 
 //------------------------------------------------------------------------------
 void ConfidentialityProtectionIndication::set(
-    const e_Ngap_ConfidentialityProtectionIndication& indication) {
+    const e_Ngap_ConfidentialityProtectionIndication &indication) {
   m_Indication = indication;
 }
 
 //------------------------------------------------------------------------------
-bool ConfidentialityProtectionIndication::get(long& indication) const {
+bool ConfidentialityProtectionIndication::get(long &indication) const {
   indication = m_Indication;
 
   return true;
@@ -26,7 +26,7 @@ bool ConfidentialityProtectionIndication::get(long& indication) const {
 
 //------------------------------------------------------------------------------
 bool ConfidentialityProtectionIndication::encode(
-    Ngap_ConfidentialityProtectionIndication_t& indication) const {
+    Ngap_ConfidentialityProtectionIndication_t &indication) const {
   indication = m_Indication;
 
   return true;
@@ -34,10 +34,10 @@ bool ConfidentialityProtectionIndication::encode(
 
 //------------------------------------------------------------------------------
 bool ConfidentialityProtectionIndication::decode(
-    const Ngap_ConfidentialityProtectionIndication_t& indication) {
+    const Ngap_ConfidentialityProtectionIndication_t &indication) {
   m_Indication = indication;
 
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

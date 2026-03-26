@@ -26,20 +26,16 @@ void GADShape::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const GADShape& o) {
-  j          = nlohmann::json();
+void to_json(nlohmann::json &j, const GADShape &o) {
+  j = nlohmann::json();
   j["shape"] = o.m_Shape;
 }
 
-void from_json(const nlohmann::json& j, GADShape& o) {
+void from_json(const nlohmann::json &j, GADShape &o) {
   j.at("shape").get_to(o.m_Shape);
 }
 
-SupportedGADShapes GADShape::getShape() const {
-  return m_Shape;
-}
-void GADShape::setShape(SupportedGADShapes const& value) {
-  m_Shape = value;
-}
+SupportedGADShapes GADShape::getShape() const { return m_Shape; }
+void GADShape::setShape(SupportedGADShapes const &value) { m_Shape = value; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

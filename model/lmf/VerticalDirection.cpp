@@ -13,8 +13,8 @@
 
 #include "VerticalDirection.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::lmf {
 
@@ -27,12 +27,12 @@ void VerticalDirection::validate() const {
   }
 }
 
-bool VerticalDirection::validate(std::stringstream& msg) const {
+bool VerticalDirection::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool VerticalDirection::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool VerticalDirection::validate(std::stringstream &msg,
+                                 const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "VerticalDirection" : pathPrefix;
@@ -46,33 +46,33 @@ bool VerticalDirection::validate(
   return success;
 }
 
-bool VerticalDirection::operator==(const VerticalDirection& rhs) const {
+bool VerticalDirection::operator==(const VerticalDirection &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool VerticalDirection::operator!=(const VerticalDirection& rhs) const {
+bool VerticalDirection::operator!=(const VerticalDirection &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const VerticalDirection& o) {
+void to_json(nlohmann::json &j, const VerticalDirection &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case VerticalDirection::eVerticalDirection::INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case VerticalDirection::eVerticalDirection::UPWARD:
-      j = "UPWARD";
-      break;
-    case VerticalDirection::eVerticalDirection::DOWNWARD:
-      j = "DOWNWARD";
-      break;
+  case VerticalDirection::eVerticalDirection::INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case VerticalDirection::eVerticalDirection::UPWARD:
+    j = "UPWARD";
+    break;
+  case VerticalDirection::eVerticalDirection::DOWNWARD:
+    j = "DOWNWARD";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, VerticalDirection& o) {
+void from_json(const nlohmann::json &j, VerticalDirection &o) {
   auto s = j.get<std::string>();
   if (s == "UPWARD") {
     o.setValue(VerticalDirection::eVerticalDirection::UPWARD);
@@ -94,4 +94,4 @@ void VerticalDirection::setValue(VerticalDirection::eVerticalDirection value) {
   m_value = value;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

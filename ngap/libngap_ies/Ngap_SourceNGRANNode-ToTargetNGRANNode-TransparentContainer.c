@@ -8,8 +8,8 @@
 
 #include "Ngap_SourceNGRANNode-ToTargetNGRANNode-TransparentContainer.h"
 
-#include "Ngap_PDUSessionResourceInformationList.h"
 #include "Ngap_E-RABInformationList.h"
+#include "Ngap_PDUSessionResourceInformationList.h"
 #include "Ngap_ProtocolExtensionContainer.h"
 static asn_TYPE_member_t
     asn_MBR_Ngap_SourceNGRANNode_ToTargetNGRANNode_TransparentContainer_1[] = {

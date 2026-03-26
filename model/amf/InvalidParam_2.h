@@ -19,8 +19,8 @@
 #ifndef InvalidParam_2_H_
 #define InvalidParam_2_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::amf {
 
@@ -28,7 +28,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class InvalidParam_2 {
- public:
+public:
   InvalidParam_2();
   virtual ~InvalidParam_2();
 
@@ -41,25 +41,25 @@ class InvalidParam_2 {
   ///
   /// </summary>
   std::string getParam() const;
-  void setParam(std::string const& value);
+  void setParam(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getReason() const;
-  void setReason(std::string const& value);
+  void setReason(std::string const &value);
   bool reasonIsSet() const;
   void unsetReason();
 
-  friend void to_json(nlohmann::json& j, const InvalidParam_2& o);
-  friend void from_json(const nlohmann::json& j, InvalidParam_2& o);
+  friend void to_json(nlohmann::json &j, const InvalidParam_2 &o);
+  friend void from_json(const nlohmann::json &j, InvalidParam_2 &o);
 
- protected:
+protected:
   std::string m_Param;
 
   std::string m_Reason;
   bool m_ReasonIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* InvalidParam_2_H_ */

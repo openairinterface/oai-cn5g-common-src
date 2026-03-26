@@ -19,8 +19,8 @@
 #ifndef Ambr_H_
 #define Ambr_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::common {
 
@@ -28,7 +28,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class Ambr {
- public:
+public:
   Ambr();
   virtual ~Ambr() = default;
 
@@ -42,16 +42,16 @@ class Ambr {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const Ambr& rhs) const;
-  bool operator!=(const Ambr& rhs) const;
+  bool operator==(const Ambr &rhs) const;
+  bool operator!=(const Ambr &rhs) const;
 
   /////////////////////////////////////////////
   /// Ambr members
@@ -60,22 +60,22 @@ class Ambr {
   ///
   /// </summary>
   std::string getUplink() const;
-  void setUplink(std::string const& value);
+  void setUplink(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getDownlink() const;
-  void setDownlink(std::string const& value);
+  void setDownlink(std::string const &value);
 
-  friend void to_json(nlohmann::json& j, const Ambr& o);
-  friend void from_json(const nlohmann::json& j, Ambr& o);
+  friend void to_json(nlohmann::json &j, const Ambr &o);
+  friend void from_json(const nlohmann::json &j, Ambr &o);
 
- protected:
+protected:
   std::string m_Uplink;
 
   std::string m_Downlink;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* Ambr_H_ */

@@ -20,8 +20,8 @@
 #define AddFlowDescriptionInfo_H_
 
 #include "FlowDirection.h"
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::pcf {
 
@@ -29,7 +29,7 @@ namespace oai::model::pcf {
 /// Contains additional flow description information.
 /// </summary>
 class AddFlowDescriptionInfo {
- public:
+public:
   AddFlowDescriptionInfo();
   virtual ~AddFlowDescriptionInfo() = default;
 
@@ -43,16 +43,16 @@ class AddFlowDescriptionInfo {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const AddFlowDescriptionInfo& rhs) const;
-  bool operator!=(const AddFlowDescriptionInfo& rhs) const;
+  bool operator==(const AddFlowDescriptionInfo &rhs) const;
+  bool operator!=(const AddFlowDescriptionInfo &rhs) const;
 
   /////////////////////////////////////////////
   /// AddFlowDescriptionInfo members
@@ -62,7 +62,7 @@ class AddFlowDescriptionInfo {
   /// packet in hexadecimal representation.
   /// </summary>
   std::string getSpi() const;
-  void setSpi(std::string const& value);
+  void setSpi(std::string const &value);
   bool spiIsSet() const;
   void unsetSpi();
   /// <summary>
@@ -70,21 +70,21 @@ class AddFlowDescriptionInfo {
   /// hexadecimal representation.
   /// </summary>
   std::string getFlowLabel() const;
-  void setFlowLabel(std::string const& value);
+  void setFlowLabel(std::string const &value);
   bool flowLabelIsSet() const;
   void unsetFlowLabel();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::FlowDirection getFlowDir() const;
-  void setFlowDir(oai::model::pcf::FlowDirection const& value);
+  void setFlowDir(oai::model::pcf::FlowDirection const &value);
   bool flowDirIsSet() const;
   void unsetFlowDir();
 
-  friend void to_json(nlohmann::json& j, const AddFlowDescriptionInfo& o);
-  friend void from_json(const nlohmann::json& j, AddFlowDescriptionInfo& o);
+  friend void to_json(nlohmann::json &j, const AddFlowDescriptionInfo &o);
+  friend void from_json(const nlohmann::json &j, AddFlowDescriptionInfo &o);
 
- protected:
+protected:
   std::string m_Spi;
   bool m_SpiIsSet;
   std::string m_FlowLabel;
@@ -93,6 +93,6 @@ class AddFlowDescriptionInfo {
   bool m_FlowDirIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* AddFlowDescriptionInfo_H_ */

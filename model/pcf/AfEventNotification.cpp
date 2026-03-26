@@ -19,8 +19,8 @@
 namespace oai::model::pcf {
 
 AfEventNotification::AfEventNotification() {
-  m_FlowsIsSet      = false;
-  m_RetryAfter      = 0;
+  m_FlowsIsSet = false;
+  m_RetryAfter = 0;
   m_RetryAfterIsSet = false;
 }
 
@@ -31,12 +31,12 @@ void AfEventNotification::validate() const {
   }
 }
 
-bool AfEventNotification::validate(std::stringstream& msg) const {
+bool AfEventNotification::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AfEventNotification::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool AfEventNotification::validate(std::stringstream &msg,
+                                   const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AfEventNotification" : pathPrefix;
@@ -46,17 +46,17 @@ bool AfEventNotification::validate(
     success = false;
   }
   if (flowsIsSet()) {
-    const std::vector<oai::model::pcf::Flows>& value = m_Flows;
-    const std::string currentValuePath               = _pathPrefix + ".flows";
+    const std::vector<oai::model::pcf::Flows> &value = m_Flows;
+    const std::string currentValuePath = _pathPrefix + ".flows";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::Flows& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::Flows &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -68,7 +68,7 @@ bool AfEventNotification::validate(
   }
 
   if (retryAfterIsSet()) {
-    const int32_t& value               = m_RetryAfter;
+    const int32_t &value = m_RetryAfter;
     const std::string currentValuePath = _pathPrefix + ".retryAfter";
 
     if (value < 0) {
@@ -80,7 +80,7 @@ bool AfEventNotification::validate(
   return success;
 }
 
-bool AfEventNotification::operator==(const AfEventNotification& rhs) const {
+bool AfEventNotification::operator==(const AfEventNotification &rhs) const {
   return
 
       (getEvent() == rhs.getEvent()) &&
@@ -95,18 +95,20 @@ bool AfEventNotification::operator==(const AfEventNotification& rhs) const {
           ;
 }
 
-bool AfEventNotification::operator!=(const AfEventNotification& rhs) const {
+bool AfEventNotification::operator!=(const AfEventNotification &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AfEventNotification& o) {
-  j          = nlohmann::json::object();
+void to_json(nlohmann::json &j, const AfEventNotification &o) {
+  j = nlohmann::json::object();
   j["event"] = o.m_Event;
-  if (o.flowsIsSet() || !o.m_Flows.empty()) j["flows"] = o.m_Flows;
-  if (o.retryAfterIsSet()) j["retryAfter"] = o.m_RetryAfter;
+  if (o.flowsIsSet() || !o.m_Flows.empty())
+    j["flows"] = o.m_Flows;
+  if (o.retryAfterIsSet())
+    j["retryAfter"] = o.m_RetryAfter;
 }
 
-void from_json(const nlohmann::json& j, AfEventNotification& o) {
+void from_json(const nlohmann::json &j, AfEventNotification &o) {
   j.at("event").get_to(o.m_Event);
   if (j.find("flows") != j.end()) {
     j.at("flows").get_to(o.m_Flows);
@@ -121,35 +123,25 @@ void from_json(const nlohmann::json& j, AfEventNotification& o) {
 oai::model::pcf::AfEvent AfEventNotification::getEvent() const {
   return m_Event;
 }
-void AfEventNotification::setEvent(oai::model::pcf::AfEvent const& value) {
+void AfEventNotification::setEvent(oai::model::pcf::AfEvent const &value) {
   m_Event = value;
 }
 std::vector<oai::model::pcf::Flows> AfEventNotification::getFlows() const {
   return m_Flows;
 }
 void AfEventNotification::setFlows(
-    std::vector<oai::model::pcf::Flows> const& value) {
-  m_Flows      = value;
+    std::vector<oai::model::pcf::Flows> const &value) {
+  m_Flows = value;
   m_FlowsIsSet = true;
 }
-bool AfEventNotification::flowsIsSet() const {
-  return m_FlowsIsSet;
-}
-void AfEventNotification::unsetFlows() {
-  m_FlowsIsSet = false;
-}
-int32_t AfEventNotification::getRetryAfter() const {
-  return m_RetryAfter;
-}
+bool AfEventNotification::flowsIsSet() const { return m_FlowsIsSet; }
+void AfEventNotification::unsetFlows() { m_FlowsIsSet = false; }
+int32_t AfEventNotification::getRetryAfter() const { return m_RetryAfter; }
 void AfEventNotification::setRetryAfter(int32_t const value) {
-  m_RetryAfter      = value;
+  m_RetryAfter = value;
   m_RetryAfterIsSet = true;
 }
-bool AfEventNotification::retryAfterIsSet() const {
-  return m_RetryAfterIsSet;
-}
-void AfEventNotification::unsetRetryAfter() {
-  m_RetryAfterIsSet = false;
-}
+bool AfEventNotification::retryAfterIsSet() const { return m_RetryAfterIsSet; }
+void AfEventNotification::unsetRetryAfter() { m_RetryAfterIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

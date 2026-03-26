@@ -19,19 +19,19 @@
 #ifndef NrfInfo_H_
 #define NrfInfo_H_
 
-#include "BsfInfo.h"
-#include "UdrInfo.h"
-#include "PcfInfo.h"
-#include "UdmInfo.h"
-#include "UpfInfo.h"
-#include "ChfInfo.h"
-#include "SmfInfo.h"
-#include <map>
-#include <vector>
 #include "AmfInfo.h"
 #include "AusfInfo.h"
+#include "BsfInfo.h"
+#include "ChfInfo.h"
 #include "NwdafInfo.h"
+#include "PcfInfo.h"
+#include "SmfInfo.h"
+#include "UdmInfo.h"
+#include "UdrInfo.h"
+#include "UpfInfo.h"
+#include <map>
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::nrf {
 
@@ -39,7 +39,7 @@ namespace oai::model::nrf {
 ///
 /// </summary>
 class NrfInfo {
- public:
+public:
   NrfInfo();
   virtual ~NrfInfo();
 
@@ -51,78 +51,78 @@ class NrfInfo {
   /// <summary>
   ///
   /// </summary>
-  std::map<std::string, UdrInfo>& getServedUdrInfo();
-  void setServedUdrInfo(std::map<std::string, UdrInfo> const& value);
+  std::map<std::string, UdrInfo> &getServedUdrInfo();
+  void setServedUdrInfo(std::map<std::string, UdrInfo> const &value);
   bool servedUdrInfoIsSet() const;
   void unsetServedUdrInfo();
   /// <summary>
   ///
   /// </summary>
-  std::map<std::string, UdmInfo>& getServedUdmInfo();
-  void setServedUdmInfo(std::map<std::string, UdmInfo> const& value);
+  std::map<std::string, UdmInfo> &getServedUdmInfo();
+  void setServedUdmInfo(std::map<std::string, UdmInfo> const &value);
   bool servedUdmInfoIsSet() const;
   void unsetServedUdmInfo();
   /// <summary>
   ///
   /// </summary>
-  std::map<std::string, AusfInfo>& getServedAusfInfo();
-  void setServedAusfInfo(std::map<std::string, AusfInfo> const& value);
+  std::map<std::string, AusfInfo> &getServedAusfInfo();
+  void setServedAusfInfo(std::map<std::string, AusfInfo> const &value);
   bool servedAusfInfoIsSet() const;
   void unsetServedAusfInfo();
   /// <summary>
   ///
   /// </summary>
-  std::map<std::string, AmfInfo>& getServedAmfInfo();
-  void setServedAmfInfo(std::map<std::string, AmfInfo> const& value);
+  std::map<std::string, AmfInfo> &getServedAmfInfo();
+  void setServedAmfInfo(std::map<std::string, AmfInfo> const &value);
   bool servedAmfInfoIsSet() const;
   void unsetServedAmfInfo();
   /// <summary>
   ///
   /// </summary>
-  std::map<std::string, SmfInfo>& getServedSmfInfo();
-  void setServedSmfInfo(std::map<std::string, SmfInfo> const& value);
+  std::map<std::string, SmfInfo> &getServedSmfInfo();
+  void setServedSmfInfo(std::map<std::string, SmfInfo> const &value);
   bool servedSmfInfoIsSet() const;
   void unsetServedSmfInfo();
   /// <summary>
   ///
   /// </summary>
-  std::map<std::string, UpfInfo>& getServedUpfInfo();
-  void setServedUpfInfo(std::map<std::string, UpfInfo> const& value);
+  std::map<std::string, UpfInfo> &getServedUpfInfo();
+  void setServedUpfInfo(std::map<std::string, UpfInfo> const &value);
   bool servedUpfInfoIsSet() const;
   void unsetServedUpfInfo();
   /// <summary>
   ///
   /// </summary>
-  std::map<std::string, PcfInfo>& getServedPcfInfo();
-  void setServedPcfInfo(std::map<std::string, PcfInfo> const& value);
+  std::map<std::string, PcfInfo> &getServedPcfInfo();
+  void setServedPcfInfo(std::map<std::string, PcfInfo> const &value);
   bool servedPcfInfoIsSet() const;
   void unsetServedPcfInfo();
   /// <summary>
   ///
   /// </summary>
-  std::map<std::string, BsfInfo>& getServedBsfInfo();
-  void setServedBsfInfo(std::map<std::string, BsfInfo> const& value);
+  std::map<std::string, BsfInfo> &getServedBsfInfo();
+  void setServedBsfInfo(std::map<std::string, BsfInfo> const &value);
   bool servedBsfInfoIsSet() const;
   void unsetServedBsfInfo();
   /// <summary>
   ///
   /// </summary>
-  std::map<std::string, ChfInfo>& getServedChfInfo();
-  void setServedChfInfo(std::map<std::string, ChfInfo> const& value);
+  std::map<std::string, ChfInfo> &getServedChfInfo();
+  void setServedChfInfo(std::map<std::string, ChfInfo> const &value);
   bool servedChfInfoIsSet() const;
   void unsetServedChfInfo();
   /// <summary>
   ///
   /// </summary>
-  std::map<std::string, NwdafInfo>& getServedNwdafInfo();
-  void setServedNwdafInfo(std::map<std::string, NwdafInfo> const& value);
+  std::map<std::string, NwdafInfo> &getServedNwdafInfo();
+  void setServedNwdafInfo(std::map<std::string, NwdafInfo> const &value);
   bool servedNwdafInfoIsSet() const;
   void unsetServedNwdafInfo();
 
-  friend void to_json(nlohmann::json& j, const NrfInfo& o);
-  friend void from_json(const nlohmann::json& j, NrfInfo& o);
+  friend void to_json(nlohmann::json &j, const NrfInfo &o);
+  friend void from_json(const nlohmann::json &j, NrfInfo &o);
 
- protected:
+protected:
   std::map<std::string, UdrInfo> m_ServedUdrInfo;
   bool m_ServedUdrInfoIsSet;
   std::map<std::string, UdmInfo> m_ServedUdmInfo;
@@ -145,6 +145,6 @@ class NrfInfo {
   bool m_ServedNwdafInfoIsSet;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* NrfInfo_H_ */

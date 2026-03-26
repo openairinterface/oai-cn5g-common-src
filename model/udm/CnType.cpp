@@ -30,30 +30,24 @@ void CnType::validate() const {
   }
 }
 
-bool CnType::validate(std::stringstream& msg) const {
+bool CnType::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool CnType::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool CnType::validate(std::stringstream &msg,
+                      const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "CnType" : pathPrefix;
 
   return success;
 }
 
-bool CnType::operator==(const CnType& rhs) const {
-  return true;
-}
+bool CnType::operator==(const CnType &rhs) const { return true; }
 
-bool CnType::operator!=(const CnType& rhs) const {
-  return !(*this == rhs);
-}
+bool CnType::operator!=(const CnType &rhs) const { return !(*this == rhs); }
 
-void to_json(nlohmann::json& j, const CnType& o) {
-  j = nlohmann::json();
-}
+void to_json(nlohmann::json &j, const CnType &o) { j = nlohmann::json(); }
 
-void from_json(const nlohmann::json& j, CnType& o) {}
+void from_json(const nlohmann::json &j, CnType &o) {}
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

@@ -20,8 +20,8 @@ namespace oai::model::common {
 
 Ipv6AddrRm::Ipv6AddrRm() {}
 
-bool Ipv6AddrRm::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool Ipv6AddrRm::validate(std::stringstream &msg,
+                          const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "Ipv6AddrRm" : pathPrefix;
@@ -29,7 +29,7 @@ bool Ipv6AddrRm::validate(
   return success;
 }
 
-void to_json(nlohmann::json& j, const Ipv6AddrRm& o) {
+void to_json(nlohmann::json &j, const Ipv6AddrRm &o) {
   j = nlohmann::json();
   if (o.m_Ipv6Addr.empty()) {
     j = nullptr;
@@ -38,10 +38,10 @@ void to_json(nlohmann::json& j, const Ipv6AddrRm& o) {
   }
 }
 
-void from_json(const nlohmann::json& j, Ipv6AddrRm& o) {
+void from_json(const nlohmann::json &j, Ipv6AddrRm &o) {
   if (!j.is_null()) {
     o.setIpv6Addr(j);
   }
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

@@ -20,7 +20,7 @@ namespace oai::udr::model {
 
 PlmnEcInfo::PlmnEcInfo() {
   m_EcRestrictionDataWbIsSet = false;
-  m_EcRestrictionDataNb      = false;
+  m_EcRestrictionDataNb = false;
   m_EcRestrictionDataNbIsSet = false;
 }
 
@@ -30,8 +30,8 @@ void PlmnEcInfo::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const PlmnEcInfo& o) {
-  j           = nlohmann::json();
+void to_json(nlohmann::json &j, const PlmnEcInfo &o) {
+  j = nlohmann::json();
   j["plmnId"] = o.m_PlmnId;
   if (o.ecRestrictionDataWbIsSet())
     j["ecRestrictionDataWb"] = o.m_EcRestrictionDataWb;
@@ -39,7 +39,7 @@ void to_json(nlohmann::json& j, const PlmnEcInfo& o) {
     j["ecRestrictionDataNb"] = o.m_EcRestrictionDataNb;
 }
 
-void from_json(const nlohmann::json& j, PlmnEcInfo& o) {
+void from_json(const nlohmann::json &j, PlmnEcInfo &o) {
   j.at("plmnId").get_to(o.m_PlmnId);
   if (j.find("ecRestrictionDataWb") != j.end()) {
     j.at("ecRestrictionDataWb").get_to(o.m_EcRestrictionDataWb);
@@ -51,17 +51,15 @@ void from_json(const nlohmann::json& j, PlmnEcInfo& o) {
   }
 }
 
-oai::model::common::PlmnId PlmnEcInfo::getPlmnId() const {
-  return m_PlmnId;
-}
-void PlmnEcInfo::setPlmnId(oai::model::common::PlmnId const& value) {
+oai::model::common::PlmnId PlmnEcInfo::getPlmnId() const { return m_PlmnId; }
+void PlmnEcInfo::setPlmnId(oai::model::common::PlmnId const &value) {
   m_PlmnId = value;
 }
 EcRestrictionDataWb PlmnEcInfo::getEcRestrictionDataWb() const {
   return m_EcRestrictionDataWb;
 }
-void PlmnEcInfo::setEcRestrictionDataWb(EcRestrictionDataWb const& value) {
-  m_EcRestrictionDataWb      = value;
+void PlmnEcInfo::setEcRestrictionDataWb(EcRestrictionDataWb const &value) {
+  m_EcRestrictionDataWb = value;
   m_EcRestrictionDataWbIsSet = true;
 }
 bool PlmnEcInfo::ecRestrictionDataWbIsSet() const {
@@ -70,11 +68,9 @@ bool PlmnEcInfo::ecRestrictionDataWbIsSet() const {
 void PlmnEcInfo::unsetEcRestrictionDataWb() {
   m_EcRestrictionDataWbIsSet = false;
 }
-bool PlmnEcInfo::isEcRestrictionDataNb() const {
-  return m_EcRestrictionDataNb;
-}
+bool PlmnEcInfo::isEcRestrictionDataNb() const { return m_EcRestrictionDataNb; }
 void PlmnEcInfo::setEcRestrictionDataNb(bool const value) {
-  m_EcRestrictionDataNb      = value;
+  m_EcRestrictionDataNb = value;
   m_EcRestrictionDataNbIsSet = true;
 }
 bool PlmnEcInfo::ecRestrictionDataNbIsSet() const {
@@ -84,4 +80,4 @@ void PlmnEcInfo::unsetEcRestrictionDataNb() {
   m_EcRestrictionDataNbIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

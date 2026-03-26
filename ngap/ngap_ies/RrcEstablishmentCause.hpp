@@ -12,20 +12,20 @@ extern "C" {
 namespace oai::ngap {
 
 class RrcEstablishmentCause {
- public:
+public:
   RrcEstablishmentCause();
   virtual ~RrcEstablishmentCause();
 
-  void set(const e_Ngap_RRCEstablishmentCause& cause);
+  void set(const e_Ngap_RRCEstablishmentCause &cause);
   int get() const;
 
-  bool encode(Ngap_RRCEstablishmentCause_t&) const;
+  bool encode(Ngap_RRCEstablishmentCause_t &) const;
   bool decode(Ngap_RRCEstablishmentCause_t);
 
- private:
+private:
   int m_Cause;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

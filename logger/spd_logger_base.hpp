@@ -2,7 +2,6 @@
  * SPDX-License-Identifier: LicenseRef-CSSL-1.0
  */
 
-
 #pragma once
 
 #include <cstdarg>
@@ -29,20 +28,18 @@ namespace oai::logger {
  * safe printf-style formatting
  */
 class spd_logger {
- public:
-  spd_logger(
-      const std::string& nf_name, const std::string& name, bool log_stdout,
-      bool log_rot_file);
+public:
+  spd_logger(const std::string &nf_name, const std::string &name,
+             bool log_stdout, bool log_rot_file);
 
   void set_level(spdlog::level::level_enum level);
   bool should_log(spdlog::level::level_enum level) {
     return logger->should_log(level);
   }
 
-  template<typename... T>
-  void log_printf(
-      const spdlog::level::level_enum& lvl, const std::string& fmt,
-      const T&... args) const {
+  template <typename... T>
+  void log_printf(const spdlog::level::level_enum &lvl, const std::string &fmt,
+                  const T &...args) const {
     // to prevent "expensive" string formatting
     if (!logger->should_log(lvl)) {
       return;
@@ -51,16 +48,16 @@ class spd_logger {
     try {
       std::string format = fmt::sprintf(fmt, args...);
       logger->log(lvl, "{}", format);
-    } catch (fmt::format_error& err) {
+    } catch (fmt::format_error &err) {
       // It would be better to not catch here, but keep it here for now
       // to ensure that we don't break when we replace the logger
       logger->error("Format error in format string {}: {}", fmt, err.what());
-    } catch (std::exception& e) {
+    } catch (std::exception &e) {
       logger->error("Format error in format string {}", e.what());
     }
   }
 
- private:
+private:
   std::shared_ptr<spdlog::logger> logger;
 };
-}  // namespace oai::logger
+} // namespace oai::logger

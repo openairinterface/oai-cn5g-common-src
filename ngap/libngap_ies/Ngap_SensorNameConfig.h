@@ -56,7 +56,7 @@ typedef struct Ngap_SensorNameConfig {
     long uncompensatedBarometricConfig;
     long ueSpeedConfig;
     long ueOrientationConfig;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

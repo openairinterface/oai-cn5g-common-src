@@ -12,9 +12,8 @@
 asn_TYPE_member_t asn_MBR_Ngap_RANStatusTransfer_TransparentContainer_1[] = {
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_RANStatusTransfer_TransparentContainer,
-         dRBsSubjectToStatusTransferList),
+     offsetof(struct Ngap_RANStatusTransfer_TransparentContainer,
+              dRBsSubjectToStatusTransferList),
      (ASN_TAG_CLASS_CONTEXT | (0 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_DRBsSubjectToStatusTransferList,
@@ -33,8 +32,8 @@ asn_TYPE_member_t asn_MBR_Ngap_RANStatusTransfer_TransparentContainer_1[] = {
      "dRBsSubjectToStatusTransferList"},
     {ATF_POINTER,
      1,
-     offsetof(
-         struct Ngap_RANStatusTransfer_TransparentContainer, iE_Extensions),
+     offsetof(struct Ngap_RANStatusTransfer_TransparentContainer,
+              iE_Extensions),
      (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_ProtocolExtensionContainer_9666P216,

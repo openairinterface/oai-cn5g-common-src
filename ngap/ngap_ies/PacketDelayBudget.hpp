@@ -12,20 +12,20 @@ extern "C" {
 namespace oai::ngap {
 
 class PacketDelayBudget {
- public:
+public:
   PacketDelayBudget();
   virtual ~PacketDelayBudget();
 
-  void set(const long& value);
-  bool get(long& value) const;
+  void set(const long &value);
+  bool get(long &value) const;
 
-  bool encode(Ngap_PacketDelayBudget_t&) const;
-  bool decode(const Ngap_PacketDelayBudget_t&);
+  bool encode(Ngap_PacketDelayBudget_t &) const;
+  bool decode(const Ngap_PacketDelayBudget_t &);
 
- private:
+private:
   long m_PacketDelayBudget;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

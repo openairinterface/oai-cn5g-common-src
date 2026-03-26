@@ -10,9 +10,8 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 AuthenticationFailure::AuthenticationFailure()
-    : ie_header_(
-          k5gsMobilityManagementMessages, kPlain5gsMessage,
-          kAuthenticationFailure) {
+    : ie_header_(k5gsMobilityManagementMessages, kPlain5gsMessage,
+                 kAuthenticationFailure) {
   ie_authentication_failure_parameter_ = std::nullopt;
 }
 
@@ -65,14 +64,14 @@ bool AuthenticationFailure::GetAuthenticationFailureParameter(uint8_t
 
 //------------------------------------------------------------------------------
 void AuthenticationFailure::SetAuthenticationFailureParameter(
-    const bstring& value) {
+    const bstring &value) {
   ie_authentication_failure_parameter_ =
       std::make_optional<AuthenticationFailureParameter>(value);
 }
 
 //------------------------------------------------------------------------------
 bool AuthenticationFailure::GetAuthenticationFailureParameter(
-    bstring& value) const {
+    bstring &value) const {
   if (ie_authentication_failure_parameter_.has_value()) {
     ie_authentication_failure_parameter_.value().GetValue(value);
     return true;
@@ -82,13 +81,14 @@ bool AuthenticationFailure::GetAuthenticationFailureParameter(
 }
 
 //------------------------------------------------------------------------------
-int AuthenticationFailure::Encode(uint8_t* buf, int len) {
+int AuthenticationFailure::Encode(uint8_t *buf, int len) {
   oai::logger::logger_common::nas().debug(
       "Encoding AuthenticationFailure message");
 
-  if (!Validate(len)) return KEncodeDecodeError;
+  if (!Validate(len))
+    return KEncodeDecodeError;
 
-  int encoded_size    = 0;
+  int encoded_size = 0;
   int encoded_ie_size = 0;
 
   // Header
@@ -105,8 +105,8 @@ int AuthenticationFailure::Encode(uint8_t* buf, int len) {
   }
 
   // Authentication Failure Parameter
-  if ((encoded_ie_size = NasHelper::Encode(
-           ie_authentication_failure_parameter_, buf, len, encoded_size)) ==
+  if ((encoded_ie_size = NasHelper::Encode(ie_authentication_failure_parameter_,
+                                           buf, len, encoded_size)) ==
       KEncodeDecodeError) {
     return KEncodeDecodeError;
   }
@@ -117,11 +117,11 @@ int AuthenticationFailure::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int AuthenticationFailure::Decode(uint8_t* buf, int len) {
+int AuthenticationFailure::Decode(uint8_t *buf, int len) {
   oai::logger::logger_common::nas().debug(
       "Decoding AuthenticationFailure message");
 
-  int decoded_size    = 0;
+  int decoded_size = 0;
   int decoded_ie_size = 0;
 
   // Header
@@ -147,22 +147,22 @@ int AuthenticationFailure::Decode(uint8_t* buf, int len) {
   while ((octet != 0x0)) {
     oai::logger::logger_common::nas().debug("Decoding IEI 0x%x", octet);
     switch (octet) {
-      case kIeiAuthenticationFailureParameter: {
-        if ((decoded_ie_size = NasHelper::Decode(
-                 ie_authentication_failure_parameter_, buf, len, decoded_size,
-                 true)) == KEncodeDecodeError) {
-          return KEncodeDecodeError;
-        }
-        DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
-      } break;
+    case kIeiAuthenticationFailureParameter: {
+      if ((decoded_ie_size =
+               NasHelper::Decode(ie_authentication_failure_parameter_, buf, len,
+                                 decoded_size, true)) == KEncodeDecodeError) {
+        return KEncodeDecodeError;
+      }
+      DECODE_U8_VALUE(buf, octet, decoded_size, len);
+      oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
+    } break;
 
-      default: {
-        oai::logger::logger_common::nas().warn(
-            "Unknown IEI 0x%x, stop decoding...", octet);
-        // Stop decoding
-        octet = 0x00;
-      } break;
+    default: {
+      oai::logger::logger_common::nas().warn(
+          "Unknown IEI 0x%x, stop decoding...", octet);
+      // Stop decoding
+      octet = 0x00;
+    } break;
     }
   }
 

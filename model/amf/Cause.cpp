@@ -23,19 +23,11 @@ void Cause::validate() {
   // TODO: implement validation
 }
 
-std::string Cause::getValue() const {
-  return cause;
-}
-void Cause::setValue(const std::string& value) {
-  cause = value;
-}
+std::string Cause::getValue() const { return cause; }
+void Cause::setValue(const std::string &value) { cause = value; }
 
-void to_json(nlohmann::json& j, const Cause& o) {
-  j = nlohmann::json();
-}
+void to_json(nlohmann::json &j, const Cause &o) { j = nlohmann::json(); }
 
-void from_json(const nlohmann::json& j, Cause& o) {
-  j.get_to(o.cause);
-}
+void from_json(const nlohmann::json &j, Cause &o) { j.get_to(o.cause); }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

@@ -21,7 +21,7 @@ extern "C" {
 /* Dependencies */
 typedef enum Ngap_Pre_emptionCapability {
   Ngap_Pre_emptionCapability_shall_not_trigger_pre_emption = 0,
-  Ngap_Pre_emptionCapability_may_trigger_pre_emption       = 1
+  Ngap_Pre_emptionCapability_may_trigger_pre_emption = 1
   /*
    * Enumeration is extensible
    */

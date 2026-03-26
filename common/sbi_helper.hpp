@@ -22,16 +22,16 @@ namespace oai::common::sbi {
 
 using namespace oai::logger;
 
-constexpr auto kNumberOfFirstConnectionRetries       = 10;
-constexpr auto kNumberOfConnectionRetries            = 3;
-constexpr auto kNfDefaultCurlTimeout                 = 1000;  // in Millisecond
-constexpr auto kNumberOfCurlRetries                  = 3;
-constexpr auto kBaseTimeIntervalBetweenCurlRetries   = 1000;  // in microsecond
-constexpr auto kNumberOfNfRegisterRetries            = 3;
-constexpr auto kNumberOfNfDeregisterRetries          = 3;
-constexpr auto kTimeIntervalBetweenNfRegisterRetries = 1;    // in seconds
-constexpr auto kTimeIntervalBetweenNfDeregisterRetries = 1;  // in seconds
-constexpr auto kNfDefaultHttpRequestTimeout = 1000;          // in Millisecond
+constexpr auto kNumberOfFirstConnectionRetries = 10;
+constexpr auto kNumberOfConnectionRetries = 3;
+constexpr auto kNfDefaultCurlTimeout = 1000; // in Millisecond
+constexpr auto kNumberOfCurlRetries = 3;
+constexpr auto kBaseTimeIntervalBetweenCurlRetries = 1000; // in microsecond
+constexpr auto kNumberOfNfRegisterRetries = 3;
+constexpr auto kNumberOfNfDeregisterRetries = 3;
+constexpr auto kTimeIntervalBetweenNfRegisterRetries = 1;   // in seconds
+constexpr auto kTimeIntervalBetweenNfDeregisterRetries = 1; // in seconds
+constexpr auto kNfDefaultHttpRequestTimeout = 1000;         // in Millisecond
 
 constexpr auto kDefaultSbiApiVersion = "v1";
 
@@ -46,27 +46,27 @@ typedef struct interface_cfg_s {
 
   nlohmann::json to_json() const {
     nlohmann::json json_data = {};
-    json_data["if_name"]     = this->if_name;
-    json_data["addr4"]       = inet_ntoa(this->addr4);
-    json_data["network4"]    = inet_ntoa(this->network4);
+    json_data["if_name"] = this->if_name;
+    json_data["addr4"] = inet_ntoa(this->addr4);
+    json_data["network4"] = inet_ntoa(this->network4);
     char str_addr6[INET6_ADDRSTRLEN];
     inet_ntop(AF_INET6, &this->addr6, str_addr6, sizeof(str_addr6));
     json_data["addr6"] = str_addr6;
-    json_data["mtu"]   = this->mtu;
-    json_data["port"]  = this->port;
+    json_data["mtu"] = this->mtu;
+    json_data["port"] = this->port;
     if (api_version.has_value())
       json_data["api_version"] = this->api_version.value();
     return json_data;
   }
 
-  void from_json(nlohmann::json& json_data) {
+  void from_json(nlohmann::json &json_data) {
     try {
       if (json_data.find("if_name") != json_data.end()) {
         this->if_name = json_data["if_name"].get<std::string>();
       }
       if (json_data.find("addr4") != json_data.end()) {
         std::string addr4_str = {};
-        addr4_str             = json_data["addr4"].get<std::string>();
+        addr4_str = json_data["addr4"].get<std::string>();
         if (boost::iequals(addr4_str, "read")) {
           if (oai::utils::get_inet_addr_infos_from_iface(
                   this->if_name, this->addr4, this->network4, this->mtu)) {
@@ -76,14 +76,14 @@ typedef struct interface_cfg_s {
             return;
           }
         } else {
-          IPV4_STR_ADDR_TO_INADDR(
-              oai::utils::trim(addr4_str).c_str(), this->addr4,
-              "BAD IPv4 ADDRESS FORMAT FOR INTERFACE !");
+          IPV4_STR_ADDR_TO_INADDR(oai::utils::trim(addr4_str).c_str(),
+                                  this->addr4,
+                                  "BAD IPv4 ADDRESS FORMAT FOR INTERFACE !");
           if (json_data.find("network4") != json_data.end()) {
             std::string network4_str = json_data["network4"].get<std::string>();
-            IPV4_STR_ADDR_TO_INADDR(
-                oai::utils::trim(network4_str).c_str(), this->network4,
-                "BAD IPv4 ADDRESS FORMAT FOR INTERFACE !");
+            IPV4_STR_ADDR_TO_INADDR(oai::utils::trim(network4_str).c_str(),
+                                    this->network4,
+                                    "BAD IPv4 ADDRESS FORMAT FOR INTERFACE !");
           }
           // TODO: addr6
           if (json_data.find("mtu") != json_data.end()) {
@@ -98,7 +98,7 @@ typedef struct interface_cfg_s {
           }
         }
       }
-    } catch (std::exception& e) {
+    } catch (std::exception &e) {
       logger_common::common().error("%s", e.what());
     }
   }
@@ -118,12 +118,12 @@ typedef struct nf_addr_s {
 
   nlohmann::json to_json() const {
     nlohmann::json json_data = {};
-    json_data["uri_root"]    = this->uri_root;
+    json_data["uri_root"] = this->uri_root;
     json_data["api_version"] = this->api_version;
     return json_data;
   }
 
-  void from_json(nlohmann::json& json_data) {
+  void from_json(nlohmann::json &json_data) {
     try {
       if (json_data.find("uri_root") != json_data.end()) {
         this->uri_root = json_data["uri_root"].get<std::string>();
@@ -131,7 +131,7 @@ typedef struct nf_addr_s {
       if (json_data.find("api_version") != json_data.end()) {
         this->api_version = json_data["api_version"].get<std::string>();
       }
-    } catch (std::exception& e) {
+    } catch (std::exception &e) {
       logger_common::common().error("%s", e.what());
     }
   }
@@ -139,9 +139,9 @@ typedef struct nf_addr_s {
 } nf_addr_t;
 
 class sbi_helper {
- public:
+public:
   // AMF: Communication Service
-  static inline const std::string AmfCommBase          = "/namf-comm/";
+  static inline const std::string AmfCommBase = "/namf-comm/";
   static inline const std::string AmfCommPathUeContext = "/ue-contexts/";
   static inline const std::string AmfCommPathUeContextContextId =
       "/ue-contexts/:ueContextId";
@@ -177,7 +177,7 @@ class sbi_helper {
   static inline const std::string AmfCommPathSubscriptionsSubscriptionId =
       "/subscriptions/:subscriptionId";
   // AMF: Event Exposure Service
-  static inline const std::string AmfEvtsBase              = "/namf-evts/";
+  static inline const std::string AmfEvtsBase = "/namf-evts/";
   static inline const std::string AmfEvtsPathSubscriptions = "/subscriptions";
   static inline const std::string AmfEvtsPathSubscriptionsSubscriptionId =
       "/subscriptions/:subscriptionId";
@@ -193,7 +193,7 @@ class sbi_helper {
       "/determine-location";
   // TODO: AMF: Mobile Terminated Service
   // AMF Configuration Service
-  static inline const std::string AmfConfBase              = "/namf-oai/";
+  static inline const std::string AmfConfBase = "/namf-oai/";
   static inline const std::string AmfConfPathConfiguration = "/configuration/";
   // AMF Status Notify
   static inline const std::string AmfStatusNotifBase = "/namf-status-notify/";
@@ -224,12 +224,12 @@ class sbi_helper {
   static inline const std::string NrfNfmBase = "/nnrf-nfm/";
   static inline const std::string NrfNfmPathNfInstancesNfInstanceId =
       "/nf-instances/:nfInstanceID";
-  static inline const std::string NrfNfmPathNfInstances   = "/nf-instances";
+  static inline const std::string NrfNfmPathNfInstances = "/nf-instances";
   static inline const std::string NrfNfmPathSubscriptions = "/subscriptions";
   static inline const std::string NrfNfmPathSubscriptionsSubscriptionId =
       "/subscriptions/:subscriptionID";
   // NRF: NF Discovery Service
-  static inline const std::string NrfDiscBase            = "/nnrf-disc/";
+  static inline const std::string NrfDiscBase = "/nnrf-disc/";
   static inline const std::string NrfDiscPathNfInstances = "/nf-instances";
   static inline const std::string NrfDiscPathSearchesSearchId =
       "/searches/:searchId";
@@ -296,9 +296,9 @@ class sbi_helper {
   // TODO: SMF: Session Management Event Exposure Service
 
   // UDM: Subscriber Data Management
-  static inline const std::string UdmSdmBase           = "/nudm-sdm/";
-  static inline const std::string UdmSdmPathSupi       = "/:supi";
-  static inline const std::string UdmSdmPathSupiNssai  = "/:supi/nssai";
+  static inline const std::string UdmSdmBase = "/nudm-sdm/";
+  static inline const std::string UdmSdmPathSupi = "/:supi";
+  static inline const std::string UdmSdmPathSupiNssai = "/:supi/nssai";
   static inline const std::string UdmSdmPathSupiAmData = "/:supi/am-data";
   static inline const std::string UdmSdmPathSupiSmfSelData =
       "/:supi/smf-select-data";
@@ -308,7 +308,7 @@ class sbi_helper {
       "/:supi/ue-context-in-smsf-data";
   static inline const std::string UdmSdmPathSupiTraceConfigData =
       "/:supi/trace-data";
-  static inline const std::string UdmSdmPathSupiSmData  = "/:supi/sm-data";
+  static inline const std::string UdmSdmPathSupiSmData = "/:supi/sm-data";
   static inline const std::string UdmSdmPathSupiSmsData = "/:supi/sms-data";
   static inline const std::string UdmSdmPathSupiSmsMngtData =
       "/:supi/sms-mng-data";
@@ -620,7 +620,7 @@ class sbi_helper {
       "/exposure-data/subs-to-notify/:subId";
 
   // UDR: Configuration
-  static inline const std::string UdrConfBase              = "/nudr-oai/";
+  static inline const std::string UdrConfBase = "/nudr-oai/";
   static inline const std::string UdrConfPathConfiguration = "/configuration/";
 
   // UDSF: Data Repository
@@ -669,8 +669,8 @@ class sbi_helper {
    * @param [std::string& ] api_root: NRF's API Root
    * @return void
    */
-  static void get_nrf_nfm_api_root(
-      const nf_addr_t& nrf_addr, std::string& api_root);
+  static void get_nrf_nfm_api_root(const nf_addr_t &nrf_addr,
+                                   std::string &api_root);
 
   /*
    * Get NRF NF Register URI
@@ -679,9 +679,9 @@ class sbi_helper {
    * @param [std::string& ] uri: NRF NF Register URI
    * @return void
    */
-  static void get_nrf_nf_instance_uri(
-      const nf_addr_t& nrf_addr, const std::string& nf_instance,
-      std::string& uri);
+  static void get_nrf_nf_instance_uri(const nf_addr_t &nrf_addr,
+                                      const std::string &nf_instance,
+                                      std::string &uri);
 
   /*
    * Get NRF Disc API Root
@@ -689,8 +689,8 @@ class sbi_helper {
    * @param [std::string& ] api_root: NRF Discovery API Root
    * @return void
    */
-  static void get_nrf_disc_api_root(
-      const nf_addr_t& nrf_addr, std::string& api_root);
+  static void get_nrf_disc_api_root(const nf_addr_t &nrf_addr,
+                                    std::string &api_root);
 
   /*
    * Get NRF NF Discovery SearchNFInstances URI
@@ -698,8 +698,8 @@ class sbi_helper {
    * @param [std::string& ] uri: NRF SearchNFInstances URI
    * @return void
    */
-  static void get_nrf_disc_search_nf_instances_uri(
-      const nf_addr_t& nrf_addr, std::string& uri);
+  static void get_nrf_disc_search_nf_instances_uri(const nf_addr_t &nrf_addr,
+                                                   std::string &uri);
 
   /*
    * Get FMT format from an input string (3GPP format)
@@ -707,7 +707,7 @@ class sbi_helper {
    * @param [std::string& ] output_str: Output string
    * @return void
    */
-  static void get_fmt_format_form(
-      const std::string& input_str, std::string& output_str);
+  static void get_fmt_format_form(const std::string &input_str,
+                                  std::string &output_str);
 };
-}  // namespace oai::common::sbi
+} // namespace oai::common::sbi

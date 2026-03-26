@@ -13,7 +13,7 @@ namespace oai::ngap {
 HandoverResourceAllocationUnsuccessfulTransfer::
     HandoverResourceAllocationUnsuccessfulTransfer() {
   m_HandoverResourceAllocationUnsuccessfulTransferIe =
-      (Ngap_HandoverResourceAllocationUnsuccessfulTransfer_t*) calloc(
+      (Ngap_HandoverResourceAllocationUnsuccessfulTransfer_t *)calloc(
           1, sizeof(Ngap_HandoverResourceAllocationUnsuccessfulTransfer_t));
 }
 
@@ -108,8 +108,8 @@ long HandoverResourceAllocationUnsuccessfulTransfer::getCause() const {
 }
 
 //------------------------------------------------------------------------------
-int HandoverResourceAllocationUnsuccessfulTransfer::encode(
-    uint8_t* buf, int bufSize) {
+int HandoverResourceAllocationUnsuccessfulTransfer::encode(uint8_t *buf,
+                                                           int bufSize) {
   ngap_utils::print_asn_msg(
       &asn_DEF_Ngap_HandoverResourceAllocationUnsuccessfulTransfer,
       m_HandoverResourceAllocationUnsuccessfulTransferIe);
@@ -121,13 +121,13 @@ int HandoverResourceAllocationUnsuccessfulTransfer::encode(
 }
 
 //------------------------------------------------------------------------------
-bool HandoverResourceAllocationUnsuccessfulTransfer::decode(
-    uint8_t* buf, int bufSize) {
-  asn_dec_rval_t rc = asn_decode(
-      NULL, ATS_ALIGNED_CANONICAL_PER,
-      &asn_DEF_Ngap_HandoverResourceAllocationUnsuccessfulTransfer,
-      (void**) &m_HandoverResourceAllocationUnsuccessfulTransferIe, buf,
-      bufSize);
+bool HandoverResourceAllocationUnsuccessfulTransfer::decode(uint8_t *buf,
+                                                            int bufSize) {
+  asn_dec_rval_t rc =
+      asn_decode(NULL, ATS_ALIGNED_CANONICAL_PER,
+                 &asn_DEF_Ngap_HandoverResourceAllocationUnsuccessfulTransfer,
+                 (void **)&m_HandoverResourceAllocationUnsuccessfulTransferIe,
+                 buf, bufSize);
 
   if (rc.code == RC_OK) {
     oai::logger::logger_common::ngap().debug("Decoded successfully");
@@ -139,8 +139,8 @@ bool HandoverResourceAllocationUnsuccessfulTransfer::decode(
     return false;
   }
 
-  oai::logger::logger_common::ngap().debug(
-      "rc.consumed to decode %d", rc.consumed);
+  oai::logger::logger_common::ngap().debug("rc.consumed to decode %d",
+                                           rc.consumed);
   // asn_fprint(stderr,
   // &asn_DEF_Ngap_HandoverResourceAllocationUnsuccessfulTransfer,
   // m_HandoverResourceAllocationUnsuccessfulTransferIe);
@@ -153,4 +153,4 @@ bool HandoverResourceAllocationUnsuccessfulTransfer::decode(
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

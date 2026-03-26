@@ -15,30 +15,30 @@
 namespace oai::ngap {
 
 class NgResetAckMsg : public NgapMessage {
- public:
+public:
   NgResetAckMsg();
   virtual ~NgResetAckMsg();
 
   void initialize();
 
   void setUeAssociatedLogicalNgConnectionList(
-      const std::vector<UeAssociatedLogicalNgConnectionItem>& list);
+      const std::vector<UeAssociatedLogicalNgConnectionItem> &list);
   void getUeAssociatedLogicalNgConnectionList(
-      std::vector<UeAssociatedLogicalNgConnectionItem>& list) const;
+      std::vector<UeAssociatedLogicalNgConnectionItem> &list) const;
 
   void addUeAssociatedLogicalNgConnectionList();
 
-  bool decode(Ngap_NGAP_PDU_t* ngapMsgPdu) override;
+  bool decode(Ngap_NGAP_PDU_t *ngapMsgPdu) override;
   // TODO: CriticalityDiagnostics
 
- private:
-  Ngap_NGResetAcknowledge_t* m_NgResetAckIes;
+private:
+  Ngap_NGResetAcknowledge_t *m_NgResetAckIes;
 
   std::optional<UeAssociatedLogicalNgConnectionList>
-      m_UeAssociatedLogicalNgConnectionList;                // Optional
-  Ngap_CriticalityDiagnostics_t* m_CriticalityDiagnostics;  // TODO: Optional
+      m_UeAssociatedLogicalNgConnectionList;               // Optional
+  Ngap_CriticalityDiagnostics_t *m_CriticalityDiagnostics; // TODO: Optional
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

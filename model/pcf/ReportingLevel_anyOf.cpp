@@ -13,8 +13,8 @@
 
 #include "ReportingLevel_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::pcf {
 
@@ -27,12 +27,12 @@ void ReportingLevel_anyOf::validate() const {
   }
 }
 
-bool ReportingLevel_anyOf::validate(std::stringstream& msg) const {
+bool ReportingLevel_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ReportingLevel_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ReportingLevel_anyOf::validate(std::stringstream &msg,
+                                    const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ReportingLevel_anyOf" : pathPrefix;
@@ -46,40 +46,40 @@ bool ReportingLevel_anyOf::validate(
   return success;
 }
 
-bool ReportingLevel_anyOf::operator==(const ReportingLevel_anyOf& rhs) const {
+bool ReportingLevel_anyOf::operator==(const ReportingLevel_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool ReportingLevel_anyOf::operator!=(const ReportingLevel_anyOf& rhs) const {
+bool ReportingLevel_anyOf::operator!=(const ReportingLevel_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ReportingLevel_anyOf& o) {
+void to_json(nlohmann::json &j, const ReportingLevel_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case ReportingLevel_anyOf::eReportingLevel_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case ReportingLevel_anyOf::eReportingLevel_anyOf::SER_ID_LEVEL:
-      j = "SER_ID_LEVEL";
-      break;
-    case ReportingLevel_anyOf::eReportingLevel_anyOf::RAT_GR_LEVEL:
-      j = "RAT_GR_LEVEL";
-      break;
-    case ReportingLevel_anyOf::eReportingLevel_anyOf::SPON_CON_LEVEL:
-      j = "SPON_CON_LEVEL";
-      break;
-    case ReportingLevel_anyOf::eReportingLevel_anyOf::NULL_VALUE:
-      j = nullptr;
-      break;
+  case ReportingLevel_anyOf::eReportingLevel_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case ReportingLevel_anyOf::eReportingLevel_anyOf::SER_ID_LEVEL:
+    j = "SER_ID_LEVEL";
+    break;
+  case ReportingLevel_anyOf::eReportingLevel_anyOf::RAT_GR_LEVEL:
+    j = "RAT_GR_LEVEL";
+    break;
+  case ReportingLevel_anyOf::eReportingLevel_anyOf::SPON_CON_LEVEL:
+    j = "SPON_CON_LEVEL";
+    break;
+  case ReportingLevel_anyOf::eReportingLevel_anyOf::NULL_VALUE:
+    j = nullptr;
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, ReportingLevel_anyOf& o) {
+void from_json(const nlohmann::json &j, ReportingLevel_anyOf &o) {
   if (j.is_null()) {
     o.setValue(ReportingLevel_anyOf::eReportingLevel_anyOf::NULL_VALUE);
     return;
@@ -103,8 +103,8 @@ void from_json(const nlohmann::json& j, ReportingLevel_anyOf& o) {
   }
 }
 
-ReportingLevel_anyOf::eReportingLevel_anyOf ReportingLevel_anyOf::getValue()
-    const {
+ReportingLevel_anyOf::eReportingLevel_anyOf
+ReportingLevel_anyOf::getValue() const {
   return m_value;
 }
 void ReportingLevel_anyOf::setValue(
@@ -112,4 +112,4 @@ void ReportingLevel_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

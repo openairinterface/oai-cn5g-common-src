@@ -21,30 +21,30 @@ extern "C" {
 namespace oai::ngap {
 
 class PduSessionResourceModifyConfirmTransfer {
- public:
+public:
   PduSessionResourceModifyConfirmTransfer();
   virtual ~PduSessionResourceModifyConfirmTransfer(){};
 
-  void setQosFlowModifyConfirmList(
-      const std::vector<QosFlowModifyConfirmItem> list);
-  void setQosFlowModifyConfirmList(const QosFlowModifyConfirmList& list);
-  void getQosFlowModifyConfirmList(QosFlowModifyConfirmList& list) const;
+  void
+  setQosFlowModifyConfirmList(const std::vector<QosFlowModifyConfirmItem> list);
+  void setQosFlowModifyConfirmList(const QosFlowModifyConfirmList &list);
+  void getQosFlowModifyConfirmList(QosFlowModifyConfirmList &list) const;
 
   void setUlNgUUpTnlInformation(
-      const UpTransportLayerInformation& ulNgUUpTnlInformation);
+      const UpTransportLayerInformation &ulNgUUpTnlInformation);
   void getUlNgUUpTnlInformation(
-      UpTransportLayerInformation& ulNgUUpTnlInformation) const;
+      UpTransportLayerInformation &ulNgUUpTnlInformation) const;
 
   void setQosFlowFailedToModifyList(
-      const QosFlowListWithCause& qosFlowFailedToModifyList);
+      const QosFlowListWithCause &qosFlowFailedToModifyList);
   void getQosFlowFailedToModifyList(
-      std::optional<QosFlowListWithCause>& qosFlowFailedToModifyList) const;
+      std::optional<QosFlowListWithCause> &qosFlowFailedToModifyList) const;
 
-  int encode(uint8_t* buf, int bufSize);
-  bool decode(uint8_t* buf, int bufSize);
+  int encode(uint8_t *buf, int bufSize);
+  bool decode(uint8_t *buf, int bufSize);
 
- private:
-  Ngap_PDUSessionResourceModifyConfirmTransfer_t* m_Ie;
+private:
+  Ngap_PDUSessionResourceModifyConfirmTransfer_t *m_Ie;
 
   // QoS Flow Modify Confirm List (Mandatory)
   QosFlowModifyConfirmList m_QosFlowModifyConfirmList;
@@ -57,5 +57,5 @@ class PduSessionResourceModifyConfirmTransfer {
   // Additional Redundant NG-U UP TNL Information (Optional)
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

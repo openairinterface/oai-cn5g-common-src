@@ -13,8 +13,8 @@
 
 #include "LoggingIntervalNrMdt_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::common {
 
@@ -27,12 +27,12 @@ void LoggingIntervalNrMdt_anyOf::validate() const {
   }
 }
 
-bool LoggingIntervalNrMdt_anyOf::validate(std::stringstream& msg) const {
+bool LoggingIntervalNrMdt_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool LoggingIntervalNrMdt_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool LoggingIntervalNrMdt_anyOf::validate(std::stringstream &msg,
+                                          const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "LoggingIntervalNrMdt_anyOf" : pathPrefix;
@@ -47,62 +47,62 @@ bool LoggingIntervalNrMdt_anyOf::validate(
 }
 
 bool LoggingIntervalNrMdt_anyOf::operator==(
-    const LoggingIntervalNrMdt_anyOf& rhs) const {
+    const LoggingIntervalNrMdt_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool LoggingIntervalNrMdt_anyOf::operator!=(
-    const LoggingIntervalNrMdt_anyOf& rhs) const {
+    const LoggingIntervalNrMdt_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const LoggingIntervalNrMdt_anyOf& o) {
+void to_json(nlohmann::json &j, const LoggingIntervalNrMdt_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf::_128:
-      j = "128";
-      break;
-    case LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf::_256:
-      j = "256";
-      break;
-    case LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf::_512:
-      j = "512";
-      break;
-    case LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf::_1024:
-      j = "1024";
-      break;
-    case LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf::_2048:
-      j = "2048";
-      break;
-    case LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf::_3072:
-      j = "3072";
-      break;
-    case LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf::_4096:
-      j = "4096";
-      break;
-    case LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf::_6144:
-      j = "6144";
-      break;
-    case LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf::_320:
-      j = "320";
-      break;
-    case LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf::_640:
-      j = "640";
-      break;
-    case LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf::_INFINITY:
-      j = "infinity";
-      break;
+  case LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf::_128:
+    j = "128";
+    break;
+  case LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf::_256:
+    j = "256";
+    break;
+  case LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf::_512:
+    j = "512";
+    break;
+  case LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf::_1024:
+    j = "1024";
+    break;
+  case LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf::_2048:
+    j = "2048";
+    break;
+  case LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf::_3072:
+    j = "3072";
+    break;
+  case LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf::_4096:
+    j = "4096";
+    break;
+  case LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf::_6144:
+    j = "6144";
+    break;
+  case LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf::_320:
+    j = "320";
+    break;
+  case LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf::_640:
+    j = "640";
+    break;
+  case LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf::_INFINITY:
+    j = "infinity";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, LoggingIntervalNrMdt_anyOf& o) {
+void from_json(const nlohmann::json &j, LoggingIntervalNrMdt_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "128") {
     o.setValue(LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf::_128);
@@ -145,4 +145,4 @@ void LoggingIntervalNrMdt_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

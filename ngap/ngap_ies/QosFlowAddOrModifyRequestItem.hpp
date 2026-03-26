@@ -15,33 +15,33 @@ extern "C" {
 namespace oai::ngap {
 
 class QosFlowAddOrModifyRequestItem {
- public:
+public:
   QosFlowAddOrModifyRequestItem();
   virtual ~QosFlowAddOrModifyRequestItem();
 
-  void setQosFlowIdentifier(const QosFlowIdentifier& qosFlowIdentifier);
-  void getQosFlowIdentifier(QosFlowIdentifier& qosFlowIdentifier) const;
+  void setQosFlowIdentifier(const QosFlowIdentifier &qosFlowIdentifier);
+  void getQosFlowIdentifier(QosFlowIdentifier &qosFlowIdentifier) const;
 
   void setQosFlowLevelQosParameters(
-      const QosFlowLevelQosParameters& qosFlowLevelQosParameters);
-  void setQosFlowLevelQosParameters(
-      const std::optional<QosFlowLevelQosParameters>&
-          qosFlowLevelQosParameters);
-  void setQosFlowLevelQosParameters(std::optional<QosFlowLevelQosParameters>&
-                                        qosFlowLevelQosParameters) const;
+      const QosFlowLevelQosParameters &qosFlowLevelQosParameters);
+  void
+  setQosFlowLevelQosParameters(const std::optional<QosFlowLevelQosParameters>
+                                   &qosFlowLevelQosParameters);
+  void setQosFlowLevelQosParameters(std::optional<QosFlowLevelQosParameters>
+                                        &qosFlowLevelQosParameters) const;
 
-  bool encode(Ngap_QosFlowAddOrModifyRequestItem_t&) const;
-  bool decode(const Ngap_QosFlowAddOrModifyRequestItem_t&);
+  bool encode(Ngap_QosFlowAddOrModifyRequestItem_t &) const;
+  bool decode(const Ngap_QosFlowAddOrModifyRequestItem_t &);
 
- private:
-  QosFlowIdentifier m_QosFlowIdentifier;  // Mandatory
+private:
+  QosFlowIdentifier m_QosFlowIdentifier; // Mandatory
   std::optional<QosFlowLevelQosParameters>
-      m_QosFlowLevelQosParameters;  // Optional
+      m_QosFlowLevelQosParameters; // Optional
   // TODO: E-RAB ID (Optional)
   // TODO: TSC Traffic Characteristics
   // TODO: Redundant QoS Flow Indicator
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

@@ -8,8 +8,8 @@
 
 #include "Ngap_PathSwitchRequestTransfer.h"
 
-#include "Ngap_UserPlaneSecurityInformation.h"
 #include "Ngap_ProtocolExtensionContainer.h"
+#include "Ngap_UserPlaneSecurityInformation.h"
 static asn_TYPE_member_t asn_MBR_Ngap_PathSwitchRequestTransfer_1[] = {
     {ATF_NOFLAGS,
      0,
@@ -32,8 +32,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_PathSwitchRequestTransfer_1[] = {
      "dL-NGU-UP-TNLInformation"},
     {ATF_POINTER,
      2,
-     offsetof(
-         struct Ngap_PathSwitchRequestTransfer, dL_NGU_TNLInformationReused),
+     offsetof(struct Ngap_PathSwitchRequestTransfer,
+              dL_NGU_TNLInformationReused),
      (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_DL_NGU_TNLInformationReused,
@@ -52,8 +52,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_PathSwitchRequestTransfer_1[] = {
      "dL-NGU-TNLInformationReused"},
     {ATF_POINTER,
      1,
-     offsetof(
-         struct Ngap_PathSwitchRequestTransfer, userPlaneSecurityInformation),
+     offsetof(struct Ngap_PathSwitchRequestTransfer,
+              userPlaneSecurityInformation),
      (ASN_TAG_CLASS_CONTEXT | (2 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_UserPlaneSecurityInformation,

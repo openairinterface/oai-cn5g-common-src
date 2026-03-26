@@ -15,9 +15,7 @@
 
 namespace oai::model::amf {
 
-UeContextCreateError::UeContextCreateError() {
-  m_NgapCauseIsSet = false;
-}
+UeContextCreateError::UeContextCreateError() { m_NgapCauseIsSet = false; }
 
 UeContextCreateError::~UeContextCreateError() {}
 
@@ -25,13 +23,14 @@ void UeContextCreateError::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const UeContextCreateError& o) {
-  j          = nlohmann::json();
+void to_json(nlohmann::json &j, const UeContextCreateError &o) {
+  j = nlohmann::json();
   j["error"] = o.m_Error;
-  if (o.ngapCauseIsSet()) j["ngapCause"] = o.m_NgapCause;
+  if (o.ngapCauseIsSet())
+    j["ngapCause"] = o.m_NgapCause;
 }
 
-void from_json(const nlohmann::json& j, UeContextCreateError& o) {
+void from_json(const nlohmann::json &j, UeContextCreateError &o) {
   j.at("error").get_to(o.m_Error);
   if (j.find("ngapCause") != j.end()) {
     j.at("ngapCause").get_to(o.m_NgapCause);
@@ -43,22 +42,18 @@ oai::model::common::ProblemDetails UeContextCreateError::getError() const {
   return m_Error;
 }
 void UeContextCreateError::setError(
-    oai::model::common::ProblemDetails const& value) {
+    oai::model::common::ProblemDetails const &value) {
   m_Error = value;
 }
 oai::model::common::NgApCause UeContextCreateError::getNgapCause() const {
   return m_NgapCause;
 }
 void UeContextCreateError::setNgapCause(
-    oai::model::common::NgApCause const& value) {
-  m_NgapCause      = value;
+    oai::model::common::NgApCause const &value) {
+  m_NgapCause = value;
   m_NgapCauseIsSet = true;
 }
-bool UeContextCreateError::ngapCauseIsSet() const {
-  return m_NgapCauseIsSet;
-}
-void UeContextCreateError::unsetNgapCause() {
-  m_NgapCauseIsSet = false;
-}
+bool UeContextCreateError::ngapCauseIsSet() const { return m_NgapCauseIsSet; }
+void UeContextCreateError::unsetNgapCause() { m_NgapCauseIsSet = false; }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

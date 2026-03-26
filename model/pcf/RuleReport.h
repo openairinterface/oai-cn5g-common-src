@@ -19,13 +19,13 @@
 #ifndef RuleReport_H_
 #define RuleReport_H_
 
-#include "RuleStatus.h"
-#include <string>
 #include "FailureCode.h"
 #include "FinalUnitAction.h"
-#include <vector>
 #include "RanNasRelCause.h"
+#include "RuleStatus.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::pcf {
 
@@ -33,7 +33,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class RuleReport {
- public:
+public:
   RuleReport();
   virtual ~RuleReport() = default;
 
@@ -47,16 +47,16 @@ class RuleReport {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const RuleReport& rhs) const;
-  bool operator!=(const RuleReport& rhs) const;
+  bool operator==(const RuleReport &rhs) const;
+  bool operator!=(const RuleReport &rhs) const;
 
   /////////////////////////////////////////////
   /// RuleReport members
@@ -65,12 +65,12 @@ class RuleReport {
   /// Contains the identifier of the affected PCC rule(s).
   /// </summary>
   std::vector<std::string> getPccRuleIds() const;
-  void setPccRuleIds(std::vector<std::string> const& value);
+  void setPccRuleIds(std::vector<std::string> const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::RuleStatus getRuleStatus() const;
-  void setRuleStatus(oai::model::pcf::RuleStatus const& value);
+  void setRuleStatus(oai::model::pcf::RuleStatus const &value);
   /// <summary>
   /// Indicates the version of a PCC rule.
   /// </summary>
@@ -82,29 +82,29 @@ class RuleReport {
   ///
   /// </summary>
   oai::model::pcf::FailureCode getFailureCode() const;
-  void setFailureCode(oai::model::pcf::FailureCode const& value);
+  void setFailureCode(oai::model::pcf::FailureCode const &value);
   bool failureCodeIsSet() const;
   void unsetFailureCode();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::FinalUnitAction getFinUnitAct() const;
-  void setFinUnitAct(oai::model::pcf::FinalUnitAction const& value);
+  void setFinUnitAct(oai::model::pcf::FinalUnitAction const &value);
   bool finUnitActIsSet() const;
   void unsetFinUnitAct();
   /// <summary>
   /// indicates the RAN or NAS release cause code information.
   /// </summary>
   std::vector<oai::model::pcf::RanNasRelCause> getRanNasRelCauses() const;
-  void setRanNasRelCauses(
-      std::vector<oai::model::pcf::RanNasRelCause> const& value);
+  void
+  setRanNasRelCauses(std::vector<oai::model::pcf::RanNasRelCause> const &value);
   bool ranNasRelCausesIsSet() const;
   void unsetRanNasRelCauses();
 
-  friend void to_json(nlohmann::json& j, const RuleReport& o);
-  friend void from_json(const nlohmann::json& j, RuleReport& o);
+  friend void to_json(nlohmann::json &j, const RuleReport &o);
+  friend void from_json(const nlohmann::json &j, RuleReport &o);
 
- protected:
+protected:
   std::vector<std::string> m_PccRuleIds;
 
   oai::model::pcf::RuleStatus m_RuleStatus;
@@ -119,6 +119,6 @@ class RuleReport {
   bool m_RanNasRelCausesIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* RuleReport_H_ */

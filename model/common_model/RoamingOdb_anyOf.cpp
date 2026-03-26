@@ -13,8 +13,8 @@
 
 #include "RoamingOdb_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::common {
 
@@ -27,12 +27,12 @@ void RoamingOdb_anyOf::validate() const {
   }
 }
 
-bool RoamingOdb_anyOf::validate(std::stringstream& msg) const {
+bool RoamingOdb_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool RoamingOdb_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool RoamingOdb_anyOf::validate(std::stringstream &msg,
+                                const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "RoamingOdb_anyOf" : pathPrefix;
@@ -46,33 +46,33 @@ bool RoamingOdb_anyOf::validate(
   return success;
 }
 
-bool RoamingOdb_anyOf::operator==(const RoamingOdb_anyOf& rhs) const {
+bool RoamingOdb_anyOf::operator==(const RoamingOdb_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool RoamingOdb_anyOf::operator!=(const RoamingOdb_anyOf& rhs) const {
+bool RoamingOdb_anyOf::operator!=(const RoamingOdb_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const RoamingOdb_anyOf& o) {
+void to_json(nlohmann::json &j, const RoamingOdb_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case RoamingOdb_anyOf::eRoamingOdb_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case RoamingOdb_anyOf::eRoamingOdb_anyOf::PLMN:
-      j = "OUTSIDE_HOME_PLMN";
-      break;
-    case RoamingOdb_anyOf::eRoamingOdb_anyOf::PLMN_COUNTRY:
-      j = "OUTSIDE_HOME_PLMN_COUNTRY";
-      break;
+  case RoamingOdb_anyOf::eRoamingOdb_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case RoamingOdb_anyOf::eRoamingOdb_anyOf::PLMN:
+    j = "OUTSIDE_HOME_PLMN";
+    break;
+  case RoamingOdb_anyOf::eRoamingOdb_anyOf::PLMN_COUNTRY:
+    j = "OUTSIDE_HOME_PLMN_COUNTRY";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, RoamingOdb_anyOf& o) {
+void from_json(const nlohmann::json &j, RoamingOdb_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "OUTSIDE_HOME_PLMN") {
     o.setValue(RoamingOdb_anyOf::eRoamingOdb_anyOf::PLMN);
@@ -94,4 +94,4 @@ void RoamingOdb_anyOf::setValue(RoamingOdb_anyOf::eRoamingOdb_anyOf value) {
   m_value = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

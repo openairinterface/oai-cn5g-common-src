@@ -19,17 +19,17 @@
 namespace oai::model::udm {
 
 SmsfRegistration::SmsfRegistration() {
-  m_SmsfInstanceId           = "";
-  m_SmsfSetId                = "";
-  m_SmsfSetIdIsSet           = false;
-  m_SupportedFeatures        = "";
-  m_SupportedFeaturesIsSet   = false;
-  m_SmsfMAPAddress           = "";
-  m_SmsfMAPAddressIsSet      = false;
+  m_SmsfInstanceId = "";
+  m_SmsfSetId = "";
+  m_SmsfSetIdIsSet = false;
+  m_SupportedFeatures = "";
+  m_SupportedFeaturesIsSet = false;
+  m_SmsfMAPAddress = "";
+  m_SmsfMAPAddressIsSet = false;
   m_SmsfDiameterAddressIsSet = false;
-  m_RegistrationTime         = "";
-  m_RegistrationTimeIsSet    = false;
-  m_ContextInfoIsSet         = false;
+  m_RegistrationTime = "";
+  m_RegistrationTimeIsSet = false;
+  m_ContextInfoIsSet = false;
 }
 
 SmsfRegistration::~SmsfRegistration() {}
@@ -38,21 +38,25 @@ void SmsfRegistration::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const SmsfRegistration& o) {
-  j                   = nlohmann::json();
+void to_json(nlohmann::json &j, const SmsfRegistration &o) {
+  j = nlohmann::json();
   j["smsfInstanceId"] = o.m_SmsfInstanceId;
-  if (o.smsfSetIdIsSet()) j["smsfSetId"] = o.m_SmsfSetId;
+  if (o.smsfSetIdIsSet())
+    j["smsfSetId"] = o.m_SmsfSetId;
   if (o.supportedFeaturesIsSet())
     j["supportedFeatures"] = o.m_SupportedFeatures;
   j["plmnId"] = o.m_PlmnId;
-  if (o.smsfMAPAddressIsSet()) j["smsfMAPAddress"] = o.m_SmsfMAPAddress;
+  if (o.smsfMAPAddressIsSet())
+    j["smsfMAPAddress"] = o.m_SmsfMAPAddress;
   if (o.smsfDiameterAddressIsSet())
     j["smsfDiameterAddress"] = o.m_SmsfDiameterAddress;
-  if (o.registrationTimeIsSet()) j["registrationTime"] = o.m_RegistrationTime;
-  if (o.contextInfoIsSet()) j["contextInfo"] = o.m_ContextInfo;
+  if (o.registrationTimeIsSet())
+    j["registrationTime"] = o.m_RegistrationTime;
+  if (o.contextInfoIsSet())
+    j["contextInfo"] = o.m_ContextInfo;
 }
 
-void from_json(const nlohmann::json& j, SmsfRegistration& o) {
+void from_json(const nlohmann::json &j, SmsfRegistration &o) {
   j.at("smsfInstanceId").get_to(o.m_SmsfInstanceId);
   if (j.find("smsfSetId") != j.end()) {
     j.at("smsfSetId").get_to(o.m_SmsfSetId);
@@ -84,27 +88,21 @@ void from_json(const nlohmann::json& j, SmsfRegistration& o) {
 std::string SmsfRegistration::getSmsfInstanceId() const {
   return m_SmsfInstanceId;
 }
-void SmsfRegistration::setSmsfInstanceId(std::string const& value) {
+void SmsfRegistration::setSmsfInstanceId(std::string const &value) {
   m_SmsfInstanceId = value;
 }
-std::string SmsfRegistration::getSmsfSetId() const {
-  return m_SmsfSetId;
-}
-void SmsfRegistration::setSmsfSetId(std::string const& value) {
-  m_SmsfSetId      = value;
+std::string SmsfRegistration::getSmsfSetId() const { return m_SmsfSetId; }
+void SmsfRegistration::setSmsfSetId(std::string const &value) {
+  m_SmsfSetId = value;
   m_SmsfSetIdIsSet = true;
 }
-bool SmsfRegistration::smsfSetIdIsSet() const {
-  return m_SmsfSetIdIsSet;
-}
-void SmsfRegistration::unsetSmsfSetId() {
-  m_SmsfSetIdIsSet = false;
-}
+bool SmsfRegistration::smsfSetIdIsSet() const { return m_SmsfSetIdIsSet; }
+void SmsfRegistration::unsetSmsfSetId() { m_SmsfSetIdIsSet = false; }
 std::string SmsfRegistration::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
-void SmsfRegistration::setSupportedFeatures(std::string const& value) {
-  m_SupportedFeatures      = value;
+void SmsfRegistration::setSupportedFeatures(std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool SmsfRegistration::supportedFeaturesIsSet() const {
@@ -116,28 +114,26 @@ void SmsfRegistration::unsetSupportedFeatures() {
 oai::model::common::PlmnId SmsfRegistration::getPlmnId() const {
   return m_PlmnId;
 }
-void SmsfRegistration::setPlmnId(oai::model::common::PlmnId const& value) {
+void SmsfRegistration::setPlmnId(oai::model::common::PlmnId const &value) {
   m_PlmnId = value;
 }
 std::string SmsfRegistration::getSmsfMAPAddress() const {
   return m_SmsfMAPAddress;
 }
-void SmsfRegistration::setSmsfMAPAddress(std::string const& value) {
-  m_SmsfMAPAddress      = value;
+void SmsfRegistration::setSmsfMAPAddress(std::string const &value) {
+  m_SmsfMAPAddress = value;
   m_SmsfMAPAddressIsSet = true;
 }
 bool SmsfRegistration::smsfMAPAddressIsSet() const {
   return m_SmsfMAPAddressIsSet;
 }
-void SmsfRegistration::unsetSmsfMAPAddress() {
-  m_SmsfMAPAddressIsSet = false;
-}
+void SmsfRegistration::unsetSmsfMAPAddress() { m_SmsfMAPAddressIsSet = false; }
 NetworkNodeDiameterAddress SmsfRegistration::getSmsfDiameterAddress() const {
   return m_SmsfDiameterAddress;
 }
 void SmsfRegistration::setSmsfDiameterAddress(
-    NetworkNodeDiameterAddress const& value) {
-  m_SmsfDiameterAddress      = value;
+    NetworkNodeDiameterAddress const &value) {
+  m_SmsfDiameterAddress = value;
   m_SmsfDiameterAddressIsSet = true;
 }
 bool SmsfRegistration::smsfDiameterAddressIsSet() const {
@@ -149,8 +145,8 @@ void SmsfRegistration::unsetSmsfDiameterAddress() {
 std::string SmsfRegistration::getRegistrationTime() const {
   return m_RegistrationTime;
 }
-void SmsfRegistration::setRegistrationTime(std::string const& value) {
-  m_RegistrationTime      = value;
+void SmsfRegistration::setRegistrationTime(std::string const &value) {
+  m_RegistrationTime = value;
   m_RegistrationTimeIsSet = true;
 }
 bool SmsfRegistration::registrationTimeIsSet() const {
@@ -159,18 +155,12 @@ bool SmsfRegistration::registrationTimeIsSet() const {
 void SmsfRegistration::unsetRegistrationTime() {
   m_RegistrationTimeIsSet = false;
 }
-ContextInfo SmsfRegistration::getContextInfo() const {
-  return m_ContextInfo;
-}
-void SmsfRegistration::setContextInfo(ContextInfo const& value) {
-  m_ContextInfo      = value;
+ContextInfo SmsfRegistration::getContextInfo() const { return m_ContextInfo; }
+void SmsfRegistration::setContextInfo(ContextInfo const &value) {
+  m_ContextInfo = value;
   m_ContextInfoIsSet = true;
 }
-bool SmsfRegistration::contextInfoIsSet() const {
-  return m_ContextInfoIsSet;
-}
-void SmsfRegistration::unsetContextInfo() {
-  m_ContextInfoIsSet = false;
-}
+bool SmsfRegistration::contextInfoIsSet() const { return m_ContextInfoIsSet; }
+void SmsfRegistration::unsetContextInfo() { m_ContextInfoIsSet = false; }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

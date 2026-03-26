@@ -27,12 +27,12 @@ void DlDataDeliveryStatus::validate() const {
   }
 }
 
-bool DlDataDeliveryStatus::validate(std::stringstream& msg) const {
+bool DlDataDeliveryStatus::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool DlDataDeliveryStatus::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool DlDataDeliveryStatus::validate(std::stringstream &msg,
+                                    const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "DlDataDeliveryStatus" : pathPrefix;
@@ -43,22 +43,22 @@ bool DlDataDeliveryStatus::validate(
   return success;
 }
 
-bool DlDataDeliveryStatus::operator==(const DlDataDeliveryStatus& rhs) const {
+bool DlDataDeliveryStatus::operator==(const DlDataDeliveryStatus &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool DlDataDeliveryStatus::operator!=(const DlDataDeliveryStatus& rhs) const {
+bool DlDataDeliveryStatus::operator!=(const DlDataDeliveryStatus &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const DlDataDeliveryStatus& o) {
+void to_json(nlohmann::json &j, const DlDataDeliveryStatus &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, DlDataDeliveryStatus& o) {
+void from_json(const nlohmann::json &j, DlDataDeliveryStatus &o) {
   from_json(j, o.m_value);
 }
 
@@ -80,4 +80,4 @@ void DlDataDeliveryStatus::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

@@ -13,8 +13,8 @@
 
 #include "ReportTypeMdt_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::common {
 
@@ -27,12 +27,12 @@ void ReportTypeMdt_anyOf::validate() const {
   }
 }
 
-bool ReportTypeMdt_anyOf::validate(std::stringstream& msg) const {
+bool ReportTypeMdt_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ReportTypeMdt_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ReportTypeMdt_anyOf::validate(std::stringstream &msg,
+                                   const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ReportTypeMdt_anyOf" : pathPrefix;
@@ -46,34 +46,34 @@ bool ReportTypeMdt_anyOf::validate(
   return success;
 }
 
-bool ReportTypeMdt_anyOf::operator==(const ReportTypeMdt_anyOf& rhs) const {
+bool ReportTypeMdt_anyOf::operator==(const ReportTypeMdt_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool ReportTypeMdt_anyOf::operator!=(const ReportTypeMdt_anyOf& rhs) const {
+bool ReportTypeMdt_anyOf::operator!=(const ReportTypeMdt_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ReportTypeMdt_anyOf& o) {
+void to_json(nlohmann::json &j, const ReportTypeMdt_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case ReportTypeMdt_anyOf::eReportTypeMdt_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case ReportTypeMdt_anyOf::eReportTypeMdt_anyOf::PERIODICAL:
-      j = "PERIODICAL";
-      break;
-    case ReportTypeMdt_anyOf::eReportTypeMdt_anyOf::EVENT_TRIGGED:
-      j = "EVENT_TRIGGED";
-      break;
+  case ReportTypeMdt_anyOf::eReportTypeMdt_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case ReportTypeMdt_anyOf::eReportTypeMdt_anyOf::PERIODICAL:
+    j = "PERIODICAL";
+    break;
+  case ReportTypeMdt_anyOf::eReportTypeMdt_anyOf::EVENT_TRIGGED:
+    j = "EVENT_TRIGGED";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, ReportTypeMdt_anyOf& o) {
+void from_json(const nlohmann::json &j, ReportTypeMdt_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "PERIODICAL") {
     o.setValue(ReportTypeMdt_anyOf::eReportTypeMdt_anyOf::PERIODICAL);
@@ -88,8 +88,8 @@ void from_json(const nlohmann::json& j, ReportTypeMdt_anyOf& o) {
   }
 }
 
-ReportTypeMdt_anyOf::eReportTypeMdt_anyOf ReportTypeMdt_anyOf::getValue()
-    const {
+ReportTypeMdt_anyOf::eReportTypeMdt_anyOf
+ReportTypeMdt_anyOf::getValue() const {
   return m_value;
 }
 void ReportTypeMdt_anyOf::setValue(
@@ -97,4 +97,4 @@ void ReportTypeMdt_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

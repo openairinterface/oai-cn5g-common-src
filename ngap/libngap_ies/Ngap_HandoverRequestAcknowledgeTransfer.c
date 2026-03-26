@@ -8,17 +8,16 @@
 
 #include "Ngap_HandoverRequestAcknowledgeTransfer.h"
 
-#include "Ngap_UPTransportLayerInformation.h"
-#include "Ngap_SecurityResult.h"
-#include "Ngap_QosFlowListWithCause.h"
 #include "Ngap_DataForwardingResponseDRBList.h"
 #include "Ngap_ProtocolExtensionContainer.h"
+#include "Ngap_QosFlowListWithCause.h"
+#include "Ngap_SecurityResult.h"
+#include "Ngap_UPTransportLayerInformation.h"
 static asn_TYPE_member_t asn_MBR_Ngap_HandoverRequestAcknowledgeTransfer_1[] = {
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_HandoverRequestAcknowledgeTransfer,
-         dL_NGU_UP_TNLInformation),
+     offsetof(struct Ngap_HandoverRequestAcknowledgeTransfer,
+              dL_NGU_UP_TNLInformation),
      (ASN_TAG_CLASS_CONTEXT | (0 << 2)),
      +1, /* EXPLICIT tag at current level */
      &asn_DEF_Ngap_UPTransportLayerInformation,
@@ -37,9 +36,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_HandoverRequestAcknowledgeTransfer_1[] = {
      "dL-NGU-UP-TNLInformation"},
     {ATF_POINTER,
      2,
-     offsetof(
-         struct Ngap_HandoverRequestAcknowledgeTransfer,
-         dLForwardingUP_TNLInformation),
+     offsetof(struct Ngap_HandoverRequestAcknowledgeTransfer,
+              dLForwardingUP_TNLInformation),
      (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
      +1, /* EXPLICIT tag at current level */
      &asn_DEF_Ngap_UPTransportLayerInformation,
@@ -77,9 +75,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_HandoverRequestAcknowledgeTransfer_1[] = {
      "securityResult"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_HandoverRequestAcknowledgeTransfer,
-         qosFlowSetupResponseList),
+     offsetof(struct Ngap_HandoverRequestAcknowledgeTransfer,
+              qosFlowSetupResponseList),
      (ASN_TAG_CLASS_CONTEXT | (3 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_QosFlowListWithDataForwarding,
@@ -98,9 +95,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_HandoverRequestAcknowledgeTransfer_1[] = {
      "qosFlowSetupResponseList"},
     {ATF_POINTER,
      3,
-     offsetof(
-         struct Ngap_HandoverRequestAcknowledgeTransfer,
-         qosFlowFailedToSetupList),
+     offsetof(struct Ngap_HandoverRequestAcknowledgeTransfer,
+              qosFlowFailedToSetupList),
      (ASN_TAG_CLASS_CONTEXT | (4 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_QosFlowListWithCause,
@@ -119,9 +115,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_HandoverRequestAcknowledgeTransfer_1[] = {
      "qosFlowFailedToSetupList"},
     {ATF_POINTER,
      2,
-     offsetof(
-         struct Ngap_HandoverRequestAcknowledgeTransfer,
-         dataForwardingResponseDRBList),
+     offsetof(struct Ngap_HandoverRequestAcknowledgeTransfer,
+              dataForwardingResponseDRBList),
      (ASN_TAG_CLASS_CONTEXT | (5 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_DataForwardingResponseDRBList,

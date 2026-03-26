@@ -18,31 +18,31 @@ extern "C" {
 namespace oai::ngap {
 
 class UnavailableGuamiItem {
- public:
+public:
   UnavailableGuamiItem();
   virtual ~UnavailableGuamiItem();
 
-  void setGuami(const Guami& guami);
-  void getGuami(Guami& guami) const;
+  void setGuami(const Guami &guami);
+  void getGuami(Guami &guami) const;
 
-  void setTimerApproachForGuamiRemoval(
-      const TimerApproachForGuamiRemoval& timer);
+  void
+  setTimerApproachForGuamiRemoval(const TimerApproachForGuamiRemoval &timer);
   void getTimerApproachForGuamiRemoval(
-      std::optional<TimerApproachForGuamiRemoval>& timer) const;
+      std::optional<TimerApproachForGuamiRemoval> &timer) const;
 
-  void setBackupAmfName(const AmfName& name);
-  void getBackupAmfName(std::optional<AmfName>& name) const;
+  void setBackupAmfName(const AmfName &name);
+  void getBackupAmfName(std::optional<AmfName> &name) const;
 
-  bool encode(Ngap_UnavailableGUAMIItem& item) const;
-  bool decode(const Ngap_UnavailableGUAMIItem& item);
+  bool encode(Ngap_UnavailableGUAMIItem &item) const;
+  bool decode(const Ngap_UnavailableGUAMIItem &item);
 
- private:
+private:
   Guami m_Guami;
   std::optional<TimerApproachForGuamiRemoval>
-      m_TimerApproachForGuamiRemoval;      // Optional
-  std::optional<AmfName> m_BackupAmfName;  // Optional
+      m_TimerApproachForGuamiRemoval;     // Optional
+  std::optional<AmfName> m_BackupAmfName; // Optional
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

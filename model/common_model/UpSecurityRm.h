@@ -19,10 +19,10 @@
 #ifndef UpSecurityRm_H_
 #define UpSecurityRm_H_
 
-#include "UpConfidentiality.h"
-#include "UpSecurity.h"
 #include "NullValue.h"
+#include "UpConfidentiality.h"
 #include "UpIntegrity.h"
+#include "UpSecurity.h"
 #include <nlohmann/json.hpp>
 
 namespace oai::model::common {
@@ -31,7 +31,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class UpSecurityRm {
- public:
+public:
   UpSecurityRm();
   virtual ~UpSecurityRm() = default;
 
@@ -45,16 +45,16 @@ class UpSecurityRm {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const UpSecurityRm& rhs) const;
-  bool operator!=(const UpSecurityRm& rhs) const;
+  bool operator==(const UpSecurityRm &rhs) const;
+  bool operator!=(const UpSecurityRm &rhs) const;
 
   /////////////////////////////////////////////
   /// UpSecurityRm members
@@ -63,22 +63,22 @@ class UpSecurityRm {
   ///
   /// </summary>
   oai::model::common::UpIntegrity getUpIntegr() const;
-  void setUpIntegr(oai::model::common::UpIntegrity const& value);
+  void setUpIntegr(oai::model::common::UpIntegrity const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::UpConfidentiality getUpConfid() const;
-  void setUpConfid(oai::model::common::UpConfidentiality const& value);
+  void setUpConfid(oai::model::common::UpConfidentiality const &value);
 
-  friend void to_json(nlohmann::json& j, const UpSecurityRm& o);
-  friend void from_json(const nlohmann::json& j, UpSecurityRm& o);
+  friend void to_json(nlohmann::json &j, const UpSecurityRm &o);
+  friend void from_json(const nlohmann::json &j, UpSecurityRm &o);
 
- protected:
+protected:
   oai::model::common::UpIntegrity m_UpIntegr;
 
   oai::model::common::UpConfidentiality m_UpConfid;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* UpSecurityRm_H_ */

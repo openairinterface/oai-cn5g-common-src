@@ -19,11 +19,11 @@
 namespace oai::model::udsf {
 
 RecordSearchResult::RecordSearchResult() {
-  m_Count                  = 0;
-  m_ReferencesIsSet        = false;
-  m_SupportedFeatures      = "";
+  m_Count = 0;
+  m_ReferencesIsSet = false;
+  m_SupportedFeatures = "";
   m_SupportedFeaturesIsSet = false;
-  m_MatchingRecordsIsSet   = false;
+  m_MatchingRecordsIsSet = false;
 }
 
 void RecordSearchResult::validate() const {
@@ -33,18 +33,18 @@ void RecordSearchResult::validate() const {
   }
 }
 
-bool RecordSearchResult::validate(std::stringstream& msg) const {
+bool RecordSearchResult::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool RecordSearchResult::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool RecordSearchResult::validate(std::stringstream &msg,
+                                  const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "RecordSearchResult" : pathPrefix;
 
   /* Count */ {
-    const int32_t& value               = m_Count;
+    const int32_t &value = m_Count;
     const std::string currentValuePath = _pathPrefix + ".count";
 
     if (value < 0) {
@@ -54,17 +54,17 @@ bool RecordSearchResult::validate(
   }
 
   if (referencesIsSet()) {
-    const std::vector<std::string>& value = m_References;
-    const std::string currentValuePath    = _pathPrefix + ".references";
+    const std::vector<std::string> &value = m_References;
+    const std::string currentValuePath = _pathPrefix + ".references";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const std::string& value : value) {
+      int i = 0;
+      for (const std::string &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -74,12 +74,12 @@ bool RecordSearchResult::validate(
   }
 
   if (supportedFeaturesIsSet()) {
-    const std::string& value           = m_SupportedFeatures;
+    const std::string &value = m_SupportedFeatures;
     const std::string currentValuePath = _pathPrefix + ".supportedFeatures";
   }
 
   if (matchingRecordsIsSet()) {
-    const std::map<std::string, oai::model::udsf::Record>& value =
+    const std::map<std::string, oai::model::udsf::Record> &value =
         m_MatchingRecords;
     const std::string currentValuePath = _pathPrefix + ".matchingRecords";
   }
@@ -87,7 +87,7 @@ bool RecordSearchResult::validate(
   return success;
 }
 
-bool RecordSearchResult::operator==(const RecordSearchResult& rhs) const {
+bool RecordSearchResult::operator==(const RecordSearchResult &rhs) const {
   return
 
       (getCount() == rhs.getCount()) &&
@@ -107,12 +107,12 @@ bool RecordSearchResult::operator==(const RecordSearchResult& rhs) const {
           ;
 }
 
-bool RecordSearchResult::operator!=(const RecordSearchResult& rhs) const {
+bool RecordSearchResult::operator!=(const RecordSearchResult &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const RecordSearchResult& o) {
-  j          = nlohmann::json();
+void to_json(nlohmann::json &j, const RecordSearchResult &o) {
+  j = nlohmann::json();
   j["count"] = o.m_Count;
   if (o.referencesIsSet() || !o.m_References.empty())
     j["references"] = o.m_References;
@@ -122,7 +122,7 @@ void to_json(nlohmann::json& j, const RecordSearchResult& o) {
     j["matchingRecords"] = o.m_MatchingRecords;
 }
 
-void from_json(const nlohmann::json& j, RecordSearchResult& o) {
+void from_json(const nlohmann::json &j, RecordSearchResult &o) {
   j.at("count").get_to(o.m_Count);
   if (j.find("references") != j.end()) {
     j.at("references").get_to(o.m_References);
@@ -138,30 +138,22 @@ void from_json(const nlohmann::json& j, RecordSearchResult& o) {
   }
 }
 
-int32_t RecordSearchResult::getCount() const {
-  return m_Count;
-}
-void RecordSearchResult::setCount(int32_t const value) {
-  m_Count = value;
-}
+int32_t RecordSearchResult::getCount() const { return m_Count; }
+void RecordSearchResult::setCount(int32_t const value) { m_Count = value; }
 std::vector<std::string> RecordSearchResult::getReferences() const {
   return m_References;
 }
-void RecordSearchResult::setReferences(std::vector<std::string> const& value) {
-  m_References      = value;
+void RecordSearchResult::setReferences(std::vector<std::string> const &value) {
+  m_References = value;
   m_ReferencesIsSet = true;
 }
-bool RecordSearchResult::referencesIsSet() const {
-  return m_ReferencesIsSet;
-}
-void RecordSearchResult::unsetReferences() {
-  m_ReferencesIsSet = false;
-}
+bool RecordSearchResult::referencesIsSet() const { return m_ReferencesIsSet; }
+void RecordSearchResult::unsetReferences() { m_ReferencesIsSet = false; }
 std::string RecordSearchResult::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
-void RecordSearchResult::setSupportedFeatures(std::string const& value) {
-  m_SupportedFeatures      = value;
+void RecordSearchResult::setSupportedFeatures(std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool RecordSearchResult::supportedFeaturesIsSet() const {
@@ -175,8 +167,8 @@ RecordSearchResult::getMatchingRecords() const {
   return m_MatchingRecords;
 }
 void RecordSearchResult::setMatchingRecords(
-    std::map<std::string, oai::model::udsf::Record> const& value) {
-  m_MatchingRecords      = value;
+    std::map<std::string, oai::model::udsf::Record> const &value) {
+  m_MatchingRecords = value;
   m_MatchingRecordsIsSet = true;
 }
 bool RecordSearchResult::matchingRecordsIsSet() const {
@@ -186,4 +178,4 @@ void RecordSearchResult::unsetMatchingRecords() {
   m_MatchingRecordsIsSet = false;
 }
 
-}  // namespace oai::model::udsf
+} // namespace oai::model::udsf

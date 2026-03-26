@@ -14,20 +14,20 @@ extern "C" {
 namespace oai::ngap {
 
 class QosFlowModifyConfirmItem {
- public:
+public:
   QosFlowModifyConfirmItem();
   virtual ~QosFlowModifyConfirmItem();
 
-  void setQosFlowIdentifier(const QosFlowIdentifier& qosFlowIdentifier);
-  void getQosFlowIdentifier(QosFlowIdentifier& qosFlowIdentifier) const;
+  void setQosFlowIdentifier(const QosFlowIdentifier &qosFlowIdentifier);
+  void getQosFlowIdentifier(QosFlowIdentifier &qosFlowIdentifier) const;
 
-  bool encode(Ngap_QosFlowModifyConfirmItem_t&) const;
-  bool decode(const Ngap_QosFlowModifyConfirmItem_t&);
+  bool encode(Ngap_QosFlowModifyConfirmItem_t &) const;
+  bool decode(const Ngap_QosFlowModifyConfirmItem_t &);
 
- private:
-  QosFlowIdentifier m_QosFlowIdentifier;  // Mandatory
+private:
+  QosFlowIdentifier m_QosFlowIdentifier; // Mandatory
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

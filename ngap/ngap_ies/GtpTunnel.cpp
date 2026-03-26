@@ -19,24 +19,23 @@ GtpTunnel::GtpTunnel() {}
 GtpTunnel::~GtpTunnel() {}
 
 //------------------------------------------------------------------------------
-void GtpTunnel::set(
-    const TransportLayerAddress& transportLayerAddress,
-    const GtpTeid& gtpTeid) {
+void GtpTunnel::set(const TransportLayerAddress &transportLayerAddress,
+                    const GtpTeid &gtpTeid) {
   m_TransportLayerAddress = transportLayerAddress;
-  m_GtpTeid               = gtpTeid;
+  m_GtpTeid = gtpTeid;
 }
 
 //------------------------------------------------------------------------------
-bool GtpTunnel::get(
-    TransportLayerAddress& transportLayerAddress, GtpTeid& gtpTeid) const {
+bool GtpTunnel::get(TransportLayerAddress &transportLayerAddress,
+                    GtpTeid &gtpTeid) const {
   transportLayerAddress = m_TransportLayerAddress;
-  gtpTeid               = m_GtpTeid;
+  gtpTeid = m_GtpTeid;
 
   return true;
 }
 
 //------------------------------------------------------------------------------
-bool GtpTunnel::encode(Ngap_GTPTunnel& gtpTunnel) const {
+bool GtpTunnel::encode(Ngap_GTPTunnel &gtpTunnel) const {
   if (!m_TransportLayerAddress.encode(gtpTunnel.transportLayerAddress)) {
     return false;
   }
@@ -48,12 +47,13 @@ bool GtpTunnel::encode(Ngap_GTPTunnel& gtpTunnel) const {
 }
 
 //------------------------------------------------------------------------------
-bool GtpTunnel::decode(const Ngap_GTPTunnel& gtpTunnel) {
+bool GtpTunnel::decode(const Ngap_GTPTunnel &gtpTunnel) {
   if (!m_TransportLayerAddress.decode(gtpTunnel.transportLayerAddress))
     return false;
-  if (!m_GtpTeid.decode(gtpTunnel.gTP_TEID)) return false;
+  if (!m_GtpTeid.decode(gtpTunnel.gTP_TEID))
+    return false;
 
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

@@ -20,12 +20,12 @@
 #define PartialSuccessReport_H_
 
 #include "FailureCause.h"
-#include "UeCampingRep.h"
 #include "PolicyDecisionFailureCode.h"
 #include "RuleReport.h"
 #include "SessionRuleReport.h"
-#include <vector>
+#include "UeCampingRep.h"
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::pcf {
 
@@ -33,7 +33,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class PartialSuccessReport {
- public:
+public:
   PartialSuccessReport();
   virtual ~PartialSuccessReport() = default;
 
@@ -47,16 +47,16 @@ class PartialSuccessReport {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const PartialSuccessReport& rhs) const;
-  bool operator!=(const PartialSuccessReport& rhs) const;
+  bool operator==(const PartialSuccessReport &rhs) const;
+  bool operator!=(const PartialSuccessReport &rhs) const;
 
   /////////////////////////////////////////////
   /// PartialSuccessReport members
@@ -65,13 +65,13 @@ class PartialSuccessReport {
   ///
   /// </summary>
   oai::model::pcf::FailureCause getFailureCause() const;
-  void setFailureCause(oai::model::pcf::FailureCause const& value);
+  void setFailureCause(oai::model::pcf::FailureCause const &value);
   /// <summary>
   /// Information about the PCC rules provisioned by the PCF not successfully
   /// installed/activated.
   /// </summary>
   std::vector<oai::model::pcf::RuleReport> getRuleReports() const;
-  void setRuleReports(std::vector<oai::model::pcf::RuleReport> const& value);
+  void setRuleReports(std::vector<oai::model::pcf::RuleReport> const &value);
   bool ruleReportsIsSet() const;
   void unsetRuleReports();
   /// <summary>
@@ -80,14 +80,14 @@ class PartialSuccessReport {
   /// </summary>
   std::vector<oai::model::pcf::SessionRuleReport> getSessRuleReports() const;
   void setSessRuleReports(
-      std::vector<oai::model::pcf::SessionRuleReport> const& value);
+      std::vector<oai::model::pcf::SessionRuleReport> const &value);
   bool sessRuleReportsIsSet() const;
   void unsetSessRuleReports();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::UeCampingRep getUeCampingRep() const;
-  void setUeCampingRep(oai::model::pcf::UeCampingRep const& value);
+  void setUeCampingRep(oai::model::pcf::UeCampingRep const &value);
   bool ueCampingRepIsSet() const;
   void unsetUeCampingRep();
   /// <summary>
@@ -96,14 +96,14 @@ class PartialSuccessReport {
   std::vector<oai::model::pcf::PolicyDecisionFailureCode>
   getPolicyDecFailureReports() const;
   void setPolicyDecFailureReports(
-      std::vector<oai::model::pcf::PolicyDecisionFailureCode> const& value);
+      std::vector<oai::model::pcf::PolicyDecisionFailureCode> const &value);
   bool policyDecFailureReportsIsSet() const;
   void unsetPolicyDecFailureReports();
 
-  friend void to_json(nlohmann::json& j, const PartialSuccessReport& o);
-  friend void from_json(const nlohmann::json& j, PartialSuccessReport& o);
+  friend void to_json(nlohmann::json &j, const PartialSuccessReport &o);
+  friend void from_json(const nlohmann::json &j, PartialSuccessReport &o);
 
- protected:
+protected:
   oai::model::pcf::FailureCause m_FailureCause;
 
   std::vector<oai::model::pcf::RuleReport> m_RuleReports;
@@ -117,6 +117,6 @@ class PartialSuccessReport {
   bool m_PolicyDecFailureReportsIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* PartialSuccessReport_H_ */

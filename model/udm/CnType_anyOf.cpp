@@ -16,8 +16,8 @@
 
 #include "CnType_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::udm {
 
@@ -30,12 +30,12 @@ void CnType_anyOf::validate() const {
   }
 }
 
-bool CnType_anyOf::validate(std::stringstream& msg) const {
+bool CnType_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool CnType_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool CnType_anyOf::validate(std::stringstream &msg,
+                            const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "CnType_anyOf" : pathPrefix;
@@ -48,36 +48,36 @@ bool CnType_anyOf::validate(
   return success;
 }
 
-bool CnType_anyOf::operator==(const CnType_anyOf& rhs) const {
+bool CnType_anyOf::operator==(const CnType_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool CnType_anyOf::operator!=(const CnType_anyOf& rhs) const {
+bool CnType_anyOf::operator!=(const CnType_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const CnType_anyOf& o) {
+void to_json(nlohmann::json &j, const CnType_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case CnType_anyOf::eCnType_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case CnType_anyOf::eCnType_anyOf::SINGLE_4G:
-      j = "SINGLE_4G";
-      break;
-    case CnType_anyOf::eCnType_anyOf::SINGLE_5G:
-      j = "SINGLE_5G";
-      break;
-    case CnType_anyOf::eCnType_anyOf::DUAL_4G5G:
-      j = "DUAL_4G5G";
-      break;
+  case CnType_anyOf::eCnType_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case CnType_anyOf::eCnType_anyOf::SINGLE_4G:
+    j = "SINGLE_4G";
+    break;
+  case CnType_anyOf::eCnType_anyOf::SINGLE_5G:
+    j = "SINGLE_5G";
+    break;
+  case CnType_anyOf::eCnType_anyOf::DUAL_4G5G:
+    j = "DUAL_4G5G";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, CnType_anyOf& o) {
+void from_json(const nlohmann::json &j, CnType_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "SINGLE_4G") {
     o.setValue(CnType_anyOf::eCnType_anyOf::SINGLE_4G);
@@ -94,11 +94,9 @@ void from_json(const nlohmann::json& j, CnType_anyOf& o) {
   }
 }
 
-CnType_anyOf::eCnType_anyOf CnType_anyOf::getValue() const {
-  return m_value;
-}
+CnType_anyOf::eCnType_anyOf CnType_anyOf::getValue() const { return m_value; }
 void CnType_anyOf::setValue(CnType_anyOf::eCnType_anyOf value) {
   m_value = value;
 }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

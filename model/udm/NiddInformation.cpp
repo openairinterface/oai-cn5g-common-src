@@ -20,8 +20,8 @@ namespace oai::model::udm {
 
 NiddInformation::NiddInformation() {
   m_AfInstanceId = "";
-  m_Gpsi         = "";
-  m_GpsiIsSet    = false;
+  m_Gpsi = "";
+  m_GpsiIsSet = false;
 }
 
 NiddInformation::~NiddInformation() {}
@@ -30,13 +30,14 @@ void NiddInformation::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const NiddInformation& o) {
-  j                 = nlohmann::json();
+void to_json(nlohmann::json &j, const NiddInformation &o) {
+  j = nlohmann::json();
   j["afInstanceId"] = o.m_AfInstanceId;
-  if (o.gpsiIsSet()) j["gpsi"] = o.m_Gpsi;
+  if (o.gpsiIsSet())
+    j["gpsi"] = o.m_Gpsi;
 }
 
-void from_json(const nlohmann::json& j, NiddInformation& o) {
+void from_json(const nlohmann::json &j, NiddInformation &o) {
   j.at("afInstanceId").get_to(o.m_AfInstanceId);
   if (j.find("gpsi") != j.end()) {
     j.at("gpsi").get_to(o.m_Gpsi);
@@ -44,24 +45,16 @@ void from_json(const nlohmann::json& j, NiddInformation& o) {
   }
 }
 
-std::string NiddInformation::getAfInstanceId() const {
-  return m_AfInstanceId;
-}
-void NiddInformation::setAfInstanceId(std::string const& value) {
+std::string NiddInformation::getAfInstanceId() const { return m_AfInstanceId; }
+void NiddInformation::setAfInstanceId(std::string const &value) {
   m_AfInstanceId = value;
 }
-std::string NiddInformation::getGpsi() const {
-  return m_Gpsi;
-}
-void NiddInformation::setGpsi(std::string const& value) {
-  m_Gpsi      = value;
+std::string NiddInformation::getGpsi() const { return m_Gpsi; }
+void NiddInformation::setGpsi(std::string const &value) {
+  m_Gpsi = value;
   m_GpsiIsSet = true;
 }
-bool NiddInformation::gpsiIsSet() const {
-  return m_GpsiIsSet;
-}
-void NiddInformation::unsetGpsi() {
-  m_GpsiIsSet = false;
-}
+bool NiddInformation::gpsiIsSet() const { return m_GpsiIsSet; }
+void NiddInformation::unsetGpsi() { m_GpsiIsSet = false; }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

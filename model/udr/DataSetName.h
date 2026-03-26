@@ -30,7 +30,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class DataSetName {
- public:
+public:
   DataSetName();
   virtual ~DataSetName();
 
@@ -39,12 +39,12 @@ class DataSetName {
   /////////////////////////////////////////////
   /// DataSetName members
 
-  friend void to_json(nlohmann::json& j, const DataSetName& o);
-  friend void from_json(const nlohmann::json& j, DataSetName& o);
+  friend void to_json(nlohmann::json &j, const DataSetName &o);
+  friend void from_json(const nlohmann::json &j, DataSetName &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* DataSetName_H_ */

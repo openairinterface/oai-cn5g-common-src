@@ -33,7 +33,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class EmergencyInfo {
- public:
+public:
   EmergencyInfo();
   virtual ~EmergencyInfo();
 
@@ -46,21 +46,21 @@ class EmergencyInfo {
   ///
   /// </summary>
   std::string getPgwFqdn() const;
-  void setPgwFqdn(std::string const& value);
+  void setPgwFqdn(std::string const &value);
   bool pgwFqdnIsSet() const;
   void unsetPgwFqdn();
   /// <summary>
   ///
   /// </summary>
   IpAddress getPgwIpAddress() const;
-  void setPgwIpAddress(IpAddress const& value);
+  void setPgwIpAddress(IpAddress const &value);
   bool pgwIpAddressIsSet() const;
   void unsetPgwIpAddress();
   /// <summary>
   ///
   /// </summary>
   std::string getSmfInstanceId() const;
-  void setSmfInstanceId(std::string const& value);
+  void setSmfInstanceId(std::string const &value);
   bool smfInstanceIdIsSet() const;
   void unsetSmfInstanceId();
   /// <summary>
@@ -71,10 +71,10 @@ class EmergencyInfo {
   bool epdgIndIsSet() const;
   void unsetEpdgInd();
 
-  friend void to_json(nlohmann::json& j, const EmergencyInfo& o);
-  friend void from_json(const nlohmann::json& j, EmergencyInfo& o);
+  friend void to_json(nlohmann::json &j, const EmergencyInfo &o);
+  friend void from_json(const nlohmann::json &j, EmergencyInfo &o);
 
- protected:
+protected:
   std::string m_PgwFqdn;
   bool m_PgwFqdnIsSet;
   IpAddress m_PgwIpAddress;
@@ -85,6 +85,6 @@ class EmergencyInfo {
   bool m_EpdgIndIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* EmergencyInfo_H_ */

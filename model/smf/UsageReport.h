@@ -22,7 +22,7 @@ enum UsageReportTrigger { PERIO = 1, VOLTH, TIMTH, VOLQU, TIMQU };
 ///
 /// </summary>
 class UsageReport {
- public:
+public:
   UsageReport();
   virtual ~UsageReport();
 
@@ -35,7 +35,7 @@ class UsageReport {
   ///
   /// </summary>
   int64_t getSEndID() const;
-  void setSEndID(int64_t const& value);
+  void setSEndID(int64_t const &value);
   bool SEndIDIsSet() const;
   void unsetSEndID();
 
@@ -43,7 +43,7 @@ class UsageReport {
   ///
   /// </summary>
   int32_t geturSeqN() const;
-  void seturSeqN(int32_t const& value);
+  void seturSeqN(int32_t const &value);
   bool urSeqNIsSet() const;
   void unseturSeqN();
 
@@ -51,7 +51,7 @@ class UsageReport {
   ///
   /// </summary>
   int32_t getDuration() const;
-  void setDuration(int32_t const& value);
+  void setDuration(int32_t const &value);
   bool durationIsSet() const;
   void unsetDuration();
 
@@ -59,7 +59,7 @@ class UsageReport {
   ///
   /// </summary>
   int64_t getTotNoP() const;
-  void setTotNoP(int64_t const& value);
+  void setTotNoP(int64_t const &value);
   bool totNoPIsSet() const;
   void unsetTotNoP();
 
@@ -67,7 +67,7 @@ class UsageReport {
   ///
   /// </summary>
   int64_t getUlNoP() const;
-  void setUlNoP(int64_t const& value);
+  void setUlNoP(int64_t const &value);
   bool ulNoPIsSet() const;
   void unsetUlNoP();
 
@@ -75,7 +75,7 @@ class UsageReport {
   ///
   /// </summary>
   int64_t getDlNoP() const;
-  void setDlNoP(int64_t const& value);
+  void setDlNoP(int64_t const &value);
   bool dlNoPIsSet() const;
   void unsetDlNoP();
 
@@ -83,7 +83,7 @@ class UsageReport {
   ///
   /// </summary>
   int64_t getTotVol() const;
-  void setTotVol(int64_t const& value);
+  void setTotVol(int64_t const &value);
   bool totVolIsSet() const;
   void unsetTotVol();
 
@@ -91,7 +91,7 @@ class UsageReport {
   ///
   /// </summary>
   int64_t getUlVol() const;
-  void setUlVol(int64_t const& value);
+  void setUlVol(int64_t const &value);
   bool ulVolIsSet() const;
   void unsetUlVol();
 
@@ -99,7 +99,7 @@ class UsageReport {
   ///
   /// </summary>
   int64_t getDlVol() const;
-  void setDlVol(int64_t const& value);
+  void setDlVol(int64_t const &value);
   bool dlVolIsSet() const;
   void unsetDlVol();
 
@@ -107,14 +107,14 @@ class UsageReport {
   ///
   /// </summary>
   pfcp::usage_report_trigger_t getURTrigger() const;
-  void setURTrigger(pfcp::usage_report_trigger_t const& value);
+  void setURTrigger(pfcp::usage_report_trigger_t const &value);
   bool urTriggerIsSet() const;
   void unsetURTrigger();
 
-  friend void to_json(nlohmann::json& j, const UsageReport& o);
-  friend void from_json(const nlohmann::json& j, UsageReport& o);
+  friend void to_json(nlohmann::json &j, const UsageReport &o);
+  friend void from_json(const nlohmann::json &j, UsageReport &o);
 
- protected:
+protected:
   int64_t m_SEndID;
   bool m_SEndIDIsSet;
   int32_t m_urSeqN;
@@ -138,6 +138,6 @@ class UsageReport {
   bool m_urTrigIsSet;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* UsageReport_H_ */

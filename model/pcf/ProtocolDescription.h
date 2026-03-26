@@ -19,11 +19,11 @@
 #ifndef ProtocolDescription_H_
 #define ProtocolDescription_H_
 
-#include "RtpPayloadInfo.h"
 #include "MediaTransportProto.h"
 #include "RtpHeaderExtInfo.h"
-#include <vector>
+#include "RtpPayloadInfo.h"
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::pcf {
 
@@ -31,7 +31,7 @@ namespace oai::model::pcf {
 /// ProtocolDescription contains information to derive PDU set information.
 /// </summary>
 class ProtocolDescription {
- public:
+public:
   ProtocolDescription();
   virtual ~ProtocolDescription() = default;
 
@@ -45,16 +45,16 @@ class ProtocolDescription {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const ProtocolDescription& rhs) const;
-  bool operator!=(const ProtocolDescription& rhs) const;
+  bool operator==(const ProtocolDescription &rhs) const;
+  bool operator!=(const ProtocolDescription &rhs) const;
 
   /////////////////////////////////////////////
   /// ProtocolDescription members
@@ -63,14 +63,14 @@ class ProtocolDescription {
   ///
   /// </summary>
   oai::model::pcf::MediaTransportProto getTransportProto() const;
-  void setTransportProto(oai::model::pcf::MediaTransportProto const& value);
+  void setTransportProto(oai::model::pcf::MediaTransportProto const &value);
   bool transportProtoIsSet() const;
   void unsetTransportProto();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::RtpHeaderExtInfo getRtpHeaderExtInfo() const;
-  void setRtpHeaderExtInfo(oai::model::pcf::RtpHeaderExtInfo const& value);
+  void setRtpHeaderExtInfo(oai::model::pcf::RtpHeaderExtInfo const &value);
   bool rtpHeaderExtInfoIsSet() const;
   void unsetRtpHeaderExtInfo();
   /// <summary>
@@ -78,14 +78,14 @@ class ProtocolDescription {
   /// </summary>
   std::vector<oai::model::pcf::RtpPayloadInfo> getRtpPayloadInfoList() const;
   void setRtpPayloadInfoList(
-      std::vector<oai::model::pcf::RtpPayloadInfo> const& value);
+      std::vector<oai::model::pcf::RtpPayloadInfo> const &value);
   bool rtpPayloadInfoListIsSet() const;
   void unsetRtpPayloadInfoList();
 
-  friend void to_json(nlohmann::json& j, const ProtocolDescription& o);
-  friend void from_json(const nlohmann::json& j, ProtocolDescription& o);
+  friend void to_json(nlohmann::json &j, const ProtocolDescription &o);
+  friend void from_json(const nlohmann::json &j, ProtocolDescription &o);
 
- protected:
+protected:
   oai::model::pcf::MediaTransportProto m_TransportProto;
   bool m_TransportProtoIsSet;
   oai::model::pcf::RtpHeaderExtInfo m_RtpHeaderExtInfo;
@@ -94,6 +94,6 @@ class ProtocolDescription {
   bool m_RtpPayloadInfoListIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* ProtocolDescription_H_ */

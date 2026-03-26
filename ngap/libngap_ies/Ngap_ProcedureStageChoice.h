@@ -33,8 +33,8 @@ struct Ngap_ProtocolIE_SingleContainer;
 typedef struct Ngap_ProcedureStageChoice {
   Ngap_ProcedureStageChoice_PR present;
   union Ngap_ProcedureStageChoice_u {
-    struct Ngap_FirstDLCount* first_dl_count;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_FirstDLCount *first_dl_count;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

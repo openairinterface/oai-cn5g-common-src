@@ -35,10 +35,10 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_BluetoothMeasurementConfiguration */
 typedef struct Ngap_BluetoothMeasurementConfiguration {
   Ngap_BluetoothMeasConfig_t bluetoothMeasConfig;
-  struct Ngap_BluetoothMeasConfigNameList*
-      bluetoothMeasConfigNameList;                       /* OPTIONAL */
-  long* bt_rssi;                                         /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_BluetoothMeasConfigNameList
+      *bluetoothMeasConfigNameList;                      /* OPTIONAL */
+  long *bt_rssi;                                         /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

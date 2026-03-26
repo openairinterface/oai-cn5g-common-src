@@ -27,18 +27,18 @@ void SpatialValidityRm::validate() const {
   }
 }
 
-bool SpatialValidityRm::validate(std::stringstream& msg) const {
+bool SpatialValidityRm::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool SpatialValidityRm::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool SpatialValidityRm::validate(std::stringstream &msg,
+                                 const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "SpatialValidityRm" : pathPrefix;
 
   /* PresenceInfoList */ {
-    const std::map<std::string, oai::model::common::PresenceInfo>& value =
+    const std::map<std::string, oai::model::common::PresenceInfo> &value =
         m_PresenceInfoList;
     const std::string currentValuePath = _pathPrefix + ".presenceInfoList";
   }
@@ -46,7 +46,7 @@ bool SpatialValidityRm::validate(
   return success;
 }
 
-bool SpatialValidityRm::operator==(const SpatialValidityRm& rhs) const {
+bool SpatialValidityRm::operator==(const SpatialValidityRm &rhs) const {
   return
 
       (getPresenceInfoList() == rhs.getPresenceInfoList())
@@ -54,16 +54,16 @@ bool SpatialValidityRm::operator==(const SpatialValidityRm& rhs) const {
           ;
 }
 
-bool SpatialValidityRm::operator!=(const SpatialValidityRm& rhs) const {
+bool SpatialValidityRm::operator!=(const SpatialValidityRm &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const SpatialValidityRm& o) {
-  j                     = nlohmann::json::object();
+void to_json(nlohmann::json &j, const SpatialValidityRm &o) {
+  j = nlohmann::json::object();
   j["presenceInfoList"] = o.m_PresenceInfoList;
 }
 
-void from_json(const nlohmann::json& j, SpatialValidityRm& o) {
+void from_json(const nlohmann::json &j, SpatialValidityRm &o) {
   j.at("presenceInfoList").get_to(o.m_PresenceInfoList);
 }
 
@@ -72,8 +72,8 @@ SpatialValidityRm::getPresenceInfoList() const {
   return m_PresenceInfoList;
 }
 void SpatialValidityRm::setPresenceInfoList(
-    std::map<std::string, oai::model::common::PresenceInfo> const& value) {
+    std::map<std::string, oai::model::common::PresenceInfo> const &value) {
   m_PresenceInfoList = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

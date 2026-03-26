@@ -27,12 +27,12 @@ void NoProfileMatchReason::validate() const {
   }
 }
 
-bool NoProfileMatchReason::validate(std::stringstream& msg) const {
+bool NoProfileMatchReason::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool NoProfileMatchReason::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool NoProfileMatchReason::validate(std::stringstream &msg,
+                                    const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "NoProfileMatchReason" : pathPrefix;
@@ -40,18 +40,18 @@ bool NoProfileMatchReason::validate(
   return success;
 }
 
-bool NoProfileMatchReason::operator==(const NoProfileMatchReason& rhs) const {
-  return true;  // TODO
+bool NoProfileMatchReason::operator==(const NoProfileMatchReason &rhs) const {
+  return true; // TODO
 }
 
-bool NoProfileMatchReason::operator!=(const NoProfileMatchReason& rhs) const {
+bool NoProfileMatchReason::operator!=(const NoProfileMatchReason &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const NoProfileMatchReason& o) {
+void to_json(nlohmann::json &j, const NoProfileMatchReason &o) {
   j = nlohmann::json::object();
 }
 
-void from_json(const nlohmann::json& j, NoProfileMatchReason& o) {}
+void from_json(const nlohmann::json &j, NoProfileMatchReason &o) {}
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

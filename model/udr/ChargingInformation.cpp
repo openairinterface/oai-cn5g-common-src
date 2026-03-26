@@ -19,15 +19,15 @@
 namespace oai::udr::model {
 
 ChargingInformation::ChargingInformation() {
-  m_PrimaryChfAddress           = "";
-  m_SecondaryChfAddress         = "";
-  m_PrimaryChfSetId             = "";
-  m_PrimaryChfSetIdIsSet        = false;
-  m_PrimaryChfInstanceId        = "";
-  m_PrimaryChfInstanceIdIsSet   = false;
-  m_SecondaryChfSetId           = "";
-  m_SecondaryChfSetIdIsSet      = false;
-  m_SecondaryChfInstanceId      = "";
+  m_PrimaryChfAddress = "";
+  m_SecondaryChfAddress = "";
+  m_PrimaryChfSetId = "";
+  m_PrimaryChfSetIdIsSet = false;
+  m_PrimaryChfInstanceId = "";
+  m_PrimaryChfInstanceIdIsSet = false;
+  m_SecondaryChfSetId = "";
+  m_SecondaryChfSetIdIsSet = false;
+  m_SecondaryChfInstanceId = "";
   m_SecondaryChfInstanceIdIsSet = false;
 }
 
@@ -37,11 +37,12 @@ void ChargingInformation::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const ChargingInformation& o) {
-  j                        = nlohmann::json();
-  j["primaryChfAddress"]   = o.m_PrimaryChfAddress;
+void to_json(nlohmann::json &j, const ChargingInformation &o) {
+  j = nlohmann::json();
+  j["primaryChfAddress"] = o.m_PrimaryChfAddress;
   j["secondaryChfAddress"] = o.m_SecondaryChfAddress;
-  if (o.primaryChfSetIdIsSet()) j["primaryChfSetId"] = o.m_PrimaryChfSetId;
+  if (o.primaryChfSetIdIsSet())
+    j["primaryChfSetId"] = o.m_PrimaryChfSetId;
   if (o.primaryChfInstanceIdIsSet())
     j["primaryChfInstanceId"] = o.m_PrimaryChfInstanceId;
   if (o.secondaryChfSetIdIsSet())
@@ -50,7 +51,7 @@ void to_json(nlohmann::json& j, const ChargingInformation& o) {
     j["secondaryChfInstanceId"] = o.m_SecondaryChfInstanceId;
 }
 
-void from_json(const nlohmann::json& j, ChargingInformation& o) {
+void from_json(const nlohmann::json &j, ChargingInformation &o) {
   j.at("primaryChfAddress").get_to(o.m_PrimaryChfAddress);
   j.at("secondaryChfAddress").get_to(o.m_SecondaryChfAddress);
   if (j.find("primaryChfSetId") != j.end()) {
@@ -74,20 +75,20 @@ void from_json(const nlohmann::json& j, ChargingInformation& o) {
 std::string ChargingInformation::getPrimaryChfAddress() const {
   return m_PrimaryChfAddress;
 }
-void ChargingInformation::setPrimaryChfAddress(std::string const& value) {
+void ChargingInformation::setPrimaryChfAddress(std::string const &value) {
   m_PrimaryChfAddress = value;
 }
 std::string ChargingInformation::getSecondaryChfAddress() const {
   return m_SecondaryChfAddress;
 }
-void ChargingInformation::setSecondaryChfAddress(std::string const& value) {
+void ChargingInformation::setSecondaryChfAddress(std::string const &value) {
   m_SecondaryChfAddress = value;
 }
 std::string ChargingInformation::getPrimaryChfSetId() const {
   return m_PrimaryChfSetId;
 }
-void ChargingInformation::setPrimaryChfSetId(std::string const& value) {
-  m_PrimaryChfSetId      = value;
+void ChargingInformation::setPrimaryChfSetId(std::string const &value) {
+  m_PrimaryChfSetId = value;
   m_PrimaryChfSetIdIsSet = true;
 }
 bool ChargingInformation::primaryChfSetIdIsSet() const {
@@ -99,8 +100,8 @@ void ChargingInformation::unsetPrimaryChfSetId() {
 std::string ChargingInformation::getPrimaryChfInstanceId() const {
   return m_PrimaryChfInstanceId;
 }
-void ChargingInformation::setPrimaryChfInstanceId(std::string const& value) {
-  m_PrimaryChfInstanceId      = value;
+void ChargingInformation::setPrimaryChfInstanceId(std::string const &value) {
+  m_PrimaryChfInstanceId = value;
   m_PrimaryChfInstanceIdIsSet = true;
 }
 bool ChargingInformation::primaryChfInstanceIdIsSet() const {
@@ -112,8 +113,8 @@ void ChargingInformation::unsetPrimaryChfInstanceId() {
 std::string ChargingInformation::getSecondaryChfSetId() const {
   return m_SecondaryChfSetId;
 }
-void ChargingInformation::setSecondaryChfSetId(std::string const& value) {
-  m_SecondaryChfSetId      = value;
+void ChargingInformation::setSecondaryChfSetId(std::string const &value) {
+  m_SecondaryChfSetId = value;
   m_SecondaryChfSetIdIsSet = true;
 }
 bool ChargingInformation::secondaryChfSetIdIsSet() const {
@@ -125,8 +126,8 @@ void ChargingInformation::unsetSecondaryChfSetId() {
 std::string ChargingInformation::getSecondaryChfInstanceId() const {
   return m_SecondaryChfInstanceId;
 }
-void ChargingInformation::setSecondaryChfInstanceId(std::string const& value) {
-  m_SecondaryChfInstanceId      = value;
+void ChargingInformation::setSecondaryChfInstanceId(std::string const &value) {
+  m_SecondaryChfInstanceId = value;
   m_SecondaryChfInstanceIdIsSet = true;
 }
 bool ChargingInformation::secondaryChfInstanceIdIsSet() const {
@@ -136,4 +137,4 @@ void ChargingInformation::unsetSecondaryChfInstanceId() {
   m_SecondaryChfInstanceIdIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

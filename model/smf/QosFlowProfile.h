@@ -20,11 +20,11 @@
 #define QosFlowProfile_H_
 
 #include "AdditionalQosFlowInfo.h"
+#include "Arp.h"
 #include "Dynamic5Qi.h"
 #include "GbrQosFlowInformation.h"
-#include "ReflectiveQoSAttribute.h"
-#include "Arp.h"
 #include "NonDynamic5Qi.h"
+#include "ReflectiveQoSAttribute.h"
 #include <nlohmann/json.hpp>
 
 namespace oai::model::smf {
@@ -33,7 +33,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class QosFlowProfile {
- public:
+public:
   QosFlowProfile();
   virtual ~QosFlowProfile();
 
@@ -51,35 +51,35 @@ class QosFlowProfile {
   ///
   /// </summary>
   oai::model::common::NonDynamic5Qi getNonDynamic5Qi() const;
-  void setNonDynamic5Qi(oai::model::common::NonDynamic5Qi const& value);
+  void setNonDynamic5Qi(oai::model::common::NonDynamic5Qi const &value);
   bool nonDynamic5QiIsSet() const;
   void unsetNonDynamic5Qi();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Dynamic5Qi getDynamic5Qi() const;
-  void setDynamic5Qi(oai::model::common::Dynamic5Qi const& value);
+  void setDynamic5Qi(oai::model::common::Dynamic5Qi const &value);
   bool dynamic5QiIsSet() const;
   void unsetDynamic5Qi();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Arp getArp() const;
-  void setArp(oai::model::common::Arp const& value);
+  void setArp(oai::model::common::Arp const &value);
   bool arpIsSet() const;
   void unsetArp();
   /// <summary>
   ///
   /// </summary>
   GbrQosFlowInformation getGbrQosFlowInfo() const;
-  void setGbrQosFlowInfo(GbrQosFlowInformation const& value);
+  void setGbrQosFlowInfo(GbrQosFlowInformation const &value);
   bool gbrQosFlowInfoIsSet() const;
   void unsetGbrQosFlowInfo();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::ReflectiveQoSAttribute getRqa() const;
-  void setRqa(oai::model::common::ReflectiveQoSAttribute const& value);
+  void setRqa(oai::model::common::ReflectiveQoSAttribute const &value);
   bool rqaIsSet() const;
   void unsetRqa();
   /// <summary>
@@ -87,14 +87,14 @@ class QosFlowProfile {
   /// </summary>
   oai::model::common::AdditionalQosFlowInfo getAdditionalQosFlowInfo() const;
   void setAdditionalQosFlowInfo(
-      oai::model::common::AdditionalQosFlowInfo const& value);
+      oai::model::common::AdditionalQosFlowInfo const &value);
   bool additionalQosFlowInfoIsSet() const;
   void unsetAdditionalQosFlowInfo();
 
-  friend void to_json(nlohmann::json& j, const QosFlowProfile& o);
-  friend void from_json(const nlohmann::json& j, QosFlowProfile& o);
+  friend void to_json(nlohmann::json &j, const QosFlowProfile &o);
+  friend void from_json(const nlohmann::json &j, QosFlowProfile &o);
 
- protected:
+protected:
   int32_t m__5qi;
 
   oai::model::common::NonDynamic5Qi m_NonDynamic5Qi;
@@ -111,6 +111,6 @@ class QosFlowProfile {
   bool m_AdditionalQosFlowInfoIsSet;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* QosFlowProfile_H_ */

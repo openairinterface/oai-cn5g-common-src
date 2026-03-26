@@ -27,12 +27,12 @@ void ServiceInfoStatus::validate() const {
   }
 }
 
-bool ServiceInfoStatus::validate(std::stringstream& msg) const {
+bool ServiceInfoStatus::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ServiceInfoStatus::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ServiceInfoStatus::validate(std::stringstream &msg,
+                                 const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ServiceInfoStatus" : pathPrefix;
@@ -40,18 +40,18 @@ bool ServiceInfoStatus::validate(
   return success;
 }
 
-bool ServiceInfoStatus::operator==(const ServiceInfoStatus& rhs) const {
-  return true;  // TODO
+bool ServiceInfoStatus::operator==(const ServiceInfoStatus &rhs) const {
+  return true; // TODO
 }
 
-bool ServiceInfoStatus::operator!=(const ServiceInfoStatus& rhs) const {
+bool ServiceInfoStatus::operator!=(const ServiceInfoStatus &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ServiceInfoStatus& o) {
+void to_json(nlohmann::json &j, const ServiceInfoStatus &o) {
   j = nlohmann::json::object();
 }
 
-void from_json(const nlohmann::json& j, ServiceInfoStatus& o) {}
+void from_json(const nlohmann::json &j, ServiceInfoStatus &o) {}
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

@@ -19,16 +19,16 @@
 namespace oai::model::udsf {
 
 NotificationSubscription::NotificationSubscription() {
-  m_CallbackReference            = "";
-  m_ExpiryCallbackReference      = "";
+  m_CallbackReference = "";
+  m_ExpiryCallbackReference = "";
   m_ExpiryCallbackReferenceIsSet = false;
-  m_Expiry                       = "";
-  m_ExpiryIsSet                  = false;
-  m_ExpiryNotification           = 0;
-  m_ExpiryNotificationIsSet      = false;
-  m_SubFilterIsSet               = false;
-  m_SupportedFeatures            = "";
-  m_SupportedFeaturesIsSet       = false;
+  m_Expiry = "";
+  m_ExpiryIsSet = false;
+  m_ExpiryNotification = 0;
+  m_ExpiryNotificationIsSet = false;
+  m_SubFilterIsSet = false;
+  m_SupportedFeatures = "";
+  m_SupportedFeaturesIsSet = false;
 }
 
 void NotificationSubscription::validate() const {
@@ -38,18 +38,18 @@ void NotificationSubscription::validate() const {
   }
 }
 
-bool NotificationSubscription::validate(std::stringstream& msg) const {
+bool NotificationSubscription::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool NotificationSubscription::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool NotificationSubscription::validate(std::stringstream &msg,
+                                        const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "NotificationSubscription" : pathPrefix;
 
   if (expiryNotificationIsSet()) {
-    const int32_t& value               = m_ExpiryNotification;
+    const int32_t &value = m_ExpiryNotification;
     const std::string currentValuePath = _pathPrefix + ".expiryNotification";
 
     if (value < 0) {
@@ -59,7 +59,7 @@ bool NotificationSubscription::validate(
   }
 
   if (supportedFeaturesIsSet()) {
-    const std::string& value           = m_SupportedFeatures;
+    const std::string &value = m_SupportedFeatures;
     const std::string currentValuePath = _pathPrefix + ".supportedFeatures";
   }
 
@@ -67,7 +67,7 @@ bool NotificationSubscription::validate(
 }
 
 bool NotificationSubscription::operator==(
-    const NotificationSubscription& rhs) const {
+    const NotificationSubscription &rhs) const {
   return
 
       (getClientId() == rhs.getClientId()) &&
@@ -99,25 +99,27 @@ bool NotificationSubscription::operator==(
 }
 
 bool NotificationSubscription::operator!=(
-    const NotificationSubscription& rhs) const {
+    const NotificationSubscription &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const NotificationSubscription& o) {
-  j                      = nlohmann::json();
-  j["clientId"]          = o.m_ClientId;
+void to_json(nlohmann::json &j, const NotificationSubscription &o) {
+  j = nlohmann::json();
+  j["clientId"] = o.m_ClientId;
   j["callbackReference"] = o.m_CallbackReference;
   if (o.expiryCallbackReferenceIsSet())
     j["expiryCallbackReference"] = o.m_ExpiryCallbackReference;
-  if (o.expiryIsSet()) j["expiry"] = o.m_Expiry;
+  if (o.expiryIsSet())
+    j["expiry"] = o.m_Expiry;
   if (o.expiryNotificationIsSet())
     j["expiryNotification"] = o.m_ExpiryNotification;
-  if (o.subFilterIsSet()) j["subFilter"] = o.m_SubFilter;
+  if (o.subFilterIsSet())
+    j["subFilter"] = o.m_SubFilter;
   if (o.supportedFeaturesIsSet())
     j["supportedFeatures"] = o.m_SupportedFeatures;
 }
 
-void from_json(const nlohmann::json& j, NotificationSubscription& o) {
+void from_json(const nlohmann::json &j, NotificationSubscription &o) {
   j.at("clientId").get_to(o.m_ClientId);
   j.at("callbackReference").get_to(o.m_CallbackReference);
   if (j.find("expiryCallbackReference") != j.end()) {
@@ -146,21 +148,21 @@ oai::model::udsf::ClientId NotificationSubscription::getClientId() const {
   return m_ClientId;
 }
 void NotificationSubscription::setClientId(
-    oai::model::udsf::ClientId const& value) {
+    oai::model::udsf::ClientId const &value) {
   m_ClientId = value;
 }
 std::string NotificationSubscription::getCallbackReference() const {
   return m_CallbackReference;
 }
-void NotificationSubscription::setCallbackReference(std::string const& value) {
+void NotificationSubscription::setCallbackReference(std::string const &value) {
   m_CallbackReference = value;
 }
 std::string NotificationSubscription::getExpiryCallbackReference() const {
   return m_ExpiryCallbackReference;
 }
 void NotificationSubscription::setExpiryCallbackReference(
-    std::string const& value) {
-  m_ExpiryCallbackReference      = value;
+    std::string const &value) {
+  m_ExpiryCallbackReference = value;
   m_ExpiryCallbackReferenceIsSet = true;
 }
 bool NotificationSubscription::expiryCallbackReferenceIsSet() const {
@@ -169,24 +171,18 @@ bool NotificationSubscription::expiryCallbackReferenceIsSet() const {
 void NotificationSubscription::unsetExpiryCallbackReference() {
   m_ExpiryCallbackReferenceIsSet = false;
 }
-std::string NotificationSubscription::getExpiry() const {
-  return m_Expiry;
-}
-void NotificationSubscription::setExpiry(std::string const& value) {
-  m_Expiry      = value;
+std::string NotificationSubscription::getExpiry() const { return m_Expiry; }
+void NotificationSubscription::setExpiry(std::string const &value) {
+  m_Expiry = value;
   m_ExpiryIsSet = true;
 }
-bool NotificationSubscription::expiryIsSet() const {
-  return m_ExpiryIsSet;
-}
-void NotificationSubscription::unsetExpiry() {
-  m_ExpiryIsSet = false;
-}
+bool NotificationSubscription::expiryIsSet() const { return m_ExpiryIsSet; }
+void NotificationSubscription::unsetExpiry() { m_ExpiryIsSet = false; }
 int32_t NotificationSubscription::getExpiryNotification() const {
   return m_ExpiryNotification;
 }
 void NotificationSubscription::setExpiryNotification(int32_t const value) {
-  m_ExpiryNotification      = value;
+  m_ExpiryNotification = value;
   m_ExpiryNotificationIsSet = true;
 }
 bool NotificationSubscription::expiryNotificationIsSet() const {
@@ -195,26 +191,24 @@ bool NotificationSubscription::expiryNotificationIsSet() const {
 void NotificationSubscription::unsetExpiryNotification() {
   m_ExpiryNotificationIsSet = false;
 }
-oai::model::udsf::SubscriptionFilter NotificationSubscription::getSubFilter()
-    const {
+oai::model::udsf::SubscriptionFilter
+NotificationSubscription::getSubFilter() const {
   return m_SubFilter;
 }
 void NotificationSubscription::setSubFilter(
-    oai::model::udsf::SubscriptionFilter const& value) {
-  m_SubFilter      = value;
+    oai::model::udsf::SubscriptionFilter const &value) {
+  m_SubFilter = value;
   m_SubFilterIsSet = true;
 }
 bool NotificationSubscription::subFilterIsSet() const {
   return m_SubFilterIsSet;
 }
-void NotificationSubscription::unsetSubFilter() {
-  m_SubFilterIsSet = false;
-}
+void NotificationSubscription::unsetSubFilter() { m_SubFilterIsSet = false; }
 std::string NotificationSubscription::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
-void NotificationSubscription::setSupportedFeatures(std::string const& value) {
-  m_SupportedFeatures      = value;
+void NotificationSubscription::setSupportedFeatures(std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool NotificationSubscription::supportedFeaturesIsSet() const {
@@ -224,4 +218,4 @@ void NotificationSubscription::unsetSupportedFeatures() {
   m_SupportedFeaturesIsSet = false;
 }
 
-}  // namespace oai::model::udsf
+} // namespace oai::model::udsf

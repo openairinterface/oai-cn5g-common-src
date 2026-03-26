@@ -14,28 +14,28 @@ extern "C" {
 
 namespace oai::ngap {
 class UplinkRanStatusTransfer : public NgapUeMessage {
- public:
+public:
   UplinkRanStatusTransfer();
   virtual ~UplinkRanStatusTransfer();
 
   void initialize();
 
-  void setAmfUeNgapId(const uint64_t& id) override;
-  void setRanUeNgapId(const uint32_t& id) override;
-  bool decode(Ngap_NGAP_PDU_t* ngapMsgPdu) override;
+  void setAmfUeNgapId(const uint64_t &id) override;
+  void setRanUeNgapId(const uint32_t &id) override;
+  bool decode(Ngap_NGAP_PDU_t *ngapMsgPdu) override;
 
   void getRanStatusTransferTransparentContainer(
-      RanStatusTransferTransparentContainer& ranContainer) const;
+      RanStatusTransferTransparentContainer &ranContainer) const;
   void setRanStatusTransferTransparentContainer(
-      const RanStatusTransferTransparentContainer& ranContainer);
+      const RanStatusTransferTransparentContainer &ranContainer);
 
- private:
-  Ngap_UplinkRANStatusTransfer_t* m_UplinkRanStatusTransferIes;
+private:
+  Ngap_UplinkRANStatusTransfer_t *m_UplinkRanStatusTransferIes;
   // AMF_UE_NGAP_ID (Mandatory)
   // RAN_UE_NGAP_ID (Mandatory)
   RanStatusTransferTransparentContainer
-      m_RanStatusTransferTransparentContainer;  // Mandatory
+      m_RanStatusTransferTransparentContainer; // Mandatory
 };
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

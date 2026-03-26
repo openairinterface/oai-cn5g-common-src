@@ -12,7 +12,7 @@ constexpr auto kMaPduSessionInformationIeName = "MA PDU Session Information";
 namespace oai::nas {
 
 class MaPduSessionInformation : public Type1NasIeFormatTv {
- public:
+public:
   MaPduSessionInformation();
   MaPduSessionInformation(uint8_t value);
   virtual ~MaPduSessionInformation();
@@ -22,8 +22,8 @@ class MaPduSessionInformation : public Type1NasIeFormatTv {
   void Set(uint8_t value);
   uint8_t Get() const;
 
- private:
+private:
 };
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

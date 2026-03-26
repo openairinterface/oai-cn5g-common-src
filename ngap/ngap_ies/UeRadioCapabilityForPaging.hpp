@@ -17,28 +17,28 @@ extern "C" {
 namespace oai::ngap {
 
 class UeRadioCapabilityForPaging {
- public:
+public:
   UeRadioCapabilityForPaging();
   virtual ~UeRadioCapabilityForPaging();
 
-  void setUeRadioCapabilityForPagingOfNr(const OCTET_STRING_t& capability);
-  bool getUeRadioCapabilityForPagingOfNr(OCTET_STRING_t& capability) const;
+  void setUeRadioCapabilityForPagingOfNr(const OCTET_STRING_t &capability);
+  bool getUeRadioCapabilityForPagingOfNr(OCTET_STRING_t &capability) const;
 
-  void setUeRadioCapabilityForPagingOfEutra(const OCTET_STRING_t& capability);
-  bool getUeRadioCapabilityForPagingOfEutra(OCTET_STRING_t& capability) const;
+  void setUeRadioCapabilityForPagingOfEutra(const OCTET_STRING_t &capability);
+  bool getUeRadioCapabilityForPagingOfEutra(OCTET_STRING_t &capability) const;
 
-  bool encode(
-      Ngap_UERadioCapabilityForPaging_t& ueRadioCapabilityForPaging) const;
-  bool decode(
-      const Ngap_UERadioCapabilityForPaging_t& ueRadioCapabilityForPaging);
+  bool
+  encode(Ngap_UERadioCapabilityForPaging_t &ueRadioCapabilityForPaging) const;
+  bool
+  decode(const Ngap_UERadioCapabilityForPaging_t &ueRadioCapabilityForPaging);
 
- private:
+private:
   std::optional<UeRadioCapabilityForPagingOfNr>
-      m_UeRadioCapabilityForPagingOfNr;  // Optional
+      m_UeRadioCapabilityForPagingOfNr; // Optional
   std::optional<UeRadioCapabilityForPagingOfEutra>
-      m_UeRadioCapabilityForPagingOfEutra;  // Optional
+      m_UeRadioCapabilityForPagingOfEutra; // Optional
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

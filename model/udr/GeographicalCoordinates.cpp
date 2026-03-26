@@ -29,28 +29,20 @@ void GeographicalCoordinates::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const GeographicalCoordinates& o) {
-  j        = nlohmann::json();
+void to_json(nlohmann::json &j, const GeographicalCoordinates &o) {
+  j = nlohmann::json();
   j["lon"] = o.m_Lon;
   j["lat"] = o.m_Lat;
 }
 
-void from_json(const nlohmann::json& j, GeographicalCoordinates& o) {
+void from_json(const nlohmann::json &j, GeographicalCoordinates &o) {
   j.at("lon").get_to(o.m_Lon);
   j.at("lat").get_to(o.m_Lat);
 }
 
-double GeographicalCoordinates::getLon() const {
-  return m_Lon;
-}
-void GeographicalCoordinates::setLon(double const value) {
-  m_Lon = value;
-}
-double GeographicalCoordinates::getLat() const {
-  return m_Lat;
-}
-void GeographicalCoordinates::setLat(double const value) {
-  m_Lat = value;
-}
+double GeographicalCoordinates::getLon() const { return m_Lon; }
+void GeographicalCoordinates::setLon(double const value) { m_Lon = value; }
+double GeographicalCoordinates::getLat() const { return m_Lat; }
+void GeographicalCoordinates::setLat(double const value) { m_Lat = value; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

@@ -18,9 +18,7 @@
 
 namespace oai::udr::model {
 
-Lpi::Lpi() {
-  m_ValidTimePeriodIsSet = false;
-}
+Lpi::Lpi() { m_ValidTimePeriodIsSet = false; }
 
 Lpi::~Lpi() {}
 
@@ -28,13 +26,14 @@ void Lpi::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const Lpi& o) {
-  j                       = nlohmann::json();
+void to_json(nlohmann::json &j, const Lpi &o) {
+  j = nlohmann::json();
   j["locationPrivacyInd"] = o.m_LocationPrivacyInd;
-  if (o.validTimePeriodIsSet()) j["validTimePeriod"] = o.m_ValidTimePeriod;
+  if (o.validTimePeriodIsSet())
+    j["validTimePeriod"] = o.m_ValidTimePeriod;
 }
 
-void from_json(const nlohmann::json& j, Lpi& o) {
+void from_json(const nlohmann::json &j, Lpi &o) {
   j.at("locationPrivacyInd").get_to(o.m_LocationPrivacyInd);
   if (j.find("validTimePeriod") != j.end()) {
     j.at("validTimePeriod").get_to(o.m_ValidTimePeriod);
@@ -45,21 +44,15 @@ void from_json(const nlohmann::json& j, Lpi& o) {
 LocationPrivacyInd Lpi::getLocationPrivacyInd() const {
   return m_LocationPrivacyInd;
 }
-void Lpi::setLocationPrivacyInd(LocationPrivacyInd const& value) {
+void Lpi::setLocationPrivacyInd(LocationPrivacyInd const &value) {
   m_LocationPrivacyInd = value;
 }
-ValidTimePeriod Lpi::getValidTimePeriod() const {
-  return m_ValidTimePeriod;
-}
-void Lpi::setValidTimePeriod(ValidTimePeriod const& value) {
-  m_ValidTimePeriod      = value;
+ValidTimePeriod Lpi::getValidTimePeriod() const { return m_ValidTimePeriod; }
+void Lpi::setValidTimePeriod(ValidTimePeriod const &value) {
+  m_ValidTimePeriod = value;
   m_ValidTimePeriodIsSet = true;
 }
-bool Lpi::validTimePeriodIsSet() const {
-  return m_ValidTimePeriodIsSet;
-}
-void Lpi::unsetValidTimePeriod() {
-  m_ValidTimePeriodIsSet = false;
-}
+bool Lpi::validTimePeriodIsSet() const { return m_ValidTimePeriodIsSet; }
+void Lpi::unsetValidTimePeriod() { m_ValidTimePeriodIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

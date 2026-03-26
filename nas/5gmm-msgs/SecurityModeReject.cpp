@@ -10,9 +10,8 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 SecurityModeReject::SecurityModeReject()
-    : ie_header_(
-          k5gsMobilityManagementMessages, kPlain5gsMessage,
-          kSecurityModeReject) {}
+    : ie_header_(k5gsMobilityManagementMessages, kPlain5gsMessage,
+                 kSecurityModeReject) {}
 
 //------------------------------------------------------------------------------
 SecurityModeReject::~SecurityModeReject() {}
@@ -36,11 +35,11 @@ void SecurityModeReject::Set5gmmCause(uint8_t value) {
 }
 
 //------------------------------------------------------------------------------
-int SecurityModeReject::Encode(uint8_t* buf, int len) {
+int SecurityModeReject::Encode(uint8_t *buf, int len) {
   oai::logger::logger_common::nas().debug(
       "Encoding SecurityModeReject message");
 
-  int encoded_size    = 0;
+  int encoded_size = 0;
   int encoded_ie_size = 0;
   // Header
   if ((encoded_ie_size = ie_header_.Encode(buf, len)) == KEncodeDecodeError) {
@@ -61,10 +60,10 @@ int SecurityModeReject::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int SecurityModeReject::Decode(uint8_t* buf, int len) {
+int SecurityModeReject::Decode(uint8_t *buf, int len) {
   oai::logger::logger_common::nas().debug(
       "Decoding SecurityModeReject message");
-  int decoded_size    = 0;
+  int decoded_size = 0;
   int decoded_ie_size = 0;
 
   // Header

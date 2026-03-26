@@ -14,17 +14,17 @@ DrbStatusDl12::DrbStatusDl12() {}
 DrbStatusDl12::~DrbStatusDl12() {}
 
 //------------------------------------------------------------------------------
-void DrbStatusDl12::get(CountValueForPdcpSn12& value) const {
+void DrbStatusDl12::get(CountValueForPdcpSn12 &value) const {
   value = m_DlCountValue;
 }
 
 //------------------------------------------------------------------------------
-void DrbStatusDl12::set(const CountValueForPdcpSn12& value) {
+void DrbStatusDl12::set(const CountValueForPdcpSn12 &value) {
   m_DlCountValue = value;
 }
 
 //------------------------------------------------------------------------------
-bool DrbStatusDl12::encode(Ngap_DRBStatusDL12_t& dl12) const {
+bool DrbStatusDl12::encode(Ngap_DRBStatusDL12_t &dl12) const {
   if (!m_DlCountValue.encode(dl12.dL_COUNTValue)) {
     oai::logger::logger_common::ngap().error("Encode DrbStatusDl12 IE error");
     return false;
@@ -33,11 +33,11 @@ bool DrbStatusDl12::encode(Ngap_DRBStatusDL12_t& dl12) const {
 }
 
 //------------------------------------------------------------------------------
-bool DrbStatusDl12::decode(const Ngap_DRBStatusDL12_t& dl12) {
+bool DrbStatusDl12::decode(const Ngap_DRBStatusDL12_t &dl12) {
   if (!m_DlCountValue.decode(dl12.dL_COUNTValue)) {
     oai::logger::logger_common::ngap().error("Decode DrbStatusDl12 IE error");
     return false;
   }
   return true;
 }
-}  // namespace oai::ngap
+} // namespace oai::ngap

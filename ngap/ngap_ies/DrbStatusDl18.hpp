@@ -14,18 +14,18 @@ extern "C" {
 namespace oai::ngap {
 
 class DrbStatusDl18 {
- public:
+public:
   DrbStatusDl18();
   virtual ~DrbStatusDl18();
 
-  void get(CountValueForPdcpSn18& value) const;
-  void set(const CountValueForPdcpSn18& value);
+  void get(CountValueForPdcpSn18 &value) const;
+  void set(const CountValueForPdcpSn18 &value);
 
-  bool encode(Ngap_DRBStatusDL18_t& dl18) const;
-  bool decode(const Ngap_DRBStatusDL18_t& dl18);
+  bool encode(Ngap_DRBStatusDL18_t &dl18) const;
+  bool decode(const Ngap_DRBStatusDL18_t &dl18);
 
- private:
-  CountValueForPdcpSn18 m_DlCountValue;  // Mandatory
+private:
+  CountValueForPdcpSn18 m_DlCountValue; // Mandatory
 };
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

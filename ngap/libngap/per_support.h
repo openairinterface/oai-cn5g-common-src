@@ -5,8 +5,8 @@
 #ifndef _PER_SUPPORT_H_
 #define _PER_SUPPORT_H_
 
-#include <asn_system.h> /* Platform-specific types */
 #include <asn_bit_data.h>
+#include <asn_system.h> /* Platform-specific types */
 
 #ifdef __cplusplus
 extern "C" {
@@ -17,10 +17,10 @@ extern "C" {
  */
 typedef struct asn_per_constraint_s {
   enum asn_per_constraint_flags {
-    APC_UNCONSTRAINED    = 0x0, /* No PER visible constraints */
+    APC_UNCONSTRAINED = 0x0,    /* No PER visible constraints */
     APC_SEMI_CONSTRAINED = 0x1, /* Constrained at "lb" */
-    APC_CONSTRAINED      = 0x2, /* Fully constrained */
-    APC_EXTENSIBLE       = 0x4  /* May have extension */
+    APC_CONSTRAINED = 0x2,      /* Fully constrained */
+    APC_EXTENSIBLE = 0x4        /* May have extension */
   } flags;
   int range_bits;       /* Full number of bits in the range */
   int effective_bits;   /* Effective bits */

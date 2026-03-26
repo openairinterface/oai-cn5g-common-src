@@ -12,21 +12,21 @@ extern "C" {
 namespace oai::ngap {
 
 class ReflectiveQosAttribute {
- public:
+public:
   ReflectiveQosAttribute();
   ReflectiveQosAttribute(e_Ngap_ReflectiveQosAttribute value);
   virtual ~ReflectiveQosAttribute();
 
   void set(e_Ngap_ReflectiveQosAttribute value);
-  bool get(e_Ngap_ReflectiveQosAttribute& value) const;
+  bool get(e_Ngap_ReflectiveQosAttribute &value) const;
 
-  bool encode(Ngap_ReflectiveQosAttribute_t&) const;
-  bool decode(const Ngap_ReflectiveQosAttribute_t&);
+  bool encode(Ngap_ReflectiveQosAttribute_t &) const;
+  bool decode(const Ngap_ReflectiveQosAttribute_t &);
 
- private:
+private:
   long m_Attribute;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

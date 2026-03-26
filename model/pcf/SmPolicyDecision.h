@@ -19,28 +19,28 @@
 #ifndef SmPolicyDecision_H_
 #define SmPolicyDecision_H_
 
-#include "UsageMonitoringData.h"
+#include "BridgeManagementContainer.h"
 #include "ChargingData.h"
-#include "PccRule.h"
-#include "SmPolicyAssociationReleaseCause.h"
-#include <string>
 #include "ChargingInformation.h"
 #include "ConditionData.h"
-#include "RequestedRuleData.h"
-#include "BridgeManagementContainer.h"
-#include <vector>
-#include "QosCharacteristics.h"
-#include "PresenceInfoRm.h"
+#include "PccRule.h"
 #include "PolicyControlRequestTrigger.h"
-#include "RequestedUsageData.h"
-#include "TrafficControlData.h"
-#include "SessionRule.h"
-#include "QosFlowUsage.h"
-#include "QosData.h"
-#include "QosMonitoringData.h"
 #include "PortManagementContainer.h"
+#include "PresenceInfoRm.h"
+#include "QosCharacteristics.h"
+#include "QosData.h"
+#include "QosFlowUsage.h"
+#include "QosMonitoringData.h"
+#include "RequestedRuleData.h"
+#include "RequestedUsageData.h"
+#include "SessionRule.h"
+#include "SmPolicyAssociationReleaseCause.h"
+#include "TrafficControlData.h"
+#include "UsageMonitoringData.h"
 #include <map>
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::pcf {
 
@@ -48,7 +48,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class SmPolicyDecision {
- public:
+public:
   SmPolicyDecision();
   virtual ~SmPolicyDecision() = default;
 
@@ -62,16 +62,16 @@ class SmPolicyDecision {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const SmPolicyDecision& rhs) const;
-  bool operator!=(const SmPolicyDecision& rhs) const;
+  bool operator==(const SmPolicyDecision &rhs) const;
+  bool operator!=(const SmPolicyDecision &rhs) const;
 
   /////////////////////////////////////////////
   /// SmPolicyDecision members
@@ -82,7 +82,7 @@ class SmPolicyDecision {
   /// </summary>
   std::map<std::string, oai::model::pcf::SessionRule> getSessRules() const;
   void setSessRules(
-      std::map<std::string, oai::model::pcf::SessionRule> const& value);
+      std::map<std::string, oai::model::pcf::SessionRule> const &value);
   bool sessRulesIsSet() const;
   void unsetSessRules();
   /// <summary>
@@ -90,8 +90,8 @@ class SmPolicyDecision {
   /// subclause 5.6.2.6.
   /// </summary>
   std::map<std::string, oai::model::pcf::PccRule> getPccRules() const;
-  void setPccRules(
-      std::map<std::string, oai::model::pcf::PccRule> const& value);
+  void
+  setPccRules(std::map<std::string, oai::model::pcf::PccRule> const &value);
   bool pccRulesIsSet() const;
   void unsetPccRules();
   /// <summary>
@@ -106,31 +106,31 @@ class SmPolicyDecision {
   /// Map of QoS data policy decisions.
   /// </summary>
   std::map<std::string, oai::model::pcf::QosData> getQosDecs() const;
-  void setQosDecs(std::map<std::string, oai::model::pcf::QosData> const& value);
+  void setQosDecs(std::map<std::string, oai::model::pcf::QosData> const &value);
   bool qosDecsIsSet() const;
   void unsetQosDecs();
   /// <summary>
   /// Map of Charging data policy decisions.
   /// </summary>
   std::map<std::string, oai::model::pcf::ChargingData> getChgDecs() const;
-  void setChgDecs(
-      std::map<std::string, oai::model::pcf::ChargingData> const& value);
+  void
+  setChgDecs(std::map<std::string, oai::model::pcf::ChargingData> const &value);
   bool chgDecsIsSet() const;
   void unsetChgDecs();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::ChargingInformation getChargingInfo() const;
-  void setChargingInfo(oai::model::pcf::ChargingInformation const& value);
+  void setChargingInfo(oai::model::pcf::ChargingInformation const &value);
   bool chargingInfoIsSet() const;
   void unsetChargingInfo();
   /// <summary>
   /// Map of Traffic Control data policy decisions.
   /// </summary>
-  std::map<std::string, oai::model::pcf::TrafficControlData> getTraffContDecs()
-      const;
+  std::map<std::string, oai::model::pcf::TrafficControlData>
+  getTraffContDecs() const;
   void setTraffContDecs(
-      std::map<std::string, oai::model::pcf::TrafficControlData> const& value);
+      std::map<std::string, oai::model::pcf::TrafficControlData> const &value);
   bool traffContDecsIsSet() const;
   void unsetTraffContDecs();
   /// <summary>
@@ -138,26 +138,26 @@ class SmPolicyDecision {
   /// </summary>
   std::map<std::string, oai::model::pcf::UsageMonitoringData> getUmDecs() const;
   void setUmDecs(
-      std::map<std::string, oai::model::pcf::UsageMonitoringData> const& value);
+      std::map<std::string, oai::model::pcf::UsageMonitoringData> const &value);
   bool umDecsIsSet() const;
   void unsetUmDecs();
   /// <summary>
   /// Map of QoS characteristics for non standard 5QIs. This map uses the 5QI
   /// values as keys.
   /// </summary>
-  std::map<std::string, oai::model::pcf::QosCharacteristics> getQosChars()
-      const;
+  std::map<std::string, oai::model::pcf::QosCharacteristics>
+  getQosChars() const;
   void setQosChars(
-      std::map<std::string, oai::model::pcf::QosCharacteristics> const& value);
+      std::map<std::string, oai::model::pcf::QosCharacteristics> const &value);
   bool qosCharsIsSet() const;
   void unsetQosChars();
   /// <summary>
   /// Map of QoS Monitoring data policy decisions.
   /// </summary>
-  std::map<std::string, oai::model::pcf::QosMonitoringData> getQosMonDecs()
-      const;
+  std::map<std::string, oai::model::pcf::QosMonitoringData>
+  getQosMonDecs() const;
   void setQosMonDecs(
-      std::map<std::string, oai::model::pcf::QosMonitoringData> const& value);
+      std::map<std::string, oai::model::pcf::QosMonitoringData> const &value);
   bool qosMonDecsIsSet() const;
   void unsetQosMonDecs();
   /// <summary>
@@ -172,15 +172,15 @@ class SmPolicyDecision {
   /// subclause 5.6.2.9.
   /// </summary>
   std::map<std::string, oai::model::pcf::ConditionData> getConds() const;
-  void setConds(
-      std::map<std::string, oai::model::pcf::ConditionData> const& value);
+  void
+  setConds(std::map<std::string, oai::model::pcf::ConditionData> const &value);
   bool condsIsSet() const;
   void unsetConds();
   /// <summary>
   ///
   /// </summary>
   std::string getRevalidationTime() const;
-  void setRevalidationTime(std::string const& value);
+  void setRevalidationTime(std::string const &value);
   bool revalidationTimeIsSet() const;
   void unsetRevalidationTime();
   /// <summary>
@@ -205,7 +205,7 @@ class SmPolicyDecision {
   std::vector<oai::model::pcf::PolicyControlRequestTrigger>
   getPolicyCtrlReqTriggers() const;
   void setPolicyCtrlReqTriggers(
-      std::vector<oai::model::pcf::PolicyControlRequestTrigger> const& value);
+      std::vector<oai::model::pcf::PolicyControlRequestTrigger> const &value);
   bool policyCtrlReqTriggersIsSet() const;
   void unsetPolicyCtrlReqTriggers();
   /// <summary>
@@ -213,14 +213,14 @@ class SmPolicyDecision {
   /// </summary>
   std::vector<oai::model::pcf::RequestedRuleData> getLastReqRuleData() const;
   void setLastReqRuleData(
-      std::vector<oai::model::pcf::RequestedRuleData> const& value);
+      std::vector<oai::model::pcf::RequestedRuleData> const &value);
   bool lastReqRuleDataIsSet() const;
   void unsetLastReqRuleData();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::RequestedUsageData getLastReqUsageData() const;
-  void setLastReqUsageData(oai::model::pcf::RequestedUsageData const& value);
+  void setLastReqUsageData(oai::model::pcf::RequestedUsageData const &value);
   bool lastReqUsageDataIsSet() const;
   void unsetLastReqUsageData();
   /// <summary>
@@ -228,7 +228,7 @@ class SmPolicyDecision {
   /// </summary>
   std::map<std::string, oai::model::common::PresenceInfoRm> getPraInfos() const;
   void setPraInfos(
-      std::map<std::string, oai::model::common::PresenceInfoRm> const& value);
+      std::map<std::string, oai::model::common::PresenceInfoRm> const &value);
   bool praInfosIsSet() const;
   void unsetPraInfos();
   /// <summary>
@@ -249,47 +249,47 @@ class SmPolicyDecision {
   ///
   /// </summary>
   oai::model::pcf::QosFlowUsage getQosFlowUsage() const;
-  void setQosFlowUsage(oai::model::pcf::QosFlowUsage const& value);
+  void setQosFlowUsage(oai::model::pcf::QosFlowUsage const &value);
   bool qosFlowUsageIsSet() const;
   void unsetQosFlowUsage();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::SmPolicyAssociationReleaseCause getRelCause() const;
-  void setRelCause(
-      oai::model::pcf::SmPolicyAssociationReleaseCause const& value);
+  void
+  setRelCause(oai::model::pcf::SmPolicyAssociationReleaseCause const &value);
   bool relCauseIsSet() const;
   void unsetRelCause();
   /// <summary>
   ///
   /// </summary>
   std::string getSuppFeat() const;
-  void setSuppFeat(std::string const& value);
+  void setSuppFeat(std::string const &value);
   bool suppFeatIsSet() const;
   void unsetSuppFeat();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::BridgeManagementContainer getTsnBridgeManCont() const;
-  void setTsnBridgeManCont(
-      oai::model::pcf::BridgeManagementContainer const& value);
+  void
+  setTsnBridgeManCont(oai::model::pcf::BridgeManagementContainer const &value);
   bool tsnBridgeManContIsSet() const;
   void unsetTsnBridgeManCont();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::PortManagementContainer getTsnPortManContDstt() const;
-  void setTsnPortManContDstt(
-      oai::model::pcf::PortManagementContainer const& value);
+  void
+  setTsnPortManContDstt(oai::model::pcf::PortManagementContainer const &value);
   bool tsnPortManContDsttIsSet() const;
   void unsetTsnPortManContDstt();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::pcf::PortManagementContainer> getTsnPortManContNwtts()
-      const;
+  std::vector<oai::model::pcf::PortManagementContainer>
+  getTsnPortManContNwtts() const;
   void setTsnPortManContNwtts(
-      std::vector<oai::model::pcf::PortManagementContainer> const& value);
+      std::vector<oai::model::pcf::PortManagementContainer> const &value);
   bool tsnPortManContNwttsIsSet() const;
   void unsetTsnPortManContNwtts();
   /// <summary>
@@ -301,10 +301,10 @@ class SmPolicyDecision {
   bool redSessIndicationIsSet() const;
   void unsetRedSessIndication();
 
-  friend void to_json(nlohmann::json& j, const SmPolicyDecision& o);
-  friend void from_json(const nlohmann::json& j, SmPolicyDecision& o);
+  friend void to_json(nlohmann::json &j, const SmPolicyDecision &o);
+  friend void from_json(const nlohmann::json &j, SmPolicyDecision &o);
 
- protected:
+protected:
   std::map<std::string, oai::model::pcf::SessionRule> m_SessRules;
   bool m_SessRulesIsSet;
   std::map<std::string, oai::model::pcf::PccRule> m_PccRules;
@@ -364,8 +364,8 @@ class SmPolicyDecision {
   bool m_RedSessIndicationIsSet;
 };
 
-std::ostream& operator<<(
-    std::ostream& os, const oai::model::pcf::SmPolicyDecision& decision);
-}  // namespace oai::model::pcf
+std::ostream &operator<<(std::ostream &os,
+                         const oai::model::pcf::SmPolicyDecision &decision);
+} // namespace oai::model::pcf
 
 #endif /* SmPolicyDecision_H_ */

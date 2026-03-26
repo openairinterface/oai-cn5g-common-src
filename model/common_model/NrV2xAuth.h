@@ -28,7 +28,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class NrV2xAuth {
- public:
+public:
   NrV2xAuth();
   virtual ~NrV2xAuth() = default;
 
@@ -42,16 +42,16 @@ class NrV2xAuth {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const NrV2xAuth& rhs) const;
-  bool operator!=(const NrV2xAuth& rhs) const;
+  bool operator==(const NrV2xAuth &rhs) const;
+  bool operator!=(const NrV2xAuth &rhs) const;
 
   /////////////////////////////////////////////
   /// NrV2xAuth members
@@ -60,27 +60,27 @@ class NrV2xAuth {
   ///
   /// </summary>
   oai::model::common::UeAuth getVehicleUeAuth() const;
-  void setVehicleUeAuth(oai::model::common::UeAuth const& value);
+  void setVehicleUeAuth(oai::model::common::UeAuth const &value);
   bool vehicleUeAuthIsSet() const;
   void unsetVehicleUeAuth();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::UeAuth getPedestrianUeAuth() const;
-  void setPedestrianUeAuth(oai::model::common::UeAuth const& value);
+  void setPedestrianUeAuth(oai::model::common::UeAuth const &value);
   bool pedestrianUeAuthIsSet() const;
   void unsetPedestrianUeAuth();
 
-  friend void to_json(nlohmann::json& j, const NrV2xAuth& o);
-  friend void from_json(const nlohmann::json& j, NrV2xAuth& o);
+  friend void to_json(nlohmann::json &j, const NrV2xAuth &o);
+  friend void from_json(const nlohmann::json &j, NrV2xAuth &o);
 
- protected:
+protected:
   oai::model::common::UeAuth m_VehicleUeAuth;
   bool m_VehicleUeAuthIsSet;
   oai::model::common::UeAuth m_PedestrianUeAuth;
   bool m_PedestrianUeAuthIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* NrV2xAuth_H_ */

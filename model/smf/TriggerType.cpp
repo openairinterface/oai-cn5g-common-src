@@ -23,10 +23,8 @@ void TriggerType::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const TriggerType& o) {
-  j = nlohmann::json();
-}
+void to_json(nlohmann::json &j, const TriggerType &o) { j = nlohmann::json(); }
 
-void from_json(const nlohmann::json& j, TriggerType& o) {}
+void from_json(const nlohmann::json &j, TriggerType &o) {}
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

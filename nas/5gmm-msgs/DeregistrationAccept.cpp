@@ -36,11 +36,11 @@ void DeregistrationAccept::SetHeader(uint8_t security_header_type) {
 }
 
 //------------------------------------------------------------------------------
-int DeregistrationAccept::Encode(uint8_t* buf, int len) {
+int DeregistrationAccept::Encode(uint8_t *buf, int len) {
   oai::logger::logger_common::nas().debug(
       "Encoding De-registration Accept message");
 
-  int encoded_size    = 0;
+  int encoded_size = 0;
   int encoded_ie_size = 0;
 
   // Header
@@ -56,8 +56,8 @@ int DeregistrationAccept::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int DeregistrationAccept::Decode(uint8_t* buf, int len) {
-  int decoded_size   = 0;
+int DeregistrationAccept::Decode(uint8_t *buf, int len) {
+  int decoded_size = 0;
   int decoded_result = 0;
 
   // Header

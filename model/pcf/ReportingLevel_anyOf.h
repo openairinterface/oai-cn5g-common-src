@@ -27,7 +27,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class ReportingLevel_anyOf {
- public:
+public:
   ReportingLevel_anyOf();
   virtual ~ReportingLevel_anyOf() = default;
 
@@ -52,16 +52,16 @@ class ReportingLevel_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const ReportingLevel_anyOf& rhs) const;
-  bool operator!=(const ReportingLevel_anyOf& rhs) const;
+  bool operator==(const ReportingLevel_anyOf &rhs) const;
+  bool operator!=(const ReportingLevel_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// ReportingLevel_anyOf members
@@ -69,14 +69,14 @@ class ReportingLevel_anyOf {
   ReportingLevel_anyOf::eReportingLevel_anyOf getValue() const;
   void setValue(ReportingLevel_anyOf::eReportingLevel_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const ReportingLevel_anyOf& o);
-  friend void from_json(const nlohmann::json& j, ReportingLevel_anyOf& o);
+  friend void to_json(nlohmann::json &j, const ReportingLevel_anyOf &o);
+  friend void from_json(const nlohmann::json &j, ReportingLevel_anyOf &o);
 
- protected:
+protected:
   ReportingLevel_anyOf::eReportingLevel_anyOf m_value = ReportingLevel_anyOf::
       eReportingLevel_anyOf::INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* ReportingLevel_anyOf_H_ */

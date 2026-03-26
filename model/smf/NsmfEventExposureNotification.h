@@ -19,10 +19,10 @@
 #ifndef NsmfEventExposureNotification_H_
 #define NsmfEventExposureNotification_H_
 
-#include <string>
-#include <vector>
 #include "EventNotification.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::smf {
 
@@ -30,7 +30,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class NsmfEventExposureNotification {
- public:
+public:
   NsmfEventExposureNotification();
   virtual ~NsmfEventExposureNotification();
 
@@ -43,24 +43,24 @@ class NsmfEventExposureNotification {
   /// Notification correlation ID
   /// </summary>
   std::string getNotifId() const;
-  void setNotifId(std::string const& value);
+  void setNotifId(std::string const &value);
   /// <summary>
   /// Notifications about Individual Events
   /// </summary>
-  std::vector<EventNotification>& getEventNotifs();
-  void setEventNotifs(std::vector<EventNotification> const& value);
+  std::vector<EventNotification> &getEventNotifs();
+  void setEventNotifs(std::vector<EventNotification> const &value);
 
-  friend void to_json(
-      nlohmann::json& j, const NsmfEventExposureNotification& o);
-  friend void from_json(
-      const nlohmann::json& j, NsmfEventExposureNotification& o);
+  friend void to_json(nlohmann::json &j,
+                      const NsmfEventExposureNotification &o);
+  friend void from_json(const nlohmann::json &j,
+                        NsmfEventExposureNotification &o);
 
- protected:
+protected:
   std::string m_NotifId;
 
   std::vector<EventNotification> m_EventNotifs;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* NsmfEventExposureNotification_H_ */

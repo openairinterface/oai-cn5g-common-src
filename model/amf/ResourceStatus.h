@@ -27,25 +27,25 @@ namespace oai::model::amf {
 /// Possible values are - RELEASED
 /// </summary>
 class ResourceStatus {
- public:
+public:
   ResourceStatus();
   virtual ~ResourceStatus();
 
   void validate();
   std::string getValue() const;
-  void getValue(std::string& value) const;
-  void setValue(const std::string& v);
+  void getValue(std::string &value) const;
+  void setValue(const std::string &v);
 
   /////////////////////////////////////////////
   /// ResourceStatus members
 
-  friend void to_json(nlohmann::json& j, const ResourceStatus& o);
-  friend void from_json(const nlohmann::json& j, ResourceStatus& o);
+  friend void to_json(nlohmann::json &j, const ResourceStatus &o);
+  friend void from_json(const nlohmann::json &j, ResourceStatus &o);
 
- protected:
+protected:
   std::string status;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* ResourceStatus_H_ */

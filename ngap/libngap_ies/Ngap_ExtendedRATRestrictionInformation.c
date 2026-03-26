@@ -10,15 +10,14 @@
 
 #include "Ngap_ProtocolExtensionContainer.h"
 static int memb_Ngap_primaryRATRestriction_constraint_1(
-    const asn_TYPE_descriptor_t* td, const void* sptr,
-    asn_app_constraint_failed_f* ctfailcb, void* app_key) {
-  const BIT_STRING_t* st = (const BIT_STRING_t*) sptr;
+    const asn_TYPE_descriptor_t *td, const void *sptr,
+    asn_app_constraint_failed_f *ctfailcb, void *app_key) {
+  const BIT_STRING_t *st = (const BIT_STRING_t *)sptr;
   size_t size;
 
   if (!sptr) {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: value not given (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: value not given (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 
@@ -33,23 +32,21 @@ static int memb_Ngap_primaryRATRestriction_constraint_1(
     /* Constraint check succeeded */
     return 0;
   } else {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: constraint failed (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: constraint failed (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 }
 
 static int memb_Ngap_secondaryRATRestriction_constraint_1(
-    const asn_TYPE_descriptor_t* td, const void* sptr,
-    asn_app_constraint_failed_f* ctfailcb, void* app_key) {
-  const BIT_STRING_t* st = (const BIT_STRING_t*) sptr;
+    const asn_TYPE_descriptor_t *td, const void *sptr,
+    asn_app_constraint_failed_f *ctfailcb, void *app_key) {
+  const BIT_STRING_t *st = (const BIT_STRING_t *)sptr;
   size_t size;
 
   if (!sptr) {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: value not given (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: value not given (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 
@@ -64,9 +61,8 @@ static int memb_Ngap_secondaryRATRestriction_constraint_1(
     /* Constraint check succeeded */
     return 0;
   } else {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: constraint failed (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: constraint failed (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 }
@@ -102,8 +98,8 @@ static asn_per_constraints_t asn_PER_memb_Ngap_secondaryRATRestriction_constr_3
 asn_TYPE_member_t asn_MBR_Ngap_ExtendedRATRestrictionInformation_1[] = {
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_ExtendedRATRestrictionInformation, primaryRATRestriction),
+     offsetof(struct Ngap_ExtendedRATRestrictionInformation,
+              primaryRATRestriction),
      (ASN_TAG_CLASS_CONTEXT | (0 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_BIT_STRING,
@@ -122,9 +118,8 @@ asn_TYPE_member_t asn_MBR_Ngap_ExtendedRATRestrictionInformation_1[] = {
      "primaryRATRestriction"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_ExtendedRATRestrictionInformation,
-         secondaryRATRestriction),
+     offsetof(struct Ngap_ExtendedRATRestrictionInformation,
+              secondaryRATRestriction),
      (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_BIT_STRING,

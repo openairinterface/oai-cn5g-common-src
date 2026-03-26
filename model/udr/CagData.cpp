@@ -19,7 +19,7 @@
 namespace oai::udr::model {
 
 CagData::CagData() {
-  m_ProvisioningTime      = "";
+  m_ProvisioningTime = "";
   m_ProvisioningTimeIsSet = false;
 }
 
@@ -29,13 +29,14 @@ void CagData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const CagData& o) {
-  j             = nlohmann::json();
+void to_json(nlohmann::json &j, const CagData &o) {
+  j = nlohmann::json();
   j["cagInfos"] = o.m_CagInfos;
-  if (o.provisioningTimeIsSet()) j["provisioningTime"] = o.m_ProvisioningTime;
+  if (o.provisioningTimeIsSet())
+    j["provisioningTime"] = o.m_ProvisioningTime;
 }
 
-void from_json(const nlohmann::json& j, CagData& o) {
+void from_json(const nlohmann::json &j, CagData &o) {
   j.at("cagInfos").get_to(o.m_CagInfos);
   if (j.find("provisioningTime") != j.end()) {
     j.at("provisioningTime").get_to(o.m_ProvisioningTime);
@@ -43,24 +44,16 @@ void from_json(const nlohmann::json& j, CagData& o) {
   }
 }
 
-std::map<std::string, CagInfo>& CagData::getCagInfos() {
-  return m_CagInfos;
-}
-void CagData::setCagInfos(std::map<std::string, CagInfo> const& value) {
+std::map<std::string, CagInfo> &CagData::getCagInfos() { return m_CagInfos; }
+void CagData::setCagInfos(std::map<std::string, CagInfo> const &value) {
   m_CagInfos = value;
 }
-std::string CagData::getProvisioningTime() const {
-  return m_ProvisioningTime;
-}
-void CagData::setProvisioningTime(std::string const& value) {
-  m_ProvisioningTime      = value;
+std::string CagData::getProvisioningTime() const { return m_ProvisioningTime; }
+void CagData::setProvisioningTime(std::string const &value) {
+  m_ProvisioningTime = value;
   m_ProvisioningTimeIsSet = true;
 }
-bool CagData::provisioningTimeIsSet() const {
-  return m_ProvisioningTimeIsSet;
-}
-void CagData::unsetProvisioningTime() {
-  m_ProvisioningTimeIsSet = false;
-}
+bool CagData::provisioningTimeIsSet() const { return m_ProvisioningTimeIsSet; }
+void CagData::unsetProvisioningTime() { m_ProvisioningTimeIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

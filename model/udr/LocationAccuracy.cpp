@@ -26,10 +26,10 @@ void LocationAccuracy::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const LocationAccuracy& o) {
+void to_json(nlohmann::json &j, const LocationAccuracy &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, LocationAccuracy& o) {}
+void from_json(const nlohmann::json &j, LocationAccuracy &o) {}
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

@@ -26,10 +26,8 @@ void AvType::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const AvType& o) {
-  j = nlohmann::json();
-}
+void to_json(nlohmann::json &j, const AvType &o) { j = nlohmann::json(); }
 
-void from_json(const nlohmann::json& j, AvType& o) {}
+void from_json(const nlohmann::json &j, AvType &o) {}
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

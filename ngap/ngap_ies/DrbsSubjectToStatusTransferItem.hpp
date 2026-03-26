@@ -15,23 +15,22 @@ extern "C" {
 namespace oai::ngap {
 
 class DrbSubjectToStatusTransferItem {
- public:
+public:
   DrbSubjectToStatusTransferItem();
   virtual ~DrbSubjectToStatusTransferItem();
 
-  void get(Ngap_DRB_ID_t& drbId, DrbStatusUl& drbUl, DrbStatusDl& drbDl) const;
-  void set(
-      const Ngap_DRB_ID_t& drbId, const DrbStatusUl& drbUl,
-      const DrbStatusDl& drbDl);
+  void get(Ngap_DRB_ID_t &drbId, DrbStatusUl &drbUl, DrbStatusDl &drbDl) const;
+  void set(const Ngap_DRB_ID_t &drbId, const DrbStatusUl &drbUl,
+           const DrbStatusDl &drbDl);
 
-  bool encode(Ngap_DRBsSubjectToStatusTransferItem_t& drbItem) const;
-  bool decode(const Ngap_DRBsSubjectToStatusTransferItem_t& drbItem);
+  bool encode(Ngap_DRBsSubjectToStatusTransferItem_t &drbItem) const;
+  bool decode(const Ngap_DRBsSubjectToStatusTransferItem_t &drbItem);
 
- private:
-  Ngap_DRB_ID_t m_DrbId;  // Mandatory
-  DrbStatusUl m_DrbUl;    // Mandatory
-  DrbStatusDl m_DrbDl;    // Mandatory
+private:
+  Ngap_DRB_ID_t m_DrbId; // Mandatory
+  DrbStatusUl m_DrbUl;   // Mandatory
+  DrbStatusDl m_DrbDl;   // Mandatory
   // TODO: Old Associated QoS Flow List - UL End Marker Expected
 };
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

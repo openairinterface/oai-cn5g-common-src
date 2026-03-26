@@ -27,7 +27,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class SupportedGADShapes_anyOf {
- public:
+public:
   SupportedGADShapes_anyOf();
   virtual ~SupportedGADShapes_anyOf() = default;
 
@@ -55,16 +55,16 @@ class SupportedGADShapes_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const SupportedGADShapes_anyOf& rhs) const;
-  bool operator!=(const SupportedGADShapes_anyOf& rhs) const;
+  bool operator==(const SupportedGADShapes_anyOf &rhs) const;
+  bool operator!=(const SupportedGADShapes_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// SupportedGADShapes_anyOf members
@@ -72,15 +72,15 @@ class SupportedGADShapes_anyOf {
   SupportedGADShapes_anyOf::eSupportedGADShapes_anyOf getValue() const;
   void setValue(SupportedGADShapes_anyOf::eSupportedGADShapes_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const SupportedGADShapes_anyOf& o);
-  friend void from_json(const nlohmann::json& j, SupportedGADShapes_anyOf& o);
+  friend void to_json(nlohmann::json &j, const SupportedGADShapes_anyOf &o);
+  friend void from_json(const nlohmann::json &j, SupportedGADShapes_anyOf &o);
 
- protected:
+protected:
   SupportedGADShapes_anyOf::eSupportedGADShapes_anyOf m_value =
       SupportedGADShapes_anyOf::eSupportedGADShapes_anyOf::
           INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* SupportedGADShapes_anyOf_H_ */

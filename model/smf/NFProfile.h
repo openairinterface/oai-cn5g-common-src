@@ -49,14 +49,14 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class NFProfile {
- public:
+public:
   NFProfile();
   virtual ~NFProfile();
 
   void validate();
 
-  bool operator==(const NFProfile& rhs) const;
-  bool operator!=(const NFProfile& rhs) const;
+  bool operator==(const NFProfile &rhs) const;
+  bool operator!=(const NFProfile &rhs) const;
 
   /////////////////////////////////////////////
   /// NFProfile members
@@ -65,24 +65,24 @@ class NFProfile {
   ///
   /// </summary>
   std::string getNfInstanceId() const;
-  void setNfInstanceId(std::string const& value);
+  void setNfInstanceId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getNfInstanceName() const;
-  void setNfInstanceName(std::string const& value);
+  void setNfInstanceName(std::string const &value);
   bool nfInstanceNameIsSet() const;
   void unsetNfInstanceName();
   /// <summary>
   ///
   /// </summary>
   std::string getNfType() const;
-  void setNfType(std::string const& value);
+  void setNfType(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getNfStatus() const;
-  void setNfStatus(std::string const& value);
+  void setNfStatus(std::string const &value);
   /// <summary>
   ///
   /// </summary>
@@ -93,86 +93,86 @@ class NFProfile {
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::PlmnId>& getPlmnList();
-  void setPlmnList(std::vector<oai::model::common::PlmnId> const& value);
+  std::vector<oai::model::common::PlmnId> &getPlmnList();
+  void setPlmnList(std::vector<oai::model::common::PlmnId> const &value);
   bool plmnListIsSet() const;
   void unsetPlmnList();
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::common::Snssai> getSNssais() const;
-  void setSNssais(std::vector<oai::model::common::Snssai> const& value);
+  void setSNssais(std::vector<oai::model::common::Snssai> const &value);
   bool sNssaisIsSet() const;
   void unsetSNssais();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::nrf::PlmnSnssai>& getPerPlmnSnssaiList();
-  void setPerPlmnSnssaiList(
-      std::vector<oai::model::nrf::PlmnSnssai> const& value);
+  std::vector<oai::model::nrf::PlmnSnssai> &getPerPlmnSnssaiList();
+  void
+  setPerPlmnSnssaiList(std::vector<oai::model::nrf::PlmnSnssai> const &value);
   bool perPlmnSnssaiListIsSet() const;
   void unsetPerPlmnSnssaiList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getNsiList();
-  void setNsiList(std::vector<std::string> const& value);
+  std::vector<std::string> &getNsiList();
+  void setNsiList(std::vector<std::string> const &value);
   bool nsiListIsSet() const;
   void unsetNsiList();
   /// <summary>
   ///
   /// </summary>
   std::string getFqdn() const;
-  void setFqdn(std::string const& value);
+  void setFqdn(std::string const &value);
   bool fqdnIsSet() const;
   void unsetFqdn();
   /// <summary>
   ///
   /// </summary>
   std::string getInterPlmnFqdn() const;
-  void setInterPlmnFqdn(std::string const& value);
+  void setInterPlmnFqdn(std::string const &value);
   bool interPlmnFqdnIsSet() const;
   void unsetInterPlmnFqdn();
   /// <summary>
   ///
   /// </summary>
   std::vector<std::string> getIpv4Addresses() const;
-  void setIpv4Addresses(std::vector<std::string> const& value);
+  void setIpv4Addresses(std::vector<std::string> const &value);
   bool ipv4AddressesIsSet() const;
   void unsetIpv4Addresses();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::Ipv6Addr>& getIpv6Addresses();
-  void setIpv6Addresses(std::vector<oai::model::common::Ipv6Addr> const& value);
+  std::vector<oai::model::common::Ipv6Addr> &getIpv6Addresses();
+  void setIpv6Addresses(std::vector<oai::model::common::Ipv6Addr> const &value);
   bool ipv6AddressesIsSet() const;
   void unsetIpv6Addresses();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::PlmnId>& getAllowedPlmns();
-  void setAllowedPlmns(std::vector<oai::model::common::PlmnId> const& value);
+  std::vector<oai::model::common::PlmnId> &getAllowedPlmns();
+  void setAllowedPlmns(std::vector<oai::model::common::PlmnId> const &value);
   bool allowedPlmnsIsSet() const;
   void unsetAllowedPlmns();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getAllowedNfTypes();
-  void setAllowedNfTypes(std::vector<std::string> const& value);
+  std::vector<std::string> &getAllowedNfTypes();
+  void setAllowedNfTypes(std::vector<std::string> const &value);
   bool allowedNfTypesIsSet() const;
   void unsetAllowedNfTypes();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getAllowedNfDomains();
-  void setAllowedNfDomains(std::vector<std::string> const& value);
+  std::vector<std::string> &getAllowedNfDomains();
+  void setAllowedNfDomains(std::vector<std::string> const &value);
   bool allowedNfDomainsIsSet() const;
   void unsetAllowedNfDomains();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::Snssai>& getAllowedNssais();
-  void setAllowedNssais(std::vector<oai::model::common::Snssai> const& value);
+  std::vector<oai::model::common::Snssai> &getAllowedNssais();
+  void setAllowedNssais(std::vector<oai::model::common::Snssai> const &value);
   bool allowedNssaisIsSet() const;
   void unsetAllowedNssais();
   /// <summary>
@@ -200,26 +200,26 @@ class NFProfile {
   ///
   /// </summary>
   std::string getLocality() const;
-  void setLocality(std::string const& value);
+  void setLocality(std::string const &value);
   bool localityIsSet() const;
   void unsetLocality();
   /// <summary>
   ///
   /// </summary>
   oai::model::nrf::UpfInfo getUpfInfo() const;
-  void setUpfInfo(oai::model::nrf::UpfInfo const& value);
+  void setUpfInfo(oai::model::nrf::UpfInfo const &value);
   bool upfInfoIsSet() const;
   void unsetUpfInfo();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::nrf::UpfInfo>& getUpfInfoExt();
-  void setUpfInfoExt(std::vector<oai::model::nrf::UpfInfo> const& value);
+  std::vector<oai::model::nrf::UpfInfo> &getUpfInfoExt();
+  void setUpfInfoExt(std::vector<oai::model::nrf::UpfInfo> const &value);
   bool upfInfoExtIsSet() const;
   void unsetUpfInfoExt();
 
   std::string getRecoveryTime() const;
-  void setRecoveryTime(std::string const& value);
+  void setRecoveryTime(std::string const &value);
   bool recoveryTimeIsSet() const;
   void unsetRecoveryTime();
   /// <summary>
@@ -249,10 +249,10 @@ class NFProfile {
   ///
   /// </summary>
 
-  friend void to_json(nlohmann::json& j, const NFProfile& o);
-  friend void from_json(const nlohmann::json& j, NFProfile& o);
+  friend void to_json(nlohmann::json &j, const NFProfile &o);
+  friend void from_json(const nlohmann::json &j, NFProfile &o);
 
- protected:
+protected:
   std::string m_NfInstanceId;
 
   std::string m_NfInstanceName;
@@ -309,6 +309,6 @@ class NFProfile {
   bool m_NfProfileChangesIndIsSet;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* NFProfile_H_ */

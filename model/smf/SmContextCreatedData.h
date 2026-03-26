@@ -20,14 +20,14 @@
 #define SmContextCreatedData_H_
 
 #include "EbiArpMapping.h"
-#include "RefToBinaryData.h"
-#include <string>
-#include "UpCnxState.h"
 #include "HoState.h"
 #include "N2SmInfoType.h"
+#include "RefToBinaryData.h"
 #include "Snssai.h"
-#include <vector>
+#include "UpCnxState.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::smf {
 
@@ -35,7 +35,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class SmContextCreatedData {
- public:
+public:
   SmContextCreatedData();
   virtual ~SmContextCreatedData();
 
@@ -48,7 +48,7 @@ class SmContextCreatedData {
   ///
   /// </summary>
   std::string getHSmfUri() const;
-  void setHSmfUri(std::string const& value);
+  void setHSmfUri(std::string const &value);
   bool hSmfUriIsSet() const;
   void unsetHSmfUri();
   /// <summary>
@@ -62,76 +62,76 @@ class SmContextCreatedData {
   ///
   /// </summary>
   oai::model::common::Snssai getSNssai() const;
-  void setSNssai(oai::model::common::Snssai const& value);
+  void setSNssai(oai::model::common::Snssai const &value);
   bool sNssaiIsSet() const;
   void unsetSNssai();
   /// <summary>
   ///
   /// </summary>
   UpCnxState getUpCnxState() const;
-  void setUpCnxState(UpCnxState const& value);
+  void setUpCnxState(UpCnxState const &value);
   bool upCnxStateIsSet() const;
   void unsetUpCnxState();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::RefToBinaryData getN2SmInfo() const;
-  void setN2SmInfo(oai::model::common::RefToBinaryData const& value);
+  void setN2SmInfo(oai::model::common::RefToBinaryData const &value);
   bool n2SmInfoIsSet() const;
   void unsetN2SmInfo();
   /// <summary>
   ///
   /// </summary>
   N2SmInfoType getN2SmInfoType() const;
-  void setN2SmInfoType(N2SmInfoType const& value);
+  void setN2SmInfoType(N2SmInfoType const &value);
   bool n2SmInfoTypeIsSet() const;
   void unsetN2SmInfoType();
   /// <summary>
   ///
   /// </summary>
-  std::vector<EbiArpMapping>& getAllocatedEbiList();
+  std::vector<EbiArpMapping> &getAllocatedEbiList();
   bool allocatedEbiListIsSet() const;
   void unsetAllocatedEbiList();
   /// <summary>
   ///
   /// </summary>
   HoState getHoState() const;
-  void setHoState(HoState const& value);
+  void setHoState(HoState const &value);
   bool hoStateIsSet() const;
   void unsetHoState();
   /// <summary>
   ///
   /// </summary>
   std::string getGpsi() const;
-  void setGpsi(std::string const& value);
+  void setGpsi(std::string const &value);
   bool gpsiIsSet() const;
   void unsetGpsi();
   /// <summary>
   ///
   /// </summary>
   std::string getSmfServiceInstanceId() const;
-  void setSmfServiceInstanceId(std::string const& value);
+  void setSmfServiceInstanceId(std::string const &value);
   bool smfServiceInstanceIdIsSet() const;
   void unsetSmfServiceInstanceId();
   /// <summary>
   ///
   /// </summary>
   std::string getRecoveryTime() const;
-  void setRecoveryTime(std::string const& value);
+  void setRecoveryTime(std::string const &value);
   bool recoveryTimeIsSet() const;
   void unsetRecoveryTime();
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
 
-  friend void to_json(nlohmann::json& j, const SmContextCreatedData& o);
-  friend void from_json(const nlohmann::json& j, SmContextCreatedData& o);
+  friend void to_json(nlohmann::json &j, const SmContextCreatedData &o);
+  friend void from_json(const nlohmann::json &j, SmContextCreatedData &o);
 
- protected:
+protected:
   std::string m_HSmfUri;
   bool m_HSmfUriIsSet;
   int32_t m_PduSessionId;
@@ -158,6 +158,6 @@ class SmContextCreatedData {
   bool m_SupportedFeaturesIsSet;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* SmContextCreatedData_H_ */

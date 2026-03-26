@@ -19,24 +19,24 @@
 #ifndef Snssai_H_
 #define Snssai_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::common {
 
 const std::string SD_VALIDATION_REGEX =
     "((^|, )(^[A-Fa-f0-9]{6}$|0(x|X)^[A-Fa-f0-9]{6}$))+$";
-const std::string SD_DEFAULT_VALUE  = "FFFFFF";
+const std::string SD_DEFAULT_VALUE = "FFFFFF";
 const uint32_t SD_DEFAULT_VALUE_INT = 0xFFFFFF;
 
 /// <summary>
 ///
 /// </summary>
 class Snssai {
- public:
+public:
   Snssai();
-  Snssai(const int32_t& sst) : m_Sst(sst) {
-    m_Sd      = SD_DEFAULT_VALUE;
+  Snssai(const int32_t &sst) : m_Sst(sst) {
+    m_Sd = SD_DEFAULT_VALUE;
     m_SdIsSet = true;
   };
   virtual ~Snssai() = default;
@@ -51,16 +51,16 @@ class Snssai {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const Snssai& rhs) const;
-  bool operator!=(const Snssai& rhs) const;
+  bool operator==(const Snssai &rhs) const;
+  bool operator!=(const Snssai &rhs) const;
 
   /////////////////////////////////////////////
   /// Snssai members
@@ -75,7 +75,7 @@ class Snssai {
   /// </summary>
   std::string getSd() const;
   int32_t getSdInt() const;
-  void setSd(std::string const& value);
+  void setSd(std::string const &value);
   bool sdIsSet() const;
   void unsetSd();
 
@@ -85,8 +85,8 @@ class Snssai {
    */
   void parse_sd_int_with_hex();
 
-  friend void to_json(nlohmann::json& j, const Snssai& o);
-  friend void from_json(const nlohmann::json& j, Snssai& o);
+  friend void to_json(nlohmann::json &j, const Snssai &o);
+  friend void from_json(const nlohmann::json &j, Snssai &o);
 
   [[nodiscard]] std::string to_string(int indent_level) const;
 
@@ -96,6 +96,6 @@ class Snssai {
   bool m_SdIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* Snssai_H_ */

@@ -13,9 +13,8 @@
 asn_TYPE_member_t asn_MBR_Ngap_NGRAN_TNLAssociationToRemoveItem_1[] = {
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_NGRAN_TNLAssociationToRemoveItem,
-         tNLAssociationTransportLayerAddress),
+     offsetof(struct Ngap_NGRAN_TNLAssociationToRemoveItem,
+              tNLAssociationTransportLayerAddress),
      (ASN_TAG_CLASS_CONTEXT | (0 << 2)),
      +1, /* EXPLICIT tag at current level */
      &asn_DEF_Ngap_CPTransportLayerInformation,
@@ -34,9 +33,8 @@ asn_TYPE_member_t asn_MBR_Ngap_NGRAN_TNLAssociationToRemoveItem_1[] = {
      "tNLAssociationTransportLayerAddress"},
     {ATF_POINTER,
      2,
-     offsetof(
-         struct Ngap_NGRAN_TNLAssociationToRemoveItem,
-         tNLAssociationTransportLayerAddressAMF),
+     offsetof(struct Ngap_NGRAN_TNLAssociationToRemoveItem,
+              tNLAssociationTransportLayerAddressAMF),
      (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
      +1, /* EXPLICIT tag at current level */
      &asn_DEF_Ngap_CPTransportLayerInformation,

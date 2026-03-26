@@ -27,12 +27,12 @@ void EasIpReplacementInfo::validate() const {
   }
 }
 
-bool EasIpReplacementInfo::validate(std::stringstream& msg) const {
+bool EasIpReplacementInfo::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool EasIpReplacementInfo::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool EasIpReplacementInfo::validate(std::stringstream &msg,
+                                    const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "EasIpReplacementInfo" : pathPrefix;
@@ -48,7 +48,7 @@ bool EasIpReplacementInfo::validate(
   return success;
 }
 
-bool EasIpReplacementInfo::operator==(const EasIpReplacementInfo& rhs) const {
+bool EasIpReplacementInfo::operator==(const EasIpReplacementInfo &rhs) const {
   return
 
       (getSource() == rhs.getSource()) &&
@@ -58,17 +58,17 @@ bool EasIpReplacementInfo::operator==(const EasIpReplacementInfo& rhs) const {
           ;
 }
 
-bool EasIpReplacementInfo::operator!=(const EasIpReplacementInfo& rhs) const {
+bool EasIpReplacementInfo::operator!=(const EasIpReplacementInfo &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const EasIpReplacementInfo& o) {
-  j           = nlohmann::json::object();
+void to_json(nlohmann::json &j, const EasIpReplacementInfo &o) {
+  j = nlohmann::json::object();
   j["source"] = o.m_Source;
   j["target"] = o.m_Target;
 }
 
-void from_json(const nlohmann::json& j, EasIpReplacementInfo& o) {
+void from_json(const nlohmann::json &j, EasIpReplacementInfo &o) {
   j.at("source").get_to(o.m_Source);
   j.at("target").get_to(o.m_Target);
 }
@@ -77,15 +77,15 @@ oai::model::pcf::EasServerAddress EasIpReplacementInfo::getSource() const {
   return m_Source;
 }
 void EasIpReplacementInfo::setSource(
-    oai::model::pcf::EasServerAddress const& value) {
+    oai::model::pcf::EasServerAddress const &value) {
   m_Source = value;
 }
 oai::model::pcf::EasServerAddress EasIpReplacementInfo::getTarget() const {
   return m_Target;
 }
 void EasIpReplacementInfo::setTarget(
-    oai::model::pcf::EasServerAddress const& value) {
+    oai::model::pcf::EasServerAddress const &value) {
   m_Target = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

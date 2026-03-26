@@ -31,7 +31,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class SuggestedPacketNumDl {
- public:
+public:
   SuggestedPacketNumDl();
   virtual ~SuggestedPacketNumDl();
 
@@ -49,20 +49,20 @@ class SuggestedPacketNumDl {
   ///
   /// </summary>
   std::string getValidityTime() const;
-  void setValidityTime(std::string const& value);
+  void setValidityTime(std::string const &value);
   bool validityTimeIsSet() const;
   void unsetValidityTime();
 
-  friend void to_json(nlohmann::json& j, const SuggestedPacketNumDl& o);
-  friend void from_json(const nlohmann::json& j, SuggestedPacketNumDl& o);
+  friend void to_json(nlohmann::json &j, const SuggestedPacketNumDl &o);
+  friend void from_json(const nlohmann::json &j, SuggestedPacketNumDl &o);
 
- protected:
+protected:
   int32_t m_SuggestedPacketNumDl;
 
   std::string m_ValidityTime;
   bool m_ValidityTimeIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* SuggestedPacketNumDl_H_ */

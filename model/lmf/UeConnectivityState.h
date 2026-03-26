@@ -19,8 +19,8 @@
 #ifndef UeConnectivityState_H_
 #define UeConnectivityState_H_
 
-#include "CmState.h"
 #include "AccessType.h"
+#include "CmState.h"
 #include <nlohmann/json.hpp>
 
 namespace oai::model::lmf {
@@ -29,7 +29,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class UeConnectivityState {
- public:
+public:
   UeConnectivityState();
   virtual ~UeConnectivityState() = default;
 
@@ -43,16 +43,16 @@ class UeConnectivityState {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const UeConnectivityState& rhs) const;
-  bool operator!=(const UeConnectivityState& rhs) const;
+  bool operator==(const UeConnectivityState &rhs) const;
+  bool operator!=(const UeConnectivityState &rhs) const;
 
   /////////////////////////////////////////////
   /// UeConnectivityState members
@@ -61,25 +61,25 @@ class UeConnectivityState {
   ///
   /// </summary>
   oai::model::common::AccessType getAccessType() const;
-  void setAccessType(oai::model::common::AccessType const& value);
+  void setAccessType(oai::model::common::AccessType const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::lmf::CmState getConnectivitystate() const;
-  void setConnectivitystate(oai::model::lmf::CmState const& value);
+  void setConnectivitystate(oai::model::lmf::CmState const &value);
   bool connectivitystateIsSet() const;
   void unsetConnectivitystate();
 
-  friend void to_json(nlohmann::json& j, const UeConnectivityState& o);
-  friend void from_json(const nlohmann::json& j, UeConnectivityState& o);
+  friend void to_json(nlohmann::json &j, const UeConnectivityState &o);
+  friend void from_json(const nlohmann::json &j, UeConnectivityState &o);
 
- protected:
+protected:
   oai::model::common::AccessType m_AccessType;
 
   oai::model::lmf::CmState m_Connectivitystate;
   bool m_ConnectivitystateIsSet;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* UeConnectivityState_H_ */

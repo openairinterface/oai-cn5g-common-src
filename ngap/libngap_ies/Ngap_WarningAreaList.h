@@ -39,11 +39,11 @@ struct Ngap_ProtocolIE_SingleContainer;
 typedef struct Ngap_WarningAreaList {
   Ngap_WarningAreaList_PR present;
   union Ngap_WarningAreaList_u {
-    struct Ngap_EUTRA_CGIListForWarning* eUTRA_CGIListForWarning;
-    struct Ngap_NR_CGIListForWarning* nR_CGIListForWarning;
-    struct Ngap_TAIListForWarning* tAIListForWarning;
-    struct Ngap_EmergencyAreaIDList* emergencyAreaIDList;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_EUTRA_CGIListForWarning *eUTRA_CGIListForWarning;
+    struct Ngap_NR_CGIListForWarning *nR_CGIListForWarning;
+    struct Ngap_TAIListForWarning *tAIListForWarning;
+    struct Ngap_EmergencyAreaIDList *emergencyAreaIDList;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

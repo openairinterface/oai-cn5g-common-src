@@ -19,18 +19,18 @@
 namespace oai::udr::model {
 
 UePolicySet::UePolicySet() {
-  m_PraInfosIsSet             = false;
-  m_SubscCatsIsSet            = false;
-  m_UePolicySectionsIsSet     = false;
-  m_UpsisIsSet                = false;
+  m_PraInfosIsSet = false;
+  m_SubscCatsIsSet = false;
+  m_UePolicySectionsIsSet = false;
+  m_UpsisIsSet = false;
   m_AllowedRouteSelDescsIsSet = false;
-  m_AndspInd                  = false;
-  m_AndspIndIsSet             = false;
-  m_Pei                       = "";
-  m_PeiIsSet                  = false;
-  m_OsIdsIsSet                = false;
-  m_SuppFeat                  = "";
-  m_SuppFeatIsSet             = false;
+  m_AndspInd = false;
+  m_AndspIndIsSet = false;
+  m_Pei = "";
+  m_PeiIsSet = false;
+  m_OsIdsIsSet = false;
+  m_SuppFeat = "";
+  m_SuppFeatIsSet = false;
 }
 
 UePolicySet::~UePolicySet() {}
@@ -39,23 +39,29 @@ void UePolicySet::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const UePolicySet& o) {
+void to_json(nlohmann::json &j, const UePolicySet &o) {
   j = nlohmann::json();
-  if (o.praInfosIsSet() || !o.m_PraInfos.empty()) j["praInfos"] = o.m_PraInfos;
+  if (o.praInfosIsSet() || !o.m_PraInfos.empty())
+    j["praInfos"] = o.m_PraInfos;
   if (o.subscCatsIsSet() || !o.m_SubscCats.empty())
     j["subscCats"] = o.m_SubscCats;
   if (o.uePolicySectionsIsSet() || !o.m_UePolicySections.empty())
     j["uePolicySections"] = o.m_UePolicySections;
-  if (o.upsisIsSet() || !o.m_Upsis.empty()) j["upsis"] = o.m_Upsis;
+  if (o.upsisIsSet() || !o.m_Upsis.empty())
+    j["upsis"] = o.m_Upsis;
   if (o.allowedRouteSelDescsIsSet() || !o.m_AllowedRouteSelDescs.empty())
     j["allowedRouteSelDescs"] = o.m_AllowedRouteSelDescs;
-  if (o.andspIndIsSet()) j["andspInd"] = o.m_AndspInd;
-  if (o.peiIsSet()) j["pei"] = o.m_Pei;
-  if (o.osIdsIsSet() || !o.m_OsIds.empty()) j["osIds"] = o.m_OsIds;
-  if (o.suppFeatIsSet()) j["suppFeat"] = o.m_SuppFeat;
+  if (o.andspIndIsSet())
+    j["andspInd"] = o.m_AndspInd;
+  if (o.peiIsSet())
+    j["pei"] = o.m_Pei;
+  if (o.osIdsIsSet() || !o.m_OsIds.empty())
+    j["osIds"] = o.m_OsIds;
+  if (o.suppFeatIsSet())
+    j["suppFeat"] = o.m_SuppFeat;
 }
 
-void from_json(const nlohmann::json& j, UePolicySet& o) {
+void from_json(const nlohmann::json &j, UePolicySet &o) {
   if (j.find("praInfos") != j.end()) {
     j.at("praInfos").get_to(o.m_PraInfos);
     o.m_PraInfosIsSet = true;
@@ -94,68 +100,50 @@ void from_json(const nlohmann::json& j, UePolicySet& o) {
   }
 }
 
-std::map<std::string, oai::model::common::PresenceInfo>&
+std::map<std::string, oai::model::common::PresenceInfo> &
 UePolicySet::getPraInfos() {
   return m_PraInfos;
 }
 void UePolicySet::setPraInfos(
-    std::map<std::string, oai::model::common::PresenceInfo> const& value) {
-  m_PraInfos      = value;
+    std::map<std::string, oai::model::common::PresenceInfo> const &value) {
+  m_PraInfos = value;
   m_PraInfosIsSet = true;
 }
-bool UePolicySet::praInfosIsSet() const {
-  return m_PraInfosIsSet;
-}
-void UePolicySet::unsetPraInfos() {
-  m_PraInfosIsSet = false;
-}
-std::vector<std::string>& UePolicySet::getSubscCats() {
-  return m_SubscCats;
-}
-void UePolicySet::setSubscCats(std::vector<std::string> const& value) {
-  m_SubscCats      = value;
+bool UePolicySet::praInfosIsSet() const { return m_PraInfosIsSet; }
+void UePolicySet::unsetPraInfos() { m_PraInfosIsSet = false; }
+std::vector<std::string> &UePolicySet::getSubscCats() { return m_SubscCats; }
+void UePolicySet::setSubscCats(std::vector<std::string> const &value) {
+  m_SubscCats = value;
   m_SubscCatsIsSet = true;
 }
-bool UePolicySet::subscCatsIsSet() const {
-  return m_SubscCatsIsSet;
-}
-void UePolicySet::unsetSubscCats() {
-  m_SubscCatsIsSet = false;
-}
-std::map<std::string, UePolicySection>& UePolicySet::getUePolicySections() {
+bool UePolicySet::subscCatsIsSet() const { return m_SubscCatsIsSet; }
+void UePolicySet::unsetSubscCats() { m_SubscCatsIsSet = false; }
+std::map<std::string, UePolicySection> &UePolicySet::getUePolicySections() {
   return m_UePolicySections;
 }
 void UePolicySet::setUePolicySections(
-    std::map<std::string, UePolicySection> const& value) {
-  m_UePolicySections      = value;
+    std::map<std::string, UePolicySection> const &value) {
+  m_UePolicySections = value;
   m_UePolicySectionsIsSet = true;
 }
 bool UePolicySet::uePolicySectionsIsSet() const {
   return m_UePolicySectionsIsSet;
 }
-void UePolicySet::unsetUePolicySections() {
-  m_UePolicySectionsIsSet = false;
-}
-std::vector<std::string>& UePolicySet::getUpsis() {
-  return m_Upsis;
-}
-void UePolicySet::setUpsis(std::vector<std::string> const& value) {
-  m_Upsis      = value;
+void UePolicySet::unsetUePolicySections() { m_UePolicySectionsIsSet = false; }
+std::vector<std::string> &UePolicySet::getUpsis() { return m_Upsis; }
+void UePolicySet::setUpsis(std::vector<std::string> const &value) {
+  m_Upsis = value;
   m_UpsisIsSet = true;
 }
-bool UePolicySet::upsisIsSet() const {
-  return m_UpsisIsSet;
-}
-void UePolicySet::unsetUpsis() {
-  m_UpsisIsSet = false;
-}
-std::map<std::string, PlmnRouteSelectionDescriptor>&
+bool UePolicySet::upsisIsSet() const { return m_UpsisIsSet; }
+void UePolicySet::unsetUpsis() { m_UpsisIsSet = false; }
+std::map<std::string, PlmnRouteSelectionDescriptor> &
 UePolicySet::getAllowedRouteSelDescs() {
   return m_AllowedRouteSelDescs;
 }
 void UePolicySet::setAllowedRouteSelDescs(
-    std::map<std::string, PlmnRouteSelectionDescriptor> const& value) {
-  m_AllowedRouteSelDescs      = value;
+    std::map<std::string, PlmnRouteSelectionDescriptor> const &value) {
+  m_AllowedRouteSelDescs = value;
   m_AllowedRouteSelDescsIsSet = true;
 }
 bool UePolicySet::allowedRouteSelDescsIsSet() const {
@@ -164,57 +152,33 @@ bool UePolicySet::allowedRouteSelDescsIsSet() const {
 void UePolicySet::unsetAllowedRouteSelDescs() {
   m_AllowedRouteSelDescsIsSet = false;
 }
-bool UePolicySet::isAndspInd() const {
-  return m_AndspInd;
-}
+bool UePolicySet::isAndspInd() const { return m_AndspInd; }
 void UePolicySet::setAndspInd(bool const value) {
-  m_AndspInd      = value;
+  m_AndspInd = value;
   m_AndspIndIsSet = true;
 }
-bool UePolicySet::andspIndIsSet() const {
-  return m_AndspIndIsSet;
-}
-void UePolicySet::unsetAndspInd() {
-  m_AndspIndIsSet = false;
-}
-std::string UePolicySet::getPei() const {
-  return m_Pei;
-}
-void UePolicySet::setPei(std::string const& value) {
-  m_Pei      = value;
+bool UePolicySet::andspIndIsSet() const { return m_AndspIndIsSet; }
+void UePolicySet::unsetAndspInd() { m_AndspIndIsSet = false; }
+std::string UePolicySet::getPei() const { return m_Pei; }
+void UePolicySet::setPei(std::string const &value) {
+  m_Pei = value;
   m_PeiIsSet = true;
 }
-bool UePolicySet::peiIsSet() const {
-  return m_PeiIsSet;
-}
-void UePolicySet::unsetPei() {
-  m_PeiIsSet = false;
-}
-std::vector<std::string>& UePolicySet::getOsIds() {
-  return m_OsIds;
-}
-void UePolicySet::setOsIds(std::vector<std::string> const& value) {
-  m_OsIds      = value;
+bool UePolicySet::peiIsSet() const { return m_PeiIsSet; }
+void UePolicySet::unsetPei() { m_PeiIsSet = false; }
+std::vector<std::string> &UePolicySet::getOsIds() { return m_OsIds; }
+void UePolicySet::setOsIds(std::vector<std::string> const &value) {
+  m_OsIds = value;
   m_OsIdsIsSet = true;
 }
-bool UePolicySet::osIdsIsSet() const {
-  return m_OsIdsIsSet;
-}
-void UePolicySet::unsetOsIds() {
-  m_OsIdsIsSet = false;
-}
-std::string UePolicySet::getSuppFeat() const {
-  return m_SuppFeat;
-}
-void UePolicySet::setSuppFeat(std::string const& value) {
-  m_SuppFeat      = value;
+bool UePolicySet::osIdsIsSet() const { return m_OsIdsIsSet; }
+void UePolicySet::unsetOsIds() { m_OsIdsIsSet = false; }
+std::string UePolicySet::getSuppFeat() const { return m_SuppFeat; }
+void UePolicySet::setSuppFeat(std::string const &value) {
+  m_SuppFeat = value;
   m_SuppFeatIsSet = true;
 }
-bool UePolicySet::suppFeatIsSet() const {
-  return m_SuppFeatIsSet;
-}
-void UePolicySet::unsetSuppFeat() {
-  m_SuppFeatIsSet = false;
-}
+bool UePolicySet::suppFeatIsSet() const { return m_SuppFeatIsSet; }
+void UePolicySet::unsetSuppFeat() { m_SuppFeatIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

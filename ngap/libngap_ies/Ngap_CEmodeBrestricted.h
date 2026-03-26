@@ -20,7 +20,7 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_CEmodeBrestricted {
-  Ngap_CEmodeBrestricted_restricted     = 0,
+  Ngap_CEmodeBrestricted_restricted = 0,
   Ngap_CEmodeBrestricted_not_restricted = 1
   /*
    * Enumeration is extensible

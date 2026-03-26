@@ -37,9 +37,9 @@ struct Ngap_UnsuccessfulOutcome;
 typedef struct Ngap_NGAP_PDU {
   Ngap_NGAP_PDU_PR present;
   union Ngap_NGAP_PDU_u {
-    struct Ngap_InitiatingMessage* initiatingMessage;
-    struct Ngap_SuccessfulOutcome* successfulOutcome;
-    struct Ngap_UnsuccessfulOutcome* unsuccessfulOutcome;
+    struct Ngap_InitiatingMessage *initiatingMessage;
+    struct Ngap_SuccessfulOutcome *successfulOutcome;
+    struct Ngap_UnsuccessfulOutcome *unsuccessfulOutcome;
     /*
      * This type is extensible,
      * possible extensions are below.

@@ -33,7 +33,7 @@ namespace oai::model::ausf {
 ///
 /// </summary>
 class DeregistrationInfo {
- public:
+public:
   DeregistrationInfo();
   virtual ~DeregistrationInfo();
 
@@ -46,15 +46,15 @@ class DeregistrationInfo {
   ///
   /// </summary>
   std::string getSupi() const;
-  void setSupi(std::string const& value);
+  void setSupi(std::string const &value);
 
-  friend void to_json(nlohmann::json& j, const DeregistrationInfo& o);
-  friend void from_json(const nlohmann::json& j, DeregistrationInfo& o);
+  friend void to_json(nlohmann::json &j, const DeregistrationInfo &o);
+  friend void from_json(const nlohmann::json &j, DeregistrationInfo &o);
 
- protected:
+protected:
   std::string m_Supi;
 };
 
-}  // namespace oai::model::ausf
+} // namespace oai::model::ausf
 
 #endif /* DeregistrationInfo_H_ */

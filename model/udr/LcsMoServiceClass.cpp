@@ -26,10 +26,10 @@ void LcsMoServiceClass::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const LcsMoServiceClass& o) {
+void to_json(nlohmann::json &j, const LcsMoServiceClass &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, LcsMoServiceClass& o) {}
+void from_json(const nlohmann::json &j, LcsMoServiceClass &o) {}
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

@@ -41,7 +41,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class AccessAndMobilityData {
- public:
+public:
   AccessAndMobilityData();
   virtual ~AccessAndMobilityData();
 
@@ -54,91 +54,91 @@ class AccessAndMobilityData {
   ///
   /// </summary>
   oai::model::common::UserLocation getLocation() const;
-  void setLocation(oai::model::common::UserLocation const& value);
+  void setLocation(oai::model::common::UserLocation const &value);
   bool locationIsSet() const;
   void unsetLocation();
   /// <summary>
   ///
   /// </summary>
   std::string getLocationTs() const;
-  void setLocationTs(std::string const& value);
+  void setLocationTs(std::string const &value);
   bool locationTsIsSet() const;
   void unsetLocationTs();
   /// <summary>
   ///
   /// </summary>
   std::string getTimeZone() const;
-  void setTimeZone(std::string const& value);
+  void setTimeZone(std::string const &value);
   bool timeZoneIsSet() const;
   void unsetTimeZone();
   /// <summary>
   ///
   /// </summary>
   std::string getTimeZoneTs() const;
-  void setTimeZoneTs(std::string const& value);
+  void setTimeZoneTs(std::string const &value);
   bool timeZoneTsIsSet() const;
   void unsetTimeZoneTs();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::AccessType getAccessType() const;
-  void setAccessType(oai::model::common::AccessType const& value);
+  void setAccessType(oai::model::common::AccessType const &value);
   bool accessTypeIsSet() const;
   void unsetAccessType();
   /// <summary>
   ///
   /// </summary>
-  std::vector<RmInfo>& getRegStates();
-  void setRegStates(std::vector<RmInfo> const& value);
+  std::vector<RmInfo> &getRegStates();
+  void setRegStates(std::vector<RmInfo> const &value);
   bool regStatesIsSet() const;
   void unsetRegStates();
   /// <summary>
   ///
   /// </summary>
   std::string getRegStatesTs() const;
-  void setRegStatesTs(std::string const& value);
+  void setRegStatesTs(std::string const &value);
   bool regStatesTsIsSet() const;
   void unsetRegStatesTs();
   /// <summary>
   ///
   /// </summary>
-  std::vector<CmInfo>& getConnStates();
-  void setConnStates(std::vector<CmInfo> const& value);
+  std::vector<CmInfo> &getConnStates();
+  void setConnStates(std::vector<CmInfo> const &value);
   bool connStatesIsSet() const;
   void unsetConnStates();
   /// <summary>
   ///
   /// </summary>
   std::string getConnStatesTs() const;
-  void setConnStatesTs(std::string const& value);
+  void setConnStatesTs(std::string const &value);
   bool connStatesTsIsSet() const;
   void unsetConnStatesTs();
   /// <summary>
   ///
   /// </summary>
   UeReachability getReachabilityStatus() const;
-  void setReachabilityStatus(UeReachability const& value);
+  void setReachabilityStatus(UeReachability const &value);
   bool reachabilityStatusIsSet() const;
   void unsetReachabilityStatus();
   /// <summary>
   ///
   /// </summary>
   std::string getReachabilityStatusTs() const;
-  void setReachabilityStatusTs(std::string const& value);
+  void setReachabilityStatusTs(std::string const &value);
   bool reachabilityStatusTsIsSet() const;
   void unsetReachabilityStatusTs();
   /// <summary>
   ///
   /// </summary>
   SmsSupport getSmsOverNasStatus() const;
-  void setSmsOverNasStatus(SmsSupport const& value);
+  void setSmsOverNasStatus(SmsSupport const &value);
   bool smsOverNasStatusIsSet() const;
   void unsetSmsOverNasStatus();
   /// <summary>
   ///
   /// </summary>
   std::string getSmsOverNasStatusTs() const;
-  void setSmsOverNasStatusTs(std::string const& value);
+  void setSmsOverNasStatusTs(std::string const &value);
   bool smsOverNasStatusTsIsSet() const;
   void unsetSmsOverNasStatusTs();
   /// <summary>
@@ -153,49 +153,49 @@ class AccessAndMobilityData {
   ///
   /// </summary>
   std::string getRoamingStatusTs() const;
-  void setRoamingStatusTs(std::string const& value);
+  void setRoamingStatusTs(std::string const &value);
   bool roamingStatusTsIsSet() const;
   void unsetRoamingStatusTs();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::PlmnId getCurrentPlmn() const;
-  void setCurrentPlmn(oai::model::common::PlmnId const& value);
+  void setCurrentPlmn(oai::model::common::PlmnId const &value);
   bool currentPlmnIsSet() const;
   void unsetCurrentPlmn();
   /// <summary>
   ///
   /// </summary>
   std::string getCurrentPlmnTs() const;
-  void setCurrentPlmnTs(std::string const& value);
+  void setCurrentPlmnTs(std::string const &value);
   bool currentPlmnTsIsSet() const;
   void unsetCurrentPlmnTs();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::RatType>& getRatType();
-  void setRatType(std::vector<oai::model::common::RatType> const& value);
+  std::vector<oai::model::common::RatType> &getRatType();
+  void setRatType(std::vector<oai::model::common::RatType> const &value);
   bool ratTypeIsSet() const;
   void unsetRatType();
   /// <summary>
   ///
   /// </summary>
   std::string getRatTypesTs() const;
-  void setRatTypesTs(std::string const& value);
+  void setRatTypesTs(std::string const &value);
   bool ratTypesTsIsSet() const;
   void unsetRatTypesTs();
   /// <summary>
   ///
   /// </summary>
   std::string getSuppFeat() const;
-  void setSuppFeat(std::string const& value);
+  void setSuppFeat(std::string const &value);
   bool suppFeatIsSet() const;
   void unsetSuppFeat();
 
-  friend void to_json(nlohmann::json& j, const AccessAndMobilityData& o);
-  friend void from_json(const nlohmann::json& j, AccessAndMobilityData& o);
+  friend void to_json(nlohmann::json &j, const AccessAndMobilityData &o);
+  friend void from_json(const nlohmann::json &j, AccessAndMobilityData &o);
 
- protected:
+protected:
   oai::model::common::UserLocation m_Location;
   bool m_LocationIsSet;
   std::string m_LocationTs;
@@ -238,6 +238,6 @@ class AccessAndMobilityData {
   bool m_SuppFeatIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* AccessAndMobilityData_H_ */

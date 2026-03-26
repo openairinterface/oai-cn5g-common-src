@@ -13,13 +13,13 @@ constexpr auto kEpsNasSecurityAlgorithmsIeName = "EPS NAS Security Algorithms";
 namespace oai::nas {
 
 class EpsNasSecurityAlgorithms : public Type3NasIe {
- public:
+public:
   EpsNasSecurityAlgorithms();
   EpsNasSecurityAlgorithms(uint8_t ciphering, uint8_t integrity_protection);
   virtual ~EpsNasSecurityAlgorithms();
 
-  int Encode(uint8_t* buf, int len) const override;
-  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+  int Encode(uint8_t *buf, int len) const override;
+  int Decode(const uint8_t *const buf, int len, bool is_iei = false) override;
 
   static std::string GetIeName() { return kEpsNasSecurityAlgorithmsIeName; }
   uint32_t GetIeLength() const override;
@@ -31,13 +31,13 @@ class EpsNasSecurityAlgorithms : public Type3NasIe {
   uint8_t GetTypeOfIntegrityProtectionAlgorithm() const;
 
   void Set(uint8_t ciphering, uint8_t integrity_protection);
-  void Get(uint8_t& ciphering, uint8_t& integrity_protection) const;
+  void Get(uint8_t &ciphering, uint8_t &integrity_protection) const;
 
- private:
+private:
   uint8_t type_of_ciphering_algorithm_;
   uint8_t type_of_integrity_protection_algorithm_;
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

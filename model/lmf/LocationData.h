@@ -19,17 +19,17 @@
 #ifndef LocationData_H_
 #define LocationData_H_
 
-#include "GnssPositioningMethodAndUsage.h"
 #include "AccuracyFulfilmentIndicator.h"
-#include "Ecgi.h"
-#include "Ncgi.h"
 #include "CivicAddress.h"
+#include "Ecgi.h"
 #include "GeographicArea.h"
-#include "VelocityEstimate.h"
+#include "GnssPositioningMethodAndUsage.h"
+#include "Ncgi.h"
 #include "PositioningMethodAndUsage.h"
+#include "VelocityEstimate.h"
+#include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
-#include <nlohmann/json.hpp>
 
 namespace oai::model::lmf {
 
@@ -37,7 +37,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class LocationData {
- public:
+public:
   LocationData();
   virtual ~LocationData() = default;
 
@@ -51,16 +51,16 @@ class LocationData {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const LocationData& rhs) const;
-  bool operator!=(const LocationData& rhs) const;
+  bool operator==(const LocationData &rhs) const;
+  bool operator!=(const LocationData &rhs) const;
 
   /////////////////////////////////////////////
   /// LocationData members
@@ -69,14 +69,14 @@ class LocationData {
   ///
   /// </summary>
   oai::model::lmf::GeographicArea getLocationEstimate() const;
-  void setLocationEstimate(oai::model::lmf::GeographicArea const& value);
+  void setLocationEstimate(oai::model::lmf::GeographicArea const &value);
   /// <summary>
   ///
   /// </summary>
-  oai::model::lmf::AccuracyFulfilmentIndicator getAccuracyFulfilmentIndicator()
-      const;
+  oai::model::lmf::AccuracyFulfilmentIndicator
+  getAccuracyFulfilmentIndicator() const;
   void setAccuracyFulfilmentIndicator(
-      oai::model::lmf::AccuracyFulfilmentIndicator const& value);
+      oai::model::lmf::AccuracyFulfilmentIndicator const &value);
   bool accuracyFulfilmentIndicatorIsSet() const;
   void unsetAccuracyFulfilmentIndicator();
   /// <summary>
@@ -90,14 +90,14 @@ class LocationData {
   ///
   /// </summary>
   oai::model::lmf::VelocityEstimate getVelocityEstimate() const;
-  void setVelocityEstimate(oai::model::lmf::VelocityEstimate const& value);
+  void setVelocityEstimate(oai::model::lmf::VelocityEstimate const &value);
   bool velocityEstimateIsSet() const;
   void unsetVelocityEstimate();
   /// <summary>
   ///
   /// </summary>
   oai::model::lmf::CivicAddress getCivicAddress() const;
-  void setCivicAddress(oai::model::lmf::CivicAddress const& value);
+  void setCivicAddress(oai::model::lmf::CivicAddress const &value);
   bool civicAddressIsSet() const;
   void unsetCivicAddress();
   /// <summary>
@@ -106,7 +106,7 @@ class LocationData {
   std::vector<oai::model::lmf::PositioningMethodAndUsage>
   getPositioningDataList() const;
   void setPositioningDataList(
-      std::vector<oai::model::lmf::PositioningMethodAndUsage> const& value);
+      std::vector<oai::model::lmf::PositioningMethodAndUsage> const &value);
   bool positioningDataListIsSet() const;
   void unsetPositioningDataList();
   /// <summary>
@@ -115,21 +115,21 @@ class LocationData {
   std::vector<oai::model::lmf::GnssPositioningMethodAndUsage>
   getGnssPositioningDataList() const;
   void setGnssPositioningDataList(
-      std::vector<oai::model::lmf::GnssPositioningMethodAndUsage> const& value);
+      std::vector<oai::model::lmf::GnssPositioningMethodAndUsage> const &value);
   bool gnssPositioningDataListIsSet() const;
   void unsetGnssPositioningDataList();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ecgi getEcgi() const;
-  void setEcgi(oai::model::common::Ecgi const& value);
+  void setEcgi(oai::model::common::Ecgi const &value);
   bool ecgiIsSet() const;
   void unsetEcgi();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ncgi getNcgi() const;
-  void setNcgi(oai::model::common::Ncgi const& value);
+  void setNcgi(oai::model::common::Ncgi const &value);
   bool ncgiIsSet() const;
   void unsetNcgi();
   /// <summary>
@@ -150,14 +150,14 @@ class LocationData {
   ///
   /// </summary>
   std::string getServingLMFIdentification() const;
-  void setServingLMFIdentification(std::string const& value);
+  void setServingLMFIdentification(std::string const &value);
   bool servingLMFIdentificationIsSet() const;
   void unsetServingLMFIdentification();
 
-  friend void to_json(nlohmann::json& j, const LocationData& o);
-  friend void from_json(const nlohmann::json& j, LocationData& o);
+  friend void to_json(nlohmann::json &j, const LocationData &o);
+  friend void from_json(const nlohmann::json &j, LocationData &o);
 
- protected:
+protected:
   oai::model::lmf::GeographicArea m_LocationEstimate;
 
   oai::model::lmf::AccuracyFulfilmentIndicator m_AccuracyFulfilmentIndicator;
@@ -185,6 +185,6 @@ class LocationData {
   bool m_ServingLMFIdentificationIsSet;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* LocationData_H_ */

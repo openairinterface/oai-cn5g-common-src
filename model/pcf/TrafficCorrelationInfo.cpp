@@ -11,26 +11,26 @@
  * the class manually.
  */
 
-#include "Ipv6AddrRm.h"
 #include "TrafficCorrelationInfo.h"
 #include "Helpers.h"
+#include "Ipv6AddrRm.h"
 
 #include <sstream>
 
 namespace oai::model::pcf {
 
 TrafficCorrelationInfo::TrafficCorrelationInfo() {
-  m_CorrTypeIsSet       = false;
-  m_TfcCorrId           = "";
-  m_TfcCorrIdIsSet      = false;
-  m_ComEasIpv4Addr      = "";
+  m_CorrTypeIsSet = false;
+  m_TfcCorrId = "";
+  m_TfcCorrIdIsSet = false;
+  m_ComEasIpv4Addr = "";
   m_ComEasIpv4AddrIsSet = false;
   m_ComEasIpv6AddrIsSet = false;
-  m_FqdnRangeIsSet      = false;
-  m_NotifUri            = "";
-  m_NotifUriIsSet       = false;
-  m_NotifCorrId         = "";
-  m_NotifCorrIdIsSet    = false;
+  m_FqdnRangeIsSet = false;
+  m_NotifUri = "";
+  m_NotifUriIsSet = false;
+  m_NotifCorrId = "";
+  m_NotifCorrIdIsSet = false;
 }
 
 void TrafficCorrelationInfo::validate() const {
@@ -40,23 +40,23 @@ void TrafficCorrelationInfo::validate() const {
   }
 }
 
-bool TrafficCorrelationInfo::validate(std::stringstream& msg) const {
+bool TrafficCorrelationInfo::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool TrafficCorrelationInfo::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool TrafficCorrelationInfo::validate(std::stringstream &msg,
+                                      const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "TrafficCorrelationInfo" : pathPrefix;
 
   if (comEasIpv4AddrIsSet()) {
-    const std::string& value           = m_ComEasIpv4Addr;
+    const std::string &value = m_ComEasIpv4Addr;
     const std::string currentValuePath = _pathPrefix + ".comEasIpv4Addr";
   }
 
   if (fqdnRangeIsSet()) {
-    const std::vector<oai::model::pcf::FqdnPatternMatchingRule>& value =
+    const std::vector<oai::model::pcf::FqdnPatternMatchingRule> &value =
         m_FqdnRange;
     const std::string currentValuePath = _pathPrefix + ".fqdnRange";
 
@@ -64,10 +64,10 @@ bool TrafficCorrelationInfo::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::FqdnPatternMatchingRule& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::FqdnPatternMatchingRule &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -83,7 +83,7 @@ bool TrafficCorrelationInfo::validate(
 }
 
 bool TrafficCorrelationInfo::operator==(
-    const TrafficCorrelationInfo& rhs) const {
+    const TrafficCorrelationInfo &rhs) const {
   return
 
       ((!corrTypeIsSet() && !rhs.corrTypeIsSet()) ||
@@ -118,23 +118,29 @@ bool TrafficCorrelationInfo::operator==(
 }
 
 bool TrafficCorrelationInfo::operator!=(
-    const TrafficCorrelationInfo& rhs) const {
+    const TrafficCorrelationInfo &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const TrafficCorrelationInfo& o) {
+void to_json(nlohmann::json &j, const TrafficCorrelationInfo &o) {
   j = nlohmann::json::object();
-  if (o.corrTypeIsSet()) j["corrType"] = o.m_CorrType;
-  if (o.tfcCorrIdIsSet()) j["tfcCorrId"] = o.m_TfcCorrId;
-  if (o.comEasIpv4AddrIsSet()) j["comEasIpv4Addr"] = o.m_ComEasIpv4Addr;
-  if (o.comEasIpv6AddrIsSet()) j["comEasIpv6Addr"] = o.m_ComEasIpv6Addr;
+  if (o.corrTypeIsSet())
+    j["corrType"] = o.m_CorrType;
+  if (o.tfcCorrIdIsSet())
+    j["tfcCorrId"] = o.m_TfcCorrId;
+  if (o.comEasIpv4AddrIsSet())
+    j["comEasIpv4Addr"] = o.m_ComEasIpv4Addr;
+  if (o.comEasIpv6AddrIsSet())
+    j["comEasIpv6Addr"] = o.m_ComEasIpv6Addr;
   if (o.fqdnRangeIsSet() || !o.m_FqdnRange.empty())
     j["fqdnRange"] = o.m_FqdnRange;
-  if (o.notifUriIsSet()) j["notifUri"] = o.m_NotifUri;
-  if (o.notifCorrIdIsSet()) j["notifCorrId"] = o.m_NotifCorrId;
+  if (o.notifUriIsSet())
+    j["notifUri"] = o.m_NotifUri;
+  if (o.notifCorrIdIsSet())
+    j["notifCorrId"] = o.m_NotifCorrId;
 }
 
-void from_json(const nlohmann::json& j, TrafficCorrelationInfo& o) {
+void from_json(const nlohmann::json &j, TrafficCorrelationInfo &o) {
   if (j.find("corrType") != j.end()) {
     j.at("corrType").get_to(o.m_CorrType);
     o.m_CorrTypeIsSet = true;
@@ -169,34 +175,24 @@ oai::model::pcf::CorrelationType TrafficCorrelationInfo::getCorrType() const {
   return m_CorrType;
 }
 void TrafficCorrelationInfo::setCorrType(
-    oai::model::pcf::CorrelationType const& value) {
-  m_CorrType      = value;
+    oai::model::pcf::CorrelationType const &value) {
+  m_CorrType = value;
   m_CorrTypeIsSet = true;
 }
-bool TrafficCorrelationInfo::corrTypeIsSet() const {
-  return m_CorrTypeIsSet;
-}
-void TrafficCorrelationInfo::unsetCorrType() {
-  m_CorrTypeIsSet = false;
-}
-std::string TrafficCorrelationInfo::getTfcCorrId() const {
-  return m_TfcCorrId;
-}
-void TrafficCorrelationInfo::setTfcCorrId(std::string const& value) {
-  m_TfcCorrId      = value;
+bool TrafficCorrelationInfo::corrTypeIsSet() const { return m_CorrTypeIsSet; }
+void TrafficCorrelationInfo::unsetCorrType() { m_CorrTypeIsSet = false; }
+std::string TrafficCorrelationInfo::getTfcCorrId() const { return m_TfcCorrId; }
+void TrafficCorrelationInfo::setTfcCorrId(std::string const &value) {
+  m_TfcCorrId = value;
   m_TfcCorrIdIsSet = true;
 }
-bool TrafficCorrelationInfo::tfcCorrIdIsSet() const {
-  return m_TfcCorrIdIsSet;
-}
-void TrafficCorrelationInfo::unsetTfcCorrId() {
-  m_TfcCorrIdIsSet = false;
-}
+bool TrafficCorrelationInfo::tfcCorrIdIsSet() const { return m_TfcCorrIdIsSet; }
+void TrafficCorrelationInfo::unsetTfcCorrId() { m_TfcCorrIdIsSet = false; }
 std::string TrafficCorrelationInfo::getComEasIpv4Addr() const {
   return m_ComEasIpv4Addr;
 }
-void TrafficCorrelationInfo::setComEasIpv4Addr(std::string const& value) {
-  m_ComEasIpv4Addr      = value;
+void TrafficCorrelationInfo::setComEasIpv4Addr(std::string const &value) {
+  m_ComEasIpv4Addr = value;
   m_ComEasIpv4AddrIsSet = true;
 }
 bool TrafficCorrelationInfo::comEasIpv4AddrIsSet() const {
@@ -205,13 +201,13 @@ bool TrafficCorrelationInfo::comEasIpv4AddrIsSet() const {
 void TrafficCorrelationInfo::unsetComEasIpv4Addr() {
   m_ComEasIpv4AddrIsSet = false;
 }
-oai::model::common::Ipv6AddrRm TrafficCorrelationInfo::getComEasIpv6Addr()
-    const {
+oai::model::common::Ipv6AddrRm
+TrafficCorrelationInfo::getComEasIpv6Addr() const {
   return m_ComEasIpv6Addr;
 }
 void TrafficCorrelationInfo::setComEasIpv6Addr(
-    oai::model::common::Ipv6AddrRm const& value) {
-  m_ComEasIpv6Addr      = value;
+    oai::model::common::Ipv6AddrRm const &value) {
+  m_ComEasIpv6Addr = value;
   m_ComEasIpv6AddrIsSet = true;
 }
 bool TrafficCorrelationInfo::comEasIpv6AddrIsSet() const {
@@ -225,41 +221,29 @@ TrafficCorrelationInfo::getFqdnRange() const {
   return m_FqdnRange;
 }
 void TrafficCorrelationInfo::setFqdnRange(
-    std::vector<oai::model::pcf::FqdnPatternMatchingRule> const& value) {
-  m_FqdnRange      = value;
+    std::vector<oai::model::pcf::FqdnPatternMatchingRule> const &value) {
+  m_FqdnRange = value;
   m_FqdnRangeIsSet = true;
 }
-bool TrafficCorrelationInfo::fqdnRangeIsSet() const {
-  return m_FqdnRangeIsSet;
-}
-void TrafficCorrelationInfo::unsetFqdnRange() {
-  m_FqdnRangeIsSet = false;
-}
-std::string TrafficCorrelationInfo::getNotifUri() const {
-  return m_NotifUri;
-}
-void TrafficCorrelationInfo::setNotifUri(std::string const& value) {
-  m_NotifUri      = value;
+bool TrafficCorrelationInfo::fqdnRangeIsSet() const { return m_FqdnRangeIsSet; }
+void TrafficCorrelationInfo::unsetFqdnRange() { m_FqdnRangeIsSet = false; }
+std::string TrafficCorrelationInfo::getNotifUri() const { return m_NotifUri; }
+void TrafficCorrelationInfo::setNotifUri(std::string const &value) {
+  m_NotifUri = value;
   m_NotifUriIsSet = true;
 }
-bool TrafficCorrelationInfo::notifUriIsSet() const {
-  return m_NotifUriIsSet;
-}
-void TrafficCorrelationInfo::unsetNotifUri() {
-  m_NotifUriIsSet = false;
-}
+bool TrafficCorrelationInfo::notifUriIsSet() const { return m_NotifUriIsSet; }
+void TrafficCorrelationInfo::unsetNotifUri() { m_NotifUriIsSet = false; }
 std::string TrafficCorrelationInfo::getNotifCorrId() const {
   return m_NotifCorrId;
 }
-void TrafficCorrelationInfo::setNotifCorrId(std::string const& value) {
-  m_NotifCorrId      = value;
+void TrafficCorrelationInfo::setNotifCorrId(std::string const &value) {
+  m_NotifCorrId = value;
   m_NotifCorrIdIsSet = true;
 }
 bool TrafficCorrelationInfo::notifCorrIdIsSet() const {
   return m_NotifCorrIdIsSet;
 }
-void TrafficCorrelationInfo::unsetNotifCorrId() {
-  m_NotifCorrIdIsSet = false;
-}
+void TrafficCorrelationInfo::unsetNotifCorrId() { m_NotifCorrIdIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

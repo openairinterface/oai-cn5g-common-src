@@ -27,7 +27,7 @@ PlmnId::PlmnId() {
 PlmnId::~PlmnId() {}
 
 //------------------------------------------------------------------------------
-void PlmnId::set(const std::string& mcc, const std::string& mnc) {
+void PlmnId::set(const std::string &mcc, const std::string &mnc) {
   int mcc_value = oai::utils::utils::fromString<int>(mcc);
   int mnc_value = oai::utils::utils::fromString<int>(mnc);
 
@@ -40,20 +40,20 @@ void PlmnId::set(const std::string& mcc, const std::string& mnc) {
   } else {
     m_MncDigit3 = 0xf;
   }
-  m_MncDigit1 = (uint8_t) std::floor((double) (mnc_value % 100) / 10);
+  m_MncDigit1 = (uint8_t)std::floor((double)(mnc_value % 100) / 10);
   m_MncDigit2 = mnc_value % 10;
 }
 
 //------------------------------------------------------------------------------
-void PlmnId::get(std::string& mcc, std::string& mnc) const {
+void PlmnId::get(std::string &mcc, std::string &mnc) const {
   getMcc(mcc);
   getMnc(mnc);
 }
 
 //------------------------------------------------------------------------------
-void PlmnId::getMcc(std::string& mcc) const {
+void PlmnId::getMcc(std::string &mcc) const {
   int m_mcc = m_MccDigit1 * 100 + m_MccDigit2 * 10 + m_MccDigit3;
-  mcc       = std::to_string(m_mcc);
+  mcc = std::to_string(m_mcc);
   if ((m_MccDigit2 == 0) and (m_MccDigit1 == 0)) {
     mcc = "00" + mcc;
   } else if (m_MccDigit1 == 0) {
@@ -68,17 +68,17 @@ std::string PlmnId::getMcc() const {
 }
 
 //------------------------------------------------------------------------------
-void PlmnId::getMnc(std::string& mnc) const {
+void PlmnId::getMnc(std::string &mnc) const {
   int m_mnc = 0;
   if (m_MncDigit3 == 0xf) {
     m_mnc = m_MncDigit1 * 10 + m_MncDigit2;
-    mnc   = std::to_string(m_mnc);
+    mnc = std::to_string(m_mnc);
     if (m_MncDigit1 == 0) {
       mnc = "0" + mnc;
     }
   } else {
     m_mnc = m_MncDigit3 * 100 + m_MncDigit1 * 10 + m_MncDigit2;
-    mnc   = std::to_string(m_mnc);
+    mnc = std::to_string(m_mnc);
     if (m_MncDigit3 == 0) {
       if (m_MncDigit1 == 0)
         mnc = "00" + mnc;
@@ -95,10 +95,11 @@ std::string PlmnId::getMnc() const {
   return mnc;
 }
 //------------------------------------------------------------------------------
-bool PlmnId::encode(Ngap_PLMNIdentity_t& plmn) const {
-  plmn.size = 3;  // OCTET_STRING(SIZE(3))  9.3.3.5, 3gpp ts 38.413 V15.4.0
-  plmn.buf  = (uint8_t*) calloc(1, 3 * sizeof(uint8_t));
-  if (!plmn.buf) return false;
+bool PlmnId::encode(Ngap_PLMNIdentity_t &plmn) const {
+  plmn.size = 3; // OCTET_STRING(SIZE(3))  9.3.3.5, 3gpp ts 38.413 V15.4.0
+  plmn.buf = (uint8_t *)calloc(1, 3 * sizeof(uint8_t));
+  if (!plmn.buf)
+    return false;
 
   plmn.buf[0] = 0x00 | ((m_MccDigit2 & 0x0f) << 4) | (m_MccDigit1 & 0x0f);
   plmn.buf[1] = 0x00 | ((m_MncDigit3 & 0x0f) << 4) | (m_MccDigit3 & 0x0f);
@@ -107,9 +108,11 @@ bool PlmnId::encode(Ngap_PLMNIdentity_t& plmn) const {
 }
 
 //------------------------------------------------------------------------------
-bool PlmnId::decode(const Ngap_PLMNIdentity_t& plmn) {
-  if (!plmn.buf) return false;
-  if (plmn.size < 3) return false;
+bool PlmnId::decode(const Ngap_PLMNIdentity_t &plmn) {
+  if (!plmn.buf)
+    return false;
+  if (plmn.size < 3)
+    return false;
 
   m_MccDigit1 = plmn.buf[0] & 0x0f;
   m_MccDigit2 = plmn.buf[0] >> 4;
@@ -122,4 +125,4 @@ bool PlmnId::decode(const Ngap_PLMNIdentity_t& plmn) {
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

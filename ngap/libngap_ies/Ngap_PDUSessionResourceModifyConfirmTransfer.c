@@ -8,16 +8,15 @@
 
 #include "Ngap_PDUSessionResourceModifyConfirmTransfer.h"
 
-#include "Ngap_UPTransportLayerInformationPairList.h"
-#include "Ngap_QosFlowListWithCause.h"
 #include "Ngap_ProtocolExtensionContainer.h"
+#include "Ngap_QosFlowListWithCause.h"
+#include "Ngap_UPTransportLayerInformationPairList.h"
 static asn_TYPE_member_t
     asn_MBR_Ngap_PDUSessionResourceModifyConfirmTransfer_1[] = {
         {ATF_NOFLAGS,
          0,
-         offsetof(
-             struct Ngap_PDUSessionResourceModifyConfirmTransfer,
-             qosFlowModifyConfirmList),
+         offsetof(struct Ngap_PDUSessionResourceModifyConfirmTransfer,
+                  qosFlowModifyConfirmList),
          (ASN_TAG_CLASS_CONTEXT | (0 << 2)),
          -1, /* IMPLICIT tag at current level */
          &asn_DEF_Ngap_QosFlowModifyConfirmList,
@@ -36,9 +35,8 @@ static asn_TYPE_member_t
          "qosFlowModifyConfirmList"},
         {ATF_NOFLAGS,
          0,
-         offsetof(
-             struct Ngap_PDUSessionResourceModifyConfirmTransfer,
-             uLNGU_UP_TNLInformation),
+         offsetof(struct Ngap_PDUSessionResourceModifyConfirmTransfer,
+                  uLNGU_UP_TNLInformation),
          (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
          +1, /* EXPLICIT tag at current level */
          &asn_DEF_Ngap_UPTransportLayerInformation,
@@ -57,9 +55,8 @@ static asn_TYPE_member_t
          "uLNGU-UP-TNLInformation"},
         {ATF_POINTER,
          3,
-         offsetof(
-             struct Ngap_PDUSessionResourceModifyConfirmTransfer,
-             additionalNG_UUPTNLInformation),
+         offsetof(struct Ngap_PDUSessionResourceModifyConfirmTransfer,
+                  additionalNG_UUPTNLInformation),
          (ASN_TAG_CLASS_CONTEXT | (2 << 2)),
          -1, /* IMPLICIT tag at current level */
          &asn_DEF_Ngap_UPTransportLayerInformationPairList,
@@ -78,9 +75,8 @@ static asn_TYPE_member_t
          "additionalNG-UUPTNLInformation"},
         {ATF_POINTER,
          2,
-         offsetof(
-             struct Ngap_PDUSessionResourceModifyConfirmTransfer,
-             qosFlowFailedToModifyList),
+         offsetof(struct Ngap_PDUSessionResourceModifyConfirmTransfer,
+                  qosFlowFailedToModifyList),
          (ASN_TAG_CLASS_CONTEXT | (3 << 2)),
          -1, /* IMPLICIT tag at current level */
          &asn_DEF_Ngap_QosFlowListWithCause,
@@ -99,9 +95,8 @@ static asn_TYPE_member_t
          "qosFlowFailedToModifyList"},
         {ATF_POINTER,
          1,
-         offsetof(
-             struct Ngap_PDUSessionResourceModifyConfirmTransfer,
-             iE_Extensions),
+         offsetof(struct Ngap_PDUSessionResourceModifyConfirmTransfer,
+                  iE_Extensions),
          (ASN_TAG_CLASS_CONTEXT | (4 << 2)),
          -1, /* IMPLICIT tag at current level */
          &asn_DEF_Ngap_ProtocolExtensionContainer_9666P164,

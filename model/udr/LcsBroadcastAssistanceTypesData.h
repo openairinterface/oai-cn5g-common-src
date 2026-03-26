@@ -32,7 +32,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class LcsBroadcastAssistanceTypesData {
- public:
+public:
   LcsBroadcastAssistanceTypesData();
   virtual ~LcsBroadcastAssistanceTypesData();
 
@@ -44,18 +44,18 @@ class LcsBroadcastAssistanceTypesData {
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getLocationAssistanceType();
-  void setLocationAssistanceType(std::vector<std::string> const& value);
+  std::vector<std::string> &getLocationAssistanceType();
+  void setLocationAssistanceType(std::vector<std::string> const &value);
 
-  friend void to_json(
-      nlohmann::json& j, const LcsBroadcastAssistanceTypesData& o);
-  friend void from_json(
-      const nlohmann::json& j, LcsBroadcastAssistanceTypesData& o);
+  friend void to_json(nlohmann::json &j,
+                      const LcsBroadcastAssistanceTypesData &o);
+  friend void from_json(const nlohmann::json &j,
+                        LcsBroadcastAssistanceTypesData &o);
 
- protected:
+protected:
   std::vector<std::string> m_LocationAssistanceType;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* LcsBroadcastAssistanceTypesData_H_ */

@@ -9,7 +9,7 @@
 constexpr uint8_t kPduSessionReactivationResultMinimumLength = 4;
 constexpr uint8_t kPduSessionReactivationResultContentMinimumLength =
     kPduSessionReactivationResultMinimumLength -
-    2;  // Minimum length - 2 octets for IEI/Length
+    2; // Minimum length - 2 octets for IEI/Length
 constexpr uint8_t kPduSessionReactivationResultMaximumLength = 34;
 constexpr auto kPduSessionReactivationResultIeName =
     "PDU Session Reactivation Result";
@@ -17,24 +17,24 @@ constexpr auto kPduSessionReactivationResultIeName =
 namespace oai::nas {
 
 class PduSessionReactivationResult : public Type4NasIe {
- public:
+public:
   PduSessionReactivationResult();
   PduSessionReactivationResult(uint16_t value);
   virtual ~PduSessionReactivationResult() = default;
 
-  int Encode(uint8_t* buf, int len) const override;
-  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+  int Encode(uint8_t *buf, int len) const override;
+  int Decode(const uint8_t *const buf, int len, bool is_iei = false) override;
 
   static std::string GetIeName() { return kPduSessionReactivationResultIeName; }
 
   void SetValue(uint16_t value);
   uint16_t GetValue() const;
 
- private:
+private:
   uint16_t value_;
   // Spare
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

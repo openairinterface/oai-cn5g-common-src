@@ -19,8 +19,8 @@
 namespace oai::model::common {
 
 SnssaiExtension::SnssaiExtension() {
-  m_SdRangesIsSet   = false;
-  m_WildcardSd      = false;
+  m_SdRangesIsSet = false;
+  m_WildcardSd = false;
   m_WildcardSdIsSet = false;
 }
 
@@ -31,28 +31,28 @@ void SnssaiExtension::validate() const {
   }
 }
 
-bool SnssaiExtension::validate(std::stringstream& msg) const {
+bool SnssaiExtension::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool SnssaiExtension::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool SnssaiExtension::validate(std::stringstream &msg,
+                               const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "SnssaiExtension" : pathPrefix;
 
   if (sdRangesIsSet()) {
-    const std::vector<oai::model::common::SdRange>& value = m_SdRanges;
+    const std::vector<oai::model::common::SdRange> &value = m_SdRanges;
     const std::string currentValuePath = _pathPrefix + ".sdRanges";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::SdRange& value : value) {
+      int i = 0;
+      for (const oai::model::common::SdRange &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -67,7 +67,7 @@ bool SnssaiExtension::validate(
   return success;
 }
 
-bool SnssaiExtension::operator==(const SnssaiExtension& rhs) const {
+bool SnssaiExtension::operator==(const SnssaiExtension &rhs) const {
   return
 
       ((!sdRangesIsSet() && !rhs.sdRangesIsSet()) ||
@@ -81,17 +81,19 @@ bool SnssaiExtension::operator==(const SnssaiExtension& rhs) const {
           ;
 }
 
-bool SnssaiExtension::operator!=(const SnssaiExtension& rhs) const {
+bool SnssaiExtension::operator!=(const SnssaiExtension &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const SnssaiExtension& o) {
+void to_json(nlohmann::json &j, const SnssaiExtension &o) {
   j = nlohmann::json();
-  if (o.sdRangesIsSet() || !o.m_SdRanges.empty()) j["sdRanges"] = o.m_SdRanges;
-  if (o.wildcardSdIsSet()) j["wildcardSd"] = o.m_WildcardSd;
+  if (o.sdRangesIsSet() || !o.m_SdRanges.empty())
+    j["sdRanges"] = o.m_SdRanges;
+  if (o.wildcardSdIsSet())
+    j["wildcardSd"] = o.m_WildcardSd;
 }
 
-void from_json(const nlohmann::json& j, SnssaiExtension& o) {
+void from_json(const nlohmann::json &j, SnssaiExtension &o) {
   if (j.find("sdRanges") != j.end()) {
     j.at("sdRanges").get_to(o.m_SdRanges);
     o.m_SdRangesIsSet = true;
@@ -106,28 +108,18 @@ std::vector<oai::model::common::SdRange> SnssaiExtension::getSdRanges() const {
   return m_SdRanges;
 }
 void SnssaiExtension::setSdRanges(
-    std::vector<oai::model::common::SdRange> const& value) {
-  m_SdRanges      = value;
+    std::vector<oai::model::common::SdRange> const &value) {
+  m_SdRanges = value;
   m_SdRangesIsSet = true;
 }
-bool SnssaiExtension::sdRangesIsSet() const {
-  return m_SdRangesIsSet;
-}
-void SnssaiExtension::unsetSdRanges() {
-  m_SdRangesIsSet = false;
-}
-bool SnssaiExtension::isWildcardSd() const {
-  return m_WildcardSd;
-}
+bool SnssaiExtension::sdRangesIsSet() const { return m_SdRangesIsSet; }
+void SnssaiExtension::unsetSdRanges() { m_SdRangesIsSet = false; }
+bool SnssaiExtension::isWildcardSd() const { return m_WildcardSd; }
 void SnssaiExtension::setWildcardSd(bool const value) {
-  m_WildcardSd      = value;
+  m_WildcardSd = value;
   m_WildcardSdIsSet = true;
 }
-bool SnssaiExtension::wildcardSdIsSet() const {
-  return m_WildcardSdIsSet;
-}
-void SnssaiExtension::unsetWildcardSd() {
-  m_WildcardSdIsSet = false;
-}
+bool SnssaiExtension::wildcardSdIsSet() const { return m_WildcardSdIsSet; }
+void SnssaiExtension::unsetWildcardSd() { m_WildcardSdIsSet = false; }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

@@ -28,7 +28,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class AmfUpdatedEventSubscription {
- public:
+public:
   AmfUpdatedEventSubscription();
   virtual ~AmfUpdatedEventSubscription() = default;
 
@@ -42,10 +42,10 @@ class AmfUpdatedEventSubscription {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const AmfUpdatedEventSubscription& rhs) const;
-  bool operator!=(const AmfUpdatedEventSubscription& rhs) const;
+  bool operator==(const AmfUpdatedEventSubscription &rhs) const;
+  bool operator!=(const AmfUpdatedEventSubscription &rhs) const;
 
   /////////////////////////////////////////////
   /// AmfUpdatedEventSubscription members
@@ -54,20 +54,20 @@ class AmfUpdatedEventSubscription {
   ///
   /// </summary>
   AmfEventSubscription getSubscription() const;
-  void setSubscription(AmfEventSubscription const& value);
+  void setSubscription(AmfEventSubscription const &value);
 
-  friend void to_json(nlohmann::json& j, const AmfUpdatedEventSubscription& o);
-  friend void from_json(
-      const nlohmann::json& j, AmfUpdatedEventSubscription& o);
+  friend void to_json(nlohmann::json &j, const AmfUpdatedEventSubscription &o);
+  friend void from_json(const nlohmann::json &j,
+                        AmfUpdatedEventSubscription &o);
 
- protected:
+protected:
   AmfEventSubscription m_Subscription;
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* AmfUpdatedEventSubscription_H_ */

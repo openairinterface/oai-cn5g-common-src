@@ -25,9 +25,9 @@ struct Ngap_ProtocolExtensionContainer;
 
 /* Ngap_MDT-Configuration */
 typedef struct Ngap_MDT_Configuration {
-  struct Ngap_MDT_Configuration_NR* mdt_Config_NR;       /* OPTIONAL */
-  struct Ngap_MDT_Configuration_EUTRA* mdt_Config_EUTRA; /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_MDT_Configuration_NR *mdt_Config_NR;       /* OPTIONAL */
+  struct Ngap_MDT_Configuration_EUTRA *mdt_Config_EUTRA; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

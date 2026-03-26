@@ -26,28 +26,24 @@ void Polygon::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const Polygon& o) {
-  j              = nlohmann::json();
-  j["shape"]     = o.m_Shape;
+void to_json(nlohmann::json &j, const Polygon &o) {
+  j = nlohmann::json();
+  j["shape"] = o.m_Shape;
   j["pointList"] = o.m_PointList;
 }
 
-void from_json(const nlohmann::json& j, Polygon& o) {
+void from_json(const nlohmann::json &j, Polygon &o) {
   j.at("shape").get_to(o.m_Shape);
   j.at("pointList").get_to(o.m_PointList);
 }
 
-SupportedGADShapes Polygon::getShape() const {
-  return m_Shape;
-}
-void Polygon::setShape(SupportedGADShapes const& value) {
-  m_Shape = value;
-}
-std::vector<GeographicalCoordinates>& Polygon::getPointList() {
+SupportedGADShapes Polygon::getShape() const { return m_Shape; }
+void Polygon::setShape(SupportedGADShapes const &value) { m_Shape = value; }
+std::vector<GeographicalCoordinates> &Polygon::getPointList() {
   return m_PointList;
 }
-void Polygon::setPointList(std::vector<GeographicalCoordinates> const& value) {
+void Polygon::setPointList(std::vector<GeographicalCoordinates> const &value) {
   m_PointList = value;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

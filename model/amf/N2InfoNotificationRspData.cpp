@@ -25,12 +25,13 @@ void N2InfoNotificationRspData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const N2InfoNotificationRspData& o) {
+void to_json(nlohmann::json &j, const N2InfoNotificationRspData &o) {
   j = nlohmann::json();
-  if (o.n2InfoContentIsSet()) j["n2InfoContent"] = o.m_N2InfoContent;
+  if (o.n2InfoContentIsSet())
+    j["n2InfoContent"] = o.m_N2InfoContent;
 }
 
-void from_json(const nlohmann::json& j, N2InfoNotificationRspData& o) {
+void from_json(const nlohmann::json &j, N2InfoNotificationRspData &o) {
   if (j.find("n2InfoContent") != j.end()) {
     j.at("n2InfoContent").get_to(o.m_N2InfoContent);
     o.m_N2InfoContentIsSet = true;
@@ -40,8 +41,8 @@ void from_json(const nlohmann::json& j, N2InfoNotificationRspData& o) {
 N2InfoContent N2InfoNotificationRspData::getN2InfoContent() const {
   return m_N2InfoContent;
 }
-void N2InfoNotificationRspData::setN2InfoContent(N2InfoContent const& value) {
-  m_N2InfoContent      = value;
+void N2InfoNotificationRspData::setN2InfoContent(N2InfoContent const &value) {
+  m_N2InfoContent = value;
   m_N2InfoContentIsSet = true;
 }
 bool N2InfoNotificationRspData::n2InfoContentIsSet() const {
@@ -51,4 +52,4 @@ void N2InfoNotificationRspData::unsetN2InfoContent() {
   m_N2InfoContentIsSet = false;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

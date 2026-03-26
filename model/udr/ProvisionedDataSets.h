@@ -42,7 +42,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class ProvisionedDataSets {
- public:
+public:
   ProvisionedDataSets();
   virtual ~ProvisionedDataSets();
 
@@ -55,77 +55,77 @@ class ProvisionedDataSets {
   ///
   /// </summary>
   AccessAndMobilitySubscriptionData getAmData() const;
-  void setAmData(AccessAndMobilitySubscriptionData const& value);
+  void setAmData(AccessAndMobilitySubscriptionData const &value);
   bool amDataIsSet() const;
   void unsetAmData();
   /// <summary>
   ///
   /// </summary>
   SmfSelectionSubscriptionData getSmfSelData() const;
-  void setSmfSelData(SmfSelectionSubscriptionData const& value);
+  void setSmfSelData(SmfSelectionSubscriptionData const &value);
   bool smfSelDataIsSet() const;
   void unsetSmfSelData();
   /// <summary>
   ///
   /// </summary>
   SmsSubscriptionData getSmsSubsData() const;
-  void setSmsSubsData(SmsSubscriptionData const& value);
+  void setSmsSubsData(SmsSubscriptionData const &value);
   bool smsSubsDataIsSet() const;
   void unsetSmsSubsData();
   /// <summary>
   ///
   /// </summary>
-  std::vector<SessionManagementSubscriptionData>& getSmData();
-  void setSmData(std::vector<SessionManagementSubscriptionData> const& value);
+  std::vector<SessionManagementSubscriptionData> &getSmData();
+  void setSmData(std::vector<SessionManagementSubscriptionData> const &value);
   bool smDataIsSet() const;
   void unsetSmData();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::TraceData getTraceData() const;
-  void setTraceData(oai::model::common::TraceData const& value);
+  void setTraceData(oai::model::common::TraceData const &value);
   bool traceDataIsSet() const;
   void unsetTraceData();
   /// <summary>
   ///
   /// </summary>
   SmsManagementSubscriptionData getSmsMngData() const;
-  void setSmsMngData(SmsManagementSubscriptionData const& value);
+  void setSmsMngData(SmsManagementSubscriptionData const &value);
   bool smsMngDataIsSet() const;
   void unsetSmsMngData();
   /// <summary>
   ///
   /// </summary>
   LcsPrivacyData getLcsPrivacyData() const;
-  void setLcsPrivacyData(LcsPrivacyData const& value);
+  void setLcsPrivacyData(LcsPrivacyData const &value);
   bool lcsPrivacyDataIsSet() const;
   void unsetLcsPrivacyData();
   /// <summary>
   ///
   /// </summary>
   LcsMoData getLcsMoData() const;
-  void setLcsMoData(LcsMoData const& value);
+  void setLcsMoData(LcsMoData const &value);
   bool lcsMoDataIsSet() const;
   void unsetLcsMoData();
   /// <summary>
   ///
   /// </summary>
   LcsBroadcastAssistanceTypesData getLcsBcaData() const;
-  void setLcsBcaData(LcsBroadcastAssistanceTypesData const& value);
+  void setLcsBcaData(LcsBroadcastAssistanceTypesData const &value);
   bool lcsBcaDataIsSet() const;
   void unsetLcsBcaData();
   /// <summary>
   ///
   /// </summary>
   V2xSubscriptionData getV2xData() const;
-  void setV2xData(V2xSubscriptionData const& value);
+  void setV2xData(V2xSubscriptionData const &value);
   bool v2xDataIsSet() const;
   void unsetV2xData();
 
-  friend void to_json(nlohmann::json& j, const ProvisionedDataSets& o);
-  friend void from_json(const nlohmann::json& j, ProvisionedDataSets& o);
+  friend void to_json(nlohmann::json &j, const ProvisionedDataSets &o);
+  friend void from_json(const nlohmann::json &j, ProvisionedDataSets &o);
 
- protected:
+protected:
   AccessAndMobilitySubscriptionData m_AmData;
   bool m_AmDataIsSet;
   SmfSelectionSubscriptionData m_SmfSelData;
@@ -148,6 +148,6 @@ class ProvisionedDataSets {
   bool m_V2xDataIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* ProvisionedDataSets_H_ */

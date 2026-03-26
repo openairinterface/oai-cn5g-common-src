@@ -35,7 +35,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class RegistrationDataSets {
- public:
+public:
   RegistrationDataSets();
   virtual ~RegistrationDataSets();
 
@@ -48,42 +48,42 @@ class RegistrationDataSets {
   ///
   /// </summary>
   Amf3GppAccessRegistration getAmf3Gpp() const;
-  void setAmf3Gpp(Amf3GppAccessRegistration const& value);
+  void setAmf3Gpp(Amf3GppAccessRegistration const &value);
   bool amf3GppIsSet() const;
   void unsetAmf3Gpp();
   /// <summary>
   ///
   /// </summary>
   AmfNon3GppAccessRegistration getAmfNon3Gpp() const;
-  void setAmfNon3Gpp(AmfNon3GppAccessRegistration const& value);
+  void setAmfNon3Gpp(AmfNon3GppAccessRegistration const &value);
   bool amfNon3GppIsSet() const;
   void unsetAmfNon3Gpp();
   /// <summary>
   ///
   /// </summary>
   SmfRegistrationInfo getSmfRegistration() const;
-  void setSmfRegistration(SmfRegistrationInfo const& value);
+  void setSmfRegistration(SmfRegistrationInfo const &value);
   bool smfRegistrationIsSet() const;
   void unsetSmfRegistration();
   /// <summary>
   ///
   /// </summary>
   SmsfRegistration getSmsf3Gpp() const;
-  void setSmsf3Gpp(SmsfRegistration const& value);
+  void setSmsf3Gpp(SmsfRegistration const &value);
   bool smsf3GppIsSet() const;
   void unsetSmsf3Gpp();
   /// <summary>
   ///
   /// </summary>
   SmsfRegistration getSmsfNon3Gpp() const;
-  void setSmsfNon3Gpp(SmsfRegistration const& value);
+  void setSmsfNon3Gpp(SmsfRegistration const &value);
   bool smsfNon3GppIsSet() const;
   void unsetSmsfNon3Gpp();
 
-  friend void to_json(nlohmann::json& j, const RegistrationDataSets& o);
-  friend void from_json(const nlohmann::json& j, RegistrationDataSets& o);
+  friend void to_json(nlohmann::json &j, const RegistrationDataSets &o);
+  friend void from_json(const nlohmann::json &j, RegistrationDataSets &o);
 
- protected:
+protected:
   Amf3GppAccessRegistration m_Amf3Gpp;
   bool m_Amf3GppIsSet;
   AmfNon3GppAccessRegistration m_AmfNon3Gpp;
@@ -96,6 +96,6 @@ class RegistrationDataSets {
   bool m_SmsfNon3GppIsSet;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* RegistrationDataSets_H_ */

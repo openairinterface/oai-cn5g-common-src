@@ -25,7 +25,7 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_DRBStatusDL18 */
 typedef struct Ngap_DRBStatusDL18 {
   Ngap_COUNTValueForPDCP_SN18_t dL_COUNTValue;
-  struct Ngap_ProtocolExtensionContainer* iE_Extension; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extension; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

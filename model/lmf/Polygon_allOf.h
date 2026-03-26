@@ -20,8 +20,8 @@
 #define Polygon_allOf_H_
 
 #include "GeographicalCoordinates.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::lmf {
 
@@ -29,7 +29,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class Polygon_allOf {
- public:
+public:
   Polygon_allOf();
   virtual ~Polygon_allOf() = default;
 
@@ -43,16 +43,16 @@ class Polygon_allOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const Polygon_allOf& rhs) const;
-  bool operator!=(const Polygon_allOf& rhs) const;
+  bool operator==(const Polygon_allOf &rhs) const;
+  bool operator!=(const Polygon_allOf &rhs) const;
 
   /////////////////////////////////////////////
   /// Polygon_allOf members
@@ -62,15 +62,15 @@ class Polygon_allOf {
   /// </summary>
   std::vector<oai::model::lmf::GeographicalCoordinates> getPointList() const;
   void setPointList(
-      std::vector<oai::model::lmf::GeographicalCoordinates> const& value);
+      std::vector<oai::model::lmf::GeographicalCoordinates> const &value);
 
-  friend void to_json(nlohmann::json& j, const Polygon_allOf& o);
-  friend void from_json(const nlohmann::json& j, Polygon_allOf& o);
+  friend void to_json(nlohmann::json &j, const Polygon_allOf &o);
+  friend void from_json(const nlohmann::json &j, Polygon_allOf &o);
 
- protected:
+protected:
   std::vector<oai::model::lmf::GeographicalCoordinates> m_PointList;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* Polygon_allOf_H_ */

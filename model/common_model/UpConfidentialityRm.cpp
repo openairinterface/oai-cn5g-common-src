@@ -27,12 +27,12 @@ void UpConfidentialityRm::validate() const {
   }
 }
 
-bool UpConfidentialityRm::validate(std::stringstream& msg) const {
+bool UpConfidentialityRm::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool UpConfidentialityRm::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool UpConfidentialityRm::validate(std::stringstream &msg,
+                                   const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "UpConfidentialityRm" : pathPrefix;
@@ -40,18 +40,18 @@ bool UpConfidentialityRm::validate(
   return success;
 }
 
-bool UpConfidentialityRm::operator==(const UpConfidentialityRm& rhs) const {
+bool UpConfidentialityRm::operator==(const UpConfidentialityRm &rhs) const {
   return (*this == rhs);
 }
 
-bool UpConfidentialityRm::operator!=(const UpConfidentialityRm& rhs) const {
+bool UpConfidentialityRm::operator!=(const UpConfidentialityRm &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const UpConfidentialityRm& o) {
+void to_json(nlohmann::json &j, const UpConfidentialityRm &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, UpConfidentialityRm& o) {}
+void from_json(const nlohmann::json &j, UpConfidentialityRm &o) {}
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

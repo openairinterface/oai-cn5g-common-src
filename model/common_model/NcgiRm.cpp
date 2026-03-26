@@ -20,7 +20,7 @@ namespace oai::model::common {
 
 NcgiRm::NcgiRm() {
   m_NrCellId = "";
-  m_Nid      = "";
+  m_Nid = "";
   m_NidIsSet = false;
 }
 
@@ -31,29 +31,29 @@ void NcgiRm::validate() const {
   }
 }
 
-bool NcgiRm::validate(std::stringstream& msg) const {
+bool NcgiRm::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool NcgiRm::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool NcgiRm::validate(std::stringstream &msg,
+                      const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "NcgiRm" : pathPrefix;
 
   /* NrCellId */ {
-    const std::string& value           = m_NrCellId;
+    const std::string &value = m_NrCellId;
     const std::string currentValuePath = _pathPrefix + ".nrCellId";
   }
 
   if (nidIsSet()) {
-    const std::string& value           = m_Nid;
+    const std::string &value = m_Nid;
     const std::string currentValuePath = _pathPrefix + ".nid";
   }
 
   return success;
 }
 
-bool NcgiRm::operator==(const NcgiRm& rhs) const {
+bool NcgiRm::operator==(const NcgiRm &rhs) const {
   return
 
       (getPlmnId() == rhs.getPlmnId()) &&
@@ -66,18 +66,17 @@ bool NcgiRm::operator==(const NcgiRm& rhs) const {
           ;
 }
 
-bool NcgiRm::operator!=(const NcgiRm& rhs) const {
-  return !(*this == rhs);
-}
+bool NcgiRm::operator!=(const NcgiRm &rhs) const { return !(*this == rhs); }
 
-void to_json(nlohmann::json& j, const NcgiRm& o) {
-  j             = nlohmann::json();
-  j["plmnId"]   = o.m_PlmnId;
+void to_json(nlohmann::json &j, const NcgiRm &o) {
+  j = nlohmann::json();
+  j["plmnId"] = o.m_PlmnId;
   j["nrCellId"] = o.m_NrCellId;
-  if (o.nidIsSet()) j["nid"] = o.m_Nid;
+  if (o.nidIsSet())
+    j["nid"] = o.m_Nid;
 }
 
-void from_json(const nlohmann::json& j, NcgiRm& o) {
+void from_json(const nlohmann::json &j, NcgiRm &o) {
   j.at("plmnId").get_to(o.m_PlmnId);
   j.at("nrCellId").get_to(o.m_NrCellId);
   if (j.find("nid") != j.end()) {
@@ -86,30 +85,18 @@ void from_json(const nlohmann::json& j, NcgiRm& o) {
   }
 }
 
-oai::model::common::PlmnId NcgiRm::getPlmnId() const {
-  return m_PlmnId;
-}
-void NcgiRm::setPlmnId(oai::model::common::PlmnId const& value) {
+oai::model::common::PlmnId NcgiRm::getPlmnId() const { return m_PlmnId; }
+void NcgiRm::setPlmnId(oai::model::common::PlmnId const &value) {
   m_PlmnId = value;
 }
-std::string NcgiRm::getNrCellId() const {
-  return m_NrCellId;
-}
-void NcgiRm::setNrCellId(std::string const& value) {
-  m_NrCellId = value;
-}
-std::string NcgiRm::getNid() const {
-  return m_Nid;
-}
-void NcgiRm::setNid(std::string const& value) {
-  m_Nid      = value;
+std::string NcgiRm::getNrCellId() const { return m_NrCellId; }
+void NcgiRm::setNrCellId(std::string const &value) { m_NrCellId = value; }
+std::string NcgiRm::getNid() const { return m_Nid; }
+void NcgiRm::setNid(std::string const &value) {
+  m_Nid = value;
   m_NidIsSet = true;
 }
-bool NcgiRm::nidIsSet() const {
-  return m_NidIsSet;
-}
-void NcgiRm::unsetNid() {
-  m_NidIsSet = false;
-}
+bool NcgiRm::nidIsSet() const { return m_NidIsSet; }
+void NcgiRm::unsetNid() { m_NidIsSet = false; }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

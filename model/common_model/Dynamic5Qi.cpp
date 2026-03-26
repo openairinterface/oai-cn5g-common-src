@@ -19,20 +19,20 @@
 namespace oai::model::common {
 
 Dynamic5Qi::Dynamic5Qi() {
-  m_PriorityLevel              = 0;
-  m_PacketDelayBudget          = 0;
-  m_PacketErrRate              = "";
-  m_AverWindow                 = 2000;
-  m_AverWindowIsSet            = false;
-  m_MaxDataBurstVol            = 0;
-  m_MaxDataBurstVolIsSet       = false;
-  m_ExtMaxDataBurstVol         = 0;
-  m_ExtMaxDataBurstVolIsSet    = false;
-  m_ExtPacketDelBudget         = 0;
-  m_ExtPacketDelBudgetIsSet    = false;
-  m_CnPacketDelayBudgetDl      = 0;
+  m_PriorityLevel = 0;
+  m_PacketDelayBudget = 0;
+  m_PacketErrRate = "";
+  m_AverWindow = 2000;
+  m_AverWindowIsSet = false;
+  m_MaxDataBurstVol = 0;
+  m_MaxDataBurstVolIsSet = false;
+  m_ExtMaxDataBurstVol = 0;
+  m_ExtMaxDataBurstVolIsSet = false;
+  m_ExtPacketDelBudget = 0;
+  m_ExtPacketDelBudgetIsSet = false;
+  m_CnPacketDelayBudgetDl = 0;
   m_CnPacketDelayBudgetDlIsSet = false;
-  m_CnPacketDelayBudgetUl      = 0;
+  m_CnPacketDelayBudgetUl = 0;
   m_CnPacketDelayBudgetUlIsSet = false;
 }
 
@@ -43,18 +43,18 @@ void Dynamic5Qi::validate() const {
   }
 }
 
-bool Dynamic5Qi::validate(std::stringstream& msg) const {
+bool Dynamic5Qi::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool Dynamic5Qi::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool Dynamic5Qi::validate(std::stringstream &msg,
+                          const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "Dynamic5Qi" : pathPrefix;
 
   /* PriorityLevel */ {
-    const int32_t& value               = m_PriorityLevel;
+    const int32_t &value = m_PriorityLevel;
     const std::string currentValuePath = _pathPrefix + ".priorityLevel";
 
     if (value < 1) {
@@ -68,7 +68,7 @@ bool Dynamic5Qi::validate(
   }
 
   /* PacketDelayBudget */ {
-    const int32_t& value               = m_PacketDelayBudget;
+    const int32_t &value = m_PacketDelayBudget;
     const std::string currentValuePath = _pathPrefix + ".packetDelayBudget";
 
     if (value < 1) {
@@ -78,12 +78,12 @@ bool Dynamic5Qi::validate(
   }
 
   /* PacketErrRate */ {
-    const std::string& value           = m_PacketErrRate;
+    const std::string &value = m_PacketErrRate;
     const std::string currentValuePath = _pathPrefix + ".packetErrRate";
   }
 
   if (averWindowIsSet()) {
-    const int32_t& value               = m_AverWindow;
+    const int32_t &value = m_AverWindow;
     const std::string currentValuePath = _pathPrefix + ".averWindow";
 
     if (value < 1) {
@@ -97,7 +97,7 @@ bool Dynamic5Qi::validate(
   }
 
   if (maxDataBurstVolIsSet()) {
-    const int32_t& value               = m_MaxDataBurstVol;
+    const int32_t &value = m_MaxDataBurstVol;
     const std::string currentValuePath = _pathPrefix + ".maxDataBurstVol";
 
     if (value < 1) {
@@ -111,7 +111,7 @@ bool Dynamic5Qi::validate(
   }
 
   if (extMaxDataBurstVolIsSet()) {
-    const int32_t& value               = m_ExtMaxDataBurstVol;
+    const int32_t &value = m_ExtMaxDataBurstVol;
     const std::string currentValuePath = _pathPrefix + ".extMaxDataBurstVol";
 
     if (value < 4096) {
@@ -125,7 +125,7 @@ bool Dynamic5Qi::validate(
   }
 
   if (extPacketDelBudgetIsSet()) {
-    const int32_t& value               = m_ExtPacketDelBudget;
+    const int32_t &value = m_ExtPacketDelBudget;
     const std::string currentValuePath = _pathPrefix + ".extPacketDelBudget";
 
     if (value < 1) {
@@ -135,7 +135,7 @@ bool Dynamic5Qi::validate(
   }
 
   if (cnPacketDelayBudgetDlIsSet()) {
-    const int32_t& value               = m_CnPacketDelayBudgetDl;
+    const int32_t &value = m_CnPacketDelayBudgetDl;
     const std::string currentValuePath = _pathPrefix + ".cnPacketDelayBudgetDl";
 
     if (value < 1) {
@@ -145,7 +145,7 @@ bool Dynamic5Qi::validate(
   }
 
   if (cnPacketDelayBudgetUlIsSet()) {
-    const int32_t& value               = m_CnPacketDelayBudgetUl;
+    const int32_t &value = m_CnPacketDelayBudgetUl;
     const std::string currentValuePath = _pathPrefix + ".cnPacketDelayBudgetUl";
 
     if (value < 1) {
@@ -157,7 +157,7 @@ bool Dynamic5Qi::validate(
   return success;
 }
 
-bool Dynamic5Qi::operator==(const Dynamic5Qi& rhs) const {
+bool Dynamic5Qi::operator==(const Dynamic5Qi &rhs) const {
   return
 
       (getResourceType() == rhs.getResourceType()) &&
@@ -195,18 +195,20 @@ bool Dynamic5Qi::operator==(const Dynamic5Qi& rhs) const {
           ;
 }
 
-bool Dynamic5Qi::operator!=(const Dynamic5Qi& rhs) const {
+bool Dynamic5Qi::operator!=(const Dynamic5Qi &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const Dynamic5Qi& o) {
-  j                      = nlohmann::json();
-  j["resourceType"]      = o.m_ResourceType;
-  j["priorityLevel"]     = o.m_PriorityLevel;
+void to_json(nlohmann::json &j, const Dynamic5Qi &o) {
+  j = nlohmann::json();
+  j["resourceType"] = o.m_ResourceType;
+  j["priorityLevel"] = o.m_PriorityLevel;
   j["packetDelayBudget"] = o.m_PacketDelayBudget;
-  j["packetErrRate"]     = o.m_PacketErrRate;
-  if (o.averWindowIsSet()) j["averWindow"] = o.m_AverWindow;
-  if (o.maxDataBurstVolIsSet()) j["maxDataBurstVol"] = o.m_MaxDataBurstVol;
+  j["packetErrRate"] = o.m_PacketErrRate;
+  if (o.averWindowIsSet())
+    j["averWindow"] = o.m_AverWindow;
+  if (o.maxDataBurstVolIsSet())
+    j["maxDataBurstVol"] = o.m_MaxDataBurstVol;
   if (o.extMaxDataBurstVolIsSet())
     j["extMaxDataBurstVol"] = o.m_ExtMaxDataBurstVol;
   if (o.extPacketDelBudgetIsSet())
@@ -217,7 +219,7 @@ void to_json(nlohmann::json& j, const Dynamic5Qi& o) {
     j["cnPacketDelayBudgetUl"] = o.m_CnPacketDelayBudgetUl;
 }
 
-void from_json(const nlohmann::json& j, Dynamic5Qi& o) {
+void from_json(const nlohmann::json &j, Dynamic5Qi &o) {
   j.at("resourceType").get_to(o.m_ResourceType);
   j.at("priorityLevel").get_to(o.m_PriorityLevel);
   j.at("packetDelayBudget").get_to(o.m_PacketDelayBudget);
@@ -252,58 +254,40 @@ oai::model::common::QosResourceType Dynamic5Qi::getResourceType() const {
   return m_ResourceType;
 }
 void Dynamic5Qi::setResourceType(
-    oai::model::common::QosResourceType const& value) {
+    oai::model::common::QosResourceType const &value) {
   m_ResourceType = value;
 }
-int32_t Dynamic5Qi::getPriorityLevel() const {
-  return m_PriorityLevel;
-}
+int32_t Dynamic5Qi::getPriorityLevel() const { return m_PriorityLevel; }
 void Dynamic5Qi::setPriorityLevel(int32_t const value) {
   m_PriorityLevel = value;
 }
-int32_t Dynamic5Qi::getPacketDelayBudget() const {
-  return m_PacketDelayBudget;
-}
+int32_t Dynamic5Qi::getPacketDelayBudget() const { return m_PacketDelayBudget; }
 void Dynamic5Qi::setPacketDelayBudget(int32_t const value) {
   m_PacketDelayBudget = value;
 }
-std::string Dynamic5Qi::getPacketErrRate() const {
-  return m_PacketErrRate;
-}
-void Dynamic5Qi::setPacketErrRate(std::string const& value) {
+std::string Dynamic5Qi::getPacketErrRate() const { return m_PacketErrRate; }
+void Dynamic5Qi::setPacketErrRate(std::string const &value) {
   m_PacketErrRate = value;
 }
-int32_t Dynamic5Qi::getAverWindow() const {
-  return m_AverWindow;
-}
+int32_t Dynamic5Qi::getAverWindow() const { return m_AverWindow; }
 void Dynamic5Qi::setAverWindow(int32_t const value) {
-  m_AverWindow      = value;
+  m_AverWindow = value;
   m_AverWindowIsSet = true;
 }
-bool Dynamic5Qi::averWindowIsSet() const {
-  return m_AverWindowIsSet;
-}
-void Dynamic5Qi::unsetAverWindow() {
-  m_AverWindowIsSet = false;
-}
-int32_t Dynamic5Qi::getMaxDataBurstVol() const {
-  return m_MaxDataBurstVol;
-}
+bool Dynamic5Qi::averWindowIsSet() const { return m_AverWindowIsSet; }
+void Dynamic5Qi::unsetAverWindow() { m_AverWindowIsSet = false; }
+int32_t Dynamic5Qi::getMaxDataBurstVol() const { return m_MaxDataBurstVol; }
 void Dynamic5Qi::setMaxDataBurstVol(int32_t const value) {
-  m_MaxDataBurstVol      = value;
+  m_MaxDataBurstVol = value;
   m_MaxDataBurstVolIsSet = true;
 }
-bool Dynamic5Qi::maxDataBurstVolIsSet() const {
-  return m_MaxDataBurstVolIsSet;
-}
-void Dynamic5Qi::unsetMaxDataBurstVol() {
-  m_MaxDataBurstVolIsSet = false;
-}
+bool Dynamic5Qi::maxDataBurstVolIsSet() const { return m_MaxDataBurstVolIsSet; }
+void Dynamic5Qi::unsetMaxDataBurstVol() { m_MaxDataBurstVolIsSet = false; }
 int32_t Dynamic5Qi::getExtMaxDataBurstVol() const {
   return m_ExtMaxDataBurstVol;
 }
 void Dynamic5Qi::setExtMaxDataBurstVol(int32_t const value) {
-  m_ExtMaxDataBurstVol      = value;
+  m_ExtMaxDataBurstVol = value;
   m_ExtMaxDataBurstVolIsSet = true;
 }
 bool Dynamic5Qi::extMaxDataBurstVolIsSet() const {
@@ -316,7 +300,7 @@ int32_t Dynamic5Qi::getExtPacketDelBudget() const {
   return m_ExtPacketDelBudget;
 }
 void Dynamic5Qi::setExtPacketDelBudget(int32_t const value) {
-  m_ExtPacketDelBudget      = value;
+  m_ExtPacketDelBudget = value;
   m_ExtPacketDelBudgetIsSet = true;
 }
 bool Dynamic5Qi::extPacketDelBudgetIsSet() const {
@@ -329,7 +313,7 @@ int32_t Dynamic5Qi::getCnPacketDelayBudgetDl() const {
   return m_CnPacketDelayBudgetDl;
 }
 void Dynamic5Qi::setCnPacketDelayBudgetDl(int32_t const value) {
-  m_CnPacketDelayBudgetDl      = value;
+  m_CnPacketDelayBudgetDl = value;
   m_CnPacketDelayBudgetDlIsSet = true;
 }
 bool Dynamic5Qi::cnPacketDelayBudgetDlIsSet() const {
@@ -342,7 +326,7 @@ int32_t Dynamic5Qi::getCnPacketDelayBudgetUl() const {
   return m_CnPacketDelayBudgetUl;
 }
 void Dynamic5Qi::setCnPacketDelayBudgetUl(int32_t const value) {
-  m_CnPacketDelayBudgetUl      = value;
+  m_CnPacketDelayBudgetUl = value;
   m_CnPacketDelayBudgetUlIsSet = true;
 }
 bool Dynamic5Qi::cnPacketDelayBudgetUlIsSet() const {
@@ -352,4 +336,4 @@ void Dynamic5Qi::unsetCnPacketDelayBudgetUl() {
   m_CnPacketDelayBudgetUlIsSet = false;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

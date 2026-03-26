@@ -16,7 +16,7 @@
 namespace oai::model::smf {
 
 MmeCapabilities::MmeCapabilities() {
-  m_NonIpSupported      = false;
+  m_NonIpSupported = false;
   m_NonIpSupportedIsSet = false;
 }
 
@@ -26,30 +26,27 @@ void MmeCapabilities::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const MmeCapabilities& o) {
+void to_json(nlohmann::json &j, const MmeCapabilities &o) {
   j = nlohmann::json();
-  if (o.nonIpSupportedIsSet()) j["nonIpSupported"] = o.m_NonIpSupported;
+  if (o.nonIpSupportedIsSet())
+    j["nonIpSupported"] = o.m_NonIpSupported;
 }
 
-void from_json(const nlohmann::json& j, MmeCapabilities& o) {
+void from_json(const nlohmann::json &j, MmeCapabilities &o) {
   if (j.find("nonIpSupported") != j.end()) {
     j.at("nonIpSupported").get_to(o.m_NonIpSupported);
     o.m_NonIpSupportedIsSet = true;
   }
 }
 
-bool MmeCapabilities::isNonIpSupported() const {
-  return m_NonIpSupported;
-}
+bool MmeCapabilities::isNonIpSupported() const { return m_NonIpSupported; }
 void MmeCapabilities::setNonIpSupported(bool const value) {
-  m_NonIpSupported      = value;
+  m_NonIpSupported = value;
   m_NonIpSupportedIsSet = true;
 }
 bool MmeCapabilities::nonIpSupportedIsSet() const {
   return m_NonIpSupportedIsSet;
 }
-void MmeCapabilities::unsetNonIpSupported() {
-  m_NonIpSupportedIsSet = false;
-}
+void MmeCapabilities::unsetNonIpSupported() { m_NonIpSupportedIsSet = false; }
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

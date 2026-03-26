@@ -27,7 +27,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class ReportingFrequency_anyOf {
- public:
+public:
   ReportingFrequency_anyOf();
   virtual ~ReportingFrequency_anyOf() = default;
 
@@ -50,16 +50,16 @@ class ReportingFrequency_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const ReportingFrequency_anyOf& rhs) const;
-  bool operator!=(const ReportingFrequency_anyOf& rhs) const;
+  bool operator==(const ReportingFrequency_anyOf &rhs) const;
+  bool operator!=(const ReportingFrequency_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// ReportingFrequency_anyOf members
@@ -67,15 +67,15 @@ class ReportingFrequency_anyOf {
   ReportingFrequency_anyOf::eReportingFrequency_anyOf getValue() const;
   void setValue(ReportingFrequency_anyOf::eReportingFrequency_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const ReportingFrequency_anyOf& o);
-  friend void from_json(const nlohmann::json& j, ReportingFrequency_anyOf& o);
+  friend void to_json(nlohmann::json &j, const ReportingFrequency_anyOf &o);
+  friend void from_json(const nlohmann::json &j, ReportingFrequency_anyOf &o);
 
- protected:
+protected:
   ReportingFrequency_anyOf::eReportingFrequency_anyOf m_value =
       ReportingFrequency_anyOf::eReportingFrequency_anyOf::
           INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* ReportingFrequency_anyOf_H_ */

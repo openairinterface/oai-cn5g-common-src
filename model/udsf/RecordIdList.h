@@ -19,9 +19,9 @@
 #ifndef RecordIdList_H_
 #define RecordIdList_H_
 
+#include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
-#include <nlohmann/json.hpp>
 
 namespace oai::model::udsf {
 
@@ -29,7 +29,7 @@ namespace oai::model::udsf {
 /// List of Record IDs
 /// </summary>
 class RecordIdList {
- public:
+public:
   RecordIdList();
   virtual ~RecordIdList() = default;
 
@@ -43,16 +43,16 @@ class RecordIdList {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const RecordIdList& rhs) const;
-  bool operator!=(const RecordIdList& rhs) const;
+  bool operator==(const RecordIdList &rhs) const;
+  bool operator!=(const RecordIdList &rhs) const;
 
   /////////////////////////////////////////////
   /// RecordIdList members
@@ -61,15 +61,15 @@ class RecordIdList {
   ///
   /// </summary>
   std::vector<std::string> getRecordIdList() const;
-  void setRecordIdList(std::vector<std::string> const& value);
+  void setRecordIdList(std::vector<std::string> const &value);
 
-  friend void to_json(nlohmann::json& j, const RecordIdList& o);
-  friend void from_json(const nlohmann::json& j, RecordIdList& o);
+  friend void to_json(nlohmann::json &j, const RecordIdList &o);
+  friend void from_json(const nlohmann::json &j, RecordIdList &o);
 
- protected:
+protected:
   std::vector<std::string> m_RecordIdList;
 };
 
-}  // namespace oai::model::udsf
+} // namespace oai::model::udsf
 
 #endif /* RecordIdList_H_ */

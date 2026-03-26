@@ -13,8 +13,8 @@
 
 #include "AuthStatus_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::common {
 
@@ -27,12 +27,12 @@ void AuthStatus_anyOf::validate() const {
   }
 }
 
-bool AuthStatus_anyOf::validate(std::stringstream& msg) const {
+bool AuthStatus_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AuthStatus_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool AuthStatus_anyOf::validate(std::stringstream &msg,
+                                const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AuthStatus_anyOf" : pathPrefix;
@@ -46,36 +46,36 @@ bool AuthStatus_anyOf::validate(
   return success;
 }
 
-bool AuthStatus_anyOf::operator==(const AuthStatus_anyOf& rhs) const {
+bool AuthStatus_anyOf::operator==(const AuthStatus_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool AuthStatus_anyOf::operator!=(const AuthStatus_anyOf& rhs) const {
+bool AuthStatus_anyOf::operator!=(const AuthStatus_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AuthStatus_anyOf& o) {
+void to_json(nlohmann::json &j, const AuthStatus_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case AuthStatus_anyOf::eAuthStatus_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case AuthStatus_anyOf::eAuthStatus_anyOf::EAP_SUCCESS:
-      j = "EAP_SUCCESS";
-      break;
-    case AuthStatus_anyOf::eAuthStatus_anyOf::EAP_FAILURE:
-      j = "EAP_FAILURE";
-      break;
-    case AuthStatus_anyOf::eAuthStatus_anyOf::PENDING:
-      j = "PENDING";
-      break;
+  case AuthStatus_anyOf::eAuthStatus_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case AuthStatus_anyOf::eAuthStatus_anyOf::EAP_SUCCESS:
+    j = "EAP_SUCCESS";
+    break;
+  case AuthStatus_anyOf::eAuthStatus_anyOf::EAP_FAILURE:
+    j = "EAP_FAILURE";
+    break;
+  case AuthStatus_anyOf::eAuthStatus_anyOf::PENDING:
+    j = "PENDING";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, AuthStatus_anyOf& o) {
+void from_json(const nlohmann::json &j, AuthStatus_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "EAP_SUCCESS") {
     o.setValue(AuthStatus_anyOf::eAuthStatus_anyOf::EAP_SUCCESS);
@@ -99,4 +99,4 @@ void AuthStatus_anyOf::setValue(AuthStatus_anyOf::eAuthStatus_anyOf value) {
   m_value = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

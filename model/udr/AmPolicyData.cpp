@@ -19,7 +19,7 @@
 namespace oai::udr::model {
 
 AmPolicyData::AmPolicyData() {
-  m_PraInfosIsSet  = false;
+  m_PraInfosIsSet = false;
   m_SubscCatsIsSet = false;
 }
 
@@ -29,14 +29,15 @@ void AmPolicyData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const AmPolicyData& o) {
+void to_json(nlohmann::json &j, const AmPolicyData &o) {
   j = nlohmann::json();
-  if (o.praInfosIsSet() || !o.m_PraInfos.empty()) j["praInfos"] = o.m_PraInfos;
+  if (o.praInfosIsSet() || !o.m_PraInfos.empty())
+    j["praInfos"] = o.m_PraInfos;
   if (o.subscCatsIsSet() || !o.m_SubscCats.empty())
     j["subscCats"] = o.m_SubscCats;
 }
 
-void from_json(const nlohmann::json& j, AmPolicyData& o) {
+void from_json(const nlohmann::json &j, AmPolicyData &o) {
   if (j.find("praInfos") != j.end()) {
     j.at("praInfos").get_to(o.m_PraInfos);
     o.m_PraInfosIsSet = true;
@@ -47,33 +48,23 @@ void from_json(const nlohmann::json& j, AmPolicyData& o) {
   }
 }
 
-std::map<std::string, oai::model::common::PresenceInfo>&
+std::map<std::string, oai::model::common::PresenceInfo> &
 AmPolicyData::getPraInfos() {
   return m_PraInfos;
 }
 void AmPolicyData::setPraInfos(
-    std::map<std::string, oai::model::common::PresenceInfo> const& value) {
-  m_PraInfos      = value;
+    std::map<std::string, oai::model::common::PresenceInfo> const &value) {
+  m_PraInfos = value;
   m_PraInfosIsSet = true;
 }
-bool AmPolicyData::praInfosIsSet() const {
-  return m_PraInfosIsSet;
-}
-void AmPolicyData::unsetPraInfos() {
-  m_PraInfosIsSet = false;
-}
-std::vector<std::string>& AmPolicyData::getSubscCats() {
-  return m_SubscCats;
-}
-void AmPolicyData::setSubscCats(std::vector<std::string> const& value) {
-  m_SubscCats      = value;
+bool AmPolicyData::praInfosIsSet() const { return m_PraInfosIsSet; }
+void AmPolicyData::unsetPraInfos() { m_PraInfosIsSet = false; }
+std::vector<std::string> &AmPolicyData::getSubscCats() { return m_SubscCats; }
+void AmPolicyData::setSubscCats(std::vector<std::string> const &value) {
+  m_SubscCats = value;
   m_SubscCatsIsSet = true;
 }
-bool AmPolicyData::subscCatsIsSet() const {
-  return m_SubscCatsIsSet;
-}
-void AmPolicyData::unsetSubscCats() {
-  m_SubscCatsIsSet = false;
-}
+bool AmPolicyData::subscCatsIsSet() const { return m_SubscCatsIsSet; }
+void AmPolicyData::unsetSubscCats() { m_SubscCatsIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

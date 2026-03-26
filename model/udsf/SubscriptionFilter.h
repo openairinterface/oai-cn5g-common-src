@@ -20,9 +20,9 @@
 #define SubscriptionFilter_H_
 
 #include "RecordOperation.h"
+#include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
-#include <nlohmann/json.hpp>
 
 namespace oai::model::udsf {
 
@@ -30,7 +30,7 @@ namespace oai::model::udsf {
 /// A subscription filter
 /// </summary>
 class SubscriptionFilter {
- public:
+public:
   SubscriptionFilter();
   virtual ~SubscriptionFilter() = default;
 
@@ -44,16 +44,16 @@ class SubscriptionFilter {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const SubscriptionFilter& rhs) const;
-  bool operator!=(const SubscriptionFilter& rhs) const;
+  bool operator==(const SubscriptionFilter &rhs) const;
+  bool operator!=(const SubscriptionFilter &rhs) const;
 
   /////////////////////////////////////////////
   /// SubscriptionFilter members
@@ -62,28 +62,28 @@ class SubscriptionFilter {
   /// list of resources applicable to the subscription
   /// </summary>
   std::vector<std::string> getMonitoredResourceUris() const;
-  void setMonitoredResourceUris(std::vector<std::string> const& value);
+  void setMonitoredResourceUris(std::vector<std::string> const &value);
   bool monitoredResourceUrisIsSet() const;
   void unsetMonitoredResourceUris();
   /// <summary>
   /// list of resources applicable to the subscription
   /// </summary>
   std::vector<oai::model::udsf::RecordOperation> getOperations() const;
-  void setOperations(
-      std::vector<oai::model::udsf::RecordOperation> const& value);
+  void
+  setOperations(std::vector<oai::model::udsf::RecordOperation> const &value);
   bool operationsIsSet() const;
   void unsetOperations();
 
-  friend void to_json(nlohmann::json& j, const SubscriptionFilter& o);
-  friend void from_json(const nlohmann::json& j, SubscriptionFilter& o);
+  friend void to_json(nlohmann::json &j, const SubscriptionFilter &o);
+  friend void from_json(const nlohmann::json &j, SubscriptionFilter &o);
 
- protected:
+protected:
   std::vector<std::string> m_MonitoredResourceUris;
   bool m_MonitoredResourceUrisIsSet;
   std::vector<oai::model::udsf::RecordOperation> m_Operations;
   bool m_OperationsIsSet;
 };
 
-}  // namespace oai::model::udsf
+} // namespace oai::model::udsf
 
 #endif /* SubscriptionFilter_H_ */

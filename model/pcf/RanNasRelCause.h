@@ -20,8 +20,8 @@
 #define RanNasRelCause_H_
 
 #include "NgApCause.h"
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::pcf {
 
@@ -29,7 +29,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class RanNasRelCause {
- public:
+public:
   RanNasRelCause();
   virtual ~RanNasRelCause() = default;
 
@@ -43,16 +43,16 @@ class RanNasRelCause {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const RanNasRelCause& rhs) const;
-  bool operator!=(const RanNasRelCause& rhs) const;
+  bool operator==(const RanNasRelCause &rhs) const;
+  bool operator!=(const RanNasRelCause &rhs) const;
 
   /////////////////////////////////////////////
   /// RanNasRelCause members
@@ -61,7 +61,7 @@ class RanNasRelCause {
   ///
   /// </summary>
   oai::model::common::NgApCause getNgApCause() const;
-  void setNgApCause(oai::model::common::NgApCause const& value);
+  void setNgApCause(oai::model::common::NgApCause const &value);
   bool ngApCauseIsSet() const;
   void unsetNgApCause();
   /// <summary>
@@ -82,14 +82,14 @@ class RanNasRelCause {
   /// Defines the EPS RAN/NAS release cause.
   /// </summary>
   std::string getEpsCause() const;
-  void setEpsCause(std::string const& value);
+  void setEpsCause(std::string const &value);
   bool epsCauseIsSet() const;
   void unsetEpsCause();
 
-  friend void to_json(nlohmann::json& j, const RanNasRelCause& o);
-  friend void from_json(const nlohmann::json& j, RanNasRelCause& o);
+  friend void to_json(nlohmann::json &j, const RanNasRelCause &o);
+  friend void from_json(const nlohmann::json &j, RanNasRelCause &o);
 
- protected:
+protected:
   oai::model::common::NgApCause m_NgApCause;
   bool m_NgApCauseIsSet;
   int32_t m_r_5gMmCause;
@@ -100,6 +100,6 @@ class RanNasRelCause {
   bool m_EpsCauseIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* RanNasRelCause_H_ */

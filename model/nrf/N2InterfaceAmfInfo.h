@@ -19,10 +19,10 @@
 #ifndef N2InterfaceAmfInfo_H_
 #define N2InterfaceAmfInfo_H_
 
-#include <string>
 #include "Ipv6Addr.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::nrf {
 
@@ -30,7 +30,7 @@ namespace oai::model::nrf {
 ///
 /// </summary>
 class N2InterfaceAmfInfo {
- public:
+public:
   N2InterfaceAmfInfo();
   virtual ~N2InterfaceAmfInfo();
 
@@ -42,30 +42,30 @@ class N2InterfaceAmfInfo {
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getIpv4EndpointAddress();
-  void setIpv4EndpointAddress(std::vector<std::string> const& value);
+  std::vector<std::string> &getIpv4EndpointAddress();
+  void setIpv4EndpointAddress(std::vector<std::string> const &value);
   bool ipv4EndpointAddressIsSet() const;
   void unsetIpv4EndpointAddress();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::Ipv6Addr>& getIpv6EndpointAddress();
+  std::vector<oai::model::common::Ipv6Addr> &getIpv6EndpointAddress();
   void setIpv6EndpointAddress(
-      std::vector<oai::model::common::Ipv6Addr> const& value);
+      std::vector<oai::model::common::Ipv6Addr> const &value);
   bool ipv6EndpointAddressIsSet() const;
   void unsetIpv6EndpointAddress();
   /// <summary>
   ///
   /// </summary>
   std::string getAmfName() const;
-  void setAmfName(std::string const& value);
+  void setAmfName(std::string const &value);
   bool amfNameIsSet() const;
   void unsetAmfName();
 
-  friend void to_json(nlohmann::json& j, const N2InterfaceAmfInfo& o);
-  friend void from_json(const nlohmann::json& j, N2InterfaceAmfInfo& o);
+  friend void to_json(nlohmann::json &j, const N2InterfaceAmfInfo &o);
+  friend void from_json(const nlohmann::json &j, N2InterfaceAmfInfo &o);
 
- protected:
+protected:
   std::vector<std::string> m_Ipv4EndpointAddress;
   bool m_Ipv4EndpointAddressIsSet;
   std::vector<oai::model::common::Ipv6Addr> m_Ipv6EndpointAddress;
@@ -74,6 +74,6 @@ class N2InterfaceAmfInfo {
   bool m_AmfNameIsSet;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* N2InterfaceAmfInfo_H_ */

@@ -28,14 +28,14 @@ void SmPolicySnssaiDataPatch::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const SmPolicySnssaiDataPatch& o) {
-  j           = nlohmann::json();
+void to_json(nlohmann::json &j, const SmPolicySnssaiDataPatch &o) {
+  j = nlohmann::json();
   j["snssai"] = o.m_Snssai;
   if (o.smPolicyDnnDataIsSet() || !o.m_SmPolicyDnnData.empty())
     j["smPolicyDnnData"] = o.m_SmPolicyDnnData;
 }
 
-void from_json(const nlohmann::json& j, SmPolicySnssaiDataPatch& o) {
+void from_json(const nlohmann::json &j, SmPolicySnssaiDataPatch &o) {
   j.at("snssai").get_to(o.m_Snssai);
   if (j.find("smPolicyDnnData") != j.end()) {
     j.at("smPolicyDnnData").get_to(o.m_SmPolicyDnnData);
@@ -47,16 +47,16 @@ oai::model::common::Snssai SmPolicySnssaiDataPatch::getSnssai() const {
   return m_Snssai;
 }
 void SmPolicySnssaiDataPatch::setSnssai(
-    oai::model::common::Snssai const& value) {
+    oai::model::common::Snssai const &value) {
   m_Snssai = value;
 }
-std::map<std::string, SmPolicyDnnDataPatch>&
+std::map<std::string, SmPolicyDnnDataPatch> &
 SmPolicySnssaiDataPatch::getSmPolicyDnnData() {
   return m_SmPolicyDnnData;
 }
 void SmPolicySnssaiDataPatch::setSmPolicyDnnData(
-    std::map<std::string, SmPolicyDnnDataPatch> const& value) {
-  m_SmPolicyDnnData      = value;
+    std::map<std::string, SmPolicyDnnDataPatch> const &value) {
+  m_SmPolicyDnnData = value;
   m_SmPolicyDnnDataIsSet = true;
 }
 bool SmPolicySnssaiDataPatch::smPolicyDnnDataIsSet() const {
@@ -66,4 +66,4 @@ void SmPolicySnssaiDataPatch::unsetSmPolicyDnnData() {
   m_SmPolicyDnnDataIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

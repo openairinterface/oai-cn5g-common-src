@@ -12,8 +12,8 @@
 asn_TYPE_member_t asn_MBR_Ngap_UPTransportLayerInformationItem_1[] = {
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_UPTransportLayerInformationItem, nGU_UP_TNLInformation),
+     offsetof(struct Ngap_UPTransportLayerInformationItem,
+              nGU_UP_TNLInformation),
      (ASN_TAG_CLASS_CONTEXT | (0 << 2)),
      +1, /* EXPLICIT tag at current level */
      &asn_DEF_Ngap_UPTransportLayerInformation,

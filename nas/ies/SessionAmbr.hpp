@@ -9,26 +9,24 @@
 
 constexpr uint8_t kSessionAmbrLength = 8;
 constexpr uint8_t kSessionAmbrContentLength =
-    kSessionAmbrLength - 2;  // length - 2 octets for IEI/Length
+    kSessionAmbrLength - 2; // length - 2 octets for IEI/Length
 constexpr auto kSessionAmbrIeName = "Session-AMBR";
 
 namespace oai::nas {
 
 class SessionAmbr : public Type4NasIe {
- public:
+public:
   SessionAmbr();
   SessionAmbr(uint8_t iei);
-  SessionAmbr(
-      uint8_t unit_for_downlink, uint16_t session_ambr_for_downlink,
-      uint8_t unit_for_uplink, uint16_t session_ambr_for_uplink);
-  SessionAmbr(
-      uint8_t iei, uint8_t unit_for_downlink,
-      uint16_t session_ambr_for_downlink, uint8_t unit_for_uplink,
-      uint16_t session_ambr_for_uplink);
+  SessionAmbr(uint8_t unit_for_downlink, uint16_t session_ambr_for_downlink,
+              uint8_t unit_for_uplink, uint16_t session_ambr_for_uplink);
+  SessionAmbr(uint8_t iei, uint8_t unit_for_downlink,
+              uint16_t session_ambr_for_downlink, uint8_t unit_for_uplink,
+              uint16_t session_ambr_for_uplink);
   virtual ~SessionAmbr();
 
-  int Encode(uint8_t* buf, int len) const override;
-  int Decode(const uint8_t* const buf, int len, bool is_iei = true) override;
+  int Encode(uint8_t *buf, int len) const override;
+  int Decode(const uint8_t *const buf, int len, bool is_iei = true) override;
 
   static std::string GetIeName() { return kSessionAmbrIeName; }
 
@@ -44,13 +42,13 @@ class SessionAmbr : public Type4NasIe {
   void SetSessionAmbrForUplink(uint16_t session_ambr_for_uplink);
   uint16_t GetSessionAmbrForUplink() const;
 
- private:
+private:
   uint8_t unit_for_downlink_;
   uint16_t session_ambr_for_downlink_;
   uint8_t unit_for_uplink_;
   uint16_t session_ambr_for_uplink_;
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

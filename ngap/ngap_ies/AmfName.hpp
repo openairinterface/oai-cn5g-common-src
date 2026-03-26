@@ -16,19 +16,19 @@ constexpr uint8_t AMF_NAME_SIZE_MAX = 150;
 namespace oai::ngap {
 
 class AmfName {
- public:
+public:
   AmfName();
   virtual ~AmfName();
 
-  bool set(const std::string& amf_name);
-  void get(std::string& amf_name) const;
+  bool set(const std::string &amf_name);
+  void get(std::string &amf_name) const;
 
-  bool encode(Ngap_AMFName_t&) const;
-  bool decode(const Ngap_AMFName_t&);
+  bool encode(Ngap_AMFName_t &) const;
+  bool decode(const Ngap_AMFName_t &);
 
- private:
+private:
   std::string m_AmfName;
 };
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

@@ -19,15 +19,15 @@
 #ifndef MediaSubComponent_H_
 #define MediaSubComponent_H_
 
+#include "AddFlowDescriptionInfo.h"
+#include "AfSigProtocol.h"
+#include "EthFlowDescription.h"
 #include "EventsSubscReqData.h"
 #include "FlowStatus.h"
-#include "AddFlowDescriptionInfo.h"
-#include "EthFlowDescription.h"
-#include <string>
-#include "AfSigProtocol.h"
-#include <vector>
 #include "FlowUsage.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::pcf {
 
@@ -35,7 +35,7 @@ namespace oai::model::pcf {
 /// Identifies a media subcomponent.
 /// </summary>
 class MediaSubComponent {
- public:
+public:
   MediaSubComponent();
   virtual ~MediaSubComponent() = default;
 
@@ -49,16 +49,16 @@ class MediaSubComponent {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const MediaSubComponent& rhs) const;
-  bool operator!=(const MediaSubComponent& rhs) const;
+  bool operator==(const MediaSubComponent &rhs) const;
+  bool operator!=(const MediaSubComponent &rhs) const;
 
   /////////////////////////////////////////////
   /// MediaSubComponent members
@@ -67,15 +67,15 @@ class MediaSubComponent {
   ///
   /// </summary>
   oai::model::pcf::AfSigProtocol getAfSigProtocol() const;
-  void setAfSigProtocol(oai::model::pcf::AfSigProtocol const& value);
+  void setAfSigProtocol(oai::model::pcf::AfSigProtocol const &value);
   bool afSigProtocolIsSet() const;
   void unsetAfSigProtocol();
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::pcf::EthFlowDescription> getEthfDescs() const;
-  void setEthfDescs(
-      std::vector<oai::model::pcf::EthFlowDescription> const& value);
+  void
+  setEthfDescs(std::vector<oai::model::pcf::EthFlowDescription> const &value);
   bool ethfDescsIsSet() const;
   void unsetEthfDescs();
   /// <summary>
@@ -87,24 +87,24 @@ class MediaSubComponent {
   ///
   /// </summary>
   std::vector<std::string> getFDescs() const;
-  void setFDescs(std::vector<std::string> const& value);
+  void setFDescs(std::vector<std::string> const &value);
   bool fDescsIsSet() const;
   void unsetFDescs();
   /// <summary>
   /// Represents additional flow description information (flow label and IPsec
   /// SPI) per Uplink and/or Downlink IP flows.
   /// </summary>
-  std::vector<oai::model::pcf::AddFlowDescriptionInfo> getAddInfoFlowDescs()
-      const;
+  std::vector<oai::model::pcf::AddFlowDescriptionInfo>
+  getAddInfoFlowDescs() const;
   void setAddInfoFlowDescs(
-      std::vector<oai::model::pcf::AddFlowDescriptionInfo> const& value);
+      std::vector<oai::model::pcf::AddFlowDescriptionInfo> const &value);
   bool addInfoFlowDescsIsSet() const;
   void unsetAddInfoFlowDescs();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::FlowStatus getFStatus() const;
-  void setFStatus(oai::model::pcf::FlowStatus const& value);
+  void setFStatus(oai::model::pcf::FlowStatus const &value);
   bool fStatusIsSet() const;
   void unsetFStatus();
   /// <summary>
@@ -114,7 +114,7 @@ class MediaSubComponent {
   /// standard symbol \&quot;k\&quot;.
   /// </summary>
   std::string getMarBwDl() const;
-  void setMarBwDl(std::string const& value);
+  void setMarBwDl(std::string const &value);
   bool marBwDlIsSet() const;
   void unsetMarBwDl();
   /// <summary>
@@ -124,7 +124,7 @@ class MediaSubComponent {
   /// standard symbol \&quot;k\&quot;.
   /// </summary>
   std::string getMarBwUl() const;
-  void setMarBwUl(std::string const& value);
+  void setMarBwUl(std::string const &value);
   bool marBwUlIsSet() const;
   void unsetMarBwUl();
   /// <summary>
@@ -134,28 +134,28 @@ class MediaSubComponent {
   /// mask field.
   /// </summary>
   std::string getTosTrCl() const;
-  void setTosTrCl(std::string const& value);
+  void setTosTrCl(std::string const &value);
   bool tosTrClIsSet() const;
   void unsetTosTrCl();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::FlowUsage getFlowUsage() const;
-  void setFlowUsage(oai::model::pcf::FlowUsage const& value);
+  void setFlowUsage(oai::model::pcf::FlowUsage const &value);
   bool flowUsageIsSet() const;
   void unsetFlowUsage();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::EventsSubscReqData getEvSubsc() const;
-  void setEvSubsc(oai::model::pcf::EventsSubscReqData const& value);
+  void setEvSubsc(oai::model::pcf::EventsSubscReqData const &value);
   bool evSubscIsSet() const;
   void unsetEvSubsc();
 
-  friend void to_json(nlohmann::json& j, const MediaSubComponent& o);
-  friend void from_json(const nlohmann::json& j, MediaSubComponent& o);
+  friend void to_json(nlohmann::json &j, const MediaSubComponent &o);
+  friend void from_json(const nlohmann::json &j, MediaSubComponent &o);
 
- protected:
+protected:
   oai::model::pcf::AfSigProtocol m_AfSigProtocol;
   bool m_AfSigProtocolIsSet;
   std::vector<oai::model::pcf::EthFlowDescription> m_EthfDescs;
@@ -180,6 +180,6 @@ class MediaSubComponent {
   bool m_EvSubscIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* MediaSubComponent_H_ */

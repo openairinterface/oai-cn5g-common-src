@@ -30,7 +30,7 @@ namespace oai::model::smf {
 /// being part of a condition for a subscription to a set of NFs
 /// </summary>
 class ConditionEventType {
- public:
+public:
   ConditionEventType();
   virtual ~ConditionEventType() = default;
 
@@ -44,16 +44,16 @@ class ConditionEventType {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const ConditionEventType& rhs) const;
-  bool operator!=(const ConditionEventType& rhs) const;
+  bool operator==(const ConditionEventType &rhs) const;
+  bool operator!=(const ConditionEventType &rhs) const;
 
   /////////////////////////////////////////////
   /// ConditionEventType members
@@ -62,15 +62,15 @@ class ConditionEventType {
   void setValue(ConditionEventType_anyOf value);
   ConditionEventType_anyOf::eConditionEventType_anyOf getEnumValue() const;
   void setEnumValue(ConditionEventType_anyOf::eConditionEventType_anyOf value);
-  friend void to_json(nlohmann::json& j, const ConditionEventType& o);
-  friend void from_json(const nlohmann::json& j, ConditionEventType& o);
-  friend void to_json(nlohmann::json& j, const ConditionEventType_anyOf& o);
-  friend void from_json(const nlohmann::json& j, ConditionEventType_anyOf& o);
+  friend void to_json(nlohmann::json &j, const ConditionEventType &o);
+  friend void from_json(const nlohmann::json &j, ConditionEventType &o);
+  friend void to_json(nlohmann::json &j, const ConditionEventType_anyOf &o);
+  friend void from_json(const nlohmann::json &j, ConditionEventType_anyOf &o);
 
- protected:
+protected:
   ConditionEventType_anyOf m_value;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* ConditionEventType_H_ */

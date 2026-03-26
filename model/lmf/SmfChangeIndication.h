@@ -27,7 +27,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class SmfChangeIndication {
- public:
+public:
   SmfChangeIndication();
   virtual ~SmfChangeIndication();
 
@@ -36,12 +36,12 @@ class SmfChangeIndication {
   /////////////////////////////////////////////
   /// SmfChangeIndication members
 
-  friend void to_json(nlohmann::json& j, const SmfChangeIndication& o);
-  friend void from_json(const nlohmann::json& j, SmfChangeIndication& o);
+  friend void to_json(nlohmann::json &j, const SmfChangeIndication &o);
+  friend void from_json(const nlohmann::json &j, SmfChangeIndication &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* SmfChangeIndication_H_ */

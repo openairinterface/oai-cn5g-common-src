@@ -19,8 +19,8 @@
 namespace oai::udr::model {
 
 SmscData::SmscData() {
-  m_SmscMapAddress           = "";
-  m_SmscMapAddressIsSet      = false;
+  m_SmscMapAddress = "";
+  m_SmscMapAddressIsSet = false;
   m_SmscDiameterAddressIsSet = false;
 }
 
@@ -30,14 +30,15 @@ void SmscData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const SmscData& o) {
+void to_json(nlohmann::json &j, const SmscData &o) {
   j = nlohmann::json();
-  if (o.smscMapAddressIsSet()) j["smscMapAddress"] = o.m_SmscMapAddress;
+  if (o.smscMapAddressIsSet())
+    j["smscMapAddress"] = o.m_SmscMapAddress;
   if (o.smscDiameterAddressIsSet())
     j["smscDiameterAddress"] = o.m_SmscDiameterAddress;
 }
 
-void from_json(const nlohmann::json& j, SmscData& o) {
+void from_json(const nlohmann::json &j, SmscData &o) {
   if (j.find("smscMapAddress") != j.end()) {
     j.at("smscMapAddress").get_to(o.m_SmscMapAddress);
     o.m_SmscMapAddressIsSet = true;
@@ -48,24 +49,18 @@ void from_json(const nlohmann::json& j, SmscData& o) {
   }
 }
 
-std::string SmscData::getSmscMapAddress() const {
-  return m_SmscMapAddress;
-}
-void SmscData::setSmscMapAddress(std::string const& value) {
-  m_SmscMapAddress      = value;
+std::string SmscData::getSmscMapAddress() const { return m_SmscMapAddress; }
+void SmscData::setSmscMapAddress(std::string const &value) {
+  m_SmscMapAddress = value;
   m_SmscMapAddressIsSet = true;
 }
-bool SmscData::smscMapAddressIsSet() const {
-  return m_SmscMapAddressIsSet;
-}
-void SmscData::unsetSmscMapAddress() {
-  m_SmscMapAddressIsSet = false;
-}
+bool SmscData::smscMapAddressIsSet() const { return m_SmscMapAddressIsSet; }
+void SmscData::unsetSmscMapAddress() { m_SmscMapAddressIsSet = false; }
 NetworkNodeDiameterAddress SmscData::getSmscDiameterAddress() const {
   return m_SmscDiameterAddress;
 }
-void SmscData::setSmscDiameterAddress(NetworkNodeDiameterAddress const& value) {
-  m_SmscDiameterAddress      = value;
+void SmscData::setSmscDiameterAddress(NetworkNodeDiameterAddress const &value) {
+  m_SmscDiameterAddress = value;
   m_SmscDiameterAddressIsSet = true;
 }
 bool SmscData::smscDiameterAddressIsSet() const {
@@ -75,4 +70,4 @@ void SmscData::unsetSmscDiameterAddress() {
   m_SmscDiameterAddressIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

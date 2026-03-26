@@ -27,7 +27,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class GnssId_anyOf {
- public:
+public:
   GnssId_anyOf();
   virtual ~GnssId_anyOf() = default;
 
@@ -56,16 +56,16 @@ class GnssId_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const GnssId_anyOf& rhs) const;
-  bool operator!=(const GnssId_anyOf& rhs) const;
+  bool operator==(const GnssId_anyOf &rhs) const;
+  bool operator!=(const GnssId_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// GnssId_anyOf members
@@ -73,14 +73,14 @@ class GnssId_anyOf {
   GnssId_anyOf::eGnssId_anyOf getValue() const;
   void setValue(GnssId_anyOf::eGnssId_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const GnssId_anyOf& o);
-  friend void from_json(const nlohmann::json& j, GnssId_anyOf& o);
+  friend void to_json(nlohmann::json &j, const GnssId_anyOf &o);
+  friend void from_json(const nlohmann::json &j, GnssId_anyOf &o);
 
- protected:
+protected:
   GnssId_anyOf::eGnssId_anyOf m_value =
       GnssId_anyOf::eGnssId_anyOf::INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* GnssId_anyOf_H_ */

@@ -20,18 +20,18 @@ namespace oai::model::smf {
 using namespace oai::model::common;
 
 VplmnQos::VplmnQos() {
-  m_r_5qi            = 0;
-  m_r_5qiIsSet       = false;
-  m_ArpIsSet         = false;
+  m_r_5qi = 0;
+  m_r_5qiIsSet = false;
+  m_ArpIsSet = false;
   m_SessionAmbrIsSet = false;
-  m_MaxFbrDl         = "";
-  m_MaxFbrDlIsSet    = false;
-  m_MaxFbrUl         = "";
-  m_MaxFbrUlIsSet    = false;
-  m_GuaFbrDl         = "";
-  m_GuaFbrDlIsSet    = false;
-  m_GuaFbrUl         = "";
-  m_GuaFbrUlIsSet    = false;
+  m_MaxFbrDl = "";
+  m_MaxFbrDlIsSet = false;
+  m_MaxFbrUl = "";
+  m_MaxFbrUlIsSet = false;
+  m_GuaFbrDl = "";
+  m_GuaFbrDlIsSet = false;
+  m_GuaFbrUl = "";
+  m_GuaFbrUlIsSet = false;
 }
 
 void VplmnQos::validate() const {
@@ -41,17 +41,17 @@ void VplmnQos::validate() const {
   }
 }
 
-bool VplmnQos::validate(std::stringstream& msg) const {
+bool VplmnQos::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool VplmnQos::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool VplmnQos::validate(std::stringstream &msg,
+                        const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "VplmnQos" : pathPrefix;
 
   if (r5qiIsSet()) {
-    const int32_t& value               = m_r_5qi;
+    const int32_t &value = m_r_5qi;
     const std::string currentValuePath = _pathPrefix + ".r5qi";
 
     if (value < 0) {
@@ -65,37 +65,37 @@ bool VplmnQos::validate(
   }
 
   if (maxFbrDlIsSet()) {
-    const std::string& value           = m_MaxFbrDl;
+    const std::string &value = m_MaxFbrDl;
     const std::string currentValuePath = _pathPrefix + ".maxFbrDl";
-    success &= helpers::validate_regex(
-        helpers::BANDWIDTH_VALIDATION_REGEX, value, msg, currentValuePath);
+    success &= helpers::validate_regex(helpers::BANDWIDTH_VALIDATION_REGEX,
+                                       value, msg, currentValuePath);
   }
 
   if (maxFbrUlIsSet()) {
-    const std::string& value           = m_MaxFbrUl;
+    const std::string &value = m_MaxFbrUl;
     const std::string currentValuePath = _pathPrefix + ".maxFbrUl";
-    success &= helpers::validate_regex(
-        helpers::BANDWIDTH_VALIDATION_REGEX, value, msg, currentValuePath);
+    success &= helpers::validate_regex(helpers::BANDWIDTH_VALIDATION_REGEX,
+                                       value, msg, currentValuePath);
   }
 
   if (guaFbrDlIsSet()) {
-    const std::string& value           = m_GuaFbrDl;
+    const std::string &value = m_GuaFbrDl;
     const std::string currentValuePath = _pathPrefix + ".guaFbrDl";
-    success &= helpers::validate_regex(
-        helpers::BANDWIDTH_VALIDATION_REGEX, value, msg, currentValuePath);
+    success &= helpers::validate_regex(helpers::BANDWIDTH_VALIDATION_REGEX,
+                                       value, msg, currentValuePath);
   }
 
   if (guaFbrUlIsSet()) {
-    const std::string& value           = m_GuaFbrUl;
+    const std::string &value = m_GuaFbrUl;
     const std::string currentValuePath = _pathPrefix + ".guaFbrUl";
-    success &= helpers::validate_regex(
-        helpers::BANDWIDTH_VALIDATION_REGEX, value, msg, currentValuePath);
+    success &= helpers::validate_regex(helpers::BANDWIDTH_VALIDATION_REGEX,
+                                       value, msg, currentValuePath);
   }
 
   return success;
 }
 
-bool VplmnQos::operator==(const VplmnQos& rhs) const {
+bool VplmnQos::operator==(const VplmnQos &rhs) const {
   return
 
       ((!r5qiIsSet() && !rhs.r5qiIsSet()) ||
@@ -127,22 +127,27 @@ bool VplmnQos::operator==(const VplmnQos& rhs) const {
           ;
 }
 
-bool VplmnQos::operator!=(const VplmnQos& rhs) const {
-  return !(*this == rhs);
-}
+bool VplmnQos::operator!=(const VplmnQos &rhs) const { return !(*this == rhs); }
 
-void to_json(nlohmann::json& j, const VplmnQos& o) {
+void to_json(nlohmann::json &j, const VplmnQos &o) {
   j = nlohmann::json();
-  if (o.r5qiIsSet()) j["5qi"] = o.m_r_5qi;
-  if (o.arpIsSet()) j["arp"] = o.m_Arp;
-  if (o.sessionAmbrIsSet()) j["sessionAmbr"] = o.m_SessionAmbr;
-  if (o.maxFbrDlIsSet()) j["maxFbrDl"] = o.m_MaxFbrDl;
-  if (o.maxFbrUlIsSet()) j["maxFbrUl"] = o.m_MaxFbrUl;
-  if (o.guaFbrDlIsSet()) j["guaFbrDl"] = o.m_GuaFbrDl;
-  if (o.guaFbrUlIsSet()) j["guaFbrUl"] = o.m_GuaFbrUl;
+  if (o.r5qiIsSet())
+    j["5qi"] = o.m_r_5qi;
+  if (o.arpIsSet())
+    j["arp"] = o.m_Arp;
+  if (o.sessionAmbrIsSet())
+    j["sessionAmbr"] = o.m_SessionAmbr;
+  if (o.maxFbrDlIsSet())
+    j["maxFbrDl"] = o.m_MaxFbrDl;
+  if (o.maxFbrUlIsSet())
+    j["maxFbrUl"] = o.m_MaxFbrUl;
+  if (o.guaFbrDlIsSet())
+    j["guaFbrDl"] = o.m_GuaFbrDl;
+  if (o.guaFbrUlIsSet())
+    j["guaFbrUl"] = o.m_GuaFbrUl;
 }
 
-void from_json(const nlohmann::json& j, VplmnQos& o) {
+void from_json(const nlohmann::json &j, VplmnQos &o) {
   if (j.find("5qi") != j.end()) {
     j.at("5qi").get_to(o.m_r_5qi);
     o.m_r_5qiIsSet = true;
@@ -173,96 +178,56 @@ void from_json(const nlohmann::json& j, VplmnQos& o) {
   }
 }
 
-int32_t VplmnQos::getR5qi() const {
-  return m_r_5qi;
-}
+int32_t VplmnQos::getR5qi() const { return m_r_5qi; }
 void VplmnQos::setR5qi(int32_t const value) {
-  m_r_5qi      = value;
+  m_r_5qi = value;
   m_r_5qiIsSet = true;
 }
-bool VplmnQos::r5qiIsSet() const {
-  return m_r_5qiIsSet;
-}
-void VplmnQos::unsetr_5qi() {
-  m_r_5qiIsSet = false;
-}
-oai::model::common::Arp VplmnQos::getArp() const {
-  return m_Arp;
-}
-void VplmnQos::setArp(oai::model::common::Arp const& value) {
-  m_Arp      = value;
+bool VplmnQos::r5qiIsSet() const { return m_r_5qiIsSet; }
+void VplmnQos::unsetr_5qi() { m_r_5qiIsSet = false; }
+oai::model::common::Arp VplmnQos::getArp() const { return m_Arp; }
+void VplmnQos::setArp(oai::model::common::Arp const &value) {
+  m_Arp = value;
   m_ArpIsSet = true;
 }
-bool VplmnQos::arpIsSet() const {
-  return m_ArpIsSet;
-}
-void VplmnQos::unsetArp() {
-  m_ArpIsSet = false;
-}
+bool VplmnQos::arpIsSet() const { return m_ArpIsSet; }
+void VplmnQos::unsetArp() { m_ArpIsSet = false; }
 oai::model::common::Ambr VplmnQos::getSessionAmbr() const {
   return m_SessionAmbr;
 }
-void VplmnQos::setSessionAmbr(oai::model::common::Ambr const& value) {
-  m_SessionAmbr      = value;
+void VplmnQos::setSessionAmbr(oai::model::common::Ambr const &value) {
+  m_SessionAmbr = value;
   m_SessionAmbrIsSet = true;
 }
-bool VplmnQos::sessionAmbrIsSet() const {
-  return m_SessionAmbrIsSet;
-}
-void VplmnQos::unsetSessionAmbr() {
-  m_SessionAmbrIsSet = false;
-}
-std::string VplmnQos::getMaxFbrDl() const {
-  return m_MaxFbrDl;
-}
-void VplmnQos::setMaxFbrDl(std::string const& value) {
-  m_MaxFbrDl      = value;
+bool VplmnQos::sessionAmbrIsSet() const { return m_SessionAmbrIsSet; }
+void VplmnQos::unsetSessionAmbr() { m_SessionAmbrIsSet = false; }
+std::string VplmnQos::getMaxFbrDl() const { return m_MaxFbrDl; }
+void VplmnQos::setMaxFbrDl(std::string const &value) {
+  m_MaxFbrDl = value;
   m_MaxFbrDlIsSet = true;
 }
-bool VplmnQos::maxFbrDlIsSet() const {
-  return m_MaxFbrDlIsSet;
-}
-void VplmnQos::unsetMaxFbrDl() {
-  m_MaxFbrDlIsSet = false;
-}
-std::string VplmnQos::getMaxFbrUl() const {
-  return m_MaxFbrUl;
-}
-void VplmnQos::setMaxFbrUl(std::string const& value) {
-  m_MaxFbrUl      = value;
+bool VplmnQos::maxFbrDlIsSet() const { return m_MaxFbrDlIsSet; }
+void VplmnQos::unsetMaxFbrDl() { m_MaxFbrDlIsSet = false; }
+std::string VplmnQos::getMaxFbrUl() const { return m_MaxFbrUl; }
+void VplmnQos::setMaxFbrUl(std::string const &value) {
+  m_MaxFbrUl = value;
   m_MaxFbrUlIsSet = true;
 }
-bool VplmnQos::maxFbrUlIsSet() const {
-  return m_MaxFbrUlIsSet;
-}
-void VplmnQos::unsetMaxFbrUl() {
-  m_MaxFbrUlIsSet = false;
-}
-std::string VplmnQos::getGuaFbrDl() const {
-  return m_GuaFbrDl;
-}
-void VplmnQos::setGuaFbrDl(std::string const& value) {
-  m_GuaFbrDl      = value;
+bool VplmnQos::maxFbrUlIsSet() const { return m_MaxFbrUlIsSet; }
+void VplmnQos::unsetMaxFbrUl() { m_MaxFbrUlIsSet = false; }
+std::string VplmnQos::getGuaFbrDl() const { return m_GuaFbrDl; }
+void VplmnQos::setGuaFbrDl(std::string const &value) {
+  m_GuaFbrDl = value;
   m_GuaFbrDlIsSet = true;
 }
-bool VplmnQos::guaFbrDlIsSet() const {
-  return m_GuaFbrDlIsSet;
-}
-void VplmnQos::unsetGuaFbrDl() {
-  m_GuaFbrDlIsSet = false;
-}
-std::string VplmnQos::getGuaFbrUl() const {
-  return m_GuaFbrUl;
-}
-void VplmnQos::setGuaFbrUl(std::string const& value) {
-  m_GuaFbrUl      = value;
+bool VplmnQos::guaFbrDlIsSet() const { return m_GuaFbrDlIsSet; }
+void VplmnQos::unsetGuaFbrDl() { m_GuaFbrDlIsSet = false; }
+std::string VplmnQos::getGuaFbrUl() const { return m_GuaFbrUl; }
+void VplmnQos::setGuaFbrUl(std::string const &value) {
+  m_GuaFbrUl = value;
   m_GuaFbrUlIsSet = true;
 }
-bool VplmnQos::guaFbrUlIsSet() const {
-  return m_GuaFbrUlIsSet;
-}
-void VplmnQos::unsetGuaFbrUl() {
-  m_GuaFbrUlIsSet = false;
-}
+bool VplmnQos::guaFbrUlIsSet() const { return m_GuaFbrUlIsSet; }
+void VplmnQos::unsetGuaFbrUl() { m_GuaFbrUlIsSet = false; }
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

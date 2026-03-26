@@ -16,8 +16,7 @@
  */
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 static asn_oer_constraints_t asn_OER_type_Ngap_bt_rssi_constr_4 CC_NOTUSED = {
-    {0, 0},
-    -1};
+    {0, 0}, -1};
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 static asn_per_constraints_t asn_PER_type_Ngap_bt_rssi_constr_4 CC_NOTUSED = {
@@ -75,8 +74,8 @@ static /* Use -fall-defs-global to expose */
 asn_TYPE_member_t asn_MBR_Ngap_BluetoothMeasurementConfiguration_1[] = {
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_BluetoothMeasurementConfiguration, bluetoothMeasConfig),
+     offsetof(struct Ngap_BluetoothMeasurementConfiguration,
+              bluetoothMeasConfig),
      (ASN_TAG_CLASS_CONTEXT | (0 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_BluetoothMeasConfig,
@@ -95,9 +94,8 @@ asn_TYPE_member_t asn_MBR_Ngap_BluetoothMeasurementConfiguration_1[] = {
      "bluetoothMeasConfig"},
     {ATF_POINTER,
      3,
-     offsetof(
-         struct Ngap_BluetoothMeasurementConfiguration,
-         bluetoothMeasConfigNameList),
+     offsetof(struct Ngap_BluetoothMeasurementConfiguration,
+              bluetoothMeasConfigNameList),
      (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_BluetoothMeasConfigNameList,
@@ -153,8 +151,8 @@ asn_TYPE_member_t asn_MBR_Ngap_BluetoothMeasurementConfiguration_1[] = {
      0, /* No default value */
      "iE-Extensions"},
 };
-static const int asn_MAP_Ngap_BluetoothMeasurementConfiguration_oms_1[] = {
-    1, 2, 3};
+static const int asn_MAP_Ngap_BluetoothMeasurementConfiguration_oms_1[] = {1, 2,
+                                                                           3};
 static const ber_tlv_tag_t
     asn_DEF_Ngap_BluetoothMeasurementConfiguration_tags_1[] = {
         (ASN_TAG_CLASS_UNIVERSAL | (16 << 2))};

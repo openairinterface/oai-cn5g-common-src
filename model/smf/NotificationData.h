@@ -19,13 +19,13 @@
 #ifndef NotificationData_H_
 #define NotificationData_H_
 
-#include "NFProfile.h"
 #include "ChangeItem.h"
 #include "ConditionEventType.h"
-#include <string>
+#include "NFProfile.h"
 #include "NotificationEventType.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 // TODO move to common-src (NRF model)
 namespace oai::model::smf {
@@ -34,7 +34,7 @@ namespace oai::model::smf {
 /// Data sent in notifications from NRF to subscribed NF Instances
 /// </summary>
 class NotificationData {
- public:
+public:
   NotificationData();
   virtual ~NotificationData() = default;
 
@@ -48,16 +48,16 @@ class NotificationData {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const NotificationData& rhs) const;
-  bool operator!=(const NotificationData& rhs) const;
+  bool operator==(const NotificationData &rhs) const;
+  bool operator!=(const NotificationData &rhs) const;
 
   /////////////////////////////////////////////
   /// NotificationData members
@@ -66,39 +66,39 @@ class NotificationData {
   ///
   /// </summary>
   oai::model::smf::NotificationEventType getEvent() const;
-  void setEvent(oai::model::smf::NotificationEventType const& value);
+  void setEvent(oai::model::smf::NotificationEventType const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getNfInstanceUri() const;
-  void setNfInstanceUri(std::string const& value);
+  void setNfInstanceUri(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::smf::NFProfile getNfProfile() const;
-  void setNfProfile(oai::model::smf::NFProfile const& value);
+  void setNfProfile(oai::model::smf::NFProfile const &value);
   bool nfProfileIsSet() const;
   void unsetNfProfile();
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::common::ChangeItem> getProfileChanges() const;
-  void setProfileChanges(
-      std::vector<oai::model::common::ChangeItem> const& value);
+  void
+  setProfileChanges(std::vector<oai::model::common::ChangeItem> const &value);
   bool profileChangesIsSet() const;
   void unsetProfileChanges();
   /// <summary>
   ///
   /// </summary>
   oai::model::smf::ConditionEventType getConditionEvent() const;
-  void setConditionEvent(oai::model::smf::ConditionEventType const& value);
+  void setConditionEvent(oai::model::smf::ConditionEventType const &value);
   bool conditionEventIsSet() const;
   void unsetConditionEvent();
 
-  friend void to_json(nlohmann::json& j, const NotificationData& o);
-  friend void from_json(const nlohmann::json& j, NotificationData& o);
+  friend void to_json(nlohmann::json &j, const NotificationData &o);
+  friend void from_json(const nlohmann::json &j, NotificationData &o);
 
- protected:
+protected:
   oai::model::smf::NotificationEventType m_Event;
 
   std::string m_NfInstanceUri;
@@ -111,6 +111,6 @@ class NotificationData {
   bool m_ConditionEventIsSet;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* NotificationData_H_ */

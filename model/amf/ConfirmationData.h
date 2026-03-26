@@ -19,8 +19,8 @@
 #ifndef ConfirmationData_H_
 #define ConfirmationData_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::amf {
 
@@ -28,7 +28,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class ConfirmationData {
- public:
+public:
   ConfirmationData();
   virtual ~ConfirmationData();
 
@@ -41,15 +41,15 @@ class ConfirmationData {
   ///
   /// </summary>
   std::string getResStar() const;
-  void setResStar(std::string const& value);
+  void setResStar(std::string const &value);
 
-  friend void to_json(nlohmann::json& j, const ConfirmationData& o);
-  friend void from_json(const nlohmann::json& j, ConfirmationData& o);
+  friend void to_json(nlohmann::json &j, const ConfirmationData &o);
+  friend void from_json(const nlohmann::json &j, ConfirmationData &o);
 
- protected:
+protected:
   std::string m_ResStar;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* ConfirmationData_H_ */

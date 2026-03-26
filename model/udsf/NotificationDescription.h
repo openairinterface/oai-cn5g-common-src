@@ -20,8 +20,8 @@
 #define NotificationDescription_H_
 
 #include "RecordOperation.h"
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::udsf {
 
@@ -29,7 +29,7 @@ namespace oai::model::udsf {
 /// Description of a record notification
 /// </summary>
 class NotificationDescription {
- public:
+public:
   NotificationDescription();
   virtual ~NotificationDescription() = default;
 
@@ -43,16 +43,16 @@ class NotificationDescription {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const NotificationDescription& rhs) const;
-  bool operator!=(const NotificationDescription& rhs) const;
+  bool operator==(const NotificationDescription &rhs) const;
+  bool operator!=(const NotificationDescription &rhs) const;
 
   /////////////////////////////////////////////
   /// NotificationDescription members
@@ -61,24 +61,24 @@ class NotificationDescription {
   /// String providing an URI formatted according to RFC 3986.
   /// </summary>
   std::string getRecordRef() const;
-  void setRecordRef(std::string const& value);
+  void setRecordRef(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::udsf::RecordOperation getOperationType() const;
-  void setOperationType(oai::model::udsf::RecordOperation const& value);
+  void setOperationType(oai::model::udsf::RecordOperation const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getSubscriptionId() const;
-  void setSubscriptionId(std::string const& value);
+  void setSubscriptionId(std::string const &value);
   bool subscriptionIdIsSet() const;
   void unsetSubscriptionId();
 
-  friend void to_json(nlohmann::json& j, const NotificationDescription& o);
-  friend void from_json(const nlohmann::json& j, NotificationDescription& o);
+  friend void to_json(nlohmann::json &j, const NotificationDescription &o);
+  friend void from_json(const nlohmann::json &j, NotificationDescription &o);
 
- protected:
+protected:
   std::string m_RecordRef;
 
   oai::model::udsf::RecordOperation m_OperationType;
@@ -87,6 +87,6 @@ class NotificationDescription {
   bool m_SubscriptionIdIsSet;
 };
 
-}  // namespace oai::model::udsf
+} // namespace oai::model::udsf
 
 #endif /* NotificationDescription_H_ */

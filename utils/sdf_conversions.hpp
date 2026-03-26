@@ -16,12 +16,11 @@ namespace oai::utils::sdf_conversions {
 
 struct port_range {
   bool use_port_range = false;
-  bool is_range =
-      false;  // if range is false, only start should be used and set
+  bool is_range = false; // if range is false, only start should be used and set
   uint16_t start = 0;
-  uint16_t end   = UINT16_MAX;
+  uint16_t end = UINT16_MAX;
 
-  static port_range from_string(const std::string& port_string);
+  static port_range from_string(const std::string &port_string);
 };
 
 struct ip_range {
@@ -29,13 +28,13 @@ struct ip_range {
   in_addr ip_addr{};
   in_addr snm{};
 
-  static ip_range from_string(const std::string& ip_string);
+  static ip_range from_string(const std::string &ip_string);
 };
 
 struct sdf_filter {
-  bool default_filter          = true;
+  bool default_filter = true;
   bool use_protocol_identifier = false;
-  uint8_t protocol_identifier  = 0;
+  uint8_t protocol_identifier = 0;
   // as I understood the spec, there is only one IP range (not like for ports)
   ip_range src_ip_range;
   std::vector<port_range> src_port_ranges;
@@ -45,19 +44,19 @@ struct sdf_filter {
   // TODO there are some more things in RFC 6733 but this should cover most
   // cases
 
-  static sdf_filter from_string(const std::string& filter_string);
+  static sdf_filter from_string(const std::string &filter_string);
 };
 
 // DO NOT CHANGE the int values of the enum, they are used
 // Note: 3GPP also allows bit/s, but it is neither used in NAS nor in PFCP so we
 // ignore it
 enum class bitrate_unit_e {
-  KBPS     = 1,
-  MBPS     = 2,
-  GBPS     = 3,
-  TBPS     = 4,
-  PBPS     = 5,
-  _256PBPS = 6  // to support maximum NAS value
+  KBPS = 1,
+  MBPS = 2,
+  GBPS = 3,
+  TBPS = 4,
+  PBPS = 5,
+  _256PBPS = 6 // to support maximum NAS value
 };
 
 /**
@@ -67,10 +66,10 @@ enum class bitrate_unit_e {
  * @param unit output: bitrate unit
  * @return true if parsing is successful
  */
-bool parse_bitrate_string(
-    const std::string& bitrate, uint16_t& value, bitrate_unit_e& unit);
+bool parse_bitrate_string(const std::string &bitrate, uint16_t &value,
+                          bitrate_unit_e &unit);
 
-bool parse_bitrate_string(const std::string& bitrate, BitRate& bit_rate);
+bool parse_bitrate_string(const std::string &bitrate, BitRate &bit_rate);
 /**
  * Parses 3GPP 29.571 BitRate string to a desired unit (e.g. KBPS)
  * @param bitrate input: bitrate string
@@ -78,8 +77,8 @@ bool parse_bitrate_string(const std::string& bitrate, BitRate& bit_rate);
  * @param value output: bitrate value
  * @return true if parsing is successful
  */
-bool parse_bitrate_string_to_unit(
-    const std::string& bitrate, const bitrate_unit_e& unit, uint32_t& value);
+bool parse_bitrate_string_to_unit(const std::string &bitrate,
+                                  const bitrate_unit_e &unit, uint32_t &value);
 
-}  // namespace oai::utils::sdf_conversions
+} // namespace oai::utils::sdf_conversions
 #endif /* FILE_CONVERSIONS_HPP_SEEN */

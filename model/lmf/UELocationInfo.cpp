@@ -19,11 +19,11 @@
 namespace oai::model::lmf {
 
 UELocationInfo::UELocationInfo() {
-  m_LocationEstimateIsSet      = false;
-  m_AgeOfLocationEstimate      = 0;
+  m_LocationEstimateIsSet = false;
+  m_AgeOfLocationEstimate = 0;
   m_AgeOfLocationEstimateIsSet = false;
-  m_VelocityEstimateIsSet      = false;
-  m_AgeOfVelocityEstimate      = 0;
+  m_VelocityEstimateIsSet = false;
+  m_AgeOfVelocityEstimate = 0;
   m_AgeOfVelocityEstimateIsSet = false;
 }
 
@@ -34,18 +34,18 @@ void UELocationInfo::validate() const {
   }
 }
 
-bool UELocationInfo::validate(std::stringstream& msg) const {
+bool UELocationInfo::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool UELocationInfo::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool UELocationInfo::validate(std::stringstream &msg,
+                              const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "UELocationInfo" : pathPrefix;
 
   if (ageOfLocationEstimateIsSet()) {
-    const int32_t& value               = m_AgeOfLocationEstimate;
+    const int32_t &value = m_AgeOfLocationEstimate;
     const std::string currentValuePath = _pathPrefix + ".ageOfLocationEstimate";
 
     if (value < 0) {
@@ -59,7 +59,7 @@ bool UELocationInfo::validate(
   }
 
   if (ageOfVelocityEstimateIsSet()) {
-    const int32_t& value               = m_AgeOfVelocityEstimate;
+    const int32_t &value = m_AgeOfVelocityEstimate;
     const std::string currentValuePath = _pathPrefix + ".ageOfVelocityEstimate";
 
     if (value < 0) {
@@ -75,7 +75,7 @@ bool UELocationInfo::validate(
   return success;
 }
 
-bool UELocationInfo::operator==(const UELocationInfo& rhs) const {
+bool UELocationInfo::operator==(const UELocationInfo &rhs) const {
   return
 
       ((!locationEstimateIsSet() && !rhs.locationEstimateIsSet()) ||
@@ -97,21 +97,23 @@ bool UELocationInfo::operator==(const UELocationInfo& rhs) const {
           ;
 }
 
-bool UELocationInfo::operator!=(const UELocationInfo& rhs) const {
+bool UELocationInfo::operator!=(const UELocationInfo &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const UELocationInfo& o) {
+void to_json(nlohmann::json &j, const UELocationInfo &o) {
   j = nlohmann::json();
-  if (o.locationEstimateIsSet()) j["locationEstimate"] = o.m_LocationEstimate;
+  if (o.locationEstimateIsSet())
+    j["locationEstimate"] = o.m_LocationEstimate;
   if (o.ageOfLocationEstimateIsSet())
     j["ageOfLocationEstimate"] = o.m_AgeOfLocationEstimate;
-  if (o.velocityEstimateIsSet()) j["velocityEstimate"] = o.m_VelocityEstimate;
+  if (o.velocityEstimateIsSet())
+    j["velocityEstimate"] = o.m_VelocityEstimate;
   if (o.ageOfVelocityEstimateIsSet())
     j["ageOfVelocityEstimate"] = o.m_AgeOfVelocityEstimate;
 }
 
-void from_json(const nlohmann::json& j, UELocationInfo& o) {
+void from_json(const nlohmann::json &j, UELocationInfo &o) {
   if (j.find("locationEstimate") != j.end()) {
     j.at("locationEstimate").get_to(o.m_LocationEstimate);
     o.m_LocationEstimateIsSet = true;
@@ -134,8 +136,8 @@ oai::model::lmf::GeographicArea UELocationInfo::getLocationEstimate() const {
   return m_LocationEstimate;
 }
 void UELocationInfo::setLocationEstimate(
-    oai::model::lmf::GeographicArea const& value) {
-  m_LocationEstimate      = value;
+    oai::model::lmf::GeographicArea const &value) {
+  m_LocationEstimate = value;
   m_LocationEstimateIsSet = true;
 }
 bool UELocationInfo::locationEstimateIsSet() const {
@@ -148,7 +150,7 @@ int32_t UELocationInfo::getAgeOfLocationEstimate() const {
   return m_AgeOfLocationEstimate;
 }
 void UELocationInfo::setAgeOfLocationEstimate(int32_t const value) {
-  m_AgeOfLocationEstimate      = value;
+  m_AgeOfLocationEstimate = value;
   m_AgeOfLocationEstimateIsSet = true;
 }
 bool UELocationInfo::ageOfLocationEstimateIsSet() const {
@@ -161,8 +163,8 @@ oai::model::lmf::VelocityEstimate UELocationInfo::getVelocityEstimate() const {
   return m_VelocityEstimate;
 }
 void UELocationInfo::setVelocityEstimate(
-    oai::model::lmf::VelocityEstimate const& value) {
-  m_VelocityEstimate      = value;
+    oai::model::lmf::VelocityEstimate const &value) {
+  m_VelocityEstimate = value;
   m_VelocityEstimateIsSet = true;
 }
 bool UELocationInfo::velocityEstimateIsSet() const {
@@ -175,7 +177,7 @@ int32_t UELocationInfo::getAgeOfVelocityEstimate() const {
   return m_AgeOfVelocityEstimate;
 }
 void UELocationInfo::setAgeOfVelocityEstimate(int32_t const value) {
-  m_AgeOfVelocityEstimate      = value;
+  m_AgeOfVelocityEstimate = value;
   m_AgeOfVelocityEstimateIsSet = true;
 }
 bool UELocationInfo::ageOfVelocityEstimateIsSet() const {
@@ -185,4 +187,4 @@ void UELocationInfo::unsetAgeOfVelocityEstimate() {
   m_AgeOfVelocityEstimateIsSet = false;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

@@ -13,8 +13,8 @@
 
 #include "HttpMethod_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::common {
 
@@ -27,12 +27,12 @@ void HttpMethod_anyOf::validate() const {
   }
 }
 
-bool HttpMethod_anyOf::validate(std::stringstream& msg) const {
+bool HttpMethod_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool HttpMethod_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool HttpMethod_anyOf::validate(std::stringstream &msg,
+                                const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "HttpMethod_anyOf" : pathPrefix;
@@ -46,54 +46,54 @@ bool HttpMethod_anyOf::validate(
   return success;
 }
 
-bool HttpMethod_anyOf::operator==(const HttpMethod_anyOf& rhs) const {
+bool HttpMethod_anyOf::operator==(const HttpMethod_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool HttpMethod_anyOf::operator!=(const HttpMethod_anyOf& rhs) const {
+bool HttpMethod_anyOf::operator!=(const HttpMethod_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const HttpMethod_anyOf& o) {
+void to_json(nlohmann::json &j, const HttpMethod_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case HttpMethod_anyOf::eHttpMethod_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case HttpMethod_anyOf::eHttpMethod_anyOf::GET:
-      j = "GET";
-      break;
-    case HttpMethod_anyOf::eHttpMethod_anyOf::POST:
-      j = "POST";
-      break;
-    case HttpMethod_anyOf::eHttpMethod_anyOf::PUT:
-      j = "PUT";
-      break;
-    case HttpMethod_anyOf::eHttpMethod_anyOf::DELETE:
-      j = "DELETE";
-      break;
-    case HttpMethod_anyOf::eHttpMethod_anyOf::PATCH:
-      j = "PATCH";
-      break;
-    case HttpMethod_anyOf::eHttpMethod_anyOf::OPTIONS:
-      j = "OPTIONS";
-      break;
-    case HttpMethod_anyOf::eHttpMethod_anyOf::HEAD:
-      j = "HEAD";
-      break;
-    case HttpMethod_anyOf::eHttpMethod_anyOf::CONNECT:
-      j = "CONNECT";
-      break;
-    case HttpMethod_anyOf::eHttpMethod_anyOf::TRACE:
-      j = "TRACE";
-      break;
+  case HttpMethod_anyOf::eHttpMethod_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case HttpMethod_anyOf::eHttpMethod_anyOf::GET:
+    j = "GET";
+    break;
+  case HttpMethod_anyOf::eHttpMethod_anyOf::POST:
+    j = "POST";
+    break;
+  case HttpMethod_anyOf::eHttpMethod_anyOf::PUT:
+    j = "PUT";
+    break;
+  case HttpMethod_anyOf::eHttpMethod_anyOf::DELETE:
+    j = "DELETE";
+    break;
+  case HttpMethod_anyOf::eHttpMethod_anyOf::PATCH:
+    j = "PATCH";
+    break;
+  case HttpMethod_anyOf::eHttpMethod_anyOf::OPTIONS:
+    j = "OPTIONS";
+    break;
+  case HttpMethod_anyOf::eHttpMethod_anyOf::HEAD:
+    j = "HEAD";
+    break;
+  case HttpMethod_anyOf::eHttpMethod_anyOf::CONNECT:
+    j = "CONNECT";
+    break;
+  case HttpMethod_anyOf::eHttpMethod_anyOf::TRACE:
+    j = "TRACE";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, HttpMethod_anyOf& o) {
+void from_json(const nlohmann::json &j, HttpMethod_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "GET") {
     o.setValue(HttpMethod_anyOf::eHttpMethod_anyOf::GET);
@@ -129,4 +129,4 @@ void HttpMethod_anyOf::setValue(HttpMethod_anyOf::eHttpMethod_anyOf value) {
   m_value = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

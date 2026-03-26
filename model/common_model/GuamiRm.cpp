@@ -18,9 +18,7 @@
 
 namespace oai::model::common {
 
-GuamiRm::GuamiRm() {
-  m_AmfId = "";
-}
+GuamiRm::GuamiRm() { m_AmfId = ""; }
 
 void GuamiRm::validate() const {
   std::stringstream msg;
@@ -29,24 +27,24 @@ void GuamiRm::validate() const {
   }
 }
 
-bool GuamiRm::validate(std::stringstream& msg) const {
+bool GuamiRm::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool GuamiRm::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool GuamiRm::validate(std::stringstream &msg,
+                       const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "GuamiRm" : pathPrefix;
 
   /* AmfId */ {
-    const std::string& value           = m_AmfId;
+    const std::string &value = m_AmfId;
     const std::string currentValuePath = _pathPrefix + ".amfId";
   }
 
   return success;
 }
 
-bool GuamiRm::operator==(const GuamiRm& rhs) const {
+bool GuamiRm::operator==(const GuamiRm &rhs) const {
   return
 
       (getPlmnId() == rhs.getPlmnId()) &&
@@ -56,32 +54,24 @@ bool GuamiRm::operator==(const GuamiRm& rhs) const {
           ;
 }
 
-bool GuamiRm::operator!=(const GuamiRm& rhs) const {
-  return !(*this == rhs);
-}
+bool GuamiRm::operator!=(const GuamiRm &rhs) const { return !(*this == rhs); }
 
-void to_json(nlohmann::json& j, const GuamiRm& o) {
-  j           = nlohmann::json();
+void to_json(nlohmann::json &j, const GuamiRm &o) {
+  j = nlohmann::json();
   j["plmnId"] = o.m_PlmnId;
-  j["amfId"]  = o.m_AmfId;
+  j["amfId"] = o.m_AmfId;
 }
 
-void from_json(const nlohmann::json& j, GuamiRm& o) {
+void from_json(const nlohmann::json &j, GuamiRm &o) {
   j.at("plmnId").get_to(o.m_PlmnId);
   j.at("amfId").get_to(o.m_AmfId);
 }
 
-oai::model::common::PlmnIdNid GuamiRm::getPlmnId() const {
-  return m_PlmnId;
-}
-void GuamiRm::setPlmnId(oai::model::common::PlmnIdNid const& value) {
+oai::model::common::PlmnIdNid GuamiRm::getPlmnId() const { return m_PlmnId; }
+void GuamiRm::setPlmnId(oai::model::common::PlmnIdNid const &value) {
   m_PlmnId = value;
 }
-std::string GuamiRm::getAmfId() const {
-  return m_AmfId;
-}
-void GuamiRm::setAmfId(std::string const& value) {
-  m_AmfId = value;
-}
+std::string GuamiRm::getAmfId() const { return m_AmfId; }
+void GuamiRm::setAmfId(std::string const &value) { m_AmfId = value; }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

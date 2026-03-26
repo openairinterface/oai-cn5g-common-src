@@ -30,7 +30,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class DeregistrationReason {
- public:
+public:
   DeregistrationReason();
   virtual ~DeregistrationReason();
 
@@ -39,12 +39,12 @@ class DeregistrationReason {
   /////////////////////////////////////////////
   /// DeregistrationReason members
 
-  friend void to_json(nlohmann::json& j, const DeregistrationReason& o);
-  friend void from_json(const nlohmann::json& j, DeregistrationReason& o);
+  friend void to_json(nlohmann::json &j, const DeregistrationReason &o);
+  friend void from_json(const nlohmann::json &j, DeregistrationReason &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* DeregistrationReason_H_ */

@@ -19,30 +19,30 @@
 #ifndef MdtConfiguration_H_
 #define MdtConfiguration_H_
 
+#include "AreaScope.h"
+#include "CollectionPeriodRmmLteMdt.h"
+#include "CollectionPeriodRmmNrMdt.h"
+#include "EventForMdt.h"
+#include "InterFreqTargetInfo.h"
+#include "JobType.h"
+#include "LoggingDurationMdt.h"
 #include "LoggingDurationNrMdt.h"
-#include "MeasurementPeriodLteMdt.h"
-#include "ReportingTrigger.h"
-#include "PositioningMethodMdt.h"
 #include "LoggingIntervalMdt.h"
 #include "LoggingIntervalNrMdt.h"
-#include "PlmnId.h"
-#include "CollectionPeriodRmmNrMdt.h"
-#include "JobType.h"
-#include <vector>
-#include "ReportTypeMdt.h"
-#include "SensorMeasurement.h"
-#include "ReportIntervalMdt.h"
-#include "CollectionPeriodRmmLteMdt.h"
-#include "LoggingDurationMdt.h"
 #include "MbsfnArea.h"
-#include "MeasurementNrForMdt.h"
-#include "InterFreqTargetInfo.h"
-#include "ReportAmountMdt.h"
-#include "EventForMdt.h"
-#include "ReportIntervalNrMdt.h"
-#include "AreaScope.h"
 #include "MeasurementLteForMdt.h"
+#include "MeasurementNrForMdt.h"
+#include "MeasurementPeriodLteMdt.h"
+#include "PlmnId.h"
+#include "PositioningMethodMdt.h"
+#include "ReportAmountMdt.h"
+#include "ReportIntervalMdt.h"
+#include "ReportIntervalNrMdt.h"
+#include "ReportTypeMdt.h"
+#include "ReportingTrigger.h"
+#include "SensorMeasurement.h"
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::common {
 
@@ -50,7 +50,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class MdtConfiguration {
- public:
+public:
   MdtConfiguration();
   virtual ~MdtConfiguration() = default;
 
@@ -64,16 +64,16 @@ class MdtConfiguration {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const MdtConfiguration& rhs) const;
-  bool operator!=(const MdtConfiguration& rhs) const;
+  bool operator==(const MdtConfiguration &rhs) const;
+  bool operator!=(const MdtConfiguration &rhs) const;
 
   /////////////////////////////////////////////
   /// MdtConfiguration members
@@ -82,77 +82,77 @@ class MdtConfiguration {
   ///
   /// </summary>
   oai::model::common::JobType getJobType() const;
-  void setJobType(oai::model::common::JobType const& value);
+  void setJobType(oai::model::common::JobType const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::ReportTypeMdt getReportType() const;
-  void setReportType(oai::model::common::ReportTypeMdt const& value);
+  void setReportType(oai::model::common::ReportTypeMdt const &value);
   bool reportTypeIsSet() const;
   void unsetReportType();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::AreaScope getAreaScope() const;
-  void setAreaScope(oai::model::common::AreaScope const& value);
+  void setAreaScope(oai::model::common::AreaScope const &value);
   bool areaScopeIsSet() const;
   void unsetAreaScope();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::MeasurementLteForMdt> getMeasurementLteList()
-      const;
+  std::vector<oai::model::common::MeasurementLteForMdt>
+  getMeasurementLteList() const;
   void setMeasurementLteList(
-      std::vector<oai::model::common::MeasurementLteForMdt> const& value);
+      std::vector<oai::model::common::MeasurementLteForMdt> const &value);
   bool measurementLteListIsSet() const;
   void unsetMeasurementLteList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::MeasurementNrForMdt> getMeasurementNrList()
-      const;
+  std::vector<oai::model::common::MeasurementNrForMdt>
+  getMeasurementNrList() const;
   void setMeasurementNrList(
-      std::vector<oai::model::common::MeasurementNrForMdt> const& value);
+      std::vector<oai::model::common::MeasurementNrForMdt> const &value);
   bool measurementNrListIsSet() const;
   void unsetMeasurementNrList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::SensorMeasurement> getSensorMeasurementList()
-      const;
+  std::vector<oai::model::common::SensorMeasurement>
+  getSensorMeasurementList() const;
   void setSensorMeasurementList(
-      std::vector<oai::model::common::SensorMeasurement> const& value);
+      std::vector<oai::model::common::SensorMeasurement> const &value);
   bool sensorMeasurementListIsSet() const;
   void unsetSensorMeasurementList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::ReportingTrigger> getReportingTriggerList()
-      const;
+  std::vector<oai::model::common::ReportingTrigger>
+  getReportingTriggerList() const;
   void setReportingTriggerList(
-      std::vector<oai::model::common::ReportingTrigger> const& value);
+      std::vector<oai::model::common::ReportingTrigger> const &value);
   bool reportingTriggerListIsSet() const;
   void unsetReportingTriggerList();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::ReportIntervalMdt getReportInterval() const;
-  void setReportInterval(oai::model::common::ReportIntervalMdt const& value);
+  void setReportInterval(oai::model::common::ReportIntervalMdt const &value);
   bool reportIntervalIsSet() const;
   void unsetReportInterval();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::ReportIntervalNrMdt getReportIntervalNr() const;
-  void setReportIntervalNr(
-      oai::model::common::ReportIntervalNrMdt const& value);
+  void
+  setReportIntervalNr(oai::model::common::ReportIntervalNrMdt const &value);
   bool reportIntervalNrIsSet() const;
   void unsetReportIntervalNr();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::ReportAmountMdt getReportAmount() const;
-  void setReportAmount(oai::model::common::ReportAmountMdt const& value);
+  void setReportAmount(oai::model::common::ReportAmountMdt const &value);
   bool reportAmountIsSet() const;
   void unsetReportAmount();
   /// <summary>
@@ -187,45 +187,45 @@ class MdtConfiguration {
   ///
   /// </summary>
   std::vector<oai::model::common::EventForMdt> getEventList() const;
-  void setEventList(std::vector<oai::model::common::EventForMdt> const& value);
+  void setEventList(std::vector<oai::model::common::EventForMdt> const &value);
   bool eventListIsSet() const;
   void unsetEventList();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::LoggingIntervalMdt getLoggingInterval() const;
-  void setLoggingInterval(oai::model::common::LoggingIntervalMdt const& value);
+  void setLoggingInterval(oai::model::common::LoggingIntervalMdt const &value);
   bool loggingIntervalIsSet() const;
   void unsetLoggingInterval();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::LoggingIntervalNrMdt getLoggingIntervalNr() const;
-  void setLoggingIntervalNr(
-      oai::model::common::LoggingIntervalNrMdt const& value);
+  void
+  setLoggingIntervalNr(oai::model::common::LoggingIntervalNrMdt const &value);
   bool loggingIntervalNrIsSet() const;
   void unsetLoggingIntervalNr();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::LoggingDurationMdt getLoggingDuration() const;
-  void setLoggingDuration(oai::model::common::LoggingDurationMdt const& value);
+  void setLoggingDuration(oai::model::common::LoggingDurationMdt const &value);
   bool loggingDurationIsSet() const;
   void unsetLoggingDuration();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::LoggingDurationNrMdt getLoggingDurationNr() const;
-  void setLoggingDurationNr(
-      oai::model::common::LoggingDurationNrMdt const& value);
+  void
+  setLoggingDurationNr(oai::model::common::LoggingDurationNrMdt const &value);
   bool loggingDurationNrIsSet() const;
   void unsetLoggingDurationNr();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::PositioningMethodMdt getPositioningMethod() const;
-  void setPositioningMethod(
-      oai::model::common::PositioningMethodMdt const& value);
+  void
+  setPositioningMethod(oai::model::common::PositioningMethodMdt const &value);
   bool positioningMethodIsSet() const;
   void unsetPositioningMethod();
   /// <summary>
@@ -234,16 +234,16 @@ class MdtConfiguration {
   std::vector<oai::model::common::PositioningMethodMdt>
   getAddPositioningMethodList() const;
   void setAddPositioningMethodList(
-      std::vector<oai::model::common::PositioningMethodMdt> const& value);
+      std::vector<oai::model::common::PositioningMethodMdt> const &value);
   bool addPositioningMethodListIsSet() const;
   void unsetAddPositioningMethodList();
   /// <summary>
   ///
   /// </summary>
-  oai::model::common::CollectionPeriodRmmLteMdt getCollectionPeriodRmmLte()
-      const;
+  oai::model::common::CollectionPeriodRmmLteMdt
+  getCollectionPeriodRmmLte() const;
   void setCollectionPeriodRmmLte(
-      oai::model::common::CollectionPeriodRmmLteMdt const& value);
+      oai::model::common::CollectionPeriodRmmLteMdt const &value);
   bool collectionPeriodRmmLteIsSet() const;
   void unsetCollectionPeriodRmmLte();
   /// <summary>
@@ -251,7 +251,7 @@ class MdtConfiguration {
   /// </summary>
   oai::model::common::CollectionPeriodRmmNrMdt getCollectionPeriodRmmNr() const;
   void setCollectionPeriodRmmNr(
-      oai::model::common::CollectionPeriodRmmNrMdt const& value);
+      oai::model::common::CollectionPeriodRmmNrMdt const &value);
   bool collectionPeriodRmmNrIsSet() const;
   void unsetCollectionPeriodRmmNr();
   /// <summary>
@@ -259,39 +259,39 @@ class MdtConfiguration {
   /// </summary>
   oai::model::common::MeasurementPeriodLteMdt getMeasurementPeriodLte() const;
   void setMeasurementPeriodLte(
-      oai::model::common::MeasurementPeriodLteMdt const& value);
+      oai::model::common::MeasurementPeriodLteMdt const &value);
   bool measurementPeriodLteIsSet() const;
   void unsetMeasurementPeriodLte();
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::common::PlmnId> getMdtAllowedPlmnIdList() const;
-  void setMdtAllowedPlmnIdList(
-      std::vector<oai::model::common::PlmnId> const& value);
+  void
+  setMdtAllowedPlmnIdList(std::vector<oai::model::common::PlmnId> const &value);
   bool mdtAllowedPlmnIdListIsSet() const;
   void unsetMdtAllowedPlmnIdList();
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::common::MbsfnArea> getMbsfnAreaList() const;
-  void setMbsfnAreaList(
-      std::vector<oai::model::common::MbsfnArea> const& value);
+  void
+  setMbsfnAreaList(std::vector<oai::model::common::MbsfnArea> const &value);
   bool mbsfnAreaListIsSet() const;
   void unsetMbsfnAreaList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::InterFreqTargetInfo> getInterFreqTargetList()
-      const;
+  std::vector<oai::model::common::InterFreqTargetInfo>
+  getInterFreqTargetList() const;
   void setInterFreqTargetList(
-      std::vector<oai::model::common::InterFreqTargetInfo> const& value);
+      std::vector<oai::model::common::InterFreqTargetInfo> const &value);
   bool interFreqTargetListIsSet() const;
   void unsetInterFreqTargetList();
 
-  friend void to_json(nlohmann::json& j, const MdtConfiguration& o);
-  friend void from_json(const nlohmann::json& j, MdtConfiguration& o);
+  friend void to_json(nlohmann::json &j, const MdtConfiguration &o);
+  friend void from_json(const nlohmann::json &j, MdtConfiguration &o);
 
- protected:
+protected:
   oai::model::common::JobType m_JobType;
 
   oai::model::common::ReportTypeMdt m_ReportType;
@@ -349,6 +349,6 @@ class MdtConfiguration {
   bool m_InterFreqTargetListIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* MdtConfiguration_H_ */

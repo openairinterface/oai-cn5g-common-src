@@ -19,9 +19,9 @@
 #ifndef GuamiListCond_H_
 #define GuamiListCond_H_
 
-#include <vector>
 #include "Guami.h"
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::nrf {
 
@@ -29,7 +29,7 @@ namespace oai::model::nrf {
 ///
 /// </summary>
 class GuamiListCond {
- public:
+public:
   GuamiListCond();
   virtual ~GuamiListCond();
 
@@ -41,16 +41,16 @@ class GuamiListCond {
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::Guami>& getGuamiList();
-  void setGuamiList(std::vector<oai::model::common::Guami> const& value);
+  std::vector<oai::model::common::Guami> &getGuamiList();
+  void setGuamiList(std::vector<oai::model::common::Guami> const &value);
 
-  friend void to_json(nlohmann::json& j, const GuamiListCond& o);
-  friend void from_json(const nlohmann::json& j, GuamiListCond& o);
+  friend void to_json(nlohmann::json &j, const GuamiListCond &o);
+  friend void from_json(const nlohmann::json &j, GuamiListCond &o);
 
- protected:
+protected:
   std::vector<oai::model::common::Guami> m_GuamiList;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* GuamiListCond_H_ */

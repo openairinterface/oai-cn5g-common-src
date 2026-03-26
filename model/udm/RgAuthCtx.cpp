@@ -19,10 +19,10 @@
 namespace oai::model::udm {
 
 RgAuthCtx::RgAuthCtx() {
-  m_AuthInd                = false;
-  m_Supi                   = "";
-  m_SupiIsSet              = false;
-  m_SupportedFeatures      = "";
+  m_AuthInd = false;
+  m_Supi = "";
+  m_SupiIsSet = false;
+  m_SupportedFeatures = "";
   m_SupportedFeaturesIsSet = false;
 }
 
@@ -32,15 +32,16 @@ void RgAuthCtx::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const RgAuthCtx& o) {
-  j            = nlohmann::json();
+void to_json(nlohmann::json &j, const RgAuthCtx &o) {
+  j = nlohmann::json();
   j["authInd"] = o.m_AuthInd;
-  if (o.supiIsSet()) j["supi"] = o.m_Supi;
+  if (o.supiIsSet())
+    j["supi"] = o.m_Supi;
   if (o.supportedFeaturesIsSet())
     j["supportedFeatures"] = o.m_SupportedFeatures;
 }
 
-void from_json(const nlohmann::json& j, RgAuthCtx& o) {
+void from_json(const nlohmann::json &j, RgAuthCtx &o) {
   j.at("authInd").get_to(o.m_AuthInd);
   if (j.find("supi") != j.end()) {
     j.at("supi").get_to(o.m_Supi);
@@ -52,37 +53,25 @@ void from_json(const nlohmann::json& j, RgAuthCtx& o) {
   }
 }
 
-bool RgAuthCtx::isAuthInd() const {
-  return m_AuthInd;
-}
-void RgAuthCtx::setAuthInd(bool const value) {
-  m_AuthInd = value;
-}
-std::string RgAuthCtx::getSupi() const {
-  return m_Supi;
-}
-void RgAuthCtx::setSupi(std::string const& value) {
-  m_Supi      = value;
+bool RgAuthCtx::isAuthInd() const { return m_AuthInd; }
+void RgAuthCtx::setAuthInd(bool const value) { m_AuthInd = value; }
+std::string RgAuthCtx::getSupi() const { return m_Supi; }
+void RgAuthCtx::setSupi(std::string const &value) {
+  m_Supi = value;
   m_SupiIsSet = true;
 }
-bool RgAuthCtx::supiIsSet() const {
-  return m_SupiIsSet;
-}
-void RgAuthCtx::unsetSupi() {
-  m_SupiIsSet = false;
-}
+bool RgAuthCtx::supiIsSet() const { return m_SupiIsSet; }
+void RgAuthCtx::unsetSupi() { m_SupiIsSet = false; }
 std::string RgAuthCtx::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
-void RgAuthCtx::setSupportedFeatures(std::string const& value) {
-  m_SupportedFeatures      = value;
+void RgAuthCtx::setSupportedFeatures(std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool RgAuthCtx::supportedFeaturesIsSet() const {
   return m_SupportedFeaturesIsSet;
 }
-void RgAuthCtx::unsetSupportedFeatures() {
-  m_SupportedFeaturesIsSet = false;
-}
+void RgAuthCtx::unsetSupportedFeatures() { m_SupportedFeaturesIsSet = false; }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

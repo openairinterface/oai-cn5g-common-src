@@ -19,11 +19,11 @@
 #ifndef VelocityEstimate_H_
 #define VelocityEstimate_H_
 
-#include "HorizontalVelocityWithUncertainty.h"
-#include "HorizontalWithVerticalVelocityAndUncertainty.h"
-#include "HorizontalWithVerticalVelocity.h"
-#include "VerticalDirection.h"
 #include "HorizontalVelocity.h"
+#include "HorizontalVelocityWithUncertainty.h"
+#include "HorizontalWithVerticalVelocity.h"
+#include "HorizontalWithVerticalVelocityAndUncertainty.h"
+#include "VerticalDirection.h"
 #include <nlohmann/json.hpp>
 
 namespace oai::model::lmf {
@@ -32,7 +32,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class VelocityEstimate {
- public:
+public:
   VelocityEstimate();
   virtual ~VelocityEstimate() = default;
 
@@ -46,16 +46,16 @@ class VelocityEstimate {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const VelocityEstimate& rhs) const;
-  bool operator!=(const VelocityEstimate& rhs) const;
+  bool operator==(const VelocityEstimate &rhs) const;
+  bool operator!=(const VelocityEstimate &rhs) const;
 
   /////////////////////////////////////////////
   /// VelocityEstimate members
@@ -79,7 +79,7 @@ class VelocityEstimate {
   ///
   /// </summary>
   oai::model::lmf::VerticalDirection getVDirection() const;
-  void setVDirection(oai::model::lmf::VerticalDirection const& value);
+  void setVDirection(oai::model::lmf::VerticalDirection const &value);
   /// <summary>
   ///
   /// </summary>
@@ -91,10 +91,10 @@ class VelocityEstimate {
   float getVUncertainty() const;
   void setVUncertainty(float const value);
 
-  friend void to_json(nlohmann::json& j, const VelocityEstimate& o);
-  friend void from_json(const nlohmann::json& j, VelocityEstimate& o);
+  friend void to_json(nlohmann::json &j, const VelocityEstimate &o);
+  friend void from_json(const nlohmann::json &j, VelocityEstimate &o);
 
- protected:
+protected:
   float m_HSpeed;
 
   int32_t m_Bearing;
@@ -108,6 +108,6 @@ class VelocityEstimate {
   float m_VUncertainty;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* VelocityEstimate_H_ */

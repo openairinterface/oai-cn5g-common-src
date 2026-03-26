@@ -26,10 +26,10 @@ void AccessNetworkId::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const AccessNetworkId& o) {
+void to_json(nlohmann::json &j, const AccessNetworkId &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, AccessNetworkId& o) {}
+void from_json(const nlohmann::json &j, AccessNetworkId &o) {}
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

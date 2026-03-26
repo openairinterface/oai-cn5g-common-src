@@ -20,10 +20,10 @@
 #define NcgiRm_H_
 
 #include "Ncgi.h"
-#include <string>
-#include "PlmnId.h"
 #include "NullValue.h"
+#include "PlmnId.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::common {
 
@@ -31,7 +31,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class NcgiRm {
- public:
+public:
   NcgiRm();
   virtual ~NcgiRm() = default;
 
@@ -45,16 +45,16 @@ class NcgiRm {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const NcgiRm& rhs) const;
-  bool operator!=(const NcgiRm& rhs) const;
+  bool operator==(const NcgiRm &rhs) const;
+  bool operator!=(const NcgiRm &rhs) const;
 
   /////////////////////////////////////////////
   /// NcgiRm members
@@ -63,24 +63,24 @@ class NcgiRm {
   ///
   /// </summary>
   oai::model::common::PlmnId getPlmnId() const;
-  void setPlmnId(oai::model::common::PlmnId const& value);
+  void setPlmnId(oai::model::common::PlmnId const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getNrCellId() const;
-  void setNrCellId(std::string const& value);
+  void setNrCellId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getNid() const;
-  void setNid(std::string const& value);
+  void setNid(std::string const &value);
   bool nidIsSet() const;
   void unsetNid();
 
-  friend void to_json(nlohmann::json& j, const NcgiRm& o);
-  friend void from_json(const nlohmann::json& j, NcgiRm& o);
+  friend void to_json(nlohmann::json &j, const NcgiRm &o);
+  friend void from_json(const nlohmann::json &j, NcgiRm &o);
 
- protected:
+protected:
   oai::model::common::PlmnId m_PlmnId;
 
   std::string m_NrCellId;
@@ -89,6 +89,6 @@ class NcgiRm {
   bool m_NidIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* NcgiRm_H_ */

@@ -19,24 +19,24 @@
 namespace oai::udr::model {
 
 MonitoringConfiguration::MonitoringConfiguration() {
-  m_ImmediateFlag                       = false;
-  m_ImmediateFlagIsSet                  = false;
+  m_ImmediateFlag = false;
+  m_ImmediateFlagIsSet = false;
   m_LocationReportingConfigurationIsSet = false;
-  m_AssociationTypeIsSet                = false;
-  m_DatalinkReportCfgIsSet              = false;
-  m_LossConnectivityCfgIsSet            = false;
-  m_MaximumLatency                      = 0;
-  m_MaximumLatencyIsSet                 = false;
-  m_MaximumResponseTime                 = 0;
-  m_MaximumResponseTimeIsSet            = false;
-  m_SuggestedPacketNumDl                = 0;
-  m_SuggestedPacketNumDlIsSet           = false;
-  m_PduSessionStatusCfgIsSet            = false;
-  m_ReachabilityForSmsCfgIsSet          = false;
-  m_MtcProviderInformation              = "";
-  m_MtcProviderInformationIsSet         = false;
-  m_AfId                                = "";
-  m_AfIdIsSet                           = false;
+  m_AssociationTypeIsSet = false;
+  m_DatalinkReportCfgIsSet = false;
+  m_LossConnectivityCfgIsSet = false;
+  m_MaximumLatency = 0;
+  m_MaximumLatencyIsSet = false;
+  m_MaximumResponseTime = 0;
+  m_MaximumResponseTimeIsSet = false;
+  m_SuggestedPacketNumDl = 0;
+  m_SuggestedPacketNumDlIsSet = false;
+  m_PduSessionStatusCfgIsSet = false;
+  m_ReachabilityForSmsCfgIsSet = false;
+  m_MtcProviderInformation = "";
+  m_MtcProviderInformationIsSet = false;
+  m_AfId = "";
+  m_AfIdIsSet = false;
 }
 
 MonitoringConfiguration::~MonitoringConfiguration() {}
@@ -45,18 +45,21 @@ void MonitoringConfiguration::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const MonitoringConfiguration& o) {
-  j              = nlohmann::json();
+void to_json(nlohmann::json &j, const MonitoringConfiguration &o) {
+  j = nlohmann::json();
   j["eventType"] = o.m_EventType;
-  if (o.immediateFlagIsSet()) j["immediateFlag"] = o.m_ImmediateFlag;
+  if (o.immediateFlagIsSet())
+    j["immediateFlag"] = o.m_ImmediateFlag;
   if (o.locationReportingConfigurationIsSet())
     j["locationReportingConfiguration"] = o.m_LocationReportingConfiguration;
-  if (o.associationTypeIsSet()) j["associationType"] = o.m_AssociationType;
+  if (o.associationTypeIsSet())
+    j["associationType"] = o.m_AssociationType;
   if (o.datalinkReportCfgIsSet())
     j["datalinkReportCfg"] = o.m_DatalinkReportCfg;
   if (o.lossConnectivityCfgIsSet())
     j["lossConnectivityCfg"] = o.m_LossConnectivityCfg;
-  if (o.maximumLatencyIsSet()) j["maximumLatency"] = o.m_MaximumLatency;
+  if (o.maximumLatencyIsSet())
+    j["maximumLatency"] = o.m_MaximumLatency;
   if (o.maximumResponseTimeIsSet())
     j["maximumResponseTime"] = o.m_MaximumResponseTime;
   if (o.suggestedPacketNumDlIsSet())
@@ -67,10 +70,11 @@ void to_json(nlohmann::json& j, const MonitoringConfiguration& o) {
     j["reachabilityForSmsCfg"] = o.m_ReachabilityForSmsCfg;
   if (o.mtcProviderInformationIsSet())
     j["mtcProviderInformation"] = o.m_MtcProviderInformation;
-  if (o.afIdIsSet()) j["afId"] = o.m_AfId;
+  if (o.afIdIsSet())
+    j["afId"] = o.m_AfId;
 }
 
-void from_json(const nlohmann::json& j, MonitoringConfiguration& o) {
+void from_json(const nlohmann::json &j, MonitoringConfiguration &o) {
   j.at("eventType").get_to(o.m_EventType);
   if (j.find("immediateFlag") != j.end()) {
     j.at("immediateFlag").get_to(o.m_ImmediateFlag);
@@ -123,17 +127,15 @@ void from_json(const nlohmann::json& j, MonitoringConfiguration& o) {
   }
 }
 
-EventType MonitoringConfiguration::getEventType() const {
-  return m_EventType;
-}
-void MonitoringConfiguration::setEventType(EventType const& value) {
+EventType MonitoringConfiguration::getEventType() const { return m_EventType; }
+void MonitoringConfiguration::setEventType(EventType const &value) {
   m_EventType = value;
 }
 bool MonitoringConfiguration::isImmediateFlag() const {
   return m_ImmediateFlag;
 }
 void MonitoringConfiguration::setImmediateFlag(bool const value) {
-  m_ImmediateFlag      = value;
+  m_ImmediateFlag = value;
   m_ImmediateFlagIsSet = true;
 }
 bool MonitoringConfiguration::immediateFlagIsSet() const {
@@ -147,8 +149,8 @@ MonitoringConfiguration::getLocationReportingConfiguration() const {
   return m_LocationReportingConfiguration;
 }
 void MonitoringConfiguration::setLocationReportingConfiguration(
-    LocationReportingConfiguration const& value) {
-  m_LocationReportingConfiguration      = value;
+    LocationReportingConfiguration const &value) {
+  m_LocationReportingConfiguration = value;
   m_LocationReportingConfigurationIsSet = true;
 }
 bool MonitoringConfiguration::locationReportingConfigurationIsSet() const {
@@ -160,8 +162,8 @@ void MonitoringConfiguration::unsetLocationReportingConfiguration() {
 AssociationType MonitoringConfiguration::getAssociationType() const {
   return m_AssociationType;
 }
-void MonitoringConfiguration::setAssociationType(AssociationType const& value) {
-  m_AssociationType      = value;
+void MonitoringConfiguration::setAssociationType(AssociationType const &value) {
+  m_AssociationType = value;
   m_AssociationTypeIsSet = true;
 }
 bool MonitoringConfiguration::associationTypeIsSet() const {
@@ -170,13 +172,13 @@ bool MonitoringConfiguration::associationTypeIsSet() const {
 void MonitoringConfiguration::unsetAssociationType() {
   m_AssociationTypeIsSet = false;
 }
-DatalinkReportingConfiguration MonitoringConfiguration::getDatalinkReportCfg()
-    const {
+DatalinkReportingConfiguration
+MonitoringConfiguration::getDatalinkReportCfg() const {
   return m_DatalinkReportCfg;
 }
 void MonitoringConfiguration::setDatalinkReportCfg(
-    DatalinkReportingConfiguration const& value) {
-  m_DatalinkReportCfg      = value;
+    DatalinkReportingConfiguration const &value) {
+  m_DatalinkReportCfg = value;
   m_DatalinkReportCfgIsSet = true;
 }
 bool MonitoringConfiguration::datalinkReportCfgIsSet() const {
@@ -189,8 +191,8 @@ LossConnectivityCfg MonitoringConfiguration::getLossConnectivityCfg() const {
   return m_LossConnectivityCfg;
 }
 void MonitoringConfiguration::setLossConnectivityCfg(
-    LossConnectivityCfg const& value) {
-  m_LossConnectivityCfg      = value;
+    LossConnectivityCfg const &value) {
+  m_LossConnectivityCfg = value;
   m_LossConnectivityCfgIsSet = true;
 }
 bool MonitoringConfiguration::lossConnectivityCfgIsSet() const {
@@ -203,7 +205,7 @@ int32_t MonitoringConfiguration::getMaximumLatency() const {
   return m_MaximumLatency;
 }
 void MonitoringConfiguration::setMaximumLatency(int32_t const value) {
-  m_MaximumLatency      = value;
+  m_MaximumLatency = value;
   m_MaximumLatencyIsSet = true;
 }
 bool MonitoringConfiguration::maximumLatencyIsSet() const {
@@ -216,7 +218,7 @@ int32_t MonitoringConfiguration::getMaximumResponseTime() const {
   return m_MaximumResponseTime;
 }
 void MonitoringConfiguration::setMaximumResponseTime(int32_t const value) {
-  m_MaximumResponseTime      = value;
+  m_MaximumResponseTime = value;
   m_MaximumResponseTimeIsSet = true;
 }
 bool MonitoringConfiguration::maximumResponseTimeIsSet() const {
@@ -229,7 +231,7 @@ int32_t MonitoringConfiguration::getSuggestedPacketNumDl() const {
   return m_SuggestedPacketNumDl;
 }
 void MonitoringConfiguration::setSuggestedPacketNumDl(int32_t const value) {
-  m_SuggestedPacketNumDl      = value;
+  m_SuggestedPacketNumDl = value;
   m_SuggestedPacketNumDlIsSet = true;
 }
 bool MonitoringConfiguration::suggestedPacketNumDlIsSet() const {
@@ -242,8 +244,8 @@ PduSessionStatusCfg MonitoringConfiguration::getPduSessionStatusCfg() const {
   return m_PduSessionStatusCfg;
 }
 void MonitoringConfiguration::setPduSessionStatusCfg(
-    PduSessionStatusCfg const& value) {
-  m_PduSessionStatusCfg      = value;
+    PduSessionStatusCfg const &value) {
+  m_PduSessionStatusCfg = value;
   m_PduSessionStatusCfgIsSet = true;
 }
 bool MonitoringConfiguration::pduSessionStatusCfgIsSet() const {
@@ -257,8 +259,8 @@ MonitoringConfiguration::getReachabilityForSmsCfg() const {
   return m_ReachabilityForSmsCfg;
 }
 void MonitoringConfiguration::setReachabilityForSmsCfg(
-    ReachabilityForSmsConfiguration const& value) {
-  m_ReachabilityForSmsCfg      = value;
+    ReachabilityForSmsConfiguration const &value) {
+  m_ReachabilityForSmsCfg = value;
   m_ReachabilityForSmsCfgIsSet = true;
 }
 bool MonitoringConfiguration::reachabilityForSmsCfgIsSet() const {
@@ -271,8 +273,8 @@ std::string MonitoringConfiguration::getMtcProviderInformation() const {
   return m_MtcProviderInformation;
 }
 void MonitoringConfiguration::setMtcProviderInformation(
-    std::string const& value) {
-  m_MtcProviderInformation      = value;
+    std::string const &value) {
+  m_MtcProviderInformation = value;
   m_MtcProviderInformationIsSet = true;
 }
 bool MonitoringConfiguration::mtcProviderInformationIsSet() const {
@@ -281,18 +283,12 @@ bool MonitoringConfiguration::mtcProviderInformationIsSet() const {
 void MonitoringConfiguration::unsetMtcProviderInformation() {
   m_MtcProviderInformationIsSet = false;
 }
-std::string MonitoringConfiguration::getAfId() const {
-  return m_AfId;
-}
-void MonitoringConfiguration::setAfId(std::string const& value) {
-  m_AfId      = value;
+std::string MonitoringConfiguration::getAfId() const { return m_AfId; }
+void MonitoringConfiguration::setAfId(std::string const &value) {
+  m_AfId = value;
   m_AfIdIsSet = true;
 }
-bool MonitoringConfiguration::afIdIsSet() const {
-  return m_AfIdIsSet;
-}
-void MonitoringConfiguration::unsetAfId() {
-  m_AfIdIsSet = false;
-}
+bool MonitoringConfiguration::afIdIsSet() const { return m_AfIdIsSet; }
+void MonitoringConfiguration::unsetAfId() { m_AfIdIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

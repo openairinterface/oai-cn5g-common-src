@@ -23,10 +23,10 @@ void PolicyReqTrigger::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const PolicyReqTrigger& o) {
+void to_json(nlohmann::json &j, const PolicyReqTrigger &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, PolicyReqTrigger& o) {}
+void from_json(const nlohmann::json &j, PolicyReqTrigger &o) {}
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

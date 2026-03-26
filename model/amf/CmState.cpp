@@ -27,43 +27,33 @@ void CmState::validate() const {
   }
 }
 
-bool CmState::validate(std::stringstream& msg) const {
+bool CmState::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool CmState::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool CmState::validate(std::stringstream &msg,
+                       const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "CmState" : pathPrefix;
 
   return success;
 }
 
-bool CmState::operator==(const CmState& rhs) const {
-  return true;  // TODO
+bool CmState::operator==(const CmState &rhs) const {
+  return true; // TODO
 
   ;
 }
 
-bool CmState::operator!=(const CmState& rhs) const {
-  return !(*this == rhs);
-}
+bool CmState::operator!=(const CmState &rhs) const { return !(*this == rhs); }
 
-void CmState::set_value(std::string value) {
-  this->value = value;
-}
-void CmState::get_value(std::string& value) const {
-  value = this->value;
-}
-std::string CmState::get_value() const {
-  return value;
-}
-void to_json(nlohmann::json& j, const CmState& o) {
-  j = o.get_value();
-}
+void CmState::set_value(std::string value) { this->value = value; }
+void CmState::get_value(std::string &value) const { value = this->value; }
+std::string CmState::get_value() const { return value; }
+void to_json(nlohmann::json &j, const CmState &o) { j = o.get_value(); }
 
-void from_json(const nlohmann::json& j, CmState& o) {
+void from_json(const nlohmann::json &j, CmState &o) {
   o.set_value(j.get<std::string>());
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

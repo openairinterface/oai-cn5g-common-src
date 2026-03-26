@@ -31,7 +31,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class PpDlPacketCountExt {
- public:
+public:
   PpDlPacketCountExt();
   virtual ~PpDlPacketCountExt();
 
@@ -44,7 +44,7 @@ class PpDlPacketCountExt {
   ///
   /// </summary>
   std::string getAfInstanceId() const;
-  void setAfInstanceId(std::string const& value);
+  void setAfInstanceId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
@@ -54,21 +54,21 @@ class PpDlPacketCountExt {
   ///
   /// </summary>
   std::string getValidityTime() const;
-  void setValidityTime(std::string const& value);
+  void setValidityTime(std::string const &value);
   bool validityTimeIsSet() const;
   void unsetValidityTime();
   /// <summary>
   ///
   /// </summary>
   std::string getMtcProviderInformation() const;
-  void setMtcProviderInformation(std::string const& value);
+  void setMtcProviderInformation(std::string const &value);
   bool mtcProviderInformationIsSet() const;
   void unsetMtcProviderInformation();
 
-  friend void to_json(nlohmann::json& j, const PpDlPacketCountExt& o);
-  friend void from_json(const nlohmann::json& j, PpDlPacketCountExt& o);
+  friend void to_json(nlohmann::json &j, const PpDlPacketCountExt &o);
+  friend void from_json(const nlohmann::json &j, PpDlPacketCountExt &o);
 
- protected:
+protected:
   std::string m_AfInstanceId;
 
   int32_t m_ReferenceId;
@@ -79,6 +79,6 @@ class PpDlPacketCountExt {
   bool m_MtcProviderInformationIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* PpDlPacketCountExt_H_ */

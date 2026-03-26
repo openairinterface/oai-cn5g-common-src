@@ -19,11 +19,11 @@
 namespace oai::udr::model {
 
 UpuData_2::UpuData_2() {
-  m_SecPacket             = "";
-  m_SecPacketIsSet        = false;
+  m_SecPacket = "";
+  m_SecPacketIsSet = false;
   m_DefaultConfNssaiIsSet = false;
-  m_RoutingId             = "";
-  m_RoutingIdIsSet        = false;
+  m_RoutingId = "";
+  m_RoutingIdIsSet = false;
 }
 
 UpuData_2::~UpuData_2() {}
@@ -32,15 +32,17 @@ void UpuData_2::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const UpuData_2& o) {
+void to_json(nlohmann::json &j, const UpuData_2 &o) {
   j = nlohmann::json();
-  if (o.secPacketIsSet()) j["secPacket"] = o.m_SecPacket;
+  if (o.secPacketIsSet())
+    j["secPacket"] = o.m_SecPacket;
   if (o.defaultConfNssaiIsSet() || !o.m_DefaultConfNssai.empty())
     j["defaultConfNssai"] = o.m_DefaultConfNssai;
-  if (o.routingIdIsSet()) j["routingId"] = o.m_RoutingId;
+  if (o.routingIdIsSet())
+    j["routingId"] = o.m_RoutingId;
 }
 
-void from_json(const nlohmann::json& j, UpuData_2& o) {
+void from_json(const nlohmann::json &j, UpuData_2 &o) {
   if (j.find("secPacket") != j.end()) {
     j.at("secPacket").get_to(o.m_SecPacket);
     o.m_SecPacketIsSet = true;
@@ -55,45 +57,31 @@ void from_json(const nlohmann::json& j, UpuData_2& o) {
   }
 }
 
-std::string UpuData_2::getSecPacket() const {
-  return m_SecPacket;
-}
-void UpuData_2::setSecPacket(std::string const& value) {
-  m_SecPacket      = value;
+std::string UpuData_2::getSecPacket() const { return m_SecPacket; }
+void UpuData_2::setSecPacket(std::string const &value) {
+  m_SecPacket = value;
   m_SecPacketIsSet = true;
 }
-bool UpuData_2::secPacketIsSet() const {
-  return m_SecPacketIsSet;
-}
-void UpuData_2::unsetSecPacket() {
-  m_SecPacketIsSet = false;
-}
-std::vector<oai::model::common::Snssai>& UpuData_2::getDefaultConfNssai() {
+bool UpuData_2::secPacketIsSet() const { return m_SecPacketIsSet; }
+void UpuData_2::unsetSecPacket() { m_SecPacketIsSet = false; }
+std::vector<oai::model::common::Snssai> &UpuData_2::getDefaultConfNssai() {
   return m_DefaultConfNssai;
 }
 void UpuData_2::setDefaultConfNssai(
-    std::vector<oai::model::common::Snssai> const& value) {
-  m_DefaultConfNssai      = value;
+    std::vector<oai::model::common::Snssai> const &value) {
+  m_DefaultConfNssai = value;
   m_DefaultConfNssaiIsSet = true;
 }
 bool UpuData_2::defaultConfNssaiIsSet() const {
   return m_DefaultConfNssaiIsSet;
 }
-void UpuData_2::unsetDefaultConfNssai() {
-  m_DefaultConfNssaiIsSet = false;
-}
-std::string UpuData_2::getRoutingId() const {
-  return m_RoutingId;
-}
-void UpuData_2::setRoutingId(std::string const& value) {
-  m_RoutingId      = value;
+void UpuData_2::unsetDefaultConfNssai() { m_DefaultConfNssaiIsSet = false; }
+std::string UpuData_2::getRoutingId() const { return m_RoutingId; }
+void UpuData_2::setRoutingId(std::string const &value) {
+  m_RoutingId = value;
   m_RoutingIdIsSet = true;
 }
-bool UpuData_2::routingIdIsSet() const {
-  return m_RoutingIdIsSet;
-}
-void UpuData_2::unsetRoutingId() {
-  m_RoutingIdIsSet = false;
-}
+bool UpuData_2::routingIdIsSet() const { return m_RoutingIdIsSet; }
+void UpuData_2::unsetRoutingId() { m_RoutingIdIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

@@ -30,7 +30,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class EventReportMode_anyOf {
- public:
+public:
   EventReportMode_anyOf();
   virtual ~EventReportMode_anyOf() = default;
 
@@ -53,10 +53,10 @@ class EventReportMode_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const EventReportMode_anyOf& rhs) const;
-  bool operator!=(const EventReportMode_anyOf& rhs) const;
+  bool operator==(const EventReportMode_anyOf &rhs) const;
+  bool operator!=(const EventReportMode_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// EventReportMode_anyOf members
@@ -64,19 +64,19 @@ class EventReportMode_anyOf {
   EventReportMode_anyOf::eEventReportMode_anyOf getValue() const;
   void setValue(EventReportMode_anyOf::eEventReportMode_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const EventReportMode_anyOf& o);
-  friend void from_json(const nlohmann::json& j, EventReportMode_anyOf& o);
+  friend void to_json(nlohmann::json &j, const EventReportMode_anyOf &o);
+  friend void from_json(const nlohmann::json &j, EventReportMode_anyOf &o);
 
- protected:
+protected:
   EventReportMode_anyOf::eEventReportMode_anyOf m_value =
       EventReportMode_anyOf::eEventReportMode_anyOf::
           INVALID_VALUE_OPENAPI_GENERATED;
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* EventReportMode_anyOf_H_ */

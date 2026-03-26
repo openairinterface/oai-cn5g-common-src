@@ -12,11 +12,11 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_PrivateIE-ID.h"
 #include "Ngap_Criticality.h"
+#include "Ngap_PrivateIE-ID.h"
 #include <ANY.h>
-#include <asn_ioc.h>
 #include <OPEN_TYPE.h>
+#include <asn_ioc.h>
 #include <constr_CHOICE.h>
 #include <constr_SEQUENCE.h>
 

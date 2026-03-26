@@ -10,8 +10,8 @@
  * implementation deals with the standard (machine-specific) representation
  * of them instead of using the platform-independent buffer.
  */
-#include <asn_internal.h>
 #include <NativeInteger.h>
+#include <asn_internal.h>
 
 /*
  * NativeInteger basic type description.
@@ -95,35 +95,35 @@ asn_TYPE_descriptor_t asn_DEF_NativeInteger = {
     0  /* No specifics */
 };
 
-void NativeInteger_free(
-    const asn_TYPE_descriptor_t* td, void* ptr,
-    enum asn_struct_free_method method) {
-  if (!td || !ptr) return;
+void NativeInteger_free(const asn_TYPE_descriptor_t *td, void *ptr,
+                        enum asn_struct_free_method method) {
+  if (!td || !ptr)
+    return;
 
   ASN_DEBUG("Freeing %s as INTEGER (%d, %p, Native)", td->name, method, ptr);
 
   switch (method) {
-    case ASFM_FREE_EVERYTHING:
-      FREEMEM(ptr);
-      break;
-    case ASFM_FREE_UNDERLYING:
-      break;
-    case ASFM_FREE_UNDERLYING_AND_RESET:
-      memset(ptr, 0, sizeof(long));
-      break;
+  case ASFM_FREE_EVERYTHING:
+    FREEMEM(ptr);
+    break;
+  case ASFM_FREE_UNDERLYING:
+    break;
+  case ASFM_FREE_UNDERLYING_AND_RESET:
+    memset(ptr, 0, sizeof(long));
+    break;
   }
 }
 
-int NativeInteger_compare(
-    const asn_TYPE_descriptor_t* td, const void* aptr, const void* bptr) {
-  (void) td;
+int NativeInteger_compare(const asn_TYPE_descriptor_t *td, const void *aptr,
+                          const void *bptr) {
+  (void)td;
 
   if (aptr && bptr) {
-    const asn_INTEGER_specifics_t* specs =
-        (const asn_INTEGER_specifics_t*) td->specifics;
+    const asn_INTEGER_specifics_t *specs =
+        (const asn_INTEGER_specifics_t *)td->specifics;
     if (specs && specs->field_unsigned) {
-      const unsigned long* a = aptr;
-      const unsigned long* b = bptr;
+      const unsigned long *a = aptr;
+      const unsigned long *b = bptr;
       if (*a < *b) {
         return -1;
       } else if (*a > *b) {
@@ -132,8 +132,8 @@ int NativeInteger_compare(
         return 0;
       }
     } else {
-      const long* a = aptr;
-      const long* b = bptr;
+      const long *a = aptr;
+      const long *b = bptr;
       if (*a < *b) {
         return -1;
       } else if (*a > *b) {

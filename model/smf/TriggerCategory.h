@@ -27,7 +27,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class TriggerCategory {
- public:
+public:
   TriggerCategory();
   virtual ~TriggerCategory();
 
@@ -36,12 +36,12 @@ class TriggerCategory {
   /////////////////////////////////////////////
   /// TriggerCategory members
 
-  friend void to_json(nlohmann::json& j, const TriggerCategory& o);
-  friend void from_json(const nlohmann::json& j, TriggerCategory& o);
+  friend void to_json(nlohmann::json &j, const TriggerCategory &o);
+  friend void from_json(const nlohmann::json &j, TriggerCategory &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* TriggerCategory_H_ */

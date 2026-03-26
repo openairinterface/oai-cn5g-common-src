@@ -12,8 +12,8 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_MDT-Activation.h"
 #include "Ngap_AreaScopeOfMDT-NR.h"
+#include "Ngap_MDT-Activation.h"
 #include "Ngap_MDTModeNr.h"
 #include <constr_SEQUENCE.h>
 
@@ -30,8 +30,8 @@ typedef struct Ngap_MDT_Configuration_NR {
   Ngap_MDT_Activation_t mdt_Activation;
   Ngap_AreaScopeOfMDT_NR_t areaScopeOfMDT;
   Ngap_MDTModeNr_t mDTModeNr;
-  struct Ngap_MDTPLMNList* signallingBasedMDTPLMNList;   /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_MDTPLMNList *signallingBasedMDTPLMNList;   /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

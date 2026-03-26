@@ -12,35 +12,34 @@
 namespace oai::nas {
 
 class Type4NasIe : public NasIe {
- public:
+public:
   Type4NasIe();
   Type4NasIe(uint8_t iei);
   virtual ~Type4NasIe() = default;
 
-  int Encode(uint8_t* buf, int len) const override;
-  int Encode(
-      uint8_t* buf, int len,
-      int& len_pos) const;  // Use this function to encode IE length later
-  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+  int Encode(uint8_t *buf, int len) const override;
+  int Encode(uint8_t *buf, int len,
+             int &len_pos) const; // Use this function to encode IE length later
+  int Decode(const uint8_t *const buf, int len, bool is_iei = false) override;
 
   uint32_t GetIeLength() const override;
   bool Validate(int len) const override;
   bool ValidateHeader(int len) const;
 
   void SetIei(uint8_t iei);
-  void GetIei(std::optional<uint8_t>& iei) const;
+  void GetIei(std::optional<uint8_t> &iei) const;
 
   void SetLengthIndicator(uint8_t li);
-  void GetLengthIndicator(uint8_t& li) const;
+  void GetLengthIndicator(uint8_t &li) const;
   uint8_t GetLengthIndicator() const;
 
   uint8_t GetHeaderLength() const;
 
- protected:
-  std::optional<uint8_t> iei_;  // IEI present in format TLV
-  uint8_t li_;                  // length indicator, 1 byte
+protected:
+  std::optional<uint8_t> iei_; // IEI present in format TLV
+  uint8_t li_;                 // length indicator, 1 byte
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

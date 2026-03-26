@@ -28,13 +28,13 @@ void PointUncertaintyCircle_allOf::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const PointUncertaintyCircle_allOf& o) {
-  j                = nlohmann::json();
-  j["point"]       = o.m_Point;
+void to_json(nlohmann::json &j, const PointUncertaintyCircle_allOf &o) {
+  j = nlohmann::json();
+  j["point"] = o.m_Point;
   j["uncertainty"] = o.m_Uncertainty;
 }
 
-void from_json(const nlohmann::json& j, PointUncertaintyCircle_allOf& o) {
+void from_json(const nlohmann::json &j, PointUncertaintyCircle_allOf &o) {
   j.at("point").get_to(o.m_Point);
   j.at("uncertainty").get_to(o.m_Uncertainty);
 }
@@ -43,7 +43,7 @@ GeographicalCoordinates PointUncertaintyCircle_allOf::getPoint() const {
   return m_Point;
 }
 void PointUncertaintyCircle_allOf::setPoint(
-    GeographicalCoordinates const& value) {
+    GeographicalCoordinates const &value) {
   m_Point = value;
 }
 float PointUncertaintyCircle_allOf::getUncertainty() const {
@@ -53,4 +53,4 @@ void PointUncertaintyCircle_allOf::setUncertainty(float const value) {
   m_Uncertainty = value;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

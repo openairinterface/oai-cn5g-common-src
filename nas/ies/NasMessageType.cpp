@@ -30,28 +30,23 @@ bool NasMessageType::Validate(int len) const {
 }
 
 //------------------------------------------------------------------------------
-uint32_t NasMessageType::GetIeLength() const {
-  return kNasMessageTypeIeSize;
-}
+uint32_t NasMessageType::GetIeLength() const { return kNasMessageTypeIeSize; }
 
 //------------------------------------------------------------------------------
-void NasMessageType::Set(uint8_t message_type) {
-  message_type_ = message_type;
-}
+void NasMessageType::Set(uint8_t message_type) { message_type_ = message_type; }
 
 //------------------------------------------------------------------------------
-void NasMessageType::Get(uint8_t& message_type) const {
+void NasMessageType::Get(uint8_t &message_type) const {
   message_type = message_type_;
 }
 
 //------------------------------------------------------------------------------
-uint8_t NasMessageType::Get() const {
-  return message_type_;
-}
+uint8_t NasMessageType::Get() const { return message_type_; }
 
 //------------------------------------------------------------------------------
-int NasMessageType::Encode(uint8_t* buf, int len) const {
-  if (!Validate(len)) return KEncodeDecodeError;
+int NasMessageType::Encode(uint8_t *buf, int len) const {
+  if (!Validate(len))
+    return KEncodeDecodeError;
 
   uint32_t encoded_size = 0;
   ENCODE_U8(buf, message_type_, encoded_size);
@@ -59,8 +54,9 @@ int NasMessageType::Encode(uint8_t* buf, int len) const {
 }
 
 //------------------------------------------------------------------------------
-int NasMessageType::Decode(const uint8_t* const buf, int len, bool is_iei) {
-  if (!Validate(len)) return KEncodeDecodeError;
+int NasMessageType::Decode(const uint8_t *const buf, int len, bool is_iei) {
+  if (!Validate(len))
+    return KEncodeDecodeError;
   uint32_t decoded_size = 0;
   DECODE_U8(buf, message_type_, decoded_size);
   return decoded_size;

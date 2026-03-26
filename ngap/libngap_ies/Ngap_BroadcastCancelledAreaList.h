@@ -43,13 +43,13 @@ struct Ngap_ProtocolIE_SingleContainer;
 typedef struct Ngap_BroadcastCancelledAreaList {
   Ngap_BroadcastCancelledAreaList_PR present;
   union Ngap_BroadcastCancelledAreaList_u {
-    struct Ngap_CellIDCancelledEUTRA* cellIDCancelledEUTRA;
-    struct Ngap_TAICancelledEUTRA* tAICancelledEUTRA;
-    struct Ngap_EmergencyAreaIDCancelledEUTRA* emergencyAreaIDCancelledEUTRA;
-    struct Ngap_CellIDCancelledNR* cellIDCancelledNR;
-    struct Ngap_TAICancelledNR* tAICancelledNR;
-    struct Ngap_EmergencyAreaIDCancelledNR* emergencyAreaIDCancelledNR;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_CellIDCancelledEUTRA *cellIDCancelledEUTRA;
+    struct Ngap_TAICancelledEUTRA *tAICancelledEUTRA;
+    struct Ngap_EmergencyAreaIDCancelledEUTRA *emergencyAreaIDCancelledEUTRA;
+    struct Ngap_CellIDCancelledNR *cellIDCancelledNR;
+    struct Ngap_TAICancelledNR *tAICancelledNR;
+    struct Ngap_EmergencyAreaIDCancelledNR *emergencyAreaIDCancelledNR;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

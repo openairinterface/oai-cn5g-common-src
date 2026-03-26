@@ -23,13 +23,13 @@ void NasSecurityMode::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const NasSecurityMode& o) {
-  j                       = nlohmann::json();
+void to_json(nlohmann::json &j, const NasSecurityMode &o) {
+  j = nlohmann::json();
   j["integrityAlgorithm"] = o.m_IntegrityAlgorithm;
   j["cipheringAlgorithm"] = o.m_CipheringAlgorithm;
 }
 
-void from_json(const nlohmann::json& j, NasSecurityMode& o) {
+void from_json(const nlohmann::json &j, NasSecurityMode &o) {
   j.at("integrityAlgorithm").get_to(o.m_IntegrityAlgorithm);
   j.at("cipheringAlgorithm").get_to(o.m_CipheringAlgorithm);
 }
@@ -37,14 +37,14 @@ void from_json(const nlohmann::json& j, NasSecurityMode& o) {
 IntegrityAlgorithm NasSecurityMode::getIntegrityAlgorithm() const {
   return m_IntegrityAlgorithm;
 }
-void NasSecurityMode::setIntegrityAlgorithm(IntegrityAlgorithm const& value) {
+void NasSecurityMode::setIntegrityAlgorithm(IntegrityAlgorithm const &value) {
   m_IntegrityAlgorithm = value;
 }
 CipheringAlgorithm NasSecurityMode::getCipheringAlgorithm() const {
   return m_CipheringAlgorithm;
 }
-void NasSecurityMode::setCipheringAlgorithm(CipheringAlgorithm const& value) {
+void NasSecurityMode::setCipheringAlgorithm(CipheringAlgorithm const &value) {
   m_CipheringAlgorithm = value;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

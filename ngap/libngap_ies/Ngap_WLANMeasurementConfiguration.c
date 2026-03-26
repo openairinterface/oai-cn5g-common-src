@@ -8,8 +8,8 @@
 
 #include "Ngap_WLANMeasurementConfiguration.h"
 
-#include "Ngap_WLANMeasConfigNameList.h"
 #include "Ngap_ProtocolExtensionContainer.h"
+#include "Ngap_WLANMeasConfigNameList.h"
 /*
  * This type is implemented using NativeEnumerated,
  * so here we adjust the DEF accordingly.
@@ -20,8 +20,7 @@
  */
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 static asn_oer_constraints_t asn_OER_type_Ngap_wlan_rssi_constr_4 CC_NOTUSED = {
-    {0, 0},
-    -1};
+    {0, 0}, -1};
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 static asn_per_constraints_t asn_PER_type_Ngap_wlan_rssi_constr_4 CC_NOTUSED = {
@@ -34,8 +33,7 @@ static asn_per_constraints_t asn_PER_type_Ngap_wlan_rssi_constr_4 CC_NOTUSED = {
           !defined(ASN_DISABLE_APER_SUPPORT) */
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 static asn_oer_constraints_t asn_OER_type_Ngap_wlan_rtt_constr_7 CC_NOTUSED = {
-    {0, 0},
-    -1};
+    {0, 0}, -1};
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 static asn_per_constraints_t asn_PER_type_Ngap_wlan_rtt_constr_7 CC_NOTUSED = {
@@ -231,8 +229,8 @@ asn_TYPE_member_t asn_MBR_Ngap_WLANMeasurementConfiguration_1[] = {
      0, /* No default value */
      "iE-Extensions"},
 };
-static const int asn_MAP_Ngap_WLANMeasurementConfiguration_oms_1[] = {
-    1, 2, 3, 4};
+static const int asn_MAP_Ngap_WLANMeasurementConfiguration_oms_1[] = {1, 2, 3,
+                                                                      4};
 static const ber_tlv_tag_t asn_DEF_Ngap_WLANMeasurementConfiguration_tags_1[] =
     {(ASN_TAG_CLASS_UNIVERSAL | (16 << 2))};
 static const asn_TYPE_tag2member_t

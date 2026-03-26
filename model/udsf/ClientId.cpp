@@ -19,9 +19,9 @@
 namespace oai::model::udsf {
 
 ClientId::ClientId() {
-  m_NfId         = "";
-  m_NfIdIsSet    = false;
-  m_NfSetId      = "";
+  m_NfId = "";
+  m_NfIdIsSet = false;
+  m_NfSetId = "";
   m_NfSetIdIsSet = false;
 }
 
@@ -32,19 +32,19 @@ void ClientId::validate() const {
   }
 }
 
-bool ClientId::validate(std::stringstream& msg) const {
+bool ClientId::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ClientId::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool ClientId::validate(std::stringstream &msg,
+                        const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "ClientId" : pathPrefix;
 
   return success;
 }
 
-bool ClientId::operator==(const ClientId& rhs) const {
+bool ClientId::operator==(const ClientId &rhs) const {
   return
 
       ((!nfIdIsSet() && !rhs.nfIdIsSet()) ||
@@ -57,17 +57,17 @@ bool ClientId::operator==(const ClientId& rhs) const {
           ;
 }
 
-bool ClientId::operator!=(const ClientId& rhs) const {
-  return !(*this == rhs);
-}
+bool ClientId::operator!=(const ClientId &rhs) const { return !(*this == rhs); }
 
-void to_json(nlohmann::json& j, const ClientId& o) {
+void to_json(nlohmann::json &j, const ClientId &o) {
   j = nlohmann::json();
-  if (o.nfIdIsSet()) j["nfId"] = o.m_NfId;
-  if (o.nfSetIdIsSet()) j["nfSetId"] = o.m_NfSetId;
+  if (o.nfIdIsSet())
+    j["nfId"] = o.m_NfId;
+  if (o.nfSetIdIsSet())
+    j["nfSetId"] = o.m_NfSetId;
 }
 
-void from_json(const nlohmann::json& j, ClientId& o) {
+void from_json(const nlohmann::json &j, ClientId &o) {
   if (j.find("nfId") != j.end()) {
     j.at("nfId").get_to(o.m_NfId);
     o.m_NfIdIsSet = true;
@@ -78,31 +78,19 @@ void from_json(const nlohmann::json& j, ClientId& o) {
   }
 }
 
-std::string ClientId::getNfId() const {
-  return m_NfId;
-}
-void ClientId::setNfId(std::string const& value) {
-  m_NfId      = value;
+std::string ClientId::getNfId() const { return m_NfId; }
+void ClientId::setNfId(std::string const &value) {
+  m_NfId = value;
   m_NfIdIsSet = true;
 }
-bool ClientId::nfIdIsSet() const {
-  return m_NfIdIsSet;
-}
-void ClientId::unsetNfId() {
-  m_NfIdIsSet = false;
-}
-std::string ClientId::getNfSetId() const {
-  return m_NfSetId;
-}
-void ClientId::setNfSetId(std::string const& value) {
-  m_NfSetId      = value;
+bool ClientId::nfIdIsSet() const { return m_NfIdIsSet; }
+void ClientId::unsetNfId() { m_NfIdIsSet = false; }
+std::string ClientId::getNfSetId() const { return m_NfSetId; }
+void ClientId::setNfSetId(std::string const &value) {
+  m_NfSetId = value;
   m_NfSetIdIsSet = true;
 }
-bool ClientId::nfSetIdIsSet() const {
-  return m_NfSetIdIsSet;
-}
-void ClientId::unsetNfSetId() {
-  m_NfSetIdIsSet = false;
-}
+bool ClientId::nfSetIdIsSet() const { return m_NfSetIdIsSet; }
+void ClientId::unsetNfSetId() { m_NfSetIdIsSet = false; }
 
-}  // namespace oai::model::udsf
+} // namespace oai::model::udsf

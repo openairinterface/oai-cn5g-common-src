@@ -19,62 +19,62 @@
 namespace oai::model::pcf {
 
 SmPolicyContextData::SmPolicyContextData() {
-  m_AccNetChIdIsSet              = false;
-  m_ChargEntityAddrIsSet         = false;
-  m_Gpsi                         = "";
-  m_GpsiIsSet                    = false;
-  m_Supi                         = "";
-  m_InvalidSupi                  = false;
-  m_InvalidSupiIsSet             = false;
-  m_InterGrpIdsIsSet             = false;
-  m_PduSessionId                 = 0;
-  m_Chargingcharacteristics      = "";
+  m_AccNetChIdIsSet = false;
+  m_ChargEntityAddrIsSet = false;
+  m_Gpsi = "";
+  m_GpsiIsSet = false;
+  m_Supi = "";
+  m_InvalidSupi = false;
+  m_InvalidSupiIsSet = false;
+  m_InterGrpIdsIsSet = false;
+  m_PduSessionId = 0;
+  m_Chargingcharacteristics = "";
   m_ChargingcharacteristicsIsSet = false;
-  m_Dnn                          = "";
-  m_DnnSelModeIsSet              = false;
-  m_NotificationUri              = "";
-  m_AccessTypeIsSet              = false;
-  m_RatTypeIsSet                 = false;
-  m_AddAccessInfoIsSet           = false;
-  m_ServingNetworkIsSet          = false;
-  m_UserLocationInfoIsSet        = false;
-  m_UeTimeZone                   = "";
-  m_UeTimeZoneIsSet              = false;
-  m_Pei                          = "";
-  m_PeiIsSet                     = false;
-  m_Ipv4Address                  = "";
-  m_Ipv4AddressIsSet             = false;
-  m_Ipv6AddressPrefixIsSet       = false;
-  m_IpDomain                     = "";
-  m_IpDomainIsSet                = false;
-  m_SubsSessAmbrIsSet            = false;
-  m_AuthProfIndex                = "";
-  m_AuthProfIndexIsSet           = false;
-  m_SubsDefQosIsSet              = false;
-  m_VplmnQosIsSet                = false;
-  m_NumOfPackFilter              = 0;
-  m_NumOfPackFilterIsSet         = false;
-  m_Online                       = false;
-  m_OnlineIsSet                  = false;
-  m_Offline                      = false;
-  m_OfflineIsSet                 = false;
-  m_r_3gppPsDataOffStatus        = false;
-  m_r_3gppPsDataOffStatusIsSet   = false;
-  m_RefQosIndication             = false;
-  m_RefQosIndicationIsSet        = false;
-  m_TraceReqIsSet                = false;
-  m_QosFlowUsageIsSet            = false;
-  m_ServNfIdIsSet                = false;
-  m_SuppFeat                     = "";
-  m_SuppFeatIsSet                = false;
-  m_SmfId                        = "";
-  m_SmfIdIsSet                   = false;
-  m_RecoveryTime                 = "";
-  m_RecoveryTimeIsSet            = false;
-  m_MaPduIndIsSet                = false;
-  m_AtsssCapabIsSet              = false;
-  m_Ipv4FrameRouteListIsSet      = false;
-  m_Ipv6FrameRouteListIsSet      = false;
+  m_Dnn = "";
+  m_DnnSelModeIsSet = false;
+  m_NotificationUri = "";
+  m_AccessTypeIsSet = false;
+  m_RatTypeIsSet = false;
+  m_AddAccessInfoIsSet = false;
+  m_ServingNetworkIsSet = false;
+  m_UserLocationInfoIsSet = false;
+  m_UeTimeZone = "";
+  m_UeTimeZoneIsSet = false;
+  m_Pei = "";
+  m_PeiIsSet = false;
+  m_Ipv4Address = "";
+  m_Ipv4AddressIsSet = false;
+  m_Ipv6AddressPrefixIsSet = false;
+  m_IpDomain = "";
+  m_IpDomainIsSet = false;
+  m_SubsSessAmbrIsSet = false;
+  m_AuthProfIndex = "";
+  m_AuthProfIndexIsSet = false;
+  m_SubsDefQosIsSet = false;
+  m_VplmnQosIsSet = false;
+  m_NumOfPackFilter = 0;
+  m_NumOfPackFilterIsSet = false;
+  m_Online = false;
+  m_OnlineIsSet = false;
+  m_Offline = false;
+  m_OfflineIsSet = false;
+  m_r_3gppPsDataOffStatus = false;
+  m_r_3gppPsDataOffStatusIsSet = false;
+  m_RefQosIndication = false;
+  m_RefQosIndicationIsSet = false;
+  m_TraceReqIsSet = false;
+  m_QosFlowUsageIsSet = false;
+  m_ServNfIdIsSet = false;
+  m_SuppFeat = "";
+  m_SuppFeatIsSet = false;
+  m_SmfId = "";
+  m_SmfIdIsSet = false;
+  m_RecoveryTime = "";
+  m_RecoveryTimeIsSet = false;
+  m_MaPduIndIsSet = false;
+  m_AtsssCapabIsSet = false;
+  m_Ipv4FrameRouteListIsSet = false;
+  m_Ipv6FrameRouteListIsSet = false;
 }
 
 void SmPolicyContextData::validate() const {
@@ -84,12 +84,12 @@ void SmPolicyContextData::validate() const {
   }
 }
 
-bool SmPolicyContextData::validate(std::stringstream& msg) const {
+bool SmPolicyContextData::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool SmPolicyContextData::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool SmPolicyContextData::validate(std::stringstream &msg,
+                                   const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "SmPolicyContextData" : pathPrefix;
@@ -106,8 +106,8 @@ bool SmPolicyContextData::validate(
   }
   */
   if (interGrpIdsIsSet()) {
-    const std::vector<std::string>& value = m_InterGrpIds;
-    const std::string currentValuePath    = _pathPrefix + ".interGrpIds";
+    const std::vector<std::string> &value = m_InterGrpIds;
+    const std::string currentValuePath = _pathPrefix + ".interGrpIds";
 
     if (value.size() < 1) {
       success = false;
@@ -128,7 +128,7 @@ bool SmPolicyContextData::validate(
   }
 
   /* PduSessionId */ {
-    const int32_t& value               = m_PduSessionId;
+    const int32_t &value = m_PduSessionId;
     const std::string currentValuePath = _pathPrefix + ".pduSessionId";
 
     if (value < 0) {
@@ -158,8 +158,8 @@ bool SmPolicyContextData::validate(
   */
 
   if (ipv4FrameRouteListIsSet()) {
-    const std::vector<std::string>& value = m_Ipv4FrameRouteList;
-    const std::string currentValuePath    = _pathPrefix + ".ipv4FrameRouteList";
+    const std::vector<std::string> &value = m_Ipv4FrameRouteList;
+    const std::string currentValuePath = _pathPrefix + ".ipv4FrameRouteList";
 
     if (value.size() < 1) {
       success = false;
@@ -180,7 +180,7 @@ bool SmPolicyContextData::validate(
   }
 
   if (ipv6FrameRouteListIsSet()) {
-    const std::vector<oai::model::common::Ipv6Prefix>& value =
+    const std::vector<oai::model::common::Ipv6Prefix> &value =
         m_Ipv6FrameRouteList;
     const std::string currentValuePath = _pathPrefix + ".ipv6FrameRouteList";
 
@@ -188,10 +188,10 @@ bool SmPolicyContextData::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::Ipv6Prefix& value : value) {
+      int i = 0;
+      for (const oai::model::common::Ipv6Prefix &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -207,7 +207,7 @@ bool SmPolicyContextData::validate(
   return success;
 }
 
-bool SmPolicyContextData::operator==(const SmPolicyContextData& rhs) const {
+bool SmPolicyContextData::operator==(const SmPolicyContextData &rhs) const {
   return
 
       ((!accNetChIdIsSet() && !rhs.accNetChIdIsSet()) ||
@@ -366,63 +366,93 @@ bool SmPolicyContextData::operator==(const SmPolicyContextData& rhs) const {
           ;
 }
 
-bool SmPolicyContextData::operator!=(const SmPolicyContextData& rhs) const {
+bool SmPolicyContextData::operator!=(const SmPolicyContextData &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const SmPolicyContextData& o) {
+void to_json(nlohmann::json &j, const SmPolicyContextData &o) {
   j = nlohmann::json();
-  if (o.accNetChIdIsSet()) j["accNetChId"] = o.m_AccNetChId;
-  if (o.chargEntityAddrIsSet()) j["chargEntityAddr"] = o.m_ChargEntityAddr;
-  if (o.gpsiIsSet()) j["gpsi"] = o.m_Gpsi;
+  if (o.accNetChIdIsSet())
+    j["accNetChId"] = o.m_AccNetChId;
+  if (o.chargEntityAddrIsSet())
+    j["chargEntityAddr"] = o.m_ChargEntityAddr;
+  if (o.gpsiIsSet())
+    j["gpsi"] = o.m_Gpsi;
   j["supi"] = o.m_Supi;
-  if (o.invalidSupiIsSet()) j["invalidSupi"] = o.m_InvalidSupi;
+  if (o.invalidSupiIsSet())
+    j["invalidSupi"] = o.m_InvalidSupi;
   if (o.interGrpIdsIsSet() || !o.m_InterGrpIds.empty())
     j["interGrpIds"] = o.m_InterGrpIds;
-  j["pduSessionId"]   = o.m_PduSessionId;
+  j["pduSessionId"] = o.m_PduSessionId;
   j["pduSessionType"] = o.m_PduSessionType;
   if (o.chargingcharacteristicsIsSet())
     j["chargingcharacteristics"] = o.m_Chargingcharacteristics;
   j["dnn"] = o.m_Dnn;
-  if (o.dnnSelModeIsSet()) j["dnnSelMode"] = o.m_DnnSelMode;
+  if (o.dnnSelModeIsSet())
+    j["dnnSelMode"] = o.m_DnnSelMode;
   j["notificationUri"] = o.m_NotificationUri;
-  if (o.accessTypeIsSet()) j["accessType"] = o.m_AccessType;
-  if (o.ratTypeIsSet()) j["ratType"] = o.m_RatType;
-  if (o.addAccessInfoIsSet()) j["addAccessInfo"] = o.m_AddAccessInfo;
-  if (o.servingNetworkIsSet()) j["servingNetwork"] = o.m_ServingNetwork;
-  if (o.userLocationInfoIsSet()) j["userLocationInfo"] = o.m_UserLocationInfo;
-  if (o.ueTimeZoneIsSet()) j["ueTimeZone"] = o.m_UeTimeZone;
-  if (o.peiIsSet()) j["pei"] = o.m_Pei;
-  if (o.ipv4AddressIsSet()) j["ipv4Address"] = o.m_Ipv4Address;
+  if (o.accessTypeIsSet())
+    j["accessType"] = o.m_AccessType;
+  if (o.ratTypeIsSet())
+    j["ratType"] = o.m_RatType;
+  if (o.addAccessInfoIsSet())
+    j["addAccessInfo"] = o.m_AddAccessInfo;
+  if (o.servingNetworkIsSet())
+    j["servingNetwork"] = o.m_ServingNetwork;
+  if (o.userLocationInfoIsSet())
+    j["userLocationInfo"] = o.m_UserLocationInfo;
+  if (o.ueTimeZoneIsSet())
+    j["ueTimeZone"] = o.m_UeTimeZone;
+  if (o.peiIsSet())
+    j["pei"] = o.m_Pei;
+  if (o.ipv4AddressIsSet())
+    j["ipv4Address"] = o.m_Ipv4Address;
   if (o.ipv6AddressPrefixIsSet())
     j["ipv6AddressPrefix"] = o.m_Ipv6AddressPrefix;
-  if (o.ipDomainIsSet()) j["ipDomain"] = o.m_IpDomain;
-  if (o.subsSessAmbrIsSet()) j["subsSessAmbr"] = o.m_SubsSessAmbr;
-  if (o.authProfIndexIsSet()) j["authProfIndex"] = o.m_AuthProfIndex;
-  if (o.subsDefQosIsSet()) j["subsDefQos"] = o.m_SubsDefQos;
-  if (o.vplmnQosIsSet()) j["vplmnQos"] = o.m_VplmnQos;
-  if (o.numOfPackFilterIsSet()) j["numOfPackFilter"] = o.m_NumOfPackFilter;
-  if (o.onlineIsSet()) j["online"] = o.m_Online;
-  if (o.offlineIsSet()) j["offline"] = o.m_Offline;
+  if (o.ipDomainIsSet())
+    j["ipDomain"] = o.m_IpDomain;
+  if (o.subsSessAmbrIsSet())
+    j["subsSessAmbr"] = o.m_SubsSessAmbr;
+  if (o.authProfIndexIsSet())
+    j["authProfIndex"] = o.m_AuthProfIndex;
+  if (o.subsDefQosIsSet())
+    j["subsDefQos"] = o.m_SubsDefQos;
+  if (o.vplmnQosIsSet())
+    j["vplmnQos"] = o.m_VplmnQos;
+  if (o.numOfPackFilterIsSet())
+    j["numOfPackFilter"] = o.m_NumOfPackFilter;
+  if (o.onlineIsSet())
+    j["online"] = o.m_Online;
+  if (o.offlineIsSet())
+    j["offline"] = o.m_Offline;
   if (o.r3gppPsDataOffStatusIsSet())
     j["3gppPsDataOffStatus"] = o.m_r_3gppPsDataOffStatus;
-  if (o.refQosIndicationIsSet()) j["refQosIndication"] = o.m_RefQosIndication;
-  if (o.traceReqIsSet()) j["traceReq"] = o.m_TraceReq;
+  if (o.refQosIndicationIsSet())
+    j["refQosIndication"] = o.m_RefQosIndication;
+  if (o.traceReqIsSet())
+    j["traceReq"] = o.m_TraceReq;
   j["sliceInfo"] = o.m_SliceInfo;
-  if (o.qosFlowUsageIsSet()) j["qosFlowUsage"] = o.m_QosFlowUsage;
-  if (o.servNfIdIsSet()) j["servNfId"] = o.m_ServNfId;
-  if (o.suppFeatIsSet()) j["suppFeat"] = o.m_SuppFeat;
-  if (o.smfIdIsSet()) j["smfId"] = o.m_SmfId;
-  if (o.recoveryTimeIsSet()) j["recoveryTime"] = o.m_RecoveryTime;
-  if (o.maPduIndIsSet()) j["maPduInd"] = o.m_MaPduInd;
-  if (o.atsssCapabIsSet()) j["atsssCapab"] = o.m_AtsssCapab;
+  if (o.qosFlowUsageIsSet())
+    j["qosFlowUsage"] = o.m_QosFlowUsage;
+  if (o.servNfIdIsSet())
+    j["servNfId"] = o.m_ServNfId;
+  if (o.suppFeatIsSet())
+    j["suppFeat"] = o.m_SuppFeat;
+  if (o.smfIdIsSet())
+    j["smfId"] = o.m_SmfId;
+  if (o.recoveryTimeIsSet())
+    j["recoveryTime"] = o.m_RecoveryTime;
+  if (o.maPduIndIsSet())
+    j["maPduInd"] = o.m_MaPduInd;
+  if (o.atsssCapabIsSet())
+    j["atsssCapab"] = o.m_AtsssCapab;
   if (o.ipv4FrameRouteListIsSet() || !o.m_Ipv4FrameRouteList.empty())
     j["ipv4FrameRouteList"] = o.m_Ipv4FrameRouteList;
   if (o.ipv6FrameRouteListIsSet() || !o.m_Ipv6FrameRouteList.empty())
     j["ipv6FrameRouteList"] = o.m_Ipv6FrameRouteList;
 }
 
-void from_json(const nlohmann::json& j, SmPolicyContextData& o) {
+void from_json(const nlohmann::json &j, SmPolicyContextData &o) {
   if (j.find("accNetChId") != j.end()) {
     j.at("accNetChId").get_to(o.m_AccNetChId);
     o.m_AccNetChIdIsSet = true;
@@ -579,23 +609,19 @@ oai::model::pcf::AccNetChId SmPolicyContextData::getAccNetChId() const {
   return m_AccNetChId;
 }
 void SmPolicyContextData::setAccNetChId(
-    oai::model::pcf::AccNetChId const& value) {
-  m_AccNetChId      = value;
+    oai::model::pcf::AccNetChId const &value) {
+  m_AccNetChId = value;
   m_AccNetChIdIsSet = true;
 }
-bool SmPolicyContextData::accNetChIdIsSet() const {
-  return m_AccNetChIdIsSet;
-}
-void SmPolicyContextData::unsetAccNetChId() {
-  m_AccNetChIdIsSet = false;
-}
-oai::model::pcf::AccNetChargingAddress SmPolicyContextData::getChargEntityAddr()
-    const {
+bool SmPolicyContextData::accNetChIdIsSet() const { return m_AccNetChIdIsSet; }
+void SmPolicyContextData::unsetAccNetChId() { m_AccNetChIdIsSet = false; }
+oai::model::pcf::AccNetChargingAddress
+SmPolicyContextData::getChargEntityAddr() const {
   return m_ChargEntityAddr;
 }
 void SmPolicyContextData::setChargEntityAddr(
-    oai::model::pcf::AccNetChargingAddress const& value) {
-  m_ChargEntityAddr      = value;
+    oai::model::pcf::AccNetChargingAddress const &value) {
+  m_ChargEntityAddr = value;
   m_ChargEntityAddrIsSet = true;
 }
 bool SmPolicyContextData::chargEntityAddrIsSet() const {
@@ -604,71 +630,53 @@ bool SmPolicyContextData::chargEntityAddrIsSet() const {
 void SmPolicyContextData::unsetChargEntityAddr() {
   m_ChargEntityAddrIsSet = false;
 }
-std::string SmPolicyContextData::getGpsi() const {
-  return m_Gpsi;
-}
-void SmPolicyContextData::setGpsi(std::string const& value) {
-  m_Gpsi      = value;
+std::string SmPolicyContextData::getGpsi() const { return m_Gpsi; }
+void SmPolicyContextData::setGpsi(std::string const &value) {
+  m_Gpsi = value;
   m_GpsiIsSet = true;
 }
-bool SmPolicyContextData::gpsiIsSet() const {
-  return m_GpsiIsSet;
-}
-void SmPolicyContextData::unsetGpsi() {
-  m_GpsiIsSet = false;
-}
-std::string SmPolicyContextData::getSupi() const {
-  return m_Supi;
-}
-void SmPolicyContextData::setSupi(std::string const& value) {
-  m_Supi = value;
-}
-bool SmPolicyContextData::isInvalidSupi() const {
-  return m_InvalidSupi;
-}
+bool SmPolicyContextData::gpsiIsSet() const { return m_GpsiIsSet; }
+void SmPolicyContextData::unsetGpsi() { m_GpsiIsSet = false; }
+std::string SmPolicyContextData::getSupi() const { return m_Supi; }
+void SmPolicyContextData::setSupi(std::string const &value) { m_Supi = value; }
+bool SmPolicyContextData::isInvalidSupi() const { return m_InvalidSupi; }
 void SmPolicyContextData::setInvalidSupi(bool const value) {
-  m_InvalidSupi      = value;
+  m_InvalidSupi = value;
   m_InvalidSupiIsSet = true;
 }
 bool SmPolicyContextData::invalidSupiIsSet() const {
   return m_InvalidSupiIsSet;
 }
-void SmPolicyContextData::unsetInvalidSupi() {
-  m_InvalidSupiIsSet = false;
-}
+void SmPolicyContextData::unsetInvalidSupi() { m_InvalidSupiIsSet = false; }
 std::vector<std::string> SmPolicyContextData::getInterGrpIds() const {
   return m_InterGrpIds;
 }
 void SmPolicyContextData::setInterGrpIds(
-    std::vector<std::string> const& value) {
-  m_InterGrpIds      = value;
+    std::vector<std::string> const &value) {
+  m_InterGrpIds = value;
   m_InterGrpIdsIsSet = true;
 }
 bool SmPolicyContextData::interGrpIdsIsSet() const {
   return m_InterGrpIdsIsSet;
 }
-void SmPolicyContextData::unsetInterGrpIds() {
-  m_InterGrpIdsIsSet = false;
-}
-int32_t SmPolicyContextData::getPduSessionId() const {
-  return m_PduSessionId;
-}
+void SmPolicyContextData::unsetInterGrpIds() { m_InterGrpIdsIsSet = false; }
+int32_t SmPolicyContextData::getPduSessionId() const { return m_PduSessionId; }
 void SmPolicyContextData::setPduSessionId(int32_t const value) {
   m_PduSessionId = value;
 }
-oai::model::common::PduSessionType SmPolicyContextData::getPduSessionType()
-    const {
+oai::model::common::PduSessionType
+SmPolicyContextData::getPduSessionType() const {
   return m_PduSessionType;
 }
 void SmPolicyContextData::setPduSessionType(
-    oai::model::common::PduSessionType const& value) {
+    oai::model::common::PduSessionType const &value) {
   m_PduSessionType = value;
 }
 std::string SmPolicyContextData::getChargingcharacteristics() const {
   return m_Chargingcharacteristics;
 }
-void SmPolicyContextData::setChargingcharacteristics(std::string const& value) {
-  m_Chargingcharacteristics      = value;
+void SmPolicyContextData::setChargingcharacteristics(std::string const &value) {
+  m_Chargingcharacteristics = value;
   m_ChargingcharacteristicsIsSet = true;
 }
 bool SmPolicyContextData::chargingcharacteristicsIsSet() const {
@@ -677,80 +685,62 @@ bool SmPolicyContextData::chargingcharacteristicsIsSet() const {
 void SmPolicyContextData::unsetChargingcharacteristics() {
   m_ChargingcharacteristicsIsSet = false;
 }
-std::string SmPolicyContextData::getDnn() const {
-  return m_Dnn;
-}
-void SmPolicyContextData::setDnn(std::string const& value) {
-  m_Dnn = value;
-}
+std::string SmPolicyContextData::getDnn() const { return m_Dnn; }
+void SmPolicyContextData::setDnn(std::string const &value) { m_Dnn = value; }
 oai::model::smf::DnnSelectionMode SmPolicyContextData::getDnnSelMode() const {
   return m_DnnSelMode;
 }
 void SmPolicyContextData::setDnnSelMode(
-    oai::model::smf::DnnSelectionMode const& value) {
-  m_DnnSelMode      = value;
+    oai::model::smf::DnnSelectionMode const &value) {
+  m_DnnSelMode = value;
   m_DnnSelModeIsSet = true;
 }
-bool SmPolicyContextData::dnnSelModeIsSet() const {
-  return m_DnnSelModeIsSet;
-}
-void SmPolicyContextData::unsetDnnSelMode() {
-  m_DnnSelModeIsSet = false;
-}
+bool SmPolicyContextData::dnnSelModeIsSet() const { return m_DnnSelModeIsSet; }
+void SmPolicyContextData::unsetDnnSelMode() { m_DnnSelModeIsSet = false; }
 std::string SmPolicyContextData::getNotificationUri() const {
   return m_NotificationUri;
 }
-void SmPolicyContextData::setNotificationUri(std::string const& value) {
+void SmPolicyContextData::setNotificationUri(std::string const &value) {
   m_NotificationUri = value;
 }
 oai::model::common::AccessType SmPolicyContextData::getAccessType() const {
   return m_AccessType;
 }
 void SmPolicyContextData::setAccessType(
-    oai::model::common::AccessType const& value) {
-  m_AccessType      = value;
+    oai::model::common::AccessType const &value) {
+  m_AccessType = value;
   m_AccessTypeIsSet = true;
 }
-bool SmPolicyContextData::accessTypeIsSet() const {
-  return m_AccessTypeIsSet;
-}
-void SmPolicyContextData::unsetAccessType() {
-  m_AccessTypeIsSet = false;
-}
+bool SmPolicyContextData::accessTypeIsSet() const { return m_AccessTypeIsSet; }
+void SmPolicyContextData::unsetAccessType() { m_AccessTypeIsSet = false; }
 oai::model::common::RatType SmPolicyContextData::getRatType() const {
   return m_RatType;
 }
-void SmPolicyContextData::setRatType(oai::model::common::RatType const& value) {
-  m_RatType      = value;
+void SmPolicyContextData::setRatType(oai::model::common::RatType const &value) {
+  m_RatType = value;
   m_RatTypeIsSet = true;
 }
-bool SmPolicyContextData::ratTypeIsSet() const {
-  return m_RatTypeIsSet;
-}
-void SmPolicyContextData::unsetRatType() {
-  m_RatTypeIsSet = false;
-}
-oai::model::pcf::AdditionalAccessInfo SmPolicyContextData::getAddAccessInfo()
-    const {
+bool SmPolicyContextData::ratTypeIsSet() const { return m_RatTypeIsSet; }
+void SmPolicyContextData::unsetRatType() { m_RatTypeIsSet = false; }
+oai::model::pcf::AdditionalAccessInfo
+SmPolicyContextData::getAddAccessInfo() const {
   return m_AddAccessInfo;
 }
 void SmPolicyContextData::setAddAccessInfo(
-    oai::model::pcf::AdditionalAccessInfo const& value) {
-  m_AddAccessInfo      = value;
+    oai::model::pcf::AdditionalAccessInfo const &value) {
+  m_AddAccessInfo = value;
   m_AddAccessInfoIsSet = true;
 }
 bool SmPolicyContextData::addAccessInfoIsSet() const {
   return m_AddAccessInfoIsSet;
 }
-void SmPolicyContextData::unsetAddAccessInfo() {
-  m_AddAccessInfoIsSet = false;
-}
+void SmPolicyContextData::unsetAddAccessInfo() { m_AddAccessInfoIsSet = false; }
 oai::model::common::PlmnIdNid SmPolicyContextData::getServingNetwork() const {
   return m_ServingNetwork;
 }
 void SmPolicyContextData::setServingNetwork(
-    oai::model::common::PlmnIdNid const& value) {
-  m_ServingNetwork      = value;
+    oai::model::common::PlmnIdNid const &value) {
+  m_ServingNetwork = value;
   m_ServingNetworkIsSet = true;
 }
 bool SmPolicyContextData::servingNetworkIsSet() const {
@@ -759,13 +749,13 @@ bool SmPolicyContextData::servingNetworkIsSet() const {
 void SmPolicyContextData::unsetServingNetwork() {
   m_ServingNetworkIsSet = false;
 }
-oai::model::common::UserLocation SmPolicyContextData::getUserLocationInfo()
-    const {
+oai::model::common::UserLocation
+SmPolicyContextData::getUserLocationInfo() const {
   return m_UserLocationInfo;
 }
 void SmPolicyContextData::setUserLocationInfo(
-    oai::model::common::UserLocation const& value) {
-  m_UserLocationInfo      = value;
+    oai::model::common::UserLocation const &value) {
+  m_UserLocationInfo = value;
   m_UserLocationInfoIsSet = true;
 }
 bool SmPolicyContextData::userLocationInfoIsSet() const {
@@ -774,52 +764,38 @@ bool SmPolicyContextData::userLocationInfoIsSet() const {
 void SmPolicyContextData::unsetUserLocationInfo() {
   m_UserLocationInfoIsSet = false;
 }
-std::string SmPolicyContextData::getUeTimeZone() const {
-  return m_UeTimeZone;
-}
-void SmPolicyContextData::setUeTimeZone(std::string const& value) {
-  m_UeTimeZone      = value;
+std::string SmPolicyContextData::getUeTimeZone() const { return m_UeTimeZone; }
+void SmPolicyContextData::setUeTimeZone(std::string const &value) {
+  m_UeTimeZone = value;
   m_UeTimeZoneIsSet = true;
 }
-bool SmPolicyContextData::ueTimeZoneIsSet() const {
-  return m_UeTimeZoneIsSet;
-}
-void SmPolicyContextData::unsetUeTimeZone() {
-  m_UeTimeZoneIsSet = false;
-}
-std::string SmPolicyContextData::getPei() const {
-  return m_Pei;
-}
-void SmPolicyContextData::setPei(std::string const& value) {
-  m_Pei      = value;
+bool SmPolicyContextData::ueTimeZoneIsSet() const { return m_UeTimeZoneIsSet; }
+void SmPolicyContextData::unsetUeTimeZone() { m_UeTimeZoneIsSet = false; }
+std::string SmPolicyContextData::getPei() const { return m_Pei; }
+void SmPolicyContextData::setPei(std::string const &value) {
+  m_Pei = value;
   m_PeiIsSet = true;
 }
-bool SmPolicyContextData::peiIsSet() const {
-  return m_PeiIsSet;
-}
-void SmPolicyContextData::unsetPei() {
-  m_PeiIsSet = false;
-}
+bool SmPolicyContextData::peiIsSet() const { return m_PeiIsSet; }
+void SmPolicyContextData::unsetPei() { m_PeiIsSet = false; }
 std::string SmPolicyContextData::getIpv4Address() const {
   return m_Ipv4Address;
 }
-void SmPolicyContextData::setIpv4Address(std::string const& value) {
-  m_Ipv4Address      = value;
+void SmPolicyContextData::setIpv4Address(std::string const &value) {
+  m_Ipv4Address = value;
   m_Ipv4AddressIsSet = true;
 }
 bool SmPolicyContextData::ipv4AddressIsSet() const {
   return m_Ipv4AddressIsSet;
 }
-void SmPolicyContextData::unsetIpv4Address() {
-  m_Ipv4AddressIsSet = false;
-}
-oai::model::common::Ipv6Prefix SmPolicyContextData::getIpv6AddressPrefix()
-    const {
+void SmPolicyContextData::unsetIpv4Address() { m_Ipv4AddressIsSet = false; }
+oai::model::common::Ipv6Prefix
+SmPolicyContextData::getIpv6AddressPrefix() const {
   return m_Ipv6AddressPrefix;
 }
 void SmPolicyContextData::setIpv6AddressPrefix(
-    oai::model::common::Ipv6Prefix const& value) {
-  m_Ipv6AddressPrefix      = value;
+    oai::model::common::Ipv6Prefix const &value) {
+  m_Ipv6AddressPrefix = value;
   m_Ipv6AddressPrefixIsSet = true;
 }
 bool SmPolicyContextData::ipv6AddressPrefixIsSet() const {
@@ -828,79 +804,61 @@ bool SmPolicyContextData::ipv6AddressPrefixIsSet() const {
 void SmPolicyContextData::unsetIpv6AddressPrefix() {
   m_Ipv6AddressPrefixIsSet = false;
 }
-std::string SmPolicyContextData::getIpDomain() const {
-  return m_IpDomain;
-}
-void SmPolicyContextData::setIpDomain(std::string const& value) {
-  m_IpDomain      = value;
+std::string SmPolicyContextData::getIpDomain() const { return m_IpDomain; }
+void SmPolicyContextData::setIpDomain(std::string const &value) {
+  m_IpDomain = value;
   m_IpDomainIsSet = true;
 }
-bool SmPolicyContextData::ipDomainIsSet() const {
-  return m_IpDomainIsSet;
-}
-void SmPolicyContextData::unsetIpDomain() {
-  m_IpDomainIsSet = false;
-}
+bool SmPolicyContextData::ipDomainIsSet() const { return m_IpDomainIsSet; }
+void SmPolicyContextData::unsetIpDomain() { m_IpDomainIsSet = false; }
 oai::model::common::Ambr SmPolicyContextData::getSubsSessAmbr() const {
   return m_SubsSessAmbr;
 }
 void SmPolicyContextData::setSubsSessAmbr(
-    oai::model::common::Ambr const& value) {
-  m_SubsSessAmbr      = value;
+    oai::model::common::Ambr const &value) {
+  m_SubsSessAmbr = value;
   m_SubsSessAmbrIsSet = true;
 }
 bool SmPolicyContextData::subsSessAmbrIsSet() const {
   return m_SubsSessAmbrIsSet;
 }
-void SmPolicyContextData::unsetSubsSessAmbr() {
-  m_SubsSessAmbrIsSet = false;
-}
+void SmPolicyContextData::unsetSubsSessAmbr() { m_SubsSessAmbrIsSet = false; }
 std::string SmPolicyContextData::getAuthProfIndex() const {
   return m_AuthProfIndex;
 }
-void SmPolicyContextData::setAuthProfIndex(std::string const& value) {
-  m_AuthProfIndex      = value;
+void SmPolicyContextData::setAuthProfIndex(std::string const &value) {
+  m_AuthProfIndex = value;
   m_AuthProfIndexIsSet = true;
 }
 bool SmPolicyContextData::authProfIndexIsSet() const {
   return m_AuthProfIndexIsSet;
 }
-void SmPolicyContextData::unsetAuthProfIndex() {
-  m_AuthProfIndexIsSet = false;
-}
-oai::model::common::SubscribedDefaultQos SmPolicyContextData::getSubsDefQos()
-    const {
+void SmPolicyContextData::unsetAuthProfIndex() { m_AuthProfIndexIsSet = false; }
+oai::model::common::SubscribedDefaultQos
+SmPolicyContextData::getSubsDefQos() const {
   return m_SubsDefQos;
 }
 void SmPolicyContextData::setSubsDefQos(
-    oai::model::common::SubscribedDefaultQos const& value) {
-  m_SubsDefQos      = value;
+    oai::model::common::SubscribedDefaultQos const &value) {
+  m_SubsDefQos = value;
   m_SubsDefQosIsSet = true;
 }
-bool SmPolicyContextData::subsDefQosIsSet() const {
-  return m_SubsDefQosIsSet;
-}
-void SmPolicyContextData::unsetSubsDefQos() {
-  m_SubsDefQosIsSet = false;
-}
+bool SmPolicyContextData::subsDefQosIsSet() const { return m_SubsDefQosIsSet; }
+void SmPolicyContextData::unsetSubsDefQos() { m_SubsDefQosIsSet = false; }
 oai::model::smf::VplmnQos SmPolicyContextData::getVplmnQos() const {
   return m_VplmnQos;
 }
-void SmPolicyContextData::setVplmnQos(oai::model::smf::VplmnQos const& value) {
-  m_VplmnQos      = value;
+void SmPolicyContextData::setVplmnQos(oai::model::smf::VplmnQos const &value) {
+  m_VplmnQos = value;
   m_VplmnQosIsSet = true;
 }
-bool SmPolicyContextData::vplmnQosIsSet() const {
-  return m_VplmnQosIsSet;
-}
-void SmPolicyContextData::unsetVplmnQos() {
-  m_VplmnQosIsSet = false;
-}
+bool SmPolicyContextData::vplmnQosIsSet() const { return m_VplmnQosIsSet; }
+void SmPolicyContextData::unsetVplmnQos() { m_VplmnQosIsSet = false; }
 int32_t SmPolicyContextData::getNumOfPackFilter() const {
   return m_NumOfPackFilter;
 }
 void SmPolicyContextData::setNumOfPackFilter(int32_t const value) {
-  m_NumOfPackFilter      = value;
+  m_NumOfPackFilter = value;
   m_NumOfPackFilterIsSet = true;
 }
 bool SmPolicyContextData::numOfPackFilterIsSet() const {
@@ -909,37 +867,25 @@ bool SmPolicyContextData::numOfPackFilterIsSet() const {
 void SmPolicyContextData::unsetNumOfPackFilter() {
   m_NumOfPackFilterIsSet = false;
 }
-bool SmPolicyContextData::isOnline() const {
-  return m_Online;
-}
+bool SmPolicyContextData::isOnline() const { return m_Online; }
 void SmPolicyContextData::setOnline(bool const value) {
-  m_Online      = value;
+  m_Online = value;
   m_OnlineIsSet = true;
 }
-bool SmPolicyContextData::onlineIsSet() const {
-  return m_OnlineIsSet;
-}
-void SmPolicyContextData::unsetOnline() {
-  m_OnlineIsSet = false;
-}
-bool SmPolicyContextData::isOffline() const {
-  return m_Offline;
-}
+bool SmPolicyContextData::onlineIsSet() const { return m_OnlineIsSet; }
+void SmPolicyContextData::unsetOnline() { m_OnlineIsSet = false; }
+bool SmPolicyContextData::isOffline() const { return m_Offline; }
 void SmPolicyContextData::setOffline(bool const value) {
-  m_Offline      = value;
+  m_Offline = value;
   m_OfflineIsSet = true;
 }
-bool SmPolicyContextData::offlineIsSet() const {
-  return m_OfflineIsSet;
-}
-void SmPolicyContextData::unsetOffline() {
-  m_OfflineIsSet = false;
-}
+bool SmPolicyContextData::offlineIsSet() const { return m_OfflineIsSet; }
+void SmPolicyContextData::unsetOffline() { m_OfflineIsSet = false; }
 bool SmPolicyContextData::isR3gppPsDataOffStatus() const {
   return m_r_3gppPsDataOffStatus;
 }
 void SmPolicyContextData::setR3gppPsDataOffStatus(bool const value) {
-  m_r_3gppPsDataOffStatus      = value;
+  m_r_3gppPsDataOffStatus = value;
   m_r_3gppPsDataOffStatusIsSet = true;
 }
 bool SmPolicyContextData::r3gppPsDataOffStatusIsSet() const {
@@ -952,7 +898,7 @@ bool SmPolicyContextData::isRefQosIndication() const {
   return m_RefQosIndication;
 }
 void SmPolicyContextData::setRefQosIndication(bool const value) {
-  m_RefQosIndication      = value;
+  m_RefQosIndication = value;
   m_RefQosIndicationIsSet = true;
 }
 bool SmPolicyContextData::refQosIndicationIsSet() const {
@@ -965,124 +911,92 @@ oai::model::common::TraceData SmPolicyContextData::getTraceReq() const {
   return m_TraceReq;
 }
 void SmPolicyContextData::setTraceReq(
-    oai::model::common::TraceData const& value) {
-  m_TraceReq      = value;
+    oai::model::common::TraceData const &value) {
+  m_TraceReq = value;
   m_TraceReqIsSet = true;
 }
-bool SmPolicyContextData::traceReqIsSet() const {
-  return m_TraceReqIsSet;
-}
-void SmPolicyContextData::unsetTraceReq() {
-  m_TraceReqIsSet = false;
-}
+bool SmPolicyContextData::traceReqIsSet() const { return m_TraceReqIsSet; }
+void SmPolicyContextData::unsetTraceReq() { m_TraceReqIsSet = false; }
 oai::model::common::Snssai SmPolicyContextData::getSliceInfo() const {
   return m_SliceInfo;
 }
 void SmPolicyContextData::setSliceInfo(
-    oai::model::common::Snssai const& value) {
+    oai::model::common::Snssai const &value) {
   m_SliceInfo = value;
 }
 oai::model::pcf::QosFlowUsage SmPolicyContextData::getQosFlowUsage() const {
   return m_QosFlowUsage;
 }
 void SmPolicyContextData::setQosFlowUsage(
-    oai::model::pcf::QosFlowUsage const& value) {
-  m_QosFlowUsage      = value;
+    oai::model::pcf::QosFlowUsage const &value) {
+  m_QosFlowUsage = value;
   m_QosFlowUsageIsSet = true;
 }
 bool SmPolicyContextData::qosFlowUsageIsSet() const {
   return m_QosFlowUsageIsSet;
 }
-void SmPolicyContextData::unsetQosFlowUsage() {
-  m_QosFlowUsageIsSet = false;
-}
+void SmPolicyContextData::unsetQosFlowUsage() { m_QosFlowUsageIsSet = false; }
 oai::model::pcf::ServingNfIdentity SmPolicyContextData::getServNfId() const {
   return m_ServNfId;
 }
 void SmPolicyContextData::setServNfId(
-    oai::model::pcf::ServingNfIdentity const& value) {
-  m_ServNfId      = value;
+    oai::model::pcf::ServingNfIdentity const &value) {
+  m_ServNfId = value;
   m_ServNfIdIsSet = true;
 }
-bool SmPolicyContextData::servNfIdIsSet() const {
-  return m_ServNfIdIsSet;
-}
-void SmPolicyContextData::unsetServNfId() {
-  m_ServNfIdIsSet = false;
-}
-std::string SmPolicyContextData::getSuppFeat() const {
-  return m_SuppFeat;
-}
-void SmPolicyContextData::setSuppFeat(std::string const& value) {
-  m_SuppFeat      = value;
+bool SmPolicyContextData::servNfIdIsSet() const { return m_ServNfIdIsSet; }
+void SmPolicyContextData::unsetServNfId() { m_ServNfIdIsSet = false; }
+std::string SmPolicyContextData::getSuppFeat() const { return m_SuppFeat; }
+void SmPolicyContextData::setSuppFeat(std::string const &value) {
+  m_SuppFeat = value;
   m_SuppFeatIsSet = true;
 }
-bool SmPolicyContextData::suppFeatIsSet() const {
-  return m_SuppFeatIsSet;
-}
-void SmPolicyContextData::unsetSuppFeat() {
-  m_SuppFeatIsSet = false;
-}
-std::string SmPolicyContextData::getSmfId() const {
-  return m_SmfId;
-}
-void SmPolicyContextData::setSmfId(std::string const& value) {
-  m_SmfId      = value;
+bool SmPolicyContextData::suppFeatIsSet() const { return m_SuppFeatIsSet; }
+void SmPolicyContextData::unsetSuppFeat() { m_SuppFeatIsSet = false; }
+std::string SmPolicyContextData::getSmfId() const { return m_SmfId; }
+void SmPolicyContextData::setSmfId(std::string const &value) {
+  m_SmfId = value;
   m_SmfIdIsSet = true;
 }
-bool SmPolicyContextData::smfIdIsSet() const {
-  return m_SmfIdIsSet;
-}
-void SmPolicyContextData::unsetSmfId() {
-  m_SmfIdIsSet = false;
-}
+bool SmPolicyContextData::smfIdIsSet() const { return m_SmfIdIsSet; }
+void SmPolicyContextData::unsetSmfId() { m_SmfIdIsSet = false; }
 std::string SmPolicyContextData::getRecoveryTime() const {
   return m_RecoveryTime;
 }
-void SmPolicyContextData::setRecoveryTime(std::string const& value) {
-  m_RecoveryTime      = value;
+void SmPolicyContextData::setRecoveryTime(std::string const &value) {
+  m_RecoveryTime = value;
   m_RecoveryTimeIsSet = true;
 }
 bool SmPolicyContextData::recoveryTimeIsSet() const {
   return m_RecoveryTimeIsSet;
 }
-void SmPolicyContextData::unsetRecoveryTime() {
-  m_RecoveryTimeIsSet = false;
-}
+void SmPolicyContextData::unsetRecoveryTime() { m_RecoveryTimeIsSet = false; }
 oai::model::pcf::MaPduIndication SmPolicyContextData::getMaPduInd() const {
   return m_MaPduInd;
 }
 void SmPolicyContextData::setMaPduInd(
-    oai::model::pcf::MaPduIndication const& value) {
-  m_MaPduInd      = value;
+    oai::model::pcf::MaPduIndication const &value) {
+  m_MaPduInd = value;
   m_MaPduIndIsSet = true;
 }
-bool SmPolicyContextData::maPduIndIsSet() const {
-  return m_MaPduIndIsSet;
-}
-void SmPolicyContextData::unsetMaPduInd() {
-  m_MaPduIndIsSet = false;
-}
+bool SmPolicyContextData::maPduIndIsSet() const { return m_MaPduIndIsSet; }
+void SmPolicyContextData::unsetMaPduInd() { m_MaPduIndIsSet = false; }
 oai::model::pcf::AtsssCapability SmPolicyContextData::getAtsssCapab() const {
   return m_AtsssCapab;
 }
 void SmPolicyContextData::setAtsssCapab(
-    oai::model::pcf::AtsssCapability const& value) {
-  m_AtsssCapab      = value;
+    oai::model::pcf::AtsssCapability const &value) {
+  m_AtsssCapab = value;
   m_AtsssCapabIsSet = true;
 }
-bool SmPolicyContextData::atsssCapabIsSet() const {
-  return m_AtsssCapabIsSet;
-}
-void SmPolicyContextData::unsetAtsssCapab() {
-  m_AtsssCapabIsSet = false;
-}
+bool SmPolicyContextData::atsssCapabIsSet() const { return m_AtsssCapabIsSet; }
+void SmPolicyContextData::unsetAtsssCapab() { m_AtsssCapabIsSet = false; }
 std::vector<std::string> SmPolicyContextData::getIpv4FrameRouteList() const {
   return m_Ipv4FrameRouteList;
 }
 void SmPolicyContextData::setIpv4FrameRouteList(
-    std::vector<std::string> const& value) {
-  m_Ipv4FrameRouteList      = value;
+    std::vector<std::string> const &value) {
+  m_Ipv4FrameRouteList = value;
   m_Ipv4FrameRouteListIsSet = true;
 }
 bool SmPolicyContextData::ipv4FrameRouteListIsSet() const {
@@ -1096,8 +1010,8 @@ SmPolicyContextData::getIpv6FrameRouteList() const {
   return m_Ipv6FrameRouteList;
 }
 void SmPolicyContextData::setIpv6FrameRouteList(
-    std::vector<oai::model::common::Ipv6Prefix> const& value) {
-  m_Ipv6FrameRouteList      = value;
+    std::vector<oai::model::common::Ipv6Prefix> const &value) {
+  m_Ipv6FrameRouteList = value;
   m_Ipv6FrameRouteListIsSet = true;
 }
 bool SmPolicyContextData::ipv6FrameRouteListIsSet() const {
@@ -1107,4 +1021,4 @@ void SmPolicyContextData::unsetIpv6FrameRouteList() {
   m_Ipv6FrameRouteListIsSet = false;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

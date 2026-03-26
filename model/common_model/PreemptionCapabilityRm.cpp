@@ -27,12 +27,12 @@ void PreemptionCapabilityRm::validate() const {
   }
 }
 
-bool PreemptionCapabilityRm::validate(std::stringstream& msg) const {
+bool PreemptionCapabilityRm::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool PreemptionCapabilityRm::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool PreemptionCapabilityRm::validate(std::stringstream &msg,
+                                      const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PreemptionCapabilityRm" : pathPrefix;
@@ -41,19 +41,19 @@ bool PreemptionCapabilityRm::validate(
 }
 
 bool PreemptionCapabilityRm::operator==(
-    const PreemptionCapabilityRm& rhs) const {
+    const PreemptionCapabilityRm &rhs) const {
   return (*this == rhs);
 }
 
 bool PreemptionCapabilityRm::operator!=(
-    const PreemptionCapabilityRm& rhs) const {
+    const PreemptionCapabilityRm &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PreemptionCapabilityRm& o) {
+void to_json(nlohmann::json &j, const PreemptionCapabilityRm &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, PreemptionCapabilityRm& o) {}
+void from_json(const nlohmann::json &j, PreemptionCapabilityRm &o) {}
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

@@ -27,13 +27,13 @@ void UplinkNasTransportMsg::initialize() {
 }
 
 //------------------------------------------------------------------------------
-void UplinkNasTransportMsg::setAmfUeNgapId(const uint64_t& id) {
+void UplinkNasTransportMsg::setAmfUeNgapId(const uint64_t &id) {
   NgapUeMessage::m_AmfUeNgapId.set(id);
 
-  Ngap_UplinkNASTransport_IEs_t* ie = (Ngap_UplinkNASTransport_IEs_t*) calloc(
+  Ngap_UplinkNASTransport_IEs_t *ie = (Ngap_UplinkNASTransport_IEs_t *)calloc(
       1, sizeof(Ngap_UplinkNASTransport_IEs_t));
-  ie->id            = Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID;
-  ie->criticality   = Ngap_Criticality_reject;
+  ie->id = Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID;
+  ie->criticality = Ngap_Criticality_reject;
   ie->value.present = Ngap_UplinkNASTransport_IEs__value_PR_AMF_UE_NGAP_ID;
 
   int ret =
@@ -41,7 +41,7 @@ void UplinkNasTransportMsg::setAmfUeNgapId(const uint64_t& id) {
   if (!ret) {
     oai::logger::logger_common::ngap().error(
         "Encode NGAP AMF_UE_NGAP_ID IE error");
-    oai::utils::utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void **)&ie);
     return;
   }
 
@@ -52,13 +52,13 @@ void UplinkNasTransportMsg::setAmfUeNgapId(const uint64_t& id) {
 }
 
 //------------------------------------------------------------------------------
-void UplinkNasTransportMsg::setRanUeNgapId(const uint32_t& ranUeNgapId) {
+void UplinkNasTransportMsg::setRanUeNgapId(const uint32_t &ranUeNgapId) {
   NgapUeMessage::m_RanUeNgapId.set(ranUeNgapId);
 
-  Ngap_UplinkNASTransport_IEs_t* ie = (Ngap_UplinkNASTransport_IEs_t*) calloc(
+  Ngap_UplinkNASTransport_IEs_t *ie = (Ngap_UplinkNASTransport_IEs_t *)calloc(
       1, sizeof(Ngap_UplinkNASTransport_IEs_t));
-  ie->id            = Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID;
-  ie->criticality   = Ngap_Criticality_reject;
+  ie->id = Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID;
+  ie->criticality = Ngap_Criticality_reject;
   ie->value.present = Ngap_UplinkNASTransport_IEs__value_PR_RAN_UE_NGAP_ID;
 
   int ret =
@@ -66,7 +66,7 @@ void UplinkNasTransportMsg::setRanUeNgapId(const uint32_t& ranUeNgapId) {
   if (!ret) {
     oai::logger::logger_common::ngap().error(
         "Encode NGAP RAN_UE_NGAP_ID IE error");
-    oai::utils::utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void **)&ie);
     return;
   }
 
@@ -77,19 +77,19 @@ void UplinkNasTransportMsg::setRanUeNgapId(const uint32_t& ranUeNgapId) {
 }
 
 //------------------------------------------------------------------------------
-void UplinkNasTransportMsg::setNasPdu(const bstring& pdu) {
+void UplinkNasTransportMsg::setNasPdu(const bstring &pdu) {
   m_NasPdu.set(pdu);
 
-  Ngap_UplinkNASTransport_IEs_t* ie = (Ngap_UplinkNASTransport_IEs_t*) calloc(
+  Ngap_UplinkNASTransport_IEs_t *ie = (Ngap_UplinkNASTransport_IEs_t *)calloc(
       1, sizeof(Ngap_UplinkNASTransport_IEs_t));
-  ie->id            = Ngap_ProtocolIE_ID_id_NAS_PDU;
-  ie->criticality   = Ngap_Criticality_reject;
+  ie->id = Ngap_ProtocolIE_ID_id_NAS_PDU;
+  ie->criticality = Ngap_Criticality_reject;
   ie->value.present = Ngap_UplinkNASTransport_IEs__value_PR_NAS_PDU;
 
   int ret = m_NasPdu.encode(ie->value.choice.NAS_PDU);
   if (!ret) {
     oai::logger::logger_common::ngap().error("Encode NGAP NAS_PDU IE error");
-    oai::utils::utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void **)&ie);
     return;
   }
 
@@ -99,25 +99,25 @@ void UplinkNasTransportMsg::setNasPdu(const bstring& pdu) {
 }
 
 //------------------------------------------------------------------------------
-bool UplinkNasTransportMsg::getNasPdu(bstring& pdu) const {
+bool UplinkNasTransportMsg::getNasPdu(bstring &pdu) const {
   return m_NasPdu.get(pdu);
 }
 
 //------------------------------------------------------------------------------
-void UplinkNasTransportMsg::setUserLocationInfoNr(
-    const NrCgi_t& cig, const Tai_t& tai) {
+void UplinkNasTransportMsg::setUserLocationInfoNr(const NrCgi_t &cig,
+                                                  const Tai_t &tai) {
   UserLocationInformationNr userLocationInformationNR;
   NrCgi nrCgi = {};
-  Tai taiNr   = {};
+  Tai taiNr = {};
 
   nrCgi.set(cig);
   taiNr.set(tai);
   userLocationInformationNR.set(nrCgi, taiNr);
   m_UserLocationInformation.set(userLocationInformationNR);
 
-  Ngap_UplinkNASTransport_IEs_t* ie = (Ngap_UplinkNASTransport_IEs_t*) calloc(
+  Ngap_UplinkNASTransport_IEs_t *ie = (Ngap_UplinkNASTransport_IEs_t *)calloc(
       1, sizeof(Ngap_UplinkNASTransport_IEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_UserLocationInformation;
+  ie->id = Ngap_ProtocolIE_ID_id_UserLocationInformation;
   ie->criticality = Ngap_Criticality_ignore;
   ie->value.present =
       Ngap_UplinkNASTransport_IEs__value_PR_UserLocationInformation;
@@ -127,7 +127,7 @@ void UplinkNasTransportMsg::setUserLocationInfoNr(
   if (!ret) {
     oai::logger::logger_common::ngap().error(
         "Encode NGAP UserLocationInformation IE error");
-    oai::utils::utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void **)&ie);
     return;
   }
 
@@ -138,17 +138,18 @@ void UplinkNasTransportMsg::setUserLocationInfoNr(
 }
 
 //------------------------------------------------------------------------------
-bool UplinkNasTransportMsg::getUserLocationInfoNr(
-    NrCgi_t& cig, Tai_t& tai) const {
+bool UplinkNasTransportMsg::getUserLocationInfoNr(NrCgi_t &cig,
+                                                  Tai_t &tai) const {
   UserLocationInformationNr userLocationInformationNR = {};
-  if (!m_UserLocationInformation.get(userLocationInformationNR)) return false;
+  if (!m_UserLocationInformation.get(userLocationInformationNR))
+    return false;
 
   if (m_UserLocationInformation.getChoiceOfUserLocationInformation() !=
       Ngap_UserLocationInformation_PR_userLocationInformationNR)
     return false;
 
   NrCgi nrCgi = {};
-  Tai taiNr   = {};
+  Tai taiNr = {};
   userLocationInformationNR.get(nrCgi, taiNr);
   nrCgi.get(cig);
   taiNr.get(tai);
@@ -157,7 +158,7 @@ bool UplinkNasTransportMsg::getUserLocationInfoNr(
 }
 
 //------------------------------------------------------------------------------
-bool UplinkNasTransportMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
+bool UplinkNasTransportMsg::decode(Ngap_NGAP_PDU_t *ngapMsgPdu) {
   ngapPdu = ngapMsgPdu;
 
   if (ngapPdu->present == Ngap_NGAP_PDU_PR_initiatingMessage) {
@@ -181,87 +182,86 @@ bool UplinkNasTransportMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
   }
   for (int i = 0; i < m_UplinkNasTransportIes->protocolIEs.list.count; i++) {
     switch (m_UplinkNasTransportIes->protocolIEs.list.array[i]->id) {
-      case Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID: {
-        if (m_UplinkNasTransportIes->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_reject &&
-            m_UplinkNasTransportIes->protocolIEs.list.array[i]->value.present ==
-                Ngap_UplinkNASTransport_IEs__value_PR_AMF_UE_NGAP_ID) {
-          if (!NgapUeMessage::m_AmfUeNgapId.decode(
-                  m_UplinkNasTransportIes->protocolIEs.list.array[i]
-                      ->value.choice.AMF_UE_NGAP_ID)) {
-            oai::logger::logger_common::ngap().error(
-                "Decoded NGAP AMF_UE_NGAP_ID IE error");
-            return false;
-          }
-        } else {
+    case Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID: {
+      if (m_UplinkNasTransportIes->protocolIEs.list.array[i]->criticality ==
+              Ngap_Criticality_reject &&
+          m_UplinkNasTransportIes->protocolIEs.list.array[i]->value.present ==
+              Ngap_UplinkNASTransport_IEs__value_PR_AMF_UE_NGAP_ID) {
+        if (!NgapUeMessage::m_AmfUeNgapId.decode(
+                m_UplinkNasTransportIes->protocolIEs.list.array[i]
+                    ->value.choice.AMF_UE_NGAP_ID)) {
           oai::logger::logger_common::ngap().error(
               "Decoded NGAP AMF_UE_NGAP_ID IE error");
           return false;
         }
-      } break;
-      case Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID: {
-        if (m_UplinkNasTransportIes->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_reject &&
-            m_UplinkNasTransportIes->protocolIEs.list.array[i]->value.present ==
-                Ngap_UplinkNASTransport_IEs__value_PR_RAN_UE_NGAP_ID) {
-          if (!NgapUeMessage::m_RanUeNgapId.decode(
-                  m_UplinkNasTransportIes->protocolIEs.list.array[i]
-                      ->value.choice.RAN_UE_NGAP_ID)) {
-            oai::logger::logger_common::ngap().error(
-                "Decoded NGAP RAN_UE_NGAP_ID IE error");
-            return false;
-          }
-        } else {
+      } else {
+        oai::logger::logger_common::ngap().error(
+            "Decoded NGAP AMF_UE_NGAP_ID IE error");
+        return false;
+      }
+    } break;
+    case Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID: {
+      if (m_UplinkNasTransportIes->protocolIEs.list.array[i]->criticality ==
+              Ngap_Criticality_reject &&
+          m_UplinkNasTransportIes->protocolIEs.list.array[i]->value.present ==
+              Ngap_UplinkNASTransport_IEs__value_PR_RAN_UE_NGAP_ID) {
+        if (!NgapUeMessage::m_RanUeNgapId.decode(
+                m_UplinkNasTransportIes->protocolIEs.list.array[i]
+                    ->value.choice.RAN_UE_NGAP_ID)) {
           oai::logger::logger_common::ngap().error(
               "Decoded NGAP RAN_UE_NGAP_ID IE error");
           return false;
         }
-      } break;
-      case Ngap_ProtocolIE_ID_id_NAS_PDU: {
-        if (m_UplinkNasTransportIes->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_reject &&
-            m_UplinkNasTransportIes->protocolIEs.list.array[i]->value.present ==
-                Ngap_UplinkNASTransport_IEs__value_PR_NAS_PDU) {
-          if (!m_NasPdu.decode(
-                  m_UplinkNasTransportIes->protocolIEs.list.array[i]
-                      ->value.choice.NAS_PDU)) {
-            oai::logger::logger_common::ngap().error(
-                "Decoded NGAP NAS_PDU IE error");
-            return false;
-          }
-        } else {
+      } else {
+        oai::logger::logger_common::ngap().error(
+            "Decoded NGAP RAN_UE_NGAP_ID IE error");
+        return false;
+      }
+    } break;
+    case Ngap_ProtocolIE_ID_id_NAS_PDU: {
+      if (m_UplinkNasTransportIes->protocolIEs.list.array[i]->criticality ==
+              Ngap_Criticality_reject &&
+          m_UplinkNasTransportIes->protocolIEs.list.array[i]->value.present ==
+              Ngap_UplinkNASTransport_IEs__value_PR_NAS_PDU) {
+        if (!m_NasPdu.decode(m_UplinkNasTransportIes->protocolIEs.list.array[i]
+                                 ->value.choice.NAS_PDU)) {
           oai::logger::logger_common::ngap().error(
               "Decoded NGAP NAS_PDU IE error");
           return false;
         }
-      } break;
-      case Ngap_ProtocolIE_ID_id_UserLocationInformation: {
-        if (m_UplinkNasTransportIes->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_ignore &&
-            m_UplinkNasTransportIes->protocolIEs.list.array[i]->value.present ==
-                Ngap_UplinkNASTransport_IEs__value_PR_UserLocationInformation) {
-          if (!m_UserLocationInformation.decode(
-                  m_UplinkNasTransportIes->protocolIEs.list.array[i]
-                      ->value.choice.UserLocationInformation)) {
-            oai::logger::logger_common::ngap().error(
-                "Decoded NGAP UserLocationInformation IE error");
-            return false;
-          }
-        } else {
+      } else {
+        oai::logger::logger_common::ngap().error(
+            "Decoded NGAP NAS_PDU IE error");
+        return false;
+      }
+    } break;
+    case Ngap_ProtocolIE_ID_id_UserLocationInformation: {
+      if (m_UplinkNasTransportIes->protocolIEs.list.array[i]->criticality ==
+              Ngap_Criticality_ignore &&
+          m_UplinkNasTransportIes->protocolIEs.list.array[i]->value.present ==
+              Ngap_UplinkNASTransport_IEs__value_PR_UserLocationInformation) {
+        if (!m_UserLocationInformation.decode(
+                m_UplinkNasTransportIes->protocolIEs.list.array[i]
+                    ->value.choice.UserLocationInformation)) {
           oai::logger::logger_common::ngap().error(
               "Decoded NGAP UserLocationInformation IE error");
           return false;
         }
-      } break;
-
-      default: {
+      } else {
         oai::logger::logger_common::ngap().error(
-            "Decoded NGAP message PDU error");
+            "Decoded NGAP UserLocationInformation IE error");
         return false;
       }
+    } break;
+
+    default: {
+      oai::logger::logger_common::ngap().error(
+          "Decoded NGAP message PDU error");
+      return false;
+    }
     }
   }
 
   return true;
 }
-}  // namespace oai::ngap
+} // namespace oai::ngap

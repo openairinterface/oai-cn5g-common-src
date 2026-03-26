@@ -25,13 +25,13 @@ void NsmfEventExposureNotification::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const NsmfEventExposureNotification& o) {
-  j                = nlohmann::json();
-  j["notifId"]     = o.m_NotifId;
+void to_json(nlohmann::json &j, const NsmfEventExposureNotification &o) {
+  j = nlohmann::json();
+  j["notifId"] = o.m_NotifId;
   j["eventNotifs"] = o.m_EventNotifs;
 }
 
-void from_json(const nlohmann::json& j, NsmfEventExposureNotification& o) {
+void from_json(const nlohmann::json &j, NsmfEventExposureNotification &o) {
   j.at("notifId").get_to(o.m_NotifId);
   j.at("eventNotifs").get_to(o.m_EventNotifs);
 }
@@ -39,16 +39,16 @@ void from_json(const nlohmann::json& j, NsmfEventExposureNotification& o) {
 std::string NsmfEventExposureNotification::getNotifId() const {
   return m_NotifId;
 }
-void NsmfEventExposureNotification::setNotifId(std::string const& value) {
+void NsmfEventExposureNotification::setNotifId(std::string const &value) {
   m_NotifId = value;
 }
-std::vector<EventNotification>&
+std::vector<EventNotification> &
 NsmfEventExposureNotification::getEventNotifs() {
   return m_EventNotifs;
 }
 void NsmfEventExposureNotification::setEventNotifs(
-    std::vector<EventNotification> const& value) {
+    std::vector<EventNotification> const &value) {
   m_EventNotifs = value;
 }
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

@@ -29,7 +29,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class StatusInfo {
- public:
+public:
   StatusInfo();
   virtual ~StatusInfo();
 
@@ -42,25 +42,25 @@ class StatusInfo {
   ///
   /// </summary>
   ResourceStatus getResourceStatus() const;
-  void setResourceStatus(ResourceStatus const& value);
+  void setResourceStatus(ResourceStatus const &value);
   /// <summary>
   ///
   /// </summary>
   Cause getCause() const;
-  void setCause(Cause const& value);
+  void setCause(Cause const &value);
   bool causeIsSet() const;
   void unsetCause();
 
-  friend void to_json(nlohmann::json& j, const StatusInfo& o);
-  friend void from_json(const nlohmann::json& j, StatusInfo& o);
+  friend void to_json(nlohmann::json &j, const StatusInfo &o);
+  friend void from_json(const nlohmann::json &j, StatusInfo &o);
 
- protected:
+protected:
   ResourceStatus m_ResourceStatus;
 
   Cause m_Cause;
   bool m_CauseIsSet;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* StatusInfo_H_ */

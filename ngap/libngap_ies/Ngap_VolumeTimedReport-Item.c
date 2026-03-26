@@ -10,15 +10,14 @@
 
 #include "Ngap_ProtocolExtensionContainer.h"
 static int memb_Ngap_startTimeStamp_constraint_1(
-    const asn_TYPE_descriptor_t* td, const void* sptr,
-    asn_app_constraint_failed_f* ctfailcb, void* app_key) {
-  const OCTET_STRING_t* st = (const OCTET_STRING_t*) sptr;
+    const asn_TYPE_descriptor_t *td, const void *sptr,
+    asn_app_constraint_failed_f *ctfailcb, void *app_key) {
+  const OCTET_STRING_t *st = (const OCTET_STRING_t *)sptr;
   size_t size;
 
   if (!sptr) {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: value not given (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: value not given (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 
@@ -28,23 +27,21 @@ static int memb_Ngap_startTimeStamp_constraint_1(
     /* Constraint check succeeded */
     return 0;
   } else {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: constraint failed (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: constraint failed (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 }
 
 static int memb_Ngap_endTimeStamp_constraint_1(
-    const asn_TYPE_descriptor_t* td, const void* sptr,
-    asn_app_constraint_failed_f* ctfailcb, void* app_key) {
-  const OCTET_STRING_t* st = (const OCTET_STRING_t*) sptr;
+    const asn_TYPE_descriptor_t *td, const void *sptr,
+    asn_app_constraint_failed_f *ctfailcb, void *app_key) {
+  const OCTET_STRING_t *st = (const OCTET_STRING_t *)sptr;
   size_t size;
 
   if (!sptr) {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: value not given (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: value not given (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 
@@ -54,30 +51,27 @@ static int memb_Ngap_endTimeStamp_constraint_1(
     /* Constraint check succeeded */
     return 0;
   } else {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: constraint failed (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: constraint failed (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 }
 
 static int memb_Ngap_usageCountUL_constraint_1(
-    const asn_TYPE_descriptor_t* td, const void* sptr,
-    asn_app_constraint_failed_f* ctfailcb, void* app_key) {
-  const INTEGER_t* st = (const INTEGER_t*) sptr;
+    const asn_TYPE_descriptor_t *td, const void *sptr,
+    asn_app_constraint_failed_f *ctfailcb, void *app_key) {
+  const INTEGER_t *st = (const INTEGER_t *)sptr;
   long value;
 
   if (!sptr) {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: value not given (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: value not given (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 
   if (asn_INTEGER2long(st, &value)) {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: value too large (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: value too large (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 
@@ -85,30 +79,27 @@ static int memb_Ngap_usageCountUL_constraint_1(
     /* Constraint check succeeded */
     return 0;
   } else {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: constraint failed (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: constraint failed (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 }
 
 static int memb_Ngap_usageCountDL_constraint_1(
-    const asn_TYPE_descriptor_t* td, const void* sptr,
-    asn_app_constraint_failed_f* ctfailcb, void* app_key) {
-  const INTEGER_t* st = (const INTEGER_t*) sptr;
+    const asn_TYPE_descriptor_t *td, const void *sptr,
+    asn_app_constraint_failed_f *ctfailcb, void *app_key) {
+  const INTEGER_t *st = (const INTEGER_t *)sptr;
   long value;
 
   if (!sptr) {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: value not given (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: value not given (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 
   if (asn_INTEGER2long(st, &value)) {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: value too large (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: value too large (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 
@@ -116,9 +107,8 @@ static int memb_Ngap_usageCountDL_constraint_1(
     /* Constraint check succeeded */
     return 0;
   } else {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: constraint failed (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: constraint failed (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 }
@@ -278,7 +268,7 @@ asn_TYPE_member_t asn_MBR_Ngap_VolumeTimedReport_Item_1[] = {
      0, /* No default value */
      "iE-Extensions"},
 };
-static const int asn_MAP_Ngap_VolumeTimedReport_Item_oms_1[]            = {4};
+static const int asn_MAP_Ngap_VolumeTimedReport_Item_oms_1[] = {4};
 static const ber_tlv_tag_t asn_DEF_Ngap_VolumeTimedReport_Item_tags_1[] = {
     (ASN_TAG_CLASS_UNIVERSAL | (16 << 2))};
 static const asn_TYPE_tag2member_t

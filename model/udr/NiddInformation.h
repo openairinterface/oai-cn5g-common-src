@@ -31,7 +31,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class NiddInformation {
- public:
+public:
   NiddInformation();
   virtual ~NiddInformation();
 
@@ -44,26 +44,26 @@ class NiddInformation {
   ///
   /// </summary>
   std::string getAfId() const;
-  void setAfId(std::string const& value);
+  void setAfId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getGpsi() const;
-  void setGpsi(std::string const& value);
+  void setGpsi(std::string const &value);
   bool gpsiIsSet() const;
   void unsetGpsi();
   /// <summary>
   ///
   /// </summary>
   std::string getExtGroupId() const;
-  void setExtGroupId(std::string const& value);
+  void setExtGroupId(std::string const &value);
   bool extGroupIdIsSet() const;
   void unsetExtGroupId();
 
-  friend void to_json(nlohmann::json& j, const NiddInformation& o);
-  friend void from_json(const nlohmann::json& j, NiddInformation& o);
+  friend void to_json(nlohmann::json &j, const NiddInformation &o);
+  friend void from_json(const nlohmann::json &j, NiddInformation &o);
 
- protected:
+protected:
   std::string m_AfId;
 
   std::string m_Gpsi;
@@ -72,6 +72,6 @@ class NiddInformation {
   bool m_ExtGroupIdIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* NiddInformation_H_ */

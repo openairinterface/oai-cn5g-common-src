@@ -19,11 +19,11 @@
 #ifndef ScheduledCommunicationTimeRm_H_
 #define ScheduledCommunicationTimeRm_H_
 
-#include <string>
-#include "ScheduledCommunicationTime.h"
 #include "NullValue.h"
-#include <vector>
+#include "ScheduledCommunicationTime.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::common {
 
@@ -31,7 +31,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class ScheduledCommunicationTimeRm {
- public:
+public:
   ScheduledCommunicationTimeRm();
   virtual ~ScheduledCommunicationTimeRm() = default;
 
@@ -45,16 +45,16 @@ class ScheduledCommunicationTimeRm {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const ScheduledCommunicationTimeRm& rhs) const;
-  bool operator!=(const ScheduledCommunicationTimeRm& rhs) const;
+  bool operator==(const ScheduledCommunicationTimeRm &rhs) const;
+  bool operator!=(const ScheduledCommunicationTimeRm &rhs) const;
 
   /////////////////////////////////////////////
   /// ScheduledCommunicationTimeRm members
@@ -73,7 +73,7 @@ class ScheduledCommunicationTimeRm {
   /// UTC).
   /// </summary>
   std::string getTimeOfDayStart() const;
-  void setTimeOfDayStart(std::string const& value);
+  void setTimeOfDayStart(std::string const &value);
   bool timeOfDayStartIsSet() const;
   void unsetTimeOfDayStart();
   /// <summary>
@@ -82,15 +82,15 @@ class ScheduledCommunicationTimeRm {
   /// UTC).
   /// </summary>
   std::string getTimeOfDayEnd() const;
-  void setTimeOfDayEnd(std::string const& value);
+  void setTimeOfDayEnd(std::string const &value);
   bool timeOfDayEndIsSet() const;
   void unsetTimeOfDayEnd();
 
-  friend void to_json(nlohmann::json& j, const ScheduledCommunicationTimeRm& o);
-  friend void from_json(
-      const nlohmann::json& j, ScheduledCommunicationTimeRm& o);
+  friend void to_json(nlohmann::json &j, const ScheduledCommunicationTimeRm &o);
+  friend void from_json(const nlohmann::json &j,
+                        ScheduledCommunicationTimeRm &o);
 
- protected:
+protected:
   std::vector<int32_t> m_DaysOfWeek;
   bool m_DaysOfWeekIsSet;
   std::string m_TimeOfDayStart;
@@ -99,6 +99,6 @@ class ScheduledCommunicationTimeRm {
   bool m_TimeOfDayEndIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* ScheduledCommunicationTimeRm_H_ */

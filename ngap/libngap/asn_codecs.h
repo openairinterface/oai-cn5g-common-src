@@ -51,16 +51,16 @@ typedef struct asn_enc_rval_s {
    */
 
   /* Type which cannot be encoded */
-  const struct asn_TYPE_descriptor_s* failed_type;
+  const struct asn_TYPE_descriptor_s *failed_type;
 
   /* Pointer to the structure of that type */
-  const void* structure_ptr;
+  const void *structure_ptr;
 } asn_enc_rval_t;
 #define ASN__ENCODE_FAILED                                                     \
   do {                                                                         \
     asn_enc_rval_t tmp_error;                                                  \
-    tmp_error.encoded       = -1;                                              \
-    tmp_error.failed_type   = td;                                              \
+    tmp_error.encoded = -1;                                                    \
+    tmp_error.failed_type = td;                                                \
     tmp_error.structure_ptr = sptr;                                            \
     ASN_DEBUG("Failed to encode element %s", td ? td->name : "");              \
     return tmp_error;                                                          \
@@ -68,7 +68,7 @@ typedef struct asn_enc_rval_s {
 #define ASN__ENCODED_OK(rval)                                                  \
   do {                                                                         \
     rval.structure_ptr = 0;                                                    \
-    rval.failed_type   = 0;                                                    \
+    rval.failed_type = 0;                                                      \
     return rval;                                                               \
   } while (0)
 
@@ -92,7 +92,7 @@ typedef struct asn_dec_rval_s {
 #define ASN__DECODE_FAILED                                                     \
   do {                                                                         \
     asn_dec_rval_t tmp_error;                                                  \
-    tmp_error.code     = RC_FAIL;                                              \
+    tmp_error.code = RC_FAIL;                                                  \
     tmp_error.consumed = 0;                                                    \
     ASN_DEBUG("Failed to decode element %s", td ? td->name : "");              \
     return tmp_error;                                                          \
@@ -100,7 +100,7 @@ typedef struct asn_dec_rval_s {
 #define ASN__DECODE_STARVED                                                    \
   do {                                                                         \
     asn_dec_rval_t tmp_error;                                                  \
-    tmp_error.code     = RC_WMORE;                                             \
+    tmp_error.code = RC_WMORE;                                                 \
     tmp_error.consumed = 0;                                                    \
     return tmp_error;                                                          \
   } while (0)

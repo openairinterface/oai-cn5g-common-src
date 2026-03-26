@@ -18,9 +18,7 @@
 
 namespace oai::model::common {
 
-OdbData::OdbData() {
-  m_RoamingOdbIsSet = false;
-}
+OdbData::OdbData() { m_RoamingOdbIsSet = false; }
 
 void OdbData::validate() const {
   std::stringstream msg;
@@ -29,19 +27,19 @@ void OdbData::validate() const {
   }
 }
 
-bool OdbData::validate(std::stringstream& msg) const {
+bool OdbData::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool OdbData::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool OdbData::validate(std::stringstream &msg,
+                       const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "OdbData" : pathPrefix;
 
   return success;
 }
 
-bool OdbData::operator==(const OdbData& rhs) const {
+bool OdbData::operator==(const OdbData &rhs) const {
   return
 
       ((!roamingOdbIsSet() && !rhs.roamingOdbIsSet()) ||
@@ -51,16 +49,15 @@ bool OdbData::operator==(const OdbData& rhs) const {
           ;
 }
 
-bool OdbData::operator!=(const OdbData& rhs) const {
-  return !(*this == rhs);
-}
+bool OdbData::operator!=(const OdbData &rhs) const { return !(*this == rhs); }
 
-void to_json(nlohmann::json& j, const OdbData& o) {
+void to_json(nlohmann::json &j, const OdbData &o) {
   j = nlohmann::json();
-  if (o.roamingOdbIsSet()) j["roamingOdb"] = o.m_RoamingOdb;
+  if (o.roamingOdbIsSet())
+    j["roamingOdb"] = o.m_RoamingOdb;
 }
 
-void from_json(const nlohmann::json& j, OdbData& o) {
+void from_json(const nlohmann::json &j, OdbData &o) {
   if (j.find("roamingOdb") != j.end()) {
     j.at("roamingOdb").get_to(o.m_RoamingOdb);
     o.m_RoamingOdbIsSet = true;
@@ -70,15 +67,11 @@ void from_json(const nlohmann::json& j, OdbData& o) {
 oai::model::common::RoamingOdb OdbData::getRoamingOdb() const {
   return m_RoamingOdb;
 }
-void OdbData::setRoamingOdb(oai::model::common::RoamingOdb const& value) {
-  m_RoamingOdb      = value;
+void OdbData::setRoamingOdb(oai::model::common::RoamingOdb const &value) {
+  m_RoamingOdb = value;
   m_RoamingOdbIsSet = true;
 }
-bool OdbData::roamingOdbIsSet() const {
-  return m_RoamingOdbIsSet;
-}
-void OdbData::unsetRoamingOdb() {
-  m_RoamingOdbIsSet = false;
-}
+bool OdbData::roamingOdbIsSet() const { return m_RoamingOdbIsSet; }
+void OdbData::unsetRoamingOdb() { m_RoamingOdbIsSet = false; }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

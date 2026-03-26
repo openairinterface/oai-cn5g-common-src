@@ -12,7 +12,7 @@ constexpr auto kSscModeName = "SSC Mode";
 namespace oai::nas {
 
 class SscMode : public Type1NasIe {
- public:
+public:
   SscMode();
   SscMode(uint8_t type);
   SscMode(uint8_t iei, uint8_t type);
@@ -25,12 +25,12 @@ class SscMode : public Type1NasIe {
   void SetSscMode(uint8_t value);
   uint8_t GetSscMode();
 
- private:
+private:
   void SetValue() override;
   void GetValue() override;
-  uint8_t ssc_mode_;  // 3 bits
+  uint8_t ssc_mode_; // 3 bits
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

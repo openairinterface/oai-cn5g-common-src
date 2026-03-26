@@ -12,12 +12,12 @@ namespace oai::nas {
 using namespace oai::nas;
 
 class ConfigurationUpdateCommand : public Nas5gmmMessage {
- public:
+public:
   ConfigurationUpdateCommand();
   ~ConfigurationUpdateCommand();
 
-  int Encode(uint8_t* buf, int len) override;
-  int Decode(uint8_t* buf, int len) override;
+  int Encode(uint8_t *buf, int len) override;
+  int Decode(uint8_t *buf, int len) override;
 
   uint32_t GetLength() const override;
 
@@ -26,37 +26,37 @@ class ConfigurationUpdateCommand : public Nas5gmmMessage {
   bool VerifyHeader();
 
   void SetConfigurationUpdateIndication(
-      const ConfigurationUpdateIndication& configuration_update_indication);
-  void GetConfigurationUpdateIndication(
-      std::optional<ConfigurationUpdateIndication>&
-          configuration_update_indication);
+      const ConfigurationUpdateIndication &configuration_update_indication);
+  void
+  GetConfigurationUpdateIndication(std::optional<ConfigurationUpdateIndication>
+                                       &configuration_update_indication);
 
-  void Set5gGuti(
-      const std::string& mcc, const std::string& mnc, uint8_t amf_region_id,
-      uint16_t amf_set_id, uint8_t amf_pointer, uint32_t tmsi);
+  void Set5gGuti(const std::string &mcc, const std::string &mnc,
+                 uint8_t amf_region_id, uint16_t amf_set_id,
+                 uint8_t amf_pointer, uint32_t tmsi);
   // TODO: Get
 
-  void SetFullNameForNetwork(const NetworkName& name);
-  void SetFullNameForNetwork(const std::string& text_string);
-  void GetFullNameForNetwork(std::optional<NetworkName>& name) const;
+  void SetFullNameForNetwork(const NetworkName &name);
+  void SetFullNameForNetwork(const std::string &text_string);
+  void GetFullNameForNetwork(std::optional<NetworkName> &name) const;
 
-  void SetShortNameForNetwork(const NetworkName& name);
-  void SetShortNameForNetwork(const std::string& text_string);
-  void GetShortNameForNetwork(NetworkName& name) const;
+  void SetShortNameForNetwork(const NetworkName &name);
+  void SetShortNameForNetwork(const std::string &text_string);
+  void GetShortNameForNetwork(NetworkName &name) const;
 
- private:
-  NasMmPlainHeader ie_header_;  // Mandatory
+private:
+  NasMmPlainHeader ie_header_; // Mandatory
   // Configuration update indication
   std::optional<ConfigurationUpdateIndication>
-      ie_configuration_update_indication_;        // Optional
-  std::optional<_5gsMobileIdentity> ie_5g_guti_;  // Optional
+      ie_configuration_update_indication_;       // Optional
+  std::optional<_5gsMobileIdentity> ie_5g_guti_; // Optional
   // TODO: TAI list (Optional)
   // TODO: Allowed NSSAI (Optional)
   // TODO: Service area list (Optional)
   // Full name for network (Optional)
-  std::optional<NetworkName> ie_full_name_for_network_;  // Optional
+  std::optional<NetworkName> ie_full_name_for_network_; // Optional
   // Short name for network
-  std::optional<NetworkName> ie_short_name_for_network_;  // Optional
+  std::optional<NetworkName> ie_short_name_for_network_; // Optional
   // TODO: Local time zone (Optional)
   // TODO: Universal time and local time zone (Optional)
   // TODO: Network daylight saving time (Optional)
@@ -76,6 +76,6 @@ class ConfigurationUpdateCommand : public Nas5gmmMessage {
   // TODO: Additional configuration indication (Rel 16.14.0) (Optional)
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

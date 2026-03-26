@@ -22,15 +22,15 @@ namespace oai::model::nrf {
 using namespace oai::model::common;
 
 DnnUpfInfoItem::DnnUpfInfoItem() {
-  m_Dnn                     = "";
-  m_DnaiListIsSet           = false;
-  m_PduSessionTypesIsSet    = false;
-  m_Ipv4AddressRangesIsSet  = false;
-  m_Ipv6PrefixRangesIsSet   = false;
+  m_Dnn = "";
+  m_DnaiListIsSet = false;
+  m_PduSessionTypesIsSet = false;
+  m_Ipv4AddressRangesIsSet = false;
+  m_Ipv6PrefixRangesIsSet = false;
   m_DnaiNwInstanceListIsSet = false;
 }
 
-DnnUpfInfoItem::DnnUpfInfoItem(const std::string& dnn) : DnnUpfInfoItem() {
+DnnUpfInfoItem::DnnUpfInfoItem(const std::string &dnn) : DnnUpfInfoItem() {
   m_Dnn = dnn;
 }
 
@@ -41,28 +41,28 @@ void DnnUpfInfoItem::validate() const {
   }
 }
 
-bool DnnUpfInfoItem::validate(std::stringstream& msg) const {
+bool DnnUpfInfoItem::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool DnnUpfInfoItem::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool DnnUpfInfoItem::validate(std::stringstream &msg,
+                              const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "DnnUpfInfoItem" : pathPrefix;
 
   if (dnaiListIsSet()) {
-    const std::vector<std::string>& value = m_DnaiList;
-    const std::string currentValuePath    = _pathPrefix + ".dnaiList";
+    const std::vector<std::string> &value = m_DnaiList;
+    const std::string currentValuePath = _pathPrefix + ".dnaiList";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const std::string& value : value) {
+      int i = 0;
+      for (const std::string &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -72,17 +72,17 @@ bool DnnUpfInfoItem::validate(
   }
 
   if (pduSessionTypesIsSet()) {
-    const std::vector<PduSessionType>& value = m_PduSessionTypes;
-    const std::string currentValuePath       = _pathPrefix + ".pduSessionTypes";
+    const std::vector<PduSessionType> &value = m_PduSessionTypes;
+    const std::string currentValuePath = _pathPrefix + ".pduSessionTypes";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const PduSessionType& value : value) {
+      int i = 0;
+      for (const PduSessionType &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -95,7 +95,7 @@ bool DnnUpfInfoItem::validate(
   }
 
   if (ipv4AddressRangesIsSet()) {
-    const std::vector<oai::model::nrf::Ipv4AddressRange>& value =
+    const std::vector<oai::model::nrf::Ipv4AddressRange> &value =
         m_Ipv4AddressRanges;
     const std::string currentValuePath = _pathPrefix + ".ipv4AddressRanges";
 
@@ -103,10 +103,10 @@ bool DnnUpfInfoItem::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::nrf::Ipv4AddressRange& value : value) {
+      int i = 0;
+      for (const oai::model::nrf::Ipv4AddressRange &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -120,7 +120,7 @@ bool DnnUpfInfoItem::validate(
   }
 
   if (ipv6PrefixRangesIsSet()) {
-    const std::vector<oai::model::nrf::Ipv6PrefixRange>& value =
+    const std::vector<oai::model::nrf::Ipv6PrefixRange> &value =
         m_Ipv6PrefixRanges;
     const std::string currentValuePath = _pathPrefix + ".ipv6PrefixRanges";
 
@@ -128,10 +128,10 @@ bool DnnUpfInfoItem::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::nrf::Ipv6PrefixRange& value : value) {
+      int i = 0;
+      for (const oai::model::nrf::Ipv6PrefixRange &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -144,14 +144,14 @@ bool DnnUpfInfoItem::validate(
   }
 
   if (dnaiNwInstanceListIsSet()) {
-    const std::map<std::string, std::string>& value = m_DnaiNwInstanceList;
+    const std::map<std::string, std::string> &value = m_DnaiNwInstanceList;
     const std::string currentValuePath = _pathPrefix + ".dnaiNwInstanceList";
   }
 
   return success;
 }
 
-bool DnnUpfInfoItem::operator==(const DnnUpfInfoItem& rhs) const {
+bool DnnUpfInfoItem::operator==(const DnnUpfInfoItem &rhs) const {
   return
 
       (getDnn() == rhs.getDnn()) &&
@@ -179,14 +179,15 @@ bool DnnUpfInfoItem::operator==(const DnnUpfInfoItem& rhs) const {
           ;
 }
 
-bool DnnUpfInfoItem::operator!=(const DnnUpfInfoItem& rhs) const {
+bool DnnUpfInfoItem::operator!=(const DnnUpfInfoItem &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const DnnUpfInfoItem& o) {
-  j        = nlohmann::json();
+void to_json(nlohmann::json &j, const DnnUpfInfoItem &o) {
+  j = nlohmann::json();
   j["dnn"] = o.m_Dnn;
-  if (o.dnaiListIsSet() || !o.m_DnaiList.empty()) j["dnaiList"] = o.m_DnaiList;
+  if (o.dnaiListIsSet() || !o.m_DnaiList.empty())
+    j["dnaiList"] = o.m_DnaiList;
   if (o.pduSessionTypesIsSet() || !o.m_PduSessionTypes.empty())
     j["pduSessionTypes"] = o.m_PduSessionTypes;
   if (o.ipv4AddressRangesIsSet() || !o.m_Ipv4AddressRanges.empty())
@@ -197,7 +198,7 @@ void to_json(nlohmann::json& j, const DnnUpfInfoItem& o) {
     j["dnaiNwInstanceList"] = o.m_DnaiNwInstanceList;
 }
 
-void from_json(const nlohmann::json& j, DnnUpfInfoItem& o) {
+void from_json(const nlohmann::json &j, DnnUpfInfoItem &o) {
   j.at("dnn").get_to(o.m_Dnn);
   if (j.find("dnaiList") != j.end()) {
     j.at("dnaiList").get_to(o.m_DnaiList);
@@ -221,46 +222,36 @@ void from_json(const nlohmann::json& j, DnnUpfInfoItem& o) {
   }
 }
 
-std::string DnnUpfInfoItem::getDnn() const {
-  return m_Dnn;
-}
-void DnnUpfInfoItem::setDnn(std::string const& value) {
-  m_Dnn = value;
-}
+std::string DnnUpfInfoItem::getDnn() const { return m_Dnn; }
+void DnnUpfInfoItem::setDnn(std::string const &value) { m_Dnn = value; }
 std::vector<std::string> DnnUpfInfoItem::getDnaiList() const {
   return m_DnaiList;
 }
-void DnnUpfInfoItem::setDnaiList(std::vector<std::string> const& value) {
-  m_DnaiList      = value;
+void DnnUpfInfoItem::setDnaiList(std::vector<std::string> const &value) {
+  m_DnaiList = value;
   m_DnaiListIsSet = true;
 }
-bool DnnUpfInfoItem::dnaiListIsSet() const {
-  return m_DnaiListIsSet;
-}
-void DnnUpfInfoItem::unsetDnaiList() {
-  m_DnaiListIsSet = false;
-}
+bool DnnUpfInfoItem::dnaiListIsSet() const { return m_DnaiListIsSet; }
+void DnnUpfInfoItem::unsetDnaiList() { m_DnaiListIsSet = false; }
 std::vector<PduSessionType> DnnUpfInfoItem::getPduSessionTypes() const {
   return m_PduSessionTypes;
 }
 void DnnUpfInfoItem::setPduSessionTypes(
-    std::vector<PduSessionType> const& value) {
-  m_PduSessionTypes      = value;
+    std::vector<PduSessionType> const &value) {
+  m_PduSessionTypes = value;
   m_PduSessionTypesIsSet = true;
 }
 bool DnnUpfInfoItem::pduSessionTypesIsSet() const {
   return m_PduSessionTypesIsSet;
 }
-void DnnUpfInfoItem::unsetPduSessionTypes() {
-  m_PduSessionTypesIsSet = false;
-}
+void DnnUpfInfoItem::unsetPduSessionTypes() { m_PduSessionTypesIsSet = false; }
 std::vector<oai::model::nrf::Ipv4AddressRange>
 DnnUpfInfoItem::getIpv4AddressRanges() const {
   return m_Ipv4AddressRanges;
 }
 void DnnUpfInfoItem::setIpv4AddressRanges(
-    std::vector<oai::model::nrf::Ipv4AddressRange> const& value) {
-  m_Ipv4AddressRanges      = value;
+    std::vector<oai::model::nrf::Ipv4AddressRange> const &value) {
+  m_Ipv4AddressRanges = value;
   m_Ipv4AddressRangesIsSet = true;
 }
 bool DnnUpfInfoItem::ipv4AddressRangesIsSet() const {
@@ -274,8 +265,8 @@ DnnUpfInfoItem::getIpv6PrefixRanges() const {
   return m_Ipv6PrefixRanges;
 }
 void DnnUpfInfoItem::setIpv6PrefixRanges(
-    std::vector<oai::model::nrf::Ipv6PrefixRange> const& value) {
-  m_Ipv6PrefixRanges      = value;
+    std::vector<oai::model::nrf::Ipv6PrefixRange> const &value) {
+  m_Ipv6PrefixRanges = value;
   m_Ipv6PrefixRangesIsSet = true;
 }
 bool DnnUpfInfoItem::ipv6PrefixRangesIsSet() const {
@@ -284,13 +275,13 @@ bool DnnUpfInfoItem::ipv6PrefixRangesIsSet() const {
 void DnnUpfInfoItem::unsetIpv6PrefixRanges() {
   m_Ipv6PrefixRangesIsSet = false;
 }
-std::map<std::string, std::string> DnnUpfInfoItem::getDnaiNwInstanceList()
-    const {
+std::map<std::string, std::string>
+DnnUpfInfoItem::getDnaiNwInstanceList() const {
   return m_DnaiNwInstanceList;
 }
 void DnnUpfInfoItem::setDnaiNwInstanceList(
-    std::map<std::string, std::string> const& value) {
-  m_DnaiNwInstanceList      = value;
+    std::map<std::string, std::string> const &value) {
+  m_DnaiNwInstanceList = value;
   m_DnaiNwInstanceListIsSet = true;
 }
 bool DnnUpfInfoItem::dnaiNwInstanceListIsSet() const {
@@ -310,13 +301,13 @@ std::string DnnUpfInfoItem::to_string(int indent_level) const {
 
   if (m_DnaiListIsSet) {
     out.append(fmt::format(fmt_title, "dnai_list:"));
-    for (const auto& dnai : m_DnaiList) {
+    for (const auto &dnai : m_DnaiList) {
       out.append(fmt::format(fmt_value_inner, "dnai", dnai));
     }
   }
   if (m_DnaiNwInstanceListIsSet) {
     out.append(fmt::format(fmt_title, "dnai_nw_instance_list:"));
-    for (const auto& nwi : m_DnaiNwInstanceList) {
+    for (const auto &nwi : m_DnaiNwInstanceList) {
       out.append(fmt::format(fmt_value_inner, nwi.first, nwi.second));
     }
   }
@@ -324,4 +315,4 @@ std::string DnnUpfInfoItem::to_string(int indent_level) const {
   // TODO other values
   return out;
 }
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

@@ -14,19 +14,19 @@ constexpr auto kExtendedProtocolDiscriminatorIeName =
 namespace oai::nas {
 
 class ExtendedProtocolDiscriminator : public NasIe {
- public:
-  ExtendedProtocolDiscriminator(){};  // TODO: = delete;
+public:
+  ExtendedProtocolDiscriminator(){}; // TODO: = delete;
   ExtendedProtocolDiscriminator(uint8_t epd);
   virtual ~ExtendedProtocolDiscriminator() = default;
 
-  ExtendedProtocolDiscriminator& operator=(
-      const struct ExtendedProtocolDiscriminator& epd) {
+  ExtendedProtocolDiscriminator &
+  operator=(const struct ExtendedProtocolDiscriminator &epd) {
     epd_ = epd.epd_;
     return *this;
   }
 
-  int Encode(uint8_t* buf, int len) const override;
-  int Decode(const uint8_t* const buf, int len, bool is_iei = true) override;
+  int Encode(uint8_t *buf, int len) const override;
+  int Decode(const uint8_t *const buf, int len, bool is_iei = true) override;
 
   static std::string GetIeName() {
     return kExtendedProtocolDiscriminatorIeName;
@@ -36,13 +36,13 @@ class ExtendedProtocolDiscriminator : public NasIe {
   bool Validate(int len) const override;
 
   void Set(uint8_t epd);
-  void Get(uint8_t& epd) const;
+  void Get(uint8_t &epd) const;
   uint8_t Get() const;
 
- private:
+private:
   uint8_t epd_;
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

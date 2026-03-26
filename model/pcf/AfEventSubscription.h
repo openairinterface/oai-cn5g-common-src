@@ -30,7 +30,7 @@ namespace oai::model::pcf {
 /// Describes the event information delivered in the subscription.
 /// </summary>
 class AfEventSubscription {
- public:
+public:
   AfEventSubscription();
   virtual ~AfEventSubscription() = default;
 
@@ -44,16 +44,16 @@ class AfEventSubscription {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const AfEventSubscription& rhs) const;
-  bool operator!=(const AfEventSubscription& rhs) const;
+  bool operator==(const AfEventSubscription &rhs) const;
+  bool operator!=(const AfEventSubscription &rhs) const;
 
   /////////////////////////////////////////////
   /// AfEventSubscription members
@@ -62,12 +62,12 @@ class AfEventSubscription {
   ///
   /// </summary>
   oai::model::pcf::AfEvent getEvent() const;
-  void setEvent(oai::model::pcf::AfEvent const& value);
+  void setEvent(oai::model::pcf::AfEvent const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::AfNotifMethod getNotifMethod() const;
-  void setNotifMethod(oai::model::pcf::AfNotifMethod const& value);
+  void setNotifMethod(oai::model::pcf::AfNotifMethod const &value);
   bool notifMethodIsSet() const;
   void unsetNotifMethod();
   /// <summary>
@@ -88,14 +88,14 @@ class AfEventSubscription {
   ///
   /// </summary>
   oai::model::pcf::QosMonitoringParamType getQosMonParamType() const;
-  void setQosMonParamType(oai::model::pcf::QosMonitoringParamType const& value);
+  void setQosMonParamType(oai::model::pcf::QosMonitoringParamType const &value);
   bool qosMonParamTypeIsSet() const;
   void unsetQosMonParamType();
 
-  friend void to_json(nlohmann::json& j, const AfEventSubscription& o);
-  friend void from_json(const nlohmann::json& j, AfEventSubscription& o);
+  friend void to_json(nlohmann::json &j, const AfEventSubscription &o);
+  friend void from_json(const nlohmann::json &j, AfEventSubscription &o);
 
- protected:
+protected:
   oai::model::pcf::AfEvent m_Event;
 
   oai::model::pcf::AfNotifMethod m_NotifMethod;
@@ -108,6 +108,6 @@ class AfEventSubscription {
   bool m_QosMonParamTypeIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* AfEventSubscription_H_ */

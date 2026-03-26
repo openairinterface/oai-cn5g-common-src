@@ -11,9 +11,7 @@
 using namespace oai::nas;
 
 //------------------------------------------------------------------------------
-Type3NasIe::Type3NasIe() : NasIe() {
-  iei_ = std::nullopt;
-}
+Type3NasIe::Type3NasIe() : NasIe() { iei_ = std::nullopt; }
 
 //------------------------------------------------------------------------------
 Type3NasIe::Type3NasIe(uint8_t iei) : NasIe() {
@@ -24,9 +22,7 @@ Type3NasIe::Type3NasIe(uint8_t iei) : NasIe() {
 // Type3NasIe::~Type3NasIe() {}
 
 //------------------------------------------------------------------------------
-void Type3NasIe::SetIei(uint8_t iei) {
-  iei_ = std::optional<uint8_t>(iei);
-}
+void Type3NasIe::SetIei(uint8_t iei) { iei_ = std::optional<uint8_t>(iei); }
 
 //------------------------------------------------------------------------------
 bool Type3NasIe::Validate(int len) const {
@@ -50,11 +46,12 @@ uint32_t Type3NasIe::GetIeLength() const {
 }
 
 //------------------------------------------------------------------------------
-int Type3NasIe::Encode(uint8_t* buf, int len) const {
-  if (!Validate(len)) return KEncodeDecodeError;
+int Type3NasIe::Encode(uint8_t *buf, int len) const {
+  if (!Validate(len))
+    return KEncodeDecodeError;
 
   int encoded_size = 0;
-  uint8_t octet    = 0;
+  uint8_t octet = 0;
   if (iei_.has_value()) {
     ENCODE_U8(buf + encoded_size, iei_.value(), encoded_size);
   }
@@ -62,11 +59,12 @@ int Type3NasIe::Encode(uint8_t* buf, int len) const {
 }
 
 //------------------------------------------------------------------------------
-int Type3NasIe::Decode(const uint8_t* const buf, int len, bool is_iei) {
-  if (!Validate(len)) return KEncodeDecodeError;
+int Type3NasIe::Decode(const uint8_t *const buf, int len, bool is_iei) {
+  if (!Validate(len))
+    return KEncodeDecodeError;
 
   int decoded_size = 0;
-  uint8_t octet    = 0;
+  uint8_t octet = 0;
 
   if (is_iei) {
     DECODE_U8(buf + decoded_size, octet, decoded_size);

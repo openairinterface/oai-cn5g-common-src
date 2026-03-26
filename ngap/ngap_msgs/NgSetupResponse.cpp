@@ -28,21 +28,21 @@ void NgSetupResponseMsg::initialize() {
 }
 
 //------------------------------------------------------------------------------
-bool NgSetupResponseMsg::setAmfName(const std::string& name) {
+bool NgSetupResponseMsg::setAmfName(const std::string &name) {
   if (!m_AmfName.set(name)) {
     oai::logger::logger_common::ngap().warn("Not a valid AMF Name value!");
     return false;
   }
 
-  Ngap_NGSetupResponseIEs_t* ie =
-      (Ngap_NGSetupResponseIEs_t*) calloc(1, sizeof(Ngap_NGSetupResponseIEs_t));
-  ie->id            = Ngap_ProtocolIE_ID_id_AMFName;
-  ie->criticality   = Ngap_Criticality_reject;
+  Ngap_NGSetupResponseIEs_t *ie =
+      (Ngap_NGSetupResponseIEs_t *)calloc(1, sizeof(Ngap_NGSetupResponseIEs_t));
+  ie->id = Ngap_ProtocolIE_ID_id_AMFName;
+  ie->criticality = Ngap_Criticality_reject;
   ie->value.present = Ngap_NGSetupResponseIEs__value_PR_AMFName;
 
   if (!m_AmfName.encode(ie->value.choice.AMFName)) {
     oai::logger::logger_common::ngap().error("Encode NGAP AMFName IE error");
-    oai::utils::utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void **)&ie);
     return false;
   }
 
@@ -55,13 +55,12 @@ bool NgSetupResponseMsg::setAmfName(const std::string& name) {
 }
 
 //------------------------------------------------------------------------------
-void NgSetupResponseMsg::setGuamiList(std::vector<struct GuamiItem_s>& list) {
+void NgSetupResponseMsg::setGuamiList(std::vector<struct GuamiItem_s> &list) {
   ServedGuamiItem servedGUAMIItem = {};
   for (int i = 0; i < list.size(); i++) {
     Guami guami = {};
-    guami.set(
-        list[i].mcc, list[i].mnc, list[i].regionId, list[i].amfSetId,
-        list[i].amfPointer);
+    guami.set(list[i].mcc, list[i].mnc, list[i].regionId, list[i].amfSetId,
+              list[i].amfPointer);
     servedGUAMIItem.setGuami(guami);
 
     if (list[i].backupAmfName.size() > 0) {
@@ -73,16 +72,16 @@ void NgSetupResponseMsg::setGuamiList(std::vector<struct GuamiItem_s>& list) {
     m_ServedGuamiList.addItem(servedGUAMIItem);
   }
 
-  Ngap_NGSetupResponseIEs_t* ie =
-      (Ngap_NGSetupResponseIEs_t*) calloc(1, sizeof(Ngap_NGSetupResponseIEs_t));
-  ie->id            = Ngap_ProtocolIE_ID_id_ServedGUAMIList;
-  ie->criticality   = Ngap_Criticality_reject;
+  Ngap_NGSetupResponseIEs_t *ie =
+      (Ngap_NGSetupResponseIEs_t *)calloc(1, sizeof(Ngap_NGSetupResponseIEs_t));
+  ie->id = Ngap_ProtocolIE_ID_id_ServedGUAMIList;
+  ie->criticality = Ngap_Criticality_reject;
   ie->value.present = Ngap_NGSetupResponseIEs__value_PR_ServedGUAMIList;
 
   if (!m_ServedGuamiList.encode(ie->value.choice.ServedGUAMIList)) {
     oai::logger::logger_common::ngap().error(
         "Encode NGAP ServedGUAMIList IE error");
-    oai::utils::utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void **)&ie);
     return;
   }
 
@@ -93,19 +92,19 @@ void NgSetupResponseMsg::setGuamiList(std::vector<struct GuamiItem_s>& list) {
 }
 
 //------------------------------------------------------------------------------
-void NgSetupResponseMsg::setRelativeAmfCapacity(const long& capacity) {
+void NgSetupResponseMsg::setRelativeAmfCapacity(const long &capacity) {
   m_RelativeAmfCapacity.set(capacity);
 
-  Ngap_NGSetupResponseIEs_t* ie =
-      (Ngap_NGSetupResponseIEs_t*) calloc(1, sizeof(Ngap_NGSetupResponseIEs_t));
-  ie->id            = Ngap_ProtocolIE_ID_id_RelativeAMFCapacity;
-  ie->criticality   = Ngap_Criticality_ignore;
+  Ngap_NGSetupResponseIEs_t *ie =
+      (Ngap_NGSetupResponseIEs_t *)calloc(1, sizeof(Ngap_NGSetupResponseIEs_t));
+  ie->id = Ngap_ProtocolIE_ID_id_RelativeAMFCapacity;
+  ie->criticality = Ngap_Criticality_ignore;
   ie->value.present = Ngap_NGSetupResponseIEs__value_PR_RelativeAMFCapacity;
 
   if (!m_RelativeAmfCapacity.encode(ie->value.choice.RelativeAMFCapacity)) {
     oai::logger::logger_common::ngap().error(
         "Encode NGAP RelativeAMFCapacity IE error");
-    oai::utils::utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void **)&ie);
     return;
   }
 
@@ -116,19 +115,19 @@ void NgSetupResponseMsg::setRelativeAmfCapacity(const long& capacity) {
 }
 
 //------------------------------------------------------------------------------
-void NgSetupResponseMsg::setPlmnSupportList(const PlmnSupportList& list) {
+void NgSetupResponseMsg::setPlmnSupportList(const PlmnSupportList &list) {
   m_PlmnSupportList = list;
 
-  Ngap_NGSetupResponseIEs_t* ie =
-      (Ngap_NGSetupResponseIEs_t*) calloc(1, sizeof(Ngap_NGSetupResponseIEs_t));
-  ie->id            = Ngap_ProtocolIE_ID_id_PLMNSupportList;
-  ie->criticality   = Ngap_Criticality_reject;
+  Ngap_NGSetupResponseIEs_t *ie =
+      (Ngap_NGSetupResponseIEs_t *)calloc(1, sizeof(Ngap_NGSetupResponseIEs_t));
+  ie->id = Ngap_ProtocolIE_ID_id_PLMNSupportList;
+  ie->criticality = Ngap_Criticality_reject;
   ie->value.present = Ngap_NGSetupResponseIEs__value_PR_PLMNSupportList;
 
   if (!m_PlmnSupportList.encode(ie->value.choice.PLMNSupportList)) {
     oai::logger::logger_common::ngap().error(
         "Encode NGAP PLMNSupportList IE error");
-    oai::utils::utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void **)&ie);
     return;
   }
 
@@ -139,7 +138,7 @@ void NgSetupResponseMsg::setPlmnSupportList(const PlmnSupportList& list) {
 }
 
 //------------------------------------------------------------------------------
-bool NgSetupResponseMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
+bool NgSetupResponseMsg::decode(Ngap_NGAP_PDU_t *ngapMsgPdu) {
   ngapPdu = ngapMsgPdu;
 
   if (ngapPdu->present == Ngap_NGAP_PDU_PR_successfulOutcome) {
@@ -164,106 +163,105 @@ bool NgSetupResponseMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
   }
   for (int i = 0; i < m_NgSetupResponsIes->protocolIEs.list.count; i++) {
     switch (m_NgSetupResponsIes->protocolIEs.list.array[i]->id) {
-      case Ngap_ProtocolIE_ID_id_AMFName: {
-        if (m_NgSetupResponsIes->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_reject &&
-            m_NgSetupResponsIes->protocolIEs.list.array[i]->value.present ==
-                Ngap_NGSetupResponseIEs__value_PR_AMFName) {
-          if (!m_AmfName.decode(m_NgSetupResponsIes->protocolIEs.list.array[i]
-                                    ->value.choice.AMFName)) {
-            oai::logger::logger_common::ngap().error(
-                "Decoded NGAP AMFName error");
-            return false;
-          }
-        } else {
+    case Ngap_ProtocolIE_ID_id_AMFName: {
+      if (m_NgSetupResponsIes->protocolIEs.list.array[i]->criticality ==
+              Ngap_Criticality_reject &&
+          m_NgSetupResponsIes->protocolIEs.list.array[i]->value.present ==
+              Ngap_NGSetupResponseIEs__value_PR_AMFName) {
+        if (!m_AmfName.decode(m_NgSetupResponsIes->protocolIEs.list.array[i]
+                                  ->value.choice.AMFName)) {
           oai::logger::logger_common::ngap().error(
               "Decoded NGAP AMFName error");
           return false;
         }
-      } break;
-      case Ngap_ProtocolIE_ID_id_ServedGUAMIList: {
-        if (m_NgSetupResponsIes->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_reject &&
-            m_NgSetupResponsIes->protocolIEs.list.array[i]->value.present ==
-                Ngap_NGSetupResponseIEs__value_PR_ServedGUAMIList) {
-          if (!m_ServedGuamiList.decode(
-                  m_NgSetupResponsIes->protocolIEs.list.array[i]
-                      ->value.choice.ServedGUAMIList)) {
-            oai::logger::logger_common::ngap().error(
-                "Decoded NGAP ServedGUAMIList error");
-            return false;
-          }
-        } else {
+      } else {
+        oai::logger::logger_common::ngap().error("Decoded NGAP AMFName error");
+        return false;
+      }
+    } break;
+    case Ngap_ProtocolIE_ID_id_ServedGUAMIList: {
+      if (m_NgSetupResponsIes->protocolIEs.list.array[i]->criticality ==
+              Ngap_Criticality_reject &&
+          m_NgSetupResponsIes->protocolIEs.list.array[i]->value.present ==
+              Ngap_NGSetupResponseIEs__value_PR_ServedGUAMIList) {
+        if (!m_ServedGuamiList.decode(
+                m_NgSetupResponsIes->protocolIEs.list.array[i]
+                    ->value.choice.ServedGUAMIList)) {
           oai::logger::logger_common::ngap().error(
               "Decoded NGAP ServedGUAMIList error");
           return false;
         }
-      } break;
-      case Ngap_ProtocolIE_ID_id_RelativeAMFCapacity: {
-        if (m_NgSetupResponsIes->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_ignore &&
-            m_NgSetupResponsIes->protocolIEs.list.array[i]->value.present ==
-                Ngap_NGSetupResponseIEs__value_PR_RelativeAMFCapacity) {
-          if (!m_RelativeAmfCapacity.decode(
-                  m_NgSetupResponsIes->protocolIEs.list.array[i]
-                      ->value.choice.RelativeAMFCapacity)) {
-            oai::logger::logger_common::ngap().error(
-                "Decoded NGAP RelativeAMFCapacity error");
-            return false;
-          }
-        } else {
+      } else {
+        oai::logger::logger_common::ngap().error(
+            "Decoded NGAP ServedGUAMIList error");
+        return false;
+      }
+    } break;
+    case Ngap_ProtocolIE_ID_id_RelativeAMFCapacity: {
+      if (m_NgSetupResponsIes->protocolIEs.list.array[i]->criticality ==
+              Ngap_Criticality_ignore &&
+          m_NgSetupResponsIes->protocolIEs.list.array[i]->value.present ==
+              Ngap_NGSetupResponseIEs__value_PR_RelativeAMFCapacity) {
+        if (!m_RelativeAmfCapacity.decode(
+                m_NgSetupResponsIes->protocolIEs.list.array[i]
+                    ->value.choice.RelativeAMFCapacity)) {
           oai::logger::logger_common::ngap().error(
               "Decoded NGAP RelativeAMFCapacity error");
           return false;
         }
-      } break;
-      case Ngap_ProtocolIE_ID_id_PLMNSupportList: {
-        if (m_NgSetupResponsIes->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_reject &&
-            m_NgSetupResponsIes->protocolIEs.list.array[i]->value.present ==
-                Ngap_NGSetupResponseIEs__value_PR_PLMNSupportList) {
-          if (!m_PlmnSupportList.decode(
-                  m_NgSetupResponsIes->protocolIEs.list.array[i]
-                      ->value.choice.PLMNSupportList)) {
-            oai::logger::logger_common::ngap().error(
-                "Decoded NGAP PLMNSupportList error");
-            return false;
-          }
-        } else {
+      } else {
+        oai::logger::logger_common::ngap().error(
+            "Decoded NGAP RelativeAMFCapacity error");
+        return false;
+      }
+    } break;
+    case Ngap_ProtocolIE_ID_id_PLMNSupportList: {
+      if (m_NgSetupResponsIes->protocolIEs.list.array[i]->criticality ==
+              Ngap_Criticality_reject &&
+          m_NgSetupResponsIes->protocolIEs.list.array[i]->value.present ==
+              Ngap_NGSetupResponseIEs__value_PR_PLMNSupportList) {
+        if (!m_PlmnSupportList.decode(
+                m_NgSetupResponsIes->protocolIEs.list.array[i]
+                    ->value.choice.PLMNSupportList)) {
           oai::logger::logger_common::ngap().error(
               "Decoded NGAP PLMNSupportList error");
           return false;
         }
-      } break;
-      case Ngap_ProtocolIE_ID_id_UERetentionInformation: {
-        if (m_NgSetupResponsIes->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_ignore &&
-            m_NgSetupResponsIes->protocolIEs.list.array[i]->value.present ==
-                Ngap_NGSetupResponseIEs__value_PR_UERetentionInformation) {
-          UeRetentionInformation tmp = {};
-          if (!tmp.decode(m_NgSetupResponsIes->protocolIEs.list.array[i]
-                              ->value.choice.UERetentionInformation)) {
-            oai::logger::logger_common::ngap().error(
-                "Decoded NGAP UeRetentionInformation IE error");
-            return false;
-          }
-          m_UeRetentionInformation =
-              std::make_optional<UeRetentionInformation>(tmp);
-        } else {
+      } else {
+        oai::logger::logger_common::ngap().error(
+            "Decoded NGAP PLMNSupportList error");
+        return false;
+      }
+    } break;
+    case Ngap_ProtocolIE_ID_id_UERetentionInformation: {
+      if (m_NgSetupResponsIes->protocolIEs.list.array[i]->criticality ==
+              Ngap_Criticality_ignore &&
+          m_NgSetupResponsIes->protocolIEs.list.array[i]->value.present ==
+              Ngap_NGSetupResponseIEs__value_PR_UERetentionInformation) {
+        UeRetentionInformation tmp = {};
+        if (!tmp.decode(m_NgSetupResponsIes->protocolIEs.list.array[i]
+                            ->value.choice.UERetentionInformation)) {
           oai::logger::logger_common::ngap().error(
               "Decoded NGAP UeRetentionInformation IE error");
           return false;
         }
-      } break;
-      case Ngap_ProtocolIE_ID_id_CriticalityDiagnostics: {
-        oai::logger::logger_common::ngap().debug(
-            "Decoded NGAP CriticalityDiagnostics");
-      } break;
-      default: {
+        m_UeRetentionInformation =
+            std::make_optional<UeRetentionInformation>(tmp);
+      } else {
         oai::logger::logger_common::ngap().error(
-            "Decoded NGAP Message PDU error");
+            "Decoded NGAP UeRetentionInformation IE error");
         return false;
       }
+    } break;
+    case Ngap_ProtocolIE_ID_id_CriticalityDiagnostics: {
+      oai::logger::logger_common::ngap().debug(
+          "Decoded NGAP CriticalityDiagnostics");
+    } break;
+    default: {
+      oai::logger::logger_common::ngap().error(
+          "Decoded NGAP Message PDU error");
+      return false;
+    }
     }
   }
 
@@ -271,25 +269,24 @@ bool NgSetupResponseMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
 }
 
 //------------------------------------------------------------------------------
-bool NgSetupResponseMsg::getAmfName(std::string& name) const {
+bool NgSetupResponseMsg::getAmfName(std::string &name) const {
   m_AmfName.get(name);
   return true;
 }
 
 //------------------------------------------------------------------------------
 bool NgSetupResponseMsg::getGuamiList(
-    std::vector<struct GuamiItem_s>& list) const {
+    std::vector<struct GuamiItem_s> &list) const {
   std::vector<ServedGuamiItem> servedGUAMIItems;
   m_ServedGuamiList.get(servedGUAMIItems);
 
   for (std::vector<ServedGuamiItem>::iterator it = std::begin(servedGUAMIItems);
        it != std::end(servedGUAMIItems); ++it) {
     GuamiItem_t guamiItem = {};
-    Guami guami           = {};
+    Guami guami = {};
     it->getGuami(guami);
-    guami.get(
-        guamiItem.mcc, guamiItem.mnc, guamiItem.regionId, guamiItem.amfSetId,
-        guamiItem.amfPointer);
+    guami.get(guamiItem.mcc, guamiItem.mnc, guamiItem.regionId,
+              guamiItem.amfSetId, guamiItem.amfPointer);
 
     AmfName amf_name = {};
     if (it->getBackupAmfName(amf_name)) {
@@ -308,26 +305,26 @@ long NgSetupResponseMsg::getRelativeAmfCapacity() const {
 }
 
 //------------------------------------------------------------------------------
-void NgSetupResponseMsg::getPlmnSupportList(PlmnSupportList& list) const {
+void NgSetupResponseMsg::getPlmnSupportList(PlmnSupportList &list) const {
   list = m_PlmnSupportList;
 }
 
 //------------------------------------------------------------------------------
 void NgSetupResponseMsg::setUeRetentionInformation(
-    const UeRetentionInformation& value) {
+    const UeRetentionInformation &value) {
   m_UeRetentionInformation = std::make_optional<UeRetentionInformation>(value);
 
-  Ngap_NGSetupResponseIEs_t* ie =
-      (Ngap_NGSetupResponseIEs_t*) calloc(1, sizeof(Ngap_NGSetupResponseIEs_t));
-  ie->id            = Ngap_ProtocolIE_ID_id_UERetentionInformation;
-  ie->criticality   = Ngap_Criticality_ignore;
+  Ngap_NGSetupResponseIEs_t *ie =
+      (Ngap_NGSetupResponseIEs_t *)calloc(1, sizeof(Ngap_NGSetupResponseIEs_t));
+  ie->id = Ngap_ProtocolIE_ID_id_UERetentionInformation;
+  ie->criticality = Ngap_Criticality_ignore;
   ie->value.present = Ngap_NGSetupResponseIEs__value_PR_UERetentionInformation;
 
   if (!m_UeRetentionInformation.value().encode(
           ie->value.choice.UERetentionInformation)) {
     oai::logger::logger_common::ngap().error(
         "Encode NGAP UeRetentionInformation IE error");
-    oai::utils::utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void **)&ie);
     return;
   }
 
@@ -339,8 +336,8 @@ void NgSetupResponseMsg::setUeRetentionInformation(
 
 //------------------------------------------------------------------------------
 void NgSetupResponseMsg::getUeRetentionInformation(
-    std::optional<UeRetentionInformation>& value) const {
+    std::optional<UeRetentionInformation> &value) const {
   value = m_UeRetentionInformation;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

@@ -19,8 +19,8 @@
 #ifndef OdbPacketServices_H_
 #define OdbPacketServices_H_
 
-#include "OdbPacketServices_anyOf.h"
 #include "NullValue.h"
+#include "OdbPacketServices_anyOf.h"
 #include <nlohmann/json.hpp>
 
 namespace oai::model::common {
@@ -29,7 +29,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class OdbPacketServices {
- public:
+public:
   OdbPacketServices();
   virtual ~OdbPacketServices() = default;
 
@@ -43,32 +43,32 @@ class OdbPacketServices {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const OdbPacketServices& rhs) const;
-  bool operator!=(const OdbPacketServices& rhs) const;
+  bool operator==(const OdbPacketServices &rhs) const;
+  bool operator!=(const OdbPacketServices &rhs) const;
 
   /////////////////////////////////////////////
   /// OdbPacketServices members
 
-  friend void to_json(nlohmann::json& j, const OdbPacketServices& o);
-  friend void from_json(const nlohmann::json& j, OdbPacketServices& o);
+  friend void to_json(nlohmann::json &j, const OdbPacketServices &o);
+  friend void from_json(const nlohmann::json &j, OdbPacketServices &o);
 
   OdbPacketServices_anyOf getValue() const;
   void setValue(OdbPacketServices_anyOf value);
   OdbPacketServices_anyOf::eOdbPacketServices_anyOf getEnumValue() const;
   void setEnumValue(OdbPacketServices_anyOf::eOdbPacketServices_anyOf value);
 
- protected:
+protected:
   OdbPacketServices_anyOf m_value;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* OdbPacketServices_H_ */

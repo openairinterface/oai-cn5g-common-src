@@ -34,7 +34,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class EcRestriction {
- public:
+public:
   EcRestriction();
   virtual ~EcRestriction();
 
@@ -47,7 +47,7 @@ class EcRestriction {
   ///
   /// </summary>
   std::string getAfInstanceId() const;
-  void setAfInstanceId(std::string const& value);
+  void setAfInstanceId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
@@ -56,22 +56,22 @@ class EcRestriction {
   /// <summary>
   ///
   /// </summary>
-  std::vector<PlmnEcInfo>& getPlmnEcInfos();
-  void setPlmnEcInfos(std::vector<PlmnEcInfo> const& value);
+  std::vector<PlmnEcInfo> &getPlmnEcInfos();
+  void setPlmnEcInfos(std::vector<PlmnEcInfo> const &value);
   bool plmnEcInfosIsSet() const;
   void unsetPlmnEcInfos();
   /// <summary>
   ///
   /// </summary>
   std::string getMtcProviderInformation() const;
-  void setMtcProviderInformation(std::string const& value);
+  void setMtcProviderInformation(std::string const &value);
   bool mtcProviderInformationIsSet() const;
   void unsetMtcProviderInformation();
 
-  friend void to_json(nlohmann::json& j, const EcRestriction& o);
-  friend void from_json(const nlohmann::json& j, EcRestriction& o);
+  friend void to_json(nlohmann::json &j, const EcRestriction &o);
+  friend void from_json(const nlohmann::json &j, EcRestriction &o);
 
- protected:
+protected:
   std::string m_AfInstanceId;
 
   int32_t m_ReferenceId;
@@ -82,6 +82,6 @@ class EcRestriction {
   bool m_MtcProviderInformationIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* EcRestriction_H_ */

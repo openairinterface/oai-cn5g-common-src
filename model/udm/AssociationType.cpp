@@ -30,12 +30,12 @@ void AssociationType::validate() const {
   }
 }
 
-bool AssociationType::validate(std::stringstream& msg) const {
+bool AssociationType::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AssociationType::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool AssociationType::validate(std::stringstream &msg,
+                               const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AssociationType" : pathPrefix;
@@ -43,18 +43,18 @@ bool AssociationType::validate(
   return success;
 }
 
-bool AssociationType::operator==(const AssociationType& rhs) const {
+bool AssociationType::operator==(const AssociationType &rhs) const {
   return true;
 }
 
-bool AssociationType::operator!=(const AssociationType& rhs) const {
+bool AssociationType::operator!=(const AssociationType &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AssociationType& o) {
+void to_json(nlohmann::json &j, const AssociationType &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, AssociationType& o) {}
+void from_json(const nlohmann::json &j, AssociationType &o) {}
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

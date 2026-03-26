@@ -19,10 +19,10 @@
 #ifndef FlowInformation_H_
 #define FlowInformation_H_
 
-#include "FlowDirectionRm.h"
 #include "EthFlowDescription.h"
-#include <string>
+#include "FlowDirectionRm.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::pcf {
 
@@ -30,7 +30,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class FlowInformation {
- public:
+public:
   FlowInformation();
   virtual ~FlowInformation() = default;
 
@@ -44,16 +44,16 @@ class FlowInformation {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const FlowInformation& rhs) const;
-  bool operator!=(const FlowInformation& rhs) const;
+  bool operator==(const FlowInformation &rhs) const;
+  bool operator!=(const FlowInformation &rhs) const;
 
   /////////////////////////////////////////////
   /// FlowInformation members
@@ -62,21 +62,21 @@ class FlowInformation {
   /// Defines a packet filter for an IP flow.
   /// </summary>
   std::string getFlowDescription() const;
-  void setFlowDescription(std::string const& value);
+  void setFlowDescription(std::string const &value);
   bool flowDescriptionIsSet() const;
   void unsetFlowDescription();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::EthFlowDescription getEthFlowDescription() const;
-  void setEthFlowDescription(oai::model::pcf::EthFlowDescription const& value);
+  void setEthFlowDescription(oai::model::pcf::EthFlowDescription const &value);
   bool ethFlowDescriptionIsSet() const;
   void unsetEthFlowDescription();
   /// <summary>
   /// An identifier of packet filter.
   /// </summary>
   std::string getPackFiltId() const;
-  void setPackFiltId(std::string const& value);
+  void setPackFiltId(std::string const &value);
   bool packFiltIdIsSet() const;
   void unsetPackFiltId();
   /// <summary>
@@ -91,35 +91,35 @@ class FlowInformation {
   /// field and mask field.
   /// </summary>
   std::string getTosTrafficClass() const;
-  void setTosTrafficClass(std::string const& value);
+  void setTosTrafficClass(std::string const &value);
   bool tosTrafficClassIsSet() const;
   void unsetTosTrafficClass();
   /// <summary>
   /// the security parameter index of the IPSec packet.
   /// </summary>
   std::string getSpi() const;
-  void setSpi(std::string const& value);
+  void setSpi(std::string const &value);
   bool spiIsSet() const;
   void unsetSpi();
   /// <summary>
   /// the Ipv6 flow label header field.
   /// </summary>
   std::string getFlowLabel() const;
-  void setFlowLabel(std::string const& value);
+  void setFlowLabel(std::string const &value);
   bool flowLabelIsSet() const;
   void unsetFlowLabel();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::FlowDirectionRm getFlowDirection() const;
-  void setFlowDirection(oai::model::pcf::FlowDirectionRm const& value);
+  void setFlowDirection(oai::model::pcf::FlowDirectionRm const &value);
   bool flowDirectionIsSet() const;
   void unsetFlowDirection();
 
-  friend void to_json(nlohmann::json& j, const FlowInformation& o);
-  friend void from_json(const nlohmann::json& j, FlowInformation& o);
+  friend void to_json(nlohmann::json &j, const FlowInformation &o);
+  friend void from_json(const nlohmann::json &j, FlowInformation &o);
 
- protected:
+protected:
   std::string m_FlowDescription;
   bool m_FlowDescriptionIsSet;
   oai::model::pcf::EthFlowDescription m_EthFlowDescription;
@@ -138,6 +138,6 @@ class FlowInformation {
   bool m_FlowDirectionIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* FlowInformation_H_ */

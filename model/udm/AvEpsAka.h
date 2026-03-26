@@ -33,7 +33,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class AvEpsAka {
- public:
+public:
   AvEpsAka();
   virtual ~AvEpsAka();
 
@@ -46,32 +46,32 @@ class AvEpsAka {
   ///
   /// </summary>
   HssAvType getAvType() const;
-  void setAvType(HssAvType const& value);
+  void setAvType(HssAvType const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getRand() const;
-  void setRand(std::string const& value);
+  void setRand(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getXres() const;
-  void setXres(std::string const& value);
+  void setXres(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getAutn() const;
-  void setAutn(std::string const& value);
+  void setAutn(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getKasme() const;
-  void setKasme(std::string const& value);
+  void setKasme(std::string const &value);
 
-  friend void to_json(nlohmann::json& j, const AvEpsAka& o);
-  friend void from_json(const nlohmann::json& j, AvEpsAka& o);
+  friend void to_json(nlohmann::json &j, const AvEpsAka &o);
+  friend void from_json(const nlohmann::json &j, AvEpsAka &o);
 
- protected:
+protected:
   HssAvType m_AvType;
 
   std::string m_Rand;
@@ -83,6 +83,6 @@ class AvEpsAka {
   std::string m_Kasme;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* AvEpsAka_H_ */

@@ -27,7 +27,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class ExternalClientType_anyOf {
- public:
+public:
   ExternalClientType_anyOf();
   virtual ~ExternalClientType_anyOf() = default;
 
@@ -56,16 +56,16 @@ class ExternalClientType_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const ExternalClientType_anyOf& rhs) const;
-  bool operator!=(const ExternalClientType_anyOf& rhs) const;
+  bool operator==(const ExternalClientType_anyOf &rhs) const;
+  bool operator!=(const ExternalClientType_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// ExternalClientType_anyOf members
@@ -73,15 +73,15 @@ class ExternalClientType_anyOf {
   ExternalClientType_anyOf::eExternalClientType_anyOf getValue() const;
   void setValue(ExternalClientType_anyOf::eExternalClientType_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const ExternalClientType_anyOf& o);
-  friend void from_json(const nlohmann::json& j, ExternalClientType_anyOf& o);
+  friend void to_json(nlohmann::json &j, const ExternalClientType_anyOf &o);
+  friend void from_json(const nlohmann::json &j, ExternalClientType_anyOf &o);
 
- protected:
+protected:
   ExternalClientType_anyOf::eExternalClientType_anyOf m_value =
       ExternalClientType_anyOf::eExternalClientType_anyOf::
           INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* ExternalClientType_anyOf_H_ */

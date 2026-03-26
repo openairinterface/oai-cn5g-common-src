@@ -34,7 +34,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class LocationInfo {
- public:
+public:
   LocationInfo();
   virtual ~LocationInfo();
 
@@ -47,34 +47,34 @@ class LocationInfo {
   ///
   /// </summary>
   std::string getSupi() const;
-  void setSupi(std::string const& value);
+  void setSupi(std::string const &value);
   bool supiIsSet() const;
   void unsetSupi();
   /// <summary>
   ///
   /// </summary>
   std::string getGpsi() const;
-  void setGpsi(std::string const& value);
+  void setGpsi(std::string const &value);
   bool gpsiIsSet() const;
   void unsetGpsi();
   /// <summary>
   ///
   /// </summary>
-  std::vector<RegistrationLocationInfo>& getRegistrationLocationInfoList();
+  std::vector<RegistrationLocationInfo> &getRegistrationLocationInfoList();
   void setRegistrationLocationInfoList(
-      std::vector<RegistrationLocationInfo> const& value);
+      std::vector<RegistrationLocationInfo> const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
 
-  friend void to_json(nlohmann::json& j, const LocationInfo& o);
-  friend void from_json(const nlohmann::json& j, LocationInfo& o);
+  friend void to_json(nlohmann::json &j, const LocationInfo &o);
+  friend void from_json(const nlohmann::json &j, LocationInfo &o);
 
- protected:
+protected:
   std::string m_Supi;
   bool m_SupiIsSet;
   std::string m_Gpsi;
@@ -85,6 +85,6 @@ class LocationInfo {
   bool m_SupportedFeaturesIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* LocationInfo_H_ */

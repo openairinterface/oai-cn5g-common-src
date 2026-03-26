@@ -33,7 +33,7 @@ namespace oai::udr::model {
 /// Contains the SM policy data for a given DNN (and S-NSSAI).
 /// </summary>
 class SmPolicyDnnDataPatch {
- public:
+public:
   SmPolicyDnnDataPatch();
   virtual ~SmPolicyDnnDataPatch();
 
@@ -46,25 +46,25 @@ class SmPolicyDnnDataPatch {
   ///
   /// </summary>
   std::string getDnn() const;
-  void setDnn(std::string const& value);
+  void setDnn(std::string const &value);
   /// <summary>
   ///
   /// </summary>
-  std::map<std::string, std::string>& getBdtRefIds();
-  void setBdtRefIds(std::map<std::string, std::string> const& value);
+  std::map<std::string, std::string> &getBdtRefIds();
+  void setBdtRefIds(std::map<std::string, std::string> const &value);
   bool bdtRefIdsIsSet() const;
   void unsetBdtRefIds();
 
-  friend void to_json(nlohmann::json& j, const SmPolicyDnnDataPatch& o);
-  friend void from_json(const nlohmann::json& j, SmPolicyDnnDataPatch& o);
+  friend void to_json(nlohmann::json &j, const SmPolicyDnnDataPatch &o);
+  friend void from_json(const nlohmann::json &j, SmPolicyDnnDataPatch &o);
 
- protected:
+protected:
   std::string m_Dnn;
 
   std::map<std::string, std::string> m_BdtRefIds;
   bool m_BdtRefIdsIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* SmPolicyDnnDataPatch_H_ */

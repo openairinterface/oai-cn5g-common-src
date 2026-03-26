@@ -28,7 +28,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class Usage {
- public:
+public:
   Usage();
   virtual ~Usage() = default;
 
@@ -42,16 +42,16 @@ class Usage {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const Usage& rhs) const;
-  bool operator!=(const Usage& rhs) const;
+  bool operator==(const Usage &rhs) const;
+  bool operator!=(const Usage &rhs) const;
 
   /////////////////////////////////////////////
   /// Usage members
@@ -60,15 +60,15 @@ class Usage {
   void setValue(Usage_anyOf value);
   Usage_anyOf::eUsage_anyOf getEnumValue() const;
   void setEnumValue(Usage_anyOf::eUsage_anyOf value);
-  friend void to_json(nlohmann::json& j, const Usage& o);
-  friend void from_json(const nlohmann::json& j, Usage& o);
-  friend void to_json(nlohmann::json& j, const Usage_anyOf& o);
-  friend void from_json(const nlohmann::json& j, Usage_anyOf& o);
+  friend void to_json(nlohmann::json &j, const Usage &o);
+  friend void from_json(const nlohmann::json &j, Usage &o);
+  friend void to_json(nlohmann::json &j, const Usage_anyOf &o);
+  friend void from_json(const nlohmann::json &j, Usage_anyOf &o);
 
- protected:
+protected:
   Usage_anyOf m_value;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* Usage_H_ */

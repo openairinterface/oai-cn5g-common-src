@@ -9,17 +9,16 @@
 #include "Ngap_BroadcastCancelledAreaList.h"
 
 #include "Ngap_CellIDCancelledEUTRA.h"
-#include "Ngap_TAICancelledEUTRA.h"
-#include "Ngap_EmergencyAreaIDCancelledEUTRA.h"
 #include "Ngap_CellIDCancelledNR.h"
-#include "Ngap_TAICancelledNR.h"
+#include "Ngap_EmergencyAreaIDCancelledEUTRA.h"
 #include "Ngap_EmergencyAreaIDCancelledNR.h"
 #include "Ngap_ProtocolIE-SingleContainer.h"
+#include "Ngap_TAICancelledEUTRA.h"
+#include "Ngap_TAICancelledNR.h"
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 static asn_oer_constraints_t
-    asn_OER_type_Ngap_BroadcastCancelledAreaList_constr_1 CC_NOTUSED = {
-        {0, 0},
-        -1};
+    asn_OER_type_Ngap_BroadcastCancelledAreaList_constr_1 CC_NOTUSED = {{0, 0},
+                                                                        -1};
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 asn_per_constraints_t asn_PER_type_Ngap_BroadcastCancelledAreaList_constr_1
@@ -34,8 +33,8 @@ asn_per_constraints_t asn_PER_type_Ngap_BroadcastCancelledAreaList_constr_1
 asn_TYPE_member_t asn_MBR_Ngap_BroadcastCancelledAreaList_1[] = {
     {ATF_POINTER,
      0,
-     offsetof(
-         struct Ngap_BroadcastCancelledAreaList, choice.cellIDCancelledEUTRA),
+     offsetof(struct Ngap_BroadcastCancelledAreaList,
+              choice.cellIDCancelledEUTRA),
      (ASN_TAG_CLASS_CONTEXT | (0 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_CellIDCancelledEUTRA,
@@ -73,9 +72,8 @@ asn_TYPE_member_t asn_MBR_Ngap_BroadcastCancelledAreaList_1[] = {
      "tAICancelledEUTRA"},
     {ATF_POINTER,
      0,
-     offsetof(
-         struct Ngap_BroadcastCancelledAreaList,
-         choice.emergencyAreaIDCancelledEUTRA),
+     offsetof(struct Ngap_BroadcastCancelledAreaList,
+              choice.emergencyAreaIDCancelledEUTRA),
      (ASN_TAG_CLASS_CONTEXT | (2 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_EmergencyAreaIDCancelledEUTRA,
@@ -132,9 +130,8 @@ asn_TYPE_member_t asn_MBR_Ngap_BroadcastCancelledAreaList_1[] = {
      "tAICancelledNR"},
     {ATF_POINTER,
      0,
-     offsetof(
-         struct Ngap_BroadcastCancelledAreaList,
-         choice.emergencyAreaIDCancelledNR),
+     offsetof(struct Ngap_BroadcastCancelledAreaList,
+              choice.emergencyAreaIDCancelledNR),
      (ASN_TAG_CLASS_CONTEXT | (5 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_EmergencyAreaIDCancelledNR,
@@ -188,7 +185,7 @@ asn_CHOICE_specifics_t asn_SPC_Ngap_BroadcastCancelledAreaList_specs_1 = {
     sizeof(struct Ngap_BroadcastCancelledAreaList),
     offsetof(struct Ngap_BroadcastCancelledAreaList, _asn_ctx),
     offsetof(struct Ngap_BroadcastCancelledAreaList, present),
-    sizeof(((struct Ngap_BroadcastCancelledAreaList*) 0)->present),
+    sizeof(((struct Ngap_BroadcastCancelledAreaList *)0)->present),
     asn_MAP_Ngap_BroadcastCancelledAreaList_tag2el_1,
     7, /* Count of tags in the map */
     0,

@@ -26,8 +26,8 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_EmergencyFallbackIndicator */
 typedef struct Ngap_EmergencyFallbackIndicator {
   Ngap_EmergencyFallbackRequestIndicator_t emergencyFallbackRequestIndicator;
-  Ngap_EmergencyServiceTargetCN_t* emergencyServiceTargetCN; /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions;     /* OPTIONAL */
+  Ngap_EmergencyServiceTargetCN_t *emergencyServiceTargetCN; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions;     /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

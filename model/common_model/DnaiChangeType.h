@@ -34,7 +34,7 @@ namespace oai::model::common {
 /// LATE: Late notification of UP path reconfiguration.
 /// </summary>
 class DnaiChangeType {
- public:
+public:
   DnaiChangeType();
   virtual ~DnaiChangeType() = default;
 
@@ -48,17 +48,17 @@ class DnaiChangeType {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  virtual bool validate(
-      std::stringstream& msg, const std::string& pathPrefix) const;
+  virtual bool validate(std::stringstream &msg,
+                        const std::string &pathPrefix) const;
 
-  bool operator==(const DnaiChangeType& rhs) const;
-  bool operator!=(const DnaiChangeType& rhs) const;
+  bool operator==(const DnaiChangeType &rhs) const;
+  bool operator!=(const DnaiChangeType &rhs) const;
 
   /////////////////////////////////////////////
   /// DnaiChangeType members
@@ -67,15 +67,15 @@ class DnaiChangeType {
   void setValue(DnaiChangeType_anyOf value);
   DnaiChangeType_anyOf::eDnaiChangeType_anyOf getEnumValue() const;
   void setEnumValue(DnaiChangeType_anyOf::eDnaiChangeType_anyOf value);
-  friend void to_json(nlohmann::json& j, const DnaiChangeType& o);
-  friend void from_json(const nlohmann::json& j, DnaiChangeType& o);
-  friend void to_json(nlohmann::json& j, const DnaiChangeType_anyOf& o);
-  friend void from_json(const nlohmann::json& j, DnaiChangeType_anyOf& o);
+  friend void to_json(nlohmann::json &j, const DnaiChangeType &o);
+  friend void from_json(const nlohmann::json &j, DnaiChangeType &o);
+  friend void to_json(nlohmann::json &j, const DnaiChangeType_anyOf &o);
+  friend void from_json(const nlohmann::json &j, DnaiChangeType_anyOf &o);
 
- protected:
+protected:
   DnaiChangeType_anyOf m_value;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* DnaiChangeType_H_ */

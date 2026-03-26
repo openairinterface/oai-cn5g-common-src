@@ -13,8 +13,8 @@
 
 #include "FinalUnitAction_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::pcf {
 
@@ -27,12 +27,12 @@ void FinalUnitAction_anyOf::validate() const {
   }
 }
 
-bool FinalUnitAction_anyOf::validate(std::stringstream& msg) const {
+bool FinalUnitAction_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool FinalUnitAction_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool FinalUnitAction_anyOf::validate(std::stringstream &msg,
+                                     const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "FinalUnitAction_anyOf" : pathPrefix;
@@ -46,37 +46,37 @@ bool FinalUnitAction_anyOf::validate(
   return success;
 }
 
-bool FinalUnitAction_anyOf::operator==(const FinalUnitAction_anyOf& rhs) const {
+bool FinalUnitAction_anyOf::operator==(const FinalUnitAction_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool FinalUnitAction_anyOf::operator!=(const FinalUnitAction_anyOf& rhs) const {
+bool FinalUnitAction_anyOf::operator!=(const FinalUnitAction_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const FinalUnitAction_anyOf& o) {
+void to_json(nlohmann::json &j, const FinalUnitAction_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case FinalUnitAction_anyOf::eFinalUnitAction_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case FinalUnitAction_anyOf::eFinalUnitAction_anyOf::TERMINATE:
-      j = "TERMINATE";
-      break;
-    case FinalUnitAction_anyOf::eFinalUnitAction_anyOf::REDIRECT:
-      j = "REDIRECT";
-      break;
-    case FinalUnitAction_anyOf::eFinalUnitAction_anyOf::RESTRICT_ACCESS:
-      j = "RESTRICT_ACCESS";
-      break;
+  case FinalUnitAction_anyOf::eFinalUnitAction_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case FinalUnitAction_anyOf::eFinalUnitAction_anyOf::TERMINATE:
+    j = "TERMINATE";
+    break;
+  case FinalUnitAction_anyOf::eFinalUnitAction_anyOf::REDIRECT:
+    j = "REDIRECT";
+    break;
+  case FinalUnitAction_anyOf::eFinalUnitAction_anyOf::RESTRICT_ACCESS:
+    j = "RESTRICT_ACCESS";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, FinalUnitAction_anyOf& o) {
+void from_json(const nlohmann::json &j, FinalUnitAction_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "TERMINATE") {
     o.setValue(FinalUnitAction_anyOf::eFinalUnitAction_anyOf::TERMINATE);
@@ -93,8 +93,8 @@ void from_json(const nlohmann::json& j, FinalUnitAction_anyOf& o) {
   }
 }
 
-FinalUnitAction_anyOf::eFinalUnitAction_anyOf FinalUnitAction_anyOf::getValue()
-    const {
+FinalUnitAction_anyOf::eFinalUnitAction_anyOf
+FinalUnitAction_anyOf::getValue() const {
   return m_value;
 }
 void FinalUnitAction_anyOf::setValue(
@@ -102,4 +102,4 @@ void FinalUnitAction_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

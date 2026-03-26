@@ -14,19 +14,19 @@ QosFlowPerTnlInformationItem::~QosFlowPerTnlInformationItem() {}
 
 //------------------------------------------------------------------------------
 void QosFlowPerTnlInformationItem::set(
-    const QosFlowPerTnlInformation& qosFlowPerTNLInformation) {
+    const QosFlowPerTnlInformation &qosFlowPerTNLInformation) {
   m_QosFlowPerTnlInformation = qosFlowPerTNLInformation;
 }
 
 //------------------------------------------------------------------------------
 void QosFlowPerTnlInformationItem::get(
-    QosFlowPerTnlInformation& qosFlowPerTNLInformation) const {
+    QosFlowPerTnlInformation &qosFlowPerTNLInformation) const {
   qosFlowPerTNLInformation = m_QosFlowPerTnlInformation;
 }
 
 //------------------------------------------------------------------------------
 bool QosFlowPerTnlInformationItem::encode(
-    Ngap_QosFlowPerTNLInformationItem_t& qosFlowPerTnlInformationItem) const {
+    Ngap_QosFlowPerTNLInformationItem_t &qosFlowPerTnlInformationItem) const {
   if (!m_QosFlowPerTnlInformation.encode(
           qosFlowPerTnlInformationItem.qosFlowPerTNLInformation))
     return false;
@@ -35,7 +35,7 @@ bool QosFlowPerTnlInformationItem::encode(
 
 //------------------------------------------------------------------------------
 bool QosFlowPerTnlInformationItem::decode(
-    const Ngap_QosFlowPerTNLInformationItem_t& qosFlowPerTnlInformationItem) {
+    const Ngap_QosFlowPerTNLInformationItem_t &qosFlowPerTnlInformationItem) {
   if (!m_QosFlowPerTnlInformation.decode(
           qosFlowPerTnlInformationItem.qosFlowPerTNLInformation))
     return false;
@@ -43,4 +43,4 @@ bool QosFlowPerTnlInformationItem::decode(
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

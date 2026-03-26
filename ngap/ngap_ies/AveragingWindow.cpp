@@ -7,36 +7,32 @@
 namespace oai::ngap {
 
 //------------------------------------------------------------------------------
-AveragingWindow::AveragingWindow() {
-  m_AveragingWindow = 0;
-}
+AveragingWindow::AveragingWindow() { m_AveragingWindow = 0; }
 
 //------------------------------------------------------------------------------
 AveragingWindow::~AveragingWindow() {}
 
 //------------------------------------------------------------------------------
-void AveragingWindow::set(const long& value) {
-  m_AveragingWindow = value;
-}
+void AveragingWindow::set(const long &value) { m_AveragingWindow = value; }
 
 //------------------------------------------------------------------------------
-bool AveragingWindow::get(long& value) const {
+bool AveragingWindow::get(long &value) const {
   value = m_AveragingWindow;
 
   return true;
 }
 
 //------------------------------------------------------------------------------
-bool AveragingWindow::encode(Ngap_AveragingWindow_t& value) const {
+bool AveragingWindow::encode(Ngap_AveragingWindow_t &value) const {
   value = m_AveragingWindow;
 
   return true;
 }
 
 //------------------------------------------------------------------------------
-bool AveragingWindow::decode(const Ngap_AveragingWindow_t& value) {
+bool AveragingWindow::decode(const Ngap_AveragingWindow_t &value) {
   m_AveragingWindow = value;
 
   return true;
 }
-}  // namespace oai::ngap
+} // namespace oai::ngap

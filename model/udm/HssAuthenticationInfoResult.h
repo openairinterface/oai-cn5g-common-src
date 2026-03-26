@@ -33,7 +33,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class HssAuthenticationInfoResult {
- public:
+public:
   HssAuthenticationInfoResult();
   virtual ~HssAuthenticationInfoResult();
 
@@ -46,25 +46,25 @@ class HssAuthenticationInfoResult {
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
   /// <summary>
   ///
   /// </summary>
   HssAuthenticationVectors getHssAuthenticationVectors() const;
-  void setHssAuthenticationVectors(HssAuthenticationVectors const& value);
+  void setHssAuthenticationVectors(HssAuthenticationVectors const &value);
 
-  friend void to_json(nlohmann::json& j, const HssAuthenticationInfoResult& o);
-  friend void from_json(
-      const nlohmann::json& j, HssAuthenticationInfoResult& o);
+  friend void to_json(nlohmann::json &j, const HssAuthenticationInfoResult &o);
+  friend void from_json(const nlohmann::json &j,
+                        HssAuthenticationInfoResult &o);
 
- protected:
+protected:
   std::string m_SupportedFeatures;
   bool m_SupportedFeaturesIsSet;
   HssAuthenticationVectors m_HssAuthenticationVectors;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* HssAuthenticationInfoResult_H_ */

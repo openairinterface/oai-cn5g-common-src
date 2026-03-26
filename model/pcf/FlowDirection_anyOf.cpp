@@ -13,8 +13,8 @@
 
 #include "FlowDirection_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::pcf {
 
@@ -27,12 +27,12 @@ void FlowDirection_anyOf::validate() const {
   }
 }
 
-bool FlowDirection_anyOf::validate(std::stringstream& msg) const {
+bool FlowDirection_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool FlowDirection_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool FlowDirection_anyOf::validate(std::stringstream &msg,
+                                   const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "FlowDirection_anyOf" : pathPrefix;
@@ -46,43 +46,43 @@ bool FlowDirection_anyOf::validate(
   return success;
 }
 
-bool FlowDirection_anyOf::operator==(const FlowDirection_anyOf& rhs) const {
+bool FlowDirection_anyOf::operator==(const FlowDirection_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool FlowDirection_anyOf::operator!=(const FlowDirection_anyOf& rhs) const {
+bool FlowDirection_anyOf::operator!=(const FlowDirection_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const FlowDirection_anyOf& o) {
+void to_json(nlohmann::json &j, const FlowDirection_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case FlowDirection_anyOf::eFlowDirection_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case FlowDirection_anyOf::eFlowDirection_anyOf::DOWNLINK:
-      j = "DOWNLINK";
-      break;
-    case FlowDirection_anyOf::eFlowDirection_anyOf::UPLINK:
-      j = "UPLINK";
-      break;
-    case FlowDirection_anyOf::eFlowDirection_anyOf::BIDIRECTIONAL:
-      j = "BIDIRECTIONAL";
-      break;
-    case FlowDirection_anyOf::eFlowDirection_anyOf::UNSPECIFIED:
-      j = "UNSPECIFIED";
-      break;
-    case FlowDirection_anyOf::eFlowDirection_anyOf::NULL_VALUE:
-      j = nullptr;
-      break;
+  case FlowDirection_anyOf::eFlowDirection_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case FlowDirection_anyOf::eFlowDirection_anyOf::DOWNLINK:
+    j = "DOWNLINK";
+    break;
+  case FlowDirection_anyOf::eFlowDirection_anyOf::UPLINK:
+    j = "UPLINK";
+    break;
+  case FlowDirection_anyOf::eFlowDirection_anyOf::BIDIRECTIONAL:
+    j = "BIDIRECTIONAL";
+    break;
+  case FlowDirection_anyOf::eFlowDirection_anyOf::UNSPECIFIED:
+    j = "UNSPECIFIED";
+    break;
+  case FlowDirection_anyOf::eFlowDirection_anyOf::NULL_VALUE:
+    j = nullptr;
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, FlowDirection_anyOf& o) {
+void from_json(const nlohmann::json &j, FlowDirection_anyOf &o) {
   if (j.is_null()) {
     o.setValue(FlowDirection_anyOf::eFlowDirection_anyOf::NULL_VALUE);
     return;
@@ -108,8 +108,8 @@ void from_json(const nlohmann::json& j, FlowDirection_anyOf& o) {
   }
 }
 
-FlowDirection_anyOf::eFlowDirection_anyOf FlowDirection_anyOf::getValue()
-    const {
+FlowDirection_anyOf::eFlowDirection_anyOf
+FlowDirection_anyOf::getValue() const {
   return m_value;
 }
 void FlowDirection_anyOf::setValue(
@@ -117,4 +117,4 @@ void FlowDirection_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

@@ -12,8 +12,8 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_VehicleUE.h"
 #include "Ngap_PedestrianUE.h"
+#include "Ngap_VehicleUE.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -25,9 +25,9 @@ struct Ngap_ProtocolExtensionContainer;
 
 /* Ngap_LTEV2XServicesAuthorized */
 typedef struct Ngap_LTEV2XServicesAuthorized {
-  Ngap_VehicleUE_t* vehicleUE;                           /* OPTIONAL */
-  Ngap_PedestrianUE_t* pedestrianUE;                     /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  Ngap_VehicleUE_t *vehicleUE;                           /* OPTIONAL */
+  Ngap_PedestrianUE_t *pedestrianUE;                     /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

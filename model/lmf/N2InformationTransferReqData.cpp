@@ -16,13 +16,13 @@
 namespace oai::model::lmf {
 
 N2InformationTransferReqData::N2InformationTransferReqData() {
-  m_TaiListIsSet           = false;
-  m_RatSelector            = "";
-  m_RatSelectorIsSet       = false;
-  m_EcgiListIsSet          = false;
-  m_NcgiListIsSet          = false;
+  m_TaiListIsSet = false;
+  m_RatSelector = "";
+  m_RatSelectorIsSet = false;
+  m_EcgiListIsSet = false;
+  m_NcgiListIsSet = false;
   m_GlobalRanNodeListIsSet = false;
-  m_SupportedFeatures      = "";
+  m_SupportedFeatures = "";
   m_SupportedFeaturesIsSet = false;
 }
 
@@ -32,12 +32,16 @@ void N2InformationTransferReqData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const N2InformationTransferReqData& o) {
+void to_json(nlohmann::json &j, const N2InformationTransferReqData &o) {
   j = nlohmann::json();
-  if (o.taiListIsSet()) j["taiList"] = o.m_TaiList;
-  if (o.ratSelectorIsSet()) j["ratSelector"] = o.m_RatSelector;
-  if (o.ecgiListIsSet()) j["ecgiList"] = o.m_EcgiList;
-  if (o.ncgiListIsSet()) j["ncgiList"] = o.m_NcgiList;
+  if (o.taiListIsSet())
+    j["taiList"] = o.m_TaiList;
+  if (o.ratSelectorIsSet())
+    j["ratSelector"] = o.m_RatSelector;
+  if (o.ecgiListIsSet())
+    j["ecgiList"] = o.m_EcgiList;
+  if (o.ncgiListIsSet())
+    j["ncgiList"] = o.m_NcgiList;
   if (o.globalRanNodeListIsSet())
     j["globalRanNodeList"] = o.m_GlobalRanNodeList;
   j["n2Information"] = o.m_N2Information;
@@ -45,7 +49,7 @@ void to_json(nlohmann::json& j, const N2InformationTransferReqData& o) {
     j["supportedFeatures"] = o.m_SupportedFeatures;
 }
 
-void from_json(const nlohmann::json& j, N2InformationTransferReqData& o) {
+void from_json(const nlohmann::json &j, N2InformationTransferReqData &o) {
   if (j.find("taiList") != j.end()) {
     j.at("taiList").get_to(o.m_TaiList);
     o.m_TaiListIsSet = true;
@@ -73,20 +77,18 @@ void from_json(const nlohmann::json& j, N2InformationTransferReqData& o) {
   }
 }
 
-std::vector<Tai>& N2InformationTransferReqData::getTaiList() {
+std::vector<Tai> &N2InformationTransferReqData::getTaiList() {
   return m_TaiList;
 }
 bool N2InformationTransferReqData::taiListIsSet() const {
   return m_TaiListIsSet;
 }
-void N2InformationTransferReqData::unsetTaiList() {
-  m_TaiListIsSet = false;
-}
+void N2InformationTransferReqData::unsetTaiList() { m_TaiListIsSet = false; }
 std::string N2InformationTransferReqData::getRatSelector() const {
   return m_RatSelector;
 }
-void N2InformationTransferReqData::setRatSelector(std::string const& value) {
-  m_RatSelector      = value;
+void N2InformationTransferReqData::setRatSelector(std::string const &value) {
+  m_RatSelector = value;
   m_RatSelectorIsSet = true;
 }
 bool N2InformationTransferReqData::ratSelectorIsSet() const {
@@ -95,31 +97,27 @@ bool N2InformationTransferReqData::ratSelectorIsSet() const {
 void N2InformationTransferReqData::unsetRatSelector() {
   m_RatSelectorIsSet = false;
 }
-std::vector<Ecgi>& N2InformationTransferReqData::getEcgiList() {
+std::vector<Ecgi> &N2InformationTransferReqData::getEcgiList() {
   return m_EcgiList;
 }
 bool N2InformationTransferReqData::ecgiListIsSet() const {
   return m_EcgiListIsSet;
 }
-void N2InformationTransferReqData::unsetEcgiList() {
-  m_EcgiListIsSet = false;
-}
-std::vector<Ncgi>& N2InformationTransferReqData::getNcgiList() {
+void N2InformationTransferReqData::unsetEcgiList() { m_EcgiListIsSet = false; }
+std::vector<Ncgi> &N2InformationTransferReqData::getNcgiList() {
   return m_NcgiList;
 }
 bool N2InformationTransferReqData::ncgiListIsSet() const {
   return m_NcgiListIsSet;
 }
-void N2InformationTransferReqData::unsetNcgiList() {
-  m_NcgiListIsSet = false;
-}
-std::vector<GlobalRanNodeId>&
+void N2InformationTransferReqData::unsetNcgiList() { m_NcgiListIsSet = false; }
+std::vector<GlobalRanNodeId> &
 N2InformationTransferReqData::getGlobalRanNodeList() {
   return m_GlobalRanNodeList;
 }
 void N2InformationTransferReqData::setGlobalRanNodeList(
-    std::vector<GlobalRanNodeId> const& value) {
-  m_GlobalRanNodeList      = value;
+    std::vector<GlobalRanNodeId> const &value) {
+  m_GlobalRanNodeList = value;
   m_GlobalRanNodeListIsSet = true;
 }
 bool N2InformationTransferReqData::globalRanNodeListIsSet() const {
@@ -132,15 +130,15 @@ N2InfoContainer N2InformationTransferReqData::getN2Information() const {
   return m_N2Information;
 }
 void N2InformationTransferReqData::setN2Information(
-    N2InfoContainer const& value) {
+    N2InfoContainer const &value) {
   m_N2Information = value;
 }
 std::string N2InformationTransferReqData::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
 void N2InformationTransferReqData::setSupportedFeatures(
-    std::string const& value) {
-  m_SupportedFeatures      = value;
+    std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool N2InformationTransferReqData::supportedFeaturesIsSet() const {
@@ -150,4 +148,4 @@ void N2InformationTransferReqData::unsetSupportedFeatures() {
   m_SupportedFeaturesIsSet = false;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

@@ -19,20 +19,20 @@
 namespace oai::model::pcf {
 
 MediaSubComponentRm::MediaSubComponentRm() {
-  m_AfSigProtocolIsSet    = false;
-  m_EthfDescsIsSet        = false;
-  m_FNum                  = 0;
-  m_FDescsIsSet           = false;
+  m_AfSigProtocolIsSet = false;
+  m_EthfDescsIsSet = false;
+  m_FNum = 0;
+  m_FDescsIsSet = false;
   m_AddInfoFlowDescsIsSet = false;
-  m_FStatusIsSet          = false;
-  m_MarBwDl               = "";
-  m_MarBwDlIsSet          = false;
-  m_MarBwUl               = "";
-  m_MarBwUlIsSet          = false;
-  m_TosTrCl               = "";
-  m_TosTrClIsSet          = false;
-  m_FlowUsageIsSet        = false;
-  m_EvSubscIsSet          = false;
+  m_FStatusIsSet = false;
+  m_MarBwDl = "";
+  m_MarBwDlIsSet = false;
+  m_MarBwUl = "";
+  m_MarBwUlIsSet = false;
+  m_TosTrCl = "";
+  m_TosTrClIsSet = false;
+  m_FlowUsageIsSet = false;
+  m_EvSubscIsSet = false;
 }
 
 void MediaSubComponentRm::validate() const {
@@ -42,18 +42,18 @@ void MediaSubComponentRm::validate() const {
   }
 }
 
-bool MediaSubComponentRm::validate(std::stringstream& msg) const {
+bool MediaSubComponentRm::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool MediaSubComponentRm::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool MediaSubComponentRm::validate(std::stringstream &msg,
+                                   const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "MediaSubComponentRm" : pathPrefix;
 
   if (ethfDescsIsSet()) {
-    const std::vector<oai::model::pcf::EthFlowDescription>& value = m_EthfDescs;
+    const std::vector<oai::model::pcf::EthFlowDescription> &value = m_EthfDescs;
     const std::string currentValuePath = _pathPrefix + ".ethfDescs";
 
     if (value.size() < 1) {
@@ -64,10 +64,10 @@ bool MediaSubComponentRm::validate(
       success = false;
       msg << currentValuePath << ": must have at most 2 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::EthFlowDescription& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::EthFlowDescription &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -80,8 +80,8 @@ bool MediaSubComponentRm::validate(
   }
 
   if (fDescsIsSet()) {
-    const std::vector<std::string>& value = m_FDescs;
-    const std::string currentValuePath    = _pathPrefix + ".fDescs";
+    const std::vector<std::string> &value = m_FDescs;
+    const std::string currentValuePath = _pathPrefix + ".fDescs";
 
     if (value.size() < 1) {
       success = false;
@@ -91,10 +91,10 @@ bool MediaSubComponentRm::validate(
       success = false;
       msg << currentValuePath << ": must have at most 2 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const std::string& value : value) {
+      int i = 0;
+      for (const std::string &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -104,7 +104,7 @@ bool MediaSubComponentRm::validate(
   }
 
   if (addInfoFlowDescsIsSet()) {
-    const std::vector<oai::model::pcf::AddFlowDescriptionInfo>& value =
+    const std::vector<oai::model::pcf::AddFlowDescriptionInfo> &value =
         m_AddInfoFlowDescs;
     const std::string currentValuePath = _pathPrefix + ".addInfoFlowDescs";
 
@@ -116,10 +116,10 @@ bool MediaSubComponentRm::validate(
       success = false;
       msg << currentValuePath << ": must have at most 2 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::AddFlowDescriptionInfo& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::AddFlowDescriptionInfo &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -132,19 +132,19 @@ bool MediaSubComponentRm::validate(
   }
 
   if (marBwDlIsSet()) {
-    const std::string& value           = m_MarBwDl;
+    const std::string &value = m_MarBwDl;
     const std::string currentValuePath = _pathPrefix + ".marBwDl";
   }
 
   if (marBwUlIsSet()) {
-    const std::string& value           = m_MarBwUl;
+    const std::string &value = m_MarBwUl;
     const std::string currentValuePath = _pathPrefix + ".marBwUl";
   }
 
   return success;
 }
 
-bool MediaSubComponentRm::operator==(const MediaSubComponentRm& rhs) const {
+bool MediaSubComponentRm::operator==(const MediaSubComponentRm &rhs) const {
   return
 
       ((!afSigProtocolIsSet() && !rhs.afSigProtocolIsSet()) ||
@@ -192,28 +192,36 @@ bool MediaSubComponentRm::operator==(const MediaSubComponentRm& rhs) const {
           ;
 }
 
-bool MediaSubComponentRm::operator!=(const MediaSubComponentRm& rhs) const {
+bool MediaSubComponentRm::operator!=(const MediaSubComponentRm &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const MediaSubComponentRm& o) {
+void to_json(nlohmann::json &j, const MediaSubComponentRm &o) {
   j = nlohmann::json::object();
-  if (o.afSigProtocolIsSet()) j["afSigProtocol"] = o.m_AfSigProtocol;
+  if (o.afSigProtocolIsSet())
+    j["afSigProtocol"] = o.m_AfSigProtocol;
   if (o.ethfDescsIsSet() || !o.m_EthfDescs.empty())
     j["ethfDescs"] = o.m_EthfDescs;
   j["fNum"] = o.m_FNum;
-  if (o.fDescsIsSet() || !o.m_FDescs.empty()) j["fDescs"] = o.m_FDescs;
+  if (o.fDescsIsSet() || !o.m_FDescs.empty())
+    j["fDescs"] = o.m_FDescs;
   if (o.addInfoFlowDescsIsSet() || !o.m_AddInfoFlowDescs.empty())
     j["addInfoFlowDescs"] = o.m_AddInfoFlowDescs;
-  if (o.fStatusIsSet()) j["fStatus"] = o.m_FStatus;
-  if (o.marBwDlIsSet()) j["marBwDl"] = o.m_MarBwDl;
-  if (o.marBwUlIsSet()) j["marBwUl"] = o.m_MarBwUl;
-  if (o.tosTrClIsSet()) j["tosTrCl"] = o.m_TosTrCl;
-  if (o.flowUsageIsSet()) j["flowUsage"] = o.m_FlowUsage;
-  if (o.evSubscIsSet()) j["evSubsc"] = o.m_EvSubsc;
+  if (o.fStatusIsSet())
+    j["fStatus"] = o.m_FStatus;
+  if (o.marBwDlIsSet())
+    j["marBwDl"] = o.m_MarBwDl;
+  if (o.marBwUlIsSet())
+    j["marBwUl"] = o.m_MarBwUl;
+  if (o.tosTrClIsSet())
+    j["tosTrCl"] = o.m_TosTrCl;
+  if (o.flowUsageIsSet())
+    j["flowUsage"] = o.m_FlowUsage;
+  if (o.evSubscIsSet())
+    j["evSubsc"] = o.m_EvSubsc;
 }
 
-void from_json(const nlohmann::json& j, MediaSubComponentRm& o) {
+void from_json(const nlohmann::json &j, MediaSubComponentRm &o) {
   if (j.find("afSigProtocol") != j.end()) {
     j.at("afSigProtocol").get_to(o.m_AfSigProtocol);
     o.m_AfSigProtocolIsSet = true;
@@ -261,57 +269,43 @@ oai::model::pcf::AfSigProtocol MediaSubComponentRm::getAfSigProtocol() const {
   return m_AfSigProtocol;
 }
 void MediaSubComponentRm::setAfSigProtocol(
-    oai::model::pcf::AfSigProtocol const& value) {
-  m_AfSigProtocol      = value;
+    oai::model::pcf::AfSigProtocol const &value) {
+  m_AfSigProtocol = value;
   m_AfSigProtocolIsSet = true;
 }
 bool MediaSubComponentRm::afSigProtocolIsSet() const {
   return m_AfSigProtocolIsSet;
 }
-void MediaSubComponentRm::unsetAfSigProtocol() {
-  m_AfSigProtocolIsSet = false;
-}
+void MediaSubComponentRm::unsetAfSigProtocol() { m_AfSigProtocolIsSet = false; }
 std::vector<oai::model::pcf::EthFlowDescription>
 MediaSubComponentRm::getEthfDescs() const {
   return m_EthfDescs;
 }
 void MediaSubComponentRm::setEthfDescs(
-    std::vector<oai::model::pcf::EthFlowDescription> const& value) {
-  m_EthfDescs      = value;
+    std::vector<oai::model::pcf::EthFlowDescription> const &value) {
+  m_EthfDescs = value;
   m_EthfDescsIsSet = true;
 }
-bool MediaSubComponentRm::ethfDescsIsSet() const {
-  return m_EthfDescsIsSet;
-}
-void MediaSubComponentRm::unsetEthfDescs() {
-  m_EthfDescsIsSet = false;
-}
-int32_t MediaSubComponentRm::getFNum() const {
-  return m_FNum;
-}
-void MediaSubComponentRm::setFNum(int32_t const value) {
-  m_FNum = value;
-}
+bool MediaSubComponentRm::ethfDescsIsSet() const { return m_EthfDescsIsSet; }
+void MediaSubComponentRm::unsetEthfDescs() { m_EthfDescsIsSet = false; }
+int32_t MediaSubComponentRm::getFNum() const { return m_FNum; }
+void MediaSubComponentRm::setFNum(int32_t const value) { m_FNum = value; }
 std::vector<std::string> MediaSubComponentRm::getFDescs() const {
   return m_FDescs;
 }
-void MediaSubComponentRm::setFDescs(std::vector<std::string> const& value) {
-  m_FDescs      = value;
+void MediaSubComponentRm::setFDescs(std::vector<std::string> const &value) {
+  m_FDescs = value;
   m_FDescsIsSet = true;
 }
-bool MediaSubComponentRm::fDescsIsSet() const {
-  return m_FDescsIsSet;
-}
-void MediaSubComponentRm::unsetFDescs() {
-  m_FDescsIsSet = false;
-}
+bool MediaSubComponentRm::fDescsIsSet() const { return m_FDescsIsSet; }
+void MediaSubComponentRm::unsetFDescs() { m_FDescsIsSet = false; }
 std::vector<oai::model::pcf::AddFlowDescriptionInfo>
 MediaSubComponentRm::getAddInfoFlowDescs() const {
   return m_AddInfoFlowDescs;
 }
 void MediaSubComponentRm::setAddInfoFlowDescs(
-    std::vector<oai::model::pcf::AddFlowDescriptionInfo> const& value) {
-  m_AddInfoFlowDescs      = value;
+    std::vector<oai::model::pcf::AddFlowDescriptionInfo> const &value) {
+  m_AddInfoFlowDescs = value;
   m_AddInfoFlowDescsIsSet = true;
 }
 bool MediaSubComponentRm::addInfoFlowDescsIsSet() const {
@@ -323,82 +317,52 @@ void MediaSubComponentRm::unsetAddInfoFlowDescs() {
 oai::model::pcf::FlowStatus MediaSubComponentRm::getFStatus() const {
   return m_FStatus;
 }
-void MediaSubComponentRm::setFStatus(oai::model::pcf::FlowStatus const& value) {
-  m_FStatus      = value;
+void MediaSubComponentRm::setFStatus(oai::model::pcf::FlowStatus const &value) {
+  m_FStatus = value;
   m_FStatusIsSet = true;
 }
-bool MediaSubComponentRm::fStatusIsSet() const {
-  return m_FStatusIsSet;
-}
-void MediaSubComponentRm::unsetFStatus() {
-  m_FStatusIsSet = false;
-}
-std::string MediaSubComponentRm::getMarBwDl() const {
-  return m_MarBwDl;
-}
-void MediaSubComponentRm::setMarBwDl(std::string const& value) {
-  m_MarBwDl      = value;
+bool MediaSubComponentRm::fStatusIsSet() const { return m_FStatusIsSet; }
+void MediaSubComponentRm::unsetFStatus() { m_FStatusIsSet = false; }
+std::string MediaSubComponentRm::getMarBwDl() const { return m_MarBwDl; }
+void MediaSubComponentRm::setMarBwDl(std::string const &value) {
+  m_MarBwDl = value;
   m_MarBwDlIsSet = true;
 }
-bool MediaSubComponentRm::marBwDlIsSet() const {
-  return m_MarBwDlIsSet;
-}
-void MediaSubComponentRm::unsetMarBwDl() {
-  m_MarBwDlIsSet = false;
-}
-std::string MediaSubComponentRm::getMarBwUl() const {
-  return m_MarBwUl;
-}
-void MediaSubComponentRm::setMarBwUl(std::string const& value) {
-  m_MarBwUl      = value;
+bool MediaSubComponentRm::marBwDlIsSet() const { return m_MarBwDlIsSet; }
+void MediaSubComponentRm::unsetMarBwDl() { m_MarBwDlIsSet = false; }
+std::string MediaSubComponentRm::getMarBwUl() const { return m_MarBwUl; }
+void MediaSubComponentRm::setMarBwUl(std::string const &value) {
+  m_MarBwUl = value;
   m_MarBwUlIsSet = true;
 }
-bool MediaSubComponentRm::marBwUlIsSet() const {
-  return m_MarBwUlIsSet;
-}
-void MediaSubComponentRm::unsetMarBwUl() {
-  m_MarBwUlIsSet = false;
-}
-std::string MediaSubComponentRm::getTosTrCl() const {
-  return m_TosTrCl;
-}
-void MediaSubComponentRm::setTosTrCl(std::string const& value) {
-  m_TosTrCl      = value;
+bool MediaSubComponentRm::marBwUlIsSet() const { return m_MarBwUlIsSet; }
+void MediaSubComponentRm::unsetMarBwUl() { m_MarBwUlIsSet = false; }
+std::string MediaSubComponentRm::getTosTrCl() const { return m_TosTrCl; }
+void MediaSubComponentRm::setTosTrCl(std::string const &value) {
+  m_TosTrCl = value;
   m_TosTrClIsSet = true;
 }
-bool MediaSubComponentRm::tosTrClIsSet() const {
-  return m_TosTrClIsSet;
-}
-void MediaSubComponentRm::unsetTosTrCl() {
-  m_TosTrClIsSet = false;
-}
+bool MediaSubComponentRm::tosTrClIsSet() const { return m_TosTrClIsSet; }
+void MediaSubComponentRm::unsetTosTrCl() { m_TosTrClIsSet = false; }
 oai::model::pcf::FlowUsage MediaSubComponentRm::getFlowUsage() const {
   return m_FlowUsage;
 }
 void MediaSubComponentRm::setFlowUsage(
-    oai::model::pcf::FlowUsage const& value) {
-  m_FlowUsage      = value;
+    oai::model::pcf::FlowUsage const &value) {
+  m_FlowUsage = value;
   m_FlowUsageIsSet = true;
 }
-bool MediaSubComponentRm::flowUsageIsSet() const {
-  return m_FlowUsageIsSet;
-}
-void MediaSubComponentRm::unsetFlowUsage() {
-  m_FlowUsageIsSet = false;
-}
+bool MediaSubComponentRm::flowUsageIsSet() const { return m_FlowUsageIsSet; }
+void MediaSubComponentRm::unsetFlowUsage() { m_FlowUsageIsSet = false; }
 oai::model::pcf::EventsSubscReqDataRm MediaSubComponentRm::getEvSubsc() const {
   return m_EvSubsc;
 }
 void MediaSubComponentRm::setEvSubsc(
-    oai::model::pcf::EventsSubscReqDataRm const& value) {
-  m_EvSubsc      = value;
+    oai::model::pcf::EventsSubscReqDataRm const &value) {
+  m_EvSubsc = value;
   m_EvSubscIsSet = true;
 }
-bool MediaSubComponentRm::evSubscIsSet() const {
-  return m_EvSubscIsSet;
-}
-void MediaSubComponentRm::unsetEvSubsc() {
-  m_EvSubscIsSet = false;
-}
+bool MediaSubComponentRm::evSubscIsSet() const { return m_EvSubscIsSet; }
+void MediaSubComponentRm::unsetEvSubsc() { m_EvSubscIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

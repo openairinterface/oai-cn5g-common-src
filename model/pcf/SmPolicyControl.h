@@ -19,8 +19,8 @@
 #ifndef SmPolicyControl_H_
 #define SmPolicyControl_H_
 
-#include "SmPolicyDecision.h"
 #include "SmPolicyContextData.h"
+#include "SmPolicyDecision.h"
 #include <nlohmann/json.hpp>
 
 namespace oai::model::pcf {
@@ -29,7 +29,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class SmPolicyControl {
- public:
+public:
   SmPolicyControl();
   virtual ~SmPolicyControl() = default;
 
@@ -43,16 +43,16 @@ class SmPolicyControl {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const SmPolicyControl& rhs) const;
-  bool operator!=(const SmPolicyControl& rhs) const;
+  bool operator==(const SmPolicyControl &rhs) const;
+  bool operator!=(const SmPolicyControl &rhs) const;
 
   /////////////////////////////////////////////
   /// SmPolicyControl members
@@ -61,22 +61,22 @@ class SmPolicyControl {
   ///
   /// </summary>
   oai::model::pcf::SmPolicyContextData getContext() const;
-  void setContext(oai::model::pcf::SmPolicyContextData const& value);
+  void setContext(oai::model::pcf::SmPolicyContextData const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::SmPolicyDecision getPolicy() const;
-  void setPolicy(oai::model::pcf::SmPolicyDecision const& value);
+  void setPolicy(oai::model::pcf::SmPolicyDecision const &value);
 
-  friend void to_json(nlohmann::json& j, const SmPolicyControl& o);
-  friend void from_json(const nlohmann::json& j, SmPolicyControl& o);
+  friend void to_json(nlohmann::json &j, const SmPolicyControl &o);
+  friend void from_json(const nlohmann::json &j, SmPolicyControl &o);
 
- protected:
+protected:
   oai::model::pcf::SmPolicyContextData m_Context;
 
   oai::model::pcf::SmPolicyDecision m_Policy;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* SmPolicyControl_H_ */

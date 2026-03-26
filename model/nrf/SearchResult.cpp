@@ -16,13 +16,13 @@
 namespace oai::model::nrf {
 
 SearchResult::SearchResult() {
-  m_ValidityPeriod            = 0;
-  m_ValidityPeriodIsSet       = false;
-  m_SearchId                  = "";
-  m_SearchIdIsSet             = false;
-  m_NumNfInstComplete         = 0;
-  m_NumNfInstCompleteIsSet    = false;
-  m_NrfSupportedFeatures      = "";
+  m_ValidityPeriod = 0;
+  m_ValidityPeriodIsSet = false;
+  m_SearchId = "";
+  m_SearchIdIsSet = false;
+  m_NumNfInstComplete = 0;
+  m_NumNfInstCompleteIsSet = false;
+  m_NrfSupportedFeatures = "";
   m_NrfSupportedFeaturesIsSet = false;
 }
 
@@ -32,18 +32,20 @@ void SearchResult::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const SearchResult& o) {
+void to_json(nlohmann::json &j, const SearchResult &o) {
   j = nlohmann::json();
-  if (o.validityPeriodIsSet()) j["validityPeriod"] = o.m_ValidityPeriod;
+  if (o.validityPeriodIsSet())
+    j["validityPeriod"] = o.m_ValidityPeriod;
   j["nfInstances"] = o.m_NfInstances;
-  if (o.searchIdIsSet()) j["searchId"] = o.m_SearchId;
+  if (o.searchIdIsSet())
+    j["searchId"] = o.m_SearchId;
   if (o.numNfInstCompleteIsSet())
     j["numNfInstComplete"] = o.m_NumNfInstComplete;
   if (o.nrfSupportedFeaturesIsSet())
     j["nrfSupportedFeatures"] = o.m_NrfSupportedFeatures;
 }
 
-void from_json(const nlohmann::json& j, SearchResult& o) {
+void from_json(const nlohmann::json &j, SearchResult &o) {
   if (j.find("validityPeriod") != j.end()) {
     j.at("validityPeriod").get_to(o.m_ValidityPeriod);
     o.m_ValidityPeriodIsSet = true;
@@ -63,43 +65,29 @@ void from_json(const nlohmann::json& j, SearchResult& o) {
   }
 }
 
-int32_t SearchResult::getValidityPeriod() const {
-  return m_ValidityPeriod;
-}
+int32_t SearchResult::getValidityPeriod() const { return m_ValidityPeriod; }
 void SearchResult::setValidityPeriod(int32_t const value) {
-  m_ValidityPeriod      = value;
+  m_ValidityPeriod = value;
   m_ValidityPeriodIsSet = true;
 }
-bool SearchResult::validityPeriodIsSet() const {
-  return m_ValidityPeriodIsSet;
-}
-void SearchResult::unsetValidityPeriod() {
-  m_ValidityPeriodIsSet = false;
-}
-std::vector<NFProfile>& SearchResult::getNfInstances() {
-  return m_NfInstances;
-}
-void SearchResult::setNfInstances(std::vector<NFProfile> const& value) {
+bool SearchResult::validityPeriodIsSet() const { return m_ValidityPeriodIsSet; }
+void SearchResult::unsetValidityPeriod() { m_ValidityPeriodIsSet = false; }
+std::vector<NFProfile> &SearchResult::getNfInstances() { return m_NfInstances; }
+void SearchResult::setNfInstances(std::vector<NFProfile> const &value) {
   m_NfInstances = value;
 }
-std::string SearchResult::getSearchId() const {
-  return m_SearchId;
-}
-void SearchResult::setSearchId(std::string const& value) {
-  m_SearchId      = value;
+std::string SearchResult::getSearchId() const { return m_SearchId; }
+void SearchResult::setSearchId(std::string const &value) {
+  m_SearchId = value;
   m_SearchIdIsSet = true;
 }
-bool SearchResult::searchIdIsSet() const {
-  return m_SearchIdIsSet;
-}
-void SearchResult::unsetSearchId() {
-  m_SearchIdIsSet = false;
-}
+bool SearchResult::searchIdIsSet() const { return m_SearchIdIsSet; }
+void SearchResult::unsetSearchId() { m_SearchIdIsSet = false; }
 int32_t SearchResult::getNumNfInstComplete() const {
   return m_NumNfInstComplete;
 }
 void SearchResult::setNumNfInstComplete(int32_t const value) {
-  m_NumNfInstComplete      = value;
+  m_NumNfInstComplete = value;
   m_NumNfInstCompleteIsSet = true;
 }
 bool SearchResult::numNfInstCompleteIsSet() const {
@@ -111,8 +99,8 @@ void SearchResult::unsetNumNfInstComplete() {
 std::string SearchResult::getNrfSupportedFeatures() const {
   return m_NrfSupportedFeatures;
 }
-void SearchResult::setNrfSupportedFeatures(std::string const& value) {
-  m_NrfSupportedFeatures      = value;
+void SearchResult::setNrfSupportedFeatures(std::string const &value) {
+  m_NrfSupportedFeatures = value;
   m_NrfSupportedFeaturesIsSet = true;
 }
 bool SearchResult::nrfSupportedFeaturesIsSet() const {
@@ -122,4 +110,4 @@ void SearchResult::unsetNrfSupportedFeatures() {
   m_NrfSupportedFeaturesIsSet = false;
 }
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

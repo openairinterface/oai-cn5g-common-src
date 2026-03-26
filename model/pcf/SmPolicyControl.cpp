@@ -27,12 +27,12 @@ void SmPolicyControl::validate() const {
   }
 }
 
-bool SmPolicyControl::validate(std::stringstream& msg) const {
+bool SmPolicyControl::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool SmPolicyControl::validate(
-    std::stringstream& /* msg */, const std::string& /* pathPrefix */) const {
+bool SmPolicyControl::validate(std::stringstream & /* msg */,
+                               const std::string & /* pathPrefix */) const {
   bool success = true;
   /*
   const std::string _pathPrefix =
@@ -41,7 +41,7 @@ bool SmPolicyControl::validate(
   return success;
 }
 
-bool SmPolicyControl::operator==(const SmPolicyControl& rhs) const {
+bool SmPolicyControl::operator==(const SmPolicyControl &rhs) const {
   return
 
       (getContext() == rhs.getContext()) &&
@@ -51,17 +51,17 @@ bool SmPolicyControl::operator==(const SmPolicyControl& rhs) const {
           ;
 }
 
-bool SmPolicyControl::operator!=(const SmPolicyControl& rhs) const {
+bool SmPolicyControl::operator!=(const SmPolicyControl &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const SmPolicyControl& o) {
-  j            = nlohmann::json();
+void to_json(nlohmann::json &j, const SmPolicyControl &o) {
+  j = nlohmann::json();
   j["context"] = o.m_Context;
-  j["policy"]  = o.m_Policy;
+  j["policy"] = o.m_Policy;
 }
 
-void from_json(const nlohmann::json& j, SmPolicyControl& o) {
+void from_json(const nlohmann::json &j, SmPolicyControl &o) {
   j.at("context").get_to(o.m_Context);
   j.at("policy").get_to(o.m_Policy);
 }
@@ -70,15 +70,15 @@ oai::model::pcf::SmPolicyContextData SmPolicyControl::getContext() const {
   return m_Context;
 }
 void SmPolicyControl::setContext(
-    oai::model::pcf::SmPolicyContextData const& value) {
+    oai::model::pcf::SmPolicyContextData const &value) {
   m_Context = value;
 }
 oai::model::pcf::SmPolicyDecision SmPolicyControl::getPolicy() const {
   return m_Policy;
 }
 void SmPolicyControl::setPolicy(
-    oai::model::pcf::SmPolicyDecision const& value) {
+    oai::model::pcf::SmPolicyDecision const &value) {
   m_Policy = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

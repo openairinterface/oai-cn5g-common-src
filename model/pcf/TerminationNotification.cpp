@@ -18,9 +18,7 @@
 
 namespace oai::model::pcf {
 
-TerminationNotification::TerminationNotification() {
-  m_ResourceUri = "";
-}
+TerminationNotification::TerminationNotification() { m_ResourceUri = ""; }
 
 void TerminationNotification::validate() const {
   std::stringstream msg;
@@ -29,12 +27,12 @@ void TerminationNotification::validate() const {
   }
 }
 
-bool TerminationNotification::validate(std::stringstream& msg) const {
+bool TerminationNotification::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool TerminationNotification::validate(
-    std::stringstream& /* msg */, const std::string& /* pathPrefix */) const {
+    std::stringstream & /* msg */, const std::string & /* pathPrefix */) const {
   bool success = true;
   /*
   const std::string _pathPrefix =
@@ -44,7 +42,7 @@ bool TerminationNotification::validate(
 }
 
 bool TerminationNotification::operator==(
-    const TerminationNotification& rhs) const {
+    const TerminationNotification &rhs) const {
   return
 
       (getResourceUri() == rhs.getResourceUri()) &&
@@ -55,17 +53,17 @@ bool TerminationNotification::operator==(
 }
 
 bool TerminationNotification::operator!=(
-    const TerminationNotification& rhs) const {
+    const TerminationNotification &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const TerminationNotification& o) {
-  j                = nlohmann::json();
+void to_json(nlohmann::json &j, const TerminationNotification &o) {
+  j = nlohmann::json();
   j["resourceUri"] = o.m_ResourceUri;
-  j["cause"]       = o.m_Cause;
+  j["cause"] = o.m_Cause;
 }
 
-void from_json(const nlohmann::json& j, TerminationNotification& o) {
+void from_json(const nlohmann::json &j, TerminationNotification &o) {
   j.at("resourceUri").get_to(o.m_ResourceUri);
   j.at("cause").get_to(o.m_Cause);
 }
@@ -73,7 +71,7 @@ void from_json(const nlohmann::json& j, TerminationNotification& o) {
 std::string TerminationNotification::getResourceUri() const {
   return m_ResourceUri;
 }
-void TerminationNotification::setResourceUri(std::string const& value) {
+void TerminationNotification::setResourceUri(std::string const &value) {
   m_ResourceUri = value;
 }
 oai::model::pcf::SmPolicyAssociationReleaseCause
@@ -81,8 +79,8 @@ TerminationNotification::getCause() const {
   return m_Cause;
 }
 void TerminationNotification::setCause(
-    oai::model::pcf::SmPolicyAssociationReleaseCause const& value) {
+    oai::model::pcf::SmPolicyAssociationReleaseCause const &value) {
   m_Cause = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

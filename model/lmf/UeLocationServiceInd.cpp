@@ -27,12 +27,12 @@ void UeLocationServiceInd::validate() const {
   }
 }
 
-bool UeLocationServiceInd::validate(std::stringstream& msg) const {
+bool UeLocationServiceInd::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool UeLocationServiceInd::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool UeLocationServiceInd::validate(std::stringstream &msg,
+                                    const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "UeLocationServiceInd" : pathPrefix;
@@ -43,22 +43,22 @@ bool UeLocationServiceInd::validate(
   return success;
 }
 
-bool UeLocationServiceInd::operator==(const UeLocationServiceInd& rhs) const {
+bool UeLocationServiceInd::operator==(const UeLocationServiceInd &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool UeLocationServiceInd::operator!=(const UeLocationServiceInd& rhs) const {
+bool UeLocationServiceInd::operator!=(const UeLocationServiceInd &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const UeLocationServiceInd& o) {
+void to_json(nlohmann::json &j, const UeLocationServiceInd &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, UeLocationServiceInd& o) {
+void from_json(const nlohmann::json &j, UeLocationServiceInd &o) {
   from_json(j, o.m_value);
 }
 
@@ -80,4 +80,4 @@ void UeLocationServiceInd::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

@@ -7,41 +7,39 @@
 namespace oai::ngap {
 
 //------------------------------------------------------------------------------
-NetworkInstance::NetworkInstance() {
-  m_NetworkInstance = 0;
-}
+NetworkInstance::NetworkInstance() { m_NetworkInstance = 0; }
 
 //------------------------------------------------------------------------------
-NetworkInstance::NetworkInstance(const long& networkInstance) {
+NetworkInstance::NetworkInstance(const long &networkInstance) {
   m_NetworkInstance = networkInstance;
 }
 //------------------------------------------------------------------------------
 NetworkInstance::~NetworkInstance() {}
 
 //------------------------------------------------------------------------------
-void NetworkInstance::set(const long& networkInstance) {
+void NetworkInstance::set(const long &networkInstance) {
   m_NetworkInstance = networkInstance;
 }
 
 //------------------------------------------------------------------------------
-bool NetworkInstance::get(long& networkInstance) const {
+bool NetworkInstance::get(long &networkInstance) const {
   networkInstance = m_NetworkInstance;
 
   return true;
 }
 
 //------------------------------------------------------------------------------
-bool NetworkInstance::encode(Ngap_NetworkInstance_t& value) const {
+bool NetworkInstance::encode(Ngap_NetworkInstance_t &value) const {
   value = m_NetworkInstance;
 
   return true;
 }
 
 //------------------------------------------------------------------------------
-bool NetworkInstance::decode(const Ngap_NetworkInstance_t& value) {
+bool NetworkInstance::decode(const Ngap_NetworkInstance_t &value) {
   m_NetworkInstance = value;
 
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

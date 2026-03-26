@@ -17,31 +17,31 @@ extern "C" {
 
 namespace oai::ngap {
 class UserLocationInformation {
- public:
+public:
   UserLocationInformation();
   virtual ~UserLocationInformation();
 
-  void set(const UserLocationInformationEutra&);
-  bool get(UserLocationInformationEutra&) const;
+  void set(const UserLocationInformationEutra &);
+  bool get(UserLocationInformationEutra &) const;
 
-  void set(const UserLocationInformationNr&);
-  bool get(UserLocationInformationNr&) const;
+  void set(const UserLocationInformationNr &);
+  bool get(UserLocationInformationNr &) const;
 
   // void set(const UserLocationInformationN3IWF&);
   // void get(UserLocationInformationN3IWF&);
 
   Ngap_UserLocationInformation_PR getChoiceOfUserLocationInformation() const;
 
-  bool encode(Ngap_UserLocationInformation_t& userLocationInformation) const;
-  bool decode(const Ngap_UserLocationInformation_t& userLocationInformation);
+  bool encode(Ngap_UserLocationInformation_t &userLocationInformation) const;
+  bool decode(const Ngap_UserLocationInformation_t &userLocationInformation);
 
- private:
+private:
   Ngap_UserLocationInformation_PR m_Present;
   std::optional<UserLocationInformationEutra> m_UserLocationInformationEutra;
   std::optional<UserLocationInformationNr> m_UserLocationInformationNr;
   // TODO: UserLocationInformationN3IWF *userLocationInformationN3IWF;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

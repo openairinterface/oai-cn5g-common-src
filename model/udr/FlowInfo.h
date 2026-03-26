@@ -32,7 +32,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class FlowInfo {
- public:
+public:
   FlowInfo();
   virtual ~FlowInfo();
 
@@ -51,21 +51,21 @@ class FlowInfo {
   /// 3GPP TS 29.214 for encoding. It shall contain UL and/or DL IP flow
   /// description.
   /// </summary>
-  std::vector<std::string>& getFlowDescriptions();
-  void setFlowDescriptions(std::vector<std::string> const& value);
+  std::vector<std::string> &getFlowDescriptions();
+  void setFlowDescriptions(std::vector<std::string> const &value);
   bool flowDescriptionsIsSet() const;
   void unsetFlowDescriptions();
 
-  friend void to_json(nlohmann::json& j, const FlowInfo& o);
-  friend void from_json(const nlohmann::json& j, FlowInfo& o);
+  friend void to_json(nlohmann::json &j, const FlowInfo &o);
+  friend void from_json(const nlohmann::json &j, FlowInfo &o);
 
- protected:
+protected:
   int32_t m_FlowId;
 
   std::vector<std::string> m_FlowDescriptions;
   bool m_FlowDescriptionsIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* FlowInfo_H_ */

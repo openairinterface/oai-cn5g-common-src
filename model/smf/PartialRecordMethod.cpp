@@ -23,10 +23,10 @@ void PartialRecordMethod::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const PartialRecordMethod& o) {
+void to_json(nlohmann::json &j, const PartialRecordMethod &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, PartialRecordMethod& o) {}
+void from_json(const nlohmann::json &j, PartialRecordMethod &o) {}
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

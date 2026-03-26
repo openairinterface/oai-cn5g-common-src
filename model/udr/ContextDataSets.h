@@ -40,7 +40,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class ContextDataSets {
- public:
+public:
   ContextDataSets();
   virtual ~ContextDataSets();
 
@@ -53,72 +53,72 @@ class ContextDataSets {
   ///
   /// </summary>
   Amf3GppAccessRegistration getAmf3Gpp() const;
-  void setAmf3Gpp(Amf3GppAccessRegistration const& value);
+  void setAmf3Gpp(Amf3GppAccessRegistration const &value);
   bool amf3GppIsSet() const;
   void unsetAmf3Gpp();
   /// <summary>
   ///
   /// </summary>
   AmfNon3GppAccessRegistration getAmfNon3Gpp() const;
-  void setAmfNon3Gpp(AmfNon3GppAccessRegistration const& value);
+  void setAmfNon3Gpp(AmfNon3GppAccessRegistration const &value);
   bool amfNon3GppIsSet() const;
   void unsetAmfNon3Gpp();
   /// <summary>
   ///
   /// </summary>
-  std::vector<SdmSubscription>& getSdmSubscriptions();
-  void setSdmSubscriptions(std::vector<SdmSubscription> const& value);
+  std::vector<SdmSubscription> &getSdmSubscriptions();
+  void setSdmSubscriptions(std::vector<SdmSubscription> const &value);
   bool sdmSubscriptionsIsSet() const;
   void unsetSdmSubscriptions();
   /// <summary>
   ///
   /// </summary>
-  std::vector<EeSubscription>& getEeSubscriptions();
-  void setEeSubscriptions(std::vector<EeSubscription> const& value);
+  std::vector<EeSubscription> &getEeSubscriptions();
+  void setEeSubscriptions(std::vector<EeSubscription> const &value);
   bool eeSubscriptionsIsSet() const;
   void unsetEeSubscriptions();
   /// <summary>
   ///
   /// </summary>
   SmsfRegistration getSmsf3GppAccess() const;
-  void setSmsf3GppAccess(SmsfRegistration const& value);
+  void setSmsf3GppAccess(SmsfRegistration const &value);
   bool smsf3GppAccessIsSet() const;
   void unsetSmsf3GppAccess();
   /// <summary>
   ///
   /// </summary>
   SmsfRegistration getSmsfNon3GppAccess() const;
-  void setSmsfNon3GppAccess(SmsfRegistration const& value);
+  void setSmsfNon3GppAccess(SmsfRegistration const &value);
   bool smsfNon3GppAccessIsSet() const;
   void unsetSmsfNon3GppAccess();
   /// <summary>
   ///
   /// </summary>
-  std::vector<SubscriptionDataSubscriptions>&
+  std::vector<SubscriptionDataSubscriptions> &
   getSubscriptionDataSubscriptions();
   void setSubscriptionDataSubscriptions(
-      std::vector<SubscriptionDataSubscriptions> const& value);
+      std::vector<SubscriptionDataSubscriptions> const &value);
   bool subscriptionDataSubscriptionsIsSet() const;
   void unsetSubscriptionDataSubscriptions();
   /// <summary>
   ///
   /// </summary>
-  std::vector<SmfRegistration>& getSmfRegistrations();
-  void setSmfRegistrations(std::vector<SmfRegistration> const& value);
+  std::vector<SmfRegistration> &getSmfRegistrations();
+  void setSmfRegistrations(std::vector<SmfRegistration> const &value);
   bool smfRegistrationsIsSet() const;
   void unsetSmfRegistrations();
   /// <summary>
   ///
   /// </summary>
   IpSmGwRegistration getIpSmGw() const;
-  void setIpSmGw(IpSmGwRegistration const& value);
+  void setIpSmGw(IpSmGwRegistration const &value);
   bool ipSmGwIsSet() const;
   void unsetIpSmGw();
 
-  friend void to_json(nlohmann::json& j, const ContextDataSets& o);
-  friend void from_json(const nlohmann::json& j, ContextDataSets& o);
+  friend void to_json(nlohmann::json &j, const ContextDataSets &o);
+  friend void from_json(const nlohmann::json &j, ContextDataSets &o);
 
- protected:
+protected:
   Amf3GppAccessRegistration m_Amf3Gpp;
   bool m_Amf3GppIsSet;
   AmfNon3GppAccessRegistration m_AmfNon3Gpp;
@@ -139,6 +139,6 @@ class ContextDataSets {
   bool m_IpSmGwIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* ContextDataSets_H_ */

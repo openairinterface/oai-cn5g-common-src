@@ -29,19 +29,19 @@ namespace oai::model::common {
 ///
 /// </summary>
 class DnaiChangeTypeRm : DnaiChangeType {
- public:
+public:
   DnaiChangeTypeRm();
   virtual ~DnaiChangeTypeRm() = default;
 
-  bool validate(
-      std::stringstream& msg, const std::string& pathPrefix) const override;
+  bool validate(std::stringstream &msg,
+                const std::string &pathPrefix) const override;
 
-  friend void to_json(nlohmann::json& j, const DnaiChangeTypeRm& o);
-  friend void from_json(const nlohmann::json& j, DnaiChangeTypeRm& o);
+  friend void to_json(nlohmann::json &j, const DnaiChangeTypeRm &o);
+  friend void from_json(const nlohmann::json &j, DnaiChangeTypeRm &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* DnaiChangeTypeRm_H_ */

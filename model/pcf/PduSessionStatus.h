@@ -27,7 +27,7 @@ namespace oai::model::pcf {
 /// Indicates whether the PDU session is established or terminated.
 /// </summary>
 class PduSessionStatus {
- public:
+public:
   PduSessionStatus();
   virtual ~PduSessionStatus() = default;
 
@@ -41,26 +41,26 @@ class PduSessionStatus {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const PduSessionStatus& rhs) const;
-  bool operator!=(const PduSessionStatus& rhs) const;
+  bool operator==(const PduSessionStatus &rhs) const;
+  bool operator!=(const PduSessionStatus &rhs) const;
 
   /////////////////////////////////////////////
   /// PduSessionStatus members
 
-  friend void to_json(nlohmann::json& j, const PduSessionStatus& o);
-  friend void from_json(const nlohmann::json& j, PduSessionStatus& o);
+  friend void to_json(nlohmann::json &j, const PduSessionStatus &o);
+  friend void from_json(const nlohmann::json &j, PduSessionStatus &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* PduSessionStatus_H_ */

@@ -12,20 +12,20 @@ extern "C" {
 namespace oai::ngap {
 
 class DelayCritical {
- public:
+public:
   DelayCritical();
   virtual ~DelayCritical();
 
-  void set(const e_Ngap_DelayCritical& value);
-  bool get(e_Ngap_DelayCritical& value) const;
+  void set(const e_Ngap_DelayCritical &value);
+  bool get(e_Ngap_DelayCritical &value) const;
 
-  bool encode(Ngap_DelayCritical_t&) const;
-  bool decode(const Ngap_DelayCritical_t&);
+  bool encode(Ngap_DelayCritical_t &) const;
+  bool decode(const Ngap_DelayCritical_t &);
 
- private:
+private:
   long m_DelayCritical;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

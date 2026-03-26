@@ -23,10 +23,10 @@ void NotificationCause::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const NotificationCause& o) {
+void to_json(nlohmann::json &j, const NotificationCause &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, NotificationCause& o) {}
+void from_json(const nlohmann::json &j, NotificationCause &o) {}
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

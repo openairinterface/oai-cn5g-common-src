@@ -25,7 +25,7 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_PDUSessionResourceModifyIndicationUnsuccessfulTransfer */
 typedef struct Ngap_PDUSessionResourceModifyIndicationUnsuccessfulTransfer {
   Ngap_Cause_t cause;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

@@ -16,21 +16,21 @@ extern "C" {
 namespace oai::ngap {
 
 class PduSessionResourceReleaseResponseTransfer {
- public:
+public:
   PduSessionResourceReleaseResponseTransfer();
   virtual ~PduSessionResourceReleaseResponseTransfer();
 
   // TODO: Secondary RAT Usage Information (Optional)
 
-  int encode(uint8_t* buf, int bufSize);
-  bool decode(uint8_t* buf, int bufSize);
+  int encode(uint8_t *buf, int bufSize);
+  bool decode(uint8_t *buf, int bufSize);
 
- private:
-  Ngap_PDUSessionResourceReleaseResponseTransfer_t*
-      m_PduSessionResourceReleaseResponseTransferIe;
+private:
+  Ngap_PDUSessionResourceReleaseResponseTransfer_t
+      *m_PduSessionResourceReleaseResponseTransferIe;
 
   // TODO: Secondary RAT Usage Information (Optional)
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

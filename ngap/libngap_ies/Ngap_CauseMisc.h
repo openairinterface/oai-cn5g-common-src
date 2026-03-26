@@ -20,12 +20,12 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_CauseMisc {
-  Ngap_CauseMisc_control_processing_overload                = 0,
+  Ngap_CauseMisc_control_processing_overload = 0,
   Ngap_CauseMisc_not_enough_user_plane_processing_resources = 1,
-  Ngap_CauseMisc_hardware_failure                           = 2,
-  Ngap_CauseMisc_om_intervention                            = 3,
-  Ngap_CauseMisc_unknown_PLMN_or_SNPN                       = 4,
-  Ngap_CauseMisc_unspecified                                = 5
+  Ngap_CauseMisc_hardware_failure = 2,
+  Ngap_CauseMisc_om_intervention = 3,
+  Ngap_CauseMisc_unknown_PLMN_or_SNPN = 4,
+  Ngap_CauseMisc_unspecified = 5
   /*
    * Enumeration is extensible
    */

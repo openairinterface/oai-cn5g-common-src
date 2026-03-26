@@ -14,16 +14,16 @@ PduSessionResourceReleaseItemCmd::~PduSessionResourceReleaseItemCmd() {}
 
 //------------------------------------------------------------------------------
 void PduSessionResourceReleaseItemCmd::set(
-    const PduSessionId& pduSessionId,
-    const OCTET_STRING_t& pduSessionResourceRelease) {
-  m_PduSessionId                             = pduSessionId;
+    const PduSessionId &pduSessionId,
+    const OCTET_STRING_t &pduSessionResourceRelease) {
+  m_PduSessionId = pduSessionId;
   m_PduSessionResourceReleaseCommandTransfer = pduSessionResourceRelease;
 }
 
 //------------------------------------------------------------------------------
 bool PduSessionResourceReleaseItemCmd::encode(
-    Ngap_PDUSessionResourceToReleaseItemRelCmd_t&
-        pduSessionResourceReleaseCommandTransfer) const {
+    Ngap_PDUSessionResourceToReleaseItemRelCmd_t
+        &pduSessionResourceReleaseCommandTransfer) const {
   if (!m_PduSessionId.encode(
           pduSessionResourceReleaseCommandTransfer.pDUSessionID))
     return false;
@@ -36,8 +36,8 @@ bool PduSessionResourceReleaseItemCmd::encode(
 
 //------------------------------------------------------------------------------
 bool PduSessionResourceReleaseItemCmd::decode(
-    const Ngap_PDUSessionResourceToReleaseItemRelCmd_t&
-        pduSessionResourceReleaseCommandTransfer) {
+    const Ngap_PDUSessionResourceToReleaseItemRelCmd_t
+        &pduSessionResourceReleaseCommandTransfer) {
   if (!m_PduSessionId.decode(
           pduSessionResourceReleaseCommandTransfer.pDUSessionID))
     return false;
@@ -50,10 +50,10 @@ bool PduSessionResourceReleaseItemCmd::decode(
 
 //------------------------------------------------------------------------------
 void PduSessionResourceReleaseItemCmd::get(
-    PduSessionId& pduSessionId,
-    OCTET_STRING_t& pduSessionResourceRelease) const {
-  pduSessionId              = m_PduSessionId;
+    PduSessionId &pduSessionId,
+    OCTET_STRING_t &pduSessionResourceRelease) const {
+  pduSessionId = m_PduSessionId;
   pduSessionResourceRelease = m_PduSessionResourceReleaseCommandTransfer;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

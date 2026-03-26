@@ -22,10 +22,10 @@
 #ifndef ReportingOptions_H_
 #define ReportingOptions_H_
 
-#include "NotificationFlag.h"
 #include "EventReportMode.h"
-#include <string>
+#include "NotificationFlag.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::udm {
 
@@ -33,7 +33,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class ReportingOptions {
- public:
+public:
   ReportingOptions();
   virtual ~ReportingOptions() = default;
 
@@ -47,10 +47,10 @@ class ReportingOptions {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const ReportingOptions& rhs) const;
-  bool operator!=(const ReportingOptions& rhs) const;
+  bool operator==(const ReportingOptions &rhs) const;
+  bool operator!=(const ReportingOptions &rhs) const;
 
   /////////////////////////////////////////////
   /// ReportingOptions members
@@ -59,7 +59,7 @@ class ReportingOptions {
   ///
   /// </summary>
   EventReportMode getReportMode() const;
-  void setReportMode(EventReportMode const& value);
+  void setReportMode(EventReportMode const &value);
   bool reportModeIsSet() const;
   void unsetReportMode();
   /// <summary>
@@ -73,7 +73,7 @@ class ReportingOptions {
   ///
   /// </summary>
   std::string getExpiry() const;
-  void setExpiry(std::string const& value);
+  void setExpiry(std::string const &value);
   bool expiryIsSet() const;
   void unsetExpiry();
   /// <summary>
@@ -101,14 +101,14 @@ class ReportingOptions {
   ///
   /// </summary>
   NotificationFlag getNotifFlag() const;
-  void setNotifFlag(NotificationFlag const& value);
+  void setNotifFlag(NotificationFlag const &value);
   bool notifFlagIsSet() const;
   void unsetNotifFlag();
 
-  friend void to_json(nlohmann::json& j, const ReportingOptions& o);
-  friend void from_json(const nlohmann::json& j, ReportingOptions& o);
+  friend void to_json(nlohmann::json &j, const ReportingOptions &o);
+  friend void from_json(const nlohmann::json &j, ReportingOptions &o);
 
- protected:
+protected:
   EventReportMode m_ReportMode;
   bool m_ReportModeIsSet;
   int32_t m_MaxNumOfReports;
@@ -126,9 +126,9 @@ class ReportingOptions {
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* ReportingOptions_H_ */

@@ -19,8 +19,8 @@
 #ifndef AlternativeServiceRequirementsData_H_
 #define AlternativeServiceRequirementsData_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::pcf {
 
@@ -28,7 +28,7 @@ namespace oai::model::pcf {
 /// Contains an alternative QoS related parameter set.
 /// </summary>
 class AlternativeServiceRequirementsData {
- public:
+public:
   AlternativeServiceRequirementsData();
   virtual ~AlternativeServiceRequirementsData() = default;
 
@@ -42,16 +42,16 @@ class AlternativeServiceRequirementsData {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const AlternativeServiceRequirementsData& rhs) const;
-  bool operator!=(const AlternativeServiceRequirementsData& rhs) const;
+  bool operator==(const AlternativeServiceRequirementsData &rhs) const;
+  bool operator!=(const AlternativeServiceRequirementsData &rhs) const;
 
   /////////////////////////////////////////////
   /// AlternativeServiceRequirementsData members
@@ -60,7 +60,7 @@ class AlternativeServiceRequirementsData {
   /// Reference to this alternative QoS related parameter set.
   /// </summary>
   std::string getAltQosParamSetRef() const;
-  void setAltQosParamSetRef(std::string const& value);
+  void setAltQosParamSetRef(std::string const &value);
   /// <summary>
   /// String representing a bit rate; the prefixes follow the standard symbols
   /// from The International System of Units, and represent x1000 multipliers,
@@ -68,7 +68,7 @@ class AlternativeServiceRequirementsData {
   /// standard symbol \&quot;k\&quot;.
   /// </summary>
   std::string getGbrUl() const;
-  void setGbrUl(std::string const& value);
+  void setGbrUl(std::string const &value);
   bool gbrUlIsSet() const;
   void unsetGbrUl();
   /// <summary>
@@ -78,7 +78,7 @@ class AlternativeServiceRequirementsData {
   /// standard symbol \&quot;k\&quot;.
   /// </summary>
   std::string getGbrDl() const;
-  void setGbrDl(std::string const& value);
+  void setGbrDl(std::string const &value);
   bool gbrDlIsSet() const;
   void unsetGbrDl();
   /// <summary>
@@ -95,16 +95,16 @@ class AlternativeServiceRequirementsData {
   /// scalar and the exponent k are each encoded as one decimal digit.
   /// </summary>
   std::string getPer() const;
-  void setPer(std::string const& value);
+  void setPer(std::string const &value);
   bool perIsSet() const;
   void unsetPer();
 
-  friend void to_json(
-      nlohmann::json& j, const AlternativeServiceRequirementsData& o);
-  friend void from_json(
-      const nlohmann::json& j, AlternativeServiceRequirementsData& o);
+  friend void to_json(nlohmann::json &j,
+                      const AlternativeServiceRequirementsData &o);
+  friend void from_json(const nlohmann::json &j,
+                        AlternativeServiceRequirementsData &o);
 
- protected:
+protected:
   std::string m_AltQosParamSetRef;
 
   std::string m_GbrUl;
@@ -117,6 +117,6 @@ class AlternativeServiceRequirementsData {
   bool m_PerIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* AlternativeServiceRequirementsData_H_ */

@@ -27,13 +27,13 @@ void UeAuth::validate() const {
   }
 }
 
-bool UeAuth::validate(std::stringstream& msg) const {
+bool UeAuth::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool UeAuth::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool UeAuth::validate(std::stringstream &msg,
+                      const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "UeAuth" : pathPrefix;
 
   if (!m_value.validate(msg)) {
@@ -42,32 +42,24 @@ bool UeAuth::validate(
   return success;
 }
 
-bool UeAuth::operator==(const UeAuth& rhs) const {
+bool UeAuth::operator==(const UeAuth &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool UeAuth::operator!=(const UeAuth& rhs) const {
-  return !(*this == rhs);
-}
+bool UeAuth::operator!=(const UeAuth &rhs) const { return !(*this == rhs); }
 
-void to_json(nlohmann::json& j, const UeAuth& o) {
+void to_json(nlohmann::json &j, const UeAuth &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, UeAuth& o) {
-  from_json(j, o.m_value);
-}
+void from_json(const nlohmann::json &j, UeAuth &o) { from_json(j, o.m_value); }
 
-UeAuth_anyOf UeAuth::getValue() const {
-  return m_value;
-}
+UeAuth_anyOf UeAuth::getValue() const { return m_value; }
 
-void UeAuth::setValue(UeAuth_anyOf value) {
-  m_value = value;
-}
+void UeAuth::setValue(UeAuth_anyOf value) { m_value = value; }
 
 UeAuth_anyOf::eUeAuth_anyOf UeAuth::getEnumValue() const {
   return m_value.getValue();
@@ -77,4 +69,4 @@ void UeAuth::setEnumValue(UeAuth_anyOf::eUeAuth_anyOf value) {
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

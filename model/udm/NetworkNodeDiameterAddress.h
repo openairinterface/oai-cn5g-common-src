@@ -31,7 +31,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class NetworkNodeDiameterAddress {
- public:
+public:
   NetworkNodeDiameterAddress();
   virtual ~NetworkNodeDiameterAddress();
 
@@ -44,21 +44,21 @@ class NetworkNodeDiameterAddress {
   ///
   /// </summary>
   std::string getName() const;
-  void setName(std::string const& value);
+  void setName(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getRealm() const;
-  void setRealm(std::string const& value);
+  void setRealm(std::string const &value);
 
-  friend void to_json(nlohmann::json& j, const NetworkNodeDiameterAddress& o);
-  friend void from_json(const nlohmann::json& j, NetworkNodeDiameterAddress& o);
+  friend void to_json(nlohmann::json &j, const NetworkNodeDiameterAddress &o);
+  friend void from_json(const nlohmann::json &j, NetworkNodeDiameterAddress &o);
 
- protected:
+protected:
   std::string m_Name;
 
   std::string m_Realm;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 #endif /* NetworkNodeDiameterAddress_H_ */

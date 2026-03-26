@@ -27,12 +27,12 @@ void _5GsUserState::validate() const {
   }
 }
 
-bool _5GsUserState::validate(std::stringstream& msg) const {
+bool _5GsUserState::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool _5GsUserState::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool _5GsUserState::validate(std::stringstream &msg,
+                             const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "5GsUserState" : pathPrefix;
@@ -43,32 +43,28 @@ bool _5GsUserState::validate(
   return success;
 }
 
-bool _5GsUserState::operator==(const _5GsUserState& rhs) const {
+bool _5GsUserState::operator==(const _5GsUserState &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool _5GsUserState::operator!=(const _5GsUserState& rhs) const {
+bool _5GsUserState::operator!=(const _5GsUserState &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const _5GsUserState& o) {
+void to_json(nlohmann::json &j, const _5GsUserState &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, _5GsUserState& o) {
+void from_json(const nlohmann::json &j, _5GsUserState &o) {
   from_json(j, o.m_value);
 }
 
-_5GsUserState_anyOf _5GsUserState::getValue() const {
-  return m_value;
-}
+_5GsUserState_anyOf _5GsUserState::getValue() const { return m_value; }
 
-void _5GsUserState::setValue(_5GsUserState_anyOf value) {
-  m_value = value;
-}
+void _5GsUserState::setValue(_5GsUserState_anyOf value) { m_value = value; }
 
 _5GsUserState_anyOf::e_5GsUserState_anyOf _5GsUserState::getEnumValue() const {
   return m_value.getValue();
@@ -79,4 +75,4 @@ void _5GsUserState::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

@@ -27,12 +27,12 @@ void QosMonitoringParamType::validate() const {
   }
 }
 
-bool QosMonitoringParamType::validate(std::stringstream& msg) const {
+bool QosMonitoringParamType::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool QosMonitoringParamType::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool QosMonitoringParamType::validate(std::stringstream &msg,
+                                      const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "QosMonitoringParamType" : pathPrefix;
@@ -41,19 +41,19 @@ bool QosMonitoringParamType::validate(
 }
 
 bool QosMonitoringParamType::operator==(
-    const QosMonitoringParamType& rhs) const {
-  return true;  // TODO
+    const QosMonitoringParamType &rhs) const {
+  return true; // TODO
 }
 
 bool QosMonitoringParamType::operator!=(
-    const QosMonitoringParamType& rhs) const {
+    const QosMonitoringParamType &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const QosMonitoringParamType& o) {
+void to_json(nlohmann::json &j, const QosMonitoringParamType &o) {
   j = nlohmann::json::object();
 }
 
-void from_json(const nlohmann::json& j, QosMonitoringParamType& o) {}
+void from_json(const nlohmann::json &j, QosMonitoringParamType &o) {}
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

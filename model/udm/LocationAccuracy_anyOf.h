@@ -30,7 +30,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class LocationAccuracy_anyOf {
- public:
+public:
   LocationAccuracy_anyOf();
   virtual ~LocationAccuracy_anyOf() = default;
 
@@ -57,10 +57,10 @@ class LocationAccuracy_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const LocationAccuracy_anyOf& rhs) const;
-  bool operator!=(const LocationAccuracy_anyOf& rhs) const;
+  bool operator==(const LocationAccuracy_anyOf &rhs) const;
+  bool operator!=(const LocationAccuracy_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// LocationAccuracy_anyOf members
@@ -68,19 +68,19 @@ class LocationAccuracy_anyOf {
   LocationAccuracy_anyOf::eLocationAccuracy_anyOf getValue() const;
   void setValue(LocationAccuracy_anyOf::eLocationAccuracy_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const LocationAccuracy_anyOf& o);
-  friend void from_json(const nlohmann::json& j, LocationAccuracy_anyOf& o);
+  friend void to_json(nlohmann::json &j, const LocationAccuracy_anyOf &o);
+  friend void from_json(const nlohmann::json &j, LocationAccuracy_anyOf &o);
 
- protected:
+protected:
   LocationAccuracy_anyOf::eLocationAccuracy_anyOf m_value =
       LocationAccuracy_anyOf::eLocationAccuracy_anyOf::
           INVALID_VALUE_OPENAPI_GENERATED;
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* LocationAccuracy_anyOf_H_ */

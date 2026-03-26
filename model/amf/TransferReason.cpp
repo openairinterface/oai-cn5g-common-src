@@ -23,10 +23,10 @@ void TransferReason::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const TransferReason& o) {
+void to_json(nlohmann::json &j, const TransferReason &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, TransferReason& o) {}
+void from_json(const nlohmann::json &j, TransferReason &o) {}
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

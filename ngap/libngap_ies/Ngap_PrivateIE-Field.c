@@ -8,13 +8,13 @@
 
 #include "Ngap_PrivateIE-Field.h"
 
-static int memb_Ngap_id_constraint_1(
-    const asn_TYPE_descriptor_t* td, const void* sptr,
-    asn_app_constraint_failed_f* ctfailcb, void* app_key) {
+static int memb_Ngap_id_constraint_1(const asn_TYPE_descriptor_t *td,
+                                     const void *sptr,
+                                     asn_app_constraint_failed_f *ctfailcb,
+                                     void *app_key) {
   if (!sptr) {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: value not given (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: value not given (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 
@@ -22,17 +22,16 @@ static int memb_Ngap_id_constraint_1(
     /* Nothing is here. See below */
   }
 
-  return td->encoding_constraints.general_constraints(
-      td, sptr, ctfailcb, app_key);
+  return td->encoding_constraints.general_constraints(td, sptr, ctfailcb,
+                                                      app_key);
 }
 
 static int memb_Ngap_criticality_constraint_1(
-    const asn_TYPE_descriptor_t* td, const void* sptr,
-    asn_app_constraint_failed_f* ctfailcb, void* app_key) {
+    const asn_TYPE_descriptor_t *td, const void *sptr,
+    asn_app_constraint_failed_f *ctfailcb, void *app_key) {
   if (!sptr) {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: value not given (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: value not given (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 
@@ -40,17 +39,17 @@ static int memb_Ngap_criticality_constraint_1(
     /* Nothing is here. See below */
   }
 
-  return td->encoding_constraints.general_constraints(
-      td, sptr, ctfailcb, app_key);
+  return td->encoding_constraints.general_constraints(td, sptr, ctfailcb,
+                                                      app_key);
 }
 
-static int memb_Ngap_value_constraint_1(
-    const asn_TYPE_descriptor_t* td, const void* sptr,
-    asn_app_constraint_failed_f* ctfailcb, void* app_key) {
+static int memb_Ngap_value_constraint_1(const asn_TYPE_descriptor_t *td,
+                                        const void *sptr,
+                                        asn_app_constraint_failed_f *ctfailcb,
+                                        void *app_key) {
   if (!sptr) {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: value not given (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: value not given (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 
@@ -58,14 +57,13 @@ static int memb_Ngap_value_constraint_1(
     /* Nothing is here. See below */
   }
 
-  return td->encoding_constraints.general_constraints(
-      td, sptr, ctfailcb, app_key);
+  return td->encoding_constraints.general_constraints(td, sptr, ctfailcb,
+                                                      app_key);
 }
 
 #if !defined(ASN_DISABLE_OER_SUPPORT)
-static asn_oer_constraints_t asn_OER_memb_Ngap_id_constr_2 CC_NOTUSED = {
-    {0, 0},
-    -1};
+static asn_oer_constraints_t asn_OER_memb_Ngap_id_constr_2 CC_NOTUSED = {{0, 0},
+                                                                         -1};
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 static asn_per_constraints_t asn_PER_memb_Ngap_id_constr_2 CC_NOTUSED = {
@@ -92,8 +90,7 @@ static asn_per_constraints_t asn_PER_memb_Ngap_criticality_constr_3
           !defined(ASN_DISABLE_APER_SUPPORT) */
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 static asn_oer_constraints_t asn_OER_memb_Ngap_value_constr_4 CC_NOTUSED = {
-    {0, 0},
-    -1};
+    {0, 0}, -1};
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 static asn_per_constraints_t asn_PER_memb_Ngap_value_constr_4 CC_NOTUSED = {
@@ -108,7 +105,7 @@ static asn_CHOICE_specifics_t asn_SPC_Ngap_value_specs_4 = {
     sizeof(struct Ngap_PrivateMessageIEs__value),
     offsetof(struct Ngap_PrivateMessageIEs__value, _asn_ctx),
     offsetof(struct Ngap_PrivateMessageIEs__value, present),
-    sizeof(((struct Ngap_PrivateMessageIEs__value*) 0)->present),
+    sizeof(((struct Ngap_PrivateMessageIEs__value *)0)->present),
     0, /* No top level tags */
     0, /* No tags in the map */
     0,

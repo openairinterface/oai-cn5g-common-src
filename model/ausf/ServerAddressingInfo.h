@@ -19,10 +19,10 @@
 #ifndef ServerAddressingInfo_H_
 #define ServerAddressingInfo_H_
 
-#include <string>
 #include "Ipv6Addr.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::ausf {
 
@@ -30,7 +30,7 @@ namespace oai::model::ausf {
 /// Contains addressing information (IP addresses and/or FQDNs) of a server.
 /// </summary>
 class ServerAddressingInfo {
- public:
+public:
   ServerAddressingInfo();
   virtual ~ServerAddressingInfo() = default;
 
@@ -44,16 +44,16 @@ class ServerAddressingInfo {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const ServerAddressingInfo& rhs) const;
-  bool operator!=(const ServerAddressingInfo& rhs) const;
+  bool operator==(const ServerAddressingInfo &rhs) const;
+  bool operator!=(const ServerAddressingInfo &rhs) const;
 
   /////////////////////////////////////////////
   /// ServerAddressingInfo members
@@ -62,28 +62,28 @@ class ServerAddressingInfo {
   ///
   /// </summary>
   std::vector<std::string> getIpv4Addresses() const;
-  void setIpv4Addresses(std::vector<std::string> const& value);
+  void setIpv4Addresses(std::vector<std::string> const &value);
   bool ipv4AddressesIsSet() const;
   void unsetIpv4Addresses();
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::common::Ipv6Addr> getIpv6Addresses() const;
-  void setIpv6Addresses(std::vector<oai::model::common::Ipv6Addr> const& value);
+  void setIpv6Addresses(std::vector<oai::model::common::Ipv6Addr> const &value);
   bool ipv6AddressesIsSet() const;
   void unsetIpv6Addresses();
   /// <summary>
   ///
   /// </summary>
   std::vector<std::string> getFqdnList() const;
-  void setFqdnList(std::vector<std::string> const& value);
+  void setFqdnList(std::vector<std::string> const &value);
   bool fqdnListIsSet() const;
   void unsetFqdnList();
 
-  friend void to_json(nlohmann::json& j, const ServerAddressingInfo& o);
-  friend void from_json(const nlohmann::json& j, ServerAddressingInfo& o);
+  friend void to_json(nlohmann::json &j, const ServerAddressingInfo &o);
+  friend void from_json(const nlohmann::json &j, ServerAddressingInfo &o);
 
- protected:
+protected:
   std::vector<std::string> m_Ipv4Addresses;
   bool m_Ipv4AddressesIsSet;
   std::vector<oai::model::common::Ipv6Addr> m_Ipv6Addresses;
@@ -92,6 +92,6 @@ class ServerAddressingInfo {
   bool m_FqdnListIsSet;
 };
 
-}  // namespace oai::model::ausf
+} // namespace oai::model::ausf
 
 #endif /* ServerAddressingInfo_H_ */

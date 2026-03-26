@@ -27,12 +27,12 @@ void SteeringFunctionality::validate() const {
   }
 }
 
-bool SteeringFunctionality::validate(std::stringstream& msg) const {
+bool SteeringFunctionality::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool SteeringFunctionality::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool SteeringFunctionality::validate(std::stringstream &msg,
+                                     const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "SteeringFunctionality" : pathPrefix;
@@ -43,22 +43,22 @@ bool SteeringFunctionality::validate(
   return success;
 }
 
-bool SteeringFunctionality::operator==(const SteeringFunctionality& rhs) const {
+bool SteeringFunctionality::operator==(const SteeringFunctionality &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool SteeringFunctionality::operator!=(const SteeringFunctionality& rhs) const {
+bool SteeringFunctionality::operator!=(const SteeringFunctionality &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const SteeringFunctionality& o) {
+void to_json(nlohmann::json &j, const SteeringFunctionality &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, SteeringFunctionality& o) {
+void from_json(const nlohmann::json &j, SteeringFunctionality &o) {
   from_json(j, o.m_value);
 }
 
@@ -80,4 +80,4 @@ void SteeringFunctionality::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

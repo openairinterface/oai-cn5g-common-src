@@ -12,29 +12,28 @@ extern "C" {
 namespace oai::ngap {
 
 class UeSecurityCapabilities {
- public:
+public:
   UeSecurityCapabilities();
   virtual ~UeSecurityCapabilities();
 
-  void set(
-      uint16_t nr_encryption_algs, uint16_t integrityProtectionAlgorithms,
-      uint16_t eutraEncryptionAlgorithms,
-      uint16_t eutraIntegrityProtectionAlgorithms);
-  bool get(
-      uint16_t& nr_encryption_algs, uint16_t& integrityProtectionAlgorithms,
-      uint16_t& eutraEncryptionAlgorithms,
-      uint16_t& eutraIntegrityProtectionAlgorithms) const;
+  void set(uint16_t nr_encryption_algs, uint16_t integrityProtectionAlgorithms,
+           uint16_t eutraEncryptionAlgorithms,
+           uint16_t eutraIntegrityProtectionAlgorithms);
+  bool get(uint16_t &nr_encryption_algs,
+           uint16_t &integrityProtectionAlgorithms,
+           uint16_t &eutraEncryptionAlgorithms,
+           uint16_t &eutraIntegrityProtectionAlgorithms) const;
 
-  bool encode(Ngap_UESecurityCapabilities_t&) const;
-  bool decode(const Ngap_UESecurityCapabilities_t&);
+  bool encode(Ngap_UESecurityCapabilities_t &) const;
+  bool decode(const Ngap_UESecurityCapabilities_t &);
 
- private:
-  uint16_t m_NrEncryptionAlgorithms;              // Mandatory
-  uint16_t m_IntegrityProtectionAlgorithms;       // Mandatory
-  uint16_t m_EutraEncryptionAlgorithms;           // Mandatory
-  uint16_t m_EutraIntegrityProtectionAlgorithms;  // Mandatory
+private:
+  uint16_t m_NrEncryptionAlgorithms;             // Mandatory
+  uint16_t m_IntegrityProtectionAlgorithms;      // Mandatory
+  uint16_t m_EutraEncryptionAlgorithms;          // Mandatory
+  uint16_t m_EutraIntegrityProtectionAlgorithms; // Mandatory
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

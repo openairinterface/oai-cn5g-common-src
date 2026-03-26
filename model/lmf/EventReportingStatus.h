@@ -27,7 +27,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class EventReportingStatus {
- public:
+public:
   EventReportingStatus();
   virtual ~EventReportingStatus() = default;
 
@@ -41,16 +41,16 @@ class EventReportingStatus {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const EventReportingStatus& rhs) const;
-  bool operator!=(const EventReportingStatus& rhs) const;
+  bool operator==(const EventReportingStatus &rhs) const;
+  bool operator!=(const EventReportingStatus &rhs) const;
 
   /////////////////////////////////////////////
   /// EventReportingStatus members
@@ -70,16 +70,16 @@ class EventReportingStatus {
   bool eventReportDurationIsSet() const;
   void unsetEventReportDuration();
 
-  friend void to_json(nlohmann::json& j, const EventReportingStatus& o);
-  friend void from_json(const nlohmann::json& j, EventReportingStatus& o);
+  friend void to_json(nlohmann::json &j, const EventReportingStatus &o);
+  friend void from_json(const nlohmann::json &j, EventReportingStatus &o);
 
- protected:
+protected:
   int32_t m_EventReportCounter;
   bool m_EventReportCounterIsSet;
   int32_t m_EventReportDuration;
   bool m_EventReportDurationIsSet;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* EventReportingStatus_H_ */

@@ -24,10 +24,10 @@ using namespace oai::model::common;
 InterfaceUpfInfoItem::InterfaceUpfInfoItem() {
   m_Ipv4EndpointAddressesIsSet = false;
   m_Ipv6EndpointAddressesIsSet = false;
-  m_EndpointFqdn               = "";
-  m_EndpointFqdnIsSet          = false;
-  m_NetworkInstance            = "";
-  m_NetworkInstanceIsSet       = false;
+  m_EndpointFqdn = "";
+  m_EndpointFqdnIsSet = false;
+  m_NetworkInstance = "";
+  m_NetworkInstanceIsSet = false;
 }
 
 void InterfaceUpfInfoItem::validate() const {
@@ -37,28 +37,28 @@ void InterfaceUpfInfoItem::validate() const {
   }
 }
 
-bool InterfaceUpfInfoItem::validate(std::stringstream& msg) const {
+bool InterfaceUpfInfoItem::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool InterfaceUpfInfoItem::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool InterfaceUpfInfoItem::validate(std::stringstream &msg,
+                                    const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "InterfaceUpfInfoItem" : pathPrefix;
 
   if (ipv4EndpointAddressesIsSet()) {
-    const std::vector<std::string>& value = m_Ipv4EndpointAddresses;
+    const std::vector<std::string> &value = m_Ipv4EndpointAddresses;
     const std::string currentValuePath = _pathPrefix + ".ipv4EndpointAddresses";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const std::string& value : value) {
+      int i = 0;
+      for (const std::string &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -68,17 +68,17 @@ bool InterfaceUpfInfoItem::validate(
   }
 
   if (ipv6EndpointAddressesIsSet()) {
-    const std::vector<Ipv6Addr>& value = m_Ipv6EndpointAddresses;
+    const std::vector<Ipv6Addr> &value = m_Ipv6EndpointAddresses;
     const std::string currentValuePath = _pathPrefix + ".ipv6EndpointAddresses";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::nrf::Ipv6Addr& value : value) {
+      int i = 0;
+      for (const oai::model::nrf::Ipv6Addr &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -94,7 +94,7 @@ bool InterfaceUpfInfoItem::validate(
   return success;
 }
 
-bool InterfaceUpfInfoItem::operator==(const InterfaceUpfInfoItem& rhs) const {
+bool InterfaceUpfInfoItem::operator==(const InterfaceUpfInfoItem &rhs) const {
   return
 
       (getInterfaceType() == rhs.getInterfaceType()) &&
@@ -118,22 +118,24 @@ bool InterfaceUpfInfoItem::operator==(const InterfaceUpfInfoItem& rhs) const {
           ;
 }
 
-bool InterfaceUpfInfoItem::operator!=(const InterfaceUpfInfoItem& rhs) const {
+bool InterfaceUpfInfoItem::operator!=(const InterfaceUpfInfoItem &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const InterfaceUpfInfoItem& o) {
-  j                  = nlohmann::json();
+void to_json(nlohmann::json &j, const InterfaceUpfInfoItem &o) {
+  j = nlohmann::json();
   j["interfaceType"] = o.m_InterfaceType;
   if (o.ipv4EndpointAddressesIsSet() || !o.m_Ipv4EndpointAddresses.empty())
     j["ipv4EndpointAddresses"] = o.m_Ipv4EndpointAddresses;
   if (o.ipv6EndpointAddressesIsSet() || !o.m_Ipv6EndpointAddresses.empty())
     j["ipv6EndpointAddresses"] = o.m_Ipv6EndpointAddresses;
-  if (o.endpointFqdnIsSet()) j["endpointFqdn"] = o.m_EndpointFqdn;
-  if (o.networkInstanceIsSet()) j["networkInstance"] = o.m_NetworkInstance;
+  if (o.endpointFqdnIsSet())
+    j["endpointFqdn"] = o.m_EndpointFqdn;
+  if (o.networkInstanceIsSet())
+    j["networkInstance"] = o.m_NetworkInstance;
 }
 
-void from_json(const nlohmann::json& j, InterfaceUpfInfoItem& o) {
+void from_json(const nlohmann::json &j, InterfaceUpfInfoItem &o) {
   j.at("interfaceType").get_to(o.m_InterfaceType);
   if (j.find("ipv4EndpointAddresses") != j.end()) {
     j.at("ipv4EndpointAddresses").get_to(o.m_Ipv4EndpointAddresses);
@@ -153,21 +155,21 @@ void from_json(const nlohmann::json& j, InterfaceUpfInfoItem& o) {
   }
 }
 
-oai::model::nrf::UPInterfaceType InterfaceUpfInfoItem::getInterfaceType()
-    const {
+oai::model::nrf::UPInterfaceType
+InterfaceUpfInfoItem::getInterfaceType() const {
   return m_InterfaceType;
 }
 void InterfaceUpfInfoItem::setInterfaceType(
-    oai::model::nrf::UPInterfaceType const& value) {
+    oai::model::nrf::UPInterfaceType const &value) {
   m_InterfaceType = value;
 }
-std::vector<std::string> InterfaceUpfInfoItem::getIpv4EndpointAddresses()
-    const {
+std::vector<std::string>
+InterfaceUpfInfoItem::getIpv4EndpointAddresses() const {
   return m_Ipv4EndpointAddresses;
 }
 void InterfaceUpfInfoItem::setIpv4EndpointAddresses(
-    std::vector<std::string> const& value) {
-  m_Ipv4EndpointAddresses      = value;
+    std::vector<std::string> const &value) {
+  m_Ipv4EndpointAddresses = value;
   m_Ipv4EndpointAddressesIsSet = true;
 }
 bool InterfaceUpfInfoItem::ipv4EndpointAddressesIsSet() const {
@@ -181,8 +183,8 @@ InterfaceUpfInfoItem::getIpv6EndpointAddresses() const {
   return m_Ipv6EndpointAddresses;
 }
 void InterfaceUpfInfoItem::setIpv6EndpointAddresses(
-    std::vector<Ipv6Addr> const& value) {
-  m_Ipv6EndpointAddresses      = value;
+    std::vector<Ipv6Addr> const &value) {
+  m_Ipv6EndpointAddresses = value;
   m_Ipv6EndpointAddressesIsSet = true;
 }
 bool InterfaceUpfInfoItem::ipv6EndpointAddressesIsSet() const {
@@ -194,21 +196,19 @@ void InterfaceUpfInfoItem::unsetIpv6EndpointAddresses() {
 std::string InterfaceUpfInfoItem::getEndpointFqdn() const {
   return m_EndpointFqdn;
 }
-void InterfaceUpfInfoItem::setEndpointFqdn(std::string const& value) {
-  m_EndpointFqdn      = value;
+void InterfaceUpfInfoItem::setEndpointFqdn(std::string const &value) {
+  m_EndpointFqdn = value;
   m_EndpointFqdnIsSet = true;
 }
 bool InterfaceUpfInfoItem::endpointFqdnIsSet() const {
   return m_EndpointFqdnIsSet;
 }
-void InterfaceUpfInfoItem::unsetEndpointFqdn() {
-  m_EndpointFqdnIsSet = false;
-}
+void InterfaceUpfInfoItem::unsetEndpointFqdn() { m_EndpointFqdnIsSet = false; }
 std::string InterfaceUpfInfoItem::getNetworkInstance() const {
   return m_NetworkInstance;
 }
-void InterfaceUpfInfoItem::setNetworkInstance(std::string const& value) {
-  m_NetworkInstance      = value;
+void InterfaceUpfInfoItem::setNetworkInstance(std::string const &value) {
+  m_NetworkInstance = value;
   m_NetworkInstanceIsSet = true;
 }
 bool InterfaceUpfInfoItem::networkInstanceIsSet() const {
@@ -225,8 +225,8 @@ std::string InterfaceUpfInfoItem::to_string(int indent_level) const {
       oai::config::get_value_formatter(indent_level + 1);
 
   out.append(fmt::format(fmt_title, "interface_upf_info_item:"));
-  out.append(fmt::format(
-      fmt_value_inner, "interface_type", m_InterfaceType.getEnumString()));
+  out.append(fmt::format(fmt_value_inner, "interface_type",
+                         m_InterfaceType.getEnumString()));
   if (m_NetworkInstanceIsSet) {
     out.append(
         fmt::format(fmt_value_inner, "network_instance", m_NetworkInstance));
@@ -235,4 +235,4 @@ std::string InterfaceUpfInfoItem::to_string(int indent_level) const {
   return out;
 }
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

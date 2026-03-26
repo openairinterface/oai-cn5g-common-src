@@ -14,9 +14,7 @@
 
 namespace oai::model::amf {
 
-N1N2MessageTransferError::N1N2MessageTransferError() {
-  m_ErrInfoIsSet = false;
-}
+N1N2MessageTransferError::N1N2MessageTransferError() { m_ErrInfoIsSet = false; }
 
 N1N2MessageTransferError::~N1N2MessageTransferError() {}
 
@@ -24,13 +22,14 @@ void N1N2MessageTransferError::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const N1N2MessageTransferError& o) {
-  j          = nlohmann::json();
+void to_json(nlohmann::json &j, const N1N2MessageTransferError &o) {
+  j = nlohmann::json();
   j["error"] = o.m_Error;
-  if (o.errInfoIsSet()) j["errInfo"] = o.m_ErrInfo;
+  if (o.errInfoIsSet())
+    j["errInfo"] = o.m_ErrInfo;
 }
 
-void from_json(const nlohmann::json& j, N1N2MessageTransferError& o) {
+void from_json(const nlohmann::json &j, N1N2MessageTransferError &o) {
   if (j.find("error") != j.end()) {
     j.at("error").get_to(o.m_Error);
   }
@@ -45,21 +44,17 @@ oai::model::common::ProblemDetails N1N2MessageTransferError::getError() const {
   return m_Error;
 }
 void N1N2MessageTransferError::setError(
-    oai::model::common::ProblemDetails const& value) {
+    oai::model::common::ProblemDetails const &value) {
   m_Error = value;
 }
 N1N2MsgTxfrErrDetail N1N2MessageTransferError::getErrInfo() const {
   return m_ErrInfo;
 }
-void N1N2MessageTransferError::setErrInfo(N1N2MsgTxfrErrDetail const& value) {
-  m_ErrInfo      = value;
+void N1N2MessageTransferError::setErrInfo(N1N2MsgTxfrErrDetail const &value) {
+  m_ErrInfo = value;
   m_ErrInfoIsSet = true;
 }
-bool N1N2MessageTransferError::errInfoIsSet() const {
-  return m_ErrInfoIsSet;
-}
-void N1N2MessageTransferError::unsetErrInfo() {
-  m_ErrInfoIsSet = false;
-}
+bool N1N2MessageTransferError::errInfoIsSet() const { return m_ErrInfoIsSet; }
+void N1N2MessageTransferError::unsetErrInfo() { m_ErrInfoIsSet = false; }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

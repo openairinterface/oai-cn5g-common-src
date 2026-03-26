@@ -18,12 +18,12 @@ LadnIndication::LadnIndication() : Type6NasIe(kIeiLadnIndication) {
 }
 
 //------------------------------------------------------------------------------
-LadnIndication::LadnIndication(const std::vector<bstring>& ladn)
+LadnIndication::LadnIndication(const std::vector<bstring> &ladn)
     : Type6NasIe(kIeiLadnIndication) {
-  int length   = 0;
-  uint8_t size = (ladn.size() > kLadnIndicationMaximumSupportedLadns) ?
-                     kLadnIndicationMaximumSupportedLadns :
-                     ladn.size();
+  int length = 0;
+  uint8_t size = (ladn.size() > kLadnIndicationMaximumSupportedLadns)
+                     ? kLadnIndicationMaximumSupportedLadns
+                     : ladn.size();
   for (int i = 0; i < size; i++) {
     bstring ladnItem = bstrcpy(ladn.at(i));
     ladn_.push_back(ladnItem);
@@ -36,12 +36,12 @@ LadnIndication::LadnIndication(const std::vector<bstring>& ladn)
 LadnIndication::~LadnIndication() {}
 
 //------------------------------------------------------------------------------
-void LadnIndication::GetValue(std::vector<bstring>& ladn) const {
+void LadnIndication::GetValue(std::vector<bstring> &ladn) const {
   ladn.assign(ladn_.begin(), ladn_.end());
 }
 
 //------------------------------------------------------------------------------
-int LadnIndication::Encode(uint8_t* buf, int len) const {
+int LadnIndication::Encode(uint8_t *buf, int len) const {
   oai::logger::logger_common::nas().debug("Encoding %s", GetIeName().c_str());
 
   int encoded_size = 0;
@@ -50,7 +50,8 @@ int LadnIndication::Encode(uint8_t* buf, int len) const {
   int len_pos = 0;
   int encoded_header_size =
       Type6NasIe::Encode(buf + encoded_size, len, len_pos);
-  if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
+  if (encoded_header_size == KEncodeDecodeError)
+    return KEncodeDecodeError;
   encoded_size += encoded_header_size;
 
   for (int i = 0; i < ladn_.size(); i++) {
@@ -63,25 +64,26 @@ int LadnIndication::Encode(uint8_t* buf, int len) const {
   int encoded_len_ie = 0;
   ENCODE_U16(buf + len_pos, encoded_size - GetHeaderLength(), encoded_len_ie);
 
-  oai::logger::logger_common::nas().debug(
-      "Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
+  oai::logger::logger_common::nas().debug("Encoded %s, len (%d)",
+                                          GetIeName().c_str(), encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
-int LadnIndication::Decode(const uint8_t* const buf, int len, bool is_iei) {
+int LadnIndication::Decode(const uint8_t *const buf, int len, bool is_iei) {
   oai::logger::logger_common::nas().debug("Decoding %s", GetIeName().c_str());
   int decoded_size = 0;
 
   // IEI and Length
-  uint16_t ie_len         = 0;
+  uint16_t ie_len = 0;
   int decoded_header_size = Type6NasIe::Decode(buf + decoded_size, len, is_iei);
-  if (decoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
+  if (decoded_header_size == KEncodeDecodeError)
+    return KEncodeDecodeError;
   decoded_size += decoded_header_size;
   ie_len = GetLengthIndicator();
 
   uint8_t dnn_len = 0;
-  bstring dnn     = {};
+  bstring dnn = {};
   while (ie_len) {
     DECODE_U8(buf + decoded_size, dnn_len, decoded_size);
     ie_len--;
@@ -94,11 +96,10 @@ int LadnIndication::Decode(const uint8_t* const buf, int len, bool is_iei) {
   for (int i = 0; i < ladn_.size(); i++) {
     for (int j = 0; j < blength(ladn_.at(i)); j++) {
       oai::logger::logger_common::nas().debug(
-          "Decoded LadnIndication value (0x%x)",
-          (uint8_t) ladn_.at(i)->data[j]);
+          "Decoded LadnIndication value (0x%x)", (uint8_t)ladn_.at(i)->data[j]);
     }
   }
-  oai::logger::logger_common::nas().debug(
-      "Decoded %s (len %d)", GetIeName().c_str(), decoded_size);
+  oai::logger::logger_common::nas().debug("Decoded %s (len %d)",
+                                          GetIeName().c_str(), decoded_size);
   return decoded_size;
 }

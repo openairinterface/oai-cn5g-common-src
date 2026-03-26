@@ -27,12 +27,12 @@ void RestrictionType::validate() const {
   }
 }
 
-bool RestrictionType::validate(std::stringstream& msg) const {
+bool RestrictionType::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool RestrictionType::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool RestrictionType::validate(std::stringstream &msg,
+                               const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "RestrictionType" : pathPrefix;
@@ -43,35 +43,31 @@ bool RestrictionType::validate(
   return success;
 }
 
-bool RestrictionType::operator==(const RestrictionType& rhs) const {
+bool RestrictionType::operator==(const RestrictionType &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool RestrictionType::operator!=(const RestrictionType& rhs) const {
+bool RestrictionType::operator!=(const RestrictionType &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const RestrictionType& o) {
+void to_json(nlohmann::json &j, const RestrictionType &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, RestrictionType& o) {
+void from_json(const nlohmann::json &j, RestrictionType &o) {
   from_json(j, o.m_value);
 }
 
-RestrictionType_anyOf RestrictionType::getValue() const {
-  return m_value;
-}
+RestrictionType_anyOf RestrictionType::getValue() const { return m_value; }
 
-void RestrictionType::setValue(RestrictionType_anyOf value) {
-  m_value = value;
-}
+void RestrictionType::setValue(RestrictionType_anyOf value) { m_value = value; }
 
-RestrictionType_anyOf::eRestrictionType_anyOf RestrictionType::getEnumValue()
-    const {
+RestrictionType_anyOf::eRestrictionType_anyOf
+RestrictionType::getEnumValue() const {
   return m_value.getValue();
 }
 
@@ -80,4 +76,4 @@ void RestrictionType::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

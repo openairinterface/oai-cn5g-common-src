@@ -20,8 +20,8 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_ConfidentialityProtectionIndication {
-  Ngap_ConfidentialityProtectionIndication_required   = 0,
-  Ngap_ConfidentialityProtectionIndication_preferred  = 1,
+  Ngap_ConfidentialityProtectionIndication_required = 0,
+  Ngap_ConfidentialityProtectionIndication_preferred = 1,
   Ngap_ConfidentialityProtectionIndication_not_needed = 2
   /*
    * Enumeration is extensible

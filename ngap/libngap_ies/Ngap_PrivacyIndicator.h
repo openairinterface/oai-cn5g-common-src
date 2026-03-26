@@ -21,7 +21,7 @@ extern "C" {
 /* Dependencies */
 typedef enum Ngap_PrivacyIndicator {
   Ngap_PrivacyIndicator_immediate_MDT = 0,
-  Ngap_PrivacyIndicator_logged_MDT    = 1
+  Ngap_PrivacyIndicator_logged_MDT = 1
   /*
    * Enumeration is extensible
    */

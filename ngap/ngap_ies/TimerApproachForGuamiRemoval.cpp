@@ -21,7 +21,7 @@ void TimerApproachForGuamiRemoval::set(
 }
 
 //------------------------------------------------------------------------------
-bool TimerApproachForGuamiRemoval::get(long& value) const {
+bool TimerApproachForGuamiRemoval::get(long &value) const {
   value = m_TimerApproachForGuamiRemoval;
 
   return true;
@@ -29,7 +29,7 @@ bool TimerApproachForGuamiRemoval::get(long& value) const {
 
 //------------------------------------------------------------------------------
 bool TimerApproachForGuamiRemoval::encode(
-    Ngap_TimerApproachForGUAMIRemoval_t& value) const {
+    Ngap_TimerApproachForGUAMIRemoval_t &value) const {
   value = m_TimerApproachForGuamiRemoval;
 
   return true;
@@ -37,9 +37,9 @@ bool TimerApproachForGuamiRemoval::encode(
 
 //------------------------------------------------------------------------------
 bool TimerApproachForGuamiRemoval::decode(
-    const Ngap_TimerApproachForGUAMIRemoval_t& value) {
+    const Ngap_TimerApproachForGUAMIRemoval_t &value) {
   m_TimerApproachForGuamiRemoval = value;
 
   return true;
 }
-}  // namespace oai::ngap
+} // namespace oai::ngap

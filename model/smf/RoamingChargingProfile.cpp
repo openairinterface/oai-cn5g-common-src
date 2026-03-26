@@ -16,7 +16,7 @@
 namespace oai::model::smf {
 
 RoamingChargingProfile::RoamingChargingProfile() {
-  m_TriggersIsSet            = false;
+  m_TriggersIsSet = false;
   m_PartialRecordMethodIsSet = false;
 }
 
@@ -26,14 +26,15 @@ void RoamingChargingProfile::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const RoamingChargingProfile& o) {
+void to_json(nlohmann::json &j, const RoamingChargingProfile &o) {
   j = nlohmann::json();
-  if (o.triggersIsSet()) j["triggers"] = o.m_Triggers;
+  if (o.triggersIsSet())
+    j["triggers"] = o.m_Triggers;
   if (o.partialRecordMethodIsSet())
     j["partialRecordMethod"] = o.m_PartialRecordMethod;
 }
 
-void from_json(const nlohmann::json& j, RoamingChargingProfile& o) {
+void from_json(const nlohmann::json &j, RoamingChargingProfile &o) {
   if (j.find("triggers") != j.end()) {
     j.at("triggers").get_to(o.m_Triggers);
     o.m_TriggersIsSet = true;
@@ -44,21 +45,17 @@ void from_json(const nlohmann::json& j, RoamingChargingProfile& o) {
   }
 }
 
-std::vector<Trigger>& RoamingChargingProfile::getTriggers() {
+std::vector<Trigger> &RoamingChargingProfile::getTriggers() {
   return m_Triggers;
 }
-bool RoamingChargingProfile::triggersIsSet() const {
-  return m_TriggersIsSet;
-}
-void RoamingChargingProfile::unsetTriggers() {
-  m_TriggersIsSet = false;
-}
+bool RoamingChargingProfile::triggersIsSet() const { return m_TriggersIsSet; }
+void RoamingChargingProfile::unsetTriggers() { m_TriggersIsSet = false; }
 PartialRecordMethod RoamingChargingProfile::getPartialRecordMethod() const {
   return m_PartialRecordMethod;
 }
 void RoamingChargingProfile::setPartialRecordMethod(
-    PartialRecordMethod const& value) {
-  m_PartialRecordMethod      = value;
+    PartialRecordMethod const &value) {
+  m_PartialRecordMethod = value;
   m_PartialRecordMethodIsSet = true;
 }
 bool RoamingChargingProfile::partialRecordMethodIsSet() const {
@@ -68,4 +65,4 @@ void RoamingChargingProfile::unsetPartialRecordMethod() {
   m_PartialRecordMethodIsSet = false;
 }
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

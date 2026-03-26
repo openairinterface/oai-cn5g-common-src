@@ -16,9 +16,7 @@
 namespace oai::model::nrf {
 using namespace oai::model::common;
 
-NetworkSliceCond::NetworkSliceCond() {
-  m_NsiListIsSet = false;
-}
+NetworkSliceCond::NetworkSliceCond() { m_NsiListIsSet = false; }
 
 NetworkSliceCond::~NetworkSliceCond() {}
 
@@ -26,13 +24,14 @@ void NetworkSliceCond::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const NetworkSliceCond& o) {
-  j               = nlohmann::json();
+void to_json(nlohmann::json &j, const NetworkSliceCond &o) {
+  j = nlohmann::json();
   j["snssaiList"] = o.m_SnssaiList;
-  if (o.nsiListIsSet() || !o.m_NsiList.empty()) j["nsiList"] = o.m_NsiList;
+  if (o.nsiListIsSet() || !o.m_NsiList.empty())
+    j["nsiList"] = o.m_NsiList;
 }
 
-void from_json(const nlohmann::json& j, NetworkSliceCond& o) {
+void from_json(const nlohmann::json &j, NetworkSliceCond &o) {
   j.at("snssaiList").get_to(o.m_SnssaiList);
   if (j.find("nsiList") != j.end()) {
     j.at("nsiList").get_to(o.m_NsiList);
@@ -40,24 +39,16 @@ void from_json(const nlohmann::json& j, NetworkSliceCond& o) {
   }
 }
 
-std::vector<Snssai>& NetworkSliceCond::getSnssaiList() {
-  return m_SnssaiList;
-}
-void NetworkSliceCond::setSnssaiList(std::vector<Snssai> const& value) {
+std::vector<Snssai> &NetworkSliceCond::getSnssaiList() { return m_SnssaiList; }
+void NetworkSliceCond::setSnssaiList(std::vector<Snssai> const &value) {
   m_SnssaiList = value;
 }
-std::vector<std::string>& NetworkSliceCond::getNsiList() {
-  return m_NsiList;
-}
-void NetworkSliceCond::setNsiList(std::vector<std::string> const& value) {
-  m_NsiList      = value;
+std::vector<std::string> &NetworkSliceCond::getNsiList() { return m_NsiList; }
+void NetworkSliceCond::setNsiList(std::vector<std::string> const &value) {
+  m_NsiList = value;
   m_NsiListIsSet = true;
 }
-bool NetworkSliceCond::nsiListIsSet() const {
-  return m_NsiListIsSet;
-}
-void NetworkSliceCond::unsetNsiList() {
-  m_NsiListIsSet = false;
-}
+bool NetworkSliceCond::nsiListIsSet() const { return m_NsiListIsSet; }
+void NetworkSliceCond::unsetNsiList() { m_NsiListIsSet = false; }
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

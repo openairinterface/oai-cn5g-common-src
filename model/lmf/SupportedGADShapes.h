@@ -28,7 +28,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class SupportedGADShapes {
- public:
+public:
   SupportedGADShapes();
   virtual ~SupportedGADShapes() = default;
 
@@ -42,16 +42,16 @@ class SupportedGADShapes {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const SupportedGADShapes& rhs) const;
-  bool operator!=(const SupportedGADShapes& rhs) const;
+  bool operator==(const SupportedGADShapes &rhs) const;
+  bool operator!=(const SupportedGADShapes &rhs) const;
 
   /////////////////////////////////////////////
   /// SupportedGADShapes members
@@ -60,15 +60,15 @@ class SupportedGADShapes {
   void setValue(SupportedGADShapes_anyOf value);
   SupportedGADShapes_anyOf::eSupportedGADShapes_anyOf getEnumValue() const;
   void setEnumValue(SupportedGADShapes_anyOf::eSupportedGADShapes_anyOf value);
-  friend void to_json(nlohmann::json& j, const SupportedGADShapes& o);
-  friend void from_json(const nlohmann::json& j, SupportedGADShapes& o);
-  friend void to_json(nlohmann::json& j, const SupportedGADShapes_anyOf& o);
-  friend void from_json(const nlohmann::json& j, SupportedGADShapes_anyOf& o);
+  friend void to_json(nlohmann::json &j, const SupportedGADShapes &o);
+  friend void from_json(const nlohmann::json &j, SupportedGADShapes &o);
+  friend void to_json(nlohmann::json &j, const SupportedGADShapes_anyOf &o);
+  friend void from_json(const nlohmann::json &j, SupportedGADShapes_anyOf &o);
 
- protected:
+protected:
   SupportedGADShapes_anyOf m_value;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* SupportedGADShapes_H_ */

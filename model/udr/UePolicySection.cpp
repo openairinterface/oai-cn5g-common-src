@@ -18,9 +18,7 @@
 
 namespace oai::udr::model {
 
-UePolicySection::UePolicySection() {
-  m_Upsi = "";
-}
+UePolicySection::UePolicySection() { m_Upsi = ""; }
 
 UePolicySection::~UePolicySection() {}
 
@@ -28,13 +26,13 @@ void UePolicySection::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const UePolicySection& o) {
-  j                        = nlohmann::json();
+void to_json(nlohmann::json &j, const UePolicySection &o) {
+  j = nlohmann::json();
   j["uePolicySectionInfo"] = o.m_UePolicySectionInfo;
-  j["upsi"]                = o.m_Upsi;
+  j["upsi"] = o.m_Upsi;
 }
 
-void from_json(const nlohmann::json& j, UePolicySection& o) {
+void from_json(const nlohmann::json &j, UePolicySection &o) {
   j.at("uePolicySectionInfo").get_to(o.m_UePolicySectionInfo);
   j.at("upsi").get_to(o.m_Upsi);
 }
@@ -42,14 +40,10 @@ void from_json(const nlohmann::json& j, UePolicySection& o) {
 std::string UePolicySection::getUePolicySectionInfo() const {
   return m_UePolicySectionInfo;
 }
-void UePolicySection::setUePolicySectionInfo(std::string const& value) {
+void UePolicySection::setUePolicySectionInfo(std::string const &value) {
   m_UePolicySectionInfo = value;
 }
-std::string UePolicySection::getUpsi() const {
-  return m_Upsi;
-}
-void UePolicySection::setUpsi(std::string const& value) {
-  m_Upsi = value;
-}
+std::string UePolicySection::getUpsi() const { return m_Upsi; }
+void UePolicySection::setUpsi(std::string const &value) { m_Upsi = value; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

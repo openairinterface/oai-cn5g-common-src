@@ -34,7 +34,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class PfdChangeNotification {
- public:
+public:
   PfdChangeNotification();
   virtual ~PfdChangeNotification();
 
@@ -47,7 +47,7 @@ class PfdChangeNotification {
   ///
   /// </summary>
   std::string getApplicationId() const;
-  void setApplicationId(std::string const& value);
+  void setApplicationId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
@@ -65,15 +65,15 @@ class PfdChangeNotification {
   /// <summary>
   ///
   /// </summary>
-  std::vector<PfdContent>& getPfds();
-  void setPfds(std::vector<PfdContent> const& value);
+  std::vector<PfdContent> &getPfds();
+  void setPfds(std::vector<PfdContent> const &value);
   bool pfdsIsSet() const;
   void unsetPfds();
 
-  friend void to_json(nlohmann::json& j, const PfdChangeNotification& o);
-  friend void from_json(const nlohmann::json& j, PfdChangeNotification& o);
+  friend void to_json(nlohmann::json &j, const PfdChangeNotification &o);
+  friend void from_json(const nlohmann::json &j, PfdChangeNotification &o);
 
- protected:
+protected:
   std::string m_ApplicationId;
 
   bool m_RemovalFlag;
@@ -84,6 +84,6 @@ class PfdChangeNotification {
   bool m_PfdsIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* PfdChangeNotification_H_ */

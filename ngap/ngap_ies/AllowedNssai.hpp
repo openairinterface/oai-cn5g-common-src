@@ -18,18 +18,18 @@ extern "C" {
 namespace oai::ngap {
 
 class AllowedNSSAI {
- public:
+public:
   AllowedNSSAI();
   virtual ~AllowedNSSAI();
 
-  void set(const std::vector<SNssai>& list);
-  void get(std::vector<SNssai>& list) const;
+  void set(const std::vector<SNssai> &list);
+  void get(std::vector<SNssai> &list) const;
 
-  bool encode(Ngap_AllowedNSSAI_t& allowedNssaiList) const;
-  bool decode(const Ngap_AllowedNSSAI_t& allowedNssaiList);
+  bool encode(Ngap_AllowedNSSAI_t &allowedNssaiList) const;
+  bool decode(const Ngap_AllowedNSSAI_t &allowedNssaiList);
 
- private:
+private:
   std::vector<SNssai> m_List;
 };
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

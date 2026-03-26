@@ -23,10 +23,8 @@ void ScType::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const ScType& o) {
-  j = nlohmann::json();
-}
+void to_json(nlohmann::json &j, const ScType &o) { j = nlohmann::json(); }
 
-void from_json(const nlohmann::json& j, ScType& o) {}
+void from_json(const nlohmann::json &j, ScType &o) {}
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

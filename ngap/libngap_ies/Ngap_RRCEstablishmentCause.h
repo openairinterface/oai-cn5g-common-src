@@ -20,20 +20,20 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_RRCEstablishmentCause {
-  Ngap_RRCEstablishmentCause_emergency          = 0,
+  Ngap_RRCEstablishmentCause_emergency = 0,
   Ngap_RRCEstablishmentCause_highPriorityAccess = 1,
-  Ngap_RRCEstablishmentCause_mt_Access          = 2,
-  Ngap_RRCEstablishmentCause_mo_Signalling      = 3,
-  Ngap_RRCEstablishmentCause_mo_Data            = 4,
-  Ngap_RRCEstablishmentCause_mo_VoiceCall       = 5,
-  Ngap_RRCEstablishmentCause_mo_VideoCall       = 6,
-  Ngap_RRCEstablishmentCause_mo_SMS             = 7,
+  Ngap_RRCEstablishmentCause_mt_Access = 2,
+  Ngap_RRCEstablishmentCause_mo_Signalling = 3,
+  Ngap_RRCEstablishmentCause_mo_Data = 4,
+  Ngap_RRCEstablishmentCause_mo_VoiceCall = 5,
+  Ngap_RRCEstablishmentCause_mo_VideoCall = 6,
+  Ngap_RRCEstablishmentCause_mo_SMS = 7,
   Ngap_RRCEstablishmentCause_mps_PriorityAccess = 8,
   Ngap_RRCEstablishmentCause_mcs_PriorityAccess = 9,
   /*
    * Enumeration is extensible
    */
-  Ngap_RRCEstablishmentCause_notAvailable     = 10,
+  Ngap_RRCEstablishmentCause_notAvailable = 10,
   Ngap_RRCEstablishmentCause_mo_ExceptionData = 11
 } e_Ngap_RRCEstablishmentCause;
 

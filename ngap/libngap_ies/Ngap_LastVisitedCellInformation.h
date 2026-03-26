@@ -13,8 +13,8 @@
 
 /* Including external dependencies */
 #include "Ngap_LastVisitedEUTRANCellInformation.h"
-#include "Ngap_LastVisitedUTRANCellInformation.h"
 #include "Ngap_LastVisitedGERANCellInformation.h"
+#include "Ngap_LastVisitedUTRANCellInformation.h"
 #include <constr_CHOICE.h>
 
 #ifdef __cplusplus
@@ -39,11 +39,11 @@ struct Ngap_ProtocolIE_SingleContainer;
 typedef struct Ngap_LastVisitedCellInformation {
   Ngap_LastVisitedCellInformation_PR present;
   union Ngap_LastVisitedCellInformation_u {
-    struct Ngap_LastVisitedNGRANCellInformation* nGRANCell;
+    struct Ngap_LastVisitedNGRANCellInformation *nGRANCell;
     Ngap_LastVisitedEUTRANCellInformation_t eUTRANCell;
     Ngap_LastVisitedUTRANCellInformation_t uTRANCell;
     Ngap_LastVisitedGERANCellInformation_t gERANCell;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

@@ -13,8 +13,8 @@
 
 #include "RestrictionType_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::common {
 
@@ -27,12 +27,12 @@ void RestrictionType_anyOf::validate() const {
   }
 }
 
-bool RestrictionType_anyOf::validate(std::stringstream& msg) const {
+bool RestrictionType_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool RestrictionType_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool RestrictionType_anyOf::validate(std::stringstream &msg,
+                                     const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "RestrictionType_anyOf" : pathPrefix;
@@ -46,34 +46,34 @@ bool RestrictionType_anyOf::validate(
   return success;
 }
 
-bool RestrictionType_anyOf::operator==(const RestrictionType_anyOf& rhs) const {
+bool RestrictionType_anyOf::operator==(const RestrictionType_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool RestrictionType_anyOf::operator!=(const RestrictionType_anyOf& rhs) const {
+bool RestrictionType_anyOf::operator!=(const RestrictionType_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const RestrictionType_anyOf& o) {
+void to_json(nlohmann::json &j, const RestrictionType_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case RestrictionType_anyOf::eRestrictionType_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case RestrictionType_anyOf::eRestrictionType_anyOf::ALLOWED_AREAS:
-      j = "ALLOWED_AREAS";
-      break;
-    case RestrictionType_anyOf::eRestrictionType_anyOf::NOT_ALLOWED_AREAS:
-      j = "NOT_ALLOWED_AREAS";
-      break;
+  case RestrictionType_anyOf::eRestrictionType_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case RestrictionType_anyOf::eRestrictionType_anyOf::ALLOWED_AREAS:
+    j = "ALLOWED_AREAS";
+    break;
+  case RestrictionType_anyOf::eRestrictionType_anyOf::NOT_ALLOWED_AREAS:
+    j = "NOT_ALLOWED_AREAS";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, RestrictionType_anyOf& o) {
+void from_json(const nlohmann::json &j, RestrictionType_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "ALLOWED_AREAS") {
     o.setValue(RestrictionType_anyOf::eRestrictionType_anyOf::ALLOWED_AREAS);
@@ -89,8 +89,8 @@ void from_json(const nlohmann::json& j, RestrictionType_anyOf& o) {
   }
 }
 
-RestrictionType_anyOf::eRestrictionType_anyOf RestrictionType_anyOf::getValue()
-    const {
+RestrictionType_anyOf::eRestrictionType_anyOf
+RestrictionType_anyOf::getValue() const {
   return m_value;
 }
 void RestrictionType_anyOf::setValue(
@@ -98,4 +98,4 @@ void RestrictionType_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

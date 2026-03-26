@@ -13,8 +13,8 @@
 
 #include "ExternalClientType_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::lmf {
 
@@ -27,12 +27,12 @@ void ExternalClientType_anyOf::validate() const {
   }
 }
 
-bool ExternalClientType_anyOf::validate(std::stringstream& msg) const {
+bool ExternalClientType_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ExternalClientType_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ExternalClientType_anyOf::validate(std::stringstream &msg,
+                                        const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ExternalClientType_anyOf" : pathPrefix;
@@ -47,60 +47,59 @@ bool ExternalClientType_anyOf::validate(
 }
 
 bool ExternalClientType_anyOf::operator==(
-    const ExternalClientType_anyOf& rhs) const {
+    const ExternalClientType_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool ExternalClientType_anyOf::operator!=(
-    const ExternalClientType_anyOf& rhs) const {
+    const ExternalClientType_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ExternalClientType_anyOf& o) {
+void to_json(nlohmann::json &j, const ExternalClientType_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case ExternalClientType_anyOf::eExternalClientType_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case ExternalClientType_anyOf::eExternalClientType_anyOf::
-        EMERGENCY_SERVICES:
-      j = "EMERGENCY_SERVICES";
-      break;
-    case ExternalClientType_anyOf::eExternalClientType_anyOf::
-        VALUE_ADDED_SERVICES:
-      j = "VALUE_ADDED_SERVICES";
-      break;
-    case ExternalClientType_anyOf::eExternalClientType_anyOf::
-        PLMN_OPERATOR_SERVICES:
-      j = "PLMN_OPERATOR_SERVICES";
-      break;
-    case ExternalClientType_anyOf::eExternalClientType_anyOf::
-        LAWFUL_INTERCEPT_SERVICES:
-      j = "LAWFUL_INTERCEPT_SERVICES";
-      break;
-    case ExternalClientType_anyOf::eExternalClientType_anyOf::
-        PLMN_OPERATOR_BROADCAST_SERVICES:
-      j = "PLMN_OPERATOR_BROADCAST_SERVICES";
-      break;
-    case ExternalClientType_anyOf::eExternalClientType_anyOf::PLMN_OPERATOR_OM:
-      j = "PLMN_OPERATOR_OM";
-      break;
-    case ExternalClientType_anyOf::eExternalClientType_anyOf::
-        PLMN_OPERATOR_ANONYMOUS_STATISTICS:
-      j = "PLMN_OPERATOR_ANONYMOUS_STATISTICS";
-      break;
-    case ExternalClientType_anyOf::eExternalClientType_anyOf::
-        PLMN_OPERATOR_TARGET_MS_SERVICE_SUPPORT:
-      j = "PLMN_OPERATOR_TARGET_MS_SERVICE_SUPPORT";
-      break;
+  case ExternalClientType_anyOf::eExternalClientType_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case ExternalClientType_anyOf::eExternalClientType_anyOf::EMERGENCY_SERVICES:
+    j = "EMERGENCY_SERVICES";
+    break;
+  case ExternalClientType_anyOf::eExternalClientType_anyOf::
+      VALUE_ADDED_SERVICES:
+    j = "VALUE_ADDED_SERVICES";
+    break;
+  case ExternalClientType_anyOf::eExternalClientType_anyOf::
+      PLMN_OPERATOR_SERVICES:
+    j = "PLMN_OPERATOR_SERVICES";
+    break;
+  case ExternalClientType_anyOf::eExternalClientType_anyOf::
+      LAWFUL_INTERCEPT_SERVICES:
+    j = "LAWFUL_INTERCEPT_SERVICES";
+    break;
+  case ExternalClientType_anyOf::eExternalClientType_anyOf::
+      PLMN_OPERATOR_BROADCAST_SERVICES:
+    j = "PLMN_OPERATOR_BROADCAST_SERVICES";
+    break;
+  case ExternalClientType_anyOf::eExternalClientType_anyOf::PLMN_OPERATOR_OM:
+    j = "PLMN_OPERATOR_OM";
+    break;
+  case ExternalClientType_anyOf::eExternalClientType_anyOf::
+      PLMN_OPERATOR_ANONYMOUS_STATISTICS:
+    j = "PLMN_OPERATOR_ANONYMOUS_STATISTICS";
+    break;
+  case ExternalClientType_anyOf::eExternalClientType_anyOf::
+      PLMN_OPERATOR_TARGET_MS_SERVICE_SUPPORT:
+    j = "PLMN_OPERATOR_TARGET_MS_SERVICE_SUPPORT";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, ExternalClientType_anyOf& o) {
+void from_json(const nlohmann::json &j, ExternalClientType_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "EMERGENCY_SERVICES") {
     o.setValue(ExternalClientType_anyOf::eExternalClientType_anyOf::
@@ -144,4 +143,4 @@ void ExternalClientType_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

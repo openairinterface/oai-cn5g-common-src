@@ -20,11 +20,11 @@
 #define ExtSnssai_H_
 
 #include "SdRange.h"
-#include "SnssaiExtension.h"
-#include <string>
 #include "Snssai.h"
-#include <vector>
+#include "SnssaiExtension.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::common {
 
@@ -32,7 +32,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class ExtSnssai {
- public:
+public:
   ExtSnssai();
   virtual ~ExtSnssai() = default;
 
@@ -46,16 +46,16 @@ class ExtSnssai {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const ExtSnssai& rhs) const;
-  bool operator!=(const ExtSnssai& rhs) const;
+  bool operator==(const ExtSnssai &rhs) const;
+  bool operator!=(const ExtSnssai &rhs) const;
 
   /////////////////////////////////////////////
   /// ExtSnssai members
@@ -69,7 +69,7 @@ class ExtSnssai {
   ///
   /// </summary>
   std::string getSd() const;
-  void setSd(std::string const& value);
+  void setSd(std::string const &value);
   bool sdIsSet() const;
   void unsetSd();
   /// <summary>
@@ -78,7 +78,7 @@ class ExtSnssai {
   /// of the Snssai data type
   /// </summary>
   std::vector<oai::model::common::SdRange> getSdRanges() const;
-  void setSdRanges(std::vector<oai::model::common::SdRange> const& value);
+  void setSdRanges(std::vector<oai::model::common::SdRange> const &value);
   bool sdRangesIsSet() const;
   void unsetSdRanges();
   /// <summary>
@@ -91,10 +91,10 @@ class ExtSnssai {
   bool wildcardSdIsSet() const;
   void unsetWildcardSd();
 
-  friend void to_json(nlohmann::json& j, const ExtSnssai& o);
-  friend void from_json(const nlohmann::json& j, ExtSnssai& o);
+  friend void to_json(nlohmann::json &j, const ExtSnssai &o);
+  friend void from_json(const nlohmann::json &j, ExtSnssai &o);
 
- protected:
+protected:
   int32_t m_Sst;
 
   std::string m_Sd;
@@ -105,6 +105,6 @@ class ExtSnssai {
   bool m_WildcardSdIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* ExtSnssai_H_ */

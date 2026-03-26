@@ -20,10 +20,10 @@ namespace oai::udr::model {
 
 UpuData::UpuData() {
   m_ProvisioningTime = "";
-  m_UpuXmacIue       = "";
-  m_UpuXmacIueIsSet  = false;
-  m_UpuMacIue        = "";
-  m_UpuMacIueIsSet   = false;
+  m_UpuXmacIue = "";
+  m_UpuXmacIueIsSet = false;
+  m_UpuMacIue = "";
+  m_UpuMacIueIsSet = false;
 }
 
 UpuData::~UpuData() {}
@@ -32,15 +32,17 @@ void UpuData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const UpuData& o) {
-  j                     = nlohmann::json();
+void to_json(nlohmann::json &j, const UpuData &o) {
+  j = nlohmann::json();
   j["provisioningTime"] = o.m_ProvisioningTime;
-  j["ueUpdateStatus"]   = o.m_UeUpdateStatus;
-  if (o.upuXmacIueIsSet()) j["upuXmacIue"] = o.m_UpuXmacIue;
-  if (o.upuMacIueIsSet()) j["upuMacIue"] = o.m_UpuMacIue;
+  j["ueUpdateStatus"] = o.m_UeUpdateStatus;
+  if (o.upuXmacIueIsSet())
+    j["upuXmacIue"] = o.m_UpuXmacIue;
+  if (o.upuMacIueIsSet())
+    j["upuMacIue"] = o.m_UpuMacIue;
 }
 
-void from_json(const nlohmann::json& j, UpuData& o) {
+void from_json(const nlohmann::json &j, UpuData &o) {
   j.at("provisioningTime").get_to(o.m_ProvisioningTime);
   j.at("ueUpdateStatus").get_to(o.m_UeUpdateStatus);
   if (j.find("upuXmacIue") != j.end()) {
@@ -53,43 +55,27 @@ void from_json(const nlohmann::json& j, UpuData& o) {
   }
 }
 
-std::string UpuData::getProvisioningTime() const {
-  return m_ProvisioningTime;
-}
-void UpuData::setProvisioningTime(std::string const& value) {
+std::string UpuData::getProvisioningTime() const { return m_ProvisioningTime; }
+void UpuData::setProvisioningTime(std::string const &value) {
   m_ProvisioningTime = value;
 }
-UeUpdateStatus UpuData::getUeUpdateStatus() const {
-  return m_UeUpdateStatus;
-}
-void UpuData::setUeUpdateStatus(UeUpdateStatus const& value) {
+UeUpdateStatus UpuData::getUeUpdateStatus() const { return m_UeUpdateStatus; }
+void UpuData::setUeUpdateStatus(UeUpdateStatus const &value) {
   m_UeUpdateStatus = value;
 }
-std::string UpuData::getUpuXmacIue() const {
-  return m_UpuXmacIue;
-}
-void UpuData::setUpuXmacIue(std::string const& value) {
-  m_UpuXmacIue      = value;
+std::string UpuData::getUpuXmacIue() const { return m_UpuXmacIue; }
+void UpuData::setUpuXmacIue(std::string const &value) {
+  m_UpuXmacIue = value;
   m_UpuXmacIueIsSet = true;
 }
-bool UpuData::upuXmacIueIsSet() const {
-  return m_UpuXmacIueIsSet;
-}
-void UpuData::unsetUpuXmacIue() {
-  m_UpuXmacIueIsSet = false;
-}
-std::string UpuData::getUpuMacIue() const {
-  return m_UpuMacIue;
-}
-void UpuData::setUpuMacIue(std::string const& value) {
-  m_UpuMacIue      = value;
+bool UpuData::upuXmacIueIsSet() const { return m_UpuXmacIueIsSet; }
+void UpuData::unsetUpuXmacIue() { m_UpuXmacIueIsSet = false; }
+std::string UpuData::getUpuMacIue() const { return m_UpuMacIue; }
+void UpuData::setUpuMacIue(std::string const &value) {
+  m_UpuMacIue = value;
   m_UpuMacIueIsSet = true;
 }
-bool UpuData::upuMacIueIsSet() const {
-  return m_UpuMacIueIsSet;
-}
-void UpuData::unsetUpuMacIue() {
-  m_UpuMacIueIsSet = false;
-}
+bool UpuData::upuMacIueIsSet() const { return m_UpuMacIueIsSet; }
+void UpuData::unsetUpuMacIue() { m_UpuMacIueIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

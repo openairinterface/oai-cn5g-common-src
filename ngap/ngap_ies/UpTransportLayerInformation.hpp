@@ -18,26 +18,25 @@ extern "C" {
 namespace oai::ngap {
 
 class UpTransportLayerInformation {
- public:
+public:
   UpTransportLayerInformation();
   virtual ~UpTransportLayerInformation();
 
-  void set(
-      const TransportLayerAddress& transportLayerAddress,
-      const GtpTeid& gtpTeid);
-  bool get(
-      TransportLayerAddress& transportLayerAddress, GtpTeid& gtpTeid) const;
+  void set(const TransportLayerAddress &transportLayerAddress,
+           const GtpTeid &gtpTeid);
+  bool get(TransportLayerAddress &transportLayerAddress,
+           GtpTeid &gtpTeid) const;
 
-  void set(const GtpTunnel& gtpTunnel);
-  void get(std::optional<GtpTunnel>& gtpTunnel) const;
+  void set(const GtpTunnel &gtpTunnel);
+  void get(std::optional<GtpTunnel> &gtpTunnel) const;
 
-  bool encode(Ngap_UPTransportLayerInformation_t& upTransportLayerInfo) const;
-  bool decode(const Ngap_UPTransportLayerInformation_t& upTransportLayerInfo);
+  bool encode(Ngap_UPTransportLayerInformation_t &upTransportLayerInfo) const;
+  bool decode(const Ngap_UPTransportLayerInformation_t &upTransportLayerInfo);
 
- private:
+private:
   std::optional<GtpTunnel> m_GtpTunnel;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

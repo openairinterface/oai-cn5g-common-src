@@ -26,16 +26,10 @@ bool NasMessage::Validate(uint32_t len) const {
 }
 
 //------------------------------------------------------------------------------
-void NasMessage::SetMessageName(const std::string& name) {
-  msg_name_ = name;
-}
+void NasMessage::SetMessageName(const std::string &name) { msg_name_ = name; }
 
 //------------------------------------------------------------------------------
-std::string NasMessage::GetMessageName() const {
-  return msg_name_;
-}
+std::string NasMessage::GetMessageName() const { return msg_name_; }
 
 //------------------------------------------------------------------------------
-void NasMessage::GetMessageName(std::string& name) const {
-  name = msg_name_;
-}
+void NasMessage::GetMessageName(std::string &name) const { name = msg_name_; }

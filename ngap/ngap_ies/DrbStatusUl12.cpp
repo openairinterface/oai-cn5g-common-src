@@ -13,17 +13,17 @@ DrbStatusUl12::DrbStatusUl12() {}
 DrbStatusUl12::~DrbStatusUl12() {}
 
 //------------------------------------------------------------------------------
-void DrbStatusUl12::get(CountValueForPdcpSn12& countValue) const {
+void DrbStatusUl12::get(CountValueForPdcpSn12 &countValue) const {
   countValue = m_PdcpValue;
 }
 
 //------------------------------------------------------------------------------
-void DrbStatusUl12::set(const CountValueForPdcpSn12& countValue) {
+void DrbStatusUl12::set(const CountValueForPdcpSn12 &countValue) {
   m_PdcpValue = countValue;
 }
 
 //------------------------------------------------------------------------------
-bool DrbStatusUl12::encode(Ngap_DRBStatusUL12_t& ul12) const {
+bool DrbStatusUl12::encode(Ngap_DRBStatusUL12_t &ul12) const {
   if (!m_PdcpValue.encode(ul12.uL_COUNTValue)) {
     return false;
   }
@@ -31,10 +31,10 @@ bool DrbStatusUl12::encode(Ngap_DRBStatusUL12_t& ul12) const {
 }
 
 //------------------------------------------------------------------------------
-bool DrbStatusUl12::decode(const Ngap_DRBStatusUL12_t& ul12) {
+bool DrbStatusUl12::decode(const Ngap_DRBStatusUL12_t &ul12) {
   if (!m_PdcpValue.decode(ul12.uL_COUNTValue)) {
     return false;
   }
   return true;
 }
-}  // namespace oai::ngap
+} // namespace oai::ngap

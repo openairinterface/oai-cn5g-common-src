@@ -28,7 +28,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class ReportingFrequency {
- public:
+public:
   ReportingFrequency();
   virtual ~ReportingFrequency() = default;
 
@@ -42,16 +42,16 @@ class ReportingFrequency {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const ReportingFrequency& rhs) const;
-  bool operator!=(const ReportingFrequency& rhs) const;
+  bool operator==(const ReportingFrequency &rhs) const;
+  bool operator!=(const ReportingFrequency &rhs) const;
 
   /////////////////////////////////////////////
   /// ReportingFrequency members
@@ -60,15 +60,15 @@ class ReportingFrequency {
   void setValue(ReportingFrequency_anyOf value);
   ReportingFrequency_anyOf::eReportingFrequency_anyOf getEnumValue() const;
   void setEnumValue(ReportingFrequency_anyOf::eReportingFrequency_anyOf value);
-  friend void to_json(nlohmann::json& j, const ReportingFrequency& o);
-  friend void from_json(const nlohmann::json& j, ReportingFrequency& o);
-  friend void to_json(nlohmann::json& j, const ReportingFrequency_anyOf& o);
-  friend void from_json(const nlohmann::json& j, ReportingFrequency_anyOf& o);
+  friend void to_json(nlohmann::json &j, const ReportingFrequency &o);
+  friend void from_json(const nlohmann::json &j, ReportingFrequency &o);
+  friend void to_json(nlohmann::json &j, const ReportingFrequency_anyOf &o);
+  friend void from_json(const nlohmann::json &j, ReportingFrequency_anyOf &o);
 
- protected:
+protected:
   ReportingFrequency_anyOf m_value;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* ReportingFrequency_H_ */

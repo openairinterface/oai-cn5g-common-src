@@ -22,8 +22,8 @@ QosFlowDescriptionParameter::~QosFlowDescriptionParameter() {}
 
 //------------------------------------------------------------------------------
 uint8_t QosFlowDescriptionParameter::GetLength() const {
-  return (length_ + 2);  // 1 for parameter identifier, 1 for length and actual
-                         // length of the contents
+  return (length_ + 2); // 1 for parameter identifier, 1 for length and actual
+                        // length of the contents
 }
 
 //------------------------------------------------------------------------------
@@ -43,7 +43,7 @@ void QosFlowDescriptionParameter::SetIdentifier(uint8_t id) {
 }
 
 //------------------------------------------------------------------------------
-void QosFlowDescriptionParameter::GetIdentifier(uint8_t& id) const {
+void QosFlowDescriptionParameter::GetIdentifier(uint8_t &id) const {
   id = identifier_;
 }
 
@@ -53,35 +53,33 @@ uint8_t QosFlowDescriptionParameter::GetIdentifier() const {
 }
 
 //------------------------------------------------------------------------------
-void QosFlowDescriptionParameter::SetContents(const bstring& contents) {
+void QosFlowDescriptionParameter::SetContents(const bstring &contents) {
   contents_ = contents;
   SetContentsLength();
 }
 
 //------------------------------------------------------------------------------
-bstring QosFlowDescriptionParameter::GetContents() const {
-  return contents_;
-}
+bstring QosFlowDescriptionParameter::GetContents() const { return contents_; }
 
 //------------------------------------------------------------------------------
-void QosFlowDescriptionParameter::GetContents(bstring& contents) const {
+void QosFlowDescriptionParameter::GetContents(bstring &contents) const {
   contents = contents_;
 }
 
 //------------------------------------------------------------------------------
 void QosFlowDescriptionParameter::Set5qi(uint8_t _5qi) {
   identifier_ = kQosFlowDescriptionParameterIdentifier5qi;
-  length_     = 1;
-  contents_   = blk2bstr(&_5qi, 1);
+  length_ = 1;
+  contents_ = blk2bstr(&_5qi, 1);
   SetContentsLength();
 }
 
 //------------------------------------------------------------------------------
-void QosFlowDescriptionParameter::Get5qi(std::optional<uint8_t>& _5qi) const {
+void QosFlowDescriptionParameter::Get5qi(std::optional<uint8_t> &_5qi) const {
   if ((identifier_ == kQosFlowDescriptionParameterIdentifier5qi) &&
       (length_ == 1)) {
     _5qi =
-        std::make_optional<uint8_t>(*((uint8_t*) bdata(contents_)));  // 1 octet
+        std::make_optional<uint8_t>(*((uint8_t *)bdata(contents_))); // 1 octet
   }
 }
 
@@ -90,29 +88,29 @@ std::optional<uint8_t> QosFlowDescriptionParameter::Get5qi() const {
   if ((identifier_ == kQosFlowDescriptionParameterIdentifier5qi) &&
       (length_ == 1)) {
     return std::make_optional<uint8_t>(
-        *((uint8_t*) bdata(contents_)));  // 1 octet
+        *((uint8_t *)bdata(contents_))); // 1 octet
   } else {
     return std::nullopt;
   }
 }
 
 //------------------------------------------------------------------------------
-void QosFlowDescriptionParameter::SetBitRate(const BitRate& bit_rate) {
+void QosFlowDescriptionParameter::SetBitRate(const BitRate &bit_rate) {
   length_ = 3;
   uint8_t content[3];
   content[0] = bit_rate.unit;
-  content[1] = bit_rate.value >> 8;                  // 8 most significant bits
-  content[2] = (uint8_t) (bit_rate.value & 0x00ff);  // 8 less significant bits
-  contents_  = blk2bstr(&content, 3);
+  content[1] = bit_rate.value >> 8;                // 8 most significant bits
+  content[2] = (uint8_t)(bit_rate.value & 0x00ff); // 8 less significant bits
+  contents_ = blk2bstr(&content, 3);
   SetContentsLength();
 }
 //------------------------------------------------------------------------------
 std::optional<BitRate> QosFlowDescriptionParameter::GetBitRate() const {
   if (length_ == 3) {
     BitRate bit_rate = {};
-    bit_rate.unit    = *((uint8_t*) bdata(contents_));
-    bit_rate.value   = (*((uint8_t*) bdata(contents_) + 1) << 8) |
-                     *((uint8_t*) bdata(contents_) + 2);
+    bit_rate.unit = *((uint8_t *)bdata(contents_));
+    bit_rate.value = (*((uint8_t *)bdata(contents_) + 1) << 8) |
+                     *((uint8_t *)bdata(contents_) + 2);
     return std::optional<BitRate>(bit_rate);
   } else {
     return std::nullopt;
@@ -120,14 +118,14 @@ std::optional<BitRate> QosFlowDescriptionParameter::GetBitRate() const {
 }
 
 //------------------------------------------------------------------------------
-void QosFlowDescriptionParameter::SetGfbrUplink(const BitRate& gfbr_uplink) {
+void QosFlowDescriptionParameter::SetGfbrUplink(const BitRate &gfbr_uplink) {
   identifier_ = kQosFlowDescriptionParameterIdentifierGfbrUplink;
   SetBitRate(gfbr_uplink);
 }
 //------------------------------------------------------------------------------
 
 void QosFlowDescriptionParameter::GetGfbrUplink(
-    std::optional<BitRate>& gfbr_uplink) const {
+    std::optional<BitRate> &gfbr_uplink) const {
   if ((identifier_ == kQosFlowDescriptionParameterIdentifierGfbrUplink)) {
     gfbr_uplink = GetBitRate();
   }
@@ -144,14 +142,14 @@ std::optional<BitRate> QosFlowDescriptionParameter::GetGfbrUplink() const {
 
 //------------------------------------------------------------------------------
 void QosFlowDescriptionParameter::SetGfbrDownlink(
-    const BitRate& gfbr_downlink) {
+    const BitRate &gfbr_downlink) {
   identifier_ = kQosFlowDescriptionParameterIdentifierGfbrDownlink;
   SetBitRate(gfbr_downlink);
 }
 
 //------------------------------------------------------------------------------
 void QosFlowDescriptionParameter::GetGfbrDownlink(
-    std::optional<BitRate>& gfbr_downlink) const {
+    std::optional<BitRate> &gfbr_downlink) const {
   if ((identifier_ == kQosFlowDescriptionParameterIdentifierGfbrDownlink)) {
     gfbr_downlink = GetBitRate();
   }
@@ -167,14 +165,14 @@ std::optional<BitRate> QosFlowDescriptionParameter::GetGfbrDownlink() const {
 }
 
 //------------------------------------------------------------------------------
-void QosFlowDescriptionParameter::SetMfbrUplink(const BitRate& mfbr_uplink) {
+void QosFlowDescriptionParameter::SetMfbrUplink(const BitRate &mfbr_uplink) {
   identifier_ = kQosFlowDescriptionParameterIdentifierMfbrUplink;
   SetBitRate(mfbr_uplink);
 }
 
 //------------------------------------------------------------------------------
 void QosFlowDescriptionParameter::GetMfbrUplink(
-    std::optional<BitRate>& mfbr_uplink) const {
+    std::optional<BitRate> &mfbr_uplink) const {
   if ((identifier_ == kQosFlowDescriptionParameterIdentifierMfbrUplink)) {
     mfbr_uplink = GetBitRate();
   }
@@ -191,14 +189,14 @@ std::optional<BitRate> QosFlowDescriptionParameter::GetMfbrUplink() const {
 
 //------------------------------------------------------------------------------
 void QosFlowDescriptionParameter::SetMfbrDownlink(
-    const BitRate& mfbr_downlink) {
+    const BitRate &mfbr_downlink) {
   identifier_ = kQosFlowDescriptionParameterIdentifierMfbrDownlink;
   SetBitRate(mfbr_downlink);
 }
 
 //------------------------------------------------------------------------------
 void QosFlowDescriptionParameter::GetMfbrDownlink(
-    std::optional<BitRate>& mfbr_downlink) const {
+    std::optional<BitRate> &mfbr_downlink) const {
   if ((identifier_ == kQosFlowDescriptionParameterIdentifierMfbrDownlink)) {
     mfbr_downlink = GetBitRate();
   }
@@ -214,7 +212,7 @@ std::optional<BitRate> QosFlowDescriptionParameter::GetMfbrDownlink() const {
 }
 
 //------------------------------------------------------------------------------
-int QosFlowDescriptionParameter::Encode(uint8_t* buf, int len) const {
+int QosFlowDescriptionParameter::Encode(uint8_t *buf, int len) const {
   oai::logger::logger_common::nas().debug(
       "Encoding QosFlowDescriptionParameter");
 
@@ -246,7 +244,7 @@ int QosFlowDescriptionParameter::Encode(uint8_t* buf, int len) const {
 }
 
 //------------------------------------------------------------------------------
-int QosFlowDescriptionParameter::Decode(const uint8_t* const buf, int len) {
+int QosFlowDescriptionParameter::Decode(const uint8_t *const buf, int len) {
   oai::logger::logger_common::nas().debug(
       "Decoding QosFlowDescriptionParameter");
   if (len < kQosFlowDescriptionParameterMinimumLength) {
@@ -269,7 +267,8 @@ int QosFlowDescriptionParameter::Decode(const uint8_t* const buf, int len) {
   uint8_t decoded_bstring_size = decode_bstring(
       &contents_, length_, (buf + decoded_size), len - decoded_size);
 
-  if (decoded_bstring_size > 0) decoded_size += length_;
+  if (decoded_bstring_size > 0)
+    decoded_size += length_;
 
   oai::logger::logger_common::nas().debug(
       "Decoded QosFlowDescriptionParameter (len %d)", decoded_size);

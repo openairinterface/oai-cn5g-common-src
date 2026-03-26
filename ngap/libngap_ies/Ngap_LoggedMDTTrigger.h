@@ -36,8 +36,8 @@ typedef struct Ngap_LoggedMDTTrigger {
   Ngap_LoggedMDTTrigger_PR present;
   union Ngap_LoggedMDTTrigger_u {
     NULL_t periodical;
-    struct Ngap_EventTrigger* eventTrigger;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_EventTrigger *eventTrigger;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

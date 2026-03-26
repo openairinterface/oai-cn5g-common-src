@@ -19,13 +19,13 @@
 #ifndef DnnUpfInfoItem_H_
 #define DnnUpfInfoItem_H_
 
-#include <string>
 #include "Ipv4AddressRange.h"
+#include "Ipv6PrefixRange.h"
 #include "PduSessionType.h"
 #include <map>
-#include <vector>
-#include "Ipv6PrefixRange.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::nrf {
 
@@ -33,10 +33,10 @@ namespace oai::model::nrf {
 /// Set of parameters supported by UPF for a given DNN
 /// </summary>
 class DnnUpfInfoItem {
- public:
+public:
   DnnUpfInfoItem();
 
-  explicit DnnUpfInfoItem(const std::string& dnn);
+  explicit DnnUpfInfoItem(const std::string &dnn);
 
   virtual ~DnnUpfInfoItem() = default;
 
@@ -50,16 +50,16 @@ class DnnUpfInfoItem {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const DnnUpfInfoItem& rhs) const;
-  bool operator!=(const DnnUpfInfoItem& rhs) const;
+  bool operator==(const DnnUpfInfoItem &rhs) const;
+  bool operator!=(const DnnUpfInfoItem &rhs) const;
 
   /////////////////////////////////////////////
   /// DnnUpfInfoItem members
@@ -68,12 +68,12 @@ class DnnUpfInfoItem {
   ///
   /// </summary>
   std::string getDnn() const;
-  void setDnn(std::string const& value);
+  void setDnn(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::vector<std::string> getDnaiList() const;
-  void setDnaiList(std::vector<std::string> const& value);
+  void setDnaiList(std::vector<std::string> const &value);
   bool dnaiListIsSet() const;
   void unsetDnaiList();
   /// <summary>
@@ -81,7 +81,7 @@ class DnnUpfInfoItem {
   /// </summary>
   std::vector<oai::model::common::PduSessionType> getPduSessionTypes() const;
   void setPduSessionTypes(
-      std::vector<oai::model::common::PduSessionType> const& value);
+      std::vector<oai::model::common::PduSessionType> const &value);
   bool pduSessionTypesIsSet() const;
   void unsetPduSessionTypes();
   /// <summary>
@@ -89,7 +89,7 @@ class DnnUpfInfoItem {
   /// </summary>
   std::vector<oai::model::nrf::Ipv4AddressRange> getIpv4AddressRanges() const;
   void setIpv4AddressRanges(
-      std::vector<oai::model::nrf::Ipv4AddressRange> const& value);
+      std::vector<oai::model::nrf::Ipv4AddressRange> const &value);
   bool ipv4AddressRangesIsSet() const;
   void unsetIpv4AddressRanges();
   /// <summary>
@@ -97,7 +97,7 @@ class DnnUpfInfoItem {
   /// </summary>
   std::vector<oai::model::nrf::Ipv6PrefixRange> getIpv6PrefixRanges() const;
   void setIpv6PrefixRanges(
-      std::vector<oai::model::nrf::Ipv6PrefixRange> const& value);
+      std::vector<oai::model::nrf::Ipv6PrefixRange> const &value);
   bool ipv6PrefixRangesIsSet() const;
   void unsetIpv6PrefixRanges();
   /// <summary>
@@ -106,16 +106,16 @@ class DnnUpfInfoItem {
   /// N6 network instance that is configured for the DNAI indicated by the key.
   /// </summary>
   std::map<std::string, std::string> getDnaiNwInstanceList() const;
-  void setDnaiNwInstanceList(std::map<std::string, std::string> const& value);
+  void setDnaiNwInstanceList(std::map<std::string, std::string> const &value);
   bool dnaiNwInstanceListIsSet() const;
   void unsetDnaiNwInstanceList();
 
-  friend void to_json(nlohmann::json& j, const DnnUpfInfoItem& o);
-  friend void from_json(const nlohmann::json& j, DnnUpfInfoItem& o);
+  friend void to_json(nlohmann::json &j, const DnnUpfInfoItem &o);
+  friend void from_json(const nlohmann::json &j, DnnUpfInfoItem &o);
 
   [[nodiscard]] std::string to_string(int indent_level) const;
 
- protected:
+protected:
   std::string m_Dnn;
 
   std::vector<std::string> m_DnaiList;
@@ -130,6 +130,6 @@ class DnnUpfInfoItem {
   bool m_DnaiNwInstanceListIsSet;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* DnnUpfInfoItem_H_ */

@@ -27,7 +27,7 @@ struct Ngap_ProtocolExtensionContainer;
 typedef struct Ngap_BroadcastPLMNItem {
   Ngap_PLMNIdentity_t pLMNIdentity;
   Ngap_SliceSupportList_t tAISliceSupportList;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

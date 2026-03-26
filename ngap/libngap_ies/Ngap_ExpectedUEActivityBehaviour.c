@@ -50,9 +50,8 @@ asn_TYPE_member_t asn_MBR_Ngap_ExpectedUEActivityBehaviour_1[] = {
      "expectedIdlePeriod"},
     {ATF_POINTER,
      2,
-     offsetof(
-         struct Ngap_ExpectedUEActivityBehaviour,
-         sourceOfUEActivityBehaviourInformation),
+     offsetof(struct Ngap_ExpectedUEActivityBehaviour,
+              sourceOfUEActivityBehaviourInformation),
      (ASN_TAG_CLASS_CONTEXT | (2 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_SourceOfUEActivityBehaviourInformation,
@@ -89,8 +88,8 @@ asn_TYPE_member_t asn_MBR_Ngap_ExpectedUEActivityBehaviour_1[] = {
      0, /* No default value */
      "iE-Extensions"},
 };
-static const int asn_MAP_Ngap_ExpectedUEActivityBehaviour_oms_1[] = {
-    0, 1, 2, 3};
+static const int asn_MAP_Ngap_ExpectedUEActivityBehaviour_oms_1[] = {0, 1, 2,
+                                                                     3};
 static const ber_tlv_tag_t asn_DEF_Ngap_ExpectedUEActivityBehaviour_tags_1[] = {
     (ASN_TAG_CLASS_UNIVERSAL | (16 << 2))};
 static const asn_TYPE_tag2member_t

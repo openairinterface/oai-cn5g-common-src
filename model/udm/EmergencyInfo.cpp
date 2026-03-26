@@ -26,10 +26,10 @@ void EmergencyInfo::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const EmergencyInfo& o) {
+void to_json(nlohmann::json &j, const EmergencyInfo &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, EmergencyInfo& o) {}
+void from_json(const nlohmann::json &j, EmergencyInfo &o) {}
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

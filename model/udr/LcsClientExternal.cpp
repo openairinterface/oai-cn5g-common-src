@@ -19,9 +19,9 @@
 namespace oai::udr::model {
 
 LcsClientExternal::LcsClientExternal() {
-  m_AllowedGeographicAreaIsSet     = false;
+  m_AllowedGeographicAreaIsSet = false;
   m_PrivacyCheckRelatedActionIsSet = false;
-  m_ValidTimePeriodIsSet           = false;
+  m_ValidTimePeriodIsSet = false;
 }
 
 LcsClientExternal::~LcsClientExternal() {}
@@ -30,16 +30,17 @@ void LcsClientExternal::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const LcsClientExternal& o) {
+void to_json(nlohmann::json &j, const LcsClientExternal &o) {
   j = nlohmann::json();
   if (o.allowedGeographicAreaIsSet() || !o.m_AllowedGeographicArea.empty())
     j["allowedGeographicArea"] = o.m_AllowedGeographicArea;
   if (o.privacyCheckRelatedActionIsSet())
     j["privacyCheckRelatedAction"] = o.m_PrivacyCheckRelatedAction;
-  if (o.validTimePeriodIsSet()) j["validTimePeriod"] = o.m_ValidTimePeriod;
+  if (o.validTimePeriodIsSet())
+    j["validTimePeriod"] = o.m_ValidTimePeriod;
 }
 
-void from_json(const nlohmann::json& j, LcsClientExternal& o) {
+void from_json(const nlohmann::json &j, LcsClientExternal &o) {
   if (j.find("allowedGeographicArea") != j.end()) {
     j.at("allowedGeographicArea").get_to(o.m_AllowedGeographicArea);
     o.m_AllowedGeographicAreaIsSet = true;
@@ -54,12 +55,12 @@ void from_json(const nlohmann::json& j, LcsClientExternal& o) {
   }
 }
 
-std::vector<GeographicArea>& LcsClientExternal::getAllowedGeographicArea() {
+std::vector<GeographicArea> &LcsClientExternal::getAllowedGeographicArea() {
   return m_AllowedGeographicArea;
 }
 void LcsClientExternal::setAllowedGeographicArea(
-    std::vector<GeographicArea> const& value) {
-  m_AllowedGeographicArea      = value;
+    std::vector<GeographicArea> const &value) {
+  m_AllowedGeographicArea = value;
   m_AllowedGeographicAreaIsSet = true;
 }
 bool LcsClientExternal::allowedGeographicAreaIsSet() const {
@@ -68,13 +69,13 @@ bool LcsClientExternal::allowedGeographicAreaIsSet() const {
 void LcsClientExternal::unsetAllowedGeographicArea() {
   m_AllowedGeographicAreaIsSet = false;
 }
-PrivacyCheckRelatedAction LcsClientExternal::getPrivacyCheckRelatedAction()
-    const {
+PrivacyCheckRelatedAction
+LcsClientExternal::getPrivacyCheckRelatedAction() const {
   return m_PrivacyCheckRelatedAction;
 }
 void LcsClientExternal::setPrivacyCheckRelatedAction(
-    PrivacyCheckRelatedAction const& value) {
-  m_PrivacyCheckRelatedAction      = value;
+    PrivacyCheckRelatedAction const &value) {
+  m_PrivacyCheckRelatedAction = value;
   m_PrivacyCheckRelatedActionIsSet = true;
 }
 bool LcsClientExternal::privacyCheckRelatedActionIsSet() const {
@@ -86,8 +87,8 @@ void LcsClientExternal::unsetPrivacyCheckRelatedAction() {
 ValidTimePeriod LcsClientExternal::getValidTimePeriod() const {
   return m_ValidTimePeriod;
 }
-void LcsClientExternal::setValidTimePeriod(ValidTimePeriod const& value) {
-  m_ValidTimePeriod      = value;
+void LcsClientExternal::setValidTimePeriod(ValidTimePeriod const &value) {
+  m_ValidTimePeriod = value;
   m_ValidTimePeriodIsSet = true;
 }
 bool LcsClientExternal::validTimePeriodIsSet() const {
@@ -97,4 +98,4 @@ void LcsClientExternal::unsetValidTimePeriod() {
   m_ValidTimePeriodIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

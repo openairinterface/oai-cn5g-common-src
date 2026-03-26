@@ -26,10 +26,10 @@ void OperationMode::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const OperationMode& o) {
+void to_json(nlohmann::json &j, const OperationMode &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, OperationMode& o) {}
+void from_json(const nlohmann::json &j, OperationMode &o) {}
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

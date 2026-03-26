@@ -20,7 +20,7 @@ namespace oai::udr::model {
 
 BdtDataPatch::BdtDataPatch() {
   m_TransPolicyIsSet = false;
-  m_BdtpStatusIsSet  = false;
+  m_BdtpStatusIsSet = false;
 }
 
 BdtDataPatch::~BdtDataPatch() {}
@@ -29,13 +29,15 @@ void BdtDataPatch::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const BdtDataPatch& o) {
+void to_json(nlohmann::json &j, const BdtDataPatch &o) {
   j = nlohmann::json();
-  if (o.transPolicyIsSet()) j["transPolicy"] = o.m_TransPolicy;
-  if (o.bdtpStatusIsSet()) j["bdtpStatus"] = o.m_BdtpStatus;
+  if (o.transPolicyIsSet())
+    j["transPolicy"] = o.m_TransPolicy;
+  if (o.bdtpStatusIsSet())
+    j["bdtpStatus"] = o.m_BdtpStatus;
 }
 
-void from_json(const nlohmann::json& j, BdtDataPatch& o) {
+void from_json(const nlohmann::json &j, BdtDataPatch &o) {
   if (j.find("transPolicy") != j.end()) {
     j.at("transPolicy").get_to(o.m_TransPolicy);
     o.m_TransPolicyIsSet = true;
@@ -46,31 +48,19 @@ void from_json(const nlohmann::json& j, BdtDataPatch& o) {
   }
 }
 
-TransferPolicy BdtDataPatch::getTransPolicy() const {
-  return m_TransPolicy;
-}
-void BdtDataPatch::setTransPolicy(TransferPolicy const& value) {
-  m_TransPolicy      = value;
+TransferPolicy BdtDataPatch::getTransPolicy() const { return m_TransPolicy; }
+void BdtDataPatch::setTransPolicy(TransferPolicy const &value) {
+  m_TransPolicy = value;
   m_TransPolicyIsSet = true;
 }
-bool BdtDataPatch::transPolicyIsSet() const {
-  return m_TransPolicyIsSet;
-}
-void BdtDataPatch::unsetTransPolicy() {
-  m_TransPolicyIsSet = false;
-}
-BdtPolicyStatus BdtDataPatch::getBdtpStatus() const {
-  return m_BdtpStatus;
-}
-void BdtDataPatch::setBdtpStatus(BdtPolicyStatus const& value) {
-  m_BdtpStatus      = value;
+bool BdtDataPatch::transPolicyIsSet() const { return m_TransPolicyIsSet; }
+void BdtDataPatch::unsetTransPolicy() { m_TransPolicyIsSet = false; }
+BdtPolicyStatus BdtDataPatch::getBdtpStatus() const { return m_BdtpStatus; }
+void BdtDataPatch::setBdtpStatus(BdtPolicyStatus const &value) {
+  m_BdtpStatus = value;
   m_BdtpStatusIsSet = true;
 }
-bool BdtDataPatch::bdtpStatusIsSet() const {
-  return m_BdtpStatusIsSet;
-}
-void BdtDataPatch::unsetBdtpStatus() {
-  m_BdtpStatusIsSet = false;
-}
+bool BdtDataPatch::bdtpStatusIsSet() const { return m_BdtpStatusIsSet; }
+void BdtDataPatch::unsetBdtpStatus() { m_BdtpStatusIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

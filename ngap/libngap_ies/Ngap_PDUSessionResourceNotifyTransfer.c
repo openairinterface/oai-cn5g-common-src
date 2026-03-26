@@ -8,9 +8,9 @@
 
 #include "Ngap_PDUSessionResourceNotifyTransfer.h"
 
-#include "Ngap_QosFlowNotifyList.h"
-#include "Ngap_QosFlowListWithCause.h"
 #include "Ngap_ProtocolExtensionContainer.h"
+#include "Ngap_QosFlowListWithCause.h"
+#include "Ngap_QosFlowNotifyList.h"
 static asn_TYPE_member_t asn_MBR_Ngap_PDUSessionResourceNotifyTransfer_1[] = {
     {ATF_POINTER,
      3,
@@ -33,8 +33,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_PDUSessionResourceNotifyTransfer_1[] = {
      "qosFlowNotifyList"},
     {ATF_POINTER,
      2,
-     offsetof(
-         struct Ngap_PDUSessionResourceNotifyTransfer, qosFlowReleasedList),
+     offsetof(struct Ngap_PDUSessionResourceNotifyTransfer,
+              qosFlowReleasedList),
      (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_QosFlowListWithCause,
@@ -71,8 +71,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_PDUSessionResourceNotifyTransfer_1[] = {
      0, /* No default value */
      "iE-Extensions"},
 };
-static const int asn_MAP_Ngap_PDUSessionResourceNotifyTransfer_oms_1[] = {
-    0, 1, 2};
+static const int asn_MAP_Ngap_PDUSessionResourceNotifyTransfer_oms_1[] = {0, 1,
+                                                                          2};
 static const ber_tlv_tag_t
     asn_DEF_Ngap_PDUSessionResourceNotifyTransfer_tags_1[] = {
         (ASN_TAG_CLASS_UNIVERSAL | (16 << 2))};

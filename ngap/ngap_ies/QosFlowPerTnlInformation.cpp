@@ -14,23 +14,23 @@ QosFlowPerTnlInformation::~QosFlowPerTnlInformation() {}
 
 //------------------------------------------------------------------------------
 void QosFlowPerTnlInformation::set(
-    const UpTransportLayerInformation& uPTransportLayerInformation,
-    const AssociatedQosFlowList& associatedQosFlowList) {
+    const UpTransportLayerInformation &uPTransportLayerInformation,
+    const AssociatedQosFlowList &associatedQosFlowList) {
   m_UpTransportLayerInformation = uPTransportLayerInformation;
-  m_AssociatedQosFlowList       = associatedQosFlowList;
+  m_AssociatedQosFlowList = associatedQosFlowList;
 }
 
 //------------------------------------------------------------------------------
 void QosFlowPerTnlInformation::get(
-    UpTransportLayerInformation& uPTransportLayerInformation,
-    AssociatedQosFlowList& associatedQosFlowList) const {
+    UpTransportLayerInformation &uPTransportLayerInformation,
+    AssociatedQosFlowList &associatedQosFlowList) const {
   uPTransportLayerInformation = m_UpTransportLayerInformation;
-  associatedQosFlowList       = m_AssociatedQosFlowList;
+  associatedQosFlowList = m_AssociatedQosFlowList;
 }
 
 //------------------------------------------------------------------------------
 bool QosFlowPerTnlInformation::encode(
-    Ngap_QosFlowPerTNLInformation_t& qosFlowPerTnlInformation) const {
+    Ngap_QosFlowPerTNLInformation_t &qosFlowPerTnlInformation) const {
   if (!m_UpTransportLayerInformation.encode(
           qosFlowPerTnlInformation.uPTransportLayerInformation))
     return false;
@@ -44,7 +44,7 @@ bool QosFlowPerTnlInformation::encode(
 
 //------------------------------------------------------------------------------
 bool QosFlowPerTnlInformation::decode(
-    const Ngap_QosFlowPerTNLInformation_t& qosFlowPerTnlInformation) {
+    const Ngap_QosFlowPerTNLInformation_t &qosFlowPerTnlInformation) {
   if (!m_UpTransportLayerInformation.decode(
           qosFlowPerTnlInformation.uPTransportLayerInformation))
     return false;
@@ -55,4 +55,4 @@ bool QosFlowPerTnlInformation::decode(
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

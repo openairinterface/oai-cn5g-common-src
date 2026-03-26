@@ -19,11 +19,11 @@
 namespace oai::udr::model {
 
 ApplicationDataSubs::ApplicationDataSubs() {
-  m_NotificationUri        = "";
-  m_DataFiltersIsSet       = false;
-  m_Expiry                 = "";
-  m_ExpiryIsSet            = false;
-  m_SupportedFeatures      = "";
+  m_NotificationUri = "";
+  m_DataFiltersIsSet = false;
+  m_Expiry = "";
+  m_ExpiryIsSet = false;
+  m_SupportedFeatures = "";
   m_SupportedFeaturesIsSet = false;
 }
 
@@ -33,17 +33,18 @@ void ApplicationDataSubs::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const ApplicationDataSubs& o) {
-  j                    = nlohmann::json();
+void to_json(nlohmann::json &j, const ApplicationDataSubs &o) {
+  j = nlohmann::json();
   j["notificationUri"] = o.m_NotificationUri;
   if (o.dataFiltersIsSet() || !o.m_DataFilters.empty())
     j["dataFilters"] = o.m_DataFilters;
-  if (o.expiryIsSet()) j["expiry"] = o.m_Expiry;
+  if (o.expiryIsSet())
+    j["expiry"] = o.m_Expiry;
   if (o.supportedFeaturesIsSet())
     j["supportedFeatures"] = o.m_SupportedFeatures;
 }
 
-void from_json(const nlohmann::json& j, ApplicationDataSubs& o) {
+void from_json(const nlohmann::json &j, ApplicationDataSubs &o) {
   j.at("notificationUri").get_to(o.m_NotificationUri);
   if (j.find("dataFilters") != j.end()) {
     j.at("dataFilters").get_to(o.m_DataFilters);
@@ -62,40 +63,32 @@ void from_json(const nlohmann::json& j, ApplicationDataSubs& o) {
 std::string ApplicationDataSubs::getNotificationUri() const {
   return m_NotificationUri;
 }
-void ApplicationDataSubs::setNotificationUri(std::string const& value) {
+void ApplicationDataSubs::setNotificationUri(std::string const &value) {
   m_NotificationUri = value;
 }
-std::vector<DataFilter>& ApplicationDataSubs::getDataFilters() {
+std::vector<DataFilter> &ApplicationDataSubs::getDataFilters() {
   return m_DataFilters;
 }
-void ApplicationDataSubs::setDataFilters(std::vector<DataFilter> const& value) {
-  m_DataFilters      = value;
+void ApplicationDataSubs::setDataFilters(std::vector<DataFilter> const &value) {
+  m_DataFilters = value;
   m_DataFiltersIsSet = true;
 }
 bool ApplicationDataSubs::dataFiltersIsSet() const {
   return m_DataFiltersIsSet;
 }
-void ApplicationDataSubs::unsetDataFilters() {
-  m_DataFiltersIsSet = false;
-}
-std::string ApplicationDataSubs::getExpiry() const {
-  return m_Expiry;
-}
-void ApplicationDataSubs::setExpiry(std::string const& value) {
-  m_Expiry      = value;
+void ApplicationDataSubs::unsetDataFilters() { m_DataFiltersIsSet = false; }
+std::string ApplicationDataSubs::getExpiry() const { return m_Expiry; }
+void ApplicationDataSubs::setExpiry(std::string const &value) {
+  m_Expiry = value;
   m_ExpiryIsSet = true;
 }
-bool ApplicationDataSubs::expiryIsSet() const {
-  return m_ExpiryIsSet;
-}
-void ApplicationDataSubs::unsetExpiry() {
-  m_ExpiryIsSet = false;
-}
+bool ApplicationDataSubs::expiryIsSet() const { return m_ExpiryIsSet; }
+void ApplicationDataSubs::unsetExpiry() { m_ExpiryIsSet = false; }
 std::string ApplicationDataSubs::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
-void ApplicationDataSubs::setSupportedFeatures(std::string const& value) {
-  m_SupportedFeatures      = value;
+void ApplicationDataSubs::setSupportedFeatures(std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool ApplicationDataSubs::supportedFeaturesIsSet() const {
@@ -105,4 +98,4 @@ void ApplicationDataSubs::unsetSupportedFeatures() {
   m_SupportedFeaturesIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

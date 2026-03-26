@@ -26,10 +26,10 @@ struct Ngap_ProtocolExtensionContainer;
 
 /* Ngap_SourceToTarget-AMFInformationReroute */
 typedef struct Ngap_SourceToTarget_AMFInformationReroute {
-  Ngap_ConfiguredNSSAI_t* configuredNSSAI;               /* OPTIONAL */
-  Ngap_RejectedNSSAIinPLMN_t* rejectedNSSAIinPLMN;       /* OPTIONAL */
-  Ngap_RejectedNSSAIinTA_t* rejectedNSSAIinTA;           /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  Ngap_ConfiguredNSSAI_t *configuredNSSAI;               /* OPTIONAL */
+  Ngap_RejectedNSSAIinPLMN_t *rejectedNSSAIinPLMN;       /* OPTIONAL */
+  Ngap_RejectedNSSAIinTA_t *rejectedNSSAIinTA;           /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

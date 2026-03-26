@@ -92,7 +92,7 @@ asn_CHOICE_specifics_t asn_SPC_Ngap_UERLFReportContainer_specs_1 = {
     sizeof(struct Ngap_UERLFReportContainer),
     offsetof(struct Ngap_UERLFReportContainer, _asn_ctx),
     offsetof(struct Ngap_UERLFReportContainer, present),
-    sizeof(((struct Ngap_UERLFReportContainer*) 0)->present),
+    sizeof(((struct Ngap_UERLFReportContainer *)0)->present),
     asn_MAP_Ngap_UERLFReportContainer_tag2el_1,
     3, /* Count of tags in the map */
     0,

@@ -19,14 +19,14 @@
 namespace oai::model::pcf {
 
 UeCampingRep::UeCampingRep() {
-  m_AccessTypeIsSet       = false;
-  m_RatTypeIsSet          = false;
-  m_ServNfIdIsSet         = false;
-  m_ServingNetworkIsSet   = false;
+  m_AccessTypeIsSet = false;
+  m_RatTypeIsSet = false;
+  m_ServNfIdIsSet = false;
+  m_ServingNetworkIsSet = false;
   m_UserLocationInfoIsSet = false;
-  m_UeTimeZone            = "";
-  m_UeTimeZoneIsSet       = false;
-  m_NetLocAccSuppIsSet    = false;
+  m_UeTimeZone = "";
+  m_UeTimeZoneIsSet = false;
+  m_NetLocAccSuppIsSet = false;
 }
 
 void UeCampingRep::validate() const {
@@ -36,12 +36,12 @@ void UeCampingRep::validate() const {
   }
 }
 
-bool UeCampingRep::validate(std::stringstream& msg) const {
+bool UeCampingRep::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool UeCampingRep::validate(
-    std::stringstream& /* msg */, const std::string& /* pathPrefix */) const {
+bool UeCampingRep::validate(std::stringstream & /* msg */,
+                            const std::string & /* pathPrefix */) const {
   bool success = true;
   /*
   const std::string _pathPrefix =
@@ -50,7 +50,7 @@ bool UeCampingRep::validate(
   return success;
 }
 
-bool UeCampingRep::operator==(const UeCampingRep& rhs) const {
+bool UeCampingRep::operator==(const UeCampingRep &rhs) const {
   return
 
       ((!accessTypeIsSet() && !rhs.accessTypeIsSet()) ||
@@ -84,22 +84,29 @@ bool UeCampingRep::operator==(const UeCampingRep& rhs) const {
           ;
 }
 
-bool UeCampingRep::operator!=(const UeCampingRep& rhs) const {
+bool UeCampingRep::operator!=(const UeCampingRep &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const UeCampingRep& o) {
+void to_json(nlohmann::json &j, const UeCampingRep &o) {
   j = nlohmann::json();
-  if (o.accessTypeIsSet()) j["accessType"] = o.m_AccessType;
-  if (o.ratTypeIsSet()) j["ratType"] = o.m_RatType;
-  if (o.servNfIdIsSet()) j["servNfId"] = o.m_ServNfId;
-  if (o.servingNetworkIsSet()) j["servingNetwork"] = o.m_ServingNetwork;
-  if (o.userLocationInfoIsSet()) j["userLocationInfo"] = o.m_UserLocationInfo;
-  if (o.ueTimeZoneIsSet()) j["ueTimeZone"] = o.m_UeTimeZone;
-  if (o.netLocAccSuppIsSet()) j["netLocAccSupp"] = o.m_NetLocAccSupp;
+  if (o.accessTypeIsSet())
+    j["accessType"] = o.m_AccessType;
+  if (o.ratTypeIsSet())
+    j["ratType"] = o.m_RatType;
+  if (o.servNfIdIsSet())
+    j["servNfId"] = o.m_ServNfId;
+  if (o.servingNetworkIsSet())
+    j["servingNetwork"] = o.m_ServingNetwork;
+  if (o.userLocationInfoIsSet())
+    j["userLocationInfo"] = o.m_UserLocationInfo;
+  if (o.ueTimeZoneIsSet())
+    j["ueTimeZone"] = o.m_UeTimeZone;
+  if (o.netLocAccSuppIsSet())
+    j["netLocAccSupp"] = o.m_NetLocAccSupp;
 }
 
-void from_json(const nlohmann::json& j, UeCampingRep& o) {
+void from_json(const nlohmann::json &j, UeCampingRep &o) {
   if (j.find("accessType") != j.end()) {
     j.at("accessType").get_to(o.m_AccessType);
     o.m_AccessTypeIsSet = true;
@@ -133,97 +140,69 @@ void from_json(const nlohmann::json& j, UeCampingRep& o) {
 oai::model::common::AccessType UeCampingRep::getAccessType() const {
   return m_AccessType;
 }
-void UeCampingRep::setAccessType(oai::model::common::AccessType const& value) {
-  m_AccessType      = value;
+void UeCampingRep::setAccessType(oai::model::common::AccessType const &value) {
+  m_AccessType = value;
   m_AccessTypeIsSet = true;
 }
-bool UeCampingRep::accessTypeIsSet() const {
-  return m_AccessTypeIsSet;
-}
-void UeCampingRep::unsetAccessType() {
-  m_AccessTypeIsSet = false;
-}
+bool UeCampingRep::accessTypeIsSet() const { return m_AccessTypeIsSet; }
+void UeCampingRep::unsetAccessType() { m_AccessTypeIsSet = false; }
 oai::model::common::RatType UeCampingRep::getRatType() const {
   return m_RatType;
 }
-void UeCampingRep::setRatType(oai::model::common::RatType const& value) {
-  m_RatType      = value;
+void UeCampingRep::setRatType(oai::model::common::RatType const &value) {
+  m_RatType = value;
   m_RatTypeIsSet = true;
 }
-bool UeCampingRep::ratTypeIsSet() const {
-  return m_RatTypeIsSet;
-}
-void UeCampingRep::unsetRatType() {
-  m_RatTypeIsSet = false;
-}
+bool UeCampingRep::ratTypeIsSet() const { return m_RatTypeIsSet; }
+void UeCampingRep::unsetRatType() { m_RatTypeIsSet = false; }
 oai::model::pcf::ServingNfIdentity UeCampingRep::getServNfId() const {
   return m_ServNfId;
 }
 void UeCampingRep::setServNfId(
-    oai::model::pcf::ServingNfIdentity const& value) {
-  m_ServNfId      = value;
+    oai::model::pcf::ServingNfIdentity const &value) {
+  m_ServNfId = value;
   m_ServNfIdIsSet = true;
 }
-bool UeCampingRep::servNfIdIsSet() const {
-  return m_ServNfIdIsSet;
-}
-void UeCampingRep::unsetServNfId() {
-  m_ServNfIdIsSet = false;
-}
+bool UeCampingRep::servNfIdIsSet() const { return m_ServNfIdIsSet; }
+void UeCampingRep::unsetServNfId() { m_ServNfIdIsSet = false; }
 oai::model::common::PlmnIdNid UeCampingRep::getServingNetwork() const {
   return m_ServingNetwork;
 }
 void UeCampingRep::setServingNetwork(
-    oai::model::common::PlmnIdNid const& value) {
-  m_ServingNetwork      = value;
+    oai::model::common::PlmnIdNid const &value) {
+  m_ServingNetwork = value;
   m_ServingNetworkIsSet = true;
 }
-bool UeCampingRep::servingNetworkIsSet() const {
-  return m_ServingNetworkIsSet;
-}
-void UeCampingRep::unsetServingNetwork() {
-  m_ServingNetworkIsSet = false;
-}
+bool UeCampingRep::servingNetworkIsSet() const { return m_ServingNetworkIsSet; }
+void UeCampingRep::unsetServingNetwork() { m_ServingNetworkIsSet = false; }
 oai::model::common::UserLocation UeCampingRep::getUserLocationInfo() const {
   return m_UserLocationInfo;
 }
 void UeCampingRep::setUserLocationInfo(
-    oai::model::common::UserLocation const& value) {
-  m_UserLocationInfo      = value;
+    oai::model::common::UserLocation const &value) {
+  m_UserLocationInfo = value;
   m_UserLocationInfoIsSet = true;
 }
 bool UeCampingRep::userLocationInfoIsSet() const {
   return m_UserLocationInfoIsSet;
 }
-void UeCampingRep::unsetUserLocationInfo() {
-  m_UserLocationInfoIsSet = false;
-}
-std::string UeCampingRep::getUeTimeZone() const {
-  return m_UeTimeZone;
-}
-void UeCampingRep::setUeTimeZone(std::string const& value) {
-  m_UeTimeZone      = value;
+void UeCampingRep::unsetUserLocationInfo() { m_UserLocationInfoIsSet = false; }
+std::string UeCampingRep::getUeTimeZone() const { return m_UeTimeZone; }
+void UeCampingRep::setUeTimeZone(std::string const &value) {
+  m_UeTimeZone = value;
   m_UeTimeZoneIsSet = true;
 }
-bool UeCampingRep::ueTimeZoneIsSet() const {
-  return m_UeTimeZoneIsSet;
-}
-void UeCampingRep::unsetUeTimeZone() {
-  m_UeTimeZoneIsSet = false;
-}
+bool UeCampingRep::ueTimeZoneIsSet() const { return m_UeTimeZoneIsSet; }
+void UeCampingRep::unsetUeTimeZone() { m_UeTimeZoneIsSet = false; }
 oai::model::pcf::NetLocAccessSupport UeCampingRep::getNetLocAccSupp() const {
   return m_NetLocAccSupp;
 }
 void UeCampingRep::setNetLocAccSupp(
-    oai::model::pcf::NetLocAccessSupport const& value) {
-  m_NetLocAccSupp      = value;
+    oai::model::pcf::NetLocAccessSupport const &value) {
+  m_NetLocAccSupp = value;
   m_NetLocAccSuppIsSet = true;
 }
-bool UeCampingRep::netLocAccSuppIsSet() const {
-  return m_NetLocAccSuppIsSet;
-}
-void UeCampingRep::unsetNetLocAccSupp() {
-  m_NetLocAccSuppIsSet = false;
-}
+bool UeCampingRep::netLocAccSuppIsSet() const { return m_NetLocAccSuppIsSet; }
+void UeCampingRep::unsetNetLocAccSupp() { m_NetLocAccSuppIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

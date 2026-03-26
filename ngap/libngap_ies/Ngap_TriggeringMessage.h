@@ -20,8 +20,8 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_TriggeringMessage {
-  Ngap_TriggeringMessage_initiating_message    = 0,
-  Ngap_TriggeringMessage_successful_outcome    = 1,
+  Ngap_TriggeringMessage_initiating_message = 0,
+  Ngap_TriggeringMessage_successful_outcome = 1,
   Ngap_TriggeringMessage_unsuccessfull_outcome = 2
 } e_Ngap_TriggeringMessage;
 

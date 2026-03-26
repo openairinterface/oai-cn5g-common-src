@@ -27,7 +27,7 @@ namespace oai::model::ausf {
 /// Indicates the result of the authentication.
 /// </summary>
 class AuthResult {
- public:
+public:
   AuthResult();
   virtual ~AuthResult() = default;
 
@@ -51,16 +51,16 @@ class AuthResult {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const AuthResult& rhs) const;
-  bool operator!=(const AuthResult& rhs) const;
+  bool operator==(const AuthResult &rhs) const;
+  bool operator!=(const AuthResult &rhs) const;
 
   /////////////////////////////////////////////
   /// AuthResult members
@@ -68,14 +68,14 @@ class AuthResult {
   AuthResult::eAuthResult getValue() const;
   void setValue(AuthResult::eAuthResult value);
 
-  friend void to_json(nlohmann::json& j, const AuthResult& o);
-  friend void from_json(const nlohmann::json& j, AuthResult& o);
+  friend void to_json(nlohmann::json &j, const AuthResult &o);
+  friend void from_json(const nlohmann::json &j, AuthResult &o);
 
- protected:
+protected:
   AuthResult::eAuthResult m_value =
       AuthResult::eAuthResult::INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::ausf
+} // namespace oai::model::ausf
 
 #endif /* AuthResult_H_ */

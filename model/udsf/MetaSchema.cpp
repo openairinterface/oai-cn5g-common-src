@@ -18,9 +18,7 @@
 
 namespace oai::model::udsf {
 
-MetaSchema::MetaSchema() {
-  m_SchemaId = "";
-}
+MetaSchema::MetaSchema() { m_SchemaId = ""; }
 
 void MetaSchema::validate() const {
   std::stringstream msg;
@@ -29,24 +27,24 @@ void MetaSchema::validate() const {
   }
 }
 
-bool MetaSchema::validate(std::stringstream& msg) const {
+bool MetaSchema::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool MetaSchema::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool MetaSchema::validate(std::stringstream &msg,
+                          const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "MetaSchema" : pathPrefix;
 
   /* MetaTags */ {
-    const std::vector<oai::model::udsf::TagType>& value = m_MetaTags;
+    const std::vector<oai::model::udsf::TagType> &value = m_MetaTags;
     const std::string currentValuePath = _pathPrefix + ".metaTags";
 
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::udsf::TagType& value : value) {
+      int i = 0;
+      for (const oai::model::udsf::TagType &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -61,7 +59,7 @@ bool MetaSchema::validate(
   return success;
 }
 
-bool MetaSchema::operator==(const MetaSchema& rhs) const {
+bool MetaSchema::operator==(const MetaSchema &rhs) const {
   return
 
       (getSchemaId() == rhs.getSchemaId()) &&
@@ -71,33 +69,29 @@ bool MetaSchema::operator==(const MetaSchema& rhs) const {
           ;
 }
 
-bool MetaSchema::operator!=(const MetaSchema& rhs) const {
+bool MetaSchema::operator!=(const MetaSchema &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const MetaSchema& o) {
-  j             = nlohmann::json();
+void to_json(nlohmann::json &j, const MetaSchema &o) {
+  j = nlohmann::json();
   j["schemaId"] = o.m_SchemaId;
   j["metaTags"] = o.m_MetaTags;
 }
 
-void from_json(const nlohmann::json& j, MetaSchema& o) {
+void from_json(const nlohmann::json &j, MetaSchema &o) {
   j.at("schemaId").get_to(o.m_SchemaId);
   j.at("metaTags").get_to(o.m_MetaTags);
 }
 
-std::string MetaSchema::getSchemaId() const {
-  return m_SchemaId;
-}
-void MetaSchema::setSchemaId(std::string const& value) {
-  m_SchemaId = value;
-}
+std::string MetaSchema::getSchemaId() const { return m_SchemaId; }
+void MetaSchema::setSchemaId(std::string const &value) { m_SchemaId = value; }
 std::vector<oai::model::udsf::TagType> MetaSchema::getMetaTags() const {
   return m_MetaTags;
 }
 void MetaSchema::setMetaTags(
-    std::vector<oai::model::udsf::TagType> const& value) {
+    std::vector<oai::model::udsf::TagType> const &value) {
   m_MetaTags = value;
 }
 
-}  // namespace oai::model::udsf
+} // namespace oai::model::udsf

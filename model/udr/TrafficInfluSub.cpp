@@ -19,14 +19,14 @@
 namespace oai::udr::model {
 
 TrafficInfluSub::TrafficInfluSub() {
-  m_DnnsIsSet              = false;
-  m_SnssaisIsSet           = false;
-  m_InternalGroupIdsIsSet  = false;
-  m_SupisIsSet             = false;
-  m_NotificationUri        = "";
-  m_Expiry                 = "";
-  m_ExpiryIsSet            = false;
-  m_SupportedFeatures      = "";
+  m_DnnsIsSet = false;
+  m_SnssaisIsSet = false;
+  m_InternalGroupIdsIsSet = false;
+  m_SupisIsSet = false;
+  m_NotificationUri = "";
+  m_Expiry = "";
+  m_ExpiryIsSet = false;
+  m_SupportedFeatures = "";
   m_SupportedFeaturesIsSet = false;
 }
 
@@ -36,20 +36,24 @@ void TrafficInfluSub::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const TrafficInfluSub& o) {
+void to_json(nlohmann::json &j, const TrafficInfluSub &o) {
   j = nlohmann::json();
-  if (o.dnnsIsSet() || !o.m_Dnns.empty()) j["dnns"] = o.m_Dnns;
-  if (o.snssaisIsSet() || !o.m_Snssais.empty()) j["snssais"] = o.m_Snssais;
+  if (o.dnnsIsSet() || !o.m_Dnns.empty())
+    j["dnns"] = o.m_Dnns;
+  if (o.snssaisIsSet() || !o.m_Snssais.empty())
+    j["snssais"] = o.m_Snssais;
   if (o.internalGroupIdsIsSet() || !o.m_InternalGroupIds.empty())
     j["internalGroupIds"] = o.m_InternalGroupIds;
-  if (o.supisIsSet() || !o.m_Supis.empty()) j["supis"] = o.m_Supis;
+  if (o.supisIsSet() || !o.m_Supis.empty())
+    j["supis"] = o.m_Supis;
   j["notificationUri"] = o.m_NotificationUri;
-  if (o.expiryIsSet()) j["expiry"] = o.m_Expiry;
+  if (o.expiryIsSet())
+    j["expiry"] = o.m_Expiry;
   if (o.supportedFeaturesIsSet())
     j["supportedFeatures"] = o.m_SupportedFeatures;
 }
 
-void from_json(const nlohmann::json& j, TrafficInfluSub& o) {
+void from_json(const nlohmann::json &j, TrafficInfluSub &o) {
   if (j.find("dnns") != j.end()) {
     j.at("dnns").get_to(o.m_Dnns);
     o.m_DnnsIsSet = true;
@@ -77,39 +81,29 @@ void from_json(const nlohmann::json& j, TrafficInfluSub& o) {
   }
 }
 
-std::vector<std::string>& TrafficInfluSub::getDnns() {
-  return m_Dnns;
-}
-void TrafficInfluSub::setDnns(std::vector<std::string> const& value) {
-  m_Dnns      = value;
+std::vector<std::string> &TrafficInfluSub::getDnns() { return m_Dnns; }
+void TrafficInfluSub::setDnns(std::vector<std::string> const &value) {
+  m_Dnns = value;
   m_DnnsIsSet = true;
 }
-bool TrafficInfluSub::dnnsIsSet() const {
-  return m_DnnsIsSet;
-}
-void TrafficInfluSub::unsetDnns() {
-  m_DnnsIsSet = false;
-}
-std::vector<oai::model::common::Snssai>& TrafficInfluSub::getSnssais() {
+bool TrafficInfluSub::dnnsIsSet() const { return m_DnnsIsSet; }
+void TrafficInfluSub::unsetDnns() { m_DnnsIsSet = false; }
+std::vector<oai::model::common::Snssai> &TrafficInfluSub::getSnssais() {
   return m_Snssais;
 }
 void TrafficInfluSub::setSnssais(
-    std::vector<oai::model::common::Snssai> const& value) {
-  m_Snssais      = value;
+    std::vector<oai::model::common::Snssai> const &value) {
+  m_Snssais = value;
   m_SnssaisIsSet = true;
 }
-bool TrafficInfluSub::snssaisIsSet() const {
-  return m_SnssaisIsSet;
-}
-void TrafficInfluSub::unsetSnssais() {
-  m_SnssaisIsSet = false;
-}
-std::vector<std::string>& TrafficInfluSub::getInternalGroupIds() {
+bool TrafficInfluSub::snssaisIsSet() const { return m_SnssaisIsSet; }
+void TrafficInfluSub::unsetSnssais() { m_SnssaisIsSet = false; }
+std::vector<std::string> &TrafficInfluSub::getInternalGroupIds() {
   return m_InternalGroupIds;
 }
 void TrafficInfluSub::setInternalGroupIds(
-    std::vector<std::string> const& value) {
-  m_InternalGroupIds      = value;
+    std::vector<std::string> const &value) {
+  m_InternalGroupIds = value;
   m_InternalGroupIdsIsSet = true;
 }
 bool TrafficInfluSub::internalGroupIdsIsSet() const {
@@ -118,43 +112,31 @@ bool TrafficInfluSub::internalGroupIdsIsSet() const {
 void TrafficInfluSub::unsetInternalGroupIds() {
   m_InternalGroupIdsIsSet = false;
 }
-std::vector<std::string>& TrafficInfluSub::getSupis() {
-  return m_Supis;
-}
-void TrafficInfluSub::setSupis(std::vector<std::string> const& value) {
-  m_Supis      = value;
+std::vector<std::string> &TrafficInfluSub::getSupis() { return m_Supis; }
+void TrafficInfluSub::setSupis(std::vector<std::string> const &value) {
+  m_Supis = value;
   m_SupisIsSet = true;
 }
-bool TrafficInfluSub::supisIsSet() const {
-  return m_SupisIsSet;
-}
-void TrafficInfluSub::unsetSupis() {
-  m_SupisIsSet = false;
-}
+bool TrafficInfluSub::supisIsSet() const { return m_SupisIsSet; }
+void TrafficInfluSub::unsetSupis() { m_SupisIsSet = false; }
 std::string TrafficInfluSub::getNotificationUri() const {
   return m_NotificationUri;
 }
-void TrafficInfluSub::setNotificationUri(std::string const& value) {
+void TrafficInfluSub::setNotificationUri(std::string const &value) {
   m_NotificationUri = value;
 }
-std::string TrafficInfluSub::getExpiry() const {
-  return m_Expiry;
-}
-void TrafficInfluSub::setExpiry(std::string const& value) {
-  m_Expiry      = value;
+std::string TrafficInfluSub::getExpiry() const { return m_Expiry; }
+void TrafficInfluSub::setExpiry(std::string const &value) {
+  m_Expiry = value;
   m_ExpiryIsSet = true;
 }
-bool TrafficInfluSub::expiryIsSet() const {
-  return m_ExpiryIsSet;
-}
-void TrafficInfluSub::unsetExpiry() {
-  m_ExpiryIsSet = false;
-}
+bool TrafficInfluSub::expiryIsSet() const { return m_ExpiryIsSet; }
+void TrafficInfluSub::unsetExpiry() { m_ExpiryIsSet = false; }
 std::string TrafficInfluSub::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
-void TrafficInfluSub::setSupportedFeatures(std::string const& value) {
-  m_SupportedFeatures      = value;
+void TrafficInfluSub::setSupportedFeatures(std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool TrafficInfluSub::supportedFeaturesIsSet() const {
@@ -164,4 +146,4 @@ void TrafficInfluSub::unsetSupportedFeatures() {
   m_SupportedFeaturesIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

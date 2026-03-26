@@ -10,15 +10,14 @@
 
 #include "Ngap_ProtocolIE-SingleContainer.h"
 static int memb_Ngap_indexLength10_constraint_1(
-    const asn_TYPE_descriptor_t* td, const void* sptr,
-    asn_app_constraint_failed_f* ctfailcb, void* app_key) {
-  const BIT_STRING_t* st = (const BIT_STRING_t*) sptr;
+    const asn_TYPE_descriptor_t *td, const void *sptr,
+    asn_app_constraint_failed_f *ctfailcb, void *app_key) {
+  const BIT_STRING_t *st = (const BIT_STRING_t *)sptr;
   size_t size;
 
   if (!sptr) {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: value not given (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: value not given (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 
@@ -33,9 +32,8 @@ static int memb_Ngap_indexLength10_constraint_1(
     /* Constraint check succeeded */
     return 0;
   } else {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: constraint failed (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: constraint failed (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 }
@@ -117,7 +115,7 @@ asn_CHOICE_specifics_t asn_SPC_Ngap_UEIdentityIndexValue_specs_1 = {
     sizeof(struct Ngap_UEIdentityIndexValue),
     offsetof(struct Ngap_UEIdentityIndexValue, _asn_ctx),
     offsetof(struct Ngap_UEIdentityIndexValue, present),
-    sizeof(((struct Ngap_UEIdentityIndexValue*) 0)->present),
+    sizeof(((struct Ngap_UEIdentityIndexValue *)0)->present),
     asn_MAP_Ngap_UEIdentityIndexValue_tag2el_1,
     2, /* Count of tags in the map */
     0,

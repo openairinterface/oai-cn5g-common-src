@@ -27,12 +27,12 @@ void ReportingFrequency::validate() const {
   }
 }
 
-bool ReportingFrequency::validate(std::stringstream& msg) const {
+bool ReportingFrequency::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ReportingFrequency::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ReportingFrequency::validate(std::stringstream &msg,
+                                  const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ReportingFrequency" : pathPrefix;
@@ -43,22 +43,22 @@ bool ReportingFrequency::validate(
   return success;
 }
 
-bool ReportingFrequency::operator==(const ReportingFrequency& rhs) const {
+bool ReportingFrequency::operator==(const ReportingFrequency &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool ReportingFrequency::operator!=(const ReportingFrequency& rhs) const {
+bool ReportingFrequency::operator!=(const ReportingFrequency &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ReportingFrequency& o) {
+void to_json(nlohmann::json &j, const ReportingFrequency &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, ReportingFrequency& o) {
+void from_json(const nlohmann::json &j, ReportingFrequency &o) {
   from_json(j, o.m_value);
 }
 
@@ -80,4 +80,4 @@ void ReportingFrequency::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

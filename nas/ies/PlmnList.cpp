@@ -25,47 +25,46 @@ PlmnList::PlmnList() : Type4NasIe() {
 PlmnList::~PlmnList() {}
 
 //------------------------------------------------------------------------------
-void PlmnList::Set(uint8_t iei, const std::vector<nas_plmn_t>& list) {
+void PlmnList::Set(uint8_t iei, const std::vector<nas_plmn_t> &list) {
   plmn_list_ = list;
   int length = 0;
   if (list.size() > 0)
     length =
         kPlmnListMinimumLength +
         (list.size() - 1) *
-            3;  // 3 - size of each PLMN
-                // size of the first PLMN is included in kPlmnListMinimumLength
+            3; // 3 - size of each PLMN
+               // size of the first PLMN is included in kPlmnListMinimumLength
 
-  SetLengthIndicator(
-      (length > kPlmnListContentMinimumLength) ? length :
-                                                 kPlmnListContentMinimumLength);
+  SetLengthIndicator((length > kPlmnListContentMinimumLength)
+                         ? length
+                         : kPlmnListContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
-void PlmnList::Get(std::vector<nas_plmn_t>& list) const {
-  list = plmn_list_;
-}
+void PlmnList::Get(std::vector<nas_plmn_t> &list) const { list = plmn_list_; }
 
 //------------------------------------------------------------------------------
-int PlmnList::Encode(uint8_t* buf, int len) const {
+int PlmnList::Encode(uint8_t *buf, int len) const {
   oai::logger::logger_common::nas().debug("Encoding %s", GetIeName().c_str());
 
   int encoded_size = 0;
   // Validate the buffer's length and Encode IEI/Length
   int encoded_header_size = Type4NasIe::Encode(buf + encoded_size, len);
-  if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
+  if (encoded_header_size == KEncodeDecodeError)
+    return KEncodeDecodeError;
   encoded_size += encoded_header_size;
 
   for (auto it : plmn_list_)
     encoded_size += nas_utils::encodeMccMnc2Buffer(
         it.mcc, it.mnc, buf + encoded_size, len - encoded_size);
 
-  oai::logger::logger_common::nas().debug(
-      "Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
+  oai::logger::logger_common::nas().debug("Encoded %s, len (%d)",
+                                          GetIeName().c_str(), encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
-int PlmnList::Decode(const uint8_t* const buf, int len, bool is_iei) {
+int PlmnList::Decode(const uint8_t *const buf, int len, bool is_iei) {
   oai::logger::logger_common::nas().debug("Decoding %s", GetIeName().c_str());
 
   if (len < kPlmnListMinimumLength) {
@@ -80,13 +79,14 @@ int PlmnList::Decode(const uint8_t* const buf, int len, bool is_iei) {
 
   // IEI and Length
   int decoded_header_size = Type4NasIe::Decode(buf + decoded_size, len, true);
-  if (decoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
+  if (decoded_header_size == KEncodeDecodeError)
+    return KEncodeDecodeError;
   decoded_size += decoded_header_size;
 
   uint8_t len_ie = GetLengthIndicator();
   while (len_ie > 0) {
     nas_plmn_t nas_plmn = {};
-    uint8_t size        = nas_utils::decodeMccMncFromBuffer(
+    uint8_t size = nas_utils::decodeMccMncFromBuffer(
         nas_plmn.mcc, nas_plmn.mnc, buf + decoded_size, len - decoded_size);
     if (size > 0) {
       len_ie -= size;
@@ -95,7 +95,7 @@ int PlmnList::Decode(const uint8_t* const buf, int len, bool is_iei) {
       break;
     }
   }
-  oai::logger::logger_common::nas().debug(
-      "Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
+  oai::logger::logger_common::nas().debug("Decoded %s, len (%d)",
+                                          GetIeName().c_str(), decoded_size);
   return decoded_size;
 }

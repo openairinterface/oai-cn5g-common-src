@@ -39,11 +39,11 @@ struct Ngap_ProtocolIE_SingleContainer;
 typedef struct Ngap_AreaScopeOfMDT_NR {
   Ngap_AreaScopeOfMDT_NR_PR present;
   union Ngap_AreaScopeOfMDT_NR_u {
-    struct Ngap_CellBasedMDT_NR* cellBased;
-    struct Ngap_TABasedMDT* tABased;
+    struct Ngap_CellBasedMDT_NR *cellBased;
+    struct Ngap_TABasedMDT *tABased;
     NULL_t pLMNWide;
-    struct Ngap_TAIBasedMDT* tAIBased;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_TAIBasedMDT *tAIBased;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

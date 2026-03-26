@@ -11,12 +11,12 @@
 namespace oai::nas {
 
 class AuthenticationResult : public Nas5gmmMessage {
- public:
+public:
   AuthenticationResult();
   ~AuthenticationResult();
 
-  int Encode(uint8_t* buf, int len) override;
-  int Decode(uint8_t* buf, int len) override;
+  int Encode(uint8_t *buf, int len) override;
+  int Decode(uint8_t *buf, int len) override;
 
   uint32_t GetLength() const override;
 
@@ -25,19 +25,19 @@ class AuthenticationResult : public Nas5gmmMessage {
   void SetNgKsi(uint8_t tsc, uint8_t key_set_id);
   // TODO: Get
 
-  void SetEapMessage(const bstring& eap);
+  void SetEapMessage(const bstring &eap);
   // TODO: Get
 
-  void SetAbba(uint8_t length, uint8_t* value);
+  void SetAbba(uint8_t length, uint8_t *value);
   // TODO: Get
 
- private:
-  NasMmPlainHeader ie_header_;     // Mandatory
-  NasKeySetIdentifier ie_ng_ksi_;  // Mandatory (1/2 lower octet)
-  EapMessage ie_eap_message_;      // Mandatory
-  std::optional<Abba> ie_abba_;    // Optional
+private:
+  NasMmPlainHeader ie_header_;    // Mandatory
+  NasKeySetIdentifier ie_ng_ksi_; // Mandatory (1/2 lower octet)
+  EapMessage ie_eap_message_;     // Mandatory
+  std::optional<Abba> ie_abba_;   // Optional
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

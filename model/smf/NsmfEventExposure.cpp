@@ -18,35 +18,35 @@ namespace oai::model::smf {
 using namespace oai::model::common;
 
 NsmfEventExposure::NsmfEventExposure() {
-  m_Supi                   = "";
-  m_SupiIsSet              = false;
-  m_Gpsi                   = "";
-  m_GpsiIsSet              = false;
-  m_AnyUeInd               = false;
-  m_AnyUeIndIsSet          = false;
-  m_GroupId                = "";
-  m_GroupIdIsSet           = false;
-  m_PduSeId                = 0;
-  m_PduSeIdIsSet           = false;
-  m_SubId                  = "";
-  m_SubIdIsSet             = false;
-  m_NotifId                = "";
-  m_NotifUri               = "";
+  m_Supi = "";
+  m_SupiIsSet = false;
+  m_Gpsi = "";
+  m_GpsiIsSet = false;
+  m_AnyUeInd = false;
+  m_AnyUeIndIsSet = false;
+  m_GroupId = "";
+  m_GroupIdIsSet = false;
+  m_PduSeId = 0;
+  m_PduSeIdIsSet = false;
+  m_SubId = "";
+  m_SubIdIsSet = false;
+  m_NotifId = "";
+  m_NotifUri = "";
   m_AltNotifIpv4AddrsIsSet = false;
   m_AltNotifIpv6AddrsIsSet = false;
-  m_ImmeRep                = false;
-  m_ImmeRepIsSet           = false;
-  m_NotifMethodIsSet       = false;
-  m_MaxReportNbr           = 0;
-  m_MaxReportNbrIsSet      = false;
-  m_Expiry                 = "";
-  m_ExpiryIsSet            = false;
-  m_RepPeriod              = 0;
-  m_RepPeriodIsSet         = false;
-  m_GuamiIsSet             = false;
-  m_ServiveName            = "";
-  m_ServiveNameIsSet       = false;
-  m_SupportedFeatures      = "";
+  m_ImmeRep = false;
+  m_ImmeRepIsSet = false;
+  m_NotifMethodIsSet = false;
+  m_MaxReportNbr = 0;
+  m_MaxReportNbrIsSet = false;
+  m_Expiry = "";
+  m_ExpiryIsSet = false;
+  m_RepPeriod = 0;
+  m_RepPeriodIsSet = false;
+  m_GuamiIsSet = false;
+  m_ServiveName = "";
+  m_ServiveNameIsSet = false;
+  m_SupportedFeatures = "";
   m_SupportedFeaturesIsSet = false;
 }
 
@@ -56,33 +56,46 @@ void NsmfEventExposure::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const NsmfEventExposure& o) {
+void to_json(nlohmann::json &j, const NsmfEventExposure &o) {
   j = nlohmann::json();
-  if (o.supiIsSet()) j["supi"] = o.m_Supi;
-  if (o.gpsiIsSet()) j["gpsi"] = o.m_Gpsi;
-  if (o.anyUeIndIsSet()) j["anyUeInd"] = o.m_AnyUeInd;
-  if (o.groupIdIsSet()) j["groupId"] = o.m_GroupId;
-  if (o.pduSeIdIsSet()) j["pduSeId"] = o.m_PduSeId;
-  if (o.subIdIsSet()) j["subId"] = o.m_SubId;
-  j["notifId"]  = o.m_NotifId;
+  if (o.supiIsSet())
+    j["supi"] = o.m_Supi;
+  if (o.gpsiIsSet())
+    j["gpsi"] = o.m_Gpsi;
+  if (o.anyUeIndIsSet())
+    j["anyUeInd"] = o.m_AnyUeInd;
+  if (o.groupIdIsSet())
+    j["groupId"] = o.m_GroupId;
+  if (o.pduSeIdIsSet())
+    j["pduSeId"] = o.m_PduSeId;
+  if (o.subIdIsSet())
+    j["subId"] = o.m_SubId;
+  j["notifId"] = o.m_NotifId;
   j["notifUri"] = o.m_NotifUri;
   if (o.altNotifIpv4AddrsIsSet() || !o.m_AltNotifIpv4Addrs.empty())
     j["altNotifIpv4Addrs"] = o.m_AltNotifIpv4Addrs;
   if (o.altNotifIpv6AddrsIsSet() || !o.m_AltNotifIpv6Addrs.empty())
     j["altNotifIpv6Addrs"] = o.m_AltNotifIpv6Addrs;
   j["eventSubs"] = o.m_EventSubs;
-  if (o.immeRepIsSet()) j["ImmeRep"] = o.m_ImmeRep;
-  if (o.notifMethodIsSet()) j["notifMethod"] = o.m_NotifMethod;
-  if (o.maxReportNbrIsSet()) j["maxReportNbr"] = o.m_MaxReportNbr;
-  if (o.expiryIsSet()) j["expiry"] = o.m_Expiry;
-  if (o.repPeriodIsSet()) j["repPeriod"] = o.m_RepPeriod;
-  if (o.guamiIsSet()) j["guami"] = o.m_Guami;
-  if (o.serviveNameIsSet()) j["serviveName"] = o.m_ServiveName;
+  if (o.immeRepIsSet())
+    j["ImmeRep"] = o.m_ImmeRep;
+  if (o.notifMethodIsSet())
+    j["notifMethod"] = o.m_NotifMethod;
+  if (o.maxReportNbrIsSet())
+    j["maxReportNbr"] = o.m_MaxReportNbr;
+  if (o.expiryIsSet())
+    j["expiry"] = o.m_Expiry;
+  if (o.repPeriodIsSet())
+    j["repPeriod"] = o.m_RepPeriod;
+  if (o.guamiIsSet())
+    j["guami"] = o.m_Guami;
+  if (o.serviveNameIsSet())
+    j["serviveName"] = o.m_ServiveName;
   if (o.supportedFeaturesIsSet())
     j["supportedFeatures"] = o.m_SupportedFeatures;
 }
 
-void from_json(const nlohmann::json& j, NsmfEventExposure& o) {
+void from_json(const nlohmann::json &j, NsmfEventExposure &o) {
   if (j.find("supi") != j.end()) {
     j.at("supi").get_to(o.m_Supi);
     o.m_SupiIsSet = true;
@@ -152,102 +165,62 @@ void from_json(const nlohmann::json& j, NsmfEventExposure& o) {
   }
 }
 
-std::string NsmfEventExposure::getSupi() const {
-  return m_Supi;
-}
-void NsmfEventExposure::setSupi(std::string const& value) {
-  m_Supi      = value;
+std::string NsmfEventExposure::getSupi() const { return m_Supi; }
+void NsmfEventExposure::setSupi(std::string const &value) {
+  m_Supi = value;
   m_SupiIsSet = true;
 }
-bool NsmfEventExposure::supiIsSet() const {
-  return m_SupiIsSet;
-}
-void NsmfEventExposure::unsetSupi() {
-  m_SupiIsSet = false;
-}
-std::string NsmfEventExposure::getGpsi() const {
-  return m_Gpsi;
-}
-void NsmfEventExposure::setGpsi(std::string const& value) {
-  m_Gpsi      = value;
+bool NsmfEventExposure::supiIsSet() const { return m_SupiIsSet; }
+void NsmfEventExposure::unsetSupi() { m_SupiIsSet = false; }
+std::string NsmfEventExposure::getGpsi() const { return m_Gpsi; }
+void NsmfEventExposure::setGpsi(std::string const &value) {
+  m_Gpsi = value;
   m_GpsiIsSet = true;
 }
-bool NsmfEventExposure::gpsiIsSet() const {
-  return m_GpsiIsSet;
-}
-void NsmfEventExposure::unsetGpsi() {
-  m_GpsiIsSet = false;
-}
-bool NsmfEventExposure::isAnyUeInd() const {
-  return m_AnyUeInd;
-}
+bool NsmfEventExposure::gpsiIsSet() const { return m_GpsiIsSet; }
+void NsmfEventExposure::unsetGpsi() { m_GpsiIsSet = false; }
+bool NsmfEventExposure::isAnyUeInd() const { return m_AnyUeInd; }
 void NsmfEventExposure::setAnyUeInd(bool const value) {
-  m_AnyUeInd      = value;
+  m_AnyUeInd = value;
   m_AnyUeIndIsSet = true;
 }
-bool NsmfEventExposure::anyUeIndIsSet() const {
-  return m_AnyUeIndIsSet;
-}
-void NsmfEventExposure::unsetAnyUeInd() {
-  m_AnyUeIndIsSet = false;
-}
-std::string NsmfEventExposure::getGroupId() const {
-  return m_GroupId;
-}
-void NsmfEventExposure::setGroupId(std::string const& value) {
-  m_GroupId      = value;
+bool NsmfEventExposure::anyUeIndIsSet() const { return m_AnyUeIndIsSet; }
+void NsmfEventExposure::unsetAnyUeInd() { m_AnyUeIndIsSet = false; }
+std::string NsmfEventExposure::getGroupId() const { return m_GroupId; }
+void NsmfEventExposure::setGroupId(std::string const &value) {
+  m_GroupId = value;
   m_GroupIdIsSet = true;
 }
-bool NsmfEventExposure::groupIdIsSet() const {
-  return m_GroupIdIsSet;
-}
-void NsmfEventExposure::unsetGroupId() {
-  m_GroupIdIsSet = false;
-}
-int32_t NsmfEventExposure::getPduSeId() const {
-  return m_PduSeId;
-}
+bool NsmfEventExposure::groupIdIsSet() const { return m_GroupIdIsSet; }
+void NsmfEventExposure::unsetGroupId() { m_GroupIdIsSet = false; }
+int32_t NsmfEventExposure::getPduSeId() const { return m_PduSeId; }
 void NsmfEventExposure::setPduSeId(int32_t const value) {
-  m_PduSeId      = value;
+  m_PduSeId = value;
   m_PduSeIdIsSet = true;
 }
-bool NsmfEventExposure::pduSeIdIsSet() const {
-  return m_PduSeIdIsSet;
-}
-void NsmfEventExposure::unsetPduSeId() {
-  m_PduSeIdIsSet = false;
-}
-std::string NsmfEventExposure::getSubId() const {
-  return m_SubId;
-}
-void NsmfEventExposure::setSubId(std::string const& value) {
-  m_SubId      = value;
+bool NsmfEventExposure::pduSeIdIsSet() const { return m_PduSeIdIsSet; }
+void NsmfEventExposure::unsetPduSeId() { m_PduSeIdIsSet = false; }
+std::string NsmfEventExposure::getSubId() const { return m_SubId; }
+void NsmfEventExposure::setSubId(std::string const &value) {
+  m_SubId = value;
   m_SubIdIsSet = true;
 }
-bool NsmfEventExposure::subIdIsSet() const {
-  return m_SubIdIsSet;
-}
-void NsmfEventExposure::unsetSubId() {
-  m_SubIdIsSet = false;
-}
-std::string NsmfEventExposure::getNotifId() const {
-  return m_NotifId;
-}
-void NsmfEventExposure::setNotifId(std::string const& value) {
+bool NsmfEventExposure::subIdIsSet() const { return m_SubIdIsSet; }
+void NsmfEventExposure::unsetSubId() { m_SubIdIsSet = false; }
+std::string NsmfEventExposure::getNotifId() const { return m_NotifId; }
+void NsmfEventExposure::setNotifId(std::string const &value) {
   m_NotifId = value;
 }
-std::string NsmfEventExposure::getNotifUri() const {
-  return m_NotifUri;
-}
-void NsmfEventExposure::setNotifUri(std::string const& value) {
+std::string NsmfEventExposure::getNotifUri() const { return m_NotifUri; }
+void NsmfEventExposure::setNotifUri(std::string const &value) {
   m_NotifUri = value;
 }
-std::vector<std::string>& NsmfEventExposure::getAltNotifIpv4Addrs() {
+std::vector<std::string> &NsmfEventExposure::getAltNotifIpv4Addrs() {
   return m_AltNotifIpv4Addrs;
 }
 void NsmfEventExposure::setAltNotifIpv4Addrs(
-    std::vector<std::string> const& value) {
-  m_AltNotifIpv4Addrs      = value;
+    std::vector<std::string> const &value) {
+  m_AltNotifIpv4Addrs = value;
   m_AltNotifIpv4AddrsIsSet = true;
 }
 bool NsmfEventExposure::altNotifIpv4AddrsIsSet() const {
@@ -256,12 +229,12 @@ bool NsmfEventExposure::altNotifIpv4AddrsIsSet() const {
 void NsmfEventExposure::unsetAltNotifIpv4Addrs() {
   m_AltNotifIpv4AddrsIsSet = false;
 }
-std::vector<Ipv6Addr>& NsmfEventExposure::getAltNotifIpv6Addrs() {
+std::vector<Ipv6Addr> &NsmfEventExposure::getAltNotifIpv6Addrs() {
   return m_AltNotifIpv6Addrs;
 }
 void NsmfEventExposure::setAltNotifIpv6Addrs(
-    std::vector<Ipv6Addr> const& value) {
-  m_AltNotifIpv6Addrs      = value;
+    std::vector<Ipv6Addr> const &value) {
+  m_AltNotifIpv6Addrs = value;
   m_AltNotifIpv6AddrsIsSet = true;
 }
 bool NsmfEventExposure::altNotifIpv6AddrsIsSet() const {
@@ -274,109 +247,71 @@ std::vector<EventSubscription> NsmfEventExposure::getEventSubs() const {
   return m_EventSubs;
 }
 
-void NsmfEventExposure::getEventSubs(std::vector<EventSubscription>& es) const {
+void NsmfEventExposure::getEventSubs(std::vector<EventSubscription> &es) const {
   es = m_EventSubs;
 }
 void NsmfEventExposure::setEventSubs(
-    std::vector<EventSubscription> const& value) {
+    std::vector<EventSubscription> const &value) {
   m_EventSubs = value;
 }
-bool NsmfEventExposure::isImmeRep() const {
-  return m_ImmeRep;
-}
+bool NsmfEventExposure::isImmeRep() const { return m_ImmeRep; }
 void NsmfEventExposure::setImmeRep(bool const value) {
-  m_ImmeRep      = value;
+  m_ImmeRep = value;
   m_ImmeRepIsSet = true;
 }
-bool NsmfEventExposure::immeRepIsSet() const {
-  return m_ImmeRepIsSet;
-}
-void NsmfEventExposure::unsetImmeRep() {
-  m_ImmeRepIsSet = false;
-}
+bool NsmfEventExposure::immeRepIsSet() const { return m_ImmeRepIsSet; }
+void NsmfEventExposure::unsetImmeRep() { m_ImmeRepIsSet = false; }
 NotificationMethod NsmfEventExposure::getNotifMethod() const {
   return m_NotifMethod;
 }
-void NsmfEventExposure::setNotifMethod(NotificationMethod const& value) {
-  m_NotifMethod      = value;
+void NsmfEventExposure::setNotifMethod(NotificationMethod const &value) {
+  m_NotifMethod = value;
   m_NotifMethodIsSet = true;
 }
-bool NsmfEventExposure::notifMethodIsSet() const {
-  return m_NotifMethodIsSet;
-}
-void NsmfEventExposure::unsetNotifMethod() {
-  m_NotifMethodIsSet = false;
-}
-int32_t NsmfEventExposure::getMaxReportNbr() const {
-  return m_MaxReportNbr;
-}
+bool NsmfEventExposure::notifMethodIsSet() const { return m_NotifMethodIsSet; }
+void NsmfEventExposure::unsetNotifMethod() { m_NotifMethodIsSet = false; }
+int32_t NsmfEventExposure::getMaxReportNbr() const { return m_MaxReportNbr; }
 void NsmfEventExposure::setMaxReportNbr(int32_t const value) {
-  m_MaxReportNbr      = value;
+  m_MaxReportNbr = value;
   m_MaxReportNbrIsSet = true;
 }
 bool NsmfEventExposure::maxReportNbrIsSet() const {
   return m_MaxReportNbrIsSet;
 }
-void NsmfEventExposure::unsetMaxReportNbr() {
-  m_MaxReportNbrIsSet = false;
-}
-std::string NsmfEventExposure::getExpiry() const {
-  return m_Expiry;
-}
-void NsmfEventExposure::setExpiry(std::string const& value) {
-  m_Expiry      = value;
+void NsmfEventExposure::unsetMaxReportNbr() { m_MaxReportNbrIsSet = false; }
+std::string NsmfEventExposure::getExpiry() const { return m_Expiry; }
+void NsmfEventExposure::setExpiry(std::string const &value) {
+  m_Expiry = value;
   m_ExpiryIsSet = true;
 }
-bool NsmfEventExposure::expiryIsSet() const {
-  return m_ExpiryIsSet;
-}
-void NsmfEventExposure::unsetExpiry() {
-  m_ExpiryIsSet = false;
-}
-int32_t NsmfEventExposure::getRepPeriod() const {
-  return m_RepPeriod;
-}
+bool NsmfEventExposure::expiryIsSet() const { return m_ExpiryIsSet; }
+void NsmfEventExposure::unsetExpiry() { m_ExpiryIsSet = false; }
+int32_t NsmfEventExposure::getRepPeriod() const { return m_RepPeriod; }
 void NsmfEventExposure::setRepPeriod(int32_t const value) {
-  m_RepPeriod      = value;
+  m_RepPeriod = value;
   m_RepPeriodIsSet = true;
 }
-bool NsmfEventExposure::repPeriodIsSet() const {
-  return m_RepPeriodIsSet;
-}
-void NsmfEventExposure::unsetRepPeriod() {
-  m_RepPeriodIsSet = false;
-}
-Guami NsmfEventExposure::getGuami() const {
-  return m_Guami;
-}
-void NsmfEventExposure::setGuami(Guami const& value) {
-  m_Guami      = value;
+bool NsmfEventExposure::repPeriodIsSet() const { return m_RepPeriodIsSet; }
+void NsmfEventExposure::unsetRepPeriod() { m_RepPeriodIsSet = false; }
+Guami NsmfEventExposure::getGuami() const { return m_Guami; }
+void NsmfEventExposure::setGuami(Guami const &value) {
+  m_Guami = value;
   m_GuamiIsSet = true;
 }
-bool NsmfEventExposure::guamiIsSet() const {
-  return m_GuamiIsSet;
-}
-void NsmfEventExposure::unsetGuami() {
-  m_GuamiIsSet = false;
-}
-std::string NsmfEventExposure::getServiveName() const {
-  return m_ServiveName;
-}
-void NsmfEventExposure::setServiveName(std::string const& value) {
-  m_ServiveName      = value;
+bool NsmfEventExposure::guamiIsSet() const { return m_GuamiIsSet; }
+void NsmfEventExposure::unsetGuami() { m_GuamiIsSet = false; }
+std::string NsmfEventExposure::getServiveName() const { return m_ServiveName; }
+void NsmfEventExposure::setServiveName(std::string const &value) {
+  m_ServiveName = value;
   m_ServiveNameIsSet = true;
 }
-bool NsmfEventExposure::serviveNameIsSet() const {
-  return m_ServiveNameIsSet;
-}
-void NsmfEventExposure::unsetServiveName() {
-  m_ServiveNameIsSet = false;
-}
+bool NsmfEventExposure::serviveNameIsSet() const { return m_ServiveNameIsSet; }
+void NsmfEventExposure::unsetServiveName() { m_ServiveNameIsSet = false; }
 std::string NsmfEventExposure::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
-void NsmfEventExposure::setSupportedFeatures(std::string const& value) {
-  m_SupportedFeatures      = value;
+void NsmfEventExposure::setSupportedFeatures(std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool NsmfEventExposure::supportedFeaturesIsSet() const {
@@ -386,4 +321,4 @@ void NsmfEventExposure::unsetSupportedFeatures() {
   m_SupportedFeaturesIsSet = false;
 }
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

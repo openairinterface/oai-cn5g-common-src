@@ -32,18 +32,18 @@ void ChangeOfSupiPeiAssociationReport::validate() const {
   }
 }
 
-bool ChangeOfSupiPeiAssociationReport::validate(std::stringstream& msg) const {
+bool ChangeOfSupiPeiAssociationReport::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool ChangeOfSupiPeiAssociationReport::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ChangeOfSupiPeiAssociationReport" : pathPrefix;
 
   /* NewPei */ {
-    const std::string& value           = m_NewPei;
+    const std::string &value = m_NewPei;
     const std::string currentValuePath = _pathPrefix + ".newPei";
   }
 
@@ -51,7 +51,7 @@ bool ChangeOfSupiPeiAssociationReport::validate(
 }
 
 bool ChangeOfSupiPeiAssociationReport::operator==(
-    const ChangeOfSupiPeiAssociationReport& rhs) const {
+    const ChangeOfSupiPeiAssociationReport &rhs) const {
   return
 
       (getNewPei() == rhs.getNewPei())
@@ -60,24 +60,24 @@ bool ChangeOfSupiPeiAssociationReport::operator==(
 }
 
 bool ChangeOfSupiPeiAssociationReport::operator!=(
-    const ChangeOfSupiPeiAssociationReport& rhs) const {
+    const ChangeOfSupiPeiAssociationReport &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ChangeOfSupiPeiAssociationReport& o) {
-  j           = nlohmann::json();
+void to_json(nlohmann::json &j, const ChangeOfSupiPeiAssociationReport &o) {
+  j = nlohmann::json();
   j["newPei"] = o.m_NewPei;
 }
 
-void from_json(const nlohmann::json& j, ChangeOfSupiPeiAssociationReport& o) {
+void from_json(const nlohmann::json &j, ChangeOfSupiPeiAssociationReport &o) {
   j.at("newPei").get_to(o.m_NewPei);
 }
 
 std::string ChangeOfSupiPeiAssociationReport::getNewPei() const {
   return m_NewPei;
 }
-void ChangeOfSupiPeiAssociationReport::setNewPei(std::string const& value) {
+void ChangeOfSupiPeiAssociationReport::setNewPei(std::string const &value) {
   m_NewPei = value;
 }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

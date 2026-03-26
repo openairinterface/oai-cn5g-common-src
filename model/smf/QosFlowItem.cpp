@@ -16,7 +16,7 @@
 namespace oai::model::smf {
 
 QosFlowItem::QosFlowItem() {
-  m_Qfi        = 0;
+  m_Qfi = 0;
   m_CauseIsSet = false;
 }
 
@@ -26,13 +26,14 @@ void QosFlowItem::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const QosFlowItem& o) {
-  j        = nlohmann::json();
+void to_json(nlohmann::json &j, const QosFlowItem &o) {
+  j = nlohmann::json();
   j["qfi"] = o.m_Qfi;
-  if (o.causeIsSet()) j["cause"] = o.m_Cause;
+  if (o.causeIsSet())
+    j["cause"] = o.m_Cause;
 }
 
-void from_json(const nlohmann::json& j, QosFlowItem& o) {
+void from_json(const nlohmann::json &j, QosFlowItem &o) {
   j.at("qfi").get_to(o.m_Qfi);
   if (j.find("cause") != j.end()) {
     j.at("cause").get_to(o.m_Cause);
@@ -40,24 +41,14 @@ void from_json(const nlohmann::json& j, QosFlowItem& o) {
   }
 }
 
-int32_t QosFlowItem::getQfi() const {
-  return m_Qfi;
-}
-void QosFlowItem::setQfi(int32_t const value) {
-  m_Qfi = value;
-}
-Cause QosFlowItem::getCause() const {
-  return m_Cause;
-}
-void QosFlowItem::setCause(Cause const& value) {
-  m_Cause      = value;
+int32_t QosFlowItem::getQfi() const { return m_Qfi; }
+void QosFlowItem::setQfi(int32_t const value) { m_Qfi = value; }
+Cause QosFlowItem::getCause() const { return m_Cause; }
+void QosFlowItem::setCause(Cause const &value) {
+  m_Cause = value;
   m_CauseIsSet = true;
 }
-bool QosFlowItem::causeIsSet() const {
-  return m_CauseIsSet;
-}
-void QosFlowItem::unsetCause() {
-  m_CauseIsSet = false;
-}
+bool QosFlowItem::causeIsSet() const { return m_CauseIsSet; }
+void QosFlowItem::unsetCause() { m_CauseIsSet = false; }
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

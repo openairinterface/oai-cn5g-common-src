@@ -19,8 +19,8 @@
 #ifndef HfcNodeId_H_
 #define HfcNodeId_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::common {
 
@@ -28,7 +28,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class HfcNodeId {
- public:
+public:
   HfcNodeId();
   virtual ~HfcNodeId() = default;
 
@@ -42,16 +42,16 @@ class HfcNodeId {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const HfcNodeId& rhs) const;
-  bool operator!=(const HfcNodeId& rhs) const;
+  bool operator==(const HfcNodeId &rhs) const;
+  bool operator!=(const HfcNodeId &rhs) const;
 
   /////////////////////////////////////////////
   /// HfcNodeId members
@@ -60,15 +60,15 @@ class HfcNodeId {
   ///
   /// </summary>
   std::string getHfcNId() const;
-  void setHfcNId(std::string const& value);
+  void setHfcNId(std::string const &value);
 
-  friend void to_json(nlohmann::json& j, const HfcNodeId& o);
-  friend void from_json(const nlohmann::json& j, HfcNodeId& o);
+  friend void to_json(nlohmann::json &j, const HfcNodeId &o);
+  friend void from_json(const nlohmann::json &j, HfcNodeId &o);
 
- protected:
+protected:
   std::string m_HfcNId;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* HfcNodeId_H_ */

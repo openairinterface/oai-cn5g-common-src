@@ -20,8 +20,8 @@
 #define PduSetQosPara_H_
 
 #include "PduSetHandlingInfo.h"
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::pcf {
 
@@ -29,7 +29,7 @@ namespace oai::model::pcf {
 /// Represents the PDU Set level QoS parameters.
 /// </summary>
 class PduSetQosPara {
- public:
+public:
   PduSetQosPara();
   virtual ~PduSetQosPara() = default;
 
@@ -43,16 +43,16 @@ class PduSetQosPara {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const PduSetQosPara& rhs) const;
-  bool operator!=(const PduSetQosPara& rhs) const;
+  bool operator==(const PduSetQosPara &rhs) const;
+  bool operator!=(const PduSetQosPara &rhs) const;
 
   /////////////////////////////////////////////
   /// PduSetQosPara members
@@ -71,21 +71,21 @@ class PduSetQosPara {
   /// scalar and the exponent k are each encoded as one decimal digit.
   /// </summary>
   std::string getPduSetErrRate() const;
-  void setPduSetErrRate(std::string const& value);
+  void setPduSetErrRate(std::string const &value);
   bool pduSetErrRateIsSet() const;
   void unsetPduSetErrRate();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::PduSetHandlingInfo getPduSetHandlingInfo() const;
-  void setPduSetHandlingInfo(oai::model::pcf::PduSetHandlingInfo const& value);
+  void setPduSetHandlingInfo(oai::model::pcf::PduSetHandlingInfo const &value);
   bool pduSetHandlingInfoIsSet() const;
   void unsetPduSetHandlingInfo();
 
-  friend void to_json(nlohmann::json& j, const PduSetQosPara& o);
-  friend void from_json(const nlohmann::json& j, PduSetQosPara& o);
+  friend void to_json(nlohmann::json &j, const PduSetQosPara &o);
+  friend void from_json(const nlohmann::json &j, PduSetQosPara &o);
 
- protected:
+protected:
   int32_t m_PduSetDelayBudget;
   bool m_PduSetDelayBudgetIsSet;
   std::string m_PduSetErrRate;
@@ -94,6 +94,6 @@ class PduSetQosPara {
   bool m_PduSetHandlingInfoIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* PduSetQosPara_H_ */

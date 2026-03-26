@@ -17,14 +17,13 @@ extern "C" {
 namespace oai::ngap {
 
 class MessageType {
- public:
+public:
   MessageType();
-  MessageType(
-      const Ngap_ProcedureCode_t& procedureCode,
-      Ngap_NGAP_PDU_PR m_typeOfMessage);
+  MessageType(const Ngap_ProcedureCode_t &procedureCode,
+              Ngap_NGAP_PDU_PR m_typeOfMessage);
   virtual ~MessageType();
 
-  void setProcedureCode(const Ngap_ProcedureCode_t& procedureCode);
+  void setProcedureCode(const Ngap_ProcedureCode_t &procedureCode);
   Ngap_ProcedureCode_t getProcedureCode() const;
 
   void setTypeOfMessage(Ngap_NGAP_PDU_PR typeOfMessage);
@@ -37,21 +36,21 @@ class MessageType {
   void setValuePresent(Ngap_SuccessfulOutcome__value_PR valuePresent);
   void setValuePresent(Ngap_UnsuccessfulOutcome__value_PR valuePresent);
 
-  int encode(Ngap_NGAP_PDU_t&) const;
+  int encode(Ngap_NGAP_PDU_t &) const;
   // TODO: void decode(const Ngap_NGAP_PDU_t&);
 
- private:
-  Ngap_ProcedureCode_t m_ProcedureCode;  // Ngap_ProcedureCode.h
-  Ngap_NGAP_PDU_PR m_TypeOfMessage;      // Ngap_NGAP-PDU.h
-  Ngap_Criticality m_Criticality;        // Ngap_Criticality.h
+private:
+  Ngap_ProcedureCode_t m_ProcedureCode; // Ngap_ProcedureCode.h
+  Ngap_NGAP_PDU_PR m_TypeOfMessage;     // Ngap_NGAP-PDU.h
+  Ngap_Criticality m_Criticality;       // Ngap_Criticality.h
 
   Ngap_InitiatingMessage__value_PR
-      m_InitiatingMsgValuePresent;  // Ngap_InitiatingMessage.h
+      m_InitiatingMsgValuePresent; // Ngap_InitiatingMessage.h
   Ngap_SuccessfulOutcome__value_PR
-      m_SuccessfulOutcomeValuePresent;  // Ngap_SuccessfulOutcome.h
+      m_SuccessfulOutcomeValuePresent; // Ngap_SuccessfulOutcome.h
   Ngap_UnsuccessfulOutcome__value_PR
-      m_UnsuccessfulOutcomeValuePresent;  // Ngap_UnsuccessfulOutcome.h
+      m_UnsuccessfulOutcomeValuePresent; // Ngap_UnsuccessfulOutcome.h
 };
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

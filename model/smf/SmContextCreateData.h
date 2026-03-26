@@ -19,25 +19,25 @@
 #ifndef SmContextCreateData_H_
 #define SmContextCreateData_H_
 
-#include "NgRanTargetId.h"
-#include "RatType.h"
-#include "RefToBinaryData.h"
-#include <string>
-#include "BackupAmfInfo.h"
-#include "PlmnId.h"
-#include "Snssai.h"
-#include "TraceData.h"
-#include <vector>
 #include "AccessType.h"
+#include "BackupAmfInfo.h"
 #include "DnnSelectionMode.h"
 #include "EpsInterworkingIndication.h"
-#include "ServiceName.h"
-#include "UserLocation.h"
-#include "HoState.h"
-#include "PresenceState.h"
-#include "RequestType.h"
 #include "Guami.h"
+#include "HoState.h"
+#include "NgRanTargetId.h"
+#include "PlmnId.h"
+#include "PresenceState.h"
+#include "RatType.h"
+#include "RefToBinaryData.h"
+#include "RequestType.h"
+#include "ServiceName.h"
+#include "Snssai.h"
+#include "TraceData.h"
+#include "UserLocation.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::smf {
 
@@ -45,7 +45,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class SmContextCreateData {
- public:
+public:
   SmContextCreateData();
   virtual ~SmContextCreateData();
 
@@ -58,7 +58,7 @@ class SmContextCreateData {
   ///
   /// </summary>
   std::string getSupi() const;
-  void setSupi(std::string const& value);
+  void setSupi(std::string const &value);
   bool supiIsSet() const;
   void unsetSupi();
   /// <summary>
@@ -72,14 +72,14 @@ class SmContextCreateData {
   ///
   /// </summary>
   std::string getPei() const;
-  void setPei(std::string const& value);
+  void setPei(std::string const &value);
   bool peiIsSet() const;
   void unsetPei();
   /// <summary>
   ///
   /// </summary>
   std::string getGpsi() const;
-  void setGpsi(std::string const& value);
+  void setGpsi(std::string const &value);
   bool gpsiIsSet() const;
   void unsetGpsi();
   /// <summary>
@@ -93,124 +93,124 @@ class SmContextCreateData {
   ///
   /// </summary>
   std::string getDnn() const;
-  void setDnn(std::string const& value);
+  void setDnn(std::string const &value);
   bool dnnIsSet() const;
   void unsetDnn();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Snssai getSNssai() const;
-  void setSNssai(oai::model::common::Snssai const& value);
+  void setSNssai(oai::model::common::Snssai const &value);
   bool sNssaiIsSet() const;
   void unsetSNssai();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Snssai getHplmnSnssai() const;
-  void setHplmnSnssai(oai::model::common::Snssai const& value);
+  void setHplmnSnssai(oai::model::common::Snssai const &value);
   bool hplmnSnssaiIsSet() const;
   void unsetHplmnSnssai();
   /// <summary>
   ///
   /// </summary>
   std::string getServingNfId() const;
-  void setServingNfId(std::string const& value);
+  void setServingNfId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Guami getGuami() const;
-  void setGuami(oai::model::common::Guami const& value);
+  void setGuami(oai::model::common::Guami const &value);
   bool guamiIsSet() const;
   void unsetGuami();
   /// <summary>
   ///
   /// </summary>
   std::string getServiceName() const;
-  void setServiceName(std::string const& value);
+  void setServiceName(std::string const &value);
   bool serviceNameIsSet() const;
   void unsetServiceName();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::PlmnId getServingNetwork() const;
-  void setServingNetwork(oai::model::common::PlmnId const& value);
+  void setServingNetwork(oai::model::common::PlmnId const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getRequestType() const;
-  void setRequestType(std::string const& value);
+  void setRequestType(std::string const &value);
   bool requestTypeIsSet() const;
   void unsetRequestType();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::RefToBinaryData getN1SmMsg() const;
-  void setN1SmMsg(oai::model::common::RefToBinaryData const& value);
+  void setN1SmMsg(oai::model::common::RefToBinaryData const &value);
   bool n1SmMsgIsSet() const;
   void unsetN1SmMsg();
   /// <summary>
   ///
   /// </summary>
   std::string getAnType() const;
-  void setAnType(std::string const& value);
+  void setAnType(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getSecondAnType() const;
-  void setSecondAnType(std::string const& value);
+  void setSecondAnType(std::string const &value);
   bool secondAnTypeIsSet() const;
   void unsetSecondAnType();
   /// <summary>
   ///
   /// </summary>
   std::string getRatType() const;
-  void setRatType(std::string const& value);
+  void setRatType(std::string const &value);
   bool ratTypeIsSet() const;
   void unsetRatType();
   /// <summary>
   ///
   /// </summary>
   std::string getPresenceInLadn() const;
-  void setPresenceInLadn(std::string const& value);
+  void setPresenceInLadn(std::string const &value);
   bool presenceInLadnIsSet() const;
   void unsetPresenceInLadn();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::UserLocation getUeLocation() const;
-  void setUeLocation(oai::model::common::UserLocation const& value);
+  void setUeLocation(oai::model::common::UserLocation const &value);
   bool ueLocationIsSet() const;
   void unsetUeLocation();
   /// <summary>
   ///
   /// </summary>
   std::string getUeTimeZone() const;
-  void setUeTimeZone(std::string const& value);
+  void setUeTimeZone(std::string const &value);
   bool ueTimeZoneIsSet() const;
   void unsetUeTimeZone();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::UserLocation getAddUeLocation() const;
-  void setAddUeLocation(oai::model::common::UserLocation const& value);
+  void setAddUeLocation(oai::model::common::UserLocation const &value);
   bool addUeLocationIsSet() const;
   void unsetAddUeLocation();
   /// <summary>
   ///
   /// </summary>
   std::string getSmContextStatusUri() const;
-  void setSmContextStatusUri(std::string const& value);
+  void setSmContextStatusUri(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getHSmfUri() const;
-  void setHSmfUri(std::string const& value);
+  void setHSmfUri(std::string const &value);
   bool hSmfUriIsSet() const;
   void unsetHSmfUri();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getAdditionalHsmfUri();
+  std::vector<std::string> &getAdditionalHsmfUri();
   bool additionalHsmfUriIsSet() const;
   void unsetAdditionalHsmfUri();
   /// <summary>
@@ -223,83 +223,83 @@ class SmContextCreateData {
   /// <summary>
   ///
   /// </summary>
-  std::vector<int32_t>& getPduSessionsActivateList();
+  std::vector<int32_t> &getPduSessionsActivateList();
   bool pduSessionsActivateListIsSet() const;
   void unsetPduSessionsActivateList();
   /// <summary>
   ///
   /// </summary>
   std::string getUeEpsPdnConnection() const;
-  void setUeEpsPdnConnection(std::string const& value);
+  void setUeEpsPdnConnection(std::string const &value);
   bool ueEpsPdnConnectionIsSet() const;
   void unsetUeEpsPdnConnection();
   /// <summary>
   ///
   /// </summary>
   std::string getHoState() const;
-  void setHoState(std::string const& value);
+  void setHoState(std::string const &value);
   bool hoStateIsSet() const;
   void unsetHoState();
   /// <summary>
   ///
   /// </summary>
   std::string getPcfId() const;
-  void setPcfId(std::string const& value);
+  void setPcfId(std::string const &value);
   bool pcfIdIsSet() const;
   void unsetPcfId();
   /// <summary>
   ///
   /// </summary>
   std::string getNrfUri() const;
-  void setNrfUri(std::string const& value);
+  void setNrfUri(std::string const &value);
   bool nrfUriIsSet() const;
   void unsetNrfUri();
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
   /// <summary>
   ///
   /// </summary>
   std::string getSelMode() const;
-  void setSelMode(std::string const& value);
+  void setSelMode(std::string const &value);
   bool selModeIsSet() const;
   void unsetSelMode();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::BackupAmfInfo>& getBackupAmfInfo();
+  std::vector<oai::model::common::BackupAmfInfo> &getBackupAmfInfo();
   bool backupAmfInfoIsSet() const;
   void unsetBackupAmfInfo();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::TraceData getTraceData() const;
-  void setTraceData(oai::model::common::TraceData const& value);
+  void setTraceData(oai::model::common::TraceData const &value);
   bool traceDataIsSet() const;
   void unsetTraceData();
   /// <summary>
   ///
   /// </summary>
   std::string getUdmGroupId() const;
-  void setUdmGroupId(std::string const& value);
+  void setUdmGroupId(std::string const &value);
   bool udmGroupIdIsSet() const;
   void unsetUdmGroupId();
   /// <summary>
   ///
   /// </summary>
   std::string getRoutingIndicator() const;
-  void setRoutingIndicator(std::string const& value);
+  void setRoutingIndicator(std::string const &value);
   bool routingIndicatorIsSet() const;
   void unsetRoutingIndicator();
   /// <summary>
   ///
   /// </summary>
   EpsInterworkingIndication getEpsInterworkingInd() const;
-  void setEpsInterworkingInd(EpsInterworkingIndication const& value);
+  void setEpsInterworkingInd(EpsInterworkingIndication const &value);
   bool epsInterworkingIndIsSet() const;
   void unsetEpsInterworkingInd();
   /// <summary>
@@ -313,14 +313,14 @@ class SmContextCreateData {
   ///
   /// </summary>
   NgRanTargetId getTargetId() const;
-  void setTargetId(NgRanTargetId const& value);
+  void setTargetId(NgRanTargetId const &value);
   bool targetIdIsSet() const;
   void unsetTargetId();
   /// <summary>
   ///
   /// </summary>
   std::string getEpsBearerCtxStatus() const;
-  void setEpsBearerCtxStatus(std::string const& value);
+  void setEpsBearerCtxStatus(std::string const &value);
   bool epsBearerCtxStatusIsSet() const;
   void unsetEpsBearerCtxStatus();
   /// <summary>
@@ -348,21 +348,21 @@ class SmContextCreateData {
   ///
   /// </summary>
   oai::model::common::RefToBinaryData getN2SmInfo() const;
-  void setN2SmInfo(oai::model::common::RefToBinaryData const& value);
+  void setN2SmInfo(oai::model::common::RefToBinaryData const &value);
   bool n2SmInfoIsSet() const;
   void unsetN2SmInfo();
   /// <summary>
   ///
   /// </summary>
   std::string getSmContextRef() const;
-  void setSmContextRef(std::string const& value);
+  void setSmContextRef(std::string const &value);
   bool smContextRefIsSet() const;
   void unsetSmContextRef();
 
-  friend void to_json(nlohmann::json& j, const SmContextCreateData& o);
-  friend void from_json(const nlohmann::json& j, SmContextCreateData& o);
+  friend void to_json(nlohmann::json &j, const SmContextCreateData &o);
+  friend void from_json(const nlohmann::json &j, SmContextCreateData &o);
 
- protected:
+protected:
   std::string m_Supi;
   bool m_SupiIsSet;
   bool m_UnauthenticatedSupi;
@@ -455,6 +455,6 @@ class SmContextCreateData {
   bool m_SmContextRefIsSet;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* SmContextCreateData_H_ */

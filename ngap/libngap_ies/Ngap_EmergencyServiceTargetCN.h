@@ -21,7 +21,7 @@ extern "C" {
 /* Dependencies */
 typedef enum Ngap_EmergencyServiceTargetCN {
   Ngap_EmergencyServiceTargetCN_fiveGC = 0,
-  Ngap_EmergencyServiceTargetCN_epc    = 1
+  Ngap_EmergencyServiceTargetCN_epc = 1
   /*
    * Enumeration is extensible
    */

@@ -27,7 +27,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class LoggingDurationMdt_anyOf {
- public:
+public:
   LoggingDurationMdt_anyOf();
   virtual ~LoggingDurationMdt_anyOf() = default;
 
@@ -54,16 +54,16 @@ class LoggingDurationMdt_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const LoggingDurationMdt_anyOf& rhs) const;
-  bool operator!=(const LoggingDurationMdt_anyOf& rhs) const;
+  bool operator==(const LoggingDurationMdt_anyOf &rhs) const;
+  bool operator!=(const LoggingDurationMdt_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// LoggingDurationMdt_anyOf members
@@ -71,15 +71,15 @@ class LoggingDurationMdt_anyOf {
   LoggingDurationMdt_anyOf::eLoggingDurationMdt_anyOf getValue() const;
   void setValue(LoggingDurationMdt_anyOf::eLoggingDurationMdt_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const LoggingDurationMdt_anyOf& o);
-  friend void from_json(const nlohmann::json& j, LoggingDurationMdt_anyOf& o);
+  friend void to_json(nlohmann::json &j, const LoggingDurationMdt_anyOf &o);
+  friend void from_json(const nlohmann::json &j, LoggingDurationMdt_anyOf &o);
 
- protected:
+protected:
   LoggingDurationMdt_anyOf::eLoggingDurationMdt_anyOf m_value =
       LoggingDurationMdt_anyOf::eLoggingDurationMdt_anyOf::
           INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* LoggingDurationMdt_anyOf_H_ */

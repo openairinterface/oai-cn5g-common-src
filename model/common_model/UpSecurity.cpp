@@ -27,12 +27,12 @@ void UpSecurity::validate() const {
   }
 }
 
-bool UpSecurity::validate(std::stringstream& msg) const {
+bool UpSecurity::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool UpSecurity::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool UpSecurity::validate(std::stringstream &msg,
+                          const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "UpSecurity" : pathPrefix;
@@ -40,7 +40,7 @@ bool UpSecurity::validate(
   return success;
 }
 
-bool UpSecurity::operator==(const UpSecurity& rhs) const {
+bool UpSecurity::operator==(const UpSecurity &rhs) const {
   return
 
       (getUpIntegr() == rhs.getUpIntegr()) &&
@@ -50,17 +50,17 @@ bool UpSecurity::operator==(const UpSecurity& rhs) const {
           ;
 }
 
-bool UpSecurity::operator!=(const UpSecurity& rhs) const {
+bool UpSecurity::operator!=(const UpSecurity &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const UpSecurity& o) {
-  j             = nlohmann::json();
+void to_json(nlohmann::json &j, const UpSecurity &o) {
+  j = nlohmann::json();
   j["upIntegr"] = o.m_UpIntegr;
   j["upConfid"] = o.m_UpConfid;
 }
 
-void from_json(const nlohmann::json& j, UpSecurity& o) {
+void from_json(const nlohmann::json &j, UpSecurity &o) {
   j.at("upIntegr").get_to(o.m_UpIntegr);
   j.at("upConfid").get_to(o.m_UpConfid);
 }
@@ -68,15 +68,15 @@ void from_json(const nlohmann::json& j, UpSecurity& o) {
 oai::model::common::UpIntegrity UpSecurity::getUpIntegr() const {
   return m_UpIntegr;
 }
-void UpSecurity::setUpIntegr(oai::model::common::UpIntegrity const& value) {
+void UpSecurity::setUpIntegr(oai::model::common::UpIntegrity const &value) {
   m_UpIntegr = value;
 }
 oai::model::common::UpConfidentiality UpSecurity::getUpConfid() const {
   return m_UpConfid;
 }
 void UpSecurity::setUpConfid(
-    oai::model::common::UpConfidentiality const& value) {
+    oai::model::common::UpConfidentiality const &value) {
   m_UpConfid = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

@@ -31,7 +31,7 @@ namespace oai::model::smf {
 /// EBI_ASSIGNMENT_REQ
 /// </summary>
 class RequestIndication {
- public:
+public:
   RequestIndication();
   virtual ~RequestIndication();
 
@@ -40,12 +40,12 @@ class RequestIndication {
   /////////////////////////////////////////////
   /// RequestIndication members
 
-  friend void to_json(nlohmann::json& j, const RequestIndication& o);
-  friend void from_json(const nlohmann::json& j, RequestIndication& o);
+  friend void to_json(nlohmann::json &j, const RequestIndication &o);
+  friend void from_json(const nlohmann::json &j, RequestIndication &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* RequestIndication_H_ */

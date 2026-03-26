@@ -27,12 +27,12 @@ void CollectionPeriodRmmLteMdt::validate() const {
   }
 }
 
-bool CollectionPeriodRmmLteMdt::validate(std::stringstream& msg) const {
+bool CollectionPeriodRmmLteMdt::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool CollectionPeriodRmmLteMdt::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool CollectionPeriodRmmLteMdt::validate(std::stringstream &msg,
+                                         const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "CollectionPeriodRmmLteMdt" : pathPrefix;
@@ -44,23 +44,23 @@ bool CollectionPeriodRmmLteMdt::validate(
 }
 
 bool CollectionPeriodRmmLteMdt::operator==(
-    const CollectionPeriodRmmLteMdt& rhs) const {
+    const CollectionPeriodRmmLteMdt &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
 bool CollectionPeriodRmmLteMdt::operator!=(
-    const CollectionPeriodRmmLteMdt& rhs) const {
+    const CollectionPeriodRmmLteMdt &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const CollectionPeriodRmmLteMdt& o) {
+void to_json(nlohmann::json &j, const CollectionPeriodRmmLteMdt &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, CollectionPeriodRmmLteMdt& o) {
+void from_json(const nlohmann::json &j, CollectionPeriodRmmLteMdt &o) {
   from_json(j, o.m_value);
 }
 
@@ -83,4 +83,4 @@ void CollectionPeriodRmmLteMdt::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

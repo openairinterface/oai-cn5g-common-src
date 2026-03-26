@@ -8,38 +8,36 @@
 #include "UpTransportLayerInformation.hpp"
 
 extern "C" {
-#include "Ngap_UPTransportLayerInformation.h"
 #include "Ngap_UL-NGU-UP-TNLModifyItem.h"
+#include "Ngap_UPTransportLayerInformation.h"
 }
 
 namespace oai::ngap {
 
 class UlNgUUpTnlModifyItem {
- public:
+public:
   UlNgUUpTnlModifyItem();
   virtual ~UlNgUUpTnlModifyItem();
 
-  void set(
-      const UpTransportLayerInformation& ulNgUUpTnlInformation,
-      const UpTransportLayerInformation& dlNgUUpTnlInformation);
-  void get(
-      UpTransportLayerInformation& ulNgUUpTnlInformation,
-      UpTransportLayerInformation& dlNgUUpTnlInformation) const;
+  void set(const UpTransportLayerInformation &ulNgUUpTnlInformation,
+           const UpTransportLayerInformation &dlNgUUpTnlInformation);
+  void get(UpTransportLayerInformation &ulNgUUpTnlInformation,
+           UpTransportLayerInformation &dlNgUUpTnlInformation) const;
 
   void setUlNgUUpTnlInformation(
-      const UpTransportLayerInformation& ulNgUUpTnlInformation);
+      const UpTransportLayerInformation &ulNgUUpTnlInformation);
   void getUlNgUUpTnlInformation(
-      UpTransportLayerInformation& ulNgUUpTnlInformation) const;
+      UpTransportLayerInformation &ulNgUUpTnlInformation) const;
 
   void setDlNgUUpTnlInformation(
-      const UpTransportLayerInformation& dlNgUUpTnlInformation);
+      const UpTransportLayerInformation &dlNgUUpTnlInformation);
   void getDlNgUUpTnlInformation(
-      UpTransportLayerInformation& dlNgUUpTnlInformation) const;
+      UpTransportLayerInformation &dlNgUUpTnlInformation) const;
 
-  bool encode(Ngap_UL_NGU_UP_TNLModifyItem_t& ulNgUUpTnlModifyItem) const;
-  bool decode(const Ngap_UL_NGU_UP_TNLModifyItem_t& ulNgUUpTnlModifyItem);
+  bool encode(Ngap_UL_NGU_UP_TNLModifyItem_t &ulNgUUpTnlModifyItem) const;
+  bool decode(const Ngap_UL_NGU_UP_TNLModifyItem_t &ulNgUUpTnlModifyItem);
 
- private:
+private:
   // UL NG-U UP TNL Information (Mandatory)
   UpTransportLayerInformation m_UlNgUUpTnlInformation;
   // UL NG-U UP TNL Information (Mandatory)
@@ -48,6 +46,6 @@ class UlNgUUpTnlModifyItem {
   // TODO: Redundant DL NG-U UP TNL Information (Optional)
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

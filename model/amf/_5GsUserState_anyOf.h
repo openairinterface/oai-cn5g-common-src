@@ -27,7 +27,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class _5GsUserState_anyOf {
- public:
+public:
   _5GsUserState_anyOf();
   virtual ~_5GsUserState_anyOf() = default;
 
@@ -54,10 +54,10 @@ class _5GsUserState_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const _5GsUserState_anyOf& rhs) const;
-  bool operator!=(const _5GsUserState_anyOf& rhs) const;
+  bool operator==(const _5GsUserState_anyOf &rhs) const;
+  bool operator!=(const _5GsUserState_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// _5GsUserState_anyOf members
@@ -65,18 +65,18 @@ class _5GsUserState_anyOf {
   _5GsUserState_anyOf::e_5GsUserState_anyOf getValue() const;
   void setValue(_5GsUserState_anyOf::e_5GsUserState_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const _5GsUserState_anyOf& o);
-  friend void from_json(const nlohmann::json& j, _5GsUserState_anyOf& o);
+  friend void to_json(nlohmann::json &j, const _5GsUserState_anyOf &o);
+  friend void from_json(const nlohmann::json &j, _5GsUserState_anyOf &o);
 
- protected:
+protected:
   _5GsUserState_anyOf::e_5GsUserState_anyOf m_value = _5GsUserState_anyOf::
       e_5GsUserState_anyOf::INVALID_VALUE_OPENAPI_GENERATED;
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* _5GsUserState_anyOf_H_ */

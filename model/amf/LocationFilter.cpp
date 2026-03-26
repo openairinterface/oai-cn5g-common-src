@@ -27,12 +27,12 @@ void LocationFilter::validate() const {
   }
 }
 
-bool LocationFilter::validate(std::stringstream& msg) const {
+bool LocationFilter::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool LocationFilter::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool LocationFilter::validate(std::stringstream &msg,
+                              const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "LocationFilter" : pathPrefix;
@@ -40,20 +40,20 @@ bool LocationFilter::validate(
   return success;
 }
 
-bool LocationFilter::operator==(const LocationFilter& rhs) const {
-  return true;  // TODO
+bool LocationFilter::operator==(const LocationFilter &rhs) const {
+  return true; // TODO
 
   ;
 }
 
-bool LocationFilter::operator!=(const LocationFilter& rhs) const {
+bool LocationFilter::operator!=(const LocationFilter &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const LocationFilter& o) {
+void to_json(nlohmann::json &j, const LocationFilter &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, LocationFilter& o) {}
+void from_json(const nlohmann::json &j, LocationFilter &o) {}
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

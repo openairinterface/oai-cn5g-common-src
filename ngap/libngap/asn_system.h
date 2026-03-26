@@ -20,14 +20,14 @@
 #define _BSD_SOURCE /* for snprintf() on some linux systems  */
 #endif
 
+#include <inttypes.h>  /* for PRIdMAX */
+#include <limits.h>    /* For LONG_MAX */
+#include <stdarg.h>    /* For va_start */
+#include <stddef.h>    /* for offsetof and ptrdiff_t */
 #include <stdio.h>     /* For snprintf(3) */
 #include <stdlib.h>    /* For *alloc(3) */
 #include <string.h>    /* For memcpy(3) */
 #include <sys/types.h> /* For size_t */
-#include <limits.h>    /* For LONG_MAX */
-#include <stdarg.h>    /* For va_start */
-#include <stddef.h>    /* for offsetof and ptrdiff_t */
-#include <inttypes.h>  /* for PRIdMAX */
 
 #ifdef _WIN32
 
@@ -60,8 +60,8 @@ typedef unsigned int uint32_t;
 #endif /* _MSC_VER < 1600 */
 #endif /* ASSUMESTDTYPES */
 #define WIN32_LEAN_AND_MEAN
-#include <windows.h>
 #include <float.h>
+#include <windows.h>
 #define isnan _isnan
 #define finite _finite
 #define copysign _copysign
@@ -117,7 +117,7 @@ typedef unsigned int uint32_t;
 #endif /* Thread safety */
 
 #ifndef offsetof /* If not defined by <stddef.h> */
-#define offsetof(s, m) ((ptrdiff_t) & (((s*) 0)->m) - (ptrdiff_t) ((s*) 0))
+#define offsetof(s, m) ((ptrdiff_t) & (((s *)0)->m) - (ptrdiff_t)((s *)0))
 #endif /* offsetof */
 
 #ifndef MIN /* Suitable for comparing primitive types (integers) */
@@ -135,22 +135,22 @@ typedef unsigned int uint32_t;
 
 #if __STDC_VERSION__ >= 199901L
 #ifndef SIZE_MAX
-#define SIZE_MAX ((~((size_t) 0)) >> 1)
+#define SIZE_MAX ((~((size_t)0)) >> 1)
 #endif
 
 #ifndef RSIZE_MAX /* C11, Annex K */
 #define RSIZE_MAX (SIZE_MAX >> 1)
 #endif
 #ifndef RSSIZE_MAX /* Halve signed size even further than unsigned */
-#define RSSIZE_MAX ((ssize_t) (RSIZE_MAX >> 1))
+#define RSSIZE_MAX ((ssize_t)(RSIZE_MAX >> 1))
 #endif
 #else /* Old compiler */
 #undef SIZE_MAX
 #undef RSIZE_MAX
 #undef RSSIZE_MAX
-#define SIZE_MAX ((~((size_t) 0)) >> 1)
+#define SIZE_MAX ((~((size_t)0)) >> 1)
 #define RSIZE_MAX (SIZE_MAX >> 1)
-#define RSSIZE_MAX ((ssize_t) (RSIZE_MAX >> 1))
+#define RSSIZE_MAX ((ssize_t)(RSIZE_MAX >> 1))
 #endif
 
 #if __STDC_VERSION__ >= 199901L

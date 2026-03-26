@@ -27,12 +27,12 @@ void L4sNotifType::validate() const {
   }
 }
 
-bool L4sNotifType::validate(std::stringstream& msg) const {
+bool L4sNotifType::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool L4sNotifType::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool L4sNotifType::validate(std::stringstream &msg,
+                            const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "L4sNotifType" : pathPrefix;
@@ -40,18 +40,18 @@ bool L4sNotifType::validate(
   return success;
 }
 
-bool L4sNotifType::operator==(const L4sNotifType& rhs) const {
-  return true;  // TODO
+bool L4sNotifType::operator==(const L4sNotifType &rhs) const {
+  return true; // TODO
 }
 
-bool L4sNotifType::operator!=(const L4sNotifType& rhs) const {
+bool L4sNotifType::operator!=(const L4sNotifType &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const L4sNotifType& o) {
+void to_json(nlohmann::json &j, const L4sNotifType &o) {
   j = nlohmann::json::object();
 }
 
-void from_json(const nlohmann::json& j, L4sNotifType& o) {}
+void from_json(const nlohmann::json &j, L4sNotifType &o) {}
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

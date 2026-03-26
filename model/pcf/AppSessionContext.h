@@ -19,9 +19,9 @@
 #ifndef AppSessionContext_H_
 #define AppSessionContext_H_
 
-#include "EventsNotification.h"
-#include "AppSessionContextRespData.h"
 #include "AppSessionContextReqData.h"
+#include "AppSessionContextRespData.h"
+#include "EventsNotification.h"
 #include <nlohmann/json.hpp>
 
 namespace oai::model::pcf {
@@ -30,7 +30,7 @@ namespace oai::model::pcf {
 /// Represents an Individual Application Session Context resource.
 /// </summary>
 class AppSessionContext {
- public:
+public:
   AppSessionContext();
   virtual ~AppSessionContext() = default;
 
@@ -44,16 +44,16 @@ class AppSessionContext {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const AppSessionContext& rhs) const;
-  bool operator!=(const AppSessionContext& rhs) const;
+  bool operator==(const AppSessionContext &rhs) const;
+  bool operator!=(const AppSessionContext &rhs) const;
 
   /////////////////////////////////////////////
   /// AppSessionContext members
@@ -62,28 +62,28 @@ class AppSessionContext {
   ///
   /// </summary>
   oai::model::pcf::AppSessionContextReqData getAscReqData() const;
-  void setAscReqData(oai::model::pcf::AppSessionContextReqData const& value);
+  void setAscReqData(oai::model::pcf::AppSessionContextReqData const &value);
   bool ascReqDataIsSet() const;
   void unsetAscReqData();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::AppSessionContextRespData getAscRespData() const;
-  void setAscRespData(oai::model::pcf::AppSessionContextRespData const& value);
+  void setAscRespData(oai::model::pcf::AppSessionContextRespData const &value);
   bool ascRespDataIsSet() const;
   void unsetAscRespData();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::EventsNotification getEvsNotif() const;
-  void setEvsNotif(oai::model::pcf::EventsNotification const& value);
+  void setEvsNotif(oai::model::pcf::EventsNotification const &value);
   bool evsNotifIsSet() const;
   void unsetEvsNotif();
 
-  friend void to_json(nlohmann::json& j, const AppSessionContext& o);
-  friend void from_json(const nlohmann::json& j, AppSessionContext& o);
+  friend void to_json(nlohmann::json &j, const AppSessionContext &o);
+  friend void from_json(const nlohmann::json &j, AppSessionContext &o);
 
- protected:
+protected:
   oai::model::pcf::AppSessionContextReqData m_AscReqData;
   bool m_AscReqDataIsSet;
   oai::model::pcf::AppSessionContextRespData m_AscRespData;
@@ -92,6 +92,6 @@ class AppSessionContext {
   bool m_EvsNotifIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* AppSessionContext_H_ */

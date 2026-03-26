@@ -16,11 +16,11 @@ extern "C" {
 namespace oai::ngap {
 
 class HandoverPreparationUnsuccessfulTransfer {
- public:
+public:
   HandoverPreparationUnsuccessfulTransfer();
   virtual ~HandoverPreparationUnsuccessfulTransfer();
 
-  void setCause(const Cause& cause);
+  void setCause(const Cause &cause);
   void setCauseRadioNetwork(e_Ngap_CauseRadioNetwork causeValue);
   void setCauseTransport(e_Ngap_CauseTransport causeValue);
   void setCauseNas(e_Ngap_CauseNas causeValue);
@@ -29,15 +29,15 @@ class HandoverPreparationUnsuccessfulTransfer {
   long getChoiceOfCause() const;
   long getCause() const;
 
-  int encode(uint8_t* buf, int bufSize);
-  bool decode(uint8_t* buf, int bufSize);
+  int encode(uint8_t *buf, int bufSize);
+  bool decode(uint8_t *buf, int bufSize);
 
- private:
-  Ngap_HandoverPreparationUnsuccessfulTransfer_t*
-      m_HandoverPreparationUnsuccessfulTransferIe;
+private:
+  Ngap_HandoverPreparationUnsuccessfulTransfer_t
+      *m_HandoverPreparationUnsuccessfulTransferIe;
 
-  Cause m_Cause;  // Mandatory
+  Cause m_Cause; // Mandatory
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

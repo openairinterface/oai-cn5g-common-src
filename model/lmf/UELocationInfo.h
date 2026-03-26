@@ -29,7 +29,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class UELocationInfo {
- public:
+public:
   UELocationInfo();
   virtual ~UELocationInfo() = default;
 
@@ -43,16 +43,16 @@ class UELocationInfo {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const UELocationInfo& rhs) const;
-  bool operator!=(const UELocationInfo& rhs) const;
+  bool operator==(const UELocationInfo &rhs) const;
+  bool operator!=(const UELocationInfo &rhs) const;
 
   /////////////////////////////////////////////
   /// UELocationInfo members
@@ -61,7 +61,7 @@ class UELocationInfo {
   ///
   /// </summary>
   oai::model::lmf::GeographicArea getLocationEstimate() const;
-  void setLocationEstimate(oai::model::lmf::GeographicArea const& value);
+  void setLocationEstimate(oai::model::lmf::GeographicArea const &value);
   bool locationEstimateIsSet() const;
   void unsetLocationEstimate();
   /// <summary>
@@ -75,7 +75,7 @@ class UELocationInfo {
   ///
   /// </summary>
   oai::model::lmf::VelocityEstimate getVelocityEstimate() const;
-  void setVelocityEstimate(oai::model::lmf::VelocityEstimate const& value);
+  void setVelocityEstimate(oai::model::lmf::VelocityEstimate const &value);
   bool velocityEstimateIsSet() const;
   void unsetVelocityEstimate();
   /// <summary>
@@ -86,10 +86,10 @@ class UELocationInfo {
   bool ageOfVelocityEstimateIsSet() const;
   void unsetAgeOfVelocityEstimate();
 
-  friend void to_json(nlohmann::json& j, const UELocationInfo& o);
-  friend void from_json(const nlohmann::json& j, UELocationInfo& o);
+  friend void to_json(nlohmann::json &j, const UELocationInfo &o);
+  friend void from_json(const nlohmann::json &j, UELocationInfo &o);
 
- protected:
+protected:
   oai::model::lmf::GeographicArea m_LocationEstimate;
   bool m_LocationEstimateIsSet;
   int32_t m_AgeOfLocationEstimate;
@@ -100,6 +100,6 @@ class UELocationInfo {
   bool m_AgeOfVelocityEstimateIsSet;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* UELocationInfo_H_ */

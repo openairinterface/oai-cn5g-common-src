@@ -27,13 +27,13 @@ void UriScheme::validate() const {
   }
 }
 
-bool UriScheme::validate(std::stringstream& msg) const {
+bool UriScheme::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool UriScheme::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool UriScheme::validate(std::stringstream &msg,
+                         const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "UriScheme" : pathPrefix;
 
   if (!m_value.validate(msg)) {
@@ -42,32 +42,28 @@ bool UriScheme::validate(
   return success;
 }
 
-bool UriScheme::operator==(const UriScheme& rhs) const {
+bool UriScheme::operator==(const UriScheme &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool UriScheme::operator!=(const UriScheme& rhs) const {
+bool UriScheme::operator!=(const UriScheme &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const UriScheme& o) {
+void to_json(nlohmann::json &j, const UriScheme &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, UriScheme& o) {
+void from_json(const nlohmann::json &j, UriScheme &o) {
   from_json(j, o.m_value);
 }
 
-UriScheme_anyOf UriScheme::getValue() const {
-  return m_value;
-}
+UriScheme_anyOf UriScheme::getValue() const { return m_value; }
 
-void UriScheme::setValue(UriScheme_anyOf value) {
-  m_value = value;
-}
+void UriScheme::setValue(UriScheme_anyOf value) { m_value = value; }
 
 UriScheme_anyOf::eUriScheme_anyOf UriScheme::getEnumValue() const {
   return m_value.getValue();
@@ -81,4 +77,4 @@ std::string UriScheme::getEnumString() const {
   return helpers::enumToString(m_value);
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

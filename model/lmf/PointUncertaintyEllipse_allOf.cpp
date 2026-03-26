@@ -29,18 +29,18 @@ void PointUncertaintyEllipse_allOf::validate() const {
   }
 }
 
-bool PointUncertaintyEllipse_allOf::validate(std::stringstream& msg) const {
+bool PointUncertaintyEllipse_allOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool PointUncertaintyEllipse_allOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PointUncertaintyEllipse_allOf" : pathPrefix;
 
   /* Confidence */ {
-    const int32_t& value               = m_Confidence;
+    const int32_t &value = m_Confidence;
     const std::string currentValuePath = _pathPrefix + ".confidence";
 
     if (value < 0) {
@@ -57,7 +57,7 @@ bool PointUncertaintyEllipse_allOf::validate(
 }
 
 bool PointUncertaintyEllipse_allOf::operator==(
-    const PointUncertaintyEllipse_allOf& rhs) const {
+    const PointUncertaintyEllipse_allOf &rhs) const {
   return
 
       (getPoint() == rhs.getPoint()) &&
@@ -70,18 +70,18 @@ bool PointUncertaintyEllipse_allOf::operator==(
 }
 
 bool PointUncertaintyEllipse_allOf::operator!=(
-    const PointUncertaintyEllipse_allOf& rhs) const {
+    const PointUncertaintyEllipse_allOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PointUncertaintyEllipse_allOf& o) {
-  j                       = nlohmann::json();
-  j["point"]              = o.m_Point;
+void to_json(nlohmann::json &j, const PointUncertaintyEllipse_allOf &o) {
+  j = nlohmann::json();
+  j["point"] = o.m_Point;
   j["uncertaintyEllipse"] = o.m_UncertaintyEllipse;
-  j["confidence"]         = o.m_Confidence;
+  j["confidence"] = o.m_Confidence;
 }
 
-void from_json(const nlohmann::json& j, PointUncertaintyEllipse_allOf& o) {
+void from_json(const nlohmann::json &j, PointUncertaintyEllipse_allOf &o) {
   j.at("point").get_to(o.m_Point);
   j.at("uncertaintyEllipse").get_to(o.m_UncertaintyEllipse);
   j.at("confidence").get_to(o.m_Confidence);
@@ -92,7 +92,7 @@ PointUncertaintyEllipse_allOf::getPoint() const {
   return m_Point;
 }
 void PointUncertaintyEllipse_allOf::setPoint(
-    oai::model::lmf::GeographicalCoordinates const& value) {
+    oai::model::lmf::GeographicalCoordinates const &value) {
   m_Point = value;
 }
 oai::model::lmf::UncertaintyEllipse
@@ -100,7 +100,7 @@ PointUncertaintyEllipse_allOf::getUncertaintyEllipse() const {
   return m_UncertaintyEllipse;
 }
 void PointUncertaintyEllipse_allOf::setUncertaintyEllipse(
-    oai::model::lmf::UncertaintyEllipse const& value) {
+    oai::model::lmf::UncertaintyEllipse const &value) {
   m_UncertaintyEllipse = value;
 }
 int32_t PointUncertaintyEllipse_allOf::getConfidence() const {
@@ -110,4 +110,4 @@ void PointUncertaintyEllipse_allOf::setConfidence(int32_t const value) {
   m_Confidence = value;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

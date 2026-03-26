@@ -13,7 +13,7 @@ constexpr auto kReleaseAssistanceIndicationIeName =
 namespace oai::nas {
 
 class ReleaseAssistanceIndication : public Type1NasIeFormatTv {
- public:
+public:
   ReleaseAssistanceIndication();
   ReleaseAssistanceIndication(uint8_t value);
   virtual ~ReleaseAssistanceIndication();
@@ -23,9 +23,9 @@ class ReleaseAssistanceIndication : public Type1NasIeFormatTv {
   void Set(uint8_t value);
   uint8_t Get() const;
 
- private:
+private:
   // uint8_t ddx_;
 };
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

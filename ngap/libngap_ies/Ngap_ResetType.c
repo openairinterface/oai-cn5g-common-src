@@ -8,12 +8,11 @@
 
 #include "Ngap_ResetType.h"
 
-#include "Ngap_UE-associatedLogicalNG-connectionList.h"
 #include "Ngap_ProtocolIE-SingleContainer.h"
+#include "Ngap_UE-associatedLogicalNG-connectionList.h"
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 static asn_oer_constraints_t asn_OER_type_Ngap_ResetType_constr_1 CC_NOTUSED = {
-    {0, 0},
-    -1};
+    {0, 0}, -1};
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 asn_per_constraints_t asn_PER_type_Ngap_ResetType_constr_1 CC_NOTUSED = {
@@ -92,7 +91,7 @@ asn_CHOICE_specifics_t asn_SPC_Ngap_ResetType_specs_1 = {
     sizeof(struct Ngap_ResetType),
     offsetof(struct Ngap_ResetType, _asn_ctx),
     offsetof(struct Ngap_ResetType, present),
-    sizeof(((struct Ngap_ResetType*) 0)->present),
+    sizeof(((struct Ngap_ResetType *)0)->present),
     asn_MAP_Ngap_ResetType_tag2el_1,
     3, /* Count of tags in the map */
     0,

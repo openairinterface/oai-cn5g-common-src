@@ -12,11 +12,11 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_CauseRadioNetwork.h"
-#include "Ngap_CauseTransport.h"
+#include "Ngap_CauseMisc.h"
 #include "Ngap_CauseNas.h"
 #include "Ngap_CauseProtocol.h"
-#include "Ngap_CauseMisc.h"
+#include "Ngap_CauseRadioNetwork.h"
+#include "Ngap_CauseTransport.h"
 #include <constr_CHOICE.h>
 
 #ifdef __cplusplus
@@ -46,7 +46,7 @@ typedef struct Ngap_Cause {
     Ngap_CauseNas_t nas;
     Ngap_CauseProtocol_t protocol;
     Ngap_CauseMisc_t misc;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

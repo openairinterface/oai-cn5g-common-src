@@ -19,13 +19,13 @@
 namespace oai::model::udm {
 
 DnnInfo::DnnInfo() {
-  m_Dnn                      = "";
-  m_DefaultDnnIndicator      = false;
+  m_Dnn = "";
+  m_DefaultDnnIndicator = false;
   m_DefaultDnnIndicatorIsSet = false;
-  m_LboRoamingAllowed        = false;
-  m_LboRoamingAllowedIsSet   = false;
-  m_IwkEpsInd                = false;
-  m_IwkEpsIndIsSet           = false;
+  m_LboRoamingAllowed = false;
+  m_LboRoamingAllowedIsSet = false;
+  m_IwkEpsInd = false;
+  m_IwkEpsIndIsSet = false;
 }
 
 DnnInfo::~DnnInfo() {}
@@ -34,17 +34,18 @@ void DnnInfo::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const DnnInfo& o) {
-  j        = nlohmann::json();
+void to_json(nlohmann::json &j, const DnnInfo &o) {
+  j = nlohmann::json();
   j["dnn"] = o.m_Dnn;
   if (o.defaultDnnIndicatorIsSet())
     j["defaultDnnIndicator"] = o.m_DefaultDnnIndicator;
   if (o.lboRoamingAllowedIsSet())
     j["lboRoamingAllowed"] = o.m_LboRoamingAllowed;
-  if (o.iwkEpsIndIsSet()) j["iwkEpsInd"] = o.m_IwkEpsInd;
+  if (o.iwkEpsIndIsSet())
+    j["iwkEpsInd"] = o.m_IwkEpsInd;
 }
 
-void from_json(const nlohmann::json& j, DnnInfo& o) {
+void from_json(const nlohmann::json &j, DnnInfo &o) {
   j.at("dnn").get_to(o.m_Dnn);
   if (j.find("defaultDnnIndicator") != j.end()) {
     j.at("defaultDnnIndicator").get_to(o.m_DefaultDnnIndicator);
@@ -60,50 +61,32 @@ void from_json(const nlohmann::json& j, DnnInfo& o) {
   }
 }
 
-std::string DnnInfo::getDnn() const {
-  return m_Dnn;
-}
-void DnnInfo::setDnn(std::string const& value) {
-  m_Dnn = value;
-}
-bool DnnInfo::isDefaultDnnIndicator() const {
-  return m_DefaultDnnIndicator;
-}
+std::string DnnInfo::getDnn() const { return m_Dnn; }
+void DnnInfo::setDnn(std::string const &value) { m_Dnn = value; }
+bool DnnInfo::isDefaultDnnIndicator() const { return m_DefaultDnnIndicator; }
 void DnnInfo::setDefaultDnnIndicator(bool const value) {
-  m_DefaultDnnIndicator      = value;
+  m_DefaultDnnIndicator = value;
   m_DefaultDnnIndicatorIsSet = true;
 }
 bool DnnInfo::defaultDnnIndicatorIsSet() const {
   return m_DefaultDnnIndicatorIsSet;
 }
-void DnnInfo::unsetDefaultDnnIndicator() {
-  m_DefaultDnnIndicatorIsSet = false;
-}
-bool DnnInfo::isLboRoamingAllowed() const {
-  return m_LboRoamingAllowed;
-}
+void DnnInfo::unsetDefaultDnnIndicator() { m_DefaultDnnIndicatorIsSet = false; }
+bool DnnInfo::isLboRoamingAllowed() const { return m_LboRoamingAllowed; }
 void DnnInfo::setLboRoamingAllowed(bool const value) {
-  m_LboRoamingAllowed      = value;
+  m_LboRoamingAllowed = value;
   m_LboRoamingAllowedIsSet = true;
 }
 bool DnnInfo::lboRoamingAllowedIsSet() const {
   return m_LboRoamingAllowedIsSet;
 }
-void DnnInfo::unsetLboRoamingAllowed() {
-  m_LboRoamingAllowedIsSet = false;
-}
-bool DnnInfo::isIwkEpsInd() const {
-  return m_IwkEpsInd;
-}
+void DnnInfo::unsetLboRoamingAllowed() { m_LboRoamingAllowedIsSet = false; }
+bool DnnInfo::isIwkEpsInd() const { return m_IwkEpsInd; }
 void DnnInfo::setIwkEpsInd(bool const value) {
-  m_IwkEpsInd      = value;
+  m_IwkEpsInd = value;
   m_IwkEpsIndIsSet = true;
 }
-bool DnnInfo::iwkEpsIndIsSet() const {
-  return m_IwkEpsIndIsSet;
-}
-void DnnInfo::unsetIwkEpsInd() {
-  m_IwkEpsIndIsSet = false;
-}
+bool DnnInfo::iwkEpsIndIsSet() const { return m_IwkEpsIndIsSet; }
+void DnnInfo::unsetIwkEpsInd() { m_IwkEpsIndIsSet = false; }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

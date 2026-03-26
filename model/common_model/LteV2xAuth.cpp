@@ -19,7 +19,7 @@
 namespace oai::model::common {
 
 LteV2xAuth::LteV2xAuth() {
-  m_VehicleUeAuthIsSet    = false;
+  m_VehicleUeAuthIsSet = false;
   m_PedestrianUeAuthIsSet = false;
 }
 
@@ -30,12 +30,12 @@ void LteV2xAuth::validate() const {
   }
 }
 
-bool LteV2xAuth::validate(std::stringstream& msg) const {
+bool LteV2xAuth::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool LteV2xAuth::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool LteV2xAuth::validate(std::stringstream &msg,
+                          const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "LteV2xAuth" : pathPrefix;
@@ -43,7 +43,7 @@ bool LteV2xAuth::validate(
   return success;
 }
 
-bool LteV2xAuth::operator==(const LteV2xAuth& rhs) const {
+bool LteV2xAuth::operator==(const LteV2xAuth &rhs) const {
   return
 
       ((!vehicleUeAuthIsSet() && !rhs.vehicleUeAuthIsSet()) ||
@@ -57,17 +57,19 @@ bool LteV2xAuth::operator==(const LteV2xAuth& rhs) const {
           ;
 }
 
-bool LteV2xAuth::operator!=(const LteV2xAuth& rhs) const {
+bool LteV2xAuth::operator!=(const LteV2xAuth &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const LteV2xAuth& o) {
+void to_json(nlohmann::json &j, const LteV2xAuth &o) {
   j = nlohmann::json();
-  if (o.vehicleUeAuthIsSet()) j["vehicleUeAuth"] = o.m_VehicleUeAuth;
-  if (o.pedestrianUeAuthIsSet()) j["pedestrianUeAuth"] = o.m_PedestrianUeAuth;
+  if (o.vehicleUeAuthIsSet())
+    j["vehicleUeAuth"] = o.m_VehicleUeAuth;
+  if (o.pedestrianUeAuthIsSet())
+    j["pedestrianUeAuth"] = o.m_PedestrianUeAuth;
 }
 
-void from_json(const nlohmann::json& j, LteV2xAuth& o) {
+void from_json(const nlohmann::json &j, LteV2xAuth &o) {
   if (j.find("vehicleUeAuth") != j.end()) {
     j.at("vehicleUeAuth").get_to(o.m_VehicleUeAuth);
     o.m_VehicleUeAuthIsSet = true;
@@ -81,28 +83,22 @@ void from_json(const nlohmann::json& j, LteV2xAuth& o) {
 oai::model::common::UeAuth LteV2xAuth::getVehicleUeAuth() const {
   return m_VehicleUeAuth;
 }
-void LteV2xAuth::setVehicleUeAuth(oai::model::common::UeAuth const& value) {
-  m_VehicleUeAuth      = value;
+void LteV2xAuth::setVehicleUeAuth(oai::model::common::UeAuth const &value) {
+  m_VehicleUeAuth = value;
   m_VehicleUeAuthIsSet = true;
 }
-bool LteV2xAuth::vehicleUeAuthIsSet() const {
-  return m_VehicleUeAuthIsSet;
-}
-void LteV2xAuth::unsetVehicleUeAuth() {
-  m_VehicleUeAuthIsSet = false;
-}
+bool LteV2xAuth::vehicleUeAuthIsSet() const { return m_VehicleUeAuthIsSet; }
+void LteV2xAuth::unsetVehicleUeAuth() { m_VehicleUeAuthIsSet = false; }
 oai::model::common::UeAuth LteV2xAuth::getPedestrianUeAuth() const {
   return m_PedestrianUeAuth;
 }
-void LteV2xAuth::setPedestrianUeAuth(oai::model::common::UeAuth const& value) {
-  m_PedestrianUeAuth      = value;
+void LteV2xAuth::setPedestrianUeAuth(oai::model::common::UeAuth const &value) {
+  m_PedestrianUeAuth = value;
   m_PedestrianUeAuthIsSet = true;
 }
 bool LteV2xAuth::pedestrianUeAuthIsSet() const {
   return m_PedestrianUeAuthIsSet;
 }
-void LteV2xAuth::unsetPedestrianUeAuth() {
-  m_PedestrianUeAuthIsSet = false;
-}
+void LteV2xAuth::unsetPedestrianUeAuth() { m_PedestrianUeAuthIsSet = false; }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

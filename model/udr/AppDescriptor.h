@@ -31,7 +31,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class AppDescriptor {
- public:
+public:
   AppDescriptor();
   virtual ~AppDescriptor();
 
@@ -44,27 +44,27 @@ class AppDescriptor {
   ///
   /// </summary>
   std::string getOsId() const;
-  void setOsId(std::string const& value);
+  void setOsId(std::string const &value);
   bool osIdIsSet() const;
   void unsetOsId();
   /// <summary>
   ///
   /// </summary>
   std::string getAppId() const;
-  void setAppId(std::string const& value);
+  void setAppId(std::string const &value);
   bool appIdIsSet() const;
   void unsetAppId();
 
-  friend void to_json(nlohmann::json& j, const AppDescriptor& o);
-  friend void from_json(const nlohmann::json& j, AppDescriptor& o);
+  friend void to_json(nlohmann::json &j, const AppDescriptor &o);
+  friend void from_json(const nlohmann::json &j, AppDescriptor &o);
 
- protected:
+protected:
   std::string m_OsId;
   bool m_OsIdIsSet;
   std::string m_AppId;
   bool m_AppIdIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* AppDescriptor_H_ */

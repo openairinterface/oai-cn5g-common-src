@@ -12,8 +12,8 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_Periodicity.h"
 #include "Ngap_BurstArrivalTime.h"
+#include "Ngap_Periodicity.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -26,8 +26,8 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_TSCAssistanceInformation */
 typedef struct Ngap_TSCAssistanceInformation {
   Ngap_Periodicity_t periodicity;
-  Ngap_BurstArrivalTime_t* burstArrivalTime;             /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  Ngap_BurstArrivalTime_t *burstArrivalTime;             /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

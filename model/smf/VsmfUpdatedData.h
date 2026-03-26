@@ -19,15 +19,15 @@
 #ifndef VsmfUpdatedData_H_
 #define VsmfUpdatedData_H_
 
-#include "SecondaryRatUsageInfo.h"
 #include "EbiArpMapping.h"
-#include "RefToBinaryData.h"
-#include <string>
-#include "UserLocation.h"
 #include "QosFlowItem.h"
+#include "RefToBinaryData.h"
+#include "SecondaryRatUsageInfo.h"
 #include "SecondaryRatUsageReport.h"
-#include <vector>
+#include "UserLocation.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::smf {
 
@@ -35,7 +35,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class VsmfUpdatedData {
- public:
+public:
   VsmfUpdatedData();
   virtual ~VsmfUpdatedData();
 
@@ -47,99 +47,99 @@ class VsmfUpdatedData {
   /// <summary>
   ///
   /// </summary>
-  std::vector<QosFlowItem>& getQosFlowsAddModList();
+  std::vector<QosFlowItem> &getQosFlowsAddModList();
   bool qosFlowsAddModListIsSet() const;
   void unsetQosFlowsAddModList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<QosFlowItem>& getQosFlowsRelList();
+  std::vector<QosFlowItem> &getQosFlowsRelList();
   bool qosFlowsRelListIsSet() const;
   void unsetQosFlowsRelList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<QosFlowItem>& getQosFlowsFailedtoAddModList();
+  std::vector<QosFlowItem> &getQosFlowsFailedtoAddModList();
   bool qosFlowsFailedtoAddModListIsSet() const;
   void unsetQosFlowsFailedtoAddModList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<QosFlowItem>& getQosFlowsFailedtoRelList();
+  std::vector<QosFlowItem> &getQosFlowsFailedtoRelList();
   bool qosFlowsFailedtoRelListIsSet() const;
   void unsetQosFlowsFailedtoRelList();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::RefToBinaryData getN1SmInfoFromUe() const;
-  void setN1SmInfoFromUe(oai::model::common::RefToBinaryData const& value);
+  void setN1SmInfoFromUe(oai::model::common::RefToBinaryData const &value);
   bool n1SmInfoFromUeIsSet() const;
   void unsetN1SmInfoFromUe();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::RefToBinaryData getUnknownN1SmInfo() const;
-  void setUnknownN1SmInfo(oai::model::common::RefToBinaryData const& value);
+  void setUnknownN1SmInfo(oai::model::common::RefToBinaryData const &value);
   bool unknownN1SmInfoIsSet() const;
   void unsetUnknownN1SmInfo();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::UserLocation getUeLocation() const;
-  void setUeLocation(oai::model::common::UserLocation const& value);
+  void setUeLocation(oai::model::common::UserLocation const &value);
   bool ueLocationIsSet() const;
   void unsetUeLocation();
   /// <summary>
   ///
   /// </summary>
   std::string getUeTimeZone() const;
-  void setUeTimeZone(std::string const& value);
+  void setUeTimeZone(std::string const &value);
   bool ueTimeZoneIsSet() const;
   void unsetUeTimeZone();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::UserLocation getAddUeLocation() const;
-  void setAddUeLocation(oai::model::common::UserLocation const& value);
+  void setAddUeLocation(oai::model::common::UserLocation const &value);
   bool addUeLocationIsSet() const;
   void unsetAddUeLocation();
   /// <summary>
   ///
   /// </summary>
-  std::vector<EbiArpMapping>& getAssignedEbiList();
+  std::vector<EbiArpMapping> &getAssignedEbiList();
   bool assignedEbiListIsSet() const;
   void unsetAssignedEbiList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<int32_t>& getFailedToAssignEbiList();
+  std::vector<int32_t> &getFailedToAssignEbiList();
   bool failedToAssignEbiListIsSet() const;
   void unsetFailedToAssignEbiList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<int32_t>& getReleasedEbiList();
+  std::vector<int32_t> &getReleasedEbiList();
   bool releasedEbiListIsSet() const;
   void unsetReleasedEbiList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::SecondaryRatUsageReport>&
+  std::vector<oai::model::common::SecondaryRatUsageReport> &
   getSecondaryRatUsageReport();
   bool secondaryRatUsageReportIsSet() const;
   void unsetSecondaryRatUsageReport();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::SecondaryRatUsageInfo>&
+  std::vector<oai::model::common::SecondaryRatUsageInfo> &
   getSecondaryRatUsageInfo();
   bool secondaryRatUsageInfoIsSet() const;
   void unsetSecondaryRatUsageInfo();
 
-  friend void to_json(nlohmann::json& j, const VsmfUpdatedData& o);
-  friend void from_json(const nlohmann::json& j, VsmfUpdatedData& o);
+  friend void to_json(nlohmann::json &j, const VsmfUpdatedData &o);
+  friend void from_json(const nlohmann::json &j, VsmfUpdatedData &o);
 
- protected:
+protected:
   std::vector<QosFlowItem> m_QosFlowsAddModList;
   bool m_QosFlowsAddModListIsSet;
   std::vector<QosFlowItem> m_QosFlowsRelList;
@@ -172,6 +172,6 @@ class VsmfUpdatedData {
   bool m_SecondaryRatUsageInfoIsSet;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* VsmfUpdatedData_H_ */

@@ -19,8 +19,8 @@
 #ifndef NfInstanceIdCond_H_
 #define NfInstanceIdCond_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::nrf {
 
@@ -28,7 +28,7 @@ namespace oai::model::nrf {
 ///
 /// </summary>
 class NfInstanceIdCond {
- public:
+public:
   NfInstanceIdCond();
   virtual ~NfInstanceIdCond();
 
@@ -41,15 +41,15 @@ class NfInstanceIdCond {
   ///
   /// </summary>
   std::string getNfInstanceId() const;
-  void setNfInstanceId(std::string const& value);
+  void setNfInstanceId(std::string const &value);
 
-  friend void to_json(nlohmann::json& j, const NfInstanceIdCond& o);
-  friend void from_json(const nlohmann::json& j, NfInstanceIdCond& o);
+  friend void to_json(nlohmann::json &j, const NfInstanceIdCond &o);
+  friend void from_json(const nlohmann::json &j, NfInstanceIdCond &o);
 
- protected:
+protected:
   std::string m_NfInstanceId;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* NfInstanceIdCond_H_ */

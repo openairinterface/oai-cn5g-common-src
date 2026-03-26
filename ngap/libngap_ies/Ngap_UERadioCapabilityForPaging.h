@@ -12,8 +12,8 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_UERadioCapabilityForPagingOfNR.h"
 #include "Ngap_UERadioCapabilityForPagingOfEUTRA.h"
+#include "Ngap_UERadioCapabilityForPagingOfNR.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -25,11 +25,11 @@ struct Ngap_ProtocolExtensionContainer;
 
 /* Ngap_UERadioCapabilityForPaging */
 typedef struct Ngap_UERadioCapabilityForPaging {
-  Ngap_UERadioCapabilityForPagingOfNR_t*
-      uERadioCapabilityForPagingOfNR; /* OPTIONAL */
-  Ngap_UERadioCapabilityForPagingOfEUTRA_t*
-      uERadioCapabilityForPagingOfEUTRA;                 /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  Ngap_UERadioCapabilityForPagingOfNR_t
+      *uERadioCapabilityForPagingOfNR; /* OPTIONAL */
+  Ngap_UERadioCapabilityForPagingOfEUTRA_t
+      *uERadioCapabilityForPagingOfEUTRA;                /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

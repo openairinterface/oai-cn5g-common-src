@@ -5,8 +5,8 @@
 #ifndef ASN1_CONSTRAINTS_VALIDATOR_H
 #define ASN1_CONSTRAINTS_VALIDATOR_H
 
-#include <asn_system.h> /* Platform-dependent types */
 #include <asn_application.h>
+#include <asn_system.h> /* Platform-dependent types */
 
 #ifdef __cplusplus
 extern "C" {
@@ -27,10 +27,10 @@ struct asn_TYPE_descriptor_s; /* Forward declaration */
  * and -1 if one or more constraints were failed.
  */
 int asn_check_constraints(
-    const struct asn_TYPE_descriptor_s* type_descriptor,
-    const void* struct_ptr, /* Target language's structure */
-    char* errbuf,           /* Returned error description */
-    size_t* errlen          /* Length of the error description */
+    const struct asn_TYPE_descriptor_s *type_descriptor,
+    const void *struct_ptr, /* Target language's structure */
+    char *errbuf,           /* Returned error description */
+    size_t *errlen          /* Length of the error description */
 );
 
 /*
@@ -38,9 +38,9 @@ int asn_check_constraints(
  * associated with every type descriptor.
  */
 typedef int(asn_constr_check_f)(
-    const struct asn_TYPE_descriptor_s* type_descriptor, const void* struct_ptr,
-    asn_app_constraint_failed_f* optional_callback, /* Log the error */
-    void* optional_app_key /* Opaque key passed to a callback */
+    const struct asn_TYPE_descriptor_s *type_descriptor, const void *struct_ptr,
+    asn_app_constraint_failed_f *optional_callback, /* Log the error */
+    void *optional_app_key /* Opaque key passed to a callback */
 );
 
 /*******************************
@@ -54,7 +54,8 @@ asn_constr_check_f asn_generic_unknown_constraint; /* Not fully supported */
  * Invoke the callback with a complete error message.
  */
 #define ASN__CTFAIL                                                            \
-  if (ctfailcb) ctfailcb
+  if (ctfailcb)                                                                \
+  ctfailcb
 
 #ifdef __cplusplus
 }

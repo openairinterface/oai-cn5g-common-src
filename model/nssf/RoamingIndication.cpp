@@ -30,12 +30,12 @@ void RoamingIndication::validate() const {
   // }
 }
 
-bool RoamingIndication::validate(std::stringstream& msg) const {
+bool RoamingIndication::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool RoamingIndication::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool RoamingIndication::validate(std::stringstream &msg,
+                                 const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "RoamingIndication" : pathPrefix;
@@ -46,28 +46,26 @@ bool RoamingIndication::validate(
   return success;
 }
 
-bool RoamingIndication::operator==(const RoamingIndication& rhs) const {
+bool RoamingIndication::operator==(const RoamingIndication &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool RoamingIndication::operator!=(const RoamingIndication& rhs) const {
+bool RoamingIndication::operator!=(const RoamingIndication &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const RoamingIndication& o) {
+void to_json(nlohmann::json &j, const RoamingIndication &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, RoamingIndication& o) {
+void from_json(const nlohmann::json &j, RoamingIndication &o) {
   from_json(j, o.m_value);
 }
 
-RoamingIndication_anyOf RoamingIndication::getValue() const {
-  return m_value;
-}
+RoamingIndication_anyOf RoamingIndication::getValue() const { return m_value; }
 
 void RoamingIndication::setValue(RoamingIndication_anyOf value) {
   m_value = value;
@@ -83,6 +81,6 @@ void RoamingIndication::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace model
-}  // namespace nssf_server
-}  // namespace oai
+} // namespace model
+} // namespace nssf_server
+} // namespace oai

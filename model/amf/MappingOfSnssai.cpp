@@ -28,12 +28,12 @@ void MappingOfSnssai::validate() const {
   // }
 }
 
-bool MappingOfSnssai::validate(std::stringstream& msg) const {
+bool MappingOfSnssai::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool MappingOfSnssai::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool MappingOfSnssai::validate(std::stringstream &msg,
+                               const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "MappingOfSnssai" : pathPrefix;
@@ -41,7 +41,7 @@ bool MappingOfSnssai::validate(
   return success;
 }
 
-bool MappingOfSnssai::operator==(const MappingOfSnssai& rhs) const {
+bool MappingOfSnssai::operator==(const MappingOfSnssai &rhs) const {
   return
 
       (getServingSnssai() == rhs.getServingSnssai()) &&
@@ -51,17 +51,17 @@ bool MappingOfSnssai::operator==(const MappingOfSnssai& rhs) const {
           ;
 }
 
-bool MappingOfSnssai::operator!=(const MappingOfSnssai& rhs) const {
+bool MappingOfSnssai::operator!=(const MappingOfSnssai &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const MappingOfSnssai& o) {
-  j                  = nlohmann::json();
+void to_json(nlohmann::json &j, const MappingOfSnssai &o) {
+  j = nlohmann::json();
   j["servingSnssai"] = o.m_ServingSnssai;
-  j["homeSnssai"]    = o.m_HomeSnssai;
+  j["homeSnssai"] = o.m_HomeSnssai;
 }
 
-void from_json(const nlohmann::json& j, MappingOfSnssai& o) {
+void from_json(const nlohmann::json &j, MappingOfSnssai &o) {
   j.at("servingSnssai").get_to(o.m_ServingSnssai);
   j.at("homeSnssai").get_to(o.m_HomeSnssai);
 }
@@ -70,14 +70,14 @@ oai::model::common::Snssai MappingOfSnssai::getServingSnssai() const {
   return m_ServingSnssai;
 }
 void MappingOfSnssai::setServingSnssai(
-    oai::model::common::Snssai const& value) {
+    oai::model::common::Snssai const &value) {
   m_ServingSnssai = value;
 }
 oai::model::common::Snssai MappingOfSnssai::getHomeSnssai() const {
   return m_HomeSnssai;
 }
-void MappingOfSnssai::setHomeSnssai(oai::model::common::Snssai const& value) {
+void MappingOfSnssai::setHomeSnssai(oai::model::common::Snssai const &value) {
   m_HomeSnssai = value;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

@@ -31,9 +31,8 @@ asn_TYPE_member_t asn_MBR_Ngap_DataForwardingResponseERABListItem_1[] = {
      "e-RAB-ID"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_DataForwardingResponseERABListItem,
-         dLForwardingUP_TNLInformation),
+     offsetof(struct Ngap_DataForwardingResponseERABListItem,
+              dLForwardingUP_TNLInformation),
      (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
      +1, /* EXPLICIT tag at current level */
      &asn_DEF_Ngap_UPTransportLayerInformation,

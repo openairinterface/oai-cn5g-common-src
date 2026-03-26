@@ -16,7 +16,7 @@
 namespace oai::model::smf {
 
 SmContextRetrieveData::SmContextRetrieveData() {
-  m_TargetMmeCapIsSet  = false;
+  m_TargetMmeCapIsSet = false;
   m_SmContextTypeIsSet = false;
 }
 
@@ -26,13 +26,15 @@ void SmContextRetrieveData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const SmContextRetrieveData& o) {
+void to_json(nlohmann::json &j, const SmContextRetrieveData &o) {
   j = nlohmann::json();
-  if (o.targetMmeCapIsSet()) j["targetMmeCap"] = o.m_TargetMmeCap;
-  if (o.smContextTypeIsSet()) j["smContextType"] = o.m_SmContextType;
+  if (o.targetMmeCapIsSet())
+    j["targetMmeCap"] = o.m_TargetMmeCap;
+  if (o.smContextTypeIsSet())
+    j["smContextType"] = o.m_SmContextType;
 }
 
-void from_json(const nlohmann::json& j, SmContextRetrieveData& o) {
+void from_json(const nlohmann::json &j, SmContextRetrieveData &o) {
   if (j.find("targetMmeCap") != j.end()) {
     j.at("targetMmeCap").get_to(o.m_TargetMmeCap);
     o.m_TargetMmeCapIsSet = true;
@@ -46,21 +48,19 @@ void from_json(const nlohmann::json& j, SmContextRetrieveData& o) {
 MmeCapabilities SmContextRetrieveData::getTargetMmeCap() const {
   return m_TargetMmeCap;
 }
-void SmContextRetrieveData::setTargetMmeCap(MmeCapabilities const& value) {
-  m_TargetMmeCap      = value;
+void SmContextRetrieveData::setTargetMmeCap(MmeCapabilities const &value) {
+  m_TargetMmeCap = value;
   m_TargetMmeCapIsSet = true;
 }
 bool SmContextRetrieveData::targetMmeCapIsSet() const {
   return m_TargetMmeCapIsSet;
 }
-void SmContextRetrieveData::unsetTargetMmeCap() {
-  m_TargetMmeCapIsSet = false;
-}
+void SmContextRetrieveData::unsetTargetMmeCap() { m_TargetMmeCapIsSet = false; }
 SmContextType SmContextRetrieveData::getSmContextType() const {
   return m_SmContextType;
 }
-void SmContextRetrieveData::setSmContextType(SmContextType const& value) {
-  m_SmContextType      = value;
+void SmContextRetrieveData::setSmContextType(SmContextType const &value) {
+  m_SmContextType = value;
   m_SmContextTypeIsSet = true;
 }
 bool SmContextRetrieveData::smContextTypeIsSet() const {
@@ -70,4 +70,4 @@ void SmContextRetrieveData::unsetSmContextType() {
   m_SmContextTypeIsSet = false;
 }
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

@@ -27,7 +27,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class OccurrenceInfo_anyOf {
- public:
+public:
   OccurrenceInfo_anyOf();
   virtual ~OccurrenceInfo_anyOf() = default;
 
@@ -50,16 +50,16 @@ class OccurrenceInfo_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const OccurrenceInfo_anyOf& rhs) const;
-  bool operator!=(const OccurrenceInfo_anyOf& rhs) const;
+  bool operator==(const OccurrenceInfo_anyOf &rhs) const;
+  bool operator!=(const OccurrenceInfo_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// OccurrenceInfo_anyOf members
@@ -67,14 +67,14 @@ class OccurrenceInfo_anyOf {
   OccurrenceInfo_anyOf::eOccurrenceInfo_anyOf getValue() const;
   void setValue(OccurrenceInfo_anyOf::eOccurrenceInfo_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const OccurrenceInfo_anyOf& o);
-  friend void from_json(const nlohmann::json& j, OccurrenceInfo_anyOf& o);
+  friend void to_json(nlohmann::json &j, const OccurrenceInfo_anyOf &o);
+  friend void from_json(const nlohmann::json &j, OccurrenceInfo_anyOf &o);
 
- protected:
+protected:
   OccurrenceInfo_anyOf::eOccurrenceInfo_anyOf m_value = OccurrenceInfo_anyOf::
       eOccurrenceInfo_anyOf::INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* OccurrenceInfo_anyOf_H_ */

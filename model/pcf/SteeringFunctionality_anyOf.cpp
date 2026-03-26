@@ -13,8 +13,8 @@
 
 #include "SteeringFunctionality_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::pcf {
 
@@ -27,12 +27,12 @@ void SteeringFunctionality_anyOf::validate() const {
   }
 }
 
-bool SteeringFunctionality_anyOf::validate(std::stringstream& msg) const {
+bool SteeringFunctionality_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool SteeringFunctionality_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "SteeringFunctionality_anyOf" : pathPrefix;
@@ -47,35 +47,35 @@ bool SteeringFunctionality_anyOf::validate(
 }
 
 bool SteeringFunctionality_anyOf::operator==(
-    const SteeringFunctionality_anyOf& rhs) const {
+    const SteeringFunctionality_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool SteeringFunctionality_anyOf::operator!=(
-    const SteeringFunctionality_anyOf& rhs) const {
+    const SteeringFunctionality_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const SteeringFunctionality_anyOf& o) {
+void to_json(nlohmann::json &j, const SteeringFunctionality_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case SteeringFunctionality_anyOf::eSteeringFunctionality_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case SteeringFunctionality_anyOf::eSteeringFunctionality_anyOf::MPTCP:
-      j = "MPTCP";
-      break;
-    case SteeringFunctionality_anyOf::eSteeringFunctionality_anyOf::ATSSS_LL:
-      j = "ATSSS_LL";
-      break;
+  case SteeringFunctionality_anyOf::eSteeringFunctionality_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case SteeringFunctionality_anyOf::eSteeringFunctionality_anyOf::MPTCP:
+    j = "MPTCP";
+    break;
+  case SteeringFunctionality_anyOf::eSteeringFunctionality_anyOf::ATSSS_LL:
+    j = "ATSSS_LL";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, SteeringFunctionality_anyOf& o) {
+void from_json(const nlohmann::json &j, SteeringFunctionality_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "MPTCP") {
     o.setValue(
@@ -101,4 +101,4 @@ void SteeringFunctionality_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

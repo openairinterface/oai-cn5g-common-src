@@ -20,8 +20,8 @@
 #define Sm_Context_Message_H_
 
 #include "SmContextCreateData.h"
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::smf {
 
@@ -29,7 +29,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class SmContextMessage {
- public:
+public:
   SmContextMessage();
   virtual ~SmContextMessage();
 
@@ -42,28 +42,28 @@ class SmContextMessage {
   ///
   /// </summary>
   SmContextCreateData getJsonData() const;
-  void setJsonData(SmContextCreateData const& value);
+  void setJsonData(SmContextCreateData const &value);
   bool jsonDataIsSet() const;
   void unsetJsonData();
   /// <summary>
   ///
   /// </summary>
   std::string getBinaryDataN1SmMessage() const;
-  void setBinaryDataN1SmMessage(std::string const& value);
+  void setBinaryDataN1SmMessage(std::string const &value);
   bool binaryDataN1SmMessageIsSet() const;
   void unsetBinaryDataN1SmMessage();
   /// <summary>
   ///
   /// </summary>
   std::string getBinaryDataN2SmInformation() const;
-  void setBinaryDataN2SmInformation(std::string const& value);
+  void setBinaryDataN2SmInformation(std::string const &value);
   bool binaryDataN2SmInformationIsSet() const;
   void unsetBinaryDataN2SmInformation();
 
-  friend void to_json(nlohmann::json& j, const SmContextMessage& o);
-  friend void from_json(const nlohmann::json& j, SmContextMessage& o);
+  friend void to_json(nlohmann::json &j, const SmContextMessage &o);
+  friend void from_json(const nlohmann::json &j, SmContextMessage &o);
 
- protected:
+protected:
   SmContextCreateData m_JsonData;
   bool m_JsonDataIsSet;
   std::string m_BinaryDataN1SmMessage;
@@ -72,6 +72,6 @@ class SmContextMessage {
   bool m_BinaryDataN2SmInformationIsSet;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* Sm_Context_Message_H_ */

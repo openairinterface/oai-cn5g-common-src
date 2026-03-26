@@ -15,26 +15,24 @@ extern "C" {
 namespace oai::ngap {
 
 class QosFlowSetupRequestItem {
- public:
+public:
   QosFlowSetupRequestItem();
   virtual ~QosFlowSetupRequestItem();
 
-  void set(
-      const QosFlowIdentifier& qosFlowIdentifier,
-      const QosFlowLevelQosParameters& qosFlowLevelQosParameters);
-  bool get(
-      QosFlowIdentifier& qosFlowIdentifier,
-      QosFlowLevelQosParameters& qosFlowLevelQosParameters) const;
+  void set(const QosFlowIdentifier &qosFlowIdentifier,
+           const QosFlowLevelQosParameters &qosFlowLevelQosParameters);
+  bool get(QosFlowIdentifier &qosFlowIdentifier,
+           QosFlowLevelQosParameters &qosFlowLevelQosParameters) const;
 
-  bool encode(Ngap_QosFlowSetupRequestItem_t&) const;
-  bool decode(const Ngap_QosFlowSetupRequestItem_t&);
+  bool encode(Ngap_QosFlowSetupRequestItem_t &) const;
+  bool decode(const Ngap_QosFlowSetupRequestItem_t &);
 
- private:
-  QosFlowIdentifier m_QosFlowIdentifier;                  // Mandatory
-  QosFlowLevelQosParameters m_QosFlowLevelQosParameters;  // Mandatory
+private:
+  QosFlowIdentifier m_QosFlowIdentifier;                 // Mandatory
+  QosFlowLevelQosParameters m_QosFlowLevelQosParameters; // Mandatory
   // TODO: E-RAB ID //Optional
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

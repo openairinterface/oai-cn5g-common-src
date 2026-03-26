@@ -29,7 +29,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class BatteryIndicationRm {
- public:
+public:
   BatteryIndicationRm();
   virtual ~BatteryIndicationRm() = default;
 
@@ -43,16 +43,16 @@ class BatteryIndicationRm {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const BatteryIndicationRm& rhs) const;
-  bool operator!=(const BatteryIndicationRm& rhs) const;
+  bool operator==(const BatteryIndicationRm &rhs) const;
+  bool operator!=(const BatteryIndicationRm &rhs) const;
 
   /////////////////////////////////////////////
   /// BatteryIndicationRm members
@@ -79,10 +79,10 @@ class BatteryIndicationRm {
   bool rechargeableIndIsSet() const;
   void unsetRechargeableInd();
 
-  friend void to_json(nlohmann::json& j, const BatteryIndicationRm& o);
-  friend void from_json(const nlohmann::json& j, BatteryIndicationRm& o);
+  friend void to_json(nlohmann::json &j, const BatteryIndicationRm &o);
+  friend void from_json(const nlohmann::json &j, BatteryIndicationRm &o);
 
- protected:
+protected:
   bool m_BatteryInd;
   bool m_BatteryIndIsSet;
   bool m_ReplaceableInd;
@@ -91,6 +91,6 @@ class BatteryIndicationRm {
   bool m_RechargeableIndIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* BatteryIndicationRm_H_ */

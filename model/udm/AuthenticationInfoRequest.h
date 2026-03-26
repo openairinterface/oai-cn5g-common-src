@@ -34,7 +34,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class AuthenticationInfoRequest {
- public:
+public:
   AuthenticationInfoRequest();
   virtual ~AuthenticationInfoRequest();
 
@@ -47,31 +47,31 @@ class AuthenticationInfoRequest {
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
   /// <summary>
   ///
   /// </summary>
   std::string getServingNetworkName() const;
-  void setServingNetworkName(std::string const& value);
+  void setServingNetworkName(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   ResynchronizationInfo getResynchronizationInfo() const;
-  void setResynchronizationInfo(ResynchronizationInfo const& value);
+  void setResynchronizationInfo(ResynchronizationInfo const &value);
   bool resynchronizationInfoIsSet() const;
   void unsetResynchronizationInfo();
   /// <summary>
   ///
   /// </summary>
   std::string getAusfInstanceId() const;
-  void setAusfInstanceId(std::string const& value);
+  void setAusfInstanceId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getCellCagInfo();
-  void setCellCagInfo(std::vector<std::string> const& value);
+  std::vector<std::string> &getCellCagInfo();
+  void setCellCagInfo(std::vector<std::string> const &value);
   bool cellCagInfoIsSet() const;
   void unsetCellCagInfo();
   /// <summary>
@@ -82,10 +82,10 @@ class AuthenticationInfoRequest {
   bool n5gcIndIsSet() const;
   void unsetN5gcInd();
 
-  friend void to_json(nlohmann::json& j, const AuthenticationInfoRequest& o);
-  friend void from_json(const nlohmann::json& j, AuthenticationInfoRequest& o);
+  friend void to_json(nlohmann::json &j, const AuthenticationInfoRequest &o);
+  friend void from_json(const nlohmann::json &j, AuthenticationInfoRequest &o);
 
- protected:
+protected:
   std::string m_SupportedFeatures;
   bool m_SupportedFeaturesIsSet;
   std::string m_ServingNetworkName;
@@ -100,6 +100,6 @@ class AuthenticationInfoRequest {
   bool m_N5gcIndIsSet;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* AuthenticationInfoRequest_H_ */

@@ -20,8 +20,8 @@
 #define NrppaInformation_H_
 
 #include "N2InfoContent.h"
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::lmf {
 
@@ -29,7 +29,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class NrppaInformation {
- public:
+public:
   NrppaInformation();
   virtual ~NrppaInformation() = default;
 
@@ -43,16 +43,16 @@ class NrppaInformation {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const NrppaInformation& rhs) const;
-  bool operator!=(const NrppaInformation& rhs) const;
+  bool operator==(const NrppaInformation &rhs) const;
+  bool operator!=(const NrppaInformation &rhs) const;
 
   /////////////////////////////////////////////
   /// NrppaInformation members
@@ -61,24 +61,24 @@ class NrppaInformation {
   ///
   /// </summary>
   std::string getNfId() const;
-  void setNfId(std::string const& value);
+  void setNfId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::lmf::N2InfoContent getNrppaPdu() const;
-  void setNrppaPdu(oai::model::lmf::N2InfoContent const& value);
+  void setNrppaPdu(oai::model::lmf::N2InfoContent const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getServiceInstanceId() const;
-  void setServiceInstanceId(std::string const& value);
+  void setServiceInstanceId(std::string const &value);
   bool serviceInstanceIdIsSet() const;
   void unsetServiceInstanceId();
 
-  friend void to_json(nlohmann::json& j, const NrppaInformation& o);
-  friend void from_json(const nlohmann::json& j, NrppaInformation& o);
+  friend void to_json(nlohmann::json &j, const NrppaInformation &o);
+  friend void from_json(const nlohmann::json &j, NrppaInformation &o);
 
- protected:
+protected:
   std::string m_NfId;
 
   oai::model::lmf::N2InfoContent m_NrppaPdu;
@@ -87,6 +87,6 @@ class NrppaInformation {
   bool m_ServiceInstanceIdIsSet;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* NrppaInformation_H_ */

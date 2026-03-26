@@ -12,8 +12,8 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_SecurityResult.h"
 #include "Ngap_SecurityIndication.h"
+#include "Ngap_SecurityResult.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -27,7 +27,7 @@ struct Ngap_ProtocolExtensionContainer;
 typedef struct Ngap_UserPlaneSecurityInformation {
   Ngap_SecurityResult_t securityResult;
   Ngap_SecurityIndication_t securityIndication;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

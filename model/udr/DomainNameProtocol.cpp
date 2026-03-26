@@ -26,10 +26,10 @@ void DomainNameProtocol::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const DomainNameProtocol& o) {
+void to_json(nlohmann::json &j, const DomainNameProtocol &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, DomainNameProtocol& o) {}
+void from_json(const nlohmann::json &j, DomainNameProtocol &o) {}
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

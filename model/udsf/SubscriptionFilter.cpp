@@ -20,7 +20,7 @@ namespace oai::model::udsf {
 
 SubscriptionFilter::SubscriptionFilter() {
   m_MonitoredResourceUrisIsSet = false;
-  m_OperationsIsSet            = false;
+  m_OperationsIsSet = false;
 }
 
 void SubscriptionFilter::validate() const {
@@ -30,28 +30,28 @@ void SubscriptionFilter::validate() const {
   }
 }
 
-bool SubscriptionFilter::validate(std::stringstream& msg) const {
+bool SubscriptionFilter::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool SubscriptionFilter::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool SubscriptionFilter::validate(std::stringstream &msg,
+                                  const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "SubscriptionFilter" : pathPrefix;
 
   if (monitoredResourceUrisIsSet()) {
-    const std::vector<std::string>& value = m_MonitoredResourceUris;
+    const std::vector<std::string> &value = m_MonitoredResourceUris;
     const std::string currentValuePath = _pathPrefix + ".monitoredResourceUris";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const std::string& value : value) {
+      int i = 0;
+      for (const std::string &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -61,17 +61,17 @@ bool SubscriptionFilter::validate(
   }
 
   if (operationsIsSet()) {
-    const std::vector<oai::model::udsf::RecordOperation>& value = m_Operations;
+    const std::vector<oai::model::udsf::RecordOperation> &value = m_Operations;
     const std::string currentValuePath = _pathPrefix + ".operations";
 
     if (value.size() > 3) {
       success = false;
       msg << currentValuePath << ": must have at most 3 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::udsf::RecordOperation& value : value) {
+      int i = 0;
+      for (const oai::model::udsf::RecordOperation &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -86,7 +86,7 @@ bool SubscriptionFilter::validate(
   return success;
 }
 
-bool SubscriptionFilter::operator==(const SubscriptionFilter& rhs) const {
+bool SubscriptionFilter::operator==(const SubscriptionFilter &rhs) const {
   return
 
       ((!monitoredResourceUrisIsSet() && !rhs.monitoredResourceUrisIsSet()) ||
@@ -100,11 +100,11 @@ bool SubscriptionFilter::operator==(const SubscriptionFilter& rhs) const {
           ;
 }
 
-bool SubscriptionFilter::operator!=(const SubscriptionFilter& rhs) const {
+bool SubscriptionFilter::operator!=(const SubscriptionFilter &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const SubscriptionFilter& o) {
+void to_json(nlohmann::json &j, const SubscriptionFilter &o) {
   j = nlohmann::json();
   if (o.monitoredResourceUrisIsSet() || !o.m_MonitoredResourceUris.empty())
     j["monitoredResourceUris"] = o.m_MonitoredResourceUris;
@@ -112,7 +112,7 @@ void to_json(nlohmann::json& j, const SubscriptionFilter& o) {
     j["operations"] = o.m_Operations;
 }
 
-void from_json(const nlohmann::json& j, SubscriptionFilter& o) {
+void from_json(const nlohmann::json &j, SubscriptionFilter &o) {
   if (j.find("monitoredResourceUris") != j.end()) {
     j.at("monitoredResourceUris").get_to(o.m_MonitoredResourceUris);
     o.m_MonitoredResourceUrisIsSet = true;
@@ -127,8 +127,8 @@ std::vector<std::string> SubscriptionFilter::getMonitoredResourceUris() const {
   return m_MonitoredResourceUris;
 }
 void SubscriptionFilter::setMonitoredResourceUris(
-    std::vector<std::string> const& value) {
-  m_MonitoredResourceUris      = value;
+    std::vector<std::string> const &value) {
+  m_MonitoredResourceUris = value;
   m_MonitoredResourceUrisIsSet = true;
 }
 bool SubscriptionFilter::monitoredResourceUrisIsSet() const {
@@ -142,15 +142,11 @@ SubscriptionFilter::getOperations() const {
   return m_Operations;
 }
 void SubscriptionFilter::setOperations(
-    std::vector<oai::model::udsf::RecordOperation> const& value) {
-  m_Operations      = value;
+    std::vector<oai::model::udsf::RecordOperation> const &value) {
+  m_Operations = value;
   m_OperationsIsSet = true;
 }
-bool SubscriptionFilter::operationsIsSet() const {
-  return m_OperationsIsSet;
-}
-void SubscriptionFilter::unsetOperations() {
-  m_OperationsIsSet = false;
-}
+bool SubscriptionFilter::operationsIsSet() const { return m_OperationsIsSet; }
+void SubscriptionFilter::unsetOperations() { m_OperationsIsSet = false; }
 
-}  // namespace oai::model::udsf
+} // namespace oai::model::udsf

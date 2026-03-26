@@ -18,9 +18,7 @@
 
 namespace oai::udr::model {
 
-CagAckData::CagAckData() {
-  m_ProvisioningTime = "";
-}
+CagAckData::CagAckData() { m_ProvisioningTime = ""; }
 
 CagAckData::~CagAckData() {}
 
@@ -28,13 +26,13 @@ void CagAckData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const CagAckData& o) {
-  j                     = nlohmann::json();
+void to_json(nlohmann::json &j, const CagAckData &o) {
+  j = nlohmann::json();
   j["provisioningTime"] = o.m_ProvisioningTime;
-  j["ueUpdateStatus"]   = o.m_UeUpdateStatus;
+  j["ueUpdateStatus"] = o.m_UeUpdateStatus;
 }
 
-void from_json(const nlohmann::json& j, CagAckData& o) {
+void from_json(const nlohmann::json &j, CagAckData &o) {
   j.at("provisioningTime").get_to(o.m_ProvisioningTime);
   j.at("ueUpdateStatus").get_to(o.m_UeUpdateStatus);
 }
@@ -42,14 +40,14 @@ void from_json(const nlohmann::json& j, CagAckData& o) {
 std::string CagAckData::getProvisioningTime() const {
   return m_ProvisioningTime;
 }
-void CagAckData::setProvisioningTime(std::string const& value) {
+void CagAckData::setProvisioningTime(std::string const &value) {
   m_ProvisioningTime = value;
 }
 UeUpdateStatus CagAckData::getUeUpdateStatus() const {
   return m_UeUpdateStatus;
 }
-void CagAckData::setUeUpdateStatus(UeUpdateStatus const& value) {
+void CagAckData::setUeUpdateStatus(UeUpdateStatus const &value) {
   m_UeUpdateStatus = value;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

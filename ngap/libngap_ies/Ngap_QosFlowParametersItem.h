@@ -26,9 +26,9 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_QosFlowParametersItem */
 typedef struct Ngap_QosFlowParametersItem {
   Ngap_QosFlowIdentifier_t qosFlowIdentifier;
-  struct Ngap_AlternativeQoSParaSetList*
-      alternativeQoSParaSetList;                         /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_AlternativeQoSParaSetList
+      *alternativeQoSParaSetList;                        /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

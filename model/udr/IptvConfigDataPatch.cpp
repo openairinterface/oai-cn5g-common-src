@@ -18,9 +18,7 @@
 
 namespace oai::udr::model {
 
-IptvConfigDataPatch::IptvConfigDataPatch() {
-  m_MultiAccCtrlsIsSet = false;
-}
+IptvConfigDataPatch::IptvConfigDataPatch() { m_MultiAccCtrlsIsSet = false; }
 
 IptvConfigDataPatch::~IptvConfigDataPatch() {}
 
@@ -28,33 +26,31 @@ void IptvConfigDataPatch::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const IptvConfigDataPatch& o) {
+void to_json(nlohmann::json &j, const IptvConfigDataPatch &o) {
   j = nlohmann::json();
   if (o.multiAccCtrlsIsSet() || !o.m_MultiAccCtrls.empty())
     j["multiAccCtrls"] = o.m_MultiAccCtrls;
 }
 
-void from_json(const nlohmann::json& j, IptvConfigDataPatch& o) {
+void from_json(const nlohmann::json &j, IptvConfigDataPatch &o) {
   if (j.find("multiAccCtrls") != j.end()) {
     j.at("multiAccCtrls").get_to(o.m_MultiAccCtrls);
     o.m_MultiAccCtrlsIsSet = true;
   }
 }
 
-std::map<std::string, MulticastAccessControl>&
+std::map<std::string, MulticastAccessControl> &
 IptvConfigDataPatch::getMultiAccCtrls() {
   return m_MultiAccCtrls;
 }
 void IptvConfigDataPatch::setMultiAccCtrls(
-    std::map<std::string, MulticastAccessControl> const& value) {
-  m_MultiAccCtrls      = value;
+    std::map<std::string, MulticastAccessControl> const &value) {
+  m_MultiAccCtrls = value;
   m_MultiAccCtrlsIsSet = true;
 }
 bool IptvConfigDataPatch::multiAccCtrlsIsSet() const {
   return m_MultiAccCtrlsIsSet;
 }
-void IptvConfigDataPatch::unsetMultiAccCtrls() {
-  m_MultiAccCtrlsIsSet = false;
-}
+void IptvConfigDataPatch::unsetMultiAccCtrls() { m_MultiAccCtrlsIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

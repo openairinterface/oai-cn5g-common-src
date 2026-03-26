@@ -21,8 +21,8 @@
 
 #include "DlDataDeliveryStatus.h"
 #include "NotificationControlIndication.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::pcf {
 
@@ -30,7 +30,7 @@ namespace oai::model::pcf {
 /// Contains the downlink data notification control information.
 /// </summary>
 class DownlinkDataNotificationControl {
- public:
+public:
   DownlinkDataNotificationControl();
   virtual ~DownlinkDataNotificationControl() = default;
 
@@ -44,16 +44,16 @@ class DownlinkDataNotificationControl {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const DownlinkDataNotificationControl& rhs) const;
-  bool operator!=(const DownlinkDataNotificationControl& rhs) const;
+  bool operator==(const DownlinkDataNotificationControl &rhs) const;
+  bool operator!=(const DownlinkDataNotificationControl &rhs) const;
 
   /////////////////////////////////////////////
   /// DownlinkDataNotificationControl members
@@ -61,10 +61,10 @@ class DownlinkDataNotificationControl {
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::pcf::NotificationControlIndication> getNotifCtrlInds()
-      const;
+  std::vector<oai::model::pcf::NotificationControlIndication>
+  getNotifCtrlInds() const;
   void setNotifCtrlInds(
-      std::vector<oai::model::pcf::NotificationControlIndication> const& value);
+      std::vector<oai::model::pcf::NotificationControlIndication> const &value);
   bool notifCtrlIndsIsSet() const;
   void unsetNotifCtrlInds();
   /// <summary>
@@ -72,22 +72,22 @@ class DownlinkDataNotificationControl {
   /// </summary>
   std::vector<oai::model::common::DlDataDeliveryStatus> getTypesOfNotif() const;
   void setTypesOfNotif(
-      std::vector<oai::model::common::DlDataDeliveryStatus> const& value);
+      std::vector<oai::model::common::DlDataDeliveryStatus> const &value);
   bool typesOfNotifIsSet() const;
   void unsetTypesOfNotif();
 
-  friend void to_json(
-      nlohmann::json& j, const DownlinkDataNotificationControl& o);
-  friend void from_json(
-      const nlohmann::json& j, DownlinkDataNotificationControl& o);
+  friend void to_json(nlohmann::json &j,
+                      const DownlinkDataNotificationControl &o);
+  friend void from_json(const nlohmann::json &j,
+                        DownlinkDataNotificationControl &o);
 
- protected:
+protected:
   std::vector<oai::model::pcf::NotificationControlIndication> m_NotifCtrlInds;
   bool m_NotifCtrlIndsIsSet;
   std::vector<oai::model::common::DlDataDeliveryStatus> m_TypesOfNotif;
   bool m_TypesOfNotifIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* DownlinkDataNotificationControl_H_ */

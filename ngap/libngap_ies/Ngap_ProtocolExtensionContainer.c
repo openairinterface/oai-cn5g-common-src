@@ -12,8 +12,7 @@
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 static asn_oer_constraints_t
     asn_OER_type_Ngap_ProtocolExtensionContainer_9666P0_constr_1 CC_NOTUSED = {
-        {0, 0},
-        -1 /* (SIZE(1..65535)) */};
+        {0, 0}, -1 /* (SIZE(1..65535)) */};
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 asn_per_constraints_t
@@ -28,8 +27,7 @@ asn_per_constraints_t
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 static asn_oer_constraints_t
     asn_OER_type_Ngap_ProtocolExtensionContainer_9666P1_constr_3 CC_NOTUSED = {
-        {0, 0},
-        -1 /* (SIZE(1..65535)) */};
+        {0, 0}, -1 /* (SIZE(1..65535)) */};
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 asn_per_constraints_t
@@ -44,8 +42,7 @@ asn_per_constraints_t
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 static asn_oer_constraints_t
     asn_OER_type_Ngap_ProtocolExtensionContainer_9666P2_constr_5 CC_NOTUSED = {
-        {0, 0},
-        -1 /* (SIZE(1..65535)) */};
+        {0, 0}, -1 /* (SIZE(1..65535)) */};
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 asn_per_constraints_t
@@ -60,8 +57,7 @@ asn_per_constraints_t
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 static asn_oer_constraints_t
     asn_OER_type_Ngap_ProtocolExtensionContainer_9666P3_constr_7 CC_NOTUSED = {
-        {0, 0},
-        -1 /* (SIZE(1..65535)) */};
+        {0, 0}, -1 /* (SIZE(1..65535)) */};
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 asn_per_constraints_t
@@ -76,8 +72,7 @@ asn_per_constraints_t
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 static asn_oer_constraints_t
     asn_OER_type_Ngap_ProtocolExtensionContainer_9666P4_constr_9 CC_NOTUSED = {
-        {0, 0},
-        -1 /* (SIZE(1..65535)) */};
+        {0, 0}, -1 /* (SIZE(1..65535)) */};
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 asn_per_constraints_t
@@ -92,8 +87,7 @@ asn_per_constraints_t
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 static asn_oer_constraints_t
     asn_OER_type_Ngap_ProtocolExtensionContainer_9666P5_constr_11 CC_NOTUSED = {
-        {0, 0},
-        -1 /* (SIZE(1..65535)) */};
+        {0, 0}, -1 /* (SIZE(1..65535)) */};
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 asn_per_constraints_t
@@ -108,8 +102,7 @@ asn_per_constraints_t
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 static asn_oer_constraints_t
     asn_OER_type_Ngap_ProtocolExtensionContainer_9666P6_constr_13 CC_NOTUSED = {
-        {0, 0},
-        -1 /* (SIZE(1..65535)) */};
+        {0, 0}, -1 /* (SIZE(1..65535)) */};
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 asn_per_constraints_t
@@ -124,8 +117,7 @@ asn_per_constraints_t
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 static asn_oer_constraints_t
     asn_OER_type_Ngap_ProtocolExtensionContainer_9666P7_constr_15 CC_NOTUSED = {
-        {0, 0},
-        -1 /* (SIZE(1..65535)) */};
+        {0, 0}, -1 /* (SIZE(1..65535)) */};
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 asn_per_constraints_t
@@ -140,8 +132,7 @@ asn_per_constraints_t
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 static asn_oer_constraints_t
     asn_OER_type_Ngap_ProtocolExtensionContainer_9666P8_constr_17 CC_NOTUSED = {
-        {0, 0},
-        -1 /* (SIZE(1..65535)) */};
+        {0, 0}, -1 /* (SIZE(1..65535)) */};
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 asn_per_constraints_t
@@ -156,8 +147,7 @@ asn_per_constraints_t
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 static asn_oer_constraints_t
     asn_OER_type_Ngap_ProtocolExtensionContainer_9666P9_constr_19 CC_NOTUSED = {
-        {0, 0},
-        -1 /* (SIZE(1..65535)) */};
+        {0, 0}, -1 /* (SIZE(1..65535)) */};
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 asn_per_constraints_t

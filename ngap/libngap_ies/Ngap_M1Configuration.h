@@ -27,9 +27,9 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_M1Configuration */
 typedef struct Ngap_M1Configuration {
   Ngap_M1ReportingTrigger_t m1reportingTrigger;
-  struct Ngap_M1ThresholdEventA2* m1thresholdEventA2;    /* OPTIONAL */
-  struct Ngap_M1PeriodicReporting* m1periodicReporting;  /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_M1ThresholdEventA2 *m1thresholdEventA2;    /* OPTIONAL */
+  struct Ngap_M1PeriodicReporting *m1periodicReporting;  /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

@@ -36,7 +36,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class PfdDataForAppExt {
- public:
+public:
   PfdDataForAppExt();
   virtual ~PfdDataForAppExt();
 
@@ -49,31 +49,31 @@ class PfdDataForAppExt {
   ///
   /// </summary>
   std::string getApplicationId() const;
-  void setApplicationId(std::string const& value);
+  void setApplicationId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
-  std::vector<PfdContent>& getPfds();
-  void setPfds(std::vector<PfdContent> const& value);
+  std::vector<PfdContent> &getPfds();
+  void setPfds(std::vector<PfdContent> const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getCachingTime() const;
-  void setCachingTime(std::string const& value);
+  void setCachingTime(std::string const &value);
   bool cachingTimeIsSet() const;
   void unsetCachingTime();
   /// <summary>
   ///
   /// </summary>
   std::string getSuppFeat() const;
-  void setSuppFeat(std::string const& value);
+  void setSuppFeat(std::string const &value);
   bool suppFeatIsSet() const;
   void unsetSuppFeat();
 
-  friend void to_json(nlohmann::json& j, const PfdDataForAppExt& o);
-  friend void from_json(const nlohmann::json& j, PfdDataForAppExt& o);
+  friend void to_json(nlohmann::json &j, const PfdDataForAppExt &o);
+  friend void from_json(const nlohmann::json &j, PfdDataForAppExt &o);
 
- protected:
+protected:
   std::string m_ApplicationId;
 
   std::vector<PfdContent> m_Pfds;
@@ -84,6 +84,6 @@ class PfdDataForAppExt {
   bool m_SuppFeatIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* PfdDataForAppExt_H_ */

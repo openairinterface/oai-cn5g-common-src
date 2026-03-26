@@ -31,8 +31,8 @@ asn_TYPE_member_t asn_MBR_Ngap_UESecurityCapabilities_1[] = {
      "nRencryptionAlgorithms"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_UESecurityCapabilities, nRintegrityProtectionAlgorithms),
+     offsetof(struct Ngap_UESecurityCapabilities,
+              nRintegrityProtectionAlgorithms),
      (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_NRintegrityProtectionAlgorithms,
@@ -70,9 +70,8 @@ asn_TYPE_member_t asn_MBR_Ngap_UESecurityCapabilities_1[] = {
      "eUTRAencryptionAlgorithms"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_UESecurityCapabilities,
-         eUTRAintegrityProtectionAlgorithms),
+     offsetof(struct Ngap_UESecurityCapabilities,
+              eUTRAintegrityProtectionAlgorithms),
      (ASN_TAG_CLASS_CONTEXT | (3 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_EUTRAintegrityProtectionAlgorithms,
@@ -109,7 +108,7 @@ asn_TYPE_member_t asn_MBR_Ngap_UESecurityCapabilities_1[] = {
      0, /* No default value */
      "iE-Extensions"},
 };
-static const int asn_MAP_Ngap_UESecurityCapabilities_oms_1[]            = {4};
+static const int asn_MAP_Ngap_UESecurityCapabilities_oms_1[] = {4};
 static const ber_tlv_tag_t asn_DEF_Ngap_UESecurityCapabilities_tags_1[] = {
     (ASN_TAG_CLASS_UNIVERSAL | (16 << 2))};
 static const asn_TYPE_tag2member_t

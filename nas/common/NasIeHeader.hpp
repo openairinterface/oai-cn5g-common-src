@@ -38,6 +38,7 @@
 #include "MicoIndication.hpp"
 #include "NasKeySetIdentifier.hpp"
 #include "NasMessageContainer.hpp"
+#include "NasMessageType.hpp"
 #include "NasSecurityAlgorithms.hpp"
 #include "NetworkName.hpp"
 #include "NetworkSlicingIndication.hpp"
@@ -93,5 +94,3 @@
 #include "_5gsmCapability.hpp"
 #include "_5gsmCause.hpp"
 #include "_5gsmCongestionReAttemptIndicator.hpp"
-#include "NasMessageType.hpp"
-#include "PduSessionReactivationResultErrorCause.hpp"

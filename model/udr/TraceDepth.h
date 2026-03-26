@@ -30,7 +30,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class TraceDepth {
- public:
+public:
   TraceDepth();
   virtual ~TraceDepth();
 
@@ -39,12 +39,12 @@ class TraceDepth {
   /////////////////////////////////////////////
   /// TraceDepth members
 
-  friend void to_json(nlohmann::json& j, const TraceDepth& o);
-  friend void from_json(const nlohmann::json& j, TraceDepth& o);
+  friend void to_json(nlohmann::json &j, const TraceDepth &o);
+  friend void from_json(const nlohmann::json &j, TraceDepth &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* TraceDepth_H_ */

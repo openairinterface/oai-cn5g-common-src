@@ -27,9 +27,9 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_PC5QoSFlowItem */
 typedef struct Ngap_PC5QoSFlowItem {
   Ngap_FiveQI_t pQI;
-  struct Ngap_PC5FlowBitRates* pc5FlowBitRates;          /* OPTIONAL */
-  Ngap_Range_t* range;                                   /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_PC5FlowBitRates *pc5FlowBitRates;          /* OPTIONAL */
+  Ngap_Range_t *range;                                   /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

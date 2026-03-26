@@ -27,7 +27,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class NotificationControl_anyOf {
- public:
+public:
   NotificationControl_anyOf();
   virtual ~NotificationControl_anyOf() = default;
 
@@ -50,16 +50,16 @@ class NotificationControl_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const NotificationControl_anyOf& rhs) const;
-  bool operator!=(const NotificationControl_anyOf& rhs) const;
+  bool operator==(const NotificationControl_anyOf &rhs) const;
+  bool operator!=(const NotificationControl_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// NotificationControl_anyOf members
@@ -67,15 +67,15 @@ class NotificationControl_anyOf {
   NotificationControl_anyOf::eNotificationControl_anyOf getValue() const;
   void setValue(NotificationControl_anyOf::eNotificationControl_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const NotificationControl_anyOf& o);
-  friend void from_json(const nlohmann::json& j, NotificationControl_anyOf& o);
+  friend void to_json(nlohmann::json &j, const NotificationControl_anyOf &o);
+  friend void from_json(const nlohmann::json &j, NotificationControl_anyOf &o);
 
- protected:
+protected:
   NotificationControl_anyOf::eNotificationControl_anyOf m_value =
       NotificationControl_anyOf::eNotificationControl_anyOf::
           INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* NotificationControl_anyOf_H_ */

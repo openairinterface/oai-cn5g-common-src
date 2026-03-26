@@ -32,7 +32,7 @@ namespace model {
 ///
 /// </summary>
 class AllowedNssai {
- public:
+public:
   AllowedNssai();
   virtual ~AllowedNssai() = default;
 
@@ -46,16 +46,16 @@ class AllowedNssai {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const AllowedNssai& rhs) const;
-  bool operator!=(const AllowedNssai& rhs) const;
+  bool operator==(const AllowedNssai &rhs) const;
+  bool operator!=(const AllowedNssai &rhs) const;
 
   /////////////////////////////////////////////
   /// AllowedNssai members
@@ -64,24 +64,24 @@ class AllowedNssai {
   ///
   /// </summary>
   std::vector<AllowedSnssai> getAllowedSnssaiList() const;
-  void setAllowedSnssaiList(std::vector<AllowedSnssai> const& value);
+  void setAllowedSnssaiList(std::vector<AllowedSnssai> const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::AccessType getAccessType() const;
-  void setAccessType(oai::model::common::AccessType const& value);
+  void setAccessType(oai::model::common::AccessType const &value);
 
-  friend void to_json(nlohmann::json& j, const AllowedNssai& o);
-  friend void from_json(const nlohmann::json& j, AllowedNssai& o);
+  friend void to_json(nlohmann::json &j, const AllowedNssai &o);
+  friend void from_json(const nlohmann::json &j, AllowedNssai &o);
 
- protected:
+protected:
   std::vector<AllowedSnssai> m_AllowedSnssaiList;
 
   oai::model::common::AccessType m_AccessType;
 };
 
-}  // namespace model
-}  // namespace nssf_server
-}  // namespace oai
+} // namespace model
+} // namespace nssf_server
+} // namespace oai
 
 #endif /* AllowedNssai_H_ */

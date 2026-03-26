@@ -12,25 +12,25 @@ extern "C" {
 namespace oai::ngap {
 
 class Cause {
- public:
+public:
   Cause();
   virtual ~Cause();
 
-  void setChoiceOfCause(const Ngap_Cause_PR& cause_present);
+  void setChoiceOfCause(const Ngap_Cause_PR &cause_present);
   Ngap_Cause_PR getChoiceOfCause() const;
 
-  void set(const long& value);
+  void set(const long &value);
   long get() const;
 
-  void set(const long& value, const Ngap_Cause_PR& cause_present);
+  void set(const long &value, const Ngap_Cause_PR &cause_present);
 
-  bool encode(Ngap_Cause_t& cause) const;
-  bool decode(const Ngap_Cause_t& cause);
+  bool encode(Ngap_Cause_t &cause) const;
+  bool decode(const Ngap_Cause_t &cause);
 
- private:
+private:
   long m_CauseValue;
   Ngap_Cause_PR m_CausePresent;
 };
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

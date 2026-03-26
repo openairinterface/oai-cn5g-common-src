@@ -29,7 +29,7 @@ namespace model {
 ///
 /// </summary>
 class NssfEventType_anyOf {
- public:
+public:
   NssfEventType_anyOf();
   virtual ~NssfEventType_anyOf() = default;
 
@@ -51,16 +51,16 @@ class NssfEventType_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const NssfEventType_anyOf& rhs) const;
-  bool operator!=(const NssfEventType_anyOf& rhs) const;
+  bool operator==(const NssfEventType_anyOf &rhs) const;
+  bool operator!=(const NssfEventType_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// NssfEventType_anyOf members
@@ -68,16 +68,16 @@ class NssfEventType_anyOf {
   NssfEventType_anyOf::eNssfEventType_anyOf getValue() const;
   void setValue(NssfEventType_anyOf::eNssfEventType_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const NssfEventType_anyOf& o);
-  friend void from_json(const nlohmann::json& j, NssfEventType_anyOf& o);
+  friend void to_json(nlohmann::json &j, const NssfEventType_anyOf &o);
+  friend void from_json(const nlohmann::json &j, NssfEventType_anyOf &o);
 
- protected:
+protected:
   NssfEventType_anyOf::eNssfEventType_anyOf m_value = NssfEventType_anyOf::
       eNssfEventType_anyOf::INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace model
-}  // namespace nssf_server
-}  // namespace oai
+} // namespace model
+} // namespace nssf_server
+} // namespace oai
 
 #endif /* NssfEventType_anyOf_H_ */

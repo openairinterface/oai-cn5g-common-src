@@ -12,24 +12,24 @@ extern "C" {
 namespace oai::ngap {
 
 class UeRetentionInformation {
- public:
+public:
   UeRetentionInformation();
   virtual ~UeRetentionInformation();
 
   void set(const long value);
-  void get(long& value) const;
+  void get(long &value) const;
 
-  void set(const e_Ngap_UERetentionInformation& value);
-  void get(e_Ngap_UERetentionInformation& value) const;
+  void set(const e_Ngap_UERetentionInformation &value);
+  void get(e_Ngap_UERetentionInformation &value) const;
   e_Ngap_UERetentionInformation get() const;
 
-  bool encode(Ngap_UERetentionInformation_t& value) const;
+  bool encode(Ngap_UERetentionInformation_t &value) const;
   bool decode(Ngap_UERetentionInformation_t value);
 
- private:
+private:
   long m_UeRetentionInformation;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

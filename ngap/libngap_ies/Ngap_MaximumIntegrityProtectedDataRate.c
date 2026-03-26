@@ -15,8 +15,7 @@
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 static asn_oer_constraints_t
     asn_OER_type_Ngap_MaximumIntegrityProtectedDataRate_constr_1 CC_NOTUSED = {
-        {0, 0},
-        -1};
+        {0, 0}, -1};
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 asn_per_constraints_t
@@ -30,8 +29,7 @@ asn_per_constraints_t
           !defined(ASN_DISABLE_APER_SUPPORT) */
 static const asn_INTEGER_enum_map_t
     asn_MAP_Ngap_MaximumIntegrityProtectedDataRate_value2enum_1[] = {
-        {0, 12, "bitrate64kbs"},
-        {1, 15, "maximum-UE-rate"}
+        {0, 12, "bitrate64kbs"}, {1, 15, "maximum-UE-rate"}
         /* This list is extensible */
 };
 static const unsigned int

@@ -14,24 +14,23 @@ extern "C" {
 namespace oai::ngap {
 
 class PduSessionResourceFailedToSetupItemCxtFail {
- public:
+public:
   PduSessionResourceFailedToSetupItemCxtFail();
   virtual ~PduSessionResourceFailedToSetupItemCxtFail();
 
-  void set(
-      const PduSessionId& pduSessionId,
-      const OCTET_STRING_t& pduSessionResource);
-  void get(
-      PduSessionId& pduSessionId, OCTET_STRING_t& pduSessionResource) const;
+  void set(const PduSessionId &pduSessionId,
+           const OCTET_STRING_t &pduSessionResource);
+  void get(PduSessionId &pduSessionId,
+           OCTET_STRING_t &pduSessionResource) const;
 
-  bool encode(Ngap_PDUSessionResourceFailedToSetupItemCxtFail_t& pduCxt) const;
-  bool decode(const Ngap_PDUSessionResourceFailedToSetupItemCxtFail_t& pduCxt);
+  bool encode(Ngap_PDUSessionResourceFailedToSetupItemCxtFail_t &pduCxt) const;
+  bool decode(const Ngap_PDUSessionResourceFailedToSetupItemCxtFail_t &pduCxt);
 
- private:
-  PduSessionId m_PduSessionId;                                   // Mandatory
-  OCTET_STRING_t m_PduSessionResourceSetupUnsuccessfulTransfer;  // Mandatory
+private:
+  PduSessionId m_PduSessionId;                                  // Mandatory
+  OCTET_STRING_t m_PduSessionResourceSetupUnsuccessfulTransfer; // Mandatory
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

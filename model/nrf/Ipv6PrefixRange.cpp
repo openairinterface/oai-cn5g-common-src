@@ -22,7 +22,7 @@ using namespace oai::model::common;
 
 Ipv6PrefixRange::Ipv6PrefixRange() {
   m_StartIsSet = false;
-  m_EndIsSet   = false;
+  m_EndIsSet = false;
 }
 
 void Ipv6PrefixRange::validate() const {
@@ -32,12 +32,12 @@ void Ipv6PrefixRange::validate() const {
   }
 }
 
-bool Ipv6PrefixRange::validate(std::stringstream& msg) const {
+bool Ipv6PrefixRange::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool Ipv6PrefixRange::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool Ipv6PrefixRange::validate(std::stringstream &msg,
+                               const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "Ipv6PrefixRange" : pathPrefix;
@@ -45,7 +45,7 @@ bool Ipv6PrefixRange::validate(
   return success;
 }
 
-bool Ipv6PrefixRange::operator==(const Ipv6PrefixRange& rhs) const {
+bool Ipv6PrefixRange::operator==(const Ipv6PrefixRange &rhs) const {
   return
 
       ((!startIsSet() && !rhs.startIsSet()) ||
@@ -57,17 +57,19 @@ bool Ipv6PrefixRange::operator==(const Ipv6PrefixRange& rhs) const {
           ;
 }
 
-bool Ipv6PrefixRange::operator!=(const Ipv6PrefixRange& rhs) const {
+bool Ipv6PrefixRange::operator!=(const Ipv6PrefixRange &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const Ipv6PrefixRange& o) {
+void to_json(nlohmann::json &j, const Ipv6PrefixRange &o) {
   j = nlohmann::json();
-  if (o.startIsSet()) j["start"] = o.m_Start;
-  if (o.endIsSet()) j["end"] = o.m_End;
+  if (o.startIsSet())
+    j["start"] = o.m_Start;
+  if (o.endIsSet())
+    j["end"] = o.m_End;
 }
 
-void from_json(const nlohmann::json& j, Ipv6PrefixRange& o) {
+void from_json(const nlohmann::json &j, Ipv6PrefixRange &o) {
   if (j.find("start") != j.end()) {
     j.at("start").get_to(o.m_Start);
     o.m_StartIsSet = true;
@@ -78,31 +80,19 @@ void from_json(const nlohmann::json& j, Ipv6PrefixRange& o) {
   }
 }
 
-Ipv6Prefix Ipv6PrefixRange::getStart() const {
-  return m_Start;
-}
-void Ipv6PrefixRange::setStart(Ipv6Prefix const& value) {
-  m_Start      = value;
+Ipv6Prefix Ipv6PrefixRange::getStart() const { return m_Start; }
+void Ipv6PrefixRange::setStart(Ipv6Prefix const &value) {
+  m_Start = value;
   m_StartIsSet = true;
 }
-bool Ipv6PrefixRange::startIsSet() const {
-  return m_StartIsSet;
-}
-void Ipv6PrefixRange::unsetStart() {
-  m_StartIsSet = false;
-}
-Ipv6Prefix Ipv6PrefixRange::getEnd() const {
-  return m_End;
-}
-void Ipv6PrefixRange::setEnd(Ipv6Prefix const& value) {
-  m_End      = value;
+bool Ipv6PrefixRange::startIsSet() const { return m_StartIsSet; }
+void Ipv6PrefixRange::unsetStart() { m_StartIsSet = false; }
+Ipv6Prefix Ipv6PrefixRange::getEnd() const { return m_End; }
+void Ipv6PrefixRange::setEnd(Ipv6Prefix const &value) {
+  m_End = value;
   m_EndIsSet = true;
 }
-bool Ipv6PrefixRange::endIsSet() const {
-  return m_EndIsSet;
-}
-void Ipv6PrefixRange::unsetEnd() {
-  m_EndIsSet = false;
-}
+bool Ipv6PrefixRange::endIsSet() const { return m_EndIsSet; }
+void Ipv6PrefixRange::unsetEnd() { m_EndIsSet = false; }
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

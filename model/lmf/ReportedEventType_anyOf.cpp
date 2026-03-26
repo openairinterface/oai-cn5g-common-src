@@ -13,8 +13,8 @@
 
 #include "ReportedEventType_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::lmf {
 
@@ -27,12 +27,12 @@ void ReportedEventType_anyOf::validate() const {
   }
 }
 
-bool ReportedEventType_anyOf::validate(std::stringstream& msg) const {
+bool ReportedEventType_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ReportedEventType_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ReportedEventType_anyOf::validate(std::stringstream &msg,
+                                       const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ReportedEventType_anyOf" : pathPrefix;
@@ -47,53 +47,53 @@ bool ReportedEventType_anyOf::validate(
 }
 
 bool ReportedEventType_anyOf::operator==(
-    const ReportedEventType_anyOf& rhs) const {
+    const ReportedEventType_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool ReportedEventType_anyOf::operator!=(
-    const ReportedEventType_anyOf& rhs) const {
+    const ReportedEventType_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ReportedEventType_anyOf& o) {
+void to_json(nlohmann::json &j, const ReportedEventType_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case ReportedEventType_anyOf::eReportedEventType_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case ReportedEventType_anyOf::eReportedEventType_anyOf::PERIODIC_EVENT:
-      j = "PERIODIC_EVENT";
-      break;
-    case ReportedEventType_anyOf::eReportedEventType_anyOf::ENTERING_AREA_EVENT:
-      j = "ENTERING_AREA_EVENT";
-      break;
-    case ReportedEventType_anyOf::eReportedEventType_anyOf::LEAVING_AREA_EVENT:
-      j = "LEAVING_AREA_EVENT";
-      break;
-    case ReportedEventType_anyOf::eReportedEventType_anyOf::
-        BEING_INSIDE_AREA_EVENT:
-      j = "BEING_INSIDE_AREA_EVENT";
-      break;
-    case ReportedEventType_anyOf::eReportedEventType_anyOf::MOTION_EVENT:
-      j = "MOTION_EVENT";
-      break;
-    case ReportedEventType_anyOf::eReportedEventType_anyOf::
-        MAXIMUM_INTERVAL_EXPIRATION_EVENT:
-      j = "MAXIMUM_INTERVAL_EXPIRATION_EVENT";
-      break;
-    case ReportedEventType_anyOf::eReportedEventType_anyOf::
-        LOCATION_CANCELLATION_EVENT:
-      j = "LOCATION_CANCELLATION_EVENT";
-      break;
+  case ReportedEventType_anyOf::eReportedEventType_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case ReportedEventType_anyOf::eReportedEventType_anyOf::PERIODIC_EVENT:
+    j = "PERIODIC_EVENT";
+    break;
+  case ReportedEventType_anyOf::eReportedEventType_anyOf::ENTERING_AREA_EVENT:
+    j = "ENTERING_AREA_EVENT";
+    break;
+  case ReportedEventType_anyOf::eReportedEventType_anyOf::LEAVING_AREA_EVENT:
+    j = "LEAVING_AREA_EVENT";
+    break;
+  case ReportedEventType_anyOf::eReportedEventType_anyOf::
+      BEING_INSIDE_AREA_EVENT:
+    j = "BEING_INSIDE_AREA_EVENT";
+    break;
+  case ReportedEventType_anyOf::eReportedEventType_anyOf::MOTION_EVENT:
+    j = "MOTION_EVENT";
+    break;
+  case ReportedEventType_anyOf::eReportedEventType_anyOf::
+      MAXIMUM_INTERVAL_EXPIRATION_EVENT:
+    j = "MAXIMUM_INTERVAL_EXPIRATION_EVENT";
+    break;
+  case ReportedEventType_anyOf::eReportedEventType_anyOf::
+      LOCATION_CANCELLATION_EVENT:
+    j = "LOCATION_CANCELLATION_EVENT";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, ReportedEventType_anyOf& o) {
+void from_json(const nlohmann::json &j, ReportedEventType_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "PERIODIC_EVENT") {
     o.setValue(
@@ -133,4 +133,4 @@ void ReportedEventType_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

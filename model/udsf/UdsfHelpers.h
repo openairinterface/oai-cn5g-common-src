@@ -24,29 +24,29 @@
 using namespace oai::model::udsf;
 
 namespace oai::model::common::helpers {
-bool fromStringValue(
-    const std::string& inStr, oai::model::udsf::ClientId& value);
-bool fromStringValue(
-    const std::string& inStr, oai::model::udsf::SearchExpression& value);
-bool fromStringValue(
-    const std::string& inStr, oai::model::udsf::ClientId& value);
-bool fromStringValue(
-    const std::string& inStr, oai::model::udsf::SearchExpression& value);
-bool fromStringValue(
-    const std::string& inStr, oai::model::udsf::RetrieveRecords& value);
+bool fromStringValue(const std::string &inStr,
+                     oai::model::udsf::ClientId &value);
+bool fromStringValue(const std::string &inStr,
+                     oai::model::udsf::SearchExpression &value);
+bool fromStringValue(const std::string &inStr,
+                     oai::model::udsf::ClientId &value);
+bool fromStringValue(const std::string &inStr,
+                     oai::model::udsf::SearchExpression &value);
+bool fromStringValue(const std::string &inStr,
+                     oai::model::udsf::RetrieveRecords &value);
 
 void fromPistacheToStdStringOptional(
-    const Pistache::Optional<Pistache::Http::Header::Raw>& inOpt,
-    std::optional<std::string>& outOpt);
+    const Pistache::Optional<Pistache::Http::Header::Raw> &inOpt,
+    std::optional<std::string> &outOpt);
 
-template<typename T>
-void fromPistacheStdOptional(
-    const Pistache::Optional<T>& inOpt, std::optional<T>& outOpt) {
+template <typename T>
+void fromPistacheStdOptional(const Pistache::Optional<T> &inOpt,
+                             std::optional<T> &outOpt) {
   if (!inOpt.isEmpty()) {
     outOpt = std::optional<T>(inOpt.get());
   }
 }
 
-}  // namespace oai::model::common::helpers
+} // namespace oai::model::common::helpers
 
-#endif  // Helpers_H_
+#endif // Helpers_H_

@@ -20,13 +20,13 @@ namespace oai::model::pcf {
 using namespace oai::model::common;
 
 ConditionData::ConditionData() {
-  m_CondId                = "";
-  m_ActivationTime        = "";
-  m_ActivationTimeIsSet   = false;
-  m_DeactivationTime      = "";
+  m_CondId = "";
+  m_ActivationTime = "";
+  m_ActivationTimeIsSet = false;
+  m_DeactivationTime = "";
   m_DeactivationTimeIsSet = false;
-  m_AccessTypeIsSet       = false;
-  m_RatTypeIsSet          = false;
+  m_AccessTypeIsSet = false;
+  m_RatTypeIsSet = false;
 }
 
 void ConditionData::validate() const {
@@ -36,12 +36,12 @@ void ConditionData::validate() const {
   }
 }
 
-bool ConditionData::validate(std::stringstream& msg) const {
+bool ConditionData::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ConditionData::validate(
-    std::stringstream& /* msg */, const std::string& /* pathPrefix */) const {
+bool ConditionData::validate(std::stringstream & /* msg */,
+                             const std::string & /* pathPrefix */) const {
   bool success = true;
   /*
   const std::string _pathPrefix =
@@ -50,7 +50,7 @@ bool ConditionData::validate(
   return success;
 }
 
-bool ConditionData::operator==(const ConditionData& rhs) const {
+bool ConditionData::operator==(const ConditionData &rhs) const {
   return
 
       (getCondId() == rhs.getCondId()) &&
@@ -74,20 +74,24 @@ bool ConditionData::operator==(const ConditionData& rhs) const {
           ;
 }
 
-bool ConditionData::operator!=(const ConditionData& rhs) const {
+bool ConditionData::operator!=(const ConditionData &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ConditionData& o) {
-  j           = nlohmann::json();
+void to_json(nlohmann::json &j, const ConditionData &o) {
+  j = nlohmann::json();
   j["condId"] = o.m_CondId;
-  if (o.activationTimeIsSet()) j["activationTime"] = o.m_ActivationTime;
-  if (o.deactivationTimeIsSet()) j["deactivationTime"] = o.m_DeactivationTime;
-  if (o.accessTypeIsSet()) j["accessType"] = o.m_AccessType;
-  if (o.ratTypeIsSet()) j["ratType"] = o.m_RatType;
+  if (o.activationTimeIsSet())
+    j["activationTime"] = o.m_ActivationTime;
+  if (o.deactivationTimeIsSet())
+    j["deactivationTime"] = o.m_DeactivationTime;
+  if (o.accessTypeIsSet())
+    j["accessType"] = o.m_AccessType;
+  if (o.ratTypeIsSet())
+    j["ratType"] = o.m_RatType;
 }
 
-void from_json(const nlohmann::json& j, ConditionData& o) {
+void from_json(const nlohmann::json &j, ConditionData &o) {
   j.at("condId").get_to(o.m_CondId);
   if (j.find("activationTime") != j.end()) {
     j.at("activationTime").get_to(o.m_ActivationTime);
@@ -107,63 +111,43 @@ void from_json(const nlohmann::json& j, ConditionData& o) {
   }
 }
 
-std::string ConditionData::getCondId() const {
-  return m_CondId;
-}
-void ConditionData::setCondId(std::string const& value) {
-  m_CondId = value;
-}
+std::string ConditionData::getCondId() const { return m_CondId; }
+void ConditionData::setCondId(std::string const &value) { m_CondId = value; }
 std::string ConditionData::getActivationTime() const {
   return m_ActivationTime;
 }
-void ConditionData::setActivationTime(std::string const& value) {
-  m_ActivationTime      = value;
+void ConditionData::setActivationTime(std::string const &value) {
+  m_ActivationTime = value;
   m_ActivationTimeIsSet = true;
 }
 bool ConditionData::activationTimeIsSet() const {
   return m_ActivationTimeIsSet;
 }
-void ConditionData::unsetActivationTime() {
-  m_ActivationTimeIsSet = false;
-}
+void ConditionData::unsetActivationTime() { m_ActivationTimeIsSet = false; }
 std::string ConditionData::getDeactivationTime() const {
   return m_DeactivationTime;
 }
-void ConditionData::setDeactivationTime(std::string const& value) {
-  m_DeactivationTime      = value;
+void ConditionData::setDeactivationTime(std::string const &value) {
+  m_DeactivationTime = value;
   m_DeactivationTimeIsSet = true;
 }
 bool ConditionData::deactivationTimeIsSet() const {
   return m_DeactivationTimeIsSet;
 }
-void ConditionData::unsetDeactivationTime() {
-  m_DeactivationTimeIsSet = false;
-}
-AccessType ConditionData::getAccessType() const {
-  return m_AccessType;
-}
-void ConditionData::setAccessType(AccessType const& value) {
-  m_AccessType      = value;
+void ConditionData::unsetDeactivationTime() { m_DeactivationTimeIsSet = false; }
+AccessType ConditionData::getAccessType() const { return m_AccessType; }
+void ConditionData::setAccessType(AccessType const &value) {
+  m_AccessType = value;
   m_AccessTypeIsSet = true;
 }
-bool ConditionData::accessTypeIsSet() const {
-  return m_AccessTypeIsSet;
-}
-void ConditionData::unsetAccessType() {
-  m_AccessTypeIsSet = false;
-}
-RatType ConditionData::getRatType() const {
-  return m_RatType;
-}
-void ConditionData::setRatType(RatType const& value) {
-  m_RatType      = value;
+bool ConditionData::accessTypeIsSet() const { return m_AccessTypeIsSet; }
+void ConditionData::unsetAccessType() { m_AccessTypeIsSet = false; }
+RatType ConditionData::getRatType() const { return m_RatType; }
+void ConditionData::setRatType(RatType const &value) {
+  m_RatType = value;
   m_RatTypeIsSet = true;
 }
-bool ConditionData::ratTypeIsSet() const {
-  return m_RatTypeIsSet;
-}
-void ConditionData::unsetRatType() {
-  m_RatTypeIsSet = false;
-}
+bool ConditionData::ratTypeIsSet() const { return m_RatTypeIsSet; }
+void ConditionData::unsetRatType() { m_RatTypeIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

@@ -16,19 +16,19 @@ extern "C" {
 
 namespace oai::ngap {
 class QosFlowListWithDataForwarding {
- public:
+public:
   QosFlowListWithDataForwarding();
   virtual ~QosFlowListWithDataForwarding();
 
-  void set(const std::vector<QosFlowItemWithDataForwarding>& list);
-  void get(std::vector<QosFlowItemWithDataForwarding>& list) const;
+  void set(const std::vector<QosFlowItemWithDataForwarding> &list);
+  void get(std::vector<QosFlowItemWithDataForwarding> &list) const;
 
-  bool decode(const Ngap_QosFlowListWithDataForwarding_t& list);
-  bool encode(Ngap_QosFlowListWithDataForwarding_t& list) const;
+  bool decode(const Ngap_QosFlowListWithDataForwarding_t &list);
+  bool encode(Ngap_QosFlowListWithDataForwarding_t &list) const;
 
- private:
+private:
   std::vector<QosFlowItemWithDataForwarding> m_ItemList;
   constexpr static uint8_t KMaxNoOfQosFlows = 64;
 };
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

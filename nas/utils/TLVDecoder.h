@@ -22,9 +22,8 @@
 
 extern int errorCodeDecoder;
 
-int decode_bstring(
-    bstring* octetstring, const uint16_t pdulen, const uint8_t* const buffer,
-    const uint32_t buflen);
+int decode_bstring(bstring *octetstring, const uint16_t pdulen,
+                   const uint8_t *const buffer, const uint32_t buflen);
 
 bstring dump_bstring_xml(const bstring bstr);
 

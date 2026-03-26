@@ -27,19 +27,19 @@ void CmInfo::validate() const {
   }
 }
 
-bool CmInfo::validate(std::stringstream& msg) const {
+bool CmInfo::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool CmInfo::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool CmInfo::validate(std::stringstream &msg,
+                      const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "CmInfo" : pathPrefix;
 
   return success;
 }
 
-bool CmInfo::operator==(const CmInfo& rhs) const {
+bool CmInfo::operator==(const CmInfo &rhs) const {
   return
 
       (getCmState() == rhs.getCmState()) &&
@@ -49,32 +49,26 @@ bool CmInfo::operator==(const CmInfo& rhs) const {
           ;
 }
 
-bool CmInfo::operator!=(const CmInfo& rhs) const {
-  return !(*this == rhs);
-}
+bool CmInfo::operator!=(const CmInfo &rhs) const { return !(*this == rhs); }
 
-void to_json(nlohmann::json& j, const CmInfo& o) {
-  j               = nlohmann::json();
-  j["cmState"]    = o.m_CmState;
+void to_json(nlohmann::json &j, const CmInfo &o) {
+  j = nlohmann::json();
+  j["cmState"] = o.m_CmState;
   j["accessType"] = o.m_AccessType;
 }
 
-void from_json(const nlohmann::json& j, CmInfo& o) {
+void from_json(const nlohmann::json &j, CmInfo &o) {
   j.at("cmState").get_to(o.m_CmState);
   j.at("accessType").get_to(o.m_AccessType);
 }
 
-CmState CmInfo::getCmState() const {
-  return m_CmState;
-}
-void CmInfo::setCmState(CmState const& value) {
-  m_CmState = value;
-}
+CmState CmInfo::getCmState() const { return m_CmState; }
+void CmInfo::setCmState(CmState const &value) { m_CmState = value; }
 oai::model::common::AccessType CmInfo::getAccessType() const {
   return m_AccessType;
 }
-void CmInfo::setAccessType(oai::model::common::AccessType const& value) {
+void CmInfo::setAccessType(oai::model::common::AccessType const &value) {
   m_AccessType = value;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

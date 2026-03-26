@@ -29,7 +29,7 @@ namespace model {
 ///
 /// </summary>
 class DataSetId {
- public:
+public:
   DataSetId();
   virtual ~DataSetId();
 
@@ -38,14 +38,14 @@ class DataSetId {
   /////////////////////////////////////////////
   /// DataSetId members
 
-  friend void to_json(nlohmann::json& j, const DataSetId& o);
-  friend void from_json(const nlohmann::json& j, DataSetId& o);
+  friend void to_json(nlohmann::json &j, const DataSetId &o);
+  friend void from_json(const nlohmann::json &j, DataSetId &o);
 
- protected:
+protected:
 };
 
-}  // namespace model
-}  // namespace nssf_server
-}  // namespace oai
+} // namespace model
+} // namespace nssf_server
+} // namespace oai
 
 #endif /* DataSetId_H_ */

@@ -19,11 +19,11 @@
 namespace oai::model::common {
 
 ScheduledCommunicationTimeRm::ScheduledCommunicationTimeRm() {
-  m_DaysOfWeekIsSet     = false;
-  m_TimeOfDayStart      = "";
+  m_DaysOfWeekIsSet = false;
+  m_TimeOfDayStart = "";
   m_TimeOfDayStartIsSet = false;
-  m_TimeOfDayEnd        = "";
-  m_TimeOfDayEndIsSet   = false;
+  m_TimeOfDayEnd = "";
+  m_TimeOfDayEndIsSet = false;
 }
 
 void ScheduledCommunicationTimeRm::validate() const {
@@ -33,18 +33,18 @@ void ScheduledCommunicationTimeRm::validate() const {
   }
 }
 
-bool ScheduledCommunicationTimeRm::validate(std::stringstream& msg) const {
+bool ScheduledCommunicationTimeRm::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool ScheduledCommunicationTimeRm::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ScheduledCommunicationTimeRm" : pathPrefix;
 
   if (daysOfWeekIsSet()) {
-    const std::vector<int32_t>& value  = m_DaysOfWeek;
+    const std::vector<int32_t> &value = m_DaysOfWeek;
     const std::string currentValuePath = _pathPrefix + ".daysOfWeek";
 
     if (value.size() < 1) {
@@ -55,10 +55,10 @@ bool ScheduledCommunicationTimeRm::validate(
       success = false;
       msg << currentValuePath << ": must have at most 6 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const int32_t& value : value) {
+      int i = 0;
+      for (const int32_t &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -80,7 +80,7 @@ bool ScheduledCommunicationTimeRm::validate(
 }
 
 bool ScheduledCommunicationTimeRm::operator==(
-    const ScheduledCommunicationTimeRm& rhs) const {
+    const ScheduledCommunicationTimeRm &rhs) const {
   return
 
       ((!daysOfWeekIsSet() && !rhs.daysOfWeekIsSet()) ||
@@ -99,19 +99,21 @@ bool ScheduledCommunicationTimeRm::operator==(
 }
 
 bool ScheduledCommunicationTimeRm::operator!=(
-    const ScheduledCommunicationTimeRm& rhs) const {
+    const ScheduledCommunicationTimeRm &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ScheduledCommunicationTimeRm& o) {
+void to_json(nlohmann::json &j, const ScheduledCommunicationTimeRm &o) {
   j = nlohmann::json();
   if (o.daysOfWeekIsSet() || !o.m_DaysOfWeek.empty())
     j["daysOfWeek"] = o.m_DaysOfWeek;
-  if (o.timeOfDayStartIsSet()) j["timeOfDayStart"] = o.m_TimeOfDayStart;
-  if (o.timeOfDayEndIsSet()) j["timeOfDayEnd"] = o.m_TimeOfDayEnd;
+  if (o.timeOfDayStartIsSet())
+    j["timeOfDayStart"] = o.m_TimeOfDayStart;
+  if (o.timeOfDayEndIsSet())
+    j["timeOfDayEnd"] = o.m_TimeOfDayEnd;
 }
 
-void from_json(const nlohmann::json& j, ScheduledCommunicationTimeRm& o) {
+void from_json(const nlohmann::json &j, ScheduledCommunicationTimeRm &o) {
   if (j.find("daysOfWeek") != j.end()) {
     j.at("daysOfWeek").get_to(o.m_DaysOfWeek);
     o.m_DaysOfWeekIsSet = true;
@@ -131,7 +133,7 @@ std::vector<int32_t> ScheduledCommunicationTimeRm::getDaysOfWeek() const {
 }
 void ScheduledCommunicationTimeRm::setDaysOfWeek(
     std::vector<int32_t> const value) {
-  m_DaysOfWeek      = value;
+  m_DaysOfWeek = value;
   m_DaysOfWeekIsSet = true;
 }
 bool ScheduledCommunicationTimeRm::daysOfWeekIsSet() const {
@@ -143,8 +145,8 @@ void ScheduledCommunicationTimeRm::unsetDaysOfWeek() {
 std::string ScheduledCommunicationTimeRm::getTimeOfDayStart() const {
   return m_TimeOfDayStart;
 }
-void ScheduledCommunicationTimeRm::setTimeOfDayStart(std::string const& value) {
-  m_TimeOfDayStart      = value;
+void ScheduledCommunicationTimeRm::setTimeOfDayStart(std::string const &value) {
+  m_TimeOfDayStart = value;
   m_TimeOfDayStartIsSet = true;
 }
 bool ScheduledCommunicationTimeRm::timeOfDayStartIsSet() const {
@@ -156,8 +158,8 @@ void ScheduledCommunicationTimeRm::unsetTimeOfDayStart() {
 std::string ScheduledCommunicationTimeRm::getTimeOfDayEnd() const {
   return m_TimeOfDayEnd;
 }
-void ScheduledCommunicationTimeRm::setTimeOfDayEnd(std::string const& value) {
-  m_TimeOfDayEnd      = value;
+void ScheduledCommunicationTimeRm::setTimeOfDayEnd(std::string const &value) {
+  m_TimeOfDayEnd = value;
   m_TimeOfDayEndIsSet = true;
 }
 bool ScheduledCommunicationTimeRm::timeOfDayEndIsSet() const {
@@ -167,4 +169,4 @@ void ScheduledCommunicationTimeRm::unsetTimeOfDayEnd() {
   m_TimeOfDayEndIsSet = false;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

@@ -18,9 +18,7 @@
 
 namespace oai::model::lmf {
 
-V2xInformation::V2xInformation() {
-  m_N2Pc5PolIsSet = false;
-}
+V2xInformation::V2xInformation() { m_N2Pc5PolIsSet = false; }
 
 void V2xInformation::validate() const {
   std::stringstream msg;
@@ -29,12 +27,12 @@ void V2xInformation::validate() const {
   }
 }
 
-bool V2xInformation::validate(std::stringstream& msg) const {
+bool V2xInformation::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool V2xInformation::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool V2xInformation::validate(std::stringstream &msg,
+                              const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "V2xInformation" : pathPrefix;
@@ -42,7 +40,7 @@ bool V2xInformation::validate(
   return success;
 }
 
-bool V2xInformation::operator==(const V2xInformation& rhs) const {
+bool V2xInformation::operator==(const V2xInformation &rhs) const {
   return
 
       ((!n2Pc5PolIsSet() && !rhs.n2Pc5PolIsSet()) ||
@@ -52,16 +50,17 @@ bool V2xInformation::operator==(const V2xInformation& rhs) const {
           ;
 }
 
-bool V2xInformation::operator!=(const V2xInformation& rhs) const {
+bool V2xInformation::operator!=(const V2xInformation &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const V2xInformation& o) {
+void to_json(nlohmann::json &j, const V2xInformation &o) {
   j = nlohmann::json();
-  if (o.n2Pc5PolIsSet()) j["n2Pc5Pol"] = o.m_N2Pc5Pol;
+  if (o.n2Pc5PolIsSet())
+    j["n2Pc5Pol"] = o.m_N2Pc5Pol;
 }
 
-void from_json(const nlohmann::json& j, V2xInformation& o) {
+void from_json(const nlohmann::json &j, V2xInformation &o) {
   if (j.find("n2Pc5Pol") != j.end()) {
     j.at("n2Pc5Pol").get_to(o.m_N2Pc5Pol);
     o.m_N2Pc5PolIsSet = true;
@@ -71,15 +70,11 @@ void from_json(const nlohmann::json& j, V2xInformation& o) {
 oai::model::lmf::N2InfoContent V2xInformation::getN2Pc5Pol() const {
   return m_N2Pc5Pol;
 }
-void V2xInformation::setN2Pc5Pol(oai::model::lmf::N2InfoContent const& value) {
-  m_N2Pc5Pol      = value;
+void V2xInformation::setN2Pc5Pol(oai::model::lmf::N2InfoContent const &value) {
+  m_N2Pc5Pol = value;
   m_N2Pc5PolIsSet = true;
 }
-bool V2xInformation::n2Pc5PolIsSet() const {
-  return m_N2Pc5PolIsSet;
-}
-void V2xInformation::unsetN2Pc5Pol() {
-  m_N2Pc5PolIsSet = false;
-}
+bool V2xInformation::n2Pc5PolIsSet() const { return m_N2Pc5PolIsSet; }
+void V2xInformation::unsetN2Pc5Pol() { m_N2Pc5PolIsSet = false; }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

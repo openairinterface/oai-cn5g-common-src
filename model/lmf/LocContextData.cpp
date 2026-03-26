@@ -19,27 +19,27 @@
 namespace oai::model::lmf {
 
 LocContextData::LocContextData() {
-  m_AmfId                     = "";
-  m_LocationQoSIsSet          = false;
-  m_SupportedGADShapesIsSet   = false;
-  m_Supi                      = "";
-  m_SupiIsSet                 = false;
-  m_Gpsi                      = "";
-  m_GpsiIsSet                 = false;
-  m_HgmlcCallBackURI          = "";
-  m_LdrReference              = "";
-  m_PeriodicEventInfoIsSet    = false;
-  m_AreaEventInfoIsSet        = false;
-  m_MotionEventInfoIsSet      = false;
+  m_AmfId = "";
+  m_LocationQoSIsSet = false;
+  m_SupportedGADShapesIsSet = false;
+  m_Supi = "";
+  m_SupiIsSet = false;
+  m_Gpsi = "";
+  m_GpsiIsSet = false;
+  m_HgmlcCallBackURI = "";
+  m_LdrReference = "";
+  m_PeriodicEventInfoIsSet = false;
+  m_AreaEventInfoIsSet = false;
+  m_MotionEventInfoIsSet = false;
   m_EventReportingStatusIsSet = false;
-  m_UeLocationInfoIsSet       = false;
-  m_CIoT5GSOptimisation       = false;
-  m_CIoT5GSOptimisationIsSet  = false;
-  m_EcgiIsSet                 = false;
-  m_NcgiIsSet                 = false;
-  m_GuamiIsSet                = false;
-  m_SupportedFeatures         = "";
-  m_SupportedFeaturesIsSet    = false;
+  m_UeLocationInfoIsSet = false;
+  m_CIoT5GSOptimisation = false;
+  m_CIoT5GSOptimisationIsSet = false;
+  m_EcgiIsSet = false;
+  m_NcgiIsSet = false;
+  m_GuamiIsSet = false;
+  m_SupportedFeatures = "";
+  m_SupportedFeaturesIsSet = false;
 }
 
 void LocContextData::validate() const {
@@ -49,18 +49,18 @@ void LocContextData::validate() const {
   }
 }
 
-bool LocContextData::validate(std::stringstream& msg) const {
+bool LocContextData::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool LocContextData::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool LocContextData::validate(std::stringstream &msg,
+                              const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "LocContextData" : pathPrefix;
 
   if (supportedGADShapesIsSet()) {
-    const std::vector<oai::model::lmf::SupportedGADShapes>& value =
+    const std::vector<oai::model::lmf::SupportedGADShapes> &value =
         m_SupportedGADShapes;
     const std::string currentValuePath = _pathPrefix + ".supportedGADShapes";
 
@@ -68,10 +68,10 @@ bool LocContextData::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::lmf::SupportedGADShapes& value : value) {
+      int i = 0;
+      for (const oai::model::lmf::SupportedGADShapes &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -85,17 +85,17 @@ bool LocContextData::validate(
   }
 
   if (supiIsSet()) {
-    const std::string& value           = m_Supi;
+    const std::string &value = m_Supi;
     const std::string currentValuePath = _pathPrefix + ".supi";
   }
 
   if (gpsiIsSet()) {
-    const std::string& value           = m_Gpsi;
+    const std::string &value = m_Gpsi;
     const std::string currentValuePath = _pathPrefix + ".gpsi";
   }
 
   /* LdrReference */ {
-    const std::string& value           = m_LdrReference;
+    const std::string &value = m_LdrReference;
     const std::string currentValuePath = _pathPrefix + ".ldrReference";
 
     if (value.length() < 2) {
@@ -109,14 +109,14 @@ bool LocContextData::validate(
   }
 
   if (supportedFeaturesIsSet()) {
-    const std::string& value           = m_SupportedFeatures;
+    const std::string &value = m_SupportedFeatures;
     const std::string currentValuePath = _pathPrefix + ".supportedFeatures";
   }
 
   return success;
 }
 
-bool LocContextData::operator==(const LocContextData& rhs) const {
+bool LocContextData::operator==(const LocContextData &rhs) const {
   return
 
       (getAmfId() == rhs.getAmfId()) &&
@@ -183,39 +183,48 @@ bool LocContextData::operator==(const LocContextData& rhs) const {
           ;
 }
 
-bool LocContextData::operator!=(const LocContextData& rhs) const {
+bool LocContextData::operator!=(const LocContextData &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const LocContextData& o) {
-  j          = nlohmann::json();
+void to_json(nlohmann::json &j, const LocContextData &o) {
+  j = nlohmann::json();
   j["amfId"] = o.m_AmfId;
-  if (o.locationQoSIsSet()) j["locationQoS"] = o.m_LocationQoS;
+  if (o.locationQoSIsSet())
+    j["locationQoS"] = o.m_LocationQoS;
   if (o.supportedGADShapesIsSet() || !o.m_SupportedGADShapes.empty())
     j["supportedGADShapes"] = o.m_SupportedGADShapes;
-  if (o.supiIsSet()) j["supi"] = o.m_Supi;
-  if (o.gpsiIsSet()) j["gpsi"] = o.m_Gpsi;
-  j["ldrType"]          = o.m_LdrType;
+  if (o.supiIsSet())
+    j["supi"] = o.m_Supi;
+  if (o.gpsiIsSet())
+    j["gpsi"] = o.m_Gpsi;
+  j["ldrType"] = o.m_LdrType;
   j["hgmlcCallBackURI"] = o.m_HgmlcCallBackURI;
-  j["ldrReference"]     = o.m_LdrReference;
+  j["ldrReference"] = o.m_LdrReference;
   if (o.periodicEventInfoIsSet())
     j["periodicEventInfo"] = o.m_PeriodicEventInfo;
-  if (o.areaEventInfoIsSet()) j["areaEventInfo"] = o.m_AreaEventInfo;
-  if (o.motionEventInfoIsSet()) j["motionEventInfo"] = o.m_MotionEventInfo;
+  if (o.areaEventInfoIsSet())
+    j["areaEventInfo"] = o.m_AreaEventInfo;
+  if (o.motionEventInfoIsSet())
+    j["motionEventInfo"] = o.m_MotionEventInfo;
   j["eventReportMessage"] = o.m_EventReportMessage;
   if (o.eventReportingStatusIsSet())
     j["eventReportingStatus"] = o.m_EventReportingStatus;
-  if (o.ueLocationInfoIsSet()) j["ueLocationInfo"] = o.m_UeLocationInfo;
+  if (o.ueLocationInfoIsSet())
+    j["ueLocationInfo"] = o.m_UeLocationInfo;
   if (o.cIoT5GSOptimisationIsSet())
     j["cIoT5GSOptimisation"] = o.m_CIoT5GSOptimisation;
-  if (o.ecgiIsSet()) j["ecgi"] = o.m_Ecgi;
-  if (o.ncgiIsSet()) j["ncgi"] = o.m_Ncgi;
-  if (o.guamiIsSet()) j["guami"] = o.m_Guami;
+  if (o.ecgiIsSet())
+    j["ecgi"] = o.m_Ecgi;
+  if (o.ncgiIsSet())
+    j["ncgi"] = o.m_Ncgi;
+  if (o.guamiIsSet())
+    j["guami"] = o.m_Guami;
   if (o.supportedFeaturesIsSet())
     j["supportedFeatures"] = o.m_SupportedFeatures;
 }
 
-void from_json(const nlohmann::json& j, LocContextData& o) {
+void from_json(const nlohmann::json &j, LocContextData &o) {
   j.at("amfId").get_to(o.m_AmfId);
   if (j.find("locationQoS") != j.end()) {
     j.at("locationQoS").get_to(o.m_LocationQoS);
@@ -279,32 +288,24 @@ void from_json(const nlohmann::json& j, LocContextData& o) {
   }
 }
 
-std::string LocContextData::getAmfId() const {
-  return m_AmfId;
-}
-void LocContextData::setAmfId(std::string const& value) {
-  m_AmfId = value;
-}
+std::string LocContextData::getAmfId() const { return m_AmfId; }
+void LocContextData::setAmfId(std::string const &value) { m_AmfId = value; }
 oai::model::lmf::LocationQoS LocContextData::getLocationQoS() const {
   return m_LocationQoS;
 }
-void LocContextData::setLocationQoS(oai::model::lmf::LocationQoS const& value) {
-  m_LocationQoS      = value;
+void LocContextData::setLocationQoS(oai::model::lmf::LocationQoS const &value) {
+  m_LocationQoS = value;
   m_LocationQoSIsSet = true;
 }
-bool LocContextData::locationQoSIsSet() const {
-  return m_LocationQoSIsSet;
-}
-void LocContextData::unsetLocationQoS() {
-  m_LocationQoSIsSet = false;
-}
+bool LocContextData::locationQoSIsSet() const { return m_LocationQoSIsSet; }
+void LocContextData::unsetLocationQoS() { m_LocationQoSIsSet = false; }
 std::vector<oai::model::lmf::SupportedGADShapes>
 LocContextData::getSupportedGADShapes() const {
   return m_SupportedGADShapes;
 }
 void LocContextData::setSupportedGADShapes(
-    std::vector<oai::model::lmf::SupportedGADShapes> const& value) {
-  m_SupportedGADShapes      = value;
+    std::vector<oai::model::lmf::SupportedGADShapes> const &value) {
+  m_SupportedGADShapes = value;
   m_SupportedGADShapesIsSet = true;
 }
 bool LocContextData::supportedGADShapesIsSet() const {
@@ -313,57 +314,43 @@ bool LocContextData::supportedGADShapesIsSet() const {
 void LocContextData::unsetSupportedGADShapes() {
   m_SupportedGADShapesIsSet = false;
 }
-std::string LocContextData::getSupi() const {
-  return m_Supi;
-}
-void LocContextData::setSupi(std::string const& value) {
-  m_Supi      = value;
+std::string LocContextData::getSupi() const { return m_Supi; }
+void LocContextData::setSupi(std::string const &value) {
+  m_Supi = value;
   m_SupiIsSet = true;
 }
-bool LocContextData::supiIsSet() const {
-  return m_SupiIsSet;
-}
-void LocContextData::unsetSupi() {
-  m_SupiIsSet = false;
-}
-std::string LocContextData::getGpsi() const {
-  return m_Gpsi;
-}
-void LocContextData::setGpsi(std::string const& value) {
-  m_Gpsi      = value;
+bool LocContextData::supiIsSet() const { return m_SupiIsSet; }
+void LocContextData::unsetSupi() { m_SupiIsSet = false; }
+std::string LocContextData::getGpsi() const { return m_Gpsi; }
+void LocContextData::setGpsi(std::string const &value) {
+  m_Gpsi = value;
   m_GpsiIsSet = true;
 }
-bool LocContextData::gpsiIsSet() const {
-  return m_GpsiIsSet;
-}
-void LocContextData::unsetGpsi() {
-  m_GpsiIsSet = false;
-}
+bool LocContextData::gpsiIsSet() const { return m_GpsiIsSet; }
+void LocContextData::unsetGpsi() { m_GpsiIsSet = false; }
 oai::model::lmf::LdrType LocContextData::getLdrType() const {
   return m_LdrType;
 }
-void LocContextData::setLdrType(oai::model::lmf::LdrType const& value) {
+void LocContextData::setLdrType(oai::model::lmf::LdrType const &value) {
   m_LdrType = value;
 }
 std::string LocContextData::getHgmlcCallBackURI() const {
   return m_HgmlcCallBackURI;
 }
-void LocContextData::setHgmlcCallBackURI(std::string const& value) {
+void LocContextData::setHgmlcCallBackURI(std::string const &value) {
   m_HgmlcCallBackURI = value;
 }
-std::string LocContextData::getLdrReference() const {
-  return m_LdrReference;
-}
-void LocContextData::setLdrReference(std::string const& value) {
+std::string LocContextData::getLdrReference() const { return m_LdrReference; }
+void LocContextData::setLdrReference(std::string const &value) {
   m_LdrReference = value;
 }
-oai::model::lmf::PeriodicEventInfo LocContextData::getPeriodicEventInfo()
-    const {
+oai::model::lmf::PeriodicEventInfo
+LocContextData::getPeriodicEventInfo() const {
   return m_PeriodicEventInfo;
 }
 void LocContextData::setPeriodicEventInfo(
-    oai::model::lmf::PeriodicEventInfo const& value) {
-  m_PeriodicEventInfo      = value;
+    oai::model::lmf::PeriodicEventInfo const &value) {
+  m_PeriodicEventInfo = value;
   m_PeriodicEventInfoIsSet = true;
 }
 bool LocContextData::periodicEventInfoIsSet() const {
@@ -376,45 +363,39 @@ oai::model::lmf::AreaEventInfo LocContextData::getAreaEventInfo() const {
   return m_AreaEventInfo;
 }
 void LocContextData::setAreaEventInfo(
-    oai::model::lmf::AreaEventInfo const& value) {
-  m_AreaEventInfo      = value;
+    oai::model::lmf::AreaEventInfo const &value) {
+  m_AreaEventInfo = value;
   m_AreaEventInfoIsSet = true;
 }
-bool LocContextData::areaEventInfoIsSet() const {
-  return m_AreaEventInfoIsSet;
-}
-void LocContextData::unsetAreaEventInfo() {
-  m_AreaEventInfoIsSet = false;
-}
+bool LocContextData::areaEventInfoIsSet() const { return m_AreaEventInfoIsSet; }
+void LocContextData::unsetAreaEventInfo() { m_AreaEventInfoIsSet = false; }
 oai::model::lmf::MotionEventInfo LocContextData::getMotionEventInfo() const {
   return m_MotionEventInfo;
 }
 void LocContextData::setMotionEventInfo(
-    oai::model::lmf::MotionEventInfo const& value) {
-  m_MotionEventInfo      = value;
+    oai::model::lmf::MotionEventInfo const &value) {
+  m_MotionEventInfo = value;
   m_MotionEventInfoIsSet = true;
 }
 bool LocContextData::motionEventInfoIsSet() const {
   return m_MotionEventInfoIsSet;
 }
-void LocContextData::unsetMotionEventInfo() {
-  m_MotionEventInfoIsSet = false;
-}
-oai::model::lmf::EventReportMessage LocContextData::getEventReportMessage()
-    const {
+void LocContextData::unsetMotionEventInfo() { m_MotionEventInfoIsSet = false; }
+oai::model::lmf::EventReportMessage
+LocContextData::getEventReportMessage() const {
   return m_EventReportMessage;
 }
 void LocContextData::setEventReportMessage(
-    oai::model::lmf::EventReportMessage const& value) {
+    oai::model::lmf::EventReportMessage const &value) {
   m_EventReportMessage = value;
 }
-oai::model::lmf::EventReportingStatus LocContextData::getEventReportingStatus()
-    const {
+oai::model::lmf::EventReportingStatus
+LocContextData::getEventReportingStatus() const {
   return m_EventReportingStatus;
 }
 void LocContextData::setEventReportingStatus(
-    oai::model::lmf::EventReportingStatus const& value) {
-  m_EventReportingStatus      = value;
+    oai::model::lmf::EventReportingStatus const &value) {
+  m_EventReportingStatus = value;
   m_EventReportingStatusIsSet = true;
 }
 bool LocContextData::eventReportingStatusIsSet() const {
@@ -427,21 +408,19 @@ oai::model::lmf::UELocationInfo LocContextData::getUeLocationInfo() const {
   return m_UeLocationInfo;
 }
 void LocContextData::setUeLocationInfo(
-    oai::model::lmf::UELocationInfo const& value) {
-  m_UeLocationInfo      = value;
+    oai::model::lmf::UELocationInfo const &value) {
+  m_UeLocationInfo = value;
   m_UeLocationInfoIsSet = true;
 }
 bool LocContextData::ueLocationInfoIsSet() const {
   return m_UeLocationInfoIsSet;
 }
-void LocContextData::unsetUeLocationInfo() {
-  m_UeLocationInfoIsSet = false;
-}
+void LocContextData::unsetUeLocationInfo() { m_UeLocationInfoIsSet = false; }
 bool LocContextData::isCIoT5GSOptimisation() const {
   return m_CIoT5GSOptimisation;
 }
 void LocContextData::setCIoT5GSOptimisation(bool const value) {
-  m_CIoT5GSOptimisation      = value;
+  m_CIoT5GSOptimisation = value;
   m_CIoT5GSOptimisationIsSet = true;
 }
 bool LocContextData::cIoT5GSOptimisationIsSet() const {
@@ -450,50 +429,32 @@ bool LocContextData::cIoT5GSOptimisationIsSet() const {
 void LocContextData::unsetCIoT5GSOptimisation() {
   m_CIoT5GSOptimisationIsSet = false;
 }
-oai::model::common::Ecgi LocContextData::getEcgi() const {
-  return m_Ecgi;
-}
-void LocContextData::setEcgi(oai::model::common::Ecgi const& value) {
-  m_Ecgi      = value;
+oai::model::common::Ecgi LocContextData::getEcgi() const { return m_Ecgi; }
+void LocContextData::setEcgi(oai::model::common::Ecgi const &value) {
+  m_Ecgi = value;
   m_EcgiIsSet = true;
 }
-bool LocContextData::ecgiIsSet() const {
-  return m_EcgiIsSet;
-}
-void LocContextData::unsetEcgi() {
-  m_EcgiIsSet = false;
-}
-oai::model::common::Ncgi LocContextData::getNcgi() const {
-  return m_Ncgi;
-}
-void LocContextData::setNcgi(oai::model::common::Ncgi const& value) {
-  m_Ncgi      = value;
+bool LocContextData::ecgiIsSet() const { return m_EcgiIsSet; }
+void LocContextData::unsetEcgi() { m_EcgiIsSet = false; }
+oai::model::common::Ncgi LocContextData::getNcgi() const { return m_Ncgi; }
+void LocContextData::setNcgi(oai::model::common::Ncgi const &value) {
+  m_Ncgi = value;
   m_NcgiIsSet = true;
 }
-bool LocContextData::ncgiIsSet() const {
-  return m_NcgiIsSet;
-}
-void LocContextData::unsetNcgi() {
-  m_NcgiIsSet = false;
-}
-oai::model::common::Guami LocContextData::getGuami() const {
-  return m_Guami;
-}
-void LocContextData::setGuami(oai::model::common::Guami const& value) {
-  m_Guami      = value;
+bool LocContextData::ncgiIsSet() const { return m_NcgiIsSet; }
+void LocContextData::unsetNcgi() { m_NcgiIsSet = false; }
+oai::model::common::Guami LocContextData::getGuami() const { return m_Guami; }
+void LocContextData::setGuami(oai::model::common::Guami const &value) {
+  m_Guami = value;
   m_GuamiIsSet = true;
 }
-bool LocContextData::guamiIsSet() const {
-  return m_GuamiIsSet;
-}
-void LocContextData::unsetGuami() {
-  m_GuamiIsSet = false;
-}
+bool LocContextData::guamiIsSet() const { return m_GuamiIsSet; }
+void LocContextData::unsetGuami() { m_GuamiIsSet = false; }
 std::string LocContextData::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
-void LocContextData::setSupportedFeatures(std::string const& value) {
-  m_SupportedFeatures      = value;
+void LocContextData::setSupportedFeatures(std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool LocContextData::supportedFeaturesIsSet() const {
@@ -503,4 +464,4 @@ void LocContextData::unsetSupportedFeatures() {
   m_SupportedFeaturesIsSet = false;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

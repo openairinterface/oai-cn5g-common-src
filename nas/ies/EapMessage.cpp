@@ -22,35 +22,29 @@ EapMessage::EapMessage(uint8_t iei) : Type6NasIe(iei), eap_() {
 }
 
 //------------------------------------------------------------------------------
-EapMessage::EapMessage(uint8_t iei, const bstring& eap) : Type6NasIe(iei) {
+EapMessage::EapMessage(uint8_t iei, const bstring &eap) : Type6NasIe(iei) {
   eap_ = bstrcpy(eap);
-  SetLengthIndicator(
-      (blength(eap_) > kEapMessageContentMinimumLength) ?
-          blength(eap_) :
-          kEapMessageContentMinimumLength);
+  SetLengthIndicator((blength(eap_) > kEapMessageContentMinimumLength)
+                         ? blength(eap_)
+                         : kEapMessageContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
-EapMessage::~EapMessage() {
-  eap_ = nullptr;
-}
+EapMessage::~EapMessage() { eap_ = nullptr; }
 
 //------------------------------------------------------------------------------
-void EapMessage::SetValue(const bstring& eap) {
+void EapMessage::SetValue(const bstring &eap) {
   eap_ = bstrcpy(eap);
-  SetLengthIndicator(
-      (blength(eap_) > kEapMessageContentMinimumLength) ?
-          blength(eap_) :
-          kEapMessageContentMinimumLength);
+  SetLengthIndicator((blength(eap_) > kEapMessageContentMinimumLength)
+                         ? blength(eap_)
+                         : kEapMessageContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
-void EapMessage::GetValue(bstring& eap) const {
-  eap = bstrcpy(eap_);
-}
+void EapMessage::GetValue(bstring &eap) const { eap = bstrcpy(eap_); }
 
 //------------------------------------------------------------------------------
-int EapMessage::Encode(uint8_t* buf, int len) const {
+int EapMessage::Encode(uint8_t *buf, int len) const {
   oai::logger::logger_common::nas().debug("Encoding %s", GetIeName().c_str());
 
   int encoded_size = 0;
@@ -58,7 +52,8 @@ int EapMessage::Encode(uint8_t* buf, int len) const {
   int len_pos = 0;
   int encoded_header_size =
       Type6NasIe::Encode(buf + encoded_size, len, len_pos);
-  if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
+  if (encoded_header_size == KEncodeDecodeError)
+    return KEncodeDecodeError;
   encoded_size += encoded_header_size;
 
   // Value
@@ -69,20 +64,21 @@ int EapMessage::Encode(uint8_t* buf, int len) const {
   int encoded_len_ie = 0;
   ENCODE_U16(buf + len_pos, encoded_size - GetHeaderLength(), encoded_len_ie);
 
-  oai::logger::logger_common::nas().debug(
-      "Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
+  oai::logger::logger_common::nas().debug("Encoded %s, len (%d)",
+                                          GetIeName().c_str(), encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
-int EapMessage::Decode(const uint8_t* const buf, int len, bool is_iei) {
+int EapMessage::Decode(const uint8_t *const buf, int len, bool is_iei) {
   oai::logger::logger_common::nas().debug("Decoding %s", GetIeName().c_str());
   int decoded_size = 0;
 
   // IEI and Length
-  uint16_t ie_len         = 0;
+  uint16_t ie_len = 0;
   int decoded_header_size = Type6NasIe::Decode(buf + decoded_size, len, is_iei);
-  if (decoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
+  if (decoded_header_size == KEncodeDecodeError)
+    return KEncodeDecodeError;
   decoded_size += decoded_header_size;
   ie_len = GetLengthIndicator();
 
@@ -96,10 +92,10 @@ int EapMessage::Decode(const uint8_t* const buf, int len, bool is_iei) {
   decoded_size += ie_len;
   for (int i = 0; i < ie_len; i++) {
     oai::logger::logger_common::nas().debug(
-        "Decoded NasMessageContainer value 0x%x", (uint8_t) eap_->data[i]);
+        "Decoded NasMessageContainer value 0x%x", (uint8_t)eap_->data[i]);
   }
 
-  oai::logger::logger_common::nas().debug(
-      "Decoded %s (len %d)", GetIeName().c_str(), decoded_size);
+  oai::logger::logger_common::nas().debug("Decoded %s (len %d)",
+                                          GetIeName().c_str(), decoded_size);
   return decoded_size;
 }

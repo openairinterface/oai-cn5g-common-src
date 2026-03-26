@@ -19,17 +19,17 @@
 namespace oai::model::pcf {
 
 PacketFilterInfo::PacketFilterInfo() {
-  m_PackFiltId           = "";
-  m_PackFiltIdIsSet      = false;
-  m_PackFiltCont         = "";
-  m_PackFiltContIsSet    = false;
-  m_TosTrafficClass      = "";
+  m_PackFiltId = "";
+  m_PackFiltIdIsSet = false;
+  m_PackFiltCont = "";
+  m_PackFiltContIsSet = false;
+  m_TosTrafficClass = "";
   m_TosTrafficClassIsSet = false;
-  m_Spi                  = "";
-  m_SpiIsSet             = false;
-  m_FlowLabel            = "";
-  m_FlowLabelIsSet       = false;
-  m_FlowDirectionIsSet   = false;
+  m_Spi = "";
+  m_SpiIsSet = false;
+  m_FlowLabel = "";
+  m_FlowLabelIsSet = false;
+  m_FlowDirectionIsSet = false;
 }
 
 void PacketFilterInfo::validate() const {
@@ -39,12 +39,12 @@ void PacketFilterInfo::validate() const {
   }
 }
 
-bool PacketFilterInfo::validate(std::stringstream& msg) const {
+bool PacketFilterInfo::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool PacketFilterInfo::validate(
-    std::stringstream& /* msg */, const std::string& /* pathPrefix */) const {
+bool PacketFilterInfo::validate(std::stringstream & /* msg */,
+                                const std::string & /* pathPrefix */) const {
   bool success = true;
   /*
   const std::string _pathPrefix =
@@ -53,7 +53,7 @@ bool PacketFilterInfo::validate(
   return success;
 }
 
-bool PacketFilterInfo::operator==(const PacketFilterInfo& rhs) const {
+bool PacketFilterInfo::operator==(const PacketFilterInfo &rhs) const {
   return
 
       ((!packFiltIdIsSet() && !rhs.packFiltIdIsSet()) ||
@@ -82,21 +82,27 @@ bool PacketFilterInfo::operator==(const PacketFilterInfo& rhs) const {
           ;
 }
 
-bool PacketFilterInfo::operator!=(const PacketFilterInfo& rhs) const {
+bool PacketFilterInfo::operator!=(const PacketFilterInfo &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PacketFilterInfo& o) {
+void to_json(nlohmann::json &j, const PacketFilterInfo &o) {
   j = nlohmann::json();
-  if (o.packFiltIdIsSet()) j["packFiltId"] = o.m_PackFiltId;
-  if (o.packFiltContIsSet()) j["packFiltCont"] = o.m_PackFiltCont;
-  if (o.tosTrafficClassIsSet()) j["tosTrafficClass"] = o.m_TosTrafficClass;
-  if (o.spiIsSet()) j["spi"] = o.m_Spi;
-  if (o.flowLabelIsSet()) j["flowLabel"] = o.m_FlowLabel;
-  if (o.flowDirectionIsSet()) j["flowDirection"] = o.m_FlowDirection;
+  if (o.packFiltIdIsSet())
+    j["packFiltId"] = o.m_PackFiltId;
+  if (o.packFiltContIsSet())
+    j["packFiltCont"] = o.m_PackFiltCont;
+  if (o.tosTrafficClassIsSet())
+    j["tosTrafficClass"] = o.m_TosTrafficClass;
+  if (o.spiIsSet())
+    j["spi"] = o.m_Spi;
+  if (o.flowLabelIsSet())
+    j["flowLabel"] = o.m_FlowLabel;
+  if (o.flowDirectionIsSet())
+    j["flowDirection"] = o.m_FlowDirection;
 }
 
-void from_json(const nlohmann::json& j, PacketFilterInfo& o) {
+void from_json(const nlohmann::json &j, PacketFilterInfo &o) {
   if (j.find("packFiltId") != j.end()) {
     j.at("packFiltId").get_to(o.m_PackFiltId);
     o.m_PackFiltIdIsSet = true;
@@ -123,37 +129,25 @@ void from_json(const nlohmann::json& j, PacketFilterInfo& o) {
   }
 }
 
-std::string PacketFilterInfo::getPackFiltId() const {
-  return m_PackFiltId;
-}
-void PacketFilterInfo::setPackFiltId(std::string const& value) {
-  m_PackFiltId      = value;
+std::string PacketFilterInfo::getPackFiltId() const { return m_PackFiltId; }
+void PacketFilterInfo::setPackFiltId(std::string const &value) {
+  m_PackFiltId = value;
   m_PackFiltIdIsSet = true;
 }
-bool PacketFilterInfo::packFiltIdIsSet() const {
-  return m_PackFiltIdIsSet;
-}
-void PacketFilterInfo::unsetPackFiltId() {
-  m_PackFiltIdIsSet = false;
-}
-std::string PacketFilterInfo::getPackFiltCont() const {
-  return m_PackFiltCont;
-}
-void PacketFilterInfo::setPackFiltCont(std::string const& value) {
-  m_PackFiltCont      = value;
+bool PacketFilterInfo::packFiltIdIsSet() const { return m_PackFiltIdIsSet; }
+void PacketFilterInfo::unsetPackFiltId() { m_PackFiltIdIsSet = false; }
+std::string PacketFilterInfo::getPackFiltCont() const { return m_PackFiltCont; }
+void PacketFilterInfo::setPackFiltCont(std::string const &value) {
+  m_PackFiltCont = value;
   m_PackFiltContIsSet = true;
 }
-bool PacketFilterInfo::packFiltContIsSet() const {
-  return m_PackFiltContIsSet;
-}
-void PacketFilterInfo::unsetPackFiltCont() {
-  m_PackFiltContIsSet = false;
-}
+bool PacketFilterInfo::packFiltContIsSet() const { return m_PackFiltContIsSet; }
+void PacketFilterInfo::unsetPackFiltCont() { m_PackFiltContIsSet = false; }
 std::string PacketFilterInfo::getTosTrafficClass() const {
   return m_TosTrafficClass;
 }
-void PacketFilterInfo::setTosTrafficClass(std::string const& value) {
-  m_TosTrafficClass      = value;
+void PacketFilterInfo::setTosTrafficClass(std::string const &value) {
+  m_TosTrafficClass = value;
   m_TosTrafficClassIsSet = true;
 }
 bool PacketFilterInfo::tosTrafficClassIsSet() const {
@@ -162,45 +156,31 @@ bool PacketFilterInfo::tosTrafficClassIsSet() const {
 void PacketFilterInfo::unsetTosTrafficClass() {
   m_TosTrafficClassIsSet = false;
 }
-std::string PacketFilterInfo::getSpi() const {
-  return m_Spi;
-}
-void PacketFilterInfo::setSpi(std::string const& value) {
-  m_Spi      = value;
+std::string PacketFilterInfo::getSpi() const { return m_Spi; }
+void PacketFilterInfo::setSpi(std::string const &value) {
+  m_Spi = value;
   m_SpiIsSet = true;
 }
-bool PacketFilterInfo::spiIsSet() const {
-  return m_SpiIsSet;
-}
-void PacketFilterInfo::unsetSpi() {
-  m_SpiIsSet = false;
-}
-std::string PacketFilterInfo::getFlowLabel() const {
-  return m_FlowLabel;
-}
-void PacketFilterInfo::setFlowLabel(std::string const& value) {
-  m_FlowLabel      = value;
+bool PacketFilterInfo::spiIsSet() const { return m_SpiIsSet; }
+void PacketFilterInfo::unsetSpi() { m_SpiIsSet = false; }
+std::string PacketFilterInfo::getFlowLabel() const { return m_FlowLabel; }
+void PacketFilterInfo::setFlowLabel(std::string const &value) {
+  m_FlowLabel = value;
   m_FlowLabelIsSet = true;
 }
-bool PacketFilterInfo::flowLabelIsSet() const {
-  return m_FlowLabelIsSet;
-}
-void PacketFilterInfo::unsetFlowLabel() {
-  m_FlowLabelIsSet = false;
-}
+bool PacketFilterInfo::flowLabelIsSet() const { return m_FlowLabelIsSet; }
+void PacketFilterInfo::unsetFlowLabel() { m_FlowLabelIsSet = false; }
 oai::model::pcf::FlowDirection PacketFilterInfo::getFlowDirection() const {
   return m_FlowDirection;
 }
 void PacketFilterInfo::setFlowDirection(
-    oai::model::pcf::FlowDirection const& value) {
-  m_FlowDirection      = value;
+    oai::model::pcf::FlowDirection const &value) {
+  m_FlowDirection = value;
   m_FlowDirectionIsSet = true;
 }
 bool PacketFilterInfo::flowDirectionIsSet() const {
   return m_FlowDirectionIsSet;
 }
-void PacketFilterInfo::unsetFlowDirection() {
-  m_FlowDirectionIsSet = false;
-}
+void PacketFilterInfo::unsetFlowDirection() { m_FlowDirectionIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

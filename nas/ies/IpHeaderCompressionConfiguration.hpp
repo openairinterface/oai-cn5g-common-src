@@ -10,7 +10,7 @@
 constexpr uint8_t kIpHeaderCompressionConfigurationMinimumLength = 5;
 constexpr uint8_t kIpHeaderCompressionConfigurationContentMinimumLength =
     kIpHeaderCompressionConfigurationMinimumLength -
-    2;  // Minimum length - 2 octets for IEI/Length
+    2; // Minimum length - 2 octets for IEI/Length
 constexpr uint16_t kIpHeaderCompressionConfigurationMaximumLength = 257;
 constexpr auto kIpHeaderCompressionConfigurationIeName =
     "IP Header Compression Configuration";
@@ -18,13 +18,13 @@ constexpr auto kIpHeaderCompressionConfigurationIeName =
 namespace oai::nas {
 
 class IpHeaderCompressionConfiguration : public Type4NasIe {
- public:
+public:
   IpHeaderCompressionConfiguration();
   IpHeaderCompressionConfiguration(uint8_t iei);
   virtual ~IpHeaderCompressionConfiguration();
 
-  int Encode(uint8_t* buf, int len) const override;
-  int Decode(const uint8_t* const buf, int len, bool is_iei = true) override;
+  int Encode(uint8_t *buf, int len) const override;
+  int Decode(const uint8_t *const buf, int len, bool is_iei = true) override;
 
   static std::string GetIeName() {
     return kIpHeaderCompressionConfigurationIeName;
@@ -38,13 +38,13 @@ class IpHeaderCompressionConfiguration : public Type4NasIe {
 
   // TODO: Getter/setter for the rest
 
- private:
+private:
   uint8_t octet3_;
-  uint16_t max_cid_;                                       // octet4, octet5
-  std::optional<uint8_t> _context_setup_parameters_type_;  // octet 6
-  bstring context_setup_parameters_container_;             // octet 7-n
+  uint16_t max_cid_;                                      // octet4, octet5
+  std::optional<uint8_t> _context_setup_parameters_type_; // octet 6
+  bstring context_setup_parameters_container_;            // octet 7-n
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

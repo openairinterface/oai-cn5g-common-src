@@ -3,9 +3,9 @@
  * All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
+#include <asn_SEQUENCE_OF.h>
 #include <asn_internal.h>
 #include <constr_SEQUENCE_OF.h>
-#include <asn_SEQUENCE_OF.h>
 
 asn_TYPE_operation_t asn_OP_SEQUENCE_OF = {
     SEQUENCE_OF_free,
@@ -63,10 +63,10 @@ asn_TYPE_operation_t asn_OP_SEQUENCE_OF = {
     0  /* Use generic outmost tag fetcher */
 };
 
-int SEQUENCE_OF_compare(
-    const asn_TYPE_descriptor_t* td, const void* aptr, const void* bptr) {
-  const asn_anonymous_sequence_* a = _A_CSEQUENCE_FROM_VOID(aptr);
-  const asn_anonymous_sequence_* b = _A_CSEQUENCE_FROM_VOID(bptr);
+int SEQUENCE_OF_compare(const asn_TYPE_descriptor_t *td, const void *aptr,
+                        const void *bptr) {
+  const asn_anonymous_sequence_ *a = _A_CSEQUENCE_FROM_VOID(aptr);
+  const asn_anonymous_sequence_ *b = _A_CSEQUENCE_FROM_VOID(bptr);
   ssize_t idx;
 
   if (a && b) {
@@ -74,12 +74,14 @@ int SEQUENCE_OF_compare(
     for (idx = 0; idx < common_length; idx++) {
       int ret = td->elements->type->op->compare_struct(
           td->elements->type, a->array[idx], b->array[idx]);
-      if (ret) return ret;
+      if (ret)
+        return ret;
     }
 
     if (idx < b->count) /* more elements in b */
       return -1;        /* a is shorter, so put it first */
-    if (idx < a->count) return 1;
+    if (idx < a->count)
+      return 1;
 
   } else if (!a) {
     return -1;

@@ -28,7 +28,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class _5GsUserState {
- public:
+public:
   _5GsUserState();
   virtual ~_5GsUserState() = default;
 
@@ -42,16 +42,16 @@ class _5GsUserState {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const _5GsUserState& rhs) const;
-  bool operator!=(const _5GsUserState& rhs) const;
+  bool operator==(const _5GsUserState &rhs) const;
+  bool operator!=(const _5GsUserState &rhs) const;
 
   /////////////////////////////////////////////
   /// 5GsUserState members
@@ -60,15 +60,15 @@ class _5GsUserState {
   void setValue(_5GsUserState_anyOf value);
   _5GsUserState_anyOf::e_5GsUserState_anyOf getEnumValue() const;
   void setEnumValue(_5GsUserState_anyOf::e_5GsUserState_anyOf value);
-  friend void to_json(nlohmann::json& j, const _5GsUserState& o);
-  friend void from_json(const nlohmann::json& j, _5GsUserState& o);
-  friend void to_json(nlohmann::json& j, const _5GsUserState_anyOf& o);
-  friend void from_json(const nlohmann::json& j, _5GsUserState_anyOf& o);
+  friend void to_json(nlohmann::json &j, const _5GsUserState &o);
+  friend void from_json(const nlohmann::json &j, _5GsUserState &o);
+  friend void to_json(nlohmann::json &j, const _5GsUserState_anyOf &o);
+  friend void from_json(const nlohmann::json &j, _5GsUserState_anyOf &o);
 
- protected:
+protected:
   _5GsUserState_anyOf m_value;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* 5GsUserState_H_ */

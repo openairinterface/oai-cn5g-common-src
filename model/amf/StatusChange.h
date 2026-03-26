@@ -27,7 +27,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class StatusChange {
- public:
+public:
   StatusChange();
   virtual ~StatusChange();
 
@@ -36,12 +36,12 @@ class StatusChange {
   /////////////////////////////////////////////
   /// StatusChange members
 
-  friend void to_json(nlohmann::json& j, const StatusChange& o);
-  friend void from_json(const nlohmann::json& j, StatusChange& o);
+  friend void to_json(nlohmann::json &j, const StatusChange &o);
+  friend void from_json(const nlohmann::json &j, StatusChange &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* StatusChange_H_ */

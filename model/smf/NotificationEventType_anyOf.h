@@ -27,7 +27,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class NotificationEventType_anyOf {
- public:
+public:
   NotificationEventType_anyOf();
   virtual ~NotificationEventType_anyOf() = default;
 
@@ -51,34 +51,34 @@ class NotificationEventType_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const NotificationEventType_anyOf& rhs) const;
-  bool operator!=(const NotificationEventType_anyOf& rhs) const;
+  bool operator==(const NotificationEventType_anyOf &rhs) const;
+  bool operator!=(const NotificationEventType_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// NotificationEventType_anyOf members
 
   NotificationEventType_anyOf::eNotificationEventType_anyOf getValue() const;
-  void setValue(
-      NotificationEventType_anyOf::eNotificationEventType_anyOf value);
+  void
+  setValue(NotificationEventType_anyOf::eNotificationEventType_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const NotificationEventType_anyOf& o);
-  friend void from_json(
-      const nlohmann::json& j, NotificationEventType_anyOf& o);
+  friend void to_json(nlohmann::json &j, const NotificationEventType_anyOf &o);
+  friend void from_json(const nlohmann::json &j,
+                        NotificationEventType_anyOf &o);
 
- protected:
+protected:
   NotificationEventType_anyOf::eNotificationEventType_anyOf m_value =
       NotificationEventType_anyOf::eNotificationEventType_anyOf::
           INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* NotificationEventType_anyOf_H_ */

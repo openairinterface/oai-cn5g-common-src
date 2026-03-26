@@ -27,7 +27,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class N2InformationClass_anyOf {
- public:
+public:
   N2InformationClass_anyOf();
   virtual ~N2InformationClass_anyOf() = default;
 
@@ -55,16 +55,16 @@ class N2InformationClass_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const N2InformationClass_anyOf& rhs) const;
-  bool operator!=(const N2InformationClass_anyOf& rhs) const;
+  bool operator==(const N2InformationClass_anyOf &rhs) const;
+  bool operator!=(const N2InformationClass_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// N2InformationClass_anyOf members
@@ -72,15 +72,15 @@ class N2InformationClass_anyOf {
   N2InformationClass_anyOf::eN2InformationClass_anyOf getValue() const;
   void setValue(N2InformationClass_anyOf::eN2InformationClass_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const N2InformationClass_anyOf& o);
-  friend void from_json(const nlohmann::json& j, N2InformationClass_anyOf& o);
+  friend void to_json(nlohmann::json &j, const N2InformationClass_anyOf &o);
+  friend void from_json(const nlohmann::json &j, N2InformationClass_anyOf &o);
 
- protected:
+protected:
   N2InformationClass_anyOf::eN2InformationClass_anyOf m_value =
       N2InformationClass_anyOf::eN2InformationClass_anyOf::
           INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* N2InformationClass_anyOf_H_ */

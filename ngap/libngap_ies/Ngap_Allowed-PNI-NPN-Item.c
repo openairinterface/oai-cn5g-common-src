@@ -29,8 +29,7 @@ static asn_per_constraints_t asn_PER_type_Ngap_pNI_NPN_restricted_constr_3
           !defined(ASN_DISABLE_APER_SUPPORT) */
 static const asn_INTEGER_enum_map_t
     asn_MAP_Ngap_pNI_NPN_restricted_value2enum_3[] = {
-        {0, 10, "restricted"},
-        {1, 14, "not-restricted"}
+        {0, 10, "restricted"}, {1, 14, "not-restricted"}
         /* This list is extensible */
 };
 static const unsigned int asn_MAP_Ngap_pNI_NPN_restricted_enum2value_3[] = {
@@ -153,7 +152,7 @@ asn_TYPE_member_t asn_MBR_Ngap_Allowed_PNI_NPN_Item_1[] = {
      0, /* No default value */
      "iE-Extensions"},
 };
-static const int asn_MAP_Ngap_Allowed_PNI_NPN_Item_oms_1[]            = {3};
+static const int asn_MAP_Ngap_Allowed_PNI_NPN_Item_oms_1[] = {3};
 static const ber_tlv_tag_t asn_DEF_Ngap_Allowed_PNI_NPN_Item_tags_1[] = {
     (ASN_TAG_CLASS_UNIVERSAL | (16 << 2))};
 static const asn_TYPE_tag2member_t

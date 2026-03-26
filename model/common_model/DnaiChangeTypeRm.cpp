@@ -20,8 +20,8 @@ namespace oai::model::common {
 
 DnaiChangeTypeRm::DnaiChangeTypeRm() {}
 
-bool DnaiChangeTypeRm::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool DnaiChangeTypeRm::validate(std::stringstream &msg,
+                                const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "DnaiChangeTypeRm" : pathPrefix;
@@ -29,7 +29,7 @@ bool DnaiChangeTypeRm::validate(
   return success;
 }
 
-void to_json(nlohmann::json& j, const DnaiChangeTypeRm& o) {
+void to_json(nlohmann::json &j, const DnaiChangeTypeRm &o) {
   j = nlohmann::json();
   if (o.m_value.getValue() == DnaiChangeType_anyOf::eDnaiChangeType_anyOf::
                                   INVALID_VALUE_OPENAPI_GENERATED) {
@@ -39,7 +39,7 @@ void to_json(nlohmann::json& j, const DnaiChangeTypeRm& o) {
   }
 }
 
-void from_json(const nlohmann::json& j, DnaiChangeTypeRm& o) {
+void from_json(const nlohmann::json &j, DnaiChangeTypeRm &o) {
   if (j.is_null()) {
     o.m_value.setValue(DnaiChangeType_anyOf::eDnaiChangeType_anyOf::
                            INVALID_VALUE_OPENAPI_GENERATED);
@@ -48,4 +48,4 @@ void from_json(const nlohmann::json& j, DnaiChangeTypeRm& o) {
   }
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

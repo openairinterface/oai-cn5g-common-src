@@ -19,8 +19,8 @@
 #ifndef EpsBearerInfo_H_
 #define EpsBearerInfo_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::smf {
 
@@ -28,7 +28,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class EpsBearerInfo {
- public:
+public:
   EpsBearerInfo();
   virtual ~EpsBearerInfo();
 
@@ -46,17 +46,17 @@ class EpsBearerInfo {
   ///
   /// </summary>
   std::string getPgwS8uFteid() const;
-  void setPgwS8uFteid(std::string const& value);
+  void setPgwS8uFteid(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getBearerLevelQoS() const;
-  void setBearerLevelQoS(std::string const& value);
+  void setBearerLevelQoS(std::string const &value);
 
-  friend void to_json(nlohmann::json& j, const EpsBearerInfo& o);
-  friend void from_json(const nlohmann::json& j, EpsBearerInfo& o);
+  friend void to_json(nlohmann::json &j, const EpsBearerInfo &o);
+  friend void from_json(const nlohmann::json &j, EpsBearerInfo &o);
 
- protected:
+protected:
   int32_t m_Ebi;
 
   std::string m_PgwS8uFteid;
@@ -64,6 +64,6 @@ class EpsBearerInfo {
   std::string m_BearerLevelQoS;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* EpsBearerInfo_H_ */

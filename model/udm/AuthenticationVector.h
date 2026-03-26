@@ -35,7 +35,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class AuthenticationVector {
- public:
+public:
   AuthenticationVector();
   virtual ~AuthenticationVector();
 
@@ -48,47 +48,47 @@ class AuthenticationVector {
   ///
   /// </summary>
   AvType getAvType() const;
-  void setAvType(AvType const& value);
+  void setAvType(AvType const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getRand() const;
-  void setRand(std::string const& value);
+  void setRand(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getXres() const;
-  void setXres(std::string const& value);
+  void setXres(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getAutn() const;
-  void setAutn(std::string const& value);
+  void setAutn(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getCkPrime() const;
-  void setCkPrime(std::string const& value);
+  void setCkPrime(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getIkPrime() const;
-  void setIkPrime(std::string const& value);
+  void setIkPrime(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getXresStar() const;
-  void setXresStar(std::string const& value);
+  void setXresStar(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getKausf() const;
-  void setKausf(std::string const& value);
+  void setKausf(std::string const &value);
 
-  friend void to_json(nlohmann::json& j, const AuthenticationVector& o);
-  friend void from_json(const nlohmann::json& j, AuthenticationVector& o);
+  friend void to_json(nlohmann::json &j, const AuthenticationVector &o);
+  friend void from_json(const nlohmann::json &j, AuthenticationVector &o);
 
- protected:
+protected:
   AvType m_AvType;
 
   std::string m_Rand;
@@ -106,6 +106,6 @@ class AuthenticationVector {
   std::string m_Kausf;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* AuthenticationVector_H_ */

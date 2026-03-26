@@ -27,28 +27,28 @@ void AreaOfValidity::validate() const {
   }
 }
 
-bool AreaOfValidity::validate(std::stringstream& msg) const {
+bool AreaOfValidity::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AreaOfValidity::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool AreaOfValidity::validate(std::stringstream &msg,
+                              const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AreaOfValidity" : pathPrefix;
 
   /* TaiList */ {
-    const std::vector<oai::model::common::Tai>& value = m_TaiList;
+    const std::vector<oai::model::common::Tai> &value = m_TaiList;
     const std::string currentValuePath = _pathPrefix + ".taiList";
 
     if (value.size() < 0) {
       success = false;
       msg << currentValuePath << ": must have at least 0 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::Tai& value : value) {
+      int i = 0;
+      for (const oai::model::common::Tai &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -62,7 +62,7 @@ bool AreaOfValidity::validate(
   return success;
 }
 
-bool AreaOfValidity::operator==(const AreaOfValidity& rhs) const {
+bool AreaOfValidity::operator==(const AreaOfValidity &rhs) const {
   return
 
       (getTaiList() == rhs.getTaiList())
@@ -70,16 +70,16 @@ bool AreaOfValidity::operator==(const AreaOfValidity& rhs) const {
           ;
 }
 
-bool AreaOfValidity::operator!=(const AreaOfValidity& rhs) const {
+bool AreaOfValidity::operator!=(const AreaOfValidity &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AreaOfValidity& o) {
-  j            = nlohmann::json();
+void to_json(nlohmann::json &j, const AreaOfValidity &o) {
+  j = nlohmann::json();
   j["taiList"] = o.m_TaiList;
 }
 
-void from_json(const nlohmann::json& j, AreaOfValidity& o) {
+void from_json(const nlohmann::json &j, AreaOfValidity &o) {
   j.at("taiList").get_to(o.m_TaiList);
 }
 
@@ -87,8 +87,8 @@ std::vector<oai::model::common::Tai> AreaOfValidity::getTaiList() const {
   return m_TaiList;
 }
 void AreaOfValidity::setTaiList(
-    std::vector<oai::model::common::Tai> const& value) {
+    std::vector<oai::model::common::Tai> const &value) {
   m_TaiList = value;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

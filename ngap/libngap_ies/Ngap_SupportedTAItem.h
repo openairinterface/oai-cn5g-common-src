@@ -12,8 +12,8 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_TAC.h"
 #include "Ngap_BroadcastPLMNList.h"
+#include "Ngap_TAC.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -27,7 +27,7 @@ struct Ngap_ProtocolExtensionContainer;
 typedef struct Ngap_SupportedTAItem {
   Ngap_TAC_t tAC;
   Ngap_BroadcastPLMNList_t broadcastPLMNList;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

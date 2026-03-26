@@ -27,7 +27,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class GeographicalCoordinates {
- public:
+public:
   GeographicalCoordinates();
   virtual ~GeographicalCoordinates() = default;
 
@@ -41,16 +41,16 @@ class GeographicalCoordinates {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const GeographicalCoordinates& rhs) const;
-  bool operator!=(const GeographicalCoordinates& rhs) const;
+  bool operator==(const GeographicalCoordinates &rhs) const;
+  bool operator!=(const GeographicalCoordinates &rhs) const;
 
   /////////////////////////////////////////////
   /// GeographicalCoordinates members
@@ -66,15 +66,15 @@ class GeographicalCoordinates {
   double getLat() const;
   void setLat(double const value);
 
-  friend void to_json(nlohmann::json& j, const GeographicalCoordinates& o);
-  friend void from_json(const nlohmann::json& j, GeographicalCoordinates& o);
+  friend void to_json(nlohmann::json &j, const GeographicalCoordinates &o);
+  friend void from_json(const nlohmann::json &j, GeographicalCoordinates &o);
 
- protected:
+protected:
   double m_Lon;
 
   double m_Lat;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* GeographicalCoordinates_H_ */

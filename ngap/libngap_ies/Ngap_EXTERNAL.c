@@ -11,8 +11,7 @@
 
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 static asn_oer_constraints_t asn_OER_type_Ngap_encoding_constr_5 CC_NOTUSED = {
-    {0, 0},
-    -1};
+    {0, 0}, -1};
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 static asn_per_constraints_t asn_PER_type_Ngap_encoding_constr_5 CC_NOTUSED = {
@@ -91,7 +90,7 @@ static asn_CHOICE_specifics_t asn_SPC_Ngap_encoding_specs_5 = {
     sizeof(struct Ngap_EXTERNAL__encoding),
     offsetof(struct Ngap_EXTERNAL__encoding, _asn_ctx),
     offsetof(struct Ngap_EXTERNAL__encoding, present),
-    sizeof(((struct Ngap_EXTERNAL__encoding*) 0)->present),
+    sizeof(((struct Ngap_EXTERNAL__encoding *)0)->present),
     asn_MAP_Ngap_encoding_tag2el_5,
     3, /* Count of tags in the map */
     0,
@@ -199,7 +198,7 @@ static asn_TYPE_member_t asn_MBR_Ngap_EXTERNAL_1[] = {
      0, /* No default value */
      "encoding"},
 };
-static const int asn_MAP_Ngap_EXTERNAL_oms_1[]            = {0, 1, 2};
+static const int asn_MAP_Ngap_EXTERNAL_oms_1[] = {0, 1, 2};
 static const ber_tlv_tag_t asn_DEF_Ngap_EXTERNAL_tags_1[] = {
     (ASN_TAG_CLASS_UNIVERSAL | (8 << 2)),
     (ASN_TAG_CLASS_UNIVERSAL | (16 << 2))};

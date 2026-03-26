@@ -35,7 +35,7 @@ namespace model {
 ///
 /// </summary>
 class AuthorizedNetworkSliceInfo {
- public:
+public:
   AuthorizedNetworkSliceInfo();
   virtual ~AuthorizedNetworkSliceInfo() = default;
 
@@ -49,16 +49,16 @@ class AuthorizedNetworkSliceInfo {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const AuthorizedNetworkSliceInfo& rhs) const;
-  bool operator!=(const AuthorizedNetworkSliceInfo& rhs) const;
+  bool operator==(const AuthorizedNetworkSliceInfo &rhs) const;
+  bool operator!=(const AuthorizedNetworkSliceInfo &rhs) const;
 
   /////////////////////////////////////////////
   /// AuthorizedNetworkSliceInfo members
@@ -67,93 +67,93 @@ class AuthorizedNetworkSliceInfo {
   ///
   /// </summary>
   std::vector<AllowedNssai> getAllowedNssaiList() const;
-  void setAllowedNssaiList(std::vector<AllowedNssai> const& value);
+  void setAllowedNssaiList(std::vector<AllowedNssai> const &value);
   bool allowedNssaiListIsSet() const;
   void unsetAllowedNssaiList();
   /// <summary>
   ///
   /// </summary>
   std::vector<ConfiguredSnssai> getConfiguredNssai() const;
-  void setConfiguredNssai(std::vector<ConfiguredSnssai> const& value);
+  void setConfiguredNssai(std::vector<ConfiguredSnssai> const &value);
   bool configuredNssaiIsSet() const;
   void unsetConfiguredNssai();
   /// <summary>
   ///
   /// </summary>
   std::string getTargetAmfSet() const;
-  void setTargetAmfSet(std::string const& value);
+  void setTargetAmfSet(std::string const &value);
   bool targetAmfSetIsSet() const;
   void unsetTargetAmfSet();
   /// <summary>
   ///
   /// </summary>
   std::vector<std::string> getCandidateAmfList() const;
-  void setCandidateAmfList(std::vector<std::string> const& value);
+  void setCandidateAmfList(std::vector<std::string> const &value);
   bool candidateAmfListIsSet() const;
   void unsetCandidateAmfList();
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::common::Snssai> getRejectedNssaiInPlmn() const;
-  void setRejectedNssaiInPlmn(
-      std::vector<oai::model::common::Snssai> const& value);
+  void
+  setRejectedNssaiInPlmn(std::vector<oai::model::common::Snssai> const &value);
   bool rejectedNssaiInPlmnIsSet() const;
   void unsetRejectedNssaiInPlmn();
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::common::Snssai> getRejectedNssaiInTa() const;
-  void setRejectedNssaiInTa(
-      std::vector<oai::model::common::Snssai> const& value);
+  void
+  setRejectedNssaiInTa(std::vector<oai::model::common::Snssai> const &value);
   bool rejectedNssaiInTaIsSet() const;
   void unsetRejectedNssaiInTa();
   /// <summary>
   ///
   /// </summary>
   NsiInformation getNsiInformation() const;
-  void setNsiInformation(NsiInformation const& value);
+  void setNsiInformation(NsiInformation const &value);
   bool nsiInformationIsSet() const;
   void unsetNsiInformation();
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
   /// <summary>
   ///
   /// </summary>
   std::string getNrfAmfSet() const;
-  void setNrfAmfSet(std::string const& value);
+  void setNrfAmfSet(std::string const &value);
   bool nrfAmfSetIsSet() const;
   void unsetNrfAmfSet();
   /// <summary>
   ///
   /// </summary>
   std::string getNrfAmfSetNfMgtUri() const;
-  void setNrfAmfSetNfMgtUri(std::string const& value);
+  void setNrfAmfSetNfMgtUri(std::string const &value);
   bool nrfAmfSetNfMgtUriIsSet() const;
   void unsetNrfAmfSetNfMgtUri();
   /// <summary>
   ///
   /// </summary>
   std::string getNrfAmfSetAccessTokenUri() const;
-  void setNrfAmfSetAccessTokenUri(std::string const& value);
+  void setNrfAmfSetAccessTokenUri(std::string const &value);
   bool nrfAmfSetAccessTokenUriIsSet() const;
   void unsetNrfAmfSetAccessTokenUri();
   /// <summary>
   ///
   /// </summary>
   std::string getTargetAmfServiceSet() const;
-  void setTargetAmfServiceSet(std::string const& value);
+  void setTargetAmfServiceSet(std::string const &value);
   bool targetAmfServiceSetIsSet() const;
   void unsetTargetAmfServiceSet();
 
-  friend void to_json(nlohmann::json& j, const AuthorizedNetworkSliceInfo& o);
-  friend void from_json(const nlohmann::json& j, AuthorizedNetworkSliceInfo& o);
+  friend void to_json(nlohmann::json &j, const AuthorizedNetworkSliceInfo &o);
+  friend void from_json(const nlohmann::json &j, AuthorizedNetworkSliceInfo &o);
 
- protected:
+protected:
   std::vector<AllowedNssai> m_AllowedNssaiList;
   bool m_AllowedNssaiListIsSet;
   std::vector<ConfiguredSnssai> m_ConfiguredNssai;
@@ -180,8 +180,8 @@ class AuthorizedNetworkSliceInfo {
   bool m_TargetAmfServiceSetIsSet;
 };
 
-}  // namespace model
-}  // namespace nssf_server
-}  // namespace oai
+} // namespace model
+} // namespace nssf_server
+} // namespace oai
 
 #endif /* AuthorizedNetworkSliceInfo_H_ */

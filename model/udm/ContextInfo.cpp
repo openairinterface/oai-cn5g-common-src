@@ -18,9 +18,7 @@
 
 namespace oai::model::udm {
 
-ContextInfo::ContextInfo() {
-  m_OrigHeadersIsSet = false;
-}
+ContextInfo::ContextInfo() { m_OrigHeadersIsSet = false; }
 
 ContextInfo::~ContextInfo() {}
 
@@ -28,31 +26,27 @@ void ContextInfo::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const ContextInfo& o) {
+void to_json(nlohmann::json &j, const ContextInfo &o) {
   j = nlohmann::json();
   if (o.origHeadersIsSet() || !o.m_OrigHeaders.empty())
     j["origHeaders"] = o.m_OrigHeaders;
 }
 
-void from_json(const nlohmann::json& j, ContextInfo& o) {
+void from_json(const nlohmann::json &j, ContextInfo &o) {
   if (j.find("origHeaders") != j.end()) {
     j.at("origHeaders").get_to(o.m_OrigHeaders);
     o.m_OrigHeadersIsSet = true;
   }
 }
 
-std::vector<std::string>& ContextInfo::getOrigHeaders() {
+std::vector<std::string> &ContextInfo::getOrigHeaders() {
   return m_OrigHeaders;
 }
-void ContextInfo::setOrigHeaders(std::vector<std::string> const& value) {
-  m_OrigHeaders      = value;
+void ContextInfo::setOrigHeaders(std::vector<std::string> const &value) {
+  m_OrigHeaders = value;
   m_OrigHeadersIsSet = true;
 }
-bool ContextInfo::origHeadersIsSet() const {
-  return m_OrigHeadersIsSet;
-}
-void ContextInfo::unsetOrigHeaders() {
-  m_OrigHeadersIsSet = false;
-}
+bool ContextInfo::origHeadersIsSet() const { return m_OrigHeadersIsSet; }
+void ContextInfo::unsetOrigHeaders() { m_OrigHeadersIsSet = false; }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

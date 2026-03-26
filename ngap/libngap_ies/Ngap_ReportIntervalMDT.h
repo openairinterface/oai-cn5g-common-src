@@ -20,19 +20,19 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_ReportIntervalMDT {
-  Ngap_ReportIntervalMDT_ms120   = 0,
-  Ngap_ReportIntervalMDT_ms240   = 1,
-  Ngap_ReportIntervalMDT_ms480   = 2,
-  Ngap_ReportIntervalMDT_ms640   = 3,
-  Ngap_ReportIntervalMDT_ms1024  = 4,
-  Ngap_ReportIntervalMDT_ms2048  = 5,
-  Ngap_ReportIntervalMDT_ms5120  = 6,
+  Ngap_ReportIntervalMDT_ms120 = 0,
+  Ngap_ReportIntervalMDT_ms240 = 1,
+  Ngap_ReportIntervalMDT_ms480 = 2,
+  Ngap_ReportIntervalMDT_ms640 = 3,
+  Ngap_ReportIntervalMDT_ms1024 = 4,
+  Ngap_ReportIntervalMDT_ms2048 = 5,
+  Ngap_ReportIntervalMDT_ms5120 = 6,
   Ngap_ReportIntervalMDT_ms10240 = 7,
-  Ngap_ReportIntervalMDT_min1    = 8,
-  Ngap_ReportIntervalMDT_min6    = 9,
-  Ngap_ReportIntervalMDT_min12   = 10,
-  Ngap_ReportIntervalMDT_min30   = 11,
-  Ngap_ReportIntervalMDT_min60   = 12
+  Ngap_ReportIntervalMDT_min1 = 8,
+  Ngap_ReportIntervalMDT_min6 = 9,
+  Ngap_ReportIntervalMDT_min12 = 10,
+  Ngap_ReportIntervalMDT_min30 = 11,
+  Ngap_ReportIntervalMDT_min60 = 12
 } e_Ngap_ReportIntervalMDT;
 
 /* Ngap_ReportIntervalMDT */

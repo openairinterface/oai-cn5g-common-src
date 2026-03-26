@@ -26,10 +26,8 @@ void DataInd::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const DataInd& o) {
-  j = nlohmann::json();
-}
+void to_json(nlohmann::json &j, const DataInd &o) { j = nlohmann::json(); }
 
-void from_json(const nlohmann::json& j, DataInd& o) {}
+void from_json(const nlohmann::json &j, DataInd &o) {}
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

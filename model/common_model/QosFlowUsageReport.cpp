@@ -19,11 +19,11 @@
 namespace oai::model::common {
 
 QosFlowUsageReport::QosFlowUsageReport() {
-  m_Qfi            = 0;
+  m_Qfi = 0;
   m_StartTimeStamp = "";
-  m_EndTimeStamp   = "";
+  m_EndTimeStamp = "";
   m_DownlinkVolume = 0L;
-  m_UplinkVolume   = 0L;
+  m_UplinkVolume = 0L;
 }
 
 void QosFlowUsageReport::validate() const {
@@ -33,18 +33,18 @@ void QosFlowUsageReport::validate() const {
   }
 }
 
-bool QosFlowUsageReport::validate(std::stringstream& msg) const {
+bool QosFlowUsageReport::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool QosFlowUsageReport::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool QosFlowUsageReport::validate(std::stringstream &msg,
+                                  const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "QosFlowUsageReport" : pathPrefix;
 
   /* Qfi */ {
-    const int32_t& value               = m_Qfi;
+    const int32_t &value = m_Qfi;
     const std::string currentValuePath = _pathPrefix + ".qfi";
 
     if (value < 0) {
@@ -60,7 +60,7 @@ bool QosFlowUsageReport::validate(
   return success;
 }
 
-bool QosFlowUsageReport::operator==(const QosFlowUsageReport& rhs) const {
+bool QosFlowUsageReport::operator==(const QosFlowUsageReport &rhs) const {
   return
 
       (getQfi() == rhs.getQfi()) &&
@@ -76,20 +76,20 @@ bool QosFlowUsageReport::operator==(const QosFlowUsageReport& rhs) const {
           ;
 }
 
-bool QosFlowUsageReport::operator!=(const QosFlowUsageReport& rhs) const {
+bool QosFlowUsageReport::operator!=(const QosFlowUsageReport &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const QosFlowUsageReport& o) {
-  j                   = nlohmann::json();
-  j["qfi"]            = o.m_Qfi;
+void to_json(nlohmann::json &j, const QosFlowUsageReport &o) {
+  j = nlohmann::json();
+  j["qfi"] = o.m_Qfi;
   j["startTimeStamp"] = o.m_StartTimeStamp;
-  j["endTimeStamp"]   = o.m_EndTimeStamp;
+  j["endTimeStamp"] = o.m_EndTimeStamp;
   j["downlinkVolume"] = o.m_DownlinkVolume;
-  j["uplinkVolume"]   = o.m_UplinkVolume;
+  j["uplinkVolume"] = o.m_UplinkVolume;
 }
 
-void from_json(const nlohmann::json& j, QosFlowUsageReport& o) {
+void from_json(const nlohmann::json &j, QosFlowUsageReport &o) {
   j.at("qfi").get_to(o.m_Qfi);
   j.at("startTimeStamp").get_to(o.m_StartTimeStamp);
   j.at("endTimeStamp").get_to(o.m_EndTimeStamp);
@@ -97,22 +97,18 @@ void from_json(const nlohmann::json& j, QosFlowUsageReport& o) {
   j.at("uplinkVolume").get_to(o.m_UplinkVolume);
 }
 
-int32_t QosFlowUsageReport::getQfi() const {
-  return m_Qfi;
-}
-void QosFlowUsageReport::setQfi(int32_t const value) {
-  m_Qfi = value;
-}
+int32_t QosFlowUsageReport::getQfi() const { return m_Qfi; }
+void QosFlowUsageReport::setQfi(int32_t const value) { m_Qfi = value; }
 std::string QosFlowUsageReport::getStartTimeStamp() const {
   return m_StartTimeStamp;
 }
-void QosFlowUsageReport::setStartTimeStamp(std::string const& value) {
+void QosFlowUsageReport::setStartTimeStamp(std::string const &value) {
   m_StartTimeStamp = value;
 }
 std::string QosFlowUsageReport::getEndTimeStamp() const {
   return m_EndTimeStamp;
 }
-void QosFlowUsageReport::setEndTimeStamp(std::string const& value) {
+void QosFlowUsageReport::setEndTimeStamp(std::string const &value) {
   m_EndTimeStamp = value;
 }
 int64_t QosFlowUsageReport::getDownlinkVolume() const {
@@ -121,11 +117,9 @@ int64_t QosFlowUsageReport::getDownlinkVolume() const {
 void QosFlowUsageReport::setDownlinkVolume(int64_t const value) {
   m_DownlinkVolume = value;
 }
-int64_t QosFlowUsageReport::getUplinkVolume() const {
-  return m_UplinkVolume;
-}
+int64_t QosFlowUsageReport::getUplinkVolume() const { return m_UplinkVolume; }
 void QosFlowUsageReport::setUplinkVolume(int64_t const value) {
   m_UplinkVolume = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

@@ -20,8 +20,8 @@
 #define FqdnPatternMatchingRule_H_
 
 #include "StringMatchingRule.h"
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::pcf {
 
@@ -29,7 +29,7 @@ namespace oai::model::pcf {
 /// a matching rule for a FQDN pattern
 /// </summary>
 class FqdnPatternMatchingRule {
- public:
+public:
   FqdnPatternMatchingRule();
   virtual ~FqdnPatternMatchingRule() = default;
 
@@ -43,16 +43,16 @@ class FqdnPatternMatchingRule {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const FqdnPatternMatchingRule& rhs) const;
-  bool operator!=(const FqdnPatternMatchingRule& rhs) const;
+  bool operator==(const FqdnPatternMatchingRule &rhs) const;
+  bool operator!=(const FqdnPatternMatchingRule &rhs) const;
 
   /////////////////////////////////////////////
   /// FqdnPatternMatchingRule members
@@ -61,27 +61,27 @@ class FqdnPatternMatchingRule {
   ///
   /// </summary>
   std::string getRegex() const;
-  void setRegex(std::string const& value);
+  void setRegex(std::string const &value);
   bool regexIsSet() const;
   void unsetRegex();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::StringMatchingRule getStringMatchingRule() const;
-  void setStringMatchingRule(oai::model::pcf::StringMatchingRule const& value);
+  void setStringMatchingRule(oai::model::pcf::StringMatchingRule const &value);
   bool stringMatchingRuleIsSet() const;
   void unsetStringMatchingRule();
 
-  friend void to_json(nlohmann::json& j, const FqdnPatternMatchingRule& o);
-  friend void from_json(const nlohmann::json& j, FqdnPatternMatchingRule& o);
+  friend void to_json(nlohmann::json &j, const FqdnPatternMatchingRule &o);
+  friend void from_json(const nlohmann::json &j, FqdnPatternMatchingRule &o);
 
- protected:
+protected:
   std::string m_Regex;
   bool m_RegexIsSet;
   oai::model::pcf::StringMatchingRule m_StringMatchingRule;
   bool m_StringMatchingRuleIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* FqdnPatternMatchingRule_H_ */

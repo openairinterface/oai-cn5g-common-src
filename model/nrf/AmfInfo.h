@@ -19,13 +19,13 @@
 #ifndef AmfInfo_H_
 #define AmfInfo_H_
 
+#include "Guami.h"
 #include "N2InterfaceAmfInfo.h"
 #include "Tai.h"
-#include <string>
 #include "TaiRange.h"
-#include <vector>
-#include "Guami.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::nrf {
 
@@ -33,7 +33,7 @@ namespace oai::model::nrf {
 ///
 /// </summary>
 class AmfInfo {
- public:
+public:
   AmfInfo();
   virtual ~AmfInfo();
 
@@ -46,59 +46,59 @@ class AmfInfo {
   ///
   /// </summary>
   std::string getAmfSetId() const;
-  void setAmfSetId(std::string const& value);
+  void setAmfSetId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getAmfRegionId() const;
-  void setAmfRegionId(std::string const& value);
+  void setAmfRegionId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::Guami>& getGuamiList();
-  void setGuamiList(std::vector<oai::model::common::Guami> const& value);
+  std::vector<oai::model::common::Guami> &getGuamiList();
+  void setGuamiList(std::vector<oai::model::common::Guami> const &value);
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::Tai>& getTaiList();
-  void setTaiList(std::vector<oai::model::common::Tai> const& value);
+  std::vector<oai::model::common::Tai> &getTaiList();
+  void setTaiList(std::vector<oai::model::common::Tai> const &value);
   bool taiListIsSet() const;
   void unsetTaiList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<TaiRange>& getTaiRangeList();
-  void setTaiRangeList(std::vector<TaiRange> const& value);
+  std::vector<TaiRange> &getTaiRangeList();
+  void setTaiRangeList(std::vector<TaiRange> const &value);
   bool taiRangeListIsSet() const;
   void unsetTaiRangeList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::Guami>& getBackupInfoAmfFailure();
-  void setBackupInfoAmfFailure(
-      std::vector<oai::model::common::Guami> const& value);
+  std::vector<oai::model::common::Guami> &getBackupInfoAmfFailure();
+  void
+  setBackupInfoAmfFailure(std::vector<oai::model::common::Guami> const &value);
   bool backupInfoAmfFailureIsSet() const;
   void unsetBackupInfoAmfFailure();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::Guami>& getBackupInfoAmfRemoval();
-  void setBackupInfoAmfRemoval(
-      std::vector<oai::model::common::Guami> const& value);
+  std::vector<oai::model::common::Guami> &getBackupInfoAmfRemoval();
+  void
+  setBackupInfoAmfRemoval(std::vector<oai::model::common::Guami> const &value);
   bool backupInfoAmfRemovalIsSet() const;
   void unsetBackupInfoAmfRemoval();
   /// <summary>
   ///
   /// </summary>
   N2InterfaceAmfInfo getN2InterfaceAmfInfo() const;
-  void setN2InterfaceAmfInfo(N2InterfaceAmfInfo const& value);
+  void setN2InterfaceAmfInfo(N2InterfaceAmfInfo const &value);
   bool n2InterfaceAmfInfoIsSet() const;
   void unsetN2InterfaceAmfInfo();
 
-  friend void to_json(nlohmann::json& j, const AmfInfo& o);
-  friend void from_json(const nlohmann::json& j, AmfInfo& o);
+  friend void to_json(nlohmann::json &j, const AmfInfo &o);
+  friend void from_json(const nlohmann::json &j, AmfInfo &o);
 
- protected:
+protected:
   std::string m_AmfSetId;
 
   std::string m_AmfRegionId;
@@ -117,6 +117,6 @@ class AmfInfo {
   bool m_N2InterfaceAmfInfoIsSet;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* AmfInfo_H_ */

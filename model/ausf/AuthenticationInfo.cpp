@@ -21,19 +21,19 @@ namespace oai::model::ausf {
 using namespace oai::model::common;
 
 AuthenticationInfo::AuthenticationInfo() {
-  m_SupiOrSuci                 = "";
-  m_ServingNetworkName         = "";
+  m_SupiOrSuci = "";
+  m_ServingNetworkName = "";
   m_ResynchronizationInfoIsSet = false;
-  m_Pei                        = "";
-  m_PeiIsSet                   = false;
-  m_TraceDataIsSet             = false;
-  m_UdmGroupId                 = "";
-  m_UdmGroupIdIsSet            = false;
-  m_RoutingIndicator           = "";
-  m_RoutingIndicatorIsSet      = false;
-  m_CellCagInfoIsSet           = false;
-  m_N5gcInd                    = false;
-  m_N5gcIndIsSet               = false;
+  m_Pei = "";
+  m_PeiIsSet = false;
+  m_TraceDataIsSet = false;
+  m_UdmGroupId = "";
+  m_UdmGroupIdIsSet = false;
+  m_RoutingIndicator = "";
+  m_RoutingIndicatorIsSet = false;
+  m_CellCagInfoIsSet = false;
+  m_N5gcInd = false;
+  m_N5gcIndIsSet = false;
 }
 
 AuthenticationInfo::~AuthenticationInfo() {}
@@ -42,22 +42,27 @@ void AuthenticationInfo::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const AuthenticationInfo& o) {
-  j                       = nlohmann::json();
-  j["supiOrSuci"]         = o.m_SupiOrSuci;
+void to_json(nlohmann::json &j, const AuthenticationInfo &o) {
+  j = nlohmann::json();
+  j["supiOrSuci"] = o.m_SupiOrSuci;
   j["servingNetworkName"] = o.m_ServingNetworkName;
   if (o.resynchronizationInfoIsSet())
     j["resynchronizationInfo"] = o.m_ResynchronizationInfo;
-  if (o.peiIsSet()) j["pei"] = o.m_Pei;
-  if (o.traceDataIsSet()) j["traceData"] = o.m_TraceData;
-  if (o.udmGroupIdIsSet()) j["udmGroupId"] = o.m_UdmGroupId;
-  if (o.routingIndicatorIsSet()) j["routingIndicator"] = o.m_RoutingIndicator;
+  if (o.peiIsSet())
+    j["pei"] = o.m_Pei;
+  if (o.traceDataIsSet())
+    j["traceData"] = o.m_TraceData;
+  if (o.udmGroupIdIsSet())
+    j["udmGroupId"] = o.m_UdmGroupId;
+  if (o.routingIndicatorIsSet())
+    j["routingIndicator"] = o.m_RoutingIndicator;
   if (o.cellCagInfoIsSet() || !o.m_CellCagInfo.empty())
     j["cellCagInfo"] = o.m_CellCagInfo;
-  if (o.n5gcIndIsSet()) j["n5gcInd"] = o.m_N5gcInd;
+  if (o.n5gcIndIsSet())
+    j["n5gcInd"] = o.m_N5gcInd;
 }
 
-void from_json(const nlohmann::json& j, AuthenticationInfo& o) {
+void from_json(const nlohmann::json &j, AuthenticationInfo &o) {
   j.at("supiOrSuci").get_to(o.m_SupiOrSuci);
   j.at("servingNetworkName").get_to(o.m_ServingNetworkName);
   if (j.find("resynchronizationInfo") != j.end()) {
@@ -90,24 +95,22 @@ void from_json(const nlohmann::json& j, AuthenticationInfo& o) {
   }
 }
 
-std::string AuthenticationInfo::getSupiOrSuci() const {
-  return m_SupiOrSuci;
-}
-void AuthenticationInfo::setSupiOrSuci(std::string const& value) {
+std::string AuthenticationInfo::getSupiOrSuci() const { return m_SupiOrSuci; }
+void AuthenticationInfo::setSupiOrSuci(std::string const &value) {
   m_SupiOrSuci = value;
 }
 std::string AuthenticationInfo::getServingNetworkName() const {
   return m_ServingNetworkName;
 }
-void AuthenticationInfo::setServingNetworkName(std::string const& value) {
+void AuthenticationInfo::setServingNetworkName(std::string const &value) {
   m_ServingNetworkName = value;
 }
 ResynchronizationInfo AuthenticationInfo::getResynchronizationInfo() const {
   return m_ResynchronizationInfo;
 }
 void AuthenticationInfo::setResynchronizationInfo(
-    ResynchronizationInfo const& value) {
-  m_ResynchronizationInfo      = value;
+    ResynchronizationInfo const &value) {
+  m_ResynchronizationInfo = value;
   m_ResynchronizationInfoIsSet = true;
 }
 bool AuthenticationInfo::resynchronizationInfoIsSet() const {
@@ -116,50 +119,32 @@ bool AuthenticationInfo::resynchronizationInfoIsSet() const {
 void AuthenticationInfo::unsetResynchronizationInfo() {
   m_ResynchronizationInfoIsSet = false;
 }
-std::string AuthenticationInfo::getPei() const {
-  return m_Pei;
-}
-void AuthenticationInfo::setPei(std::string const& value) {
-  m_Pei      = value;
+std::string AuthenticationInfo::getPei() const { return m_Pei; }
+void AuthenticationInfo::setPei(std::string const &value) {
+  m_Pei = value;
   m_PeiIsSet = true;
 }
-bool AuthenticationInfo::peiIsSet() const {
-  return m_PeiIsSet;
-}
-void AuthenticationInfo::unsetPei() {
-  m_PeiIsSet = false;
-}
-TraceData AuthenticationInfo::getTraceData() const {
-  return m_TraceData;
-}
-void AuthenticationInfo::setTraceData(TraceData const& value) {
-  m_TraceData      = value;
+bool AuthenticationInfo::peiIsSet() const { return m_PeiIsSet; }
+void AuthenticationInfo::unsetPei() { m_PeiIsSet = false; }
+TraceData AuthenticationInfo::getTraceData() const { return m_TraceData; }
+void AuthenticationInfo::setTraceData(TraceData const &value) {
+  m_TraceData = value;
   m_TraceDataIsSet = true;
 }
-bool AuthenticationInfo::traceDataIsSet() const {
-  return m_TraceDataIsSet;
-}
-void AuthenticationInfo::unsetTraceData() {
-  m_TraceDataIsSet = false;
-}
-std::string AuthenticationInfo::getUdmGroupId() const {
-  return m_UdmGroupId;
-}
-void AuthenticationInfo::setUdmGroupId(std::string const& value) {
-  m_UdmGroupId      = value;
+bool AuthenticationInfo::traceDataIsSet() const { return m_TraceDataIsSet; }
+void AuthenticationInfo::unsetTraceData() { m_TraceDataIsSet = false; }
+std::string AuthenticationInfo::getUdmGroupId() const { return m_UdmGroupId; }
+void AuthenticationInfo::setUdmGroupId(std::string const &value) {
+  m_UdmGroupId = value;
   m_UdmGroupIdIsSet = true;
 }
-bool AuthenticationInfo::udmGroupIdIsSet() const {
-  return m_UdmGroupIdIsSet;
-}
-void AuthenticationInfo::unsetUdmGroupId() {
-  m_UdmGroupIdIsSet = false;
-}
+bool AuthenticationInfo::udmGroupIdIsSet() const { return m_UdmGroupIdIsSet; }
+void AuthenticationInfo::unsetUdmGroupId() { m_UdmGroupIdIsSet = false; }
 std::string AuthenticationInfo::getRoutingIndicator() const {
   return m_RoutingIndicator;
 }
-void AuthenticationInfo::setRoutingIndicator(std::string const& value) {
-  m_RoutingIndicator      = value;
+void AuthenticationInfo::setRoutingIndicator(std::string const &value) {
+  m_RoutingIndicator = value;
   m_RoutingIndicatorIsSet = true;
 }
 bool AuthenticationInfo::routingIndicatorIsSet() const {
@@ -168,31 +153,21 @@ bool AuthenticationInfo::routingIndicatorIsSet() const {
 void AuthenticationInfo::unsetRoutingIndicator() {
   m_RoutingIndicatorIsSet = false;
 }
-std::vector<std::string>& AuthenticationInfo::getCellCagInfo() {
+std::vector<std::string> &AuthenticationInfo::getCellCagInfo() {
   return m_CellCagInfo;
 }
-void AuthenticationInfo::setCellCagInfo(std::vector<std::string> const& value) {
-  m_CellCagInfo      = value;
+void AuthenticationInfo::setCellCagInfo(std::vector<std::string> const &value) {
+  m_CellCagInfo = value;
   m_CellCagInfoIsSet = true;
 }
-bool AuthenticationInfo::cellCagInfoIsSet() const {
-  return m_CellCagInfoIsSet;
-}
-void AuthenticationInfo::unsetCellCagInfo() {
-  m_CellCagInfoIsSet = false;
-}
-bool AuthenticationInfo::isN5gcInd() const {
-  return m_N5gcInd;
-}
+bool AuthenticationInfo::cellCagInfoIsSet() const { return m_CellCagInfoIsSet; }
+void AuthenticationInfo::unsetCellCagInfo() { m_CellCagInfoIsSet = false; }
+bool AuthenticationInfo::isN5gcInd() const { return m_N5gcInd; }
 void AuthenticationInfo::setN5gcInd(bool const value) {
-  m_N5gcInd      = value;
+  m_N5gcInd = value;
   m_N5gcIndIsSet = true;
 }
-bool AuthenticationInfo::n5gcIndIsSet() const {
-  return m_N5gcIndIsSet;
-}
-void AuthenticationInfo::unsetN5gcInd() {
-  m_N5gcIndIsSet = false;
-}
+bool AuthenticationInfo::n5gcIndIsSet() const { return m_N5gcIndIsSet; }
+void AuthenticationInfo::unsetN5gcInd() { m_N5gcIndIsSet = false; }
 
-}  // namespace oai::model::ausf
+} // namespace oai::model::ausf

@@ -23,10 +23,10 @@ void N2InformationClass::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const N2InformationClass& o) {
+void to_json(nlohmann::json &j, const N2InformationClass &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, N2InformationClass& o) {}
+void from_json(const nlohmann::json &j, N2InformationClass &o) {}
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

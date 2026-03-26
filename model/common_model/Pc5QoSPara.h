@@ -19,10 +19,10 @@
 #ifndef Pc5QoSPara_H_
 #define Pc5QoSPara_H_
 
-#include <string>
 #include "Pc5QosFlowItem.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::common {
 
@@ -30,7 +30,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class Pc5QoSPara {
- public:
+public:
   Pc5QoSPara();
   virtual ~Pc5QoSPara() = default;
 
@@ -44,16 +44,16 @@ class Pc5QoSPara {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const Pc5QoSPara& rhs) const;
-  bool operator!=(const Pc5QoSPara& rhs) const;
+  bool operator==(const Pc5QoSPara &rhs) const;
+  bool operator!=(const Pc5QoSPara &rhs) const;
 
   /////////////////////////////////////////////
   /// Pc5QoSPara members
@@ -63,25 +63,25 @@ class Pc5QoSPara {
   /// </summary>
   std::vector<oai::model::common::Pc5QosFlowItem> getPc5QosFlowList() const;
   void setPc5QosFlowList(
-      std::vector<oai::model::common::Pc5QosFlowItem> const& value);
+      std::vector<oai::model::common::Pc5QosFlowItem> const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getPc5LinkAmbr() const;
-  void setPc5LinkAmbr(std::string const& value);
+  void setPc5LinkAmbr(std::string const &value);
   bool pc5LinkAmbrIsSet() const;
   void unsetPc5LinkAmbr();
 
-  friend void to_json(nlohmann::json& j, const Pc5QoSPara& o);
-  friend void from_json(const nlohmann::json& j, Pc5QoSPara& o);
+  friend void to_json(nlohmann::json &j, const Pc5QoSPara &o);
+  friend void from_json(const nlohmann::json &j, Pc5QoSPara &o);
 
- protected:
+protected:
   std::vector<oai::model::common::Pc5QosFlowItem> m_Pc5QosFlowList;
 
   std::string m_Pc5LinkAmbr;
   bool m_Pc5LinkAmbrIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* Pc5QoSPara_H_ */

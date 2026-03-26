@@ -12,9 +12,9 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_RRCContainer.h"
-#include "Ngap_NGRAN-CGI.h"
 #include "Ngap_IndexToRFSP.h"
+#include "Ngap_NGRAN-CGI.h"
+#include "Ngap_RRCContainer.h"
 #include "Ngap_UEHistoryInformation.h"
 #include <constr_SEQUENCE.h>
 
@@ -30,13 +30,13 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_SourceNGRANNode-ToTargetNGRANNode-TransparentContainer */
 typedef struct Ngap_SourceNGRANNode_ToTargetNGRANNode_TransparentContainer {
   Ngap_RRCContainer_t rRCContainer;
-  struct Ngap_PDUSessionResourceInformationList*
-      pDUSessionResourceInformationList;                  /* OPTIONAL */
-  struct Ngap_E_RABInformationList* e_RABInformationList; /* OPTIONAL */
+  struct Ngap_PDUSessionResourceInformationList
+      *pDUSessionResourceInformationList;                 /* OPTIONAL */
+  struct Ngap_E_RABInformationList *e_RABInformationList; /* OPTIONAL */
   Ngap_NGRAN_CGI_t targetCell_ID;
-  Ngap_IndexToRFSP_t* indexToRFSP; /* OPTIONAL */
+  Ngap_IndexToRFSP_t *indexToRFSP; /* OPTIONAL */
   Ngap_UEHistoryInformation_t uEHistoryInformation;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

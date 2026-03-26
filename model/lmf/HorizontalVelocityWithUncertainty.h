@@ -27,7 +27,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class HorizontalVelocityWithUncertainty {
- public:
+public:
   HorizontalVelocityWithUncertainty();
   virtual ~HorizontalVelocityWithUncertainty() = default;
 
@@ -41,16 +41,16 @@ class HorizontalVelocityWithUncertainty {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const HorizontalVelocityWithUncertainty& rhs) const;
-  bool operator!=(const HorizontalVelocityWithUncertainty& rhs) const;
+  bool operator==(const HorizontalVelocityWithUncertainty &rhs) const;
+  bool operator!=(const HorizontalVelocityWithUncertainty &rhs) const;
 
   /////////////////////////////////////////////
   /// HorizontalVelocityWithUncertainty members
@@ -71,12 +71,12 @@ class HorizontalVelocityWithUncertainty {
   float getHUncertainty() const;
   void setHUncertainty(float const value);
 
-  friend void to_json(
-      nlohmann::json& j, const HorizontalVelocityWithUncertainty& o);
-  friend void from_json(
-      const nlohmann::json& j, HorizontalVelocityWithUncertainty& o);
+  friend void to_json(nlohmann::json &j,
+                      const HorizontalVelocityWithUncertainty &o);
+  friend void from_json(const nlohmann::json &j,
+                        HorizontalVelocityWithUncertainty &o);
 
- protected:
+protected:
   float m_HSpeed;
 
   int32_t m_Bearing;
@@ -84,6 +84,6 @@ class HorizontalVelocityWithUncertainty {
   float m_HUncertainty;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* HorizontalVelocityWithUncertainty_H_ */

@@ -34,7 +34,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class EpsInterworkingInfo {
- public:
+public:
   EpsInterworkingInfo();
   virtual ~EpsInterworkingInfo();
 
@@ -46,19 +46,19 @@ class EpsInterworkingInfo {
   /// <summary>
   /// A map (list of key-value pairs where Dnn serves as key) of EpsIwkPgws
   /// </summary>
-  std::map<std::string, EpsIwkPgw>& getEpsIwkPgws();
-  void setEpsIwkPgws(std::map<std::string, EpsIwkPgw> const& value);
+  std::map<std::string, EpsIwkPgw> &getEpsIwkPgws();
+  void setEpsIwkPgws(std::map<std::string, EpsIwkPgw> const &value);
   bool epsIwkPgwsIsSet() const;
   void unsetEpsIwkPgws();
 
-  friend void to_json(nlohmann::json& j, const EpsInterworkingInfo& o);
-  friend void from_json(const nlohmann::json& j, EpsInterworkingInfo& o);
+  friend void to_json(nlohmann::json &j, const EpsInterworkingInfo &o);
+  friend void from_json(const nlohmann::json &j, EpsInterworkingInfo &o);
 
- protected:
+protected:
   std::map<std::string, EpsIwkPgw> m_EpsIwkPgws;
   bool m_EpsIwkPgwsIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* EpsInterworkingInfo_H_ */

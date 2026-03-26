@@ -25,7 +25,7 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_DL-CP-SecurityInformation */
 typedef struct Ngap_DL_CP_SecurityInformation {
   Ngap_DL_NAS_MAC_t dl_NAS_MAC;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

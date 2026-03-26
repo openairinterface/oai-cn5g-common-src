@@ -35,9 +35,9 @@ struct Ngap_ProtocolIE_SingleContainer;
 typedef struct Ngap_NGRAN_CGI {
   Ngap_NGRAN_CGI_PR present;
   union Ngap_NGRAN_CGI_u {
-    struct Ngap_NR_CGI* nR_CGI;
-    struct Ngap_EUTRA_CGI* eUTRA_CGI;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_NR_CGI *nR_CGI;
+    struct Ngap_EUTRA_CGI *eUTRA_CGI;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

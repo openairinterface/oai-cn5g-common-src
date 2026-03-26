@@ -12,8 +12,8 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_PDUSessionID.h"
 #include "Ngap_NAS-PDU.h"
+#include "Ngap_PDUSessionID.h"
 #include <OCTET_STRING.h>
 #include <constr_SEQUENCE.h>
 
@@ -27,9 +27,9 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_PDUSessionResourceModifyItemModReq */
 typedef struct Ngap_PDUSessionResourceModifyItemModReq {
   Ngap_PDUSessionID_t pDUSessionID;
-  Ngap_NAS_PDU_t* nAS_PDU; /* OPTIONAL */
+  Ngap_NAS_PDU_t *nAS_PDU; /* OPTIONAL */
   OCTET_STRING_t pDUSessionResourceModifyRequestTransfer;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

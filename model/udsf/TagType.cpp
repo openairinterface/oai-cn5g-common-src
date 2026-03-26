@@ -19,10 +19,10 @@
 namespace oai::model::udsf {
 
 TagType::TagType() {
-  m_TagName       = "";
-  m_Sort          = false;
-  m_SortIsSet     = false;
-  m_Presence      = false;
+  m_TagName = "";
+  m_Sort = false;
+  m_SortIsSet = false;
+  m_Presence = false;
   m_PresenceIsSet = false;
 }
 
@@ -33,19 +33,19 @@ void TagType::validate() const {
   }
 }
 
-bool TagType::validate(std::stringstream& msg) const {
+bool TagType::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool TagType::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool TagType::validate(std::stringstream &msg,
+                       const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "TagType" : pathPrefix;
 
   return success;
 }
 
-bool TagType::operator==(const TagType& rhs) const {
+bool TagType::operator==(const TagType &rhs) const {
   return
 
       (getTagName() == rhs.getTagName()) &&
@@ -62,19 +62,19 @@ bool TagType::operator==(const TagType& rhs) const {
           ;
 }
 
-bool TagType::operator!=(const TagType& rhs) const {
-  return !(*this == rhs);
-}
+bool TagType::operator!=(const TagType &rhs) const { return !(*this == rhs); }
 
-void to_json(nlohmann::json& j, const TagType& o) {
-  j            = nlohmann::json();
+void to_json(nlohmann::json &j, const TagType &o) {
+  j = nlohmann::json();
   j["tagName"] = o.m_TagName;
   j["keyType"] = o.m_KeyType;
-  if (o.sortIsSet()) j["sort"] = o.m_Sort;
-  if (o.presenceIsSet()) j["presence"] = o.m_Presence;
+  if (o.sortIsSet())
+    j["sort"] = o.m_Sort;
+  if (o.presenceIsSet())
+    j["presence"] = o.m_Presence;
 }
 
-void from_json(const nlohmann::json& j, TagType& o) {
+void from_json(const nlohmann::json &j, TagType &o) {
   j.at("tagName").get_to(o.m_TagName);
   j.at("keyType").get_to(o.m_KeyType);
   if (j.find("sort") != j.end()) {
@@ -87,43 +87,25 @@ void from_json(const nlohmann::json& j, TagType& o) {
   }
 }
 
-std::string TagType::getTagName() const {
-  return m_TagName;
-}
-void TagType::setTagName(std::string const& value) {
-  m_TagName = value;
-}
-oai::model::udsf::KeyType TagType::getKeyType() const {
-  return m_KeyType;
-}
-void TagType::setKeyType(oai::model::udsf::KeyType const& value) {
+std::string TagType::getTagName() const { return m_TagName; }
+void TagType::setTagName(std::string const &value) { m_TagName = value; }
+oai::model::udsf::KeyType TagType::getKeyType() const { return m_KeyType; }
+void TagType::setKeyType(oai::model::udsf::KeyType const &value) {
   m_KeyType = value;
 }
-bool TagType::isSort() const {
-  return m_Sort;
-}
+bool TagType::isSort() const { return m_Sort; }
 void TagType::setSort(bool const value) {
-  m_Sort      = value;
+  m_Sort = value;
   m_SortIsSet = true;
 }
-bool TagType::sortIsSet() const {
-  return m_SortIsSet;
-}
-void TagType::unsetSort() {
-  m_SortIsSet = false;
-}
-bool TagType::isPresence() const {
-  return m_Presence;
-}
+bool TagType::sortIsSet() const { return m_SortIsSet; }
+void TagType::unsetSort() { m_SortIsSet = false; }
+bool TagType::isPresence() const { return m_Presence; }
 void TagType::setPresence(bool const value) {
-  m_Presence      = value;
+  m_Presence = value;
   m_PresenceIsSet = true;
 }
-bool TagType::presenceIsSet() const {
-  return m_PresenceIsSet;
-}
-void TagType::unsetPresence() {
-  m_PresenceIsSet = false;
-}
+bool TagType::presenceIsSet() const { return m_PresenceIsSet; }
+void TagType::unsetPresence() { m_PresenceIsSet = false; }
 
-}  // namespace oai::model::udsf
+} // namespace oai::model::udsf

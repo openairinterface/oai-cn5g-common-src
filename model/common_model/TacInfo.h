@@ -19,9 +19,9 @@
 #ifndef TacInfo_H_
 #define TacInfo_H_
 
+#include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
-#include <nlohmann/json.hpp>
 
 namespace oai::model::common {
 
@@ -29,7 +29,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class TacInfo {
- public:
+public:
   TacInfo();
   virtual ~TacInfo() = default;
 
@@ -43,16 +43,16 @@ class TacInfo {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const TacInfo& rhs) const;
-  bool operator!=(const TacInfo& rhs) const;
+  bool operator==(const TacInfo &rhs) const;
+  bool operator!=(const TacInfo &rhs) const;
 
   /////////////////////////////////////////////
   /// TacInfo members
@@ -61,15 +61,15 @@ class TacInfo {
   ///
   /// </summary>
   std::vector<std::string> getTacList() const;
-  void setTacList(std::vector<std::string> const& value);
+  void setTacList(std::vector<std::string> const &value);
 
-  friend void to_json(nlohmann::json& j, const TacInfo& o);
-  friend void from_json(const nlohmann::json& j, TacInfo& o);
+  friend void to_json(nlohmann::json &j, const TacInfo &o);
+  friend void from_json(const nlohmann::json &j, TacInfo &o);
 
- protected:
+protected:
   std::vector<std::string> m_TacList;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* TacInfo_H_ */

@@ -15,9 +15,7 @@
 
 namespace oai::model::amf {
 
-ConfirmationData::ConfirmationData() {
-  m_ResStar = "";
-}
+ConfirmationData::ConfirmationData() { m_ResStar = ""; }
 
 ConfirmationData::~ConfirmationData() {}
 
@@ -25,20 +23,18 @@ void ConfirmationData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const ConfirmationData& o) {
-  j            = nlohmann::json();
+void to_json(nlohmann::json &j, const ConfirmationData &o) {
+  j = nlohmann::json();
   j["resStar"] = o.m_ResStar;
 }
 
-void from_json(const nlohmann::json& j, ConfirmationData& o) {
+void from_json(const nlohmann::json &j, ConfirmationData &o) {
   j.at("resStar").get_to(o.m_ResStar);
 }
 
-std::string ConfirmationData::getResStar() const {
-  return m_ResStar;
-}
-void ConfirmationData::setResStar(std::string const& value) {
+std::string ConfirmationData::getResStar() const { return m_ResStar; }
+void ConfirmationData::setResStar(std::string const &value) {
   m_ResStar = value;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

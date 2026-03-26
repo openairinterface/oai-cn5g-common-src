@@ -20,9 +20,9 @@ namespace oai::model::pcf {
 
 UpPathChgEvent::UpPathChgEvent() {
   m_NotificationUri = "";
-  m_NotifCorreId    = "";
-  m_AfAckInd        = false;
-  m_AfAckIndIsSet   = false;
+  m_NotifCorreId = "";
+  m_AfAckInd = false;
+  m_AfAckIndIsSet = false;
 }
 
 void UpPathChgEvent::validate() const {
@@ -32,12 +32,12 @@ void UpPathChgEvent::validate() const {
   }
 }
 
-bool UpPathChgEvent::validate(std::stringstream& msg) const {
+bool UpPathChgEvent::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool UpPathChgEvent::validate(
-    std::stringstream& /* msg */, const std::string& /* pathPrefix */) const {
+bool UpPathChgEvent::validate(std::stringstream & /* msg */,
+                              const std::string & /* pathPrefix */) const {
   bool success = true;
   /*
   const std::string _pathPrefix =
@@ -46,7 +46,7 @@ bool UpPathChgEvent::validate(
   return success;
 }
 
-bool UpPathChgEvent::operator==(const UpPathChgEvent& rhs) const {
+bool UpPathChgEvent::operator==(const UpPathChgEvent &rhs) const {
   return
 
       (getNotificationUri() == rhs.getNotificationUri()) &&
@@ -62,19 +62,20 @@ bool UpPathChgEvent::operator==(const UpPathChgEvent& rhs) const {
           ;
 }
 
-bool UpPathChgEvent::operator!=(const UpPathChgEvent& rhs) const {
+bool UpPathChgEvent::operator!=(const UpPathChgEvent &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const UpPathChgEvent& o) {
-  j                    = nlohmann::json();
+void to_json(nlohmann::json &j, const UpPathChgEvent &o) {
+  j = nlohmann::json();
   j["notificationUri"] = o.m_NotificationUri;
-  j["notifCorreId"]    = o.m_NotifCorreId;
-  j["dnaiChgType"]     = o.m_DnaiChgType;
-  if (o.afAckIndIsSet()) j["afAckInd"] = o.m_AfAckInd;
+  j["notifCorreId"] = o.m_NotifCorreId;
+  j["dnaiChgType"] = o.m_DnaiChgType;
+  if (o.afAckIndIsSet())
+    j["afAckInd"] = o.m_AfAckInd;
 }
 
-void from_json(const nlohmann::json& j, UpPathChgEvent& o) {
+void from_json(const nlohmann::json &j, UpPathChgEvent &o) {
   j.at("notificationUri").get_to(o.m_NotificationUri);
   j.at("notifCorreId").get_to(o.m_NotifCorreId);
   j.at("dnaiChgType").get_to(o.m_DnaiChgType);
@@ -87,34 +88,26 @@ void from_json(const nlohmann::json& j, UpPathChgEvent& o) {
 std::string UpPathChgEvent::getNotificationUri() const {
   return m_NotificationUri;
 }
-void UpPathChgEvent::setNotificationUri(std::string const& value) {
+void UpPathChgEvent::setNotificationUri(std::string const &value) {
   m_NotificationUri = value;
 }
-std::string UpPathChgEvent::getNotifCorreId() const {
-  return m_NotifCorreId;
-}
-void UpPathChgEvent::setNotifCorreId(std::string const& value) {
+std::string UpPathChgEvent::getNotifCorreId() const { return m_NotifCorreId; }
+void UpPathChgEvent::setNotifCorreId(std::string const &value) {
   m_NotifCorreId = value;
 }
 oai::model::common::DnaiChangeType UpPathChgEvent::getDnaiChgType() const {
   return m_DnaiChgType;
 }
 void UpPathChgEvent::setDnaiChgType(
-    oai::model::common::DnaiChangeType const& value) {
+    oai::model::common::DnaiChangeType const &value) {
   m_DnaiChgType = value;
 }
-bool UpPathChgEvent::isAfAckInd() const {
-  return m_AfAckInd;
-}
+bool UpPathChgEvent::isAfAckInd() const { return m_AfAckInd; }
 void UpPathChgEvent::setAfAckInd(bool const value) {
-  m_AfAckInd      = value;
+  m_AfAckInd = value;
   m_AfAckIndIsSet = true;
 }
-bool UpPathChgEvent::afAckIndIsSet() const {
-  return m_AfAckIndIsSet;
-}
-void UpPathChgEvent::unsetAfAckInd() {
-  m_AfAckIndIsSet = false;
-}
+bool UpPathChgEvent::afAckIndIsSet() const { return m_AfAckIndIsSet; }
+void UpPathChgEvent::unsetAfAckInd() { m_AfAckIndIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

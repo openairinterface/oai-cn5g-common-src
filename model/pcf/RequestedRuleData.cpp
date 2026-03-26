@@ -27,19 +27,19 @@ void RequestedRuleData::validate() const {
   }
 }
 
-bool RequestedRuleData::validate(std::stringstream& msg) const {
+bool RequestedRuleData::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool RequestedRuleData::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool RequestedRuleData::validate(std::stringstream &msg,
+                                 const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "RequestedRuleData" : pathPrefix;
 
   /* RefPccRuleIds */ {
-    const std::vector<std::string>& value = m_RefPccRuleIds;
-    const std::string currentValuePath    = _pathPrefix + ".refPccRuleIds";
+    const std::vector<std::string> &value = m_RefPccRuleIds;
+    const std::string currentValuePath = _pathPrefix + ".refPccRuleIds";
 
     if (value.size() < 1) {
       success = false;
@@ -60,7 +60,7 @@ bool RequestedRuleData::validate(
   }
 
   /* ReqData */ {
-    const std::vector<oai::model::pcf::RequestedRuleDataType>& value =
+    const std::vector<oai::model::pcf::RequestedRuleDataType> &value =
         m_ReqData;
     const std::string currentValuePath = _pathPrefix + ".reqData";
 
@@ -68,10 +68,10 @@ bool RequestedRuleData::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::RequestedRuleDataType& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::RequestedRuleDataType &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -85,7 +85,7 @@ bool RequestedRuleData::validate(
   return success;
 }
 
-bool RequestedRuleData::operator==(const RequestedRuleData& rhs) const {
+bool RequestedRuleData::operator==(const RequestedRuleData &rhs) const {
   return
 
       (getRefPccRuleIds() == rhs.getRefPccRuleIds()) &&
@@ -95,17 +95,17 @@ bool RequestedRuleData::operator==(const RequestedRuleData& rhs) const {
           ;
 }
 
-bool RequestedRuleData::operator!=(const RequestedRuleData& rhs) const {
+bool RequestedRuleData::operator!=(const RequestedRuleData &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const RequestedRuleData& o) {
-  j                  = nlohmann::json();
+void to_json(nlohmann::json &j, const RequestedRuleData &o) {
+  j = nlohmann::json();
   j["refPccRuleIds"] = o.m_RefPccRuleIds;
-  j["reqData"]       = o.m_ReqData;
+  j["reqData"] = o.m_ReqData;
 }
 
-void from_json(const nlohmann::json& j, RequestedRuleData& o) {
+void from_json(const nlohmann::json &j, RequestedRuleData &o) {
   j.at("refPccRuleIds").get_to(o.m_RefPccRuleIds);
   j.at("reqData").get_to(o.m_ReqData);
 }
@@ -114,7 +114,7 @@ std::vector<std::string> RequestedRuleData::getRefPccRuleIds() const {
   return m_RefPccRuleIds;
 }
 void RequestedRuleData::setRefPccRuleIds(
-    std::vector<std::string> const& value) {
+    std::vector<std::string> const &value) {
   m_RefPccRuleIds = value;
 }
 std::vector<oai::model::pcf::RequestedRuleDataType>
@@ -122,8 +122,8 @@ RequestedRuleData::getReqData() const {
   return m_ReqData;
 }
 void RequestedRuleData::setReqData(
-    std::vector<oai::model::pcf::RequestedRuleDataType> const& value) {
+    std::vector<oai::model::pcf::RequestedRuleDataType> const &value) {
   m_ReqData = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

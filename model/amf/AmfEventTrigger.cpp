@@ -27,12 +27,12 @@ void AmfEventTrigger::validate() const {
   }
 }
 
-bool AmfEventTrigger::validate(std::stringstream& msg) const {
+bool AmfEventTrigger::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AmfEventTrigger::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool AmfEventTrigger::validate(std::stringstream &msg,
+                               const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AmfEventTrigger" : pathPrefix;
@@ -40,20 +40,20 @@ bool AmfEventTrigger::validate(
   return success;
 }
 
-bool AmfEventTrigger::operator==(const AmfEventTrigger& rhs) const {
-  return true;  // TODO
+bool AmfEventTrigger::operator==(const AmfEventTrigger &rhs) const {
+  return true; // TODO
 
   ;
 }
 
-bool AmfEventTrigger::operator!=(const AmfEventTrigger& rhs) const {
+bool AmfEventTrigger::operator!=(const AmfEventTrigger &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AmfEventTrigger& o) {
+void to_json(nlohmann::json &j, const AmfEventTrigger &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, AmfEventTrigger& o) {}
+void from_json(const nlohmann::json &j, AmfEventTrigger &o) {}
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

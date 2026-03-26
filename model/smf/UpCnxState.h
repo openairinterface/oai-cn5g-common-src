@@ -27,7 +27,7 @@ namespace oai::model::smf {
 /// Possible values are - ACTIVATED - DEACTIVATED - ACTIVATING
 /// </summary>
 class UpCnxState {
- public:
+public:
   UpCnxState();
   virtual ~UpCnxState();
 
@@ -36,12 +36,12 @@ class UpCnxState {
   /////////////////////////////////////////////
   /// UpCnxState members
 
-  friend void to_json(nlohmann::json& j, const UpCnxState& o);
-  friend void from_json(const nlohmann::json& j, UpCnxState& o);
+  friend void to_json(nlohmann::json &j, const UpCnxState &o);
+  friend void from_json(const nlohmann::json &j, UpCnxState &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* UpCnxState_H_ */

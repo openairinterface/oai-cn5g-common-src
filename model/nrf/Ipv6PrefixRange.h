@@ -28,7 +28,7 @@ namespace oai::model::nrf {
 /// Range of IPv6 prefixes
 /// </summary>
 class Ipv6PrefixRange {
- public:
+public:
   Ipv6PrefixRange();
   virtual ~Ipv6PrefixRange() = default;
 
@@ -42,16 +42,16 @@ class Ipv6PrefixRange {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const Ipv6PrefixRange& rhs) const;
-  bool operator!=(const Ipv6PrefixRange& rhs) const;
+  bool operator==(const Ipv6PrefixRange &rhs) const;
+  bool operator!=(const Ipv6PrefixRange &rhs) const;
 
   /////////////////////////////////////////////
   /// Ipv6PrefixRange members
@@ -60,27 +60,27 @@ class Ipv6PrefixRange {
   ///
   /// </summary>
   oai::model::common::Ipv6Prefix getStart() const;
-  void setStart(oai::model::common::Ipv6Prefix const& value);
+  void setStart(oai::model::common::Ipv6Prefix const &value);
   bool startIsSet() const;
   void unsetStart();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ipv6Prefix getEnd() const;
-  void setEnd(oai::model::common::Ipv6Prefix const& value);
+  void setEnd(oai::model::common::Ipv6Prefix const &value);
   bool endIsSet() const;
   void unsetEnd();
 
-  friend void to_json(nlohmann::json& j, const Ipv6PrefixRange& o);
-  friend void from_json(const nlohmann::json& j, Ipv6PrefixRange& o);
+  friend void to_json(nlohmann::json &j, const Ipv6PrefixRange &o);
+  friend void from_json(const nlohmann::json &j, Ipv6PrefixRange &o);
 
- protected:
+protected:
   oai::model::common::Ipv6Prefix m_Start;
   bool m_StartIsSet;
   oai::model::common::Ipv6Prefix m_End;
   bool m_EndIsSet;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* Ipv6PrefixRange_H_ */

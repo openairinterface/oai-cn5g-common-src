@@ -14,32 +14,32 @@
 #include "AuthorizedDefaultQos.h"
 #include "Helpers.h"
 
-#include <sstream>
 #include "Helpers.h"
+#include <sstream>
 
 namespace oai::model::pcf {
 
 using namespace oai::model::common;
 
 AuthorizedDefaultQos::AuthorizedDefaultQos() {
-  m_r_5qi                   = 0;
-  m_r_5qiIsSet              = false;
-  m_ArpIsSet                = false;
-  m_PriorityLevel           = 0;
-  m_PriorityLevelIsSet      = false;
-  m_AverWindow              = 2000;
-  m_AverWindowIsSet         = false;
-  m_MaxDataBurstVol         = 0;
-  m_MaxDataBurstVolIsSet    = false;
-  m_MaxbrUl                 = "";
-  m_MaxbrUlIsSet            = false;
-  m_MaxbrDl                 = "";
-  m_MaxbrDlIsSet            = false;
-  m_GbrUl                   = "";
-  m_GbrUlIsSet              = false;
-  m_GbrDl                   = "";
-  m_GbrDlIsSet              = false;
-  m_ExtMaxDataBurstVol      = 0;
+  m_r_5qi = 0;
+  m_r_5qiIsSet = false;
+  m_ArpIsSet = false;
+  m_PriorityLevel = 0;
+  m_PriorityLevelIsSet = false;
+  m_AverWindow = 2000;
+  m_AverWindowIsSet = false;
+  m_MaxDataBurstVol = 0;
+  m_MaxDataBurstVolIsSet = false;
+  m_MaxbrUl = "";
+  m_MaxbrUlIsSet = false;
+  m_MaxbrDl = "";
+  m_MaxbrDlIsSet = false;
+  m_GbrUl = "";
+  m_GbrUlIsSet = false;
+  m_GbrDl = "";
+  m_GbrDlIsSet = false;
+  m_ExtMaxDataBurstVol = 0;
   m_ExtMaxDataBurstVolIsSet = false;
 }
 
@@ -50,18 +50,18 @@ void AuthorizedDefaultQos::validate() const {
   }
 }
 
-bool AuthorizedDefaultQos::validate(std::stringstream& msg) const {
+bool AuthorizedDefaultQos::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AuthorizedDefaultQos::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool AuthorizedDefaultQos::validate(std::stringstream &msg,
+                                    const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AuthorizedDefaultQos" : pathPrefix;
 
   if (r5qiIsSet()) {
-    const int32_t& value               = m_r_5qi;
+    const int32_t &value = m_r_5qi;
     const std::string currentValuePath = _pathPrefix + ".r5qi";
 
     if (value < 0) {
@@ -75,7 +75,7 @@ bool AuthorizedDefaultQos::validate(
   }
 
   if (priorityLevelIsSet()) {
-    const int32_t& value               = m_PriorityLevel;
+    const int32_t &value = m_PriorityLevel;
     const std::string currentValuePath = _pathPrefix + ".priorityLevel";
 
     if (value < 1) {
@@ -89,7 +89,7 @@ bool AuthorizedDefaultQos::validate(
   }
 
   if (averWindowIsSet()) {
-    const int32_t& value               = m_AverWindow;
+    const int32_t &value = m_AverWindow;
     const std::string currentValuePath = _pathPrefix + ".averWindow";
 
     if (value < 1) {
@@ -103,7 +103,7 @@ bool AuthorizedDefaultQos::validate(
   }
 
   if (maxDataBurstVolIsSet()) {
-    const int32_t& value               = m_MaxDataBurstVol;
+    const int32_t &value = m_MaxDataBurstVol;
     const std::string currentValuePath = _pathPrefix + ".maxDataBurstVol";
 
     if (value < 1) {
@@ -117,35 +117,35 @@ bool AuthorizedDefaultQos::validate(
   }
 
   if (maxbrUlIsSet()) {
-    const std::string& value           = m_MaxbrUl;
+    const std::string &value = m_MaxbrUl;
     const std::string currentValuePath = _pathPrefix + ".maxbrUl";
-    success &= helpers::validate_regex(
-        helpers::BANDWIDTH_VALIDATION_REGEX, value, msg, currentValuePath);
+    success &= helpers::validate_regex(helpers::BANDWIDTH_VALIDATION_REGEX,
+                                       value, msg, currentValuePath);
   }
 
   if (maxbrDlIsSet()) {
-    const std::string& value           = m_MaxbrDl;
+    const std::string &value = m_MaxbrDl;
     const std::string currentValuePath = _pathPrefix + ".maxbrDl";
-    success &= helpers::validate_regex(
-        helpers::BANDWIDTH_VALIDATION_REGEX, value, msg, currentValuePath);
+    success &= helpers::validate_regex(helpers::BANDWIDTH_VALIDATION_REGEX,
+                                       value, msg, currentValuePath);
   }
 
   if (gbrUlIsSet()) {
-    const std::string& value           = m_GbrUl;
+    const std::string &value = m_GbrUl;
     const std::string currentValuePath = _pathPrefix + ".gbrUl";
-    success &= helpers::validate_regex(
-        helpers::BANDWIDTH_VALIDATION_REGEX, value, msg, currentValuePath);
+    success &= helpers::validate_regex(helpers::BANDWIDTH_VALIDATION_REGEX,
+                                       value, msg, currentValuePath);
   }
 
   if (gbrDlIsSet()) {
-    const std::string& value           = m_GbrDl;
+    const std::string &value = m_GbrDl;
     const std::string currentValuePath = _pathPrefix + ".gbrDl";
-    success &= helpers::validate_regex(
-        helpers::BANDWIDTH_VALIDATION_REGEX, value, msg, currentValuePath);
+    success &= helpers::validate_regex(helpers::BANDWIDTH_VALIDATION_REGEX,
+                                       value, msg, currentValuePath);
   }
 
   if (extMaxDataBurstVolIsSet()) {
-    const int32_t& value               = m_ExtMaxDataBurstVol;
+    const int32_t &value = m_ExtMaxDataBurstVol;
     const std::string currentValuePath = _pathPrefix + ".extMaxDataBurstVol";
 
     if (value < 4096) {
@@ -161,7 +161,7 @@ bool AuthorizedDefaultQos::validate(
   return success;
 }
 
-bool AuthorizedDefaultQos::operator==(const AuthorizedDefaultQos& rhs) const {
+bool AuthorizedDefaultQos::operator==(const AuthorizedDefaultQos &rhs) const {
   return
 
       ((!r5qiIsSet() && !rhs.r5qiIsSet()) ||
@@ -203,26 +203,35 @@ bool AuthorizedDefaultQos::operator==(const AuthorizedDefaultQos& rhs) const {
           ;
 }
 
-bool AuthorizedDefaultQos::operator!=(const AuthorizedDefaultQos& rhs) const {
+bool AuthorizedDefaultQos::operator!=(const AuthorizedDefaultQos &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AuthorizedDefaultQos& o) {
+void to_json(nlohmann::json &j, const AuthorizedDefaultQos &o) {
   j = nlohmann::json();
-  if (o.r5qiIsSet()) j["5qi"] = o.m_r_5qi;
-  if (o.arpIsSet()) j["arp"] = o.m_Arp;
-  if (o.priorityLevelIsSet()) j["priorityLevel"] = o.m_PriorityLevel;
-  if (o.averWindowIsSet()) j["averWindow"] = o.m_AverWindow;
-  if (o.maxDataBurstVolIsSet()) j["maxDataBurstVol"] = o.m_MaxDataBurstVol;
-  if (o.maxbrUlIsSet()) j["maxbrUl"] = o.m_MaxbrUl;
-  if (o.maxbrDlIsSet()) j["maxbrDl"] = o.m_MaxbrDl;
-  if (o.gbrUlIsSet()) j["gbrUl"] = o.m_GbrUl;
-  if (o.gbrDlIsSet()) j["gbrDl"] = o.m_GbrDl;
+  if (o.r5qiIsSet())
+    j["5qi"] = o.m_r_5qi;
+  if (o.arpIsSet())
+    j["arp"] = o.m_Arp;
+  if (o.priorityLevelIsSet())
+    j["priorityLevel"] = o.m_PriorityLevel;
+  if (o.averWindowIsSet())
+    j["averWindow"] = o.m_AverWindow;
+  if (o.maxDataBurstVolIsSet())
+    j["maxDataBurstVol"] = o.m_MaxDataBurstVol;
+  if (o.maxbrUlIsSet())
+    j["maxbrUl"] = o.m_MaxbrUl;
+  if (o.maxbrDlIsSet())
+    j["maxbrDl"] = o.m_MaxbrDl;
+  if (o.gbrUlIsSet())
+    j["gbrUl"] = o.m_GbrUl;
+  if (o.gbrDlIsSet())
+    j["gbrDl"] = o.m_GbrDl;
   if (o.extMaxDataBurstVolIsSet())
     j["extMaxDataBurstVol"] = o.m_ExtMaxDataBurstVol;
 }
 
-void from_json(const nlohmann::json& j, AuthorizedDefaultQos& o) {
+void from_json(const nlohmann::json &j, AuthorizedDefaultQos &o) {
   if (j.find("5qi") != j.end()) {
     j.at("5qi").get_to(o.m_r_5qi);
     o.m_r_5qiIsSet = true;
@@ -265,37 +274,25 @@ void from_json(const nlohmann::json& j, AuthorizedDefaultQos& o) {
   }
 }
 
-int32_t AuthorizedDefaultQos::getR5qi() const {
-  return m_r_5qi;
-}
+int32_t AuthorizedDefaultQos::getR5qi() const { return m_r_5qi; }
 void AuthorizedDefaultQos::setR5qi(int32_t const value) {
-  m_r_5qi      = value;
+  m_r_5qi = value;
   m_r_5qiIsSet = true;
 }
-bool AuthorizedDefaultQos::r5qiIsSet() const {
-  return m_r_5qiIsSet;
-}
-void AuthorizedDefaultQos::unsetr_5qi() {
-  m_r_5qiIsSet = false;
-}
-Arp AuthorizedDefaultQos::getArp() const {
-  return m_Arp;
-}
-void AuthorizedDefaultQos::setArp(Arp const& value) {
-  m_Arp      = value;
+bool AuthorizedDefaultQos::r5qiIsSet() const { return m_r_5qiIsSet; }
+void AuthorizedDefaultQos::unsetr_5qi() { m_r_5qiIsSet = false; }
+Arp AuthorizedDefaultQos::getArp() const { return m_Arp; }
+void AuthorizedDefaultQos::setArp(Arp const &value) {
+  m_Arp = value;
   m_ArpIsSet = true;
 }
-bool AuthorizedDefaultQos::arpIsSet() const {
-  return m_ArpIsSet;
-}
-void AuthorizedDefaultQos::unsetArp() {
-  m_ArpIsSet = false;
-}
+bool AuthorizedDefaultQos::arpIsSet() const { return m_ArpIsSet; }
+void AuthorizedDefaultQos::unsetArp() { m_ArpIsSet = false; }
 int32_t AuthorizedDefaultQos::getPriorityLevel() const {
   return m_PriorityLevel;
 }
 void AuthorizedDefaultQos::setPriorityLevel(int32_t const value) {
-  m_PriorityLevel      = value;
+  m_PriorityLevel = value;
   m_PriorityLevelIsSet = true;
 }
 bool AuthorizedDefaultQos::priorityLevelIsSet() const {
@@ -304,24 +301,18 @@ bool AuthorizedDefaultQos::priorityLevelIsSet() const {
 void AuthorizedDefaultQos::unsetPriorityLevel() {
   m_PriorityLevelIsSet = false;
 }
-int32_t AuthorizedDefaultQos::getAverWindow() const {
-  return m_AverWindow;
-}
+int32_t AuthorizedDefaultQos::getAverWindow() const { return m_AverWindow; }
 void AuthorizedDefaultQos::setAverWindow(int32_t const value) {
-  m_AverWindow      = value;
+  m_AverWindow = value;
   m_AverWindowIsSet = true;
 }
-bool AuthorizedDefaultQos::averWindowIsSet() const {
-  return m_AverWindowIsSet;
-}
-void AuthorizedDefaultQos::unsetAverWindow() {
-  m_AverWindowIsSet = false;
-}
+bool AuthorizedDefaultQos::averWindowIsSet() const { return m_AverWindowIsSet; }
+void AuthorizedDefaultQos::unsetAverWindow() { m_AverWindowIsSet = false; }
 int32_t AuthorizedDefaultQos::getMaxDataBurstVol() const {
   return m_MaxDataBurstVol;
 }
 void AuthorizedDefaultQos::setMaxDataBurstVol(int32_t const value) {
-  m_MaxDataBurstVol      = value;
+  m_MaxDataBurstVol = value;
   m_MaxDataBurstVolIsSet = true;
 }
 bool AuthorizedDefaultQos::maxDataBurstVolIsSet() const {
@@ -330,63 +321,39 @@ bool AuthorizedDefaultQos::maxDataBurstVolIsSet() const {
 void AuthorizedDefaultQos::unsetMaxDataBurstVol() {
   m_MaxDataBurstVolIsSet = false;
 }
-std::string AuthorizedDefaultQos::getMaxbrUl() const {
-  return m_MaxbrUl;
-}
-void AuthorizedDefaultQos::setMaxbrUl(std::string const& value) {
-  m_MaxbrUl      = value;
+std::string AuthorizedDefaultQos::getMaxbrUl() const { return m_MaxbrUl; }
+void AuthorizedDefaultQos::setMaxbrUl(std::string const &value) {
+  m_MaxbrUl = value;
   m_MaxbrUlIsSet = true;
 }
-bool AuthorizedDefaultQos::maxbrUlIsSet() const {
-  return m_MaxbrUlIsSet;
-}
-void AuthorizedDefaultQos::unsetMaxbrUl() {
-  m_MaxbrUlIsSet = false;
-}
-std::string AuthorizedDefaultQos::getMaxbrDl() const {
-  return m_MaxbrDl;
-}
-void AuthorizedDefaultQos::setMaxbrDl(std::string const& value) {
-  m_MaxbrDl      = value;
+bool AuthorizedDefaultQos::maxbrUlIsSet() const { return m_MaxbrUlIsSet; }
+void AuthorizedDefaultQos::unsetMaxbrUl() { m_MaxbrUlIsSet = false; }
+std::string AuthorizedDefaultQos::getMaxbrDl() const { return m_MaxbrDl; }
+void AuthorizedDefaultQos::setMaxbrDl(std::string const &value) {
+  m_MaxbrDl = value;
   m_MaxbrDlIsSet = true;
 }
-bool AuthorizedDefaultQos::maxbrDlIsSet() const {
-  return m_MaxbrDlIsSet;
-}
-void AuthorizedDefaultQos::unsetMaxbrDl() {
-  m_MaxbrDlIsSet = false;
-}
-std::string AuthorizedDefaultQos::getGbrUl() const {
-  return m_GbrUl;
-}
-void AuthorizedDefaultQos::setGbrUl(std::string const& value) {
-  m_GbrUl      = value;
+bool AuthorizedDefaultQos::maxbrDlIsSet() const { return m_MaxbrDlIsSet; }
+void AuthorizedDefaultQos::unsetMaxbrDl() { m_MaxbrDlIsSet = false; }
+std::string AuthorizedDefaultQos::getGbrUl() const { return m_GbrUl; }
+void AuthorizedDefaultQos::setGbrUl(std::string const &value) {
+  m_GbrUl = value;
   m_GbrUlIsSet = true;
 }
-bool AuthorizedDefaultQos::gbrUlIsSet() const {
-  return m_GbrUlIsSet;
-}
-void AuthorizedDefaultQos::unsetGbrUl() {
-  m_GbrUlIsSet = false;
-}
-std::string AuthorizedDefaultQos::getGbrDl() const {
-  return m_GbrDl;
-}
-void AuthorizedDefaultQos::setGbrDl(std::string const& value) {
-  m_GbrDl      = value;
+bool AuthorizedDefaultQos::gbrUlIsSet() const { return m_GbrUlIsSet; }
+void AuthorizedDefaultQos::unsetGbrUl() { m_GbrUlIsSet = false; }
+std::string AuthorizedDefaultQos::getGbrDl() const { return m_GbrDl; }
+void AuthorizedDefaultQos::setGbrDl(std::string const &value) {
+  m_GbrDl = value;
   m_GbrDlIsSet = true;
 }
-bool AuthorizedDefaultQos::gbrDlIsSet() const {
-  return m_GbrDlIsSet;
-}
-void AuthorizedDefaultQos::unsetGbrDl() {
-  m_GbrDlIsSet = false;
-}
+bool AuthorizedDefaultQos::gbrDlIsSet() const { return m_GbrDlIsSet; }
+void AuthorizedDefaultQos::unsetGbrDl() { m_GbrDlIsSet = false; }
 int32_t AuthorizedDefaultQos::getExtMaxDataBurstVol() const {
   return m_ExtMaxDataBurstVol;
 }
 void AuthorizedDefaultQos::setExtMaxDataBurstVol(int32_t const value) {
-  m_ExtMaxDataBurstVol      = value;
+  m_ExtMaxDataBurstVol = value;
   m_ExtMaxDataBurstVolIsSet = true;
 }
 bool AuthorizedDefaultQos::extMaxDataBurstVolIsSet() const {
@@ -396,4 +363,4 @@ void AuthorizedDefaultQos::unsetExtMaxDataBurstVol() {
   m_ExtMaxDataBurstVolIsSet = false;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

@@ -19,9 +19,9 @@
 #ifndef RouteToLocation_H_
 #define RouteToLocation_H_
 
-#include <string>
 #include "RouteInformation.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::common {
 
@@ -29,7 +29,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class RouteToLocation {
- public:
+public:
   RouteToLocation();
   virtual ~RouteToLocation() = default;
 
@@ -43,16 +43,16 @@ class RouteToLocation {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const RouteToLocation& rhs) const;
-  bool operator!=(const RouteToLocation& rhs) const;
+  bool operator==(const RouteToLocation &rhs) const;
+  bool operator!=(const RouteToLocation &rhs) const;
 
   /////////////////////////////////////////////
   /// RouteToLocation members
@@ -61,26 +61,26 @@ class RouteToLocation {
   ///
   /// </summary>
   std::string getDnai() const;
-  void setDnai(std::string const& value);
+  void setDnai(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::RouteInformation getRouteInfo() const;
-  void setRouteInfo(oai::model::common::RouteInformation const& value);
+  void setRouteInfo(oai::model::common::RouteInformation const &value);
   bool routeInfoIsSet() const;
   void unsetRouteInfo();
   /// <summary>
   ///
   /// </summary>
   std::string getRouteProfId() const;
-  void setRouteProfId(std::string const& value);
+  void setRouteProfId(std::string const &value);
   bool routeProfIdIsSet() const;
   void unsetRouteProfId();
 
-  friend void to_json(nlohmann::json& j, const RouteToLocation& o);
-  friend void from_json(const nlohmann::json& j, RouteToLocation& o);
+  friend void to_json(nlohmann::json &j, const RouteToLocation &o);
+  friend void from_json(const nlohmann::json &j, RouteToLocation &o);
 
- protected:
+protected:
   std::string m_Dnai;
 
   oai::model::common::RouteInformation m_RouteInfo;
@@ -89,6 +89,6 @@ class RouteToLocation {
   bool m_RouteProfIdIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* RouteToLocation_H_ */

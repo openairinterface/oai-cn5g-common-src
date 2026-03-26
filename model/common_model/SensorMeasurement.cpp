@@ -27,12 +27,12 @@ void SensorMeasurement::validate() const {
   }
 }
 
-bool SensorMeasurement::validate(std::stringstream& msg) const {
+bool SensorMeasurement::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool SensorMeasurement::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool SensorMeasurement::validate(std::stringstream &msg,
+                                 const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "SensorMeasurement" : pathPrefix;
@@ -43,28 +43,26 @@ bool SensorMeasurement::validate(
   return success;
 }
 
-bool SensorMeasurement::operator==(const SensorMeasurement& rhs) const {
+bool SensorMeasurement::operator==(const SensorMeasurement &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool SensorMeasurement::operator!=(const SensorMeasurement& rhs) const {
+bool SensorMeasurement::operator!=(const SensorMeasurement &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const SensorMeasurement& o) {
+void to_json(nlohmann::json &j, const SensorMeasurement &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, SensorMeasurement& o) {
+void from_json(const nlohmann::json &j, SensorMeasurement &o) {
   from_json(j, o.m_value);
 }
 
-SensorMeasurement_anyOf SensorMeasurement::getValue() const {
-  return m_value;
-}
+SensorMeasurement_anyOf SensorMeasurement::getValue() const { return m_value; }
 
 void SensorMeasurement::setValue(SensorMeasurement_anyOf value) {
   m_value = value;
@@ -80,4 +78,4 @@ void SensorMeasurement::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

@@ -29,7 +29,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class StationaryIndicationRm {
- public:
+public:
   StationaryIndicationRm();
   virtual ~StationaryIndicationRm() = default;
 
@@ -43,26 +43,26 @@ class StationaryIndicationRm {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const StationaryIndicationRm& rhs) const;
-  bool operator!=(const StationaryIndicationRm& rhs) const;
+  bool operator==(const StationaryIndicationRm &rhs) const;
+  bool operator!=(const StationaryIndicationRm &rhs) const;
 
   /////////////////////////////////////////////
   /// StationaryIndicationRm members
 
-  friend void to_json(nlohmann::json& j, const StationaryIndicationRm& o);
-  friend void from_json(const nlohmann::json& j, StationaryIndicationRm& o);
+  friend void to_json(nlohmann::json &j, const StationaryIndicationRm &o);
+  friend void from_json(const nlohmann::json &j, StationaryIndicationRm &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* StationaryIndicationRm_H_ */

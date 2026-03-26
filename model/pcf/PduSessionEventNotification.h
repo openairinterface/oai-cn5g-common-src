@@ -21,12 +21,12 @@
 #define PduSessionEventNotification_H_
 
 #include "AfEventNotification.h"
-#include "PcfAddressingInfo.h"
-#include <string>
 #include "Ipv6Addr.h"
+#include "PcfAddressingInfo.h"
 #include "PduSessionStatus.h"
 #include "Snssai.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::pcf {
 
@@ -35,7 +35,7 @@ namespace oai::model::pcf {
 /// PDU session.
 /// </summary>
 class PduSessionEventNotification {
- public:
+public:
   PduSessionEventNotification();
   virtual ~PduSessionEventNotification() = default;
 
@@ -49,16 +49,16 @@ class PduSessionEventNotification {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const PduSessionEventNotification& rhs) const;
-  bool operator!=(const PduSessionEventNotification& rhs) const;
+  bool operator==(const PduSessionEventNotification &rhs) const;
+  bool operator!=(const PduSessionEventNotification &rhs) const;
 
   /////////////////////////////////////////////
   /// PduSessionEventNotification members
@@ -67,7 +67,7 @@ class PduSessionEventNotification {
   ///
   /// </summary>
   oai::model::pcf::AfEventNotification getEvNotif() const;
-  void setEvNotif(oai::model::pcf::AfEventNotification const& value);
+  void setEvNotif(oai::model::pcf::AfEventNotification const &value);
   /// <summary>
   /// String identifying a Supi that shall contain either an IMSI, a network
   /// specific identifier, a Global Cable Identifier (GCI) or a Global Line
@@ -86,7 +86,7 @@ class PduSessionEventNotification {
   /// defined in 3GPP TS 29.501.
   /// </summary>
   std::string getSupi() const;
-  void setSupi(std::string const& value);
+  void setSupi(std::string const &value);
   bool supiIsSet() const;
   void unsetSupi();
   /// <summary>
@@ -94,14 +94,14 @@ class PduSessionEventNotification {
   /// decimal&#39; notation as defined in RFC 1166.
   /// </summary>
   std::string getUeIpv4() const;
-  void setUeIpv4(std::string const& value);
+  void setUeIpv4(std::string const &value);
   bool ueIpv4IsSet() const;
   void unsetUeIpv4();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ipv6Addr getUeIpv6() const;
-  void setUeIpv6(oai::model::common::Ipv6Addr const& value);
+  void setUeIpv6(oai::model::common::Ipv6Addr const &value);
   bool ueIpv6IsSet() const;
   void unsetUeIpv6();
   /// <summary>
@@ -109,21 +109,21 @@ class PduSessionEventNotification {
   /// according to clause 1.1 and clause 2.1 of RFC 7042.
   /// </summary>
   std::string getUeMac() const;
-  void setUeMac(std::string const& value);
+  void setUeMac(std::string const &value);
   bool ueMacIsSet() const;
   void unsetUeMac();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::PduSessionStatus getStatus() const;
-  void setStatus(oai::model::pcf::PduSessionStatus const& value);
+  void setStatus(oai::model::pcf::PduSessionStatus const &value);
   bool statusIsSet() const;
   void unsetStatus();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::PcfAddressingInfo getPcfInfo() const;
-  void setPcfInfo(oai::model::pcf::PcfAddressingInfo const& value);
+  void setPcfInfo(oai::model::pcf::PcfAddressingInfo const &value);
   bool pcfInfoIsSet() const;
   void unsetPcfInfo();
   /// <summary>
@@ -135,14 +135,14 @@ class PduSessionEventNotification {
   /// \&quot;Label1.Label2.Label3\&quot;).
   /// </summary>
   std::string getDnn() const;
-  void setDnn(std::string const& value);
+  void setDnn(std::string const &value);
   bool dnnIsSet() const;
   void unsetDnn();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Snssai getSnssai() const;
-  void setSnssai(oai::model::common::Snssai const& value);
+  void setSnssai(oai::model::common::Snssai const &value);
   bool snssaiIsSet() const;
   void unsetSnssai();
   /// <summary>
@@ -153,15 +153,15 @@ class PduSessionEventNotification {
   /// Identifier.
   /// </summary>
   std::string getGpsi() const;
-  void setGpsi(std::string const& value);
+  void setGpsi(std::string const &value);
   bool gpsiIsSet() const;
   void unsetGpsi();
 
-  friend void to_json(nlohmann::json& j, const PduSessionEventNotification& o);
-  friend void from_json(
-      const nlohmann::json& j, PduSessionEventNotification& o);
+  friend void to_json(nlohmann::json &j, const PduSessionEventNotification &o);
+  friend void from_json(const nlohmann::json &j,
+                        PduSessionEventNotification &o);
 
- protected:
+protected:
   oai::model::pcf::AfEventNotification m_EvNotif;
 
   std::string m_Supi;
@@ -184,6 +184,6 @@ class PduSessionEventNotification {
   bool m_GpsiIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* PduSessionEventNotification_H_ */

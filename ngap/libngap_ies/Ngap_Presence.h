@@ -20,9 +20,9 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_Presence {
-  Ngap_Presence_optional    = 0,
+  Ngap_Presence_optional = 0,
   Ngap_Presence_conditional = 1,
-  Ngap_Presence_mandatory   = 2
+  Ngap_Presence_mandatory = 2
 } e_Ngap_Presence;
 
 /* Ngap_Presence */

@@ -19,9 +19,9 @@
 namespace oai::model::amf {
 
 N2InfoContent::N2InfoContent() {
-  m_NgapMessageType      = 0;
+  m_NgapMessageType = 0;
   m_NgapMessageTypeIsSet = false;
-  m_NgapIeTypeIsSet      = false;
+  m_NgapIeTypeIsSet = false;
 }
 
 void N2InfoContent::validate() const {
@@ -31,18 +31,18 @@ void N2InfoContent::validate() const {
   }
 }
 
-bool N2InfoContent::validate(std::stringstream& msg) const {
+bool N2InfoContent::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool N2InfoContent::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool N2InfoContent::validate(std::stringstream &msg,
+                             const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "N2InfoContent" : pathPrefix;
 
   if (ngapMessageTypeIsSet()) {
-    const int32_t& value               = m_NgapMessageType;
+    const int32_t &value = m_NgapMessageType;
     const std::string currentValuePath = _pathPrefix + ".ngapMessageType";
 
     if (value < 0) {
@@ -54,7 +54,7 @@ bool N2InfoContent::validate(
   return success;
 }
 
-bool N2InfoContent::operator==(const N2InfoContent& rhs) const {
+bool N2InfoContent::operator==(const N2InfoContent &rhs) const {
   return
 
       ((!ngapMessageTypeIsSet() && !rhs.ngapMessageTypeIsSet()) ||
@@ -70,18 +70,20 @@ bool N2InfoContent::operator==(const N2InfoContent& rhs) const {
           ;
 }
 
-bool N2InfoContent::operator!=(const N2InfoContent& rhs) const {
+bool N2InfoContent::operator!=(const N2InfoContent &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const N2InfoContent& o) {
+void to_json(nlohmann::json &j, const N2InfoContent &o) {
   j = nlohmann::json();
-  if (o.ngapMessageTypeIsSet()) j["ngapMessageType"] = o.m_NgapMessageType;
-  if (o.ngapIeTypeIsSet()) j["ngapIeType"] = o.m_NgapIeType;
+  if (o.ngapMessageTypeIsSet())
+    j["ngapMessageType"] = o.m_NgapMessageType;
+  if (o.ngapIeTypeIsSet())
+    j["ngapIeType"] = o.m_NgapIeType;
   j["ngapData"] = o.m_NgapData;
 }
 
-void from_json(const nlohmann::json& j, N2InfoContent& o) {
+void from_json(const nlohmann::json &j, N2InfoContent &o) {
   if (j.find("ngapMessageType") != j.end()) {
     j.at("ngapMessageType").get_to(o.m_NgapMessageType);
     o.m_NgapMessageTypeIsSet = true;
@@ -93,38 +95,30 @@ void from_json(const nlohmann::json& j, N2InfoContent& o) {
   j.at("ngapData").get_to(o.m_NgapData);
 }
 
-int32_t N2InfoContent::getNgapMessageType() const {
-  return m_NgapMessageType;
-}
+int32_t N2InfoContent::getNgapMessageType() const { return m_NgapMessageType; }
 void N2InfoContent::setNgapMessageType(int32_t const value) {
-  m_NgapMessageType      = value;
+  m_NgapMessageType = value;
   m_NgapMessageTypeIsSet = true;
 }
 bool N2InfoContent::ngapMessageTypeIsSet() const {
   return m_NgapMessageTypeIsSet;
 }
-void N2InfoContent::unsetNgapMessageType() {
-  m_NgapMessageTypeIsSet = false;
-}
+void N2InfoContent::unsetNgapMessageType() { m_NgapMessageTypeIsSet = false; }
 oai::model::amf::NgapIeType N2InfoContent::getNgapIeType() const {
   return m_NgapIeType;
 }
-void N2InfoContent::setNgapIeType(oai::model::amf::NgapIeType const& value) {
-  m_NgapIeType      = value;
+void N2InfoContent::setNgapIeType(oai::model::amf::NgapIeType const &value) {
+  m_NgapIeType = value;
   m_NgapIeTypeIsSet = true;
 }
-bool N2InfoContent::ngapIeTypeIsSet() const {
-  return m_NgapIeTypeIsSet;
-}
-void N2InfoContent::unsetNgapIeType() {
-  m_NgapIeTypeIsSet = false;
-}
+bool N2InfoContent::ngapIeTypeIsSet() const { return m_NgapIeTypeIsSet; }
+void N2InfoContent::unsetNgapIeType() { m_NgapIeTypeIsSet = false; }
 oai::model::common::RefToBinaryData N2InfoContent::getNgapData() const {
   return m_NgapData;
 }
 void N2InfoContent::setNgapData(
-    oai::model::common::RefToBinaryData const& value) {
+    oai::model::common::RefToBinaryData const &value) {
   m_NgapData = value;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

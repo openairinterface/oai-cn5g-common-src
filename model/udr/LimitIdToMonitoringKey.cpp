@@ -19,7 +19,7 @@
 namespace oai::udr::model {
 
 LimitIdToMonitoringKey::LimitIdToMonitoringKey() {
-  m_LimitId     = "";
+  m_LimitId = "";
   m_MonkeyIsSet = false;
 }
 
@@ -29,13 +29,14 @@ void LimitIdToMonitoringKey::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const LimitIdToMonitoringKey& o) {
-  j            = nlohmann::json();
+void to_json(nlohmann::json &j, const LimitIdToMonitoringKey &o) {
+  j = nlohmann::json();
   j["limitId"] = o.m_LimitId;
-  if (o.monkeyIsSet() || !o.m_Monkey.empty()) j["monkey"] = o.m_Monkey;
+  if (o.monkeyIsSet() || !o.m_Monkey.empty())
+    j["monkey"] = o.m_Monkey;
 }
 
-void from_json(const nlohmann::json& j, LimitIdToMonitoringKey& o) {
+void from_json(const nlohmann::json &j, LimitIdToMonitoringKey &o) {
   j.at("limitId").get_to(o.m_LimitId);
   if (j.find("monkey") != j.end()) {
     j.at("monkey").get_to(o.m_Monkey);
@@ -43,24 +44,18 @@ void from_json(const nlohmann::json& j, LimitIdToMonitoringKey& o) {
   }
 }
 
-std::string LimitIdToMonitoringKey::getLimitId() const {
-  return m_LimitId;
-}
-void LimitIdToMonitoringKey::setLimitId(std::string const& value) {
+std::string LimitIdToMonitoringKey::getLimitId() const { return m_LimitId; }
+void LimitIdToMonitoringKey::setLimitId(std::string const &value) {
   m_LimitId = value;
 }
-std::vector<std::string>& LimitIdToMonitoringKey::getMonkey() {
+std::vector<std::string> &LimitIdToMonitoringKey::getMonkey() {
   return m_Monkey;
 }
-void LimitIdToMonitoringKey::setMonkey(std::vector<std::string> const& value) {
-  m_Monkey      = value;
+void LimitIdToMonitoringKey::setMonkey(std::vector<std::string> const &value) {
+  m_Monkey = value;
   m_MonkeyIsSet = true;
 }
-bool LimitIdToMonitoringKey::monkeyIsSet() const {
-  return m_MonkeyIsSet;
-}
-void LimitIdToMonitoringKey::unsetMonkey() {
-  m_MonkeyIsSet = false;
-}
+bool LimitIdToMonitoringKey::monkeyIsSet() const { return m_MonkeyIsSet; }
+void LimitIdToMonitoringKey::unsetMonkey() { m_MonkeyIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

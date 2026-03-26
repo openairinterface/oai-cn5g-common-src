@@ -19,12 +19,12 @@
 #ifndef TrafficCorrelationInfo_H_
 #define TrafficCorrelationInfo_H_
 
-#include "Ipv6AddrRm.h"
-#include "FqdnPatternMatchingRule.h"
-#include <string>
 #include "CorrelationType.h"
-#include <vector>
+#include "FqdnPatternMatchingRule.h"
+#include "Ipv6AddrRm.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::pcf {
 
@@ -32,7 +32,7 @@ namespace oai::model::pcf {
 /// Contains the information for traffic correlation.
 /// </summary>
 class TrafficCorrelationInfo {
- public:
+public:
   TrafficCorrelationInfo();
   virtual ~TrafficCorrelationInfo() = default;
 
@@ -46,16 +46,16 @@ class TrafficCorrelationInfo {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const TrafficCorrelationInfo& rhs) const;
-  bool operator!=(const TrafficCorrelationInfo& rhs) const;
+  bool operator==(const TrafficCorrelationInfo &rhs) const;
+  bool operator!=(const TrafficCorrelationInfo &rhs) const;
 
   /////////////////////////////////////////////
   /// TrafficCorrelationInfo members
@@ -64,7 +64,7 @@ class TrafficCorrelationInfo {
   ///
   /// </summary>
   oai::model::pcf::CorrelationType getCorrType() const;
-  void setCorrType(oai::model::pcf::CorrelationType const& value);
+  void setCorrType(oai::model::pcf::CorrelationType const &value);
   bool corrTypeIsSet() const;
   void unsetCorrType();
   /// <summary>
@@ -72,7 +72,7 @@ class TrafficCorrelationInfo {
   /// Application Identifier or traffic filtering information.
   /// </summary>
   std::string getTfcCorrId() const;
-  void setTfcCorrId(std::string const& value);
+  void setTfcCorrId(std::string const &value);
   bool tfcCorrIdIsSet() const;
   void unsetTfcCorrId();
   /// <summary>
@@ -81,14 +81,14 @@ class TrafficCorrelationInfo {
   /// &#39;nullable: true&#39; property.
   /// </summary>
   std::string getComEasIpv4Addr() const;
-  void setComEasIpv4Addr(std::string const& value);
+  void setComEasIpv4Addr(std::string const &value);
   bool comEasIpv4AddrIsSet() const;
   void unsetComEasIpv4Addr();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ipv6AddrRm getComEasIpv6Addr() const;
-  void setComEasIpv6Addr(oai::model::common::Ipv6AddrRm const& value);
+  void setComEasIpv6Addr(oai::model::common::Ipv6AddrRm const &value);
   bool comEasIpv6AddrIsSet() const;
   void unsetComEasIpv6Addr();
   /// <summary>
@@ -96,7 +96,7 @@ class TrafficCorrelationInfo {
   /// </summary>
   std::vector<oai::model::pcf::FqdnPatternMatchingRule> getFqdnRange() const;
   void setFqdnRange(
-      std::vector<oai::model::pcf::FqdnPatternMatchingRule> const& value);
+      std::vector<oai::model::pcf::FqdnPatternMatchingRule> const &value);
   bool fqdnRangeIsSet() const;
   void unsetFqdnRange();
   /// <summary>
@@ -104,21 +104,21 @@ class TrafficCorrelationInfo {
   /// &#39;nullable: true&#39; property.
   /// </summary>
   std::string getNotifUri() const;
-  void setNotifUri(std::string const& value);
+  void setNotifUri(std::string const &value);
   bool notifUriIsSet() const;
   void unsetNotifUri();
   /// <summary>
   /// Notification correlation identifier.
   /// </summary>
   std::string getNotifCorrId() const;
-  void setNotifCorrId(std::string const& value);
+  void setNotifCorrId(std::string const &value);
   bool notifCorrIdIsSet() const;
   void unsetNotifCorrId();
 
-  friend void to_json(nlohmann::json& j, const TrafficCorrelationInfo& o);
-  friend void from_json(const nlohmann::json& j, TrafficCorrelationInfo& o);
+  friend void to_json(nlohmann::json &j, const TrafficCorrelationInfo &o);
+  friend void from_json(const nlohmann::json &j, TrafficCorrelationInfo &o);
 
- protected:
+protected:
   oai::model::pcf::CorrelationType m_CorrType;
   bool m_CorrTypeIsSet;
   std::string m_TfcCorrId;
@@ -135,6 +135,6 @@ class TrafficCorrelationInfo {
   bool m_NotifCorrIdIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* TrafficCorrelationInfo_H_ */

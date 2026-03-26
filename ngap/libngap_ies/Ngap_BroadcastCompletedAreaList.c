@@ -9,17 +9,16 @@
 #include "Ngap_BroadcastCompletedAreaList.h"
 
 #include "Ngap_CellIDBroadcastEUTRA.h"
-#include "Ngap_TAIBroadcastEUTRA.h"
-#include "Ngap_EmergencyAreaIDBroadcastEUTRA.h"
 #include "Ngap_CellIDBroadcastNR.h"
-#include "Ngap_TAIBroadcastNR.h"
+#include "Ngap_EmergencyAreaIDBroadcastEUTRA.h"
 #include "Ngap_EmergencyAreaIDBroadcastNR.h"
 #include "Ngap_ProtocolIE-SingleContainer.h"
+#include "Ngap_TAIBroadcastEUTRA.h"
+#include "Ngap_TAIBroadcastNR.h"
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 static asn_oer_constraints_t
-    asn_OER_type_Ngap_BroadcastCompletedAreaList_constr_1 CC_NOTUSED = {
-        {0, 0},
-        -1};
+    asn_OER_type_Ngap_BroadcastCompletedAreaList_constr_1 CC_NOTUSED = {{0, 0},
+                                                                        -1};
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 asn_per_constraints_t asn_PER_type_Ngap_BroadcastCompletedAreaList_constr_1
@@ -34,8 +33,8 @@ asn_per_constraints_t asn_PER_type_Ngap_BroadcastCompletedAreaList_constr_1
 asn_TYPE_member_t asn_MBR_Ngap_BroadcastCompletedAreaList_1[] = {
     {ATF_POINTER,
      0,
-     offsetof(
-         struct Ngap_BroadcastCompletedAreaList, choice.cellIDBroadcastEUTRA),
+     offsetof(struct Ngap_BroadcastCompletedAreaList,
+              choice.cellIDBroadcastEUTRA),
      (ASN_TAG_CLASS_CONTEXT | (0 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_CellIDBroadcastEUTRA,
@@ -73,9 +72,8 @@ asn_TYPE_member_t asn_MBR_Ngap_BroadcastCompletedAreaList_1[] = {
      "tAIBroadcastEUTRA"},
     {ATF_POINTER,
      0,
-     offsetof(
-         struct Ngap_BroadcastCompletedAreaList,
-         choice.emergencyAreaIDBroadcastEUTRA),
+     offsetof(struct Ngap_BroadcastCompletedAreaList,
+              choice.emergencyAreaIDBroadcastEUTRA),
      (ASN_TAG_CLASS_CONTEXT | (2 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_EmergencyAreaIDBroadcastEUTRA,
@@ -132,9 +130,8 @@ asn_TYPE_member_t asn_MBR_Ngap_BroadcastCompletedAreaList_1[] = {
      "tAIBroadcastNR"},
     {ATF_POINTER,
      0,
-     offsetof(
-         struct Ngap_BroadcastCompletedAreaList,
-         choice.emergencyAreaIDBroadcastNR),
+     offsetof(struct Ngap_BroadcastCompletedAreaList,
+              choice.emergencyAreaIDBroadcastNR),
      (ASN_TAG_CLASS_CONTEXT | (5 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_EmergencyAreaIDBroadcastNR,
@@ -188,7 +185,7 @@ asn_CHOICE_specifics_t asn_SPC_Ngap_BroadcastCompletedAreaList_specs_1 = {
     sizeof(struct Ngap_BroadcastCompletedAreaList),
     offsetof(struct Ngap_BroadcastCompletedAreaList, _asn_ctx),
     offsetof(struct Ngap_BroadcastCompletedAreaList, present),
-    sizeof(((struct Ngap_BroadcastCompletedAreaList*) 0)->present),
+    sizeof(((struct Ngap_BroadcastCompletedAreaList *)0)->present),
     asn_MAP_Ngap_BroadcastCompletedAreaList_tag2el_1,
     7, /* Count of tags in the map */
     0,

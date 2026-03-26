@@ -32,7 +32,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class ContextInfo {
- public:
+public:
   ContextInfo();
   virtual ~ContextInfo();
 
@@ -44,19 +44,19 @@ class ContextInfo {
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getOrigHeaders();
-  void setOrigHeaders(std::vector<std::string> const& value);
+  std::vector<std::string> &getOrigHeaders();
+  void setOrigHeaders(std::vector<std::string> const &value);
   bool origHeadersIsSet() const;
   void unsetOrigHeaders();
 
-  friend void to_json(nlohmann::json& j, const ContextInfo& o);
-  friend void from_json(const nlohmann::json& j, ContextInfo& o);
+  friend void to_json(nlohmann::json &j, const ContextInfo &o);
+  friend void from_json(const nlohmann::json &j, ContextInfo &o);
 
- protected:
+protected:
   std::vector<std::string> m_OrigHeaders;
   bool m_OrigHeadersIsSet;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* ContextInfo_H_ */

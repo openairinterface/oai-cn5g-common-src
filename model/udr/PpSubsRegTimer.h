@@ -31,7 +31,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class PpSubsRegTimer {
- public:
+public:
   PpSubsRegTimer();
   virtual ~PpSubsRegTimer();
 
@@ -49,7 +49,7 @@ class PpSubsRegTimer {
   ///
   /// </summary>
   std::string getAfInstanceId() const;
-  void setAfInstanceId(std::string const& value);
+  void setAfInstanceId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
@@ -59,21 +59,21 @@ class PpSubsRegTimer {
   ///
   /// </summary>
   std::string getValidityTime() const;
-  void setValidityTime(std::string const& value);
+  void setValidityTime(std::string const &value);
   bool validityTimeIsSet() const;
   void unsetValidityTime();
   /// <summary>
   ///
   /// </summary>
   std::string getMtcProviderInformation() const;
-  void setMtcProviderInformation(std::string const& value);
+  void setMtcProviderInformation(std::string const &value);
   bool mtcProviderInformationIsSet() const;
   void unsetMtcProviderInformation();
 
-  friend void to_json(nlohmann::json& j, const PpSubsRegTimer& o);
-  friend void from_json(const nlohmann::json& j, PpSubsRegTimer& o);
+  friend void to_json(nlohmann::json &j, const PpSubsRegTimer &o);
+  friend void from_json(const nlohmann::json &j, PpSubsRegTimer &o);
 
- protected:
+protected:
   int32_t m_SubsRegTimer;
 
   std::string m_AfInstanceId;
@@ -86,6 +86,6 @@ class PpSubsRegTimer {
   bool m_MtcProviderInformationIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* PpSubsRegTimer_H_ */

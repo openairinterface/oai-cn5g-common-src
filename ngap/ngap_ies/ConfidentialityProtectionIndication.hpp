@@ -12,20 +12,20 @@ extern "C" {
 namespace oai::ngap {
 
 class ConfidentialityProtectionIndication {
- public:
+public:
   ConfidentialityProtectionIndication();
   virtual ~ConfidentialityProtectionIndication(){};
 
-  void set(const e_Ngap_ConfidentialityProtectionIndication& indication);
-  bool get(long& indication) const;
+  void set(const e_Ngap_ConfidentialityProtectionIndication &indication);
+  bool get(long &indication) const;
 
-  bool encode(Ngap_ConfidentialityProtectionIndication_t&) const;
-  bool decode(const Ngap_ConfidentialityProtectionIndication_t&);
+  bool encode(Ngap_ConfidentialityProtectionIndication_t &) const;
+  bool decode(const Ngap_ConfidentialityProtectionIndication_t &);
 
- private:
+private:
   long m_Indication;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

@@ -71,7 +71,7 @@ asn_CHOICE_specifics_t asn_SPC_Ngap_SourceNodeID_specs_1 = {
     sizeof(struct Ngap_SourceNodeID),
     offsetof(struct Ngap_SourceNodeID, _asn_ctx),
     offsetof(struct Ngap_SourceNodeID, present),
-    sizeof(((struct Ngap_SourceNodeID*) 0)->present),
+    sizeof(((struct Ngap_SourceNodeID *)0)->present),
     asn_MAP_Ngap_SourceNodeID_tag2el_1,
     2, /* Count of tags in the map */
     0,

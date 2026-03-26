@@ -26,10 +26,10 @@ void AccessRightStatus::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const AccessRightStatus& o) {
+void to_json(nlohmann::json &j, const AccessRightStatus &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, AccessRightStatus& o) {}
+void from_json(const nlohmann::json &j, AccessRightStatus &o) {}
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

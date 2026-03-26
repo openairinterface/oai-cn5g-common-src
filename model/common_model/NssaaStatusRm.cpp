@@ -27,12 +27,12 @@ void NssaaStatusRm::validate() const {
   }
 }
 
-bool NssaaStatusRm::validate(std::stringstream& msg) const {
+bool NssaaStatusRm::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool NssaaStatusRm::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool NssaaStatusRm::validate(std::stringstream &msg,
+                             const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "NssaaStatusRm" : pathPrefix;
@@ -40,7 +40,7 @@ bool NssaaStatusRm::validate(
   return success;
 }
 
-bool NssaaStatusRm::operator==(const NssaaStatusRm& rhs) const {
+bool NssaaStatusRm::operator==(const NssaaStatusRm &rhs) const {
   return
 
       (getSnssai() == rhs.getSnssai()) &&
@@ -50,32 +50,30 @@ bool NssaaStatusRm::operator==(const NssaaStatusRm& rhs) const {
           ;
 }
 
-bool NssaaStatusRm::operator!=(const NssaaStatusRm& rhs) const {
+bool NssaaStatusRm::operator!=(const NssaaStatusRm &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const NssaaStatusRm& o) {
-  j           = nlohmann::json();
+void to_json(nlohmann::json &j, const NssaaStatusRm &o) {
+  j = nlohmann::json();
   j["snssai"] = o.m_Snssai;
   j["status"] = o.m_Status;
 }
 
-void from_json(const nlohmann::json& j, NssaaStatusRm& o) {
+void from_json(const nlohmann::json &j, NssaaStatusRm &o) {
   j.at("snssai").get_to(o.m_Snssai);
   j.at("status").get_to(o.m_Status);
 }
 
-oai::model::common::Snssai NssaaStatusRm::getSnssai() const {
-  return m_Snssai;
-}
-void NssaaStatusRm::setSnssai(oai::model::common::Snssai const& value) {
+oai::model::common::Snssai NssaaStatusRm::getSnssai() const { return m_Snssai; }
+void NssaaStatusRm::setSnssai(oai::model::common::Snssai const &value) {
   m_Snssai = value;
 }
 oai::model::common::AuthStatus NssaaStatusRm::getStatus() const {
   return m_Status;
 }
-void NssaaStatusRm::setStatus(oai::model::common::AuthStatus const& value) {
+void NssaaStatusRm::setStatus(oai::model::common::AuthStatus const &value) {
   m_Status = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

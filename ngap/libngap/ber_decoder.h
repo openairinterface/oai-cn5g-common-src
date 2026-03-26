@@ -22,21 +22,21 @@ struct asn_codec_ctx_s;       /* Forward declaration */
  * NOTE: Use the der_encode() function (der_encoder.h) to produce encoding
  * which is compliant with ber_decode().
  */
-asn_dec_rval_t ber_decode(
-    const struct asn_codec_ctx_s* opt_codec_ctx,
-    const struct asn_TYPE_descriptor_s* type_descriptor,
-    void** struct_ptr,  /* Pointer to a target structure's pointer */
-    const void* buffer, /* Data to be decoded */
-    size_t size         /* Size of that buffer */
+asn_dec_rval_t
+ber_decode(const struct asn_codec_ctx_s *opt_codec_ctx,
+           const struct asn_TYPE_descriptor_s *type_descriptor,
+           void **struct_ptr,  /* Pointer to a target structure's pointer */
+           const void *buffer, /* Data to be decoded */
+           size_t size         /* Size of that buffer */
 );
 
 /*
  * Type of generic function which decodes the byte stream into the structure.
  */
 typedef asn_dec_rval_t(ber_type_decoder_f)(
-    const struct asn_codec_ctx_s* opt_codec_ctx,
-    const struct asn_TYPE_descriptor_s* type_descriptor, void** struct_ptr,
-    const void* buf_ptr, size_t size, int tag_mode);
+    const struct asn_codec_ctx_s *opt_codec_ctx,
+    const struct asn_TYPE_descriptor_s *type_descriptor, void **struct_ptr,
+    const void *buf_ptr, size_t size, int tag_mode);
 
 /*******************************
  * INTERNALLY USEFUL FUNCTIONS *
@@ -49,14 +49,15 @@ typedef asn_dec_rval_t(ber_type_decoder_f)(
  * "end of content" sequences. The number may only be negative if the
  * head->last_tag_form is non-zero.
  */
-asn_dec_rval_t ber_check_tags(
-    const struct asn_codec_ctx_s* opt_codec_ctx, /* codec options */
-    const struct asn_TYPE_descriptor_s* type_descriptor,
-    asn_struct_ctx_t* opt_ctx, /* saved decoding context */
-    const void* ptr, size_t size,
-    int tag_mode,      /* {-1,0,1}: IMPLICIT, no, EXPLICIT */
-    int last_tag_form, /* {-1,0:1}: any, primitive, constr */
-    ber_tlv_len_t* last_length, int* opt_tlv_form /* optional tag form */
+asn_dec_rval_t
+ber_check_tags(const struct asn_codec_ctx_s *opt_codec_ctx, /* codec options */
+               const struct asn_TYPE_descriptor_s *type_descriptor,
+               asn_struct_ctx_t *opt_ctx, /* saved decoding context */
+               const void *ptr, size_t size,
+               int tag_mode,      /* {-1,0,1}: IMPLICIT, no, EXPLICIT */
+               int last_tag_form, /* {-1,0:1}: any, primitive, constr */
+               ber_tlv_len_t *last_length,
+               int *opt_tlv_form /* optional tag form */
 );
 
 #ifdef __cplusplus

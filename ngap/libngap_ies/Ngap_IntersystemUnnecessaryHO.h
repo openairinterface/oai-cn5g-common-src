@@ -12,10 +12,10 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_NGRAN-CGI.h"
-#include "Ngap_EUTRA-CGI.h"
-#include <NativeEnumerated.h>
 #include "Ngap_CandidateCellList.h"
+#include "Ngap_EUTRA-CGI.h"
+#include "Ngap_NGRAN-CGI.h"
+#include <NativeEnumerated.h>
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -24,7 +24,7 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_IntersystemUnnecessaryHO__earlyIRATHO {
-  Ngap_IntersystemUnnecessaryHO__earlyIRATHO_true  = 0,
+  Ngap_IntersystemUnnecessaryHO__earlyIRATHO_true = 0,
   Ngap_IntersystemUnnecessaryHO__earlyIRATHO_false = 1
   /*
    * Enumeration is extensible
@@ -40,7 +40,7 @@ typedef struct Ngap_IntersystemUnnecessaryHO {
   Ngap_EUTRA_CGI_t targetcellID;
   long earlyIRATHO;
   Ngap_CandidateCellList_t candidateCellList;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

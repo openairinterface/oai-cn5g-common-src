@@ -19,8 +19,8 @@
 #ifndef ChargingInformation_H_
 #define ChargingInformation_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::pcf {
 
@@ -28,7 +28,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class ChargingInformation {
- public:
+public:
   ChargingInformation();
   virtual ~ChargingInformation() = default;
 
@@ -42,16 +42,16 @@ class ChargingInformation {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const ChargingInformation& rhs) const;
-  bool operator!=(const ChargingInformation& rhs) const;
+  bool operator==(const ChargingInformation &rhs) const;
+  bool operator!=(const ChargingInformation &rhs) const;
 
   /////////////////////////////////////////////
   /// ChargingInformation members
@@ -60,45 +60,45 @@ class ChargingInformation {
   ///
   /// </summary>
   std::string getPrimaryChfAddress() const;
-  void setPrimaryChfAddress(std::string const& value);
+  void setPrimaryChfAddress(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getSecondaryChfAddress() const;
-  void setSecondaryChfAddress(std::string const& value);
+  void setSecondaryChfAddress(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getPrimaryChfSetId() const;
-  void setPrimaryChfSetId(std::string const& value);
+  void setPrimaryChfSetId(std::string const &value);
   bool primaryChfSetIdIsSet() const;
   void unsetPrimaryChfSetId();
   /// <summary>
   ///
   /// </summary>
   std::string getPrimaryChfInstanceId() const;
-  void setPrimaryChfInstanceId(std::string const& value);
+  void setPrimaryChfInstanceId(std::string const &value);
   bool primaryChfInstanceIdIsSet() const;
   void unsetPrimaryChfInstanceId();
   /// <summary>
   ///
   /// </summary>
   std::string getSecondaryChfSetId() const;
-  void setSecondaryChfSetId(std::string const& value);
+  void setSecondaryChfSetId(std::string const &value);
   bool secondaryChfSetIdIsSet() const;
   void unsetSecondaryChfSetId();
   /// <summary>
   ///
   /// </summary>
   std::string getSecondaryChfInstanceId() const;
-  void setSecondaryChfInstanceId(std::string const& value);
+  void setSecondaryChfInstanceId(std::string const &value);
   bool secondaryChfInstanceIdIsSet() const;
   void unsetSecondaryChfInstanceId();
 
-  friend void to_json(nlohmann::json& j, const ChargingInformation& o);
-  friend void from_json(const nlohmann::json& j, ChargingInformation& o);
+  friend void to_json(nlohmann::json &j, const ChargingInformation &o);
+  friend void from_json(const nlohmann::json &j, ChargingInformation &o);
 
- protected:
+protected:
   std::string m_PrimaryChfAddress;
 
   std::string m_SecondaryChfAddress;
@@ -113,6 +113,6 @@ class ChargingInformation {
   bool m_SecondaryChfInstanceIdIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* ChargingInformation_H_ */

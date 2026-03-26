@@ -20,8 +20,8 @@
 #define UEContextRelease_H_
 
 #include "NgApCause.h"
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::amf {
 
@@ -29,7 +29,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class UEContextRelease {
- public:
+public:
   UEContextRelease();
   virtual ~UEContextRelease();
 
@@ -42,7 +42,7 @@ class UEContextRelease {
   ///
   /// </summary>
   std::string getSupi() const;
-  void setSupi(std::string const& value);
+  void setSupi(std::string const &value);
   bool supiIsSet() const;
   void unsetSupi();
   /// <summary>
@@ -56,12 +56,12 @@ class UEContextRelease {
   ///
   /// </summary>
   oai::model::common::NgApCause getNgapCause() const;
-  void setNgapCause(oai::model::common::NgApCause const& value);
+  void setNgapCause(oai::model::common::NgApCause const &value);
 
-  friend void to_json(nlohmann::json& j, const UEContextRelease& o);
-  friend void from_json(const nlohmann::json& j, UEContextRelease& o);
+  friend void to_json(nlohmann::json &j, const UEContextRelease &o);
+  friend void from_json(const nlohmann::json &j, UEContextRelease &o);
 
- protected:
+protected:
   std::string m_Supi;
   bool m_SupiIsSet;
   bool m_UnauthenticatedSupi;
@@ -69,6 +69,6 @@ class UEContextRelease {
   oai::model::common::NgApCause m_NgapCause;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* UEContextRelease_H_ */

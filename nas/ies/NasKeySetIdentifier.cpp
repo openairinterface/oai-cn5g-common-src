@@ -17,7 +17,7 @@ NasKeySetIdentifier::NasKeySetIdentifier()
 //------------------------------------------------------------------------------
 NasKeySetIdentifier::NasKeySetIdentifier(uint8_t iei, bool tsc, uint8_t key_id)
     : Type1NasIe(iei) {
-  tsc_    = 0x01 & tsc;
+  tsc_ = 0x01 & tsc;
   key_id_ = 0x07 & key_id;
   NasKeySetIdentifier::SetValue();
 }
@@ -25,7 +25,7 @@ NasKeySetIdentifier::NasKeySetIdentifier(uint8_t iei, bool tsc, uint8_t key_id)
 //------------------------------------------------------------------------------
 NasKeySetIdentifier::NasKeySetIdentifier(bool tsc, uint8_t key_id)
     : Type1NasIe(false) {
-  tsc_    = 0x01 & tsc;
+  tsc_ = 0x01 & tsc;
   key_id_ = 0x07 & key_id;
   NasKeySetIdentifier::SetValue();
 }
@@ -34,9 +34,7 @@ NasKeySetIdentifier::NasKeySetIdentifier(bool tsc, uint8_t key_id)
 NasKeySetIdentifier::~NasKeySetIdentifier(){};
 
 //------------------------------------------------------------------------------
-void NasKeySetIdentifier::Set(bool high_pos) {
-  Type1NasIe::Set(high_pos);
-}
+void NasKeySetIdentifier::Set(bool high_pos) { Type1NasIe::Set(high_pos); }
 
 //------------------------------------------------------------------------------
 void NasKeySetIdentifier::SetValue() {
@@ -48,31 +46,27 @@ void NasKeySetIdentifier::SetValue() {
 
 //------------------------------------------------------------------------------
 void NasKeySetIdentifier::GetValue() {
-  tsc_    = (0b1000 & value_) >> 3;
+  tsc_ = (0b1000 & value_) >> 3;
   key_id_ = value_ & 0b00000111;
 }
 
 //------------------------------------------------------------------------------
 void NasKeySetIdentifier::SetTypeOfSecurityContext(bool type) {
   tsc_ = type;
-  SetValue();  // Update value
+  SetValue(); // Update value
 }
 
 //------------------------------------------------------------------------------
 void NasKeySetIdentifier::SetNasKeyIdentifier(uint8_t id) {
   key_id_ = 0x07 & id;
-  SetValue();  // Update value
+  SetValue(); // Update value
 }
 
 //------------------------------------------------------------------------------
-bool NasKeySetIdentifier::GetTypeOfSecurityContext() const {
-  return tsc_;
-}
+bool NasKeySetIdentifier::GetTypeOfSecurityContext() const { return tsc_; }
 
 //------------------------------------------------------------------------------
-uint8_t NasKeySetIdentifier::GetNasKeyIdentifier() const {
-  return key_id_;
-}
+uint8_t NasKeySetIdentifier::GetNasKeyIdentifier() const { return key_id_; }
 
 //------------------------------------------------------------------------------
 uint8_t NasKeySetIdentifier::GetNgKsi() const {

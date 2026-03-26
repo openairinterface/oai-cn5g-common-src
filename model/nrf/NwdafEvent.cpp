@@ -23,10 +23,8 @@ void NwdafEvent::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const NwdafEvent& o) {
-  j = nlohmann::json();
-}
+void to_json(nlohmann::json &j, const NwdafEvent &o) { j = nlohmann::json(); }
 
-void from_json(const nlohmann::json& j, NwdafEvent& o) {}
+void from_json(const nlohmann::json &j, NwdafEvent &o) {}
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

@@ -8,12 +8,12 @@
 #include "Type1NasIeFormatTv.hpp"
 
 constexpr uint8_t kPayloadContainerTypeLength = 1;
-constexpr auto kPayloadContainerTypeIeName    = "Payload Container Type";
+constexpr auto kPayloadContainerTypeIeName = "Payload Container Type";
 
 namespace oai::nas {
 
 class PayloadContainerType : public Type1NasIeFormatTv {
- public:
+public:
   PayloadContainerType();
   PayloadContainerType(uint8_t value);
   PayloadContainerType(uint8_t iei, uint8_t value);
@@ -21,9 +21,9 @@ class PayloadContainerType : public Type1NasIeFormatTv {
 
   static std::string GetIeName() { return kPayloadContainerTypeIeName; }
 
- private:
+private:
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

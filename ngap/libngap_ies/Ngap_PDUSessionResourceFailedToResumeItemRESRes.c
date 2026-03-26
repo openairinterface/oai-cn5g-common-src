@@ -13,9 +13,8 @@ asn_TYPE_member_t asn_MBR_Ngap_PDUSessionResourceFailedToResumeItemRESRes_1[] =
     {
         {ATF_NOFLAGS,
          0,
-         offsetof(
-             struct Ngap_PDUSessionResourceFailedToResumeItemRESRes,
-             pDUSessionID),
+         offsetof(struct Ngap_PDUSessionResourceFailedToResumeItemRESRes,
+                  pDUSessionID),
          (ASN_TAG_CLASS_CONTEXT | (0 << 2)),
          -1, /* IMPLICIT tag at current level */
          &asn_DEF_Ngap_PDUSessionID,
@@ -34,8 +33,8 @@ asn_TYPE_member_t asn_MBR_Ngap_PDUSessionResourceFailedToResumeItemRESRes_1[] =
          "pDUSessionID"},
         {ATF_NOFLAGS,
          0,
-         offsetof(
-             struct Ngap_PDUSessionResourceFailedToResumeItemRESRes, cause),
+         offsetof(struct Ngap_PDUSessionResourceFailedToResumeItemRESRes,
+                  cause),
          (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
          +1, /* EXPLICIT tag at current level */
          &asn_DEF_Ngap_Cause,
@@ -54,9 +53,8 @@ asn_TYPE_member_t asn_MBR_Ngap_PDUSessionResourceFailedToResumeItemRESRes_1[] =
          "cause"},
         {ATF_POINTER,
          1,
-         offsetof(
-             struct Ngap_PDUSessionResourceFailedToResumeItemRESRes,
-             iE_Extensions),
+         offsetof(struct Ngap_PDUSessionResourceFailedToResumeItemRESRes,
+                  iE_Extensions),
          (ASN_TAG_CLASS_CONTEXT | (2 << 2)),
          -1, /* IMPLICIT tag at current level */
          &asn_DEF_Ngap_ProtocolExtensionContainer_9666P153,
@@ -88,8 +86,8 @@ static const asn_TYPE_tag2member_t
 asn_SEQUENCE_specifics_t
     asn_SPC_Ngap_PDUSessionResourceFailedToResumeItemRESRes_specs_1 = {
         sizeof(struct Ngap_PDUSessionResourceFailedToResumeItemRESRes),
-        offsetof(
-            struct Ngap_PDUSessionResourceFailedToResumeItemRESRes, _asn_ctx),
+        offsetof(struct Ngap_PDUSessionResourceFailedToResumeItemRESRes,
+                 _asn_ctx),
         asn_MAP_Ngap_PDUSessionResourceFailedToResumeItemRESRes_tag2el_1,
         3, /* Count of tags in the map */
         asn_MAP_Ngap_PDUSessionResourceFailedToResumeItemRESRes_oms_1, /* Optional

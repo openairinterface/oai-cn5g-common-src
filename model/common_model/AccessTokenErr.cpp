@@ -19,11 +19,11 @@
 namespace oai::model::common {
 
 AccessTokenErr::AccessTokenErr() {
-  m_Error                  = "";
-  m_Error_description      = "";
+  m_Error = "";
+  m_Error_description = "";
   m_Error_descriptionIsSet = false;
-  m_Error_uri              = "";
-  m_Error_uriIsSet         = false;
+  m_Error_uri = "";
+  m_Error_uriIsSet = false;
 }
 
 void AccessTokenErr::validate() const {
@@ -33,12 +33,12 @@ void AccessTokenErr::validate() const {
   }
 }
 
-bool AccessTokenErr::validate(std::stringstream& msg) const {
+bool AccessTokenErr::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AccessTokenErr::validate(
-    std::stringstream& /* msg */, const std::string& /* pathPrefix */) const {
+bool AccessTokenErr::validate(std::stringstream & /* msg */,
+                              const std::string & /* pathPrefix */) const {
   bool success = true;
   /*
   const std::string _pathPrefix =
@@ -47,7 +47,7 @@ bool AccessTokenErr::validate(
   return success;
 }
 
-bool AccessTokenErr::operator==(const AccessTokenErr& rhs) const {
+bool AccessTokenErr::operator==(const AccessTokenErr &rhs) const {
   return
 
       (getError() == rhs.getError()) &&
@@ -63,18 +63,20 @@ bool AccessTokenErr::operator==(const AccessTokenErr& rhs) const {
           ;
 }
 
-bool AccessTokenErr::operator!=(const AccessTokenErr& rhs) const {
+bool AccessTokenErr::operator!=(const AccessTokenErr &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AccessTokenErr& o) {
-  j          = nlohmann::json();
+void to_json(nlohmann::json &j, const AccessTokenErr &o) {
+  j = nlohmann::json();
   j["error"] = o.m_Error;
-  if (o.errorDescriptionIsSet()) j["error_description"] = o.m_Error_description;
-  if (o.errorUriIsSet()) j["error_uri"] = o.m_Error_uri;
+  if (o.errorDescriptionIsSet())
+    j["error_description"] = o.m_Error_description;
+  if (o.errorUriIsSet())
+    j["error_uri"] = o.m_Error_uri;
 }
 
-void from_json(const nlohmann::json& j, AccessTokenErr& o) {
+void from_json(const nlohmann::json &j, AccessTokenErr &o) {
   j.at("error").get_to(o.m_Error);
   if (j.find("error_description") != j.end()) {
     j.at("error_description").get_to(o.m_Error_description);
@@ -86,17 +88,13 @@ void from_json(const nlohmann::json& j, AccessTokenErr& o) {
   }
 }
 
-std::string AccessTokenErr::getError() const {
-  return m_Error;
-}
-void AccessTokenErr::setError(std::string const& value) {
-  m_Error = value;
-}
+std::string AccessTokenErr::getError() const { return m_Error; }
+void AccessTokenErr::setError(std::string const &value) { m_Error = value; }
 std::string AccessTokenErr::getErrorDescription() const {
   return m_Error_description;
 }
-void AccessTokenErr::setErrorDescription(std::string const& value) {
-  m_Error_description      = value;
+void AccessTokenErr::setErrorDescription(std::string const &value) {
+  m_Error_description = value;
   m_Error_descriptionIsSet = true;
 }
 bool AccessTokenErr::errorDescriptionIsSet() const {
@@ -105,18 +103,12 @@ bool AccessTokenErr::errorDescriptionIsSet() const {
 void AccessTokenErr::unsetError_description() {
   m_Error_descriptionIsSet = false;
 }
-std::string AccessTokenErr::getErrorUri() const {
-  return m_Error_uri;
-}
-void AccessTokenErr::setErrorUri(std::string const& value) {
-  m_Error_uri      = value;
+std::string AccessTokenErr::getErrorUri() const { return m_Error_uri; }
+void AccessTokenErr::setErrorUri(std::string const &value) {
+  m_Error_uri = value;
   m_Error_uriIsSet = true;
 }
-bool AccessTokenErr::errorUriIsSet() const {
-  return m_Error_uriIsSet;
-}
-void AccessTokenErr::unsetError_uri() {
-  m_Error_uriIsSet = false;
-}
+bool AccessTokenErr::errorUriIsSet() const { return m_Error_uriIsSet; }
+void AccessTokenErr::unsetError_uri() { m_Error_uriIsSet = false; }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

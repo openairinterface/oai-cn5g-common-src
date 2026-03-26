@@ -33,8 +33,8 @@
 
 #ifndef bstr__alloc
 #if defined(BSTRLIB_TEST_CANARY)
-void* bstr__alloc(size_t sz) {
-  char* p = (char*) malloc(sz);
+void *bstr__alloc(size_t sz) {
+  char *p = (char *)malloc(sz);
   memset(p, 'X', sz);
   return p;
 }
@@ -79,7 +79,8 @@ void* bstr__alloc(size_t sz) {
 
 #define bBlockCopy(D, S, L)                                                    \
   {                                                                            \
-    if ((L) > 0) bstr__memmove((D), (S), (L));                                 \
+    if ((L) > 0)                                                               \
+      bstr__memmove((D), (S), (L));                                            \
   }
 
 /* Compute the snapped size for a given requested size.  By snapping to powers
@@ -89,7 +90,7 @@ static int snapUpSize(int i) {
     i = 8;
   } else {
     unsigned int j;
-    j = (unsigned int) i;
+    j = (unsigned int)i;
 
     j |= (j >> 1);
     j |= (j >> 2);
@@ -103,7 +104,8 @@ static int snapUpSize(int i) {
 #endif
     /* Least power of two greater than i */
     j++;
-    if ((int) j >= i) i = (int) j;
+    if ((int)j >= i)
+      i = (int)j;
   }
   return i;
 }
@@ -120,9 +122,10 @@ int balloc(bstring b, int olen) {
   }
 
   if (olen >= b->mlen) {
-    unsigned char* x;
+    unsigned char *x;
 
-    if ((len = snapUpSize(olen)) <= b->mlen) return BSTR_OK;
+    if ((len = snapUpSize(olen)) <= b->mlen)
+      return BSTR_OK;
 
     /* Assume probability of a non-moving realloc is 0.125 */
     if (7 * b->mlen < 8 * b->slen) {
@@ -131,13 +134,13 @@ int balloc(bstring b, int olen) {
 
     reallocStrategy:;
 
-      x = (unsigned char*) bstr__realloc(b->data, (size_t) len);
+      x = (unsigned char *)bstr__realloc(b->data, (size_t)len);
       if (x == NULL) {
         /* Since we failed, try allocating the tighest possible
          allocation */
 
         len = olen;
-        x   = (unsigned char*) bstr__realloc(b->data, (size_t) olen);
+        x = (unsigned char *)bstr__realloc(b->data, (size_t)olen);
         if (NULL == x) {
           return BSTR_ERR;
         }
@@ -147,20 +150,21 @@ int balloc(bstring b, int olen) {
        the extra bytes that are allocated, but not considered part of
        the string */
 
-      if (NULL == (x = (unsigned char*) bstr__alloc((size_t) len))) {
+      if (NULL == (x = (unsigned char *)bstr__alloc((size_t)len))) {
         /* Perhaps there is no available memory for the two
          allocations to be in memory at once */
 
         goto reallocStrategy;
 
       } else {
-        if (b->slen) bstr__memcpy((char*) x, (char*) b->data, (size_t) b->slen);
+        if (b->slen)
+          bstr__memcpy((char *)x, (char *)b->data, (size_t)b->slen);
         bstr__free(b->data);
       }
     }
-    b->data          = x;
-    b->mlen          = len;
-    b->data[b->slen] = (unsigned char) '\0';
+    b->data = x;
+    b->mlen = len;
+    b->data[b->slen] = (unsigned char)'\0';
 
 #if defined(BSTRLIB_TEST_CANARY)
     if (len > b->slen + 1) {
@@ -180,22 +184,26 @@ int balloc(bstring b, int olen) {
  *  performance.
  */
 int ballocmin(bstring b, int len) {
-  unsigned char* s;
+  unsigned char *s;
 
-  if (b == NULL || b->data == NULL) return BSTR_ERR;
-  if (b->slen >= INT_MAX || b->slen < 0) return BSTR_ERR;
+  if (b == NULL || b->data == NULL)
+    return BSTR_ERR;
+  if (b->slen >= INT_MAX || b->slen < 0)
+    return BSTR_ERR;
   if (b->mlen <= 0 || b->mlen < b->slen || len <= 0) {
     return BSTR_ERR;
   }
 
-  if (len < b->slen + 1) len = b->slen + 1;
+  if (len < b->slen + 1)
+    len = b->slen + 1;
 
   if (len != b->mlen) {
-    s = (unsigned char*) bstr__realloc(b->data, (size_t) len);
-    if (NULL == s) return BSTR_ERR;
-    s[b->slen] = (unsigned char) '\0';
-    b->data    = s;
-    b->mlen    = len;
+    s = (unsigned char *)bstr__realloc(b->data, (size_t)len);
+    if (NULL == s)
+      return BSTR_ERR;
+    s[b->slen] = (unsigned char)'\0';
+    b->data = s;
+    b->mlen = len;
   }
 
   return BSTR_OK;
@@ -206,20 +214,23 @@ int ballocmin(bstring b, int len) {
  *  Create a bstring which contains the contents of the '\0' terminated char *
  *  buffer str.
  */
-bstring bfromcstr(const char* str) {
+bstring bfromcstr(const char *str) {
   bstring b;
   int i;
   size_t j;
 
-  if (str == NULL) return NULL;
-  j = (strlen) (str);
-  i = snapUpSize((int) (j + (2 - (j != 0))));
-  if (i <= (int) j) return NULL;
+  if (str == NULL)
+    return NULL;
+  j = (strlen)(str);
+  i = snapUpSize((int)(j + (2 - (j != 0))));
+  if (i <= (int)j)
+    return NULL;
 
-  b = (bstring) bstr__alloc(sizeof(struct tagbstring));
-  if (NULL == b) return NULL;
-  b->slen = (int) j;
-  b->data = (unsigned char*) bstr__alloc(b->mlen = i);
+  b = (bstring)bstr__alloc(sizeof(struct tagbstring));
+  if (NULL == b)
+    return NULL;
+  b->slen = (int)j;
+  b->data = (unsigned char *)bstr__alloc(b->mlen = i);
   if (b->data == NULL) {
     bstr__free(b);
     return NULL;
@@ -236,26 +247,31 @@ bstring bfromcstr(const char* str) {
  *  minl characters in length, but an attempt is made to allocate up to
  *  maxl characters.
  */
-bstring bfromcstrrangealloc(int minl, int maxl, const char* str) {
+bstring bfromcstrrangealloc(int minl, int maxl, const char *str) {
   bstring b;
   int i;
   size_t j;
 
   /* Bad parameters? */
-  if (str == NULL) return NULL;
-  if (maxl < minl || minl < 0) return NULL;
+  if (str == NULL)
+    return NULL;
+  if (maxl < minl || minl < 0)
+    return NULL;
 
   /* Adjust lengths */
-  j = (strlen) (str);
-  if ((size_t) minl < (j + 1)) minl = (int) (j + 1);
-  if (maxl < minl) maxl = minl;
+  j = (strlen)(str);
+  if ((size_t)minl < (j + 1))
+    minl = (int)(j + 1);
+  if (maxl < minl)
+    maxl = minl;
   i = maxl;
 
-  b = (bstring) bstr__alloc(sizeof(struct tagbstring));
-  if (b == NULL) return NULL;
-  b->slen = (int) j;
+  b = (bstring)bstr__alloc(sizeof(struct tagbstring));
+  if (b == NULL)
+    return NULL;
+  b->slen = (int)j;
 
-  while (NULL == (b->data = (unsigned char*) bstr__alloc(b->mlen = i))) {
+  while (NULL == (b->data = (unsigned char *)bstr__alloc(b->mlen = i))) {
     int k = (i >> 1) + (minl >> 1);
     if (i == k || i < minl) {
       bstr__free(b);
@@ -274,7 +290,7 @@ bstring bfromcstrrangealloc(int minl, int maxl, const char* str) {
  *  char* buffer str.  The memory buffer backing the string is at least
  *  mlen characters in length.
  */
-bstring bfromcstralloc(int mlen, const char* str) {
+bstring bfromcstralloc(int mlen, const char *str) {
   return bfromcstrrangealloc(mlen, mlen, str);
 }
 
@@ -283,13 +299,15 @@ bstring bfromcstralloc(int mlen, const char* str) {
  *  Create a bstring which contains the content of the block blk of length
  *  len.
  */
-bstring blk2bstr(const void* blk, int len) {
+bstring blk2bstr(const void *blk, int len) {
   bstring b;
   int i;
 
-  if (blk == NULL || len < 0) return NULL;
-  b = (bstring) bstr__alloc(sizeof(struct tagbstring));
-  if (b == NULL) return NULL;
+  if (blk == NULL || len < 0)
+    return NULL;
+  b = (bstring)bstr__alloc(sizeof(struct tagbstring));
+  if (b == NULL)
+    return NULL;
   b->slen = len;
 
   i = len + (2 - (len != 0));
@@ -297,14 +315,15 @@ bstring blk2bstr(const void* blk, int len) {
 
   b->mlen = i;
 
-  b->data = (unsigned char*) bstr__alloc((size_t) b->mlen);
+  b->data = (unsigned char *)bstr__alloc((size_t)b->mlen);
   if (b->data == NULL) {
     bstr__free(b);
     return NULL;
   }
 
-  if (len > 0) bstr__memcpy(b->data, blk, (size_t) len);
-  b->data[len] = (unsigned char) '\0';
+  if (len > 0)
+    bstr__memcpy(b->data, blk, (size_t)len);
+  b->data[len] = (unsigned char)'\0';
 
   return b;
 }
@@ -316,20 +335,22 @@ bstring blk2bstr(const void* blk, int len) {
  *  to the character in z. This returned value should be freed with a
  *  bcstrfree () call, by the calling application.
  */
-char* bstr2cstr(const_bstring b, char z) {
+char *bstr2cstr(const_bstring b, char z) {
   int i, l;
-  char* r;
+  char *r;
 
-  if (b == NULL || b->slen < 0 || b->data == NULL) return NULL;
+  if (b == NULL || b->slen < 0 || b->data == NULL)
+    return NULL;
   l = b->slen;
-  r = (char*) bstr__alloc((size_t) (l + 1));
-  if (r == NULL) return r;
+  r = (char *)bstr__alloc((size_t)(l + 1));
+  if (r == NULL)
+    return r;
 
   for (i = 0; i < l; i++) {
-    r[i] = (char) ((b->data[i] == '\0') ? z : (char) (b->data[i]));
+    r[i] = (char)((b->data[i] == '\0') ? z : (char)(b->data[i]));
   }
 
-  r[l] = (unsigned char) '\0';
+  r[l] = (unsigned char)'\0';
 
   return r;
 }
@@ -345,7 +366,7 @@ char* bstr2cstr(const_bstring b, char z) {
  *  that allows higher level code to be independent from these macro
  *  redefinitions.
  */
-int bcstrfree(char* s) {
+int bcstrfree(char *s) {
   if (s) {
     bstr__free(s);
     return BSTR_OK;
@@ -359,30 +380,34 @@ int bcstrfree(char* s) {
  */
 int bconcat(bstring b0, const_bstring b1) {
   int len, d;
-  bstring aux = (bstring) b1;
+  bstring aux = (bstring)b1;
 
   if (b0 == NULL || b1 == NULL || b0->data == NULL || b1->data == NULL)
     return BSTR_ERR;
 
-  d   = b0->slen;
+  d = b0->slen;
   len = b1->slen;
-  if ((d | (b0->mlen - d) | len | (d + len)) < 0) return BSTR_ERR;
+  if ((d | (b0->mlen - d) | len | (d + len)) < 0)
+    return BSTR_ERR;
 
   if (b0->mlen <= d + len + 1) {
     ptrdiff_t pd = b1->data - b0->data;
     if (0 <= pd && pd < b0->mlen) {
-      if (NULL == (aux = bstrcpy(b1))) return BSTR_ERR;
+      if (NULL == (aux = bstrcpy(b1)))
+        return BSTR_ERR;
     }
     if (balloc(b0, d + len + 1) != BSTR_OK) {
-      if (aux != b1) bdestroy(aux);
+      if (aux != b1)
+        bdestroy(aux);
       return BSTR_ERR;
     }
   }
 
-  bBlockCopy(&b0->data[d], &aux->data[0], (size_t) len);
-  b0->data[d + len] = (unsigned char) '\0';
-  b0->slen          = d + len;
-  if (aux != b1) bdestroy(aux);
+  bBlockCopy(&b0->data[d], &aux->data[0], (size_t)len);
+  b0->data[d + len] = (unsigned char)'\0';
+  b0->slen = d + len;
+  if (aux != b1)
+    bdestroy(aux);
   return BSTR_OK;
 }
 
@@ -393,11 +418,13 @@ int bconcat(bstring b0, const_bstring b1) {
 int bconchar(bstring b, char c) {
   int d;
 
-  if (b == NULL) return BSTR_ERR;
+  if (b == NULL)
+    return BSTR_ERR;
   d = b->slen;
-  if ((d | (b->mlen - d)) < 0 || balloc(b, d + 2) != BSTR_OK) return BSTR_ERR;
-  b->data[d]     = (unsigned char) c;
-  b->data[d + 1] = (unsigned char) '\0';
+  if ((d | (b->mlen - d)) < 0 || balloc(b, d + 2) != BSTR_OK)
+    return BSTR_ERR;
+  b->data[d] = (unsigned char)c;
+  b->data[d + 1] = (unsigned char)'\0';
   b->slen++;
   return BSTR_OK;
 }
@@ -406,8 +433,8 @@ int bconchar(bstring b, char c) {
  *
  *  Concatenate a char * string to a bstring.
  */
-int bcatcstr(bstring b, const char* s) {
-  char* d;
+int bcatcstr(bstring b, const char *s) {
+  char *d;
   int i, l;
 
   if (b == NULL || b->data == NULL || b->slen < 0 || b->mlen < b->slen ||
@@ -416,7 +443,7 @@ int bcatcstr(bstring b, const char* s) {
 
   /* Optimistically concatenate directly */
   l = b->mlen - b->slen;
-  d = (char*) &b->data[b->slen];
+  d = (char *)&b->data[b->slen];
   for (i = 0; i < l; i++) {
     if ((*d++ = *s++) == '\0') {
       b->slen += i;
@@ -426,26 +453,28 @@ int bcatcstr(bstring b, const char* s) {
   b->slen += i;
 
   /* Need to explicitely resize and concatenate tail */
-  return bcatblk(b, (const void*) s, (int) strlen(s));
+  return bcatblk(b, (const void *)s, (int)strlen(s));
 }
 
 /*  int bcatblk (bstring b, const void * s, int len)
  *
  *  Concatenate a fixed length buffer to a bstring.
  */
-int bcatblk(bstring b, const void* s, int len) {
+int bcatblk(bstring b, const void *s, int len) {
   int nl;
 
   if (b == NULL || b->data == NULL || b->slen < 0 || b->mlen < b->slen ||
       b->mlen <= 0 || s == NULL || len < 0)
     return BSTR_ERR;
 
-  if (0 > (nl = b->slen + len)) return BSTR_ERR; /* Overflow? */
-  if (b->mlen <= nl && 0 > balloc(b, nl + 1)) return BSTR_ERR;
+  if (0 > (nl = b->slen + len))
+    return BSTR_ERR; /* Overflow? */
+  if (b->mlen <= nl && 0 > balloc(b, nl + 1))
+    return BSTR_ERR;
 
-  bBlockCopy(&b->data[b->slen], s, (size_t) len);
-  b->slen     = nl;
-  b->data[nl] = (unsigned char) '\0';
+  bBlockCopy(&b->data[b->slen], s, (size_t)len);
+  b->slen = nl;
+  b->data[nl] = (unsigned char)'\0';
   return BSTR_OK;
 }
 
@@ -458,9 +487,10 @@ bstring bstrcpy(const_bstring b) {
   int i, j;
 
   /* Attempted to copy an invalid string? */
-  if (b == NULL || b->slen < 0 || b->data == NULL) return NULL;
+  if (b == NULL || b->slen < 0 || b->data == NULL)
+    return NULL;
 
-  b0 = (bstring) bstr__alloc(sizeof(struct tagbstring));
+  b0 = (bstring)bstr__alloc(sizeof(struct tagbstring));
   if (b0 == NULL) {
     /* Unable to allocate memory for string header */
     return NULL;
@@ -469,10 +499,10 @@ bstring bstrcpy(const_bstring b) {
   i = b->slen;
   j = snapUpSize(i + 1);
 
-  b0->data = (unsigned char*) bstr__alloc(j);
+  b0->data = (unsigned char *)bstr__alloc(j);
   if (b0->data == NULL) {
-    j        = i + 1;
-    b0->data = (unsigned char*) bstr__alloc(j);
+    j = i + 1;
+    b0->data = (unsigned char *)bstr__alloc(j);
     if (b0->data == NULL) {
       /* Unable to allocate memory for string data */
       bstr__free(b0);
@@ -483,8 +513,9 @@ bstring bstrcpy(const_bstring b) {
   b0->mlen = j;
   b0->slen = i;
 
-  if (i) bstr__memcpy((char*) b0->data, (char*) b->data, i);
-  b0->data[b0->slen] = (unsigned char) '\0';
+  if (i)
+    bstr__memcpy((char *)b0->data, (char *)b->data, i);
+  b0->data[b0->slen] = (unsigned char)'\0';
 
   return b0;
 }
@@ -494,17 +525,19 @@ bstring bstrcpy(const_bstring b) {
  *  Overwrite the string a with the contents of string b.
  */
 int bassign(bstring a, const_bstring b) {
-  if (b == NULL || b->data == NULL || b->slen < 0) return BSTR_ERR;
+  if (b == NULL || b->data == NULL || b->slen < 0)
+    return BSTR_ERR;
   if (b->slen != 0) {
-    if (balloc(a, b->slen) != BSTR_OK) return BSTR_ERR;
+    if (balloc(a, b->slen) != BSTR_OK)
+      return BSTR_ERR;
     bstr__memmove(a->data, b->data, b->slen);
   } else {
     if (a == NULL || a->data == NULL || a->mlen < a->slen || a->slen < 0 ||
         a->mlen == 0)
       return BSTR_ERR;
   }
-  a->data[b->slen] = (unsigned char) '\0';
-  a->slen          = b->slen;
+  a->data[b->slen] = (unsigned char)'\0';
+  a->slen = b->slen;
   return BSTR_OK;
 }
 
@@ -515,27 +548,30 @@ int bassign(bstring a, const_bstring b) {
  *  len are clamped to the ends of b as with the function bmidstr.
  */
 int bassignmidstr(bstring a, const_bstring b, int left, int len) {
-  if (b == NULL || b->data == NULL || b->slen < 0) return BSTR_ERR;
+  if (b == NULL || b->data == NULL || b->slen < 0)
+    return BSTR_ERR;
 
   if (left < 0) {
     len += left;
     left = 0;
   }
 
-  if (len > b->slen - left) len = b->slen - left;
+  if (len > b->slen - left)
+    len = b->slen - left;
 
   if (a == NULL || a->data == NULL || a->mlen < a->slen || a->slen < 0 ||
       a->mlen == 0)
     return BSTR_ERR;
 
   if (len > 0) {
-    if (balloc(a, len) != BSTR_OK) return BSTR_ERR;
+    if (balloc(a, len) != BSTR_OK)
+      return BSTR_ERR;
     bstr__memmove(a->data, b->data + left, len);
     a->slen = len;
   } else {
     a->slen = 0;
   }
-  a->data[a->slen] = (unsigned char) '\0';
+  a->data[a->slen] = (unsigned char)'\0';
   return BSTR_OK;
 }
 
@@ -545,7 +581,7 @@ int bassignmidstr(bstring a, const_bstring b, int left, int len) {
  *  the bstring a must be a well defined and writable bstring.  If an error
  *  occurs BSTR_ERR is returned however a may be partially overwritten.
  */
-int bassigncstr(bstring a, const char* str) {
+int bassigncstr(bstring a, const char *str) {
   int i;
   size_t len;
   if (a == NULL || a->data == NULL || a->mlen < a->slen || a->slen < 0 ||
@@ -560,11 +596,11 @@ int bassigncstr(bstring a, const char* str) {
   }
 
   a->slen = i;
-  len     = strlen(str + i);
-  if (len + 1 > INT_MAX - i || 0 > balloc(a, (int) (i + len + 1)))
+  len = strlen(str + i);
+  if (len + 1 > INT_MAX - i || 0 > balloc(a, (int)(i + len + 1)))
     return BSTR_ERR;
-  bBlockCopy(a->data + i, str + i, (size_t) len + 1);
-  a->slen += (int) len;
+  bBlockCopy(a->data + i, str + i, (size_t)len + 1);
+  a->slen += (int)len;
   return BSTR_OK;
 }
 
@@ -574,14 +610,15 @@ int bassigncstr(bstring a, const char* str) {
  *  the bstring a must be a well defined and writable bstring.  If an error
  *  occurs BSTR_ERR is returned and a is not overwritten.
  */
-int bassignblk(bstring a, const void* s, int len) {
+int bassignblk(bstring a, const void *s, int len) {
   if (a == NULL || a->data == NULL || a->mlen < a->slen || a->slen < 0 ||
       a->mlen == 0 || NULL == s || len < 0 || len >= INT_MAX)
     return BSTR_ERR;
-  if (len + 1 > a->mlen && 0 > balloc(a, len + 1)) return BSTR_ERR;
-  bBlockCopy(a->data, s, (size_t) len);
-  a->data[len] = (unsigned char) '\0';
-  a->slen      = len;
+  if (len + 1 > a->mlen && 0 > balloc(a, len + 1))
+    return BSTR_ERR;
+  bBlockCopy(a->data, s, (size_t)len);
+  a->data[len] = (unsigned char)'\0';
+  a->slen = len;
   return BSTR_OK;
 }
 
@@ -594,15 +631,15 @@ int btrunc(bstring b, int n) {
       b->slen < 0 || b->mlen <= 0)
     return BSTR_ERR;
   if (b->slen > n) {
-    b->slen    = n;
-    b->data[n] = (unsigned char) '\0';
+    b->slen = n;
+    b->data[n] = (unsigned char)'\0';
   }
   return BSTR_OK;
 }
 
-#define upcase(c) (toupper((unsigned char) c))
-#define downcase(c) (tolower((unsigned char) c))
-#define wspace(c) (isspace((unsigned char) c))
+#define upcase(c) (toupper((unsigned char)c))
+#define downcase(c) (tolower((unsigned char)c))
+#define wspace(c) (isspace((unsigned char)c))
 
 /*  int btoupper (bstring b)
  *
@@ -614,7 +651,7 @@ int btoupper(bstring b) {
       b->mlen <= 0)
     return BSTR_ERR;
   for (i = 0, len = b->slen; i < len; i++) {
-    b->data[i] = (unsigned char) upcase(b->data[i]);
+    b->data[i] = (unsigned char)upcase(b->data[i]);
   }
   return BSTR_OK;
 }
@@ -629,7 +666,7 @@ int btolower(bstring b) {
       b->mlen <= 0)
     return BSTR_ERR;
   for (i = 0, len = b->slen; i < len; i++) {
-    b->data[i] = (unsigned char) downcase(b->data[i]);
+    b->data[i] = (unsigned char)downcase(b->data[i]);
   }
   return BSTR_OK;
 }
@@ -654,19 +691,22 @@ int bstricmp(const_bstring b0, const_bstring b1) {
     return BSTR_OK;
 
   for (i = 0; i < n; i++) {
-    v = (char) downcase(b0->data[i]) - (char) downcase(b1->data[i]);
-    if (0 != v) return v;
+    v = (char)downcase(b0->data[i]) - (char)downcase(b1->data[i]);
+    if (0 != v)
+      return v;
   }
 
   if (b0->slen > n) {
-    v = (char) downcase(b0->data[n]);
-    if (v) return v;
+    v = (char)downcase(b0->data[n]);
+    if (v)
+      return v;
     return UCHAR_MAX + 1;
   }
   if (b1->slen > n) {
-    v = -(char) downcase(b1->data[n]);
-    if (v) return v;
-    return -(int) (UCHAR_MAX + 1);
+    v = -(char)downcase(b1->data[n]);
+    if (v)
+      return v;
+    return -(int)(UCHAR_MAX + 1);
   }
   return BSTR_OK;
 }
@@ -688,28 +728,34 @@ int bstrnicmp(const_bstring b0, const_bstring b1, int n) {
       n < 0)
     return SHRT_MIN;
   m = n;
-  if (m > b0->slen) m = b0->slen;
-  if (m > b1->slen) m = b1->slen;
+  if (m > b0->slen)
+    m = b0->slen;
+  if (m > b1->slen)
+    m = b1->slen;
 
   if (b0->data != b1->data) {
     for (i = 0; i < m; i++) {
-      v = (char) downcase(b0->data[i]);
-      v -= (char) downcase(b1->data[i]);
-      if (v != 0) return b0->data[i] - b1->data[i];
+      v = (char)downcase(b0->data[i]);
+      v -= (char)downcase(b1->data[i]);
+      if (v != 0)
+        return b0->data[i] - b1->data[i];
     }
   }
 
-  if (n == m || b0->slen == b1->slen) return BSTR_OK;
+  if (n == m || b0->slen == b1->slen)
+    return BSTR_OK;
 
   if (b0->slen > m) {
-    v = (char) downcase(b0->data[m]);
-    if (v) return v;
+    v = (char)downcase(b0->data[m]);
+    if (v)
+      return v;
     return UCHAR_MAX + 1;
   }
 
-  v = -(char) downcase(b1->data[m]);
-  if (v) return v;
-  return -(int) (UCHAR_MAX + 1);
+  v = -(char)downcase(b1->data[m]);
+  if (v)
+    return v;
+  return -(int)(UCHAR_MAX + 1);
 }
 
 /*  int biseqcaselessblk (const_bstring b, const void * blk, int len)
@@ -721,17 +767,20 @@ int bstrnicmp(const_bstring b0, const_bstring b1, int n) {
  *  length of the strings are different, this function is O(1).  '\0'
  *  characters are not treated in any special way.
  */
-int biseqcaselessblk(const_bstring b, const void* blk, int len) {
+int biseqcaselessblk(const_bstring b, const void *blk, int len) {
   int i;
 
   if (bdata(b) == NULL || b->slen < 0 || blk == NULL || len < 0)
     return BSTR_ERR;
-  if (b->slen != len) return 0;
-  if (len == 0 || b->data == blk) return 1;
+  if (b->slen != len)
+    return 0;
+  if (len == 0 || b->data == blk)
+    return 1;
   for (i = 0; i < len; i++) {
-    if (b->data[i] != ((unsigned char*) blk)[i]) {
-      unsigned char c = (unsigned char) downcase(b->data[i]);
-      if (c != (unsigned char) downcase(((unsigned char*) blk)[i])) return 0;
+    if (b->data[i] != ((unsigned char *)blk)[i]) {
+      unsigned char c = (unsigned char)downcase(b->data[i]);
+      if (c != (unsigned char)downcase(((unsigned char *)blk)[i]))
+        return 0;
     }
   }
   return 1;
@@ -761,7 +810,8 @@ int i, n;
 	}
 	return 1;
 #else
-  if (NULL == b1) return BSTR_ERR;
+  if (NULL == b1)
+    return BSTR_ERR;
   return biseqcaselessblk(b0, b1->data, b1->slen);
 #endif
 }
@@ -775,17 +825,19 @@ int i, n;
  *  error, -1 is returned.  '\0' characters are not treated in any special
  *  way.
  */
-int bisstemeqcaselessblk(const_bstring b0, const void* blk, int len) {
+int bisstemeqcaselessblk(const_bstring b0, const void *blk, int len) {
   int i;
 
   if (bdata(b0) == NULL || b0->slen < 0 || NULL == blk || len < 0)
     return BSTR_ERR;
-  if (b0->slen < len) return BSTR_OK;
-  if (b0->data == (const unsigned char*) blk || len == 0) return 1;
+  if (b0->slen < len)
+    return BSTR_OK;
+  if (b0->data == (const unsigned char *)blk || len == 0)
+    return 1;
 
   for (i = 0; i < len; i++) {
-    if (b0->data[i] != ((const unsigned char*) blk)[i]) {
-      if (downcase(b0->data[i]) != downcase(((const unsigned char*) blk)[i]))
+    if (b0->data[i] != ((const unsigned char *)blk)[i]) {
+      if (downcase(b0->data[i]) != downcase(((const unsigned char *)blk)[i]))
         return 0;
     }
   }
@@ -810,8 +862,8 @@ int bltrimws(bstring b) {
     }
   }
 
-  b->data[0] = (unsigned char) '\0';
-  b->slen    = 0;
+  b->data[0] = (unsigned char)'\0';
+  b->slen = 0;
   return BSTR_OK;
 }
 
@@ -829,14 +881,15 @@ int brtrimws(bstring b) {
 
   for (i = b->slen - 1; i >= 0; i--) {
     if (!wspace(b->data[i])) {
-      if (b->mlen > i) b->data[i + 1] = (unsigned char) '\0';
+      if (b->mlen > i)
+        b->data[i + 1] = (unsigned char)'\0';
       b->slen = i + 1;
       return BSTR_OK;
     }
   }
 
-  b->data[0] = (unsigned char) '\0';
-  b->slen    = 0;
+  b->data[0] = (unsigned char)'\0';
+  b->slen = 0;
   return BSTR_OK;
 }
 
@@ -854,7 +907,8 @@ int btrimws(bstring b) {
 
   for (i = b->slen - 1; i >= 0; i--) {
     if (!wspace(b->data[i])) {
-      if (b->mlen > i) b->data[i + 1] = (unsigned char) '\0';
+      if (b->mlen > i)
+        b->data[i + 1] = (unsigned char)'\0';
       b->slen = i + 1;
       for (j = 0; wspace(b->data[j]); j++) {
       }
@@ -862,8 +916,8 @@ int btrimws(bstring b) {
     }
   }
 
-  b->data[0] = (unsigned char) '\0';
-  b->slen    = 0;
+  b->data[0] = (unsigned char)'\0';
+  b->slen = 0;
   return BSTR_OK;
 }
 
@@ -875,11 +929,13 @@ int btrimws(bstring b) {
  *  different, this function is O(1).  '\0' characters are not treated in any
  *  special way.
  */
-int biseqblk(const_bstring b, const void* blk, int len) {
+int biseqblk(const_bstring b, const void *blk, int len) {
   if (len < 0 || b == NULL || blk == NULL || b->data == NULL || b->slen < 0)
     return BSTR_ERR;
-  if (b->slen != len) return 0;
-  if (len == 0 || b->data == blk) return 1;
+  if (b->slen != len)
+    return 0;
+  if (len == 0 || b->data == blk)
+    return 1;
   return !bstr__memcmp(b->data, blk, len);
 }
 
@@ -894,8 +950,10 @@ int biseq(const_bstring b0, const_bstring b1) {
   if (b0 == NULL || b1 == NULL || b0->data == NULL || b1->data == NULL ||
       b0->slen < 0 || b1->slen < 0)
     return BSTR_ERR;
-  if (b0->slen != b1->slen) return BSTR_OK;
-  if (b0->data == b1->data || b0->slen == 0) return 1;
+  if (b0->slen != b1->slen)
+    return BSTR_OK;
+  if (b0->data == b1->data || b0->slen == 0)
+    return 1;
   return !bstr__memcmp(b0->data, b1->data, b0->slen);
 }
 
@@ -907,16 +965,19 @@ int biseq(const_bstring b0, const_bstring b1) {
  *  if there is an error, -1 is returned.  '\0' characters are not treated in
  *  any special way.
  */
-int bisstemeqblk(const_bstring b0, const void* blk, int len) {
+int bisstemeqblk(const_bstring b0, const void *blk, int len) {
   int i;
 
   if (bdata(b0) == NULL || b0->slen < 0 || NULL == blk || len < 0)
     return BSTR_ERR;
-  if (b0->slen < len) return BSTR_OK;
-  if (b0->data == (const unsigned char*) blk || len == 0) return 1;
+  if (b0->slen < len)
+    return BSTR_OK;
+  if (b0->data == (const unsigned char *)blk || len == 0)
+    return 1;
 
   for (i = 0; i < len; i++) {
-    if (b0->data[i] != ((const unsigned char*) blk)[i]) return BSTR_OK;
+    if (b0->data[i] != ((const unsigned char *)blk)[i])
+      return BSTR_OK;
   }
   return 1;
 }
@@ -932,11 +993,13 @@ int bisstemeqblk(const_bstring b0, const void* blk, int len) {
  *  other.  If the strings are equal 1 is returned, if they are unequal 0 is
  *  returned and if there is a detectable error BSTR_ERR is returned.
  */
-int biseqcstr(const_bstring b, const char* s) {
+int biseqcstr(const_bstring b, const char *s) {
   int i;
-  if (b == NULL || s == NULL || b->data == NULL || b->slen < 0) return BSTR_ERR;
+  if (b == NULL || s == NULL || b->data == NULL || b->slen < 0)
+    return BSTR_ERR;
   for (i = 0; i < b->slen; i++) {
-    if (s[i] == '\0' || b->data[i] != (unsigned char) s[i]) return BSTR_OK;
+    if (s[i] == '\0' || b->data[i] != (unsigned char)s[i])
+      return BSTR_OK;
   }
   return s[i] == '\0';
 }
@@ -953,13 +1016,13 @@ int biseqcstr(const_bstring b, const char* s) {
  *  1 is returned, if they are unequal regardless of case 0 is returned and
  *  if there is a detectable error BSTR_ERR is returned.
  */
-int biseqcstrcaseless(const_bstring b, const char* s) {
+int biseqcstrcaseless(const_bstring b, const char *s) {
   int i;
-  if (b == NULL || s == NULL || b->data == NULL || b->slen < 0) return BSTR_ERR;
+  if (b == NULL || s == NULL || b->data == NULL || b->slen < 0)
+    return BSTR_ERR;
   for (i = 0; i < b->slen; i++) {
-    if (s[i] == '\0' ||
-        (b->data[i] != (unsigned char) s[i] &&
-         downcase(b->data[i]) != (unsigned char) downcase(s[i])))
+    if (s[i] == '\0' || (b->data[i] != (unsigned char)s[i] &&
+                         downcase(b->data[i]) != (unsigned char)downcase(s[i])))
       return BSTR_OK;
   }
   return s[i] == '\0';
@@ -986,18 +1049,23 @@ int bstrcmp(const_bstring b0, const_bstring b1) {
       b0->slen < 0 || b1->slen < 0)
     return SHRT_MIN;
   n = b0->slen;
-  if (n > b1->slen) n = b1->slen;
+  if (n > b1->slen)
+    n = b1->slen;
   if (b0->slen == b1->slen && (b0->data == b1->data || b0->slen == 0))
     return BSTR_OK;
 
   for (i = 0; i < n; i++) {
-    v = ((char) b0->data[i]) - ((char) b1->data[i]);
-    if (v != 0) return v;
-    if (b0->data[i] == (unsigned char) '\0') return BSTR_OK;
+    v = ((char)b0->data[i]) - ((char)b1->data[i]);
+    if (v != 0)
+      return v;
+    if (b0->data[i] == (unsigned char)'\0')
+      return BSTR_OK;
   }
 
-  if (b0->slen > n) return 1;
-  if (b1->slen > n) return -1;
+  if (b0->slen > n)
+    return 1;
+  if (b1->slen > n)
+    return -1;
   return BSTR_OK;
 }
 
@@ -1018,20 +1086,26 @@ int bstrncmp(const_bstring b0, const_bstring b1, int n) {
       b0->slen < 0 || b1->slen < 0)
     return SHRT_MIN;
   m = n;
-  if (m > b0->slen) m = b0->slen;
-  if (m > b1->slen) m = b1->slen;
+  if (m > b0->slen)
+    m = b0->slen;
+  if (m > b1->slen)
+    m = b1->slen;
 
   if (b0->data != b1->data) {
     for (i = 0; i < m; i++) {
-      v = ((char) b0->data[i]) - ((char) b1->data[i]);
-      if (v != 0) return v;
-      if (b0->data[i] == (unsigned char) '\0') return BSTR_OK;
+      v = ((char)b0->data[i]) - ((char)b1->data[i]);
+      if (v != 0)
+        return v;
+      if (b0->data[i] == (unsigned char)'\0')
+        return BSTR_OK;
     }
   }
 
-  if (n == m || b0->slen == b1->slen) return BSTR_OK;
+  if (n == m || b0->slen == b1->slen)
+    return BSTR_OK;
 
-  if (b0->slen > m) return 1;
+  if (b0->slen > m)
+    return 1;
   return -1;
 }
 
@@ -1043,16 +1117,19 @@ int bstrncmp(const_bstring b0, const_bstring b1, int n) {
  *  by (left, len) is clamped to the boundaries of b.
  */
 bstring bmidstr(const_bstring b, int left, int len) {
-  if (b == NULL || b->slen < 0 || b->data == NULL) return NULL;
+  if (b == NULL || b->slen < 0 || b->data == NULL)
+    return NULL;
 
   if (left < 0) {
     len += left;
     left = 0;
   }
 
-  if (len > b->slen - left) len = b->slen - left;
+  if (len > b->slen - left)
+    len = b->slen - left;
 
-  if (len <= 0) return bfromcstr("");
+  if (len <= 0)
+    return bfromcstr("");
   return blk2bstr(b->data + left, len);
 }
 
@@ -1077,12 +1154,11 @@ int bdelete(bstring b, int pos, int len) {
     if (pos + len >= b->slen) {
       b->slen = pos;
     } else {
-      bBlockCopy(
-          (char*) (b->data + pos), (char*) (b->data + pos + len),
-          b->slen - (pos + len));
+      bBlockCopy((char *)(b->data + pos), (char *)(b->data + pos + len),
+                 b->slen - (pos + len));
       b->slen -= len;
     }
-    b->data[b->slen] = (unsigned char) '\0';
+    b->data[b->slen] = (unsigned char)'\0';
   }
   return BSTR_OK;
 }
@@ -1123,24 +1199,29 @@ int bdestroy(bstring b) {
  */
 int binstr(const_bstring b1, int pos, const_bstring b2) {
   int j, ii, ll, lf;
-  unsigned char* d0;
+  unsigned char *d0;
   unsigned char c0;
-  register unsigned char* d1;
+  register unsigned char *d1;
   register unsigned char c1;
   register int i;
 
   if (b1 == NULL || b1->data == NULL || b1->slen < 0 || b2 == NULL ||
       b2->data == NULL || b2->slen < 0)
     return BSTR_ERR;
-  if (b1->slen == pos) return (b2->slen == 0) ? pos : BSTR_ERR;
-  if (b1->slen < pos || pos < 0) return BSTR_ERR;
-  if (b2->slen == 0) return pos;
+  if (b1->slen == pos)
+    return (b2->slen == 0) ? pos : BSTR_ERR;
+  if (b1->slen < pos || pos < 0)
+    return BSTR_ERR;
+  if (b2->slen == 0)
+    return pos;
 
   /* No space to find such a string? */
-  if ((lf = b1->slen - b2->slen + 1) <= pos) return BSTR_ERR;
+  if ((lf = b1->slen - b2->slen + 1) <= pos)
+    return BSTR_ERR;
 
   /* An obvious alias case */
-  if (b1->data == b2->data && pos == 0) return 0;
+  if (b1->data == b2->data && pos == 0)
+    return 0;
 
   i = pos;
 
@@ -1152,16 +1233,18 @@ int binstr(const_bstring b1, int pos, const_bstring b2) {
   c0 = d0[0];
   if (1 == ll) {
     for (; i < lf; i++)
-      if (c0 == d1[i]) return i;
+      if (c0 == d1[i])
+        return i;
     return BSTR_ERR;
   }
 
   c1 = c0;
-  j  = 0;
+  j = 0;
   lf = b1->slen - 1;
 
   ii = -1;
-  if (i < lf) do {
+  if (i < lf)
+    do {
       /* Unrolled current character test */
       if (c1 != d1[i]) {
         if (c1 != d1[1 + i]) {
@@ -1172,7 +1255,8 @@ int binstr(const_bstring b1, int pos, const_bstring b2) {
       }
 
       /* Take note if this is the start of a potential match */
-      if (0 == j) ii = i;
+      if (0 == j)
+        ii = i;
 
       /* Shift the test character down by one */
       j++;
@@ -1187,16 +1271,18 @@ int binstr(const_bstring b1, int pos, const_bstring b2) {
     N0:;
 
       /* If no characters mismatched, then we matched */
-      if (i == ii + j) return ii;
+      if (i == ii + j)
+        return ii;
 
       /* Shift back to the beginning */
       i -= j;
-      j  = 0;
+      j = 0;
       c1 = c0;
     } while (i < lf);
 
   /* Deal with last case if unrolling caused a misalignment */
-  if (i == lf && ll == j + 1 && c1 == d1[i]) goto N0;
+  if (i == lf && ll == j + 1 && c1 == d1[i])
+    goto N0;
 
   return BSTR_ERR;
 }
@@ -1217,31 +1303,39 @@ int binstrr(const_bstring b1, int pos, const_bstring b2) {
   if (b1 == NULL || b1->data == NULL || b1->slen < 0 || b2 == NULL ||
       b2->data == NULL || b2->slen < 0)
     return BSTR_ERR;
-  if (b1->slen == pos && b2->slen == 0) return pos;
-  if (b1->slen < pos || pos < 0) return BSTR_ERR;
-  if (b2->slen == 0) return pos;
+  if (b1->slen == pos && b2->slen == 0)
+    return pos;
+  if (b1->slen < pos || pos < 0)
+    return BSTR_ERR;
+  if (b2->slen == 0)
+    return pos;
 
   /* Obvious alias case */
-  if (b1->data == b2->data && pos == 0 && b2->slen <= b1->slen) return 0;
+  if (b1->data == b2->data && pos == 0 && b2->slen <= b1->slen)
+    return 0;
 
   i = pos;
-  if ((l = b1->slen - b2->slen) < 0) return BSTR_ERR;
+  if ((l = b1->slen - b2->slen) < 0)
+    return BSTR_ERR;
 
   /* If no space to find such a string then snap back */
-  if (l + 1 <= i) i = l;
+  if (l + 1 <= i)
+    i = l;
   j = 0;
 
   d0 = b2->data;
   d1 = b1->data;
-  l  = b2->slen;
+  l = b2->slen;
 
   for (;;) {
     if (d0[j] == d1[i + j]) {
       j++;
-      if (j >= l) return i;
+      if (j >= l)
+        return i;
     } else {
       i--;
-      if (i < 0) break;
+      if (i < 0)
+        break;
       j = 0;
     }
   }
@@ -1265,17 +1359,22 @@ int binstrcaseless(const_bstring b1, int pos, const_bstring b2) {
   if (b1 == NULL || b1->data == NULL || b1->slen < 0 || b2 == NULL ||
       b2->data == NULL || b2->slen < 0)
     return BSTR_ERR;
-  if (b1->slen == pos) return (b2->slen == 0) ? pos : BSTR_ERR;
-  if (b1->slen < pos || pos < 0) return BSTR_ERR;
-  if (b2->slen == 0) return pos;
+  if (b1->slen == pos)
+    return (b2->slen == 0) ? pos : BSTR_ERR;
+  if (b1->slen < pos || pos < 0)
+    return BSTR_ERR;
+  if (b2->slen == 0)
+    return pos;
 
   l = b1->slen - b2->slen + 1;
 
   /* No space to find such a string? */
-  if (l <= pos) return BSTR_ERR;
+  if (l <= pos)
+    return BSTR_ERR;
 
   /* An obvious alias case */
-  if (b1->data == b2->data && pos == 0) return BSTR_OK;
+  if (b1->data == b2->data && pos == 0)
+    return BSTR_OK;
 
   i = pos;
   j = 0;
@@ -1287,10 +1386,12 @@ int binstrcaseless(const_bstring b1, int pos, const_bstring b2) {
   for (;;) {
     if (d0[j] == d1[i + j] || downcase(d0[j]) == downcase(d1[i + j])) {
       j++;
-      if (j >= ll) return i;
+      if (j >= ll)
+        return i;
     } else {
       i++;
-      if (i >= l) break;
+      if (i >= l)
+        break;
       j = 0;
     }
   }
@@ -1314,31 +1415,39 @@ int binstrrcaseless(const_bstring b1, int pos, const_bstring b2) {
   if (b1 == NULL || b1->data == NULL || b1->slen < 0 || b2 == NULL ||
       b2->data == NULL || b2->slen < 0)
     return BSTR_ERR;
-  if (b1->slen == pos && b2->slen == 0) return pos;
-  if (b1->slen < pos || pos < 0) return BSTR_ERR;
-  if (b2->slen == 0) return pos;
+  if (b1->slen == pos && b2->slen == 0)
+    return pos;
+  if (b1->slen < pos || pos < 0)
+    return BSTR_ERR;
+  if (b2->slen == 0)
+    return pos;
 
   /* Obvious alias case */
-  if (b1->data == b2->data && pos == 0 && b2->slen <= b1->slen) return BSTR_OK;
+  if (b1->data == b2->data && pos == 0 && b2->slen <= b1->slen)
+    return BSTR_OK;
 
   i = pos;
-  if ((l = b1->slen - b2->slen) < 0) return BSTR_ERR;
+  if ((l = b1->slen - b2->slen) < 0)
+    return BSTR_ERR;
 
   /* If no space to find such a string then snap back */
-  if (l + 1 <= i) i = l;
+  if (l + 1 <= i)
+    i = l;
   j = 0;
 
   d0 = b2->data;
   d1 = b1->data;
-  l  = b2->slen;
+  l = b2->slen;
 
   for (;;) {
     if (d0[j] == d1[i + j] || downcase(d0[j]) == downcase(d1[i + j])) {
       j++;
-      if (j >= l) return i;
+      if (j >= l)
+        return i;
     } else {
       i--;
-      if (i < 0) break;
+      if (i < 0)
+        break;
       j = 0;
     }
   }
@@ -1352,13 +1461,14 @@ int binstrrcaseless(const_bstring b1, int pos, const_bstring b2) {
  *  (inclusive).
  */
 int bstrchrp(const_bstring b, int c, int pos) {
-  unsigned char* p;
+  unsigned char *p;
 
   if (b == NULL || b->data == NULL || b->slen <= pos || pos < 0)
     return BSTR_ERR;
-  p = (unsigned char*) bstr__memchr(
-      (b->data + pos), (unsigned char) c, (b->slen - pos));
-  if (p) return (int) (p - b->data);
+  p = (unsigned char *)bstr__memchr((b->data + pos), (unsigned char)c,
+                                    (b->slen - pos));
+  if (p)
+    return (int)(p - b->data);
   return BSTR_ERR;
 }
 
@@ -1373,7 +1483,8 @@ int bstrrchrp(const_bstring b, int c, int pos) {
   if (b == NULL || b->data == NULL || b->slen <= pos || pos < 0)
     return BSTR_ERR;
   for (i = pos; i >= 0; i--) {
-    if (b->data[i] == (unsigned char) c) return i;
+    if (b->data[i] == (unsigned char)c)
+      return i;
   }
   return BSTR_ERR;
 }
@@ -1389,12 +1500,12 @@ struct charField {
 };
 #define testInCharField(cf, c)                                                 \
   ((cf)->content[(c) >> LONG_LOG_BITS_QTY] &                                   \
-   (((long) 1) << ((c) & (LONG_BITS_QTY - 1))))
+   (((long)1) << ((c) & (LONG_BITS_QTY - 1))))
 #define setInCharField(cf, idx)                                                \
   {                                                                            \
-    unsigned int c = (unsigned int) (idx);                                     \
+    unsigned int c = (unsigned int)(idx);                                      \
     (cf)->content[c >> LONG_LOG_BITS_QTY] |=                                   \
-        (LONG_TYPE) (1ul << (c & (LONG_BITS_QTY - 1)));                        \
+        (LONG_TYPE)(1ul << (c & (LONG_BITS_QTY - 1)));                         \
   }
 
 #else
@@ -1403,34 +1514,37 @@ struct charField {
 struct charField {
   unsigned char content[CFCLEN];
 };
-#define testInCharField(cf, c) ((cf)->content[(unsigned char) (c)])
-#define setInCharField(cf, idx) (cf)->content[(unsigned int) (idx)] = ~0
+#define testInCharField(cf, c) ((cf)->content[(unsigned char)(c)])
+#define setInCharField(cf, idx) (cf)->content[(unsigned int)(idx)] = ~0
 
 #endif
 
 /* Convert a bstring to charField */
-static int buildCharField(struct charField* cf, const_bstring b) {
+static int buildCharField(struct charField *cf, const_bstring b) {
   int i;
-  if (b == NULL || b->data == NULL || b->slen <= 0) return BSTR_ERR;
-  memset((void*) cf->content, 0, sizeof(struct charField));
+  if (b == NULL || b->data == NULL || b->slen <= 0)
+    return BSTR_ERR;
+  memset((void *)cf->content, 0, sizeof(struct charField));
   for (i = 0; i < b->slen; i++) {
     setInCharField(cf, b->data[i]);
   }
   return BSTR_OK;
 }
 
-static void invertCharField(struct charField* cf) {
+static void invertCharField(struct charField *cf) {
   int i;
-  for (i = 0; i < CFCLEN; i++) cf->content[i] = ~cf->content[i];
+  for (i = 0; i < CFCLEN; i++)
+    cf->content[i] = ~cf->content[i];
 }
 
 /* Inner engine for binchr */
-static int binchrCF(
-    const unsigned char* data, int len, int pos, const struct charField* cf) {
+static int binchrCF(const unsigned char *data, int len, int pos,
+                    const struct charField *cf) {
   int i;
   for (i = pos; i < len; i++) {
-    unsigned char c = (unsigned char) data[i];
-    if (testInCharField(cf, c)) return i;
+    unsigned char c = (unsigned char)data[i];
+    if (testInCharField(cf, c))
+      return i;
   }
   return BSTR_ERR;
 }
@@ -1445,18 +1559,21 @@ int binchr(const_bstring b0, int pos, const_bstring b1) {
   struct charField chrs;
   if (pos < 0 || b0 == NULL || b0->data == NULL || b0->slen <= pos)
     return BSTR_ERR;
-  if (1 == b1->slen) return bstrchrp(b0, b1->data[0], pos);
-  if (0 > buildCharField(&chrs, b1)) return BSTR_ERR;
+  if (1 == b1->slen)
+    return bstrchrp(b0, b1->data[0], pos);
+  if (0 > buildCharField(&chrs, b1))
+    return BSTR_ERR;
   return binchrCF(b0->data, b0->slen, pos, &chrs);
 }
 
 /* Inner engine for binchrr */
-static int binchrrCF(
-    const unsigned char* data, int pos, const struct charField* cf) {
+static int binchrrCF(const unsigned char *data, int pos,
+                     const struct charField *cf) {
   int i;
   for (i = pos; i >= 0; i--) {
-    unsigned int c = (unsigned int) data[i];
-    if (testInCharField(cf, c)) return i;
+    unsigned int c = (unsigned int)data[i];
+    if (testInCharField(cf, c))
+      return i;
   }
   return BSTR_ERR;
 }
@@ -1471,9 +1588,12 @@ int binchrr(const_bstring b0, int pos, const_bstring b1) {
   struct charField chrs;
   if (pos < 0 || b0 == NULL || b0->data == NULL || b1 == NULL || b0->slen < pos)
     return BSTR_ERR;
-  if (pos == b0->slen) pos--;
-  if (1 == b1->slen) return bstrrchrp(b0, b1->data[0], pos);
-  if (0 > buildCharField(&chrs, b1)) return BSTR_ERR;
+  if (pos == b0->slen)
+    pos--;
+  if (1 == b1->slen)
+    return bstrrchrp(b0, b1->data[0], pos);
+  if (0 > buildCharField(&chrs, b1))
+    return BSTR_ERR;
   return binchrrCF(b0->data, pos, &chrs);
 }
 
@@ -1487,7 +1607,8 @@ int bninchr(const_bstring b0, int pos, const_bstring b1) {
   struct charField chrs;
   if (pos < 0 || b0 == NULL || b0->data == NULL || b0->slen <= pos)
     return BSTR_ERR;
-  if (buildCharField(&chrs, b1) < 0) return BSTR_ERR;
+  if (buildCharField(&chrs, b1) < 0)
+    return BSTR_ERR;
   invertCharField(&chrs);
   return binchrCF(b0->data, b0->slen, pos, &chrs);
 }
@@ -1502,8 +1623,10 @@ int bninchrr(const_bstring b0, int pos, const_bstring b1) {
   struct charField chrs;
   if (pos < 0 || b0 == NULL || b0->data == NULL || b0->slen < pos)
     return BSTR_ERR;
-  if (pos == b0->slen) pos--;
-  if (buildCharField(&chrs, b1) < 0) return BSTR_ERR;
+  if (pos == b0->slen)
+    pos--;
+  if (buildCharField(&chrs, b1) < 0)
+    return BSTR_ERR;
   invertCharField(&chrs);
   return binchrrCF(b0->data, pos, &chrs);
 }
@@ -1518,27 +1641,30 @@ int bninchrr(const_bstring b0, int pos, const_bstring b1) {
 int bsetstr(bstring b0, int pos, const_bstring b1, unsigned char fill) {
   int d, newlen;
   ptrdiff_t pd;
-  bstring aux = (bstring) b1;
+  bstring aux = (bstring)b1;
 
   if (pos < 0 || b0 == NULL || b0->slen < 0 || NULL == b0->data ||
       b0->mlen < b0->slen || b0->mlen <= 0)
     return BSTR_ERR;
-  if (b1 != NULL && (b1->slen < 0 || b1->data == NULL)) return BSTR_ERR;
+  if (b1 != NULL && (b1->slen < 0 || b1->data == NULL))
+    return BSTR_ERR;
 
   d = pos;
 
   /* Aliasing case */
   if (NULL != aux) {
-    if ((pd = (ptrdiff_t) (b1->data - b0->data)) >= 0 &&
-        pd < (ptrdiff_t) b0->mlen) {
-      if (NULL == (aux = bstrcpy(b1))) return BSTR_ERR;
+    if ((pd = (ptrdiff_t)(b1->data - b0->data)) >= 0 &&
+        pd < (ptrdiff_t)b0->mlen) {
+      if (NULL == (aux = bstrcpy(b1)))
+        return BSTR_ERR;
     }
     d += aux->slen;
   }
 
   /* Increase memory size if necessary */
   if (balloc(b0, d + 1) != BSTR_OK) {
-    if (aux != b1) bdestroy(aux);
+    if (aux != b1)
+      bdestroy(aux);
     return BSTR_ERR;
   }
 
@@ -1546,21 +1672,23 @@ int bsetstr(bstring b0, int pos, const_bstring b1, unsigned char fill) {
 
   /* Fill in "fill" character as necessary */
   if (pos > newlen) {
-    bstr__memset(b0->data + b0->slen, (int) fill, (size_t) (pos - b0->slen));
+    bstr__memset(b0->data + b0->slen, (int)fill, (size_t)(pos - b0->slen));
     newlen = pos;
   }
 
   /* Copy b1 to position pos in b0. */
   if (aux != NULL) {
-    bBlockCopy((char*) (b0->data + pos), (char*) aux->data, aux->slen);
-    if (aux != b1) bdestroy(aux);
+    bBlockCopy((char *)(b0->data + pos), (char *)aux->data, aux->slen);
+    if (aux != b1)
+      bdestroy(aux);
   }
 
   /* Indicate the potentially increased size of b0 */
-  if (d > newlen) newlen = d;
+  if (d > newlen)
+    newlen = d;
 
-  b0->slen         = newlen;
-  b0->data[newlen] = (unsigned char) '\0';
+  b0->slen = newlen;
+  b0->data[newlen] = (unsigned char)'\0';
 
   return BSTR_OK;
 }
@@ -1573,10 +1701,10 @@ int bsetstr(bstring b0, int pos, const_bstring b1, unsigned char fill) {
  *  is appended as necessary to make up the gap between the end of b1 and pos.
  *  Unlike bsetstr, binsert does not allow b2 to be NULL.
  */
-int binsertblk(
-    bstring b, int pos, const void* blk, int len, unsigned char fill) {
+int binsertblk(bstring b, int pos, const void *blk, int len,
+               unsigned char fill) {
   int d, l;
-  unsigned char* aux = (unsigned char*) blk;
+  unsigned char *aux = (unsigned char *)blk;
 
   if (b == NULL || blk == NULL || pos < 0 || len < 0 || b->slen < 0 ||
       b->mlen <= 0 || b->mlen < b->slen)
@@ -1585,36 +1713,41 @@ int binsertblk(
   /* Compute the two possible end pointers */
   d = b->slen + len;
   l = pos + len;
-  if ((d | l) < 0) return BSTR_ERR; /* Integer wrap around. */
+  if ((d | l) < 0)
+    return BSTR_ERR; /* Integer wrap around. */
 
   /* Aliasing case */
-  if (((size_t) ((unsigned char*) blk + len)) >= ((size_t) b->data) &&
-      ((size_t) blk) < ((size_t) (b->data + b->mlen))) {
-    aux = (unsigned char*) bstr__alloc(len);
-    if (aux == NULL) return BSTR_ERR;
+  if (((size_t)((unsigned char *)blk + len)) >= ((size_t)b->data) &&
+      ((size_t)blk) < ((size_t)(b->data + b->mlen))) {
+    aux = (unsigned char *)bstr__alloc(len);
+    if (aux == NULL)
+      return BSTR_ERR;
     bstr__memcpy(aux, blk, len);
   }
 
   if (l > d) {
     /* Inserting past the end of the string */
     if (balloc(b, l + 1) != BSTR_OK) {
-      if (aux != (unsigned char*) blk) bstr__free(aux);
+      if (aux != (unsigned char *)blk)
+        bstr__free(aux);
       return BSTR_ERR;
     }
-    bstr__memset(b->data + b->slen, (int) fill, (size_t) (pos - b->slen));
+    bstr__memset(b->data + b->slen, (int)fill, (size_t)(pos - b->slen));
     b->slen = l;
   } else {
     /* Inserting in the middle of the string */
     if (balloc(b, d + 1) != BSTR_OK) {
-      if (aux != (unsigned char*) blk) bstr__free(aux);
+      if (aux != (unsigned char *)blk)
+        bstr__free(aux);
       return BSTR_ERR;
     }
     bBlockCopy(b->data + l, b->data + pos, d - l);
     b->slen = d;
   }
   bBlockCopy(b->data + pos, aux, len);
-  b->data[b->slen] = (unsigned char) '\0';
-  if (aux != (unsigned char*) blk) bstr__free(aux);
+  b->data[b->slen] = (unsigned char)'\0';
+  if (aux != (unsigned char *)blk)
+    bstr__free(aux);
   return BSTR_OK;
 }
 
@@ -1626,7 +1759,8 @@ int binsertblk(
  *  does not allow b2 to be NULL.
  */
 int binsert(bstring b1, int pos, const_bstring b2, unsigned char fill) {
-  if (NULL == b2 || (b2->mlen > 0 && b2->slen > b2->mlen)) return BSTR_ERR;
+  if (NULL == b2 || (b2->mlen > 0 && b2->slen > b2->mlen))
+    return BSTR_ERR;
   return binsertblk(b1, pos, b2->data, b2->slen, fill);
 }
 
@@ -1636,14 +1770,16 @@ int binsert(bstring b1, int pos, const_bstring b2, unsigned char fill) {
  *  Replace a section of a string from pos for a length len with the string
  *  b2. fill is used is pos > b1->slen.
  */
-int breplace(
-    bstring b1, int pos, int len, const_bstring b2, unsigned char fill) {
+int breplace(bstring b1, int pos, int len, const_bstring b2,
+             unsigned char fill) {
   int pl, ret;
   ptrdiff_t pd;
-  bstring aux = (bstring) b2;
+  bstring aux = (bstring)b2;
 
-  if (pos < 0 || len < 0) return BSTR_ERR;
-  if (pos > INT_MAX - len) return BSTR_ERR; /* Overflow */
+  if (pos < 0 || len < 0)
+    return BSTR_ERR;
+  if (pos > INT_MAX - len)
+    return BSTR_ERR; /* Overflow */
   pl = pos + len;
   if (b1 == NULL || b2 == NULL || b1->data == NULL || b2->data == NULL ||
       b1->slen < 0 || b2->slen < 0 || b1->mlen < b1->slen || b1->mlen <= 0)
@@ -1651,35 +1787,38 @@ int breplace(
 
   /* Straddles the end? */
   if (pl >= b1->slen) {
-    if ((ret = bsetstr(b1, pos, b2, fill)) < 0) return ret;
+    if ((ret = bsetstr(b1, pos, b2, fill)) < 0)
+      return ret;
     if (pos + b2->slen < b1->slen) {
-      b1->slen           = pos + b2->slen;
-      b1->data[b1->slen] = (unsigned char) '\0';
+      b1->slen = pos + b2->slen;
+      b1->data[b1->slen] = (unsigned char)'\0';
     }
     return ret;
   }
 
   /* Aliasing case */
-  if ((pd = (ptrdiff_t) (b2->data - b1->data)) >= 0 &&
-      pd < (ptrdiff_t) b1->slen) {
-    if (NULL == (aux = bstrcpy(b2))) return BSTR_ERR;
+  if ((pd = (ptrdiff_t)(b2->data - b1->data)) >= 0 &&
+      pd < (ptrdiff_t)b1->slen) {
+    if (NULL == (aux = bstrcpy(b2)))
+      return BSTR_ERR;
   }
 
   if (aux->slen > len) {
     if (balloc(b1, b1->slen + aux->slen - len) != BSTR_OK) {
-      if (aux != b2) bdestroy(aux);
+      if (aux != b2)
+        bdestroy(aux);
       return BSTR_ERR;
     }
   }
 
   if (aux->slen != len)
-    bstr__memmove(
-        b1->data + pos + aux->slen, b1->data + pos + len,
-        b1->slen - (pos + len));
+    bstr__memmove(b1->data + pos + aux->slen, b1->data + pos + len,
+                  b1->slen - (pos + len));
   bstr__memcpy(b1->data + pos, aux->data, aux->slen);
   b1->slen += aux->slen - len;
-  b1->data[b1->slen] = (unsigned char) '\0';
-  if (aux != b2) bdestroy(aux);
+  b1->data[b1->slen] = (unsigned char)'\0';
+  if (aux != b2)
+    bdestroy(aux);
   return BSTR_OK;
 }
 
@@ -1694,33 +1833,35 @@ typedef int (*instr_fnptr)(const_bstring s1, int pos, const_bstring s2);
 
 #define INITIAL_STATIC_FIND_INDEX_COUNT 32
 
-static int findreplaceengine(
-    bstring b, const_bstring find, const_bstring repl, int pos,
-    instr_fnptr instr) {
+static int findreplaceengine(bstring b, const_bstring find, const_bstring repl,
+                             int pos, instr_fnptr instr) {
   int i, ret, slen, mlen, delta, acc;
-  int* d;
+  int *d;
   int static_d[INITIAL_STATIC_FIND_INDEX_COUNT + 1]; /* This +1 is for LINT. */
   ptrdiff_t pd;
-  bstring auxf = (bstring) find;
-  bstring auxr = (bstring) repl;
+  bstring auxf = (bstring)find;
+  bstring auxr = (bstring)repl;
 
   if (b == NULL || b->data == NULL || find == NULL || find->data == NULL ||
       repl == NULL || repl->data == NULL || pos < 0 || find->slen <= 0 ||
       b->mlen <= 0 || b->slen > b->mlen || b->slen < 0 || repl->slen < 0)
     return BSTR_ERR;
-  if (pos > b->slen - find->slen) return BSTR_OK;
+  if (pos > b->slen - find->slen)
+    return BSTR_OK;
 
   /* Alias with find string */
-  pd = (ptrdiff_t) (find->data - b->data);
-  if ((ptrdiff_t) (pos - find->slen) < pd && pd < (ptrdiff_t) b->slen) {
-    if (NULL == (auxf = bstrcpy(find))) return BSTR_ERR;
+  pd = (ptrdiff_t)(find->data - b->data);
+  if ((ptrdiff_t)(pos - find->slen) < pd && pd < (ptrdiff_t)b->slen) {
+    if (NULL == (auxf = bstrcpy(find)))
+      return BSTR_ERR;
   }
 
   /* Alias with repl string */
-  pd = (ptrdiff_t) (repl->data - b->data);
-  if ((ptrdiff_t) (pos - repl->slen) < pd && pd < (ptrdiff_t) b->slen) {
+  pd = (ptrdiff_t)(repl->data - b->data);
+  if ((ptrdiff_t)(pos - repl->slen) < pd && pd < (ptrdiff_t)b->slen) {
     if (NULL == (auxr = bstrcpy(repl))) {
-      if (auxf != find) bdestroy(auxf);
+      if (auxf != find)
+        bdestroy(auxf);
       return BSTR_ERR;
     }
   }
@@ -1734,8 +1875,10 @@ static int findreplaceengine(
       bstr__memcpy(b->data + pos, auxr->data, auxr->slen);
       pos += auxf->slen;
     }
-    if (auxf != find) bdestroy(auxf);
-    if (auxr != repl) bdestroy(auxr);
+    if (auxf != find)
+      bdestroy(auxf);
+    if (auxr != repl)
+      bdestroy(auxr);
     return BSTR_OK;
   }
 
@@ -1746,20 +1889,24 @@ static int findreplaceengine(
     while ((i = instr(b, pos, auxf)) >= 0) {
       if (acc && i > pos)
         bstr__memmove(b->data + pos - acc, b->data + pos, i - pos);
-      if (auxr->slen) bstr__memcpy(b->data + i - acc, auxr->data, auxr->slen);
+      if (auxr->slen)
+        bstr__memcpy(b->data + i - acc, auxr->data, auxr->slen);
       acc += delta;
       pos = i + auxf->slen;
     }
 
     if (acc) {
       i = b->slen;
-      if (i > pos) bstr__memmove(b->data + pos - acc, b->data + pos, i - pos);
+      if (i > pos)
+        bstr__memmove(b->data + pos - acc, b->data + pos, i - pos);
       b->slen -= acc;
-      b->data[b->slen] = (unsigned char) '\0';
+      b->data[b->slen] = (unsigned char)'\0';
     }
 
-    if (auxf != find) bdestroy(auxf);
-    if (auxr != repl) bdestroy(auxr);
+    if (auxf != find)
+      bdestroy(auxf);
+    if (auxr != repl)
+      bdestroy(auxr);
     return BSTR_OK;
   }
 
@@ -1778,26 +1925,28 @@ static int findreplaceengine(
    */
 
   mlen = INITIAL_STATIC_FIND_INDEX_COUNT;
-  d    = (int*) static_d; /* Avoid malloc for trivial/initial cases */
+  d = (int *)static_d; /* Avoid malloc for trivial/initial cases */
   acc = slen = 0;
 
   while ((pos = instr(b, pos, auxf)) >= 0) {
     if (slen >= mlen - 1) {
-      int* t;
+      int *t;
       int sl;
       /* Overflow */
-      if (mlen > (INT_MAX / sizeof(int*)) / 2) {
+      if (mlen > (INT_MAX / sizeof(int *)) / 2) {
         ret = BSTR_ERR;
         goto done;
       }
       mlen += mlen;
-      sl = sizeof(int*) * mlen;
-      if (static_d == d) d = NULL; /* static_d cannot be realloced */
-      if (NULL == (t = (int*) bstr__realloc(d, sl))) {
+      sl = sizeof(int *) * mlen;
+      if (static_d == d)
+        d = NULL; /* static_d cannot be realloced */
+      if (NULL == (t = (int *)bstr__realloc(d, sl))) {
         ret = BSTR_ERR;
         goto done;
       }
-      if (NULL == d) bstr__memcpy(t, static_d, sizeof(static_d));
+      if (NULL == d)
+        bstr__memcpy(t, static_d, sizeof(static_d));
       d = t;
     }
     d[slen] = pos;
@@ -1827,13 +1976,16 @@ static int findreplaceengine(
       }
       acc += delta;
     }
-    b->data[b->slen] = (unsigned char) '\0';
+    b->data[b->slen] = (unsigned char)'\0';
   }
 
 done:;
-  if (static_d != d) bstr__free(d);
-  if (auxf != find) bdestroy(auxf);
-  if (auxr != repl) bdestroy(auxr);
+  if (static_d != d)
+    bstr__free(d);
+  if (auxf != find)
+    bdestroy(auxf);
+  if (auxr != repl)
+    bdestroy(auxr);
   return ret;
 }
 
@@ -1853,8 +2005,8 @@ int bfindreplace(bstring b, const_bstring find, const_bstring repl, int pos) {
  *  Replace all occurrences of a find string, ignoring case, with a replace
  *  string after a given point in a bstring.
  */
-int bfindreplacecaseless(
-    bstring b, const_bstring find, const_bstring repl, int pos) {
+int bfindreplacecaseless(bstring b, const_bstring find, const_bstring repl,
+                         int pos) {
   return findreplaceengine(b, find, repl, pos, binstrcaseless);
 }
 
@@ -1875,24 +2027,28 @@ int binsertch(bstring b, int pos, int len, unsigned char fill) {
   /* Compute the two possible end pointers */
   d = b->slen + len;
   l = pos + len;
-  if ((d | l) < 0) return BSTR_ERR;
+  if ((d | l) < 0)
+    return BSTR_ERR;
 
   if (l > d) {
     /* Inserting past the end of the string */
-    if (balloc(b, l + 1) != BSTR_OK) return BSTR_ERR;
-    pos     = b->slen;
+    if (balloc(b, l + 1) != BSTR_OK)
+      return BSTR_ERR;
+    pos = b->slen;
     b->slen = l;
   } else {
     /* Inserting in the middle of the string */
-    if (balloc(b, d + 1) != BSTR_OK) return BSTR_ERR;
+    if (balloc(b, d + 1) != BSTR_OK)
+      return BSTR_ERR;
     for (i = d - 1; i >= l; i--) {
       b->data[i] = b->data[i - len];
     }
     b->slen = d;
   }
 
-  for (i = pos; i < l; i++) b->data[i] = fill;
-  b->data[b->slen] = (unsigned char) '\0';
+  for (i = pos; i < l; i++)
+    b->data[i] = fill;
+  b->data[b->slen] = (unsigned char)'\0';
   return BSTR_OK;
 }
 
@@ -1907,13 +2063,16 @@ int bpattern(bstring b, int len) {
   int i, d;
 
   d = blength(b);
-  if (d <= 0 || len < 0 || balloc(b, len + 1) != BSTR_OK) return BSTR_ERR;
+  if (d <= 0 || len < 0 || balloc(b, len + 1) != BSTR_OK)
+    return BSTR_ERR;
   if (len > 0) {
-    if (d == 1) return bsetstr(b, len, NULL, b->data[0]);
-    for (i = d; i < len; i++) b->data[i] = b->data[i - d];
+    if (d == 1)
+      return bsetstr(b, len, NULL, b->data[0]);
+    for (i = d; i < len; i++)
+      b->data[i] = b->data[i - d];
   }
-  b->data[len] = (unsigned char) '\0';
-  b->slen      = len;
+  b->data[len] = (unsigned char)'\0';
+  b->slen = len;
   return BSTR_OK;
 }
 
@@ -1925,7 +2084,7 @@ int bpattern(bstring b, int len) {
  *  bstring b the entire contents of file-like source data in a roughly
  *  efficient way.
  */
-int breada(bstring b, bNread readPtr, void* parm) {
+int breada(bstring b, bNread readPtr, void *parm) {
   int i, l, n;
 
   if (b == NULL || b->mlen <= 0 || b->slen < 0 || b->mlen < b->slen ||
@@ -1934,14 +2093,16 @@ int breada(bstring b, bNread readPtr, void* parm) {
 
   i = b->slen;
   for (n = i + 16;; n += ((n < BS_BUFF_SZ) ? n : BS_BUFF_SZ)) {
-    if (BSTR_OK != balloc(b, n + 1)) return BSTR_ERR;
-    l = (int) readPtr((void*) (b->data + i), 1, n - i, parm);
+    if (BSTR_OK != balloc(b, n + 1))
+      return BSTR_ERR;
+    l = (int)readPtr((void *)(b->data + i), 1, n - i, parm);
     i += l;
     b->slen = i;
-    if (i < n) break;
+    if (i < n)
+      break;
   }
 
-  b->data[i] = (unsigned char) '\0';
+  b->data[i] = (unsigned char)'\0';
   return BSTR_OK;
 }
 
@@ -1951,7 +2112,7 @@ int breada(bstring b, bNread readPtr, void* parm) {
  *  filled with the entire contents of file-like source data in a roughly
  *  efficient way.
  */
-bstring bread(bNread readPtr, void* parm) {
+bstring bread(bNread readPtr, void *parm) {
   bstring buff;
 
   if (0 > breada(buff = bfromcstr(""), readPtr, parm)) {
@@ -1974,7 +2135,7 @@ bstring bread(bNread readPtr, void* parm) {
  *  result, 1 is returned.  If no characters are read, or there is some other
  *  detectable error, BSTR_ERR is returned.
  */
-int bassigngets(bstring b, bNgetc getcPtr, void* parm, char terminator) {
+int bassigngets(bstring b, bNgetc getcPtr, void *parm, char terminator) {
   int c, d, e;
 
   if (b == NULL || b->mlen <= 0 || b->slen < 0 || b->mlen < b->slen ||
@@ -1986,16 +2147,18 @@ int bassigngets(bstring b, bNgetc getcPtr, void* parm, char terminator) {
   while ((c = getcPtr(parm)) >= 0) {
     if (d > e) {
       b->slen = d;
-      if (balloc(b, d + 2) != BSTR_OK) return BSTR_ERR;
+      if (balloc(b, d + 2) != BSTR_OK)
+        return BSTR_ERR;
       e = b->mlen - 2;
     }
-    b->data[d] = (unsigned char) c;
+    b->data[d] = (unsigned char)c;
     d++;
-    if (c == terminator) break;
+    if (c == terminator)
+      break;
   }
 
-  b->data[d] = (unsigned char) '\0';
-  b->slen    = d;
+  b->data[d] = (unsigned char)'\0';
+  b->slen = d;
 
   return d == 0 && c < 0;
 }
@@ -2013,7 +2176,7 @@ int bassigngets(bstring b, bNgetc getcPtr, void* parm, char terminator) {
  *  an empty partial result, 1 is returned.  If no characters are read, or
  *  there is some other detectable error, BSTR_ERR is returned.
  */
-int bgetsa(bstring b, bNgetc getcPtr, void* parm, char terminator) {
+int bgetsa(bstring b, bNgetc getcPtr, void *parm, char terminator) {
   int c, d, e;
 
   if (b == NULL || b->mlen <= 0 || b->slen < 0 || b->mlen < b->slen ||
@@ -2025,16 +2188,18 @@ int bgetsa(bstring b, bNgetc getcPtr, void* parm, char terminator) {
   while ((c = getcPtr(parm)) >= 0) {
     if (d > e) {
       b->slen = d;
-      if (balloc(b, d + 2) != BSTR_OK) return BSTR_ERR;
+      if (balloc(b, d + 2) != BSTR_OK)
+        return BSTR_ERR;
       e = b->mlen - 2;
     }
-    b->data[d] = (unsigned char) c;
+    b->data[d] = (unsigned char)c;
     d++;
-    if (c == terminator) break;
+    if (c == terminator)
+      break;
   }
 
-  b->data[d] = (unsigned char) '\0';
-  b->slen    = d;
+  b->data[d] = (unsigned char)'\0';
+  b->slen = d;
 
   return d == 0 && c < 0;
 }
@@ -2050,7 +2215,7 @@ int bgetsa(bstring b, bNgetc getcPtr, void* parm, char terminator) {
  *  result obtained thus far is returned.  If no characters are read, or
  *  there is some other detectable error, NULL is returned.
  */
-bstring bgets(bNgetc getcPtr, void* parm, char terminator) {
+bstring bgets(bNgetc getcPtr, void *parm, char terminator) {
   bstring buff;
 
   if (0 > bgetsa(buff = bfromcstr(""), getcPtr, parm, terminator) ||
@@ -2063,7 +2228,7 @@ bstring bgets(bNgetc getcPtr, void* parm, char terminator) {
 
 struct bStream {
   bstring buff;     /* Buffer for over-reads */
-  void* parm;       /* The stream handle for core stream */
+  void *parm;       /* The stream handle for core stream */
   bNread readFnPtr; /* fread compatible fnptr for core stream */
   int isEOF;        /* track file's EOF state */
   int maxBuffSz;
@@ -2075,17 +2240,19 @@ struct bStream {
  *  pointer and stream handle) into an open bStream suitable for the bstring
  *  library streaming functions.
  */
-struct bStream* bsopen(bNread readPtr, void* parm) {
-  struct bStream* s;
+struct bStream *bsopen(bNread readPtr, void *parm) {
+  struct bStream *s;
 
-  if (readPtr == NULL) return NULL;
-  s = (struct bStream*) bstr__alloc(sizeof(struct bStream));
-  if (s == NULL) return NULL;
-  s->parm      = parm;
-  s->buff      = bfromcstr("");
+  if (readPtr == NULL)
+    return NULL;
+  s = (struct bStream *)bstr__alloc(sizeof(struct bStream));
+  if (s == NULL)
+    return NULL;
+  s->parm = parm;
+  s->buff = bfromcstr("");
   s->readFnPtr = readPtr;
   s->maxBuffSz = BS_BUFF_SZ;
-  s->isEOF     = 0;
+  s->isEOF = 0;
   return s;
 }
 
@@ -2094,16 +2261,19 @@ struct bStream* bsopen(bNread readPtr, void* parm) {
  *  Set the length of the buffer used by the bStream.  If sz is zero, the
  *  length is not set.  This function returns with the previous length.
  */
-int bsbufflength(struct bStream* s, int sz) {
+int bsbufflength(struct bStream *s, int sz) {
   int oldSz;
-  if (s == NULL || sz < 0) return BSTR_ERR;
+  if (s == NULL || sz < 0)
+    return BSTR_ERR;
   oldSz = s->maxBuffSz;
-  if (sz > 0) s->maxBuffSz = sz;
+  if (sz > 0)
+    s->maxBuffSz = sz;
   return oldSz;
 }
 
-int bseof(const struct bStream* s) {
-  if (s == NULL || s->readFnPtr == NULL) return BSTR_ERR;
+int bseof(const struct bStream *s) {
+  if (s == NULL || s->readFnPtr == NULL)
+    return BSTR_ERR;
   return s->isEOF && (s->buff->slen == 0);
 }
 
@@ -2112,14 +2282,16 @@ int bseof(const struct bStream* s) {
  *  Close the bStream, and return the handle to the stream that was originally
  *  used to open the given stream.
  */
-void* bsclose(struct bStream* s) {
-  void* parm;
-  if (s == NULL) return NULL;
+void *bsclose(struct bStream *s) {
+  void *parm;
+  if (s == NULL)
+    return NULL;
   s->readFnPtr = NULL;
-  if (s->buff) bdestroy(s->buff);
-  s->buff  = NULL;
-  parm     = s->parm;
-  s->parm  = NULL;
+  if (s->buff)
+    bdestroy(s->buff);
+  s->buff = NULL;
+  parm = s->parm;
+  s->parm = NULL;
   s->isEOF = 1;
   bstr__free(s);
   return parm;
@@ -2132,9 +2304,9 @@ void* bsclose(struct bStream* s) {
  *  function may read additional characters from the core stream that are not
  *  returned, but will be retained for subsequent read operations.
  */
-int bsreadlna(bstring r, struct bStream* s, char terminator) {
+int bsreadlna(bstring r, struct bStream *s, char terminator) {
   int i, l, ret, rlo;
-  char* b;
+  char *b;
   struct tagbstring x;
   x.mlen = 0;
   x.slen = 0;
@@ -2144,19 +2316,21 @@ int bsreadlna(bstring r, struct bStream* s, char terminator) {
       r->slen < 0 || r->mlen < r->slen)
     return BSTR_ERR;
   l = s->buff->slen;
-  if (BSTR_OK != balloc(s->buff, s->maxBuffSz + 1)) return BSTR_ERR;
-  b      = (char*) s->buff->data;
-  x.data = (unsigned char*) b;
+  if (BSTR_OK != balloc(s->buff, s->maxBuffSz + 1))
+    return BSTR_ERR;
+  b = (char *)s->buff->data;
+  x.data = (unsigned char *)b;
 
   /* First check if the current buffer holds the terminator */
   b[l] = terminator; /* Set sentinel */
   for (i = 0; b[i] != terminator; i++)
     ;
   if (i < l) {
-    x.slen        = i + 1;
-    ret           = bconcat(r, &x);
+    x.slen = i + 1;
+    ret = bconcat(r, &x);
     s->buff->slen = l;
-    if (BSTR_OK == ret) bdelete(s->buff, 0, i + 1);
+    if (BSTR_OK == ret)
+      bdelete(s->buff, 0, i + 1);
     return BSTR_OK;
   }
 
@@ -2164,25 +2338,28 @@ int bsreadlna(bstring r, struct bStream* s, char terminator) {
 
   /* If not then just concatenate the entire buffer to the output */
   x.slen = l;
-  if (BSTR_OK != bconcat(r, &x)) return BSTR_ERR;
+  if (BSTR_OK != bconcat(r, &x))
+    return BSTR_ERR;
 
   /* Perform direct in-place reads into the destination to allow for
    the minimum of data-copies */
   for (;;) {
-    if (BSTR_OK != balloc(r, r->slen + s->maxBuffSz + 1)) return BSTR_ERR;
-    b = (char*) (r->data + r->slen);
-    l = (int) s->readFnPtr(b, 1, s->maxBuffSz, s->parm);
+    if (BSTR_OK != balloc(r, r->slen + s->maxBuffSz + 1))
+      return BSTR_ERR;
+    b = (char *)(r->data + r->slen);
+    l = (int)s->readFnPtr(b, 1, s->maxBuffSz, s->parm);
     if (l <= 0) {
-      r->data[r->slen] = (unsigned char) '\0';
-      s->buff->slen    = 0;
-      s->isEOF         = 1;
+      r->data[r->slen] = (unsigned char)'\0';
+      s->buff->slen = 0;
+      s->isEOF = 1;
       /* If nothing was read return with an error message */
       return BSTR_ERR & -(r->slen == rlo);
     }
     b[l] = terminator; /* Set sentinel */
     for (i = 0; b[i] != terminator; i++)
       ;
-    if (i < l) break;
+    if (i < l)
+      break;
     r->slen += l;
   }
 
@@ -2191,7 +2368,7 @@ int bsreadlna(bstring r, struct bStream* s, char terminator) {
   r->slen += i;
   s->buff->slen = l - i;
   bstr__memcpy(s->buff->data, b + i, l - i);
-  r->data[r->slen] = (unsigned char) '\0';
+  r->data[r->slen] = (unsigned char)'\0';
   return BSTR_OK;
 }
 
@@ -2202,9 +2379,9 @@ int bsreadlna(bstring r, struct bStream* s, char terminator) {
  *  This function may read additional characters from the core stream that
  *  are not returned, but will be retained for subsequent read operations.
  */
-int bsreadlnsa(bstring r, struct bStream* s, const_bstring term) {
+int bsreadlnsa(bstring r, struct bStream *s, const_bstring term) {
   int i, l, ret, rlo;
-  unsigned char* b;
+  unsigned char *b;
   struct tagbstring x;
   struct charField cf;
   x.mlen = 0;
@@ -2214,12 +2391,15 @@ int bsreadlnsa(bstring r, struct bStream* s, const_bstring term) {
   if (s == NULL || s->buff == NULL || r == NULL || term == NULL ||
       term->data == NULL || r->mlen <= 0 || r->slen < 0 || r->mlen < r->slen)
     return BSTR_ERR;
-  if (term->slen == 1) return bsreadlna(r, s, term->data[0]);
-  if (term->slen < 1 || buildCharField(&cf, term)) return BSTR_ERR;
+  if (term->slen == 1)
+    return bsreadlna(r, s, term->data[0]);
+  if (term->slen < 1 || buildCharField(&cf, term))
+    return BSTR_ERR;
 
   l = s->buff->slen;
-  if (BSTR_OK != balloc(s->buff, s->maxBuffSz + 1)) return BSTR_ERR;
-  b      = (unsigned char*) s->buff->data;
+  if (BSTR_OK != balloc(s->buff, s->maxBuffSz + 1))
+    return BSTR_ERR;
+  b = (unsigned char *)s->buff->data;
   x.data = b;
 
   /* First check if the current buffer holds the terminator */
@@ -2227,10 +2407,11 @@ int bsreadlnsa(bstring r, struct bStream* s, const_bstring term) {
   for (i = 0; !testInCharField(&cf, b[i]); i++)
     ;
   if (i < l) {
-    x.slen        = i + 1;
-    ret           = bconcat(r, &x);
+    x.slen = i + 1;
+    ret = bconcat(r, &x);
     s->buff->slen = l;
-    if (BSTR_OK == ret) bdelete(s->buff, 0, i + 1);
+    if (BSTR_OK == ret)
+      bdelete(s->buff, 0, i + 1);
     return BSTR_OK;
   }
 
@@ -2238,18 +2419,20 @@ int bsreadlnsa(bstring r, struct bStream* s, const_bstring term) {
 
   /* If not then just concatenate the entire buffer to the output */
   x.slen = l;
-  if (BSTR_OK != bconcat(r, &x)) return BSTR_ERR;
+  if (BSTR_OK != bconcat(r, &x))
+    return BSTR_ERR;
 
   /* Perform direct in-place reads into the destination to allow for
    the minimum of data-copies */
   for (;;) {
-    if (BSTR_OK != balloc(r, r->slen + s->maxBuffSz + 1)) return BSTR_ERR;
-    b = (unsigned char*) (r->data + r->slen);
-    l = (int) s->readFnPtr(b, 1, s->maxBuffSz, s->parm);
+    if (BSTR_OK != balloc(r, r->slen + s->maxBuffSz + 1))
+      return BSTR_ERR;
+    b = (unsigned char *)(r->data + r->slen);
+    l = (int)s->readFnPtr(b, 1, s->maxBuffSz, s->parm);
     if (l <= 0) {
-      r->data[r->slen] = (unsigned char) '\0';
-      s->buff->slen    = 0;
-      s->isEOF         = 1;
+      r->data[r->slen] = (unsigned char)'\0';
+      s->buff->slen = 0;
+      s->isEOF = 1;
       /* If nothing was read return with an error message */
       return BSTR_ERR & -(r->slen == rlo);
     }
@@ -2257,7 +2440,8 @@ int bsreadlnsa(bstring r, struct bStream* s, const_bstring term) {
     b[l] = term->data[0]; /* Set sentinel */
     for (i = 0; !testInCharField(&cf, b[i]); i++)
       ;
-    if (i < l) break;
+    if (i < l)
+      break;
     r->slen += l;
   }
 
@@ -2266,7 +2450,7 @@ int bsreadlnsa(bstring r, struct bStream* s, const_bstring term) {
   r->slen += i;
   s->buff->slen = l - i;
   bstr__memcpy(s->buff->data, b + i, l - i);
-  r->data[r->slen] = (unsigned char) '\0';
+  r->data[r->slen] = (unsigned char)'\0';
   return BSTR_OK;
 }
 
@@ -2278,16 +2462,17 @@ int bsreadlnsa(bstring r, struct bStream* s, const_bstring term) {
  *  retained for subsequent read operations.  This function will not read
  *  additional characters from the core stream beyond virtual stream pointer.
  */
-int bsreada(bstring r, struct bStream* s, int n) {
+int bsreada(bstring r, struct bStream *s, int n) {
   int l, ret, orslen;
-  char* b;
+  char *b;
   struct tagbstring x;
 
   if (s == NULL || s->buff == NULL || r == NULL || r->mlen <= 0 ||
       r->slen < 0 || r->mlen < r->slen || n <= 0)
     return BSTR_ERR;
 
-  if (n > INT_MAX - r->slen) return BSTR_ERR;
+  if (n > INT_MAX - r->slen)
+    return BSTR_ERR;
   n += r->slen;
 
   l = s->buff->slen;
@@ -2295,43 +2480,50 @@ int bsreada(bstring r, struct bStream* s, int n) {
   orslen = r->slen;
 
   if (0 == l) {
-    if (s->isEOF) return BSTR_ERR;
+    if (s->isEOF)
+      return BSTR_ERR;
     if (r->mlen > n) {
-      l = (int) s->readFnPtr(r->data + r->slen, 1, n - r->slen, s->parm);
+      l = (int)s->readFnPtr(r->data + r->slen, 1, n - r->slen, s->parm);
       if (0 >= l || l > n - r->slen) {
         s->isEOF = 1;
         return BSTR_ERR;
       }
       r->slen += l;
-      r->data[r->slen] = (unsigned char) '\0';
+      r->data[r->slen] = (unsigned char)'\0';
       return 0;
     }
   }
 
-  if (BSTR_OK != balloc(s->buff, s->maxBuffSz + 1)) return BSTR_ERR;
-  b      = (char*) s->buff->data;
-  x.data = (unsigned char*) b;
+  if (BSTR_OK != balloc(s->buff, s->maxBuffSz + 1))
+    return BSTR_ERR;
+  b = (char *)s->buff->data;
+  x.data = (unsigned char *)b;
 
   do {
     if (l + r->slen >= n) {
-      x.slen        = n - r->slen;
-      ret           = bconcat(r, &x);
+      x.slen = n - r->slen;
+      ret = bconcat(r, &x);
       s->buff->slen = l;
-      if (BSTR_OK == ret) bdelete(s->buff, 0, x.slen);
+      if (BSTR_OK == ret)
+        bdelete(s->buff, 0, x.slen);
       return BSTR_ERR & -(r->slen == orslen);
     }
 
     x.slen = l;
-    if (BSTR_OK != bconcat(r, &x)) break;
+    if (BSTR_OK != bconcat(r, &x))
+      break;
 
     l = n - r->slen;
-    if (l > s->maxBuffSz) l = s->maxBuffSz;
+    if (l > s->maxBuffSz)
+      l = s->maxBuffSz;
 
-    l = (int) s->readFnPtr(b, 1, l, s->parm);
+    l = (int)s->readFnPtr(b, 1, l, s->parm);
 
   } while (l > 0);
-  if (l < 0) l = 0;
-  if (l == 0) s->isEOF = 1;
+  if (l < 0)
+    l = 0;
+  if (l == 0)
+    s->isEOF = 1;
   s->buff->slen = l;
   return BSTR_ERR & -(r->slen == orslen);
 }
@@ -2343,10 +2535,11 @@ int bsreada(bstring r, struct bStream* s, int n) {
  *  function may read additional characters from the core stream that are not
  *  returned, but will be retained for subsequent read operations.
  */
-int bsreadln(bstring r, struct bStream* s, char terminator) {
+int bsreadln(bstring r, struct bStream *s, char terminator) {
   if (s == NULL || s->buff == NULL || r == NULL || r->mlen <= 0)
     return BSTR_ERR;
-  if (BSTR_OK != balloc(s->buff, s->maxBuffSz + 1)) return BSTR_ERR;
+  if (BSTR_OK != balloc(s->buff, s->maxBuffSz + 1))
+    return BSTR_ERR;
   r->slen = 0;
   return bsreadlna(r, s, terminator);
 }
@@ -2358,13 +2551,16 @@ int bsreadln(bstring r, struct bStream* s, char terminator) {
  *  This function may read additional characters from the core stream that
  *  are not returned, but will be retained for subsequent read operations.
  */
-int bsreadlns(bstring r, struct bStream* s, const_bstring term) {
+int bsreadlns(bstring r, struct bStream *s, const_bstring term) {
   if (s == NULL || s->buff == NULL || r == NULL || term == NULL ||
       term->data == NULL || r->mlen <= 0)
     return BSTR_ERR;
-  if (term->slen == 1) return bsreadln(r, s, term->data[0]);
-  if (term->slen < 1) return BSTR_ERR;
-  if (BSTR_OK != balloc(s->buff, s->maxBuffSz + 1)) return BSTR_ERR;
+  if (term->slen == 1)
+    return bsreadln(r, s, term->data[0]);
+  if (term->slen < 1)
+    return BSTR_ERR;
+  if (BSTR_OK != balloc(s->buff, s->maxBuffSz + 1))
+    return BSTR_ERR;
   r->slen = 0;
   return bsreadlnsa(r, s, term);
 }
@@ -2377,10 +2573,11 @@ int bsreadlns(bstring r, struct bStream* s, const_bstring term) {
  *  retained for subsequent read operations.  This function will not read
  *  additional characters from the core stream beyond virtual stream pointer.
  */
-int bsread(bstring r, struct bStream* s, int n) {
+int bsread(bstring r, struct bStream *s, int n) {
   if (s == NULL || s->buff == NULL || r == NULL || r->mlen <= 0 || n <= 0)
     return BSTR_ERR;
-  if (BSTR_OK != balloc(s->buff, s->maxBuffSz + 1)) return BSTR_ERR;
+  if (BSTR_OK != balloc(s->buff, s->maxBuffSz + 1))
+    return BSTR_ERR;
   r->slen = 0;
   return bsreada(r, s, n);
 }
@@ -2391,9 +2588,10 @@ int bsread(bstring r, struct bStream* s, int n) {
  *  characters will be read prior to those that actually come from the core
  *  stream.
  */
-int bsunread(struct bStream* s, const_bstring b) {
-  if (s == NULL || s->buff == NULL) return BSTR_ERR;
-  return binsert(s->buff, 0, b, (unsigned char) '?');
+int bsunread(struct bStream *s, const_bstring b) {
+  if (s == NULL || s->buff == NULL)
+    return BSTR_ERR;
+  return binsert(s->buff, 0, b, (unsigned char)'?');
 }
 
 /*  int bspeek (bstring r, const struct bStream * s)
@@ -2401,8 +2599,9 @@ int bsunread(struct bStream* s, const_bstring b) {
  *  Return the currently buffered characters from the bStream that will be
  *  read prior to reads from the core stream.
  */
-int bspeek(bstring r, const struct bStream* s) {
-  if (s == NULL || s->buff == NULL) return BSTR_ERR;
+int bspeek(bstring r, const struct bStream *s) {
+  if (s == NULL || s->buff == NULL)
+    return BSTR_ERR;
   return bassign(r, s->buff);
 }
 
@@ -2413,26 +2612,32 @@ int bspeek(bstring r, const struct bStream* s) {
  *  If there is an error NULL is returned, otherwise a bstring with the
  *  correct result is returned.
  */
-bstring bjoinblk(const struct bstrList* bl, const void* blk, int len) {
+bstring bjoinblk(const struct bstrList *bl, const void *blk, int len) {
   bstring b;
-  unsigned char* p;
+  unsigned char *p;
   int i, c, v;
 
-  if (bl == NULL || bl->qty < 0) return NULL;
-  if (len < 0) return NULL;
-  if (len > 0 && blk == NULL) return NULL;
-  if (bl->qty < 1) return bfromStatic("");
+  if (bl == NULL || bl->qty < 0)
+    return NULL;
+  if (len < 0)
+    return NULL;
+  if (len > 0 && blk == NULL)
+    return NULL;
+  if (bl->qty < 1)
+    return bfromStatic("");
 
   for (i = 0, c = 1; i < bl->qty; i++) {
     v = bl->entry[i]->slen;
-    if (v < 0) return NULL;           /* Invalid input */
-    if (v > INT_MAX - c) return NULL; /* Overflow */
+    if (v < 0)
+      return NULL; /* Invalid input */
+    if (v > INT_MAX - c)
+      return NULL; /* Overflow */
     c += v;
   }
 
-  b = (bstring) bstr__alloc(sizeof(struct tagbstring));
+  b = (bstring)bstr__alloc(sizeof(struct tagbstring));
   if (len == 0) {
-    p = b->data = (unsigned char*) bstr__alloc(c);
+    p = b->data = (unsigned char *)bstr__alloc(c);
     if (p == NULL) {
       bstr__free(b);
       return NULL;
@@ -2445,10 +2650,11 @@ bstring bjoinblk(const struct bstrList* bl, const void* blk, int len) {
   } else {
     v = (bl->qty - 1) * len;
     if ((bl->qty > 512 || len > 127) && v / len != bl->qty - 1)
-      return NULL;                    /* Overflow */
-    if (v > INT_MAX - c) return NULL; /* Overflow */
+      return NULL; /* Overflow */
+    if (v > INT_MAX - c)
+      return NULL; /* Overflow */
     c += v;
-    p = b->data = (unsigned char*) bstr__alloc(c);
+    p = b->data = (unsigned char *)bstr__alloc(c);
     if (p == NULL) {
       bstr__free(b);
       return NULL;
@@ -2466,9 +2672,9 @@ bstring bjoinblk(const struct bstrList* bl, const void* blk, int len) {
       }
     }
   }
-  b->mlen        = c;
-  b->slen        = c - 1;
-  b->data[c - 1] = (unsigned char) '\0';
+  b->mlen = c;
+  b->slen = c - 1;
+  b->data[c - 1] = (unsigned char)'\0';
   return b;
 }
 
@@ -2478,7 +2684,7 @@ bstring bjoinblk(const struct bstrList* bl, const void* blk, int len) {
  *  concatenating them with the sep string in between.  If there is an error
  *  NULL is returned, otherwise a bstring with the correct result is returned.
  */
-bstring bjoin(const struct bstrList* bl, const_bstring sep) {
+bstring bjoin(const struct bstrList *bl, const_bstring sep) {
   if (sep == NULL)
     return NULL;
   else if (sep->slen < 0 || sep->data == NULL)
@@ -2506,9 +2712,9 @@ bstring bjoin(const struct bstrList* bl, const_bstring sep) {
  *  return with a negative value, otherwise bssplitscb will continue in an
  *  undefined manner.
  */
-int bssplitscb(
-    struct bStream* s, const_bstring splitStr,
-    int (*cb)(void* parm, int ofs, const_bstring entry), void* parm) {
+int bssplitscb(struct bStream *s, const_bstring splitStr,
+               int (*cb)(void *parm, int ofs, const_bstring entry),
+               void *parm) {
   struct charField chrs;
   bstring buff;
   int i, p, ret;
@@ -2517,12 +2723,14 @@ int bssplitscb(
       splitStr->slen < 0)
     return BSTR_ERR;
 
-  if (NULL == (buff = bfromcstr(""))) return BSTR_ERR;
+  if (NULL == (buff = bfromcstr("")))
+    return BSTR_ERR;
 
   if (splitStr->slen == 0) {
     while (bsreada(buff, s, BSSSC_BUFF_LEN) >= 0)
       ;
-    if ((ret = cb(parm, 0, buff)) > 0) ret = 0;
+    if ((ret = cb(parm, 0, buff)) > 0)
+      ret = 0;
   } else {
     buildCharField(&chrs, splitStr);
     ret = p = i = 0;
@@ -2530,7 +2738,8 @@ int bssplitscb(
       if (i >= buff->slen) {
         bsreada(buff, s, BSSSC_BUFF_LEN);
         if (i >= buff->slen) {
-          if (0 < (ret = cb(parm, p, buff))) ret = 0;
+          if (0 < (ret = cb(parm, p, buff)))
+            ret = 0;
           break;
         }
       }
@@ -2539,13 +2748,15 @@ int bssplitscb(
         unsigned char c;
 
         blk2tbstr(t, buff->data + i + 1, buff->slen - (i + 1));
-        if ((ret = bsunread(s, &t)) < 0) break;
-        buff->slen    = i;
-        c             = buff->data[i];
-        buff->data[i] = (unsigned char) '\0';
-        if ((ret = cb(parm, p, buff)) < 0) break;
+        if ((ret = bsunread(s, &t)) < 0)
+          break;
+        buff->slen = i;
+        c = buff->data[i];
+        buff->data[i] = (unsigned char)'\0';
+        if ((ret = cb(parm, p, buff)) < 0)
+          break;
         buff->data[i] = c;
-        buff->slen    = 0;
+        buff->slen = 0;
         p += i + 1;
         i = -1;
       }
@@ -2575,9 +2786,9 @@ int bssplitscb(
  *  return with a negative value, otherwise bssplitscb will continue in an
  *  undefined manner.
  */
-int bssplitstrcb(
-    struct bStream* s, const_bstring splitStr,
-    int (*cb)(void* parm, int ofs, const_bstring entry), void* parm) {
+int bssplitstrcb(struct bStream *s, const_bstring splitStr,
+                 int (*cb)(void *parm, int ofs, const_bstring entry),
+                 void *parm) {
   bstring buff;
   int i, p, ret;
 
@@ -2585,9 +2796,11 @@ int bssplitstrcb(
       splitStr->slen < 0)
     return BSTR_ERR;
 
-  if (splitStr->slen == 1) return bssplitscb(s, splitStr, cb, parm);
+  if (splitStr->slen == 1)
+    return bssplitscb(s, splitStr, cb, parm);
 
-  if (NULL == (buff = bfromcstr(""))) return BSTR_ERR;
+  if (NULL == (buff = bfromcstr("")))
+    return BSTR_ERR;
 
   if (splitStr->slen == 0) {
     for (i = 0; bsreada(buff, s, BSSSC_BUFF_LEN) >= 0; i++) {
@@ -2605,13 +2818,15 @@ int bssplitstrcb(
         struct tagbstring t;
         blk2tbstr(t, buff->data, ret);
         i = ret + splitStr->slen;
-        if ((ret = cb(parm, p, &t)) < 0) break;
+        if ((ret = cb(parm, p, &t)) < 0)
+          break;
         p += i;
         bdelete(buff, 0, i);
       } else {
         bsreada(buff, s, BSSSC_BUFF_LEN);
         if (bseof(s)) {
-          if ((ret = cb(parm, p, buff)) > 0) ret = 0;
+          if ((ret = cb(parm, p, buff)) > 0)
+            ret = 0;
           break;
         }
       }
@@ -2626,15 +2841,15 @@ int bssplitstrcb(
  *
  *  Create a bstrList.
  */
-struct bstrList* bstrListCreate(void) {
-  struct bstrList* sl = (struct bstrList*) bstr__alloc(sizeof(struct bstrList));
+struct bstrList *bstrListCreate(void) {
+  struct bstrList *sl = (struct bstrList *)bstr__alloc(sizeof(struct bstrList));
   if (sl) {
-    sl->entry = (bstring*) bstr__alloc(1 * sizeof(bstring));
+    sl->entry = (bstring *)bstr__alloc(1 * sizeof(bstring));
     if (!sl->entry) {
       bstr__free(sl);
       sl = NULL;
     } else {
-      sl->qty  = 0;
+      sl->qty = 0;
       sl->mlen = 1;
     }
   }
@@ -2646,16 +2861,17 @@ struct bstrList* bstrListCreate(void) {
  *  Destroy a bstrList that has been created by bsplit, bsplits or
  *  bstrListCreate.
  */
-int bstrListDestroy(struct bstrList* sl) {
+int bstrListDestroy(struct bstrList *sl) {
   int i;
-  if (sl == NULL || sl->qty < 0) return BSTR_ERR;
+  if (sl == NULL || sl->qty < 0)
+    return BSTR_ERR;
   for (i = 0; i < sl->qty; i++) {
     if (sl->entry[i]) {
       bdestroy(sl->entry[i]);
       sl->entry[i] = NULL;
     }
   }
-  sl->qty  = -1;
+  sl->qty = -1;
   sl->mlen = -1;
   bstr__free(sl->entry);
   sl->entry = NULL;
@@ -2668,25 +2884,28 @@ int bstrListDestroy(struct bstrList* sl) {
  *  Ensure that there is memory for at least msz number of entries for the
  *  list.
  */
-int bstrListAlloc(struct bstrList* sl, int msz) {
-  bstring* l;
+int bstrListAlloc(struct bstrList *sl, int msz) {
+  bstring *l;
   int smsz;
   size_t nsz;
   if (!sl || msz <= 0 || !sl->entry || sl->qty < 0 || sl->mlen <= 0 ||
       sl->qty > sl->mlen)
     return BSTR_ERR;
-  if (sl->mlen >= msz) return BSTR_OK;
+  if (sl->mlen >= msz)
+    return BSTR_OK;
   smsz = snapUpSize(msz);
-  nsz  = ((size_t) smsz) * sizeof(bstring);
-  if (nsz < (size_t) smsz) return BSTR_ERR;
-  l = (bstring*) bstr__realloc(sl->entry, nsz);
+  nsz = ((size_t)smsz) * sizeof(bstring);
+  if (nsz < (size_t)smsz)
+    return BSTR_ERR;
+  l = (bstring *)bstr__realloc(sl->entry, nsz);
   if (!l) {
     smsz = msz;
-    nsz  = ((size_t) smsz) * sizeof(bstring);
-    l    = (bstring*) bstr__realloc(sl->entry, nsz);
-    if (!l) return BSTR_ERR;
+    nsz = ((size_t)smsz) * sizeof(bstring);
+    l = (bstring *)bstr__realloc(sl->entry, nsz);
+    if (!l)
+      return BSTR_ERR;
   }
-  sl->mlen  = smsz;
+  sl->mlen = smsz;
   sl->entry = l;
   return BSTR_OK;
 }
@@ -2696,19 +2915,23 @@ int bstrListAlloc(struct bstrList* sl, int msz) {
  *  Try to allocate the minimum amount of memory for the list to include at
  *  least msz entries or sl->qty whichever is greater.
  */
-int bstrListAllocMin(struct bstrList* sl, int msz) {
-  bstring* l;
+int bstrListAllocMin(struct bstrList *sl, int msz) {
+  bstring *l;
   size_t nsz;
   if (!sl || msz <= 0 || !sl->entry || sl->qty < 0 || sl->mlen <= 0 ||
       sl->qty > sl->mlen)
     return BSTR_ERR;
-  if (msz < sl->qty) msz = sl->qty;
-  if (sl->mlen == msz) return BSTR_OK;
-  nsz = ((size_t) msz) * sizeof(bstring);
-  if (nsz < (size_t) msz) return BSTR_ERR;
-  l = (bstring*) bstr__realloc(sl->entry, nsz);
-  if (!l) return BSTR_ERR;
-  sl->mlen  = msz;
+  if (msz < sl->qty)
+    msz = sl->qty;
+  if (sl->mlen == msz)
+    return BSTR_OK;
+  nsz = ((size_t)msz) * sizeof(bstring);
+  if (nsz < (size_t)msz)
+    return BSTR_ERR;
+  l = (bstring *)bstr__realloc(sl->entry, nsz);
+  if (!l)
+    return BSTR_ERR;
+  sl->mlen = msz;
   sl->entry = l;
   return BSTR_OK;
 }
@@ -2728,19 +2951,21 @@ int bstrListAllocMin(struct bstrList* sl, int msz) {
  *  cb function destroys str, then it *must* return with a negative value,
  *  otherwise bsplitcb will continue in an undefined manner.
  */
-int bsplitcb(
-    const_bstring str, unsigned char splitChar, int pos,
-    int (*cb)(void* parm, int ofs, int len), void* parm) {
+int bsplitcb(const_bstring str, unsigned char splitChar, int pos,
+             int (*cb)(void *parm, int ofs, int len), void *parm) {
   int i, p, ret;
 
-  if (cb == NULL || str == NULL || pos < 0 || pos > str->slen) return BSTR_ERR;
+  if (cb == NULL || str == NULL || pos < 0 || pos > str->slen)
+    return BSTR_ERR;
 
   p = pos;
   do {
     for (i = p; i < str->slen; i++) {
-      if (str->data[i] == splitChar) break;
+      if (str->data[i] == splitChar)
+        break;
     }
-    if ((ret = cb(parm, p, i - p)) < 0) return ret;
+    if ((ret = cb(parm, p, i - p)) < 0)
+      return ret;
     p = i + 1;
   } while (p <= str->slen);
   return BSTR_OK;
@@ -2762,9 +2987,8 @@ int bsplitcb(
  *  cb function destroys str, then it *must* return with a negative value,
  *  otherwise bsplitscb will continue in an undefined manner.
  */
-int bsplitscb(
-    const_bstring str, const_bstring splitStr, int pos,
-    int (*cb)(void* parm, int ofs, int len), void* parm) {
+int bsplitscb(const_bstring str, const_bstring splitStr, int pos,
+              int (*cb)(void *parm, int ofs, int len), void *parm) {
   struct charField chrs;
   int i, p, ret;
 
@@ -2772,7 +2996,8 @@ int bsplitscb(
       splitStr == NULL || splitStr->slen < 0)
     return BSTR_ERR;
   if (splitStr->slen == 0) {
-    if ((ret = cb(parm, 0, str->slen)) > 0) ret = 0;
+    if ((ret = cb(parm, 0, str->slen)) > 0)
+      ret = 0;
     return ret;
   }
 
@@ -2784,9 +3009,11 @@ int bsplitscb(
   p = pos;
   do {
     for (i = p; i < str->slen; i++) {
-      if (testInCharField(&chrs, str->data[i])) break;
+      if (testInCharField(&chrs, str->data[i]))
+        break;
     }
-    if ((ret = cb(parm, p, i - p)) < 0) return ret;
+    if ((ret = cb(parm, p, i - p)) < 0)
+      return ret;
     p = i + 1;
   } while (p <= str->slen);
   return BSTR_OK;
@@ -2808,9 +3035,8 @@ int bsplitscb(
  *  cb function destroys str, then it *must* return with a negative value,
  *  otherwise bsplitscb will continue in an undefined manner.
  */
-int bsplitstrcb(
-    const_bstring str, const_bstring splitStr, int pos,
-    int (*cb)(void* parm, int ofs, int len), void* parm) {
+int bsplitstrcb(const_bstring str, const_bstring splitStr, int pos,
+                int (*cb)(void *parm, int ofs, int len), void *parm) {
   int i, p, ret;
 
   if (cb == NULL || str == NULL || pos < 0 || pos > str->slen ||
@@ -2819,7 +3045,8 @@ int bsplitstrcb(
 
   if (0 == splitStr->slen) {
     for (i = pos; i < str->slen; i++) {
-      if ((ret = cb(parm, i, 1)) < 0) return ret;
+      if ((ret = cb(parm, i, 1)) < 0)
+        return ret;
     }
     return BSTR_OK;
   }
@@ -2829,36 +3056,40 @@ int bsplitstrcb(
 
   for (i = p = pos; i <= str->slen - splitStr->slen; i++) {
     if (0 == bstr__memcmp(splitStr->data, str->data + i, splitStr->slen)) {
-      if ((ret = cb(parm, p, i - p)) < 0) return ret;
+      if ((ret = cb(parm, p, i - p)) < 0)
+        return ret;
       i += splitStr->slen;
       p = i;
     }
   }
-  if ((ret = cb(parm, p, str->slen - p)) < 0) return ret;
+  if ((ret = cb(parm, p, str->slen - p)) < 0)
+    return ret;
   return BSTR_OK;
 }
 
 struct genBstrList {
   bstring b;
-  struct bstrList* bl;
+  struct bstrList *bl;
 };
 
-static int bscb(void* parm, int ofs, int len) {
-  struct genBstrList* g = (struct genBstrList*) parm;
+static int bscb(void *parm, int ofs, int len) {
+  struct genBstrList *g = (struct genBstrList *)parm;
   if (g->bl->qty >= g->bl->mlen) {
     int mlen = g->bl->mlen * 2;
-    bstring* tbl;
+    bstring *tbl;
 
     while (g->bl->qty >= mlen) {
-      if (mlen < g->bl->mlen) return BSTR_ERR;
+      if (mlen < g->bl->mlen)
+        return BSTR_ERR;
       mlen += mlen;
     }
 
-    tbl = (bstring*) bstr__realloc(g->bl->entry, sizeof(bstring) * mlen);
-    if (tbl == NULL) return BSTR_ERR;
+    tbl = (bstring *)bstr__realloc(g->bl->entry, sizeof(bstring) * mlen);
+    if (tbl == NULL)
+      return BSTR_ERR;
 
     g->bl->entry = tbl;
-    g->bl->mlen  = mlen;
+    g->bl->mlen = mlen;
   }
 
   g->bl->entry[g->bl->qty] = bmidstr(g->b, ofs, len);
@@ -2871,21 +3102,23 @@ static int bscb(void* parm, int ofs, int len) {
  *  Create an array of sequential substrings from str divided by the character
  *  splitChar.
  */
-struct bstrList* bsplit(const_bstring str, unsigned char splitChar) {
+struct bstrList *bsplit(const_bstring str, unsigned char splitChar) {
   struct genBstrList g;
 
-  if (str == NULL || str->data == NULL || str->slen < 0) return NULL;
+  if (str == NULL || str->data == NULL || str->slen < 0)
+    return NULL;
 
-  g.bl = (struct bstrList*) bstr__alloc(sizeof(struct bstrList));
-  if (g.bl == NULL) return NULL;
-  g.bl->mlen  = 4;
-  g.bl->entry = (bstring*) bstr__alloc(g.bl->mlen * sizeof(bstring));
+  g.bl = (struct bstrList *)bstr__alloc(sizeof(struct bstrList));
+  if (g.bl == NULL)
+    return NULL;
+  g.bl->mlen = 4;
+  g.bl->entry = (bstring *)bstr__alloc(g.bl->mlen * sizeof(bstring));
   if (NULL == g.bl->entry) {
     bstr__free(g.bl);
     return NULL;
   }
 
-  g.b       = (bstring) str;
+  g.b = (bstring)str;
   g.bl->qty = 0;
   if (bsplitcb(str, splitChar, 0, bscb, &g) < 0) {
     bstrListDestroy(g.bl);
@@ -2899,21 +3132,23 @@ struct bstrList* bsplit(const_bstring str, unsigned char splitChar) {
  *  Create an array of sequential substrings from str divided by the entire
  *  substring splitStr.
  */
-struct bstrList* bsplitstr(const_bstring str, const_bstring splitStr) {
+struct bstrList *bsplitstr(const_bstring str, const_bstring splitStr) {
   struct genBstrList g;
 
-  if (str == NULL || str->data == NULL || str->slen < 0) return NULL;
+  if (str == NULL || str->data == NULL || str->slen < 0)
+    return NULL;
 
-  g.bl = (struct bstrList*) bstr__alloc(sizeof(struct bstrList));
-  if (g.bl == NULL) return NULL;
-  g.bl->mlen  = 4;
-  g.bl->entry = (bstring*) bstr__alloc(g.bl->mlen * sizeof(bstring));
+  g.bl = (struct bstrList *)bstr__alloc(sizeof(struct bstrList));
+  if (g.bl == NULL)
+    return NULL;
+  g.bl->mlen = 4;
+  g.bl->entry = (bstring *)bstr__alloc(g.bl->mlen * sizeof(bstring));
   if (NULL == g.bl->entry) {
     bstr__free(g.bl);
     return NULL;
   }
 
-  g.b       = (bstring) str;
+  g.b = (bstring)str;
   g.bl->qty = 0;
   if (bsplitstrcb(str, splitStr, 0, bscb, &g) < 0) {
     bstrListDestroy(g.bl);
@@ -2928,22 +3163,23 @@ struct bstrList* bsplitstr(const_bstring str, const_bstring splitStr) {
  *  characters in splitStr.  An empty splitStr causes a single entry bstrList
  *  containing a copy of str to be returned.
  */
-struct bstrList* bsplits(const_bstring str, const_bstring splitStr) {
+struct bstrList *bsplits(const_bstring str, const_bstring splitStr) {
   struct genBstrList g;
 
   if (str == NULL || str->slen < 0 || str->data == NULL || splitStr == NULL ||
       splitStr->slen < 0 || splitStr->data == NULL)
     return NULL;
 
-  g.bl = (struct bstrList*) bstr__alloc(sizeof(struct bstrList));
-  if (g.bl == NULL) return NULL;
-  g.bl->mlen  = 4;
-  g.bl->entry = (bstring*) bstr__alloc(g.bl->mlen * sizeof(bstring));
+  g.bl = (struct bstrList *)bstr__alloc(sizeof(struct bstrList));
+  if (g.bl == NULL)
+    return NULL;
+  g.bl->mlen = 4;
+  g.bl->entry = (bstring *)bstr__alloc(g.bl->mlen * sizeof(bstring));
   if (NULL == g.bl->entry) {
     bstr__free(g.bl);
     return NULL;
   }
-  g.b       = (bstring) str;
+  g.b = (bstring)str;
   g.bl->qty = 0;
 
   if (bsplitscb(str, splitStr, 0, bscb, &g) < 0) {
@@ -2978,7 +3214,7 @@ struct bstrList* bsplits(const_bstring str, const_bstring splitStr) {
 #if defined(__GNUC__) && !defined(__APPLE__)
 /* Something is making gcc complain about this prototype not being here, so
    I've just gone ahead and put it in. */
-extern int vsnprintf(char* buf, size_t count, const char* format, va_list arg);
+extern int vsnprintf(char *buf, size_t count, const char *format, va_list arg);
 #endif
 
 #define exvsnprintf(r, b, n, f, a)                                             \
@@ -3007,7 +3243,7 @@ extern int vsnprintf(char* buf, size_t count, const char* format, va_list arg);
  *  is an early generation of a '\0' character, the bstring will be truncated
  *  to this end point.
  */
-int bformata(bstring b, const char* fmt, ...) {
+int bformata(bstring b, const char *fmt, ...) {
   va_list arglist;
   bstring buff;
   int n, r;
@@ -3020,21 +3256,24 @@ int bformata(bstring b, const char* fmt, ...) {
    performed using the truncating "vsnprintf" call (to avoid buffer
    overflows) on increasing potential sizes for the output result. */
 
-  if ((n = (int) (2 * strlen(fmt))) < START_VSNBUFF) n = START_VSNBUFF;
+  if ((n = (int)(2 * strlen(fmt))) < START_VSNBUFF)
+    n = START_VSNBUFF;
   if (NULL == (buff = bfromcstralloc(n + 2, ""))) {
     n = 1;
-    if (NULL == (buff = bfromcstralloc(n + 2, ""))) return BSTR_ERR;
+    if (NULL == (buff = bfromcstralloc(n + 2, "")))
+      return BSTR_ERR;
   }
 
   for (;;) {
     va_start(arglist, fmt);
-    exvsnprintf(r, (char*) buff->data, n + 1, fmt, arglist);
+    exvsnprintf(r, (char *)buff->data, n + 1, fmt, arglist);
     va_end(arglist);
 
-    buff->data[n] = (unsigned char) '\0';
-    buff->slen    = (int) (strlen) ((char*) buff->data);
+    buff->data[n] = (unsigned char)'\0';
+    buff->slen = (int)(strlen)((char *)buff->data);
 
-    if (buff->slen < n) break;
+    if (buff->slen < n)
+      break;
 
     if (r > n)
       n = r;
@@ -3059,7 +3298,7 @@ int bformata(bstring b, const char* fmt, ...) {
  *  the bstring parameter b. Note that if there is an early generation of a
  *  '\0' character, the bstring will be truncated to this end point.
  */
-int bassignformat(bstring b, const char* fmt, ...) {
+int bassignformat(bstring b, const char *fmt, ...) {
   va_list arglist;
   bstring buff;
   int n, r;
@@ -3072,21 +3311,24 @@ int bassignformat(bstring b, const char* fmt, ...) {
    performed using the truncating "vsnprintf" call (to avoid buffer
    overflows) on increasing potential sizes for the output result. */
 
-  if ((n = (int) (2 * strlen(fmt))) < START_VSNBUFF) n = START_VSNBUFF;
+  if ((n = (int)(2 * strlen(fmt))) < START_VSNBUFF)
+    n = START_VSNBUFF;
   if (NULL == (buff = bfromcstralloc(n + 2, ""))) {
     n = 1;
-    if (NULL == (buff = bfromcstralloc(n + 2, ""))) return BSTR_ERR;
+    if (NULL == (buff = bfromcstralloc(n + 2, "")))
+      return BSTR_ERR;
   }
 
   for (;;) {
     va_start(arglist, fmt);
-    exvsnprintf(r, (char*) buff->data, n + 1, fmt, arglist);
+    exvsnprintf(r, (char *)buff->data, n + 1, fmt, arglist);
     va_end(arglist);
 
-    buff->data[n] = (unsigned char) '\0';
-    buff->slen    = (int) (strlen) ((char*) buff->data);
+    buff->data[n] = (unsigned char)'\0';
+    buff->slen = (int)(strlen)((char *)buff->data);
 
-    if (buff->slen < n) break;
+    if (buff->slen < n)
+      break;
 
     if (r > n)
       n = r;
@@ -3111,32 +3353,36 @@ int bassignformat(bstring b, const char* fmt, ...) {
  *  Note that if there is an early generation of a '\0' character, the
  *  bstring will be truncated to this end point.
  */
-bstring bformat(const char* fmt, ...) {
+bstring bformat(const char *fmt, ...) {
   va_list arglist;
   bstring buff;
   int n, r;
 
-  if (fmt == NULL) return NULL;
+  if (fmt == NULL)
+    return NULL;
 
   /* Since the length is not determinable beforehand, a search is
    performed using the truncating "vsnprintf" call (to avoid buffer
    overflows) on increasing potential sizes for the output result. */
 
-  if ((n = (int) (2 * strlen(fmt))) < START_VSNBUFF) n = START_VSNBUFF;
+  if ((n = (int)(2 * strlen(fmt))) < START_VSNBUFF)
+    n = START_VSNBUFF;
   if (NULL == (buff = bfromcstralloc(n + 2, ""))) {
     n = 1;
-    if (NULL == (buff = bfromcstralloc(n + 2, ""))) return NULL;
+    if (NULL == (buff = bfromcstralloc(n + 2, "")))
+      return NULL;
   }
 
   for (;;) {
     va_start(arglist, fmt);
-    exvsnprintf(r, (char*) buff->data, n + 1, fmt, arglist);
+    exvsnprintf(r, (char *)buff->data, n + 1, fmt, arglist);
     va_end(arglist);
 
-    buff->data[n] = (unsigned char) '\0';
-    buff->slen    = (int) (strlen) ((char*) buff->data);
+    buff->data[n] = (unsigned char)'\0';
+    buff->slen = (int)(strlen)((char *)buff->data);
 
-    if (buff->slen < n) break;
+    if (buff->slen < n)
+      break;
 
     if (r > n)
       n = r;
@@ -3172,22 +3418,24 @@ bstring bformat(const char* fmt, ...) {
  *  is an early generation of a '\0' character, the bstring will be truncated
  *  to this end point.
  */
-int bvcformata(bstring b, int count, const char* fmt, va_list arg) {
+int bvcformata(bstring b, int count, const char *fmt, va_list arg) {
   int n, r, l;
 
   if (b == NULL || fmt == NULL || count <= 0 || b->data == NULL ||
       b->mlen <= 0 || b->slen < 0 || b->slen > b->mlen)
     return BSTR_ERR;
 
-  if (count > (n = b->slen + count) + 2) return BSTR_ERR;
-  if (BSTR_OK != balloc(b, n + 2)) return BSTR_ERR;
+  if (count > (n = b->slen + count) + 2)
+    return BSTR_ERR;
+  if (BSTR_OK != balloc(b, n + 2))
+    return BSTR_ERR;
 
-  exvsnprintf(r, (char*) b->data + b->slen, count + 2, fmt, arg);
+  exvsnprintf(r, (char *)b->data + b->slen, count + 2, fmt, arg);
   b->data[b->slen + count + 2] = '\0';
 
   /* Did the operation complete successfully within bounds? */
 
-  if (n >= (l = b->slen + (int) (strlen) ((char*) b->data + b->slen))) {
+  if (n >= (l = b->slen + (int)(strlen)((char *)b->data + b->slen))) {
     b->slen = l;
     return BSTR_OK;
   }
@@ -3205,7 +3453,8 @@ int bvcformata(bstring b, int count, const char* fmt, va_list arg) {
       l = count + count;
   }
   n = -l;
-  if (n > BSTR_ERR - 1) n = BSTR_ERR - 1;
+  if (n > BSTR_ERR - 1)
+    n = BSTR_ERR - 1;
   return n;
 }
 

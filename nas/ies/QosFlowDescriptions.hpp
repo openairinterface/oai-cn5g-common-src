@@ -11,34 +11,34 @@
 constexpr uint8_t kQosFlowDescriptionsMinimumLength = 6;
 constexpr uint8_t kQosFlowDescriptionsContentMinimumLength =
     kQosFlowDescriptionsMinimumLength -
-    3;  // Minimum length - 3 octets for IEI/Length
+    3; // Minimum length - 3 octets for IEI/Length
 constexpr uint32_t kQosFlowDescriptionsMaximumLength = 65538;
-constexpr auto kQosFlowDescriptionsIeName            = "QoS Flow Descriptions";
+constexpr auto kQosFlowDescriptionsIeName = "QoS Flow Descriptions";
 
 namespace oai::nas {
 class QosFlowDescriptions : public Type6NasIe {
- public:
+public:
   QosFlowDescriptions();
   QosFlowDescriptions(uint8_t iei);
-  QosFlowDescriptions(
-      uint8_t iei, const std::vector<QosFlowDescription>& qos_rules);
-  QosFlowDescriptions(const std::vector<QosFlowDescription>& qos_rules);
+  QosFlowDescriptions(uint8_t iei,
+                      const std::vector<QosFlowDescription> &qos_rules);
+  QosFlowDescriptions(const std::vector<QosFlowDescription> &qos_rules);
   virtual ~QosFlowDescriptions();
 
-  int Encode(uint8_t* buf, int len) const;
-  int Decode(const uint8_t* const buf, int len, bool is_iei);
+  int Encode(uint8_t *buf, int len) const;
+  int Decode(const uint8_t *const buf, int len, bool is_iei);
 
   static std::string GetIeName() { return kQosFlowDescriptionsIeName; }
 
-  void Set(const std::vector<QosFlowDescription>& qos_flow_descriptions);
-  void Get(std::vector<QosFlowDescription>& qos_flow_descriptions) const;
+  void Set(const std::vector<QosFlowDescription> &qos_flow_descriptions);
+  void Get(std::vector<QosFlowDescription> &qos_flow_descriptions) const;
 
-  void AddQosFlowDescription(const QosFlowDescription& qos_flow_description);
+  void AddQosFlowDescription(const QosFlowDescription &qos_flow_description);
 
- private:
+private:
   std::vector<QosFlowDescription> qos_flow_descriptions_;
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

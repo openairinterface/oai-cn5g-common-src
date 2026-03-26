@@ -39,7 +39,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class TrafficInfluDataPatch {
- public:
+public:
   TrafficInfluDataPatch();
   virtual ~TrafficInfluDataPatch();
 
@@ -53,7 +53,7 @@ class TrafficInfluDataPatch {
   /// path change notification.
   /// </summary>
   std::string getUpPathChgNotifCorreId() const;
-  void setUpPathChgNotifCorreId(std::string const& value);
+  void setUpPathChgNotifCorreId(std::string const &value);
   bool upPathChgNotifCorreIdIsSet() const;
   void unsetUpPathChgNotifCorreId();
   /// <summary>
@@ -68,52 +68,52 @@ class TrafficInfluDataPatch {
   ///
   /// </summary>
   std::string getDnn() const;
-  void setDnn(std::string const& value);
+  void setDnn(std::string const &value);
   bool dnnIsSet() const;
   void unsetDnn();
   /// <summary>
   /// Identifies Ethernet packet filters. Either \&quot;trafficFilters\&quot; or
   /// \&quot;ethTrafficFilters\&quot; shall be included if applicable.
   /// </summary>
-  std::vector<EthFlowDescription>& getEthTrafficFilters();
-  void setEthTrafficFilters(std::vector<EthFlowDescription> const& value);
+  std::vector<EthFlowDescription> &getEthTrafficFilters();
+  void setEthTrafficFilters(std::vector<EthFlowDescription> const &value);
   bool ethTrafficFiltersIsSet() const;
   void unsetEthTrafficFilters();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Snssai getSnssai() const;
-  void setSnssai(oai::model::common::Snssai const& value);
+  void setSnssai(oai::model::common::Snssai const &value);
   bool snssaiIsSet() const;
   void unsetSnssai();
   /// <summary>
   ///
   /// </summary>
   std::string getInternalGroupId() const;
-  void setInternalGroupId(std::string const& value);
+  void setInternalGroupId(std::string const &value);
   bool internalGroupIdIsSet() const;
   void unsetInternalGroupId();
   /// <summary>
   ///
   /// </summary>
   std::string getSupi() const;
-  void setSupi(std::string const& value);
+  void setSupi(std::string const &value);
   bool supiIsSet() const;
   void unsetSupi();
   /// <summary>
   /// Identifies IP packet filters. Either \&quot;trafficFilters\&quot; or
   /// \&quot;ethTrafficFilters\&quot; shall be included if applicable.
   /// </summary>
-  std::vector<FlowInfo>& getTrafficFilters();
-  void setTrafficFilters(std::vector<FlowInfo> const& value);
+  std::vector<FlowInfo> &getTrafficFilters();
+  void setTrafficFilters(std::vector<FlowInfo> const &value);
   bool trafficFiltersIsSet() const;
   void unsetTrafficFilters();
   /// <summary>
   /// Identifies the N6 traffic routing requirement.
   /// </summary>
-  std::vector<oai::model::common::RouteToLocation>& getTrafficRoutes();
+  std::vector<oai::model::common::RouteToLocation> &getTrafficRoutes();
   void setTrafficRoutes(
-      std::vector<oai::model::common::RouteToLocation> const& value);
+      std::vector<oai::model::common::RouteToLocation> const &value);
   bool trafficRoutesIsSet() const;
   void unsetTrafficRoutes();
   /// <summary>
@@ -127,42 +127,42 @@ class TrafficInfluDataPatch {
   ///
   /// </summary>
   std::string getValidStartTime() const;
-  void setValidStartTime(std::string const& value);
+  void setValidStartTime(std::string const &value);
   bool validStartTimeIsSet() const;
   void unsetValidStartTime();
   /// <summary>
   ///
   /// </summary>
   std::string getValidEndTime() const;
-  void setValidEndTime(std::string const& value);
+  void setValidEndTime(std::string const &value);
   bool validEndTimeIsSet() const;
   void unsetValidEndTime();
   /// <summary>
   /// Identifies the temporal validities for the N6 traffic routing requirement.
   /// </summary>
-  std::vector<TemporalValidity>& getTempValidities();
-  void setTempValidities(std::vector<TemporalValidity> const& value);
+  std::vector<TemporalValidity> &getTempValidities();
+  void setTempValidities(std::vector<TemporalValidity> const &value);
   bool tempValiditiesIsSet() const;
   void unsetTempValidities();
   /// <summary>
   ///
   /// </summary>
   NetworkAreaInfo_2 getNwAreaInfo() const;
-  void setNwAreaInfo(NetworkAreaInfo_2 const& value);
+  void setNwAreaInfo(NetworkAreaInfo_2 const &value);
   bool nwAreaInfoIsSet() const;
   void unsetNwAreaInfo();
   /// <summary>
   ///
   /// </summary>
   std::string getUpPathChgNotifUri() const;
-  void setUpPathChgNotifUri(std::string const& value);
+  void setUpPathChgNotifUri(std::string const &value);
   bool upPathChgNotifUriIsSet() const;
   void unsetUpPathChgNotifUri();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getHeaders();
-  void setHeaders(std::vector<std::string> const& value);
+  std::vector<std::string> &getHeaders();
+  void setHeaders(std::vector<std::string> const &value);
   bool headersIsSet() const;
   void unsetHeaders();
   /// <summary>
@@ -180,10 +180,10 @@ class TrafficInfluDataPatch {
   bool addrPreserIndIsSet() const;
   void unsetAddrPreserInd();
 
-  friend void to_json(nlohmann::json& j, const TrafficInfluDataPatch& o);
-  friend void from_json(const nlohmann::json& j, TrafficInfluDataPatch& o);
+  friend void to_json(nlohmann::json &j, const TrafficInfluDataPatch &o);
+  friend void from_json(const nlohmann::json &j, TrafficInfluDataPatch &o);
 
- protected:
+protected:
   std::string m_UpPathChgNotifCorreId;
   bool m_UpPathChgNotifCorreIdIsSet;
   bool m_AppReloInd;
@@ -222,6 +222,6 @@ class TrafficInfluDataPatch {
   bool m_AddrPreserIndIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* TrafficInfluDataPatch_H_ */

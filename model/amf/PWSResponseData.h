@@ -20,8 +20,8 @@
 #define PWSResponseData_H_
 
 #include "Tai.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::amf {
 
@@ -29,7 +29,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class PWSResponseData {
- public:
+public:
   PWSResponseData();
   virtual ~PWSResponseData();
 
@@ -56,14 +56,14 @@ class PWSResponseData {
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::Tai>& getUnknownTaiList();
+  std::vector<oai::model::common::Tai> &getUnknownTaiList();
   bool unknownTaiListIsSet() const;
   void unsetUnknownTaiList();
 
-  friend void to_json(nlohmann::json& j, const PWSResponseData& o);
-  friend void from_json(const nlohmann::json& j, PWSResponseData& o);
+  friend void to_json(nlohmann::json &j, const PWSResponseData &o);
+  friend void from_json(const nlohmann::json &j, PWSResponseData &o);
 
- protected:
+protected:
   int32_t m_NgapMessageType;
 
   int32_t m_SerialNumber;
@@ -74,6 +74,6 @@ class PWSResponseData {
   bool m_UnknownTaiListIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* PWSResponseData_H_ */

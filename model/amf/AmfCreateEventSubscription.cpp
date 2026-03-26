@@ -19,9 +19,9 @@
 namespace oai::model::amf {
 
 AmfCreateEventSubscription::AmfCreateEventSubscription() {
-  m_SupportedFeatures      = "";
+  m_SupportedFeatures = "";
   m_SupportedFeaturesIsSet = false;
-  m_OldGuamiIsSet          = false;
+  m_OldGuamiIsSet = false;
 }
 
 void AmfCreateEventSubscription::validate() const {
@@ -31,18 +31,18 @@ void AmfCreateEventSubscription::validate() const {
   }
 }
 
-bool AmfCreateEventSubscription::validate(std::stringstream& msg) const {
+bool AmfCreateEventSubscription::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AmfCreateEventSubscription::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool AmfCreateEventSubscription::validate(std::stringstream &msg,
+                                          const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AmfCreateEventSubscription" : pathPrefix;
 
   if (supportedFeaturesIsSet()) {
-    const std::string& value           = m_SupportedFeatures;
+    const std::string &value = m_SupportedFeatures;
     const std::string currentValuePath = _pathPrefix + ".supportedFeatures";
   }
 
@@ -50,7 +50,7 @@ bool AmfCreateEventSubscription::validate(
 }
 
 bool AmfCreateEventSubscription::operator==(
-    const AmfCreateEventSubscription& rhs) const {
+    const AmfCreateEventSubscription &rhs) const {
   return
 
       (getSubscription() == rhs.getSubscription()) &&
@@ -67,19 +67,20 @@ bool AmfCreateEventSubscription::operator==(
 }
 
 bool AmfCreateEventSubscription::operator!=(
-    const AmfCreateEventSubscription& rhs) const {
+    const AmfCreateEventSubscription &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AmfCreateEventSubscription& o) {
-  j                 = nlohmann::json();
+void to_json(nlohmann::json &j, const AmfCreateEventSubscription &o) {
+  j = nlohmann::json();
   j["subscription"] = o.m_Subscription;
   if (o.supportedFeaturesIsSet())
     j["supportedFeatures"] = o.m_SupportedFeatures;
-  if (o.oldGuamiIsSet()) j["oldGuami"] = o.m_OldGuami;
+  if (o.oldGuamiIsSet())
+    j["oldGuami"] = o.m_OldGuami;
 }
 
-void from_json(const nlohmann::json& j, AmfCreateEventSubscription& o) {
+void from_json(const nlohmann::json &j, AmfCreateEventSubscription &o) {
   j.at("subscription").get_to(o.m_Subscription);
   if (j.find("supportedFeatures") != j.end()) {
     j.at("supportedFeatures").get_to(o.m_SupportedFeatures);
@@ -95,15 +96,15 @@ AmfEventSubscription AmfCreateEventSubscription::getSubscription() const {
   return m_Subscription;
 }
 void AmfCreateEventSubscription::setSubscription(
-    AmfEventSubscription const& value) {
+    AmfEventSubscription const &value) {
   m_Subscription = value;
 }
 std::string AmfCreateEventSubscription::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
 void AmfCreateEventSubscription::setSupportedFeatures(
-    std::string const& value) {
-  m_SupportedFeatures      = value;
+    std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool AmfCreateEventSubscription::supportedFeaturesIsSet() const {
@@ -116,15 +117,13 @@ oai::model::common::Guami AmfCreateEventSubscription::getOldGuami() const {
   return m_OldGuami;
 }
 void AmfCreateEventSubscription::setOldGuami(
-    oai::model::common::Guami const& value) {
-  m_OldGuami      = value;
+    oai::model::common::Guami const &value) {
+  m_OldGuami = value;
   m_OldGuamiIsSet = true;
 }
 bool AmfCreateEventSubscription::oldGuamiIsSet() const {
   return m_OldGuamiIsSet;
 }
-void AmfCreateEventSubscription::unsetOldGuami() {
-  m_OldGuamiIsSet = false;
-}
+void AmfCreateEventSubscription::unsetOldGuami() { m_OldGuamiIsSet = false; }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

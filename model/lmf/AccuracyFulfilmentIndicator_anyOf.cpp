@@ -13,8 +13,8 @@
 
 #include "AccuracyFulfilmentIndicator_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::lmf {
 
@@ -27,12 +27,12 @@ void AccuracyFulfilmentIndicator_anyOf::validate() const {
   }
 }
 
-bool AccuracyFulfilmentIndicator_anyOf::validate(std::stringstream& msg) const {
+bool AccuracyFulfilmentIndicator_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool AccuracyFulfilmentIndicator_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AccuracyFulfilmentIndicator_anyOf" : pathPrefix;
@@ -48,37 +48,37 @@ bool AccuracyFulfilmentIndicator_anyOf::validate(
 }
 
 bool AccuracyFulfilmentIndicator_anyOf::operator==(
-    const AccuracyFulfilmentIndicator_anyOf& rhs) const {
+    const AccuracyFulfilmentIndicator_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool AccuracyFulfilmentIndicator_anyOf::operator!=(
-    const AccuracyFulfilmentIndicator_anyOf& rhs) const {
+    const AccuracyFulfilmentIndicator_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AccuracyFulfilmentIndicator_anyOf& o) {
+void to_json(nlohmann::json &j, const AccuracyFulfilmentIndicator_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case AccuracyFulfilmentIndicator_anyOf::eAccuracyFulfilmentIndicator_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case AccuracyFulfilmentIndicator_anyOf::eAccuracyFulfilmentIndicator_anyOf::
-        FULFILLED:
-      j = "REQUESTED_ACCURACY_FULFILLED";
-      break;
-    case AccuracyFulfilmentIndicator_anyOf::eAccuracyFulfilmentIndicator_anyOf::
-        NOT_FULFILLED:
-      j = "REQUESTED_ACCURACY_NOT_FULFILLED";
-      break;
+  case AccuracyFulfilmentIndicator_anyOf::eAccuracyFulfilmentIndicator_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case AccuracyFulfilmentIndicator_anyOf::eAccuracyFulfilmentIndicator_anyOf::
+      FULFILLED:
+    j = "REQUESTED_ACCURACY_FULFILLED";
+    break;
+  case AccuracyFulfilmentIndicator_anyOf::eAccuracyFulfilmentIndicator_anyOf::
+      NOT_FULFILLED:
+    j = "REQUESTED_ACCURACY_NOT_FULFILLED";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, AccuracyFulfilmentIndicator_anyOf& o) {
+void from_json(const nlohmann::json &j, AccuracyFulfilmentIndicator_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "REQUESTED_ACCURACY_FULFILLED") {
     o.setValue(AccuracyFulfilmentIndicator_anyOf::
@@ -106,4 +106,4 @@ void AccuracyFulfilmentIndicator_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

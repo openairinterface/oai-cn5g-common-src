@@ -28,7 +28,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class FlowStatus {
- public:
+public:
   FlowStatus();
   virtual ~FlowStatus() = default;
 
@@ -42,16 +42,16 @@ class FlowStatus {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const FlowStatus& rhs) const;
-  bool operator!=(const FlowStatus& rhs) const;
+  bool operator==(const FlowStatus &rhs) const;
+  bool operator!=(const FlowStatus &rhs) const;
 
   /////////////////////////////////////////////
   /// FlowStatus members
@@ -60,15 +60,15 @@ class FlowStatus {
   void setValue(FlowStatus_anyOf value);
   FlowStatus_anyOf::eFlowStatus_anyOf getEnumValue() const;
   void setEnumValue(FlowStatus_anyOf::eFlowStatus_anyOf value);
-  friend void to_json(nlohmann::json& j, const FlowStatus& o);
-  friend void from_json(const nlohmann::json& j, FlowStatus& o);
-  friend void to_json(nlohmann::json& j, const FlowStatus_anyOf& o);
-  friend void from_json(const nlohmann::json& j, FlowStatus_anyOf& o);
+  friend void to_json(nlohmann::json &j, const FlowStatus &o);
+  friend void from_json(const nlohmann::json &j, FlowStatus &o);
+  friend void to_json(nlohmann::json &j, const FlowStatus_anyOf &o);
+  friend void from_json(const nlohmann::json &j, FlowStatus_anyOf &o);
 
- protected:
+protected:
   FlowStatus_anyOf m_value;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* FlowStatus_H_ */

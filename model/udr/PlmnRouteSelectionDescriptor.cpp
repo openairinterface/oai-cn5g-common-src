@@ -28,14 +28,14 @@ void PlmnRouteSelectionDescriptor::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const PlmnRouteSelectionDescriptor& o) {
-  j                = nlohmann::json();
+void to_json(nlohmann::json &j, const PlmnRouteSelectionDescriptor &o) {
+  j = nlohmann::json();
   j["servingPlmn"] = o.m_ServingPlmn;
   if (o.snssaiRouteSelDescsIsSet() || !o.m_SnssaiRouteSelDescs.empty())
     j["snssaiRouteSelDescs"] = o.m_SnssaiRouteSelDescs;
 }
 
-void from_json(const nlohmann::json& j, PlmnRouteSelectionDescriptor& o) {
+void from_json(const nlohmann::json &j, PlmnRouteSelectionDescriptor &o) {
   j.at("servingPlmn").get_to(o.m_ServingPlmn);
   if (j.find("snssaiRouteSelDescs") != j.end()) {
     j.at("snssaiRouteSelDescs").get_to(o.m_SnssaiRouteSelDescs);
@@ -43,21 +43,21 @@ void from_json(const nlohmann::json& j, PlmnRouteSelectionDescriptor& o) {
   }
 }
 
-oai::model::common::PlmnId PlmnRouteSelectionDescriptor::getServingPlmn()
-    const {
+oai::model::common::PlmnId
+PlmnRouteSelectionDescriptor::getServingPlmn() const {
   return m_ServingPlmn;
 }
 void PlmnRouteSelectionDescriptor::setServingPlmn(
-    oai::model::common::PlmnId const& value) {
+    oai::model::common::PlmnId const &value) {
   m_ServingPlmn = value;
 }
-std::vector<SnssaiRouteSelectionDescriptor>&
+std::vector<SnssaiRouteSelectionDescriptor> &
 PlmnRouteSelectionDescriptor::getSnssaiRouteSelDescs() {
   return m_SnssaiRouteSelDescs;
 }
 void PlmnRouteSelectionDescriptor::setSnssaiRouteSelDescs(
-    std::vector<SnssaiRouteSelectionDescriptor> const& value) {
-  m_SnssaiRouteSelDescs      = value;
+    std::vector<SnssaiRouteSelectionDescriptor> const &value) {
+  m_SnssaiRouteSelDescs = value;
   m_SnssaiRouteSelDescsIsSet = true;
 }
 bool PlmnRouteSelectionDescriptor::snssaiRouteSelDescsIsSet() const {
@@ -67,4 +67,4 @@ void PlmnRouteSelectionDescriptor::unsetSnssaiRouteSelDescs() {
   m_SnssaiRouteSelDescsIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

@@ -13,14 +13,14 @@ UserLocationInformationNr::UserLocationInformationNr() {}
 UserLocationInformationNr::~UserLocationInformationNr() {}
 
 //------------------------------------------------------------------------------
-void UserLocationInformationNr::set(const NrCgi& nrCgi, const Tai& tai) {
+void UserLocationInformationNr::set(const NrCgi &nrCgi, const Tai &tai) {
   m_NrCgi = nrCgi;
-  m_Tai   = tai;
+  m_Tai = tai;
 }
 
 //------------------------------------------------------------------------------
 bool UserLocationInformationNr::encode(
-    Ngap_UserLocationInformationNR_t& userLocationInformation) const {
+    Ngap_UserLocationInformationNR_t &userLocationInformation) const {
   if (!m_NrCgi.encode(userLocationInformation.nR_CGI)) {
     return false;
   }
@@ -32,7 +32,7 @@ bool UserLocationInformationNr::encode(
 
 //------------------------------------------------------------------------------
 bool UserLocationInformationNr::decode(
-    const Ngap_UserLocationInformationNR_t& userLocationInformation) {
+    const Ngap_UserLocationInformationNR_t &userLocationInformation) {
   if (!m_NrCgi.decode(userLocationInformation.nR_CGI)) {
     return false;
   }
@@ -44,8 +44,8 @@ bool UserLocationInformationNr::decode(
 }
 
 //------------------------------------------------------------------------------
-void UserLocationInformationNr::get(NrCgi& nrCgi, Tai& tai) const {
+void UserLocationInformationNr::get(NrCgi &nrCgi, Tai &tai) const {
   nrCgi = m_NrCgi;
-  tai   = m_Tai;
+  tai = m_Tai;
 }
-}  // namespace oai::ngap
+} // namespace oai::ngap

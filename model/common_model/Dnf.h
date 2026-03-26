@@ -19,9 +19,9 @@
 #ifndef Dnf_H_
 #define Dnf_H_
 
-#include <vector>
 #include "DnfUnit.h"
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::common {
 
@@ -29,7 +29,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class Dnf {
- public:
+public:
   Dnf();
   virtual ~Dnf() = default;
 
@@ -43,16 +43,16 @@ class Dnf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const Dnf& rhs) const;
-  bool operator!=(const Dnf& rhs) const;
+  bool operator==(const Dnf &rhs) const;
+  bool operator!=(const Dnf &rhs) const;
 
   /////////////////////////////////////////////
   /// Dnf members
@@ -61,15 +61,15 @@ class Dnf {
   ///
   /// </summary>
   std::vector<oai::model::common::DnfUnit> getDnfUnits() const;
-  void setDnfUnits(std::vector<oai::model::common::DnfUnit> const& value);
+  void setDnfUnits(std::vector<oai::model::common::DnfUnit> const &value);
 
-  friend void to_json(nlohmann::json& j, const Dnf& o);
-  friend void from_json(const nlohmann::json& j, Dnf& o);
+  friend void to_json(nlohmann::json &j, const Dnf &o);
+  friend void from_json(const nlohmann::json &j, Dnf &o);
 
- protected:
+protected:
   std::vector<oai::model::common::DnfUnit> m_DnfUnits;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* Dnf_H_ */

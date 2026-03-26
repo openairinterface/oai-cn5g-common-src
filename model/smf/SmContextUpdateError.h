@@ -19,12 +19,12 @@
 #ifndef SmContextUpdateError_H_
 #define SmContextUpdateError_H_
 
+#include "N2SmInfoType.h"
 #include "ProblemDetails.h"
 #include "RefToBinaryData.h"
-#include <string>
 #include "UpCnxState.h"
-#include "N2SmInfoType.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::smf {
 
@@ -32,7 +32,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class SmContextUpdateError {
- public:
+public:
   SmContextUpdateError();
   virtual ~SmContextUpdateError();
 
@@ -45,47 +45,47 @@ class SmContextUpdateError {
   ///
   /// </summary>
   oai::model::common::ProblemDetails getError() const;
-  void setError(oai::model::common::ProblemDetails const& value);
+  void setError(oai::model::common::ProblemDetails const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::RefToBinaryData getN1SmMsg() const;
-  void setN1SmMsg(oai::model::common::RefToBinaryData const& value);
+  void setN1SmMsg(oai::model::common::RefToBinaryData const &value);
   bool n1SmMsgIsSet() const;
   void unsetN1SmMsg();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::RefToBinaryData getN2SmInfo() const;
-  void setN2SmInfo(oai::model::common::RefToBinaryData const& value);
+  void setN2SmInfo(oai::model::common::RefToBinaryData const &value);
   bool n2SmInfoIsSet() const;
   void unsetN2SmInfo();
   /// <summary>
   ///
   /// </summary>
   N2SmInfoType getN2SmInfoType() const;
-  void setN2SmInfoType(N2SmInfoType const& value);
+  void setN2SmInfoType(N2SmInfoType const &value);
   bool n2SmInfoTypeIsSet() const;
   void unsetN2SmInfoType();
   /// <summary>
   ///
   /// </summary>
   UpCnxState getUpCnxState() const;
-  void setUpCnxState(UpCnxState const& value);
+  void setUpCnxState(UpCnxState const &value);
   bool upCnxStateIsSet() const;
   void unsetUpCnxState();
   /// <summary>
   ///
   /// </summary>
   std::string getRecoveryTime() const;
-  void setRecoveryTime(std::string const& value);
+  void setRecoveryTime(std::string const &value);
   bool recoveryTimeIsSet() const;
   void unsetRecoveryTime();
 
-  friend void to_json(nlohmann::json& j, const SmContextUpdateError& o);
-  friend void from_json(const nlohmann::json& j, SmContextUpdateError& o);
+  friend void to_json(nlohmann::json &j, const SmContextUpdateError &o);
+  friend void from_json(const nlohmann::json &j, SmContextUpdateError &o);
 
- protected:
+protected:
   oai::model::common::ProblemDetails m_Error;
 
   oai::model::common::RefToBinaryData m_N1SmMsg;
@@ -100,6 +100,6 @@ class SmContextUpdateError {
   bool m_RecoveryTimeIsSet;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* SmContextUpdateError_H_ */

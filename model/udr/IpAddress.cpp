@@ -19,9 +19,9 @@
 namespace oai::udr::model {
 
 IpAddress::IpAddress() {
-  m_Ipv4Addr        = "";
-  m_Ipv4AddrIsSet   = false;
-  m_Ipv6AddrIsSet   = false;
+  m_Ipv4Addr = "";
+  m_Ipv4AddrIsSet = false;
+  m_Ipv6AddrIsSet = false;
   m_Ipv6PrefixIsSet = false;
 }
 
@@ -31,14 +31,17 @@ void IpAddress::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const IpAddress& o) {
+void to_json(nlohmann::json &j, const IpAddress &o) {
   j = nlohmann::json();
-  if (o.ipv4AddrIsSet()) j["ipv4Addr"] = o.m_Ipv4Addr;
-  if (o.ipv6AddrIsSet()) j["ipv6Addr"] = o.m_Ipv6Addr;
-  if (o.ipv6PrefixIsSet()) j["ipv6Prefix"] = o.m_Ipv6Prefix;
+  if (o.ipv4AddrIsSet())
+    j["ipv4Addr"] = o.m_Ipv4Addr;
+  if (o.ipv6AddrIsSet())
+    j["ipv6Addr"] = o.m_Ipv6Addr;
+  if (o.ipv6PrefixIsSet())
+    j["ipv6Prefix"] = o.m_Ipv6Prefix;
 }
 
-void from_json(const nlohmann::json& j, IpAddress& o) {
+void from_json(const nlohmann::json &j, IpAddress &o) {
   if (j.find("ipv4Addr") != j.end()) {
     j.at("ipv4Addr").get_to(o.m_Ipv4Addr);
     o.m_Ipv4AddrIsSet = true;
@@ -53,44 +56,30 @@ void from_json(const nlohmann::json& j, IpAddress& o) {
   }
 }
 
-std::string IpAddress::getIpv4Addr() const {
-  return m_Ipv4Addr;
-}
-void IpAddress::setIpv4Addr(std::string const& value) {
-  m_Ipv4Addr      = value;
+std::string IpAddress::getIpv4Addr() const { return m_Ipv4Addr; }
+void IpAddress::setIpv4Addr(std::string const &value) {
+  m_Ipv4Addr = value;
   m_Ipv4AddrIsSet = true;
 }
-bool IpAddress::ipv4AddrIsSet() const {
-  return m_Ipv4AddrIsSet;
-}
-void IpAddress::unsetIpv4Addr() {
-  m_Ipv4AddrIsSet = false;
-}
+bool IpAddress::ipv4AddrIsSet() const { return m_Ipv4AddrIsSet; }
+void IpAddress::unsetIpv4Addr() { m_Ipv4AddrIsSet = false; }
 oai::model::common::Ipv6Addr IpAddress::getIpv6Addr() const {
   return m_Ipv6Addr;
 }
-void IpAddress::setIpv6Addr(oai::model::common::Ipv6Addr const& value) {
-  m_Ipv6Addr      = value;
+void IpAddress::setIpv6Addr(oai::model::common::Ipv6Addr const &value) {
+  m_Ipv6Addr = value;
   m_Ipv6AddrIsSet = true;
 }
-bool IpAddress::ipv6AddrIsSet() const {
-  return m_Ipv6AddrIsSet;
-}
-void IpAddress::unsetIpv6Addr() {
-  m_Ipv6AddrIsSet = false;
-}
+bool IpAddress::ipv6AddrIsSet() const { return m_Ipv6AddrIsSet; }
+void IpAddress::unsetIpv6Addr() { m_Ipv6AddrIsSet = false; }
 oai::model::common::Ipv6Prefix IpAddress::getIpv6Prefix() const {
   return m_Ipv6Prefix;
 }
-void IpAddress::setIpv6Prefix(oai::model::common::Ipv6Prefix const& value) {
-  m_Ipv6Prefix      = value;
+void IpAddress::setIpv6Prefix(oai::model::common::Ipv6Prefix const &value) {
+  m_Ipv6Prefix = value;
   m_Ipv6PrefixIsSet = true;
 }
-bool IpAddress::ipv6PrefixIsSet() const {
-  return m_Ipv6PrefixIsSet;
-}
-void IpAddress::unsetIpv6Prefix() {
-  m_Ipv6PrefixIsSet = false;
-}
+bool IpAddress::ipv6PrefixIsSet() const { return m_Ipv6PrefixIsSet; }
+void IpAddress::unsetIpv6Prefix() { m_Ipv6PrefixIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

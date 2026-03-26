@@ -19,10 +19,10 @@
 #ifndef AfEventNotification_H_
 #define AfEventNotification_H_
 
-#include "Flows.h"
 #include "AfEvent.h"
-#include <vector>
+#include "Flows.h"
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::pcf {
 
@@ -30,7 +30,7 @@ namespace oai::model::pcf {
 /// Describes the event information delivered in the notification.
 /// </summary>
 class AfEventNotification {
- public:
+public:
   AfEventNotification();
   virtual ~AfEventNotification() = default;
 
@@ -44,16 +44,16 @@ class AfEventNotification {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const AfEventNotification& rhs) const;
-  bool operator!=(const AfEventNotification& rhs) const;
+  bool operator==(const AfEventNotification &rhs) const;
+  bool operator!=(const AfEventNotification &rhs) const;
 
   /////////////////////////////////////////////
   /// AfEventNotification members
@@ -62,12 +62,12 @@ class AfEventNotification {
   ///
   /// </summary>
   oai::model::pcf::AfEvent getEvent() const;
-  void setEvent(oai::model::pcf::AfEvent const& value);
+  void setEvent(oai::model::pcf::AfEvent const &value);
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::pcf::Flows> getFlows() const;
-  void setFlows(std::vector<oai::model::pcf::Flows> const& value);
+  void setFlows(std::vector<oai::model::pcf::Flows> const &value);
   bool flowsIsSet() const;
   void unsetFlows();
   /// <summary>
@@ -78,10 +78,10 @@ class AfEventNotification {
   bool retryAfterIsSet() const;
   void unsetRetryAfter();
 
-  friend void to_json(nlohmann::json& j, const AfEventNotification& o);
-  friend void from_json(const nlohmann::json& j, AfEventNotification& o);
+  friend void to_json(nlohmann::json &j, const AfEventNotification &o);
+  friend void from_json(const nlohmann::json &j, AfEventNotification &o);
 
- protected:
+protected:
   oai::model::pcf::AfEvent m_Event;
 
   std::vector<oai::model::pcf::Flows> m_Flows;
@@ -90,6 +90,6 @@ class AfEventNotification {
   bool m_RetryAfterIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* AfEventNotification_H_ */

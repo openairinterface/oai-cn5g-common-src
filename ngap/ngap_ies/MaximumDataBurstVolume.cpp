@@ -15,18 +15,18 @@ MaximumDataBurstVolume::MaximumDataBurstVolume() {
 MaximumDataBurstVolume::~MaximumDataBurstVolume() {}
 
 //------------------------------------------------------------------------------
-void MaximumDataBurstVolume::set(const long& value) {
+void MaximumDataBurstVolume::set(const long &value) {
   m_MaximumDataBurstVolume = value;
 }
 
 //------------------------------------------------------------------------------
-void MaximumDataBurstVolume::get(long& value) const {
+void MaximumDataBurstVolume::get(long &value) const {
   value = m_MaximumDataBurstVolume;
 }
 
 //------------------------------------------------------------------------------
 bool MaximumDataBurstVolume::encode(
-    Ngap_MaximumDataBurstVolume_t& value) const {
+    Ngap_MaximumDataBurstVolume_t &value) const {
   value = m_MaximumDataBurstVolume;
 
   return true;
@@ -34,9 +34,9 @@ bool MaximumDataBurstVolume::encode(
 
 //------------------------------------------------------------------------------
 bool MaximumDataBurstVolume::decode(
-    const Ngap_MaximumDataBurstVolume_t& value) {
+    const Ngap_MaximumDataBurstVolume_t &value) {
   m_MaximumDataBurstVolume = value;
 
   return true;
 }
-}  // namespace oai::ngap
+} // namespace oai::ngap

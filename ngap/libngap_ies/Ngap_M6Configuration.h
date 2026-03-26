@@ -12,8 +12,8 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_M6report-Interval.h"
 #include "Ngap_Links-to-log.h"
+#include "Ngap_M6report-Interval.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -27,7 +27,7 @@ struct Ngap_ProtocolExtensionContainer;
 typedef struct Ngap_M6Configuration {
   Ngap_M6report_Interval_t m6report_Interval;
   Ngap_Links_to_log_t m6_links_to_log;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

@@ -19,12 +19,12 @@
 #ifndef ComplexQuery_H_
 #define ComplexQuery_H_
 
+#include "Cnf.h"
 #include "CnfUnit.h"
 #include "Dnf.h"
-#include <vector>
-#include "Cnf.h"
 #include "DnfUnit.h"
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::common {
 
@@ -32,7 +32,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class ComplexQuery {
- public:
+public:
   ComplexQuery();
   virtual ~ComplexQuery() = default;
 
@@ -46,16 +46,16 @@ class ComplexQuery {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const ComplexQuery& rhs) const;
-  bool operator!=(const ComplexQuery& rhs) const;
+  bool operator==(const ComplexQuery &rhs) const;
+  bool operator!=(const ComplexQuery &rhs) const;
 
   /////////////////////////////////////////////
   /// ComplexQuery members
@@ -64,22 +64,22 @@ class ComplexQuery {
   ///
   /// </summary>
   std::vector<oai::model::common::CnfUnit> getCnfUnits() const;
-  void setCnfUnits(std::vector<oai::model::common::CnfUnit> const& value);
+  void setCnfUnits(std::vector<oai::model::common::CnfUnit> const &value);
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::common::DnfUnit> getDnfUnits() const;
-  void setDnfUnits(std::vector<oai::model::common::DnfUnit> const& value);
+  void setDnfUnits(std::vector<oai::model::common::DnfUnit> const &value);
 
-  friend void to_json(nlohmann::json& j, const ComplexQuery& o);
-  friend void from_json(const nlohmann::json& j, ComplexQuery& o);
+  friend void to_json(nlohmann::json &j, const ComplexQuery &o);
+  friend void from_json(const nlohmann::json &j, ComplexQuery &o);
 
- protected:
+protected:
   std::vector<oai::model::common::CnfUnit> m_CnfUnits;
 
   std::vector<oai::model::common::DnfUnit> m_DnfUnits;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* ComplexQuery_H_ */

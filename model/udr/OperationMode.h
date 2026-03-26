@@ -30,7 +30,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class OperationMode {
- public:
+public:
   OperationMode();
   virtual ~OperationMode();
 
@@ -39,12 +39,12 @@ class OperationMode {
   /////////////////////////////////////////////
   /// OperationMode members
 
-  friend void to_json(nlohmann::json& j, const OperationMode& o);
-  friend void from_json(const nlohmann::json& j, OperationMode& o);
+  friend void to_json(nlohmann::json &j, const OperationMode &o);
+  friend void from_json(const nlohmann::json &j, OperationMode &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* OperationMode_H_ */

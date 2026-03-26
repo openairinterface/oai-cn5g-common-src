@@ -20,19 +20,19 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_NB_IoT_Paging_eDRXCycle {
-  Ngap_NB_IoT_Paging_eDRXCycle_hf2    = 0,
-  Ngap_NB_IoT_Paging_eDRXCycle_hf4    = 1,
-  Ngap_NB_IoT_Paging_eDRXCycle_hf6    = 2,
-  Ngap_NB_IoT_Paging_eDRXCycle_hf8    = 3,
-  Ngap_NB_IoT_Paging_eDRXCycle_hf10   = 4,
-  Ngap_NB_IoT_Paging_eDRXCycle_hf12   = 5,
-  Ngap_NB_IoT_Paging_eDRXCycle_hf14   = 6,
-  Ngap_NB_IoT_Paging_eDRXCycle_hf16   = 7,
-  Ngap_NB_IoT_Paging_eDRXCycle_hf32   = 8,
-  Ngap_NB_IoT_Paging_eDRXCycle_hf64   = 9,
-  Ngap_NB_IoT_Paging_eDRXCycle_hf128  = 10,
-  Ngap_NB_IoT_Paging_eDRXCycle_hf256  = 11,
-  Ngap_NB_IoT_Paging_eDRXCycle_hf512  = 12,
+  Ngap_NB_IoT_Paging_eDRXCycle_hf2 = 0,
+  Ngap_NB_IoT_Paging_eDRXCycle_hf4 = 1,
+  Ngap_NB_IoT_Paging_eDRXCycle_hf6 = 2,
+  Ngap_NB_IoT_Paging_eDRXCycle_hf8 = 3,
+  Ngap_NB_IoT_Paging_eDRXCycle_hf10 = 4,
+  Ngap_NB_IoT_Paging_eDRXCycle_hf12 = 5,
+  Ngap_NB_IoT_Paging_eDRXCycle_hf14 = 6,
+  Ngap_NB_IoT_Paging_eDRXCycle_hf16 = 7,
+  Ngap_NB_IoT_Paging_eDRXCycle_hf32 = 8,
+  Ngap_NB_IoT_Paging_eDRXCycle_hf64 = 9,
+  Ngap_NB_IoT_Paging_eDRXCycle_hf128 = 10,
+  Ngap_NB_IoT_Paging_eDRXCycle_hf256 = 11,
+  Ngap_NB_IoT_Paging_eDRXCycle_hf512 = 12,
   Ngap_NB_IoT_Paging_eDRXCycle_hf1024 = 13
   /*
    * Enumeration is extensible

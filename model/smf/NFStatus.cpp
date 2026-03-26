@@ -23,10 +23,8 @@ void NFStatus::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const NFStatus& o) {
-  j = nlohmann::json();
-}
+void to_json(nlohmann::json &j, const NFStatus &o) { j = nlohmann::json(); }
 
-void from_json(const nlohmann::json& j, NFStatus& o) {}
+void from_json(const nlohmann::json &j, NFStatus &o) {}
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

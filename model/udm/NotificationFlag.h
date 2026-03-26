@@ -37,7 +37,7 @@ namespace oai::model::udm {
 /// shall be sent to the NF service consumer(s), after that, is muted again.
 /// </summary>
 class NotificationFlag {
- public:
+public:
   NotificationFlag();
   virtual ~NotificationFlag() = default;
 
@@ -51,23 +51,23 @@ class NotificationFlag {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const NotificationFlag& rhs) const;
-  bool operator!=(const NotificationFlag& rhs) const;
+  bool operator==(const NotificationFlag &rhs) const;
+  bool operator!=(const NotificationFlag &rhs) const;
 
   /////////////////////////////////////////////
   /// NotificationFlag members
 
-  friend void to_json(nlohmann::json& j, const NotificationFlag& o);
-  friend void from_json(const nlohmann::json& j, NotificationFlag& o);
+  friend void to_json(nlohmann::json &j, const NotificationFlag &o);
+  friend void from_json(const nlohmann::json &j, NotificationFlag &o);
 
- protected:
+protected:
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* NotificationFlag_H_ */

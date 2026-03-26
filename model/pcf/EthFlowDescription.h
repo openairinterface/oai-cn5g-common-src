@@ -20,9 +20,9 @@
 #define EthFlowDescription_H_
 
 #include "FlowDirection.h"
+#include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
-#include <nlohmann/json.hpp>
 
 namespace oai::model::pcf {
 
@@ -30,7 +30,7 @@ namespace oai::model::pcf {
 /// Identifies an Ethernet flow
 /// </summary>
 class EthFlowDescription {
- public:
+public:
   EthFlowDescription();
   virtual ~EthFlowDescription() = default;
 
@@ -44,16 +44,16 @@ class EthFlowDescription {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const EthFlowDescription& rhs) const;
-  bool operator!=(const EthFlowDescription& rhs) const;
+  bool operator==(const EthFlowDescription &rhs) const;
+  bool operator!=(const EthFlowDescription &rhs) const;
 
   /////////////////////////////////////////////
   /// EthFlowDescription members
@@ -62,61 +62,61 @@ class EthFlowDescription {
   ///
   /// </summary>
   std::string getDestMacAddr() const;
-  void setDestMacAddr(std::string const& value);
+  void setDestMacAddr(std::string const &value);
   bool destMacAddrIsSet() const;
   void unsetDestMacAddr();
   /// <summary>
   ///
   /// </summary>
   std::string getEthType() const;
-  void setEthType(std::string const& value);
+  void setEthType(std::string const &value);
   /// <summary>
   /// Defines a packet filter of an IP flow.
   /// </summary>
   std::string getFDesc() const;
-  void setFDesc(std::string const& value);
+  void setFDesc(std::string const &value);
   bool fDescIsSet() const;
   void unsetFDesc();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::FlowDirection getFDir() const;
-  void setFDir(oai::model::pcf::FlowDirection const& value);
+  void setFDir(oai::model::pcf::FlowDirection const &value);
   bool fDirIsSet() const;
   void unsetFDir();
   /// <summary>
   ///
   /// </summary>
   std::string getSourceMacAddr() const;
-  void setSourceMacAddr(std::string const& value);
+  void setSourceMacAddr(std::string const &value);
   bool sourceMacAddrIsSet() const;
   void unsetSourceMacAddr();
   /// <summary>
   ///
   /// </summary>
   std::vector<std::string> getVlanTags() const;
-  void setVlanTags(std::vector<std::string> const& value);
+  void setVlanTags(std::vector<std::string> const &value);
   bool vlanTagsIsSet() const;
   void unsetVlanTags();
   /// <summary>
   ///
   /// </summary>
   std::string getSrcMacAddrEnd() const;
-  void setSrcMacAddrEnd(std::string const& value);
+  void setSrcMacAddrEnd(std::string const &value);
   bool srcMacAddrEndIsSet() const;
   void unsetSrcMacAddrEnd();
   /// <summary>
   ///
   /// </summary>
   std::string getDestMacAddrEnd() const;
-  void setDestMacAddrEnd(std::string const& value);
+  void setDestMacAddrEnd(std::string const &value);
   bool destMacAddrEndIsSet() const;
   void unsetDestMacAddrEnd();
 
-  friend void to_json(nlohmann::json& j, const EthFlowDescription& o);
-  friend void from_json(const nlohmann::json& j, EthFlowDescription& o);
+  friend void to_json(nlohmann::json &j, const EthFlowDescription &o);
+  friend void from_json(const nlohmann::json &j, EthFlowDescription &o);
 
- protected:
+protected:
   std::string m_DestMacAddr;
   bool m_DestMacAddrIsSet;
   std::string m_EthType;
@@ -135,6 +135,6 @@ class EthFlowDescription {
   bool m_DestMacAddrEndIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* EthFlowDescription_H_ */

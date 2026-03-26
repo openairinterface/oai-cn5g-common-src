@@ -12,20 +12,20 @@ extern "C" {
 namespace oai::ngap {
 
 class FiveQI {
- public:
+public:
   FiveQI();
   virtual ~FiveQI();
 
-  void set(const long& value);
-  bool get(long& value) const;
+  void set(const long &value);
+  bool get(long &value) const;
 
-  bool encode(Ngap_FiveQI_t&) const;
-  bool decode(const Ngap_FiveQI_t&);
+  bool encode(Ngap_FiveQI_t &) const;
+  bool decode(const Ngap_FiveQI_t &);
 
- private:
+private:
   long m_FiveQI;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

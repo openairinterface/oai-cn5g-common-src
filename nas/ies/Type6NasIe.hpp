@@ -12,16 +12,15 @@
 namespace oai::nas {
 
 class Type6NasIe : public NasIe {
- public:
+public:
   Type6NasIe();
   Type6NasIe(uint8_t iei);
   virtual ~Type6NasIe() = default;
 
-  int Encode(uint8_t* buf, int len) const override;
-  int Encode(
-      uint8_t* buf, int len,
-      int& len_pos) const;  // Use this function to encode IE lengh later
-  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+  int Encode(uint8_t *buf, int len) const override;
+  int Encode(uint8_t *buf, int len,
+             int &len_pos) const; // Use this function to encode IE lengh later
+  int Decode(const uint8_t *const buf, int len, bool is_iei = false) override;
 
   uint32_t GetIeLength() const override;
   bool Validate(int len) const override;
@@ -30,16 +29,16 @@ class Type6NasIe : public NasIe {
   void SetIei(uint8_t iei);
 
   void SetLengthIndicator(uint16_t li);
-  void GetLengthIndicator(uint16_t& li) const;
+  void GetLengthIndicator(uint16_t &li) const;
   uint16_t GetLengthIndicator() const;
 
   uint8_t GetHeaderLength() const;
 
- protected:
-  std::optional<uint8_t> iei_;  // IEI present in format TLV-E
-  uint16_t li_;                 // length indicator, 2 bytes
+protected:
+  std::optional<uint8_t> iei_; // IEI present in format TLV-E
+  uint16_t li_;                // length indicator, 2 bytes
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

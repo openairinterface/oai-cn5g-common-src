@@ -27,7 +27,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class CreditManagementStatus_anyOf {
- public:
+public:
   CreditManagementStatus_anyOf();
   virtual ~CreditManagementStatus_anyOf() = default;
 
@@ -53,34 +53,34 @@ class CreditManagementStatus_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const CreditManagementStatus_anyOf& rhs) const;
-  bool operator!=(const CreditManagementStatus_anyOf& rhs) const;
+  bool operator==(const CreditManagementStatus_anyOf &rhs) const;
+  bool operator!=(const CreditManagementStatus_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// CreditManagementStatus_anyOf members
 
   CreditManagementStatus_anyOf::eCreditManagementStatus_anyOf getValue() const;
-  void setValue(
-      CreditManagementStatus_anyOf::eCreditManagementStatus_anyOf value);
+  void
+  setValue(CreditManagementStatus_anyOf::eCreditManagementStatus_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const CreditManagementStatus_anyOf& o);
-  friend void from_json(
-      const nlohmann::json& j, CreditManagementStatus_anyOf& o);
+  friend void to_json(nlohmann::json &j, const CreditManagementStatus_anyOf &o);
+  friend void from_json(const nlohmann::json &j,
+                        CreditManagementStatus_anyOf &o);
 
- protected:
+protected:
   CreditManagementStatus_anyOf::eCreditManagementStatus_anyOf m_value =
       CreditManagementStatus_anyOf::eCreditManagementStatus_anyOf::
           INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* CreditManagementStatus_anyOf_H_ */

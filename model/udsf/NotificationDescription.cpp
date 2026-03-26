@@ -19,8 +19,8 @@
 namespace oai::model::udsf {
 
 NotificationDescription::NotificationDescription() {
-  m_RecordRef           = "";
-  m_SubscriptionId      = "";
+  m_RecordRef = "";
+  m_SubscriptionId = "";
   m_SubscriptionIdIsSet = false;
 }
 
@@ -31,12 +31,12 @@ void NotificationDescription::validate() const {
   }
 }
 
-bool NotificationDescription::validate(std::stringstream& msg) const {
+bool NotificationDescription::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool NotificationDescription::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool NotificationDescription::validate(std::stringstream &msg,
+                                       const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "NotificationDescription" : pathPrefix;
@@ -45,7 +45,7 @@ bool NotificationDescription::validate(
 }
 
 bool NotificationDescription::operator==(
-    const NotificationDescription& rhs) const {
+    const NotificationDescription &rhs) const {
   return
 
       (getRecordRef() == rhs.getRecordRef()) &&
@@ -60,18 +60,19 @@ bool NotificationDescription::operator==(
 }
 
 bool NotificationDescription::operator!=(
-    const NotificationDescription& rhs) const {
+    const NotificationDescription &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const NotificationDescription& o) {
-  j                  = nlohmann::json();
-  j["recordRef"]     = o.m_RecordRef;
+void to_json(nlohmann::json &j, const NotificationDescription &o) {
+  j = nlohmann::json();
+  j["recordRef"] = o.m_RecordRef;
   j["operationType"] = o.m_OperationType;
-  if (o.subscriptionIdIsSet()) j["subscriptionId"] = o.m_SubscriptionId;
+  if (o.subscriptionIdIsSet())
+    j["subscriptionId"] = o.m_SubscriptionId;
 }
 
-void from_json(const nlohmann::json& j, NotificationDescription& o) {
+void from_json(const nlohmann::json &j, NotificationDescription &o) {
   j.at("recordRef").get_to(o.m_RecordRef);
   j.at("operationType").get_to(o.m_OperationType);
   if (j.find("subscriptionId") != j.end()) {
@@ -83,22 +84,22 @@ void from_json(const nlohmann::json& j, NotificationDescription& o) {
 std::string NotificationDescription::getRecordRef() const {
   return m_RecordRef;
 }
-void NotificationDescription::setRecordRef(std::string const& value) {
+void NotificationDescription::setRecordRef(std::string const &value) {
   m_RecordRef = value;
 }
-oai::model::udsf::RecordOperation NotificationDescription::getOperationType()
-    const {
+oai::model::udsf::RecordOperation
+NotificationDescription::getOperationType() const {
   return m_OperationType;
 }
 void NotificationDescription::setOperationType(
-    oai::model::udsf::RecordOperation const& value) {
+    oai::model::udsf::RecordOperation const &value) {
   m_OperationType = value;
 }
 std::string NotificationDescription::getSubscriptionId() const {
   return m_SubscriptionId;
 }
-void NotificationDescription::setSubscriptionId(std::string const& value) {
-  m_SubscriptionId      = value;
+void NotificationDescription::setSubscriptionId(std::string const &value) {
+  m_SubscriptionId = value;
   m_SubscriptionIdIsSet = true;
 }
 bool NotificationDescription::subscriptionIdIsSet() const {
@@ -108,4 +109,4 @@ void NotificationDescription::unsetSubscriptionId() {
   m_SubscriptionIdIsSet = false;
 }
 
-}  // namespace oai::model::udsf
+} // namespace oai::model::udsf

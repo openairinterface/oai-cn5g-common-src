@@ -36,7 +36,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class AmfNon3GppAccessRegistrationModification {
- public:
+public:
   AmfNon3GppAccessRegistrationModification();
   virtual ~AmfNon3GppAccessRegistrationModification();
 
@@ -49,7 +49,7 @@ class AmfNon3GppAccessRegistrationModification {
   ///
   /// </summary>
   oai::model::common::Guami getGuami() const;
-  void setGuami(oai::model::common::Guami const& value);
+  void setGuami(oai::model::common::Guami const &value);
   /// <summary>
   ///
   /// </summary>
@@ -61,31 +61,31 @@ class AmfNon3GppAccessRegistrationModification {
   ///
   /// </summary>
   std::string getPei() const;
-  void setPei(std::string const& value);
+  void setPei(std::string const &value);
   bool peiIsSet() const;
   void unsetPei();
   /// <summary>
   ///
   /// </summary>
   ImsVoPs getImsVoPs() const;
-  void setImsVoPs(ImsVoPs const& value);
+  void setImsVoPs(ImsVoPs const &value);
   bool imsVoPsIsSet() const;
   void unsetImsVoPs();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::BackupAmfInfo>& getBackupAmfInfo();
-  void setBackupAmfInfo(
-      std::vector<oai::model::common::BackupAmfInfo> const& value);
+  std::vector<oai::model::common::BackupAmfInfo> &getBackupAmfInfo();
+  void
+  setBackupAmfInfo(std::vector<oai::model::common::BackupAmfInfo> const &value);
   bool backupAmfInfoIsSet() const;
   void unsetBackupAmfInfo();
 
-  friend void to_json(
-      nlohmann::json& j, const AmfNon3GppAccessRegistrationModification& o);
-  friend void from_json(
-      const nlohmann::json& j, AmfNon3GppAccessRegistrationModification& o);
+  friend void to_json(nlohmann::json &j,
+                      const AmfNon3GppAccessRegistrationModification &o);
+  friend void from_json(const nlohmann::json &j,
+                        AmfNon3GppAccessRegistrationModification &o);
 
- protected:
+protected:
   oai::model::common::Guami m_Guami;
 
   bool m_PurgeFlag;
@@ -98,6 +98,6 @@ class AmfNon3GppAccessRegistrationModification {
   bool m_BackupAmfInfoIsSet;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* AmfNon3GppAccessRegistrationModification_H_ */

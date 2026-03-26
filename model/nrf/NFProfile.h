@@ -19,28 +19,28 @@
 #ifndef NFProfile_H_
 #define NFProfile_H_
 
+#include "AmfInfo.h"
 #include "BsfInfo.h"
-#include "PcfInfo.h"
-#include "NrfInfo.h"
-#include "UdmInfo.h"
-#include "UpfInfo.h"
 #include "ChfInfo.h"
-#include "SmfInfo.h"
-#include <string>
 #include "DefaultNotificationSubscription.h"
 #include "Ipv6Addr.h"
-#include "NFStatus.h"
 #include "NFService.h"
+#include "NFStatus.h"
+#include "NrfInfo.h"
+#include "PcfInfo.h"
 #include "PlmnId.h"
+#include "SmfInfo.h"
 #include "Snssai.h"
-#include <vector>
-#include "AmfInfo.h"
+#include "UdmInfo.h"
 #include "UdrInfo.h"
+#include "UpfInfo.h"
+#include <string>
+#include <vector>
 //#include "NFType.h"
 //#include "Object.h"
-#include "PlmnSnssai.h"
 #include "AusfInfo.h"
 #include "NwdafInfo.h"
+#include "PlmnSnssai.h"
 #include <nlohmann/json.hpp>
 
 namespace oai::model::nrf {
@@ -49,7 +49,7 @@ namespace oai::model::nrf {
 ///
 /// </summary>
 class NFProfile {
- public:
+public:
   NFProfile();
   virtual ~NFProfile();
 
@@ -62,24 +62,24 @@ class NFProfile {
   ///
   /// </summary>
   std::string getNfInstanceId() const;
-  void setNfInstanceId(std::string const& value);
+  void setNfInstanceId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getNfInstanceName() const;
-  void setNfInstanceName(std::string const& value);
+  void setNfInstanceName(std::string const &value);
   bool nfInstanceNameIsSet() const;
   void unsetNfInstanceName();
   /// <summary>
   ///
   /// </summary>
   std::string getNfType() const;
-  void setNfType(std::string const& value);
+  void setNfType(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getNfStatus() const;
-  void setNfStatus(std::string const& value);
+  void setNfStatus(std::string const &value);
   /// <summary>
   ///
   /// </summary>
@@ -90,85 +90,85 @@ class NFProfile {
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::PlmnId>& getPlmnList();
-  void setPlmnList(std::vector<oai::model::common::PlmnId> const& value);
+  std::vector<oai::model::common::PlmnId> &getPlmnList();
+  void setPlmnList(std::vector<oai::model::common::PlmnId> const &value);
   bool plmnListIsSet() const;
   void unsetPlmnList();
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::common::Snssai> getSNssais() const;
-  void setSNssais(std::vector<oai::model::common::Snssai> const& value);
+  void setSNssais(std::vector<oai::model::common::Snssai> const &value);
   bool sNssaisIsSet() const;
   void unsetSNssais();
   /// <summary>
   ///
   /// </summary>
-  std::vector<PlmnSnssai>& getPerPlmnSnssaiList();
-  void setPerPlmnSnssaiList(std::vector<PlmnSnssai> const& value);
+  std::vector<PlmnSnssai> &getPerPlmnSnssaiList();
+  void setPerPlmnSnssaiList(std::vector<PlmnSnssai> const &value);
   bool perPlmnSnssaiListIsSet() const;
   void unsetPerPlmnSnssaiList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getNsiList();
-  void setNsiList(std::vector<std::string> const& value);
+  std::vector<std::string> &getNsiList();
+  void setNsiList(std::vector<std::string> const &value);
   bool nsiListIsSet() const;
   void unsetNsiList();
   /// <summary>
   ///
   /// </summary>
   std::string getFqdn() const;
-  void setFqdn(std::string const& value);
+  void setFqdn(std::string const &value);
   bool fqdnIsSet() const;
   void unsetFqdn();
   /// <summary>
   ///
   /// </summary>
   std::string getInterPlmnFqdn() const;
-  void setInterPlmnFqdn(std::string const& value);
+  void setInterPlmnFqdn(std::string const &value);
   bool interPlmnFqdnIsSet() const;
   void unsetInterPlmnFqdn();
   /// <summary>
   ///
   /// </summary>
   std::vector<std::string> getIpv4Addresses() const;
-  void setIpv4Addresses(std::vector<std::string> const& value);
+  void setIpv4Addresses(std::vector<std::string> const &value);
   bool ipv4AddressesIsSet() const;
   void unsetIpv4Addresses();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::Ipv6Addr>& getIpv6Addresses();
-  void setIpv6Addresses(std::vector<oai::model::common::Ipv6Addr> const& value);
+  std::vector<oai::model::common::Ipv6Addr> &getIpv6Addresses();
+  void setIpv6Addresses(std::vector<oai::model::common::Ipv6Addr> const &value);
   bool ipv6AddressesIsSet() const;
   void unsetIpv6Addresses();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::PlmnId>& getAllowedPlmns();
-  void setAllowedPlmns(std::vector<oai::model::common::PlmnId> const& value);
+  std::vector<oai::model::common::PlmnId> &getAllowedPlmns();
+  void setAllowedPlmns(std::vector<oai::model::common::PlmnId> const &value);
   bool allowedPlmnsIsSet() const;
   void unsetAllowedPlmns();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getAllowedNfTypes();
-  void setAllowedNfTypes(std::vector<std::string> const& value);
+  std::vector<std::string> &getAllowedNfTypes();
+  void setAllowedNfTypes(std::vector<std::string> const &value);
   bool allowedNfTypesIsSet() const;
   void unsetAllowedNfTypes();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getAllowedNfDomains();
-  void setAllowedNfDomains(std::vector<std::string> const& value);
+  std::vector<std::string> &getAllowedNfDomains();
+  void setAllowedNfDomains(std::vector<std::string> const &value);
   bool allowedNfDomainsIsSet() const;
   void unsetAllowedNfDomains();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::Snssai>& getAllowedNssais();
-  void setAllowedNssais(std::vector<oai::model::common::Snssai> const& value);
+  std::vector<oai::model::common::Snssai> &getAllowedNssais();
+  void setAllowedNssais(std::vector<oai::model::common::Snssai> const &value);
   bool allowedNssaisIsSet() const;
   void unsetAllowedNssais();
   /// <summary>
@@ -196,7 +196,7 @@ class NFProfile {
   ///
   /// </summary>
   std::string getLocality() const;
-  void setLocality(std::string const& value);
+  void setLocality(std::string const &value);
   bool localityIsSet() const;
   void unsetLocality();
   /// <summary>
@@ -204,154 +204,154 @@ class NFProfile {
   ///
   /// </summary>
   UdrInfo getUdrInfo() const;
-  void setUdrInfo(UdrInfo const& value);
+  void setUdrInfo(UdrInfo const &value);
   bool udrInfoIsSet() const;
   void unsetUdrInfo();
   /// <summary>
   ///
   /// </summary>
-  std::vector<UdrInfo>& getUdrInfoExt();
-  void setUdrInfoExt(std::vector<UdrInfo> const& value);
+  std::vector<UdrInfo> &getUdrInfoExt();
+  void setUdrInfoExt(std::vector<UdrInfo> const &value);
   bool udrInfoExtIsSet() const;
   void unsetUdrInfoExt();
   /// <summary>
   ///
   /// </summary>
   UdmInfo getUdmInfo() const;
-  void setUdmInfo(UdmInfo const& value);
+  void setUdmInfo(UdmInfo const &value);
   bool udmInfoIsSet() const;
   void unsetUdmInfo();
   /// <summary>
   ///
   /// </summary>
-  std::vector<UdmInfo>& getUdmInfoExt();
-  void setUdmInfoExt(std::vector<UdmInfo> const& value);
+  std::vector<UdmInfo> &getUdmInfoExt();
+  void setUdmInfoExt(std::vector<UdmInfo> const &value);
   bool udmInfoExtIsSet() const;
   void unsetUdmInfoExt();
   /// <summary>
   ///
   /// </summary>
   AusfInfo getAusfInfo() const;
-  void setAusfInfo(AusfInfo const& value);
+  void setAusfInfo(AusfInfo const &value);
   bool ausfInfoIsSet() const;
   void unsetAusfInfo();
   /// <summary>
   ///
   /// </summary>
-  std::vector<AusfInfo>& getAusfInfoExt();
-  void setAusfInfoExt(std::vector<AusfInfo> const& value);
+  std::vector<AusfInfo> &getAusfInfoExt();
+  void setAusfInfoExt(std::vector<AusfInfo> const &value);
   bool ausfInfoExtIsSet() const;
   void unsetAusfInfoExt();
   /// <summary>
   ///
   /// </summary>
   AmfInfo getAmfInfo() const;
-  void setAmfInfo(AmfInfo const& value);
+  void setAmfInfo(AmfInfo const &value);
   bool amfInfoIsSet() const;
   void unsetAmfInfo();
   /// <summary>
   ///
   /// </summary>
-  std::vector<AmfInfo>& getAmfInfoExt();
-  void setAmfInfoExt(std::vector<AmfInfo> const& value);
+  std::vector<AmfInfo> &getAmfInfoExt();
+  void setAmfInfoExt(std::vector<AmfInfo> const &value);
   bool amfInfoExtIsSet() const;
   void unsetAmfInfoExt();
   /// <summary>
   ///
   /// </summary>
   SmfInfo getSmfInfo() const;
-  void setSmfInfo(SmfInfo const& value);
+  void setSmfInfo(SmfInfo const &value);
   bool smfInfoIsSet() const;
   void unsetSmfInfo();
   /// <summary>
   ///
   /// </summary>
-  std::vector<SmfInfo>& getSmfInfoExt();
-  void setSmfInfoExt(std::vector<SmfInfo> const& value);
+  std::vector<SmfInfo> &getSmfInfoExt();
+  void setSmfInfoExt(std::vector<SmfInfo> const &value);
   bool smfInfoExtIsSet() const;
   void unsetSmfInfoExt();
   /// <summary>
   ///
   /// </summary>
   UpfInfo getUpfInfo() const;
-  void setUpfInfo(UpfInfo const& value);
+  void setUpfInfo(UpfInfo const &value);
   bool upfInfoIsSet() const;
   void unsetUpfInfo();
   /// <summary>
   ///
   /// </summary>
-  std::vector<UpfInfo>& getUpfInfoExt();
-  void setUpfInfoExt(std::vector<UpfInfo> const& value);
+  std::vector<UpfInfo> &getUpfInfoExt();
+  void setUpfInfoExt(std::vector<UpfInfo> const &value);
   bool upfInfoExtIsSet() const;
   void unsetUpfInfoExt();
   /// <summary>
   ///
   /// </summary>
   PcfInfo getPcfInfo() const;
-  void setPcfInfo(PcfInfo const& value);
+  void setPcfInfo(PcfInfo const &value);
   bool pcfInfoIsSet() const;
   void unsetPcfInfo();
   /// <summary>
   ///
   /// </summary>
-  std::vector<PcfInfo>& getPcfInfoExt();
-  void setPcfInfoExt(std::vector<PcfInfo> const& value);
+  std::vector<PcfInfo> &getPcfInfoExt();
+  void setPcfInfoExt(std::vector<PcfInfo> const &value);
   bool pcfInfoExtIsSet() const;
   void unsetPcfInfoExt();
   /// <summary>
   ///
   /// </summary>
   BsfInfo getBsfInfo() const;
-  void setBsfInfo(BsfInfo const& value);
+  void setBsfInfo(BsfInfo const &value);
   bool bsfInfoIsSet() const;
   void unsetBsfInfo();
   /// <summary>
   ///
   /// </summary>
-  std::vector<BsfInfo>& getBsfInfoExt();
-  void setBsfInfoExt(std::vector<BsfInfo> const& value);
+  std::vector<BsfInfo> &getBsfInfoExt();
+  void setBsfInfoExt(std::vector<BsfInfo> const &value);
   bool bsfInfoExtIsSet() const;
   void unsetBsfInfoExt();
   /// <summary>
   ///
   /// </summary>
   ChfInfo getChfInfo() const;
-  void setChfInfo(ChfInfo const& value);
+  void setChfInfo(ChfInfo const &value);
   bool chfInfoIsSet() const;
   void unsetChfInfo();
   /// <summary>
   ///
   /// </summary>
-  std::vector<ChfInfo>& getChfInfoExt();
-  void setChfInfoExt(std::vector<ChfInfo> const& value);
+  std::vector<ChfInfo> &getChfInfoExt();
+  void setChfInfoExt(std::vector<ChfInfo> const &value);
   bool chfInfoExtIsSet() const;
   void unsetChfInfoExt();
   /// <summary>
   ///
   /// </summary>
   NrfInfo getNrfInfo() const;
-  void setNrfInfo(NrfInfo const& value);
+  void setNrfInfo(NrfInfo const &value);
   bool nrfInfoIsSet() const;
   void unsetNrfInfo();
   /// <summary>
   ///
   /// </summary>
   NwdafInfo getNwdafInfo() const;
-  void setNwdafInfo(NwdafInfo const& value);
+  void setNwdafInfo(NwdafInfo const &value);
   bool nwdafInfoIsSet() const;
   void unsetNwdafInfo();
   /// <summary>
   ///
   /// </summary>
   nlohmann::json getCustomInfo() const;
-  void setCustomInfo(nlohmann::json const& value);
+  void setCustomInfo(nlohmann::json const &value);
   bool customInfoIsSet() const;
   void unsetCustomInfo();
   /// <summary>
   ///
   /// </summary>
   std::string getRecoveryTime() const;
-  void setRecoveryTime(std::string const& value);
+  void setRecoveryTime(std::string const &value);
   bool recoveryTimeIsSet() const;
   void unsetRecoveryTime();
   /// <summary>
@@ -365,7 +365,7 @@ class NFProfile {
   ///
   /// </summary>
   std::vector<NFService> getNfServices() const;
-  void setNfServices(std::vector<NFService> const& value);
+  void setNfServices(std::vector<NFService> const &value);
   bool nfServicesIsSet() const;
   void unsetNfServices();
   /// <summary>
@@ -385,17 +385,17 @@ class NFProfile {
   /// <summary>
   ///
   /// </summary>
-  std::vector<DefaultNotificationSubscription>&
+  std::vector<DefaultNotificationSubscription> &
   getDefaultNotificationSubscriptions();
   void setDefaultNotificationSubscriptions(
-      std::vector<DefaultNotificationSubscription> const& value);
+      std::vector<DefaultNotificationSubscription> const &value);
   bool defaultNotificationSubscriptionsIsSet() const;
   void unsetDefaultNotificationSubscriptions();
 
-  friend void to_json(nlohmann::json& j, const NFProfile& o);
-  friend void from_json(const nlohmann::json& j, NFProfile& o);
+  friend void to_json(nlohmann::json &j, const NFProfile &o);
+  friend void from_json(const nlohmann::json &j, NFProfile &o);
 
- protected:
+protected:
   std::string m_NfInstanceId;
 
   std::string m_NfInstanceName;
@@ -495,6 +495,6 @@ class NFProfile {
   bool m_DefaultNotificationSubscriptionsIsSet;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* NFProfile_H_ */

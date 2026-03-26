@@ -19,9 +19,9 @@
 #ifndef AssignEbiData_H_
 #define AssignEbiData_H_
 
-#include <vector>
 #include "Arp.h"
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::amf {
 
@@ -29,7 +29,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class AssignEbiData {
- public:
+public:
   AssignEbiData();
   virtual ~AssignEbiData();
 
@@ -46,20 +46,20 @@ class AssignEbiData {
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::Arp>& getArpList();
+  std::vector<oai::model::common::Arp> &getArpList();
   bool arpListIsSet() const;
   void unsetArpList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<int32_t>& getReleasedEbiList();
+  std::vector<int32_t> &getReleasedEbiList();
   bool releasedEbiListIsSet() const;
   void unsetReleasedEbiList();
 
-  friend void to_json(nlohmann::json& j, const AssignEbiData& o);
-  friend void from_json(const nlohmann::json& j, AssignEbiData& o);
+  friend void to_json(nlohmann::json &j, const AssignEbiData &o);
+  friend void from_json(const nlohmann::json &j, AssignEbiData &o);
 
- protected:
+protected:
   int32_t m_PduSessionId;
 
   std::vector<oai::model::common::Arp> m_ArpList;
@@ -68,6 +68,6 @@ class AssignEbiData {
   bool m_ReleasedEbiListIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* AssignEbiData_H_ */

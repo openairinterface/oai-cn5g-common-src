@@ -14,13 +14,12 @@
 
 namespace oai::utils {
 
-constexpr uint8_t kMccMncLength           = 3;
+constexpr uint8_t kMccMncLength = 3;
 constexpr uint32_t KFutureStatusTimeoutMs = 1000;
 
 class utils {
- public:
-  template<class T>
-  static inline T fromString(const std::string& str) {
+public:
+  template <class T> static inline T fromString(const std::string &str) {
     std::istringstream is(str);
     T v;
     is >> v;
@@ -28,9 +27,9 @@ class utils {
   }
 
   // For Boost
-  template<typename T>
-  static void wait_for_result(
-      boost::shared_future<T>& f, std::optional<T>& result) {
+  template <typename T>
+  static void wait_for_result(boost::shared_future<T> &f,
+                              std::optional<T> &result) {
     boost::future_status status;
     // wait for timeout or ready
     status = f.wait_for(boost::chrono::milliseconds(KFutureStatusTimeoutMs));
@@ -47,8 +46,8 @@ class utils {
     }
   }
 
-  static void free_wrapper(void** ptr) __attribute__((hot));
-  static void bdestroy_wrapper(bstring* b);
+  static void free_wrapper(void **ptr) __attribute__((hot));
+  static void bdestroy_wrapper(bstring *b);
 };
-}  // namespace oai::utils
+} // namespace oai::utils
 #endif /* FILE_UTILS_HPP_SEEN */

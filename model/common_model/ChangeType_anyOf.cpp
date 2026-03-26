@@ -13,8 +13,8 @@
 
 #include "ChangeType_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::common {
 
@@ -27,12 +27,12 @@ void ChangeType_anyOf::validate() const {
   }
 }
 
-bool ChangeType_anyOf::validate(std::stringstream& msg) const {
+bool ChangeType_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ChangeType_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ChangeType_anyOf::validate(std::stringstream &msg,
+                                const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ChangeType_anyOf" : pathPrefix;
@@ -46,39 +46,39 @@ bool ChangeType_anyOf::validate(
   return success;
 }
 
-bool ChangeType_anyOf::operator==(const ChangeType_anyOf& rhs) const {
+bool ChangeType_anyOf::operator==(const ChangeType_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool ChangeType_anyOf::operator!=(const ChangeType_anyOf& rhs) const {
+bool ChangeType_anyOf::operator!=(const ChangeType_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ChangeType_anyOf& o) {
+void to_json(nlohmann::json &j, const ChangeType_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case ChangeType_anyOf::eChangeType_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case ChangeType_anyOf::eChangeType_anyOf::ADD:
-      j = "ADD";
-      break;
-    case ChangeType_anyOf::eChangeType_anyOf::MOVE:
-      j = "MOVE";
-      break;
-    case ChangeType_anyOf::eChangeType_anyOf::REMOVE:
-      j = "REMOVE";
-      break;
-    case ChangeType_anyOf::eChangeType_anyOf::REPLACE:
-      j = "REPLACE";
-      break;
+  case ChangeType_anyOf::eChangeType_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case ChangeType_anyOf::eChangeType_anyOf::ADD:
+    j = "ADD";
+    break;
+  case ChangeType_anyOf::eChangeType_anyOf::MOVE:
+    j = "MOVE";
+    break;
+  case ChangeType_anyOf::eChangeType_anyOf::REMOVE:
+    j = "REMOVE";
+    break;
+  case ChangeType_anyOf::eChangeType_anyOf::REPLACE:
+    j = "REPLACE";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, ChangeType_anyOf& o) {
+void from_json(const nlohmann::json &j, ChangeType_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "ADD") {
     o.setValue(ChangeType_anyOf::eChangeType_anyOf::ADD);
@@ -104,4 +104,4 @@ void ChangeType_anyOf::setValue(ChangeType_anyOf::eChangeType_anyOf value) {
   m_value = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

@@ -19,8 +19,8 @@
 #ifndef ChfServiceInfo_H_
 #define ChfServiceInfo_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::nrf {
 
@@ -28,7 +28,7 @@ namespace oai::model::nrf {
 ///
 /// </summary>
 class ChfServiceInfo {
- public:
+public:
   ChfServiceInfo();
   virtual ~ChfServiceInfo();
 
@@ -41,27 +41,27 @@ class ChfServiceInfo {
   ///
   /// </summary>
   std::string getPrimaryChfServiceInstance() const;
-  void setPrimaryChfServiceInstance(std::string const& value);
+  void setPrimaryChfServiceInstance(std::string const &value);
   bool primaryChfServiceInstanceIsSet() const;
   void unsetPrimaryChfServiceInstance();
   /// <summary>
   ///
   /// </summary>
   std::string getSecondaryChfServiceInstance() const;
-  void setSecondaryChfServiceInstance(std::string const& value);
+  void setSecondaryChfServiceInstance(std::string const &value);
   bool secondaryChfServiceInstanceIsSet() const;
   void unsetSecondaryChfServiceInstance();
 
-  friend void to_json(nlohmann::json& j, const ChfServiceInfo& o);
-  friend void from_json(const nlohmann::json& j, ChfServiceInfo& o);
+  friend void to_json(nlohmann::json &j, const ChfServiceInfo &o);
+  friend void from_json(const nlohmann::json &j, ChfServiceInfo &o);
 
- protected:
+protected:
   std::string m_PrimaryChfServiceInstance;
   bool m_PrimaryChfServiceInstanceIsSet;
   std::string m_SecondaryChfServiceInstance;
   bool m_SecondaryChfServiceInstanceIsSet;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* ChfServiceInfo_H_ */

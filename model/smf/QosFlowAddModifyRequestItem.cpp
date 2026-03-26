@@ -16,12 +16,12 @@
 namespace oai::model::smf {
 
 QosFlowAddModifyRequestItem::QosFlowAddModifyRequestItem() {
-  m_Qfi                     = 0;
-  m_Ebi                     = 0;
-  m_EbiIsSet                = false;
-  m_QosRulesIsSet           = false;
+  m_Qfi = 0;
+  m_Ebi = 0;
+  m_EbiIsSet = false;
+  m_QosRulesIsSet = false;
   m_QosFlowDescriptionIsSet = false;
-  m_QosFlowProfileIsSet     = false;
+  m_QosFlowProfileIsSet = false;
 }
 
 QosFlowAddModifyRequestItem::~QosFlowAddModifyRequestItem() {}
@@ -30,17 +30,20 @@ void QosFlowAddModifyRequestItem::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const QosFlowAddModifyRequestItem& o) {
-  j        = nlohmann::json();
+void to_json(nlohmann::json &j, const QosFlowAddModifyRequestItem &o) {
+  j = nlohmann::json();
   j["qfi"] = o.m_Qfi;
-  if (o.ebiIsSet()) j["ebi"] = o.m_Ebi;
-  if (o.qosRulesIsSet()) j["qosRules"] = o.m_QosRules;
+  if (o.ebiIsSet())
+    j["ebi"] = o.m_Ebi;
+  if (o.qosRulesIsSet())
+    j["qosRules"] = o.m_QosRules;
   if (o.qosFlowDescriptionIsSet())
     j["qosFlowDescription"] = o.m_QosFlowDescription;
-  if (o.qosFlowProfileIsSet()) j["qosFlowProfile"] = o.m_QosFlowProfile;
+  if (o.qosFlowProfileIsSet())
+    j["qosFlowProfile"] = o.m_QosFlowProfile;
 }
 
-void from_json(const nlohmann::json& j, QosFlowAddModifyRequestItem& o) {
+void from_json(const nlohmann::json &j, QosFlowAddModifyRequestItem &o) {
   j.at("qfi").get_to(o.m_Qfi);
   if (j.find("ebi") != j.end()) {
     j.at("ebi").get_to(o.m_Ebi);
@@ -60,44 +63,32 @@ void from_json(const nlohmann::json& j, QosFlowAddModifyRequestItem& o) {
   }
 }
 
-int32_t QosFlowAddModifyRequestItem::getQfi() const {
-  return m_Qfi;
-}
-void QosFlowAddModifyRequestItem::setQfi(int32_t const value) {
-  m_Qfi = value;
-}
-int32_t QosFlowAddModifyRequestItem::getEbi() const {
-  return m_Ebi;
-}
+int32_t QosFlowAddModifyRequestItem::getQfi() const { return m_Qfi; }
+void QosFlowAddModifyRequestItem::setQfi(int32_t const value) { m_Qfi = value; }
+int32_t QosFlowAddModifyRequestItem::getEbi() const { return m_Ebi; }
 void QosFlowAddModifyRequestItem::setEbi(int32_t const value) {
-  m_Ebi      = value;
+  m_Ebi = value;
   m_EbiIsSet = true;
 }
-bool QosFlowAddModifyRequestItem::ebiIsSet() const {
-  return m_EbiIsSet;
-}
-void QosFlowAddModifyRequestItem::unsetEbi() {
-  m_EbiIsSet = false;
-}
+bool QosFlowAddModifyRequestItem::ebiIsSet() const { return m_EbiIsSet; }
+void QosFlowAddModifyRequestItem::unsetEbi() { m_EbiIsSet = false; }
 std::string QosFlowAddModifyRequestItem::getQosRules() const {
   return m_QosRules;
 }
-void QosFlowAddModifyRequestItem::setQosRules(std::string const& value) {
-  m_QosRules      = value;
+void QosFlowAddModifyRequestItem::setQosRules(std::string const &value) {
+  m_QosRules = value;
   m_QosRulesIsSet = true;
 }
 bool QosFlowAddModifyRequestItem::qosRulesIsSet() const {
   return m_QosRulesIsSet;
 }
-void QosFlowAddModifyRequestItem::unsetQosRules() {
-  m_QosRulesIsSet = false;
-}
+void QosFlowAddModifyRequestItem::unsetQosRules() { m_QosRulesIsSet = false; }
 std::string QosFlowAddModifyRequestItem::getQosFlowDescription() const {
   return m_QosFlowDescription;
 }
 void QosFlowAddModifyRequestItem::setQosFlowDescription(
-    std::string const& value) {
-  m_QosFlowDescription      = value;
+    std::string const &value) {
+  m_QosFlowDescription = value;
   m_QosFlowDescriptionIsSet = true;
 }
 bool QosFlowAddModifyRequestItem::qosFlowDescriptionIsSet() const {
@@ -110,8 +101,8 @@ QosFlowProfile QosFlowAddModifyRequestItem::getQosFlowProfile() const {
   return m_QosFlowProfile;
 }
 void QosFlowAddModifyRequestItem::setQosFlowProfile(
-    QosFlowProfile const& value) {
-  m_QosFlowProfile      = value;
+    QosFlowProfile const &value) {
+  m_QosFlowProfile = value;
   m_QosFlowProfileIsSet = true;
 }
 bool QosFlowAddModifyRequestItem::qosFlowProfileIsSet() const {
@@ -121,4 +112,4 @@ void QosFlowAddModifyRequestItem::unsetQosFlowProfile() {
   m_QosFlowProfileIsSet = false;
 }
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

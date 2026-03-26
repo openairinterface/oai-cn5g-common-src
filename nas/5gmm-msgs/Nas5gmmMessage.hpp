@@ -10,7 +10,7 @@
 namespace oai::nas {
 
 class Nas5gmmMessage {
- public:
+public:
   Nas5gmmMessage(){};
   virtual ~Nas5gmmMessage() = default;
 
@@ -19,17 +19,17 @@ class Nas5gmmMessage {
   virtual uint32_t GetLength() const = 0;
   virtual bool Validate(uint32_t len) const;
 
-  virtual int Encode(uint8_t* buf, int len) = 0;
-  virtual int Decode(uint8_t* buf, int len) = 0;
+  virtual int Encode(uint8_t *buf, int len) = 0;
+  virtual int Decode(uint8_t *buf, int len) = 0;
 
-  void SetMessageName(const std::string& name);
+  void SetMessageName(const std::string &name);
   std::string GetMessageName() const;
-  void GetMessageName(std::string& name) const;
+  void GetMessageName(std::string &name) const;
 
- private:
-  std::string msg_name_;  // non 3GPP IE
+private:
+  std::string msg_name_; // non 3GPP IE
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

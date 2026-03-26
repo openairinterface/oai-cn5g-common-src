@@ -20,10 +20,10 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_CauseNas {
-  Ngap_CauseNas_normal_release         = 0,
+  Ngap_CauseNas_normal_release = 0,
   Ngap_CauseNas_authentication_failure = 1,
-  Ngap_CauseNas_deregister             = 2,
-  Ngap_CauseNas_unspecified            = 3
+  Ngap_CauseNas_deregister = 2,
+  Ngap_CauseNas_unspecified = 3
   /*
    * Enumeration is extensible
    */

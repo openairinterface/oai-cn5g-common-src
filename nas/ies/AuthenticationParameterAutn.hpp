@@ -15,22 +15,22 @@ constexpr auto kAuthenticationParameterAutnIeName =
 namespace oai::nas {
 
 class AuthenticationParameterAutn : public Type4NasIe {
- public:
+public:
   AuthenticationParameterAutn();
   AuthenticationParameterAutn(uint8_t iei);
   AuthenticationParameterAutn(
       uint8_t iei, uint8_t value[kAuthenticationParameterAutnValueLength]);
   virtual ~AuthenticationParameterAutn();
 
-  int Encode(uint8_t* buf, int len) const override;
-  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+  int Encode(uint8_t *buf, int len) const override;
+  int Decode(const uint8_t *const buf, int len, bool is_iei = false) override;
 
   static std::string GetIeName() { return kAuthenticationParameterAutnIeName; }
 
- private:
+private:
   uint8_t value_[kAuthenticationParameterAutnValueLength];
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

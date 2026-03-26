@@ -33,7 +33,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class SmsfInfo {
- public:
+public:
   SmsfInfo();
   virtual ~SmsfInfo();
 
@@ -46,22 +46,22 @@ class SmsfInfo {
   ///
   /// </summary>
   std::string getSmsfInstanceId() const;
-  void setSmsfInstanceId(std::string const& value);
+  void setSmsfInstanceId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::PlmnId getPlmnId() const;
-  void setPlmnId(oai::model::common::PlmnId const& value);
+  void setPlmnId(oai::model::common::PlmnId const &value);
 
-  friend void to_json(nlohmann::json& j, const SmsfInfo& o);
-  friend void from_json(const nlohmann::json& j, SmsfInfo& o);
+  friend void to_json(nlohmann::json &j, const SmsfInfo &o);
+  friend void from_json(const nlohmann::json &j, SmsfInfo &o);
 
- protected:
+protected:
   std::string m_SmsfInstanceId;
 
   oai::model::common::PlmnId m_PlmnId;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* SmsfInfo_H_ */

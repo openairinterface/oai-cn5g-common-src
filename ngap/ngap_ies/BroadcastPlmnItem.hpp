@@ -17,27 +17,27 @@ extern "C" {
 namespace oai::ngap {
 
 class BroadcastPlmnItem {
- public:
+public:
   BroadcastPlmnItem();
   virtual ~BroadcastPlmnItem();
 
-  void set(const PlmnId& plmn, const std::vector<SNssai>& sliceList);
-  void get(PlmnId& plmn, std::vector<SNssai>& sliceList) const;
+  void set(const PlmnId &plmn, const std::vector<SNssai> &sliceList);
+  void get(PlmnId &plmn, std::vector<SNssai> &sliceList) const;
 
   PlmnId getPlmn() const;
-  void setPlmn(const PlmnId& plmn);
+  void setPlmn(const PlmnId &plmn);
 
   std::vector<SNssai> getSNssai() const;
-  void setSNssai(const std::vector<SNssai>& sliceList);
+  void setSNssai(const std::vector<SNssai> &sliceList);
   void addSNssai(const SNssai snssai);
 
-  bool encode(Ngap_BroadcastPLMNItem_t&) const;
-  bool decode(const Ngap_BroadcastPLMNItem_t&);
+  bool encode(Ngap_BroadcastPLMNItem_t &) const;
+  bool decode(const Ngap_BroadcastPLMNItem_t &);
 
- private:
-  PlmnId m_Plmn;                             // Mandatory
-  std::vector<SNssai> m_SupportedSliceList;  // Tai Slice Support List
-                                             // (Mandatory)
+private:
+  PlmnId m_Plmn;                            // Mandatory
+  std::vector<SNssai> m_SupportedSliceList; // Tai Slice Support List
+                                            // (Mandatory)
 };
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

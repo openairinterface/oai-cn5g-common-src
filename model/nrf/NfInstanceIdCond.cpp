@@ -15,9 +15,7 @@
 
 namespace oai::model::nrf {
 
-NfInstanceIdCond::NfInstanceIdCond() {
-  m_NfInstanceId = "";
-}
+NfInstanceIdCond::NfInstanceIdCond() { m_NfInstanceId = ""; }
 
 NfInstanceIdCond::~NfInstanceIdCond() {}
 
@@ -25,20 +23,18 @@ void NfInstanceIdCond::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const NfInstanceIdCond& o) {
-  j                 = nlohmann::json();
+void to_json(nlohmann::json &j, const NfInstanceIdCond &o) {
+  j = nlohmann::json();
   j["nfInstanceId"] = o.m_NfInstanceId;
 }
 
-void from_json(const nlohmann::json& j, NfInstanceIdCond& o) {
+void from_json(const nlohmann::json &j, NfInstanceIdCond &o) {
   j.at("nfInstanceId").get_to(o.m_NfInstanceId);
 }
 
-std::string NfInstanceIdCond::getNfInstanceId() const {
-  return m_NfInstanceId;
-}
-void NfInstanceIdCond::setNfInstanceId(std::string const& value) {
+std::string NfInstanceIdCond::getNfInstanceId() const { return m_NfInstanceId; }
+void NfInstanceIdCond::setNfInstanceId(std::string const &value) {
   m_NfInstanceId = value;
 }
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

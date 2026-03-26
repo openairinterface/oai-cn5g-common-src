@@ -8,7 +8,7 @@ namespace oai::ngap {
 
 //------------------------------------------------------------------------------
 UeRadioCapabilityForPaging::UeRadioCapabilityForPaging() {
-  m_UeRadioCapabilityForPagingOfNr    = std::nullopt;
+  m_UeRadioCapabilityForPagingOfNr = std::nullopt;
   m_UeRadioCapabilityForPagingOfEutra = std::nullopt;
 }
 
@@ -17,10 +17,10 @@ UeRadioCapabilityForPaging::~UeRadioCapabilityForPaging() {}
 
 //------------------------------------------------------------------------------
 bool UeRadioCapabilityForPaging::encode(
-    Ngap_UERadioCapabilityForPaging_t& ueRadioCapabilityForPaging) const {
+    Ngap_UERadioCapabilityForPaging_t &ueRadioCapabilityForPaging) const {
   if (m_UeRadioCapabilityForPagingOfNr.has_value()) {
     ueRadioCapabilityForPaging.uERadioCapabilityForPagingOfNR =
-        (Ngap_UERadioCapabilityForPagingOfNR_t*) calloc(
+        (Ngap_UERadioCapabilityForPagingOfNR_t *)calloc(
             1, sizeof(Ngap_UERadioCapabilityForPagingOfNR_t));
     if (!m_UeRadioCapabilityForPagingOfNr.value().encode(
             *ueRadioCapabilityForPaging.uERadioCapabilityForPagingOfNR))
@@ -28,7 +28,7 @@ bool UeRadioCapabilityForPaging::encode(
   }
   if (m_UeRadioCapabilityForPagingOfEutra.has_value()) {
     ueRadioCapabilityForPaging.uERadioCapabilityForPagingOfEUTRA =
-        (Ngap_UERadioCapabilityForPagingOfEUTRA_t*) calloc(
+        (Ngap_UERadioCapabilityForPagingOfEUTRA_t *)calloc(
             1, sizeof(Ngap_UERadioCapabilityForPagingOfEUTRA_t));
     if (!m_UeRadioCapabilityForPagingOfEutra.value().encode(
             *ueRadioCapabilityForPaging.uERadioCapabilityForPagingOfEUTRA))
@@ -40,7 +40,7 @@ bool UeRadioCapabilityForPaging::encode(
 
 //------------------------------------------------------------------------------
 bool UeRadioCapabilityForPaging::decode(
-    const Ngap_UERadioCapabilityForPaging_t& ueRadioCapabilityForPaging) {
+    const Ngap_UERadioCapabilityForPaging_t &ueRadioCapabilityForPaging) {
   if (ueRadioCapabilityForPaging.uERadioCapabilityForPagingOfNR) {
     UeRadioCapabilityForPagingOfNr tmp = {};
     if (!tmp.decode(*ueRadioCapabilityForPaging.uERadioCapabilityForPagingOfNR))
@@ -62,7 +62,7 @@ bool UeRadioCapabilityForPaging::decode(
 
 //------------------------------------------------------------------------------
 void UeRadioCapabilityForPaging::setUeRadioCapabilityForPagingOfNr(
-    const OCTET_STRING_t& capability) {
+    const OCTET_STRING_t &capability) {
   UeRadioCapabilityForPagingOfNr tmp = {};
   tmp.set(capability);
   m_UeRadioCapabilityForPagingOfNr =
@@ -72,14 +72,15 @@ void UeRadioCapabilityForPaging::setUeRadioCapabilityForPagingOfNr(
 
 //------------------------------------------------------------------------------
 bool UeRadioCapabilityForPaging::getUeRadioCapabilityForPagingOfNr(
-    OCTET_STRING_t& capability) const {
-  if (!m_UeRadioCapabilityForPagingOfNr.has_value()) return false;
+    OCTET_STRING_t &capability) const {
+  if (!m_UeRadioCapabilityForPagingOfNr.has_value())
+    return false;
   return m_UeRadioCapabilityForPagingOfNr.value().get(capability);
 }
 
 //------------------------------------------------------------------------------
 void UeRadioCapabilityForPaging::setUeRadioCapabilityForPagingOfEutra(
-    const OCTET_STRING_t& capability) {
+    const OCTET_STRING_t &capability) {
   UeRadioCapabilityForPagingOfEutra tmp = {};
   tmp.set(capability);
   m_UeRadioCapabilityForPagingOfEutra =
@@ -90,9 +91,10 @@ void UeRadioCapabilityForPaging::setUeRadioCapabilityForPagingOfEutra(
 
 //------------------------------------------------------------------------------
 bool UeRadioCapabilityForPaging::getUeRadioCapabilityForPagingOfEutra(
-    OCTET_STRING_t& capability) const {
-  if (!m_UeRadioCapabilityForPagingOfEutra.has_value()) return false;
+    OCTET_STRING_t &capability) const {
+  if (!m_UeRadioCapabilityForPagingOfEutra.has_value())
+    return false;
   return m_UeRadioCapabilityForPagingOfEutra.value().get(capability);
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

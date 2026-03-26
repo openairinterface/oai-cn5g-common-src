@@ -15,20 +15,20 @@ constexpr uint8_t RAN_NODE_NAME_SIZE_MAX = 150;
 namespace oai::ngap {
 
 class RanNodeName {
- public:
+public:
   RanNodeName();
   virtual ~RanNodeName();
 
-  bool set(const std::string& value);
-  void get(std::string& value) const;
+  bool set(const std::string &value);
+  void get(std::string &value) const;
 
-  bool encode(Ngap_RANNodeName_t&) const;
-  bool decode(const Ngap_RANNodeName_t&);
+  bool encode(Ngap_RANNodeName_t &) const;
+  bool decode(const Ngap_RANNodeName_t &);
 
- private:
+private:
   std::string m_RanNodeName;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

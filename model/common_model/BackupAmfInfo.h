@@ -19,10 +19,10 @@
 #ifndef BackupAmfInfo_H_
 #define BackupAmfInfo_H_
 
-#include <string>
-#include <vector>
 #include "Guami.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::common {
 
@@ -30,7 +30,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class BackupAmfInfo {
- public:
+public:
   BackupAmfInfo();
   virtual ~BackupAmfInfo() = default;
 
@@ -44,16 +44,16 @@ class BackupAmfInfo {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const BackupAmfInfo& rhs) const;
-  bool operator!=(const BackupAmfInfo& rhs) const;
+  bool operator==(const BackupAmfInfo &rhs) const;
+  bool operator!=(const BackupAmfInfo &rhs) const;
 
   /////////////////////////////////////////////
   /// BackupAmfInfo members
@@ -62,25 +62,25 @@ class BackupAmfInfo {
   ///
   /// </summary>
   std::string getBackupAmf() const;
-  void setBackupAmf(std::string const& value);
+  void setBackupAmf(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::common::Guami> getGuamiList() const;
-  void setGuamiList(std::vector<oai::model::common::Guami> const& value);
+  void setGuamiList(std::vector<oai::model::common::Guami> const &value);
   bool guamiListIsSet() const;
   void unsetGuamiList();
 
-  friend void to_json(nlohmann::json& j, const BackupAmfInfo& o);
-  friend void from_json(const nlohmann::json& j, BackupAmfInfo& o);
+  friend void to_json(nlohmann::json &j, const BackupAmfInfo &o);
+  friend void from_json(const nlohmann::json &j, BackupAmfInfo &o);
 
- protected:
+protected:
   std::string m_BackupAmf;
 
   std::vector<oai::model::common::Guami> m_GuamiList;
   bool m_GuamiListIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* BackupAmfInfo_H_ */

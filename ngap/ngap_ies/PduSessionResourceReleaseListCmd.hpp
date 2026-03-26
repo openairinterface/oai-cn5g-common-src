@@ -18,22 +18,22 @@ constexpr uint16_t kMaxNoOfPduSessions = 256;
 namespace oai::ngap {
 
 class PduSessionResourceReleaseListCmd {
- public:
+public:
   PduSessionResourceReleaseListCmd();
   virtual ~PduSessionResourceReleaseListCmd();
 
-  void set(const std::vector<PduSessionResourceReleaseItemCmd>& itemList);
-  void get(std::vector<PduSessionResourceReleaseItemCmd>& itemList) const;
+  void set(const std::vector<PduSessionResourceReleaseItemCmd> &itemList);
+  void get(std::vector<PduSessionResourceReleaseItemCmd> &itemList) const;
 
-  bool encode(Ngap_PDUSessionResourceToReleaseListRelCmd_t&
-                  pduSessionResourceReleaseListCmd) const;
-  bool decode(const Ngap_PDUSessionResourceToReleaseListRelCmd_t&
-                  pduSessionResourceReleaseListCmd);
+  bool encode(Ngap_PDUSessionResourceToReleaseListRelCmd_t
+                  &pduSessionResourceReleaseListCmd) const;
+  bool decode(const Ngap_PDUSessionResourceToReleaseListRelCmd_t
+                  &pduSessionResourceReleaseListCmd);
 
- private:
+private:
   std::vector<PduSessionResourceReleaseItemCmd> m_ItemList;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

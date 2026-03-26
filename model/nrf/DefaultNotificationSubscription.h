@@ -21,9 +21,9 @@
 
 #include "N1MessageClass.h"
 #include "N2InformationClass.h"
-#include <string>
 #include "NotificationType.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::nrf {
 
@@ -31,7 +31,7 @@ namespace oai::model::nrf {
 ///
 /// </summary>
 class DefaultNotificationSubscription {
- public:
+public:
   DefaultNotificationSubscription();
   virtual ~DefaultNotificationSubscription();
 
@@ -44,33 +44,33 @@ class DefaultNotificationSubscription {
   ///
   /// </summary>
   NotificationType getNotificationType() const;
-  void setNotificationType(NotificationType const& value);
+  void setNotificationType(NotificationType const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getCallbackUri() const;
-  void setCallbackUri(std::string const& value);
+  void setCallbackUri(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   N1MessageClass getN1MessageClass() const;
-  void setN1MessageClass(N1MessageClass const& value);
+  void setN1MessageClass(N1MessageClass const &value);
   bool n1MessageClassIsSet() const;
   void unsetN1MessageClass();
   /// <summary>
   ///
   /// </summary>
   N2InformationClass getN2InformationClass() const;
-  void setN2InformationClass(N2InformationClass const& value);
+  void setN2InformationClass(N2InformationClass const &value);
   bool n2InformationClassIsSet() const;
   void unsetN2InformationClass();
 
-  friend void to_json(
-      nlohmann::json& j, const DefaultNotificationSubscription& o);
-  friend void from_json(
-      const nlohmann::json& j, DefaultNotificationSubscription& o);
+  friend void to_json(nlohmann::json &j,
+                      const DefaultNotificationSubscription &o);
+  friend void from_json(const nlohmann::json &j,
+                        DefaultNotificationSubscription &o);
 
- protected:
+protected:
   NotificationType m_NotificationType;
 
   std::string m_CallbackUri;
@@ -81,6 +81,6 @@ class DefaultNotificationSubscription {
   bool m_N2InformationClassIsSet;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* DefaultNotificationSubscription_H_ */

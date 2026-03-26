@@ -8,17 +8,16 @@
 
 #include "Ngap_PDUSessionResourceSetupResponseTransfer.h"
 
+#include "Ngap_ProtocolExtensionContainer.h"
+#include "Ngap_QosFlowListWithCause.h"
 #include "Ngap_QosFlowPerTNLInformationList.h"
 #include "Ngap_SecurityResult.h"
-#include "Ngap_QosFlowListWithCause.h"
-#include "Ngap_ProtocolExtensionContainer.h"
 static asn_TYPE_member_t
     asn_MBR_Ngap_PDUSessionResourceSetupResponseTransfer_1[] = {
         {ATF_NOFLAGS,
          0,
-         offsetof(
-             struct Ngap_PDUSessionResourceSetupResponseTransfer,
-             dLQosFlowPerTNLInformation),
+         offsetof(struct Ngap_PDUSessionResourceSetupResponseTransfer,
+                  dLQosFlowPerTNLInformation),
          (ASN_TAG_CLASS_CONTEXT | (0 << 2)),
          -1, /* IMPLICIT tag at current level */
          &asn_DEF_Ngap_QosFlowPerTNLInformation,
@@ -37,9 +36,8 @@ static asn_TYPE_member_t
          "dLQosFlowPerTNLInformation"},
         {ATF_POINTER,
          4,
-         offsetof(
-             struct Ngap_PDUSessionResourceSetupResponseTransfer,
-             additionalDLQosFlowPerTNLInformation),
+         offsetof(struct Ngap_PDUSessionResourceSetupResponseTransfer,
+                  additionalDLQosFlowPerTNLInformation),
          (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
          -1, /* IMPLICIT tag at current level */
          &asn_DEF_Ngap_QosFlowPerTNLInformationList,
@@ -58,9 +56,8 @@ static asn_TYPE_member_t
          "additionalDLQosFlowPerTNLInformation"},
         {ATF_POINTER,
          3,
-         offsetof(
-             struct Ngap_PDUSessionResourceSetupResponseTransfer,
-             securityResult),
+         offsetof(struct Ngap_PDUSessionResourceSetupResponseTransfer,
+                  securityResult),
          (ASN_TAG_CLASS_CONTEXT | (2 << 2)),
          -1, /* IMPLICIT tag at current level */
          &asn_DEF_Ngap_SecurityResult,
@@ -79,9 +76,8 @@ static asn_TYPE_member_t
          "securityResult"},
         {ATF_POINTER,
          2,
-         offsetof(
-             struct Ngap_PDUSessionResourceSetupResponseTransfer,
-             qosFlowFailedToSetupList),
+         offsetof(struct Ngap_PDUSessionResourceSetupResponseTransfer,
+                  qosFlowFailedToSetupList),
          (ASN_TAG_CLASS_CONTEXT | (3 << 2)),
          -1, /* IMPLICIT tag at current level */
          &asn_DEF_Ngap_QosFlowListWithCause,
@@ -100,9 +96,8 @@ static asn_TYPE_member_t
          "qosFlowFailedToSetupList"},
         {ATF_POINTER,
          1,
-         offsetof(
-             struct Ngap_PDUSessionResourceSetupResponseTransfer,
-             iE_Extensions),
+         offsetof(struct Ngap_PDUSessionResourceSetupResponseTransfer,
+                  iE_Extensions),
          (ASN_TAG_CLASS_CONTEXT | (4 << 2)),
          -1, /* IMPLICIT tag at current level */
          &asn_DEF_Ngap_ProtocolExtensionContainer_9666P190,

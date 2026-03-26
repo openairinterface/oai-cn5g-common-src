@@ -19,16 +19,16 @@
 namespace oai::model::common {
 
 PresenceInfoRm::PresenceInfoRm() {
-  m_PraId                    = "";
-  m_PraIdIsSet               = false;
-  m_AdditionalPraId          = "";
-  m_AdditionalPraIdIsSet     = false;
-  m_PresenceStateIsSet       = false;
-  m_TrackingAreaListIsSet    = false;
-  m_EcgiListIsSet            = false;
-  m_NcgiListIsSet            = false;
+  m_PraId = "";
+  m_PraIdIsSet = false;
+  m_AdditionalPraId = "";
+  m_AdditionalPraIdIsSet = false;
+  m_PresenceStateIsSet = false;
+  m_TrackingAreaListIsSet = false;
+  m_EcgiListIsSet = false;
+  m_NcgiListIsSet = false;
   m_GlobalRanNodeIdListIsSet = false;
-  m_GlobaleNbIdListIsSet     = false;
+  m_GlobaleNbIdListIsSet = false;
 }
 
 void PresenceInfoRm::validate() const {
@@ -38,24 +38,24 @@ void PresenceInfoRm::validate() const {
   }
 }
 
-bool PresenceInfoRm::validate(std::stringstream& msg) const {
+bool PresenceInfoRm::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool PresenceInfoRm::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool PresenceInfoRm::validate(std::stringstream &msg,
+                              const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PresenceInfoRm" : pathPrefix;
 
   if (trackingAreaListIsSet()) {
-    const std::vector<oai::model::common::Tai>& value = m_TrackingAreaList;
+    const std::vector<oai::model::common::Tai> &value = m_TrackingAreaList;
     const std::string currentValuePath = _pathPrefix + ".trackingAreaList";
 
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::Tai& value : value) {
+      int i = 0;
+      for (const oai::model::common::Tai &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -68,13 +68,13 @@ bool PresenceInfoRm::validate(
   }
 
   if (ecgiListIsSet()) {
-    const std::vector<oai::model::common::Ecgi>& value = m_EcgiList;
+    const std::vector<oai::model::common::Ecgi> &value = m_EcgiList;
     const std::string currentValuePath = _pathPrefix + ".ecgiList";
 
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::Ecgi& value : value) {
+      int i = 0;
+      for (const oai::model::common::Ecgi &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -87,13 +87,13 @@ bool PresenceInfoRm::validate(
   }
 
   if (ncgiListIsSet()) {
-    const std::vector<oai::model::common::Ncgi>& value = m_NcgiList;
+    const std::vector<oai::model::common::Ncgi> &value = m_NcgiList;
     const std::string currentValuePath = _pathPrefix + ".ncgiList";
 
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::Ncgi& value : value) {
+      int i = 0;
+      for (const oai::model::common::Ncgi &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -106,14 +106,14 @@ bool PresenceInfoRm::validate(
   }
 
   if (globalRanNodeIdListIsSet()) {
-    const std::vector<oai::model::common::GlobalRanNodeId>& value =
+    const std::vector<oai::model::common::GlobalRanNodeId> &value =
         m_GlobalRanNodeIdList;
     const std::string currentValuePath = _pathPrefix + ".globalRanNodeIdList";
 
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::GlobalRanNodeId& value : value) {
+      int i = 0;
+      for (const oai::model::common::GlobalRanNodeId &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -127,7 +127,7 @@ bool PresenceInfoRm::validate(
   }
 
   if (globaleNbIdListIsSet()) {
-    const std::vector<oai::model::common::GlobalRanNodeId>& value =
+    const std::vector<oai::model::common::GlobalRanNodeId> &value =
         m_GlobaleNbIdList;
     const std::string currentValuePath = _pathPrefix + ".globaleNbIdList";
 
@@ -135,10 +135,10 @@ bool PresenceInfoRm::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::GlobalRanNodeId& value : value) {
+      int i = 0;
+      for (const oai::model::common::GlobalRanNodeId &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -153,7 +153,7 @@ bool PresenceInfoRm::validate(
   return success;
 }
 
-bool PresenceInfoRm::operator==(const PresenceInfoRm& rhs) const {
+bool PresenceInfoRm::operator==(const PresenceInfoRm &rhs) const {
   return
 
       ((!praIdIsSet() && !rhs.praIdIsSet()) ||
@@ -190,26 +190,31 @@ bool PresenceInfoRm::operator==(const PresenceInfoRm& rhs) const {
           ;
 }
 
-bool PresenceInfoRm::operator!=(const PresenceInfoRm& rhs) const {
+bool PresenceInfoRm::operator!=(const PresenceInfoRm &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PresenceInfoRm& o) {
+void to_json(nlohmann::json &j, const PresenceInfoRm &o) {
   j = nlohmann::json();
-  if (o.praIdIsSet()) j["praId"] = o.m_PraId;
-  if (o.additionalPraIdIsSet()) j["additionalPraId"] = o.m_AdditionalPraId;
-  if (o.presenceStateIsSet()) j["presenceState"] = o.m_PresenceState;
+  if (o.praIdIsSet())
+    j["praId"] = o.m_PraId;
+  if (o.additionalPraIdIsSet())
+    j["additionalPraId"] = o.m_AdditionalPraId;
+  if (o.presenceStateIsSet())
+    j["presenceState"] = o.m_PresenceState;
   if (o.trackingAreaListIsSet() || !o.m_TrackingAreaList.empty())
     j["trackingAreaList"] = o.m_TrackingAreaList;
-  if (o.ecgiListIsSet() || !o.m_EcgiList.empty()) j["ecgiList"] = o.m_EcgiList;
-  if (o.ncgiListIsSet() || !o.m_NcgiList.empty()) j["ncgiList"] = o.m_NcgiList;
+  if (o.ecgiListIsSet() || !o.m_EcgiList.empty())
+    j["ecgiList"] = o.m_EcgiList;
+  if (o.ncgiListIsSet() || !o.m_NcgiList.empty())
+    j["ncgiList"] = o.m_NcgiList;
   if (o.globalRanNodeIdListIsSet() || !o.m_GlobalRanNodeIdList.empty())
     j["globalRanNodeIdList"] = o.m_GlobalRanNodeIdList;
   if (o.globaleNbIdListIsSet() || !o.m_GlobaleNbIdList.empty())
     j["globaleNbIdList"] = o.m_GlobaleNbIdList;
 }
 
-void from_json(const nlohmann::json& j, PresenceInfoRm& o) {
+void from_json(const nlohmann::json &j, PresenceInfoRm &o) {
   if (j.find("praId") != j.end()) {
     j.at("praId").get_to(o.m_PraId);
     o.m_PraIdIsSet = true;
@@ -244,53 +249,41 @@ void from_json(const nlohmann::json& j, PresenceInfoRm& o) {
   }
 }
 
-std::string PresenceInfoRm::getPraId() const {
-  return m_PraId;
-}
-void PresenceInfoRm::setPraId(std::string const& value) {
-  m_PraId      = value;
+std::string PresenceInfoRm::getPraId() const { return m_PraId; }
+void PresenceInfoRm::setPraId(std::string const &value) {
+  m_PraId = value;
   m_PraIdIsSet = true;
 }
-bool PresenceInfoRm::praIdIsSet() const {
-  return m_PraIdIsSet;
-}
-void PresenceInfoRm::unsetPraId() {
-  m_PraIdIsSet = false;
-}
+bool PresenceInfoRm::praIdIsSet() const { return m_PraIdIsSet; }
+void PresenceInfoRm::unsetPraId() { m_PraIdIsSet = false; }
 std::string PresenceInfoRm::getAdditionalPraId() const {
   return m_AdditionalPraId;
 }
-void PresenceInfoRm::setAdditionalPraId(std::string const& value) {
-  m_AdditionalPraId      = value;
+void PresenceInfoRm::setAdditionalPraId(std::string const &value) {
+  m_AdditionalPraId = value;
   m_AdditionalPraIdIsSet = true;
 }
 bool PresenceInfoRm::additionalPraIdIsSet() const {
   return m_AdditionalPraIdIsSet;
 }
-void PresenceInfoRm::unsetAdditionalPraId() {
-  m_AdditionalPraIdIsSet = false;
-}
+void PresenceInfoRm::unsetAdditionalPraId() { m_AdditionalPraIdIsSet = false; }
 oai::model::common::PresenceState PresenceInfoRm::getPresenceState() const {
   return m_PresenceState;
 }
 void PresenceInfoRm::setPresenceState(
-    oai::model::common::PresenceState const& value) {
-  m_PresenceState      = value;
+    oai::model::common::PresenceState const &value) {
+  m_PresenceState = value;
   m_PresenceStateIsSet = true;
 }
-bool PresenceInfoRm::presenceStateIsSet() const {
-  return m_PresenceStateIsSet;
-}
-void PresenceInfoRm::unsetPresenceState() {
-  m_PresenceStateIsSet = false;
-}
-std::vector<oai::model::common::Tai> PresenceInfoRm::getTrackingAreaList()
-    const {
+bool PresenceInfoRm::presenceStateIsSet() const { return m_PresenceStateIsSet; }
+void PresenceInfoRm::unsetPresenceState() { m_PresenceStateIsSet = false; }
+std::vector<oai::model::common::Tai>
+PresenceInfoRm::getTrackingAreaList() const {
   return m_TrackingAreaList;
 }
 void PresenceInfoRm::setTrackingAreaList(
-    std::vector<oai::model::common::Tai> const& value) {
-  m_TrackingAreaList      = value;
+    std::vector<oai::model::common::Tai> const &value) {
+  m_TrackingAreaList = value;
   m_TrackingAreaListIsSet = true;
 }
 bool PresenceInfoRm::trackingAreaListIsSet() const {
@@ -303,37 +296,29 @@ std::vector<oai::model::common::Ecgi> PresenceInfoRm::getEcgiList() const {
   return m_EcgiList;
 }
 void PresenceInfoRm::setEcgiList(
-    std::vector<oai::model::common::Ecgi> const& value) {
-  m_EcgiList      = value;
+    std::vector<oai::model::common::Ecgi> const &value) {
+  m_EcgiList = value;
   m_EcgiListIsSet = true;
 }
-bool PresenceInfoRm::ecgiListIsSet() const {
-  return m_EcgiListIsSet;
-}
-void PresenceInfoRm::unsetEcgiList() {
-  m_EcgiListIsSet = false;
-}
+bool PresenceInfoRm::ecgiListIsSet() const { return m_EcgiListIsSet; }
+void PresenceInfoRm::unsetEcgiList() { m_EcgiListIsSet = false; }
 std::vector<oai::model::common::Ncgi> PresenceInfoRm::getNcgiList() const {
   return m_NcgiList;
 }
 void PresenceInfoRm::setNcgiList(
-    std::vector<oai::model::common::Ncgi> const& value) {
-  m_NcgiList      = value;
+    std::vector<oai::model::common::Ncgi> const &value) {
+  m_NcgiList = value;
   m_NcgiListIsSet = true;
 }
-bool PresenceInfoRm::ncgiListIsSet() const {
-  return m_NcgiListIsSet;
-}
-void PresenceInfoRm::unsetNcgiList() {
-  m_NcgiListIsSet = false;
-}
+bool PresenceInfoRm::ncgiListIsSet() const { return m_NcgiListIsSet; }
+void PresenceInfoRm::unsetNcgiList() { m_NcgiListIsSet = false; }
 std::vector<oai::model::common::GlobalRanNodeId>
 PresenceInfoRm::getGlobalRanNodeIdList() const {
   return m_GlobalRanNodeIdList;
 }
 void PresenceInfoRm::setGlobalRanNodeIdList(
-    std::vector<oai::model::common::GlobalRanNodeId> const& value) {
-  m_GlobalRanNodeIdList      = value;
+    std::vector<oai::model::common::GlobalRanNodeId> const &value) {
+  m_GlobalRanNodeIdList = value;
   m_GlobalRanNodeIdListIsSet = true;
 }
 bool PresenceInfoRm::globalRanNodeIdListIsSet() const {
@@ -347,15 +332,13 @@ PresenceInfoRm::getGlobaleNbIdList() const {
   return m_GlobaleNbIdList;
 }
 void PresenceInfoRm::setGlobaleNbIdList(
-    std::vector<oai::model::common::GlobalRanNodeId> const& value) {
-  m_GlobaleNbIdList      = value;
+    std::vector<oai::model::common::GlobalRanNodeId> const &value) {
+  m_GlobaleNbIdList = value;
   m_GlobaleNbIdListIsSet = true;
 }
 bool PresenceInfoRm::globaleNbIdListIsSet() const {
   return m_GlobaleNbIdListIsSet;
 }
-void PresenceInfoRm::unsetGlobaleNbIdList() {
-  m_GlobaleNbIdListIsSet = false;
-}
+void PresenceInfoRm::unsetGlobaleNbIdList() { m_GlobaleNbIdListIsSet = false; }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

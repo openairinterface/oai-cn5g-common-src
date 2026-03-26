@@ -30,7 +30,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class SqnScheme {
- public:
+public:
   SqnScheme();
   virtual ~SqnScheme();
 
@@ -39,12 +39,12 @@ class SqnScheme {
   /////////////////////////////////////////////
   /// SqnScheme members
 
-  friend void to_json(nlohmann::json& j, const SqnScheme& o);
-  friend void from_json(const nlohmann::json& j, SqnScheme& o);
+  friend void to_json(nlohmann::json &j, const SqnScheme &o);
+  friend void from_json(const nlohmann::json &j, SqnScheme &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* SqnScheme_H_ */

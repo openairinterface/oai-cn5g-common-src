@@ -35,7 +35,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class ExternalUnrelatedClass {
- public:
+public:
   ExternalUnrelatedClass();
   virtual ~ExternalUnrelatedClass();
 
@@ -47,30 +47,30 @@ class ExternalUnrelatedClass {
   /// <summary>
   ///
   /// </summary>
-  std::vector<LcsClientExternal>& getLcsClientExternals();
-  void setLcsClientExternals(std::vector<LcsClientExternal> const& value);
+  std::vector<LcsClientExternal> &getLcsClientExternals();
+  void setLcsClientExternals(std::vector<LcsClientExternal> const &value);
   bool lcsClientExternalsIsSet() const;
   void unsetLcsClientExternals();
   /// <summary>
   ///
   /// </summary>
-  std::vector<AfExternal>& getAfExternals();
-  void setAfExternals(std::vector<AfExternal> const& value);
+  std::vector<AfExternal> &getAfExternals();
+  void setAfExternals(std::vector<AfExternal> const &value);
   bool afExternalsIsSet() const;
   void unsetAfExternals();
   /// <summary>
   ///
   /// </summary>
-  std::vector<LcsClientGroupExternal>& getLcsClientGroupExternals();
-  void setLcsClientGroupExternals(
-      std::vector<LcsClientGroupExternal> const& value);
+  std::vector<LcsClientGroupExternal> &getLcsClientGroupExternals();
+  void
+  setLcsClientGroupExternals(std::vector<LcsClientGroupExternal> const &value);
   bool lcsClientGroupExternalsIsSet() const;
   void unsetLcsClientGroupExternals();
 
-  friend void to_json(nlohmann::json& j, const ExternalUnrelatedClass& o);
-  friend void from_json(const nlohmann::json& j, ExternalUnrelatedClass& o);
+  friend void to_json(nlohmann::json &j, const ExternalUnrelatedClass &o);
+  friend void from_json(const nlohmann::json &j, ExternalUnrelatedClass &o);
 
- protected:
+protected:
   std::vector<LcsClientExternal> m_LcsClientExternals;
   bool m_LcsClientExternalsIsSet;
   std::vector<AfExternal> m_AfExternals;
@@ -79,6 +79,6 @@ class ExternalUnrelatedClass {
   bool m_LcsClientGroupExternalsIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* ExternalUnrelatedClass_H_ */

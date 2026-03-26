@@ -35,7 +35,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class CagData {
- public:
+public:
   CagData();
   virtual ~CagData();
 
@@ -47,26 +47,26 @@ class CagData {
   /// <summary>
   /// A map (list of key-value pairs where PlmnId serves as key) of CagInfo
   /// </summary>
-  std::map<std::string, CagInfo>& getCagInfos();
-  void setCagInfos(std::map<std::string, CagInfo> const& value);
+  std::map<std::string, CagInfo> &getCagInfos();
+  void setCagInfos(std::map<std::string, CagInfo> const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getProvisioningTime() const;
-  void setProvisioningTime(std::string const& value);
+  void setProvisioningTime(std::string const &value);
   bool provisioningTimeIsSet() const;
   void unsetProvisioningTime();
 
-  friend void to_json(nlohmann::json& j, const CagData& o);
-  friend void from_json(const nlohmann::json& j, CagData& o);
+  friend void to_json(nlohmann::json &j, const CagData &o);
+  friend void from_json(const nlohmann::json &j, CagData &o);
 
- protected:
+protected:
   std::map<std::string, CagInfo> m_CagInfos;
 
   std::string m_ProvisioningTime;
   bool m_ProvisioningTimeIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* CagData_H_ */

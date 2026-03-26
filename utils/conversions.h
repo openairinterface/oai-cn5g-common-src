@@ -48,26 +48,26 @@
 #define hton_int16(x) (x)
 #endif
 
-#define IN_ADDR_TO_BUFFER(X, bUFF) INT32_TO_BUFFER((X).s_addr, (char*) bUFF)
+#define IN_ADDR_TO_BUFFER(X, bUFF) INT32_TO_BUFFER((X).s_addr, (char *)bUFF)
 
 #define IN6_ADDR_TO_BUFFER(X, bUFF)                                            \
   do {                                                                         \
-    ((uint8_t*) (bUFF))[0]  = (X).s6_addr[0];                                  \
-    ((uint8_t*) (bUFF))[1]  = (X).s6_addr[1];                                  \
-    ((uint8_t*) (bUFF))[2]  = (X).s6_addr[2];                                  \
-    ((uint8_t*) (bUFF))[3]  = (X).s6_addr[3];                                  \
-    ((uint8_t*) (bUFF))[4]  = (X).s6_addr[4];                                  \
-    ((uint8_t*) (bUFF))[5]  = (X).s6_addr[5];                                  \
-    ((uint8_t*) (bUFF))[6]  = (X).s6_addr[6];                                  \
-    ((uint8_t*) (bUFF))[7]  = (X).s6_addr[7];                                  \
-    ((uint8_t*) (bUFF))[8]  = (X).s6_addr[8];                                  \
-    ((uint8_t*) (bUFF))[9]  = (X).s6_addr[9];                                  \
-    ((uint8_t*) (bUFF))[10] = (X).s6_addr[10];                                 \
-    ((uint8_t*) (bUFF))[11] = (X).s6_addr[11];                                 \
-    ((uint8_t*) (bUFF))[12] = (X).s6_addr[12];                                 \
-    ((uint8_t*) (bUFF))[13] = (X).s6_addr[13];                                 \
-    ((uint8_t*) (bUFF))[14] = (X).s6_addr[14];                                 \
-    ((uint8_t*) (bUFF))[15] = (X).s6_addr[15];                                 \
+    ((uint8_t *)(bUFF))[0] = (X).s6_addr[0];                                   \
+    ((uint8_t *)(bUFF))[1] = (X).s6_addr[1];                                   \
+    ((uint8_t *)(bUFF))[2] = (X).s6_addr[2];                                   \
+    ((uint8_t *)(bUFF))[3] = (X).s6_addr[3];                                   \
+    ((uint8_t *)(bUFF))[4] = (X).s6_addr[4];                                   \
+    ((uint8_t *)(bUFF))[5] = (X).s6_addr[5];                                   \
+    ((uint8_t *)(bUFF))[6] = (X).s6_addr[6];                                   \
+    ((uint8_t *)(bUFF))[7] = (X).s6_addr[7];                                   \
+    ((uint8_t *)(bUFF))[8] = (X).s6_addr[8];                                   \
+    ((uint8_t *)(bUFF))[9] = (X).s6_addr[9];                                   \
+    ((uint8_t *)(bUFF))[10] = (X).s6_addr[10];                                 \
+    ((uint8_t *)(bUFF))[11] = (X).s6_addr[11];                                 \
+    ((uint8_t *)(bUFF))[12] = (X).s6_addr[12];                                 \
+    ((uint8_t *)(bUFF))[13] = (X).s6_addr[13];                                 \
+    ((uint8_t *)(bUFF))[14] = (X).s6_addr[14];                                 \
+    ((uint8_t *)(bUFF))[15] = (X).s6_addr[15];                                 \
   } while (0)
 
 #define BUFFER_TO_INT8(buf, x) (x = ((buf)[0]))
@@ -95,9 +95,10 @@
     (buf)[2] = (x);                                                            \
   } while (0)
 
-#define BUFFER_TO_INT24(buf, x)                                                                             \
-  do {                                                                                                      \
-    x = (int32_t) (((uint32_t) ((buf)[0]) << 16) | ((uint32_t) ((buf)[1]) << 8) | ((uint32_t) ((buf)[2]))); \
+#define BUFFER_TO_INT24(buf, x)                                                \
+  do {                                                                         \
+    x = (int32_t)(((uint32_t)((buf)[0]) << 16) | ((uint32_t)((buf)[1]) << 8) | \
+                  ((uint32_t)((buf)[2])));                                     \
   } while (0)
 
 /* Convert an integer on 32 bits to the given bUFFER */
@@ -118,7 +119,7 @@
 /* Convert an integer on 32 bits to an octet string from aSN1c tool */
 #define INT32_TO_OCTET_STRING(x, aSN)                                          \
   do {                                                                         \
-    (aSN)->buf = (uint8_t*) calloc(4, sizeof(uint8_t));                        \
+    (aSN)->buf = (uint8_t *)calloc(4, sizeof(uint8_t));                        \
     INT32_TO_BUFFER(x, ((aSN)->buf));                                          \
     (aSN)->size = 4;                                                           \
   } while (0)
@@ -137,7 +138,7 @@
 
 #define INT24_TO_OCTET_STRING(x, aSN)                                          \
   do {                                                                         \
-    (aSN)->buf  = (uint8_t*) calloc(3, sizeof(uint8_t));                       \
+    (aSN)->buf = (uint8_t *)calloc(3, sizeof(uint8_t));                        \
     (aSN)->size = 3;                                                           \
     INT24_TO_BUFFER(x, (aSN)->buf);                                            \
   } while (0)
@@ -150,21 +151,21 @@
 
 #define INT16_TO_OCTET_STRING(x, aSN)                                          \
   do {                                                                         \
-    (aSN)->buf  = calloc(2, sizeof(uint8_t));                                  \
+    (aSN)->buf = calloc(2, sizeof(uint8_t));                                   \
     (aSN)->size = 2;                                                           \
     INT16_TO_BUFFER(x, (aSN)->buf);                                            \
   } while (0)
 
 #define INT16_TO_BIT_STRING(x, aSN)                                            \
   do {                                                                         \
-    (aSN)->buf         = calloc(2, sizeof(uint8_t));                           \
-    (aSN)->size        = 2;                                                    \
+    (aSN)->buf = calloc(2, sizeof(uint8_t));                                   \
+    (aSN)->size = 2;                                                           \
     (aSN)->bits_unused = 0;                                                    \
   } while (0)
 
 #define INT8_TO_OCTET_STRING(x, aSN)                                           \
   do {                                                                         \
-    (aSN)->buf  = calloc(1, sizeof(uint8_t));                                  \
+    (aSN)->buf = calloc(1, sizeof(uint8_t));                                   \
     (aSN)->size = 1;                                                           \
     INT8_TO_BUFFER(x, (aSN)->buf);                                             \
   } while (0)
@@ -228,9 +229,9 @@
 /* Used to format an uint32_t containing an ipv4 address */
 #define IPV4_ADDR "%u.%u.%u.%u"
 #define IPV4_ADDR_FORMAT(aDDRESS)                                              \
-  (uint8_t)((aDDRESS) &0x000000ff), (uint8_t) (((aDDRESS) &0x0000ff00) >> 8),  \
-      (uint8_t) (((aDDRESS) &0x00ff0000) >> 16),                               \
-      (uint8_t) (((aDDRESS) &0xff000000) >> 24)
+  (uint8_t)((aDDRESS)&0x000000ff), (uint8_t)(((aDDRESS)&0x0000ff00) >> 8),     \
+      (uint8_t)(((aDDRESS)&0x00ff0000) >> 16),                                 \
+      (uint8_t)(((aDDRESS)&0xff000000) >> 24)
 
 #define IPV4_ADDR_DISPLAY_8(aDDRESS)                                           \
   (aDDRESS)[0], (aDDRESS)[1], (aDDRESS)[2], (aDDRESS)[3]

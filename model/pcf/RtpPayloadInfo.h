@@ -20,8 +20,8 @@
 #define RtpPayloadInfo_H_
 
 #include "RtpPayloadFormat.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::pcf {
 
@@ -29,7 +29,7 @@ namespace oai::model::pcf {
 /// RtpPayloadInfo contains Rtp payload type and format.
 /// </summary>
 class RtpPayloadInfo {
- public:
+public:
   RtpPayloadInfo();
   virtual ~RtpPayloadInfo() = default;
 
@@ -43,16 +43,16 @@ class RtpPayloadInfo {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const RtpPayloadInfo& rhs) const;
-  bool operator!=(const RtpPayloadInfo& rhs) const;
+  bool operator==(const RtpPayloadInfo &rhs) const;
+  bool operator!=(const RtpPayloadInfo &rhs) const;
 
   /////////////////////////////////////////////
   /// RtpPayloadInfo members
@@ -68,20 +68,20 @@ class RtpPayloadInfo {
   ///
   /// </summary>
   oai::model::pcf::RtpPayloadFormat getRtpPayloadFormat() const;
-  void setRtpPayloadFormat(oai::model::pcf::RtpPayloadFormat const& value);
+  void setRtpPayloadFormat(oai::model::pcf::RtpPayloadFormat const &value);
   bool rtpPayloadFormatIsSet() const;
   void unsetRtpPayloadFormat();
 
-  friend void to_json(nlohmann::json& j, const RtpPayloadInfo& o);
-  friend void from_json(const nlohmann::json& j, RtpPayloadInfo& o);
+  friend void to_json(nlohmann::json &j, const RtpPayloadInfo &o);
+  friend void from_json(const nlohmann::json &j, RtpPayloadInfo &o);
 
- protected:
+protected:
   std::vector<int32_t> m_RtpPayloadTypeList;
   bool m_RtpPayloadTypeListIsSet;
   oai::model::pcf::RtpPayloadFormat m_RtpPayloadFormat;
   bool m_RtpPayloadFormatIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* RtpPayloadInfo_H_ */

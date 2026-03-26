@@ -19,12 +19,12 @@
 #ifndef UdrInfo_H_
 #define UdrInfo_H_
 
+#include "DataSetId.h"
 #include "IdentityRange.h"
 #include "SupiRange.h"
-#include <string>
-#include "DataSetId.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::nrf {
 
@@ -32,7 +32,7 @@ namespace oai::model::nrf {
 ///
 /// </summary>
 class UdrInfo {
- public:
+public:
   UdrInfo();
   virtual ~UdrInfo();
 
@@ -45,43 +45,43 @@ class UdrInfo {
   ///
   /// </summary>
   std::string getGroupId() const;
-  void setGroupId(std::string const& value);
+  void setGroupId(std::string const &value);
   bool groupIdIsSet() const;
   void unsetGroupId();
   /// <summary>
   ///
   /// </summary>
-  std::vector<SupiRange>& getSupiRanges();
-  void setSupiRanges(std::vector<SupiRange> const& value);
+  std::vector<SupiRange> &getSupiRanges();
+  void setSupiRanges(std::vector<SupiRange> const &value);
   bool supiRangesIsSet() const;
   void unsetSupiRanges();
   /// <summary>
   ///
   /// </summary>
-  std::vector<IdentityRange>& getGpsiRanges();
-  void setGpsiRanges(std::vector<IdentityRange> const& value);
+  std::vector<IdentityRange> &getGpsiRanges();
+  void setGpsiRanges(std::vector<IdentityRange> const &value);
   bool gpsiRangesIsSet() const;
   void unsetGpsiRanges();
   /// <summary>
   ///
   /// </summary>
-  std::vector<IdentityRange>& getExternalGroupIdentifiersRanges();
-  void setExternalGroupIdentifiersRanges(
-      std::vector<IdentityRange> const& value);
+  std::vector<IdentityRange> &getExternalGroupIdentifiersRanges();
+  void
+  setExternalGroupIdentifiersRanges(std::vector<IdentityRange> const &value);
   bool externalGroupIdentifiersRangesIsSet() const;
   void unsetExternalGroupIdentifiersRanges();
   /// <summary>
   ///
   /// </summary>
-  std::vector<DataSetId>& getSupportedDataSets();
-  void setSupportedDataSets(std::vector<DataSetId> const& value);
+  std::vector<DataSetId> &getSupportedDataSets();
+  void setSupportedDataSets(std::vector<DataSetId> const &value);
   bool supportedDataSetsIsSet() const;
   void unsetSupportedDataSets();
 
-  friend void to_json(nlohmann::json& j, const UdrInfo& o);
-  friend void from_json(const nlohmann::json& j, UdrInfo& o);
+  friend void to_json(nlohmann::json &j, const UdrInfo &o);
+  friend void from_json(const nlohmann::json &j, UdrInfo &o);
 
- protected:
+protected:
   std::string m_GroupId;
   bool m_GroupIdIsSet;
   std::vector<SupiRange> m_SupiRanges;
@@ -94,6 +94,6 @@ class UdrInfo {
   bool m_SupportedDataSetsIsSet;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* UdrInfo_H_ */

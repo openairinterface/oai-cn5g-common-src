@@ -21,9 +21,7 @@
 
 namespace oai::model::udm {
 
-MonitoringEvent::MonitoringEvent() {
-  m_RevokedCauseIsSet = false;
-}
+MonitoringEvent::MonitoringEvent() { m_RevokedCauseIsSet = false; }
 
 void MonitoringEvent::validate() const {
   std::stringstream msg;
@@ -32,12 +30,12 @@ void MonitoringEvent::validate() const {
   }
 }
 
-bool MonitoringEvent::validate(std::stringstream& msg) const {
+bool MonitoringEvent::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool MonitoringEvent::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool MonitoringEvent::validate(std::stringstream &msg,
+                               const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "MonitoringEvent" : pathPrefix;
@@ -45,7 +43,7 @@ bool MonitoringEvent::validate(
   return success;
 }
 
-bool MonitoringEvent::operator==(const MonitoringEvent& rhs) const {
+bool MonitoringEvent::operator==(const MonitoringEvent &rhs) const {
   return
 
       (getEventType() == rhs.getEventType()) &&
@@ -57,17 +55,18 @@ bool MonitoringEvent::operator==(const MonitoringEvent& rhs) const {
           ;
 }
 
-bool MonitoringEvent::operator!=(const MonitoringEvent& rhs) const {
+bool MonitoringEvent::operator!=(const MonitoringEvent &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const MonitoringEvent& o) {
-  j              = nlohmann::json();
+void to_json(nlohmann::json &j, const MonitoringEvent &o) {
+  j = nlohmann::json();
   j["eventType"] = o.m_EventType;
-  if (o.revokedCauseIsSet()) j["revokedCause"] = o.m_RevokedCause;
+  if (o.revokedCauseIsSet())
+    j["revokedCause"] = o.m_RevokedCause;
 }
 
-void from_json(const nlohmann::json& j, MonitoringEvent& o) {
+void from_json(const nlohmann::json &j, MonitoringEvent &o) {
   j.at("eventType").get_to(o.m_EventType);
   if (j.find("revokedCause") != j.end()) {
     j.at("revokedCause").get_to(o.m_RevokedCause);
@@ -75,24 +74,16 @@ void from_json(const nlohmann::json& j, MonitoringEvent& o) {
   }
 }
 
-EventType MonitoringEvent::getEventType() const {
-  return m_EventType;
-}
-void MonitoringEvent::setEventType(EventType const& value) {
+EventType MonitoringEvent::getEventType() const { return m_EventType; }
+void MonitoringEvent::setEventType(EventType const &value) {
   m_EventType = value;
 }
-RevokedCause MonitoringEvent::getRevokedCause() const {
-  return m_RevokedCause;
-}
-void MonitoringEvent::setRevokedCause(RevokedCause const& value) {
-  m_RevokedCause      = value;
+RevokedCause MonitoringEvent::getRevokedCause() const { return m_RevokedCause; }
+void MonitoringEvent::setRevokedCause(RevokedCause const &value) {
+  m_RevokedCause = value;
   m_RevokedCauseIsSet = true;
 }
-bool MonitoringEvent::revokedCauseIsSet() const {
-  return m_RevokedCauseIsSet;
-}
-void MonitoringEvent::unsetRevokedCause() {
-  m_RevokedCauseIsSet = false;
-}
+bool MonitoringEvent::revokedCauseIsSet() const { return m_RevokedCauseIsSet; }
+void MonitoringEvent::unsetRevokedCause() { m_RevokedCauseIsSet = false; }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

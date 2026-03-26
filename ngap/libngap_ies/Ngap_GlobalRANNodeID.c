@@ -9,8 +9,8 @@
 #include "Ngap_GlobalRANNodeID.h"
 
 #include "Ngap_GlobalGNB-ID.h"
-#include "Ngap_GlobalNgENB-ID.h"
 #include "Ngap_GlobalN3IWF-ID.h"
+#include "Ngap_GlobalNgENB-ID.h"
 #include "Ngap_ProtocolIE-SingleContainer.h"
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 static asn_oer_constraints_t asn_OER_type_Ngap_GlobalRANNodeID_constr_1
@@ -113,7 +113,7 @@ asn_CHOICE_specifics_t asn_SPC_Ngap_GlobalRANNodeID_specs_1 = {
     sizeof(struct Ngap_GlobalRANNodeID),
     offsetof(struct Ngap_GlobalRANNodeID, _asn_ctx),
     offsetof(struct Ngap_GlobalRANNodeID, present),
-    sizeof(((struct Ngap_GlobalRANNodeID*) 0)->present),
+    sizeof(((struct Ngap_GlobalRANNodeID *)0)->present),
     asn_MAP_Ngap_GlobalRANNodeID_tag2el_1,
     4, /* Count of tags in the map */
     0,

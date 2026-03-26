@@ -34,7 +34,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class MulticastAccessControl {
- public:
+public:
   MulticastAccessControl();
   virtual ~MulticastAccessControl();
 
@@ -47,40 +47,40 @@ class MulticastAccessControl {
   ///
   /// </summary>
   std::string getSrcIpv4Addr() const;
-  void setSrcIpv4Addr(std::string const& value);
+  void setSrcIpv4Addr(std::string const &value);
   bool srcIpv4AddrIsSet() const;
   void unsetSrcIpv4Addr();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ipv6Addr getSrcIpv6Addr() const;
-  void setSrcIpv6Addr(oai::model::common::Ipv6Addr const& value);
+  void setSrcIpv6Addr(oai::model::common::Ipv6Addr const &value);
   bool srcIpv6AddrIsSet() const;
   void unsetSrcIpv6Addr();
   /// <summary>
   ///
   /// </summary>
   std::string getMulticastV4Addr() const;
-  void setMulticastV4Addr(std::string const& value);
+  void setMulticastV4Addr(std::string const &value);
   bool multicastV4AddrIsSet() const;
   void unsetMulticastV4Addr();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ipv6Addr getMulticastV6Addr() const;
-  void setMulticastV6Addr(oai::model::common::Ipv6Addr const& value);
+  void setMulticastV6Addr(oai::model::common::Ipv6Addr const &value);
   bool multicastV6AddrIsSet() const;
   void unsetMulticastV6Addr();
   /// <summary>
   ///
   /// </summary>
   AccessRightStatus getAccStatus() const;
-  void setAccStatus(AccessRightStatus const& value);
+  void setAccStatus(AccessRightStatus const &value);
 
-  friend void to_json(nlohmann::json& j, const MulticastAccessControl& o);
-  friend void from_json(const nlohmann::json& j, MulticastAccessControl& o);
+  friend void to_json(nlohmann::json &j, const MulticastAccessControl &o);
+  friend void from_json(const nlohmann::json &j, MulticastAccessControl &o);
 
- protected:
+protected:
   std::string m_SrcIpv4Addr;
   bool m_SrcIpv4AddrIsSet;
   oai::model::common::Ipv6Addr m_SrcIpv6Addr;
@@ -92,6 +92,6 @@ class MulticastAccessControl {
   AccessRightStatus m_AccStatus;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* MulticastAccessControl_H_ */

@@ -28,7 +28,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class LocationFilter {
- public:
+public:
   LocationFilter();
   virtual ~LocationFilter() = default;
 
@@ -42,24 +42,24 @@ class LocationFilter {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const LocationFilter& rhs) const;
-  bool operator!=(const LocationFilter& rhs) const;
+  bool operator==(const LocationFilter &rhs) const;
+  bool operator!=(const LocationFilter &rhs) const;
 
   /////////////////////////////////////////////
   /// LocationFilter members
 
-  friend void to_json(nlohmann::json& j, const LocationFilter& o);
-  friend void from_json(const nlohmann::json& j, LocationFilter& o);
+  friend void to_json(nlohmann::json &j, const LocationFilter &o);
+  friend void from_json(const nlohmann::json &j, LocationFilter &o);
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* LocationFilter_H_ */

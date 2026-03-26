@@ -30,12 +30,12 @@ void NotificationFlag::validate() const {
   }
 }
 
-bool NotificationFlag::validate(std::stringstream& msg) const {
+bool NotificationFlag::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool NotificationFlag::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool NotificationFlag::validate(std::stringstream &msg,
+                                const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "NotificationFlag" : pathPrefix;
@@ -43,18 +43,18 @@ bool NotificationFlag::validate(
   return success;
 }
 
-bool NotificationFlag::operator==(const NotificationFlag& rhs) const {
+bool NotificationFlag::operator==(const NotificationFlag &rhs) const {
   return true;
 }
 
-bool NotificationFlag::operator!=(const NotificationFlag& rhs) const {
+bool NotificationFlag::operator!=(const NotificationFlag &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const NotificationFlag& o) {
+void to_json(nlohmann::json &j, const NotificationFlag &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, NotificationFlag& o) {}
+void from_json(const nlohmann::json &j, NotificationFlag &o) {}
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

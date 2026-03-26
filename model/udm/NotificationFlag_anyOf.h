@@ -30,7 +30,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class NotificationFlag_anyOf {
- public:
+public:
   NotificationFlag_anyOf();
   virtual ~NotificationFlag_anyOf() = default;
 
@@ -54,10 +54,10 @@ class NotificationFlag_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const NotificationFlag_anyOf& rhs) const;
-  bool operator!=(const NotificationFlag_anyOf& rhs) const;
+  bool operator==(const NotificationFlag_anyOf &rhs) const;
+  bool operator!=(const NotificationFlag_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// NotificationFlag_anyOf members
@@ -65,19 +65,19 @@ class NotificationFlag_anyOf {
   NotificationFlag_anyOf::eNotificationFlag_anyOf getValue() const;
   void setValue(NotificationFlag_anyOf::eNotificationFlag_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const NotificationFlag_anyOf& o);
-  friend void from_json(const nlohmann::json& j, NotificationFlag_anyOf& o);
+  friend void to_json(nlohmann::json &j, const NotificationFlag_anyOf &o);
+  friend void from_json(const nlohmann::json &j, NotificationFlag_anyOf &o);
 
- protected:
+protected:
   NotificationFlag_anyOf::eNotificationFlag_anyOf m_value =
       NotificationFlag_anyOf::eNotificationFlag_anyOf::
           INVALID_VALUE_OPENAPI_GENERATED;
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* NotificationFlag_anyOf_H_ */

@@ -13,8 +13,8 @@
 
 #include "ReflectiveQoSAttribute_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::common {
 
@@ -27,12 +27,12 @@ void ReflectiveQoSAttribute_anyOf::validate() const {
   }
 }
 
-bool ReflectiveQoSAttribute_anyOf::validate(std::stringstream& msg) const {
+bool ReflectiveQoSAttribute_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool ReflectiveQoSAttribute_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ReflectiveQoSAttribute_anyOf" : pathPrefix;
@@ -47,35 +47,35 @@ bool ReflectiveQoSAttribute_anyOf::validate(
 }
 
 bool ReflectiveQoSAttribute_anyOf::operator==(
-    const ReflectiveQoSAttribute_anyOf& rhs) const {
+    const ReflectiveQoSAttribute_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool ReflectiveQoSAttribute_anyOf::operator!=(
-    const ReflectiveQoSAttribute_anyOf& rhs) const {
+    const ReflectiveQoSAttribute_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ReflectiveQoSAttribute_anyOf& o) {
+void to_json(nlohmann::json &j, const ReflectiveQoSAttribute_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case ReflectiveQoSAttribute_anyOf::eReflectiveQoSAttribute_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case ReflectiveQoSAttribute_anyOf::eReflectiveQoSAttribute_anyOf::RQOS:
-      j = "RQOS";
-      break;
-    case ReflectiveQoSAttribute_anyOf::eReflectiveQoSAttribute_anyOf::NO_RQOS:
-      j = "NO_RQOS";
-      break;
+  case ReflectiveQoSAttribute_anyOf::eReflectiveQoSAttribute_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case ReflectiveQoSAttribute_anyOf::eReflectiveQoSAttribute_anyOf::RQOS:
+    j = "RQOS";
+    break;
+  case ReflectiveQoSAttribute_anyOf::eReflectiveQoSAttribute_anyOf::NO_RQOS:
+    j = "NO_RQOS";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, ReflectiveQoSAttribute_anyOf& o) {
+void from_json(const nlohmann::json &j, ReflectiveQoSAttribute_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "RQOS") {
     o.setValue(
@@ -101,4 +101,4 @@ void ReflectiveQoSAttribute_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

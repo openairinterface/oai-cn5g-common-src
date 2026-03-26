@@ -15,24 +15,24 @@ extern "C" {
 
 namespace oai::ngap {
 class UeContextResumeResponseTransfer {
- public:
+public:
   UeContextResumeResponseTransfer();
   virtual ~UeContextResumeResponseTransfer();
 
-  void setQosFlowFailedToResumeList(
-      const std::vector<QosFlowWithCauseItem> list);
-  void setQosFlowFailedToResumeList(const QosFlowListWithCause& list);
-  void getQosFlowFailedToResumeList(
-      std::optional<QosFlowListWithCause>& list) const;
+  void
+  setQosFlowFailedToResumeList(const std::vector<QosFlowWithCauseItem> list);
+  void setQosFlowFailedToResumeList(const QosFlowListWithCause &list);
+  void
+  getQosFlowFailedToResumeList(std::optional<QosFlowListWithCause> &list) const;
 
-  int encode(uint8_t* buf, int bufSize);
-  bool decode(uint8_t* buf, int bufSize);
+  int encode(uint8_t *buf, int bufSize);
+  bool decode(uint8_t *buf, int bufSize);
 
- private:
-  Ngap_UEContextResumeResponseTransfer_t* m_UeContextResumeResponseTransferIe;
+private:
+  Ngap_UEContextResumeResponseTransfer_t *m_UeContextResumeResponseTransferIe;
   // QoS Flow Failed to Resume List (Optional)
   std::optional<QosFlowListWithCause> m_QosFlowFailedToResumeList;
 };
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

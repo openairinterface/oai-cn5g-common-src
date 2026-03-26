@@ -32,7 +32,7 @@ namespace oai::model::ausf {
 ///
 /// </summary>
 class AuthType {
- public:
+public:
   AuthType();
   virtual ~AuthType();
 
@@ -41,12 +41,12 @@ class AuthType {
   /////////////////////////////////////////////
   /// AuthType members
 
-  friend void to_json(nlohmann::json& j, const AuthType& o);
-  friend void from_json(const nlohmann::json& j, AuthType& o);
+  friend void to_json(nlohmann::json &j, const AuthType &o);
+  friend void from_json(const nlohmann::json &j, AuthType &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::ausf
+} // namespace oai::model::ausf
 
 #endif /* AuthType_H_ */

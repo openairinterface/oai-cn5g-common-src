@@ -30,7 +30,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class LossConnectivityCfg {
- public:
+public:
   LossConnectivityCfg();
   virtual ~LossConnectivityCfg();
 
@@ -47,14 +47,14 @@ class LossConnectivityCfg {
   bool maxDetectionTimeIsSet() const;
   void unsetMaxDetectionTime();
 
-  friend void to_json(nlohmann::json& j, const LossConnectivityCfg& o);
-  friend void from_json(const nlohmann::json& j, LossConnectivityCfg& o);
+  friend void to_json(nlohmann::json &j, const LossConnectivityCfg &o);
+  friend void from_json(const nlohmann::json &j, LossConnectivityCfg &o);
 
- protected:
+protected:
   int32_t m_MaxDetectionTime;
   bool m_MaxDetectionTimeIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* LossConnectivityCfg_H_ */

@@ -14,20 +14,20 @@ extern "C" {
 namespace oai::ngap {
 
 class DrbStatusUl18 {
- public:
+public:
   DrbStatusUl18();
   virtual ~DrbStatusUl18();
 
-  void get(CountValueForPdcpSn18& countValue) const;
-  void set(const CountValueForPdcpSn18& countValue);
+  void get(CountValueForPdcpSn18 &countValue) const;
+  void set(const CountValueForPdcpSn18 &countValue);
 
-  bool encode(Ngap_DRBStatusUL18_t& ul18) const;
-  bool decode(const Ngap_DRBStatusUL18_t& ul18);
+  bool encode(Ngap_DRBStatusUL18_t &ul18) const;
+  bool decode(const Ngap_DRBStatusUL18_t &ul18);
 
- private:
-  CountValueForPdcpSn18 m_PdcpValue;  // Mandatory
+private:
+  CountValueForPdcpSn18 m_PdcpValue; // Mandatory
   // TODO: Receive Status of UL PDCP SDUs //Optional
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

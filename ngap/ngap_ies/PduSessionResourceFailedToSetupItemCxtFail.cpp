@@ -16,23 +16,24 @@ PduSessionResourceFailedToSetupItemCxtFail::
 
 //------------------------------------------------------------------------------
 void PduSessionResourceFailedToSetupItemCxtFail::set(
-    const PduSessionId& pduSessionId,
-    const OCTET_STRING_t& pduSessionResource) {
-  m_PduSessionId                                = pduSessionId;
+    const PduSessionId &pduSessionId,
+    const OCTET_STRING_t &pduSessionResource) {
+  m_PduSessionId = pduSessionId;
   m_PduSessionResourceSetupUnsuccessfulTransfer = pduSessionResource;
 }
 
 //------------------------------------------------------------------------------
 void PduSessionResourceFailedToSetupItemCxtFail::get(
-    PduSessionId& pduSessionId, OCTET_STRING_t& pduSessionResource) const {
-  pduSessionId       = m_PduSessionId;
+    PduSessionId &pduSessionId, OCTET_STRING_t &pduSessionResource) const {
+  pduSessionId = m_PduSessionId;
   pduSessionResource = m_PduSessionResourceSetupUnsuccessfulTransfer;
 }
 
 //------------------------------------------------------------------------------
 bool PduSessionResourceFailedToSetupItemCxtFail::encode(
-    Ngap_PDUSessionResourceFailedToSetupItemCxtFail_t& pdu_session_cxt) const {
-  if (!m_PduSessionId.encode(pdu_session_cxt.pDUSessionID)) return false;
+    Ngap_PDUSessionResourceFailedToSetupItemCxtFail_t &pdu_session_cxt) const {
+  if (!m_PduSessionId.encode(pdu_session_cxt.pDUSessionID))
+    return false;
   pdu_session_cxt.pDUSessionResourceSetupUnsuccessfulTransfer =
       m_PduSessionResourceSetupUnsuccessfulTransfer;
 
@@ -41,12 +42,13 @@ bool PduSessionResourceFailedToSetupItemCxtFail::encode(
 
 //------------------------------------------------------------------------------
 bool PduSessionResourceFailedToSetupItemCxtFail::decode(
-    const Ngap_PDUSessionResourceFailedToSetupItemCxtFail_t& pdu_session_cxt) {
-  if (!m_PduSessionId.decode(pdu_session_cxt.pDUSessionID)) return false;
+    const Ngap_PDUSessionResourceFailedToSetupItemCxtFail_t &pdu_session_cxt) {
+  if (!m_PduSessionId.decode(pdu_session_cxt.pDUSessionID))
+    return false;
   m_PduSessionResourceSetupUnsuccessfulTransfer =
       pdu_session_cxt.pDUSessionResourceSetupUnsuccessfulTransfer;
 
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

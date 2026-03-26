@@ -19,13 +19,13 @@
 namespace oai::model::common {
 
 Property::Property() {
-  m_Name          = "";
-  m_Required      = false;
+  m_Name = "";
+  m_Required = false;
   m_RequiredIsSet = false;
-  m_Regex         = "";
-  m_RegexIsSet    = false;
-  m_Value         = "";
-  m_ValueIsSet    = false;
+  m_Regex = "";
+  m_RegexIsSet = false;
+  m_Value = "";
+  m_ValueIsSet = false;
 }
 
 void Property::validate() const {
@@ -35,19 +35,19 @@ void Property::validate() const {
   }
 }
 
-bool Property::validate(std::stringstream& msg) const {
+bool Property::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool Property::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool Property::validate(std::stringstream &msg,
+                        const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "Property" : pathPrefix;
 
   return success;
 }
 
-bool Property::operator==(const Property& rhs) const {
+bool Property::operator==(const Property &rhs) const {
   return
 
       (getName() == rhs.getName()) &&
@@ -65,19 +65,20 @@ bool Property::operator==(const Property& rhs) const {
           ;
 }
 
-bool Property::operator!=(const Property& rhs) const {
-  return !(*this == rhs);
-}
+bool Property::operator!=(const Property &rhs) const { return !(*this == rhs); }
 
-void to_json(nlohmann::json& j, const Property& o) {
-  j         = nlohmann::json();
+void to_json(nlohmann::json &j, const Property &o) {
+  j = nlohmann::json();
   j["name"] = o.m_Name;
-  if (o.requiredIsSet()) j["required"] = o.m_Required;
-  if (o.regexIsSet()) j["regex"] = o.m_Regex;
-  if (o.valueIsSet()) j["value"] = o.m_Value;
+  if (o.requiredIsSet())
+    j["required"] = o.m_Required;
+  if (o.regexIsSet())
+    j["regex"] = o.m_Regex;
+  if (o.valueIsSet())
+    j["value"] = o.m_Value;
 }
 
-void from_json(const nlohmann::json& j, Property& o) {
+void from_json(const nlohmann::json &j, Property &o) {
   j.at("name").get_to(o.m_Name);
   if (j.find("required") != j.end()) {
     j.at("required").get_to(o.m_Required);
@@ -93,50 +94,28 @@ void from_json(const nlohmann::json& j, Property& o) {
   }
 }
 
-std::string Property::getName() const {
-  return m_Name;
-}
-void Property::setName(std::string const& value) {
-  m_Name = value;
-}
-bool Property::isRequired() const {
-  return m_Required;
-}
+std::string Property::getName() const { return m_Name; }
+void Property::setName(std::string const &value) { m_Name = value; }
+bool Property::isRequired() const { return m_Required; }
 void Property::setRequired(bool const value) {
-  m_Required      = value;
+  m_Required = value;
   m_RequiredIsSet = true;
 }
-bool Property::requiredIsSet() const {
-  return m_RequiredIsSet;
-}
-void Property::unsetRequired() {
-  m_RequiredIsSet = false;
-}
-std::string Property::getRegex() const {
-  return m_Regex;
-}
-void Property::setRegex(std::string const& value) {
-  m_Regex      = value;
+bool Property::requiredIsSet() const { return m_RequiredIsSet; }
+void Property::unsetRequired() { m_RequiredIsSet = false; }
+std::string Property::getRegex() const { return m_Regex; }
+void Property::setRegex(std::string const &value) {
+  m_Regex = value;
   m_RegexIsSet = true;
 }
-bool Property::regexIsSet() const {
-  return m_RegexIsSet;
-}
-void Property::unsetRegex() {
-  m_RegexIsSet = false;
-}
-std::string Property::getValue() const {
-  return m_Value;
-}
-void Property::setValue(std::string const& value) {
-  m_Value      = value;
+bool Property::regexIsSet() const { return m_RegexIsSet; }
+void Property::unsetRegex() { m_RegexIsSet = false; }
+std::string Property::getValue() const { return m_Value; }
+void Property::setValue(std::string const &value) {
+  m_Value = value;
   m_ValueIsSet = true;
 }
-bool Property::valueIsSet() const {
-  return m_ValueIsSet;
-}
-void Property::unsetValue() {
-  m_ValueIsSet = false;
-}
+bool Property::valueIsSet() const { return m_ValueIsSet; }
+void Property::unsetValue() { m_ValueIsSet = false; }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

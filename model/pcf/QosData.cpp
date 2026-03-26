@@ -21,44 +21,44 @@ namespace oai::model::pcf {
 using namespace oai::model::common;
 
 QosData::QosData() {
-  m_QosId                     = "";
-  m_r_5qi                     = 0;
-  m_r_5qiIsSet                = false;
-  m_MaxbrUl                   = "";
-  m_MaxbrUlIsSet              = false;
-  m_MaxbrDl                   = "";
-  m_MaxbrDlIsSet              = false;
-  m_GbrUl                     = "";
-  m_GbrUlIsSet                = false;
-  m_GbrDl                     = "";
-  m_GbrDlIsSet                = false;
-  m_ArpIsSet                  = false;
-  m_Qnc                       = false;
-  m_QncIsSet                  = false;
-  m_PriorityLevel             = 0;
-  m_PriorityLevelIsSet        = false;
-  m_AverWindow                = 2000;
-  m_AverWindowIsSet           = false;
-  m_MaxDataBurstVol           = 0;
-  m_MaxDataBurstVolIsSet      = false;
-  m_ReflectiveQos             = false;
-  m_ReflectiveQosIsSet        = false;
-  m_SharingKeyDl              = "";
-  m_SharingKeyDlIsSet         = false;
-  m_SharingKeyUl              = "";
-  m_SharingKeyUlIsSet         = false;
-  m_MaxPacketLossRateDl       = 0;
-  m_MaxPacketLossRateDlIsSet  = false;
-  m_MaxPacketLossRateUl       = 0;
-  m_MaxPacketLossRateUlIsSet  = false;
-  m_DefQosFlowIndication      = false;
+  m_QosId = "";
+  m_r_5qi = 0;
+  m_r_5qiIsSet = false;
+  m_MaxbrUl = "";
+  m_MaxbrUlIsSet = false;
+  m_MaxbrDl = "";
+  m_MaxbrDlIsSet = false;
+  m_GbrUl = "";
+  m_GbrUlIsSet = false;
+  m_GbrDl = "";
+  m_GbrDlIsSet = false;
+  m_ArpIsSet = false;
+  m_Qnc = false;
+  m_QncIsSet = false;
+  m_PriorityLevel = 0;
+  m_PriorityLevelIsSet = false;
+  m_AverWindow = 2000;
+  m_AverWindowIsSet = false;
+  m_MaxDataBurstVol = 0;
+  m_MaxDataBurstVolIsSet = false;
+  m_ReflectiveQos = false;
+  m_ReflectiveQosIsSet = false;
+  m_SharingKeyDl = "";
+  m_SharingKeyDlIsSet = false;
+  m_SharingKeyUl = "";
+  m_SharingKeyUlIsSet = false;
+  m_MaxPacketLossRateDl = 0;
+  m_MaxPacketLossRateDlIsSet = false;
+  m_MaxPacketLossRateUl = 0;
+  m_MaxPacketLossRateUlIsSet = false;
+  m_DefQosFlowIndication = false;
   m_DefQosFlowIndicationIsSet = false;
-  m_ExtMaxDataBurstVol        = 0;
-  m_ExtMaxDataBurstVolIsSet   = false;
-  m_PacketDelayBudget         = 0;
-  m_PacketDelayBudgetIsSet    = false;
-  m_PacketErrorRate           = "";
-  m_PacketErrorRateIsSet      = false;
+  m_ExtMaxDataBurstVol = 0;
+  m_ExtMaxDataBurstVolIsSet = false;
+  m_PacketDelayBudget = 0;
+  m_PacketDelayBudgetIsSet = false;
+  m_PacketErrorRate = "";
+  m_PacketErrorRateIsSet = false;
 }
 
 void QosData::validate() const {
@@ -68,17 +68,17 @@ void QosData::validate() const {
   }
 }
 
-bool QosData::validate(std::stringstream& msg) const {
+bool QosData::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool QosData::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool QosData::validate(std::stringstream &msg,
+                       const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "QosData" : pathPrefix;
 
   if (r5qiIsSet()) {
-    const int32_t& value               = m_r_5qi;
+    const int32_t &value = m_r_5qi;
     const std::string currentValuePath = _pathPrefix + ".r5qi";
 
     if (value < 0) {
@@ -92,35 +92,35 @@ bool QosData::validate(
   }
 
   if (maxbrUlIsSet()) {
-    const std::string& value           = m_MaxbrUl;
+    const std::string &value = m_MaxbrUl;
     const std::string currentValuePath = _pathPrefix + ".maxbrUl";
-    success &= helpers::validate_regex(
-        helpers::BANDWIDTH_VALIDATION_REGEX, value, msg, currentValuePath);
+    success &= helpers::validate_regex(helpers::BANDWIDTH_VALIDATION_REGEX,
+                                       value, msg, currentValuePath);
   }
 
   if (maxbrDlIsSet()) {
-    const std::string& value           = m_MaxbrDl;
+    const std::string &value = m_MaxbrDl;
     const std::string currentValuePath = _pathPrefix + ".maxbrDl";
-    success &= helpers::validate_regex(
-        helpers::BANDWIDTH_VALIDATION_REGEX, value, msg, currentValuePath);
+    success &= helpers::validate_regex(helpers::BANDWIDTH_VALIDATION_REGEX,
+                                       value, msg, currentValuePath);
   }
 
   if (gbrUlIsSet()) {
-    const std::string& value           = m_GbrUl;
+    const std::string &value = m_GbrUl;
     const std::string currentValuePath = _pathPrefix + ".gbrUl";
-    success &= helpers::validate_regex(
-        helpers::BANDWIDTH_VALIDATION_REGEX, value, msg, currentValuePath);
+    success &= helpers::validate_regex(helpers::BANDWIDTH_VALIDATION_REGEX,
+                                       value, msg, currentValuePath);
   }
 
   if (gbrDlIsSet()) {
-    const std::string& value           = m_GbrDl;
+    const std::string &value = m_GbrDl;
     const std::string currentValuePath = _pathPrefix + ".gbrDl";
-    success &= helpers::validate_regex(
-        helpers::BANDWIDTH_VALIDATION_REGEX, value, msg, currentValuePath);
+    success &= helpers::validate_regex(helpers::BANDWIDTH_VALIDATION_REGEX,
+                                       value, msg, currentValuePath);
   }
 
   if (priorityLevelIsSet()) {
-    const int32_t& value               = m_PriorityLevel;
+    const int32_t &value = m_PriorityLevel;
     const std::string currentValuePath = _pathPrefix + ".priorityLevel";
 
     if (value < 1) {
@@ -134,7 +134,7 @@ bool QosData::validate(
   }
 
   if (averWindowIsSet()) {
-    const int32_t& value               = m_AverWindow;
+    const int32_t &value = m_AverWindow;
     const std::string currentValuePath = _pathPrefix + ".averWindow";
 
     if (value < 1) {
@@ -148,7 +148,7 @@ bool QosData::validate(
   }
 
   if (maxDataBurstVolIsSet()) {
-    const int32_t& value               = m_MaxDataBurstVol;
+    const int32_t &value = m_MaxDataBurstVol;
     const std::string currentValuePath = _pathPrefix + ".maxDataBurstVol";
 
     if (value < 1) {
@@ -162,7 +162,7 @@ bool QosData::validate(
   }
 
   if (maxPacketLossRateDlIsSet()) {
-    const int32_t& value               = m_MaxPacketLossRateDl;
+    const int32_t &value = m_MaxPacketLossRateDl;
     const std::string currentValuePath = _pathPrefix + ".maxPacketLossRateDl";
 
     if (value < 0) {
@@ -176,7 +176,7 @@ bool QosData::validate(
   }
 
   if (maxPacketLossRateUlIsSet()) {
-    const int32_t& value               = m_MaxPacketLossRateUl;
+    const int32_t &value = m_MaxPacketLossRateUl;
     const std::string currentValuePath = _pathPrefix + ".maxPacketLossRateUl";
 
     if (value < 0) {
@@ -190,7 +190,7 @@ bool QosData::validate(
   }
 
   if (extMaxDataBurstVolIsSet()) {
-    const int32_t& value               = m_ExtMaxDataBurstVol;
+    const int32_t &value = m_ExtMaxDataBurstVol;
     const std::string currentValuePath = _pathPrefix + ".extMaxDataBurstVol";
 
     if (value < 4096) {
@@ -204,7 +204,7 @@ bool QosData::validate(
   }
 
   if (packetDelayBudgetIsSet()) {
-    const int32_t& value               = m_PacketDelayBudget;
+    const int32_t &value = m_PacketDelayBudget;
     const std::string currentValuePath = _pathPrefix + ".packetDelayBudget";
 
     if (value < 1) {
@@ -222,7 +222,7 @@ bool QosData::validate(
   return success;
 }
 
-bool QosData::operator==(const QosData& rhs) const {
+bool QosData::operator==(const QosData &rhs) const {
   return
 
       (getQosId() == rhs.getQosId()) &&
@@ -301,26 +301,37 @@ bool QosData::operator==(const QosData& rhs) const {
           ;
 }
 
-bool QosData::operator!=(const QosData& rhs) const {
-  return !(*this == rhs);
-}
+bool QosData::operator!=(const QosData &rhs) const { return !(*this == rhs); }
 
-void to_json(nlohmann::json& j, const QosData& o) {
-  j          = nlohmann::json();
+void to_json(nlohmann::json &j, const QosData &o) {
+  j = nlohmann::json();
   j["qosId"] = o.m_QosId;
-  if (o.r5qiIsSet()) j["5qi"] = o.m_r_5qi;
-  if (o.maxbrUlIsSet()) j["maxbrUl"] = o.m_MaxbrUl;
-  if (o.maxbrDlIsSet()) j["maxbrDl"] = o.m_MaxbrDl;
-  if (o.gbrUlIsSet()) j["gbrUl"] = o.m_GbrUl;
-  if (o.gbrDlIsSet()) j["gbrDl"] = o.m_GbrDl;
-  if (o.arpIsSet()) j["arp"] = o.m_Arp;
-  if (o.qncIsSet()) j["qnc"] = o.m_Qnc;
-  if (o.priorityLevelIsSet()) j["priorityLevel"] = o.m_PriorityLevel;
-  if (o.averWindowIsSet()) j["averWindow"] = o.m_AverWindow;
-  if (o.maxDataBurstVolIsSet()) j["maxDataBurstVol"] = o.m_MaxDataBurstVol;
-  if (o.reflectiveQosIsSet()) j["reflectiveQos"] = o.m_ReflectiveQos;
-  if (o.sharingKeyDlIsSet()) j["sharingKeyDl"] = o.m_SharingKeyDl;
-  if (o.sharingKeyUlIsSet()) j["sharingKeyUl"] = o.m_SharingKeyUl;
+  if (o.r5qiIsSet())
+    j["5qi"] = o.m_r_5qi;
+  if (o.maxbrUlIsSet())
+    j["maxbrUl"] = o.m_MaxbrUl;
+  if (o.maxbrDlIsSet())
+    j["maxbrDl"] = o.m_MaxbrDl;
+  if (o.gbrUlIsSet())
+    j["gbrUl"] = o.m_GbrUl;
+  if (o.gbrDlIsSet())
+    j["gbrDl"] = o.m_GbrDl;
+  if (o.arpIsSet())
+    j["arp"] = o.m_Arp;
+  if (o.qncIsSet())
+    j["qnc"] = o.m_Qnc;
+  if (o.priorityLevelIsSet())
+    j["priorityLevel"] = o.m_PriorityLevel;
+  if (o.averWindowIsSet())
+    j["averWindow"] = o.m_AverWindow;
+  if (o.maxDataBurstVolIsSet())
+    j["maxDataBurstVol"] = o.m_MaxDataBurstVol;
+  if (o.reflectiveQosIsSet())
+    j["reflectiveQos"] = o.m_ReflectiveQos;
+  if (o.sharingKeyDlIsSet())
+    j["sharingKeyDl"] = o.m_SharingKeyDl;
+  if (o.sharingKeyUlIsSet())
+    j["sharingKeyUl"] = o.m_SharingKeyUl;
   if (o.maxPacketLossRateDlIsSet())
     j["maxPacketLossRateDl"] = o.m_MaxPacketLossRateDl;
   if (o.maxPacketLossRateUlIsSet())
@@ -331,10 +342,11 @@ void to_json(nlohmann::json& j, const QosData& o) {
     j["extMaxDataBurstVol"] = o.m_ExtMaxDataBurstVol;
   if (o.packetDelayBudgetIsSet())
     j["packetDelayBudget"] = o.m_PacketDelayBudget;
-  if (o.packetErrorRateIsSet()) j["packetErrorRate"] = o.m_PacketErrorRate;
+  if (o.packetErrorRateIsSet())
+    j["packetErrorRate"] = o.m_PacketErrorRate;
 }
 
-void from_json(const nlohmann::json& j, QosData& o) {
+void from_json(const nlohmann::json &j, QosData &o) {
   if (j.find("qosId") != j.end()) {
     j.at("qosId").get_to(o.m_QosId);
   }
@@ -416,212 +428,124 @@ void from_json(const nlohmann::json& j, QosData& o) {
   }
 }
 
-std::string QosData::getQosId() const {
-  return m_QosId;
-}
-void QosData::setQosId(std::string const& value) {
-  m_QosId = value;
-}
-int32_t QosData::getR5qi() const {
-  return m_r_5qi;
-}
+std::string QosData::getQosId() const { return m_QosId; }
+void QosData::setQosId(std::string const &value) { m_QosId = value; }
+int32_t QosData::getR5qi() const { return m_r_5qi; }
 void QosData::setR5qi(int32_t const value) {
-  m_r_5qi      = value;
+  m_r_5qi = value;
   m_r_5qiIsSet = true;
 }
-bool QosData::r5qiIsSet() const {
-  return m_r_5qiIsSet;
-}
-void QosData::unsetr_5qi() {
-  m_r_5qiIsSet = false;
-}
-std::string QosData::getMaxbrUl() const {
-  return m_MaxbrUl;
-}
-void QosData::setMaxbrUl(std::string const& value) {
-  m_MaxbrUl      = value;
+bool QosData::r5qiIsSet() const { return m_r_5qiIsSet; }
+void QosData::unsetr_5qi() { m_r_5qiIsSet = false; }
+std::string QosData::getMaxbrUl() const { return m_MaxbrUl; }
+void QosData::setMaxbrUl(std::string const &value) {
+  m_MaxbrUl = value;
   m_MaxbrUlIsSet = true;
 }
-bool QosData::maxbrUlIsSet() const {
-  return m_MaxbrUlIsSet;
-}
-void QosData::unsetMaxbrUl() {
-  m_MaxbrUlIsSet = false;
-}
-std::string QosData::getMaxbrDl() const {
-  return m_MaxbrDl;
-}
-void QosData::setMaxbrDl(std::string const& value) {
-  m_MaxbrDl      = value;
+bool QosData::maxbrUlIsSet() const { return m_MaxbrUlIsSet; }
+void QosData::unsetMaxbrUl() { m_MaxbrUlIsSet = false; }
+std::string QosData::getMaxbrDl() const { return m_MaxbrDl; }
+void QosData::setMaxbrDl(std::string const &value) {
+  m_MaxbrDl = value;
   m_MaxbrDlIsSet = true;
 }
-bool QosData::maxbrDlIsSet() const {
-  return m_MaxbrDlIsSet;
-}
-void QosData::unsetMaxbrDl() {
-  m_MaxbrDlIsSet = false;
-}
-std::string QosData::getGbrUl() const {
-  return m_GbrUl;
-}
-void QosData::setGbrUl(std::string const& value) {
-  m_GbrUl      = value;
+bool QosData::maxbrDlIsSet() const { return m_MaxbrDlIsSet; }
+void QosData::unsetMaxbrDl() { m_MaxbrDlIsSet = false; }
+std::string QosData::getGbrUl() const { return m_GbrUl; }
+void QosData::setGbrUl(std::string const &value) {
+  m_GbrUl = value;
   m_GbrUlIsSet = true;
 }
-bool QosData::gbrUlIsSet() const {
-  return m_GbrUlIsSet;
-}
-void QosData::unsetGbrUl() {
-  m_GbrUlIsSet = false;
-}
-std::string QosData::getGbrDl() const {
-  return m_GbrDl;
-}
-void QosData::setGbrDl(std::string const& value) {
-  m_GbrDl      = value;
+bool QosData::gbrUlIsSet() const { return m_GbrUlIsSet; }
+void QosData::unsetGbrUl() { m_GbrUlIsSet = false; }
+std::string QosData::getGbrDl() const { return m_GbrDl; }
+void QosData::setGbrDl(std::string const &value) {
+  m_GbrDl = value;
   m_GbrDlIsSet = true;
 }
-bool QosData::gbrDlIsSet() const {
-  return m_GbrDlIsSet;
-}
-void QosData::unsetGbrDl() {
-  m_GbrDlIsSet = false;
-}
-oai::model::common::Arp QosData::getArp() const {
-  return m_Arp;
-}
-void QosData::setArp(oai::model::common::Arp const& value) {
-  m_Arp      = value;
+bool QosData::gbrDlIsSet() const { return m_GbrDlIsSet; }
+void QosData::unsetGbrDl() { m_GbrDlIsSet = false; }
+oai::model::common::Arp QosData::getArp() const { return m_Arp; }
+void QosData::setArp(oai::model::common::Arp const &value) {
+  m_Arp = value;
   m_ArpIsSet = true;
 }
-bool QosData::arpIsSet() const {
-  return m_ArpIsSet;
-}
-void QosData::unsetArp() {
-  m_ArpIsSet = false;
-}
-bool QosData::isQnc() const {
-  return m_Qnc;
-}
+bool QosData::arpIsSet() const { return m_ArpIsSet; }
+void QosData::unsetArp() { m_ArpIsSet = false; }
+bool QosData::isQnc() const { return m_Qnc; }
 void QosData::setQnc(bool const value) {
-  m_Qnc      = value;
+  m_Qnc = value;
   m_QncIsSet = true;
 }
-bool QosData::qncIsSet() const {
-  return m_QncIsSet;
-}
-void QosData::unsetQnc() {
-  m_QncIsSet = false;
-}
-int32_t QosData::getPriorityLevel() const {
-  return m_PriorityLevel;
-}
+bool QosData::qncIsSet() const { return m_QncIsSet; }
+void QosData::unsetQnc() { m_QncIsSet = false; }
+int32_t QosData::getPriorityLevel() const { return m_PriorityLevel; }
 void QosData::setPriorityLevel(int32_t const value) {
-  m_PriorityLevel      = value;
+  m_PriorityLevel = value;
   m_PriorityLevelIsSet = true;
 }
-bool QosData::priorityLevelIsSet() const {
-  return m_PriorityLevelIsSet;
-}
-void QosData::unsetPriorityLevel() {
-  m_PriorityLevelIsSet = false;
-}
-int32_t QosData::getAverWindow() const {
-  return m_AverWindow;
-}
+bool QosData::priorityLevelIsSet() const { return m_PriorityLevelIsSet; }
+void QosData::unsetPriorityLevel() { m_PriorityLevelIsSet = false; }
+int32_t QosData::getAverWindow() const { return m_AverWindow; }
 void QosData::setAverWindow(int32_t const value) {
-  m_AverWindow      = value;
+  m_AverWindow = value;
   m_AverWindowIsSet = true;
 }
-bool QosData::averWindowIsSet() const {
-  return m_AverWindowIsSet;
-}
-void QosData::unsetAverWindow() {
-  m_AverWindowIsSet = false;
-}
-int32_t QosData::getMaxDataBurstVol() const {
-  return m_MaxDataBurstVol;
-}
+bool QosData::averWindowIsSet() const { return m_AverWindowIsSet; }
+void QosData::unsetAverWindow() { m_AverWindowIsSet = false; }
+int32_t QosData::getMaxDataBurstVol() const { return m_MaxDataBurstVol; }
 void QosData::setMaxDataBurstVol(int32_t const value) {
-  m_MaxDataBurstVol      = value;
+  m_MaxDataBurstVol = value;
   m_MaxDataBurstVolIsSet = true;
 }
-bool QosData::maxDataBurstVolIsSet() const {
-  return m_MaxDataBurstVolIsSet;
-}
-void QosData::unsetMaxDataBurstVol() {
-  m_MaxDataBurstVolIsSet = false;
-}
-bool QosData::isReflectiveQos() const {
-  return m_ReflectiveQos;
-}
+bool QosData::maxDataBurstVolIsSet() const { return m_MaxDataBurstVolIsSet; }
+void QosData::unsetMaxDataBurstVol() { m_MaxDataBurstVolIsSet = false; }
+bool QosData::isReflectiveQos() const { return m_ReflectiveQos; }
 void QosData::setReflectiveQos(bool const value) {
-  m_ReflectiveQos      = value;
+  m_ReflectiveQos = value;
   m_ReflectiveQosIsSet = true;
 }
-bool QosData::reflectiveQosIsSet() const {
-  return m_ReflectiveQosIsSet;
-}
-void QosData::unsetReflectiveQos() {
-  m_ReflectiveQosIsSet = false;
-}
-std::string QosData::getSharingKeyDl() const {
-  return m_SharingKeyDl;
-}
-void QosData::setSharingKeyDl(std::string const& value) {
-  m_SharingKeyDl      = value;
+bool QosData::reflectiveQosIsSet() const { return m_ReflectiveQosIsSet; }
+void QosData::unsetReflectiveQos() { m_ReflectiveQosIsSet = false; }
+std::string QosData::getSharingKeyDl() const { return m_SharingKeyDl; }
+void QosData::setSharingKeyDl(std::string const &value) {
+  m_SharingKeyDl = value;
   m_SharingKeyDlIsSet = true;
 }
-bool QosData::sharingKeyDlIsSet() const {
-  return m_SharingKeyDlIsSet;
-}
-void QosData::unsetSharingKeyDl() {
-  m_SharingKeyDlIsSet = false;
-}
-std::string QosData::getSharingKeyUl() const {
-  return m_SharingKeyUl;
-}
-void QosData::setSharingKeyUl(std::string const& value) {
-  m_SharingKeyUl      = value;
+bool QosData::sharingKeyDlIsSet() const { return m_SharingKeyDlIsSet; }
+void QosData::unsetSharingKeyDl() { m_SharingKeyDlIsSet = false; }
+std::string QosData::getSharingKeyUl() const { return m_SharingKeyUl; }
+void QosData::setSharingKeyUl(std::string const &value) {
+  m_SharingKeyUl = value;
   m_SharingKeyUlIsSet = true;
 }
-bool QosData::sharingKeyUlIsSet() const {
-  return m_SharingKeyUlIsSet;
-}
-void QosData::unsetSharingKeyUl() {
-  m_SharingKeyUlIsSet = false;
-}
+bool QosData::sharingKeyUlIsSet() const { return m_SharingKeyUlIsSet; }
+void QosData::unsetSharingKeyUl() { m_SharingKeyUlIsSet = false; }
 int32_t QosData::getMaxPacketLossRateDl() const {
   return m_MaxPacketLossRateDl;
 }
 void QosData::setMaxPacketLossRateDl(int32_t const value) {
-  m_MaxPacketLossRateDl      = value;
+  m_MaxPacketLossRateDl = value;
   m_MaxPacketLossRateDlIsSet = true;
 }
 bool QosData::maxPacketLossRateDlIsSet() const {
   return m_MaxPacketLossRateDlIsSet;
 }
-void QosData::unsetMaxPacketLossRateDl() {
-  m_MaxPacketLossRateDlIsSet = false;
-}
+void QosData::unsetMaxPacketLossRateDl() { m_MaxPacketLossRateDlIsSet = false; }
 int32_t QosData::getMaxPacketLossRateUl() const {
   return m_MaxPacketLossRateUl;
 }
 void QosData::setMaxPacketLossRateUl(int32_t const value) {
-  m_MaxPacketLossRateUl      = value;
+  m_MaxPacketLossRateUl = value;
   m_MaxPacketLossRateUlIsSet = true;
 }
 bool QosData::maxPacketLossRateUlIsSet() const {
   return m_MaxPacketLossRateUlIsSet;
 }
-void QosData::unsetMaxPacketLossRateUl() {
-  m_MaxPacketLossRateUlIsSet = false;
-}
-bool QosData::isDefQosFlowIndication() const {
-  return m_DefQosFlowIndication;
-}
+void QosData::unsetMaxPacketLossRateUl() { m_MaxPacketLossRateUlIsSet = false; }
+bool QosData::isDefQosFlowIndication() const { return m_DefQosFlowIndication; }
 void QosData::setDefQosFlowIndication(bool const value) {
-  m_DefQosFlowIndication      = value;
+  m_DefQosFlowIndication = value;
   m_DefQosFlowIndicationIsSet = true;
 }
 bool QosData::defQosFlowIndicationIsSet() const {
@@ -630,44 +554,30 @@ bool QosData::defQosFlowIndicationIsSet() const {
 void QosData::unsetDefQosFlowIndication() {
   m_DefQosFlowIndicationIsSet = false;
 }
-int32_t QosData::getExtMaxDataBurstVol() const {
-  return m_ExtMaxDataBurstVol;
-}
+int32_t QosData::getExtMaxDataBurstVol() const { return m_ExtMaxDataBurstVol; }
 void QosData::setExtMaxDataBurstVol(int32_t const value) {
-  m_ExtMaxDataBurstVol      = value;
+  m_ExtMaxDataBurstVol = value;
   m_ExtMaxDataBurstVolIsSet = true;
 }
 bool QosData::extMaxDataBurstVolIsSet() const {
   return m_ExtMaxDataBurstVolIsSet;
 }
-void QosData::unsetExtMaxDataBurstVol() {
-  m_ExtMaxDataBurstVolIsSet = false;
-}
-int32_t QosData::getPacketDelayBudget() const {
-  return m_PacketDelayBudget;
-}
+void QosData::unsetExtMaxDataBurstVol() { m_ExtMaxDataBurstVolIsSet = false; }
+int32_t QosData::getPacketDelayBudget() const { return m_PacketDelayBudget; }
 void QosData::setPacketDelayBudget(int32_t const value) {
-  m_PacketDelayBudget      = value;
+  m_PacketDelayBudget = value;
   m_PacketDelayBudgetIsSet = true;
 }
 bool QosData::packetDelayBudgetIsSet() const {
   return m_PacketDelayBudgetIsSet;
 }
-void QosData::unsetPacketDelayBudget() {
-  m_PacketDelayBudgetIsSet = false;
-}
-std::string QosData::getPacketErrorRate() const {
-  return m_PacketErrorRate;
-}
-void QosData::setPacketErrorRate(std::string const& value) {
-  m_PacketErrorRate      = value;
+void QosData::unsetPacketDelayBudget() { m_PacketDelayBudgetIsSet = false; }
+std::string QosData::getPacketErrorRate() const { return m_PacketErrorRate; }
+void QosData::setPacketErrorRate(std::string const &value) {
+  m_PacketErrorRate = value;
   m_PacketErrorRateIsSet = true;
 }
-bool QosData::packetErrorRateIsSet() const {
-  return m_PacketErrorRateIsSet;
-}
-void QosData::unsetPacketErrorRate() {
-  m_PacketErrorRateIsSet = false;
-}
+bool QosData::packetErrorRateIsSet() const { return m_PacketErrorRateIsSet; }
+void QosData::unsetPacketErrorRate() { m_PacketErrorRateIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

@@ -26,8 +26,8 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_HandoverResourceAllocationUnsuccessfulTransfer */
 typedef struct Ngap_HandoverResourceAllocationUnsuccessfulTransfer {
   Ngap_Cause_t cause;
-  struct Ngap_CriticalityDiagnostics* criticalityDiagnostics; /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions;      /* OPTIONAL */
+  struct Ngap_CriticalityDiagnostics *criticalityDiagnostics; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions;      /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

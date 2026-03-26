@@ -12,10 +12,10 @@ namespace oai::ngap {
 //------------------------------------------------------------------------------
 PduSessionResourceSetupResponseTransfer::
     PduSessionResourceSetupResponseTransfer() {
-  m_Ie = (Ngap_PDUSessionResourceSetupResponseTransfer_t*) calloc(
+  m_Ie = (Ngap_PDUSessionResourceSetupResponseTransfer_t *)calloc(
       1, sizeof(Ngap_PDUSessionResourceSetupResponseTransfer_t));
   m_AdditionalDlQosFlowPerTnlInformation = std::nullopt;
-  m_SecurityResult                       = std::nullopt;
+  m_SecurityResult = std::nullopt;
 }
 
 //------------------------------------------------------------------------------
@@ -24,7 +24,7 @@ PduSessionResourceSetupResponseTransfer::
 
 //------------------------------------------------------------------------------
 void PduSessionResourceSetupResponseTransfer::setDlQosFlowPerTnlInformation(
-    const QosFlowPerTnlInformation& qosFlowPerTnlInformation) {
+    const QosFlowPerTnlInformation &qosFlowPerTnlInformation) {
   m_DlQosFlowPerTnlInformation = qosFlowPerTnlInformation;
 
   int ret =
@@ -38,14 +38,14 @@ void PduSessionResourceSetupResponseTransfer::setDlQosFlowPerTnlInformation(
 
 //------------------------------------------------------------------------------
 void PduSessionResourceSetupResponseTransfer::getDlQosFlowPerTnlInformation(
-    QosFlowPerTnlInformation& qosFlowPerTnlInformation) const {
+    QosFlowPerTnlInformation &qosFlowPerTnlInformation) const {
   qosFlowPerTnlInformation = m_DlQosFlowPerTnlInformation;
 }
 
 //------------------------------------------------------------------------------
 void PduSessionResourceSetupResponseTransfer::setDlQosFlowPerTnlInformation(
-    const GtpTunnel& upTransportLayerInfo,
-    const std::vector<AssociatedQosFlow_t>& list) {
+    const GtpTunnel &upTransportLayerInfo,
+    const std::vector<AssociatedQosFlow_t> &list) {
   UpTransportLayerInformation upTransportLayerInformation = {};
   upTransportLayerInformation.set(upTransportLayerInfo);
 
@@ -64,8 +64,8 @@ void PduSessionResourceSetupResponseTransfer::setDlQosFlowPerTnlInformation(
   }
   associatedQosFlowList.set(flowItemVector);
 
-  m_DlQosFlowPerTnlInformation.set(
-      upTransportLayerInformation, associatedQosFlowList);
+  m_DlQosFlowPerTnlInformation.set(upTransportLayerInformation,
+                                   associatedQosFlowList);
 
   int ret =
       m_DlQosFlowPerTnlInformation.encode(m_Ie->dLQosFlowPerTNLInformation);
@@ -78,12 +78,12 @@ void PduSessionResourceSetupResponseTransfer::setDlQosFlowPerTnlInformation(
 
 //------------------------------------------------------------------------------
 void PduSessionResourceSetupResponseTransfer::getDlQosFlowPerTnlInformation(
-    GtpTunnel& upTransportLayerInfo,
-    std::vector<AssociatedQosFlow_t>& list) const {
+    GtpTunnel &upTransportLayerInfo,
+    std::vector<AssociatedQosFlow_t> &list) const {
   UpTransportLayerInformation upTransportLayerInformation = {};
-  AssociatedQosFlowList associatedQosFlowList             = {};
-  m_DlQosFlowPerTnlInformation.get(
-      upTransportLayerInformation, associatedQosFlowList);
+  AssociatedQosFlowList associatedQosFlowList = {};
+  m_DlQosFlowPerTnlInformation.get(upTransportLayerInformation,
+                                   associatedQosFlowList);
 
   std::optional<GtpTunnel> upTransportLayerInfo_opt = std::nullopt;
   upTransportLayerInformation.get(upTransportLayerInfo_opt);
@@ -96,14 +96,14 @@ void PduSessionResourceSetupResponseTransfer::getDlQosFlowPerTnlInformation(
     AssociatedQosFlow_t AssociatedQosFlow_str;
     long m_qosFlowMappingIndication;
     QosFlowIdentifier qosFlowIdentifier = {};
-    vector_associated_qos_flow_item[i].get(
-        m_qosFlowMappingIndication, qosFlowIdentifier);
+    vector_associated_qos_flow_item[i].get(m_qosFlowMappingIndication,
+                                           qosFlowIdentifier);
     qosFlowIdentifier.get(AssociatedQosFlow_str.qosFlowIdentifier);
     if (m_qosFlowMappingIndication < 0) {
       AssociatedQosFlow_str.qosFlowMappingIndication = nullptr;
     } else {
       AssociatedQosFlow_str.qosFlowMappingIndication =
-          (e_Ngap_AssociatedQosFlowItem__qosFlowMappingIndication*) calloc(
+          (e_Ngap_AssociatedQosFlowItem__qosFlowMappingIndication *)calloc(
               1,
               sizeof(e_Ngap_AssociatedQosFlowItem__qosFlowMappingIndication));
       *AssociatedQosFlow_str.qosFlowMappingIndication =
@@ -118,8 +118,8 @@ void PduSessionResourceSetupResponseTransfer::getDlQosFlowPerTnlInformation(
 //------------------------------------------------------------------------------
 void PduSessionResourceSetupResponseTransfer::
     setAdditionalDLQoSFlowPerTNLInformation(
-        const QosFlowPerTnlInformationList&
-            additionDlQoSFlowPerTnlInformation) {
+        const QosFlowPerTnlInformationList
+            &additionDlQoSFlowPerTnlInformation) {
   /*  UpTransportLayerInformation upTransportLayerInformation = {};
 
     TransportLayerAddress transportLayerAddress = {};
@@ -172,7 +172,7 @@ void PduSessionResourceSetupResponseTransfer::
 //------------------------------------------------------------------------------
 bool PduSessionResourceSetupResponseTransfer::
     getAdditionalDLQoSFlowPerTNLInformation(
-        QosFlowPerTnlInformationList& additionDlQoSFlowPerTnlInformation)
+        QosFlowPerTnlInformationList &additionDlQoSFlowPerTnlInformation)
         const {
   return true;
 }
@@ -188,12 +188,12 @@ void PduSessionResourceSetupResponseTransfer::setSecurityResult(
   confidentiality_protection_result_tmp.set(
       e_confidentiality_protection_result);
   SecurityResult security_result = {};
-  security_result.set(
-      integrity_protection_result_tmp, confidentiality_protection_result_tmp);
+  security_result.set(integrity_protection_result_tmp,
+                      confidentiality_protection_result_tmp);
   m_SecurityResult = std::make_optional<SecurityResult>(security_result);
 
-  Ngap_SecurityResult_t* ie =
-      (Ngap_SecurityResult_t*) calloc(1, sizeof(Ngap_SecurityResult_t));
+  Ngap_SecurityResult_t *ie =
+      (Ngap_SecurityResult_t *)calloc(1, sizeof(Ngap_SecurityResult_t));
   int ret = m_SecurityResult.value().encode(*ie);
   if (!ret) {
     oai::logger::logger_common::ngap().error("Encode SecurityResult IE error");
@@ -204,15 +204,16 @@ void PduSessionResourceSetupResponseTransfer::setSecurityResult(
 
 //------------------------------------------------------------------------------
 bool PduSessionResourceSetupResponseTransfer::getSecurityResult(
-    long& integrity_protection_result,
-    long& confidentialityProtectionResult) const {
-  if (!m_SecurityResult.has_value()) return false;
+    long &integrity_protection_result,
+    long &confidentialityProtectionResult) const {
+  if (!m_SecurityResult.has_value())
+    return false;
 
-  IntegrityProtectionResult integrity_protection_result_tmp             = {};
+  IntegrityProtectionResult integrity_protection_result_tmp = {};
   ConfidentialityProtectionResult confidentiality_protection_result_tmp = {};
 
-  m_SecurityResult.value().get(
-      integrity_protection_result_tmp, confidentiality_protection_result_tmp);
+  m_SecurityResult.value().get(integrity_protection_result_tmp,
+                               confidentiality_protection_result_tmp);
 
   integrity_protection_result_tmp.get(integrity_protection_result);
   confidentiality_protection_result_tmp.get(confidentialityProtectionResult);
@@ -221,7 +222,7 @@ bool PduSessionResourceSetupResponseTransfer::getSecurityResult(
 }
 
 //------------------------------------------------------------------------------
-int PduSessionResourceSetupResponseTransfer::encode(uint8_t* buf, int bufSize) {
+int PduSessionResourceSetupResponseTransfer::encode(uint8_t *buf, int bufSize) {
   ngap_utils::print_asn_msg(
       &asn_DEF_Ngap_PDUSessionResourceSetupResponseTransfer, m_Ie);
   asn_enc_rval_t er = aper_encode_to_buffer(
@@ -233,12 +234,12 @@ int PduSessionResourceSetupResponseTransfer::encode(uint8_t* buf, int bufSize) {
 
 //------------------------------------------------------------------------------
 // Decapsulation
-bool PduSessionResourceSetupResponseTransfer::decode(
-    uint8_t* buf, int bufSize) {
-  asn_dec_rval_t rc = asn_decode(
-      nullptr, ATS_ALIGNED_CANONICAL_PER,
-      &asn_DEF_Ngap_PDUSessionResourceSetupResponseTransfer, (void**) &m_Ie,
-      buf, bufSize);
+bool PduSessionResourceSetupResponseTransfer::decode(uint8_t *buf,
+                                                     int bufSize) {
+  asn_dec_rval_t rc =
+      asn_decode(nullptr, ATS_ALIGNED_CANONICAL_PER,
+                 &asn_DEF_Ngap_PDUSessionResourceSetupResponseTransfer,
+                 (void **)&m_Ie, buf, bufSize);
   if (rc.code == RC_OK) {
     oai::logger::logger_common::ngap().debug("Decoded successfully");
   } else if (rc.code == RC_WMORE) {
@@ -248,8 +249,8 @@ bool PduSessionResourceSetupResponseTransfer::decode(
     oai::logger::logger_common::ngap().error("Failure to decode data");
     return false;
   }
-  oai::logger::logger_common::ngap().debug(
-      "rc.consumed to decode %d", rc.consumed);
+  oai::logger::logger_common::ngap().debug("rc.consumed to decode %d",
+                                           rc.consumed);
   // asn_fprint(stderr, &asn_DEF_Ngap_PDUSessionResourceSetupResponseTransfer,
   // m_Ie);
 
@@ -283,4 +284,4 @@ bool PduSessionResourceSetupResponseTransfer::decode(
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

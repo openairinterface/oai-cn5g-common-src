@@ -30,7 +30,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class LossConnectivityCfg {
- public:
+public:
   LossConnectivityCfg();
   virtual ~LossConnectivityCfg() = default;
 
@@ -44,10 +44,10 @@ class LossConnectivityCfg {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const LossConnectivityCfg& rhs) const;
-  bool operator!=(const LossConnectivityCfg& rhs) const;
+  bool operator==(const LossConnectivityCfg &rhs) const;
+  bool operator!=(const LossConnectivityCfg &rhs) const;
 
   /////////////////////////////////////////////
   /// LossConnectivityCfg members
@@ -60,18 +60,18 @@ class LossConnectivityCfg {
   bool maxDetectionTimeIsSet() const;
   void unsetMaxDetectionTime();
 
-  friend void to_json(nlohmann::json& j, const LossConnectivityCfg& o);
-  friend void from_json(const nlohmann::json& j, LossConnectivityCfg& o);
+  friend void to_json(nlohmann::json &j, const LossConnectivityCfg &o);
+  friend void from_json(const nlohmann::json &j, LossConnectivityCfg &o);
 
- protected:
+protected:
   int32_t m_MaxDetectionTime;
   bool m_MaxDetectionTimeIsSet;
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* LossConnectivityCfg_H_ */

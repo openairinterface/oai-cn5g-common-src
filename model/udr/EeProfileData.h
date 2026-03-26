@@ -34,7 +34,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class EeProfileData {
- public:
+public:
   EeProfileData();
   virtual ~EeProfileData();
 
@@ -46,28 +46,28 @@ class EeProfileData {
   /// <summary>
   ///
   /// </summary>
-  std::vector<EventType>& getRestrictedEventTypes();
-  void setRestrictedEventTypes(std::vector<EventType> const& value);
+  std::vector<EventType> &getRestrictedEventTypes();
+  void setRestrictedEventTypes(std::vector<EventType> const &value);
   bool restrictedEventTypesIsSet() const;
   void unsetRestrictedEventTypes();
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
 
-  friend void to_json(nlohmann::json& j, const EeProfileData& o);
-  friend void from_json(const nlohmann::json& j, EeProfileData& o);
+  friend void to_json(nlohmann::json &j, const EeProfileData &o);
+  friend void from_json(const nlohmann::json &j, EeProfileData &o);
 
- protected:
+protected:
   std::vector<EventType> m_RestrictedEventTypes;
   bool m_RestrictedEventTypesIsSet;
   std::string m_SupportedFeatures;
   bool m_SupportedFeaturesIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* EeProfileData_H_ */

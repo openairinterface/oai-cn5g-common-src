@@ -12,20 +12,20 @@ extern "C" {
 namespace oai::ngap {
 
 class MicoModeIndication {
- public:
+public:
   MicoModeIndication();
   virtual ~MicoModeIndication();
 
-  void set(const long& micoModeIndication);
-  void get(long& micoModeIndication) const;
+  void set(const long &micoModeIndication);
+  void get(long &micoModeIndication) const;
 
-  bool encode(Ngap_MICOModeIndication_t& micoModeIndication) const;
-  bool decode(const Ngap_MICOModeIndication_t& micoModeIndication);
+  bool encode(Ngap_MICOModeIndication_t &micoModeIndication) const;
+  bool decode(const Ngap_MICOModeIndication_t &micoModeIndication);
 
- private:
+private:
   long m_MicoModeIndication;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

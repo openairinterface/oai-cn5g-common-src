@@ -12,7 +12,7 @@ extern "C" {
 #endif
 
 typedef struct ASN__PRIMITIVE_TYPE_s {
-  uint8_t* buf;          /* Buffer with consecutive primitive encoding bytes */
+  uint8_t *buf;          /* Buffer with consecutive primitive encoding bytes */
   size_t size;           /* Size of the buffer */
 } ASN__PRIMITIVE_TYPE_t; /* Do not use this type directly! */
 
@@ -35,18 +35,19 @@ enum xer_pbd_rval {
   XPBD_BODY_CONSUMED    /* Body is recognized and consumed */
 };
 typedef enum xer_pbd_rval(xer_primitive_body_decoder_f)(
-    const asn_TYPE_descriptor_t* td, void* struct_ptr, const void* chunk_buf,
+    const asn_TYPE_descriptor_t *td, void *struct_ptr, const void *chunk_buf,
     size_t chunk_size);
 
 /*
  * Specific function to decode simple primitive types.
  * Also see xer_decode_general() in xer_decoder.h
  */
-asn_dec_rval_t xer_decode_primitive(
-    const asn_codec_ctx_t* opt_codec_ctx,
-    const asn_TYPE_descriptor_t* type_descriptor, void** struct_ptr,
-    size_t struct_size, const char* opt_mname, const void* buf_ptr, size_t size,
-    xer_primitive_body_decoder_f* prim_body_decoder);
+asn_dec_rval_t
+xer_decode_primitive(const asn_codec_ctx_t *opt_codec_ctx,
+                     const asn_TYPE_descriptor_t *type_descriptor,
+                     void **struct_ptr, size_t struct_size,
+                     const char *opt_mname, const void *buf_ptr, size_t size,
+                     xer_primitive_body_decoder_f *prim_body_decoder);
 #endif /* !defined(ASN_DISABLE_XER_SUPPORT) */
 
 #ifdef __cplusplus

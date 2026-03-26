@@ -28,7 +28,7 @@ namespace oai::model::pcf {
 /// RTP Header Extension information
 /// </summary>
 class RtpHeaderExtInfo {
- public:
+public:
   RtpHeaderExtInfo();
   virtual ~RtpHeaderExtInfo() = default;
 
@@ -42,16 +42,16 @@ class RtpHeaderExtInfo {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const RtpHeaderExtInfo& rhs) const;
-  bool operator!=(const RtpHeaderExtInfo& rhs) const;
+  bool operator==(const RtpHeaderExtInfo &rhs) const;
+  bool operator!=(const RtpHeaderExtInfo &rhs) const;
 
   /////////////////////////////////////////////
   /// RtpHeaderExtInfo members
@@ -60,7 +60,7 @@ class RtpHeaderExtInfo {
   ///
   /// </summary>
   oai::model::pcf::RtpHeaderExtType getRtpHeaderExtType() const;
-  void setRtpHeaderExtType(oai::model::pcf::RtpHeaderExtType const& value);
+  void setRtpHeaderExtType(oai::model::pcf::RtpHeaderExtType const &value);
   bool rtpHeaderExtTypeIsSet() const;
   void unsetRtpHeaderExtType();
   /// <summary>
@@ -85,10 +85,10 @@ class RtpHeaderExtInfo {
   bool pduSetSizeActiveIsSet() const;
   void unsetPduSetSizeActive();
 
-  friend void to_json(nlohmann::json& j, const RtpHeaderExtInfo& o);
-  friend void from_json(const nlohmann::json& j, RtpHeaderExtInfo& o);
+  friend void to_json(nlohmann::json &j, const RtpHeaderExtInfo &o);
+  friend void from_json(const nlohmann::json &j, RtpHeaderExtInfo &o);
 
- protected:
+protected:
   oai::model::pcf::RtpHeaderExtType m_RtpHeaderExtType;
   bool m_RtpHeaderExtTypeIsSet;
   int32_t m_RtpHeaderExtId;
@@ -99,6 +99,6 @@ class RtpHeaderExtInfo {
   bool m_PduSetSizeActiveIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* RtpHeaderExtInfo_H_ */

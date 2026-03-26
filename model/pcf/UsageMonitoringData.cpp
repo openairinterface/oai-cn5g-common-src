@@ -19,28 +19,28 @@
 namespace oai::model::pcf {
 
 UsageMonitoringData::UsageMonitoringData() {
-  m_UmId                          = "";
-  m_VolumeThreshold               = 0L;
-  m_VolumeThresholdIsSet          = false;
-  m_VolumeThresholdUplink         = 0L;
-  m_VolumeThresholdUplinkIsSet    = false;
-  m_VolumeThresholdDownlink       = 0L;
-  m_VolumeThresholdDownlinkIsSet  = false;
-  m_TimeThreshold                 = 0;
-  m_TimeThresholdIsSet            = false;
-  m_MonitoringTime                = "";
-  m_MonitoringTimeIsSet           = false;
-  m_NextVolThreshold              = 0L;
-  m_NextVolThresholdIsSet         = false;
-  m_NextVolThresholdUplink        = 0L;
-  m_NextVolThresholdUplinkIsSet   = false;
-  m_NextVolThresholdDownlink      = 0L;
+  m_UmId = "";
+  m_VolumeThreshold = 0L;
+  m_VolumeThresholdIsSet = false;
+  m_VolumeThresholdUplink = 0L;
+  m_VolumeThresholdUplinkIsSet = false;
+  m_VolumeThresholdDownlink = 0L;
+  m_VolumeThresholdDownlinkIsSet = false;
+  m_TimeThreshold = 0;
+  m_TimeThresholdIsSet = false;
+  m_MonitoringTime = "";
+  m_MonitoringTimeIsSet = false;
+  m_NextVolThreshold = 0L;
+  m_NextVolThresholdIsSet = false;
+  m_NextVolThresholdUplink = 0L;
+  m_NextVolThresholdUplinkIsSet = false;
+  m_NextVolThresholdDownlink = 0L;
   m_NextVolThresholdDownlinkIsSet = false;
-  m_NextTimeThreshold             = 0;
-  m_NextTimeThresholdIsSet        = false;
-  m_InactivityTime                = 0;
-  m_InactivityTimeIsSet           = false;
-  m_ExUsagePccRuleIdsIsSet        = false;
+  m_NextTimeThreshold = 0;
+  m_NextTimeThresholdIsSet = false;
+  m_InactivityTime = 0;
+  m_InactivityTimeIsSet = false;
+  m_ExUsagePccRuleIdsIsSet = false;
 }
 
 void UsageMonitoringData::validate() const {
@@ -50,18 +50,18 @@ void UsageMonitoringData::validate() const {
   }
 }
 
-bool UsageMonitoringData::validate(std::stringstream& msg) const {
+bool UsageMonitoringData::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool UsageMonitoringData::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool UsageMonitoringData::validate(std::stringstream &msg,
+                                   const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "UsageMonitoringData" : pathPrefix;
 
   if (volumeThresholdIsSet()) {
-    const int64_t& value               = m_VolumeThreshold;
+    const int64_t &value = m_VolumeThreshold;
     const std::string currentValuePath = _pathPrefix + ".volumeThreshold";
 
     if (value < 0ll) {
@@ -71,7 +71,7 @@ bool UsageMonitoringData::validate(
   }
 
   if (volumeThresholdUplinkIsSet()) {
-    const int64_t& value               = m_VolumeThresholdUplink;
+    const int64_t &value = m_VolumeThresholdUplink;
     const std::string currentValuePath = _pathPrefix + ".volumeThresholdUplink";
 
     if (value < 0ll) {
@@ -81,7 +81,7 @@ bool UsageMonitoringData::validate(
   }
 
   if (volumeThresholdDownlinkIsSet()) {
-    const int64_t& value = m_VolumeThresholdDownlink;
+    const int64_t &value = m_VolumeThresholdDownlink;
     const std::string currentValuePath =
         _pathPrefix + ".volumeThresholdDownlink";
 
@@ -92,7 +92,7 @@ bool UsageMonitoringData::validate(
   }
 
   if (nextVolThresholdIsSet()) {
-    const int64_t& value               = m_NextVolThreshold;
+    const int64_t &value = m_NextVolThreshold;
     const std::string currentValuePath = _pathPrefix + ".nextVolThreshold";
 
     if (value < 0ll) {
@@ -102,7 +102,7 @@ bool UsageMonitoringData::validate(
   }
 
   if (nextVolThresholdUplinkIsSet()) {
-    const int64_t& value = m_NextVolThresholdUplink;
+    const int64_t &value = m_NextVolThresholdUplink;
     const std::string currentValuePath =
         _pathPrefix + ".nextVolThresholdUplink";
 
@@ -113,7 +113,7 @@ bool UsageMonitoringData::validate(
   }
 
   if (nextVolThresholdDownlinkIsSet()) {
-    const int64_t& value = m_NextVolThresholdDownlink;
+    const int64_t &value = m_NextVolThresholdDownlink;
     const std::string currentValuePath =
         _pathPrefix + ".nextVolThresholdDownlink";
 
@@ -124,8 +124,8 @@ bool UsageMonitoringData::validate(
   }
 
   if (exUsagePccRuleIdsIsSet()) {
-    const std::vector<std::string>& value = m_ExUsagePccRuleIds;
-    const std::string currentValuePath    = _pathPrefix + ".exUsagePccRuleIds";
+    const std::vector<std::string> &value = m_ExUsagePccRuleIds;
+    const std::string currentValuePath = _pathPrefix + ".exUsagePccRuleIds";
 
     if (value.size() < 1) {
       success = false;
@@ -148,7 +148,7 @@ bool UsageMonitoringData::validate(
   return success;
 }
 
-bool UsageMonitoringData::operator==(const UsageMonitoringData& rhs) const {
+bool UsageMonitoringData::operator==(const UsageMonitoringData &rhs) const {
   return
 
       (getUmId() == rhs.getUmId()) &&
@@ -203,33 +203,38 @@ bool UsageMonitoringData::operator==(const UsageMonitoringData& rhs) const {
           ;
 }
 
-bool UsageMonitoringData::operator!=(const UsageMonitoringData& rhs) const {
+bool UsageMonitoringData::operator!=(const UsageMonitoringData &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const UsageMonitoringData& o) {
-  j         = nlohmann::json();
+void to_json(nlohmann::json &j, const UsageMonitoringData &o) {
+  j = nlohmann::json();
   j["umId"] = o.m_UmId;
-  if (o.volumeThresholdIsSet()) j["volumeThreshold"] = o.m_VolumeThreshold;
+  if (o.volumeThresholdIsSet())
+    j["volumeThreshold"] = o.m_VolumeThreshold;
   if (o.volumeThresholdUplinkIsSet())
     j["volumeThresholdUplink"] = o.m_VolumeThresholdUplink;
   if (o.volumeThresholdDownlinkIsSet())
     j["volumeThresholdDownlink"] = o.m_VolumeThresholdDownlink;
-  if (o.timeThresholdIsSet()) j["timeThreshold"] = o.m_TimeThreshold;
-  if (o.monitoringTimeIsSet()) j["monitoringTime"] = o.m_MonitoringTime;
-  if (o.nextVolThresholdIsSet()) j["nextVolThreshold"] = o.m_NextVolThreshold;
+  if (o.timeThresholdIsSet())
+    j["timeThreshold"] = o.m_TimeThreshold;
+  if (o.monitoringTimeIsSet())
+    j["monitoringTime"] = o.m_MonitoringTime;
+  if (o.nextVolThresholdIsSet())
+    j["nextVolThreshold"] = o.m_NextVolThreshold;
   if (o.nextVolThresholdUplinkIsSet())
     j["nextVolThresholdUplink"] = o.m_NextVolThresholdUplink;
   if (o.nextVolThresholdDownlinkIsSet())
     j["nextVolThresholdDownlink"] = o.m_NextVolThresholdDownlink;
   if (o.nextTimeThresholdIsSet())
     j["nextTimeThreshold"] = o.m_NextTimeThreshold;
-  if (o.inactivityTimeIsSet()) j["inactivityTime"] = o.m_InactivityTime;
+  if (o.inactivityTimeIsSet())
+    j["inactivityTime"] = o.m_InactivityTime;
   if (o.exUsagePccRuleIdsIsSet() || !o.m_ExUsagePccRuleIds.empty())
     j["exUsagePccRuleIds"] = o.m_ExUsagePccRuleIds;
 }
 
-void from_json(const nlohmann::json& j, UsageMonitoringData& o) {
+void from_json(const nlohmann::json &j, UsageMonitoringData &o) {
   j.at("umId").get_to(o.m_UmId);
   if (j.find("volumeThreshold") != j.end()) {
     j.at("volumeThreshold").get_to(o.m_VolumeThreshold);
@@ -277,17 +282,13 @@ void from_json(const nlohmann::json& j, UsageMonitoringData& o) {
   }
 }
 
-std::string UsageMonitoringData::getUmId() const {
-  return m_UmId;
-}
-void UsageMonitoringData::setUmId(std::string const& value) {
-  m_UmId = value;
-}
+std::string UsageMonitoringData::getUmId() const { return m_UmId; }
+void UsageMonitoringData::setUmId(std::string const &value) { m_UmId = value; }
 int64_t UsageMonitoringData::getVolumeThreshold() const {
   return m_VolumeThreshold;
 }
 void UsageMonitoringData::setVolumeThreshold(int64_t const value) {
-  m_VolumeThreshold      = value;
+  m_VolumeThreshold = value;
   m_VolumeThresholdIsSet = true;
 }
 bool UsageMonitoringData::volumeThresholdIsSet() const {
@@ -300,7 +301,7 @@ int64_t UsageMonitoringData::getVolumeThresholdUplink() const {
   return m_VolumeThresholdUplink;
 }
 void UsageMonitoringData::setVolumeThresholdUplink(int64_t const value) {
-  m_VolumeThresholdUplink      = value;
+  m_VolumeThresholdUplink = value;
   m_VolumeThresholdUplinkIsSet = true;
 }
 bool UsageMonitoringData::volumeThresholdUplinkIsSet() const {
@@ -313,7 +314,7 @@ int64_t UsageMonitoringData::getVolumeThresholdDownlink() const {
   return m_VolumeThresholdDownlink;
 }
 void UsageMonitoringData::setVolumeThresholdDownlink(int64_t const value) {
-  m_VolumeThresholdDownlink      = value;
+  m_VolumeThresholdDownlink = value;
   m_VolumeThresholdDownlinkIsSet = true;
 }
 bool UsageMonitoringData::volumeThresholdDownlinkIsSet() const {
@@ -326,20 +327,18 @@ int32_t UsageMonitoringData::getTimeThreshold() const {
   return m_TimeThreshold;
 }
 void UsageMonitoringData::setTimeThreshold(int32_t const value) {
-  m_TimeThreshold      = value;
+  m_TimeThreshold = value;
   m_TimeThresholdIsSet = true;
 }
 bool UsageMonitoringData::timeThresholdIsSet() const {
   return m_TimeThresholdIsSet;
 }
-void UsageMonitoringData::unsetTimeThreshold() {
-  m_TimeThresholdIsSet = false;
-}
+void UsageMonitoringData::unsetTimeThreshold() { m_TimeThresholdIsSet = false; }
 std::string UsageMonitoringData::getMonitoringTime() const {
   return m_MonitoringTime;
 }
-void UsageMonitoringData::setMonitoringTime(std::string const& value) {
-  m_MonitoringTime      = value;
+void UsageMonitoringData::setMonitoringTime(std::string const &value) {
+  m_MonitoringTime = value;
   m_MonitoringTimeIsSet = true;
 }
 bool UsageMonitoringData::monitoringTimeIsSet() const {
@@ -352,7 +351,7 @@ int64_t UsageMonitoringData::getNextVolThreshold() const {
   return m_NextVolThreshold;
 }
 void UsageMonitoringData::setNextVolThreshold(int64_t const value) {
-  m_NextVolThreshold      = value;
+  m_NextVolThreshold = value;
   m_NextVolThresholdIsSet = true;
 }
 bool UsageMonitoringData::nextVolThresholdIsSet() const {
@@ -365,7 +364,7 @@ int64_t UsageMonitoringData::getNextVolThresholdUplink() const {
   return m_NextVolThresholdUplink;
 }
 void UsageMonitoringData::setNextVolThresholdUplink(int64_t const value) {
-  m_NextVolThresholdUplink      = value;
+  m_NextVolThresholdUplink = value;
   m_NextVolThresholdUplinkIsSet = true;
 }
 bool UsageMonitoringData::nextVolThresholdUplinkIsSet() const {
@@ -378,7 +377,7 @@ int64_t UsageMonitoringData::getNextVolThresholdDownlink() const {
   return m_NextVolThresholdDownlink;
 }
 void UsageMonitoringData::setNextVolThresholdDownlink(int64_t const value) {
-  m_NextVolThresholdDownlink      = value;
+  m_NextVolThresholdDownlink = value;
   m_NextVolThresholdDownlinkIsSet = true;
 }
 bool UsageMonitoringData::nextVolThresholdDownlinkIsSet() const {
@@ -391,7 +390,7 @@ int32_t UsageMonitoringData::getNextTimeThreshold() const {
   return m_NextTimeThreshold;
 }
 void UsageMonitoringData::setNextTimeThreshold(int32_t const value) {
-  m_NextTimeThreshold      = value;
+  m_NextTimeThreshold = value;
   m_NextTimeThresholdIsSet = true;
 }
 bool UsageMonitoringData::nextTimeThresholdIsSet() const {
@@ -404,7 +403,7 @@ int32_t UsageMonitoringData::getInactivityTime() const {
   return m_InactivityTime;
 }
 void UsageMonitoringData::setInactivityTime(int32_t const value) {
-  m_InactivityTime      = value;
+  m_InactivityTime = value;
   m_InactivityTimeIsSet = true;
 }
 bool UsageMonitoringData::inactivityTimeIsSet() const {
@@ -417,8 +416,8 @@ std::vector<std::string> UsageMonitoringData::getExUsagePccRuleIds() const {
   return m_ExUsagePccRuleIds;
 }
 void UsageMonitoringData::setExUsagePccRuleIds(
-    std::vector<std::string> const& value) {
-  m_ExUsagePccRuleIds      = value;
+    std::vector<std::string> const &value) {
+  m_ExUsagePccRuleIds = value;
   m_ExUsagePccRuleIdsIsSet = true;
 }
 bool UsageMonitoringData::exUsagePccRuleIdsIsSet() const {
@@ -428,4 +427,4 @@ void UsageMonitoringData::unsetExUsagePccRuleIds() {
   m_ExUsagePccRuleIdsIsSet = false;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

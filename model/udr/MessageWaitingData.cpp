@@ -18,9 +18,7 @@
 
 namespace oai::udr::model {
 
-MessageWaitingData::MessageWaitingData() {
-  m_MwdListIsSet = false;
-}
+MessageWaitingData::MessageWaitingData() { m_MwdListIsSet = false; }
 
 MessageWaitingData::~MessageWaitingData() {}
 
@@ -28,30 +26,25 @@ void MessageWaitingData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const MessageWaitingData& o) {
+void to_json(nlohmann::json &j, const MessageWaitingData &o) {
   j = nlohmann::json();
-  if (o.mwdListIsSet() || !o.m_MwdList.empty()) j["mwdList"] = o.m_MwdList;
+  if (o.mwdListIsSet() || !o.m_MwdList.empty())
+    j["mwdList"] = o.m_MwdList;
 }
 
-void from_json(const nlohmann::json& j, MessageWaitingData& o) {
+void from_json(const nlohmann::json &j, MessageWaitingData &o) {
   if (j.find("mwdList") != j.end()) {
     j.at("mwdList").get_to(o.m_MwdList);
     o.m_MwdListIsSet = true;
   }
 }
 
-std::vector<SmscData>& MessageWaitingData::getMwdList() {
-  return m_MwdList;
-}
-void MessageWaitingData::setMwdList(std::vector<SmscData> const& value) {
-  m_MwdList      = value;
+std::vector<SmscData> &MessageWaitingData::getMwdList() { return m_MwdList; }
+void MessageWaitingData::setMwdList(std::vector<SmscData> const &value) {
+  m_MwdList = value;
   m_MwdListIsSet = true;
 }
-bool MessageWaitingData::mwdListIsSet() const {
-  return m_MwdListIsSet;
-}
-void MessageWaitingData::unsetMwdList() {
-  m_MwdListIsSet = false;
-}
+bool MessageWaitingData::mwdListIsSet() const { return m_MwdListIsSet; }
+void MessageWaitingData::unsetMwdList() { m_MwdListIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

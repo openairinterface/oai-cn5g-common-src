@@ -21,14 +21,14 @@ typedef struct asn_SEQUENCE_specifics_s {
   /*
    * Tags to members mapping table (sorted).
    */
-  const asn_TYPE_tag2member_t* tag2el;
+  const asn_TYPE_tag2member_t *tag2el;
   unsigned tag2el_count;
 
   /*
    * Optional members of the extensions root (roms) or additions (aoms).
    * Meaningful for PER.
    */
-  const int* oms;      /* Optional MemberS */
+  const int *oms;      /* Optional MemberS */
   unsigned roms_count; /* Root optional members count */
   unsigned aoms_count; /* Additions optional members count */
 

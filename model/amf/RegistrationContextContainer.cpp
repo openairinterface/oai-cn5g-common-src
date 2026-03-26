@@ -16,21 +16,21 @@
 namespace oai::model::amf {
 
 RegistrationContextContainer::RegistrationContextContainer() {
-  m_LocalTimeZone            = "";
-  m_LocalTimeZoneIsSet       = false;
-  m_AnN2ApId                 = 0;
-  m_InitialAmfName           = "";
-  m_RrcEstCause              = "";
-  m_RrcEstCauseIsSet         = false;
-  m_UeContextRequest         = false;
-  m_UeContextRequestIsSet    = false;
-  m_AnN2IPv4Addr             = "";
-  m_AnN2IPv4AddrIsSet        = false;
-  m_AnN2IPv6AddrIsSet        = false;
-  m_AllowedNssaiIsSet        = false;
-  m_ConfiguredNssaiIsSet     = false;
+  m_LocalTimeZone = "";
+  m_LocalTimeZoneIsSet = false;
+  m_AnN2ApId = 0;
+  m_InitialAmfName = "";
+  m_RrcEstCause = "";
+  m_RrcEstCauseIsSet = false;
+  m_UeContextRequest = false;
+  m_UeContextRequestIsSet = false;
+  m_AnN2IPv4Addr = "";
+  m_AnN2IPv4AddrIsSet = false;
+  m_AnN2IPv6AddrIsSet = false;
+  m_AllowedNssaiIsSet = false;
+  m_ConfiguredNssaiIsSet = false;
   m_RejectedNssaiInPlmnIsSet = false;
-  m_RejectedNssaiInTaIsSet   = false;
+  m_RejectedNssaiInTaIsSet = false;
 }
 
 RegistrationContextContainer::~RegistrationContextContainer() {}
@@ -39,28 +39,35 @@ void RegistrationContextContainer::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const RegistrationContextContainer& o) {
-  j              = nlohmann::json();
+void to_json(nlohmann::json &j, const RegistrationContextContainer &o) {
+  j = nlohmann::json();
   j["ueContext"] = o.m_UeContext;
-  if (o.localTimeZoneIsSet()) j["localTimeZone"] = o.m_LocalTimeZone;
-  j["anType"]         = o.m_AnType;
-  j["anN2ApId"]       = o.m_AnN2ApId;
-  j["ranNodeId"]      = o.m_RanNodeId;
+  if (o.localTimeZoneIsSet())
+    j["localTimeZone"] = o.m_LocalTimeZone;
+  j["anType"] = o.m_AnType;
+  j["anN2ApId"] = o.m_AnN2ApId;
+  j["ranNodeId"] = o.m_RanNodeId;
   j["initialAmfName"] = o.m_InitialAmfName;
-  j["userLocation"]   = o.m_UserLocation;
-  if (o.rrcEstCauseIsSet()) j["rrcEstCause"] = o.m_RrcEstCause;
-  if (o.ueContextRequestIsSet()) j["ueContextRequest"] = o.m_UeContextRequest;
-  if (o.anN2IPv4AddrIsSet()) j["anN2IPv4Addr"] = o.m_AnN2IPv4Addr;
-  if (o.anN2IPv6AddrIsSet()) j["anN2IPv6Addr"] = o.m_AnN2IPv6Addr;
-  if (o.allowedNssaiIsSet()) j["allowedNssai"] = o.m_AllowedNssai;
-  if (o.configuredNssaiIsSet()) j["configuredNssai"] = o.m_ConfiguredNssai;
+  j["userLocation"] = o.m_UserLocation;
+  if (o.rrcEstCauseIsSet())
+    j["rrcEstCause"] = o.m_RrcEstCause;
+  if (o.ueContextRequestIsSet())
+    j["ueContextRequest"] = o.m_UeContextRequest;
+  if (o.anN2IPv4AddrIsSet())
+    j["anN2IPv4Addr"] = o.m_AnN2IPv4Addr;
+  if (o.anN2IPv6AddrIsSet())
+    j["anN2IPv6Addr"] = o.m_AnN2IPv6Addr;
+  if (o.allowedNssaiIsSet())
+    j["allowedNssai"] = o.m_AllowedNssai;
+  if (o.configuredNssaiIsSet())
+    j["configuredNssai"] = o.m_ConfiguredNssai;
   if (o.rejectedNssaiInPlmnIsSet())
     j["rejectedNssaiInPlmn"] = o.m_RejectedNssaiInPlmn;
   if (o.rejectedNssaiInTaIsSet())
     j["rejectedNssaiInTa"] = o.m_RejectedNssaiInTa;
 }
 
-void from_json(const nlohmann::json& j, RegistrationContextContainer& o) {
+void from_json(const nlohmann::json &j, RegistrationContextContainer &o) {
   j.at("ueContext").get_to(o.m_UeContext);
   if (j.find("localTimeZone") != j.end()) {
     j.at("localTimeZone").get_to(o.m_LocalTimeZone);
@@ -108,14 +115,14 @@ void from_json(const nlohmann::json& j, RegistrationContextContainer& o) {
 UeContext RegistrationContextContainer::getUeContext() const {
   return m_UeContext;
 }
-void RegistrationContextContainer::setUeContext(UeContext const& value) {
+void RegistrationContextContainer::setUeContext(UeContext const &value) {
   m_UeContext = value;
 }
 std::string RegistrationContextContainer::getLocalTimeZone() const {
   return m_LocalTimeZone;
 }
-void RegistrationContextContainer::setLocalTimeZone(std::string const& value) {
-  m_LocalTimeZone      = value;
+void RegistrationContextContainer::setLocalTimeZone(std::string const &value) {
+  m_LocalTimeZone = value;
   m_LocalTimeZoneIsSet = true;
 }
 bool RegistrationContextContainer::localTimeZoneIsSet() const {
@@ -128,42 +135,40 @@ oai::model::common::AccessType RegistrationContextContainer::getAnType() const {
   return m_AnType;
 }
 void RegistrationContextContainer::setAnType(
-    oai::model::common::AccessType const& value) {
+    oai::model::common::AccessType const &value) {
   m_AnType = value;
 }
-int32_t RegistrationContextContainer::getAnN2ApId() const {
-  return m_AnN2ApId;
-}
+int32_t RegistrationContextContainer::getAnN2ApId() const { return m_AnN2ApId; }
 void RegistrationContextContainer::setAnN2ApId(int32_t const value) {
   m_AnN2ApId = value;
 }
-oai::model::common::GlobalRanNodeId RegistrationContextContainer::getRanNodeId()
-    const {
+oai::model::common::GlobalRanNodeId
+RegistrationContextContainer::getRanNodeId() const {
   return m_RanNodeId;
 }
 void RegistrationContextContainer::setRanNodeId(
-    oai::model::common::GlobalRanNodeId const& value) {
+    oai::model::common::GlobalRanNodeId const &value) {
   m_RanNodeId = value;
 }
 std::string RegistrationContextContainer::getInitialAmfName() const {
   return m_InitialAmfName;
 }
-void RegistrationContextContainer::setInitialAmfName(std::string const& value) {
+void RegistrationContextContainer::setInitialAmfName(std::string const &value) {
   m_InitialAmfName = value;
 }
-oai::model::common::UserLocation RegistrationContextContainer::getUserLocation()
-    const {
+oai::model::common::UserLocation
+RegistrationContextContainer::getUserLocation() const {
   return m_UserLocation;
 }
 void RegistrationContextContainer::setUserLocation(
-    oai::model::common::UserLocation const& value) {
+    oai::model::common::UserLocation const &value) {
   m_UserLocation = value;
 }
 std::string RegistrationContextContainer::getRrcEstCause() const {
   return m_RrcEstCause;
 }
-void RegistrationContextContainer::setRrcEstCause(std::string const& value) {
-  m_RrcEstCause      = value;
+void RegistrationContextContainer::setRrcEstCause(std::string const &value) {
+  m_RrcEstCause = value;
   m_RrcEstCauseIsSet = true;
 }
 bool RegistrationContextContainer::rrcEstCauseIsSet() const {
@@ -176,7 +181,7 @@ bool RegistrationContextContainer::isUeContextRequest() const {
   return m_UeContextRequest;
 }
 void RegistrationContextContainer::setUeContextRequest(bool const value) {
-  m_UeContextRequest      = value;
+  m_UeContextRequest = value;
   m_UeContextRequestIsSet = true;
 }
 bool RegistrationContextContainer::ueContextRequestIsSet() const {
@@ -188,8 +193,8 @@ void RegistrationContextContainer::unsetUeContextRequest() {
 std::string RegistrationContextContainer::getAnN2IPv4Addr() const {
   return m_AnN2IPv4Addr;
 }
-void RegistrationContextContainer::setAnN2IPv4Addr(std::string const& value) {
-  m_AnN2IPv4Addr      = value;
+void RegistrationContextContainer::setAnN2IPv4Addr(std::string const &value) {
+  m_AnN2IPv4Addr = value;
   m_AnN2IPv4AddrIsSet = true;
 }
 bool RegistrationContextContainer::anN2IPv4AddrIsSet() const {
@@ -201,8 +206,8 @@ void RegistrationContextContainer::unsetAnN2IPv4Addr() {
 std::string RegistrationContextContainer::getAnN2IPv6Addr() const {
   return m_AnN2IPv6Addr;
 }
-void RegistrationContextContainer::setAnN2IPv6Addr(std::string const& value) {
-  m_AnN2IPv6Addr      = value;
+void RegistrationContextContainer::setAnN2IPv6Addr(std::string const &value) {
+  m_AnN2IPv6Addr = value;
   m_AnN2IPv6AddrIsSet = true;
 }
 bool RegistrationContextContainer::anN2IPv6AddrIsSet() const {
@@ -214,8 +219,8 @@ void RegistrationContextContainer::unsetAnN2IPv6Addr() {
 AllowedNssai RegistrationContextContainer::getAllowedNssai() const {
   return m_AllowedNssai;
 }
-void RegistrationContextContainer::setAllowedNssai(AllowedNssai const& value) {
-  m_AllowedNssai      = value;
+void RegistrationContextContainer::setAllowedNssai(AllowedNssai const &value) {
+  m_AllowedNssai = value;
   m_AllowedNssaiIsSet = true;
 }
 bool RegistrationContextContainer::allowedNssaiIsSet() const {
@@ -224,7 +229,7 @@ bool RegistrationContextContainer::allowedNssaiIsSet() const {
 void RegistrationContextContainer::unsetAllowedNssai() {
   m_AllowedNssaiIsSet = false;
 }
-std::vector<ConfiguredSnssai>&
+std::vector<ConfiguredSnssai> &
 RegistrationContextContainer::getConfiguredNssai() {
   return m_ConfiguredNssai;
 }
@@ -234,7 +239,7 @@ bool RegistrationContextContainer::configuredNssaiIsSet() const {
 void RegistrationContextContainer::unsetConfiguredNssai() {
   m_ConfiguredNssaiIsSet = false;
 }
-std::vector<oai::model::common::Snssai>&
+std::vector<oai::model::common::Snssai> &
 RegistrationContextContainer::getRejectedNssaiInPlmn() {
   return m_RejectedNssaiInPlmn;
 }
@@ -244,7 +249,7 @@ bool RegistrationContextContainer::rejectedNssaiInPlmnIsSet() const {
 void RegistrationContextContainer::unsetRejectedNssaiInPlmn() {
   m_RejectedNssaiInPlmnIsSet = false;
 }
-std::vector<oai::model::common::Snssai>&
+std::vector<oai::model::common::Snssai> &
 RegistrationContextContainer::getRejectedNssaiInTa() {
   return m_RejectedNssaiInTa;
 }
@@ -255,4 +260,4 @@ void RegistrationContextContainer::unsetRejectedNssaiInTa() {
   m_RejectedNssaiInTaIsSet = false;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

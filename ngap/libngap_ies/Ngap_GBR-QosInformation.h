@@ -30,10 +30,10 @@ typedef struct Ngap_GBR_QosInformation {
   Ngap_BitRate_t maximumFlowBitRateUL;
   Ngap_BitRate_t guaranteedFlowBitRateDL;
   Ngap_BitRate_t guaranteedFlowBitRateUL;
-  Ngap_NotificationControl_t* notificationControl;       /* OPTIONAL */
-  Ngap_PacketLossRate_t* maximumPacketLossRateDL;        /* OPTIONAL */
-  Ngap_PacketLossRate_t* maximumPacketLossRateUL;        /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  Ngap_NotificationControl_t *notificationControl;       /* OPTIONAL */
+  Ngap_PacketLossRate_t *maximumPacketLossRateDL;        /* OPTIONAL */
+  Ngap_PacketLossRate_t *maximumPacketLossRateUL;        /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

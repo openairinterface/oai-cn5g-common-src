@@ -27,7 +27,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class RestrictionType_anyOf {
- public:
+public:
   RestrictionType_anyOf();
   virtual ~RestrictionType_anyOf() = default;
 
@@ -50,16 +50,16 @@ class RestrictionType_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const RestrictionType_anyOf& rhs) const;
-  bool operator!=(const RestrictionType_anyOf& rhs) const;
+  bool operator==(const RestrictionType_anyOf &rhs) const;
+  bool operator!=(const RestrictionType_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// RestrictionType_anyOf members
@@ -67,15 +67,15 @@ class RestrictionType_anyOf {
   RestrictionType_anyOf::eRestrictionType_anyOf getValue() const;
   void setValue(RestrictionType_anyOf::eRestrictionType_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const RestrictionType_anyOf& o);
-  friend void from_json(const nlohmann::json& j, RestrictionType_anyOf& o);
+  friend void to_json(nlohmann::json &j, const RestrictionType_anyOf &o);
+  friend void from_json(const nlohmann::json &j, RestrictionType_anyOf &o);
 
- protected:
+protected:
   RestrictionType_anyOf::eRestrictionType_anyOf m_value =
       RestrictionType_anyOf::eRestrictionType_anyOf::
           INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* RestrictionType_anyOf_H_ */

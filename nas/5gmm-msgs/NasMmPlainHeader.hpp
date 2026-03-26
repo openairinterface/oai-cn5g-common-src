@@ -17,7 +17,7 @@ namespace oai::nas {
 using namespace oai::nas;
 
 class NasMmPlainHeader : public Nas5gmmMessage {
- public:
+public:
   NasMmPlainHeader() : Nas5gmmMessage(){};
   NasMmPlainHeader(uint8_t epd);
   NasMmPlainHeader(uint8_t epd, uint8_t msg_type);
@@ -29,8 +29,8 @@ class NasMmPlainHeader : public Nas5gmmMessage {
   uint32_t GetLength() const override;
   bool Validate(uint32_t len) const override;
 
-  int Encode(uint8_t* buf, int len) override;
-  int Decode(uint8_t* buf, int len) override;
+  int Encode(uint8_t *buf, int len) override;
+  int Decode(uint8_t *buf, int len) override;
 
   void SetEpd(uint8_t epd);
   uint8_t GetEpd() const;
@@ -41,15 +41,15 @@ class NasMmPlainHeader : public Nas5gmmMessage {
   void SetMessageType(uint8_t type);
   uint8_t GetMessageType() const;
 
- private:
-  ExtendedProtocolDiscriminator epd_;    // Mandatory
-  SecurityHeaderType secu_header_type_;  // Mandatory (1/2 octet)
+private:
+  ExtendedProtocolDiscriminator epd_;   // Mandatory
+  SecurityHeaderType secu_header_type_; // Mandatory (1/2 octet)
   // TODO: Spare half octet (1/2 octet)
-  NasMessageType msg_type_;  // Mandatory
+  NasMessageType msg_type_; // Mandatory
 
-  std::string msg_name_;  // non 3GPP IE
+  std::string msg_name_; // non 3GPP IE
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

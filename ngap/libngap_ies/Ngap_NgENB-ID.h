@@ -38,7 +38,7 @@ typedef struct Ngap_NgENB_ID {
     BIT_STRING_t macroNgENB_ID;
     BIT_STRING_t shortMacroNgENB_ID;
     BIT_STRING_t longMacroNgENB_ID;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

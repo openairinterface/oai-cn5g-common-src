@@ -19,14 +19,14 @@
 #ifndef UeCampingRep_H_
 #define UeCampingRep_H_
 
-#include "PlmnIdNid.h"
-#include "NetLocAccessSupport.h"
-#include "RatType.h"
-#include <string>
-#include "UserLocation.h"
-#include "ServingNfIdentity.h"
 #include "AccessType.h"
+#include "NetLocAccessSupport.h"
+#include "PlmnIdNid.h"
+#include "RatType.h"
+#include "ServingNfIdentity.h"
+#include "UserLocation.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::pcf {
 
@@ -34,7 +34,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class UeCampingRep {
- public:
+public:
   UeCampingRep();
   virtual ~UeCampingRep() = default;
 
@@ -48,16 +48,16 @@ class UeCampingRep {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const UeCampingRep& rhs) const;
-  bool operator!=(const UeCampingRep& rhs) const;
+  bool operator==(const UeCampingRep &rhs) const;
+  bool operator!=(const UeCampingRep &rhs) const;
 
   /////////////////////////////////////////////
   /// UeCampingRep members
@@ -66,56 +66,56 @@ class UeCampingRep {
   ///
   /// </summary>
   oai::model::common::AccessType getAccessType() const;
-  void setAccessType(oai::model::common::AccessType const& value);
+  void setAccessType(oai::model::common::AccessType const &value);
   bool accessTypeIsSet() const;
   void unsetAccessType();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::RatType getRatType() const;
-  void setRatType(oai::model::common::RatType const& value);
+  void setRatType(oai::model::common::RatType const &value);
   bool ratTypeIsSet() const;
   void unsetRatType();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::ServingNfIdentity getServNfId() const;
-  void setServNfId(oai::model::pcf::ServingNfIdentity const& value);
+  void setServNfId(oai::model::pcf::ServingNfIdentity const &value);
   bool servNfIdIsSet() const;
   void unsetServNfId();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::PlmnIdNid getServingNetwork() const;
-  void setServingNetwork(oai::model::common::PlmnIdNid const& value);
+  void setServingNetwork(oai::model::common::PlmnIdNid const &value);
   bool servingNetworkIsSet() const;
   void unsetServingNetwork();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::UserLocation getUserLocationInfo() const;
-  void setUserLocationInfo(oai::model::common::UserLocation const& value);
+  void setUserLocationInfo(oai::model::common::UserLocation const &value);
   bool userLocationInfoIsSet() const;
   void unsetUserLocationInfo();
   /// <summary>
   ///
   /// </summary>
   std::string getUeTimeZone() const;
-  void setUeTimeZone(std::string const& value);
+  void setUeTimeZone(std::string const &value);
   bool ueTimeZoneIsSet() const;
   void unsetUeTimeZone();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::NetLocAccessSupport getNetLocAccSupp() const;
-  void setNetLocAccSupp(oai::model::pcf::NetLocAccessSupport const& value);
+  void setNetLocAccSupp(oai::model::pcf::NetLocAccessSupport const &value);
   bool netLocAccSuppIsSet() const;
   void unsetNetLocAccSupp();
 
-  friend void to_json(nlohmann::json& j, const UeCampingRep& o);
-  friend void from_json(const nlohmann::json& j, UeCampingRep& o);
+  friend void to_json(nlohmann::json &j, const UeCampingRep &o);
+  friend void from_json(const nlohmann::json &j, UeCampingRep &o);
 
- protected:
+protected:
   oai::model::common::AccessType m_AccessType;
   bool m_AccessTypeIsSet;
   oai::model::common::RatType m_RatType;
@@ -132,6 +132,6 @@ class UeCampingRep {
   bool m_NetLocAccSuppIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* UeCampingRep_H_ */

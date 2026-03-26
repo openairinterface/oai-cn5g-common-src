@@ -29,7 +29,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class UpIntegrityRm {
- public:
+public:
   UpIntegrityRm();
   virtual ~UpIntegrityRm() = default;
 
@@ -43,26 +43,26 @@ class UpIntegrityRm {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const UpIntegrityRm& rhs) const;
-  bool operator!=(const UpIntegrityRm& rhs) const;
+  bool operator==(const UpIntegrityRm &rhs) const;
+  bool operator!=(const UpIntegrityRm &rhs) const;
 
   /////////////////////////////////////////////
   /// UpIntegrityRm members
 
-  friend void to_json(nlohmann::json& j, const UpIntegrityRm& o);
-  friend void from_json(const nlohmann::json& j, UpIntegrityRm& o);
+  friend void to_json(nlohmann::json &j, const UpIntegrityRm &o);
+  friend void from_json(const nlohmann::json &j, UpIntegrityRm &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* UpIntegrityRm_H_ */

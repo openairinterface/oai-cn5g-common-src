@@ -16,11 +16,11 @@ extern "C" {
 namespace oai::ngap {
 
 class PduSessionResourceReleaseCommandTransfer {
- public:
+public:
   PduSessionResourceReleaseCommandTransfer();
   virtual ~PduSessionResourceReleaseCommandTransfer();
 
-  void setCause(const Cause& cause);
+  void setCause(const Cause &cause);
   void setCauseRadioNetwork(e_Ngap_CauseRadioNetwork causeValue);
   void setCauseTransport(e_Ngap_CauseTransport causeValue);
   void setCauseNas(e_Ngap_CauseNas causeValue);
@@ -30,16 +30,16 @@ class PduSessionResourceReleaseCommandTransfer {
   long getChoiceOfCause() const;
   long getCause() const;
 
-  int encode(uint8_t* buf, int bufSize);
-  void encode2NewBuffer(uint8_t*& buf, int& encoded_size);
-  bool decode(uint8_t* buf, int bufSize);
+  int encode(uint8_t *buf, int bufSize);
+  void encode2NewBuffer(uint8_t *&buf, int &encoded_size);
+  bool decode(uint8_t *buf, int bufSize);
 
- private:
-  Ngap_PDUSessionResourceReleaseCommandTransfer_t*
-      m_PduSessionResourceReleaseCommandTransferIe;
+private:
+  Ngap_PDUSessionResourceReleaseCommandTransfer_t
+      *m_PduSessionResourceReleaseCommandTransferIe;
 
-  Cause m_CauseValue;  // Mandatory
+  Cause m_CauseValue; // Mandatory
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

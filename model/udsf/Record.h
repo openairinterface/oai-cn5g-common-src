@@ -19,10 +19,9 @@
 #ifndef Record_H_
 #define Record_H_
 
-#include <nlohmann/json.hpp>
 #include "RecordMeta.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::udsf {
 
@@ -30,7 +29,7 @@ namespace oai::model::udsf {
 /// Definition of a Record
 /// </summary>
 class Record {
- public:
+public:
   Record();
   virtual ~Record() = default;
 
@@ -44,16 +43,16 @@ class Record {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const Record& rhs) const;
-  bool operator!=(const Record& rhs) const;
+  bool operator==(const Record &rhs) const;
+  bool operator!=(const Record &rhs) const;
 
   /////////////////////////////////////////////
   /// Record members
@@ -62,25 +61,25 @@ class Record {
   ///
   /// </summary>
   oai::model::udsf::RecordMeta getMeta() const;
-  void setMeta(oai::model::udsf::RecordMeta const& value);
+  void setMeta(oai::model::udsf::RecordMeta const &value);
   /// <summary>
   /// list of opaque Block&#39;s in this Record
   /// </summary>
   std::vector<nlohmann::json> getBlocks() const;
-  void setBlocks(std::vector<nlohmann::json> const& value);
+  void setBlocks(std::vector<nlohmann::json> const &value);
   bool blocksIsSet() const;
   void unsetBlocks();
 
-  friend void to_json(nlohmann::json& j, const Record& o);
-  friend void from_json(const nlohmann::json& j, Record& o);
+  friend void to_json(nlohmann::json &j, const Record &o);
+  friend void from_json(const nlohmann::json &j, Record &o);
 
- protected:
+protected:
   oai::model::udsf::RecordMeta m_Meta;
 
   std::vector<nlohmann::json> m_Blocks;
   bool m_BlocksIsSet;
 };
 
-}  // namespace oai::model::udsf
+} // namespace oai::model::udsf
 
 #endif /* Record_H_ */

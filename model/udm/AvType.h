@@ -30,7 +30,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class AvType {
- public:
+public:
   AvType();
   virtual ~AvType();
 
@@ -39,12 +39,12 @@ class AvType {
   /////////////////////////////////////////////
   /// AvType members
 
-  friend void to_json(nlohmann::json& j, const AvType& o);
-  friend void from_json(const nlohmann::json& j, AvType& o);
+  friend void to_json(nlohmann::json &j, const AvType &o);
+  friend void from_json(const nlohmann::json &j, AvType &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* AvType_H_ */

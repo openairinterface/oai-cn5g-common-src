@@ -9,23 +9,22 @@
 
 constexpr uint8_t k5gsRegistrationResultLength = 3;
 constexpr uint8_t k5gsRegistrationResultContentLength =
-    k5gsRegistrationResultLength -
-    2;  // Minimum length - 2 bytes for IEI/Length
+    k5gsRegistrationResultLength - 2; // Minimum length - 2 bytes for IEI/Length
 constexpr auto k5gsRegistrationResultIeName = "5GS Registration Result";
 
 namespace oai::nas {
 
 class _5gsRegistrationResult : public Type4NasIe {
- public:
+public:
   _5gsRegistrationResult();
   _5gsRegistrationResult(uint8_t iei);
   _5gsRegistrationResult(bool emergency, bool nssaa, bool sms, uint8_t value);
-  _5gsRegistrationResult(
-      uint8_t iei, bool emergency, bool nssaa, bool sms, uint8_t value);
+  _5gsRegistrationResult(uint8_t iei, bool emergency, bool nssaa, bool sms,
+                         uint8_t value);
   virtual ~_5gsRegistrationResult();
 
-  int Encode(uint8_t* buf, int len) const override;
-  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+  int Encode(uint8_t *buf, int len) const override;
+  int Decode(const uint8_t *const buf, int len, bool is_iei = false) override;
 
   static std::string GetIeName() { return k5gsRegistrationResultIeName; }
 
@@ -35,12 +34,12 @@ class _5gsRegistrationResult : public Type4NasIe {
   void Set(uint8_t iei, bool emergency, bool nssaa, bool sms, uint8_t value);
   void Set(bool emergency, bool nssaa, bool sms, uint8_t value);
 
- private:
+private:
   bool emergency_registered_;
   bool nssaa_performed_;
   bool sms_allowed_;
   uint8_t value_;
 };
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

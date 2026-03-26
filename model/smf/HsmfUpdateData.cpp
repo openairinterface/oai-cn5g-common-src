@@ -18,42 +18,42 @@ namespace oai::model::smf {
 using namespace oai::model::common;
 
 HsmfUpdateData::HsmfUpdateData() {
-  m_Pei                          = "";
-  m_PeiIsSet                     = false;
-  m_VcnTunnelInfoIsSet           = false;
-  m_ServingNetworkIsSet          = false;
-  m_AnTypeIsSet                  = false;
-  m_SecondAnTypeIsSet            = false;
-  m_RatTypeIsSet                 = false;
-  m_UeLocationIsSet              = false;
-  m_UeTimeZone                   = "";
-  m_UeTimeZoneIsSet              = false;
-  m_AddUeLocationIsSet           = false;
-  m_PauseCharging                = false;
-  m_PauseChargingIsSet           = false;
-  m_Pti                          = 0;
-  m_PtiIsSet                     = false;
-  m_N1SmInfoFromUeIsSet          = false;
-  m_UnknownN1SmInfoIsSet         = false;
-  m_QosFlowsRelNotifyListIsSet   = false;
-  m_QosFlowsNotifyListIsSet      = false;
-  m_NotifyListIsSet              = false;
-  m_EpsBearerIdIsSet             = false;
-  m_HoPreparationIndication      = false;
+  m_Pei = "";
+  m_PeiIsSet = false;
+  m_VcnTunnelInfoIsSet = false;
+  m_ServingNetworkIsSet = false;
+  m_AnTypeIsSet = false;
+  m_SecondAnTypeIsSet = false;
+  m_RatTypeIsSet = false;
+  m_UeLocationIsSet = false;
+  m_UeTimeZone = "";
+  m_UeTimeZoneIsSet = false;
+  m_AddUeLocationIsSet = false;
+  m_PauseCharging = false;
+  m_PauseChargingIsSet = false;
+  m_Pti = 0;
+  m_PtiIsSet = false;
+  m_N1SmInfoFromUeIsSet = false;
+  m_UnknownN1SmInfoIsSet = false;
+  m_QosFlowsRelNotifyListIsSet = false;
+  m_QosFlowsNotifyListIsSet = false;
+  m_NotifyListIsSet = false;
+  m_EpsBearerIdIsSet = false;
+  m_HoPreparationIndication = false;
   m_HoPreparationIndicationIsSet = false;
-  m_RevokeEbiListIsSet           = false;
-  m_CauseIsSet                   = false;
-  m_NgApCauseIsSet               = false;
-  m__5gMmCauseValue              = 0;
-  m__5gMmCauseValueIsSet         = false;
-  m_AlwaysOnRequested            = false;
-  m_AlwaysOnRequestedIsSet       = false;
-  m_EpsInterworkingIndIsSet      = false;
+  m_RevokeEbiListIsSet = false;
+  m_CauseIsSet = false;
+  m_NgApCauseIsSet = false;
+  m__5gMmCauseValue = 0;
+  m__5gMmCauseValueIsSet = false;
+  m_AlwaysOnRequested = false;
+  m_AlwaysOnRequestedIsSet = false;
+  m_EpsInterworkingIndIsSet = false;
   m_SecondaryRatUsageReportIsSet = false;
-  m_SecondaryRatUsageInfoIsSet   = false;
-  m_AnTypeCanBeChanged           = false;
-  m_AnTypeCanBeChangedIsSet      = false;
-  m_MaReleaseIndIsSet            = false;
+  m_SecondaryRatUsageInfoIsSet = false;
+  m_AnTypeCanBeChanged = false;
+  m_AnTypeCanBeChangedIsSet = false;
+  m_MaReleaseIndIsSet = false;
 }
 
 HsmfUpdateData::~HsmfUpdateData() {}
@@ -62,34 +62,53 @@ void HsmfUpdateData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const HsmfUpdateData& o) {
-  j                      = nlohmann::json();
+void to_json(nlohmann::json &j, const HsmfUpdateData &o) {
+  j = nlohmann::json();
   j["requestIndication"] = o.m_RequestIndication;
-  if (o.peiIsSet()) j["pei"] = o.m_Pei;
-  if (o.vcnTunnelInfoIsSet()) j["vcnTunnelInfo"] = o.m_VcnTunnelInfo;
-  if (o.servingNetworkIsSet()) j["servingNetwork"] = o.m_ServingNetwork;
-  if (o.anTypeIsSet()) j["anType"] = o.m_AnType;
-  if (o.secondAnTypeIsSet()) j["secondAnType"] = o.m_SecondAnType;
-  if (o.ratTypeIsSet()) j["ratType"] = o.m_RatType;
-  if (o.ueLocationIsSet()) j["ueLocation"] = o.m_UeLocation;
-  if (o.ueTimeZoneIsSet()) j["ueTimeZone"] = o.m_UeTimeZone;
-  if (o.addUeLocationIsSet()) j["addUeLocation"] = o.m_AddUeLocation;
-  if (o.pauseChargingIsSet()) j["pauseCharging"] = o.m_PauseCharging;
-  if (o.ptiIsSet()) j["pti"] = o.m_Pti;
-  if (o.n1SmInfoFromUeIsSet()) j["n1SmInfoFromUe"] = o.m_N1SmInfoFromUe;
-  if (o.unknownN1SmInfoIsSet()) j["unknownN1SmInfo"] = o.m_UnknownN1SmInfo;
+  if (o.peiIsSet())
+    j["pei"] = o.m_Pei;
+  if (o.vcnTunnelInfoIsSet())
+    j["vcnTunnelInfo"] = o.m_VcnTunnelInfo;
+  if (o.servingNetworkIsSet())
+    j["servingNetwork"] = o.m_ServingNetwork;
+  if (o.anTypeIsSet())
+    j["anType"] = o.m_AnType;
+  if (o.secondAnTypeIsSet())
+    j["secondAnType"] = o.m_SecondAnType;
+  if (o.ratTypeIsSet())
+    j["ratType"] = o.m_RatType;
+  if (o.ueLocationIsSet())
+    j["ueLocation"] = o.m_UeLocation;
+  if (o.ueTimeZoneIsSet())
+    j["ueTimeZone"] = o.m_UeTimeZone;
+  if (o.addUeLocationIsSet())
+    j["addUeLocation"] = o.m_AddUeLocation;
+  if (o.pauseChargingIsSet())
+    j["pauseCharging"] = o.m_PauseCharging;
+  if (o.ptiIsSet())
+    j["pti"] = o.m_Pti;
+  if (o.n1SmInfoFromUeIsSet())
+    j["n1SmInfoFromUe"] = o.m_N1SmInfoFromUe;
+  if (o.unknownN1SmInfoIsSet())
+    j["unknownN1SmInfo"] = o.m_UnknownN1SmInfo;
   if (o.qosFlowsRelNotifyListIsSet())
     j["qosFlowsRelNotifyList"] = o.m_QosFlowsRelNotifyList;
   if (o.qosFlowsNotifyListIsSet())
     j["qosFlowsNotifyList"] = o.m_QosFlowsNotifyList;
-  if (o.notifyListIsSet()) j["NotifyList"] = o.m_NotifyList;
-  if (o.epsBearerIdIsSet()) j["epsBearerId"] = o.m_EpsBearerId;
+  if (o.notifyListIsSet())
+    j["NotifyList"] = o.m_NotifyList;
+  if (o.epsBearerIdIsSet())
+    j["epsBearerId"] = o.m_EpsBearerId;
   if (o.hoPreparationIndicationIsSet())
     j["hoPreparationIndication"] = o.m_HoPreparationIndication;
-  if (o.revokeEbiListIsSet()) j["revokeEbiList"] = o.m_RevokeEbiList;
-  if (o.causeIsSet()) j["cause"] = o.m_Cause;
-  if (o.ngApCauseIsSet()) j["ngApCause"] = o.m_NgApCause;
-  if (o._5gMmCauseValueIsSet()) j["5gMmCauseValue"] = o.m__5gMmCauseValue;
+  if (o.revokeEbiListIsSet())
+    j["revokeEbiList"] = o.m_RevokeEbiList;
+  if (o.causeIsSet())
+    j["cause"] = o.m_Cause;
+  if (o.ngApCauseIsSet())
+    j["ngApCause"] = o.m_NgApCause;
+  if (o._5gMmCauseValueIsSet())
+    j["5gMmCauseValue"] = o.m__5gMmCauseValue;
   if (o.alwaysOnRequestedIsSet())
     j["alwaysOnRequested"] = o.m_AlwaysOnRequested;
   if (o.epsInterworkingIndIsSet())
@@ -100,10 +119,11 @@ void to_json(nlohmann::json& j, const HsmfUpdateData& o) {
     j["secondaryRatUsageInfo"] = o.m_SecondaryRatUsageInfo;
   if (o.anTypeCanBeChangedIsSet())
     j["anTypeCanBeChanged"] = o.m_AnTypeCanBeChanged;
-  if (o.maReleaseIndIsSet()) j["maReleaseInd"] = o.m_MaReleaseInd;
+  if (o.maReleaseIndIsSet())
+    j["maReleaseInd"] = o.m_MaReleaseInd;
 }
 
-void from_json(const nlohmann::json& j, HsmfUpdateData& o) {
+void from_json(const nlohmann::json &j, HsmfUpdateData &o) {
   j.at("requestIndication").get_to(o.m_RequestIndication);
   if (j.find("pei") != j.end()) {
     j.at("pei").get_to(o.m_Pei);
@@ -222,179 +242,113 @@ void from_json(const nlohmann::json& j, HsmfUpdateData& o) {
 RequestIndication HsmfUpdateData::getRequestIndication() const {
   return m_RequestIndication;
 }
-void HsmfUpdateData::setRequestIndication(RequestIndication const& value) {
+void HsmfUpdateData::setRequestIndication(RequestIndication const &value) {
   m_RequestIndication = value;
 }
-std::string HsmfUpdateData::getPei() const {
-  return m_Pei;
-}
-void HsmfUpdateData::setPei(std::string const& value) {
-  m_Pei      = value;
+std::string HsmfUpdateData::getPei() const { return m_Pei; }
+void HsmfUpdateData::setPei(std::string const &value) {
+  m_Pei = value;
   m_PeiIsSet = true;
 }
-bool HsmfUpdateData::peiIsSet() const {
-  return m_PeiIsSet;
-}
-void HsmfUpdateData::unsetPei() {
-  m_PeiIsSet = false;
-}
-TunnelInfo HsmfUpdateData::getVcnTunnelInfo() const {
-  return m_VcnTunnelInfo;
-}
-void HsmfUpdateData::setVcnTunnelInfo(TunnelInfo const& value) {
-  m_VcnTunnelInfo      = value;
+bool HsmfUpdateData::peiIsSet() const { return m_PeiIsSet; }
+void HsmfUpdateData::unsetPei() { m_PeiIsSet = false; }
+TunnelInfo HsmfUpdateData::getVcnTunnelInfo() const { return m_VcnTunnelInfo; }
+void HsmfUpdateData::setVcnTunnelInfo(TunnelInfo const &value) {
+  m_VcnTunnelInfo = value;
   m_VcnTunnelInfoIsSet = true;
 }
-bool HsmfUpdateData::vcnTunnelInfoIsSet() const {
-  return m_VcnTunnelInfoIsSet;
-}
-void HsmfUpdateData::unsetVcnTunnelInfo() {
-  m_VcnTunnelInfoIsSet = false;
-}
-PlmnId HsmfUpdateData::getServingNetwork() const {
-  return m_ServingNetwork;
-}
-void HsmfUpdateData::setServingNetwork(PlmnId const& value) {
-  m_ServingNetwork      = value;
+bool HsmfUpdateData::vcnTunnelInfoIsSet() const { return m_VcnTunnelInfoIsSet; }
+void HsmfUpdateData::unsetVcnTunnelInfo() { m_VcnTunnelInfoIsSet = false; }
+PlmnId HsmfUpdateData::getServingNetwork() const { return m_ServingNetwork; }
+void HsmfUpdateData::setServingNetwork(PlmnId const &value) {
+  m_ServingNetwork = value;
   m_ServingNetworkIsSet = true;
 }
 bool HsmfUpdateData::servingNetworkIsSet() const {
   return m_ServingNetworkIsSet;
 }
-void HsmfUpdateData::unsetServingNetwork() {
-  m_ServingNetworkIsSet = false;
-}
-AccessType HsmfUpdateData::getAnType() const {
-  return m_AnType;
-}
-void HsmfUpdateData::setAnType(AccessType const& value) {
-  m_AnType      = value;
+void HsmfUpdateData::unsetServingNetwork() { m_ServingNetworkIsSet = false; }
+AccessType HsmfUpdateData::getAnType() const { return m_AnType; }
+void HsmfUpdateData::setAnType(AccessType const &value) {
+  m_AnType = value;
   m_AnTypeIsSet = true;
 }
-bool HsmfUpdateData::anTypeIsSet() const {
-  return m_AnTypeIsSet;
-}
-void HsmfUpdateData::unsetAnType() {
-  m_AnTypeIsSet = false;
-}
-AccessType HsmfUpdateData::getSecondAnType() const {
-  return m_SecondAnType;
-}
-void HsmfUpdateData::setSecondAnType(AccessType const& value) {
-  m_SecondAnType      = value;
+bool HsmfUpdateData::anTypeIsSet() const { return m_AnTypeIsSet; }
+void HsmfUpdateData::unsetAnType() { m_AnTypeIsSet = false; }
+AccessType HsmfUpdateData::getSecondAnType() const { return m_SecondAnType; }
+void HsmfUpdateData::setSecondAnType(AccessType const &value) {
+  m_SecondAnType = value;
   m_SecondAnTypeIsSet = true;
 }
-bool HsmfUpdateData::secondAnTypeIsSet() const {
-  return m_SecondAnTypeIsSet;
-}
-void HsmfUpdateData::unsetSecondAnType() {
-  m_SecondAnTypeIsSet = false;
-}
-RatType HsmfUpdateData::getRatType() const {
-  return m_RatType;
-}
-void HsmfUpdateData::setRatType(RatType const& value) {
-  m_RatType      = value;
+bool HsmfUpdateData::secondAnTypeIsSet() const { return m_SecondAnTypeIsSet; }
+void HsmfUpdateData::unsetSecondAnType() { m_SecondAnTypeIsSet = false; }
+RatType HsmfUpdateData::getRatType() const { return m_RatType; }
+void HsmfUpdateData::setRatType(RatType const &value) {
+  m_RatType = value;
   m_RatTypeIsSet = true;
 }
-bool HsmfUpdateData::ratTypeIsSet() const {
-  return m_RatTypeIsSet;
-}
-void HsmfUpdateData::unsetRatType() {
-  m_RatTypeIsSet = false;
-}
-UserLocation HsmfUpdateData::getUeLocation() const {
-  return m_UeLocation;
-}
-void HsmfUpdateData::setUeLocation(UserLocation const& value) {
-  m_UeLocation      = value;
+bool HsmfUpdateData::ratTypeIsSet() const { return m_RatTypeIsSet; }
+void HsmfUpdateData::unsetRatType() { m_RatTypeIsSet = false; }
+UserLocation HsmfUpdateData::getUeLocation() const { return m_UeLocation; }
+void HsmfUpdateData::setUeLocation(UserLocation const &value) {
+  m_UeLocation = value;
   m_UeLocationIsSet = true;
 }
-bool HsmfUpdateData::ueLocationIsSet() const {
-  return m_UeLocationIsSet;
-}
-void HsmfUpdateData::unsetUeLocation() {
-  m_UeLocationIsSet = false;
-}
-std::string HsmfUpdateData::getUeTimeZone() const {
-  return m_UeTimeZone;
-}
-void HsmfUpdateData::setUeTimeZone(std::string const& value) {
-  m_UeTimeZone      = value;
+bool HsmfUpdateData::ueLocationIsSet() const { return m_UeLocationIsSet; }
+void HsmfUpdateData::unsetUeLocation() { m_UeLocationIsSet = false; }
+std::string HsmfUpdateData::getUeTimeZone() const { return m_UeTimeZone; }
+void HsmfUpdateData::setUeTimeZone(std::string const &value) {
+  m_UeTimeZone = value;
   m_UeTimeZoneIsSet = true;
 }
-bool HsmfUpdateData::ueTimeZoneIsSet() const {
-  return m_UeTimeZoneIsSet;
-}
-void HsmfUpdateData::unsetUeTimeZone() {
-  m_UeTimeZoneIsSet = false;
-}
+bool HsmfUpdateData::ueTimeZoneIsSet() const { return m_UeTimeZoneIsSet; }
+void HsmfUpdateData::unsetUeTimeZone() { m_UeTimeZoneIsSet = false; }
 UserLocation HsmfUpdateData::getAddUeLocation() const {
   return m_AddUeLocation;
 }
-void HsmfUpdateData::setAddUeLocation(UserLocation const& value) {
-  m_AddUeLocation      = value;
+void HsmfUpdateData::setAddUeLocation(UserLocation const &value) {
+  m_AddUeLocation = value;
   m_AddUeLocationIsSet = true;
 }
-bool HsmfUpdateData::addUeLocationIsSet() const {
-  return m_AddUeLocationIsSet;
-}
-void HsmfUpdateData::unsetAddUeLocation() {
-  m_AddUeLocationIsSet = false;
-}
-bool HsmfUpdateData::isPauseCharging() const {
-  return m_PauseCharging;
-}
+bool HsmfUpdateData::addUeLocationIsSet() const { return m_AddUeLocationIsSet; }
+void HsmfUpdateData::unsetAddUeLocation() { m_AddUeLocationIsSet = false; }
+bool HsmfUpdateData::isPauseCharging() const { return m_PauseCharging; }
 void HsmfUpdateData::setPauseCharging(bool const value) {
-  m_PauseCharging      = value;
+  m_PauseCharging = value;
   m_PauseChargingIsSet = true;
 }
-bool HsmfUpdateData::pauseChargingIsSet() const {
-  return m_PauseChargingIsSet;
-}
-void HsmfUpdateData::unsetPauseCharging() {
-  m_PauseChargingIsSet = false;
-}
-int32_t HsmfUpdateData::getPti() const {
-  return m_Pti;
-}
+bool HsmfUpdateData::pauseChargingIsSet() const { return m_PauseChargingIsSet; }
+void HsmfUpdateData::unsetPauseCharging() { m_PauseChargingIsSet = false; }
+int32_t HsmfUpdateData::getPti() const { return m_Pti; }
 void HsmfUpdateData::setPti(int32_t const value) {
-  m_Pti      = value;
+  m_Pti = value;
   m_PtiIsSet = true;
 }
-bool HsmfUpdateData::ptiIsSet() const {
-  return m_PtiIsSet;
-}
-void HsmfUpdateData::unsetPti() {
-  m_PtiIsSet = false;
-}
+bool HsmfUpdateData::ptiIsSet() const { return m_PtiIsSet; }
+void HsmfUpdateData::unsetPti() { m_PtiIsSet = false; }
 RefToBinaryData HsmfUpdateData::getN1SmInfoFromUe() const {
   return m_N1SmInfoFromUe;
 }
-void HsmfUpdateData::setN1SmInfoFromUe(RefToBinaryData const& value) {
-  m_N1SmInfoFromUe      = value;
+void HsmfUpdateData::setN1SmInfoFromUe(RefToBinaryData const &value) {
+  m_N1SmInfoFromUe = value;
   m_N1SmInfoFromUeIsSet = true;
 }
 bool HsmfUpdateData::n1SmInfoFromUeIsSet() const {
   return m_N1SmInfoFromUeIsSet;
 }
-void HsmfUpdateData::unsetN1SmInfoFromUe() {
-  m_N1SmInfoFromUeIsSet = false;
-}
+void HsmfUpdateData::unsetN1SmInfoFromUe() { m_N1SmInfoFromUeIsSet = false; }
 RefToBinaryData HsmfUpdateData::getUnknownN1SmInfo() const {
   return m_UnknownN1SmInfo;
 }
-void HsmfUpdateData::setUnknownN1SmInfo(RefToBinaryData const& value) {
-  m_UnknownN1SmInfo      = value;
+void HsmfUpdateData::setUnknownN1SmInfo(RefToBinaryData const &value) {
+  m_UnknownN1SmInfo = value;
   m_UnknownN1SmInfoIsSet = true;
 }
 bool HsmfUpdateData::unknownN1SmInfoIsSet() const {
   return m_UnknownN1SmInfoIsSet;
 }
-void HsmfUpdateData::unsetUnknownN1SmInfo() {
-  m_UnknownN1SmInfoIsSet = false;
-}
-std::vector<QosFlowItem>& HsmfUpdateData::getQosFlowsRelNotifyList() {
+void HsmfUpdateData::unsetUnknownN1SmInfo() { m_UnknownN1SmInfoIsSet = false; }
+std::vector<QosFlowItem> &HsmfUpdateData::getQosFlowsRelNotifyList() {
   return m_QosFlowsRelNotifyList;
 }
 bool HsmfUpdateData::qosFlowsRelNotifyListIsSet() const {
@@ -403,7 +357,7 @@ bool HsmfUpdateData::qosFlowsRelNotifyListIsSet() const {
 void HsmfUpdateData::unsetQosFlowsRelNotifyList() {
   m_QosFlowsRelNotifyListIsSet = false;
 }
-std::vector<QosFlowNotifyItem>& HsmfUpdateData::getQosFlowsNotifyList() {
+std::vector<QosFlowNotifyItem> &HsmfUpdateData::getQosFlowsNotifyList() {
   return m_QosFlowsNotifyList;
 }
 bool HsmfUpdateData::qosFlowsNotifyListIsSet() const {
@@ -412,29 +366,19 @@ bool HsmfUpdateData::qosFlowsNotifyListIsSet() const {
 void HsmfUpdateData::unsetQosFlowsNotifyList() {
   m_QosFlowsNotifyListIsSet = false;
 }
-std::vector<PduSessionNotifyItem>& HsmfUpdateData::getNotifyList() {
+std::vector<PduSessionNotifyItem> &HsmfUpdateData::getNotifyList() {
   return m_NotifyList;
 }
-bool HsmfUpdateData::notifyListIsSet() const {
-  return m_NotifyListIsSet;
-}
-void HsmfUpdateData::unsetNotifyList() {
-  m_NotifyListIsSet = false;
-}
-std::vector<int32_t>& HsmfUpdateData::getEpsBearerId() {
-  return m_EpsBearerId;
-}
-bool HsmfUpdateData::epsBearerIdIsSet() const {
-  return m_EpsBearerIdIsSet;
-}
-void HsmfUpdateData::unsetEpsBearerId() {
-  m_EpsBearerIdIsSet = false;
-}
+bool HsmfUpdateData::notifyListIsSet() const { return m_NotifyListIsSet; }
+void HsmfUpdateData::unsetNotifyList() { m_NotifyListIsSet = false; }
+std::vector<int32_t> &HsmfUpdateData::getEpsBearerId() { return m_EpsBearerId; }
+bool HsmfUpdateData::epsBearerIdIsSet() const { return m_EpsBearerIdIsSet; }
+void HsmfUpdateData::unsetEpsBearerId() { m_EpsBearerIdIsSet = false; }
 bool HsmfUpdateData::isHoPreparationIndication() const {
   return m_HoPreparationIndication;
 }
 void HsmfUpdateData::setHoPreparationIndication(bool const value) {
-  m_HoPreparationIndication      = value;
+  m_HoPreparationIndication = value;
   m_HoPreparationIndicationIsSet = true;
 }
 bool HsmfUpdateData::hoPreparationIndicationIsSet() const {
@@ -443,59 +387,37 @@ bool HsmfUpdateData::hoPreparationIndicationIsSet() const {
 void HsmfUpdateData::unsetHoPreparationIndication() {
   m_HoPreparationIndicationIsSet = false;
 }
-std::vector<int32_t>& HsmfUpdateData::getRevokeEbiList() {
+std::vector<int32_t> &HsmfUpdateData::getRevokeEbiList() {
   return m_RevokeEbiList;
 }
-bool HsmfUpdateData::revokeEbiListIsSet() const {
-  return m_RevokeEbiListIsSet;
-}
-void HsmfUpdateData::unsetRevokeEbiList() {
-  m_RevokeEbiListIsSet = false;
-}
-Cause HsmfUpdateData::getCause() const {
-  return m_Cause;
-}
-void HsmfUpdateData::setCause(Cause const& value) {
-  m_Cause      = value;
+bool HsmfUpdateData::revokeEbiListIsSet() const { return m_RevokeEbiListIsSet; }
+void HsmfUpdateData::unsetRevokeEbiList() { m_RevokeEbiListIsSet = false; }
+Cause HsmfUpdateData::getCause() const { return m_Cause; }
+void HsmfUpdateData::setCause(Cause const &value) {
+  m_Cause = value;
   m_CauseIsSet = true;
 }
-bool HsmfUpdateData::causeIsSet() const {
-  return m_CauseIsSet;
-}
-void HsmfUpdateData::unsetCause() {
-  m_CauseIsSet = false;
-}
-NgApCause HsmfUpdateData::getNgApCause() const {
-  return m_NgApCause;
-}
-void HsmfUpdateData::setNgApCause(NgApCause const& value) {
-  m_NgApCause      = value;
+bool HsmfUpdateData::causeIsSet() const { return m_CauseIsSet; }
+void HsmfUpdateData::unsetCause() { m_CauseIsSet = false; }
+NgApCause HsmfUpdateData::getNgApCause() const { return m_NgApCause; }
+void HsmfUpdateData::setNgApCause(NgApCause const &value) {
+  m_NgApCause = value;
   m_NgApCauseIsSet = true;
 }
-bool HsmfUpdateData::ngApCauseIsSet() const {
-  return m_NgApCauseIsSet;
-}
-void HsmfUpdateData::unsetNgApCause() {
-  m_NgApCauseIsSet = false;
-}
-int32_t HsmfUpdateData::get5gMmCauseValue() const {
-  return m__5gMmCauseValue;
-}
+bool HsmfUpdateData::ngApCauseIsSet() const { return m_NgApCauseIsSet; }
+void HsmfUpdateData::unsetNgApCause() { m_NgApCauseIsSet = false; }
+int32_t HsmfUpdateData::get5gMmCauseValue() const { return m__5gMmCauseValue; }
 void HsmfUpdateData::set5gMmCauseValue(int32_t const value) {
-  m__5gMmCauseValue      = value;
+  m__5gMmCauseValue = value;
   m__5gMmCauseValueIsSet = true;
 }
 bool HsmfUpdateData::_5gMmCauseValueIsSet() const {
   return m__5gMmCauseValueIsSet;
 }
-void HsmfUpdateData::unset_5gMmCauseValue() {
-  m__5gMmCauseValueIsSet = false;
-}
-bool HsmfUpdateData::isAlwaysOnRequested() const {
-  return m_AlwaysOnRequested;
-}
+void HsmfUpdateData::unset_5gMmCauseValue() { m__5gMmCauseValueIsSet = false; }
+bool HsmfUpdateData::isAlwaysOnRequested() const { return m_AlwaysOnRequested; }
 void HsmfUpdateData::setAlwaysOnRequested(bool const value) {
-  m_AlwaysOnRequested      = value;
+  m_AlwaysOnRequested = value;
   m_AlwaysOnRequestedIsSet = true;
 }
 bool HsmfUpdateData::alwaysOnRequestedIsSet() const {
@@ -508,8 +430,8 @@ EpsInterworkingIndication HsmfUpdateData::getEpsInterworkingInd() const {
   return m_EpsInterworkingInd;
 }
 void HsmfUpdateData::setEpsInterworkingInd(
-    EpsInterworkingIndication const& value) {
-  m_EpsInterworkingInd      = value;
+    EpsInterworkingIndication const &value) {
+  m_EpsInterworkingInd = value;
   m_EpsInterworkingIndIsSet = true;
 }
 bool HsmfUpdateData::epsInterworkingIndIsSet() const {
@@ -518,7 +440,7 @@ bool HsmfUpdateData::epsInterworkingIndIsSet() const {
 void HsmfUpdateData::unsetEpsInterworkingInd() {
   m_EpsInterworkingIndIsSet = false;
 }
-std::vector<SecondaryRatUsageReport>&
+std::vector<SecondaryRatUsageReport> &
 HsmfUpdateData::getSecondaryRatUsageReport() {
   return m_SecondaryRatUsageReport;
 }
@@ -528,7 +450,7 @@ bool HsmfUpdateData::secondaryRatUsageReportIsSet() const {
 void HsmfUpdateData::unsetSecondaryRatUsageReport() {
   m_SecondaryRatUsageReportIsSet = false;
 }
-std::vector<SecondaryRatUsageInfo>& HsmfUpdateData::getSecondaryRatUsageInfo() {
+std::vector<SecondaryRatUsageInfo> &HsmfUpdateData::getSecondaryRatUsageInfo() {
   return m_SecondaryRatUsageInfo;
 }
 bool HsmfUpdateData::secondaryRatUsageInfoIsSet() const {
@@ -541,7 +463,7 @@ bool HsmfUpdateData::isAnTypeCanBeChanged() const {
   return m_AnTypeCanBeChanged;
 }
 void HsmfUpdateData::setAnTypeCanBeChanged(bool const value) {
-  m_AnTypeCanBeChanged      = value;
+  m_AnTypeCanBeChanged = value;
   m_AnTypeCanBeChangedIsSet = true;
 }
 bool HsmfUpdateData::anTypeCanBeChangedIsSet() const {
@@ -553,15 +475,11 @@ void HsmfUpdateData::unsetAnTypeCanBeChanged() {
 MaReleaseIndication HsmfUpdateData::getMaReleaseInd() const {
   return m_MaReleaseInd;
 }
-void HsmfUpdateData::setMaReleaseInd(MaReleaseIndication const& value) {
-  m_MaReleaseInd      = value;
+void HsmfUpdateData::setMaReleaseInd(MaReleaseIndication const &value) {
+  m_MaReleaseInd = value;
   m_MaReleaseIndIsSet = true;
 }
-bool HsmfUpdateData::maReleaseIndIsSet() const {
-  return m_MaReleaseIndIsSet;
-}
-void HsmfUpdateData::unsetMaReleaseInd() {
-  m_MaReleaseIndIsSet = false;
-}
+bool HsmfUpdateData::maReleaseIndIsSet() const { return m_MaReleaseIndIsSet; }
+void HsmfUpdateData::unsetMaReleaseInd() { m_MaReleaseIndIsSet = false; }
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

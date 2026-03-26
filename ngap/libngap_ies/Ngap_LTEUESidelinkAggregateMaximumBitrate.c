@@ -12,9 +12,8 @@
 asn_TYPE_member_t asn_MBR_Ngap_LTEUESidelinkAggregateMaximumBitrate_1[] = {
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_LTEUESidelinkAggregateMaximumBitrate,
-         uESidelinkAggregateMaximumBitRate),
+     offsetof(struct Ngap_LTEUESidelinkAggregateMaximumBitrate,
+              uESidelinkAggregateMaximumBitRate),
      (ASN_TAG_CLASS_CONTEXT | (0 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_BitRate,

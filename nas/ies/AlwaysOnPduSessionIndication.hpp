@@ -12,10 +12,10 @@ namespace oai::nas {
 constexpr auto kAlwaysOnPduSessionIndicationIeName =
     "Always-on PDU Session Indication";
 constexpr uint8_t kAlwaysOnPduSessionNotAllowed = 0;
-constexpr uint8_t kAlwaysOnPduSessionRequired   = 1;
+constexpr uint8_t kAlwaysOnPduSessionRequired = 1;
 
 class AlwaysOnPduSessionIndication : public Type1NasIeFormatTv {
- public:
+public:
   AlwaysOnPduSessionIndication();
   AlwaysOnPduSessionIndication(uint8_t iei);
   AlwaysOnPduSessionIndication(uint8_t iei, uint8_t type);
@@ -31,10 +31,10 @@ class AlwaysOnPduSessionIndication : public Type1NasIeFormatTv {
   void SetApsi(bool apsi);
   bool IsApsi();
 
- private:
+private:
   bool apsi_;
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

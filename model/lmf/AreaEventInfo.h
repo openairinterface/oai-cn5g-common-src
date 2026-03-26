@@ -19,10 +19,10 @@
 #ifndef AreaEventInfo_H_
 #define AreaEventInfo_H_
 
-#include "ReportingArea.h"
 #include "OccurrenceInfo.h"
-#include <vector>
+#include "ReportingArea.h"
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::lmf {
 
@@ -30,7 +30,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class AreaEventInfo {
- public:
+public:
   AreaEventInfo();
   virtual ~AreaEventInfo() = default;
 
@@ -44,16 +44,16 @@ class AreaEventInfo {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const AreaEventInfo& rhs) const;
-  bool operator!=(const AreaEventInfo& rhs) const;
+  bool operator==(const AreaEventInfo &rhs) const;
+  bool operator!=(const AreaEventInfo &rhs) const;
 
   /////////////////////////////////////////////
   /// AreaEventInfo members
@@ -62,13 +62,13 @@ class AreaEventInfo {
   ///
   /// </summary>
   std::vector<oai::model::lmf::ReportingArea> getAreaDefinition() const;
-  void setAreaDefinition(
-      std::vector<oai::model::lmf::ReportingArea> const& value);
+  void
+  setAreaDefinition(std::vector<oai::model::lmf::ReportingArea> const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::lmf::OccurrenceInfo getOccurrenceInfo() const;
-  void setOccurrenceInfo(oai::model::lmf::OccurrenceInfo const& value);
+  void setOccurrenceInfo(oai::model::lmf::OccurrenceInfo const &value);
   bool occurrenceInfoIsSet() const;
   void unsetOccurrenceInfo();
   /// <summary>
@@ -107,10 +107,10 @@ class AreaEventInfo {
   bool reportingLocationReqIsSet() const;
   void unsetReportingLocationReq();
 
-  friend void to_json(nlohmann::json& j, const AreaEventInfo& o);
-  friend void from_json(const nlohmann::json& j, AreaEventInfo& o);
+  friend void to_json(nlohmann::json &j, const AreaEventInfo &o);
+  friend void from_json(const nlohmann::json &j, AreaEventInfo &o);
 
- protected:
+protected:
   std::vector<oai::model::lmf::ReportingArea> m_AreaDefinition;
 
   oai::model::lmf::OccurrenceInfo m_OccurrenceInfo;
@@ -127,6 +127,6 @@ class AreaEventInfo {
   bool m_ReportingLocationReqIsSet;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* AreaEventInfo_H_ */

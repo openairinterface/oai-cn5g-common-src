@@ -18,12 +18,12 @@ namespace oai::model::smf {
 using namespace oai::model::common;
 
 PduSessionCreateError::PduSessionCreateError() {
-  m_N1smCause         = "";
-  m_N1smCauseIsSet    = false;
+  m_N1smCause = "";
+  m_N1smCauseIsSet = false;
   m_N1SmInfoToUeIsSet = false;
-  m_BackOffTimer      = 0;
+  m_BackOffTimer = 0;
   m_BackOffTimerIsSet = false;
-  m_RecoveryTime      = "";
+  m_RecoveryTime = "";
   m_RecoveryTimeIsSet = false;
 }
 
@@ -33,16 +33,20 @@ void PduSessionCreateError::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const PduSessionCreateError& o) {
-  j          = nlohmann::json();
+void to_json(nlohmann::json &j, const PduSessionCreateError &o) {
+  j = nlohmann::json();
   j["error"] = o.m_Error;
-  if (o.n1smCauseIsSet()) j["n1smCause"] = o.m_N1smCause;
-  if (o.n1SmInfoToUeIsSet()) j["n1SmInfoToUe"] = o.m_N1SmInfoToUe;
-  if (o.backOffTimerIsSet()) j["backOffTimer"] = o.m_BackOffTimer;
-  if (o.recoveryTimeIsSet()) j["recoveryTime"] = o.m_RecoveryTime;
+  if (o.n1smCauseIsSet())
+    j["n1smCause"] = o.m_N1smCause;
+  if (o.n1SmInfoToUeIsSet())
+    j["n1SmInfoToUe"] = o.m_N1SmInfoToUe;
+  if (o.backOffTimerIsSet())
+    j["backOffTimer"] = o.m_BackOffTimer;
+  if (o.recoveryTimeIsSet())
+    j["recoveryTime"] = o.m_RecoveryTime;
 }
 
-void from_json(const nlohmann::json& j, PduSessionCreateError& o) {
+void from_json(const nlohmann::json &j, PduSessionCreateError &o) {
   j.at("error").get_to(o.m_Error);
   if (j.find("n1smCause") != j.end()) {
     j.at("n1smCause").get_to(o.m_N1smCause);
@@ -62,63 +66,49 @@ void from_json(const nlohmann::json& j, PduSessionCreateError& o) {
   }
 }
 
-ProblemDetails PduSessionCreateError::getError() const {
-  return m_Error;
-}
-void PduSessionCreateError::setError(ProblemDetails const& value) {
+ProblemDetails PduSessionCreateError::getError() const { return m_Error; }
+void PduSessionCreateError::setError(ProblemDetails const &value) {
   m_Error = value;
 }
-std::string PduSessionCreateError::getN1smCause() const {
-  return m_N1smCause;
-}
-void PduSessionCreateError::setN1smCause(std::string const& value) {
-  m_N1smCause      = value;
+std::string PduSessionCreateError::getN1smCause() const { return m_N1smCause; }
+void PduSessionCreateError::setN1smCause(std::string const &value) {
+  m_N1smCause = value;
   m_N1smCauseIsSet = true;
 }
-bool PduSessionCreateError::n1smCauseIsSet() const {
-  return m_N1smCauseIsSet;
-}
-void PduSessionCreateError::unsetN1smCause() {
-  m_N1smCauseIsSet = false;
-}
+bool PduSessionCreateError::n1smCauseIsSet() const { return m_N1smCauseIsSet; }
+void PduSessionCreateError::unsetN1smCause() { m_N1smCauseIsSet = false; }
 RefToBinaryData PduSessionCreateError::getN1SmInfoToUe() const {
   return m_N1SmInfoToUe;
 }
-void PduSessionCreateError::setN1SmInfoToUe(RefToBinaryData const& value) {
-  m_N1SmInfoToUe      = value;
+void PduSessionCreateError::setN1SmInfoToUe(RefToBinaryData const &value) {
+  m_N1SmInfoToUe = value;
   m_N1SmInfoToUeIsSet = true;
 }
 bool PduSessionCreateError::n1SmInfoToUeIsSet() const {
   return m_N1SmInfoToUeIsSet;
 }
-void PduSessionCreateError::unsetN1SmInfoToUe() {
-  m_N1SmInfoToUeIsSet = false;
-}
+void PduSessionCreateError::unsetN1SmInfoToUe() { m_N1SmInfoToUeIsSet = false; }
 int32_t PduSessionCreateError::getBackOffTimer() const {
   return m_BackOffTimer;
 }
 void PduSessionCreateError::setBackOffTimer(int32_t const value) {
-  m_BackOffTimer      = value;
+  m_BackOffTimer = value;
   m_BackOffTimerIsSet = true;
 }
 bool PduSessionCreateError::backOffTimerIsSet() const {
   return m_BackOffTimerIsSet;
 }
-void PduSessionCreateError::unsetBackOffTimer() {
-  m_BackOffTimerIsSet = false;
-}
+void PduSessionCreateError::unsetBackOffTimer() { m_BackOffTimerIsSet = false; }
 std::string PduSessionCreateError::getRecoveryTime() const {
   return m_RecoveryTime;
 }
-void PduSessionCreateError::setRecoveryTime(std::string const& value) {
-  m_RecoveryTime      = value;
+void PduSessionCreateError::setRecoveryTime(std::string const &value) {
+  m_RecoveryTime = value;
   m_RecoveryTimeIsSet = true;
 }
 bool PduSessionCreateError::recoveryTimeIsSet() const {
   return m_RecoveryTimeIsSet;
 }
-void PduSessionCreateError::unsetRecoveryTime() {
-  m_RecoveryTimeIsSet = false;
-}
+void PduSessionCreateError::unsetRecoveryTime() { m_RecoveryTimeIsSet = false; }
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

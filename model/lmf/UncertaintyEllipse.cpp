@@ -19,8 +19,8 @@
 namespace oai::model::lmf {
 
 UncertaintyEllipse::UncertaintyEllipse() {
-  m_SemiMajor        = 0.0f;
-  m_SemiMinor        = 0.0f;
+  m_SemiMajor = 0.0f;
+  m_SemiMinor = 0.0f;
   m_OrientationMajor = 0;
 }
 
@@ -31,18 +31,18 @@ void UncertaintyEllipse::validate() const {
   }
 }
 
-bool UncertaintyEllipse::validate(std::stringstream& msg) const {
+bool UncertaintyEllipse::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool UncertaintyEllipse::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool UncertaintyEllipse::validate(std::stringstream &msg,
+                                  const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "UncertaintyEllipse" : pathPrefix;
 
   /* SemiMajor */ {
-    const float& value                 = m_SemiMajor;
+    const float &value = m_SemiMajor;
     const std::string currentValuePath = _pathPrefix + ".semiMajor";
 
     if (value < static_cast<float>(0)) {
@@ -52,7 +52,7 @@ bool UncertaintyEllipse::validate(
   }
 
   /* SemiMinor */ {
-    const float& value                 = m_SemiMinor;
+    const float &value = m_SemiMinor;
     const std::string currentValuePath = _pathPrefix + ".semiMinor";
 
     if (value < static_cast<float>(0)) {
@@ -62,7 +62,7 @@ bool UncertaintyEllipse::validate(
   }
 
   /* OrientationMajor */ {
-    const int32_t& value               = m_OrientationMajor;
+    const int32_t &value = m_OrientationMajor;
     const std::string currentValuePath = _pathPrefix + ".orientationMajor";
 
     if (value < 0) {
@@ -78,7 +78,7 @@ bool UncertaintyEllipse::validate(
   return success;
 }
 
-bool UncertaintyEllipse::operator==(const UncertaintyEllipse& rhs) const {
+bool UncertaintyEllipse::operator==(const UncertaintyEllipse &rhs) const {
   return
 
       (getSemiMajor() == rhs.getSemiMajor()) &&
@@ -90,32 +90,28 @@ bool UncertaintyEllipse::operator==(const UncertaintyEllipse& rhs) const {
           ;
 }
 
-bool UncertaintyEllipse::operator!=(const UncertaintyEllipse& rhs) const {
+bool UncertaintyEllipse::operator!=(const UncertaintyEllipse &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const UncertaintyEllipse& o) {
-  j                     = nlohmann::json();
-  j["semiMajor"]        = o.m_SemiMajor;
-  j["semiMinor"]        = o.m_SemiMinor;
+void to_json(nlohmann::json &j, const UncertaintyEllipse &o) {
+  j = nlohmann::json();
+  j["semiMajor"] = o.m_SemiMajor;
+  j["semiMinor"] = o.m_SemiMinor;
   j["orientationMajor"] = o.m_OrientationMajor;
 }
 
-void from_json(const nlohmann::json& j, UncertaintyEllipse& o) {
+void from_json(const nlohmann::json &j, UncertaintyEllipse &o) {
   j.at("semiMajor").get_to(o.m_SemiMajor);
   j.at("semiMinor").get_to(o.m_SemiMinor);
   j.at("orientationMajor").get_to(o.m_OrientationMajor);
 }
 
-float UncertaintyEllipse::getSemiMajor() const {
-  return m_SemiMajor;
-}
+float UncertaintyEllipse::getSemiMajor() const { return m_SemiMajor; }
 void UncertaintyEllipse::setSemiMajor(float const value) {
   m_SemiMajor = value;
 }
-float UncertaintyEllipse::getSemiMinor() const {
-  return m_SemiMinor;
-}
+float UncertaintyEllipse::getSemiMinor() const { return m_SemiMinor; }
 void UncertaintyEllipse::setSemiMinor(float const value) {
   m_SemiMinor = value;
 }
@@ -126,4 +122,4 @@ void UncertaintyEllipse::setOrientationMajor(int32_t const value) {
   m_OrientationMajor = value;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

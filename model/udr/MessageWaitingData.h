@@ -33,7 +33,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class MessageWaitingData {
- public:
+public:
   MessageWaitingData();
   virtual ~MessageWaitingData();
 
@@ -45,19 +45,19 @@ class MessageWaitingData {
   /// <summary>
   ///
   /// </summary>
-  std::vector<SmscData>& getMwdList();
-  void setMwdList(std::vector<SmscData> const& value);
+  std::vector<SmscData> &getMwdList();
+  void setMwdList(std::vector<SmscData> const &value);
   bool mwdListIsSet() const;
   void unsetMwdList();
 
-  friend void to_json(nlohmann::json& j, const MessageWaitingData& o);
-  friend void from_json(const nlohmann::json& j, MessageWaitingData& o);
+  friend void to_json(nlohmann::json &j, const MessageWaitingData &o);
+  friend void from_json(const nlohmann::json &j, MessageWaitingData &o);
 
- protected:
+protected:
   std::vector<SmscData> m_MwdList;
   bool m_MwdListIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* MessageWaitingData_H_ */

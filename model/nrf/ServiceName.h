@@ -27,7 +27,7 @@ namespace oai::model::nrf {
 ///
 /// </summary>
 class ServiceName {
- public:
+public:
   ServiceName();
   virtual ~ServiceName();
 
@@ -36,12 +36,12 @@ class ServiceName {
   /////////////////////////////////////////////
   /// ServiceName members
 
-  friend void to_json(nlohmann::json& j, const ServiceName& o);
-  friend void from_json(const nlohmann::json& j, ServiceName& o);
+  friend void to_json(nlohmann::json &j, const ServiceName &o);
+  friend void from_json(const nlohmann::json &j, ServiceName &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* ServiceName_H_ */

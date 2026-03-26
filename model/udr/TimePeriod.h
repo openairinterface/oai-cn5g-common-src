@@ -32,7 +32,7 @@ namespace oai::udr::model {
 /// Contains the periodicity for the defined usage monitoring data limits.
 /// </summary>
 class TimePeriod {
- public:
+public:
   TimePeriod();
   virtual ~TimePeriod();
 
@@ -45,7 +45,7 @@ class TimePeriod {
   ///
   /// </summary>
   Periodicity getPeriod() const;
-  void setPeriod(Periodicity const& value);
+  void setPeriod(Periodicity const &value);
   /// <summary>
   ///
   /// </summary>
@@ -54,16 +54,16 @@ class TimePeriod {
   bool maxNumPeriodIsSet() const;
   void unsetMaxNumPeriod();
 
-  friend void to_json(nlohmann::json& j, const TimePeriod& o);
-  friend void from_json(const nlohmann::json& j, TimePeriod& o);
+  friend void to_json(nlohmann::json &j, const TimePeriod &o);
+  friend void from_json(const nlohmann::json &j, TimePeriod &o);
 
- protected:
+protected:
   Periodicity m_Period;
 
   int32_t m_MaxNumPeriod;
   bool m_MaxNumPeriodIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* TimePeriod_H_ */

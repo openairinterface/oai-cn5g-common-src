@@ -21,8 +21,8 @@
 
 #include "LinksValueSchema.h"
 #include <map>
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::nrf {
 
@@ -30,7 +30,7 @@ namespace oai::model::nrf {
 ///
 /// </summary>
 class Inline_response_200 {
- public:
+public:
   Inline_response_200();
   virtual ~Inline_response_200();
 
@@ -43,20 +43,20 @@ class Inline_response_200 {
   /// List of the URI of NF instances. It has two members whose names are item
   /// and self. The item one contains an array of URIs.
   /// </summary>
-  std::map<std::string, oai::model::common::LinksValueSchema>& getLinks();
+  std::map<std::string, oai::model::common::LinksValueSchema> &getLinks();
   void setLinks(
-      std::map<std::string, oai::model::common::LinksValueSchema> const& value);
+      std::map<std::string, oai::model::common::LinksValueSchema> const &value);
   bool linksIsSet() const;
   void unset_links();
 
-  friend void to_json(nlohmann::json& j, const Inline_response_200& o);
-  friend void from_json(const nlohmann::json& j, Inline_response_200& o);
+  friend void to_json(nlohmann::json &j, const Inline_response_200 &o);
+  friend void from_json(const nlohmann::json &j, Inline_response_200 &o);
 
- protected:
+protected:
   std::map<std::string, oai::model::common::LinksValueSchema> m__links;
   bool m__linksIsSet;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* Inline_response_200_H_ */

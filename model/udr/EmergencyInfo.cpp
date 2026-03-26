@@ -19,13 +19,13 @@
 namespace oai::udr::model {
 
 EmergencyInfo::EmergencyInfo() {
-  m_PgwFqdn            = "";
-  m_PgwFqdnIsSet       = false;
-  m_PgwIpAddressIsSet  = false;
-  m_SmfInstanceId      = "";
+  m_PgwFqdn = "";
+  m_PgwFqdnIsSet = false;
+  m_PgwIpAddressIsSet = false;
+  m_SmfInstanceId = "";
   m_SmfInstanceIdIsSet = false;
-  m_EpdgInd            = false;
-  m_EpdgIndIsSet       = false;
+  m_EpdgInd = false;
+  m_EpdgIndIsSet = false;
 }
 
 EmergencyInfo::~EmergencyInfo() {}
@@ -34,15 +34,19 @@ void EmergencyInfo::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const EmergencyInfo& o) {
+void to_json(nlohmann::json &j, const EmergencyInfo &o) {
   j = nlohmann::json();
-  if (o.pgwFqdnIsSet()) j["pgwFqdn"] = o.m_PgwFqdn;
-  if (o.pgwIpAddressIsSet()) j["pgwIpAddress"] = o.m_PgwIpAddress;
-  if (o.smfInstanceIdIsSet()) j["smfInstanceId"] = o.m_SmfInstanceId;
-  if (o.epdgIndIsSet()) j["epdgInd"] = o.m_EpdgInd;
+  if (o.pgwFqdnIsSet())
+    j["pgwFqdn"] = o.m_PgwFqdn;
+  if (o.pgwIpAddressIsSet())
+    j["pgwIpAddress"] = o.m_PgwIpAddress;
+  if (o.smfInstanceIdIsSet())
+    j["smfInstanceId"] = o.m_SmfInstanceId;
+  if (o.epdgIndIsSet())
+    j["epdgInd"] = o.m_EpdgInd;
 }
 
-void from_json(const nlohmann::json& j, EmergencyInfo& o) {
+void from_json(const nlohmann::json &j, EmergencyInfo &o) {
   if (j.find("pgwFqdn") != j.end()) {
     j.at("pgwFqdn").get_to(o.m_PgwFqdn);
     o.m_PgwFqdnIsSet = true;
@@ -61,57 +65,33 @@ void from_json(const nlohmann::json& j, EmergencyInfo& o) {
   }
 }
 
-std::string EmergencyInfo::getPgwFqdn() const {
-  return m_PgwFqdn;
-}
-void EmergencyInfo::setPgwFqdn(std::string const& value) {
-  m_PgwFqdn      = value;
+std::string EmergencyInfo::getPgwFqdn() const { return m_PgwFqdn; }
+void EmergencyInfo::setPgwFqdn(std::string const &value) {
+  m_PgwFqdn = value;
   m_PgwFqdnIsSet = true;
 }
-bool EmergencyInfo::pgwFqdnIsSet() const {
-  return m_PgwFqdnIsSet;
-}
-void EmergencyInfo::unsetPgwFqdn() {
-  m_PgwFqdnIsSet = false;
-}
-IpAddress EmergencyInfo::getPgwIpAddress() const {
-  return m_PgwIpAddress;
-}
-void EmergencyInfo::setPgwIpAddress(IpAddress const& value) {
-  m_PgwIpAddress      = value;
+bool EmergencyInfo::pgwFqdnIsSet() const { return m_PgwFqdnIsSet; }
+void EmergencyInfo::unsetPgwFqdn() { m_PgwFqdnIsSet = false; }
+IpAddress EmergencyInfo::getPgwIpAddress() const { return m_PgwIpAddress; }
+void EmergencyInfo::setPgwIpAddress(IpAddress const &value) {
+  m_PgwIpAddress = value;
   m_PgwIpAddressIsSet = true;
 }
-bool EmergencyInfo::pgwIpAddressIsSet() const {
-  return m_PgwIpAddressIsSet;
-}
-void EmergencyInfo::unsetPgwIpAddress() {
-  m_PgwIpAddressIsSet = false;
-}
-std::string EmergencyInfo::getSmfInstanceId() const {
-  return m_SmfInstanceId;
-}
-void EmergencyInfo::setSmfInstanceId(std::string const& value) {
-  m_SmfInstanceId      = value;
+bool EmergencyInfo::pgwIpAddressIsSet() const { return m_PgwIpAddressIsSet; }
+void EmergencyInfo::unsetPgwIpAddress() { m_PgwIpAddressIsSet = false; }
+std::string EmergencyInfo::getSmfInstanceId() const { return m_SmfInstanceId; }
+void EmergencyInfo::setSmfInstanceId(std::string const &value) {
+  m_SmfInstanceId = value;
   m_SmfInstanceIdIsSet = true;
 }
-bool EmergencyInfo::smfInstanceIdIsSet() const {
-  return m_SmfInstanceIdIsSet;
-}
-void EmergencyInfo::unsetSmfInstanceId() {
-  m_SmfInstanceIdIsSet = false;
-}
-bool EmergencyInfo::isEpdgInd() const {
-  return m_EpdgInd;
-}
+bool EmergencyInfo::smfInstanceIdIsSet() const { return m_SmfInstanceIdIsSet; }
+void EmergencyInfo::unsetSmfInstanceId() { m_SmfInstanceIdIsSet = false; }
+bool EmergencyInfo::isEpdgInd() const { return m_EpdgInd; }
 void EmergencyInfo::setEpdgInd(bool const value) {
-  m_EpdgInd      = value;
+  m_EpdgInd = value;
   m_EpdgIndIsSet = true;
 }
-bool EmergencyInfo::epdgIndIsSet() const {
-  return m_EpdgIndIsSet;
-}
-void EmergencyInfo::unsetEpdgInd() {
-  m_EpdgIndIsSet = false;
-}
+bool EmergencyInfo::epdgIndIsSet() const { return m_EpdgIndIsSet; }
+void EmergencyInfo::unsetEpdgInd() { m_EpdgIndIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

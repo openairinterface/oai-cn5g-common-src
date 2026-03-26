@@ -28,7 +28,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class LcsQosClass {
- public:
+public:
   LcsQosClass();
   virtual ~LcsQosClass() = default;
 
@@ -42,16 +42,16 @@ class LcsQosClass {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const LcsQosClass& rhs) const;
-  bool operator!=(const LcsQosClass& rhs) const;
+  bool operator==(const LcsQosClass &rhs) const;
+  bool operator!=(const LcsQosClass &rhs) const;
 
   /////////////////////////////////////////////
   /// LcsQosClass members
@@ -60,15 +60,15 @@ class LcsQosClass {
   void setValue(LcsQosClass_anyOf value);
   LcsQosClass_anyOf::eLcsQosClass_anyOf getEnumValue() const;
   void setEnumValue(LcsQosClass_anyOf::eLcsQosClass_anyOf value);
-  friend void to_json(nlohmann::json& j, const LcsQosClass& o);
-  friend void from_json(const nlohmann::json& j, LcsQosClass& o);
-  friend void to_json(nlohmann::json& j, const LcsQosClass_anyOf& o);
-  friend void from_json(const nlohmann::json& j, LcsQosClass_anyOf& o);
+  friend void to_json(nlohmann::json &j, const LcsQosClass &o);
+  friend void from_json(const nlohmann::json &j, LcsQosClass &o);
+  friend void to_json(nlohmann::json &j, const LcsQosClass_anyOf &o);
+  friend void from_json(const nlohmann::json &j, LcsQosClass_anyOf &o);
 
- protected:
+protected:
   LcsQosClass_anyOf m_value;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* LcsQosClass_H_ */

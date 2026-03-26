@@ -34,7 +34,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class SubscriptionDataSubscriptions {
- public:
+public:
   SubscriptionDataSubscriptions();
   virtual ~SubscriptionDataSubscriptions();
 
@@ -47,61 +47,61 @@ class SubscriptionDataSubscriptions {
   ///
   /// </summary>
   std::string getUeId() const;
-  void setUeId(std::string const& value);
+  void setUeId(std::string const &value);
   bool ueIdIsSet() const;
   void unsetUeId();
   /// <summary>
   ///
   /// </summary>
   std::string getCallbackReference() const;
-  void setCallbackReference(std::string const& value);
+  void setCallbackReference(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getOriginalCallbackReference() const;
-  void setOriginalCallbackReference(std::string const& value);
+  void setOriginalCallbackReference(std::string const &value);
   bool originalCallbackReferenceIsSet() const;
   void unsetOriginalCallbackReference();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getMonitoredResourceUris();
-  void setMonitoredResourceUris(std::vector<std::string> const& value);
+  std::vector<std::string> &getMonitoredResourceUris();
+  void setMonitoredResourceUris(std::vector<std::string> const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getExpiry() const;
-  void setExpiry(std::string const& value);
+  void setExpiry(std::string const &value);
   bool expiryIsSet() const;
   void unsetExpiry();
   /// <summary>
   ///
   /// </summary>
   SdmSubscription getSdmSubscription() const;
-  void setSdmSubscription(SdmSubscription const& value);
+  void setSdmSubscription(SdmSubscription const &value);
   bool sdmSubscriptionIsSet() const;
   void unsetSdmSubscription();
   /// <summary>
   ///
   /// </summary>
   std::string getSubscriptionId() const;
-  void setSubscriptionId(std::string const& value);
+  void setSubscriptionId(std::string const &value);
   bool subscriptionIdIsSet() const;
   void unsetSubscriptionId();
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupported_features();
 
-  friend void to_json(
-      nlohmann::json& j, const SubscriptionDataSubscriptions& o);
-  friend void from_json(
-      const nlohmann::json& j, SubscriptionDataSubscriptions& o);
+  friend void to_json(nlohmann::json &j,
+                      const SubscriptionDataSubscriptions &o);
+  friend void from_json(const nlohmann::json &j,
+                        SubscriptionDataSubscriptions &o);
 
- protected:
+protected:
   std::string m_UeId;
   bool m_UeIdIsSet;
   std::string m_CallbackReference;
@@ -120,6 +120,6 @@ class SubscriptionDataSubscriptions {
   bool m_Supported_featuresIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* SubscriptionDataSubscriptions_H_ */

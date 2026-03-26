@@ -10,59 +10,54 @@
 
 #include "Ngap_ProtocolExtensionContainer.h"
 static int memb_Ngap_pDCP_SN18_constraint_1(
-    const asn_TYPE_descriptor_t* td, const void* sptr,
-    asn_app_constraint_failed_f* ctfailcb, void* app_key) {
+    const asn_TYPE_descriptor_t *td, const void *sptr,
+    asn_app_constraint_failed_f *ctfailcb, void *app_key) {
   long value;
 
   if (!sptr) {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: value not given (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: value not given (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 
-  value = *(const long*) sptr;
+  value = *(const long *)sptr;
 
   if ((value >= 0L && value <= 262143L)) {
     /* Constraint check succeeded */
     return 0;
   } else {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: constraint failed (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: constraint failed (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 }
 
 static int memb_Ngap_hFN_PDCP_SN18_constraint_1(
-    const asn_TYPE_descriptor_t* td, const void* sptr,
-    asn_app_constraint_failed_f* ctfailcb, void* app_key) {
+    const asn_TYPE_descriptor_t *td, const void *sptr,
+    asn_app_constraint_failed_f *ctfailcb, void *app_key) {
   long value;
 
   if (!sptr) {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: value not given (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: value not given (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 
-  value = *(const long*) sptr;
+  value = *(const long *)sptr;
 
   if ((value >= 0L && value <= 16383L)) {
     /* Constraint check succeeded */
     return 0;
   } else {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: constraint failed (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: constraint failed (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 }
 
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 static asn_oer_constraints_t asn_OER_memb_Ngap_pDCP_SN18_constr_2 CC_NOTUSED = {
-    {4, 1} /* (0..262143) */,
-    -1};
+    {4, 1} /* (0..262143) */, -1};
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 static asn_per_constraints_t asn_PER_memb_Ngap_pDCP_SN18_constr_2 CC_NOTUSED = {
@@ -146,7 +141,7 @@ asn_TYPE_member_t asn_MBR_Ngap_COUNTValueForPDCP_SN18_1[] = {
      0, /* No default value */
      "iE-Extensions"},
 };
-static const int asn_MAP_Ngap_COUNTValueForPDCP_SN18_oms_1[]            = {2};
+static const int asn_MAP_Ngap_COUNTValueForPDCP_SN18_oms_1[] = {2};
 static const ber_tlv_tag_t asn_DEF_Ngap_COUNTValueForPDCP_SN18_tags_1[] = {
     (ASN_TAG_CLASS_UNIVERSAL | (16 << 2))};
 static const asn_TYPE_tag2member_t

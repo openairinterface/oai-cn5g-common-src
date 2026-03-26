@@ -27,12 +27,12 @@ void SteerModeValue::validate() const {
   }
 }
 
-bool SteerModeValue::validate(std::stringstream& msg) const {
+bool SteerModeValue::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool SteerModeValue::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool SteerModeValue::validate(std::stringstream &msg,
+                              const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "SteerModeValue" : pathPrefix;
@@ -43,35 +43,31 @@ bool SteerModeValue::validate(
   return success;
 }
 
-bool SteerModeValue::operator==(const SteerModeValue& rhs) const {
+bool SteerModeValue::operator==(const SteerModeValue &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool SteerModeValue::operator!=(const SteerModeValue& rhs) const {
+bool SteerModeValue::operator!=(const SteerModeValue &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const SteerModeValue& o) {
+void to_json(nlohmann::json &j, const SteerModeValue &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, SteerModeValue& o) {
+void from_json(const nlohmann::json &j, SteerModeValue &o) {
   from_json(j, o.m_value);
 }
 
-SteerModeValue_anyOf SteerModeValue::getValue() const {
-  return m_value;
-}
+SteerModeValue_anyOf SteerModeValue::getValue() const { return m_value; }
 
-void SteerModeValue::setValue(SteerModeValue_anyOf value) {
-  m_value = value;
-}
+void SteerModeValue::setValue(SteerModeValue_anyOf value) { m_value = value; }
 
-SteerModeValue_anyOf::eSteerModeValue_anyOf SteerModeValue::getEnumValue()
-    const {
+SteerModeValue_anyOf::eSteerModeValue_anyOf
+SteerModeValue::getEnumValue() const {
   return m_value.getValue();
 }
 
@@ -80,4 +76,4 @@ void SteerModeValue::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

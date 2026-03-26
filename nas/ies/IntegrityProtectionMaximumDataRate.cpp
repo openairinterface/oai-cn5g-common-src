@@ -13,14 +13,14 @@ using namespace oai::nas;
 IntegrityProtectionMaximumDataRate::IntegrityProtectionMaximumDataRate(
     uint8_t iei)
     : Type3NasIe(iei) {
-  uplink_   = 0;
+  uplink_ = 0;
   downlink_ = 0;
 }
 
 //------------------------------------------------------------------------------
 IntegrityProtectionMaximumDataRate::IntegrityProtectionMaximumDataRate()
     : Type3NasIe() {
-  uplink_   = 0;
+  uplink_ = 0;
   downlink_ = 0;
 }
 
@@ -28,7 +28,7 @@ IntegrityProtectionMaximumDataRate::IntegrityProtectionMaximumDataRate()
 IntegrityProtectionMaximumDataRate::IntegrityProtectionMaximumDataRate(
     uint8_t iei, uint8_t uplink, uint8_t downlink)
     : Type3NasIe(iei) {
-  uplink_   = uplink;
+  uplink_ = uplink;
   downlink_ = downlink;
 }
 
@@ -37,9 +37,8 @@ IntegrityProtectionMaximumDataRate::~IntegrityProtectionMaximumDataRate(){};
 
 //------------------------------------------------------------------------------
 uint32_t IntegrityProtectionMaximumDataRate::GetIeLength() const {
-  return (
-      kIntegrityProtectionMaximumDataRateMaximumLength - 1 +
-      Type3NasIe::GetIeLength());
+  return (kIntegrityProtectionMaximumDataRateMaximumLength - 1 +
+          Type3NasIe::GetIeLength());
 }
 
 //------------------------------------------------------------------------------
@@ -63,15 +62,15 @@ uint8_t IntegrityProtectionMaximumDataRate::GetDownlink() const {
 }
 
 //------------------------------------------------------------------------------
-void IntegrityProtectionMaximumDataRate::Set(
-    uint8_t iei, uint8_t uplink, uint8_t downlink) {
+void IntegrityProtectionMaximumDataRate::Set(uint8_t iei, uint8_t uplink,
+                                             uint8_t downlink) {
   SetIei(iei);
-  uplink_   = uplink;
+  uplink_ = uplink;
   downlink_ = downlink;
 }
 
 //------------------------------------------------------------------------------
-int IntegrityProtectionMaximumDataRate::Encode(uint8_t* buf, int len) const {
+int IntegrityProtectionMaximumDataRate::Encode(uint8_t *buf, int len) const {
   oai::logger::logger_common::nas().debug("Encoding %s", GetIeName().c_str());
 
   if (len < kIntegrityProtectionMaximumDataRateMinimumLength) {
@@ -89,14 +88,14 @@ int IntegrityProtectionMaximumDataRate::Encode(uint8_t* buf, int len) const {
   ENCODE_U8(buf + encoded_size, uplink_, encoded_size);
   // Downlink
   ENCODE_U8(buf + encoded_size, downlink_, encoded_size);
-  oai::logger::logger_common::nas().debug(
-      "Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
+  oai::logger::logger_common::nas().debug("Encoded %s, len (%d)",
+                                          GetIeName().c_str(), encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
-int IntegrityProtectionMaximumDataRate::Decode(
-    const uint8_t* const buf, int len, bool is_iei) {
+int IntegrityProtectionMaximumDataRate::Decode(const uint8_t *const buf,
+                                               int len, bool is_iei) {
   oai::logger::logger_common::nas().debug("Decoding %s", GetIeName().c_str());
 
   if (len < kIntegrityProtectionMaximumDataRateMinimumLength) {
@@ -124,7 +123,7 @@ int IntegrityProtectionMaximumDataRate::Decode(
       "Decoded Maximum data rate per UE for user-plane integrity "
       "protection for downlink 0x%x",
       downlink_);
-  oai::logger::logger_common::nas().debug(
-      "Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
+  oai::logger::logger_common::nas().debug("Decoded %s, len (%d)",
+                                          GetIeName().c_str(), decoded_size);
   return decoded_size;
 }

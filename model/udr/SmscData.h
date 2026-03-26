@@ -33,7 +33,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class SmscData {
- public:
+public:
   SmscData();
   virtual ~SmscData();
 
@@ -46,27 +46,27 @@ class SmscData {
   ///
   /// </summary>
   std::string getSmscMapAddress() const;
-  void setSmscMapAddress(std::string const& value);
+  void setSmscMapAddress(std::string const &value);
   bool smscMapAddressIsSet() const;
   void unsetSmscMapAddress();
   /// <summary>
   ///
   /// </summary>
   NetworkNodeDiameterAddress getSmscDiameterAddress() const;
-  void setSmscDiameterAddress(NetworkNodeDiameterAddress const& value);
+  void setSmscDiameterAddress(NetworkNodeDiameterAddress const &value);
   bool smscDiameterAddressIsSet() const;
   void unsetSmscDiameterAddress();
 
-  friend void to_json(nlohmann::json& j, const SmscData& o);
-  friend void from_json(const nlohmann::json& j, SmscData& o);
+  friend void to_json(nlohmann::json &j, const SmscData &o);
+  friend void from_json(const nlohmann::json &j, SmscData &o);
 
- protected:
+protected:
   std::string m_SmscMapAddress;
   bool m_SmscMapAddressIsSet;
   NetworkNodeDiameterAddress m_SmscDiameterAddress;
   bool m_SmscDiameterAddressIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* SmscData_H_ */

@@ -8,29 +8,30 @@
 
 #include "Ngap_AMFNameVisibleString.h"
 
-static int check_permitted_alphabet_1(const void* sptr) {
+static int check_permitted_alphabet_1(const void *sptr) {
   /* The underlying type is VisibleString */
-  const VisibleString_t* st = (const VisibleString_t*) sptr;
-  const uint8_t* ch         = st->buf;
-  const uint8_t* end        = ch + st->size;
+  const VisibleString_t *st = (const VisibleString_t *)sptr;
+  const uint8_t *ch = st->buf;
+  const uint8_t *end = ch + st->size;
 
   for (; ch < end; ch++) {
     uint8_t cv = *ch;
-    if (!(cv >= 32UL && cv <= 126UL)) return -1;
+    if (!(cv >= 32UL && cv <= 126UL))
+      return -1;
   }
   return 0;
 }
 
-int Ngap_AMFNameVisibleString_constraint(
-    const asn_TYPE_descriptor_t* td, const void* sptr,
-    asn_app_constraint_failed_f* ctfailcb, void* app_key) {
-  const VisibleString_t* st = (const VisibleString_t*) sptr;
+int Ngap_AMFNameVisibleString_constraint(const asn_TYPE_descriptor_t *td,
+                                         const void *sptr,
+                                         asn_app_constraint_failed_f *ctfailcb,
+                                         void *app_key) {
+  const VisibleString_t *st = (const VisibleString_t *)sptr;
   size_t size;
 
   if (!sptr) {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: value not given (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: value not given (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 
@@ -40,9 +41,8 @@ int Ngap_AMFNameVisibleString_constraint(
     /* Constraint check succeeded */
     return 0;
   } else {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: constraint failed (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: constraint failed (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 }

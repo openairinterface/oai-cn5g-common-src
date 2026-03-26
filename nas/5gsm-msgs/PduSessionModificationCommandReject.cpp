@@ -10,8 +10,8 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 PduSessionModificationCommandReject::PduSessionModificationCommandReject()
-    : Nas5gsmMessage(
-          k5gsSessionManagementMessages, kPduSessionModificationCommandReject) {
+    : Nas5gsmMessage(k5gsSessionManagementMessages,
+                     kPduSessionModificationCommandReject) {
   ie_extended_protocol_configuration_options_ = std::nullopt;
 }
 
@@ -33,20 +33,20 @@ uint32_t PduSessionModificationCommandReject::GetLength() const {
 
 //------------------------------------------------------------------------------
 void PduSessionModificationCommandReject::Set5gsmCause(
-    const _5gsmCause& _5gsm_cause) {
+    const _5gsmCause &_5gsm_cause) {
   ie_5gsm_cause_ = _5gsm_cause;
 }
 
 //------------------------------------------------------------------------------
 void PduSessionModificationCommandReject::Get5gsmCause(
-    _5gsmCause& _5gsm_cause) const {
+    _5gsmCause &_5gsm_cause) const {
   _5gsm_cause = ie_5gsm_cause_;
 }
 
 //------------------------------------------------------------------------------
 void PduSessionModificationCommandReject::
     SetExtendedProtocolConfigurationOptions(
-        const ExtendedProtocolConfigurationOptions& options) {
+        const ExtendedProtocolConfigurationOptions &options) {
   ie_extended_protocol_configuration_options_ =
       std::make_optional<ExtendedProtocolConfigurationOptions>(options);
 }
@@ -54,15 +54,15 @@ void PduSessionModificationCommandReject::
 //------------------------------------------------------------------------------
 void PduSessionModificationCommandReject::
     GetExtendedProtocolConfigurationOptions(
-        std::optional<ExtendedProtocolConfigurationOptions>& options) const {
+        std::optional<ExtendedProtocolConfigurationOptions> &options) const {
   options = ie_extended_protocol_configuration_options_;
 }
 
 //------------------------------------------------------------------------------
-int PduSessionModificationCommandReject::Encode(uint8_t* buf, int len) {
+int PduSessionModificationCommandReject::Encode(uint8_t *buf, int len) {
   oai::logger::logger_common::nas().debug(
       "Encoding PduSessionModificationCommandReject message");
-  int encoded_size    = 0;
+  int encoded_size = 0;
   int encoded_ie_size = 0;
   // Header
   if ((encoded_ie_size = Nas5gsmMessage::Encode(buf, len)) ==
@@ -79,9 +79,9 @@ int PduSessionModificationCommandReject::Encode(uint8_t* buf, int len) {
   }
 
   // Extended protocol configuration options
-  if ((encoded_ie_size = NasHelper::Encode(
-           ie_extended_protocol_configuration_options_, buf, len,
-           encoded_size)) == KEncodeDecodeError) {
+  if ((encoded_ie_size =
+           NasHelper::Encode(ie_extended_protocol_configuration_options_, buf,
+                             len, encoded_size)) == KEncodeDecodeError) {
     return KEncodeDecodeError;
   }
 
@@ -92,10 +92,10 @@ int PduSessionModificationCommandReject::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int PduSessionModificationCommandReject::Decode(uint8_t* buf, int len) {
+int PduSessionModificationCommandReject::Decode(uint8_t *buf, int len) {
   oai::logger::logger_common::nas().debug(
       "Decoding PduSessionModificationCommandReject message");
-  int decoded_size    = 0;
+  int decoded_size = 0;
   int decoded_ie_size = 0;
 
   // Header
@@ -119,27 +119,27 @@ int PduSessionModificationCommandReject::Decode(uint8_t* buf, int len) {
   bool flag = false;
   while ((octet != 0x0)) {
     switch (octet) {
-      case kIeiExtendedProtocolConfigurationOptions: {
-        oai::logger::logger_common::nas().debug(
-            "Decoding IEI 0x%x", kIeiExtendedProtocolConfigurationOptions);
-        if ((decoded_ie_size = NasHelper::Decode(
-                 ie_extended_protocol_configuration_options_, buf, len,
-                 decoded_size, true)) == KEncodeDecodeError) {
-          return KEncodeDecodeError;
-        }
-        DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
-      } break;
+    case kIeiExtendedProtocolConfigurationOptions: {
+      oai::logger::logger_common::nas().debug(
+          "Decoding IEI 0x%x", kIeiExtendedProtocolConfigurationOptions);
+      if ((decoded_ie_size = NasHelper::Decode(
+               ie_extended_protocol_configuration_options_, buf, len,
+               decoded_size, true)) == KEncodeDecodeError) {
+        return KEncodeDecodeError;
+      }
+      DECODE_U8_VALUE(buf, octet, decoded_size, len);
+      oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
+    } break;
 
-      default: {
-        // TODO:
-        if (flag) {
-          oai::logger::logger_common::nas().warn(
-              "Unknown IEI 0x%x, stop decoding...", octet);
-          // Stop decoding
-          octet = 0x00;
-        }
-      } break;
+    default: {
+      // TODO:
+      if (flag) {
+        oai::logger::logger_common::nas().warn(
+            "Unknown IEI 0x%x, stop decoding...", octet);
+        // Stop decoding
+        octet = 0x00;
+      }
+    } break;
     }
   }
 

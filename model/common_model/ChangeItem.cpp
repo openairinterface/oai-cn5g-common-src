@@ -19,11 +19,11 @@
 namespace oai::model::common {
 
 ChangeItem::ChangeItem() {
-  m_Path           = "";
-  m_From           = "";
-  m_FromIsSet      = false;
+  m_Path = "";
+  m_From = "";
+  m_FromIsSet = false;
   m_OrigValueIsSet = false;
-  m_NewValueIsSet  = false;
+  m_NewValueIsSet = false;
 }
 
 void ChangeItem::validate() const {
@@ -33,12 +33,12 @@ void ChangeItem::validate() const {
   }
 }
 
-bool ChangeItem::validate(std::stringstream& msg) const {
+bool ChangeItem::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ChangeItem::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ChangeItem::validate(std::stringstream &msg,
+                          const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ChangeItem" : pathPrefix;
@@ -46,7 +46,7 @@ bool ChangeItem::validate(
   return success;
 }
 
-bool ChangeItem::operator==(const ChangeItem& rhs) const {
+bool ChangeItem::operator==(const ChangeItem &rhs) const {
   return
 
       (getOp() == rhs.getOp()) &&
@@ -67,20 +67,23 @@ bool ChangeItem::operator==(const ChangeItem& rhs) const {
           ;
 }
 
-bool ChangeItem::operator!=(const ChangeItem& rhs) const {
+bool ChangeItem::operator!=(const ChangeItem &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ChangeItem& o) {
-  j         = nlohmann::json();
-  j["op"]   = o.m_Op;
+void to_json(nlohmann::json &j, const ChangeItem &o) {
+  j = nlohmann::json();
+  j["op"] = o.m_Op;
   j["path"] = o.m_Path;
-  if (o.fromIsSet()) j["from"] = o.m_From;
-  if (o.origValueIsSet()) j["origValue"] = o.m_OrigValue;
-  if (o.newValueIsSet()) j["newValue"] = o.m_NewValue;
+  if (o.fromIsSet())
+    j["from"] = o.m_From;
+  if (o.origValueIsSet())
+    j["origValue"] = o.m_OrigValue;
+  if (o.newValueIsSet())
+    j["newValue"] = o.m_NewValue;
 }
 
-void from_json(const nlohmann::json& j, ChangeItem& o) {
+void from_json(const nlohmann::json &j, ChangeItem &o) {
   j.at("op").get_to(o.m_Op);
   j.at("path").get_to(o.m_Path);
   if (j.find("from") != j.end()) {
@@ -97,56 +100,32 @@ void from_json(const nlohmann::json& j, ChangeItem& o) {
   }
 }
 
-oai::model::common::ChangeType ChangeItem::getOp() const {
-  return m_Op;
-}
-void ChangeItem::setOp(oai::model::common::ChangeType const& value) {
+oai::model::common::ChangeType ChangeItem::getOp() const { return m_Op; }
+void ChangeItem::setOp(oai::model::common::ChangeType const &value) {
   m_Op = value;
 }
-std::string ChangeItem::getPath() const {
-  return m_Path;
-}
-void ChangeItem::setPath(std::string const& value) {
-  m_Path = value;
-}
-std::string ChangeItem::getFrom() const {
-  return m_From;
-}
-void ChangeItem::setFrom(std::string const& value) {
-  m_From      = value;
+std::string ChangeItem::getPath() const { return m_Path; }
+void ChangeItem::setPath(std::string const &value) { m_Path = value; }
+std::string ChangeItem::getFrom() const { return m_From; }
+void ChangeItem::setFrom(std::string const &value) {
+  m_From = value;
   m_FromIsSet = true;
 }
-bool ChangeItem::fromIsSet() const {
-  return m_FromIsSet;
-}
-void ChangeItem::unsetFrom() {
-  m_FromIsSet = false;
-}
-nlohmann::json ChangeItem::getOrigValue() const {
-  return m_OrigValue;
-}
-void ChangeItem::setOrigValue(nlohmann::json const& value) {
-  m_OrigValue      = value;
+bool ChangeItem::fromIsSet() const { return m_FromIsSet; }
+void ChangeItem::unsetFrom() { m_FromIsSet = false; }
+nlohmann::json ChangeItem::getOrigValue() const { return m_OrigValue; }
+void ChangeItem::setOrigValue(nlohmann::json const &value) {
+  m_OrigValue = value;
   m_OrigValueIsSet = true;
 }
-bool ChangeItem::origValueIsSet() const {
-  return m_OrigValueIsSet;
-}
-void ChangeItem::unsetOrigValue() {
-  m_OrigValueIsSet = false;
-}
-nlohmann::json ChangeItem::getNewValue() const {
-  return m_NewValue;
-}
-void ChangeItem::setNewValue(nlohmann::json const& value) {
-  m_NewValue      = value;
+bool ChangeItem::origValueIsSet() const { return m_OrigValueIsSet; }
+void ChangeItem::unsetOrigValue() { m_OrigValueIsSet = false; }
+nlohmann::json ChangeItem::getNewValue() const { return m_NewValue; }
+void ChangeItem::setNewValue(nlohmann::json const &value) {
+  m_NewValue = value;
   m_NewValueIsSet = true;
 }
-bool ChangeItem::newValueIsSet() const {
-  return m_NewValueIsSet;
-}
-void ChangeItem::unsetNewValue() {
-  m_NewValueIsSet = false;
-}
+bool ChangeItem::newValueIsSet() const { return m_NewValueIsSet; }
+void ChangeItem::unsetNewValue() { m_NewValueIsSet = false; }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

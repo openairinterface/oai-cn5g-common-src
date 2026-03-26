@@ -27,12 +27,12 @@ void RequiredAccessInfo::validate() const {
   }
 }
 
-bool RequiredAccessInfo::validate(std::stringstream& msg) const {
+bool RequiredAccessInfo::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool RequiredAccessInfo::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool RequiredAccessInfo::validate(std::stringstream &msg,
+                                  const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "RequiredAccessInfo" : pathPrefix;
@@ -40,18 +40,18 @@ bool RequiredAccessInfo::validate(
   return success;
 }
 
-bool RequiredAccessInfo::operator==(const RequiredAccessInfo& rhs) const {
-  return true;  // TODO
+bool RequiredAccessInfo::operator==(const RequiredAccessInfo &rhs) const {
+  return true; // TODO
 }
 
-bool RequiredAccessInfo::operator!=(const RequiredAccessInfo& rhs) const {
+bool RequiredAccessInfo::operator!=(const RequiredAccessInfo &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const RequiredAccessInfo& o) {
+void to_json(nlohmann::json &j, const RequiredAccessInfo &o) {
   j = nlohmann::json::object();
 }
 
-void from_json(const nlohmann::json& j, RequiredAccessInfo& o) {}
+void from_json(const nlohmann::json &j, RequiredAccessInfo &o) {}
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

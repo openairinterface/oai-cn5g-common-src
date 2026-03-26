@@ -18,9 +18,7 @@
 
 namespace oai::model::udm {
 
-EpsInterworkingInfo::EpsInterworkingInfo() {
-  m_EpsIwkPgwsIsSet = false;
-}
+EpsInterworkingInfo::EpsInterworkingInfo() { m_EpsIwkPgwsIsSet = false; }
 
 EpsInterworkingInfo::~EpsInterworkingInfo() {}
 
@@ -28,32 +26,28 @@ void EpsInterworkingInfo::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const EpsInterworkingInfo& o) {
+void to_json(nlohmann::json &j, const EpsInterworkingInfo &o) {
   j = nlohmann::json();
   if (o.epsIwkPgwsIsSet() || !o.m_EpsIwkPgws.empty())
     j["epsIwkPgws"] = o.m_EpsIwkPgws;
 }
 
-void from_json(const nlohmann::json& j, EpsInterworkingInfo& o) {
+void from_json(const nlohmann::json &j, EpsInterworkingInfo &o) {
   if (j.find("epsIwkPgws") != j.end()) {
     j.at("epsIwkPgws").get_to(o.m_EpsIwkPgws);
     o.m_EpsIwkPgwsIsSet = true;
   }
 }
 
-std::map<std::string, EpsIwkPgw>& EpsInterworkingInfo::getEpsIwkPgws() {
+std::map<std::string, EpsIwkPgw> &EpsInterworkingInfo::getEpsIwkPgws() {
   return m_EpsIwkPgws;
 }
 void EpsInterworkingInfo::setEpsIwkPgws(
-    std::map<std::string, EpsIwkPgw> const& value) {
-  m_EpsIwkPgws      = value;
+    std::map<std::string, EpsIwkPgw> const &value) {
+  m_EpsIwkPgws = value;
   m_EpsIwkPgwsIsSet = true;
 }
-bool EpsInterworkingInfo::epsIwkPgwsIsSet() const {
-  return m_EpsIwkPgwsIsSet;
-}
-void EpsInterworkingInfo::unsetEpsIwkPgws() {
-  m_EpsIwkPgwsIsSet = false;
-}
+bool EpsInterworkingInfo::epsIwkPgwsIsSet() const { return m_EpsIwkPgwsIsSet; }
+void EpsInterworkingInfo::unsetEpsIwkPgws() { m_EpsIwkPgwsIsSet = false; }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

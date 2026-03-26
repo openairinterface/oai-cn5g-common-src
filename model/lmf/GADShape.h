@@ -28,7 +28,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class GADShape {
- public:
+public:
   GADShape();
   virtual ~GADShape() = default;
 
@@ -42,16 +42,16 @@ class GADShape {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const GADShape& rhs) const;
-  bool operator!=(const GADShape& rhs) const;
+  bool operator==(const GADShape &rhs) const;
+  bool operator!=(const GADShape &rhs) const;
 
   /////////////////////////////////////////////
   /// GADShape members
@@ -60,15 +60,15 @@ class GADShape {
   ///
   /// </summary>
   oai::model::lmf::SupportedGADShapes getShape() const;
-  void setShape(oai::model::lmf::SupportedGADShapes const& value);
+  void setShape(oai::model::lmf::SupportedGADShapes const &value);
 
-  friend void to_json(nlohmann::json& j, const GADShape& o);
-  friend void from_json(const nlohmann::json& j, GADShape& o);
+  friend void to_json(nlohmann::json &j, const GADShape &o);
+  friend void from_json(const nlohmann::json &j, GADShape &o);
 
- protected:
+protected:
   oai::model::lmf::SupportedGADShapes m_Shape;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* GADShape_H_ */

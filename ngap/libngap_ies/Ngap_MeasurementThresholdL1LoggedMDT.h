@@ -37,7 +37,7 @@ typedef struct Ngap_MeasurementThresholdL1LoggedMDT {
   union Ngap_MeasurementThresholdL1LoggedMDT_u {
     Ngap_Threshold_RSRP_t threshold_RSRP;
     Ngap_Threshold_RSRQ_t threshold_RSRQ;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

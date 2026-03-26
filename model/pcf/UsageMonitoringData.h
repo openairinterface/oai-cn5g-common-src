@@ -19,9 +19,9 @@
 #ifndef UsageMonitoringData_H_
 #define UsageMonitoringData_H_
 
+#include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
-#include <nlohmann/json.hpp>
 
 namespace oai::model::pcf {
 
@@ -29,7 +29,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class UsageMonitoringData {
- public:
+public:
   UsageMonitoringData();
   virtual ~UsageMonitoringData() = default;
 
@@ -43,16 +43,16 @@ class UsageMonitoringData {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const UsageMonitoringData& rhs) const;
-  bool operator!=(const UsageMonitoringData& rhs) const;
+  bool operator==(const UsageMonitoringData &rhs) const;
+  bool operator!=(const UsageMonitoringData &rhs) const;
 
   /////////////////////////////////////////////
   /// UsageMonitoringData members
@@ -62,7 +62,7 @@ class UsageMonitoringData {
   /// session.
   /// </summary>
   std::string getUmId() const;
-  void setUmId(std::string const& value);
+  void setUmId(std::string const &value);
   /// <summary>
   /// Unsigned integer identifying a volume in units of bytes with
   /// \&quot;nullable&#x3D;true\&quot; property.
@@ -98,7 +98,7 @@ class UsageMonitoringData {
   ///
   /// </summary>
   std::string getMonitoringTime() const;
-  void setMonitoringTime(std::string const& value);
+  void setMonitoringTime(std::string const &value);
   bool monitoringTimeIsSet() const;
   void unsetMonitoringTime();
   /// <summary>
@@ -146,14 +146,14 @@ class UsageMonitoringData {
   /// monitoring.
   /// </summary>
   std::vector<std::string> getExUsagePccRuleIds() const;
-  void setExUsagePccRuleIds(std::vector<std::string> const& value);
+  void setExUsagePccRuleIds(std::vector<std::string> const &value);
   bool exUsagePccRuleIdsIsSet() const;
   void unsetExUsagePccRuleIds();
 
-  friend void to_json(nlohmann::json& j, const UsageMonitoringData& o);
-  friend void from_json(const nlohmann::json& j, UsageMonitoringData& o);
+  friend void to_json(nlohmann::json &j, const UsageMonitoringData &o);
+  friend void from_json(const nlohmann::json &j, UsageMonitoringData &o);
 
- protected:
+protected:
   std::string m_UmId;
 
   int64_t m_VolumeThreshold;
@@ -180,6 +180,6 @@ class UsageMonitoringData {
   bool m_ExUsagePccRuleIdsIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* UsageMonitoringData_H_ */

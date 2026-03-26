@@ -16,8 +16,8 @@
 namespace oai::model::amf {
 
 AssignEbiData::AssignEbiData() {
-  m_PduSessionId         = 0;
-  m_ArpListIsSet         = false;
+  m_PduSessionId = 0;
+  m_ArpListIsSet = false;
   m_ReleasedEbiListIsSet = false;
 }
 
@@ -27,14 +27,16 @@ void AssignEbiData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const AssignEbiData& o) {
-  j                 = nlohmann::json();
+void to_json(nlohmann::json &j, const AssignEbiData &o) {
+  j = nlohmann::json();
   j["pduSessionId"] = o.m_PduSessionId;
-  if (o.arpListIsSet()) j["arpList"] = o.m_ArpList;
-  if (o.releasedEbiListIsSet()) j["releasedEbiList"] = o.m_ReleasedEbiList;
+  if (o.arpListIsSet())
+    j["arpList"] = o.m_ArpList;
+  if (o.releasedEbiListIsSet())
+    j["releasedEbiList"] = o.m_ReleasedEbiList;
 }
 
-void from_json(const nlohmann::json& j, AssignEbiData& o) {
+void from_json(const nlohmann::json &j, AssignEbiData &o) {
   j.at("pduSessionId").get_to(o.m_PduSessionId);
   if (j.find("arpList") != j.end()) {
     j.at("arpList").get_to(o.m_ArpList);
@@ -46,29 +48,21 @@ void from_json(const nlohmann::json& j, AssignEbiData& o) {
   }
 }
 
-int32_t AssignEbiData::getPduSessionId() const {
-  return m_PduSessionId;
-}
+int32_t AssignEbiData::getPduSessionId() const { return m_PduSessionId; }
 void AssignEbiData::setPduSessionId(int32_t const value) {
   m_PduSessionId = value;
 }
-std::vector<oai::model::common::Arp>& AssignEbiData::getArpList() {
+std::vector<oai::model::common::Arp> &AssignEbiData::getArpList() {
   return m_ArpList;
 }
-bool AssignEbiData::arpListIsSet() const {
-  return m_ArpListIsSet;
-}
-void AssignEbiData::unsetArpList() {
-  m_ArpListIsSet = false;
-}
-std::vector<int32_t>& AssignEbiData::getReleasedEbiList() {
+bool AssignEbiData::arpListIsSet() const { return m_ArpListIsSet; }
+void AssignEbiData::unsetArpList() { m_ArpListIsSet = false; }
+std::vector<int32_t> &AssignEbiData::getReleasedEbiList() {
   return m_ReleasedEbiList;
 }
 bool AssignEbiData::releasedEbiListIsSet() const {
   return m_ReleasedEbiListIsSet;
 }
-void AssignEbiData::unsetReleasedEbiList() {
-  m_ReleasedEbiListIsSet = false;
-}
+void AssignEbiData::unsetReleasedEbiList() { m_ReleasedEbiListIsSet = false; }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

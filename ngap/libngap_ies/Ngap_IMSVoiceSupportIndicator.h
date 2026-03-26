@@ -20,7 +20,7 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_IMSVoiceSupportIndicator {
-  Ngap_IMSVoiceSupportIndicator_supported     = 0,
+  Ngap_IMSVoiceSupportIndicator_supported = 0,
   Ngap_IMSVoiceSupportIndicator_not_supported = 1
   /*
    * Enumeration is extensible

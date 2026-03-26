@@ -27,12 +27,12 @@ void TraceDepthRm::validate() const {
   }
 }
 
-bool TraceDepthRm::validate(std::stringstream& msg) const {
+bool TraceDepthRm::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool TraceDepthRm::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool TraceDepthRm::validate(std::stringstream &msg,
+                            const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "TraceDepthRm" : pathPrefix;
@@ -40,18 +40,16 @@ bool TraceDepthRm::validate(
   return success;
 }
 
-bool TraceDepthRm::operator==(const TraceDepthRm& rhs) const {
+bool TraceDepthRm::operator==(const TraceDepthRm &rhs) const {
   return (*this == rhs);
 }
 
-bool TraceDepthRm::operator!=(const TraceDepthRm& rhs) const {
+bool TraceDepthRm::operator!=(const TraceDepthRm &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const TraceDepthRm& o) {
-  j = nlohmann::json();
-}
+void to_json(nlohmann::json &j, const TraceDepthRm &o) { j = nlohmann::json(); }
 
-void from_json(const nlohmann::json& j, TraceDepthRm& o) {}
+void from_json(const nlohmann::json &j, TraceDepthRm &o) {}
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

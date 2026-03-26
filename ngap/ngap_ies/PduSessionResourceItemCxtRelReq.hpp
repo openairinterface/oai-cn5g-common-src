@@ -14,23 +14,23 @@ extern "C" {
 namespace oai::ngap {
 
 class PduSessionResourceItemCxtRelReq {
- public:
+public:
   PduSessionResourceItemCxtRelReq();
   virtual ~PduSessionResourceItemCxtRelReq();
 
-  void set(const PduSessionId& pduSessionId);
-  void get(PduSessionId& pduSessionId) const;
+  void set(const PduSessionId &pduSessionId);
+  void get(PduSessionId &pduSessionId) const;
   PduSessionId get() const;
 
-  bool encode(
-      Ngap_PDUSessionResourceItemCxtRelReq_t& pduSessionResourceItem) const;
-  bool decode(
-      const Ngap_PDUSessionResourceItemCxtRelReq_t& pduSessionResourceItem);
+  bool
+  encode(Ngap_PDUSessionResourceItemCxtRelReq_t &pduSessionResourceItem) const;
+  bool
+  decode(const Ngap_PDUSessionResourceItemCxtRelReq_t &pduSessionResourceItem);
 
- private:
-  PduSessionId m_PduSessionId;  // Mandatory
+private:
+  PduSessionId m_PduSessionId; // Mandatory
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

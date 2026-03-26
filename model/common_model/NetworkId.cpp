@@ -19,9 +19,9 @@
 namespace oai::model::common {
 
 NetworkId::NetworkId() {
-  m_Mnc      = "";
+  m_Mnc = "";
   m_MncIsSet = false;
-  m_Mcc      = "";
+  m_Mcc = "";
   m_MccIsSet = false;
 }
 
@@ -32,29 +32,29 @@ void NetworkId::validate() const {
   }
 }
 
-bool NetworkId::validate(std::stringstream& msg) const {
+bool NetworkId::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool NetworkId::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool NetworkId::validate(std::stringstream &msg,
+                         const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "NetworkId" : pathPrefix;
 
   if (mncIsSet()) {
-    const std::string& value           = m_Mnc;
+    const std::string &value = m_Mnc;
     const std::string currentValuePath = _pathPrefix + ".mnc";
   }
 
   if (mccIsSet()) {
-    const std::string& value           = m_Mcc;
+    const std::string &value = m_Mcc;
     const std::string currentValuePath = _pathPrefix + ".mcc";
   }
 
   return success;
 }
 
-bool NetworkId::operator==(const NetworkId& rhs) const {
+bool NetworkId::operator==(const NetworkId &rhs) const {
   return
 
       ((!mncIsSet() && !rhs.mncIsSet()) ||
@@ -66,17 +66,19 @@ bool NetworkId::operator==(const NetworkId& rhs) const {
           ;
 }
 
-bool NetworkId::operator!=(const NetworkId& rhs) const {
+bool NetworkId::operator!=(const NetworkId &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const NetworkId& o) {
+void to_json(nlohmann::json &j, const NetworkId &o) {
   j = nlohmann::json();
-  if (o.mncIsSet()) j["mnc"] = o.m_Mnc;
-  if (o.mccIsSet()) j["mcc"] = o.m_Mcc;
+  if (o.mncIsSet())
+    j["mnc"] = o.m_Mnc;
+  if (o.mccIsSet())
+    j["mcc"] = o.m_Mcc;
 }
 
-void from_json(const nlohmann::json& j, NetworkId& o) {
+void from_json(const nlohmann::json &j, NetworkId &o) {
   if (j.find("mnc") != j.end()) {
     j.at("mnc").get_to(o.m_Mnc);
     o.m_MncIsSet = true;
@@ -87,31 +89,19 @@ void from_json(const nlohmann::json& j, NetworkId& o) {
   }
 }
 
-std::string NetworkId::getMnc() const {
-  return m_Mnc;
-}
-void NetworkId::setMnc(std::string const& value) {
-  m_Mnc      = value;
+std::string NetworkId::getMnc() const { return m_Mnc; }
+void NetworkId::setMnc(std::string const &value) {
+  m_Mnc = value;
   m_MncIsSet = true;
 }
-bool NetworkId::mncIsSet() const {
-  return m_MncIsSet;
-}
-void NetworkId::unsetMnc() {
-  m_MncIsSet = false;
-}
-std::string NetworkId::getMcc() const {
-  return m_Mcc;
-}
-void NetworkId::setMcc(std::string const& value) {
-  m_Mcc      = value;
+bool NetworkId::mncIsSet() const { return m_MncIsSet; }
+void NetworkId::unsetMnc() { m_MncIsSet = false; }
+std::string NetworkId::getMcc() const { return m_Mcc; }
+void NetworkId::setMcc(std::string const &value) {
+  m_Mcc = value;
   m_MccIsSet = true;
 }
-bool NetworkId::mccIsSet() const {
-  return m_MccIsSet;
-}
-void NetworkId::unsetMcc() {
-  m_MccIsSet = false;
-}
+bool NetworkId::mccIsSet() const { return m_MccIsSet; }
+void NetworkId::unsetMcc() { m_MccIsSet = false; }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

@@ -19,8 +19,8 @@
 #ifndef Link_H_
 #define Link_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::common {
 
@@ -28,7 +28,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class Link {
- public:
+public:
   Link();
   virtual ~Link() = default;
 
@@ -42,16 +42,16 @@ class Link {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const Link& rhs) const;
-  bool operator!=(const Link& rhs) const;
+  bool operator==(const Link &rhs) const;
+  bool operator!=(const Link &rhs) const;
 
   /////////////////////////////////////////////
   /// Link members
@@ -60,18 +60,18 @@ class Link {
   ///
   /// </summary>
   std::string getHref() const;
-  void setHref(std::string const& value);
+  void setHref(std::string const &value);
   bool hrefIsSet() const;
   void unsetHref();
 
-  friend void to_json(nlohmann::json& j, const Link& o);
-  friend void from_json(const nlohmann::json& j, Link& o);
+  friend void to_json(nlohmann::json &j, const Link &o);
+  friend void from_json(const nlohmann::json &j, Link &o);
 
- protected:
+protected:
   std::string m_Href;
   bool m_HrefIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* Link_H_ */

@@ -27,7 +27,7 @@ struct Ngap_ProtocolExtensionContainer;
 typedef struct Ngap_CellIDCancelledEUTRA_Item {
   Ngap_EUTRA_CGI_t eUTRA_CGI;
   Ngap_NumberOfBroadcasts_t numberOfBroadcasts;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

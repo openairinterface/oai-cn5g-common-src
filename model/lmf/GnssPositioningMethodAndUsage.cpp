@@ -27,12 +27,12 @@ void GnssPositioningMethodAndUsage::validate() const {
   }
 }
 
-bool GnssPositioningMethodAndUsage::validate(std::stringstream& msg) const {
+bool GnssPositioningMethodAndUsage::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool GnssPositioningMethodAndUsage::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "GnssPositioningMethodAndUsage" : pathPrefix;
@@ -41,7 +41,7 @@ bool GnssPositioningMethodAndUsage::validate(
 }
 
 bool GnssPositioningMethodAndUsage::operator==(
-    const GnssPositioningMethodAndUsage& rhs) const {
+    const GnssPositioningMethodAndUsage &rhs) const {
   return
 
       (getMode() == rhs.getMode()) &&
@@ -54,44 +54,44 @@ bool GnssPositioningMethodAndUsage::operator==(
 }
 
 bool GnssPositioningMethodAndUsage::operator!=(
-    const GnssPositioningMethodAndUsage& rhs) const {
+    const GnssPositioningMethodAndUsage &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const GnssPositioningMethodAndUsage& o) {
-  j          = nlohmann::json();
-  j["mode"]  = o.m_Mode;
-  j["gnss"]  = o.m_Gnss;
+void to_json(nlohmann::json &j, const GnssPositioningMethodAndUsage &o) {
+  j = nlohmann::json();
+  j["mode"] = o.m_Mode;
+  j["gnss"] = o.m_Gnss;
   j["usage"] = o.m_Usage;
 }
 
-void from_json(const nlohmann::json& j, GnssPositioningMethodAndUsage& o) {
+void from_json(const nlohmann::json &j, GnssPositioningMethodAndUsage &o) {
   j.at("mode").get_to(o.m_Mode);
   j.at("gnss").get_to(o.m_Gnss);
   j.at("usage").get_to(o.m_Usage);
 }
 
-oai::model::lmf::PositioningMode GnssPositioningMethodAndUsage::getMode()
-    const {
+oai::model::lmf::PositioningMode
+GnssPositioningMethodAndUsage::getMode() const {
   return m_Mode;
 }
 void GnssPositioningMethodAndUsage::setMode(
-    oai::model::lmf::PositioningMode const& value) {
+    oai::model::lmf::PositioningMode const &value) {
   m_Mode = value;
 }
 oai::model::lmf::GnssId GnssPositioningMethodAndUsage::getGnss() const {
   return m_Gnss;
 }
 void GnssPositioningMethodAndUsage::setGnss(
-    oai::model::lmf::GnssId const& value) {
+    oai::model::lmf::GnssId const &value) {
   m_Gnss = value;
 }
 oai::model::lmf::Usage GnssPositioningMethodAndUsage::getUsage() const {
   return m_Usage;
 }
 void GnssPositioningMethodAndUsage::setUsage(
-    oai::model::lmf::Usage const& value) {
+    oai::model::lmf::Usage const &value) {
   m_Usage = value;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

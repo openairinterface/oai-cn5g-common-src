@@ -36,7 +36,7 @@ namespace oai::udr::model {
 /// Identifies a data filter.
 /// </summary>
 class DataFilter {
- public:
+public:
   DataFilter();
   virtual ~DataFilter();
 
@@ -49,68 +49,68 @@ class DataFilter {
   ///
   /// </summary>
   DataInd getDataInd() const;
-  void setDataInd(DataInd const& value);
+  void setDataInd(DataInd const &value);
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getDnns();
-  void setDnns(std::vector<std::string> const& value);
+  std::vector<std::string> &getDnns();
+  void setDnns(std::vector<std::string> const &value);
   bool dnnsIsSet() const;
   void unsetDnns();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::Snssai>& getSnssais();
-  void setSnssais(std::vector<oai::model::common::Snssai> const& value);
+  std::vector<oai::model::common::Snssai> &getSnssais();
+  void setSnssais(std::vector<oai::model::common::Snssai> const &value);
   bool snssaisIsSet() const;
   void unsetSnssais();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getInternalGroupIds();
-  void setInternalGroupIds(std::vector<std::string> const& value);
+  std::vector<std::string> &getInternalGroupIds();
+  void setInternalGroupIds(std::vector<std::string> const &value);
   bool internalGroupIdsIsSet() const;
   void unsetInternalGroupIds();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getSupis();
-  void setSupis(std::vector<std::string> const& value);
+  std::vector<std::string> &getSupis();
+  void setSupis(std::vector<std::string> const &value);
   bool supisIsSet() const;
   void unsetSupis();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getAppIds();
-  void setAppIds(std::vector<std::string> const& value);
+  std::vector<std::string> &getAppIds();
+  void setAppIds(std::vector<std::string> const &value);
   bool appIdsIsSet() const;
   void unsetAppIds();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getUeIpv4s();
-  void setUeIpv4s(std::vector<std::string> const& value);
+  std::vector<std::string> &getUeIpv4s();
+  void setUeIpv4s(std::vector<std::string> const &value);
   bool ueIpv4sIsSet() const;
   void unsetUeIpv4s();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::Ipv6Addr>& getUeIpv6s();
-  void setUeIpv6s(std::vector<oai::model::common::Ipv6Addr> const& value);
+  std::vector<oai::model::common::Ipv6Addr> &getUeIpv6s();
+  void setUeIpv6s(std::vector<oai::model::common::Ipv6Addr> const &value);
   bool ueIpv6sIsSet() const;
   void unsetUeIpv6s();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getUeMacs();
-  void setUeMacs(std::vector<std::string> const& value);
+  std::vector<std::string> &getUeMacs();
+  void setUeMacs(std::vector<std::string> const &value);
   bool ueMacsIsSet() const;
   void unsetUeMacs();
 
-  friend void to_json(nlohmann::json& j, const DataFilter& o);
-  friend void from_json(const nlohmann::json& j, DataFilter& o);
+  friend void to_json(nlohmann::json &j, const DataFilter &o);
+  friend void from_json(const nlohmann::json &j, DataFilter &o);
 
- protected:
+protected:
   DataInd m_DataInd;
 
   std::vector<std::string> m_Dnns;
@@ -131,6 +131,6 @@ class DataFilter {
   bool m_UeMacsIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* DataFilter_H_ */

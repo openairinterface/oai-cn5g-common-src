@@ -27,7 +27,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class MulticastAccessControl_anyOf {
- public:
+public:
   MulticastAccessControl_anyOf();
   virtual ~MulticastAccessControl_anyOf() = default;
 
@@ -50,34 +50,34 @@ class MulticastAccessControl_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const MulticastAccessControl_anyOf& rhs) const;
-  bool operator!=(const MulticastAccessControl_anyOf& rhs) const;
+  bool operator==(const MulticastAccessControl_anyOf &rhs) const;
+  bool operator!=(const MulticastAccessControl_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// MulticastAccessControl_anyOf members
 
   MulticastAccessControl_anyOf::eMulticastAccessControl_anyOf getValue() const;
-  void setValue(
-      MulticastAccessControl_anyOf::eMulticastAccessControl_anyOf value);
+  void
+  setValue(MulticastAccessControl_anyOf::eMulticastAccessControl_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const MulticastAccessControl_anyOf& o);
-  friend void from_json(
-      const nlohmann::json& j, MulticastAccessControl_anyOf& o);
+  friend void to_json(nlohmann::json &j, const MulticastAccessControl_anyOf &o);
+  friend void from_json(const nlohmann::json &j,
+                        MulticastAccessControl_anyOf &o);
 
- protected:
+protected:
   MulticastAccessControl_anyOf::eMulticastAccessControl_anyOf m_value =
       MulticastAccessControl_anyOf::eMulticastAccessControl_anyOf::
           INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* MulticastAccessControl_anyOf_H_ */

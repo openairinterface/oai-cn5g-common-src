@@ -27,7 +27,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class UeAuth_anyOf {
- public:
+public:
   UeAuth_anyOf();
   virtual ~UeAuth_anyOf() = default;
 
@@ -50,16 +50,16 @@ class UeAuth_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const UeAuth_anyOf& rhs) const;
-  bool operator!=(const UeAuth_anyOf& rhs) const;
+  bool operator==(const UeAuth_anyOf &rhs) const;
+  bool operator!=(const UeAuth_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// UeAuth_anyOf members
@@ -67,14 +67,14 @@ class UeAuth_anyOf {
   UeAuth_anyOf::eUeAuth_anyOf getValue() const;
   void setValue(UeAuth_anyOf::eUeAuth_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const UeAuth_anyOf& o);
-  friend void from_json(const nlohmann::json& j, UeAuth_anyOf& o);
+  friend void to_json(nlohmann::json &j, const UeAuth_anyOf &o);
+  friend void from_json(const nlohmann::json &j, UeAuth_anyOf &o);
 
- protected:
+protected:
   UeAuth_anyOf::eUeAuth_anyOf m_value =
       UeAuth_anyOf::eUeAuth_anyOf::INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* UeAuth_anyOf_H_ */

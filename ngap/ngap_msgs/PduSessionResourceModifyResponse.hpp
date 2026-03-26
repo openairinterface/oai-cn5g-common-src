@@ -15,30 +15,30 @@ extern "C" {
 namespace oai::ngap {
 
 class PduSessionResourceModifyResponseMsg : public NgapUeMessage {
- public:
+public:
   PduSessionResourceModifyResponseMsg();
   virtual ~PduSessionResourceModifyResponseMsg();
 
   void initialize();
 
-  void setAmfUeNgapId(const uint64_t& id) override;
-  void setRanUeNgapId(const uint32_t& id) override;
-  bool decode(Ngap_NGAP_PDU_t* ngapMsgPdu) override;
+  void setAmfUeNgapId(const uint64_t &id) override;
+  void setRanUeNgapId(const uint32_t &id) override;
+  bool decode(Ngap_NGAP_PDU_t *ngapMsgPdu) override;
 
   void setPduSessionResourceModifyResponseList(
-      const std::vector<PDUSessionResourceModifyResponseItem_t>& list);
+      const std::vector<PDUSessionResourceModifyResponseItem_t> &list);
   bool getPduSessionResourceModifyResponseList(
-      std::vector<PDUSessionResourceModifyResponseItem_t>& list) const;
+      std::vector<PDUSessionResourceModifyResponseItem_t> &list) const;
 
- private:
-  Ngap_PDUSessionResourceModifyResponse_t* pduSessionResourceModifyResponseIes;
+private:
+  Ngap_PDUSessionResourceModifyResponse_t *pduSessionResourceModifyResponseIes;
 
   std::optional<PduSessionResourceModifyListModRes>
-      m_PduSessionResourceModifyList;  // Optional
+      m_PduSessionResourceModifyList; // Optional
   // TODO: PDUSessionResourceFailedToModifyListModRes (Optional)
   // TODO: User Location Information (Optional)
   // TODO: Criticality Diagnostics (Optional)
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

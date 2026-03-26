@@ -27,12 +27,12 @@ void FailureCode::validate() const {
   }
 }
 
-bool FailureCode::validate(std::stringstream& msg) const {
+bool FailureCode::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool FailureCode::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool FailureCode::validate(std::stringstream &msg,
+                           const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "FailureCode" : pathPrefix;
@@ -43,32 +43,28 @@ bool FailureCode::validate(
   return success;
 }
 
-bool FailureCode::operator==(const FailureCode& rhs) const {
+bool FailureCode::operator==(const FailureCode &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool FailureCode::operator!=(const FailureCode& rhs) const {
+bool FailureCode::operator!=(const FailureCode &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const FailureCode& o) {
+void to_json(nlohmann::json &j, const FailureCode &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, FailureCode& o) {
+void from_json(const nlohmann::json &j, FailureCode &o) {
   from_json(j, o.m_value);
 }
 
-FailureCode_anyOf FailureCode::getValue() const {
-  return m_value;
-}
+FailureCode_anyOf FailureCode::getValue() const { return m_value; }
 
-void FailureCode::setValue(FailureCode_anyOf value) {
-  m_value = value;
-}
+void FailureCode::setValue(FailureCode_anyOf value) { m_value = value; }
 
 FailureCode_anyOf::eFailureCode_anyOf FailureCode::getEnumValue() const {
   return m_value.getValue();
@@ -78,4 +74,4 @@ void FailureCode::setEnumValue(FailureCode_anyOf::eFailureCode_anyOf value) {
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

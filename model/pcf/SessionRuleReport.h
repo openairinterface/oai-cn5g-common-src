@@ -19,12 +19,12 @@
 #ifndef SessionRuleReport_H_
 #define SessionRuleReport_H_
 
-#include "RuleStatus.h"
 #include "PolicyDecisionFailureCode.h"
-#include <string>
+#include "RuleStatus.h"
 #include "SessionRuleFailureCode.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::pcf {
 
@@ -32,7 +32,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class SessionRuleReport {
- public:
+public:
   SessionRuleReport();
   virtual ~SessionRuleReport() = default;
 
@@ -46,16 +46,16 @@ class SessionRuleReport {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const SessionRuleReport& rhs) const;
-  bool operator!=(const SessionRuleReport& rhs) const;
+  bool operator==(const SessionRuleReport &rhs) const;
+  bool operator!=(const SessionRuleReport &rhs) const;
 
   /////////////////////////////////////////////
   /// SessionRuleReport members
@@ -64,18 +64,18 @@ class SessionRuleReport {
   /// Contains the identifier of the affected session rule(s).
   /// </summary>
   std::vector<std::string> getRuleIds() const;
-  void setRuleIds(std::vector<std::string> const& value);
+  void setRuleIds(std::vector<std::string> const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::RuleStatus getRuleStatus() const;
-  void setRuleStatus(oai::model::pcf::RuleStatus const& value);
+  void setRuleStatus(oai::model::pcf::RuleStatus const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::SessionRuleFailureCode getSessRuleFailureCode() const;
-  void setSessRuleFailureCode(
-      oai::model::pcf::SessionRuleFailureCode const& value);
+  void
+  setSessRuleFailureCode(oai::model::pcf::SessionRuleFailureCode const &value);
   bool sessRuleFailureCodeIsSet() const;
   void unsetSessRuleFailureCode();
   /// <summary>
@@ -84,14 +84,14 @@ class SessionRuleReport {
   std::vector<oai::model::pcf::PolicyDecisionFailureCode>
   getPolicyDecFailureReports() const;
   void setPolicyDecFailureReports(
-      std::vector<oai::model::pcf::PolicyDecisionFailureCode> const& value);
+      std::vector<oai::model::pcf::PolicyDecisionFailureCode> const &value);
   bool policyDecFailureReportsIsSet() const;
   void unsetPolicyDecFailureReports();
 
-  friend void to_json(nlohmann::json& j, const SessionRuleReport& o);
-  friend void from_json(const nlohmann::json& j, SessionRuleReport& o);
+  friend void to_json(nlohmann::json &j, const SessionRuleReport &o);
+  friend void from_json(const nlohmann::json &j, SessionRuleReport &o);
 
- protected:
+protected:
   std::vector<std::string> m_RuleIds;
 
   oai::model::pcf::RuleStatus m_RuleStatus;
@@ -103,6 +103,6 @@ class SessionRuleReport {
   bool m_PolicyDecFailureReportsIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* SessionRuleReport_H_ */

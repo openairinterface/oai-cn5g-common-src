@@ -19,15 +19,15 @@
 #ifndef N1N2MessageTransferReqData_H_
 #define N1N2MessageTransferReqData_H_
 
-#include "N1MessageContainer.h"
-#include "RefToBinaryData.h"
-#include <string>
-#include "N2InfoContainer.h"
 #include "AccessType.h"
-#include "Arp.h"
 #include "AreaOfValidity.h"
+#include "Arp.h"
 #include "Guami.h"
+#include "N1MessageContainer.h"
+#include "N2InfoContainer.h"
+#include "RefToBinaryData.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::amf {
 
@@ -35,7 +35,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class N1N2MessageTransferReqData {
- public:
+public:
   N1N2MessageTransferReqData();
   virtual ~N1N2MessageTransferReqData() = default;
 
@@ -49,16 +49,16 @@ class N1N2MessageTransferReqData {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const N1N2MessageTransferReqData& rhs) const;
-  bool operator!=(const N1N2MessageTransferReqData& rhs) const;
+  bool operator==(const N1N2MessageTransferReqData &rhs) const;
+  bool operator!=(const N1N2MessageTransferReqData &rhs) const;
 
   /////////////////////////////////////////////
   /// N1N2MessageTransferReqData members
@@ -67,21 +67,21 @@ class N1N2MessageTransferReqData {
   ///
   /// </summary>
   oai::model::amf::N1MessageContainer getN1MessageContainer() const;
-  void setN1MessageContainer(oai::model::amf::N1MessageContainer const& value);
+  void setN1MessageContainer(oai::model::amf::N1MessageContainer const &value);
   bool n1MessageContainerIsSet() const;
   void unsetN1MessageContainer();
   /// <summary>
   ///
   /// </summary>
   oai::model::amf::N2InfoContainer getN2InfoContainer() const;
-  void setN2InfoContainer(oai::model::amf::N2InfoContainer const& value);
+  void setN2InfoContainer(oai::model::amf::N2InfoContainer const &value);
   bool n2InfoContainerIsSet() const;
   void unsetN2InfoContainer();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::RefToBinaryData getMtData() const;
-  void setMtData(oai::model::common::RefToBinaryData const& value);
+  void setMtData(oai::model::common::RefToBinaryData const &value);
   bool mtDataIsSet() const;
   void unsetMtData();
   /// <summary>
@@ -109,7 +109,7 @@ class N1N2MessageTransferReqData {
   ///
   /// </summary>
   std::string getLcsCorrelationId() const;
-  void setLcsCorrelationId(std::string const& value);
+  void setLcsCorrelationId(std::string const &value);
   bool lcsCorrelationIdIsSet() const;
   void unsetLcsCorrelationId();
   /// <summary>
@@ -123,7 +123,7 @@ class N1N2MessageTransferReqData {
   ///
   /// </summary>
   oai::model::common::Arp getArp() const;
-  void setArp(oai::model::common::Arp const& value);
+  void setArp(oai::model::common::Arp const &value);
   bool arpIsSet() const;
   void unsetArp();
   /// <summary>
@@ -137,7 +137,7 @@ class N1N2MessageTransferReqData {
   ///
   /// </summary>
   std::string getN1n2FailureTxfNotifURI() const;
-  void setN1n2FailureTxfNotifURI(std::string const& value);
+  void setN1n2FailureTxfNotifURI(std::string const &value);
   bool n1n2FailureTxfNotifURIIsSet() const;
   void unsetN1n2FailureTxfNotifURI();
   /// <summary>
@@ -151,21 +151,21 @@ class N1N2MessageTransferReqData {
   ///
   /// </summary>
   oai::model::amf::AreaOfValidity getAreaOfValidity() const;
-  void setAreaOfValidity(oai::model::amf::AreaOfValidity const& value);
+  void setAreaOfValidity(oai::model::amf::AreaOfValidity const &value);
   bool areaOfValidityIsSet() const;
   void unsetAreaOfValidity();
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Guami getOldGuami() const;
-  void setOldGuami(oai::model::common::Guami const& value);
+  void setOldGuami(oai::model::common::Guami const &value);
   bool oldGuamiIsSet() const;
   void unsetOldGuami();
   /// <summary>
@@ -186,14 +186,14 @@ class N1N2MessageTransferReqData {
   ///
   /// </summary>
   oai::model::common::AccessType getTargetAccess() const;
-  void setTargetAccess(oai::model::common::AccessType const& value);
+  void setTargetAccess(oai::model::common::AccessType const &value);
   bool targetAccessIsSet() const;
   void unsetTargetAccess();
 
-  friend void to_json(nlohmann::json& j, const N1N2MessageTransferReqData& o);
-  friend void from_json(const nlohmann::json& j, N1N2MessageTransferReqData& o);
+  friend void to_json(nlohmann::json &j, const N1N2MessageTransferReqData &o);
+  friend void from_json(const nlohmann::json &j, N1N2MessageTransferReqData &o);
 
- protected:
+protected:
   oai::model::amf::N1MessageContainer m_N1MessageContainer;
   bool m_N1MessageContainerIsSet;
   oai::model::amf::N2InfoContainer m_N2InfoContainer;
@@ -232,6 +232,6 @@ class N1N2MessageTransferReqData {
   bool m_TargetAccessIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* N1N2MessageTransferReqData_H_ */

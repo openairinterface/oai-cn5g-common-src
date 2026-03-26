@@ -13,8 +13,8 @@
 
 #include "EventClass_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::lmf {
 
@@ -27,12 +27,12 @@ void EventClass_anyOf::validate() const {
   }
 }
 
-bool EventClass_anyOf::validate(std::stringstream& msg) const {
+bool EventClass_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool EventClass_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool EventClass_anyOf::validate(std::stringstream &msg,
+                                const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "EventClass_anyOf" : pathPrefix;
@@ -46,30 +46,30 @@ bool EventClass_anyOf::validate(
   return success;
 }
 
-bool EventClass_anyOf::operator==(const EventClass_anyOf& rhs) const {
+bool EventClass_anyOf::operator==(const EventClass_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool EventClass_anyOf::operator!=(const EventClass_anyOf& rhs) const {
+bool EventClass_anyOf::operator!=(const EventClass_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const EventClass_anyOf& o) {
+void to_json(nlohmann::json &j, const EventClass_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case EventClass_anyOf::eEventClass_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case EventClass_anyOf::eEventClass_anyOf::SUPPLEMENTARY_SERVICES:
-      j = "SUPPLEMENTARY_SERVICES";
-      break;
+  case EventClass_anyOf::eEventClass_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case EventClass_anyOf::eEventClass_anyOf::SUPPLEMENTARY_SERVICES:
+    j = "SUPPLEMENTARY_SERVICES";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, EventClass_anyOf& o) {
+void from_json(const nlohmann::json &j, EventClass_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "SUPPLEMENTARY_SERVICES") {
     o.setValue(EventClass_anyOf::eEventClass_anyOf::SUPPLEMENTARY_SERVICES);
@@ -89,4 +89,4 @@ void EventClass_anyOf::setValue(EventClass_anyOf::eEventClass_anyOf value) {
   m_value = value;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

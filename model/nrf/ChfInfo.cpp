@@ -27,7 +27,7 @@ void ChfInfo::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const ChfInfo& o) {
+void to_json(nlohmann::json &j, const ChfInfo &o) {
   j = nlohmann::json();
   if (o.supiRangeListIsSet() || !o.m_SupiRangeList.empty())
     j["supiRangeList"] = o.m_SupiRangeList;
@@ -37,7 +37,7 @@ void to_json(nlohmann::json& j, const ChfInfo& o) {
     j["plmnRangeList"] = o.m_PlmnRangeList;
 }
 
-void from_json(const nlohmann::json& j, ChfInfo& o) {
+void from_json(const nlohmann::json &j, ChfInfo &o) {
   if (j.find("supiRangeList") != j.end()) {
     j.at("supiRangeList").get_to(o.m_SupiRangeList);
     o.m_SupiRangeListIsSet = true;
@@ -52,44 +52,28 @@ void from_json(const nlohmann::json& j, ChfInfo& o) {
   }
 }
 
-std::vector<SupiRange>& ChfInfo::getSupiRangeList() {
-  return m_SupiRangeList;
-}
-void ChfInfo::setSupiRangeList(std::vector<SupiRange> const& value) {
-  m_SupiRangeList      = value;
+std::vector<SupiRange> &ChfInfo::getSupiRangeList() { return m_SupiRangeList; }
+void ChfInfo::setSupiRangeList(std::vector<SupiRange> const &value) {
+  m_SupiRangeList = value;
   m_SupiRangeListIsSet = true;
 }
-bool ChfInfo::supiRangeListIsSet() const {
-  return m_SupiRangeListIsSet;
-}
-void ChfInfo::unsetSupiRangeList() {
-  m_SupiRangeListIsSet = false;
-}
-std::vector<IdentityRange>& ChfInfo::getGpsiRangeList() {
+bool ChfInfo::supiRangeListIsSet() const { return m_SupiRangeListIsSet; }
+void ChfInfo::unsetSupiRangeList() { m_SupiRangeListIsSet = false; }
+std::vector<IdentityRange> &ChfInfo::getGpsiRangeList() {
   return m_GpsiRangeList;
 }
-void ChfInfo::setGpsiRangeList(std::vector<IdentityRange> const& value) {
-  m_GpsiRangeList      = value;
+void ChfInfo::setGpsiRangeList(std::vector<IdentityRange> const &value) {
+  m_GpsiRangeList = value;
   m_GpsiRangeListIsSet = true;
 }
-bool ChfInfo::gpsiRangeListIsSet() const {
-  return m_GpsiRangeListIsSet;
-}
-void ChfInfo::unsetGpsiRangeList() {
-  m_GpsiRangeListIsSet = false;
-}
-std::vector<PlmnRange>& ChfInfo::getPlmnRangeList() {
-  return m_PlmnRangeList;
-}
-void ChfInfo::setPlmnRangeList(std::vector<PlmnRange> const& value) {
-  m_PlmnRangeList      = value;
+bool ChfInfo::gpsiRangeListIsSet() const { return m_GpsiRangeListIsSet; }
+void ChfInfo::unsetGpsiRangeList() { m_GpsiRangeListIsSet = false; }
+std::vector<PlmnRange> &ChfInfo::getPlmnRangeList() { return m_PlmnRangeList; }
+void ChfInfo::setPlmnRangeList(std::vector<PlmnRange> const &value) {
+  m_PlmnRangeList = value;
   m_PlmnRangeListIsSet = true;
 }
-bool ChfInfo::plmnRangeListIsSet() const {
-  return m_PlmnRangeListIsSet;
-}
-void ChfInfo::unsetPlmnRangeList() {
-  m_PlmnRangeListIsSet = false;
-}
+bool ChfInfo::plmnRangeListIsSet() const { return m_PlmnRangeListIsSet; }
+void ChfInfo::unsetPlmnRangeList() { m_PlmnRangeListIsSet = false; }
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

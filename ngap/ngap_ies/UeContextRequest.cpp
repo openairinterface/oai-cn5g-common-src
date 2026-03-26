@@ -7,36 +7,32 @@
 namespace oai::ngap {
 
 //------------------------------------------------------------------------------
-UeContextRequest::UeContextRequest() {
-  m_UeContextRequest = -1;
-}
+UeContextRequest::UeContextRequest() { m_UeContextRequest = -1; }
 
 //------------------------------------------------------------------------------
 UeContextRequest::UeContextRequest(
-    const e_Ngap_UEContextRequest& ueContextRequest)
+    const e_Ngap_UEContextRequest &ueContextRequest)
     : m_UeContextRequest(ueContextRequest) {}
 //------------------------------------------------------------------------------
 UeContextRequest::~UeContextRequest() {}
 
 //------------------------------------------------------------------------------
-void UeContextRequest::set(const e_Ngap_UEContextRequest& ueContextRequest) {
+void UeContextRequest::set(const e_Ngap_UEContextRequest &ueContextRequest) {
   m_UeContextRequest = ueContextRequest;
 }
 
 //------------------------------------------------------------------------------
-int UeContextRequest::get() const {
-  return m_UeContextRequest;
-}
+int UeContextRequest::get() const { return m_UeContextRequest; }
 
 //------------------------------------------------------------------------------
-bool UeContextRequest::encode(Ngap_UEContextRequest_t& ueContextRequest) const {
+bool UeContextRequest::encode(Ngap_UEContextRequest_t &ueContextRequest) const {
   ueContextRequest = m_UeContextRequest;
   return true;
 }
 
 //------------------------------------------------------------------------------
-bool UeContextRequest::decode(const Ngap_UEContextRequest_t& ueContextRequest) {
+bool UeContextRequest::decode(const Ngap_UEContextRequest_t &ueContextRequest) {
   m_UeContextRequest = ueContextRequest;
   return true;
 }
-}  // namespace oai::ngap
+} // namespace oai::ngap

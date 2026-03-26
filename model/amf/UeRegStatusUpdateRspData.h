@@ -27,7 +27,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class UeRegStatusUpdateRspData {
- public:
+public:
   UeRegStatusUpdateRspData();
   virtual ~UeRegStatusUpdateRspData();
 
@@ -42,13 +42,13 @@ class UeRegStatusUpdateRspData {
   bool isRegStatusTransferComplete() const;
   void setRegStatusTransferComplete(bool const value);
 
-  friend void to_json(nlohmann::json& j, const UeRegStatusUpdateRspData& o);
-  friend void from_json(const nlohmann::json& j, UeRegStatusUpdateRspData& o);
+  friend void to_json(nlohmann::json &j, const UeRegStatusUpdateRspData &o);
+  friend void from_json(const nlohmann::json &j, UeRegStatusUpdateRspData &o);
 
- protected:
+protected:
   bool m_RegStatusTransferComplete;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* UeRegStatusUpdateRspData_H_ */

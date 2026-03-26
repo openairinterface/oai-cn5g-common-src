@@ -12,8 +12,7 @@
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 static asn_oer_constraints_t
     asn_OER_type_Ngap_PDUSessionResourceModifyListModInd_constr_1 CC_NOTUSED = {
-        {0, 0},
-        -1 /* (SIZE(1..256)) */};
+        {0, 0}, -1 /* (SIZE(1..256)) */};
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 asn_per_constraints_t

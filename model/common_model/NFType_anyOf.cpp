@@ -13,8 +13,8 @@
 
 #include "NFType_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::common {
 
@@ -27,12 +27,12 @@ void NFType_anyOf::validate() const {
   }
 }
 
-bool NFType_anyOf::validate(std::stringstream& msg) const {
+bool NFType_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool NFType_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool NFType_anyOf::validate(std::stringstream &msg,
+                            const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "NFType_anyOf" : pathPrefix;
@@ -45,138 +45,138 @@ bool NFType_anyOf::validate(
   return success;
 }
 
-bool NFType_anyOf::operator==(const NFType_anyOf& rhs) const {
+bool NFType_anyOf::operator==(const NFType_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool NFType_anyOf::operator!=(const NFType_anyOf& rhs) const {
+bool NFType_anyOf::operator!=(const NFType_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const NFType_anyOf& o) {
+void to_json(nlohmann::json &j, const NFType_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case NFType_anyOf::eNFType_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case NFType_anyOf::eNFType_anyOf::NRF:
-      j = "NRF";
-      break;
-    case NFType_anyOf::eNFType_anyOf::UDM:
-      j = "UDM";
-      break;
-    case NFType_anyOf::eNFType_anyOf::AMF:
-      j = "AMF";
-      break;
-    case NFType_anyOf::eNFType_anyOf::SMF:
-      j = "SMF";
-      break;
-    case NFType_anyOf::eNFType_anyOf::AUSF:
-      j = "AUSF";
-      break;
-    case NFType_anyOf::eNFType_anyOf::NEF:
-      j = "NEF";
-      break;
-    case NFType_anyOf::eNFType_anyOf::PCF:
-      j = "PCF";
-      break;
-    case NFType_anyOf::eNFType_anyOf::SMSF:
-      j = "SMSF";
-      break;
-    case NFType_anyOf::eNFType_anyOf::NSSF:
-      j = "NSSF";
-      break;
-    case NFType_anyOf::eNFType_anyOf::UDR:
-      j = "UDR";
-      break;
-    case NFType_anyOf::eNFType_anyOf::LMF:
-      j = "LMF";
-      break;
-    case NFType_anyOf::eNFType_anyOf::GMLC:
-      j = "GMLC";
-      break;
-    case NFType_anyOf::eNFType_anyOf::_5G_EIR:
-      j = "5G_EIR";
-      break;
-    case NFType_anyOf::eNFType_anyOf::SEPP:
-      j = "SEPP";
-      break;
-    case NFType_anyOf::eNFType_anyOf::UPF:
-      j = "UPF";
-      break;
-    case NFType_anyOf::eNFType_anyOf::N3IWF:
-      j = "N3IWF";
-      break;
-    case NFType_anyOf::eNFType_anyOf::AF:
-      j = "AF";
-      break;
-    case NFType_anyOf::eNFType_anyOf::UDSF:
-      j = "UDSF";
-      break;
-    case NFType_anyOf::eNFType_anyOf::BSF:
-      j = "BSF";
-      break;
-    case NFType_anyOf::eNFType_anyOf::CHF:
-      j = "CHF";
-      break;
-    case NFType_anyOf::eNFType_anyOf::NWDAF:
-      j = "NWDAF";
-      break;
-    case NFType_anyOf::eNFType_anyOf::PCSCF:
-      j = "PCSCF";
-      break;
-    case NFType_anyOf::eNFType_anyOf::CBCF:
-      j = "CBCF";
-      break;
-    case NFType_anyOf::eNFType_anyOf::HSS:
-      j = "HSS";
-      break;
-    case NFType_anyOf::eNFType_anyOf::UCMF:
-      j = "UCMF";
-      break;
-    case NFType_anyOf::eNFType_anyOf::SOR_AF:
-      j = "SOR_AF";
-      break;
-    case NFType_anyOf::eNFType_anyOf::SPAF:
-      j = "SPAF";
-      break;
-    case NFType_anyOf::eNFType_anyOf::MME:
-      j = "MME";
-      break;
-    case NFType_anyOf::eNFType_anyOf::SCSAS:
-      j = "SCSAS";
-      break;
-    case NFType_anyOf::eNFType_anyOf::SCEF:
-      j = "SCEF";
-      break;
-    case NFType_anyOf::eNFType_anyOf::SCP:
-      j = "SCP";
-      break;
-    case NFType_anyOf::eNFType_anyOf::NSSAAF:
-      j = "NSSAAF";
-      break;
-    case NFType_anyOf::eNFType_anyOf::ICSCF:
-      j = "ICSCF";
-      break;
-    case NFType_anyOf::eNFType_anyOf::SCSCF:
-      j = "SCSCF";
-      break;
-    case NFType_anyOf::eNFType_anyOf::DRA:
-      j = "DRA";
-      break;
-    case NFType_anyOf::eNFType_anyOf::IMS_AS:
-      j = "IMS_AS";
-      break;
-    case NFType_anyOf::eNFType_anyOf::CEF:
-      j = "CEF";
-      break;
+  case NFType_anyOf::eNFType_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case NFType_anyOf::eNFType_anyOf::NRF:
+    j = "NRF";
+    break;
+  case NFType_anyOf::eNFType_anyOf::UDM:
+    j = "UDM";
+    break;
+  case NFType_anyOf::eNFType_anyOf::AMF:
+    j = "AMF";
+    break;
+  case NFType_anyOf::eNFType_anyOf::SMF:
+    j = "SMF";
+    break;
+  case NFType_anyOf::eNFType_anyOf::AUSF:
+    j = "AUSF";
+    break;
+  case NFType_anyOf::eNFType_anyOf::NEF:
+    j = "NEF";
+    break;
+  case NFType_anyOf::eNFType_anyOf::PCF:
+    j = "PCF";
+    break;
+  case NFType_anyOf::eNFType_anyOf::SMSF:
+    j = "SMSF";
+    break;
+  case NFType_anyOf::eNFType_anyOf::NSSF:
+    j = "NSSF";
+    break;
+  case NFType_anyOf::eNFType_anyOf::UDR:
+    j = "UDR";
+    break;
+  case NFType_anyOf::eNFType_anyOf::LMF:
+    j = "LMF";
+    break;
+  case NFType_anyOf::eNFType_anyOf::GMLC:
+    j = "GMLC";
+    break;
+  case NFType_anyOf::eNFType_anyOf::_5G_EIR:
+    j = "5G_EIR";
+    break;
+  case NFType_anyOf::eNFType_anyOf::SEPP:
+    j = "SEPP";
+    break;
+  case NFType_anyOf::eNFType_anyOf::UPF:
+    j = "UPF";
+    break;
+  case NFType_anyOf::eNFType_anyOf::N3IWF:
+    j = "N3IWF";
+    break;
+  case NFType_anyOf::eNFType_anyOf::AF:
+    j = "AF";
+    break;
+  case NFType_anyOf::eNFType_anyOf::UDSF:
+    j = "UDSF";
+    break;
+  case NFType_anyOf::eNFType_anyOf::BSF:
+    j = "BSF";
+    break;
+  case NFType_anyOf::eNFType_anyOf::CHF:
+    j = "CHF";
+    break;
+  case NFType_anyOf::eNFType_anyOf::NWDAF:
+    j = "NWDAF";
+    break;
+  case NFType_anyOf::eNFType_anyOf::PCSCF:
+    j = "PCSCF";
+    break;
+  case NFType_anyOf::eNFType_anyOf::CBCF:
+    j = "CBCF";
+    break;
+  case NFType_anyOf::eNFType_anyOf::HSS:
+    j = "HSS";
+    break;
+  case NFType_anyOf::eNFType_anyOf::UCMF:
+    j = "UCMF";
+    break;
+  case NFType_anyOf::eNFType_anyOf::SOR_AF:
+    j = "SOR_AF";
+    break;
+  case NFType_anyOf::eNFType_anyOf::SPAF:
+    j = "SPAF";
+    break;
+  case NFType_anyOf::eNFType_anyOf::MME:
+    j = "MME";
+    break;
+  case NFType_anyOf::eNFType_anyOf::SCSAS:
+    j = "SCSAS";
+    break;
+  case NFType_anyOf::eNFType_anyOf::SCEF:
+    j = "SCEF";
+    break;
+  case NFType_anyOf::eNFType_anyOf::SCP:
+    j = "SCP";
+    break;
+  case NFType_anyOf::eNFType_anyOf::NSSAAF:
+    j = "NSSAAF";
+    break;
+  case NFType_anyOf::eNFType_anyOf::ICSCF:
+    j = "ICSCF";
+    break;
+  case NFType_anyOf::eNFType_anyOf::SCSCF:
+    j = "SCSCF";
+    break;
+  case NFType_anyOf::eNFType_anyOf::DRA:
+    j = "DRA";
+    break;
+  case NFType_anyOf::eNFType_anyOf::IMS_AS:
+    j = "IMS_AS";
+    break;
+  case NFType_anyOf::eNFType_anyOf::CEF:
+    j = "CEF";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, NFType_anyOf& o) {
+void from_json(const nlohmann::json &j, NFType_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "NRF") {
     o.setValue(NFType_anyOf::eNFType_anyOf::NRF);
@@ -261,11 +261,9 @@ void from_json(const nlohmann::json& j, NFType_anyOf& o) {
   }
 }
 
-NFType_anyOf::eNFType_anyOf NFType_anyOf::getValue() const {
-  return m_value;
-}
+NFType_anyOf::eNFType_anyOf NFType_anyOf::getValue() const { return m_value; }
 void NFType_anyOf::setValue(NFType_anyOf::eNFType_anyOf value) {
   m_value = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

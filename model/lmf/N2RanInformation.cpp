@@ -27,12 +27,12 @@ void N2RanInformation::validate() const {
   }
 }
 
-bool N2RanInformation::validate(std::stringstream& msg) const {
+bool N2RanInformation::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool N2RanInformation::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool N2RanInformation::validate(std::stringstream &msg,
+                                const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "N2RanInformation" : pathPrefix;
@@ -40,7 +40,7 @@ bool N2RanInformation::validate(
   return success;
 }
 
-bool N2RanInformation::operator==(const N2RanInformation& rhs) const {
+bool N2RanInformation::operator==(const N2RanInformation &rhs) const {
   return
 
       (getN2InfoContent() == rhs.getN2InfoContent())
@@ -48,16 +48,16 @@ bool N2RanInformation::operator==(const N2RanInformation& rhs) const {
           ;
 }
 
-bool N2RanInformation::operator!=(const N2RanInformation& rhs) const {
+bool N2RanInformation::operator!=(const N2RanInformation &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const N2RanInformation& o) {
-  j                  = nlohmann::json();
+void to_json(nlohmann::json &j, const N2RanInformation &o) {
+  j = nlohmann::json();
   j["n2InfoContent"] = o.m_N2InfoContent;
 }
 
-void from_json(const nlohmann::json& j, N2RanInformation& o) {
+void from_json(const nlohmann::json &j, N2RanInformation &o) {
   j.at("n2InfoContent").get_to(o.m_N2InfoContent);
 }
 
@@ -65,8 +65,8 @@ oai::model::lmf::N2InfoContent N2RanInformation::getN2InfoContent() const {
   return m_N2InfoContent;
 }
 void N2RanInformation::setN2InfoContent(
-    oai::model::lmf::N2InfoContent const& value) {
+    oai::model::lmf::N2InfoContent const &value) {
   m_N2InfoContent = value;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

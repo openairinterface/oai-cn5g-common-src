@@ -23,10 +23,10 @@ void MaxIntegrityProtectedDataRate::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const MaxIntegrityProtectedDataRate& o) {
+void to_json(nlohmann::json &j, const MaxIntegrityProtectedDataRate &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, MaxIntegrityProtectedDataRate& o) {}
+void from_json(const nlohmann::json &j, MaxIntegrityProtectedDataRate &o) {}
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

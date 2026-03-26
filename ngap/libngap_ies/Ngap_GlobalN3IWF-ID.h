@@ -12,8 +12,8 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_PLMNIdentity.h"
 #include "Ngap_N3IWF-ID.h"
+#include "Ngap_PLMNIdentity.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -27,7 +27,7 @@ struct Ngap_ProtocolExtensionContainer;
 typedef struct Ngap_GlobalN3IWF_ID {
   Ngap_PLMNIdentity_t pLMNIdentity;
   Ngap_N3IWF_ID_t n3IWF_ID;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

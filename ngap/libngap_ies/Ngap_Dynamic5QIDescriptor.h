@@ -12,13 +12,13 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_PriorityLevelQos.h"
+#include "Ngap_AveragingWindow.h"
+#include "Ngap_DelayCritical.h"
+#include "Ngap_FiveQI.h"
+#include "Ngap_MaximumDataBurstVolume.h"
 #include "Ngap_PacketDelayBudget.h"
 #include "Ngap_PacketErrorRate.h"
-#include "Ngap_FiveQI.h"
-#include "Ngap_DelayCritical.h"
-#include "Ngap_AveragingWindow.h"
-#include "Ngap_MaximumDataBurstVolume.h"
+#include "Ngap_PriorityLevelQos.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -33,11 +33,11 @@ typedef struct Ngap_Dynamic5QIDescriptor {
   Ngap_PriorityLevelQos_t priorityLevelQos;
   Ngap_PacketDelayBudget_t packetDelayBudget;
   Ngap_PacketErrorRate_t packetErrorRate;
-  Ngap_FiveQI_t* fiveQI;                                 /* OPTIONAL */
-  Ngap_DelayCritical_t* delayCritical;                   /* OPTIONAL */
-  Ngap_AveragingWindow_t* averagingWindow;               /* OPTIONAL */
-  Ngap_MaximumDataBurstVolume_t* maximumDataBurstVolume; /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  Ngap_FiveQI_t *fiveQI;                                 /* OPTIONAL */
+  Ngap_DelayCritical_t *delayCritical;                   /* OPTIONAL */
+  Ngap_AveragingWindow_t *averagingWindow;               /* OPTIONAL */
+  Ngap_MaximumDataBurstVolume_t *maximumDataBurstVolume; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

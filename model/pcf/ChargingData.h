@@ -19,10 +19,10 @@
 #ifndef ChargingData_H_
 #define ChargingData_H_
 
-#include "ReportingLevel.h"
-#include <string>
 #include "MeteringMethod.h"
+#include "ReportingLevel.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::pcf {
 
@@ -30,7 +30,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class ChargingData {
- public:
+public:
   ChargingData();
   virtual ~ChargingData() = default;
 
@@ -44,16 +44,16 @@ class ChargingData {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const ChargingData& rhs) const;
-  bool operator!=(const ChargingData& rhs) const;
+  bool operator==(const ChargingData &rhs) const;
+  bool operator!=(const ChargingData &rhs) const;
 
   /////////////////////////////////////////////
   /// ChargingData members
@@ -63,12 +63,12 @@ class ChargingData {
   /// session.
   /// </summary>
   std::string getChgId() const;
-  void setChgId(std::string const& value);
+  void setChgId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::MeteringMethod getMeteringMethod() const;
-  void setMeteringMethod(oai::model::pcf::MeteringMethod const& value);
+  void setMeteringMethod(oai::model::pcf::MeteringMethod const &value);
   bool meteringMethodIsSet() const;
   void unsetMeteringMethod();
   /// <summary>
@@ -106,7 +106,7 @@ class ChargingData {
   ///
   /// </summary>
   oai::model::pcf::ReportingLevel getReportingLevel() const;
-  void setReportingLevel(oai::model::pcf::ReportingLevel const& value);
+  void setReportingLevel(oai::model::pcf::ReportingLevel const &value);
   bool reportingLevelIsSet() const;
   void unsetReportingLevel();
   /// <summary>
@@ -120,14 +120,14 @@ class ChargingData {
   /// Indicates the sponsor identity.
   /// </summary>
   std::string getSponsorId() const;
-  void setSponsorId(std::string const& value);
+  void setSponsorId(std::string const &value);
   bool sponsorIdIsSet() const;
   void unsetSponsorId();
   /// <summary>
   /// Indicates the application service provider identity.
   /// </summary>
   std::string getAppSvcProvId() const;
-  void setAppSvcProvId(std::string const& value);
+  void setAppSvcProvId(std::string const &value);
   bool appSvcProvIdIsSet() const;
   void unsetAppSvcProvId();
   /// <summary>
@@ -141,14 +141,14 @@ class ChargingData {
   ///
   /// </summary>
   std::string getAfChargId() const;
-  void setAfChargId(std::string const& value);
+  void setAfChargId(std::string const &value);
   bool afChargIdIsSet() const;
   void unsetAfChargId();
 
-  friend void to_json(nlohmann::json& j, const ChargingData& o);
-  friend void from_json(const nlohmann::json& j, ChargingData& o);
+  friend void to_json(nlohmann::json &j, const ChargingData &o);
+  friend void from_json(const nlohmann::json &j, ChargingData &o);
 
- protected:
+protected:
   std::string m_ChgId;
 
   oai::model::pcf::MeteringMethod m_MeteringMethod;
@@ -175,6 +175,6 @@ class ChargingData {
   bool m_AfChargIdIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* ChargingData_H_ */

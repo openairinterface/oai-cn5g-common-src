@@ -30,7 +30,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class MdtUserConsent {
- public:
+public:
   MdtUserConsent();
   virtual ~MdtUserConsent();
 
@@ -39,12 +39,12 @@ class MdtUserConsent {
   /////////////////////////////////////////////
   /// MdtUserConsent members
 
-  friend void to_json(nlohmann::json& j, const MdtUserConsent& o);
-  friend void from_json(const nlohmann::json& j, MdtUserConsent& o);
+  friend void to_json(nlohmann::json &j, const MdtUserConsent &o);
+  friend void from_json(const nlohmann::json &j, MdtUserConsent &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* MdtUserConsent_H_ */

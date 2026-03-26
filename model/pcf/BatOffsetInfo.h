@@ -20,8 +20,8 @@
 #define BatOffsetInfo_H_
 
 #include "Flows.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::pcf {
 
@@ -29,7 +29,7 @@ namespace oai::model::pcf {
 /// Indicates the offset of the BAT and the optionally adjusted periodicity.
 /// </summary>
 class BatOffsetInfo {
- public:
+public:
   BatOffsetInfo();
   virtual ~BatOffsetInfo() = default;
 
@@ -43,16 +43,16 @@ class BatOffsetInfo {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const BatOffsetInfo& rhs) const;
-  bool operator!=(const BatOffsetInfo& rhs) const;
+  bool operator==(const BatOffsetInfo &rhs) const;
+  bool operator!=(const BatOffsetInfo &rhs) const;
 
   /////////////////////////////////////////////
   /// BatOffsetInfo members
@@ -75,14 +75,14 @@ class BatOffsetInfo {
   /// applies for all flows of the AF session.
   /// </summary>
   std::vector<oai::model::pcf::Flows> getFlows() const;
-  void setFlows(std::vector<oai::model::pcf::Flows> const& value);
+  void setFlows(std::vector<oai::model::pcf::Flows> const &value);
   bool flowsIsSet() const;
   void unsetFlows();
 
-  friend void to_json(nlohmann::json& j, const BatOffsetInfo& o);
-  friend void from_json(const nlohmann::json& j, BatOffsetInfo& o);
+  friend void to_json(nlohmann::json &j, const BatOffsetInfo &o);
+  friend void from_json(const nlohmann::json &j, BatOffsetInfo &o);
 
- protected:
+protected:
   int32_t m_RanBatOffsetNotif;
 
   int32_t m_AdjPeriod;
@@ -91,6 +91,6 @@ class BatOffsetInfo {
   bool m_FlowsIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* BatOffsetInfo_H_ */

@@ -9,8 +9,8 @@
 #include "Ngap_SecondaryRATUsageInformation.h"
 
 #include "Ngap_PDUSessionUsageReport.h"
-#include "Ngap_QoSFlowsUsageReportList.h"
 #include "Ngap_ProtocolExtensionContainer.h"
+#include "Ngap_QoSFlowsUsageReportList.h"
 asn_TYPE_member_t asn_MBR_Ngap_SecondaryRATUsageInformation_1[] = {
     {ATF_POINTER,
      3,
@@ -33,8 +33,8 @@ asn_TYPE_member_t asn_MBR_Ngap_SecondaryRATUsageInformation_1[] = {
      "pDUSessionUsageReport"},
     {ATF_POINTER,
      2,
-     offsetof(
-         struct Ngap_SecondaryRATUsageInformation, qosFlowsUsageReportList),
+     offsetof(struct Ngap_SecondaryRATUsageInformation,
+              qosFlowsUsageReportList),
      (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_QoSFlowsUsageReportList,

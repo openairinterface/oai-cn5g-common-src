@@ -19,10 +19,10 @@
 namespace oai::udr::model {
 
 ValidTimePeriod::ValidTimePeriod() {
-  m_StartTime      = "";
+  m_StartTime = "";
   m_StartTimeIsSet = false;
-  m_EndTime        = "";
-  m_EndTimeIsSet   = false;
+  m_EndTime = "";
+  m_EndTimeIsSet = false;
 }
 
 ValidTimePeriod::~ValidTimePeriod() {}
@@ -31,13 +31,15 @@ void ValidTimePeriod::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const ValidTimePeriod& o) {
+void to_json(nlohmann::json &j, const ValidTimePeriod &o) {
   j = nlohmann::json();
-  if (o.startTimeIsSet()) j["startTime"] = o.m_StartTime;
-  if (o.endTimeIsSet()) j["endTime"] = o.m_EndTime;
+  if (o.startTimeIsSet())
+    j["startTime"] = o.m_StartTime;
+  if (o.endTimeIsSet())
+    j["endTime"] = o.m_EndTime;
 }
 
-void from_json(const nlohmann::json& j, ValidTimePeriod& o) {
+void from_json(const nlohmann::json &j, ValidTimePeriod &o) {
   if (j.find("startTime") != j.end()) {
     j.at("startTime").get_to(o.m_StartTime);
     o.m_StartTimeIsSet = true;
@@ -48,31 +50,19 @@ void from_json(const nlohmann::json& j, ValidTimePeriod& o) {
   }
 }
 
-std::string ValidTimePeriod::getStartTime() const {
-  return m_StartTime;
-}
-void ValidTimePeriod::setStartTime(std::string const& value) {
-  m_StartTime      = value;
+std::string ValidTimePeriod::getStartTime() const { return m_StartTime; }
+void ValidTimePeriod::setStartTime(std::string const &value) {
+  m_StartTime = value;
   m_StartTimeIsSet = true;
 }
-bool ValidTimePeriod::startTimeIsSet() const {
-  return m_StartTimeIsSet;
-}
-void ValidTimePeriod::unsetStartTime() {
-  m_StartTimeIsSet = false;
-}
-std::string ValidTimePeriod::getEndTime() const {
-  return m_EndTime;
-}
-void ValidTimePeriod::setEndTime(std::string const& value) {
-  m_EndTime      = value;
+bool ValidTimePeriod::startTimeIsSet() const { return m_StartTimeIsSet; }
+void ValidTimePeriod::unsetStartTime() { m_StartTimeIsSet = false; }
+std::string ValidTimePeriod::getEndTime() const { return m_EndTime; }
+void ValidTimePeriod::setEndTime(std::string const &value) {
+  m_EndTime = value;
   m_EndTimeIsSet = true;
 }
-bool ValidTimePeriod::endTimeIsSet() const {
-  return m_EndTimeIsSet;
-}
-void ValidTimePeriod::unsetEndTime() {
-  m_EndTimeIsSet = false;
-}
+bool ValidTimePeriod::endTimeIsSet() const { return m_EndTimeIsSet; }
+void ValidTimePeriod::unsetEndTime() { m_EndTimeIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

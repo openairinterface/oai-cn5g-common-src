@@ -19,7 +19,7 @@
 namespace oai::udr::model {
 
 UnrelatedClass::UnrelatedClass() {
-  m_ExternalUnrelatedClassIsSet      = false;
+  m_ExternalUnrelatedClassIsSet = false;
   m_ServiceTypeUnrelatedClassesIsSet = false;
 }
 
@@ -29,8 +29,8 @@ void UnrelatedClass::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const UnrelatedClass& o) {
-  j                          = nlohmann::json();
+void to_json(nlohmann::json &j, const UnrelatedClass &o) {
+  j = nlohmann::json();
   j["defaultUnrelatedClass"] = o.m_DefaultUnrelatedClass;
   if (o.externalUnrelatedClassIsSet())
     j["externalUnrelatedClass"] = o.m_ExternalUnrelatedClass;
@@ -39,7 +39,7 @@ void to_json(nlohmann::json& j, const UnrelatedClass& o) {
     j["serviceTypeUnrelatedClasses"] = o.m_ServiceTypeUnrelatedClasses;
 }
 
-void from_json(const nlohmann::json& j, UnrelatedClass& o) {
+void from_json(const nlohmann::json &j, UnrelatedClass &o) {
   j.at("defaultUnrelatedClass").get_to(o.m_DefaultUnrelatedClass);
   if (j.find("externalUnrelatedClass") != j.end()) {
     j.at("externalUnrelatedClass").get_to(o.m_ExternalUnrelatedClass);
@@ -55,15 +55,15 @@ DefaultUnrelatedClass UnrelatedClass::getDefaultUnrelatedClass() const {
   return m_DefaultUnrelatedClass;
 }
 void UnrelatedClass::setDefaultUnrelatedClass(
-    DefaultUnrelatedClass const& value) {
+    DefaultUnrelatedClass const &value) {
   m_DefaultUnrelatedClass = value;
 }
 ExternalUnrelatedClass UnrelatedClass::getExternalUnrelatedClass() const {
   return m_ExternalUnrelatedClass;
 }
 void UnrelatedClass::setExternalUnrelatedClass(
-    ExternalUnrelatedClass const& value) {
-  m_ExternalUnrelatedClass      = value;
+    ExternalUnrelatedClass const &value) {
+  m_ExternalUnrelatedClass = value;
   m_ExternalUnrelatedClassIsSet = true;
 }
 bool UnrelatedClass::externalUnrelatedClassIsSet() const {
@@ -72,13 +72,13 @@ bool UnrelatedClass::externalUnrelatedClassIsSet() const {
 void UnrelatedClass::unsetExternalUnrelatedClass() {
   m_ExternalUnrelatedClassIsSet = false;
 }
-std::vector<ServiceTypeUnrelatedClass>&
+std::vector<ServiceTypeUnrelatedClass> &
 UnrelatedClass::getServiceTypeUnrelatedClasses() {
   return m_ServiceTypeUnrelatedClasses;
 }
 void UnrelatedClass::setServiceTypeUnrelatedClasses(
-    std::vector<ServiceTypeUnrelatedClass> const& value) {
-  m_ServiceTypeUnrelatedClasses      = value;
+    std::vector<ServiceTypeUnrelatedClass> const &value) {
+  m_ServiceTypeUnrelatedClasses = value;
   m_ServiceTypeUnrelatedClassesIsSet = true;
 }
 bool UnrelatedClass::serviceTypeUnrelatedClassesIsSet() const {
@@ -88,4 +88,4 @@ void UnrelatedClass::unsetServiceTypeUnrelatedClasses() {
   m_ServiceTypeUnrelatedClassesIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

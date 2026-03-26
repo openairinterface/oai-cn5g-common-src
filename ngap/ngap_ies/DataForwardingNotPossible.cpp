@@ -13,17 +13,17 @@ DataForwardingNotPossible::DataForwardingNotPossible() {}
 DataForwardingNotPossible::~DataForwardingNotPossible() {}
 
 //------------------------------------------------------------------------------
-void DataForwardingNotPossible::set(const long& value) {
+void DataForwardingNotPossible::set(const long &value) {
   m_DataForwardingNotPossible = value;
 }
 
 //------------------------------------------------------------------------------
-void DataForwardingNotPossible::get(long& value) const {
+void DataForwardingNotPossible::get(long &value) const {
   value = m_DataForwardingNotPossible;
 }
 //------------------------------------------------------------------------------
 bool DataForwardingNotPossible::encode(
-    Ngap_DataForwardingNotPossible_t& value) const {
+    Ngap_DataForwardingNotPossible_t &value) const {
   // TODO:
   value = Ngap_DataForwardingNotPossible_data_forwarding_not_possible;
 
@@ -32,7 +32,7 @@ bool DataForwardingNotPossible::encode(
 
 //------------------------------------------------------------------------------
 bool DataForwardingNotPossible::decode(
-    const Ngap_DataForwardingNotPossible_t& value) {
+    const Ngap_DataForwardingNotPossible_t &value) {
   // TODO:
   if (value != Ngap_DataForwardingNotPossible_data_forwarding_not_possible)
     return false;
@@ -40,4 +40,4 @@ bool DataForwardingNotPossible::decode(
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

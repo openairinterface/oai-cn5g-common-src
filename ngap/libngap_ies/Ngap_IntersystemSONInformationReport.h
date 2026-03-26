@@ -35,9 +35,9 @@ struct Ngap_ProtocolIE_SingleContainer;
 typedef struct Ngap_IntersystemSONInformationReport {
   Ngap_IntersystemSONInformationReport_PR present;
   union Ngap_IntersystemSONInformationReport_u {
-    struct Ngap_InterSystemHOReport* hOReportInformation;
-    struct Ngap_InterSystemFailureIndication* failureIndicationInformation;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_InterSystemHOReport *hOReportInformation;
+    struct Ngap_InterSystemFailureIndication *failureIndicationInformation;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

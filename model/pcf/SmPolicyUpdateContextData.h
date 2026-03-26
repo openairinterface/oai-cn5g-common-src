@@ -19,42 +19,42 @@
 #ifndef SmPolicyUpdateContextData_H_
 #define SmPolicyUpdateContextData_H_
 
-#include "DlDataDeliveryStatus.h"
-#include "SubscribedDefaultQos.h"
-#include "QosNotificationControlInfo.h"
-#include "PresenceInfo.h"
-#include "MaPduIndication.h"
+#include "AccNetChId.h"
+#include "AccessType.h"
 #include "AccuUsageReport.h"
-#include "TraceData.h"
+#include "AdditionalAccessInfo.h"
+#include "Ambr.h"
+#include "AppDetectionInfo.h"
+#include "BridgeManagementContainer.h"
+#include "CreditManagementStatus.h"
+#include "DddTrafficDescriptor.h"
+#include "DlDataDeliveryStatus.h"
+#include "IpMulticastAddressInfo.h"
+#include "Ipv6Prefix.h"
+#include "MaPduIndication.h"
+#include "PcfAtsssCapability.h"
 #include "PlmnIdNid.h"
 #include "PolicyControlRequestTrigger.h"
-#include "Ipv6Prefix.h"
-#include "PortManagementContainer.h"
-#include "AppDetectionInfo.h"
-#include "CreditManagementStatus.h"
-#include <map>
-#include "AdditionalAccessInfo.h"
-#include "AccNetChId.h"
-#include "Ambr.h"
-#include "PcfAtsssCapability.h"
-#include "VplmnQos.h"
-#include "RatType.h"
-#include "SessionRuleReport.h"
-#include <string>
-#include "ServingNfIdentity.h"
-#include "UeInitiatedResourceRequest.h"
-#include "BridgeManagementContainer.h"
-#include <vector>
-#include "AccessType.h"
 #include "PolicyDecisionFailureCode.h"
-#include "DddTrafficDescriptor.h"
+#include "PortManagementContainer.h"
+#include "PresenceInfo.h"
 #include "QosFlowUsage.h"
 #include "QosMonitoringReport.h"
+#include "QosNotificationControlInfo.h"
+#include "RatType.h"
 #include "RuleReport.h"
-#include "UserLocation.h"
+#include "ServingNfIdentity.h"
+#include "SessionRuleReport.h"
+#include "SubscribedDefaultQos.h"
+#include "TraceData.h"
 #include "TsnBridgeInfo.h"
-#include "IpMulticastAddressInfo.h"
+#include "UeInitiatedResourceRequest.h"
+#include "UserLocation.h"
+#include "VplmnQos.h"
+#include <map>
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::pcf {
 
@@ -62,7 +62,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class SmPolicyUpdateContextData {
- public:
+public:
   SmPolicyUpdateContextData();
   virtual ~SmPolicyUpdateContextData() = default;
 
@@ -76,16 +76,16 @@ class SmPolicyUpdateContextData {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const SmPolicyUpdateContextData& rhs) const;
-  bool operator!=(const SmPolicyUpdateContextData& rhs) const;
+  bool operator==(const SmPolicyUpdateContextData &rhs) const;
+  bool operator!=(const SmPolicyUpdateContextData &rhs) const;
 
   /////////////////////////////////////////////
   /// SmPolicyUpdateContextData members
@@ -96,7 +96,7 @@ class SmPolicyUpdateContextData {
   std::vector<oai::model::pcf::PolicyControlRequestTrigger>
   getRepPolicyCtrlReqTriggers() const;
   void setRepPolicyCtrlReqTriggers(
-      std::vector<oai::model::pcf::PolicyControlRequestTrigger> const& value);
+      std::vector<oai::model::pcf::PolicyControlRequestTrigger> const &value);
   bool repPolicyCtrlReqTriggersIsSet() const;
   void unsetRepPolicyCtrlReqTriggers();
   /// <summary>
@@ -104,147 +104,147 @@ class SmPolicyUpdateContextData {
   /// whole PDU session.
   /// </summary>
   std::vector<oai::model::pcf::AccNetChId> getAccNetChIds() const;
-  void setAccNetChIds(std::vector<oai::model::pcf::AccNetChId> const& value);
+  void setAccNetChIds(std::vector<oai::model::pcf::AccNetChId> const &value);
   bool accNetChIdsIsSet() const;
   void unsetAccNetChIds();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::AccessType getAccessType() const;
-  void setAccessType(oai::model::common::AccessType const& value);
+  void setAccessType(oai::model::common::AccessType const &value);
   bool accessTypeIsSet() const;
   void unsetAccessType();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::RatType getRatType() const;
-  void setRatType(oai::model::common::RatType const& value);
+  void setRatType(oai::model::common::RatType const &value);
   bool ratTypeIsSet() const;
   void unsetRatType();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::AdditionalAccessInfo getAddAccessInfo() const;
-  void setAddAccessInfo(oai::model::pcf::AdditionalAccessInfo const& value);
+  void setAddAccessInfo(oai::model::pcf::AdditionalAccessInfo const &value);
   bool addAccessInfoIsSet() const;
   void unsetAddAccessInfo();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::AdditionalAccessInfo getRelAccessInfo() const;
-  void setRelAccessInfo(oai::model::pcf::AdditionalAccessInfo const& value);
+  void setRelAccessInfo(oai::model::pcf::AdditionalAccessInfo const &value);
   bool relAccessInfoIsSet() const;
   void unsetRelAccessInfo();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::PlmnIdNid getServingNetwork() const;
-  void setServingNetwork(oai::model::common::PlmnIdNid const& value);
+  void setServingNetwork(oai::model::common::PlmnIdNid const &value);
   bool servingNetworkIsSet() const;
   void unsetServingNetwork();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::UserLocation getUserLocationInfo() const;
-  void setUserLocationInfo(oai::model::common::UserLocation const& value);
+  void setUserLocationInfo(oai::model::common::UserLocation const &value);
   bool userLocationInfoIsSet() const;
   void unsetUserLocationInfo();
   /// <summary>
   ///
   /// </summary>
   std::string getUeTimeZone() const;
-  void setUeTimeZone(std::string const& value);
+  void setUeTimeZone(std::string const &value);
   bool ueTimeZoneIsSet() const;
   void unsetUeTimeZone();
   /// <summary>
   ///
   /// </summary>
   std::string getRelIpv4Address() const;
-  void setRelIpv4Address(std::string const& value);
+  void setRelIpv4Address(std::string const &value);
   bool relIpv4AddressIsSet() const;
   void unsetRelIpv4Address();
   /// <summary>
   ///
   /// </summary>
   std::string getIpv4Address() const;
-  void setIpv4Address(std::string const& value);
+  void setIpv4Address(std::string const &value);
   bool ipv4AddressIsSet() const;
   void unsetIpv4Address();
   /// <summary>
   /// Indicates the IPv4 address domain
   /// </summary>
   std::string getIpDomain() const;
-  void setIpDomain(std::string const& value);
+  void setIpDomain(std::string const &value);
   bool ipDomainIsSet() const;
   void unsetIpDomain();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ipv6Prefix getIpv6AddressPrefix() const;
-  void setIpv6AddressPrefix(oai::model::common::Ipv6Prefix const& value);
+  void setIpv6AddressPrefix(oai::model::common::Ipv6Prefix const &value);
   bool ipv6AddressPrefixIsSet() const;
   void unsetIpv6AddressPrefix();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ipv6Prefix getRelIpv6AddressPrefix() const;
-  void setRelIpv6AddressPrefix(oai::model::common::Ipv6Prefix const& value);
+  void setRelIpv6AddressPrefix(oai::model::common::Ipv6Prefix const &value);
   bool relIpv6AddressPrefixIsSet() const;
   void unsetRelIpv6AddressPrefix();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ipv6Prefix getAddIpv6AddrPrefixes() const;
-  void setAddIpv6AddrPrefixes(oai::model::common::Ipv6Prefix const& value);
+  void setAddIpv6AddrPrefixes(oai::model::common::Ipv6Prefix const &value);
   bool addIpv6AddrPrefixesIsSet() const;
   void unsetAddIpv6AddrPrefixes();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ipv6Prefix getAddRelIpv6AddrPrefixes() const;
-  void setAddRelIpv6AddrPrefixes(oai::model::common::Ipv6Prefix const& value);
+  void setAddRelIpv6AddrPrefixes(oai::model::common::Ipv6Prefix const &value);
   bool addRelIpv6AddrPrefixesIsSet() const;
   void unsetAddRelIpv6AddrPrefixes();
   /// <summary>
   ///
   /// </summary>
   std::string getRelUeMac() const;
-  void setRelUeMac(std::string const& value);
+  void setRelUeMac(std::string const &value);
   bool relUeMacIsSet() const;
   void unsetRelUeMac();
   /// <summary>
   ///
   /// </summary>
   std::string getUeMac() const;
-  void setUeMac(std::string const& value);
+  void setUeMac(std::string const &value);
   bool ueMacIsSet() const;
   void unsetUeMac();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ambr getSubsSessAmbr() const;
-  void setSubsSessAmbr(oai::model::common::Ambr const& value);
+  void setSubsSessAmbr(oai::model::common::Ambr const &value);
   bool subsSessAmbrIsSet() const;
   void unsetSubsSessAmbr();
   /// <summary>
   /// Indicates the DN-AAA authorization profile index
   /// </summary>
   std::string getAuthProfIndex() const;
-  void setAuthProfIndex(std::string const& value);
+  void setAuthProfIndex(std::string const &value);
   bool authProfIndexIsSet() const;
   void unsetAuthProfIndex();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::SubscribedDefaultQos getSubsDefQos() const;
-  void setSubsDefQos(oai::model::common::SubscribedDefaultQos const& value);
+  void setSubsDefQos(oai::model::common::SubscribedDefaultQos const &value);
   bool subsDefQosIsSet() const;
   void unsetSubsDefQos();
   /// <summary>
   ///
   /// </summary>
   oai::model::smf::VplmnQos getVplmnQos() const;
-  void setVplmnQos(oai::model::smf::VplmnQos const& value);
+  void setVplmnQos(oai::model::smf::VplmnQos const &value);
   bool vplmnQosIsSet() const;
   void unsetVplmnQos();
   /// <summary>
@@ -267,7 +267,7 @@ class SmPolicyUpdateContextData {
   /// </summary>
   std::vector<oai::model::pcf::AccuUsageReport> getAccuUsageReports() const;
   void setAccuUsageReports(
-      std::vector<oai::model::pcf::AccuUsageReport> const& value);
+      std::vector<oai::model::pcf::AccuUsageReport> const &value);
   bool accuUsageReportsIsSet() const;
   void unsetAccuUsageReports();
   /// <summary>
@@ -284,14 +284,14 @@ class SmPolicyUpdateContextData {
   /// </summary>
   std::vector<oai::model::pcf::AppDetectionInfo> getAppDetectionInfos() const;
   void setAppDetectionInfos(
-      std::vector<oai::model::pcf::AppDetectionInfo> const& value);
+      std::vector<oai::model::pcf::AppDetectionInfo> const &value);
   bool appDetectionInfosIsSet() const;
   void unsetAppDetectionInfos();
   /// <summary>
   /// Used to report the PCC rule failure.
   /// </summary>
   std::vector<oai::model::pcf::RuleReport> getRuleReports() const;
-  void setRuleReports(std::vector<oai::model::pcf::RuleReport> const& value);
+  void setRuleReports(std::vector<oai::model::pcf::RuleReport> const &value);
   bool ruleReportsIsSet() const;
   void unsetRuleReports();
   /// <summary>
@@ -299,16 +299,16 @@ class SmPolicyUpdateContextData {
   /// </summary>
   std::vector<oai::model::pcf::SessionRuleReport> getSessRuleReports() const;
   void setSessRuleReports(
-      std::vector<oai::model::pcf::SessionRuleReport> const& value);
+      std::vector<oai::model::pcf::SessionRuleReport> const &value);
   bool sessRuleReportsIsSet() const;
   void unsetSessRuleReports();
   /// <summary>
   /// QoS Notification Control information.
   /// </summary>
-  std::vector<oai::model::pcf::QosNotificationControlInfo> getQncReports()
-      const;
+  std::vector<oai::model::pcf::QosNotificationControlInfo>
+  getQncReports() const;
   void setQncReports(
-      std::vector<oai::model::pcf::QosNotificationControlInfo> const& value);
+      std::vector<oai::model::pcf::QosNotificationControlInfo> const &value);
   bool qncReportsIsSet() const;
   void unsetQncReports();
   /// <summary>
@@ -316,31 +316,31 @@ class SmPolicyUpdateContextData {
   /// </summary>
   std::vector<oai::model::pcf::QosMonitoringReport> getQosMonReports() const;
   void setQosMonReports(
-      std::vector<oai::model::pcf::QosMonitoringReport> const& value);
+      std::vector<oai::model::pcf::QosMonitoringReport> const &value);
   bool qosMonReportsIsSet() const;
   void unsetQosMonReports();
   /// <summary>
   ///
   /// </summary>
   std::string getUserLocationInfoTime() const;
-  void setUserLocationInfoTime(std::string const& value);
+  void setUserLocationInfoTime(std::string const &value);
   bool userLocationInfoTimeIsSet() const;
   void unsetUserLocationInfoTime();
   /// <summary>
   /// Reports the changes of presence reporting area.
   /// </summary>
-  std::map<std::string, oai::model::common::PresenceInfo> getRepPraInfos()
-      const;
+  std::map<std::string, oai::model::common::PresenceInfo>
+  getRepPraInfos() const;
   void setRepPraInfos(
-      std::map<std::string, oai::model::common::PresenceInfo> const& value);
+      std::map<std::string, oai::model::common::PresenceInfo> const &value);
   bool repPraInfosIsSet() const;
   void unsetRepPraInfos();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::UeInitiatedResourceRequest getUeInitResReq() const;
-  void setUeInitResReq(
-      oai::model::pcf::UeInitiatedResourceRequest const& value);
+  void
+  setUeInitResReq(oai::model::pcf::UeInitiatedResourceRequest const &value);
   bool ueInitResReqIsSet() const;
   void unsetUeInitResReq();
   /// <summary>
@@ -356,75 +356,75 @@ class SmPolicyUpdateContextData {
   ///
   /// </summary>
   oai::model::pcf::QosFlowUsage getQosFlowUsage() const;
-  void setQosFlowUsage(oai::model::pcf::QosFlowUsage const& value);
+  void setQosFlowUsage(oai::model::pcf::QosFlowUsage const &value);
   bool qosFlowUsageIsSet() const;
   void unsetQosFlowUsage();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::CreditManagementStatus getCreditManageStatus() const;
-  void setCreditManageStatus(
-      oai::model::pcf::CreditManagementStatus const& value);
+  void
+  setCreditManageStatus(oai::model::pcf::CreditManagementStatus const &value);
   bool creditManageStatusIsSet() const;
   void unsetCreditManageStatus();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::ServingNfIdentity getServNfId() const;
-  void setServNfId(oai::model::pcf::ServingNfIdentity const& value);
+  void setServNfId(oai::model::pcf::ServingNfIdentity const &value);
   bool servNfIdIsSet() const;
   void unsetServNfId();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::TraceData getTraceReq() const;
-  void setTraceReq(oai::model::common::TraceData const& value);
+  void setTraceReq(oai::model::common::TraceData const &value);
   bool traceReqIsSet() const;
   void unsetTraceReq();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::MaPduIndication getMaPduInd() const;
-  void setMaPduInd(oai::model::pcf::MaPduIndication const& value);
+  void setMaPduInd(oai::model::pcf::MaPduIndication const &value);
   bool maPduIndIsSet() const;
   void unsetMaPduInd();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::AtsssCapability getAtsssCapab() const;
-  void setAtsssCapab(oai::model::pcf::AtsssCapability const& value);
+  void setAtsssCapab(oai::model::pcf::AtsssCapability const &value);
   bool atsssCapabIsSet() const;
   void unsetAtsssCapab();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::TsnBridgeInfo getTsnBridgeInfo() const;
-  void setTsnBridgeInfo(oai::model::pcf::TsnBridgeInfo const& value);
+  void setTsnBridgeInfo(oai::model::pcf::TsnBridgeInfo const &value);
   bool tsnBridgeInfoIsSet() const;
   void unsetTsnBridgeInfo();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::BridgeManagementContainer getTsnBridgeManCont() const;
-  void setTsnBridgeManCont(
-      oai::model::pcf::BridgeManagementContainer const& value);
+  void
+  setTsnBridgeManCont(oai::model::pcf::BridgeManagementContainer const &value);
   bool tsnBridgeManContIsSet() const;
   void unsetTsnBridgeManCont();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::PortManagementContainer getTsnPortManContDstt() const;
-  void setTsnPortManContDstt(
-      oai::model::pcf::PortManagementContainer const& value);
+  void
+  setTsnPortManContDstt(oai::model::pcf::PortManagementContainer const &value);
   bool tsnPortManContDsttIsSet() const;
   void unsetTsnPortManContDstt();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::pcf::PortManagementContainer> getTsnPortManContNwtts()
-      const;
+  std::vector<oai::model::pcf::PortManagementContainer>
+  getTsnPortManContNwtts() const;
   void setTsnPortManContNwtts(
-      std::vector<oai::model::pcf::PortManagementContainer> const& value);
+      std::vector<oai::model::pcf::PortManagementContainer> const &value);
   bool tsnPortManContNwttsIsSet() const;
   void unsetTsnPortManContNwtts();
   /// <summary>
@@ -432,7 +432,7 @@ class SmPolicyUpdateContextData {
   /// </summary>
   std::vector<oai::model::pcf::IpMulticastAddressInfo> getMulAddrInfos() const;
   void setMulAddrInfos(
-      std::vector<oai::model::pcf::IpMulticastAddressInfo> const& value);
+      std::vector<oai::model::pcf::IpMulticastAddressInfo> const &value);
   bool mulAddrInfosIsSet() const;
   void unsetMulAddrInfos();
   /// <summary>
@@ -441,16 +441,16 @@ class SmPolicyUpdateContextData {
   std::vector<oai::model::pcf::PolicyDecisionFailureCode>
   getPolicyDecFailureReports() const;
   void setPolicyDecFailureReports(
-      std::vector<oai::model::pcf::PolicyDecisionFailureCode> const& value);
+      std::vector<oai::model::pcf::PolicyDecisionFailureCode> const &value);
   bool policyDecFailureReportsIsSet() const;
   void unsetPolicyDecFailureReports();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::DddTrafficDescriptor> getTrafficDescriptors()
-      const;
+  std::vector<oai::model::common::DddTrafficDescriptor>
+  getTrafficDescriptors() const;
   void setTrafficDescriptors(
-      std::vector<oai::model::common::DddTrafficDescriptor> const& value);
+      std::vector<oai::model::common::DddTrafficDescriptor> const &value);
   bool trafficDescriptorsIsSet() const;
   void unsetTrafficDescriptors();
   /// <summary>
@@ -458,14 +458,14 @@ class SmPolicyUpdateContextData {
   /// detection of event.
   /// </summary>
   std::string getPccRuleId() const;
-  void setPccRuleId(std::string const& value);
+  void setPccRuleId(std::string const &value);
   bool pccRuleIdIsSet() const;
   void unsetPccRuleId();
   /// <summary>
   ///
   /// </summary>
   std::vector<std::string> getInterGrpIds() const;
-  void setInterGrpIds(std::vector<std::string> const& value);
+  void setInterGrpIds(std::vector<std::string> const &value);
   bool interGrpIdsIsSet() const;
   void unsetInterGrpIds();
   /// <summary>
@@ -473,14 +473,14 @@ class SmPolicyUpdateContextData {
   /// </summary>
   std::vector<oai::model::common::DlDataDeliveryStatus> getTypesOfNotif() const;
   void setTypesOfNotif(
-      std::vector<oai::model::common::DlDataDeliveryStatus> const& value);
+      std::vector<oai::model::common::DlDataDeliveryStatus> const &value);
   bool typesOfNotifIsSet() const;
   void unsetTypesOfNotif();
 
-  friend void to_json(nlohmann::json& j, const SmPolicyUpdateContextData& o);
-  friend void from_json(const nlohmann::json& j, SmPolicyUpdateContextData& o);
+  friend void to_json(nlohmann::json &j, const SmPolicyUpdateContextData &o);
+  friend void from_json(const nlohmann::json &j, SmPolicyUpdateContextData &o);
 
- protected:
+protected:
   std::vector<oai::model::pcf::PolicyControlRequestTrigger>
       m_RepPolicyCtrlReqTriggers;
   bool m_RepPolicyCtrlReqTriggersIsSet;
@@ -587,6 +587,6 @@ class SmPolicyUpdateContextData {
   bool m_TypesOfNotifIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* SmPolicyUpdateContextData_H_ */

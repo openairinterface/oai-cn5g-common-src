@@ -19,9 +19,9 @@
 #ifndef Area_H_
 #define Area_H_
 
+#include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
-#include <nlohmann/json.hpp>
 
 namespace oai::model::common {
 
@@ -29,7 +29,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class Area {
- public:
+public:
   Area();
   virtual ~Area() = default;
 
@@ -43,16 +43,16 @@ class Area {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const Area& rhs) const;
-  bool operator!=(const Area& rhs) const;
+  bool operator==(const Area &rhs) const;
+  bool operator!=(const Area &rhs) const;
 
   /////////////////////////////////////////////
   /// Area members
@@ -61,27 +61,27 @@ class Area {
   ///
   /// </summary>
   std::vector<std::string> getTacs() const;
-  void setTacs(std::vector<std::string> const& value);
+  void setTacs(std::vector<std::string> const &value);
   bool tacsIsSet() const;
   void unsetTacs();
   /// <summary>
   ///
   /// </summary>
   std::string getAreaCode() const;
-  void setAreaCode(std::string const& value);
+  void setAreaCode(std::string const &value);
   bool areaCodeIsSet() const;
   void unsetAreaCode();
 
-  friend void to_json(nlohmann::json& j, const Area& o);
-  friend void from_json(const nlohmann::json& j, Area& o);
+  friend void to_json(nlohmann::json &j, const Area &o);
+  friend void from_json(const nlohmann::json &j, Area &o);
 
- protected:
+protected:
   std::vector<std::string> m_Tacs;
   bool m_TacsIsSet;
   std::string m_AreaCode;
   bool m_AreaCodeIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* Area_H_ */

@@ -30,7 +30,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class HssAuthTypeInUri {
- public:
+public:
   HssAuthTypeInUri();
   virtual ~HssAuthTypeInUri();
 
@@ -39,12 +39,12 @@ class HssAuthTypeInUri {
   /////////////////////////////////////////////
   /// HssAuthTypeInUri members
 
-  friend void to_json(nlohmann::json& j, const HssAuthTypeInUri& o);
-  friend void from_json(const nlohmann::json& j, HssAuthTypeInUri& o);
+  friend void to_json(nlohmann::json &j, const HssAuthTypeInUri &o);
+  friend void from_json(const nlohmann::json &j, HssAuthTypeInUri &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* HssAuthTypeInUri_H_ */

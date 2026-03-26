@@ -20,8 +20,8 @@
 #define Dynamic5Qi_H_
 
 #include "QosResourceType.h"
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::common {
 
@@ -29,7 +29,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class Dynamic5Qi {
- public:
+public:
   Dynamic5Qi();
   virtual ~Dynamic5Qi() = default;
 
@@ -43,16 +43,16 @@ class Dynamic5Qi {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const Dynamic5Qi& rhs) const;
-  bool operator!=(const Dynamic5Qi& rhs) const;
+  bool operator==(const Dynamic5Qi &rhs) const;
+  bool operator!=(const Dynamic5Qi &rhs) const;
 
   /////////////////////////////////////////////
   /// Dynamic5Qi members
@@ -61,7 +61,7 @@ class Dynamic5Qi {
   ///
   /// </summary>
   oai::model::common::QosResourceType getResourceType() const;
-  void setResourceType(oai::model::common::QosResourceType const& value);
+  void setResourceType(oai::model::common::QosResourceType const &value);
   /// <summary>
   ///
   /// </summary>
@@ -76,7 +76,7 @@ class Dynamic5Qi {
   ///
   /// </summary>
   std::string getPacketErrRate() const;
-  void setPacketErrRate(std::string const& value);
+  void setPacketErrRate(std::string const &value);
   /// <summary>
   ///
   /// </summary>
@@ -120,10 +120,10 @@ class Dynamic5Qi {
   bool cnPacketDelayBudgetUlIsSet() const;
   void unsetCnPacketDelayBudgetUl();
 
-  friend void to_json(nlohmann::json& j, const Dynamic5Qi& o);
-  friend void from_json(const nlohmann::json& j, Dynamic5Qi& o);
+  friend void to_json(nlohmann::json &j, const Dynamic5Qi &o);
+  friend void from_json(const nlohmann::json &j, Dynamic5Qi &o);
 
- protected:
+protected:
   oai::model::common::QosResourceType m_ResourceType;
 
   int32_t m_PriorityLevel;
@@ -146,6 +146,6 @@ class Dynamic5Qi {
   bool m_CnPacketDelayBudgetUlIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* Dynamic5Qi_H_ */

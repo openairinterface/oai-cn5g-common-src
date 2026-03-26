@@ -19,8 +19,8 @@
 #ifndef TsnQosContainer_H_
 #define TsnQosContainer_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::pcf {
 
@@ -28,7 +28,7 @@ namespace oai::model::pcf {
 /// Indicates TSC Traffic QoS.
 /// </summary>
 class TsnQosContainer {
- public:
+public:
   TsnQosContainer();
   virtual ~TsnQosContainer() = default;
 
@@ -42,16 +42,16 @@ class TsnQosContainer {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const TsnQosContainer& rhs) const;
-  bool operator!=(const TsnQosContainer& rhs) const;
+  bool operator==(const TsnQosContainer &rhs) const;
+  bool operator!=(const TsnQosContainer &rhs) const;
 
   /////////////////////////////////////////////
   /// TsnQosContainer members
@@ -78,7 +78,7 @@ class TsnQosContainer {
   /// scalar and the exponent k are each encoded as one decimal digit.
   /// </summary>
   std::string getMaxPer() const;
-  void setMaxPer(std::string const& value);
+  void setMaxPer(std::string const &value);
   bool maxPerIsSet() const;
   void unsetMaxPer();
   /// <summary>
@@ -89,10 +89,10 @@ class TsnQosContainer {
   bool tscPrioLevelIsSet() const;
   void unsetTscPrioLevel();
 
-  friend void to_json(nlohmann::json& j, const TsnQosContainer& o);
-  friend void from_json(const nlohmann::json& j, TsnQosContainer& o);
+  friend void to_json(nlohmann::json &j, const TsnQosContainer &o);
+  friend void from_json(const nlohmann::json &j, TsnQosContainer &o);
 
- protected:
+protected:
   int32_t m_MaxTscBurstSize;
   bool m_MaxTscBurstSizeIsSet;
   int32_t m_TscPackDelay;
@@ -103,6 +103,6 @@ class TsnQosContainer {
   bool m_TscPrioLevelIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* TsnQosContainer_H_ */

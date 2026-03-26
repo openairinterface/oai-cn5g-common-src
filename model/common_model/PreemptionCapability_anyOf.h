@@ -27,7 +27,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class PreemptionCapability_anyOf {
- public:
+public:
   PreemptionCapability_anyOf();
   virtual ~PreemptionCapability_anyOf() = default;
 
@@ -50,16 +50,16 @@ class PreemptionCapability_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const PreemptionCapability_anyOf& rhs) const;
-  bool operator!=(const PreemptionCapability_anyOf& rhs) const;
+  bool operator==(const PreemptionCapability_anyOf &rhs) const;
+  bool operator!=(const PreemptionCapability_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// PreemptionCapability_anyOf members
@@ -67,14 +67,14 @@ class PreemptionCapability_anyOf {
   PreemptionCapability_anyOf::ePreemptionCapability_anyOf getValue() const;
   void setValue(PreemptionCapability_anyOf::ePreemptionCapability_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const PreemptionCapability_anyOf& o);
-  friend void from_json(const nlohmann::json& j, PreemptionCapability_anyOf& o);
+  friend void to_json(nlohmann::json &j, const PreemptionCapability_anyOf &o);
+  friend void from_json(const nlohmann::json &j, PreemptionCapability_anyOf &o);
 
   PreemptionCapability_anyOf::ePreemptionCapability_anyOf m_value =
       PreemptionCapability_anyOf::ePreemptionCapability_anyOf::
           INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* PreemptionCapability_anyOf_H_ */

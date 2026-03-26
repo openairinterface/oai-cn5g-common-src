@@ -20,20 +20,20 @@
 #define UeContext_H_
 
 #include "Ambr.h"
-#include "CoreNetworkType.h"
-#include "Area.h"
-#include "RatType.h"
-#include <string>
-#include "TraceData.h"
-#include <vector>
-#include "SeafData.h"
-#include "PolicyReqTrigger.h"
-#include "SmsSupport.h"
-#include "PduSessionContext.h"
-#include "ServiceAreaRestriction.h"
 #include "AmfEventSubscription.h"
+#include "Area.h"
+#include "CoreNetworkType.h"
 #include "MmContext.h"
+#include "PduSessionContext.h"
+#include "PolicyReqTrigger.h"
+#include "RatType.h"
+#include "SeafData.h"
+#include "ServiceAreaRestriction.h"
+#include "SmsSupport.h"
+#include "TraceData.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::amf {
 
@@ -41,7 +41,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class UeContext {
- public:
+public:
   UeContext();
   virtual ~UeContext();
 
@@ -54,7 +54,7 @@ class UeContext {
   ///
   /// </summary>
   std::string getSupi() const;
-  void setSupi(std::string const& value);
+  void setSupi(std::string const &value);
   bool supiIsSet() const;
   void unsetSupi();
   /// <summary>
@@ -67,48 +67,48 @@ class UeContext {
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getGpsiList();
+  std::vector<std::string> &getGpsiList();
   bool gpsiListIsSet() const;
   void unsetGpsiList();
   /// <summary>
   ///
   /// </summary>
   std::string getPei() const;
-  void setPei(std::string const& value);
+  void setPei(std::string const &value);
   bool peiIsSet() const;
   void unsetPei();
   /// <summary>
   ///
   /// </summary>
   std::string getUdmGroupId() const;
-  void setUdmGroupId(std::string const& value);
+  void setUdmGroupId(std::string const &value);
   bool udmGroupIdIsSet() const;
   void unsetUdmGroupId();
   /// <summary>
   ///
   /// </summary>
   std::string getAusfGroupId() const;
-  void setAusfGroupId(std::string const& value);
+  void setAusfGroupId(std::string const &value);
   bool ausfGroupIdIsSet() const;
   void unsetAusfGroupId();
   /// <summary>
   ///
   /// </summary>
   std::string getRoutingIndicator() const;
-  void setRoutingIndicator(std::string const& value);
+  void setRoutingIndicator(std::string const &value);
   bool routingIndicatorIsSet() const;
   void unsetRoutingIndicator();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getGroupList();
+  std::vector<std::string> &getGroupList();
   bool groupListIsSet() const;
   void unsetGroupList();
   /// <summary>
   ///
   /// </summary>
   std::string getDrxParameter() const;
-  void setDrxParameter(std::string const& value);
+  void setDrxParameter(std::string const &value);
   bool drxParameterIsSet() const;
   void unsetDrxParameter();
   /// <summary>
@@ -129,87 +129,87 @@ class UeContext {
   ///
   /// </summary>
   oai::model::common::Ambr getSubUeAmbr() const;
-  void setSubUeAmbr(oai::model::common::Ambr const& value);
+  void setSubUeAmbr(oai::model::common::Ambr const &value);
   bool subUeAmbrIsSet() const;
   void unsetSubUeAmbr();
   /// <summary>
   ///
   /// </summary>
   SmsSupport getSmsSupport() const;
-  void setSmsSupport(SmsSupport const& value);
+  void setSmsSupport(SmsSupport const &value);
   bool smsSupportIsSet() const;
   void unsetSmsSupport();
   /// <summary>
   ///
   /// </summary>
   std::string getSmsfId() const;
-  void setSmsfId(std::string const& value);
+  void setSmsfId(std::string const &value);
   bool smsfIdIsSet() const;
   void unsetSmsfId();
   /// <summary>
   ///
   /// </summary>
   SeafData getSeafData() const;
-  void setSeafData(SeafData const& value);
+  void setSeafData(SeafData const &value);
   bool seafDataIsSet() const;
   void unsetSeafData();
   /// <summary>
   ///
   /// </summary>
   std::string get5gMmCapability() const;
-  void set5gMmCapability(std::string const& value);
+  void set5gMmCapability(std::string const &value);
   bool _5gMmCapabilityIsSet() const;
   void unset_5gMmCapability();
   /// <summary>
   ///
   /// </summary>
   std::string getPcfId() const;
-  void setPcfId(std::string const& value);
+  void setPcfId(std::string const &value);
   bool pcfIdIsSet() const;
   void unsetPcfId();
   /// <summary>
   ///
   /// </summary>
   std::string getPcfAmPolicyUri() const;
-  void setPcfAmPolicyUri(std::string const& value);
+  void setPcfAmPolicyUri(std::string const &value);
   bool pcfAmPolicyUriIsSet() const;
   void unsetPcfAmPolicyUri();
   /// <summary>
   ///
   /// </summary>
-  std::vector<PolicyReqTrigger>& getAmPolicyReqTriggerList();
+  std::vector<PolicyReqTrigger> &getAmPolicyReqTriggerList();
   bool amPolicyReqTriggerListIsSet() const;
   void unsetAmPolicyReqTriggerList();
   /// <summary>
   ///
   /// </summary>
   std::string getPcfUePolicyUri() const;
-  void setPcfUePolicyUri(std::string const& value);
+  void setPcfUePolicyUri(std::string const &value);
   bool pcfUePolicyUriIsSet() const;
   void unsetPcfUePolicyUri();
   /// <summary>
   ///
   /// </summary>
-  std::vector<PolicyReqTrigger>& getUePolicyReqTriggerList();
+  std::vector<PolicyReqTrigger> &getUePolicyReqTriggerList();
   bool uePolicyReqTriggerListIsSet() const;
   void unsetUePolicyReqTriggerList();
   /// <summary>
   ///
   /// </summary>
   std::string getHpcfId() const;
-  void setHpcfId(std::string const& value);
+  void setHpcfId(std::string const &value);
   bool hpcfIdIsSet() const;
   void unsetHpcfId();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::RatType>& getRestrictedRatList();
+  std::vector<oai::model::common::RatType> &getRestrictedRatList();
   bool restrictedRatListIsSet() const;
   void unsetRestrictedRatList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::Area>& getForbiddenAreaList();
+  std::vector<oai::model::common::Area> &getForbiddenAreaList();
   bool forbiddenAreaListIsSet() const;
   void unsetForbiddenAreaList();
   /// <summary>
@@ -217,39 +217,39 @@ class UeContext {
   /// </summary>
   oai::model::common::ServiceAreaRestriction getServiceAreaRestriction() const;
   void setServiceAreaRestriction(
-      oai::model::common::ServiceAreaRestriction const& value);
+      oai::model::common::ServiceAreaRestriction const &value);
   bool serviceAreaRestrictionIsSet() const;
   void unsetServiceAreaRestriction();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::CoreNetworkType>&
+  std::vector<oai::model::common::CoreNetworkType> &
   getRestrictedCoreNwTypeList();
   bool restrictedCoreNwTypeListIsSet() const;
   void unsetRestrictedCoreNwTypeList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<AmfEventSubscription>& getEventSubscriptionList();
+  std::vector<AmfEventSubscription> &getEventSubscriptionList();
   bool eventSubscriptionListIsSet() const;
   void unsetEventSubscriptionList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<MmContext>& getMmContextList();
+  std::vector<MmContext> &getMmContextList();
   bool mmContextListIsSet() const;
   void unsetMmContextList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<PduSessionContext>& getSessionContextList();
+  std::vector<PduSessionContext> &getSessionContextList();
   bool sessionContextListIsSet() const;
   void unsetSessionContextList();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::TraceData getTraceData() const;
-  void setTraceData(oai::model::common::TraceData const& value);
+  void setTraceData(oai::model::common::TraceData const &value);
   bool traceDataIsSet() const;
   void unsetTraceData();
   /// <summary>
@@ -260,10 +260,10 @@ class UeContext {
   bool remainingServiceGapTimerIsSet() const;
   void unsetRemainingServiceGapTimer();
 
-  friend void to_json(nlohmann::json& j, const UeContext& o);
-  friend void from_json(const nlohmann::json& j, UeContext& o);
+  friend void to_json(nlohmann::json &j, const UeContext &o);
+  friend void from_json(const nlohmann::json &j, UeContext &o);
 
- protected:
+protected:
   std::string m_Supi;
   bool m_SupiIsSet;
   bool m_SupiUnauthInd;
@@ -328,6 +328,6 @@ class UeContext {
   bool m_RemainingServiceGapTimerIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* UeContext_H_ */

@@ -30,7 +30,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class GeographicalCoordinates {
- public:
+public:
   GeographicalCoordinates();
   virtual ~GeographicalCoordinates();
 
@@ -50,15 +50,15 @@ class GeographicalCoordinates {
   double getLat() const;
   void setLat(double const value);
 
-  friend void to_json(nlohmann::json& j, const GeographicalCoordinates& o);
-  friend void from_json(const nlohmann::json& j, GeographicalCoordinates& o);
+  friend void to_json(nlohmann::json &j, const GeographicalCoordinates &o);
+  friend void from_json(const nlohmann::json &j, GeographicalCoordinates &o);
 
- protected:
+protected:
   double m_Lon;
 
   double m_Lat;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* GeographicalCoordinates_H_ */

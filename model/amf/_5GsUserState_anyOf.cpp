@@ -13,8 +13,8 @@
 
 #include "_5GsUserState_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::amf {
 
@@ -27,12 +27,12 @@ void _5GsUserState_anyOf::validate() const {
   }
 }
 
-bool _5GsUserState_anyOf::validate(std::stringstream& msg) const {
+bool _5GsUserState_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool _5GsUserState_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool _5GsUserState_anyOf::validate(std::stringstream &msg,
+                                   const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "_5GsUserState_anyOf" : pathPrefix;
@@ -46,50 +46,50 @@ bool _5GsUserState_anyOf::validate(
   return success;
 }
 
-bool _5GsUserState_anyOf::operator==(const _5GsUserState_anyOf& rhs) const {
+bool _5GsUserState_anyOf::operator==(const _5GsUserState_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool _5GsUserState_anyOf::operator!=(const _5GsUserState_anyOf& rhs) const {
+bool _5GsUserState_anyOf::operator!=(const _5GsUserState_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const _5GsUserState_anyOf& o) {
+void to_json(nlohmann::json &j, const _5GsUserState_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case _5GsUserState_anyOf::e_5GsUserState_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case _5GsUserState_anyOf::e_5GsUserState_anyOf::DEREGISTERED:
-      j = "DEREGISTERED";
-      break;
-    case _5GsUserState_anyOf::e_5GsUserState_anyOf::
-        REGISTERED_NOT_REACHABLE_FOR_PAGING:
-      j = "REGISTERED_NOT_REACHABLE_FOR_PAGING";
-      break;
-    case _5GsUserState_anyOf::e_5GsUserState_anyOf::
-        REGISTERED_REACHABLE_FOR_PAGING:
-      j = "REGISTERED_REACHABLE_FOR_PAGING";
-      break;
-    case _5GsUserState_anyOf::e_5GsUserState_anyOf::
-        CONNECTED_NOT_REACHABLE_FOR_PAGING:
-      j = "CONNECTED_NOT_REACHABLE_FOR_PAGING";
-      break;
-    case _5GsUserState_anyOf::e_5GsUserState_anyOf::
-        CONNECTED_REACHABLE_FOR_PAGING:
-      j = "CONNECTED_REACHABLE_FOR_PAGING";
-      break;
-    case _5GsUserState_anyOf::e_5GsUserState_anyOf::NOT_PROVIDED_FROM_AMF:
-      j = "NOT_PROVIDED_FROM_AMF";
-      break;
+  case _5GsUserState_anyOf::e_5GsUserState_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case _5GsUserState_anyOf::e_5GsUserState_anyOf::DEREGISTERED:
+    j = "DEREGISTERED";
+    break;
+  case _5GsUserState_anyOf::e_5GsUserState_anyOf::
+      REGISTERED_NOT_REACHABLE_FOR_PAGING:
+    j = "REGISTERED_NOT_REACHABLE_FOR_PAGING";
+    break;
+  case _5GsUserState_anyOf::e_5GsUserState_anyOf::
+      REGISTERED_REACHABLE_FOR_PAGING:
+    j = "REGISTERED_REACHABLE_FOR_PAGING";
+    break;
+  case _5GsUserState_anyOf::e_5GsUserState_anyOf::
+      CONNECTED_NOT_REACHABLE_FOR_PAGING:
+    j = "CONNECTED_NOT_REACHABLE_FOR_PAGING";
+    break;
+  case _5GsUserState_anyOf::e_5GsUserState_anyOf::
+      CONNECTED_REACHABLE_FOR_PAGING:
+    j = "CONNECTED_REACHABLE_FOR_PAGING";
+    break;
+  case _5GsUserState_anyOf::e_5GsUserState_anyOf::NOT_PROVIDED_FROM_AMF:
+    j = "NOT_PROVIDED_FROM_AMF";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, _5GsUserState_anyOf& o) {
+void from_json(const nlohmann::json &j, _5GsUserState_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "DEREGISTERED") {
     o.setValue(_5GsUserState_anyOf::e_5GsUserState_anyOf::DEREGISTERED);
@@ -117,8 +117,8 @@ void from_json(const nlohmann::json& j, _5GsUserState_anyOf& o) {
   }
 }
 
-_5GsUserState_anyOf::e_5GsUserState_anyOf _5GsUserState_anyOf::getValue()
-    const {
+_5GsUserState_anyOf::e_5GsUserState_anyOf
+_5GsUserState_anyOf::getValue() const {
   return m_value;
 }
 void _5GsUserState_anyOf::setValue(
@@ -126,4 +126,4 @@ void _5GsUserState_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

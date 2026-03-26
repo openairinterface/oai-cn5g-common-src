@@ -19,8 +19,8 @@
 #ifndef PortManagementContainer_H_
 #define PortManagementContainer_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::pcf {
 
@@ -28,7 +28,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class PortManagementContainer {
- public:
+public:
   PortManagementContainer();
   virtual ~PortManagementContainer() = default;
 
@@ -42,16 +42,16 @@ class PortManagementContainer {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const PortManagementContainer& rhs) const;
-  bool operator!=(const PortManagementContainer& rhs) const;
+  bool operator==(const PortManagementContainer &rhs) const;
+  bool operator!=(const PortManagementContainer &rhs) const;
 
   /////////////////////////////////////////////
   /// PortManagementContainer members
@@ -60,22 +60,22 @@ class PortManagementContainer {
   ///
   /// </summary>
   std::string getPortManCont() const;
-  void setPortManCont(std::string const& value);
+  void setPortManCont(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   int32_t getPortNum() const;
   void setPortNum(int32_t const value);
 
-  friend void to_json(nlohmann::json& j, const PortManagementContainer& o);
-  friend void from_json(const nlohmann::json& j, PortManagementContainer& o);
+  friend void to_json(nlohmann::json &j, const PortManagementContainer &o);
+  friend void from_json(const nlohmann::json &j, PortManagementContainer &o);
 
- protected:
+protected:
   std::string m_PortManCont;
 
   int32_t m_PortNum;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* PortManagementContainer_H_ */

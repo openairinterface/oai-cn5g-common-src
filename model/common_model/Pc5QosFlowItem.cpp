@@ -19,10 +19,10 @@
 namespace oai::model::common {
 
 Pc5QosFlowItem::Pc5QosFlowItem() {
-  m_Pqi                  = 0;
+  m_Pqi = 0;
   m_Pc5FlowBitRatesIsSet = false;
-  m_Range                = 0;
-  m_RangeIsSet           = false;
+  m_Range = 0;
+  m_RangeIsSet = false;
 }
 
 void Pc5QosFlowItem::validate() const {
@@ -32,18 +32,18 @@ void Pc5QosFlowItem::validate() const {
   }
 }
 
-bool Pc5QosFlowItem::validate(std::stringstream& msg) const {
+bool Pc5QosFlowItem::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool Pc5QosFlowItem::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool Pc5QosFlowItem::validate(std::stringstream &msg,
+                              const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "Pc5QosFlowItem" : pathPrefix;
 
   /* Pqi */ {
-    const int32_t& value               = m_Pqi;
+    const int32_t &value = m_Pqi;
     const std::string currentValuePath = _pathPrefix + ".pqi";
 
     if (value < 0) {
@@ -57,7 +57,7 @@ bool Pc5QosFlowItem::validate(
   }
 
   if (rangeIsSet()) {
-    const int32_t& value               = m_Range;
+    const int32_t &value = m_Range;
     const std::string currentValuePath = _pathPrefix + ".range";
 
     if (value < 0) {
@@ -69,7 +69,7 @@ bool Pc5QosFlowItem::validate(
   return success;
 }
 
-bool Pc5QosFlowItem::operator==(const Pc5QosFlowItem& rhs) const {
+bool Pc5QosFlowItem::operator==(const Pc5QosFlowItem &rhs) const {
   return
 
       (getPqi() == rhs.getPqi()) &&
@@ -84,18 +84,20 @@ bool Pc5QosFlowItem::operator==(const Pc5QosFlowItem& rhs) const {
           ;
 }
 
-bool Pc5QosFlowItem::operator!=(const Pc5QosFlowItem& rhs) const {
+bool Pc5QosFlowItem::operator!=(const Pc5QosFlowItem &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const Pc5QosFlowItem& o) {
-  j        = nlohmann::json();
+void to_json(nlohmann::json &j, const Pc5QosFlowItem &o) {
+  j = nlohmann::json();
   j["pqi"] = o.m_Pqi;
-  if (o.pc5FlowBitRatesIsSet()) j["pc5FlowBitRates"] = o.m_Pc5FlowBitRates;
-  if (o.rangeIsSet()) j["range"] = o.m_Range;
+  if (o.pc5FlowBitRatesIsSet())
+    j["pc5FlowBitRates"] = o.m_Pc5FlowBitRates;
+  if (o.rangeIsSet())
+    j["range"] = o.m_Range;
 }
 
-void from_json(const nlohmann::json& j, Pc5QosFlowItem& o) {
+void from_json(const nlohmann::json &j, Pc5QosFlowItem &o) {
   j.at("pqi").get_to(o.m_Pqi);
   if (j.find("pc5FlowBitRates") != j.end()) {
     j.at("pc5FlowBitRates").get_to(o.m_Pc5FlowBitRates);
@@ -107,38 +109,26 @@ void from_json(const nlohmann::json& j, Pc5QosFlowItem& o) {
   }
 }
 
-int32_t Pc5QosFlowItem::getPqi() const {
-  return m_Pqi;
-}
-void Pc5QosFlowItem::setPqi(int32_t const value) {
-  m_Pqi = value;
-}
+int32_t Pc5QosFlowItem::getPqi() const { return m_Pqi; }
+void Pc5QosFlowItem::setPqi(int32_t const value) { m_Pqi = value; }
 oai::model::common::Pc5FlowBitRates Pc5QosFlowItem::getPc5FlowBitRates() const {
   return m_Pc5FlowBitRates;
 }
 void Pc5QosFlowItem::setPc5FlowBitRates(
-    oai::model::common::Pc5FlowBitRates const& value) {
-  m_Pc5FlowBitRates      = value;
+    oai::model::common::Pc5FlowBitRates const &value) {
+  m_Pc5FlowBitRates = value;
   m_Pc5FlowBitRatesIsSet = true;
 }
 bool Pc5QosFlowItem::pc5FlowBitRatesIsSet() const {
   return m_Pc5FlowBitRatesIsSet;
 }
-void Pc5QosFlowItem::unsetPc5FlowBitRates() {
-  m_Pc5FlowBitRatesIsSet = false;
-}
-int32_t Pc5QosFlowItem::getRange() const {
-  return m_Range;
-}
+void Pc5QosFlowItem::unsetPc5FlowBitRates() { m_Pc5FlowBitRatesIsSet = false; }
+int32_t Pc5QosFlowItem::getRange() const { return m_Range; }
 void Pc5QosFlowItem::setRange(int32_t const value) {
-  m_Range      = value;
+  m_Range = value;
   m_RangeIsSet = true;
 }
-bool Pc5QosFlowItem::rangeIsSet() const {
-  return m_RangeIsSet;
-}
-void Pc5QosFlowItem::unsetRange() {
-  m_RangeIsSet = false;
-}
+bool Pc5QosFlowItem::rangeIsSet() const { return m_RangeIsSet; }
+void Pc5QosFlowItem::unsetRange() { m_RangeIsSet = false; }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

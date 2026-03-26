@@ -16,20 +16,20 @@ extern "C" {
 namespace oai::ngap {
 
 class PduSessionResourceFailedToSetupListHoAck {
- public:
+public:
   PduSessionResourceFailedToSetupListHoAck();
   virtual ~PduSessionResourceFailedToSetupListHoAck();
 
-  void set(const std::vector<PduSessionResourceItem>& list);
-  void get(std::vector<PduSessionResourceItem>& list) const;
+  void set(const std::vector<PduSessionResourceItem> &list);
+  void get(std::vector<PduSessionResourceItem> &list) const;
 
-  bool encode(Ngap_PDUSessionResourceFailedToSetupListHOAck_t& list) const;
-  bool decode(const Ngap_PDUSessionResourceFailedToSetupListHOAck_t& list);
+  bool encode(Ngap_PDUSessionResourceFailedToSetupListHOAck_t &list) const;
+  bool decode(const Ngap_PDUSessionResourceFailedToSetupListHOAck_t &list);
 
- private:
+private:
   std::vector<PduSessionResourceItem> m_ItemList;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

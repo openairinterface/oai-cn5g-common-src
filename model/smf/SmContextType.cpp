@@ -23,10 +23,10 @@ void SmContextType::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const SmContextType& o) {
+void to_json(nlohmann::json &j, const SmContextType &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, SmContextType& o) {}
+void from_json(const nlohmann::json &j, SmContextType &o) {}
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

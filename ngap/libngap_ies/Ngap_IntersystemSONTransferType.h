@@ -35,9 +35,9 @@ struct Ngap_ProtocolIE_SingleContainer;
 typedef struct Ngap_IntersystemSONTransferType {
   Ngap_IntersystemSONTransferType_PR present;
   union Ngap_IntersystemSONTransferType_u {
-    struct Ngap_FromEUTRANtoNGRAN* fromEUTRANtoNGRAN;
-    struct Ngap_FromNGRANtoEUTRAN* fromNGRANtoEUTRAN;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_FromEUTRANtoNGRAN *fromEUTRANtoNGRAN;
+    struct Ngap_FromNGRANtoEUTRAN *fromNGRANtoEUTRAN;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

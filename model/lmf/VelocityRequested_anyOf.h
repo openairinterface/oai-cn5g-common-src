@@ -27,7 +27,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class VelocityRequested_anyOf {
- public:
+public:
   VelocityRequested_anyOf();
   virtual ~VelocityRequested_anyOf() = default;
 
@@ -50,16 +50,16 @@ class VelocityRequested_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const VelocityRequested_anyOf& rhs) const;
-  bool operator!=(const VelocityRequested_anyOf& rhs) const;
+  bool operator==(const VelocityRequested_anyOf &rhs) const;
+  bool operator!=(const VelocityRequested_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// VelocityRequested_anyOf members
@@ -67,15 +67,15 @@ class VelocityRequested_anyOf {
   VelocityRequested_anyOf::eVelocityRequested_anyOf getValue() const;
   void setValue(VelocityRequested_anyOf::eVelocityRequested_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const VelocityRequested_anyOf& o);
-  friend void from_json(const nlohmann::json& j, VelocityRequested_anyOf& o);
+  friend void to_json(nlohmann::json &j, const VelocityRequested_anyOf &o);
+  friend void from_json(const nlohmann::json &j, VelocityRequested_anyOf &o);
 
- protected:
+protected:
   VelocityRequested_anyOf::eVelocityRequested_anyOf m_value =
       VelocityRequested_anyOf::eVelocityRequested_anyOf::
           INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* VelocityRequested_anyOf_H_ */

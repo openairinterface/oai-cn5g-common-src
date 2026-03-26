@@ -13,8 +13,8 @@
 
 #include "TransportProtocol_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::common {
 
@@ -27,12 +27,12 @@ void TransportProtocol_anyOf::validate() const {
   }
 }
 
-bool TransportProtocol_anyOf::validate(std::stringstream& msg) const {
+bool TransportProtocol_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool TransportProtocol_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool TransportProtocol_anyOf::validate(std::stringstream &msg,
+                                       const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "TransportProtocol_anyOf" : pathPrefix;
@@ -47,35 +47,35 @@ bool TransportProtocol_anyOf::validate(
 }
 
 bool TransportProtocol_anyOf::operator==(
-    const TransportProtocol_anyOf& rhs) const {
+    const TransportProtocol_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool TransportProtocol_anyOf::operator!=(
-    const TransportProtocol_anyOf& rhs) const {
+    const TransportProtocol_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const TransportProtocol_anyOf& o) {
+void to_json(nlohmann::json &j, const TransportProtocol_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case TransportProtocol_anyOf::eTransportProtocol_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case TransportProtocol_anyOf::eTransportProtocol_anyOf::UDP:
-      j = "UDP";
-      break;
-    case TransportProtocol_anyOf::eTransportProtocol_anyOf::TCP:
-      j = "TCP";
-      break;
+  case TransportProtocol_anyOf::eTransportProtocol_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case TransportProtocol_anyOf::eTransportProtocol_anyOf::UDP:
+    j = "UDP";
+    break;
+  case TransportProtocol_anyOf::eTransportProtocol_anyOf::TCP:
+    j = "TCP";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, TransportProtocol_anyOf& o) {
+void from_json(const nlohmann::json &j, TransportProtocol_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "UDP") {
     o.setValue(TransportProtocol_anyOf::eTransportProtocol_anyOf::UDP);
@@ -99,4 +99,4 @@ void TransportProtocol_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

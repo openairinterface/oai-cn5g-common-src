@@ -19,12 +19,12 @@
 namespace oai::udr::model {
 
 LcsPrivacy::LcsPrivacy() {
-  m_AfInstanceId                = "";
-  m_AfInstanceIdIsSet           = false;
-  m_ReferenceId                 = 0;
-  m_ReferenceIdIsSet            = false;
-  m_LpiIsSet                    = false;
-  m_MtcProviderInformation      = "";
+  m_AfInstanceId = "";
+  m_AfInstanceIdIsSet = false;
+  m_ReferenceId = 0;
+  m_ReferenceIdIsSet = false;
+  m_LpiIsSet = false;
+  m_MtcProviderInformation = "";
   m_MtcProviderInformationIsSet = false;
 }
 
@@ -34,16 +34,19 @@ void LcsPrivacy::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const LcsPrivacy& o) {
+void to_json(nlohmann::json &j, const LcsPrivacy &o) {
   j = nlohmann::json();
-  if (o.afInstanceIdIsSet()) j["afInstanceId"] = o.m_AfInstanceId;
-  if (o.referenceIdIsSet()) j["referenceId"] = o.m_ReferenceId;
-  if (o.lpiIsSet()) j["lpi"] = o.m_Lpi;
+  if (o.afInstanceIdIsSet())
+    j["afInstanceId"] = o.m_AfInstanceId;
+  if (o.referenceIdIsSet())
+    j["referenceId"] = o.m_ReferenceId;
+  if (o.lpiIsSet())
+    j["lpi"] = o.m_Lpi;
   if (o.mtcProviderInformationIsSet())
     j["mtcProviderInformation"] = o.m_MtcProviderInformation;
 }
 
-void from_json(const nlohmann::json& j, LcsPrivacy& o) {
+void from_json(const nlohmann::json &j, LcsPrivacy &o) {
   if (j.find("afInstanceId") != j.end()) {
     j.at("afInstanceId").get_to(o.m_AfInstanceId);
     o.m_AfInstanceIdIsSet = true;
@@ -62,50 +65,32 @@ void from_json(const nlohmann::json& j, LcsPrivacy& o) {
   }
 }
 
-std::string LcsPrivacy::getAfInstanceId() const {
-  return m_AfInstanceId;
-}
-void LcsPrivacy::setAfInstanceId(std::string const& value) {
-  m_AfInstanceId      = value;
+std::string LcsPrivacy::getAfInstanceId() const { return m_AfInstanceId; }
+void LcsPrivacy::setAfInstanceId(std::string const &value) {
+  m_AfInstanceId = value;
   m_AfInstanceIdIsSet = true;
 }
-bool LcsPrivacy::afInstanceIdIsSet() const {
-  return m_AfInstanceIdIsSet;
-}
-void LcsPrivacy::unsetAfInstanceId() {
-  m_AfInstanceIdIsSet = false;
-}
-int32_t LcsPrivacy::getReferenceId() const {
-  return m_ReferenceId;
-}
+bool LcsPrivacy::afInstanceIdIsSet() const { return m_AfInstanceIdIsSet; }
+void LcsPrivacy::unsetAfInstanceId() { m_AfInstanceIdIsSet = false; }
+int32_t LcsPrivacy::getReferenceId() const { return m_ReferenceId; }
 void LcsPrivacy::setReferenceId(int32_t const value) {
-  m_ReferenceId      = value;
+  m_ReferenceId = value;
   m_ReferenceIdIsSet = true;
 }
-bool LcsPrivacy::referenceIdIsSet() const {
-  return m_ReferenceIdIsSet;
-}
-void LcsPrivacy::unsetReferenceId() {
-  m_ReferenceIdIsSet = false;
-}
-Lpi LcsPrivacy::getLpi() const {
-  return m_Lpi;
-}
-void LcsPrivacy::setLpi(Lpi const& value) {
-  m_Lpi      = value;
+bool LcsPrivacy::referenceIdIsSet() const { return m_ReferenceIdIsSet; }
+void LcsPrivacy::unsetReferenceId() { m_ReferenceIdIsSet = false; }
+Lpi LcsPrivacy::getLpi() const { return m_Lpi; }
+void LcsPrivacy::setLpi(Lpi const &value) {
+  m_Lpi = value;
   m_LpiIsSet = true;
 }
-bool LcsPrivacy::lpiIsSet() const {
-  return m_LpiIsSet;
-}
-void LcsPrivacy::unsetLpi() {
-  m_LpiIsSet = false;
-}
+bool LcsPrivacy::lpiIsSet() const { return m_LpiIsSet; }
+void LcsPrivacy::unsetLpi() { m_LpiIsSet = false; }
 std::string LcsPrivacy::getMtcProviderInformation() const {
   return m_MtcProviderInformation;
 }
-void LcsPrivacy::setMtcProviderInformation(std::string const& value) {
-  m_MtcProviderInformation      = value;
+void LcsPrivacy::setMtcProviderInformation(std::string const &value) {
+  m_MtcProviderInformation = value;
   m_MtcProviderInformationIsSet = true;
 }
 bool LcsPrivacy::mtcProviderInformationIsSet() const {
@@ -115,4 +100,4 @@ void LcsPrivacy::unsetMtcProviderInformation() {
   m_MtcProviderInformationIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

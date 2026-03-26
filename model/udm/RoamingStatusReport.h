@@ -28,7 +28,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class RoamingStatusReport {
- public:
+public:
   RoamingStatusReport();
   virtual ~RoamingStatusReport() = default;
 
@@ -42,10 +42,10 @@ class RoamingStatusReport {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const RoamingStatusReport& rhs) const;
-  bool operator!=(const RoamingStatusReport& rhs) const;
+  bool operator==(const RoamingStatusReport &rhs) const;
+  bool operator!=(const RoamingStatusReport &rhs) const;
 
   /////////////////////////////////////////////
   /// RoamingStatusReport members
@@ -59,21 +59,21 @@ class RoamingStatusReport {
   ///
   /// </summary>
   oai::model::common::PlmnId getNewServingPlmn() const;
-  void setNewServingPlmn(oai::model::common::PlmnId const& value);
+  void setNewServingPlmn(oai::model::common::PlmnId const &value);
 
-  friend void to_json(nlohmann::json& j, const RoamingStatusReport& o);
-  friend void from_json(const nlohmann::json& j, RoamingStatusReport& o);
+  friend void to_json(nlohmann::json &j, const RoamingStatusReport &o);
+  friend void from_json(const nlohmann::json &j, RoamingStatusReport &o);
 
- protected:
+protected:
   bool m_Roaming;
 
   oai::model::common::PlmnId m_NewServingPlmn;
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* RoamingStatusReport_H_ */

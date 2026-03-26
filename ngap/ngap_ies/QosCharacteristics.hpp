@@ -17,26 +17,26 @@ extern "C" {
 namespace oai::ngap {
 
 class QosCharacteristics {
- public:
+public:
   QosCharacteristics();
   virtual ~QosCharacteristics();
 
   int QosCharacteristicsPresent();
 
-  void set(const NonDynamic5qiDescriptor& nonDynamic5qiDescriptor);
-  void get(
-      std::optional<NonDynamic5qiDescriptor>& nonDynamic5qiDescriptor) const;
+  void set(const NonDynamic5qiDescriptor &nonDynamic5qiDescriptor);
+  void
+  get(std::optional<NonDynamic5qiDescriptor> &nonDynamic5qiDescriptor) const;
 
-  void set(const Dynamic5qiDescriptor& dynamic5qiDescriptor);
-  void get(std::optional<Dynamic5qiDescriptor>& dynamic5qiDescriptor) const;
+  void set(const Dynamic5qiDescriptor &dynamic5qiDescriptor);
+  void get(std::optional<Dynamic5qiDescriptor> &dynamic5qiDescriptor) const;
 
-  bool encode(Ngap_QosCharacteristics_t&) const;
-  bool decode(const Ngap_QosCharacteristics_t&);
+  bool encode(Ngap_QosCharacteristics_t &) const;
+  bool decode(const Ngap_QosCharacteristics_t &);
 
- private:
+private:
   std::optional<NonDynamic5qiDescriptor> m_NonDynamic5qiDescriptor;
   std::optional<Dynamic5qiDescriptor> m_Dynamic5qiDescriptor;
 };
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

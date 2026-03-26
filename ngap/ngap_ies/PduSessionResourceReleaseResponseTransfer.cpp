@@ -13,7 +13,7 @@ namespace oai::ngap {
 PduSessionResourceReleaseResponseTransfer::
     PduSessionResourceReleaseResponseTransfer() {
   m_PduSessionResourceReleaseResponseTransferIe =
-      (Ngap_PDUSessionResourceReleaseResponseTransfer_t*) calloc(
+      (Ngap_PDUSessionResourceReleaseResponseTransfer_t *)calloc(
           1, sizeof(Ngap_PDUSessionResourceReleaseResponseTransfer_t));
 }
 
@@ -27,8 +27,8 @@ PduSessionResourceReleaseResponseTransfer::
 }
 
 //------------------------------------------------------------------------------
-int PduSessionResourceReleaseResponseTransfer::encode(
-    uint8_t* buf, int bufSize) {
+int PduSessionResourceReleaseResponseTransfer::encode(uint8_t *buf,
+                                                      int bufSize) {
   ngap_utils::print_asn_msg(
       &asn_DEF_Ngap_PDUSessionResourceReleaseResponseTransfer,
       m_PduSessionResourceReleaseResponseTransferIe);
@@ -40,12 +40,12 @@ int PduSessionResourceReleaseResponseTransfer::encode(
 }
 
 //------------------------------------------------------------------------------
-bool PduSessionResourceReleaseResponseTransfer::decode(
-    uint8_t* buf, int bufSize) {
+bool PduSessionResourceReleaseResponseTransfer::decode(uint8_t *buf,
+                                                       int bufSize) {
   asn_dec_rval_t rc = asn_decode(
       NULL, ATS_ALIGNED_CANONICAL_PER,
       &asn_DEF_Ngap_PDUSessionResourceReleaseResponseTransfer,
-      (void**) &m_PduSessionResourceReleaseResponseTransferIe, buf, bufSize);
+      (void **)&m_PduSessionResourceReleaseResponseTransferIe, buf, bufSize);
 
   if (rc.code == RC_OK) {
     oai::logger::logger_common::ngap().debug("Decoded successfully");
@@ -57,8 +57,8 @@ bool PduSessionResourceReleaseResponseTransfer::decode(
     return false;
   }
 
-  oai::logger::logger_common::ngap().debug(
-      "rc.consumed to decode %d", rc.consumed);
+  oai::logger::logger_common::ngap().debug("rc.consumed to decode %d",
+                                           rc.consumed);
   // asn_fprint(stderr,
   // &asn_DEF_Ngap_PDUSessionResourceReleaseResponseTransfer,
   // m_PduSessionResourceReleaseResponseTransferIe);
@@ -67,4 +67,4 @@ bool PduSessionResourceReleaseResponseTransfer::decode(
 
   return true;
 }
-}  // namespace oai::ngap
+} // namespace oai::ngap

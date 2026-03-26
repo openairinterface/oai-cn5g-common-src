@@ -40,7 +40,7 @@ typedef struct Ngap_M1ThresholdType {
     Ngap_Threshold_RSRP_t threshold_RSRP;
     Ngap_Threshold_RSRQ_t threshold_RSRQ;
     Ngap_Threshold_SINR_t threshold_SINR;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

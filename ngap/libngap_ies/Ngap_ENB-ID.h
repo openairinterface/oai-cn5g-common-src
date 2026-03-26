@@ -40,7 +40,7 @@ typedef struct Ngap_ENB_ID {
     BIT_STRING_t homeENB_ID;
     BIT_STRING_t short_macroENB_ID;
     BIT_STRING_t long_macroENB_ID;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

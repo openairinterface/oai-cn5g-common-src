@@ -23,13 +23,13 @@ void NgRanTargetId::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const NgRanTargetId& o) {
-  j              = nlohmann::json();
+void to_json(nlohmann::json &j, const NgRanTargetId &o) {
+  j = nlohmann::json();
   j["ranNodeId"] = o.m_RanNodeId;
-  j["tai"]       = o.m_Tai;
+  j["tai"] = o.m_Tai;
 }
 
-void from_json(const nlohmann::json& j, NgRanTargetId& o) {
+void from_json(const nlohmann::json &j, NgRanTargetId &o) {
   j.at("ranNodeId").get_to(o.m_RanNodeId);
   j.at("tai").get_to(o.m_Tai);
 }
@@ -38,14 +38,12 @@ oai::model::common::GlobalRanNodeId NgRanTargetId::getRanNodeId() const {
   return m_RanNodeId;
 }
 void NgRanTargetId::setRanNodeId(
-    oai::model::common::GlobalRanNodeId const& value) {
+    oai::model::common::GlobalRanNodeId const &value) {
   m_RanNodeId = value;
 }
-oai::model::common::Tai NgRanTargetId::getTai() const {
-  return m_Tai;
-}
-void NgRanTargetId::setTai(oai::model::common::Tai const& value) {
+oai::model::common::Tai NgRanTargetId::getTai() const { return m_Tai; }
+void NgRanTargetId::setTai(oai::model::common::Tai const &value) {
   m_Tai = value;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

@@ -13,9 +13,8 @@ asn_TYPE_member_t asn_MBR_Ngap_InfoOnRecommendedCellsAndRANNodesForPaging_1[] =
     {
         {ATF_NOFLAGS,
          0,
-         offsetof(
-             struct Ngap_InfoOnRecommendedCellsAndRANNodesForPaging,
-             recommendedCellsForPaging),
+         offsetof(struct Ngap_InfoOnRecommendedCellsAndRANNodesForPaging,
+                  recommendedCellsForPaging),
          (ASN_TAG_CLASS_CONTEXT | (0 << 2)),
          -1, /* IMPLICIT tag at current level */
          &asn_DEF_Ngap_RecommendedCellsForPaging,
@@ -34,9 +33,8 @@ asn_TYPE_member_t asn_MBR_Ngap_InfoOnRecommendedCellsAndRANNodesForPaging_1[] =
          "recommendedCellsForPaging"},
         {ATF_NOFLAGS,
          0,
-         offsetof(
-             struct Ngap_InfoOnRecommendedCellsAndRANNodesForPaging,
-             recommendRANNodesForPaging),
+         offsetof(struct Ngap_InfoOnRecommendedCellsAndRANNodesForPaging,
+                  recommendRANNodesForPaging),
          (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
          -1, /* IMPLICIT tag at current level */
          &asn_DEF_Ngap_RecommendedRANNodesForPaging,
@@ -55,9 +53,8 @@ asn_TYPE_member_t asn_MBR_Ngap_InfoOnRecommendedCellsAndRANNodesForPaging_1[] =
          "recommendRANNodesForPaging"},
         {ATF_POINTER,
          1,
-         offsetof(
-             struct Ngap_InfoOnRecommendedCellsAndRANNodesForPaging,
-             iE_Extensions),
+         offsetof(struct Ngap_InfoOnRecommendedCellsAndRANNodesForPaging,
+                  iE_Extensions),
          (ASN_TAG_CLASS_CONTEXT | (2 << 2)),
          -1, /* IMPLICIT tag at current level */
          &asn_DEF_Ngap_ProtocolExtensionContainer_9666P101,
@@ -91,8 +88,8 @@ static const asn_TYPE_tag2member_t
 asn_SEQUENCE_specifics_t
     asn_SPC_Ngap_InfoOnRecommendedCellsAndRANNodesForPaging_specs_1 = {
         sizeof(struct Ngap_InfoOnRecommendedCellsAndRANNodesForPaging),
-        offsetof(
-            struct Ngap_InfoOnRecommendedCellsAndRANNodesForPaging, _asn_ctx),
+        offsetof(struct Ngap_InfoOnRecommendedCellsAndRANNodesForPaging,
+                 _asn_ctx),
         asn_MAP_Ngap_InfoOnRecommendedCellsAndRANNodesForPaging_tag2el_1,
         3, /* Count of tags in the map */
         asn_MAP_Ngap_InfoOnRecommendedCellsAndRANNodesForPaging_oms_1, /* Optional

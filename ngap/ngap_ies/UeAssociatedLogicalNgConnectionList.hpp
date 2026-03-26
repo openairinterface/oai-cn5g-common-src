@@ -17,21 +17,21 @@ extern "C" {
 namespace oai::ngap {
 
 class UeAssociatedLogicalNgConnectionList {
- public:
+public:
   UeAssociatedLogicalNgConnectionList();
   virtual ~UeAssociatedLogicalNgConnectionList();
 
-  void set(const std::vector<UeAssociatedLogicalNgConnectionItem>& list);
-  void get(std::vector<UeAssociatedLogicalNgConnectionItem>& list) const;
+  void set(const std::vector<UeAssociatedLogicalNgConnectionItem> &list);
+  void get(std::vector<UeAssociatedLogicalNgConnectionItem> &list) const;
 
-  void addItem(UeAssociatedLogicalNgConnectionItem& item);
+  void addItem(UeAssociatedLogicalNgConnectionItem &item);
 
-  bool encode(Ngap_UE_associatedLogicalNG_connectionList_t& list) const;
-  bool decode(const Ngap_UE_associatedLogicalNG_connectionList_t& list);
+  bool encode(Ngap_UE_associatedLogicalNG_connectionList_t &list) const;
+  bool decode(const Ngap_UE_associatedLogicalNG_connectionList_t &list);
 
- private:
+private:
   std::vector<UeAssociatedLogicalNgConnectionItem> m_ItemList;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

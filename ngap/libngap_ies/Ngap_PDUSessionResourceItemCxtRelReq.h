@@ -25,7 +25,7 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_PDUSessionResourceItemCxtRelReq */
 typedef struct Ngap_PDUSessionResourceItemCxtRelReq {
   Ngap_PDUSessionID_t pDUSessionID;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

@@ -18,7 +18,7 @@ typedef struct _5gs_deregistration_type_s {
 constexpr auto k5gsDeregistrationTypeIeName = "5GS De-registration Type";
 
 class _5gsDeregistrationType : public Type1NasIeFormatTv {
- public:
+public:
   _5gsDeregistrationType();
   _5gsDeregistrationType(uint8_t iei);
   _5gsDeregistrationType(uint8_t iei, uint8_t value);
@@ -27,16 +27,16 @@ class _5gsDeregistrationType : public Type1NasIeFormatTv {
 
   static std::string GetIeName() { return k5gsDeregistrationTypeIeName; }
 
-  void Set(const _5gs_deregistration_type_t& type);
-  void Get(_5gs_deregistration_type_t& type) const;
+  void Set(const _5gs_deregistration_type_t &type);
+  void Get(_5gs_deregistration_type_t &type) const;
 
   void Set(uint8_t value);
-  void Get(uint8_t& value) const;
+  void Get(uint8_t &value) const;
 
   void Set(uint8_t iei, uint8_t value);
-  void Get(uint8_t& iei, uint8_t& value) const;
+  void Get(uint8_t &iei, uint8_t &value) const;
 
- private:
+private:
   void SetValue();
   void GetValue();
 
@@ -51,6 +51,6 @@ class _5gsDeregistrationType : public Type1NasIeFormatTv {
   } u1;
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

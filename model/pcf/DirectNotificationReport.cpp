@@ -18,9 +18,7 @@
 
 namespace oai::model::pcf {
 
-DirectNotificationReport::DirectNotificationReport() {
-  m_FlowsIsSet = false;
-}
+DirectNotificationReport::DirectNotificationReport() { m_FlowsIsSet = false; }
 
 void DirectNotificationReport::validate() const {
   std::stringstream msg;
@@ -29,12 +27,12 @@ void DirectNotificationReport::validate() const {
   }
 }
 
-bool DirectNotificationReport::validate(std::stringstream& msg) const {
+bool DirectNotificationReport::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool DirectNotificationReport::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool DirectNotificationReport::validate(std::stringstream &msg,
+                                        const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "DirectNotificationReport" : pathPrefix;
@@ -44,17 +42,17 @@ bool DirectNotificationReport::validate(
     success = false;
   }
   if (flowsIsSet()) {
-    const std::vector<oai::model::pcf::Flows>& value = m_Flows;
-    const std::string currentValuePath               = _pathPrefix + ".flows";
+    const std::vector<oai::model::pcf::Flows> &value = m_Flows;
+    const std::string currentValuePath = _pathPrefix + ".flows";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::Flows& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::Flows &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -69,7 +67,7 @@ bool DirectNotificationReport::validate(
 }
 
 bool DirectNotificationReport::operator==(
-    const DirectNotificationReport& rhs) const {
+    const DirectNotificationReport &rhs) const {
   return
 
       (getQosMonParamType() == rhs.getQosMonParamType()) &&
@@ -81,17 +79,18 @@ bool DirectNotificationReport::operator==(
 }
 
 bool DirectNotificationReport::operator!=(
-    const DirectNotificationReport& rhs) const {
+    const DirectNotificationReport &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const DirectNotificationReport& o) {
-  j                    = nlohmann::json::object();
+void to_json(nlohmann::json &j, const DirectNotificationReport &o) {
+  j = nlohmann::json::object();
   j["qosMonParamType"] = o.m_QosMonParamType;
-  if (o.flowsIsSet() || !o.m_Flows.empty()) j["flows"] = o.m_Flows;
+  if (o.flowsIsSet() || !o.m_Flows.empty())
+    j["flows"] = o.m_Flows;
 }
 
-void from_json(const nlohmann::json& j, DirectNotificationReport& o) {
+void from_json(const nlohmann::json &j, DirectNotificationReport &o) {
   j.at("qosMonParamType").get_to(o.m_QosMonParamType);
   if (j.find("flows") != j.end()) {
     j.at("flows").get_to(o.m_Flows);
@@ -104,22 +103,18 @@ DirectNotificationReport::getQosMonParamType() const {
   return m_QosMonParamType;
 }
 void DirectNotificationReport::setQosMonParamType(
-    oai::model::pcf::QosMonitoringParamType const& value) {
+    oai::model::pcf::QosMonitoringParamType const &value) {
   m_QosMonParamType = value;
 }
 std::vector<oai::model::pcf::Flows> DirectNotificationReport::getFlows() const {
   return m_Flows;
 }
 void DirectNotificationReport::setFlows(
-    std::vector<oai::model::pcf::Flows> const& value) {
-  m_Flows      = value;
+    std::vector<oai::model::pcf::Flows> const &value) {
+  m_Flows = value;
   m_FlowsIsSet = true;
 }
-bool DirectNotificationReport::flowsIsSet() const {
-  return m_FlowsIsSet;
-}
-void DirectNotificationReport::unsetFlows() {
-  m_FlowsIsSet = false;
-}
+bool DirectNotificationReport::flowsIsSet() const { return m_FlowsIsSet; }
+void DirectNotificationReport::unsetFlows() { m_FlowsIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

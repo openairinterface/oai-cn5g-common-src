@@ -19,10 +19,10 @@
 #ifndef AmfCreateEventSubscription_H_
 #define AmfCreateEventSubscription_H_
 
-#include <string>
 #include "AmfEventSubscription.h"
 #include "Guami.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::amf {
 
@@ -30,7 +30,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class AmfCreateEventSubscription {
- public:
+public:
   AmfCreateEventSubscription();
   virtual ~AmfCreateEventSubscription() = default;
 
@@ -44,10 +44,10 @@ class AmfCreateEventSubscription {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const AmfCreateEventSubscription& rhs) const;
-  bool operator!=(const AmfCreateEventSubscription& rhs) const;
+  bool operator==(const AmfCreateEventSubscription &rhs) const;
+  bool operator!=(const AmfCreateEventSubscription &rhs) const;
 
   /////////////////////////////////////////////
   /// AmfCreateEventSubscription members
@@ -56,26 +56,26 @@ class AmfCreateEventSubscription {
   ///
   /// </summary>
   AmfEventSubscription getSubscription() const;
-  void setSubscription(AmfEventSubscription const& value);
+  void setSubscription(AmfEventSubscription const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Guami getOldGuami() const;
-  void setOldGuami(oai::model::common::Guami const& value);
+  void setOldGuami(oai::model::common::Guami const &value);
   bool oldGuamiIsSet() const;
   void unsetOldGuami();
 
-  friend void to_json(nlohmann::json& j, const AmfCreateEventSubscription& o);
-  friend void from_json(const nlohmann::json& j, AmfCreateEventSubscription& o);
+  friend void to_json(nlohmann::json &j, const AmfCreateEventSubscription &o);
+  friend void from_json(const nlohmann::json &j, AmfCreateEventSubscription &o);
 
- protected:
+protected:
   AmfEventSubscription m_Subscription;
 
   std::string m_SupportedFeatures;
@@ -85,9 +85,9 @@ class AmfCreateEventSubscription {
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* AmfCreateEventSubscription_H_ */

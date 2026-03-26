@@ -27,7 +27,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class NetLocAccessSupport_anyOf {
- public:
+public:
   NetLocAccessSupport_anyOf();
   virtual ~NetLocAccessSupport_anyOf() = default;
 
@@ -51,16 +51,16 @@ class NetLocAccessSupport_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const NetLocAccessSupport_anyOf& rhs) const;
-  bool operator!=(const NetLocAccessSupport_anyOf& rhs) const;
+  bool operator==(const NetLocAccessSupport_anyOf &rhs) const;
+  bool operator!=(const NetLocAccessSupport_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// NetLocAccessSupport_anyOf members
@@ -68,15 +68,15 @@ class NetLocAccessSupport_anyOf {
   NetLocAccessSupport_anyOf::eNetLocAccessSupport_anyOf getValue() const;
   void setValue(NetLocAccessSupport_anyOf::eNetLocAccessSupport_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const NetLocAccessSupport_anyOf& o);
-  friend void from_json(const nlohmann::json& j, NetLocAccessSupport_anyOf& o);
+  friend void to_json(nlohmann::json &j, const NetLocAccessSupport_anyOf &o);
+  friend void from_json(const nlohmann::json &j, NetLocAccessSupport_anyOf &o);
 
- protected:
+protected:
   NetLocAccessSupport_anyOf::eNetLocAccessSupport_anyOf m_value =
       NetLocAccessSupport_anyOf::eNetLocAccessSupport_anyOf::
           INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* NetLocAccessSupport_anyOf_H_ */

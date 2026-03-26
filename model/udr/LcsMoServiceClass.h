@@ -30,7 +30,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class LcsMoServiceClass {
- public:
+public:
   LcsMoServiceClass();
   virtual ~LcsMoServiceClass();
 
@@ -39,12 +39,12 @@ class LcsMoServiceClass {
   /////////////////////////////////////////////
   /// LcsMoServiceClass members
 
-  friend void to_json(nlohmann::json& j, const LcsMoServiceClass& o);
-  friend void from_json(const nlohmann::json& j, LcsMoServiceClass& o);
+  friend void to_json(nlohmann::json &j, const LcsMoServiceClass &o);
+  friend void from_json(const nlohmann::json &j, LcsMoServiceClass &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* LcsMoServiceClass_H_ */

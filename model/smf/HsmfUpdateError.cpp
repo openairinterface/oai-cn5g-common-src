@@ -18,14 +18,14 @@ namespace oai::model::smf {
 using namespace oai::model::common;
 
 HsmfUpdateError::HsmfUpdateError() {
-  m_Pti               = 0;
-  m_PtiIsSet          = false;
-  m_N1smCause         = "";
-  m_N1smCauseIsSet    = false;
+  m_Pti = 0;
+  m_PtiIsSet = false;
+  m_N1smCause = "";
+  m_N1smCauseIsSet = false;
   m_N1SmInfoToUeIsSet = false;
-  m_BackOffTimer      = 0;
+  m_BackOffTimer = 0;
   m_BackOffTimerIsSet = false;
-  m_RecoveryTime      = "";
+  m_RecoveryTime = "";
   m_RecoveryTimeIsSet = false;
 }
 
@@ -35,17 +35,22 @@ void HsmfUpdateError::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const HsmfUpdateError& o) {
-  j          = nlohmann::json();
+void to_json(nlohmann::json &j, const HsmfUpdateError &o) {
+  j = nlohmann::json();
   j["error"] = o.m_Error;
-  if (o.ptiIsSet()) j["pti"] = o.m_Pti;
-  if (o.n1smCauseIsSet()) j["n1smCause"] = o.m_N1smCause;
-  if (o.n1SmInfoToUeIsSet()) j["n1SmInfoToUe"] = o.m_N1SmInfoToUe;
-  if (o.backOffTimerIsSet()) j["backOffTimer"] = o.m_BackOffTimer;
-  if (o.recoveryTimeIsSet()) j["recoveryTime"] = o.m_RecoveryTime;
+  if (o.ptiIsSet())
+    j["pti"] = o.m_Pti;
+  if (o.n1smCauseIsSet())
+    j["n1smCause"] = o.m_N1smCause;
+  if (o.n1SmInfoToUeIsSet())
+    j["n1SmInfoToUe"] = o.m_N1SmInfoToUe;
+  if (o.backOffTimerIsSet())
+    j["backOffTimer"] = o.m_BackOffTimer;
+  if (o.recoveryTimeIsSet())
+    j["recoveryTime"] = o.m_RecoveryTime;
 }
 
-void from_json(const nlohmann::json& j, HsmfUpdateError& o) {
+void from_json(const nlohmann::json &j, HsmfUpdateError &o) {
   j.at("error").get_to(o.m_Error);
   if (j.find("pti") != j.end()) {
     j.at("pti").get_to(o.m_Pti);
@@ -69,76 +74,44 @@ void from_json(const nlohmann::json& j, HsmfUpdateError& o) {
   }
 }
 
-ProblemDetails HsmfUpdateError::getError() const {
-  return m_Error;
-}
-void HsmfUpdateError::setError(ProblemDetails const& value) {
-  m_Error = value;
-}
-int32_t HsmfUpdateError::getPti() const {
-  return m_Pti;
-}
+ProblemDetails HsmfUpdateError::getError() const { return m_Error; }
+void HsmfUpdateError::setError(ProblemDetails const &value) { m_Error = value; }
+int32_t HsmfUpdateError::getPti() const { return m_Pti; }
 void HsmfUpdateError::setPti(int32_t const value) {
-  m_Pti      = value;
+  m_Pti = value;
   m_PtiIsSet = true;
 }
-bool HsmfUpdateError::ptiIsSet() const {
-  return m_PtiIsSet;
-}
-void HsmfUpdateError::unsetPti() {
-  m_PtiIsSet = false;
-}
-std::string HsmfUpdateError::getN1smCause() const {
-  return m_N1smCause;
-}
-void HsmfUpdateError::setN1smCause(std::string const& value) {
-  m_N1smCause      = value;
+bool HsmfUpdateError::ptiIsSet() const { return m_PtiIsSet; }
+void HsmfUpdateError::unsetPti() { m_PtiIsSet = false; }
+std::string HsmfUpdateError::getN1smCause() const { return m_N1smCause; }
+void HsmfUpdateError::setN1smCause(std::string const &value) {
+  m_N1smCause = value;
   m_N1smCauseIsSet = true;
 }
-bool HsmfUpdateError::n1smCauseIsSet() const {
-  return m_N1smCauseIsSet;
-}
-void HsmfUpdateError::unsetN1smCause() {
-  m_N1smCauseIsSet = false;
-}
+bool HsmfUpdateError::n1smCauseIsSet() const { return m_N1smCauseIsSet; }
+void HsmfUpdateError::unsetN1smCause() { m_N1smCauseIsSet = false; }
 RefToBinaryData HsmfUpdateError::getN1SmInfoToUe() const {
   return m_N1SmInfoToUe;
 }
-void HsmfUpdateError::setN1SmInfoToUe(RefToBinaryData const& value) {
-  m_N1SmInfoToUe      = value;
+void HsmfUpdateError::setN1SmInfoToUe(RefToBinaryData const &value) {
+  m_N1SmInfoToUe = value;
   m_N1SmInfoToUeIsSet = true;
 }
-bool HsmfUpdateError::n1SmInfoToUeIsSet() const {
-  return m_N1SmInfoToUeIsSet;
-}
-void HsmfUpdateError::unsetN1SmInfoToUe() {
-  m_N1SmInfoToUeIsSet = false;
-}
-int32_t HsmfUpdateError::getBackOffTimer() const {
-  return m_BackOffTimer;
-}
+bool HsmfUpdateError::n1SmInfoToUeIsSet() const { return m_N1SmInfoToUeIsSet; }
+void HsmfUpdateError::unsetN1SmInfoToUe() { m_N1SmInfoToUeIsSet = false; }
+int32_t HsmfUpdateError::getBackOffTimer() const { return m_BackOffTimer; }
 void HsmfUpdateError::setBackOffTimer(int32_t const value) {
-  m_BackOffTimer      = value;
+  m_BackOffTimer = value;
   m_BackOffTimerIsSet = true;
 }
-bool HsmfUpdateError::backOffTimerIsSet() const {
-  return m_BackOffTimerIsSet;
-}
-void HsmfUpdateError::unsetBackOffTimer() {
-  m_BackOffTimerIsSet = false;
-}
-std::string HsmfUpdateError::getRecoveryTime() const {
-  return m_RecoveryTime;
-}
-void HsmfUpdateError::setRecoveryTime(std::string const& value) {
-  m_RecoveryTime      = value;
+bool HsmfUpdateError::backOffTimerIsSet() const { return m_BackOffTimerIsSet; }
+void HsmfUpdateError::unsetBackOffTimer() { m_BackOffTimerIsSet = false; }
+std::string HsmfUpdateError::getRecoveryTime() const { return m_RecoveryTime; }
+void HsmfUpdateError::setRecoveryTime(std::string const &value) {
+  m_RecoveryTime = value;
   m_RecoveryTimeIsSet = true;
 }
-bool HsmfUpdateError::recoveryTimeIsSet() const {
-  return m_RecoveryTimeIsSet;
-}
-void HsmfUpdateError::unsetRecoveryTime() {
-  m_RecoveryTimeIsSet = false;
-}
+bool HsmfUpdateError::recoveryTimeIsSet() const { return m_RecoveryTimeIsSet; }
+void HsmfUpdateError::unsetRecoveryTime() { m_RecoveryTimeIsSet = false; }
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

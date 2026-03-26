@@ -33,7 +33,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class SmfRegistrationInfo {
- public:
+public:
   SmfRegistrationInfo();
   virtual ~SmfRegistrationInfo();
 
@@ -45,16 +45,16 @@ class SmfRegistrationInfo {
   /// <summary>
   ///
   /// </summary>
-  std::vector<SmfRegistration>& getSmfRegistrationList();
-  void setSmfRegistrationList(std::vector<SmfRegistration> const& value);
+  std::vector<SmfRegistration> &getSmfRegistrationList();
+  void setSmfRegistrationList(std::vector<SmfRegistration> const &value);
 
-  friend void to_json(nlohmann::json& j, const SmfRegistrationInfo& o);
-  friend void from_json(const nlohmann::json& j, SmfRegistrationInfo& o);
+  friend void to_json(nlohmann::json &j, const SmfRegistrationInfo &o);
+  friend void from_json(const nlohmann::json &j, SmfRegistrationInfo &o);
 
- protected:
+protected:
   std::vector<SmfRegistration> m_SmfRegistrationList;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* SmfRegistrationInfo_H_ */

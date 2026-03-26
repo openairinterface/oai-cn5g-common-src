@@ -19,16 +19,16 @@
 namespace oai::model::pcf {
 
 PcscfRestorationRequestData::PcscfRestorationRequestData() {
-  m_Dnn            = "";
-  m_DnnIsSet       = false;
-  m_IpDomain       = "";
-  m_IpDomainIsSet  = false;
+  m_Dnn = "";
+  m_DnnIsSet = false;
+  m_IpDomain = "";
+  m_IpDomainIsSet = false;
   m_SliceInfoIsSet = false;
-  m_Supi           = "";
-  m_SupiIsSet      = false;
-  m_UeIpv4         = "";
-  m_UeIpv4IsSet    = false;
-  m_UeIpv6IsSet    = false;
+  m_Supi = "";
+  m_SupiIsSet = false;
+  m_UeIpv4 = "";
+  m_UeIpv4IsSet = false;
+  m_UeIpv6IsSet = false;
 }
 
 void PcscfRestorationRequestData::validate() const {
@@ -38,23 +38,23 @@ void PcscfRestorationRequestData::validate() const {
   }
 }
 
-bool PcscfRestorationRequestData::validate(std::stringstream& msg) const {
+bool PcscfRestorationRequestData::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool PcscfRestorationRequestData::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PcscfRestorationRequestData" : pathPrefix;
 
   if (supiIsSet()) {
-    const std::string& value           = m_Supi;
+    const std::string &value = m_Supi;
     const std::string currentValuePath = _pathPrefix + ".supi";
   }
 
   if (ueIpv4IsSet()) {
-    const std::string& value           = m_UeIpv4;
+    const std::string &value = m_UeIpv4;
     const std::string currentValuePath = _pathPrefix + ".ueIpv4";
   }
 
@@ -62,7 +62,7 @@ bool PcscfRestorationRequestData::validate(
 }
 
 bool PcscfRestorationRequestData::operator==(
-    const PcscfRestorationRequestData& rhs) const {
+    const PcscfRestorationRequestData &rhs) const {
   return
 
       ((!dnnIsSet() && !rhs.dnnIsSet()) ||
@@ -90,21 +90,27 @@ bool PcscfRestorationRequestData::operator==(
 }
 
 bool PcscfRestorationRequestData::operator!=(
-    const PcscfRestorationRequestData& rhs) const {
+    const PcscfRestorationRequestData &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PcscfRestorationRequestData& o) {
+void to_json(nlohmann::json &j, const PcscfRestorationRequestData &o) {
   j = nlohmann::json::object();
-  if (o.dnnIsSet()) j["dnn"] = o.m_Dnn;
-  if (o.ipDomainIsSet()) j["ipDomain"] = o.m_IpDomain;
-  if (o.sliceInfoIsSet()) j["sliceInfo"] = o.m_SliceInfo;
-  if (o.supiIsSet()) j["supi"] = o.m_Supi;
-  if (o.ueIpv4IsSet()) j["ueIpv4"] = o.m_UeIpv4;
-  if (o.ueIpv6IsSet()) j["ueIpv6"] = o.m_UeIpv6;
+  if (o.dnnIsSet())
+    j["dnn"] = o.m_Dnn;
+  if (o.ipDomainIsSet())
+    j["ipDomain"] = o.m_IpDomain;
+  if (o.sliceInfoIsSet())
+    j["sliceInfo"] = o.m_SliceInfo;
+  if (o.supiIsSet())
+    j["supi"] = o.m_Supi;
+  if (o.ueIpv4IsSet())
+    j["ueIpv4"] = o.m_UeIpv4;
+  if (o.ueIpv6IsSet())
+    j["ueIpv6"] = o.m_UeIpv6;
 }
 
-void from_json(const nlohmann::json& j, PcscfRestorationRequestData& o) {
+void from_json(const nlohmann::json &j, PcscfRestorationRequestData &o) {
   if (j.find("dnn") != j.end()) {
     j.at("dnn").get_to(o.m_Dnn);
     o.m_DnnIsSet = true;
@@ -131,85 +137,59 @@ void from_json(const nlohmann::json& j, PcscfRestorationRequestData& o) {
   }
 }
 
-std::string PcscfRestorationRequestData::getDnn() const {
-  return m_Dnn;
-}
-void PcscfRestorationRequestData::setDnn(std::string const& value) {
-  m_Dnn      = value;
+std::string PcscfRestorationRequestData::getDnn() const { return m_Dnn; }
+void PcscfRestorationRequestData::setDnn(std::string const &value) {
+  m_Dnn = value;
   m_DnnIsSet = true;
 }
-bool PcscfRestorationRequestData::dnnIsSet() const {
-  return m_DnnIsSet;
-}
-void PcscfRestorationRequestData::unsetDnn() {
-  m_DnnIsSet = false;
-}
+bool PcscfRestorationRequestData::dnnIsSet() const { return m_DnnIsSet; }
+void PcscfRestorationRequestData::unsetDnn() { m_DnnIsSet = false; }
 std::string PcscfRestorationRequestData::getIpDomain() const {
   return m_IpDomain;
 }
-void PcscfRestorationRequestData::setIpDomain(std::string const& value) {
-  m_IpDomain      = value;
+void PcscfRestorationRequestData::setIpDomain(std::string const &value) {
+  m_IpDomain = value;
   m_IpDomainIsSet = true;
 }
 bool PcscfRestorationRequestData::ipDomainIsSet() const {
   return m_IpDomainIsSet;
 }
-void PcscfRestorationRequestData::unsetIpDomain() {
-  m_IpDomainIsSet = false;
-}
+void PcscfRestorationRequestData::unsetIpDomain() { m_IpDomainIsSet = false; }
 oai::model::common::Snssai PcscfRestorationRequestData::getSliceInfo() const {
   return m_SliceInfo;
 }
 void PcscfRestorationRequestData::setSliceInfo(
-    oai::model::common::Snssai const& value) {
-  m_SliceInfo      = value;
+    oai::model::common::Snssai const &value) {
+  m_SliceInfo = value;
   m_SliceInfoIsSet = true;
 }
 bool PcscfRestorationRequestData::sliceInfoIsSet() const {
   return m_SliceInfoIsSet;
 }
-void PcscfRestorationRequestData::unsetSliceInfo() {
-  m_SliceInfoIsSet = false;
-}
-std::string PcscfRestorationRequestData::getSupi() const {
-  return m_Supi;
-}
-void PcscfRestorationRequestData::setSupi(std::string const& value) {
-  m_Supi      = value;
+void PcscfRestorationRequestData::unsetSliceInfo() { m_SliceInfoIsSet = false; }
+std::string PcscfRestorationRequestData::getSupi() const { return m_Supi; }
+void PcscfRestorationRequestData::setSupi(std::string const &value) {
+  m_Supi = value;
   m_SupiIsSet = true;
 }
-bool PcscfRestorationRequestData::supiIsSet() const {
-  return m_SupiIsSet;
-}
-void PcscfRestorationRequestData::unsetSupi() {
-  m_SupiIsSet = false;
-}
-std::string PcscfRestorationRequestData::getUeIpv4() const {
-  return m_UeIpv4;
-}
-void PcscfRestorationRequestData::setUeIpv4(std::string const& value) {
-  m_UeIpv4      = value;
+bool PcscfRestorationRequestData::supiIsSet() const { return m_SupiIsSet; }
+void PcscfRestorationRequestData::unsetSupi() { m_SupiIsSet = false; }
+std::string PcscfRestorationRequestData::getUeIpv4() const { return m_UeIpv4; }
+void PcscfRestorationRequestData::setUeIpv4(std::string const &value) {
+  m_UeIpv4 = value;
   m_UeIpv4IsSet = true;
 }
-bool PcscfRestorationRequestData::ueIpv4IsSet() const {
-  return m_UeIpv4IsSet;
-}
-void PcscfRestorationRequestData::unsetUeIpv4() {
-  m_UeIpv4IsSet = false;
-}
+bool PcscfRestorationRequestData::ueIpv4IsSet() const { return m_UeIpv4IsSet; }
+void PcscfRestorationRequestData::unsetUeIpv4() { m_UeIpv4IsSet = false; }
 oai::model::common::Ipv6Addr PcscfRestorationRequestData::getUeIpv6() const {
   return m_UeIpv6;
 }
 void PcscfRestorationRequestData::setUeIpv6(
-    oai::model::common::Ipv6Addr const& value) {
-  m_UeIpv6      = value;
+    oai::model::common::Ipv6Addr const &value) {
+  m_UeIpv6 = value;
   m_UeIpv6IsSet = true;
 }
-bool PcscfRestorationRequestData::ueIpv6IsSet() const {
-  return m_UeIpv6IsSet;
-}
-void PcscfRestorationRequestData::unsetUeIpv6() {
-  m_UeIpv6IsSet = false;
-}
+bool PcscfRestorationRequestData::ueIpv6IsSet() const { return m_UeIpv6IsSet; }
+void PcscfRestorationRequestData::unsetUeIpv6() { m_UeIpv6IsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

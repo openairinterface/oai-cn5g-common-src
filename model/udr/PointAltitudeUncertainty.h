@@ -36,7 +36,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class PointAltitudeUncertainty {
- public:
+public:
   PointAltitudeUncertainty();
   virtual ~PointAltitudeUncertainty();
 
@@ -49,12 +49,12 @@ class PointAltitudeUncertainty {
   ///
   /// </summary>
   SupportedGADShapes getShape() const;
-  void setShape(SupportedGADShapes const& value);
+  void setShape(SupportedGADShapes const &value);
   /// <summary>
   ///
   /// </summary>
   GeographicalCoordinates getPoint() const;
-  void setPoint(GeographicalCoordinates const& value);
+  void setPoint(GeographicalCoordinates const &value);
   /// <summary>
   ///
   /// </summary>
@@ -64,7 +64,7 @@ class PointAltitudeUncertainty {
   ///
   /// </summary>
   UncertaintyEllipse getUncertaintyEllipse() const;
-  void setUncertaintyEllipse(UncertaintyEllipse const& value);
+  void setUncertaintyEllipse(UncertaintyEllipse const &value);
   /// <summary>
   ///
   /// </summary>
@@ -76,10 +76,10 @@ class PointAltitudeUncertainty {
   int32_t getConfidence() const;
   void setConfidence(int32_t const value);
 
-  friend void to_json(nlohmann::json& j, const PointAltitudeUncertainty& o);
-  friend void from_json(const nlohmann::json& j, PointAltitudeUncertainty& o);
+  friend void to_json(nlohmann::json &j, const PointAltitudeUncertainty &o);
+  friend void from_json(const nlohmann::json &j, PointAltitudeUncertainty &o);
 
- protected:
+protected:
   SupportedGADShapes m_Shape;
 
   GeographicalCoordinates m_Point;
@@ -93,6 +93,6 @@ class PointAltitudeUncertainty {
   int32_t m_Confidence;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* PointAltitudeUncertainty_H_ */

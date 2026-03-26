@@ -21,8 +21,8 @@
 
 #include "N1MessageClass.h"
 #include "N2InformationClass.h"
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::lmf {
 
@@ -30,7 +30,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class UeN1N2InfoSubscriptionCreateData {
- public:
+public:
   UeN1N2InfoSubscriptionCreateData();
   virtual ~UeN1N2InfoSubscriptionCreateData();
 
@@ -43,51 +43,51 @@ class UeN1N2InfoSubscriptionCreateData {
   ///
   /// </summary>
   N2InformationClass getN2InformationClass() const;
-  void setN2InformationClass(N2InformationClass const& value);
+  void setN2InformationClass(N2InformationClass const &value);
   bool n2InformationClassIsSet() const;
   void unsetN2InformationClass();
   /// <summary>
   ///
   /// </summary>
   std::string getN2NotifyCallbackUri() const;
-  void setN2NotifyCallbackUri(std::string const& value);
+  void setN2NotifyCallbackUri(std::string const &value);
   bool n2NotifyCallbackUriIsSet() const;
   void unsetN2NotifyCallbackUri();
   /// <summary>
   ///
   /// </summary>
   N1MessageClass getN1MessageClass() const;
-  void setN1MessageClass(N1MessageClass const& value);
+  void setN1MessageClass(N1MessageClass const &value);
   bool n1MessageClassIsSet() const;
   void unsetN1MessageClass();
   /// <summary>
   ///
   /// </summary>
   std::string getN1NotifyCallbackUri() const;
-  void setN1NotifyCallbackUri(std::string const& value);
+  void setN1NotifyCallbackUri(std::string const &value);
   bool n1NotifyCallbackUriIsSet() const;
   void unsetN1NotifyCallbackUri();
   /// <summary>
   ///
   /// </summary>
   std::string getNfId() const;
-  void setNfId(std::string const& value);
+  void setNfId(std::string const &value);
   bool nfIdIsSet() const;
   void unsetNfId();
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
 
-  friend void to_json(
-      nlohmann::json& j, const UeN1N2InfoSubscriptionCreateData& o);
-  friend void from_json(
-      const nlohmann::json& j, UeN1N2InfoSubscriptionCreateData& o);
+  friend void to_json(nlohmann::json &j,
+                      const UeN1N2InfoSubscriptionCreateData &o);
+  friend void from_json(const nlohmann::json &j,
+                        UeN1N2InfoSubscriptionCreateData &o);
 
- protected:
+protected:
   N2InformationClass m_N2InformationClass;
   bool m_N2InformationClassIsSet;
   std::string m_N2NotifyCallbackUri;
@@ -102,6 +102,6 @@ class UeN1N2InfoSubscriptionCreateData {
   bool m_SupportedFeaturesIsSet;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* UeN1N2InfoSubscriptionCreateData_H_ */

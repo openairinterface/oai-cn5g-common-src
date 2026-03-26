@@ -19,27 +19,27 @@
 namespace oai::model::lmf {
 
 EventNotifyData::EventNotifyData() {
-  m_Supi                          = "";
-  m_SupiIsSet                     = false;
-  m_Gpsi                          = "";
-  m_GpsiIsSet                     = false;
-  m_HgmlcCallBackURI              = "";
-  m_HgmlcCallBackURIIsSet         = false;
-  m_LdrReference                  = "";
-  m_LocationEstimateIsSet         = false;
-  m_AgeOfLocationEstimate         = 0;
-  m_AgeOfLocationEstimateIsSet    = false;
-  m_CivicAddressIsSet             = false;
-  m_PositioningDataListIsSet      = false;
-  m_GnssPositioningDataListIsSet  = false;
-  m_ServingLMFidentification      = "";
+  m_Supi = "";
+  m_SupiIsSet = false;
+  m_Gpsi = "";
+  m_GpsiIsSet = false;
+  m_HgmlcCallBackURI = "";
+  m_HgmlcCallBackURIIsSet = false;
+  m_LdrReference = "";
+  m_LocationEstimateIsSet = false;
+  m_AgeOfLocationEstimate = 0;
+  m_AgeOfLocationEstimateIsSet = false;
+  m_CivicAddressIsSet = false;
+  m_PositioningDataListIsSet = false;
+  m_GnssPositioningDataListIsSet = false;
+  m_ServingLMFidentification = "";
   m_ServingLMFidentificationIsSet = false;
-  m_TerminationCauseIsSet         = false;
-  m_VelocityEstimateIsSet         = false;
-  m_Altitude                      = 0.0;
-  m_AltitudeIsSet                 = false;
-  m_SupportedFeatures             = "";
-  m_SupportedFeaturesIsSet        = false;
+  m_TerminationCauseIsSet = false;
+  m_VelocityEstimateIsSet = false;
+  m_Altitude = 0.0;
+  m_AltitudeIsSet = false;
+  m_SupportedFeatures = "";
+  m_SupportedFeaturesIsSet = false;
 }
 
 void EventNotifyData::validate() const {
@@ -49,28 +49,28 @@ void EventNotifyData::validate() const {
   }
 }
 
-bool EventNotifyData::validate(std::stringstream& msg) const {
+bool EventNotifyData::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool EventNotifyData::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool EventNotifyData::validate(std::stringstream &msg,
+                               const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "EventNotifyData" : pathPrefix;
 
   if (supiIsSet()) {
-    const std::string& value           = m_Supi;
+    const std::string &value = m_Supi;
     const std::string currentValuePath = _pathPrefix + ".supi";
   }
 
   if (gpsiIsSet()) {
-    const std::string& value           = m_Gpsi;
+    const std::string &value = m_Gpsi;
     const std::string currentValuePath = _pathPrefix + ".gpsi";
   }
 
   /* LdrReference */ {
-    const std::string& value           = m_LdrReference;
+    const std::string &value = m_LdrReference;
     const std::string currentValuePath = _pathPrefix + ".ldrReference";
 
     if (value.length() < 2) {
@@ -84,7 +84,7 @@ bool EventNotifyData::validate(
   }
 
   if (ageOfLocationEstimateIsSet()) {
-    const int32_t& value               = m_AgeOfLocationEstimate;
+    const int32_t &value = m_AgeOfLocationEstimate;
     const std::string currentValuePath = _pathPrefix + ".ageOfLocationEstimate";
 
     if (value < 0) {
@@ -98,7 +98,7 @@ bool EventNotifyData::validate(
   }
 
   if (positioningDataListIsSet()) {
-    const std::vector<oai::model::lmf::PositioningMethodAndUsage>& value =
+    const std::vector<oai::model::lmf::PositioningMethodAndUsage> &value =
         m_PositioningDataList;
     const std::string currentValuePath = _pathPrefix + ".positioningDataList";
 
@@ -106,10 +106,10 @@ bool EventNotifyData::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::lmf::PositioningMethodAndUsage& value : value) {
+      int i = 0;
+      for (const oai::model::lmf::PositioningMethodAndUsage &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -123,7 +123,7 @@ bool EventNotifyData::validate(
   }
 
   if (gnssPositioningDataListIsSet()) {
-    const std::vector<oai::model::lmf::GnssPositioningMethodAndUsage>& value =
+    const std::vector<oai::model::lmf::GnssPositioningMethodAndUsage> &value =
         m_GnssPositioningDataList;
     const std::string currentValuePath =
         _pathPrefix + ".gnssPositioningDataList";
@@ -132,16 +132,16 @@ bool EventNotifyData::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::lmf::GnssPositioningMethodAndUsage& value :
+      int i = 0;
+      for (const oai::model::lmf::GnssPositioningMethodAndUsage &value :
            value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
-        success = value.validate(
-                      msg, currentValuePath + ".gnssPositioningDataList") &&
+        success = value.validate(msg, currentValuePath +
+                                          ".gnssPositioningDataList") &&
                   success;
 
         i++;
@@ -150,7 +150,7 @@ bool EventNotifyData::validate(
   }
 
   if (altitudeIsSet()) {
-    const double& value                = m_Altitude;
+    const double &value = m_Altitude;
     const std::string currentValuePath = _pathPrefix + ".altitude";
 
     if (value < -32767) {
@@ -164,14 +164,14 @@ bool EventNotifyData::validate(
   }
 
   if (supportedFeaturesIsSet()) {
-    const std::string& value           = m_SupportedFeatures;
+    const std::string &value = m_SupportedFeatures;
     const std::string currentValuePath = _pathPrefix + ".supportedFeatures";
   }
 
   return success;
 }
 
-bool EventNotifyData::operator==(const EventNotifyData& rhs) const {
+bool EventNotifyData::operator==(const EventNotifyData &rhs) const {
   return
 
       (getReportedEventType() == rhs.getReportedEventType()) &&
@@ -234,35 +234,43 @@ bool EventNotifyData::operator==(const EventNotifyData& rhs) const {
           ;
 }
 
-bool EventNotifyData::operator!=(const EventNotifyData& rhs) const {
+bool EventNotifyData::operator!=(const EventNotifyData &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const EventNotifyData& o) {
-  j                      = nlohmann::json();
+void to_json(nlohmann::json &j, const EventNotifyData &o) {
+  j = nlohmann::json();
   j["reportedEventType"] = o.m_ReportedEventType;
-  if (o.supiIsSet()) j["supi"] = o.m_Supi;
-  if (o.gpsiIsSet()) j["gpsi"] = o.m_Gpsi;
-  if (o.hgmlcCallBackURIIsSet()) j["hgmlcCallBackURI"] = o.m_HgmlcCallBackURI;
+  if (o.supiIsSet())
+    j["supi"] = o.m_Supi;
+  if (o.gpsiIsSet())
+    j["gpsi"] = o.m_Gpsi;
+  if (o.hgmlcCallBackURIIsSet())
+    j["hgmlcCallBackURI"] = o.m_HgmlcCallBackURI;
   j["ldrReference"] = o.m_LdrReference;
-  if (o.locationEstimateIsSet()) j["locationEstimate"] = o.m_LocationEstimate;
+  if (o.locationEstimateIsSet())
+    j["locationEstimate"] = o.m_LocationEstimate;
   if (o.ageOfLocationEstimateIsSet())
     j["ageOfLocationEstimate"] = o.m_AgeOfLocationEstimate;
-  if (o.civicAddressIsSet()) j["civicAddress"] = o.m_CivicAddress;
+  if (o.civicAddressIsSet())
+    j["civicAddress"] = o.m_CivicAddress;
   if (o.positioningDataListIsSet() || !o.m_PositioningDataList.empty())
     j["positioningDataList"] = o.m_PositioningDataList;
   if (o.gnssPositioningDataListIsSet() || !o.m_GnssPositioningDataList.empty())
     j["gnssPositioningDataList"] = o.m_GnssPositioningDataList;
   if (o.servingLMFidentificationIsSet())
     j["servingLMFidentification"] = o.m_ServingLMFidentification;
-  if (o.terminationCauseIsSet()) j["terminationCause"] = o.m_TerminationCause;
-  if (o.velocityEstimateIsSet()) j["velocityEstimate"] = o.m_VelocityEstimate;
-  if (o.altitudeIsSet()) j["altitude"] = o.m_Altitude;
+  if (o.terminationCauseIsSet())
+    j["terminationCause"] = o.m_TerminationCause;
+  if (o.velocityEstimateIsSet())
+    j["velocityEstimate"] = o.m_VelocityEstimate;
+  if (o.altitudeIsSet())
+    j["altitude"] = o.m_Altitude;
   if (o.supportedFeaturesIsSet())
     j["supportedFeatures"] = o.m_SupportedFeatures;
 }
 
-void from_json(const nlohmann::json& j, EventNotifyData& o) {
+void from_json(const nlohmann::json &j, EventNotifyData &o) {
   j.at("reportedEventType").get_to(o.m_ReportedEventType);
   if (j.find("supi") != j.end()) {
     j.at("supi").get_to(o.m_Supi);
@@ -319,45 +327,33 @@ void from_json(const nlohmann::json& j, EventNotifyData& o) {
   }
 }
 
-oai::model::lmf::ReportedEventType EventNotifyData::getReportedEventType()
-    const {
+oai::model::lmf::ReportedEventType
+EventNotifyData::getReportedEventType() const {
   return m_ReportedEventType;
 }
 void EventNotifyData::setReportedEventType(
-    oai::model::lmf::ReportedEventType const& value) {
+    oai::model::lmf::ReportedEventType const &value) {
   m_ReportedEventType = value;
 }
-std::string EventNotifyData::getSupi() const {
-  return m_Supi;
-}
-void EventNotifyData::setSupi(std::string const& value) {
-  m_Supi      = value;
+std::string EventNotifyData::getSupi() const { return m_Supi; }
+void EventNotifyData::setSupi(std::string const &value) {
+  m_Supi = value;
   m_SupiIsSet = true;
 }
-bool EventNotifyData::supiIsSet() const {
-  return m_SupiIsSet;
-}
-void EventNotifyData::unsetSupi() {
-  m_SupiIsSet = false;
-}
-std::string EventNotifyData::getGpsi() const {
-  return m_Gpsi;
-}
-void EventNotifyData::setGpsi(std::string const& value) {
-  m_Gpsi      = value;
+bool EventNotifyData::supiIsSet() const { return m_SupiIsSet; }
+void EventNotifyData::unsetSupi() { m_SupiIsSet = false; }
+std::string EventNotifyData::getGpsi() const { return m_Gpsi; }
+void EventNotifyData::setGpsi(std::string const &value) {
+  m_Gpsi = value;
   m_GpsiIsSet = true;
 }
-bool EventNotifyData::gpsiIsSet() const {
-  return m_GpsiIsSet;
-}
-void EventNotifyData::unsetGpsi() {
-  m_GpsiIsSet = false;
-}
+bool EventNotifyData::gpsiIsSet() const { return m_GpsiIsSet; }
+void EventNotifyData::unsetGpsi() { m_GpsiIsSet = false; }
 std::string EventNotifyData::getHgmlcCallBackURI() const {
   return m_HgmlcCallBackURI;
 }
-void EventNotifyData::setHgmlcCallBackURI(std::string const& value) {
-  m_HgmlcCallBackURI      = value;
+void EventNotifyData::setHgmlcCallBackURI(std::string const &value) {
+  m_HgmlcCallBackURI = value;
   m_HgmlcCallBackURIIsSet = true;
 }
 bool EventNotifyData::hgmlcCallBackURIIsSet() const {
@@ -366,18 +362,16 @@ bool EventNotifyData::hgmlcCallBackURIIsSet() const {
 void EventNotifyData::unsetHgmlcCallBackURI() {
   m_HgmlcCallBackURIIsSet = false;
 }
-std::string EventNotifyData::getLdrReference() const {
-  return m_LdrReference;
-}
-void EventNotifyData::setLdrReference(std::string const& value) {
+std::string EventNotifyData::getLdrReference() const { return m_LdrReference; }
+void EventNotifyData::setLdrReference(std::string const &value) {
   m_LdrReference = value;
 }
 oai::model::lmf::GeographicArea EventNotifyData::getLocationEstimate() const {
   return m_LocationEstimate;
 }
 void EventNotifyData::setLocationEstimate(
-    oai::model::lmf::GeographicArea const& value) {
-  m_LocationEstimate      = value;
+    oai::model::lmf::GeographicArea const &value) {
+  m_LocationEstimate = value;
   m_LocationEstimateIsSet = true;
 }
 bool EventNotifyData::locationEstimateIsSet() const {
@@ -390,7 +384,7 @@ int32_t EventNotifyData::getAgeOfLocationEstimate() const {
   return m_AgeOfLocationEstimate;
 }
 void EventNotifyData::setAgeOfLocationEstimate(int32_t const value) {
-  m_AgeOfLocationEstimate      = value;
+  m_AgeOfLocationEstimate = value;
   m_AgeOfLocationEstimateIsSet = true;
 }
 bool EventNotifyData::ageOfLocationEstimateIsSet() const {
@@ -403,23 +397,19 @@ oai::model::lmf::CivicAddress EventNotifyData::getCivicAddress() const {
   return m_CivicAddress;
 }
 void EventNotifyData::setCivicAddress(
-    oai::model::lmf::CivicAddress const& value) {
-  m_CivicAddress      = value;
+    oai::model::lmf::CivicAddress const &value) {
+  m_CivicAddress = value;
   m_CivicAddressIsSet = true;
 }
-bool EventNotifyData::civicAddressIsSet() const {
-  return m_CivicAddressIsSet;
-}
-void EventNotifyData::unsetCivicAddress() {
-  m_CivicAddressIsSet = false;
-}
+bool EventNotifyData::civicAddressIsSet() const { return m_CivicAddressIsSet; }
+void EventNotifyData::unsetCivicAddress() { m_CivicAddressIsSet = false; }
 std::vector<oai::model::lmf::PositioningMethodAndUsage>
 EventNotifyData::getPositioningDataList() const {
   return m_PositioningDataList;
 }
 void EventNotifyData::setPositioningDataList(
-    std::vector<oai::model::lmf::PositioningMethodAndUsage> const& value) {
-  m_PositioningDataList      = value;
+    std::vector<oai::model::lmf::PositioningMethodAndUsage> const &value) {
+  m_PositioningDataList = value;
   m_PositioningDataListIsSet = true;
 }
 bool EventNotifyData::positioningDataListIsSet() const {
@@ -433,8 +423,8 @@ EventNotifyData::getGnssPositioningDataList() const {
   return m_GnssPositioningDataList;
 }
 void EventNotifyData::setGnssPositioningDataList(
-    std::vector<oai::model::lmf::GnssPositioningMethodAndUsage> const& value) {
-  m_GnssPositioningDataList      = value;
+    std::vector<oai::model::lmf::GnssPositioningMethodAndUsage> const &value) {
+  m_GnssPositioningDataList = value;
   m_GnssPositioningDataListIsSet = true;
 }
 bool EventNotifyData::gnssPositioningDataListIsSet() const {
@@ -446,8 +436,8 @@ void EventNotifyData::unsetGnssPositioningDataList() {
 std::string EventNotifyData::getServingLMFidentification() const {
   return m_ServingLMFidentification;
 }
-void EventNotifyData::setServingLMFidentification(std::string const& value) {
-  m_ServingLMFidentification      = value;
+void EventNotifyData::setServingLMFidentification(std::string const &value) {
+  m_ServingLMFidentification = value;
   m_ServingLMFidentificationIsSet = true;
 }
 bool EventNotifyData::servingLMFidentificationIsSet() const {
@@ -460,8 +450,8 @@ oai::model::lmf::TerminationCause EventNotifyData::getTerminationCause() const {
   return m_TerminationCause;
 }
 void EventNotifyData::setTerminationCause(
-    oai::model::lmf::TerminationCause const& value) {
-  m_TerminationCause      = value;
+    oai::model::lmf::TerminationCause const &value) {
+  m_TerminationCause = value;
   m_TerminationCauseIsSet = true;
 }
 bool EventNotifyData::terminationCauseIsSet() const {
@@ -474,8 +464,8 @@ oai::model::lmf::VelocityEstimate EventNotifyData::getVelocityEstimate() const {
   return m_VelocityEstimate;
 }
 void EventNotifyData::setVelocityEstimate(
-    oai::model::lmf::VelocityEstimate const& value) {
-  m_VelocityEstimate      = value;
+    oai::model::lmf::VelocityEstimate const &value) {
+  m_VelocityEstimate = value;
   m_VelocityEstimateIsSet = true;
 }
 bool EventNotifyData::velocityEstimateIsSet() const {
@@ -484,24 +474,18 @@ bool EventNotifyData::velocityEstimateIsSet() const {
 void EventNotifyData::unsetVelocityEstimate() {
   m_VelocityEstimateIsSet = false;
 }
-double EventNotifyData::getAltitude() const {
-  return m_Altitude;
-}
+double EventNotifyData::getAltitude() const { return m_Altitude; }
 void EventNotifyData::setAltitude(double const value) {
-  m_Altitude      = value;
+  m_Altitude = value;
   m_AltitudeIsSet = true;
 }
-bool EventNotifyData::altitudeIsSet() const {
-  return m_AltitudeIsSet;
-}
-void EventNotifyData::unsetAltitude() {
-  m_AltitudeIsSet = false;
-}
+bool EventNotifyData::altitudeIsSet() const { return m_AltitudeIsSet; }
+void EventNotifyData::unsetAltitude() { m_AltitudeIsSet = false; }
 std::string EventNotifyData::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
-void EventNotifyData::setSupportedFeatures(std::string const& value) {
-  m_SupportedFeatures      = value;
+void EventNotifyData::setSupportedFeatures(std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool EventNotifyData::supportedFeaturesIsSet() const {
@@ -511,4 +495,4 @@ void EventNotifyData::unsetSupportedFeatures() {
   m_SupportedFeaturesIsSet = false;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

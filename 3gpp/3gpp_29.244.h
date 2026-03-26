@@ -2,14 +2,13 @@
  * SPDX-License-Identifier: LicenseRef-CSSL-1.0
  */
 
-
 #ifndef FILE_3GPP_129_244_H_SEEN
 #define FILE_3GPP_129_244_H_SEEN
 #include "3gpp_29.274.h"
 #include "common_root_types.h"
 #include "conversions.hpp"
-#include <fmt/format.h>
 #include <arpa/inet.h>
+#include <fmt/format.h>
 #include <stdint.h>
 #include <string>
 #include <vector>
@@ -30,73 +29,72 @@ struct pfcp_exception : public std::exception {
   }
 
   pfcp_exception(int acause) throw() {
-    cause  = acause;
+    cause = acause;
     phrase = fmt::format("PFCP Exception cause {}", cause);
   }
-  const char* what() const throw() { return phrase.c_str(); }
+  const char *what() const throw() { return phrase.c_str(); }
 
- public:
+public:
   int cause;
   std::string phrase;
 };
 
 struct pfcp_msg_bad_length_exception : public pfcp_exception {
- public:
-  pfcp_msg_bad_length_exception(
-      const uint8_t msg_type, const uint16_t hdr_size, const uint16_t ie_size,
-      const uint16_t check_ie_size, const char* file, const int line) throw() {
+public:
+  pfcp_msg_bad_length_exception(const uint8_t msg_type, const uint16_t hdr_size,
+                                const uint16_t ie_size,
+                                const uint16_t check_ie_size, const char *file,
+                                const int line) throw() {
     phrase = fmt::format(
         "PFCP msg {} Bad Length hdr.length {}/ sum ie {} / check sum ie {} "
         "Exception {}:{}",
         msg_type, hdr_size, ie_size, check_ie_size, file, line);
   }
-  pfcp_msg_bad_length_exception(std::string& aphrase) throw() {
+  pfcp_msg_bad_length_exception(std::string &aphrase) throw() {
     phrase = aphrase;
   }
   virtual ~pfcp_msg_bad_length_exception() throw() {}
 };
 
 struct pfcp_msg_unimplemented_ie_exception : public pfcp_exception {
- public:
-  pfcp_msg_unimplemented_ie_exception(
-      const uint8_t msg_type, const uint16_t ie_type,
-      const uint8_t instance = 0) throw() {
-    phrase = fmt::format(
-        "PFCP msg {} Unimplemented {} IE Instance {} Exception", msg_type,
-        ie_type, instance);
+public:
+  pfcp_msg_unimplemented_ie_exception(const uint8_t msg_type,
+                                      const uint16_t ie_type,
+                                      const uint8_t instance = 0) throw() {
+    phrase =
+        fmt::format("PFCP msg {} Unimplemented {} IE Instance {} Exception",
+                    msg_type, ie_type, instance);
   }
-  pfcp_msg_unimplemented_ie_exception(std::string& aphrase) throw() {
+  pfcp_msg_unimplemented_ie_exception(std::string &aphrase) throw() {
     phrase = aphrase;
   }
   virtual ~pfcp_msg_unimplemented_ie_exception() throw() {}
 };
 
 struct pfcp_msg_illegal_ie_exception : public pfcp_exception {
- public:
-  pfcp_msg_illegal_ie_exception(
-      const uint8_t msg_type, const uint16_t ie_type, const char* file,
-      const int line) throw() {
-    phrase = fmt::format(
-        "PFCP msg {} Illegal IE {} Exception {}:{}", msg_type, ie_type, file,
-        line);
+public:
+  pfcp_msg_illegal_ie_exception(const uint8_t msg_type, const uint16_t ie_type,
+                                const char *file, const int line) throw() {
+    phrase = fmt::format("PFCP msg {} Illegal IE {} Exception {}:{}", msg_type,
+                         ie_type, file, line);
   }
-  pfcp_msg_illegal_ie_exception(std::string& aphrase) throw() {
+  pfcp_msg_illegal_ie_exception(std::string &aphrase) throw() {
     phrase = aphrase;
   }
   virtual ~pfcp_msg_illegal_ie_exception() throw() {}
 };
 
 struct pfcp_ie_exception : public pfcp_exception {
- public:
+public:
   pfcp_ie_exception(uint16_t ie_type) throw() {
     phrase = fmt::format("PFCP IE {} Exception", ie_type);
   }
-  pfcp_ie_exception(std::string& aphrase) throw() { phrase = aphrase; }
+  pfcp_ie_exception(std::string &aphrase) throw() { phrase = aphrase; }
   virtual ~pfcp_ie_exception() throw() {}
 };
 
 struct pfcp_ie_unimplemented_exception : public pfcp_ie_exception {
- public:
+public:
   pfcp_ie_unimplemented_exception(uint16_t ie_type) throw()
       : pfcp_ie_exception(ie_type) {
     phrase = fmt::format("PFCP IE {} Unimplemented Exception", ie_type);
@@ -105,7 +103,7 @@ struct pfcp_ie_unimplemented_exception : public pfcp_ie_exception {
 };
 
 struct pfcp_tlv_exception : public pfcp_ie_exception {
- public:
+public:
   pfcp_tlv_exception(uint16_t ie_type) throw() : pfcp_ie_exception(ie_type) {
     phrase = fmt::format("PFCP IE TLV {} Exception", ie_type);
   }
@@ -113,21 +111,19 @@ struct pfcp_tlv_exception : public pfcp_ie_exception {
 };
 
 struct pfcp_tlv_bad_length_exception : public pfcp_tlv_exception {
- public:
-  pfcp_tlv_bad_length_exception(
-      uint16_t ie_type, uint16_t ie_length, const char* file,
-      const int line) throw()
+public:
+  pfcp_tlv_bad_length_exception(uint16_t ie_type, uint16_t ie_length,
+                                const char *file, const int line) throw()
       : pfcp_tlv_exception(ie_type) {
-    phrase = fmt::format(
-        "PFCP IE TLV {} Bad Length {} Exception {}:{}", ie_type, ie_length,
-        file, line);
+    phrase = fmt::format("PFCP IE TLV {} Bad Length {} Exception {}:{}",
+                         ie_type, ie_length, file, line);
   }
   virtual ~pfcp_tlv_bad_length_exception() throw() {}
 };
 
 struct pfcp_ie_value_exception : public pfcp_ie_exception {
- public:
-  pfcp_ie_value_exception(uint16_t ie_type, const char* field) throw()
+public:
+  pfcp_ie_value_exception(uint16_t ie_type, const char *field) throw()
       : pfcp_ie_exception(ie_type) {
     phrase =
         fmt::format("PFCP IE {} Bad Value of {} Exception", ie_type, field);
@@ -347,39 +343,39 @@ struct pfcp_ie_value_exception : public pfcp_ie_exception {
 #define PFCP_SESSION_DELETION_RESPONSE (55)
 #define PFCP_SESSION_REPORT_REQUEST (56)
 #define PFCP_SESSION_REPORT_RESPONSE (57)
-}  // namespace pfcp
+} // namespace pfcp
 
 namespace pfcp {
 //-------------------------------------
 // 8.2.1 Cause
 enum cause_value_e {
   /* Request / Initial message */
-  CAUSE_VALUE_RESERVED                           = 0,
-  CAUSE_VALUE_REQUEST_ACCEPTED                   = 1,
-  CAUSE_VALUE_REQUEST_REJECTED                   = 64,
-  CAUSE_VALUE_SESSION_CONTEXT_NOT_FOUND          = 65,
-  CAUSE_VALUE_MANDATORY_IE_MISSING               = 66,
-  CAUSE_VALUE_CONDITIONAL_IE_MISSING             = 67,
-  CAUSE_VALUE_INVALID_LENGTH                     = 68,
-  CAUSE_VALUE_MANDATORY_IE_INCORRECT             = 69,
-  CAUSE_VALUE_INVALID_FORWARDING_POLICY          = 70,
-  CAUSE_VALUE_INVALID_FTEID_ALLOCATION_OPTION    = 71,
-  CAUSE_VALUE_NO_ESTABLISHED_PFCP_ASSOCIATION    = 72,
+  CAUSE_VALUE_RESERVED = 0,
+  CAUSE_VALUE_REQUEST_ACCEPTED = 1,
+  CAUSE_VALUE_REQUEST_REJECTED = 64,
+  CAUSE_VALUE_SESSION_CONTEXT_NOT_FOUND = 65,
+  CAUSE_VALUE_MANDATORY_IE_MISSING = 66,
+  CAUSE_VALUE_CONDITIONAL_IE_MISSING = 67,
+  CAUSE_VALUE_INVALID_LENGTH = 68,
+  CAUSE_VALUE_MANDATORY_IE_INCORRECT = 69,
+  CAUSE_VALUE_INVALID_FORWARDING_POLICY = 70,
+  CAUSE_VALUE_INVALID_FTEID_ALLOCATION_OPTION = 71,
+  CAUSE_VALUE_NO_ESTABLISHED_PFCP_ASSOCIATION = 72,
   CAUSE_VALUE_RULE_CREATION_MODIFICATION_FAILURE = 73,
-  CAUSE_VALUE_PFCP_ENTITY_IN_CONGESTION          = 74,
-  CAUSE_VALUE_NO_RESOURCES_AVAILABLE             = 75,
-  CAUSE_VALUE_SERVICE_NOT_SUPPORTED              = 76,
-  CAUSE_VALUE_SYSTEM_FAILURE                     = 77,
-  CAUSE_VALUE_REDIRECTION_REQUESTED              = 78
+  CAUSE_VALUE_PFCP_ENTITY_IN_CONGESTION = 74,
+  CAUSE_VALUE_NO_RESOURCES_AVAILABLE = 75,
+  CAUSE_VALUE_SERVICE_NOT_SUPPORTED = 76,
+  CAUSE_VALUE_SYSTEM_FAILURE = 77,
+  CAUSE_VALUE_REDIRECTION_REQUESTED = 78
 };
 
 typedef struct cause_s {
   uint8_t cause_value;
 
-  bool operator==(const struct cause_s& i) const {
+  bool operator==(const struct cause_s &i) const {
     return (i.cause_value == cause_value);
   };
-  bool operator==(const uint8_t& cvalue) const {
+  bool operator==(const uint8_t &cvalue) const {
     return (cvalue == cause_value);
   };
 } cause_t;
@@ -397,7 +393,7 @@ typedef struct cause_s {
 
 typedef struct source_interface_s {
   uint8_t interface_value;
-  bool operator==(const struct source_interface_s& i) const {
+  bool operator==(const struct source_interface_s &i) const {
     return (i.interface_value == interface_value);
   };
 } source_interface_t;
@@ -414,7 +410,7 @@ struct fteid_s {
   struct in6_addr ipv6_address;
   uint8_t choose_id;
 
-  bool operator==(const struct fteid_s& f) const {
+  bool operator==(const struct fteid_s &f) const {
     return (teid == f.teid) and
            (ipv4_address.s_addr == f.ipv4_address.s_addr) and
            (chid == f.chid) and (ch == f.ch) and (choose_id == f.choose_id) and
@@ -425,15 +421,15 @@ struct fteid_s {
            (v4 == f.v4) and (v6 == f.v6);
   }
 
-  fteid_s& operator=(const struct fteid_s& f) {
-    v4                  = f.v4;
-    v6                  = f.v6;
-    chid                = f.chid;
-    ch                  = f.ch;
-    choose_id           = f.choose_id;
-    teid                = f.teid;
+  fteid_s &operator=(const struct fteid_s &f) {
+    v4 = f.v4;
+    v6 = f.v6;
+    chid = f.chid;
+    ch = f.ch;
+    choose_id = f.choose_id;
+    teid = f.teid;
     ipv4_address.s_addr = f.ipv4_address.s_addr;
-    ipv6_address        = f.ipv6_address;
+    ipv6_address = f.ipv6_address;
     // ipv6_address.s6_addr32[0] = f.ipv6_address.s6_addr32[0];
     // ipv6_address.s6_addr32[1] = f.ipv6_address.s6_addr32[1];
     // ipv6_address.s6_addr32[2] = f.ipv6_address.s6_addr32[2];
@@ -478,9 +474,9 @@ typedef struct sdf_filter_s {
   uint8_t fd : 1;
   uint16_t length_of_flow_description;
   std::string flow_description;
-  std::string tos_traffic_class;         // 2 octets
-  std::string security_parameter_index;  // 4 octets
-  std::string flow_label;                // 3 octets
+  std::string tos_traffic_class;        // 2 octets
+  std::string security_parameter_index; // 4 octets
+  std::string flow_label;               // 3 octets
   uint32_t sdf_filter_id;
 } sdf_filter_t;
 
@@ -494,7 +490,7 @@ typedef struct application_id_s {
 //  8.2.7 Gate Status
 enum gate_status_e {
   /* Request / Initial message */
-  OPEN   = 0,
+  OPEN = 0,
   CLOSED = 1
 };
 typedef struct gate_status_s {
@@ -526,7 +522,7 @@ typedef struct qer_correlation_id_s {
 // 8.2.11 Precedence
 typedef struct precedence_s {
   uint32_t precedence;
-  bool operator==(const struct precedence_s& i) const {
+  bool operator==(const struct precedence_s &i) const {
     return (i.precedence == precedence);
   };
 } precedence_t;
@@ -534,7 +530,7 @@ typedef struct precedence_s {
 //-------------------------------------
 // 8.2.12 Transport Level Marking
 typedef struct transport_level_marking_s {
-  std::string transport_level_marking;  // 2 octets
+  std::string transport_level_marking; // 2 octets
 } transport_level_marking_t;
 
 //-------------------------------------
@@ -553,7 +549,7 @@ typedef struct volume_threshold_s {
 // 8.2.14 Time Threshold
 typedef struct time_threshold_s {
   uint32_t time_threshold;
-  bool operator==(const struct time_threshold_s& i) const {
+  bool operator==(const struct time_threshold_s &i) const {
     return (i.time_threshold == time_threshold);
   };
 } time_threshold_t;
@@ -580,7 +576,7 @@ typedef struct subsequent_volume_threshold_s {
 // 8.2.17 Subsequent Time Threshold
 typedef struct subsequent_time_threshold_s {
   uint32_t subsequent_time_threshold;
-  bool operator==(const struct subsequent_time_threshold_s& i) const {
+  bool operator==(const struct subsequent_time_threshold_s &i) const {
     return (i.subsequent_time_threshold == subsequent_time_threshold);
   };
 } subsequent_time_threshold_t;
@@ -589,7 +585,7 @@ typedef struct subsequent_time_threshold_s {
 // 8.2.18 Inactivity Detection Time
 typedef struct inactivity_detection_time_s {
   uint32_t inactivity_detection_time;
-  bool operator==(const struct inactivity_detection_time_s& i) const {
+  bool operator==(const struct inactivity_detection_time_s &i) const {
     return (i.inactivity_detection_time == inactivity_detection_time);
   };
 } inactivity_detection_time_t;
@@ -625,10 +621,10 @@ typedef struct redirect_information_s {
 } redirect_information_t;
 
 enum redirect_address_type_e {
-  IPV4_ADDRESS            = 0,
-  IPV6_ADDRESS            = 1,
-  URL                     = 2,
-  SIP_URI                 = 3,
+  IPV4_ADDRESS = 0,
+  IPV6_ADDRESS = 1,
+  URL = 2,
+  SIP_URI = 3,
   IPV4_AND_IPV6_ADDRESSES = 4
 };
 
@@ -646,7 +642,7 @@ typedef struct report_type_s {
 // 8.2.22 Offending IE
 typedef struct offending_ie_s {
   uint16_t offending_ie;
-  bool operator==(const struct offending_ie_s& i) const {
+  bool operator==(const struct offending_ie_s &i) const {
     return (i.offending_ie == offending_ie);
   };
 } offending_ie_t;
@@ -655,23 +651,23 @@ typedef struct offending_ie_s {
 // 8.2.23 Forwarding Policy
 typedef struct forwarding_policy_s {
   uint8_t forwarding_policy_identifier_length;
-  std::string forwarding_policy_identifier;  // TODO CHECK TYPE
+  std::string forwarding_policy_identifier; // TODO CHECK TYPE
 } forwarding_policy_t;
 
 //-------------------------------------
 // 8.2.24 Destination Interface
 enum destination_interface_value_e {
   /* Request / Initial message */
-  INTERFACE_VALUE_ACCESS         = 0,
-  INTERFACE_VALUE_CORE           = 1,
+  INTERFACE_VALUE_ACCESS = 0,
+  INTERFACE_VALUE_CORE = 1,
   INTERFACE_VALUE_SGI_LAN_N6_LAN = 2,
-  INTERFACE_VALUE_CP_FUNCTION    = 3,
-  INTERFACE_VALUE_LI_FUNCTION    = 4
+  INTERFACE_VALUE_CP_FUNCTION = 3,
+  INTERFACE_VALUE_LI_FUNCTION = 4
 };
 
 typedef struct destination_interface_s {
   uint8_t interface_value;
-  bool operator==(const struct destination_interface_s& i) const {
+  bool operator==(const struct destination_interface_s &i) const {
     return (i.interface_value == interface_value);
   };
 } destination_interface_t;
@@ -734,55 +730,23 @@ struct up_function_features_s {
   //  return *this;
   //}
   up_function_features_s()
-      : bucp(0),
-        ddnd(0),
-        dlbd(0),
-        trst(0),
-        ftup(0),
-        pfdm(0),
-        heeu(0),
-        treu(0),
+      : bucp(0), ddnd(0), dlbd(0), trst(0), ftup(0), pfdm(0), heeu(0), treu(0),
 
-        empu(0),
-        pdiu(0),
-        udbc(0),
-        quoac(0),
-        trace(0),
-        frrt(0),
-        pfde(0),
+        empu(0), pdiu(0), udbc(0), quoac(0), trace(0), frrt(0), pfde(0),
         epfar(0),
 
-        dpdra(0),
-        adpdp(0),
-        ueip(0),
-        sset(0),
-        mnop(0),
-        mte(0),
-        bundl(0),
+        dpdra(0), adpdp(0), ueip(0), sset(0), mnop(0), mte(0), bundl(0),
         gcom(0),
 
-        mpas(0),
-        rttl(0),
-        vtime(0),
-        norp(0),
-        iptv(0),
-        ip6pl(0),
-        tscu(0),
+        mpas(0), rttl(0), vtime(0), norp(0), iptv(0), ip6pl(0), tscu(0),
         mptcp(0),
 
-        atsss_ll(0),
-        qfqm(0),
-        gpqm(0),
-        mt_edt(0),
-        ciot(0),
-        ethar(0),
-        ddds(0),
+        atsss_ll(0), qfqm(0), gpqm(0), mt_edt(0), ciot(0), ethar(0), ddds(0),
         rds(0),
 
-        rttwp(0),
-        spare(0) {}
+        rttwp(0), spare(0) {}
 
-  up_function_features_s(const up_function_features_s& i) {
+  up_function_features_s(const up_function_features_s &i) {
     bucp = i.bucp;
     ddnd = i.ddnd;
     dlbd = i.dlbd;
@@ -792,42 +756,42 @@ struct up_function_features_s {
     heeu = i.heeu;
     treu = i.treu;
 
-    empu  = i.empu;
-    pdiu  = i.pdiu;
-    udbc  = i.udbc;
+    empu = i.empu;
+    pdiu = i.pdiu;
+    udbc = i.udbc;
     quoac = i.quoac;
     trace = i.trace;
-    frrt  = i.frrt;
+    frrt = i.frrt;
     spare = i.spare;
     epfar = i.epfar;
-    pfde  = i.pfde;
+    pfde = i.pfde;
 
     dpdra = i.dpdra;
     adpdp = i.adpdp;
-    ueip  = i.ueip;
-    sset  = i.sset;
-    mnop  = i.mnop;
-    mte   = i.mte;
+    ueip = i.ueip;
+    sset = i.sset;
+    mnop = i.mnop;
+    mte = i.mte;
     bundl = i.bundl;
-    gcom  = i.gcom;
+    gcom = i.gcom;
 
-    mpas  = i.mpas;
-    rttl  = i.rttl;
+    mpas = i.mpas;
+    rttl = i.rttl;
     vtime = i.vtime;
-    norp  = i.norp;
-    iptv  = i.iptv;
+    norp = i.norp;
+    iptv = i.iptv;
     ip6pl = i.ip6pl;
-    tscu  = i.tscu;
+    tscu = i.tscu;
     mptcp = i.mptcp;
 
     atsss_ll = i.atsss_ll;
-    qfqm     = i.qfqm;
-    gpqm     = i.gpqm;
-    mt_edt   = i.mt_edt;
-    ciot     = i.ciot;
-    ethar    = i.ethar;
-    ddds     = i.ddds;
-    rds      = i.rds;
+    qfqm = i.qfqm;
+    gpqm = i.gpqm;
+    mt_edt = i.mt_edt;
+    ciot = i.ciot;
+    ethar = i.ethar;
+    ddds = i.ddds;
+    rds = i.rds;
 
     rttwp = i.rttwp;
   }
@@ -858,7 +822,7 @@ typedef struct downlink_data_service_information_s {
 //-------------------------------------
 // 8.2.28 Downlink Data Notification Delay
 typedef struct downlink_data_notification_delay_s {
-  uint8_t delay;  // Delay Value in integer multiples of 50 millisecs, or zero
+  uint8_t delay; // Delay Value in integer multiples of 50 millisecs, or zero
 } downlink_data_notification_delay_t;
 
 //-------------------------------------
@@ -894,7 +858,7 @@ typedef struct pfcpsrrsp_flags_s {
 // 8.2.33 Sequence Number
 typedef struct sequence_number_s {
   uint32_t sequence_number;
-  bool operator==(const struct sequence_number_s& i) const {
+  bool operator==(const struct sequence_number_s &i) const {
     return (i.sequence_number == sequence_number);
   };
 } sequence_number_t;
@@ -902,11 +866,11 @@ typedef struct sequence_number_s {
 //-------------------------------------
 // 8.2.34 Metric
 typedef struct metric_s {
-  uint8_t metric;  // It indicates a percentage and may take binary coded
-                   // integer values from
+  uint8_t metric; // It indicates a percentage and may take binary coded
+                  // integer values from
   // and including 0 up to and including 100. Other values shall be considered
   // as 0.
-  bool operator==(const struct metric_s& i) const {
+  bool operator==(const struct metric_s &i) const {
     return (i.metric == metric);
   };
 } metric_t;
@@ -923,9 +887,9 @@ typedef struct timer_s {
 typedef struct pdr_id_s {
   uint16_t rule_id;
   pdr_id_s() : rule_id(0) {}
-  pdr_id_s(const uint8_t& p) : rule_id(p) {}
-  pdr_id_s(const struct pdr_id_s& p) : rule_id(p.rule_id) {}
-  bool operator==(const struct pdr_id_s& i) const {
+  pdr_id_s(const uint8_t &p) : rule_id(p) {}
+  pdr_id_s(const struct pdr_id_s &p) : rule_id(p.rule_id) {}
+  bool operator==(const struct pdr_id_s &i) const {
     return (i.rule_id == rule_id);
   };
 } pdr_id_t;
@@ -940,7 +904,7 @@ typedef struct fseid_s {
   struct in_addr ipv4_address;
   struct in6_addr ipv6_address;
 
-  bool operator==(const struct fseid_s& i) const {
+  bool operator==(const struct fseid_s &i) const {
     if ((i.seid == this->seid) && (i.v4 == this->v4) &&
         (i.ipv4_address.s_addr == this->ipv4_address.s_addr) &&
         (i.v6 == this->v6) &&
@@ -953,7 +917,7 @@ typedef struct fseid_s {
       return false;
     }
   };
-  bool operator<(const struct fseid_s& i) const {
+  bool operator<(const struct fseid_s &i) const {
     if (i.seid < this->seid)
       return true;
     else if (i.seid > this->seid)
@@ -966,19 +930,19 @@ typedef struct fseid_s {
     } else if (this->v4)
       return true;
     if (i.v6 == this->v6) {
-      uint64_t i64 = ((uint64_t) i.ipv6_address.s6_addr32[0] << 32) |
-                     ((uint64_t) i.ipv6_address.s6_addr32[1]);
-      uint64_t this64 = ((uint64_t) this->ipv6_address.s6_addr32[0] << 32) |
-                        ((uint64_t) this->ipv6_address.s6_addr32[1]);
+      uint64_t i64 = ((uint64_t)i.ipv6_address.s6_addr32[0] << 32) |
+                     ((uint64_t)i.ipv6_address.s6_addr32[1]);
+      uint64_t this64 = ((uint64_t)this->ipv6_address.s6_addr32[0] << 32) |
+                        ((uint64_t)this->ipv6_address.s6_addr32[1]);
 
       if (i64 < this64)
         return true;
       else if (i64 > this64)
         return false;
-      i64 = ((uint64_t) i.ipv6_address.s6_addr32[2] << 32) |
-            ((uint64_t) i.ipv6_address.s6_addr32[3]);
-      this64 = ((uint64_t) this->ipv6_address.s6_addr32[2] << 32) |
-               ((uint64_t) this->ipv6_address.s6_addr32[3]);
+      i64 = ((uint64_t)i.ipv6_address.s6_addr32[2] << 32) |
+            ((uint64_t)i.ipv6_address.s6_addr32[3]);
+      this64 = ((uint64_t)this->ipv6_address.s6_addr32[2] << 32) |
+               ((uint64_t)this->ipv6_address.s6_addr32[3]);
       if (i64 < this64)
         return true;
       else if (i64 > this64)
@@ -995,8 +959,8 @@ enum node_id_type_value_e {
   /* Request / Initial message */
   NODE_ID_TYPE_IPV4_ADDRESS = 0,
   NODE_ID_TYPE_IPV6_ADDRESS = 1,
-  NODE_ID_TYPE_FQDN         = 2,
-  NODE_ID_TYPE_UNKNOWN      = 3
+  NODE_ID_TYPE_FQDN = 2,
+  NODE_ID_TYPE_UNKNOWN = 3
 };
 
 struct node_id_s {
@@ -1006,38 +970,40 @@ struct node_id_s {
     struct in_addr ipv4_address;
     struct in6_addr ipv6_address;
   } u1;
-  std::string fqdn;  // should be in union but problem with virtual ~
+  std::string fqdn; // should be in union but problem with virtual ~
   node_id_s() {
-    node_id_type           = node_id_type_value_e::NODE_ID_TYPE_UNKNOWN;
+    node_id_type = node_id_type_value_e::NODE_ID_TYPE_UNKNOWN;
     u1.ipv4_address.s_addr = INADDR_ANY;
-    u1.ipv6_address        = in6addr_any;
-    fqdn                   = {};
+    u1.ipv6_address = in6addr_any;
+    fqdn = {};
   }
 
-  bool operator==(const struct node_id_s& i) const {
-    if (i.node_id_type != this->node_id_type) return false;
+  bool operator==(const struct node_id_s &i) const {
+    if (i.node_id_type != this->node_id_type)
+      return false;
     switch (i.node_id_type) {
-      case NODE_ID_TYPE_IPV4_ADDRESS: {
-        if (i.u1.ipv4_address.s_addr == this->u1.ipv4_address.s_addr)
-          return true;
-      } break;
-      case NODE_ID_TYPE_IPV6_ADDRESS: {
-        if ((i.u1.ipv6_address.s6_addr32[0] ==
-             this->u1.ipv6_address.s6_addr32[0]) &&
-            (i.u1.ipv6_address.s6_addr32[1] ==
-             this->u1.ipv6_address.s6_addr32[1]) &&
-            (i.u1.ipv6_address.s6_addr32[2] ==
-             this->u1.ipv6_address.s6_addr32[2]) &&
-            (i.u1.ipv6_address.s6_addr32[3] ==
-             this->u1.ipv6_address.s6_addr32[3]))
-          return true;
-      } break;
-      case NODE_ID_TYPE_FQDN: {
-        if (i.fqdn == this->fqdn) return true;
-      } break;
-      default: {
-        return false;
-      }
+    case NODE_ID_TYPE_IPV4_ADDRESS: {
+      if (i.u1.ipv4_address.s_addr == this->u1.ipv4_address.s_addr)
+        return true;
+    } break;
+    case NODE_ID_TYPE_IPV6_ADDRESS: {
+      if ((i.u1.ipv6_address.s6_addr32[0] ==
+           this->u1.ipv6_address.s6_addr32[0]) &&
+          (i.u1.ipv6_address.s6_addr32[1] ==
+           this->u1.ipv6_address.s6_addr32[1]) &&
+          (i.u1.ipv6_address.s6_addr32[2] ==
+           this->u1.ipv6_address.s6_addr32[2]) &&
+          (i.u1.ipv6_address.s6_addr32[3] ==
+           this->u1.ipv6_address.s6_addr32[3]))
+        return true;
+    } break;
+    case NODE_ID_TYPE_FQDN: {
+      if (i.fqdn == this->fqdn)
+        return true;
+    } break;
+    default: {
+      return false;
+    }
     }
     return false;
 
@@ -1059,14 +1025,14 @@ struct node_id_s {
         }
         */
   };
-  bool operator==(const std::string& f) const {
+  bool operator==(const std::string &f) const {
     if ((NODE_ID_TYPE_FQDN == this->node_id_type) && (fqdn.compare(f) == 0)) {
       return true;
     } else {
       return false;
     }
   };
-  bool operator==(const struct in_addr& a) const {
+  bool operator==(const struct in_addr &a) const {
     if ((NODE_ID_TYPE_IPV4_ADDRESS == this->node_id_type) &&
         (a.s_addr == u1.ipv4_address.s_addr)) {
       return true;
@@ -1074,7 +1040,7 @@ struct node_id_s {
       return false;
     }
   };
-  bool operator==(const struct in6_addr& i) const {
+  bool operator==(const struct in6_addr &i) const {
     if ((NODE_ID_TYPE_IPV6_ADDRESS == this->node_id_type) &&
         (i.s6_addr32[0] == this->u1.ipv6_address.s6_addr32[0]) &&
         (i.s6_addr32[1] == this->u1.ipv6_address.s6_addr32[1]) &&
@@ -1086,10 +1052,10 @@ struct node_id_s {
     }
   };
 
-  node_id_s& operator=(const struct node_id_s& i) {
-    node_id_type                 = i.node_id_type;
-    fqdn                         = i.fqdn;
-    u1.ipv4_address.s_addr       = i.u1.ipv4_address.s_addr;
+  node_id_s &operator=(const struct node_id_s &i) {
+    node_id_type = i.node_id_type;
+    fqdn = i.fqdn;
+    u1.ipv4_address.s_addr = i.u1.ipv4_address.s_addr;
     u1.ipv6_address.s6_addr32[0] = i.u1.ipv6_address.s6_addr32[0];
     u1.ipv6_address.s6_addr32[1] = i.u1.ipv6_address.s6_addr32[1];
     u1.ipv6_address.s6_addr32[2] = i.u1.ipv6_address.s6_addr32[2];
@@ -1271,8 +1237,8 @@ typedef struct linked_urr_id_s {
 enum outer_header_creation_description_value_e {
   OUTER_HEADER_CREATION_GTPU_UDP_IPV4 = 0x0100,
   OUTER_HEADER_CREATION_GTPU_UDP_IPV6 = 0x0200,
-  OUTER_HEADER_CREATION_UDP_IPV4      = 0x0400,
-  OUTER_HEADER_CREATION_UDP_IPV6      = 0x0800
+  OUTER_HEADER_CREATION_UDP_IPV4 = 0x0400,
+  OUTER_HEADER_CREATION_UDP_IPV6 = 0x0800
 };
 
 typedef struct outer_header_creation_s {
@@ -1301,7 +1267,7 @@ struct cp_function_features_s {
   //  return *this;
   //}
   cp_function_features_s() : spare(0), ovrl(0), load(0) {}
-  cp_function_features_s(const cp_function_features_s& i)
+  cp_function_features_s(const cp_function_features_s &i)
       : spare(i.spare), ovrl(i.ovrl), load(i.load) {}
 };
 typedef struct cp_function_features_s cp_function_features_t;
@@ -1324,9 +1290,9 @@ typedef struct application_instance_id_s {
 //-------------------------------------
 // 8.2.61 Flow Information
 enum flow_direction_value_e {
-  UNSPECIFIED   = 0,
-  DOWNLINK      = 1,
-  UPLINK        = 2,
+  UNSPECIFIED = 0,
+  DOWNLINK = 1,
+  UPLINK = 2,
   BIDIRECTIONAL = 3
 };
 
@@ -1340,23 +1306,22 @@ typedef struct flow_information_s {
 //-------------------------------------
 // 8.2.62 UE IP Address
 typedef struct ue_ip_address_s {
-  uint8_t ipv6d : 1;  // This bit is only applicable to the UE IP address IE in
-                      // the PDI IE and whhen V6 bit is set to "1". If this bit
-                      // is set to "1", then the IPv6 Prefix Delegation Bits
-                      // field shall be present, otherwise the UP function shall
-                      // consider IPv6 prefix is default /64.
-  uint8_t
-      sd : 1;  // This bit is only applicable to the UE IP Address IE in the PDI
-               // IE. It shall be set to "0" and ignored by the receiver in IEs
-               // other than PDI IE. In the PDI IE, if this bit is set to "0",
-               // this indicates a Source IP address; if this bit is set to "1",
-               // this indicates a Destination IP address.
-  uint8_t v4 : 1;  // If this bit is set to "1", then the IPv4 address field
-                   // shall be present in the UE IP Address, otherwise the IPv4
-                   // address field shall not be present.
-  uint8_t v6 : 1;  // If this bit is set to "1", then the IPv6 address field
-                   // shall be present in the UE IP Address, otherwise the IPv6
-                   // address field shall not be present.
+  uint8_t ipv6d : 1; // This bit is only applicable to the UE IP address IE in
+                     // the PDI IE and whhen V6 bit is set to "1". If this bit
+                     // is set to "1", then the IPv6 Prefix Delegation Bits
+                     // field shall be present, otherwise the UP function shall
+                     // consider IPv6 prefix is default /64.
+  uint8_t sd : 1; // This bit is only applicable to the UE IP Address IE in the
+                  // PDI IE. It shall be set to "0" and ignored by the receiver
+                  // in IEs other than PDI IE. In the PDI IE, if this bit is set
+                  // to "0", this indicates a Source IP address; if this bit is
+                  // set to "1", this indicates a Destination IP address.
+  uint8_t v4 : 1; // If this bit is set to "1", then the IPv4 address field
+                  // shall be present in the UE IP Address, otherwise the IPv4
+                  // address field shall not be present.
+  uint8_t v6 : 1; // If this bit is set to "1", then the IPv6 address field
+                  // shall be present in the UE IP Address, otherwise the IPv6
+                  // address field shall not be present.
   struct in_addr ipv4_address;
   struct in6_addr ipv6_address;
   uint8_t ipv6_prefix_delegation_bits;
@@ -1387,7 +1352,7 @@ typedef struct outer_header_removal_s {
 // 8.2.65 Recovery Time Stamp
 typedef struct recovery_time_stamp_s {
   uint32_t recovery_time_stamp;
-  bool operator==(const struct recovery_time_stamp_s& a) const {
+  bool operator==(const struct recovery_time_stamp_s &a) const {
     return (recovery_time_stamp == a.recovery_time_stamp);
   }
 } recovery_time_stamp_t;
@@ -1462,9 +1427,9 @@ typedef struct deactivate_predefined_rules_s {
 struct far_id_s {
   uint32_t far_id;
   far_id_s() : far_id(0) {}
-  far_id_s(const uint8_t& f) : far_id(f) {}
-  far_id_s(const struct far_id_s& f) : far_id(f.far_id) {}
-  bool operator==(const struct far_id_s& i) const {
+  far_id_s(const uint8_t &f) : far_id(f) {}
+  far_id_s(const struct far_id_s &f) : far_id(f.far_id) {}
+  bool operator==(const struct far_id_s &i) const {
     return (i.far_id == far_id);
   };
 };
@@ -1500,10 +1465,10 @@ typedef struct graceful_release_period_s {
 // 8.2.79 PDN Type
 enum pdn_type_value_e {
   /* Request / Initial message */
-  IPV4     = 1,
-  IPV6     = 2,
-  IPV4V6   = 3,
-  NON_IP   = 4,
+  IPV4 = 1,
+  IPV6 = 2,
+  IPV4V6 = 3,
+  NON_IP = 4,
   ETHERNET = 5
 };
 
@@ -1607,12 +1572,12 @@ typedef struct qfi_s {
   uint8_t spare : 2;
   uint8_t qfi : 6;
   qfi_s() : qfi(0), spare(0) {}
-  qfi_s(const uint8_t& q) : qfi(q), spare(0) {}
-  qfi_s(const struct qfi_s& q) : qfi(q.qfi), spare(q.spare) {}
-  inline bool operator==(const struct qfi_s& rhs) const {
+  qfi_s(const uint8_t &q) : qfi(q), spare(0) {}
+  qfi_s(const struct qfi_s &q) : qfi(q.qfi), spare(q.spare) {}
+  inline bool operator==(const struct qfi_s &rhs) const {
     return ((qfi == rhs.qfi) && (spare == rhs.spare));
   }
-  inline bool operator!=(const struct qfi_s& rhs) const {
+  inline bool operator!=(const struct qfi_s &rhs) const {
     return !((qfi == rhs.qfi) && (spare == rhs.spare));
   }
 } qfi_t;
@@ -1855,22 +1820,22 @@ typedef struct nssai_s {
 //-------------------------------------
 // 8.2.118. 3GPP Interface Type
 enum _3gpp_interface_type_e {
-  _3GPP_INTERFACE_TYPE_S1_U                         = 0,
-  _3GPP_INTERFACE_TYPE_S5_S8_U                      = 1,
-  _3GPP_INTERFACE_TYPE_S4_U                         = 2,
-  _3GPP_INTERFACE_TYPE_S11_U                        = 3,
-  _3GPP_INTERFACE_TYPE_S12_U                        = 4,
-  _3GPP_INTERFACE_TYPE_GN_GP_U                      = 5,
-  _3GPP_INTERFACE_TYPE_S2A_U                        = 6,
-  _3GPP_INTERFACE_TYPE_S2B_U                        = 7,
-  _3GPP_INTERFACE_TYPE_ENODEB_GTP_U_DL              = 8,
-  _3GPP_INTERFACE_TYPE_ENODEB_GTP_U_UL              = 9,
-  _3GPP_INTERFACE_TYPE_SGW_UPF_GTP_U_DL             = 10,
-  _3GPP_INTERFACE_TYPE_N3_3GPP_ACCESS               = 11,
-  _3GPP_INTERFACE_TYPE_N3_TRUSTED_NON_3GPP_ACCESS   = 12,
+  _3GPP_INTERFACE_TYPE_S1_U = 0,
+  _3GPP_INTERFACE_TYPE_S5_S8_U = 1,
+  _3GPP_INTERFACE_TYPE_S4_U = 2,
+  _3GPP_INTERFACE_TYPE_S11_U = 3,
+  _3GPP_INTERFACE_TYPE_S12_U = 4,
+  _3GPP_INTERFACE_TYPE_GN_GP_U = 5,
+  _3GPP_INTERFACE_TYPE_S2A_U = 6,
+  _3GPP_INTERFACE_TYPE_S2B_U = 7,
+  _3GPP_INTERFACE_TYPE_ENODEB_GTP_U_DL = 8,
+  _3GPP_INTERFACE_TYPE_ENODEB_GTP_U_UL = 9,
+  _3GPP_INTERFACE_TYPE_SGW_UPF_GTP_U_DL = 10,
+  _3GPP_INTERFACE_TYPE_N3_3GPP_ACCESS = 11,
+  _3GPP_INTERFACE_TYPE_N3_TRUSTED_NON_3GPP_ACCESS = 12,
   _3GPP_INTERFACE_TYPE_N3_UNTRUSTED_NON_3GPP_ACCESS = 13,
-  _3GPP_INTERFACE_TYPE_N3                           = 14,
-  _3GPP_INTERFACE_TYPE_N9                           = 15
+  _3GPP_INTERFACE_TYPE_N3 = 14,
+  _3GPP_INTERFACE_TYPE_N9 = 15
 };
 
 typedef struct _3gpp_interface_type_s {
@@ -1919,8 +1884,8 @@ typedef struct steering_functionality_s {
 
 enum steering_functionality_value_e {
   STEERING_FUNCTIONALITY_ATSSS_LL = 0,
-  STEERING_FUNCTIONALITY_MPTCP    = 1,
-  STEERING_FUNCTIONALITY_SPARE    = 2
+  STEERING_FUNCTIONALITY_MPTCP = 1,
+  STEERING_FUNCTIONALITY_SPARE = 2
 };
 
 //-------------------------------------
@@ -1935,7 +1900,7 @@ enum steering_mode_value_e {
   STEERING_MODE_SMALLEST_DELAY = 1,
   STEERING_MODE_LOAD_BALANCING = 2,
   STEERING_MODE_PRIORITY_BASED = 3,
-  STEERING_MODE_SPARED         = 4
+  STEERING_MODE_SPARED = 4
 };
 
 //-------------------------------------
@@ -1951,11 +1916,11 @@ typedef struct priority_s {
   uint8_t priority_value : 4;
 } priority_t;
 enum priority_value_e {
-  PRIORITY_VALUE_ACTIVE  = 0,
+  PRIORITY_VALUE_ACTIVE = 0,
   PRIORITY_VALUE_STANDBY = 1,
-  PRIORITY_VALUE_HIGH    = 2,
-  PRIORITY_VALUE_LOW     = 3,
-  PRIORITY_VALUE_SPARED  = 4
+  PRIORITY_VALUE_HIGH = 2,
+  PRIORITY_VALUE_LOW = 3,
+  PRIORITY_VALUE_SPARED = 4
 };
 
 //-------------------------------------
@@ -2398,13 +2363,12 @@ typedef struct alternative_smf_ip_address_s {
 //    dl_buffering_buffering_suggested_packet_count;
 //    suggested_buffering_packets_count_t   suggested_buffering_packets_count;
 //  } update_bar_within_pfcp_session_report_response_t;
-}  // namespace pfcp
+} // namespace pfcp
 
 namespace std {
 
-template<>
-struct hash<pfcp::fseid_t> {
-  std::size_t operator()(const pfcp::fseid_t& k) const {
+template <> struct hash<pfcp::fseid_t> {
+  std::size_t operator()(const pfcp::fseid_t &k) const {
     using std::hash;
     using std::size_t;
     std::size_t h;
@@ -2421,30 +2385,29 @@ struct hash<pfcp::fseid_t> {
   }
 };
 
-template<>
-class hash<pfcp::node_id_t> {
- public:
-  size_t operator()(const pfcp::node_id_t& k) const {
+template <> class hash<pfcp::node_id_t> {
+public:
+  size_t operator()(const pfcp::node_id_t &k) const {
     using std::hash;
     using std::size_t;
     std::size_t h = 0;
     switch (k.node_id_type) {
-      case pfcp::NODE_ID_TYPE_IPV4_ADDRESS:
-        h = std::hash<uint32_t>()(k.u1.ipv4_address.s_addr);
-        return h;
-        break;
-      case pfcp::NODE_ID_TYPE_IPV6_ADDRESS:
-        h = k.u1.ipv6_address.s6_addr32[0] ^ k.u1.ipv6_address.s6_addr32[1] ^
-            k.u1.ipv6_address.s6_addr32[2] ^ k.u1.ipv6_address.s6_addr32[3];
-        return h;
-        break;
-      case pfcp::NODE_ID_TYPE_FQDN:
-        h = std::hash<std::string>()(k.fqdn);
-        return h;
-      default:
-        return h;
+    case pfcp::NODE_ID_TYPE_IPV4_ADDRESS:
+      h = std::hash<uint32_t>()(k.u1.ipv4_address.s_addr);
+      return h;
+      break;
+    case pfcp::NODE_ID_TYPE_IPV6_ADDRESS:
+      h = k.u1.ipv6_address.s6_addr32[0] ^ k.u1.ipv6_address.s6_addr32[1] ^
+          k.u1.ipv6_address.s6_addr32[2] ^ k.u1.ipv6_address.s6_addr32[3];
+      return h;
+      break;
+    case pfcp::NODE_ID_TYPE_FQDN:
+      h = std::hash<std::string>()(k.fqdn);
+      return h;
+    default:
+      return h;
     }
   }
 };
-}  // namespace std
+} // namespace std
 #endif /* FILE_3GPP_129_244_H_SEEN */

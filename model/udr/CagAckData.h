@@ -33,7 +33,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class CagAckData {
- public:
+public:
   CagAckData();
   virtual ~CagAckData();
 
@@ -46,22 +46,22 @@ class CagAckData {
   ///
   /// </summary>
   std::string getProvisioningTime() const;
-  void setProvisioningTime(std::string const& value);
+  void setProvisioningTime(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   UeUpdateStatus getUeUpdateStatus() const;
-  void setUeUpdateStatus(UeUpdateStatus const& value);
+  void setUeUpdateStatus(UeUpdateStatus const &value);
 
-  friend void to_json(nlohmann::json& j, const CagAckData& o);
-  friend void from_json(const nlohmann::json& j, CagAckData& o);
+  friend void to_json(nlohmann::json &j, const CagAckData &o);
+  friend void from_json(const nlohmann::json &j, CagAckData &o);
 
- protected:
+protected:
   std::string m_ProvisioningTime;
 
   UeUpdateStatus m_UeUpdateStatus;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* CagAckData_H_ */

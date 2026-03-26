@@ -20,9 +20,9 @@
 #define SearchResult_H_
 
 #include "NFProfile.h"
+#include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
-#include <nlohmann/json.hpp>
 
 namespace oai::model::nrf {
 
@@ -30,7 +30,7 @@ namespace oai::model::nrf {
 ///
 /// </summary>
 class SearchResult {
- public:
+public:
   SearchResult();
   virtual ~SearchResult();
 
@@ -49,13 +49,13 @@ class SearchResult {
   /// <summary>
   ///
   /// </summary>
-  std::vector<NFProfile>& getNfInstances();
-  void setNfInstances(std::vector<NFProfile> const& value);
+  std::vector<NFProfile> &getNfInstances();
+  void setNfInstances(std::vector<NFProfile> const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getSearchId() const;
-  void setSearchId(std::string const& value);
+  void setSearchId(std::string const &value);
   bool searchIdIsSet() const;
   void unsetSearchId();
   /// <summary>
@@ -69,14 +69,14 @@ class SearchResult {
   ///
   /// </summary>
   std::string getNrfSupportedFeatures() const;
-  void setNrfSupportedFeatures(std::string const& value);
+  void setNrfSupportedFeatures(std::string const &value);
   bool nrfSupportedFeaturesIsSet() const;
   void unsetNrfSupportedFeatures();
 
-  friend void to_json(nlohmann::json& j, const SearchResult& o);
-  friend void from_json(const nlohmann::json& j, SearchResult& o);
+  friend void to_json(nlohmann::json &j, const SearchResult &o);
+  friend void from_json(const nlohmann::json &j, SearchResult &o);
 
- protected:
+protected:
   int32_t m_ValidityPeriod;
   bool m_ValidityPeriodIsSet;
   std::vector<NFProfile> m_NfInstances;
@@ -89,6 +89,6 @@ class SearchResult {
   bool m_NrfSupportedFeaturesIsSet;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* SearchResult_H_ */

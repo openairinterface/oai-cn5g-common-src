@@ -12,12 +12,12 @@ namespace oai::nas {
 using namespace oai::nas;
 
 class AuthenticationFailure : public Nas5gmmMessage {
- public:
+public:
   AuthenticationFailure();
   virtual ~AuthenticationFailure() = default;
 
-  int Encode(uint8_t* buf, int len) override;
-  int Decode(uint8_t* buf, int len) override;
+  int Encode(uint8_t *buf, int len) override;
+  int Decode(uint8_t *buf, int len) override;
 
   uint32_t GetLength() const override;
 
@@ -31,16 +31,16 @@ class AuthenticationFailure : public Nas5gmmMessage {
   //  GetAuthenticationFailureParameter(uint8_t
   //  (&value)[kAuthenticationFailureParameterContentLength]) const;
 
-  void SetAuthenticationFailureParameter(const bstring& value);
-  bool GetAuthenticationFailureParameter(bstring& value) const;
+  void SetAuthenticationFailureParameter(const bstring &value);
+  bool GetAuthenticationFailureParameter(bstring &value) const;
 
- private:
-  NasMmPlainHeader ie_header_;  // Mandatory
-  _5gmmCause ie_5gmm_cause_;    // Mandatory
+private:
+  NasMmPlainHeader ie_header_; // Mandatory
+  _5gmmCause ie_5gmm_cause_;   // Mandatory
   std::optional<AuthenticationFailureParameter>
-      ie_authentication_failure_parameter_;  // Optional
+      ie_authentication_failure_parameter_; // Optional
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

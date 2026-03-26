@@ -20,7 +20,7 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_SRVCCOperationPossible {
-  Ngap_SRVCCOperationPossible_possible    = 0,
+  Ngap_SRVCCOperationPossible_possible = 0,
   Ngap_SRVCCOperationPossible_notPossible = 1
   /*
    * Enumeration is extensible

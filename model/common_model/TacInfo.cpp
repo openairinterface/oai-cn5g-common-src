@@ -27,27 +27,27 @@ void TacInfo::validate() const {
   }
 }
 
-bool TacInfo::validate(std::stringstream& msg) const {
+bool TacInfo::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool TacInfo::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool TacInfo::validate(std::stringstream &msg,
+                       const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "TacInfo" : pathPrefix;
 
   /* TacList */ {
-    const std::vector<std::string>& value = m_TacList;
-    const std::string currentValuePath    = _pathPrefix + ".tacList";
+    const std::vector<std::string> &value = m_TacList;
+    const std::string currentValuePath = _pathPrefix + ".tacList";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const std::string& value : value) {
+      int i = 0;
+      for (const std::string &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -59,7 +59,7 @@ bool TacInfo::validate(
   return success;
 }
 
-bool TacInfo::operator==(const TacInfo& rhs) const {
+bool TacInfo::operator==(const TacInfo &rhs) const {
   return
 
       (getTacList() == rhs.getTacList())
@@ -67,24 +67,20 @@ bool TacInfo::operator==(const TacInfo& rhs) const {
           ;
 }
 
-bool TacInfo::operator!=(const TacInfo& rhs) const {
-  return !(*this == rhs);
-}
+bool TacInfo::operator!=(const TacInfo &rhs) const { return !(*this == rhs); }
 
-void to_json(nlohmann::json& j, const TacInfo& o) {
-  j            = nlohmann::json();
+void to_json(nlohmann::json &j, const TacInfo &o) {
+  j = nlohmann::json();
   j["tacList"] = o.m_TacList;
 }
 
-void from_json(const nlohmann::json& j, TacInfo& o) {
+void from_json(const nlohmann::json &j, TacInfo &o) {
   j.at("tacList").get_to(o.m_TacList);
 }
 
-std::vector<std::string> TacInfo::getTacList() const {
-  return m_TacList;
-}
-void TacInfo::setTacList(std::vector<std::string> const& value) {
+std::vector<std::string> TacInfo::getTacList() const { return m_TacList; }
+void TacInfo::setTacList(std::vector<std::string> const &value) {
   m_TacList = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

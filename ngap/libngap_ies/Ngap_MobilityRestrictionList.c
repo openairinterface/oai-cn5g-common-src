@@ -9,10 +9,10 @@
 #include "Ngap_MobilityRestrictionList.h"
 
 #include "Ngap_EquivalentPLMNs.h"
-#include "Ngap_RATRestrictions.h"
 #include "Ngap_ForbiddenAreaInformation.h"
-#include "Ngap_ServiceAreaInformation.h"
 #include "Ngap_ProtocolExtensionContainer.h"
+#include "Ngap_RATRestrictions.h"
+#include "Ngap_ServiceAreaInformation.h"
 asn_TYPE_member_t asn_MBR_Ngap_MobilityRestrictionList_1[] = {
     {ATF_NOFLAGS,
      0,

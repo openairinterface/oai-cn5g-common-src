@@ -27,27 +27,27 @@ void CnfUnit::validate() const {
   }
 }
 
-bool CnfUnit::validate(std::stringstream& msg) const {
+bool CnfUnit::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool CnfUnit::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool CnfUnit::validate(std::stringstream &msg,
+                       const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "CnfUnit" : pathPrefix;
 
   /* CnfUnit */ {
-    const std::vector<oai::model::common::Atom>& value = m_CnfUnit;
+    const std::vector<oai::model::common::Atom> &value = m_CnfUnit;
     const std::string currentValuePath = _pathPrefix + ".cnfUnit";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::Atom& value : value) {
+      int i = 0;
+      for (const oai::model::common::Atom &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -61,7 +61,7 @@ bool CnfUnit::validate(
   return success;
 }
 
-bool CnfUnit::operator==(const CnfUnit& rhs) const {
+bool CnfUnit::operator==(const CnfUnit &rhs) const {
   return
 
       (getCnfUnit() == rhs.getCnfUnit())
@@ -69,24 +69,22 @@ bool CnfUnit::operator==(const CnfUnit& rhs) const {
           ;
 }
 
-bool CnfUnit::operator!=(const CnfUnit& rhs) const {
-  return !(*this == rhs);
-}
+bool CnfUnit::operator!=(const CnfUnit &rhs) const { return !(*this == rhs); }
 
-void to_json(nlohmann::json& j, const CnfUnit& o) {
-  j            = nlohmann::json();
+void to_json(nlohmann::json &j, const CnfUnit &o) {
+  j = nlohmann::json();
   j["cnfUnit"] = o.m_CnfUnit;
 }
 
-void from_json(const nlohmann::json& j, CnfUnit& o) {
+void from_json(const nlohmann::json &j, CnfUnit &o) {
   j.at("cnfUnit").get_to(o.m_CnfUnit);
 }
 
 std::vector<oai::model::common::Atom> CnfUnit::getCnfUnit() const {
   return m_CnfUnit;
 }
-void CnfUnit::setCnfUnit(std::vector<oai::model::common::Atom> const& value) {
+void CnfUnit::setCnfUnit(std::vector<oai::model::common::Atom> const &value) {
   m_CnfUnit = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

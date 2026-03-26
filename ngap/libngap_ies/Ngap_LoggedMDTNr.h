@@ -12,9 +12,9 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_LoggingInterval.h"
-#include "Ngap_LoggingDuration.h"
 #include "Ngap_LoggedMDTTrigger.h"
+#include "Ngap_LoggingDuration.h"
+#include "Ngap_LoggingInterval.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -33,15 +33,15 @@ typedef struct Ngap_LoggedMDTNr {
   Ngap_LoggingInterval_t loggingInterval;
   Ngap_LoggingDuration_t loggingDuration;
   Ngap_LoggedMDTTrigger_t loggedMDTTrigger;
-  struct Ngap_BluetoothMeasurementConfiguration*
-      bluetoothMeasurementConfiguration; /* OPTIONAL */
-  struct Ngap_WLANMeasurementConfiguration*
-      wLANMeasurementConfiguration; /* OPTIONAL */
-  struct Ngap_SensorMeasurementConfiguration*
-      sensorMeasurementConfiguration; /* OPTIONAL */
-  struct Ngap_AreaScopeOfNeighCellsList*
-      areaScopeOfNeighCellsList;                         /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_BluetoothMeasurementConfiguration
+      *bluetoothMeasurementConfiguration; /* OPTIONAL */
+  struct Ngap_WLANMeasurementConfiguration
+      *wLANMeasurementConfiguration; /* OPTIONAL */
+  struct Ngap_SensorMeasurementConfiguration
+      *sensorMeasurementConfiguration; /* OPTIONAL */
+  struct Ngap_AreaScopeOfNeighCellsList
+      *areaScopeOfNeighCellsList;                        /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

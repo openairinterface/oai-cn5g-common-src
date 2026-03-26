@@ -19,9 +19,9 @@
 #ifndef RedirectInformation_H_
 #define RedirectInformation_H_
 
-#include <string>
 #include "RedirectAddressType.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::pcf {
 
@@ -29,7 +29,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class RedirectInformation {
- public:
+public:
   RedirectInformation();
   virtual ~RedirectInformation() = default;
 
@@ -43,16 +43,16 @@ class RedirectInformation {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const RedirectInformation& rhs) const;
-  bool operator!=(const RedirectInformation& rhs) const;
+  bool operator==(const RedirectInformation &rhs) const;
+  bool operator!=(const RedirectInformation &rhs) const;
 
   /////////////////////////////////////////////
   /// RedirectInformation members
@@ -68,8 +68,8 @@ class RedirectInformation {
   ///
   /// </summary>
   oai::model::pcf::RedirectAddressType getRedirectAddressType() const;
-  void setRedirectAddressType(
-      oai::model::pcf::RedirectAddressType const& value);
+  void
+  setRedirectAddressType(oai::model::pcf::RedirectAddressType const &value);
   bool redirectAddressTypeIsSet() const;
   void unsetRedirectAddressType();
   /// <summary>
@@ -83,14 +83,14 @@ class RedirectInformation {
   /// in 3GPP TS 29.571.
   /// </summary>
   std::string getRedirectServerAddress() const;
-  void setRedirectServerAddress(std::string const& value);
+  void setRedirectServerAddress(std::string const &value);
   bool redirectServerAddressIsSet() const;
   void unsetRedirectServerAddress();
 
-  friend void to_json(nlohmann::json& j, const RedirectInformation& o);
-  friend void from_json(const nlohmann::json& j, RedirectInformation& o);
+  friend void to_json(nlohmann::json &j, const RedirectInformation &o);
+  friend void from_json(const nlohmann::json &j, RedirectInformation &o);
 
- protected:
+protected:
   bool m_RedirectEnabled;
   bool m_RedirectEnabledIsSet;
   oai::model::pcf::RedirectAddressType m_RedirectAddressType;
@@ -99,6 +99,6 @@ class RedirectInformation {
   bool m_RedirectServerAddressIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* RedirectInformation_H_ */

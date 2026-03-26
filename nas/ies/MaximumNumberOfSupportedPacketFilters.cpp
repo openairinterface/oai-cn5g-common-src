@@ -26,7 +26,7 @@ MaximumNumberOfSupportedPacketFilters::MaximumNumberOfSupportedPacketFilters()
 MaximumNumberOfSupportedPacketFilters::MaximumNumberOfSupportedPacketFilters(
     uint8_t iei, uint16_t value)
     : Type3NasIe(iei) {
-  value_ = (value & 0xffe0);  // Get 11 bits of value
+  value_ = (value & 0xffe0); // Get 11 bits of value
 }
 
 //------------------------------------------------------------------------------
@@ -35,14 +35,13 @@ MaximumNumberOfSupportedPacketFilters::
 
 //------------------------------------------------------------------------------
 uint32_t MaximumNumberOfSupportedPacketFilters::GetIeLength() const {
-  return (
-      kMaximumNumberOfSupportedPacketFiltersMaximumLength - 1 +
-      Type3NasIe::GetIeLength());
+  return (kMaximumNumberOfSupportedPacketFiltersMaximumLength - 1 +
+          Type3NasIe::GetIeLength());
 }
 
 //------------------------------------------------------------------------------
 void MaximumNumberOfSupportedPacketFilters::SetValue(uint16_t value) {
-  value_ = (value & 0xffe0);  // Get 11 bits of value
+  value_ = (value & 0xffe0); // Get 11 bits of value
 }
 
 //------------------------------------------------------------------------------
@@ -53,11 +52,11 @@ uint16_t MaximumNumberOfSupportedPacketFilters::GetValue() const {
 //------------------------------------------------------------------------------
 void MaximumNumberOfSupportedPacketFilters::Set(uint8_t iei, uint16_t value) {
   SetIei(iei);
-  value_ = (value & 0xffe0);  // Get 11 bits of value
+  value_ = (value & 0xffe0); // Get 11 bits of value
 }
 
 //------------------------------------------------------------------------------
-int MaximumNumberOfSupportedPacketFilters::Encode(uint8_t* buf, int len) const {
+int MaximumNumberOfSupportedPacketFilters::Encode(uint8_t *buf, int len) const {
   oai::logger::logger_common::nas().debug("Encoding %s", GetIeName().c_str());
 
   if (len < kMaximumNumberOfSupportedPacketFiltersMinimumLength) {
@@ -74,14 +73,14 @@ int MaximumNumberOfSupportedPacketFilters::Encode(uint8_t* buf, int len) const {
   // Value
   ENCODE_U16(buf + encoded_size, value_, encoded_size);
 
-  oai::logger::logger_common::nas().debug(
-      "Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
+  oai::logger::logger_common::nas().debug("Encoded %s, len (%d)",
+                                          GetIeName().c_str(), encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
-int MaximumNumberOfSupportedPacketFilters::Decode(
-    const uint8_t* const buf, int len, bool is_iei) {
+int MaximumNumberOfSupportedPacketFilters::Decode(const uint8_t *const buf,
+                                                  int len, bool is_iei) {
   oai::logger::logger_common::nas().debug("Decoding %s", GetIeName().c_str());
 
   if (len < kMaximumNumberOfSupportedPacketFiltersMinimumLength) {
@@ -97,10 +96,10 @@ int MaximumNumberOfSupportedPacketFilters::Decode(
   decoded_size += Type3NasIe::Decode(buf + decoded_size, len, is_iei);
 
   DECODE_U16(buf + decoded_size, value_, decoded_size);
-  value_ = (value_ & 0xffe0);  // Get 11 bits of value
+  value_ = (value_ & 0xffe0); // Get 11 bits of value
 
   oai::logger::logger_common::nas().debug("Decoded value 0x%x", value_);
-  oai::logger::logger_common::nas().debug(
-      "Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
+  oai::logger::logger_common::nas().debug("Decoded %s, len (%d)",
+                                          GetIeName().c_str(), decoded_size);
   return decoded_size;
 }

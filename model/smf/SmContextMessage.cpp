@@ -11,14 +11,14 @@
  * the class manually.
  */
 
-#include <iostream>
 #include "SmContextMessage.h"
+#include <iostream>
 
 namespace oai::model::smf {
 
 SmContextMessage::SmContextMessage() {
-  m_JsonDataIsSet                  = false;
-  m_BinaryDataN1SmMessageIsSet     = false;
+  m_JsonDataIsSet = false;
+  m_BinaryDataN1SmMessageIsSet = false;
   m_BinaryDataN2SmInformationIsSet = false;
 }
 
@@ -28,16 +28,17 @@ void SmContextMessage::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const SmContextMessage& o) {
+void to_json(nlohmann::json &j, const SmContextMessage &o) {
   j = nlohmann::json();
-  if (o.jsonDataIsSet()) j["jsonData"] = o.m_JsonData;
+  if (o.jsonDataIsSet())
+    j["jsonData"] = o.m_JsonData;
   if (o.binaryDataN1SmMessageIsSet())
     j["binaryDataN1SmMessage"] = o.m_BinaryDataN1SmMessage;
   if (o.binaryDataN2SmInformationIsSet())
     j["binaryDataN2SmInformation"] = o.m_BinaryDataN2SmInformation;
 }
 
-void from_json(const nlohmann::json& j, SmContextMessage& o) {
+void from_json(const nlohmann::json &j, SmContextMessage &o) {
   if (j.find("jsonData") != j.end()) {
     j.at("jsonData").get_to(o.m_JsonData);
     o.m_JsonDataIsSet = true;
@@ -52,24 +53,18 @@ void from_json(const nlohmann::json& j, SmContextMessage& o) {
   }
 }
 
-SmContextCreateData SmContextMessage::getJsonData() const {
-  return m_JsonData;
-}
-void SmContextMessage::setJsonData(SmContextCreateData const& value) {
-  m_JsonData      = value;
+SmContextCreateData SmContextMessage::getJsonData() const { return m_JsonData; }
+void SmContextMessage::setJsonData(SmContextCreateData const &value) {
+  m_JsonData = value;
   m_JsonDataIsSet = true;
 }
-bool SmContextMessage::jsonDataIsSet() const {
-  return m_JsonDataIsSet;
-}
-void SmContextMessage::unsetJsonData() {
-  m_JsonDataIsSet = false;
-}
+bool SmContextMessage::jsonDataIsSet() const { return m_JsonDataIsSet; }
+void SmContextMessage::unsetJsonData() { m_JsonDataIsSet = false; }
 std::string SmContextMessage::getBinaryDataN1SmMessage() const {
   return m_BinaryDataN1SmMessage;
 }
-void SmContextMessage::setBinaryDataN1SmMessage(std::string const& value) {
-  m_BinaryDataN1SmMessage      = value;
+void SmContextMessage::setBinaryDataN1SmMessage(std::string const &value) {
+  m_BinaryDataN1SmMessage = value;
   m_BinaryDataN1SmMessageIsSet = true;
 }
 bool SmContextMessage::binaryDataN1SmMessageIsSet() const {
@@ -81,8 +76,8 @@ void SmContextMessage::unsetBinaryDataN1SmMessage() {
 std::string SmContextMessage::getBinaryDataN2SmInformation() const {
   return m_BinaryDataN2SmInformation;
 }
-void SmContextMessage::setBinaryDataN2SmInformation(std::string const& value) {
-  m_BinaryDataN2SmInformation      = value;
+void SmContextMessage::setBinaryDataN2SmInformation(std::string const &value) {
+  m_BinaryDataN2SmInformation = value;
   m_BinaryDataN2SmInformationIsSet = true;
 }
 bool SmContextMessage::binaryDataN2SmInformationIsSet() const {
@@ -92,4 +87,4 @@ void SmContextMessage::unsetBinaryDataN2SmInformation() {
   m_BinaryDataN2SmInformationIsSet = false;
 }
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

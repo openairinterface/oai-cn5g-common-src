@@ -14,7 +14,7 @@ extern "C" {
 
 using ::testing::Test;
 
-extern std::vector<uint8_t> hexStringToByteArray(const std::string& hexString);
+extern std::vector<uint8_t> hexStringToByteArray(const std::string &hexString);
 
 TEST(TestSuiteNGAPMsg, positiveTestingRegistrationRequest) {
   uint8_t packet_bytes[] = {
@@ -71,17 +71,16 @@ Country Code (MCC): France (208) Mobile Network Code (MNC): Unknown (92) tAC: 1
 (0x000001)
 */
 
-  Ngap_NGAP_PDU_t* ngap_msg_pdu =
-      (Ngap_NGAP_PDU_t*) calloc(1, sizeof(Ngap_NGAP_PDU_t));
+  Ngap_NGAP_PDU_t *ngap_msg_pdu =
+      (Ngap_NGAP_PDU_t *)calloc(1, sizeof(Ngap_NGAP_PDU_t));
   asn_dec_rval_t dec_ret;
 
-  dec_ret = aper_decode(
-      NULL, &asn_DEF_Ngap_NGAP_PDU, (void**) &ngap_msg_pdu, packet_bytes,
-      sizeof(packet_bytes), 0, 0);
+  dec_ret = aper_decode(NULL, &asn_DEF_Ngap_NGAP_PDU, (void **)&ngap_msg_pdu,
+                        packet_bytes, sizeof(packet_bytes), 0, 0);
 
   oai::ngap::ngap_utils::print_asn_msg(&asn_DEF_Ngap_NGAP_PDU, ngap_msg_pdu);
 
-  oai::ngap::UplinkNasTransportMsg* uplink_nas_transport =
+  oai::ngap::UplinkNasTransportMsg *uplink_nas_transport =
       new oai::ngap::UplinkNasTransportMsg();
   EXPECT_NE(uplink_nas_transport->decode(ngap_msg_pdu), 0);
 }

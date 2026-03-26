@@ -13,8 +13,8 @@
 
 #include "LoggingDurationMdt_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::common {
 
@@ -27,12 +27,12 @@ void LoggingDurationMdt_anyOf::validate() const {
   }
 }
 
-bool LoggingDurationMdt_anyOf::validate(std::stringstream& msg) const {
+bool LoggingDurationMdt_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool LoggingDurationMdt_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool LoggingDurationMdt_anyOf::validate(std::stringstream &msg,
+                                        const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "LoggingDurationMdt_anyOf" : pathPrefix;
@@ -47,47 +47,47 @@ bool LoggingDurationMdt_anyOf::validate(
 }
 
 bool LoggingDurationMdt_anyOf::operator==(
-    const LoggingDurationMdt_anyOf& rhs) const {
+    const LoggingDurationMdt_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool LoggingDurationMdt_anyOf::operator!=(
-    const LoggingDurationMdt_anyOf& rhs) const {
+    const LoggingDurationMdt_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const LoggingDurationMdt_anyOf& o) {
+void to_json(nlohmann::json &j, const LoggingDurationMdt_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case LoggingDurationMdt_anyOf::eLoggingDurationMdt_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case LoggingDurationMdt_anyOf::eLoggingDurationMdt_anyOf::_600:
-      j = "600";
-      break;
-    case LoggingDurationMdt_anyOf::eLoggingDurationMdt_anyOf::_1200:
-      j = "1200";
-      break;
-    case LoggingDurationMdt_anyOf::eLoggingDurationMdt_anyOf::_2400:
-      j = "2400";
-      break;
-    case LoggingDurationMdt_anyOf::eLoggingDurationMdt_anyOf::_3600:
-      j = "3600";
-      break;
-    case LoggingDurationMdt_anyOf::eLoggingDurationMdt_anyOf::_5400:
-      j = "5400";
-      break;
-    case LoggingDurationMdt_anyOf::eLoggingDurationMdt_anyOf::_7200:
-      j = "7200";
-      break;
+  case LoggingDurationMdt_anyOf::eLoggingDurationMdt_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case LoggingDurationMdt_anyOf::eLoggingDurationMdt_anyOf::_600:
+    j = "600";
+    break;
+  case LoggingDurationMdt_anyOf::eLoggingDurationMdt_anyOf::_1200:
+    j = "1200";
+    break;
+  case LoggingDurationMdt_anyOf::eLoggingDurationMdt_anyOf::_2400:
+    j = "2400";
+    break;
+  case LoggingDurationMdt_anyOf::eLoggingDurationMdt_anyOf::_3600:
+    j = "3600";
+    break;
+  case LoggingDurationMdt_anyOf::eLoggingDurationMdt_anyOf::_5400:
+    j = "5400";
+    break;
+  case LoggingDurationMdt_anyOf::eLoggingDurationMdt_anyOf::_7200:
+    j = "7200";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, LoggingDurationMdt_anyOf& o) {
+void from_json(const nlohmann::json &j, LoggingDurationMdt_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "600") {
     o.setValue(LoggingDurationMdt_anyOf::eLoggingDurationMdt_anyOf::_600);
@@ -119,4 +119,4 @@ void LoggingDurationMdt_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

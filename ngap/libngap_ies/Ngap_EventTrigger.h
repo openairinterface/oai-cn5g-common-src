@@ -42,8 +42,8 @@ typedef struct Ngap_EventTrigger {
   Ngap_EventTrigger_PR present;
   union Ngap_EventTrigger_u {
     long outOfCoverage;
-    struct Ngap_EventL1LoggedMDTConfig* eventL1LoggedMDTConfig;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_EventL1LoggedMDTConfig *eventL1LoggedMDTConfig;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

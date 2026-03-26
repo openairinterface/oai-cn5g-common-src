@@ -20,25 +20,25 @@ extern "C" {
 namespace oai::ngap {
 
 class PathSwitchRequestAcknowledgeTransfer {
- public:
+public:
   PathSwitchRequestAcknowledgeTransfer();
   virtual ~PathSwitchRequestAcknowledgeTransfer(){};
 
   void setUlNgUUpTnlInformation(
-      const UpTransportLayerInformation& ulNgUUpTnlInformation);
+      const UpTransportLayerInformation &ulNgUUpTnlInformation);
   void getUlNgUUpTnlInformation(
-      std::optional<UpTransportLayerInformation>& ulNgUUpTnlInformation) const;
+      std::optional<UpTransportLayerInformation> &ulNgUUpTnlInformation) const;
 
   void setQosFlowParametersList(const std::vector<QosFlowParametersItem> list);
-  void setQosFlowParametersList(const QosFlowParametersList& list);
-  void getQosFlowParametersList(
-      std::optional<QosFlowParametersList>& list) const;
+  void setQosFlowParametersList(const QosFlowParametersList &list);
+  void
+  getQosFlowParametersList(std::optional<QosFlowParametersList> &list) const;
 
-  int encode(uint8_t* buf, int bufSize);
-  bool decode(uint8_t* buf, int bufSize);
+  int encode(uint8_t *buf, int bufSize);
+  bool decode(uint8_t *buf, int bufSize);
 
- private:
-  Ngap_PathSwitchRequestAcknowledgeTransfer_t* m_Ie;
+private:
+  Ngap_PathSwitchRequestAcknowledgeTransfer_t *m_Ie;
 
   // UL NG-U UP TNL Information (Optional)
   std::optional<UpTransportLayerInformation> m_UlNgUUpTnlInformation;
@@ -52,5 +52,5 @@ class PathSwitchRequestAcknowledgeTransfer {
   std::optional<QosFlowParametersList> m_QosFlowParametersList;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

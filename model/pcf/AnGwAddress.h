@@ -19,9 +19,9 @@
 #ifndef AnGwAddress_H_
 #define AnGwAddress_H_
 
-#include <string>
 #include "Ipv6Addr.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::pcf {
 
@@ -29,7 +29,7 @@ namespace oai::model::pcf {
 /// describes the address of the access network gateway control node
 /// </summary>
 class AnGwAddress {
- public:
+public:
   AnGwAddress();
   virtual ~AnGwAddress() = default;
 
@@ -43,16 +43,16 @@ class AnGwAddress {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const AnGwAddress& rhs) const;
-  bool operator!=(const AnGwAddress& rhs) const;
+  bool operator==(const AnGwAddress &rhs) const;
+  bool operator!=(const AnGwAddress &rhs) const;
 
   /////////////////////////////////////////////
   /// AnGwAddress members
@@ -61,27 +61,27 @@ class AnGwAddress {
   ///
   /// </summary>
   std::string getAnGwIpv4Addr() const;
-  void setAnGwIpv4Addr(std::string const& value);
+  void setAnGwIpv4Addr(std::string const &value);
   bool anGwIpv4AddrIsSet() const;
   void unsetAnGwIpv4Addr();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ipv6Addr getAnGwIpv6Addr() const;
-  void setAnGwIpv6Addr(oai::model::common::Ipv6Addr const& value);
+  void setAnGwIpv6Addr(oai::model::common::Ipv6Addr const &value);
   bool anGwIpv6AddrIsSet() const;
   void unsetAnGwIpv6Addr();
 
-  friend void to_json(nlohmann::json& j, const AnGwAddress& o);
-  friend void from_json(const nlohmann::json& j, AnGwAddress& o);
+  friend void to_json(nlohmann::json &j, const AnGwAddress &o);
+  friend void from_json(const nlohmann::json &j, AnGwAddress &o);
 
- protected:
+protected:
   std::string m_AnGwIpv4Addr;
   bool m_AnGwIpv4AddrIsSet;
   oai::model::common::Ipv6Addr m_AnGwIpv6Addr;
   bool m_AnGwIpv6AddrIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* AnGwAddress_H_ */

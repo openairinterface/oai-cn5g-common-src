@@ -18,9 +18,7 @@
 
 namespace oai::model::pcf {
 
-OutOfCreditInformation::OutOfCreditInformation() {
-  m_FlowsIsSet = false;
-}
+OutOfCreditInformation::OutOfCreditInformation() { m_FlowsIsSet = false; }
 
 void OutOfCreditInformation::validate() const {
   std::stringstream msg;
@@ -29,12 +27,12 @@ void OutOfCreditInformation::validate() const {
   }
 }
 
-bool OutOfCreditInformation::validate(std::stringstream& msg) const {
+bool OutOfCreditInformation::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool OutOfCreditInformation::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool OutOfCreditInformation::validate(std::stringstream &msg,
+                                      const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "OutOfCreditInformation" : pathPrefix;
@@ -44,17 +42,17 @@ bool OutOfCreditInformation::validate(
     success = false;
   }
   if (flowsIsSet()) {
-    const std::vector<oai::model::pcf::Flows>& value = m_Flows;
-    const std::string currentValuePath               = _pathPrefix + ".flows";
+    const std::vector<oai::model::pcf::Flows> &value = m_Flows;
+    const std::string currentValuePath = _pathPrefix + ".flows";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::Flows& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::Flows &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -69,7 +67,7 @@ bool OutOfCreditInformation::validate(
 }
 
 bool OutOfCreditInformation::operator==(
-    const OutOfCreditInformation& rhs) const {
+    const OutOfCreditInformation &rhs) const {
   return
 
       (getFinUnitAct() == rhs.getFinUnitAct()) &&
@@ -81,17 +79,18 @@ bool OutOfCreditInformation::operator==(
 }
 
 bool OutOfCreditInformation::operator!=(
-    const OutOfCreditInformation& rhs) const {
+    const OutOfCreditInformation &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const OutOfCreditInformation& o) {
-  j               = nlohmann::json::object();
+void to_json(nlohmann::json &j, const OutOfCreditInformation &o) {
+  j = nlohmann::json::object();
   j["finUnitAct"] = o.m_FinUnitAct;
-  if (o.flowsIsSet() || !o.m_Flows.empty()) j["flows"] = o.m_Flows;
+  if (o.flowsIsSet() || !o.m_Flows.empty())
+    j["flows"] = o.m_Flows;
 }
 
-void from_json(const nlohmann::json& j, OutOfCreditInformation& o) {
+void from_json(const nlohmann::json &j, OutOfCreditInformation &o) {
   j.at("finUnitAct").get_to(o.m_FinUnitAct);
   if (j.find("flows") != j.end()) {
     j.at("flows").get_to(o.m_Flows);
@@ -103,22 +102,18 @@ oai::model::pcf::FinalUnitAction OutOfCreditInformation::getFinUnitAct() const {
   return m_FinUnitAct;
 }
 void OutOfCreditInformation::setFinUnitAct(
-    oai::model::pcf::FinalUnitAction const& value) {
+    oai::model::pcf::FinalUnitAction const &value) {
   m_FinUnitAct = value;
 }
 std::vector<oai::model::pcf::Flows> OutOfCreditInformation::getFlows() const {
   return m_Flows;
 }
 void OutOfCreditInformation::setFlows(
-    std::vector<oai::model::pcf::Flows> const& value) {
-  m_Flows      = value;
+    std::vector<oai::model::pcf::Flows> const &value) {
+  m_Flows = value;
   m_FlowsIsSet = true;
 }
-bool OutOfCreditInformation::flowsIsSet() const {
-  return m_FlowsIsSet;
-}
-void OutOfCreditInformation::unsetFlows() {
-  m_FlowsIsSet = false;
-}
+bool OutOfCreditInformation::flowsIsSet() const { return m_FlowsIsSet; }
+void OutOfCreditInformation::unsetFlows() { m_FlowsIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

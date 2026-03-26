@@ -21,38 +21,38 @@ extern "C" {
 namespace oai::ngap {
 
 class PduSessionResourceModifyResponseTransfer {
- public:
+public:
   PduSessionResourceModifyResponseTransfer();
   virtual ~PduSessionResourceModifyResponseTransfer(){};
 
   void setDlNgUUpTnlInformation(
-      const UpTransportLayerInformation& dlNgUUpTnlInformation);
+      const UpTransportLayerInformation &dlNgUUpTnlInformation);
   void getDlNgUUpTnlInformation(
-      std::optional<UpTransportLayerInformation>& dlNgUUpTnlInformation) const;
+      std::optional<UpTransportLayerInformation> &dlNgUUpTnlInformation) const;
 
   void setUlNgUUpTnlInformation(
-      const UpTransportLayerInformation& ulNgUUpTnlInformation);
+      const UpTransportLayerInformation &ulNgUUpTnlInformation);
   void getUlNgUUpTnlInformation(
-      std::optional<UpTransportLayerInformation>& ulNgUUpTnlInformation) const;
+      std::optional<UpTransportLayerInformation> &ulNgUUpTnlInformation) const;
 
   void setQosFlowAddOrModifyResponseList(
       const std::vector<QosFlowAddOrModifyResponseItem> list);
-  void setQosFlowAddOrModifyResponseList(
-      const QosFlowAddOrModifyResponseList& list);
+  void
+  setQosFlowAddOrModifyResponseList(const QosFlowAddOrModifyResponseList &list);
   void getQosFlowAddOrModifyRequestList(
-      std::optional<QosFlowAddOrModifyResponseList>& list) const;
+      std::optional<QosFlowAddOrModifyResponseList> &list) const;
 
   void setQosFlowFailedToAddOrModifyList(
-      const QosFlowListWithCause& qosFlowFailedToAddOrModifyList);
+      const QosFlowListWithCause &qosFlowFailedToAddOrModifyList);
   void getQosFlowFailedToAddOrModifyList(
-      std::optional<QosFlowListWithCause>& qosFlowFailedToAddOrModifyList)
+      std::optional<QosFlowListWithCause> &qosFlowFailedToAddOrModifyList)
       const;
 
-  int encode(uint8_t* buf, int bufSize);
-  bool decode(uint8_t* buf, int bufSize);
+  int encode(uint8_t *buf, int bufSize);
+  bool decode(uint8_t *buf, int bufSize);
 
- private:
-  Ngap_PDUSessionResourceModifyResponseTransfer_t* m_Ie;
+private:
+  Ngap_PDUSessionResourceModifyResponseTransfer_t *m_Ie;
 
   // DL NG-U UP TNL Information (Optional)
   std::optional<UpTransportLayerInformation> m_DlNgUUpTnlInformation;
@@ -74,5 +74,5 @@ class PduSessionResourceModifyResponseTransfer {
   // Secondary RAT Usage Information
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

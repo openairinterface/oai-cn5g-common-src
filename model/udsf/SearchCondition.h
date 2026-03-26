@@ -19,18 +19,18 @@
 #ifndef SearchCondition_H_
 #define SearchCondition_H_
 
-#include <string>
-#include "SearchComparison.h"
-#include <vector>
 #include "ConditionOperator.h"
+#include "SearchComparison.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 namespace oai::model::udsf {
 
 /// <summary>
 /// A logical condition
 /// </summary>
 class SearchCondition {
- public:
+public:
   SearchCondition();
   virtual ~SearchCondition() = default;
 
@@ -44,16 +44,16 @@ class SearchCondition {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const SearchCondition& rhs) const;
-  bool operator!=(const SearchCondition& rhs) const;
+  bool operator==(const SearchCondition &rhs) const;
+  bool operator!=(const SearchCondition &rhs) const;
 
   /////////////////////////////////////////////
   /// SearchCondition members
@@ -62,24 +62,24 @@ class SearchCondition {
   ///
   /// </summary>
   oai::model::udsf::ConditionOperator getCond() const;
-  void setCond(oai::model::udsf::ConditionOperator const& value);
+  void setCond(oai::model::udsf::ConditionOperator const &value);
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::udsf::SearchComparison> getUnits() const;
-  void setUnits(std::vector<oai::model::udsf::SearchComparison> const& value);
+  void setUnits(std::vector<oai::model::udsf::SearchComparison> const &value);
   /// <summary>
   /// Represents the Identifier of a Meta schema.
   /// </summary>
   std::string getSchemaId() const;
-  void setSchemaId(std::string const& value);
+  void setSchemaId(std::string const &value);
   bool schemaIdIsSet() const;
   void unsetSchemaId();
 
-  friend void to_json(nlohmann::json& j, const SearchCondition& o);
-  friend void from_json(const nlohmann::json& j, SearchCondition& o);
+  friend void to_json(nlohmann::json &j, const SearchCondition &o);
+  friend void from_json(const nlohmann::json &j, SearchCondition &o);
 
- protected:
+protected:
   oai::model::udsf::ConditionOperator m_Cond;
 
   std::vector<oai::model::udsf::SearchComparison> m_Units;
@@ -88,6 +88,6 @@ class SearchCondition {
   bool m_SchemaIdIsSet;
 };
 
-}  // namespace oai::model::udsf
+} // namespace oai::model::udsf
 
 #endif /* SearchCondition_H_ */

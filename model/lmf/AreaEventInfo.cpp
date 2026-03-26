@@ -19,16 +19,16 @@
 namespace oai::model::lmf {
 
 AreaEventInfo::AreaEventInfo() {
-  m_OccurrenceInfoIsSet       = false;
-  m_MinimumInterval           = 0;
-  m_MinimumIntervalIsSet      = false;
-  m_MaximumInterval           = 0;
-  m_MaximumIntervalIsSet      = false;
-  m_SamplingInterval          = 0;
-  m_SamplingIntervalIsSet     = false;
-  m_ReportingDuration         = 0;
-  m_ReportingDurationIsSet    = false;
-  m_ReportingLocationReq      = true;
+  m_OccurrenceInfoIsSet = false;
+  m_MinimumInterval = 0;
+  m_MinimumIntervalIsSet = false;
+  m_MaximumInterval = 0;
+  m_MaximumIntervalIsSet = false;
+  m_SamplingInterval = 0;
+  m_SamplingIntervalIsSet = false;
+  m_ReportingDuration = 0;
+  m_ReportingDurationIsSet = false;
+  m_ReportingLocationReq = true;
   m_ReportingLocationReqIsSet = false;
 }
 
@@ -39,18 +39,18 @@ void AreaEventInfo::validate() const {
   }
 }
 
-bool AreaEventInfo::validate(std::stringstream& msg) const {
+bool AreaEventInfo::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AreaEventInfo::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool AreaEventInfo::validate(std::stringstream &msg,
+                             const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AreaEventInfo" : pathPrefix;
 
   /* AreaDefinition */ {
-    const std::vector<oai::model::lmf::ReportingArea>& value = m_AreaDefinition;
+    const std::vector<oai::model::lmf::ReportingArea> &value = m_AreaDefinition;
     const std::string currentValuePath = _pathPrefix + ".areaDefinition";
 
     if (value.size() < 1) {
@@ -61,10 +61,10 @@ bool AreaEventInfo::validate(
       success = false;
       msg << currentValuePath << ": must have at most 250 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::lmf::ReportingArea& value : value) {
+      int i = 0;
+      for (const oai::model::lmf::ReportingArea &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -77,7 +77,7 @@ bool AreaEventInfo::validate(
   }
 
   if (minimumIntervalIsSet()) {
-    const int32_t& value               = m_MinimumInterval;
+    const int32_t &value = m_MinimumInterval;
     const std::string currentValuePath = _pathPrefix + ".minimumInterval";
 
     if (value < 1) {
@@ -91,7 +91,7 @@ bool AreaEventInfo::validate(
   }
 
   if (maximumIntervalIsSet()) {
-    const int32_t& value               = m_MaximumInterval;
+    const int32_t &value = m_MaximumInterval;
     const std::string currentValuePath = _pathPrefix + ".maximumInterval";
 
     if (value < 1) {
@@ -105,7 +105,7 @@ bool AreaEventInfo::validate(
   }
 
   if (samplingIntervalIsSet()) {
-    const int32_t& value               = m_SamplingInterval;
+    const int32_t &value = m_SamplingInterval;
     const std::string currentValuePath = _pathPrefix + ".samplingInterval";
 
     if (value < 1) {
@@ -119,7 +119,7 @@ bool AreaEventInfo::validate(
   }
 
   if (reportingDurationIsSet()) {
-    const int32_t& value               = m_ReportingDuration;
+    const int32_t &value = m_ReportingDuration;
     const std::string currentValuePath = _pathPrefix + ".reportingDuration";
 
     if (value < 1) {
@@ -135,7 +135,7 @@ bool AreaEventInfo::validate(
   return success;
 }
 
-bool AreaEventInfo::operator==(const AreaEventInfo& rhs) const {
+bool AreaEventInfo::operator==(const AreaEventInfo &rhs) const {
   return
 
       (getAreaDefinition() == rhs.getAreaDefinition()) &&
@@ -167,24 +167,28 @@ bool AreaEventInfo::operator==(const AreaEventInfo& rhs) const {
           ;
 }
 
-bool AreaEventInfo::operator!=(const AreaEventInfo& rhs) const {
+bool AreaEventInfo::operator!=(const AreaEventInfo &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AreaEventInfo& o) {
-  j                   = nlohmann::json();
+void to_json(nlohmann::json &j, const AreaEventInfo &o) {
+  j = nlohmann::json();
   j["areaDefinition"] = o.m_AreaDefinition;
-  if (o.occurrenceInfoIsSet()) j["occurrenceInfo"] = o.m_OccurrenceInfo;
-  if (o.minimumIntervalIsSet()) j["minimumInterval"] = o.m_MinimumInterval;
-  if (o.maximumIntervalIsSet()) j["maximumInterval"] = o.m_MaximumInterval;
-  if (o.samplingIntervalIsSet()) j["samplingInterval"] = o.m_SamplingInterval;
+  if (o.occurrenceInfoIsSet())
+    j["occurrenceInfo"] = o.m_OccurrenceInfo;
+  if (o.minimumIntervalIsSet())
+    j["minimumInterval"] = o.m_MinimumInterval;
+  if (o.maximumIntervalIsSet())
+    j["maximumInterval"] = o.m_MaximumInterval;
+  if (o.samplingIntervalIsSet())
+    j["samplingInterval"] = o.m_SamplingInterval;
   if (o.reportingDurationIsSet())
     j["reportingDuration"] = o.m_ReportingDuration;
   if (o.reportingLocationReqIsSet())
     j["reportingLocationReq"] = o.m_ReportingLocationReq;
 }
 
-void from_json(const nlohmann::json& j, AreaEventInfo& o) {
+void from_json(const nlohmann::json &j, AreaEventInfo &o) {
   j.at("areaDefinition").get_to(o.m_AreaDefinition);
   if (j.find("occurrenceInfo") != j.end()) {
     j.at("occurrenceInfo").get_to(o.m_OccurrenceInfo);
@@ -212,72 +216,60 @@ void from_json(const nlohmann::json& j, AreaEventInfo& o) {
   }
 }
 
-std::vector<oai::model::lmf::ReportingArea> AreaEventInfo::getAreaDefinition()
-    const {
+std::vector<oai::model::lmf::ReportingArea>
+AreaEventInfo::getAreaDefinition() const {
   return m_AreaDefinition;
 }
 void AreaEventInfo::setAreaDefinition(
-    std::vector<oai::model::lmf::ReportingArea> const& value) {
+    std::vector<oai::model::lmf::ReportingArea> const &value) {
   m_AreaDefinition = value;
 }
 oai::model::lmf::OccurrenceInfo AreaEventInfo::getOccurrenceInfo() const {
   return m_OccurrenceInfo;
 }
 void AreaEventInfo::setOccurrenceInfo(
-    oai::model::lmf::OccurrenceInfo const& value) {
-  m_OccurrenceInfo      = value;
+    oai::model::lmf::OccurrenceInfo const &value) {
+  m_OccurrenceInfo = value;
   m_OccurrenceInfoIsSet = true;
 }
 bool AreaEventInfo::occurrenceInfoIsSet() const {
   return m_OccurrenceInfoIsSet;
 }
-void AreaEventInfo::unsetOccurrenceInfo() {
-  m_OccurrenceInfoIsSet = false;
-}
-int32_t AreaEventInfo::getMinimumInterval() const {
-  return m_MinimumInterval;
-}
+void AreaEventInfo::unsetOccurrenceInfo() { m_OccurrenceInfoIsSet = false; }
+int32_t AreaEventInfo::getMinimumInterval() const { return m_MinimumInterval; }
 void AreaEventInfo::setMinimumInterval(int32_t const value) {
-  m_MinimumInterval      = value;
+  m_MinimumInterval = value;
   m_MinimumIntervalIsSet = true;
 }
 bool AreaEventInfo::minimumIntervalIsSet() const {
   return m_MinimumIntervalIsSet;
 }
-void AreaEventInfo::unsetMinimumInterval() {
-  m_MinimumIntervalIsSet = false;
-}
-int32_t AreaEventInfo::getMaximumInterval() const {
-  return m_MaximumInterval;
-}
+void AreaEventInfo::unsetMinimumInterval() { m_MinimumIntervalIsSet = false; }
+int32_t AreaEventInfo::getMaximumInterval() const { return m_MaximumInterval; }
 void AreaEventInfo::setMaximumInterval(int32_t const value) {
-  m_MaximumInterval      = value;
+  m_MaximumInterval = value;
   m_MaximumIntervalIsSet = true;
 }
 bool AreaEventInfo::maximumIntervalIsSet() const {
   return m_MaximumIntervalIsSet;
 }
-void AreaEventInfo::unsetMaximumInterval() {
-  m_MaximumIntervalIsSet = false;
-}
+void AreaEventInfo::unsetMaximumInterval() { m_MaximumIntervalIsSet = false; }
 int32_t AreaEventInfo::getSamplingInterval() const {
   return m_SamplingInterval;
 }
 void AreaEventInfo::setSamplingInterval(int32_t const value) {
-  m_SamplingInterval      = value;
+  m_SamplingInterval = value;
   m_SamplingIntervalIsSet = true;
 }
 bool AreaEventInfo::samplingIntervalIsSet() const {
   return m_SamplingIntervalIsSet;
 }
-void AreaEventInfo::unsetSamplingInterval() {
-  m_SamplingIntervalIsSet = false;
-}
+void AreaEventInfo::unsetSamplingInterval() { m_SamplingIntervalIsSet = false; }
 int32_t AreaEventInfo::getReportingDuration() const {
   return m_ReportingDuration;
 }
 void AreaEventInfo::setReportingDuration(int32_t const value) {
-  m_ReportingDuration      = value;
+  m_ReportingDuration = value;
   m_ReportingDurationIsSet = true;
 }
 bool AreaEventInfo::reportingDurationIsSet() const {
@@ -290,7 +282,7 @@ bool AreaEventInfo::isReportingLocationReq() const {
   return m_ReportingLocationReq;
 }
 void AreaEventInfo::setReportingLocationReq(bool const value) {
-  m_ReportingLocationReq      = value;
+  m_ReportingLocationReq = value;
   m_ReportingLocationReqIsSet = true;
 }
 bool AreaEventInfo::reportingLocationReqIsSet() const {
@@ -300,4 +292,4 @@ void AreaEventInfo::unsetReportingLocationReq() {
   m_ReportingLocationReqIsSet = false;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

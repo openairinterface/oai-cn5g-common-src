@@ -18,9 +18,7 @@
 
 namespace oai::model::common {
 
-HfcNodeIdRm::HfcNodeIdRm() {
-  m_HfcNId = "";
-}
+HfcNodeIdRm::HfcNodeIdRm() { m_HfcNId = ""; }
 
 void HfcNodeIdRm::validate() const {
   std::stringstream msg;
@@ -29,18 +27,18 @@ void HfcNodeIdRm::validate() const {
   }
 }
 
-bool HfcNodeIdRm::validate(std::stringstream& msg) const {
+bool HfcNodeIdRm::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool HfcNodeIdRm::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool HfcNodeIdRm::validate(std::stringstream &msg,
+                           const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "HfcNodeIdRm" : pathPrefix;
 
   /* HfcNId */ {
-    const std::string& value           = m_HfcNId;
+    const std::string &value = m_HfcNId;
     const std::string currentValuePath = _pathPrefix + ".hfcNId";
 
     if (value.length() > 6) {
@@ -52,7 +50,7 @@ bool HfcNodeIdRm::validate(
   return success;
 }
 
-bool HfcNodeIdRm::operator==(const HfcNodeIdRm& rhs) const {
+bool HfcNodeIdRm::operator==(const HfcNodeIdRm &rhs) const {
   return
 
       (getHfcNId() == rhs.getHfcNId())
@@ -60,24 +58,20 @@ bool HfcNodeIdRm::operator==(const HfcNodeIdRm& rhs) const {
           ;
 }
 
-bool HfcNodeIdRm::operator!=(const HfcNodeIdRm& rhs) const {
+bool HfcNodeIdRm::operator!=(const HfcNodeIdRm &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const HfcNodeIdRm& o) {
-  j           = nlohmann::json();
+void to_json(nlohmann::json &j, const HfcNodeIdRm &o) {
+  j = nlohmann::json();
   j["hfcNId"] = o.m_HfcNId;
 }
 
-void from_json(const nlohmann::json& j, HfcNodeIdRm& o) {
+void from_json(const nlohmann::json &j, HfcNodeIdRm &o) {
   j.at("hfcNId").get_to(o.m_HfcNId);
 }
 
-std::string HfcNodeIdRm::getHfcNId() const {
-  return m_HfcNId;
-}
-void HfcNodeIdRm::setHfcNId(std::string const& value) {
-  m_HfcNId = value;
-}
+std::string HfcNodeIdRm::getHfcNId() const { return m_HfcNId; }
+void HfcNodeIdRm::setHfcNId(std::string const &value) { m_HfcNId = value; }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

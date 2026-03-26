@@ -26,10 +26,10 @@ void DeregistrationReason::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const DeregistrationReason& o) {
+void to_json(nlohmann::json &j, const DeregistrationReason &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, DeregistrationReason& o) {}
+void from_json(const nlohmann::json &j, DeregistrationReason &o) {}
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

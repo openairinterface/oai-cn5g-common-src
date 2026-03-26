@@ -13,8 +13,8 @@
 
 #include "SmPolicyAssociationReleaseCause_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::pcf {
 
@@ -30,12 +30,12 @@ void SmPolicyAssociationReleaseCause_anyOf::validate() const {
 }
 
 bool SmPolicyAssociationReleaseCause_anyOf::validate(
-    std::stringstream& msg) const {
+    std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool SmPolicyAssociationReleaseCause_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "SmPolicyAssociationReleaseCause_anyOf" : pathPrefix;
@@ -51,47 +51,47 @@ bool SmPolicyAssociationReleaseCause_anyOf::validate(
 }
 
 bool SmPolicyAssociationReleaseCause_anyOf::operator==(
-    const SmPolicyAssociationReleaseCause_anyOf& rhs) const {
+    const SmPolicyAssociationReleaseCause_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool SmPolicyAssociationReleaseCause_anyOf::operator!=(
-    const SmPolicyAssociationReleaseCause_anyOf& rhs) const {
+    const SmPolicyAssociationReleaseCause_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(
-    nlohmann::json& j, const SmPolicyAssociationReleaseCause_anyOf& o) {
+void to_json(nlohmann::json &j,
+             const SmPolicyAssociationReleaseCause_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case SmPolicyAssociationReleaseCause_anyOf::
-        eSmPolicyAssociationReleaseCause_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case SmPolicyAssociationReleaseCause_anyOf::
-        eSmPolicyAssociationReleaseCause_anyOf::UNSPECIFIED:
-      j = "UNSPECIFIED";
-      break;
-    case SmPolicyAssociationReleaseCause_anyOf::
-        eSmPolicyAssociationReleaseCause_anyOf::UE_SUBSCRIPTION:
-      j = "UE_SUBSCRIPTION";
-      break;
-    case SmPolicyAssociationReleaseCause_anyOf::
-        eSmPolicyAssociationReleaseCause_anyOf::INSUFFICIENT_RES:
-      j = "INSUFFICIENT_RES";
-      break;
-    case SmPolicyAssociationReleaseCause_anyOf::
-        eSmPolicyAssociationReleaseCause_anyOf::VALIDATION_CONDITION_NOT_MET:
-      j = "VALIDATION_CONDITION_NOT_MET";
-      break;
+  case SmPolicyAssociationReleaseCause_anyOf::
+      eSmPolicyAssociationReleaseCause_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case SmPolicyAssociationReleaseCause_anyOf::
+      eSmPolicyAssociationReleaseCause_anyOf::UNSPECIFIED:
+    j = "UNSPECIFIED";
+    break;
+  case SmPolicyAssociationReleaseCause_anyOf::
+      eSmPolicyAssociationReleaseCause_anyOf::UE_SUBSCRIPTION:
+    j = "UE_SUBSCRIPTION";
+    break;
+  case SmPolicyAssociationReleaseCause_anyOf::
+      eSmPolicyAssociationReleaseCause_anyOf::INSUFFICIENT_RES:
+    j = "INSUFFICIENT_RES";
+    break;
+  case SmPolicyAssociationReleaseCause_anyOf::
+      eSmPolicyAssociationReleaseCause_anyOf::VALIDATION_CONDITION_NOT_MET:
+    j = "VALIDATION_CONDITION_NOT_MET";
+    break;
   }
 }
 
-void from_json(
-    const nlohmann::json& j, SmPolicyAssociationReleaseCause_anyOf& o) {
+void from_json(const nlohmann::json &j,
+               SmPolicyAssociationReleaseCause_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "UNSPECIFIED") {
     o.setValue(SmPolicyAssociationReleaseCause_anyOf::
@@ -126,4 +126,4 @@ void SmPolicyAssociationReleaseCause_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

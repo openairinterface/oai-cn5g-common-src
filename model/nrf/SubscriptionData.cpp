@@ -18,20 +18,20 @@ using namespace oai::model::common;
 
 SubscriptionData::SubscriptionData() {
   m_NfStatusNotificationUri = "";
-  m_ReqNfInstanceId         = "";
-  m_ReqNfInstanceIdIsSet    = false;
-  m_SubscrCondIsSet         = false;
-  m_SubscriptionId          = "";
-  m_ValidityTime            = "";
-  m_ValidityTimeIsSet       = false;
-  m_ReqNotifEventsIsSet     = false;
-  m_PlmnIdIsSet             = false;
-  m_NotifConditionIsSet     = false;
-  m_ReqNfTypeIsSet          = false;
-  m_ReqNfFqdn               = "";
-  m_ReqNfFqdnIsSet          = false;
-  m_ReqSnssaisIsSet         = false;
-  m_SubscrCond              = {};
+  m_ReqNfInstanceId = "";
+  m_ReqNfInstanceIdIsSet = false;
+  m_SubscrCondIsSet = false;
+  m_SubscriptionId = "";
+  m_ValidityTime = "";
+  m_ValidityTimeIsSet = false;
+  m_ReqNotifEventsIsSet = false;
+  m_PlmnIdIsSet = false;
+  m_NotifConditionIsSet = false;
+  m_ReqNfTypeIsSet = false;
+  m_ReqNfFqdn = "";
+  m_ReqNfFqdnIsSet = false;
+  m_ReqSnssaisIsSet = false;
+  m_SubscrCond = {};
 }
 
 SubscriptionData::~SubscriptionData() {}
@@ -40,24 +40,31 @@ void SubscriptionData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const SubscriptionData& o) {
-  j                            = nlohmann::json();
+void to_json(nlohmann::json &j, const SubscriptionData &o) {
+  j = nlohmann::json();
   j["nfStatusNotificationUri"] = o.m_NfStatusNotificationUri;
-  if (o.reqNfInstanceIdIsSet()) j["reqNfInstanceId"] = o.m_ReqNfInstanceId;
-  if (o.subscrCondIsSet()) j["subscrCond"] = o.m_SubscrCond;
+  if (o.reqNfInstanceIdIsSet())
+    j["reqNfInstanceId"] = o.m_ReqNfInstanceId;
+  if (o.subscrCondIsSet())
+    j["subscrCond"] = o.m_SubscrCond;
   j["subscriptionId"] = o.m_SubscriptionId;
-  if (o.validityTimeIsSet()) j["validityTime"] = o.m_ValidityTime;
+  if (o.validityTimeIsSet())
+    j["validityTime"] = o.m_ValidityTime;
   if (o.reqNotifEventsIsSet() || !o.m_ReqNotifEvents.empty())
     j["reqNotifEvents"] = o.m_ReqNotifEvents;
-  if (o.plmnIdIsSet()) j["plmnId"] = o.m_PlmnId;
-  if (o.notifConditionIsSet()) j["notifCondition"] = o.m_NotifCondition;
-  if (o.reqNfTypeIsSet()) j["reqNfType"] = o.m_ReqNfType;
-  if (o.reqNfFqdnIsSet()) j["reqNfFqdn"] = o.m_ReqNfFqdn;
+  if (o.plmnIdIsSet())
+    j["plmnId"] = o.m_PlmnId;
+  if (o.notifConditionIsSet())
+    j["notifCondition"] = o.m_NotifCondition;
+  if (o.reqNfTypeIsSet())
+    j["reqNfType"] = o.m_ReqNfType;
+  if (o.reqNfFqdnIsSet())
+    j["reqNfFqdn"] = o.m_ReqNfFqdn;
   if (o.reqSnssaisIsSet() || !o.m_ReqSnssais.empty())
     j["reqSnssais"] = o.m_ReqSnssais;
 }
 
-void from_json(const nlohmann::json& j, SubscriptionData& o) {
+void from_json(const nlohmann::json &j, SubscriptionData &o) {
   j.at("nfStatusNotificationUri").get_to(o.m_NfStatusNotificationUri);
   if (j.find("reqNfInstanceId") != j.end()) {
     j.at("reqNfInstanceId").get_to(o.m_ReqNfInstanceId);
@@ -65,7 +72,7 @@ void from_json(const nlohmann::json& j, SubscriptionData& o) {
   }
   if (j.find("subscrCond") != j.end()) {
     // j.at("subscrCond").get_to(o.m_SubscrCond);
-    o.m_SubscrCond      = j.at("subscrCond");
+    o.m_SubscrCond = j.at("subscrCond");
     o.m_SubscrCondIsSet = true;
   }
 
@@ -108,14 +115,14 @@ void from_json(const nlohmann::json& j, SubscriptionData& o) {
 std::string SubscriptionData::getNfStatusNotificationUri() const {
   return m_NfStatusNotificationUri;
 }
-void SubscriptionData::setNfStatusNotificationUri(std::string const& value) {
+void SubscriptionData::setNfStatusNotificationUri(std::string const &value) {
   m_NfStatusNotificationUri = value;
 }
 std::string SubscriptionData::getReqNfInstanceId() const {
   return m_ReqNfInstanceId;
 }
-void SubscriptionData::setReqNfInstanceId(std::string const& value) {
-  m_ReqNfInstanceId      = value;
+void SubscriptionData::setReqNfInstanceId(std::string const &value) {
+  m_ReqNfInstanceId = value;
   m_ReqNfInstanceIdIsSet = true;
 }
 bool SubscriptionData::reqNfInstanceIdIsSet() const {
@@ -125,123 +132,85 @@ void SubscriptionData::unsetReqNfInstanceId() {
   m_ReqNfInstanceIdIsSet = false;
 }
 
-void SubscriptionData::getSubscrCond(nlohmann::json& s) const {
+void SubscriptionData::getSubscrCond(nlohmann::json &s) const {
   s = m_SubscrCond;
 }
 
-void SubscriptionData::setSubscrCond(nlohmann::json const& value) {
-  m_SubscrCond      = value;
+void SubscriptionData::setSubscrCond(nlohmann::json const &value) {
+  m_SubscrCond = value;
   m_SubscrCondIsSet = true;
 }
 
-bool SubscriptionData::subscrCondIsSet() const {
-  return m_SubscrCondIsSet;
-}
-void SubscriptionData::unsetSubscrCond() {
-  m_SubscrCondIsSet = false;
-}
+bool SubscriptionData::subscrCondIsSet() const { return m_SubscrCondIsSet; }
+void SubscriptionData::unsetSubscrCond() { m_SubscrCondIsSet = false; }
 std::string SubscriptionData::getSubscriptionId() const {
   return m_SubscriptionId;
 }
-void SubscriptionData::setSubscriptionId(std::string const& value) {
+void SubscriptionData::setSubscriptionId(std::string const &value) {
   m_SubscriptionId = value;
 }
-std::string SubscriptionData::getValidityTime() const {
-  return m_ValidityTime;
-}
-void SubscriptionData::setValidityTime(std::string const& value) {
-  m_ValidityTime      = value;
+std::string SubscriptionData::getValidityTime() const { return m_ValidityTime; }
+void SubscriptionData::setValidityTime(std::string const &value) {
+  m_ValidityTime = value;
   m_ValidityTimeIsSet = true;
 }
-bool SubscriptionData::validityTimeIsSet() const {
-  return m_ValidityTimeIsSet;
-}
-void SubscriptionData::unsetValidityTime() {
-  m_ValidityTimeIsSet = false;
-}
+bool SubscriptionData::validityTimeIsSet() const { return m_ValidityTimeIsSet; }
+void SubscriptionData::unsetValidityTime() { m_ValidityTimeIsSet = false; }
 std::vector<std::string> SubscriptionData::getReqNotifEvents() const {
   return m_ReqNotifEvents;
 }
 void SubscriptionData::getReqNotifEvents(
-    std::vector<std::string>& value) const {
+    std::vector<std::string> &value) const {
   value = m_ReqNotifEvents;
 }
 
 void SubscriptionData::setReqNotifEvents(
-    std::vector<std::string> const& value) {
-  m_ReqNotifEvents      = value;
+    std::vector<std::string> const &value) {
+  m_ReqNotifEvents = value;
   m_ReqNotifEventsIsSet = true;
 }
 bool SubscriptionData::reqNotifEventsIsSet() const {
   return m_ReqNotifEventsIsSet;
 }
-void SubscriptionData::unsetReqNotifEvents() {
-  m_ReqNotifEventsIsSet = false;
-}
-PlmnId SubscriptionData::getPlmnId() const {
-  return m_PlmnId;
-}
-void SubscriptionData::setPlmnId(PlmnId const& value) {
-  m_PlmnId      = value;
+void SubscriptionData::unsetReqNotifEvents() { m_ReqNotifEventsIsSet = false; }
+PlmnId SubscriptionData::getPlmnId() const { return m_PlmnId; }
+void SubscriptionData::setPlmnId(PlmnId const &value) {
+  m_PlmnId = value;
   m_PlmnIdIsSet = true;
 }
-bool SubscriptionData::plmnIdIsSet() const {
-  return m_PlmnIdIsSet;
-}
-void SubscriptionData::unsetPlmnId() {
-  m_PlmnIdIsSet = false;
-}
+bool SubscriptionData::plmnIdIsSet() const { return m_PlmnIdIsSet; }
+void SubscriptionData::unsetPlmnId() { m_PlmnIdIsSet = false; }
 NotifCondition SubscriptionData::getNotifCondition() const {
   return m_NotifCondition;
 }
-void SubscriptionData::setNotifCondition(NotifCondition const& value) {
-  m_NotifCondition      = value;
+void SubscriptionData::setNotifCondition(NotifCondition const &value) {
+  m_NotifCondition = value;
   m_NotifConditionIsSet = true;
 }
 bool SubscriptionData::notifConditionIsSet() const {
   return m_NotifConditionIsSet;
 }
-void SubscriptionData::unsetNotifCondition() {
-  m_NotifConditionIsSet = false;
-}
-std::string SubscriptionData::getReqNfType() const {
-  return m_ReqNfType;
-}
-void SubscriptionData::setReqNfType(std::string const& value) {
-  m_ReqNfType      = value;
+void SubscriptionData::unsetNotifCondition() { m_NotifConditionIsSet = false; }
+std::string SubscriptionData::getReqNfType() const { return m_ReqNfType; }
+void SubscriptionData::setReqNfType(std::string const &value) {
+  m_ReqNfType = value;
   m_ReqNfTypeIsSet = true;
 }
-bool SubscriptionData::reqNfTypeIsSet() const {
-  return m_ReqNfTypeIsSet;
-}
-void SubscriptionData::unsetReqNfType() {
-  m_ReqNfTypeIsSet = false;
-}
-std::string SubscriptionData::getReqNfFqdn() const {
-  return m_ReqNfFqdn;
-}
-void SubscriptionData::setReqNfFqdn(std::string const& value) {
-  m_ReqNfFqdn      = value;
+bool SubscriptionData::reqNfTypeIsSet() const { return m_ReqNfTypeIsSet; }
+void SubscriptionData::unsetReqNfType() { m_ReqNfTypeIsSet = false; }
+std::string SubscriptionData::getReqNfFqdn() const { return m_ReqNfFqdn; }
+void SubscriptionData::setReqNfFqdn(std::string const &value) {
+  m_ReqNfFqdn = value;
   m_ReqNfFqdnIsSet = true;
 }
-bool SubscriptionData::reqNfFqdnIsSet() const {
-  return m_ReqNfFqdnIsSet;
-}
-void SubscriptionData::unsetReqNfFqdn() {
-  m_ReqNfFqdnIsSet = false;
-}
-std::vector<Snssai>& SubscriptionData::getReqSnssais() {
-  return m_ReqSnssais;
-}
-void SubscriptionData::setReqSnssais(std::vector<Snssai> const& value) {
-  m_ReqSnssais      = value;
+bool SubscriptionData::reqNfFqdnIsSet() const { return m_ReqNfFqdnIsSet; }
+void SubscriptionData::unsetReqNfFqdn() { m_ReqNfFqdnIsSet = false; }
+std::vector<Snssai> &SubscriptionData::getReqSnssais() { return m_ReqSnssais; }
+void SubscriptionData::setReqSnssais(std::vector<Snssai> const &value) {
+  m_ReqSnssais = value;
   m_ReqSnssaisIsSet = true;
 }
-bool SubscriptionData::reqSnssaisIsSet() const {
-  return m_ReqSnssaisIsSet;
-}
-void SubscriptionData::unsetReqSnssais() {
-  m_ReqSnssaisIsSet = false;
-}
+bool SubscriptionData::reqSnssaisIsSet() const { return m_ReqSnssaisIsSet; }
+void SubscriptionData::unsetReqSnssais() { m_ReqSnssaisIsSet = false; }
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

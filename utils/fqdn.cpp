@@ -5,8 +5,8 @@
 #include "fqdn.hpp"
 #include "logger_base.hpp"
 #include <boost/asio.hpp>
-#include <iostream>
 #include <chrono>
+#include <iostream>
 #include <thread>
 
 #define MAX_NB_RESOLVE_TRIES 4
@@ -16,9 +16,9 @@ using namespace oai::utils;
 using namespace oai::logger;
 
 //------------------------------------------------------------------------------
-bool fqdn::resolve(
-    const std::string& host_name, std::string& address, uint32_t& port,
-    uint8_t& addr_type, const std::string& protocol) {
+bool fqdn::resolve(const std::string &host_name, std::string &address,
+                   uint32_t &port, uint8_t &addr_type,
+                   const std::string &protocol) {
   int tries = 0;
   logger_common::common().debug("Resolving a DNS (name %s)", host_name.c_str());
   while (tries < MAX_NB_RESOLVE_TRIES) {
@@ -30,12 +30,12 @@ bool fqdn::resolve(
       boost::asio::ip::tcp::resolver::results_type endpoints =
           resolver.resolve(host_name, protocol);
 
-      addr_type = 0;  // IPv4 by default
+      addr_type = 0; // IPv4 by default
       for (auto it = endpoints.cbegin(); it != endpoints.cend(); it++) {
         // get the first Endpoint
         boost::asio::ip::tcp::endpoint endpoint = *it;
         address = endpoint.address().to_string();
-        port    = endpoint.port();
+        port = endpoint.port();
         logger_common::common().debug(
             "Resolved a DNS (name %s, protocol %s): Ip Addr %s, port %u",
             host_name.c_str(), protocol.c_str(), address.c_str(), port);
@@ -48,12 +48,12 @@ bool fqdn::resolve(
         }
         return true;
       }
-    } catch (std::exception& e) {
+    } catch (std::exception &e) {
       tries++;
       if (tries == MAX_NB_RESOLVE_TRIES) {
-        throw std::runtime_error(
-            "Cannot resolve a DNS name " + std::string(e.what()) + " after " +
-            std::to_string(tries) + " tries");
+        throw std::runtime_error("Cannot resolve a DNS name " +
+                                 std::string(e.what()) + " after " +
+                                 std::to_string(tries) + " tries");
         return false;
       }
       std::this_thread::sleep_for(

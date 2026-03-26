@@ -19,7 +19,7 @@
 namespace oai::udr::model {
 
 TrafficInfluDataNotif::TrafficInfluDataNotif() {
-  m_ResUri                = "";
+  m_ResUri = "";
   m_TrafficInfluDataIsSet = false;
 }
 
@@ -29,13 +29,14 @@ void TrafficInfluDataNotif::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const TrafficInfluDataNotif& o) {
-  j           = nlohmann::json();
+void to_json(nlohmann::json &j, const TrafficInfluDataNotif &o) {
+  j = nlohmann::json();
   j["resUri"] = o.m_ResUri;
-  if (o.trafficInfluDataIsSet()) j["trafficInfluData"] = o.m_TrafficInfluData;
+  if (o.trafficInfluDataIsSet())
+    j["trafficInfluData"] = o.m_TrafficInfluData;
 }
 
-void from_json(const nlohmann::json& j, TrafficInfluDataNotif& o) {
+void from_json(const nlohmann::json &j, TrafficInfluDataNotif &o) {
   j.at("resUri").get_to(o.m_ResUri);
   if (j.find("trafficInfluData") != j.end()) {
     j.at("trafficInfluData").get_to(o.m_TrafficInfluData);
@@ -43,17 +44,15 @@ void from_json(const nlohmann::json& j, TrafficInfluDataNotif& o) {
   }
 }
 
-std::string TrafficInfluDataNotif::getResUri() const {
-  return m_ResUri;
-}
-void TrafficInfluDataNotif::setResUri(std::string const& value) {
+std::string TrafficInfluDataNotif::getResUri() const { return m_ResUri; }
+void TrafficInfluDataNotif::setResUri(std::string const &value) {
   m_ResUri = value;
 }
 TrafficInfluData TrafficInfluDataNotif::getTrafficInfluData() const {
   return m_TrafficInfluData;
 }
-void TrafficInfluDataNotif::setTrafficInfluData(TrafficInfluData const& value) {
-  m_TrafficInfluData      = value;
+void TrafficInfluDataNotif::setTrafficInfluData(TrafficInfluData const &value) {
+  m_TrafficInfluData = value;
   m_TrafficInfluDataIsSet = true;
 }
 bool TrafficInfluDataNotif::trafficInfluDataIsSet() const {
@@ -63,4 +62,4 @@ void TrafficInfluDataNotif::unsetTrafficInfluData() {
   m_TrafficInfluDataIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

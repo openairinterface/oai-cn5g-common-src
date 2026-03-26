@@ -31,7 +31,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class EpsIwkPgw {
- public:
+public:
   EpsIwkPgw();
   virtual ~EpsIwkPgw();
 
@@ -44,22 +44,22 @@ class EpsIwkPgw {
   ///
   /// </summary>
   std::string getPgwFqdn() const;
-  void setPgwFqdn(std::string const& value);
+  void setPgwFqdn(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getSmfInstanceId() const;
-  void setSmfInstanceId(std::string const& value);
+  void setSmfInstanceId(std::string const &value);
 
-  friend void to_json(nlohmann::json& j, const EpsIwkPgw& o);
-  friend void from_json(const nlohmann::json& j, EpsIwkPgw& o);
+  friend void to_json(nlohmann::json &j, const EpsIwkPgw &o);
+  friend void from_json(const nlohmann::json &j, EpsIwkPgw &o);
 
- protected:
+protected:
   std::string m_PgwFqdn;
 
   std::string m_SmfInstanceId;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* EpsIwkPgw_H_ */

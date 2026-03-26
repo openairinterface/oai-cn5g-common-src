@@ -27,7 +27,7 @@ namespace oai::model::pcf {
 /// Represents an accumulated usage.
 /// </summary>
 class AccumulatedUsage {
- public:
+public:
   AccumulatedUsage();
   virtual ~AccumulatedUsage() = default;
 
@@ -41,16 +41,16 @@ class AccumulatedUsage {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const AccumulatedUsage& rhs) const;
-  bool operator!=(const AccumulatedUsage& rhs) const;
+  bool operator==(const AccumulatedUsage &rhs) const;
+  bool operator!=(const AccumulatedUsage &rhs) const;
 
   /////////////////////////////////////////////
   /// AccumulatedUsage members
@@ -84,10 +84,10 @@ class AccumulatedUsage {
   bool uplinkVolumeIsSet() const;
   void unsetUplinkVolume();
 
-  friend void to_json(nlohmann::json& j, const AccumulatedUsage& o);
-  friend void from_json(const nlohmann::json& j, AccumulatedUsage& o);
+  friend void to_json(nlohmann::json &j, const AccumulatedUsage &o);
+  friend void from_json(const nlohmann::json &j, AccumulatedUsage &o);
 
- protected:
+protected:
   int32_t m_Duration;
   bool m_DurationIsSet;
   int64_t m_TotalVolume;
@@ -98,6 +98,6 @@ class AccumulatedUsage {
   bool m_UplinkVolumeIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* AccumulatedUsage_H_ */

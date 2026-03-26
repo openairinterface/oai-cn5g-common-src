@@ -30,7 +30,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class SmsSupport {
- public:
+public:
   SmsSupport();
   virtual ~SmsSupport();
 
@@ -39,12 +39,12 @@ class SmsSupport {
   /////////////////////////////////////////////
   /// SmsSupport members
 
-  friend void to_json(nlohmann::json& j, const SmsSupport& o);
-  friend void from_json(const nlohmann::json& j, SmsSupport& o);
+  friend void to_json(nlohmann::json &j, const SmsSupport &o);
+  friend void from_json(const nlohmann::json &j, SmsSupport &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* SmsSupport_H_ */

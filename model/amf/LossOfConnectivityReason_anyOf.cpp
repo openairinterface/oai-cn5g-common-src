@@ -12,8 +12,8 @@
 
 #include "LossOfConnectivityReason_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::amf {
 
@@ -26,12 +26,12 @@ void LossOfConnectivityReason_anyOf::validate() const {
   }
 }
 
-bool LossOfConnectivityReason_anyOf::validate(std::stringstream& msg) const {
+bool LossOfConnectivityReason_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool LossOfConnectivityReason_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "LossOfConnectivityReason_anyOf" : pathPrefix;
@@ -47,39 +47,38 @@ bool LossOfConnectivityReason_anyOf::validate(
 }
 
 bool LossOfConnectivityReason_anyOf::operator==(
-    const LossOfConnectivityReason_anyOf& rhs) const {
+    const LossOfConnectivityReason_anyOf &rhs) const {
   return getValue() == rhs.getValue();
 }
 
 bool LossOfConnectivityReason_anyOf::operator!=(
-    const LossOfConnectivityReason_anyOf& rhs) const {
+    const LossOfConnectivityReason_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const LossOfConnectivityReason_anyOf& o) {
+void to_json(nlohmann::json &j, const LossOfConnectivityReason_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case LossOfConnectivityReason_anyOf::eLossOfConnectivityReason_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case LossOfConnectivityReason_anyOf::eLossOfConnectivityReason_anyOf::
-        DEREGISTERED:
-      j = "DEREGISTERED";
-      break;
-    case LossOfConnectivityReason_anyOf::eLossOfConnectivityReason_anyOf::
-        MAX_DETECTION_TIME_EXPIRED:
-      j = "MAX_DETECTION_TIME_EXPIRED";
-      break;
-    case LossOfConnectivityReason_anyOf::eLossOfConnectivityReason_anyOf::
-        PURGED:
-      j = "PURGED";
-      break;
+  case LossOfConnectivityReason_anyOf::eLossOfConnectivityReason_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case LossOfConnectivityReason_anyOf::eLossOfConnectivityReason_anyOf::
+      DEREGISTERED:
+    j = "DEREGISTERED";
+    break;
+  case LossOfConnectivityReason_anyOf::eLossOfConnectivityReason_anyOf::
+      MAX_DETECTION_TIME_EXPIRED:
+    j = "MAX_DETECTION_TIME_EXPIRED";
+    break;
+  case LossOfConnectivityReason_anyOf::eLossOfConnectivityReason_anyOf::PURGED:
+    j = "PURGED";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, LossOfConnectivityReason_anyOf& o) {
+void from_json(const nlohmann::json &j, LossOfConnectivityReason_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "DEREGISTERED") {
     o.setValue(LossOfConnectivityReason_anyOf::eLossOfConnectivityReason_anyOf::
@@ -108,4 +107,4 @@ void LossOfConnectivityReason_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

@@ -21,13 +21,14 @@ void PeriodicRegistrationUpdateTimer::set(uint8_t updateTimer) {
 
 //------------------------------------------------------------------------------
 bool PeriodicRegistrationUpdateTimer::encode(
-    Ngap_PeriodicRegistrationUpdateTimer_t& periodicRegistrationUpdateTimer)
+    Ngap_PeriodicRegistrationUpdateTimer_t &periodicRegistrationUpdateTimer)
     const {
-  periodicRegistrationUpdateTimer.size        = sizeof(uint8_t);
+  periodicRegistrationUpdateTimer.size = sizeof(uint8_t);
   periodicRegistrationUpdateTimer.bits_unused = 0;
   periodicRegistrationUpdateTimer.buf =
-      (uint8_t*) calloc(1, periodicRegistrationUpdateTimer.size);
-  if (!periodicRegistrationUpdateTimer.buf) return false;
+      (uint8_t *)calloc(1, periodicRegistrationUpdateTimer.size);
+  if (!periodicRegistrationUpdateTimer.buf)
+    return false;
   periodicRegistrationUpdateTimer.buf[0] = m_UpdateTimer;
 
   return true;
@@ -36,15 +37,16 @@ bool PeriodicRegistrationUpdateTimer::encode(
 //------------------------------------------------------------------------------
 bool PeriodicRegistrationUpdateTimer::decode(
     Ngap_PeriodicRegistrationUpdateTimer_t periodicRegistrationUpdateTimer) {
-  if (!periodicRegistrationUpdateTimer.buf) return false;
+  if (!periodicRegistrationUpdateTimer.buf)
+    return false;
   m_UpdateTimer = periodicRegistrationUpdateTimer.buf[0];
 
   return true;
 }
 
 //------------------------------------------------------------------------------
-void PeriodicRegistrationUpdateTimer::get(uint8_t& updateTimer) const {
+void PeriodicRegistrationUpdateTimer::get(uint8_t &updateTimer) const {
   updateTimer = m_UpdateTimer;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

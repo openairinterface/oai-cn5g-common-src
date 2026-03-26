@@ -19,11 +19,11 @@
 #ifndef AreaScope_H_
 #define AreaScope_H_
 
-#include <string>
-#include <map>
-#include <vector>
 #include "TacInfo.h"
+#include <map>
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::common {
 
@@ -31,7 +31,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class AreaScope {
- public:
+public:
   AreaScope();
   virtual ~AreaScope() = default;
 
@@ -45,16 +45,16 @@ class AreaScope {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const AreaScope& rhs) const;
-  bool operator!=(const AreaScope& rhs) const;
+  bool operator==(const AreaScope &rhs) const;
+  bool operator!=(const AreaScope &rhs) const;
 
   /////////////////////////////////////////////
   /// AreaScope members
@@ -63,21 +63,21 @@ class AreaScope {
   ///
   /// </summary>
   std::vector<std::string> getEutraCellIdList() const;
-  void setEutraCellIdList(std::vector<std::string> const& value);
+  void setEutraCellIdList(std::vector<std::string> const &value);
   bool eutraCellIdListIsSet() const;
   void unsetEutraCellIdList();
   /// <summary>
   ///
   /// </summary>
   std::vector<std::string> getNrCellIdList() const;
-  void setNrCellIdList(std::vector<std::string> const& value);
+  void setNrCellIdList(std::vector<std::string> const &value);
   bool nrCellIdListIsSet() const;
   void unsetNrCellIdList();
   /// <summary>
   ///
   /// </summary>
   std::vector<std::string> getTacList() const;
-  void setTacList(std::vector<std::string> const& value);
+  void setTacList(std::vector<std::string> const &value);
   bool tacListIsSet() const;
   void unsetTacList();
   /// <summary>
@@ -85,14 +85,14 @@ class AreaScope {
   /// </summary>
   std::map<std::string, oai::model::common::TacInfo> getTacInfoPerPlmn() const;
   void setTacInfoPerPlmn(
-      std::map<std::string, oai::model::common::TacInfo> const& value);
+      std::map<std::string, oai::model::common::TacInfo> const &value);
   bool tacInfoPerPlmnIsSet() const;
   void unsetTacInfoPerPlmn();
 
-  friend void to_json(nlohmann::json& j, const AreaScope& o);
-  friend void from_json(const nlohmann::json& j, AreaScope& o);
+  friend void to_json(nlohmann::json &j, const AreaScope &o);
+  friend void from_json(const nlohmann::json &j, AreaScope &o);
 
- protected:
+protected:
   std::vector<std::string> m_EutraCellIdList;
   bool m_EutraCellIdListIsSet;
   std::vector<std::string> m_NrCellIdList;
@@ -103,6 +103,6 @@ class AreaScope {
   bool m_TacInfoPerPlmnIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* AreaScope_H_ */

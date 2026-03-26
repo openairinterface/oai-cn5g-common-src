@@ -12,9 +12,9 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
+#include "Ngap_ExtendedRNC-ID.h"
 #include "Ngap_LAI.h"
 #include "Ngap_RNC-ID.h"
-#include "Ngap_ExtendedRNC-ID.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -28,8 +28,8 @@ struct Ngap_ProtocolExtensionContainer;
 typedef struct Ngap_TargetRNC_ID {
   Ngap_LAI_t lAI;
   Ngap_RNC_ID_t rNC_ID;
-  Ngap_ExtendedRNC_ID_t* extendedRNC_ID;                 /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  Ngap_ExtendedRNC_ID_t *extendedRNC_ID;                 /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

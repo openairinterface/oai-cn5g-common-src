@@ -39,7 +39,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class ExpectedUeBehaviourData {
- public:
+public:
   ExpectedUeBehaviourData();
   virtual ~ExpectedUeBehaviourData();
 
@@ -53,7 +53,7 @@ class ExpectedUeBehaviourData {
   /// </summary>
   oai::model::common::StationaryIndication getStationaryIndication() const;
   void setStationaryIndication(
-      oai::model::common::StationaryIndication const& value);
+      oai::model::common::StationaryIndication const &value);
   bool stationaryIndicationIsSet() const;
   void unsetStationaryIndication();
   /// <summary>
@@ -73,55 +73,55 @@ class ExpectedUeBehaviourData {
   /// <summary>
   ///
   /// </summary>
-  oai::model::common::ScheduledCommunicationTime getScheduledCommunicationTime()
-      const;
+  oai::model::common::ScheduledCommunicationTime
+  getScheduledCommunicationTime() const;
   void setScheduledCommunicationTime(
-      oai::model::common::ScheduledCommunicationTime const& value);
+      oai::model::common::ScheduledCommunicationTime const &value);
   bool scheduledCommunicationTimeIsSet() const;
   void unsetScheduledCommunicationTime();
   /// <summary>
   ///
   /// </summary>
-  oai::model::common::ScheduledCommunicationType getScheduledCommunicationType()
-      const;
+  oai::model::common::ScheduledCommunicationType
+  getScheduledCommunicationType() const;
   void setScheduledCommunicationType(
-      oai::model::common::ScheduledCommunicationType const& value);
+      oai::model::common::ScheduledCommunicationType const &value);
   bool scheduledCommunicationTypeIsSet() const;
   void unsetScheduledCommunicationType();
   /// <summary>
   /// Identifies the UE&#39;s expected geographical movement. The attribute is
   /// only applicable in 5G.
   /// </summary>
-  std::vector<LocationArea>& getExpectedUmts();
-  void setExpectedUmts(std::vector<LocationArea> const& value);
+  std::vector<LocationArea> &getExpectedUmts();
+  void setExpectedUmts(std::vector<LocationArea> const &value);
   bool expectedUmtsIsSet() const;
   void unsetExpectedUmts();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::TrafficProfile getTrafficProfile() const;
-  void setTrafficProfile(oai::model::common::TrafficProfile const& value);
+  void setTrafficProfile(oai::model::common::TrafficProfile const &value);
   bool trafficProfileIsSet() const;
   void unsetTrafficProfile();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::BatteryIndication getBatteryIndication() const;
-  void setBatteryIndication(oai::model::common::BatteryIndication const& value);
+  void setBatteryIndication(oai::model::common::BatteryIndication const &value);
   bool batteryIndicationIsSet() const;
   void unsetBatteryIndication();
   /// <summary>
   ///
   /// </summary>
   std::string getValidityTime() const;
-  void setValidityTime(std::string const& value);
+  void setValidityTime(std::string const &value);
   bool validityTimeIsSet() const;
   void unsetValidityTime();
 
-  friend void to_json(nlohmann::json& j, const ExpectedUeBehaviourData& o);
-  friend void from_json(const nlohmann::json& j, ExpectedUeBehaviourData& o);
+  friend void to_json(nlohmann::json &j, const ExpectedUeBehaviourData &o);
+  friend void from_json(const nlohmann::json &j, ExpectedUeBehaviourData &o);
 
- protected:
+protected:
   oai::model::common::StationaryIndication m_StationaryIndication;
   bool m_StationaryIndicationIsSet;
   int32_t m_CommunicationDurationTime;
@@ -142,6 +142,6 @@ class ExpectedUeBehaviourData {
   bool m_ValidityTimeIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* ExpectedUeBehaviourData_H_ */

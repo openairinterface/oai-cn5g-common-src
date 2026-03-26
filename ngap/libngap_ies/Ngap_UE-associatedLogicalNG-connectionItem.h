@@ -25,9 +25,9 @@ struct Ngap_ProtocolExtensionContainer;
 
 /* Ngap_UE-associatedLogicalNG-connectionItem */
 typedef struct Ngap_UE_associatedLogicalNG_connectionItem {
-  Ngap_AMF_UE_NGAP_ID_t* aMF_UE_NGAP_ID;                 /* OPTIONAL */
-  Ngap_RAN_UE_NGAP_ID_t* rAN_UE_NGAP_ID;                 /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  Ngap_AMF_UE_NGAP_ID_t *aMF_UE_NGAP_ID;                 /* OPTIONAL */
+  Ngap_RAN_UE_NGAP_ID_t *rAN_UE_NGAP_ID;                 /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

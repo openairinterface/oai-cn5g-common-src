@@ -19,11 +19,11 @@
 namespace oai::model::pcf {
 
 AccessNetChargingIdentifier::AccessNetChargingIdentifier() {
-  m_AccNetChaIdValue         = 0;
-  m_AccNetChaIdValueIsSet    = false;
-  m_AccNetChargIdString      = "";
+  m_AccNetChaIdValue = 0;
+  m_AccNetChaIdValueIsSet = false;
+  m_AccNetChargIdString = "";
   m_AccNetChargIdStringIsSet = false;
-  m_FlowsIsSet               = false;
+  m_FlowsIsSet = false;
 }
 
 void AccessNetChargingIdentifier::validate() const {
@@ -33,18 +33,18 @@ void AccessNetChargingIdentifier::validate() const {
   }
 }
 
-bool AccessNetChargingIdentifier::validate(std::stringstream& msg) const {
+bool AccessNetChargingIdentifier::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool AccessNetChargingIdentifier::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AccessNetChargingIdentifier" : pathPrefix;
 
   if (accNetChaIdValueIsSet()) {
-    const int32_t& value               = m_AccNetChaIdValue;
+    const int32_t &value = m_AccNetChaIdValue;
     const std::string currentValuePath = _pathPrefix + ".accNetChaIdValue";
 
     if (value < 0) {
@@ -58,17 +58,17 @@ bool AccessNetChargingIdentifier::validate(
   }
 
   if (flowsIsSet()) {
-    const std::vector<oai::model::pcf::Flows>& value = m_Flows;
-    const std::string currentValuePath               = _pathPrefix + ".flows";
+    const std::vector<oai::model::pcf::Flows> &value = m_Flows;
+    const std::string currentValuePath = _pathPrefix + ".flows";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::Flows& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::Flows &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -83,7 +83,7 @@ bool AccessNetChargingIdentifier::validate(
 }
 
 bool AccessNetChargingIdentifier::operator==(
-    const AccessNetChargingIdentifier& rhs) const {
+    const AccessNetChargingIdentifier &rhs) const {
   return
 
       ((!accNetChaIdValueIsSet() && !rhs.accNetChaIdValueIsSet()) ||
@@ -101,19 +101,21 @@ bool AccessNetChargingIdentifier::operator==(
 }
 
 bool AccessNetChargingIdentifier::operator!=(
-    const AccessNetChargingIdentifier& rhs) const {
+    const AccessNetChargingIdentifier &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AccessNetChargingIdentifier& o) {
+void to_json(nlohmann::json &j, const AccessNetChargingIdentifier &o) {
   j = nlohmann::json::object();
-  if (o.accNetChaIdValueIsSet()) j["accNetChaIdValue"] = o.m_AccNetChaIdValue;
+  if (o.accNetChaIdValueIsSet())
+    j["accNetChaIdValue"] = o.m_AccNetChaIdValue;
   if (o.accNetChargIdStringIsSet())
     j["accNetChargIdString"] = o.m_AccNetChargIdString;
-  if (o.flowsIsSet() || !o.m_Flows.empty()) j["flows"] = o.m_Flows;
+  if (o.flowsIsSet() || !o.m_Flows.empty())
+    j["flows"] = o.m_Flows;
 }
 
-void from_json(const nlohmann::json& j, AccessNetChargingIdentifier& o) {
+void from_json(const nlohmann::json &j, AccessNetChargingIdentifier &o) {
   if (j.find("accNetChaIdValue") != j.end()) {
     j.at("accNetChaIdValue").get_to(o.m_AccNetChaIdValue);
     o.m_AccNetChaIdValueIsSet = true;
@@ -132,7 +134,7 @@ int32_t AccessNetChargingIdentifier::getAccNetChaIdValue() const {
   return m_AccNetChaIdValue;
 }
 void AccessNetChargingIdentifier::setAccNetChaIdValue(int32_t const value) {
-  m_AccNetChaIdValue      = value;
+  m_AccNetChaIdValue = value;
   m_AccNetChaIdValueIsSet = true;
 }
 bool AccessNetChargingIdentifier::accNetChaIdValueIsSet() const {
@@ -145,8 +147,8 @@ std::string AccessNetChargingIdentifier::getAccNetChargIdString() const {
   return m_AccNetChargIdString;
 }
 void AccessNetChargingIdentifier::setAccNetChargIdString(
-    std::string const& value) {
-  m_AccNetChargIdString      = value;
+    std::string const &value) {
+  m_AccNetChargIdString = value;
   m_AccNetChargIdStringIsSet = true;
 }
 bool AccessNetChargingIdentifier::accNetChargIdStringIsSet() const {
@@ -155,20 +157,16 @@ bool AccessNetChargingIdentifier::accNetChargIdStringIsSet() const {
 void AccessNetChargingIdentifier::unsetAccNetChargIdString() {
   m_AccNetChargIdStringIsSet = false;
 }
-std::vector<oai::model::pcf::Flows> AccessNetChargingIdentifier::getFlows()
-    const {
+std::vector<oai::model::pcf::Flows>
+AccessNetChargingIdentifier::getFlows() const {
   return m_Flows;
 }
 void AccessNetChargingIdentifier::setFlows(
-    std::vector<oai::model::pcf::Flows> const& value) {
-  m_Flows      = value;
+    std::vector<oai::model::pcf::Flows> const &value) {
+  m_Flows = value;
   m_FlowsIsSet = true;
 }
-bool AccessNetChargingIdentifier::flowsIsSet() const {
-  return m_FlowsIsSet;
-}
-void AccessNetChargingIdentifier::unsetFlows() {
-  m_FlowsIsSet = false;
-}
+bool AccessNetChargingIdentifier::flowsIsSet() const { return m_FlowsIsSet; }
+void AccessNetChargingIdentifier::unsetFlows() { m_FlowsIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

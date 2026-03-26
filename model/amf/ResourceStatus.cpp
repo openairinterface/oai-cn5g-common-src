@@ -23,23 +23,17 @@ void ResourceStatus::validate() {
   // TODO: implement validation
 }
 
-std::string ResourceStatus::getValue() const {
-  return status;
-}
-void ResourceStatus::getValue(std::string& v) const {
-  v = status;
-}
+std::string ResourceStatus::getValue() const { return status; }
+void ResourceStatus::getValue(std::string &v) const { v = status; }
 
-void ResourceStatus::setValue(const std::string& v) {
-  status = v;
-}
+void ResourceStatus::setValue(const std::string &v) { status = v; }
 
-void to_json(nlohmann::json& j, const ResourceStatus& o) {
+void to_json(nlohmann::json &j, const ResourceStatus &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, ResourceStatus& o) {
+void from_json(const nlohmann::json &j, ResourceStatus &o) {
   j.get_to(o.status);
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

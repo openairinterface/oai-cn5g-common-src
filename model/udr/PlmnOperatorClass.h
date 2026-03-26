@@ -34,7 +34,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class PlmnOperatorClass {
- public:
+public:
   PlmnOperatorClass();
   virtual ~PlmnOperatorClass();
 
@@ -47,22 +47,22 @@ class PlmnOperatorClass {
   ///
   /// </summary>
   LcsClientClass getLcsClientClass() const;
-  void setLcsClientClass(LcsClientClass const& value);
+  void setLcsClientClass(LcsClientClass const &value);
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getLcsClientIds();
-  void setLcsClientIds(std::vector<std::string> const& value);
+  std::vector<std::string> &getLcsClientIds();
+  void setLcsClientIds(std::vector<std::string> const &value);
 
-  friend void to_json(nlohmann::json& j, const PlmnOperatorClass& o);
-  friend void from_json(const nlohmann::json& j, PlmnOperatorClass& o);
+  friend void to_json(nlohmann::json &j, const PlmnOperatorClass &o);
+  friend void from_json(const nlohmann::json &j, PlmnOperatorClass &o);
 
- protected:
+protected:
   LcsClientClass m_LcsClientClass;
 
   std::vector<std::string> m_LcsClientIds;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* PlmnOperatorClass_H_ */

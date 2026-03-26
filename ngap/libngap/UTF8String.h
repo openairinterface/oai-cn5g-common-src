@@ -62,7 +62,7 @@ asn_random_fill_f UTF8String_random_fill;
  * -4:	Not minimal length encoding
  * -5:	Invalid arguments
  */
-ssize_t UTF8String_length(const UTF8String_t* st);
+ssize_t UTF8String_length(const UTF8String_t *st);
 
 /*
  * Convert the UTF-8 string into a sequence of wide characters.
@@ -75,7 +75,7 @@ ssize_t UTF8String_length(const UTF8String_t* st);
  * is equivalent to
  * 	UTF8String_length(const UTF8String_t *st);
  */
-size_t UTF8String_to_wcs(const UTF8String_t* st, uint32_t* dst, size_t dstlen);
+size_t UTF8String_to_wcs(const UTF8String_t *st, uint32_t *dst, size_t dstlen);
 
 #ifdef __cplusplus
 }

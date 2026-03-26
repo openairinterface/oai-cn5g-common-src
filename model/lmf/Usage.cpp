@@ -27,13 +27,11 @@ void Usage::validate() const {
   }
 }
 
-bool Usage::validate(std::stringstream& msg) const {
-  return validate(msg, "");
-}
+bool Usage::validate(std::stringstream &msg) const { return validate(msg, ""); }
 
-bool Usage::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool Usage::validate(std::stringstream &msg,
+                     const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "Usage" : pathPrefix;
 
   if (!m_value.validate(msg)) {
@@ -42,32 +40,24 @@ bool Usage::validate(
   return success;
 }
 
-bool Usage::operator==(const Usage& rhs) const {
+bool Usage::operator==(const Usage &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool Usage::operator!=(const Usage& rhs) const {
-  return !(*this == rhs);
-}
+bool Usage::operator!=(const Usage &rhs) const { return !(*this == rhs); }
 
-void to_json(nlohmann::json& j, const Usage& o) {
+void to_json(nlohmann::json &j, const Usage &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, Usage& o) {
-  from_json(j, o.m_value);
-}
+void from_json(const nlohmann::json &j, Usage &o) { from_json(j, o.m_value); }
 
-Usage_anyOf Usage::getValue() const {
-  return m_value;
-}
+Usage_anyOf Usage::getValue() const { return m_value; }
 
-void Usage::setValue(Usage_anyOf value) {
-  m_value = value;
-}
+void Usage::setValue(Usage_anyOf value) { m_value = value; }
 
 Usage_anyOf::eUsage_anyOf Usage::getEnumValue() const {
   return m_value.getValue();
@@ -77,4 +67,4 @@ void Usage::setEnumValue(Usage_anyOf::eUsage_anyOf value) {
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

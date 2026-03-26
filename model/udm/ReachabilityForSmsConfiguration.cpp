@@ -30,12 +30,12 @@ void ReachabilityForSmsConfiguration::validate() const {
   }
 }
 
-bool ReachabilityForSmsConfiguration::validate(std::stringstream& msg) const {
+bool ReachabilityForSmsConfiguration::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool ReachabilityForSmsConfiguration::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ReachabilityForSmsConfiguration" : pathPrefix;
@@ -44,19 +44,19 @@ bool ReachabilityForSmsConfiguration::validate(
 }
 
 bool ReachabilityForSmsConfiguration::operator==(
-    const ReachabilityForSmsConfiguration& rhs) const {
+    const ReachabilityForSmsConfiguration &rhs) const {
   return true;
 }
 
 bool ReachabilityForSmsConfiguration::operator!=(
-    const ReachabilityForSmsConfiguration& rhs) const {
+    const ReachabilityForSmsConfiguration &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ReachabilityForSmsConfiguration& o) {
+void to_json(nlohmann::json &j, const ReachabilityForSmsConfiguration &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, ReachabilityForSmsConfiguration& o) {}
+void from_json(const nlohmann::json &j, ReachabilityForSmsConfiguration &o) {}
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

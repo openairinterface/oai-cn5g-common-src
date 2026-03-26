@@ -15,9 +15,7 @@
 
 namespace oai::model::amf {
 
-EbiArpMapping::EbiArpMapping() {
-  m_EpsBearerId = 0;
-}
+EbiArpMapping::EbiArpMapping() { m_EpsBearerId = 0; }
 
 EbiArpMapping::~EbiArpMapping() {}
 
@@ -25,28 +23,24 @@ void EbiArpMapping::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const EbiArpMapping& o) {
-  j                = nlohmann::json();
+void to_json(nlohmann::json &j, const EbiArpMapping &o) {
+  j = nlohmann::json();
   j["epsBearerId"] = o.m_EpsBearerId;
-  j["arp"]         = o.m_Arp;
+  j["arp"] = o.m_Arp;
 }
 
-void from_json(const nlohmann::json& j, EbiArpMapping& o) {
+void from_json(const nlohmann::json &j, EbiArpMapping &o) {
   j.at("epsBearerId").get_to(o.m_EpsBearerId);
   j.at("arp").get_to(o.m_Arp);
 }
 
-int32_t EbiArpMapping::getEpsBearerId() const {
-  return m_EpsBearerId;
-}
+int32_t EbiArpMapping::getEpsBearerId() const { return m_EpsBearerId; }
 void EbiArpMapping::setEpsBearerId(int32_t const value) {
   m_EpsBearerId = value;
 }
-oai::model::common::Arp EbiArpMapping::getArp() const {
-  return m_Arp;
-}
-void EbiArpMapping::setArp(oai::model::common::Arp const& value) {
+oai::model::common::Arp EbiArpMapping::getArp() const { return m_Arp; }
+void EbiArpMapping::setArp(oai::model::common::Arp const &value) {
   m_Arp = value;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

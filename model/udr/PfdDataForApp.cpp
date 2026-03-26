@@ -19,8 +19,8 @@
 namespace oai::udr::model {
 
 PfdDataForApp::PfdDataForApp() {
-  m_ApplicationId    = "";
-  m_CachingTime      = "";
+  m_ApplicationId = "";
+  m_CachingTime = "";
   m_CachingTimeIsSet = false;
 }
 
@@ -30,14 +30,15 @@ void PfdDataForApp::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const PfdDataForApp& o) {
-  j                  = nlohmann::json();
+void to_json(nlohmann::json &j, const PfdDataForApp &o) {
+  j = nlohmann::json();
   j["applicationId"] = o.m_ApplicationId;
-  j["pfds"]          = o.m_Pfds;
-  if (o.cachingTimeIsSet()) j["cachingTime"] = o.m_CachingTime;
+  j["pfds"] = o.m_Pfds;
+  if (o.cachingTimeIsSet())
+    j["cachingTime"] = o.m_CachingTime;
 }
 
-void from_json(const nlohmann::json& j, PfdDataForApp& o) {
+void from_json(const nlohmann::json &j, PfdDataForApp &o) {
   j.at("applicationId").get_to(o.m_ApplicationId);
   j.at("pfds").get_to(o.m_Pfds);
   if (j.find("cachingTime") != j.end()) {
@@ -46,30 +47,20 @@ void from_json(const nlohmann::json& j, PfdDataForApp& o) {
   }
 }
 
-std::string PfdDataForApp::getApplicationId() const {
-  return m_ApplicationId;
-}
-void PfdDataForApp::setApplicationId(std::string const& value) {
+std::string PfdDataForApp::getApplicationId() const { return m_ApplicationId; }
+void PfdDataForApp::setApplicationId(std::string const &value) {
   m_ApplicationId = value;
 }
-std::vector<PfdContent>& PfdDataForApp::getPfds() {
-  return m_Pfds;
-}
-void PfdDataForApp::setPfds(std::vector<PfdContent> const& value) {
+std::vector<PfdContent> &PfdDataForApp::getPfds() { return m_Pfds; }
+void PfdDataForApp::setPfds(std::vector<PfdContent> const &value) {
   m_Pfds = value;
 }
-std::string PfdDataForApp::getCachingTime() const {
-  return m_CachingTime;
-}
-void PfdDataForApp::setCachingTime(std::string const& value) {
-  m_CachingTime      = value;
+std::string PfdDataForApp::getCachingTime() const { return m_CachingTime; }
+void PfdDataForApp::setCachingTime(std::string const &value) {
+  m_CachingTime = value;
   m_CachingTimeIsSet = true;
 }
-bool PfdDataForApp::cachingTimeIsSet() const {
-  return m_CachingTimeIsSet;
-}
-void PfdDataForApp::unsetCachingTime() {
-  m_CachingTimeIsSet = false;
-}
+bool PfdDataForApp::cachingTimeIsSet() const { return m_CachingTimeIsSet; }
+void PfdDataForApp::unsetCachingTime() { m_CachingTimeIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

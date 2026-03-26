@@ -21,12 +21,12 @@ namespace nssf_server {
 namespace model {
 
 NssfEventSubscriptionCreatedData::NssfEventSubscriptionCreatedData() {
-  m_SubscriptionId                       = "";
-  m_Expiry                               = "";
-  m_ExpiryIsSet                          = false;
+  m_SubscriptionId = "";
+  m_Expiry = "";
+  m_ExpiryIsSet = false;
   m_AuthorizedNssaiAvailabilityDataIsSet = false;
-  m_SupportedFeatures                    = "";
-  m_SupportedFeaturesIsSet               = false;
+  m_SupportedFeatures = "";
+  m_SupportedFeaturesIsSet = false;
 }
 
 void NssfEventSubscriptionCreatedData::validate() const {
@@ -37,18 +37,18 @@ void NssfEventSubscriptionCreatedData::validate() const {
   // }
 }
 
-bool NssfEventSubscriptionCreatedData::validate(std::stringstream& msg) const {
+bool NssfEventSubscriptionCreatedData::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool NssfEventSubscriptionCreatedData::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "NssfEventSubscriptionCreatedData" : pathPrefix;
 
   if (authorizedNssaiAvailabilityDataIsSet()) {
-    const std::vector<AuthorizedNssaiAvailabilityData>& value =
+    const std::vector<AuthorizedNssaiAvailabilityData> &value =
         m_AuthorizedNssaiAvailabilityData;
     const std::string currentValuePath =
         _pathPrefix + ".authorizedNssaiAvailabilityData";
@@ -57,17 +57,16 @@ bool NssfEventSubscriptionCreatedData::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const AuthorizedNssaiAvailabilityData& value : value) {
+      int i = 0;
+      for (const AuthorizedNssaiAvailabilityData &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
-        success =
-            value.validate(
-                msg, currentValuePath + ".authorizedNssaiAvailabilityData") &&
-            success;
+        success = value.validate(msg, currentValuePath +
+                                          ".authorizedNssaiAvailabilityData") &&
+                  success;
 
         i++;
       }
@@ -75,7 +74,7 @@ bool NssfEventSubscriptionCreatedData::validate(
   }
 
   if (supportedFeaturesIsSet()) {
-    const std::string& value           = m_SupportedFeatures;
+    const std::string &value = m_SupportedFeatures;
     const std::string currentValuePath = _pathPrefix + ".supportedFeatures";
   }
 
@@ -83,7 +82,7 @@ bool NssfEventSubscriptionCreatedData::validate(
 }
 
 bool NssfEventSubscriptionCreatedData::operator==(
-    const NssfEventSubscriptionCreatedData& rhs) const {
+    const NssfEventSubscriptionCreatedData &rhs) const {
   return
 
       (getSubscriptionId() == rhs.getSubscriptionId()) &&
@@ -107,14 +106,15 @@ bool NssfEventSubscriptionCreatedData::operator==(
 }
 
 bool NssfEventSubscriptionCreatedData::operator!=(
-    const NssfEventSubscriptionCreatedData& rhs) const {
+    const NssfEventSubscriptionCreatedData &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const NssfEventSubscriptionCreatedData& o) {
-  j                   = nlohmann::json();
+void to_json(nlohmann::json &j, const NssfEventSubscriptionCreatedData &o) {
+  j = nlohmann::json();
   j["subscriptionId"] = o.m_SubscriptionId;
-  if (o.expiryIsSet()) j["expiry"] = o.m_Expiry;
+  if (o.expiryIsSet())
+    j["expiry"] = o.m_Expiry;
   if (o.authorizedNssaiAvailabilityDataIsSet() ||
       !o.m_AuthorizedNssaiAvailabilityData.empty())
     j["authorizedNssaiAvailabilityData"] = o.m_AuthorizedNssaiAvailabilityData;
@@ -122,7 +122,7 @@ void to_json(nlohmann::json& j, const NssfEventSubscriptionCreatedData& o) {
     j["supportedFeatures"] = o.m_SupportedFeatures;
 }
 
-void from_json(const nlohmann::json& j, NssfEventSubscriptionCreatedData& o) {
+void from_json(const nlohmann::json &j, NssfEventSubscriptionCreatedData &o) {
   j.at("subscriptionId").get_to(o.m_SubscriptionId);
   if (j.find("expiry") != j.end()) {
     j.at("expiry").get_to(o.m_Expiry);
@@ -143,29 +143,27 @@ std::string NssfEventSubscriptionCreatedData::getSubscriptionId() const {
   return m_SubscriptionId;
 }
 void NssfEventSubscriptionCreatedData::setSubscriptionId(
-    std::string const& value) {
+    std::string const &value) {
   m_SubscriptionId = value;
 }
 std::string NssfEventSubscriptionCreatedData::getExpiry() const {
   return m_Expiry;
 }
-void NssfEventSubscriptionCreatedData::setExpiry(std::string const& value) {
-  m_Expiry      = value;
+void NssfEventSubscriptionCreatedData::setExpiry(std::string const &value) {
+  m_Expiry = value;
   m_ExpiryIsSet = true;
 }
 bool NssfEventSubscriptionCreatedData::expiryIsSet() const {
   return m_ExpiryIsSet;
 }
-void NssfEventSubscriptionCreatedData::unsetExpiry() {
-  m_ExpiryIsSet = false;
-}
+void NssfEventSubscriptionCreatedData::unsetExpiry() { m_ExpiryIsSet = false; }
 std::vector<AuthorizedNssaiAvailabilityData>
 NssfEventSubscriptionCreatedData::getAuthorizedNssaiAvailabilityData() const {
   return m_AuthorizedNssaiAvailabilityData;
 }
 void NssfEventSubscriptionCreatedData::setAuthorizedNssaiAvailabilityData(
-    std::vector<AuthorizedNssaiAvailabilityData> const& value) {
-  m_AuthorizedNssaiAvailabilityData      = value;
+    std::vector<AuthorizedNssaiAvailabilityData> const &value) {
+  m_AuthorizedNssaiAvailabilityData = value;
   m_AuthorizedNssaiAvailabilityDataIsSet = true;
 }
 bool NssfEventSubscriptionCreatedData::authorizedNssaiAvailabilityDataIsSet()
@@ -179,8 +177,8 @@ std::string NssfEventSubscriptionCreatedData::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
 void NssfEventSubscriptionCreatedData::setSupportedFeatures(
-    std::string const& value) {
-  m_SupportedFeatures      = value;
+    std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool NssfEventSubscriptionCreatedData::supportedFeaturesIsSet() const {
@@ -190,6 +188,6 @@ void NssfEventSubscriptionCreatedData::unsetSupportedFeatures() {
   m_SupportedFeaturesIsSet = false;
 }
 
-}  // namespace model
-}  // namespace nssf_server
-}  // namespace oai
+} // namespace model
+} // namespace nssf_server
+} // namespace oai

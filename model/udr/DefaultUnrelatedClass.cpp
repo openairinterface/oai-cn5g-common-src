@@ -19,11 +19,11 @@
 namespace oai::udr::model {
 
 DefaultUnrelatedClass::DefaultUnrelatedClass() {
-  m_AllowedGeographicAreaIsSet     = false;
+  m_AllowedGeographicAreaIsSet = false;
   m_PrivacyCheckRelatedActionIsSet = false;
-  m_CodeWordIndIsSet               = false;
-  m_ValidTimePeriodIsSet           = false;
-  m_CodeWordListIsSet              = false;
+  m_CodeWordIndIsSet = false;
+  m_ValidTimePeriodIsSet = false;
+  m_CodeWordListIsSet = false;
 }
 
 DefaultUnrelatedClass::~DefaultUnrelatedClass() {}
@@ -32,19 +32,21 @@ void DefaultUnrelatedClass::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const DefaultUnrelatedClass& o) {
+void to_json(nlohmann::json &j, const DefaultUnrelatedClass &o) {
   j = nlohmann::json();
   if (o.allowedGeographicAreaIsSet() || !o.m_AllowedGeographicArea.empty())
     j["allowedGeographicArea"] = o.m_AllowedGeographicArea;
   if (o.privacyCheckRelatedActionIsSet())
     j["privacyCheckRelatedAction"] = o.m_PrivacyCheckRelatedAction;
-  if (o.codeWordIndIsSet()) j["codeWordInd"] = o.m_CodeWordInd;
-  if (o.validTimePeriodIsSet()) j["validTimePeriod"] = o.m_ValidTimePeriod;
+  if (o.codeWordIndIsSet())
+    j["codeWordInd"] = o.m_CodeWordInd;
+  if (o.validTimePeriodIsSet())
+    j["validTimePeriod"] = o.m_ValidTimePeriod;
   if (o.codeWordListIsSet() || !o.m_CodeWordList.empty())
     j["codeWordList"] = o.m_CodeWordList;
 }
 
-void from_json(const nlohmann::json& j, DefaultUnrelatedClass& o) {
+void from_json(const nlohmann::json &j, DefaultUnrelatedClass &o) {
   if (j.find("allowedGeographicArea") != j.end()) {
     j.at("allowedGeographicArea").get_to(o.m_AllowedGeographicArea);
     o.m_AllowedGeographicAreaIsSet = true;
@@ -67,12 +69,12 @@ void from_json(const nlohmann::json& j, DefaultUnrelatedClass& o) {
   }
 }
 
-std::vector<GeographicArea>& DefaultUnrelatedClass::getAllowedGeographicArea() {
+std::vector<GeographicArea> &DefaultUnrelatedClass::getAllowedGeographicArea() {
   return m_AllowedGeographicArea;
 }
 void DefaultUnrelatedClass::setAllowedGeographicArea(
-    std::vector<GeographicArea> const& value) {
-  m_AllowedGeographicArea      = value;
+    std::vector<GeographicArea> const &value) {
+  m_AllowedGeographicArea = value;
   m_AllowedGeographicAreaIsSet = true;
 }
 bool DefaultUnrelatedClass::allowedGeographicAreaIsSet() const {
@@ -81,13 +83,13 @@ bool DefaultUnrelatedClass::allowedGeographicAreaIsSet() const {
 void DefaultUnrelatedClass::unsetAllowedGeographicArea() {
   m_AllowedGeographicAreaIsSet = false;
 }
-PrivacyCheckRelatedAction DefaultUnrelatedClass::getPrivacyCheckRelatedAction()
-    const {
+PrivacyCheckRelatedAction
+DefaultUnrelatedClass::getPrivacyCheckRelatedAction() const {
   return m_PrivacyCheckRelatedAction;
 }
 void DefaultUnrelatedClass::setPrivacyCheckRelatedAction(
-    PrivacyCheckRelatedAction const& value) {
-  m_PrivacyCheckRelatedAction      = value;
+    PrivacyCheckRelatedAction const &value) {
+  m_PrivacyCheckRelatedAction = value;
   m_PrivacyCheckRelatedActionIsSet = true;
 }
 bool DefaultUnrelatedClass::privacyCheckRelatedActionIsSet() const {
@@ -99,21 +101,19 @@ void DefaultUnrelatedClass::unsetPrivacyCheckRelatedAction() {
 CodeWordInd DefaultUnrelatedClass::getCodeWordInd() const {
   return m_CodeWordInd;
 }
-void DefaultUnrelatedClass::setCodeWordInd(CodeWordInd const& value) {
-  m_CodeWordInd      = value;
+void DefaultUnrelatedClass::setCodeWordInd(CodeWordInd const &value) {
+  m_CodeWordInd = value;
   m_CodeWordIndIsSet = true;
 }
 bool DefaultUnrelatedClass::codeWordIndIsSet() const {
   return m_CodeWordIndIsSet;
 }
-void DefaultUnrelatedClass::unsetCodeWordInd() {
-  m_CodeWordIndIsSet = false;
-}
+void DefaultUnrelatedClass::unsetCodeWordInd() { m_CodeWordIndIsSet = false; }
 ValidTimePeriod DefaultUnrelatedClass::getValidTimePeriod() const {
   return m_ValidTimePeriod;
 }
-void DefaultUnrelatedClass::setValidTimePeriod(ValidTimePeriod const& value) {
-  m_ValidTimePeriod      = value;
+void DefaultUnrelatedClass::setValidTimePeriod(ValidTimePeriod const &value) {
+  m_ValidTimePeriod = value;
   m_ValidTimePeriodIsSet = true;
 }
 bool DefaultUnrelatedClass::validTimePeriodIsSet() const {
@@ -122,19 +122,17 @@ bool DefaultUnrelatedClass::validTimePeriodIsSet() const {
 void DefaultUnrelatedClass::unsetValidTimePeriod() {
   m_ValidTimePeriodIsSet = false;
 }
-std::vector<std::string>& DefaultUnrelatedClass::getCodeWordList() {
+std::vector<std::string> &DefaultUnrelatedClass::getCodeWordList() {
   return m_CodeWordList;
 }
 void DefaultUnrelatedClass::setCodeWordList(
-    std::vector<std::string> const& value) {
-  m_CodeWordList      = value;
+    std::vector<std::string> const &value) {
+  m_CodeWordList = value;
   m_CodeWordListIsSet = true;
 }
 bool DefaultUnrelatedClass::codeWordListIsSet() const {
   return m_CodeWordListIsSet;
 }
-void DefaultUnrelatedClass::unsetCodeWordList() {
-  m_CodeWordListIsSet = false;
-}
+void DefaultUnrelatedClass::unsetCodeWordList() { m_CodeWordListIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

@@ -19,10 +19,10 @@
 #ifndef IpEndPoint_H_
 #define IpEndPoint_H_
 
-#include "TransportProtocol.h"
-#include <string>
 #include "Ipv6Addr.h"
+#include "TransportProtocol.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::nrf {
 
@@ -30,7 +30,7 @@ namespace oai::model::nrf {
 ///
 /// </summary>
 class IpEndPoint {
- public:
+public:
   IpEndPoint();
   virtual ~IpEndPoint();
 
@@ -43,21 +43,21 @@ class IpEndPoint {
   ///
   /// </summary>
   std::string getIpv4Address() const;
-  void setIpv4Address(std::string const& value);
+  void setIpv4Address(std::string const &value);
   bool ipv4AddressIsSet() const;
   void unsetIpv4Address();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ipv6Addr getIpv6Address() const;
-  void setIpv6Address(oai::model::common::Ipv6Addr const& value);
+  void setIpv6Address(oai::model::common::Ipv6Addr const &value);
   bool ipv6AddressIsSet() const;
   void unsetIpv6Address();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::TransportProtocol getTransport() const;
-  void setTransport(oai::model::common::TransportProtocol const& value);
+  void setTransport(oai::model::common::TransportProtocol const &value);
   bool transportIsSet() const;
   void unsetTransport();
   /// <summary>
@@ -68,10 +68,10 @@ class IpEndPoint {
   bool portIsSet() const;
   void unsetPort();
 
-  friend void to_json(nlohmann::json& j, const IpEndPoint& o);
-  friend void from_json(const nlohmann::json& j, IpEndPoint& o);
+  friend void to_json(nlohmann::json &j, const IpEndPoint &o);
+  friend void from_json(const nlohmann::json &j, IpEndPoint &o);
 
- protected:
+protected:
   std::string m_Ipv4Address;
   bool m_Ipv4AddressIsSet;
   oai::model::common::Ipv6Addr m_Ipv6Address;
@@ -82,6 +82,6 @@ class IpEndPoint {
   bool m_PortIsSet;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* IpEndPoint_H_ */

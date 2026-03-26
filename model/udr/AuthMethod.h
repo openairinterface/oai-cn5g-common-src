@@ -30,7 +30,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class AuthMethod {
- public:
+public:
   AuthMethod();
   virtual ~AuthMethod();
 
@@ -39,12 +39,12 @@ class AuthMethod {
   /////////////////////////////////////////////
   /// AuthMethod members
 
-  friend void to_json(nlohmann::json& j, const AuthMethod& o);
-  friend void from_json(const nlohmann::json& j, AuthMethod& o);
+  friend void to_json(nlohmann::json &j, const AuthMethod &o);
+  friend void from_json(const nlohmann::json &j, AuthMethod &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* AuthMethod_H_ */

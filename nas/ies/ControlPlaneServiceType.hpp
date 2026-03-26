@@ -12,7 +12,7 @@ constexpr auto kControlPlaneServiceTypeIeName = "Control Plane Service Type";
 namespace oai::nas {
 
 class ControlPlaneServiceType : public Type1NasIe {
- public:
+public:
   ControlPlaneServiceType();
   ControlPlaneServiceType(uint8_t value);
   virtual ~ControlPlaneServiceType();
@@ -20,14 +20,14 @@ class ControlPlaneServiceType : public Type1NasIe {
   static std::string GetIeName() { return kControlPlaneServiceTypeIeName; }
 
   void SetValue(uint8_t value);
-  void GetValue(uint8_t& value) const;
+  void GetValue(uint8_t &value) const;
 
- private:
+private:
   void SetValue() override;
   void GetValue() override;
   uint8_t service_type_value_;
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

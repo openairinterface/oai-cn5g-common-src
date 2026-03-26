@@ -19,9 +19,9 @@
 namespace oai::model::lmf {
 
 CancelLocData::CancelLocData() {
-  m_HgmlcCallBackURI       = "";
-  m_LdrReference           = "";
-  m_SupportedFeatures      = "";
+  m_HgmlcCallBackURI = "";
+  m_LdrReference = "";
+  m_SupportedFeatures = "";
   m_SupportedFeaturesIsSet = false;
 }
 
@@ -32,18 +32,18 @@ void CancelLocData::validate() const {
   }
 }
 
-bool CancelLocData::validate(std::stringstream& msg) const {
+bool CancelLocData::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool CancelLocData::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool CancelLocData::validate(std::stringstream &msg,
+                             const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "CancelLocData" : pathPrefix;
 
   /* LdrReference */ {
-    const std::string& value           = m_LdrReference;
+    const std::string &value = m_LdrReference;
     const std::string currentValuePath = _pathPrefix + ".ldrReference";
 
     if (value.length() < 2) {
@@ -57,14 +57,14 @@ bool CancelLocData::validate(
   }
 
   if (supportedFeaturesIsSet()) {
-    const std::string& value           = m_SupportedFeatures;
+    const std::string &value = m_SupportedFeatures;
     const std::string currentValuePath = _pathPrefix + ".supportedFeatures";
   }
 
   return success;
 }
 
-bool CancelLocData::operator==(const CancelLocData& rhs) const {
+bool CancelLocData::operator==(const CancelLocData &rhs) const {
   return
 
       (getHgmlcCallBackURI() == rhs.getHgmlcCallBackURI()) &&
@@ -78,19 +78,19 @@ bool CancelLocData::operator==(const CancelLocData& rhs) const {
           ;
 }
 
-bool CancelLocData::operator!=(const CancelLocData& rhs) const {
+bool CancelLocData::operator!=(const CancelLocData &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const CancelLocData& o) {
-  j                     = nlohmann::json();
+void to_json(nlohmann::json &j, const CancelLocData &o) {
+  j = nlohmann::json();
   j["hgmlcCallBackURI"] = o.m_HgmlcCallBackURI;
-  j["ldrReference"]     = o.m_LdrReference;
+  j["ldrReference"] = o.m_LdrReference;
   if (o.supportedFeaturesIsSet())
     j["supportedFeatures"] = o.m_SupportedFeatures;
 }
 
-void from_json(const nlohmann::json& j, CancelLocData& o) {
+void from_json(const nlohmann::json &j, CancelLocData &o) {
   j.at("hgmlcCallBackURI").get_to(o.m_HgmlcCallBackURI);
   j.at("ldrReference").get_to(o.m_LdrReference);
   if (j.find("supportedFeatures") != j.end()) {
@@ -102,20 +102,18 @@ void from_json(const nlohmann::json& j, CancelLocData& o) {
 std::string CancelLocData::getHgmlcCallBackURI() const {
   return m_HgmlcCallBackURI;
 }
-void CancelLocData::setHgmlcCallBackURI(std::string const& value) {
+void CancelLocData::setHgmlcCallBackURI(std::string const &value) {
   m_HgmlcCallBackURI = value;
 }
-std::string CancelLocData::getLdrReference() const {
-  return m_LdrReference;
-}
-void CancelLocData::setLdrReference(std::string const& value) {
+std::string CancelLocData::getLdrReference() const { return m_LdrReference; }
+void CancelLocData::setLdrReference(std::string const &value) {
   m_LdrReference = value;
 }
 std::string CancelLocData::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
-void CancelLocData::setSupportedFeatures(std::string const& value) {
-  m_SupportedFeatures      = value;
+void CancelLocData::setSupportedFeatures(std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool CancelLocData::supportedFeaturesIsSet() const {
@@ -125,4 +123,4 @@ void CancelLocData::unsetSupportedFeatures() {
   m_SupportedFeaturesIsSet = false;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

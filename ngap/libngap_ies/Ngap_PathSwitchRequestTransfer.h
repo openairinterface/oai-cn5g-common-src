@@ -12,9 +12,9 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_UPTransportLayerInformation.h"
 #include "Ngap_DL-NGU-TNLInformationReused.h"
 #include "Ngap_QosFlowAcceptedList.h"
+#include "Ngap_UPTransportLayerInformation.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -28,12 +28,12 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_PathSwitchRequestTransfer */
 typedef struct Ngap_PathSwitchRequestTransfer {
   Ngap_UPTransportLayerInformation_t dL_NGU_UP_TNLInformation;
-  Ngap_DL_NGU_TNLInformationReused_t*
-      dL_NGU_TNLInformationReused; /* OPTIONAL */
-  struct Ngap_UserPlaneSecurityInformation*
-      userPlaneSecurityInformation; /* OPTIONAL */
+  Ngap_DL_NGU_TNLInformationReused_t
+      *dL_NGU_TNLInformationReused; /* OPTIONAL */
+  struct Ngap_UserPlaneSecurityInformation
+      *userPlaneSecurityInformation; /* OPTIONAL */
   Ngap_QosFlowAcceptedList_t qosFlowAcceptedList;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

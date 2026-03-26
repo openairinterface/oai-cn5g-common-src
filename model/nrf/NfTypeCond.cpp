@@ -24,20 +24,16 @@ void NfTypeCond::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const NfTypeCond& o) {
-  j           = nlohmann::json();
+void to_json(nlohmann::json &j, const NfTypeCond &o) {
+  j = nlohmann::json();
   j["nfType"] = o.m_NfType;
 }
 
-void from_json(const nlohmann::json& j, NfTypeCond& o) {
+void from_json(const nlohmann::json &j, NfTypeCond &o) {
   j.at("nfType").get_to(o.m_NfType);
 }
 
-std::string NfTypeCond::getNfType() const {
-  return m_NfType;
-}
-void NfTypeCond::setNfType(std::string const& value) {
-  m_NfType = value;
-}
+std::string NfTypeCond::getNfType() const { return m_NfType; }
+void NfTypeCond::setNfType(std::string const &value) { m_NfType = value; }
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

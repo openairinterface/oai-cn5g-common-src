@@ -13,7 +13,7 @@ namespace oai::ngap {
 HandoverPreparationUnsuccessfulTransfer::
     HandoverPreparationUnsuccessfulTransfer() {
   m_HandoverPreparationUnsuccessfulTransferIe =
-      (Ngap_HandoverPreparationUnsuccessfulTransfer_t*) calloc(
+      (Ngap_HandoverPreparationUnsuccessfulTransfer_t *)calloc(
           1, sizeof(Ngap_HandoverPreparationUnsuccessfulTransfer_t));
 }
 
@@ -22,7 +22,7 @@ HandoverPreparationUnsuccessfulTransfer::
     ~HandoverPreparationUnsuccessfulTransfer() {}
 
 //------------------------------------------------------------------------------
-void HandoverPreparationUnsuccessfulTransfer::setCause(const Cause& cause) {
+void HandoverPreparationUnsuccessfulTransfer::setCause(const Cause &cause) {
   m_Cause = cause;
   int ret = m_Cause.encode(m_HandoverPreparationUnsuccessfulTransferIe->cause);
   if (!ret) {
@@ -99,7 +99,7 @@ void HandoverPreparationUnsuccessfulTransfer::setCauseMisc(
 }
 
 //------------------------------------------------------------------------------
-int HandoverPreparationUnsuccessfulTransfer::encode(uint8_t* buf, int bufSize) {
+int HandoverPreparationUnsuccessfulTransfer::encode(uint8_t *buf, int bufSize) {
   ngap_utils::print_asn_msg(
       &asn_DEF_Ngap_HandoverPreparationUnsuccessfulTransfer,
       m_HandoverPreparationUnsuccessfulTransferIe);
@@ -111,12 +111,12 @@ int HandoverPreparationUnsuccessfulTransfer::encode(uint8_t* buf, int bufSize) {
 }
 
 //------------------------------------------------------------------------------
-bool HandoverPreparationUnsuccessfulTransfer::decode(
-    uint8_t* buf, int bufSize) {
+bool HandoverPreparationUnsuccessfulTransfer::decode(uint8_t *buf,
+                                                     int bufSize) {
   asn_dec_rval_t rc = asn_decode(
       NULL, ATS_ALIGNED_CANONICAL_PER,
       &asn_DEF_Ngap_HandoverPreparationUnsuccessfulTransfer,
-      (void**) &m_HandoverPreparationUnsuccessfulTransferIe, buf, bufSize);
+      (void **)&m_HandoverPreparationUnsuccessfulTransferIe, buf, bufSize);
 
   if (rc.code == RC_OK) {
     oai::logger::logger_common::ngap().debug("Decoded successfully");
@@ -127,8 +127,8 @@ bool HandoverPreparationUnsuccessfulTransfer::decode(
     oai::logger::logger_common::ngap().debug("Failure to decode data");
     return false;
   }
-  oai::logger::logger_common::ngap().debug(
-      "rc.consumed to decode %d", rc.consumed);
+  oai::logger::logger_common::ngap().debug("rc.consumed to decode %d",
+                                           rc.consumed);
 
   // asn_fprint(stderr,
   // &asn_DEF_Ngap_HandoverPreparationUnsuccessfulTransfer,
@@ -151,4 +151,4 @@ long HandoverPreparationUnsuccessfulTransfer::getChoiceOfCause() const {
 long HandoverPreparationUnsuccessfulTransfer::getCause() const {
   return m_Cause.get();
 }
-}  // namespace oai::ngap
+} // namespace oai::ngap

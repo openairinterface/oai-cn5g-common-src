@@ -8,16 +8,16 @@
 
 #include "Ngap_WarningType.h"
 
-int Ngap_WarningType_constraint(
-    const asn_TYPE_descriptor_t* td, const void* sptr,
-    asn_app_constraint_failed_f* ctfailcb, void* app_key) {
-  const OCTET_STRING_t* st = (const OCTET_STRING_t*) sptr;
+int Ngap_WarningType_constraint(const asn_TYPE_descriptor_t *td,
+                                const void *sptr,
+                                asn_app_constraint_failed_f *ctfailcb,
+                                void *app_key) {
+  const OCTET_STRING_t *st = (const OCTET_STRING_t *)sptr;
   size_t size;
 
   if (!sptr) {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: value not given (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: value not given (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 
@@ -27,9 +27,8 @@ int Ngap_WarningType_constraint(
     /* Constraint check succeeded */
     return 0;
   } else {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: constraint failed (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: constraint failed (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 }

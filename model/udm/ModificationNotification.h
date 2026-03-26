@@ -33,7 +33,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class ModificationNotification {
- public:
+public:
   ModificationNotification();
   virtual ~ModificationNotification();
 
@@ -45,15 +45,15 @@ class ModificationNotification {
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::NotifyItem>& getNotifyItems();
+  std::vector<oai::model::common::NotifyItem> &getNotifyItems();
 
-  friend void to_json(nlohmann::json& j, const ModificationNotification& o);
-  friend void from_json(const nlohmann::json& j, ModificationNotification& o);
+  friend void to_json(nlohmann::json &j, const ModificationNotification &o);
+  friend void from_json(const nlohmann::json &j, ModificationNotification &o);
 
- protected:
+protected:
   std::vector<oai::model::common::NotifyItem> m_NotifyItems;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* ModificationNotification_H_ */

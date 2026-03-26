@@ -26,21 +26,21 @@ void Polygon_allOf::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const Polygon_allOf& o) {
-  j              = nlohmann::json();
+void to_json(nlohmann::json &j, const Polygon_allOf &o) {
+  j = nlohmann::json();
   j["pointList"] = o.m_PointList;
 }
 
-void from_json(const nlohmann::json& j, Polygon_allOf& o) {
+void from_json(const nlohmann::json &j, Polygon_allOf &o) {
   j.at("pointList").get_to(o.m_PointList);
 }
 
-std::vector<GeographicalCoordinates>& Polygon_allOf::getPointList() {
+std::vector<GeographicalCoordinates> &Polygon_allOf::getPointList() {
   return m_PointList;
 }
 void Polygon_allOf::setPointList(
-    std::vector<GeographicalCoordinates> const& value) {
+    std::vector<GeographicalCoordinates> const &value) {
   m_PointList = value;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

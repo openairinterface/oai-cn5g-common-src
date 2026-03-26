@@ -18,32 +18,32 @@ extern "C" {
 namespace oai::ngap {
 
 class InitialContextSetupFailureMsg : public NgapUeMessage {
- public:
+public:
   InitialContextSetupFailureMsg();
   virtual ~InitialContextSetupFailureMsg();
 
   void initialize();
-  void setAmfUeNgapId(const uint64_t& id) override;
-  void setRanUeNgapId(const uint32_t& id) override;
-  bool decode(Ngap_NGAP_PDU_t* ngapMsgPdu) override;
+  void setAmfUeNgapId(const uint64_t &id) override;
+  void setRanUeNgapId(const uint32_t &id) override;
+  bool decode(Ngap_NGAP_PDU_t *ngapMsgPdu) override;
 
   void setPduSessionResourceFailedToSetupList(
-      const std::vector<PDUSessionResourceFailedToSetupItem_t>& list);
+      const std::vector<PDUSessionResourceFailedToSetupItem_t> &list);
   bool getPduSessionResourceFailedToSetupList(
-      std::vector<PDUSessionResourceFailedToSetupItem_t>& list) const;
+      std::vector<PDUSessionResourceFailedToSetupItem_t> &list) const;
 
-  void setCause(const long& cause, const Ngap_Cause_PR& cause_present);
-  void setCause(const Cause& cause);
-  void getCause(Cause& cause) const;
+  void setCause(const long &cause, const Ngap_Cause_PR &cause_present);
+  void setCause(const Cause &cause);
+  void getCause(Cause &cause) const;
 
- private:
-  Ngap_InitialContextSetupFailure_t* m_InitialContextSetupFailureIes;
+private:
+  Ngap_InitialContextSetupFailure_t *m_InitialContextSetupFailureIes;
 
   std::optional<PduSessionResourceFailedToSetupListCxtFail>
-      m_PduSessionResourceFailedToSetupFailureList;  // Optional
-  Cause m_Cause;                                     // Mandatory
+      m_PduSessionResourceFailedToSetupFailureList; // Optional
+  Cause m_Cause;                                    // Mandatory
   // TODO: Criticality Diagnostics //Optional
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

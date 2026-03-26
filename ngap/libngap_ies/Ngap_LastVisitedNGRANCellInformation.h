@@ -12,8 +12,8 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_NGRAN-CGI.h"
 #include "Ngap_CellType.h"
+#include "Ngap_NGRAN-CGI.h"
 #include "Ngap_TimeUEStayedInCell.h"
 #include "Ngap_TimeUEStayedInCellEnhancedGranularity.h"
 #include <constr_SEQUENCE.h>
@@ -31,10 +31,10 @@ typedef struct Ngap_LastVisitedNGRANCellInformation {
   Ngap_NGRAN_CGI_t globalCellID;
   Ngap_CellType_t cellType;
   Ngap_TimeUEStayedInCell_t timeUEStayedInCell;
-  Ngap_TimeUEStayedInCellEnhancedGranularity_t*
-      timeUEStayedInCellEnhancedGranularity;             /* OPTIONAL */
-  struct Ngap_Cause* hOCauseValue;                       /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  Ngap_TimeUEStayedInCellEnhancedGranularity_t
+      *timeUEStayedInCellEnhancedGranularity;            /* OPTIONAL */
+  struct Ngap_Cause *hOCauseValue;                       /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

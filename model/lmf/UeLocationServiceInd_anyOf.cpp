@@ -13,8 +13,8 @@
 
 #include "UeLocationServiceInd_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::lmf {
 
@@ -27,12 +27,12 @@ void UeLocationServiceInd_anyOf::validate() const {
   }
 }
 
-bool UeLocationServiceInd_anyOf::validate(std::stringstream& msg) const {
+bool UeLocationServiceInd_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool UeLocationServiceInd_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool UeLocationServiceInd_anyOf::validate(std::stringstream &msg,
+                                          const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "UeLocationServiceInd_anyOf" : pathPrefix;
@@ -47,36 +47,35 @@ bool UeLocationServiceInd_anyOf::validate(
 }
 
 bool UeLocationServiceInd_anyOf::operator==(
-    const UeLocationServiceInd_anyOf& rhs) const {
+    const UeLocationServiceInd_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool UeLocationServiceInd_anyOf::operator!=(
-    const UeLocationServiceInd_anyOf& rhs) const {
+    const UeLocationServiceInd_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const UeLocationServiceInd_anyOf& o) {
+void to_json(nlohmann::json &j, const UeLocationServiceInd_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case UeLocationServiceInd_anyOf::eUeLocationServiceInd_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case UeLocationServiceInd_anyOf::eUeLocationServiceInd_anyOf::ESTIMATE:
-      j = "LOCATION_ESTIMATE";
-      break;
-    case UeLocationServiceInd_anyOf::eUeLocationServiceInd_anyOf::
-        ASSISTANCE_DATA:
-      j = "LOCATION_ASSISTANCE_DATA";
-      break;
+  case UeLocationServiceInd_anyOf::eUeLocationServiceInd_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case UeLocationServiceInd_anyOf::eUeLocationServiceInd_anyOf::ESTIMATE:
+    j = "LOCATION_ESTIMATE";
+    break;
+  case UeLocationServiceInd_anyOf::eUeLocationServiceInd_anyOf::ASSISTANCE_DATA:
+    j = "LOCATION_ASSISTANCE_DATA";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, UeLocationServiceInd_anyOf& o) {
+void from_json(const nlohmann::json &j, UeLocationServiceInd_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "LOCATION_ESTIMATE") {
     o.setValue(
@@ -102,4 +101,4 @@ void UeLocationServiceInd_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

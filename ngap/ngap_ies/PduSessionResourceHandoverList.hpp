@@ -15,20 +15,20 @@ extern "C" {
 namespace oai::ngap {
 
 class PduSessionResourceHandoverList {
- public:
+public:
   PduSessionResourceHandoverList();
   virtual ~PduSessionResourceHandoverList();
 
-  void set(const std::vector<PduSessionResourceItem>& list);
-  void get(std::vector<PduSessionResourceItem>& list) const;
+  void set(const std::vector<PduSessionResourceItem> &list);
+  void get(std::vector<PduSessionResourceItem> &list) const;
 
-  bool encode(Ngap_PDUSessionResourceHandoverList_t& list) const;
-  bool decode(const Ngap_PDUSessionResourceHandoverList_t& list);
+  bool encode(Ngap_PDUSessionResourceHandoverList_t &list) const;
+  bool decode(const Ngap_PDUSessionResourceHandoverList_t &list);
 
- private:
+private:
   std::vector<PduSessionResourceItem> m_ItemList;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

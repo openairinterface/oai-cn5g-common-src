@@ -11,9 +11,10 @@
 extern "C" {
 #endif
 
-asn_dec_rval_t uper_sot_suck(
-    const asn_codec_ctx_t*, const asn_TYPE_descriptor_t* td,
-    const asn_per_constraints_t* constraints, void** sptr, asn_per_data_t* pd);
+asn_dec_rval_t uper_sot_suck(const asn_codec_ctx_t *,
+                             const asn_TYPE_descriptor_t *td,
+                             const asn_per_constraints_t *constraints,
+                             void **sptr, asn_per_data_t *pd);
 
 #ifdef __cplusplus
 }

@@ -19,9 +19,9 @@
 namespace oai::model::common {
 
 TwapId::TwapId() {
-  m_SsId              = "";
-  m_BssId             = "";
-  m_BssIdIsSet        = false;
+  m_SsId = "";
+  m_BssId = "";
+  m_BssIdIsSet = false;
   m_CivicAddressIsSet = false;
 }
 
@@ -32,12 +32,12 @@ void TwapId::validate() const {
   }
 }
 
-bool TwapId::validate(std::stringstream& msg) const {
+bool TwapId::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool TwapId::validate(
-    std::stringstream& /* msg */, const std::string& /* pathPrefix */) const {
+bool TwapId::validate(std::stringstream & /* msg */,
+                      const std::string & /* pathPrefix */) const {
   bool success = true;
   /*
   const std::string _pathPrefix = pathPrefix.empty() ? "TwapId" : pathPrefix;
@@ -45,7 +45,7 @@ bool TwapId::validate(
   return success;
 }
 
-bool TwapId::operator==(const TwapId& rhs) const {
+bool TwapId::operator==(const TwapId &rhs) const {
   return
 
       (getSsId() == rhs.getSsId()) &&
@@ -60,18 +60,18 @@ bool TwapId::operator==(const TwapId& rhs) const {
           ;
 }
 
-bool TwapId::operator!=(const TwapId& rhs) const {
-  return !(*this == rhs);
-}
+bool TwapId::operator!=(const TwapId &rhs) const { return !(*this == rhs); }
 
-void to_json(nlohmann::json& j, const TwapId& o) {
-  j         = nlohmann::json();
+void to_json(nlohmann::json &j, const TwapId &o) {
+  j = nlohmann::json();
   j["ssId"] = o.m_SsId;
-  if (o.bssIdIsSet()) j["bssId"] = o.m_BssId;
-  if (o.civicAddressIsSet()) j["civicAddress"] = o.m_CivicAddress;
+  if (o.bssIdIsSet())
+    j["bssId"] = o.m_BssId;
+  if (o.civicAddressIsSet())
+    j["civicAddress"] = o.m_CivicAddress;
 }
 
-void from_json(const nlohmann::json& j, TwapId& o) {
+void from_json(const nlohmann::json &j, TwapId &o) {
   j.at("ssId").get_to(o.m_SsId);
   if (j.find("bssId") != j.end()) {
     j.at("bssId").get_to(o.m_BssId);
@@ -83,37 +83,21 @@ void from_json(const nlohmann::json& j, TwapId& o) {
   }
 }
 
-std::string TwapId::getSsId() const {
-  return m_SsId;
-}
-void TwapId::setSsId(std::string const& value) {
-  m_SsId = value;
-}
-std::string TwapId::getBssId() const {
-  return m_BssId;
-}
-void TwapId::setBssId(std::string const& value) {
-  m_BssId      = value;
+std::string TwapId::getSsId() const { return m_SsId; }
+void TwapId::setSsId(std::string const &value) { m_SsId = value; }
+std::string TwapId::getBssId() const { return m_BssId; }
+void TwapId::setBssId(std::string const &value) {
+  m_BssId = value;
   m_BssIdIsSet = true;
 }
-bool TwapId::bssIdIsSet() const {
-  return m_BssIdIsSet;
-}
-void TwapId::unsetBssId() {
-  m_BssIdIsSet = false;
-}
-std::string TwapId::getCivicAddress() const {
-  return m_CivicAddress;
-}
-void TwapId::setCivicAddress(std::string const& value) {
-  m_CivicAddress      = value;
+bool TwapId::bssIdIsSet() const { return m_BssIdIsSet; }
+void TwapId::unsetBssId() { m_BssIdIsSet = false; }
+std::string TwapId::getCivicAddress() const { return m_CivicAddress; }
+void TwapId::setCivicAddress(std::string const &value) {
+  m_CivicAddress = value;
   m_CivicAddressIsSet = true;
 }
-bool TwapId::civicAddressIsSet() const {
-  return m_CivicAddressIsSet;
-}
-void TwapId::unsetCivicAddress() {
-  m_CivicAddressIsSet = false;
-}
+bool TwapId::civicAddressIsSet() const { return m_CivicAddressIsSet; }
+void TwapId::unsetCivicAddress() { m_CivicAddressIsSet = false; }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

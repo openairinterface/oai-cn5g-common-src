@@ -154,7 +154,7 @@ asn_CHOICE_specifics_t asn_SPC_Ngap_EventTrigger_specs_1 = {
     sizeof(struct Ngap_EventTrigger),
     offsetof(struct Ngap_EventTrigger, _asn_ctx),
     offsetof(struct Ngap_EventTrigger, present),
-    sizeof(((struct Ngap_EventTrigger*) 0)->present),
+    sizeof(((struct Ngap_EventTrigger *)0)->present),
     asn_MAP_Ngap_EventTrigger_tag2el_1,
     3, /* Count of tags in the map */
     0,

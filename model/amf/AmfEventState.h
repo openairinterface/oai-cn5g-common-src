@@ -27,7 +27,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class AmfEventState {
- public:
+public:
   AmfEventState();
   virtual ~AmfEventState() = default;
 
@@ -41,10 +41,10 @@ class AmfEventState {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const AmfEventState& rhs) const;
-  bool operator!=(const AmfEventState& rhs) const;
+  bool operator==(const AmfEventState &rhs) const;
+  bool operator!=(const AmfEventState &rhs) const;
 
   /////////////////////////////////////////////
   /// AmfEventState members
@@ -69,10 +69,10 @@ class AmfEventState {
   bool remainDurationIsSet() const;
   void unsetRemainDuration();
 
-  friend void to_json(nlohmann::json& j, const AmfEventState& o);
-  friend void from_json(const nlohmann::json& j, AmfEventState& o);
+  friend void to_json(nlohmann::json &j, const AmfEventState &o);
+  friend void from_json(const nlohmann::json &j, AmfEventState &o);
 
- protected:
+protected:
   bool m_Active;
 
   int32_t m_RemainReports;
@@ -82,9 +82,9 @@ class AmfEventState {
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* AmfEventState_H_ */

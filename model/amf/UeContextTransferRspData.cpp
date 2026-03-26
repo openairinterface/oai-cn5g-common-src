@@ -16,10 +16,10 @@
 namespace oai::model::amf {
 
 UeContextTransferRspData::UeContextTransferRspData() {
-  m_UeRadioCapabilityIsSet      = false;
+  m_UeRadioCapabilityIsSet = false;
   m_UeNbiotRadioCapabilityIsSet = false;
-  m_SupportedFeatures           = "";
-  m_SupportedFeaturesIsSet      = false;
+  m_SupportedFeatures = "";
+  m_SupportedFeaturesIsSet = false;
 }
 
 UeContextTransferRspData::~UeContextTransferRspData() {}
@@ -28,8 +28,8 @@ void UeContextTransferRspData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const UeContextTransferRspData& o) {
-  j              = nlohmann::json();
+void to_json(nlohmann::json &j, const UeContextTransferRspData &o) {
+  j = nlohmann::json();
   j["ueContext"] = o.m_UeContext;
   if (o.ueRadioCapabilityIsSet())
     j["ueRadioCapability"] = o.m_UeRadioCapability;
@@ -39,7 +39,7 @@ void to_json(nlohmann::json& j, const UeContextTransferRspData& o) {
     j["supportedFeatures"] = o.m_SupportedFeatures;
 }
 
-void from_json(const nlohmann::json& j, UeContextTransferRspData& o) {
+void from_json(const nlohmann::json &j, UeContextTransferRspData &o) {
   j.at("ueContext").get_to(o.m_UeContext);
   if (j.find("ueRadioCapability") != j.end()) {
     j.at("ueRadioCapability").get_to(o.m_UeRadioCapability);
@@ -55,18 +55,16 @@ void from_json(const nlohmann::json& j, UeContextTransferRspData& o) {
   }
 }
 
-UeContext UeContextTransferRspData::getUeContext() const {
-  return m_UeContext;
-}
-void UeContextTransferRspData::setUeContext(UeContext const& value) {
+UeContext UeContextTransferRspData::getUeContext() const { return m_UeContext; }
+void UeContextTransferRspData::setUeContext(UeContext const &value) {
   m_UeContext = value;
 }
 N2InfoContent UeContextTransferRspData::getUeRadioCapability() const {
   return m_UeRadioCapability;
 }
 void UeContextTransferRspData::setUeRadioCapability(
-    N2InfoContent const& value) {
-  m_UeRadioCapability      = value;
+    N2InfoContent const &value) {
+  m_UeRadioCapability = value;
   m_UeRadioCapabilityIsSet = true;
 }
 bool UeContextTransferRspData::ueRadioCapabilityIsSet() const {
@@ -79,8 +77,8 @@ N2InfoContent UeContextTransferRspData::getUeNbiotRadioCapability() const {
   return m_UeNbiotRadioCapability;
 }
 void UeContextTransferRspData::setUeNbiotRadioCapability(
-    N2InfoContent const& value) {
-  m_UeNbiotRadioCapability      = value;
+    N2InfoContent const &value) {
+  m_UeNbiotRadioCapability = value;
   m_UeNbiotRadioCapabilityIsSet = true;
 }
 bool UeContextTransferRspData::ueNbiotRadioCapabilityIsSet() const {
@@ -92,8 +90,8 @@ void UeContextTransferRspData::unsetUeNbiotRadioCapability() {
 std::string UeContextTransferRspData::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
-void UeContextTransferRspData::setSupportedFeatures(std::string const& value) {
-  m_SupportedFeatures      = value;
+void UeContextTransferRspData::setSupportedFeatures(std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool UeContextTransferRspData::supportedFeaturesIsSet() const {
@@ -103,4 +101,4 @@ void UeContextTransferRspData::unsetSupportedFeatures() {
   m_SupportedFeaturesIsSet = false;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

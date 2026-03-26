@@ -27,7 +27,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class UeContextTransferStatus {
- public:
+public:
   UeContextTransferStatus();
   virtual ~UeContextTransferStatus();
 
@@ -36,12 +36,12 @@ class UeContextTransferStatus {
   /////////////////////////////////////////////
   /// UeContextTransferStatus members
 
-  friend void to_json(nlohmann::json& j, const UeContextTransferStatus& o);
-  friend void from_json(const nlohmann::json& j, UeContextTransferStatus& o);
+  friend void to_json(nlohmann::json &j, const UeContextTransferStatus &o);
+  friend void from_json(const nlohmann::json &j, UeContextTransferStatus &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* UeContextTransferStatus_H_ */

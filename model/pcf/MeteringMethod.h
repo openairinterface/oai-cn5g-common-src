@@ -24,8 +24,8 @@
 #ifndef MeteringMethod_H_
 #define MeteringMethod_H_
 
-#include "NullValue.h"
 #include "MeteringMethod_anyOf.h"
+#include "NullValue.h"
 #include <nlohmann/json.hpp>
 
 namespace oai::model::pcf {
@@ -39,7 +39,7 @@ namespace oai::model::pcf {
 /// shall be metered.
 /// </summary>
 class MeteringMethod {
- public:
+public:
   MeteringMethod();
   virtual ~MeteringMethod() = default;
 
@@ -53,16 +53,16 @@ class MeteringMethod {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const MeteringMethod& rhs) const;
-  bool operator!=(const MeteringMethod& rhs) const;
+  bool operator==(const MeteringMethod &rhs) const;
+  bool operator!=(const MeteringMethod &rhs) const;
 
   /////////////////////////////////////////////
   /// MeteringMethod members
@@ -72,13 +72,13 @@ class MeteringMethod {
   MeteringMethod_anyOf::eMeteringMethod_anyOf getEnumValue() const;
   void setEnumValue(MeteringMethod_anyOf::eMeteringMethod_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const MeteringMethod& o);
-  friend void from_json(const nlohmann::json& j, MeteringMethod& o);
+  friend void to_json(nlohmann::json &j, const MeteringMethod &o);
+  friend void from_json(const nlohmann::json &j, MeteringMethod &o);
 
- protected:
+protected:
   MeteringMethod_anyOf m_value;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* MeteringMethod_H_ */

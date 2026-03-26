@@ -14,23 +14,23 @@ extern "C" {
 namespace oai::ngap {
 
 class QosFlowPerTnlInformationItem {
- public:
+public:
   QosFlowPerTnlInformationItem();
   virtual ~QosFlowPerTnlInformationItem();
 
-  void set(const QosFlowPerTnlInformation& qosFlowPerTnlInformation);
-  void get(QosFlowPerTnlInformation& qosFlowPerTnlInformation) const;
+  void set(const QosFlowPerTnlInformation &qosFlowPerTnlInformation);
+  void get(QosFlowPerTnlInformation &qosFlowPerTnlInformation) const;
 
   bool encode(
-      Ngap_QosFlowPerTNLInformationItem_t& qosFlowPerTnlInformationItem) const;
+      Ngap_QosFlowPerTNLInformationItem_t &qosFlowPerTnlInformationItem) const;
   bool decode(
-      const Ngap_QosFlowPerTNLInformationItem_t& qosFlowPerTnlInformationItem);
+      const Ngap_QosFlowPerTNLInformationItem_t &qosFlowPerTnlInformationItem);
 
- private:
-  QosFlowPerTnlInformation m_QosFlowPerTnlInformation;  // Mandatory
+private:
+  QosFlowPerTnlInformation m_QosFlowPerTnlInformation; // Mandatory
   // TODO: Ngap_ProtocolExtensionContainer
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

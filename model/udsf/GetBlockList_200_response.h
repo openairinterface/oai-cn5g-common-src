@@ -21,7 +21,6 @@
 
 #include <nlohmann/json.hpp>
 #include <vector>
-#include <nlohmann/json.hpp>
 
 namespace oai::model::udsf {
 
@@ -29,7 +28,7 @@ namespace oai::model::udsf {
 ///
 /// </summary>
 class GetBlockList_200_response {
- public:
+public:
   GetBlockList_200_response();
   virtual ~GetBlockList_200_response() = default;
 
@@ -43,16 +42,16 @@ class GetBlockList_200_response {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const GetBlockList_200_response& rhs) const;
-  bool operator!=(const GetBlockList_200_response& rhs) const;
+  bool operator==(const GetBlockList_200_response &rhs) const;
+  bool operator!=(const GetBlockList_200_response &rhs) const;
 
   /////////////////////////////////////////////
   /// GetBlockList_200_response members
@@ -61,18 +60,18 @@ class GetBlockList_200_response {
   /// an array of Block parts, can be empty
   /// </summary>
   std::vector<nlohmann::json> getBlocks() const;
-  void setBlocks(std::vector<nlohmann::json> const& value);
+  void setBlocks(std::vector<nlohmann::json> const &value);
   bool blocksIsSet() const;
   void unsetBlocks();
 
-  friend void to_json(nlohmann::json& j, const GetBlockList_200_response& o);
-  friend void from_json(const nlohmann::json& j, GetBlockList_200_response& o);
+  friend void to_json(nlohmann::json &j, const GetBlockList_200_response &o);
+  friend void from_json(const nlohmann::json &j, GetBlockList_200_response &o);
 
- protected:
+protected:
   std::vector<nlohmann::json> m_Blocks;
   bool m_BlocksIsSet;
 };
 
-}  // namespace oai::model::udsf
+} // namespace oai::model::udsf
 
 #endif /* GetBlockList_200_response_H_ */

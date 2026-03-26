@@ -33,7 +33,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class TraceDataResponse {
- public:
+public:
   TraceDataResponse();
   virtual ~TraceDataResponse();
 
@@ -46,27 +46,27 @@ class TraceDataResponse {
   ///
   /// </summary>
   oai::model::common::TraceData getTraceData() const;
-  void setTraceData(oai::model::common::TraceData const& value);
+  void setTraceData(oai::model::common::TraceData const &value);
   bool traceDataIsSet() const;
   void unsetTraceData();
   /// <summary>
   ///
   /// </summary>
   std::string getSharedTraceDataId() const;
-  void setSharedTraceDataId(std::string const& value);
+  void setSharedTraceDataId(std::string const &value);
   bool sharedTraceDataIdIsSet() const;
   void unsetSharedTraceDataId();
 
-  friend void to_json(nlohmann::json& j, const TraceDataResponse& o);
-  friend void from_json(const nlohmann::json& j, TraceDataResponse& o);
+  friend void to_json(nlohmann::json &j, const TraceDataResponse &o);
+  friend void from_json(const nlohmann::json &j, TraceDataResponse &o);
 
- protected:
+protected:
   oai::model::common::TraceData m_TraceData;
   bool m_TraceDataIsSet;
   std::string m_SharedTraceDataId;
   bool m_SharedTraceDataIdIsSet;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* TraceDataResponse_H_ */

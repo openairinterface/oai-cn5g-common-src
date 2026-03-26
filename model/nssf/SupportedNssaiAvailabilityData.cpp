@@ -21,7 +21,7 @@ namespace nssf_server {
 namespace model {
 
 SupportedNssaiAvailabilityData::SupportedNssaiAvailabilityData() {
-  m_TaiListIsSet      = false;
+  m_TaiListIsSet = false;
   m_TaiRangeListIsSet = false;
 }
 
@@ -33,18 +33,18 @@ void SupportedNssaiAvailabilityData::validate() const {
   // }
 }
 
-bool SupportedNssaiAvailabilityData::validate(std::stringstream& msg) const {
+bool SupportedNssaiAvailabilityData::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool SupportedNssaiAvailabilityData::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "SupportedNssaiAvailabilityData" : pathPrefix;
 
   /* SupportedSnssaiList */ {
-    const std::vector<oai::model::common::ExtSnssai>& value =
+    const std::vector<oai::model::common::ExtSnssai> &value =
         m_SupportedSnssaiList;
     const std::string currentValuePath = _pathPrefix + ".supportedSnssaiList";
 
@@ -52,10 +52,10 @@ bool SupportedNssaiAvailabilityData::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::ExtSnssai& value : value) {
+      int i = 0;
+      for (const oai::model::common::ExtSnssai &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -69,17 +69,17 @@ bool SupportedNssaiAvailabilityData::validate(
   }
 
   if (taiListIsSet()) {
-    const std::vector<oai::model::common::Tai>& value = m_TaiList;
+    const std::vector<oai::model::common::Tai> &value = m_TaiList;
     const std::string currentValuePath = _pathPrefix + ".taiList";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::Tai& value : value) {
+      int i = 0;
+      for (const oai::model::common::Tai &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -91,17 +91,17 @@ bool SupportedNssaiAvailabilityData::validate(
   }
 
   if (taiRangeListIsSet()) {
-    const std::vector<oai::model::nrf::TaiRange>& value = m_TaiRangeList;
+    const std::vector<oai::model::nrf::TaiRange> &value = m_TaiRangeList;
     const std::string currentValuePath = _pathPrefix + ".taiRangeList";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::nrf::TaiRange& value : value) {
+      int i = 0;
+      for (const oai::model::nrf::TaiRange &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -117,7 +117,7 @@ bool SupportedNssaiAvailabilityData::validate(
 }
 
 bool SupportedNssaiAvailabilityData::operator==(
-    const SupportedNssaiAvailabilityData& rhs) const {
+    const SupportedNssaiAvailabilityData &rhs) const {
   return
 
       (getTai() == rhs.getTai()) &&
@@ -136,20 +136,21 @@ bool SupportedNssaiAvailabilityData::operator==(
 }
 
 bool SupportedNssaiAvailabilityData::operator!=(
-    const SupportedNssaiAvailabilityData& rhs) const {
+    const SupportedNssaiAvailabilityData &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const SupportedNssaiAvailabilityData& o) {
-  j                        = nlohmann::json();
-  j["tai"]                 = o.m_Tai;
+void to_json(nlohmann::json &j, const SupportedNssaiAvailabilityData &o) {
+  j = nlohmann::json();
+  j["tai"] = o.m_Tai;
   j["supportedSnssaiList"] = o.m_SupportedSnssaiList;
-  if (o.taiListIsSet() || !o.m_TaiList.empty()) j["taiList"] = o.m_TaiList;
+  if (o.taiListIsSet() || !o.m_TaiList.empty())
+    j["taiList"] = o.m_TaiList;
   if (o.taiRangeListIsSet() || !o.m_TaiRangeList.empty())
     j["taiRangeList"] = o.m_TaiRangeList;
 }
 
-void from_json(const nlohmann::json& j, SupportedNssaiAvailabilityData& o) {
+void from_json(const nlohmann::json &j, SupportedNssaiAvailabilityData &o) {
   j.at("tai").get_to(o.m_Tai);
   j.at("supportedSnssaiList").get_to(o.m_SupportedSnssaiList);
   if (j.find("taiList") != j.end()) {
@@ -166,7 +167,7 @@ oai::model::common::Tai SupportedNssaiAvailabilityData::getTai() const {
   return m_Tai;
 }
 void SupportedNssaiAvailabilityData::setTai(
-    oai::model::common::Tai const& value) {
+    oai::model::common::Tai const &value) {
   m_Tai = value;
 }
 std::vector<oai::model::common::ExtSnssai>
@@ -174,7 +175,7 @@ SupportedNssaiAvailabilityData::getSupportedSnssaiList() const {
   return m_SupportedSnssaiList;
 }
 void SupportedNssaiAvailabilityData::setSupportedSnssaiList(
-    std::vector<oai::model::common::ExtSnssai> const& value) {
+    std::vector<oai::model::common::ExtSnssai> const &value) {
   m_SupportedSnssaiList = value;
 }
 std::vector<oai::model::common::Tai>
@@ -182,23 +183,21 @@ SupportedNssaiAvailabilityData::getTaiList() const {
   return m_TaiList;
 }
 void SupportedNssaiAvailabilityData::setTaiList(
-    std::vector<oai::model::common::Tai> const& value) {
-  m_TaiList      = value;
+    std::vector<oai::model::common::Tai> const &value) {
+  m_TaiList = value;
   m_TaiListIsSet = true;
 }
 bool SupportedNssaiAvailabilityData::taiListIsSet() const {
   return m_TaiListIsSet;
 }
-void SupportedNssaiAvailabilityData::unsetTaiList() {
-  m_TaiListIsSet = false;
-}
+void SupportedNssaiAvailabilityData::unsetTaiList() { m_TaiListIsSet = false; }
 std::vector<oai::model::nrf::TaiRange>
 SupportedNssaiAvailabilityData::getTaiRangeList() const {
   return m_TaiRangeList;
 }
 void SupportedNssaiAvailabilityData::setTaiRangeList(
-    std::vector<oai::model::nrf::TaiRange> const& value) {
-  m_TaiRangeList      = value;
+    std::vector<oai::model::nrf::TaiRange> const &value) {
+  m_TaiRangeList = value;
   m_TaiRangeListIsSet = true;
 }
 bool SupportedNssaiAvailabilityData::taiRangeListIsSet() const {
@@ -208,6 +207,6 @@ void SupportedNssaiAvailabilityData::unsetTaiRangeList() {
   m_TaiRangeListIsSet = false;
 }
 
-}  // namespace model
-}  // namespace nssf_server
-}  // namespace oai
+} // namespace model
+} // namespace nssf_server
+} // namespace oai

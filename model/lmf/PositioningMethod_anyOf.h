@@ -27,7 +27,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class PositioningMethod_anyOf {
- public:
+public:
   PositioningMethod_anyOf();
   virtual ~PositioningMethod_anyOf() = default;
 
@@ -63,16 +63,16 @@ class PositioningMethod_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const PositioningMethod_anyOf& rhs) const;
-  bool operator!=(const PositioningMethod_anyOf& rhs) const;
+  bool operator==(const PositioningMethod_anyOf &rhs) const;
+  bool operator!=(const PositioningMethod_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// PositioningMethod_anyOf members
@@ -80,15 +80,15 @@ class PositioningMethod_anyOf {
   PositioningMethod_anyOf::ePositioningMethod_anyOf getValue() const;
   void setValue(PositioningMethod_anyOf::ePositioningMethod_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const PositioningMethod_anyOf& o);
-  friend void from_json(const nlohmann::json& j, PositioningMethod_anyOf& o);
+  friend void to_json(nlohmann::json &j, const PositioningMethod_anyOf &o);
+  friend void from_json(const nlohmann::json &j, PositioningMethod_anyOf &o);
 
- protected:
+protected:
   PositioningMethod_anyOf::ePositioningMethod_anyOf m_value =
       PositioningMethod_anyOf::ePositioningMethod_anyOf::
           INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* PositioningMethod_anyOf_H_ */

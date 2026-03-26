@@ -23,10 +23,10 @@ void N1MessageClass::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const N1MessageClass& o) {
+void to_json(nlohmann::json &j, const N1MessageClass &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, N1MessageClass& o) {}
+void from_json(const nlohmann::json &j, N1MessageClass &o) {}
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

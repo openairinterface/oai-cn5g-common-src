@@ -23,10 +23,10 @@ void NotificationMethod::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const NotificationMethod& o) {
+void to_json(nlohmann::json &j, const NotificationMethod &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, NotificationMethod& o) {}
+void from_json(const nlohmann::json &j, NotificationMethod &o) {}
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

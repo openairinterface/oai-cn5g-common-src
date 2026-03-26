@@ -31,7 +31,7 @@ namespace model {
 ///
 /// </summary>
 class SliceInfoForPDUSession {
- public:
+public:
   SliceInfoForPDUSession();
   virtual ~SliceInfoForPDUSession() = default;
 
@@ -45,16 +45,16 @@ class SliceInfoForPDUSession {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const SliceInfoForPDUSession& rhs) const;
-  bool operator!=(const SliceInfoForPDUSession& rhs) const;
+  bool operator==(const SliceInfoForPDUSession &rhs) const;
+  bool operator!=(const SliceInfoForPDUSession &rhs) const;
 
   /////////////////////////////////////////////
   /// SliceInfoForPDUSession members
@@ -63,24 +63,24 @@ class SliceInfoForPDUSession {
   ///
   /// </summary>
   oai::model::common::Snssai getSNssai() const;
-  void setSNssai(oai::model::common::Snssai const& value);
+  void setSNssai(oai::model::common::Snssai const &value);
   /// <summary>
   ///
   /// </summary>
   RoamingIndication getRoamingIndication() const;
-  void setRoamingIndication(RoamingIndication const& value);
+  void setRoamingIndication(RoamingIndication const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Snssai getHomeSnssai() const;
-  void setHomeSnssai(oai::model::common::Snssai const& value);
+  void setHomeSnssai(oai::model::common::Snssai const &value);
   bool homeSnssaiIsSet() const;
   void unsetHomeSnssai();
 
-  friend void to_json(nlohmann::json& j, const SliceInfoForPDUSession& o);
-  friend void from_json(const nlohmann::json& j, SliceInfoForPDUSession& o);
+  friend void to_json(nlohmann::json &j, const SliceInfoForPDUSession &o);
+  friend void from_json(const nlohmann::json &j, SliceInfoForPDUSession &o);
 
- protected:
+protected:
   oai::model::common::Snssai m_SNssai;
 
   RoamingIndication m_RoamingIndication;
@@ -89,8 +89,8 @@ class SliceInfoForPDUSession {
   bool m_HomeSnssaiIsSet;
 };
 
-}  // namespace model
-}  // namespace nssf_server
-}  // namespace oai
+} // namespace model
+} // namespace nssf_server
+} // namespace oai
 
 #endif /* SliceInfoForPDUSession_H_ */

@@ -33,26 +33,26 @@ namespace oai::model::smf {
 /// Monitoring
 /// </summary>
 class SmfEvent {
- public:
+public:
   SmfEvent();
   virtual ~SmfEvent();
 
   void validate();
 
   void set_value(std::string value);
-  void get_value(std::string& value) const;
+  void get_value(std::string &value) const;
   std::string get_value() const;
   /////////////////////////////////////////////
   /// SmfEvent members
 
-  friend void to_json(nlohmann::json& j, const SmfEvent& o);
-  friend void from_json(const nlohmann::json& j, SmfEvent& o);
+  friend void to_json(nlohmann::json &j, const SmfEvent &o);
+  friend void from_json(const nlohmann::json &j, SmfEvent &o);
 
- protected:
- private:
+protected:
+private:
   std::string value;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* SmfEvent_H_ */

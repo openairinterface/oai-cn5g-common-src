@@ -16,30 +16,30 @@ extern "C" {
 
 namespace oai::ngap {
 class HandoverCommandTransfer {
- public:
+public:
   HandoverCommandTransfer();
   virtual ~HandoverCommandTransfer();
 
-  void setDlForwardingUpTnlInformation(const GtpTunnel& upTransportLayerInfo);
+  void setDlForwardingUpTnlInformation(const GtpTunnel &upTransportLayerInfo);
   void setDlForwardingUpTnlInformation(
-      const UpTransportLayerInformation& dlForwardingUpTnlInformation);
+      const UpTransportLayerInformation &dlForwardingUpTnlInformation);
   void getDlForwardingUpTnlInformation(
-      std::optional<UpTransportLayerInformation>& dlForwardingUpTnlInformation)
+      std::optional<UpTransportLayerInformation> &dlForwardingUpTnlInformation)
       const;
 
   void setQosFlowToBeForwardedList(
-      const std::vector<QosFlowToBeForwardedItem_t>& list);
-  void setQosFlowToBeForwardedList(
-      const std::vector<QosFlowToBeForwardedItem> list);
-  void setQosFlowToBeForwardedList(const QosFlowToBeForwardedList& list);
+      const std::vector<QosFlowToBeForwardedItem_t> &list);
+  void
+  setQosFlowToBeForwardedList(const std::vector<QosFlowToBeForwardedItem> list);
+  void setQosFlowToBeForwardedList(const QosFlowToBeForwardedList &list);
   void getQosFlowToBeForwardedList(
-      std::optional<QosFlowToBeForwardedList>& list) const;
+      std::optional<QosFlowToBeForwardedList> &list) const;
 
-  int encode(uint8_t* buf, int bufSize) const;
-  bool decode(uint8_t* buf, int bufSize);
+  int encode(uint8_t *buf, int bufSize) const;
+  bool decode(uint8_t *buf, int bufSize);
 
- private:
-  Ngap_HandoverCommandTransfer_t* m_Ie;
+private:
+  Ngap_HandoverCommandTransfer_t *m_Ie;
 
   // DL Forwarding UP TNL Information(Optional)
   std::optional<UpTransportLayerInformation> m_DlForwardingUpTnlInformation;
@@ -53,5 +53,5 @@ class HandoverCommandTransfer {
   // TODO: QoS Flow Failed to Setup List (Optional)
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

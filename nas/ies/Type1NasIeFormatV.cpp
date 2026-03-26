@@ -21,7 +21,7 @@ Type1NasIeFormatV::Type1NasIeFormatV(bool high_pos) : NasIe(), value_(0) {
 //------------------------------------------------------------------------------
 Type1NasIeFormatV::Type1NasIeFormatV(bool high_pos, uint8_t value) : NasIe() {
   high_pos_ = high_pos;
-  value_    = value & 0x0f;
+  value_ = value & 0x0f;
 }
 
 //------------------------------------------------------------------------------
@@ -47,44 +47,46 @@ uint32_t Type1NasIeFormatV::GetIeLength() const {
 //------------------------------------------------------------------------------
 void Type1NasIeFormatV::Set(bool high_pos, uint8_t value) {
   high_pos_ = high_pos;
-  value_    = value & 0x0f;  // 4 bits
+  value_ = value & 0x0f; // 4 bits
 }
 
 //------------------------------------------------------------------------------
 void Type1NasIeFormatV::Set(uint8_t value) {
-  value_ = value & 0x0f;  // 4 bits
+  value_ = value & 0x0f; // 4 bits
 }
 
 //------------------------------------------------------------------------------
-int Type1NasIeFormatV::Encode(uint8_t* buf, int len) const {
-  if (!Validate(len)) return KEncodeDecodeError;
+int Type1NasIeFormatV::Encode(uint8_t *buf, int len) const {
+  if (!Validate(len))
+    return KEncodeDecodeError;
 
   int encoded_size = 0;
   int decoded_size = 0;
-  uint8_t octet    = 0;
+  uint8_t octet = 0;
 
   // First get value of this octet
   DECODE_U8(buf + encoded_size, octet, decoded_size);
   if (high_pos_) {
-    octet = (octet & 0x0f) | (value_ << 4);  // Keep 4 less significant bits and
-                                             // update 4 most significant bits
+    octet = (octet & 0x0f) | (value_ << 4); // Keep 4 less significant bits and
+                                            // update 4 most significant bits
   } else {
-    octet = (octet & 0xf0) | (value_);  // Keep 4 most significant bits and
-                                        // update 4 less significant bits
+    octet = (octet & 0xf0) | (value_); // Keep 4 most significant bits and
+                                       // update 4 less significant bits
   }
 
   ENCODE_U8(buf + encoded_size, octet, encoded_size);
 
-  return 0;  // 1/2 octet
+  return 0; // 1/2 octet
 }
 
 //------------------------------------------------------------------------------
-int Type1NasIeFormatV::Decode(
-    const uint8_t* const buf, int len, bool high_pos) {
-  if (!Validate(len)) return KEncodeDecodeError;
-  high_pos_        = high_pos;
+int Type1NasIeFormatV::Decode(const uint8_t *const buf, int len,
+                              bool high_pos) {
+  if (!Validate(len))
+    return KEncodeDecodeError;
+  high_pos_ = high_pos;
   int decoded_size = 0;
-  uint8_t octet    = 0;
+  uint8_t octet = 0;
   DECODE_U8(buf + decoded_size, octet, decoded_size);
 
   if (high_pos_) {
@@ -92,5 +94,5 @@ int Type1NasIeFormatV::Decode(
   } else {
     value_ = (octet & 0x0f);
   }
-  return 0;  // 1/2 octet
+  return 0; // 1/2 octet
 }

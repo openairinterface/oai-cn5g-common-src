@@ -27,12 +27,12 @@ void PatchOperation::validate() const {
   }
 }
 
-bool PatchOperation::validate(std::stringstream& msg) const {
+bool PatchOperation::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool PatchOperation::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool PatchOperation::validate(std::stringstream &msg,
+                              const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PatchOperation" : pathPrefix;
@@ -43,35 +43,31 @@ bool PatchOperation::validate(
   return success;
 }
 
-bool PatchOperation::operator==(const PatchOperation& rhs) const {
+bool PatchOperation::operator==(const PatchOperation &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool PatchOperation::operator!=(const PatchOperation& rhs) const {
+bool PatchOperation::operator!=(const PatchOperation &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PatchOperation& o) {
+void to_json(nlohmann::json &j, const PatchOperation &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, PatchOperation& o) {
+void from_json(const nlohmann::json &j, PatchOperation &o) {
   from_json(j, o.m_value);
 }
 
-PatchOperation_anyOf PatchOperation::getValue() const {
-  return m_value;
-}
+PatchOperation_anyOf PatchOperation::getValue() const { return m_value; }
 
-void PatchOperation::setValue(PatchOperation_anyOf value) {
-  m_value = value;
-}
+void PatchOperation::setValue(PatchOperation_anyOf value) { m_value = value; }
 
-PatchOperation_anyOf::ePatchOperation_anyOf PatchOperation::getEnumValue()
-    const {
+PatchOperation_anyOf::ePatchOperation_anyOf
+PatchOperation::getEnumValue() const {
   return m_value.getValue();
 }
 
@@ -84,4 +80,4 @@ void PatchOperation::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

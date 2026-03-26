@@ -19,7 +19,7 @@
 namespace oai::udr::model {
 
 UeContextInSmsfData::UeContextInSmsfData() {
-  m_SmsfInfo3GppAccessIsSet    = false;
+  m_SmsfInfo3GppAccessIsSet = false;
   m_SmsfInfoNon3GppAccessIsSet = false;
 }
 
@@ -29,7 +29,7 @@ void UeContextInSmsfData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const UeContextInSmsfData& o) {
+void to_json(nlohmann::json &j, const UeContextInSmsfData &o) {
   j = nlohmann::json();
   if (o.smsfInfo3GppAccessIsSet())
     j["smsfInfo3GppAccess"] = o.m_SmsfInfo3GppAccess;
@@ -37,7 +37,7 @@ void to_json(nlohmann::json& j, const UeContextInSmsfData& o) {
     j["smsfInfoNon3GppAccess"] = o.m_SmsfInfoNon3GppAccess;
 }
 
-void from_json(const nlohmann::json& j, UeContextInSmsfData& o) {
+void from_json(const nlohmann::json &j, UeContextInSmsfData &o) {
   if (j.find("smsfInfo3GppAccess") != j.end()) {
     j.at("smsfInfo3GppAccess").get_to(o.m_SmsfInfo3GppAccess);
     o.m_SmsfInfo3GppAccessIsSet = true;
@@ -51,8 +51,8 @@ void from_json(const nlohmann::json& j, UeContextInSmsfData& o) {
 SmsfInfo UeContextInSmsfData::getSmsfInfo3GppAccess() const {
   return m_SmsfInfo3GppAccess;
 }
-void UeContextInSmsfData::setSmsfInfo3GppAccess(SmsfInfo const& value) {
-  m_SmsfInfo3GppAccess      = value;
+void UeContextInSmsfData::setSmsfInfo3GppAccess(SmsfInfo const &value) {
+  m_SmsfInfo3GppAccess = value;
   m_SmsfInfo3GppAccessIsSet = true;
 }
 bool UeContextInSmsfData::smsfInfo3GppAccessIsSet() const {
@@ -64,8 +64,8 @@ void UeContextInSmsfData::unsetSmsfInfo3GppAccess() {
 SmsfInfo UeContextInSmsfData::getSmsfInfoNon3GppAccess() const {
   return m_SmsfInfoNon3GppAccess;
 }
-void UeContextInSmsfData::setSmsfInfoNon3GppAccess(SmsfInfo const& value) {
-  m_SmsfInfoNon3GppAccess      = value;
+void UeContextInSmsfData::setSmsfInfoNon3GppAccess(SmsfInfo const &value) {
+  m_SmsfInfoNon3GppAccess = value;
   m_SmsfInfoNon3GppAccessIsSet = true;
 }
 bool UeContextInSmsfData::smsfInfoNon3GppAccessIsSet() const {
@@ -75,4 +75,4 @@ void UeContextInSmsfData::unsetSmsfInfoNon3GppAccess() {
   m_SmsfInfoNon3GppAccessIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

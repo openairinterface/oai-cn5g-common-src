@@ -8,13 +8,13 @@
 
 #include "Ngap_SgNB-UE-X2AP-ID.h"
 
-int Ngap_SgNB_UE_X2AP_ID_constraint(
-    const asn_TYPE_descriptor_t* td, const void* sptr,
-    asn_app_constraint_failed_f* ctfailcb, void* app_key) {
+int Ngap_SgNB_UE_X2AP_ID_constraint(const asn_TYPE_descriptor_t *td,
+                                    const void *sptr,
+                                    asn_app_constraint_failed_f *ctfailcb,
+                                    void *app_key) {
   if (!sptr) {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: value not given (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: value not given (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 

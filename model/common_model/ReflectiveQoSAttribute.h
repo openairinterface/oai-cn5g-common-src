@@ -28,7 +28,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class ReflectiveQoSAttribute {
- public:
+public:
   ReflectiveQoSAttribute();
   virtual ~ReflectiveQoSAttribute() = default;
 
@@ -42,36 +42,36 @@ class ReflectiveQoSAttribute {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const ReflectiveQoSAttribute& rhs) const;
-  bool operator!=(const ReflectiveQoSAttribute& rhs) const;
+  bool operator==(const ReflectiveQoSAttribute &rhs) const;
+  bool operator!=(const ReflectiveQoSAttribute &rhs) const;
 
   /////////////////////////////////////////////
   /// ReflectiveQoSAttribute members
 
   ReflectiveQoSAttribute_anyOf getValue() const;
   void setValue(ReflectiveQoSAttribute_anyOf value);
-  ReflectiveQoSAttribute_anyOf::eReflectiveQoSAttribute_anyOf getEnumValue()
-      const;
+  ReflectiveQoSAttribute_anyOf::eReflectiveQoSAttribute_anyOf
+  getEnumValue() const;
   void setEnumValue(
       ReflectiveQoSAttribute_anyOf::eReflectiveQoSAttribute_anyOf value);
-  friend void to_json(nlohmann::json& j, const ReflectiveQoSAttribute& o);
-  friend void from_json(const nlohmann::json& j, ReflectiveQoSAttribute& o);
-  friend void to_json(nlohmann::json& j, const ReflectiveQoSAttribute_anyOf& o);
-  friend void from_json(
-      const nlohmann::json& j, ReflectiveQoSAttribute_anyOf& o);
+  friend void to_json(nlohmann::json &j, const ReflectiveQoSAttribute &o);
+  friend void from_json(const nlohmann::json &j, ReflectiveQoSAttribute &o);
+  friend void to_json(nlohmann::json &j, const ReflectiveQoSAttribute_anyOf &o);
+  friend void from_json(const nlohmann::json &j,
+                        ReflectiveQoSAttribute_anyOf &o);
 
- protected:
+protected:
   ReflectiveQoSAttribute_anyOf m_value;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* ReflectiveQoSAttribute_H_ */

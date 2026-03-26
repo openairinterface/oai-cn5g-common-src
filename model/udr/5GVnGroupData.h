@@ -37,7 +37,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class _5GVnGroupData {
- public:
+public:
   _5GVnGroupData();
   virtual ~_5GVnGroupData();
 
@@ -50,25 +50,25 @@ class _5GVnGroupData {
   ///
   /// </summary>
   std::string getDnn() const;
-  void setDnn(std::string const& value);
+  void setDnn(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Snssai getSNssai() const;
-  void setSNssai(oai::model::common::Snssai const& value);
+  void setSNssai(oai::model::common::Snssai const &value);
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::PduSessionType>& getPduSessionTypes();
+  std::vector<oai::model::common::PduSessionType> &getPduSessionTypes();
   void setPduSessionTypes(
-      std::vector<oai::model::common::PduSessionType> const& value);
+      std::vector<oai::model::common::PduSessionType> const &value);
   bool pduSessionTypesIsSet() const;
   void unsetPduSessionTypes();
   /// <summary>
   ///
   /// </summary>
-  std::vector<AppDescriptor>& getAppDescriptors();
-  void setAppDescriptors(std::vector<AppDescriptor> const& value);
+  std::vector<AppDescriptor> &getAppDescriptors();
+  void setAppDescriptors(std::vector<AppDescriptor> const &value);
   bool appDescriptorsIsSet() const;
   void unsetAppDescriptors();
   /// <summary>
@@ -82,14 +82,14 @@ class _5GVnGroupData {
   ///
   /// </summary>
   IpAddress getDnAaaAddress() const;
-  void setDnAaaAddress(IpAddress const& value);
+  void setDnAaaAddress(IpAddress const &value);
   bool dnAaaAddressIsSet() const;
   void unsetDnAaaAddress();
 
-  friend void to_json(nlohmann::json& j, const _5GVnGroupData& o);
-  friend void from_json(const nlohmann::json& j, _5GVnGroupData& o);
+  friend void to_json(nlohmann::json &j, const _5GVnGroupData &o);
+  friend void from_json(const nlohmann::json &j, _5GVnGroupData &o);
 
- protected:
+protected:
   std::string m_Dnn;
 
   oai::model::common::Snssai m_SNssai;
@@ -104,6 +104,6 @@ class _5GVnGroupData {
   bool m_DnAaaAddressIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* 5GVnGroupData_H_ */

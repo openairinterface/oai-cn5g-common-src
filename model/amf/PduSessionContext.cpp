@@ -16,17 +16,17 @@
 namespace oai::model::amf {
 
 PduSessionContext::PduSessionContext() {
-  m_PduSessionId              = 0;
-  m_SmContextRef              = "";
-  m_Dnn                       = "";
-  m_AllocatedEbiListIsSet     = false;
-  m_HsmfId                    = "";
-  m_HsmfIdIsSet               = false;
-  m_VsmfId                    = "";
-  m_VsmfIdIsSet               = false;
-  m_NsInstance                = "";
-  m_NsInstanceIsSet           = false;
-  m_SmfServiceInstanceId      = "";
+  m_PduSessionId = 0;
+  m_SmContextRef = "";
+  m_Dnn = "";
+  m_AllocatedEbiListIsSet = false;
+  m_HsmfId = "";
+  m_HsmfIdIsSet = false;
+  m_VsmfId = "";
+  m_VsmfIdIsSet = false;
+  m_NsInstance = "";
+  m_NsInstanceIsSet = false;
+  m_SmfServiceInstanceId = "";
   m_SmfServiceInstanceIdIsSet = false;
 }
 
@@ -36,22 +36,26 @@ void PduSessionContext::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const PduSessionContext& o) {
-  j                 = nlohmann::json();
+void to_json(nlohmann::json &j, const PduSessionContext &o) {
+  j = nlohmann::json();
   j["pduSessionId"] = o.m_PduSessionId;
   j["smContextRef"] = o.m_SmContextRef;
-  j["sNssai"]       = o.m_SNssai;
-  j["dnn"]          = o.m_Dnn;
-  j["accessType"]   = o.m_AccessType;
-  if (o.allocatedEbiListIsSet()) j["allocatedEbiList"] = o.m_AllocatedEbiList;
-  if (o.hsmfIdIsSet()) j["hsmfId"] = o.m_HsmfId;
-  if (o.vsmfIdIsSet()) j["vsmfId"] = o.m_VsmfId;
-  if (o.nsInstanceIsSet()) j["nsInstance"] = o.m_NsInstance;
+  j["sNssai"] = o.m_SNssai;
+  j["dnn"] = o.m_Dnn;
+  j["accessType"] = o.m_AccessType;
+  if (o.allocatedEbiListIsSet())
+    j["allocatedEbiList"] = o.m_AllocatedEbiList;
+  if (o.hsmfIdIsSet())
+    j["hsmfId"] = o.m_HsmfId;
+  if (o.vsmfIdIsSet())
+    j["vsmfId"] = o.m_VsmfId;
+  if (o.nsInstanceIsSet())
+    j["nsInstance"] = o.m_NsInstance;
   if (o.smfServiceInstanceIdIsSet())
     j["smfServiceInstanceId"] = o.m_SmfServiceInstanceId;
 }
 
-void from_json(const nlohmann::json& j, PduSessionContext& o) {
+void from_json(const nlohmann::json &j, PduSessionContext &o) {
   j.at("pduSessionId").get_to(o.m_PduSessionId);
   j.at("smContextRef").get_to(o.m_SmContextRef);
   j.at("sNssai").get_to(o.m_SNssai);
@@ -79,38 +83,32 @@ void from_json(const nlohmann::json& j, PduSessionContext& o) {
   }
 }
 
-int32_t PduSessionContext::getPduSessionId() const {
-  return m_PduSessionId;
-}
+int32_t PduSessionContext::getPduSessionId() const { return m_PduSessionId; }
 void PduSessionContext::setPduSessionId(int32_t const value) {
   m_PduSessionId = value;
 }
 std::string PduSessionContext::getSmContextRef() const {
   return m_SmContextRef;
 }
-void PduSessionContext::setSmContextRef(std::string const& value) {
+void PduSessionContext::setSmContextRef(std::string const &value) {
   m_SmContextRef = value;
 }
 oai::model::common::Snssai PduSessionContext::getSNssai() const {
   return m_SNssai;
 }
-void PduSessionContext::setSNssai(oai::model::common::Snssai const& value) {
+void PduSessionContext::setSNssai(oai::model::common::Snssai const &value) {
   m_SNssai = value;
 }
-std::string PduSessionContext::getDnn() const {
-  return m_Dnn;
-}
-void PduSessionContext::setDnn(std::string const& value) {
-  m_Dnn = value;
-}
+std::string PduSessionContext::getDnn() const { return m_Dnn; }
+void PduSessionContext::setDnn(std::string const &value) { m_Dnn = value; }
 oai::model::common::AccessType PduSessionContext::getAccessType() const {
   return m_AccessType;
 }
 void PduSessionContext::setAccessType(
-    oai::model::common::AccessType const& value) {
+    oai::model::common::AccessType const &value) {
   m_AccessType = value;
 }
-std::vector<EbiArpMapping_2>& PduSessionContext::getAllocatedEbiList() {
+std::vector<EbiArpMapping_2> &PduSessionContext::getAllocatedEbiList() {
   return m_AllocatedEbiList;
 }
 bool PduSessionContext::allocatedEbiListIsSet() const {
@@ -119,50 +117,32 @@ bool PduSessionContext::allocatedEbiListIsSet() const {
 void PduSessionContext::unsetAllocatedEbiList() {
   m_AllocatedEbiListIsSet = false;
 }
-std::string PduSessionContext::getHsmfId() const {
-  return m_HsmfId;
-}
-void PduSessionContext::setHsmfId(std::string const& value) {
-  m_HsmfId      = value;
+std::string PduSessionContext::getHsmfId() const { return m_HsmfId; }
+void PduSessionContext::setHsmfId(std::string const &value) {
+  m_HsmfId = value;
   m_HsmfIdIsSet = true;
 }
-bool PduSessionContext::hsmfIdIsSet() const {
-  return m_HsmfIdIsSet;
-}
-void PduSessionContext::unsetHsmfId() {
-  m_HsmfIdIsSet = false;
-}
-std::string PduSessionContext::getVsmfId() const {
-  return m_VsmfId;
-}
-void PduSessionContext::setVsmfId(std::string const& value) {
-  m_VsmfId      = value;
+bool PduSessionContext::hsmfIdIsSet() const { return m_HsmfIdIsSet; }
+void PduSessionContext::unsetHsmfId() { m_HsmfIdIsSet = false; }
+std::string PduSessionContext::getVsmfId() const { return m_VsmfId; }
+void PduSessionContext::setVsmfId(std::string const &value) {
+  m_VsmfId = value;
   m_VsmfIdIsSet = true;
 }
-bool PduSessionContext::vsmfIdIsSet() const {
-  return m_VsmfIdIsSet;
-}
-void PduSessionContext::unsetVsmfId() {
-  m_VsmfIdIsSet = false;
-}
-std::string PduSessionContext::getNsInstance() const {
-  return m_NsInstance;
-}
-void PduSessionContext::setNsInstance(std::string const& value) {
-  m_NsInstance      = value;
+bool PduSessionContext::vsmfIdIsSet() const { return m_VsmfIdIsSet; }
+void PduSessionContext::unsetVsmfId() { m_VsmfIdIsSet = false; }
+std::string PduSessionContext::getNsInstance() const { return m_NsInstance; }
+void PduSessionContext::setNsInstance(std::string const &value) {
+  m_NsInstance = value;
   m_NsInstanceIsSet = true;
 }
-bool PduSessionContext::nsInstanceIsSet() const {
-  return m_NsInstanceIsSet;
-}
-void PduSessionContext::unsetNsInstance() {
-  m_NsInstanceIsSet = false;
-}
+bool PduSessionContext::nsInstanceIsSet() const { return m_NsInstanceIsSet; }
+void PduSessionContext::unsetNsInstance() { m_NsInstanceIsSet = false; }
 std::string PduSessionContext::getSmfServiceInstanceId() const {
   return m_SmfServiceInstanceId;
 }
-void PduSessionContext::setSmfServiceInstanceId(std::string const& value) {
-  m_SmfServiceInstanceId      = value;
+void PduSessionContext::setSmfServiceInstanceId(std::string const &value) {
+  m_SmfServiceInstanceId = value;
   m_SmfServiceInstanceIdIsSet = true;
 }
 bool PduSessionContext::smfServiceInstanceIdIsSet() const {
@@ -172,4 +152,4 @@ void PduSessionContext::unsetSmfServiceInstanceId() {
   m_SmfServiceInstanceIdIsSet = false;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

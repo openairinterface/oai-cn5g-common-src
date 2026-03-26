@@ -13,7 +13,7 @@ namespace oai::ngap {
 PduSessionResourceModifyUnSuccessfulTransfer::
     PduSessionResourceModifyUnSuccessfulTransfer() {
   m_PduSessionResourceModifyUnsuccessfulTransferIe =
-      (Ngap_PDUSessionResourceModifyUnsuccessfulTransfer_t*) calloc(
+      (Ngap_PDUSessionResourceModifyUnsuccessfulTransfer_t *)calloc(
           1, sizeof(Ngap_PDUSessionResourceModifyUnsuccessfulTransfer_t));
 }
 
@@ -93,8 +93,8 @@ void PduSessionResourceModifyUnSuccessfulTransfer::setCauseMisc(
 }
 
 //------------------------------------------------------------------------------
-int PduSessionResourceModifyUnSuccessfulTransfer::encode(
-    uint8_t* buf, int bufSize) {
+int PduSessionResourceModifyUnSuccessfulTransfer::encode(uint8_t *buf,
+                                                         int bufSize) {
   ngap_utils::print_asn_msg(
       &asn_DEF_Ngap_PDUSessionResourceModifyUnsuccessfulTransfer,
       m_PduSessionResourceModifyUnsuccessfulTransferIe);
@@ -107,12 +107,12 @@ int PduSessionResourceModifyUnSuccessfulTransfer::encode(
 
 //------------------------------------------------------------------------------
 // Decapsulation
-bool PduSessionResourceModifyUnSuccessfulTransfer::decode(
-    uint8_t* buf, int bufSize) {
+bool PduSessionResourceModifyUnSuccessfulTransfer::decode(uint8_t *buf,
+                                                          int bufSize) {
   asn_dec_rval_t rc = asn_decode(
       NULL, ATS_ALIGNED_CANONICAL_PER,
       &asn_DEF_Ngap_PDUSessionResourceModifyUnsuccessfulTransfer,
-      (void**) &m_PduSessionResourceModifyUnsuccessfulTransferIe, buf, bufSize);
+      (void **)&m_PduSessionResourceModifyUnsuccessfulTransferIe, buf, bufSize);
 
   if (rc.code == RC_OK) {
     oai::logger::logger_common::ngap().debug("Decoded successfully");
@@ -123,8 +123,8 @@ bool PduSessionResourceModifyUnSuccessfulTransfer::decode(
     oai::logger::logger_common::ngap().debug("Failure to decode data");
     return false;
   }
-  oai::logger::logger_common::ngap().debug(
-      "rc.consumed to decode %d", rc.consumed);
+  oai::logger::logger_common::ngap().debug("rc.consumed to decode %d",
+                                           rc.consumed);
 
   // asn_fprint(stderr,
   // &asn_DEF_Ngap_PDUSessionResourceModifyUnsuccessfulTransfer,
@@ -148,4 +148,4 @@ long PduSessionResourceModifyUnSuccessfulTransfer::getChoiceOfCause() const {
 long PduSessionResourceModifyUnSuccessfulTransfer::getCause() const {
   return m_Cause.get();
 }
-}  // namespace oai::ngap
+} // namespace oai::ngap

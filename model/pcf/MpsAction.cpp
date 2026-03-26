@@ -27,30 +27,30 @@ void MpsAction::validate() const {
   }
 }
 
-bool MpsAction::validate(std::stringstream& msg) const {
+bool MpsAction::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool MpsAction::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool MpsAction::validate(std::stringstream &msg,
+                         const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "MpsAction" : pathPrefix;
 
   return success;
 }
 
-bool MpsAction::operator==(const MpsAction& rhs) const {
-  return true;  // TODO
+bool MpsAction::operator==(const MpsAction &rhs) const {
+  return true; // TODO
 }
 
-bool MpsAction::operator!=(const MpsAction& rhs) const {
+bool MpsAction::operator!=(const MpsAction &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const MpsAction& o) {
+void to_json(nlohmann::json &j, const MpsAction &o) {
   j = nlohmann::json::object();
 }
 
-void from_json(const nlohmann::json& j, MpsAction& o) {}
+void from_json(const nlohmann::json &j, MpsAction &o) {}
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

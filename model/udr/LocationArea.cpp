@@ -20,8 +20,8 @@ namespace oai::udr::model {
 
 LocationArea::LocationArea() {
   m_GeographicAreasIsSet = false;
-  m_CivicAddressesIsSet  = false;
-  m_NwAreaInfoIsSet      = false;
+  m_CivicAddressesIsSet = false;
+  m_NwAreaInfoIsSet = false;
 }
 
 LocationArea::~LocationArea() {}
@@ -30,16 +30,17 @@ void LocationArea::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const LocationArea& o) {
+void to_json(nlohmann::json &j, const LocationArea &o) {
   j = nlohmann::json();
   if (o.geographicAreasIsSet() || !o.m_GeographicAreas.empty())
     j["geographicAreas"] = o.m_GeographicAreas;
   if (o.civicAddressesIsSet() || !o.m_CivicAddresses.empty())
     j["civicAddresses"] = o.m_CivicAddresses;
-  if (o.nwAreaInfoIsSet()) j["nwAreaInfo"] = o.m_NwAreaInfo;
+  if (o.nwAreaInfoIsSet())
+    j["nwAreaInfo"] = o.m_NwAreaInfo;
 }
 
-void from_json(const nlohmann::json& j, LocationArea& o) {
+void from_json(const nlohmann::json &j, LocationArea &o) {
   if (j.find("geographicAreas") != j.end()) {
     j.at("geographicAreas").get_to(o.m_GeographicAreas);
     o.m_GeographicAreasIsSet = true;
@@ -54,45 +55,33 @@ void from_json(const nlohmann::json& j, LocationArea& o) {
   }
 }
 
-std::vector<GeographicArea>& LocationArea::getGeographicAreas() {
+std::vector<GeographicArea> &LocationArea::getGeographicAreas() {
   return m_GeographicAreas;
 }
 void LocationArea::setGeographicAreas(
-    std::vector<GeographicArea> const& value) {
-  m_GeographicAreas      = value;
+    std::vector<GeographicArea> const &value) {
+  m_GeographicAreas = value;
   m_GeographicAreasIsSet = true;
 }
 bool LocationArea::geographicAreasIsSet() const {
   return m_GeographicAreasIsSet;
 }
-void LocationArea::unsetGeographicAreas() {
-  m_GeographicAreasIsSet = false;
-}
-std::vector<CivicAddress>& LocationArea::getCivicAddresses() {
+void LocationArea::unsetGeographicAreas() { m_GeographicAreasIsSet = false; }
+std::vector<CivicAddress> &LocationArea::getCivicAddresses() {
   return m_CivicAddresses;
 }
-void LocationArea::setCivicAddresses(std::vector<CivicAddress> const& value) {
-  m_CivicAddresses      = value;
+void LocationArea::setCivicAddresses(std::vector<CivicAddress> const &value) {
+  m_CivicAddresses = value;
   m_CivicAddressesIsSet = true;
 }
-bool LocationArea::civicAddressesIsSet() const {
-  return m_CivicAddressesIsSet;
-}
-void LocationArea::unsetCivicAddresses() {
-  m_CivicAddressesIsSet = false;
-}
-NetworkAreaInfo LocationArea::getNwAreaInfo() const {
-  return m_NwAreaInfo;
-}
-void LocationArea::setNwAreaInfo(NetworkAreaInfo const& value) {
-  m_NwAreaInfo      = value;
+bool LocationArea::civicAddressesIsSet() const { return m_CivicAddressesIsSet; }
+void LocationArea::unsetCivicAddresses() { m_CivicAddressesIsSet = false; }
+NetworkAreaInfo LocationArea::getNwAreaInfo() const { return m_NwAreaInfo; }
+void LocationArea::setNwAreaInfo(NetworkAreaInfo const &value) {
+  m_NwAreaInfo = value;
   m_NwAreaInfoIsSet = true;
 }
-bool LocationArea::nwAreaInfoIsSet() const {
-  return m_NwAreaInfoIsSet;
-}
-void LocationArea::unsetNwAreaInfo() {
-  m_NwAreaInfoIsSet = false;
-}
+bool LocationArea::nwAreaInfoIsSet() const { return m_NwAreaInfoIsSet; }
+void LocationArea::unsetNwAreaInfo() { m_NwAreaInfoIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

@@ -13,10 +13,10 @@ namespace oai::ngap {
 
 //------------------------------------------------------------------------------
 HandoverCommandTransfer::HandoverCommandTransfer() {
-  m_Ie = (Ngap_HandoverCommandTransfer_t*) calloc(
+  m_Ie = (Ngap_HandoverCommandTransfer_t *)calloc(
       1, sizeof(Ngap_HandoverCommandTransfer_t));
   m_DlForwardingUpTnlInformation = std::nullopt;
-  m_QosFlowToBeForwardedList     = std::nullopt;
+  m_QosFlowToBeForwardedList = std::nullopt;
 }
 
 //------------------------------------------------------------------------------
@@ -24,14 +24,14 @@ HandoverCommandTransfer::~HandoverCommandTransfer() {}
 
 //------------------------------------------------------------------------------
 void HandoverCommandTransfer::setDlForwardingUpTnlInformation(
-    const GtpTunnel& upTransportLayerInfo) {
+    const GtpTunnel &upTransportLayerInfo) {
   UpTransportLayerInformation tmp = {};
   tmp.set(upTransportLayerInfo);
   m_DlForwardingUpTnlInformation =
       std::make_optional<UpTransportLayerInformation>(tmp);
 
   m_Ie->dLForwardingUP_TNLInformation =
-      (Ngap_UPTransportLayerInformation*) calloc(
+      (Ngap_UPTransportLayerInformation *)calloc(
           1, sizeof(Ngap_UPTransportLayerInformation));
   int ret = m_DlForwardingUpTnlInformation.value().encode(
       *m_Ie->dLForwardingUP_TNLInformation);
@@ -44,27 +44,27 @@ void HandoverCommandTransfer::setDlForwardingUpTnlInformation(
 
 //------------------------------------------------------------------------------
 void HandoverCommandTransfer::setDlForwardingUpTnlInformation(
-    const UpTransportLayerInformation& dlForwardingUpTnlInformation) {
+    const UpTransportLayerInformation &dlForwardingUpTnlInformation) {
   m_DlForwardingUpTnlInformation =
       std::make_optional<UpTransportLayerInformation>(
           dlForwardingUpTnlInformation);
 }
 //------------------------------------------------------------------------------
 void HandoverCommandTransfer::getDlForwardingUpTnlInformation(
-    std::optional<UpTransportLayerInformation>& dlForwardingUpTnlInformation)
+    std::optional<UpTransportLayerInformation> &dlForwardingUpTnlInformation)
     const {
   dlForwardingUpTnlInformation = m_DlForwardingUpTnlInformation;
 }
 
 //------------------------------------------------------------------------------
 void HandoverCommandTransfer::setQosFlowToBeForwardedList(
-    const std::vector<QosFlowToBeForwardedItem_t>& list) {
+    const std::vector<QosFlowToBeForwardedItem_t> &list) {
   QosFlowToBeForwardedList qosList = {};
 
   std::vector<QosFlowToBeForwardedItem> item_list;
 
   for (int i = 0; i < list.size(); i++) {
-    QosFlowIdentifier qfi             = {};
+    QosFlowIdentifier qfi = {};
     QosFlowToBeForwardedItem qos_item = {};
     qfi.set(list[i].qfi);
 
@@ -106,19 +106,19 @@ void HandoverCommandTransfer::setQosFlowToBeForwardedList(
 
 //------------------------------------------------------------------------------
 void HandoverCommandTransfer::setQosFlowToBeForwardedList(
-    const QosFlowToBeForwardedList& list) {
+    const QosFlowToBeForwardedList &list) {
   m_QosFlowToBeForwardedList =
       std::make_optional<QosFlowToBeForwardedList>(list);
 }
 
 //------------------------------------------------------------------------------
 void HandoverCommandTransfer::getQosFlowToBeForwardedList(
-    std::optional<QosFlowToBeForwardedList>& list) const {
+    std::optional<QosFlowToBeForwardedList> &list) const {
   list = m_QosFlowToBeForwardedList;
 }
 
 //------------------------------------------------------------------------------
-int HandoverCommandTransfer::encode(uint8_t* buf, int bufSize) const {
+int HandoverCommandTransfer::encode(uint8_t *buf, int bufSize) const {
   ngap_utils::print_asn_msg(&asn_DEF_Ngap_HandoverCommandTransfer, m_Ie);
   asn_enc_rval_t er = aper_encode_to_buffer(
       &asn_DEF_Ngap_HandoverCommandTransfer, NULL, m_Ie, buf, bufSize);
@@ -127,10 +127,10 @@ int HandoverCommandTransfer::encode(uint8_t* buf, int bufSize) const {
 }
 
 //------------------------------------------------------------------------------
-bool HandoverCommandTransfer::decode(uint8_t* buf, int bufSize) {
-  asn_dec_rval_t rc = asn_decode(
-      NULL, ATS_ALIGNED_CANONICAL_PER, &asn_DEF_Ngap_HandoverCommandTransfer,
-      (void**) &m_Ie, buf, bufSize);
+bool HandoverCommandTransfer::decode(uint8_t *buf, int bufSize) {
+  asn_dec_rval_t rc = asn_decode(NULL, ATS_ALIGNED_CANONICAL_PER,
+                                 &asn_DEF_Ngap_HandoverCommandTransfer,
+                                 (void **)&m_Ie, buf, bufSize);
   if (rc.code == RC_OK) {
     oai::logger::logger_common::ngap().debug("Decoded successfully");
   } else if (rc.code == RC_WMORE) {
@@ -173,4 +173,4 @@ bool HandoverCommandTransfer::decode(uint8_t* buf, int bufSize) {
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

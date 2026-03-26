@@ -13,8 +13,8 @@
 
 #include "QosFlowUsage_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::pcf {
 
@@ -27,12 +27,12 @@ void QosFlowUsage_anyOf::validate() const {
   }
 }
 
-bool QosFlowUsage_anyOf::validate(std::stringstream& msg) const {
+bool QosFlowUsage_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool QosFlowUsage_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool QosFlowUsage_anyOf::validate(std::stringstream &msg,
+                                  const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "QosFlowUsage_anyOf" : pathPrefix;
@@ -46,34 +46,33 @@ bool QosFlowUsage_anyOf::validate(
   return success;
 }
 
-bool QosFlowUsage_anyOf::operator==(const QosFlowUsage_anyOf& rhs) const {
+bool QosFlowUsage_anyOf::operator==(const QosFlowUsage_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool QosFlowUsage_anyOf::operator!=(const QosFlowUsage_anyOf& rhs) const {
+bool QosFlowUsage_anyOf::operator!=(const QosFlowUsage_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const QosFlowUsage_anyOf& o) {
+void to_json(nlohmann::json &j, const QosFlowUsage_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case QosFlowUsage_anyOf::eQosFlowUsage_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case QosFlowUsage_anyOf::eQosFlowUsage_anyOf::GENERAL:
-      j = "GENERAL";
-      break;
-    case QosFlowUsage_anyOf::eQosFlowUsage_anyOf::IMS_SIG:
-      j = "IMS_SIG";
-      break;
+  case QosFlowUsage_anyOf::eQosFlowUsage_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case QosFlowUsage_anyOf::eQosFlowUsage_anyOf::GENERAL:
+    j = "GENERAL";
+    break;
+  case QosFlowUsage_anyOf::eQosFlowUsage_anyOf::IMS_SIG:
+    j = "IMS_SIG";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, QosFlowUsage_anyOf& o) {
+void from_json(const nlohmann::json &j, QosFlowUsage_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "GENERAL") {
     o.setValue(QosFlowUsage_anyOf::eQosFlowUsage_anyOf::GENERAL);
@@ -96,4 +95,4 @@ void QosFlowUsage_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

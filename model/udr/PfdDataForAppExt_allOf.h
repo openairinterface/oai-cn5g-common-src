@@ -31,7 +31,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class PfdDataForAppExt_allOf {
- public:
+public:
   PfdDataForAppExt_allOf();
   virtual ~PfdDataForAppExt_allOf();
 
@@ -44,18 +44,18 @@ class PfdDataForAppExt_allOf {
   ///
   /// </summary>
   std::string getSuppFeat() const;
-  void setSuppFeat(std::string const& value);
+  void setSuppFeat(std::string const &value);
   bool suppFeatIsSet() const;
   void unsetSuppFeat();
 
-  friend void to_json(nlohmann::json& j, const PfdDataForAppExt_allOf& o);
-  friend void from_json(const nlohmann::json& j, PfdDataForAppExt_allOf& o);
+  friend void to_json(nlohmann::json &j, const PfdDataForAppExt_allOf &o);
+  friend void from_json(const nlohmann::json &j, PfdDataForAppExt_allOf &o);
 
- protected:
+protected:
   std::string m_SuppFeat;
   bool m_SuppFeatIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* PfdDataForAppExt_allOf_H_ */

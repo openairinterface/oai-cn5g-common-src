@@ -27,7 +27,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class N2InfoNotifyReason {
- public:
+public:
   N2InfoNotifyReason();
   virtual ~N2InfoNotifyReason();
 
@@ -36,12 +36,12 @@ class N2InfoNotifyReason {
   /////////////////////////////////////////////
   /// N2InfoNotifyReason members
 
-  friend void to_json(nlohmann::json& j, const N2InfoNotifyReason& o);
-  friend void from_json(const nlohmann::json& j, N2InfoNotifyReason& o);
+  friend void to_json(nlohmann::json &j, const N2InfoNotifyReason &o);
+  friend void from_json(const nlohmann::json &j, N2InfoNotifyReason &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* N2InfoNotifyReason_H_ */

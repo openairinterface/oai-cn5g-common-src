@@ -12,20 +12,20 @@ extern "C" {
 namespace oai::ngap {
 
 class DataForwardingNotPossible {
- public:
+public:
   DataForwardingNotPossible();
   virtual ~DataForwardingNotPossible();
 
-  void set(const long& value);
-  void get(long& value) const;
+  void set(const long &value);
+  void get(long &value) const;
 
-  bool encode(Ngap_DataForwardingNotPossible_t& value) const;
-  bool decode(const Ngap_DataForwardingNotPossible_t& value);
+  bool encode(Ngap_DataForwardingNotPossible_t &value) const;
+  bool decode(const Ngap_DataForwardingNotPossible_t &value);
 
- private:
+private:
   long m_DataForwardingNotPossible;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

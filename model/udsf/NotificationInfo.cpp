@@ -27,18 +27,18 @@ void NotificationInfo::validate() const {
   }
 }
 
-bool NotificationInfo::validate(std::stringstream& msg) const {
+bool NotificationInfo::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool NotificationInfo::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool NotificationInfo::validate(std::stringstream &msg,
+                                const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "NotificationInfo" : pathPrefix;
 
   /* ExpiredSubscriptions */ {
-    const std::vector<oai::model::udsf::NotificationSubscription>& value =
+    const std::vector<oai::model::udsf::NotificationSubscription> &value =
         m_ExpiredSubscriptions;
     const std::string currentValuePath = _pathPrefix + ".expiredSubscriptions";
 
@@ -46,10 +46,10 @@ bool NotificationInfo::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::udsf::NotificationSubscription& value : value) {
+      int i = 0;
+      for (const oai::model::udsf::NotificationSubscription &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -65,7 +65,7 @@ bool NotificationInfo::validate(
   return success;
 }
 
-bool NotificationInfo::operator==(const NotificationInfo& rhs) const {
+bool NotificationInfo::operator==(const NotificationInfo &rhs) const {
   return
 
       (getExpiredSubscriptions() == rhs.getExpiredSubscriptions())
@@ -73,16 +73,16 @@ bool NotificationInfo::operator==(const NotificationInfo& rhs) const {
           ;
 }
 
-bool NotificationInfo::operator!=(const NotificationInfo& rhs) const {
+bool NotificationInfo::operator!=(const NotificationInfo &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const NotificationInfo& o) {
-  j                         = nlohmann::json();
+void to_json(nlohmann::json &j, const NotificationInfo &o) {
+  j = nlohmann::json();
   j["expiredSubscriptions"] = o.m_ExpiredSubscriptions;
 }
 
-void from_json(const nlohmann::json& j, NotificationInfo& o) {
+void from_json(const nlohmann::json &j, NotificationInfo &o) {
   j.at("expiredSubscriptions").get_to(o.m_ExpiredSubscriptions);
 }
 
@@ -91,8 +91,8 @@ NotificationInfo::getExpiredSubscriptions() const {
   return m_ExpiredSubscriptions;
 }
 void NotificationInfo::setExpiredSubscriptions(
-    std::vector<oai::model::udsf::NotificationSubscription> const& value) {
+    std::vector<oai::model::udsf::NotificationSubscription> const &value) {
   m_ExpiredSubscriptions = value;
 }
 
-}  // namespace oai::model::udsf
+} // namespace oai::model::udsf

@@ -28,8 +28,8 @@ asn_per_constraints_t asn_PER_type_Ngap_SONInformationReport_constr_1
 asn_TYPE_member_t asn_MBR_Ngap_SONInformationReport_1[] = {
     {ATF_POINTER,
      0,
-     offsetof(
-         struct Ngap_SONInformationReport, choice.failureIndicationInformation),
+     offsetof(struct Ngap_SONInformationReport,
+              choice.failureIndicationInformation),
      (ASN_TAG_CLASS_CONTEXT | (0 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_FailureIndication,
@@ -96,7 +96,7 @@ asn_CHOICE_specifics_t asn_SPC_Ngap_SONInformationReport_specs_1 = {
     sizeof(struct Ngap_SONInformationReport),
     offsetof(struct Ngap_SONInformationReport, _asn_ctx),
     offsetof(struct Ngap_SONInformationReport, present),
-    sizeof(((struct Ngap_SONInformationReport*) 0)->present),
+    sizeof(((struct Ngap_SONInformationReport *)0)->present),
     asn_MAP_Ngap_SONInformationReport_tag2el_1,
     3, /* Count of tags in the map */
     0,

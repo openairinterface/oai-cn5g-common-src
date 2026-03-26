@@ -27,7 +27,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class PduSessionRelCause_anyOf {
- public:
+public:
   PduSessionRelCause_anyOf();
   virtual ~PduSessionRelCause_anyOf() = default;
 
@@ -49,16 +49,16 @@ class PduSessionRelCause_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const PduSessionRelCause_anyOf& rhs) const;
-  bool operator!=(const PduSessionRelCause_anyOf& rhs) const;
+  bool operator==(const PduSessionRelCause_anyOf &rhs) const;
+  bool operator!=(const PduSessionRelCause_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// PduSessionRelCause_anyOf members
@@ -66,15 +66,15 @@ class PduSessionRelCause_anyOf {
   PduSessionRelCause_anyOf::ePduSessionRelCause_anyOf getValue() const;
   void setValue(PduSessionRelCause_anyOf::ePduSessionRelCause_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const PduSessionRelCause_anyOf& o);
-  friend void from_json(const nlohmann::json& j, PduSessionRelCause_anyOf& o);
+  friend void to_json(nlohmann::json &j, const PduSessionRelCause_anyOf &o);
+  friend void from_json(const nlohmann::json &j, PduSessionRelCause_anyOf &o);
 
- protected:
+protected:
   PduSessionRelCause_anyOf::ePduSessionRelCause_anyOf m_value =
       PduSessionRelCause_anyOf::ePduSessionRelCause_anyOf::
           INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* PduSessionRelCause_anyOf_H_ */

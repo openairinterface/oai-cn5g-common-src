@@ -20,8 +20,8 @@ namespace oai::udr::model {
 
 SuggestedPacketNumDl::SuggestedPacketNumDl() {
   m_SuggestedPacketNumDl = 0;
-  m_ValidityTime         = "";
-  m_ValidityTimeIsSet    = false;
+  m_ValidityTime = "";
+  m_ValidityTimeIsSet = false;
 }
 
 SuggestedPacketNumDl::~SuggestedPacketNumDl() {}
@@ -30,13 +30,14 @@ void SuggestedPacketNumDl::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const SuggestedPacketNumDl& o) {
-  j                         = nlohmann::json();
+void to_json(nlohmann::json &j, const SuggestedPacketNumDl &o) {
+  j = nlohmann::json();
   j["suggestedPacketNumDl"] = o.m_SuggestedPacketNumDl;
-  if (o.validityTimeIsSet()) j["validityTime"] = o.m_ValidityTime;
+  if (o.validityTimeIsSet())
+    j["validityTime"] = o.m_ValidityTime;
 }
 
-void from_json(const nlohmann::json& j, SuggestedPacketNumDl& o) {
+void from_json(const nlohmann::json &j, SuggestedPacketNumDl &o) {
   j.at("suggestedPacketNumDl").get_to(o.m_SuggestedPacketNumDl);
   if (j.find("validityTime") != j.end()) {
     j.at("validityTime").get_to(o.m_ValidityTime);
@@ -53,15 +54,13 @@ void SuggestedPacketNumDl::setSuggestedPacketNumDl(int32_t const value) {
 std::string SuggestedPacketNumDl::getValidityTime() const {
   return m_ValidityTime;
 }
-void SuggestedPacketNumDl::setValidityTime(std::string const& value) {
-  m_ValidityTime      = value;
+void SuggestedPacketNumDl::setValidityTime(std::string const &value) {
+  m_ValidityTime = value;
   m_ValidityTimeIsSet = true;
 }
 bool SuggestedPacketNumDl::validityTimeIsSet() const {
   return m_ValidityTimeIsSet;
 }
-void SuggestedPacketNumDl::unsetValidityTime() {
-  m_ValidityTimeIsSet = false;
-}
+void SuggestedPacketNumDl::unsetValidityTime() { m_ValidityTimeIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

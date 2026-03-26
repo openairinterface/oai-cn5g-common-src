@@ -12,20 +12,20 @@ extern "C" {
 namespace oai::ngap {
 
 class IntegrityProtectionResult {
- public:
+public:
   IntegrityProtectionResult();
   virtual ~IntegrityProtectionResult();
 
-  void set(const e_Ngap_IntegrityProtectionResult& value);
-  bool get(long& value) const;
+  void set(const e_Ngap_IntegrityProtectionResult &value);
+  bool get(long &value) const;
 
-  bool encode(Ngap_IntegrityProtectionResult_t&) const;
-  bool decode(const Ngap_IntegrityProtectionResult_t&);
+  bool encode(Ngap_IntegrityProtectionResult_t &) const;
+  bool decode(const Ngap_IntegrityProtectionResult_t &);
 
- private:
+private:
   long m_Result;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

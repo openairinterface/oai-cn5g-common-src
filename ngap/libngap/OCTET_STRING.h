@@ -12,7 +12,7 @@ extern "C" {
 #endif
 
 typedef struct OCTET_STRING {
-  uint8_t* buf; /* Buffer with consecutive OCTET_STRING bits */
+  uint8_t *buf; /* Buffer with consecutive OCTET_STRING bits */
   size_t size;  /* Size of the buffer */
 
   asn_struct_ctx_t _asn_ctx; /* Parsing across buffer boundaries */
@@ -69,13 +69,15 @@ asn_random_fill_f OCTET_STRING_random_fill;
 #endif /* !defined(ASN_DISABLE_RFILL_SUPPORT) */
 
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
-int OCTET_STRING_per_get_characters(
-    asn_per_data_t* po, uint8_t* buf, size_t units, unsigned int bpc,
-    unsigned int unit_bits, long lb, long ub, const asn_per_constraints_t* pc);
+int OCTET_STRING_per_get_characters(asn_per_data_t *po, uint8_t *buf,
+                                    size_t units, unsigned int bpc,
+                                    unsigned int unit_bits, long lb, long ub,
+                                    const asn_per_constraints_t *pc);
 
-int OCTET_STRING_per_put_characters(
-    asn_per_outp_t* po, const uint8_t* buf, size_t units, unsigned int bpc,
-    unsigned int unit_bits, long lb, long ub, const asn_per_constraints_t* pc);
+int OCTET_STRING_per_put_characters(asn_per_outp_t *po, const uint8_t *buf,
+                                    size_t units, unsigned int bpc,
+                                    unsigned int unit_bits, long lb, long ub,
+                                    const asn_per_constraints_t *pc);
 #endif /* !defined(ASN_DISABLE_UPER_SUPPORT) ||                                \
           !defined(ASN_DISABLE_APER_SUPPORT) */
 /******************************
@@ -91,7 +93,7 @@ int OCTET_STRING_per_put_characters(
  * current contents of the OCTET STRING.
  * Returns 0 if it was possible to perform operation, -1 otherwise.
  */
-int OCTET_STRING_fromBuf(OCTET_STRING_t* s, const char* str, int size);
+int OCTET_STRING_fromBuf(OCTET_STRING_t *s, const char *str, int size);
 
 /* Handy conversion from the C string into the OCTET STRING. */
 #define OCTET_STRING_fromString(s, str) OCTET_STRING_fromBuf(s, str, -1)
@@ -101,8 +103,8 @@ int OCTET_STRING_fromBuf(OCTET_STRING_t* s, const char* str, int size);
  * allocated object. NULL is permitted in str: the function will just allocate
  * empty OCTET STRING.
  */
-OCTET_STRING_t* OCTET_STRING_new_fromBuf(
-    const asn_TYPE_descriptor_t* td, const char* str, int size);
+OCTET_STRING_t *OCTET_STRING_new_fromBuf(const asn_TYPE_descriptor_t *td,
+                                         const char *str, int size);
 
 /****************************
  * Internally useful stuff. *
@@ -126,9 +128,10 @@ typedef struct asn_OCTET_STRING_specifics_s {
 
 extern asn_OCTET_STRING_specifics_t asn_SPC_OCTET_STRING_specs;
 
-size_t OCTET_STRING_random_length_constrained(
-    const asn_TYPE_descriptor_t*, const asn_encoding_constraints_t*,
-    size_t max_length);
+size_t
+OCTET_STRING_random_length_constrained(const asn_TYPE_descriptor_t *,
+                                       const asn_encoding_constraints_t *,
+                                       size_t max_length);
 
 #if !defined(ASN_DISABLE_BER_SUPPORT)
 struct _stack_el {
@@ -138,12 +141,12 @@ struct _stack_el {
   int want_nulls;      /* Want null "end of content" octets? */
   int bits_chopped;    /* Flag in BIT STRING mode */
   ber_tlv_tag_t tag;   /* For debugging purposes */
-  struct _stack_el* prev;
-  struct _stack_el* next;
+  struct _stack_el *prev;
+  struct _stack_el *next;
 };
 struct _stack {
-  struct _stack_el* tail;
-  struct _stack_el* cur_ptr;
+  struct _stack_el *tail;
+  struct _stack_el *cur_ptr;
 };
 #endif /* !defined(ASN_DISABLE_BER_SUPPORT) */
 

@@ -13,8 +13,8 @@
 
 #include "AuthResult.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::amf {
 
@@ -27,12 +27,12 @@ void AuthResult::validate() const {
   }
 }
 
-bool AuthResult::validate(std::stringstream& msg) const {
+bool AuthResult::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AuthResult::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool AuthResult::validate(std::stringstream &msg,
+                          const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AuthResult" : pathPrefix;
@@ -45,36 +45,36 @@ bool AuthResult::validate(
   return success;
 }
 
-bool AuthResult::operator==(const AuthResult& rhs) const {
+bool AuthResult::operator==(const AuthResult &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool AuthResult::operator!=(const AuthResult& rhs) const {
+bool AuthResult::operator!=(const AuthResult &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AuthResult& o) {
+void to_json(nlohmann::json &j, const AuthResult &o) {
   j = nlohmann::json::object();
 
   switch (o.getValue()) {
-    case AuthResult::eAuthResult::INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case AuthResult::eAuthResult::AUTHENTICATION_SUCCESS:
-      j = "AUTHENTICATION_SUCCESS";
-      break;
-    case AuthResult::eAuthResult::AUTHENTICATION_FAILURE:
-      j = "AUTHENTICATION_FAILURE";
-      break;
-    case AuthResult::eAuthResult::AUTHENTICATION_ONGOING:
-      j = "AUTHENTICATION_ONGOING";
-      break;
+  case AuthResult::eAuthResult::INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case AuthResult::eAuthResult::AUTHENTICATION_SUCCESS:
+    j = "AUTHENTICATION_SUCCESS";
+    break;
+  case AuthResult::eAuthResult::AUTHENTICATION_FAILURE:
+    j = "AUTHENTICATION_FAILURE";
+    break;
+  case AuthResult::eAuthResult::AUTHENTICATION_ONGOING:
+    j = "AUTHENTICATION_ONGOING";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, AuthResult& o) {
+void from_json(const nlohmann::json &j, AuthResult &o) {
   auto s = j.get<std::string>();
   if (s == "AUTHENTICATION_SUCCESS") {
     o.setValue(AuthResult::eAuthResult::AUTHENTICATION_SUCCESS);
@@ -91,11 +91,7 @@ void from_json(const nlohmann::json& j, AuthResult& o) {
   }
 }
 
-AuthResult::eAuthResult AuthResult::getValue() const {
-  return m_value;
-}
-void AuthResult::setValue(AuthResult::eAuthResult value) {
-  m_value = value;
-}
+AuthResult::eAuthResult AuthResult::getValue() const { return m_value; }
+void AuthResult::setValue(AuthResult::eAuthResult value) { m_value = value; }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

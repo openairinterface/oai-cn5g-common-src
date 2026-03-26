@@ -28,7 +28,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class PointAltitude_allOf {
- public:
+public:
   PointAltitude_allOf();
   virtual ~PointAltitude_allOf() = default;
 
@@ -42,16 +42,16 @@ class PointAltitude_allOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const PointAltitude_allOf& rhs) const;
-  bool operator!=(const PointAltitude_allOf& rhs) const;
+  bool operator==(const PointAltitude_allOf &rhs) const;
+  bool operator!=(const PointAltitude_allOf &rhs) const;
 
   /////////////////////////////////////////////
   /// PointAltitude_allOf members
@@ -60,22 +60,22 @@ class PointAltitude_allOf {
   ///
   /// </summary>
   oai::model::lmf::GeographicalCoordinates getPoint() const;
-  void setPoint(oai::model::lmf::GeographicalCoordinates const& value);
+  void setPoint(oai::model::lmf::GeographicalCoordinates const &value);
   /// <summary>
   ///
   /// </summary>
   double getAltitude() const;
   void setAltitude(double const value);
 
-  friend void to_json(nlohmann::json& j, const PointAltitude_allOf& o);
-  friend void from_json(const nlohmann::json& j, PointAltitude_allOf& o);
+  friend void to_json(nlohmann::json &j, const PointAltitude_allOf &o);
+  friend void from_json(const nlohmann::json &j, PointAltitude_allOf &o);
 
- protected:
+protected:
   oai::model::lmf::GeographicalCoordinates m_Point;
 
   double m_Altitude;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* PointAltitude_allOf_H_ */

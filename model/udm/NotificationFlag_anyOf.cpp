@@ -16,8 +16,8 @@
 
 #include "NotificationFlag_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::udm {
 
@@ -30,12 +30,12 @@ void NotificationFlag_anyOf::validate() const {
   }
 }
 
-bool NotificationFlag_anyOf::validate(std::stringstream& msg) const {
+bool NotificationFlag_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool NotificationFlag_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool NotificationFlag_anyOf::validate(std::stringstream &msg,
+                                      const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "NotificationFlag_anyOf" : pathPrefix;
@@ -50,38 +50,38 @@ bool NotificationFlag_anyOf::validate(
 }
 
 bool NotificationFlag_anyOf::operator==(
-    const NotificationFlag_anyOf& rhs) const {
+    const NotificationFlag_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool NotificationFlag_anyOf::operator!=(
-    const NotificationFlag_anyOf& rhs) const {
+    const NotificationFlag_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const NotificationFlag_anyOf& o) {
+void to_json(nlohmann::json &j, const NotificationFlag_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case NotificationFlag_anyOf::eNotificationFlag_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case NotificationFlag_anyOf::eNotificationFlag_anyOf::ACTIVATE:
-      j = "ACTIVATE";
-      break;
-    case NotificationFlag_anyOf::eNotificationFlag_anyOf::DEACTIVATE:
-      j = "DEACTIVATE";
-      break;
-    case NotificationFlag_anyOf::eNotificationFlag_anyOf::RETRIEVAL:
-      j = "RETRIEVAL";
-      break;
+  case NotificationFlag_anyOf::eNotificationFlag_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case NotificationFlag_anyOf::eNotificationFlag_anyOf::ACTIVATE:
+    j = "ACTIVATE";
+    break;
+  case NotificationFlag_anyOf::eNotificationFlag_anyOf::DEACTIVATE:
+    j = "DEACTIVATE";
+    break;
+  case NotificationFlag_anyOf::eNotificationFlag_anyOf::RETRIEVAL:
+    j = "RETRIEVAL";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, NotificationFlag_anyOf& o) {
+void from_json(const nlohmann::json &j, NotificationFlag_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "ACTIVATE") {
     o.setValue(NotificationFlag_anyOf::eNotificationFlag_anyOf::ACTIVATE);
@@ -107,4 +107,4 @@ void NotificationFlag_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

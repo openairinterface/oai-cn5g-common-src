@@ -13,8 +13,8 @@
 
 #include "ResponseTime_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::lmf {
 
@@ -27,12 +27,12 @@ void ResponseTime_anyOf::validate() const {
   }
 }
 
-bool ResponseTime_anyOf::validate(std::stringstream& msg) const {
+bool ResponseTime_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ResponseTime_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ResponseTime_anyOf::validate(std::stringstream &msg,
+                                  const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ResponseTime_anyOf" : pathPrefix;
@@ -46,37 +46,36 @@ bool ResponseTime_anyOf::validate(
   return success;
 }
 
-bool ResponseTime_anyOf::operator==(const ResponseTime_anyOf& rhs) const {
+bool ResponseTime_anyOf::operator==(const ResponseTime_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool ResponseTime_anyOf::operator!=(const ResponseTime_anyOf& rhs) const {
+bool ResponseTime_anyOf::operator!=(const ResponseTime_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ResponseTime_anyOf& o) {
+void to_json(nlohmann::json &j, const ResponseTime_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case ResponseTime_anyOf::eResponseTime_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case ResponseTime_anyOf::eResponseTime_anyOf::LOW_DELAY:
-      j = "LOW_DELAY";
-      break;
-    case ResponseTime_anyOf::eResponseTime_anyOf::DELAY_TOLERANT:
-      j = "DELAY_TOLERANT";
-      break;
-    case ResponseTime_anyOf::eResponseTime_anyOf::NO_DELAY:
-      j = "NO_DELAY";
-      break;
+  case ResponseTime_anyOf::eResponseTime_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case ResponseTime_anyOf::eResponseTime_anyOf::LOW_DELAY:
+    j = "LOW_DELAY";
+    break;
+  case ResponseTime_anyOf::eResponseTime_anyOf::DELAY_TOLERANT:
+    j = "DELAY_TOLERANT";
+    break;
+  case ResponseTime_anyOf::eResponseTime_anyOf::NO_DELAY:
+    j = "NO_DELAY";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, ResponseTime_anyOf& o) {
+void from_json(const nlohmann::json &j, ResponseTime_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "LOW_DELAY") {
     o.setValue(ResponseTime_anyOf::eResponseTime_anyOf::LOW_DELAY);
@@ -101,4 +100,4 @@ void ResponseTime_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

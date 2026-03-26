@@ -13,8 +13,8 @@
 
 #include "ScheduledCommunicationType_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::common {
 
@@ -27,12 +27,12 @@ void ScheduledCommunicationType_anyOf::validate() const {
   }
 }
 
-bool ScheduledCommunicationType_anyOf::validate(std::stringstream& msg) const {
+bool ScheduledCommunicationType_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool ScheduledCommunicationType_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ScheduledCommunicationType_anyOf" : pathPrefix;
@@ -48,41 +48,41 @@ bool ScheduledCommunicationType_anyOf::validate(
 }
 
 bool ScheduledCommunicationType_anyOf::operator==(
-    const ScheduledCommunicationType_anyOf& rhs) const {
+    const ScheduledCommunicationType_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool ScheduledCommunicationType_anyOf::operator!=(
-    const ScheduledCommunicationType_anyOf& rhs) const {
+    const ScheduledCommunicationType_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ScheduledCommunicationType_anyOf& o) {
+void to_json(nlohmann::json &j, const ScheduledCommunicationType_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case ScheduledCommunicationType_anyOf::eScheduledCommunicationType_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case ScheduledCommunicationType_anyOf::eScheduledCommunicationType_anyOf::
-        DOWNLINK_ONLY:
-      j = "DOWNLINK_ONLY";
-      break;
-    case ScheduledCommunicationType_anyOf::eScheduledCommunicationType_anyOf::
-        UPLINK_ONLY:
-      j = "UPLINK_ONLY";
-      break;
-    case ScheduledCommunicationType_anyOf::eScheduledCommunicationType_anyOf::
-        BIDIRECTIONAL:
-      j = "BIDIRECTIONAL";
-      break;
+  case ScheduledCommunicationType_anyOf::eScheduledCommunicationType_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case ScheduledCommunicationType_anyOf::eScheduledCommunicationType_anyOf::
+      DOWNLINK_ONLY:
+    j = "DOWNLINK_ONLY";
+    break;
+  case ScheduledCommunicationType_anyOf::eScheduledCommunicationType_anyOf::
+      UPLINK_ONLY:
+    j = "UPLINK_ONLY";
+    break;
+  case ScheduledCommunicationType_anyOf::eScheduledCommunicationType_anyOf::
+      BIDIRECTIONAL:
+    j = "BIDIRECTIONAL";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, ScheduledCommunicationType_anyOf& o) {
+void from_json(const nlohmann::json &j, ScheduledCommunicationType_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "DOWNLINK_ONLY") {
     o.setValue(ScheduledCommunicationType_anyOf::
@@ -112,4 +112,4 @@ void ScheduledCommunicationType_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

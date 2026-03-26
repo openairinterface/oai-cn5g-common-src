@@ -16,27 +16,25 @@ extern "C" {
 namespace oai::ngap {
 
 class AllocationAndRetentionPriority {
- public:
+public:
   AllocationAndRetentionPriority();
   virtual ~AllocationAndRetentionPriority();
 
-  void set(
-      const PriorityLevelARP& priorityLevelArp,
-      const Pre_emptionCapability& pre_emptionCapability,
-      const Pre_emptionVulnerability& pre_emptionVulnerability);
-  bool get(
-      PriorityLevelARP& priorityLevelArp,
-      Pre_emptionCapability& pre_emptionCapability,
-      Pre_emptionVulnerability& pre_emptionVulnerability) const;
+  void set(const PriorityLevelARP &priorityLevelArp,
+           const Pre_emptionCapability &pre_emptionCapability,
+           const Pre_emptionVulnerability &pre_emptionVulnerability);
+  bool get(PriorityLevelARP &priorityLevelArp,
+           Pre_emptionCapability &pre_emptionCapability,
+           Pre_emptionVulnerability &pre_emptionVulnerability) const;
 
-  bool encode(Ngap_AllocationAndRetentionPriority_t&) const;
-  bool decode(const Ngap_AllocationAndRetentionPriority_t&);
+  bool encode(Ngap_AllocationAndRetentionPriority_t &) const;
+  bool decode(const Ngap_AllocationAndRetentionPriority_t &);
 
- private:
-  PriorityLevelARP m_PriorityLevelArp;                  // Mandatory
-  Pre_emptionCapability m_Pre_emptionCapability;        // Mandatory
-  Pre_emptionVulnerability m_Pre_emptionVulnerability;  // Mandatory
+private:
+  PriorityLevelARP m_PriorityLevelArp;                 // Mandatory
+  Pre_emptionCapability m_Pre_emptionCapability;       // Mandatory
+  Pre_emptionVulnerability m_Pre_emptionVulnerability; // Mandatory
 };
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

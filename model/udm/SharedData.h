@@ -40,7 +40,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class SharedData {
- public:
+public:
   SharedData();
   virtual ~SharedData();
 
@@ -53,52 +53,52 @@ class SharedData {
   ///
   /// </summary>
   std::string getSharedDataId() const;
-  void setSharedDataId(std::string const& value);
+  void setSharedDataId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   AccessAndMobilitySubscriptionData getSharedAmData() const;
-  void setSharedAmData(AccessAndMobilitySubscriptionData const& value);
+  void setSharedAmData(AccessAndMobilitySubscriptionData const &value);
   bool sharedAmDataIsSet() const;
   void unsetSharedAmData();
   /// <summary>
   ///
   /// </summary>
   SmsSubscriptionData getSharedSmsSubsData() const;
-  void setSharedSmsSubsData(SmsSubscriptionData const& value);
+  void setSharedSmsSubsData(SmsSubscriptionData const &value);
   bool sharedSmsSubsDataIsSet() const;
   void unsetSharedSmsSubsData();
   /// <summary>
   ///
   /// </summary>
   SmsManagementSubscriptionData getSharedSmsMngSubsData() const;
-  void setSharedSmsMngSubsData(SmsManagementSubscriptionData const& value);
+  void setSharedSmsMngSubsData(SmsManagementSubscriptionData const &value);
   bool sharedSmsMngSubsDataIsSet() const;
   void unsetSharedSmsMngSubsData();
   /// <summary>
   ///
   /// </summary>
-  std::map<std::string, DnnConfiguration>& getSharedDnnConfigurations();
+  std::map<std::string, DnnConfiguration> &getSharedDnnConfigurations();
   bool sharedDnnConfigurationsIsSet() const;
   void unsetSharedDnnConfigurations();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::TraceData getSharedTraceData() const;
-  void setSharedTraceData(oai::model::common::TraceData const& value);
+  void setSharedTraceData(oai::model::common::TraceData const &value);
   bool sharedTraceDataIsSet() const;
   void unsetSharedTraceData();
   /// <summary>
   ///
   /// </summary>
-  std::map<std::string, SnssaiInfo>& getSharedSnssaiInfos();
+  std::map<std::string, SnssaiInfo> &getSharedSnssaiInfos();
   bool sharedSnssaiInfosIsSet() const;
   void unsetSharedSnssaiInfos();
 
-  friend void to_json(nlohmann::json& j, const SharedData& o);
-  friend void from_json(const nlohmann::json& j, SharedData& o);
+  friend void to_json(nlohmann::json &j, const SharedData &o);
+  friend void from_json(const nlohmann::json &j, SharedData &o);
 
- protected:
+protected:
   std::string m_SharedDataId;
 
   AccessAndMobilitySubscriptionData m_SharedAmData;
@@ -115,6 +115,6 @@ class SharedData {
   bool m_SharedSnssaiInfosIsSet;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* SharedData_H_ */

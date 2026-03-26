@@ -35,9 +35,9 @@ struct Ngap_ProtocolIE_SingleContainer;
 typedef struct Ngap_DRBStatusUL {
   Ngap_DRBStatusUL_PR present;
   union Ngap_DRBStatusUL_u {
-    struct Ngap_DRBStatusUL12* dRBStatusUL12;
-    struct Ngap_DRBStatusUL18* dRBStatusUL18;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_DRBStatusUL12 *dRBStatusUL12;
+    struct Ngap_DRBStatusUL18 *dRBStatusUL18;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

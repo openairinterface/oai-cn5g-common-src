@@ -34,7 +34,7 @@ namespace oai::udr::model {
 /// Identifies an Ethernet flow
 /// </summary>
 class EthFlowDescription {
- public:
+public:
   EthFlowDescription();
   virtual ~EthFlowDescription();
 
@@ -47,61 +47,61 @@ class EthFlowDescription {
   ///
   /// </summary>
   std::string getDestMacAddr() const;
-  void setDestMacAddr(std::string const& value);
+  void setDestMacAddr(std::string const &value);
   bool destMacAddrIsSet() const;
   void unsetDestMacAddr();
   /// <summary>
   ///
   /// </summary>
   std::string getEthType() const;
-  void setEthType(std::string const& value);
+  void setEthType(std::string const &value);
   /// <summary>
   /// Defines a packet filter of an IP flow.
   /// </summary>
   std::string getFDesc() const;
-  void setFDesc(std::string const& value);
+  void setFDesc(std::string const &value);
   bool fDescIsSet() const;
   void unsetFDesc();
   /// <summary>
   ///
   /// </summary>
   FlowDirection getFDir() const;
-  void setFDir(FlowDirection const& value);
+  void setFDir(FlowDirection const &value);
   bool fDirIsSet() const;
   void unsetFDir();
   /// <summary>
   ///
   /// </summary>
   std::string getSourceMacAddr() const;
-  void setSourceMacAddr(std::string const& value);
+  void setSourceMacAddr(std::string const &value);
   bool sourceMacAddrIsSet() const;
   void unsetSourceMacAddr();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getVlanTags();
-  void setVlanTags(std::vector<std::string> const& value);
+  std::vector<std::string> &getVlanTags();
+  void setVlanTags(std::vector<std::string> const &value);
   bool vlanTagsIsSet() const;
   void unsetVlanTags();
   /// <summary>
   ///
   /// </summary>
   std::string getSrcMacAddrEnd() const;
-  void setSrcMacAddrEnd(std::string const& value);
+  void setSrcMacAddrEnd(std::string const &value);
   bool srcMacAddrEndIsSet() const;
   void unsetSrcMacAddrEnd();
   /// <summary>
   ///
   /// </summary>
   std::string getDestMacAddrEnd() const;
-  void setDestMacAddrEnd(std::string const& value);
+  void setDestMacAddrEnd(std::string const &value);
   bool destMacAddrEndIsSet() const;
   void unsetDestMacAddrEnd();
 
-  friend void to_json(nlohmann::json& j, const EthFlowDescription& o);
-  friend void from_json(const nlohmann::json& j, EthFlowDescription& o);
+  friend void to_json(nlohmann::json &j, const EthFlowDescription &o);
+  friend void from_json(const nlohmann::json &j, EthFlowDescription &o);
 
- protected:
+protected:
   std::string m_DestMacAddr;
   bool m_DestMacAddrIsSet;
   std::string m_EthType;
@@ -120,6 +120,6 @@ class EthFlowDescription {
   bool m_DestMacAddrEndIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* EthFlowDescription_H_ */

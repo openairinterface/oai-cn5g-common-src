@@ -23,10 +23,10 @@ void TriggerCategory::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const TriggerCategory& o) {
+void to_json(nlohmann::json &j, const TriggerCategory &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, TriggerCategory& o) {}
+void from_json(const nlohmann::json &j, TriggerCategory &o) {}
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

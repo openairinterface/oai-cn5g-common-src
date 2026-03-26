@@ -26,10 +26,10 @@ void UeUpdateStatus::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const UeUpdateStatus& o) {
+void to_json(nlohmann::json &j, const UeUpdateStatus &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, UeUpdateStatus& o) {}
+void from_json(const nlohmann::json &j, UeUpdateStatus &o) {}
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

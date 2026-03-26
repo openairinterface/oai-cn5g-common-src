@@ -19,9 +19,9 @@
 namespace oai::udr::model {
 
 AmfSubscriptionInfo::AmfSubscriptionInfo() {
-  m_AmfInstanceId                      = "";
-  m_SubscriptionId                     = "";
-  m_SubsChangeNotifyCorrelationId      = "";
+  m_AmfInstanceId = "";
+  m_SubscriptionId = "";
+  m_SubsChangeNotifyCorrelationId = "";
   m_SubsChangeNotifyCorrelationIdIsSet = false;
 }
 
@@ -31,15 +31,15 @@ void AmfSubscriptionInfo::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const AmfSubscriptionInfo& o) {
-  j                   = nlohmann::json();
-  j["amfInstanceId"]  = o.m_AmfInstanceId;
+void to_json(nlohmann::json &j, const AmfSubscriptionInfo &o) {
+  j = nlohmann::json();
+  j["amfInstanceId"] = o.m_AmfInstanceId;
   j["subscriptionId"] = o.m_SubscriptionId;
   if (o.subsChangeNotifyCorrelationIdIsSet())
     j["subsChangeNotifyCorrelationId"] = o.m_SubsChangeNotifyCorrelationId;
 }
 
-void from_json(const nlohmann::json& j, AmfSubscriptionInfo& o) {
+void from_json(const nlohmann::json &j, AmfSubscriptionInfo &o) {
   j.at("amfInstanceId").get_to(o.m_AmfInstanceId);
   j.at("subscriptionId").get_to(o.m_SubscriptionId);
   if (j.find("subsChangeNotifyCorrelationId") != j.end()) {
@@ -52,21 +52,21 @@ void from_json(const nlohmann::json& j, AmfSubscriptionInfo& o) {
 std::string AmfSubscriptionInfo::getAmfInstanceId() const {
   return m_AmfInstanceId;
 }
-void AmfSubscriptionInfo::setAmfInstanceId(std::string const& value) {
+void AmfSubscriptionInfo::setAmfInstanceId(std::string const &value) {
   m_AmfInstanceId = value;
 }
 std::string AmfSubscriptionInfo::getSubscriptionId() const {
   return m_SubscriptionId;
 }
-void AmfSubscriptionInfo::setSubscriptionId(std::string const& value) {
+void AmfSubscriptionInfo::setSubscriptionId(std::string const &value) {
   m_SubscriptionId = value;
 }
 std::string AmfSubscriptionInfo::getSubsChangeNotifyCorrelationId() const {
   return m_SubsChangeNotifyCorrelationId;
 }
 void AmfSubscriptionInfo::setSubsChangeNotifyCorrelationId(
-    std::string const& value) {
-  m_SubsChangeNotifyCorrelationId      = value;
+    std::string const &value) {
+  m_SubsChangeNotifyCorrelationId = value;
   m_SubsChangeNotifyCorrelationIdIsSet = true;
 }
 bool AmfSubscriptionInfo::subsChangeNotifyCorrelationIdIsSet() const {
@@ -76,4 +76,4 @@ void AmfSubscriptionInfo::unsetSubsChangeNotifyCorrelationId() {
   m_SubsChangeNotifyCorrelationIdIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

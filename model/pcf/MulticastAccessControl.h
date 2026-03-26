@@ -28,7 +28,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class MulticastAccessControl {
- public:
+public:
   MulticastAccessControl();
   virtual ~MulticastAccessControl() = default;
 
@@ -42,36 +42,36 @@ class MulticastAccessControl {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const MulticastAccessControl& rhs) const;
-  bool operator!=(const MulticastAccessControl& rhs) const;
+  bool operator==(const MulticastAccessControl &rhs) const;
+  bool operator!=(const MulticastAccessControl &rhs) const;
 
   /////////////////////////////////////////////
   /// MulticastAccessControl members
 
   MulticastAccessControl_anyOf getValue() const;
   void setValue(MulticastAccessControl_anyOf value);
-  MulticastAccessControl_anyOf::eMulticastAccessControl_anyOf getEnumValue()
-      const;
+  MulticastAccessControl_anyOf::eMulticastAccessControl_anyOf
+  getEnumValue() const;
   void setEnumValue(
       MulticastAccessControl_anyOf::eMulticastAccessControl_anyOf value);
-  friend void to_json(nlohmann::json& j, const MulticastAccessControl& o);
-  friend void from_json(const nlohmann::json& j, MulticastAccessControl& o);
-  friend void to_json(nlohmann::json& j, const MulticastAccessControl_anyOf& o);
-  friend void from_json(
-      const nlohmann::json& j, MulticastAccessControl_anyOf& o);
+  friend void to_json(nlohmann::json &j, const MulticastAccessControl &o);
+  friend void from_json(const nlohmann::json &j, MulticastAccessControl &o);
+  friend void to_json(nlohmann::json &j, const MulticastAccessControl_anyOf &o);
+  friend void from_json(const nlohmann::json &j,
+                        MulticastAccessControl_anyOf &o);
 
- protected:
+protected:
   MulticastAccessControl_anyOf m_value;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* MulticastAccessControl_H_ */

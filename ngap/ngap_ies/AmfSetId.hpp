@@ -14,23 +14,23 @@ extern "C" {
 namespace oai::ngap {
 
 class AmfSetId {
- public:
+public:
   AmfSetId();
   virtual ~AmfSetId();
 
-  bool set(const std::string&);
-  bool set(const uint16_t&);
+  bool set(const std::string &);
+  bool set(const uint16_t &);
 
-  void get(std::string&) const;
-  void get(uint16_t&) const;
+  void get(std::string &) const;
+  void get(uint16_t &) const;
 
-  bool encode(Ngap_AMFSetID_t&) const;
-  bool decode(const Ngap_AMFSetID_t&);
+  bool encode(Ngap_AMFSetID_t &) const;
+  bool decode(const Ngap_AMFSetID_t &);
 
- private:
+private:
   uint16_t m_Id;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

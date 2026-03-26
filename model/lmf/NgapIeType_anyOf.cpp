@@ -13,8 +13,8 @@
 
 #include "NgapIeType_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::lmf {
 
@@ -27,12 +27,12 @@ void NgapIeType_anyOf::validate() const {
   }
 }
 
-bool NgapIeType_anyOf::validate(std::stringstream& msg) const {
+bool NgapIeType_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool NgapIeType_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool NgapIeType_anyOf::validate(std::stringstream &msg,
+                                const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "NgapIeType_anyOf" : pathPrefix;
@@ -46,78 +46,78 @@ bool NgapIeType_anyOf::validate(
   return success;
 }
 
-bool NgapIeType_anyOf::operator==(const NgapIeType_anyOf& rhs) const {
+bool NgapIeType_anyOf::operator==(const NgapIeType_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool NgapIeType_anyOf::operator!=(const NgapIeType_anyOf& rhs) const {
+bool NgapIeType_anyOf::operator!=(const NgapIeType_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const NgapIeType_anyOf& o) {
+void to_json(nlohmann::json &j, const NgapIeType_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case NgapIeType_anyOf::eNgapIeType_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case NgapIeType_anyOf::eNgapIeType_anyOf::PDU_RES_SETUP_REQ:
-      j = "PDU_RES_SETUP_REQ";
-      break;
-    case NgapIeType_anyOf::eNgapIeType_anyOf::PDU_RES_REL_CMD:
-      j = "PDU_RES_REL_CMD";
-      break;
-    case NgapIeType_anyOf::eNgapIeType_anyOf::PDU_RES_MOD_REQ:
-      j = "PDU_RES_MOD_REQ";
-      break;
-    case NgapIeType_anyOf::eNgapIeType_anyOf::HANDOVER_CMD:
-      j = "HANDOVER_CMD";
-      break;
-    case NgapIeType_anyOf::eNgapIeType_anyOf::HANDOVER_REQUIRED:
-      j = "HANDOVER_REQUIRED";
-      break;
-    case NgapIeType_anyOf::eNgapIeType_anyOf::HANDOVER_PREP_FAIL:
-      j = "HANDOVER_PREP_FAIL";
-      break;
-    case NgapIeType_anyOf::eNgapIeType_anyOf::SRC_TO_TAR_CONTAINER:
-      j = "SRC_TO_TAR_CONTAINER";
-      break;
-    case NgapIeType_anyOf::eNgapIeType_anyOf::TAR_TO_SRC_CONTAINER:
-      j = "TAR_TO_SRC_CONTAINER";
-      break;
-    case NgapIeType_anyOf::eNgapIeType_anyOf::TAR_TO_SRC_FAIL_CONTAINER:
-      j = "TAR_TO_SRC_FAIL_CONTAINER";
-      break;
-    case NgapIeType_anyOf::eNgapIeType_anyOf::RAN_STATUS_TRANS_CONTAINER:
-      j = "RAN_STATUS_TRANS_CONTAINER";
-      break;
-    case NgapIeType_anyOf::eNgapIeType_anyOf::SON_CONFIG_TRANSFER:
-      j = "SON_CONFIG_TRANSFER";
-      break;
-    case NgapIeType_anyOf::eNgapIeType_anyOf::NRPPA_PDU:
-      j = "NRPPA_PDU";
-      break;
-    case NgapIeType_anyOf::eNgapIeType_anyOf::UE_RADIO_CAPABILITY:
-      j = "UE_RADIO_CAPABILITY";
-      break;
-    case NgapIeType_anyOf::eNgapIeType_anyOf::RIM_INFO_TRANSFER:
-      j = "RIM_INFO_TRANSFER";
-      break;
-    case NgapIeType_anyOf::eNgapIeType_anyOf::SECONDARY_RAT_USAGE:
-      j = "SECONDARY_RAT_USAGE";
-      break;
-    case NgapIeType_anyOf::eNgapIeType_anyOf::PC5_QOS_PARA:
-      j = "PC5_QOS_PARA";
-      break;
-    case NgapIeType_anyOf::eNgapIeType_anyOf::EARLY_STATUS_TRANS_CONTAINER:
-      j = "EARLY_STATUS_TRANS_CONTAINER";
-      break;
+  case NgapIeType_anyOf::eNgapIeType_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case NgapIeType_anyOf::eNgapIeType_anyOf::PDU_RES_SETUP_REQ:
+    j = "PDU_RES_SETUP_REQ";
+    break;
+  case NgapIeType_anyOf::eNgapIeType_anyOf::PDU_RES_REL_CMD:
+    j = "PDU_RES_REL_CMD";
+    break;
+  case NgapIeType_anyOf::eNgapIeType_anyOf::PDU_RES_MOD_REQ:
+    j = "PDU_RES_MOD_REQ";
+    break;
+  case NgapIeType_anyOf::eNgapIeType_anyOf::HANDOVER_CMD:
+    j = "HANDOVER_CMD";
+    break;
+  case NgapIeType_anyOf::eNgapIeType_anyOf::HANDOVER_REQUIRED:
+    j = "HANDOVER_REQUIRED";
+    break;
+  case NgapIeType_anyOf::eNgapIeType_anyOf::HANDOVER_PREP_FAIL:
+    j = "HANDOVER_PREP_FAIL";
+    break;
+  case NgapIeType_anyOf::eNgapIeType_anyOf::SRC_TO_TAR_CONTAINER:
+    j = "SRC_TO_TAR_CONTAINER";
+    break;
+  case NgapIeType_anyOf::eNgapIeType_anyOf::TAR_TO_SRC_CONTAINER:
+    j = "TAR_TO_SRC_CONTAINER";
+    break;
+  case NgapIeType_anyOf::eNgapIeType_anyOf::TAR_TO_SRC_FAIL_CONTAINER:
+    j = "TAR_TO_SRC_FAIL_CONTAINER";
+    break;
+  case NgapIeType_anyOf::eNgapIeType_anyOf::RAN_STATUS_TRANS_CONTAINER:
+    j = "RAN_STATUS_TRANS_CONTAINER";
+    break;
+  case NgapIeType_anyOf::eNgapIeType_anyOf::SON_CONFIG_TRANSFER:
+    j = "SON_CONFIG_TRANSFER";
+    break;
+  case NgapIeType_anyOf::eNgapIeType_anyOf::NRPPA_PDU:
+    j = "NRPPA_PDU";
+    break;
+  case NgapIeType_anyOf::eNgapIeType_anyOf::UE_RADIO_CAPABILITY:
+    j = "UE_RADIO_CAPABILITY";
+    break;
+  case NgapIeType_anyOf::eNgapIeType_anyOf::RIM_INFO_TRANSFER:
+    j = "RIM_INFO_TRANSFER";
+    break;
+  case NgapIeType_anyOf::eNgapIeType_anyOf::SECONDARY_RAT_USAGE:
+    j = "SECONDARY_RAT_USAGE";
+    break;
+  case NgapIeType_anyOf::eNgapIeType_anyOf::PC5_QOS_PARA:
+    j = "PC5_QOS_PARA";
+    break;
+  case NgapIeType_anyOf::eNgapIeType_anyOf::EARLY_STATUS_TRANS_CONTAINER:
+    j = "EARLY_STATUS_TRANS_CONTAINER";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, NgapIeType_anyOf& o) {
+void from_json(const nlohmann::json &j, NgapIeType_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "PDU_RES_SETUP_REQ") {
     o.setValue(NgapIeType_anyOf::eNgapIeType_anyOf::PDU_RES_SETUP_REQ);
@@ -170,4 +170,4 @@ void NgapIeType_anyOf::setValue(NgapIeType_anyOf::eNgapIeType_anyOf value) {
   m_value = value;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

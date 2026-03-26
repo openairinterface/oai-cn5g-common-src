@@ -26,10 +26,10 @@ void FlowDirection::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const FlowDirection& o) {
+void to_json(nlohmann::json &j, const FlowDirection &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, FlowDirection& o) {}
+void from_json(const nlohmann::json &j, FlowDirection &o) {}
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

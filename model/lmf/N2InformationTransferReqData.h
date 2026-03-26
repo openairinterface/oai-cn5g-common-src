@@ -20,13 +20,13 @@
 #define N2InformationTransferReqData_H_
 
 #include "Ecgi.h"
+#include "GlobalRanNodeId.h"
+#include "N2InfoContainer.h"
 #include "Ncgi.h"
 #include "Tai.h"
-#include <string>
-#include "N2InfoContainer.h"
-#include "GlobalRanNodeId.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::lmf {
 using namespace oai::model::common;
@@ -34,7 +34,7 @@ using namespace oai::model::common;
 ///
 /// </summary>
 class N2InformationTransferReqData {
- public:
+public:
   N2InformationTransferReqData();
   virtual ~N2InformationTransferReqData();
 
@@ -46,53 +46,53 @@ class N2InformationTransferReqData {
   /// <summary>
   ///
   /// </summary>
-  std::vector<Tai>& getTaiList();
+  std::vector<Tai> &getTaiList();
   bool taiListIsSet() const;
   void unsetTaiList();
   /// <summary>
   ///
   /// </summary>
   std::string getRatSelector() const;
-  void setRatSelector(std::string const& value);
+  void setRatSelector(std::string const &value);
   bool ratSelectorIsSet() const;
   void unsetRatSelector();
   /// <summary>
   ///
   /// </summary>
-  std::vector<Ecgi>& getEcgiList();
+  std::vector<Ecgi> &getEcgiList();
   bool ecgiListIsSet() const;
   void unsetEcgiList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<Ncgi>& getNcgiList();
+  std::vector<Ncgi> &getNcgiList();
   bool ncgiListIsSet() const;
   void unsetNcgiList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<GlobalRanNodeId>& getGlobalRanNodeList();
-  void setGlobalRanNodeList(std::vector<GlobalRanNodeId> const& value);
+  std::vector<GlobalRanNodeId> &getGlobalRanNodeList();
+  void setGlobalRanNodeList(std::vector<GlobalRanNodeId> const &value);
   bool globalRanNodeListIsSet() const;
   void unsetGlobalRanNodeList();
   /// <summary>
   ///
   /// </summary>
   N2InfoContainer getN2Information() const;
-  void setN2Information(N2InfoContainer const& value);
+  void setN2Information(N2InfoContainer const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
 
-  friend void to_json(nlohmann::json& j, const N2InformationTransferReqData& o);
-  friend void from_json(
-      const nlohmann::json& j, N2InformationTransferReqData& o);
+  friend void to_json(nlohmann::json &j, const N2InformationTransferReqData &o);
+  friend void from_json(const nlohmann::json &j,
+                        N2InformationTransferReqData &o);
 
- protected:
+protected:
   std::vector<Tai> m_TaiList;
   bool m_TaiListIsSet;
   std::string m_RatSelector;
@@ -109,6 +109,6 @@ class N2InformationTransferReqData {
   bool m_SupportedFeaturesIsSet;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* N2InformationTransferReqData_H_ */

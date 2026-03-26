@@ -43,7 +43,7 @@ namespace oai::udr::model {
 /// Contains changed policy data for which notification was requested.
 /// </summary>
 class PolicyDataChangeNotification {
- public:
+public:
   PolicyDataChangeNotification();
   virtual ~PolicyDataChangeNotification();
 
@@ -56,78 +56,78 @@ class PolicyDataChangeNotification {
   ///
   /// </summary>
   AmPolicyData getAmPolicyData() const;
-  void setAmPolicyData(AmPolicyData const& value);
+  void setAmPolicyData(AmPolicyData const &value);
   bool amPolicyDataIsSet() const;
   void unsetAmPolicyData();
   /// <summary>
   ///
   /// </summary>
   UePolicySet getUePolicySet() const;
-  void setUePolicySet(UePolicySet const& value);
+  void setUePolicySet(UePolicySet const &value);
   bool uePolicySetIsSet() const;
   void unsetUePolicySet();
   /// <summary>
   ///
   /// </summary>
   UePolicySet getPlmnUePolicySet() const;
-  void setPlmnUePolicySet(UePolicySet const& value);
+  void setPlmnUePolicySet(UePolicySet const &value);
   bool plmnUePolicySetIsSet() const;
   void unsetPlmnUePolicySet();
   /// <summary>
   ///
   /// </summary>
   SmPolicyData getSmPolicyData() const;
-  void setSmPolicyData(SmPolicyData const& value);
+  void setSmPolicyData(SmPolicyData const &value);
   bool smPolicyDataIsSet() const;
   void unsetSmPolicyData();
   /// <summary>
   ///
   /// </summary>
   UsageMonData getUsageMonData() const;
-  void setUsageMonData(UsageMonData const& value);
+  void setUsageMonData(UsageMonData const &value);
   bool usageMonDataIsSet() const;
   void unsetUsageMonData();
   /// <summary>
   ///
   /// </summary>
   SponsorConnectivityData getSponsorConnectivityData() const;
-  void setSponsorConnectivityData(SponsorConnectivityData const& value);
+  void setSponsorConnectivityData(SponsorConnectivityData const &value);
   bool sponsorConnectivityDataIsSet() const;
   void unsetSponsorConnectivityData();
   /// <summary>
   ///
   /// </summary>
   BdtData getBdtData() const;
-  void setBdtData(BdtData const& value);
+  void setBdtData(BdtData const &value);
   bool bdtDataIsSet() const;
   void unsetBdtData();
   /// <summary>
   ///
   /// </summary>
   OperatorSpecificDataContainer getOpSpecData() const;
-  void setOpSpecData(OperatorSpecificDataContainer const& value);
+  void setOpSpecData(OperatorSpecificDataContainer const &value);
   bool opSpecDataIsSet() const;
   void unsetOpSpecData();
   /// <summary>
   ///
   /// </summary>
-  std::map<std::string, OperatorSpecificDataContainer>& getOpSpecDataMap();
+  std::map<std::string, OperatorSpecificDataContainer> &getOpSpecDataMap();
   void setOpSpecDataMap(
-      std::map<std::string, OperatorSpecificDataContainer> const& value);
+      std::map<std::string, OperatorSpecificDataContainer> const &value);
   bool opSpecDataMapIsSet() const;
   void unsetOpSpecDataMap();
   /// <summary>
   ///
   /// </summary>
   std::string getUeId() const;
-  void setUeId(std::string const& value);
+  void setUeId(std::string const &value);
   bool ueIdIsSet() const;
   void unsetUeId();
   /// <summary>
   ///
   /// </summary>
   std::string getSponsorId() const;
-  void setSponsorId(std::string const& value);
+  void setSponsorId(std::string const &value);
   bool sponsorIdIsSet() const;
   void unsetSponsorId();
   /// <summary>
@@ -135,50 +135,50 @@ class PolicyDataChangeNotification {
   /// 3GPP TS 29.154.
   /// </summary>
   std::string getBdtRefId() const;
-  void setBdtRefId(std::string const& value);
+  void setBdtRefId(std::string const &value);
   bool bdtRefIdIsSet() const;
   void unsetBdtRefId();
   /// <summary>
   ///
   /// </summary>
   std::string getUsageMonId() const;
-  void setUsageMonId(std::string const& value);
+  void setUsageMonId(std::string const &value);
   bool usageMonIdIsSet() const;
   void unsetUsageMonId();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::PlmnId getPlmnId() const;
-  void setPlmnId(oai::model::common::PlmnId const& value);
+  void setPlmnId(oai::model::common::PlmnId const &value);
   bool plmnIdIsSet() const;
   void unsetPlmnId();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getDelResources();
-  void setDelResources(std::vector<std::string> const& value);
+  std::vector<std::string> &getDelResources();
+  void setDelResources(std::vector<std::string> const &value);
   bool delResourcesIsSet() const;
   void unsetDelResources();
   /// <summary>
   ///
   /// </summary>
   std::string getNotifId() const;
-  void setNotifId(std::string const& value);
+  void setNotifId(std::string const &value);
   bool notifIdIsSet() const;
   void unsetNotifId();
   /// <summary>
   ///
   /// </summary>
-  std::vector<NotificationItem>& getReportedFragments();
-  void setReportedFragments(std::vector<NotificationItem> const& value);
+  std::vector<NotificationItem> &getReportedFragments();
+  void setReportedFragments(std::vector<NotificationItem> const &value);
   bool reportedFragmentsIsSet() const;
   void unsetReportedFragments();
 
-  friend void to_json(nlohmann::json& j, const PolicyDataChangeNotification& o);
-  friend void from_json(
-      const nlohmann::json& j, PolicyDataChangeNotification& o);
+  friend void to_json(nlohmann::json &j, const PolicyDataChangeNotification &o);
+  friend void from_json(const nlohmann::json &j,
+                        PolicyDataChangeNotification &o);
 
- protected:
+protected:
   AmPolicyData m_AmPolicyData;
   bool m_AmPolicyDataIsSet;
   UePolicySet m_UePolicySet;
@@ -215,6 +215,6 @@ class PolicyDataChangeNotification {
   bool m_ReportedFragmentsIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* PolicyDataChangeNotification_H_ */

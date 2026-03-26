@@ -12,20 +12,20 @@ extern "C" {
 namespace oai::ngap {
 
 class GtpTeid {
- public:
+public:
   GtpTeid();
   virtual ~GtpTeid();
 
   void set(const uint32_t gtpTeid);
-  bool get(uint32_t& gtpTeid) const;
+  bool get(uint32_t &gtpTeid) const;
 
-  bool encode(Ngap_GTP_TEID_t& gtpTeid) const;
-  bool decode(const Ngap_GTP_TEID_t& gtpTeid);
+  bool encode(Ngap_GTP_TEID_t &gtpTeid) const;
+  bool decode(const Ngap_GTP_TEID_t &gtpTeid);
 
- private:
+private:
   uint32_t m_GtpTeid;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

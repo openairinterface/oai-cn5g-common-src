@@ -19,10 +19,10 @@
 namespace oai::udr::model {
 
 EcRestriction::EcRestriction() {
-  m_AfInstanceId                = "";
-  m_ReferenceId                 = 0;
-  m_PlmnEcInfosIsSet            = false;
-  m_MtcProviderInformation      = "";
+  m_AfInstanceId = "";
+  m_ReferenceId = 0;
+  m_PlmnEcInfosIsSet = false;
+  m_MtcProviderInformation = "";
   m_MtcProviderInformationIsSet = false;
 }
 
@@ -32,17 +32,17 @@ void EcRestriction::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const EcRestriction& o) {
-  j                 = nlohmann::json();
+void to_json(nlohmann::json &j, const EcRestriction &o) {
+  j = nlohmann::json();
   j["afInstanceId"] = o.m_AfInstanceId;
-  j["referenceId"]  = o.m_ReferenceId;
+  j["referenceId"] = o.m_ReferenceId;
   if (o.plmnEcInfosIsSet() || !o.m_PlmnEcInfos.empty())
     j["plmnEcInfos"] = o.m_PlmnEcInfos;
   if (o.mtcProviderInformationIsSet())
     j["mtcProviderInformation"] = o.m_MtcProviderInformation;
 }
 
-void from_json(const nlohmann::json& j, EcRestriction& o) {
+void from_json(const nlohmann::json &j, EcRestriction &o) {
   j.at("afInstanceId").get_to(o.m_AfInstanceId);
   j.at("referenceId").get_to(o.m_ReferenceId);
   if (j.find("plmnEcInfos") != j.end()) {
@@ -55,36 +55,28 @@ void from_json(const nlohmann::json& j, EcRestriction& o) {
   }
 }
 
-std::string EcRestriction::getAfInstanceId() const {
-  return m_AfInstanceId;
-}
-void EcRestriction::setAfInstanceId(std::string const& value) {
+std::string EcRestriction::getAfInstanceId() const { return m_AfInstanceId; }
+void EcRestriction::setAfInstanceId(std::string const &value) {
   m_AfInstanceId = value;
 }
-int32_t EcRestriction::getReferenceId() const {
-  return m_ReferenceId;
-}
+int32_t EcRestriction::getReferenceId() const { return m_ReferenceId; }
 void EcRestriction::setReferenceId(int32_t const value) {
   m_ReferenceId = value;
 }
-std::vector<PlmnEcInfo>& EcRestriction::getPlmnEcInfos() {
+std::vector<PlmnEcInfo> &EcRestriction::getPlmnEcInfos() {
   return m_PlmnEcInfos;
 }
-void EcRestriction::setPlmnEcInfos(std::vector<PlmnEcInfo> const& value) {
-  m_PlmnEcInfos      = value;
+void EcRestriction::setPlmnEcInfos(std::vector<PlmnEcInfo> const &value) {
+  m_PlmnEcInfos = value;
   m_PlmnEcInfosIsSet = true;
 }
-bool EcRestriction::plmnEcInfosIsSet() const {
-  return m_PlmnEcInfosIsSet;
-}
-void EcRestriction::unsetPlmnEcInfos() {
-  m_PlmnEcInfosIsSet = false;
-}
+bool EcRestriction::plmnEcInfosIsSet() const { return m_PlmnEcInfosIsSet; }
+void EcRestriction::unsetPlmnEcInfos() { m_PlmnEcInfosIsSet = false; }
 std::string EcRestriction::getMtcProviderInformation() const {
   return m_MtcProviderInformation;
 }
-void EcRestriction::setMtcProviderInformation(std::string const& value) {
-  m_MtcProviderInformation      = value;
+void EcRestriction::setMtcProviderInformation(std::string const &value) {
+  m_MtcProviderInformation = value;
   m_MtcProviderInformationIsSet = true;
 }
 bool EcRestriction::mtcProviderInformationIsSet() const {
@@ -94,4 +86,4 @@ void EcRestriction::unsetMtcProviderInformation() {
   m_MtcProviderInformationIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

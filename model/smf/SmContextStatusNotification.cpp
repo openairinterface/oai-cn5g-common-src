@@ -23,20 +23,20 @@ void SmContextStatusNotification::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const SmContextStatusNotification& o) {
-  j               = nlohmann::json();
+void to_json(nlohmann::json &j, const SmContextStatusNotification &o) {
+  j = nlohmann::json();
   j["statusInfo"] = o.m_StatusInfo;
 }
 
-void from_json(const nlohmann::json& j, SmContextStatusNotification& o) {
+void from_json(const nlohmann::json &j, SmContextStatusNotification &o) {
   j.at("statusInfo").get_to(o.m_StatusInfo);
 }
 
 StatusInfo SmContextStatusNotification::getStatusInfo() const {
   return m_StatusInfo;
 }
-void SmContextStatusNotification::setStatusInfo(StatusInfo const& value) {
+void SmContextStatusNotification::setStatusInfo(StatusInfo const &value) {
   m_StatusInfo = value;
 }
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

@@ -30,7 +30,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class RmState {
- public:
+public:
   RmState();
   virtual ~RmState();
 
@@ -39,12 +39,12 @@ class RmState {
   /////////////////////////////////////////////
   /// RmState members
 
-  friend void to_json(nlohmann::json& j, const RmState& o);
-  friend void from_json(const nlohmann::json& j, RmState& o);
+  friend void to_json(nlohmann::json &j, const RmState &o);
+  friend void from_json(const nlohmann::json &j, RmState &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* RmState_H_ */

@@ -19,12 +19,12 @@
 namespace oai::udr::model {
 
 DataChangeNotify::DataChangeNotify() {
-  m_OriginalCallbackReferenceIsSet     = false;
-  m_UeId                               = "";
-  m_UeIdIsSet                          = false;
-  m_NotifyItemsIsSet                   = false;
-  m_SdmSubscriptionIsSet               = false;
-  m_AdditionalSdmSubscriptionsIsSet    = false;
+  m_OriginalCallbackReferenceIsSet = false;
+  m_UeId = "";
+  m_UeIdIsSet = false;
+  m_NotifyItemsIsSet = false;
+  m_SdmSubscriptionIsSet = false;
+  m_AdditionalSdmSubscriptionsIsSet = false;
   m_SubscriptionDataSubscriptionsIsSet = false;
 }
 
@@ -34,15 +34,17 @@ void DataChangeNotify::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const DataChangeNotify& o) {
+void to_json(nlohmann::json &j, const DataChangeNotify &o) {
   j = nlohmann::json();
   if (o.originalCallbackReferenceIsSet() ||
       !o.m_OriginalCallbackReference.empty())
     j["originalCallbackReference"] = o.m_OriginalCallbackReference;
-  if (o.ueIdIsSet()) j["ueId"] = o.m_UeId;
+  if (o.ueIdIsSet())
+    j["ueId"] = o.m_UeId;
   if (o.notifyItemsIsSet() || !o.m_NotifyItems.empty())
     j["notifyItems"] = o.m_NotifyItems;
-  if (o.sdmSubscriptionIsSet()) j["sdmSubscription"] = o.m_SdmSubscription;
+  if (o.sdmSubscriptionIsSet())
+    j["sdmSubscription"] = o.m_SdmSubscription;
   if (o.additionalSdmSubscriptionsIsSet() ||
       !o.m_AdditionalSdmSubscriptions.empty())
     j["additionalSdmSubscriptions"] = o.m_AdditionalSdmSubscriptions;
@@ -51,7 +53,7 @@ void to_json(nlohmann::json& j, const DataChangeNotify& o) {
     j["subscriptionDataSubscriptions"] = o.m_SubscriptionDataSubscriptions;
 }
 
-void from_json(const nlohmann::json& j, DataChangeNotify& o) {
+void from_json(const nlohmann::json &j, DataChangeNotify &o) {
   if (j.find("originalCallbackReference") != j.end()) {
     j.at("originalCallbackReference").get_to(o.m_OriginalCallbackReference);
     o.m_OriginalCallbackReferenceIsSet = true;
@@ -79,12 +81,12 @@ void from_json(const nlohmann::json& j, DataChangeNotify& o) {
   }
 }
 
-std::vector<std::string>& DataChangeNotify::getOriginalCallbackReference() {
+std::vector<std::string> &DataChangeNotify::getOriginalCallbackReference() {
   return m_OriginalCallbackReference;
 }
 void DataChangeNotify::setOriginalCallbackReference(
-    std::vector<std::string> const& value) {
-  m_OriginalCallbackReference      = value;
+    std::vector<std::string> const &value) {
+  m_OriginalCallbackReference = value;
   m_OriginalCallbackReferenceIsSet = true;
 }
 bool DataChangeNotify::originalCallbackReferenceIsSet() const {
@@ -93,39 +95,29 @@ bool DataChangeNotify::originalCallbackReferenceIsSet() const {
 void DataChangeNotify::unsetOriginalCallbackReference() {
   m_OriginalCallbackReferenceIsSet = false;
 }
-std::string DataChangeNotify::getUeId() const {
-  return m_UeId;
-}
-void DataChangeNotify::setUeId(std::string const& value) {
-  m_UeId      = value;
+std::string DataChangeNotify::getUeId() const { return m_UeId; }
+void DataChangeNotify::setUeId(std::string const &value) {
+  m_UeId = value;
   m_UeIdIsSet = true;
 }
-bool DataChangeNotify::ueIdIsSet() const {
-  return m_UeIdIsSet;
-}
-void DataChangeNotify::unsetUeId() {
-  m_UeIdIsSet = false;
-}
-std::vector<oai::model::common::NotifyItem>&
+bool DataChangeNotify::ueIdIsSet() const { return m_UeIdIsSet; }
+void DataChangeNotify::unsetUeId() { m_UeIdIsSet = false; }
+std::vector<oai::model::common::NotifyItem> &
 DataChangeNotify::getNotifyItems() {
   return m_NotifyItems;
 }
 void DataChangeNotify::setNotifyItems(
-    std::vector<oai::model::common::NotifyItem> const& value) {
-  m_NotifyItems      = value;
+    std::vector<oai::model::common::NotifyItem> const &value) {
+  m_NotifyItems = value;
   m_NotifyItemsIsSet = true;
 }
-bool DataChangeNotify::notifyItemsIsSet() const {
-  return m_NotifyItemsIsSet;
-}
-void DataChangeNotify::unsetNotifyItems() {
-  m_NotifyItemsIsSet = false;
-}
+bool DataChangeNotify::notifyItemsIsSet() const { return m_NotifyItemsIsSet; }
+void DataChangeNotify::unsetNotifyItems() { m_NotifyItemsIsSet = false; }
 SdmSubscription DataChangeNotify::getSdmSubscription() const {
   return m_SdmSubscription;
 }
-void DataChangeNotify::setSdmSubscription(SdmSubscription const& value) {
-  m_SdmSubscription      = value;
+void DataChangeNotify::setSdmSubscription(SdmSubscription const &value) {
+  m_SdmSubscription = value;
   m_SdmSubscriptionIsSet = true;
 }
 bool DataChangeNotify::sdmSubscriptionIsSet() const {
@@ -134,13 +126,13 @@ bool DataChangeNotify::sdmSubscriptionIsSet() const {
 void DataChangeNotify::unsetSdmSubscription() {
   m_SdmSubscriptionIsSet = false;
 }
-std::vector<SdmSubscription>&
+std::vector<SdmSubscription> &
 DataChangeNotify::getAdditionalSdmSubscriptions() {
   return m_AdditionalSdmSubscriptions;
 }
 void DataChangeNotify::setAdditionalSdmSubscriptions(
-    std::vector<SdmSubscription> const& value) {
-  m_AdditionalSdmSubscriptions      = value;
+    std::vector<SdmSubscription> const &value) {
+  m_AdditionalSdmSubscriptions = value;
   m_AdditionalSdmSubscriptionsIsSet = true;
 }
 bool DataChangeNotify::additionalSdmSubscriptionsIsSet() const {
@@ -149,13 +141,13 @@ bool DataChangeNotify::additionalSdmSubscriptionsIsSet() const {
 void DataChangeNotify::unsetAdditionalSdmSubscriptions() {
   m_AdditionalSdmSubscriptionsIsSet = false;
 }
-std::vector<SubscriptionDataSubscriptions>&
+std::vector<SubscriptionDataSubscriptions> &
 DataChangeNotify::getSubscriptionDataSubscriptions() {
   return m_SubscriptionDataSubscriptions;
 }
 void DataChangeNotify::setSubscriptionDataSubscriptions(
-    std::vector<SubscriptionDataSubscriptions> const& value) {
-  m_SubscriptionDataSubscriptions      = value;
+    std::vector<SubscriptionDataSubscriptions> const &value) {
+  m_SubscriptionDataSubscriptions = value;
   m_SubscriptionDataSubscriptionsIsSet = true;
 }
 bool DataChangeNotify::subscriptionDataSubscriptionsIsSet() const {
@@ -165,4 +157,4 @@ void DataChangeNotify::unsetSubscriptionDataSubscriptions() {
   m_SubscriptionDataSubscriptionsIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

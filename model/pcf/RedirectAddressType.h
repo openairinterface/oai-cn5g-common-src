@@ -38,7 +38,7 @@ namespace oai::model::pcf {
 /// Identifier.
 /// </summary>
 class RedirectAddressType {
- public:
+public:
   RedirectAddressType();
   virtual ~RedirectAddressType() = default;
 
@@ -52,16 +52,16 @@ class RedirectAddressType {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const RedirectAddressType& rhs) const;
-  bool operator!=(const RedirectAddressType& rhs) const;
+  bool operator==(const RedirectAddressType &rhs) const;
+  bool operator!=(const RedirectAddressType &rhs) const;
 
   /////////////////////////////////////////////
   /// RedirectAddressType members
@@ -69,17 +69,17 @@ class RedirectAddressType {
   RedirectAddressType_anyOf getValue() const;
   void setValue(RedirectAddressType_anyOf value);
   RedirectAddressType_anyOf::eRedirectAddressType_anyOf getEnumValue() const;
-  void setEnumValue(
-      RedirectAddressType_anyOf::eRedirectAddressType_anyOf value);
-  friend void to_json(nlohmann::json& j, const RedirectAddressType& o);
-  friend void from_json(const nlohmann::json& j, RedirectAddressType& o);
-  friend void to_json(nlohmann::json& j, const RedirectAddressType_anyOf& o);
-  friend void from_json(const nlohmann::json& j, RedirectAddressType_anyOf& o);
+  void
+  setEnumValue(RedirectAddressType_anyOf::eRedirectAddressType_anyOf value);
+  friend void to_json(nlohmann::json &j, const RedirectAddressType &o);
+  friend void from_json(const nlohmann::json &j, RedirectAddressType &o);
+  friend void to_json(nlohmann::json &j, const RedirectAddressType_anyOf &o);
+  friend void from_json(const nlohmann::json &j, RedirectAddressType_anyOf &o);
 
- protected:
+protected:
   RedirectAddressType_anyOf m_value;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* RedirectAddressType_H_ */

@@ -32,7 +32,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class Point_allOf {
- public:
+public:
   Point_allOf();
   virtual ~Point_allOf();
 
@@ -45,15 +45,15 @@ class Point_allOf {
   ///
   /// </summary>
   GeographicalCoordinates getPoint() const;
-  void setPoint(GeographicalCoordinates const& value);
+  void setPoint(GeographicalCoordinates const &value);
 
-  friend void to_json(nlohmann::json& j, const Point_allOf& o);
-  friend void from_json(const nlohmann::json& j, Point_allOf& o);
+  friend void to_json(nlohmann::json &j, const Point_allOf &o);
+  friend void from_json(const nlohmann::json &j, Point_allOf &o);
 
- protected:
+protected:
   GeographicalCoordinates m_Point;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* Point_allOf_H_ */

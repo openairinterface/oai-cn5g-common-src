@@ -13,8 +13,8 @@
 
 #include "LdrType_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::lmf {
 
@@ -27,12 +27,12 @@ void LdrType_anyOf::validate() const {
   }
 }
 
-bool LdrType_anyOf::validate(std::stringstream& msg) const {
+bool LdrType_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool LdrType_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool LdrType_anyOf::validate(std::stringstream &msg,
+                             const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "LdrType_anyOf" : pathPrefix;
@@ -46,45 +46,45 @@ bool LdrType_anyOf::validate(
   return success;
 }
 
-bool LdrType_anyOf::operator==(const LdrType_anyOf& rhs) const {
+bool LdrType_anyOf::operator==(const LdrType_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool LdrType_anyOf::operator!=(const LdrType_anyOf& rhs) const {
+bool LdrType_anyOf::operator!=(const LdrType_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const LdrType_anyOf& o) {
+void to_json(nlohmann::json &j, const LdrType_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case LdrType_anyOf::eLdrType_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case LdrType_anyOf::eLdrType_anyOf::UE_AVAILABLE:
-      j = "UE_AVAILABLE";
-      break;
-    case LdrType_anyOf::eLdrType_anyOf::PERIODIC:
-      j = "PERIODIC";
-      break;
-    case LdrType_anyOf::eLdrType_anyOf::ENTERING_INTO_AREA:
-      j = "ENTERING_INTO_AREA";
-      break;
-    case LdrType_anyOf::eLdrType_anyOf::LEAVING_FROM_AREA:
-      j = "LEAVING_FROM_AREA";
-      break;
-    case LdrType_anyOf::eLdrType_anyOf::BEING_INSIDE_AREA:
-      j = "BEING_INSIDE_AREA";
-      break;
-    case LdrType_anyOf::eLdrType_anyOf::MOTION:
-      j = "MOTION";
-      break;
+  case LdrType_anyOf::eLdrType_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case LdrType_anyOf::eLdrType_anyOf::UE_AVAILABLE:
+    j = "UE_AVAILABLE";
+    break;
+  case LdrType_anyOf::eLdrType_anyOf::PERIODIC:
+    j = "PERIODIC";
+    break;
+  case LdrType_anyOf::eLdrType_anyOf::ENTERING_INTO_AREA:
+    j = "ENTERING_INTO_AREA";
+    break;
+  case LdrType_anyOf::eLdrType_anyOf::LEAVING_FROM_AREA:
+    j = "LEAVING_FROM_AREA";
+    break;
+  case LdrType_anyOf::eLdrType_anyOf::BEING_INSIDE_AREA:
+    j = "BEING_INSIDE_AREA";
+    break;
+  case LdrType_anyOf::eLdrType_anyOf::MOTION:
+    j = "MOTION";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, LdrType_anyOf& o) {
+void from_json(const nlohmann::json &j, LdrType_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "UE_AVAILABLE") {
     o.setValue(LdrType_anyOf::eLdrType_anyOf::UE_AVAILABLE);
@@ -114,4 +114,4 @@ void LdrType_anyOf::setValue(LdrType_anyOf::eLdrType_anyOf value) {
   m_value = value;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

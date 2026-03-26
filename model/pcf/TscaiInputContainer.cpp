@@ -19,9 +19,9 @@
 namespace oai::model::pcf {
 
 TscaiInputContainer::TscaiInputContainer() {
-  m_Periodicity           = 0;
-  m_PeriodicityIsSet      = false;
-  m_BurstArrivalTime      = "";
+  m_Periodicity = 0;
+  m_PeriodicityIsSet = false;
+  m_BurstArrivalTime = "";
   m_BurstArrivalTimeIsSet = false;
 }
 
@@ -32,18 +32,18 @@ void TscaiInputContainer::validate() const {
   }
 }
 
-bool TscaiInputContainer::validate(std::stringstream& msg) const {
+bool TscaiInputContainer::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool TscaiInputContainer::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool TscaiInputContainer::validate(std::stringstream &msg,
+                                   const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "TscaiInputContainer" : pathPrefix;
 
   if (periodicityIsSet()) {
-    const int32_t& value               = m_Periodicity;
+    const int32_t &value = m_Periodicity;
     const std::string currentValuePath = _pathPrefix + ".periodicity";
 
     if (value < 0) {
@@ -55,7 +55,7 @@ bool TscaiInputContainer::validate(
   return success;
 }
 
-bool TscaiInputContainer::operator==(const TscaiInputContainer& rhs) const {
+bool TscaiInputContainer::operator==(const TscaiInputContainer &rhs) const {
   return
 
       ((!periodicityIsSet() && !rhs.periodicityIsSet()) ||
@@ -69,17 +69,19 @@ bool TscaiInputContainer::operator==(const TscaiInputContainer& rhs) const {
           ;
 }
 
-bool TscaiInputContainer::operator!=(const TscaiInputContainer& rhs) const {
+bool TscaiInputContainer::operator!=(const TscaiInputContainer &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const TscaiInputContainer& o) {
+void to_json(nlohmann::json &j, const TscaiInputContainer &o) {
   j = nlohmann::json();
-  if (o.periodicityIsSet()) j["periodicity"] = o.m_Periodicity;
-  if (o.burstArrivalTimeIsSet()) j["burstArrivalTime"] = o.m_BurstArrivalTime;
+  if (o.periodicityIsSet())
+    j["periodicity"] = o.m_Periodicity;
+  if (o.burstArrivalTimeIsSet())
+    j["burstArrivalTime"] = o.m_BurstArrivalTime;
 }
 
-void from_json(const nlohmann::json& j, TscaiInputContainer& o) {
+void from_json(const nlohmann::json &j, TscaiInputContainer &o) {
   if (j.find("periodicity") != j.end()) {
     j.at("periodicity").get_to(o.m_Periodicity);
     o.m_PeriodicityIsSet = true;
@@ -90,24 +92,20 @@ void from_json(const nlohmann::json& j, TscaiInputContainer& o) {
   }
 }
 
-int32_t TscaiInputContainer::getPeriodicity() const {
-  return m_Periodicity;
-}
+int32_t TscaiInputContainer::getPeriodicity() const { return m_Periodicity; }
 void TscaiInputContainer::setPeriodicity(int32_t const value) {
-  m_Periodicity      = value;
+  m_Periodicity = value;
   m_PeriodicityIsSet = true;
 }
 bool TscaiInputContainer::periodicityIsSet() const {
   return m_PeriodicityIsSet;
 }
-void TscaiInputContainer::unsetPeriodicity() {
-  m_PeriodicityIsSet = false;
-}
+void TscaiInputContainer::unsetPeriodicity() { m_PeriodicityIsSet = false; }
 std::string TscaiInputContainer::getBurstArrivalTime() const {
   return m_BurstArrivalTime;
 }
-void TscaiInputContainer::setBurstArrivalTime(std::string const& value) {
-  m_BurstArrivalTime      = value;
+void TscaiInputContainer::setBurstArrivalTime(std::string const &value) {
+  m_BurstArrivalTime = value;
   m_BurstArrivalTimeIsSet = true;
 }
 bool TscaiInputContainer::burstArrivalTimeIsSet() const {
@@ -117,4 +115,4 @@ void TscaiInputContainer::unsetBurstArrivalTime() {
   m_BurstArrivalTimeIsSet = false;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

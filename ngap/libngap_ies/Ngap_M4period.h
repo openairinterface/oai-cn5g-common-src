@@ -20,11 +20,11 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_M4period {
-  Ngap_M4period_ms1024  = 0,
-  Ngap_M4period_ms2048  = 1,
-  Ngap_M4period_ms5120  = 2,
+  Ngap_M4period_ms1024 = 0,
+  Ngap_M4period_ms2048 = 1,
+  Ngap_M4period_ms5120 = 2,
   Ngap_M4period_ms10240 = 3,
-  Ngap_M4period_min1    = 4
+  Ngap_M4period_min1 = 4
   /*
    * Enumeration is extensible
    */

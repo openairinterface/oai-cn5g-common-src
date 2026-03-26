@@ -18,8 +18,8 @@ namespace oai::model::smf {
 using namespace oai::model::common;
 
 SmContextCreateError::SmContextCreateError() {
-  m_N1SmMsgIsSet      = false;
-  m_RecoveryTime      = "";
+  m_N1SmMsgIsSet = false;
+  m_RecoveryTime = "";
   m_RecoveryTimeIsSet = false;
 }
 
@@ -29,14 +29,16 @@ void SmContextCreateError::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const SmContextCreateError& o) {
-  j          = nlohmann::json();
+void to_json(nlohmann::json &j, const SmContextCreateError &o) {
+  j = nlohmann::json();
   j["error"] = o.m_Error;
-  if (o.n1SmMsgIsSet()) j["n1SmMsg"] = o.m_N1SmMsg;
-  if (o.recoveryTimeIsSet()) j["recoveryTime"] = o.m_RecoveryTime;
+  if (o.n1SmMsgIsSet())
+    j["n1SmMsg"] = o.m_N1SmMsg;
+  if (o.recoveryTimeIsSet())
+    j["recoveryTime"] = o.m_RecoveryTime;
 }
 
-void from_json(const nlohmann::json& j, SmContextCreateError& o) {
+void from_json(const nlohmann::json &j, SmContextCreateError &o) {
   j.at("error").get_to(o.m_Error);
   if (j.find("n1SmMsg") != j.end()) {
     j.at("n1SmMsg").get_to(o.m_N1SmMsg);
@@ -48,37 +50,27 @@ void from_json(const nlohmann::json& j, SmContextCreateError& o) {
   }
 }
 
-ProblemDetails SmContextCreateError::getError() const {
-  return m_Error;
-}
-void SmContextCreateError::setError(ProblemDetails const& value) {
+ProblemDetails SmContextCreateError::getError() const { return m_Error; }
+void SmContextCreateError::setError(ProblemDetails const &value) {
   m_Error = value;
 }
-RefToBinaryData SmContextCreateError::getN1SmMsg() const {
-  return m_N1SmMsg;
-}
-void SmContextCreateError::setN1SmMsg(RefToBinaryData const& value) {
-  m_N1SmMsg      = value;
+RefToBinaryData SmContextCreateError::getN1SmMsg() const { return m_N1SmMsg; }
+void SmContextCreateError::setN1SmMsg(RefToBinaryData const &value) {
+  m_N1SmMsg = value;
   m_N1SmMsgIsSet = true;
 }
-bool SmContextCreateError::n1SmMsgIsSet() const {
-  return m_N1SmMsgIsSet;
-}
-void SmContextCreateError::unsetN1SmMsg() {
-  m_N1SmMsgIsSet = false;
-}
+bool SmContextCreateError::n1SmMsgIsSet() const { return m_N1SmMsgIsSet; }
+void SmContextCreateError::unsetN1SmMsg() { m_N1SmMsgIsSet = false; }
 std::string SmContextCreateError::getRecoveryTime() const {
   return m_RecoveryTime;
 }
-void SmContextCreateError::setRecoveryTime(std::string const& value) {
-  m_RecoveryTime      = value;
+void SmContextCreateError::setRecoveryTime(std::string const &value) {
+  m_RecoveryTime = value;
   m_RecoveryTimeIsSet = true;
 }
 bool SmContextCreateError::recoveryTimeIsSet() const {
   return m_RecoveryTimeIsSet;
 }
-void SmContextCreateError::unsetRecoveryTime() {
-  m_RecoveryTimeIsSet = false;
-}
+void SmContextCreateError::unsetRecoveryTime() { m_RecoveryTimeIsSet = false; }
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

@@ -15,25 +15,25 @@ extern "C" {
 
 namespace oai::ngap {
 class HandoverNotifyMsg : public NgapUeMessage {
- public:
+public:
   HandoverNotifyMsg();
   virtual ~HandoverNotifyMsg();
 
   void initialize();
-  void setAmfUeNgapId(const uint64_t& id) override;
-  void setRanUeNgapId(const uint32_t& id) override;
-  bool decode(Ngap_NGAP_PDU_t* ngapMsgPdu) override;
+  void setAmfUeNgapId(const uint64_t &id) override;
+  void setRanUeNgapId(const uint32_t &id) override;
+  bool decode(Ngap_NGAP_PDU_t *ngapMsgPdu) override;
 
-  void setUserLocationInfoNr(const NrCgi_t& cig, const Tai_t& tai);
-  bool getUserLocationInfoNr(NrCgi_t& cig, Tai_t& tai) const;
+  void setUserLocationInfoNr(const NrCgi_t &cig, const Tai_t &tai);
+  bool getUserLocationInfoNr(NrCgi_t &cig, Tai_t &tai) const;
 
- private:
-  Ngap_HandoverNotify_t* m_HandoverNotifyIes;
+private:
+  Ngap_HandoverNotify_t *m_HandoverNotifyIes;
   // AMF_UE_NGAP_ID (Mandatory)
   // RAN_UE_NGAP_ID (Mandatory)
-  UserLocationInformation m_UserLocationInformation;  // Mandatory
+  UserLocationInformation m_UserLocationInformation; // Mandatory
   // TODO: Notify Source NG-RAN Node (Optional, Rel 16.14.0)
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

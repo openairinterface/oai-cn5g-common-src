@@ -2,8 +2,8 @@
  * Copyright (c) 2003, 2005 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#include <asn_internal.h>
 #include <NULL.h>
+#include <asn_internal.h>
 
 /*
  * NULL basic type description.
@@ -87,27 +87,26 @@ asn_TYPE_descriptor_t asn_DEF_NULL = {
     0  /* No specifics */
 };
 
-void NULL_free(
-    const asn_TYPE_descriptor_t* td, void* ptr,
-    enum asn_struct_free_method method) {
+void NULL_free(const asn_TYPE_descriptor_t *td, void *ptr,
+               enum asn_struct_free_method method) {
   if (td && ptr) {
     switch (method) {
-      case ASFM_FREE_EVERYTHING:
-        FREEMEM(ptr);
-        break;
-      case ASFM_FREE_UNDERLYING:
-        break;
-      case ASFM_FREE_UNDERLYING_AND_RESET:
-        memset(ptr, 0, sizeof(NULL_t));
-        break;
+    case ASFM_FREE_EVERYTHING:
+      FREEMEM(ptr);
+      break;
+    case ASFM_FREE_UNDERLYING:
+      break;
+    case ASFM_FREE_UNDERLYING_AND_RESET:
+      memset(ptr, 0, sizeof(NULL_t));
+      break;
     }
   }
 }
 
-int NULL_compare(
-    const asn_TYPE_descriptor_t* td, const void* a, const void* b) {
-  (void) td;
-  (void) a;
-  (void) b;
+int NULL_compare(const asn_TYPE_descriptor_t *td, const void *a,
+                 const void *b) {
+  (void)td;
+  (void)a;
+  (void)b;
   return 0;
 }

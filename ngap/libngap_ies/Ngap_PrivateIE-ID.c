@@ -8,35 +8,33 @@
 
 #include "Ngap_PrivateIE-ID.h"
 
-static int memb_Ngap_local_constraint_1(
-    const asn_TYPE_descriptor_t* td, const void* sptr,
-    asn_app_constraint_failed_f* ctfailcb, void* app_key) {
+static int memb_Ngap_local_constraint_1(const asn_TYPE_descriptor_t *td,
+                                        const void *sptr,
+                                        asn_app_constraint_failed_f *ctfailcb,
+                                        void *app_key) {
   long value;
 
   if (!sptr) {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: value not given (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: value not given (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 
-  value = *(const long*) sptr;
+  value = *(const long *)sptr;
 
   if ((value >= 0L && value <= 65535L)) {
     /* Constraint check succeeded */
     return 0;
   } else {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: constraint failed (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: constraint failed (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 }
 
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 static asn_oer_constraints_t asn_OER_memb_Ngap_local_constr_2 CC_NOTUSED = {
-    {2, 1} /* (0..65535) */,
-    -1};
+    {2, 1} /* (0..65535) */, -1};
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 static asn_per_constraints_t asn_PER_memb_Ngap_local_constr_2 CC_NOTUSED = {
@@ -108,7 +106,7 @@ asn_CHOICE_specifics_t asn_SPC_Ngap_PrivateIE_ID_specs_1 = {
     sizeof(struct Ngap_PrivateIE_ID),
     offsetof(struct Ngap_PrivateIE_ID, _asn_ctx),
     offsetof(struct Ngap_PrivateIE_ID, present),
-    sizeof(((struct Ngap_PrivateIE_ID*) 0)->present),
+    sizeof(((struct Ngap_PrivateIE_ID *)0)->present),
     asn_MAP_Ngap_PrivateIE_ID_tag2el_1,
     2, /* Count of tags in the map */
     0,

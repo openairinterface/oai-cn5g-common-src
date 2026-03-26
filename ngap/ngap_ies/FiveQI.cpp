@@ -7,36 +7,32 @@
 namespace oai::ngap {
 
 //------------------------------------------------------------------------------
-FiveQI::FiveQI() {
-  m_FiveQI = 0;
-}
+FiveQI::FiveQI() { m_FiveQI = 0; }
 
 //------------------------------------------------------------------------------
 FiveQI::~FiveQI() {}
 
 //------------------------------------------------------------------------------
-void FiveQI::set(const long& value) {
-  m_FiveQI = value;
-}
+void FiveQI::set(const long &value) { m_FiveQI = value; }
 
 //------------------------------------------------------------------------------
-bool FiveQI::get(long& value) const {
+bool FiveQI::get(long &value) const {
   value = m_FiveQI;
 
   return true;
 }
 
 //------------------------------------------------------------------------------
-bool FiveQI::encode(Ngap_FiveQI_t& value) const {
+bool FiveQI::encode(Ngap_FiveQI_t &value) const {
   value = m_FiveQI;
 
   return true;
 }
 
 //------------------------------------------------------------------------------
-bool FiveQI::decode(const Ngap_FiveQI_t& value) {
+bool FiveQI::decode(const Ngap_FiveQI_t &value) {
   m_FiveQI = value;
 
   return true;
 }
-}  // namespace oai::ngap
+} // namespace oai::ngap

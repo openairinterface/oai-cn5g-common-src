@@ -32,7 +32,7 @@ namespace oai::model::pcf {
 /// IMS signalling only.
 /// </summary>
 class QosFlowUsage {
- public:
+public:
   QosFlowUsage();
   virtual ~QosFlowUsage() = default;
 
@@ -46,16 +46,16 @@ class QosFlowUsage {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const QosFlowUsage& rhs) const;
-  bool operator!=(const QosFlowUsage& rhs) const;
+  bool operator==(const QosFlowUsage &rhs) const;
+  bool operator!=(const QosFlowUsage &rhs) const;
 
   /////////////////////////////////////////////
   /// QosFlowUsage members
@@ -64,15 +64,15 @@ class QosFlowUsage {
   void setValue(QosFlowUsage_anyOf value);
   QosFlowUsage_anyOf::eQosFlowUsage_anyOf getEnumValue() const;
   void setEnumValue(QosFlowUsage_anyOf::eQosFlowUsage_anyOf value);
-  friend void to_json(nlohmann::json& j, const QosFlowUsage& o);
-  friend void from_json(const nlohmann::json& j, QosFlowUsage& o);
-  friend void to_json(nlohmann::json& j, const QosFlowUsage_anyOf& o);
-  friend void from_json(const nlohmann::json& j, QosFlowUsage_anyOf& o);
+  friend void to_json(nlohmann::json &j, const QosFlowUsage &o);
+  friend void from_json(const nlohmann::json &j, QosFlowUsage &o);
+  friend void to_json(nlohmann::json &j, const QosFlowUsage_anyOf &o);
+  friend void from_json(const nlohmann::json &j, QosFlowUsage_anyOf &o);
 
- protected:
+protected:
   QosFlowUsage_anyOf m_value;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* QosFlowUsage_H_ */

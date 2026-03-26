@@ -19,10 +19,10 @@
 namespace oai::model::pcf {
 
 PduSetQosPara::PduSetQosPara() {
-  m_PduSetDelayBudget       = 0;
-  m_PduSetDelayBudgetIsSet  = false;
-  m_PduSetErrRate           = "";
-  m_PduSetErrRateIsSet      = false;
+  m_PduSetDelayBudget = 0;
+  m_PduSetDelayBudgetIsSet = false;
+  m_PduSetErrRate = "";
+  m_PduSetErrRateIsSet = false;
   m_PduSetHandlingInfoIsSet = false;
 }
 
@@ -33,18 +33,18 @@ void PduSetQosPara::validate() const {
   }
 }
 
-bool PduSetQosPara::validate(std::stringstream& msg) const {
+bool PduSetQosPara::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool PduSetQosPara::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool PduSetQosPara::validate(std::stringstream &msg,
+                             const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PduSetQosPara" : pathPrefix;
 
   if (pduSetDelayBudgetIsSet()) {
-    const int32_t& value               = m_PduSetDelayBudget;
+    const int32_t &value = m_PduSetDelayBudget;
     const std::string currentValuePath = _pathPrefix + ".pduSetDelayBudget";
 
     if (value < 1) {
@@ -54,14 +54,14 @@ bool PduSetQosPara::validate(
   }
 
   if (pduSetErrRateIsSet()) {
-    const std::string& value           = m_PduSetErrRate;
+    const std::string &value = m_PduSetErrRate;
     const std::string currentValuePath = _pathPrefix + ".pduSetErrRate";
   }
 
   return success;
 }
 
-bool PduSetQosPara::operator==(const PduSetQosPara& rhs) const {
+bool PduSetQosPara::operator==(const PduSetQosPara &rhs) const {
   return
 
       ((!pduSetDelayBudgetIsSet() && !rhs.pduSetDelayBudgetIsSet()) ||
@@ -79,20 +79,21 @@ bool PduSetQosPara::operator==(const PduSetQosPara& rhs) const {
           ;
 }
 
-bool PduSetQosPara::operator!=(const PduSetQosPara& rhs) const {
+bool PduSetQosPara::operator!=(const PduSetQosPara &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PduSetQosPara& o) {
+void to_json(nlohmann::json &j, const PduSetQosPara &o) {
   j = nlohmann::json::object();
   if (o.pduSetDelayBudgetIsSet())
     j["pduSetDelayBudget"] = o.m_PduSetDelayBudget;
-  if (o.pduSetErrRateIsSet()) j["pduSetErrRate"] = o.m_PduSetErrRate;
+  if (o.pduSetErrRateIsSet())
+    j["pduSetErrRate"] = o.m_PduSetErrRate;
   if (o.pduSetHandlingInfoIsSet())
     j["pduSetHandlingInfo"] = o.m_PduSetHandlingInfo;
 }
 
-void from_json(const nlohmann::json& j, PduSetQosPara& o) {
+void from_json(const nlohmann::json &j, PduSetQosPara &o) {
   if (j.find("pduSetDelayBudget") != j.end()) {
     j.at("pduSetDelayBudget").get_to(o.m_PduSetDelayBudget);
     o.m_PduSetDelayBudgetIsSet = true;
@@ -111,7 +112,7 @@ int32_t PduSetQosPara::getPduSetDelayBudget() const {
   return m_PduSetDelayBudget;
 }
 void PduSetQosPara::setPduSetDelayBudget(int32_t const value) {
-  m_PduSetDelayBudget      = value;
+  m_PduSetDelayBudget = value;
   m_PduSetDelayBudgetIsSet = true;
 }
 bool PduSetQosPara::pduSetDelayBudgetIsSet() const {
@@ -120,26 +121,20 @@ bool PduSetQosPara::pduSetDelayBudgetIsSet() const {
 void PduSetQosPara::unsetPduSetDelayBudget() {
   m_PduSetDelayBudgetIsSet = false;
 }
-std::string PduSetQosPara::getPduSetErrRate() const {
-  return m_PduSetErrRate;
-}
-void PduSetQosPara::setPduSetErrRate(std::string const& value) {
-  m_PduSetErrRate      = value;
+std::string PduSetQosPara::getPduSetErrRate() const { return m_PduSetErrRate; }
+void PduSetQosPara::setPduSetErrRate(std::string const &value) {
+  m_PduSetErrRate = value;
   m_PduSetErrRateIsSet = true;
 }
-bool PduSetQosPara::pduSetErrRateIsSet() const {
-  return m_PduSetErrRateIsSet;
-}
-void PduSetQosPara::unsetPduSetErrRate() {
-  m_PduSetErrRateIsSet = false;
-}
-oai::model::pcf::PduSetHandlingInfo PduSetQosPara::getPduSetHandlingInfo()
-    const {
+bool PduSetQosPara::pduSetErrRateIsSet() const { return m_PduSetErrRateIsSet; }
+void PduSetQosPara::unsetPduSetErrRate() { m_PduSetErrRateIsSet = false; }
+oai::model::pcf::PduSetHandlingInfo
+PduSetQosPara::getPduSetHandlingInfo() const {
   return m_PduSetHandlingInfo;
 }
 void PduSetQosPara::setPduSetHandlingInfo(
-    oai::model::pcf::PduSetHandlingInfo const& value) {
-  m_PduSetHandlingInfo      = value;
+    oai::model::pcf::PduSetHandlingInfo const &value) {
+  m_PduSetHandlingInfo = value;
   m_PduSetHandlingInfoIsSet = true;
 }
 bool PduSetQosPara::pduSetHandlingInfoIsSet() const {
@@ -149,4 +144,4 @@ void PduSetQosPara::unsetPduSetHandlingInfo() {
   m_PduSetHandlingInfoIsSet = false;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

@@ -19,17 +19,17 @@
 namespace oai::model::common {
 
 NrLocationRm::NrLocationRm() {
-  m_IgnoreNcgi                    = false;
-  m_IgnoreNcgiIsSet               = false;
-  m_AgeOfLocationInformation      = 0;
+  m_IgnoreNcgi = false;
+  m_IgnoreNcgiIsSet = false;
+  m_AgeOfLocationInformation = 0;
   m_AgeOfLocationInformationIsSet = false;
-  m_UeLocationTimestamp           = "";
-  m_UeLocationTimestampIsSet      = false;
-  m_GeographicalInformation       = "";
-  m_GeographicalInformationIsSet  = false;
-  m_GeodeticInformation           = "";
-  m_GeodeticInformationIsSet      = false;
-  m_GlobalGnbIdIsSet              = false;
+  m_UeLocationTimestamp = "";
+  m_UeLocationTimestampIsSet = false;
+  m_GeographicalInformation = "";
+  m_GeographicalInformationIsSet = false;
+  m_GeodeticInformation = "";
+  m_GeodeticInformationIsSet = false;
+  m_GlobalGnbIdIsSet = false;
 }
 
 void NrLocationRm::validate() const {
@@ -39,18 +39,18 @@ void NrLocationRm::validate() const {
   }
 }
 
-bool NrLocationRm::validate(std::stringstream& msg) const {
+bool NrLocationRm::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool NrLocationRm::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool NrLocationRm::validate(std::stringstream &msg,
+                            const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "NrLocationRm" : pathPrefix;
 
   if (ageOfLocationInformationIsSet()) {
-    const int32_t& value = m_AgeOfLocationInformation;
+    const int32_t &value = m_AgeOfLocationInformation;
     const std::string currentValuePath =
         _pathPrefix + ".ageOfLocationInformation";
 
@@ -65,20 +65,20 @@ bool NrLocationRm::validate(
   }
 
   if (geographicalInformationIsSet()) {
-    const std::string& value = m_GeographicalInformation;
+    const std::string &value = m_GeographicalInformation;
     const std::string currentValuePath =
         _pathPrefix + ".geographicalInformation";
   }
 
   if (geodeticInformationIsSet()) {
-    const std::string& value           = m_GeodeticInformation;
+    const std::string &value = m_GeodeticInformation;
     const std::string currentValuePath = _pathPrefix + ".geodeticInformation";
   }
 
   return success;
 }
 
-bool NrLocationRm::operator==(const NrLocationRm& rhs) const {
+bool NrLocationRm::operator==(const NrLocationRm &rhs) const {
   return
 
       (getTai() == rhs.getTai()) &&
@@ -115,15 +115,16 @@ bool NrLocationRm::operator==(const NrLocationRm& rhs) const {
           ;
 }
 
-bool NrLocationRm::operator!=(const NrLocationRm& rhs) const {
+bool NrLocationRm::operator!=(const NrLocationRm &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const NrLocationRm& o) {
-  j         = nlohmann::json();
-  j["tai"]  = o.m_Tai;
+void to_json(nlohmann::json &j, const NrLocationRm &o) {
+  j = nlohmann::json();
+  j["tai"] = o.m_Tai;
   j["ncgi"] = o.m_Ncgi;
-  if (o.ignoreNcgiIsSet()) j["ignoreNcgi"] = o.m_IgnoreNcgi;
+  if (o.ignoreNcgiIsSet())
+    j["ignoreNcgi"] = o.m_IgnoreNcgi;
   if (o.ageOfLocationInformationIsSet())
     j["ageOfLocationInformation"] = o.m_AgeOfLocationInformation;
   if (o.ueLocationTimestampIsSet())
@@ -132,10 +133,11 @@ void to_json(nlohmann::json& j, const NrLocationRm& o) {
     j["geographicalInformation"] = o.m_GeographicalInformation;
   if (o.geodeticInformationIsSet())
     j["geodeticInformation"] = o.m_GeodeticInformation;
-  if (o.globalGnbIdIsSet()) j["globalGnbId"] = o.m_GlobalGnbId;
+  if (o.globalGnbIdIsSet())
+    j["globalGnbId"] = o.m_GlobalGnbId;
 }
 
-void from_json(const nlohmann::json& j, NrLocationRm& o) {
+void from_json(const nlohmann::json &j, NrLocationRm &o) {
   j.at("tai").get_to(o.m_Tai);
   j.at("ncgi").get_to(o.m_Ncgi);
   if (j.find("ignoreNcgi") != j.end()) {
@@ -164,36 +166,26 @@ void from_json(const nlohmann::json& j, NrLocationRm& o) {
   }
 }
 
-oai::model::common::Tai NrLocationRm::getTai() const {
-  return m_Tai;
-}
-void NrLocationRm::setTai(oai::model::common::Tai const& value) {
+oai::model::common::Tai NrLocationRm::getTai() const { return m_Tai; }
+void NrLocationRm::setTai(oai::model::common::Tai const &value) {
   m_Tai = value;
 }
-oai::model::common::Ncgi NrLocationRm::getNcgi() const {
-  return m_Ncgi;
-}
-void NrLocationRm::setNcgi(oai::model::common::Ncgi const& value) {
+oai::model::common::Ncgi NrLocationRm::getNcgi() const { return m_Ncgi; }
+void NrLocationRm::setNcgi(oai::model::common::Ncgi const &value) {
   m_Ncgi = value;
 }
-bool NrLocationRm::isIgnoreNcgi() const {
-  return m_IgnoreNcgi;
-}
+bool NrLocationRm::isIgnoreNcgi() const { return m_IgnoreNcgi; }
 void NrLocationRm::setIgnoreNcgi(bool const value) {
-  m_IgnoreNcgi      = value;
+  m_IgnoreNcgi = value;
   m_IgnoreNcgiIsSet = true;
 }
-bool NrLocationRm::ignoreNcgiIsSet() const {
-  return m_IgnoreNcgiIsSet;
-}
-void NrLocationRm::unsetIgnoreNcgi() {
-  m_IgnoreNcgiIsSet = false;
-}
+bool NrLocationRm::ignoreNcgiIsSet() const { return m_IgnoreNcgiIsSet; }
+void NrLocationRm::unsetIgnoreNcgi() { m_IgnoreNcgiIsSet = false; }
 int32_t NrLocationRm::getAgeOfLocationInformation() const {
   return m_AgeOfLocationInformation;
 }
 void NrLocationRm::setAgeOfLocationInformation(int32_t const value) {
-  m_AgeOfLocationInformation      = value;
+  m_AgeOfLocationInformation = value;
   m_AgeOfLocationInformationIsSet = true;
 }
 bool NrLocationRm::ageOfLocationInformationIsSet() const {
@@ -205,8 +197,8 @@ void NrLocationRm::unsetAgeOfLocationInformation() {
 std::string NrLocationRm::getUeLocationTimestamp() const {
   return m_UeLocationTimestamp;
 }
-void NrLocationRm::setUeLocationTimestamp(std::string const& value) {
-  m_UeLocationTimestamp      = value;
+void NrLocationRm::setUeLocationTimestamp(std::string const &value) {
+  m_UeLocationTimestamp = value;
   m_UeLocationTimestampIsSet = true;
 }
 bool NrLocationRm::ueLocationTimestampIsSet() const {
@@ -218,8 +210,8 @@ void NrLocationRm::unsetUeLocationTimestamp() {
 std::string NrLocationRm::getGeographicalInformation() const {
   return m_GeographicalInformation;
 }
-void NrLocationRm::setGeographicalInformation(std::string const& value) {
-  m_GeographicalInformation      = value;
+void NrLocationRm::setGeographicalInformation(std::string const &value) {
+  m_GeographicalInformation = value;
   m_GeographicalInformationIsSet = true;
 }
 bool NrLocationRm::geographicalInformationIsSet() const {
@@ -231,8 +223,8 @@ void NrLocationRm::unsetGeographicalInformation() {
 std::string NrLocationRm::getGeodeticInformation() const {
   return m_GeodeticInformation;
 }
-void NrLocationRm::setGeodeticInformation(std::string const& value) {
-  m_GeodeticInformation      = value;
+void NrLocationRm::setGeodeticInformation(std::string const &value) {
+  m_GeodeticInformation = value;
   m_GeodeticInformationIsSet = true;
 }
 bool NrLocationRm::geodeticInformationIsSet() const {
@@ -245,15 +237,11 @@ oai::model::common::GlobalRanNodeId NrLocationRm::getGlobalGnbId() const {
   return m_GlobalGnbId;
 }
 void NrLocationRm::setGlobalGnbId(
-    oai::model::common::GlobalRanNodeId const& value) {
-  m_GlobalGnbId      = value;
+    oai::model::common::GlobalRanNodeId const &value) {
+  m_GlobalGnbId = value;
   m_GlobalGnbIdIsSet = true;
 }
-bool NrLocationRm::globalGnbIdIsSet() const {
-  return m_GlobalGnbIdIsSet;
-}
-void NrLocationRm::unsetGlobalGnbId() {
-  m_GlobalGnbIdIsSet = false;
-}
+bool NrLocationRm::globalGnbIdIsSet() const { return m_GlobalGnbIdIsSet; }
+void NrLocationRm::unsetGlobalGnbId() { m_GlobalGnbIdIsSet = false; }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

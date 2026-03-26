@@ -23,10 +23,10 @@ void N2InfoNotifyReason::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const N2InfoNotifyReason& o) {
+void to_json(nlohmann::json &j, const N2InfoNotifyReason &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, N2InfoNotifyReason& o) {}
+void from_json(const nlohmann::json &j, N2InfoNotifyReason &o) {}
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

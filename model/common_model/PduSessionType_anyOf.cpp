@@ -13,8 +13,8 @@
 
 #include "PduSessionType_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::common {
 
@@ -27,12 +27,12 @@ void PduSessionType_anyOf::validate() const {
   }
 }
 
-bool PduSessionType_anyOf::validate(std::stringstream& msg) const {
+bool PduSessionType_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool PduSessionType_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool PduSessionType_anyOf::validate(std::stringstream &msg,
+                                    const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PduSessionType_anyOf" : pathPrefix;
@@ -46,43 +46,43 @@ bool PduSessionType_anyOf::validate(
   return success;
 }
 
-bool PduSessionType_anyOf::operator==(const PduSessionType_anyOf& rhs) const {
+bool PduSessionType_anyOf::operator==(const PduSessionType_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool PduSessionType_anyOf::operator!=(const PduSessionType_anyOf& rhs) const {
+bool PduSessionType_anyOf::operator!=(const PduSessionType_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PduSessionType_anyOf& o) {
+void to_json(nlohmann::json &j, const PduSessionType_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case PduSessionType_anyOf::ePduSessionType_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case PduSessionType_anyOf::ePduSessionType_anyOf::IPV4:
-      j = "IPV4";
-      break;
-    case PduSessionType_anyOf::ePduSessionType_anyOf::IPV6:
-      j = "IPV6";
-      break;
-    case PduSessionType_anyOf::ePduSessionType_anyOf::IPV4V6:
-      j = "IPV4V6";
-      break;
-    case PduSessionType_anyOf::ePduSessionType_anyOf::UNSTRUCTURED:
-      j = "UNSTRUCTURED";
-      break;
-    case PduSessionType_anyOf::ePduSessionType_anyOf::ETHERNET:
-      j = "ETHERNET";
-      break;
+  case PduSessionType_anyOf::ePduSessionType_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case PduSessionType_anyOf::ePduSessionType_anyOf::IPV4:
+    j = "IPV4";
+    break;
+  case PduSessionType_anyOf::ePduSessionType_anyOf::IPV6:
+    j = "IPV6";
+    break;
+  case PduSessionType_anyOf::ePduSessionType_anyOf::IPV4V6:
+    j = "IPV4V6";
+    break;
+  case PduSessionType_anyOf::ePduSessionType_anyOf::UNSTRUCTURED:
+    j = "UNSTRUCTURED";
+    break;
+  case PduSessionType_anyOf::ePduSessionType_anyOf::ETHERNET:
+    j = "ETHERNET";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, PduSessionType_anyOf& o) {
+void from_json(const nlohmann::json &j, PduSessionType_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "IPV4") {
     o.setValue(PduSessionType_anyOf::ePduSessionType_anyOf::IPV4);
@@ -103,8 +103,8 @@ void from_json(const nlohmann::json& j, PduSessionType_anyOf& o) {
   }
 }
 
-PduSessionType_anyOf::ePduSessionType_anyOf PduSessionType_anyOf::getValue()
-    const {
+PduSessionType_anyOf::ePduSessionType_anyOf
+PduSessionType_anyOf::getValue() const {
   return m_value;
 }
 void PduSessionType_anyOf::setValue(
@@ -112,4 +112,4 @@ void PduSessionType_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

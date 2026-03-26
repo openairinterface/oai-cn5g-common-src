@@ -20,17 +20,17 @@ void UeRetentionInformation::set(const long value) {
 }
 
 //------------------------------------------------------------------------------
-void UeRetentionInformation::get(long& value) const {
+void UeRetentionInformation::get(long &value) const {
   value = m_UeRetentionInformation;
 }
 
 //------------------------------------------------------------------------------
-void UeRetentionInformation::set(const e_Ngap_UERetentionInformation& value) {
+void UeRetentionInformation::set(const e_Ngap_UERetentionInformation &value) {
   m_UeRetentionInformation = static_cast<long>(value);
 }
 
 //------------------------------------------------------------------------------
-void UeRetentionInformation::get(e_Ngap_UERetentionInformation& value) const {
+void UeRetentionInformation::get(e_Ngap_UERetentionInformation &value) const {
   value = static_cast<e_Ngap_UERetentionInformation>(m_UeRetentionInformation);
 }
 
@@ -41,7 +41,7 @@ e_Ngap_UERetentionInformation UeRetentionInformation::get() const {
 
 //------------------------------------------------------------------------------
 bool UeRetentionInformation::encode(
-    Ngap_UERetentionInformation_t& value) const {
+    Ngap_UERetentionInformation_t &value) const {
   value = m_UeRetentionInformation;
   return true;
 }
@@ -52,4 +52,4 @@ bool UeRetentionInformation::decode(Ngap_UERetentionInformation_t value) {
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

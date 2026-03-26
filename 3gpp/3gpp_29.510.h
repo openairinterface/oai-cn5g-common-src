@@ -9,8 +9,8 @@
 #include <netinet/in.h>
 
 #include <map>
-#include <vector>
 #include <unordered_set>
+#include <vector>
 
 #include "3gpp_23.003.h"
 
@@ -22,11 +22,11 @@ static const std::vector<std::string> nf_status_e2str = {
     "REGISTERED", "SUSPENDED", "UNDISCOVERABLE"};
 
 typedef enum nf_up_interface_type_s {
-  N3              = 0,
-  N6              = 1,
-  N9              = 2,
+  N3 = 0,
+  N6 = 1,
+  N9 = 2,
   DATA_FORWARDING = 3,
-  TYPE_UNKNOWN    = 4
+  TYPE_UNKNOWN = 4
 } nf_up_interface_type_t;
 
 static const std::vector<std::string> up_interface_type_e2str = {
@@ -59,16 +59,16 @@ typedef struct dnn_upf_info_item_s {
   std::map<std::string, std::string> dnai_nw_instance_list;
   // std::vector<std::string> pdu_session_types
 
-  dnn_upf_info_item_s& operator=(const dnn_upf_info_item_s& d) {
-    dnn                   = d.dnn;
-    dnai_list             = d.dnai_list;
+  dnn_upf_info_item_s &operator=(const dnn_upf_info_item_s &d) {
+    dnn = d.dnn;
+    dnai_list = d.dnai_list;
     dnai_nw_instance_list = d.dnai_nw_instance_list;
     return *this;
   }
 
-  bool operator==(const dnn_upf_info_item_s& s) const { return dnn == s.dnn; }
+  bool operator==(const dnn_upf_info_item_s &s) const { return dnn == s.dnn; }
 
-  size_t operator()(const dnn_upf_info_item_s&) const {
+  size_t operator()(const dnn_upf_info_item_s &) const {
     return std::hash<std::string>()(dnn);
   }
 
@@ -80,7 +80,7 @@ typedef struct dnn_upf_info_item_s {
     if (dnai_list.size() > 0) {
       s.append("DNAI list: {");
 
-      for (const auto& dnai : dnai_list) {
+      for (const auto &dnai : dnai_list) {
         s.append("DNAI = ").append(dnai).append(", ");
       }
       s.append("}, ");
@@ -89,7 +89,7 @@ typedef struct dnn_upf_info_item_s {
     if (dnai_nw_instance_list.size() > 0) {
       s.append("DNAI NW Instance list: {");
 
-      for (const auto& dnai_nw : dnai_nw_instance_list) {
+      for (const auto &dnai_nw : dnai_nw_instance_list) {
         s.append("(")
             .append(dnai_nw.first)
             .append(", ")
@@ -108,13 +108,13 @@ typedef struct snssai_upf_info_item_s {
   mutable std::unordered_set<dnn_upf_info_item_t, dnn_upf_info_item_t>
       dnn_upf_info_list;
 
-  snssai_upf_info_item_s& operator=(const snssai_upf_info_item_s& s) {
-    snssai            = s.snssai;
+  snssai_upf_info_item_s &operator=(const snssai_upf_info_item_s &s) {
+    snssai = s.snssai;
     dnn_upf_info_list = s.dnn_upf_info_list;
     return *this;
   }
 
-  bool operator==(const snssai_upf_info_item_s& s) const {
+  bool operator==(const snssai_upf_info_item_s &s) const {
     return (snssai == s.snssai) and (dnn_upf_info_list == s.dnn_upf_info_list);
   }
 
@@ -143,11 +143,11 @@ typedef struct interface_upf_info_item_s {
   std::string endpoint_fqdn;
   std::string network_instance;
 
-  interface_upf_info_item_s& operator=(const interface_upf_info_item_s& i) {
-    interface_type   = i.interface_type;
-    ipv4_addresses   = i.ipv4_addresses;
-    ipv6_addresses   = i.ipv6_addresses;
-    endpoint_fqdn    = i.endpoint_fqdn;
+  interface_upf_info_item_s &operator=(const interface_upf_info_item_s &i) {
+    interface_type = i.interface_type;
+    ipv4_addresses = i.ipv4_addresses;
+    ipv6_addresses = i.ipv6_addresses;
+    endpoint_fqdn = i.endpoint_fqdn;
     network_instance = i.network_instance;
 
     return *this;
@@ -159,9 +159,9 @@ typedef struct upf_info_s {
   std::vector<interface_upf_info_item_t> interface_upf_info_list;
   std::vector<snssai_upf_info_item_t> snssai_upf_info_list;
 
-  upf_info_s& operator=(const upf_info_s& s) {
+  upf_info_s &operator=(const upf_info_s &s) {
     interface_upf_info_list = s.interface_upf_info_list;
-    snssai_upf_info_list    = s.snssai_upf_info_list;
+    snssai_upf_info_list = s.snssai_upf_info_list;
     return *this;
   }
 
@@ -249,15 +249,15 @@ typedef struct udsf_info_s {
   std::map<std::string, std::vector<identity_range_t>> storage_id_ranges;
 } udsf_info_t;
 
-enum subscr_condition_type_e {  // TODO: use enum class
-  UNKNOWN_CONDITION   = 0,
+enum subscr_condition_type_e { // TODO: use enum class
+  UNKNOWN_CONDITION = 0,
   NF_INSTANCE_ID_COND = 1,
-  NF_TYPE_COND        = 2,
-  SERVICE_NAME_COND   = 3,
-  AMF_COND            = 4,
-  GUAMI_LIST_COND     = 5,
-  NETWOTK_SLICE_COND  = 6,
-  NF_GROUP_COND       = 7
+  NF_TYPE_COND = 2,
+  SERVICE_NAME_COND = 3,
+  AMF_COND = 4,
+  GUAMI_LIST_COND = 5,
+  NETWOTK_SLICE_COND = 6,
+  NF_GROUP_COND = 7
 };
 
 static const std::vector<std::string> subscription_condition_type_e2str = {
@@ -298,82 +298,82 @@ typedef struct subscription_condition_s {
 
   subscription_condition_s(uint8_t t) : type(t) {}
 
-  subscription_condition_s(const subscription_condition_s& s)
+  subscription_condition_s(const subscription_condition_s &s)
       : subscription_condition_s() {
     type = s.type;
     switch (s.type) {
-      case NF_INSTANCE_ID_COND: {
-        nf_instance_id = s.nf_instance_id;
-      } break;
-      case NF_TYPE_COND: {
-        nf_type = s.nf_type;
-      } break;
+    case NF_INSTANCE_ID_COND: {
+      nf_instance_id = s.nf_instance_id;
+    } break;
+    case NF_TYPE_COND: {
+      nf_type = s.nf_type;
+    } break;
 
-      case SERVICE_NAME_COND: {
-        service_name = s.service_name;
-      } break;
-      case AMF_COND: {
-        amf_info.amf_set_id    = s.amf_info.amf_set_id;
-        amf_info.amf_region_id = s.amf_info.amf_region_id;
-      } break;
+    case SERVICE_NAME_COND: {
+      service_name = s.service_name;
+    } break;
+    case AMF_COND: {
+      amf_info.amf_set_id = s.amf_info.amf_set_id;
+      amf_info.amf_region_id = s.amf_info.amf_region_id;
+    } break;
 
-      case GUAMI_LIST_COND: {
-        // TODO:
-      } break;
+    case GUAMI_LIST_COND: {
+      // TODO:
+    } break;
 
-      case NETWOTK_SLICE_COND: {
-        // TODO:
-      } break;
+    case NETWOTK_SLICE_COND: {
+      // TODO:
+    } break;
 
-      case NF_GROUP_COND: {
-        // TODO:
-      } break;
+    case NF_GROUP_COND: {
+      // TODO:
+    } break;
 
-      default: {
-        // TODO:
-      }
+    default: {
+      // TODO:
+    }
     }
     // TODO:
   }
-  bool operator==(const struct subscription_condition_s& s) const {
+  bool operator==(const struct subscription_condition_s &s) const {
     return (s.type == type);
   }
 
-  bool operator==(const uint8_t& t) const { return (t == type); }
+  bool operator==(const uint8_t &t) const { return (t == type); }
 
-  subscription_condition_s& operator=(const subscription_condition_s& s) {
+  subscription_condition_s &operator=(const subscription_condition_s &s) {
     type = s.type;
     switch (s.type) {
-      case NF_INSTANCE_ID_COND: {
-        nf_instance_id = s.nf_instance_id;
-      } break;
-      case NF_TYPE_COND: {
-        nf_type = s.nf_type;
-      } break;
+    case NF_INSTANCE_ID_COND: {
+      nf_instance_id = s.nf_instance_id;
+    } break;
+    case NF_TYPE_COND: {
+      nf_type = s.nf_type;
+    } break;
 
-      case SERVICE_NAME_COND: {
-        service_name = s.service_name;
-      } break;
-      case AMF_COND: {
-        amf_info.amf_set_id    = s.amf_info.amf_set_id;
-        amf_info.amf_region_id = s.amf_info.amf_region_id;
-      } break;
+    case SERVICE_NAME_COND: {
+      service_name = s.service_name;
+    } break;
+    case AMF_COND: {
+      amf_info.amf_set_id = s.amf_info.amf_set_id;
+      amf_info.amf_region_id = s.amf_info.amf_region_id;
+    } break;
 
-      case GUAMI_LIST_COND: {
-        // TODO:
-      } break;
+    case GUAMI_LIST_COND: {
+      // TODO:
+    } break;
 
-      case NETWOTK_SLICE_COND: {
-        // TODO:
-      } break;
+    case NETWOTK_SLICE_COND: {
+      // TODO:
+    } break;
 
-      case NF_GROUP_COND: {
-        // TODO:
-      } break;
+    case NF_GROUP_COND: {
+      // TODO:
+    } break;
 
-      default: {
-        // TODO:
-      }
+    default: {
+      // TODO:
+    }
     }
     return *this;
     // TODO:
@@ -387,37 +387,37 @@ typedef struct subscription_condition_s {
     s.append(subscription_condition_type_e2str[type]);
     s.append(", condition: ");
     switch (type) {
-      case NF_INSTANCE_ID_COND: {
-        s.append(nf_instance_id);
-      } break;
-      case NF_TYPE_COND: {
-        s.append(nf_type);
-      } break;
-      case SERVICE_NAME_COND: {
-        s.append(service_name);
-      } break;
-      case AMF_COND: {
-        s.append(", AMF_Set_ID: ");
-        s.append(amf_info.amf_set_id);
-        s.append(", AMF_Region_ID: ");
-        s.append(amf_info.amf_region_id);
-      } break;
+    case NF_INSTANCE_ID_COND: {
+      s.append(nf_instance_id);
+    } break;
+    case NF_TYPE_COND: {
+      s.append(nf_type);
+    } break;
+    case SERVICE_NAME_COND: {
+      s.append(service_name);
+    } break;
+    case AMF_COND: {
+      s.append(", AMF_Set_ID: ");
+      s.append(amf_info.amf_set_id);
+      s.append(", AMF_Region_ID: ");
+      s.append(amf_info.amf_region_id);
+    } break;
 
-      case GUAMI_LIST_COND: {
-        // TODO:
-      } break;
+    case GUAMI_LIST_COND: {
+      // TODO:
+    } break;
 
-      case NETWOTK_SLICE_COND: {
-        // TODO:
-      } break;
+    case NETWOTK_SLICE_COND: {
+      // TODO:
+    } break;
 
-      case NF_GROUP_COND: {
-        // TODO:
-      } break;
+    case NF_GROUP_COND: {
+      // TODO:
+    } break;
 
-      default: {
-        // TODO:
-      }
+    default: {
+      // TODO:
+    }
     }
     // TODO:
 
@@ -427,9 +427,9 @@ typedef struct subscription_condition_s {
 } subscription_condition_t;
 
 enum notification_event_type_t {
-  NOTIFICATION_TYPE_UNKNOWN_EVENT      = 0,
-  NOTIFICATION_TYPE_NF_REGISTERED      = 1,
-  NOTIFICATION_TYPE_NF_DEREGISTERED    = 2,
+  NOTIFICATION_TYPE_UNKNOWN_EVENT = 0,
+  NOTIFICATION_TYPE_NF_REGISTERED = 1,
+  NOTIFICATION_TYPE_NF_DEREGISTERED = 2,
   NOTIFICATION_TYPE_NF_PROFILE_CHANGED = 3
 };
 
@@ -437,12 +437,12 @@ static const std::vector<std::string> notification_event_type_e2str = {
     "UNKNOWN EVENT", "NF_REGISTERED", "NF_DEREGISTERED", "NF_PROFILE_CHANGED"};
 
 typedef struct nf_service_version_s {
-  std::string api_version_in_uri;  // apiVersionInUri
-  std::string api_full_version;    // apiFullVersion
+  std::string api_version_in_uri; // apiVersionInUri
+  std::string api_full_version;   // apiFullVersion
 
-  nf_service_version_s& operator=(const nf_service_version_s& s) {
+  nf_service_version_s &operator=(const nf_service_version_s &s) {
     api_version_in_uri = s.api_version_in_uri;
-    api_full_version   = s.api_full_version;
+    api_full_version = s.api_full_version;
     return *this;
   }
 
@@ -461,7 +461,7 @@ typedef struct nf_service_version_s {
 typedef struct ip_endpoint_s {
   // struct in6_addr  ipv6_address;
   struct in_addr ipv4_address;
-  std::string transport;  // TCP
+  std::string transport; // TCP
   unsigned int port;
   std::string to_string() const {
     std::string s = {};
@@ -489,7 +489,7 @@ typedef struct nf_service_s {
     s.append(service_instance_id);
     s.append(", Service name: ");
     s.append(service_name);
-    for (const auto& v : versions) {
+    for (const auto &v : versions) {
       s.append(v.to_string());
     }
     s.append(", Scheme: ");
@@ -515,13 +515,13 @@ typedef struct patch_item_s {
 
   nlohmann::json to_json() const {
     nlohmann::json json_data = {};
-    json_data["op"]          = op;
-    json_data["path"]        = path;
-    json_data["value"]       = value;
+    json_data["op"] = op;
+    json_data["path"] = path;
+    json_data["value"] = value;
     return json_data;
   }
 } patch_item_t;
 
-}  // namespace oai::common::sbi
+} // namespace oai::common::sbi
 
-#endif  // FILE_3GPP_29_510_SEEN
+#endif // FILE_3GPP_29_510_SEEN

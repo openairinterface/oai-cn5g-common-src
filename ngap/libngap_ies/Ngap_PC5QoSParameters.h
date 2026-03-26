@@ -12,8 +12,8 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_PC5QoSFlowList.h"
 #include "Ngap_BitRate.h"
+#include "Ngap_PC5QoSFlowList.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -26,8 +26,8 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_PC5QoSParameters */
 typedef struct Ngap_PC5QoSParameters {
   Ngap_PC5QoSFlowList_t pc5QoSFlowList;
-  Ngap_BitRate_t* pc5LinkAggregateBitRates;              /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  Ngap_BitRate_t *pc5LinkAggregateBitRates;              /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

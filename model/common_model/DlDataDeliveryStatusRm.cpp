@@ -20,8 +20,8 @@ namespace oai::model::common {
 
 DlDataDeliveryStatusRm::DlDataDeliveryStatusRm() {}
 
-bool DlDataDeliveryStatusRm::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool DlDataDeliveryStatusRm::validate(std::stringstream &msg,
+                                      const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "DlDataDeliveryStatusRm" : pathPrefix;
@@ -29,7 +29,7 @@ bool DlDataDeliveryStatusRm::validate(
   return success;
 }
 
-void to_json(nlohmann::json& j, const DlDataDeliveryStatusRm& o) {
+void to_json(nlohmann::json &j, const DlDataDeliveryStatusRm &o) {
   j = nlohmann::json();
   if (o.m_value.getValue() ==
       DlDataDeliveryStatus_anyOf::eDlDataDeliveryStatus_anyOf::
@@ -40,7 +40,7 @@ void to_json(nlohmann::json& j, const DlDataDeliveryStatusRm& o) {
   }
 }
 
-void from_json(const nlohmann::json& j, DlDataDeliveryStatusRm& o) {
+void from_json(const nlohmann::json &j, DlDataDeliveryStatusRm &o) {
   if (j.is_null()) {
     o.m_value.setValue(DlDataDeliveryStatus_anyOf::eDlDataDeliveryStatus_anyOf::
                            INVALID_VALUE_OPENAPI_GENERATED);
@@ -49,4 +49,4 @@ void from_json(const nlohmann::json& j, DlDataDeliveryStatusRm& o) {
   }
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

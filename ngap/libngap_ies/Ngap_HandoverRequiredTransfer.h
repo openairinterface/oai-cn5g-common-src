@@ -24,9 +24,9 @@ struct Ngap_ProtocolExtensionContainer;
 
 /* Ngap_HandoverRequiredTransfer */
 typedef struct Ngap_HandoverRequiredTransfer {
-  Ngap_DirectForwardingPathAvailability_t*
-      directForwardingPathAvailability;                  /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  Ngap_DirectForwardingPathAvailability_t
+      *directForwardingPathAvailability;                 /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

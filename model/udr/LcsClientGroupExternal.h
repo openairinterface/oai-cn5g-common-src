@@ -36,7 +36,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class LcsClientGroupExternal {
- public:
+public:
   LcsClientGroupExternal();
   virtual ~LcsClientGroupExternal();
 
@@ -49,35 +49,35 @@ class LcsClientGroupExternal {
   ///
   /// </summary>
   std::string getLcsClientGroupId() const;
-  void setLcsClientGroupId(std::string const& value);
+  void setLcsClientGroupId(std::string const &value);
   bool lcsClientGroupIdIsSet() const;
   void unsetLcsClientGroupId();
   /// <summary>
   ///
   /// </summary>
-  std::vector<GeographicArea>& getAllowedGeographicArea();
-  void setAllowedGeographicArea(std::vector<GeographicArea> const& value);
+  std::vector<GeographicArea> &getAllowedGeographicArea();
+  void setAllowedGeographicArea(std::vector<GeographicArea> const &value);
   bool allowedGeographicAreaIsSet() const;
   void unsetAllowedGeographicArea();
   /// <summary>
   ///
   /// </summary>
   PrivacyCheckRelatedAction getPrivacyCheckRelatedAction() const;
-  void setPrivacyCheckRelatedAction(PrivacyCheckRelatedAction const& value);
+  void setPrivacyCheckRelatedAction(PrivacyCheckRelatedAction const &value);
   bool privacyCheckRelatedActionIsSet() const;
   void unsetPrivacyCheckRelatedAction();
   /// <summary>
   ///
   /// </summary>
   ValidTimePeriod getValidTimePeriod() const;
-  void setValidTimePeriod(ValidTimePeriod const& value);
+  void setValidTimePeriod(ValidTimePeriod const &value);
   bool validTimePeriodIsSet() const;
   void unsetValidTimePeriod();
 
-  friend void to_json(nlohmann::json& j, const LcsClientGroupExternal& o);
-  friend void from_json(const nlohmann::json& j, LcsClientGroupExternal& o);
+  friend void to_json(nlohmann::json &j, const LcsClientGroupExternal &o);
+  friend void from_json(const nlohmann::json &j, LcsClientGroupExternal &o);
 
- protected:
+protected:
   std::string m_LcsClientGroupId;
   bool m_LcsClientGroupIdIsSet;
   std::vector<GeographicArea> m_AllowedGeographicArea;
@@ -88,6 +88,6 @@ class LcsClientGroupExternal {
   bool m_ValidTimePeriodIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* LcsClientGroupExternal_H_ */

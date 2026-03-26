@@ -38,7 +38,7 @@ namespace oai::model::common {
 /// packet transmission.
 /// </summary>
 class TrafficProfile {
- public:
+public:
   TrafficProfile();
   virtual ~TrafficProfile() = default;
 
@@ -52,16 +52,16 @@ class TrafficProfile {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const TrafficProfile& rhs) const;
-  bool operator!=(const TrafficProfile& rhs) const;
+  bool operator==(const TrafficProfile &rhs) const;
+  bool operator!=(const TrafficProfile &rhs) const;
 
   /////////////////////////////////////////////
   /// TrafficProfile members
@@ -70,15 +70,15 @@ class TrafficProfile {
   void setValue(TrafficProfile_anyOf value);
   TrafficProfile_anyOf::eTrafficProfile_anyOf getEnumValue() const;
   void setEnumValue(TrafficProfile_anyOf::eTrafficProfile_anyOf value);
-  friend void to_json(nlohmann::json& j, const TrafficProfile& o);
-  friend void from_json(const nlohmann::json& j, TrafficProfile& o);
-  friend void to_json(nlohmann::json& j, const TrafficProfile_anyOf& o);
-  friend void from_json(const nlohmann::json& j, TrafficProfile_anyOf& o);
+  friend void to_json(nlohmann::json &j, const TrafficProfile &o);
+  friend void from_json(const nlohmann::json &j, TrafficProfile &o);
+  friend void to_json(nlohmann::json &j, const TrafficProfile_anyOf &o);
+  friend void from_json(const nlohmann::json &j, TrafficProfile_anyOf &o);
 
- protected:
+protected:
   TrafficProfile_anyOf m_value;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* TrafficProfile_H_ */

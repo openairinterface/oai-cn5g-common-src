@@ -20,14 +20,14 @@ namespace oai::model::pcf {
 
 AlternativeServiceRequirementsData::AlternativeServiceRequirementsData() {
   m_AltQosParamSetRef = "";
-  m_GbrUl             = "";
-  m_GbrUlIsSet        = false;
-  m_GbrDl             = "";
-  m_GbrDlIsSet        = false;
-  m_Pdb               = 0;
-  m_PdbIsSet          = false;
-  m_Per               = "";
-  m_PerIsSet          = false;
+  m_GbrUl = "";
+  m_GbrUlIsSet = false;
+  m_GbrDl = "";
+  m_GbrDlIsSet = false;
+  m_Pdb = 0;
+  m_PdbIsSet = false;
+  m_Per = "";
+  m_PerIsSet = false;
 }
 
 void AlternativeServiceRequirementsData::validate() const {
@@ -38,28 +38,28 @@ void AlternativeServiceRequirementsData::validate() const {
 }
 
 bool AlternativeServiceRequirementsData::validate(
-    std::stringstream& msg) const {
+    std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool AlternativeServiceRequirementsData::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AlternativeServiceRequirementsData" : pathPrefix;
 
   if (gbrUlIsSet()) {
-    const std::string& value           = m_GbrUl;
+    const std::string &value = m_GbrUl;
     const std::string currentValuePath = _pathPrefix + ".gbrUl";
   }
 
   if (gbrDlIsSet()) {
-    const std::string& value           = m_GbrDl;
+    const std::string &value = m_GbrDl;
     const std::string currentValuePath = _pathPrefix + ".gbrDl";
   }
 
   if (pdbIsSet()) {
-    const int32_t& value               = m_Pdb;
+    const int32_t &value = m_Pdb;
     const std::string currentValuePath = _pathPrefix + ".pdb";
 
     if (value < 1) {
@@ -69,7 +69,7 @@ bool AlternativeServiceRequirementsData::validate(
   }
 
   if (perIsSet()) {
-    const std::string& value           = m_Per;
+    const std::string &value = m_Per;
     const std::string currentValuePath = _pathPrefix + ".per";
   }
 
@@ -77,7 +77,7 @@ bool AlternativeServiceRequirementsData::validate(
 }
 
 bool AlternativeServiceRequirementsData::operator==(
-    const AlternativeServiceRequirementsData& rhs) const {
+    const AlternativeServiceRequirementsData &rhs) const {
   return
 
       (getAltQosParamSetRef() == rhs.getAltQosParamSetRef()) &&
@@ -98,20 +98,24 @@ bool AlternativeServiceRequirementsData::operator==(
 }
 
 bool AlternativeServiceRequirementsData::operator!=(
-    const AlternativeServiceRequirementsData& rhs) const {
+    const AlternativeServiceRequirementsData &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AlternativeServiceRequirementsData& o) {
-  j                      = nlohmann::json::object();
+void to_json(nlohmann::json &j, const AlternativeServiceRequirementsData &o) {
+  j = nlohmann::json::object();
   j["altQosParamSetRef"] = o.m_AltQosParamSetRef;
-  if (o.gbrUlIsSet()) j["gbrUl"] = o.m_GbrUl;
-  if (o.gbrDlIsSet()) j["gbrDl"] = o.m_GbrDl;
-  if (o.pdbIsSet()) j["pdb"] = o.m_Pdb;
-  if (o.perIsSet()) j["per"] = o.m_Per;
+  if (o.gbrUlIsSet())
+    j["gbrUl"] = o.m_GbrUl;
+  if (o.gbrDlIsSet())
+    j["gbrDl"] = o.m_GbrDl;
+  if (o.pdbIsSet())
+    j["pdb"] = o.m_Pdb;
+  if (o.perIsSet())
+    j["per"] = o.m_Per;
 }
 
-void from_json(const nlohmann::json& j, AlternativeServiceRequirementsData& o) {
+void from_json(const nlohmann::json &j, AlternativeServiceRequirementsData &o) {
   j.at("altQosParamSetRef").get_to(o.m_AltQosParamSetRef);
   if (j.find("gbrUl") != j.end()) {
     j.at("gbrUl").get_to(o.m_GbrUl);
@@ -135,60 +139,44 @@ std::string AlternativeServiceRequirementsData::getAltQosParamSetRef() const {
   return m_AltQosParamSetRef;
 }
 void AlternativeServiceRequirementsData::setAltQosParamSetRef(
-    std::string const& value) {
+    std::string const &value) {
   m_AltQosParamSetRef = value;
 }
 std::string AlternativeServiceRequirementsData::getGbrUl() const {
   return m_GbrUl;
 }
-void AlternativeServiceRequirementsData::setGbrUl(std::string const& value) {
-  m_GbrUl      = value;
+void AlternativeServiceRequirementsData::setGbrUl(std::string const &value) {
+  m_GbrUl = value;
   m_GbrUlIsSet = true;
 }
 bool AlternativeServiceRequirementsData::gbrUlIsSet() const {
   return m_GbrUlIsSet;
 }
-void AlternativeServiceRequirementsData::unsetGbrUl() {
-  m_GbrUlIsSet = false;
-}
+void AlternativeServiceRequirementsData::unsetGbrUl() { m_GbrUlIsSet = false; }
 std::string AlternativeServiceRequirementsData::getGbrDl() const {
   return m_GbrDl;
 }
-void AlternativeServiceRequirementsData::setGbrDl(std::string const& value) {
-  m_GbrDl      = value;
+void AlternativeServiceRequirementsData::setGbrDl(std::string const &value) {
+  m_GbrDl = value;
   m_GbrDlIsSet = true;
 }
 bool AlternativeServiceRequirementsData::gbrDlIsSet() const {
   return m_GbrDlIsSet;
 }
-void AlternativeServiceRequirementsData::unsetGbrDl() {
-  m_GbrDlIsSet = false;
-}
-int32_t AlternativeServiceRequirementsData::getPdb() const {
-  return m_Pdb;
-}
+void AlternativeServiceRequirementsData::unsetGbrDl() { m_GbrDlIsSet = false; }
+int32_t AlternativeServiceRequirementsData::getPdb() const { return m_Pdb; }
 void AlternativeServiceRequirementsData::setPdb(int32_t const value) {
-  m_Pdb      = value;
+  m_Pdb = value;
   m_PdbIsSet = true;
 }
-bool AlternativeServiceRequirementsData::pdbIsSet() const {
-  return m_PdbIsSet;
-}
-void AlternativeServiceRequirementsData::unsetPdb() {
-  m_PdbIsSet = false;
-}
-std::string AlternativeServiceRequirementsData::getPer() const {
-  return m_Per;
-}
-void AlternativeServiceRequirementsData::setPer(std::string const& value) {
-  m_Per      = value;
+bool AlternativeServiceRequirementsData::pdbIsSet() const { return m_PdbIsSet; }
+void AlternativeServiceRequirementsData::unsetPdb() { m_PdbIsSet = false; }
+std::string AlternativeServiceRequirementsData::getPer() const { return m_Per; }
+void AlternativeServiceRequirementsData::setPer(std::string const &value) {
+  m_Per = value;
   m_PerIsSet = true;
 }
-bool AlternativeServiceRequirementsData::perIsSet() const {
-  return m_PerIsSet;
-}
-void AlternativeServiceRequirementsData::unsetPer() {
-  m_PerIsSet = false;
-}
+bool AlternativeServiceRequirementsData::perIsSet() const { return m_PerIsSet; }
+void AlternativeServiceRequirementsData::unsetPer() { m_PerIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

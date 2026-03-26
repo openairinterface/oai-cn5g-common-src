@@ -9,19 +9,19 @@
 
 constexpr uint8_t kUeStatusIeLength = 3;
 constexpr uint8_t kUeStatusIeContentLength =
-    kUeStatusIeLength - 2;  // Minimum length - 2 octets for IEI/Length
+    kUeStatusIeLength - 2; // Minimum length - 2 octets for IEI/Length
 constexpr auto kUeStatusIeName = "UE Status";
 
 namespace oai::nas {
 
 class UeStatus : public Type4NasIe {
- public:
+public:
   UeStatus();
   UeStatus(bool n1, bool s1);
   virtual ~UeStatus();
 
-  int Encode(uint8_t* buf, int len) const override;
-  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+  int Encode(uint8_t *buf, int len) const override;
+  int Decode(const uint8_t *const buf, int len, bool is_iei = false) override;
 
   static std::string GetIeName() { return kUeStatusIeName; }
 
@@ -31,10 +31,10 @@ class UeStatus : public Type4NasIe {
   void SetS1(bool value);
   bool GetS1() const;
 
- private:
+private:
   bool n1_;
   bool s1_;
 };
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

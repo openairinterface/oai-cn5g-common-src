@@ -30,7 +30,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class ReachabilityForDataReportConfig_anyOf {
- public:
+public:
   ReachabilityForDataReportConfig_anyOf();
   virtual ~ReachabilityForDataReportConfig_anyOf() = default;
 
@@ -53,10 +53,10 @@ class ReachabilityForDataReportConfig_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const ReachabilityForDataReportConfig_anyOf& rhs) const;
-  bool operator!=(const ReachabilityForDataReportConfig_anyOf& rhs) const;
+  bool operator==(const ReachabilityForDataReportConfig_anyOf &rhs) const;
+  bool operator!=(const ReachabilityForDataReportConfig_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// ReachabilityForDataReportConfig_anyOf members
@@ -66,12 +66,12 @@ class ReachabilityForDataReportConfig_anyOf {
   void setValue(ReachabilityForDataReportConfig_anyOf::
                     eReachabilityForDataReportConfig_anyOf value);
 
-  friend void to_json(
-      nlohmann::json& j, const ReachabilityForDataReportConfig_anyOf& o);
-  friend void from_json(
-      const nlohmann::json& j, ReachabilityForDataReportConfig_anyOf& o);
+  friend void to_json(nlohmann::json &j,
+                      const ReachabilityForDataReportConfig_anyOf &o);
+  friend void from_json(const nlohmann::json &j,
+                        ReachabilityForDataReportConfig_anyOf &o);
 
- protected:
+protected:
   ReachabilityForDataReportConfig_anyOf::eReachabilityForDataReportConfig_anyOf
       m_value = ReachabilityForDataReportConfig_anyOf::
           eReachabilityForDataReportConfig_anyOf::
@@ -79,9 +79,9 @@ class ReachabilityForDataReportConfig_anyOf {
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* ReachabilityForDataReportConfig_anyOf_H_ */

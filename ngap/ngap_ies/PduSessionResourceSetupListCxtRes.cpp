@@ -14,28 +14,30 @@ PduSessionResourceSetupListCxtRes::~PduSessionResourceSetupListCxtRes() {}
 
 //------------------------------------------------------------------------------
 void PduSessionResourceSetupListCxtRes::set(
-    const std::vector<PduSessionResourceSetupItemCxtRes>& list) {
+    const std::vector<PduSessionResourceSetupItemCxtRes> &list) {
   m_ItemList = list;
 }
 
 //------------------------------------------------------------------------------
 void PduSessionResourceSetupListCxtRes::get(
-    std::vector<PduSessionResourceSetupItemCxtRes>& list) const {
+    std::vector<PduSessionResourceSetupItemCxtRes> &list) const {
   list = m_ItemList;
 }
 
 //------------------------------------------------------------------------------
 bool PduSessionResourceSetupListCxtRes::encode(
-    Ngap_PDUSessionResourceSetupListCxtRes_t& pduSessionResourceSetupListCxtRes)
+    Ngap_PDUSessionResourceSetupListCxtRes_t &pduSessionResourceSetupListCxtRes)
     const {
   for (std::vector<PduSessionResourceSetupItemCxtRes>::const_iterator it =
            m_ItemList.begin();
        it < m_ItemList.end(); ++it) {
-    Ngap_PDUSessionResourceSetupItemCxtRes_t* response =
-        (Ngap_PDUSessionResourceSetupItemCxtRes_t*) calloc(
+    Ngap_PDUSessionResourceSetupItemCxtRes_t *response =
+        (Ngap_PDUSessionResourceSetupItemCxtRes_t *)calloc(
             1, sizeof(Ngap_PDUSessionResourceSetupItemCxtRes_t));
-    if (!response) return false;
-    if (!it->encode(*response)) return false;
+    if (!response)
+      return false;
+    if (!it->encode(*response))
+      return false;
     if (ASN_SEQUENCE_ADD(&pduSessionResourceSetupListCxtRes.list, response) !=
         0)
       return false;
@@ -46,8 +48,8 @@ bool PduSessionResourceSetupListCxtRes::encode(
 
 //------------------------------------------------------------------------------
 bool PduSessionResourceSetupListCxtRes::decode(
-    const Ngap_PDUSessionResourceSetupListCxtRes_t&
-        pduSessionResourceSetupListCxtRes) {
+    const Ngap_PDUSessionResourceSetupListCxtRes_t
+        &pduSessionResourceSetupListCxtRes) {
   m_ItemList.reserve(pduSessionResourceSetupListCxtRes.list.count);
   for (int i = 0; i < pduSessionResourceSetupListCxtRes.list.count; i++) {
     PduSessionResourceSetupItemCxtRes item = {};
@@ -59,4 +61,4 @@ bool PduSessionResourceSetupListCxtRes::decode(
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

@@ -14,23 +14,23 @@ extern "C" {
 namespace oai::ngap {
 
 class AmfRegionId {
- public:
+public:
   AmfRegionId();
   virtual ~AmfRegionId();
 
-  void set(const std::string&);
-  void get(std::string&) const;
+  void set(const std::string &);
+  void get(std::string &) const;
 
-  void set(const uint8_t&);
-  void get(uint8_t&) const;
+  void set(const uint8_t &);
+  void get(uint8_t &) const;
 
-  bool encode(Ngap_AMFRegionID_t&) const;
-  bool decode(const Ngap_AMFRegionID_t&);
+  bool encode(Ngap_AMFRegionID_t &) const;
+  bool decode(const Ngap_AMFRegionID_t &);
 
- private:
+private:
   uint8_t m_RegionId;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

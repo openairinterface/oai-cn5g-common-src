@@ -27,7 +27,7 @@ struct Ngap_ProtocolExtensionContainer;
 typedef struct Ngap_DataForwardingResponseERABListItem {
   Ngap_E_RAB_ID_t e_RAB_ID;
   Ngap_UPTransportLayerInformation_t dLForwardingUP_TNLInformation;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

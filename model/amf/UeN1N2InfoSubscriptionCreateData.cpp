@@ -16,16 +16,16 @@
 namespace oai::model::amf {
 
 UeN1N2InfoSubscriptionCreateData::UeN1N2InfoSubscriptionCreateData() {
-  m_N2InformationClassIsSet  = false;
-  m_N2NotifyCallbackUri      = "";
+  m_N2InformationClassIsSet = false;
+  m_N2NotifyCallbackUri = "";
   m_N2NotifyCallbackUriIsSet = false;
-  m_N1MessageClassIsSet      = false;
-  m_N1NotifyCallbackUri      = "";
+  m_N1MessageClassIsSet = false;
+  m_N1NotifyCallbackUri = "";
   m_N1NotifyCallbackUriIsSet = false;
-  m_NfId                     = "";
-  m_NfIdIsSet                = false;
-  m_SupportedFeatures        = "";
-  m_SupportedFeaturesIsSet   = false;
+  m_NfId = "";
+  m_NfIdIsSet = false;
+  m_SupportedFeatures = "";
+  m_SupportedFeaturesIsSet = false;
 }
 
 UeN1N2InfoSubscriptionCreateData::~UeN1N2InfoSubscriptionCreateData() {}
@@ -34,21 +34,23 @@ void UeN1N2InfoSubscriptionCreateData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const UeN1N2InfoSubscriptionCreateData& o) {
+void to_json(nlohmann::json &j, const UeN1N2InfoSubscriptionCreateData &o) {
   j = nlohmann::json();
   if (o.n2InformationClassIsSet())
     j["n2InformationClass"] = o.m_N2InformationClass;
   if (o.n2NotifyCallbackUriIsSet())
     j["n2NotifyCallbackUri"] = o.m_N2NotifyCallbackUri;
-  if (o.n1MessageClassIsSet()) j["n1MessageClass"] = o.m_N1MessageClass;
+  if (o.n1MessageClassIsSet())
+    j["n1MessageClass"] = o.m_N1MessageClass;
   if (o.n1NotifyCallbackUriIsSet())
     j["n1NotifyCallbackUri"] = o.m_N1NotifyCallbackUri;
-  if (o.nfIdIsSet()) j["nfId"] = o.m_NfId;
+  if (o.nfIdIsSet())
+    j["nfId"] = o.m_NfId;
   if (o.supportedFeaturesIsSet())
     j["supportedFeatures"] = o.m_SupportedFeatures;
 }
 
-void from_json(const nlohmann::json& j, UeN1N2InfoSubscriptionCreateData& o) {
+void from_json(const nlohmann::json &j, UeN1N2InfoSubscriptionCreateData &o) {
   if (j.find("n2InformationClass") != j.end()) {
     j.at("n2InformationClass").get_to(o.m_N2InformationClass);
     o.m_N2InformationClassIsSet = true;
@@ -75,13 +77,13 @@ void from_json(const nlohmann::json& j, UeN1N2InfoSubscriptionCreateData& o) {
   }
 }
 
-N2InformationClass UeN1N2InfoSubscriptionCreateData::getN2InformationClass()
-    const {
+N2InformationClass
+UeN1N2InfoSubscriptionCreateData::getN2InformationClass() const {
   return m_N2InformationClass;
 }
 void UeN1N2InfoSubscriptionCreateData::setN2InformationClass(
-    N2InformationClass const& value) {
-  m_N2InformationClass      = value;
+    N2InformationClass const &value) {
+  m_N2InformationClass = value;
   m_N2InformationClassIsSet = true;
 }
 bool UeN1N2InfoSubscriptionCreateData::n2InformationClassIsSet() const {
@@ -94,8 +96,8 @@ std::string UeN1N2InfoSubscriptionCreateData::getN2NotifyCallbackUri() const {
   return m_N2NotifyCallbackUri;
 }
 void UeN1N2InfoSubscriptionCreateData::setN2NotifyCallbackUri(
-    std::string const& value) {
-  m_N2NotifyCallbackUri      = value;
+    std::string const &value) {
+  m_N2NotifyCallbackUri = value;
   m_N2NotifyCallbackUriIsSet = true;
 }
 bool UeN1N2InfoSubscriptionCreateData::n2NotifyCallbackUriIsSet() const {
@@ -108,8 +110,8 @@ N1MessageClass UeN1N2InfoSubscriptionCreateData::getN1MessageClass() const {
   return m_N1MessageClass;
 }
 void UeN1N2InfoSubscriptionCreateData::setN1MessageClass(
-    N1MessageClass const& value) {
-  m_N1MessageClass      = value;
+    N1MessageClass const &value) {
+  m_N1MessageClass = value;
   m_N1MessageClassIsSet = true;
 }
 bool UeN1N2InfoSubscriptionCreateData::n1MessageClassIsSet() const {
@@ -122,8 +124,8 @@ std::string UeN1N2InfoSubscriptionCreateData::getN1NotifyCallbackUri() const {
   return m_N1NotifyCallbackUri;
 }
 void UeN1N2InfoSubscriptionCreateData::setN1NotifyCallbackUri(
-    std::string const& value) {
-  m_N1NotifyCallbackUri      = value;
+    std::string const &value) {
+  m_N1NotifyCallbackUri = value;
   m_N1NotifyCallbackUriIsSet = true;
 }
 bool UeN1N2InfoSubscriptionCreateData::n1NotifyCallbackUriIsSet() const {
@@ -132,25 +134,19 @@ bool UeN1N2InfoSubscriptionCreateData::n1NotifyCallbackUriIsSet() const {
 void UeN1N2InfoSubscriptionCreateData::unsetN1NotifyCallbackUri() {
   m_N1NotifyCallbackUriIsSet = false;
 }
-std::string UeN1N2InfoSubscriptionCreateData::getNfId() const {
-  return m_NfId;
-}
-void UeN1N2InfoSubscriptionCreateData::setNfId(std::string const& value) {
-  m_NfId      = value;
+std::string UeN1N2InfoSubscriptionCreateData::getNfId() const { return m_NfId; }
+void UeN1N2InfoSubscriptionCreateData::setNfId(std::string const &value) {
+  m_NfId = value;
   m_NfIdIsSet = true;
 }
-bool UeN1N2InfoSubscriptionCreateData::nfIdIsSet() const {
-  return m_NfIdIsSet;
-}
-void UeN1N2InfoSubscriptionCreateData::unsetNfId() {
-  m_NfIdIsSet = false;
-}
+bool UeN1N2InfoSubscriptionCreateData::nfIdIsSet() const { return m_NfIdIsSet; }
+void UeN1N2InfoSubscriptionCreateData::unsetNfId() { m_NfIdIsSet = false; }
 std::string UeN1N2InfoSubscriptionCreateData::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
 void UeN1N2InfoSubscriptionCreateData::setSupportedFeatures(
-    std::string const& value) {
-  m_SupportedFeatures      = value;
+    std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool UeN1N2InfoSubscriptionCreateData::supportedFeaturesIsSet() const {
@@ -160,4 +156,4 @@ void UeN1N2InfoSubscriptionCreateData::unsetSupportedFeatures() {
   m_SupportedFeaturesIsSet = false;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

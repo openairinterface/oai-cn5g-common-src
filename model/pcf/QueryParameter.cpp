@@ -19,7 +19,7 @@
 namespace oai::model::pcf {
 
 QueryParameter::QueryParameter() {
-  m_Name  = "";
+  m_Name = "";
   m_Value = "";
 }
 
@@ -30,12 +30,12 @@ void QueryParameter::validate() const {
   }
 }
 
-bool QueryParameter::validate(std::stringstream& msg) const {
+bool QueryParameter::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool QueryParameter::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool QueryParameter::validate(std::stringstream &msg,
+                              const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "QueryParameter" : pathPrefix;
@@ -43,7 +43,7 @@ bool QueryParameter::validate(
   return success;
 }
 
-bool QueryParameter::operator==(const QueryParameter& rhs) const {
+bool QueryParameter::operator==(const QueryParameter &rhs) const {
   return
 
       (getName() == rhs.getName()) &&
@@ -53,32 +53,24 @@ bool QueryParameter::operator==(const QueryParameter& rhs) const {
           ;
 }
 
-bool QueryParameter::operator!=(const QueryParameter& rhs) const {
+bool QueryParameter::operator!=(const QueryParameter &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const QueryParameter& o) {
-  j          = nlohmann::json::object();
-  j["name"]  = o.m_Name;
+void to_json(nlohmann::json &j, const QueryParameter &o) {
+  j = nlohmann::json::object();
+  j["name"] = o.m_Name;
   j["value"] = o.m_Value;
 }
 
-void from_json(const nlohmann::json& j, QueryParameter& o) {
+void from_json(const nlohmann::json &j, QueryParameter &o) {
   j.at("name").get_to(o.m_Name);
   j.at("value").get_to(o.m_Value);
 }
 
-std::string QueryParameter::getName() const {
-  return m_Name;
-}
-void QueryParameter::setName(std::string const& value) {
-  m_Name = value;
-}
-std::string QueryParameter::getValue() const {
-  return m_Value;
-}
-void QueryParameter::setValue(std::string const& value) {
-  m_Value = value;
-}
+std::string QueryParameter::getName() const { return m_Name; }
+void QueryParameter::setName(std::string const &value) { m_Name = value; }
+std::string QueryParameter::getValue() const { return m_Value; }
+void QueryParameter::setValue(std::string const &value) { m_Value = value; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

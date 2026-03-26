@@ -20,7 +20,7 @@ namespace oai::udr::model {
 
 TimeWindow::TimeWindow() {
   m_StartTime = "";
-  m_StopTime  = "";
+  m_StopTime = "";
 }
 
 TimeWindow::~TimeWindow() {}
@@ -29,28 +29,20 @@ void TimeWindow::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const TimeWindow& o) {
-  j              = nlohmann::json();
+void to_json(nlohmann::json &j, const TimeWindow &o) {
+  j = nlohmann::json();
   j["startTime"] = o.m_StartTime;
-  j["stopTime"]  = o.m_StopTime;
+  j["stopTime"] = o.m_StopTime;
 }
 
-void from_json(const nlohmann::json& j, TimeWindow& o) {
+void from_json(const nlohmann::json &j, TimeWindow &o) {
   j.at("startTime").get_to(o.m_StartTime);
   j.at("stopTime").get_to(o.m_StopTime);
 }
 
-std::string TimeWindow::getStartTime() const {
-  return m_StartTime;
-}
-void TimeWindow::setStartTime(std::string const& value) {
-  m_StartTime = value;
-}
-std::string TimeWindow::getStopTime() const {
-  return m_StopTime;
-}
-void TimeWindow::setStopTime(std::string const& value) {
-  m_StopTime = value;
-}
+std::string TimeWindow::getStartTime() const { return m_StartTime; }
+void TimeWindow::setStartTime(std::string const &value) { m_StartTime = value; }
+std::string TimeWindow::getStopTime() const { return m_StopTime; }
+void TimeWindow::setStopTime(std::string const &value) { m_StopTime = value; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

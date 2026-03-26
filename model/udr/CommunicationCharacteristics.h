@@ -36,7 +36,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class CommunicationCharacteristics {
- public:
+public:
   CommunicationCharacteristics();
   virtual ~CommunicationCharacteristics();
 
@@ -49,14 +49,14 @@ class CommunicationCharacteristics {
   ///
   /// </summary>
   PpSubsRegTimer getPpSubsRegTimer() const;
-  void setPpSubsRegTimer(PpSubsRegTimer const& value);
+  void setPpSubsRegTimer(PpSubsRegTimer const &value);
   bool ppSubsRegTimerIsSet() const;
   void unsetPpSubsRegTimer();
   /// <summary>
   ///
   /// </summary>
   PpActiveTime getPpActiveTime() const;
-  void setPpActiveTime(PpActiveTime const& value);
+  void setPpActiveTime(PpActiveTime const &value);
   bool ppActiveTimeIsSet() const;
   void unsetPpActiveTime();
   /// <summary>
@@ -70,29 +70,29 @@ class CommunicationCharacteristics {
   ///
   /// </summary>
   PpDlPacketCountExt getPpDlPacketCountExt() const;
-  void setPpDlPacketCountExt(PpDlPacketCountExt const& value);
+  void setPpDlPacketCountExt(PpDlPacketCountExt const &value);
   bool ppDlPacketCountExtIsSet() const;
   void unsetPpDlPacketCountExt();
   /// <summary>
   ///
   /// </summary>
   PpMaximumResponseTime getPpMaximumResponseTime() const;
-  void setPpMaximumResponseTime(PpMaximumResponseTime const& value);
+  void setPpMaximumResponseTime(PpMaximumResponseTime const &value);
   bool ppMaximumResponseTimeIsSet() const;
   void unsetPpMaximumResponseTime();
   /// <summary>
   ///
   /// </summary>
   PpMaximumLatency getPpMaximumLatency() const;
-  void setPpMaximumLatency(PpMaximumLatency const& value);
+  void setPpMaximumLatency(PpMaximumLatency const &value);
   bool ppMaximumLatencyIsSet() const;
   void unsetPpMaximumLatency();
 
-  friend void to_json(nlohmann::json& j, const CommunicationCharacteristics& o);
-  friend void from_json(
-      const nlohmann::json& j, CommunicationCharacteristics& o);
+  friend void to_json(nlohmann::json &j, const CommunicationCharacteristics &o);
+  friend void from_json(const nlohmann::json &j,
+                        CommunicationCharacteristics &o);
 
- protected:
+protected:
   PpSubsRegTimer m_PpSubsRegTimer;
   bool m_PpSubsRegTimerIsSet;
   PpActiveTime m_PpActiveTime;
@@ -107,6 +107,6 @@ class CommunicationCharacteristics {
   bool m_PpMaximumLatencyIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* CommunicationCharacteristics_H_ */

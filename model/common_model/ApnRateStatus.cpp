@@ -19,15 +19,15 @@
 namespace oai::model::common {
 
 ApnRateStatus::ApnRateStatus() {
-  m_RemainPacketsUl        = 0;
-  m_RemainPacketsUlIsSet   = false;
-  m_RemainPacketsDl        = 0;
-  m_RemainPacketsDlIsSet   = false;
-  m_ValidityTime           = "";
-  m_ValidityTimeIsSet      = false;
-  m_RemainExReportsUl      = 0;
+  m_RemainPacketsUl = 0;
+  m_RemainPacketsUlIsSet = false;
+  m_RemainPacketsDl = 0;
+  m_RemainPacketsDlIsSet = false;
+  m_ValidityTime = "";
+  m_ValidityTimeIsSet = false;
+  m_RemainExReportsUl = 0;
   m_RemainExReportsUlIsSet = false;
-  m_RemainExReportsDl      = 0;
+  m_RemainExReportsDl = 0;
   m_RemainExReportsDlIsSet = false;
 }
 
@@ -38,18 +38,18 @@ void ApnRateStatus::validate() const {
   }
 }
 
-bool ApnRateStatus::validate(std::stringstream& msg) const {
+bool ApnRateStatus::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ApnRateStatus::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ApnRateStatus::validate(std::stringstream &msg,
+                             const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ApnRateStatus" : pathPrefix;
 
   if (remainPacketsUlIsSet()) {
-    const int32_t& value               = m_RemainPacketsUl;
+    const int32_t &value = m_RemainPacketsUl;
     const std::string currentValuePath = _pathPrefix + ".remainPacketsUl";
 
     if (value < 0) {
@@ -59,7 +59,7 @@ bool ApnRateStatus::validate(
   }
 
   if (remainPacketsDlIsSet()) {
-    const int32_t& value               = m_RemainPacketsDl;
+    const int32_t &value = m_RemainPacketsDl;
     const std::string currentValuePath = _pathPrefix + ".remainPacketsDl";
 
     if (value < 0) {
@@ -69,7 +69,7 @@ bool ApnRateStatus::validate(
   }
 
   if (remainExReportsUlIsSet()) {
-    const int32_t& value               = m_RemainExReportsUl;
+    const int32_t &value = m_RemainExReportsUl;
     const std::string currentValuePath = _pathPrefix + ".remainExReportsUl";
 
     if (value < 0) {
@@ -79,7 +79,7 @@ bool ApnRateStatus::validate(
   }
 
   if (remainExReportsDlIsSet()) {
-    const int32_t& value               = m_RemainExReportsDl;
+    const int32_t &value = m_RemainExReportsDl;
     const std::string currentValuePath = _pathPrefix + ".remainExReportsDl";
 
     if (value < 0) {
@@ -91,7 +91,7 @@ bool ApnRateStatus::validate(
   return success;
 }
 
-bool ApnRateStatus::operator==(const ApnRateStatus& rhs) const {
+bool ApnRateStatus::operator==(const ApnRateStatus &rhs) const {
   return
 
       ((!remainPacketsUlIsSet() && !rhs.remainPacketsUlIsSet()) ||
@@ -117,22 +117,25 @@ bool ApnRateStatus::operator==(const ApnRateStatus& rhs) const {
           ;
 }
 
-bool ApnRateStatus::operator!=(const ApnRateStatus& rhs) const {
+bool ApnRateStatus::operator!=(const ApnRateStatus &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ApnRateStatus& o) {
+void to_json(nlohmann::json &j, const ApnRateStatus &o) {
   j = nlohmann::json();
-  if (o.remainPacketsUlIsSet()) j["remainPacketsUl"] = o.m_RemainPacketsUl;
-  if (o.remainPacketsDlIsSet()) j["remainPacketsDl"] = o.m_RemainPacketsDl;
-  if (o.validityTimeIsSet()) j["validityTime"] = o.m_ValidityTime;
+  if (o.remainPacketsUlIsSet())
+    j["remainPacketsUl"] = o.m_RemainPacketsUl;
+  if (o.remainPacketsDlIsSet())
+    j["remainPacketsDl"] = o.m_RemainPacketsDl;
+  if (o.validityTimeIsSet())
+    j["validityTime"] = o.m_ValidityTime;
   if (o.remainExReportsUlIsSet())
     j["remainExReportsUl"] = o.m_RemainExReportsUl;
   if (o.remainExReportsDlIsSet())
     j["remainExReportsDl"] = o.m_RemainExReportsDl;
 }
 
-void from_json(const nlohmann::json& j, ApnRateStatus& o) {
+void from_json(const nlohmann::json &j, ApnRateStatus &o) {
   if (j.find("remainPacketsUl") != j.end()) {
     j.at("remainPacketsUl").get_to(o.m_RemainPacketsUl);
     o.m_RemainPacketsUlIsSet = true;
@@ -155,50 +158,36 @@ void from_json(const nlohmann::json& j, ApnRateStatus& o) {
   }
 }
 
-int32_t ApnRateStatus::getRemainPacketsUl() const {
-  return m_RemainPacketsUl;
-}
+int32_t ApnRateStatus::getRemainPacketsUl() const { return m_RemainPacketsUl; }
 void ApnRateStatus::setRemainPacketsUl(int32_t const value) {
-  m_RemainPacketsUl      = value;
+  m_RemainPacketsUl = value;
   m_RemainPacketsUlIsSet = true;
 }
 bool ApnRateStatus::remainPacketsUlIsSet() const {
   return m_RemainPacketsUlIsSet;
 }
-void ApnRateStatus::unsetRemainPacketsUl() {
-  m_RemainPacketsUlIsSet = false;
-}
-int32_t ApnRateStatus::getRemainPacketsDl() const {
-  return m_RemainPacketsDl;
-}
+void ApnRateStatus::unsetRemainPacketsUl() { m_RemainPacketsUlIsSet = false; }
+int32_t ApnRateStatus::getRemainPacketsDl() const { return m_RemainPacketsDl; }
 void ApnRateStatus::setRemainPacketsDl(int32_t const value) {
-  m_RemainPacketsDl      = value;
+  m_RemainPacketsDl = value;
   m_RemainPacketsDlIsSet = true;
 }
 bool ApnRateStatus::remainPacketsDlIsSet() const {
   return m_RemainPacketsDlIsSet;
 }
-void ApnRateStatus::unsetRemainPacketsDl() {
-  m_RemainPacketsDlIsSet = false;
-}
-std::string ApnRateStatus::getValidityTime() const {
-  return m_ValidityTime;
-}
-void ApnRateStatus::setValidityTime(std::string const& value) {
-  m_ValidityTime      = value;
+void ApnRateStatus::unsetRemainPacketsDl() { m_RemainPacketsDlIsSet = false; }
+std::string ApnRateStatus::getValidityTime() const { return m_ValidityTime; }
+void ApnRateStatus::setValidityTime(std::string const &value) {
+  m_ValidityTime = value;
   m_ValidityTimeIsSet = true;
 }
-bool ApnRateStatus::validityTimeIsSet() const {
-  return m_ValidityTimeIsSet;
-}
-void ApnRateStatus::unsetValidityTime() {
-  m_ValidityTimeIsSet = false;
-}
+bool ApnRateStatus::validityTimeIsSet() const { return m_ValidityTimeIsSet; }
+void ApnRateStatus::unsetValidityTime() { m_ValidityTimeIsSet = false; }
 int32_t ApnRateStatus::getRemainExReportsUl() const {
   return m_RemainExReportsUl;
 }
 void ApnRateStatus::setRemainExReportsUl(int32_t const value) {
-  m_RemainExReportsUl      = value;
+  m_RemainExReportsUl = value;
   m_RemainExReportsUlIsSet = true;
 }
 bool ApnRateStatus::remainExReportsUlIsSet() const {
@@ -211,7 +200,7 @@ int32_t ApnRateStatus::getRemainExReportsDl() const {
   return m_RemainExReportsDl;
 }
 void ApnRateStatus::setRemainExReportsDl(int32_t const value) {
-  m_RemainExReportsDl      = value;
+  m_RemainExReportsDl = value;
   m_RemainExReportsDlIsSet = true;
 }
 bool ApnRateStatus::remainExReportsDlIsSet() const {
@@ -221,4 +210,4 @@ void ApnRateStatus::unsetRemainExReportsDl() {
   m_RemainExReportsDlIsSet = false;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

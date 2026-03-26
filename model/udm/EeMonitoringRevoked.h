@@ -24,8 +24,8 @@
 
 #include "MonitoringEvent.h"
 #include <map>
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::udm {
 
@@ -33,7 +33,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class EeMonitoringRevoked {
- public:
+public:
   EeMonitoringRevoked();
   virtual ~EeMonitoringRevoked() = default;
 
@@ -47,10 +47,10 @@ class EeMonitoringRevoked {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const EeMonitoringRevoked& rhs) const;
-  bool operator!=(const EeMonitoringRevoked& rhs) const;
+  bool operator==(const EeMonitoringRevoked &rhs) const;
+  bool operator!=(const EeMonitoringRevoked &rhs) const;
 
   /////////////////////////////////////////////
   /// EeMonitoringRevoked members
@@ -61,19 +61,19 @@ class EeMonitoringRevoked {
   /// </summary>
   std::map<std::string, MonitoringEvent> getRevokedMonitoringEventList() const;
   void setRevokedMonitoringEventList(
-      std::map<std::string, MonitoringEvent> const& value);
+      std::map<std::string, MonitoringEvent> const &value);
 
-  friend void to_json(nlohmann::json& j, const EeMonitoringRevoked& o);
-  friend void from_json(const nlohmann::json& j, EeMonitoringRevoked& o);
+  friend void to_json(nlohmann::json &j, const EeMonitoringRevoked &o);
+  friend void from_json(const nlohmann::json &j, EeMonitoringRevoked &o);
 
- protected:
+protected:
   std::map<std::string, MonitoringEvent> m_RevokedMonitoringEventList;
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* EeMonitoringRevoked_H_ */

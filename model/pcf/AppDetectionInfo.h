@@ -19,10 +19,10 @@
 #ifndef AppDetectionInfo_H_
 #define AppDetectionInfo_H_
 
-#include <string>
 #include "FlowInformation.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::pcf {
 
@@ -30,7 +30,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class AppDetectionInfo {
- public:
+public:
   AppDetectionInfo();
   virtual ~AppDetectionInfo() = default;
 
@@ -44,16 +44,16 @@ class AppDetectionInfo {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const AppDetectionInfo& rhs) const;
-  bool operator!=(const AppDetectionInfo& rhs) const;
+  bool operator==(const AppDetectionInfo &rhs) const;
+  bool operator!=(const AppDetectionInfo &rhs) const;
 
   /////////////////////////////////////////////
   /// AppDetectionInfo members
@@ -62,14 +62,14 @@ class AppDetectionInfo {
   /// A reference to the application detection filter configured at the UPF
   /// </summary>
   std::string getAppId() const;
-  void setAppId(std::string const& value);
+  void setAppId(std::string const &value);
   /// <summary>
   /// Identifier sent by the SMF in order to allow correlation of application
   /// Start and Stop events to the specific service data flow description, if
   /// service data flow descriptions are deducible.
   /// </summary>
   std::string getInstanceId() const;
-  void setInstanceId(std::string const& value);
+  void setInstanceId(std::string const &value);
   bool instanceIdIsSet() const;
   void unsetInstanceId();
   /// <summary>
@@ -78,14 +78,14 @@ class AppDetectionInfo {
   /// </summary>
   std::vector<oai::model::pcf::FlowInformation> getSdfDescriptions() const;
   void setSdfDescriptions(
-      std::vector<oai::model::pcf::FlowInformation> const& value);
+      std::vector<oai::model::pcf::FlowInformation> const &value);
   bool sdfDescriptionsIsSet() const;
   void unsetSdfDescriptions();
 
-  friend void to_json(nlohmann::json& j, const AppDetectionInfo& o);
-  friend void from_json(const nlohmann::json& j, AppDetectionInfo& o);
+  friend void to_json(nlohmann::json &j, const AppDetectionInfo &o);
+  friend void from_json(const nlohmann::json &j, AppDetectionInfo &o);
 
- protected:
+protected:
   std::string m_AppId;
 
   std::string m_InstanceId;
@@ -94,6 +94,6 @@ class AppDetectionInfo {
   bool m_SdfDescriptionsIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* AppDetectionInfo_H_ */

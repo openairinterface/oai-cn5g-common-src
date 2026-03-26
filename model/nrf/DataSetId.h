@@ -27,7 +27,7 @@ namespace oai::model::nrf {
 ///
 /// </summary>
 class DataSetId {
- public:
+public:
   DataSetId();
   virtual ~DataSetId();
 
@@ -36,12 +36,12 @@ class DataSetId {
   /////////////////////////////////////////////
   /// DataSetId members
 
-  friend void to_json(nlohmann::json& j, const DataSetId& o);
-  friend void from_json(const nlohmann::json& j, DataSetId& o);
+  friend void to_json(nlohmann::json &j, const DataSetId &o);
+  friend void from_json(const nlohmann::json &j, DataSetId &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* DataSetId_H_ */

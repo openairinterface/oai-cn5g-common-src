@@ -10,29 +10,29 @@
 
 constexpr uint8_t kPlmnListMinimumLength = 5;
 constexpr uint8_t kPlmnListContentMinimumLength =
-    kPlmnListMinimumLength - 2;  // Minimum length - 2 octets for IEI/Length
+    kPlmnListMinimumLength - 2; // Minimum length - 2 octets for IEI/Length
 constexpr uint8_t kPlmnListMaximumLength = 47;
-constexpr auto kPlmnListIeName           = "PLMN List";
+constexpr auto kPlmnListIeName = "PLMN List";
 
 namespace oai::nas {
 
 class PlmnList : public Type4NasIe {
- public:
+public:
   PlmnList();
   PlmnList(uint8_t iei);
   virtual ~PlmnList();
 
-  int Encode(uint8_t* buf, int len) const override;
-  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+  int Encode(uint8_t *buf, int len) const override;
+  int Decode(const uint8_t *const buf, int len, bool is_iei = false) override;
 
   static std::string GetIeName() { return kPlmnListIeName; }
 
-  void Set(uint8_t iei, const std::vector<nas_plmn_t>& list);
-  void Get(std::vector<nas_plmn_t>& list) const;
+  void Set(uint8_t iei, const std::vector<nas_plmn_t> &list);
+  void Get(std::vector<nas_plmn_t> &list) const;
 
- private:
+private:
   std::vector<nas_plmn_t> plmn_list_;
 };
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

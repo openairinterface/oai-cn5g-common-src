@@ -19,9 +19,9 @@
 namespace oai::model::lmf {
 
 PointAltitudeUncertainty::PointAltitudeUncertainty() {
-  m_Altitude            = 0.0;
+  m_Altitude = 0.0;
   m_UncertaintyAltitude = 0.0f;
-  m_Confidence          = 0;
+  m_Confidence = 0;
 }
 
 void PointAltitudeUncertainty::validate() const {
@@ -31,18 +31,18 @@ void PointAltitudeUncertainty::validate() const {
   }
 }
 
-bool PointAltitudeUncertainty::validate(std::stringstream& msg) const {
+bool PointAltitudeUncertainty::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool PointAltitudeUncertainty::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool PointAltitudeUncertainty::validate(std::stringstream &msg,
+                                        const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PointAltitudeUncertainty" : pathPrefix;
 
   /* Altitude */ {
-    const double& value                = m_Altitude;
+    const double &value = m_Altitude;
     const std::string currentValuePath = _pathPrefix + ".altitude";
 
     if (value < -32767) {
@@ -56,7 +56,7 @@ bool PointAltitudeUncertainty::validate(
   }
 
   /* UncertaintyAltitude */ {
-    const float& value                 = m_UncertaintyAltitude;
+    const float &value = m_UncertaintyAltitude;
     const std::string currentValuePath = _pathPrefix + ".uncertaintyAltitude";
 
     if (value < static_cast<float>(0)) {
@@ -66,7 +66,7 @@ bool PointAltitudeUncertainty::validate(
   }
 
   /* Confidence */ {
-    const int32_t& value               = m_Confidence;
+    const int32_t &value = m_Confidence;
     const std::string currentValuePath = _pathPrefix + ".confidence";
 
     if (value < 0) {
@@ -83,7 +83,7 @@ bool PointAltitudeUncertainty::validate(
 }
 
 bool PointAltitudeUncertainty::operator==(
-    const PointAltitudeUncertainty& rhs) const {
+    const PointAltitudeUncertainty &rhs) const {
   return
 
       (getShape() == rhs.getShape()) &&
@@ -102,21 +102,21 @@ bool PointAltitudeUncertainty::operator==(
 }
 
 bool PointAltitudeUncertainty::operator!=(
-    const PointAltitudeUncertainty& rhs) const {
+    const PointAltitudeUncertainty &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PointAltitudeUncertainty& o) {
-  j                        = nlohmann::json();
-  j["shape"]               = o.m_Shape;
-  j["point"]               = o.m_Point;
-  j["altitude"]            = o.m_Altitude;
-  j["uncertaintyEllipse"]  = o.m_UncertaintyEllipse;
+void to_json(nlohmann::json &j, const PointAltitudeUncertainty &o) {
+  j = nlohmann::json();
+  j["shape"] = o.m_Shape;
+  j["point"] = o.m_Point;
+  j["altitude"] = o.m_Altitude;
+  j["uncertaintyEllipse"] = o.m_UncertaintyEllipse;
   j["uncertaintyAltitude"] = o.m_UncertaintyAltitude;
-  j["confidence"]          = o.m_Confidence;
+  j["confidence"] = o.m_Confidence;
 }
 
-void from_json(const nlohmann::json& j, PointAltitudeUncertainty& o) {
+void from_json(const nlohmann::json &j, PointAltitudeUncertainty &o) {
   j.at("shape").get_to(o.m_Shape);
   j.at("point").get_to(o.m_Point);
   j.at("altitude").get_to(o.m_Altitude);
@@ -129,20 +129,18 @@ oai::model::lmf::SupportedGADShapes PointAltitudeUncertainty::getShape() const {
   return m_Shape;
 }
 void PointAltitudeUncertainty::setShape(
-    oai::model::lmf::SupportedGADShapes const& value) {
+    oai::model::lmf::SupportedGADShapes const &value) {
   m_Shape = value;
 }
-oai::model::lmf::GeographicalCoordinates PointAltitudeUncertainty::getPoint()
-    const {
+oai::model::lmf::GeographicalCoordinates
+PointAltitudeUncertainty::getPoint() const {
   return m_Point;
 }
 void PointAltitudeUncertainty::setPoint(
-    oai::model::lmf::GeographicalCoordinates const& value) {
+    oai::model::lmf::GeographicalCoordinates const &value) {
   m_Point = value;
 }
-double PointAltitudeUncertainty::getAltitude() const {
-  return m_Altitude;
-}
+double PointAltitudeUncertainty::getAltitude() const { return m_Altitude; }
 void PointAltitudeUncertainty::setAltitude(double const value) {
   m_Altitude = value;
 }
@@ -151,7 +149,7 @@ PointAltitudeUncertainty::getUncertaintyEllipse() const {
   return m_UncertaintyEllipse;
 }
 void PointAltitudeUncertainty::setUncertaintyEllipse(
-    oai::model::lmf::UncertaintyEllipse const& value) {
+    oai::model::lmf::UncertaintyEllipse const &value) {
   m_UncertaintyEllipse = value;
 }
 float PointAltitudeUncertainty::getUncertaintyAltitude() const {
@@ -160,11 +158,9 @@ float PointAltitudeUncertainty::getUncertaintyAltitude() const {
 void PointAltitudeUncertainty::setUncertaintyAltitude(float const value) {
   m_UncertaintyAltitude = value;
 }
-int32_t PointAltitudeUncertainty::getConfidence() const {
-  return m_Confidence;
-}
+int32_t PointAltitudeUncertainty::getConfidence() const { return m_Confidence; }
 void PointAltitudeUncertainty::setConfidence(int32_t const value) {
   m_Confidence = value;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

@@ -19,16 +19,16 @@
 namespace oai::udr::model {
 
 PpData::PpData() {
-  m_CommunicationCharacteristicsIsSet  = false;
-  m_SupportedFeatures                  = "";
-  m_SupportedFeaturesIsSet             = false;
+  m_CommunicationCharacteristicsIsSet = false;
+  m_SupportedFeatures = "";
+  m_SupportedFeaturesIsSet = false;
   m_ExpectedUeBehaviourParametersIsSet = false;
-  m_EcRestrictionIsSet                 = false;
-  m_AcsInfoIsSet                       = false;
-  m_StnSr                              = "";
-  m_StnSrIsSet                         = false;
-  m_LcsPrivacyIsSet                    = false;
-  m_SorInfoIsSet                       = false;
+  m_EcRestrictionIsSet = false;
+  m_AcsInfoIsSet = false;
+  m_StnSr = "";
+  m_StnSrIsSet = false;
+  m_LcsPrivacyIsSet = false;
+  m_SorInfoIsSet = false;
 }
 
 PpData::~PpData() {}
@@ -37,7 +37,7 @@ void PpData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const PpData& o) {
+void to_json(nlohmann::json &j, const PpData &o) {
   j = nlohmann::json();
   if (o.communicationCharacteristicsIsSet())
     j["communicationCharacteristics"] = o.m_CommunicationCharacteristics;
@@ -45,14 +45,19 @@ void to_json(nlohmann::json& j, const PpData& o) {
     j["supportedFeatures"] = o.m_SupportedFeatures;
   if (o.expectedUeBehaviourParametersIsSet())
     j["expectedUeBehaviourParameters"] = o.m_ExpectedUeBehaviourParameters;
-  if (o.ecRestrictionIsSet()) j["ecRestriction"] = o.m_EcRestriction;
-  if (o.acsInfoIsSet()) j["acsInfo"] = o.m_AcsInfo;
-  if (o.stnSrIsSet()) j["stnSr"] = o.m_StnSr;
-  if (o.lcsPrivacyIsSet()) j["lcsPrivacy"] = o.m_LcsPrivacy;
-  if (o.sorInfoIsSet()) j["sorInfo"] = o.m_SorInfo;
+  if (o.ecRestrictionIsSet())
+    j["ecRestriction"] = o.m_EcRestriction;
+  if (o.acsInfoIsSet())
+    j["acsInfo"] = o.m_AcsInfo;
+  if (o.stnSrIsSet())
+    j["stnSr"] = o.m_StnSr;
+  if (o.lcsPrivacyIsSet())
+    j["lcsPrivacy"] = o.m_LcsPrivacy;
+  if (o.sorInfoIsSet())
+    j["sorInfo"] = o.m_SorInfo;
 }
 
-void from_json(const nlohmann::json& j, PpData& o) {
+void from_json(const nlohmann::json &j, PpData &o) {
   if (j.find("communicationCharacteristics") != j.end()) {
     j.at("communicationCharacteristics")
         .get_to(o.m_CommunicationCharacteristics);
@@ -93,8 +98,8 @@ CommunicationCharacteristics PpData::getCommunicationCharacteristics() const {
   return m_CommunicationCharacteristics;
 }
 void PpData::setCommunicationCharacteristics(
-    CommunicationCharacteristics const& value) {
-  m_CommunicationCharacteristics      = value;
+    CommunicationCharacteristics const &value) {
+  m_CommunicationCharacteristics = value;
   m_CommunicationCharacteristicsIsSet = true;
 }
 bool PpData::communicationCharacteristicsIsSet() const {
@@ -103,25 +108,19 @@ bool PpData::communicationCharacteristicsIsSet() const {
 void PpData::unsetCommunicationCharacteristics() {
   m_CommunicationCharacteristicsIsSet = false;
 }
-std::string PpData::getSupportedFeatures() const {
-  return m_SupportedFeatures;
-}
-void PpData::setSupportedFeatures(std::string const& value) {
-  m_SupportedFeatures      = value;
+std::string PpData::getSupportedFeatures() const { return m_SupportedFeatures; }
+void PpData::setSupportedFeatures(std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
-bool PpData::supportedFeaturesIsSet() const {
-  return m_SupportedFeaturesIsSet;
-}
-void PpData::unsetSupportedFeatures() {
-  m_SupportedFeaturesIsSet = false;
-}
+bool PpData::supportedFeaturesIsSet() const { return m_SupportedFeaturesIsSet; }
+void PpData::unsetSupportedFeatures() { m_SupportedFeaturesIsSet = false; }
 ExpectedUeBehaviour PpData::getExpectedUeBehaviourParameters() const {
   return m_ExpectedUeBehaviourParameters;
 }
 void PpData::setExpectedUeBehaviourParameters(
-    ExpectedUeBehaviour const& value) {
-  m_ExpectedUeBehaviourParameters      = value;
+    ExpectedUeBehaviour const &value) {
+  m_ExpectedUeBehaviourParameters = value;
   m_ExpectedUeBehaviourParametersIsSet = true;
 }
 bool PpData::expectedUeBehaviourParametersIsSet() const {
@@ -130,70 +129,40 @@ bool PpData::expectedUeBehaviourParametersIsSet() const {
 void PpData::unsetExpectedUeBehaviourParameters() {
   m_ExpectedUeBehaviourParametersIsSet = false;
 }
-EcRestriction PpData::getEcRestriction() const {
-  return m_EcRestriction;
-}
-void PpData::setEcRestriction(EcRestriction const& value) {
-  m_EcRestriction      = value;
+EcRestriction PpData::getEcRestriction() const { return m_EcRestriction; }
+void PpData::setEcRestriction(EcRestriction const &value) {
+  m_EcRestriction = value;
   m_EcRestrictionIsSet = true;
 }
-bool PpData::ecRestrictionIsSet() const {
-  return m_EcRestrictionIsSet;
-}
-void PpData::unsetEcRestriction() {
-  m_EcRestrictionIsSet = false;
-}
-oai::model::common::AcsInfoRm PpData::getAcsInfo() const {
-  return m_AcsInfo;
-}
-void PpData::setAcsInfo(oai::model::common::AcsInfoRm const& value) {
-  m_AcsInfo      = value;
+bool PpData::ecRestrictionIsSet() const { return m_EcRestrictionIsSet; }
+void PpData::unsetEcRestriction() { m_EcRestrictionIsSet = false; }
+oai::model::common::AcsInfoRm PpData::getAcsInfo() const { return m_AcsInfo; }
+void PpData::setAcsInfo(oai::model::common::AcsInfoRm const &value) {
+  m_AcsInfo = value;
   m_AcsInfoIsSet = true;
 }
-bool PpData::acsInfoIsSet() const {
-  return m_AcsInfoIsSet;
-}
-void PpData::unsetAcsInfo() {
-  m_AcsInfoIsSet = false;
-}
-std::string PpData::getStnSr() const {
-  return m_StnSr;
-}
-void PpData::setStnSr(std::string const& value) {
-  m_StnSr      = value;
+bool PpData::acsInfoIsSet() const { return m_AcsInfoIsSet; }
+void PpData::unsetAcsInfo() { m_AcsInfoIsSet = false; }
+std::string PpData::getStnSr() const { return m_StnSr; }
+void PpData::setStnSr(std::string const &value) {
+  m_StnSr = value;
   m_StnSrIsSet = true;
 }
-bool PpData::stnSrIsSet() const {
-  return m_StnSrIsSet;
-}
-void PpData::unsetStnSr() {
-  m_StnSrIsSet = false;
-}
-LcsPrivacy PpData::getLcsPrivacy() const {
-  return m_LcsPrivacy;
-}
-void PpData::setLcsPrivacy(LcsPrivacy const& value) {
-  m_LcsPrivacy      = value;
+bool PpData::stnSrIsSet() const { return m_StnSrIsSet; }
+void PpData::unsetStnSr() { m_StnSrIsSet = false; }
+LcsPrivacy PpData::getLcsPrivacy() const { return m_LcsPrivacy; }
+void PpData::setLcsPrivacy(LcsPrivacy const &value) {
+  m_LcsPrivacy = value;
   m_LcsPrivacyIsSet = true;
 }
-bool PpData::lcsPrivacyIsSet() const {
-  return m_LcsPrivacyIsSet;
-}
-void PpData::unsetLcsPrivacy() {
-  m_LcsPrivacyIsSet = false;
-}
-SorInfo PpData::getSorInfo() const {
-  return m_SorInfo;
-}
-void PpData::setSorInfo(SorInfo const& value) {
-  m_SorInfo      = value;
+bool PpData::lcsPrivacyIsSet() const { return m_LcsPrivacyIsSet; }
+void PpData::unsetLcsPrivacy() { m_LcsPrivacyIsSet = false; }
+SorInfo PpData::getSorInfo() const { return m_SorInfo; }
+void PpData::setSorInfo(SorInfo const &value) {
+  m_SorInfo = value;
   m_SorInfoIsSet = true;
 }
-bool PpData::sorInfoIsSet() const {
-  return m_SorInfoIsSet;
-}
-void PpData::unsetSorInfo() {
-  m_SorInfoIsSet = false;
-}
+bool PpData::sorInfoIsSet() const { return m_SorInfoIsSet; }
+void PpData::unsetSorInfo() { m_SorInfoIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

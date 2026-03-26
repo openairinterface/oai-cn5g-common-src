@@ -36,7 +36,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class DataChangeNotify {
- public:
+public:
   DataChangeNotify();
   virtual ~DataChangeNotify();
 
@@ -48,52 +48,52 @@ class DataChangeNotify {
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getOriginalCallbackReference();
-  void setOriginalCallbackReference(std::vector<std::string> const& value);
+  std::vector<std::string> &getOriginalCallbackReference();
+  void setOriginalCallbackReference(std::vector<std::string> const &value);
   bool originalCallbackReferenceIsSet() const;
   void unsetOriginalCallbackReference();
   /// <summary>
   ///
   /// </summary>
   std::string getUeId() const;
-  void setUeId(std::string const& value);
+  void setUeId(std::string const &value);
   bool ueIdIsSet() const;
   void unsetUeId();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::NotifyItem>& getNotifyItems();
-  void setNotifyItems(std::vector<oai::model::common::NotifyItem> const& value);
+  std::vector<oai::model::common::NotifyItem> &getNotifyItems();
+  void setNotifyItems(std::vector<oai::model::common::NotifyItem> const &value);
   bool notifyItemsIsSet() const;
   void unsetNotifyItems();
   /// <summary>
   ///
   /// </summary>
   SdmSubscription getSdmSubscription() const;
-  void setSdmSubscription(SdmSubscription const& value);
+  void setSdmSubscription(SdmSubscription const &value);
   bool sdmSubscriptionIsSet() const;
   void unsetSdmSubscription();
   /// <summary>
   ///
   /// </summary>
-  std::vector<SdmSubscription>& getAdditionalSdmSubscriptions();
-  void setAdditionalSdmSubscriptions(std::vector<SdmSubscription> const& value);
+  std::vector<SdmSubscription> &getAdditionalSdmSubscriptions();
+  void setAdditionalSdmSubscriptions(std::vector<SdmSubscription> const &value);
   bool additionalSdmSubscriptionsIsSet() const;
   void unsetAdditionalSdmSubscriptions();
   /// <summary>
   ///
   /// </summary>
-  std::vector<SubscriptionDataSubscriptions>&
+  std::vector<SubscriptionDataSubscriptions> &
   getSubscriptionDataSubscriptions();
   void setSubscriptionDataSubscriptions(
-      std::vector<SubscriptionDataSubscriptions> const& value);
+      std::vector<SubscriptionDataSubscriptions> const &value);
   bool subscriptionDataSubscriptionsIsSet() const;
   void unsetSubscriptionDataSubscriptions();
 
-  friend void to_json(nlohmann::json& j, const DataChangeNotify& o);
-  friend void from_json(const nlohmann::json& j, DataChangeNotify& o);
+  friend void to_json(nlohmann::json &j, const DataChangeNotify &o);
+  friend void from_json(const nlohmann::json &j, DataChangeNotify &o);
 
- protected:
+protected:
   std::vector<std::string> m_OriginalCallbackReference;
   bool m_OriginalCallbackReferenceIsSet;
   std::string m_UeId;
@@ -108,6 +108,6 @@ class DataChangeNotify {
   bool m_SubscriptionDataSubscriptionsIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* DataChangeNotify_H_ */

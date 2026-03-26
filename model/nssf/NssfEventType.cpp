@@ -30,12 +30,12 @@ void NssfEventType::validate() const {
   // }
 }
 
-bool NssfEventType::validate(std::stringstream& msg) const {
+bool NssfEventType::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool NssfEventType::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool NssfEventType::validate(std::stringstream &msg,
+                             const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "NssfEventType" : pathPrefix;
@@ -46,32 +46,28 @@ bool NssfEventType::validate(
   return success;
 }
 
-bool NssfEventType::operator==(const NssfEventType& rhs) const {
+bool NssfEventType::operator==(const NssfEventType &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool NssfEventType::operator!=(const NssfEventType& rhs) const {
+bool NssfEventType::operator!=(const NssfEventType &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const NssfEventType& o) {
+void to_json(nlohmann::json &j, const NssfEventType &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, NssfEventType& o) {
+void from_json(const nlohmann::json &j, NssfEventType &o) {
   from_json(j, o.m_value);
 }
 
-NssfEventType_anyOf NssfEventType::getValue() const {
-  return m_value;
-}
+NssfEventType_anyOf NssfEventType::getValue() const { return m_value; }
 
-void NssfEventType::setValue(NssfEventType_anyOf value) {
-  m_value = value;
-}
+void NssfEventType::setValue(NssfEventType_anyOf value) { m_value = value; }
 
 NssfEventType_anyOf::eNssfEventType_anyOf NssfEventType::getEnumValue() const {
   return m_value.getValue();
@@ -82,6 +78,6 @@ void NssfEventType::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace model
-}  // namespace nssf_server
-}  // namespace oai
+} // namespace model
+} // namespace nssf_server
+} // namespace oai

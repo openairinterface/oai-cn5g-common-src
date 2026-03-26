@@ -33,7 +33,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class PduSession {
- public:
+public:
   PduSession();
   virtual ~PduSession();
 
@@ -46,22 +46,22 @@ class PduSession {
   ///
   /// </summary>
   std::string getDnn() const;
-  void setDnn(std::string const& value);
+  void setDnn(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getSmfInstanceId() const;
-  void setSmfInstanceId(std::string const& value);
+  void setSmfInstanceId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::PlmnId getPlmnId() const;
-  void setPlmnId(oai::model::common::PlmnId const& value);
+  void setPlmnId(oai::model::common::PlmnId const &value);
 
-  friend void to_json(nlohmann::json& j, const PduSession& o);
-  friend void from_json(const nlohmann::json& j, PduSession& o);
+  friend void to_json(nlohmann::json &j, const PduSession &o);
+  friend void from_json(const nlohmann::json &j, PduSession &o);
 
- protected:
+protected:
   std::string m_Dnn;
 
   std::string m_SmfInstanceId;
@@ -69,6 +69,6 @@ class PduSession {
   oai::model::common::PlmnId m_PlmnId;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* PduSession_H_ */

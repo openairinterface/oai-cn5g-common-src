@@ -25,7 +25,7 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_CompletedCellsInTAI-NR-Item */
 typedef struct Ngap_CompletedCellsInTAI_NR_Item {
   Ngap_NR_CGI_t nR_CGI;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

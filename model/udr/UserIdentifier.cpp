@@ -19,10 +19,10 @@
 namespace oai::udr::model {
 
 UserIdentifier::UserIdentifier() {
-  m_Supi              = "";
-  m_Gpsi              = "";
-  m_GpsiIsSet         = false;
-  m_ValidityTime      = "";
+  m_Supi = "";
+  m_Gpsi = "";
+  m_GpsiIsSet = false;
+  m_ValidityTime = "";
   m_ValidityTimeIsSet = false;
 }
 
@@ -32,14 +32,16 @@ void UserIdentifier::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const UserIdentifier& o) {
-  j         = nlohmann::json();
+void to_json(nlohmann::json &j, const UserIdentifier &o) {
+  j = nlohmann::json();
   j["supi"] = o.m_Supi;
-  if (o.gpsiIsSet()) j["gpsi"] = o.m_Gpsi;
-  if (o.validityTimeIsSet()) j["validityTime"] = o.m_ValidityTime;
+  if (o.gpsiIsSet())
+    j["gpsi"] = o.m_Gpsi;
+  if (o.validityTimeIsSet())
+    j["validityTime"] = o.m_ValidityTime;
 }
 
-void from_json(const nlohmann::json& j, UserIdentifier& o) {
+void from_json(const nlohmann::json &j, UserIdentifier &o) {
   j.at("supi").get_to(o.m_Supi);
   if (j.find("gpsi") != j.end()) {
     j.at("gpsi").get_to(o.m_Gpsi);
@@ -51,37 +53,21 @@ void from_json(const nlohmann::json& j, UserIdentifier& o) {
   }
 }
 
-std::string UserIdentifier::getSupi() const {
-  return m_Supi;
-}
-void UserIdentifier::setSupi(std::string const& value) {
-  m_Supi = value;
-}
-std::string UserIdentifier::getGpsi() const {
-  return m_Gpsi;
-}
-void UserIdentifier::setGpsi(std::string const& value) {
-  m_Gpsi      = value;
+std::string UserIdentifier::getSupi() const { return m_Supi; }
+void UserIdentifier::setSupi(std::string const &value) { m_Supi = value; }
+std::string UserIdentifier::getGpsi() const { return m_Gpsi; }
+void UserIdentifier::setGpsi(std::string const &value) {
+  m_Gpsi = value;
   m_GpsiIsSet = true;
 }
-bool UserIdentifier::gpsiIsSet() const {
-  return m_GpsiIsSet;
-}
-void UserIdentifier::unsetGpsi() {
-  m_GpsiIsSet = false;
-}
-std::string UserIdentifier::getValidityTime() const {
-  return m_ValidityTime;
-}
-void UserIdentifier::setValidityTime(std::string const& value) {
-  m_ValidityTime      = value;
+bool UserIdentifier::gpsiIsSet() const { return m_GpsiIsSet; }
+void UserIdentifier::unsetGpsi() { m_GpsiIsSet = false; }
+std::string UserIdentifier::getValidityTime() const { return m_ValidityTime; }
+void UserIdentifier::setValidityTime(std::string const &value) {
+  m_ValidityTime = value;
   m_ValidityTimeIsSet = true;
 }
-bool UserIdentifier::validityTimeIsSet() const {
-  return m_ValidityTimeIsSet;
-}
-void UserIdentifier::unsetValidityTime() {
-  m_ValidityTimeIsSet = false;
-}
+bool UserIdentifier::validityTimeIsSet() const { return m_ValidityTimeIsSet; }
+void UserIdentifier::unsetValidityTime() { m_ValidityTimeIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

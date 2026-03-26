@@ -8,24 +8,23 @@
 
 #include "Ngap_HOReport.h"
 
-#include "Ngap_NGRAN-CGI.h"
 #include "Ngap_EUTRA-CGI.h"
-#include "Ngap_UERLFReportContainer.h"
+#include "Ngap_NGRAN-CGI.h"
 #include "Ngap_ProtocolExtensionContainer.h"
+#include "Ngap_UERLFReportContainer.h"
 /*
  * This type is implemented using NativeEnumerated,
  * so here we adjust the DEF accordingly.
  */
 static int memb_Ngap_sourcecellC_RNTI_constraint_1(
-    const asn_TYPE_descriptor_t* td, const void* sptr,
-    asn_app_constraint_failed_f* ctfailcb, void* app_key) {
-  const BIT_STRING_t* st = (const BIT_STRING_t*) sptr;
+    const asn_TYPE_descriptor_t *td, const void *sptr,
+    asn_app_constraint_failed_f *ctfailcb, void *app_key) {
+  const BIT_STRING_t *st = (const BIT_STRING_t *)sptr;
   size_t size;
 
   if (!sptr) {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: value not given (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: value not given (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 
@@ -40,9 +39,8 @@ static int memb_Ngap_sourcecellC_RNTI_constraint_1(
     /* Constraint check succeeded */
     return 0;
   } else {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: constraint failed (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: constraint failed (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 }
@@ -317,7 +315,7 @@ asn_TYPE_member_t asn_MBR_Ngap_HOReport_1[] = {
      0, /* No default value */
      "iE-Extensions"},
 };
-static const int asn_MAP_Ngap_HOReport_oms_1[]            = {4, 5, 6, 7, 8, 9};
+static const int asn_MAP_Ngap_HOReport_oms_1[] = {4, 5, 6, 7, 8, 9};
 static const ber_tlv_tag_t asn_DEF_Ngap_HOReport_tags_1[] = {
     (ASN_TAG_CLASS_UNIVERSAL | (16 << 2))};
 static const asn_TYPE_tag2member_t asn_MAP_Ngap_HOReport_tag2el_1[] = {

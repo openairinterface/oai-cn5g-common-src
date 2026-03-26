@@ -31,7 +31,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class TimeWindow {
- public:
+public:
   TimeWindow();
   virtual ~TimeWindow();
 
@@ -44,22 +44,22 @@ class TimeWindow {
   /// string with format \&quot;date-time\&quot; as defined in OpenAPI.
   /// </summary>
   std::string getStartTime() const;
-  void setStartTime(std::string const& value);
+  void setStartTime(std::string const &value);
   /// <summary>
   /// string with format \&quot;date-time\&quot; as defined in OpenAPI.
   /// </summary>
   std::string getStopTime() const;
-  void setStopTime(std::string const& value);
+  void setStopTime(std::string const &value);
 
-  friend void to_json(nlohmann::json& j, const TimeWindow& o);
-  friend void from_json(const nlohmann::json& j, TimeWindow& o);
+  friend void to_json(nlohmann::json &j, const TimeWindow &o);
+  friend void from_json(const nlohmann::json &j, TimeWindow &o);
 
- protected:
+protected:
   std::string m_StartTime;
 
   std::string m_StopTime;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* TimeWindow_H_ */

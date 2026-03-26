@@ -19,8 +19,8 @@
 #ifndef RefToBinaryData_H_
 #define RefToBinaryData_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::common {
 
@@ -28,7 +28,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class RefToBinaryData {
- public:
+public:
   RefToBinaryData();
   virtual ~RefToBinaryData() = default;
 
@@ -42,16 +42,16 @@ class RefToBinaryData {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const RefToBinaryData& rhs) const;
-  bool operator!=(const RefToBinaryData& rhs) const;
+  bool operator==(const RefToBinaryData &rhs) const;
+  bool operator!=(const RefToBinaryData &rhs) const;
 
   /////////////////////////////////////////////
   /// RefToBinaryData members
@@ -60,15 +60,15 @@ class RefToBinaryData {
   ///
   /// </summary>
   std::string getContentId() const;
-  void setContentId(std::string const& value);
+  void setContentId(std::string const &value);
 
-  friend void to_json(nlohmann::json& j, const RefToBinaryData& o);
-  friend void from_json(const nlohmann::json& j, RefToBinaryData& o);
+  friend void to_json(nlohmann::json &j, const RefToBinaryData &o);
+  friend void from_json(const nlohmann::json &j, RefToBinaryData &o);
 
- protected:
+protected:
   std::string m_ContentId;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* RefToBinaryData_H_ */

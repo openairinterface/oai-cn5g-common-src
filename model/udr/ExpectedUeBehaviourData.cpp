@@ -19,18 +19,18 @@
 namespace oai::udr::model {
 
 ExpectedUeBehaviourData::ExpectedUeBehaviourData() {
-  m_StationaryIndicationIsSet       = false;
-  m_CommunicationDurationTime       = 0;
-  m_CommunicationDurationTimeIsSet  = false;
-  m_PeriodicTime                    = 0;
-  m_PeriodicTimeIsSet               = false;
+  m_StationaryIndicationIsSet = false;
+  m_CommunicationDurationTime = 0;
+  m_CommunicationDurationTimeIsSet = false;
+  m_PeriodicTime = 0;
+  m_PeriodicTimeIsSet = false;
   m_ScheduledCommunicationTimeIsSet = false;
   m_ScheduledCommunicationTypeIsSet = false;
-  m_ExpectedUmtsIsSet               = false;
-  m_TrafficProfileIsSet             = false;
-  m_BatteryIndicationIsSet          = false;
-  m_ValidityTime                    = "";
-  m_ValidityTimeIsSet               = false;
+  m_ExpectedUmtsIsSet = false;
+  m_TrafficProfileIsSet = false;
+  m_BatteryIndicationIsSet = false;
+  m_ValidityTime = "";
+  m_ValidityTimeIsSet = false;
 }
 
 ExpectedUeBehaviourData::~ExpectedUeBehaviourData() {}
@@ -39,26 +39,29 @@ void ExpectedUeBehaviourData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const ExpectedUeBehaviourData& o) {
+void to_json(nlohmann::json &j, const ExpectedUeBehaviourData &o) {
   j = nlohmann::json();
   if (o.stationaryIndicationIsSet())
     j["stationaryIndication"] = o.m_StationaryIndication;
   if (o.communicationDurationTimeIsSet())
     j["communicationDurationTime"] = o.m_CommunicationDurationTime;
-  if (o.periodicTimeIsSet()) j["periodicTime"] = o.m_PeriodicTime;
+  if (o.periodicTimeIsSet())
+    j["periodicTime"] = o.m_PeriodicTime;
   if (o.scheduledCommunicationTimeIsSet())
     j["scheduledCommunicationTime"] = o.m_ScheduledCommunicationTime;
   if (o.scheduledCommunicationTypeIsSet())
     j["scheduledCommunicationType"] = o.m_ScheduledCommunicationType;
   if (o.expectedUmtsIsSet() || !o.m_ExpectedUmts.empty())
     j["expectedUmts"] = o.m_ExpectedUmts;
-  if (o.trafficProfileIsSet()) j["trafficProfile"] = o.m_TrafficProfile;
+  if (o.trafficProfileIsSet())
+    j["trafficProfile"] = o.m_TrafficProfile;
   if (o.batteryIndicationIsSet())
     j["batteryIndication"] = o.m_BatteryIndication;
-  if (o.validityTimeIsSet()) j["validityTime"] = o.m_ValidityTime;
+  if (o.validityTimeIsSet())
+    j["validityTime"] = o.m_ValidityTime;
 }
 
-void from_json(const nlohmann::json& j, ExpectedUeBehaviourData& o) {
+void from_json(const nlohmann::json &j, ExpectedUeBehaviourData &o) {
   if (j.find("stationaryIndication") != j.end()) {
     j.at("stationaryIndication").get_to(o.m_StationaryIndication);
     o.m_StationaryIndicationIsSet = true;
@@ -102,8 +105,8 @@ ExpectedUeBehaviourData::getStationaryIndication() const {
   return m_StationaryIndication;
 }
 void ExpectedUeBehaviourData::setStationaryIndication(
-    oai::model::common::StationaryIndication const& value) {
-  m_StationaryIndication      = value;
+    oai::model::common::StationaryIndication const &value) {
+  m_StationaryIndication = value;
   m_StationaryIndicationIsSet = true;
 }
 bool ExpectedUeBehaviourData::stationaryIndicationIsSet() const {
@@ -117,7 +120,7 @@ int32_t ExpectedUeBehaviourData::getCommunicationDurationTime() const {
 }
 void ExpectedUeBehaviourData::setCommunicationDurationTime(
     int32_t const value) {
-  m_CommunicationDurationTime      = value;
+  m_CommunicationDurationTime = value;
   m_CommunicationDurationTimeIsSet = true;
 }
 bool ExpectedUeBehaviourData::communicationDurationTimeIsSet() const {
@@ -130,7 +133,7 @@ int32_t ExpectedUeBehaviourData::getPeriodicTime() const {
   return m_PeriodicTime;
 }
 void ExpectedUeBehaviourData::setPeriodicTime(int32_t const value) {
-  m_PeriodicTime      = value;
+  m_PeriodicTime = value;
   m_PeriodicTimeIsSet = true;
 }
 bool ExpectedUeBehaviourData::periodicTimeIsSet() const {
@@ -144,8 +147,8 @@ ExpectedUeBehaviourData::getScheduledCommunicationTime() const {
   return m_ScheduledCommunicationTime;
 }
 void ExpectedUeBehaviourData::setScheduledCommunicationTime(
-    oai::model::common::ScheduledCommunicationTime const& value) {
-  m_ScheduledCommunicationTime      = value;
+    oai::model::common::ScheduledCommunicationTime const &value) {
+  m_ScheduledCommunicationTime = value;
   m_ScheduledCommunicationTimeIsSet = true;
 }
 bool ExpectedUeBehaviourData::scheduledCommunicationTimeIsSet() const {
@@ -159,8 +162,8 @@ ExpectedUeBehaviourData::getScheduledCommunicationType() const {
   return m_ScheduledCommunicationType;
 }
 void ExpectedUeBehaviourData::setScheduledCommunicationType(
-    oai::model::common::ScheduledCommunicationType const& value) {
-  m_ScheduledCommunicationType      = value;
+    oai::model::common::ScheduledCommunicationType const &value) {
+  m_ScheduledCommunicationType = value;
   m_ScheduledCommunicationTypeIsSet = true;
 }
 bool ExpectedUeBehaviourData::scheduledCommunicationTypeIsSet() const {
@@ -169,12 +172,12 @@ bool ExpectedUeBehaviourData::scheduledCommunicationTypeIsSet() const {
 void ExpectedUeBehaviourData::unsetScheduledCommunicationType() {
   m_ScheduledCommunicationTypeIsSet = false;
 }
-std::vector<LocationArea>& ExpectedUeBehaviourData::getExpectedUmts() {
+std::vector<LocationArea> &ExpectedUeBehaviourData::getExpectedUmts() {
   return m_ExpectedUmts;
 }
 void ExpectedUeBehaviourData::setExpectedUmts(
-    std::vector<LocationArea> const& value) {
-  m_ExpectedUmts      = value;
+    std::vector<LocationArea> const &value) {
+  m_ExpectedUmts = value;
   m_ExpectedUmtsIsSet = true;
 }
 bool ExpectedUeBehaviourData::expectedUmtsIsSet() const {
@@ -183,13 +186,13 @@ bool ExpectedUeBehaviourData::expectedUmtsIsSet() const {
 void ExpectedUeBehaviourData::unsetExpectedUmts() {
   m_ExpectedUmtsIsSet = false;
 }
-oai::model::common::TrafficProfile ExpectedUeBehaviourData::getTrafficProfile()
-    const {
+oai::model::common::TrafficProfile
+ExpectedUeBehaviourData::getTrafficProfile() const {
   return m_TrafficProfile;
 }
 void ExpectedUeBehaviourData::setTrafficProfile(
-    oai::model::common::TrafficProfile const& value) {
-  m_TrafficProfile      = value;
+    oai::model::common::TrafficProfile const &value) {
+  m_TrafficProfile = value;
   m_TrafficProfileIsSet = true;
 }
 bool ExpectedUeBehaviourData::trafficProfileIsSet() const {
@@ -203,8 +206,8 @@ ExpectedUeBehaviourData::getBatteryIndication() const {
   return m_BatteryIndication;
 }
 void ExpectedUeBehaviourData::setBatteryIndication(
-    oai::model::common::BatteryIndication const& value) {
-  m_BatteryIndication      = value;
+    oai::model::common::BatteryIndication const &value) {
+  m_BatteryIndication = value;
   m_BatteryIndicationIsSet = true;
 }
 bool ExpectedUeBehaviourData::batteryIndicationIsSet() const {
@@ -216,8 +219,8 @@ void ExpectedUeBehaviourData::unsetBatteryIndication() {
 std::string ExpectedUeBehaviourData::getValidityTime() const {
   return m_ValidityTime;
 }
-void ExpectedUeBehaviourData::setValidityTime(std::string const& value) {
-  m_ValidityTime      = value;
+void ExpectedUeBehaviourData::setValidityTime(std::string const &value) {
+  m_ValidityTime = value;
   m_ValidityTimeIsSet = true;
 }
 bool ExpectedUeBehaviourData::validityTimeIsSet() const {
@@ -227,4 +230,4 @@ void ExpectedUeBehaviourData::unsetValidityTime() {
   m_ValidityTimeIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

@@ -16,27 +16,26 @@ extern "C" {
 namespace oai::ngap {
 
 class NrCgi {
- public:
+public:
   NrCgi();
   virtual ~NrCgi();
 
-  void set(const PlmnId&, const NrCellIdentity&);
-  void get(PlmnId&, NrCellIdentity&) const;
+  void set(const PlmnId &, const NrCellIdentity &);
+  void get(PlmnId &, NrCellIdentity &) const;
 
-  void set(
-      const std::string& mcc, const std::string& mnc,
-      const uint64_t& nrCellIdentity);
+  void set(const std::string &mcc, const std::string &mnc,
+           const uint64_t &nrCellIdentity);
 
-  void set(const struct NrCgi_s& cig);
-  void get(struct NrCgi_s& cig) const;
+  void set(const struct NrCgi_s &cig);
+  void get(struct NrCgi_s &cig) const;
 
-  bool encode(Ngap_NR_CGI_t&) const;
-  bool decode(const Ngap_NR_CGI_t&);
+  bool encode(Ngap_NR_CGI_t &) const;
+  bool decode(const Ngap_NR_CGI_t &);
 
- private:
-  PlmnId m_PlmnId;                  // Mandatory
-  NrCellIdentity m_NrCellIdentity;  // Mandatory
+private:
+  PlmnId m_PlmnId;                 // Mandatory
+  NrCellIdentity m_NrCellIdentity; // Mandatory
 };
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

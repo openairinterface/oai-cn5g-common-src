@@ -19,35 +19,35 @@
 namespace oai::model::lmf {
 
 N1N2MessageTransferReqData::N1N2MessageTransferReqData() {
-  m_N1MessageContainerIsSet     = false;
-  m_N2InfoContainerIsSet        = false;
-  m_MtDataIsSet                 = false;
-  m_SkipInd                     = false;
-  m_SkipIndIsSet                = false;
-  m_LastMsgIndication           = false;
-  m_LastMsgIndicationIsSet      = false;
-  m_PduSessionId                = 0;
-  m_PduSessionIdIsSet           = false;
-  m_LcsCorrelationId            = "";
-  m_LcsCorrelationIdIsSet       = false;
-  m_Ppi                         = 0;
-  m_PpiIsSet                    = false;
-  m_ArpIsSet                    = false;
-  m_r_5qi                       = 0;
-  m_r_5qiIsSet                  = false;
-  m_N1n2FailureTxfNotifURI      = "";
+  m_N1MessageContainerIsSet = false;
+  m_N2InfoContainerIsSet = false;
+  m_MtDataIsSet = false;
+  m_SkipInd = false;
+  m_SkipIndIsSet = false;
+  m_LastMsgIndication = false;
+  m_LastMsgIndicationIsSet = false;
+  m_PduSessionId = 0;
+  m_PduSessionIdIsSet = false;
+  m_LcsCorrelationId = "";
+  m_LcsCorrelationIdIsSet = false;
+  m_Ppi = 0;
+  m_PpiIsSet = false;
+  m_ArpIsSet = false;
+  m_r_5qi = 0;
+  m_r_5qiIsSet = false;
+  m_N1n2FailureTxfNotifURI = "";
   m_N1n2FailureTxfNotifURIIsSet = false;
-  m_SmfReallocationInd          = false;
-  m_SmfReallocationIndIsSet     = false;
-  m_AreaOfValidityIsSet         = false;
-  m_SupportedFeatures           = "";
-  m_SupportedFeaturesIsSet      = false;
-  m_OldGuamiIsSet               = false;
-  m_MaAcceptedInd               = false;
-  m_MaAcceptedIndIsSet          = false;
-  m_ExtBufSupport               = false;
-  m_ExtBufSupportIsSet          = false;
-  m_TargetAccessIsSet           = false;
+  m_SmfReallocationInd = false;
+  m_SmfReallocationIndIsSet = false;
+  m_AreaOfValidityIsSet = false;
+  m_SupportedFeatures = "";
+  m_SupportedFeaturesIsSet = false;
+  m_OldGuamiIsSet = false;
+  m_MaAcceptedInd = false;
+  m_MaAcceptedIndIsSet = false;
+  m_ExtBufSupport = false;
+  m_ExtBufSupportIsSet = false;
+  m_TargetAccessIsSet = false;
 }
 
 void N1N2MessageTransferReqData::validate() const {
@@ -57,18 +57,18 @@ void N1N2MessageTransferReqData::validate() const {
   }
 }
 
-bool N1N2MessageTransferReqData::validate(std::stringstream& msg) const {
+bool N1N2MessageTransferReqData::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool N1N2MessageTransferReqData::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool N1N2MessageTransferReqData::validate(std::stringstream &msg,
+                                          const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "N1N2MessageTransferReqData" : pathPrefix;
 
   if (pduSessionIdIsSet()) {
-    const int32_t& value               = m_PduSessionId;
+    const int32_t &value = m_PduSessionId;
     const std::string currentValuePath = _pathPrefix + ".pduSessionId";
 
     if (value < 0) {
@@ -82,7 +82,7 @@ bool N1N2MessageTransferReqData::validate(
   }
 
   if (lcsCorrelationIdIsSet()) {
-    const std::string& value           = m_LcsCorrelationId;
+    const std::string &value = m_LcsCorrelationId;
     const std::string currentValuePath = _pathPrefix + ".lcsCorrelationId";
 
     if (value.length() < 1) {
@@ -96,7 +96,7 @@ bool N1N2MessageTransferReqData::validate(
   }
 
   if (ppiIsSet()) {
-    const int32_t& value               = m_Ppi;
+    const int32_t &value = m_Ppi;
     const std::string currentValuePath = _pathPrefix + ".ppi";
 
     if (value < 0) {
@@ -110,7 +110,7 @@ bool N1N2MessageTransferReqData::validate(
   }
 
   if (r5qiIsSet()) {
-    const int32_t& value               = m_r_5qi;
+    const int32_t &value = m_r_5qi;
     const std::string currentValuePath = _pathPrefix + ".r5qi";
 
     if (value < 0) {
@@ -124,7 +124,7 @@ bool N1N2MessageTransferReqData::validate(
   }
 
   if (supportedFeaturesIsSet()) {
-    const std::string& value           = m_SupportedFeatures;
+    const std::string &value = m_SupportedFeatures;
     const std::string currentValuePath = _pathPrefix + ".supportedFeatures";
   }
 
@@ -132,7 +132,7 @@ bool N1N2MessageTransferReqData::validate(
 }
 
 bool N1N2MessageTransferReqData::operator==(
-    const N1N2MessageTransferReqData& rhs) const {
+    const N1N2MessageTransferReqData &rhs) const {
   return
 
       ((!n1MessageContainerIsSet() && !rhs.n1MessageContainerIsSet()) ||
@@ -208,38 +208,51 @@ bool N1N2MessageTransferReqData::operator==(
 }
 
 bool N1N2MessageTransferReqData::operator!=(
-    const N1N2MessageTransferReqData& rhs) const {
+    const N1N2MessageTransferReqData &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const N1N2MessageTransferReqData& o) {
+void to_json(nlohmann::json &j, const N1N2MessageTransferReqData &o) {
   j = nlohmann::json();
   if (o.n1MessageContainerIsSet())
     j["n1MessageContainer"] = o.m_N1MessageContainer;
-  if (o.n2InfoContainerIsSet()) j["n2InfoContainer"] = o.m_N2InfoContainer;
-  if (o.mtDataIsSet()) j["mtData"] = o.m_MtData;
-  if (o.skipIndIsSet()) j["skipInd"] = o.m_SkipInd;
+  if (o.n2InfoContainerIsSet())
+    j["n2InfoContainer"] = o.m_N2InfoContainer;
+  if (o.mtDataIsSet())
+    j["mtData"] = o.m_MtData;
+  if (o.skipIndIsSet())
+    j["skipInd"] = o.m_SkipInd;
   if (o.lastMsgIndicationIsSet())
     j["lastMsgIndication"] = o.m_LastMsgIndication;
-  if (o.pduSessionIdIsSet()) j["pduSessionId"] = o.m_PduSessionId;
-  if (o.lcsCorrelationIdIsSet()) j["lcsCorrelationId"] = o.m_LcsCorrelationId;
-  if (o.ppiIsSet()) j["ppi"] = o.m_Ppi;
-  if (o.arpIsSet()) j["arp"] = o.m_Arp;
-  if (o.r5qiIsSet()) j["5qi"] = o.m_r_5qi;
+  if (o.pduSessionIdIsSet())
+    j["pduSessionId"] = o.m_PduSessionId;
+  if (o.lcsCorrelationIdIsSet())
+    j["lcsCorrelationId"] = o.m_LcsCorrelationId;
+  if (o.ppiIsSet())
+    j["ppi"] = o.m_Ppi;
+  if (o.arpIsSet())
+    j["arp"] = o.m_Arp;
+  if (o.r5qiIsSet())
+    j["5qi"] = o.m_r_5qi;
   if (o.n1n2FailureTxfNotifURIIsSet())
     j["n1n2FailureTxfNotifURI"] = o.m_N1n2FailureTxfNotifURI;
   if (o.smfReallocationIndIsSet())
     j["smfReallocationInd"] = o.m_SmfReallocationInd;
-  if (o.areaOfValidityIsSet()) j["areaOfValidity"] = o.m_AreaOfValidity;
+  if (o.areaOfValidityIsSet())
+    j["areaOfValidity"] = o.m_AreaOfValidity;
   if (o.supportedFeaturesIsSet())
     j["supportedFeatures"] = o.m_SupportedFeatures;
-  if (o.oldGuamiIsSet()) j["oldGuami"] = o.m_OldGuami;
-  if (o.maAcceptedIndIsSet()) j["maAcceptedInd"] = o.m_MaAcceptedInd;
-  if (o.extBufSupportIsSet()) j["extBufSupport"] = o.m_ExtBufSupport;
-  if (o.targetAccessIsSet()) j["targetAccess"] = o.m_TargetAccess;
+  if (o.oldGuamiIsSet())
+    j["oldGuami"] = o.m_OldGuami;
+  if (o.maAcceptedIndIsSet())
+    j["maAcceptedInd"] = o.m_MaAcceptedInd;
+  if (o.extBufSupportIsSet())
+    j["extBufSupport"] = o.m_ExtBufSupport;
+  if (o.targetAccessIsSet())
+    j["targetAccess"] = o.m_TargetAccess;
 }
 
-void from_json(const nlohmann::json& j, N1N2MessageTransferReqData& o) {
+void from_json(const nlohmann::json &j, N1N2MessageTransferReqData &o) {
   if (j.find("n1MessageContainer") != j.end()) {
     j.at("n1MessageContainer").get_to(o.m_N1MessageContainer);
     o.m_N1MessageContainerIsSet = true;
@@ -319,8 +332,8 @@ N1N2MessageTransferReqData::getN1MessageContainer() const {
   return m_N1MessageContainer;
 }
 void N1N2MessageTransferReqData::setN1MessageContainer(
-    oai::model::lmf::N1MessageContainer const& value) {
-  m_N1MessageContainer      = value;
+    oai::model::lmf::N1MessageContainer const &value) {
+  m_N1MessageContainer = value;
   m_N1MessageContainerIsSet = true;
 }
 bool N1N2MessageTransferReqData::n1MessageContainerIsSet() const {
@@ -334,8 +347,8 @@ N1N2MessageTransferReqData::getN2InfoContainer() const {
   return m_N2InfoContainer;
 }
 void N1N2MessageTransferReqData::setN2InfoContainer(
-    oai::model::lmf::N2InfoContainer const& value) {
-  m_N2InfoContainer      = value;
+    oai::model::lmf::N2InfoContainer const &value) {
+  m_N2InfoContainer = value;
   m_N2InfoContainerIsSet = true;
 }
 bool N1N2MessageTransferReqData::n2InfoContainerIsSet() const {
@@ -344,39 +357,29 @@ bool N1N2MessageTransferReqData::n2InfoContainerIsSet() const {
 void N1N2MessageTransferReqData::unsetN2InfoContainer() {
   m_N2InfoContainerIsSet = false;
 }
-oai::model::common::RefToBinaryData N1N2MessageTransferReqData::getMtData()
-    const {
+oai::model::common::RefToBinaryData
+N1N2MessageTransferReqData::getMtData() const {
   return m_MtData;
 }
 void N1N2MessageTransferReqData::setMtData(
-    oai::model::common::RefToBinaryData const& value) {
-  m_MtData      = value;
+    oai::model::common::RefToBinaryData const &value) {
+  m_MtData = value;
   m_MtDataIsSet = true;
 }
-bool N1N2MessageTransferReqData::mtDataIsSet() const {
-  return m_MtDataIsSet;
-}
-void N1N2MessageTransferReqData::unsetMtData() {
-  m_MtDataIsSet = false;
-}
-bool N1N2MessageTransferReqData::isSkipInd() const {
-  return m_SkipInd;
-}
+bool N1N2MessageTransferReqData::mtDataIsSet() const { return m_MtDataIsSet; }
+void N1N2MessageTransferReqData::unsetMtData() { m_MtDataIsSet = false; }
+bool N1N2MessageTransferReqData::isSkipInd() const { return m_SkipInd; }
 void N1N2MessageTransferReqData::setSkipInd(bool const value) {
-  m_SkipInd      = value;
+  m_SkipInd = value;
   m_SkipIndIsSet = true;
 }
-bool N1N2MessageTransferReqData::skipIndIsSet() const {
-  return m_SkipIndIsSet;
-}
-void N1N2MessageTransferReqData::unsetSkipInd() {
-  m_SkipIndIsSet = false;
-}
+bool N1N2MessageTransferReqData::skipIndIsSet() const { return m_SkipIndIsSet; }
+void N1N2MessageTransferReqData::unsetSkipInd() { m_SkipIndIsSet = false; }
 bool N1N2MessageTransferReqData::isLastMsgIndication() const {
   return m_LastMsgIndication;
 }
 void N1N2MessageTransferReqData::setLastMsgIndication(bool const value) {
-  m_LastMsgIndication      = value;
+  m_LastMsgIndication = value;
   m_LastMsgIndicationIsSet = true;
 }
 bool N1N2MessageTransferReqData::lastMsgIndicationIsSet() const {
@@ -389,7 +392,7 @@ int32_t N1N2MessageTransferReqData::getPduSessionId() const {
   return m_PduSessionId;
 }
 void N1N2MessageTransferReqData::setPduSessionId(int32_t const value) {
-  m_PduSessionId      = value;
+  m_PduSessionId = value;
   m_PduSessionIdIsSet = true;
 }
 bool N1N2MessageTransferReqData::pduSessionIdIsSet() const {
@@ -401,8 +404,8 @@ void N1N2MessageTransferReqData::unsetPduSessionId() {
 std::string N1N2MessageTransferReqData::getLcsCorrelationId() const {
   return m_LcsCorrelationId;
 }
-void N1N2MessageTransferReqData::setLcsCorrelationId(std::string const& value) {
-  m_LcsCorrelationId      = value;
+void N1N2MessageTransferReqData::setLcsCorrelationId(std::string const &value) {
+  m_LcsCorrelationId = value;
   m_LcsCorrelationIdIsSet = true;
 }
 bool N1N2MessageTransferReqData::lcsCorrelationIdIsSet() const {
@@ -411,51 +414,35 @@ bool N1N2MessageTransferReqData::lcsCorrelationIdIsSet() const {
 void N1N2MessageTransferReqData::unsetLcsCorrelationId() {
   m_LcsCorrelationIdIsSet = false;
 }
-int32_t N1N2MessageTransferReqData::getPpi() const {
-  return m_Ppi;
-}
+int32_t N1N2MessageTransferReqData::getPpi() const { return m_Ppi; }
 void N1N2MessageTransferReqData::setPpi(int32_t const value) {
-  m_Ppi      = value;
+  m_Ppi = value;
   m_PpiIsSet = true;
 }
-bool N1N2MessageTransferReqData::ppiIsSet() const {
-  return m_PpiIsSet;
-}
-void N1N2MessageTransferReqData::unsetPpi() {
-  m_PpiIsSet = false;
-}
+bool N1N2MessageTransferReqData::ppiIsSet() const { return m_PpiIsSet; }
+void N1N2MessageTransferReqData::unsetPpi() { m_PpiIsSet = false; }
 oai::model::common::Arp N1N2MessageTransferReqData::getArp() const {
   return m_Arp;
 }
-void N1N2MessageTransferReqData::setArp(oai::model::common::Arp const& value) {
-  m_Arp      = value;
+void N1N2MessageTransferReqData::setArp(oai::model::common::Arp const &value) {
+  m_Arp = value;
   m_ArpIsSet = true;
 }
-bool N1N2MessageTransferReqData::arpIsSet() const {
-  return m_ArpIsSet;
-}
-void N1N2MessageTransferReqData::unsetArp() {
-  m_ArpIsSet = false;
-}
-int32_t N1N2MessageTransferReqData::getR5qi() const {
-  return m_r_5qi;
-}
+bool N1N2MessageTransferReqData::arpIsSet() const { return m_ArpIsSet; }
+void N1N2MessageTransferReqData::unsetArp() { m_ArpIsSet = false; }
+int32_t N1N2MessageTransferReqData::getR5qi() const { return m_r_5qi; }
 void N1N2MessageTransferReqData::setR5qi(int32_t const value) {
-  m_r_5qi      = value;
+  m_r_5qi = value;
   m_r_5qiIsSet = true;
 }
-bool N1N2MessageTransferReqData::r5qiIsSet() const {
-  return m_r_5qiIsSet;
-}
-void N1N2MessageTransferReqData::unsetr_5qi() {
-  m_r_5qiIsSet = false;
-}
+bool N1N2MessageTransferReqData::r5qiIsSet() const { return m_r_5qiIsSet; }
+void N1N2MessageTransferReqData::unsetr_5qi() { m_r_5qiIsSet = false; }
 std::string N1N2MessageTransferReqData::getN1n2FailureTxfNotifURI() const {
   return m_N1n2FailureTxfNotifURI;
 }
 void N1N2MessageTransferReqData::setN1n2FailureTxfNotifURI(
-    std::string const& value) {
-  m_N1n2FailureTxfNotifURI      = value;
+    std::string const &value) {
+  m_N1n2FailureTxfNotifURI = value;
   m_N1n2FailureTxfNotifURIIsSet = true;
 }
 bool N1N2MessageTransferReqData::n1n2FailureTxfNotifURIIsSet() const {
@@ -468,7 +455,7 @@ bool N1N2MessageTransferReqData::isSmfReallocationInd() const {
   return m_SmfReallocationInd;
 }
 void N1N2MessageTransferReqData::setSmfReallocationInd(bool const value) {
-  m_SmfReallocationInd      = value;
+  m_SmfReallocationInd = value;
   m_SmfReallocationIndIsSet = true;
 }
 bool N1N2MessageTransferReqData::smfReallocationIndIsSet() const {
@@ -477,13 +464,13 @@ bool N1N2MessageTransferReqData::smfReallocationIndIsSet() const {
 void N1N2MessageTransferReqData::unsetSmfReallocationInd() {
   m_SmfReallocationIndIsSet = false;
 }
-oai::model::lmf::AreaOfValidity N1N2MessageTransferReqData::getAreaOfValidity()
-    const {
+oai::model::lmf::AreaOfValidity
+N1N2MessageTransferReqData::getAreaOfValidity() const {
   return m_AreaOfValidity;
 }
 void N1N2MessageTransferReqData::setAreaOfValidity(
-    oai::model::lmf::AreaOfValidity const& value) {
-  m_AreaOfValidity      = value;
+    oai::model::lmf::AreaOfValidity const &value) {
+  m_AreaOfValidity = value;
   m_AreaOfValidityIsSet = true;
 }
 bool N1N2MessageTransferReqData::areaOfValidityIsSet() const {
@@ -496,8 +483,8 @@ std::string N1N2MessageTransferReqData::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
 void N1N2MessageTransferReqData::setSupportedFeatures(
-    std::string const& value) {
-  m_SupportedFeatures      = value;
+    std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool N1N2MessageTransferReqData::supportedFeaturesIsSet() const {
@@ -510,21 +497,19 @@ oai::model::common::Guami N1N2MessageTransferReqData::getOldGuami() const {
   return m_OldGuami;
 }
 void N1N2MessageTransferReqData::setOldGuami(
-    oai::model::common::Guami const& value) {
-  m_OldGuami      = value;
+    oai::model::common::Guami const &value) {
+  m_OldGuami = value;
   m_OldGuamiIsSet = true;
 }
 bool N1N2MessageTransferReqData::oldGuamiIsSet() const {
   return m_OldGuamiIsSet;
 }
-void N1N2MessageTransferReqData::unsetOldGuami() {
-  m_OldGuamiIsSet = false;
-}
+void N1N2MessageTransferReqData::unsetOldGuami() { m_OldGuamiIsSet = false; }
 bool N1N2MessageTransferReqData::isMaAcceptedInd() const {
   return m_MaAcceptedInd;
 }
 void N1N2MessageTransferReqData::setMaAcceptedInd(bool const value) {
-  m_MaAcceptedInd      = value;
+  m_MaAcceptedInd = value;
   m_MaAcceptedIndIsSet = true;
 }
 bool N1N2MessageTransferReqData::maAcceptedIndIsSet() const {
@@ -537,7 +522,7 @@ bool N1N2MessageTransferReqData::isExtBufSupport() const {
   return m_ExtBufSupport;
 }
 void N1N2MessageTransferReqData::setExtBufSupport(bool const value) {
-  m_ExtBufSupport      = value;
+  m_ExtBufSupport = value;
   m_ExtBufSupportIsSet = true;
 }
 bool N1N2MessageTransferReqData::extBufSupportIsSet() const {
@@ -546,13 +531,13 @@ bool N1N2MessageTransferReqData::extBufSupportIsSet() const {
 void N1N2MessageTransferReqData::unsetExtBufSupport() {
   m_ExtBufSupportIsSet = false;
 }
-oai::model::common::AccessType N1N2MessageTransferReqData::getTargetAccess()
-    const {
+oai::model::common::AccessType
+N1N2MessageTransferReqData::getTargetAccess() const {
   return m_TargetAccess;
 }
 void N1N2MessageTransferReqData::setTargetAccess(
-    oai::model::common::AccessType const& value) {
-  m_TargetAccess      = value;
+    oai::model::common::AccessType const &value) {
+  m_TargetAccess = value;
   m_TargetAccessIsSet = true;
 }
 bool N1N2MessageTransferReqData::targetAccessIsSet() const {
@@ -562,4 +547,4 @@ void N1N2MessageTransferReqData::unsetTargetAccess() {
   m_TargetAccessIsSet = false;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

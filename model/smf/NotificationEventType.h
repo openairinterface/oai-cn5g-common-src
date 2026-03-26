@@ -28,7 +28,7 @@ namespace oai::model::smf {
 /// Types of events sent in notifications from NRF to subscribed NF Instances
 /// </summary>
 class NotificationEventType {
- public:
+public:
   NotificationEventType();
   virtual ~NotificationEventType() = default;
 
@@ -42,36 +42,36 @@ class NotificationEventType {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const NotificationEventType& rhs) const;
-  bool operator!=(const NotificationEventType& rhs) const;
+  bool operator==(const NotificationEventType &rhs) const;
+  bool operator!=(const NotificationEventType &rhs) const;
 
   /////////////////////////////////////////////
   /// NotificationEventType members
 
   NotificationEventType_anyOf getValue() const;
   void setValue(NotificationEventType_anyOf value);
-  NotificationEventType_anyOf::eNotificationEventType_anyOf getEnumValue()
-      const;
-  void setEnumValue(
-      NotificationEventType_anyOf::eNotificationEventType_anyOf value);
-  friend void to_json(nlohmann::json& j, const NotificationEventType& o);
-  friend void from_json(const nlohmann::json& j, NotificationEventType& o);
-  friend void to_json(nlohmann::json& j, const NotificationEventType_anyOf& o);
-  friend void from_json(
-      const nlohmann::json& j, NotificationEventType_anyOf& o);
+  NotificationEventType_anyOf::eNotificationEventType_anyOf
+  getEnumValue() const;
+  void
+  setEnumValue(NotificationEventType_anyOf::eNotificationEventType_anyOf value);
+  friend void to_json(nlohmann::json &j, const NotificationEventType &o);
+  friend void from_json(const nlohmann::json &j, NotificationEventType &o);
+  friend void to_json(nlohmann::json &j, const NotificationEventType_anyOf &o);
+  friend void from_json(const nlohmann::json &j,
+                        NotificationEventType_anyOf &o);
 
- protected:
+protected:
   NotificationEventType_anyOf m_value;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* NotificationEventType_H_ */

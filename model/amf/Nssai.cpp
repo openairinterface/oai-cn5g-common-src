@@ -19,9 +19,9 @@
 namespace oai::model::amf {
 
 Nssai::Nssai() {
-  m_SupportedFeatures      = "";
+  m_SupportedFeatures = "";
   m_SupportedFeaturesIsSet = false;
-  m_SingleNssaisIsSet      = false;
+  m_SingleNssaisIsSet = false;
 }
 
 Nssai::~Nssai() {}
@@ -30,15 +30,16 @@ void Nssai::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const Nssai& o) {
+void to_json(nlohmann::json &j, const Nssai &o) {
   j = nlohmann::json();
   if (o.supportedFeaturesIsSet())
     j["supportedFeatures"] = o.m_SupportedFeatures;
   j["defaultSingleNssais"] = o.m_DefaultSingleNssais;
-  if (o.singleNssaisIsSet()) j["singleNssais"] = o.m_SingleNssais;
+  if (o.singleNssaisIsSet())
+    j["singleNssais"] = o.m_SingleNssais;
 }
 
-void from_json(const nlohmann::json& j, Nssai& o) {
+void from_json(const nlohmann::json &j, Nssai &o) {
   if (j.find("supportedFeatures") != j.end()) {
     j.at("supportedFeatures").get_to(o.m_SupportedFeatures);
     o.m_SupportedFeaturesIsSet = true;
@@ -50,34 +51,24 @@ void from_json(const nlohmann::json& j, Nssai& o) {
   }
 }
 
-std::string Nssai::getSupportedFeatures() const {
-  return m_SupportedFeatures;
-}
-void Nssai::setSupportedFeatures(std::string const& value) {
-  m_SupportedFeatures      = value;
+std::string Nssai::getSupportedFeatures() const { return m_SupportedFeatures; }
+void Nssai::setSupportedFeatures(std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
-bool Nssai::supportedFeaturesIsSet() const {
-  return m_SupportedFeaturesIsSet;
-}
-void Nssai::unsetSupportedFeatures() {
-  m_SupportedFeaturesIsSet = false;
-}
-std::vector<oai::model::common::Snssai>& Nssai::getDefaultSingleNssais() {
+bool Nssai::supportedFeaturesIsSet() const { return m_SupportedFeaturesIsSet; }
+void Nssai::unsetSupportedFeatures() { m_SupportedFeaturesIsSet = false; }
+std::vector<oai::model::common::Snssai> &Nssai::getDefaultSingleNssais() {
   return m_DefaultSingleNssais;
 }
 void Nssai::setDefaultSingleNssais(
-    std::vector<oai::model::common::Snssai>& snssais) {
+    std::vector<oai::model::common::Snssai> &snssais) {
   m_DefaultSingleNssais = snssais;
 }
-std::vector<oai::model::common::Snssai>& Nssai::getSingleNssais() {
+std::vector<oai::model::common::Snssai> &Nssai::getSingleNssais() {
   return m_SingleNssais;
 }
-bool Nssai::singleNssaisIsSet() const {
-  return m_SingleNssaisIsSet;
-}
-void Nssai::unsetSingleNssais() {
-  m_SingleNssaisIsSet = false;
-}
+bool Nssai::singleNssaisIsSet() const { return m_SingleNssaisIsSet; }
+void Nssai::unsetSingleNssais() { m_SingleNssaisIsSet = false; }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

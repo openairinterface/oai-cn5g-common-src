@@ -19,25 +19,25 @@
 namespace oai::model::common {
 
 AccessTokenReq::AccessTokenReq() {
-  m_Grant_type                = "";
-  m_NfInstanceId              = "";
-  m_NfTypeIsSet               = false;
-  m_TargetNfTypeIsSet         = false;
-  m_Scope                     = "";
-  m_TargetNfInstanceId        = "";
-  m_TargetNfInstanceIdIsSet   = false;
-  m_RequesterPlmnIsSet        = false;
-  m_RequesterPlmnListIsSet    = false;
-  m_RequesterSnssaiListIsSet  = false;
-  m_RequesterFqdn             = "";
-  m_RequesterFqdnIsSet        = false;
-  m_RequesterSnpnListIsSet    = false;
-  m_TargetPlmnIsSet           = false;
-  m_TargetSnssaiListIsSet     = false;
-  m_TargetNsiListIsSet        = false;
-  m_TargetNfSetId             = "";
-  m_TargetNfSetIdIsSet        = false;
-  m_TargetNfServiceSetId      = "";
+  m_Grant_type = "";
+  m_NfInstanceId = "";
+  m_NfTypeIsSet = false;
+  m_TargetNfTypeIsSet = false;
+  m_Scope = "";
+  m_TargetNfInstanceId = "";
+  m_TargetNfInstanceIdIsSet = false;
+  m_RequesterPlmnIsSet = false;
+  m_RequesterPlmnListIsSet = false;
+  m_RequesterSnssaiListIsSet = false;
+  m_RequesterFqdn = "";
+  m_RequesterFqdnIsSet = false;
+  m_RequesterSnpnListIsSet = false;
+  m_TargetPlmnIsSet = false;
+  m_TargetSnssaiListIsSet = false;
+  m_TargetNsiListIsSet = false;
+  m_TargetNfSetId = "";
+  m_TargetNfSetIdIsSet = false;
+  m_TargetNfServiceSetId = "";
   m_TargetNfServiceSetIdIsSet = false;
 }
 
@@ -48,12 +48,12 @@ void AccessTokenReq::validate() const {
   }
 }
 
-bool AccessTokenReq::validate(std::stringstream& msg) const {
+bool AccessTokenReq::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AccessTokenReq::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool AccessTokenReq::validate(std::stringstream &msg,
+                              const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AccessTokenReq" : pathPrefix;
@@ -66,17 +66,17 @@ bool AccessTokenReq::validate(
   */
 
   if (requesterPlmnListIsSet()) {
-    const std::vector<oai::model::common::PlmnId>& value = m_RequesterPlmnList;
+    const std::vector<oai::model::common::PlmnId> &value = m_RequesterPlmnList;
     const std::string currentValuePath = _pathPrefix + ".requesterPlmnList";
 
     if (value.size() < 2) {
       success = false;
       msg << currentValuePath << ": must have at least 2 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::PlmnId& value : value) {
+      int i = 0;
+      for (const oai::model::common::PlmnId &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -90,7 +90,7 @@ bool AccessTokenReq::validate(
   }
 
   if (requesterSnssaiListIsSet()) {
-    const std::vector<oai::model::common::Snssai>& value =
+    const std::vector<oai::model::common::Snssai> &value =
         m_RequesterSnssaiList;
     const std::string currentValuePath = _pathPrefix + ".requesterSnssaiList";
 
@@ -98,10 +98,10 @@ bool AccessTokenReq::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::Snssai& value : value) {
+      int i = 0;
+      for (const oai::model::common::Snssai &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -115,7 +115,7 @@ bool AccessTokenReq::validate(
   }
 
   if (requesterSnpnListIsSet()) {
-    const std::vector<oai::model::common::PlmnIdNid>& value =
+    const std::vector<oai::model::common::PlmnIdNid> &value =
         m_RequesterSnpnList;
     const std::string currentValuePath = _pathPrefix + ".requesterSnpnList";
 
@@ -123,10 +123,10 @@ bool AccessTokenReq::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::PlmnIdNid& value : value) {
+      int i = 0;
+      for (const oai::model::common::PlmnIdNid &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -140,17 +140,17 @@ bool AccessTokenReq::validate(
   }
 
   if (targetSnssaiListIsSet()) {
-    const std::vector<oai::model::common::Snssai>& value = m_TargetSnssaiList;
+    const std::vector<oai::model::common::Snssai> &value = m_TargetSnssaiList;
     const std::string currentValuePath = _pathPrefix + ".targetSnssaiList";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::Snssai& value : value) {
+      int i = 0;
+      for (const oai::model::common::Snssai &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -163,8 +163,8 @@ bool AccessTokenReq::validate(
   }
 
   if (targetNsiListIsSet()) {
-    const std::vector<std::string>& value = m_TargetNsiList;
-    const std::string currentValuePath    = _pathPrefix + ".targetNsiList";
+    const std::vector<std::string> &value = m_TargetNsiList;
+    const std::string currentValuePath = _pathPrefix + ".targetNsiList";
 
     if (value.size() < 1) {
       success = false;
@@ -187,7 +187,7 @@ bool AccessTokenReq::validate(
   return success;
 }
 
-bool AccessTokenReq::operator==(const AccessTokenReq& rhs) const {
+bool AccessTokenReq::operator==(const AccessTokenReq &rhs) const {
   return
 
       (getGrantType() == rhs.getGrantType()) &&
@@ -251,38 +251,44 @@ bool AccessTokenReq::operator==(const AccessTokenReq& rhs) const {
           ;
 }
 
-bool AccessTokenReq::operator!=(const AccessTokenReq& rhs) const {
+bool AccessTokenReq::operator!=(const AccessTokenReq &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AccessTokenReq& o) {
-  j                 = nlohmann::json();
-  j["grant_type"]   = o.m_Grant_type;
+void to_json(nlohmann::json &j, const AccessTokenReq &o) {
+  j = nlohmann::json();
+  j["grant_type"] = o.m_Grant_type;
   j["nfInstanceId"] = o.m_NfInstanceId;
-  if (o.nfTypeIsSet()) j["nfType"] = o.m_NfType;
-  if (o.targetNfTypeIsSet()) j["targetNfType"] = o.m_TargetNfType;
+  if (o.nfTypeIsSet())
+    j["nfType"] = o.m_NfType;
+  if (o.targetNfTypeIsSet())
+    j["targetNfType"] = o.m_TargetNfType;
   j["scope"] = o.m_Scope;
   if (o.targetNfInstanceIdIsSet())
     j["targetNfInstanceId"] = o.m_TargetNfInstanceId;
-  if (o.requesterPlmnIsSet()) j["requesterPlmn"] = o.m_RequesterPlmn;
+  if (o.requesterPlmnIsSet())
+    j["requesterPlmn"] = o.m_RequesterPlmn;
   if (o.requesterPlmnListIsSet() || !o.m_RequesterPlmnList.empty())
     j["requesterPlmnList"] = o.m_RequesterPlmnList;
   if (o.requesterSnssaiListIsSet() || !o.m_RequesterSnssaiList.empty())
     j["requesterSnssaiList"] = o.m_RequesterSnssaiList;
-  if (o.requesterFqdnIsSet()) j["requesterFqdn"] = o.m_RequesterFqdn;
+  if (o.requesterFqdnIsSet())
+    j["requesterFqdn"] = o.m_RequesterFqdn;
   if (o.requesterSnpnListIsSet() || !o.m_RequesterSnpnList.empty())
     j["requesterSnpnList"] = o.m_RequesterSnpnList;
-  if (o.targetPlmnIsSet()) j["targetPlmn"] = o.m_TargetPlmn;
+  if (o.targetPlmnIsSet())
+    j["targetPlmn"] = o.m_TargetPlmn;
   if (o.targetSnssaiListIsSet() || !o.m_TargetSnssaiList.empty())
     j["targetSnssaiList"] = o.m_TargetSnssaiList;
   if (o.targetNsiListIsSet() || !o.m_TargetNsiList.empty())
     j["targetNsiList"] = o.m_TargetNsiList;
-  if (o.targetNfSetIdIsSet()) j["targetNfSetId"] = o.m_TargetNfSetId;
+  if (o.targetNfSetIdIsSet())
+    j["targetNfSetId"] = o.m_TargetNfSetId;
   if (o.targetNfServiceSetIdIsSet())
     j["targetNfServiceSetId"] = o.m_TargetNfServiceSetId;
 }
 
-void from_json(const nlohmann::json& j, AccessTokenReq& o) {
+void from_json(const nlohmann::json &j, AccessTokenReq &o) {
   j.at("grant_type").get_to(o.m_Grant_type);
   j.at("nfInstanceId").get_to(o.m_NfInstanceId);
   if (j.find("nfType") != j.end()) {
@@ -340,55 +346,39 @@ void from_json(const nlohmann::json& j, AccessTokenReq& o) {
   }
 }
 
-std::string AccessTokenReq::getGrantType() const {
-  return m_Grant_type;
-}
-void AccessTokenReq::setGrantType(std::string const& value) {
+std::string AccessTokenReq::getGrantType() const { return m_Grant_type; }
+void AccessTokenReq::setGrantType(std::string const &value) {
   m_Grant_type = value;
 }
-std::string AccessTokenReq::getNfInstanceId() const {
-  return m_NfInstanceId;
-}
-void AccessTokenReq::setNfInstanceId(std::string const& value) {
+std::string AccessTokenReq::getNfInstanceId() const { return m_NfInstanceId; }
+void AccessTokenReq::setNfInstanceId(std::string const &value) {
   m_NfInstanceId = value;
 }
 oai::model::common::NFType AccessTokenReq::getNfType() const {
   return m_NfType;
 }
-void AccessTokenReq::setNfType(oai::model::common::NFType const& value) {
-  m_NfType      = value;
+void AccessTokenReq::setNfType(oai::model::common::NFType const &value) {
+  m_NfType = value;
   m_NfTypeIsSet = true;
 }
-bool AccessTokenReq::nfTypeIsSet() const {
-  return m_NfTypeIsSet;
-}
-void AccessTokenReq::unsetNfType() {
-  m_NfTypeIsSet = false;
-}
+bool AccessTokenReq::nfTypeIsSet() const { return m_NfTypeIsSet; }
+void AccessTokenReq::unsetNfType() { m_NfTypeIsSet = false; }
 oai::model::common::NFType AccessTokenReq::getTargetNfType() const {
   return m_TargetNfType;
 }
-void AccessTokenReq::setTargetNfType(oai::model::common::NFType const& value) {
-  m_TargetNfType      = value;
+void AccessTokenReq::setTargetNfType(oai::model::common::NFType const &value) {
+  m_TargetNfType = value;
   m_TargetNfTypeIsSet = true;
 }
-bool AccessTokenReq::targetNfTypeIsSet() const {
-  return m_TargetNfTypeIsSet;
-}
-void AccessTokenReq::unsetTargetNfType() {
-  m_TargetNfTypeIsSet = false;
-}
-std::string AccessTokenReq::getScope() const {
-  return m_Scope;
-}
-void AccessTokenReq::setScope(std::string const& value) {
-  m_Scope = value;
-}
+bool AccessTokenReq::targetNfTypeIsSet() const { return m_TargetNfTypeIsSet; }
+void AccessTokenReq::unsetTargetNfType() { m_TargetNfTypeIsSet = false; }
+std::string AccessTokenReq::getScope() const { return m_Scope; }
+void AccessTokenReq::setScope(std::string const &value) { m_Scope = value; }
 std::string AccessTokenReq::getTargetNfInstanceId() const {
   return m_TargetNfInstanceId;
 }
-void AccessTokenReq::setTargetNfInstanceId(std::string const& value) {
-  m_TargetNfInstanceId      = value;
+void AccessTokenReq::setTargetNfInstanceId(std::string const &value) {
+  m_TargetNfInstanceId = value;
   m_TargetNfInstanceIdIsSet = true;
 }
 bool AccessTokenReq::targetNfInstanceIdIsSet() const {
@@ -400,23 +390,19 @@ void AccessTokenReq::unsetTargetNfInstanceId() {
 oai::model::common::PlmnId AccessTokenReq::getRequesterPlmn() const {
   return m_RequesterPlmn;
 }
-void AccessTokenReq::setRequesterPlmn(oai::model::common::PlmnId const& value) {
-  m_RequesterPlmn      = value;
+void AccessTokenReq::setRequesterPlmn(oai::model::common::PlmnId const &value) {
+  m_RequesterPlmn = value;
   m_RequesterPlmnIsSet = true;
 }
-bool AccessTokenReq::requesterPlmnIsSet() const {
-  return m_RequesterPlmnIsSet;
-}
-void AccessTokenReq::unsetRequesterPlmn() {
-  m_RequesterPlmnIsSet = false;
-}
-std::vector<oai::model::common::PlmnId> AccessTokenReq::getRequesterPlmnList()
-    const {
+bool AccessTokenReq::requesterPlmnIsSet() const { return m_RequesterPlmnIsSet; }
+void AccessTokenReq::unsetRequesterPlmn() { m_RequesterPlmnIsSet = false; }
+std::vector<oai::model::common::PlmnId>
+AccessTokenReq::getRequesterPlmnList() const {
   return m_RequesterPlmnList;
 }
 void AccessTokenReq::setRequesterPlmnList(
-    std::vector<oai::model::common::PlmnId> const& value) {
-  m_RequesterPlmnList      = value;
+    std::vector<oai::model::common::PlmnId> const &value) {
+  m_RequesterPlmnList = value;
   m_RequesterPlmnListIsSet = true;
 }
 bool AccessTokenReq::requesterPlmnListIsSet() const {
@@ -425,13 +411,13 @@ bool AccessTokenReq::requesterPlmnListIsSet() const {
 void AccessTokenReq::unsetRequesterPlmnList() {
   m_RequesterPlmnListIsSet = false;
 }
-std::vector<oai::model::common::Snssai> AccessTokenReq::getRequesterSnssaiList()
-    const {
+std::vector<oai::model::common::Snssai>
+AccessTokenReq::getRequesterSnssaiList() const {
   return m_RequesterSnssaiList;
 }
 void AccessTokenReq::setRequesterSnssaiList(
-    std::vector<oai::model::common::Snssai> const& value) {
-  m_RequesterSnssaiList      = value;
+    std::vector<oai::model::common::Snssai> const &value) {
+  m_RequesterSnssaiList = value;
   m_RequesterSnssaiListIsSet = true;
 }
 bool AccessTokenReq::requesterSnssaiListIsSet() const {
@@ -440,26 +426,20 @@ bool AccessTokenReq::requesterSnssaiListIsSet() const {
 void AccessTokenReq::unsetRequesterSnssaiList() {
   m_RequesterSnssaiListIsSet = false;
 }
-std::string AccessTokenReq::getRequesterFqdn() const {
-  return m_RequesterFqdn;
-}
-void AccessTokenReq::setRequesterFqdn(std::string const& value) {
-  m_RequesterFqdn      = value;
+std::string AccessTokenReq::getRequesterFqdn() const { return m_RequesterFqdn; }
+void AccessTokenReq::setRequesterFqdn(std::string const &value) {
+  m_RequesterFqdn = value;
   m_RequesterFqdnIsSet = true;
 }
-bool AccessTokenReq::requesterFqdnIsSet() const {
-  return m_RequesterFqdnIsSet;
-}
-void AccessTokenReq::unsetRequesterFqdn() {
-  m_RequesterFqdnIsSet = false;
-}
+bool AccessTokenReq::requesterFqdnIsSet() const { return m_RequesterFqdnIsSet; }
+void AccessTokenReq::unsetRequesterFqdn() { m_RequesterFqdnIsSet = false; }
 std::vector<oai::model::common::PlmnIdNid>
 AccessTokenReq::getRequesterSnpnList() const {
   return m_RequesterSnpnList;
 }
 void AccessTokenReq::setRequesterSnpnList(
-    std::vector<oai::model::common::PlmnIdNid> const& value) {
-  m_RequesterSnpnList      = value;
+    std::vector<oai::model::common::PlmnIdNid> const &value) {
+  m_RequesterSnpnList = value;
   m_RequesterSnpnListIsSet = true;
 }
 bool AccessTokenReq::requesterSnpnListIsSet() const {
@@ -471,23 +451,19 @@ void AccessTokenReq::unsetRequesterSnpnList() {
 oai::model::common::PlmnId AccessTokenReq::getTargetPlmn() const {
   return m_TargetPlmn;
 }
-void AccessTokenReq::setTargetPlmn(oai::model::common::PlmnId const& value) {
-  m_TargetPlmn      = value;
+void AccessTokenReq::setTargetPlmn(oai::model::common::PlmnId const &value) {
+  m_TargetPlmn = value;
   m_TargetPlmnIsSet = true;
 }
-bool AccessTokenReq::targetPlmnIsSet() const {
-  return m_TargetPlmnIsSet;
-}
-void AccessTokenReq::unsetTargetPlmn() {
-  m_TargetPlmnIsSet = false;
-}
-std::vector<oai::model::common::Snssai> AccessTokenReq::getTargetSnssaiList()
-    const {
+bool AccessTokenReq::targetPlmnIsSet() const { return m_TargetPlmnIsSet; }
+void AccessTokenReq::unsetTargetPlmn() { m_TargetPlmnIsSet = false; }
+std::vector<oai::model::common::Snssai>
+AccessTokenReq::getTargetSnssaiList() const {
   return m_TargetSnssaiList;
 }
 void AccessTokenReq::setTargetSnssaiList(
-    std::vector<oai::model::common::Snssai> const& value) {
-  m_TargetSnssaiList      = value;
+    std::vector<oai::model::common::Snssai> const &value) {
+  m_TargetSnssaiList = value;
   m_TargetSnssaiListIsSet = true;
 }
 bool AccessTokenReq::targetSnssaiListIsSet() const {
@@ -499,34 +475,24 @@ void AccessTokenReq::unsetTargetSnssaiList() {
 std::vector<std::string> AccessTokenReq::getTargetNsiList() const {
   return m_TargetNsiList;
 }
-void AccessTokenReq::setTargetNsiList(std::vector<std::string> const& value) {
-  m_TargetNsiList      = value;
+void AccessTokenReq::setTargetNsiList(std::vector<std::string> const &value) {
+  m_TargetNsiList = value;
   m_TargetNsiListIsSet = true;
 }
-bool AccessTokenReq::targetNsiListIsSet() const {
-  return m_TargetNsiListIsSet;
-}
-void AccessTokenReq::unsetTargetNsiList() {
-  m_TargetNsiListIsSet = false;
-}
-std::string AccessTokenReq::getTargetNfSetId() const {
-  return m_TargetNfSetId;
-}
-void AccessTokenReq::setTargetNfSetId(std::string const& value) {
-  m_TargetNfSetId      = value;
+bool AccessTokenReq::targetNsiListIsSet() const { return m_TargetNsiListIsSet; }
+void AccessTokenReq::unsetTargetNsiList() { m_TargetNsiListIsSet = false; }
+std::string AccessTokenReq::getTargetNfSetId() const { return m_TargetNfSetId; }
+void AccessTokenReq::setTargetNfSetId(std::string const &value) {
+  m_TargetNfSetId = value;
   m_TargetNfSetIdIsSet = true;
 }
-bool AccessTokenReq::targetNfSetIdIsSet() const {
-  return m_TargetNfSetIdIsSet;
-}
-void AccessTokenReq::unsetTargetNfSetId() {
-  m_TargetNfSetIdIsSet = false;
-}
+bool AccessTokenReq::targetNfSetIdIsSet() const { return m_TargetNfSetIdIsSet; }
+void AccessTokenReq::unsetTargetNfSetId() { m_TargetNfSetIdIsSet = false; }
 std::string AccessTokenReq::getTargetNfServiceSetId() const {
   return m_TargetNfServiceSetId;
 }
-void AccessTokenReq::setTargetNfServiceSetId(std::string const& value) {
-  m_TargetNfServiceSetId      = value;
+void AccessTokenReq::setTargetNfServiceSetId(std::string const &value) {
+  m_TargetNfServiceSetId = value;
   m_TargetNfServiceSetIdIsSet = true;
 }
 bool AccessTokenReq::targetNfServiceSetIdIsSet() const {
@@ -536,4 +502,4 @@ void AccessTokenReq::unsetTargetNfServiceSetId() {
   m_TargetNfServiceSetIdIsSet = false;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

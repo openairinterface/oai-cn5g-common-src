@@ -46,7 +46,7 @@ namespace oai::model::pcf {
 /// the same value is received from the SMF.
 /// </summary>
 class FlowDirection {
- public:
+public:
   FlowDirection();
   virtual ~FlowDirection() = default;
 
@@ -60,16 +60,16 @@ class FlowDirection {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const FlowDirection& rhs) const;
-  bool operator!=(const FlowDirection& rhs) const;
+  bool operator==(const FlowDirection &rhs) const;
+  bool operator!=(const FlowDirection &rhs) const;
 
   /////////////////////////////////////////////
   /// FlowDirection members
@@ -78,15 +78,15 @@ class FlowDirection {
   void setValue(FlowDirection_anyOf value);
   FlowDirection_anyOf::eFlowDirection_anyOf getEnumValue() const;
   void setEnumValue(FlowDirection_anyOf::eFlowDirection_anyOf value);
-  friend void to_json(nlohmann::json& j, const FlowDirection& o);
-  friend void from_json(const nlohmann::json& j, FlowDirection& o);
-  friend void to_json(nlohmann::json& j, const FlowDirection_anyOf& o);
-  friend void from_json(const nlohmann::json& j, FlowDirection_anyOf& o);
+  friend void to_json(nlohmann::json &j, const FlowDirection &o);
+  friend void from_json(const nlohmann::json &j, FlowDirection &o);
+  friend void to_json(nlohmann::json &j, const FlowDirection_anyOf &o);
+  friend void from_json(const nlohmann::json &j, FlowDirection_anyOf &o);
 
- protected:
+protected:
   FlowDirection_anyOf m_value;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* FlowDirection_H_ */

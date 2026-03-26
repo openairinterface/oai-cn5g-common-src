@@ -20,11 +20,11 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_TraceDepth {
-  Ngap_TraceDepth_minimum                               = 0,
-  Ngap_TraceDepth_medium                                = 1,
-  Ngap_TraceDepth_maximum                               = 2,
+  Ngap_TraceDepth_minimum = 0,
+  Ngap_TraceDepth_medium = 1,
+  Ngap_TraceDepth_maximum = 2,
   Ngap_TraceDepth_minimumWithoutVendorSpecificExtension = 3,
-  Ngap_TraceDepth_mediumWithoutVendorSpecificExtension  = 4,
+  Ngap_TraceDepth_mediumWithoutVendorSpecificExtension = 4,
   Ngap_TraceDepth_maximumWithoutVendorSpecificExtension = 5
   /*
    * Enumeration is extensible

@@ -20,9 +20,9 @@
 #ifndef AppDetectionReport_H_
 #define AppDetectionReport_H_
 
-#include <string>
 #include "AppDetectionNotifType.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::pcf {
 
@@ -31,7 +31,7 @@ namespace oai::model::pcf {
 /// application identifier of the detected application traffic.
 /// </summary>
 class AppDetectionReport {
- public:
+public:
   AppDetectionReport();
   virtual ~AppDetectionReport() = default;
 
@@ -45,16 +45,16 @@ class AppDetectionReport {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const AppDetectionReport& rhs) const;
-  bool operator!=(const AppDetectionReport& rhs) const;
+  bool operator==(const AppDetectionReport &rhs) const;
+  bool operator!=(const AppDetectionReport &rhs) const;
 
   /////////////////////////////////////////////
   /// AppDetectionReport members
@@ -63,22 +63,22 @@ class AppDetectionReport {
   ///
   /// </summary>
   oai::model::pcf::AppDetectionNotifType getAdNotifType() const;
-  void setAdNotifType(oai::model::pcf::AppDetectionNotifType const& value);
+  void setAdNotifType(oai::model::pcf::AppDetectionNotifType const &value);
   /// <summary>
   /// Contains an AF application identifier.
   /// </summary>
   std::string getAfAppId() const;
-  void setAfAppId(std::string const& value);
+  void setAfAppId(std::string const &value);
 
-  friend void to_json(nlohmann::json& j, const AppDetectionReport& o);
-  friend void from_json(const nlohmann::json& j, AppDetectionReport& o);
+  friend void to_json(nlohmann::json &j, const AppDetectionReport &o);
+  friend void from_json(const nlohmann::json &j, AppDetectionReport &o);
 
- protected:
+protected:
   oai::model::pcf::AppDetectionNotifType m_AdNotifType;
 
   std::string m_AfAppId;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* AppDetectionReport_H_ */

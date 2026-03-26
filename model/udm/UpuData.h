@@ -30,7 +30,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class UpuData {
- public:
+public:
   UpuData();
   virtual ~UpuData();
 
@@ -39,12 +39,12 @@ class UpuData {
   /////////////////////////////////////////////
   /// UpuData members
 
-  friend void to_json(nlohmann::json& j, const UpuData& o);
-  friend void from_json(const nlohmann::json& j, UpuData& o);
+  friend void to_json(nlohmann::json &j, const UpuData &o);
+  friend void from_json(const nlohmann::json &j, UpuData &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* UpuData_H_ */

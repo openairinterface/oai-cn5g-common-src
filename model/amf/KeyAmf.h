@@ -20,8 +20,8 @@
 #define KeyAmf_H_
 
 #include "KeyAmfType.h"
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::amf {
 
@@ -29,7 +29,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class KeyAmf {
- public:
+public:
   KeyAmf();
   virtual ~KeyAmf();
 
@@ -42,22 +42,22 @@ class KeyAmf {
   ///
   /// </summary>
   KeyAmfType getKeyType() const;
-  void setKeyType(KeyAmfType const& value);
+  void setKeyType(KeyAmfType const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getKeyVal() const;
-  void setKeyVal(std::string const& value);
+  void setKeyVal(std::string const &value);
 
-  friend void to_json(nlohmann::json& j, const KeyAmf& o);
-  friend void from_json(const nlohmann::json& j, KeyAmf& o);
+  friend void to_json(nlohmann::json &j, const KeyAmf &o);
+  friend void from_json(const nlohmann::json &j, KeyAmf &o);
 
- protected:
+protected:
   KeyAmfType m_KeyType;
 
   std::string m_KeyVal;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* KeyAmf_H_ */

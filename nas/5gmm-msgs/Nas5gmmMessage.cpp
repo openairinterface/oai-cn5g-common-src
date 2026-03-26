@@ -27,16 +27,14 @@ bool Nas5gmmMessage::Validate(uint32_t len) const {
 }
 
 //------------------------------------------------------------------------------
-void Nas5gmmMessage::SetMessageName(const std::string& name) {
+void Nas5gmmMessage::SetMessageName(const std::string &name) {
   msg_name_ = name;
 }
 
 //------------------------------------------------------------------------------
-std::string Nas5gmmMessage::GetMessageName() const {
-  return msg_name_;
-}
+std::string Nas5gmmMessage::GetMessageName() const { return msg_name_; }
 
 //------------------------------------------------------------------------------
-void Nas5gmmMessage::GetMessageName(std::string& name) const {
+void Nas5gmmMessage::GetMessageName(std::string &name) const {
   name = msg_name_;
 }

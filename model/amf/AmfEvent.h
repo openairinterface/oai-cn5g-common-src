@@ -19,11 +19,11 @@
 #ifndef AmfEvent_H_
 #define AmfEvent_H_
 
-#include "LocationFilter.h"
 #include "AmfEventArea.h"
-#include <vector>
 #include "AmfEventType.h"
+#include "LocationFilter.h"
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::amf {
 using namespace oai::model::amf;
@@ -31,7 +31,7 @@ using namespace oai::model::amf;
 ///
 /// </summary>
 class AmfEvent {
- public:
+public:
   AmfEvent();
   virtual ~AmfEvent() = default;
 
@@ -45,10 +45,10 @@ class AmfEvent {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const AmfEvent& rhs) const;
-  bool operator!=(const AmfEvent& rhs) const;
+  bool operator==(const AmfEvent &rhs) const;
+  bool operator!=(const AmfEvent &rhs) const;
 
   /////////////////////////////////////////////
   /// AmfEvent members
@@ -57,7 +57,7 @@ class AmfEvent {
   ///
   /// </summary>
   AmfEventType getType() const;
-  void setType(AmfEventType const& value);
+  void setType(AmfEventType const &value);
   /// <summary>
   ///
   /// </summary>
@@ -69,14 +69,14 @@ class AmfEvent {
   ///
   /// </summary>
   std::vector<AmfEventArea> getAreaList() const;
-  void setAreaList(std::vector<AmfEventArea> const& value);
+  void setAreaList(std::vector<AmfEventArea> const &value);
   bool areaListIsSet() const;
   void unsetAreaList();
   /// <summary>
   ///
   /// </summary>
   std::vector<LocationFilter> getLocationFilterList() const;
-  void setLocationFilterList(std::vector<LocationFilter> const& value);
+  void setLocationFilterList(std::vector<LocationFilter> const &value);
   bool locationFilterListIsSet() const;
   void unsetLocationFilterList();
   /// <summary>
@@ -87,14 +87,14 @@ class AmfEvent {
   bool refIdIsSet() const;
   void unsetRefId();
 
-  friend void to_json(nlohmann::json& j, const AmfEvent& o);
-  friend void from_json(const nlohmann::json& j, AmfEvent& o);
+  friend void to_json(nlohmann::json &j, const AmfEvent &o);
+  friend void from_json(const nlohmann::json &j, AmfEvent &o);
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
- protected:
+protected:
   AmfEventType m_Type;
 
   bool m_ImmediateFlag;
@@ -107,6 +107,6 @@ class AmfEvent {
   bool m_RefIdIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* AmfEvent_H_ */

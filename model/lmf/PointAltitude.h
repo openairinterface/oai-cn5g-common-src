@@ -19,8 +19,8 @@
 #ifndef PointAltitude_H_
 #define PointAltitude_H_
 
-#include "GeographicalCoordinates.h"
 #include "GADShape.h"
+#include "GeographicalCoordinates.h"
 #include "SupportedGADShapes.h"
 #include <nlohmann/json.hpp>
 
@@ -30,7 +30,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class PointAltitude {
- public:
+public:
   PointAltitude();
   virtual ~PointAltitude() = default;
 
@@ -44,16 +44,16 @@ class PointAltitude {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const PointAltitude& rhs) const;
-  bool operator!=(const PointAltitude& rhs) const;
+  bool operator==(const PointAltitude &rhs) const;
+  bool operator!=(const PointAltitude &rhs) const;
 
   /////////////////////////////////////////////
   /// PointAltitude members
@@ -62,22 +62,22 @@ class PointAltitude {
   ///
   /// </summary>
   oai::model::lmf::SupportedGADShapes getShape() const;
-  void setShape(oai::model::lmf::SupportedGADShapes const& value);
+  void setShape(oai::model::lmf::SupportedGADShapes const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::lmf::GeographicalCoordinates getPoint() const;
-  void setPoint(oai::model::lmf::GeographicalCoordinates const& value);
+  void setPoint(oai::model::lmf::GeographicalCoordinates const &value);
   /// <summary>
   ///
   /// </summary>
   double getAltitude() const;
   void setAltitude(double const value);
 
-  friend void to_json(nlohmann::json& j, const PointAltitude& o);
-  friend void from_json(const nlohmann::json& j, PointAltitude& o);
+  friend void to_json(nlohmann::json &j, const PointAltitude &o);
+  friend void from_json(const nlohmann::json &j, PointAltitude &o);
 
- protected:
+protected:
   oai::model::lmf::SupportedGADShapes m_Shape;
 
   oai::model::lmf::GeographicalCoordinates m_Point;
@@ -85,6 +85,6 @@ class PointAltitude {
   double m_Altitude;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* PointAltitude_H_ */

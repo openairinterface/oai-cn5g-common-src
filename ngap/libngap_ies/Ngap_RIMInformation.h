@@ -22,7 +22,7 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_RIMInformation__rIM_RSDetection {
-  Ngap_RIMInformation__rIM_RSDetection_rs_detected    = 0,
+  Ngap_RIMInformation__rIM_RSDetection_rs_detected = 0,
   Ngap_RIMInformation__rIM_RSDetection_rs_disappeared = 1
   /*
    * Enumeration is extensible
@@ -36,7 +36,7 @@ struct Ngap_ProtocolExtensionContainer;
 typedef struct Ngap_RIMInformation {
   Ngap_GNBSetID_t targetgNBSetID;
   long rIM_RSDetection;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

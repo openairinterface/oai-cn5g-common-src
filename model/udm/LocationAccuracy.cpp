@@ -30,12 +30,12 @@ void LocationAccuracy::validate() const {
   }
 }
 
-bool LocationAccuracy::validate(std::stringstream& msg) const {
+bool LocationAccuracy::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool LocationAccuracy::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool LocationAccuracy::validate(std::stringstream &msg,
+                                const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "LocationAccuracy" : pathPrefix;
@@ -43,18 +43,18 @@ bool LocationAccuracy::validate(
   return success;
 }
 
-bool LocationAccuracy::operator==(const LocationAccuracy& rhs) const {
+bool LocationAccuracy::operator==(const LocationAccuracy &rhs) const {
   return true;
 }
 
-bool LocationAccuracy::operator!=(const LocationAccuracy& rhs) const {
+bool LocationAccuracy::operator!=(const LocationAccuracy &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const LocationAccuracy& o) {
+void to_json(nlohmann::json &j, const LocationAccuracy &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, LocationAccuracy& o) {}
+void from_json(const nlohmann::json &j, LocationAccuracy &o) {}
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

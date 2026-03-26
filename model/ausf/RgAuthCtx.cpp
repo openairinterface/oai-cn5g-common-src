@@ -20,9 +20,9 @@
 namespace oai::model::ausf {
 
 RgAuthCtx::RgAuthCtx() {
-  m_Supi         = "";
-  m_SupiIsSet    = false;
-  m_AuthInd      = false;
+  m_Supi = "";
+  m_SupiIsSet = false;
+  m_AuthInd = false;
   m_AuthIndIsSet = false;
 }
 
@@ -32,14 +32,16 @@ void RgAuthCtx::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const RgAuthCtx& o) {
-  j               = nlohmann::json();
+void to_json(nlohmann::json &j, const RgAuthCtx &o) {
+  j = nlohmann::json();
   j["authResult"] = o.m_AuthResult;
-  if (o.supiIsSet()) j["supi"] = o.m_Supi;
-  if (o.authIndIsSet()) j["authInd"] = o.m_AuthInd;
+  if (o.supiIsSet())
+    j["supi"] = o.m_Supi;
+  if (o.authIndIsSet())
+    j["authInd"] = o.m_AuthInd;
 }
 
-void from_json(const nlohmann::json& j, RgAuthCtx& o) {
+void from_json(const nlohmann::json &j, RgAuthCtx &o) {
   j.at("authResult").get_to(o.m_AuthResult);
   if (j.find("supi") != j.end()) {
     j.at("supi").get_to(o.m_Supi);
@@ -51,37 +53,21 @@ void from_json(const nlohmann::json& j, RgAuthCtx& o) {
   }
 }
 
-AuthResult RgAuthCtx::getAuthResult() const {
-  return m_AuthResult;
-}
-void RgAuthCtx::setAuthResult(AuthResult const& value) {
-  m_AuthResult = value;
-}
-std::string RgAuthCtx::getSupi() const {
-  return m_Supi;
-}
-void RgAuthCtx::setSupi(std::string const& value) {
-  m_Supi      = value;
+AuthResult RgAuthCtx::getAuthResult() const { return m_AuthResult; }
+void RgAuthCtx::setAuthResult(AuthResult const &value) { m_AuthResult = value; }
+std::string RgAuthCtx::getSupi() const { return m_Supi; }
+void RgAuthCtx::setSupi(std::string const &value) {
+  m_Supi = value;
   m_SupiIsSet = true;
 }
-bool RgAuthCtx::supiIsSet() const {
-  return m_SupiIsSet;
-}
-void RgAuthCtx::unsetSupi() {
-  m_SupiIsSet = false;
-}
-bool RgAuthCtx::isAuthInd() const {
-  return m_AuthInd;
-}
+bool RgAuthCtx::supiIsSet() const { return m_SupiIsSet; }
+void RgAuthCtx::unsetSupi() { m_SupiIsSet = false; }
+bool RgAuthCtx::isAuthInd() const { return m_AuthInd; }
 void RgAuthCtx::setAuthInd(bool const value) {
-  m_AuthInd      = value;
+  m_AuthInd = value;
   m_AuthIndIsSet = true;
 }
-bool RgAuthCtx::authIndIsSet() const {
-  return m_AuthIndIsSet;
-}
-void RgAuthCtx::unsetAuthInd() {
-  m_AuthIndIsSet = false;
-}
+bool RgAuthCtx::authIndIsSet() const { return m_AuthIndIsSet; }
+void RgAuthCtx::unsetAuthInd() { m_AuthIndIsSet = false; }
 
-}  // namespace oai::model::ausf
+} // namespace oai::model::ausf

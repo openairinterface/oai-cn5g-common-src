@@ -18,46 +18,45 @@ extern "C" {
 namespace oai::ngap {
 
 class PduSessionResourceSetupResponseTransfer {
- public:
+public:
   PduSessionResourceSetupResponseTransfer();
   virtual ~PduSessionResourceSetupResponseTransfer();
 
   void setDlQosFlowPerTnlInformation(
-      const QosFlowPerTnlInformation& qosFlowPerTnlInformation);
+      const QosFlowPerTnlInformation &qosFlowPerTnlInformation);
   void getDlQosFlowPerTnlInformation(
-      QosFlowPerTnlInformation& qosFlowPerTnlInformation) const;
-  void setDlQosFlowPerTnlInformation(
-      const GtpTunnel& upTransportLayerInfo,
-      const std::vector<AssociatedQosFlow_t>& list);
-  void getDlQosFlowPerTnlInformation(
-      GtpTunnel& upTransportLayerInfo,
-      std::vector<AssociatedQosFlow_t>& list) const;
+      QosFlowPerTnlInformation &qosFlowPerTnlInformation) const;
+  void
+  setDlQosFlowPerTnlInformation(const GtpTunnel &upTransportLayerInfo,
+                                const std::vector<AssociatedQosFlow_t> &list);
+  void
+  getDlQosFlowPerTnlInformation(GtpTunnel &upTransportLayerInfo,
+                                std::vector<AssociatedQosFlow_t> &list) const;
 
   void setAdditionalDLQoSFlowPerTNLInformation(
-      const QosFlowPerTnlInformationList& additionDlQoSFlowPerTnlInformation);
+      const QosFlowPerTnlInformationList &additionDlQoSFlowPerTnlInformation);
   bool getAdditionalDLQoSFlowPerTNLInformation(
-      QosFlowPerTnlInformationList& additionDlQoSFlowPerTnlInformation) const;
+      QosFlowPerTnlInformationList &additionDlQoSFlowPerTnlInformation) const;
 
   void setSecurityResult(
       e_Ngap_IntegrityProtectionResult integrityProtectionResult,
       e_Ngap_ConfidentialityProtectionResult confidentialityProtectionResult);
-  bool getSecurityResult(
-      long& integrityProtectionResult,
-      long& confidentialityProtectionResult) const;
+  bool getSecurityResult(long &integrityProtectionResult,
+                         long &confidentialityProtectionResult) const;
 
-  int encode(uint8_t* buf, int bufSize);
-  bool decode(uint8_t* buf, int bufSize);
+  int encode(uint8_t *buf, int bufSize);
+  bool decode(uint8_t *buf, int bufSize);
 
- private:
-  Ngap_PDUSessionResourceSetupResponseTransfer_t* m_Ie;
+private:
+  Ngap_PDUSessionResourceSetupResponseTransfer_t *m_Ie;
 
-  QosFlowPerTnlInformation m_DlQosFlowPerTnlInformation;  // Mandatory
+  QosFlowPerTnlInformation m_DlQosFlowPerTnlInformation; // Mandatory
   std::optional<QosFlowPerTnlInformationList>
       m_AdditionalDlQosFlowPerTnlInformation;
-  std::optional<SecurityResult> m_SecurityResult;  // Optional
+  std::optional<SecurityResult> m_SecurityResult; // Optional
   // TODO: Security Result (Optional)
   // TODO: QoS Flow Failed to Setup List (Optional)
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

@@ -13,8 +13,8 @@
 
 #include "UPInterfaceType_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::nrf {
 
@@ -27,12 +27,12 @@ void UPInterfaceType_anyOf::validate() const {
   }
 }
 
-bool UPInterfaceType_anyOf::validate(std::stringstream& msg) const {
+bool UPInterfaceType_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool UPInterfaceType_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool UPInterfaceType_anyOf::validate(std::stringstream &msg,
+                                     const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "UPInterfaceType_anyOf" : pathPrefix;
@@ -46,40 +46,40 @@ bool UPInterfaceType_anyOf::validate(
   return success;
 }
 
-bool UPInterfaceType_anyOf::operator==(const UPInterfaceType_anyOf& rhs) const {
+bool UPInterfaceType_anyOf::operator==(const UPInterfaceType_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool UPInterfaceType_anyOf::operator!=(const UPInterfaceType_anyOf& rhs) const {
+bool UPInterfaceType_anyOf::operator!=(const UPInterfaceType_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const UPInterfaceType_anyOf& o) {
+void to_json(nlohmann::json &j, const UPInterfaceType_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case UPInterfaceType_anyOf::eUPInterfaceType_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case UPInterfaceType_anyOf::eUPInterfaceType_anyOf::N3:
-      j = "N3";
-      break;
-    case UPInterfaceType_anyOf::eUPInterfaceType_anyOf::N6:
-      j = "N6";
-      break;
-    case UPInterfaceType_anyOf::eUPInterfaceType_anyOf::N9:
-      j = "N9";
-      break;
-    case UPInterfaceType_anyOf::eUPInterfaceType_anyOf::DATA_FORWARDING:
-      j = "DATA_FORWARDING";
-      break;
+  case UPInterfaceType_anyOf::eUPInterfaceType_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case UPInterfaceType_anyOf::eUPInterfaceType_anyOf::N3:
+    j = "N3";
+    break;
+  case UPInterfaceType_anyOf::eUPInterfaceType_anyOf::N6:
+    j = "N6";
+    break;
+  case UPInterfaceType_anyOf::eUPInterfaceType_anyOf::N9:
+    j = "N9";
+    break;
+  case UPInterfaceType_anyOf::eUPInterfaceType_anyOf::DATA_FORWARDING:
+    j = "DATA_FORWARDING";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, UPInterfaceType_anyOf& o) {
+void from_json(const nlohmann::json &j, UPInterfaceType_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "N3") {
     o.setValue(UPInterfaceType_anyOf::eUPInterfaceType_anyOf::N3);
@@ -98,8 +98,8 @@ void from_json(const nlohmann::json& j, UPInterfaceType_anyOf& o) {
   }
 }
 
-UPInterfaceType_anyOf::eUPInterfaceType_anyOf UPInterfaceType_anyOf::getValue()
-    const {
+UPInterfaceType_anyOf::eUPInterfaceType_anyOf
+UPInterfaceType_anyOf::getValue() const {
   return m_value;
 }
 void UPInterfaceType_anyOf::setValue(
@@ -107,4 +107,4 @@ void UPInterfaceType_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

@@ -20,9 +20,9 @@
 #define AccessNetChargingIdentifier_H_
 
 #include "Flows.h"
+#include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
-#include <nlohmann/json.hpp>
 
 namespace oai::model::pcf {
 
@@ -30,7 +30,7 @@ namespace oai::model::pcf {
 /// Describes the access network charging identifier.
 /// </summary>
 class AccessNetChargingIdentifier {
- public:
+public:
   AccessNetChargingIdentifier();
   virtual ~AccessNetChargingIdentifier() = default;
 
@@ -44,16 +44,16 @@ class AccessNetChargingIdentifier {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const AccessNetChargingIdentifier& rhs) const;
-  bool operator!=(const AccessNetChargingIdentifier& rhs) const;
+  bool operator==(const AccessNetChargingIdentifier &rhs) const;
+  bool operator!=(const AccessNetChargingIdentifier &rhs) const;
 
   /////////////////////////////////////////////
   /// AccessNetChargingIdentifier members
@@ -70,22 +70,22 @@ class AccessNetChargingIdentifier {
   /// A character string containing the access network charging identifier.
   /// </summary>
   std::string getAccNetChargIdString() const;
-  void setAccNetChargIdString(std::string const& value);
+  void setAccNetChargIdString(std::string const &value);
   bool accNetChargIdStringIsSet() const;
   void unsetAccNetChargIdString();
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::pcf::Flows> getFlows() const;
-  void setFlows(std::vector<oai::model::pcf::Flows> const& value);
+  void setFlows(std::vector<oai::model::pcf::Flows> const &value);
   bool flowsIsSet() const;
   void unsetFlows();
 
-  friend void to_json(nlohmann::json& j, const AccessNetChargingIdentifier& o);
-  friend void from_json(
-      const nlohmann::json& j, AccessNetChargingIdentifier& o);
+  friend void to_json(nlohmann::json &j, const AccessNetChargingIdentifier &o);
+  friend void from_json(const nlohmann::json &j,
+                        AccessNetChargingIdentifier &o);
 
- protected:
+protected:
   int32_t m_AccNetChaIdValue;
   bool m_AccNetChaIdValueIsSet;
   std::string m_AccNetChargIdString;
@@ -94,6 +94,6 @@ class AccessNetChargingIdentifier {
   bool m_FlowsIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* AccessNetChargingIdentifier_H_ */

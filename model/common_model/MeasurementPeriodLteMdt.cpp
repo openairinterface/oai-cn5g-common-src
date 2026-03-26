@@ -27,12 +27,12 @@ void MeasurementPeriodLteMdt::validate() const {
   }
 }
 
-bool MeasurementPeriodLteMdt::validate(std::stringstream& msg) const {
+bool MeasurementPeriodLteMdt::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool MeasurementPeriodLteMdt::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool MeasurementPeriodLteMdt::validate(std::stringstream &msg,
+                                       const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "MeasurementPeriodLteMdt" : pathPrefix;
@@ -44,23 +44,23 @@ bool MeasurementPeriodLteMdt::validate(
 }
 
 bool MeasurementPeriodLteMdt::operator==(
-    const MeasurementPeriodLteMdt& rhs) const {
+    const MeasurementPeriodLteMdt &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
 bool MeasurementPeriodLteMdt::operator!=(
-    const MeasurementPeriodLteMdt& rhs) const {
+    const MeasurementPeriodLteMdt &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const MeasurementPeriodLteMdt& o) {
+void to_json(nlohmann::json &j, const MeasurementPeriodLteMdt &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, MeasurementPeriodLteMdt& o) {
+void from_json(const nlohmann::json &j, MeasurementPeriodLteMdt &o) {
   from_json(j, o.m_value);
 }
 
@@ -82,4 +82,4 @@ void MeasurementPeriodLteMdt::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

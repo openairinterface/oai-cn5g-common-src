@@ -19,11 +19,11 @@
 namespace oai::udr::model {
 
 Nssai::Nssai() {
-  m_SupportedFeatures         = "";
-  m_SupportedFeaturesIsSet    = false;
-  m_SingleNssaisIsSet         = false;
-  m_ProvisioningTime          = "";
-  m_ProvisioningTimeIsSet     = false;
+  m_SupportedFeatures = "";
+  m_SupportedFeaturesIsSet = false;
+  m_SingleNssaisIsSet = false;
+  m_ProvisioningTime = "";
+  m_ProvisioningTimeIsSet = false;
   m_AdditionalSnssaiDataIsSet = false;
 }
 
@@ -33,19 +33,20 @@ void Nssai::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const Nssai& o) {
+void to_json(nlohmann::json &j, const Nssai &o) {
   j = nlohmann::json();
   if (o.supportedFeaturesIsSet())
     j["supportedFeatures"] = o.m_SupportedFeatures;
   j["defaultSingleNssais"] = o.m_DefaultSingleNssais;
   if (o.singleNssaisIsSet() || !o.m_SingleNssais.empty())
     j["singleNssais"] = o.m_SingleNssais;
-  if (o.provisioningTimeIsSet()) j["provisioningTime"] = o.m_ProvisioningTime;
+  if (o.provisioningTimeIsSet())
+    j["provisioningTime"] = o.m_ProvisioningTime;
   if (o.additionalSnssaiDataIsSet() || !o.m_AdditionalSnssaiData.empty())
     j["additionalSnssaiData"] = o.m_AdditionalSnssaiData;
 }
 
-void from_json(const nlohmann::json& j, Nssai& o) {
+void from_json(const nlohmann::json &j, Nssai &o) {
   if (j.find("supportedFeatures") != j.end()) {
     j.at("supportedFeatures").get_to(o.m_SupportedFeatures);
     o.m_SupportedFeaturesIsSet = true;
@@ -65,66 +66,48 @@ void from_json(const nlohmann::json& j, Nssai& o) {
   }
 }
 
-std::string Nssai::getSupportedFeatures() const {
-  return m_SupportedFeatures;
-}
-void Nssai::setSupportedFeatures(std::string const& value) {
-  m_SupportedFeatures      = value;
+std::string Nssai::getSupportedFeatures() const { return m_SupportedFeatures; }
+void Nssai::setSupportedFeatures(std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
-bool Nssai::supportedFeaturesIsSet() const {
-  return m_SupportedFeaturesIsSet;
-}
-void Nssai::unsetSupportedFeatures() {
-  m_SupportedFeaturesIsSet = false;
-}
-std::vector<oai::model::common::Snssai>& Nssai::getDefaultSingleNssais() {
+bool Nssai::supportedFeaturesIsSet() const { return m_SupportedFeaturesIsSet; }
+void Nssai::unsetSupportedFeatures() { m_SupportedFeaturesIsSet = false; }
+std::vector<oai::model::common::Snssai> &Nssai::getDefaultSingleNssais() {
   return m_DefaultSingleNssais;
 }
 void Nssai::setDefaultSingleNssais(
-    std::vector<oai::model::common::Snssai> const& value) {
+    std::vector<oai::model::common::Snssai> const &value) {
   m_DefaultSingleNssais = value;
 }
-std::vector<oai::model::common::Snssai>& Nssai::getSingleNssais() {
+std::vector<oai::model::common::Snssai> &Nssai::getSingleNssais() {
   return m_SingleNssais;
 }
 void Nssai::setSingleNssais(
-    std::vector<oai::model::common::Snssai> const& value) {
-  m_SingleNssais      = value;
+    std::vector<oai::model::common::Snssai> const &value) {
+  m_SingleNssais = value;
   m_SingleNssaisIsSet = true;
 }
-bool Nssai::singleNssaisIsSet() const {
-  return m_SingleNssaisIsSet;
-}
-void Nssai::unsetSingleNssais() {
-  m_SingleNssaisIsSet = false;
-}
-std::string Nssai::getProvisioningTime() const {
-  return m_ProvisioningTime;
-}
-void Nssai::setProvisioningTime(std::string const& value) {
-  m_ProvisioningTime      = value;
+bool Nssai::singleNssaisIsSet() const { return m_SingleNssaisIsSet; }
+void Nssai::unsetSingleNssais() { m_SingleNssaisIsSet = false; }
+std::string Nssai::getProvisioningTime() const { return m_ProvisioningTime; }
+void Nssai::setProvisioningTime(std::string const &value) {
+  m_ProvisioningTime = value;
   m_ProvisioningTimeIsSet = true;
 }
-bool Nssai::provisioningTimeIsSet() const {
-  return m_ProvisioningTimeIsSet;
-}
-void Nssai::unsetProvisioningTime() {
-  m_ProvisioningTimeIsSet = false;
-}
-std::map<std::string, AdditionalSnssaiData>& Nssai::getAdditionalSnssaiData() {
+bool Nssai::provisioningTimeIsSet() const { return m_ProvisioningTimeIsSet; }
+void Nssai::unsetProvisioningTime() { m_ProvisioningTimeIsSet = false; }
+std::map<std::string, AdditionalSnssaiData> &Nssai::getAdditionalSnssaiData() {
   return m_AdditionalSnssaiData;
 }
 void Nssai::setAdditionalSnssaiData(
-    std::map<std::string, AdditionalSnssaiData> const& value) {
-  m_AdditionalSnssaiData      = value;
+    std::map<std::string, AdditionalSnssaiData> const &value) {
+  m_AdditionalSnssaiData = value;
   m_AdditionalSnssaiDataIsSet = true;
 }
 bool Nssai::additionalSnssaiDataIsSet() const {
   return m_AdditionalSnssaiDataIsSet;
 }
-void Nssai::unsetAdditionalSnssaiData() {
-  m_AdditionalSnssaiDataIsSet = false;
-}
+void Nssai::unsetAdditionalSnssaiData() { m_AdditionalSnssaiDataIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

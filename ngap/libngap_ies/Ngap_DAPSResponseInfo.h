@@ -21,7 +21,7 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_DAPSResponseInfo__dapsresponseindicator {
-  Ngap_DAPSResponseInfo__dapsresponseindicator_daps_ho_accepted     = 0,
+  Ngap_DAPSResponseInfo__dapsresponseindicator_daps_ho_accepted = 0,
   Ngap_DAPSResponseInfo__dapsresponseindicator_daps_ho_not_accepted = 1
   /*
    * Enumeration is extensible
@@ -34,7 +34,7 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_DAPSResponseInfo */
 typedef struct Ngap_DAPSResponseInfo {
   long dapsresponseindicator;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

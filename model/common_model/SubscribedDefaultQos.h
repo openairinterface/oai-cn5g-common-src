@@ -28,7 +28,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class SubscribedDefaultQos {
- public:
+public:
   SubscribedDefaultQos();
   virtual ~SubscribedDefaultQos() = default;
 
@@ -42,16 +42,16 @@ class SubscribedDefaultQos {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const SubscribedDefaultQos& rhs) const;
-  bool operator!=(const SubscribedDefaultQos& rhs) const;
+  bool operator==(const SubscribedDefaultQos &rhs) const;
+  bool operator!=(const SubscribedDefaultQos &rhs) const;
 
   /////////////////////////////////////////////
   /// SubscribedDefaultQos members
@@ -65,7 +65,7 @@ class SubscribedDefaultQos {
   ///
   /// </summary>
   oai::model::common::Arp getArp() const;
-  void setArp(oai::model::common::Arp const& value);
+  void setArp(oai::model::common::Arp const &value);
   /// <summary>
   ///
   /// </summary>
@@ -74,10 +74,10 @@ class SubscribedDefaultQos {
   bool priorityLevelIsSet() const;
   void unsetPriorityLevel();
 
-  friend void to_json(nlohmann::json& j, const SubscribedDefaultQos& o);
-  friend void from_json(const nlohmann::json& j, SubscribedDefaultQos& o);
+  friend void to_json(nlohmann::json &j, const SubscribedDefaultQos &o);
+  friend void from_json(const nlohmann::json &j, SubscribedDefaultQos &o);
 
- protected:
+protected:
   int32_t m_r_5qi;
 
   oai::model::common::Arp m_Arp;
@@ -86,6 +86,6 @@ class SubscribedDefaultQos {
   bool m_PriorityLevelIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* SubscribedDefaultQos_H_ */

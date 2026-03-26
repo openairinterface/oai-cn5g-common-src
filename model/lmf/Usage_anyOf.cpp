@@ -13,8 +13,8 @@
 
 #include "Usage_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::lmf {
 
@@ -27,12 +27,12 @@ void Usage_anyOf::validate() const {
   }
 }
 
-bool Usage_anyOf::validate(std::stringstream& msg) const {
+bool Usage_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool Usage_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool Usage_anyOf::validate(std::stringstream &msg,
+                           const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "Usage_anyOf" : pathPrefix;
@@ -45,42 +45,42 @@ bool Usage_anyOf::validate(
   return success;
 }
 
-bool Usage_anyOf::operator==(const Usage_anyOf& rhs) const {
+bool Usage_anyOf::operator==(const Usage_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool Usage_anyOf::operator!=(const Usage_anyOf& rhs) const {
+bool Usage_anyOf::operator!=(const Usage_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const Usage_anyOf& o) {
+void to_json(nlohmann::json &j, const Usage_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case Usage_anyOf::eUsage_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case Usage_anyOf::eUsage_anyOf::UNSUCCESS:
-      j = "UNSUCCESS";
-      break;
-    case Usage_anyOf::eUsage_anyOf::SUCCESS_RESULTS_NOT_USED:
-      j = "SUCCESS_RESULTS_NOT_USED";
-      break;
-    case Usage_anyOf::eUsage_anyOf::SUCCESS_RESULTS_USED_TO_VERIFY_LOCATION:
-      j = "SUCCESS_RESULTS_USED_TO_VERIFY_LOCATION";
-      break;
-    case Usage_anyOf::eUsage_anyOf::SUCCESS_RESULTS_USED_TO_GENERATE_LOCATION:
-      j = "SUCCESS_RESULTS_USED_TO_GENERATE_LOCATION";
-      break;
-    case Usage_anyOf::eUsage_anyOf::SUCCESS_METHOD_NOT_DETERMINED:
-      j = "SUCCESS_METHOD_NOT_DETERMINED";
-      break;
+  case Usage_anyOf::eUsage_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case Usage_anyOf::eUsage_anyOf::UNSUCCESS:
+    j = "UNSUCCESS";
+    break;
+  case Usage_anyOf::eUsage_anyOf::SUCCESS_RESULTS_NOT_USED:
+    j = "SUCCESS_RESULTS_NOT_USED";
+    break;
+  case Usage_anyOf::eUsage_anyOf::SUCCESS_RESULTS_USED_TO_VERIFY_LOCATION:
+    j = "SUCCESS_RESULTS_USED_TO_VERIFY_LOCATION";
+    break;
+  case Usage_anyOf::eUsage_anyOf::SUCCESS_RESULTS_USED_TO_GENERATE_LOCATION:
+    j = "SUCCESS_RESULTS_USED_TO_GENERATE_LOCATION";
+    break;
+  case Usage_anyOf::eUsage_anyOf::SUCCESS_METHOD_NOT_DETERMINED:
+    j = "SUCCESS_METHOD_NOT_DETERMINED";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, Usage_anyOf& o) {
+void from_json(const nlohmann::json &j, Usage_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "UNSUCCESS") {
     o.setValue(Usage_anyOf::eUsage_anyOf::UNSUCCESS);
@@ -103,11 +103,7 @@ void from_json(const nlohmann::json& j, Usage_anyOf& o) {
   }
 }
 
-Usage_anyOf::eUsage_anyOf Usage_anyOf::getValue() const {
-  return m_value;
-}
-void Usage_anyOf::setValue(Usage_anyOf::eUsage_anyOf value) {
-  m_value = value;
-}
+Usage_anyOf::eUsage_anyOf Usage_anyOf::getValue() const { return m_value; }
+void Usage_anyOf::setValue(Usage_anyOf::eUsage_anyOf value) { m_value = value; }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

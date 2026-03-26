@@ -19,9 +19,9 @@
 namespace oai::model::udm {
 
 GroupIdentifiers::GroupIdentifiers() {
-  m_ExtGroupId      = "";
+  m_ExtGroupId = "";
   m_ExtGroupIdIsSet = false;
-  m_IntGroupId      = "";
+  m_IntGroupId = "";
   m_IntGroupIdIsSet = false;
 }
 
@@ -31,13 +31,15 @@ void GroupIdentifiers::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const GroupIdentifiers& o) {
+void to_json(nlohmann::json &j, const GroupIdentifiers &o) {
   j = nlohmann::json();
-  if (o.extGroupIdIsSet()) j["extGroupId"] = o.m_ExtGroupId;
-  if (o.intGroupIdIsSet()) j["intGroupId"] = o.m_IntGroupId;
+  if (o.extGroupIdIsSet())
+    j["extGroupId"] = o.m_ExtGroupId;
+  if (o.intGroupIdIsSet())
+    j["intGroupId"] = o.m_IntGroupId;
 }
 
-void from_json(const nlohmann::json& j, GroupIdentifiers& o) {
+void from_json(const nlohmann::json &j, GroupIdentifiers &o) {
   if (j.find("extGroupId") != j.end()) {
     j.at("extGroupId").get_to(o.m_ExtGroupId);
     o.m_ExtGroupIdIsSet = true;
@@ -48,31 +50,19 @@ void from_json(const nlohmann::json& j, GroupIdentifiers& o) {
   }
 }
 
-std::string GroupIdentifiers::getExtGroupId() const {
-  return m_ExtGroupId;
-}
-void GroupIdentifiers::setExtGroupId(std::string const& value) {
-  m_ExtGroupId      = value;
+std::string GroupIdentifiers::getExtGroupId() const { return m_ExtGroupId; }
+void GroupIdentifiers::setExtGroupId(std::string const &value) {
+  m_ExtGroupId = value;
   m_ExtGroupIdIsSet = true;
 }
-bool GroupIdentifiers::extGroupIdIsSet() const {
-  return m_ExtGroupIdIsSet;
-}
-void GroupIdentifiers::unsetExtGroupId() {
-  m_ExtGroupIdIsSet = false;
-}
-std::string GroupIdentifiers::getIntGroupId() const {
-  return m_IntGroupId;
-}
-void GroupIdentifiers::setIntGroupId(std::string const& value) {
-  m_IntGroupId      = value;
+bool GroupIdentifiers::extGroupIdIsSet() const { return m_ExtGroupIdIsSet; }
+void GroupIdentifiers::unsetExtGroupId() { m_ExtGroupIdIsSet = false; }
+std::string GroupIdentifiers::getIntGroupId() const { return m_IntGroupId; }
+void GroupIdentifiers::setIntGroupId(std::string const &value) {
+  m_IntGroupId = value;
   m_IntGroupIdIsSet = true;
 }
-bool GroupIdentifiers::intGroupIdIsSet() const {
-  return m_IntGroupIdIsSet;
-}
-void GroupIdentifiers::unsetIntGroupId() {
-  m_IntGroupIdIsSet = false;
-}
+bool GroupIdentifiers::intGroupIdIsSet() const { return m_IntGroupIdIsSet; }
+void GroupIdentifiers::unsetIntGroupId() { m_IntGroupIdIsSet = false; }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

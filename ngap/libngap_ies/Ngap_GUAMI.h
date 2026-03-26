@@ -12,10 +12,10 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_PLMNIdentity.h"
+#include "Ngap_AMFPointer.h"
 #include "Ngap_AMFRegionID.h"
 #include "Ngap_AMFSetID.h"
-#include "Ngap_AMFPointer.h"
+#include "Ngap_PLMNIdentity.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -31,7 +31,7 @@ typedef struct Ngap_GUAMI {
   Ngap_AMFRegionID_t aMFRegionID;
   Ngap_AMFSetID_t aMFSetID;
   Ngap_AMFPointer_t aMFPointer;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

@@ -19,8 +19,8 @@
 #ifndef CivicAddress_H_
 #define CivicAddress_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::lmf {
 
@@ -28,7 +28,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class CivicAddress {
- public:
+public:
   CivicAddress();
   virtual ~CivicAddress() = default;
 
@@ -42,16 +42,16 @@ class CivicAddress {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const CivicAddress& rhs) const;
-  bool operator!=(const CivicAddress& rhs) const;
+  bool operator==(const CivicAddress &rhs) const;
+  bool operator!=(const CivicAddress &rhs) const;
 
   /////////////////////////////////////////////
   /// CivicAddress members
@@ -60,245 +60,245 @@ class CivicAddress {
   ///
   /// </summary>
   std::string getCountry() const;
-  void setCountry(std::string const& value);
+  void setCountry(std::string const &value);
   bool countryIsSet() const;
   void unsetCountry();
   /// <summary>
   ///
   /// </summary>
   std::string getA1() const;
-  void setA1(std::string const& value);
+  void setA1(std::string const &value);
   bool a1IsSet() const;
   void unsetA1();
   /// <summary>
   ///
   /// </summary>
   std::string getA2() const;
-  void setA2(std::string const& value);
+  void setA2(std::string const &value);
   bool a2IsSet() const;
   void unsetA2();
   /// <summary>
   ///
   /// </summary>
   std::string getA3() const;
-  void setA3(std::string const& value);
+  void setA3(std::string const &value);
   bool a3IsSet() const;
   void unsetA3();
   /// <summary>
   ///
   /// </summary>
   std::string getA4() const;
-  void setA4(std::string const& value);
+  void setA4(std::string const &value);
   bool a4IsSet() const;
   void unsetA4();
   /// <summary>
   ///
   /// </summary>
   std::string getA5() const;
-  void setA5(std::string const& value);
+  void setA5(std::string const &value);
   bool a5IsSet() const;
   void unsetA5();
   /// <summary>
   ///
   /// </summary>
   std::string getA6() const;
-  void setA6(std::string const& value);
+  void setA6(std::string const &value);
   bool a6IsSet() const;
   void unsetA6();
   /// <summary>
   ///
   /// </summary>
   std::string getPRD() const;
-  void setPRD(std::string const& value);
+  void setPRD(std::string const &value);
   bool pRDIsSet() const;
   void unsetPRD();
   /// <summary>
   ///
   /// </summary>
   std::string getPOD() const;
-  void setPOD(std::string const& value);
+  void setPOD(std::string const &value);
   bool pODIsSet() const;
   void unsetPOD();
   /// <summary>
   ///
   /// </summary>
   std::string getSTS() const;
-  void setSTS(std::string const& value);
+  void setSTS(std::string const &value);
   bool sTSIsSet() const;
   void unsetSTS();
   /// <summary>
   ///
   /// </summary>
   std::string getHNO() const;
-  void setHNO(std::string const& value);
+  void setHNO(std::string const &value);
   bool hNOIsSet() const;
   void unsetHNO();
   /// <summary>
   ///
   /// </summary>
   std::string getHNS() const;
-  void setHNS(std::string const& value);
+  void setHNS(std::string const &value);
   bool hNSIsSet() const;
   void unsetHNS();
   /// <summary>
   ///
   /// </summary>
   std::string getLMK() const;
-  void setLMK(std::string const& value);
+  void setLMK(std::string const &value);
   bool lMKIsSet() const;
   void unsetLMK();
   /// <summary>
   ///
   /// </summary>
   std::string getLOC() const;
-  void setLOC(std::string const& value);
+  void setLOC(std::string const &value);
   bool lOCIsSet() const;
   void unsetLOC();
   /// <summary>
   ///
   /// </summary>
   std::string getNAM() const;
-  void setNAM(std::string const& value);
+  void setNAM(std::string const &value);
   bool nAMIsSet() const;
   void unsetNAM();
   /// <summary>
   ///
   /// </summary>
   std::string getPC() const;
-  void setPC(std::string const& value);
+  void setPC(std::string const &value);
   bool pCIsSet() const;
   void unsetPC();
   /// <summary>
   ///
   /// </summary>
   std::string getBLD() const;
-  void setBLD(std::string const& value);
+  void setBLD(std::string const &value);
   bool bLDIsSet() const;
   void unsetBLD();
   /// <summary>
   ///
   /// </summary>
   std::string getUNIT() const;
-  void setUNIT(std::string const& value);
+  void setUNIT(std::string const &value);
   bool uNITIsSet() const;
   void unsetUNIT();
   /// <summary>
   ///
   /// </summary>
   std::string getFLR() const;
-  void setFLR(std::string const& value);
+  void setFLR(std::string const &value);
   bool fLRIsSet() const;
   void unsetFLR();
   /// <summary>
   ///
   /// </summary>
   std::string getROOM() const;
-  void setROOM(std::string const& value);
+  void setROOM(std::string const &value);
   bool rOOMIsSet() const;
   void unsetROOM();
   /// <summary>
   ///
   /// </summary>
   std::string getPLC() const;
-  void setPLC(std::string const& value);
+  void setPLC(std::string const &value);
   bool pLCIsSet() const;
   void unsetPLC();
   /// <summary>
   ///
   /// </summary>
   std::string getPCN() const;
-  void setPCN(std::string const& value);
+  void setPCN(std::string const &value);
   bool pCNIsSet() const;
   void unsetPCN();
   /// <summary>
   ///
   /// </summary>
   std::string getPOBOX() const;
-  void setPOBOX(std::string const& value);
+  void setPOBOX(std::string const &value);
   bool pOBOXIsSet() const;
   void unsetPOBOX();
   /// <summary>
   ///
   /// </summary>
   std::string getADDCODE() const;
-  void setADDCODE(std::string const& value);
+  void setADDCODE(std::string const &value);
   bool aDDCODEIsSet() const;
   void unsetADDCODE();
   /// <summary>
   ///
   /// </summary>
   std::string getSEAT() const;
-  void setSEAT(std::string const& value);
+  void setSEAT(std::string const &value);
   bool sEATIsSet() const;
   void unsetSEAT();
   /// <summary>
   ///
   /// </summary>
   std::string getRD() const;
-  void setRD(std::string const& value);
+  void setRD(std::string const &value);
   bool rDIsSet() const;
   void unsetRD();
   /// <summary>
   ///
   /// </summary>
   std::string getRDSEC() const;
-  void setRDSEC(std::string const& value);
+  void setRDSEC(std::string const &value);
   bool rDSECIsSet() const;
   void unsetRDSEC();
   /// <summary>
   ///
   /// </summary>
   std::string getRDBR() const;
-  void setRDBR(std::string const& value);
+  void setRDBR(std::string const &value);
   bool rDBRIsSet() const;
   void unsetRDBR();
   /// <summary>
   ///
   /// </summary>
   std::string getRDSUBBR() const;
-  void setRDSUBBR(std::string const& value);
+  void setRDSUBBR(std::string const &value);
   bool rDSUBBRIsSet() const;
   void unsetRDSUBBR();
   /// <summary>
   ///
   /// </summary>
   std::string getPRM() const;
-  void setPRM(std::string const& value);
+  void setPRM(std::string const &value);
   bool pRMIsSet() const;
   void unsetPRM();
   /// <summary>
   ///
   /// </summary>
   std::string getPOM() const;
-  void setPOM(std::string const& value);
+  void setPOM(std::string const &value);
   bool pOMIsSet() const;
   void unsetPOM();
   /// <summary>
   ///
   /// </summary>
   std::string getUsageRules() const;
-  void setUsageRules(std::string const& value);
+  void setUsageRules(std::string const &value);
   bool usageRulesIsSet() const;
   void unsetUsageRules();
   /// <summary>
   ///
   /// </summary>
   std::string getMethod() const;
-  void setMethod(std::string const& value);
+  void setMethod(std::string const &value);
   bool methodIsSet() const;
   void unsetMethod();
   /// <summary>
   ///
   /// </summary>
   std::string getProvidedBy() const;
-  void setProvidedBy(std::string const& value);
+  void setProvidedBy(std::string const &value);
   bool providedByIsSet() const;
   void unsetProvidedBy();
 
-  friend void to_json(nlohmann::json& j, const CivicAddress& o);
-  friend void from_json(const nlohmann::json& j, CivicAddress& o);
+  friend void to_json(nlohmann::json &j, const CivicAddress &o);
+  friend void from_json(const nlohmann::json &j, CivicAddress &o);
 
- protected:
+protected:
   std::string m_Country;
   bool m_CountryIsSet;
   std::string m_A1;
@@ -369,6 +369,6 @@ class CivicAddress {
   bool m_ProvidedByIsSet;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* CivicAddress_H_ */

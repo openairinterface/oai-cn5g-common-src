@@ -13,12 +13,12 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include <OBJECT_IDENTIFIER.h>
-#include <NativeInteger.h>
-#include <ObjectDescriptor.h>
 #include <ANY.h>
-#include <OCTET_STRING.h>
 #include <BIT_STRING.h>
+#include <NativeInteger.h>
+#include <OBJECT_IDENTIFIER.h>
+#include <OCTET_STRING.h>
+#include <ObjectDescriptor.h>
 #include <constr_CHOICE.h>
 #include <constr_SEQUENCE.h>
 
@@ -36,9 +36,9 @@ typedef enum Ngap_EXTERNAL__encoding_PR {
 
 /* Ngap_EXTERNAL */
 typedef struct Ngap_EXTERNAL {
-  OBJECT_IDENTIFIER_t* direct_reference;     /* OPTIONAL */
-  long* indirect_reference;                  /* OPTIONAL */
-  ObjectDescriptor_t* data_value_descriptor; /* OPTIONAL */
+  OBJECT_IDENTIFIER_t *direct_reference;     /* OPTIONAL */
+  long *indirect_reference;                  /* OPTIONAL */
+  ObjectDescriptor_t *data_value_descriptor; /* OPTIONAL */
   struct Ngap_EXTERNAL__encoding {
     Ngap_EXTERNAL__encoding_PR present;
     union Ngap_EXTERNAL__Ngap_encoding_u {

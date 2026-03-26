@@ -19,7 +19,7 @@
 namespace oai::model::pcf {
 
 RedundantPduSessionInformation::RedundantPduSessionInformation() {
-  m_PduSessionPairId      = 0;
+  m_PduSessionPairId = 0;
   m_PduSessionPairIdIsSet = false;
 }
 
@@ -30,12 +30,12 @@ void RedundantPduSessionInformation::validate() const {
   }
 }
 
-bool RedundantPduSessionInformation::validate(std::stringstream& msg) const {
+bool RedundantPduSessionInformation::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool RedundantPduSessionInformation::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "RedundantPduSessionInformation" : pathPrefix;
@@ -45,7 +45,7 @@ bool RedundantPduSessionInformation::validate(
     success = false;
   }
   if (pduSessionPairIdIsSet()) {
-    const int32_t& value               = m_PduSessionPairId;
+    const int32_t &value = m_PduSessionPairId;
     const std::string currentValuePath = _pathPrefix + ".pduSessionPairId";
 
     if (value < 0) {
@@ -62,7 +62,7 @@ bool RedundantPduSessionInformation::validate(
 }
 
 bool RedundantPduSessionInformation::operator==(
-    const RedundantPduSessionInformation& rhs) const {
+    const RedundantPduSessionInformation &rhs) const {
   return
 
       (getRsn() == rhs.getRsn()) &&
@@ -75,17 +75,18 @@ bool RedundantPduSessionInformation::operator==(
 }
 
 bool RedundantPduSessionInformation::operator!=(
-    const RedundantPduSessionInformation& rhs) const {
+    const RedundantPduSessionInformation &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const RedundantPduSessionInformation& o) {
-  j        = nlohmann::json::object();
+void to_json(nlohmann::json &j, const RedundantPduSessionInformation &o) {
+  j = nlohmann::json::object();
   j["rsn"] = o.m_Rsn;
-  if (o.pduSessionPairIdIsSet()) j["pduSessionPairId"] = o.m_PduSessionPairId;
+  if (o.pduSessionPairIdIsSet())
+    j["pduSessionPairId"] = o.m_PduSessionPairId;
 }
 
-void from_json(const nlohmann::json& j, RedundantPduSessionInformation& o) {
+void from_json(const nlohmann::json &j, RedundantPduSessionInformation &o) {
   j.at("rsn").get_to(o.m_Rsn);
   if (j.find("pduSessionPairId") != j.end()) {
     j.at("pduSessionPairId").get_to(o.m_PduSessionPairId);
@@ -96,14 +97,14 @@ void from_json(const nlohmann::json& j, RedundantPduSessionInformation& o) {
 oai::model::pcf::Rsn RedundantPduSessionInformation::getRsn() const {
   return m_Rsn;
 }
-void RedundantPduSessionInformation::setRsn(oai::model::pcf::Rsn const& value) {
+void RedundantPduSessionInformation::setRsn(oai::model::pcf::Rsn const &value) {
   m_Rsn = value;
 }
 int32_t RedundantPduSessionInformation::getPduSessionPairId() const {
   return m_PduSessionPairId;
 }
 void RedundantPduSessionInformation::setPduSessionPairId(int32_t const value) {
-  m_PduSessionPairId      = value;
+  m_PduSessionPairId = value;
   m_PduSessionPairIdIsSet = true;
 }
 bool RedundantPduSessionInformation::pduSessionPairIdIsSet() const {
@@ -113,4 +114,4 @@ void RedundantPduSessionInformation::unsetPduSessionPairId() {
   m_PduSessionPairIdIsSet = false;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

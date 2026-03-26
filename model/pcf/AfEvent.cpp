@@ -27,30 +27,28 @@ void AfEvent::validate() const {
   }
 }
 
-bool AfEvent::validate(std::stringstream& msg) const {
+bool AfEvent::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AfEvent::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool AfEvent::validate(std::stringstream &msg,
+                       const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "AfEvent" : pathPrefix;
 
   return success;
 }
 
-bool AfEvent::operator==(const AfEvent& rhs) const {
-  return true;  // TODO
+bool AfEvent::operator==(const AfEvent &rhs) const {
+  return true; // TODO
 }
 
-bool AfEvent::operator!=(const AfEvent& rhs) const {
-  return !(*this == rhs);
-}
+bool AfEvent::operator!=(const AfEvent &rhs) const { return !(*this == rhs); }
 
-void to_json(nlohmann::json& j, const AfEvent& o) {
+void to_json(nlohmann::json &j, const AfEvent &o) {
   j = nlohmann::json::object();
 }
 
-void from_json(const nlohmann::json& j, AfEvent& o) {}
+void from_json(const nlohmann::json &j, AfEvent &o) {}
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

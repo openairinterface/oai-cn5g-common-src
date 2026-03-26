@@ -19,8 +19,8 @@
 #ifndef SmallDataRateStatus_H_
 #define SmallDataRateStatus_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::common {
 
@@ -28,7 +28,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class SmallDataRateStatus {
- public:
+public:
   SmallDataRateStatus();
   virtual ~SmallDataRateStatus() = default;
 
@@ -42,16 +42,16 @@ class SmallDataRateStatus {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const SmallDataRateStatus& rhs) const;
-  bool operator!=(const SmallDataRateStatus& rhs) const;
+  bool operator==(const SmallDataRateStatus &rhs) const;
+  bool operator!=(const SmallDataRateStatus &rhs) const;
 
   /////////////////////////////////////////////
   /// SmallDataRateStatus members
@@ -74,7 +74,7 @@ class SmallDataRateStatus {
   ///
   /// </summary>
   std::string getValidityTime() const;
-  void setValidityTime(std::string const& value);
+  void setValidityTime(std::string const &value);
   bool validityTimeIsSet() const;
   void unsetValidityTime();
   /// <summary>
@@ -92,10 +92,10 @@ class SmallDataRateStatus {
   bool remainExReportsDlIsSet() const;
   void unsetRemainExReportsDl();
 
-  friend void to_json(nlohmann::json& j, const SmallDataRateStatus& o);
-  friend void from_json(const nlohmann::json& j, SmallDataRateStatus& o);
+  friend void to_json(nlohmann::json &j, const SmallDataRateStatus &o);
+  friend void from_json(const nlohmann::json &j, SmallDataRateStatus &o);
 
- protected:
+protected:
   int32_t m_RemainPacketsUl;
   bool m_RemainPacketsUlIsSet;
   int32_t m_RemainPacketsDl;
@@ -108,6 +108,6 @@ class SmallDataRateStatus {
   bool m_RemainExReportsDlIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* SmallDataRateStatus_H_ */

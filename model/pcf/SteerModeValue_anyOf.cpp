@@ -13,8 +13,8 @@
 
 #include "SteerModeValue_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::pcf {
 
@@ -27,12 +27,12 @@ void SteerModeValue_anyOf::validate() const {
   }
 }
 
-bool SteerModeValue_anyOf::validate(std::stringstream& msg) const {
+bool SteerModeValue_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool SteerModeValue_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool SteerModeValue_anyOf::validate(std::stringstream &msg,
+                                    const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "SteerModeValue_anyOf" : pathPrefix;
@@ -46,40 +46,40 @@ bool SteerModeValue_anyOf::validate(
   return success;
 }
 
-bool SteerModeValue_anyOf::operator==(const SteerModeValue_anyOf& rhs) const {
+bool SteerModeValue_anyOf::operator==(const SteerModeValue_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool SteerModeValue_anyOf::operator!=(const SteerModeValue_anyOf& rhs) const {
+bool SteerModeValue_anyOf::operator!=(const SteerModeValue_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const SteerModeValue_anyOf& o) {
+void to_json(nlohmann::json &j, const SteerModeValue_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case SteerModeValue_anyOf::eSteerModeValue_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case SteerModeValue_anyOf::eSteerModeValue_anyOf::ACTIVE_STANDBY:
-      j = "ACTIVE_STANDBY";
-      break;
-    case SteerModeValue_anyOf::eSteerModeValue_anyOf::LOAD_BALANCING:
-      j = "LOAD_BALANCING";
-      break;
-    case SteerModeValue_anyOf::eSteerModeValue_anyOf::SMALLEST_DELAY:
-      j = "SMALLEST_DELAY";
-      break;
-    case SteerModeValue_anyOf::eSteerModeValue_anyOf::PRIORITY_BASED:
-      j = "PRIORITY_BASED";
-      break;
+  case SteerModeValue_anyOf::eSteerModeValue_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case SteerModeValue_anyOf::eSteerModeValue_anyOf::ACTIVE_STANDBY:
+    j = "ACTIVE_STANDBY";
+    break;
+  case SteerModeValue_anyOf::eSteerModeValue_anyOf::LOAD_BALANCING:
+    j = "LOAD_BALANCING";
+    break;
+  case SteerModeValue_anyOf::eSteerModeValue_anyOf::SMALLEST_DELAY:
+    j = "SMALLEST_DELAY";
+    break;
+  case SteerModeValue_anyOf::eSteerModeValue_anyOf::PRIORITY_BASED:
+    j = "PRIORITY_BASED";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, SteerModeValue_anyOf& o) {
+void from_json(const nlohmann::json &j, SteerModeValue_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "ACTIVE_STANDBY") {
     o.setValue(SteerModeValue_anyOf::eSteerModeValue_anyOf::ACTIVE_STANDBY);
@@ -98,8 +98,8 @@ void from_json(const nlohmann::json& j, SteerModeValue_anyOf& o) {
   }
 }
 
-SteerModeValue_anyOf::eSteerModeValue_anyOf SteerModeValue_anyOf::getValue()
-    const {
+SteerModeValue_anyOf::eSteerModeValue_anyOf
+SteerModeValue_anyOf::getValue() const {
   return m_value;
 }
 void SteerModeValue_anyOf::setValue(
@@ -107,4 +107,4 @@ void SteerModeValue_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

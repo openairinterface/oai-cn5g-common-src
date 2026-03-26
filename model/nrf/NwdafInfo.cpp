@@ -17,9 +17,9 @@ namespace oai::model::nrf {
 using namespace oai::model::common;
 
 NwdafInfo::NwdafInfo() {
-  m_EventIdsIsSet     = false;
-  m_NwdafEventsIsSet  = false;
-  m_TaiListIsSet      = false;
+  m_EventIdsIsSet = false;
+  m_NwdafEventsIsSet = false;
+  m_TaiListIsSet = false;
   m_TaiRangeListIsSet = false;
 }
 
@@ -29,17 +29,19 @@ void NwdafInfo::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const NwdafInfo& o) {
+void to_json(nlohmann::json &j, const NwdafInfo &o) {
   j = nlohmann::json();
-  if (o.eventIdsIsSet() || !o.m_EventIds.empty()) j["eventIds"] = o.m_EventIds;
+  if (o.eventIdsIsSet() || !o.m_EventIds.empty())
+    j["eventIds"] = o.m_EventIds;
   if (o.nwdafEventsIsSet() || !o.m_NwdafEvents.empty())
     j["nwdafEvents"] = o.m_NwdafEvents;
-  if (o.taiListIsSet() || !o.m_TaiList.empty()) j["taiList"] = o.m_TaiList;
+  if (o.taiListIsSet() || !o.m_TaiList.empty())
+    j["taiList"] = o.m_TaiList;
   if (o.taiRangeListIsSet() || !o.m_TaiRangeList.empty())
     j["taiRangeList"] = o.m_TaiRangeList;
 }
 
-void from_json(const nlohmann::json& j, NwdafInfo& o) {
+void from_json(const nlohmann::json &j, NwdafInfo &o) {
   if (j.find("eventIds") != j.end()) {
     j.at("eventIds").get_to(o.m_EventIds);
     o.m_EventIdsIsSet = true;
@@ -58,57 +60,33 @@ void from_json(const nlohmann::json& j, NwdafInfo& o) {
   }
 }
 
-std::vector<EventId>& NwdafInfo::getEventIds() {
-  return m_EventIds;
-}
-void NwdafInfo::setEventIds(std::vector<EventId> const& value) {
-  m_EventIds      = value;
+std::vector<EventId> &NwdafInfo::getEventIds() { return m_EventIds; }
+void NwdafInfo::setEventIds(std::vector<EventId> const &value) {
+  m_EventIds = value;
   m_EventIdsIsSet = true;
 }
-bool NwdafInfo::eventIdsIsSet() const {
-  return m_EventIdsIsSet;
-}
-void NwdafInfo::unsetEventIds() {
-  m_EventIdsIsSet = false;
-}
-std::vector<NwdafEvent>& NwdafInfo::getNwdafEvents() {
-  return m_NwdafEvents;
-}
-void NwdafInfo::setNwdafEvents(std::vector<NwdafEvent> const& value) {
-  m_NwdafEvents      = value;
+bool NwdafInfo::eventIdsIsSet() const { return m_EventIdsIsSet; }
+void NwdafInfo::unsetEventIds() { m_EventIdsIsSet = false; }
+std::vector<NwdafEvent> &NwdafInfo::getNwdafEvents() { return m_NwdafEvents; }
+void NwdafInfo::setNwdafEvents(std::vector<NwdafEvent> const &value) {
+  m_NwdafEvents = value;
   m_NwdafEventsIsSet = true;
 }
-bool NwdafInfo::nwdafEventsIsSet() const {
-  return m_NwdafEventsIsSet;
-}
-void NwdafInfo::unsetNwdafEvents() {
-  m_NwdafEventsIsSet = false;
-}
-std::vector<Tai>& NwdafInfo::getTaiList() {
-  return m_TaiList;
-}
-void NwdafInfo::setTaiList(std::vector<Tai> const& value) {
-  m_TaiList      = value;
+bool NwdafInfo::nwdafEventsIsSet() const { return m_NwdafEventsIsSet; }
+void NwdafInfo::unsetNwdafEvents() { m_NwdafEventsIsSet = false; }
+std::vector<Tai> &NwdafInfo::getTaiList() { return m_TaiList; }
+void NwdafInfo::setTaiList(std::vector<Tai> const &value) {
+  m_TaiList = value;
   m_TaiListIsSet = true;
 }
-bool NwdafInfo::taiListIsSet() const {
-  return m_TaiListIsSet;
-}
-void NwdafInfo::unsetTaiList() {
-  m_TaiListIsSet = false;
-}
-std::vector<TaiRange>& NwdafInfo::getTaiRangeList() {
-  return m_TaiRangeList;
-}
-void NwdafInfo::setTaiRangeList(std::vector<TaiRange> const& value) {
-  m_TaiRangeList      = value;
+bool NwdafInfo::taiListIsSet() const { return m_TaiListIsSet; }
+void NwdafInfo::unsetTaiList() { m_TaiListIsSet = false; }
+std::vector<TaiRange> &NwdafInfo::getTaiRangeList() { return m_TaiRangeList; }
+void NwdafInfo::setTaiRangeList(std::vector<TaiRange> const &value) {
+  m_TaiRangeList = value;
   m_TaiRangeListIsSet = true;
 }
-bool NwdafInfo::taiRangeListIsSet() const {
-  return m_TaiRangeListIsSet;
-}
-void NwdafInfo::unsetTaiRangeList() {
-  m_TaiRangeListIsSet = false;
-}
+bool NwdafInfo::taiRangeListIsSet() const { return m_TaiRangeListIsSet; }
+void NwdafInfo::unsetTaiRangeList() { m_TaiRangeListIsSet = false; }
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

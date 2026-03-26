@@ -27,12 +27,12 @@ void ReportedEventType::validate() const {
   }
 }
 
-bool ReportedEventType::validate(std::stringstream& msg) const {
+bool ReportedEventType::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ReportedEventType::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ReportedEventType::validate(std::stringstream &msg,
+                                 const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ReportedEventType" : pathPrefix;
@@ -43,28 +43,26 @@ bool ReportedEventType::validate(
   return success;
 }
 
-bool ReportedEventType::operator==(const ReportedEventType& rhs) const {
+bool ReportedEventType::operator==(const ReportedEventType &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool ReportedEventType::operator!=(const ReportedEventType& rhs) const {
+bool ReportedEventType::operator!=(const ReportedEventType &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ReportedEventType& o) {
+void to_json(nlohmann::json &j, const ReportedEventType &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, ReportedEventType& o) {
+void from_json(const nlohmann::json &j, ReportedEventType &o) {
   from_json(j, o.m_value);
 }
 
-ReportedEventType_anyOf ReportedEventType::getValue() const {
-  return m_value;
-}
+ReportedEventType_anyOf ReportedEventType::getValue() const { return m_value; }
 
 void ReportedEventType::setValue(ReportedEventType_anyOf value) {
   m_value = value;
@@ -80,4 +78,4 @@ void ReportedEventType::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

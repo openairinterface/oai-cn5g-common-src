@@ -27,7 +27,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class ConditionEventType_anyOf {
- public:
+public:
   ConditionEventType_anyOf();
   virtual ~ConditionEventType_anyOf() = default;
 
@@ -50,16 +50,16 @@ class ConditionEventType_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const ConditionEventType_anyOf& rhs) const;
-  bool operator!=(const ConditionEventType_anyOf& rhs) const;
+  bool operator==(const ConditionEventType_anyOf &rhs) const;
+  bool operator!=(const ConditionEventType_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// ConditionEventType_anyOf members
@@ -67,15 +67,15 @@ class ConditionEventType_anyOf {
   ConditionEventType_anyOf::eConditionEventType_anyOf getValue() const;
   void setValue(ConditionEventType_anyOf::eConditionEventType_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const ConditionEventType_anyOf& o);
-  friend void from_json(const nlohmann::json& j, ConditionEventType_anyOf& o);
+  friend void to_json(nlohmann::json &j, const ConditionEventType_anyOf &o);
+  friend void from_json(const nlohmann::json &j, ConditionEventType_anyOf &o);
 
- protected:
+protected:
   ConditionEventType_anyOf::eConditionEventType_anyOf m_value =
       ConditionEventType_anyOf::eConditionEventType_anyOf::
           INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* ConditionEventType_anyOf_H_ */

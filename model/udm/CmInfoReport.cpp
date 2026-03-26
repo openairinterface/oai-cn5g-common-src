@@ -21,9 +21,7 @@
 
 namespace oai::model::udm {
 
-CmInfoReport::CmInfoReport() {
-  m_OldCmInfoListIsSet = false;
-}
+CmInfoReport::CmInfoReport() { m_OldCmInfoListIsSet = false; }
 
 void CmInfoReport::validate() const {
   std::stringstream msg;
@@ -32,19 +30,19 @@ void CmInfoReport::validate() const {
   }
 }
 
-bool CmInfoReport::validate(std::stringstream& msg) const {
+bool CmInfoReport::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool CmInfoReport::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool CmInfoReport::validate(std::stringstream &msg,
+                            const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "CmInfoReport" : pathPrefix;
 
   if (oldCmInfoListIsSet()) {
-    const std::vector<std::string>& value = m_OldCmInfoList;
-    const std::string currentValuePath    = _pathPrefix + ".oldCmInfoList";
+    const std::vector<std::string> &value = m_OldCmInfoList;
+    const std::string currentValuePath = _pathPrefix + ".oldCmInfoList";
 
     if (value.size() < 1) {
       success = false;
@@ -54,10 +52,10 @@ bool CmInfoReport::validate(
       success = false;
       msg << currentValuePath << ": must have at most 2 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const std::string& value : value) {
+      int i = 0;
+      for (const std::string &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -67,8 +65,8 @@ bool CmInfoReport::validate(
   }
 
   /* NewCmInfoList */ {
-    const std::vector<std::string>& value = m_NewCmInfoList;
-    const std::string currentValuePath    = _pathPrefix + ".newCmInfoList";
+    const std::vector<std::string> &value = m_NewCmInfoList;
+    const std::string currentValuePath = _pathPrefix + ".newCmInfoList";
 
     if (value.size() < 1) {
       success = false;
@@ -78,10 +76,10 @@ bool CmInfoReport::validate(
       success = false;
       msg << currentValuePath << ": must have at most 2 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const std::string& value : value) {
+      int i = 0;
+      for (const std::string &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -93,7 +91,7 @@ bool CmInfoReport::validate(
   return success;
 }
 
-bool CmInfoReport::operator==(const CmInfoReport& rhs) const {
+bool CmInfoReport::operator==(const CmInfoReport &rhs) const {
   return
 
       ((!oldCmInfoListIsSet() && !rhs.oldCmInfoListIsSet()) ||
@@ -105,18 +103,18 @@ bool CmInfoReport::operator==(const CmInfoReport& rhs) const {
           ;
 }
 
-bool CmInfoReport::operator!=(const CmInfoReport& rhs) const {
+bool CmInfoReport::operator!=(const CmInfoReport &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const CmInfoReport& o) {
+void to_json(nlohmann::json &j, const CmInfoReport &o) {
   j = nlohmann::json();
   if (o.oldCmInfoListIsSet() || !o.m_OldCmInfoList.empty())
     j["oldCmInfoList"] = o.m_OldCmInfoList;
   j["newCmInfoList"] = o.m_NewCmInfoList;
 }
 
-void from_json(const nlohmann::json& j, CmInfoReport& o) {
+void from_json(const nlohmann::json &j, CmInfoReport &o) {
   if (j.find("oldCmInfoList") != j.end()) {
     j.at("oldCmInfoList").get_to(o.m_OldCmInfoList);
     o.m_OldCmInfoListIsSet = true;
@@ -127,21 +125,17 @@ void from_json(const nlohmann::json& j, CmInfoReport& o) {
 std::vector<std::string> CmInfoReport::getOldCmInfoList() const {
   return m_OldCmInfoList;
 }
-void CmInfoReport::setOldCmInfoList(std::vector<std::string> const& value) {
-  m_OldCmInfoList      = value;
+void CmInfoReport::setOldCmInfoList(std::vector<std::string> const &value) {
+  m_OldCmInfoList = value;
   m_OldCmInfoListIsSet = true;
 }
-bool CmInfoReport::oldCmInfoListIsSet() const {
-  return m_OldCmInfoListIsSet;
-}
-void CmInfoReport::unsetOldCmInfoList() {
-  m_OldCmInfoListIsSet = false;
-}
+bool CmInfoReport::oldCmInfoListIsSet() const { return m_OldCmInfoListIsSet; }
+void CmInfoReport::unsetOldCmInfoList() { m_OldCmInfoListIsSet = false; }
 std::vector<std::string> CmInfoReport::getNewCmInfoList() const {
   return m_NewCmInfoList;
 }
-void CmInfoReport::setNewCmInfoList(std::vector<std::string> const& value) {
+void CmInfoReport::setNewCmInfoList(std::vector<std::string> const &value) {
   m_NewCmInfoList = value;
 }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

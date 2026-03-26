@@ -27,28 +27,28 @@ void QueryParamCombination::validate() const {
   }
 }
 
-bool QueryParamCombination::validate(std::stringstream& msg) const {
+bool QueryParamCombination::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool QueryParamCombination::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool QueryParamCombination::validate(std::stringstream &msg,
+                                     const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "QueryParamCombination" : pathPrefix;
 
   /* QueryParams */ {
-    const std::vector<oai::model::pcf::QueryParameter>& value = m_QueryParams;
+    const std::vector<oai::model::pcf::QueryParameter> &value = m_QueryParams;
     const std::string currentValuePath = _pathPrefix + ".queryParams";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::QueryParameter& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::QueryParameter &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -63,7 +63,7 @@ bool QueryParamCombination::validate(
   return success;
 }
 
-bool QueryParamCombination::operator==(const QueryParamCombination& rhs) const {
+bool QueryParamCombination::operator==(const QueryParamCombination &rhs) const {
   return
 
       (getQueryParams() == rhs.getQueryParams())
@@ -71,16 +71,16 @@ bool QueryParamCombination::operator==(const QueryParamCombination& rhs) const {
           ;
 }
 
-bool QueryParamCombination::operator!=(const QueryParamCombination& rhs) const {
+bool QueryParamCombination::operator!=(const QueryParamCombination &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const QueryParamCombination& o) {
-  j                = nlohmann::json::object();
+void to_json(nlohmann::json &j, const QueryParamCombination &o) {
+  j = nlohmann::json::object();
   j["queryParams"] = o.m_QueryParams;
 }
 
-void from_json(const nlohmann::json& j, QueryParamCombination& o) {
+void from_json(const nlohmann::json &j, QueryParamCombination &o) {
   j.at("queryParams").get_to(o.m_QueryParams);
 }
 
@@ -89,8 +89,8 @@ QueryParamCombination::getQueryParams() const {
   return m_QueryParams;
 }
 void QueryParamCombination::setQueryParams(
-    std::vector<oai::model::pcf::QueryParameter> const& value) {
+    std::vector<oai::model::pcf::QueryParameter> const &value) {
   m_QueryParams = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

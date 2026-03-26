@@ -19,8 +19,8 @@
 #ifndef SupiRange_H_
 #define SupiRange_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::nrf {
 
@@ -28,7 +28,7 @@ namespace oai::model::nrf {
 ///
 /// </summary>
 class SupiRange {
- public:
+public:
   SupiRange();
   virtual ~SupiRange();
 
@@ -41,28 +41,28 @@ class SupiRange {
   ///
   /// </summary>
   std::string getStart() const;
-  void setStart(std::string const& value);
+  void setStart(std::string const &value);
   bool startIsSet() const;
   void unsetStart();
   /// <summary>
   ///
   /// </summary>
   std::string getEnd() const;
-  void setEnd(std::string const& value);
+  void setEnd(std::string const &value);
   bool endIsSet() const;
   void unsetEnd();
   /// <summary>
   ///
   /// </summary>
   std::string getPattern() const;
-  void setPattern(std::string const& value);
+  void setPattern(std::string const &value);
   bool patternIsSet() const;
   void unsetPattern();
 
-  friend void to_json(nlohmann::json& j, const SupiRange& o);
-  friend void from_json(const nlohmann::json& j, SupiRange& o);
+  friend void to_json(nlohmann::json &j, const SupiRange &o);
+  friend void from_json(const nlohmann::json &j, SupiRange &o);
 
- protected:
+protected:
   std::string m_Start;
   bool m_StartIsSet;
   std::string m_End;
@@ -71,6 +71,6 @@ class SupiRange {
   bool m_PatternIsSet;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* SupiRange_H_ */

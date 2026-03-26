@@ -27,30 +27,30 @@ void MediaType::validate() const {
   }
 }
 
-bool MediaType::validate(std::stringstream& msg) const {
+bool MediaType::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool MediaType::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool MediaType::validate(std::stringstream &msg,
+                         const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "MediaType" : pathPrefix;
 
   return success;
 }
 
-bool MediaType::operator==(const MediaType& rhs) const {
-  return true;  // TODO
+bool MediaType::operator==(const MediaType &rhs) const {
+  return true; // TODO
 }
 
-bool MediaType::operator!=(const MediaType& rhs) const {
+bool MediaType::operator!=(const MediaType &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const MediaType& o) {
+void to_json(nlohmann::json &j, const MediaType &o) {
   j = nlohmann::json::object();
 }
 
-void from_json(const nlohmann::json& j, MediaType& o) {}
+void from_json(const nlohmann::json &j, MediaType &o) {}
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

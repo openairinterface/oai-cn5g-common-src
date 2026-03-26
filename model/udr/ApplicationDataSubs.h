@@ -34,7 +34,7 @@ namespace oai::udr::model {
 /// Identifies a subscription to application data change notification.
 /// </summary>
 class ApplicationDataSubs {
- public:
+public:
   ApplicationDataSubs();
   virtual ~ApplicationDataSubs();
 
@@ -47,33 +47,33 @@ class ApplicationDataSubs {
   ///
   /// </summary>
   std::string getNotificationUri() const;
-  void setNotificationUri(std::string const& value);
+  void setNotificationUri(std::string const &value);
   /// <summary>
   ///
   /// </summary>
-  std::vector<DataFilter>& getDataFilters();
-  void setDataFilters(std::vector<DataFilter> const& value);
+  std::vector<DataFilter> &getDataFilters();
+  void setDataFilters(std::vector<DataFilter> const &value);
   bool dataFiltersIsSet() const;
   void unsetDataFilters();
   /// <summary>
   ///
   /// </summary>
   std::string getExpiry() const;
-  void setExpiry(std::string const& value);
+  void setExpiry(std::string const &value);
   bool expiryIsSet() const;
   void unsetExpiry();
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
 
-  friend void to_json(nlohmann::json& j, const ApplicationDataSubs& o);
-  friend void from_json(const nlohmann::json& j, ApplicationDataSubs& o);
+  friend void to_json(nlohmann::json &j, const ApplicationDataSubs &o);
+  friend void from_json(const nlohmann::json &j, ApplicationDataSubs &o);
 
- protected:
+protected:
   std::string m_NotificationUri;
 
   std::vector<DataFilter> m_DataFilters;
@@ -84,6 +84,6 @@ class ApplicationDataSubs {
   bool m_SupportedFeaturesIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* ApplicationDataSubs_H_ */

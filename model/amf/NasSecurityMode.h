@@ -19,8 +19,8 @@
 #ifndef NasSecurityMode_H_
 #define NasSecurityMode_H_
 
-#include "IntegrityAlgorithm.h"
 #include "CipheringAlgorithm.h"
+#include "IntegrityAlgorithm.h"
 #include <nlohmann/json.hpp>
 
 namespace oai::model::amf {
@@ -29,7 +29,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class NasSecurityMode {
- public:
+public:
   NasSecurityMode();
   virtual ~NasSecurityMode();
 
@@ -42,22 +42,22 @@ class NasSecurityMode {
   ///
   /// </summary>
   IntegrityAlgorithm getIntegrityAlgorithm() const;
-  void setIntegrityAlgorithm(IntegrityAlgorithm const& value);
+  void setIntegrityAlgorithm(IntegrityAlgorithm const &value);
   /// <summary>
   ///
   /// </summary>
   CipheringAlgorithm getCipheringAlgorithm() const;
-  void setCipheringAlgorithm(CipheringAlgorithm const& value);
+  void setCipheringAlgorithm(CipheringAlgorithm const &value);
 
-  friend void to_json(nlohmann::json& j, const NasSecurityMode& o);
-  friend void from_json(const nlohmann::json& j, NasSecurityMode& o);
+  friend void to_json(nlohmann::json &j, const NasSecurityMode &o);
+  friend void from_json(const nlohmann::json &j, NasSecurityMode &o);
 
- protected:
+protected:
   IntegrityAlgorithm m_IntegrityAlgorithm;
 
   CipheringAlgorithm m_CipheringAlgorithm;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* NasSecurityMode_H_ */

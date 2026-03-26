@@ -19,27 +19,27 @@
 namespace oai::model::pcf {
 
 ChargingData::ChargingData() {
-  m_ChgId                     = "";
-  m_MeteringMethodIsSet       = false;
-  m_Offline                   = false;
-  m_OfflineIsSet              = false;
-  m_Online                    = false;
-  m_OnlineIsSet               = false;
-  m_SdfHandl                  = false;
-  m_SdfHandlIsSet             = false;
-  m_RatingGroup               = 0;
-  m_RatingGroupIsSet          = false;
-  m_ReportingLevelIsSet       = false;
-  m_ServiceId                 = 0;
-  m_ServiceIdIsSet            = false;
-  m_SponsorId                 = "";
-  m_SponsorIdIsSet            = false;
-  m_AppSvcProvId              = "";
-  m_AppSvcProvIdIsSet         = false;
-  m_AfChargingIdentifier      = 0;
+  m_ChgId = "";
+  m_MeteringMethodIsSet = false;
+  m_Offline = false;
+  m_OfflineIsSet = false;
+  m_Online = false;
+  m_OnlineIsSet = false;
+  m_SdfHandl = false;
+  m_SdfHandlIsSet = false;
+  m_RatingGroup = 0;
+  m_RatingGroupIsSet = false;
+  m_ReportingLevelIsSet = false;
+  m_ServiceId = 0;
+  m_ServiceIdIsSet = false;
+  m_SponsorId = "";
+  m_SponsorIdIsSet = false;
+  m_AppSvcProvId = "";
+  m_AppSvcProvIdIsSet = false;
+  m_AfChargingIdentifier = 0;
   m_AfChargingIdentifierIsSet = false;
-  m_AfChargId                 = "";
-  m_AfChargIdIsSet            = false;
+  m_AfChargId = "";
+  m_AfChargIdIsSet = false;
 }
 
 void ChargingData::validate() const {
@@ -49,12 +49,12 @@ void ChargingData::validate() const {
   }
 }
 
-bool ChargingData::validate(std::stringstream& msg) const {
+bool ChargingData::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ChargingData::validate(
-    std::stringstream& /* msg */, const std::string& /* pathPrefix */) const {
+bool ChargingData::validate(std::stringstream & /* msg */,
+                            const std::string & /* pathPrefix */) const {
   bool success = true;
   /*
   const std::string _pathPrefix =
@@ -64,7 +64,7 @@ bool ChargingData::validate(
   return success;
 }
 
-bool ChargingData::operator==(const ChargingData& rhs) const {
+bool ChargingData::operator==(const ChargingData &rhs) const {
   return
 
       (getChgId() == rhs.getChgId()) &&
@@ -115,28 +115,38 @@ bool ChargingData::operator==(const ChargingData& rhs) const {
           ;
 }
 
-bool ChargingData::operator!=(const ChargingData& rhs) const {
+bool ChargingData::operator!=(const ChargingData &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ChargingData& o) {
-  j          = nlohmann::json();
+void to_json(nlohmann::json &j, const ChargingData &o) {
+  j = nlohmann::json();
   j["chgId"] = o.m_ChgId;
-  if (o.meteringMethodIsSet()) j["meteringMethod"] = o.m_MeteringMethod;
-  if (o.offlineIsSet()) j["offline"] = o.m_Offline;
-  if (o.onlineIsSet()) j["online"] = o.m_Online;
-  if (o.sdfHandlIsSet()) j["sdfHandl"] = o.m_SdfHandl;
-  if (o.ratingGroupIsSet()) j["ratingGroup"] = o.m_RatingGroup;
-  if (o.reportingLevelIsSet()) j["reportingLevel"] = o.m_ReportingLevel;
-  if (o.serviceIdIsSet()) j["serviceId"] = o.m_ServiceId;
-  if (o.sponsorIdIsSet()) j["sponsorId"] = o.m_SponsorId;
-  if (o.appSvcProvIdIsSet()) j["appSvcProvId"] = o.m_AppSvcProvId;
+  if (o.meteringMethodIsSet())
+    j["meteringMethod"] = o.m_MeteringMethod;
+  if (o.offlineIsSet())
+    j["offline"] = o.m_Offline;
+  if (o.onlineIsSet())
+    j["online"] = o.m_Online;
+  if (o.sdfHandlIsSet())
+    j["sdfHandl"] = o.m_SdfHandl;
+  if (o.ratingGroupIsSet())
+    j["ratingGroup"] = o.m_RatingGroup;
+  if (o.reportingLevelIsSet())
+    j["reportingLevel"] = o.m_ReportingLevel;
+  if (o.serviceIdIsSet())
+    j["serviceId"] = o.m_ServiceId;
+  if (o.sponsorIdIsSet())
+    j["sponsorId"] = o.m_SponsorId;
+  if (o.appSvcProvIdIsSet())
+    j["appSvcProvId"] = o.m_AppSvcProvId;
   if (o.afChargingIdentifierIsSet())
     j["afChargingIdentifier"] = o.m_AfChargingIdentifier;
-  if (o.afChargIdIsSet()) j["afChargId"] = o.m_AfChargId;
+  if (o.afChargIdIsSet())
+    j["afChargId"] = o.m_AfChargId;
 }
 
-void from_json(const nlohmann::json& j, ChargingData& o) {
+void from_json(const nlohmann::json &j, ChargingData &o) {
   j.at("chgId").get_to(o.m_ChgId);
   if (j.find("meteringMethod") != j.end()) {
     j.at("meteringMethod").get_to(o.m_MeteringMethod);
@@ -184,136 +194,82 @@ void from_json(const nlohmann::json& j, ChargingData& o) {
   }
 }
 
-std::string ChargingData::getChgId() const {
-  return m_ChgId;
-}
-void ChargingData::setChgId(std::string const& value) {
-  m_ChgId = value;
-}
+std::string ChargingData::getChgId() const { return m_ChgId; }
+void ChargingData::setChgId(std::string const &value) { m_ChgId = value; }
 oai::model::pcf::MeteringMethod ChargingData::getMeteringMethod() const {
   return m_MeteringMethod;
 }
 void ChargingData::setMeteringMethod(
-    oai::model::pcf::MeteringMethod const& value) {
-  m_MeteringMethod      = value;
+    oai::model::pcf::MeteringMethod const &value) {
+  m_MeteringMethod = value;
   m_MeteringMethodIsSet = true;
 }
-bool ChargingData::meteringMethodIsSet() const {
-  return m_MeteringMethodIsSet;
-}
-void ChargingData::unsetMeteringMethod() {
-  m_MeteringMethodIsSet = false;
-}
-bool ChargingData::isOffline() const {
-  return m_Offline;
-}
+bool ChargingData::meteringMethodIsSet() const { return m_MeteringMethodIsSet; }
+void ChargingData::unsetMeteringMethod() { m_MeteringMethodIsSet = false; }
+bool ChargingData::isOffline() const { return m_Offline; }
 void ChargingData::setOffline(bool const value) {
-  m_Offline      = value;
+  m_Offline = value;
   m_OfflineIsSet = true;
 }
-bool ChargingData::offlineIsSet() const {
-  return m_OfflineIsSet;
-}
-void ChargingData::unsetOffline() {
-  m_OfflineIsSet = false;
-}
-bool ChargingData::isOnline() const {
-  return m_Online;
-}
+bool ChargingData::offlineIsSet() const { return m_OfflineIsSet; }
+void ChargingData::unsetOffline() { m_OfflineIsSet = false; }
+bool ChargingData::isOnline() const { return m_Online; }
 void ChargingData::setOnline(bool const value) {
-  m_Online      = value;
+  m_Online = value;
   m_OnlineIsSet = true;
 }
-bool ChargingData::onlineIsSet() const {
-  return m_OnlineIsSet;
-}
-void ChargingData::unsetOnline() {
-  m_OnlineIsSet = false;
-}
-bool ChargingData::isSdfHandl() const {
-  return m_SdfHandl;
-}
+bool ChargingData::onlineIsSet() const { return m_OnlineIsSet; }
+void ChargingData::unsetOnline() { m_OnlineIsSet = false; }
+bool ChargingData::isSdfHandl() const { return m_SdfHandl; }
 void ChargingData::setSdfHandl(bool const value) {
-  m_SdfHandl      = value;
+  m_SdfHandl = value;
   m_SdfHandlIsSet = true;
 }
-bool ChargingData::sdfHandlIsSet() const {
-  return m_SdfHandlIsSet;
-}
-void ChargingData::unsetSdfHandl() {
-  m_SdfHandlIsSet = false;
-}
-uint32_t ChargingData::getRatingGroup() const {
-  return m_RatingGroup;
-}
+bool ChargingData::sdfHandlIsSet() const { return m_SdfHandlIsSet; }
+void ChargingData::unsetSdfHandl() { m_SdfHandlIsSet = false; }
+uint32_t ChargingData::getRatingGroup() const { return m_RatingGroup; }
 void ChargingData::setRatingGroup(uint32_t const value) {
-  m_RatingGroup      = value;
+  m_RatingGroup = value;
   m_RatingGroupIsSet = true;
 }
-bool ChargingData::ratingGroupIsSet() const {
-  return m_RatingGroupIsSet;
-}
-void ChargingData::unsetRatingGroup() {
-  m_RatingGroupIsSet = false;
-}
+bool ChargingData::ratingGroupIsSet() const { return m_RatingGroupIsSet; }
+void ChargingData::unsetRatingGroup() { m_RatingGroupIsSet = false; }
 oai::model::pcf::ReportingLevel ChargingData::getReportingLevel() const {
   return m_ReportingLevel;
 }
 void ChargingData::setReportingLevel(
-    oai::model::pcf::ReportingLevel const& value) {
-  m_ReportingLevel      = value;
+    oai::model::pcf::ReportingLevel const &value) {
+  m_ReportingLevel = value;
   m_ReportingLevelIsSet = true;
 }
-bool ChargingData::reportingLevelIsSet() const {
-  return m_ReportingLevelIsSet;
-}
-void ChargingData::unsetReportingLevel() {
-  m_ReportingLevelIsSet = false;
-}
-uint32_t ChargingData::getServiceId() const {
-  return m_ServiceId;
-}
+bool ChargingData::reportingLevelIsSet() const { return m_ReportingLevelIsSet; }
+void ChargingData::unsetReportingLevel() { m_ReportingLevelIsSet = false; }
+uint32_t ChargingData::getServiceId() const { return m_ServiceId; }
 void ChargingData::setServiceId(uint32_t const value) {
-  m_ServiceId      = value;
+  m_ServiceId = value;
   m_ServiceIdIsSet = true;
 }
-bool ChargingData::serviceIdIsSet() const {
-  return m_ServiceIdIsSet;
-}
-void ChargingData::unsetServiceId() {
-  m_ServiceIdIsSet = false;
-}
-std::string ChargingData::getSponsorId() const {
-  return m_SponsorId;
-}
-void ChargingData::setSponsorId(std::string const& value) {
-  m_SponsorId      = value;
+bool ChargingData::serviceIdIsSet() const { return m_ServiceIdIsSet; }
+void ChargingData::unsetServiceId() { m_ServiceIdIsSet = false; }
+std::string ChargingData::getSponsorId() const { return m_SponsorId; }
+void ChargingData::setSponsorId(std::string const &value) {
+  m_SponsorId = value;
   m_SponsorIdIsSet = true;
 }
-bool ChargingData::sponsorIdIsSet() const {
-  return m_SponsorIdIsSet;
-}
-void ChargingData::unsetSponsorId() {
-  m_SponsorIdIsSet = false;
-}
-std::string ChargingData::getAppSvcProvId() const {
-  return m_AppSvcProvId;
-}
-void ChargingData::setAppSvcProvId(std::string const& value) {
-  m_AppSvcProvId      = value;
+bool ChargingData::sponsorIdIsSet() const { return m_SponsorIdIsSet; }
+void ChargingData::unsetSponsorId() { m_SponsorIdIsSet = false; }
+std::string ChargingData::getAppSvcProvId() const { return m_AppSvcProvId; }
+void ChargingData::setAppSvcProvId(std::string const &value) {
+  m_AppSvcProvId = value;
   m_AppSvcProvIdIsSet = true;
 }
-bool ChargingData::appSvcProvIdIsSet() const {
-  return m_AppSvcProvIdIsSet;
-}
-void ChargingData::unsetAppSvcProvId() {
-  m_AppSvcProvIdIsSet = false;
-}
+bool ChargingData::appSvcProvIdIsSet() const { return m_AppSvcProvIdIsSet; }
+void ChargingData::unsetAppSvcProvId() { m_AppSvcProvIdIsSet = false; }
 uint32_t ChargingData::getAfChargingIdentifier() const {
   return m_AfChargingIdentifier;
 }
 void ChargingData::setAfChargingIdentifier(uint32_t const value) {
-  m_AfChargingIdentifier      = value;
+  m_AfChargingIdentifier = value;
   m_AfChargingIdentifierIsSet = true;
 }
 bool ChargingData::afChargingIdentifierIsSet() const {
@@ -322,18 +278,12 @@ bool ChargingData::afChargingIdentifierIsSet() const {
 void ChargingData::unsetAfChargingIdentifier() {
   m_AfChargingIdentifierIsSet = false;
 }
-std::string ChargingData::getAfChargId() const {
-  return m_AfChargId;
-}
-void ChargingData::setAfChargId(std::string const& value) {
-  m_AfChargId      = value;
+std::string ChargingData::getAfChargId() const { return m_AfChargId; }
+void ChargingData::setAfChargId(std::string const &value) {
+  m_AfChargId = value;
   m_AfChargIdIsSet = true;
 }
-bool ChargingData::afChargIdIsSet() const {
-  return m_AfChargIdIsSet;
-}
-void ChargingData::unsetAfChargId() {
-  m_AfChargIdIsSet = false;
-}
+bool ChargingData::afChargIdIsSet() const { return m_AfChargIdIsSet; }
+void ChargingData::unsetAfChargId() { m_AfChargIdIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

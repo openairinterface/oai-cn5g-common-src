@@ -29,7 +29,7 @@ namespace model {
 ///
 /// </summary>
 class S1UeNetworkCapability {
- public:
+public:
   S1UeNetworkCapability();
   virtual ~S1UeNetworkCapability();
 
@@ -38,14 +38,14 @@ class S1UeNetworkCapability {
   /////////////////////////////////////////////
   /// S1UeNetworkCapability members
 
-  friend void to_json(nlohmann::json& j, const S1UeNetworkCapability& o);
-  friend void from_json(const nlohmann::json& j, S1UeNetworkCapability& o);
+  friend void to_json(nlohmann::json &j, const S1UeNetworkCapability &o);
+  friend void from_json(const nlohmann::json &j, S1UeNetworkCapability &o);
 
- protected:
+protected:
 };
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+} // namespace model
+} // namespace udm
+} // namespace oai
 
 #endif /* S1UeNetworkCapability_H_ */

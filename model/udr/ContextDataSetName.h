@@ -30,7 +30,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class ContextDataSetName {
- public:
+public:
   ContextDataSetName();
   virtual ~ContextDataSetName();
 
@@ -39,12 +39,12 @@ class ContextDataSetName {
   /////////////////////////////////////////////
   /// ContextDataSetName members
 
-  friend void to_json(nlohmann::json& j, const ContextDataSetName& o);
-  friend void from_json(const nlohmann::json& j, ContextDataSetName& o);
+  friend void to_json(nlohmann::json &j, const ContextDataSetName &o);
+  friend void from_json(const nlohmann::json &j, ContextDataSetName &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* ContextDataSetName_H_ */

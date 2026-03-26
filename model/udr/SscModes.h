@@ -33,7 +33,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class SscModes {
- public:
+public:
   SscModes();
   virtual ~SscModes();
 
@@ -46,26 +46,26 @@ class SscModes {
   ///
   /// </summary>
   oai::model::common::SscMode getDefaultSscMode() const;
-  void setDefaultSscMode(oai::model::common::SscMode const& value);
+  void setDefaultSscMode(oai::model::common::SscMode const &value);
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::SscMode>& getAllowedSscModes();
-  void setAllowedSscModes(
-      std::vector<oai::model::common::SscMode> const& value);
+  std::vector<oai::model::common::SscMode> &getAllowedSscModes();
+  void
+  setAllowedSscModes(std::vector<oai::model::common::SscMode> const &value);
   bool allowedSscModesIsSet() const;
   void unsetAllowedSscModes();
 
-  friend void to_json(nlohmann::json& j, const SscModes& o);
-  friend void from_json(const nlohmann::json& j, SscModes& o);
+  friend void to_json(nlohmann::json &j, const SscModes &o);
+  friend void from_json(const nlohmann::json &j, SscModes &o);
 
- protected:
+protected:
   oai::model::common::SscMode m_DefaultSscMode;
 
   std::vector<oai::model::common::SscMode> m_AllowedSscModes;
   bool m_AllowedSscModesIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* SscModes_H_ */

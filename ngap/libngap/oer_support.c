@@ -3,8 +3,8 @@
  * All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#include <asn_system.h>
 #include <asn_internal.h>
+#include <asn_system.h>
 
 #include <oer_support.h>
 
@@ -15,11 +15,11 @@
  *      -1:     Fatal error deciphering length.
  *      >0:     Number of bytes used from bufptr.
  */
-ssize_t oer_fetch_length(const void* bufptr, size_t size, size_t* len_r) {
+ssize_t oer_fetch_length(const void *bufptr, size_t size, size_t *len_r) {
   uint8_t first_byte;
   size_t len_len; /* Length of the length determinant */
-  const uint8_t* b;
-  const uint8_t* bend;
+  const uint8_t *b;
+  const uint8_t *bend;
   size_t len;
 
   if (size == 0) {
@@ -27,7 +27,7 @@ ssize_t oer_fetch_length(const void* bufptr, size_t size, size_t* len_r) {
     return 0;
   }
 
-  first_byte = *(const uint8_t*) bufptr;
+  first_byte = *(const uint8_t *)bufptr;
   if ((first_byte & 0x80) == 0) { /* Short form */
     *len_r = first_byte;          /* 0..127 */
     return 1;
@@ -39,14 +39,14 @@ ssize_t oer_fetch_length(const void* bufptr, size_t size, size_t* len_r) {
     return 0;
   }
 
-  b    = (const uint8_t*) bufptr + 1;
+  b = (const uint8_t *)bufptr + 1;
   bend = b + len_len;
 
   for (; b < bend && *b == 0; b++) {
     /* Skip the leading 0-bytes */
   }
 
-  if ((bend - b) > (ssize_t) sizeof(size_t)) {
+  if ((bend - b) > (ssize_t)sizeof(size_t)) {
     /* Length is not representable by the native size_t type */
     *len_r = 0;
     return -1;
@@ -62,7 +62,7 @@ ssize_t oer_fetch_length(const void* bufptr, size_t size, size_t* len_r) {
   }
 
   *len_r = len;
-  assert(len_len + 1 == (size_t) (bend - (const uint8_t*) bufptr));
+  assert(len_len + 1 == (size_t)(bend - (const uint8_t *)bufptr));
   return len_len + 1;
 }
 
@@ -70,14 +70,14 @@ ssize_t oer_fetch_length(const void* bufptr, size_t size, size_t* len_r) {
  * Serialize OER length. Returns the number of bytes serialized
  * or -1 if a given callback returned with negative result.
  */
-ssize_t oer_serialize_length(
-    size_t length, asn_app_consume_bytes_f* cb, void* app_key) {
+ssize_t oer_serialize_length(size_t length, asn_app_consume_bytes_f *cb,
+                             void *app_key) {
   uint8_t scratch[1 + sizeof(length)];
-  uint8_t* sp      = scratch;
+  uint8_t *sp = scratch;
   int littleEndian = 1; /* Run-time detection */
-  const uint8_t* pstart;
-  const uint8_t* pend;
-  const uint8_t* p;
+  const uint8_t *pstart;
+  const uint8_t *pend;
+  const uint8_t *p;
   int add;
 
   if (length <= 127) {
@@ -88,24 +88,26 @@ ssize_t oer_serialize_length(
     return 1;
   }
 
-  if (*(char*) &littleEndian) {
-    pstart = (const uint8_t*) &length + sizeof(length) - 1;
-    pend   = (const uint8_t*) &length;
-    add    = -1;
+  if (*(char *)&littleEndian) {
+    pstart = (const uint8_t *)&length + sizeof(length) - 1;
+    pend = (const uint8_t *)&length;
+    add = -1;
   } else {
-    pstart = (const uint8_t*) &length;
-    pend   = pstart + sizeof(length);
-    add    = 1;
+    pstart = (const uint8_t *)&length;
+    pend = pstart + sizeof(length);
+    add = 1;
   }
 
   for (p = pstart; p != pend; p += add) {
     /* Skip leading zeros. */
-    if (*p) break;
+    if (*p)
+      break;
   }
 
   for (sp = scratch + 1;; p += add) {
     *sp++ = *p;
-    if (p == pend) break;
+    if (p == pend)
+      break;
   }
   assert((sp - scratch) - 1 <= 0x7f);
   scratch[0] = 0x80 + ((sp - scratch) - 1);

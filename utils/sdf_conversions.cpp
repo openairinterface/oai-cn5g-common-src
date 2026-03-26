@@ -19,8 +19,8 @@
 using namespace oai::utils;
 using namespace oai::logger;
 
-sdf_conversions::sdf_filter sdf_conversions::sdf_filter::from_string(
-    const std::string& filter_string) {
+sdf_conversions::sdf_filter
+sdf_conversions::sdf_filter::from_string(const std::string &filter_string) {
   sdf_filter filter;
   // according to 29.212, we may also need to encode the destination IP
   // accordingly (instead of assigned)
@@ -42,11 +42,11 @@ sdf_conversions::sdf_filter sdf_conversions::sdf_filter::from_string(
   std::string proto = matches[1];
   if (!proto.empty() && proto != "ip") {
     try {
-      filter.protocol_identifier     = std::stoi(proto);
+      filter.protocol_identifier = std::stoi(proto);
       filter.use_protocol_identifier = true;
-      filter.default_filter          = false;
+      filter.default_filter = false;
       filter.filter_components++;
-    } catch (const std::invalid_argument& e) {
+    } catch (const std::invalid_argument &e) {
       logger_common::common().error(
           "Invalid protocol: '" + proto +
           "'. Only 'ip' or protocol numbers are allowed. Protocol filter is "
@@ -56,7 +56,7 @@ sdf_conversions::sdf_filter sdf_conversions::sdf_filter::from_string(
 
   std::string src_ip = matches[2];
   if (!src_ip.empty() && src_ip != "any") {
-    filter.src_ip_range   = ip_range::from_string(src_ip);
+    filter.src_ip_range = ip_range::from_string(src_ip);
     filter.default_filter = false;
     filter.filter_components++;
   }
@@ -64,9 +64,9 @@ sdf_conversions::sdf_filter sdf_conversions::sdf_filter::from_string(
   std::string src_ports = matches[3];
   if (!src_ports.empty()) {
     std::vector<std::string> splits;
-    boost::split(
-        splits, src_ports, boost::is_any_of(","), boost::token_compress_on);
-    for (auto& split : splits) {
+    boost::split(splits, src_ports, boost::is_any_of(","),
+                 boost::token_compress_on);
+    for (auto &split : splits) {
       boost::trim(split);
       port_range range = port_range::from_string(split);
       if (range.use_port_range) {
@@ -79,7 +79,7 @@ sdf_conversions::sdf_filter sdf_conversions::sdf_filter::from_string(
 
   std::string dst_ip = matches[4];
   if (!dst_ip.empty() && dst_ip != "assigned") {
-    filter.dst_ip_range   = ip_range::from_string(dst_ip);
+    filter.dst_ip_range = ip_range::from_string(dst_ip);
     filter.default_filter = false;
     filter.filter_components++;
   }
@@ -87,9 +87,9 @@ sdf_conversions::sdf_filter sdf_conversions::sdf_filter::from_string(
   std::string dst_ports = matches[5];
   if (!dst_ports.empty()) {
     std::vector<std::string> splits;
-    boost::split(
-        splits, dst_ports, boost::is_any_of(","), boost::token_compress_on);
-    for (auto& split : splits) {
+    boost::split(splits, dst_ports, boost::is_any_of(","),
+                 boost::token_compress_on);
+    for (auto &split : splits) {
       boost::trim(split);
       port_range range = port_range::from_string(split);
       if (range.use_port_range) {
@@ -103,18 +103,18 @@ sdf_conversions::sdf_filter sdf_conversions::sdf_filter::from_string(
   return filter;
 }
 
-sdf_conversions::port_range sdf_conversions::port_range::from_string(
-    const std::string& port_string) {
+sdf_conversions::port_range
+sdf_conversions::port_range::from_string(const std::string &port_string) {
   port_range range;
 
   std::vector<std::string> splits;
-  boost::split(
-      splits, port_string, boost::is_any_of("-"), boost::token_compress_on);
+  boost::split(splits, port_string, boost::is_any_of("-"),
+               boost::token_compress_on);
   boost::trim(splits[0]);
   range.start = std::stoi(splits[0]);
   if (splits.size() > 1) {
     boost::trim(splits[1]);
-    range.end      = std::stoi(splits[1]);
+    range.end = std::stoi(splits[1]);
     range.is_range = true;
   }
   range.use_port_range = true;
@@ -122,33 +122,34 @@ sdf_conversions::port_range sdf_conversions::port_range::from_string(
   return range;
 }
 
-sdf_conversions::ip_range sdf_conversions::ip_range::from_string(
-    const std::string& ip_string) {
+sdf_conversions::ip_range
+sdf_conversions::ip_range::from_string(const std::string &ip_string) {
   ip_range range;
   std::vector<std::string> splits;
-  boost::split(
-      splits, ip_string, boost::is_any_of("/"), boost::token_compress_on);
+  boost::split(splits, ip_string, boost::is_any_of("/"),
+               boost::token_compress_on);
 
   if (splits[0] == "any" or splits[0] == "assigned") {
     range.use_ip_range = false;
     return range;
   }
   range.use_ip_range = true;
-  in_addr ip_addr    = conv::fromString(splits[0]);
+  in_addr ip_addr = conv::fromString(splits[0]);
   if (splits.size() == 1) {
     // there is no SNM, so we take 255.255.255.255
     range.snm.s_addr = 0xffffffff;
-    range.ip_addr    = ip_addr;
+    range.ip_addr = ip_addr;
   } else {
-    uint8_t snm       = std::stoi(splits[1]);
+    uint8_t snm = std::stoi(splits[1]);
     uint8_t left_bits = 32 - snm;
-    range.snm.s_addr  = ntohl(0xffffffff << left_bits);
+    range.snm.s_addr = ntohl(0xffffffff << left_bits);
   }
   return range;
 }
 
-bool sdf_conversions::parse_bitrate_string(
-    const std::string& bitrate, uint16_t& value, bitrate_unit_e& unit) {
+bool sdf_conversions::parse_bitrate_string(const std::string &bitrate,
+                                           uint16_t &value,
+                                           bitrate_unit_e &unit) {
   std::string bandwidth_regex =
       oai::model::common::helpers::BANDWIDTH_VALIDATION_REGEX;
 
@@ -170,7 +171,7 @@ bool sdf_conversions::parse_bitrate_string(
     double bw_value = std::stod(string_bw_value);
 
     if (string_unit == "bps") {
-      unit     = bitrate_unit_e::KBPS;
+      unit = bitrate_unit_e::KBPS;
       bw_value = bw_value / 1000;
     } else if (string_unit == "Kbps") {
       unit = bitrate_unit_e::KBPS;
@@ -214,9 +215,9 @@ bool sdf_conversions::parse_bitrate_string(
     }
     // we round up because it is described in 3GPP 29.244
     value = long(bw_value + 0.5);
-    unit  = static_cast<bitrate_unit_e>(bitrate_int);
+    unit = static_cast<bitrate_unit_e>(bitrate_int);
     return true;
-  } catch (std::invalid_argument&) {
+  } catch (std::invalid_argument &) {
     logger_common::common().error(
         "Bitrate value part %s is not a number, cannot parse.",
         string_bw_value);
@@ -225,7 +226,7 @@ bool sdf_conversions::parse_bitrate_string(
 }
 
 bool oai::utils::sdf_conversions::parse_bitrate_string(
-    const std::string& bit_rate_str, BitRate& bit_rate) {
+    const std::string &bit_rate_str, BitRate &bit_rate) {
   std::string bandwidth_regex =
       oai::model::common::helpers::BANDWIDTH_VALIDATION_REGEX;
 
@@ -248,7 +249,7 @@ bool oai::utils::sdf_conversions::parse_bitrate_string(
 
     if (string_unit == "bps") {
       bit_rate.unit = kBitRateUnitValueIsIncrementedInMultiplesOf1Kbps;
-      bw_value      = bw_value / 1024;
+      bw_value = bw_value / 1024;
     } else if (string_unit == "Kbps") {
       bit_rate.unit = kBitRateUnitValueIsIncrementedInMultiplesOf1Kbps;
     } else if (string_unit == "Mbps") {
@@ -274,7 +275,7 @@ bool oai::utils::sdf_conversions::parse_bitrate_string(
     // we round up because it is described in 3GPP 29.244
     bit_rate.value = long(bw_value + 0.5);
     return true;
-  } catch (std::invalid_argument&) {
+  } catch (std::invalid_argument &) {
     logger_common::common().error(
         "Bitrate value part %s is not a number, cannot parse.",
         string_bw_value);
@@ -283,7 +284,7 @@ bool oai::utils::sdf_conversions::parse_bitrate_string(
 }
 
 bool oai::utils::sdf_conversions::parse_bitrate_string_to_unit(
-    const std::string& bitrate, const bitrate_unit_e& unit, uint32_t& value) {
+    const std::string &bitrate, const bitrate_unit_e &unit, uint32_t &value) {
   // we make it super easy here and just calculate, we could also integrate it
   // into the other parse function to safe some arithmetics, but I think it is
   // negligible

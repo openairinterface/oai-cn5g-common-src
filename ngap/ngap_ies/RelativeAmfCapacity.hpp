@@ -12,19 +12,19 @@ extern "C" {
 namespace oai::ngap {
 
 class RelativeAmfCapacity {
- public:
+public:
   RelativeAmfCapacity();
   virtual ~RelativeAmfCapacity();
 
   void set(uint8_t amfCapacity);
   uint8_t get() const;
 
-  bool encode(Ngap_RelativeAMFCapacity_t&) const;
-  bool decode(const Ngap_RelativeAMFCapacity_t&);
+  bool encode(Ngap_RelativeAMFCapacity_t &) const;
+  bool decode(const Ngap_RelativeAMFCapacity_t &);
 
- private:
+private:
   uint8_t m_AmfCapacity;
 };
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

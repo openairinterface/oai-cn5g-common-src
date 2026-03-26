@@ -20,8 +20,8 @@
 #define QosCharacteristics_H_
 
 #include "QosResourceType.h"
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::pcf {
 
@@ -29,7 +29,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class QosCharacteristics {
- public:
+public:
   QosCharacteristics();
   virtual ~QosCharacteristics() = default;
 
@@ -43,16 +43,16 @@ class QosCharacteristics {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const QosCharacteristics& rhs) const;
-  bool operator!=(const QosCharacteristics& rhs) const;
+  bool operator==(const QosCharacteristics &rhs) const;
+  bool operator!=(const QosCharacteristics &rhs) const;
 
   /////////////////////////////////////////////
   /// QosCharacteristics members
@@ -66,7 +66,7 @@ class QosCharacteristics {
   ///
   /// </summary>
   oai::model::common::QosResourceType getResourceType() const;
-  void setResourceType(oai::model::common::QosResourceType const& value);
+  void setResourceType(oai::model::common::QosResourceType const &value);
   /// <summary>
   ///
   /// </summary>
@@ -81,7 +81,7 @@ class QosCharacteristics {
   ///
   /// </summary>
   std::string getPacketErrorRate() const;
-  void setPacketErrorRate(std::string const& value);
+  void setPacketErrorRate(std::string const &value);
   /// <summary>
   ///
   /// </summary>
@@ -104,10 +104,10 @@ class QosCharacteristics {
   bool extMaxDataBurstVolIsSet() const;
   void unsetExtMaxDataBurstVol();
 
-  friend void to_json(nlohmann::json& j, const QosCharacteristics& o);
-  friend void from_json(const nlohmann::json& j, QosCharacteristics& o);
+  friend void to_json(nlohmann::json &j, const QosCharacteristics &o);
+  friend void from_json(const nlohmann::json &j, QosCharacteristics &o);
 
- protected:
+protected:
   int32_t m_r_5qi;
 
   oai::model::common::QosResourceType m_ResourceType;
@@ -126,6 +126,6 @@ class QosCharacteristics {
   bool m_ExtMaxDataBurstVolIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* QosCharacteristics_H_ */

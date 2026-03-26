@@ -21,8 +21,8 @@
 
 #include "Ecgi.h"
 #include "Ncgi.h"
-#include "Tai.h"
 #include "ReportingAreaType.h"
+#include "Tai.h"
 #include <nlohmann/json.hpp>
 
 namespace oai::model::lmf {
@@ -31,7 +31,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class ReportingArea {
- public:
+public:
   ReportingArea();
   virtual ~ReportingArea() = default;
 
@@ -45,16 +45,16 @@ class ReportingArea {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const ReportingArea& rhs) const;
-  bool operator!=(const ReportingArea& rhs) const;
+  bool operator==(const ReportingArea &rhs) const;
+  bool operator!=(const ReportingArea &rhs) const;
 
   /////////////////////////////////////////////
   /// ReportingArea members
@@ -63,33 +63,33 @@ class ReportingArea {
   ///
   /// </summary>
   oai::model::lmf::ReportingAreaType getAreaType() const;
-  void setAreaType(oai::model::lmf::ReportingAreaType const& value);
+  void setAreaType(oai::model::lmf::ReportingAreaType const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Tai getTai() const;
-  void setTai(oai::model::common::Tai const& value);
+  void setTai(oai::model::common::Tai const &value);
   bool taiIsSet() const;
   void unsetTai();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ecgi getEcgi() const;
-  void setEcgi(oai::model::common::Ecgi const& value);
+  void setEcgi(oai::model::common::Ecgi const &value);
   bool ecgiIsSet() const;
   void unsetEcgi();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ncgi getNcgi() const;
-  void setNcgi(oai::model::common::Ncgi const& value);
+  void setNcgi(oai::model::common::Ncgi const &value);
   bool ncgiIsSet() const;
   void unsetNcgi();
 
-  friend void to_json(nlohmann::json& j, const ReportingArea& o);
-  friend void from_json(const nlohmann::json& j, ReportingArea& o);
+  friend void to_json(nlohmann::json &j, const ReportingArea &o);
+  friend void from_json(const nlohmann::json &j, ReportingArea &o);
 
- protected:
+protected:
   oai::model::lmf::ReportingAreaType m_AreaType;
 
   oai::model::common::Tai m_Tai;
@@ -100,6 +100,6 @@ class ReportingArea {
   bool m_NcgiIsSet;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* ReportingArea_H_ */

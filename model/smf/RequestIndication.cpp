@@ -23,10 +23,10 @@ void RequestIndication::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const RequestIndication& o) {
+void to_json(nlohmann::json &j, const RequestIndication &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, RequestIndication& o) {}
+void from_json(const nlohmann::json &j, RequestIndication &o) {}
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

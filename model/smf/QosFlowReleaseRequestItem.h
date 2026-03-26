@@ -19,8 +19,8 @@
 #ifndef QosFlowReleaseRequestItem_H_
 #define QosFlowReleaseRequestItem_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::smf {
 
@@ -28,7 +28,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class QosFlowReleaseRequestItem {
- public:
+public:
   QosFlowReleaseRequestItem();
   virtual ~QosFlowReleaseRequestItem();
 
@@ -46,21 +46,21 @@ class QosFlowReleaseRequestItem {
   ///
   /// </summary>
   std::string getQosRules() const;
-  void setQosRules(std::string const& value);
+  void setQosRules(std::string const &value);
   bool qosRulesIsSet() const;
   void unsetQosRules();
   /// <summary>
   ///
   /// </summary>
   std::string getQosFlowDescription() const;
-  void setQosFlowDescription(std::string const& value);
+  void setQosFlowDescription(std::string const &value);
   bool qosFlowDescriptionIsSet() const;
   void unsetQosFlowDescription();
 
-  friend void to_json(nlohmann::json& j, const QosFlowReleaseRequestItem& o);
-  friend void from_json(const nlohmann::json& j, QosFlowReleaseRequestItem& o);
+  friend void to_json(nlohmann::json &j, const QosFlowReleaseRequestItem &o);
+  friend void from_json(const nlohmann::json &j, QosFlowReleaseRequestItem &o);
 
- protected:
+protected:
   int32_t m_Qfi;
 
   std::string m_QosRules;
@@ -69,6 +69,6 @@ class QosFlowReleaseRequestItem {
   bool m_QosFlowDescriptionIsSet;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* QosFlowReleaseRequestItem_H_ */

@@ -19,7 +19,7 @@
 namespace oai::udr::model {
 
 SmPolicyDataPatch::SmPolicyDataPatch() {
-  m_UmDataIsSet             = false;
+  m_UmDataIsSet = false;
   m_SmPolicySnssaiDataIsSet = false;
 }
 
@@ -29,14 +29,15 @@ void SmPolicyDataPatch::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const SmPolicyDataPatch& o) {
+void to_json(nlohmann::json &j, const SmPolicyDataPatch &o) {
   j = nlohmann::json();
-  if (o.umDataIsSet() || !o.m_UmData.empty()) j["umData"] = o.m_UmData;
+  if (o.umDataIsSet() || !o.m_UmData.empty())
+    j["umData"] = o.m_UmData;
   if (o.smPolicySnssaiDataIsSet() || !o.m_SmPolicySnssaiData.empty())
     j["smPolicySnssaiData"] = o.m_SmPolicySnssaiData;
 }
 
-void from_json(const nlohmann::json& j, SmPolicyDataPatch& o) {
+void from_json(const nlohmann::json &j, SmPolicyDataPatch &o) {
   if (j.find("umData") != j.end()) {
     j.at("umData").get_to(o.m_UmData);
     o.m_UmDataIsSet = true;
@@ -47,27 +48,23 @@ void from_json(const nlohmann::json& j, SmPolicyDataPatch& o) {
   }
 }
 
-std::map<std::string, UsageMonData>& SmPolicyDataPatch::getUmData() {
+std::map<std::string, UsageMonData> &SmPolicyDataPatch::getUmData() {
   return m_UmData;
 }
 void SmPolicyDataPatch::setUmData(
-    std::map<std::string, UsageMonData> const& value) {
-  m_UmData      = value;
+    std::map<std::string, UsageMonData> const &value) {
+  m_UmData = value;
   m_UmDataIsSet = true;
 }
-bool SmPolicyDataPatch::umDataIsSet() const {
-  return m_UmDataIsSet;
-}
-void SmPolicyDataPatch::unsetUmData() {
-  m_UmDataIsSet = false;
-}
-std::map<std::string, SmPolicySnssaiDataPatch>&
+bool SmPolicyDataPatch::umDataIsSet() const { return m_UmDataIsSet; }
+void SmPolicyDataPatch::unsetUmData() { m_UmDataIsSet = false; }
+std::map<std::string, SmPolicySnssaiDataPatch> &
 SmPolicyDataPatch::getSmPolicySnssaiData() {
   return m_SmPolicySnssaiData;
 }
 void SmPolicyDataPatch::setSmPolicySnssaiData(
-    std::map<std::string, SmPolicySnssaiDataPatch> const& value) {
-  m_SmPolicySnssaiData      = value;
+    std::map<std::string, SmPolicySnssaiDataPatch> const &value) {
+  m_SmPolicySnssaiData = value;
   m_SmPolicySnssaiDataIsSet = true;
 }
 bool SmPolicyDataPatch::smPolicySnssaiDataIsSet() const {
@@ -77,4 +74,4 @@ void SmPolicyDataPatch::unsetSmPolicySnssaiData() {
   m_SmPolicySnssaiDataIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

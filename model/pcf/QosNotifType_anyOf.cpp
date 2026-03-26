@@ -13,8 +13,8 @@
 
 #include "QosNotifType_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::pcf {
 
@@ -27,12 +27,12 @@ void QosNotifType_anyOf::validate() const {
   }
 }
 
-bool QosNotifType_anyOf::validate(std::stringstream& msg) const {
+bool QosNotifType_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool QosNotifType_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool QosNotifType_anyOf::validate(std::stringstream &msg,
+                                  const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "QosNotifType_anyOf" : pathPrefix;
@@ -46,34 +46,33 @@ bool QosNotifType_anyOf::validate(
   return success;
 }
 
-bool QosNotifType_anyOf::operator==(const QosNotifType_anyOf& rhs) const {
+bool QosNotifType_anyOf::operator==(const QosNotifType_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool QosNotifType_anyOf::operator!=(const QosNotifType_anyOf& rhs) const {
+bool QosNotifType_anyOf::operator!=(const QosNotifType_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const QosNotifType_anyOf& o) {
+void to_json(nlohmann::json &j, const QosNotifType_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case QosNotifType_anyOf::eQosNotifType_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case QosNotifType_anyOf::eQosNotifType_anyOf::GUARANTEED:
-      j = "GUARANTEED";
-      break;
-    case QosNotifType_anyOf::eQosNotifType_anyOf::NOT_GUARANTEED:
-      j = "NOT_GUARANTEED";
-      break;
+  case QosNotifType_anyOf::eQosNotifType_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case QosNotifType_anyOf::eQosNotifType_anyOf::GUARANTEED:
+    j = "GUARANTEED";
+    break;
+  case QosNotifType_anyOf::eQosNotifType_anyOf::NOT_GUARANTEED:
+    j = "NOT_GUARANTEED";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, QosNotifType_anyOf& o) {
+void from_json(const nlohmann::json &j, QosNotifType_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "GUARANTEED") {
     o.setValue(QosNotifType_anyOf::eQosNotifType_anyOf::GUARANTEED);
@@ -96,4 +95,4 @@ void QosNotifType_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

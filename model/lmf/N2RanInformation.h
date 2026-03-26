@@ -28,7 +28,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class N2RanInformation {
- public:
+public:
   N2RanInformation();
   virtual ~N2RanInformation() = default;
 
@@ -42,16 +42,16 @@ class N2RanInformation {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const N2RanInformation& rhs) const;
-  bool operator!=(const N2RanInformation& rhs) const;
+  bool operator==(const N2RanInformation &rhs) const;
+  bool operator!=(const N2RanInformation &rhs) const;
 
   /////////////////////////////////////////////
   /// N2RanInformation members
@@ -60,15 +60,15 @@ class N2RanInformation {
   ///
   /// </summary>
   oai::model::lmf::N2InfoContent getN2InfoContent() const;
-  void setN2InfoContent(oai::model::lmf::N2InfoContent const& value);
+  void setN2InfoContent(oai::model::lmf::N2InfoContent const &value);
 
-  friend void to_json(nlohmann::json& j, const N2RanInformation& o);
-  friend void from_json(const nlohmann::json& j, N2RanInformation& o);
+  friend void to_json(nlohmann::json &j, const N2RanInformation &o);
+  friend void from_json(const nlohmann::json &j, N2RanInformation &o);
 
- protected:
+protected:
   oai::model::lmf::N2InfoContent m_N2InfoContent;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* N2RanInformation_H_ */

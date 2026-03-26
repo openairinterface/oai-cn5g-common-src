@@ -19,9 +19,9 @@
 namespace oai::model::pcf {
 
 AccNetChId::AccNetChId() {
-  m_AccNetChaIdValue    = 0;
-  m_RefPccRuleIdsIsSet  = false;
-  m_SessionChScope      = false;
+  m_AccNetChaIdValue = 0;
+  m_RefPccRuleIdsIsSet = false;
+  m_SessionChScope = false;
   m_SessionChScopeIsSet = false;
 }
 
@@ -32,19 +32,19 @@ void AccNetChId::validate() const {
   }
 }
 
-bool AccNetChId::validate(std::stringstream& msg) const {
+bool AccNetChId::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AccNetChId::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool AccNetChId::validate(std::stringstream &msg,
+                          const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AccNetChId" : pathPrefix;
 
   if (refPccRuleIdsIsSet()) {
-    const std::vector<std::string>& value = m_RefPccRuleIds;
-    const std::string currentValuePath    = _pathPrefix + ".refPccRuleIds";
+    const std::vector<std::string> &value = m_RefPccRuleIds;
+    const std::string currentValuePath = _pathPrefix + ".refPccRuleIds";
 
     if (value.size() < 1) {
       success = false;
@@ -67,7 +67,7 @@ bool AccNetChId::validate(
   return success;
 }
 
-bool AccNetChId::operator==(const AccNetChId& rhs) const {
+bool AccNetChId::operator==(const AccNetChId &rhs) const {
   return
 
       (getAccNetChaIdValue() == rhs.getAccNetChaIdValue()) &&
@@ -83,19 +83,20 @@ bool AccNetChId::operator==(const AccNetChId& rhs) const {
           ;
 }
 
-bool AccNetChId::operator!=(const AccNetChId& rhs) const {
+bool AccNetChId::operator!=(const AccNetChId &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AccNetChId& o) {
-  j                     = nlohmann::json();
+void to_json(nlohmann::json &j, const AccNetChId &o) {
+  j = nlohmann::json();
   j["accNetChaIdValue"] = o.m_AccNetChaIdValue;
   if (o.refPccRuleIdsIsSet() || !o.m_RefPccRuleIds.empty())
     j["refPccRuleIds"] = o.m_RefPccRuleIds;
-  if (o.sessionChScopeIsSet()) j["sessionChScope"] = o.m_SessionChScope;
+  if (o.sessionChScopeIsSet())
+    j["sessionChScope"] = o.m_SessionChScope;
 }
 
-void from_json(const nlohmann::json& j, AccNetChId& o) {
+void from_json(const nlohmann::json &j, AccNetChId &o) {
   j.at("accNetChaIdValue").get_to(o.m_AccNetChaIdValue);
   if (j.find("refPccRuleIds") != j.end()) {
     j.at("refPccRuleIds").get_to(o.m_RefPccRuleIds);
@@ -107,37 +108,25 @@ void from_json(const nlohmann::json& j, AccNetChId& o) {
   }
 }
 
-uint32_t AccNetChId::getAccNetChaIdValue() const {
-  return m_AccNetChaIdValue;
-}
+uint32_t AccNetChId::getAccNetChaIdValue() const { return m_AccNetChaIdValue; }
 void AccNetChId::setAccNetChaIdValue(uint32_t const value) {
   m_AccNetChaIdValue = value;
 }
 std::vector<std::string> AccNetChId::getRefPccRuleIds() const {
   return m_RefPccRuleIds;
 }
-void AccNetChId::setRefPccRuleIds(std::vector<std::string> const& value) {
-  m_RefPccRuleIds      = value;
+void AccNetChId::setRefPccRuleIds(std::vector<std::string> const &value) {
+  m_RefPccRuleIds = value;
   m_RefPccRuleIdsIsSet = true;
 }
-bool AccNetChId::refPccRuleIdsIsSet() const {
-  return m_RefPccRuleIdsIsSet;
-}
-void AccNetChId::unsetRefPccRuleIds() {
-  m_RefPccRuleIdsIsSet = false;
-}
-bool AccNetChId::isSessionChScope() const {
-  return m_SessionChScope;
-}
+bool AccNetChId::refPccRuleIdsIsSet() const { return m_RefPccRuleIdsIsSet; }
+void AccNetChId::unsetRefPccRuleIds() { m_RefPccRuleIdsIsSet = false; }
+bool AccNetChId::isSessionChScope() const { return m_SessionChScope; }
 void AccNetChId::setSessionChScope(bool const value) {
-  m_SessionChScope      = value;
+  m_SessionChScope = value;
   m_SessionChScopeIsSet = true;
 }
-bool AccNetChId::sessionChScopeIsSet() const {
-  return m_SessionChScopeIsSet;
-}
-void AccNetChId::unsetSessionChScope() {
-  m_SessionChScopeIsSet = false;
-}
+bool AccNetChId::sessionChScopeIsSet() const { return m_SessionChScopeIsSet; }
+void AccNetChId::unsetSessionChScope() { m_SessionChScopeIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

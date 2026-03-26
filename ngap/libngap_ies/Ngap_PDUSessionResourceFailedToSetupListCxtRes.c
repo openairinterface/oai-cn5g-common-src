@@ -52,8 +52,8 @@ static const ber_tlv_tag_t
 asn_SET_OF_specifics_t
     asn_SPC_Ngap_PDUSessionResourceFailedToSetupListCxtRes_specs_1 = {
         sizeof(struct Ngap_PDUSessionResourceFailedToSetupListCxtRes),
-        offsetof(
-            struct Ngap_PDUSessionResourceFailedToSetupListCxtRes, _asn_ctx),
+        offsetof(struct Ngap_PDUSessionResourceFailedToSetupListCxtRes,
+                 _asn_ctx),
         0, /* XER encoding is XMLDelimitedItemList */
 };
 asn_TYPE_descriptor_t asn_DEF_Ngap_PDUSessionResourceFailedToSetupListCxtRes = {

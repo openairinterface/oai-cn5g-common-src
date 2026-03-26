@@ -27,10 +27,10 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_OverloadStartNSSAIItem */
 typedef struct Ngap_OverloadStartNSSAIItem {
   Ngap_SliceOverloadList_t sliceOverloadList;
-  struct Ngap_OverloadResponse* sliceOverloadResponse; /* OPTIONAL */
-  Ngap_TrafficLoadReductionIndication_t*
-      sliceTrafficLoadReductionIndication;               /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_OverloadResponse *sliceOverloadResponse; /* OPTIONAL */
+  Ngap_TrafficLoadReductionIndication_t
+      *sliceTrafficLoadReductionIndication;              /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

@@ -27,7 +27,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class LdrType_anyOf {
- public:
+public:
   LdrType_anyOf();
   virtual ~LdrType_anyOf() = default;
 
@@ -54,16 +54,16 @@ class LdrType_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const LdrType_anyOf& rhs) const;
-  bool operator!=(const LdrType_anyOf& rhs) const;
+  bool operator==(const LdrType_anyOf &rhs) const;
+  bool operator!=(const LdrType_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// LdrType_anyOf members
@@ -71,14 +71,14 @@ class LdrType_anyOf {
   LdrType_anyOf::eLdrType_anyOf getValue() const;
   void setValue(LdrType_anyOf::eLdrType_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const LdrType_anyOf& o);
-  friend void from_json(const nlohmann::json& j, LdrType_anyOf& o);
+  friend void to_json(nlohmann::json &j, const LdrType_anyOf &o);
+  friend void from_json(const nlohmann::json &j, LdrType_anyOf &o);
 
- protected:
+protected:
   LdrType_anyOf::eLdrType_anyOf m_value =
       LdrType_anyOf::eLdrType_anyOf::INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* LdrType_anyOf_H_ */

@@ -19,10 +19,10 @@
 #ifndef SubscriptionData_H_
 #define SubscriptionData_H_
 
-#include <string>
-#include <vector>
 #include "Guami.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::amf {
 
@@ -30,7 +30,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class SubscriptionData {
- public:
+public:
   SubscriptionData();
   virtual ~SubscriptionData();
 
@@ -43,24 +43,24 @@ class SubscriptionData {
   ///
   /// </summary>
   std::string getAmfStatusUri() const;
-  void setAmfStatusUri(std::string const& value);
+  void setAmfStatusUri(std::string const &value);
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::Guami>& getGuamiList();
+  std::vector<oai::model::common::Guami> &getGuamiList();
   bool guamiListIsSet() const;
   void unsetGuamiList();
 
-  friend void to_json(nlohmann::json& j, const SubscriptionData& o);
-  friend void from_json(const nlohmann::json& j, SubscriptionData& o);
+  friend void to_json(nlohmann::json &j, const SubscriptionData &o);
+  friend void from_json(const nlohmann::json &j, SubscriptionData &o);
 
- protected:
+protected:
   std::string m_AmfStatusUri;
 
   std::vector<oai::model::common::Guami> m_GuamiList;
   bool m_GuamiListIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* SubscriptionData_H_ */

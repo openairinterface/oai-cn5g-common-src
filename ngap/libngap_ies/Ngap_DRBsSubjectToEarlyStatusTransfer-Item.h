@@ -27,7 +27,7 @@ struct Ngap_ProtocolExtensionContainer;
 typedef struct Ngap_DRBsSubjectToEarlyStatusTransfer_Item {
   Ngap_DRB_ID_t dRB_ID;
   Ngap_DRBStatusDL_t firstDLCOUNT;
-  struct Ngap_ProtocolExtensionContainer* iE_Extension; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extension; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

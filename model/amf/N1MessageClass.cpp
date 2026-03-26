@@ -27,12 +27,12 @@ void N1MessageClass::validate() const {
   }
 }
 
-bool N1MessageClass::validate(std::stringstream& msg) const {
+bool N1MessageClass::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool N1MessageClass::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool N1MessageClass::validate(std::stringstream &msg,
+                              const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "N1MessageClass" : pathPrefix;
@@ -43,35 +43,31 @@ bool N1MessageClass::validate(
   return success;
 }
 
-bool N1MessageClass::operator==(const N1MessageClass& rhs) const {
+bool N1MessageClass::operator==(const N1MessageClass &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool N1MessageClass::operator!=(const N1MessageClass& rhs) const {
+bool N1MessageClass::operator!=(const N1MessageClass &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const N1MessageClass& o) {
+void to_json(nlohmann::json &j, const N1MessageClass &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, N1MessageClass& o) {
+void from_json(const nlohmann::json &j, N1MessageClass &o) {
   from_json(j, o.m_value);
 }
 
-N1MessageClass_anyOf N1MessageClass::getValue() const {
-  return m_value;
-}
+N1MessageClass_anyOf N1MessageClass::getValue() const { return m_value; }
 
-void N1MessageClass::setValue(N1MessageClass_anyOf value) {
-  m_value = value;
-}
+void N1MessageClass::setValue(N1MessageClass_anyOf value) { m_value = value; }
 
-N1MessageClass_anyOf::eN1MessageClass_anyOf N1MessageClass::getEnumValue()
-    const {
+N1MessageClass_anyOf::eN1MessageClass_anyOf
+N1MessageClass::getEnumValue() const {
   return m_value.getValue();
 }
 
@@ -80,4 +76,4 @@ void N1MessageClass::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

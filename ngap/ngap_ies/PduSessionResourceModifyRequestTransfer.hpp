@@ -10,9 +10,9 @@
 #include "NetworkInstance.hpp"
 #include "NgapIesStruct.hpp"
 #include "PduSessionAggregateMaximumBitRate.hpp"
-#include "UlNgUUpTnlModifyList.hpp"
 #include "QosFlowAddOrModifyRequestItem.hpp"
 #include "QosFlowAddOrModifyRequestList.hpp"
+#include "UlNgUUpTnlModifyList.hpp"
 
 extern "C" {
 #include "Ngap_PDUSessionResourceModifyRequestTransfer.h"
@@ -22,39 +22,39 @@ extern "C" {
 namespace oai::ngap {
 
 class PduSessionResourceModifyRequestTransfer {
- public:
+public:
   PduSessionResourceModifyRequestTransfer();
   virtual ~PduSessionResourceModifyRequestTransfer(){};
 
+  void setPduSessionAggregateMaximumBitRate(const long &bitRateDl,
+                                            const long &bitRateUl);
   void setPduSessionAggregateMaximumBitRate(
-      const long& bitRateDl, const long& bitRateUl);
-  void setPduSessionAggregateMaximumBitRate(
-      const PduSessionAggregateMaximumBitRate& maxBitRate);
+      const PduSessionAggregateMaximumBitRate &maxBitRate);
   void getPduSessionAggregateMaximumBitRate(
-      std::optional<PduSessionAggregateMaximumBitRate>& maxBitRate) const;
+      std::optional<PduSessionAggregateMaximumBitRate> &maxBitRate) const;
 
-  void setUlNgUUpTnlModifyList(
-      const UlNgUUpTnlModifyList& ulNgUUpTnlModifyList);
+  void
+  setUlNgUUpTnlModifyList(const UlNgUUpTnlModifyList &ulNgUUpTnlModifyList);
   void getUlNgUUpTnlModifyList(
-      std::optional<UlNgUUpTnlModifyList>& ulNgUUpTnlModifyList) const;
+      std::optional<UlNgUUpTnlModifyList> &ulNgUUpTnlModifyList) const;
 
-  void setNetworkInstance(const long& value);
-  bool getNetworkInstance(long& value) const;
-  void getNetworkInstance(
-      std::optional<NetworkInstance>& networkInstance) const;
+  void setNetworkInstance(const long &value);
+  bool getNetworkInstance(long &value) const;
+  void
+  getNetworkInstance(std::optional<NetworkInstance> &networkInstance) const;
 
   void setQosFlowAddOrModifyRequestList(
       const std::vector<QosFlowAddOrModifyRequestItem> list);
-  void setQosFlowAddOrModifyRequestList(
-      const QosFlowAddOrModifyRequestList& list);
+  void
+  setQosFlowAddOrModifyRequestList(const QosFlowAddOrModifyRequestList &list);
   void getQosFlowAddOrModifyRequestList(
-      std::optional<QosFlowAddOrModifyRequestList>& list) const;
+      std::optional<QosFlowAddOrModifyRequestList> &list) const;
 
-  int encode(uint8_t* buf, int bufSize);
-  bool decode(uint8_t* buf, int bufSize);
+  int encode(uint8_t *buf, int bufSize);
+  bool decode(uint8_t *buf, int bufSize);
 
- private:
-  Ngap_PDUSessionResourceModifyRequestTransfer_t* m_Ie;
+private:
+  Ngap_PDUSessionResourceModifyRequestTransfer_t *m_Ie;
 
   // PDU Session Aggregate Maximum Bit Rate (Optional)
   std::optional<PduSessionAggregateMaximumBitRate>
@@ -77,5 +77,5 @@ class PduSessionResourceModifyRequestTransfer {
   void addQosFlowAddOrModifyRequestList();
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

@@ -13,8 +13,8 @@
 
 #include "VelocityRequested_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::lmf {
 
@@ -27,12 +27,12 @@ void VelocityRequested_anyOf::validate() const {
   }
 }
 
-bool VelocityRequested_anyOf::validate(std::stringstream& msg) const {
+bool VelocityRequested_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool VelocityRequested_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool VelocityRequested_anyOf::validate(std::stringstream &msg,
+                                       const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "VelocityRequested_anyOf" : pathPrefix;
@@ -47,35 +47,35 @@ bool VelocityRequested_anyOf::validate(
 }
 
 bool VelocityRequested_anyOf::operator==(
-    const VelocityRequested_anyOf& rhs) const {
+    const VelocityRequested_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool VelocityRequested_anyOf::operator!=(
-    const VelocityRequested_anyOf& rhs) const {
+    const VelocityRequested_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const VelocityRequested_anyOf& o) {
+void to_json(nlohmann::json &j, const VelocityRequested_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case VelocityRequested_anyOf::eVelocityRequested_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case VelocityRequested_anyOf::eVelocityRequested_anyOf::NOT_REQUESTED:
-      j = "VELOCITY_IS_NOT_REQUESTED";
-      break;
-    case VelocityRequested_anyOf::eVelocityRequested_anyOf::REQUESTED:
-      j = "VELOCITY_IS_REQUESTED";
-      break;
+  case VelocityRequested_anyOf::eVelocityRequested_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case VelocityRequested_anyOf::eVelocityRequested_anyOf::NOT_REQUESTED:
+    j = "VELOCITY_IS_NOT_REQUESTED";
+    break;
+  case VelocityRequested_anyOf::eVelocityRequested_anyOf::REQUESTED:
+    j = "VELOCITY_IS_REQUESTED";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, VelocityRequested_anyOf& o) {
+void from_json(const nlohmann::json &j, VelocityRequested_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "VELOCITY_IS_NOT_REQUESTED") {
     o.setValue(
@@ -100,4 +100,4 @@ void VelocityRequested_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

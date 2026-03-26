@@ -19,12 +19,12 @@
 namespace oai::udr::model {
 
 TransferPolicy::TransferPolicy() {
-  m_MaxBitRateDl      = "";
+  m_MaxBitRateDl = "";
   m_MaxBitRateDlIsSet = false;
-  m_MaxBitRateUl      = "";
+  m_MaxBitRateUl = "";
   m_MaxBitRateUlIsSet = false;
-  m_RatingGroup       = 0;
-  m_TransPolicyId     = 0;
+  m_RatingGroup = 0;
+  m_TransPolicyId = 0;
 }
 
 TransferPolicy::~TransferPolicy() {}
@@ -33,16 +33,18 @@ void TransferPolicy::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const TransferPolicy& o) {
+void to_json(nlohmann::json &j, const TransferPolicy &o) {
   j = nlohmann::json();
-  if (o.maxBitRateDlIsSet()) j["maxBitRateDl"] = o.m_MaxBitRateDl;
-  if (o.maxBitRateUlIsSet()) j["maxBitRateUl"] = o.m_MaxBitRateUl;
-  j["ratingGroup"]   = o.m_RatingGroup;
-  j["recTimeInt"]    = o.m_RecTimeInt;
+  if (o.maxBitRateDlIsSet())
+    j["maxBitRateDl"] = o.m_MaxBitRateDl;
+  if (o.maxBitRateUlIsSet())
+    j["maxBitRateUl"] = o.m_MaxBitRateUl;
+  j["ratingGroup"] = o.m_RatingGroup;
+  j["recTimeInt"] = o.m_RecTimeInt;
   j["transPolicyId"] = o.m_TransPolicyId;
 }
 
-void from_json(const nlohmann::json& j, TransferPolicy& o) {
+void from_json(const nlohmann::json &j, TransferPolicy &o) {
   if (j.find("maxBitRateDl") != j.end()) {
     j.at("maxBitRateDl").get_to(o.m_MaxBitRateDl);
     o.m_MaxBitRateDlIsSet = true;
@@ -56,49 +58,31 @@ void from_json(const nlohmann::json& j, TransferPolicy& o) {
   j.at("transPolicyId").get_to(o.m_TransPolicyId);
 }
 
-std::string TransferPolicy::getMaxBitRateDl() const {
-  return m_MaxBitRateDl;
-}
-void TransferPolicy::setMaxBitRateDl(std::string const& value) {
-  m_MaxBitRateDl      = value;
+std::string TransferPolicy::getMaxBitRateDl() const { return m_MaxBitRateDl; }
+void TransferPolicy::setMaxBitRateDl(std::string const &value) {
+  m_MaxBitRateDl = value;
   m_MaxBitRateDlIsSet = true;
 }
-bool TransferPolicy::maxBitRateDlIsSet() const {
-  return m_MaxBitRateDlIsSet;
-}
-void TransferPolicy::unsetMaxBitRateDl() {
-  m_MaxBitRateDlIsSet = false;
-}
-std::string TransferPolicy::getMaxBitRateUl() const {
-  return m_MaxBitRateUl;
-}
-void TransferPolicy::setMaxBitRateUl(std::string const& value) {
-  m_MaxBitRateUl      = value;
+bool TransferPolicy::maxBitRateDlIsSet() const { return m_MaxBitRateDlIsSet; }
+void TransferPolicy::unsetMaxBitRateDl() { m_MaxBitRateDlIsSet = false; }
+std::string TransferPolicy::getMaxBitRateUl() const { return m_MaxBitRateUl; }
+void TransferPolicy::setMaxBitRateUl(std::string const &value) {
+  m_MaxBitRateUl = value;
   m_MaxBitRateUlIsSet = true;
 }
-bool TransferPolicy::maxBitRateUlIsSet() const {
-  return m_MaxBitRateUlIsSet;
-}
-void TransferPolicy::unsetMaxBitRateUl() {
-  m_MaxBitRateUlIsSet = false;
-}
-int32_t TransferPolicy::getRatingGroup() const {
-  return m_RatingGroup;
-}
+bool TransferPolicy::maxBitRateUlIsSet() const { return m_MaxBitRateUlIsSet; }
+void TransferPolicy::unsetMaxBitRateUl() { m_MaxBitRateUlIsSet = false; }
+int32_t TransferPolicy::getRatingGroup() const { return m_RatingGroup; }
 void TransferPolicy::setRatingGroup(int32_t const value) {
   m_RatingGroup = value;
 }
-TimeWindow TransferPolicy::getRecTimeInt() const {
-  return m_RecTimeInt;
-}
-void TransferPolicy::setRecTimeInt(TimeWindow const& value) {
+TimeWindow TransferPolicy::getRecTimeInt() const { return m_RecTimeInt; }
+void TransferPolicy::setRecTimeInt(TimeWindow const &value) {
   m_RecTimeInt = value;
 }
-int32_t TransferPolicy::getTransPolicyId() const {
-  return m_TransPolicyId;
-}
+int32_t TransferPolicy::getTransPolicyId() const { return m_TransPolicyId; }
 void TransferPolicy::setTransPolicyId(int32_t const value) {
   m_TransPolicyId = value;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

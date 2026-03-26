@@ -19,20 +19,20 @@
 namespace oai::model::common {
 
 EutraLocation::EutraLocation() {
-  m_IgnoreTai                     = false;
-  m_IgnoreTaiIsSet                = false;
-  m_IgnoreEcgi                    = false;
-  m_IgnoreEcgiIsSet               = false;
-  m_AgeOfLocationInformation      = 0;
+  m_IgnoreTai = false;
+  m_IgnoreTaiIsSet = false;
+  m_IgnoreEcgi = false;
+  m_IgnoreEcgiIsSet = false;
+  m_AgeOfLocationInformation = 0;
   m_AgeOfLocationInformationIsSet = false;
-  m_UeLocationTimestamp           = "";
-  m_UeLocationTimestampIsSet      = false;
-  m_GeographicalInformation       = "";
-  m_GeographicalInformationIsSet  = false;
-  m_GeodeticInformation           = "";
-  m_GeodeticInformationIsSet      = false;
-  m_GlobalNgenbIdIsSet            = false;
-  m_GlobalENbIdIsSet              = false;
+  m_UeLocationTimestamp = "";
+  m_UeLocationTimestampIsSet = false;
+  m_GeographicalInformation = "";
+  m_GeographicalInformationIsSet = false;
+  m_GeodeticInformation = "";
+  m_GeodeticInformationIsSet = false;
+  m_GlobalNgenbIdIsSet = false;
+  m_GlobalENbIdIsSet = false;
 }
 
 void EutraLocation::validate() const {
@@ -42,18 +42,18 @@ void EutraLocation::validate() const {
   }
 }
 
-bool EutraLocation::validate(std::stringstream& msg) const {
+bool EutraLocation::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool EutraLocation::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool EutraLocation::validate(std::stringstream &msg,
+                             const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "EutraLocation" : pathPrefix;
 
   if (ageOfLocationInformationIsSet()) {
-    const int32_t& value = m_AgeOfLocationInformation;
+    const int32_t &value = m_AgeOfLocationInformation;
     const std::string currentValuePath =
         _pathPrefix + ".ageOfLocationInformation";
 
@@ -80,7 +80,7 @@ bool EutraLocation::validate(
   return success;
 }
 
-bool EutraLocation::operator==(const EutraLocation& rhs) const {
+bool EutraLocation::operator==(const EutraLocation &rhs) const {
   return
 
       (getTai() == rhs.getTai()) &&
@@ -125,16 +125,18 @@ bool EutraLocation::operator==(const EutraLocation& rhs) const {
           ;
 }
 
-bool EutraLocation::operator!=(const EutraLocation& rhs) const {
+bool EutraLocation::operator!=(const EutraLocation &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const EutraLocation& o) {
-  j        = nlohmann::json();
+void to_json(nlohmann::json &j, const EutraLocation &o) {
+  j = nlohmann::json();
   j["tai"] = o.m_Tai;
-  if (o.ignoreTaiIsSet()) j["ignoreTai"] = o.m_IgnoreTai;
+  if (o.ignoreTaiIsSet())
+    j["ignoreTai"] = o.m_IgnoreTai;
   j["ecgi"] = o.m_Ecgi;
-  if (o.ignoreEcgiIsSet()) j["ignoreEcgi"] = o.m_IgnoreEcgi;
+  if (o.ignoreEcgiIsSet())
+    j["ignoreEcgi"] = o.m_IgnoreEcgi;
   if (o.ageOfLocationInformationIsSet())
     j["ageOfLocationInformation"] = o.m_AgeOfLocationInformation;
   if (o.ueLocationTimestampIsSet())
@@ -143,11 +145,13 @@ void to_json(nlohmann::json& j, const EutraLocation& o) {
     j["geographicalInformation"] = o.m_GeographicalInformation;
   if (o.geodeticInformationIsSet())
     j["geodeticInformation"] = o.m_GeodeticInformation;
-  if (o.globalNgenbIdIsSet()) j["globalNgenbId"] = o.m_GlobalNgenbId;
-  if (o.globalENbIdIsSet()) j["globalENbId"] = o.m_GlobalENbId;
+  if (o.globalNgenbIdIsSet())
+    j["globalNgenbId"] = o.m_GlobalNgenbId;
+  if (o.globalENbIdIsSet())
+    j["globalENbId"] = o.m_GlobalENbId;
 }
 
-void from_json(const nlohmann::json& j, EutraLocation& o) {
+void from_json(const nlohmann::json &j, EutraLocation &o) {
   j.at("tai").get_to(o.m_Tai);
   if (j.find("ignoreTai") != j.end()) {
     j.at("ignoreTai").get_to(o.m_IgnoreTai);
@@ -184,49 +188,33 @@ void from_json(const nlohmann::json& j, EutraLocation& o) {
   }
 }
 
-oai::model::common::Tai EutraLocation::getTai() const {
-  return m_Tai;
-}
-void EutraLocation::setTai(oai::model::common::Tai const& value) {
+oai::model::common::Tai EutraLocation::getTai() const { return m_Tai; }
+void EutraLocation::setTai(oai::model::common::Tai const &value) {
   m_Tai = value;
 }
-bool EutraLocation::isIgnoreTai() const {
-  return m_IgnoreTai;
-}
+bool EutraLocation::isIgnoreTai() const { return m_IgnoreTai; }
 void EutraLocation::setIgnoreTai(bool const value) {
-  m_IgnoreTai      = value;
+  m_IgnoreTai = value;
   m_IgnoreTaiIsSet = true;
 }
-bool EutraLocation::ignoreTaiIsSet() const {
-  return m_IgnoreTaiIsSet;
-}
-void EutraLocation::unsetIgnoreTai() {
-  m_IgnoreTaiIsSet = false;
-}
-oai::model::common::Ecgi EutraLocation::getEcgi() const {
-  return m_Ecgi;
-}
-void EutraLocation::setEcgi(oai::model::common::Ecgi const& value) {
+bool EutraLocation::ignoreTaiIsSet() const { return m_IgnoreTaiIsSet; }
+void EutraLocation::unsetIgnoreTai() { m_IgnoreTaiIsSet = false; }
+oai::model::common::Ecgi EutraLocation::getEcgi() const { return m_Ecgi; }
+void EutraLocation::setEcgi(oai::model::common::Ecgi const &value) {
   m_Ecgi = value;
 }
-bool EutraLocation::isIgnoreEcgi() const {
-  return m_IgnoreEcgi;
-}
+bool EutraLocation::isIgnoreEcgi() const { return m_IgnoreEcgi; }
 void EutraLocation::setIgnoreEcgi(bool const value) {
-  m_IgnoreEcgi      = value;
+  m_IgnoreEcgi = value;
   m_IgnoreEcgiIsSet = true;
 }
-bool EutraLocation::ignoreEcgiIsSet() const {
-  return m_IgnoreEcgiIsSet;
-}
-void EutraLocation::unsetIgnoreEcgi() {
-  m_IgnoreEcgiIsSet = false;
-}
+bool EutraLocation::ignoreEcgiIsSet() const { return m_IgnoreEcgiIsSet; }
+void EutraLocation::unsetIgnoreEcgi() { m_IgnoreEcgiIsSet = false; }
 int32_t EutraLocation::getAgeOfLocationInformation() const {
   return m_AgeOfLocationInformation;
 }
 void EutraLocation::setAgeOfLocationInformation(int32_t const value) {
-  m_AgeOfLocationInformation      = value;
+  m_AgeOfLocationInformation = value;
   m_AgeOfLocationInformationIsSet = true;
 }
 bool EutraLocation::ageOfLocationInformationIsSet() const {
@@ -238,8 +226,8 @@ void EutraLocation::unsetAgeOfLocationInformation() {
 std::string EutraLocation::getUeLocationTimestamp() const {
   return m_UeLocationTimestamp;
 }
-void EutraLocation::setUeLocationTimestamp(std::string const& value) {
-  m_UeLocationTimestamp      = value;
+void EutraLocation::setUeLocationTimestamp(std::string const &value) {
+  m_UeLocationTimestamp = value;
   m_UeLocationTimestampIsSet = true;
 }
 bool EutraLocation::ueLocationTimestampIsSet() const {
@@ -251,8 +239,8 @@ void EutraLocation::unsetUeLocationTimestamp() {
 std::string EutraLocation::getGeographicalInformation() const {
   return m_GeographicalInformation;
 }
-void EutraLocation::setGeographicalInformation(std::string const& value) {
-  m_GeographicalInformation      = value;
+void EutraLocation::setGeographicalInformation(std::string const &value) {
+  m_GeographicalInformation = value;
   m_GeographicalInformationIsSet = true;
 }
 bool EutraLocation::geographicalInformationIsSet() const {
@@ -264,8 +252,8 @@ void EutraLocation::unsetGeographicalInformation() {
 std::string EutraLocation::getGeodeticInformation() const {
   return m_GeodeticInformation;
 }
-void EutraLocation::setGeodeticInformation(std::string const& value) {
-  m_GeodeticInformation      = value;
+void EutraLocation::setGeodeticInformation(std::string const &value) {
+  m_GeodeticInformation = value;
   m_GeodeticInformationIsSet = true;
 }
 bool EutraLocation::geodeticInformationIsSet() const {
@@ -278,29 +266,21 @@ oai::model::common::GlobalRanNodeId EutraLocation::getGlobalNgenbId() const {
   return m_GlobalNgenbId;
 }
 void EutraLocation::setGlobalNgenbId(
-    oai::model::common::GlobalRanNodeId const& value) {
-  m_GlobalNgenbId      = value;
+    oai::model::common::GlobalRanNodeId const &value) {
+  m_GlobalNgenbId = value;
   m_GlobalNgenbIdIsSet = true;
 }
-bool EutraLocation::globalNgenbIdIsSet() const {
-  return m_GlobalNgenbIdIsSet;
-}
-void EutraLocation::unsetGlobalNgenbId() {
-  m_GlobalNgenbIdIsSet = false;
-}
+bool EutraLocation::globalNgenbIdIsSet() const { return m_GlobalNgenbIdIsSet; }
+void EutraLocation::unsetGlobalNgenbId() { m_GlobalNgenbIdIsSet = false; }
 oai::model::common::GlobalRanNodeId EutraLocation::getGlobalENbId() const {
   return m_GlobalENbId;
 }
 void EutraLocation::setGlobalENbId(
-    oai::model::common::GlobalRanNodeId const& value) {
-  m_GlobalENbId      = value;
+    oai::model::common::GlobalRanNodeId const &value) {
+  m_GlobalENbId = value;
   m_GlobalENbIdIsSet = true;
 }
-bool EutraLocation::globalENbIdIsSet() const {
-  return m_GlobalENbIdIsSet;
-}
-void EutraLocation::unsetGlobalENbId() {
-  m_GlobalENbIdIsSet = false;
-}
+bool EutraLocation::globalENbIdIsSet() const { return m_GlobalENbIdIsSet; }
+void EutraLocation::unsetGlobalENbId() { m_GlobalENbIdIsSet = false; }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

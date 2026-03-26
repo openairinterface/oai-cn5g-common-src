@@ -19,8 +19,8 @@
 #ifndef AccuUsageReport_H_
 #define AccuUsageReport_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::pcf {
 
@@ -28,7 +28,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class AccuUsageReport {
- public:
+public:
   AccuUsageReport();
   virtual ~AccuUsageReport() = default;
 
@@ -42,16 +42,16 @@ class AccuUsageReport {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const AccuUsageReport& rhs) const;
-  bool operator!=(const AccuUsageReport& rhs) const;
+  bool operator==(const AccuUsageReport &rhs) const;
+  bool operator!=(const AccuUsageReport &rhs) const;
 
   /////////////////////////////////////////////
   /// AccuUsageReport members
@@ -61,7 +61,7 @@ class AccuUsageReport {
   /// report.
   /// </summary>
   std::string getRefUmIds() const;
-  void setRefUmIds(std::string const& value);
+  void setRefUmIds(std::string const &value);
   /// <summary>
   /// Unsigned integer identifying a volume in units of bytes.
   /// </summary>
@@ -119,10 +119,10 @@ class AccuUsageReport {
   bool nextTimeUsageIsSet() const;
   void unsetNextTimeUsage();
 
-  friend void to_json(nlohmann::json& j, const AccuUsageReport& o);
-  friend void from_json(const nlohmann::json& j, AccuUsageReport& o);
+  friend void to_json(nlohmann::json &j, const AccuUsageReport &o);
+  friend void from_json(const nlohmann::json &j, AccuUsageReport &o);
 
- protected:
+protected:
   std::string m_RefUmIds;
 
   int64_t m_VolUsage;
@@ -143,6 +143,6 @@ class AccuUsageReport {
   bool m_NextTimeUsageIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* AccuUsageReport_H_ */

@@ -28,7 +28,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class N2InformationClass {
- public:
+public:
   N2InformationClass();
   virtual ~N2InformationClass() = default;
 
@@ -42,16 +42,16 @@ class N2InformationClass {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const N2InformationClass& rhs) const;
-  bool operator!=(const N2InformationClass& rhs) const;
+  bool operator==(const N2InformationClass &rhs) const;
+  bool operator!=(const N2InformationClass &rhs) const;
 
   /////////////////////////////////////////////
   /// N2InformationClass members
@@ -60,15 +60,15 @@ class N2InformationClass {
   void setValue(N2InformationClass_anyOf value);
   N2InformationClass_anyOf::eN2InformationClass_anyOf getEnumValue() const;
   void setEnumValue(N2InformationClass_anyOf::eN2InformationClass_anyOf value);
-  friend void to_json(nlohmann::json& j, const N2InformationClass& o);
-  friend void from_json(const nlohmann::json& j, N2InformationClass& o);
-  friend void to_json(nlohmann::json& j, const N2InformationClass_anyOf& o);
-  friend void from_json(const nlohmann::json& j, N2InformationClass_anyOf& o);
+  friend void to_json(nlohmann::json &j, const N2InformationClass &o);
+  friend void from_json(const nlohmann::json &j, N2InformationClass &o);
+  friend void to_json(nlohmann::json &j, const N2InformationClass_anyOf &o);
+  friend void from_json(const nlohmann::json &j, N2InformationClass_anyOf &o);
 
- protected:
+protected:
   N2InformationClass_anyOf m_value;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* N2InformationClass_H_ */

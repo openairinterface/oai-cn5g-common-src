@@ -29,7 +29,7 @@ namespace oai::model::pcf {
 /// Application Session Context\&quot; resource.
 /// </summary>
 class SipForkingIndication {
- public:
+public:
   SipForkingIndication();
   virtual ~SipForkingIndication() = default;
 
@@ -43,26 +43,26 @@ class SipForkingIndication {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const SipForkingIndication& rhs) const;
-  bool operator!=(const SipForkingIndication& rhs) const;
+  bool operator==(const SipForkingIndication &rhs) const;
+  bool operator!=(const SipForkingIndication &rhs) const;
 
   /////////////////////////////////////////////
   /// SipForkingIndication members
 
-  friend void to_json(nlohmann::json& j, const SipForkingIndication& o);
-  friend void from_json(const nlohmann::json& j, SipForkingIndication& o);
+  friend void to_json(nlohmann::json &j, const SipForkingIndication &o);
+  friend void from_json(const nlohmann::json &j, SipForkingIndication &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* SipForkingIndication_H_ */

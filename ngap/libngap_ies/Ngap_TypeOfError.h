@@ -21,7 +21,7 @@ extern "C" {
 /* Dependencies */
 typedef enum Ngap_TypeOfError {
   Ngap_TypeOfError_not_understood = 0,
-  Ngap_TypeOfError_missing        = 1
+  Ngap_TypeOfError_missing = 1
   /*
    * Enumeration is extensible
    */

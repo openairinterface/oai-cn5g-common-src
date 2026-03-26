@@ -13,8 +13,8 @@
 
 #include "AfSigProtocol_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::pcf {
 
@@ -27,12 +27,12 @@ void AfSigProtocol_anyOf::validate() const {
   }
 }
 
-bool AfSigProtocol_anyOf::validate(std::stringstream& msg) const {
+bool AfSigProtocol_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AfSigProtocol_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool AfSigProtocol_anyOf::validate(std::stringstream &msg,
+                                   const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AfSigProtocol_anyOf" : pathPrefix;
@@ -46,37 +46,37 @@ bool AfSigProtocol_anyOf::validate(
   return success;
 }
 
-bool AfSigProtocol_anyOf::operator==(const AfSigProtocol_anyOf& rhs) const {
+bool AfSigProtocol_anyOf::operator==(const AfSigProtocol_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool AfSigProtocol_anyOf::operator!=(const AfSigProtocol_anyOf& rhs) const {
+bool AfSigProtocol_anyOf::operator!=(const AfSigProtocol_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AfSigProtocol_anyOf& o) {
+void to_json(nlohmann::json &j, const AfSigProtocol_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case AfSigProtocol_anyOf::eAfSigProtocol_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case AfSigProtocol_anyOf::eAfSigProtocol_anyOf::NO_INFORMATION:
-      j = "NO_INFORMATION";
-      break;
-    case AfSigProtocol_anyOf::eAfSigProtocol_anyOf::SIP:
-      j = "SIP";
-      break;
-    case AfSigProtocol_anyOf::eAfSigProtocol_anyOf::NULL_VALUE:
-      j = nullptr;
-      break;
+  case AfSigProtocol_anyOf::eAfSigProtocol_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case AfSigProtocol_anyOf::eAfSigProtocol_anyOf::NO_INFORMATION:
+    j = "NO_INFORMATION";
+    break;
+  case AfSigProtocol_anyOf::eAfSigProtocol_anyOf::SIP:
+    j = "SIP";
+    break;
+  case AfSigProtocol_anyOf::eAfSigProtocol_anyOf::NULL_VALUE:
+    j = nullptr;
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, AfSigProtocol_anyOf& o) {
+void from_json(const nlohmann::json &j, AfSigProtocol_anyOf &o) {
   if (j.is_null()) {
     o.setValue(AfSigProtocol_anyOf::eAfSigProtocol_anyOf::NULL_VALUE);
     return;
@@ -100,8 +100,8 @@ void from_json(const nlohmann::json& j, AfSigProtocol_anyOf& o) {
   }
 }
 
-AfSigProtocol_anyOf::eAfSigProtocol_anyOf AfSigProtocol_anyOf::getValue()
-    const {
+AfSigProtocol_anyOf::eAfSigProtocol_anyOf
+AfSigProtocol_anyOf::getValue() const {
   return m_value;
 }
 void AfSigProtocol_anyOf::setValue(
@@ -109,4 +109,4 @@ void AfSigProtocol_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

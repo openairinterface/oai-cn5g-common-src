@@ -19,11 +19,11 @@
 namespace oai::udr::model {
 
 DnnRouteSelectionDescriptor::DnnRouteSelectionDescriptor() {
-  m_Dnn               = "";
-  m_SscModesIsSet     = false;
+  m_Dnn = "";
+  m_SscModesIsSet = false;
   m_PduSessTypesIsSet = false;
-  m_AtsssInfo         = false;
-  m_AtsssInfoIsSet    = false;
+  m_AtsssInfo = false;
+  m_AtsssInfoIsSet = false;
 }
 
 DnnRouteSelectionDescriptor::~DnnRouteSelectionDescriptor() {}
@@ -32,16 +32,18 @@ void DnnRouteSelectionDescriptor::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const DnnRouteSelectionDescriptor& o) {
-  j        = nlohmann::json();
+void to_json(nlohmann::json &j, const DnnRouteSelectionDescriptor &o) {
+  j = nlohmann::json();
   j["dnn"] = o.m_Dnn;
-  if (o.sscModesIsSet() || !o.m_SscModes.empty()) j["sscModes"] = o.m_SscModes;
+  if (o.sscModesIsSet() || !o.m_SscModes.empty())
+    j["sscModes"] = o.m_SscModes;
   if (o.pduSessTypesIsSet() || !o.m_PduSessTypes.empty())
     j["pduSessTypes"] = o.m_PduSessTypes;
-  if (o.atsssInfoIsSet()) j["atsssInfo"] = o.m_AtsssInfo;
+  if (o.atsssInfoIsSet())
+    j["atsssInfo"] = o.m_AtsssInfo;
 }
 
-void from_json(const nlohmann::json& j, DnnRouteSelectionDescriptor& o) {
+void from_json(const nlohmann::json &j, DnnRouteSelectionDescriptor &o) {
   j.at("dnn").get_to(o.m_Dnn);
   if (j.find("sscModes") != j.end()) {
     j.at("sscModes").get_to(o.m_SscModes);
@@ -57,34 +59,30 @@ void from_json(const nlohmann::json& j, DnnRouteSelectionDescriptor& o) {
   }
 }
 
-std::string DnnRouteSelectionDescriptor::getDnn() const {
-  return m_Dnn;
-}
-void DnnRouteSelectionDescriptor::setDnn(std::string const& value) {
+std::string DnnRouteSelectionDescriptor::getDnn() const { return m_Dnn; }
+void DnnRouteSelectionDescriptor::setDnn(std::string const &value) {
   m_Dnn = value;
 }
-std::vector<oai::model::common::SscMode>&
+std::vector<oai::model::common::SscMode> &
 DnnRouteSelectionDescriptor::getSscModes() {
   return m_SscModes;
 }
 void DnnRouteSelectionDescriptor::setSscModes(
-    std::vector<oai::model::common::SscMode> const& value) {
-  m_SscModes      = value;
+    std::vector<oai::model::common::SscMode> const &value) {
+  m_SscModes = value;
   m_SscModesIsSet = true;
 }
 bool DnnRouteSelectionDescriptor::sscModesIsSet() const {
   return m_SscModesIsSet;
 }
-void DnnRouteSelectionDescriptor::unsetSscModes() {
-  m_SscModesIsSet = false;
-}
-std::vector<oai::model::common::PduSessionType>&
+void DnnRouteSelectionDescriptor::unsetSscModes() { m_SscModesIsSet = false; }
+std::vector<oai::model::common::PduSessionType> &
 DnnRouteSelectionDescriptor::getPduSessTypes() {
   return m_PduSessTypes;
 }
 void DnnRouteSelectionDescriptor::setPduSessTypes(
-    std::vector<oai::model::common::PduSessionType> const& value) {
-  m_PduSessTypes      = value;
+    std::vector<oai::model::common::PduSessionType> const &value) {
+  m_PduSessTypes = value;
   m_PduSessTypesIsSet = true;
 }
 bool DnnRouteSelectionDescriptor::pduSessTypesIsSet() const {
@@ -93,18 +91,14 @@ bool DnnRouteSelectionDescriptor::pduSessTypesIsSet() const {
 void DnnRouteSelectionDescriptor::unsetPduSessTypes() {
   m_PduSessTypesIsSet = false;
 }
-bool DnnRouteSelectionDescriptor::isAtsssInfo() const {
-  return m_AtsssInfo;
-}
+bool DnnRouteSelectionDescriptor::isAtsssInfo() const { return m_AtsssInfo; }
 void DnnRouteSelectionDescriptor::setAtsssInfo(bool const value) {
-  m_AtsssInfo      = value;
+  m_AtsssInfo = value;
   m_AtsssInfoIsSet = true;
 }
 bool DnnRouteSelectionDescriptor::atsssInfoIsSet() const {
   return m_AtsssInfoIsSet;
 }
-void DnnRouteSelectionDescriptor::unsetAtsssInfo() {
-  m_AtsssInfoIsSet = false;
-}
+void DnnRouteSelectionDescriptor::unsetAtsssInfo() { m_AtsssInfoIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

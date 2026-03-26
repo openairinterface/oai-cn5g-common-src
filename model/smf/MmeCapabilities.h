@@ -27,7 +27,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class MmeCapabilities {
- public:
+public:
   MmeCapabilities();
   virtual ~MmeCapabilities();
 
@@ -44,14 +44,14 @@ class MmeCapabilities {
   bool nonIpSupportedIsSet() const;
   void unsetNonIpSupported();
 
-  friend void to_json(nlohmann::json& j, const MmeCapabilities& o);
-  friend void from_json(const nlohmann::json& j, MmeCapabilities& o);
+  friend void to_json(nlohmann::json &j, const MmeCapabilities &o);
+  friend void from_json(const nlohmann::json &j, MmeCapabilities &o);
 
- protected:
+protected:
   bool m_NonIpSupported;
   bool m_NonIpSupportedIsSet;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* MmeCapabilities_H_ */

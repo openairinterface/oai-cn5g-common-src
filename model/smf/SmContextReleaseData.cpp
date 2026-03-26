@@ -18,19 +18,19 @@ namespace oai::model::smf {
 using namespace oai::model::common;
 
 SmContextReleaseData::SmContextReleaseData() {
-  m_CauseIsSet           = false;
-  m_NgApCauseIsSet       = false;
-  m__5gMmCauseValue      = 0;
+  m_CauseIsSet = false;
+  m_NgApCauseIsSet = false;
+  m__5gMmCauseValue = 0;
   m__5gMmCauseValueIsSet = false;
-  m_UeLocationIsSet      = false;
-  m_UeTimeZone           = "";
-  m_UeTimeZoneIsSet      = false;
-  m_AddUeLocationIsSet   = false;
-  m_VsmfReleaseOnly      = false;
+  m_UeLocationIsSet = false;
+  m_UeTimeZone = "";
+  m_UeTimeZoneIsSet = false;
+  m_AddUeLocationIsSet = false;
+  m_VsmfReleaseOnly = false;
   m_VsmfReleaseOnlyIsSet = false;
-  m_N2SmInfoIsSet        = false;
-  m_N2SmInfoTypeIsSet    = false;
-  m_IsmfReleaseOnly      = false;
+  m_N2SmInfoIsSet = false;
+  m_N2SmInfoTypeIsSet = false;
+  m_IsmfReleaseOnly = false;
   m_IsmfReleaseOnlyIsSet = false;
 }
 
@@ -40,21 +40,31 @@ void SmContextReleaseData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const SmContextReleaseData& o) {
+void to_json(nlohmann::json &j, const SmContextReleaseData &o) {
   j = nlohmann::json();
-  if (o.causeIsSet()) j["cause"] = o.m_Cause;
-  if (o.ngApCauseIsSet()) j["ngApCause"] = o.m_NgApCause;
-  if (o._5gMmCauseValueIsSet()) j["5gMmCauseValue"] = o.m__5gMmCauseValue;
-  if (o.ueLocationIsSet()) j["ueLocation"] = o.m_UeLocation;
-  if (o.ueTimeZoneIsSet()) j["ueTimeZone"] = o.m_UeTimeZone;
-  if (o.addUeLocationIsSet()) j["addUeLocation"] = o.m_AddUeLocation;
-  if (o.vsmfReleaseOnlyIsSet()) j["vsmfReleaseOnly"] = o.m_VsmfReleaseOnly;
-  if (o.n2SmInfoIsSet()) j["n2SmInfo"] = o.m_N2SmInfo;
-  if (o.n2SmInfoTypeIsSet()) j["n2SmInfoType"] = o.m_N2SmInfoType;
-  if (o.ismfReleaseOnlyIsSet()) j["ismfReleaseOnly"] = o.m_IsmfReleaseOnly;
+  if (o.causeIsSet())
+    j["cause"] = o.m_Cause;
+  if (o.ngApCauseIsSet())
+    j["ngApCause"] = o.m_NgApCause;
+  if (o._5gMmCauseValueIsSet())
+    j["5gMmCauseValue"] = o.m__5gMmCauseValue;
+  if (o.ueLocationIsSet())
+    j["ueLocation"] = o.m_UeLocation;
+  if (o.ueTimeZoneIsSet())
+    j["ueTimeZone"] = o.m_UeTimeZone;
+  if (o.addUeLocationIsSet())
+    j["addUeLocation"] = o.m_AddUeLocation;
+  if (o.vsmfReleaseOnlyIsSet())
+    j["vsmfReleaseOnly"] = o.m_VsmfReleaseOnly;
+  if (o.n2SmInfoIsSet())
+    j["n2SmInfo"] = o.m_N2SmInfo;
+  if (o.n2SmInfoTypeIsSet())
+    j["n2SmInfoType"] = o.m_N2SmInfoType;
+  if (o.ismfReleaseOnlyIsSet())
+    j["ismfReleaseOnly"] = o.m_IsmfReleaseOnly;
 }
 
-void from_json(const nlohmann::json& j, SmContextReleaseData& o) {
+void from_json(const nlohmann::json &j, SmContextReleaseData &o) {
   if (j.find("cause") != j.end()) {
     j.at("cause").get_to(o.m_Cause);
     o.m_CauseIsSet = true;
@@ -97,37 +107,25 @@ void from_json(const nlohmann::json& j, SmContextReleaseData& o) {
   }
 }
 
-std::string SmContextReleaseData::getCause() const {
-  return m_Cause;
-}
-void SmContextReleaseData::setCause(std::string const& value) {
-  m_Cause      = value;
+std::string SmContextReleaseData::getCause() const { return m_Cause; }
+void SmContextReleaseData::setCause(std::string const &value) {
+  m_Cause = value;
   m_CauseIsSet = true;
 }
-bool SmContextReleaseData::causeIsSet() const {
-  return m_CauseIsSet;
-}
-void SmContextReleaseData::unsetCause() {
-  m_CauseIsSet = false;
-}
-NgApCause SmContextReleaseData::getNgApCause() const {
-  return m_NgApCause;
-}
-void SmContextReleaseData::setNgApCause(NgApCause const& value) {
-  m_NgApCause      = value;
+bool SmContextReleaseData::causeIsSet() const { return m_CauseIsSet; }
+void SmContextReleaseData::unsetCause() { m_CauseIsSet = false; }
+NgApCause SmContextReleaseData::getNgApCause() const { return m_NgApCause; }
+void SmContextReleaseData::setNgApCause(NgApCause const &value) {
+  m_NgApCause = value;
   m_NgApCauseIsSet = true;
 }
-bool SmContextReleaseData::ngApCauseIsSet() const {
-  return m_NgApCauseIsSet;
-}
-void SmContextReleaseData::unsetNgApCause() {
-  m_NgApCauseIsSet = false;
-}
+bool SmContextReleaseData::ngApCauseIsSet() const { return m_NgApCauseIsSet; }
+void SmContextReleaseData::unsetNgApCause() { m_NgApCauseIsSet = false; }
 int32_t SmContextReleaseData::get5gMmCauseValue() const {
   return m__5gMmCauseValue;
 }
 void SmContextReleaseData::set5gMmCauseValue(int32_t const value) {
-  m__5gMmCauseValue      = value;
+  m__5gMmCauseValue = value;
   m__5gMmCauseValueIsSet = true;
 }
 bool SmContextReleaseData::_5gMmCauseValueIsSet() const {
@@ -139,34 +137,24 @@ void SmContextReleaseData::unset_5gMmCauseValue() {
 UserLocation SmContextReleaseData::getUeLocation() const {
   return m_UeLocation;
 }
-void SmContextReleaseData::setUeLocation(UserLocation const& value) {
-  m_UeLocation      = value;
+void SmContextReleaseData::setUeLocation(UserLocation const &value) {
+  m_UeLocation = value;
   m_UeLocationIsSet = true;
 }
-bool SmContextReleaseData::ueLocationIsSet() const {
-  return m_UeLocationIsSet;
-}
-void SmContextReleaseData::unsetUeLocation() {
-  m_UeLocationIsSet = false;
-}
-std::string SmContextReleaseData::getUeTimeZone() const {
-  return m_UeTimeZone;
-}
-void SmContextReleaseData::setUeTimeZone(std::string const& value) {
-  m_UeTimeZone      = value;
+bool SmContextReleaseData::ueLocationIsSet() const { return m_UeLocationIsSet; }
+void SmContextReleaseData::unsetUeLocation() { m_UeLocationIsSet = false; }
+std::string SmContextReleaseData::getUeTimeZone() const { return m_UeTimeZone; }
+void SmContextReleaseData::setUeTimeZone(std::string const &value) {
+  m_UeTimeZone = value;
   m_UeTimeZoneIsSet = true;
 }
-bool SmContextReleaseData::ueTimeZoneIsSet() const {
-  return m_UeTimeZoneIsSet;
-}
-void SmContextReleaseData::unsetUeTimeZone() {
-  m_UeTimeZoneIsSet = false;
-}
+bool SmContextReleaseData::ueTimeZoneIsSet() const { return m_UeTimeZoneIsSet; }
+void SmContextReleaseData::unsetUeTimeZone() { m_UeTimeZoneIsSet = false; }
 UserLocation SmContextReleaseData::getAddUeLocation() const {
   return m_AddUeLocation;
 }
-void SmContextReleaseData::setAddUeLocation(UserLocation const& value) {
-  m_AddUeLocation      = value;
+void SmContextReleaseData::setAddUeLocation(UserLocation const &value) {
+  m_AddUeLocation = value;
   m_AddUeLocationIsSet = true;
 }
 bool SmContextReleaseData::addUeLocationIsSet() const {
@@ -179,7 +167,7 @@ bool SmContextReleaseData::isVsmfReleaseOnly() const {
   return m_VsmfReleaseOnly;
 }
 void SmContextReleaseData::setVsmfReleaseOnly(bool const value) {
-  m_VsmfReleaseOnly      = value;
+  m_VsmfReleaseOnly = value;
   m_VsmfReleaseOnlyIsSet = true;
 }
 bool SmContextReleaseData::vsmfReleaseOnlyIsSet() const {
@@ -188,37 +176,29 @@ bool SmContextReleaseData::vsmfReleaseOnlyIsSet() const {
 void SmContextReleaseData::unsetVsmfReleaseOnly() {
   m_VsmfReleaseOnlyIsSet = false;
 }
-RefToBinaryData SmContextReleaseData::getN2SmInfo() const {
-  return m_N2SmInfo;
-}
-void SmContextReleaseData::setN2SmInfo(RefToBinaryData const& value) {
-  m_N2SmInfo      = value;
+RefToBinaryData SmContextReleaseData::getN2SmInfo() const { return m_N2SmInfo; }
+void SmContextReleaseData::setN2SmInfo(RefToBinaryData const &value) {
+  m_N2SmInfo = value;
   m_N2SmInfoIsSet = true;
 }
-bool SmContextReleaseData::n2SmInfoIsSet() const {
-  return m_N2SmInfoIsSet;
-}
-void SmContextReleaseData::unsetN2SmInfo() {
-  m_N2SmInfoIsSet = false;
-}
+bool SmContextReleaseData::n2SmInfoIsSet() const { return m_N2SmInfoIsSet; }
+void SmContextReleaseData::unsetN2SmInfo() { m_N2SmInfoIsSet = false; }
 std::string SmContextReleaseData::getN2SmInfoType() const {
   return m_N2SmInfoType;
 }
-void SmContextReleaseData::setN2SmInfoType(std::string const& value) {
-  m_N2SmInfoType      = value;
+void SmContextReleaseData::setN2SmInfoType(std::string const &value) {
+  m_N2SmInfoType = value;
   m_N2SmInfoTypeIsSet = true;
 }
 bool SmContextReleaseData::n2SmInfoTypeIsSet() const {
   return m_N2SmInfoTypeIsSet;
 }
-void SmContextReleaseData::unsetN2SmInfoType() {
-  m_N2SmInfoTypeIsSet = false;
-}
+void SmContextReleaseData::unsetN2SmInfoType() { m_N2SmInfoTypeIsSet = false; }
 bool SmContextReleaseData::isIsmfReleaseOnly() const {
   return m_IsmfReleaseOnly;
 }
 void SmContextReleaseData::setIsmfReleaseOnly(bool const value) {
-  m_IsmfReleaseOnly      = value;
+  m_IsmfReleaseOnly = value;
   m_IsmfReleaseOnlyIsSet = true;
 }
 bool SmContextReleaseData::ismfReleaseOnlyIsSet() const {
@@ -228,4 +208,4 @@ void SmContextReleaseData::unsetIsmfReleaseOnly() {
   m_IsmfReleaseOnlyIsSet = false;
 }
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

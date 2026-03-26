@@ -12,9 +12,9 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
+#include "Ngap_Criticality.h"
 #include "Ngap_ProcedureCode.h"
 #include "Ngap_TriggeringMessage.h"
-#include "Ngap_Criticality.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -27,12 +27,12 @@ struct Ngap_ProtocolExtensionContainer;
 
 /* Ngap_CriticalityDiagnostics */
 typedef struct Ngap_CriticalityDiagnostics {
-  Ngap_ProcedureCode_t* procedureCode;         /* OPTIONAL */
-  Ngap_TriggeringMessage_t* triggeringMessage; /* OPTIONAL */
-  Ngap_Criticality_t* procedureCriticality;    /* OPTIONAL */
-  struct Ngap_CriticalityDiagnostics_IE_List*
-      iEsCriticalityDiagnostics;                         /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  Ngap_ProcedureCode_t *procedureCode;         /* OPTIONAL */
+  Ngap_TriggeringMessage_t *triggeringMessage; /* OPTIONAL */
+  Ngap_Criticality_t *procedureCriticality;    /* OPTIONAL */
+  struct Ngap_CriticalityDiagnostics_IE_List
+      *iEsCriticalityDiagnostics;                        /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

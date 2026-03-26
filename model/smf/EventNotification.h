@@ -19,16 +19,16 @@
 #ifndef EventNotification_H_
 #define EventNotification_H_
 
-#include "DnaiChangeType.h"
+#include "AccessType.h"
 #include "DddStatus.h"
-#include <string>
+#include "DnaiChangeType.h"
 #include "Ipv6Prefix.h"
-#include "SmfEvent.h"
 #include "PlmnId.h"
 #include "RouteToLocation.h"
-#include "AccessType.h"
+#include "SmfEvent.h"
 #include "UsageReport.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::smf {
 
@@ -36,7 +36,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class EventNotification {
- public:
+public:
   EventNotification();
   virtual ~EventNotification();
 
@@ -49,136 +49,136 @@ class EventNotification {
   ///
   /// </summary>
   SmfEvent getEvent() const;
-  void setEvent(SmfEvent const& value);
+  void setEvent(SmfEvent const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getTimeStamp() const;
-  void setTimeStamp(std::string const& value);
+  void setTimeStamp(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getSupi() const;
-  void setSupi(std::string const& value);
+  void setSupi(std::string const &value);
   bool supiIsSet() const;
   void unsetSupi();
   /// <summary>
   ///
   /// </summary>
   std::string getGpsi() const;
-  void setGpsi(std::string const& value);
+  void setGpsi(std::string const &value);
   bool gpsiIsSet() const;
   void unsetGpsi();
   /// <summary>
   ///
   /// </summary>
   std::string getSourceDnai() const;
-  void setSourceDnai(std::string const& value);
+  void setSourceDnai(std::string const &value);
   bool sourceDnaiIsSet() const;
   void unsetSourceDnai();
   /// <summary>
   ///
   /// </summary>
   std::string getTargetDnai() const;
-  void setTargetDnai(std::string const& value);
+  void setTargetDnai(std::string const &value);
   bool targetDnaiIsSet() const;
   void unsetTargetDnai();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::DnaiChangeType getDnaiChgType() const;
-  void setDnaiChgType(oai::model::common::DnaiChangeType const& value);
+  void setDnaiChgType(oai::model::common::DnaiChangeType const &value);
   bool dnaiChgTypeIsSet() const;
   void unsetDnaiChgType();
   /// <summary>
   ///
   /// </summary>
   std::string getSourceUeIpv4Addr() const;
-  void setSourceUeIpv4Addr(std::string const& value);
+  void setSourceUeIpv4Addr(std::string const &value);
   bool sourceUeIpv4AddrIsSet() const;
   void unsetSourceUeIpv4Addr();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ipv6Prefix getSourceUeIpv6Prefix() const;
-  void setSourceUeIpv6Prefix(oai::model::common::Ipv6Prefix const& value);
+  void setSourceUeIpv6Prefix(oai::model::common::Ipv6Prefix const &value);
   bool sourceUeIpv6PrefixIsSet() const;
   void unsetSourceUeIpv6Prefix();
   /// <summary>
   ///
   /// </summary>
   std::string getTargetUeIpv4Addr() const;
-  void setTargetUeIpv4Addr(std::string const& value);
+  void setTargetUeIpv4Addr(std::string const &value);
   bool targetUeIpv4AddrIsSet() const;
   void unsetTargetUeIpv4Addr();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ipv6Prefix getTargetUeIpv6Prefix() const;
-  void setTargetUeIpv6Prefix(oai::model::common::Ipv6Prefix const& value);
+  void setTargetUeIpv6Prefix(oai::model::common::Ipv6Prefix const &value);
   bool targetUeIpv6PrefixIsSet() const;
   void unsetTargetUeIpv6Prefix();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::RouteToLocation getSourceTraRouting() const;
-  void setSourceTraRouting(oai::model::common::RouteToLocation const& value);
+  void setSourceTraRouting(oai::model::common::RouteToLocation const &value);
   bool sourceTraRoutingIsSet() const;
   void unsetSourceTraRouting();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::RouteToLocation getTargetTraRouting() const;
-  void setTargetTraRouting(oai::model::common::RouteToLocation const& value);
+  void setTargetTraRouting(oai::model::common::RouteToLocation const &value);
   bool targetTraRoutingIsSet() const;
   void unsetTargetTraRouting();
   /// <summary>
   ///
   /// </summary>
   std::string getUeMac() const;
-  void setUeMac(std::string const& value);
+  void setUeMac(std::string const &value);
   bool ueMacIsSet() const;
   void unsetUeMac();
   /// <summary>
   ///
   /// </summary>
   std::string getAdIpv4Addr() const;
-  void setAdIpv4Addr(std::string const& value);
+  void setAdIpv4Addr(std::string const &value);
   bool adIpv4AddrIsSet() const;
   void unsetAdIpv4Addr();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ipv6Prefix getAdIpv6Prefix() const;
-  void setAdIpv6Prefix(oai::model::common::Ipv6Prefix const& value);
+  void setAdIpv6Prefix(oai::model::common::Ipv6Prefix const &value);
   bool adIpv6PrefixIsSet() const;
   void unsetAdIpv6Prefix();
   /// <summary>
   ///
   /// </summary>
   std::string getReIpv4Addr() const;
-  void setReIpv4Addr(std::string const& value);
+  void setReIpv4Addr(std::string const &value);
   bool reIpv4AddrIsSet() const;
   void unsetReIpv4Addr();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ipv6Prefix getReIpv6Prefix() const;
-  void setReIpv6Prefix(oai::model::common::Ipv6Prefix const& value);
+  void setReIpv6Prefix(oai::model::common::Ipv6Prefix const &value);
   bool reIpv6PrefixIsSet() const;
   void unsetReIpv6Prefix();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::PlmnId getPlmnId() const;
-  void setPlmnId(oai::model::common::PlmnId const& value);
+  void setPlmnId(oai::model::common::PlmnId const &value);
   bool plmnIdIsSet() const;
   void unsetPlmnId();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::AccessType getAccType() const;
-  void setAccType(oai::model::common::AccessType const& value);
+  void setAccType(oai::model::common::AccessType const &value);
   bool accTypeIsSet() const;
   void unsetAccType();
   /// <summary>
@@ -192,28 +192,28 @@ class EventNotification {
   ///
   /// </summary>
   DddStatus getDddStatus() const;
-  void setDddStatus(DddStatus const& value);
+  void setDddStatus(DddStatus const &value);
   bool dddStatusIsSet() const;
   void unsetDddStatus();
   /// <summary>
   ///
   /// </summary>
   std::string getMaxWaitTime() const;
-  void setMaxWaitTime(std::string const& value);
+  void setMaxWaitTime(std::string const &value);
   bool maxWaitTimeIsSet() const;
   void unsetMaxWaitTime();
   /// <summary>
   ///
   /// </summary>
   UsageReport getUsageReport() const;
-  void setUsageReport(UsageReport const& value);
+  void setUsageReport(UsageReport const &value);
   bool usageReportIsSet() const;
   void unsetUsageReport();
 
-  friend void to_json(nlohmann::json& j, const EventNotification& o);
-  friend void from_json(const nlohmann::json& j, EventNotification& o);
+  friend void to_json(nlohmann::json &j, const EventNotification &o);
+  friend void from_json(const nlohmann::json &j, EventNotification &o);
 
- protected:
+protected:
   SmfEvent m_Event;
 
   std::string m_TimeStamp;
@@ -264,6 +264,6 @@ class EventNotification {
   bool m_usageReportIsSet;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* EventNotification_H_ */

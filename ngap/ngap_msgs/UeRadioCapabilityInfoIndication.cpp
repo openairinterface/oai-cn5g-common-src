@@ -14,7 +14,7 @@ namespace oai::ngap {
 UeRadioCapabilityInfoIndicationMsg::UeRadioCapabilityInfoIndicationMsg()
     : NgapUeMessage() {
   m_UeRadioCapabilityInfoIndicationIes = nullptr;
-  m_UeRadioCapabilityForPaging         = std::nullopt;
+  m_UeRadioCapabilityForPaging = std::nullopt;
 
   setMessageType(NgapMessageType::UE_RADIO_CAPABILITY_INFO_INDICATION);
   initialize();
@@ -31,13 +31,13 @@ void UeRadioCapabilityInfoIndicationMsg::initialize() {
 }
 
 //------------------------------------------------------------------------------
-void UeRadioCapabilityInfoIndicationMsg::setAmfUeNgapId(const uint64_t& id) {
+void UeRadioCapabilityInfoIndicationMsg::setAmfUeNgapId(const uint64_t &id) {
   NgapUeMessage::m_AmfUeNgapId.set(id);
 
-  Ngap_UERadioCapabilityInfoIndicationIEs_t* ie =
-      (Ngap_UERadioCapabilityInfoIndicationIEs_t*) calloc(
+  Ngap_UERadioCapabilityInfoIndicationIEs_t *ie =
+      (Ngap_UERadioCapabilityInfoIndicationIEs_t *)calloc(
           1, sizeof(Ngap_UERadioCapabilityInfoIndicationIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID;
+  ie->id = Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID;
   ie->criticality = Ngap_Criticality_reject;
   ie->value.present =
       Ngap_UERadioCapabilityInfoIndicationIEs__value_PR_AMF_UE_NGAP_ID;
@@ -47,7 +47,7 @@ void UeRadioCapabilityInfoIndicationMsg::setAmfUeNgapId(const uint64_t& id) {
   if (!ret) {
     oai::logger::logger_common::ngap().error(
         "Encode NGAP AMF_UE_NGAP_ID IE error");
-    oai::utils::utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void **)&ie);
     return;
   }
 
@@ -60,13 +60,13 @@ void UeRadioCapabilityInfoIndicationMsg::setAmfUeNgapId(const uint64_t& id) {
 
 //------------------------------------------------------------------------------
 void UeRadioCapabilityInfoIndicationMsg::setRanUeNgapId(
-    const uint32_t& ranUeNgapId) {
+    const uint32_t &ranUeNgapId) {
   NgapUeMessage::m_RanUeNgapId.set(ranUeNgapId);
 
-  Ngap_UERadioCapabilityInfoIndicationIEs_t* ie =
-      (Ngap_UERadioCapabilityInfoIndicationIEs_t*) calloc(
+  Ngap_UERadioCapabilityInfoIndicationIEs_t *ie =
+      (Ngap_UERadioCapabilityInfoIndicationIEs_t *)calloc(
           1, sizeof(Ngap_UERadioCapabilityInfoIndicationIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID;
+  ie->id = Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID;
   ie->criticality = Ngap_Criticality_reject;
   ie->value.present =
       Ngap_UERadioCapabilityInfoIndicationIEs__value_PR_RAN_UE_NGAP_ID;
@@ -76,7 +76,7 @@ void UeRadioCapabilityInfoIndicationMsg::setRanUeNgapId(
   if (!ret) {
     oai::logger::logger_common::ngap().error(
         "Encode NGAP RAN_UE_NGAP_ID IE error");
-    oai::utils::utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void **)&ie);
     return;
   }
 
@@ -89,13 +89,13 @@ void UeRadioCapabilityInfoIndicationMsg::setRanUeNgapId(
 
 //------------------------------------------------------------------------------
 void UeRadioCapabilityInfoIndicationMsg::setUeRadioCapability(
-    const OCTET_STRING_t& capability) {
+    const OCTET_STRING_t &capability) {
   m_UeRadioCapability.set(capability);
 
-  Ngap_UERadioCapabilityInfoIndicationIEs_t* ie =
-      (Ngap_UERadioCapabilityInfoIndicationIEs_t*) calloc(
+  Ngap_UERadioCapabilityInfoIndicationIEs_t *ie =
+      (Ngap_UERadioCapabilityInfoIndicationIEs_t *)calloc(
           1, sizeof(Ngap_PDUSessionResourceSetupRequestIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_UERadioCapability;
+  ie->id = Ngap_ProtocolIE_ID_id_UERadioCapability;
   ie->criticality = Ngap_Criticality_ignore;
   ie->value.present =
       Ngap_UERadioCapabilityInfoIndicationIEs__value_PR_UERadioCapability;
@@ -103,7 +103,7 @@ void UeRadioCapabilityInfoIndicationMsg::setUeRadioCapability(
   if (!m_UeRadioCapability.encode(ie->value.choice.UERadioCapability)) {
     oai::logger::logger_common::ngap().error(
         "Encode NGAP UERadioCapability IE error");
-    oai::utils::utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void **)&ie);
     return;
   }
 
@@ -116,14 +116,14 @@ void UeRadioCapabilityInfoIndicationMsg::setUeRadioCapability(
 
 //------------------------------------------------------------------------------
 void UeRadioCapabilityInfoIndicationMsg::getUeRadioCapability(
-    OCTET_STRING_t& capability) const {
+    OCTET_STRING_t &capability) const {
   m_UeRadioCapability.get(capability);
 }
 
 //------------------------------------------------------------------------------
 void UeRadioCapabilityInfoIndicationMsg::setUeRadioCapabilityForPaging(
-    const OCTET_STRING_t& ueRadioCapabilityForPagingOfNr,
-    const OCTET_STRING_t& ueRadioCapabilityForPagingOfEutra) {
+    const OCTET_STRING_t &ueRadioCapabilityForPagingOfNr,
+    const OCTET_STRING_t &ueRadioCapabilityForPagingOfEutra) {
   if (!(ngap_utils::check_octet_string(ueRadioCapabilityForPagingOfNr) or
         ngap_utils::check_octet_string(ueRadioCapabilityForPagingOfEutra))) {
     return;
@@ -138,10 +138,10 @@ void UeRadioCapabilityInfoIndicationMsg::setUeRadioCapabilityForPaging(
   }
   m_UeRadioCapabilityForPaging = std::optional<UeRadioCapabilityForPaging>(tmp);
 
-  Ngap_UERadioCapabilityInfoIndicationIEs_t* ie =
-      (Ngap_UERadioCapabilityInfoIndicationIEs_t*) calloc(
+  Ngap_UERadioCapabilityInfoIndicationIEs_t *ie =
+      (Ngap_UERadioCapabilityInfoIndicationIEs_t *)calloc(
           1, sizeof(Ngap_UERadioCapabilityInfoIndicationIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_UERadioCapabilityForPaging;
+  ie->id = Ngap_ProtocolIE_ID_id_UERadioCapabilityForPaging;
   ie->criticality = Ngap_Criticality_ignore;
   ie->value.present =
       Ngap_UERadioCapabilityInfoIndicationIEs__value_PR_UERadioCapabilityForPaging;
@@ -151,7 +151,7 @@ void UeRadioCapabilityInfoIndicationMsg::setUeRadioCapabilityForPaging(
   if (!ret) {
     oai::logger::logger_common::ngap().error(
         "Encode NGAP UERadioCapabilityForPaging IE error");
-    oai::utils::utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void **)&ie);
     return;
   }
 
@@ -164,9 +164,10 @@ void UeRadioCapabilityInfoIndicationMsg::setUeRadioCapabilityForPaging(
 
 //------------------------------------------------------------------------------
 bool UeRadioCapabilityInfoIndicationMsg::getUeRadioCapabilityForPaging(
-    OCTET_STRING_t& ueRadioCapabilityForPagingOfNr,
-    OCTET_STRING_t& ueRadioCapabilityForPagingOfEutra) const {
-  if (!m_UeRadioCapabilityForPaging.has_value()) return false;
+    OCTET_STRING_t &ueRadioCapabilityForPagingOfNr,
+    OCTET_STRING_t &ueRadioCapabilityForPagingOfEutra) const {
+  if (!m_UeRadioCapabilityForPaging.has_value())
+    return false;
   m_UeRadioCapabilityForPaging.value().getUeRadioCapabilityForPagingOfNr(
       ueRadioCapabilityForPagingOfNr);
   m_UeRadioCapabilityForPaging.value().getUeRadioCapabilityForPagingOfEutra(
@@ -175,7 +176,7 @@ bool UeRadioCapabilityInfoIndicationMsg::getUeRadioCapabilityForPaging(
 }
 
 //------------------------------------------------------------------------------
-bool UeRadioCapabilityInfoIndicationMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
+bool UeRadioCapabilityInfoIndicationMsg::decode(Ngap_NGAP_PDU_t *ngapMsgPdu) {
   ngapPdu = ngapMsgPdu;
 
   if (ngapPdu->present == Ngap_NGAP_PDU_PR_initiatingMessage) {
@@ -202,92 +203,90 @@ bool UeRadioCapabilityInfoIndicationMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
        i < m_UeRadioCapabilityInfoIndicationIes->protocolIEs.list.count; i++) {
     switch (
         m_UeRadioCapabilityInfoIndicationIes->protocolIEs.list.array[i]->id) {
-      case Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID: {
-        if (m_UeRadioCapabilityInfoIndicationIes->protocolIEs.list.array[i]
-                    ->criticality == Ngap_Criticality_reject &&
-            m_UeRadioCapabilityInfoIndicationIes->protocolIEs.list.array[i]
-                    ->value.present ==
-                Ngap_UERadioCapabilityInfoIndicationIEs__value_PR_AMF_UE_NGAP_ID) {
-          if (!NgapUeMessage::m_AmfUeNgapId.decode(
-                  m_UeRadioCapabilityInfoIndicationIes->protocolIEs.list
-                      .array[i]
-                      ->value.choice.AMF_UE_NGAP_ID)) {
-            oai::logger::logger_common::ngap().error(
-                "Decoded NGAP AMF_UE_NGAP_ID IE error");
-            return false;
-          }
-        } else {
+    case Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID: {
+      if (m_UeRadioCapabilityInfoIndicationIes->protocolIEs.list.array[i]
+                  ->criticality == Ngap_Criticality_reject &&
+          m_UeRadioCapabilityInfoIndicationIes->protocolIEs.list.array[i]
+                  ->value.present ==
+              Ngap_UERadioCapabilityInfoIndicationIEs__value_PR_AMF_UE_NGAP_ID) {
+        if (!NgapUeMessage::m_AmfUeNgapId.decode(
+                m_UeRadioCapabilityInfoIndicationIes->protocolIEs.list.array[i]
+                    ->value.choice.AMF_UE_NGAP_ID)) {
           oai::logger::logger_common::ngap().error(
               "Decoded NGAP AMF_UE_NGAP_ID IE error");
           return false;
         }
-      } break;
-      case Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID: {
-        if (m_UeRadioCapabilityInfoIndicationIes->protocolIEs.list.array[i]
-                    ->criticality == Ngap_Criticality_reject &&
-            m_UeRadioCapabilityInfoIndicationIes->protocolIEs.list.array[i]
-                    ->value.present ==
-                Ngap_UERadioCapabilityInfoIndicationIEs__value_PR_RAN_UE_NGAP_ID) {
-          if (!NgapUeMessage::m_RanUeNgapId.decode(
-                  m_UeRadioCapabilityInfoIndicationIes->protocolIEs.list
-                      .array[i]
-                      ->value.choice.RAN_UE_NGAP_ID)) {
-            oai::logger::logger_common::ngap().error(
-                "Decoded NGAP RAN_UE_NGAP_ID IE error");
-            return false;
-          }
-        } else {
+      } else {
+        oai::logger::logger_common::ngap().error(
+            "Decoded NGAP AMF_UE_NGAP_ID IE error");
+        return false;
+      }
+    } break;
+    case Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID: {
+      if (m_UeRadioCapabilityInfoIndicationIes->protocolIEs.list.array[i]
+                  ->criticality == Ngap_Criticality_reject &&
+          m_UeRadioCapabilityInfoIndicationIes->protocolIEs.list.array[i]
+                  ->value.present ==
+              Ngap_UERadioCapabilityInfoIndicationIEs__value_PR_RAN_UE_NGAP_ID) {
+        if (!NgapUeMessage::m_RanUeNgapId.decode(
+                m_UeRadioCapabilityInfoIndicationIes->protocolIEs.list.array[i]
+                    ->value.choice.RAN_UE_NGAP_ID)) {
           oai::logger::logger_common::ngap().error(
               "Decoded NGAP RAN_UE_NGAP_ID IE error");
           return false;
         }
-      } break;
-      case Ngap_ProtocolIE_ID_id_UERadioCapability: {
-        if (m_UeRadioCapabilityInfoIndicationIes->protocolIEs.list.array[i]
-                    ->criticality == Ngap_Criticality_ignore &&
+      } else {
+        oai::logger::logger_common::ngap().error(
+            "Decoded NGAP RAN_UE_NGAP_ID IE error");
+        return false;
+      }
+    } break;
+    case Ngap_ProtocolIE_ID_id_UERadioCapability: {
+      if (m_UeRadioCapabilityInfoIndicationIes->protocolIEs.list.array[i]
+                  ->criticality == Ngap_Criticality_ignore &&
+          m_UeRadioCapabilityInfoIndicationIes->protocolIEs.list.array[i]
+                  ->value.present ==
+              Ngap_UERadioCapabilityInfoIndicationIEs__value_PR_UERadioCapability) {
+        m_UeRadioCapability.set(
             m_UeRadioCapabilityInfoIndicationIes->protocolIEs.list.array[i]
-                    ->value.present ==
-                Ngap_UERadioCapabilityInfoIndicationIEs__value_PR_UERadioCapability) {
-          m_UeRadioCapability.set(
-              m_UeRadioCapabilityInfoIndicationIes->protocolIEs.list.array[i]
-                  ->value.choice.UERadioCapability);
-        } else {
-          oai::logger::logger_common::ngap().error(
-              "Decoded NGAP UERadioCapability IE error");
-          return false;
-        }
-      } break;
-      case Ngap_ProtocolIE_ID_id_UERadioCapabilityForPaging: {
-        if (m_UeRadioCapabilityInfoIndicationIes->protocolIEs.list.array[i]
-                    ->criticality == Ngap_Criticality_ignore &&
-            m_UeRadioCapabilityInfoIndicationIes->protocolIEs.list.array[i]
-                    ->value.present ==
-                Ngap_UERadioCapabilityInfoIndicationIEs__value_PR_UERadioCapabilityForPaging) {
-          UeRadioCapabilityForPaging tmp = {};
-          if (!tmp.decode(m_UeRadioCapabilityInfoIndicationIes->protocolIEs.list
-                              .array[i]
-                              ->value.choice.UERadioCapabilityForPaging)) {
-            oai::logger::logger_common::ngap().error(
-                "Decoded NGAP UERadioCapabilityForPaging IE error");
-            return false;
-          }
-          m_UeRadioCapabilityForPaging =
-              std::optional<UeRadioCapabilityForPaging>(tmp);
-        } else {
+                ->value.choice.UERadioCapability);
+      } else {
+        oai::logger::logger_common::ngap().error(
+            "Decoded NGAP UERadioCapability IE error");
+        return false;
+      }
+    } break;
+    case Ngap_ProtocolIE_ID_id_UERadioCapabilityForPaging: {
+      if (m_UeRadioCapabilityInfoIndicationIes->protocolIEs.list.array[i]
+                  ->criticality == Ngap_Criticality_ignore &&
+          m_UeRadioCapabilityInfoIndicationIes->protocolIEs.list.array[i]
+                  ->value.present ==
+              Ngap_UERadioCapabilityInfoIndicationIEs__value_PR_UERadioCapabilityForPaging) {
+        UeRadioCapabilityForPaging tmp = {};
+        if (!tmp.decode(
+                m_UeRadioCapabilityInfoIndicationIes->protocolIEs.list.array[i]
+                    ->value.choice.UERadioCapabilityForPaging)) {
           oai::logger::logger_common::ngap().error(
               "Decoded NGAP UERadioCapabilityForPaging IE error");
           return false;
         }
-      } break;
-      default: {
+        m_UeRadioCapabilityForPaging =
+            std::optional<UeRadioCapabilityForPaging>(tmp);
+      } else {
         oai::logger::logger_common::ngap().error(
-            "Decoded NGAP message PDU error");
+            "Decoded NGAP UERadioCapabilityForPaging IE error");
         return false;
       }
+    } break;
+    default: {
+      oai::logger::logger_common::ngap().error(
+          "Decoded NGAP message PDU error");
+      return false;
+    }
     }
   }
 
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

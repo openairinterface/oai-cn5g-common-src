@@ -20,7 +20,7 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_NextPagingAreaScope {
-  Ngap_NextPagingAreaScope_same    = 0,
+  Ngap_NextPagingAreaScope_same = 0,
   Ngap_NextPagingAreaScope_changed = 1
   /*
    * Enumeration is extensible

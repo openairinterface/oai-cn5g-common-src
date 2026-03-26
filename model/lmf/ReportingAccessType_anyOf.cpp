@@ -13,8 +13,8 @@
 
 #include "ReportingAccessType_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::lmf {
 
@@ -27,12 +27,12 @@ void ReportingAccessType_anyOf::validate() const {
   }
 }
 
-bool ReportingAccessType_anyOf::validate(std::stringstream& msg) const {
+bool ReportingAccessType_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ReportingAccessType_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ReportingAccessType_anyOf::validate(std::stringstream &msg,
+                                         const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ReportingAccessType_anyOf" : pathPrefix;
@@ -47,40 +47,40 @@ bool ReportingAccessType_anyOf::validate(
 }
 
 bool ReportingAccessType_anyOf::operator==(
-    const ReportingAccessType_anyOf& rhs) const {
+    const ReportingAccessType_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool ReportingAccessType_anyOf::operator!=(
-    const ReportingAccessType_anyOf& rhs) const {
+    const ReportingAccessType_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ReportingAccessType_anyOf& o) {
+void to_json(nlohmann::json &j, const ReportingAccessType_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case ReportingAccessType_anyOf::eReportingAccessType_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case ReportingAccessType_anyOf::eReportingAccessType_anyOf::NR:
-      j = "NR";
-      break;
-    case ReportingAccessType_anyOf::eReportingAccessType_anyOf::
-        EUTRA_CONNECTED_TO_5GC:
-      j = "EUTRA_CONNECTED_TO_5GC";
-      break;
-    case ReportingAccessType_anyOf::eReportingAccessType_anyOf::
-        NON_3GPP_CONNECTED_TO_5GC:
-      j = "NON_3GPP_CONNECTED_TO_5GC";
-      break;
+  case ReportingAccessType_anyOf::eReportingAccessType_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case ReportingAccessType_anyOf::eReportingAccessType_anyOf::NR:
+    j = "NR";
+    break;
+  case ReportingAccessType_anyOf::eReportingAccessType_anyOf::
+      EUTRA_CONNECTED_TO_5GC:
+    j = "EUTRA_CONNECTED_TO_5GC";
+    break;
+  case ReportingAccessType_anyOf::eReportingAccessType_anyOf::
+      NON_3GPP_CONNECTED_TO_5GC:
+    j = "NON_3GPP_CONNECTED_TO_5GC";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, ReportingAccessType_anyOf& o) {
+void from_json(const nlohmann::json &j, ReportingAccessType_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "NR") {
     o.setValue(ReportingAccessType_anyOf::eReportingAccessType_anyOf::NR);
@@ -108,4 +108,4 @@ void ReportingAccessType_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

@@ -35,7 +35,7 @@ namespace oai::udr::model {
 /// Contains the UE policy set for a given subscriber.
 /// </summary>
 class UePolicySetPatch {
- public:
+public:
   UePolicySetPatch();
   virtual ~UePolicySetPatch();
 
@@ -47,15 +47,15 @@ class UePolicySetPatch {
   /// <summary>
   ///
   /// </summary>
-  std::map<std::string, UePolicySection>& getUePolicySections();
-  void setUePolicySections(std::map<std::string, UePolicySection> const& value);
+  std::map<std::string, UePolicySection> &getUePolicySections();
+  void setUePolicySections(std::map<std::string, UePolicySection> const &value);
   bool uePolicySectionsIsSet() const;
   void unsetUePolicySections();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getUpsis();
-  void setUpsis(std::vector<std::string> const& value);
+  std::vector<std::string> &getUpsis();
+  void setUpsis(std::vector<std::string> const &value);
   bool upsisIsSet() const;
   void unsetUpsis();
   /// <summary>
@@ -69,21 +69,21 @@ class UePolicySetPatch {
   ///
   /// </summary>
   std::string getPei() const;
-  void setPei(std::string const& value);
+  void setPei(std::string const &value);
   bool peiIsSet() const;
   void unsetPei();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getOsIds();
-  void setOsIds(std::vector<std::string> const& value);
+  std::vector<std::string> &getOsIds();
+  void setOsIds(std::vector<std::string> const &value);
   bool osIdsIsSet() const;
   void unsetOsIds();
 
-  friend void to_json(nlohmann::json& j, const UePolicySetPatch& o);
-  friend void from_json(const nlohmann::json& j, UePolicySetPatch& o);
+  friend void to_json(nlohmann::json &j, const UePolicySetPatch &o);
+  friend void from_json(const nlohmann::json &j, UePolicySetPatch &o);
 
- protected:
+protected:
   std::map<std::string, UePolicySection> m_UePolicySections;
   bool m_UePolicySectionsIsSet;
   std::vector<std::string> m_Upsis;
@@ -96,6 +96,6 @@ class UePolicySetPatch {
   bool m_OsIdsIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* UePolicySetPatch_H_ */

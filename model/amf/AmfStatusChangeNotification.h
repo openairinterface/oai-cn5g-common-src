@@ -20,8 +20,8 @@
 #define AmfStatusChangeNotification_H_
 
 #include "AmfStatusInfo.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::amf {
 
@@ -29,7 +29,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class AmfStatusChangeNotification {
- public:
+public:
   AmfStatusChangeNotification();
   virtual ~AmfStatusChangeNotification();
 
@@ -41,16 +41,16 @@ class AmfStatusChangeNotification {
   /// <summary>
   ///
   /// </summary>
-  std::vector<AmfStatusInfo>& getAmfStatusInfoList();
+  std::vector<AmfStatusInfo> &getAmfStatusInfoList();
 
-  friend void to_json(nlohmann::json& j, const AmfStatusChangeNotification& o);
-  friend void from_json(
-      const nlohmann::json& j, AmfStatusChangeNotification& o);
+  friend void to_json(nlohmann::json &j, const AmfStatusChangeNotification &o);
+  friend void from_json(const nlohmann::json &j,
+                        AmfStatusChangeNotification &o);
 
- protected:
+protected:
   std::vector<AmfStatusInfo> m_AmfStatusInfoList;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* AmfStatusChangeNotification_H_ */

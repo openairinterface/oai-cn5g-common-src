@@ -20,13 +20,13 @@
 #define ExtendedProblemDetails_H_
 
 #include "AcceptableServiceInfo.h"
-#include "NoProfileMatchInfo.h"
-#include <string>
-#include "InvalidParam.h"
 #include "AccessTokenErr.h"
 #include "AccessTokenReq.h"
-#include <vector>
+#include "InvalidParam.h"
+#include "NoProfileMatchInfo.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::pcf {
 
@@ -34,7 +34,7 @@ namespace oai::model::pcf {
 /// Extends ProblemDetails to also include the acceptable service info.
 /// </summary>
 class ExtendedProblemDetails {
- public:
+public:
   ExtendedProblemDetails();
   virtual ~ExtendedProblemDetails() = default;
 
@@ -48,16 +48,16 @@ class ExtendedProblemDetails {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const ExtendedProblemDetails& rhs) const;
-  bool operator!=(const ExtendedProblemDetails& rhs) const;
+  bool operator==(const ExtendedProblemDetails &rhs) const;
+  bool operator!=(const ExtendedProblemDetails &rhs) const;
 
   /////////////////////////////////////////////
   /// ExtendedProblemDetails members
@@ -66,14 +66,14 @@ class ExtendedProblemDetails {
   /// String providing an URI formatted according to RFC 3986.
   /// </summary>
   std::string getType() const;
-  void setType(std::string const& value);
+  void setType(std::string const &value);
   bool typeIsSet() const;
   void unsetType();
   /// <summary>
   ///
   /// </summary>
   std::string getTitle() const;
-  void setTitle(std::string const& value);
+  void setTitle(std::string const &value);
   bool titleIsSet() const;
   void unsetTitle();
   /// <summary>
@@ -87,14 +87,14 @@ class ExtendedProblemDetails {
   /// A human-readable explanation specific to this occurrence of the problem.
   /// </summary>
   std::string getDetail() const;
-  void setDetail(std::string const& value);
+  void setDetail(std::string const &value);
   bool detailIsSet() const;
   void unsetDetail();
   /// <summary>
   /// String providing an URI formatted according to RFC 3986.
   /// </summary>
   std::string getInstance() const;
-  void setInstance(std::string const& value);
+  void setInstance(std::string const &value);
   bool instanceIsSet() const;
   void unsetInstance();
   /// <summary>
@@ -103,15 +103,15 @@ class ExtendedProblemDetails {
   /// error information, if available.
   /// </summary>
   std::string getCause() const;
-  void setCause(std::string const& value);
+  void setCause(std::string const &value);
   bool causeIsSet() const;
   void unsetCause();
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::common::InvalidParam> getInvalidParams() const;
-  void setInvalidParams(
-      std::vector<oai::model::common::InvalidParam> const& value);
+  void
+  setInvalidParams(std::vector<oai::model::common::InvalidParam> const &value);
   bool invalidParamsIsSet() const;
   void unsetInvalidParams();
   /// <summary>
@@ -131,57 +131,57 @@ class ExtendedProblemDetails {
   /// not supported.
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::AccessTokenErr getAccessTokenError() const;
-  void setAccessTokenError(oai::model::common::AccessTokenErr const& value);
+  void setAccessTokenError(oai::model::common::AccessTokenErr const &value);
   bool accessTokenErrorIsSet() const;
   void unsetAccessTokenError();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::AccessTokenReq getAccessTokenRequest() const;
-  void setAccessTokenRequest(oai::model::common::AccessTokenReq const& value);
+  void setAccessTokenRequest(oai::model::common::AccessTokenReq const &value);
   bool accessTokenRequestIsSet() const;
   void unsetAccessTokenRequest();
   /// <summary>
   /// Fully Qualified Domain Name
   /// </summary>
   std::string getNrfId() const;
-  void setNrfId(std::string const& value);
+  void setNrfId(std::string const &value);
   bool nrfIdIsSet() const;
   void unsetNrfId();
   /// <summary>
   ///
   /// </summary>
   std::vector<std::string> getSupportedApiVersions() const;
-  void setSupportedApiVersions(std::vector<std::string> const& value);
+  void setSupportedApiVersions(std::vector<std::string> const &value);
   bool supportedApiVersionsIsSet() const;
   void unsetSupportedApiVersions();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::NoProfileMatchInfo getNoProfileMatchInfo() const;
-  void setNoProfileMatchInfo(oai::model::pcf::NoProfileMatchInfo const& value);
+  void setNoProfileMatchInfo(oai::model::pcf::NoProfileMatchInfo const &value);
   bool noProfileMatchInfoIsSet() const;
   void unsetNoProfileMatchInfo();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::AcceptableServiceInfo getAcceptableServInfo() const;
-  void setAcceptableServInfo(
-      oai::model::pcf::AcceptableServiceInfo const& value);
+  void
+  setAcceptableServInfo(oai::model::pcf::AcceptableServiceInfo const &value);
   bool acceptableServInfoIsSet() const;
   void unsetAcceptableServInfo();
 
-  friend void to_json(nlohmann::json& j, const ExtendedProblemDetails& o);
-  friend void from_json(const nlohmann::json& j, ExtendedProblemDetails& o);
+  friend void to_json(nlohmann::json &j, const ExtendedProblemDetails &o);
+  friend void from_json(const nlohmann::json &j, ExtendedProblemDetails &o);
 
- protected:
+protected:
   std::string m_Type;
   bool m_TypeIsSet;
   std::string m_Title;
@@ -212,6 +212,6 @@ class ExtendedProblemDetails {
   bool m_AcceptableServInfoIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* ExtendedProblemDetails_H_ */

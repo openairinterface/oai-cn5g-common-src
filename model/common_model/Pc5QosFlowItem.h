@@ -28,7 +28,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class Pc5QosFlowItem {
- public:
+public:
   Pc5QosFlowItem();
   virtual ~Pc5QosFlowItem() = default;
 
@@ -42,16 +42,16 @@ class Pc5QosFlowItem {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const Pc5QosFlowItem& rhs) const;
-  bool operator!=(const Pc5QosFlowItem& rhs) const;
+  bool operator==(const Pc5QosFlowItem &rhs) const;
+  bool operator!=(const Pc5QosFlowItem &rhs) const;
 
   /////////////////////////////////////////////
   /// Pc5QosFlowItem members
@@ -65,7 +65,7 @@ class Pc5QosFlowItem {
   ///
   /// </summary>
   oai::model::common::Pc5FlowBitRates getPc5FlowBitRates() const;
-  void setPc5FlowBitRates(oai::model::common::Pc5FlowBitRates const& value);
+  void setPc5FlowBitRates(oai::model::common::Pc5FlowBitRates const &value);
   bool pc5FlowBitRatesIsSet() const;
   void unsetPc5FlowBitRates();
   /// <summary>
@@ -76,10 +76,10 @@ class Pc5QosFlowItem {
   bool rangeIsSet() const;
   void unsetRange();
 
-  friend void to_json(nlohmann::json& j, const Pc5QosFlowItem& o);
-  friend void from_json(const nlohmann::json& j, Pc5QosFlowItem& o);
+  friend void to_json(nlohmann::json &j, const Pc5QosFlowItem &o);
+  friend void from_json(const nlohmann::json &j, Pc5QosFlowItem &o);
 
- protected:
+protected:
   int32_t m_Pqi;
 
   oai::model::common::Pc5FlowBitRates m_Pc5FlowBitRates;
@@ -88,6 +88,6 @@ class Pc5QosFlowItem {
   bool m_RangeIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* Pc5QosFlowItem_H_ */

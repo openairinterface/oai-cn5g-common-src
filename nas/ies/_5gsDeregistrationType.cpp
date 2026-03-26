@@ -29,11 +29,11 @@ _5gsDeregistrationType::_5gsDeregistrationType(uint8_t iei, uint8_t value) {
 //------------------------------------------------------------------------------
 _5gsDeregistrationType::_5gsDeregistrationType(
     _5gs_deregistration_type_t type) {
-  u1.b                           = 0;
-  u1.bf.switch_off               = type.switch_off;
+  u1.b = 0;
+  u1.bf.switch_off = type.switch_off;
   u1.bf.re_registration_required = type.re_registration_required;
-  u1.bf.access_type              = type.access_type;
-  u1.bf.iei                      = type.iei;
+  u1.bf.access_type = type.access_type;
+  u1.bf.iei = type.iei;
   if (type.iei != 0) {
     SetIei(type.iei);
   }
@@ -57,12 +57,12 @@ void _5gsDeregistrationType::GetValue() {
 }
 
 //------------------------------------------------------------------------------
-void _5gsDeregistrationType::Set(const _5gs_deregistration_type_t& type) {
-  u1.b                           = 0;
-  u1.bf.switch_off               = type.switch_off;
+void _5gsDeregistrationType::Set(const _5gs_deregistration_type_t &type) {
+  u1.b = 0;
+  u1.bf.switch_off = type.switch_off;
   u1.bf.re_registration_required = type.re_registration_required;
-  u1.bf.access_type              = type.access_type;
-  u1.bf.iei                      = type.iei;
+  u1.bf.access_type = type.access_type;
+  u1.bf.iei = type.iei;
   if (type.iei != 0) {
     SetIei(type.iei);
   }
@@ -70,19 +70,15 @@ void _5gsDeregistrationType::Set(const _5gs_deregistration_type_t& type) {
 }
 
 //------------------------------------------------------------------------------
-void _5gsDeregistrationType::Get(_5gs_deregistration_type_t& type) const {
-  type.switch_off               = u1.bf.switch_off;
+void _5gsDeregistrationType::Get(_5gs_deregistration_type_t &type) const {
+  type.switch_off = u1.bf.switch_off;
   type.re_registration_required = u1.bf.re_registration_required;
-  type.access_type              = u1.bf.access_type;
-  type.iei                      = u1.bf.iei;
+  type.access_type = u1.bf.access_type;
+  type.iei = u1.bf.iei;
 }
 
 //------------------------------------------------------------------------------
-void _5gsDeregistrationType::Set(uint8_t type) {
-  u1.b = type;
-}
+void _5gsDeregistrationType::Set(uint8_t type) { u1.b = type; }
 
 //------------------------------------------------------------------------------
-void _5gsDeregistrationType::Get(uint8_t& type) const {
-  type = u1.b;
-}
+void _5gsDeregistrationType::Get(uint8_t &type) const { type = u1.b; }

@@ -19,15 +19,15 @@
 namespace oai::udr::model {
 
 UsageMonDataLimit::UsageMonDataLimit() {
-  m_LimitId          = "";
-  m_ScopesIsSet      = false;
-  m_UmLevelIsSet     = false;
-  m_StartDate        = "";
-  m_StartDateIsSet   = false;
-  m_EndDate          = "";
-  m_EndDateIsSet     = false;
-  m_UsageLimitIsSet  = false;
-  m_ResetPeriod      = "";
+  m_LimitId = "";
+  m_ScopesIsSet = false;
+  m_UmLevelIsSet = false;
+  m_StartDate = "";
+  m_StartDateIsSet = false;
+  m_EndDate = "";
+  m_EndDateIsSet = false;
+  m_UsageLimitIsSet = false;
+  m_ResetPeriod = "";
   m_ResetPeriodIsSet = false;
 }
 
@@ -37,18 +37,24 @@ void UsageMonDataLimit::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const UsageMonDataLimit& o) {
-  j            = nlohmann::json();
+void to_json(nlohmann::json &j, const UsageMonDataLimit &o) {
+  j = nlohmann::json();
   j["limitId"] = o.m_LimitId;
-  if (o.scopesIsSet() || !o.m_Scopes.empty()) j["scopes"] = o.m_Scopes;
-  if (o.umLevelIsSet()) j["umLevel"] = o.m_UmLevel;
-  if (o.startDateIsSet()) j["startDate"] = o.m_StartDate;
-  if (o.endDateIsSet()) j["endDate"] = o.m_EndDate;
-  if (o.usageLimitIsSet()) j["usageLimit"] = o.m_UsageLimit;
-  if (o.resetPeriodIsSet()) j["resetPeriod"] = o.m_ResetPeriod;
+  if (o.scopesIsSet() || !o.m_Scopes.empty())
+    j["scopes"] = o.m_Scopes;
+  if (o.umLevelIsSet())
+    j["umLevel"] = o.m_UmLevel;
+  if (o.startDateIsSet())
+    j["startDate"] = o.m_StartDate;
+  if (o.endDateIsSet())
+    j["endDate"] = o.m_EndDate;
+  if (o.usageLimitIsSet())
+    j["usageLimit"] = o.m_UsageLimit;
+  if (o.resetPeriodIsSet())
+    j["resetPeriod"] = o.m_ResetPeriod;
 }
 
-void from_json(const nlohmann::json& j, UsageMonDataLimit& o) {
+void from_json(const nlohmann::json &j, UsageMonDataLimit &o) {
   j.at("limitId").get_to(o.m_LimitId);
   if (j.find("scopes") != j.end()) {
     j.at("scopes").get_to(o.m_Scopes);
@@ -76,90 +82,54 @@ void from_json(const nlohmann::json& j, UsageMonDataLimit& o) {
   }
 }
 
-std::string UsageMonDataLimit::getLimitId() const {
-  return m_LimitId;
-}
-void UsageMonDataLimit::setLimitId(std::string const& value) {
+std::string UsageMonDataLimit::getLimitId() const { return m_LimitId; }
+void UsageMonDataLimit::setLimitId(std::string const &value) {
   m_LimitId = value;
 }
-std::map<std::string, UsageMonDataScope>& UsageMonDataLimit::getScopes() {
+std::map<std::string, UsageMonDataScope> &UsageMonDataLimit::getScopes() {
   return m_Scopes;
 }
 void UsageMonDataLimit::setScopes(
-    std::map<std::string, UsageMonDataScope> const& value) {
-  m_Scopes      = value;
+    std::map<std::string, UsageMonDataScope> const &value) {
+  m_Scopes = value;
   m_ScopesIsSet = true;
 }
-bool UsageMonDataLimit::scopesIsSet() const {
-  return m_ScopesIsSet;
-}
-void UsageMonDataLimit::unsetScopes() {
-  m_ScopesIsSet = false;
-}
-UsageMonLevel UsageMonDataLimit::getUmLevel() const {
-  return m_UmLevel;
-}
-void UsageMonDataLimit::setUmLevel(UsageMonLevel const& value) {
-  m_UmLevel      = value;
+bool UsageMonDataLimit::scopesIsSet() const { return m_ScopesIsSet; }
+void UsageMonDataLimit::unsetScopes() { m_ScopesIsSet = false; }
+UsageMonLevel UsageMonDataLimit::getUmLevel() const { return m_UmLevel; }
+void UsageMonDataLimit::setUmLevel(UsageMonLevel const &value) {
+  m_UmLevel = value;
   m_UmLevelIsSet = true;
 }
-bool UsageMonDataLimit::umLevelIsSet() const {
-  return m_UmLevelIsSet;
-}
-void UsageMonDataLimit::unsetUmLevel() {
-  m_UmLevelIsSet = false;
-}
-std::string UsageMonDataLimit::getStartDate() const {
-  return m_StartDate;
-}
-void UsageMonDataLimit::setStartDate(std::string const& value) {
-  m_StartDate      = value;
+bool UsageMonDataLimit::umLevelIsSet() const { return m_UmLevelIsSet; }
+void UsageMonDataLimit::unsetUmLevel() { m_UmLevelIsSet = false; }
+std::string UsageMonDataLimit::getStartDate() const { return m_StartDate; }
+void UsageMonDataLimit::setStartDate(std::string const &value) {
+  m_StartDate = value;
   m_StartDateIsSet = true;
 }
-bool UsageMonDataLimit::startDateIsSet() const {
-  return m_StartDateIsSet;
-}
-void UsageMonDataLimit::unsetStartDate() {
-  m_StartDateIsSet = false;
-}
-std::string UsageMonDataLimit::getEndDate() const {
-  return m_EndDate;
-}
-void UsageMonDataLimit::setEndDate(std::string const& value) {
-  m_EndDate      = value;
+bool UsageMonDataLimit::startDateIsSet() const { return m_StartDateIsSet; }
+void UsageMonDataLimit::unsetStartDate() { m_StartDateIsSet = false; }
+std::string UsageMonDataLimit::getEndDate() const { return m_EndDate; }
+void UsageMonDataLimit::setEndDate(std::string const &value) {
+  m_EndDate = value;
   m_EndDateIsSet = true;
 }
-bool UsageMonDataLimit::endDateIsSet() const {
-  return m_EndDateIsSet;
-}
-void UsageMonDataLimit::unsetEndDate() {
-  m_EndDateIsSet = false;
-}
-UsageThreshold UsageMonDataLimit::getUsageLimit() const {
-  return m_UsageLimit;
-}
-void UsageMonDataLimit::setUsageLimit(UsageThreshold const& value) {
-  m_UsageLimit      = value;
+bool UsageMonDataLimit::endDateIsSet() const { return m_EndDateIsSet; }
+void UsageMonDataLimit::unsetEndDate() { m_EndDateIsSet = false; }
+UsageThreshold UsageMonDataLimit::getUsageLimit() const { return m_UsageLimit; }
+void UsageMonDataLimit::setUsageLimit(UsageThreshold const &value) {
+  m_UsageLimit = value;
   m_UsageLimitIsSet = true;
 }
-bool UsageMonDataLimit::usageLimitIsSet() const {
-  return m_UsageLimitIsSet;
-}
-void UsageMonDataLimit::unsetUsageLimit() {
-  m_UsageLimitIsSet = false;
-}
-std::string UsageMonDataLimit::getResetPeriod() const {
-  return m_ResetPeriod;
-}
-void UsageMonDataLimit::setResetPeriod(std::string const& value) {
-  m_ResetPeriod      = value;
+bool UsageMonDataLimit::usageLimitIsSet() const { return m_UsageLimitIsSet; }
+void UsageMonDataLimit::unsetUsageLimit() { m_UsageLimitIsSet = false; }
+std::string UsageMonDataLimit::getResetPeriod() const { return m_ResetPeriod; }
+void UsageMonDataLimit::setResetPeriod(std::string const &value) {
+  m_ResetPeriod = value;
   m_ResetPeriodIsSet = true;
 }
-bool UsageMonDataLimit::resetPeriodIsSet() const {
-  return m_ResetPeriodIsSet;
-}
-void UsageMonDataLimit::unsetResetPeriod() {
-  m_ResetPeriodIsSet = false;
-}
+bool UsageMonDataLimit::resetPeriodIsSet() const { return m_ResetPeriodIsSet; }
+void UsageMonDataLimit::unsetResetPeriod() { m_ResetPeriodIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

@@ -30,7 +30,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class AdditionalSnssaiData {
- public:
+public:
   AdditionalSnssaiData();
   virtual ~AdditionalSnssaiData();
 
@@ -47,14 +47,14 @@ class AdditionalSnssaiData {
   bool requiredAuthnAuthzIsSet() const;
   void unsetRequiredAuthnAuthz();
 
-  friend void to_json(nlohmann::json& j, const AdditionalSnssaiData& o);
-  friend void from_json(const nlohmann::json& j, AdditionalSnssaiData& o);
+  friend void to_json(nlohmann::json &j, const AdditionalSnssaiData &o);
+  friend void from_json(const nlohmann::json &j, AdditionalSnssaiData &o);
 
- protected:
+protected:
   bool m_RequiredAuthnAuthz;
   bool m_RequiredAuthnAuthzIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* AdditionalSnssaiData_H_ */

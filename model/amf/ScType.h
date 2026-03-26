@@ -27,7 +27,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class ScType {
- public:
+public:
   ScType();
   virtual ~ScType();
 
@@ -36,12 +36,12 @@ class ScType {
   /////////////////////////////////////////////
   /// ScType members
 
-  friend void to_json(nlohmann::json& j, const ScType& o);
-  friend void from_json(const nlohmann::json& j, ScType& o);
+  friend void to_json(nlohmann::json &j, const ScType &o);
+  friend void from_json(const nlohmann::json &j, ScType &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* ScType_H_ */

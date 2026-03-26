@@ -19,25 +19,25 @@
 #ifndef InputData_H_
 #define InputData_H_
 
-#include "LcsPriority.h"
 #include "AreaEventInfo.h"
-#include "Ncgi.h"
-#include "UeConnectivityState.h"
-#include "RefToBinaryData.h"
-#include <string>
-#include "ExternalClientType.h"
-#include "PeriodicEventInfo.h"
-#include "ReportingAccessType.h"
-#include "UeLocationServiceInd.h"
-#include <vector>
 #include "Ecgi.h"
+#include "ExternalClientType.h"
+#include "LcsPriority.h"
 #include "LdrType.h"
-#include "UeLcsCapability.h"
 #include "LocationQoS.h"
-#include "VelocityRequested.h"
 #include "MotionEventInfo.h"
+#include "Ncgi.h"
+#include "PeriodicEventInfo.h"
+#include "RefToBinaryData.h"
+#include "ReportingAccessType.h"
 #include "SupportedGADShapes.h"
+#include "UeConnectivityState.h"
+#include "UeLcsCapability.h"
+#include "UeLocationServiceInd.h"
+#include "VelocityRequested.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::lmf {
 
@@ -45,7 +45,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class InputData {
- public:
+public:
   InputData();
   virtual ~InputData() = default;
 
@@ -59,16 +59,16 @@ class InputData {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const InputData& rhs) const;
-  bool operator!=(const InputData& rhs) const;
+  bool operator==(const InputData &rhs) const;
+  bool operator!=(const InputData &rhs) const;
 
   /////////////////////////////////////////////
   /// InputData members
@@ -77,107 +77,107 @@ class InputData {
   ///
   /// </summary>
   oai::model::lmf::ExternalClientType getExternalClientType() const;
-  void setExternalClientType(oai::model::lmf::ExternalClientType const& value);
+  void setExternalClientType(oai::model::lmf::ExternalClientType const &value);
   bool externalClientTypeIsSet() const;
   void unsetExternalClientType();
   /// <summary>
   ///
   /// </summary>
   std::string getCorrelationID() const;
-  void setCorrelationID(std::string const& value);
+  void setCorrelationID(std::string const &value);
   bool correlationIDIsSet() const;
   void unsetCorrelationID();
   /// <summary>
   ///
   /// </summary>
   std::string getAmfId() const;
-  void setAmfId(std::string const& value);
+  void setAmfId(std::string const &value);
   bool amfIdIsSet() const;
   void unsetAmfId();
   /// <summary>
   ///
   /// </summary>
   oai::model::lmf::LocationQoS getLocationQoS() const;
-  void setLocationQoS(oai::model::lmf::LocationQoS const& value);
+  void setLocationQoS(oai::model::lmf::LocationQoS const &value);
   bool locationQoSIsSet() const;
   void unsetLocationQoS();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::lmf::SupportedGADShapes> getSupportedGADShapes()
-      const;
+  std::vector<oai::model::lmf::SupportedGADShapes>
+  getSupportedGADShapes() const;
   void setSupportedGADShapes(
-      std::vector<oai::model::lmf::SupportedGADShapes> const& value);
+      std::vector<oai::model::lmf::SupportedGADShapes> const &value);
   bool supportedGADShapesIsSet() const;
   void unsetSupportedGADShapes();
   /// <summary>
   ///
   /// </summary>
   std::string getSupi() const;
-  void setSupi(std::string const& value);
+  void setSupi(std::string const &value);
   bool supiIsSet() const;
   void unsetSupi();
   /// <summary>
   ///
   /// </summary>
   std::string getPei() const;
-  void setPei(std::string const& value);
+  void setPei(std::string const &value);
   bool peiIsSet() const;
   void unsetPei();
   /// <summary>
   ///
   /// </summary>
   std::string getGpsi() const;
-  void setGpsi(std::string const& value);
+  void setGpsi(std::string const &value);
   bool gpsiIsSet() const;
   void unsetGpsi();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ecgi getEcgi() const;
-  void setEcgi(oai::model::common::Ecgi const& value);
+  void setEcgi(oai::model::common::Ecgi const &value);
   bool ecgiIsSet() const;
   void unsetEcgi();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ecgi getEcgiOnSecondNode() const;
-  void setEcgiOnSecondNode(oai::model::common::Ecgi const& value);
+  void setEcgiOnSecondNode(oai::model::common::Ecgi const &value);
   bool ecgiOnSecondNodeIsSet() const;
   void unsetEcgiOnSecondNode();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ncgi getNcgi() const;
-  void setNcgi(oai::model::common::Ncgi const& value);
+  void setNcgi(oai::model::common::Ncgi const &value);
   bool ncgiIsSet() const;
   void unsetNcgi();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ncgi getNcgiOnSecondNode() const;
-  void setNcgiOnSecondNode(oai::model::common::Ncgi const& value);
+  void setNcgiOnSecondNode(oai::model::common::Ncgi const &value);
   bool ncgiOnSecondNodeIsSet() const;
   void unsetNcgiOnSecondNode();
   /// <summary>
   ///
   /// </summary>
   oai::model::lmf::LcsPriority getPriority() const;
-  void setPriority(oai::model::lmf::LcsPriority const& value);
+  void setPriority(oai::model::lmf::LcsPriority const &value);
   bool priorityIsSet() const;
   void unsetPriority();
   /// <summary>
   ///
   /// </summary>
   oai::model::lmf::VelocityRequested getVelocityRequested() const;
-  void setVelocityRequested(oai::model::lmf::VelocityRequested const& value);
+  void setVelocityRequested(oai::model::lmf::VelocityRequested const &value);
   bool velocityRequestedIsSet() const;
   void unsetVelocityRequested();
   /// <summary>
   ///
   /// </summary>
   oai::model::lmf::UeLcsCapability getUeLcsCap() const;
-  void setUeLcsCap(oai::model::lmf::UeLcsCapability const& value);
+  void setUeLcsCap(oai::model::lmf::UeLcsCapability const &value);
   bool ueLcsCapIsSet() const;
   void unsetUeLcsCap();
   /// <summary>
@@ -191,95 +191,95 @@ class InputData {
   ///
   /// </summary>
   oai::model::lmf::LdrType getLdrType() const;
-  void setLdrType(oai::model::lmf::LdrType const& value);
+  void setLdrType(oai::model::lmf::LdrType const &value);
   bool ldrTypeIsSet() const;
   void unsetLdrType();
   /// <summary>
   ///
   /// </summary>
   std::string getHgmlcCallBackURI() const;
-  void setHgmlcCallBackURI(std::string const& value);
+  void setHgmlcCallBackURI(std::string const &value);
   bool hgmlcCallBackURIIsSet() const;
   void unsetHgmlcCallBackURI();
   /// <summary>
   ///
   /// </summary>
   std::string getVgmlcAddress() const;
-  void setVgmlcAddress(std::string const& value);
+  void setVgmlcAddress(std::string const &value);
   bool vgmlcAddressIsSet() const;
   void unsetVgmlcAddress();
   /// <summary>
   ///
   /// </summary>
   std::string getLdrReference() const;
-  void setLdrReference(std::string const& value);
+  void setLdrReference(std::string const &value);
   bool ldrReferenceIsSet() const;
   void unsetLdrReference();
   /// <summary>
   ///
   /// </summary>
   oai::model::lmf::PeriodicEventInfo getPeriodicEventInfo() const;
-  void setPeriodicEventInfo(oai::model::lmf::PeriodicEventInfo const& value);
+  void setPeriodicEventInfo(oai::model::lmf::PeriodicEventInfo const &value);
   bool periodicEventInfoIsSet() const;
   void unsetPeriodicEventInfo();
   /// <summary>
   ///
   /// </summary>
   oai::model::lmf::AreaEventInfo getAreaEventInfo() const;
-  void setAreaEventInfo(oai::model::lmf::AreaEventInfo const& value);
+  void setAreaEventInfo(oai::model::lmf::AreaEventInfo const &value);
   bool areaEventInfoIsSet() const;
   void unsetAreaEventInfo();
   /// <summary>
   ///
   /// </summary>
   oai::model::lmf::MotionEventInfo getMotionEventInfo() const;
-  void setMotionEventInfo(oai::model::lmf::MotionEventInfo const& value);
+  void setMotionEventInfo(oai::model::lmf::MotionEventInfo const &value);
   bool motionEventInfoIsSet() const;
   void unsetMotionEventInfo();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::lmf::ReportingAccessType> getReportingAccessTypes()
-      const;
+  std::vector<oai::model::lmf::ReportingAccessType>
+  getReportingAccessTypes() const;
   void setReportingAccessTypes(
-      std::vector<oai::model::lmf::ReportingAccessType> const& value);
+      std::vector<oai::model::lmf::ReportingAccessType> const &value);
   bool reportingAccessTypesIsSet() const;
   void unsetReportingAccessTypes();
   /// <summary>
   ///
   /// </summary>
   oai::model::lmf::UeConnectivityState getUeConnectivityStates() const;
-  void setUeConnectivityStates(
-      oai::model::lmf::UeConnectivityState const& value);
+  void
+  setUeConnectivityStates(oai::model::lmf::UeConnectivityState const &value);
   bool ueConnectivityStatesIsSet() const;
   void unsetUeConnectivityStates();
   /// <summary>
   ///
   /// </summary>
   oai::model::lmf::UeLocationServiceInd getUeLocationServiceInd() const;
-  void setUeLocationServiceInd(
-      oai::model::lmf::UeLocationServiceInd const& value);
+  void
+  setUeLocationServiceInd(oai::model::lmf::UeLocationServiceInd const &value);
   bool ueLocationServiceIndIsSet() const;
   void unsetUeLocationServiceInd();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::RefToBinaryData getLppMessage() const;
-  void setLppMessage(oai::model::common::RefToBinaryData const& value);
+  void setLppMessage(oai::model::common::RefToBinaryData const &value);
   bool lppMessageIsSet() const;
   void unsetLppMessage();
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
 
-  friend void to_json(nlohmann::json& j, const InputData& o);
-  friend void from_json(const nlohmann::json& j, InputData& o);
+  friend void to_json(nlohmann::json &j, const InputData &o);
+  friend void from_json(const nlohmann::json &j, InputData &o);
 
- protected:
+protected:
   oai::model::lmf::ExternalClientType m_ExternalClientType;
   bool m_ExternalClientTypeIsSet;
   std::string m_CorrelationID;
@@ -338,6 +338,6 @@ class InputData {
   bool m_SupportedFeaturesIsSet;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* InputData_H_ */

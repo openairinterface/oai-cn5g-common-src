@@ -68,7 +68,7 @@ asn_TYPE_member_t asn_MBR_Ngap_CellIDCancelledNR_Item_1[] = {
      0, /* No default value */
      "iE-Extensions"},
 };
-static const int asn_MAP_Ngap_CellIDCancelledNR_Item_oms_1[]            = {2};
+static const int asn_MAP_Ngap_CellIDCancelledNR_Item_oms_1[] = {2};
 static const ber_tlv_tag_t asn_DEF_Ngap_CellIDCancelledNR_Item_tags_1[] = {
     (ASN_TAG_CLASS_UNIVERSAL | (16 << 2))};
 static const asn_TYPE_tag2member_t

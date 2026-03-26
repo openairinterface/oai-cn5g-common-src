@@ -31,7 +31,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class ReachabilityForDataReportConfig {
- public:
+public:
   ReachabilityForDataReportConfig();
   virtual ~ReachabilityForDataReportConfig() = default;
 
@@ -45,25 +45,25 @@ class ReachabilityForDataReportConfig {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const ReachabilityForDataReportConfig& rhs) const;
-  bool operator!=(const ReachabilityForDataReportConfig& rhs) const;
+  bool operator==(const ReachabilityForDataReportConfig &rhs) const;
+  bool operator!=(const ReachabilityForDataReportConfig &rhs) const;
 
   /////////////////////////////////////////////
   /// ReachabilityForDataReportConfig members
 
-  friend void to_json(
-      nlohmann::json& j, const ReachabilityForDataReportConfig& o);
-  friend void from_json(
-      const nlohmann::json& j, ReachabilityForDataReportConfig& o);
+  friend void to_json(nlohmann::json &j,
+                      const ReachabilityForDataReportConfig &o);
+  friend void from_json(const nlohmann::json &j,
+                        ReachabilityForDataReportConfig &o);
 
- protected:
+protected:
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* ReachabilityForDataReportConfig_H_ */

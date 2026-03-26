@@ -19,11 +19,11 @@
 namespace oai::udr::model {
 
 VgmlcAddress::VgmlcAddress() {
-  m_VgmlcAddressIpv4      = "";
+  m_VgmlcAddressIpv4 = "";
   m_VgmlcAddressIpv4IsSet = false;
   m_VgmlcAddressIpv6IsSet = false;
-  m_VgmlcFqdn             = "";
-  m_VgmlcFqdnIsSet        = false;
+  m_VgmlcFqdn = "";
+  m_VgmlcFqdnIsSet = false;
 }
 
 VgmlcAddress::~VgmlcAddress() {}
@@ -32,14 +32,17 @@ void VgmlcAddress::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const VgmlcAddress& o) {
+void to_json(nlohmann::json &j, const VgmlcAddress &o) {
   j = nlohmann::json();
-  if (o.vgmlcAddressIpv4IsSet()) j["vgmlcAddressIpv4"] = o.m_VgmlcAddressIpv4;
-  if (o.vgmlcAddressIpv6IsSet()) j["vgmlcAddressIpv6"] = o.m_VgmlcAddressIpv6;
-  if (o.vgmlcFqdnIsSet()) j["vgmlcFqdn"] = o.m_VgmlcFqdn;
+  if (o.vgmlcAddressIpv4IsSet())
+    j["vgmlcAddressIpv4"] = o.m_VgmlcAddressIpv4;
+  if (o.vgmlcAddressIpv6IsSet())
+    j["vgmlcAddressIpv6"] = o.m_VgmlcAddressIpv6;
+  if (o.vgmlcFqdnIsSet())
+    j["vgmlcFqdn"] = o.m_VgmlcFqdn;
 }
 
-void from_json(const nlohmann::json& j, VgmlcAddress& o) {
+void from_json(const nlohmann::json &j, VgmlcAddress &o) {
   if (j.find("vgmlcAddressIpv4") != j.end()) {
     j.at("vgmlcAddressIpv4").get_to(o.m_VgmlcAddressIpv4);
     o.m_VgmlcAddressIpv4IsSet = true;
@@ -57,42 +60,32 @@ void from_json(const nlohmann::json& j, VgmlcAddress& o) {
 std::string VgmlcAddress::getVgmlcAddressIpv4() const {
   return m_VgmlcAddressIpv4;
 }
-void VgmlcAddress::setVgmlcAddressIpv4(std::string const& value) {
-  m_VgmlcAddressIpv4      = value;
+void VgmlcAddress::setVgmlcAddressIpv4(std::string const &value) {
+  m_VgmlcAddressIpv4 = value;
   m_VgmlcAddressIpv4IsSet = true;
 }
 bool VgmlcAddress::vgmlcAddressIpv4IsSet() const {
   return m_VgmlcAddressIpv4IsSet;
 }
-void VgmlcAddress::unsetVgmlcAddressIpv4() {
-  m_VgmlcAddressIpv4IsSet = false;
-}
+void VgmlcAddress::unsetVgmlcAddressIpv4() { m_VgmlcAddressIpv4IsSet = false; }
 oai::model::common::Ipv6Addr VgmlcAddress::getVgmlcAddressIpv6() const {
   return m_VgmlcAddressIpv6;
 }
 void VgmlcAddress::setVgmlcAddressIpv6(
-    oai::model::common::Ipv6Addr const& value) {
-  m_VgmlcAddressIpv6      = value;
+    oai::model::common::Ipv6Addr const &value) {
+  m_VgmlcAddressIpv6 = value;
   m_VgmlcAddressIpv6IsSet = true;
 }
 bool VgmlcAddress::vgmlcAddressIpv6IsSet() const {
   return m_VgmlcAddressIpv6IsSet;
 }
-void VgmlcAddress::unsetVgmlcAddressIpv6() {
-  m_VgmlcAddressIpv6IsSet = false;
-}
-std::string VgmlcAddress::getVgmlcFqdn() const {
-  return m_VgmlcFqdn;
-}
-void VgmlcAddress::setVgmlcFqdn(std::string const& value) {
-  m_VgmlcFqdn      = value;
+void VgmlcAddress::unsetVgmlcAddressIpv6() { m_VgmlcAddressIpv6IsSet = false; }
+std::string VgmlcAddress::getVgmlcFqdn() const { return m_VgmlcFqdn; }
+void VgmlcAddress::setVgmlcFqdn(std::string const &value) {
+  m_VgmlcFqdn = value;
   m_VgmlcFqdnIsSet = true;
 }
-bool VgmlcAddress::vgmlcFqdnIsSet() const {
-  return m_VgmlcFqdnIsSet;
-}
-void VgmlcAddress::unsetVgmlcFqdn() {
-  m_VgmlcFqdnIsSet = false;
-}
+bool VgmlcAddress::vgmlcFqdnIsSet() const { return m_VgmlcFqdnIsSet; }
+void VgmlcAddress::unsetVgmlcFqdn() { m_VgmlcFqdnIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

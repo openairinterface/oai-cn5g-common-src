@@ -19,12 +19,12 @@
 #ifndef NonUeN2InfoSubscriptionCreateData_H_
 #define NonUeN2InfoSubscriptionCreateData_H_
 
-#include "N2InformationClass.h"
-#include <string>
-#include "GlobalRanNodeId.h"
-#include <vector>
 #include "AccessType.h"
+#include "GlobalRanNodeId.h"
+#include "N2InformationClass.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::amf {
 
@@ -32,7 +32,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class NonUeN2InfoSubscriptionCreateData {
- public:
+public:
   NonUeN2InfoSubscriptionCreateData();
   virtual ~NonUeN2InfoSubscriptionCreateData();
 
@@ -44,46 +44,46 @@ class NonUeN2InfoSubscriptionCreateData {
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::GlobalRanNodeId>& getGlobalRanNodeList();
+  std::vector<oai::model::common::GlobalRanNodeId> &getGlobalRanNodeList();
   bool globalRanNodeListIsSet() const;
   void unsetGlobalRanNodeList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::AccessType>& getAnTypeList();
+  std::vector<oai::model::common::AccessType> &getAnTypeList();
   bool anTypeListIsSet() const;
   void unsetAnTypeList();
   /// <summary>
   ///
   /// </summary>
   N2InformationClass getN2InformationClass() const;
-  void setN2InformationClass(N2InformationClass const& value);
+  void setN2InformationClass(N2InformationClass const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getN2NotifyCallbackUri() const;
-  void setN2NotifyCallbackUri(std::string const& value);
+  void setN2NotifyCallbackUri(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getNfId() const;
-  void setNfId(std::string const& value);
+  void setNfId(std::string const &value);
   bool nfIdIsSet() const;
   void unsetNfId();
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
 
-  friend void to_json(
-      nlohmann::json& j, const NonUeN2InfoSubscriptionCreateData& o);
-  friend void from_json(
-      const nlohmann::json& j, NonUeN2InfoSubscriptionCreateData& o);
+  friend void to_json(nlohmann::json &j,
+                      const NonUeN2InfoSubscriptionCreateData &o);
+  friend void from_json(const nlohmann::json &j,
+                        NonUeN2InfoSubscriptionCreateData &o);
 
- protected:
+protected:
   std::vector<oai::model::common::GlobalRanNodeId> m_GlobalRanNodeList;
   bool m_GlobalRanNodeListIsSet;
   std::vector<oai::model::common::AccessType> m_AnTypeList;
@@ -98,6 +98,6 @@ class NonUeN2InfoSubscriptionCreateData {
   bool m_SupportedFeaturesIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* NonUeN2InfoSubscriptionCreateData_H_ */

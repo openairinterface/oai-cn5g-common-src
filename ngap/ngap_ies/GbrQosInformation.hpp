@@ -17,36 +17,35 @@ extern "C" {
 namespace oai::ngap {
 
 class GbrQosInformation {
- public:
+public:
   GbrQosInformation();
   virtual ~GbrQosInformation();
 
-  void set(
-      const long& maximumFlowBitRateDl, const long& maximumFlowBitRateUl,
-      const long& guaranteedFlowBitRateDl, const long& guaranteedFlowBitRateUl,
-      const std::optional<NotificationControl>& notificationControl,
-      const std::optional<PacketLossRate>& maximumPacketLossRateDl,
-      const std::optional<PacketLossRate>& maximumPacketLossRateUl);
-  bool get(
-      long& maximumFlowBitRateDl, long& maximumFlowBitRateUl,
-      long& guaranteedFlowBitRateDl, long& guaranteedFlowBitRateUl,
-      std::optional<NotificationControl>& notificationControl,
-      std::optional<PacketLossRate>& maximumPacketLossRateDl,
-      std::optional<PacketLossRate>& maximumPacketLossRateUl);
+  void set(const long &maximumFlowBitRateDl, const long &maximumFlowBitRateUl,
+           const long &guaranteedFlowBitRateDl,
+           const long &guaranteedFlowBitRateUl,
+           const std::optional<NotificationControl> &notificationControl,
+           const std::optional<PacketLossRate> &maximumPacketLossRateDl,
+           const std::optional<PacketLossRate> &maximumPacketLossRateUl);
+  bool get(long &maximumFlowBitRateDl, long &maximumFlowBitRateUl,
+           long &guaranteedFlowBitRateDl, long &guaranteedFlowBitRateUl,
+           std::optional<NotificationControl> &notificationControl,
+           std::optional<PacketLossRate> &maximumPacketLossRateDl,
+           std::optional<PacketLossRate> &maximumPacketLossRateUl);
 
-  bool encode(Ngap_GBR_QosInformation_t&) const;
-  bool decode(const Ngap_GBR_QosInformation_t&);
+  bool encode(Ngap_GBR_QosInformation_t &) const;
+  bool decode(const Ngap_GBR_QosInformation_t &);
 
- private:
+private:
   long m_MaximumFlowBitRateDl;
   long m_MaximumFlowBitRateUl;
   long m_GuaranteedFlowBitRateDl;
   long m_GuaranteedFlowBitRateUl;
-  std::optional<NotificationControl> m_NotificationControl;  // Optional
-  std::optional<PacketLossRate> m_MaximumPacketLossRateDl;   // Optional
-  std::optional<PacketLossRate> m_MaximumPacketLossRateUl;   // Optional
+  std::optional<NotificationControl> m_NotificationControl; // Optional
+  std::optional<PacketLossRate> m_MaximumPacketLossRateDl;  // Optional
+  std::optional<PacketLossRate> m_MaximumPacketLossRateUl;  // Optional
   // TODO: Alternative QoS Parameters Set List (Optional, Rel 16.14.0)
 };
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

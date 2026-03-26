@@ -12,8 +12,8 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_IntersystemSONTransferType.h"
 #include "Ngap_IntersystemSONInformation.h"
+#include "Ngap_IntersystemSONTransferType.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -27,7 +27,7 @@ struct Ngap_ProtocolExtensionContainer;
 typedef struct Ngap_IntersystemSONConfigurationTransfer {
   Ngap_IntersystemSONTransferType_t transferType;
   Ngap_IntersystemSONInformation_t intersystemSONInformation;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

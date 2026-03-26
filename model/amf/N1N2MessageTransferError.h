@@ -31,7 +31,7 @@ namespace oai::model::amf {
 class N1N2MessageTransferError
 
 {
- public:
+public:
   N1N2MessageTransferError();
   virtual ~N1N2MessageTransferError();
 
@@ -40,8 +40,8 @@ class N1N2MessageTransferError
 
   void validate();
 
-  friend void to_json(nlohmann::json& j, const N1N2MessageTransferError& o);
-  friend void from_json(const nlohmann::json& j, N1N2MessageTransferError& o);
+  friend void to_json(nlohmann::json &j, const N1N2MessageTransferError &o);
+  friend void from_json(const nlohmann::json &j, N1N2MessageTransferError &o);
 
   /////////////////////////////////////////////
   /// N1N2MessageTransferError members
@@ -50,22 +50,22 @@ class N1N2MessageTransferError
   ///
   /// </summary>
   oai::model::common::ProblemDetails getError() const;
-  void setError(oai::model::common::ProblemDetails const& value);
+  void setError(oai::model::common::ProblemDetails const &value);
   /// <summary>
   ///
   /// </summary>
   N1N2MsgTxfrErrDetail getErrInfo() const;
-  void setErrInfo(N1N2MsgTxfrErrDetail const& value);
+  void setErrInfo(N1N2MsgTxfrErrDetail const &value);
   bool errInfoIsSet() const;
   void unsetErrInfo();
 
- protected:
+protected:
   oai::model::common::ProblemDetails m_Error;
 
   N1N2MsgTxfrErrDetail m_ErrInfo;
   bool m_ErrInfoIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* N1N2MessageTransferError_H_ */

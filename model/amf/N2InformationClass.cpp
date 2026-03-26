@@ -27,12 +27,12 @@ void N2InformationClass::validate() const {
   }
 }
 
-bool N2InformationClass::validate(std::stringstream& msg) const {
+bool N2InformationClass::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool N2InformationClass::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool N2InformationClass::validate(std::stringstream &msg,
+                                  const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "N2InformationClass" : pathPrefix;
@@ -43,22 +43,22 @@ bool N2InformationClass::validate(
   return success;
 }
 
-bool N2InformationClass::operator==(const N2InformationClass& rhs) const {
+bool N2InformationClass::operator==(const N2InformationClass &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool N2InformationClass::operator!=(const N2InformationClass& rhs) const {
+bool N2InformationClass::operator!=(const N2InformationClass &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const N2InformationClass& o) {
+void to_json(nlohmann::json &j, const N2InformationClass &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, N2InformationClass& o) {
+void from_json(const nlohmann::json &j, N2InformationClass &o) {
   from_json(j, o.m_value);
 }
 
@@ -80,4 +80,4 @@ void N2InformationClass::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

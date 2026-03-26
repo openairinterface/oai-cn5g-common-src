@@ -20,13 +20,13 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_ReportAmountMDT {
-  Ngap_ReportAmountMDT_r1        = 0,
-  Ngap_ReportAmountMDT_r2        = 1,
-  Ngap_ReportAmountMDT_r4        = 2,
-  Ngap_ReportAmountMDT_r8        = 3,
-  Ngap_ReportAmountMDT_r16       = 4,
-  Ngap_ReportAmountMDT_r32       = 5,
-  Ngap_ReportAmountMDT_r64       = 6,
+  Ngap_ReportAmountMDT_r1 = 0,
+  Ngap_ReportAmountMDT_r2 = 1,
+  Ngap_ReportAmountMDT_r4 = 2,
+  Ngap_ReportAmountMDT_r8 = 3,
+  Ngap_ReportAmountMDT_r16 = 4,
+  Ngap_ReportAmountMDT_r32 = 5,
+  Ngap_ReportAmountMDT_r64 = 6,
   Ngap_ReportAmountMDT_rinfinity = 7
 } e_Ngap_ReportAmountMDT;
 

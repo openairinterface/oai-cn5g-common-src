@@ -16,8 +16,8 @@
 
 #include "EventReportMode_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::udm {
 
@@ -30,12 +30,12 @@ void EventReportMode_anyOf::validate() const {
   }
 }
 
-bool EventReportMode_anyOf::validate(std::stringstream& msg) const {
+bool EventReportMode_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool EventReportMode_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool EventReportMode_anyOf::validate(std::stringstream &msg,
+                                     const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "EventReportMode_anyOf" : pathPrefix;
@@ -49,34 +49,34 @@ bool EventReportMode_anyOf::validate(
   return success;
 }
 
-bool EventReportMode_anyOf::operator==(const EventReportMode_anyOf& rhs) const {
+bool EventReportMode_anyOf::operator==(const EventReportMode_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool EventReportMode_anyOf::operator!=(const EventReportMode_anyOf& rhs) const {
+bool EventReportMode_anyOf::operator!=(const EventReportMode_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const EventReportMode_anyOf& o) {
+void to_json(nlohmann::json &j, const EventReportMode_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case EventReportMode_anyOf::eEventReportMode_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case EventReportMode_anyOf::eEventReportMode_anyOf::PERIODIC:
-      j = "PERIODIC";
-      break;
-    case EventReportMode_anyOf::eEventReportMode_anyOf::ON_EVENT_DETECTION:
-      j = "ON_EVENT_DETECTION";
-      break;
+  case EventReportMode_anyOf::eEventReportMode_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case EventReportMode_anyOf::eEventReportMode_anyOf::PERIODIC:
+    j = "PERIODIC";
+    break;
+  case EventReportMode_anyOf::eEventReportMode_anyOf::ON_EVENT_DETECTION:
+    j = "ON_EVENT_DETECTION";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, EventReportMode_anyOf& o) {
+void from_json(const nlohmann::json &j, EventReportMode_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "PERIODIC") {
     o.setValue(EventReportMode_anyOf::eEventReportMode_anyOf::PERIODIC);
@@ -92,8 +92,8 @@ void from_json(const nlohmann::json& j, EventReportMode_anyOf& o) {
   }
 }
 
-EventReportMode_anyOf::eEventReportMode_anyOf EventReportMode_anyOf::getValue()
-    const {
+EventReportMode_anyOf::eEventReportMode_anyOf
+EventReportMode_anyOf::getValue() const {
   return m_value;
 }
 void EventReportMode_anyOf::setValue(
@@ -101,4 +101,4 @@ void EventReportMode_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

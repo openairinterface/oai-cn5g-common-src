@@ -14,9 +14,8 @@
  */
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 static asn_oer_constraints_t
-    asn_OER_type_Ngap_RedundantQosFlowIndicator_constr_1 CC_NOTUSED = {
-        {0, 0},
-        -1};
+    asn_OER_type_Ngap_RedundantQosFlowIndicator_constr_1 CC_NOTUSED = {{0, 0},
+                                                                       -1};
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 asn_per_constraints_t asn_PER_type_Ngap_RedundantQosFlowIndicator_constr_1
@@ -29,9 +28,8 @@ asn_per_constraints_t asn_PER_type_Ngap_RedundantQosFlowIndicator_constr_1
 #endif /* !defined(ASN_DISABLE_UPER_SUPPORT) ||                                \
           !defined(ASN_DISABLE_APER_SUPPORT) */
 static const asn_INTEGER_enum_map_t
-    asn_MAP_Ngap_RedundantQosFlowIndicator_value2enum_1[] = {
-        {0, 4, "true"},
-        {1, 5, "false"}};
+    asn_MAP_Ngap_RedundantQosFlowIndicator_value2enum_1[] = {{0, 4, "true"},
+                                                             {1, 5, "false"}};
 static const unsigned int
     asn_MAP_Ngap_RedundantQosFlowIndicator_enum2value_1[] = {
         1, /* false(1) */

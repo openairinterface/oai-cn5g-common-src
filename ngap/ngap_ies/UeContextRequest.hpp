@@ -12,21 +12,21 @@ extern "C" {
 namespace oai::ngap {
 
 class UeContextRequest {
- public:
+public:
   UeContextRequest();
-  UeContextRequest(const e_Ngap_UEContextRequest& ueContextRequest);
+  UeContextRequest(const e_Ngap_UEContextRequest &ueContextRequest);
   virtual ~UeContextRequest();
 
-  void set(const e_Ngap_UEContextRequest& ueContextRequest);
+  void set(const e_Ngap_UEContextRequest &ueContextRequest);
   int get() const;
 
-  bool encode(Ngap_UEContextRequest_t& ueContextRequest) const;
-  bool decode(const Ngap_UEContextRequest_t& ueContextRequest);
+  bool encode(Ngap_UEContextRequest_t &ueContextRequest) const;
+  bool decode(const Ngap_UEContextRequest_t &ueContextRequest);
 
- private:
+private:
   int m_UeContextRequest;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

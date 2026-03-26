@@ -27,12 +27,12 @@ void CreditManagementStatus::validate() const {
   }
 }
 
-bool CreditManagementStatus::validate(std::stringstream& msg) const {
+bool CreditManagementStatus::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool CreditManagementStatus::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool CreditManagementStatus::validate(std::stringstream &msg,
+                                      const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "CreditManagementStatus" : pathPrefix;
@@ -44,23 +44,23 @@ bool CreditManagementStatus::validate(
 }
 
 bool CreditManagementStatus::operator==(
-    const CreditManagementStatus& rhs) const {
+    const CreditManagementStatus &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
 bool CreditManagementStatus::operator!=(
-    const CreditManagementStatus& rhs) const {
+    const CreditManagementStatus &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const CreditManagementStatus& o) {
+void to_json(nlohmann::json &j, const CreditManagementStatus &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, CreditManagementStatus& o) {
+void from_json(const nlohmann::json &j, CreditManagementStatus &o) {
   from_json(j, o.m_value);
 }
 
@@ -82,4 +82,4 @@ void CreditManagementStatus::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

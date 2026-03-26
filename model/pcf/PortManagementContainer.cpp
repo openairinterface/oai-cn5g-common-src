@@ -18,9 +18,7 @@
 
 namespace oai::model::pcf {
 
-PortManagementContainer::PortManagementContainer() {
-  m_PortNum = 0;
-}
+PortManagementContainer::PortManagementContainer() { m_PortNum = 0; }
 
 void PortManagementContainer::validate() const {
   std::stringstream msg;
@@ -29,12 +27,12 @@ void PortManagementContainer::validate() const {
   }
 }
 
-bool PortManagementContainer::validate(std::stringstream& msg) const {
+bool PortManagementContainer::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool PortManagementContainer::validate(
-    std::stringstream& /* msg */, const std::string& /* pathPrefix */) const {
+    std::stringstream & /* msg */, const std::string & /* pathPrefix */) const {
   bool success = true;
   /*
   const std::string _pathPrefix =
@@ -44,7 +42,7 @@ bool PortManagementContainer::validate(
 }
 
 bool PortManagementContainer::operator==(
-    const PortManagementContainer& rhs) const {
+    const PortManagementContainer &rhs) const {
   return
 
       (getPortManCont() == rhs.getPortManCont()) &&
@@ -55,17 +53,17 @@ bool PortManagementContainer::operator==(
 }
 
 bool PortManagementContainer::operator!=(
-    const PortManagementContainer& rhs) const {
+    const PortManagementContainer &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PortManagementContainer& o) {
-  j                = nlohmann::json();
+void to_json(nlohmann::json &j, const PortManagementContainer &o) {
+  j = nlohmann::json();
   j["portManCont"] = o.m_PortManCont;
-  j["portNum"]     = o.m_PortNum;
+  j["portNum"] = o.m_PortNum;
 }
 
-void from_json(const nlohmann::json& j, PortManagementContainer& o) {
+void from_json(const nlohmann::json &j, PortManagementContainer &o) {
   j.at("portManCont").get_to(o.m_PortManCont);
   j.at("portNum").get_to(o.m_PortNum);
 }
@@ -73,14 +71,12 @@ void from_json(const nlohmann::json& j, PortManagementContainer& o) {
 std::string PortManagementContainer::getPortManCont() const {
   return m_PortManCont;
 }
-void PortManagementContainer::setPortManCont(std::string const& value) {
+void PortManagementContainer::setPortManCont(std::string const &value) {
   m_PortManCont = value;
 }
-int32_t PortManagementContainer::getPortNum() const {
-  return m_PortNum;
-}
+int32_t PortManagementContainer::getPortNum() const { return m_PortNum; }
 void PortManagementContainer::setPortNum(int32_t const value) {
   m_PortNum = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

@@ -19,8 +19,8 @@
 #ifndef CancelLocData_H_
 #define CancelLocData_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::lmf {
 
@@ -28,7 +28,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class CancelLocData {
- public:
+public:
   CancelLocData();
   virtual ~CancelLocData() = default;
 
@@ -42,16 +42,16 @@ class CancelLocData {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const CancelLocData& rhs) const;
-  bool operator!=(const CancelLocData& rhs) const;
+  bool operator==(const CancelLocData &rhs) const;
+  bool operator!=(const CancelLocData &rhs) const;
 
   /////////////////////////////////////////////
   /// CancelLocData members
@@ -60,24 +60,24 @@ class CancelLocData {
   ///
   /// </summary>
   std::string getHgmlcCallBackURI() const;
-  void setHgmlcCallBackURI(std::string const& value);
+  void setHgmlcCallBackURI(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getLdrReference() const;
-  void setLdrReference(std::string const& value);
+  void setLdrReference(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
 
-  friend void to_json(nlohmann::json& j, const CancelLocData& o);
-  friend void from_json(const nlohmann::json& j, CancelLocData& o);
+  friend void to_json(nlohmann::json &j, const CancelLocData &o);
+  friend void from_json(const nlohmann::json &j, CancelLocData &o);
 
- protected:
+protected:
   std::string m_HgmlcCallBackURI;
 
   std::string m_LdrReference;
@@ -86,6 +86,6 @@ class CancelLocData {
   bool m_SupportedFeaturesIsSet;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* CancelLocData_H_ */

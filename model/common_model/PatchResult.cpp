@@ -27,28 +27,28 @@ void PatchResult::validate() const {
   }
 }
 
-bool PatchResult::validate(std::stringstream& msg) const {
+bool PatchResult::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool PatchResult::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool PatchResult::validate(std::stringstream &msg,
+                           const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PatchResult" : pathPrefix;
 
   /* Report */ {
-    const std::vector<oai::model::common::ReportItem>& value = m_Report;
+    const std::vector<oai::model::common::ReportItem> &value = m_Report;
     const std::string currentValuePath = _pathPrefix + ".report";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::ReportItem& value : value) {
+      int i = 0;
+      for (const oai::model::common::ReportItem &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -62,7 +62,7 @@ bool PatchResult::validate(
   return success;
 }
 
-bool PatchResult::operator==(const PatchResult& rhs) const {
+bool PatchResult::operator==(const PatchResult &rhs) const {
   return
 
       (getReport() == rhs.getReport())
@@ -70,16 +70,16 @@ bool PatchResult::operator==(const PatchResult& rhs) const {
           ;
 }
 
-bool PatchResult::operator!=(const PatchResult& rhs) const {
+bool PatchResult::operator!=(const PatchResult &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PatchResult& o) {
-  j           = nlohmann::json();
+void to_json(nlohmann::json &j, const PatchResult &o) {
+  j = nlohmann::json();
   j["report"] = o.m_Report;
 }
 
-void from_json(const nlohmann::json& j, PatchResult& o) {
+void from_json(const nlohmann::json &j, PatchResult &o) {
   j.at("report").get_to(o.m_Report);
 }
 
@@ -87,8 +87,8 @@ std::vector<oai::model::common::ReportItem> PatchResult::getReport() const {
   return m_Report;
 }
 void PatchResult::setReport(
-    std::vector<oai::model::common::ReportItem> const& value) {
+    std::vector<oai::model::common::ReportItem> const &value) {
   m_Report = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

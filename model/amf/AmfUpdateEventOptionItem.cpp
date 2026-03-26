@@ -19,8 +19,8 @@
 namespace oai::model::amf {
 
 AmfUpdateEventOptionItem::AmfUpdateEventOptionItem() {
-  m_Op    = "";
-  m_Path  = "";
+  m_Op = "";
+  m_Path = "";
   m_Value = "";
 }
 
@@ -31,18 +31,18 @@ void AmfUpdateEventOptionItem::validate() const {
   }
 }
 
-bool AmfUpdateEventOptionItem::validate(std::stringstream& msg) const {
+bool AmfUpdateEventOptionItem::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AmfUpdateEventOptionItem::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool AmfUpdateEventOptionItem::validate(std::stringstream &msg,
+                                        const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AmfUpdateEventOptionItem" : pathPrefix;
 
   /* Path */ {
-    const std::string& value           = m_Path;
+    const std::string &value = m_Path;
     const std::string currentValuePath = _pathPrefix + ".path";
   }
 
@@ -50,7 +50,7 @@ bool AmfUpdateEventOptionItem::validate(
 }
 
 bool AmfUpdateEventOptionItem::operator==(
-    const AmfUpdateEventOptionItem& rhs) const {
+    const AmfUpdateEventOptionItem &rhs) const {
   return
 
       (getOp() == rhs.getOp()) &&
@@ -63,40 +63,32 @@ bool AmfUpdateEventOptionItem::operator==(
 }
 
 bool AmfUpdateEventOptionItem::operator!=(
-    const AmfUpdateEventOptionItem& rhs) const {
+    const AmfUpdateEventOptionItem &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AmfUpdateEventOptionItem& o) {
-  j          = nlohmann::json();
-  j["op"]    = o.m_Op;
-  j["path"]  = o.m_Path;
+void to_json(nlohmann::json &j, const AmfUpdateEventOptionItem &o) {
+  j = nlohmann::json();
+  j["op"] = o.m_Op;
+  j["path"] = o.m_Path;
   j["value"] = o.m_Value;
 }
 
-void from_json(const nlohmann::json& j, AmfUpdateEventOptionItem& o) {
+void from_json(const nlohmann::json &j, AmfUpdateEventOptionItem &o) {
   j.at("op").get_to(o.m_Op);
   j.at("path").get_to(o.m_Path);
   j.at("value").get_to(o.m_Value);
 }
 
-std::string AmfUpdateEventOptionItem::getOp() const {
-  return m_Op;
-}
-void AmfUpdateEventOptionItem::setOp(std::string const& value) {
-  m_Op = value;
-}
-std::string AmfUpdateEventOptionItem::getPath() const {
-  return m_Path;
-}
-void AmfUpdateEventOptionItem::setPath(std::string const& value) {
+std::string AmfUpdateEventOptionItem::getOp() const { return m_Op; }
+void AmfUpdateEventOptionItem::setOp(std::string const &value) { m_Op = value; }
+std::string AmfUpdateEventOptionItem::getPath() const { return m_Path; }
+void AmfUpdateEventOptionItem::setPath(std::string const &value) {
   m_Path = value;
 }
-std::string AmfUpdateEventOptionItem::getValue() const {
-  return m_Value;
-}
-void AmfUpdateEventOptionItem::setValue(std::string const& value) {
+std::string AmfUpdateEventOptionItem::getValue() const { return m_Value; }
+void AmfUpdateEventOptionItem::setValue(std::string const &value) {
   m_Value = value;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

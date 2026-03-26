@@ -31,7 +31,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class ReachabilityForDataConfiguration {
- public:
+public:
   ReachabilityForDataConfiguration();
   virtual ~ReachabilityForDataConfiguration() = default;
 
@@ -45,10 +45,10 @@ class ReachabilityForDataConfiguration {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const ReachabilityForDataConfiguration& rhs) const;
-  bool operator!=(const ReachabilityForDataConfiguration& rhs) const;
+  bool operator==(const ReachabilityForDataConfiguration &rhs) const;
+  bool operator!=(const ReachabilityForDataConfiguration &rhs) const;
 
   /////////////////////////////////////////////
   /// ReachabilityForDataConfiguration members
@@ -57,21 +57,21 @@ class ReachabilityForDataConfiguration {
   ///
   /// </summary>
   ReachabilityForDataReportConfig getReportCfg() const;
-  void setReportCfg(ReachabilityForDataReportConfig const& value);
+  void setReportCfg(ReachabilityForDataReportConfig const &value);
 
-  friend void to_json(
-      nlohmann::json& j, const ReachabilityForDataConfiguration& o);
-  friend void from_json(
-      const nlohmann::json& j, ReachabilityForDataConfiguration& o);
+  friend void to_json(nlohmann::json &j,
+                      const ReachabilityForDataConfiguration &o);
+  friend void from_json(const nlohmann::json &j,
+                        ReachabilityForDataConfiguration &o);
 
- protected:
+protected:
   ReachabilityForDataReportConfig m_ReportCfg;
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* ReachabilityForDataConfiguration_H_ */

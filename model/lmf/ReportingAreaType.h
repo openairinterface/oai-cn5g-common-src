@@ -28,7 +28,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class ReportingAreaType {
- public:
+public:
   ReportingAreaType();
   virtual ~ReportingAreaType() = default;
 
@@ -42,16 +42,16 @@ class ReportingAreaType {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const ReportingAreaType& rhs) const;
-  bool operator!=(const ReportingAreaType& rhs) const;
+  bool operator==(const ReportingAreaType &rhs) const;
+  bool operator!=(const ReportingAreaType &rhs) const;
 
   /////////////////////////////////////////////
   /// ReportingAreaType members
@@ -60,15 +60,15 @@ class ReportingAreaType {
   void setValue(ReportingAreaType_anyOf value);
   ReportingAreaType_anyOf::eReportingAreaType_anyOf getEnumValue() const;
   void setEnumValue(ReportingAreaType_anyOf::eReportingAreaType_anyOf value);
-  friend void to_json(nlohmann::json& j, const ReportingAreaType& o);
-  friend void from_json(const nlohmann::json& j, ReportingAreaType& o);
-  friend void to_json(nlohmann::json& j, const ReportingAreaType_anyOf& o);
-  friend void from_json(const nlohmann::json& j, ReportingAreaType_anyOf& o);
+  friend void to_json(nlohmann::json &j, const ReportingAreaType &o);
+  friend void from_json(const nlohmann::json &j, ReportingAreaType &o);
+  friend void to_json(nlohmann::json &j, const ReportingAreaType_anyOf &o);
+  friend void from_json(const nlohmann::json &j, ReportingAreaType_anyOf &o);
 
- protected:
+protected:
   ReportingAreaType_anyOf m_value;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* ReportingAreaType_H_ */

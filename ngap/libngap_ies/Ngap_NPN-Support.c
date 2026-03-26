@@ -70,7 +70,7 @@ asn_CHOICE_specifics_t asn_SPC_Ngap_NPN_Support_specs_1 = {
     sizeof(struct Ngap_NPN_Support),
     offsetof(struct Ngap_NPN_Support, _asn_ctx),
     offsetof(struct Ngap_NPN_Support, present),
-    sizeof(((struct Ngap_NPN_Support*) 0)->present),
+    sizeof(((struct Ngap_NPN_Support *)0)->present),
     asn_MAP_Ngap_NPN_Support_tag2el_1,
     2, /* Count of tags in the map */
     0,

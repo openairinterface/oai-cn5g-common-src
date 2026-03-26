@@ -20,14 +20,14 @@
 #ifndef PduSessionTsnBridge_H_
 #define PduSessionTsnBridge_H_
 
-#include <string>
+#include "BridgeManagementContainer.h"
 #include "Ipv6Prefix.h"
 #include "PortManagementContainer.h"
-#include "TsnBridgeInfo.h"
-#include "BridgeManagementContainer.h"
 #include "Snssai.h"
-#include <vector>
+#include "TsnBridgeInfo.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::pcf {
 
@@ -36,7 +36,7 @@ namespace oai::model::pcf {
 /// port and/or NW-TT port management information.
 /// </summary>
 class PduSessionTsnBridge {
- public:
+public:
   PduSessionTsnBridge();
   virtual ~PduSessionTsnBridge() = default;
 
@@ -50,16 +50,16 @@ class PduSessionTsnBridge {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const PduSessionTsnBridge& rhs) const;
-  bool operator!=(const PduSessionTsnBridge& rhs) const;
+  bool operator==(const PduSessionTsnBridge &rhs) const;
+  bool operator!=(const PduSessionTsnBridge &rhs) const;
 
   /////////////////////////////////////////////
   /// PduSessionTsnBridge members
@@ -68,30 +68,30 @@ class PduSessionTsnBridge {
   ///
   /// </summary>
   oai::model::pcf::TsnBridgeInfo getTsnBridgeInfo() const;
-  void setTsnBridgeInfo(oai::model::pcf::TsnBridgeInfo const& value);
+  void setTsnBridgeInfo(oai::model::pcf::TsnBridgeInfo const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::BridgeManagementContainer getTsnBridgeManCont() const;
-  void setTsnBridgeManCont(
-      oai::model::pcf::BridgeManagementContainer const& value);
+  void
+  setTsnBridgeManCont(oai::model::pcf::BridgeManagementContainer const &value);
   bool tsnBridgeManContIsSet() const;
   void unsetTsnBridgeManCont();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::PortManagementContainer getTsnPortManContDstt() const;
-  void setTsnPortManContDstt(
-      oai::model::pcf::PortManagementContainer const& value);
+  void
+  setTsnPortManContDstt(oai::model::pcf::PortManagementContainer const &value);
   bool tsnPortManContDsttIsSet() const;
   void unsetTsnPortManContDstt();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::pcf::PortManagementContainer> getTsnPortManContNwtts()
-      const;
+  std::vector<oai::model::pcf::PortManagementContainer>
+  getTsnPortManContNwtts() const;
   void setTsnPortManContNwtts(
-      std::vector<oai::model::pcf::PortManagementContainer> const& value);
+      std::vector<oai::model::pcf::PortManagementContainer> const &value);
   bool tsnPortManContNwttsIsSet() const;
   void unsetTsnPortManContNwtts();
   /// <summary>
@@ -99,7 +99,7 @@ class PduSessionTsnBridge {
   /// decimal&#39; notation as defined in RFC 1166.
   /// </summary>
   std::string getUeIpv4Addr() const;
-  void setUeIpv4Addr(std::string const& value);
+  void setUeIpv4Addr(std::string const &value);
   bool ueIpv4AddrIsSet() const;
   void unsetUeIpv4Addr();
   /// <summary>
@@ -111,35 +111,35 @@ class PduSessionTsnBridge {
   /// \&quot;Label1.Label2.Label3\&quot;).
   /// </summary>
   std::string getDnn() const;
-  void setDnn(std::string const& value);
+  void setDnn(std::string const &value);
   bool dnnIsSet() const;
   void unsetDnn();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Snssai getSnssai() const;
-  void setSnssai(oai::model::common::Snssai const& value);
+  void setSnssai(oai::model::common::Snssai const &value);
   bool snssaiIsSet() const;
   void unsetSnssai();
   /// <summary>
   /// IPv4 address domain identifier.
   /// </summary>
   std::string getIpDomain() const;
-  void setIpDomain(std::string const& value);
+  void setIpDomain(std::string const &value);
   bool ipDomainIsSet() const;
   void unsetIpDomain();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::Ipv6Prefix getUeIpv6AddrPrefix() const;
-  void setUeIpv6AddrPrefix(oai::model::pcf::Ipv6Prefix const& value);
+  void setUeIpv6AddrPrefix(oai::model::pcf::Ipv6Prefix const &value);
   bool ueIpv6AddrPrefixIsSet() const;
   void unsetUeIpv6AddrPrefix();
 
-  friend void to_json(nlohmann::json& j, const PduSessionTsnBridge& o);
-  friend void from_json(const nlohmann::json& j, PduSessionTsnBridge& o);
+  friend void to_json(nlohmann::json &j, const PduSessionTsnBridge &o);
+  friend void from_json(const nlohmann::json &j, PduSessionTsnBridge &o);
 
- protected:
+protected:
   oai::model::pcf::TsnBridgeInfo m_TsnBridgeInfo;
 
   oai::model::pcf::BridgeManagementContainer m_TsnBridgeManCont;
@@ -160,6 +160,6 @@ class PduSessionTsnBridge {
   bool m_UeIpv6AddrPrefixIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* PduSessionTsnBridge_H_ */

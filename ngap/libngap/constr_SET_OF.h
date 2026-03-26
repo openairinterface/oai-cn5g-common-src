@@ -5,8 +5,8 @@
 #ifndef CONSTR_SET_OF_H
 #define CONSTR_SET_OF_H
 
-#include <asn_application.h>
 #include <asn_SET_OF.h>
+#include <asn_application.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -74,7 +74,7 @@ extern asn_TYPE_operation_t asn_OP_SET_OF;
  * Internally visible buffer holding a single encoded element.
  */
 struct _el_buffer {
-  uint8_t* buf;
+  uint8_t *buf;
   size_t length;
   size_t allocated_size;
   unsigned bits_unused;
@@ -86,11 +86,11 @@ enum SET_OF__encode_method {
   SOES_CAPER  /* Canonical Aligned Packed Encoding Rules */
 };
 
-struct _el_buffer* SET_OF__encode_sorted(
-    const asn_TYPE_member_t* elm, const asn_anonymous_set_* list,
-    enum SET_OF__encode_method method);
+struct _el_buffer *SET_OF__encode_sorted(const asn_TYPE_member_t *elm,
+                                         const asn_anonymous_set_ *list,
+                                         enum SET_OF__encode_method method);
 
-void SET_OF__encode_sorted_free(struct _el_buffer* el_buf, size_t count);
+void SET_OF__encode_sorted_free(struct _el_buffer *el_buf, size_t count);
 
 #ifdef __cplusplus
 }

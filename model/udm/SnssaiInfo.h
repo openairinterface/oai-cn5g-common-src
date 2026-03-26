@@ -33,7 +33,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class SnssaiInfo {
- public:
+public:
   SnssaiInfo();
   virtual ~SnssaiInfo();
 
@@ -45,15 +45,15 @@ class SnssaiInfo {
   /// <summary>
   ///
   /// </summary>
-  std::vector<DnnInfo>& getDnnInfos();
+  std::vector<DnnInfo> &getDnnInfos();
 
-  friend void to_json(nlohmann::json& j, const SnssaiInfo& o);
-  friend void from_json(const nlohmann::json& j, SnssaiInfo& o);
+  friend void to_json(nlohmann::json &j, const SnssaiInfo &o);
+  friend void from_json(const nlohmann::json &j, SnssaiInfo &o);
 
- protected:
+protected:
   std::vector<DnnInfo> m_DnnInfos;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* SnssaiInfo_H_ */

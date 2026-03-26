@@ -32,7 +32,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class GADShape {
- public:
+public:
   GADShape();
   virtual ~GADShape();
 
@@ -45,15 +45,15 @@ class GADShape {
   ///
   /// </summary>
   SupportedGADShapes getShape() const;
-  void setShape(SupportedGADShapes const& value);
+  void setShape(SupportedGADShapes const &value);
 
-  friend void to_json(nlohmann::json& j, const GADShape& o);
-  friend void from_json(const nlohmann::json& j, GADShape& o);
+  friend void to_json(nlohmann::json &j, const GADShape &o);
+  friend void from_json(const nlohmann::json &j, GADShape &o);
 
- protected:
+protected:
   SupportedGADShapes m_Shape;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* GADShape_H_ */

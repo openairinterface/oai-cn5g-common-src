@@ -30,7 +30,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class UsageThreshold {
- public:
+public:
   UsageThreshold();
   virtual ~UsageThreshold();
 
@@ -68,10 +68,10 @@ class UsageThreshold {
   bool uplinkVolumeIsSet() const;
   void unsetUplinkVolume();
 
-  friend void to_json(nlohmann::json& j, const UsageThreshold& o);
-  friend void from_json(const nlohmann::json& j, UsageThreshold& o);
+  friend void to_json(nlohmann::json &j, const UsageThreshold &o);
+  friend void from_json(const nlohmann::json &j, UsageThreshold &o);
 
- protected:
+protected:
   int32_t m_Duration;
   bool m_DurationIsSet;
   int64_t m_TotalVolume;
@@ -82,6 +82,6 @@ class UsageThreshold {
   bool m_UplinkVolumeIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* UsageThreshold_H_ */

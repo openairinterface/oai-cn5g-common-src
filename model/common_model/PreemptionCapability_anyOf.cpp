@@ -13,8 +13,8 @@
 
 #include "PreemptionCapability_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::common {
 
@@ -27,12 +27,12 @@ void PreemptionCapability_anyOf::validate() const {
   }
 }
 
-bool PreemptionCapability_anyOf::validate(std::stringstream& msg) const {
+bool PreemptionCapability_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool PreemptionCapability_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool PreemptionCapability_anyOf::validate(std::stringstream &msg,
+                                          const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PreemptionCapability_anyOf" : pathPrefix;
@@ -47,35 +47,35 @@ bool PreemptionCapability_anyOf::validate(
 }
 
 bool PreemptionCapability_anyOf::operator==(
-    const PreemptionCapability_anyOf& rhs) const {
+    const PreemptionCapability_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool PreemptionCapability_anyOf::operator!=(
-    const PreemptionCapability_anyOf& rhs) const {
+    const PreemptionCapability_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PreemptionCapability_anyOf& o) {
+void to_json(nlohmann::json &j, const PreemptionCapability_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case PreemptionCapability_anyOf::ePreemptionCapability_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case PreemptionCapability_anyOf::ePreemptionCapability_anyOf::NOT_PREEMPT:
-      j = "NOT_PREEMPT";
-      break;
-    case PreemptionCapability_anyOf::ePreemptionCapability_anyOf::MAY_PREEMPT:
-      j = "MAY_PREEMPT";
-      break;
+  case PreemptionCapability_anyOf::ePreemptionCapability_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case PreemptionCapability_anyOf::ePreemptionCapability_anyOf::NOT_PREEMPT:
+    j = "NOT_PREEMPT";
+    break;
+  case PreemptionCapability_anyOf::ePreemptionCapability_anyOf::MAY_PREEMPT:
+    j = "MAY_PREEMPT";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, PreemptionCapability_anyOf& o) {
+void from_json(const nlohmann::json &j, PreemptionCapability_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "NOT_PREEMPT") {
     o.setValue(
@@ -101,4 +101,4 @@ void PreemptionCapability_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

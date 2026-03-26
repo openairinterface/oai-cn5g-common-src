@@ -20,7 +20,7 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_RedirectionVoiceFallback {
-  Ngap_RedirectionVoiceFallback_possible     = 0,
+  Ngap_RedirectionVoiceFallback_possible = 0,
   Ngap_RedirectionVoiceFallback_not_possible = 1
   /*
    * Enumeration is extensible

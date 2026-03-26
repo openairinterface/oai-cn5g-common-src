@@ -23,13 +23,13 @@ void AssignEbiError::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const AssignEbiError& o) {
-  j                   = nlohmann::json();
-  j["error"]          = o.m_Error;
+void to_json(nlohmann::json &j, const AssignEbiError &o) {
+  j = nlohmann::json();
+  j["error"] = o.m_Error;
   j["failureDetails"] = o.m_FailureDetails;
 }
 
-void from_json(const nlohmann::json& j, AssignEbiError& o) {
+void from_json(const nlohmann::json &j, AssignEbiError &o) {
   j.at("error").get_to(o.m_Error);
   j.at("failureDetails").get_to(o.m_FailureDetails);
 }
@@ -37,14 +37,14 @@ void from_json(const nlohmann::json& j, AssignEbiError& o) {
 oai::model::common::ProblemDetails AssignEbiError::getError() const {
   return m_Error;
 }
-void AssignEbiError::setError(oai::model::common::ProblemDetails const& value) {
+void AssignEbiError::setError(oai::model::common::ProblemDetails const &value) {
   m_Error = value;
 }
 AssignEbiFailed AssignEbiError::getFailureDetails() const {
   return m_FailureDetails;
 }
-void AssignEbiError::setFailureDetails(AssignEbiFailed const& value) {
+void AssignEbiError::setFailureDetails(AssignEbiFailed const &value) {
   m_FailureDetails = value;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

@@ -31,7 +31,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class BdtPolicyDataPatch {
- public:
+public:
   BdtPolicyDataPatch();
   virtual ~BdtPolicyDataPatch();
 
@@ -45,15 +45,15 @@ class BdtPolicyDataPatch {
   /// 3GPP TS 29.154.
   /// </summary>
   std::string getBdtRefId() const;
-  void setBdtRefId(std::string const& value);
+  void setBdtRefId(std::string const &value);
 
-  friend void to_json(nlohmann::json& j, const BdtPolicyDataPatch& o);
-  friend void from_json(const nlohmann::json& j, BdtPolicyDataPatch& o);
+  friend void to_json(nlohmann::json &j, const BdtPolicyDataPatch &o);
+  friend void from_json(const nlohmann::json &j, BdtPolicyDataPatch &o);
 
- protected:
+protected:
   std::string m_BdtRefId;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* BdtPolicyDataPatch_H_ */

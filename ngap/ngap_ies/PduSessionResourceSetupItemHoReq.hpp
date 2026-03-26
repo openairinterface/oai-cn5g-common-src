@@ -16,28 +16,26 @@ extern "C" {
 namespace oai::ngap {
 
 class PduSessionResourceSetupItemHoReq : public PduSessionResourceItem {
- public:
+public:
   PduSessionResourceSetupItemHoReq();
   virtual ~PduSessionResourceSetupItemHoReq();
 
-  void set(
-      const PduSessionId& pduSessionId, const SNssai& sNssai,
-      const OCTET_STRING_t& handoverRequestTransfer);
-  void get(
-      PduSessionId& pduSessionId, SNssai& sNssai,
-      OCTET_STRING_t& handoverRequestTransfer) const;
+  void set(const PduSessionId &pduSessionId, const SNssai &sNssai,
+           const OCTET_STRING_t &handoverRequestTransfer);
+  void get(PduSessionId &pduSessionId, SNssai &sNssai,
+           OCTET_STRING_t &handoverRequestTransfer) const;
 
-  bool encode(Ngap_PDUSessionResourceSetupItemHOReq_t&
-                  pduSessionResourceSetupItemHOReq) const;
-  bool decode(const Ngap_PDUSessionResourceSetupItemHOReq_t&
-                  pduSessionResourceSetupItemHOReq);
+  bool encode(Ngap_PDUSessionResourceSetupItemHOReq_t
+                  &pduSessionResourceSetupItemHOReq) const;
+  bool decode(const Ngap_PDUSessionResourceSetupItemHOReq_t
+                  &pduSessionResourceSetupItemHOReq);
 
- private:
+private:
   // PduSessionId //Mandatory;
-  SNssai m_SNssai;  // Mandatory
+  SNssai m_SNssai; // Mandatory
   // Handover Request Transfer - Mandatory
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

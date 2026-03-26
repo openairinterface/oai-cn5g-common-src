@@ -26,21 +26,21 @@ void LcsMoData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const LcsMoData& o) {
-  j                          = nlohmann::json();
+void to_json(nlohmann::json &j, const LcsMoData &o) {
+  j = nlohmann::json();
   j["allowedServiceClasses"] = o.m_AllowedServiceClasses;
 }
 
-void from_json(const nlohmann::json& j, LcsMoData& o) {
+void from_json(const nlohmann::json &j, LcsMoData &o) {
   j.at("allowedServiceClasses").get_to(o.m_AllowedServiceClasses);
 }
 
-std::vector<LcsMoServiceClass>& LcsMoData::getAllowedServiceClasses() {
+std::vector<LcsMoServiceClass> &LcsMoData::getAllowedServiceClasses() {
   return m_AllowedServiceClasses;
 }
 void LcsMoData::setAllowedServiceClasses(
-    std::vector<LcsMoServiceClass> const& value) {
+    std::vector<LcsMoServiceClass> const &value) {
   m_AllowedServiceClasses = value;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

@@ -12,8 +12,8 @@
 asn_TYPE_member_t asn_MBR_Ngap_EarlyStatusTransfer_TransparentContainer_1[] = {
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_EarlyStatusTransfer_TransparentContainer, procedureStage),
+     offsetof(struct Ngap_EarlyStatusTransfer_TransparentContainer,
+              procedureStage),
      (ASN_TAG_CLASS_CONTEXT | (0 << 2)),
      +1, /* EXPLICIT tag at current level */
      &asn_DEF_Ngap_ProcedureStageChoice,
@@ -32,8 +32,8 @@ asn_TYPE_member_t asn_MBR_Ngap_EarlyStatusTransfer_TransparentContainer_1[] = {
      "procedureStage"},
     {ATF_POINTER,
      1,
-     offsetof(
-         struct Ngap_EarlyStatusTransfer_TransparentContainer, iE_Extensions),
+     offsetof(struct Ngap_EarlyStatusTransfer_TransparentContainer,
+              iE_Extensions),
      (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_ProtocolExtensionContainer_9666P60,
@@ -64,8 +64,8 @@ static const asn_TYPE_tag2member_t
 asn_SEQUENCE_specifics_t
     asn_SPC_Ngap_EarlyStatusTransfer_TransparentContainer_specs_1 = {
         sizeof(struct Ngap_EarlyStatusTransfer_TransparentContainer),
-        offsetof(
-            struct Ngap_EarlyStatusTransfer_TransparentContainer, _asn_ctx),
+        offsetof(struct Ngap_EarlyStatusTransfer_TransparentContainer,
+                 _asn_ctx),
         asn_MAP_Ngap_EarlyStatusTransfer_TransparentContainer_tag2el_1,
         2, /* Count of tags in the map */
         asn_MAP_Ngap_EarlyStatusTransfer_TransparentContainer_oms_1, /* Optional

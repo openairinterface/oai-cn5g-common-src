@@ -27,7 +27,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class LoggingIntervalNrMdt_anyOf {
- public:
+public:
   LoggingIntervalNrMdt_anyOf();
   virtual ~LoggingIntervalNrMdt_anyOf() = default;
 
@@ -59,16 +59,16 @@ class LoggingIntervalNrMdt_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const LoggingIntervalNrMdt_anyOf& rhs) const;
-  bool operator!=(const LoggingIntervalNrMdt_anyOf& rhs) const;
+  bool operator==(const LoggingIntervalNrMdt_anyOf &rhs) const;
+  bool operator!=(const LoggingIntervalNrMdt_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// LoggingIntervalNrMdt_anyOf members
@@ -76,15 +76,15 @@ class LoggingIntervalNrMdt_anyOf {
   LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf getValue() const;
   void setValue(LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const LoggingIntervalNrMdt_anyOf& o);
-  friend void from_json(const nlohmann::json& j, LoggingIntervalNrMdt_anyOf& o);
+  friend void to_json(nlohmann::json &j, const LoggingIntervalNrMdt_anyOf &o);
+  friend void from_json(const nlohmann::json &j, LoggingIntervalNrMdt_anyOf &o);
 
- protected:
+protected:
   LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf m_value =
       LoggingIntervalNrMdt_anyOf::eLoggingIntervalNrMdt_anyOf::
           INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* LoggingIntervalNrMdt_anyOf_H_ */

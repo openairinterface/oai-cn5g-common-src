@@ -35,7 +35,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class Point {
- public:
+public:
   Point();
   virtual ~Point();
 
@@ -48,22 +48,22 @@ class Point {
   ///
   /// </summary>
   SupportedGADShapes getShape() const;
-  void setShape(SupportedGADShapes const& value);
+  void setShape(SupportedGADShapes const &value);
   /// <summary>
   ///
   /// </summary>
   GeographicalCoordinates getPoint() const;
-  void setPoint(GeographicalCoordinates const& value);
+  void setPoint(GeographicalCoordinates const &value);
 
-  friend void to_json(nlohmann::json& j, const Point& o);
-  friend void from_json(const nlohmann::json& j, Point& o);
+  friend void to_json(nlohmann::json &j, const Point &o);
+  friend void from_json(const nlohmann::json &j, Point &o);
 
- protected:
+protected:
   SupportedGADShapes m_Shape;
 
   GeographicalCoordinates m_Point;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* Point_H_ */

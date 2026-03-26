@@ -13,8 +13,8 @@
 
 #include "CmState_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::lmf {
 
@@ -27,12 +27,12 @@ void CmState_anyOf::validate() const {
   }
 }
 
-bool CmState_anyOf::validate(std::stringstream& msg) const {
+bool CmState_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool CmState_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool CmState_anyOf::validate(std::stringstream &msg,
+                             const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "CmState_anyOf" : pathPrefix;
@@ -46,33 +46,33 @@ bool CmState_anyOf::validate(
   return success;
 }
 
-bool CmState_anyOf::operator==(const CmState_anyOf& rhs) const {
+bool CmState_anyOf::operator==(const CmState_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool CmState_anyOf::operator!=(const CmState_anyOf& rhs) const {
+bool CmState_anyOf::operator!=(const CmState_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const CmState_anyOf& o) {
+void to_json(nlohmann::json &j, const CmState_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case CmState_anyOf::eCmState_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case CmState_anyOf::eCmState_anyOf::IDLE:
-      j = "IDLE";
-      break;
-    case CmState_anyOf::eCmState_anyOf::CONNECTED:
-      j = "CONNECTED";
-      break;
+  case CmState_anyOf::eCmState_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case CmState_anyOf::eCmState_anyOf::IDLE:
+    j = "IDLE";
+    break;
+  case CmState_anyOf::eCmState_anyOf::CONNECTED:
+    j = "CONNECTED";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, CmState_anyOf& o) {
+void from_json(const nlohmann::json &j, CmState_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "IDLE") {
     o.setValue(CmState_anyOf::eCmState_anyOf::IDLE);
@@ -94,4 +94,4 @@ void CmState_anyOf::setValue(CmState_anyOf::eCmState_anyOf value) {
   m_value = value;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

@@ -26,9 +26,7 @@ asn_per_constraints_t asn_PER_type_Ngap_Criticality_constr_1 CC_NOTUSED = {
 #endif /* !defined(ASN_DISABLE_UPER_SUPPORT) ||                                \
           !defined(ASN_DISABLE_APER_SUPPORT) */
 static const asn_INTEGER_enum_map_t asn_MAP_Ngap_Criticality_value2enum_1[] = {
-    {0, 6, "reject"},
-    {1, 6, "ignore"},
-    {2, 6, "notify"}};
+    {0, 6, "reject"}, {1, 6, "ignore"}, {2, 6, "notify"}};
 static const unsigned int asn_MAP_Ngap_Criticality_enum2value_1[] = {
     1, /* ignore(1) */
     2, /* notify(2) */

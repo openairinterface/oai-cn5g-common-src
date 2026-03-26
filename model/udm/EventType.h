@@ -31,7 +31,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class EventType {
- public:
+public:
   EventType();
   virtual ~EventType() = default;
 
@@ -45,23 +45,23 @@ class EventType {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const EventType& rhs) const;
-  bool operator!=(const EventType& rhs) const;
+  bool operator==(const EventType &rhs) const;
+  bool operator!=(const EventType &rhs) const;
 
   /////////////////////////////////////////////
   /// EventType members
 
-  friend void to_json(nlohmann::json& j, const EventType& o);
-  friend void from_json(const nlohmann::json& j, EventType& o);
+  friend void to_json(nlohmann::json &j, const EventType &o);
+  friend void from_json(const nlohmann::json &j, EventType &o);
 
- protected:
+protected:
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* EventType_H_ */

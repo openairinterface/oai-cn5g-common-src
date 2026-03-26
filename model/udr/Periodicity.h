@@ -30,7 +30,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class Periodicity {
- public:
+public:
   Periodicity();
   virtual ~Periodicity();
 
@@ -39,12 +39,12 @@ class Periodicity {
   /////////////////////////////////////////////
   /// Periodicity members
 
-  friend void to_json(nlohmann::json& j, const Periodicity& o);
-  friend void from_json(const nlohmann::json& j, Periodicity& o);
+  friend void to_json(nlohmann::json &j, const Periodicity &o);
+  friend void from_json(const nlohmann::json &j, Periodicity &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* Periodicity_H_ */

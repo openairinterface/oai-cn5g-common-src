@@ -20,10 +20,10 @@
 #define ChfInfo_H_
 
 #include "IdentityRange.h"
-#include "SupiRange.h"
 #include "PlmnRange.h"
-#include <vector>
+#include "SupiRange.h"
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::nrf {
 
@@ -31,7 +31,7 @@ namespace oai::model::nrf {
 ///
 /// </summary>
 class ChfInfo {
- public:
+public:
   ChfInfo();
   virtual ~ChfInfo();
 
@@ -43,29 +43,29 @@ class ChfInfo {
   /// <summary>
   ///
   /// </summary>
-  std::vector<SupiRange>& getSupiRangeList();
-  void setSupiRangeList(std::vector<SupiRange> const& value);
+  std::vector<SupiRange> &getSupiRangeList();
+  void setSupiRangeList(std::vector<SupiRange> const &value);
   bool supiRangeListIsSet() const;
   void unsetSupiRangeList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<IdentityRange>& getGpsiRangeList();
-  void setGpsiRangeList(std::vector<IdentityRange> const& value);
+  std::vector<IdentityRange> &getGpsiRangeList();
+  void setGpsiRangeList(std::vector<IdentityRange> const &value);
   bool gpsiRangeListIsSet() const;
   void unsetGpsiRangeList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<PlmnRange>& getPlmnRangeList();
-  void setPlmnRangeList(std::vector<PlmnRange> const& value);
+  std::vector<PlmnRange> &getPlmnRangeList();
+  void setPlmnRangeList(std::vector<PlmnRange> const &value);
   bool plmnRangeListIsSet() const;
   void unsetPlmnRangeList();
 
-  friend void to_json(nlohmann::json& j, const ChfInfo& o);
-  friend void from_json(const nlohmann::json& j, ChfInfo& o);
+  friend void to_json(nlohmann::json &j, const ChfInfo &o);
+  friend void from_json(const nlohmann::json &j, ChfInfo &o);
 
- protected:
+protected:
   std::vector<SupiRange> m_SupiRangeList;
   bool m_SupiRangeListIsSet;
   std::vector<IdentityRange> m_GpsiRangeList;
@@ -74,6 +74,6 @@ class ChfInfo {
   bool m_PlmnRangeListIsSet;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* ChfInfo_H_ */

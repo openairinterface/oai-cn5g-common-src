@@ -20,8 +20,8 @@
 #define QosFlowAddModifyRequestItem_H_
 
 #include "QosFlowProfile.h"
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::smf {
 
@@ -29,7 +29,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class QosFlowAddModifyRequestItem {
- public:
+public:
   QosFlowAddModifyRequestItem();
   virtual ~QosFlowAddModifyRequestItem();
 
@@ -54,29 +54,29 @@ class QosFlowAddModifyRequestItem {
   ///
   /// </summary>
   std::string getQosRules() const;
-  void setQosRules(std::string const& value);
+  void setQosRules(std::string const &value);
   bool qosRulesIsSet() const;
   void unsetQosRules();
   /// <summary>
   ///
   /// </summary>
   std::string getQosFlowDescription() const;
-  void setQosFlowDescription(std::string const& value);
+  void setQosFlowDescription(std::string const &value);
   bool qosFlowDescriptionIsSet() const;
   void unsetQosFlowDescription();
   /// <summary>
   ///
   /// </summary>
   QosFlowProfile getQosFlowProfile() const;
-  void setQosFlowProfile(QosFlowProfile const& value);
+  void setQosFlowProfile(QosFlowProfile const &value);
   bool qosFlowProfileIsSet() const;
   void unsetQosFlowProfile();
 
-  friend void to_json(nlohmann::json& j, const QosFlowAddModifyRequestItem& o);
-  friend void from_json(
-      const nlohmann::json& j, QosFlowAddModifyRequestItem& o);
+  friend void to_json(nlohmann::json &j, const QosFlowAddModifyRequestItem &o);
+  friend void from_json(const nlohmann::json &j,
+                        QosFlowAddModifyRequestItem &o);
 
- protected:
+protected:
   int32_t m_Qfi;
 
   int32_t m_Ebi;
@@ -89,6 +89,6 @@ class QosFlowAddModifyRequestItem {
   bool m_QosFlowProfileIsSet;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* QosFlowAddModifyRequestItem_H_ */

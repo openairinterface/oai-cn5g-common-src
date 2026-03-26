@@ -32,7 +32,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class OperatorSpecificDataContainer {
- public:
+public:
   OperatorSpecificDataContainer();
   virtual ~OperatorSpecificDataContainer();
 
@@ -45,12 +45,12 @@ class OperatorSpecificDataContainer {
   ///
   /// </summary>
   std::string getDataType() const;
-  void setDataType(std::string const& value);
+  void setDataType(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getDataTypeDefinition() const;
-  void setDataTypeDefinition(std::string const& value);
+  void setDataTypeDefinition(std::string const &value);
   bool dataTypeDefinitionIsSet() const;
   void unsetDataTypeDefinition();
   /// <summary>
@@ -62,16 +62,16 @@ class OperatorSpecificDataContainer {
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
 
-  friend void to_json(
-      nlohmann::json& j, const OperatorSpecificDataContainer& o);
-  friend void from_json(
-      const nlohmann::json& j, OperatorSpecificDataContainer& o);
+  friend void to_json(nlohmann::json &j,
+                      const OperatorSpecificDataContainer &o);
+  friend void from_json(const nlohmann::json &j,
+                        OperatorSpecificDataContainer &o);
 
- protected:
+protected:
   std::string m_DataType;
 
   std::string m_DataTypeDefinition;
@@ -82,6 +82,6 @@ class OperatorSpecificDataContainer {
   bool m_SupportedFeaturesIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* OperatorSpecificDataContainer_H_ */

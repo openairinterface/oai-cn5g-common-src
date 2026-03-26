@@ -30,7 +30,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class UeUpdateStatus {
- public:
+public:
   UeUpdateStatus();
   virtual ~UeUpdateStatus();
 
@@ -39,12 +39,12 @@ class UeUpdateStatus {
   /////////////////////////////////////////////
   /// UeUpdateStatus members
 
-  friend void to_json(nlohmann::json& j, const UeUpdateStatus& o);
-  friend void from_json(const nlohmann::json& j, UeUpdateStatus& o);
+  friend void to_json(nlohmann::json &j, const UeUpdateStatus &o);
+  friend void from_json(const nlohmann::json &j, UeUpdateStatus &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* UeUpdateStatus_H_ */

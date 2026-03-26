@@ -20,8 +20,8 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_MDT_Activation {
-  Ngap_MDT_Activation_immediate_MDT_only      = 0,
-  Ngap_MDT_Activation_logged_MDT_only         = 1,
+  Ngap_MDT_Activation_immediate_MDT_only = 0,
+  Ngap_MDT_Activation_logged_MDT_only = 1,
   Ngap_MDT_Activation_immediate_MDT_and_Trace = 2
   /*
    * Enumeration is extensible

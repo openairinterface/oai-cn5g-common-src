@@ -16,7 +16,7 @@ extern "C" {
 namespace oai::ngap {
 
 class PduSessionResourceModifyIndicationUnsuccessfulTransfer {
- public:
+public:
   PduSessionResourceModifyIndicationUnsuccessfulTransfer();
   virtual ~PduSessionResourceModifyIndicationUnsuccessfulTransfer();
 
@@ -29,15 +29,15 @@ class PduSessionResourceModifyIndicationUnsuccessfulTransfer {
   long getChoiceOfCause() const;
   long getCause() const;
 
-  int encode(uint8_t* buf, int bufSize);
-  bool decode(uint8_t* buf, int bufSize);
+  int encode(uint8_t *buf, int bufSize);
+  bool decode(uint8_t *buf, int bufSize);
 
- private:
-  Ngap_PDUSessionResourceModifyIndicationUnsuccessfulTransfer_t*
-      m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe;
+private:
+  Ngap_PDUSessionResourceModifyIndicationUnsuccessfulTransfer_t
+      *m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe;
 
-  Cause m_CauseValue;  // Mandatory
+  Cause m_CauseValue; // Mandatory
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

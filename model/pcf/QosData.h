@@ -19,9 +19,9 @@
 #ifndef QosData_H_
 #define QosData_H_
 
-#include <string>
 #include "Arp.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::pcf {
 
@@ -29,7 +29,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class QosData {
- public:
+public:
   QosData();
   virtual ~QosData() = default;
 
@@ -43,16 +43,16 @@ class QosData {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const QosData& rhs) const;
-  bool operator!=(const QosData& rhs) const;
+  bool operator==(const QosData &rhs) const;
+  bool operator!=(const QosData &rhs) const;
 
   /////////////////////////////////////////////
   /// QosData members
@@ -61,7 +61,7 @@ class QosData {
   /// Univocally identifies the QoS control policy data within a PDU session.
   /// </summary>
   std::string getQosId() const;
-  void setQosId(std::string const& value);
+  void setQosId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
@@ -73,35 +73,35 @@ class QosData {
   ///
   /// </summary>
   std::string getMaxbrUl() const;
-  void setMaxbrUl(std::string const& value);
+  void setMaxbrUl(std::string const &value);
   bool maxbrUlIsSet() const;
   void unsetMaxbrUl();
   /// <summary>
   ///
   /// </summary>
   std::string getMaxbrDl() const;
-  void setMaxbrDl(std::string const& value);
+  void setMaxbrDl(std::string const &value);
   bool maxbrDlIsSet() const;
   void unsetMaxbrDl();
   /// <summary>
   ///
   /// </summary>
   std::string getGbrUl() const;
-  void setGbrUl(std::string const& value);
+  void setGbrUl(std::string const &value);
   bool gbrUlIsSet() const;
   void unsetGbrUl();
   /// <summary>
   ///
   /// </summary>
   std::string getGbrDl() const;
-  void setGbrDl(std::string const& value);
+  void setGbrDl(std::string const &value);
   bool gbrDlIsSet() const;
   void unsetGbrDl();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Arp getArp() const;
-  void setArp(oai::model::common::Arp const& value);
+  void setArp(oai::model::common::Arp const &value);
   bool arpIsSet() const;
   void unsetArp();
   /// <summary>
@@ -147,7 +147,7 @@ class QosData {
   /// in downlink direction.
   /// </summary>
   std::string getSharingKeyDl() const;
-  void setSharingKeyDl(std::string const& value);
+  void setSharingKeyDl(std::string const &value);
   bool sharingKeyDlIsSet() const;
   void unsetSharingKeyDl();
   /// <summary>
@@ -155,7 +155,7 @@ class QosData {
   /// in uplink direction.
   /// </summary>
   std::string getSharingKeyUl() const;
-  void setSharingKeyUl(std::string const& value);
+  void setSharingKeyUl(std::string const &value);
   bool sharingKeyUlIsSet() const;
   void unsetSharingKeyUl();
   /// <summary>
@@ -198,12 +198,12 @@ class QosData {
   ///
   /// </summary>
   std::string getPacketErrorRate() const;
-  void setPacketErrorRate(std::string const& value);
+  void setPacketErrorRate(std::string const &value);
   bool packetErrorRateIsSet() const;
   void unsetPacketErrorRate();
 
-  friend void to_json(nlohmann::json& j, const QosData& o);
-  friend void from_json(const nlohmann::json& j, QosData& o);
+  friend void to_json(nlohmann::json &j, const QosData &o);
+  friend void from_json(const nlohmann::json &j, QosData &o);
 
   std::string m_QosId;
 
@@ -247,6 +247,6 @@ class QosData {
   bool m_PacketErrorRateIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* QosData_H_ */

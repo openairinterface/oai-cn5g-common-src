@@ -19,14 +19,14 @@
 namespace oai::model::udm {
 
 SequenceNumber::SequenceNumber() {
-  m_SqnScheme        = "";
-  m_SqnSchemeIsSet   = false;
-  m_Sqn              = "";
-  m_SqnIsSet         = false;
+  m_SqnScheme = "";
+  m_SqnSchemeIsSet = false;
+  m_Sqn = "";
+  m_SqnIsSet = false;
   m_LastIndexesIsSet = false;
-  m_IndLength        = 0;
-  m_IndLengthIsSet   = false;
-  m_DifSignIsSet     = false;
+  m_IndLength = 0;
+  m_IndLengthIsSet = false;
+  m_DifSignIsSet = false;
 }
 
 SequenceNumber::~SequenceNumber() {}
@@ -35,17 +35,21 @@ void SequenceNumber::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const SequenceNumber& o) {
+void to_json(nlohmann::json &j, const SequenceNumber &o) {
   j = nlohmann::json();
-  if (o.sqnSchemeIsSet()) j["sqnScheme"] = o.m_SqnScheme;
-  if (o.sqnIsSet()) j["sqn"] = o.m_Sqn;
+  if (o.sqnSchemeIsSet())
+    j["sqnScheme"] = o.m_SqnScheme;
+  if (o.sqnIsSet())
+    j["sqn"] = o.m_Sqn;
   if (o.lastIndexesIsSet() || !o.m_LastIndexes.empty())
     j["lastIndexes"] = o.m_LastIndexes;
-  if (o.indLengthIsSet()) j["indLength"] = o.m_IndLength;
-  if (o.difSignIsSet()) j["difSign"] = o.m_DifSign;
+  if (o.indLengthIsSet())
+    j["indLength"] = o.m_IndLength;
+  if (o.difSignIsSet())
+    j["difSign"] = o.m_DifSign;
 }
 
-void from_json(const nlohmann::json& j, SequenceNumber& o) {
+void from_json(const nlohmann::json &j, SequenceNumber &o) {
   if (j.find("sqnScheme") != j.end()) {
     j.at("sqnScheme").get_to(o.m_SqnScheme);
     o.m_SqnSchemeIsSet = true;
@@ -68,71 +72,43 @@ void from_json(const nlohmann::json& j, SequenceNumber& o) {
   }
 }
 
-std::string SequenceNumber::getSqnScheme() const {
-  return m_SqnScheme;
-}
-void SequenceNumber::setSqnScheme(std::string const& value) {
-  m_SqnScheme      = value;
+std::string SequenceNumber::getSqnScheme() const { return m_SqnScheme; }
+void SequenceNumber::setSqnScheme(std::string const &value) {
+  m_SqnScheme = value;
   m_SqnSchemeIsSet = true;
 }
-bool SequenceNumber::sqnSchemeIsSet() const {
-  return m_SqnSchemeIsSet;
-}
-void SequenceNumber::unsetSqnScheme() {
-  m_SqnSchemeIsSet = false;
-}
-std::string SequenceNumber::getSqn() const {
-  return m_Sqn;
-}
-void SequenceNumber::setSqn(std::string const& value) {
-  m_Sqn      = value;
+bool SequenceNumber::sqnSchemeIsSet() const { return m_SqnSchemeIsSet; }
+void SequenceNumber::unsetSqnScheme() { m_SqnSchemeIsSet = false; }
+std::string SequenceNumber::getSqn() const { return m_Sqn; }
+void SequenceNumber::setSqn(std::string const &value) {
+  m_Sqn = value;
   m_SqnIsSet = true;
 }
-bool SequenceNumber::sqnIsSet() const {
-  return m_SqnIsSet;
-}
-void SequenceNumber::unsetSqn() {
-  m_SqnIsSet = false;
-}
-std::map<std::string, int32_t>& SequenceNumber::getLastIndexes() {
+bool SequenceNumber::sqnIsSet() const { return m_SqnIsSet; }
+void SequenceNumber::unsetSqn() { m_SqnIsSet = false; }
+std::map<std::string, int32_t> &SequenceNumber::getLastIndexes() {
   return m_LastIndexes;
 }
 void SequenceNumber::setLastIndexes(
     std::map<std::string, int32_t> const value) {
-  m_LastIndexes      = value;
+  m_LastIndexes = value;
   m_LastIndexesIsSet = true;
 }
-bool SequenceNumber::lastIndexesIsSet() const {
-  return m_LastIndexesIsSet;
-}
-void SequenceNumber::unsetLastIndexes() {
-  m_LastIndexesIsSet = false;
-}
-int32_t SequenceNumber::getIndLength() const {
-  return m_IndLength;
-}
+bool SequenceNumber::lastIndexesIsSet() const { return m_LastIndexesIsSet; }
+void SequenceNumber::unsetLastIndexes() { m_LastIndexesIsSet = false; }
+int32_t SequenceNumber::getIndLength() const { return m_IndLength; }
 void SequenceNumber::setIndLength(int32_t const value) {
-  m_IndLength      = value;
+  m_IndLength = value;
   m_IndLengthIsSet = true;
 }
-bool SequenceNumber::indLengthIsSet() const {
-  return m_IndLengthIsSet;
-}
-void SequenceNumber::unsetIndLength() {
-  m_IndLengthIsSet = false;
-}
-Sign SequenceNumber::getDifSign() const {
-  return m_DifSign;
-}
-void SequenceNumber::setDifSign(Sign const& value) {
-  m_DifSign      = value;
+bool SequenceNumber::indLengthIsSet() const { return m_IndLengthIsSet; }
+void SequenceNumber::unsetIndLength() { m_IndLengthIsSet = false; }
+Sign SequenceNumber::getDifSign() const { return m_DifSign; }
+void SequenceNumber::setDifSign(Sign const &value) {
+  m_DifSign = value;
   m_DifSignIsSet = true;
 }
-bool SequenceNumber::difSignIsSet() const {
-  return m_DifSignIsSet;
-}
-void SequenceNumber::unsetDifSign() {
-  m_DifSignIsSet = false;
-}
+bool SequenceNumber::difSignIsSet() const { return m_DifSignIsSet; }
+void SequenceNumber::unsetDifSign() { m_DifSignIsSet = false; }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

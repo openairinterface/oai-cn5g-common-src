@@ -19,8 +19,8 @@
 namespace oai::model::udm {
 
 TraceDataResponse::TraceDataResponse() {
-  m_TraceDataIsSet         = false;
-  m_SharedTraceDataId      = "";
+  m_TraceDataIsSet = false;
+  m_SharedTraceDataId = "";
   m_SharedTraceDataIdIsSet = false;
 }
 
@@ -30,14 +30,15 @@ void TraceDataResponse::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const TraceDataResponse& o) {
+void to_json(nlohmann::json &j, const TraceDataResponse &o) {
   j = nlohmann::json();
-  if (o.traceDataIsSet()) j["traceData"] = o.m_TraceData;
+  if (o.traceDataIsSet())
+    j["traceData"] = o.m_TraceData;
   if (o.sharedTraceDataIdIsSet())
     j["sharedTraceDataId"] = o.m_SharedTraceDataId;
 }
 
-void from_json(const nlohmann::json& j, TraceDataResponse& o) {
+void from_json(const nlohmann::json &j, TraceDataResponse &o) {
   if (j.find("traceData") != j.end()) {
     j.at("traceData").get_to(o.m_TraceData);
     o.m_TraceDataIsSet = true;
@@ -52,21 +53,17 @@ oai::model::common::TraceData TraceDataResponse::getTraceData() const {
   return m_TraceData;
 }
 void TraceDataResponse::setTraceData(
-    oai::model::common::TraceData const& value) {
-  m_TraceData      = value;
+    oai::model::common::TraceData const &value) {
+  m_TraceData = value;
   m_TraceDataIsSet = true;
 }
-bool TraceDataResponse::traceDataIsSet() const {
-  return m_TraceDataIsSet;
-}
-void TraceDataResponse::unsetTraceData() {
-  m_TraceDataIsSet = false;
-}
+bool TraceDataResponse::traceDataIsSet() const { return m_TraceDataIsSet; }
+void TraceDataResponse::unsetTraceData() { m_TraceDataIsSet = false; }
 std::string TraceDataResponse::getSharedTraceDataId() const {
   return m_SharedTraceDataId;
 }
-void TraceDataResponse::setSharedTraceDataId(std::string const& value) {
-  m_SharedTraceDataId      = value;
+void TraceDataResponse::setSharedTraceDataId(std::string const &value) {
+  m_SharedTraceDataId = value;
   m_SharedTraceDataIdIsSet = true;
 }
 bool TraceDataResponse::sharedTraceDataIdIsSet() const {
@@ -76,4 +73,4 @@ void TraceDataResponse::unsetSharedTraceDataId() {
   m_SharedTraceDataIdIsSet = false;
 }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

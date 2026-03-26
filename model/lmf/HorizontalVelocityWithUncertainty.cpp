@@ -19,8 +19,8 @@
 namespace oai::model::lmf {
 
 HorizontalVelocityWithUncertainty::HorizontalVelocityWithUncertainty() {
-  m_HSpeed       = 0.0f;
-  m_Bearing      = 0;
+  m_HSpeed = 0.0f;
+  m_Bearing = 0;
   m_HUncertainty = 0.0f;
 }
 
@@ -31,18 +31,18 @@ void HorizontalVelocityWithUncertainty::validate() const {
   }
 }
 
-bool HorizontalVelocityWithUncertainty::validate(std::stringstream& msg) const {
+bool HorizontalVelocityWithUncertainty::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool HorizontalVelocityWithUncertainty::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "HorizontalVelocityWithUncertainty" : pathPrefix;
 
   /* HSpeed */ {
-    const float& value                 = m_HSpeed;
+    const float &value = m_HSpeed;
     const std::string currentValuePath = _pathPrefix + ".hSpeed";
 
     if (value < static_cast<float>(0)) {
@@ -56,7 +56,7 @@ bool HorizontalVelocityWithUncertainty::validate(
   }
 
   /* Bearing */ {
-    const int32_t& value               = m_Bearing;
+    const int32_t &value = m_Bearing;
     const std::string currentValuePath = _pathPrefix + ".bearing";
 
     if (value < 0) {
@@ -70,7 +70,7 @@ bool HorizontalVelocityWithUncertainty::validate(
   }
 
   /* HUncertainty */ {
-    const float& value                 = m_HUncertainty;
+    const float &value = m_HUncertainty;
     const std::string currentValuePath = _pathPrefix + ".hUncertainty";
 
     if (value < static_cast<float>(0)) {
@@ -87,7 +87,7 @@ bool HorizontalVelocityWithUncertainty::validate(
 }
 
 bool HorizontalVelocityWithUncertainty::operator==(
-    const HorizontalVelocityWithUncertainty& rhs) const {
+    const HorizontalVelocityWithUncertainty &rhs) const {
   return
 
       (getHSpeed() == rhs.getHSpeed()) &&
@@ -100,26 +100,24 @@ bool HorizontalVelocityWithUncertainty::operator==(
 }
 
 bool HorizontalVelocityWithUncertainty::operator!=(
-    const HorizontalVelocityWithUncertainty& rhs) const {
+    const HorizontalVelocityWithUncertainty &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const HorizontalVelocityWithUncertainty& o) {
-  j                 = nlohmann::json();
-  j["hSpeed"]       = o.m_HSpeed;
-  j["bearing"]      = o.m_Bearing;
+void to_json(nlohmann::json &j, const HorizontalVelocityWithUncertainty &o) {
+  j = nlohmann::json();
+  j["hSpeed"] = o.m_HSpeed;
+  j["bearing"] = o.m_Bearing;
   j["hUncertainty"] = o.m_HUncertainty;
 }
 
-void from_json(const nlohmann::json& j, HorizontalVelocityWithUncertainty& o) {
+void from_json(const nlohmann::json &j, HorizontalVelocityWithUncertainty &o) {
   j.at("hSpeed").get_to(o.m_HSpeed);
   j.at("bearing").get_to(o.m_Bearing);
   j.at("hUncertainty").get_to(o.m_HUncertainty);
 }
 
-float HorizontalVelocityWithUncertainty::getHSpeed() const {
-  return m_HSpeed;
-}
+float HorizontalVelocityWithUncertainty::getHSpeed() const { return m_HSpeed; }
 void HorizontalVelocityWithUncertainty::setHSpeed(float const value) {
   m_HSpeed = value;
 }
@@ -136,4 +134,4 @@ void HorizontalVelocityWithUncertainty::setHUncertainty(float const value) {
   m_HUncertainty = value;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

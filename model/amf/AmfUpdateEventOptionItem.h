@@ -19,8 +19,8 @@
 #ifndef AmfUpdateEventOptionItem_H_
 #define AmfUpdateEventOptionItem_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::amf {
 
@@ -28,7 +28,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class AmfUpdateEventOptionItem {
- public:
+public:
   AmfUpdateEventOptionItem();
   virtual ~AmfUpdateEventOptionItem() = default;
 
@@ -42,10 +42,10 @@ class AmfUpdateEventOptionItem {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const AmfUpdateEventOptionItem& rhs) const;
-  bool operator!=(const AmfUpdateEventOptionItem& rhs) const;
+  bool operator==(const AmfUpdateEventOptionItem &rhs) const;
+  bool operator!=(const AmfUpdateEventOptionItem &rhs) const;
 
   /////////////////////////////////////////////
   /// AmfUpdateEventOptionItem members
@@ -54,22 +54,22 @@ class AmfUpdateEventOptionItem {
   ///
   /// </summary>
   std::string getOp() const;
-  void setOp(std::string const& value);
+  void setOp(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getPath() const;
-  void setPath(std::string const& value);
+  void setPath(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getValue() const;
-  void setValue(std::string const& value);
+  void setValue(std::string const &value);
 
-  friend void to_json(nlohmann::json& j, const AmfUpdateEventOptionItem& o);
-  friend void from_json(const nlohmann::json& j, AmfUpdateEventOptionItem& o);
+  friend void to_json(nlohmann::json &j, const AmfUpdateEventOptionItem &o);
+  friend void from_json(const nlohmann::json &j, AmfUpdateEventOptionItem &o);
 
- protected:
+protected:
   std::string m_Op;
 
   std::string m_Path;
@@ -78,9 +78,9 @@ class AmfUpdateEventOptionItem {
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* AmfUpdateEventOptionItem_H_ */

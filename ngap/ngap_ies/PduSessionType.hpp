@@ -12,20 +12,20 @@ extern "C" {
 namespace oai::ngap {
 
 class PduSessionType {
- public:
+public:
   PduSessionType();
   virtual ~PduSessionType();
 
   void set(e_Ngap_PDUSessionType pduSessionType);
-  bool get(long& pduSessionType) const;
+  bool get(long &pduSessionType) const;
 
-  bool encode(Ngap_PDUSessionType_t&) const;
-  bool decode(const Ngap_PDUSessionType_t&);
+  bool encode(Ngap_PDUSessionType_t &) const;
+  bool decode(const Ngap_PDUSessionType_t &);
 
- private:
+private:
   long m_PduSessionType;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

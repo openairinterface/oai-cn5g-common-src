@@ -13,8 +13,8 @@
 
 #include "RuleStatus_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::pcf {
 
@@ -27,12 +27,12 @@ void RuleStatus_anyOf::validate() const {
   }
 }
 
-bool RuleStatus_anyOf::validate(std::stringstream& msg) const {
+bool RuleStatus_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool RuleStatus_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool RuleStatus_anyOf::validate(std::stringstream &msg,
+                                const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "RuleStatus_anyOf" : pathPrefix;
@@ -46,33 +46,33 @@ bool RuleStatus_anyOf::validate(
   return success;
 }
 
-bool RuleStatus_anyOf::operator==(const RuleStatus_anyOf& rhs) const {
+bool RuleStatus_anyOf::operator==(const RuleStatus_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool RuleStatus_anyOf::operator!=(const RuleStatus_anyOf& rhs) const {
+bool RuleStatus_anyOf::operator!=(const RuleStatus_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const RuleStatus_anyOf& o) {
+void to_json(nlohmann::json &j, const RuleStatus_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case RuleStatus_anyOf::eRuleStatus_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case RuleStatus_anyOf::eRuleStatus_anyOf::ACTIVE:
-      j = "ACTIVE";
-      break;
-    case RuleStatus_anyOf::eRuleStatus_anyOf::INACTIVE:
-      j = "INACTIVE";
-      break;
+  case RuleStatus_anyOf::eRuleStatus_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case RuleStatus_anyOf::eRuleStatus_anyOf::ACTIVE:
+    j = "ACTIVE";
+    break;
+  case RuleStatus_anyOf::eRuleStatus_anyOf::INACTIVE:
+    j = "INACTIVE";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, RuleStatus_anyOf& o) {
+void from_json(const nlohmann::json &j, RuleStatus_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "ACTIVE") {
     o.setValue(RuleStatus_anyOf::eRuleStatus_anyOf::ACTIVE);
@@ -94,4 +94,4 @@ void RuleStatus_anyOf::setValue(RuleStatus_anyOf::eRuleStatus_anyOf value) {
   m_value = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

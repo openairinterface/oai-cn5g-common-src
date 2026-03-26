@@ -12,8 +12,8 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_NRUERLFReportContainer.h"
 #include "Ngap_LTEUERLFReportContainer.h"
+#include "Ngap_NRUERLFReportContainer.h"
 #include <constr_CHOICE.h>
 
 #ifdef __cplusplus
@@ -37,7 +37,7 @@ typedef struct Ngap_UERLFReportContainer {
   union Ngap_UERLFReportContainer_u {
     Ngap_NRUERLFReportContainer_t nR;
     Ngap_LTEUERLFReportContainer_t lTE;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

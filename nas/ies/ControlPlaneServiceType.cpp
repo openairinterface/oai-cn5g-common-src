@@ -27,7 +27,7 @@ void ControlPlaneServiceType::SetValue(uint8_t value) {
 }
 
 //------------------------------------------------------------------------------
-void ControlPlaneServiceType::GetValue(uint8_t& value) const {
+void ControlPlaneServiceType::GetValue(uint8_t &value) const {
   value = service_type_value_;
 }
 

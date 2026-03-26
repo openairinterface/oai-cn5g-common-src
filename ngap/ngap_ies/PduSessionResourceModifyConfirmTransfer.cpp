@@ -13,7 +13,7 @@ namespace oai::ngap {
 //------------------------------------------------------------------------------
 PduSessionResourceModifyConfirmTransfer::
     PduSessionResourceModifyConfirmTransfer() {
-  m_Ie = (Ngap_PDUSessionResourceModifyConfirmTransfer_t*) calloc(
+  m_Ie = (Ngap_PDUSessionResourceModifyConfirmTransfer_t *)calloc(
       1, sizeof(Ngap_PDUSessionResourceModifyConfirmTransfer_t));
   m_QosFlowFailedToModifyList = std::nullopt;
 }
@@ -26,42 +26,42 @@ void PduSessionResourceModifyConfirmTransfer::setQosFlowModifyConfirmList(
 
 //------------------------------------------------------------------------------
 void PduSessionResourceModifyConfirmTransfer::setQosFlowModifyConfirmList(
-    const QosFlowModifyConfirmList& list) {
+    const QosFlowModifyConfirmList &list) {
   m_QosFlowModifyConfirmList = list;
 }
 //------------------------------------------------------------------------------
 void PduSessionResourceModifyConfirmTransfer::getQosFlowModifyConfirmList(
-    QosFlowModifyConfirmList& list) const {
+    QosFlowModifyConfirmList &list) const {
   list = m_QosFlowModifyConfirmList;
 }
 
 //------------------------------------------------------------------------------
 void PduSessionResourceModifyConfirmTransfer::setUlNgUUpTnlInformation(
-    const UpTransportLayerInformation& ulNgUUpTnlInformation) {
+    const UpTransportLayerInformation &ulNgUUpTnlInformation) {
   m_UlNgUUpTnlInformation = ulNgUUpTnlInformation;
 }
 
 //------------------------------------------------------------------------------
 void PduSessionResourceModifyConfirmTransfer::getUlNgUUpTnlInformation(
-    UpTransportLayerInformation& ulNgUUpTnlInformation) const {
+    UpTransportLayerInformation &ulNgUUpTnlInformation) const {
   ulNgUUpTnlInformation = m_UlNgUUpTnlInformation;
 }
 
 //------------------------------------------------------------------------------
 void PduSessionResourceModifyConfirmTransfer::setQosFlowFailedToModifyList(
-    const QosFlowListWithCause& qosFlowFailedToModifyList) {
+    const QosFlowListWithCause &qosFlowFailedToModifyList) {
   m_QosFlowFailedToModifyList =
       std::make_optional<QosFlowListWithCause>(qosFlowFailedToModifyList);
 }
 
 //------------------------------------------------------------------------------
 void PduSessionResourceModifyConfirmTransfer::getQosFlowFailedToModifyList(
-    std::optional<QosFlowListWithCause>& qosFlowFailedToModifyList) const {
+    std::optional<QosFlowListWithCause> &qosFlowFailedToModifyList) const {
   qosFlowFailedToModifyList = m_QosFlowFailedToModifyList;
 }
 
 //------------------------------------------------------------------------------
-int PduSessionResourceModifyConfirmTransfer::encode(uint8_t* buf, int bufSize) {
+int PduSessionResourceModifyConfirmTransfer::encode(uint8_t *buf, int bufSize) {
   ngap_utils::print_asn_msg(
       &asn_DEF_Ngap_PDUSessionResourceModifyConfirmTransfer, m_Ie);
   asn_enc_rval_t er = aper_encode_to_buffer(
@@ -73,12 +73,12 @@ int PduSessionResourceModifyConfirmTransfer::encode(uint8_t* buf, int bufSize) {
 }
 
 //------------------------------------------------------------------------------
-bool PduSessionResourceModifyConfirmTransfer::decode(
-    uint8_t* buf, int bufSize) {
-  asn_dec_rval_t rc = asn_decode(
-      NULL, ATS_ALIGNED_CANONICAL_PER,
-      &asn_DEF_Ngap_PDUSessionResourceModifyConfirmTransfer, (void**) &m_Ie,
-      buf, bufSize);
+bool PduSessionResourceModifyConfirmTransfer::decode(uint8_t *buf,
+                                                     int bufSize) {
+  asn_dec_rval_t rc =
+      asn_decode(NULL, ATS_ALIGNED_CANONICAL_PER,
+                 &asn_DEF_Ngap_PDUSessionResourceModifyConfirmTransfer,
+                 (void **)&m_Ie, buf, bufSize);
   if (rc.code == RC_OK) {
     oai::logger::logger_common::ngap().debug("Decoded successfully");
   } else if (rc.code == RC_WMORE) {
@@ -122,4 +122,4 @@ bool PduSessionResourceModifyConfirmTransfer::decode(
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

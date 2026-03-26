@@ -40,7 +40,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class SessionManagementSubscriptionData {
- public:
+public:
   SessionManagementSubscriptionData();
   virtual ~SessionManagementSubscriptionData();
 
@@ -53,12 +53,12 @@ class SessionManagementSubscriptionData {
   ///
   /// </summary>
   oai::model::common::Snssai getSingleNssai() const;
-  void setSingleNssai(oai::model::common::Snssai const& value);
+  void setSingleNssai(oai::model::common::Snssai const &value);
   /// <summary>
   /// A map (list of key-value pairs where Dnn serves as key) of
   /// DnnConfigurations
   /// </summary>
-  std::map<std::string, DnnConfiguration>& getDnnConfigurations();
+  std::map<std::string, DnnConfiguration> &getDnnConfigurations();
   bool dnnConfigurationsIsSet() const;
   void unsetDnnConfigurations();
 
@@ -67,44 +67,44 @@ class SessionManagementSubscriptionData {
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getInternalGroupIds();
+  std::vector<std::string> &getInternalGroupIds();
   bool internalGroupIdsIsSet() const;
   void unsetInternalGroupIds();
   /// <summary>
   ///
   /// </summary>
   std::string getSharedDnnConfigurationsId() const;
-  void setSharedDnnConfigurationsId(std::string const& value);
+  void setSharedDnnConfigurationsId(std::string const &value);
   bool sharedDnnConfigurationsIdIsSet() const;
   void unsetSharedDnnConfigurationsId();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::OdbPacketServices getOdbPacketServices() const;
-  void setOdbPacketServices(oai::model::common::OdbPacketServices const& value);
+  void setOdbPacketServices(oai::model::common::OdbPacketServices const &value);
   bool odbPacketServicesIsSet() const;
   void unsetOdbPacketServices();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::TraceData getTraceData() const;
-  void setTraceData(oai::model::common::TraceData const& value);
+  void setTraceData(oai::model::common::TraceData const &value);
   bool traceDataIsSet() const;
   void unsetTraceData();
   /// <summary>
   ///
   /// </summary>
   std::string getSharedTraceDataId() const;
-  void setSharedTraceDataId(std::string const& value);
+  void setSharedTraceDataId(std::string const &value);
   bool sharedTraceDataIdIsSet() const;
   void unsetSharedTraceDataId();
 
-  friend void to_json(
-      nlohmann::json& j, const SessionManagementSubscriptionData& o);
-  friend void from_json(
-      const nlohmann::json& j, SessionManagementSubscriptionData& o);
+  friend void to_json(nlohmann::json &j,
+                      const SessionManagementSubscriptionData &o);
+  friend void from_json(const nlohmann::json &j,
+                        SessionManagementSubscriptionData &o);
 
- protected:
+protected:
   oai::model::common::Snssai m_SingleNssai;
 
   std::map<std::string, DnnConfiguration> m_DnnConfigurations;
@@ -121,6 +121,6 @@ class SessionManagementSubscriptionData {
   bool m_SharedTraceDataIdIsSet;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* SessionManagementSubscriptionData_H_ */

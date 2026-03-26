@@ -20,30 +20,29 @@ struct asn_TYPE_descriptor_s; /* Forward declaration */
  * NOTE: Use the ber_decode() function (ber_decoder.h) to decode data
  * produced by der_encode().
  */
-asn_enc_rval_t der_encode(
-    const struct asn_TYPE_descriptor_s* type_descriptor,
-    const void* struct_ptr, /* Structure to be encoded */
-    asn_app_consume_bytes_f* consume_bytes_cb,
-    void* app_key /* Arbitrary callback argument */
+asn_enc_rval_t der_encode(const struct asn_TYPE_descriptor_s *type_descriptor,
+                          const void *struct_ptr, /* Structure to be encoded */
+                          asn_app_consume_bytes_f *consume_bytes_cb,
+                          void *app_key /* Arbitrary callback argument */
 );
 
 /* A variant of der_encode() which encodes data into the pre-allocated buffer */
-asn_enc_rval_t der_encode_to_buffer(
-    const struct asn_TYPE_descriptor_s* type_descriptor,
-    const void* struct_ptr, /* Structure to be encoded */
-    void* buffer,           /* Pre-allocated buffer */
-    size_t buffer_size      /* Initial buffer size (maximum) */
+asn_enc_rval_t
+der_encode_to_buffer(const struct asn_TYPE_descriptor_s *type_descriptor,
+                     const void *struct_ptr, /* Structure to be encoded */
+                     void *buffer,           /* Pre-allocated buffer */
+                     size_t buffer_size      /* Initial buffer size (maximum) */
 );
 
 /*
  * Type of the generic DER encoder.
  */
 typedef asn_enc_rval_t(der_type_encoder_f)(
-    const struct asn_TYPE_descriptor_s* type_descriptor,
-    const void* struct_ptr, /* Structure to be encoded */
+    const struct asn_TYPE_descriptor_s *type_descriptor,
+    const void *struct_ptr, /* Structure to be encoded */
     int tag_mode,           /* {-1,0,1}: IMPLICIT, no, EXPLICIT */
-    ber_tlv_tag_t tag, asn_app_consume_bytes_f* consume_bytes_cb, /* Callback */
-    void* app_key /* Arbitrary callback argument */
+    ber_tlv_tag_t tag, asn_app_consume_bytes_f *consume_bytes_cb, /* Callback */
+    void *app_key /* Arbitrary callback argument */
 );
 
 /*******************************
@@ -53,12 +52,13 @@ typedef asn_enc_rval_t(der_type_encoder_f)(
 /*
  * Write out leading TL[v] sequence according to the type definition.
  */
-ssize_t der_write_tags(
-    const struct asn_TYPE_descriptor_s* type_descriptor, size_t struct_length,
-    int tag_mode,      /* {-1,0,1}: IMPLICIT, no, EXPLICIT */
-    int last_tag_form, /* {0,!0}: prim, constructed */
-    ber_tlv_tag_t tag, asn_app_consume_bytes_f* consume_bytes_cb,
-    void* app_key);
+ssize_t der_write_tags(const struct asn_TYPE_descriptor_s *type_descriptor,
+                       size_t struct_length,
+                       int tag_mode,      /* {-1,0,1}: IMPLICIT, no, EXPLICIT */
+                       int last_tag_form, /* {0,!0}: prim, constructed */
+                       ber_tlv_tag_t tag,
+                       asn_app_consume_bytes_f *consume_bytes_cb,
+                       void *app_key);
 
 #ifdef __cplusplus
 }

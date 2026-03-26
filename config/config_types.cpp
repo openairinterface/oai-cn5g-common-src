@@ -2,41 +2,34 @@
  * SPDX-License-Identifier: LicenseRef-CSSL-1.0
  */
 
-
 #include "config_types.hpp"
+#include "common_defs.h"
 #include "config.hpp"
 #include "conversions.hpp"
 #include "if.hpp"
-#include "common_defs.h"
 
 #include <fmt/format.h>
 #include <string>
 
-#include <regex>
-#include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/classification.hpp>
+#include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/trim.hpp>
+#include <regex>
 
 using namespace oai::config;
 using namespace oai::utils;
 
-bool config_type::is_set() const {
-  return m_set;
-}
+bool config_type::is_set() const { return m_set; }
 
-void config_type::set_config() {
-  m_set = true;
-}
+void config_type::set_config() { m_set = true; }
 
-void config_type::unset_config() {
-  m_set = false;
-}
+void config_type::unset_config() { m_set = false; }
 
-const std::string& config_type::get_config_name() const {
+const std::string &config_type::get_config_name() const {
   return m_config_name;
 }
 
-void config_type::set_config_name(const std::string& name) {
+void config_type::set_config_name(const std::string &name) {
   m_config_name = name;
 }
 
@@ -49,7 +42,7 @@ unsigned int config_type::get_inner_width(unsigned int indent_length) {
   return inner_width;
 }
 
-in_addr config_type::safe_convert_ip(const std::string& ipv4_string) {
+in_addr config_type::safe_convert_ip(const std::string &ipv4_string) {
   in_addr ip = conv::fromString(ipv4_string);
 
   if (!ip.s_addr) {
@@ -59,15 +52,15 @@ in_addr config_type::safe_convert_ip(const std::string& ipv4_string) {
   return ip;
 }
 
-void config_type::get_ipv4_range(
-    const in_addr& ipv4_domain, const uint8_t& ipv4_prefix, in_addr& start_ip,
-    in_addr& end_ip) {
+void config_type::get_ipv4_range(const in_addr &ipv4_domain,
+                                 const uint8_t &ipv4_prefix, in_addr &start_ip,
+                                 in_addr &end_ip) {
   uint32_t ipv4_subnet = ntohl(ipv4_domain.s_addr);
 
   uint32_t startIP, endIP;
 
   startIP = ipv4_subnet & ~(0xFFFFFFFF >> ipv4_prefix);
-  endIP   = startIP | (0xFFFFFFFF >> ipv4_prefix);
+  endIP = startIP | (0xFFFFFFFF >> ipv4_prefix);
 
   std::string start = std::to_string((startIP >> 24) & 0xFF) + "." +
                       std::to_string((startIP >> 16) & 0xFF) + "." +
@@ -80,13 +73,13 @@ void config_type::get_ipv4_range(
                     std::to_string(endIP & 0xFF);
 
   start_ip = conv::fromString(start);
-  end_ip   = conv::fromString(end);
+  end_ip = conv::fromString(end);
 
   start_ip.s_addr = start_ip.s_addr + be32toh(1);
-  end_ip.s_addr   = end_ip.s_addr - be32toh(1);
+  end_ip.s_addr = end_ip.s_addr - be32toh(1);
 }
 
-in6_addr config_type::safe_convert_ip6(const std::string& ipv6_string) {
+in6_addr config_type::safe_convert_ip6(const std::string &ipv6_string) {
   in6_addr ip = conv::fromStringV6(ipv6_string);
   if (IN6_IS_ADDR_UNSPECIFIED(&ip)) {
     throw std::runtime_error(
@@ -95,55 +88,52 @@ in6_addr config_type::safe_convert_ip6(const std::string& ipv6_string) {
   return ip;
 }
 
-std::string config_type::add_indent(const std::string& indent) {
+std::string config_type::add_indent(const std::string &indent) {
   std::string base_indent = fmt::format("{:<{}}", "", INDENT_WIDTH);
   return base_indent + indent;
 }
 
-nlohmann::json config_type::to_json() {
-  return {};
-}
+nlohmann::json config_type::to_json() { return {}; }
 
-bool config_type::from_json(const nlohmann::json&) {
-  return false;
-}
+bool config_type::from_json(const nlohmann::json &) { return false; }
 
-string_config_value::string_config_value(
-    const std::string& name, const std::string& value) {
+string_config_value::string_config_value(const std::string &name,
+                                         const std::string &value) {
   m_config_name = name;
-  m_value       = value;
-  m_set         = true;
+  m_value = value;
+  m_set = true;
 }
 
-void string_config_value::from_yaml(const YAML::Node& node) {
+void string_config_value::from_yaml(const YAML::Node &node) {
   m_value = node.as<std::string>();
-  m_set   = true;
+  m_set = true;
 }
 
 nlohmann::json string_config_value::to_json() {
   nlohmann::json json_data = {};
-  json_data                = m_value;
+  json_data = m_value;
   return json_data;
 }
 
-bool string_config_value::from_json(const nlohmann::json& json_data) {
+bool string_config_value::from_json(const nlohmann::json &json_data) {
   try {
     m_value = json_data.get<std::string>();
-  } catch (nlohmann::detail::exception& e) {
+  } catch (nlohmann::detail::exception &e) {
     // TODO:
-  } catch (std::exception& e) {
+  } catch (std::exception &e) {
     // TODO:
   }
   return false;
 }
 
-std::string string_config_value::to_string(const std::string&) const {
+std::string string_config_value::to_string(const std::string &) const {
   std::string out;
   return out.append(m_value);
 }
 
 void string_config_value::validate() {
-  if (!m_set) return;
+  if (!m_set)
+    return;
   std::regex re(m_regex);
   if (!std::regex_match(m_value, re)) {
     throw std::runtime_error(fmt::format(
@@ -152,138 +142,134 @@ void string_config_value::validate() {
   }
 }
 
-const std::string& string_config_value::get_value() const {
-  return m_value;
-}
+const std::string &string_config_value::get_value() const { return m_value; }
 
-void string_config_value::set_validation_regex(const std::string& regex) {
+void string_config_value::set_validation_regex(const std::string &regex) {
   m_regex = regex;
 }
 
-option_config_value::option_config_value(const std::string& name, bool value) {
+option_config_value::option_config_value(const std::string &name, bool value) {
   m_config_name = name;
-  m_value       = value;
-  m_set         = true;
+  m_value = value;
+  m_set = true;
 }
 
-void option_config_value::from_yaml(const YAML::Node& node) {
+void option_config_value::from_yaml(const YAML::Node &node) {
   m_value = node.as<bool>();
-  m_set   = true;
+  m_set = true;
 }
 
 nlohmann::json option_config_value::to_json() {
   nlohmann::json json_data = {};
-  json_data                = m_value;
+  json_data = m_value;
   return json_data;
 }
 
-bool option_config_value::from_json(const nlohmann::json& json_data) {
+bool option_config_value::from_json(const nlohmann::json &json_data) {
   try {
     m_value = json_data.get<bool>();
 
-  } catch (nlohmann::detail::exception& e) {
+  } catch (nlohmann::detail::exception &e) {
     // TODO:
-  } catch (std::exception& e) {
+  } catch (std::exception &e) {
     // TODO:
   }
   return false;
 }
 
-std::string option_config_value::to_string(const std::string&) const {
+std::string option_config_value::to_string(const std::string &) const {
   std::string val = m_value ? "Yes" : "No";
   return val;
 }
 
-bool option_config_value::get_value() const {
-  return m_value;
-}
+bool option_config_value::get_value() const { return m_value; }
 
-int_config_value::int_config_value(const std::string& name, int value) {
+int_config_value::int_config_value(const std::string &name, int value) {
   m_config_name = name;
-  m_value       = value;
-  m_set         = true;
+  m_value = value;
+  m_set = true;
 }
 
-void int_config_value::from_yaml(const YAML::Node& node) {
+void int_config_value::from_yaml(const YAML::Node &node) {
   m_value = node.as<int>();
-  m_set   = true;
+  m_set = true;
 }
 
 nlohmann::json int_config_value::to_json() {
   nlohmann::json json_data = {};
-  json_data                = m_value;
+  json_data = m_value;
   return json_data;
 }
 
-bool int_config_value::from_json(const nlohmann::json& json_data) {
+bool int_config_value::from_json(const nlohmann::json &json_data) {
   try {
     m_value = json_data.get<int>();
 
-  } catch (nlohmann::detail::exception& e) {
+  } catch (nlohmann::detail::exception &e) {
     // TODO:
-  } catch (std::exception& e) {
+  } catch (std::exception &e) {
     // TODO:
   }
   return false;
 }
 
-std::string int_config_value::to_string(const std::string&) const {
+std::string int_config_value::to_string(const std::string &) const {
   return std::to_string(m_value);
 }
 
 void int_config_value::validate() {
-  if (!m_set) return;
+  if (!m_set)
+    return;
   if (m_value < m_min_value || m_value > m_max_value) {
-    throw std::runtime_error(fmt::format(
-        "{} (value: {}) must be in interval [{},{}]", m_config_name, m_value,
-        m_min_value, m_max_value));
+    throw std::runtime_error(
+        fmt::format("{} (value: {}) must be in interval [{},{}]", m_config_name,
+                    m_value, m_min_value, m_max_value));
   }
 }
 
-int int_config_value::get_value() const {
-  return m_value;
-}
+int int_config_value::get_value() const { return m_value; }
 
 void int_config_value::set_validation_interval(int min, int max) {
   m_min_value = min;
   m_max_value = max;
 }
 
-local_interface::local_interface(
-    const std::string& name, const std::string& host, uint16_t port,
-    const std::string& if_name) {
-  m_host        = string_config_value("host", host);
+local_interface::local_interface(const std::string &name,
+                                 const std::string &host, uint16_t port,
+                                 const std::string &if_name) {
+  m_host = string_config_value("host", host);
   m_config_name = name;
-  m_if_name     = string_config_value("interface_name", if_name);
-  m_port        = int_config_value("port", port);
+  m_if_name = string_config_value("interface_name", if_name);
+  m_port = int_config_value("port", port);
   m_port.set_validation_interval(PORT_MIN_VALUE, PORT_MAX_VALUE);
   m_host.set_validation_regex(HOST_VALIDATOR_REGEX);
-  m_set                = true;
+  m_set = true;
   m_is_local_interface = true;
 }
 
-void local_interface::from_yaml(const YAML::Node& node) {
+void local_interface::from_yaml(const YAML::Node &node) {
   if (node["port"]) {
     m_port.from_yaml(node["port"]);
   }
   if (node["interface_name"]) {
     m_if_name.from_yaml(node["interface_name"]);
   }
-  m_set                = true;
+  m_set = true;
   m_is_local_interface = true;
 }
 
 nlohmann::json local_interface::to_json() {
-  nlohmann::json json_data               = {};
+  nlohmann::json json_data = {};
   json_data[m_if_name.get_config_name()] = m_if_name.to_json();
-  if (!m_is_local_interface) return json_data;
+  if (!m_is_local_interface)
+    return json_data;
   json_data[m_port.get_config_name()] = m_port.to_json();
-  json_data["mtu"]                    = m_mtu;
-  json_data["addr4"]                  = conv::toString(m_addr4);
+  json_data["mtu"] = m_mtu;
+  json_data["addr4"] = conv::toString(m_addr4);
   return json_data;
 }
 
-bool local_interface::from_json(const nlohmann::json& json_data) {
+bool local_interface::from_json(const nlohmann::json &json_data) {
   try {
     if (json_data.find(m_host.get_config_name()) != json_data.end()) {
       m_host.from_json(json_data[m_host.get_config_name()]);
@@ -299,55 +285,57 @@ bool local_interface::from_json(const nlohmann::json& json_data) {
     }
     // TODO: IP Addr
 
-  } catch (nlohmann::detail::exception& e) {
+  } catch (nlohmann::detail::exception &e) {
     // TODO:
-  } catch (std::exception& e) {
+  } catch (std::exception &e) {
     // TODO:
   }
   return false;
 }
 
-std::string local_interface::to_string(const std::string& indent) const {
+std::string local_interface::to_string(const std::string &indent) const {
   std::string out;
   unsigned int inner_width = get_inner_width(indent.length());
 
-  out.append(indent).append(fmt::format(
-      BASE_FORMATTER, INNER_LIST_ELEM, "Port", inner_width,
-      m_port.get_value()));
+  out.append(indent).append(fmt::format(BASE_FORMATTER, INNER_LIST_ELEM, "Port",
+                                        inner_width, m_port.get_value()));
 
-  if (!m_is_local_interface) return out;
+  if (!m_is_local_interface)
+    return out;
   out.append(to_string_for_local(indent));
 
   return out;
 }
 
-std::string local_interface::to_string_for_local(
-    const std::string& indent) const {
+std::string
+local_interface::to_string_for_local(const std::string &indent) const {
   unsigned int inner_width = get_inner_width(indent.length());
   std::string out;
 
   std::string ip4 = conv::toString(m_addr4);
   std::string ip6 = conv::toString(m_addr6);
 
-  out.append(indent).append(fmt::format(
-      BASE_FORMATTER, INNER_LIST_ELEM, "IPv4 Address ", inner_width, ip4));
+  out.append(indent).append(fmt::format(BASE_FORMATTER, INNER_LIST_ELEM,
+                                        "IPv4 Address ", inner_width, ip4));
   if (ip6 != "::") {
-    out.append(indent).append(fmt::format(
-        BASE_FORMATTER, INNER_LIST_ELEM, "IPv6 Address", inner_width, ip6));
+    out.append(indent).append(fmt::format(BASE_FORMATTER, INNER_LIST_ELEM,
+                                          "IPv6 Address", inner_width, ip6));
   }
   out.append(indent).append(
       fmt::format(BASE_FORMATTER, INNER_LIST_ELEM, "MTU", inner_width, m_mtu));
-  out.append(indent).append(fmt::format(
-      BASE_FORMATTER, INNER_LIST_ELEM, "Interface name: ", inner_width,
-      m_if_name.get_value()));
+  out.append(indent).append(fmt::format(BASE_FORMATTER, INNER_LIST_ELEM,
+                                        "Interface name: ", inner_width,
+                                        m_if_name.get_value()));
   return out;
 }
 
 void local_interface::validate() {
-  if (!m_set) return;
+  if (!m_set)
+    return;
   m_host.validate();
   m_port.validate();
-  if (!m_is_local_interface) return;
+  if (!m_is_local_interface)
+    return;
 
   m_if_name.validate();
 
@@ -360,33 +348,25 @@ void local_interface::validate() {
         "Error in reading network interface {}. Make sure it exists",
         m_if_name.get_value()));
   }
-  m_mtu   = _mtu;
+  m_mtu = _mtu;
   m_addr4 = _addr4;
 }
 
-const std::string& local_interface::get_host() const {
+const std::string &local_interface::get_host() const {
   return m_host.get_value();
 }
 
-const std::string& local_interface::get_if_name() const {
+const std::string &local_interface::get_if_name() const {
   return m_if_name.get_value();
 }
 
-const in_addr& local_interface::get_addr4() const {
-  return m_addr4;
-}
+const in_addr &local_interface::get_addr4() const { return m_addr4; }
 
-const in6_addr& local_interface::get_addr6() const {
-  return m_addr6;
-}
+const in6_addr &local_interface::get_addr6() const { return m_addr6; }
 
-unsigned int local_interface::get_mtu() const {
-  return m_mtu;
-}
+unsigned int local_interface::get_mtu() const { return m_mtu; }
 
-uint16_t local_interface::get_port() const {
-  return m_port.get_value();
-}
+uint16_t local_interface::get_port() const { return m_port.get_value(); }
 
 void local_interface::set_is_local_interface(bool val) {
   m_is_local_interface = val;
@@ -396,19 +376,19 @@ bool local_interface::is_local_interface() const {
   return m_is_local_interface;
 }
 
-void local_interface::set_host(const std::string& host) {
+void local_interface::set_host(const std::string &host) {
   string_config_value host_val =
       string_config_value(m_host.get_config_name(), host);
   host_val.set_validation_regex(HOST_VALIDATOR_REGEX);
   m_host = host_val;
 }
 
-sbi_interface::sbi_interface(
-    const std::string& name, const std::string& host, uint16_t port,
-    const std::string& api_version, const std::string& interface_name)
+sbi_interface::sbi_interface(const std::string &name, const std::string &host,
+                             uint16_t port, const std::string &api_version,
+                             const std::string &interface_name)
     : local_interface(name, host, port, interface_name) {
   m_config_name = name;
-  m_host        = string_config_value("host", host);
+  m_host = string_config_value("host", host);
   m_api_version = string_config_value("api_version", api_version);
 
   m_host.set_validation_regex(HOST_VALIDATOR_REGEX);
@@ -429,7 +409,7 @@ sbi_interface& sbi_interface::operator=(const sbi_interface& s) {
 }
 */
 
-void sbi_interface::from_yaml(const YAML::Node& node) {
+void sbi_interface::from_yaml(const YAML::Node &node) {
   local_interface::from_yaml(node);
   set_is_local_interface(false);
 
@@ -443,13 +423,13 @@ void sbi_interface::from_yaml(const YAML::Node& node) {
 nlohmann::json sbi_interface::to_json() {
   nlohmann::json json_data = {};
   set_is_local_interface(false);
-  json_data                                  = local_interface::to_json();
+  json_data = local_interface::to_json();
   json_data[m_api_version.get_config_name()] = m_api_version.to_json();
-  json_data["url"]                           = m_url;
+  json_data["url"] = m_url;
   return json_data;
 }
 
-bool sbi_interface::from_json(const nlohmann::json& json_data) {
+bool sbi_interface::from_json(const nlohmann::json &json_data) {
   set_is_local_interface(false);
   try {
     local_interface::from_json(json_data);
@@ -462,46 +442,48 @@ bool sbi_interface::from_json(const nlohmann::json& json_data) {
       m_url = json_data["url"].get<std::string>();
     }
 
-  } catch (nlohmann::detail::exception& e) {
+  } catch (nlohmann::detail::exception &e) {
     // TODO:
-  } catch (std::exception& e) {
+  } catch (std::exception &e) {
     // TODO:
   }
   return false;
 }
 
-std::string sbi_interface::to_string(const std::string& indent) const {
+std::string sbi_interface::to_string(const std::string &indent) const {
   std::string out;
   unsigned int inner_width = get_inner_width(indent.length());
 
   out.append(indent).append(
       fmt::format(BASE_FORMATTER, INNER_LIST_ELEM, "URL", inner_width, m_url));
-  out.append(indent).append(fmt::format(
-      BASE_FORMATTER, INNER_LIST_ELEM, "API Version", inner_width,
-      m_api_version.get_value()));
+  out.append(indent).append(fmt::format(BASE_FORMATTER, INNER_LIST_ELEM,
+                                        "API Version", inner_width,
+                                        m_api_version.get_value()));
 
-  if (!is_local_interface()) return out;
+  if (!is_local_interface())
+    return out;
 
   std::string ip4 = conv::toString(m_addr4);
   std::string ip6 = conv::toString(m_addr6);
 
-  out.append(indent).append(fmt::format(
-      BASE_FORMATTER, INNER_LIST_ELEM, "IPv4 Address ", inner_width, ip4));
+  out.append(indent).append(fmt::format(BASE_FORMATTER, INNER_LIST_ELEM,
+                                        "IPv4 Address ", inner_width, ip4));
   if (ip6 != "::") {
-    out.append(indent).append(fmt::format(
-        BASE_FORMATTER, INNER_LIST_ELEM, "IPv6 Address", inner_width, ip6));
+    out.append(indent).append(fmt::format(BASE_FORMATTER, INNER_LIST_ELEM,
+                                          "IPv6 Address", inner_width, ip6));
   }
 
   return out;
 }
 
 void sbi_interface::validate() {
-  if (!m_set) return;
+  if (!m_set)
+    return;
   local_interface::validate();
   m_api_version.validate();
 }
 
-const std::string& sbi_interface::get_api_version() const {
+const std::string &sbi_interface::get_api_version() const {
   return m_api_version.get_value();
 }
 
@@ -519,17 +501,16 @@ void sbi_interface::set_url(bool enable_tls) {
   m_url.append(get_host()).append(":").append(std::to_string(get_port()));
 }
 
-nf::nf(
-    const std::string& name, const std::string& host,
-    const sbi_interface& sbi) {
+nf::nf(const std::string &name, const std::string &host,
+       const sbi_interface &sbi) {
   m_config_name = name;
-  m_host        = string_config_value("host", host);
-  m_sbi         = sbi;
-  m_set         = true;
+  m_host = string_config_value("host", host);
+  m_sbi = sbi;
+  m_set = true;
   m_host.set_validation_regex(HOST_VALIDATOR_REGEX);
 }
 
-void nf::from_yaml(const YAML::Node& node) {
+void nf::from_yaml(const YAML::Node &node) {
   if (node[NF_CONFIG_HOST_NAME]) {
     m_host.from_yaml(node[NF_CONFIG_HOST_NAME]);
   }
@@ -541,26 +522,26 @@ void nf::from_yaml(const YAML::Node& node) {
 }
 
 nlohmann::json nf::to_json() {
-  nlohmann::json json_data           = {};
+  nlohmann::json json_data = {};
   json_data[m_sbi.get_config_name()] = m_sbi.to_json();
   return json_data;
 }
 
-bool nf::from_json(const nlohmann::json& json_data) {
+bool nf::from_json(const nlohmann::json &json_data) {
   try {
     if (json_data.find(m_sbi.get_config_name()) != json_data.end()) {
       m_sbi.from_json(json_data[m_sbi.get_config_name()]);
     }
 
-  } catch (nlohmann::detail::exception& e) {
+  } catch (nlohmann::detail::exception &e) {
     // TODO:
-  } catch (std::exception& e) {
+  } catch (std::exception &e) {
     // TODO:
   }
   return false;
 }
 
-std::string nf::to_string(const std::string& indent) const {
+std::string nf::to_string(const std::string &indent) const {
   std::string out;
   if (!is_set()) {
     return "";
@@ -570,9 +551,9 @@ std::string nf::to_string(const std::string& indent) const {
 
   out.append(indent).append(m_config_name).append(":\n");
   out.append(inner_indent)
-      .append(fmt::format(
-          BASE_FORMATTER, OUTER_LIST_ELEM, m_host.get_config_name(),
-          inner_width, m_host.get_value()));
+      .append(fmt::format(BASE_FORMATTER, OUTER_LIST_ELEM,
+                          m_host.get_config_name(), inner_width,
+                          m_host.get_value()));
 
   if (m_sbi.is_set()) {
     out.append(inner_indent)
@@ -585,41 +566,38 @@ std::string nf::to_string(const std::string& indent) const {
 }
 
 void nf::validate() {
-  if (!m_set) return;
+  if (!m_set)
+    return;
   m_host.validate();
   m_sbi.validate();
 }
 
-const sbi_interface& nf::get_sbi() const {
-  return m_sbi;
-}
+const sbi_interface &nf::get_sbi() const { return m_sbi; }
 
-const std::string& nf::get_host() const {
-  return m_host.get_value();
-}
+const std::string &nf::get_host() const { return m_host.get_value(); }
 
 std::string nf::get_url(bool enable_tls) const {
   return m_sbi.get_url(enable_tls);
 }
 
-nf_features_config::nf_features_config(
-    const std::string& name, const std::string& nf_name, bool value) {
+nf_features_config::nf_features_config(const std::string &name,
+                                       const std::string &nf_name, bool value) {
   m_option_value = option_config_value("", value);
-  m_config_name  = name;
-  m_nf_name      = nf_name;
-  m_set          = true;
+  m_config_name = name;
+  m_nf_name = nf_name;
+  m_set = true;
 }
 
-nf_features_config::nf_features_config(
-    const std::string& name, const std::string& nf_name,
-    const std::string& value) {
+nf_features_config::nf_features_config(const std::string &name,
+                                       const std::string &nf_name,
+                                       const std::string &value) {
   m_string_value = string_config_value("", value);
-  m_config_name  = name;
-  m_nf_name      = nf_name;
-  m_set          = true;
+  m_config_name = name;
+  m_nf_name = nf_name;
+  m_set = true;
 }
 
-void nf_features_config::from_yaml(const YAML::Node& node) {
+void nf_features_config::from_yaml(const YAML::Node &node) {
   if (node["general"]) {
     set_value(node["general"]);
   }
@@ -640,51 +618,53 @@ nlohmann::json nf_features_config::to_json() {
   return json_data;
 }
 
-bool nf_features_config::from_json(const nlohmann::json&) {
+bool nf_features_config::from_json(const nlohmann::json &) {
   try {
     // TODO:
     /*   if (json_data.find(m_config_name) != json_data.end()) {
            m_option_value.from_json(json_data[m_config_name]);
        }
        */
-  } catch (nlohmann::detail::exception& e) {
+  } catch (nlohmann::detail::exception &e) {
     // TODO:
-  } catch (std::exception& e) {
+  } catch (std::exception &e) {
     // TODO:
   }
   return false;
 }
 
-void nf_features_config::set_value(const YAML::Node& node) {
+void nf_features_config::set_value(const YAML::Node &node) {
   try {
     m_option_value.from_yaml(node);
-  } catch (YAML::Exception&) {
+  } catch (YAML::Exception &) {
     m_string_value.from_yaml(node);
   }
 }
 
-std::string nf_features_config::to_string(const std::string& indent) const {
-  if (!m_set) return "";
+std::string nf_features_config::to_string(const std::string &indent) const {
+  if (!m_set)
+    return "";
   std::string out;
   unsigned int inner_width = get_inner_width(indent.length());
   if (m_string_value.get_value().empty()) {
-    out.append(indent).append(fmt::format(
-        BASE_FORMATTER, OUTER_LIST_ELEM, m_config_name, inner_width,
-        m_option_value.to_string("")));
+    out.append(indent).append(fmt::format(BASE_FORMATTER, OUTER_LIST_ELEM,
+                                          m_config_name, inner_width,
+                                          m_option_value.to_string("")));
   } else {
-    out.append(indent).append(fmt::format(
-        BASE_FORMATTER, OUTER_LIST_ELEM, m_config_name, inner_width,
-        m_string_value.to_string("")));
+    out.append(indent).append(fmt::format(BASE_FORMATTER, OUTER_LIST_ELEM,
+                                          m_config_name, inner_width,
+                                          m_string_value.to_string("")));
   }
   return out;
 }
 
 void nf_features_config::validate() {
-  if (!m_set) return;
+  if (!m_set)
+    return;
   m_string_value.validate();
 }
 
-void nf_features_config::set_validation_regex(const std::string& regex) {
+void nf_features_config::set_validation_regex(const std::string &regex) {
   m_string_value.set_validation_regex(regex);
 }
 
@@ -692,18 +672,18 @@ bool nf_features_config::get_option() const {
   return m_option_value.get_value();
 }
 
-const std::string& nf_features_config::get_string() const {
+const std::string &nf_features_config::get_string() const {
   return m_string_value.get_value();
 }
 
-database_config::database_config(const std::string& name) {
-  m_config_name   = name;
-  m_set           = false;
-  m_host          = string_config_value(NF_CONFIG_HOST_NAME, "mysql");
+database_config::database_config(const std::string &name) {
+  m_config_name = name;
+  m_set = false;
+  m_host = string_config_value(NF_CONFIG_HOST_NAME, "mysql");
   m_database_type = string_config_value(DATABASE_CONFIG_DATABASE_TYPE, "mysql");
-  m_port          = database_config::get_default_database_port(m_database_type);
-  m_user          = string_config_value(DATABASE_CONFIG_USER, "root");
-  m_pass          = string_config_value(DATABASE_CONFIG_PASSWORD, "linux");
+  m_port = database_config::get_default_database_port(m_database_type);
+  m_user = string_config_value(DATABASE_CONFIG_USER, "root");
+  m_pass = string_config_value(DATABASE_CONFIG_PASSWORD, "linux");
   m_database_name =
       string_config_value(DATABASE_CONFIG_DATABASE_NAME, "oai_db");
   m_connection_timeout =
@@ -713,7 +693,7 @@ database_config::database_config(const std::string& name) {
   m_port.set_validation_interval(0, 65535);
 }
 
-void database_config::from_yaml(const YAML::Node& node) {
+void database_config::from_yaml(const YAML::Node &node) {
   m_set = true;
   if (node[NF_CONFIG_HOST_NAME]) {
     m_host.from_yaml(node[NF_CONFIG_HOST_NAME]);
@@ -742,41 +722,40 @@ void database_config::from_yaml(const YAML::Node& node) {
 }
 
 nlohmann::json database_config::to_json() {
-  nlohmann::json json_data                     = {};
-  json_data[m_host.get_config_name()]          = m_host.to_json();
-  json_data[m_port.get_config_name()]          = m_port.to_json();
+  nlohmann::json json_data = {};
+  json_data[m_host.get_config_name()] = m_host.to_json();
+  json_data[m_port.get_config_name()] = m_port.to_json();
   json_data[m_database_type.get_config_name()] = m_database_type.to_json();
-  json_data[m_user.get_config_name()]          = m_user.to_json();
-  json_data[m_pass.get_config_name()]          = m_pass.to_json();
+  json_data[m_user.get_config_name()] = m_user.to_json();
+  json_data[m_pass.get_config_name()] = m_pass.to_json();
   json_data[m_database_name.get_config_name()] = m_database_name.to_json();
   json_data[m_connection_timeout.get_config_name()] =
       m_connection_timeout.to_json();
   return json_data;
 }
 
-bool lttng_config::is_lttng_active() const {
-  return m_is_active.get_value();
-}
+bool lttng_config::is_lttng_active() const { return m_is_active.get_value(); }
 
 std::string lttng_config::get_lttng_log_level() {
   return m_log_level.get_value();
 }
 
-lttng_config::lttng_config(const std::string& name) {
+lttng_config::lttng_config(const std::string &name) {
   m_config_name = name;
-  m_set         = false;
-  m_is_active   = option_config_value("active", false);
-  m_log_level   = string_config_value("level", "debug");
-  m_use_spd     = option_config_value("use_spd", false);
+  m_set = false;
+  m_is_active = option_config_value("active", false);
+  m_log_level = string_config_value("level", "debug");
+  m_use_spd = option_config_value("use_spd", false);
   m_log_level.set_validation_regex(LOG_LVL_VALIDATOR_REGEX);
 }
 
-void lttng_config::from_yaml(const YAML::Node& node) {
+void lttng_config::from_yaml(const YAML::Node &node) {
   m_set = true;
   if (node["active"]) {
     m_is_active.from_yaml(node["active"]);
   }
-  if (!m_is_active.get_value()) return;
+  if (!m_is_active.get_value())
+    return;
 
   if (node["level"]) {
     m_log_level.from_yaml(node["level"]);
@@ -787,24 +766,25 @@ void lttng_config::from_yaml(const YAML::Node& node) {
   }
 }
 
-std::string lttng_config::to_string(const std::string& indent) const {
+std::string lttng_config::to_string(const std::string &indent) const {
   std::string out;
   unsigned int inner_width = get_inner_width(indent.length());
-  out.append(indent).append(fmt::format(
-      BASE_FORMATTER, OUTER_LIST_ELEM, NF_CONFIG_HOST_NAME_LABEL, inner_width,
-      m_is_active.get_value()));
-  out.append(indent).append(fmt::format(
-      BASE_FORMATTER, OUTER_LIST_ELEM, DATABASE_CONFIG_PORT_LABEL, inner_width,
-      m_log_level.get_value()));
+  out.append(indent).append(fmt::format(BASE_FORMATTER, OUTER_LIST_ELEM,
+                                        NF_CONFIG_HOST_NAME_LABEL, inner_width,
+                                        m_is_active.get_value()));
+  out.append(indent).append(fmt::format(BASE_FORMATTER, OUTER_LIST_ELEM,
+                                        DATABASE_CONFIG_PORT_LABEL, inner_width,
+                                        m_log_level.get_value()));
   return out;
 }
 
 void lttng_config::validate() {
-  if (!m_set) return;
+  if (!m_set)
+    return;
   m_log_level.validate();
 }
 
-bool database_config::from_json(const nlohmann::json& json_data) {
+bool database_config::from_json(const nlohmann::json &json_data) {
   try {
     if (json_data.find(m_host.get_config_name()) != json_data.end()) {
       m_host.from_json(json_data[m_host.get_config_name()]);
@@ -832,16 +812,16 @@ bool database_config::from_json(const nlohmann::json& json_data) {
       m_connection_timeout.from_json(
           json_data[m_connection_timeout.get_config_name()]);
     }
-  } catch (nlohmann::detail::exception& e) {
+  } catch (nlohmann::detail::exception &e) {
     // TODO:
-  } catch (std::exception& e) {
+  } catch (std::exception &e) {
     // TODO:
   }
   return false;
 }
 
 int_config_value database_config::get_default_database_port(
-    const string_config_value& database_type) const {
+    const string_config_value &database_type) const {
   if (database_type.get_value() == "mysql") {
     return int_config_value(DATABASE_CONFIG_PORT, 3306);
   }
@@ -854,24 +834,24 @@ int_config_value database_config::get_default_database_port(
   return int_config_value(DATABASE_CONFIG_PORT, 0);
 }
 
-std::string database_config::to_string(const std::string& indent) const {
+std::string database_config::to_string(const std::string &indent) const {
   std::string out;
   unsigned int inner_width = get_inner_width(indent.length());
-  out.append(indent).append(fmt::format(
-      BASE_FORMATTER, OUTER_LIST_ELEM, NF_CONFIG_HOST_NAME_LABEL, inner_width,
-      m_host.get_value()));
-  out.append(indent).append(fmt::format(
-      BASE_FORMATTER, OUTER_LIST_ELEM, DATABASE_CONFIG_PORT_LABEL, inner_width,
-      m_port.get_value()));
+  out.append(indent).append(fmt::format(BASE_FORMATTER, OUTER_LIST_ELEM,
+                                        NF_CONFIG_HOST_NAME_LABEL, inner_width,
+                                        m_host.get_value()));
+  out.append(indent).append(fmt::format(BASE_FORMATTER, OUTER_LIST_ELEM,
+                                        DATABASE_CONFIG_PORT_LABEL, inner_width,
+                                        m_port.get_value()));
   out.append(indent).append(fmt::format(
       BASE_FORMATTER, OUTER_LIST_ELEM, DATABASE_CONFIG_DATABASE_TYPE_LABEL,
       inner_width, m_database_type.get_value()));
-  out.append(indent).append(fmt::format(
-      BASE_FORMATTER, OUTER_LIST_ELEM, DATABASE_CONFIG_USER_LABEL, inner_width,
-      m_user.get_value()));
-  out.append(indent).append(fmt::format(
-      BASE_FORMATTER, OUTER_LIST_ELEM, DATABASE_CONFIG_PASSWORD_LABEL,
-      inner_width, m_pass.get_value()));
+  out.append(indent).append(fmt::format(BASE_FORMATTER, OUTER_LIST_ELEM,
+                                        DATABASE_CONFIG_USER_LABEL, inner_width,
+                                        m_user.get_value()));
+  out.append(indent).append(fmt::format(BASE_FORMATTER, OUTER_LIST_ELEM,
+                                        DATABASE_CONFIG_PASSWORD_LABEL,
+                                        inner_width, m_pass.get_value()));
   out.append(indent).append(fmt::format(
       BASE_FORMATTER, OUTER_LIST_ELEM, DATABASE_CONFIG_DATABASE_NAME_LABEL,
       inner_width, m_database_name.get_value()));
@@ -881,31 +861,27 @@ std::string database_config::to_string(const std::string& indent) const {
   return out;
 }
 
-void database_config::validate() {
-  m_database_type.validate();
-}
+void database_config::validate() { m_database_type.validate(); }
 
-const std::string& database_config::get_host() const {
+const std::string &database_config::get_host() const {
   return m_host.get_value();
 }
 
-int database_config::get_port() const {
-  return m_port.get_value();
-}
+int database_config::get_port() const { return m_port.get_value(); }
 
-const std::string& database_config::get_user() const {
+const std::string &database_config::get_user() const {
   return m_user.get_value();
 }
 
-const std::string& database_config::get_pass() const {
+const std::string &database_config::get_pass() const {
   return m_pass.get_value();
 }
 
-const std::string& database_config::get_database_name() const {
+const std::string &database_config::get_database_name() const {
   return m_database_name.get_value();
 }
 
-const std::string& database_config::get_database_type() const {
+const std::string &database_config::get_database_type() const {
   return m_database_type.get_value();
 }
 
@@ -913,10 +889,11 @@ int database_config::get_connection_timeout() const {
   return m_connection_timeout.get_value();
 }
 
-ue_dns::ue_dns(
-    const std::string& primary_dns_v4, const std::string& secondary_dns_v4,
-    const std::string& primary_dns_v6, const std::string& secondary_dns_v6) {
-  m_config_name    = "ue_dns";
+ue_dns::ue_dns(const std::string &primary_dns_v4,
+               const std::string &secondary_dns_v4,
+               const std::string &primary_dns_v6,
+               const std::string &secondary_dns_v6) {
+  m_config_name = "ue_dns";
   m_primary_dns_v4 = string_config_value("primary_dns_ipv4", primary_dns_v4);
   m_primary_dns_v6 = string_config_value("primary_dns_ipv6", primary_dns_v6);
   m_secondary_dns_v6 =
@@ -941,7 +918,7 @@ ue_dns::ue_dns(
   }
 }
 
-void ue_dns::from_yaml(const YAML::Node& node) {
+void ue_dns::from_yaml(const YAML::Node &node) {
   if (node["primary_ipv4"]) {
     m_primary_dns_v4.from_yaml(node["primary_ipv4"]);
   }
@@ -957,7 +934,7 @@ void ue_dns::from_yaml(const YAML::Node& node) {
 }
 
 nlohmann::json ue_dns::to_json() {
-  nlohmann::json json_data                      = {};
+  nlohmann::json json_data = {};
   json_data[m_primary_dns_v4.get_config_name()] = m_primary_dns_v4.to_json();
   json_data[m_secondary_dns_v4.get_config_name()] =
       m_secondary_dns_v4.to_json();
@@ -967,7 +944,7 @@ nlohmann::json ue_dns::to_json() {
   return json_data;
 }
 
-bool ue_dns::from_json(const nlohmann::json& json_data) {
+bool ue_dns::from_json(const nlohmann::json &json_data) {
   try {
     if (json_data.find(m_primary_dns_v4.get_config_name()) != json_data.end()) {
       m_primary_dns_v4.from_json(json_data[m_primary_dns_v4.get_config_name()]);
@@ -987,15 +964,15 @@ bool ue_dns::from_json(const nlohmann::json& json_data) {
           json_data[m_secondary_dns_v6.get_config_name()]);
     }
 
-  } catch (nlohmann::detail::exception& e) {
+  } catch (nlohmann::detail::exception &e) {
     // TODO:
-  } catch (std::exception& e) {
+  } catch (std::exception &e) {
     // TODO:
   }
   return false;
 }
 
-std::string ue_dns::to_string(const std::string& indent) const {
+std::string ue_dns::to_string(const std::string &indent) const {
   std::string out;
   unsigned int inner_width = get_inner_width(indent.length());
 
@@ -1042,31 +1019,31 @@ void ue_dns::validate() {
   }
 }
 
-const in_addr& ue_dns::get_primary_dns_v4() const {
+const in_addr &ue_dns::get_primary_dns_v4() const {
   return m_primary_dns_v4_ip;
 }
 
-const in_addr& ue_dns::get_secondary_dns_v4() const {
+const in_addr &ue_dns::get_secondary_dns_v4() const {
   return m_secondary_dns_v4_ip;
 }
 
-const in6_addr& ue_dns::get_primary_dns_v6() const {
+const in6_addr &ue_dns::get_primary_dns_v6() const {
   return m_primary_dns_v6_ip;
 }
 
-const in6_addr& ue_dns::get_secondary_dns_v6() const {
+const in6_addr &ue_dns::get_secondary_dns_v6() const {
   return m_secondary_dns_v6_ip;
 }
 
-dnn_config::dnn_config(
-    const std::string& dnn, const std::string& pdu_type,
-    const std::string& ipv4_subnet, const std::string& ipv6_prefix)
+dnn_config::dnn_config(const std::string &dnn, const std::string &pdu_type,
+                       const std::string &ipv4_subnet,
+                       const std::string &ipv6_prefix)
     : m_ue_dns("8.8.8.8", "1.1.1.1", "", "") {
-  m_config_name      = "DNN";
-  m_dnn              = string_config_value("DNN", dnn);
+  m_config_name = "DNN";
+  m_dnn = string_config_value("DNN", dnn);
   m_pdu_session_type = string_config_value("PDU session type", pdu_type);
-  m_ipv4_subnet      = string_config_value("IPv4 subnet", ipv4_subnet);
-  m_ipv6_prefix      = string_config_value("IPv6 prefix", ipv6_prefix);
+  m_ipv4_subnet = string_config_value("IPv4 subnet", ipv4_subnet);
+  m_ipv6_prefix = string_config_value("IPv6 prefix", ipv6_prefix);
   // we unset it here, so that we can check if we can overwrite it from the
   // default UE DNS config
   m_ue_dns.unset_config();
@@ -1084,7 +1061,7 @@ dnn_config::dnn_config(
   m_set = true;
 }
 
-void dnn_config::from_yaml(const YAML::Node& node) {
+void dnn_config::from_yaml(const YAML::Node &node) {
   if (node["dnn"]) {
     m_dnn.from_yaml(node["dnn"]);
   }
@@ -1104,7 +1081,7 @@ void dnn_config::from_yaml(const YAML::Node& node) {
 }
 
 nlohmann::json dnn_config::to_json() {
-  nlohmann::json json_data           = {};
+  nlohmann::json json_data = {};
   json_data[m_dnn.get_config_name()] = m_dnn.to_json();
   json_data[m_pdu_session_type.get_config_name()] =
       m_pdu_session_type.to_json();
@@ -1112,13 +1089,13 @@ nlohmann::json dnn_config::to_json() {
   json_data[m_ipv6_prefix.get_config_name()] = m_ipv6_prefix.to_json();
 
   json_data["ipv4_pool_start_ip"] = conv::toString(m_ipv4_pool_start_ip);
-  json_data["ipv4_pool_end_ip"]   = conv::toString(m_ipv4_pool_end_ip);
-  json_data["ipv6_prefix_ip"]     = conv::toString(m_ipv6_prefix_ip);
+  json_data["ipv4_pool_end_ip"] = conv::toString(m_ipv4_pool_end_ip);
+  json_data["ipv6_prefix_ip"] = conv::toString(m_ipv6_prefix_ip);
   json_data["ipv6_prefix_length"] = m_ipv6_prefix_length;
   return json_data;
 }
 
-bool dnn_config::from_json(const nlohmann::json& json_data) {
+bool dnn_config::from_json(const nlohmann::json &json_data) {
   try {
     if (json_data.find(m_dnn.get_config_name()) != json_data.end()) {
       m_dnn.from_json(json_data[m_dnn.get_config_name()]);
@@ -1141,16 +1118,16 @@ bool dnn_config::from_json(const nlohmann::json& json_data) {
     // m_ipv6_prefix_ip
     // m_ipv6_prefix_length
 
-  } catch (nlohmann::detail::exception& e) {
+  } catch (nlohmann::detail::exception &e) {
     // TODO:
-  } catch (std::exception& e) {
+  } catch (std::exception &e) {
     // TODO:
   }
   return false;
 }
 
-[[nodiscard]] std::string dnn_config::to_string(
-    const std::string& indent) const {
+[[nodiscard]] std::string
+dnn_config::to_string(const std::string &indent) const {
   std::string out;
 
   std::string inner_indent = add_indent(indent);
@@ -1159,28 +1136,28 @@ bool dnn_config::from_json(const nlohmann::json& json_data) {
   out.append(fmt::format("{} {}:\n", OUTER_LIST_ELEM, m_dnn.get_config_name()));
 
   out.append(inner_indent)
-      .append(fmt::format(
-          BASE_FORMATTER, INNER_LIST_ELEM, m_dnn.get_config_name(), inner_width,
-          m_dnn.to_string("")));
+      .append(fmt::format(BASE_FORMATTER, INNER_LIST_ELEM,
+                          m_dnn.get_config_name(), inner_width,
+                          m_dnn.to_string("")));
 
   out.append(inner_indent)
-      .append(fmt::format(
-          BASE_FORMATTER, INNER_LIST_ELEM, m_pdu_session_type.get_config_name(),
-          inner_width, m_pdu_session_type.to_string("")));
+      .append(fmt::format(BASE_FORMATTER, INNER_LIST_ELEM,
+                          m_pdu_session_type.get_config_name(), inner_width,
+                          m_pdu_session_type.to_string("")));
   if (m_pdu_session_type_generated == PDU_SESSION_TYPE_E_IPV4V6 ||
       m_pdu_session_type_generated == PDU_SESSION_TYPE_E_IPV6) {
     out.append(inner_indent)
-        .append(fmt::format(
-            BASE_FORMATTER, INNER_LIST_ELEM, m_ipv6_prefix.get_config_name(),
-            inner_width, m_ipv6_prefix.to_string("")));
+        .append(fmt::format(BASE_FORMATTER, INNER_LIST_ELEM,
+                            m_ipv6_prefix.get_config_name(), inner_width,
+                            m_ipv6_prefix.to_string("")));
   }
   if ((m_pdu_session_type_generated == PDU_SESSION_TYPE_E_IPV4V6 ||
        m_pdu_session_type_generated == PDU_SESSION_TYPE_E_IPV4) &&
       !m_ipv4_subnet.to_string("").empty()) {
     out.append(inner_indent)
-        .append(fmt::format(
-            BASE_FORMATTER, INNER_LIST_ELEM, m_ipv4_subnet.get_config_name(),
-            inner_width, m_ipv4_subnet.to_string("")));
+        .append(fmt::format(BASE_FORMATTER, INNER_LIST_ELEM,
+                            m_ipv4_subnet.get_config_name(), inner_width,
+                            m_ipv4_subnet.to_string("")));
   }
   out.append(inner_indent)
       .append(fmt::format("{} {}:\n", INNER_LIST_ELEM, "DNS Settings"));
@@ -1207,9 +1184,8 @@ void dnn_config::validate() {
     std::vector<std::string> ips;
     std::vector<std::string> ipsub;
 
-    boost::split(
-        ipsub, m_ipv4_subnet.get_value(), boost::is_any_of("/"),
-        boost::token_compress_on);
+    boost::split(ipsub, m_ipv4_subnet.get_value(), boost::is_any_of("/"),
+                 boost::token_compress_on);
 
     if (ipsub.size() != 2) {
       throw std::runtime_error(fmt::format(
@@ -1220,19 +1196,17 @@ void dnn_config::validate() {
     boost::trim_right(ipsub[0]);
 
     m_ipv4_subnet_ip = safe_convert_ip(ipsub[0]);
-    m_ipv4_prefix    = std::stoi(ipsub[1], nullptr, 0);
-    get_ipv4_range(
-        m_ipv4_subnet_ip, m_ipv4_prefix, m_ipv4_pool_start_ip,
-        m_ipv4_pool_end_ip);
+    m_ipv4_prefix = std::stoi(ipsub[1], nullptr, 0);
+    get_ipv4_range(m_ipv4_subnet_ip, m_ipv4_prefix, m_ipv4_pool_start_ip,
+                   m_ipv4_pool_end_ip);
   }
   if (m_pdu_session_type_generated ==
           pdu_session_type_e::PDU_SESSION_TYPE_E_IPV6 ||
       m_pdu_session_type_generated ==
           pdu_session_type_e::PDU_SESSION_TYPE_E_IPV4V6) {
     std::vector<std::string> ip6s;
-    boost::split(
-        ip6s, m_ipv6_prefix.get_value(), boost::is_any_of("/"),
-        boost::token_compress_on);
+    boost::split(ip6s, m_ipv6_prefix.get_value(), boost::is_any_of("/"),
+                 boost::token_compress_on);
 
     if (ip6s.size() != 2) {
       // TODO IPv6 is no handled correctly in PPA, which is why we print a
@@ -1244,37 +1218,36 @@ void dnn_config::validate() {
       //    m_ipv6_prefix.get_value()));
 
       logger::logger_registry::get_logger(LOGGER_NAME)
-          .warn(
-              "The IPv6 prefix / length %s is not valid",
-              m_ipv6_prefix.get_value());
+          .warn("The IPv6 prefix / length %s is not valid",
+                m_ipv6_prefix.get_value());
     } else {
       try {
-        m_ipv6_prefix_ip     = safe_convert_ip6(ip6s[0]);
+        m_ipv6_prefix_ip = safe_convert_ip6(ip6s[0]);
         m_ipv6_prefix_length = std::stoi(ip6s[1]);
-      } catch (std::runtime_error& e) {
+      } catch (std::runtime_error &e) {
         logger::logger_registry::get_logger(LOGGER_NAME).warn(e.what());
       }
     }
   }
 }
 
-[[nodiscard]] const in_addr& dnn_config::get_ipv4_pool_start() const {
+[[nodiscard]] const in_addr &dnn_config::get_ipv4_pool_start() const {
   return m_ipv4_pool_start_ip;
 }
 
-[[nodiscard]] const in_addr& dnn_config::get_ipv4_pool_end() const {
+[[nodiscard]] const in_addr &dnn_config::get_ipv4_pool_end() const {
   return m_ipv4_pool_end_ip;
 }
 
-[[nodiscard]] const in_addr& dnn_config::get_ipv4_subnet() const {
+[[nodiscard]] const in_addr &dnn_config::get_ipv4_subnet() const {
   return m_ipv4_subnet_ip;
 }
 
-[[nodiscard]] const int& dnn_config::get_ipv4_subnet_prefix() const {
+[[nodiscard]] const int &dnn_config::get_ipv4_subnet_prefix() const {
   return m_ipv4_prefix;
 }
 
-[[nodiscard]] const in6_addr& dnn_config::get_ipv6_prefix() const {
+[[nodiscard]] const in6_addr &dnn_config::get_ipv6_prefix() const {
   return m_ipv6_prefix_ip;
 }
 
@@ -1282,105 +1255,102 @@ void dnn_config::validate() {
   return m_ipv6_prefix_length;
 }
 
-[[nodiscard]] const pdu_session_type_t& dnn_config::get_pdu_session_type()
-    const {
+[[nodiscard]] const pdu_session_type_t &
+dnn_config::get_pdu_session_type() const {
   return m_pdu_session_type_generated;
 }
 
-const std::string& dnn_config::get_dnn() const {
-  return m_dnn.get_value();
-}
+const std::string &dnn_config::get_dnn() const { return m_dnn.get_value(); }
 
-const ue_dns& dnn_config::get_ue_dns() const {
-  return m_ue_dns;
-}
+const ue_dns &dnn_config::get_ue_dns() const { return m_ue_dns; }
 
-void dnn_config::set_ue_dns(const ue_dns& dns) {
+void dnn_config::set_ue_dns(const ue_dns &dns) {
   m_ue_dns = dns;
   m_ue_dns.set_config();
 }
 
 nf_http_version::nf_http_version() {
-  m_set     = false;
+  m_set = false;
   m_version = string_config_value(NF_CONFIG_HTTP_NAME, "1.1");
   m_version.set_validation_regex("1|1.1|2|3");
   m_config_name = NF_CONFIG_HTTP_NAME;
 }
 
-void nf_http_version::from_yaml(const YAML::Node& node) {
+void nf_http_version::from_yaml(const YAML::Node &node) {
   m_set = true;
   m_version.from_yaml(node);
 }
 
 nlohmann::json nf_http_version::to_json() {
   nlohmann::json json_data = {};
-  json_data                = m_version.to_json();
+  json_data = m_version.to_json();
   return json_data;
 }
 
-bool nf_http_version::from_json(const nlohmann::json& json_data) {
+bool nf_http_version::from_json(const nlohmann::json &json_data) {
   try {
     m_version.from_json(json_data);
-  } catch (nlohmann::detail::exception& e) {
+  } catch (nlohmann::detail::exception &e) {
     // TODO:
-  } catch (std::exception& e) {
+  } catch (std::exception &e) {
     // TODO:
   }
   return false;
 }
 
-std::string nf_http_version::to_string(const std::string& indent) const {
+std::string nf_http_version::to_string(const std::string &indent) const {
   std::string out;
   unsigned int inner_width = get_inner_width(indent.length());
-  out.append(indent).append(fmt::format(
-      BASE_FORMATTER, OUTER_LIST_ELEM, m_version.get_config_name(), inner_width,
-      m_version.get_value()));
+  out.append(indent).append(fmt::format(BASE_FORMATTER, OUTER_LIST_ELEM,
+                                        m_version.get_config_name(),
+                                        inner_width, m_version.get_value()));
   return out;
 }
 
 void nf_http_version::validate() {
-  if (!m_set) return;
+  if (!m_set)
+    return;
   m_version.validate();
 }
 
-const std::string& nf_http_version::get_http_version() const {
+const std::string &nf_http_version::get_http_version() const {
   return m_version.get_value();
 }
 
 http_request_timeout::http_request_timeout() {
-  m_set                  = false;
-  m_http_request_timeout = int_config_value(
-      NF_CONFIG_HTTP_REQUEST_TIMEOUT,
-      NF_CONFIG_HTTP_REQUEST_TIMEOUT_DEFAULT_VALUE);
+  m_set = false;
+  m_http_request_timeout =
+      int_config_value(NF_CONFIG_HTTP_REQUEST_TIMEOUT,
+                       NF_CONFIG_HTTP_REQUEST_TIMEOUT_DEFAULT_VALUE);
   m_http_request_timeout.set_validation_interval(
       NF_CONFIG_HTTP_REQUEST_TIMEOUT_MIN_VALUE,
       NF_CONFIG_HTTP_REQUEST_TIMEOUT_MAX_VALUE);
   m_config_name = NF_CONFIG_HTTP_REQUEST_TIMEOUT;
 }
 
-void http_request_timeout::from_yaml(const YAML::Node& node) {
+void http_request_timeout::from_yaml(const YAML::Node &node) {
   m_set = true;
   m_http_request_timeout.from_yaml(node);
 }
 
 nlohmann::json http_request_timeout::to_json() {
   nlohmann::json json_data = {};
-  json_data                = m_http_request_timeout.to_json();
+  json_data = m_http_request_timeout.to_json();
   return json_data;
 }
 
-bool http_request_timeout::from_json(const nlohmann::json& json_data) {
+bool http_request_timeout::from_json(const nlohmann::json &json_data) {
   try {
     m_http_request_timeout.from_json(json_data);
-  } catch (nlohmann::detail::exception& e) {
+  } catch (nlohmann::detail::exception &e) {
     // TODO:
-  } catch (std::exception& e) {
+  } catch (std::exception &e) {
     // TODO:
   }
   return false;
 }
 
-std::string http_request_timeout::to_string(const std::string& indent) const {
+std::string http_request_timeout::to_string(const std::string &indent) const {
   std::string out;
   unsigned int inner_width = get_inner_width(indent.length());
   out.append(indent).append(fmt::format(
@@ -1391,7 +1361,8 @@ std::string http_request_timeout::to_string(const std::string& indent) const {
 }
 
 void http_request_timeout::validate() {
-  if (!m_set) return;
+  if (!m_set)
+    return;
   m_http_request_timeout.validate();
 }
 
@@ -1400,15 +1371,15 @@ uint32_t http_request_timeout::get() const {
 }
 
 tls_config::tls_config() {
-  m_set                   = false;
-  m_enable_tls            = option_config_value(TLS_ENABLE_TLS, false);
-  m_config_name           = NF_CONFIG_TLS_LABLE;
+  m_set = false;
+  m_enable_tls = option_config_value(TLS_ENABLE_TLS, false);
+  m_config_name = NF_CONFIG_TLS_LABLE;
   m_cert_certificate_path = string_config_value(TLS_CERT_CERTIFICATE_PATH, "");
-  m_cert_key_path         = string_config_value(TLS_CERT_KEY_PATH, "");
-  m_cert_pem_path         = string_config_value(TLS_CERT_PEM_PATH, "");
+  m_cert_key_path = string_config_value(TLS_CERT_KEY_PATH, "");
+  m_cert_pem_path = string_config_value(TLS_CERT_PEM_PATH, "");
 }
 
-void tls_config::from_yaml(const YAML::Node& node) {
+void tls_config::from_yaml(const YAML::Node &node) {
   m_set = true;
   if (node[TLS_ENABLE_TLS]) {
     m_enable_tls.from_yaml(node[TLS_ENABLE_TLS]);
@@ -1427,7 +1398,7 @@ void tls_config::from_yaml(const YAML::Node& node) {
 }
 
 nlohmann::json tls_config::to_json() {
-  nlohmann::json json_data                  = {};
+  nlohmann::json json_data = {};
   json_data[m_enable_tls.get_config_name()] = m_enable_tls.to_json();
   if (m_enable_tls.get_value()) {
     json_data[m_cert_certificate_path.get_config_name()] =
@@ -1438,7 +1409,7 @@ nlohmann::json tls_config::to_json() {
   return json_data;
 }
 
-bool tls_config::from_json(const nlohmann::json& json_data) {
+bool tls_config::from_json(const nlohmann::json &json_data) {
   try {
     if (json_data.find(m_enable_tls.get_config_name()) != json_data.end()) {
       m_enable_tls.from_json(json_data[m_enable_tls.get_config_name()]);
@@ -1458,51 +1429,49 @@ bool tls_config::from_json(const nlohmann::json& json_data) {
       m_cert_pem_path.from_json(json_data[m_cert_pem_path.get_config_name()]);
     }
 
-  } catch (nlohmann::detail::exception& e) {
+  } catch (nlohmann::detail::exception &e) {
     // TODO:
-  } catch (std::exception& e) {
+  } catch (std::exception &e) {
     // TODO:
   }
   return false;
 }
 
-std::string tls_config::to_string(const std::string& indent) const {
+std::string tls_config::to_string(const std::string &indent) const {
   std::string out;
   unsigned int inner_width = get_inner_width(indent.length());
   out.append(indent).append(NF_CONFIG_TLS_LABLE).append(":\n");
 
-  out.append(indent).append(indent).append(fmt::format(
-      BASE_FORMATTER, OUTER_LIST_ELEM, TLS_ENABLE_TLS_LABEL, inner_width,
-      m_enable_tls.to_string("")));
+  out.append(indent).append(indent).append(
+      fmt::format(BASE_FORMATTER, OUTER_LIST_ELEM, TLS_ENABLE_TLS_LABEL,
+                  inner_width, m_enable_tls.to_string("")));
 
   if (m_enable_tls.get_value()) {
     out.append(indent).append(indent).append(fmt::format(
         BASE_FORMATTER, OUTER_LIST_ELEM, TLS_CERT_CERTIFICATE_PATH_LABEL,
         inner_width, m_cert_certificate_path.get_value()));
 
-    out.append(indent).append(indent).append(fmt::format(
-        BASE_FORMATTER, OUTER_LIST_ELEM, TLS_CERT_KEY_PATH_LABEL, inner_width,
-        m_cert_key_path.get_value()));
+    out.append(indent).append(indent).append(
+        fmt::format(BASE_FORMATTER, OUTER_LIST_ELEM, TLS_CERT_KEY_PATH_LABEL,
+                    inner_width, m_cert_key_path.get_value()));
 
-    out.append(indent).append(indent).append(fmt::format(
-        BASE_FORMATTER, OUTER_LIST_ELEM, TLS_CERT_PEM_PATH_LABEL, inner_width,
-        m_cert_pem_path.get_value()));
+    out.append(indent).append(indent).append(
+        fmt::format(BASE_FORMATTER, OUTER_LIST_ELEM, TLS_CERT_PEM_PATH_LABEL,
+                    inner_width, m_cert_pem_path.get_value()));
   }
   return out;
 }
 
-bool tls_config::enable_tls() const {
-  return m_enable_tls.get_value();
-}
+bool tls_config::enable_tls() const { return m_enable_tls.get_value(); }
 
-const std::string& tls_config::get_cert_certificate_path() const {
+const std::string &tls_config::get_cert_certificate_path() const {
   return m_cert_certificate_path.get_value();
 }
 
-const std::string& tls_config::get_cert_key_path() const {
+const std::string &tls_config::get_cert_key_path() const {
   return m_cert_key_path.get_value();
 }
 
-const std::string& tls_config::get_cert_pem_path() const {
+const std::string &tls_config::get_cert_pem_path() const {
   return m_cert_pem_path.get_value();
 }

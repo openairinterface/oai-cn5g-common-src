@@ -19,7 +19,7 @@
 namespace oai::model::amf {
 
 CommunicationFailure::CommunicationFailure() {
-  m_NasReleaseCode      = "";
+  m_NasReleaseCode = "";
   m_NasReleaseCodeIsSet = false;
   m_RanReleaseCodeIsSet = false;
 }
@@ -31,12 +31,12 @@ void CommunicationFailure::validate() const {
   }
 }
 
-bool CommunicationFailure::validate(std::stringstream& msg) const {
+bool CommunicationFailure::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool CommunicationFailure::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool CommunicationFailure::validate(std::stringstream &msg,
+                                    const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "CommunicationFailure" : pathPrefix;
@@ -44,7 +44,7 @@ bool CommunicationFailure::validate(
   return success;
 }
 
-bool CommunicationFailure::operator==(const CommunicationFailure& rhs) const {
+bool CommunicationFailure::operator==(const CommunicationFailure &rhs) const {
   return
 
       ((!nasReleaseCodeIsSet() && !rhs.nasReleaseCodeIsSet()) ||
@@ -58,17 +58,19 @@ bool CommunicationFailure::operator==(const CommunicationFailure& rhs) const {
           ;
 }
 
-bool CommunicationFailure::operator!=(const CommunicationFailure& rhs) const {
+bool CommunicationFailure::operator!=(const CommunicationFailure &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const CommunicationFailure& o) {
+void to_json(nlohmann::json &j, const CommunicationFailure &o) {
   j = nlohmann::json();
-  if (o.nasReleaseCodeIsSet()) j["nasReleaseCode"] = o.m_NasReleaseCode;
-  if (o.ranReleaseCodeIsSet()) j["ranReleaseCode"] = o.m_RanReleaseCode;
+  if (o.nasReleaseCodeIsSet())
+    j["nasReleaseCode"] = o.m_NasReleaseCode;
+  if (o.ranReleaseCodeIsSet())
+    j["ranReleaseCode"] = o.m_RanReleaseCode;
 }
 
-void from_json(const nlohmann::json& j, CommunicationFailure& o) {
+void from_json(const nlohmann::json &j, CommunicationFailure &o) {
   if (j.find("nasReleaseCode") != j.end()) {
     j.at("nasReleaseCode").get_to(o.m_NasReleaseCode);
     o.m_NasReleaseCodeIsSet = true;
@@ -82,8 +84,8 @@ void from_json(const nlohmann::json& j, CommunicationFailure& o) {
 std::string CommunicationFailure::getNasReleaseCode() const {
   return m_NasReleaseCode;
 }
-void CommunicationFailure::setNasReleaseCode(std::string const& value) {
-  m_NasReleaseCode      = value;
+void CommunicationFailure::setNasReleaseCode(std::string const &value) {
+  m_NasReleaseCode = value;
   m_NasReleaseCodeIsSet = true;
 }
 bool CommunicationFailure::nasReleaseCodeIsSet() const {
@@ -96,8 +98,8 @@ oai::model::common::NgApCause CommunicationFailure::getRanReleaseCode() const {
   return m_RanReleaseCode;
 }
 void CommunicationFailure::setRanReleaseCode(
-    oai::model::common::NgApCause const& value) {
-  m_RanReleaseCode      = value;
+    oai::model::common::NgApCause const &value) {
+  m_RanReleaseCode = value;
   m_RanReleaseCodeIsSet = true;
 }
 bool CommunicationFailure::ranReleaseCodeIsSet() const {
@@ -107,4 +109,4 @@ void CommunicationFailure::unsetRanReleaseCode() {
   m_RanReleaseCodeIsSet = false;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

@@ -13,8 +13,8 @@
 
 #include "RuleOperation_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::pcf {
 
@@ -27,12 +27,12 @@ void RuleOperation_anyOf::validate() const {
   }
 }
 
-bool RuleOperation_anyOf::validate(std::stringstream& msg) const {
+bool RuleOperation_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool RuleOperation_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool RuleOperation_anyOf::validate(std::stringstream &msg,
+                                   const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "RuleOperation_anyOf" : pathPrefix;
@@ -46,50 +46,50 @@ bool RuleOperation_anyOf::validate(
   return success;
 }
 
-bool RuleOperation_anyOf::operator==(const RuleOperation_anyOf& rhs) const {
+bool RuleOperation_anyOf::operator==(const RuleOperation_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool RuleOperation_anyOf::operator!=(const RuleOperation_anyOf& rhs) const {
+bool RuleOperation_anyOf::operator!=(const RuleOperation_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const RuleOperation_anyOf& o) {
+void to_json(nlohmann::json &j, const RuleOperation_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case RuleOperation_anyOf::eRuleOperation_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case RuleOperation_anyOf::eRuleOperation_anyOf::CREATE_PCC_RULE:
-      j = "CREATE_PCC_RULE";
-      break;
-    case RuleOperation_anyOf::eRuleOperation_anyOf::DELETE_PCC_RULE:
-      j = "DELETE_PCC_RULE";
-      break;
-    case RuleOperation_anyOf::eRuleOperation_anyOf::
-        MODIFY_PCC_RULE_AND_ADD_PACKET_FILTERS:
-      j = "MODIFY_PCC_RULE_AND_ADD_PACKET_FILTERS";
-      break;
-    case RuleOperation_anyOf::eRuleOperation_anyOf::
-        MODIFY__PCC_RULE_AND_REPLACE_PACKET_FILTERS:
-      j = "MODIFY_ PCC_RULE_AND_REPLACE_PACKET_FILTERS";
-      break;
-    case RuleOperation_anyOf::eRuleOperation_anyOf::
-        MODIFY__PCC_RULE_AND_DELETE_PACKET_FILTERS:
-      j = "MODIFY_ PCC_RULE_AND_DELETE_PACKET_FILTERS";
-      break;
-    case RuleOperation_anyOf::eRuleOperation_anyOf::
-        MODIFY_PCC_RULE_WITHOUT_MODIFY_PACKET_FILTERS:
-      j = "MODIFY_PCC_RULE_WITHOUT_MODIFY_PACKET_FILTERS";
-      break;
+  case RuleOperation_anyOf::eRuleOperation_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case RuleOperation_anyOf::eRuleOperation_anyOf::CREATE_PCC_RULE:
+    j = "CREATE_PCC_RULE";
+    break;
+  case RuleOperation_anyOf::eRuleOperation_anyOf::DELETE_PCC_RULE:
+    j = "DELETE_PCC_RULE";
+    break;
+  case RuleOperation_anyOf::eRuleOperation_anyOf::
+      MODIFY_PCC_RULE_AND_ADD_PACKET_FILTERS:
+    j = "MODIFY_PCC_RULE_AND_ADD_PACKET_FILTERS";
+    break;
+  case RuleOperation_anyOf::eRuleOperation_anyOf::
+      MODIFY__PCC_RULE_AND_REPLACE_PACKET_FILTERS:
+    j = "MODIFY_ PCC_RULE_AND_REPLACE_PACKET_FILTERS";
+    break;
+  case RuleOperation_anyOf::eRuleOperation_anyOf::
+      MODIFY__PCC_RULE_AND_DELETE_PACKET_FILTERS:
+    j = "MODIFY_ PCC_RULE_AND_DELETE_PACKET_FILTERS";
+    break;
+  case RuleOperation_anyOf::eRuleOperation_anyOf::
+      MODIFY_PCC_RULE_WITHOUT_MODIFY_PACKET_FILTERS:
+    j = "MODIFY_PCC_RULE_WITHOUT_MODIFY_PACKET_FILTERS";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, RuleOperation_anyOf& o) {
+void from_json(const nlohmann::json &j, RuleOperation_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "CREATE_PCC_RULE") {
     o.setValue(RuleOperation_anyOf::eRuleOperation_anyOf::CREATE_PCC_RULE);
@@ -116,8 +116,8 @@ void from_json(const nlohmann::json& j, RuleOperation_anyOf& o) {
   }
 }
 
-RuleOperation_anyOf::eRuleOperation_anyOf RuleOperation_anyOf::getValue()
-    const {
+RuleOperation_anyOf::eRuleOperation_anyOf
+RuleOperation_anyOf::getValue() const {
   return m_value;
 }
 void RuleOperation_anyOf::setValue(
@@ -125,4 +125,4 @@ void RuleOperation_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

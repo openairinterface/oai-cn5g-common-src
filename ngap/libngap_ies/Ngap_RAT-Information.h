@@ -21,7 +21,7 @@ extern "C" {
 /* Dependencies */
 typedef enum Ngap_RAT_Information {
   Ngap_RAT_Information_unlicensed = 0,
-  Ngap_RAT_Information_nb_IoT     = 1
+  Ngap_RAT_Information_nb_IoT = 1
   /*
    * Enumeration is extensible
    */

@@ -22,11 +22,11 @@ using namespace oai::model::common;
 
 AmfNon3GppAccessRegistrationModification::
     AmfNon3GppAccessRegistrationModification() {
-  m_PurgeFlag          = false;
-  m_PurgeFlagIsSet     = false;
-  m_Pei                = "";
-  m_PeiIsSet           = false;
-  m_ImsVoPsIsSet       = false;
+  m_PurgeFlag = false;
+  m_PurgeFlagIsSet = false;
+  m_Pei = "";
+  m_PeiIsSet = false;
+  m_ImsVoPsIsSet = false;
   m_BackupAmfInfoIsSet = false;
 }
 
@@ -37,19 +37,22 @@ void AmfNon3GppAccessRegistrationModification::validate() {
   // TODO: implement validation
 }
 
-void to_json(
-    nlohmann::json& j, const AmfNon3GppAccessRegistrationModification& o) {
-  j          = nlohmann::json();
+void to_json(nlohmann::json &j,
+             const AmfNon3GppAccessRegistrationModification &o) {
+  j = nlohmann::json();
   j["guami"] = o.m_Guami;
-  if (o.purgeFlagIsSet()) j["purgeFlag"] = o.m_PurgeFlag;
-  if (o.peiIsSet()) j["pei"] = o.m_Pei;
-  if (o.imsVoPsIsSet()) j["imsVoPs"] = o.m_ImsVoPs;
+  if (o.purgeFlagIsSet())
+    j["purgeFlag"] = o.m_PurgeFlag;
+  if (o.peiIsSet())
+    j["pei"] = o.m_Pei;
+  if (o.imsVoPsIsSet())
+    j["imsVoPs"] = o.m_ImsVoPs;
   if (o.backupAmfInfoIsSet() || !o.m_BackupAmfInfo.empty())
     j["backupAmfInfo"] = o.m_BackupAmfInfo;
 }
 
-void from_json(
-    const nlohmann::json& j, AmfNon3GppAccessRegistrationModification& o) {
+void from_json(const nlohmann::json &j,
+               AmfNon3GppAccessRegistrationModification &o) {
   j.at("guami").get_to(o.m_Guami);
   if (j.find("purgeFlag") != j.end()) {
     j.at("purgeFlag").get_to(o.m_PurgeFlag);
@@ -72,14 +75,14 @@ void from_json(
 Guami AmfNon3GppAccessRegistrationModification::getGuami() const {
   return m_Guami;
 }
-void AmfNon3GppAccessRegistrationModification::setGuami(Guami const& value) {
+void AmfNon3GppAccessRegistrationModification::setGuami(Guami const &value) {
   m_Guami = value;
 }
 bool AmfNon3GppAccessRegistrationModification::isPurgeFlag() const {
   return m_PurgeFlag;
 }
 void AmfNon3GppAccessRegistrationModification::setPurgeFlag(bool const value) {
-  m_PurgeFlag      = value;
+  m_PurgeFlag = value;
   m_PurgeFlagIsSet = true;
 }
 bool AmfNon3GppAccessRegistrationModification::purgeFlagIsSet() const {
@@ -92,8 +95,8 @@ std::string AmfNon3GppAccessRegistrationModification::getPei() const {
   return m_Pei;
 }
 void AmfNon3GppAccessRegistrationModification::setPei(
-    std::string const& value) {
-  m_Pei      = value;
+    std::string const &value) {
+  m_Pei = value;
   m_PeiIsSet = true;
 }
 bool AmfNon3GppAccessRegistrationModification::peiIsSet() const {
@@ -106,8 +109,8 @@ ImsVoPs AmfNon3GppAccessRegistrationModification::getImsVoPs() const {
   return m_ImsVoPs;
 }
 void AmfNon3GppAccessRegistrationModification::setImsVoPs(
-    ImsVoPs const& value) {
-  m_ImsVoPs      = value;
+    ImsVoPs const &value) {
+  m_ImsVoPs = value;
   m_ImsVoPsIsSet = true;
 }
 bool AmfNon3GppAccessRegistrationModification::imsVoPsIsSet() const {
@@ -116,13 +119,13 @@ bool AmfNon3GppAccessRegistrationModification::imsVoPsIsSet() const {
 void AmfNon3GppAccessRegistrationModification::unsetImsVoPs() {
   m_ImsVoPsIsSet = false;
 }
-std::vector<BackupAmfInfo>&
+std::vector<BackupAmfInfo> &
 AmfNon3GppAccessRegistrationModification::getBackupAmfInfo() {
   return m_BackupAmfInfo;
 }
 void AmfNon3GppAccessRegistrationModification::setBackupAmfInfo(
-    std::vector<BackupAmfInfo> const& value) {
-  m_BackupAmfInfo      = value;
+    std::vector<BackupAmfInfo> const &value) {
+  m_BackupAmfInfo = value;
   m_BackupAmfInfoIsSet = true;
 }
 bool AmfNon3GppAccessRegistrationModification::backupAmfInfoIsSet() const {
@@ -132,4 +135,4 @@ void AmfNon3GppAccessRegistrationModification::unsetBackupAmfInfo() {
   m_BackupAmfInfoIsSet = false;
 }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

@@ -19,9 +19,9 @@
 #ifndef AssignEbiFailed_H_
 #define AssignEbiFailed_H_
 
-#include <vector>
 #include "Arp.h"
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::amf {
 
@@ -29,7 +29,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class AssignEbiFailed {
- public:
+public:
   AssignEbiFailed();
   virtual ~AssignEbiFailed();
 
@@ -46,20 +46,20 @@ class AssignEbiFailed {
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::Arp>& getFailedArpList();
+  std::vector<oai::model::common::Arp> &getFailedArpList();
   bool failedArpListIsSet() const;
   void unsetFailedArpList();
 
-  friend void to_json(nlohmann::json& j, const AssignEbiFailed& o);
-  friend void from_json(const nlohmann::json& j, AssignEbiFailed& o);
+  friend void to_json(nlohmann::json &j, const AssignEbiFailed &o);
+  friend void from_json(const nlohmann::json &j, AssignEbiFailed &o);
 
- protected:
+protected:
   int32_t m_PduSessionId;
 
   std::vector<oai::model::common::Arp> m_FailedArpList;
   bool m_FailedArpListIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* AssignEbiFailed_H_ */

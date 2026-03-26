@@ -35,9 +35,9 @@ struct Ngap_ProtocolIE_SingleContainer;
 typedef struct Ngap_NPN_MobilityInformation {
   Ngap_NPN_MobilityInformation_PR present;
   union Ngap_NPN_MobilityInformation_u {
-    struct Ngap_SNPN_MobilityInformation* sNPN_MobilityInformation;
-    struct Ngap_PNI_NPN_MobilityInformation* pNI_NPN_MobilityInformation;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_SNPN_MobilityInformation *sNPN_MobilityInformation;
+    struct Ngap_PNI_NPN_MobilityInformation *pNI_NPN_MobilityInformation;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

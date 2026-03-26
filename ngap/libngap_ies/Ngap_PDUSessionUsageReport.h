@@ -12,8 +12,8 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include <NativeEnumerated.h>
 #include "Ngap_VolumeTimedReportList.h"
+#include <NativeEnumerated.h>
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -22,12 +22,12 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_PDUSessionUsageReport__rATType {
-  Ngap_PDUSessionUsageReport__rATType_nr    = 0,
+  Ngap_PDUSessionUsageReport__rATType_nr = 0,
   Ngap_PDUSessionUsageReport__rATType_eutra = 1,
   /*
    * Enumeration is extensible
    */
-  Ngap_PDUSessionUsageReport__rATType_nr_unlicensed     = 2,
+  Ngap_PDUSessionUsageReport__rATType_nr_unlicensed = 2,
   Ngap_PDUSessionUsageReport__rATType_e_utra_unlicensed = 3
 } e_Ngap_PDUSessionUsageReport__rATType;
 
@@ -38,7 +38,7 @@ struct Ngap_ProtocolExtensionContainer;
 typedef struct Ngap_PDUSessionUsageReport {
   long rATType;
   Ngap_VolumeTimedReportList_t pDUSessionTimedReportList;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

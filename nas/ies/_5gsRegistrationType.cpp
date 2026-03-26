@@ -16,16 +16,18 @@ _5gsRegistrationType::_5gsRegistrationType()
 //------------------------------------------------------------------------------
 _5gsRegistrationType::_5gsRegistrationType(bool follow_on_req, uint8_t type)
     : Type1NasIeFormatTv(), follow_on_req_(follow_on_req) {
-  if (ValidateValue(follow_on_req, type)) reg_type_ = type;
+  if (ValidateValue(follow_on_req, type))
+    reg_type_ = type;
   SetValue();
 }
 
 //------------------------------------------------------------------------------
-_5gsRegistrationType::_5gsRegistrationType(
-    uint8_t iei, bool follow_on_req, uint8_t type)
+_5gsRegistrationType::_5gsRegistrationType(uint8_t iei, bool follow_on_req,
+                                           uint8_t type)
     : Type1NasIeFormatTv(iei) {
   follow_on_req_ = follow_on_req;
-  if (ValidateValue(follow_on_req, type)) reg_type_ = type;
+  if (ValidateValue(follow_on_req, type))
+    reg_type_ = type;
   SetValue();
 }
 
@@ -43,19 +45,21 @@ void _5gsRegistrationType::SetValue() {
 //------------------------------------------------------------------------------
 void _5gsRegistrationType::GetValue() {
   follow_on_req_ = (0b1000 & value_) >> 3;
-  reg_type_      = value_ & 0b00000111;
+  reg_type_ = value_ & 0b00000111;
 }
 
 //------------------------------------------------------------------------------
 bool _5gsRegistrationType::ValidateValue(bool follow_on_req, uint8_t type) {
-  if (type > k5gsMobileIdentityMaxValue) return false;
+  if (type > k5gsMobileIdentityMaxValue)
+    return false;
   return true;
 }
 
 //------------------------------------------------------------------------------
 void _5gsRegistrationType::Set(bool follow_on_req, uint8_t type, uint8_t iei) {
   follow_on_req_ = follow_on_req;
-  if (ValidateValue(follow_on_req, type)) reg_type_ = type;
+  if (ValidateValue(follow_on_req, type))
+    reg_type_ = type;
   SetValue();
   SetIei(iei);
 }
@@ -63,7 +67,8 @@ void _5gsRegistrationType::Set(bool follow_on_req, uint8_t type, uint8_t iei) {
 //------------------------------------------------------------------------------
 void _5gsRegistrationType::Set(bool follow_on_req, uint8_t type) {
   follow_on_req_ = follow_on_req;
-  if (ValidateValue(follow_on_req, type)) reg_type_ = type;
+  if (ValidateValue(follow_on_req, type))
+    reg_type_ = type;
   SetValue();
 }
 

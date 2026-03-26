@@ -16,7 +16,7 @@ extern "C" {
 using namespace oai::utils;
 
 //------------------------------------------------------------------------------
-void utils::free_wrapper(void** ptr) {
+void utils::free_wrapper(void **ptr) {
   // for debug only
   AssertFatal(ptr, "Trying to free NULL ptr");
   if (ptr) {
@@ -26,7 +26,7 @@ void utils::free_wrapper(void** ptr) {
 }
 
 //------------------------------------------------------------------------------
-void utils::bdestroy_wrapper(bstring* b) {
+void utils::bdestroy_wrapper(bstring *b) {
   if ((b) && (*b)) {
     bdestroy(*b);
     *b = NULL;

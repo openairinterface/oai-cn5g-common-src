@@ -30,12 +30,12 @@ void ReachabilityForDataConfiguration::validate() const {
   }
 }
 
-bool ReachabilityForDataConfiguration::validate(std::stringstream& msg) const {
+bool ReachabilityForDataConfiguration::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool ReachabilityForDataConfiguration::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ReachabilityForDataConfiguration" : pathPrefix;
@@ -44,7 +44,7 @@ bool ReachabilityForDataConfiguration::validate(
 }
 
 bool ReachabilityForDataConfiguration::operator==(
-    const ReachabilityForDataConfiguration& rhs) const {
+    const ReachabilityForDataConfiguration &rhs) const {
   return
 
       (getReportCfg() == rhs.getReportCfg())
@@ -53,26 +53,26 @@ bool ReachabilityForDataConfiguration::operator==(
 }
 
 bool ReachabilityForDataConfiguration::operator!=(
-    const ReachabilityForDataConfiguration& rhs) const {
+    const ReachabilityForDataConfiguration &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ReachabilityForDataConfiguration& o) {
-  j              = nlohmann::json();
+void to_json(nlohmann::json &j, const ReachabilityForDataConfiguration &o) {
+  j = nlohmann::json();
   j["reportCfg"] = o.m_ReportCfg;
 }
 
-void from_json(const nlohmann::json& j, ReachabilityForDataConfiguration& o) {
+void from_json(const nlohmann::json &j, ReachabilityForDataConfiguration &o) {
   j.at("reportCfg").get_to(o.m_ReportCfg);
 }
 
-ReachabilityForDataReportConfig ReachabilityForDataConfiguration::getReportCfg()
-    const {
+ReachabilityForDataReportConfig
+ReachabilityForDataConfiguration::getReportCfg() const {
   return m_ReportCfg;
 }
 void ReachabilityForDataConfiguration::setReportCfg(
-    ReachabilityForDataReportConfig const& value) {
+    ReachabilityForDataReportConfig const &value) {
   m_ReportCfg = value;
 }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

@@ -23,10 +23,10 @@ void _5GMmCapability::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const _5GMmCapability& o) {
+void to_json(nlohmann::json &j, const _5GMmCapability &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, _5GMmCapability& o) {}
+void from_json(const nlohmann::json &j, _5GMmCapability &o) {}
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

@@ -11,31 +11,31 @@
 namespace oai::nas {
 
 class PduSessionAuthenticationComplete : public Nas5gsmMessage {
- public:
+public:
   PduSessionAuthenticationComplete();
   virtual ~PduSessionAuthenticationComplete();
 
-  int Encode(uint8_t* buf, int len) override;
-  int Decode(uint8_t* buf, int len) override;
+  int Encode(uint8_t *buf, int len) override;
+  int Decode(uint8_t *buf, int len) override;
 
   uint32_t GetLength() const override;
 
-  void SetEapMessage(const EapMessage& eap_message);
-  void GetEapMessage(EapMessage& eap_message) const;
+  void SetEapMessage(const EapMessage &eap_message);
+  void GetEapMessage(EapMessage &eap_message) const;
 
   void SetExtendedProtocolConfigurationOptions(
-      const ExtendedProtocolConfigurationOptions& options);
+      const ExtendedProtocolConfigurationOptions &options);
   void GetExtendedProtocolConfigurationOptions(
-      std::optional<ExtendedProtocolConfigurationOptions>& options) const;
+      std::optional<ExtendedProtocolConfigurationOptions> &options) const;
 
- private:
+private:
   // Nas5gsmHeader ie_header_;    // Mandatory
-  EapMessage ie_eap_message_;  // Mandatory
+  EapMessage ie_eap_message_; // Mandatory
 
   std::optional<ExtendedProtocolConfigurationOptions>
-      ie_extended_protocol_configuration_options_;  // Optional
+      ie_extended_protocol_configuration_options_; // Optional
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

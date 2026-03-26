@@ -13,8 +13,8 @@
 
 #include "SessionRuleFailureCode_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::pcf {
 
@@ -27,12 +27,12 @@ void SessionRuleFailureCode_anyOf::validate() const {
   }
 }
 
-bool SessionRuleFailureCode_anyOf::validate(std::stringstream& msg) const {
+bool SessionRuleFailureCode_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool SessionRuleFailureCode_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "SessionRuleFailureCode_anyOf" : pathPrefix;
@@ -47,43 +47,42 @@ bool SessionRuleFailureCode_anyOf::validate(
 }
 
 bool SessionRuleFailureCode_anyOf::operator==(
-    const SessionRuleFailureCode_anyOf& rhs) const {
+    const SessionRuleFailureCode_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool SessionRuleFailureCode_anyOf::operator!=(
-    const SessionRuleFailureCode_anyOf& rhs) const {
+    const SessionRuleFailureCode_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const SessionRuleFailureCode_anyOf& o) {
+void to_json(nlohmann::json &j, const SessionRuleFailureCode_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case SessionRuleFailureCode_anyOf::eSessionRuleFailureCode_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case SessionRuleFailureCode_anyOf::eSessionRuleFailureCode_anyOf::NF_MAL:
-      j = "NF_MAL";
-      break;
-    case SessionRuleFailureCode_anyOf::eSessionRuleFailureCode_anyOf::RES_LIM:
-      j = "RES_LIM";
-      break;
-    case SessionRuleFailureCode_anyOf::eSessionRuleFailureCode_anyOf::
-        UNSUCC_QOS_VAL:
-      j = "UNSUCC_QOS_VAL";
-      break;
-    case SessionRuleFailureCode_anyOf::eSessionRuleFailureCode_anyOf::
-        UE_STA_SUSP:
-      j = "UE_STA_SUSP";
-      break;
+  case SessionRuleFailureCode_anyOf::eSessionRuleFailureCode_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case SessionRuleFailureCode_anyOf::eSessionRuleFailureCode_anyOf::NF_MAL:
+    j = "NF_MAL";
+    break;
+  case SessionRuleFailureCode_anyOf::eSessionRuleFailureCode_anyOf::RES_LIM:
+    j = "RES_LIM";
+    break;
+  case SessionRuleFailureCode_anyOf::eSessionRuleFailureCode_anyOf::
+      UNSUCC_QOS_VAL:
+    j = "UNSUCC_QOS_VAL";
+    break;
+  case SessionRuleFailureCode_anyOf::eSessionRuleFailureCode_anyOf::UE_STA_SUSP:
+    j = "UE_STA_SUSP";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, SessionRuleFailureCode_anyOf& o) {
+void from_json(const nlohmann::json &j, SessionRuleFailureCode_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "NF_MAL") {
     o.setValue(
@@ -115,4 +114,4 @@ void SessionRuleFailureCode_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

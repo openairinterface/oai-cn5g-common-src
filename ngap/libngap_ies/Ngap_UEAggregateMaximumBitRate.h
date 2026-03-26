@@ -26,7 +26,7 @@ struct Ngap_ProtocolExtensionContainer;
 typedef struct Ngap_UEAggregateMaximumBitRate {
   Ngap_BitRate_t uEAggregateMaximumBitRateDL;
   Ngap_BitRate_t uEAggregateMaximumBitRateUL;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

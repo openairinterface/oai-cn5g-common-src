@@ -10,7 +10,7 @@
 constexpr uint8_t kAuthenticationResponseParameterMinimumLength = 6;
 constexpr uint8_t kAuthenticationResponseParameterContentMinimumLength =
     kAuthenticationResponseParameterMinimumLength -
-    2;  // Minimum length - 2 octets for IEI/Length
+    2; // Minimum length - 2 octets for IEI/Length
 constexpr uint8_t kAuthenticationResponseParameterMaximumLength = 18;
 constexpr auto kAuthenticationResponseParameterIeName =
     "Authentication Response Parameter";
@@ -18,25 +18,25 @@ constexpr auto kAuthenticationResponseParameterIeName =
 namespace oai::nas {
 
 class AuthenticationResponseParameter : public Type4NasIe {
- public:
+public:
   AuthenticationResponseParameter();
-  AuthenticationResponseParameter(const bstring& para);
+  AuthenticationResponseParameter(const bstring &para);
   virtual ~AuthenticationResponseParameter();
 
-  int Encode(uint8_t* buf, int len) const override;
-  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+  int Encode(uint8_t *buf, int len) const override;
+  int Decode(const uint8_t *const buf, int len, bool is_iei = false) override;
 
   static std::string GetIeName() {
     return kAuthenticationResponseParameterIeName;
   }
 
-  void SetValue(const bstring& para);
-  void GetValue(bstring& para) const;
+  void SetValue(const bstring &para);
+  void GetValue(bstring &para) const;
 
- private:
+private:
   bstring res_or_res_star_;
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

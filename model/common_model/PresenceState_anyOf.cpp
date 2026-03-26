@@ -13,8 +13,8 @@
 
 #include "PresenceState_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::common {
 
@@ -27,12 +27,12 @@ void PresenceState_anyOf::validate() const {
   }
 }
 
-bool PresenceState_anyOf::validate(std::stringstream& msg) const {
+bool PresenceState_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool PresenceState_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool PresenceState_anyOf::validate(std::stringstream &msg,
+                                   const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PresenceState_anyOf" : pathPrefix;
@@ -46,40 +46,40 @@ bool PresenceState_anyOf::validate(
   return success;
 }
 
-bool PresenceState_anyOf::operator==(const PresenceState_anyOf& rhs) const {
+bool PresenceState_anyOf::operator==(const PresenceState_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool PresenceState_anyOf::operator!=(const PresenceState_anyOf& rhs) const {
+bool PresenceState_anyOf::operator!=(const PresenceState_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PresenceState_anyOf& o) {
+void to_json(nlohmann::json &j, const PresenceState_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case PresenceState_anyOf::ePresenceState_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case PresenceState_anyOf::ePresenceState_anyOf::IN_AREA:
-      j = "IN_AREA";
-      break;
-    case PresenceState_anyOf::ePresenceState_anyOf::OUT_OF_AREA:
-      j = "OUT_OF_AREA";
-      break;
-    case PresenceState_anyOf::ePresenceState_anyOf::UNKNOWN:
-      j = "UNKNOWN";
-      break;
-    case PresenceState_anyOf::ePresenceState_anyOf::INACTIVE:
-      j = "INACTIVE";
-      break;
+  case PresenceState_anyOf::ePresenceState_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case PresenceState_anyOf::ePresenceState_anyOf::IN_AREA:
+    j = "IN_AREA";
+    break;
+  case PresenceState_anyOf::ePresenceState_anyOf::OUT_OF_AREA:
+    j = "OUT_OF_AREA";
+    break;
+  case PresenceState_anyOf::ePresenceState_anyOf::UNKNOWN:
+    j = "UNKNOWN";
+    break;
+  case PresenceState_anyOf::ePresenceState_anyOf::INACTIVE:
+    j = "INACTIVE";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, PresenceState_anyOf& o) {
+void from_json(const nlohmann::json &j, PresenceState_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "IN_AREA") {
     o.setValue(PresenceState_anyOf::ePresenceState_anyOf::IN_AREA);
@@ -98,8 +98,8 @@ void from_json(const nlohmann::json& j, PresenceState_anyOf& o) {
   }
 }
 
-PresenceState_anyOf::ePresenceState_anyOf PresenceState_anyOf::getValue()
-    const {
+PresenceState_anyOf::ePresenceState_anyOf
+PresenceState_anyOf::getValue() const {
   return m_value;
 }
 void PresenceState_anyOf::setValue(
@@ -107,4 +107,4 @@ void PresenceState_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

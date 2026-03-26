@@ -27,12 +27,12 @@ void PolicyControlRequestTrigger::validate() const {
   }
 }
 
-bool PolicyControlRequestTrigger::validate(std::stringstream& msg) const {
+bool PolicyControlRequestTrigger::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool PolicyControlRequestTrigger::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PolicyControlRequestTrigger" : pathPrefix;
@@ -44,28 +44,28 @@ bool PolicyControlRequestTrigger::validate(
 }
 
 bool PolicyControlRequestTrigger::operator==(
-    const PolicyControlRequestTrigger& rhs) const {
+    const PolicyControlRequestTrigger &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
 bool PolicyControlRequestTrigger::operator!=(
-    const PolicyControlRequestTrigger& rhs) const {
+    const PolicyControlRequestTrigger &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PolicyControlRequestTrigger& o) {
+void to_json(nlohmann::json &j, const PolicyControlRequestTrigger &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, PolicyControlRequestTrigger& o) {
+void from_json(const nlohmann::json &j, PolicyControlRequestTrigger &o) {
   from_json(j, o.m_value);
 }
 
-PolicyControlRequestTrigger_anyOf PolicyControlRequestTrigger::getValue()
-    const {
+PolicyControlRequestTrigger_anyOf
+PolicyControlRequestTrigger::getValue() const {
   return m_value;
 }
 
@@ -85,4 +85,4 @@ void PolicyControlRequestTrigger::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

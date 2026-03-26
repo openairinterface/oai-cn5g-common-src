@@ -33,8 +33,8 @@ struct Ngap_ProtocolIE_SingleContainer;
 typedef struct Ngap_SourceNodeID {
   Ngap_SourceNodeID_PR present;
   union Ngap_SourceNodeID_u {
-    struct Ngap_GlobalGNB_ID* sourceengNB_ID;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_GlobalGNB_ID *sourceengNB_ID;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

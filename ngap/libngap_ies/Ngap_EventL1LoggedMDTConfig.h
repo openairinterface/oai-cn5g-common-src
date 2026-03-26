@@ -12,8 +12,8 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_MeasurementThresholdL1LoggedMDT.h"
 #include "Ngap_Hysteresis.h"
+#include "Ngap_MeasurementThresholdL1LoggedMDT.h"
 #include "Ngap_TimeToTrigger.h"
 #include <constr_SEQUENCE.h>
 
@@ -29,7 +29,7 @@ typedef struct Ngap_EventL1LoggedMDTConfig {
   Ngap_MeasurementThresholdL1LoggedMDT_t l1Threshold;
   Ngap_Hysteresis_t hysteresis;
   Ngap_TimeToTrigger_t timeToTrigger;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

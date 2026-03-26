@@ -20,8 +20,8 @@
 #define PdvMonitoringReport_H_
 
 #include "Flows.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::pcf {
 
@@ -29,7 +29,7 @@ namespace oai::model::pcf {
 /// Packet Delay Variation reporting information.
 /// </summary>
 class PdvMonitoringReport {
- public:
+public:
   PdvMonitoringReport();
   virtual ~PdvMonitoringReport() = default;
 
@@ -43,16 +43,16 @@ class PdvMonitoringReport {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const PdvMonitoringReport& rhs) const;
-  bool operator!=(const PdvMonitoringReport& rhs) const;
+  bool operator==(const PdvMonitoringReport &rhs) const;
+  bool operator!=(const PdvMonitoringReport &rhs) const;
 
   /////////////////////////////////////////////
   /// PdvMonitoringReport members
@@ -61,7 +61,7 @@ class PdvMonitoringReport {
   /// Identification of the flows.
   /// </summary>
   std::vector<oai::model::pcf::Flows> getFlows() const;
-  void setFlows(std::vector<oai::model::pcf::Flows> const& value);
+  void setFlows(std::vector<oai::model::pcf::Flows> const &value);
   bool flowsIsSet() const;
   void unsetFlows();
   /// <summary>
@@ -86,10 +86,10 @@ class PdvMonitoringReport {
   bool rtPdvIsSet() const;
   void unsetRtPdv();
 
-  friend void to_json(nlohmann::json& j, const PdvMonitoringReport& o);
-  friend void from_json(const nlohmann::json& j, PdvMonitoringReport& o);
+  friend void to_json(nlohmann::json &j, const PdvMonitoringReport &o);
+  friend void from_json(const nlohmann::json &j, PdvMonitoringReport &o);
 
- protected:
+protected:
   std::vector<oai::model::pcf::Flows> m_Flows;
   bool m_FlowsIsSet;
   int32_t m_UlPdv;
@@ -100,6 +100,6 @@ class PdvMonitoringReport {
   bool m_RtPdvIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* PdvMonitoringReport_H_ */

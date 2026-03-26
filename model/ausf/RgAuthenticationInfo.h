@@ -24,8 +24,8 @@
 #ifndef RgAuthenticationInfo_H_
 #define RgAuthenticationInfo_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::ausf {
 
@@ -33,7 +33,7 @@ namespace oai::model::ausf {
 ///
 /// </summary>
 class RgAuthenticationInfo {
- public:
+public:
   RgAuthenticationInfo();
   virtual ~RgAuthenticationInfo();
 
@@ -46,22 +46,22 @@ class RgAuthenticationInfo {
   ///
   /// </summary>
   std::string getSuci() const;
-  void setSuci(std::string const& value);
+  void setSuci(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   bool isAuthenticatedInd() const;
   void setAuthenticatedInd(bool const value);
 
-  friend void to_json(nlohmann::json& j, const RgAuthenticationInfo& o);
-  friend void from_json(const nlohmann::json& j, RgAuthenticationInfo& o);
+  friend void to_json(nlohmann::json &j, const RgAuthenticationInfo &o);
+  friend void from_json(const nlohmann::json &j, RgAuthenticationInfo &o);
 
- protected:
+protected:
   std::string m_Suci;
 
   bool m_AuthenticatedInd;
 };
 
-}  // namespace oai::model::ausf
+} // namespace oai::model::ausf
 
 #endif /* RgAuthenticationInfo_H_ */

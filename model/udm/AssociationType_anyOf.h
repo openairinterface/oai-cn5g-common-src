@@ -30,7 +30,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class AssociationType_anyOf {
- public:
+public:
   AssociationType_anyOf();
   virtual ~AssociationType_anyOf() = default;
 
@@ -53,10 +53,10 @@ class AssociationType_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const AssociationType_anyOf& rhs) const;
-  bool operator!=(const AssociationType_anyOf& rhs) const;
+  bool operator==(const AssociationType_anyOf &rhs) const;
+  bool operator!=(const AssociationType_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// AssociationType_anyOf members
@@ -64,19 +64,19 @@ class AssociationType_anyOf {
   AssociationType_anyOf::eAssociationType_anyOf getValue() const;
   void setValue(AssociationType_anyOf::eAssociationType_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const AssociationType_anyOf& o);
-  friend void from_json(const nlohmann::json& j, AssociationType_anyOf& o);
+  friend void to_json(nlohmann::json &j, const AssociationType_anyOf &o);
+  friend void from_json(const nlohmann::json &j, AssociationType_anyOf &o);
 
- protected:
+protected:
   AssociationType_anyOf::eAssociationType_anyOf m_value =
       AssociationType_anyOf::eAssociationType_anyOf::
           INVALID_VALUE_OPENAPI_GENERATED;
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* AssociationType_anyOf_H_ */

@@ -12,8 +12,8 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_EUTRA-CGI.h"
 #include "Ngap_CoverageEnhancementLevel.h"
+#include "Ngap_EUTRA-CGI.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -27,7 +27,7 @@ struct Ngap_ProtocolExtensionContainer;
 typedef struct Ngap_PagingAssisDataforCEcapabUE {
   Ngap_EUTRA_CGI_t eUTRA_CGI;
   Ngap_CoverageEnhancementLevel_t coverageEnhancementLevel;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

@@ -27,8 +27,7 @@ asn_per_constraints_t asn_PER_type_Ngap_PrivacyIndicator_constr_1 CC_NOTUSED = {
           !defined(ASN_DISABLE_APER_SUPPORT) */
 static const asn_INTEGER_enum_map_t
     asn_MAP_Ngap_PrivacyIndicator_value2enum_1[] = {
-        {0, 13, "immediate-MDT"},
-        {1, 10, "logged-MDT"}
+        {0, 13, "immediate-MDT"}, {1, 10, "logged-MDT"}
         /* This list is extensible */
 };
 static const unsigned int asn_MAP_Ngap_PrivacyIndicator_enum2value_1[] = {

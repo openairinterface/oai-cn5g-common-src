@@ -26,12 +26,12 @@ struct Ngap_ProtocolExtensionContainer;
 
 /* Ngap_HandoverCommandTransfer */
 typedef struct Ngap_HandoverCommandTransfer {
-  struct Ngap_UPTransportLayerInformation*
-      dLForwardingUP_TNLInformation;                              /* OPTIONAL */
-  struct Ngap_QosFlowToBeForwardedList* qosFlowToBeForwardedList; /* OPTIONAL */
-  struct Ngap_DataForwardingResponseDRBList*
-      dataForwardingResponseDRBList;                     /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_UPTransportLayerInformation
+      *dLForwardingUP_TNLInformation;                             /* OPTIONAL */
+  struct Ngap_QosFlowToBeForwardedList *qosFlowToBeForwardedList; /* OPTIONAL */
+  struct Ngap_DataForwardingResponseDRBList
+      *dataForwardingResponseDRBList;                    /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

@@ -8,15 +8,15 @@
 
 #include "Ngap_HandoverCommandTransfer.h"
 
-#include "Ngap_UPTransportLayerInformation.h"
-#include "Ngap_QosFlowToBeForwardedList.h"
 #include "Ngap_DataForwardingResponseDRBList.h"
 #include "Ngap_ProtocolExtensionContainer.h"
+#include "Ngap_QosFlowToBeForwardedList.h"
+#include "Ngap_UPTransportLayerInformation.h"
 static asn_TYPE_member_t asn_MBR_Ngap_HandoverCommandTransfer_1[] = {
     {ATF_POINTER,
      4,
-     offsetof(
-         struct Ngap_HandoverCommandTransfer, dLForwardingUP_TNLInformation),
+     offsetof(struct Ngap_HandoverCommandTransfer,
+              dLForwardingUP_TNLInformation),
      (ASN_TAG_CLASS_CONTEXT | (0 << 2)),
      +1, /* EXPLICIT tag at current level */
      &asn_DEF_Ngap_UPTransportLayerInformation,
@@ -54,8 +54,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_HandoverCommandTransfer_1[] = {
      "qosFlowToBeForwardedList"},
     {ATF_POINTER,
      2,
-     offsetof(
-         struct Ngap_HandoverCommandTransfer, dataForwardingResponseDRBList),
+     offsetof(struct Ngap_HandoverCommandTransfer,
+              dataForwardingResponseDRBList),
      (ASN_TAG_CLASS_CONTEXT | (2 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_DataForwardingResponseDRBList,

@@ -10,14 +10,14 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 PduSessionEstablishmentReject::PduSessionEstablishmentReject()
-    : Nas5gsmMessage(
-          k5gsSessionManagementMessages, kPduSessionEstablishmentReject) {
-  ie_back_off_timer_value_                    = std::nullopt;
-  ie_allowed_ssc_mode_                        = std::nullopt;
-  ie_eap_message_                             = std::nullopt;
-  ie_5gsm_congestion_re_attempt_indicator_    = std::nullopt;
+    : Nas5gsmMessage(k5gsSessionManagementMessages,
+                     kPduSessionEstablishmentReject) {
+  ie_back_off_timer_value_ = std::nullopt;
+  ie_allowed_ssc_mode_ = std::nullopt;
+  ie_eap_message_ = std::nullopt;
+  ie_5gsm_congestion_re_attempt_indicator_ = std::nullopt;
   ie_extended_protocol_configuration_options_ = std::nullopt;
-  ie_re_attempt_indicator_                    = std::nullopt;
+  ie_re_attempt_indicator_ = std::nullopt;
 }
 
 //------------------------------------------------------------------------------
@@ -48,97 +48,97 @@ uint32_t PduSessionEstablishmentReject::GetLength() const {
 
 //------------------------------------------------------------------------------
 void PduSessionEstablishmentReject::Set5gsmCause(
-    const _5gsmCause& _5gsm_cause) {
+    const _5gsmCause &_5gsm_cause) {
   ie_5gsm_cause_ = _5gsm_cause;
 }
 
 //------------------------------------------------------------------------------
 void PduSessionEstablishmentReject::Get5gsmCause(
-    _5gsmCause& _5gsm_cause) const {
+    _5gsmCause &_5gsm_cause) const {
   _5gsm_cause = ie_5gsm_cause_;
 }
 
 //------------------------------------------------------------------------------
 void PduSessionEstablishmentReject::SetBackOffTimerValue(
-    const GprsTimer3& back_off_timer_value) {
+    const GprsTimer3 &back_off_timer_value) {
   ie_back_off_timer_value_ =
       std::make_optional<GprsTimer3>(back_off_timer_value);
 }
 
 //------------------------------------------------------------------------------
 void PduSessionEstablishmentReject::GetBackOffTimerValue(
-    std::optional<GprsTimer3>& back_off_timer_value) const {
+    std::optional<GprsTimer3> &back_off_timer_value) const {
   back_off_timer_value = ie_back_off_timer_value_;
 }
 
 //------------------------------------------------------------------------------
 void PduSessionEstablishmentReject::SetAllowedSscMode(
-    const AllowedSscMode& allowed_ssc_mode) {
+    const AllowedSscMode &allowed_ssc_mode) {
   ie_allowed_ssc_mode_ = std::make_optional<AllowedSscMode>(allowed_ssc_mode);
 }
 
 //------------------------------------------------------------------------------
 void PduSessionEstablishmentReject::GetAllowedSscMode(
-    std::optional<AllowedSscMode>& allowed_ssc_mode) const {
+    std::optional<AllowedSscMode> &allowed_ssc_mode) const {
   allowed_ssc_mode = ie_allowed_ssc_mode_;
 }
 
 //------------------------------------------------------------------------------
 void PduSessionEstablishmentReject::SetEapMessage(
-    const EapMessage& eap_message) {
+    const EapMessage &eap_message) {
   ie_eap_message_ = std::make_optional<EapMessage>(eap_message);
 }
 
 //------------------------------------------------------------------------------
 void PduSessionEstablishmentReject::GetEapMessage(
-    std::optional<EapMessage>& eap_message) const {
+    std::optional<EapMessage> &eap_message) const {
   eap_message = ie_eap_message_;
 }
 
 //------------------------------------------------------------------------------
 void PduSessionEstablishmentReject::Set5gsmCongestionReAttemptIndicator(
-    const _5gsmCongestionReAttemptIndicator& indicator) {
+    const _5gsmCongestionReAttemptIndicator &indicator) {
   ie_5gsm_congestion_re_attempt_indicator_ =
       std::make_optional<_5gsmCongestionReAttemptIndicator>(indicator);
 }
 
 //------------------------------------------------------------------------------
 void PduSessionEstablishmentReject::Get5gsmCongestionReAttemptIndicator(
-    std::optional<_5gsmCongestionReAttemptIndicator>& indicator) const {
+    std::optional<_5gsmCongestionReAttemptIndicator> &indicator) const {
   indicator = ie_5gsm_congestion_re_attempt_indicator_;
 }
 
 //------------------------------------------------------------------------------
 void PduSessionEstablishmentReject::SetExtendedProtocolConfigurationOptions(
-    const ExtendedProtocolConfigurationOptions& options) {
+    const ExtendedProtocolConfigurationOptions &options) {
   ie_extended_protocol_configuration_options_ =
       std::make_optional<ExtendedProtocolConfigurationOptions>(options);
 }
 
 //------------------------------------------------------------------------------
 void PduSessionEstablishmentReject::GetExtendedProtocolConfigurationOptions(
-    std::optional<ExtendedProtocolConfigurationOptions>& options) const {
+    std::optional<ExtendedProtocolConfigurationOptions> &options) const {
   options = ie_extended_protocol_configuration_options_;
 }
 
 //------------------------------------------------------------------------------
 void PduSessionEstablishmentReject::SetReAttemptIndicator(
-    const ReAttemptIndicator& re_attempt_indicator) {
+    const ReAttemptIndicator &re_attempt_indicator) {
   ie_re_attempt_indicator_ =
       std::make_optional<ReAttemptIndicator>(re_attempt_indicator);
 }
 
 //------------------------------------------------------------------------------
 void PduSessionEstablishmentReject::GetReAttemptIndicator(
-    std::optional<ReAttemptIndicator>& re_attempt_indicator) const {
+    std::optional<ReAttemptIndicator> &re_attempt_indicator) const {
   re_attempt_indicator = ie_re_attempt_indicator_;
 }
 
 //------------------------------------------------------------------------------
-int PduSessionEstablishmentReject::Encode(uint8_t* buf, int len) {
+int PduSessionEstablishmentReject::Encode(uint8_t *buf, int len) {
   oai::logger::logger_common::nas().debug(
       "Encoding PduSessionEstablishmentReject message");
-  int encoded_size    = 0;
+  int encoded_size = 0;
   int encoded_ie_size = 0;
   // Header
   if ((encoded_ie_size = Nas5gsmMessage::Encode(buf, len)) ==
@@ -155,8 +155,8 @@ int PduSessionEstablishmentReject::Encode(uint8_t* buf, int len) {
   }
 
   // Back-off timer value
-  if ((encoded_ie_size = NasHelper::Encode(
-           ie_back_off_timer_value_, buf, len, encoded_size)) ==
+  if ((encoded_ie_size = NasHelper::Encode(ie_back_off_timer_value_, buf, len,
+                                           encoded_size)) ==
       KEncodeDecodeError) {
     return KEncodeDecodeError;
   }
@@ -175,22 +175,22 @@ int PduSessionEstablishmentReject::Encode(uint8_t* buf, int len) {
   }
 
   // 5GSM congestion re-attempt indicator
-  if ((encoded_ie_size = NasHelper::Encode(
-           ie_5gsm_congestion_re_attempt_indicator_, buf, len, encoded_size)) ==
-      KEncodeDecodeError) {
+  if ((encoded_ie_size =
+           NasHelper::Encode(ie_5gsm_congestion_re_attempt_indicator_, buf, len,
+                             encoded_size)) == KEncodeDecodeError) {
     return KEncodeDecodeError;
   }
 
   // Extended protocol configuration options
-  if ((encoded_ie_size = NasHelper::Encode(
-           ie_extended_protocol_configuration_options_, buf, len,
-           encoded_size)) == KEncodeDecodeError) {
+  if ((encoded_ie_size =
+           NasHelper::Encode(ie_extended_protocol_configuration_options_, buf,
+                             len, encoded_size)) == KEncodeDecodeError) {
     return KEncodeDecodeError;
   }
 
   // Re-attempt indicator
-  if ((encoded_ie_size = NasHelper::Encode(
-           ie_re_attempt_indicator_, buf, len, encoded_size)) ==
+  if ((encoded_ie_size = NasHelper::Encode(ie_re_attempt_indicator_, buf, len,
+                                           encoded_size)) ==
       KEncodeDecodeError) {
     return KEncodeDecodeError;
   }
@@ -201,10 +201,10 @@ int PduSessionEstablishmentReject::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int PduSessionEstablishmentReject::Decode(uint8_t* buf, int len) {
+int PduSessionEstablishmentReject::Decode(uint8_t *buf, int len) {
   oai::logger::logger_common::nas().debug(
       "Decoding PduSessionEstablishmentReject message");
-  int decoded_size    = 0;
+  int decoded_size = 0;
   int decoded_ie_size = 0;
 
   // Header
@@ -228,93 +228,93 @@ int PduSessionEstablishmentReject::Decode(uint8_t* buf, int len) {
   bool flag = false;
   while ((octet != 0x0)) {
     switch ((octet & 0xf0) >> 4) {
-      case kIeiAllowedSscMode: {
-        oai::logger::logger_common::nas().debug(
-            "Decoding IEI 0x%x", kIeiAllowedSscMode);
-        if ((decoded_ie_size = NasHelper::Decode(
-                 ie_allowed_ssc_mode_, buf, len, decoded_size, true)) ==
-            KEncodeDecodeError) {
-          return KEncodeDecodeError;
-        }
-        DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
-      } break;
-
-      default: {
-        flag = true;
+    case kIeiAllowedSscMode: {
+      oai::logger::logger_common::nas().debug("Decoding IEI 0x%x",
+                                              kIeiAllowedSscMode);
+      if ((decoded_ie_size = NasHelper::Decode(ie_allowed_ssc_mode_, buf, len,
+                                               decoded_size, true)) ==
+          KEncodeDecodeError) {
+        return KEncodeDecodeError;
       }
+      DECODE_U8_VALUE(buf, octet, decoded_size, len);
+      oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
+    } break;
+
+    default: {
+      flag = true;
+    }
     }
 
     switch (octet) {
-      case kIeiGprsTimer3BackOffTimer: {
-        oai::logger::logger_common::nas().debug(
-            "Decoding IEI 0x%x", kIeiGprsTimer3BackOffTimer);
-        if ((decoded_ie_size = NasHelper::Decode(
-                 ie_back_off_timer_value_, kIeiGprsTimer3BackOffTimer, buf, len,
-                 decoded_size, true)) == KEncodeDecodeError) {
-          return KEncodeDecodeError;
-        }
-        DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
-      } break;
+    case kIeiGprsTimer3BackOffTimer: {
+      oai::logger::logger_common::nas().debug("Decoding IEI 0x%x",
+                                              kIeiGprsTimer3BackOffTimer);
+      if ((decoded_ie_size = NasHelper::Decode(
+               ie_back_off_timer_value_, kIeiGprsTimer3BackOffTimer, buf, len,
+               decoded_size, true)) == KEncodeDecodeError) {
+        return KEncodeDecodeError;
+      }
+      DECODE_U8_VALUE(buf, octet, decoded_size, len);
+      oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
+    } break;
 
-      case kIeiEapMessage: {
-        oai::logger::logger_common::nas().debug(
-            "Decoding IEI 0x%x", kIeiEapMessage);
-        if ((decoded_ie_size = NasHelper::Decode(
-                 ie_eap_message_, buf, len, decoded_size, true)) ==
-            KEncodeDecodeError) {
-          return KEncodeDecodeError;
-        }
-        DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
-      } break;
+    case kIeiEapMessage: {
+      oai::logger::logger_common::nas().debug("Decoding IEI 0x%x",
+                                              kIeiEapMessage);
+      if ((decoded_ie_size = NasHelper::Decode(ie_eap_message_, buf, len,
+                                               decoded_size, true)) ==
+          KEncodeDecodeError) {
+        return KEncodeDecodeError;
+      }
+      DECODE_U8_VALUE(buf, octet, decoded_size, len);
+      oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
+    } break;
 
-      case kIei5gsmCongestionReAttemptIndicator: {
-        oai::logger::logger_common::nas().debug(
-            "Decoding IEI 0x%x", kIei5gsmCongestionReAttemptIndicator);
-        if ((decoded_ie_size = NasHelper::Decode(
-                 ie_5gsm_congestion_re_attempt_indicator_, buf, len,
-                 decoded_size, true)) == KEncodeDecodeError) {
-          return KEncodeDecodeError;
-        }
-        DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
-      } break;
+    case kIei5gsmCongestionReAttemptIndicator: {
+      oai::logger::logger_common::nas().debug(
+          "Decoding IEI 0x%x", kIei5gsmCongestionReAttemptIndicator);
+      if ((decoded_ie_size = NasHelper::Decode(
+               ie_5gsm_congestion_re_attempt_indicator_, buf, len, decoded_size,
+               true)) == KEncodeDecodeError) {
+        return KEncodeDecodeError;
+      }
+      DECODE_U8_VALUE(buf, octet, decoded_size, len);
+      oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
+    } break;
 
-      case kIeiExtendedProtocolConfigurationOptions: {
-        oai::logger::logger_common::nas().debug(
-            "Decoding IEI 0x%x", kIeiExtendedProtocolConfigurationOptions);
-        if ((decoded_ie_size = NasHelper::Decode(
-                 ie_extended_protocol_configuration_options_, buf, len,
-                 decoded_size, true)) == KEncodeDecodeError) {
-          return KEncodeDecodeError;
-        }
-        DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
-      } break;
+    case kIeiExtendedProtocolConfigurationOptions: {
+      oai::logger::logger_common::nas().debug(
+          "Decoding IEI 0x%x", kIeiExtendedProtocolConfigurationOptions);
+      if ((decoded_ie_size = NasHelper::Decode(
+               ie_extended_protocol_configuration_options_, buf, len,
+               decoded_size, true)) == KEncodeDecodeError) {
+        return KEncodeDecodeError;
+      }
+      DECODE_U8_VALUE(buf, octet, decoded_size, len);
+      oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
+    } break;
 
-      case kIeiReAttemptIndicator: {
-        oai::logger::logger_common::nas().debug(
-            "Decoding IEI 0x%x", kIeiReAttemptIndicator);
-        if ((decoded_ie_size = NasHelper::Decode(
-                 ie_re_attempt_indicator_, buf, len, decoded_size, true)) ==
-            KEncodeDecodeError) {
-          return KEncodeDecodeError;
-        }
-        DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
-      } break;
+    case kIeiReAttemptIndicator: {
+      oai::logger::logger_common::nas().debug("Decoding IEI 0x%x",
+                                              kIeiReAttemptIndicator);
+      if ((decoded_ie_size = NasHelper::Decode(ie_re_attempt_indicator_, buf,
+                                               len, decoded_size, true)) ==
+          KEncodeDecodeError) {
+        return KEncodeDecodeError;
+      }
+      DECODE_U8_VALUE(buf, octet, decoded_size, len);
+      oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
+    } break;
 
-      default: {
-        // TODO:
-        if (flag) {
-          oai::logger::logger_common::nas().warn(
-              "Unknown IEI 0x%x, stop decoding...", octet);
-          // Stop decoding
-          octet = 0x00;
-        }
-      } break;
+    default: {
+      // TODO:
+      if (flag) {
+        oai::logger::logger_common::nas().warn(
+            "Unknown IEI 0x%x, stop decoding...", octet);
+        // Stop decoding
+        octet = 0x00;
+      }
+    } break;
     }
   }
 

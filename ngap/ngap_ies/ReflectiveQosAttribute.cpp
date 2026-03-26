@@ -7,9 +7,7 @@
 namespace oai::ngap {
 
 //------------------------------------------------------------------------------
-ReflectiveQosAttribute::ReflectiveQosAttribute() {
-  m_Attribute = 0;
-}
+ReflectiveQosAttribute::ReflectiveQosAttribute() { m_Attribute = 0; }
 
 //------------------------------------------------------------------------------
 ReflectiveQosAttribute::ReflectiveQosAttribute(
@@ -25,9 +23,9 @@ void ReflectiveQosAttribute::set(e_Ngap_ReflectiveQosAttribute value) {
 }
 
 //------------------------------------------------------------------------------
-bool ReflectiveQosAttribute::get(e_Ngap_ReflectiveQosAttribute& value) const {
+bool ReflectiveQosAttribute::get(e_Ngap_ReflectiveQosAttribute &value) const {
   if (m_Attribute == 0)
-    value = (e_Ngap_ReflectiveQosAttribute) m_Attribute;
+    value = (e_Ngap_ReflectiveQosAttribute)m_Attribute;
   else
     return false;
 
@@ -36,7 +34,7 @@ bool ReflectiveQosAttribute::get(e_Ngap_ReflectiveQosAttribute& value) const {
 
 //------------------------------------------------------------------------------
 bool ReflectiveQosAttribute::encode(
-    Ngap_ReflectiveQosAttribute_t& value) const {
+    Ngap_ReflectiveQosAttribute_t &value) const {
   value = m_Attribute;
 
   return true;
@@ -44,9 +42,9 @@ bool ReflectiveQosAttribute::encode(
 
 //------------------------------------------------------------------------------
 bool ReflectiveQosAttribute::decode(
-    const Ngap_ReflectiveQosAttribute_t& value) {
+    const Ngap_ReflectiveQosAttribute_t &value) {
   m_Attribute = value;
 
   return true;
 }
-}  // namespace oai::ngap
+} // namespace oai::ngap

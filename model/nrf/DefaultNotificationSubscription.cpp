@@ -16,8 +16,8 @@
 namespace oai::model::nrf {
 
 DefaultNotificationSubscription::DefaultNotificationSubscription() {
-  m_CallbackUri             = "";
-  m_N1MessageClassIsSet     = false;
+  m_CallbackUri = "";
+  m_N1MessageClassIsSet = false;
   m_N2InformationClassIsSet = false;
 }
 
@@ -27,16 +27,17 @@ void DefaultNotificationSubscription::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const DefaultNotificationSubscription& o) {
-  j                     = nlohmann::json();
+void to_json(nlohmann::json &j, const DefaultNotificationSubscription &o) {
+  j = nlohmann::json();
   j["notificationType"] = o.m_NotificationType;
-  j["callbackUri"]      = o.m_CallbackUri;
-  if (o.n1MessageClassIsSet()) j["n1MessageClass"] = o.m_N1MessageClass;
+  j["callbackUri"] = o.m_CallbackUri;
+  if (o.n1MessageClassIsSet())
+    j["n1MessageClass"] = o.m_N1MessageClass;
   if (o.n2InformationClassIsSet())
     j["n2InformationClass"] = o.m_N2InformationClass;
 }
 
-void from_json(const nlohmann::json& j, DefaultNotificationSubscription& o) {
+void from_json(const nlohmann::json &j, DefaultNotificationSubscription &o) {
   j.at("notificationType").get_to(o.m_NotificationType);
   j.at("callbackUri").get_to(o.m_CallbackUri);
   if (j.find("n1MessageClass") != j.end()) {
@@ -53,21 +54,21 @@ NotificationType DefaultNotificationSubscription::getNotificationType() const {
   return m_NotificationType;
 }
 void DefaultNotificationSubscription::setNotificationType(
-    NotificationType const& value) {
+    NotificationType const &value) {
   m_NotificationType = value;
 }
 std::string DefaultNotificationSubscription::getCallbackUri() const {
   return m_CallbackUri;
 }
-void DefaultNotificationSubscription::setCallbackUri(std::string const& value) {
+void DefaultNotificationSubscription::setCallbackUri(std::string const &value) {
   m_CallbackUri = value;
 }
 N1MessageClass DefaultNotificationSubscription::getN1MessageClass() const {
   return m_N1MessageClass;
 }
 void DefaultNotificationSubscription::setN1MessageClass(
-    N1MessageClass const& value) {
-  m_N1MessageClass      = value;
+    N1MessageClass const &value) {
+  m_N1MessageClass = value;
   m_N1MessageClassIsSet = true;
 }
 bool DefaultNotificationSubscription::n1MessageClassIsSet() const {
@@ -76,13 +77,13 @@ bool DefaultNotificationSubscription::n1MessageClassIsSet() const {
 void DefaultNotificationSubscription::unsetN1MessageClass() {
   m_N1MessageClassIsSet = false;
 }
-N2InformationClass DefaultNotificationSubscription::getN2InformationClass()
-    const {
+N2InformationClass
+DefaultNotificationSubscription::getN2InformationClass() const {
   return m_N2InformationClass;
 }
 void DefaultNotificationSubscription::setN2InformationClass(
-    N2InformationClass const& value) {
-  m_N2InformationClass      = value;
+    N2InformationClass const &value) {
+  m_N2InformationClass = value;
   m_N2InformationClassIsSet = true;
 }
 bool DefaultNotificationSubscription::n2InformationClassIsSet() const {
@@ -92,4 +93,4 @@ void DefaultNotificationSubscription::unsetN2InformationClass() {
   m_N2InformationClassIsSet = false;
 }
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

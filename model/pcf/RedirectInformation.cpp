@@ -19,10 +19,10 @@
 namespace oai::model::pcf {
 
 RedirectInformation::RedirectInformation() {
-  m_RedirectEnabled            = false;
-  m_RedirectEnabledIsSet       = false;
-  m_RedirectAddressTypeIsSet   = false;
-  m_RedirectServerAddress      = "";
+  m_RedirectEnabled = false;
+  m_RedirectEnabledIsSet = false;
+  m_RedirectAddressTypeIsSet = false;
+  m_RedirectServerAddress = "";
   m_RedirectServerAddressIsSet = false;
 }
 
@@ -33,12 +33,12 @@ void RedirectInformation::validate() const {
   }
 }
 
-bool RedirectInformation::validate(std::stringstream& msg) const {
+bool RedirectInformation::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool RedirectInformation::validate(
-    std::stringstream& /* msg */, const std::string& /* pathPrefix */) const {
+bool RedirectInformation::validate(std::stringstream & /* msg */,
+                                   const std::string & /* pathPrefix */) const {
   bool success = true;
   /*
   const std::string _pathPrefix =
@@ -47,7 +47,7 @@ bool RedirectInformation::validate(
   return success;
 }
 
-bool RedirectInformation::operator==(const RedirectInformation& rhs) const {
+bool RedirectInformation::operator==(const RedirectInformation &rhs) const {
   return
 
       ((!redirectEnabledIsSet() && !rhs.redirectEnabledIsSet()) ||
@@ -65,20 +65,21 @@ bool RedirectInformation::operator==(const RedirectInformation& rhs) const {
           ;
 }
 
-bool RedirectInformation::operator!=(const RedirectInformation& rhs) const {
+bool RedirectInformation::operator!=(const RedirectInformation &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const RedirectInformation& o) {
+void to_json(nlohmann::json &j, const RedirectInformation &o) {
   j = nlohmann::json();
-  if (o.redirectEnabledIsSet()) j["redirectEnabled"] = o.m_RedirectEnabled;
+  if (o.redirectEnabledIsSet())
+    j["redirectEnabled"] = o.m_RedirectEnabled;
   if (o.redirectAddressTypeIsSet())
     j["redirectAddressType"] = o.m_RedirectAddressType;
   if (o.redirectServerAddressIsSet())
     j["redirectServerAddress"] = o.m_RedirectServerAddress;
 }
 
-void from_json(const nlohmann::json& j, RedirectInformation& o) {
+void from_json(const nlohmann::json &j, RedirectInformation &o) {
   if (j.find("redirectEnabled") != j.end()) {
     j.at("redirectEnabled").get_to(o.m_RedirectEnabled);
     o.m_RedirectEnabledIsSet = true;
@@ -97,7 +98,7 @@ bool RedirectInformation::isRedirectEnabled() const {
   return m_RedirectEnabled;
 }
 void RedirectInformation::setRedirectEnabled(bool const value) {
-  m_RedirectEnabled      = value;
+  m_RedirectEnabled = value;
   m_RedirectEnabledIsSet = true;
 }
 bool RedirectInformation::redirectEnabledIsSet() const {
@@ -111,8 +112,8 @@ RedirectInformation::getRedirectAddressType() const {
   return m_RedirectAddressType;
 }
 void RedirectInformation::setRedirectAddressType(
-    oai::model::pcf::RedirectAddressType const& value) {
-  m_RedirectAddressType      = value;
+    oai::model::pcf::RedirectAddressType const &value) {
+  m_RedirectAddressType = value;
   m_RedirectAddressTypeIsSet = true;
 }
 bool RedirectInformation::redirectAddressTypeIsSet() const {
@@ -124,8 +125,8 @@ void RedirectInformation::unsetRedirectAddressType() {
 std::string RedirectInformation::getRedirectServerAddress() const {
   return m_RedirectServerAddress;
 }
-void RedirectInformation::setRedirectServerAddress(std::string const& value) {
-  m_RedirectServerAddress      = value;
+void RedirectInformation::setRedirectServerAddress(std::string const &value) {
+  m_RedirectServerAddress = value;
   m_RedirectServerAddressIsSet = true;
 }
 bool RedirectInformation::redirectServerAddressIsSet() const {
@@ -135,4 +136,4 @@ void RedirectInformation::unsetRedirectServerAddress() {
   m_RedirectServerAddressIsSet = false;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

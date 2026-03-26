@@ -12,20 +12,20 @@ extern "C" {
 namespace oai::ngap {
 
 class MaximumDataBurstVolume {
- public:
+public:
   MaximumDataBurstVolume();
   virtual ~MaximumDataBurstVolume();
 
-  void set(const long& value);
-  void get(long& value) const;
+  void set(const long &value);
+  void get(long &value) const;
 
-  bool encode(Ngap_MaximumDataBurstVolume_t&) const;
-  bool decode(const Ngap_MaximumDataBurstVolume_t&);
+  bool encode(Ngap_MaximumDataBurstVolume_t &) const;
+  bool decode(const Ngap_MaximumDataBurstVolume_t &);
 
- private:
+private:
   long m_MaximumDataBurstVolume;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

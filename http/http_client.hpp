@@ -7,9 +7,9 @@
 #include <cpr/cpr.h>
 
 #include <future>
+#include <optional>
 #include <string>
 #include <thread>
-#include <optional>
 
 #include "3gpp_29.500.h"
 #include "http_definitions.hpp"
@@ -22,15 +22,15 @@ namespace oai::http {
 const std::string MIME_BOUNDARY = "----Boundary";
 
 class http_client : public std::enable_shared_from_this<http_client> {
- private:
+private:
   /*
    * Sends a synchronous (simple) HTTP request
    * @param [const method_e&] method: HTTP method
    * @param [const request&] request: HTTP Request
    * @return the corresponding Response
    */
-  response send_simple_http_request(
-      const method_e& method, const request& request);
+  response send_simple_http_request(const method_e &method,
+                                    const request &request);
 
   /*
    * Sends a synchronous HTTP request and waits
@@ -38,8 +38,8 @@ class http_client : public std::enable_shared_from_this<http_client> {
    * @param [const request&] request: HTTP Request
    * @return the corresponding Response
    */
-  response send_async_http_request(
-      const method_e& method, const request& request);
+  response send_async_http_request(const method_e &method,
+                                   const request &request);
 
   /*
    * Execute a MultiPerform request
@@ -47,8 +47,8 @@ class http_client : public std::enable_shared_from_this<http_client> {
    * MultiPerform
    * @return the list of responses accordingly
    */
-  std::vector<response> execute_http_request(
-      const std::shared_ptr<cpr::MultiPerform>& multi_perform);
+  std::vector<response>
+  execute_http_request(const std::shared_ptr<cpr::MultiPerform> &multi_perform);
 
   /*
    * Prepare a session object
@@ -58,9 +58,8 @@ class http_client : public std::enable_shared_from_this<http_client> {
    * object
    * @return void
    */
-  void prepare_session(
-      const method_e& method, const request& request,
-      std::shared_ptr<cpr::Session>& session);
+  void prepare_session(const method_e &method, const request &request,
+                       std::shared_ptr<cpr::Session> &session);
 
   oai::logger::printf_logger m_sbi_logger;
   int m_timeout_ms;
@@ -69,15 +68,14 @@ class http_client : public std::enable_shared_from_this<http_client> {
   request_type_e m_request_type;
   bool m_enable_tls;
   std::optional<std::string>
-      m_public_key_path;  // store the public key path when TLS is enabled
+      m_public_key_path; // store the public key path when TLS is enabled
   inline static std::shared_ptr<http_client> instance;
 
- public:
-  explicit http_client(
-      oai::logger::printf_logger logger, int timeout_ms,
-      const std::string& interface, uint8_t http_version,
-      bool enable_tls             = false,
-      request_type_e request_type = request_type_e::SIMPLE);
+public:
+  explicit http_client(oai::logger::printf_logger logger, int timeout_ms,
+                       const std::string &interface, uint8_t http_version,
+                       bool enable_tls = false,
+                       request_type_e request_type = request_type_e::SIMPLE);
 
   virtual ~http_client();
 
@@ -90,11 +88,11 @@ class http_client : public std::enable_shared_from_this<http_client> {
    * @param [request_type_e ] request_type: Type of HTTP Request
    * @return an HTTP Client's instance
    */
-  static std::shared_ptr<http_client> create_instance(
-      const oai::logger::printf_logger& logger, int timeout_ms,
-      const std::string& interface, uint8_t http_version,
-      bool enable_tls             = false,
-      request_type_e request_type = request_type_e::SIMPLE);
+  static std::shared_ptr<http_client>
+  create_instance(const oai::logger::printf_logger &logger, int timeout_ms,
+                  const std::string &interface, uint8_t http_version,
+                  bool enable_tls = false,
+                  request_type_e request_type = request_type_e::SIMPLE);
 
   /*
    * Sends a HTTP request
@@ -104,7 +102,7 @@ class http_client : public std::enable_shared_from_this<http_client> {
    * MultiPerform
    * @return the corresponding Response
    */
-  response send_http_request(const method_e& method, const request& request);
+  response send_http_request(const method_e &method, const request &request);
 
   /*
    * Get HTTP response info from the corresponding CPR Response
@@ -112,7 +110,7 @@ class http_client : public std::enable_shared_from_this<http_client> {
    * @param [response&] resp: HTTP Response
    * @return void
    */
-  void get_response_info(const cpr::Response& cpr_resp, response& resp);
+  void get_response_info(const cpr::Response &cpr_resp, response &resp);
 
   /*
    * Add a session to a MultiPerform
@@ -123,8 +121,8 @@ class http_client : public std::enable_shared_from_this<http_client> {
    * @return a shared_ptr pointed to the created session
    */
   std::shared_ptr<cpr::Session> add_session_to_multi_peform(
-      const method_e& method, const request& request,
-      const std::shared_ptr<cpr::MultiPerform>& multi_perform);
+      const method_e &method, const request &request,
+      const std::shared_ptr<cpr::MultiPerform> &multi_perform);
 
   /*
    * Remove a session from a MultiPerform
@@ -135,8 +133,8 @@ class http_client : public std::enable_shared_from_this<http_client> {
    * @return void
    */
   void remove_session_from_multi_peform(
-      const std::shared_ptr<cpr::Session>& session,
-      const std::shared_ptr<cpr::MultiPerform>& multi_perform);
+      const std::shared_ptr<cpr::Session> &session,
+      const std::shared_ptr<cpr::MultiPerform> &multi_perform);
 
   /*
    * Execute the respective HTTP request on all sessions in this
@@ -146,7 +144,7 @@ class http_client : public std::enable_shared_from_this<http_client> {
    * @return the corresponding list of responses
    */
   std::vector<response> send_multi_peform_http_request(
-      const std::shared_ptr<cpr::MultiPerform>& multi_perform);
+      const std::shared_ptr<cpr::MultiPerform> &multi_perform);
 
   /*
    * Sets the correct headers for a JSON request
@@ -154,8 +152,8 @@ class http_client : public std::enable_shared_from_this<http_client> {
    * @param [const std::string&] body: JSON body
    * @return request object
    */
-  static request prepare_json_request(
-      const std::string& uri, const std::string& body = "");
+  static request prepare_json_request(const std::string &uri,
+                                      const std::string &body = "");
 
   /*
    * Sets the correct headers for a multipart/related request
@@ -164,7 +162,7 @@ class http_client : public std::enable_shared_from_this<http_client> {
    * boundaries)
    * @return request object
    */
-  static request prepare_multipart_request(
-      const std::string& uri, const std::string& body);
+  static request prepare_multipart_request(const std::string &uri,
+                                           const std::string &body);
 };
-}  // namespace oai::http
+} // namespace oai::http

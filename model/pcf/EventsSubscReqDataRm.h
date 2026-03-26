@@ -20,14 +20,14 @@
 #ifndef EventsSubscReqDataRm_H_
 #define EventsSubscReqDataRm_H_
 
+#include "AfEventSubscription.h"
 #include "QosMonitoringInformationRm.h"
 #include "RequestedQosMonitoringParameter.h"
-#include "UsageThresholdRm.h"
-#include <string>
 #include "RequiredAccessInfo.h"
-#include <vector>
-#include "AfEventSubscription.h"
+#include "UsageThresholdRm.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::pcf {
 
@@ -36,7 +36,7 @@ namespace oai::model::pcf {
 /// type, but with the OpenAPI nullable property set to true.
 /// </summary>
 class EventsSubscReqDataRm {
- public:
+public:
   EventsSubscReqDataRm();
   virtual ~EventsSubscReqDataRm() = default;
 
@@ -50,16 +50,16 @@ class EventsSubscReqDataRm {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const EventsSubscReqDataRm& rhs) const;
-  bool operator!=(const EventsSubscReqDataRm& rhs) const;
+  bool operator==(const EventsSubscReqDataRm &rhs) const;
+  bool operator!=(const EventsSubscReqDataRm &rhs) const;
 
   /////////////////////////////////////////////
   /// EventsSubscReqDataRm members
@@ -68,13 +68,13 @@ class EventsSubscReqDataRm {
   ///
   /// </summary>
   std::vector<oai::model::pcf::AfEventSubscription> getEvents() const;
-  void setEvents(
-      std::vector<oai::model::pcf::AfEventSubscription> const& value);
+  void
+  setEvents(std::vector<oai::model::pcf::AfEventSubscription> const &value);
   /// <summary>
   /// String providing an URI formatted according to RFC 3986.
   /// </summary>
   std::string getNotifUri() const;
-  void setNotifUri(std::string const& value);
+  void setNotifUri(std::string const &value);
   bool notifUriIsSet() const;
   void unsetNotifUri();
   /// <summary>
@@ -83,23 +83,23 @@ class EventsSubscReqDataRm {
   std::vector<oai::model::pcf::RequestedQosMonitoringParameter>
   getReqQosMonParams() const;
   void setReqQosMonParams(
-      std::vector<oai::model::pcf::RequestedQosMonitoringParameter> const&
-          value);
+      std::vector<oai::model::pcf::RequestedQosMonitoringParameter> const
+          &value);
   bool reqQosMonParamsIsSet() const;
   void unsetReqQosMonParams();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::QosMonitoringInformationRm getQosMon() const;
-  void setQosMon(oai::model::pcf::QosMonitoringInformationRm const& value);
+  void setQosMon(oai::model::pcf::QosMonitoringInformationRm const &value);
   bool qosMonIsSet() const;
   void unsetQosMon();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::QosMonitoringInformationRm getQosMonDatRate() const;
-  void setQosMonDatRate(
-      oai::model::pcf::QosMonitoringInformationRm const& value);
+  void
+  setQosMonDatRate(oai::model::pcf::QosMonitoringInformationRm const &value);
   bool qosMonDatRateIsSet() const;
   void unsetQosMonDatRate();
   /// <summary>
@@ -108,44 +108,44 @@ class EventsSubscReqDataRm {
   std::vector<oai::model::pcf::RequestedQosMonitoringParameter>
   getPdvReqMonParams() const;
   void setPdvReqMonParams(
-      std::vector<oai::model::pcf::RequestedQosMonitoringParameter> const&
-          value);
+      std::vector<oai::model::pcf::RequestedQosMonitoringParameter> const
+          &value);
   bool pdvReqMonParamsIsSet() const;
   void unsetPdvReqMonParams();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::QosMonitoringInformationRm getPdvMon() const;
-  void setPdvMon(oai::model::pcf::QosMonitoringInformationRm const& value);
+  void setPdvMon(oai::model::pcf::QosMonitoringInformationRm const &value);
   bool pdvMonIsSet() const;
   void unsetPdvMon();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::QosMonitoringInformationRm getCongestMon() const;
-  void setCongestMon(oai::model::pcf::QosMonitoringInformationRm const& value);
+  void setCongestMon(oai::model::pcf::QosMonitoringInformationRm const &value);
   bool congestMonIsSet() const;
   void unsetCongestMon();
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::pcf::RequiredAccessInfo> getReqAnis() const;
-  void setReqAnis(
-      std::vector<oai::model::pcf::RequiredAccessInfo> const& value);
+  void
+  setReqAnis(std::vector<oai::model::pcf::RequiredAccessInfo> const &value);
   bool reqAnisIsSet() const;
   void unsetReqAnis();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::UsageThresholdRm getUsgThres() const;
-  void setUsgThres(oai::model::pcf::UsageThresholdRm const& value);
+  void setUsgThres(oai::model::pcf::UsageThresholdRm const &value);
   bool usgThresIsSet() const;
   void unsetUsgThres();
   /// <summary>
   ///
   /// </summary>
   std::string getNotifCorreId() const;
-  void setNotifCorreId(std::string const& value);
+  void setNotifCorreId(std::string const &value);
   bool notifCorreIdIsSet() const;
   void unsetNotifCorreId();
   /// <summary>
@@ -166,10 +166,10 @@ class EventsSubscReqDataRm {
   bool avrgWndwIsSet() const;
   void unsetAvrgWndw();
 
-  friend void to_json(nlohmann::json& j, const EventsSubscReqDataRm& o);
-  friend void from_json(const nlohmann::json& j, EventsSubscReqDataRm& o);
+  friend void to_json(nlohmann::json &j, const EventsSubscReqDataRm &o);
+  friend void from_json(const nlohmann::json &j, EventsSubscReqDataRm &o);
 
- protected:
+protected:
   std::vector<oai::model::pcf::AfEventSubscription> m_Events;
 
   std::string m_NotifUri;
@@ -200,6 +200,6 @@ class EventsSubscReqDataRm {
   bool m_AvrgWndwIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* EventsSubscReqDataRm_H_ */

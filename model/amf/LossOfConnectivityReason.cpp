@@ -26,12 +26,12 @@ void LossOfConnectivityReason::validate() const {
   }
 }
 
-bool LossOfConnectivityReason::validate(std::stringstream& msg) const {
+bool LossOfConnectivityReason::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool LossOfConnectivityReason::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool LossOfConnectivityReason::validate(std::stringstream &msg,
+                                        const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "LossOfConnectivityReason" : pathPrefix;
@@ -40,33 +40,31 @@ bool LossOfConnectivityReason::validate(
 }
 
 bool LossOfConnectivityReason::operator==(
-    const LossOfConnectivityReason& rhs) const {
-  return true;  // TODO
+    const LossOfConnectivityReason &rhs) const {
+  return true; // TODO
 
   ;
 }
 
 bool LossOfConnectivityReason::operator!=(
-    const LossOfConnectivityReason& rhs) const {
+    const LossOfConnectivityReason &rhs) const {
   return !(*this == rhs);
 }
 
 void LossOfConnectivityReason::set_value(std::string value) {
   this->value = value;
 }
-void LossOfConnectivityReason::get_value(std::string& value) const {
+void LossOfConnectivityReason::get_value(std::string &value) const {
   value = this->value;
 }
-std::string LossOfConnectivityReason::get_value() const {
-  return value;
-}
+std::string LossOfConnectivityReason::get_value() const { return value; }
 
-void to_json(nlohmann::json& j, const LossOfConnectivityReason& o) {
+void to_json(nlohmann::json &j, const LossOfConnectivityReason &o) {
   j = o.get_value();
 }
 
-void from_json(const nlohmann::json& j, LossOfConnectivityReason& o) {
+void from_json(const nlohmann::json &j, LossOfConnectivityReason &o) {
   o.set_value(j.get<std::string>());
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

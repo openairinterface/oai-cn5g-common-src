@@ -20,10 +20,10 @@
 #define AmfEventSubscription_H_
 
 #include "AmfEvent.h"
-#include <string>
 #include "AmfEventMode.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::amf {
 
@@ -31,7 +31,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class AmfEventSubscription {
- public:
+public:
   AmfEventSubscription();
   virtual ~AmfEventSubscription() = default;
 
@@ -45,10 +45,10 @@ class AmfEventSubscription {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const AmfEventSubscription& rhs) const;
-  bool operator!=(const AmfEventSubscription& rhs) const;
+  bool operator==(const AmfEventSubscription &rhs) const;
+  bool operator!=(const AmfEventSubscription &rhs) const;
 
   /////////////////////////////////////////////
   /// AmfEventSubscription members
@@ -57,62 +57,62 @@ class AmfEventSubscription {
   ///
   /// </summary>
   std::vector<AmfEvent> getEventList() const;
-  void setEventList(std::vector<AmfEvent> const& value);
+  void setEventList(std::vector<AmfEvent> const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getEventNotifyUri() const;
-  void setEventNotifyUri(std::string const& value);
+  void setEventNotifyUri(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getNotifyCorrelationId() const;
-  void setNotifyCorrelationId(std::string const& value);
+  void setNotifyCorrelationId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getNfId() const;
-  void setNfId(std::string const& value);
+  void setNfId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getSubsChangeNotifyUri() const;
-  void setSubsChangeNotifyUri(std::string const& value);
+  void setSubsChangeNotifyUri(std::string const &value);
   bool subsChangeNotifyUriIsSet() const;
   void unsetSubsChangeNotifyUri();
   /// <summary>
   ///
   /// </summary>
   std::string getSubsChangeNotifyCorrelationId() const;
-  void setSubsChangeNotifyCorrelationId(std::string const& value);
+  void setSubsChangeNotifyCorrelationId(std::string const &value);
   bool subsChangeNotifyCorrelationIdIsSet() const;
   void unsetSubsChangeNotifyCorrelationId();
   /// <summary>
   ///
   /// </summary>
   std::string getSupi() const;
-  void setSupi(std::string const& value);
+  void setSupi(std::string const &value);
   bool supiIsSet() const;
   void unsetSupi();
   /// <summary>
   ///
   /// </summary>
   std::string getGroupId() const;
-  void setGroupId(std::string const& value);
+  void setGroupId(std::string const &value);
   bool groupIdIsSet() const;
   void unsetGroupId();
   /// <summary>
   ///
   /// </summary>
   std::string getGpsi() const;
-  void setGpsi(std::string const& value);
+  void setGpsi(std::string const &value);
   bool gpsiIsSet() const;
   void unsetGpsi();
   /// <summary>
   ///
   /// </summary>
   std::string getPei() const;
-  void setPei(std::string const& value);
+  void setPei(std::string const &value);
   bool peiIsSet() const;
   void unsetPei();
   /// <summary>
@@ -126,14 +126,14 @@ class AmfEventSubscription {
   ///
   /// </summary>
   AmfEventMode getOptions() const;
-  void setOptions(AmfEventMode const& value);
+  void setOptions(AmfEventMode const &value);
   bool optionsIsSet() const;
   void unsetOptions();
 
-  friend void to_json(nlohmann::json& j, const AmfEventSubscription& o);
-  friend void from_json(const nlohmann::json& j, AmfEventSubscription& o);
+  friend void to_json(nlohmann::json &j, const AmfEventSubscription &o);
+  friend void from_json(const nlohmann::json &j, AmfEventSubscription &o);
 
- protected:
+protected:
   std::vector<AmfEvent> m_EventList;
 
   std::string m_EventNotifyUri;
@@ -161,9 +161,9 @@ class AmfEventSubscription {
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* AmfEventSubscription_H_ */

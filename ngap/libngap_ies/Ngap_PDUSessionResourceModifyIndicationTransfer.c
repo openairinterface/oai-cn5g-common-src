@@ -8,15 +8,14 @@
 
 #include "Ngap_PDUSessionResourceModifyIndicationTransfer.h"
 
-#include "Ngap_QosFlowPerTNLInformationList.h"
 #include "Ngap_ProtocolExtensionContainer.h"
+#include "Ngap_QosFlowPerTNLInformationList.h"
 static asn_TYPE_member_t
     asn_MBR_Ngap_PDUSessionResourceModifyIndicationTransfer_1[] = {
         {ATF_NOFLAGS,
          0,
-         offsetof(
-             struct Ngap_PDUSessionResourceModifyIndicationTransfer,
-             dLQosFlowPerTNLInformation),
+         offsetof(struct Ngap_PDUSessionResourceModifyIndicationTransfer,
+                  dLQosFlowPerTNLInformation),
          (ASN_TAG_CLASS_CONTEXT | (0 << 2)),
          -1, /* IMPLICIT tag at current level */
          &asn_DEF_Ngap_QosFlowPerTNLInformation,
@@ -35,9 +34,8 @@ static asn_TYPE_member_t
          "dLQosFlowPerTNLInformation"},
         {ATF_POINTER,
          2,
-         offsetof(
-             struct Ngap_PDUSessionResourceModifyIndicationTransfer,
-             additionalDLQosFlowPerTNLInformation),
+         offsetof(struct Ngap_PDUSessionResourceModifyIndicationTransfer,
+                  additionalDLQosFlowPerTNLInformation),
          (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
          -1, /* IMPLICIT tag at current level */
          &asn_DEF_Ngap_QosFlowPerTNLInformationList,
@@ -56,9 +54,8 @@ static asn_TYPE_member_t
          "additionalDLQosFlowPerTNLInformation"},
         {ATF_POINTER,
          1,
-         offsetof(
-             struct Ngap_PDUSessionResourceModifyIndicationTransfer,
-             iE_Extensions),
+         offsetof(struct Ngap_PDUSessionResourceModifyIndicationTransfer,
+                  iE_Extensions),
          (ASN_TAG_CLASS_CONTEXT | (2 << 2)),
          -1, /* IMPLICIT tag at current level */
          &asn_DEF_Ngap_ProtocolExtensionContainer_9666P167,
@@ -92,8 +89,8 @@ static const asn_TYPE_tag2member_t
 static asn_SEQUENCE_specifics_t
     asn_SPC_Ngap_PDUSessionResourceModifyIndicationTransfer_specs_1 = {
         sizeof(struct Ngap_PDUSessionResourceModifyIndicationTransfer),
-        offsetof(
-            struct Ngap_PDUSessionResourceModifyIndicationTransfer, _asn_ctx),
+        offsetof(struct Ngap_PDUSessionResourceModifyIndicationTransfer,
+                 _asn_ctx),
         asn_MAP_Ngap_PDUSessionResourceModifyIndicationTransfer_tag2el_1,
         3, /* Count of tags in the map */
         asn_MAP_Ngap_PDUSessionResourceModifyIndicationTransfer_oms_1, /* Optional

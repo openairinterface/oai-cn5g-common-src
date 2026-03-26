@@ -19,9 +19,9 @@
 namespace oai::model::lmf {
 
 EventReportingStatus::EventReportingStatus() {
-  m_EventReportCounter       = 0;
-  m_EventReportCounterIsSet  = false;
-  m_EventReportDuration      = 0;
+  m_EventReportCounter = 0;
+  m_EventReportCounterIsSet = false;
+  m_EventReportDuration = 0;
   m_EventReportDurationIsSet = false;
 }
 
@@ -32,18 +32,18 @@ void EventReportingStatus::validate() const {
   }
 }
 
-bool EventReportingStatus::validate(std::stringstream& msg) const {
+bool EventReportingStatus::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool EventReportingStatus::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool EventReportingStatus::validate(std::stringstream &msg,
+                                    const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "EventReportingStatus" : pathPrefix;
 
   if (eventReportCounterIsSet()) {
-    const int32_t& value               = m_EventReportCounter;
+    const int32_t &value = m_EventReportCounter;
     const std::string currentValuePath = _pathPrefix + ".eventReportCounter";
 
     if (value < 1) {
@@ -57,7 +57,7 @@ bool EventReportingStatus::validate(
   }
 
   if (eventReportDurationIsSet()) {
-    const int32_t& value               = m_EventReportDuration;
+    const int32_t &value = m_EventReportDuration;
     const std::string currentValuePath = _pathPrefix + ".eventReportDuration";
 
     if (value < 1) {
@@ -73,7 +73,7 @@ bool EventReportingStatus::validate(
   return success;
 }
 
-bool EventReportingStatus::operator==(const EventReportingStatus& rhs) const {
+bool EventReportingStatus::operator==(const EventReportingStatus &rhs) const {
   return
 
       ((!eventReportCounterIsSet() && !rhs.eventReportCounterIsSet()) ||
@@ -87,11 +87,11 @@ bool EventReportingStatus::operator==(const EventReportingStatus& rhs) const {
           ;
 }
 
-bool EventReportingStatus::operator!=(const EventReportingStatus& rhs) const {
+bool EventReportingStatus::operator!=(const EventReportingStatus &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const EventReportingStatus& o) {
+void to_json(nlohmann::json &j, const EventReportingStatus &o) {
   j = nlohmann::json();
   if (o.eventReportCounterIsSet())
     j["eventReportCounter"] = o.m_EventReportCounter;
@@ -99,7 +99,7 @@ void to_json(nlohmann::json& j, const EventReportingStatus& o) {
     j["eventReportDuration"] = o.m_EventReportDuration;
 }
 
-void from_json(const nlohmann::json& j, EventReportingStatus& o) {
+void from_json(const nlohmann::json &j, EventReportingStatus &o) {
   if (j.find("eventReportCounter") != j.end()) {
     j.at("eventReportCounter").get_to(o.m_EventReportCounter);
     o.m_EventReportCounterIsSet = true;
@@ -114,7 +114,7 @@ int32_t EventReportingStatus::getEventReportCounter() const {
   return m_EventReportCounter;
 }
 void EventReportingStatus::setEventReportCounter(int32_t const value) {
-  m_EventReportCounter      = value;
+  m_EventReportCounter = value;
   m_EventReportCounterIsSet = true;
 }
 bool EventReportingStatus::eventReportCounterIsSet() const {
@@ -127,7 +127,7 @@ int32_t EventReportingStatus::getEventReportDuration() const {
   return m_EventReportDuration;
 }
 void EventReportingStatus::setEventReportDuration(int32_t const value) {
-  m_EventReportDuration      = value;
+  m_EventReportDuration = value;
   m_EventReportDurationIsSet = true;
 }
 bool EventReportingStatus::eventReportDurationIsSet() const {
@@ -137,4 +137,4 @@ void EventReportingStatus::unsetEventReportDuration() {
   m_EventReportDurationIsSet = false;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

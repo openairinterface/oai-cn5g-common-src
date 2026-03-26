@@ -53,7 +53,7 @@ namespace oai::model::nrf {
 /// associated Network Slice Instance
 /// </summary>
 class NwdafEvent {
- public:
+public:
   NwdafEvent();
   virtual ~NwdafEvent();
 
@@ -62,12 +62,12 @@ class NwdafEvent {
   /////////////////////////////////////////////
   /// NwdafEvent members
 
-  friend void to_json(nlohmann::json& j, const NwdafEvent& o);
-  friend void from_json(const nlohmann::json& j, NwdafEvent& o);
+  friend void to_json(nlohmann::json &j, const NwdafEvent &o);
+  friend void from_json(const nlohmann::json &j, NwdafEvent &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* NwdafEvent_H_ */

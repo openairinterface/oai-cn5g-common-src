@@ -19,18 +19,18 @@
 namespace oai::udr::model {
 
 SubscriptionDataSubscriptions::SubscriptionDataSubscriptions() {
-  m_UeId                           = "";
-  m_UeIdIsSet                      = false;
-  m_CallbackReference              = "";
-  m_OriginalCallbackReference      = "";
+  m_UeId = "";
+  m_UeIdIsSet = false;
+  m_CallbackReference = "";
+  m_OriginalCallbackReference = "";
   m_OriginalCallbackReferenceIsSet = false;
-  m_Expiry                         = "";
-  m_ExpiryIsSet                    = false;
-  m_SdmSubscriptionIsSet           = false;
-  m_SubscriptionId                 = "";
-  m_SubscriptionIdIsSet            = false;
-  m_Supported_features             = "";
-  m_Supported_featuresIsSet        = false;
+  m_Expiry = "";
+  m_ExpiryIsSet = false;
+  m_SdmSubscriptionIsSet = false;
+  m_SubscriptionId = "";
+  m_SubscriptionIdIsSet = false;
+  m_Supported_features = "";
+  m_Supported_featuresIsSet = false;
 }
 
 SubscriptionDataSubscriptions::~SubscriptionDataSubscriptions() {}
@@ -39,21 +39,25 @@ void SubscriptionDataSubscriptions::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const SubscriptionDataSubscriptions& o) {
+void to_json(nlohmann::json &j, const SubscriptionDataSubscriptions &o) {
   j = nlohmann::json();
-  if (o.ueIdIsSet()) j["ueId"] = o.m_UeId;
+  if (o.ueIdIsSet())
+    j["ueId"] = o.m_UeId;
   j["callbackReference"] = o.m_CallbackReference;
   if (o.originalCallbackReferenceIsSet())
     j["originalCallbackReference"] = o.m_OriginalCallbackReference;
   j["monitoredResourceUris"] = o.m_MonitoredResourceUris;
-  if (o.expiryIsSet()) j["expiry"] = o.m_Expiry;
-  if (o.sdmSubscriptionIsSet()) j["sdmSubscription"] = o.m_SdmSubscription;
-  if (o.subscriptionIdIsSet()) j["subscriptionId"] = o.m_SubscriptionId;
+  if (o.expiryIsSet())
+    j["expiry"] = o.m_Expiry;
+  if (o.sdmSubscriptionIsSet())
+    j["sdmSubscription"] = o.m_SdmSubscription;
+  if (o.subscriptionIdIsSet())
+    j["subscriptionId"] = o.m_SubscriptionId;
   if (o.supportedFeaturesIsSet())
     j["supported-features"] = o.m_Supported_features;
 }
 
-void from_json(const nlohmann::json& j, SubscriptionDataSubscriptions& o) {
+void from_json(const nlohmann::json &j, SubscriptionDataSubscriptions &o) {
   if (j.find("ueId") != j.end()) {
     j.at("ueId").get_to(o.m_UeId);
     o.m_UeIdIsSet = true;
@@ -82,33 +86,27 @@ void from_json(const nlohmann::json& j, SubscriptionDataSubscriptions& o) {
   }
 }
 
-std::string SubscriptionDataSubscriptions::getUeId() const {
-  return m_UeId;
-}
-void SubscriptionDataSubscriptions::setUeId(std::string const& value) {
-  m_UeId      = value;
+std::string SubscriptionDataSubscriptions::getUeId() const { return m_UeId; }
+void SubscriptionDataSubscriptions::setUeId(std::string const &value) {
+  m_UeId = value;
   m_UeIdIsSet = true;
 }
-bool SubscriptionDataSubscriptions::ueIdIsSet() const {
-  return m_UeIdIsSet;
-}
-void SubscriptionDataSubscriptions::unsetUeId() {
-  m_UeIdIsSet = false;
-}
+bool SubscriptionDataSubscriptions::ueIdIsSet() const { return m_UeIdIsSet; }
+void SubscriptionDataSubscriptions::unsetUeId() { m_UeIdIsSet = false; }
 std::string SubscriptionDataSubscriptions::getCallbackReference() const {
   return m_CallbackReference;
 }
 void SubscriptionDataSubscriptions::setCallbackReference(
-    std::string const& value) {
+    std::string const &value) {
   m_CallbackReference = value;
 }
-std::string SubscriptionDataSubscriptions::getOriginalCallbackReference()
-    const {
+std::string
+SubscriptionDataSubscriptions::getOriginalCallbackReference() const {
   return m_OriginalCallbackReference;
 }
 void SubscriptionDataSubscriptions::setOriginalCallbackReference(
-    std::string const& value) {
-  m_OriginalCallbackReference      = value;
+    std::string const &value) {
+  m_OriginalCallbackReference = value;
   m_OriginalCallbackReferenceIsSet = true;
 }
 bool SubscriptionDataSubscriptions::originalCallbackReferenceIsSet() const {
@@ -117,33 +115,31 @@ bool SubscriptionDataSubscriptions::originalCallbackReferenceIsSet() const {
 void SubscriptionDataSubscriptions::unsetOriginalCallbackReference() {
   m_OriginalCallbackReferenceIsSet = false;
 }
-std::vector<std::string>&
+std::vector<std::string> &
 SubscriptionDataSubscriptions::getMonitoredResourceUris() {
   return m_MonitoredResourceUris;
 }
 void SubscriptionDataSubscriptions::setMonitoredResourceUris(
-    std::vector<std::string> const& value) {
+    std::vector<std::string> const &value) {
   m_MonitoredResourceUris = value;
 }
 std::string SubscriptionDataSubscriptions::getExpiry() const {
   return m_Expiry;
 }
-void SubscriptionDataSubscriptions::setExpiry(std::string const& value) {
-  m_Expiry      = value;
+void SubscriptionDataSubscriptions::setExpiry(std::string const &value) {
+  m_Expiry = value;
   m_ExpiryIsSet = true;
 }
 bool SubscriptionDataSubscriptions::expiryIsSet() const {
   return m_ExpiryIsSet;
 }
-void SubscriptionDataSubscriptions::unsetExpiry() {
-  m_ExpiryIsSet = false;
-}
+void SubscriptionDataSubscriptions::unsetExpiry() { m_ExpiryIsSet = false; }
 SdmSubscription SubscriptionDataSubscriptions::getSdmSubscription() const {
   return m_SdmSubscription;
 }
 void SubscriptionDataSubscriptions::setSdmSubscription(
-    SdmSubscription const& value) {
-  m_SdmSubscription      = value;
+    SdmSubscription const &value) {
+  m_SdmSubscription = value;
   m_SdmSubscriptionIsSet = true;
 }
 bool SubscriptionDataSubscriptions::sdmSubscriptionIsSet() const {
@@ -156,8 +152,8 @@ std::string SubscriptionDataSubscriptions::getSubscriptionId() const {
   return m_SubscriptionId;
 }
 void SubscriptionDataSubscriptions::setSubscriptionId(
-    std::string const& value) {
-  m_SubscriptionId      = value;
+    std::string const &value) {
+  m_SubscriptionId = value;
   m_SubscriptionIdIsSet = true;
 }
 bool SubscriptionDataSubscriptions::subscriptionIdIsSet() const {
@@ -170,8 +166,8 @@ std::string SubscriptionDataSubscriptions::getSupportedFeatures() const {
   return m_Supported_features;
 }
 void SubscriptionDataSubscriptions::setSupportedFeatures(
-    std::string const& value) {
-  m_Supported_features      = value;
+    std::string const &value) {
+  m_Supported_features = value;
   m_Supported_featuresIsSet = true;
 }
 bool SubscriptionDataSubscriptions::supportedFeaturesIsSet() const {
@@ -181,4 +177,4 @@ void SubscriptionDataSubscriptions::unsetSupported_features() {
   m_Supported_featuresIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

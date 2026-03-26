@@ -12,20 +12,20 @@ extern "C" {
 namespace oai::ngap {
 
 class DefaultPagingDrx {
- public:
+public:
   DefaultPagingDrx();
   virtual ~DefaultPagingDrx();
 
-  void set(const e_Ngap_PagingDRX& pagingDrx);
+  void set(const e_Ngap_PagingDRX &pagingDrx);
   e_Ngap_PagingDRX get() const;
 
-  bool encode(Ngap_PagingDRX_t&) const;
-  bool decode(const Ngap_PagingDRX_t&);
+  bool encode(Ngap_PagingDRX_t &) const;
+  bool decode(const Ngap_PagingDRX_t &);
 
- private:
+private:
   e_Ngap_PagingDRX m_PagingDrx;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

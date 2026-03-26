@@ -12,8 +12,8 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_SST.h"
 #include "Ngap_SD.h"
+#include "Ngap_SST.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -26,8 +26,8 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_S-NSSAI */
 typedef struct Ngap_S_NSSAI {
   Ngap_SST_t sST;
-  Ngap_SD_t* sD;                                         /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  Ngap_SD_t *sD;                                         /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

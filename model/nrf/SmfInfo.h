@@ -19,13 +19,13 @@
 #ifndef SmfInfo_H_
 #define SmfInfo_H_
 
-#include "Tai.h"
-#include <string>
-#include "SnssaiSmfInfoItem.h"
-#include "TaiRange.h"
-#include <vector>
 #include "AccessType.h"
+#include "SnssaiSmfInfoItem.h"
+#include "Tai.h"
+#include "TaiRange.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::nrf {
 
@@ -33,7 +33,7 @@ namespace oai::model::nrf {
 /// Information of an SMF NF Instance
 /// </summary>
 class SmfInfo {
- public:
+public:
   SmfInfo();
   virtual ~SmfInfo() = default;
 
@@ -47,16 +47,16 @@ class SmfInfo {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const SmfInfo& rhs) const;
-  bool operator!=(const SmfInfo& rhs) const;
+  bool operator==(const SmfInfo &rhs) const;
+  bool operator!=(const SmfInfo &rhs) const;
 
   /////////////////////////////////////////////
   /// SmfInfo members
@@ -66,33 +66,33 @@ class SmfInfo {
   /// </summary>
   std::vector<oai::model::nrf::SnssaiSmfInfoItem> getSNssaiSmfInfoList() const;
   void setSNssaiSmfInfoList(
-      std::vector<oai::model::nrf::SnssaiSmfInfoItem> const& value);
+      std::vector<oai::model::nrf::SnssaiSmfInfoItem> const &value);
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::common::Tai> getTaiList() const;
-  void setTaiList(std::vector<oai::model::common::Tai> const& value);
+  void setTaiList(std::vector<oai::model::common::Tai> const &value);
   bool taiListIsSet() const;
   void unsetTaiList();
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::nrf::TaiRange> getTaiRangeList() const;
-  void setTaiRangeList(std::vector<oai::model::nrf::TaiRange> const& value);
+  void setTaiRangeList(std::vector<oai::model::nrf::TaiRange> const &value);
   bool taiRangeListIsSet() const;
   void unsetTaiRangeList();
   /// <summary>
   /// Fully Qualified Domain Name
   /// </summary>
   std::string getPgwFqdn() const;
-  void setPgwFqdn(std::string const& value);
+  void setPgwFqdn(std::string const &value);
   bool pgwFqdnIsSet() const;
   void unsetPgwFqdn();
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::common::AccessType> getAccessType() const;
-  void setAccessType(std::vector<oai::model::common::AccessType> const& value);
+  void setAccessType(std::vector<oai::model::common::AccessType> const &value);
   bool accessTypeIsSet() const;
   void unsetAccessType();
   /// <summary>
@@ -110,12 +110,12 @@ class SmfInfo {
   bool vsmfSupportIndIsSet() const;
   void unsetVsmfSupportInd();
 
-  friend void to_json(nlohmann::json& j, const SmfInfo& o);
-  friend void from_json(const nlohmann::json& j, SmfInfo& o);
+  friend void to_json(nlohmann::json &j, const SmfInfo &o);
+  friend void from_json(const nlohmann::json &j, SmfInfo &o);
 
   [[nodiscard]] std::string to_string(int indent_level) const;
 
- protected:
+protected:
   std::vector<oai::model::nrf::SnssaiSmfInfoItem> m_SNssaiSmfInfoList;
 
   std::vector<oai::model::common::Tai> m_TaiList;
@@ -132,6 +132,6 @@ class SmfInfo {
   bool m_VsmfSupportIndIsSet;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* SmfInfo_H_ */

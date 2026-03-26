@@ -27,7 +27,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class SmsSupport {
- public:
+public:
   SmsSupport();
   virtual ~SmsSupport();
 
@@ -36,12 +36,12 @@ class SmsSupport {
   /////////////////////////////////////////////
   /// SmsSupport members
 
-  friend void to_json(nlohmann::json& j, const SmsSupport& o);
-  friend void from_json(const nlohmann::json& j, SmsSupport& o);
+  friend void to_json(nlohmann::json &j, const SmsSupport &o);
+  friend void from_json(const nlohmann::json &j, SmsSupport &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* SmsSupport_H_ */

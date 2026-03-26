@@ -70,9 +70,8 @@ asn_TYPE_member_t asn_MBR_Ngap_LastVisitedNGRANCellInformation_1[] = {
      "timeUEStayedInCell"},
     {ATF_POINTER,
      3,
-     offsetof(
-         struct Ngap_LastVisitedNGRANCellInformation,
-         timeUEStayedInCellEnhancedGranularity),
+     offsetof(struct Ngap_LastVisitedNGRANCellInformation,
+              timeUEStayedInCellEnhancedGranularity),
      (ASN_TAG_CLASS_CONTEXT | (3 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_TimeUEStayedInCellEnhancedGranularity,
@@ -128,8 +127,8 @@ asn_TYPE_member_t asn_MBR_Ngap_LastVisitedNGRANCellInformation_1[] = {
      0, /* No default value */
      "iE-Extensions"},
 };
-static const int asn_MAP_Ngap_LastVisitedNGRANCellInformation_oms_1[] = {
-    3, 4, 5};
+static const int asn_MAP_Ngap_LastVisitedNGRANCellInformation_oms_1[] = {3, 4,
+                                                                         5};
 static const ber_tlv_tag_t
     asn_DEF_Ngap_LastVisitedNGRANCellInformation_tags_1[] = {
         (ASN_TAG_CLASS_UNIVERSAL | (16 << 2))};

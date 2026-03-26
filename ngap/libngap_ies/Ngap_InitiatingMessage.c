@@ -8,138 +8,138 @@
 
 #include "Ngap_InitiatingMessage.h"
 
-static const long asn_VAL_1_Ngap_id_AMFConfigurationUpdate                 = 0;
-static const long asn_VAL_1_Ngap_reject                                    = 0;
-static const long asn_VAL_2_Ngap_id_HandoverCancel                         = 10;
-static const long asn_VAL_2_Ngap_reject                                    = 0;
-static const long asn_VAL_3_Ngap_id_HandoverPreparation                    = 12;
-static const long asn_VAL_3_Ngap_reject                                    = 0;
-static const long asn_VAL_4_Ngap_id_HandoverResourceAllocation             = 13;
-static const long asn_VAL_4_Ngap_reject                                    = 0;
-static const long asn_VAL_5_Ngap_id_InitialContextSetup                    = 14;
-static const long asn_VAL_5_Ngap_reject                                    = 0;
-static const long asn_VAL_6_Ngap_id_NGReset                                = 20;
-static const long asn_VAL_6_Ngap_reject                                    = 0;
-static const long asn_VAL_7_Ngap_id_NGSetup                                = 21;
-static const long asn_VAL_7_Ngap_reject                                    = 0;
-static const long asn_VAL_8_Ngap_id_PathSwitchRequest                      = 25;
-static const long asn_VAL_8_Ngap_reject                                    = 0;
-static const long asn_VAL_9_Ngap_id_PDUSessionResourceModify               = 26;
-static const long asn_VAL_9_Ngap_reject                                    = 0;
-static const long asn_VAL_10_Ngap_id_PDUSessionResourceModifyIndication    = 27;
-static const long asn_VAL_10_Ngap_reject                                   = 0;
-static const long asn_VAL_11_Ngap_id_PDUSessionResourceRelease             = 28;
-static const long asn_VAL_11_Ngap_reject                                   = 0;
-static const long asn_VAL_12_Ngap_id_PDUSessionResourceSetup               = 29;
-static const long asn_VAL_12_Ngap_reject                                   = 0;
-static const long asn_VAL_13_Ngap_id_PWSCancel                             = 32;
-static const long asn_VAL_13_Ngap_reject                                   = 0;
-static const long asn_VAL_14_Ngap_id_RANConfigurationUpdate                = 35;
-static const long asn_VAL_14_Ngap_reject                                   = 0;
-static const long asn_VAL_15_Ngap_id_UEContextModification                 = 40;
-static const long asn_VAL_15_Ngap_reject                                   = 0;
-static const long asn_VAL_16_Ngap_id_UEContextRelease                      = 41;
-static const long asn_VAL_16_Ngap_reject                                   = 0;
-static const long asn_VAL_17_Ngap_id_UEContextResume                       = 58;
-static const long asn_VAL_17_Ngap_reject                                   = 0;
-static const long asn_VAL_18_Ngap_id_UEContextSuspend                      = 59;
-static const long asn_VAL_18_Ngap_reject                                   = 0;
-static const long asn_VAL_19_Ngap_id_UERadioCapabilityCheck                = 43;
-static const long asn_VAL_19_Ngap_reject                                   = 0;
-static const long asn_VAL_20_Ngap_id_UERadioCapabilityIDMapping            = 60;
-static const long asn_VAL_20_Ngap_reject                                   = 0;
-static const long asn_VAL_21_Ngap_id_WriteReplaceWarning                   = 51;
-static const long asn_VAL_21_Ngap_reject                                   = 0;
-static const long asn_VAL_22_Ngap_id_AMFCPRelocationIndication             = 64;
-static const long asn_VAL_22_Ngap_reject                                   = 0;
-static const long asn_VAL_23_Ngap_id_AMFStatusIndication                   = 1;
-static const long asn_VAL_23_Ngap_ignore                                   = 1;
-static const long asn_VAL_24_Ngap_id_CellTrafficTrace                      = 2;
-static const long asn_VAL_24_Ngap_ignore                                   = 1;
-static const long asn_VAL_25_Ngap_id_ConnectionEstablishmentIndication     = 65;
-static const long asn_VAL_25_Ngap_reject                                   = 0;
-static const long asn_VAL_26_Ngap_id_DeactivateTrace                       = 3;
-static const long asn_VAL_26_Ngap_ignore                                   = 1;
-static const long asn_VAL_27_Ngap_id_DownlinkNASTransport                  = 4;
-static const long asn_VAL_27_Ngap_ignore                                   = 1;
+static const long asn_VAL_1_Ngap_id_AMFConfigurationUpdate = 0;
+static const long asn_VAL_1_Ngap_reject = 0;
+static const long asn_VAL_2_Ngap_id_HandoverCancel = 10;
+static const long asn_VAL_2_Ngap_reject = 0;
+static const long asn_VAL_3_Ngap_id_HandoverPreparation = 12;
+static const long asn_VAL_3_Ngap_reject = 0;
+static const long asn_VAL_4_Ngap_id_HandoverResourceAllocation = 13;
+static const long asn_VAL_4_Ngap_reject = 0;
+static const long asn_VAL_5_Ngap_id_InitialContextSetup = 14;
+static const long asn_VAL_5_Ngap_reject = 0;
+static const long asn_VAL_6_Ngap_id_NGReset = 20;
+static const long asn_VAL_6_Ngap_reject = 0;
+static const long asn_VAL_7_Ngap_id_NGSetup = 21;
+static const long asn_VAL_7_Ngap_reject = 0;
+static const long asn_VAL_8_Ngap_id_PathSwitchRequest = 25;
+static const long asn_VAL_8_Ngap_reject = 0;
+static const long asn_VAL_9_Ngap_id_PDUSessionResourceModify = 26;
+static const long asn_VAL_9_Ngap_reject = 0;
+static const long asn_VAL_10_Ngap_id_PDUSessionResourceModifyIndication = 27;
+static const long asn_VAL_10_Ngap_reject = 0;
+static const long asn_VAL_11_Ngap_id_PDUSessionResourceRelease = 28;
+static const long asn_VAL_11_Ngap_reject = 0;
+static const long asn_VAL_12_Ngap_id_PDUSessionResourceSetup = 29;
+static const long asn_VAL_12_Ngap_reject = 0;
+static const long asn_VAL_13_Ngap_id_PWSCancel = 32;
+static const long asn_VAL_13_Ngap_reject = 0;
+static const long asn_VAL_14_Ngap_id_RANConfigurationUpdate = 35;
+static const long asn_VAL_14_Ngap_reject = 0;
+static const long asn_VAL_15_Ngap_id_UEContextModification = 40;
+static const long asn_VAL_15_Ngap_reject = 0;
+static const long asn_VAL_16_Ngap_id_UEContextRelease = 41;
+static const long asn_VAL_16_Ngap_reject = 0;
+static const long asn_VAL_17_Ngap_id_UEContextResume = 58;
+static const long asn_VAL_17_Ngap_reject = 0;
+static const long asn_VAL_18_Ngap_id_UEContextSuspend = 59;
+static const long asn_VAL_18_Ngap_reject = 0;
+static const long asn_VAL_19_Ngap_id_UERadioCapabilityCheck = 43;
+static const long asn_VAL_19_Ngap_reject = 0;
+static const long asn_VAL_20_Ngap_id_UERadioCapabilityIDMapping = 60;
+static const long asn_VAL_20_Ngap_reject = 0;
+static const long asn_VAL_21_Ngap_id_WriteReplaceWarning = 51;
+static const long asn_VAL_21_Ngap_reject = 0;
+static const long asn_VAL_22_Ngap_id_AMFCPRelocationIndication = 64;
+static const long asn_VAL_22_Ngap_reject = 0;
+static const long asn_VAL_23_Ngap_id_AMFStatusIndication = 1;
+static const long asn_VAL_23_Ngap_ignore = 1;
+static const long asn_VAL_24_Ngap_id_CellTrafficTrace = 2;
+static const long asn_VAL_24_Ngap_ignore = 1;
+static const long asn_VAL_25_Ngap_id_ConnectionEstablishmentIndication = 65;
+static const long asn_VAL_25_Ngap_reject = 0;
+static const long asn_VAL_26_Ngap_id_DeactivateTrace = 3;
+static const long asn_VAL_26_Ngap_ignore = 1;
+static const long asn_VAL_27_Ngap_id_DownlinkNASTransport = 4;
+static const long asn_VAL_27_Ngap_ignore = 1;
 static const long asn_VAL_28_Ngap_id_DownlinkNonUEAssociatedNRPPaTransport = 5;
-static const long asn_VAL_28_Ngap_ignore                                   = 1;
-static const long asn_VAL_29_Ngap_id_DownlinkRANConfigurationTransfer      = 6;
-static const long asn_VAL_29_Ngap_ignore                                   = 1;
-static const long asn_VAL_30_Ngap_id_DownlinkRANEarlyStatusTransfer        = 63;
-static const long asn_VAL_30_Ngap_ignore                                   = 1;
-static const long asn_VAL_31_Ngap_id_DownlinkRANStatusTransfer             = 7;
-static const long asn_VAL_31_Ngap_ignore                                   = 1;
-static const long asn_VAL_32_Ngap_id_DownlinkRIMInformationTransfer        = 54;
-static const long asn_VAL_32_Ngap_ignore                                   = 1;
-static const long asn_VAL_33_Ngap_id_DownlinkUEAssociatedNRPPaTransport    = 8;
-static const long asn_VAL_33_Ngap_ignore                                   = 1;
-static const long asn_VAL_34_Ngap_id_ErrorIndication                       = 9;
-static const long asn_VAL_34_Ngap_ignore                                   = 1;
-static const long asn_VAL_35_Ngap_id_HandoverNotification                  = 11;
-static const long asn_VAL_35_Ngap_ignore                                   = 1;
-static const long asn_VAL_36_Ngap_id_HandoverSuccess                       = 61;
-static const long asn_VAL_36_Ngap_ignore                                   = 1;
-static const long asn_VAL_37_Ngap_id_InitialUEMessage                      = 15;
-static const long asn_VAL_37_Ngap_ignore                                   = 1;
-static const long asn_VAL_38_Ngap_id_LocationReport                        = 18;
-static const long asn_VAL_38_Ngap_ignore                                   = 1;
-static const long asn_VAL_39_Ngap_id_LocationReportingControl              = 16;
-static const long asn_VAL_39_Ngap_ignore                                   = 1;
-static const long asn_VAL_40_Ngap_id_LocationReportingFailureIndication    = 17;
-static const long asn_VAL_40_Ngap_ignore                                   = 1;
-static const long asn_VAL_41_Ngap_id_NASNonDeliveryIndication              = 19;
-static const long asn_VAL_41_Ngap_ignore                                   = 1;
-static const long asn_VAL_42_Ngap_id_OverloadStart                         = 22;
-static const long asn_VAL_42_Ngap_ignore                                   = 1;
-static const long asn_VAL_43_Ngap_id_OverloadStop                          = 23;
-static const long asn_VAL_43_Ngap_reject                                   = 0;
-static const long asn_VAL_44_Ngap_id_Paging                                = 24;
-static const long asn_VAL_44_Ngap_ignore                                   = 1;
-static const long asn_VAL_45_Ngap_id_PDUSessionResourceNotify              = 30;
-static const long asn_VAL_45_Ngap_ignore                                   = 1;
-static const long asn_VAL_46_Ngap_id_PrivateMessage                        = 31;
-static const long asn_VAL_46_Ngap_ignore                                   = 1;
-static const long asn_VAL_47_Ngap_id_PWSFailureIndication                  = 33;
-static const long asn_VAL_47_Ngap_ignore                                   = 1;
-static const long asn_VAL_48_Ngap_id_PWSRestartIndication                  = 34;
-static const long asn_VAL_48_Ngap_ignore                                   = 1;
-static const long asn_VAL_49_Ngap_id_RANCPRelocationIndication             = 57;
-static const long asn_VAL_49_Ngap_reject                                   = 0;
-static const long asn_VAL_50_Ngap_id_RerouteNASRequest                     = 36;
-static const long asn_VAL_50_Ngap_reject                                   = 0;
-static const long asn_VAL_51_Ngap_id_RetrieveUEInformation                 = 55;
-static const long asn_VAL_51_Ngap_reject                                   = 0;
-static const long asn_VAL_52_Ngap_id_RRCInactiveTransitionReport           = 37;
-static const long asn_VAL_52_Ngap_ignore                                   = 1;
-static const long asn_VAL_53_Ngap_id_SecondaryRATDataUsageReport           = 52;
-static const long asn_VAL_53_Ngap_ignore                                   = 1;
-static const long asn_VAL_54_Ngap_id_TraceFailureIndication                = 38;
-static const long asn_VAL_54_Ngap_ignore                                   = 1;
-static const long asn_VAL_55_Ngap_id_TraceStart                            = 39;
-static const long asn_VAL_55_Ngap_ignore                                   = 1;
-static const long asn_VAL_56_Ngap_id_UEContextReleaseRequest               = 42;
-static const long asn_VAL_56_Ngap_ignore                                   = 1;
-static const long asn_VAL_57_Ngap_id_UEInformationTransfer                 = 56;
-static const long asn_VAL_57_Ngap_reject                                   = 0;
-static const long asn_VAL_58_Ngap_id_UERadioCapabilityInfoIndication       = 44;
-static const long asn_VAL_58_Ngap_ignore                                   = 1;
-static const long asn_VAL_59_Ngap_id_UETNLABindingRelease                  = 45;
-static const long asn_VAL_59_Ngap_ignore                                   = 1;
-static const long asn_VAL_60_Ngap_id_UplinkNASTransport                    = 46;
-static const long asn_VAL_60_Ngap_ignore                                   = 1;
-static const long asn_VAL_61_Ngap_id_UplinkNonUEAssociatedNRPPaTransport   = 47;
-static const long asn_VAL_61_Ngap_ignore                                   = 1;
-static const long asn_VAL_62_Ngap_id_UplinkRANConfigurationTransfer        = 48;
-static const long asn_VAL_62_Ngap_ignore                                   = 1;
-static const long asn_VAL_63_Ngap_id_UplinkRANEarlyStatusTransfer          = 62;
-static const long asn_VAL_63_Ngap_reject                                   = 0;
-static const long asn_VAL_64_Ngap_id_UplinkRANStatusTransfer               = 49;
-static const long asn_VAL_64_Ngap_ignore                                   = 1;
-static const long asn_VAL_65_Ngap_id_UplinkRIMInformationTransfer          = 53;
-static const long asn_VAL_65_Ngap_ignore                                   = 1;
-static const long asn_VAL_66_Ngap_id_UplinkUEAssociatedNRPPaTransport      = 50;
-static const long asn_VAL_66_Ngap_ignore                                   = 1;
+static const long asn_VAL_28_Ngap_ignore = 1;
+static const long asn_VAL_29_Ngap_id_DownlinkRANConfigurationTransfer = 6;
+static const long asn_VAL_29_Ngap_ignore = 1;
+static const long asn_VAL_30_Ngap_id_DownlinkRANEarlyStatusTransfer = 63;
+static const long asn_VAL_30_Ngap_ignore = 1;
+static const long asn_VAL_31_Ngap_id_DownlinkRANStatusTransfer = 7;
+static const long asn_VAL_31_Ngap_ignore = 1;
+static const long asn_VAL_32_Ngap_id_DownlinkRIMInformationTransfer = 54;
+static const long asn_VAL_32_Ngap_ignore = 1;
+static const long asn_VAL_33_Ngap_id_DownlinkUEAssociatedNRPPaTransport = 8;
+static const long asn_VAL_33_Ngap_ignore = 1;
+static const long asn_VAL_34_Ngap_id_ErrorIndication = 9;
+static const long asn_VAL_34_Ngap_ignore = 1;
+static const long asn_VAL_35_Ngap_id_HandoverNotification = 11;
+static const long asn_VAL_35_Ngap_ignore = 1;
+static const long asn_VAL_36_Ngap_id_HandoverSuccess = 61;
+static const long asn_VAL_36_Ngap_ignore = 1;
+static const long asn_VAL_37_Ngap_id_InitialUEMessage = 15;
+static const long asn_VAL_37_Ngap_ignore = 1;
+static const long asn_VAL_38_Ngap_id_LocationReport = 18;
+static const long asn_VAL_38_Ngap_ignore = 1;
+static const long asn_VAL_39_Ngap_id_LocationReportingControl = 16;
+static const long asn_VAL_39_Ngap_ignore = 1;
+static const long asn_VAL_40_Ngap_id_LocationReportingFailureIndication = 17;
+static const long asn_VAL_40_Ngap_ignore = 1;
+static const long asn_VAL_41_Ngap_id_NASNonDeliveryIndication = 19;
+static const long asn_VAL_41_Ngap_ignore = 1;
+static const long asn_VAL_42_Ngap_id_OverloadStart = 22;
+static const long asn_VAL_42_Ngap_ignore = 1;
+static const long asn_VAL_43_Ngap_id_OverloadStop = 23;
+static const long asn_VAL_43_Ngap_reject = 0;
+static const long asn_VAL_44_Ngap_id_Paging = 24;
+static const long asn_VAL_44_Ngap_ignore = 1;
+static const long asn_VAL_45_Ngap_id_PDUSessionResourceNotify = 30;
+static const long asn_VAL_45_Ngap_ignore = 1;
+static const long asn_VAL_46_Ngap_id_PrivateMessage = 31;
+static const long asn_VAL_46_Ngap_ignore = 1;
+static const long asn_VAL_47_Ngap_id_PWSFailureIndication = 33;
+static const long asn_VAL_47_Ngap_ignore = 1;
+static const long asn_VAL_48_Ngap_id_PWSRestartIndication = 34;
+static const long asn_VAL_48_Ngap_ignore = 1;
+static const long asn_VAL_49_Ngap_id_RANCPRelocationIndication = 57;
+static const long asn_VAL_49_Ngap_reject = 0;
+static const long asn_VAL_50_Ngap_id_RerouteNASRequest = 36;
+static const long asn_VAL_50_Ngap_reject = 0;
+static const long asn_VAL_51_Ngap_id_RetrieveUEInformation = 55;
+static const long asn_VAL_51_Ngap_reject = 0;
+static const long asn_VAL_52_Ngap_id_RRCInactiveTransitionReport = 37;
+static const long asn_VAL_52_Ngap_ignore = 1;
+static const long asn_VAL_53_Ngap_id_SecondaryRATDataUsageReport = 52;
+static const long asn_VAL_53_Ngap_ignore = 1;
+static const long asn_VAL_54_Ngap_id_TraceFailureIndication = 38;
+static const long asn_VAL_54_Ngap_ignore = 1;
+static const long asn_VAL_55_Ngap_id_TraceStart = 39;
+static const long asn_VAL_55_Ngap_ignore = 1;
+static const long asn_VAL_56_Ngap_id_UEContextReleaseRequest = 42;
+static const long asn_VAL_56_Ngap_ignore = 1;
+static const long asn_VAL_57_Ngap_id_UEInformationTransfer = 56;
+static const long asn_VAL_57_Ngap_reject = 0;
+static const long asn_VAL_58_Ngap_id_UERadioCapabilityInfoIndication = 44;
+static const long asn_VAL_58_Ngap_ignore = 1;
+static const long asn_VAL_59_Ngap_id_UETNLABindingRelease = 45;
+static const long asn_VAL_59_Ngap_ignore = 1;
+static const long asn_VAL_60_Ngap_id_UplinkNASTransport = 46;
+static const long asn_VAL_60_Ngap_ignore = 1;
+static const long asn_VAL_61_Ngap_id_UplinkNonUEAssociatedNRPPaTransport = 47;
+static const long asn_VAL_61_Ngap_ignore = 1;
+static const long asn_VAL_62_Ngap_id_UplinkRANConfigurationTransfer = 48;
+static const long asn_VAL_62_Ngap_ignore = 1;
+static const long asn_VAL_63_Ngap_id_UplinkRANEarlyStatusTransfer = 62;
+static const long asn_VAL_63_Ngap_reject = 0;
+static const long asn_VAL_64_Ngap_id_UplinkRANStatusTransfer = 49;
+static const long asn_VAL_64_Ngap_ignore = 1;
+static const long asn_VAL_65_Ngap_id_UplinkRIMInformationTransfer = 53;
+static const long asn_VAL_65_Ngap_ignore = 1;
+static const long asn_VAL_66_Ngap_id_UplinkUEAssociatedNRPPaTransport = 50;
+static const long asn_VAL_66_Ngap_ignore = 1;
 static const asn_ioc_cell_t asn_IOS_Ngap_NGAP_ELEMENTARY_PROCEDURES_1_rows[] = {
     {"&InitiatingMessage", aioc__type, &asn_DEF_Ngap_AMFConfigurationUpdate},
     {"&SuccessfulOutcome", aioc__type,
@@ -852,55 +852,55 @@ static const asn_ioc_cell_t asn_IOS_Ngap_NGAP_ELEMENTARY_PROCEDURES_1_rows[] = {
 static const asn_ioc_set_t asn_IOS_Ngap_NGAP_ELEMENTARY_PROCEDURES_1[] = {
     {66, 5, asn_IOS_Ngap_NGAP_ELEMENTARY_PROCEDURES_1_rows}};
 static int memb_Ngap_procedureCode_constraint_1(
-    const asn_TYPE_descriptor_t* td, const void* sptr,
-    asn_app_constraint_failed_f* ctfailcb, void* app_key) {
+    const asn_TYPE_descriptor_t *td, const void *sptr,
+    asn_app_constraint_failed_f *ctfailcb, void *app_key) {
   long value;
 
   if (!sptr) {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: value not given (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: value not given (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 
-  value = *(const long*) sptr;
+  value = *(const long *)sptr;
 
   if ((value >= 0L && value <= 255L)) {
     /* Constraint check succeeded */
     return 0;
   } else {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: constraint failed (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: constraint failed (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 }
 
 static asn_type_selector_result_t
 select_InitiatingMessage_Ngap_criticality_type(
-    const asn_TYPE_descriptor_t* parent_type, const void* parent_sptr) {
+    const asn_TYPE_descriptor_t *parent_type, const void *parent_sptr) {
   asn_type_selector_result_t result = {0, 0};
-  const asn_ioc_set_t* itable       = asn_IOS_Ngap_NGAP_ELEMENTARY_PROCEDURES_1;
-  size_t constraining_column        = 3; /* &procedureCode */
-  size_t for_column                 = 4; /* &criticality */
+  const asn_ioc_set_t *itable = asn_IOS_Ngap_NGAP_ELEMENTARY_PROCEDURES_1;
+  size_t constraining_column = 3; /* &procedureCode */
+  size_t for_column = 4;          /* &criticality */
   size_t row, presence_index = 0;
-  const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_InitiatingMessage, procedureCode));
+  const long *constraining_value =
+      (const long *)((const char *)parent_sptr +
+                     offsetof(struct Ngap_InitiatingMessage, procedureCode));
 
   for (row = 0; row < itable->rows_count; row++) {
-    const asn_ioc_cell_t* constraining_cell =
+    const asn_ioc_cell_t *constraining_cell =
         &itable->rows[row * itable->columns_count + constraining_column];
-    const asn_ioc_cell_t* type_cell =
+    const asn_ioc_cell_t *type_cell =
         &itable->rows[row * itable->columns_count + for_column];
 
-    if (type_cell->cell_kind == aioc__undefined) continue;
+    if (type_cell->cell_kind == aioc__undefined)
+      continue;
 
     presence_index++;
     if (constraining_cell->type_descriptor->op->compare_struct(
             constraining_cell->type_descriptor, constraining_value,
             constraining_cell->value_sptr) == 0) {
       result.type_descriptor = type_cell->type_descriptor;
-      result.presence_index  = presence_index;
+      result.presence_index = presence_index;
       break;
     }
   }
@@ -909,12 +909,11 @@ select_InitiatingMessage_Ngap_criticality_type(
 }
 
 static int memb_Ngap_criticality_constraint_1(
-    const asn_TYPE_descriptor_t* td, const void* sptr,
-    asn_app_constraint_failed_f* ctfailcb, void* app_key) {
+    const asn_TYPE_descriptor_t *td, const void *sptr,
+    asn_app_constraint_failed_f *ctfailcb, void *app_key) {
   if (!sptr) {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: value not given (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: value not given (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 
@@ -922,34 +921,36 @@ static int memb_Ngap_criticality_constraint_1(
     /* Nothing is here. See below */
   }
 
-  return td->encoding_constraints.general_constraints(
-      td, sptr, ctfailcb, app_key);
+  return td->encoding_constraints.general_constraints(td, sptr, ctfailcb,
+                                                      app_key);
 }
 
 static asn_type_selector_result_t select_InitiatingMessage_Ngap_value_type(
-    const asn_TYPE_descriptor_t* parent_type, const void* parent_sptr) {
+    const asn_TYPE_descriptor_t *parent_type, const void *parent_sptr) {
   asn_type_selector_result_t result = {0, 0};
-  const asn_ioc_set_t* itable       = asn_IOS_Ngap_NGAP_ELEMENTARY_PROCEDURES_1;
-  size_t constraining_column        = 3; /* &procedureCode */
-  size_t for_column                 = 0; /* &InitiatingMessage */
+  const asn_ioc_set_t *itable = asn_IOS_Ngap_NGAP_ELEMENTARY_PROCEDURES_1;
+  size_t constraining_column = 3; /* &procedureCode */
+  size_t for_column = 0;          /* &InitiatingMessage */
   size_t row, presence_index = 0;
-  const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_InitiatingMessage, procedureCode));
+  const long *constraining_value =
+      (const long *)((const char *)parent_sptr +
+                     offsetof(struct Ngap_InitiatingMessage, procedureCode));
 
   for (row = 0; row < itable->rows_count; row++) {
-    const asn_ioc_cell_t* constraining_cell =
+    const asn_ioc_cell_t *constraining_cell =
         &itable->rows[row * itable->columns_count + constraining_column];
-    const asn_ioc_cell_t* type_cell =
+    const asn_ioc_cell_t *type_cell =
         &itable->rows[row * itable->columns_count + for_column];
 
-    if (type_cell->cell_kind == aioc__undefined) continue;
+    if (type_cell->cell_kind == aioc__undefined)
+      continue;
 
     presence_index++;
     if (constraining_cell->type_descriptor->op->compare_struct(
             constraining_cell->type_descriptor, constraining_value,
             constraining_cell->value_sptr) == 0) {
       result.type_descriptor = type_cell->type_descriptor;
-      result.presence_index  = presence_index;
+      result.presence_index = presence_index;
       break;
     }
   }
@@ -957,13 +958,13 @@ static asn_type_selector_result_t select_InitiatingMessage_Ngap_value_type(
   return result;
 }
 
-static int memb_Ngap_value_constraint_1(
-    const asn_TYPE_descriptor_t* td, const void* sptr,
-    asn_app_constraint_failed_f* ctfailcb, void* app_key) {
+static int memb_Ngap_value_constraint_1(const asn_TYPE_descriptor_t *td,
+                                        const void *sptr,
+                                        asn_app_constraint_failed_f *ctfailcb,
+                                        void *app_key) {
   if (!sptr) {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: value not given (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: value not given (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 
@@ -971,8 +972,8 @@ static int memb_Ngap_value_constraint_1(
     /* Nothing is here. See below */
   }
 
-  return td->encoding_constraints.general_constraints(
-      td, sptr, ctfailcb, app_key);
+  return td->encoding_constraints.general_constraints(td, sptr, ctfailcb,
+                                                      app_key);
 }
 
 #if !defined(ASN_DISABLE_OER_SUPPORT)
@@ -1005,8 +1006,7 @@ static asn_per_constraints_t asn_PER_memb_Ngap_criticality_constr_3
           !defined(ASN_DISABLE_APER_SUPPORT) */
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 static asn_oer_constraints_t asn_OER_memb_Ngap_value_constr_4 CC_NOTUSED = {
-    {0, 0},
-    -1};
+    {0, 0}, -1};
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 static asn_per_constraints_t asn_PER_memb_Ngap_value_constr_4 CC_NOTUSED = {
@@ -1020,8 +1020,8 @@ static asn_per_constraints_t asn_PER_memb_Ngap_value_constr_4 CC_NOTUSED = {
 static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value, choice.AMFConfigurationUpdate),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.AMFConfigurationUpdate),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_AMFConfigurationUpdate,
@@ -1097,9 +1097,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "HandoverRequest"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value,
-         choice.InitialContextSetupRequest),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.InitialContextSetupRequest),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_InitialContextSetupRequest,
@@ -1175,9 +1174,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "PathSwitchRequest"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value,
-         choice.PDUSessionResourceModifyRequest),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.PDUSessionResourceModifyRequest),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_PDUSessionResourceModifyRequest,
@@ -1196,9 +1194,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "PDUSessionResourceModifyRequest"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value,
-         choice.PDUSessionResourceModifyIndication),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.PDUSessionResourceModifyIndication),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_PDUSessionResourceModifyIndication,
@@ -1217,9 +1214,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "PDUSessionResourceModifyIndication"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value,
-         choice.PDUSessionResourceReleaseCommand),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.PDUSessionResourceReleaseCommand),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_PDUSessionResourceReleaseCommand,
@@ -1238,9 +1234,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "PDUSessionResourceReleaseCommand"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value,
-         choice.PDUSessionResourceSetupRequest),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.PDUSessionResourceSetupRequest),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_PDUSessionResourceSetupRequest,
@@ -1278,8 +1273,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "PWSCancelRequest"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value, choice.RANConfigurationUpdate),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.RANConfigurationUpdate),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_RANConfigurationUpdate,
@@ -1298,9 +1293,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "RANConfigurationUpdate"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value,
-         choice.UEContextModificationRequest),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.UEContextModificationRequest),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_UEContextModificationRequest,
@@ -1319,8 +1313,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "UEContextModificationRequest"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value, choice.UEContextReleaseCommand),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.UEContextReleaseCommand),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_UEContextReleaseCommand,
@@ -1339,8 +1333,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "UEContextReleaseCommand"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value, choice.UEContextResumeRequest),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.UEContextResumeRequest),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_UEContextResumeRequest,
@@ -1359,8 +1353,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "UEContextResumeRequest"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value, choice.UEContextSuspendRequest),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.UEContextSuspendRequest),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_UEContextSuspendRequest,
@@ -1379,9 +1373,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "UEContextSuspendRequest"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value,
-         choice.UERadioCapabilityCheckRequest),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.UERadioCapabilityCheckRequest),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_UERadioCapabilityCheckRequest,
@@ -1400,9 +1393,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "UERadioCapabilityCheckRequest"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value,
-         choice.UERadioCapabilityIDMappingRequest),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.UERadioCapabilityIDMappingRequest),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_UERadioCapabilityIDMappingRequest,
@@ -1421,9 +1413,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "UERadioCapabilityIDMappingRequest"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value,
-         choice.WriteReplaceWarningRequest),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.WriteReplaceWarningRequest),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_WriteReplaceWarningRequest,
@@ -1442,9 +1433,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "WriteReplaceWarningRequest"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value,
-         choice.AMFCPRelocationIndication),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.AMFCPRelocationIndication),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_AMFCPRelocationIndication,
@@ -1501,9 +1491,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "CellTrafficTrace"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value,
-         choice.ConnectionEstablishmentIndication),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.ConnectionEstablishmentIndication),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_ConnectionEstablishmentIndication,
@@ -1541,8 +1530,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "DeactivateTrace"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value, choice.DownlinkNASTransport),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.DownlinkNASTransport),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_DownlinkNASTransport,
@@ -1561,9 +1550,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "DownlinkNASTransport"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value,
-         choice.DownlinkNonUEAssociatedNRPPaTransport),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.DownlinkNonUEAssociatedNRPPaTransport),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_DownlinkNonUEAssociatedNRPPaTransport,
@@ -1582,9 +1570,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "DownlinkNonUEAssociatedNRPPaTransport"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value,
-         choice.DownlinkRANConfigurationTransfer),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.DownlinkRANConfigurationTransfer),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_DownlinkRANConfigurationTransfer,
@@ -1603,9 +1590,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "DownlinkRANConfigurationTransfer"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value,
-         choice.DownlinkRANEarlyStatusTransfer),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.DownlinkRANEarlyStatusTransfer),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_DownlinkRANEarlyStatusTransfer,
@@ -1624,9 +1610,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "DownlinkRANEarlyStatusTransfer"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value,
-         choice.DownlinkRANStatusTransfer),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.DownlinkRANStatusTransfer),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_DownlinkRANStatusTransfer,
@@ -1645,9 +1630,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "DownlinkRANStatusTransfer"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value,
-         choice.DownlinkRIMInformationTransfer),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.DownlinkRIMInformationTransfer),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_DownlinkRIMInformationTransfer,
@@ -1666,9 +1650,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "DownlinkRIMInformationTransfer"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value,
-         choice.DownlinkUEAssociatedNRPPaTransport),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.DownlinkUEAssociatedNRPPaTransport),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_DownlinkUEAssociatedNRPPaTransport,
@@ -1782,8 +1765,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "LocationReport"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value, choice.LocationReportingControl),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.LocationReportingControl),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_LocationReportingControl,
@@ -1802,9 +1785,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "LocationReportingControl"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value,
-         choice.LocationReportingFailureIndication),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.LocationReportingFailureIndication),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_LocationReportingFailureIndication,
@@ -1823,8 +1805,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "LocationReportingFailureIndication"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value, choice.NASNonDeliveryIndication),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.NASNonDeliveryIndication),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_NASNonDeliveryIndication,
@@ -1900,8 +1882,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "Paging"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value, choice.PDUSessionResourceNotify),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.PDUSessionResourceNotify),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_PDUSessionResourceNotify,
@@ -1939,8 +1921,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "PrivateMessage"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value, choice.PWSFailureIndication),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.PWSFailureIndication),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_PWSFailureIndication,
@@ -1959,8 +1941,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "PWSFailureIndication"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value, choice.PWSRestartIndication),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.PWSRestartIndication),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_PWSRestartIndication,
@@ -1979,9 +1961,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "PWSRestartIndication"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value,
-         choice.RANCPRelocationIndication),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.RANCPRelocationIndication),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_RANCPRelocationIndication,
@@ -2019,8 +2000,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "RerouteNASRequest"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value, choice.RetrieveUEInformation),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.RetrieveUEInformation),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_RetrieveUEInformation,
@@ -2039,9 +2020,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "RetrieveUEInformation"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value,
-         choice.RRCInactiveTransitionReport),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.RRCInactiveTransitionReport),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_RRCInactiveTransitionReport,
@@ -2060,9 +2040,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "RRCInactiveTransitionReport"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value,
-         choice.SecondaryRATDataUsageReport),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.SecondaryRATDataUsageReport),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_SecondaryRATDataUsageReport,
@@ -2081,8 +2060,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "SecondaryRATDataUsageReport"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value, choice.TraceFailureIndication),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.TraceFailureIndication),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_TraceFailureIndication,
@@ -2120,8 +2099,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "TraceStart"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value, choice.UEContextReleaseRequest),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.UEContextReleaseRequest),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_UEContextReleaseRequest,
@@ -2140,8 +2119,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "UEContextReleaseRequest"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value, choice.UEInformationTransfer),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.UEInformationTransfer),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_UEInformationTransfer,
@@ -2160,9 +2139,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "UEInformationTransfer"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value,
-         choice.UERadioCapabilityInfoIndication),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.UERadioCapabilityInfoIndication),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_UERadioCapabilityInfoIndication,
@@ -2181,9 +2159,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "UERadioCapabilityInfoIndication"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value,
-         choice.UETNLABindingReleaseRequest),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.UETNLABindingReleaseRequest),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_UETNLABindingReleaseRequest,
@@ -2221,9 +2198,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "UplinkNASTransport"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value,
-         choice.UplinkNonUEAssociatedNRPPaTransport),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.UplinkNonUEAssociatedNRPPaTransport),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_UplinkNonUEAssociatedNRPPaTransport,
@@ -2242,9 +2218,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "UplinkNonUEAssociatedNRPPaTransport"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value,
-         choice.UplinkRANConfigurationTransfer),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.UplinkRANConfigurationTransfer),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_UplinkRANConfigurationTransfer,
@@ -2263,9 +2238,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "UplinkRANConfigurationTransfer"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value,
-         choice.UplinkRANEarlyStatusTransfer),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.UplinkRANEarlyStatusTransfer),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_UplinkRANEarlyStatusTransfer,
@@ -2284,8 +2258,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "UplinkRANEarlyStatusTransfer"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value, choice.UplinkRANStatusTransfer),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.UplinkRANStatusTransfer),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_UplinkRANStatusTransfer,
@@ -2304,9 +2278,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "UplinkRANStatusTransfer"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value,
-         choice.UplinkRIMInformationTransfer),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.UplinkRIMInformationTransfer),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_UplinkRIMInformationTransfer,
@@ -2325,9 +2298,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_4[] = {
      "UplinkRIMInformationTransfer"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_InitiatingMessage__value,
-         choice.UplinkUEAssociatedNRPPaTransport),
+     offsetof(struct Ngap_InitiatingMessage__value,
+              choice.UplinkUEAssociatedNRPPaTransport),
      (ASN_TAG_CLASS_UNIVERSAL | (16 << 2)),
      0,
      &asn_DEF_Ngap_UplinkUEAssociatedNRPPaTransport,
@@ -2464,7 +2436,7 @@ static asn_CHOICE_specifics_t asn_SPC_Ngap_value_specs_4 = {
     sizeof(struct Ngap_InitiatingMessage__value),
     offsetof(struct Ngap_InitiatingMessage__value, _asn_ctx),
     offsetof(struct Ngap_InitiatingMessage__value, present),
-    sizeof(((struct Ngap_InitiatingMessage__value*) 0)->present),
+    sizeof(((struct Ngap_InitiatingMessage__value *)0)->present),
     asn_MAP_Ngap_value_tag2el_4,
     66, /* Count of tags in the map */
     0,

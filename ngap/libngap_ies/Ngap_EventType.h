@@ -20,10 +20,10 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_EventType {
-  Ngap_EventType_direct                               = 0,
-  Ngap_EventType_change_of_serve_cell                 = 1,
-  Ngap_EventType_ue_presence_in_area_of_interest      = 2,
-  Ngap_EventType_stop_change_of_serve_cell            = 3,
+  Ngap_EventType_direct = 0,
+  Ngap_EventType_change_of_serve_cell = 1,
+  Ngap_EventType_ue_presence_in_area_of_interest = 2,
+  Ngap_EventType_stop_change_of_serve_cell = 3,
   Ngap_EventType_stop_ue_presence_in_area_of_interest = 4,
   Ngap_EventType_cancel_location_reporting_for_the_ue = 5
   /*

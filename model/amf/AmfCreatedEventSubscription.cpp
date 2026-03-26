@@ -19,9 +19,9 @@
 namespace oai::model::amf {
 
 AmfCreatedEventSubscription::AmfCreatedEventSubscription() {
-  m_SubscriptionId         = "";
-  m_ReportListIsSet        = false;
-  m_SupportedFeatures      = "";
+  m_SubscriptionId = "";
+  m_ReportListIsSet = false;
+  m_SupportedFeatures = "";
   m_SupportedFeaturesIsSet = false;
 }
 
@@ -32,28 +32,28 @@ void AmfCreatedEventSubscription::validate() const {
   }
 }
 
-bool AmfCreatedEventSubscription::validate(std::stringstream& msg) const {
+bool AmfCreatedEventSubscription::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool AmfCreatedEventSubscription::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AmfCreatedEventSubscription" : pathPrefix;
 
   if (reportListIsSet()) {
-    const std::vector<AmfEventReport>& value = m_ReportList;
-    const std::string currentValuePath       = _pathPrefix + ".reportList";
+    const std::vector<AmfEventReport> &value = m_ReportList;
+    const std::string currentValuePath = _pathPrefix + ".reportList";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const AmfEventReport& value : value) {
+      int i = 0;
+      for (const AmfEventReport &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -66,7 +66,7 @@ bool AmfCreatedEventSubscription::validate(
   }
 
   if (supportedFeaturesIsSet()) {
-    const std::string& value           = m_SupportedFeatures;
+    const std::string &value = m_SupportedFeatures;
     const std::string currentValuePath = _pathPrefix + ".supportedFeatures";
   }
 
@@ -74,7 +74,7 @@ bool AmfCreatedEventSubscription::validate(
 }
 
 bool AmfCreatedEventSubscription::operator==(
-    const AmfCreatedEventSubscription& rhs) const {
+    const AmfCreatedEventSubscription &rhs) const {
   return
 
       (getSubscription() == rhs.getSubscription()) &&
@@ -93,13 +93,13 @@ bool AmfCreatedEventSubscription::operator==(
 }
 
 bool AmfCreatedEventSubscription::operator!=(
-    const AmfCreatedEventSubscription& rhs) const {
+    const AmfCreatedEventSubscription &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AmfCreatedEventSubscription& o) {
-  j                   = nlohmann::json();
-  j["subscription"]   = o.m_Subscription;
+void to_json(nlohmann::json &j, const AmfCreatedEventSubscription &o) {
+  j = nlohmann::json();
+  j["subscription"] = o.m_Subscription;
   j["subscriptionId"] = o.m_SubscriptionId;
   if (o.reportListIsSet() || !o.m_ReportList.empty())
     j["reportList"] = o.m_ReportList;
@@ -107,7 +107,7 @@ void to_json(nlohmann::json& j, const AmfCreatedEventSubscription& o) {
     j["supportedFeatures"] = o.m_SupportedFeatures;
 }
 
-void from_json(const nlohmann::json& j, AmfCreatedEventSubscription& o) {
+void from_json(const nlohmann::json &j, AmfCreatedEventSubscription &o) {
   j.at("subscription").get_to(o.m_Subscription);
   j.at("subscriptionId").get_to(o.m_SubscriptionId);
   if (j.find("reportList") != j.end()) {
@@ -124,21 +124,21 @@ AmfEventSubscription AmfCreatedEventSubscription::getSubscription() const {
   return m_Subscription;
 }
 void AmfCreatedEventSubscription::setSubscription(
-    AmfEventSubscription const& value) {
+    AmfEventSubscription const &value) {
   m_Subscription = value;
 }
 std::string AmfCreatedEventSubscription::getSubscriptionId() const {
   return m_SubscriptionId;
 }
-void AmfCreatedEventSubscription::setSubscriptionId(std::string const& value) {
+void AmfCreatedEventSubscription::setSubscriptionId(std::string const &value) {
   m_SubscriptionId = value;
 }
 std::vector<AmfEventReport> AmfCreatedEventSubscription::getReportList() const {
   return m_ReportList;
 }
 void AmfCreatedEventSubscription::setReportList(
-    std::vector<AmfEventReport> const& value) {
-  m_ReportList      = value;
+    std::vector<AmfEventReport> const &value) {
+  m_ReportList = value;
   m_ReportListIsSet = true;
 }
 bool AmfCreatedEventSubscription::reportListIsSet() const {
@@ -151,8 +151,8 @@ std::string AmfCreatedEventSubscription::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
 void AmfCreatedEventSubscription::setSupportedFeatures(
-    std::string const& value) {
-  m_SupportedFeatures      = value;
+    std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool AmfCreatedEventSubscription::supportedFeaturesIsSet() const {
@@ -162,4 +162,4 @@ void AmfCreatedEventSubscription::unsetSupportedFeatures() {
   m_SupportedFeaturesIsSet = false;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

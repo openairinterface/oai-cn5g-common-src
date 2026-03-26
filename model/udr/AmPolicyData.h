@@ -35,7 +35,7 @@ namespace oai::udr::model {
 /// Contains the AM policy data for a given subscriber.
 /// </summary>
 class AmPolicyData {
- public:
+public:
   AmPolicyData();
   virtual ~AmPolicyData();
 
@@ -47,29 +47,29 @@ class AmPolicyData {
   /// <summary>
   ///
   /// </summary>
-  std::map<std::string, oai::model::common::PresenceInfo>& getPraInfos();
+  std::map<std::string, oai::model::common::PresenceInfo> &getPraInfos();
   void setPraInfos(
-      std::map<std::string, oai::model::common::PresenceInfo> const& value);
+      std::map<std::string, oai::model::common::PresenceInfo> const &value);
   bool praInfosIsSet() const;
   void unsetPraInfos();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getSubscCats();
-  void setSubscCats(std::vector<std::string> const& value);
+  std::vector<std::string> &getSubscCats();
+  void setSubscCats(std::vector<std::string> const &value);
   bool subscCatsIsSet() const;
   void unsetSubscCats();
 
-  friend void to_json(nlohmann::json& j, const AmPolicyData& o);
-  friend void from_json(const nlohmann::json& j, AmPolicyData& o);
+  friend void to_json(nlohmann::json &j, const AmPolicyData &o);
+  friend void from_json(const nlohmann::json &j, AmPolicyData &o);
 
- protected:
+protected:
   std::map<std::string, oai::model::common::PresenceInfo> m_PraInfos;
   bool m_PraInfosIsSet;
   std::vector<std::string> m_SubscCats;
   bool m_SubscCatsIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* AmPolicyData_H_ */

@@ -27,12 +27,12 @@ void FinalUnitAction::validate() const {
   }
 }
 
-bool FinalUnitAction::validate(std::stringstream& msg) const {
+bool FinalUnitAction::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool FinalUnitAction::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool FinalUnitAction::validate(std::stringstream &msg,
+                               const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "FinalUnitAction" : pathPrefix;
@@ -43,35 +43,31 @@ bool FinalUnitAction::validate(
   return success;
 }
 
-bool FinalUnitAction::operator==(const FinalUnitAction& rhs) const {
+bool FinalUnitAction::operator==(const FinalUnitAction &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool FinalUnitAction::operator!=(const FinalUnitAction& rhs) const {
+bool FinalUnitAction::operator!=(const FinalUnitAction &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const FinalUnitAction& o) {
+void to_json(nlohmann::json &j, const FinalUnitAction &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, FinalUnitAction& o) {
+void from_json(const nlohmann::json &j, FinalUnitAction &o) {
   from_json(j, o.m_value);
 }
 
-FinalUnitAction_anyOf FinalUnitAction::getValue() const {
-  return m_value;
-}
+FinalUnitAction_anyOf FinalUnitAction::getValue() const { return m_value; }
 
-void FinalUnitAction::setValue(FinalUnitAction_anyOf value) {
-  m_value = value;
-}
+void FinalUnitAction::setValue(FinalUnitAction_anyOf value) { m_value = value; }
 
-FinalUnitAction_anyOf::eFinalUnitAction_anyOf FinalUnitAction::getEnumValue()
-    const {
+FinalUnitAction_anyOf::eFinalUnitAction_anyOf
+FinalUnitAction::getEnumValue() const {
   return m_value.getValue();
 }
 
@@ -80,4 +76,4 @@ void FinalUnitAction::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

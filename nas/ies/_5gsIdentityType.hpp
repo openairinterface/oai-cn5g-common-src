@@ -12,7 +12,7 @@ constexpr auto k5gsIdentityTypeIeName = "5GS Identity Type";
 namespace oai::nas {
 
 class _5gsIdentityType : public Type1NasIeFormatTv {
- public:
+public:
   _5gsIdentityType();
   _5gsIdentityType(uint8_t iei);
   _5gsIdentityType(uint8_t iei, uint8_t value);
@@ -23,8 +23,8 @@ class _5gsIdentityType : public Type1NasIeFormatTv {
   void SetValue(uint8_t value);
   uint8_t GetValue() const;
 
- private:
+private:
 };
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

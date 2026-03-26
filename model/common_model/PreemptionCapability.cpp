@@ -27,12 +27,12 @@ void PreemptionCapability::validate() const {
   }
 }
 
-bool PreemptionCapability::validate(std::stringstream& msg) const {
+bool PreemptionCapability::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool PreemptionCapability::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool PreemptionCapability::validate(std::stringstream &msg,
+                                    const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PreemptionCapability" : pathPrefix;
@@ -43,22 +43,22 @@ bool PreemptionCapability::validate(
   return success;
 }
 
-bool PreemptionCapability::operator==(const PreemptionCapability& rhs) const {
+bool PreemptionCapability::operator==(const PreemptionCapability &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool PreemptionCapability::operator!=(const PreemptionCapability& rhs) const {
+bool PreemptionCapability::operator!=(const PreemptionCapability &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PreemptionCapability& o) {
+void to_json(nlohmann::json &j, const PreemptionCapability &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, PreemptionCapability& o) {
+void from_json(const nlohmann::json &j, PreemptionCapability &o) {
   from_json(j, o.m_value);
 }
 
@@ -84,4 +84,4 @@ void PreemptionCapability::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

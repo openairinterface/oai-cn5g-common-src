@@ -42,7 +42,7 @@ namespace oai::model::pcf {
 /// requested rule data is the report of QoS flow rejection due to EPS fallback.
 /// </summary>
 class RequestedRuleDataType {
- public:
+public:
   RequestedRuleDataType();
   virtual ~RequestedRuleDataType() = default;
 
@@ -56,36 +56,36 @@ class RequestedRuleDataType {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const RequestedRuleDataType& rhs) const;
-  bool operator!=(const RequestedRuleDataType& rhs) const;
+  bool operator==(const RequestedRuleDataType &rhs) const;
+  bool operator!=(const RequestedRuleDataType &rhs) const;
 
   /////////////////////////////////////////////
   /// RequestedRuleDataType members
 
   RequestedRuleDataType_anyOf getValue() const;
   void setValue(RequestedRuleDataType_anyOf value);
-  RequestedRuleDataType_anyOf::eRequestedRuleDataType_anyOf getEnumValue()
-      const;
-  void setEnumValue(
-      RequestedRuleDataType_anyOf::eRequestedRuleDataType_anyOf value);
-  friend void to_json(nlohmann::json& j, const RequestedRuleDataType& o);
-  friend void from_json(const nlohmann::json& j, RequestedRuleDataType& o);
-  friend void to_json(nlohmann::json& j, const RequestedRuleDataType_anyOf& o);
-  friend void from_json(
-      const nlohmann::json& j, RequestedRuleDataType_anyOf& o);
+  RequestedRuleDataType_anyOf::eRequestedRuleDataType_anyOf
+  getEnumValue() const;
+  void
+  setEnumValue(RequestedRuleDataType_anyOf::eRequestedRuleDataType_anyOf value);
+  friend void to_json(nlohmann::json &j, const RequestedRuleDataType &o);
+  friend void from_json(const nlohmann::json &j, RequestedRuleDataType &o);
+  friend void to_json(nlohmann::json &j, const RequestedRuleDataType_anyOf &o);
+  friend void from_json(const nlohmann::json &j,
+                        RequestedRuleDataType_anyOf &o);
 
- protected:
+protected:
   RequestedRuleDataType_anyOf m_value;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* RequestedRuleDataType_H_ */

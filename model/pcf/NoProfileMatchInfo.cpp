@@ -29,12 +29,12 @@ void NoProfileMatchInfo::validate() const {
   }
 }
 
-bool NoProfileMatchInfo::validate(std::stringstream& msg) const {
+bool NoProfileMatchInfo::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool NoProfileMatchInfo::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool NoProfileMatchInfo::validate(std::stringstream &msg,
+                                  const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "NoProfileMatchInfo" : pathPrefix;
@@ -44,7 +44,7 @@ bool NoProfileMatchInfo::validate(
     success = false;
   }
   if (queryParamCombinationListIsSet()) {
-    const std::vector<oai::model::pcf::QueryParamCombination>& value =
+    const std::vector<oai::model::pcf::QueryParamCombination> &value =
         m_QueryParamCombinationList;
     const std::string currentValuePath =
         _pathPrefix + ".queryParamCombinationList";
@@ -53,15 +53,15 @@ bool NoProfileMatchInfo::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::QueryParamCombination& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::QueryParamCombination &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
-        success = value.validate(
-                      msg, currentValuePath + ".queryParamCombinationList") &&
+        success = value.validate(msg, currentValuePath +
+                                          ".queryParamCombinationList") &&
                   success;
 
         i++;
@@ -72,7 +72,7 @@ bool NoProfileMatchInfo::validate(
   return success;
 }
 
-bool NoProfileMatchInfo::operator==(const NoProfileMatchInfo& rhs) const {
+bool NoProfileMatchInfo::operator==(const NoProfileMatchInfo &rhs) const {
   return
 
       (getReason() == rhs.getReason()) &&
@@ -86,19 +86,19 @@ bool NoProfileMatchInfo::operator==(const NoProfileMatchInfo& rhs) const {
           ;
 }
 
-bool NoProfileMatchInfo::operator!=(const NoProfileMatchInfo& rhs) const {
+bool NoProfileMatchInfo::operator!=(const NoProfileMatchInfo &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const NoProfileMatchInfo& o) {
-  j           = nlohmann::json::object();
+void to_json(nlohmann::json &j, const NoProfileMatchInfo &o) {
+  j = nlohmann::json::object();
   j["reason"] = o.m_Reason;
   if (o.queryParamCombinationListIsSet() ||
       !o.m_QueryParamCombinationList.empty())
     j["queryParamCombinationList"] = o.m_QueryParamCombinationList;
 }
 
-void from_json(const nlohmann::json& j, NoProfileMatchInfo& o) {
+void from_json(const nlohmann::json &j, NoProfileMatchInfo &o) {
   j.at("reason").get_to(o.m_Reason);
   if (j.find("queryParamCombinationList") != j.end()) {
     j.at("queryParamCombinationList").get_to(o.m_QueryParamCombinationList);
@@ -110,7 +110,7 @@ oai::model::pcf::NoProfileMatchReason NoProfileMatchInfo::getReason() const {
   return m_Reason;
 }
 void NoProfileMatchInfo::setReason(
-    oai::model::pcf::NoProfileMatchReason const& value) {
+    oai::model::pcf::NoProfileMatchReason const &value) {
   m_Reason = value;
 }
 std::vector<oai::model::pcf::QueryParamCombination>
@@ -118,8 +118,8 @@ NoProfileMatchInfo::getQueryParamCombinationList() const {
   return m_QueryParamCombinationList;
 }
 void NoProfileMatchInfo::setQueryParamCombinationList(
-    std::vector<oai::model::pcf::QueryParamCombination> const& value) {
-  m_QueryParamCombinationList      = value;
+    std::vector<oai::model::pcf::QueryParamCombination> const &value) {
+  m_QueryParamCombinationList = value;
   m_QueryParamCombinationListIsSet = true;
 }
 bool NoProfileMatchInfo::queryParamCombinationListIsSet() const {
@@ -129,4 +129,4 @@ void NoProfileMatchInfo::unsetQueryParamCombinationList() {
   m_QueryParamCombinationListIsSet = false;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

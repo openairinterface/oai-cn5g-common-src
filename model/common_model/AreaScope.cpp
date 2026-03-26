@@ -20,9 +20,9 @@ namespace oai::model::common {
 
 AreaScope::AreaScope() {
   m_EutraCellIdListIsSet = false;
-  m_NrCellIdListIsSet    = false;
-  m_TacListIsSet         = false;
-  m_TacInfoPerPlmnIsSet  = false;
+  m_NrCellIdListIsSet = false;
+  m_TacListIsSet = false;
+  m_TacInfoPerPlmnIsSet = false;
 }
 
 void AreaScope::validate() const {
@@ -32,27 +32,27 @@ void AreaScope::validate() const {
   }
 }
 
-bool AreaScope::validate(std::stringstream& msg) const {
+bool AreaScope::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AreaScope::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool AreaScope::validate(std::stringstream &msg,
+                         const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "AreaScope" : pathPrefix;
 
   if (eutraCellIdListIsSet()) {
-    const std::vector<std::string>& value = m_EutraCellIdList;
-    const std::string currentValuePath    = _pathPrefix + ".eutraCellIdList";
+    const std::vector<std::string> &value = m_EutraCellIdList;
+    const std::string currentValuePath = _pathPrefix + ".eutraCellIdList";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const std::string& value : value) {
+      int i = 0;
+      for (const std::string &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -62,17 +62,17 @@ bool AreaScope::validate(
   }
 
   if (nrCellIdListIsSet()) {
-    const std::vector<std::string>& value = m_NrCellIdList;
-    const std::string currentValuePath    = _pathPrefix + ".nrCellIdList";
+    const std::vector<std::string> &value = m_NrCellIdList;
+    const std::string currentValuePath = _pathPrefix + ".nrCellIdList";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const std::string& value : value) {
+      int i = 0;
+      for (const std::string &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -82,17 +82,17 @@ bool AreaScope::validate(
   }
 
   if (tacListIsSet()) {
-    const std::vector<std::string>& value = m_TacList;
-    const std::string currentValuePath    = _pathPrefix + ".tacList";
+    const std::vector<std::string> &value = m_TacList;
+    const std::string currentValuePath = _pathPrefix + ".tacList";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const std::string& value : value) {
+      int i = 0;
+      for (const std::string &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -104,7 +104,7 @@ bool AreaScope::validate(
   return success;
 }
 
-bool AreaScope::operator==(const AreaScope& rhs) const {
+bool AreaScope::operator==(const AreaScope &rhs) const {
   return
 
       ((!eutraCellIdListIsSet() && !rhs.eutraCellIdListIsSet()) ||
@@ -126,22 +126,23 @@ bool AreaScope::operator==(const AreaScope& rhs) const {
           ;
 }
 
-bool AreaScope::operator!=(const AreaScope& rhs) const {
+bool AreaScope::operator!=(const AreaScope &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AreaScope& o) {
+void to_json(nlohmann::json &j, const AreaScope &o) {
   j = nlohmann::json();
   if (o.eutraCellIdListIsSet() || !o.m_EutraCellIdList.empty())
     j["eutraCellIdList"] = o.m_EutraCellIdList;
   if (o.nrCellIdListIsSet() || !o.m_NrCellIdList.empty())
     j["nrCellIdList"] = o.m_NrCellIdList;
-  if (o.tacListIsSet() || !o.m_TacList.empty()) j["tacList"] = o.m_TacList;
+  if (o.tacListIsSet() || !o.m_TacList.empty())
+    j["tacList"] = o.m_TacList;
   if (o.tacInfoPerPlmnIsSet() || !o.m_TacInfoPerPlmn.empty())
     j["tacInfoPerPlmn"] = o.m_TacInfoPerPlmn;
 }
 
-void from_json(const nlohmann::json& j, AreaScope& o) {
+void from_json(const nlohmann::json &j, AreaScope &o) {
   if (j.find("eutraCellIdList") != j.end()) {
     j.at("eutraCellIdList").get_to(o.m_EutraCellIdList);
     o.m_EutraCellIdListIsSet = true;
@@ -163,56 +164,38 @@ void from_json(const nlohmann::json& j, AreaScope& o) {
 std::vector<std::string> AreaScope::getEutraCellIdList() const {
   return m_EutraCellIdList;
 }
-void AreaScope::setEutraCellIdList(std::vector<std::string> const& value) {
-  m_EutraCellIdList      = value;
+void AreaScope::setEutraCellIdList(std::vector<std::string> const &value) {
+  m_EutraCellIdList = value;
   m_EutraCellIdListIsSet = true;
 }
-bool AreaScope::eutraCellIdListIsSet() const {
-  return m_EutraCellIdListIsSet;
-}
-void AreaScope::unsetEutraCellIdList() {
-  m_EutraCellIdListIsSet = false;
-}
+bool AreaScope::eutraCellIdListIsSet() const { return m_EutraCellIdListIsSet; }
+void AreaScope::unsetEutraCellIdList() { m_EutraCellIdListIsSet = false; }
 std::vector<std::string> AreaScope::getNrCellIdList() const {
   return m_NrCellIdList;
 }
-void AreaScope::setNrCellIdList(std::vector<std::string> const& value) {
-  m_NrCellIdList      = value;
+void AreaScope::setNrCellIdList(std::vector<std::string> const &value) {
+  m_NrCellIdList = value;
   m_NrCellIdListIsSet = true;
 }
-bool AreaScope::nrCellIdListIsSet() const {
-  return m_NrCellIdListIsSet;
-}
-void AreaScope::unsetNrCellIdList() {
-  m_NrCellIdListIsSet = false;
-}
-std::vector<std::string> AreaScope::getTacList() const {
-  return m_TacList;
-}
-void AreaScope::setTacList(std::vector<std::string> const& value) {
-  m_TacList      = value;
+bool AreaScope::nrCellIdListIsSet() const { return m_NrCellIdListIsSet; }
+void AreaScope::unsetNrCellIdList() { m_NrCellIdListIsSet = false; }
+std::vector<std::string> AreaScope::getTacList() const { return m_TacList; }
+void AreaScope::setTacList(std::vector<std::string> const &value) {
+  m_TacList = value;
   m_TacListIsSet = true;
 }
-bool AreaScope::tacListIsSet() const {
-  return m_TacListIsSet;
-}
-void AreaScope::unsetTacList() {
-  m_TacListIsSet = false;
-}
+bool AreaScope::tacListIsSet() const { return m_TacListIsSet; }
+void AreaScope::unsetTacList() { m_TacListIsSet = false; }
 std::map<std::string, oai::model::common::TacInfo>
 AreaScope::getTacInfoPerPlmn() const {
   return m_TacInfoPerPlmn;
 }
 void AreaScope::setTacInfoPerPlmn(
-    std::map<std::string, oai::model::common::TacInfo> const& value) {
-  m_TacInfoPerPlmn      = value;
+    std::map<std::string, oai::model::common::TacInfo> const &value) {
+  m_TacInfoPerPlmn = value;
   m_TacInfoPerPlmnIsSet = true;
 }
-bool AreaScope::tacInfoPerPlmnIsSet() const {
-  return m_TacInfoPerPlmnIsSet;
-}
-void AreaScope::unsetTacInfoPerPlmn() {
-  m_TacInfoPerPlmnIsSet = false;
-}
+bool AreaScope::tacInfoPerPlmnIsSet() const { return m_TacInfoPerPlmnIsSet; }
+void AreaScope::unsetTacInfoPerPlmn() { m_TacInfoPerPlmnIsSet = false; }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

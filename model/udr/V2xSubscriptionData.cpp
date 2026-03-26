@@ -19,12 +19,12 @@
 namespace oai::udr::model {
 
 V2xSubscriptionData::V2xSubscriptionData() {
-  m_NrV2xServicesAuthIsSet  = false;
+  m_NrV2xServicesAuthIsSet = false;
   m_LteV2xServicesAuthIsSet = false;
-  m_NrUePc5Ambr             = "";
-  m_NrUePc5AmbrIsSet        = false;
-  m_LtePc5Ambr              = "";
-  m_LtePc5AmbrIsSet         = false;
+  m_NrUePc5Ambr = "";
+  m_NrUePc5AmbrIsSet = false;
+  m_LtePc5Ambr = "";
+  m_LtePc5AmbrIsSet = false;
 }
 
 V2xSubscriptionData::~V2xSubscriptionData() {}
@@ -33,17 +33,19 @@ void V2xSubscriptionData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const V2xSubscriptionData& o) {
+void to_json(nlohmann::json &j, const V2xSubscriptionData &o) {
   j = nlohmann::json();
   if (o.nrV2xServicesAuthIsSet())
     j["nrV2xServicesAuth"] = o.m_NrV2xServicesAuth;
   if (o.lteV2xServicesAuthIsSet())
     j["lteV2xServicesAuth"] = o.m_LteV2xServicesAuth;
-  if (o.nrUePc5AmbrIsSet()) j["nrUePc5Ambr"] = o.m_NrUePc5Ambr;
-  if (o.ltePc5AmbrIsSet()) j["ltePc5Ambr"] = o.m_LtePc5Ambr;
+  if (o.nrUePc5AmbrIsSet())
+    j["nrUePc5Ambr"] = o.m_NrUePc5Ambr;
+  if (o.ltePc5AmbrIsSet())
+    j["ltePc5Ambr"] = o.m_LtePc5Ambr;
 }
 
-void from_json(const nlohmann::json& j, V2xSubscriptionData& o) {
+void from_json(const nlohmann::json &j, V2xSubscriptionData &o) {
   if (j.find("nrV2xServicesAuth") != j.end()) {
     j.at("nrV2xServicesAuth").get_to(o.m_NrV2xServicesAuth);
     o.m_NrV2xServicesAuthIsSet = true;
@@ -62,13 +64,13 @@ void from_json(const nlohmann::json& j, V2xSubscriptionData& o) {
   }
 }
 
-oai::model::common::NrV2xAuth V2xSubscriptionData::getNrV2xServicesAuth()
-    const {
+oai::model::common::NrV2xAuth
+V2xSubscriptionData::getNrV2xServicesAuth() const {
   return m_NrV2xServicesAuth;
 }
 void V2xSubscriptionData::setNrV2xServicesAuth(
-    oai::model::common::NrV2xAuth const& value) {
-  m_NrV2xServicesAuth      = value;
+    oai::model::common::NrV2xAuth const &value) {
+  m_NrV2xServicesAuth = value;
   m_NrV2xServicesAuthIsSet = true;
 }
 bool V2xSubscriptionData::nrV2xServicesAuthIsSet() const {
@@ -77,13 +79,13 @@ bool V2xSubscriptionData::nrV2xServicesAuthIsSet() const {
 void V2xSubscriptionData::unsetNrV2xServicesAuth() {
   m_NrV2xServicesAuthIsSet = false;
 }
-oai::model::common::LteV2xAuth V2xSubscriptionData::getLteV2xServicesAuth()
-    const {
+oai::model::common::LteV2xAuth
+V2xSubscriptionData::getLteV2xServicesAuth() const {
   return m_LteV2xServicesAuth;
 }
 void V2xSubscriptionData::setLteV2xServicesAuth(
-    oai::model::common::LteV2xAuth const& value) {
-  m_LteV2xServicesAuth      = value;
+    oai::model::common::LteV2xAuth const &value) {
+  m_LteV2xServicesAuth = value;
   m_LteV2xServicesAuthIsSet = true;
 }
 bool V2xSubscriptionData::lteV2xServicesAuthIsSet() const {
@@ -95,28 +97,20 @@ void V2xSubscriptionData::unsetLteV2xServicesAuth() {
 std::string V2xSubscriptionData::getNrUePc5Ambr() const {
   return m_NrUePc5Ambr;
 }
-void V2xSubscriptionData::setNrUePc5Ambr(std::string const& value) {
-  m_NrUePc5Ambr      = value;
+void V2xSubscriptionData::setNrUePc5Ambr(std::string const &value) {
+  m_NrUePc5Ambr = value;
   m_NrUePc5AmbrIsSet = true;
 }
 bool V2xSubscriptionData::nrUePc5AmbrIsSet() const {
   return m_NrUePc5AmbrIsSet;
 }
-void V2xSubscriptionData::unsetNrUePc5Ambr() {
-  m_NrUePc5AmbrIsSet = false;
-}
-std::string V2xSubscriptionData::getLtePc5Ambr() const {
-  return m_LtePc5Ambr;
-}
-void V2xSubscriptionData::setLtePc5Ambr(std::string const& value) {
-  m_LtePc5Ambr      = value;
+void V2xSubscriptionData::unsetNrUePc5Ambr() { m_NrUePc5AmbrIsSet = false; }
+std::string V2xSubscriptionData::getLtePc5Ambr() const { return m_LtePc5Ambr; }
+void V2xSubscriptionData::setLtePc5Ambr(std::string const &value) {
+  m_LtePc5Ambr = value;
   m_LtePc5AmbrIsSet = true;
 }
-bool V2xSubscriptionData::ltePc5AmbrIsSet() const {
-  return m_LtePc5AmbrIsSet;
-}
-void V2xSubscriptionData::unsetLtePc5Ambr() {
-  m_LtePc5AmbrIsSet = false;
-}
+bool V2xSubscriptionData::ltePc5AmbrIsSet() const { return m_LtePc5AmbrIsSet; }
+void V2xSubscriptionData::unsetLtePc5Ambr() { m_LtePc5AmbrIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

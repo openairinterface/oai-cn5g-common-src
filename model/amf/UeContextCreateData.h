@@ -19,14 +19,14 @@
 #ifndef UeContextCreateData_H_
 #define UeContextCreateData_H_
 
-#include "NgApCause.h"
 #include "N2InfoContent.h"
 #include "N2SmInformation.h"
+#include "NgApCause.h"
 #include "NgRanTargetId.h"
 #include "UeContext.h"
+#include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
-#include <nlohmann/json.hpp>
 
 namespace oai::model::amf {
 
@@ -34,7 +34,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class UeContextCreateData {
- public:
+public:
   UeContextCreateData();
   virtual ~UeContextCreateData();
 
@@ -47,61 +47,61 @@ class UeContextCreateData {
   ///
   /// </summary>
   UeContext getUeContext() const;
-  void setUeContext(UeContext const& value);
+  void setUeContext(UeContext const &value);
   /// <summary>
   ///
   /// </summary>
   NgRanTargetId getTargetId() const;
-  void setTargetId(NgRanTargetId const& value);
+  void setTargetId(NgRanTargetId const &value);
   /// <summary>
   ///
   /// </summary>
   N2InfoContent getSourceToTargetData() const;
-  void setSourceToTargetData(N2InfoContent const& value);
+  void setSourceToTargetData(N2InfoContent const &value);
   /// <summary>
   ///
   /// </summary>
-  std::vector<N2SmInformation>& getPduSessionList();
+  std::vector<N2SmInformation> &getPduSessionList();
   /// <summary>
   ///
   /// </summary>
   std::string getMmeControlFteid() const;
-  void setMmeControlFteid(std::string const& value);
+  void setMmeControlFteid(std::string const &value);
   bool mmeControlFteidIsSet() const;
   void unsetMmeControlFteid();
   /// <summary>
   ///
   /// </summary>
   std::string getN2NotifyUri() const;
-  void setN2NotifyUri(std::string const& value);
+  void setN2NotifyUri(std::string const &value);
   bool n2NotifyUriIsSet() const;
   void unsetN2NotifyUri();
   /// <summary>
   ///
   /// </summary>
   N2InfoContent getUeRadioCapability() const;
-  void setUeRadioCapability(N2InfoContent const& value);
+  void setUeRadioCapability(N2InfoContent const &value);
   bool ueRadioCapabilityIsSet() const;
   void unsetUeRadioCapability();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::NgApCause getNgapCause() const;
-  void setNgapCause(oai::model::common::NgApCause const& value);
+  void setNgapCause(oai::model::common::NgApCause const &value);
   bool ngapCauseIsSet() const;
   void unsetNgapCause();
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
 
-  friend void to_json(nlohmann::json& j, const UeContextCreateData& o);
-  friend void from_json(const nlohmann::json& j, UeContextCreateData& o);
+  friend void to_json(nlohmann::json &j, const UeContextCreateData &o);
+  friend void from_json(const nlohmann::json &j, UeContextCreateData &o);
 
- protected:
+protected:
   UeContext m_UeContext;
 
   NgRanTargetId m_TargetId;
@@ -122,6 +122,6 @@ class UeContextCreateData {
   bool m_SupportedFeaturesIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* UeContextCreateData_H_ */

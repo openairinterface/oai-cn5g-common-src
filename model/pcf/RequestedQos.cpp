@@ -21,10 +21,10 @@ namespace oai::model::pcf {
 using namespace oai::model::common;
 
 RequestedQos::RequestedQos() {
-  m_r_5qi      = 0;
-  m_GbrUl      = "";
+  m_r_5qi = 0;
+  m_GbrUl = "";
   m_GbrUlIsSet = false;
-  m_GbrDl      = "";
+  m_GbrDl = "";
   m_GbrDlIsSet = false;
 }
 
@@ -35,18 +35,18 @@ void RequestedQos::validate() const {
   }
 }
 
-bool RequestedQos::validate(std::stringstream& msg) const {
+bool RequestedQos::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool RequestedQos::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool RequestedQos::validate(std::stringstream &msg,
+                            const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "RequestedQos" : pathPrefix;
 
   /* r_5qi */ {
-    const int32_t& value               = m_r_5qi;
+    const int32_t &value = m_r_5qi;
     const std::string currentValuePath = _pathPrefix + ".r5qi";
 
     if (value < 0) {
@@ -60,23 +60,23 @@ bool RequestedQos::validate(
   }
 
   if (gbrUlIsSet()) {
-    const std::string& value           = m_GbrUl;
+    const std::string &value = m_GbrUl;
     const std::string currentValuePath = _pathPrefix + ".gbrUl";
-    success &= helpers::validate_regex(
-        helpers::BANDWIDTH_VALIDATION_REGEX, value, msg, currentValuePath);
+    success &= helpers::validate_regex(helpers::BANDWIDTH_VALIDATION_REGEX,
+                                       value, msg, currentValuePath);
   }
 
   if (gbrDlIsSet()) {
-    const std::string& value           = m_GbrDl;
+    const std::string &value = m_GbrDl;
     const std::string currentValuePath = _pathPrefix + ".gbrDl";
-    success &= helpers::validate_regex(
-        helpers::BANDWIDTH_VALIDATION_REGEX, value, msg, currentValuePath);
+    success &= helpers::validate_regex(helpers::BANDWIDTH_VALIDATION_REGEX,
+                                       value, msg, currentValuePath);
   }
 
   return success;
 }
 
-bool RequestedQos::operator==(const RequestedQos& rhs) const {
+bool RequestedQos::operator==(const RequestedQos &rhs) const {
   return
 
       (getR5qi() == rhs.getR5qi()) &&
@@ -90,18 +90,20 @@ bool RequestedQos::operator==(const RequestedQos& rhs) const {
           ;
 }
 
-bool RequestedQos::operator!=(const RequestedQos& rhs) const {
+bool RequestedQos::operator!=(const RequestedQos &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const RequestedQos& o) {
-  j        = nlohmann::json();
+void to_json(nlohmann::json &j, const RequestedQos &o) {
+  j = nlohmann::json();
   j["5qi"] = o.m_r_5qi;
-  if (o.gbrUlIsSet()) j["gbrUl"] = o.m_GbrUl;
-  if (o.gbrDlIsSet()) j["gbrDl"] = o.m_GbrDl;
+  if (o.gbrUlIsSet())
+    j["gbrUl"] = o.m_GbrUl;
+  if (o.gbrDlIsSet())
+    j["gbrDl"] = o.m_GbrDl;
 }
 
-void from_json(const nlohmann::json& j, RequestedQos& o) {
+void from_json(const nlohmann::json &j, RequestedQos &o) {
   j.at("5qi").get_to(o.m_r_5qi);
   if (j.find("gbrUl") != j.end()) {
     j.at("gbrUl").get_to(o.m_GbrUl);
@@ -113,37 +115,21 @@ void from_json(const nlohmann::json& j, RequestedQos& o) {
   }
 }
 
-int32_t RequestedQos::getR5qi() const {
-  return m_r_5qi;
-}
-void RequestedQos::setR5qi(int32_t const value) {
-  m_r_5qi = value;
-}
-std::string RequestedQos::getGbrUl() const {
-  return m_GbrUl;
-}
-void RequestedQos::setGbrUl(std::string const& value) {
-  m_GbrUl      = value;
+int32_t RequestedQos::getR5qi() const { return m_r_5qi; }
+void RequestedQos::setR5qi(int32_t const value) { m_r_5qi = value; }
+std::string RequestedQos::getGbrUl() const { return m_GbrUl; }
+void RequestedQos::setGbrUl(std::string const &value) {
+  m_GbrUl = value;
   m_GbrUlIsSet = true;
 }
-bool RequestedQos::gbrUlIsSet() const {
-  return m_GbrUlIsSet;
-}
-void RequestedQos::unsetGbrUl() {
-  m_GbrUlIsSet = false;
-}
-std::string RequestedQos::getGbrDl() const {
-  return m_GbrDl;
-}
-void RequestedQos::setGbrDl(std::string const& value) {
-  m_GbrDl      = value;
+bool RequestedQos::gbrUlIsSet() const { return m_GbrUlIsSet; }
+void RequestedQos::unsetGbrUl() { m_GbrUlIsSet = false; }
+std::string RequestedQos::getGbrDl() const { return m_GbrDl; }
+void RequestedQos::setGbrDl(std::string const &value) {
+  m_GbrDl = value;
   m_GbrDlIsSet = true;
 }
-bool RequestedQos::gbrDlIsSet() const {
-  return m_GbrDlIsSet;
-}
-void RequestedQos::unsetGbrDl() {
-  m_GbrDlIsSet = false;
-}
+bool RequestedQos::gbrDlIsSet() const { return m_GbrDlIsSet; }
+void RequestedQos::unsetGbrDl() { m_GbrDlIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

@@ -20,14 +20,14 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_Range {
-  Ngap_Range_m50   = 0,
-  Ngap_Range_m80   = 1,
-  Ngap_Range_m180  = 2,
-  Ngap_Range_m200  = 3,
-  Ngap_Range_m350  = 4,
-  Ngap_Range_m400  = 5,
-  Ngap_Range_m500  = 6,
-  Ngap_Range_m700  = 7,
+  Ngap_Range_m50 = 0,
+  Ngap_Range_m80 = 1,
+  Ngap_Range_m180 = 2,
+  Ngap_Range_m200 = 3,
+  Ngap_Range_m350 = 4,
+  Ngap_Range_m400 = 5,
+  Ngap_Range_m500 = 6,
+  Ngap_Range_m700 = 7,
   Ngap_Range_m1000 = 8
   /*
    * Enumeration is extensible

@@ -16,10 +16,10 @@
 namespace oai::model::nrf {
 
 BsfInfo::BsfInfo() {
-  m_DnnListIsSet           = false;
-  m_IpDomainListIsSet      = false;
+  m_DnnListIsSet = false;
+  m_IpDomainListIsSet = false;
   m_Ipv4AddressRangesIsSet = false;
-  m_Ipv6PrefixRangesIsSet  = false;
+  m_Ipv6PrefixRangesIsSet = false;
 }
 
 BsfInfo::~BsfInfo() {}
@@ -28,9 +28,10 @@ void BsfInfo::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const BsfInfo& o) {
+void to_json(nlohmann::json &j, const BsfInfo &o) {
   j = nlohmann::json();
-  if (o.dnnListIsSet() || !o.m_DnnList.empty()) j["dnnList"] = o.m_DnnList;
+  if (o.dnnListIsSet() || !o.m_DnnList.empty())
+    j["dnnList"] = o.m_DnnList;
   if (o.ipDomainListIsSet() || !o.m_IpDomainList.empty())
     j["ipDomainList"] = o.m_IpDomainList;
   if (o.ipv4AddressRangesIsSet() || !o.m_Ipv4AddressRanges.empty())
@@ -39,7 +40,7 @@ void to_json(nlohmann::json& j, const BsfInfo& o) {
     j["ipv6PrefixRanges"] = o.m_Ipv6PrefixRanges;
 }
 
-void from_json(const nlohmann::json& j, BsfInfo& o) {
+void from_json(const nlohmann::json &j, BsfInfo &o) {
   if (j.find("dnnList") != j.end()) {
     j.at("dnnList").get_to(o.m_DnnList);
     o.m_DnnListIsSet = true;
@@ -58,57 +59,39 @@ void from_json(const nlohmann::json& j, BsfInfo& o) {
   }
 }
 
-std::vector<std::string>& BsfInfo::getDnnList() {
-  return m_DnnList;
-}
-void BsfInfo::setDnnList(std::vector<std::string> const& value) {
-  m_DnnList      = value;
+std::vector<std::string> &BsfInfo::getDnnList() { return m_DnnList; }
+void BsfInfo::setDnnList(std::vector<std::string> const &value) {
+  m_DnnList = value;
   m_DnnListIsSet = true;
 }
-bool BsfInfo::dnnListIsSet() const {
-  return m_DnnListIsSet;
-}
-void BsfInfo::unsetDnnList() {
-  m_DnnListIsSet = false;
-}
-std::vector<std::string>& BsfInfo::getIpDomainList() {
-  return m_IpDomainList;
-}
-void BsfInfo::setIpDomainList(std::vector<std::string> const& value) {
-  m_IpDomainList      = value;
+bool BsfInfo::dnnListIsSet() const { return m_DnnListIsSet; }
+void BsfInfo::unsetDnnList() { m_DnnListIsSet = false; }
+std::vector<std::string> &BsfInfo::getIpDomainList() { return m_IpDomainList; }
+void BsfInfo::setIpDomainList(std::vector<std::string> const &value) {
+  m_IpDomainList = value;
   m_IpDomainListIsSet = true;
 }
-bool BsfInfo::ipDomainListIsSet() const {
-  return m_IpDomainListIsSet;
-}
-void BsfInfo::unsetIpDomainList() {
-  m_IpDomainListIsSet = false;
-}
-std::vector<Ipv4AddressRange>& BsfInfo::getIpv4AddressRanges() {
+bool BsfInfo::ipDomainListIsSet() const { return m_IpDomainListIsSet; }
+void BsfInfo::unsetIpDomainList() { m_IpDomainListIsSet = false; }
+std::vector<Ipv4AddressRange> &BsfInfo::getIpv4AddressRanges() {
   return m_Ipv4AddressRanges;
 }
-void BsfInfo::setIpv4AddressRanges(std::vector<Ipv4AddressRange> const& value) {
-  m_Ipv4AddressRanges      = value;
+void BsfInfo::setIpv4AddressRanges(std::vector<Ipv4AddressRange> const &value) {
+  m_Ipv4AddressRanges = value;
   m_Ipv4AddressRangesIsSet = true;
 }
 bool BsfInfo::ipv4AddressRangesIsSet() const {
   return m_Ipv4AddressRangesIsSet;
 }
-void BsfInfo::unsetIpv4AddressRanges() {
-  m_Ipv4AddressRangesIsSet = false;
-}
-std::vector<Ipv6PrefixRange>& BsfInfo::getIpv6PrefixRanges() {
+void BsfInfo::unsetIpv4AddressRanges() { m_Ipv4AddressRangesIsSet = false; }
+std::vector<Ipv6PrefixRange> &BsfInfo::getIpv6PrefixRanges() {
   return m_Ipv6PrefixRanges;
 }
-void BsfInfo::setIpv6PrefixRanges(std::vector<Ipv6PrefixRange> const& value) {
-  m_Ipv6PrefixRanges      = value;
+void BsfInfo::setIpv6PrefixRanges(std::vector<Ipv6PrefixRange> const &value) {
+  m_Ipv6PrefixRanges = value;
   m_Ipv6PrefixRangesIsSet = true;
 }
-bool BsfInfo::ipv6PrefixRangesIsSet() const {
-  return m_Ipv6PrefixRangesIsSet;
-}
-void BsfInfo::unsetIpv6PrefixRanges() {
-  m_Ipv6PrefixRangesIsSet = false;
-}
+bool BsfInfo::ipv6PrefixRangesIsSet() const { return m_Ipv6PrefixRangesIsSet; }
+void BsfInfo::unsetIpv6PrefixRanges() { m_Ipv6PrefixRangesIsSet = false; }
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

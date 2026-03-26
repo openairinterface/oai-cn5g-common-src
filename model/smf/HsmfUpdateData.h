@@ -19,25 +19,25 @@
 #ifndef HsmfUpdateData_H_
 #define HsmfUpdateData_H_
 
+#include "AccessType.h"
+#include "Cause.h"
+#include "EpsInterworkingIndication.h"
 #include "MaReleaseIndication.h"
-#include "RatType.h"
-#include "RefToBinaryData.h"
-#include <string>
-#include "QosFlowNotifyItem.h"
+#include "NgApCause.h"
+#include "PduSessionNotifyItem.h"
 #include "PlmnId.h"
 #include "QosFlowItem.h"
-#include "SecondaryRatUsageReport.h"
-#include <vector>
-#include "AccessType.h"
+#include "QosFlowNotifyItem.h"
+#include "RatType.h"
+#include "RefToBinaryData.h"
 #include "RequestIndication.h"
-#include "NgApCause.h"
 #include "SecondaryRatUsageInfo.h"
-#include "EpsInterworkingIndication.h"
-#include "Cause.h"
-#include "UserLocation.h"
-#include "PduSessionNotifyItem.h"
+#include "SecondaryRatUsageReport.h"
 #include "TunnelInfo.h"
+#include "UserLocation.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::smf {
 
@@ -45,7 +45,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class HsmfUpdateData {
- public:
+public:
   HsmfUpdateData();
   virtual ~HsmfUpdateData();
 
@@ -58,68 +58,68 @@ class HsmfUpdateData {
   ///
   /// </summary>
   RequestIndication getRequestIndication() const;
-  void setRequestIndication(RequestIndication const& value);
+  void setRequestIndication(RequestIndication const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getPei() const;
-  void setPei(std::string const& value);
+  void setPei(std::string const &value);
   bool peiIsSet() const;
   void unsetPei();
   /// <summary>
   ///
   /// </summary>
   TunnelInfo getVcnTunnelInfo() const;
-  void setVcnTunnelInfo(TunnelInfo const& value);
+  void setVcnTunnelInfo(TunnelInfo const &value);
   bool vcnTunnelInfoIsSet() const;
   void unsetVcnTunnelInfo();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::PlmnId getServingNetwork() const;
-  void setServingNetwork(oai::model::common::PlmnId const& value);
+  void setServingNetwork(oai::model::common::PlmnId const &value);
   bool servingNetworkIsSet() const;
   void unsetServingNetwork();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::AccessType getAnType() const;
-  void setAnType(oai::model::common::AccessType const& value);
+  void setAnType(oai::model::common::AccessType const &value);
   bool anTypeIsSet() const;
   void unsetAnType();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::AccessType getSecondAnType() const;
-  void setSecondAnType(oai::model::common::AccessType const& value);
+  void setSecondAnType(oai::model::common::AccessType const &value);
   bool secondAnTypeIsSet() const;
   void unsetSecondAnType();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::RatType getRatType() const;
-  void setRatType(oai::model::common::RatType const& value);
+  void setRatType(oai::model::common::RatType const &value);
   bool ratTypeIsSet() const;
   void unsetRatType();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::UserLocation getUeLocation() const;
-  void setUeLocation(oai::model::common::UserLocation const& value);
+  void setUeLocation(oai::model::common::UserLocation const &value);
   bool ueLocationIsSet() const;
   void unsetUeLocation();
   /// <summary>
   ///
   /// </summary>
   std::string getUeTimeZone() const;
-  void setUeTimeZone(std::string const& value);
+  void setUeTimeZone(std::string const &value);
   bool ueTimeZoneIsSet() const;
   void unsetUeTimeZone();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::UserLocation getAddUeLocation() const;
-  void setAddUeLocation(oai::model::common::UserLocation const& value);
+  void setAddUeLocation(oai::model::common::UserLocation const &value);
   bool addUeLocationIsSet() const;
   void unsetAddUeLocation();
   /// <summary>
@@ -140,38 +140,38 @@ class HsmfUpdateData {
   ///
   /// </summary>
   oai::model::common::RefToBinaryData getN1SmInfoFromUe() const;
-  void setN1SmInfoFromUe(oai::model::common::RefToBinaryData const& value);
+  void setN1SmInfoFromUe(oai::model::common::RefToBinaryData const &value);
   bool n1SmInfoFromUeIsSet() const;
   void unsetN1SmInfoFromUe();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::RefToBinaryData getUnknownN1SmInfo() const;
-  void setUnknownN1SmInfo(oai::model::common::RefToBinaryData const& value);
+  void setUnknownN1SmInfo(oai::model::common::RefToBinaryData const &value);
   bool unknownN1SmInfoIsSet() const;
   void unsetUnknownN1SmInfo();
   /// <summary>
   ///
   /// </summary>
-  std::vector<QosFlowItem>& getQosFlowsRelNotifyList();
+  std::vector<QosFlowItem> &getQosFlowsRelNotifyList();
   bool qosFlowsRelNotifyListIsSet() const;
   void unsetQosFlowsRelNotifyList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<QosFlowNotifyItem>& getQosFlowsNotifyList();
+  std::vector<QosFlowNotifyItem> &getQosFlowsNotifyList();
   bool qosFlowsNotifyListIsSet() const;
   void unsetQosFlowsNotifyList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<PduSessionNotifyItem>& getNotifyList();
+  std::vector<PduSessionNotifyItem> &getNotifyList();
   bool notifyListIsSet() const;
   void unsetNotifyList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<int32_t>& getEpsBearerId();
+  std::vector<int32_t> &getEpsBearerId();
   bool epsBearerIdIsSet() const;
   void unsetEpsBearerId();
   /// <summary>
@@ -184,21 +184,21 @@ class HsmfUpdateData {
   /// <summary>
   ///
   /// </summary>
-  std::vector<int32_t>& getRevokeEbiList();
+  std::vector<int32_t> &getRevokeEbiList();
   bool revokeEbiListIsSet() const;
   void unsetRevokeEbiList();
   /// <summary>
   ///
   /// </summary>
   Cause getCause() const;
-  void setCause(Cause const& value);
+  void setCause(Cause const &value);
   bool causeIsSet() const;
   void unsetCause();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::NgApCause getNgApCause() const;
-  void setNgApCause(oai::model::common::NgApCause const& value);
+  void setNgApCause(oai::model::common::NgApCause const &value);
   bool ngApCauseIsSet() const;
   void unsetNgApCause();
   /// <summary>
@@ -219,20 +219,20 @@ class HsmfUpdateData {
   ///
   /// </summary>
   EpsInterworkingIndication getEpsInterworkingInd() const;
-  void setEpsInterworkingInd(EpsInterworkingIndication const& value);
+  void setEpsInterworkingInd(EpsInterworkingIndication const &value);
   bool epsInterworkingIndIsSet() const;
   void unsetEpsInterworkingInd();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::SecondaryRatUsageReport>&
+  std::vector<oai::model::common::SecondaryRatUsageReport> &
   getSecondaryRatUsageReport();
   bool secondaryRatUsageReportIsSet() const;
   void unsetSecondaryRatUsageReport();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::SecondaryRatUsageInfo>&
+  std::vector<oai::model::common::SecondaryRatUsageInfo> &
   getSecondaryRatUsageInfo();
   bool secondaryRatUsageInfoIsSet() const;
   void unsetSecondaryRatUsageInfo();
@@ -247,14 +247,14 @@ class HsmfUpdateData {
   ///
   /// </summary>
   MaReleaseIndication getMaReleaseInd() const;
-  void setMaReleaseInd(MaReleaseIndication const& value);
+  void setMaReleaseInd(MaReleaseIndication const &value);
   bool maReleaseIndIsSet() const;
   void unsetMaReleaseInd();
 
-  friend void to_json(nlohmann::json& j, const HsmfUpdateData& o);
-  friend void from_json(const nlohmann::json& j, HsmfUpdateData& o);
+  friend void to_json(nlohmann::json &j, const HsmfUpdateData &o);
+  friend void from_json(const nlohmann::json &j, HsmfUpdateData &o);
 
- protected:
+protected:
   RequestIndication m_RequestIndication;
 
   std::string m_Pei;
@@ -317,6 +317,6 @@ class HsmfUpdateData {
   bool m_MaReleaseIndIsSet;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* HsmfUpdateData_H_ */

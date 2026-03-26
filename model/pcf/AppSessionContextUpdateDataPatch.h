@@ -30,7 +30,7 @@ namespace oai::model::pcf {
 /// and/or the modifications to the sub-resource Events Subscription.
 /// </summary>
 class AppSessionContextUpdateDataPatch {
- public:
+public:
   AppSessionContextUpdateDataPatch();
   virtual ~AppSessionContextUpdateDataPatch() = default;
 
@@ -44,16 +44,16 @@ class AppSessionContextUpdateDataPatch {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const AppSessionContextUpdateDataPatch& rhs) const;
-  bool operator!=(const AppSessionContextUpdateDataPatch& rhs) const;
+  bool operator==(const AppSessionContextUpdateDataPatch &rhs) const;
+  bool operator!=(const AppSessionContextUpdateDataPatch &rhs) const;
 
   /////////////////////////////////////////////
   /// AppSessionContextUpdateDataPatch members
@@ -62,20 +62,20 @@ class AppSessionContextUpdateDataPatch {
   ///
   /// </summary>
   oai::model::pcf::AppSessionContextUpdateData getAscReqData() const;
-  void setAscReqData(oai::model::pcf::AppSessionContextUpdateData const& value);
+  void setAscReqData(oai::model::pcf::AppSessionContextUpdateData const &value);
   bool ascReqDataIsSet() const;
   void unsetAscReqData();
 
-  friend void to_json(
-      nlohmann::json& j, const AppSessionContextUpdateDataPatch& o);
-  friend void from_json(
-      const nlohmann::json& j, AppSessionContextUpdateDataPatch& o);
+  friend void to_json(nlohmann::json &j,
+                      const AppSessionContextUpdateDataPatch &o);
+  friend void from_json(const nlohmann::json &j,
+                        AppSessionContextUpdateDataPatch &o);
 
- protected:
+protected:
   oai::model::pcf::AppSessionContextUpdateData m_AscReqData;
   bool m_AscReqDataIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* AppSessionContextUpdateDataPatch_H_ */

@@ -36,7 +36,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class IptvConfigData {
- public:
+public:
   IptvConfigData();
   virtual ~IptvConfigData();
 
@@ -49,60 +49,60 @@ class IptvConfigData {
   ///
   /// </summary>
   std::string getSupi() const;
-  void setSupi(std::string const& value);
+  void setSupi(std::string const &value);
   bool supiIsSet() const;
   void unsetSupi();
   /// <summary>
   ///
   /// </summary>
   std::string getInterGroupId() const;
-  void setInterGroupId(std::string const& value);
+  void setInterGroupId(std::string const &value);
   bool interGroupIdIsSet() const;
   void unsetInterGroupId();
   /// <summary>
   ///
   /// </summary>
   std::string getDnn() const;
-  void setDnn(std::string const& value);
+  void setDnn(std::string const &value);
   bool dnnIsSet() const;
   void unsetDnn();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Snssai getSnssai() const;
-  void setSnssai(oai::model::common::Snssai const& value);
+  void setSnssai(oai::model::common::Snssai const &value);
   bool snssaiIsSet() const;
   void unsetSnssai();
   /// <summary>
   ///
   /// </summary>
   std::string getAfAppId() const;
-  void setAfAppId(std::string const& value);
+  void setAfAppId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
-  std::map<std::string, MulticastAccessControl>& getMultiAccCtrls();
-  void setMultiAccCtrls(
-      std::map<std::string, MulticastAccessControl> const& value);
+  std::map<std::string, MulticastAccessControl> &getMultiAccCtrls();
+  void
+  setMultiAccCtrls(std::map<std::string, MulticastAccessControl> const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getSuppFeat() const;
-  void setSuppFeat(std::string const& value);
+  void setSuppFeat(std::string const &value);
   bool suppFeatIsSet() const;
   void unsetSuppFeat();
   /// <summary>
   ///
   /// </summary>
   std::string getResUri() const;
-  void setResUri(std::string const& value);
+  void setResUri(std::string const &value);
   bool resUriIsSet() const;
   void unsetResUri();
 
-  friend void to_json(nlohmann::json& j, const IptvConfigData& o);
-  friend void from_json(const nlohmann::json& j, IptvConfigData& o);
+  friend void to_json(nlohmann::json &j, const IptvConfigData &o);
+  friend void from_json(const nlohmann::json &j, IptvConfigData &o);
 
- protected:
+protected:
   std::string m_Supi;
   bool m_SupiIsSet;
   std::string m_InterGroupId;
@@ -121,6 +121,6 @@ class IptvConfigData {
   bool m_ResUriIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* IptvConfigData_H_ */

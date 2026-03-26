@@ -20,8 +20,8 @@
 #define NotificationInfo_H_
 
 #include "NotificationSubscription.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::udsf {
 
@@ -29,7 +29,7 @@ namespace oai::model::udsf {
 ///
 /// </summary>
 class NotificationInfo {
- public:
+public:
   NotificationInfo();
   virtual ~NotificationInfo() = default;
 
@@ -43,16 +43,16 @@ class NotificationInfo {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const NotificationInfo& rhs) const;
-  bool operator!=(const NotificationInfo& rhs) const;
+  bool operator==(const NotificationInfo &rhs) const;
+  bool operator!=(const NotificationInfo &rhs) const;
 
   /////////////////////////////////////////////
   /// NotificationInfo members
@@ -63,16 +63,16 @@ class NotificationInfo {
   std::vector<oai::model::udsf::NotificationSubscription>
   getExpiredSubscriptions() const;
   void setExpiredSubscriptions(
-      std::vector<oai::model::udsf::NotificationSubscription> const& value);
+      std::vector<oai::model::udsf::NotificationSubscription> const &value);
 
-  friend void to_json(nlohmann::json& j, const NotificationInfo& o);
-  friend void from_json(const nlohmann::json& j, NotificationInfo& o);
+  friend void to_json(nlohmann::json &j, const NotificationInfo &o);
+  friend void from_json(const nlohmann::json &j, NotificationInfo &o);
 
- protected:
+protected:
   std::vector<oai::model::udsf::NotificationSubscription>
       m_ExpiredSubscriptions;
 };
 
-}  // namespace oai::model::udsf
+} // namespace oai::model::udsf
 
 #endif /* NotificationInfo_H_ */

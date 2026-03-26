@@ -23,10 +23,10 @@ void ResourceStatus::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const ResourceStatus& o) {
+void to_json(nlohmann::json &j, const ResourceStatus &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, ResourceStatus& o) {}
+void from_json(const nlohmann::json &j, ResourceStatus &o) {}
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

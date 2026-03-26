@@ -19,14 +19,14 @@
 namespace oai::model::pcf {
 
 UsageThreshold::UsageThreshold() {
-  m_Duration            = 0;
-  m_DurationIsSet       = false;
-  m_TotalVolume         = 0L;
-  m_TotalVolumeIsSet    = false;
-  m_DownlinkVolume      = 0L;
+  m_Duration = 0;
+  m_DurationIsSet = false;
+  m_TotalVolume = 0L;
+  m_TotalVolumeIsSet = false;
+  m_DownlinkVolume = 0L;
   m_DownlinkVolumeIsSet = false;
-  m_UplinkVolume        = 0L;
-  m_UplinkVolumeIsSet   = false;
+  m_UplinkVolume = 0L;
+  m_UplinkVolumeIsSet = false;
 }
 
 void UsageThreshold::validate() const {
@@ -36,18 +36,18 @@ void UsageThreshold::validate() const {
   }
 }
 
-bool UsageThreshold::validate(std::stringstream& msg) const {
+bool UsageThreshold::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool UsageThreshold::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool UsageThreshold::validate(std::stringstream &msg,
+                              const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "UsageThreshold" : pathPrefix;
 
   if (durationIsSet()) {
-    const int32_t& value               = m_Duration;
+    const int32_t &value = m_Duration;
     const std::string currentValuePath = _pathPrefix + ".duration";
 
     if (value < 0) {
@@ -57,7 +57,7 @@ bool UsageThreshold::validate(
   }
 
   if (totalVolumeIsSet()) {
-    const int64_t& value               = m_TotalVolume;
+    const int64_t &value = m_TotalVolume;
     const std::string currentValuePath = _pathPrefix + ".totalVolume";
 
     if (value < 0ll) {
@@ -67,7 +67,7 @@ bool UsageThreshold::validate(
   }
 
   if (downlinkVolumeIsSet()) {
-    const int64_t& value               = m_DownlinkVolume;
+    const int64_t &value = m_DownlinkVolume;
     const std::string currentValuePath = _pathPrefix + ".downlinkVolume";
 
     if (value < 0ll) {
@@ -77,7 +77,7 @@ bool UsageThreshold::validate(
   }
 
   if (uplinkVolumeIsSet()) {
-    const int64_t& value               = m_UplinkVolume;
+    const int64_t &value = m_UplinkVolume;
     const std::string currentValuePath = _pathPrefix + ".uplinkVolume";
 
     if (value < 0ll) {
@@ -89,7 +89,7 @@ bool UsageThreshold::validate(
   return success;
 }
 
-bool UsageThreshold::operator==(const UsageThreshold& rhs) const {
+bool UsageThreshold::operator==(const UsageThreshold &rhs) const {
   return
 
       ((!durationIsSet() && !rhs.durationIsSet()) ||
@@ -111,19 +111,23 @@ bool UsageThreshold::operator==(const UsageThreshold& rhs) const {
           ;
 }
 
-bool UsageThreshold::operator!=(const UsageThreshold& rhs) const {
+bool UsageThreshold::operator!=(const UsageThreshold &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const UsageThreshold& o) {
+void to_json(nlohmann::json &j, const UsageThreshold &o) {
   j = nlohmann::json::object();
-  if (o.durationIsSet()) j["duration"] = o.m_Duration;
-  if (o.totalVolumeIsSet()) j["totalVolume"] = o.m_TotalVolume;
-  if (o.downlinkVolumeIsSet()) j["downlinkVolume"] = o.m_DownlinkVolume;
-  if (o.uplinkVolumeIsSet()) j["uplinkVolume"] = o.m_UplinkVolume;
+  if (o.durationIsSet())
+    j["duration"] = o.m_Duration;
+  if (o.totalVolumeIsSet())
+    j["totalVolume"] = o.m_TotalVolume;
+  if (o.downlinkVolumeIsSet())
+    j["downlinkVolume"] = o.m_DownlinkVolume;
+  if (o.uplinkVolumeIsSet())
+    j["uplinkVolume"] = o.m_UplinkVolume;
 }
 
-void from_json(const nlohmann::json& j, UsageThreshold& o) {
+void from_json(const nlohmann::json &j, UsageThreshold &o) {
   if (j.find("duration") != j.end()) {
     j.at("duration").get_to(o.m_Duration);
     o.m_DurationIsSet = true;
@@ -142,57 +146,35 @@ void from_json(const nlohmann::json& j, UsageThreshold& o) {
   }
 }
 
-int32_t UsageThreshold::getDuration() const {
-  return m_Duration;
-}
+int32_t UsageThreshold::getDuration() const { return m_Duration; }
 void UsageThreshold::setDuration(int32_t const value) {
-  m_Duration      = value;
+  m_Duration = value;
   m_DurationIsSet = true;
 }
-bool UsageThreshold::durationIsSet() const {
-  return m_DurationIsSet;
-}
-void UsageThreshold::unsetDuration() {
-  m_DurationIsSet = false;
-}
-int64_t UsageThreshold::getTotalVolume() const {
-  return m_TotalVolume;
-}
+bool UsageThreshold::durationIsSet() const { return m_DurationIsSet; }
+void UsageThreshold::unsetDuration() { m_DurationIsSet = false; }
+int64_t UsageThreshold::getTotalVolume() const { return m_TotalVolume; }
 void UsageThreshold::setTotalVolume(int64_t const value) {
-  m_TotalVolume      = value;
+  m_TotalVolume = value;
   m_TotalVolumeIsSet = true;
 }
-bool UsageThreshold::totalVolumeIsSet() const {
-  return m_TotalVolumeIsSet;
-}
-void UsageThreshold::unsetTotalVolume() {
-  m_TotalVolumeIsSet = false;
-}
-int64_t UsageThreshold::getDownlinkVolume() const {
-  return m_DownlinkVolume;
-}
+bool UsageThreshold::totalVolumeIsSet() const { return m_TotalVolumeIsSet; }
+void UsageThreshold::unsetTotalVolume() { m_TotalVolumeIsSet = false; }
+int64_t UsageThreshold::getDownlinkVolume() const { return m_DownlinkVolume; }
 void UsageThreshold::setDownlinkVolume(int64_t const value) {
-  m_DownlinkVolume      = value;
+  m_DownlinkVolume = value;
   m_DownlinkVolumeIsSet = true;
 }
 bool UsageThreshold::downlinkVolumeIsSet() const {
   return m_DownlinkVolumeIsSet;
 }
-void UsageThreshold::unsetDownlinkVolume() {
-  m_DownlinkVolumeIsSet = false;
-}
-int64_t UsageThreshold::getUplinkVolume() const {
-  return m_UplinkVolume;
-}
+void UsageThreshold::unsetDownlinkVolume() { m_DownlinkVolumeIsSet = false; }
+int64_t UsageThreshold::getUplinkVolume() const { return m_UplinkVolume; }
 void UsageThreshold::setUplinkVolume(int64_t const value) {
-  m_UplinkVolume      = value;
+  m_UplinkVolume = value;
   m_UplinkVolumeIsSet = true;
 }
-bool UsageThreshold::uplinkVolumeIsSet() const {
-  return m_UplinkVolumeIsSet;
-}
-void UsageThreshold::unsetUplinkVolume() {
-  m_UplinkVolumeIsSet = false;
-}
+bool UsageThreshold::uplinkVolumeIsSet() const { return m_UplinkVolumeIsSet; }
+void UsageThreshold::unsetUplinkVolume() { m_UplinkVolumeIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

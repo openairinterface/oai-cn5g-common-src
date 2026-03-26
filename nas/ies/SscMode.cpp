@@ -23,9 +23,7 @@ SscMode::SscMode(uint8_t iei, uint8_t value) : Type1NasIe(iei) {
 SscMode::~SscMode() {}
 
 //------------------------------------------------------------------------------
-void SscMode::Set(bool high_pos) {
-  Type1NasIe::Set(high_pos);
-}
+void SscMode::Set(bool high_pos) { Type1NasIe::Set(high_pos); }
 
 //------------------------------------------------------------------------------
 void SscMode::SetSscMode(uint8_t value) {
@@ -40,11 +38,9 @@ uint8_t SscMode::GetSscMode() {
 }
 
 //------------------------------------------------------------------------------
-void SscMode::SetValue() {
-  Type1NasIe::SetValue(ssc_mode_);
-}
+void SscMode::SetValue() { Type1NasIe::SetValue(ssc_mode_); }
 
 //------------------------------------------------------------------------------
 void SscMode::GetValue() {
-  ssc_mode_ = value_ & 0x07;  // 3 bits
+  ssc_mode_ = value_ & 0x07; // 3 bits
 }

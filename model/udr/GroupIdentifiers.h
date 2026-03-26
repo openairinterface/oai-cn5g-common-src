@@ -34,7 +34,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class GroupIdentifiers {
- public:
+public:
   GroupIdentifiers();
   virtual ~GroupIdentifiers();
 
@@ -47,28 +47,28 @@ class GroupIdentifiers {
   ///
   /// </summary>
   std::string getExtGroupId() const;
-  void setExtGroupId(std::string const& value);
+  void setExtGroupId(std::string const &value);
   bool extGroupIdIsSet() const;
   void unsetExtGroupId();
   /// <summary>
   ///
   /// </summary>
   std::string getIntGroupId() const;
-  void setIntGroupId(std::string const& value);
+  void setIntGroupId(std::string const &value);
   bool intGroupIdIsSet() const;
   void unsetIntGroupId();
   /// <summary>
   ///
   /// </summary>
-  std::vector<UeId>& getUeIdList();
-  void setUeIdList(std::vector<UeId> const& value);
+  std::vector<UeId> &getUeIdList();
+  void setUeIdList(std::vector<UeId> const &value);
   bool ueIdListIsSet() const;
   void unsetUeIdList();
 
-  friend void to_json(nlohmann::json& j, const GroupIdentifiers& o);
-  friend void from_json(const nlohmann::json& j, GroupIdentifiers& o);
+  friend void to_json(nlohmann::json &j, const GroupIdentifiers &o);
+  friend void from_json(const nlohmann::json &j, GroupIdentifiers &o);
 
- protected:
+protected:
   std::string m_ExtGroupId;
   bool m_ExtGroupIdIsSet;
   std::string m_IntGroupId;
@@ -77,6 +77,6 @@ class GroupIdentifiers {
   bool m_UeIdListIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* GroupIdentifiers_H_ */

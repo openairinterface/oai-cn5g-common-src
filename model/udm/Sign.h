@@ -30,7 +30,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class Sign {
- public:
+public:
   Sign();
   virtual ~Sign();
 
@@ -39,12 +39,12 @@ class Sign {
   /////////////////////////////////////////////
   /// Sign members
 
-  friend void to_json(nlohmann::json& j, const Sign& o);
-  friend void from_json(const nlohmann::json& j, Sign& o);
+  friend void to_json(nlohmann::json &j, const Sign &o);
+  friend void from_json(const nlohmann::json &j, Sign &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* Sign_H_ */

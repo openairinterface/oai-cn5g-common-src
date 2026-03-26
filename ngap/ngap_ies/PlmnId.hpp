@@ -14,31 +14,31 @@ extern "C" {
 namespace oai::ngap {
 
 class PlmnId {
- public:
+public:
   PlmnId();
   virtual ~PlmnId();
 
-  void set(const std::string& mcc, const std::string& mnc);
-  void get(std::string& mcc, std::string& mnc) const;
+  void set(const std::string &mcc, const std::string &mnc);
+  void get(std::string &mcc, std::string &mnc) const;
 
-  void getMcc(std::string& mcc) const;
+  void getMcc(std::string &mcc) const;
   std::string getMcc() const;
 
-  void getMnc(std::string& mnc) const;
+  void getMnc(std::string &mnc) const;
   std::string getMnc() const;
 
-  bool encode(Ngap_PLMNIdentity_t&) const;
-  bool decode(const Ngap_PLMNIdentity_t&);
+  bool encode(Ngap_PLMNIdentity_t &) const;
+  bool decode(const Ngap_PLMNIdentity_t &);
 
- private:
+private:
   uint8_t m_MccDigit2;
   uint8_t m_MccDigit1;
-  uint8_t m_MncDigit3;  // in case of 2 digit MNC, it should be 0xf
+  uint8_t m_MncDigit3; // in case of 2 digit MNC, it should be 0xf
   uint8_t m_MccDigit3;
   uint8_t m_MncDigit2;
   uint8_t m_MncDigit1;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

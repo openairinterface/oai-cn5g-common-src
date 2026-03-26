@@ -10,24 +10,23 @@
 
 #include "Ngap_ProtocolExtensionContainer.h"
 static int memb_Ngap_pDUSessionResourceModifyRequestTransfer_constraint_1(
-    const asn_TYPE_descriptor_t* td, const void* sptr,
-    asn_app_constraint_failed_f* ctfailcb, void* app_key) {
-  const OCTET_STRING_t* st = (const OCTET_STRING_t*) sptr;
+    const asn_TYPE_descriptor_t *td, const void *sptr,
+    asn_app_constraint_failed_f *ctfailcb, void *app_key) {
+  const OCTET_STRING_t *st = (const OCTET_STRING_t *)sptr;
 
   if (!sptr) {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: value not given (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: value not given (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 
   if (1 /* No applicable constraints whatsoever */) {
-    (void) st; /* Unused variable */
-               /* Nothing is here. See below */
+    (void)st; /* Unused variable */
+              /* Nothing is here. See below */
   }
 
-  return td->encoding_constraints.general_constraints(
-      td, sptr, ctfailcb, app_key);
+  return td->encoding_constraints.general_constraints(td, sptr, ctfailcb,
+                                                      app_key);
 }
 
 #if !defined(ASN_DISABLE_OER_SUPPORT)
@@ -87,9 +86,8 @@ asn_TYPE_member_t asn_MBR_Ngap_PDUSessionResourceModifyItemModReq_1[] = {
      "nAS-PDU"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_PDUSessionResourceModifyItemModReq,
-         pDUSessionResourceModifyRequestTransfer),
+     offsetof(struct Ngap_PDUSessionResourceModifyItemModReq,
+              pDUSessionResourceModifyRequestTransfer),
      (ASN_TAG_CLASS_CONTEXT | (2 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_OCTET_STRING,
@@ -126,8 +124,8 @@ asn_TYPE_member_t asn_MBR_Ngap_PDUSessionResourceModifyItemModReq_1[] = {
      0, /* No default value */
      "iE-Extensions"},
 };
-static const int asn_MAP_Ngap_PDUSessionResourceModifyItemModReq_oms_1[] = {
-    1, 3};
+static const int asn_MAP_Ngap_PDUSessionResourceModifyItemModReq_oms_1[] = {1,
+                                                                            3};
 static const ber_tlv_tag_t
     asn_DEF_Ngap_PDUSessionResourceModifyItemModReq_tags_1[] = {
         (ASN_TAG_CLASS_UNIVERSAL | (16 << 2))};

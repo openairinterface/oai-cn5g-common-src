@@ -16,7 +16,7 @@ extern "C" {
 namespace oai::ngap {
 
 class PduSessionResourceSetupUnsuccessfulTransfer {
- public:
+public:
   PduSessionResourceSetupUnsuccessfulTransfer();
   virtual ~PduSessionResourceSetupUnsuccessfulTransfer();
 
@@ -28,16 +28,16 @@ class PduSessionResourceSetupUnsuccessfulTransfer {
   long getChoiceOfCause() const;
   long getCause() const;
 
-  int encode(uint8_t* buf, int bufSize);
-  bool decode(uint8_t* buf, int bufSize);
+  int encode(uint8_t *buf, int bufSize);
+  bool decode(uint8_t *buf, int bufSize);
 
- private:
-  Ngap_PDUSessionResourceSetupUnsuccessfulTransfer_t*
-      m_PduSessionResourceSetupUnsuccessfulTransferIe;
+private:
+  Ngap_PDUSessionResourceSetupUnsuccessfulTransfer_t
+      *m_PduSessionResourceSetupUnsuccessfulTransferIe;
 
-  Cause m_Cause;  // Mandatory
+  Cause m_Cause; // Mandatory
   // TODO: Criticality Diagnostics //Optional
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

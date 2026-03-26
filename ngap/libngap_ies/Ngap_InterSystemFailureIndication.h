@@ -24,8 +24,8 @@ struct Ngap_ProtocolExtensionContainer;
 
 /* Ngap_InterSystemFailureIndication */
 typedef struct Ngap_InterSystemFailureIndication {
-  struct Ngap_UERLFReportContainer* uERLFReportContainer; /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions;  /* OPTIONAL */
+  struct Ngap_UERLFReportContainer *uERLFReportContainer; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions;  /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

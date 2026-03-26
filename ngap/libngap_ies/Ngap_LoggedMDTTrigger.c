@@ -91,7 +91,7 @@ asn_CHOICE_specifics_t asn_SPC_Ngap_LoggedMDTTrigger_specs_1 = {
     sizeof(struct Ngap_LoggedMDTTrigger),
     offsetof(struct Ngap_LoggedMDTTrigger, _asn_ctx),
     offsetof(struct Ngap_LoggedMDTTrigger, present),
-    sizeof(((struct Ngap_LoggedMDTTrigger*) 0)->present),
+    sizeof(((struct Ngap_LoggedMDTTrigger *)0)->present),
     asn_MAP_Ngap_LoggedMDTTrigger_tag2el_1,
     3, /* Count of tags in the map */
     0,

@@ -16,7 +16,7 @@ extern "C" {
 namespace oai::ngap {
 
 class HandoverResourceAllocationUnsuccessfulTransfer {
- public:
+public:
   HandoverResourceAllocationUnsuccessfulTransfer();
   virtual ~HandoverResourceAllocationUnsuccessfulTransfer();
 
@@ -29,16 +29,16 @@ class HandoverResourceAllocationUnsuccessfulTransfer {
   long getChoiceOfCause() const;
   long getCause() const;
 
-  int encode(uint8_t* buf, int bufSize);
-  bool decode(uint8_t* buf, int bufSize);
+  int encode(uint8_t *buf, int bufSize);
+  bool decode(uint8_t *buf, int bufSize);
 
- private:
-  Ngap_HandoverResourceAllocationUnsuccessfulTransfer_t*
-      m_HandoverResourceAllocationUnsuccessfulTransferIe;
+private:
+  Ngap_HandoverResourceAllocationUnsuccessfulTransfer_t
+      *m_HandoverResourceAllocationUnsuccessfulTransferIe;
 
-  Cause m_CauseValue;  // Mandatory
+  Cause m_CauseValue; // Mandatory
   // TODO: Secondary RAT Usage Information
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

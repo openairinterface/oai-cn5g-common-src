@@ -19,11 +19,11 @@
 #ifndef TaiRange_H_
 #define TaiRange_H_
 
-#include "TacRange.h"
-#include <string>
 #include "PlmnId.h"
-#include <vector>
+#include "TacRange.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::nrf {
 
@@ -31,7 +31,7 @@ namespace oai::model::nrf {
 /// Range of TAIs (Tracking Area Identities)
 /// </summary>
 class TaiRange {
- public:
+public:
   TaiRange();
   virtual ~TaiRange() = default;
 
@@ -45,16 +45,16 @@ class TaiRange {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const TaiRange& rhs) const;
-  bool operator!=(const TaiRange& rhs) const;
+  bool operator==(const TaiRange &rhs) const;
+  bool operator!=(const TaiRange &rhs) const;
 
   /////////////////////////////////////////////
   /// TaiRange members
@@ -63,24 +63,24 @@ class TaiRange {
   ///
   /// </summary>
   oai::model::common::PlmnId getPlmnId() const;
-  void setPlmnId(oai::model::common::PlmnId const& value);
+  void setPlmnId(oai::model::common::PlmnId const &value);
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::nrf::TacRange> getTacRangeList() const;
-  void setTacRangeList(std::vector<oai::model::nrf::TacRange> const& value);
+  void setTacRangeList(std::vector<oai::model::nrf::TacRange> const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getNid() const;
-  void setNid(std::string const& value);
+  void setNid(std::string const &value);
   bool nidIsSet() const;
   void unsetNid();
 
-  friend void to_json(nlohmann::json& j, const TaiRange& o);
-  friend void from_json(const nlohmann::json& j, TaiRange& o);
+  friend void to_json(nlohmann::json &j, const TaiRange &o);
+  friend void from_json(const nlohmann::json &j, TaiRange &o);
 
- protected:
+protected:
   oai::model::common::PlmnId m_PlmnId;
 
   std::vector<oai::model::nrf::TacRange> m_TacRangeList;
@@ -89,6 +89,6 @@ class TaiRange {
   bool m_NidIsSet;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* TaiRange_H_ */

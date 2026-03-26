@@ -15,24 +15,23 @@ extern "C" {
 namespace oai::ngap {
 
 class GtpTunnel {
- public:
+public:
   GtpTunnel();
   virtual ~GtpTunnel();
 
-  void set(
-      const TransportLayerAddress& transportLayerAddress,
-      const GtpTeid& gtpTeid);
-  bool get(
-      TransportLayerAddress& transportLayerAddress, GtpTeid& gtpTeid) const;
+  void set(const TransportLayerAddress &transportLayerAddress,
+           const GtpTeid &gtpTeid);
+  bool get(TransportLayerAddress &transportLayerAddress,
+           GtpTeid &gtpTeid) const;
 
-  bool encode(Ngap_GTPTunnel& upTransportLayerInfo) const;
-  bool decode(const Ngap_GTPTunnel& upTransportLayerInfo);
+  bool encode(Ngap_GTPTunnel &upTransportLayerInfo) const;
+  bool decode(const Ngap_GTPTunnel &upTransportLayerInfo);
 
- private:
+private:
   TransportLayerAddress m_TransportLayerAddress;
   GtpTeid m_GtpTeid;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

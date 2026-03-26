@@ -16,7 +16,7 @@
 namespace oai::model::amf {
 
 AssignEbiFailed::AssignEbiFailed() {
-  m_PduSessionId       = 0;
+  m_PduSessionId = 0;
   m_FailedArpListIsSet = false;
 }
 
@@ -26,13 +26,14 @@ void AssignEbiFailed::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const AssignEbiFailed& o) {
-  j                 = nlohmann::json();
+void to_json(nlohmann::json &j, const AssignEbiFailed &o) {
+  j = nlohmann::json();
   j["pduSessionId"] = o.m_PduSessionId;
-  if (o.failedArpListIsSet()) j["failedArpList"] = o.m_FailedArpList;
+  if (o.failedArpListIsSet())
+    j["failedArpList"] = o.m_FailedArpList;
 }
 
-void from_json(const nlohmann::json& j, AssignEbiFailed& o) {
+void from_json(const nlohmann::json &j, AssignEbiFailed &o) {
   j.at("pduSessionId").get_to(o.m_PduSessionId);
   if (j.find("failedArpList") != j.end()) {
     j.at("failedArpList").get_to(o.m_FailedArpList);
@@ -40,20 +41,16 @@ void from_json(const nlohmann::json& j, AssignEbiFailed& o) {
   }
 }
 
-int32_t AssignEbiFailed::getPduSessionId() const {
-  return m_PduSessionId;
-}
+int32_t AssignEbiFailed::getPduSessionId() const { return m_PduSessionId; }
 void AssignEbiFailed::setPduSessionId(int32_t const value) {
   m_PduSessionId = value;
 }
-std::vector<oai::model::common::Arp>& AssignEbiFailed::getFailedArpList() {
+std::vector<oai::model::common::Arp> &AssignEbiFailed::getFailedArpList() {
   return m_FailedArpList;
 }
 bool AssignEbiFailed::failedArpListIsSet() const {
   return m_FailedArpListIsSet;
 }
-void AssignEbiFailed::unsetFailedArpList() {
-  m_FailedArpListIsSet = false;
-}
+void AssignEbiFailed::unsetFailedArpList() { m_FailedArpListIsSet = false; }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

@@ -28,8 +28,7 @@ asn_per_constraints_t asn_PER_type_Ngap_NotificationCause_constr_1
           !defined(ASN_DISABLE_APER_SUPPORT) */
 static const asn_INTEGER_enum_map_t
     asn_MAP_Ngap_NotificationCause_value2enum_1[] = {
-        {0, 9, "fulfilled"},
-        {1, 13, "not-fulfilled"}
+        {0, 9, "fulfilled"}, {1, 13, "not-fulfilled"}
         /* This list is extensible */
 };
 static const unsigned int asn_MAP_Ngap_NotificationCause_enum2value_1[] = {

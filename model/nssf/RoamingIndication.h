@@ -30,7 +30,7 @@ namespace model {
 ///
 /// </summary>
 class RoamingIndication {
- public:
+public:
   RoamingIndication();
   virtual ~RoamingIndication() = default;
 
@@ -44,16 +44,16 @@ class RoamingIndication {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const RoamingIndication& rhs) const;
-  bool operator!=(const RoamingIndication& rhs) const;
+  bool operator==(const RoamingIndication &rhs) const;
+  bool operator!=(const RoamingIndication &rhs) const;
 
   /////////////////////////////////////////////
   /// RoamingIndication members
@@ -62,17 +62,17 @@ class RoamingIndication {
   void setValue(RoamingIndication_anyOf value);
   RoamingIndication_anyOf::eRoamingIndication_anyOf getEnumValue() const;
   void setEnumValue(RoamingIndication_anyOf::eRoamingIndication_anyOf value);
-  friend void to_json(nlohmann::json& j, const RoamingIndication& o);
-  friend void from_json(const nlohmann::json& j, RoamingIndication& o);
-  friend void to_json(nlohmann::json& j, const RoamingIndication_anyOf& o);
-  friend void from_json(const nlohmann::json& j, RoamingIndication_anyOf& o);
+  friend void to_json(nlohmann::json &j, const RoamingIndication &o);
+  friend void from_json(const nlohmann::json &j, RoamingIndication &o);
+  friend void to_json(nlohmann::json &j, const RoamingIndication_anyOf &o);
+  friend void from_json(const nlohmann::json &j, RoamingIndication_anyOf &o);
 
- protected:
+protected:
   RoamingIndication_anyOf m_value;
 };
 
-}  // namespace model
-}  // namespace nssf_server
-}  // namespace oai
+} // namespace model
+} // namespace nssf_server
+} // namespace oai
 
 #endif /* RoamingIndication_H_ */

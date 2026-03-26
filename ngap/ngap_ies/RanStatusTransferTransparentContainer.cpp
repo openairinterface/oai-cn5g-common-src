@@ -18,19 +18,19 @@ RanStatusTransferTransparentContainer::
 
 //------------------------------------------------------------------------------
 void RanStatusTransferTransparentContainer::getDrbSubjectList(
-    DrbSubjectToStatusTransferList& drblist) const {
+    DrbSubjectToStatusTransferList &drblist) const {
   drblist = m_DrbList;
 }
 
 //------------------------------------------------------------------------------
 void RanStatusTransferTransparentContainer::setDrbSubjectList(
-    const DrbSubjectToStatusTransferList& drblist) {
+    const DrbSubjectToStatusTransferList &drblist) {
   m_DrbList = drblist;
 }
 
 //------------------------------------------------------------------------------
 bool RanStatusTransferTransparentContainer::encode(
-    Ngap_RANStatusTransfer_TransparentContainer_t& ranStatusTransfer) const {
+    Ngap_RANStatusTransfer_TransparentContainer_t &ranStatusTransfer) const {
   if (!m_DrbList.encode(ranStatusTransfer.dRBsSubjectToStatusTransferList)) {
     oai::logger::logger_common::ngap().error(
         "Encode RANStatusTransferTransparentContainer IE error!");
@@ -41,7 +41,7 @@ bool RanStatusTransferTransparentContainer::encode(
 
 //------------------------------------------------------------------------------
 bool RanStatusTransferTransparentContainer::decode(
-    const Ngap_RANStatusTransfer_TransparentContainer_t& ranStatusTransfer) {
+    const Ngap_RANStatusTransfer_TransparentContainer_t &ranStatusTransfer) {
   if (!m_DrbList.decode(ranStatusTransfer.dRBsSubjectToStatusTransferList)) {
     oai::logger::logger_common::ngap().error(
         "Decode RANStatusTransferTransparentContainer IE error!");
@@ -49,4 +49,4 @@ bool RanStatusTransferTransparentContainer::decode(
   }
   return true;
 }
-}  // namespace oai::ngap
+} // namespace oai::ngap

@@ -18,9 +18,7 @@
 
 namespace oai::model::lmf {
 
-UeConnectivityState::UeConnectivityState() {
-  m_ConnectivitystateIsSet = false;
-}
+UeConnectivityState::UeConnectivityState() { m_ConnectivitystateIsSet = false; }
 
 void UeConnectivityState::validate() const {
   std::stringstream msg;
@@ -29,12 +27,12 @@ void UeConnectivityState::validate() const {
   }
 }
 
-bool UeConnectivityState::validate(std::stringstream& msg) const {
+bool UeConnectivityState::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool UeConnectivityState::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool UeConnectivityState::validate(std::stringstream &msg,
+                                   const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "UeConnectivityState" : pathPrefix;
@@ -42,7 +40,7 @@ bool UeConnectivityState::validate(
   return success;
 }
 
-bool UeConnectivityState::operator==(const UeConnectivityState& rhs) const {
+bool UeConnectivityState::operator==(const UeConnectivityState &rhs) const {
   return
 
       (getAccessType() == rhs.getAccessType()) &&
@@ -54,18 +52,18 @@ bool UeConnectivityState::operator==(const UeConnectivityState& rhs) const {
           ;
 }
 
-bool UeConnectivityState::operator!=(const UeConnectivityState& rhs) const {
+bool UeConnectivityState::operator!=(const UeConnectivityState &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const UeConnectivityState& o) {
-  j               = nlohmann::json();
+void to_json(nlohmann::json &j, const UeConnectivityState &o) {
+  j = nlohmann::json();
   j["accessType"] = o.m_AccessType;
   if (o.connectivitystateIsSet())
     j["connectivitystate"] = o.m_Connectivitystate;
 }
 
-void from_json(const nlohmann::json& j, UeConnectivityState& o) {
+void from_json(const nlohmann::json &j, UeConnectivityState &o) {
   j.at("accessType").get_to(o.m_AccessType);
   if (j.find("connectivitystate") != j.end()) {
     j.at("connectivitystate").get_to(o.m_Connectivitystate);
@@ -77,15 +75,15 @@ oai::model::common::AccessType UeConnectivityState::getAccessType() const {
   return m_AccessType;
 }
 void UeConnectivityState::setAccessType(
-    oai::model::common::AccessType const& value) {
+    oai::model::common::AccessType const &value) {
   m_AccessType = value;
 }
 oai::model::lmf::CmState UeConnectivityState::getConnectivitystate() const {
   return m_Connectivitystate;
 }
 void UeConnectivityState::setConnectivitystate(
-    oai::model::lmf::CmState const& value) {
-  m_Connectivitystate      = value;
+    oai::model::lmf::CmState const &value) {
+  m_Connectivitystate = value;
   m_ConnectivitystateIsSet = true;
 }
 bool UeConnectivityState::connectivitystateIsSet() const {
@@ -95,4 +93,4 @@ void UeConnectivityState::unsetConnectivitystate() {
   m_ConnectivitystateIsSet = false;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

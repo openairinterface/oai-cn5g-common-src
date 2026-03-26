@@ -25,10 +25,10 @@ struct Ngap_ProtocolExtensionContainer;
 
 /* Ngap_AssistanceDataForPaging */
 typedef struct Ngap_AssistanceDataForPaging {
-  struct Ngap_AssistanceDataForRecommendedCells*
-      assistanceDataForRecommendedCells;                          /* OPTIONAL */
-  struct Ngap_PagingAttemptInformation* pagingAttemptInformation; /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions;          /* OPTIONAL */
+  struct Ngap_AssistanceDataForRecommendedCells
+      *assistanceDataForRecommendedCells;                         /* OPTIONAL */
+  struct Ngap_PagingAttemptInformation *pagingAttemptInformation; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions;          /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

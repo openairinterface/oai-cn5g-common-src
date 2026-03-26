@@ -19,7 +19,7 @@
 namespace oai::udr::model {
 
 AdditionalSnssaiData::AdditionalSnssaiData() {
-  m_RequiredAuthnAuthz      = false;
+  m_RequiredAuthnAuthz = false;
   m_RequiredAuthnAuthzIsSet = false;
 }
 
@@ -29,13 +29,13 @@ void AdditionalSnssaiData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const AdditionalSnssaiData& o) {
+void to_json(nlohmann::json &j, const AdditionalSnssaiData &o) {
   j = nlohmann::json();
   if (o.requiredAuthnAuthzIsSet())
     j["requiredAuthnAuthz"] = o.m_RequiredAuthnAuthz;
 }
 
-void from_json(const nlohmann::json& j, AdditionalSnssaiData& o) {
+void from_json(const nlohmann::json &j, AdditionalSnssaiData &o) {
   if (j.find("requiredAuthnAuthz") != j.end()) {
     j.at("requiredAuthnAuthz").get_to(o.m_RequiredAuthnAuthz);
     o.m_RequiredAuthnAuthzIsSet = true;
@@ -46,7 +46,7 @@ bool AdditionalSnssaiData::isRequiredAuthnAuthz() const {
   return m_RequiredAuthnAuthz;
 }
 void AdditionalSnssaiData::setRequiredAuthnAuthz(bool const value) {
-  m_RequiredAuthnAuthz      = value;
+  m_RequiredAuthnAuthz = value;
   m_RequiredAuthnAuthzIsSet = true;
 }
 bool AdditionalSnssaiData::requiredAuthnAuthzIsSet() const {
@@ -56,4 +56,4 @@ void AdditionalSnssaiData::unsetRequiredAuthnAuthz() {
   m_RequiredAuthnAuthzIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

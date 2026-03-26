@@ -13,8 +13,8 @@
 
 #include "SscMode_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::common {
 
@@ -27,12 +27,12 @@ void SscMode_anyOf::validate() const {
   }
 }
 
-bool SscMode_anyOf::validate(std::stringstream& msg) const {
+bool SscMode_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool SscMode_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool SscMode_anyOf::validate(std::stringstream &msg,
+                             const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "SscMode_anyOf" : pathPrefix;
@@ -46,36 +46,36 @@ bool SscMode_anyOf::validate(
   return success;
 }
 
-bool SscMode_anyOf::operator==(const SscMode_anyOf& rhs) const {
+bool SscMode_anyOf::operator==(const SscMode_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool SscMode_anyOf::operator!=(const SscMode_anyOf& rhs) const {
+bool SscMode_anyOf::operator!=(const SscMode_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const SscMode_anyOf& o) {
+void to_json(nlohmann::json &j, const SscMode_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case SscMode_anyOf::eSscMode_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case SscMode_anyOf::eSscMode_anyOf::_1:
-      j = "SSC_MODE_1";
-      break;
-    case SscMode_anyOf::eSscMode_anyOf::_2:
-      j = "SSC_MODE_2";
-      break;
-    case SscMode_anyOf::eSscMode_anyOf::_3:
-      j = "SSC_MODE_3";
-      break;
+  case SscMode_anyOf::eSscMode_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case SscMode_anyOf::eSscMode_anyOf::_1:
+    j = "SSC_MODE_1";
+    break;
+  case SscMode_anyOf::eSscMode_anyOf::_2:
+    j = "SSC_MODE_2";
+    break;
+  case SscMode_anyOf::eSscMode_anyOf::_3:
+    j = "SSC_MODE_3";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, SscMode_anyOf& o) {
+void from_json(const nlohmann::json &j, SscMode_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "SSC_MODE_1") {
     o.setValue(SscMode_anyOf::eSscMode_anyOf::_1);
@@ -99,4 +99,4 @@ void SscMode_anyOf::setValue(SscMode_anyOf::eSscMode_anyOf value) {
   m_value = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

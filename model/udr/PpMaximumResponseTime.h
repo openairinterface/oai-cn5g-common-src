@@ -31,7 +31,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class PpMaximumResponseTime {
- public:
+public:
   PpMaximumResponseTime();
   virtual ~PpMaximumResponseTime();
 
@@ -49,7 +49,7 @@ class PpMaximumResponseTime {
   ///
   /// </summary>
   std::string getAfInstanceId() const;
-  void setAfInstanceId(std::string const& value);
+  void setAfInstanceId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
@@ -59,21 +59,21 @@ class PpMaximumResponseTime {
   ///
   /// </summary>
   std::string getValidityTime() const;
-  void setValidityTime(std::string const& value);
+  void setValidityTime(std::string const &value);
   bool validityTimeIsSet() const;
   void unsetValidityTime();
   /// <summary>
   ///
   /// </summary>
   std::string getMtcProviderInformation() const;
-  void setMtcProviderInformation(std::string const& value);
+  void setMtcProviderInformation(std::string const &value);
   bool mtcProviderInformationIsSet() const;
   void unsetMtcProviderInformation();
 
-  friend void to_json(nlohmann::json& j, const PpMaximumResponseTime& o);
-  friend void from_json(const nlohmann::json& j, PpMaximumResponseTime& o);
+  friend void to_json(nlohmann::json &j, const PpMaximumResponseTime &o);
+  friend void from_json(const nlohmann::json &j, PpMaximumResponseTime &o);
 
- protected:
+protected:
   int32_t m_MaximumResponseTime;
 
   std::string m_AfInstanceId;
@@ -86,6 +86,6 @@ class PpMaximumResponseTime {
   bool m_MtcProviderInformationIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* PpMaximumResponseTime_H_ */

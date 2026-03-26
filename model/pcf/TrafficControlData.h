@@ -19,16 +19,16 @@
 #ifndef TrafficControlData_H_
 #define TrafficControlData_H_
 
-#include "RedirectInformation.h"
-#include "SteeringFunctionality.h"
 #include "FlowStatus.h"
-#include <string>
 #include "MulticastAccessControl.h"
-#include "SteeringMode.h"
+#include "RedirectInformation.h"
 #include "RouteToLocation.h"
-#include <vector>
+#include "SteeringFunctionality.h"
+#include "SteeringMode.h"
 #include "UpPathChgEvent.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::pcf {
 
@@ -36,7 +36,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class TrafficControlData {
- public:
+public:
   TrafficControlData();
   virtual ~TrafficControlData() = default;
 
@@ -50,16 +50,16 @@ class TrafficControlData {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const TrafficControlData& rhs) const;
-  bool operator!=(const TrafficControlData& rhs) const;
+  bool operator==(const TrafficControlData &rhs) const;
+  bool operator!=(const TrafficControlData &rhs) const;
 
   /////////////////////////////////////////////
   /// TrafficControlData members
@@ -69,19 +69,19 @@ class TrafficControlData {
   /// session.
   /// </summary>
   std::string getTcId() const;
-  void setTcId(std::string const& value);
+  void setTcId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::FlowStatus getFlowStatus() const;
-  void setFlowStatus(oai::model::pcf::FlowStatus const& value);
+  void setFlowStatus(oai::model::pcf::FlowStatus const &value);
   bool flowStatusIsSet() const;
   void unsetFlowStatus();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::RedirectInformation getRedirectInfo() const;
-  void setRedirectInfo(oai::model::pcf::RedirectInformation const& value);
+  void setRedirectInfo(oai::model::pcf::RedirectInformation const &value);
   bool redirectInfoIsSet() const;
   void unsetRedirectInfo();
   /// <summary>
@@ -89,7 +89,7 @@ class TrafficControlData {
   /// </summary>
   std::vector<oai::model::pcf::RedirectInformation> getAddRedirectInfo() const;
   void setAddRedirectInfo(
-      std::vector<oai::model::pcf::RedirectInformation> const& value);
+      std::vector<oai::model::pcf::RedirectInformation> const &value);
   bool addRedirectInfoIsSet() const;
   void unsetAddRedirectInfo();
   /// <summary>
@@ -105,7 +105,7 @@ class TrafficControlData {
   /// at the SMF.
   /// </summary>
   std::string getTrafficSteeringPolIdDl() const;
-  void setTrafficSteeringPolIdDl(std::string const& value);
+  void setTrafficSteeringPolIdDl(std::string const &value);
   bool trafficSteeringPolIdDlIsSet() const;
   void unsetTrafficSteeringPolIdDl();
   /// <summary>
@@ -113,15 +113,15 @@ class TrafficControlData {
   /// at the SMF.
   /// </summary>
   std::string getTrafficSteeringPolIdUl() const;
-  void setTrafficSteeringPolIdUl(std::string const& value);
+  void setTrafficSteeringPolIdUl(std::string const &value);
   bool trafficSteeringPolIdUlIsSet() const;
   void unsetTrafficSteeringPolIdUl();
   /// <summary>
   /// A list of location which the traffic shall be routed to for the AF request
   /// </summary>
   std::vector<oai::model::common::RouteToLocation> getRouteToLocs() const;
-  void setRouteToLocs(
-      std::vector<oai::model::common::RouteToLocation> const& value);
+  void
+  setRouteToLocs(std::vector<oai::model::common::RouteToLocation> const &value);
   bool routeToLocsIsSet() const;
   void unsetRouteToLocs();
   /// <summary>
@@ -135,42 +135,42 @@ class TrafficControlData {
   ///
   /// </summary>
   oai::model::pcf::UpPathChgEvent getUpPathChgEvent() const;
-  void setUpPathChgEvent(oai::model::pcf::UpPathChgEvent const& value);
+  void setUpPathChgEvent(oai::model::pcf::UpPathChgEvent const &value);
   bool upPathChgEventIsSet() const;
   void unsetUpPathChgEvent();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::SteeringFunctionality getSteerFun() const;
-  void setSteerFun(oai::model::pcf::SteeringFunctionality const& value);
+  void setSteerFun(oai::model::pcf::SteeringFunctionality const &value);
   bool steerFunIsSet() const;
   void unsetSteerFun();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::SteeringMode getSteerModeDl() const;
-  void setSteerModeDl(oai::model::pcf::SteeringMode const& value);
+  void setSteerModeDl(oai::model::pcf::SteeringMode const &value);
   bool steerModeDlIsSet() const;
   void unsetSteerModeDl();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::SteeringMode getSteerModeUl() const;
-  void setSteerModeUl(oai::model::pcf::SteeringMode const& value);
+  void setSteerModeUl(oai::model::pcf::SteeringMode const &value);
   bool steerModeUlIsSet() const;
   void unsetSteerModeUl();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::MulticastAccessControl getMulAccCtrl() const;
-  void setMulAccCtrl(oai::model::pcf::MulticastAccessControl const& value);
+  void setMulAccCtrl(oai::model::pcf::MulticastAccessControl const &value);
   bool mulAccCtrlIsSet() const;
   void unsetMulAccCtrl();
 
-  friend void to_json(nlohmann::json& j, const TrafficControlData& o);
-  friend void from_json(const nlohmann::json& j, TrafficControlData& o);
+  friend void to_json(nlohmann::json &j, const TrafficControlData &o);
+  friend void from_json(const nlohmann::json &j, TrafficControlData &o);
 
- protected:
+protected:
   std::string m_TcId;
 
   oai::model::pcf::FlowStatus m_FlowStatus;
@@ -201,6 +201,6 @@ class TrafficControlData {
   bool m_MulAccCtrlIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* TrafficControlData_H_ */

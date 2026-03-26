@@ -27,7 +27,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class PeriodicEventInfo {
- public:
+public:
   PeriodicEventInfo();
   virtual ~PeriodicEventInfo() = default;
 
@@ -41,16 +41,16 @@ class PeriodicEventInfo {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const PeriodicEventInfo& rhs) const;
-  bool operator!=(const PeriodicEventInfo& rhs) const;
+  bool operator==(const PeriodicEventInfo &rhs) const;
+  bool operator!=(const PeriodicEventInfo &rhs) const;
 
   /////////////////////////////////////////////
   /// PeriodicEventInfo members
@@ -66,15 +66,15 @@ class PeriodicEventInfo {
   int32_t getReportingInterval() const;
   void setReportingInterval(int32_t const value);
 
-  friend void to_json(nlohmann::json& j, const PeriodicEventInfo& o);
-  friend void from_json(const nlohmann::json& j, PeriodicEventInfo& o);
+  friend void to_json(nlohmann::json &j, const PeriodicEventInfo &o);
+  friend void from_json(const nlohmann::json &j, PeriodicEventInfo &o);
 
- protected:
+protected:
   int32_t m_ReportingAmount;
 
   int32_t m_ReportingInterval;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* PeriodicEventInfo_H_ */

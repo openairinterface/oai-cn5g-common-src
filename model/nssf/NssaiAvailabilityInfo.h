@@ -32,7 +32,7 @@ namespace model {
 ///
 /// </summary>
 class NssaiAvailabilityInfo {
- public:
+public:
   NssaiAvailabilityInfo();
   virtual ~NssaiAvailabilityInfo() = default;
 
@@ -46,16 +46,16 @@ class NssaiAvailabilityInfo {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const NssaiAvailabilityInfo& rhs) const;
-  bool operator!=(const NssaiAvailabilityInfo& rhs) const;
+  bool operator==(const NssaiAvailabilityInfo &rhs) const;
+  bool operator!=(const NssaiAvailabilityInfo &rhs) const;
 
   /////////////////////////////////////////////
   /// NssaiAvailabilityInfo members
@@ -66,26 +66,26 @@ class NssaiAvailabilityInfo {
   std::vector<SupportedNssaiAvailabilityData>
   getSupportedNssaiAvailabilityData() const;
   void setSupportedNssaiAvailabilityData(
-      std::vector<SupportedNssaiAvailabilityData> const& value);
+      std::vector<SupportedNssaiAvailabilityData> const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
   /// <summary>
   ///
   /// </summary>
   std::string getAmfSetId() const;
-  void setAmfSetId(std::string const& value);
+  void setAmfSetId(std::string const &value);
   bool amfSetIdIsSet() const;
   void unsetAmfSetId();
 
-  friend void to_json(nlohmann::json& j, const NssaiAvailabilityInfo& o);
-  friend void from_json(const nlohmann::json& j, NssaiAvailabilityInfo& o);
+  friend void to_json(nlohmann::json &j, const NssaiAvailabilityInfo &o);
+  friend void from_json(const nlohmann::json &j, NssaiAvailabilityInfo &o);
 
- protected:
+protected:
   std::vector<SupportedNssaiAvailabilityData> m_SupportedNssaiAvailabilityData;
 
   std::string m_SupportedFeatures;
@@ -94,8 +94,8 @@ class NssaiAvailabilityInfo {
   bool m_AmfSetIdIsSet;
 };
 
-}  // namespace model
-}  // namespace nssf_server
-}  // namespace oai
+} // namespace model
+} // namespace nssf_server
+} // namespace oai
 
 #endif /* NssaiAvailabilityInfo_H_ */

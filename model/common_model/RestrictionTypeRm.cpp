@@ -27,12 +27,12 @@ void RestrictionTypeRm::validate() const {
   }
 }
 
-bool RestrictionTypeRm::validate(std::stringstream& msg) const {
+bool RestrictionTypeRm::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool RestrictionTypeRm::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool RestrictionTypeRm::validate(std::stringstream &msg,
+                                 const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "RestrictionTypeRm" : pathPrefix;
@@ -40,18 +40,18 @@ bool RestrictionTypeRm::validate(
   return success;
 }
 
-bool RestrictionTypeRm::operator==(const RestrictionTypeRm& rhs) const {
+bool RestrictionTypeRm::operator==(const RestrictionTypeRm &rhs) const {
   return (*this == rhs);
 }
 
-bool RestrictionTypeRm::operator!=(const RestrictionTypeRm& rhs) const {
+bool RestrictionTypeRm::operator!=(const RestrictionTypeRm &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const RestrictionTypeRm& o) {
+void to_json(nlohmann::json &j, const RestrictionTypeRm &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, RestrictionTypeRm& o) {}
+void from_json(const nlohmann::json &j, RestrictionTypeRm &o) {}
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

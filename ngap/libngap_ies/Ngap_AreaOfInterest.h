@@ -26,11 +26,11 @@ struct Ngap_ProtocolExtensionContainer;
 
 /* Ngap_AreaOfInterest */
 typedef struct Ngap_AreaOfInterest {
-  struct Ngap_AreaOfInterestTAIList* areaOfInterestTAIList;   /* OPTIONAL */
-  struct Ngap_AreaOfInterestCellList* areaOfInterestCellList; /* OPTIONAL */
-  struct Ngap_AreaOfInterestRANNodeList*
-      areaOfInterestRANNodeList;                         /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_AreaOfInterestTAIList *areaOfInterestTAIList;   /* OPTIONAL */
+  struct Ngap_AreaOfInterestCellList *areaOfInterestCellList; /* OPTIONAL */
+  struct Ngap_AreaOfInterestRANNodeList
+      *areaOfInterestRANNodeList;                        /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

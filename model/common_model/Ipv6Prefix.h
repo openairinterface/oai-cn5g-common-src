@@ -27,7 +27,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class Ipv6Prefix {
- public:
+public:
   Ipv6Prefix();
   virtual ~Ipv6Prefix() = default;
 
@@ -41,31 +41,31 @@ class Ipv6Prefix {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  virtual bool validate(
-      std::stringstream& msg, const std::string& pathPrefix) const;
+  virtual bool validate(std::stringstream &msg,
+                        const std::string &pathPrefix) const;
 
-  bool operator==(const Ipv6Prefix& rhs) const;
-  bool operator!=(const Ipv6Prefix& rhs) const;
+  bool operator==(const Ipv6Prefix &rhs) const;
+  bool operator!=(const Ipv6Prefix &rhs) const;
 
   /////////////////////////////////////////////
   /// Ipv6Prefix members
 
   std::string getIpv6Prefix() const;
-  void setIpv6Prefix(std::string const& value);
+  void setIpv6Prefix(std::string const &value);
 
-  friend void to_json(nlohmann::json& j, const Ipv6Prefix& o);
-  friend void from_json(const nlohmann::json& j, Ipv6Prefix& o);
+  friend void to_json(nlohmann::json &j, const Ipv6Prefix &o);
+  friend void from_json(const nlohmann::json &j, Ipv6Prefix &o);
 
- protected:
+protected:
   std::string m_Ipv6Prefix;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* Ipv6Prefix_H_ */

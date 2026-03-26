@@ -8,16 +8,15 @@
 
 #include "Ngap_PathSwitchRequestAcknowledgeTransfer.h"
 
-#include "Ngap_UPTransportLayerInformation.h"
-#include "Ngap_SecurityIndication.h"
 #include "Ngap_ProtocolExtensionContainer.h"
+#include "Ngap_SecurityIndication.h"
+#include "Ngap_UPTransportLayerInformation.h"
 static asn_TYPE_member_t asn_MBR_Ngap_PathSwitchRequestAcknowledgeTransfer_1[] =
     {
         {ATF_POINTER,
          3,
-         offsetof(
-             struct Ngap_PathSwitchRequestAcknowledgeTransfer,
-             uL_NGU_UP_TNLInformation),
+         offsetof(struct Ngap_PathSwitchRequestAcknowledgeTransfer,
+                  uL_NGU_UP_TNLInformation),
          (ASN_TAG_CLASS_CONTEXT | (0 << 2)),
          +1, /* EXPLICIT tag at current level */
          &asn_DEF_Ngap_UPTransportLayerInformation,
@@ -36,9 +35,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_PathSwitchRequestAcknowledgeTransfer_1[] =
          "uL-NGU-UP-TNLInformation"},
         {ATF_POINTER,
          2,
-         offsetof(
-             struct Ngap_PathSwitchRequestAcknowledgeTransfer,
-             securityIndication),
+         offsetof(struct Ngap_PathSwitchRequestAcknowledgeTransfer,
+                  securityIndication),
          (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
          -1, /* IMPLICIT tag at current level */
          &asn_DEF_Ngap_SecurityIndication,
@@ -57,8 +55,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_PathSwitchRequestAcknowledgeTransfer_1[] =
          "securityIndication"},
         {ATF_POINTER,
          1,
-         offsetof(
-             struct Ngap_PathSwitchRequestAcknowledgeTransfer, iE_Extensions),
+         offsetof(struct Ngap_PathSwitchRequestAcknowledgeTransfer,
+                  iE_Extensions),
          (ASN_TAG_CLASS_CONTEXT | (2 << 2)),
          -1, /* IMPLICIT tag at current level */
          &asn_DEF_Ngap_ProtocolExtensionContainer_9666P141,

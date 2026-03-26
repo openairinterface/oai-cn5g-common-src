@@ -12,19 +12,19 @@ namespace oai::ngap {
 
 //------------------------------------------------------------------------------
 PathSwitchRequestAcknowledgeTransfer::PathSwitchRequestAcknowledgeTransfer() {
-  m_Ie = (Ngap_PathSwitchRequestAcknowledgeTransfer_t*) calloc(
+  m_Ie = (Ngap_PathSwitchRequestAcknowledgeTransfer_t *)calloc(
       1, sizeof(Ngap_PathSwitchRequestAcknowledgeTransfer_t));
 }
 
 //------------------------------------------------------------------------------
 void PathSwitchRequestAcknowledgeTransfer::setUlNgUUpTnlInformation(
-    const UpTransportLayerInformation& ulNgUUpTnlInformation) {
+    const UpTransportLayerInformation &ulNgUUpTnlInformation) {
   m_UlNgUUpTnlInformation = ulNgUUpTnlInformation;
 }
 
 //------------------------------------------------------------------------------
 void PathSwitchRequestAcknowledgeTransfer::getUlNgUUpTnlInformation(
-    std::optional<UpTransportLayerInformation>& ulNgUUpTnlInformation) const {
+    std::optional<UpTransportLayerInformation> &ulNgUUpTnlInformation) const {
   ulNgUUpTnlInformation = m_UlNgUUpTnlInformation;
 }
 
@@ -39,34 +39,34 @@ void PathSwitchRequestAcknowledgeTransfer::setQosFlowParametersList(
 
 //------------------------------------------------------------------------------
 void PathSwitchRequestAcknowledgeTransfer::setQosFlowParametersList(
-    const QosFlowParametersList& list) {
+    const QosFlowParametersList &list) {
   m_QosFlowParametersList = std::make_optional<QosFlowParametersList>(list);
 }
 
 //------------------------------------------------------------------------------
 void PathSwitchRequestAcknowledgeTransfer::getQosFlowParametersList(
-    std::optional<QosFlowParametersList>& list) const {
+    std::optional<QosFlowParametersList> &list) const {
   list = m_QosFlowParametersList;
 }
 
 //------------------------------------------------------------------------------
-int PathSwitchRequestAcknowledgeTransfer::encode(uint8_t* buf, int bufSize) {
-  ngap_utils::print_asn_msg(
-      &asn_DEF_Ngap_PathSwitchRequestAcknowledgeTransfer, m_Ie);
-  asn_enc_rval_t er = aper_encode_to_buffer(
-      &asn_DEF_Ngap_PathSwitchRequestAcknowledgeTransfer, NULL, m_Ie, buf,
-      bufSize);
+int PathSwitchRequestAcknowledgeTransfer::encode(uint8_t *buf, int bufSize) {
+  ngap_utils::print_asn_msg(&asn_DEF_Ngap_PathSwitchRequestAcknowledgeTransfer,
+                            m_Ie);
+  asn_enc_rval_t er =
+      aper_encode_to_buffer(&asn_DEF_Ngap_PathSwitchRequestAcknowledgeTransfer,
+                            NULL, m_Ie, buf, bufSize);
   oai::logger::logger_common::ngap().debug("er.encoded( %d)", er.encoded);
   // asn_fprint(stderr, er.failed_type, er.structure_ptr);
   return er.encoded;
 }
 
 //------------------------------------------------------------------------------
-bool PathSwitchRequestAcknowledgeTransfer::decode(uint8_t* buf, int bufSize) {
-  asn_dec_rval_t rc = asn_decode(
-      NULL, ATS_ALIGNED_CANONICAL_PER,
-      &asn_DEF_Ngap_PathSwitchRequestAcknowledgeTransfer, (void**) &m_Ie, buf,
-      bufSize);
+bool PathSwitchRequestAcknowledgeTransfer::decode(uint8_t *buf, int bufSize) {
+  asn_dec_rval_t rc =
+      asn_decode(NULL, ATS_ALIGNED_CANONICAL_PER,
+                 &asn_DEF_Ngap_PathSwitchRequestAcknowledgeTransfer,
+                 (void **)&m_Ie, buf, bufSize);
   if (rc.code == RC_OK) {
     oai::logger::logger_common::ngap().debug("Decoded successfully");
   } else if (rc.code == RC_WMORE) {
@@ -97,4 +97,4 @@ bool PathSwitchRequestAcknowledgeTransfer::decode(uint8_t* buf, int bufSize) {
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

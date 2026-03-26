@@ -29,10 +29,10 @@ struct Ngap_ProtocolExtensionContainer;
 typedef struct Ngap_PDUSessionResourceModifyConfirmTransfer {
   Ngap_QosFlowModifyConfirmList_t qosFlowModifyConfirmList;
   Ngap_UPTransportLayerInformation_t uLNGU_UP_TNLInformation;
-  struct Ngap_UPTransportLayerInformationPairList*
-      additionalNG_UUPTNLInformation;                          /* OPTIONAL */
-  struct Ngap_QosFlowListWithCause* qosFlowFailedToModifyList; /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions;       /* OPTIONAL */
+  struct Ngap_UPTransportLayerInformationPairList
+      *additionalNG_UUPTNLInformation;                         /* OPTIONAL */
+  struct Ngap_QosFlowListWithCause *qosFlowFailedToModifyList; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions;       /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

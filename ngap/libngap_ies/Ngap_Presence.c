@@ -14,8 +14,7 @@
  */
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 static asn_oer_constraints_t asn_OER_type_Ngap_Presence_constr_1 CC_NOTUSED = {
-    {0, 0},
-    -1};
+    {0, 0}, -1};
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 asn_per_constraints_t asn_PER_type_Ngap_Presence_constr_1 CC_NOTUSED = {
@@ -27,9 +26,7 @@ asn_per_constraints_t asn_PER_type_Ngap_Presence_constr_1 CC_NOTUSED = {
 #endif /* !defined(ASN_DISABLE_UPER_SUPPORT) ||                                \
           !defined(ASN_DISABLE_APER_SUPPORT) */
 static const asn_INTEGER_enum_map_t asn_MAP_Ngap_Presence_value2enum_1[] = {
-    {0, 8, "optional"},
-    {1, 11, "conditional"},
-    {2, 9, "mandatory"}};
+    {0, 8, "optional"}, {1, 11, "conditional"}, {2, 9, "mandatory"}};
 static const unsigned int asn_MAP_Ngap_Presence_enum2value_1[] = {
     1, /* conditional(1) */
     2, /* mandatory(2) */

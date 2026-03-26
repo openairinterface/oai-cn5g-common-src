@@ -20,11 +20,11 @@
 #define UeInitiatedResourceRequest_H_
 
 #include "PacketFilterInfo.h"
+#include "RequestedQos.h"
 #include "RuleOperation.h"
+#include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
-#include "RequestedQos.h"
-#include <nlohmann/json.hpp>
 
 namespace oai::model::pcf {
 
@@ -32,7 +32,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class UeInitiatedResourceRequest {
- public:
+public:
   UeInitiatedResourceRequest();
   virtual ~UeInitiatedResourceRequest() = default;
 
@@ -46,16 +46,16 @@ class UeInitiatedResourceRequest {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const UeInitiatedResourceRequest& rhs) const;
-  bool operator!=(const UeInitiatedResourceRequest& rhs) const;
+  bool operator==(const UeInitiatedResourceRequest &rhs) const;
+  bool operator!=(const UeInitiatedResourceRequest &rhs) const;
 
   /////////////////////////////////////////////
   /// UeInitiatedResourceRequest members
@@ -64,14 +64,14 @@ class UeInitiatedResourceRequest {
   ///
   /// </summary>
   std::string getPccRuleId() const;
-  void setPccRuleId(std::string const& value);
+  void setPccRuleId(std::string const &value);
   bool pccRuleIdIsSet() const;
   void unsetPccRuleId();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::RuleOperation getRuleOp() const;
-  void setRuleOp(oai::model::pcf::RuleOperation const& value);
+  void setRuleOp(oai::model::pcf::RuleOperation const &value);
   /// <summary>
   ///
   /// </summary>
@@ -83,20 +83,20 @@ class UeInitiatedResourceRequest {
   ///
   /// </summary>
   std::vector<oai::model::pcf::PacketFilterInfo> getPackFiltInfo() const;
-  void setPackFiltInfo(
-      std::vector<oai::model::pcf::PacketFilterInfo> const& value);
+  void
+  setPackFiltInfo(std::vector<oai::model::pcf::PacketFilterInfo> const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::RequestedQos getReqQos() const;
-  void setReqQos(oai::model::pcf::RequestedQos const& value);
+  void setReqQos(oai::model::pcf::RequestedQos const &value);
   bool reqQosIsSet() const;
   void unsetReqQos();
 
-  friend void to_json(nlohmann::json& j, const UeInitiatedResourceRequest& o);
-  friend void from_json(const nlohmann::json& j, UeInitiatedResourceRequest& o);
+  friend void to_json(nlohmann::json &j, const UeInitiatedResourceRequest &o);
+  friend void from_json(const nlohmann::json &j, UeInitiatedResourceRequest &o);
 
- protected:
+protected:
   std::string m_PccRuleId;
   bool m_PccRuleIdIsSet;
   oai::model::pcf::RuleOperation m_RuleOp;
@@ -109,6 +109,6 @@ class UeInitiatedResourceRequest {
   bool m_ReqQosIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* UeInitiatedResourceRequest_H_ */

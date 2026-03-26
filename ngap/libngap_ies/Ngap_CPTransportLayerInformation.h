@@ -34,7 +34,7 @@ typedef struct Ngap_CPTransportLayerInformation {
   Ngap_CPTransportLayerInformation_PR present;
   union Ngap_CPTransportLayerInformation_u {
     Ngap_TransportLayerAddress_t endpointIPAddress;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

@@ -26,20 +26,20 @@ void HandoverNotifyMsg::initialize() {
 }
 
 //------------------------------------------------------------------------------
-void HandoverNotifyMsg::setAmfUeNgapId(const uint64_t& id) {
+void HandoverNotifyMsg::setAmfUeNgapId(const uint64_t &id) {
   NgapUeMessage::m_AmfUeNgapId.set(id);
 
-  Ngap_HandoverNotifyIEs_t* ie =
-      (Ngap_HandoverNotifyIEs_t*) calloc(1, sizeof(Ngap_HandoverNotifyIEs_t));
-  ie->id            = Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID;
-  ie->criticality   = Ngap_Criticality_reject;
+  Ngap_HandoverNotifyIEs_t *ie =
+      (Ngap_HandoverNotifyIEs_t *)calloc(1, sizeof(Ngap_HandoverNotifyIEs_t));
+  ie->id = Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID;
+  ie->criticality = Ngap_Criticality_reject;
   ie->value.present = Ngap_HandoverNotifyIEs__value_PR_AMF_UE_NGAP_ID;
 
   int ret =
       NgapUeMessage::m_AmfUeNgapId.encode(ie->value.choice.AMF_UE_NGAP_ID);
   if (!ret) {
     oai::logger::logger_common::ngap().error("Encode AMF_UE_NGAP_ID IE error!");
-    oai::utils::utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void **)&ie);
     return;
   }
 
@@ -49,20 +49,20 @@ void HandoverNotifyMsg::setAmfUeNgapId(const uint64_t& id) {
 }
 
 //------------------------------------------------------------------------------
-void HandoverNotifyMsg::setRanUeNgapId(const uint32_t& ranUeNgapId) {
+void HandoverNotifyMsg::setRanUeNgapId(const uint32_t &ranUeNgapId) {
   NgapUeMessage::m_RanUeNgapId.set(ranUeNgapId);
 
-  Ngap_HandoverNotifyIEs_t* ie =
-      (Ngap_HandoverNotifyIEs_t*) calloc(1, sizeof(Ngap_HandoverNotifyIEs_t));
-  ie->id            = Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID;
-  ie->criticality   = Ngap_Criticality_reject;
+  Ngap_HandoverNotifyIEs_t *ie =
+      (Ngap_HandoverNotifyIEs_t *)calloc(1, sizeof(Ngap_HandoverNotifyIEs_t));
+  ie->id = Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID;
+  ie->criticality = Ngap_Criticality_reject;
   ie->value.present = Ngap_HandoverNotifyIEs__value_PR_RAN_UE_NGAP_ID;
 
   int ret =
       NgapUeMessage::m_RanUeNgapId.encode(ie->value.choice.RAN_UE_NGAP_ID);
   if (!ret) {
     oai::logger::logger_common::ngap().error("Encode RAN_UE_NGAP_ID IE error!");
-    oai::utils::utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void **)&ie);
     return;
   }
 
@@ -72,20 +72,20 @@ void HandoverNotifyMsg::setRanUeNgapId(const uint32_t& ranUeNgapId) {
 }
 
 //------------------------------------------------------------------------------
-void HandoverNotifyMsg::setUserLocationInfoNr(
-    const NrCgi_t& cig, const Tai_t& tai) {
+void HandoverNotifyMsg::setUserLocationInfoNr(const NrCgi_t &cig,
+                                              const Tai_t &tai) {
   UserLocationInformationNr information_nr = {};
-  NrCgi nR_CGI                             = {};
+  NrCgi nR_CGI = {};
   nR_CGI.set(cig.mcc, cig.mnc, cig.nrCellId);
   Tai tai_nr = {};
   tai_nr.set(tai);
   information_nr.set(nR_CGI, tai_nr);
   m_UserLocationInformation.set(information_nr);
 
-  Ngap_HandoverNotifyIEs_t* ie =
-      (Ngap_HandoverNotifyIEs_t*) calloc(1, sizeof(Ngap_HandoverNotifyIEs_t));
-  ie->id            = Ngap_ProtocolIE_ID_id_UserLocationInformation;
-  ie->criticality   = Ngap_Criticality_ignore;
+  Ngap_HandoverNotifyIEs_t *ie =
+      (Ngap_HandoverNotifyIEs_t *)calloc(1, sizeof(Ngap_HandoverNotifyIEs_t));
+  ie->id = Ngap_ProtocolIE_ID_id_UserLocationInformation;
+  ie->criticality = Ngap_Criticality_ignore;
   ie->value.present = Ngap_HandoverNotifyIEs__value_PR_UserLocationInformation;
 
   int ret = m_UserLocationInformation.encode(
@@ -93,7 +93,7 @@ void HandoverNotifyMsg::setUserLocationInfoNr(
   if (!ret) {
     oai::logger::logger_common::ngap().error(
         "Encode UserLocationInformation IE error");
-    oai::utils::utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void **)&ie);
     return;
   }
 
@@ -104,16 +104,17 @@ void HandoverNotifyMsg::setUserLocationInfoNr(
 }
 
 //------------------------------------------------------------------------------
-bool HandoverNotifyMsg::getUserLocationInfoNr(NrCgi_t& cig, Tai_t& tai) const {
+bool HandoverNotifyMsg::getUserLocationInfoNr(NrCgi_t &cig, Tai_t &tai) const {
   UserLocationInformationNr information_nr = {};
-  if (!m_UserLocationInformation.get(information_nr)) return false;
+  if (!m_UserLocationInformation.get(information_nr))
+    return false;
 
   if (m_UserLocationInformation.getChoiceOfUserLocationInformation() !=
       Ngap_UserLocationInformation_PR_userLocationInformationNR)
     return false;
 
   NrCgi nR_CGI = {};
-  Tai nR_TAI   = {};
+  Tai nR_TAI = {};
   information_nr.get(nR_CGI, nR_TAI);
   nR_CGI.get(cig);
   nR_TAI.get(tai);
@@ -122,8 +123,9 @@ bool HandoverNotifyMsg::getUserLocationInfoNr(NrCgi_t& cig, Tai_t& tai) const {
 }
 
 //------------------------------------------------------------------------------
-bool HandoverNotifyMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
-  if (!ngapMsgPdu) return false;
+bool HandoverNotifyMsg::decode(Ngap_NGAP_PDU_t *ngapMsgPdu) {
+  if (!ngapMsgPdu)
+    return false;
   ngapPdu = ngapMsgPdu;
 
   if (ngapPdu->present == Ngap_NGAP_PDU_PR_initiatingMessage) {
@@ -148,72 +150,72 @@ bool HandoverNotifyMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
   }
   for (int i = 0; i < m_HandoverNotifyIes->protocolIEs.list.count; i++) {
     switch (m_HandoverNotifyIes->protocolIEs.list.array[i]->id) {
-      case Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID: {
-        if (m_HandoverNotifyIes->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_reject &&
-            m_HandoverNotifyIes->protocolIEs.list.array[i]->value.present ==
-                Ngap_HandoverNotifyIEs__value_PR_AMF_UE_NGAP_ID) {
-          if (!NgapUeMessage::m_AmfUeNgapId.decode(
-                  m_HandoverNotifyIes->protocolIEs.list.array[i]
-                      ->value.choice.AMF_UE_NGAP_ID)) {
-            oai::logger::logger_common::ngap().error(
-                "Decoded NGAP AMF_UE_NGAP_ID IE error");
-            return false;
-          }
-        } else {
+    case Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID: {
+      if (m_HandoverNotifyIes->protocolIEs.list.array[i]->criticality ==
+              Ngap_Criticality_reject &&
+          m_HandoverNotifyIes->protocolIEs.list.array[i]->value.present ==
+              Ngap_HandoverNotifyIEs__value_PR_AMF_UE_NGAP_ID) {
+        if (!NgapUeMessage::m_AmfUeNgapId.decode(
+                m_HandoverNotifyIes->protocolIEs.list.array[i]
+                    ->value.choice.AMF_UE_NGAP_ID)) {
           oai::logger::logger_common::ngap().error(
               "Decoded NGAP AMF_UE_NGAP_ID IE error");
           return false;
         }
-      } break;
-      case Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID: {
-        if (m_HandoverNotifyIes->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_reject &&
-            m_HandoverNotifyIes->protocolIEs.list.array[i]->value.present ==
-                Ngap_HandoverNotifyIEs__value_PR_RAN_UE_NGAP_ID) {
-          if (!NgapUeMessage::m_RanUeNgapId.decode(
-                  m_HandoverNotifyIes->protocolIEs.list.array[i]
-                      ->value.choice.RAN_UE_NGAP_ID)) {
-            oai::logger::logger_common::ngap().error(
-                "Decoded NGAP RAN_UE_NGAP_ID IE error");
-            return false;
-          }
-        } else {
+      } else {
+        oai::logger::logger_common::ngap().error(
+            "Decoded NGAP AMF_UE_NGAP_ID IE error");
+        return false;
+      }
+    } break;
+    case Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID: {
+      if (m_HandoverNotifyIes->protocolIEs.list.array[i]->criticality ==
+              Ngap_Criticality_reject &&
+          m_HandoverNotifyIes->protocolIEs.list.array[i]->value.present ==
+              Ngap_HandoverNotifyIEs__value_PR_RAN_UE_NGAP_ID) {
+        if (!NgapUeMessage::m_RanUeNgapId.decode(
+                m_HandoverNotifyIes->protocolIEs.list.array[i]
+                    ->value.choice.RAN_UE_NGAP_ID)) {
           oai::logger::logger_common::ngap().error(
               "Decoded NGAP RAN_UE_NGAP_ID IE error");
           return false;
         }
-      } break;
-      case Ngap_ProtocolIE_ID_id_UserLocationInformation: {
-        // TODO: Temporarily disable Criticality check to be tested with dsTest
-        /*if (m_HandoverNotifyIes->protocolIEs.list.array[i]->criticality ==
-              Ngap_Criticality_ignore &&
-          m_HandoverNotifyIes->protocolIEs.list.array[i]->value.present ==
-              Ngap_HandoverNotifyIEs__value_PR_UserLocationInformation) {
-              */
-        if (m_HandoverNotifyIes->protocolIEs.list.array[i]->value.present ==
+      } else {
+        oai::logger::logger_common::ngap().error(
+            "Decoded NGAP RAN_UE_NGAP_ID IE error");
+        return false;
+      }
+    } break;
+    case Ngap_ProtocolIE_ID_id_UserLocationInformation: {
+      // TODO: Temporarily disable Criticality check to be tested with dsTest
+      /*if (m_HandoverNotifyIes->protocolIEs.list.array[i]->criticality ==
+            Ngap_Criticality_ignore &&
+        m_HandoverNotifyIes->protocolIEs.list.array[i]->value.present ==
             Ngap_HandoverNotifyIEs__value_PR_UserLocationInformation) {
-          if (!m_UserLocationInformation.decode(
-                  m_HandoverNotifyIes->protocolIEs.list.array[i]
-                      ->value.choice.UserLocationInformation)) {
-            oai::logger::logger_common::ngap().error(
-                "Decoded NGAP UserLocationInformation IE error");
-            return false;
-          }
-        } else {
+            */
+      if (m_HandoverNotifyIes->protocolIEs.list.array[i]->value.present ==
+          Ngap_HandoverNotifyIEs__value_PR_UserLocationInformation) {
+        if (!m_UserLocationInformation.decode(
+                m_HandoverNotifyIes->protocolIEs.list.array[i]
+                    ->value.choice.UserLocationInformation)) {
           oai::logger::logger_common::ngap().error(
               "Decoded NGAP UserLocationInformation IE error");
           return false;
         }
-      } break;
-      default: {
+      } else {
         oai::logger::logger_common::ngap().error(
-            "Decoded NGAP message PDU error");
+            "Decoded NGAP UserLocationInformation IE error");
         return false;
       }
+    } break;
+    default: {
+      oai::logger::logger_common::ngap().error(
+          "Decoded NGAP message PDU error");
+      return false;
+    }
     }
   }
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

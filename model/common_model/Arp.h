@@ -29,7 +29,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class Arp {
- public:
+public:
   Arp();
   virtual ~Arp() = default;
 
@@ -43,16 +43,16 @@ class Arp {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const Arp& rhs) const;
-  bool operator!=(const Arp& rhs) const;
+  bool operator==(const Arp &rhs) const;
+  bool operator!=(const Arp &rhs) const;
 
   /////////////////////////////////////////////
   /// Arp members
@@ -66,15 +66,15 @@ class Arp {
   ///
   /// </summary>
   oai::model::common::PreemptionCapability getPreemptCap() const;
-  void setPreemptCap(oai::model::common::PreemptionCapability const& value);
+  void setPreemptCap(oai::model::common::PreemptionCapability const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::PreemptionVulnerability getPreemptVuln() const;
-  void setPreemptVuln(oai::model::common::PreemptionVulnerability const& value);
+  void setPreemptVuln(oai::model::common::PreemptionVulnerability const &value);
 
-  friend void to_json(nlohmann::json& j, const Arp& o);
-  friend void from_json(const nlohmann::json& j, Arp& o);
+  friend void to_json(nlohmann::json &j, const Arp &o);
+  friend void from_json(const nlohmann::json &j, Arp &o);
 
   int32_t m_PriorityLevel;
 
@@ -83,6 +83,6 @@ class Arp {
   oai::model::common::PreemptionVulnerability m_PreemptVuln;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* Arp_H_ */

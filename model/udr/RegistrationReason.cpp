@@ -26,10 +26,10 @@ void RegistrationReason::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const RegistrationReason& o) {
+void to_json(nlohmann::json &j, const RegistrationReason &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, RegistrationReason& o) {}
+void from_json(const nlohmann::json &j, RegistrationReason &o) {}
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

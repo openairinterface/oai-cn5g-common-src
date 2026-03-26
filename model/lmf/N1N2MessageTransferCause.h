@@ -27,7 +27,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class N1N2MessageTransferCause {
- public:
+public:
   N1N2MessageTransferCause();
   virtual ~N1N2MessageTransferCause();
 
@@ -36,12 +36,12 @@ class N1N2MessageTransferCause {
   /////////////////////////////////////////////
   /// N1N2MessageTransferCause members
 
-  friend void to_json(nlohmann::json& j, const N1N2MessageTransferCause& o);
-  friend void from_json(const nlohmann::json& j, N1N2MessageTransferCause& o);
+  friend void to_json(nlohmann::json &j, const N1N2MessageTransferCause &o);
+  friend void from_json(const nlohmann::json &j, N1N2MessageTransferCause &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* N1N2MessageTransferCause_H_ */

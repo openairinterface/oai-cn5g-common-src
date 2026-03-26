@@ -5,8 +5,8 @@
 #ifndef _NAS_IE_H_
 #define _NAS_IE_H_
 
-#include <stdint.h>
 #include <optional>
+#include <stdint.h>
 #include <vector>
 
 #include "3gpp_24.501.hpp"
@@ -23,21 +23,21 @@ extern "C" {
 namespace oai::nas {
 
 class NasIe {
- public:
+public:
   NasIe();
   virtual ~NasIe() = default;
 
-  virtual int Encode(uint8_t* buf, int len) const = 0;
-  virtual int Decode(
-      const uint8_t* const buf, int len, bool is_option = false) = 0;
+  virtual int Encode(uint8_t *buf, int len) const = 0;
+  virtual int Decode(const uint8_t *const buf, int len,
+                     bool is_option = false) = 0;
 
   virtual uint32_t GetIeLength() const = 0;
 
   virtual bool Validate(int len) const = 0;
 
- protected:
+protected:
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

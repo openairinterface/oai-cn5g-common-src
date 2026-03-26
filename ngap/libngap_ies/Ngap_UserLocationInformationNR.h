@@ -28,8 +28,8 @@ struct Ngap_ProtocolExtensionContainer;
 typedef struct Ngap_UserLocationInformationNR {
   Ngap_NR_CGI_t nR_CGI;
   Ngap_TAI_t tAI;
-  Ngap_TimeStamp_t* timeStamp;                           /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  Ngap_TimeStamp_t *timeStamp;                           /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

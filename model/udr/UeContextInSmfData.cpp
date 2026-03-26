@@ -19,8 +19,8 @@
 namespace oai::udr::model {
 
 UeContextInSmfData::UeContextInSmfData() {
-  m_PduSessionsIsSet   = false;
-  m_PgwInfoIsSet       = false;
+  m_PduSessionsIsSet = false;
+  m_PgwInfoIsSet = false;
   m_EmergencyInfoIsSet = false;
 }
 
@@ -30,15 +30,17 @@ void UeContextInSmfData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const UeContextInSmfData& o) {
+void to_json(nlohmann::json &j, const UeContextInSmfData &o) {
   j = nlohmann::json();
   if (o.pduSessionsIsSet() || !o.m_PduSessions.empty())
     j["pduSessions"] = o.m_PduSessions;
-  if (o.pgwInfoIsSet() || !o.m_PgwInfo.empty()) j["pgwInfo"] = o.m_PgwInfo;
-  if (o.emergencyInfoIsSet()) j["emergencyInfo"] = o.m_EmergencyInfo;
+  if (o.pgwInfoIsSet() || !o.m_PgwInfo.empty())
+    j["pgwInfo"] = o.m_PgwInfo;
+  if (o.emergencyInfoIsSet())
+    j["emergencyInfo"] = o.m_EmergencyInfo;
 }
 
-void from_json(const nlohmann::json& j, UeContextInSmfData& o) {
+void from_json(const nlohmann::json &j, UeContextInSmfData &o) {
   if (j.find("pduSessions") != j.end()) {
     j.at("pduSessions").get_to(o.m_PduSessions);
     o.m_PduSessionsIsSet = true;
@@ -53,45 +55,33 @@ void from_json(const nlohmann::json& j, UeContextInSmfData& o) {
   }
 }
 
-std::map<std::string, PduSession>& UeContextInSmfData::getPduSessions() {
+std::map<std::string, PduSession> &UeContextInSmfData::getPduSessions() {
   return m_PduSessions;
 }
 void UeContextInSmfData::setPduSessions(
-    std::map<std::string, PduSession> const& value) {
-  m_PduSessions      = value;
+    std::map<std::string, PduSession> const &value) {
+  m_PduSessions = value;
   m_PduSessionsIsSet = true;
 }
-bool UeContextInSmfData::pduSessionsIsSet() const {
-  return m_PduSessionsIsSet;
-}
-void UeContextInSmfData::unsetPduSessions() {
-  m_PduSessionsIsSet = false;
-}
-std::vector<PgwInfo>& UeContextInSmfData::getPgwInfo() {
-  return m_PgwInfo;
-}
-void UeContextInSmfData::setPgwInfo(std::vector<PgwInfo> const& value) {
-  m_PgwInfo      = value;
+bool UeContextInSmfData::pduSessionsIsSet() const { return m_PduSessionsIsSet; }
+void UeContextInSmfData::unsetPduSessions() { m_PduSessionsIsSet = false; }
+std::vector<PgwInfo> &UeContextInSmfData::getPgwInfo() { return m_PgwInfo; }
+void UeContextInSmfData::setPgwInfo(std::vector<PgwInfo> const &value) {
+  m_PgwInfo = value;
   m_PgwInfoIsSet = true;
 }
-bool UeContextInSmfData::pgwInfoIsSet() const {
-  return m_PgwInfoIsSet;
-}
-void UeContextInSmfData::unsetPgwInfo() {
-  m_PgwInfoIsSet = false;
-}
+bool UeContextInSmfData::pgwInfoIsSet() const { return m_PgwInfoIsSet; }
+void UeContextInSmfData::unsetPgwInfo() { m_PgwInfoIsSet = false; }
 EmergencyInfo UeContextInSmfData::getEmergencyInfo() const {
   return m_EmergencyInfo;
 }
-void UeContextInSmfData::setEmergencyInfo(EmergencyInfo const& value) {
-  m_EmergencyInfo      = value;
+void UeContextInSmfData::setEmergencyInfo(EmergencyInfo const &value) {
+  m_EmergencyInfo = value;
   m_EmergencyInfoIsSet = true;
 }
 bool UeContextInSmfData::emergencyInfoIsSet() const {
   return m_EmergencyInfoIsSet;
 }
-void UeContextInSmfData::unsetEmergencyInfo() {
-  m_EmergencyInfoIsSet = false;
-}
+void UeContextInSmfData::unsetEmergencyInfo() { m_EmergencyInfoIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

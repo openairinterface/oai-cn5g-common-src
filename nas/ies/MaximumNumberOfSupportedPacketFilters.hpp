@@ -16,14 +16,14 @@ constexpr auto kMaximumNumberOfSupportedPacketFiltersIeName =
 namespace oai::nas {
 
 class MaximumNumberOfSupportedPacketFilters : public Type3NasIe {
- public:
+public:
   MaximumNumberOfSupportedPacketFilters();
   MaximumNumberOfSupportedPacketFilters(uint8_t iei);
   MaximumNumberOfSupportedPacketFilters(uint8_t _iei, uint16_t value);
   virtual ~MaximumNumberOfSupportedPacketFilters();
 
-  int Encode(uint8_t* buf, int len) const override;
-  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+  int Encode(uint8_t *buf, int len) const override;
+  int Decode(const uint8_t *const buf, int len, bool is_iei = false) override;
 
   static std::string GetIeName() {
     return kMaximumNumberOfSupportedPacketFiltersIeName;
@@ -35,10 +35,10 @@ class MaximumNumberOfSupportedPacketFilters : public Type3NasIe {
   void SetValue(uint16_t value);
   uint16_t GetValue() const;
 
- private:
+private:
   uint16_t value_;
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

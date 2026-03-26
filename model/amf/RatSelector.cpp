@@ -23,10 +23,8 @@ void RatSelector::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const RatSelector& o) {
-  j = nlohmann::json();
-}
+void to_json(nlohmann::json &j, const RatSelector &o) { j = nlohmann::json(); }
 
-void from_json(const nlohmann::json& j, RatSelector& o) {}
+void from_json(const nlohmann::json &j, RatSelector &o) {}
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

@@ -21,9 +21,9 @@
 
 #include "Flows.h"
 #include "MediaComponentResourcesStatus.h"
+#include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
-#include <nlohmann/json.hpp>
 
 namespace oai::model::pcf {
 
@@ -31,7 +31,7 @@ namespace oai::model::pcf {
 /// Describes the status of the PCC rule(s) related to certain media components.
 /// </summary>
 class ResourcesAllocationInfo {
- public:
+public:
   ResourcesAllocationInfo();
   virtual ~ResourcesAllocationInfo() = default;
 
@@ -45,16 +45,16 @@ class ResourcesAllocationInfo {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const ResourcesAllocationInfo& rhs) const;
-  bool operator!=(const ResourcesAllocationInfo& rhs) const;
+  bool operator==(const ResourcesAllocationInfo &rhs) const;
+  bool operator!=(const ResourcesAllocationInfo &rhs) const;
 
   /////////////////////////////////////////////
   /// ResourcesAllocationInfo members
@@ -64,14 +64,14 @@ class ResourcesAllocationInfo {
   /// </summary>
   oai::model::pcf::MediaComponentResourcesStatus getMcResourcStatus() const;
   void setMcResourcStatus(
-      oai::model::pcf::MediaComponentResourcesStatus const& value);
+      oai::model::pcf::MediaComponentResourcesStatus const &value);
   bool mcResourcStatusIsSet() const;
   void unsetMcResourcStatus();
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::pcf::Flows> getFlows() const;
-  void setFlows(std::vector<oai::model::pcf::Flows> const& value);
+  void setFlows(std::vector<oai::model::pcf::Flows> const &value);
   bool flowsIsSet() const;
   void unsetFlows();
   /// <summary>
@@ -81,14 +81,14 @@ class ResourcesAllocationInfo {
   /// could not be fulfilled.
   /// </summary>
   std::string getAltSerReq() const;
-  void setAltSerReq(std::string const& value);
+  void setAltSerReq(std::string const &value);
   bool altSerReqIsSet() const;
   void unsetAltSerReq();
 
-  friend void to_json(nlohmann::json& j, const ResourcesAllocationInfo& o);
-  friend void from_json(const nlohmann::json& j, ResourcesAllocationInfo& o);
+  friend void to_json(nlohmann::json &j, const ResourcesAllocationInfo &o);
+  friend void from_json(const nlohmann::json &j, ResourcesAllocationInfo &o);
 
- protected:
+protected:
   oai::model::pcf::MediaComponentResourcesStatus m_McResourcStatus;
   bool m_McResourcStatusIsSet;
   std::vector<oai::model::pcf::Flows> m_Flows;
@@ -97,6 +97,6 @@ class ResourcesAllocationInfo {
   bool m_AltSerReqIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* ResourcesAllocationInfo_H_ */

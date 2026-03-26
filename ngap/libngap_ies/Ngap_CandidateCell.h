@@ -35,9 +35,9 @@ struct Ngap_ProtocolIE_SingleContainer;
 typedef struct Ngap_CandidateCell {
   Ngap_CandidateCell_PR present;
   union Ngap_CandidateCell_u {
-    struct Ngap_CandidateCellID* candidateCGI;
-    struct Ngap_CandidatePCI* candidatePCI;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_CandidateCellID *candidateCGI;
+    struct Ngap_CandidatePCI *candidatePCI;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

@@ -27,7 +27,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class TransferReason {
- public:
+public:
   TransferReason();
   virtual ~TransferReason();
 
@@ -36,12 +36,12 @@ class TransferReason {
   /////////////////////////////////////////////
   /// TransferReason members
 
-  friend void to_json(nlohmann::json& j, const TransferReason& o);
-  friend void from_json(const nlohmann::json& j, TransferReason& o);
+  friend void to_json(nlohmann::json &j, const TransferReason &o);
+  friend void from_json(const nlohmann::json &j, TransferReason &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* TransferReason_H_ */

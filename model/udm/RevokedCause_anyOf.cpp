@@ -16,8 +16,8 @@
 
 #include "RevokedCause_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::udm {
 
@@ -30,12 +30,12 @@ void RevokedCause_anyOf::validate() const {
   }
 }
 
-bool RevokedCause_anyOf::validate(std::stringstream& msg) const {
+bool RevokedCause_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool RevokedCause_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool RevokedCause_anyOf::validate(std::stringstream &msg,
+                                  const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "RevokedCause_anyOf" : pathPrefix;
@@ -49,31 +49,30 @@ bool RevokedCause_anyOf::validate(
   return success;
 }
 
-bool RevokedCause_anyOf::operator==(const RevokedCause_anyOf& rhs) const {
+bool RevokedCause_anyOf::operator==(const RevokedCause_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool RevokedCause_anyOf::operator!=(const RevokedCause_anyOf& rhs) const {
+bool RevokedCause_anyOf::operator!=(const RevokedCause_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const RevokedCause_anyOf& o) {
+void to_json(nlohmann::json &j, const RevokedCause_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case RevokedCause_anyOf::eRevokedCause_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case RevokedCause_anyOf::eRevokedCause_anyOf::NOT_ALLOWED:
-      j = "NOT_ALLOWED";
-      break;
+  case RevokedCause_anyOf::eRevokedCause_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case RevokedCause_anyOf::eRevokedCause_anyOf::NOT_ALLOWED:
+    j = "NOT_ALLOWED";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, RevokedCause_anyOf& o) {
+void from_json(const nlohmann::json &j, RevokedCause_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "NOT_ALLOWED") {
     o.setValue(RevokedCause_anyOf::eRevokedCause_anyOf::NOT_ALLOWED);
@@ -94,4 +93,4 @@ void RevokedCause_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

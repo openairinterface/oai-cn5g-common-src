@@ -16,7 +16,7 @@ extern "C" {
 namespace oai::ngap {
 
 class PathSwitchRequestUnsuccessfulTransfer {
- public:
+public:
   PathSwitchRequestUnsuccessfulTransfer();
   virtual ~PathSwitchRequestUnsuccessfulTransfer();
 
@@ -29,15 +29,15 @@ class PathSwitchRequestUnsuccessfulTransfer {
   long getChoiceOfCause() const;
   long getCause() const;
 
-  int encode(uint8_t* buf, int bufSize);
-  bool decode(uint8_t* buf, int bufSize);
+  int encode(uint8_t *buf, int bufSize);
+  bool decode(uint8_t *buf, int bufSize);
 
- private:
-  Ngap_PathSwitchRequestUnsuccessfulTransfer_t*
-      m_PathSwitchRequestUnsuccessfulTransferIe;
+private:
+  Ngap_PathSwitchRequestUnsuccessfulTransfer_t
+      *m_PathSwitchRequestUnsuccessfulTransferIe;
 
-  Cause m_CauseValue;  // Mandatory
+  Cause m_CauseValue; // Mandatory
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

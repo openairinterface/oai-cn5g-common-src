@@ -27,13 +27,13 @@ struct Ngap_ProtocolExtensionContainer;
 
 /* Ngap_ExpectedUEBehaviour */
 typedef struct Ngap_ExpectedUEBehaviour {
-  struct Ngap_ExpectedUEActivityBehaviour*
-      expectedUEActivityBehaviour;               /* OPTIONAL */
-  Ngap_ExpectedHOInterval_t* expectedHOInterval; /* OPTIONAL */
-  Ngap_ExpectedUEMobility_t* expectedUEMobility; /* OPTIONAL */
-  struct Ngap_ExpectedUEMovingTrajectory*
-      expectedUEMovingTrajectory;                        /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ExpectedUEActivityBehaviour
+      *expectedUEActivityBehaviour;              /* OPTIONAL */
+  Ngap_ExpectedHOInterval_t *expectedHOInterval; /* OPTIONAL */
+  Ngap_ExpectedUEMobility_t *expectedUEMobility; /* OPTIONAL */
+  struct Ngap_ExpectedUEMovingTrajectory
+      *expectedUEMovingTrajectory;                       /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

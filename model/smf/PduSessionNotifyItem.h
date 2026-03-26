@@ -28,7 +28,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class PduSessionNotifyItem {
- public:
+public:
   PduSessionNotifyItem();
   virtual ~PduSessionNotifyItem();
 
@@ -41,15 +41,15 @@ class PduSessionNotifyItem {
   ///
   /// </summary>
   NotificationCause getNotificationCause() const;
-  void setNotificationCause(NotificationCause const& value);
+  void setNotificationCause(NotificationCause const &value);
 
-  friend void to_json(nlohmann::json& j, const PduSessionNotifyItem& o);
-  friend void from_json(const nlohmann::json& j, PduSessionNotifyItem& o);
+  friend void to_json(nlohmann::json &j, const PduSessionNotifyItem &o);
+  friend void from_json(const nlohmann::json &j, PduSessionNotifyItem &o);
 
- protected:
+protected:
   NotificationCause m_NotificationCause;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* PduSessionNotifyItem_H_ */

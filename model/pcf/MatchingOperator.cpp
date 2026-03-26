@@ -27,12 +27,12 @@ void MatchingOperator::validate() const {
   }
 }
 
-bool MatchingOperator::validate(std::stringstream& msg) const {
+bool MatchingOperator::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool MatchingOperator::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool MatchingOperator::validate(std::stringstream &msg,
+                                const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "MatchingOperator" : pathPrefix;
@@ -40,18 +40,18 @@ bool MatchingOperator::validate(
   return success;
 }
 
-bool MatchingOperator::operator==(const MatchingOperator& rhs) const {
-  return true;  // TODO
+bool MatchingOperator::operator==(const MatchingOperator &rhs) const {
+  return true; // TODO
 }
 
-bool MatchingOperator::operator!=(const MatchingOperator& rhs) const {
+bool MatchingOperator::operator!=(const MatchingOperator &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const MatchingOperator& o) {
+void to_json(nlohmann::json &j, const MatchingOperator &o) {
   j = nlohmann::json::object();
 }
 
-void from_json(const nlohmann::json& j, MatchingOperator& o) {}
+void from_json(const nlohmann::json &j, MatchingOperator &o) {}
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

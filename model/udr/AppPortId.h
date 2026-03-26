@@ -30,7 +30,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class AppPortId {
- public:
+public:
   AppPortId();
   virtual ~AppPortId();
 
@@ -54,16 +54,16 @@ class AppPortId {
   bool originatorPortIsSet() const;
   void unsetOriginatorPort();
 
-  friend void to_json(nlohmann::json& j, const AppPortId& o);
-  friend void from_json(const nlohmann::json& j, AppPortId& o);
+  friend void to_json(nlohmann::json &j, const AppPortId &o);
+  friend void from_json(const nlohmann::json &j, AppPortId &o);
 
- protected:
+protected:
   int32_t m_DestinationPort;
   bool m_DestinationPortIsSet;
   int32_t m_OriginatorPort;
   bool m_OriginatorPortIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* AppPortId_H_ */

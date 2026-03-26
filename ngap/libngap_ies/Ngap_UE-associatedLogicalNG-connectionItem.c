@@ -12,8 +12,8 @@
 asn_TYPE_member_t asn_MBR_Ngap_UE_associatedLogicalNG_connectionItem_1[] = {
     {ATF_POINTER,
      3,
-     offsetof(
-         struct Ngap_UE_associatedLogicalNG_connectionItem, aMF_UE_NGAP_ID),
+     offsetof(struct Ngap_UE_associatedLogicalNG_connectionItem,
+              aMF_UE_NGAP_ID),
      (ASN_TAG_CLASS_CONTEXT | (0 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_AMF_UE_NGAP_ID,
@@ -32,8 +32,8 @@ asn_TYPE_member_t asn_MBR_Ngap_UE_associatedLogicalNG_connectionItem_1[] = {
      "aMF-UE-NGAP-ID"},
     {ATF_POINTER,
      2,
-     offsetof(
-         struct Ngap_UE_associatedLogicalNG_connectionItem, rAN_UE_NGAP_ID),
+     offsetof(struct Ngap_UE_associatedLogicalNG_connectionItem,
+              rAN_UE_NGAP_ID),
      (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_RAN_UE_NGAP_ID,

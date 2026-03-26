@@ -19,10 +19,10 @@
 namespace oai::udr::model {
 
 NiddInformation::NiddInformation() {
-  m_AfId            = "";
-  m_Gpsi            = "";
-  m_GpsiIsSet       = false;
-  m_ExtGroupId      = "";
+  m_AfId = "";
+  m_Gpsi = "";
+  m_GpsiIsSet = false;
+  m_ExtGroupId = "";
   m_ExtGroupIdIsSet = false;
 }
 
@@ -32,14 +32,16 @@ void NiddInformation::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const NiddInformation& o) {
-  j         = nlohmann::json();
+void to_json(nlohmann::json &j, const NiddInformation &o) {
+  j = nlohmann::json();
   j["afId"] = o.m_AfId;
-  if (o.gpsiIsSet()) j["gpsi"] = o.m_Gpsi;
-  if (o.extGroupIdIsSet()) j["extGroupId"] = o.m_ExtGroupId;
+  if (o.gpsiIsSet())
+    j["gpsi"] = o.m_Gpsi;
+  if (o.extGroupIdIsSet())
+    j["extGroupId"] = o.m_ExtGroupId;
 }
 
-void from_json(const nlohmann::json& j, NiddInformation& o) {
+void from_json(const nlohmann::json &j, NiddInformation &o) {
   j.at("afId").get_to(o.m_AfId);
   if (j.find("gpsi") != j.end()) {
     j.at("gpsi").get_to(o.m_Gpsi);
@@ -51,37 +53,21 @@ void from_json(const nlohmann::json& j, NiddInformation& o) {
   }
 }
 
-std::string NiddInformation::getAfId() const {
-  return m_AfId;
-}
-void NiddInformation::setAfId(std::string const& value) {
-  m_AfId = value;
-}
-std::string NiddInformation::getGpsi() const {
-  return m_Gpsi;
-}
-void NiddInformation::setGpsi(std::string const& value) {
-  m_Gpsi      = value;
+std::string NiddInformation::getAfId() const { return m_AfId; }
+void NiddInformation::setAfId(std::string const &value) { m_AfId = value; }
+std::string NiddInformation::getGpsi() const { return m_Gpsi; }
+void NiddInformation::setGpsi(std::string const &value) {
+  m_Gpsi = value;
   m_GpsiIsSet = true;
 }
-bool NiddInformation::gpsiIsSet() const {
-  return m_GpsiIsSet;
-}
-void NiddInformation::unsetGpsi() {
-  m_GpsiIsSet = false;
-}
-std::string NiddInformation::getExtGroupId() const {
-  return m_ExtGroupId;
-}
-void NiddInformation::setExtGroupId(std::string const& value) {
-  m_ExtGroupId      = value;
+bool NiddInformation::gpsiIsSet() const { return m_GpsiIsSet; }
+void NiddInformation::unsetGpsi() { m_GpsiIsSet = false; }
+std::string NiddInformation::getExtGroupId() const { return m_ExtGroupId; }
+void NiddInformation::setExtGroupId(std::string const &value) {
+  m_ExtGroupId = value;
   m_ExtGroupIdIsSet = true;
 }
-bool NiddInformation::extGroupIdIsSet() const {
-  return m_ExtGroupIdIsSet;
-}
-void NiddInformation::unsetExtGroupId() {
-  m_ExtGroupIdIsSet = false;
-}
+bool NiddInformation::extGroupIdIsSet() const { return m_ExtGroupIdIsSet; }
+void NiddInformation::unsetExtGroupId() { m_ExtGroupIdIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

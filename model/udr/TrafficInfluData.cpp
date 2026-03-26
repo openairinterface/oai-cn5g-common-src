@@ -19,43 +19,43 @@
 namespace oai::udr::model {
 
 TrafficInfluData::TrafficInfluData() {
-  m_UpPathChgNotifCorreId      = "";
+  m_UpPathChgNotifCorreId = "";
   m_UpPathChgNotifCorreIdIsSet = false;
-  m_AppReloInd                 = false;
-  m_AppReloIndIsSet            = false;
-  m_AfAppId                    = "";
-  m_AfAppIdIsSet               = false;
-  m_Dnn                        = "";
-  m_DnnIsSet                   = false;
-  m_EthTrafficFiltersIsSet     = false;
-  m_SnssaiIsSet                = false;
-  m_InterGroupId               = "";
-  m_InterGroupIdIsSet          = false;
-  m_Supi                       = "";
-  m_SupiIsSet                  = false;
-  m_TrafficFiltersIsSet        = false;
-  m_TrafficRoutesIsSet         = false;
-  m_TraffCorreInd              = false;
-  m_TraffCorreIndIsSet         = false;
-  m_ValidStartTime             = "";
-  m_ValidStartTimeIsSet        = false;
-  m_ValidEndTime               = "";
-  m_ValidEndTimeIsSet          = false;
-  m_TempValiditiesIsSet        = false;
-  m_NwAreaInfoIsSet            = false;
-  m_UpPathChgNotifUri          = "";
-  m_UpPathChgNotifUriIsSet     = false;
-  m_HeadersIsSet               = false;
-  m_SubscribedEventsIsSet      = false;
-  m_DnaiChgTypeIsSet           = false;
-  m_AfAckInd                   = false;
-  m_AfAckIndIsSet              = false;
-  m_AddrPreserInd              = false;
-  m_AddrPreserIndIsSet         = false;
-  m_SupportedFeatures          = "";
-  m_SupportedFeaturesIsSet     = false;
-  m_ResUri                     = "";
-  m_ResUriIsSet                = false;
+  m_AppReloInd = false;
+  m_AppReloIndIsSet = false;
+  m_AfAppId = "";
+  m_AfAppIdIsSet = false;
+  m_Dnn = "";
+  m_DnnIsSet = false;
+  m_EthTrafficFiltersIsSet = false;
+  m_SnssaiIsSet = false;
+  m_InterGroupId = "";
+  m_InterGroupIdIsSet = false;
+  m_Supi = "";
+  m_SupiIsSet = false;
+  m_TrafficFiltersIsSet = false;
+  m_TrafficRoutesIsSet = false;
+  m_TraffCorreInd = false;
+  m_TraffCorreIndIsSet = false;
+  m_ValidStartTime = "";
+  m_ValidStartTimeIsSet = false;
+  m_ValidEndTime = "";
+  m_ValidEndTimeIsSet = false;
+  m_TempValiditiesIsSet = false;
+  m_NwAreaInfoIsSet = false;
+  m_UpPathChgNotifUri = "";
+  m_UpPathChgNotifUriIsSet = false;
+  m_HeadersIsSet = false;
+  m_SubscribedEventsIsSet = false;
+  m_DnaiChgTypeIsSet = false;
+  m_AfAckInd = false;
+  m_AfAckIndIsSet = false;
+  m_AddrPreserInd = false;
+  m_AddrPreserIndIsSet = false;
+  m_SupportedFeatures = "";
+  m_SupportedFeaturesIsSet = false;
+  m_ResUri = "";
+  m_ResUriIsSet = false;
 }
 
 TrafficInfluData::~TrafficInfluData() {}
@@ -64,42 +64,57 @@ void TrafficInfluData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const TrafficInfluData& o) {
+void to_json(nlohmann::json &j, const TrafficInfluData &o) {
   j = nlohmann::json();
   if (o.upPathChgNotifCorreIdIsSet())
     j["upPathChgNotifCorreId"] = o.m_UpPathChgNotifCorreId;
-  if (o.appReloIndIsSet()) j["appReloInd"] = o.m_AppReloInd;
-  if (o.afAppIdIsSet()) j["afAppId"] = o.m_AfAppId;
-  if (o.dnnIsSet()) j["dnn"] = o.m_Dnn;
+  if (o.appReloIndIsSet())
+    j["appReloInd"] = o.m_AppReloInd;
+  if (o.afAppIdIsSet())
+    j["afAppId"] = o.m_AfAppId;
+  if (o.dnnIsSet())
+    j["dnn"] = o.m_Dnn;
   if (o.ethTrafficFiltersIsSet() || !o.m_EthTrafficFilters.empty())
     j["ethTrafficFilters"] = o.m_EthTrafficFilters;
-  if (o.snssaiIsSet()) j["snssai"] = o.m_Snssai;
-  if (o.interGroupIdIsSet()) j["interGroupId"] = o.m_InterGroupId;
-  if (o.supiIsSet()) j["supi"] = o.m_Supi;
+  if (o.snssaiIsSet())
+    j["snssai"] = o.m_Snssai;
+  if (o.interGroupIdIsSet())
+    j["interGroupId"] = o.m_InterGroupId;
+  if (o.supiIsSet())
+    j["supi"] = o.m_Supi;
   if (o.trafficFiltersIsSet() || !o.m_TrafficFilters.empty())
     j["trafficFilters"] = o.m_TrafficFilters;
   if (o.trafficRoutesIsSet() || !o.m_TrafficRoutes.empty())
     j["trafficRoutes"] = o.m_TrafficRoutes;
-  if (o.traffCorreIndIsSet()) j["traffCorreInd"] = o.m_TraffCorreInd;
-  if (o.validStartTimeIsSet()) j["validStartTime"] = o.m_ValidStartTime;
-  if (o.validEndTimeIsSet()) j["validEndTime"] = o.m_ValidEndTime;
+  if (o.traffCorreIndIsSet())
+    j["traffCorreInd"] = o.m_TraffCorreInd;
+  if (o.validStartTimeIsSet())
+    j["validStartTime"] = o.m_ValidStartTime;
+  if (o.validEndTimeIsSet())
+    j["validEndTime"] = o.m_ValidEndTime;
   if (o.tempValiditiesIsSet() || !o.m_TempValidities.empty())
     j["tempValidities"] = o.m_TempValidities;
-  if (o.nwAreaInfoIsSet()) j["nwAreaInfo"] = o.m_NwAreaInfo;
+  if (o.nwAreaInfoIsSet())
+    j["nwAreaInfo"] = o.m_NwAreaInfo;
   if (o.upPathChgNotifUriIsSet())
     j["upPathChgNotifUri"] = o.m_UpPathChgNotifUri;
-  if (o.headersIsSet() || !o.m_Headers.empty()) j["headers"] = o.m_Headers;
+  if (o.headersIsSet() || !o.m_Headers.empty())
+    j["headers"] = o.m_Headers;
   if (o.subscribedEventsIsSet() || !o.m_SubscribedEvents.empty())
     j["subscribedEvents"] = o.m_SubscribedEvents;
-  if (o.dnaiChgTypeIsSet()) j["dnaiChgType"] = o.m_DnaiChgType;
-  if (o.afAckIndIsSet()) j["afAckInd"] = o.m_AfAckInd;
-  if (o.addrPreserIndIsSet()) j["addrPreserInd"] = o.m_AddrPreserInd;
+  if (o.dnaiChgTypeIsSet())
+    j["dnaiChgType"] = o.m_DnaiChgType;
+  if (o.afAckIndIsSet())
+    j["afAckInd"] = o.m_AfAckInd;
+  if (o.addrPreserIndIsSet())
+    j["addrPreserInd"] = o.m_AddrPreserInd;
   if (o.supportedFeaturesIsSet())
     j["supportedFeatures"] = o.m_SupportedFeatures;
-  if (o.resUriIsSet()) j["resUri"] = o.m_ResUri;
+  if (o.resUriIsSet())
+    j["resUri"] = o.m_ResUri;
 }
 
-void from_json(const nlohmann::json& j, TrafficInfluData& o) {
+void from_json(const nlohmann::json &j, TrafficInfluData &o) {
   if (j.find("upPathChgNotifCorreId") != j.end()) {
     j.at("upPathChgNotifCorreId").get_to(o.m_UpPathChgNotifCorreId);
     o.m_UpPathChgNotifCorreIdIsSet = true;
@@ -197,8 +212,8 @@ void from_json(const nlohmann::json& j, TrafficInfluData& o) {
 std::string TrafficInfluData::getUpPathChgNotifCorreId() const {
   return m_UpPathChgNotifCorreId;
 }
-void TrafficInfluData::setUpPathChgNotifCorreId(std::string const& value) {
-  m_UpPathChgNotifCorreId      = value;
+void TrafficInfluData::setUpPathChgNotifCorreId(std::string const &value) {
+  m_UpPathChgNotifCorreId = value;
   m_UpPathChgNotifCorreIdIsSet = true;
 }
 bool TrafficInfluData::upPathChgNotifCorreIdIsSet() const {
@@ -207,51 +222,33 @@ bool TrafficInfluData::upPathChgNotifCorreIdIsSet() const {
 void TrafficInfluData::unsetUpPathChgNotifCorreId() {
   m_UpPathChgNotifCorreIdIsSet = false;
 }
-bool TrafficInfluData::isAppReloInd() const {
-  return m_AppReloInd;
-}
+bool TrafficInfluData::isAppReloInd() const { return m_AppReloInd; }
 void TrafficInfluData::setAppReloInd(bool const value) {
-  m_AppReloInd      = value;
+  m_AppReloInd = value;
   m_AppReloIndIsSet = true;
 }
-bool TrafficInfluData::appReloIndIsSet() const {
-  return m_AppReloIndIsSet;
-}
-void TrafficInfluData::unsetAppReloInd() {
-  m_AppReloIndIsSet = false;
-}
-std::string TrafficInfluData::getAfAppId() const {
-  return m_AfAppId;
-}
-void TrafficInfluData::setAfAppId(std::string const& value) {
-  m_AfAppId      = value;
+bool TrafficInfluData::appReloIndIsSet() const { return m_AppReloIndIsSet; }
+void TrafficInfluData::unsetAppReloInd() { m_AppReloIndIsSet = false; }
+std::string TrafficInfluData::getAfAppId() const { return m_AfAppId; }
+void TrafficInfluData::setAfAppId(std::string const &value) {
+  m_AfAppId = value;
   m_AfAppIdIsSet = true;
 }
-bool TrafficInfluData::afAppIdIsSet() const {
-  return m_AfAppIdIsSet;
-}
-void TrafficInfluData::unsetAfAppId() {
-  m_AfAppIdIsSet = false;
-}
-std::string TrafficInfluData::getDnn() const {
-  return m_Dnn;
-}
-void TrafficInfluData::setDnn(std::string const& value) {
-  m_Dnn      = value;
+bool TrafficInfluData::afAppIdIsSet() const { return m_AfAppIdIsSet; }
+void TrafficInfluData::unsetAfAppId() { m_AfAppIdIsSet = false; }
+std::string TrafficInfluData::getDnn() const { return m_Dnn; }
+void TrafficInfluData::setDnn(std::string const &value) {
+  m_Dnn = value;
   m_DnnIsSet = true;
 }
-bool TrafficInfluData::dnnIsSet() const {
-  return m_DnnIsSet;
-}
-void TrafficInfluData::unsetDnn() {
-  m_DnnIsSet = false;
-}
-std::vector<EthFlowDescription>& TrafficInfluData::getEthTrafficFilters() {
+bool TrafficInfluData::dnnIsSet() const { return m_DnnIsSet; }
+void TrafficInfluData::unsetDnn() { m_DnnIsSet = false; }
+std::vector<EthFlowDescription> &TrafficInfluData::getEthTrafficFilters() {
   return m_EthTrafficFilters;
 }
 void TrafficInfluData::setEthTrafficFilters(
-    std::vector<EthFlowDescription> const& value) {
-  m_EthTrafficFilters      = value;
+    std::vector<EthFlowDescription> const &value) {
+  m_EthTrafficFilters = value;
   m_EthTrafficFiltersIsSet = true;
 }
 bool TrafficInfluData::ethTrafficFiltersIsSet() const {
@@ -263,141 +260,103 @@ void TrafficInfluData::unsetEthTrafficFilters() {
 oai::model::common::Snssai TrafficInfluData::getSnssai() const {
   return m_Snssai;
 }
-void TrafficInfluData::setSnssai(oai::model::common::Snssai const& value) {
-  m_Snssai      = value;
+void TrafficInfluData::setSnssai(oai::model::common::Snssai const &value) {
+  m_Snssai = value;
   m_SnssaiIsSet = true;
 }
-bool TrafficInfluData::snssaiIsSet() const {
-  return m_SnssaiIsSet;
-}
-void TrafficInfluData::unsetSnssai() {
-  m_SnssaiIsSet = false;
-}
-std::string TrafficInfluData::getInterGroupId() const {
-  return m_InterGroupId;
-}
-void TrafficInfluData::setInterGroupId(std::string const& value) {
-  m_InterGroupId      = value;
+bool TrafficInfluData::snssaiIsSet() const { return m_SnssaiIsSet; }
+void TrafficInfluData::unsetSnssai() { m_SnssaiIsSet = false; }
+std::string TrafficInfluData::getInterGroupId() const { return m_InterGroupId; }
+void TrafficInfluData::setInterGroupId(std::string const &value) {
+  m_InterGroupId = value;
   m_InterGroupIdIsSet = true;
 }
-bool TrafficInfluData::interGroupIdIsSet() const {
-  return m_InterGroupIdIsSet;
-}
-void TrafficInfluData::unsetInterGroupId() {
-  m_InterGroupIdIsSet = false;
-}
-std::string TrafficInfluData::getSupi() const {
-  return m_Supi;
-}
-void TrafficInfluData::setSupi(std::string const& value) {
-  m_Supi      = value;
+bool TrafficInfluData::interGroupIdIsSet() const { return m_InterGroupIdIsSet; }
+void TrafficInfluData::unsetInterGroupId() { m_InterGroupIdIsSet = false; }
+std::string TrafficInfluData::getSupi() const { return m_Supi; }
+void TrafficInfluData::setSupi(std::string const &value) {
+  m_Supi = value;
   m_SupiIsSet = true;
 }
-bool TrafficInfluData::supiIsSet() const {
-  return m_SupiIsSet;
-}
-void TrafficInfluData::unsetSupi() {
-  m_SupiIsSet = false;
-}
-std::vector<FlowInfo>& TrafficInfluData::getTrafficFilters() {
+bool TrafficInfluData::supiIsSet() const { return m_SupiIsSet; }
+void TrafficInfluData::unsetSupi() { m_SupiIsSet = false; }
+std::vector<FlowInfo> &TrafficInfluData::getTrafficFilters() {
   return m_TrafficFilters;
 }
-void TrafficInfluData::setTrafficFilters(std::vector<FlowInfo> const& value) {
-  m_TrafficFilters      = value;
+void TrafficInfluData::setTrafficFilters(std::vector<FlowInfo> const &value) {
+  m_TrafficFilters = value;
   m_TrafficFiltersIsSet = true;
 }
 bool TrafficInfluData::trafficFiltersIsSet() const {
   return m_TrafficFiltersIsSet;
 }
-void TrafficInfluData::unsetTrafficFilters() {
-  m_TrafficFiltersIsSet = false;
-}
-std::vector<oai::model::common::RouteToLocation>&
+void TrafficInfluData::unsetTrafficFilters() { m_TrafficFiltersIsSet = false; }
+std::vector<oai::model::common::RouteToLocation> &
 TrafficInfluData::getTrafficRoutes() {
   return m_TrafficRoutes;
 }
 void TrafficInfluData::setTrafficRoutes(
-    std::vector<oai::model::common::RouteToLocation> const& value) {
-  m_TrafficRoutes      = value;
+    std::vector<oai::model::common::RouteToLocation> const &value) {
+  m_TrafficRoutes = value;
   m_TrafficRoutesIsSet = true;
 }
 bool TrafficInfluData::trafficRoutesIsSet() const {
   return m_TrafficRoutesIsSet;
 }
-void TrafficInfluData::unsetTrafficRoutes() {
-  m_TrafficRoutesIsSet = false;
-}
-bool TrafficInfluData::isTraffCorreInd() const {
-  return m_TraffCorreInd;
-}
+void TrafficInfluData::unsetTrafficRoutes() { m_TrafficRoutesIsSet = false; }
+bool TrafficInfluData::isTraffCorreInd() const { return m_TraffCorreInd; }
 void TrafficInfluData::setTraffCorreInd(bool const value) {
-  m_TraffCorreInd      = value;
+  m_TraffCorreInd = value;
   m_TraffCorreIndIsSet = true;
 }
 bool TrafficInfluData::traffCorreIndIsSet() const {
   return m_TraffCorreIndIsSet;
 }
-void TrafficInfluData::unsetTraffCorreInd() {
-  m_TraffCorreIndIsSet = false;
-}
+void TrafficInfluData::unsetTraffCorreInd() { m_TraffCorreIndIsSet = false; }
 std::string TrafficInfluData::getValidStartTime() const {
   return m_ValidStartTime;
 }
-void TrafficInfluData::setValidStartTime(std::string const& value) {
-  m_ValidStartTime      = value;
+void TrafficInfluData::setValidStartTime(std::string const &value) {
+  m_ValidStartTime = value;
   m_ValidStartTimeIsSet = true;
 }
 bool TrafficInfluData::validStartTimeIsSet() const {
   return m_ValidStartTimeIsSet;
 }
-void TrafficInfluData::unsetValidStartTime() {
-  m_ValidStartTimeIsSet = false;
-}
-std::string TrafficInfluData::getValidEndTime() const {
-  return m_ValidEndTime;
-}
-void TrafficInfluData::setValidEndTime(std::string const& value) {
-  m_ValidEndTime      = value;
+void TrafficInfluData::unsetValidStartTime() { m_ValidStartTimeIsSet = false; }
+std::string TrafficInfluData::getValidEndTime() const { return m_ValidEndTime; }
+void TrafficInfluData::setValidEndTime(std::string const &value) {
+  m_ValidEndTime = value;
   m_ValidEndTimeIsSet = true;
 }
-bool TrafficInfluData::validEndTimeIsSet() const {
-  return m_ValidEndTimeIsSet;
-}
-void TrafficInfluData::unsetValidEndTime() {
-  m_ValidEndTimeIsSet = false;
-}
-std::vector<TemporalValidity>& TrafficInfluData::getTempValidities() {
+bool TrafficInfluData::validEndTimeIsSet() const { return m_ValidEndTimeIsSet; }
+void TrafficInfluData::unsetValidEndTime() { m_ValidEndTimeIsSet = false; }
+std::vector<TemporalValidity> &TrafficInfluData::getTempValidities() {
   return m_TempValidities;
 }
 void TrafficInfluData::setTempValidities(
-    std::vector<TemporalValidity> const& value) {
-  m_TempValidities      = value;
+    std::vector<TemporalValidity> const &value) {
+  m_TempValidities = value;
   m_TempValiditiesIsSet = true;
 }
 bool TrafficInfluData::tempValiditiesIsSet() const {
   return m_TempValiditiesIsSet;
 }
-void TrafficInfluData::unsetTempValidities() {
-  m_TempValiditiesIsSet = false;
-}
+void TrafficInfluData::unsetTempValidities() { m_TempValiditiesIsSet = false; }
 NetworkAreaInfo_2 TrafficInfluData::getNwAreaInfo() const {
   return m_NwAreaInfo;
 }
-void TrafficInfluData::setNwAreaInfo(NetworkAreaInfo_2 const& value) {
-  m_NwAreaInfo      = value;
+void TrafficInfluData::setNwAreaInfo(NetworkAreaInfo_2 const &value) {
+  m_NwAreaInfo = value;
   m_NwAreaInfoIsSet = true;
 }
-bool TrafficInfluData::nwAreaInfoIsSet() const {
-  return m_NwAreaInfoIsSet;
-}
-void TrafficInfluData::unsetNwAreaInfo() {
-  m_NwAreaInfoIsSet = false;
-}
+bool TrafficInfluData::nwAreaInfoIsSet() const { return m_NwAreaInfoIsSet; }
+void TrafficInfluData::unsetNwAreaInfo() { m_NwAreaInfoIsSet = false; }
 std::string TrafficInfluData::getUpPathChgNotifUri() const {
   return m_UpPathChgNotifUri;
 }
-void TrafficInfluData::setUpPathChgNotifUri(std::string const& value) {
-  m_UpPathChgNotifUri      = value;
+void TrafficInfluData::setUpPathChgNotifUri(std::string const &value) {
+  m_UpPathChgNotifUri = value;
   m_UpPathChgNotifUriIsSet = true;
 }
 bool TrafficInfluData::upPathChgNotifUriIsSet() const {
@@ -406,25 +365,19 @@ bool TrafficInfluData::upPathChgNotifUriIsSet() const {
 void TrafficInfluData::unsetUpPathChgNotifUri() {
   m_UpPathChgNotifUriIsSet = false;
 }
-std::vector<std::string>& TrafficInfluData::getHeaders() {
-  return m_Headers;
-}
-void TrafficInfluData::setHeaders(std::vector<std::string> const& value) {
-  m_Headers      = value;
+std::vector<std::string> &TrafficInfluData::getHeaders() { return m_Headers; }
+void TrafficInfluData::setHeaders(std::vector<std::string> const &value) {
+  m_Headers = value;
   m_HeadersIsSet = true;
 }
-bool TrafficInfluData::headersIsSet() const {
-  return m_HeadersIsSet;
-}
-void TrafficInfluData::unsetHeaders() {
-  m_HeadersIsSet = false;
-}
-std::vector<SubscribedEvent>& TrafficInfluData::getSubscribedEvents() {
+bool TrafficInfluData::headersIsSet() const { return m_HeadersIsSet; }
+void TrafficInfluData::unsetHeaders() { m_HeadersIsSet = false; }
+std::vector<SubscribedEvent> &TrafficInfluData::getSubscribedEvents() {
   return m_SubscribedEvents;
 }
 void TrafficInfluData::setSubscribedEvents(
-    std::vector<SubscribedEvent> const& value) {
-  m_SubscribedEvents      = value;
+    std::vector<SubscribedEvent> const &value) {
+  m_SubscribedEvents = value;
   m_SubscribedEventsIsSet = true;
 }
 bool TrafficInfluData::subscribedEventsIsSet() const {
@@ -437,47 +390,33 @@ oai::model::common::DnaiChangeType TrafficInfluData::getDnaiChgType() const {
   return m_DnaiChgType;
 }
 void TrafficInfluData::setDnaiChgType(
-    oai::model::common::DnaiChangeType const& value) {
-  m_DnaiChgType      = value;
+    oai::model::common::DnaiChangeType const &value) {
+  m_DnaiChgType = value;
   m_DnaiChgTypeIsSet = true;
 }
-bool TrafficInfluData::dnaiChgTypeIsSet() const {
-  return m_DnaiChgTypeIsSet;
-}
-void TrafficInfluData::unsetDnaiChgType() {
-  m_DnaiChgTypeIsSet = false;
-}
-bool TrafficInfluData::isAfAckInd() const {
-  return m_AfAckInd;
-}
+bool TrafficInfluData::dnaiChgTypeIsSet() const { return m_DnaiChgTypeIsSet; }
+void TrafficInfluData::unsetDnaiChgType() { m_DnaiChgTypeIsSet = false; }
+bool TrafficInfluData::isAfAckInd() const { return m_AfAckInd; }
 void TrafficInfluData::setAfAckInd(bool const value) {
-  m_AfAckInd      = value;
+  m_AfAckInd = value;
   m_AfAckIndIsSet = true;
 }
-bool TrafficInfluData::afAckIndIsSet() const {
-  return m_AfAckIndIsSet;
-}
-void TrafficInfluData::unsetAfAckInd() {
-  m_AfAckIndIsSet = false;
-}
-bool TrafficInfluData::isAddrPreserInd() const {
-  return m_AddrPreserInd;
-}
+bool TrafficInfluData::afAckIndIsSet() const { return m_AfAckIndIsSet; }
+void TrafficInfluData::unsetAfAckInd() { m_AfAckIndIsSet = false; }
+bool TrafficInfluData::isAddrPreserInd() const { return m_AddrPreserInd; }
 void TrafficInfluData::setAddrPreserInd(bool const value) {
-  m_AddrPreserInd      = value;
+  m_AddrPreserInd = value;
   m_AddrPreserIndIsSet = true;
 }
 bool TrafficInfluData::addrPreserIndIsSet() const {
   return m_AddrPreserIndIsSet;
 }
-void TrafficInfluData::unsetAddrPreserInd() {
-  m_AddrPreserIndIsSet = false;
-}
+void TrafficInfluData::unsetAddrPreserInd() { m_AddrPreserIndIsSet = false; }
 std::string TrafficInfluData::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
-void TrafficInfluData::setSupportedFeatures(std::string const& value) {
-  m_SupportedFeatures      = value;
+void TrafficInfluData::setSupportedFeatures(std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool TrafficInfluData::supportedFeaturesIsSet() const {
@@ -486,18 +425,12 @@ bool TrafficInfluData::supportedFeaturesIsSet() const {
 void TrafficInfluData::unsetSupportedFeatures() {
   m_SupportedFeaturesIsSet = false;
 }
-std::string TrafficInfluData::getResUri() const {
-  return m_ResUri;
-}
-void TrafficInfluData::setResUri(std::string const& value) {
-  m_ResUri      = value;
+std::string TrafficInfluData::getResUri() const { return m_ResUri; }
+void TrafficInfluData::setResUri(std::string const &value) {
+  m_ResUri = value;
   m_ResUriIsSet = true;
 }
-bool TrafficInfluData::resUriIsSet() const {
-  return m_ResUriIsSet;
-}
-void TrafficInfluData::unsetResUri() {
-  m_ResUriIsSet = false;
-}
+bool TrafficInfluData::resUriIsSet() const { return m_ResUriIsSet; }
+void TrafficInfluData::unsetResUri() { m_ResUriIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

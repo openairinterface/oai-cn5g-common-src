@@ -19,11 +19,11 @@
 namespace oai::model::pcf {
 
 UeInitiatedResourceRequest::UeInitiatedResourceRequest() {
-  m_PccRuleId       = "";
-  m_PccRuleIdIsSet  = false;
-  m_Precedence      = 0;
+  m_PccRuleId = "";
+  m_PccRuleIdIsSet = false;
+  m_Precedence = 0;
   m_PrecedenceIsSet = false;
-  m_ReqQosIsSet     = false;
+  m_ReqQosIsSet = false;
 }
 
 void UeInitiatedResourceRequest::validate() const {
@@ -33,18 +33,18 @@ void UeInitiatedResourceRequest::validate() const {
   }
 }
 
-bool UeInitiatedResourceRequest::validate(std::stringstream& msg) const {
+bool UeInitiatedResourceRequest::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool UeInitiatedResourceRequest::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool UeInitiatedResourceRequest::validate(std::stringstream &msg,
+                                          const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "UeInitiatedResourceRequest" : pathPrefix;
 
   /* PackFiltInfo */ {
-    const std::vector<oai::model::pcf::PacketFilterInfo>& value =
+    const std::vector<oai::model::pcf::PacketFilterInfo> &value =
         m_PackFiltInfo;
     const std::string currentValuePath = _pathPrefix + ".packFiltInfo";
 
@@ -52,10 +52,10 @@ bool UeInitiatedResourceRequest::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::PacketFilterInfo& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::PacketFilterInfo &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -71,7 +71,7 @@ bool UeInitiatedResourceRequest::validate(
 }
 
 bool UeInitiatedResourceRequest::operator==(
-    const UeInitiatedResourceRequest& rhs) const {
+    const UeInitiatedResourceRequest &rhs) const {
   return
 
       ((!pccRuleIdIsSet() && !rhs.pccRuleIdIsSet()) ||
@@ -93,20 +93,23 @@ bool UeInitiatedResourceRequest::operator==(
 }
 
 bool UeInitiatedResourceRequest::operator!=(
-    const UeInitiatedResourceRequest& rhs) const {
+    const UeInitiatedResourceRequest &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const UeInitiatedResourceRequest& o) {
+void to_json(nlohmann::json &j, const UeInitiatedResourceRequest &o) {
   j = nlohmann::json();
-  if (o.pccRuleIdIsSet()) j["pccRuleId"] = o.m_PccRuleId;
+  if (o.pccRuleIdIsSet())
+    j["pccRuleId"] = o.m_PccRuleId;
   j["ruleOp"] = o.m_RuleOp;
-  if (o.precedenceIsSet()) j["precedence"] = o.m_Precedence;
+  if (o.precedenceIsSet())
+    j["precedence"] = o.m_Precedence;
   j["packFiltInfo"] = o.m_PackFiltInfo;
-  if (o.reqQosIsSet()) j["reqQos"] = o.m_ReqQos;
+  if (o.reqQosIsSet())
+    j["reqQos"] = o.m_ReqQos;
 }
 
-void from_json(const nlohmann::json& j, UeInitiatedResourceRequest& o) {
+void from_json(const nlohmann::json &j, UeInitiatedResourceRequest &o) {
   if (j.find("pccRuleId") != j.end()) {
     j.at("pccRuleId").get_to(o.m_PccRuleId);
     o.m_PccRuleIdIsSet = true;
@@ -126,28 +129,26 @@ void from_json(const nlohmann::json& j, UeInitiatedResourceRequest& o) {
 std::string UeInitiatedResourceRequest::getPccRuleId() const {
   return m_PccRuleId;
 }
-void UeInitiatedResourceRequest::setPccRuleId(std::string const& value) {
-  m_PccRuleId      = value;
+void UeInitiatedResourceRequest::setPccRuleId(std::string const &value) {
+  m_PccRuleId = value;
   m_PccRuleIdIsSet = true;
 }
 bool UeInitiatedResourceRequest::pccRuleIdIsSet() const {
   return m_PccRuleIdIsSet;
 }
-void UeInitiatedResourceRequest::unsetPccRuleId() {
-  m_PccRuleIdIsSet = false;
-}
+void UeInitiatedResourceRequest::unsetPccRuleId() { m_PccRuleIdIsSet = false; }
 oai::model::pcf::RuleOperation UeInitiatedResourceRequest::getRuleOp() const {
   return m_RuleOp;
 }
 void UeInitiatedResourceRequest::setRuleOp(
-    oai::model::pcf::RuleOperation const& value) {
+    oai::model::pcf::RuleOperation const &value) {
   m_RuleOp = value;
 }
 int32_t UeInitiatedResourceRequest::getPrecedence() const {
   return m_Precedence;
 }
 void UeInitiatedResourceRequest::setPrecedence(int32_t const value) {
-  m_Precedence      = value;
+  m_Precedence = value;
   m_PrecedenceIsSet = true;
 }
 bool UeInitiatedResourceRequest::precedenceIsSet() const {
@@ -161,22 +162,18 @@ UeInitiatedResourceRequest::getPackFiltInfo() const {
   return m_PackFiltInfo;
 }
 void UeInitiatedResourceRequest::setPackFiltInfo(
-    std::vector<oai::model::pcf::PacketFilterInfo> const& value) {
+    std::vector<oai::model::pcf::PacketFilterInfo> const &value) {
   m_PackFiltInfo = value;
 }
 oai::model::pcf::RequestedQos UeInitiatedResourceRequest::getReqQos() const {
   return m_ReqQos;
 }
 void UeInitiatedResourceRequest::setReqQos(
-    oai::model::pcf::RequestedQos const& value) {
-  m_ReqQos      = value;
+    oai::model::pcf::RequestedQos const &value) {
+  m_ReqQos = value;
   m_ReqQosIsSet = true;
 }
-bool UeInitiatedResourceRequest::reqQosIsSet() const {
-  return m_ReqQosIsSet;
-}
-void UeInitiatedResourceRequest::unsetReqQos() {
-  m_ReqQosIsSet = false;
-}
+bool UeInitiatedResourceRequest::reqQosIsSet() const { return m_ReqQosIsSet; }
+void UeInitiatedResourceRequest::unsetReqQos() { m_ReqQosIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

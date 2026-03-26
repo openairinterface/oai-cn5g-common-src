@@ -20,8 +20,8 @@
 #define StringMatchingRule_H_
 
 #include "StringMatchingCondition.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::pcf {
 
@@ -29,7 +29,7 @@ namespace oai::model::pcf {
 /// A list of conditions for string matching
 /// </summary>
 class StringMatchingRule {
- public:
+public:
   StringMatchingRule();
   virtual ~StringMatchingRule() = default;
 
@@ -43,16 +43,16 @@ class StringMatchingRule {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const StringMatchingRule& rhs) const;
-  bool operator!=(const StringMatchingRule& rhs) const;
+  bool operator==(const StringMatchingRule &rhs) const;
+  bool operator!=(const StringMatchingRule &rhs) const;
 
   /////////////////////////////////////////////
   /// StringMatchingRule members
@@ -63,19 +63,19 @@ class StringMatchingRule {
   std::vector<oai::model::pcf::StringMatchingCondition>
   getStringMatchingConditions() const;
   void setStringMatchingConditions(
-      std::vector<oai::model::pcf::StringMatchingCondition> const& value);
+      std::vector<oai::model::pcf::StringMatchingCondition> const &value);
   bool stringMatchingConditionsIsSet() const;
   void unsetStringMatchingConditions();
 
-  friend void to_json(nlohmann::json& j, const StringMatchingRule& o);
-  friend void from_json(const nlohmann::json& j, StringMatchingRule& o);
+  friend void to_json(nlohmann::json &j, const StringMatchingRule &o);
+  friend void from_json(const nlohmann::json &j, StringMatchingRule &o);
 
- protected:
+protected:
   std::vector<oai::model::pcf::StringMatchingCondition>
       m_StringMatchingConditions;
   bool m_StringMatchingConditionsIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* StringMatchingRule_H_ */

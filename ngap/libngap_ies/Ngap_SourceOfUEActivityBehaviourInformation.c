@@ -30,8 +30,7 @@ asn_per_constraints_t
           !defined(ASN_DISABLE_APER_SUPPORT) */
 static const asn_INTEGER_enum_map_t
     asn_MAP_Ngap_SourceOfUEActivityBehaviourInformation_value2enum_1[] = {
-        {0, 24, "subscription-information"},
-        {1, 10, "statistics"}
+        {0, 24, "subscription-information"}, {1, 10, "statistics"}
         /* This list is extensible */
 };
 static const unsigned int

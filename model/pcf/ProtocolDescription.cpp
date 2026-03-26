@@ -19,8 +19,8 @@
 namespace oai::model::pcf {
 
 ProtocolDescription::ProtocolDescription() {
-  m_TransportProtoIsSet     = false;
-  m_RtpHeaderExtInfoIsSet   = false;
+  m_TransportProtoIsSet = false;
+  m_RtpHeaderExtInfoIsSet = false;
   m_RtpPayloadInfoListIsSet = false;
 }
 
@@ -31,18 +31,18 @@ void ProtocolDescription::validate() const {
   }
 }
 
-bool ProtocolDescription::validate(std::stringstream& msg) const {
+bool ProtocolDescription::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ProtocolDescription::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ProtocolDescription::validate(std::stringstream &msg,
+                                   const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ProtocolDescription" : pathPrefix;
 
   if (rtpPayloadInfoListIsSet()) {
-    const std::vector<oai::model::pcf::RtpPayloadInfo>& value =
+    const std::vector<oai::model::pcf::RtpPayloadInfo> &value =
         m_RtpPayloadInfoList;
     const std::string currentValuePath = _pathPrefix + ".rtpPayloadInfoList";
 
@@ -50,10 +50,10 @@ bool ProtocolDescription::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::RtpPayloadInfo& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::RtpPayloadInfo &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -69,7 +69,7 @@ bool ProtocolDescription::validate(
   return success;
 }
 
-bool ProtocolDescription::operator==(const ProtocolDescription& rhs) const {
+bool ProtocolDescription::operator==(const ProtocolDescription &rhs) const {
   return
 
       ((!transportProtoIsSet() && !rhs.transportProtoIsSet()) ||
@@ -87,19 +87,21 @@ bool ProtocolDescription::operator==(const ProtocolDescription& rhs) const {
           ;
 }
 
-bool ProtocolDescription::operator!=(const ProtocolDescription& rhs) const {
+bool ProtocolDescription::operator!=(const ProtocolDescription &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ProtocolDescription& o) {
+void to_json(nlohmann::json &j, const ProtocolDescription &o) {
   j = nlohmann::json::object();
-  if (o.transportProtoIsSet()) j["transportProto"] = o.m_TransportProto;
-  if (o.rtpHeaderExtInfoIsSet()) j["rtpHeaderExtInfo"] = o.m_RtpHeaderExtInfo;
+  if (o.transportProtoIsSet())
+    j["transportProto"] = o.m_TransportProto;
+  if (o.rtpHeaderExtInfoIsSet())
+    j["rtpHeaderExtInfo"] = o.m_RtpHeaderExtInfo;
   if (o.rtpPayloadInfoListIsSet() || !o.m_RtpPayloadInfoList.empty())
     j["rtpPayloadInfoList"] = o.m_RtpPayloadInfoList;
 }
 
-void from_json(const nlohmann::json& j, ProtocolDescription& o) {
+void from_json(const nlohmann::json &j, ProtocolDescription &o) {
   if (j.find("transportProto") != j.end()) {
     j.at("transportProto").get_to(o.m_TransportProto);
     o.m_TransportProtoIsSet = true;
@@ -114,13 +116,13 @@ void from_json(const nlohmann::json& j, ProtocolDescription& o) {
   }
 }
 
-oai::model::pcf::MediaTransportProto ProtocolDescription::getTransportProto()
-    const {
+oai::model::pcf::MediaTransportProto
+ProtocolDescription::getTransportProto() const {
   return m_TransportProto;
 }
 void ProtocolDescription::setTransportProto(
-    oai::model::pcf::MediaTransportProto const& value) {
-  m_TransportProto      = value;
+    oai::model::pcf::MediaTransportProto const &value) {
+  m_TransportProto = value;
   m_TransportProtoIsSet = true;
 }
 bool ProtocolDescription::transportProtoIsSet() const {
@@ -129,13 +131,13 @@ bool ProtocolDescription::transportProtoIsSet() const {
 void ProtocolDescription::unsetTransportProto() {
   m_TransportProtoIsSet = false;
 }
-oai::model::pcf::RtpHeaderExtInfo ProtocolDescription::getRtpHeaderExtInfo()
-    const {
+oai::model::pcf::RtpHeaderExtInfo
+ProtocolDescription::getRtpHeaderExtInfo() const {
   return m_RtpHeaderExtInfo;
 }
 void ProtocolDescription::setRtpHeaderExtInfo(
-    oai::model::pcf::RtpHeaderExtInfo const& value) {
-  m_RtpHeaderExtInfo      = value;
+    oai::model::pcf::RtpHeaderExtInfo const &value) {
+  m_RtpHeaderExtInfo = value;
   m_RtpHeaderExtInfoIsSet = true;
 }
 bool ProtocolDescription::rtpHeaderExtInfoIsSet() const {
@@ -149,8 +151,8 @@ ProtocolDescription::getRtpPayloadInfoList() const {
   return m_RtpPayloadInfoList;
 }
 void ProtocolDescription::setRtpPayloadInfoList(
-    std::vector<oai::model::pcf::RtpPayloadInfo> const& value) {
-  m_RtpPayloadInfoList      = value;
+    std::vector<oai::model::pcf::RtpPayloadInfo> const &value) {
+  m_RtpPayloadInfoList = value;
   m_RtpPayloadInfoListIsSet = true;
 }
 bool ProtocolDescription::rtpPayloadInfoListIsSet() const {
@@ -160,4 +162,4 @@ void ProtocolDescription::unsetRtpPayloadInfoList() {
   m_RtpPayloadInfoListIsSet = false;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

@@ -12,20 +12,20 @@ extern "C" {
 namespace oai::ngap {
 
 class TimerApproachForGuamiRemoval {
- public:
+public:
   TimerApproachForGuamiRemoval();
   virtual ~TimerApproachForGuamiRemoval();
 
   void set(e_Ngap_TimerApproachForGUAMIRemoval value);
-  bool get(long& value) const;
+  bool get(long &value) const;
 
-  bool encode(Ngap_TimerApproachForGUAMIRemoval_t&) const;
-  bool decode(const Ngap_TimerApproachForGUAMIRemoval_t&);
+  bool encode(Ngap_TimerApproachForGUAMIRemoval_t &) const;
+  bool decode(const Ngap_TimerApproachForGUAMIRemoval_t &);
 
- private:
+private:
   long m_TimerApproachForGuamiRemoval;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

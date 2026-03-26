@@ -17,7 +17,7 @@ namespace oai::model::smf {
 
 SmContextRetrievedData::SmContextRetrievedData() {
   m_UeEpsPdnConnection = "";
-  m_SmContextIsSet     = false;
+  m_SmContextIsSet = false;
 }
 
 SmContextRetrievedData::~SmContextRetrievedData() {}
@@ -26,13 +26,14 @@ void SmContextRetrievedData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const SmContextRetrievedData& o) {
-  j                       = nlohmann::json();
+void to_json(nlohmann::json &j, const SmContextRetrievedData &o) {
+  j = nlohmann::json();
   j["ueEpsPdnConnection"] = o.m_UeEpsPdnConnection;
-  if (o.smContextIsSet()) j["smContext"] = o.m_SmContext;
+  if (o.smContextIsSet())
+    j["smContext"] = o.m_SmContext;
 }
 
-void from_json(const nlohmann::json& j, SmContextRetrievedData& o) {
+void from_json(const nlohmann::json &j, SmContextRetrievedData &o) {
   j.at("ueEpsPdnConnection").get_to(o.m_UeEpsPdnConnection);
   if (j.find("smContext") != j.end()) {
     j.at("smContext").get_to(o.m_SmContext);
@@ -43,21 +44,15 @@ void from_json(const nlohmann::json& j, SmContextRetrievedData& o) {
 std::string SmContextRetrievedData::getUeEpsPdnConnection() const {
   return m_UeEpsPdnConnection;
 }
-void SmContextRetrievedData::setUeEpsPdnConnection(std::string const& value) {
+void SmContextRetrievedData::setUeEpsPdnConnection(std::string const &value) {
   m_UeEpsPdnConnection = value;
 }
-SmContext SmContextRetrievedData::getSmContext() const {
-  return m_SmContext;
-}
-void SmContextRetrievedData::setSmContext(SmContext const& value) {
-  m_SmContext      = value;
+SmContext SmContextRetrievedData::getSmContext() const { return m_SmContext; }
+void SmContextRetrievedData::setSmContext(SmContext const &value) {
+  m_SmContext = value;
   m_SmContextIsSet = true;
 }
-bool SmContextRetrievedData::smContextIsSet() const {
-  return m_SmContextIsSet;
-}
-void SmContextRetrievedData::unsetSmContext() {
-  m_SmContextIsSet = false;
-}
+bool SmContextRetrievedData::smContextIsSet() const { return m_SmContextIsSet; }
+void SmContextRetrievedData::unsetSmContext() { m_SmContextIsSet = false; }
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

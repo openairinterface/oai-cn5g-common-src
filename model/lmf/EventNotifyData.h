@@ -19,16 +19,16 @@
 #ifndef EventNotifyData_H_
 #define EventNotifyData_H_
 
-#include "GnssPositioningMethodAndUsage.h"
 #include "CivicAddress.h"
 #include "GeographicArea.h"
-#include "VelocityEstimate.h"
+#include "GnssPositioningMethodAndUsage.h"
 #include "PositioningMethodAndUsage.h"
-#include <string>
-#include "TerminationCause.h"
-#include <vector>
 #include "ReportedEventType.h"
+#include "TerminationCause.h"
+#include "VelocityEstimate.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::lmf {
 
@@ -36,7 +36,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class EventNotifyData {
- public:
+public:
   EventNotifyData();
   virtual ~EventNotifyData() = default;
 
@@ -50,16 +50,16 @@ class EventNotifyData {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const EventNotifyData& rhs) const;
-  bool operator!=(const EventNotifyData& rhs) const;
+  bool operator==(const EventNotifyData &rhs) const;
+  bool operator!=(const EventNotifyData &rhs) const;
 
   /////////////////////////////////////////////
   /// EventNotifyData members
@@ -68,38 +68,38 @@ class EventNotifyData {
   ///
   /// </summary>
   oai::model::lmf::ReportedEventType getReportedEventType() const;
-  void setReportedEventType(oai::model::lmf::ReportedEventType const& value);
+  void setReportedEventType(oai::model::lmf::ReportedEventType const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getSupi() const;
-  void setSupi(std::string const& value);
+  void setSupi(std::string const &value);
   bool supiIsSet() const;
   void unsetSupi();
   /// <summary>
   ///
   /// </summary>
   std::string getGpsi() const;
-  void setGpsi(std::string const& value);
+  void setGpsi(std::string const &value);
   bool gpsiIsSet() const;
   void unsetGpsi();
   /// <summary>
   ///
   /// </summary>
   std::string getHgmlcCallBackURI() const;
-  void setHgmlcCallBackURI(std::string const& value);
+  void setHgmlcCallBackURI(std::string const &value);
   bool hgmlcCallBackURIIsSet() const;
   void unsetHgmlcCallBackURI();
   /// <summary>
   ///
   /// </summary>
   std::string getLdrReference() const;
-  void setLdrReference(std::string const& value);
+  void setLdrReference(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::lmf::GeographicArea getLocationEstimate() const;
-  void setLocationEstimate(oai::model::lmf::GeographicArea const& value);
+  void setLocationEstimate(oai::model::lmf::GeographicArea const &value);
   bool locationEstimateIsSet() const;
   void unsetLocationEstimate();
   /// <summary>
@@ -113,7 +113,7 @@ class EventNotifyData {
   ///
   /// </summary>
   oai::model::lmf::CivicAddress getCivicAddress() const;
-  void setCivicAddress(oai::model::lmf::CivicAddress const& value);
+  void setCivicAddress(oai::model::lmf::CivicAddress const &value);
   bool civicAddressIsSet() const;
   void unsetCivicAddress();
   /// <summary>
@@ -122,7 +122,7 @@ class EventNotifyData {
   std::vector<oai::model::lmf::PositioningMethodAndUsage>
   getPositioningDataList() const;
   void setPositioningDataList(
-      std::vector<oai::model::lmf::PositioningMethodAndUsage> const& value);
+      std::vector<oai::model::lmf::PositioningMethodAndUsage> const &value);
   bool positioningDataListIsSet() const;
   void unsetPositioningDataList();
   /// <summary>
@@ -131,28 +131,28 @@ class EventNotifyData {
   std::vector<oai::model::lmf::GnssPositioningMethodAndUsage>
   getGnssPositioningDataList() const;
   void setGnssPositioningDataList(
-      std::vector<oai::model::lmf::GnssPositioningMethodAndUsage> const& value);
+      std::vector<oai::model::lmf::GnssPositioningMethodAndUsage> const &value);
   bool gnssPositioningDataListIsSet() const;
   void unsetGnssPositioningDataList();
   /// <summary>
   ///
   /// </summary>
   std::string getServingLMFidentification() const;
-  void setServingLMFidentification(std::string const& value);
+  void setServingLMFidentification(std::string const &value);
   bool servingLMFidentificationIsSet() const;
   void unsetServingLMFidentification();
   /// <summary>
   ///
   /// </summary>
   oai::model::lmf::TerminationCause getTerminationCause() const;
-  void setTerminationCause(oai::model::lmf::TerminationCause const& value);
+  void setTerminationCause(oai::model::lmf::TerminationCause const &value);
   bool terminationCauseIsSet() const;
   void unsetTerminationCause();
   /// <summary>
   ///
   /// </summary>
   oai::model::lmf::VelocityEstimate getVelocityEstimate() const;
-  void setVelocityEstimate(oai::model::lmf::VelocityEstimate const& value);
+  void setVelocityEstimate(oai::model::lmf::VelocityEstimate const &value);
   bool velocityEstimateIsSet() const;
   void unsetVelocityEstimate();
   /// <summary>
@@ -166,14 +166,14 @@ class EventNotifyData {
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
 
-  friend void to_json(nlohmann::json& j, const EventNotifyData& o);
-  friend void from_json(const nlohmann::json& j, EventNotifyData& o);
+  friend void to_json(nlohmann::json &j, const EventNotifyData &o);
+  friend void from_json(const nlohmann::json &j, EventNotifyData &o);
 
- protected:
+protected:
   oai::model::lmf::ReportedEventType m_ReportedEventType;
 
   std::string m_Supi;
@@ -207,6 +207,6 @@ class EventNotifyData {
   bool m_SupportedFeaturesIsSet;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* EventNotifyData_H_ */

@@ -16,7 +16,7 @@
 namespace oai::model::amf {
 
 SubscriptionData::SubscriptionData() {
-  m_AmfStatusUri   = "";
+  m_AmfStatusUri = "";
   m_GuamiListIsSet = false;
 }
 
@@ -26,13 +26,14 @@ void SubscriptionData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const SubscriptionData& o) {
-  j                 = nlohmann::json();
+void to_json(nlohmann::json &j, const SubscriptionData &o) {
+  j = nlohmann::json();
   j["amfStatusUri"] = o.m_AmfStatusUri;
-  if (o.guamiListIsSet()) j["guamiList"] = o.m_GuamiList;
+  if (o.guamiListIsSet())
+    j["guamiList"] = o.m_GuamiList;
 }
 
-void from_json(const nlohmann::json& j, SubscriptionData& o) {
+void from_json(const nlohmann::json &j, SubscriptionData &o) {
   j.at("amfStatusUri").get_to(o.m_AmfStatusUri);
   if (j.find("guamiList") != j.end()) {
     j.at("guamiList").get_to(o.m_GuamiList);
@@ -40,20 +41,14 @@ void from_json(const nlohmann::json& j, SubscriptionData& o) {
   }
 }
 
-std::string SubscriptionData::getAmfStatusUri() const {
-  return m_AmfStatusUri;
-}
-void SubscriptionData::setAmfStatusUri(std::string const& value) {
+std::string SubscriptionData::getAmfStatusUri() const { return m_AmfStatusUri; }
+void SubscriptionData::setAmfStatusUri(std::string const &value) {
   m_AmfStatusUri = value;
 }
-std::vector<oai::model::common::Guami>& SubscriptionData::getGuamiList() {
+std::vector<oai::model::common::Guami> &SubscriptionData::getGuamiList() {
   return m_GuamiList;
 }
-bool SubscriptionData::guamiListIsSet() const {
-  return m_GuamiListIsSet;
-}
-void SubscriptionData::unsetGuamiList() {
-  m_GuamiListIsSet = false;
-}
+bool SubscriptionData::guamiListIsSet() const { return m_GuamiListIsSet; }
+void SubscriptionData::unsetGuamiList() { m_GuamiListIsSet = false; }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

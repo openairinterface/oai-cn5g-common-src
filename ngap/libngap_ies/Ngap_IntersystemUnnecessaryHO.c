@@ -28,8 +28,7 @@ static asn_per_constraints_t asn_PER_type_Ngap_earlyIRATHO_constr_4
 #endif /* !defined(ASN_DISABLE_UPER_SUPPORT) ||                                \
           !defined(ASN_DISABLE_APER_SUPPORT) */
 static const asn_INTEGER_enum_map_t asn_MAP_Ngap_earlyIRATHO_value2enum_4[] = {
-    {0, 4, "true"},
-    {1, 5, "false"}
+    {0, 4, "true"}, {1, 5, "false"}
     /* This list is extensible */
 };
 static const unsigned int asn_MAP_Ngap_earlyIRATHO_enum2value_4[] = {
@@ -170,7 +169,7 @@ asn_TYPE_member_t asn_MBR_Ngap_IntersystemUnnecessaryHO_1[] = {
      0, /* No default value */
      "iE-Extensions"},
 };
-static const int asn_MAP_Ngap_IntersystemUnnecessaryHO_oms_1[]            = {4};
+static const int asn_MAP_Ngap_IntersystemUnnecessaryHO_oms_1[] = {4};
 static const ber_tlv_tag_t asn_DEF_Ngap_IntersystemUnnecessaryHO_tags_1[] = {
     (ASN_TAG_CLASS_UNIVERSAL | (16 << 2))};
 static const asn_TYPE_tag2member_t

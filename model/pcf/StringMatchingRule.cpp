@@ -29,18 +29,18 @@ void StringMatchingRule::validate() const {
   }
 }
 
-bool StringMatchingRule::validate(std::stringstream& msg) const {
+bool StringMatchingRule::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool StringMatchingRule::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool StringMatchingRule::validate(std::stringstream &msg,
+                                  const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "StringMatchingRule" : pathPrefix;
 
   if (stringMatchingConditionsIsSet()) {
-    const std::vector<oai::model::pcf::StringMatchingCondition>& value =
+    const std::vector<oai::model::pcf::StringMatchingCondition> &value =
         m_StringMatchingConditions;
     const std::string currentValuePath =
         _pathPrefix + ".stringMatchingConditions";
@@ -49,15 +49,15 @@ bool StringMatchingRule::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::StringMatchingCondition& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::StringMatchingCondition &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
-        success = value.validate(
-                      msg, currentValuePath + ".stringMatchingConditions") &&
+        success = value.validate(msg, currentValuePath +
+                                          ".stringMatchingConditions") &&
                   success;
 
         i++;
@@ -68,7 +68,7 @@ bool StringMatchingRule::validate(
   return success;
 }
 
-bool StringMatchingRule::operator==(const StringMatchingRule& rhs) const {
+bool StringMatchingRule::operator==(const StringMatchingRule &rhs) const {
   return
 
       ((!stringMatchingConditionsIsSet() &&
@@ -80,18 +80,18 @@ bool StringMatchingRule::operator==(const StringMatchingRule& rhs) const {
           ;
 }
 
-bool StringMatchingRule::operator!=(const StringMatchingRule& rhs) const {
+bool StringMatchingRule::operator!=(const StringMatchingRule &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const StringMatchingRule& o) {
+void to_json(nlohmann::json &j, const StringMatchingRule &o) {
   j = nlohmann::json::object();
   if (o.stringMatchingConditionsIsSet() ||
       !o.m_StringMatchingConditions.empty())
     j["stringMatchingConditions"] = o.m_StringMatchingConditions;
 }
 
-void from_json(const nlohmann::json& j, StringMatchingRule& o) {
+void from_json(const nlohmann::json &j, StringMatchingRule &o) {
   if (j.find("stringMatchingConditions") != j.end()) {
     j.at("stringMatchingConditions").get_to(o.m_StringMatchingConditions);
     o.m_StringMatchingConditionsIsSet = true;
@@ -103,8 +103,8 @@ StringMatchingRule::getStringMatchingConditions() const {
   return m_StringMatchingConditions;
 }
 void StringMatchingRule::setStringMatchingConditions(
-    std::vector<oai::model::pcf::StringMatchingCondition> const& value) {
-  m_StringMatchingConditions      = value;
+    std::vector<oai::model::pcf::StringMatchingCondition> const &value) {
+  m_StringMatchingConditions = value;
   m_StringMatchingConditionsIsSet = true;
 }
 bool StringMatchingRule::stringMatchingConditionsIsSet() const {
@@ -114,4 +114,4 @@ void StringMatchingRule::unsetStringMatchingConditions() {
   m_StringMatchingConditionsIsSet = false;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

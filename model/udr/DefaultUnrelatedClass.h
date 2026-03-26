@@ -37,7 +37,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class DefaultUnrelatedClass {
- public:
+public:
   DefaultUnrelatedClass();
   virtual ~DefaultUnrelatedClass();
 
@@ -49,43 +49,43 @@ class DefaultUnrelatedClass {
   /// <summary>
   ///
   /// </summary>
-  std::vector<GeographicArea>& getAllowedGeographicArea();
-  void setAllowedGeographicArea(std::vector<GeographicArea> const& value);
+  std::vector<GeographicArea> &getAllowedGeographicArea();
+  void setAllowedGeographicArea(std::vector<GeographicArea> const &value);
   bool allowedGeographicAreaIsSet() const;
   void unsetAllowedGeographicArea();
   /// <summary>
   ///
   /// </summary>
   PrivacyCheckRelatedAction getPrivacyCheckRelatedAction() const;
-  void setPrivacyCheckRelatedAction(PrivacyCheckRelatedAction const& value);
+  void setPrivacyCheckRelatedAction(PrivacyCheckRelatedAction const &value);
   bool privacyCheckRelatedActionIsSet() const;
   void unsetPrivacyCheckRelatedAction();
   /// <summary>
   ///
   /// </summary>
   CodeWordInd getCodeWordInd() const;
-  void setCodeWordInd(CodeWordInd const& value);
+  void setCodeWordInd(CodeWordInd const &value);
   bool codeWordIndIsSet() const;
   void unsetCodeWordInd();
   /// <summary>
   ///
   /// </summary>
   ValidTimePeriod getValidTimePeriod() const;
-  void setValidTimePeriod(ValidTimePeriod const& value);
+  void setValidTimePeriod(ValidTimePeriod const &value);
   bool validTimePeriodIsSet() const;
   void unsetValidTimePeriod();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getCodeWordList();
-  void setCodeWordList(std::vector<std::string> const& value);
+  std::vector<std::string> &getCodeWordList();
+  void setCodeWordList(std::vector<std::string> const &value);
   bool codeWordListIsSet() const;
   void unsetCodeWordList();
 
-  friend void to_json(nlohmann::json& j, const DefaultUnrelatedClass& o);
-  friend void from_json(const nlohmann::json& j, DefaultUnrelatedClass& o);
+  friend void to_json(nlohmann::json &j, const DefaultUnrelatedClass &o);
+  friend void from_json(const nlohmann::json &j, DefaultUnrelatedClass &o);
 
- protected:
+protected:
   std::vector<GeographicArea> m_AllowedGeographicArea;
   bool m_AllowedGeographicAreaIsSet;
   PrivacyCheckRelatedAction m_PrivacyCheckRelatedAction;
@@ -98,6 +98,6 @@ class DefaultUnrelatedClass {
   bool m_CodeWordListIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* DefaultUnrelatedClass_H_ */

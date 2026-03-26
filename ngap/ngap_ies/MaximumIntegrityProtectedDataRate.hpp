@@ -12,22 +12,22 @@ extern "C" {
 namespace oai::ngap {
 
 class MaximumIntegrityProtectedDataRate {
- public:
+public:
   MaximumIntegrityProtectedDataRate();
   MaximumIntegrityProtectedDataRate(
-      const e_Ngap_MaximumIntegrityProtectedDataRate& value);
+      const e_Ngap_MaximumIntegrityProtectedDataRate &value);
   virtual ~MaximumIntegrityProtectedDataRate();
 
-  void set(const e_Ngap_MaximumIntegrityProtectedDataRate& value);
-  bool get(long& value) const;
+  void set(const e_Ngap_MaximumIntegrityProtectedDataRate &value);
+  bool get(long &value) const;
 
-  bool encode(Ngap_MaximumIntegrityProtectedDataRate_t&) const;
-  bool decode(const Ngap_MaximumIntegrityProtectedDataRate_t&);
+  bool encode(Ngap_MaximumIntegrityProtectedDataRate_t &) const;
+  bool decode(const Ngap_MaximumIntegrityProtectedDataRate_t &);
 
- private:
+private:
   long m_MaximumIntegrityProtectedDataRate;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

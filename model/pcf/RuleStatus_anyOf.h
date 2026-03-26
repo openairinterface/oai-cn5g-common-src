@@ -27,7 +27,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class RuleStatus_anyOf {
- public:
+public:
   RuleStatus_anyOf();
   virtual ~RuleStatus_anyOf() = default;
 
@@ -50,16 +50,16 @@ class RuleStatus_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const RuleStatus_anyOf& rhs) const;
-  bool operator!=(const RuleStatus_anyOf& rhs) const;
+  bool operator==(const RuleStatus_anyOf &rhs) const;
+  bool operator!=(const RuleStatus_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// RuleStatus_anyOf members
@@ -67,14 +67,14 @@ class RuleStatus_anyOf {
   RuleStatus_anyOf::eRuleStatus_anyOf getValue() const;
   void setValue(RuleStatus_anyOf::eRuleStatus_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const RuleStatus_anyOf& o);
-  friend void from_json(const nlohmann::json& j, RuleStatus_anyOf& o);
+  friend void to_json(nlohmann::json &j, const RuleStatus_anyOf &o);
+  friend void from_json(const nlohmann::json &j, RuleStatus_anyOf &o);
 
- protected:
+protected:
   RuleStatus_anyOf::eRuleStatus_anyOf m_value =
       RuleStatus_anyOf::eRuleStatus_anyOf::INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* RuleStatus_anyOf_H_ */

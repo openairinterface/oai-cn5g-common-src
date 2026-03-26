@@ -16,12 +16,12 @@ IntegrityProtectionIndication::~IntegrityProtectionIndication() {}
 
 //------------------------------------------------------------------------------
 void IntegrityProtectionIndication::set(
-    const e_Ngap_IntegrityProtectionIndication& indication) {
+    const e_Ngap_IntegrityProtectionIndication &indication) {
   m_Indication = indication;
 }
 
 //------------------------------------------------------------------------------
-bool IntegrityProtectionIndication::get(long& indication) const {
+bool IntegrityProtectionIndication::get(long &indication) const {
   indication = m_Indication;
 
   return true;
@@ -29,7 +29,7 @@ bool IntegrityProtectionIndication::get(long& indication) const {
 
 //------------------------------------------------------------------------------
 bool IntegrityProtectionIndication::encode(
-    Ngap_IntegrityProtectionIndication_t& value) const {
+    Ngap_IntegrityProtectionIndication_t &value) const {
   value = m_Indication;
 
   return true;
@@ -37,10 +37,10 @@ bool IntegrityProtectionIndication::encode(
 
 //------------------------------------------------------------------------------
 bool IntegrityProtectionIndication::decode(
-    const Ngap_IntegrityProtectionIndication_t& value) {
+    const Ngap_IntegrityProtectionIndication_t &value) {
   m_Indication = value;
 
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

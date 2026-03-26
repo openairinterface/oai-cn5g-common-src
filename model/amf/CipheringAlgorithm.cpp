@@ -23,10 +23,10 @@ void CipheringAlgorithm::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const CipheringAlgorithm& o) {
+void to_json(nlohmann::json &j, const CipheringAlgorithm &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, CipheringAlgorithm& o) {}
+void from_json(const nlohmann::json &j, CipheringAlgorithm &o) {}
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

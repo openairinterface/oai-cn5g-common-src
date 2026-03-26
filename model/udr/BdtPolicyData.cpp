@@ -19,16 +19,16 @@
 namespace oai::udr::model {
 
 BdtPolicyData::BdtPolicyData() {
-  m_InterGroupId      = "";
+  m_InterGroupId = "";
   m_InterGroupIdIsSet = false;
-  m_Supi              = "";
-  m_SupiIsSet         = false;
-  m_BdtRefId          = "";
-  m_Dnn               = "";
-  m_DnnIsSet          = false;
-  m_SnssaiIsSet       = false;
-  m_ResUri            = "";
-  m_ResUriIsSet       = false;
+  m_Supi = "";
+  m_SupiIsSet = false;
+  m_BdtRefId = "";
+  m_Dnn = "";
+  m_DnnIsSet = false;
+  m_SnssaiIsSet = false;
+  m_ResUri = "";
+  m_ResUriIsSet = false;
 }
 
 BdtPolicyData::~BdtPolicyData() {}
@@ -37,17 +37,22 @@ void BdtPolicyData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const BdtPolicyData& o) {
+void to_json(nlohmann::json &j, const BdtPolicyData &o) {
   j = nlohmann::json();
-  if (o.interGroupIdIsSet()) j["interGroupId"] = o.m_InterGroupId;
-  if (o.supiIsSet()) j["supi"] = o.m_Supi;
+  if (o.interGroupIdIsSet())
+    j["interGroupId"] = o.m_InterGroupId;
+  if (o.supiIsSet())
+    j["supi"] = o.m_Supi;
   j["bdtRefId"] = o.m_BdtRefId;
-  if (o.dnnIsSet()) j["dnn"] = o.m_Dnn;
-  if (o.snssaiIsSet()) j["snssai"] = o.m_Snssai;
-  if (o.resUriIsSet()) j["resUri"] = o.m_ResUri;
+  if (o.dnnIsSet())
+    j["dnn"] = o.m_Dnn;
+  if (o.snssaiIsSet())
+    j["snssai"] = o.m_Snssai;
+  if (o.resUriIsSet())
+    j["resUri"] = o.m_ResUri;
 }
 
-void from_json(const nlohmann::json& j, BdtPolicyData& o) {
+void from_json(const nlohmann::json &j, BdtPolicyData &o) {
   if (j.find("interGroupId") != j.end()) {
     j.at("interGroupId").get_to(o.m_InterGroupId);
     o.m_InterGroupIdIsSet = true;
@@ -71,76 +76,44 @@ void from_json(const nlohmann::json& j, BdtPolicyData& o) {
   }
 }
 
-std::string BdtPolicyData::getInterGroupId() const {
-  return m_InterGroupId;
-}
-void BdtPolicyData::setInterGroupId(std::string const& value) {
-  m_InterGroupId      = value;
+std::string BdtPolicyData::getInterGroupId() const { return m_InterGroupId; }
+void BdtPolicyData::setInterGroupId(std::string const &value) {
+  m_InterGroupId = value;
   m_InterGroupIdIsSet = true;
 }
-bool BdtPolicyData::interGroupIdIsSet() const {
-  return m_InterGroupIdIsSet;
-}
-void BdtPolicyData::unsetInterGroupId() {
-  m_InterGroupIdIsSet = false;
-}
-std::string BdtPolicyData::getSupi() const {
-  return m_Supi;
-}
-void BdtPolicyData::setSupi(std::string const& value) {
-  m_Supi      = value;
+bool BdtPolicyData::interGroupIdIsSet() const { return m_InterGroupIdIsSet; }
+void BdtPolicyData::unsetInterGroupId() { m_InterGroupIdIsSet = false; }
+std::string BdtPolicyData::getSupi() const { return m_Supi; }
+void BdtPolicyData::setSupi(std::string const &value) {
+  m_Supi = value;
   m_SupiIsSet = true;
 }
-bool BdtPolicyData::supiIsSet() const {
-  return m_SupiIsSet;
-}
-void BdtPolicyData::unsetSupi() {
-  m_SupiIsSet = false;
-}
-std::string BdtPolicyData::getBdtRefId() const {
-  return m_BdtRefId;
-}
-void BdtPolicyData::setBdtRefId(std::string const& value) {
+bool BdtPolicyData::supiIsSet() const { return m_SupiIsSet; }
+void BdtPolicyData::unsetSupi() { m_SupiIsSet = false; }
+std::string BdtPolicyData::getBdtRefId() const { return m_BdtRefId; }
+void BdtPolicyData::setBdtRefId(std::string const &value) {
   m_BdtRefId = value;
 }
-std::string BdtPolicyData::getDnn() const {
-  return m_Dnn;
-}
-void BdtPolicyData::setDnn(std::string const& value) {
-  m_Dnn      = value;
+std::string BdtPolicyData::getDnn() const { return m_Dnn; }
+void BdtPolicyData::setDnn(std::string const &value) {
+  m_Dnn = value;
   m_DnnIsSet = true;
 }
-bool BdtPolicyData::dnnIsSet() const {
-  return m_DnnIsSet;
-}
-void BdtPolicyData::unsetDnn() {
-  m_DnnIsSet = false;
-}
-oai::model::common::Snssai BdtPolicyData::getSnssai() const {
-  return m_Snssai;
-}
-void BdtPolicyData::setSnssai(oai::model::common::Snssai const& value) {
-  m_Snssai      = value;
+bool BdtPolicyData::dnnIsSet() const { return m_DnnIsSet; }
+void BdtPolicyData::unsetDnn() { m_DnnIsSet = false; }
+oai::model::common::Snssai BdtPolicyData::getSnssai() const { return m_Snssai; }
+void BdtPolicyData::setSnssai(oai::model::common::Snssai const &value) {
+  m_Snssai = value;
   m_SnssaiIsSet = true;
 }
-bool BdtPolicyData::snssaiIsSet() const {
-  return m_SnssaiIsSet;
-}
-void BdtPolicyData::unsetSnssai() {
-  m_SnssaiIsSet = false;
-}
-std::string BdtPolicyData::getResUri() const {
-  return m_ResUri;
-}
-void BdtPolicyData::setResUri(std::string const& value) {
-  m_ResUri      = value;
+bool BdtPolicyData::snssaiIsSet() const { return m_SnssaiIsSet; }
+void BdtPolicyData::unsetSnssai() { m_SnssaiIsSet = false; }
+std::string BdtPolicyData::getResUri() const { return m_ResUri; }
+void BdtPolicyData::setResUri(std::string const &value) {
+  m_ResUri = value;
   m_ResUriIsSet = true;
 }
-bool BdtPolicyData::resUriIsSet() const {
-  return m_ResUriIsSet;
-}
-void BdtPolicyData::unsetResUri() {
-  m_ResUriIsSet = false;
-}
+bool BdtPolicyData::resUriIsSet() const { return m_ResUriIsSet; }
+void BdtPolicyData::unsetResUri() { m_ResUriIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

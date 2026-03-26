@@ -25,7 +25,7 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_QosFlowPerTNLInformationItem */
 typedef struct Ngap_QosFlowPerTNLInformationItem {
   Ngap_QosFlowPerTNLInformation_t qosFlowPerTNLInformation;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

@@ -24,20 +24,18 @@ void GuamiListCond::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const GuamiListCond& o) {
-  j              = nlohmann::json();
+void to_json(nlohmann::json &j, const GuamiListCond &o) {
+  j = nlohmann::json();
   j["guamiList"] = o.m_GuamiList;
 }
 
-void from_json(const nlohmann::json& j, GuamiListCond& o) {
+void from_json(const nlohmann::json &j, GuamiListCond &o) {
   j.at("guamiList").get_to(o.m_GuamiList);
 }
 
-std::vector<Guami>& GuamiListCond::getGuamiList() {
-  return m_GuamiList;
-}
-void GuamiListCond::setGuamiList(std::vector<Guami> const& value) {
+std::vector<Guami> &GuamiListCond::getGuamiList() { return m_GuamiList; }
+void GuamiListCond::setGuamiList(std::vector<Guami> const &value) {
   m_GuamiList = value;
 }
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

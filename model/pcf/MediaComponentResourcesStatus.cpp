@@ -27,12 +27,12 @@ void MediaComponentResourcesStatus::validate() const {
   }
 }
 
-bool MediaComponentResourcesStatus::validate(std::stringstream& msg) const {
+bool MediaComponentResourcesStatus::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool MediaComponentResourcesStatus::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "MediaComponentResourcesStatus" : pathPrefix;
@@ -41,19 +41,19 @@ bool MediaComponentResourcesStatus::validate(
 }
 
 bool MediaComponentResourcesStatus::operator==(
-    const MediaComponentResourcesStatus& rhs) const {
-  return true;  // TODO
+    const MediaComponentResourcesStatus &rhs) const {
+  return true; // TODO
 }
 
 bool MediaComponentResourcesStatus::operator!=(
-    const MediaComponentResourcesStatus& rhs) const {
+    const MediaComponentResourcesStatus &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const MediaComponentResourcesStatus& o) {
+void to_json(nlohmann::json &j, const MediaComponentResourcesStatus &o) {
   j = nlohmann::json::object();
 }
 
-void from_json(const nlohmann::json& j, MediaComponentResourcesStatus& o) {}
+void from_json(const nlohmann::json &j, MediaComponentResourcesStatus &o) {}
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

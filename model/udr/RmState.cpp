@@ -26,10 +26,8 @@ void RmState::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const RmState& o) {
-  j = nlohmann::json();
-}
+void to_json(nlohmann::json &j, const RmState &o) { j = nlohmann::json(); }
 
-void from_json(const nlohmann::json& j, RmState& o) {}
+void from_json(const nlohmann::json &j, RmState &o) {}
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

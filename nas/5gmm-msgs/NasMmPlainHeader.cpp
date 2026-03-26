@@ -19,22 +19,18 @@ NasMmPlainHeader::NasMmPlainHeader(uint8_t epd, uint8_t msg_type)
     : epd_(epd), msg_type_(msg_type) {}
 
 //------------------------------------------------------------------------------
-NasMmPlainHeader::NasMmPlainHeader(
-    uint8_t epd, uint8_t security_header_type, uint8_t msg_type)
+NasMmPlainHeader::NasMmPlainHeader(uint8_t epd, uint8_t security_header_type,
+                                   uint8_t msg_type)
     : epd_(epd), secu_header_type_(security_header_type), msg_type_(msg_type) {}
 
 //------------------------------------------------------------------------------
 // NasMmPlainHeader::~NasMmPlainHeader() {}
 
 //------------------------------------------------------------------------------
-void NasMmPlainHeader::SetEpd(uint8_t epd) {
-  epd_.Set(epd);
-}
+void NasMmPlainHeader::SetEpd(uint8_t epd) { epd_.Set(epd); }
 
 //------------------------------------------------------------------------------
-uint8_t NasMmPlainHeader::GetEpd() const {
-  return epd_.Get();
-}
+uint8_t NasMmPlainHeader::GetEpd() const { return epd_.Get(); }
 
 //------------------------------------------------------------------------------
 void NasMmPlainHeader::SetSecurityHeaderType(uint8_t type) {
@@ -47,27 +43,21 @@ uint8_t NasMmPlainHeader::GetSecurityHeaderType() const {
 }
 
 //------------------------------------------------------------------------------
-void NasMmPlainHeader::SetMessageType(uint8_t type) {
-  msg_type_.Set(type);
-}
+void NasMmPlainHeader::SetMessageType(uint8_t type) { msg_type_.Set(type); }
 
 //------------------------------------------------------------------------------
-uint8_t NasMmPlainHeader::GetMessageType() const {
-  return msg_type_.Get();
-}
+uint8_t NasMmPlainHeader::GetMessageType() const { return msg_type_.Get(); }
 
 //------------------------------------------------------------------------------
-void NasMmPlainHeader::SetHeader(
-    uint8_t epd, uint8_t security_header_type, uint8_t msg_type) {
+void NasMmPlainHeader::SetHeader(uint8_t epd, uint8_t security_header_type,
+                                 uint8_t msg_type) {
   epd_.Set(epd);
   secu_header_type_.Set(security_header_type);
   msg_type_.Set(msg_type);
 }
 
 //------------------------------------------------------------------------------
-uint32_t NasMmPlainHeader::GetLength() const {
-  return kNasMmPlainHeaderLength;
-}
+uint32_t NasMmPlainHeader::GetLength() const { return kNasMmPlainHeaderLength; }
 
 //------------------------------------------------------------------------------
 bool NasMmPlainHeader::Validate(uint32_t len) const {
@@ -84,12 +74,13 @@ bool NasMmPlainHeader::Validate(uint32_t len) const {
 }
 
 //------------------------------------------------------------------------------
-int NasMmPlainHeader::Encode(uint8_t* buf, int len) {
+int NasMmPlainHeader::Encode(uint8_t *buf, int len) {
   oai::logger::logger_common::nas().debug("Encoding NasMmPlainHeader");
 
-  if (!Validate(len)) return KEncodeDecodeError;
+  if (!Validate(len))
+    return KEncodeDecodeError;
 
-  int encoded_size    = 0;
+  int encoded_size = 0;
   int encoded_ie_size = 0;
 
   if ((encoded_ie_size = NasHelper::Encode(epd_, buf, len, encoded_size)) ==
@@ -113,10 +104,10 @@ int NasMmPlainHeader::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int NasMmPlainHeader::Decode(uint8_t* buf, int len) {
+int NasMmPlainHeader::Decode(uint8_t *buf, int len) {
   oai::logger::logger_common::nas().debug("Decoding NasMmPlainHeader");
 
-  int decoded_size    = 0;
+  int decoded_size = 0;
   int decoded_ie_size = 0;
 
   if (len < kNasMmPlainHeaderLength) {
@@ -125,19 +116,19 @@ int NasMmPlainHeader::Decode(uint8_t* buf, int len) {
     return KEncodeDecodeError;
   }
 
-  if ((decoded_ie_size = NasHelper::Decode(
-           epd_, buf, len, decoded_size, true)) == KEncodeDecodeError) {
+  if ((decoded_ie_size = NasHelper::Decode(epd_, buf, len, decoded_size,
+                                           true)) == KEncodeDecodeError) {
     return KEncodeDecodeError;
   }
 
-  if ((decoded_ie_size = NasHelper::Decode(
-           secu_header_type_, buf, len, decoded_size, true)) ==
+  if ((decoded_ie_size = NasHelper::Decode(secu_header_type_, buf, len,
+                                           decoded_size, true)) ==
       KEncodeDecodeError) {
     return KEncodeDecodeError;
   }
 
-  if ((decoded_ie_size = NasHelper::Decode(
-           msg_type_, buf, len, decoded_size, true)) == KEncodeDecodeError) {
+  if ((decoded_ie_size = NasHelper::Decode(msg_type_, buf, len, decoded_size,
+                                           true)) == KEncodeDecodeError) {
     return KEncodeDecodeError;
   }
 

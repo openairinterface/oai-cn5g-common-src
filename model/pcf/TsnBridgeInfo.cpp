@@ -19,13 +19,13 @@
 namespace oai::model::pcf {
 
 TsnBridgeInfo::TsnBridgeInfo() {
-  m_BridgeId           = 0;
-  m_BridgeIdIsSet      = false;
-  m_DsttAddr           = "";
-  m_DsttAddrIsSet      = false;
-  m_DsttPortNum        = 0;
-  m_DsttPortNumIsSet   = false;
-  m_DsttResidTime      = 0;
+  m_BridgeId = 0;
+  m_BridgeIdIsSet = false;
+  m_DsttAddr = "";
+  m_DsttAddrIsSet = false;
+  m_DsttPortNum = 0;
+  m_DsttPortNumIsSet = false;
+  m_DsttResidTime = 0;
   m_DsttResidTimeIsSet = false;
 }
 
@@ -36,12 +36,12 @@ void TsnBridgeInfo::validate() const {
   }
 }
 
-bool TsnBridgeInfo::validate(std::stringstream& msg) const {
+bool TsnBridgeInfo::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool TsnBridgeInfo::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool TsnBridgeInfo::validate(std::stringstream &msg,
+                             const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "TsnBridgeInfo" : pathPrefix;
@@ -53,7 +53,7 @@ bool TsnBridgeInfo::validate(
    */
 
   if (dsttPortNumIsSet()) {
-    const int32_t& value               = m_DsttPortNum;
+    const int32_t &value = m_DsttPortNum;
     const std::string currentValuePath = _pathPrefix + ".dsttPortNum";
 
     if (value < 0) {
@@ -63,7 +63,7 @@ bool TsnBridgeInfo::validate(
   }
 
   if (dsttResidTimeIsSet()) {
-    const int32_t& value               = m_DsttResidTime;
+    const int32_t &value = m_DsttResidTime;
     const std::string currentValuePath = _pathPrefix + ".dsttResidTime";
 
     if (value < 0) {
@@ -75,7 +75,7 @@ bool TsnBridgeInfo::validate(
   return success;
 }
 
-bool TsnBridgeInfo::operator==(const TsnBridgeInfo& rhs) const {
+bool TsnBridgeInfo::operator==(const TsnBridgeInfo &rhs) const {
   return
 
       ((!bridgeIdIsSet() && !rhs.bridgeIdIsSet()) ||
@@ -97,19 +97,23 @@ bool TsnBridgeInfo::operator==(const TsnBridgeInfo& rhs) const {
           ;
 }
 
-bool TsnBridgeInfo::operator!=(const TsnBridgeInfo& rhs) const {
+bool TsnBridgeInfo::operator!=(const TsnBridgeInfo &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const TsnBridgeInfo& o) {
+void to_json(nlohmann::json &j, const TsnBridgeInfo &o) {
   j = nlohmann::json();
-  if (o.bridgeIdIsSet()) j["bridgeId"] = o.m_BridgeId;
-  if (o.dsttAddrIsSet()) j["dsttAddr"] = o.m_DsttAddr;
-  if (o.dsttPortNumIsSet()) j["dsttPortNum"] = o.m_DsttPortNum;
-  if (o.dsttResidTimeIsSet()) j["dsttResidTime"] = o.m_DsttResidTime;
+  if (o.bridgeIdIsSet())
+    j["bridgeId"] = o.m_BridgeId;
+  if (o.dsttAddrIsSet())
+    j["dsttAddr"] = o.m_DsttAddr;
+  if (o.dsttPortNumIsSet())
+    j["dsttPortNum"] = o.m_DsttPortNum;
+  if (o.dsttResidTimeIsSet())
+    j["dsttResidTime"] = o.m_DsttResidTime;
 }
 
-void from_json(const nlohmann::json& j, TsnBridgeInfo& o) {
+void from_json(const nlohmann::json &j, TsnBridgeInfo &o) {
   if (j.find("bridgeId") != j.end()) {
     j.at("bridgeId").get_to(o.m_BridgeId);
     o.m_BridgeIdIsSet = true;
@@ -128,57 +132,33 @@ void from_json(const nlohmann::json& j, TsnBridgeInfo& o) {
   }
 }
 
-int32_t TsnBridgeInfo::getBridgeId() const {
-  return m_BridgeId;
-}
+int32_t TsnBridgeInfo::getBridgeId() const { return m_BridgeId; }
 void TsnBridgeInfo::setBridgeId(int32_t const value) {
-  m_BridgeId      = value;
+  m_BridgeId = value;
   m_BridgeIdIsSet = true;
 }
-bool TsnBridgeInfo::bridgeIdIsSet() const {
-  return m_BridgeIdIsSet;
-}
-void TsnBridgeInfo::unsetBridgeId() {
-  m_BridgeIdIsSet = false;
-}
-std::string TsnBridgeInfo::getDsttAddr() const {
-  return m_DsttAddr;
-}
-void TsnBridgeInfo::setDsttAddr(std::string const& value) {
-  m_DsttAddr      = value;
+bool TsnBridgeInfo::bridgeIdIsSet() const { return m_BridgeIdIsSet; }
+void TsnBridgeInfo::unsetBridgeId() { m_BridgeIdIsSet = false; }
+std::string TsnBridgeInfo::getDsttAddr() const { return m_DsttAddr; }
+void TsnBridgeInfo::setDsttAddr(std::string const &value) {
+  m_DsttAddr = value;
   m_DsttAddrIsSet = true;
 }
-bool TsnBridgeInfo::dsttAddrIsSet() const {
-  return m_DsttAddrIsSet;
-}
-void TsnBridgeInfo::unsetDsttAddr() {
-  m_DsttAddrIsSet = false;
-}
-int32_t TsnBridgeInfo::getDsttPortNum() const {
-  return m_DsttPortNum;
-}
+bool TsnBridgeInfo::dsttAddrIsSet() const { return m_DsttAddrIsSet; }
+void TsnBridgeInfo::unsetDsttAddr() { m_DsttAddrIsSet = false; }
+int32_t TsnBridgeInfo::getDsttPortNum() const { return m_DsttPortNum; }
 void TsnBridgeInfo::setDsttPortNum(int32_t const value) {
-  m_DsttPortNum      = value;
+  m_DsttPortNum = value;
   m_DsttPortNumIsSet = true;
 }
-bool TsnBridgeInfo::dsttPortNumIsSet() const {
-  return m_DsttPortNumIsSet;
-}
-void TsnBridgeInfo::unsetDsttPortNum() {
-  m_DsttPortNumIsSet = false;
-}
-int32_t TsnBridgeInfo::getDsttResidTime() const {
-  return m_DsttResidTime;
-}
+bool TsnBridgeInfo::dsttPortNumIsSet() const { return m_DsttPortNumIsSet; }
+void TsnBridgeInfo::unsetDsttPortNum() { m_DsttPortNumIsSet = false; }
+int32_t TsnBridgeInfo::getDsttResidTime() const { return m_DsttResidTime; }
 void TsnBridgeInfo::setDsttResidTime(int32_t const value) {
-  m_DsttResidTime      = value;
+  m_DsttResidTime = value;
   m_DsttResidTimeIsSet = true;
 }
-bool TsnBridgeInfo::dsttResidTimeIsSet() const {
-  return m_DsttResidTimeIsSet;
-}
-void TsnBridgeInfo::unsetDsttResidTime() {
-  m_DsttResidTimeIsSet = false;
-}
+bool TsnBridgeInfo::dsttResidTimeIsSet() const { return m_DsttResidTimeIsSet; }
+void TsnBridgeInfo::unsetDsttResidTime() { m_DsttResidTimeIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

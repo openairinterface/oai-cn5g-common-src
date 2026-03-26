@@ -19,20 +19,20 @@
 namespace oai::model::pcf {
 
 QosMonitoringData::QosMonitoringData() {
-  m_QmId               = "";
-  m_RepThreshDl        = 0;
-  m_RepThreshDlIsSet   = false;
-  m_RepThreshUl        = 0;
-  m_RepThreshUlIsSet   = false;
-  m_RepThreshRp        = 0;
-  m_RepThreshRpIsSet   = false;
-  m_WaitTime           = 0;
-  m_WaitTimeIsSet      = false;
-  m_RepPeriod          = 0;
-  m_RepPeriodIsSet     = false;
-  m_NotifyUri          = "";
-  m_NotifyUriIsSet     = false;
-  m_NotifyCorreId      = "";
+  m_QmId = "";
+  m_RepThreshDl = 0;
+  m_RepThreshDlIsSet = false;
+  m_RepThreshUl = 0;
+  m_RepThreshUlIsSet = false;
+  m_RepThreshRp = 0;
+  m_RepThreshRpIsSet = false;
+  m_WaitTime = 0;
+  m_WaitTimeIsSet = false;
+  m_RepPeriod = 0;
+  m_RepPeriodIsSet = false;
+  m_NotifyUri = "";
+  m_NotifyUriIsSet = false;
+  m_NotifyCorreId = "";
   m_NotifyCorreIdIsSet = false;
 }
 
@@ -43,18 +43,18 @@ void QosMonitoringData::validate() const {
   }
 }
 
-bool QosMonitoringData::validate(std::stringstream& msg) const {
+bool QosMonitoringData::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool QosMonitoringData::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool QosMonitoringData::validate(std::stringstream &msg,
+                                 const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "QosMonitoringData" : pathPrefix;
 
   /* ReqQosMonParams */ {
-    const std::vector<oai::model::pcf::RequestedQosMonitoringParameter>& value =
+    const std::vector<oai::model::pcf::RequestedQosMonitoringParameter> &value =
         m_ReqQosMonParams;
     const std::string currentValuePath = _pathPrefix + ".reqQosMonParams";
 
@@ -62,10 +62,10 @@ bool QosMonitoringData::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::RequestedQosMonitoringParameter& value :
+      int i = 0;
+      for (const oai::model::pcf::RequestedQosMonitoringParameter &value :
            value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
@@ -79,17 +79,17 @@ bool QosMonitoringData::validate(
   }
 
   /* RepFreqs */ {
-    const std::vector<oai::model::pcf::ReportingFrequency>& value = m_RepFreqs;
+    const std::vector<oai::model::pcf::ReportingFrequency> &value = m_RepFreqs;
     const std::string currentValuePath = _pathPrefix + ".repFreqs";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::ReportingFrequency& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::ReportingFrequency &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -104,7 +104,7 @@ bool QosMonitoringData::validate(
   return success;
 }
 
-bool QosMonitoringData::operator==(const QosMonitoringData& rhs) const {
+bool QosMonitoringData::operator==(const QosMonitoringData &rhs) const {
   return
 
       (getQmId() == rhs.getQmId()) &&
@@ -144,25 +144,32 @@ bool QosMonitoringData::operator==(const QosMonitoringData& rhs) const {
           ;
 }
 
-bool QosMonitoringData::operator!=(const QosMonitoringData& rhs) const {
+bool QosMonitoringData::operator!=(const QosMonitoringData &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const QosMonitoringData& o) {
-  j                    = nlohmann::json();
-  j["qmId"]            = o.m_QmId;
+void to_json(nlohmann::json &j, const QosMonitoringData &o) {
+  j = nlohmann::json();
+  j["qmId"] = o.m_QmId;
   j["reqQosMonParams"] = o.m_ReqQosMonParams;
-  j["repFreqs"]        = o.m_RepFreqs;
-  if (o.repThreshDlIsSet()) j["repThreshDl"] = o.m_RepThreshDl;
-  if (o.repThreshUlIsSet()) j["repThreshUl"] = o.m_RepThreshUl;
-  if (o.repThreshRpIsSet()) j["repThreshRp"] = o.m_RepThreshRp;
-  if (o.waitTimeIsSet()) j["waitTime"] = o.m_WaitTime;
-  if (o.repPeriodIsSet()) j["repPeriod"] = o.m_RepPeriod;
-  if (o.notifyUriIsSet()) j["notifyUri"] = o.m_NotifyUri;
-  if (o.notifyCorreIdIsSet()) j["notifyCorreId"] = o.m_NotifyCorreId;
+  j["repFreqs"] = o.m_RepFreqs;
+  if (o.repThreshDlIsSet())
+    j["repThreshDl"] = o.m_RepThreshDl;
+  if (o.repThreshUlIsSet())
+    j["repThreshUl"] = o.m_RepThreshUl;
+  if (o.repThreshRpIsSet())
+    j["repThreshRp"] = o.m_RepThreshRp;
+  if (o.waitTimeIsSet())
+    j["waitTime"] = o.m_WaitTime;
+  if (o.repPeriodIsSet())
+    j["repPeriod"] = o.m_RepPeriod;
+  if (o.notifyUriIsSet())
+    j["notifyUri"] = o.m_NotifyUri;
+  if (o.notifyCorreIdIsSet())
+    j["notifyCorreId"] = o.m_NotifyCorreId;
 }
 
-void from_json(const nlohmann::json& j, QosMonitoringData& o) {
+void from_json(const nlohmann::json &j, QosMonitoringData &o) {
   j.at("qmId").get_to(o.m_QmId);
   j.at("reqQosMonParams").get_to(o.m_ReqQosMonParams);
   j.at("repFreqs").get_to(o.m_RepFreqs);
@@ -196,19 +203,15 @@ void from_json(const nlohmann::json& j, QosMonitoringData& o) {
   }
 }
 
-std::string QosMonitoringData::getQmId() const {
-  return m_QmId;
-}
-void QosMonitoringData::setQmId(std::string const& value) {
-  m_QmId = value;
-}
+std::string QosMonitoringData::getQmId() const { return m_QmId; }
+void QosMonitoringData::setQmId(std::string const &value) { m_QmId = value; }
 std::vector<oai::model::pcf::RequestedQosMonitoringParameter>
 QosMonitoringData::getReqQosMonParams() const {
   return m_ReqQosMonParams;
 }
 void QosMonitoringData::setReqQosMonParams(
-    std::vector<oai::model::pcf::RequestedQosMonitoringParameter> const&
-        value) {
+    std::vector<oai::model::pcf::RequestedQosMonitoringParameter> const
+        &value) {
   m_ReqQosMonParams = value;
 }
 std::vector<oai::model::pcf::ReportingFrequency>
@@ -216,99 +219,61 @@ QosMonitoringData::getRepFreqs() const {
   return m_RepFreqs;
 }
 void QosMonitoringData::setRepFreqs(
-    std::vector<oai::model::pcf::ReportingFrequency> const& value) {
+    std::vector<oai::model::pcf::ReportingFrequency> const &value) {
   m_RepFreqs = value;
 }
-int32_t QosMonitoringData::getRepThreshDl() const {
-  return m_RepThreshDl;
-}
+int32_t QosMonitoringData::getRepThreshDl() const { return m_RepThreshDl; }
 void QosMonitoringData::setRepThreshDl(int32_t const value) {
-  m_RepThreshDl      = value;
+  m_RepThreshDl = value;
   m_RepThreshDlIsSet = true;
 }
-bool QosMonitoringData::repThreshDlIsSet() const {
-  return m_RepThreshDlIsSet;
-}
-void QosMonitoringData::unsetRepThreshDl() {
-  m_RepThreshDlIsSet = false;
-}
-int32_t QosMonitoringData::getRepThreshUl() const {
-  return m_RepThreshUl;
-}
+bool QosMonitoringData::repThreshDlIsSet() const { return m_RepThreshDlIsSet; }
+void QosMonitoringData::unsetRepThreshDl() { m_RepThreshDlIsSet = false; }
+int32_t QosMonitoringData::getRepThreshUl() const { return m_RepThreshUl; }
 void QosMonitoringData::setRepThreshUl(int32_t const value) {
-  m_RepThreshUl      = value;
+  m_RepThreshUl = value;
   m_RepThreshUlIsSet = true;
 }
-bool QosMonitoringData::repThreshUlIsSet() const {
-  return m_RepThreshUlIsSet;
-}
-void QosMonitoringData::unsetRepThreshUl() {
-  m_RepThreshUlIsSet = false;
-}
-int32_t QosMonitoringData::getRepThreshRp() const {
-  return m_RepThreshRp;
-}
+bool QosMonitoringData::repThreshUlIsSet() const { return m_RepThreshUlIsSet; }
+void QosMonitoringData::unsetRepThreshUl() { m_RepThreshUlIsSet = false; }
+int32_t QosMonitoringData::getRepThreshRp() const { return m_RepThreshRp; }
 void QosMonitoringData::setRepThreshRp(int32_t const value) {
-  m_RepThreshRp      = value;
+  m_RepThreshRp = value;
   m_RepThreshRpIsSet = true;
 }
-bool QosMonitoringData::repThreshRpIsSet() const {
-  return m_RepThreshRpIsSet;
-}
-void QosMonitoringData::unsetRepThreshRp() {
-  m_RepThreshRpIsSet = false;
-}
-int32_t QosMonitoringData::getWaitTime() const {
-  return m_WaitTime;
-}
+bool QosMonitoringData::repThreshRpIsSet() const { return m_RepThreshRpIsSet; }
+void QosMonitoringData::unsetRepThreshRp() { m_RepThreshRpIsSet = false; }
+int32_t QosMonitoringData::getWaitTime() const { return m_WaitTime; }
 void QosMonitoringData::setWaitTime(int32_t const value) {
-  m_WaitTime      = value;
+  m_WaitTime = value;
   m_WaitTimeIsSet = true;
 }
-bool QosMonitoringData::waitTimeIsSet() const {
-  return m_WaitTimeIsSet;
-}
-void QosMonitoringData::unsetWaitTime() {
-  m_WaitTimeIsSet = false;
-}
-int32_t QosMonitoringData::getRepPeriod() const {
-  return m_RepPeriod;
-}
+bool QosMonitoringData::waitTimeIsSet() const { return m_WaitTimeIsSet; }
+void QosMonitoringData::unsetWaitTime() { m_WaitTimeIsSet = false; }
+int32_t QosMonitoringData::getRepPeriod() const { return m_RepPeriod; }
 void QosMonitoringData::setRepPeriod(int32_t const value) {
-  m_RepPeriod      = value;
+  m_RepPeriod = value;
   m_RepPeriodIsSet = true;
 }
-bool QosMonitoringData::repPeriodIsSet() const {
-  return m_RepPeriodIsSet;
-}
-void QosMonitoringData::unsetRepPeriod() {
-  m_RepPeriodIsSet = false;
-}
-std::string QosMonitoringData::getNotifyUri() const {
-  return m_NotifyUri;
-}
-void QosMonitoringData::setNotifyUri(std::string const& value) {
-  m_NotifyUri      = value;
+bool QosMonitoringData::repPeriodIsSet() const { return m_RepPeriodIsSet; }
+void QosMonitoringData::unsetRepPeriod() { m_RepPeriodIsSet = false; }
+std::string QosMonitoringData::getNotifyUri() const { return m_NotifyUri; }
+void QosMonitoringData::setNotifyUri(std::string const &value) {
+  m_NotifyUri = value;
   m_NotifyUriIsSet = true;
 }
-bool QosMonitoringData::notifyUriIsSet() const {
-  return m_NotifyUriIsSet;
-}
-void QosMonitoringData::unsetNotifyUri() {
-  m_NotifyUriIsSet = false;
-}
+bool QosMonitoringData::notifyUriIsSet() const { return m_NotifyUriIsSet; }
+void QosMonitoringData::unsetNotifyUri() { m_NotifyUriIsSet = false; }
 std::string QosMonitoringData::getNotifyCorreId() const {
   return m_NotifyCorreId;
 }
-void QosMonitoringData::setNotifyCorreId(std::string const& value) {
-  m_NotifyCorreId      = value;
+void QosMonitoringData::setNotifyCorreId(std::string const &value) {
+  m_NotifyCorreId = value;
   m_NotifyCorreIdIsSet = true;
 }
 bool QosMonitoringData::notifyCorreIdIsSet() const {
   return m_NotifyCorreIdIsSet;
 }
-void QosMonitoringData::unsetNotifyCorreId() {
-  m_NotifyCorreIdIsSet = false;
-}
+void QosMonitoringData::unsetNotifyCorreId() { m_NotifyCorreIdIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

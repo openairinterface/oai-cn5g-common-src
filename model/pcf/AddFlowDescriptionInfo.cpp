@@ -19,11 +19,11 @@
 namespace oai::model::pcf {
 
 AddFlowDescriptionInfo::AddFlowDescriptionInfo() {
-  m_Spi            = "";
-  m_SpiIsSet       = false;
-  m_FlowLabel      = "";
+  m_Spi = "";
+  m_SpiIsSet = false;
+  m_FlowLabel = "";
   m_FlowLabelIsSet = false;
-  m_FlowDirIsSet   = false;
+  m_FlowDirIsSet = false;
 }
 
 void AddFlowDescriptionInfo::validate() const {
@@ -33,12 +33,12 @@ void AddFlowDescriptionInfo::validate() const {
   }
 }
 
-bool AddFlowDescriptionInfo::validate(std::stringstream& msg) const {
+bool AddFlowDescriptionInfo::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AddFlowDescriptionInfo::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool AddFlowDescriptionInfo::validate(std::stringstream &msg,
+                                      const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AddFlowDescriptionInfo" : pathPrefix;
@@ -47,7 +47,7 @@ bool AddFlowDescriptionInfo::validate(
 }
 
 bool AddFlowDescriptionInfo::operator==(
-    const AddFlowDescriptionInfo& rhs) const {
+    const AddFlowDescriptionInfo &rhs) const {
   return
 
       ((!spiIsSet() && !rhs.spiIsSet()) ||
@@ -65,18 +65,21 @@ bool AddFlowDescriptionInfo::operator==(
 }
 
 bool AddFlowDescriptionInfo::operator!=(
-    const AddFlowDescriptionInfo& rhs) const {
+    const AddFlowDescriptionInfo &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AddFlowDescriptionInfo& o) {
+void to_json(nlohmann::json &j, const AddFlowDescriptionInfo &o) {
   j = nlohmann::json::object();
-  if (o.spiIsSet()) j["spi"] = o.m_Spi;
-  if (o.flowLabelIsSet()) j["flowLabel"] = o.m_FlowLabel;
-  if (o.flowDirIsSet()) j["flowDir"] = o.m_FlowDir;
+  if (o.spiIsSet())
+    j["spi"] = o.m_Spi;
+  if (o.flowLabelIsSet())
+    j["flowLabel"] = o.m_FlowLabel;
+  if (o.flowDirIsSet())
+    j["flowDir"] = o.m_FlowDir;
 }
 
-void from_json(const nlohmann::json& j, AddFlowDescriptionInfo& o) {
+void from_json(const nlohmann::json &j, AddFlowDescriptionInfo &o) {
   if (j.find("spi") != j.end()) {
     j.at("spi").get_to(o.m_Spi);
     o.m_SpiIsSet = true;
@@ -91,45 +94,29 @@ void from_json(const nlohmann::json& j, AddFlowDescriptionInfo& o) {
   }
 }
 
-std::string AddFlowDescriptionInfo::getSpi() const {
-  return m_Spi;
-}
-void AddFlowDescriptionInfo::setSpi(std::string const& value) {
-  m_Spi      = value;
+std::string AddFlowDescriptionInfo::getSpi() const { return m_Spi; }
+void AddFlowDescriptionInfo::setSpi(std::string const &value) {
+  m_Spi = value;
   m_SpiIsSet = true;
 }
-bool AddFlowDescriptionInfo::spiIsSet() const {
-  return m_SpiIsSet;
-}
-void AddFlowDescriptionInfo::unsetSpi() {
-  m_SpiIsSet = false;
-}
-std::string AddFlowDescriptionInfo::getFlowLabel() const {
-  return m_FlowLabel;
-}
-void AddFlowDescriptionInfo::setFlowLabel(std::string const& value) {
-  m_FlowLabel      = value;
+bool AddFlowDescriptionInfo::spiIsSet() const { return m_SpiIsSet; }
+void AddFlowDescriptionInfo::unsetSpi() { m_SpiIsSet = false; }
+std::string AddFlowDescriptionInfo::getFlowLabel() const { return m_FlowLabel; }
+void AddFlowDescriptionInfo::setFlowLabel(std::string const &value) {
+  m_FlowLabel = value;
   m_FlowLabelIsSet = true;
 }
-bool AddFlowDescriptionInfo::flowLabelIsSet() const {
-  return m_FlowLabelIsSet;
-}
-void AddFlowDescriptionInfo::unsetFlowLabel() {
-  m_FlowLabelIsSet = false;
-}
+bool AddFlowDescriptionInfo::flowLabelIsSet() const { return m_FlowLabelIsSet; }
+void AddFlowDescriptionInfo::unsetFlowLabel() { m_FlowLabelIsSet = false; }
 oai::model::pcf::FlowDirection AddFlowDescriptionInfo::getFlowDir() const {
   return m_FlowDir;
 }
 void AddFlowDescriptionInfo::setFlowDir(
-    oai::model::pcf::FlowDirection const& value) {
-  m_FlowDir      = value;
+    oai::model::pcf::FlowDirection const &value) {
+  m_FlowDir = value;
   m_FlowDirIsSet = true;
 }
-bool AddFlowDescriptionInfo::flowDirIsSet() const {
-  return m_FlowDirIsSet;
-}
-void AddFlowDescriptionInfo::unsetFlowDir() {
-  m_FlowDirIsSet = false;
-}
+bool AddFlowDescriptionInfo::flowDirIsSet() const { return m_FlowDirIsSet; }
+void AddFlowDescriptionInfo::unsetFlowDir() { m_FlowDirIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

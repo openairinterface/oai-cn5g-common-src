@@ -19,11 +19,11 @@
 namespace oai::udr::model {
 
 PfdDataForAppExt::PfdDataForAppExt() {
-  m_ApplicationId    = "";
-  m_CachingTime      = "";
+  m_ApplicationId = "";
+  m_CachingTime = "";
   m_CachingTimeIsSet = false;
-  m_SuppFeat         = "";
-  m_SuppFeatIsSet    = false;
+  m_SuppFeat = "";
+  m_SuppFeatIsSet = false;
 }
 
 PfdDataForAppExt::~PfdDataForAppExt() {}
@@ -32,15 +32,17 @@ void PfdDataForAppExt::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const PfdDataForAppExt& o) {
-  j                  = nlohmann::json();
+void to_json(nlohmann::json &j, const PfdDataForAppExt &o) {
+  j = nlohmann::json();
   j["applicationId"] = o.m_ApplicationId;
-  j["pfds"]          = o.m_Pfds;
-  if (o.cachingTimeIsSet()) j["cachingTime"] = o.m_CachingTime;
-  if (o.suppFeatIsSet()) j["suppFeat"] = o.m_SuppFeat;
+  j["pfds"] = o.m_Pfds;
+  if (o.cachingTimeIsSet())
+    j["cachingTime"] = o.m_CachingTime;
+  if (o.suppFeatIsSet())
+    j["suppFeat"] = o.m_SuppFeat;
 }
 
-void from_json(const nlohmann::json& j, PfdDataForAppExt& o) {
+void from_json(const nlohmann::json &j, PfdDataForAppExt &o) {
   j.at("applicationId").get_to(o.m_ApplicationId);
   j.at("pfds").get_to(o.m_Pfds);
   if (j.find("cachingTime") != j.end()) {
@@ -56,40 +58,26 @@ void from_json(const nlohmann::json& j, PfdDataForAppExt& o) {
 std::string PfdDataForAppExt::getApplicationId() const {
   return m_ApplicationId;
 }
-void PfdDataForAppExt::setApplicationId(std::string const& value) {
+void PfdDataForAppExt::setApplicationId(std::string const &value) {
   m_ApplicationId = value;
 }
-std::vector<PfdContent>& PfdDataForAppExt::getPfds() {
-  return m_Pfds;
-}
-void PfdDataForAppExt::setPfds(std::vector<PfdContent> const& value) {
+std::vector<PfdContent> &PfdDataForAppExt::getPfds() { return m_Pfds; }
+void PfdDataForAppExt::setPfds(std::vector<PfdContent> const &value) {
   m_Pfds = value;
 }
-std::string PfdDataForAppExt::getCachingTime() const {
-  return m_CachingTime;
-}
-void PfdDataForAppExt::setCachingTime(std::string const& value) {
-  m_CachingTime      = value;
+std::string PfdDataForAppExt::getCachingTime() const { return m_CachingTime; }
+void PfdDataForAppExt::setCachingTime(std::string const &value) {
+  m_CachingTime = value;
   m_CachingTimeIsSet = true;
 }
-bool PfdDataForAppExt::cachingTimeIsSet() const {
-  return m_CachingTimeIsSet;
-}
-void PfdDataForAppExt::unsetCachingTime() {
-  m_CachingTimeIsSet = false;
-}
-std::string PfdDataForAppExt::getSuppFeat() const {
-  return m_SuppFeat;
-}
-void PfdDataForAppExt::setSuppFeat(std::string const& value) {
-  m_SuppFeat      = value;
+bool PfdDataForAppExt::cachingTimeIsSet() const { return m_CachingTimeIsSet; }
+void PfdDataForAppExt::unsetCachingTime() { m_CachingTimeIsSet = false; }
+std::string PfdDataForAppExt::getSuppFeat() const { return m_SuppFeat; }
+void PfdDataForAppExt::setSuppFeat(std::string const &value) {
+  m_SuppFeat = value;
   m_SuppFeatIsSet = true;
 }
-bool PfdDataForAppExt::suppFeatIsSet() const {
-  return m_SuppFeatIsSet;
-}
-void PfdDataForAppExt::unsetSuppFeat() {
-  m_SuppFeatIsSet = false;
-}
+bool PfdDataForAppExt::suppFeatIsSet() const { return m_SuppFeatIsSet; }
+void PfdDataForAppExt::unsetSuppFeat() { m_SuppFeatIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

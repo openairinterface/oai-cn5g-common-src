@@ -26,9 +26,7 @@ asn_per_constraints_t asn_PER_type_Ngap_UEPresence_constr_1 CC_NOTUSED = {
 #endif /* !defined(ASN_DISABLE_UPER_SUPPORT) ||                                \
           !defined(ASN_DISABLE_APER_SUPPORT) */
 static const asn_INTEGER_enum_map_t asn_MAP_Ngap_UEPresence_value2enum_1[] = {
-    {0, 2, "in"},
-    {1, 3, "out"},
-    {2, 7, "unknown"}
+    {0, 2, "in"}, {1, 3, "out"}, {2, 7, "unknown"}
     /* This list is extensible */
 };
 static const unsigned int asn_MAP_Ngap_UEPresence_enum2value_1[] = {

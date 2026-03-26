@@ -11,12 +11,12 @@
 namespace oai::nas {
 
 class SecurityModeReject : public Nas5gmmMessage {
- public:
+public:
   SecurityModeReject();
   ~SecurityModeReject();
 
-  int Encode(uint8_t* buf, int len) override;
-  int Decode(uint8_t* buf, int len) override;
+  int Encode(uint8_t *buf, int len) override;
+  int Decode(uint8_t *buf, int len) override;
 
   uint32_t GetLength() const override;
 
@@ -25,11 +25,11 @@ class SecurityModeReject : public Nas5gmmMessage {
   void Set5gmmCause(uint8_t value);
   // TODO: Get
 
- private:
-  NasMmPlainHeader ie_header_;  // Mandatory
-  _5gmmCause ie_5gmm_cause_;    // Mandatory
+private:
+  NasMmPlainHeader ie_header_; // Mandatory
+  _5gmmCause ie_5gmm_cause_;   // Mandatory
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

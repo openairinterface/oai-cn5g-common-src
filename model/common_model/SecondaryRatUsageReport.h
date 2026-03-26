@@ -21,8 +21,8 @@
 
 #include "QosFlowUsageReport.h"
 #include "RatType.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::common {
 
@@ -30,7 +30,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class SecondaryRatUsageReport {
- public:
+public:
   SecondaryRatUsageReport();
   virtual ~SecondaryRatUsageReport() = default;
 
@@ -44,16 +44,16 @@ class SecondaryRatUsageReport {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const SecondaryRatUsageReport& rhs) const;
-  bool operator!=(const SecondaryRatUsageReport& rhs) const;
+  bool operator==(const SecondaryRatUsageReport &rhs) const;
+  bool operator!=(const SecondaryRatUsageReport &rhs) const;
 
   /////////////////////////////////////////////
   /// SecondaryRatUsageReport members
@@ -62,24 +62,24 @@ class SecondaryRatUsageReport {
   ///
   /// </summary>
   oai::model::common::RatType getSecondaryRatType() const;
-  void setSecondaryRatType(oai::model::common::RatType const& value);
+  void setSecondaryRatType(oai::model::common::RatType const &value);
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::QosFlowUsageReport> getQosFlowsUsageData()
-      const;
+  std::vector<oai::model::common::QosFlowUsageReport>
+  getQosFlowsUsageData() const;
   void setQosFlowsUsageData(
-      std::vector<oai::model::common::QosFlowUsageReport> const& value);
+      std::vector<oai::model::common::QosFlowUsageReport> const &value);
 
-  friend void to_json(nlohmann::json& j, const SecondaryRatUsageReport& o);
-  friend void from_json(const nlohmann::json& j, SecondaryRatUsageReport& o);
+  friend void to_json(nlohmann::json &j, const SecondaryRatUsageReport &o);
+  friend void from_json(const nlohmann::json &j, SecondaryRatUsageReport &o);
 
- protected:
+protected:
   oai::model::common::RatType m_SecondaryRatType;
 
   std::vector<oai::model::common::QosFlowUsageReport> m_QosFlowsUsageData;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* SecondaryRatUsageReport_H_ */

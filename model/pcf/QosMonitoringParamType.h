@@ -35,7 +35,7 @@ namespace oai::model::pcf {
 /// parameter to be measured is data rate.
 /// </summary>
 class QosMonitoringParamType {
- public:
+public:
   QosMonitoringParamType();
   virtual ~QosMonitoringParamType() = default;
 
@@ -49,26 +49,26 @@ class QosMonitoringParamType {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const QosMonitoringParamType& rhs) const;
-  bool operator!=(const QosMonitoringParamType& rhs) const;
+  bool operator==(const QosMonitoringParamType &rhs) const;
+  bool operator!=(const QosMonitoringParamType &rhs) const;
 
   /////////////////////////////////////////////
   /// QosMonitoringParamType members
 
-  friend void to_json(nlohmann::json& j, const QosMonitoringParamType& o);
-  friend void from_json(const nlohmann::json& j, QosMonitoringParamType& o);
+  friend void to_json(nlohmann::json &j, const QosMonitoringParamType &o);
+  friend void from_json(const nlohmann::json &j, QosMonitoringParamType &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* QosMonitoringParamType_H_ */

@@ -14,26 +14,25 @@ extern "C" {
 namespace oai::ngap {
 
 class PduSessionResourceFailedToSetupItemSURes {
- public:
+public:
   PduSessionResourceFailedToSetupItemSURes();
   virtual ~PduSessionResourceFailedToSetupItemSURes();
 
-  void set(
-      const PduSessionId& pduSessionId,
-      const OCTET_STRING_t& pduSessionResource);
-  void get(
-      PduSessionId& pduSessionId, OCTET_STRING_t& pduSessionResource) const;
+  void set(const PduSessionId &pduSessionId,
+           const OCTET_STRING_t &pduSessionResource);
+  void get(PduSessionId &pduSessionId,
+           OCTET_STRING_t &pduSessionResource) const;
 
-  bool encode(Ngap_PDUSessionResourceFailedToSetupItemSURes_t&
-                  pduSessionResourceItem) const;
-  bool decode(const Ngap_PDUSessionResourceFailedToSetupItemSURes_t&
-                  pduSessionResourceItem);
+  bool encode(Ngap_PDUSessionResourceFailedToSetupItemSURes_t
+                  &pduSessionResourceItem) const;
+  bool decode(const Ngap_PDUSessionResourceFailedToSetupItemSURes_t
+                  &pduSessionResourceItem);
 
- private:
+private:
   PduSessionId m_PduSessionId;
   OCTET_STRING_t m_PduSessionResourceSetupUnsuccessfulTransfer;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

@@ -16,9 +16,9 @@
 namespace oai::model::nrf {
 
 AmfCond::AmfCond() {
-  m_AmfSetId         = "";
-  m_AmfSetIdIsSet    = false;
-  m_AmfRegionId      = "";
+  m_AmfSetId = "";
+  m_AmfSetIdIsSet = false;
+  m_AmfRegionId = "";
   m_AmfRegionIdIsSet = false;
 }
 
@@ -28,13 +28,15 @@ void AmfCond::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const AmfCond& o) {
+void to_json(nlohmann::json &j, const AmfCond &o) {
   j = nlohmann::json();
-  if (o.amfSetIdIsSet()) j["amfSetId"] = o.m_AmfSetId;
-  if (o.amfRegionIdIsSet()) j["amfRegionId"] = o.m_AmfRegionId;
+  if (o.amfSetIdIsSet())
+    j["amfSetId"] = o.m_AmfSetId;
+  if (o.amfRegionIdIsSet())
+    j["amfRegionId"] = o.m_AmfRegionId;
 }
 
-void from_json(const nlohmann::json& j, AmfCond& o) {
+void from_json(const nlohmann::json &j, AmfCond &o) {
   if (j.find("amfSetId") != j.end()) {
     j.at("amfSetId").get_to(o.m_AmfSetId);
     o.m_AmfSetIdIsSet = true;
@@ -45,31 +47,19 @@ void from_json(const nlohmann::json& j, AmfCond& o) {
   }
 }
 
-std::string AmfCond::getAmfSetId() const {
-  return m_AmfSetId;
-}
-void AmfCond::setAmfSetId(std::string const& value) {
-  m_AmfSetId      = value;
+std::string AmfCond::getAmfSetId() const { return m_AmfSetId; }
+void AmfCond::setAmfSetId(std::string const &value) {
+  m_AmfSetId = value;
   m_AmfSetIdIsSet = true;
 }
-bool AmfCond::amfSetIdIsSet() const {
-  return m_AmfSetIdIsSet;
-}
-void AmfCond::unsetAmfSetId() {
-  m_AmfSetIdIsSet = false;
-}
-std::string AmfCond::getAmfRegionId() const {
-  return m_AmfRegionId;
-}
-void AmfCond::setAmfRegionId(std::string const& value) {
-  m_AmfRegionId      = value;
+bool AmfCond::amfSetIdIsSet() const { return m_AmfSetIdIsSet; }
+void AmfCond::unsetAmfSetId() { m_AmfSetIdIsSet = false; }
+std::string AmfCond::getAmfRegionId() const { return m_AmfRegionId; }
+void AmfCond::setAmfRegionId(std::string const &value) {
+  m_AmfRegionId = value;
   m_AmfRegionIdIsSet = true;
 }
-bool AmfCond::amfRegionIdIsSet() const {
-  return m_AmfRegionIdIsSet;
-}
-void AmfCond::unsetAmfRegionId() {
-  m_AmfRegionIdIsSet = false;
-}
+bool AmfCond::amfRegionIdIsSet() const { return m_AmfRegionIdIsSet; }
+void AmfCond::unsetAmfRegionId() { m_AmfRegionIdIsSet = false; }
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

@@ -12,9 +12,8 @@
 #include "Ngap_ProtocolIE-SingleContainer.h"
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 static asn_oer_constraints_t
-    asn_OER_type_Ngap_UPTransportLayerInformation_constr_1 CC_NOTUSED = {
-        {0, 0},
-        -1};
+    asn_OER_type_Ngap_UPTransportLayerInformation_constr_1 CC_NOTUSED = {{0, 0},
+                                                                         -1};
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 asn_per_constraints_t asn_PER_type_Ngap_UPTransportLayerInformation_constr_1
@@ -48,8 +47,8 @@ asn_TYPE_member_t asn_MBR_Ngap_UPTransportLayerInformation_1[] = {
      "gTPTunnel"},
     {ATF_POINTER,
      0,
-     offsetof(
-         struct Ngap_UPTransportLayerInformation, choice.choice_Extensions),
+     offsetof(struct Ngap_UPTransportLayerInformation,
+              choice.choice_Extensions),
      (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_ProtocolIE_SingleContainer_9618P48,
@@ -76,7 +75,7 @@ asn_CHOICE_specifics_t asn_SPC_Ngap_UPTransportLayerInformation_specs_1 = {
     sizeof(struct Ngap_UPTransportLayerInformation),
     offsetof(struct Ngap_UPTransportLayerInformation, _asn_ctx),
     offsetof(struct Ngap_UPTransportLayerInformation, present),
-    sizeof(((struct Ngap_UPTransportLayerInformation*) 0)->present),
+    sizeof(((struct Ngap_UPTransportLayerInformation *)0)->present),
     asn_MAP_Ngap_UPTransportLayerInformation_tag2el_1,
     2, /* Count of tags in the map */
     0,

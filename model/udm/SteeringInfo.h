@@ -34,7 +34,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class SteeringInfo {
- public:
+public:
   SteeringInfo();
   virtual ~SteeringInfo();
 
@@ -47,24 +47,24 @@ class SteeringInfo {
   ///
   /// </summary>
   oai::model::common::PlmnId getPlmnId() const;
-  void setPlmnId(oai::model::common::PlmnId const& value);
+  void setPlmnId(oai::model::common::PlmnId const &value);
   /// <summary>
   ///
   /// </summary>
-  std::vector<AccessTech>& getAccessTechList();
+  std::vector<AccessTech> &getAccessTechList();
   bool accessTechListIsSet() const;
   void unsetAccessTechList();
 
-  friend void to_json(nlohmann::json& j, const SteeringInfo& o);
-  friend void from_json(const nlohmann::json& j, SteeringInfo& o);
+  friend void to_json(nlohmann::json &j, const SteeringInfo &o);
+  friend void from_json(const nlohmann::json &j, SteeringInfo &o);
 
- protected:
+protected:
   oai::model::common::PlmnId m_PlmnId;
 
   std::vector<AccessTech> m_AccessTechList;
   bool m_AccessTechListIsSet;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* SteeringInfo_H_ */

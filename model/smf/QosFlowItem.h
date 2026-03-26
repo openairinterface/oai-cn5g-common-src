@@ -28,7 +28,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class QosFlowItem {
- public:
+public:
   QosFlowItem();
   virtual ~QosFlowItem();
 
@@ -46,20 +46,20 @@ class QosFlowItem {
   ///
   /// </summary>
   Cause getCause() const;
-  void setCause(Cause const& value);
+  void setCause(Cause const &value);
   bool causeIsSet() const;
   void unsetCause();
 
-  friend void to_json(nlohmann::json& j, const QosFlowItem& o);
-  friend void from_json(const nlohmann::json& j, QosFlowItem& o);
+  friend void to_json(nlohmann::json &j, const QosFlowItem &o);
+  friend void from_json(const nlohmann::json &j, QosFlowItem &o);
 
- protected:
+protected:
   int32_t m_Qfi;
 
   Cause m_Cause;
   bool m_CauseIsSet;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* QosFlowItem_H_ */

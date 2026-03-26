@@ -21,7 +21,6 @@
 
 #include <nlohmann/json.hpp>
 #include <string>
-#include <nlohmann/json.hpp>
 
 namespace oai::model::common {
 
@@ -29,7 +28,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class Atom {
- public:
+public:
   Atom();
   virtual ~Atom() = default;
 
@@ -43,16 +42,16 @@ class Atom {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const Atom& rhs) const;
-  bool operator!=(const Atom& rhs) const;
+  bool operator==(const Atom &rhs) const;
+  bool operator!=(const Atom &rhs) const;
 
   /////////////////////////////////////////////
   /// Atom members
@@ -61,12 +60,12 @@ class Atom {
   ///
   /// </summary>
   std::string getAttr() const;
-  void setAttr(std::string const& value);
+  void setAttr(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   nlohmann::json getValue() const;
-  void setValue(nlohmann::json const& value);
+  void setValue(nlohmann::json const &value);
   /// <summary>
   ///
   /// </summary>
@@ -75,10 +74,10 @@ class Atom {
   bool negativeIsSet() const;
   void unsetNegative();
 
-  friend void to_json(nlohmann::json& j, const Atom& o);
-  friend void from_json(const nlohmann::json& j, Atom& o);
+  friend void to_json(nlohmann::json &j, const Atom &o);
+  friend void from_json(const nlohmann::json &j, Atom &o);
 
- protected:
+protected:
   std::string m_Attr;
 
   nlohmann::json m_Value;
@@ -87,6 +86,6 @@ class Atom {
   bool m_NegativeIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* Atom_H_ */

@@ -20,10 +20,10 @@ namespace oai::udr::model {
 
 ApplicationDataChangeNotif::ApplicationDataChangeNotif() {
   m_IptvConfigDataIsSet = false;
-  m_PfdDataIsSet        = false;
-  m_BdtPolicyDataIsSet  = false;
-  m_ResUri              = "";
-  m_SerParamDataIsSet   = false;
+  m_PfdDataIsSet = false;
+  m_BdtPolicyDataIsSet = false;
+  m_ResUri = "";
+  m_SerParamDataIsSet = false;
 }
 
 ApplicationDataChangeNotif::~ApplicationDataChangeNotif() {}
@@ -32,16 +32,20 @@ void ApplicationDataChangeNotif::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const ApplicationDataChangeNotif& o) {
+void to_json(nlohmann::json &j, const ApplicationDataChangeNotif &o) {
   j = nlohmann::json();
-  if (o.iptvConfigDataIsSet()) j["iptvConfigData"] = o.m_IptvConfigData;
-  if (o.pfdDataIsSet()) j["pfdData"] = o.m_PfdData;
-  if (o.bdtPolicyDataIsSet()) j["bdtPolicyData"] = o.m_BdtPolicyData;
+  if (o.iptvConfigDataIsSet())
+    j["iptvConfigData"] = o.m_IptvConfigData;
+  if (o.pfdDataIsSet())
+    j["pfdData"] = o.m_PfdData;
+  if (o.bdtPolicyDataIsSet())
+    j["bdtPolicyData"] = o.m_BdtPolicyData;
   j["resUri"] = o.m_ResUri;
-  if (o.serParamDataIsSet()) j["serParamData"] = o.m_SerParamData;
+  if (o.serParamDataIsSet())
+    j["serParamData"] = o.m_SerParamData;
 }
 
-void from_json(const nlohmann::json& j, ApplicationDataChangeNotif& o) {
+void from_json(const nlohmann::json &j, ApplicationDataChangeNotif &o) {
   if (j.find("iptvConfigData") != j.end()) {
     j.at("iptvConfigData").get_to(o.m_IptvConfigData);
     o.m_IptvConfigDataIsSet = true;
@@ -65,8 +69,8 @@ IptvConfigData ApplicationDataChangeNotif::getIptvConfigData() const {
   return m_IptvConfigData;
 }
 void ApplicationDataChangeNotif::setIptvConfigData(
-    IptvConfigData const& value) {
-  m_IptvConfigData      = value;
+    IptvConfigData const &value) {
+  m_IptvConfigData = value;
   m_IptvConfigDataIsSet = true;
 }
 bool ApplicationDataChangeNotif::iptvConfigDataIsSet() const {
@@ -79,21 +83,17 @@ PfdChangeNotification ApplicationDataChangeNotif::getPfdData() const {
   return m_PfdData;
 }
 void ApplicationDataChangeNotif::setPfdData(
-    PfdChangeNotification const& value) {
-  m_PfdData      = value;
+    PfdChangeNotification const &value) {
+  m_PfdData = value;
   m_PfdDataIsSet = true;
 }
-bool ApplicationDataChangeNotif::pfdDataIsSet() const {
-  return m_PfdDataIsSet;
-}
-void ApplicationDataChangeNotif::unsetPfdData() {
-  m_PfdDataIsSet = false;
-}
+bool ApplicationDataChangeNotif::pfdDataIsSet() const { return m_PfdDataIsSet; }
+void ApplicationDataChangeNotif::unsetPfdData() { m_PfdDataIsSet = false; }
 BdtPolicyData ApplicationDataChangeNotif::getBdtPolicyData() const {
   return m_BdtPolicyData;
 }
-void ApplicationDataChangeNotif::setBdtPolicyData(BdtPolicyData const& value) {
-  m_BdtPolicyData      = value;
+void ApplicationDataChangeNotif::setBdtPolicyData(BdtPolicyData const &value) {
+  m_BdtPolicyData = value;
   m_BdtPolicyDataIsSet = true;
 }
 bool ApplicationDataChangeNotif::bdtPolicyDataIsSet() const {
@@ -102,18 +102,16 @@ bool ApplicationDataChangeNotif::bdtPolicyDataIsSet() const {
 void ApplicationDataChangeNotif::unsetBdtPolicyData() {
   m_BdtPolicyDataIsSet = false;
 }
-std::string ApplicationDataChangeNotif::getResUri() const {
-  return m_ResUri;
-}
-void ApplicationDataChangeNotif::setResUri(std::string const& value) {
+std::string ApplicationDataChangeNotif::getResUri() const { return m_ResUri; }
+void ApplicationDataChangeNotif::setResUri(std::string const &value) {
   m_ResUri = value;
 }
 ServiceParameterData ApplicationDataChangeNotif::getSerParamData() const {
   return m_SerParamData;
 }
 void ApplicationDataChangeNotif::setSerParamData(
-    ServiceParameterData const& value) {
-  m_SerParamData      = value;
+    ServiceParameterData const &value) {
+  m_SerParamData = value;
   m_SerParamDataIsSet = true;
 }
 bool ApplicationDataChangeNotif::serParamDataIsSet() const {
@@ -123,4 +121,4 @@ void ApplicationDataChangeNotif::unsetSerParamData() {
   m_SerParamDataIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

@@ -21,8 +21,8 @@
 
 #include "N2InfoContent.h"
 #include "UeContext.h"
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::amf {
 
@@ -30,7 +30,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class UeContextTransferRspData {
- public:
+public:
   UeContextTransferRspData();
   virtual ~UeContextTransferRspData();
 
@@ -43,33 +43,33 @@ class UeContextTransferRspData {
   ///
   /// </summary>
   UeContext getUeContext() const;
-  void setUeContext(UeContext const& value);
+  void setUeContext(UeContext const &value);
   /// <summary>
   ///
   /// </summary>
   N2InfoContent getUeRadioCapability() const;
-  void setUeRadioCapability(N2InfoContent const& value);
+  void setUeRadioCapability(N2InfoContent const &value);
   bool ueRadioCapabilityIsSet() const;
   void unsetUeRadioCapability();
   /// <summary>
   ///
   /// </summary>
   N2InfoContent getUeNbiotRadioCapability() const;
-  void setUeNbiotRadioCapability(N2InfoContent const& value);
+  void setUeNbiotRadioCapability(N2InfoContent const &value);
   bool ueNbiotRadioCapabilityIsSet() const;
   void unsetUeNbiotRadioCapability();
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
 
-  friend void to_json(nlohmann::json& j, const UeContextTransferRspData& o);
-  friend void from_json(const nlohmann::json& j, UeContextTransferRspData& o);
+  friend void to_json(nlohmann::json &j, const UeContextTransferRspData &o);
+  friend void from_json(const nlohmann::json &j, UeContextTransferRspData &o);
 
- protected:
+protected:
   UeContext m_UeContext;
 
   N2InfoContent m_UeRadioCapability;
@@ -80,6 +80,6 @@ class UeContextTransferRspData {
   bool m_SupportedFeaturesIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* UeContextTransferRspData_H_ */

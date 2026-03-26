@@ -27,30 +27,28 @@ void SscModeRm::validate() const {
   }
 }
 
-bool SscModeRm::validate(std::stringstream& msg) const {
+bool SscModeRm::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool SscModeRm::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool SscModeRm::validate(std::stringstream &msg,
+                         const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "SscModeRm" : pathPrefix;
 
   return success;
 }
 
-bool SscModeRm::operator==(const SscModeRm& rhs) const {
+bool SscModeRm::operator==(const SscModeRm &rhs) const {
   return (*this == rhs);
 }
 
-bool SscModeRm::operator!=(const SscModeRm& rhs) const {
+bool SscModeRm::operator!=(const SscModeRm &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const SscModeRm& o) {
-  j = nlohmann::json();
-}
+void to_json(nlohmann::json &j, const SscModeRm &o) { j = nlohmann::json(); }
 
-void from_json(const nlohmann::json& j, SscModeRm& o) {}
+void from_json(const nlohmann::json &j, SscModeRm &o) {}
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

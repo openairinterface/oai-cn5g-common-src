@@ -19,9 +19,7 @@
 
 namespace oai::model::nrf {
 
-DnnSmfInfoItem::DnnSmfInfoItem() {
-  m_Dnn = "";
-}
+DnnSmfInfoItem::DnnSmfInfoItem() { m_Dnn = ""; }
 
 void DnnSmfInfoItem::validate() const {
   std::stringstream msg;
@@ -30,12 +28,12 @@ void DnnSmfInfoItem::validate() const {
   }
 }
 
-bool DnnSmfInfoItem::validate(std::stringstream& msg) const {
+bool DnnSmfInfoItem::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool DnnSmfInfoItem::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool DnnSmfInfoItem::validate(std::stringstream &msg,
+                              const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "DnnSmfInfoItem" : pathPrefix;
@@ -43,7 +41,7 @@ bool DnnSmfInfoItem::validate(
   return success;
 }
 
-bool DnnSmfInfoItem::operator==(const DnnSmfInfoItem& rhs) const {
+bool DnnSmfInfoItem::operator==(const DnnSmfInfoItem &rhs) const {
   return
 
       (getDnn() == rhs.getDnn())
@@ -51,25 +49,21 @@ bool DnnSmfInfoItem::operator==(const DnnSmfInfoItem& rhs) const {
           ;
 }
 
-bool DnnSmfInfoItem::operator!=(const DnnSmfInfoItem& rhs) const {
+bool DnnSmfInfoItem::operator!=(const DnnSmfInfoItem &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const DnnSmfInfoItem& o) {
-  j        = nlohmann::json::object();
+void to_json(nlohmann::json &j, const DnnSmfInfoItem &o) {
+  j = nlohmann::json::object();
   j["dnn"] = o.m_Dnn;
 }
 
-void from_json(const nlohmann::json& j, DnnSmfInfoItem& o) {
+void from_json(const nlohmann::json &j, DnnSmfInfoItem &o) {
   j.at("dnn").get_to(o.m_Dnn);
 }
 
-std::string DnnSmfInfoItem::getDnn() const {
-  return m_Dnn;
-}
-void DnnSmfInfoItem::setDnn(std::string const& value) {
-  m_Dnn = value;
-}
+std::string DnnSmfInfoItem::getDnn() const { return m_Dnn; }
+void DnnSmfInfoItem::setDnn(std::string const &value) { m_Dnn = value; }
 
 std::string DnnSmfInfoItem::to_string(int indent_level) const {
   std::string out;
@@ -78,4 +72,4 @@ std::string DnnSmfInfoItem::to_string(int indent_level) const {
   return out;
 }
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

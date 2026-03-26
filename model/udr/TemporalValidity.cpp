@@ -19,10 +19,10 @@
 namespace oai::udr::model {
 
 TemporalValidity::TemporalValidity() {
-  m_StartTime      = "";
+  m_StartTime = "";
   m_StartTimeIsSet = false;
-  m_StopTime       = "";
-  m_StopTimeIsSet  = false;
+  m_StopTime = "";
+  m_StopTimeIsSet = false;
 }
 
 TemporalValidity::~TemporalValidity() {}
@@ -31,13 +31,15 @@ void TemporalValidity::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const TemporalValidity& o) {
+void to_json(nlohmann::json &j, const TemporalValidity &o) {
   j = nlohmann::json();
-  if (o.startTimeIsSet()) j["startTime"] = o.m_StartTime;
-  if (o.stopTimeIsSet()) j["stopTime"] = o.m_StopTime;
+  if (o.startTimeIsSet())
+    j["startTime"] = o.m_StartTime;
+  if (o.stopTimeIsSet())
+    j["stopTime"] = o.m_StopTime;
 }
 
-void from_json(const nlohmann::json& j, TemporalValidity& o) {
+void from_json(const nlohmann::json &j, TemporalValidity &o) {
   if (j.find("startTime") != j.end()) {
     j.at("startTime").get_to(o.m_StartTime);
     o.m_StartTimeIsSet = true;
@@ -48,31 +50,19 @@ void from_json(const nlohmann::json& j, TemporalValidity& o) {
   }
 }
 
-std::string TemporalValidity::getStartTime() const {
-  return m_StartTime;
-}
-void TemporalValidity::setStartTime(std::string const& value) {
-  m_StartTime      = value;
+std::string TemporalValidity::getStartTime() const { return m_StartTime; }
+void TemporalValidity::setStartTime(std::string const &value) {
+  m_StartTime = value;
   m_StartTimeIsSet = true;
 }
-bool TemporalValidity::startTimeIsSet() const {
-  return m_StartTimeIsSet;
-}
-void TemporalValidity::unsetStartTime() {
-  m_StartTimeIsSet = false;
-}
-std::string TemporalValidity::getStopTime() const {
-  return m_StopTime;
-}
-void TemporalValidity::setStopTime(std::string const& value) {
-  m_StopTime      = value;
+bool TemporalValidity::startTimeIsSet() const { return m_StartTimeIsSet; }
+void TemporalValidity::unsetStartTime() { m_StartTimeIsSet = false; }
+std::string TemporalValidity::getStopTime() const { return m_StopTime; }
+void TemporalValidity::setStopTime(std::string const &value) {
+  m_StopTime = value;
   m_StopTimeIsSet = true;
 }
-bool TemporalValidity::stopTimeIsSet() const {
-  return m_StopTimeIsSet;
-}
-void TemporalValidity::unsetStopTime() {
-  m_StopTimeIsSet = false;
-}
+bool TemporalValidity::stopTimeIsSet() const { return m_StopTimeIsSet; }
+void TemporalValidity::unsetStopTime() { m_StopTimeIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

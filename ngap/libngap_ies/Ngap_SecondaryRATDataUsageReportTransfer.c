@@ -8,15 +8,14 @@
 
 #include "Ngap_SecondaryRATDataUsageReportTransfer.h"
 
-#include "Ngap_SecondaryRATUsageInformation.h"
 #include "Ngap_ProtocolExtensionContainer.h"
+#include "Ngap_SecondaryRATUsageInformation.h"
 static asn_TYPE_member_t asn_MBR_Ngap_SecondaryRATDataUsageReportTransfer_1[] =
     {
         {ATF_POINTER,
          2,
-         offsetof(
-             struct Ngap_SecondaryRATDataUsageReportTransfer,
-             secondaryRATUsageInformation),
+         offsetof(struct Ngap_SecondaryRATDataUsageReportTransfer,
+                  secondaryRATUsageInformation),
          (ASN_TAG_CLASS_CONTEXT | (0 << 2)),
          -1, /* IMPLICIT tag at current level */
          &asn_DEF_Ngap_SecondaryRATUsageInformation,
@@ -35,8 +34,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_SecondaryRATDataUsageReportTransfer_1[] =
          "secondaryRATUsageInformation"},
         {ATF_POINTER,
          1,
-         offsetof(
-             struct Ngap_SecondaryRATDataUsageReportTransfer, iE_Extensions),
+         offsetof(struct Ngap_SecondaryRATDataUsageReportTransfer,
+                  iE_Extensions),
          (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
          -1, /* IMPLICIT tag at current level */
          &asn_DEF_Ngap_ProtocolExtensionContainer_9666P227,
@@ -54,8 +53,8 @@ static asn_TYPE_member_t asn_MBR_Ngap_SecondaryRATDataUsageReportTransfer_1[] =
          0, /* No default value */
          "iE-Extensions"},
 };
-static const int asn_MAP_Ngap_SecondaryRATDataUsageReportTransfer_oms_1[] = {
-    0, 1};
+static const int asn_MAP_Ngap_SecondaryRATDataUsageReportTransfer_oms_1[] = {0,
+                                                                             1};
 static const ber_tlv_tag_t
     asn_DEF_Ngap_SecondaryRATDataUsageReportTransfer_tags_1[] = {
         (ASN_TAG_CLASS_UNIVERSAL | (16 << 2))};

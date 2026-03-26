@@ -27,7 +27,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class DlDataDeliveryStatus_anyOf {
- public:
+public:
   DlDataDeliveryStatus_anyOf();
   virtual ~DlDataDeliveryStatus_anyOf() = default;
 
@@ -51,16 +51,16 @@ class DlDataDeliveryStatus_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const DlDataDeliveryStatus_anyOf& rhs) const;
-  bool operator!=(const DlDataDeliveryStatus_anyOf& rhs) const;
+  bool operator==(const DlDataDeliveryStatus_anyOf &rhs) const;
+  bool operator!=(const DlDataDeliveryStatus_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// DlDataDeliveryStatus_anyOf members
@@ -68,15 +68,15 @@ class DlDataDeliveryStatus_anyOf {
   DlDataDeliveryStatus_anyOf::eDlDataDeliveryStatus_anyOf getValue() const;
   void setValue(DlDataDeliveryStatus_anyOf::eDlDataDeliveryStatus_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const DlDataDeliveryStatus_anyOf& o);
-  friend void from_json(const nlohmann::json& j, DlDataDeliveryStatus_anyOf& o);
+  friend void to_json(nlohmann::json &j, const DlDataDeliveryStatus_anyOf &o);
+  friend void from_json(const nlohmann::json &j, DlDataDeliveryStatus_anyOf &o);
 
- protected:
+protected:
   DlDataDeliveryStatus_anyOf::eDlDataDeliveryStatus_anyOf m_value =
       DlDataDeliveryStatus_anyOf::eDlDataDeliveryStatus_anyOf::
           INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* DlDataDeliveryStatus_anyOf_H_ */

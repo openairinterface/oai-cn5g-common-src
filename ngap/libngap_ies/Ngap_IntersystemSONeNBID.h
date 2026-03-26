@@ -12,8 +12,8 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_GlobalENB-ID.h"
 #include "Ngap_EPS-TAI.h"
+#include "Ngap_GlobalENB-ID.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -27,7 +27,7 @@ struct Ngap_ProtocolExtensionContainer;
 typedef struct Ngap_IntersystemSONeNBID {
   Ngap_GlobalENB_ID_t globaleNBID;
   Ngap_EPS_TAI_t selectedEPSTAI;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

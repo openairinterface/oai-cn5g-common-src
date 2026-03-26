@@ -21,8 +21,8 @@
 
 #include "N1MessageClass.h"
 #include "RefToBinaryData.h"
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::lmf {
 
@@ -30,7 +30,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class N1MessageContainer {
- public:
+public:
   N1MessageContainer();
   virtual ~N1MessageContainer() = default;
 
@@ -44,16 +44,16 @@ class N1MessageContainer {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const N1MessageContainer& rhs) const;
-  bool operator!=(const N1MessageContainer& rhs) const;
+  bool operator==(const N1MessageContainer &rhs) const;
+  bool operator!=(const N1MessageContainer &rhs) const;
 
   /////////////////////////////////////////////
   /// N1MessageContainer members
@@ -62,31 +62,31 @@ class N1MessageContainer {
   ///
   /// </summary>
   oai::model::lmf::N1MessageClass getN1MessageClass() const;
-  void setN1MessageClass(oai::model::lmf::N1MessageClass const& value);
+  void setN1MessageClass(oai::model::lmf::N1MessageClass const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::RefToBinaryData getN1MessageContent() const;
-  void setN1MessageContent(oai::model::common::RefToBinaryData const& value);
+  void setN1MessageContent(oai::model::common::RefToBinaryData const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getNfId() const;
-  void setNfId(std::string const& value);
+  void setNfId(std::string const &value);
   bool nfIdIsSet() const;
   void unsetNfId();
   /// <summary>
   ///
   /// </summary>
   std::string getServiceInstanceId() const;
-  void setServiceInstanceId(std::string const& value);
+  void setServiceInstanceId(std::string const &value);
   bool serviceInstanceIdIsSet() const;
   void unsetServiceInstanceId();
 
-  friend void to_json(nlohmann::json& j, const N1MessageContainer& o);
-  friend void from_json(const nlohmann::json& j, N1MessageContainer& o);
+  friend void to_json(nlohmann::json &j, const N1MessageContainer &o);
+  friend void from_json(const nlohmann::json &j, N1MessageContainer &o);
 
- protected:
+protected:
   oai::model::lmf::N1MessageClass m_N1MessageClass;
 
   oai::model::common::RefToBinaryData m_N1MessageContent;
@@ -97,6 +97,6 @@ class N1MessageContainer {
   bool m_ServiceInstanceIdIsSet;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* N1MessageContainer_H_ */

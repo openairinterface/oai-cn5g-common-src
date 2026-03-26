@@ -19,10 +19,10 @@
 namespace oai::udr::model {
 
 LocationReportingConfiguration::LocationReportingConfiguration() {
-  m_CurrentLocation    = false;
-  m_OneTime            = false;
-  m_OneTimeIsSet       = false;
-  m_AccuracyIsSet      = false;
+  m_CurrentLocation = false;
+  m_OneTime = false;
+  m_OneTimeIsSet = false;
+  m_AccuracyIsSet = false;
   m_N3gppAccuracyIsSet = false;
 }
 
@@ -32,15 +32,18 @@ void LocationReportingConfiguration::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const LocationReportingConfiguration& o) {
-  j                    = nlohmann::json();
+void to_json(nlohmann::json &j, const LocationReportingConfiguration &o) {
+  j = nlohmann::json();
   j["currentLocation"] = o.m_CurrentLocation;
-  if (o.oneTimeIsSet()) j["oneTime"] = o.m_OneTime;
-  if (o.accuracyIsSet()) j["accuracy"] = o.m_Accuracy;
-  if (o.n3gppAccuracyIsSet()) j["n3gppAccuracy"] = o.m_N3gppAccuracy;
+  if (o.oneTimeIsSet())
+    j["oneTime"] = o.m_OneTime;
+  if (o.accuracyIsSet())
+    j["accuracy"] = o.m_Accuracy;
+  if (o.n3gppAccuracyIsSet())
+    j["n3gppAccuracy"] = o.m_N3gppAccuracy;
 }
 
-void from_json(const nlohmann::json& j, LocationReportingConfiguration& o) {
+void from_json(const nlohmann::json &j, LocationReportingConfiguration &o) {
   j.at("currentLocation").get_to(o.m_CurrentLocation);
   if (j.find("oneTime") != j.end()) {
     j.at("oneTime").get_to(o.m_OneTime);
@@ -62,25 +65,21 @@ bool LocationReportingConfiguration::isCurrentLocation() const {
 void LocationReportingConfiguration::setCurrentLocation(bool const value) {
   m_CurrentLocation = value;
 }
-bool LocationReportingConfiguration::isOneTime() const {
-  return m_OneTime;
-}
+bool LocationReportingConfiguration::isOneTime() const { return m_OneTime; }
 void LocationReportingConfiguration::setOneTime(bool const value) {
-  m_OneTime      = value;
+  m_OneTime = value;
   m_OneTimeIsSet = true;
 }
 bool LocationReportingConfiguration::oneTimeIsSet() const {
   return m_OneTimeIsSet;
 }
-void LocationReportingConfiguration::unsetOneTime() {
-  m_OneTimeIsSet = false;
-}
+void LocationReportingConfiguration::unsetOneTime() { m_OneTimeIsSet = false; }
 LocationAccuracy LocationReportingConfiguration::getAccuracy() const {
   return m_Accuracy;
 }
 void LocationReportingConfiguration::setAccuracy(
-    LocationAccuracy const& value) {
-  m_Accuracy      = value;
+    LocationAccuracy const &value) {
+  m_Accuracy = value;
   m_AccuracyIsSet = true;
 }
 bool LocationReportingConfiguration::accuracyIsSet() const {
@@ -93,8 +92,8 @@ LocationAccuracy LocationReportingConfiguration::getN3gppAccuracy() const {
   return m_N3gppAccuracy;
 }
 void LocationReportingConfiguration::setN3gppAccuracy(
-    LocationAccuracy const& value) {
-  m_N3gppAccuracy      = value;
+    LocationAccuracy const &value) {
+  m_N3gppAccuracy = value;
   m_N3gppAccuracyIsSet = true;
 }
 bool LocationReportingConfiguration::n3gppAccuracyIsSet() const {
@@ -104,4 +103,4 @@ void LocationReportingConfiguration::unsetN3gppAccuracy() {
   m_N3gppAccuracyIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

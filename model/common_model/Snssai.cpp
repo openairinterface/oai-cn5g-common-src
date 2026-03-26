@@ -15,14 +15,14 @@
 #include "Helpers.h"
 #include "config.hpp"
 
-#include <sstream>
 #include <fmt/format.h>
+#include <sstream>
 
 namespace oai::model::common {
 
 Snssai::Snssai() {
-  m_Sst     = 0;
-  m_Sd      = "";
+  m_Sst = 0;
+  m_Sd = "";
   m_SdIsSet = false;
 }
 
@@ -33,17 +33,17 @@ void Snssai::validate() const {
   }
 }
 
-bool Snssai::validate(std::stringstream& msg) const {
+bool Snssai::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool Snssai::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool Snssai::validate(std::stringstream &msg,
+                      const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "Snssai" : pathPrefix;
 
   /* Sst */ {
-    const int32_t& value               = m_Sst;
+    const int32_t &value = m_Sst;
     const std::string currentValuePath = _pathPrefix + ".sst";
 
     if (value < 0) {
@@ -57,13 +57,13 @@ bool Snssai::validate(
   }
   if (sdIsSet()) {
     const std::string currentValuePath = _pathPrefix + ".sd";
-    success &= helpers::validate_regex(
-        SD_VALIDATION_REGEX, m_Sd, msg, currentValuePath);
+    success &= helpers::validate_regex(SD_VALIDATION_REGEX, m_Sd, msg,
+                                       currentValuePath);
   }
   return success;
 }
 
-bool Snssai::operator==(const Snssai& rhs) const {
+bool Snssai::operator==(const Snssai &rhs) const {
   return
 
       (getSst() == rhs.getSst()) &&
@@ -74,17 +74,16 @@ bool Snssai::operator==(const Snssai& rhs) const {
           ;
 }
 
-bool Snssai::operator!=(const Snssai& rhs) const {
-  return !(*this == rhs);
-}
+bool Snssai::operator!=(const Snssai &rhs) const { return !(*this == rhs); }
 
-void to_json(nlohmann::json& j, const Snssai& o) {
-  j        = nlohmann::json();
+void to_json(nlohmann::json &j, const Snssai &o) {
+  j = nlohmann::json();
   j["sst"] = o.m_Sst;
-  if (o.sdIsSet()) j["sd"] = o.m_Sd;
+  if (o.sdIsSet())
+    j["sd"] = o.m_Sd;
 }
 
-void from_json(const nlohmann::json& j, Snssai& o) {
+void from_json(const nlohmann::json &j, Snssai &o) {
   j.at("sst").get_to(o.m_Sst);
   if (j.find("sd") != j.end()) {
     o.m_SdIsSet = true;
@@ -92,34 +91,24 @@ void from_json(const nlohmann::json& j, Snssai& o) {
     o.parse_sd_int_with_hex();
   } else {
     // TODO this is not strictly standard-compliant
-    o.m_Sd      = SD_DEFAULT_VALUE;
+    o.m_Sd = SD_DEFAULT_VALUE;
     o.m_SdIsSet = true;
     // we set the default SD value to 0xFFFFFF
   }
 }
 
-int32_t Snssai::getSst() const {
-  return m_Sst;
-}
-void Snssai::setSst(int32_t const value) {
-  m_Sst = value;
-}
-std::string Snssai::getSd() const {
-  return m_Sd;
-}
-void Snssai::setSd(std::string const& value) {
+int32_t Snssai::getSst() const { return m_Sst; }
+void Snssai::setSst(int32_t const value) { m_Sst = value; }
+std::string Snssai::getSd() const { return m_Sd; }
+void Snssai::setSd(std::string const &value) {
   m_Sd = value;
   parse_sd_int_with_hex();
   m_SdIsSet = true;
 }
 
-bool Snssai::sdIsSet() const {
-  return m_SdIsSet;
-}
+bool Snssai::sdIsSet() const { return m_SdIsSet; }
 
-void Snssai::unsetSd() {
-  m_SdIsSet = false;
-}
+void Snssai::unsetSd() { m_SdIsSet = false; }
 
 std::string Snssai::to_string(const int indent_level) const {
   std::string out;
@@ -137,7 +126,7 @@ int32_t Snssai::getSdInt() const {
   uint32_t sd_int = SD_DEFAULT_VALUE_INT;
   try {
     sd_int = std::stoi(m_Sd, nullptr, 16);
-  } catch (const std::exception& e) {
+  } catch (const std::exception &e) {
     sd_int = SD_DEFAULT_VALUE_INT;
   }
   return sd_int;
@@ -153,11 +142,11 @@ void Snssai::parse_sd_int_with_hex() {
   }
   try {
     uint32_t sd_parsed = std::stoi(sd_to_use, nullptr, 16);
-    m_Sd               = fmt::format("{0:06x}", sd_parsed);
-  } catch (const std::exception& e) {
+    m_Sd = fmt::format("{0:06x}", sd_parsed);
+  } catch (const std::exception &e) {
     // If conversion failed, we do nothing, as then later the validation will
     // fail
   }
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

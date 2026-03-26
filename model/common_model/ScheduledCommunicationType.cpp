@@ -27,12 +27,12 @@ void ScheduledCommunicationType::validate() const {
   }
 }
 
-bool ScheduledCommunicationType::validate(std::stringstream& msg) const {
+bool ScheduledCommunicationType::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ScheduledCommunicationType::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ScheduledCommunicationType::validate(std::stringstream &msg,
+                                          const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ScheduledCommunicationType" : pathPrefix;
@@ -44,23 +44,23 @@ bool ScheduledCommunicationType::validate(
 }
 
 bool ScheduledCommunicationType::operator==(
-    const ScheduledCommunicationType& rhs) const {
+    const ScheduledCommunicationType &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
 bool ScheduledCommunicationType::operator!=(
-    const ScheduledCommunicationType& rhs) const {
+    const ScheduledCommunicationType &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ScheduledCommunicationType& o) {
+void to_json(nlohmann::json &j, const ScheduledCommunicationType &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, ScheduledCommunicationType& o) {
+void from_json(const nlohmann::json &j, ScheduledCommunicationType &o) {
   from_json(j, o.m_value);
 }
 
@@ -83,4 +83,4 @@ void ScheduledCommunicationType::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

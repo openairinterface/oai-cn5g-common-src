@@ -17,29 +17,29 @@ extern "C" {
 namespace oai::ngap {
 
 class GlobalRanNodeId {
- public:
+public:
   GlobalRanNodeId();
   virtual ~GlobalRanNodeId();
 
-  void set(const GlobalGnbId& globalGnbId);
-  bool get(GlobalGnbId& globalGnbId) const;
+  void set(const GlobalGnbId &globalGnbId);
+  bool get(GlobalGnbId &globalGnbId) const;
 
-  void set(const GlobalNgEnbId& globalNgEnbId);
-  bool get(GlobalNgEnbId& globalNgEnbId) const;
+  void set(const GlobalNgEnbId &globalNgEnbId);
+  bool get(GlobalNgEnbId &globalNgEnbId) const;
 
-  void setChoiceOfRanNodeId(const Ngap_GlobalRANNodeID_PR& idPresent);
+  void setChoiceOfRanNodeId(const Ngap_GlobalRANNodeID_PR &idPresent);
   Ngap_GlobalRANNodeID_PR getChoiceOfRanNodeId() const;
 
-  bool encode(Ngap_GlobalRANNodeID_t&) const;
-  bool decode(const Ngap_GlobalRANNodeID_t&);
+  bool encode(Ngap_GlobalRANNodeID_t &) const;
+  bool decode(const Ngap_GlobalRANNodeID_t &);
 
- private:
+private:
   std::optional<GlobalGnbId> m_GlobalGnbId;
   std::optional<GlobalNgEnbId> m_GlobalNgEnbId;
   // TODO: Global N3IWF ID
   Ngap_GlobalRANNodeID_PR m_IdPresent;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

@@ -13,8 +13,7 @@
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 static asn_oer_constraints_t
     asn_OER_type_Ngap_NPN_PagingAssistanceInformation_constr_1 CC_NOTUSED = {
-        {0, 0},
-        -1};
+        {0, 0}, -1};
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 asn_per_constraints_t asn_PER_type_Ngap_NPN_PagingAssistanceInformation_constr_1
@@ -29,9 +28,8 @@ asn_per_constraints_t asn_PER_type_Ngap_NPN_PagingAssistanceInformation_constr_1
 asn_TYPE_member_t asn_MBR_Ngap_NPN_PagingAssistanceInformation_1[] = {
     {ATF_POINTER,
      0,
-     offsetof(
-         struct Ngap_NPN_PagingAssistanceInformation,
-         choice.pNI_NPN_PagingAssistance),
+     offsetof(struct Ngap_NPN_PagingAssistanceInformation,
+              choice.pNI_NPN_PagingAssistance),
      (ASN_TAG_CLASS_CONTEXT | (0 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_Allowed_PNI_NPN_List,
@@ -50,8 +48,8 @@ asn_TYPE_member_t asn_MBR_Ngap_NPN_PagingAssistanceInformation_1[] = {
      "pNI-NPN-PagingAssistance"},
     {ATF_POINTER,
      0,
-     offsetof(
-         struct Ngap_NPN_PagingAssistanceInformation, choice.choice_Extensions),
+     offsetof(struct Ngap_NPN_PagingAssistanceInformation,
+              choice.choice_Extensions),
      (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_ProtocolIE_SingleContainer_9618P30,
@@ -79,7 +77,7 @@ asn_CHOICE_specifics_t asn_SPC_Ngap_NPN_PagingAssistanceInformation_specs_1 = {
     sizeof(struct Ngap_NPN_PagingAssistanceInformation),
     offsetof(struct Ngap_NPN_PagingAssistanceInformation, _asn_ctx),
     offsetof(struct Ngap_NPN_PagingAssistanceInformation, present),
-    sizeof(((struct Ngap_NPN_PagingAssistanceInformation*) 0)->present),
+    sizeof(((struct Ngap_NPN_PagingAssistanceInformation *)0)->present),
     asn_MAP_Ngap_NPN_PagingAssistanceInformation_tag2el_1,
     2, /* Count of tags in the map */
     0,

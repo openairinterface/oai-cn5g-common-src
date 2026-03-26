@@ -14,20 +14,20 @@ QosFlowToBeForwardedItem::~QosFlowToBeForwardedItem() {}
 
 //------------------------------------------------------------------------------
 void QosFlowToBeForwardedItem::setQosFlowIdentifier(
-    const QosFlowIdentifier& qosFlowIdentifier) {
+    const QosFlowIdentifier &qosFlowIdentifier) {
   m_QosFlowIdentifier = qosFlowIdentifier;
 }
 
 //------------------------------------------------------------------------------
 bool QosFlowToBeForwardedItem::getQosFlowIdentifier(
-    QosFlowIdentifier& qosFlowIdentifier) const {
+    QosFlowIdentifier &qosFlowIdentifier) const {
   qosFlowIdentifier = m_QosFlowIdentifier;
   return true;
 }
 
 //------------------------------------------------------------------------------
 bool QosFlowToBeForwardedItem::encode(
-    Ngap_QosFlowToBeForwardedItem_t& item) const {
+    Ngap_QosFlowToBeForwardedItem_t &item) const {
   if (!m_QosFlowIdentifier.encode(item.qosFlowIdentifier)) {
     return false;
   }
@@ -36,9 +36,10 @@ bool QosFlowToBeForwardedItem::encode(
 
 //------------------------------------------------------------------------------
 bool QosFlowToBeForwardedItem::decode(
-    const Ngap_QosFlowToBeForwardedItem_t& item) {
-  if (!m_QosFlowIdentifier.decode(item.qosFlowIdentifier)) return false;
+    const Ngap_QosFlowToBeForwardedItem_t &item) {
+  if (!m_QosFlowIdentifier.decode(item.qosFlowIdentifier))
+    return false;
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

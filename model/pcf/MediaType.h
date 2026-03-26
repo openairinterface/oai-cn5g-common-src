@@ -27,7 +27,7 @@ namespace oai::model::pcf {
 /// Indicates the media type of a media component.
 /// </summary>
 class MediaType {
- public:
+public:
   MediaType();
   virtual ~MediaType() = default;
 
@@ -41,26 +41,26 @@ class MediaType {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const MediaType& rhs) const;
-  bool operator!=(const MediaType& rhs) const;
+  bool operator==(const MediaType &rhs) const;
+  bool operator!=(const MediaType &rhs) const;
 
   /////////////////////////////////////////////
   /// MediaType members
 
-  friend void to_json(nlohmann::json& j, const MediaType& o);
-  friend void from_json(const nlohmann::json& j, MediaType& o);
+  friend void to_json(nlohmann::json &j, const MediaType &o);
+  friend void from_json(const nlohmann::json &j, MediaType &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* MediaType_H_ */

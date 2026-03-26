@@ -19,14 +19,14 @@
 namespace oai::model::lmf {
 
 LocationQoS::LocationQoS() {
-  m_HAccuracy              = 0.0f;
-  m_HAccuracyIsSet         = false;
-  m_VAccuracy              = 0.0f;
-  m_VAccuracyIsSet         = false;
-  m_VerticalRequested      = false;
+  m_HAccuracy = 0.0f;
+  m_HAccuracyIsSet = false;
+  m_VAccuracy = 0.0f;
+  m_VAccuracyIsSet = false;
+  m_VerticalRequested = false;
   m_VerticalRequestedIsSet = false;
-  m_ResponseTimeIsSet      = false;
-  m_LcsQosClassIsSet       = false;
+  m_ResponseTimeIsSet = false;
+  m_LcsQosClassIsSet = false;
 }
 
 void LocationQoS::validate() const {
@@ -36,18 +36,18 @@ void LocationQoS::validate() const {
   }
 }
 
-bool LocationQoS::validate(std::stringstream& msg) const {
+bool LocationQoS::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool LocationQoS::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool LocationQoS::validate(std::stringstream &msg,
+                           const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "LocationQoS" : pathPrefix;
 
   if (hAccuracyIsSet()) {
-    const float& value                 = m_HAccuracy;
+    const float &value = m_HAccuracy;
     const std::string currentValuePath = _pathPrefix + ".hAccuracy";
 
     if (value < static_cast<float>(0)) {
@@ -57,7 +57,7 @@ bool LocationQoS::validate(
   }
 
   if (vAccuracyIsSet()) {
-    const float& value                 = m_VAccuracy;
+    const float &value = m_VAccuracy;
     const std::string currentValuePath = _pathPrefix + ".vAccuracy";
 
     if (value < static_cast<float>(0)) {
@@ -69,7 +69,7 @@ bool LocationQoS::validate(
   return success;
 }
 
-bool LocationQoS::operator==(const LocationQoS& rhs) const {
+bool LocationQoS::operator==(const LocationQoS &rhs) const {
   return
 
       ((!hAccuracyIsSet() && !rhs.hAccuracyIsSet()) ||
@@ -95,21 +95,25 @@ bool LocationQoS::operator==(const LocationQoS& rhs) const {
           ;
 }
 
-bool LocationQoS::operator!=(const LocationQoS& rhs) const {
+bool LocationQoS::operator!=(const LocationQoS &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const LocationQoS& o) {
+void to_json(nlohmann::json &j, const LocationQoS &o) {
   j = nlohmann::json();
-  if (o.hAccuracyIsSet()) j["hAccuracy"] = o.m_HAccuracy;
-  if (o.vAccuracyIsSet()) j["vAccuracy"] = o.m_VAccuracy;
+  if (o.hAccuracyIsSet())
+    j["hAccuracy"] = o.m_HAccuracy;
+  if (o.vAccuracyIsSet())
+    j["vAccuracy"] = o.m_VAccuracy;
   if (o.verticalRequestedIsSet())
     j["verticalRequested"] = o.m_VerticalRequested;
-  if (o.responseTimeIsSet()) j["responseTime"] = o.m_ResponseTime;
-  if (o.lcsQosClassIsSet()) j["lcsQosClass"] = o.m_LcsQosClass;
+  if (o.responseTimeIsSet())
+    j["responseTime"] = o.m_ResponseTime;
+  if (o.lcsQosClassIsSet())
+    j["lcsQosClass"] = o.m_LcsQosClass;
 }
 
-void from_json(const nlohmann::json& j, LocationQoS& o) {
+void from_json(const nlohmann::json &j, LocationQoS &o) {
   if (j.find("hAccuracy") != j.end()) {
     j.at("hAccuracy").get_to(o.m_HAccuracy);
     o.m_HAccuracyIsSet = true;
@@ -132,70 +136,46 @@ void from_json(const nlohmann::json& j, LocationQoS& o) {
   }
 }
 
-float LocationQoS::getHAccuracy() const {
-  return m_HAccuracy;
-}
+float LocationQoS::getHAccuracy() const { return m_HAccuracy; }
 void LocationQoS::setHAccuracy(float const value) {
-  m_HAccuracy      = value;
+  m_HAccuracy = value;
   m_HAccuracyIsSet = true;
 }
-bool LocationQoS::hAccuracyIsSet() const {
-  return m_HAccuracyIsSet;
-}
-void LocationQoS::unsetHAccuracy() {
-  m_HAccuracyIsSet = false;
-}
-float LocationQoS::getVAccuracy() const {
-  return m_VAccuracy;
-}
+bool LocationQoS::hAccuracyIsSet() const { return m_HAccuracyIsSet; }
+void LocationQoS::unsetHAccuracy() { m_HAccuracyIsSet = false; }
+float LocationQoS::getVAccuracy() const { return m_VAccuracy; }
 void LocationQoS::setVAccuracy(float const value) {
-  m_VAccuracy      = value;
+  m_VAccuracy = value;
   m_VAccuracyIsSet = true;
 }
-bool LocationQoS::vAccuracyIsSet() const {
-  return m_VAccuracyIsSet;
-}
-void LocationQoS::unsetVAccuracy() {
-  m_VAccuracyIsSet = false;
-}
-bool LocationQoS::isVerticalRequested() const {
-  return m_VerticalRequested;
-}
+bool LocationQoS::vAccuracyIsSet() const { return m_VAccuracyIsSet; }
+void LocationQoS::unsetVAccuracy() { m_VAccuracyIsSet = false; }
+bool LocationQoS::isVerticalRequested() const { return m_VerticalRequested; }
 void LocationQoS::setVerticalRequested(bool const value) {
-  m_VerticalRequested      = value;
+  m_VerticalRequested = value;
   m_VerticalRequestedIsSet = true;
 }
 bool LocationQoS::verticalRequestedIsSet() const {
   return m_VerticalRequestedIsSet;
 }
-void LocationQoS::unsetVerticalRequested() {
-  m_VerticalRequestedIsSet = false;
-}
+void LocationQoS::unsetVerticalRequested() { m_VerticalRequestedIsSet = false; }
 oai::model::lmf::ResponseTime LocationQoS::getResponseTime() const {
   return m_ResponseTime;
 }
-void LocationQoS::setResponseTime(oai::model::lmf::ResponseTime const& value) {
-  m_ResponseTime      = value;
+void LocationQoS::setResponseTime(oai::model::lmf::ResponseTime const &value) {
+  m_ResponseTime = value;
   m_ResponseTimeIsSet = true;
 }
-bool LocationQoS::responseTimeIsSet() const {
-  return m_ResponseTimeIsSet;
-}
-void LocationQoS::unsetResponseTime() {
-  m_ResponseTimeIsSet = false;
-}
+bool LocationQoS::responseTimeIsSet() const { return m_ResponseTimeIsSet; }
+void LocationQoS::unsetResponseTime() { m_ResponseTimeIsSet = false; }
 oai::model::lmf::LcsQosClass LocationQoS::getLcsQosClass() const {
   return m_LcsQosClass;
 }
-void LocationQoS::setLcsQosClass(oai::model::lmf::LcsQosClass const& value) {
-  m_LcsQosClass      = value;
+void LocationQoS::setLcsQosClass(oai::model::lmf::LcsQosClass const &value) {
+  m_LcsQosClass = value;
   m_LcsQosClassIsSet = true;
 }
-bool LocationQoS::lcsQosClassIsSet() const {
-  return m_LcsQosClassIsSet;
-}
-void LocationQoS::unsetLcsQosClass() {
-  m_LcsQosClassIsSet = false;
-}
+bool LocationQoS::lcsQosClassIsSet() const { return m_LcsQosClassIsSet; }
+void LocationQoS::unsetLcsQosClass() { m_LcsQosClassIsSet = false; }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

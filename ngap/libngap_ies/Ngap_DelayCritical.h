@@ -20,7 +20,7 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_DelayCritical {
-  Ngap_DelayCritical_delay_critical     = 0,
+  Ngap_DelayCritical_delay_critical = 0,
   Ngap_DelayCritical_non_delay_critical = 1
   /*
    * Enumeration is extensible

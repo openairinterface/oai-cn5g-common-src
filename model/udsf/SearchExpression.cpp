@@ -19,9 +19,9 @@
 namespace oai::model::udsf {
 
 SearchExpression::SearchExpression() {
-  m_SearchConditionIsSet  = false;
+  m_SearchConditionIsSet = false;
   m_SearchComparisonIsSet = false;
-  m_RecordIdListIsSet     = false;
+  m_RecordIdListIsSet = false;
 }
 
 void SearchExpression::validate() const {
@@ -31,28 +31,28 @@ void SearchExpression::validate() const {
   }
 }
 
-bool SearchExpression::validate(std::stringstream& msg) const {
+bool SearchExpression::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool SearchExpression::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool SearchExpression::validate(std::stringstream &msg,
+                                const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "SearchExpression" : pathPrefix;
 
   /* RecordIdList */ {
-    const std::vector<std::string>& value = m_RecordIdList;
-    const std::string currentValuePath    = _pathPrefix + ".recordIdList";
+    const std::vector<std::string> &value = m_RecordIdList;
+    const std::string currentValuePath = _pathPrefix + ".recordIdList";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const std::string& value : value) {
+      int i = 0;
+      for (const std::string &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -64,22 +64,23 @@ bool SearchExpression::validate(
   return success;
 }
 
-bool SearchExpression::operator==(const SearchExpression& rhs) const {
+bool SearchExpression::operator==(const SearchExpression &rhs) const {
   return (getSearchCondition() == rhs.getSearchCondition()) &&
          (getSearchComparison() == rhs.getSearchComparison()) &&
          (getRecordIdList() == rhs.getRecordIdList());
 }
 
-bool SearchExpression::operator!=(const SearchExpression& rhs) const {
+bool SearchExpression::operator!=(const SearchExpression &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const SearchExpression& o) {
+void to_json(nlohmann::json &j, const SearchExpression &o) {
   j = nlohmann::json();
-  if (o.recordIdListIsSet()) j = o.m_RecordIdList;
+  if (o.recordIdListIsSet())
+    j = o.m_RecordIdList;
 }
 
-void from_json(const nlohmann::json& j, SearchExpression& o) {
+void from_json(const nlohmann::json &j, SearchExpression &o) {
   if (j.find("cond") != j.end()) {
     j.get_to(o.m_SearchCondition);
     o.m_SearchConditionIsSet = true;
@@ -97,8 +98,8 @@ oai::model::udsf::SearchCondition SearchExpression::getSearchCondition() const {
 }
 
 void SearchExpression::setSearchCondition(
-    oai::model::udsf::SearchCondition const& value) {
-  m_SearchCondition      = value;
+    oai::model::udsf::SearchCondition const &value) {
+  m_SearchCondition = value;
   m_SearchConditionIsSet = true;
 }
 
@@ -109,13 +110,13 @@ void SearchExpression::unsetSearchCondition() {
   m_SearchConditionIsSet = false;
 }
 
-oai::model::udsf::SearchComparison SearchExpression::getSearchComparison()
-    const {
+oai::model::udsf::SearchComparison
+SearchExpression::getSearchComparison() const {
   return m_SearchComparison;
 }
 void SearchExpression::setSearchComparison(
-    oai::model::udsf::SearchComparison const& value) {
-  m_SearchComparison      = value;
+    oai::model::udsf::SearchComparison const &value) {
+  m_SearchComparison = value;
   m_SearchComparisonIsSet = true;
 }
 bool SearchExpression::searchComparisonIsSet() const {
@@ -129,16 +130,12 @@ std::vector<std::string> SearchExpression::getRecordIdList() const {
   return m_RecordIdList;
 }
 
-void SearchExpression::setRecordIdList(std::vector<std::string> const& value) {
-  m_RecordIdList      = value;
+void SearchExpression::setRecordIdList(std::vector<std::string> const &value) {
+  m_RecordIdList = value;
   m_RecordIdListIsSet = true;
 }
 
-bool SearchExpression::recordIdListIsSet() const {
-  return m_RecordIdListIsSet;
-}
-void SearchExpression::unsetRecordIdList() {
-  m_RecordIdListIsSet = false;
-}
+bool SearchExpression::recordIdListIsSet() const { return m_RecordIdListIsSet; }
+void SearchExpression::unsetRecordIdList() { m_RecordIdListIsSet = false; }
 
-}  // namespace oai::model::udsf
+} // namespace oai::model::udsf

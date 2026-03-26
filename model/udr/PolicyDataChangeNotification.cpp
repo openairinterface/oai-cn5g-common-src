@@ -19,28 +19,28 @@
 namespace oai::udr::model {
 
 PolicyDataChangeNotification::PolicyDataChangeNotification() {
-  m_AmPolicyDataIsSet            = false;
-  m_UePolicySetIsSet             = false;
-  m_PlmnUePolicySetIsSet         = false;
-  m_SmPolicyDataIsSet            = false;
-  m_UsageMonDataIsSet            = false;
+  m_AmPolicyDataIsSet = false;
+  m_UePolicySetIsSet = false;
+  m_PlmnUePolicySetIsSet = false;
+  m_SmPolicyDataIsSet = false;
+  m_UsageMonDataIsSet = false;
   m_SponsorConnectivityDataIsSet = false;
-  m_BdtDataIsSet                 = false;
-  m_OpSpecDataIsSet              = false;
-  m_OpSpecDataMapIsSet           = false;
-  m_UeId                         = "";
-  m_UeIdIsSet                    = false;
-  m_SponsorId                    = "";
-  m_SponsorIdIsSet               = false;
-  m_BdtRefId                     = "";
-  m_BdtRefIdIsSet                = false;
-  m_UsageMonId                   = "";
-  m_UsageMonIdIsSet              = false;
-  m_PlmnIdIsSet                  = false;
-  m_DelResourcesIsSet            = false;
-  m_NotifId                      = "";
-  m_NotifIdIsSet                 = false;
-  m_ReportedFragmentsIsSet       = false;
+  m_BdtDataIsSet = false;
+  m_OpSpecDataIsSet = false;
+  m_OpSpecDataMapIsSet = false;
+  m_UeId = "";
+  m_UeIdIsSet = false;
+  m_SponsorId = "";
+  m_SponsorIdIsSet = false;
+  m_BdtRefId = "";
+  m_BdtRefIdIsSet = false;
+  m_UsageMonId = "";
+  m_UsageMonIdIsSet = false;
+  m_PlmnIdIsSet = false;
+  m_DelResourcesIsSet = false;
+  m_NotifId = "";
+  m_NotifIdIsSet = false;
+  m_ReportedFragmentsIsSet = false;
 }
 
 PolicyDataChangeNotification::~PolicyDataChangeNotification() {}
@@ -49,32 +49,45 @@ void PolicyDataChangeNotification::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const PolicyDataChangeNotification& o) {
+void to_json(nlohmann::json &j, const PolicyDataChangeNotification &o) {
   j = nlohmann::json();
-  if (o.amPolicyDataIsSet()) j["amPolicyData"] = o.m_AmPolicyData;
-  if (o.uePolicySetIsSet()) j["uePolicySet"] = o.m_UePolicySet;
-  if (o.plmnUePolicySetIsSet()) j["plmnUePolicySet"] = o.m_PlmnUePolicySet;
-  if (o.smPolicyDataIsSet()) j["smPolicyData"] = o.m_SmPolicyData;
-  if (o.usageMonDataIsSet()) j["usageMonData"] = o.m_UsageMonData;
+  if (o.amPolicyDataIsSet())
+    j["amPolicyData"] = o.m_AmPolicyData;
+  if (o.uePolicySetIsSet())
+    j["uePolicySet"] = o.m_UePolicySet;
+  if (o.plmnUePolicySetIsSet())
+    j["plmnUePolicySet"] = o.m_PlmnUePolicySet;
+  if (o.smPolicyDataIsSet())
+    j["smPolicyData"] = o.m_SmPolicyData;
+  if (o.usageMonDataIsSet())
+    j["usageMonData"] = o.m_UsageMonData;
   if (o.sponsorConnectivityDataIsSet())
     j["SponsorConnectivityData"] = o.m_SponsorConnectivityData;
-  if (o.bdtDataIsSet()) j["bdtData"] = o.m_BdtData;
-  if (o.opSpecDataIsSet()) j["opSpecData"] = o.m_OpSpecData;
+  if (o.bdtDataIsSet())
+    j["bdtData"] = o.m_BdtData;
+  if (o.opSpecDataIsSet())
+    j["opSpecData"] = o.m_OpSpecData;
   if (o.opSpecDataMapIsSet() || !o.m_OpSpecDataMap.empty())
     j["opSpecDataMap"] = o.m_OpSpecDataMap;
-  if (o.ueIdIsSet()) j["ueId"] = o.m_UeId;
-  if (o.sponsorIdIsSet()) j["sponsorId"] = o.m_SponsorId;
-  if (o.bdtRefIdIsSet()) j["bdtRefId"] = o.m_BdtRefId;
-  if (o.usageMonIdIsSet()) j["usageMonId"] = o.m_UsageMonId;
-  if (o.plmnIdIsSet()) j["plmnId"] = o.m_PlmnId;
+  if (o.ueIdIsSet())
+    j["ueId"] = o.m_UeId;
+  if (o.sponsorIdIsSet())
+    j["sponsorId"] = o.m_SponsorId;
+  if (o.bdtRefIdIsSet())
+    j["bdtRefId"] = o.m_BdtRefId;
+  if (o.usageMonIdIsSet())
+    j["usageMonId"] = o.m_UsageMonId;
+  if (o.plmnIdIsSet())
+    j["plmnId"] = o.m_PlmnId;
   if (o.delResourcesIsSet() || !o.m_DelResources.empty())
     j["delResources"] = o.m_DelResources;
-  if (o.notifIdIsSet()) j["notifId"] = o.m_NotifId;
+  if (o.notifIdIsSet())
+    j["notifId"] = o.m_NotifId;
   if (o.reportedFragmentsIsSet() || !o.m_ReportedFragments.empty())
     j["reportedFragments"] = o.m_ReportedFragments;
 }
 
-void from_json(const nlohmann::json& j, PolicyDataChangeNotification& o) {
+void from_json(const nlohmann::json &j, PolicyDataChangeNotification &o) {
   if (j.find("amPolicyData") != j.end()) {
     j.at("amPolicyData").get_to(o.m_AmPolicyData);
     o.m_AmPolicyDataIsSet = true;
@@ -148,8 +161,8 @@ void from_json(const nlohmann::json& j, PolicyDataChangeNotification& o) {
 AmPolicyData PolicyDataChangeNotification::getAmPolicyData() const {
   return m_AmPolicyData;
 }
-void PolicyDataChangeNotification::setAmPolicyData(AmPolicyData const& value) {
-  m_AmPolicyData      = value;
+void PolicyDataChangeNotification::setAmPolicyData(AmPolicyData const &value) {
+  m_AmPolicyData = value;
   m_AmPolicyDataIsSet = true;
 }
 bool PolicyDataChangeNotification::amPolicyDataIsSet() const {
@@ -161,8 +174,8 @@ void PolicyDataChangeNotification::unsetAmPolicyData() {
 UePolicySet PolicyDataChangeNotification::getUePolicySet() const {
   return m_UePolicySet;
 }
-void PolicyDataChangeNotification::setUePolicySet(UePolicySet const& value) {
-  m_UePolicySet      = value;
+void PolicyDataChangeNotification::setUePolicySet(UePolicySet const &value) {
+  m_UePolicySet = value;
   m_UePolicySetIsSet = true;
 }
 bool PolicyDataChangeNotification::uePolicySetIsSet() const {
@@ -175,8 +188,8 @@ UePolicySet PolicyDataChangeNotification::getPlmnUePolicySet() const {
   return m_PlmnUePolicySet;
 }
 void PolicyDataChangeNotification::setPlmnUePolicySet(
-    UePolicySet const& value) {
-  m_PlmnUePolicySet      = value;
+    UePolicySet const &value) {
+  m_PlmnUePolicySet = value;
   m_PlmnUePolicySetIsSet = true;
 }
 bool PolicyDataChangeNotification::plmnUePolicySetIsSet() const {
@@ -188,8 +201,8 @@ void PolicyDataChangeNotification::unsetPlmnUePolicySet() {
 SmPolicyData PolicyDataChangeNotification::getSmPolicyData() const {
   return m_SmPolicyData;
 }
-void PolicyDataChangeNotification::setSmPolicyData(SmPolicyData const& value) {
-  m_SmPolicyData      = value;
+void PolicyDataChangeNotification::setSmPolicyData(SmPolicyData const &value) {
+  m_SmPolicyData = value;
   m_SmPolicyDataIsSet = true;
 }
 bool PolicyDataChangeNotification::smPolicyDataIsSet() const {
@@ -201,8 +214,8 @@ void PolicyDataChangeNotification::unsetSmPolicyData() {
 UsageMonData PolicyDataChangeNotification::getUsageMonData() const {
   return m_UsageMonData;
 }
-void PolicyDataChangeNotification::setUsageMonData(UsageMonData const& value) {
-  m_UsageMonData      = value;
+void PolicyDataChangeNotification::setUsageMonData(UsageMonData const &value) {
+  m_UsageMonData = value;
   m_UsageMonDataIsSet = true;
 }
 bool PolicyDataChangeNotification::usageMonDataIsSet() const {
@@ -216,8 +229,8 @@ PolicyDataChangeNotification::getSponsorConnectivityData() const {
   return m_SponsorConnectivityData;
 }
 void PolicyDataChangeNotification::setSponsorConnectivityData(
-    SponsorConnectivityData const& value) {
-  m_SponsorConnectivityData      = value;
+    SponsorConnectivityData const &value) {
+  m_SponsorConnectivityData = value;
   m_SponsorConnectivityDataIsSet = true;
 }
 bool PolicyDataChangeNotification::sponsorConnectivityDataIsSet() const {
@@ -226,26 +239,22 @@ bool PolicyDataChangeNotification::sponsorConnectivityDataIsSet() const {
 void PolicyDataChangeNotification::unsetSponsorConnectivityData() {
   m_SponsorConnectivityDataIsSet = false;
 }
-BdtData PolicyDataChangeNotification::getBdtData() const {
-  return m_BdtData;
-}
-void PolicyDataChangeNotification::setBdtData(BdtData const& value) {
-  m_BdtData      = value;
+BdtData PolicyDataChangeNotification::getBdtData() const { return m_BdtData; }
+void PolicyDataChangeNotification::setBdtData(BdtData const &value) {
+  m_BdtData = value;
   m_BdtDataIsSet = true;
 }
 bool PolicyDataChangeNotification::bdtDataIsSet() const {
   return m_BdtDataIsSet;
 }
-void PolicyDataChangeNotification::unsetBdtData() {
-  m_BdtDataIsSet = false;
-}
-OperatorSpecificDataContainer PolicyDataChangeNotification::getOpSpecData()
-    const {
+void PolicyDataChangeNotification::unsetBdtData() { m_BdtDataIsSet = false; }
+OperatorSpecificDataContainer
+PolicyDataChangeNotification::getOpSpecData() const {
   return m_OpSpecData;
 }
 void PolicyDataChangeNotification::setOpSpecData(
-    OperatorSpecificDataContainer const& value) {
-  m_OpSpecData      = value;
+    OperatorSpecificDataContainer const &value) {
+  m_OpSpecData = value;
   m_OpSpecDataIsSet = true;
 }
 bool PolicyDataChangeNotification::opSpecDataIsSet() const {
@@ -254,13 +263,13 @@ bool PolicyDataChangeNotification::opSpecDataIsSet() const {
 void PolicyDataChangeNotification::unsetOpSpecData() {
   m_OpSpecDataIsSet = false;
 }
-std::map<std::string, OperatorSpecificDataContainer>&
+std::map<std::string, OperatorSpecificDataContainer> &
 PolicyDataChangeNotification::getOpSpecDataMap() {
   return m_OpSpecDataMap;
 }
 void PolicyDataChangeNotification::setOpSpecDataMap(
-    std::map<std::string, OperatorSpecificDataContainer> const& value) {
-  m_OpSpecDataMap      = value;
+    std::map<std::string, OperatorSpecificDataContainer> const &value) {
+  m_OpSpecDataMap = value;
   m_OpSpecDataMapIsSet = true;
 }
 bool PolicyDataChangeNotification::opSpecDataMapIsSet() const {
@@ -269,24 +278,18 @@ bool PolicyDataChangeNotification::opSpecDataMapIsSet() const {
 void PolicyDataChangeNotification::unsetOpSpecDataMap() {
   m_OpSpecDataMapIsSet = false;
 }
-std::string PolicyDataChangeNotification::getUeId() const {
-  return m_UeId;
-}
-void PolicyDataChangeNotification::setUeId(std::string const& value) {
-  m_UeId      = value;
+std::string PolicyDataChangeNotification::getUeId() const { return m_UeId; }
+void PolicyDataChangeNotification::setUeId(std::string const &value) {
+  m_UeId = value;
   m_UeIdIsSet = true;
 }
-bool PolicyDataChangeNotification::ueIdIsSet() const {
-  return m_UeIdIsSet;
-}
-void PolicyDataChangeNotification::unsetUeId() {
-  m_UeIdIsSet = false;
-}
+bool PolicyDataChangeNotification::ueIdIsSet() const { return m_UeIdIsSet; }
+void PolicyDataChangeNotification::unsetUeId() { m_UeIdIsSet = false; }
 std::string PolicyDataChangeNotification::getSponsorId() const {
   return m_SponsorId;
 }
-void PolicyDataChangeNotification::setSponsorId(std::string const& value) {
-  m_SponsorId      = value;
+void PolicyDataChangeNotification::setSponsorId(std::string const &value) {
+  m_SponsorId = value;
   m_SponsorIdIsSet = true;
 }
 bool PolicyDataChangeNotification::sponsorIdIsSet() const {
@@ -298,21 +301,19 @@ void PolicyDataChangeNotification::unsetSponsorId() {
 std::string PolicyDataChangeNotification::getBdtRefId() const {
   return m_BdtRefId;
 }
-void PolicyDataChangeNotification::setBdtRefId(std::string const& value) {
-  m_BdtRefId      = value;
+void PolicyDataChangeNotification::setBdtRefId(std::string const &value) {
+  m_BdtRefId = value;
   m_BdtRefIdIsSet = true;
 }
 bool PolicyDataChangeNotification::bdtRefIdIsSet() const {
   return m_BdtRefIdIsSet;
 }
-void PolicyDataChangeNotification::unsetBdtRefId() {
-  m_BdtRefIdIsSet = false;
-}
+void PolicyDataChangeNotification::unsetBdtRefId() { m_BdtRefIdIsSet = false; }
 std::string PolicyDataChangeNotification::getUsageMonId() const {
   return m_UsageMonId;
 }
-void PolicyDataChangeNotification::setUsageMonId(std::string const& value) {
-  m_UsageMonId      = value;
+void PolicyDataChangeNotification::setUsageMonId(std::string const &value) {
+  m_UsageMonId = value;
   m_UsageMonIdIsSet = true;
 }
 bool PolicyDataChangeNotification::usageMonIdIsSet() const {
@@ -325,22 +326,18 @@ oai::model::common::PlmnId PolicyDataChangeNotification::getPlmnId() const {
   return m_PlmnId;
 }
 void PolicyDataChangeNotification::setPlmnId(
-    oai::model::common::PlmnId const& value) {
-  m_PlmnId      = value;
+    oai::model::common::PlmnId const &value) {
+  m_PlmnId = value;
   m_PlmnIdIsSet = true;
 }
-bool PolicyDataChangeNotification::plmnIdIsSet() const {
-  return m_PlmnIdIsSet;
-}
-void PolicyDataChangeNotification::unsetPlmnId() {
-  m_PlmnIdIsSet = false;
-}
-std::vector<std::string>& PolicyDataChangeNotification::getDelResources() {
+bool PolicyDataChangeNotification::plmnIdIsSet() const { return m_PlmnIdIsSet; }
+void PolicyDataChangeNotification::unsetPlmnId() { m_PlmnIdIsSet = false; }
+std::vector<std::string> &PolicyDataChangeNotification::getDelResources() {
   return m_DelResources;
 }
 void PolicyDataChangeNotification::setDelResources(
-    std::vector<std::string> const& value) {
-  m_DelResources      = value;
+    std::vector<std::string> const &value) {
+  m_DelResources = value;
   m_DelResourcesIsSet = true;
 }
 bool PolicyDataChangeNotification::delResourcesIsSet() const {
@@ -352,23 +349,21 @@ void PolicyDataChangeNotification::unsetDelResources() {
 std::string PolicyDataChangeNotification::getNotifId() const {
   return m_NotifId;
 }
-void PolicyDataChangeNotification::setNotifId(std::string const& value) {
-  m_NotifId      = value;
+void PolicyDataChangeNotification::setNotifId(std::string const &value) {
+  m_NotifId = value;
   m_NotifIdIsSet = true;
 }
 bool PolicyDataChangeNotification::notifIdIsSet() const {
   return m_NotifIdIsSet;
 }
-void PolicyDataChangeNotification::unsetNotifId() {
-  m_NotifIdIsSet = false;
-}
-std::vector<NotificationItem>&
+void PolicyDataChangeNotification::unsetNotifId() { m_NotifIdIsSet = false; }
+std::vector<NotificationItem> &
 PolicyDataChangeNotification::getReportedFragments() {
   return m_ReportedFragments;
 }
 void PolicyDataChangeNotification::setReportedFragments(
-    std::vector<NotificationItem> const& value) {
-  m_ReportedFragments      = value;
+    std::vector<NotificationItem> const &value) {
+  m_ReportedFragments = value;
   m_ReportedFragmentsIsSet = true;
 }
 bool PolicyDataChangeNotification::reportedFragmentsIsSet() const {
@@ -378,4 +373,4 @@ void PolicyDataChangeNotification::unsetReportedFragments() {
   m_ReportedFragmentsIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

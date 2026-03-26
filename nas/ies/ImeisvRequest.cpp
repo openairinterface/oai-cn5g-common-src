@@ -19,11 +19,7 @@ ImeisvRequest::ImeisvRequest(uint8_t value)
 ImeisvRequest::~ImeisvRequest() {}
 
 //------------------------------------------------------------------------------
-void ImeisvRequest::Set(uint8_t value) {
-  SetValue(value & 0x07);
-}
+void ImeisvRequest::Set(uint8_t value) { SetValue(value & 0x07); }
 
 //------------------------------------------------------------------------------
-uint8_t ImeisvRequest::Get() const {
-  return GetValue() & 0x07;
-}
+uint8_t ImeisvRequest::Get() const { return GetValue() & 0x07; }

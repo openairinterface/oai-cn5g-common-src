@@ -20,7 +20,7 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_RRCState {
-  Ngap_RRCState_inactive  = 0,
+  Ngap_RRCState_inactive = 0,
   Ngap_RRCState_connected = 1
   /*
    * Enumeration is extensible

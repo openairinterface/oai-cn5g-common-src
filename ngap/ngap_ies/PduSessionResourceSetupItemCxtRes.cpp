@@ -14,8 +14,8 @@ PduSessionResourceSetupItemCxtRes::~PduSessionResourceSetupItemCxtRes() {}
 
 //------------------------------------------------------------------------------
 void PduSessionResourceSetupItemCxtRes::set(
-    const PduSessionId& pduSessionId,
-    const OCTET_STRING_t& pduSessionResourceSetupResponseTransfer) {
+    const PduSessionId &pduSessionId,
+    const OCTET_STRING_t &pduSessionResourceSetupResponseTransfer) {
   m_PduSessionId = pduSessionId;
   m_PduSessionResourceSetupResponseTransfer =
       pduSessionResourceSetupResponseTransfer;
@@ -23,8 +23,8 @@ void PduSessionResourceSetupItemCxtRes::set(
 
 //------------------------------------------------------------------------------
 void PduSessionResourceSetupItemCxtRes::get(
-    PduSessionId& pduSessionId,
-    OCTET_STRING_t& pduSessionResourceSetupResponseTransfer) const {
+    PduSessionId &pduSessionId,
+    OCTET_STRING_t &pduSessionResourceSetupResponseTransfer) const {
   pduSessionId = m_PduSessionId;
   pduSessionResourceSetupResponseTransfer =
       m_PduSessionResourceSetupResponseTransfer;
@@ -32,8 +32,9 @@ void PduSessionResourceSetupItemCxtRes::get(
 
 //------------------------------------------------------------------------------
 bool PduSessionResourceSetupItemCxtRes::encode(
-    Ngap_PDUSessionResourceSetupItemCxtRes_t& pduSessionResourceItem) const {
-  if (!m_PduSessionId.encode(pduSessionResourceItem.pDUSessionID)) return false;
+    Ngap_PDUSessionResourceSetupItemCxtRes_t &pduSessionResourceItem) const {
+  if (!m_PduSessionId.encode(pduSessionResourceItem.pDUSessionID))
+    return false;
   pduSessionResourceItem.pDUSessionResourceSetupResponseTransfer =
       m_PduSessionResourceSetupResponseTransfer;
 
@@ -42,12 +43,13 @@ bool PduSessionResourceSetupItemCxtRes::encode(
 
 //------------------------------------------------------------------------------
 bool PduSessionResourceSetupItemCxtRes::decode(
-    const Ngap_PDUSessionResourceSetupItemCxtRes_t& pduSessionResourceItem) {
-  if (!m_PduSessionId.decode(pduSessionResourceItem.pDUSessionID)) return false;
+    const Ngap_PDUSessionResourceSetupItemCxtRes_t &pduSessionResourceItem) {
+  if (!m_PduSessionId.decode(pduSessionResourceItem.pDUSessionID))
+    return false;
   m_PduSessionResourceSetupResponseTransfer =
       pduSessionResourceItem.pDUSessionResourceSetupResponseTransfer;
 
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

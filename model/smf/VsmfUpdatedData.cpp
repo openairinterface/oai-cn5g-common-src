@@ -18,21 +18,21 @@ namespace oai::model::smf {
 using namespace oai::model::common;
 
 VsmfUpdatedData::VsmfUpdatedData() {
-  m_QosFlowsAddModListIsSet         = false;
-  m_QosFlowsRelListIsSet            = false;
+  m_QosFlowsAddModListIsSet = false;
+  m_QosFlowsRelListIsSet = false;
   m_QosFlowsFailedtoAddModListIsSet = false;
-  m_QosFlowsFailedtoRelListIsSet    = false;
-  m_N1SmInfoFromUeIsSet             = false;
-  m_UnknownN1SmInfoIsSet            = false;
-  m_UeLocationIsSet                 = false;
-  m_UeTimeZone                      = "";
-  m_UeTimeZoneIsSet                 = false;
-  m_AddUeLocationIsSet              = false;
-  m_AssignedEbiListIsSet            = false;
-  m_FailedToAssignEbiListIsSet      = false;
-  m_ReleasedEbiListIsSet            = false;
-  m_SecondaryRatUsageReportIsSet    = false;
-  m_SecondaryRatUsageInfoIsSet      = false;
+  m_QosFlowsFailedtoRelListIsSet = false;
+  m_N1SmInfoFromUeIsSet = false;
+  m_UnknownN1SmInfoIsSet = false;
+  m_UeLocationIsSet = false;
+  m_UeTimeZone = "";
+  m_UeTimeZoneIsSet = false;
+  m_AddUeLocationIsSet = false;
+  m_AssignedEbiListIsSet = false;
+  m_FailedToAssignEbiListIsSet = false;
+  m_ReleasedEbiListIsSet = false;
+  m_SecondaryRatUsageReportIsSet = false;
+  m_SecondaryRatUsageInfoIsSet = false;
 }
 
 VsmfUpdatedData::~VsmfUpdatedData() {}
@@ -41,31 +41,39 @@ void VsmfUpdatedData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const VsmfUpdatedData& o) {
+void to_json(nlohmann::json &j, const VsmfUpdatedData &o) {
   j = nlohmann::json();
   if (o.qosFlowsAddModListIsSet())
     j["qosFlowsAddModList"] = o.m_QosFlowsAddModList;
-  if (o.qosFlowsRelListIsSet()) j["qosFlowsRelList"] = o.m_QosFlowsRelList;
+  if (o.qosFlowsRelListIsSet())
+    j["qosFlowsRelList"] = o.m_QosFlowsRelList;
   if (o.qosFlowsFailedtoAddModListIsSet())
     j["qosFlowsFailedtoAddModList"] = o.m_QosFlowsFailedtoAddModList;
   if (o.qosFlowsFailedtoRelListIsSet())
     j["qosFlowsFailedtoRelList"] = o.m_QosFlowsFailedtoRelList;
-  if (o.n1SmInfoFromUeIsSet()) j["n1SmInfoFromUe"] = o.m_N1SmInfoFromUe;
-  if (o.unknownN1SmInfoIsSet()) j["unknownN1SmInfo"] = o.m_UnknownN1SmInfo;
-  if (o.ueLocationIsSet()) j["ueLocation"] = o.m_UeLocation;
-  if (o.ueTimeZoneIsSet()) j["ueTimeZone"] = o.m_UeTimeZone;
-  if (o.addUeLocationIsSet()) j["addUeLocation"] = o.m_AddUeLocation;
-  if (o.assignedEbiListIsSet()) j["assignedEbiList"] = o.m_AssignedEbiList;
+  if (o.n1SmInfoFromUeIsSet())
+    j["n1SmInfoFromUe"] = o.m_N1SmInfoFromUe;
+  if (o.unknownN1SmInfoIsSet())
+    j["unknownN1SmInfo"] = o.m_UnknownN1SmInfo;
+  if (o.ueLocationIsSet())
+    j["ueLocation"] = o.m_UeLocation;
+  if (o.ueTimeZoneIsSet())
+    j["ueTimeZone"] = o.m_UeTimeZone;
+  if (o.addUeLocationIsSet())
+    j["addUeLocation"] = o.m_AddUeLocation;
+  if (o.assignedEbiListIsSet())
+    j["assignedEbiList"] = o.m_AssignedEbiList;
   if (o.failedToAssignEbiListIsSet())
     j["failedToAssignEbiList"] = o.m_FailedToAssignEbiList;
-  if (o.releasedEbiListIsSet()) j["releasedEbiList"] = o.m_ReleasedEbiList;
+  if (o.releasedEbiListIsSet())
+    j["releasedEbiList"] = o.m_ReleasedEbiList;
   if (o.secondaryRatUsageReportIsSet())
     j["secondaryRatUsageReport"] = o.m_SecondaryRatUsageReport;
   if (o.secondaryRatUsageInfoIsSet())
     j["secondaryRatUsageInfo"] = o.m_SecondaryRatUsageInfo;
 }
 
-void from_json(const nlohmann::json& j, VsmfUpdatedData& o) {
+void from_json(const nlohmann::json &j, VsmfUpdatedData &o) {
   if (j.find("qosFlowsAddModList") != j.end()) {
     j.at("qosFlowsAddModList").get_to(o.m_QosFlowsAddModList);
     o.m_QosFlowsAddModListIsSet = true;
@@ -124,7 +132,7 @@ void from_json(const nlohmann::json& j, VsmfUpdatedData& o) {
   }
 }
 
-std::vector<QosFlowItem>& VsmfUpdatedData::getQosFlowsAddModList() {
+std::vector<QosFlowItem> &VsmfUpdatedData::getQosFlowsAddModList() {
   return m_QosFlowsAddModList;
 }
 bool VsmfUpdatedData::qosFlowsAddModListIsSet() const {
@@ -133,16 +141,14 @@ bool VsmfUpdatedData::qosFlowsAddModListIsSet() const {
 void VsmfUpdatedData::unsetQosFlowsAddModList() {
   m_QosFlowsAddModListIsSet = false;
 }
-std::vector<QosFlowItem>& VsmfUpdatedData::getQosFlowsRelList() {
+std::vector<QosFlowItem> &VsmfUpdatedData::getQosFlowsRelList() {
   return m_QosFlowsRelList;
 }
 bool VsmfUpdatedData::qosFlowsRelListIsSet() const {
   return m_QosFlowsRelListIsSet;
 }
-void VsmfUpdatedData::unsetQosFlowsRelList() {
-  m_QosFlowsRelListIsSet = false;
-}
-std::vector<QosFlowItem>& VsmfUpdatedData::getQosFlowsFailedtoAddModList() {
+void VsmfUpdatedData::unsetQosFlowsRelList() { m_QosFlowsRelListIsSet = false; }
+std::vector<QosFlowItem> &VsmfUpdatedData::getQosFlowsFailedtoAddModList() {
   return m_QosFlowsFailedtoAddModList;
 }
 bool VsmfUpdatedData::qosFlowsFailedtoAddModListIsSet() const {
@@ -151,7 +157,7 @@ bool VsmfUpdatedData::qosFlowsFailedtoAddModListIsSet() const {
 void VsmfUpdatedData::unsetQosFlowsFailedtoAddModList() {
   m_QosFlowsFailedtoAddModListIsSet = false;
 }
-std::vector<QosFlowItem>& VsmfUpdatedData::getQosFlowsFailedtoRelList() {
+std::vector<QosFlowItem> &VsmfUpdatedData::getQosFlowsFailedtoRelList() {
   return m_QosFlowsFailedtoRelList;
 }
 bool VsmfUpdatedData::qosFlowsFailedtoRelListIsSet() const {
@@ -163,78 +169,58 @@ void VsmfUpdatedData::unsetQosFlowsFailedtoRelList() {
 RefToBinaryData VsmfUpdatedData::getN1SmInfoFromUe() const {
   return m_N1SmInfoFromUe;
 }
-void VsmfUpdatedData::setN1SmInfoFromUe(RefToBinaryData const& value) {
-  m_N1SmInfoFromUe      = value;
+void VsmfUpdatedData::setN1SmInfoFromUe(RefToBinaryData const &value) {
+  m_N1SmInfoFromUe = value;
   m_N1SmInfoFromUeIsSet = true;
 }
 bool VsmfUpdatedData::n1SmInfoFromUeIsSet() const {
   return m_N1SmInfoFromUeIsSet;
 }
-void VsmfUpdatedData::unsetN1SmInfoFromUe() {
-  m_N1SmInfoFromUeIsSet = false;
-}
+void VsmfUpdatedData::unsetN1SmInfoFromUe() { m_N1SmInfoFromUeIsSet = false; }
 RefToBinaryData VsmfUpdatedData::getUnknownN1SmInfo() const {
   return m_UnknownN1SmInfo;
 }
-void VsmfUpdatedData::setUnknownN1SmInfo(RefToBinaryData const& value) {
-  m_UnknownN1SmInfo      = value;
+void VsmfUpdatedData::setUnknownN1SmInfo(RefToBinaryData const &value) {
+  m_UnknownN1SmInfo = value;
   m_UnknownN1SmInfoIsSet = true;
 }
 bool VsmfUpdatedData::unknownN1SmInfoIsSet() const {
   return m_UnknownN1SmInfoIsSet;
 }
-void VsmfUpdatedData::unsetUnknownN1SmInfo() {
-  m_UnknownN1SmInfoIsSet = false;
-}
-UserLocation VsmfUpdatedData::getUeLocation() const {
-  return m_UeLocation;
-}
-void VsmfUpdatedData::setUeLocation(UserLocation const& value) {
-  m_UeLocation      = value;
+void VsmfUpdatedData::unsetUnknownN1SmInfo() { m_UnknownN1SmInfoIsSet = false; }
+UserLocation VsmfUpdatedData::getUeLocation() const { return m_UeLocation; }
+void VsmfUpdatedData::setUeLocation(UserLocation const &value) {
+  m_UeLocation = value;
   m_UeLocationIsSet = true;
 }
-bool VsmfUpdatedData::ueLocationIsSet() const {
-  return m_UeLocationIsSet;
-}
-void VsmfUpdatedData::unsetUeLocation() {
-  m_UeLocationIsSet = false;
-}
-std::string VsmfUpdatedData::getUeTimeZone() const {
-  return m_UeTimeZone;
-}
-void VsmfUpdatedData::setUeTimeZone(std::string const& value) {
-  m_UeTimeZone      = value;
+bool VsmfUpdatedData::ueLocationIsSet() const { return m_UeLocationIsSet; }
+void VsmfUpdatedData::unsetUeLocation() { m_UeLocationIsSet = false; }
+std::string VsmfUpdatedData::getUeTimeZone() const { return m_UeTimeZone; }
+void VsmfUpdatedData::setUeTimeZone(std::string const &value) {
+  m_UeTimeZone = value;
   m_UeTimeZoneIsSet = true;
 }
-bool VsmfUpdatedData::ueTimeZoneIsSet() const {
-  return m_UeTimeZoneIsSet;
-}
-void VsmfUpdatedData::unsetUeTimeZone() {
-  m_UeTimeZoneIsSet = false;
-}
+bool VsmfUpdatedData::ueTimeZoneIsSet() const { return m_UeTimeZoneIsSet; }
+void VsmfUpdatedData::unsetUeTimeZone() { m_UeTimeZoneIsSet = false; }
 UserLocation VsmfUpdatedData::getAddUeLocation() const {
   return m_AddUeLocation;
 }
-void VsmfUpdatedData::setAddUeLocation(UserLocation const& value) {
-  m_AddUeLocation      = value;
+void VsmfUpdatedData::setAddUeLocation(UserLocation const &value) {
+  m_AddUeLocation = value;
   m_AddUeLocationIsSet = true;
 }
 bool VsmfUpdatedData::addUeLocationIsSet() const {
   return m_AddUeLocationIsSet;
 }
-void VsmfUpdatedData::unsetAddUeLocation() {
-  m_AddUeLocationIsSet = false;
-}
-std::vector<EbiArpMapping>& VsmfUpdatedData::getAssignedEbiList() {
+void VsmfUpdatedData::unsetAddUeLocation() { m_AddUeLocationIsSet = false; }
+std::vector<EbiArpMapping> &VsmfUpdatedData::getAssignedEbiList() {
   return m_AssignedEbiList;
 }
 bool VsmfUpdatedData::assignedEbiListIsSet() const {
   return m_AssignedEbiListIsSet;
 }
-void VsmfUpdatedData::unsetAssignedEbiList() {
-  m_AssignedEbiListIsSet = false;
-}
-std::vector<int32_t>& VsmfUpdatedData::getFailedToAssignEbiList() {
+void VsmfUpdatedData::unsetAssignedEbiList() { m_AssignedEbiListIsSet = false; }
+std::vector<int32_t> &VsmfUpdatedData::getFailedToAssignEbiList() {
   return m_FailedToAssignEbiList;
 }
 bool VsmfUpdatedData::failedToAssignEbiListIsSet() const {
@@ -243,16 +229,14 @@ bool VsmfUpdatedData::failedToAssignEbiListIsSet() const {
 void VsmfUpdatedData::unsetFailedToAssignEbiList() {
   m_FailedToAssignEbiListIsSet = false;
 }
-std::vector<int32_t>& VsmfUpdatedData::getReleasedEbiList() {
+std::vector<int32_t> &VsmfUpdatedData::getReleasedEbiList() {
   return m_ReleasedEbiList;
 }
 bool VsmfUpdatedData::releasedEbiListIsSet() const {
   return m_ReleasedEbiListIsSet;
 }
-void VsmfUpdatedData::unsetReleasedEbiList() {
-  m_ReleasedEbiListIsSet = false;
-}
-std::vector<SecondaryRatUsageReport>&
+void VsmfUpdatedData::unsetReleasedEbiList() { m_ReleasedEbiListIsSet = false; }
+std::vector<SecondaryRatUsageReport> &
 VsmfUpdatedData::getSecondaryRatUsageReport() {
   return m_SecondaryRatUsageReport;
 }
@@ -262,7 +246,7 @@ bool VsmfUpdatedData::secondaryRatUsageReportIsSet() const {
 void VsmfUpdatedData::unsetSecondaryRatUsageReport() {
   m_SecondaryRatUsageReportIsSet = false;
 }
-std::vector<SecondaryRatUsageInfo>&
+std::vector<SecondaryRatUsageInfo> &
 VsmfUpdatedData::getSecondaryRatUsageInfo() {
   return m_SecondaryRatUsageInfo;
 }
@@ -273,4 +257,4 @@ void VsmfUpdatedData::unsetSecondaryRatUsageInfo() {
   m_SecondaryRatUsageInfoIsSet = false;
 }
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

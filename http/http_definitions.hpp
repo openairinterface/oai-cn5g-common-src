@@ -25,7 +25,7 @@ struct response {
     nlohmann::json json_data = {};
     try {
       json_data = nlohmann::json::parse(body);
-    } catch (nlohmann::json::exception& e) {
+    } catch (nlohmann::json::exception &e) {
     }
     return json_data;
   }
@@ -43,4 +43,4 @@ struct request {
 
 enum class request_type_e { SIMPLE, ASYNC, MULTI_ASYNC, MULTI_PERFORM };
 
-}  // namespace oai::http
+} // namespace oai::http

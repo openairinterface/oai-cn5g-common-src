@@ -34,7 +34,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class AuthenticationInfoResult {
- public:
+public:
   AuthenticationInfoResult();
   virtual ~AuthenticationInfoResult();
 
@@ -47,26 +47,26 @@ class AuthenticationInfoResult {
   ///
   /// </summary>
   AuthType getAuthType() const;
-  void setAuthType(AuthType const& value);
+  void setAuthType(AuthType const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
   /// <summary>
   ///
   /// </summary>
   AuthenticationVector getAuthenticationVector() const;
-  void setAuthenticationVector(AuthenticationVector const& value);
+  void setAuthenticationVector(AuthenticationVector const &value);
   bool authenticationVectorIsSet() const;
   void unsetAuthenticationVector();
   /// <summary>
   ///
   /// </summary>
   std::string getSupi() const;
-  void setSupi(std::string const& value);
+  void setSupi(std::string const &value);
   bool supiIsSet() const;
   void unsetSupi();
   /// <summary>
@@ -77,10 +77,10 @@ class AuthenticationInfoResult {
   bool akmaIndIsSet() const;
   void unsetAkmaInd();
 
-  friend void to_json(nlohmann::json& j, const AuthenticationInfoResult& o);
-  friend void from_json(const nlohmann::json& j, AuthenticationInfoResult& o);
+  friend void to_json(nlohmann::json &j, const AuthenticationInfoResult &o);
+  friend void from_json(const nlohmann::json &j, AuthenticationInfoResult &o);
 
- protected:
+protected:
   AuthType m_AuthType;
 
   std::string m_SupportedFeatures;
@@ -93,6 +93,6 @@ class AuthenticationInfoResult {
   bool m_AkmaIndIsSet;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* AuthenticationInfoResult_H_ */

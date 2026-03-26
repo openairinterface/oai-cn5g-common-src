@@ -26,8 +26,8 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_XnTNLConfigurationInfo */
 typedef struct Ngap_XnTNLConfigurationInfo {
   Ngap_XnTLAs_t xnTransportLayerAddresses;
-  struct Ngap_XnExtTLAs* xnExtendedTransportLayerAddresses; /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions;    /* OPTIONAL */
+  struct Ngap_XnExtTLAs *xnExtendedTransportLayerAddresses; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions;    /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

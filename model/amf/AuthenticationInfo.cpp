@@ -16,8 +16,8 @@
 namespace oai::model::amf {
 
 AuthenticationInfo::AuthenticationInfo() {
-  m_SupiOrSuci                 = "";
-  m_ServingNetworkName         = "";
+  m_SupiOrSuci = "";
+  m_ServingNetworkName = "";
   m_ResynchronizationInfoIsSet = false;
   //    m_Pei = "";
   //    m_PeiIsSet = false;
@@ -37,9 +37,9 @@ void AuthenticationInfo::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const AuthenticationInfo& o) {
-  j                       = nlohmann::json();
-  j["supiOrSuci"]         = o.m_SupiOrSuci;
+void to_json(nlohmann::json &j, const AuthenticationInfo &o) {
+  j = nlohmann::json();
+  j["supiOrSuci"] = o.m_SupiOrSuci;
   j["servingNetworkName"] = o.m_ServingNetworkName;
   if (o.resynchronizationInfoIsSet())
     j["resynchronizationInfo"] = o.m_ResynchronizationInfo;
@@ -57,7 +57,7 @@ void to_json(nlohmann::json& j, const AuthenticationInfo& o) {
   //        j["n5gcInd"] = o.m_N5gcInd;
 }
 
-void from_json(const nlohmann::json& j, AuthenticationInfo& o) {
+void from_json(const nlohmann::json &j, AuthenticationInfo &o) {
   j.at("supiOrSuci").get_to(o.m_SupiOrSuci);
   j.at("servingNetworkName").get_to(o.m_ServingNetworkName);
 
@@ -97,24 +97,22 @@ void from_json(const nlohmann::json& j, AuthenticationInfo& o) {
   //    }
 }
 
-std::string AuthenticationInfo::getSupiOrSuci() const {
-  return m_SupiOrSuci;
-}
-void AuthenticationInfo::setSupiOrSuci(std::string const& value) {
+std::string AuthenticationInfo::getSupiOrSuci() const { return m_SupiOrSuci; }
+void AuthenticationInfo::setSupiOrSuci(std::string const &value) {
   m_SupiOrSuci = value;
 }
 std::string AuthenticationInfo::getServingNetworkName() const {
   return m_ServingNetworkName;
 }
-void AuthenticationInfo::setServingNetworkName(std::string const& value) {
+void AuthenticationInfo::setServingNetworkName(std::string const &value) {
   m_ServingNetworkName = value;
 }
 ResynchronizationInfo AuthenticationInfo::getResynchronizationInfo() const {
   return m_ResynchronizationInfo;
 }
 void AuthenticationInfo::setResynchronizationInfo(
-    ResynchronizationInfo const& value) {
-  m_ResynchronizationInfo      = value;
+    ResynchronizationInfo const &value) {
+  m_ResynchronizationInfo = value;
   m_ResynchronizationInfoIsSet = true;
 }
 bool AuthenticationInfo::resynchronizationInfoIsSet() const {
@@ -246,4 +244,4 @@ void AuthenticationInfo::unsetResynchronizationInfo() {
 //    m_N5gcIndIsSet = false;
 //}
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

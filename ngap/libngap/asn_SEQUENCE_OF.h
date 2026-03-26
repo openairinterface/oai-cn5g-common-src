@@ -34,15 +34,15 @@ extern "C" {
  * If _do_free is given AND the (*free) is initialized, the element
  * will be freed using the custom (*free) function as well.
  */
-void asn_sequence_del(void* asn_sequence_of_x, int number, int _do_free);
+void asn_sequence_del(void *asn_sequence_of_x, int number, int _do_free);
 
 /*
  * Cope with different conversions requirements to/from void in C and C++.
  * This is mostly useful for support library.
  */
 typedef A_SEQUENCE_OF(void) asn_anonymous_sequence_;
-#define _A_SEQUENCE_FROM_VOID(ptr) ((asn_anonymous_sequence_*) (ptr))
-#define _A_CSEQUENCE_FROM_VOID(ptr) ((const asn_anonymous_sequence_*) (ptr))
+#define _A_SEQUENCE_FROM_VOID(ptr) ((asn_anonymous_sequence_ *)(ptr))
+#define _A_CSEQUENCE_FROM_VOID(ptr) ((const asn_anonymous_sequence_ *)(ptr))
 
 #ifdef __cplusplus
 }

@@ -20,8 +20,8 @@
 #define UpPathChgEvent_H_
 
 #include "DnaiChangeType.h"
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::pcf {
 
@@ -29,7 +29,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class UpPathChgEvent {
- public:
+public:
   UpPathChgEvent();
   virtual ~UpPathChgEvent() = default;
 
@@ -43,16 +43,16 @@ class UpPathChgEvent {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const UpPathChgEvent& rhs) const;
-  bool operator!=(const UpPathChgEvent& rhs) const;
+  bool operator==(const UpPathChgEvent &rhs) const;
+  bool operator!=(const UpPathChgEvent &rhs) const;
 
   /////////////////////////////////////////////
   /// UpPathChgEvent members
@@ -61,18 +61,18 @@ class UpPathChgEvent {
   ///
   /// </summary>
   std::string getNotificationUri() const;
-  void setNotificationUri(std::string const& value);
+  void setNotificationUri(std::string const &value);
   /// <summary>
   /// It is used to set the value of Notification Correlation ID in the
   /// notification sent by the SMF.
   /// </summary>
   std::string getNotifCorreId() const;
-  void setNotifCorreId(std::string const& value);
+  void setNotifCorreId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::DnaiChangeType getDnaiChgType() const;
-  void setDnaiChgType(oai::model::common::DnaiChangeType const& value);
+  void setDnaiChgType(oai::model::common::DnaiChangeType const &value);
   /// <summary>
   ///
   /// </summary>
@@ -81,10 +81,10 @@ class UpPathChgEvent {
   bool afAckIndIsSet() const;
   void unsetAfAckInd();
 
-  friend void to_json(nlohmann::json& j, const UpPathChgEvent& o);
-  friend void from_json(const nlohmann::json& j, UpPathChgEvent& o);
+  friend void to_json(nlohmann::json &j, const UpPathChgEvent &o);
+  friend void from_json(const nlohmann::json &j, UpPathChgEvent &o);
 
- protected:
+protected:
   std::string m_NotificationUri;
 
   std::string m_NotifCorreId;
@@ -95,6 +95,6 @@ class UpPathChgEvent {
   bool m_AfAckIndIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* UpPathChgEvent_H_ */

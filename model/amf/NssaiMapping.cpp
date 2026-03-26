@@ -23,13 +23,13 @@ void NssaiMapping::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const NssaiMapping& o) {
-  j                 = nlohmann::json();
+void to_json(nlohmann::json &j, const NssaiMapping &o) {
+  j = nlohmann::json();
   j["mappedSnssai"] = o.m_MappedSnssai;
-  j["hSnssai"]      = o.m_HSnssai;
+  j["hSnssai"] = o.m_HSnssai;
 }
 
-void from_json(const nlohmann::json& j, NssaiMapping& o) {
+void from_json(const nlohmann::json &j, NssaiMapping &o) {
   j.at("mappedSnssai").get_to(o.m_MappedSnssai);
   j.at("hSnssai").get_to(o.m_HSnssai);
 }
@@ -37,14 +37,14 @@ void from_json(const nlohmann::json& j, NssaiMapping& o) {
 oai::model::common::Snssai NssaiMapping::getMappedSnssai() const {
   return m_MappedSnssai;
 }
-void NssaiMapping::setMappedSnssai(oai::model::common::Snssai const& value) {
+void NssaiMapping::setMappedSnssai(oai::model::common::Snssai const &value) {
   m_MappedSnssai = value;
 }
 oai::model::common::Snssai NssaiMapping::getHSnssai() const {
   return m_HSnssai;
 }
-void NssaiMapping::setHSnssai(oai::model::common::Snssai const& value) {
+void NssaiMapping::setHSnssai(oai::model::common::Snssai const &value) {
   m_HSnssai = value;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

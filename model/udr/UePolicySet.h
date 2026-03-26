@@ -37,7 +37,7 @@ namespace oai::udr::model {
 /// Contains the UE policy data for a given subscriber.
 /// </summary>
 class UePolicySet {
- public:
+public:
   UePolicySet();
   virtual ~UePolicySet();
 
@@ -49,39 +49,39 @@ class UePolicySet {
   /// <summary>
   ///
   /// </summary>
-  std::map<std::string, oai::model::common::PresenceInfo>& getPraInfos();
+  std::map<std::string, oai::model::common::PresenceInfo> &getPraInfos();
   void setPraInfos(
-      std::map<std::string, oai::model::common::PresenceInfo> const& value);
+      std::map<std::string, oai::model::common::PresenceInfo> const &value);
   bool praInfosIsSet() const;
   void unsetPraInfos();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getSubscCats();
-  void setSubscCats(std::vector<std::string> const& value);
+  std::vector<std::string> &getSubscCats();
+  void setSubscCats(std::vector<std::string> const &value);
   bool subscCatsIsSet() const;
   void unsetSubscCats();
   /// <summary>
   ///
   /// </summary>
-  std::map<std::string, UePolicySection>& getUePolicySections();
-  void setUePolicySections(std::map<std::string, UePolicySection> const& value);
+  std::map<std::string, UePolicySection> &getUePolicySections();
+  void setUePolicySections(std::map<std::string, UePolicySection> const &value);
   bool uePolicySectionsIsSet() const;
   void unsetUePolicySections();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getUpsis();
-  void setUpsis(std::vector<std::string> const& value);
+  std::vector<std::string> &getUpsis();
+  void setUpsis(std::vector<std::string> const &value);
   bool upsisIsSet() const;
   void unsetUpsis();
   /// <summary>
   ///
   /// </summary>
-  std::map<std::string, PlmnRouteSelectionDescriptor>&
+  std::map<std::string, PlmnRouteSelectionDescriptor> &
   getAllowedRouteSelDescs();
   void setAllowedRouteSelDescs(
-      std::map<std::string, PlmnRouteSelectionDescriptor> const& value);
+      std::map<std::string, PlmnRouteSelectionDescriptor> const &value);
   bool allowedRouteSelDescsIsSet() const;
   void unsetAllowedRouteSelDescs();
   /// <summary>
@@ -95,28 +95,28 @@ class UePolicySet {
   ///
   /// </summary>
   std::string getPei() const;
-  void setPei(std::string const& value);
+  void setPei(std::string const &value);
   bool peiIsSet() const;
   void unsetPei();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getOsIds();
-  void setOsIds(std::vector<std::string> const& value);
+  std::vector<std::string> &getOsIds();
+  void setOsIds(std::vector<std::string> const &value);
   bool osIdsIsSet() const;
   void unsetOsIds();
   /// <summary>
   ///
   /// </summary>
   std::string getSuppFeat() const;
-  void setSuppFeat(std::string const& value);
+  void setSuppFeat(std::string const &value);
   bool suppFeatIsSet() const;
   void unsetSuppFeat();
 
-  friend void to_json(nlohmann::json& j, const UePolicySet& o);
-  friend void from_json(const nlohmann::json& j, UePolicySet& o);
+  friend void to_json(nlohmann::json &j, const UePolicySet &o);
+  friend void from_json(const nlohmann::json &j, UePolicySet &o);
 
- protected:
+protected:
   std::map<std::string, oai::model::common::PresenceInfo> m_PraInfos;
   bool m_PraInfosIsSet;
   std::vector<std::string> m_SubscCats;
@@ -137,6 +137,6 @@ class UePolicySet {
   bool m_SuppFeatIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* UePolicySet_H_ */

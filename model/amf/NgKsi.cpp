@@ -15,9 +15,7 @@
 
 namespace oai::model::amf {
 
-NgKsi::NgKsi() {
-  m_Ksi = 0;
-}
+NgKsi::NgKsi() { m_Ksi = 0; }
 
 NgKsi::~NgKsi() {}
 
@@ -25,28 +23,20 @@ void NgKsi::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const NgKsi& o) {
-  j        = nlohmann::json();
+void to_json(nlohmann::json &j, const NgKsi &o) {
+  j = nlohmann::json();
   j["tsc"] = o.m_Tsc;
   j["ksi"] = o.m_Ksi;
 }
 
-void from_json(const nlohmann::json& j, NgKsi& o) {
+void from_json(const nlohmann::json &j, NgKsi &o) {
   j.at("tsc").get_to(o.m_Tsc);
   j.at("ksi").get_to(o.m_Ksi);
 }
 
-ScType NgKsi::getTsc() const {
-  return m_Tsc;
-}
-void NgKsi::setTsc(ScType const& value) {
-  m_Tsc = value;
-}
-int32_t NgKsi::getKsi() const {
-  return m_Ksi;
-}
-void NgKsi::setKsi(int32_t const value) {
-  m_Ksi = value;
-}
+ScType NgKsi::getTsc() const { return m_Tsc; }
+void NgKsi::setTsc(ScType const &value) { m_Tsc = value; }
+int32_t NgKsi::getKsi() const { return m_Ksi; }
+void NgKsi::setKsi(int32_t const value) { m_Ksi = value; }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

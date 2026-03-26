@@ -10,24 +10,23 @@
 
 #include "Ngap_ProtocolExtensionContainer.h"
 static int memb_Ngap_pDUSessionResourceNotifyReleasedTransfer_constraint_1(
-    const asn_TYPE_descriptor_t* td, const void* sptr,
-    asn_app_constraint_failed_f* ctfailcb, void* app_key) {
-  const OCTET_STRING_t* st = (const OCTET_STRING_t*) sptr;
+    const asn_TYPE_descriptor_t *td, const void *sptr,
+    asn_app_constraint_failed_f *ctfailcb, void *app_key) {
+  const OCTET_STRING_t *st = (const OCTET_STRING_t *)sptr;
 
   if (!sptr) {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: value not given (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: value not given (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 
   if (1 /* No applicable constraints whatsoever */) {
-    (void) st; /* Unused variable */
-               /* Nothing is here. See below */
+    (void)st; /* Unused variable */
+              /* Nothing is here. See below */
   }
 
-  return td->encoding_constraints.general_constraints(
-      td, sptr, ctfailcb, app_key);
+  return td->encoding_constraints.general_constraints(td, sptr, ctfailcb,
+                                                      app_key);
 }
 
 #if !defined(ASN_DISABLE_OER_SUPPORT)
@@ -68,9 +67,8 @@ asn_TYPE_member_t asn_MBR_Ngap_PDUSessionResourceReleasedItemNot_1[] = {
      "pDUSessionID"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_PDUSessionResourceReleasedItemNot,
-         pDUSessionResourceNotifyReleasedTransfer),
+     offsetof(struct Ngap_PDUSessionResourceReleasedItemNot,
+              pDUSessionResourceNotifyReleasedTransfer),
      (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_OCTET_STRING,

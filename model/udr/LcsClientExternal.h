@@ -35,7 +35,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class LcsClientExternal {
- public:
+public:
   LcsClientExternal();
   virtual ~LcsClientExternal();
 
@@ -47,29 +47,29 @@ class LcsClientExternal {
   /// <summary>
   ///
   /// </summary>
-  std::vector<GeographicArea>& getAllowedGeographicArea();
-  void setAllowedGeographicArea(std::vector<GeographicArea> const& value);
+  std::vector<GeographicArea> &getAllowedGeographicArea();
+  void setAllowedGeographicArea(std::vector<GeographicArea> const &value);
   bool allowedGeographicAreaIsSet() const;
   void unsetAllowedGeographicArea();
   /// <summary>
   ///
   /// </summary>
   PrivacyCheckRelatedAction getPrivacyCheckRelatedAction() const;
-  void setPrivacyCheckRelatedAction(PrivacyCheckRelatedAction const& value);
+  void setPrivacyCheckRelatedAction(PrivacyCheckRelatedAction const &value);
   bool privacyCheckRelatedActionIsSet() const;
   void unsetPrivacyCheckRelatedAction();
   /// <summary>
   ///
   /// </summary>
   ValidTimePeriod getValidTimePeriod() const;
-  void setValidTimePeriod(ValidTimePeriod const& value);
+  void setValidTimePeriod(ValidTimePeriod const &value);
   bool validTimePeriodIsSet() const;
   void unsetValidTimePeriod();
 
-  friend void to_json(nlohmann::json& j, const LcsClientExternal& o);
-  friend void from_json(const nlohmann::json& j, LcsClientExternal& o);
+  friend void to_json(nlohmann::json &j, const LcsClientExternal &o);
+  friend void from_json(const nlohmann::json &j, LcsClientExternal &o);
 
- protected:
+protected:
   std::vector<GeographicArea> m_AllowedGeographicArea;
   bool m_AllowedGeographicAreaIsSet;
   PrivacyCheckRelatedAction m_PrivacyCheckRelatedAction;
@@ -78,6 +78,6 @@ class LcsClientExternal {
   bool m_ValidTimePeriodIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* LcsClientExternal_H_ */

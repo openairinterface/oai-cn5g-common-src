@@ -34,7 +34,7 @@ namespace oai::udr::model {
 /// Identifies a subscription to policy data change notification.
 /// </summary>
 class PolicyDataSubscription {
- public:
+public:
   PolicyDataSubscription();
   virtual ~PolicyDataSubscription();
 
@@ -47,45 +47,45 @@ class PolicyDataSubscription {
   ///
   /// </summary>
   std::string getNotificationUri() const;
-  void setNotificationUri(std::string const& value);
+  void setNotificationUri(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getNotifId() const;
-  void setNotifId(std::string const& value);
+  void setNotifId(std::string const &value);
   bool notifIdIsSet() const;
   void unsetNotifId();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getMonitoredResourceUris();
-  void setMonitoredResourceUris(std::vector<std::string> const& value);
+  std::vector<std::string> &getMonitoredResourceUris();
+  void setMonitoredResourceUris(std::vector<std::string> const &value);
   /// <summary>
   ///
   /// </summary>
-  std::vector<ResourceItem>& getMonResItems();
-  void setMonResItems(std::vector<ResourceItem> const& value);
+  std::vector<ResourceItem> &getMonResItems();
+  void setMonResItems(std::vector<ResourceItem> const &value);
   bool monResItemsIsSet() const;
   void unsetMonResItems();
   /// <summary>
   ///
   /// </summary>
   std::string getExpiry() const;
-  void setExpiry(std::string const& value);
+  void setExpiry(std::string const &value);
   bool expiryIsSet() const;
   void unsetExpiry();
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
 
-  friend void to_json(nlohmann::json& j, const PolicyDataSubscription& o);
-  friend void from_json(const nlohmann::json& j, PolicyDataSubscription& o);
+  friend void to_json(nlohmann::json &j, const PolicyDataSubscription &o);
+  friend void from_json(const nlohmann::json &j, PolicyDataSubscription &o);
 
- protected:
+protected:
   std::string m_NotificationUri;
 
   std::string m_NotifId;
@@ -100,6 +100,6 @@ class PolicyDataSubscription {
   bool m_SupportedFeaturesIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* PolicyDataSubscription_H_ */

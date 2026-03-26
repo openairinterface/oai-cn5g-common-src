@@ -32,7 +32,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class AmfDeregInfo {
- public:
+public:
   AmfDeregInfo();
   virtual ~AmfDeregInfo();
 
@@ -45,15 +45,15 @@ class AmfDeregInfo {
   ///
   /// </summary>
   DeregistrationReason getDeregReason() const;
-  void setDeregReason(DeregistrationReason const& value);
+  void setDeregReason(DeregistrationReason const &value);
 
-  friend void to_json(nlohmann::json& j, const AmfDeregInfo& o);
-  friend void from_json(const nlohmann::json& j, AmfDeregInfo& o);
+  friend void to_json(nlohmann::json &j, const AmfDeregInfo &o);
+  friend void from_json(const nlohmann::json &j, AmfDeregInfo &o);
 
- protected:
+protected:
   DeregistrationReason m_DeregReason;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* AmfDeregInfo_H_ */

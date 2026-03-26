@@ -11,13 +11,13 @@
  * the class manually.
  */
 
-#include <iostream>
 #include "SmContextReleaseMessage.h"
+#include <iostream>
 
 namespace oai::model::smf {
 
 SmContextReleaseMessage::SmContextReleaseMessage() {
-  m_JsonDataIsSet                  = false;
+  m_JsonDataIsSet = false;
   m_BinaryDataN2SmInformationIsSet = false;
 }
 
@@ -27,14 +27,15 @@ void SmContextReleaseMessage::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const SmContextReleaseMessage& o) {
+void to_json(nlohmann::json &j, const SmContextReleaseMessage &o) {
   j = nlohmann::json();
-  if (o.jsonDataIsSet()) j["jsonData"] = o.m_JsonData;
+  if (o.jsonDataIsSet())
+    j["jsonData"] = o.m_JsonData;
   if (o.binaryDataN2SmInformationIsSet())
     j["binaryDataN2SmInformation"] = o.m_BinaryDataN2SmInformation;
 }
 
-void from_json(const nlohmann::json& j, SmContextReleaseMessage& o) {
+void from_json(const nlohmann::json &j, SmContextReleaseMessage &o) {
   if (j.find("jsonData") != j.end()) {
     j.at("jsonData").get_to(o.m_JsonData);
     o.m_JsonDataIsSet = true;
@@ -48,23 +49,19 @@ void from_json(const nlohmann::json& j, SmContextReleaseMessage& o) {
 SmContextReleaseData SmContextReleaseMessage::getJsonData() const {
   return m_JsonData;
 }
-void SmContextReleaseMessage::setJsonData(SmContextReleaseData const& value) {
-  m_JsonData      = value;
+void SmContextReleaseMessage::setJsonData(SmContextReleaseData const &value) {
+  m_JsonData = value;
   m_JsonDataIsSet = true;
 }
-bool SmContextReleaseMessage::jsonDataIsSet() const {
-  return m_JsonDataIsSet;
-}
-void SmContextReleaseMessage::unsetJsonData() {
-  m_JsonDataIsSet = false;
-}
+bool SmContextReleaseMessage::jsonDataIsSet() const { return m_JsonDataIsSet; }
+void SmContextReleaseMessage::unsetJsonData() { m_JsonDataIsSet = false; }
 
 std::string SmContextReleaseMessage::getBinaryDataN2SmInformation() const {
   return m_BinaryDataN2SmInformation;
 }
 void SmContextReleaseMessage::setBinaryDataN2SmInformation(
-    std::string const& value) {
-  m_BinaryDataN2SmInformation      = value;
+    std::string const &value) {
+  m_BinaryDataN2SmInformation = value;
   m_BinaryDataN2SmInformationIsSet = true;
 }
 bool SmContextReleaseMessage::binaryDataN2SmInformationIsSet() const {
@@ -74,4 +71,4 @@ void SmContextReleaseMessage::unsetBinaryDataN2SmInformation() {
   m_BinaryDataN2SmInformationIsSet = false;
 }
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

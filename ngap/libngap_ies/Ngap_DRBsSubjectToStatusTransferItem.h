@@ -13,8 +13,8 @@
 
 /* Including external dependencies */
 #include "Ngap_DRB-ID.h"
-#include "Ngap_DRBStatusUL.h"
 #include "Ngap_DRBStatusDL.h"
+#include "Ngap_DRBStatusUL.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -29,7 +29,7 @@ typedef struct Ngap_DRBsSubjectToStatusTransferItem {
   Ngap_DRB_ID_t dRB_ID;
   Ngap_DRBStatusUL_t dRBStatusUL;
   Ngap_DRBStatusDL_t dRBStatusDL;
-  struct Ngap_ProtocolExtensionContainer* iE_Extension; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extension; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

@@ -19,15 +19,15 @@
 namespace oai::model::pcf {
 
 QosCharacteristics::QosCharacteristics() {
-  m_r_5qi                   = 0;
-  m_PriorityLevel           = 0;
-  m_PacketDelayBudget       = 0;
-  m_PacketErrorRate         = "";
-  m_AveragingWindow         = 2000;
-  m_AveragingWindowIsSet    = false;
-  m_MaxDataBurstVol         = 0;
-  m_MaxDataBurstVolIsSet    = false;
-  m_ExtMaxDataBurstVol      = 0;
+  m_r_5qi = 0;
+  m_PriorityLevel = 0;
+  m_PacketDelayBudget = 0;
+  m_PacketErrorRate = "";
+  m_AveragingWindow = 2000;
+  m_AveragingWindowIsSet = false;
+  m_MaxDataBurstVol = 0;
+  m_MaxDataBurstVolIsSet = false;
+  m_ExtMaxDataBurstVol = 0;
   m_ExtMaxDataBurstVolIsSet = false;
 }
 
@@ -38,18 +38,18 @@ void QosCharacteristics::validate() const {
   }
 }
 
-bool QosCharacteristics::validate(std::stringstream& msg) const {
+bool QosCharacteristics::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool QosCharacteristics::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool QosCharacteristics::validate(std::stringstream &msg,
+                                  const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "QosCharacteristics" : pathPrefix;
 
   /* r_5qi */ {
-    const int32_t& value               = m_r_5qi;
+    const int32_t &value = m_r_5qi;
     const std::string currentValuePath = _pathPrefix + ".r5qi";
 
     if (value < 0) {
@@ -63,7 +63,7 @@ bool QosCharacteristics::validate(
   }
 
   /* PriorityLevel */ {
-    const int32_t& value               = m_PriorityLevel;
+    const int32_t &value = m_PriorityLevel;
     const std::string currentValuePath = _pathPrefix + ".priorityLevel";
 
     if (value < 1) {
@@ -77,7 +77,7 @@ bool QosCharacteristics::validate(
   }
 
   /* PacketDelayBudget */ {
-    const int32_t& value               = m_PacketDelayBudget;
+    const int32_t &value = m_PacketDelayBudget;
     const std::string currentValuePath = _pathPrefix + ".packetDelayBudget";
 
     if (value < 1) {
@@ -94,7 +94,7 @@ bool QosCharacteristics::validate(
   */
 
   if (averagingWindowIsSet()) {
-    const int32_t& value               = m_AveragingWindow;
+    const int32_t &value = m_AveragingWindow;
     const std::string currentValuePath = _pathPrefix + ".averagingWindow";
 
     if (value < 1) {
@@ -108,7 +108,7 @@ bool QosCharacteristics::validate(
   }
 
   if (maxDataBurstVolIsSet()) {
-    const int32_t& value               = m_MaxDataBurstVol;
+    const int32_t &value = m_MaxDataBurstVol;
     const std::string currentValuePath = _pathPrefix + ".maxDataBurstVol";
 
     if (value < 1) {
@@ -122,7 +122,7 @@ bool QosCharacteristics::validate(
   }
 
   if (extMaxDataBurstVolIsSet()) {
-    const int32_t& value               = m_ExtMaxDataBurstVol;
+    const int32_t &value = m_ExtMaxDataBurstVol;
     const std::string currentValuePath = _pathPrefix + ".extMaxDataBurstVol";
 
     if (value < 4096) {
@@ -138,7 +138,7 @@ bool QosCharacteristics::validate(
   return success;
 }
 
-bool QosCharacteristics::operator==(const QosCharacteristics& rhs) const {
+bool QosCharacteristics::operator==(const QosCharacteristics &rhs) const {
   return
 
       (getR5qi() == rhs.getR5qi()) &&
@@ -166,24 +166,26 @@ bool QosCharacteristics::operator==(const QosCharacteristics& rhs) const {
           ;
 }
 
-bool QosCharacteristics::operator!=(const QosCharacteristics& rhs) const {
+bool QosCharacteristics::operator!=(const QosCharacteristics &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const QosCharacteristics& o) {
-  j                      = nlohmann::json();
-  j["5qi"]               = o.m_r_5qi;
-  j["resourceType"]      = o.m_ResourceType;
-  j["priorityLevel"]     = o.m_PriorityLevel;
+void to_json(nlohmann::json &j, const QosCharacteristics &o) {
+  j = nlohmann::json();
+  j["5qi"] = o.m_r_5qi;
+  j["resourceType"] = o.m_ResourceType;
+  j["priorityLevel"] = o.m_PriorityLevel;
   j["packetDelayBudget"] = o.m_PacketDelayBudget;
-  j["packetErrorRate"]   = o.m_PacketErrorRate;
-  if (o.averagingWindowIsSet()) j["averagingWindow"] = o.m_AveragingWindow;
-  if (o.maxDataBurstVolIsSet()) j["maxDataBurstVol"] = o.m_MaxDataBurstVol;
+  j["packetErrorRate"] = o.m_PacketErrorRate;
+  if (o.averagingWindowIsSet())
+    j["averagingWindow"] = o.m_AveragingWindow;
+  if (o.maxDataBurstVolIsSet())
+    j["maxDataBurstVol"] = o.m_MaxDataBurstVol;
   if (o.extMaxDataBurstVolIsSet())
     j["extMaxDataBurstVol"] = o.m_ExtMaxDataBurstVol;
 }
 
-void from_json(const nlohmann::json& j, QosCharacteristics& o) {
+void from_json(const nlohmann::json &j, QosCharacteristics &o) {
   j.at("5qi").get_to(o.m_r_5qi);
   j.at("resourceType").get_to(o.m_ResourceType);
   j.at("priorityLevel").get_to(o.m_PriorityLevel);
@@ -203,23 +205,17 @@ void from_json(const nlohmann::json& j, QosCharacteristics& o) {
   }
 }
 
-int32_t QosCharacteristics::getR5qi() const {
-  return m_r_5qi;
-}
-void QosCharacteristics::setR5qi(int32_t const value) {
-  m_r_5qi = value;
-}
-oai::model::common::QosResourceType QosCharacteristics::getResourceType()
-    const {
+int32_t QosCharacteristics::getR5qi() const { return m_r_5qi; }
+void QosCharacteristics::setR5qi(int32_t const value) { m_r_5qi = value; }
+oai::model::common::QosResourceType
+QosCharacteristics::getResourceType() const {
   return m_ResourceType;
 }
 void QosCharacteristics::setResourceType(
-    oai::model::common::QosResourceType const& value) {
+    oai::model::common::QosResourceType const &value) {
   m_ResourceType = value;
 }
-int32_t QosCharacteristics::getPriorityLevel() const {
-  return m_PriorityLevel;
-}
+int32_t QosCharacteristics::getPriorityLevel() const { return m_PriorityLevel; }
 void QosCharacteristics::setPriorityLevel(int32_t const value) {
   m_PriorityLevel = value;
 }
@@ -232,14 +228,14 @@ void QosCharacteristics::setPacketDelayBudget(int32_t const value) {
 std::string QosCharacteristics::getPacketErrorRate() const {
   return m_PacketErrorRate;
 }
-void QosCharacteristics::setPacketErrorRate(std::string const& value) {
+void QosCharacteristics::setPacketErrorRate(std::string const &value) {
   m_PacketErrorRate = value;
 }
 int32_t QosCharacteristics::getAveragingWindow() const {
   return m_AveragingWindow;
 }
 void QosCharacteristics::setAveragingWindow(int32_t const value) {
-  m_AveragingWindow      = value;
+  m_AveragingWindow = value;
   m_AveragingWindowIsSet = true;
 }
 bool QosCharacteristics::averagingWindowIsSet() const {
@@ -252,7 +248,7 @@ int32_t QosCharacteristics::getMaxDataBurstVol() const {
   return m_MaxDataBurstVol;
 }
 void QosCharacteristics::setMaxDataBurstVol(int32_t const value) {
-  m_MaxDataBurstVol      = value;
+  m_MaxDataBurstVol = value;
   m_MaxDataBurstVolIsSet = true;
 }
 bool QosCharacteristics::maxDataBurstVolIsSet() const {
@@ -265,7 +261,7 @@ int32_t QosCharacteristics::getExtMaxDataBurstVol() const {
   return m_ExtMaxDataBurstVol;
 }
 void QosCharacteristics::setExtMaxDataBurstVol(int32_t const value) {
-  m_ExtMaxDataBurstVol      = value;
+  m_ExtMaxDataBurstVol = value;
   m_ExtMaxDataBurstVolIsSet = true;
 }
 bool QosCharacteristics::extMaxDataBurstVolIsSet() const {
@@ -275,4 +271,4 @@ void QosCharacteristics::unsetExtMaxDataBurstVol() {
   m_ExtMaxDataBurstVolIsSet = false;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

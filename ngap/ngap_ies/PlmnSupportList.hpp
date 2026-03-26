@@ -16,22 +16,22 @@ extern "C" {
 namespace oai::ngap {
 
 class PlmnSupportList {
- public:
+public:
   PlmnSupportList();
   virtual ~PlmnSupportList();
 
-  void set(const std::vector<PlmnSupportItem>& items);
-  void get(std::vector<PlmnSupportItem>& items) const;
+  void set(const std::vector<PlmnSupportItem> &items);
+  void get(std::vector<PlmnSupportItem> &items) const;
 
-  void addItem(const PlmnSupportItem& item);
+  void addItem(const PlmnSupportItem &item);
 
-  bool encode(Ngap_PLMNSupportList_t&) const;
-  bool decode(const Ngap_PLMNSupportList_t&);
+  bool encode(Ngap_PLMNSupportList_t &) const;
+  bool decode(const Ngap_PLMNSupportList_t &);
 
- private:
+private:
   std::vector<PlmnSupportItem> m_List;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

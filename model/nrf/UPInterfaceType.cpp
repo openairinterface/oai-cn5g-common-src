@@ -27,12 +27,12 @@ void UPInterfaceType::validate() const {
   }
 }
 
-bool UPInterfaceType::validate(std::stringstream& msg) const {
+bool UPInterfaceType::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool UPInterfaceType::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool UPInterfaceType::validate(std::stringstream &msg,
+                               const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "UPInterfaceType" : pathPrefix;
@@ -43,35 +43,31 @@ bool UPInterfaceType::validate(
   return success;
 }
 
-bool UPInterfaceType::operator==(const UPInterfaceType& rhs) const {
+bool UPInterfaceType::operator==(const UPInterfaceType &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool UPInterfaceType::operator!=(const UPInterfaceType& rhs) const {
+bool UPInterfaceType::operator!=(const UPInterfaceType &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const UPInterfaceType& o) {
+void to_json(nlohmann::json &j, const UPInterfaceType &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, UPInterfaceType& o) {
+void from_json(const nlohmann::json &j, UPInterfaceType &o) {
   from_json(j, o.m_value);
 }
 
-UPInterfaceType_anyOf UPInterfaceType::getValue() const {
-  return m_value;
-}
+UPInterfaceType_anyOf UPInterfaceType::getValue() const { return m_value; }
 
-void UPInterfaceType::setValue(UPInterfaceType_anyOf value) {
-  m_value = value;
-}
+void UPInterfaceType::setValue(UPInterfaceType_anyOf value) { m_value = value; }
 
-UPInterfaceType_anyOf::eUPInterfaceType_anyOf UPInterfaceType::getEnumValue()
-    const {
+UPInterfaceType_anyOf::eUPInterfaceType_anyOf
+UPInterfaceType::getEnumValue() const {
   return m_value.getValue();
 }
 
@@ -84,4 +80,4 @@ std::string UPInterfaceType::getEnumString() const {
   return common::helpers::enumToString(m_value);
 }
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

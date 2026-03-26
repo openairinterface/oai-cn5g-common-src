@@ -19,10 +19,10 @@
 #ifndef TraceData_H_
 #define TraceData_H_
 
-#include "TraceDepth.h"
-#include <string>
 #include "Ipv6Addr.h"
+#include "TraceDepth.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::common {
 
@@ -30,7 +30,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class TraceData {
- public:
+public:
   TraceData();
   virtual ~TraceData() = default;
 
@@ -44,16 +44,16 @@ class TraceData {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const TraceData& rhs) const;
-  bool operator!=(const TraceData& rhs) const;
+  bool operator==(const TraceData &rhs) const;
+  bool operator!=(const TraceData &rhs) const;
 
   /////////////////////////////////////////////
   /// TraceData members
@@ -62,48 +62,48 @@ class TraceData {
   ///
   /// </summary>
   std::string getTraceRef() const;
-  void setTraceRef(std::string const& value);
+  void setTraceRef(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::TraceDepth getTraceDepth() const;
-  void setTraceDepth(oai::model::common::TraceDepth const& value);
+  void setTraceDepth(oai::model::common::TraceDepth const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getNeTypeList() const;
-  void setNeTypeList(std::string const& value);
+  void setNeTypeList(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getEventList() const;
-  void setEventList(std::string const& value);
+  void setEventList(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getCollectionEntityIpv4Addr() const;
-  void setCollectionEntityIpv4Addr(std::string const& value);
+  void setCollectionEntityIpv4Addr(std::string const &value);
   bool collectionEntityIpv4AddrIsSet() const;
   void unsetCollectionEntityIpv4Addr();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ipv6Addr getCollectionEntityIpv6Addr() const;
-  void setCollectionEntityIpv6Addr(oai::model::common::Ipv6Addr const& value);
+  void setCollectionEntityIpv6Addr(oai::model::common::Ipv6Addr const &value);
   bool collectionEntityIpv6AddrIsSet() const;
   void unsetCollectionEntityIpv6Addr();
   /// <summary>
   ///
   /// </summary>
   std::string getInterfaceList() const;
-  void setInterfaceList(std::string const& value);
+  void setInterfaceList(std::string const &value);
   bool interfaceListIsSet() const;
   void unsetInterfaceList();
 
-  friend void to_json(nlohmann::json& j, const TraceData& o);
-  friend void from_json(const nlohmann::json& j, TraceData& o);
+  friend void to_json(nlohmann::json &j, const TraceData &o);
+  friend void from_json(const nlohmann::json &j, TraceData &o);
 
- protected:
+protected:
   std::string m_TraceRef;
 
   oai::model::common::TraceDepth m_TraceDepth;
@@ -120,6 +120,6 @@ class TraceData {
   bool m_InterfaceListIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* TraceData_H_ */

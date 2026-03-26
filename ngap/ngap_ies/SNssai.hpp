@@ -17,38 +17,38 @@ extern "C" {
 namespace oai::ngap {
 
 class SNssai {
- public:
+public:
   SNssai();
   virtual ~SNssai();
 
-  void setSst(const std::string& sst);
-  void getSst(std::string& sst) const;
+  void setSst(const std::string &sst);
+  void getSst(std::string &sst) const;
 
-  void setSst(const uint8_t& sst);
-  void getSst(uint8_t& sst) const;
+  void setSst(const uint8_t &sst);
+  void getSst(uint8_t &sst) const;
   uint8_t getSst() const;
 
   std::string getSstStr() const;
 
-  void setSd(const std::string& sd_str);
-  bool getSd(std::string& sd) const;
+  void setSd(const std::string &sd_str);
+  bool getSd(std::string &sd) const;
   std::string getSd() const;
 
-  void setSd(const uint32_t& sd);
-  bool getSd(uint32_t& sd) const;
+  void setSd(const uint32_t &sd);
+  bool getSd(uint32_t &sd) const;
   uint32_t getSdInt() const;
 
-  bool encodeSd(Ngap_SD_t&) const;
-  bool decodeSd(const Ngap_SD_t&);
+  bool encodeSd(Ngap_SD_t &) const;
+  bool decodeSd(const Ngap_SD_t &);
 
-  bool encode(Ngap_S_NSSAI_t&) const;
-  bool decode(const Ngap_S_NSSAI_t&);
+  bool encode(Ngap_S_NSSAI_t &) const;
+  bool decode(const Ngap_S_NSSAI_t &);
 
- private:
-  uint8_t m_Sst;  // mandatory  OCTET_STRING(SIZE(1))
+private:
+  uint8_t m_Sst; // mandatory  OCTET_STRING(SIZE(1))
   std::optional<uint32_t> m_Sd;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

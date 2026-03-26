@@ -27,12 +27,12 @@ void LoggingDurationMdt::validate() const {
   }
 }
 
-bool LoggingDurationMdt::validate(std::stringstream& msg) const {
+bool LoggingDurationMdt::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool LoggingDurationMdt::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool LoggingDurationMdt::validate(std::stringstream &msg,
+                                  const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "LoggingDurationMdt" : pathPrefix;
@@ -43,22 +43,22 @@ bool LoggingDurationMdt::validate(
   return success;
 }
 
-bool LoggingDurationMdt::operator==(const LoggingDurationMdt& rhs) const {
+bool LoggingDurationMdt::operator==(const LoggingDurationMdt &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool LoggingDurationMdt::operator!=(const LoggingDurationMdt& rhs) const {
+bool LoggingDurationMdt::operator!=(const LoggingDurationMdt &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const LoggingDurationMdt& o) {
+void to_json(nlohmann::json &j, const LoggingDurationMdt &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, LoggingDurationMdt& o) {
+void from_json(const nlohmann::json &j, LoggingDurationMdt &o) {
   from_json(j, o.m_value);
 }
 
@@ -80,4 +80,4 @@ void LoggingDurationMdt::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

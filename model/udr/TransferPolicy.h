@@ -33,7 +33,7 @@ namespace oai::udr::model {
 /// Describes a transfer policy.
 /// </summary>
 class TransferPolicy {
- public:
+public:
   TransferPolicy();
   virtual ~TransferPolicy();
 
@@ -46,14 +46,14 @@ class TransferPolicy {
   ///
   /// </summary>
   std::string getMaxBitRateDl() const;
-  void setMaxBitRateDl(std::string const& value);
+  void setMaxBitRateDl(std::string const &value);
   bool maxBitRateDlIsSet() const;
   void unsetMaxBitRateDl();
   /// <summary>
   ///
   /// </summary>
   std::string getMaxBitRateUl() const;
-  void setMaxBitRateUl(std::string const& value);
+  void setMaxBitRateUl(std::string const &value);
   bool maxBitRateUlIsSet() const;
   void unsetMaxBitRateUl();
   /// <summary>
@@ -65,17 +65,17 @@ class TransferPolicy {
   ///
   /// </summary>
   TimeWindow getRecTimeInt() const;
-  void setRecTimeInt(TimeWindow const& value);
+  void setRecTimeInt(TimeWindow const &value);
   /// <summary>
   /// Contains an identity of a transfer policy.
   /// </summary>
   int32_t getTransPolicyId() const;
   void setTransPolicyId(int32_t const value);
 
-  friend void to_json(nlohmann::json& j, const TransferPolicy& o);
-  friend void from_json(const nlohmann::json& j, TransferPolicy& o);
+  friend void to_json(nlohmann::json &j, const TransferPolicy &o);
+  friend void from_json(const nlohmann::json &j, TransferPolicy &o);
 
- protected:
+protected:
   std::string m_MaxBitRateDl;
   bool m_MaxBitRateDlIsSet;
   std::string m_MaxBitRateUl;
@@ -87,6 +87,6 @@ class TransferPolicy {
   int32_t m_TransPolicyId;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* TransferPolicy_H_ */

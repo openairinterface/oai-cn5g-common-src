@@ -19,31 +19,31 @@ extern "C" {
 namespace oai::ngap {
 
 class DownlinkUeAssociatedNrppaTransportMsg : public NgapUeMessage {
- public:
+public:
   DownlinkUeAssociatedNrppaTransportMsg();
   virtual ~DownlinkUeAssociatedNrppaTransportMsg();
 
   void initialize();
 
-  void setAmfUeNgapId(const uint64_t& id) override;
-  void setRanUeNgapId(const uint32_t& id) override;
-  bool decode(Ngap_NGAP_PDU_t* ngapMsgPdu) override;
+  void setAmfUeNgapId(const uint64_t &id) override;
+  void setRanUeNgapId(const uint32_t &id) override;
+  bool decode(Ngap_NGAP_PDU_t *ngapMsgPdu) override;
 
-  void setRoutingId(const bstring& pdu);
-  void getRoutingId(bstring& pdu) const;
+  void setRoutingId(const bstring &pdu);
+  void getRoutingId(bstring &pdu) const;
 
-  void setNrppaPdu(const bstring& pdu);
-  void getNrppaPdu(bstring& pdu) const;
+  void setNrppaPdu(const bstring &pdu);
+  void getNrppaPdu(bstring &pdu) const;
 
- private:
-  Ngap_DownlinkUEAssociatedNRPPaTransport_t*
-      m_DownlinkUeAssociatedNrppaTransportIes;
+private:
+  Ngap_DownlinkUEAssociatedNRPPaTransport_t
+      *m_DownlinkUeAssociatedNrppaTransportIes;
 
   // AMF_UE_NGAP_ID  //Mandatory
   // RAN_UE_NGAP_ID //Mandatory
-  bstring m_RoutingId;  // Mandatory
-  bstring m_NrppaPdu;   // Mandatory
+  bstring m_RoutingId; // Mandatory
+  bstring m_NrppaPdu;  // Mandatory
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

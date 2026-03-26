@@ -27,7 +27,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class MaPduIndication_anyOf {
- public:
+public:
   MaPduIndication_anyOf();
   virtual ~MaPduIndication_anyOf() = default;
 
@@ -50,16 +50,16 @@ class MaPduIndication_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const MaPduIndication_anyOf& rhs) const;
-  bool operator!=(const MaPduIndication_anyOf& rhs) const;
+  bool operator==(const MaPduIndication_anyOf &rhs) const;
+  bool operator!=(const MaPduIndication_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// MaPduIndication_anyOf members
@@ -67,15 +67,15 @@ class MaPduIndication_anyOf {
   MaPduIndication_anyOf::eMaPduIndication_anyOf getValue() const;
   void setValue(MaPduIndication_anyOf::eMaPduIndication_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const MaPduIndication_anyOf& o);
-  friend void from_json(const nlohmann::json& j, MaPduIndication_anyOf& o);
+  friend void to_json(nlohmann::json &j, const MaPduIndication_anyOf &o);
+  friend void from_json(const nlohmann::json &j, MaPduIndication_anyOf &o);
 
- protected:
+protected:
   MaPduIndication_anyOf::eMaPduIndication_anyOf m_value =
       MaPduIndication_anyOf::eMaPduIndication_anyOf::
           INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* MaPduIndication_anyOf_H_ */

@@ -19,24 +19,24 @@
 namespace oai::model::pcf {
 
 AfRoutingRequirementRm::AfRoutingRequirementRm() {
-  m_AppReloc               = false;
-  m_AppRelocIsSet          = false;
-  m_RouteToLocsIsSet       = false;
-  m_SpValIsSet             = false;
-  m_TempValsIsSet          = false;
-  m_UpPathChgSubIsSet      = false;
-  m_AddrPreserInd          = false;
-  m_AddrPreserIndIsSet     = false;
-  m_SimConnInd             = false;
-  m_SimConnIndIsSet        = false;
-  m_SimConnTerm            = 0;
-  m_SimConnTermIsSet       = false;
+  m_AppReloc = false;
+  m_AppRelocIsSet = false;
+  m_RouteToLocsIsSet = false;
+  m_SpValIsSet = false;
+  m_TempValsIsSet = false;
+  m_UpPathChgSubIsSet = false;
+  m_AddrPreserInd = false;
+  m_AddrPreserIndIsSet = false;
+  m_SimConnInd = false;
+  m_SimConnIndIsSet = false;
+  m_SimConnTerm = 0;
+  m_SimConnTermIsSet = false;
   m_EasIpReplaceInfosIsSet = false;
-  m_EasRedisInd            = false;
-  m_EasRedisIndIsSet       = false;
-  m_MaxAllowedUpLat        = 0;
-  m_MaxAllowedUpLatIsSet   = false;
-  m_TfcCorreInfoIsSet      = false;
+  m_EasRedisInd = false;
+  m_EasRedisIndIsSet = false;
+  m_MaxAllowedUpLat = 0;
+  m_MaxAllowedUpLatIsSet = false;
+  m_TfcCorreInfoIsSet = false;
 }
 
 void AfRoutingRequirementRm::validate() const {
@@ -46,18 +46,18 @@ void AfRoutingRequirementRm::validate() const {
   }
 }
 
-bool AfRoutingRequirementRm::validate(std::stringstream& msg) const {
+bool AfRoutingRequirementRm::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AfRoutingRequirementRm::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool AfRoutingRequirementRm::validate(std::stringstream &msg,
+                                      const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AfRoutingRequirementRm" : pathPrefix;
 
   if (routeToLocsIsSet()) {
-    const std::vector<oai::model::common::RouteToLocation>& value =
+    const std::vector<oai::model::common::RouteToLocation> &value =
         m_RouteToLocs;
     const std::string currentValuePath = _pathPrefix + ".routeToLocs";
 
@@ -65,10 +65,10 @@ bool AfRoutingRequirementRm::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::RouteToLocation& value : value) {
+      int i = 0;
+      for (const oai::model::common::RouteToLocation &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -81,17 +81,17 @@ bool AfRoutingRequirementRm::validate(
   }
 
   if (tempValsIsSet()) {
-    const std::vector<oai::model::pcf::TemporalValidity>& value = m_TempVals;
+    const std::vector<oai::model::pcf::TemporalValidity> &value = m_TempVals;
     const std::string currentValuePath = _pathPrefix + ".tempVals";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::TemporalValidity& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::TemporalValidity &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -104,7 +104,7 @@ bool AfRoutingRequirementRm::validate(
   }
 
   if (easIpReplaceInfosIsSet()) {
-    const std::vector<oai::model::pcf::EasIpReplacementInfo>& value =
+    const std::vector<oai::model::pcf::EasIpReplacementInfo> &value =
         m_EasIpReplaceInfos;
     const std::string currentValuePath = _pathPrefix + ".easIpReplaceInfos";
 
@@ -112,10 +112,10 @@ bool AfRoutingRequirementRm::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::EasIpReplacementInfo& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::EasIpReplacementInfo &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -129,7 +129,7 @@ bool AfRoutingRequirementRm::validate(
   }
 
   if (maxAllowedUpLatIsSet()) {
-    const int32_t& value               = m_MaxAllowedUpLat;
+    const int32_t &value = m_MaxAllowedUpLat;
     const std::string currentValuePath = _pathPrefix + ".maxAllowedUpLat";
 
     if (value < 0) {
@@ -142,7 +142,7 @@ bool AfRoutingRequirementRm::validate(
 }
 
 bool AfRoutingRequirementRm::operator==(
-    const AfRoutingRequirementRm& rhs) const {
+    const AfRoutingRequirementRm &rhs) const {
   return
 
       ((!appRelocIsSet() && !rhs.appRelocIsSet()) ||
@@ -196,29 +196,39 @@ bool AfRoutingRequirementRm::operator==(
 }
 
 bool AfRoutingRequirementRm::operator!=(
-    const AfRoutingRequirementRm& rhs) const {
+    const AfRoutingRequirementRm &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AfRoutingRequirementRm& o) {
+void to_json(nlohmann::json &j, const AfRoutingRequirementRm &o) {
   j = nlohmann::json::object();
-  if (o.appRelocIsSet()) j["appReloc"] = o.m_AppReloc;
+  if (o.appRelocIsSet())
+    j["appReloc"] = o.m_AppReloc;
   if (o.routeToLocsIsSet() || !o.m_RouteToLocs.empty())
     j["routeToLocs"] = o.m_RouteToLocs;
-  if (o.spValIsSet()) j["spVal"] = o.m_SpVal;
-  if (o.tempValsIsSet() || !o.m_TempVals.empty()) j["tempVals"] = o.m_TempVals;
-  if (o.upPathChgSubIsSet()) j["upPathChgSub"] = o.m_UpPathChgSub;
-  if (o.addrPreserIndIsSet()) j["addrPreserInd"] = o.m_AddrPreserInd;
-  if (o.simConnIndIsSet()) j["simConnInd"] = o.m_SimConnInd;
-  if (o.simConnTermIsSet()) j["simConnTerm"] = o.m_SimConnTerm;
+  if (o.spValIsSet())
+    j["spVal"] = o.m_SpVal;
+  if (o.tempValsIsSet() || !o.m_TempVals.empty())
+    j["tempVals"] = o.m_TempVals;
+  if (o.upPathChgSubIsSet())
+    j["upPathChgSub"] = o.m_UpPathChgSub;
+  if (o.addrPreserIndIsSet())
+    j["addrPreserInd"] = o.m_AddrPreserInd;
+  if (o.simConnIndIsSet())
+    j["simConnInd"] = o.m_SimConnInd;
+  if (o.simConnTermIsSet())
+    j["simConnTerm"] = o.m_SimConnTerm;
   if (o.easIpReplaceInfosIsSet() || !o.m_EasIpReplaceInfos.empty())
     j["easIpReplaceInfos"] = o.m_EasIpReplaceInfos;
-  if (o.easRedisIndIsSet()) j["easRedisInd"] = o.m_EasRedisInd;
-  if (o.maxAllowedUpLatIsSet()) j["maxAllowedUpLat"] = o.m_MaxAllowedUpLat;
-  if (o.tfcCorreInfoIsSet()) j["tfcCorreInfo"] = o.m_TfcCorreInfo;
+  if (o.easRedisIndIsSet())
+    j["easRedisInd"] = o.m_EasRedisInd;
+  if (o.maxAllowedUpLatIsSet())
+    j["maxAllowedUpLat"] = o.m_MaxAllowedUpLat;
+  if (o.tfcCorreInfoIsSet())
+    j["tfcCorreInfo"] = o.m_TfcCorreInfo;
 }
 
-void from_json(const nlohmann::json& j, AfRoutingRequirementRm& o) {
+void from_json(const nlohmann::json &j, AfRoutingRequirementRm &o) {
   if (j.find("appReloc") != j.end()) {
     j.at("appReloc").get_to(o.m_AppReloc);
     o.m_AppRelocIsSet = true;
@@ -269,70 +279,54 @@ void from_json(const nlohmann::json& j, AfRoutingRequirementRm& o) {
   }
 }
 
-bool AfRoutingRequirementRm::isAppReloc() const {
-  return m_AppReloc;
-}
+bool AfRoutingRequirementRm::isAppReloc() const { return m_AppReloc; }
 void AfRoutingRequirementRm::setAppReloc(bool const value) {
-  m_AppReloc      = value;
+  m_AppReloc = value;
   m_AppRelocIsSet = true;
 }
-bool AfRoutingRequirementRm::appRelocIsSet() const {
-  return m_AppRelocIsSet;
-}
-void AfRoutingRequirementRm::unsetAppReloc() {
-  m_AppRelocIsSet = false;
-}
+bool AfRoutingRequirementRm::appRelocIsSet() const { return m_AppRelocIsSet; }
+void AfRoutingRequirementRm::unsetAppReloc() { m_AppRelocIsSet = false; }
 std::vector<oai::model::common::RouteToLocation>
 AfRoutingRequirementRm::getRouteToLocs() const {
   return m_RouteToLocs;
 }
 void AfRoutingRequirementRm::setRouteToLocs(
-    std::vector<oai::model::common::RouteToLocation> const& value) {
-  m_RouteToLocs      = value;
+    std::vector<oai::model::common::RouteToLocation> const &value) {
+  m_RouteToLocs = value;
   m_RouteToLocsIsSet = true;
 }
 bool AfRoutingRequirementRm::routeToLocsIsSet() const {
   return m_RouteToLocsIsSet;
 }
-void AfRoutingRequirementRm::unsetRouteToLocs() {
-  m_RouteToLocsIsSet = false;
-}
+void AfRoutingRequirementRm::unsetRouteToLocs() { m_RouteToLocsIsSet = false; }
 oai::model::pcf::SpatialValidityRm AfRoutingRequirementRm::getSpVal() const {
   return m_SpVal;
 }
 void AfRoutingRequirementRm::setSpVal(
-    oai::model::pcf::SpatialValidityRm const& value) {
-  m_SpVal      = value;
+    oai::model::pcf::SpatialValidityRm const &value) {
+  m_SpVal = value;
   m_SpValIsSet = true;
 }
-bool AfRoutingRequirementRm::spValIsSet() const {
-  return m_SpValIsSet;
-}
-void AfRoutingRequirementRm::unsetSpVal() {
-  m_SpValIsSet = false;
-}
+bool AfRoutingRequirementRm::spValIsSet() const { return m_SpValIsSet; }
+void AfRoutingRequirementRm::unsetSpVal() { m_SpValIsSet = false; }
 std::vector<oai::model::pcf::TemporalValidity>
 AfRoutingRequirementRm::getTempVals() const {
   return m_TempVals;
 }
 void AfRoutingRequirementRm::setTempVals(
-    std::vector<oai::model::pcf::TemporalValidity> const& value) {
-  m_TempVals      = value;
+    std::vector<oai::model::pcf::TemporalValidity> const &value) {
+  m_TempVals = value;
   m_TempValsIsSet = true;
 }
-bool AfRoutingRequirementRm::tempValsIsSet() const {
-  return m_TempValsIsSet;
-}
-void AfRoutingRequirementRm::unsetTempVals() {
-  m_TempValsIsSet = false;
-}
-oai::model::pcf::UpPathChgEvent AfRoutingRequirementRm::getUpPathChgSub()
-    const {
+bool AfRoutingRequirementRm::tempValsIsSet() const { return m_TempValsIsSet; }
+void AfRoutingRequirementRm::unsetTempVals() { m_TempValsIsSet = false; }
+oai::model::pcf::UpPathChgEvent
+AfRoutingRequirementRm::getUpPathChgSub() const {
   return m_UpPathChgSub;
 }
 void AfRoutingRequirementRm::setUpPathChgSub(
-    oai::model::pcf::UpPathChgEvent const& value) {
-  m_UpPathChgSub      = value;
+    oai::model::pcf::UpPathChgEvent const &value) {
+  m_UpPathChgSub = value;
   m_UpPathChgSubIsSet = true;
 }
 bool AfRoutingRequirementRm::upPathChgSubIsSet() const {
@@ -341,11 +335,9 @@ bool AfRoutingRequirementRm::upPathChgSubIsSet() const {
 void AfRoutingRequirementRm::unsetUpPathChgSub() {
   m_UpPathChgSubIsSet = false;
 }
-bool AfRoutingRequirementRm::isAddrPreserInd() const {
-  return m_AddrPreserInd;
-}
+bool AfRoutingRequirementRm::isAddrPreserInd() const { return m_AddrPreserInd; }
 void AfRoutingRequirementRm::setAddrPreserInd(bool const value) {
-  m_AddrPreserInd      = value;
+  m_AddrPreserInd = value;
   m_AddrPreserIndIsSet = true;
 }
 bool AfRoutingRequirementRm::addrPreserIndIsSet() const {
@@ -354,39 +346,31 @@ bool AfRoutingRequirementRm::addrPreserIndIsSet() const {
 void AfRoutingRequirementRm::unsetAddrPreserInd() {
   m_AddrPreserIndIsSet = false;
 }
-bool AfRoutingRequirementRm::isSimConnInd() const {
-  return m_SimConnInd;
-}
+bool AfRoutingRequirementRm::isSimConnInd() const { return m_SimConnInd; }
 void AfRoutingRequirementRm::setSimConnInd(bool const value) {
-  m_SimConnInd      = value;
+  m_SimConnInd = value;
   m_SimConnIndIsSet = true;
 }
 bool AfRoutingRequirementRm::simConnIndIsSet() const {
   return m_SimConnIndIsSet;
 }
-void AfRoutingRequirementRm::unsetSimConnInd() {
-  m_SimConnIndIsSet = false;
-}
-int32_t AfRoutingRequirementRm::getSimConnTerm() const {
-  return m_SimConnTerm;
-}
+void AfRoutingRequirementRm::unsetSimConnInd() { m_SimConnIndIsSet = false; }
+int32_t AfRoutingRequirementRm::getSimConnTerm() const { return m_SimConnTerm; }
 void AfRoutingRequirementRm::setSimConnTerm(int32_t const value) {
-  m_SimConnTerm      = value;
+  m_SimConnTerm = value;
   m_SimConnTermIsSet = true;
 }
 bool AfRoutingRequirementRm::simConnTermIsSet() const {
   return m_SimConnTermIsSet;
 }
-void AfRoutingRequirementRm::unsetSimConnTerm() {
-  m_SimConnTermIsSet = false;
-}
+void AfRoutingRequirementRm::unsetSimConnTerm() { m_SimConnTermIsSet = false; }
 std::vector<oai::model::pcf::EasIpReplacementInfo>
 AfRoutingRequirementRm::getEasIpReplaceInfos() const {
   return m_EasIpReplaceInfos;
 }
 void AfRoutingRequirementRm::setEasIpReplaceInfos(
-    std::vector<oai::model::pcf::EasIpReplacementInfo> const& value) {
-  m_EasIpReplaceInfos      = value;
+    std::vector<oai::model::pcf::EasIpReplacementInfo> const &value) {
+  m_EasIpReplaceInfos = value;
   m_EasIpReplaceInfosIsSet = true;
 }
 bool AfRoutingRequirementRm::easIpReplaceInfosIsSet() const {
@@ -395,24 +379,20 @@ bool AfRoutingRequirementRm::easIpReplaceInfosIsSet() const {
 void AfRoutingRequirementRm::unsetEasIpReplaceInfos() {
   m_EasIpReplaceInfosIsSet = false;
 }
-bool AfRoutingRequirementRm::isEasRedisInd() const {
-  return m_EasRedisInd;
-}
+bool AfRoutingRequirementRm::isEasRedisInd() const { return m_EasRedisInd; }
 void AfRoutingRequirementRm::setEasRedisInd(bool const value) {
-  m_EasRedisInd      = value;
+  m_EasRedisInd = value;
   m_EasRedisIndIsSet = true;
 }
 bool AfRoutingRequirementRm::easRedisIndIsSet() const {
   return m_EasRedisIndIsSet;
 }
-void AfRoutingRequirementRm::unsetEasRedisInd() {
-  m_EasRedisIndIsSet = false;
-}
+void AfRoutingRequirementRm::unsetEasRedisInd() { m_EasRedisIndIsSet = false; }
 int32_t AfRoutingRequirementRm::getMaxAllowedUpLat() const {
   return m_MaxAllowedUpLat;
 }
 void AfRoutingRequirementRm::setMaxAllowedUpLat(int32_t const value) {
-  m_MaxAllowedUpLat      = value;
+  m_MaxAllowedUpLat = value;
   m_MaxAllowedUpLatIsSet = true;
 }
 bool AfRoutingRequirementRm::maxAllowedUpLatIsSet() const {
@@ -426,8 +406,8 @@ AfRoutingRequirementRm::getTfcCorreInfo() const {
   return m_TfcCorreInfo;
 }
 void AfRoutingRequirementRm::setTfcCorreInfo(
-    oai::model::pcf::TrafficCorrelationInfo const& value) {
-  m_TfcCorreInfo      = value;
+    oai::model::pcf::TrafficCorrelationInfo const &value) {
+  m_TfcCorreInfo = value;
   m_TfcCorreInfoIsSet = true;
 }
 bool AfRoutingRequirementRm::tfcCorreInfoIsSet() const {
@@ -437,4 +417,4 @@ void AfRoutingRequirementRm::unsetTfcCorreInfo() {
   m_TfcCorreInfoIsSet = false;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

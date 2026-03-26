@@ -11,12 +11,12 @@
 namespace oai::nas {
 
 class IdentityRequest : public Nas5gmmMessage {
- public:
+public:
   IdentityRequest();
   ~IdentityRequest();
 
-  int Encode(uint8_t* buf, int len) override;
-  int Decode(uint8_t* buf, int len) override;
+  int Encode(uint8_t *buf, int len) override;
+  int Decode(uint8_t *buf, int len) override;
 
   uint32_t GetLength() const override;
 
@@ -25,12 +25,12 @@ class IdentityRequest : public Nas5gmmMessage {
   void Set5gsIdentityType(uint8_t value);
   // TODO: Get
 
- private:
-  NasMmPlainHeader ie_header_;             // Mandatory
-  _5gsIdentityType ie_5gs_identity_type_;  // Mandatory
+private:
+  NasMmPlainHeader ie_header_;            // Mandatory
+  _5gsIdentityType ie_5gs_identity_type_; // Mandatory
   // Spare half octet (Mandatory)
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

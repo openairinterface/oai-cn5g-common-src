@@ -27,12 +27,12 @@ void FlowDirection::validate() const {
   }
 }
 
-bool FlowDirection::validate(std::stringstream& msg) const {
+bool FlowDirection::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool FlowDirection::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool FlowDirection::validate(std::stringstream &msg,
+                             const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "FlowDirection" : pathPrefix;
@@ -43,17 +43,17 @@ bool FlowDirection::validate(
   return success;
 }
 
-bool FlowDirection::operator==(const FlowDirection& rhs) const {
+bool FlowDirection::operator==(const FlowDirection &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool FlowDirection::operator!=(const FlowDirection& rhs) const {
+bool FlowDirection::operator!=(const FlowDirection &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const FlowDirection& o) {
+void to_json(nlohmann::json &j, const FlowDirection &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
   if (o.m_value.getValue() ==
@@ -63,7 +63,7 @@ void to_json(nlohmann::json& j, const FlowDirection& o) {
   }
 }
 
-void from_json(const nlohmann::json& j, FlowDirection& o) {
+void from_json(const nlohmann::json &j, FlowDirection &o) {
   from_json(j, o.m_value);
   if (j.is_null()) {
     throw std::invalid_argument(
@@ -72,13 +72,9 @@ void from_json(const nlohmann::json& j, FlowDirection& o) {
   }
 }
 
-FlowDirection_anyOf FlowDirection::getValue() const {
-  return m_value;
-}
+FlowDirection_anyOf FlowDirection::getValue() const { return m_value; }
 
-void FlowDirection::setValue(FlowDirection_anyOf value) {
-  m_value = value;
-}
+void FlowDirection::setValue(FlowDirection_anyOf value) { m_value = value; }
 
 FlowDirection_anyOf::eFlowDirection_anyOf FlowDirection::getEnumValue() const {
   return m_value.getValue();
@@ -89,4 +85,4 @@ void FlowDirection::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

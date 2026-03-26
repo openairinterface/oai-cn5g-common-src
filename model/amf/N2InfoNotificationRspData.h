@@ -28,7 +28,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class N2InfoNotificationRspData {
- public:
+public:
   N2InfoNotificationRspData();
   virtual ~N2InfoNotificationRspData();
 
@@ -41,18 +41,18 @@ class N2InfoNotificationRspData {
   ///
   /// </summary>
   N2InfoContent getN2InfoContent() const;
-  void setN2InfoContent(N2InfoContent const& value);
+  void setN2InfoContent(N2InfoContent const &value);
   bool n2InfoContentIsSet() const;
   void unsetN2InfoContent();
 
-  friend void to_json(nlohmann::json& j, const N2InfoNotificationRspData& o);
-  friend void from_json(const nlohmann::json& j, N2InfoNotificationRspData& o);
+  friend void to_json(nlohmann::json &j, const N2InfoNotificationRspData &o);
+  friend void from_json(const nlohmann::json &j, N2InfoNotificationRspData &o);
 
- protected:
+protected:
   N2InfoContent m_N2InfoContent;
   bool m_N2InfoContentIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* N2InfoNotificationRspData_H_ */

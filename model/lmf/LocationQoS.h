@@ -29,7 +29,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class LocationQoS {
- public:
+public:
   LocationQoS();
   virtual ~LocationQoS() = default;
 
@@ -43,16 +43,16 @@ class LocationQoS {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const LocationQoS& rhs) const;
-  bool operator!=(const LocationQoS& rhs) const;
+  bool operator==(const LocationQoS &rhs) const;
+  bool operator!=(const LocationQoS &rhs) const;
 
   /////////////////////////////////////////////
   /// LocationQoS members
@@ -82,21 +82,21 @@ class LocationQoS {
   ///
   /// </summary>
   oai::model::lmf::ResponseTime getResponseTime() const;
-  void setResponseTime(oai::model::lmf::ResponseTime const& value);
+  void setResponseTime(oai::model::lmf::ResponseTime const &value);
   bool responseTimeIsSet() const;
   void unsetResponseTime();
   /// <summary>
   ///
   /// </summary>
   oai::model::lmf::LcsQosClass getLcsQosClass() const;
-  void setLcsQosClass(oai::model::lmf::LcsQosClass const& value);
+  void setLcsQosClass(oai::model::lmf::LcsQosClass const &value);
   bool lcsQosClassIsSet() const;
   void unsetLcsQosClass();
 
-  friend void to_json(nlohmann::json& j, const LocationQoS& o);
-  friend void from_json(const nlohmann::json& j, LocationQoS& o);
+  friend void to_json(nlohmann::json &j, const LocationQoS &o);
+  friend void from_json(const nlohmann::json &j, LocationQoS &o);
 
- protected:
+protected:
   float m_HAccuracy;
   bool m_HAccuracyIsSet;
   float m_VAccuracy;
@@ -109,6 +109,6 @@ class LocationQoS {
   bool m_LcsQosClassIsSet;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* LocationQoS_H_ */

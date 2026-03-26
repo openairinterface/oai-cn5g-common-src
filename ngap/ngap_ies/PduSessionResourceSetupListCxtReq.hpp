@@ -16,22 +16,22 @@ extern "C" {
 namespace oai::ngap {
 
 class PduSessionResourceSetupListCxtReq {
- public:
+public:
   PduSessionResourceSetupListCxtReq();
   virtual ~PduSessionResourceSetupListCxtReq();
 
-  void set(const std::vector<PduSessionResourceSetupItemCxtReq>& itemList);
-  void get(std::vector<PduSessionResourceSetupItemCxtReq>& itemList) const;
+  void set(const std::vector<PduSessionResourceSetupItemCxtReq> &itemList);
+  void get(std::vector<PduSessionResourceSetupItemCxtReq> &itemList) const;
 
-  bool encode(Ngap_PDUSessionResourceSetupListCxtReq_t&
-                  pduSessionResourceSetupListCxtReq) const;
-  bool decode(const Ngap_PDUSessionResourceSetupListCxtReq_t&
-                  pduSessionResourceSetupListCxtReq);
+  bool encode(Ngap_PDUSessionResourceSetupListCxtReq_t
+                  &pduSessionResourceSetupListCxtReq) const;
+  bool decode(const Ngap_PDUSessionResourceSetupListCxtReq_t
+                  &pduSessionResourceSetupListCxtReq);
 
- private:
+private:
   std::vector<PduSessionResourceSetupItemCxtReq> m_ItemList;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

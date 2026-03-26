@@ -23,21 +23,21 @@ extern "C" {
 /* Dependencies */
 typedef enum Ngap_UE_DifferentiationInfo__periodicCommunicationIndicator {
   Ngap_UE_DifferentiationInfo__periodicCommunicationIndicator_periodically = 0,
-  Ngap_UE_DifferentiationInfo__periodicCommunicationIndicator_ondemand     = 1
+  Ngap_UE_DifferentiationInfo__periodicCommunicationIndicator_ondemand = 1
   /*
    * Enumeration is extensible
    */
 } e_Ngap_UE_DifferentiationInfo__periodicCommunicationIndicator;
 typedef enum Ngap_UE_DifferentiationInfo__stationaryIndication {
   Ngap_UE_DifferentiationInfo__stationaryIndication_stationary = 0,
-  Ngap_UE_DifferentiationInfo__stationaryIndication_mobile     = 1
+  Ngap_UE_DifferentiationInfo__stationaryIndication_mobile = 1
   /*
    * Enumeration is extensible
    */
 } e_Ngap_UE_DifferentiationInfo__stationaryIndication;
 typedef enum Ngap_UE_DifferentiationInfo__trafficProfile {
-  Ngap_UE_DifferentiationInfo__trafficProfile_single_packet    = 0,
-  Ngap_UE_DifferentiationInfo__trafficProfile_dual_packets     = 1,
+  Ngap_UE_DifferentiationInfo__trafficProfile_single_packet = 0,
+  Ngap_UE_DifferentiationInfo__trafficProfile_dual_packets = 1,
   Ngap_UE_DifferentiationInfo__trafficProfile_multiple_packets = 2
   /*
    * Enumeration is extensible
@@ -59,14 +59,14 @@ struct Ngap_ProtocolExtensionContainer;
 
 /* Ngap_UE-DifferentiationInfo */
 typedef struct Ngap_UE_DifferentiationInfo {
-  long* periodicCommunicationIndicator; /* OPTIONAL */
-  long* periodicTime;                   /* OPTIONAL */
-  struct Ngap_ScheduledCommunicationTime*
-      scheduledCommunicationTime;                        /* OPTIONAL */
-  long* stationaryIndication;                            /* OPTIONAL */
-  long* trafficProfile;                                  /* OPTIONAL */
-  long* batteryIndication;                               /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  long *periodicCommunicationIndicator; /* OPTIONAL */
+  long *periodicTime;                   /* OPTIONAL */
+  struct Ngap_ScheduledCommunicationTime
+      *scheduledCommunicationTime;                       /* OPTIONAL */
+  long *stationaryIndication;                            /* OPTIONAL */
+  long *trafficProfile;                                  /* OPTIONAL */
+  long *batteryIndication;                               /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

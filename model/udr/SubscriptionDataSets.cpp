@@ -19,18 +19,18 @@
 namespace oai::udr::model {
 
 SubscriptionDataSets::SubscriptionDataSets() {
-  m_AmDataIsSet                          = false;
-  m_SmfSelDataIsSet                      = false;
-  m_UecAmfDataIsSet                      = false;
-  m_UecSmfDataIsSet                      = false;
-  m_UecSmsfDataIsSet                     = false;
-  m_SmsSubsDataIsSet                     = false;
-  m_SmDataIsSet                          = false;
-  m_TraceDataIsSet                       = false;
-  m_SmsMngDataIsSet                      = false;
-  m_LcsPrivacyDataIsSet                  = false;
-  m_LcsMoDataIsSet                       = false;
-  m_V2xDataIsSet                         = false;
+  m_AmDataIsSet = false;
+  m_SmfSelDataIsSet = false;
+  m_UecAmfDataIsSet = false;
+  m_UecSmfDataIsSet = false;
+  m_UecSmsfDataIsSet = false;
+  m_SmsSubsDataIsSet = false;
+  m_SmDataIsSet = false;
+  m_TraceDataIsSet = false;
+  m_SmsMngDataIsSet = false;
+  m_LcsPrivacyDataIsSet = false;
+  m_LcsMoDataIsSet = false;
+  m_V2xDataIsSet = false;
   m_LcsBroadcastAssistanceTypesDataIsSet = false;
 }
 
@@ -40,25 +40,37 @@ void SubscriptionDataSets::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const SubscriptionDataSets& o) {
+void to_json(nlohmann::json &j, const SubscriptionDataSets &o) {
   j = nlohmann::json();
-  if (o.amDataIsSet()) j["amData"] = o.m_AmData;
-  if (o.smfSelDataIsSet()) j["smfSelData"] = o.m_SmfSelData;
-  if (o.uecAmfDataIsSet()) j["uecAmfData"] = o.m_UecAmfData;
-  if (o.uecSmfDataIsSet()) j["uecSmfData"] = o.m_UecSmfData;
-  if (o.uecSmsfDataIsSet()) j["uecSmsfData"] = o.m_UecSmsfData;
-  if (o.smsSubsDataIsSet()) j["smsSubsData"] = o.m_SmsSubsData;
-  if (o.smDataIsSet() || !o.m_SmData.empty()) j["smData"] = o.m_SmData;
-  if (o.traceDataIsSet()) j["traceData"] = o.m_TraceData;
-  if (o.smsMngDataIsSet()) j["smsMngData"] = o.m_SmsMngData;
-  if (o.lcsPrivacyDataIsSet()) j["lcsPrivacyData"] = o.m_LcsPrivacyData;
-  if (o.lcsMoDataIsSet()) j["lcsMoData"] = o.m_LcsMoData;
-  if (o.v2xDataIsSet()) j["v2xData"] = o.m_V2xData;
+  if (o.amDataIsSet())
+    j["amData"] = o.m_AmData;
+  if (o.smfSelDataIsSet())
+    j["smfSelData"] = o.m_SmfSelData;
+  if (o.uecAmfDataIsSet())
+    j["uecAmfData"] = o.m_UecAmfData;
+  if (o.uecSmfDataIsSet())
+    j["uecSmfData"] = o.m_UecSmfData;
+  if (o.uecSmsfDataIsSet())
+    j["uecSmsfData"] = o.m_UecSmsfData;
+  if (o.smsSubsDataIsSet())
+    j["smsSubsData"] = o.m_SmsSubsData;
+  if (o.smDataIsSet() || !o.m_SmData.empty())
+    j["smData"] = o.m_SmData;
+  if (o.traceDataIsSet())
+    j["traceData"] = o.m_TraceData;
+  if (o.smsMngDataIsSet())
+    j["smsMngData"] = o.m_SmsMngData;
+  if (o.lcsPrivacyDataIsSet())
+    j["lcsPrivacyData"] = o.m_LcsPrivacyData;
+  if (o.lcsMoDataIsSet())
+    j["lcsMoData"] = o.m_LcsMoData;
+  if (o.v2xDataIsSet())
+    j["v2xData"] = o.m_V2xData;
   if (o.lcsBroadcastAssistanceTypesDataIsSet())
     j["lcsBroadcastAssistanceTypesData"] = o.m_LcsBroadcastAssistanceTypesData;
 }
 
-void from_json(const nlohmann::json& j, SubscriptionDataSets& o) {
+void from_json(const nlohmann::json &j, SubscriptionDataSets &o) {
   if (j.find("amData") != j.end()) {
     j.at("amData").get_to(o.m_AmData);
     o.m_AmDataIsSet = true;
@@ -118,130 +130,98 @@ AccessAndMobilitySubscriptionData SubscriptionDataSets::getAmData() const {
   return m_AmData;
 }
 void SubscriptionDataSets::setAmData(
-    AccessAndMobilitySubscriptionData const& value) {
-  m_AmData      = value;
+    AccessAndMobilitySubscriptionData const &value) {
+  m_AmData = value;
   m_AmDataIsSet = true;
 }
-bool SubscriptionDataSets::amDataIsSet() const {
-  return m_AmDataIsSet;
-}
-void SubscriptionDataSets::unsetAmData() {
-  m_AmDataIsSet = false;
-}
+bool SubscriptionDataSets::amDataIsSet() const { return m_AmDataIsSet; }
+void SubscriptionDataSets::unsetAmData() { m_AmDataIsSet = false; }
 SmfSelectionSubscriptionData SubscriptionDataSets::getSmfSelData() const {
   return m_SmfSelData;
 }
 void SubscriptionDataSets::setSmfSelData(
-    SmfSelectionSubscriptionData const& value) {
-  m_SmfSelData      = value;
+    SmfSelectionSubscriptionData const &value) {
+  m_SmfSelData = value;
   m_SmfSelDataIsSet = true;
 }
-bool SubscriptionDataSets::smfSelDataIsSet() const {
-  return m_SmfSelDataIsSet;
-}
-void SubscriptionDataSets::unsetSmfSelData() {
-  m_SmfSelDataIsSet = false;
-}
+bool SubscriptionDataSets::smfSelDataIsSet() const { return m_SmfSelDataIsSet; }
+void SubscriptionDataSets::unsetSmfSelData() { m_SmfSelDataIsSet = false; }
 UeContextInAmfData SubscriptionDataSets::getUecAmfData() const {
   return m_UecAmfData;
 }
-void SubscriptionDataSets::setUecAmfData(UeContextInAmfData const& value) {
-  m_UecAmfData      = value;
+void SubscriptionDataSets::setUecAmfData(UeContextInAmfData const &value) {
+  m_UecAmfData = value;
   m_UecAmfDataIsSet = true;
 }
-bool SubscriptionDataSets::uecAmfDataIsSet() const {
-  return m_UecAmfDataIsSet;
-}
-void SubscriptionDataSets::unsetUecAmfData() {
-  m_UecAmfDataIsSet = false;
-}
+bool SubscriptionDataSets::uecAmfDataIsSet() const { return m_UecAmfDataIsSet; }
+void SubscriptionDataSets::unsetUecAmfData() { m_UecAmfDataIsSet = false; }
 UeContextInSmfData SubscriptionDataSets::getUecSmfData() const {
   return m_UecSmfData;
 }
-void SubscriptionDataSets::setUecSmfData(UeContextInSmfData const& value) {
-  m_UecSmfData      = value;
+void SubscriptionDataSets::setUecSmfData(UeContextInSmfData const &value) {
+  m_UecSmfData = value;
   m_UecSmfDataIsSet = true;
 }
-bool SubscriptionDataSets::uecSmfDataIsSet() const {
-  return m_UecSmfDataIsSet;
-}
-void SubscriptionDataSets::unsetUecSmfData() {
-  m_UecSmfDataIsSet = false;
-}
+bool SubscriptionDataSets::uecSmfDataIsSet() const { return m_UecSmfDataIsSet; }
+void SubscriptionDataSets::unsetUecSmfData() { m_UecSmfDataIsSet = false; }
 UeContextInSmsfData SubscriptionDataSets::getUecSmsfData() const {
   return m_UecSmsfData;
 }
-void SubscriptionDataSets::setUecSmsfData(UeContextInSmsfData const& value) {
-  m_UecSmsfData      = value;
+void SubscriptionDataSets::setUecSmsfData(UeContextInSmsfData const &value) {
+  m_UecSmsfData = value;
   m_UecSmsfDataIsSet = true;
 }
 bool SubscriptionDataSets::uecSmsfDataIsSet() const {
   return m_UecSmsfDataIsSet;
 }
-void SubscriptionDataSets::unsetUecSmsfData() {
-  m_UecSmsfDataIsSet = false;
-}
+void SubscriptionDataSets::unsetUecSmsfData() { m_UecSmsfDataIsSet = false; }
 SmsSubscriptionData SubscriptionDataSets::getSmsSubsData() const {
   return m_SmsSubsData;
 }
-void SubscriptionDataSets::setSmsSubsData(SmsSubscriptionData const& value) {
-  m_SmsSubsData      = value;
+void SubscriptionDataSets::setSmsSubsData(SmsSubscriptionData const &value) {
+  m_SmsSubsData = value;
   m_SmsSubsDataIsSet = true;
 }
 bool SubscriptionDataSets::smsSubsDataIsSet() const {
   return m_SmsSubsDataIsSet;
 }
-void SubscriptionDataSets::unsetSmsSubsData() {
-  m_SmsSubsDataIsSet = false;
-}
-std::vector<SessionManagementSubscriptionData>&
+void SubscriptionDataSets::unsetSmsSubsData() { m_SmsSubsDataIsSet = false; }
+std::vector<SessionManagementSubscriptionData> &
 SubscriptionDataSets::getSmData() {
   return m_SmData;
 }
 void SubscriptionDataSets::setSmData(
-    std::vector<SessionManagementSubscriptionData> const& value) {
-  m_SmData      = value;
+    std::vector<SessionManagementSubscriptionData> const &value) {
+  m_SmData = value;
   m_SmDataIsSet = true;
 }
-bool SubscriptionDataSets::smDataIsSet() const {
-  return m_SmDataIsSet;
-}
-void SubscriptionDataSets::unsetSmData() {
-  m_SmDataIsSet = false;
-}
+bool SubscriptionDataSets::smDataIsSet() const { return m_SmDataIsSet; }
+void SubscriptionDataSets::unsetSmData() { m_SmDataIsSet = false; }
 oai::model::common::TraceData SubscriptionDataSets::getTraceData() const {
   return m_TraceData;
 }
 void SubscriptionDataSets::setTraceData(
-    oai::model::common::TraceData const& value) {
-  m_TraceData      = value;
+    oai::model::common::TraceData const &value) {
+  m_TraceData = value;
   m_TraceDataIsSet = true;
 }
-bool SubscriptionDataSets::traceDataIsSet() const {
-  return m_TraceDataIsSet;
-}
-void SubscriptionDataSets::unsetTraceData() {
-  m_TraceDataIsSet = false;
-}
+bool SubscriptionDataSets::traceDataIsSet() const { return m_TraceDataIsSet; }
+void SubscriptionDataSets::unsetTraceData() { m_TraceDataIsSet = false; }
 SmsManagementSubscriptionData SubscriptionDataSets::getSmsMngData() const {
   return m_SmsMngData;
 }
 void SubscriptionDataSets::setSmsMngData(
-    SmsManagementSubscriptionData const& value) {
-  m_SmsMngData      = value;
+    SmsManagementSubscriptionData const &value) {
+  m_SmsMngData = value;
   m_SmsMngDataIsSet = true;
 }
-bool SubscriptionDataSets::smsMngDataIsSet() const {
-  return m_SmsMngDataIsSet;
-}
-void SubscriptionDataSets::unsetSmsMngData() {
-  m_SmsMngDataIsSet = false;
-}
+bool SubscriptionDataSets::smsMngDataIsSet() const { return m_SmsMngDataIsSet; }
+void SubscriptionDataSets::unsetSmsMngData() { m_SmsMngDataIsSet = false; }
 LcsPrivacyData SubscriptionDataSets::getLcsPrivacyData() const {
   return m_LcsPrivacyData;
 }
-void SubscriptionDataSets::setLcsPrivacyData(LcsPrivacyData const& value) {
-  m_LcsPrivacyData      = value;
+void SubscriptionDataSets::setLcsPrivacyData(LcsPrivacyData const &value) {
+  m_LcsPrivacyData = value;
   m_LcsPrivacyDataIsSet = true;
 }
 bool SubscriptionDataSets::lcsPrivacyDataIsSet() const {
@@ -250,39 +230,29 @@ bool SubscriptionDataSets::lcsPrivacyDataIsSet() const {
 void SubscriptionDataSets::unsetLcsPrivacyData() {
   m_LcsPrivacyDataIsSet = false;
 }
-LcsMoData SubscriptionDataSets::getLcsMoData() const {
-  return m_LcsMoData;
-}
-void SubscriptionDataSets::setLcsMoData(LcsMoData const& value) {
-  m_LcsMoData      = value;
+LcsMoData SubscriptionDataSets::getLcsMoData() const { return m_LcsMoData; }
+void SubscriptionDataSets::setLcsMoData(LcsMoData const &value) {
+  m_LcsMoData = value;
   m_LcsMoDataIsSet = true;
 }
-bool SubscriptionDataSets::lcsMoDataIsSet() const {
-  return m_LcsMoDataIsSet;
-}
-void SubscriptionDataSets::unsetLcsMoData() {
-  m_LcsMoDataIsSet = false;
-}
+bool SubscriptionDataSets::lcsMoDataIsSet() const { return m_LcsMoDataIsSet; }
+void SubscriptionDataSets::unsetLcsMoData() { m_LcsMoDataIsSet = false; }
 V2xSubscriptionData SubscriptionDataSets::getV2xData() const {
   return m_V2xData;
 }
-void SubscriptionDataSets::setV2xData(V2xSubscriptionData const& value) {
-  m_V2xData      = value;
+void SubscriptionDataSets::setV2xData(V2xSubscriptionData const &value) {
+  m_V2xData = value;
   m_V2xDataIsSet = true;
 }
-bool SubscriptionDataSets::v2xDataIsSet() const {
-  return m_V2xDataIsSet;
-}
-void SubscriptionDataSets::unsetV2xData() {
-  m_V2xDataIsSet = false;
-}
+bool SubscriptionDataSets::v2xDataIsSet() const { return m_V2xDataIsSet; }
+void SubscriptionDataSets::unsetV2xData() { m_V2xDataIsSet = false; }
 LcsBroadcastAssistanceTypesData
 SubscriptionDataSets::getLcsBroadcastAssistanceTypesData() const {
   return m_LcsBroadcastAssistanceTypesData;
 }
 void SubscriptionDataSets::setLcsBroadcastAssistanceTypesData(
-    LcsBroadcastAssistanceTypesData const& value) {
-  m_LcsBroadcastAssistanceTypesData      = value;
+    LcsBroadcastAssistanceTypesData const &value) {
+  m_LcsBroadcastAssistanceTypesData = value;
   m_LcsBroadcastAssistanceTypesDataIsSet = true;
 }
 bool SubscriptionDataSets::lcsBroadcastAssistanceTypesDataIsSet() const {
@@ -292,4 +262,4 @@ void SubscriptionDataSets::unsetLcsBroadcastAssistanceTypesData() {
   m_LcsBroadcastAssistanceTypesDataIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

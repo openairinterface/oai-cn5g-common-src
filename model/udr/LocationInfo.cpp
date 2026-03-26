@@ -19,11 +19,11 @@
 namespace oai::udr::model {
 
 LocationInfo::LocationInfo() {
-  m_Supi                   = "";
-  m_SupiIsSet              = false;
-  m_Gpsi                   = "";
-  m_GpsiIsSet              = false;
-  m_SupportedFeatures      = "";
+  m_Supi = "";
+  m_SupiIsSet = false;
+  m_Gpsi = "";
+  m_GpsiIsSet = false;
+  m_SupportedFeatures = "";
   m_SupportedFeaturesIsSet = false;
 }
 
@@ -33,16 +33,18 @@ void LocationInfo::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const LocationInfo& o) {
+void to_json(nlohmann::json &j, const LocationInfo &o) {
   j = nlohmann::json();
-  if (o.supiIsSet()) j["supi"] = o.m_Supi;
-  if (o.gpsiIsSet()) j["gpsi"] = o.m_Gpsi;
+  if (o.supiIsSet())
+    j["supi"] = o.m_Supi;
+  if (o.gpsiIsSet())
+    j["gpsi"] = o.m_Gpsi;
   j["registrationLocationInfoList"] = o.m_RegistrationLocationInfoList;
   if (o.supportedFeaturesIsSet())
     j["supportedFeatures"] = o.m_SupportedFeatures;
 }
 
-void from_json(const nlohmann::json& j, LocationInfo& o) {
+void from_json(const nlohmann::json &j, LocationInfo &o) {
   if (j.find("supi") != j.end()) {
     j.at("supi").get_to(o.m_Supi);
     o.m_SupiIsSet = true;
@@ -58,45 +60,33 @@ void from_json(const nlohmann::json& j, LocationInfo& o) {
   }
 }
 
-std::string LocationInfo::getSupi() const {
-  return m_Supi;
-}
-void LocationInfo::setSupi(std::string const& value) {
-  m_Supi      = value;
+std::string LocationInfo::getSupi() const { return m_Supi; }
+void LocationInfo::setSupi(std::string const &value) {
+  m_Supi = value;
   m_SupiIsSet = true;
 }
-bool LocationInfo::supiIsSet() const {
-  return m_SupiIsSet;
-}
-void LocationInfo::unsetSupi() {
-  m_SupiIsSet = false;
-}
-std::string LocationInfo::getGpsi() const {
-  return m_Gpsi;
-}
-void LocationInfo::setGpsi(std::string const& value) {
-  m_Gpsi      = value;
+bool LocationInfo::supiIsSet() const { return m_SupiIsSet; }
+void LocationInfo::unsetSupi() { m_SupiIsSet = false; }
+std::string LocationInfo::getGpsi() const { return m_Gpsi; }
+void LocationInfo::setGpsi(std::string const &value) {
+  m_Gpsi = value;
   m_GpsiIsSet = true;
 }
-bool LocationInfo::gpsiIsSet() const {
-  return m_GpsiIsSet;
-}
-void LocationInfo::unsetGpsi() {
-  m_GpsiIsSet = false;
-}
-std::vector<RegistrationLocationInfo>&
+bool LocationInfo::gpsiIsSet() const { return m_GpsiIsSet; }
+void LocationInfo::unsetGpsi() { m_GpsiIsSet = false; }
+std::vector<RegistrationLocationInfo> &
 LocationInfo::getRegistrationLocationInfoList() {
   return m_RegistrationLocationInfoList;
 }
 void LocationInfo::setRegistrationLocationInfoList(
-    std::vector<RegistrationLocationInfo> const& value) {
+    std::vector<RegistrationLocationInfo> const &value) {
   m_RegistrationLocationInfoList = value;
 }
 std::string LocationInfo::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
-void LocationInfo::setSupportedFeatures(std::string const& value) {
-  m_SupportedFeatures      = value;
+void LocationInfo::setSupportedFeatures(std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool LocationInfo::supportedFeaturesIsSet() const {
@@ -106,4 +96,4 @@ void LocationInfo::unsetSupportedFeatures() {
   m_SupportedFeaturesIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

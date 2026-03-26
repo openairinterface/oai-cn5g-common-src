@@ -19,14 +19,14 @@
 namespace oai::model::udm {
 
 AuthenticationInfoRequest::AuthenticationInfoRequest() {
-  m_SupportedFeatures          = "";
-  m_SupportedFeaturesIsSet     = false;
-  m_ServingNetworkName         = "";
+  m_SupportedFeatures = "";
+  m_SupportedFeaturesIsSet = false;
+  m_ServingNetworkName = "";
   m_ResynchronizationInfoIsSet = false;
-  m_AusfInstanceId             = "";
-  m_CellCagInfoIsSet           = false;
-  m_N5gcInd                    = false;
-  m_N5gcIndIsSet               = false;
+  m_AusfInstanceId = "";
+  m_CellCagInfoIsSet = false;
+  m_N5gcInd = false;
+  m_N5gcIndIsSet = false;
 }
 
 AuthenticationInfoRequest::~AuthenticationInfoRequest() {}
@@ -35,7 +35,7 @@ void AuthenticationInfoRequest::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const AuthenticationInfoRequest& o) {
+void to_json(nlohmann::json &j, const AuthenticationInfoRequest &o) {
   j = nlohmann::json();
   if (o.supportedFeaturesIsSet())
     j["supportedFeatures"] = o.m_SupportedFeatures;
@@ -45,10 +45,11 @@ void to_json(nlohmann::json& j, const AuthenticationInfoRequest& o) {
   j["ausfInstanceId"] = o.m_AusfInstanceId;
   if (o.cellCagInfoIsSet() || !o.m_CellCagInfo.empty())
     j["cellCagInfo"] = o.m_CellCagInfo;
-  if (o.n5gcIndIsSet()) j["n5gcInd"] = o.m_N5gcInd;
+  if (o.n5gcIndIsSet())
+    j["n5gcInd"] = o.m_N5gcInd;
 }
 
-void from_json(const nlohmann::json& j, AuthenticationInfoRequest& o) {
+void from_json(const nlohmann::json &j, AuthenticationInfoRequest &o) {
   if (j.find("supportedFeatures") != j.end()) {
     j.at("supportedFeatures").get_to(o.m_SupportedFeatures);
     o.m_SupportedFeaturesIsSet = true;
@@ -72,8 +73,8 @@ void from_json(const nlohmann::json& j, AuthenticationInfoRequest& o) {
 std::string AuthenticationInfoRequest::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
-void AuthenticationInfoRequest::setSupportedFeatures(std::string const& value) {
-  m_SupportedFeatures      = value;
+void AuthenticationInfoRequest::setSupportedFeatures(std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool AuthenticationInfoRequest::supportedFeaturesIsSet() const {
@@ -86,16 +87,16 @@ std::string AuthenticationInfoRequest::getServingNetworkName() const {
   return m_ServingNetworkName;
 }
 void AuthenticationInfoRequest::setServingNetworkName(
-    std::string const& value) {
+    std::string const &value) {
   m_ServingNetworkName = value;
 }
-ResynchronizationInfo AuthenticationInfoRequest::getResynchronizationInfo()
-    const {
+ResynchronizationInfo
+AuthenticationInfoRequest::getResynchronizationInfo() const {
   return m_ResynchronizationInfo;
 }
 void AuthenticationInfoRequest::setResynchronizationInfo(
-    ResynchronizationInfo const& value) {
-  m_ResynchronizationInfo      = value;
+    ResynchronizationInfo const &value) {
+  m_ResynchronizationInfo = value;
   m_ResynchronizationInfoIsSet = true;
 }
 bool AuthenticationInfoRequest::resynchronizationInfoIsSet() const {
@@ -107,15 +108,15 @@ void AuthenticationInfoRequest::unsetResynchronizationInfo() {
 std::string AuthenticationInfoRequest::getAusfInstanceId() const {
   return m_AusfInstanceId;
 }
-void AuthenticationInfoRequest::setAusfInstanceId(std::string const& value) {
+void AuthenticationInfoRequest::setAusfInstanceId(std::string const &value) {
   m_AusfInstanceId = value;
 }
-std::vector<std::string>& AuthenticationInfoRequest::getCellCagInfo() {
+std::vector<std::string> &AuthenticationInfoRequest::getCellCagInfo() {
   return m_CellCagInfo;
 }
 void AuthenticationInfoRequest::setCellCagInfo(
-    std::vector<std::string> const& value) {
-  m_CellCagInfo      = value;
+    std::vector<std::string> const &value) {
+  m_CellCagInfo = value;
   m_CellCagInfoIsSet = true;
 }
 bool AuthenticationInfoRequest::cellCagInfoIsSet() const {
@@ -124,18 +125,12 @@ bool AuthenticationInfoRequest::cellCagInfoIsSet() const {
 void AuthenticationInfoRequest::unsetCellCagInfo() {
   m_CellCagInfoIsSet = false;
 }
-bool AuthenticationInfoRequest::isN5gcInd() const {
-  return m_N5gcInd;
-}
+bool AuthenticationInfoRequest::isN5gcInd() const { return m_N5gcInd; }
 void AuthenticationInfoRequest::setN5gcInd(bool const value) {
-  m_N5gcInd      = value;
+  m_N5gcInd = value;
   m_N5gcIndIsSet = true;
 }
-bool AuthenticationInfoRequest::n5gcIndIsSet() const {
-  return m_N5gcIndIsSet;
-}
-void AuthenticationInfoRequest::unsetN5gcInd() {
-  m_N5gcIndIsSet = false;
-}
+bool AuthenticationInfoRequest::n5gcIndIsSet() const { return m_N5gcIndIsSet; }
+void AuthenticationInfoRequest::unsetN5gcInd() { m_N5gcIndIsSet = false; }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

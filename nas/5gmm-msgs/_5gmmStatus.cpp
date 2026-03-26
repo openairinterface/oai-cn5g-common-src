@@ -10,8 +10,8 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 _5gmmStatus::_5gmmStatus()
-    : ie_header_(
-          k5gsMobilityManagementMessages, kPlain5gsMessage, k5gmmStatus) {}
+    : ie_header_(k5gsMobilityManagementMessages, kPlain5gsMessage,
+                 k5gmmStatus) {}
 
 //------------------------------------------------------------------------------
 _5gmmStatus::~_5gmmStatus() {}
@@ -36,17 +36,16 @@ void _5gmmStatus::Set5gmmCause(uint8_t value) {
 }
 
 //------------------------------------------------------------------------------
-uint8_t _5gmmStatus::Get5gmmCause() const {
-  return ie_5gmm_cause_.GetValue();
-}
+uint8_t _5gmmStatus::Get5gmmCause() const { return ie_5gmm_cause_.GetValue(); }
 
 //------------------------------------------------------------------------------
-int _5gmmStatus::Encode(uint8_t* buf, int len) {
+int _5gmmStatus::Encode(uint8_t *buf, int len) {
   oai::logger::logger_common::nas().debug("Encoding _5gmmStatus message");
 
-  if (!Validate(len)) return KEncodeDecodeError;
+  if (!Validate(len))
+    return KEncodeDecodeError;
 
-  int encoded_size    = 0;
+  int encoded_size = 0;
   int encoded_ie_size = 0;
 
   // Header
@@ -68,10 +67,10 @@ int _5gmmStatus::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int _5gmmStatus::Decode(uint8_t* buf, int len) {
+int _5gmmStatus::Decode(uint8_t *buf, int len) {
   oai::logger::logger_common::nas().debug("Decoding _5gmmStatus message");
 
-  int decoded_size    = 0;
+  int decoded_size = 0;
   int decoded_ie_size = 0;
 
   // Header

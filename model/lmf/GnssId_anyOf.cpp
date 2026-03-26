@@ -13,8 +13,8 @@
 
 #include "GnssId_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::lmf {
 
@@ -27,12 +27,12 @@ void GnssId_anyOf::validate() const {
   }
 }
 
-bool GnssId_anyOf::validate(std::stringstream& msg) const {
+bool GnssId_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool GnssId_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool GnssId_anyOf::validate(std::stringstream &msg,
+                            const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "GnssId_anyOf" : pathPrefix;
@@ -45,51 +45,51 @@ bool GnssId_anyOf::validate(
   return success;
 }
 
-bool GnssId_anyOf::operator==(const GnssId_anyOf& rhs) const {
+bool GnssId_anyOf::operator==(const GnssId_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool GnssId_anyOf::operator!=(const GnssId_anyOf& rhs) const {
+bool GnssId_anyOf::operator!=(const GnssId_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const GnssId_anyOf& o) {
+void to_json(nlohmann::json &j, const GnssId_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case GnssId_anyOf::eGnssId_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case GnssId_anyOf::eGnssId_anyOf::GPS:
-      j = "GPS";
-      break;
-    case GnssId_anyOf::eGnssId_anyOf::GALILEO:
-      j = "GALILEO";
-      break;
-    case GnssId_anyOf::eGnssId_anyOf::SBAS:
-      j = "SBAS";
-      break;
-    case GnssId_anyOf::eGnssId_anyOf::MODERNIZED_GPS:
-      j = "MODERNIZED_GPS";
-      break;
-    case GnssId_anyOf::eGnssId_anyOf::QZSS:
-      j = "QZSS";
-      break;
-    case GnssId_anyOf::eGnssId_anyOf::GLONASS:
-      j = "GLONASS";
-      break;
-    case GnssId_anyOf::eGnssId_anyOf::BDS:
-      j = "BDS";
-      break;
-    case GnssId_anyOf::eGnssId_anyOf::NAVIC:
-      j = "NAVIC";
-      break;
+  case GnssId_anyOf::eGnssId_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case GnssId_anyOf::eGnssId_anyOf::GPS:
+    j = "GPS";
+    break;
+  case GnssId_anyOf::eGnssId_anyOf::GALILEO:
+    j = "GALILEO";
+    break;
+  case GnssId_anyOf::eGnssId_anyOf::SBAS:
+    j = "SBAS";
+    break;
+  case GnssId_anyOf::eGnssId_anyOf::MODERNIZED_GPS:
+    j = "MODERNIZED_GPS";
+    break;
+  case GnssId_anyOf::eGnssId_anyOf::QZSS:
+    j = "QZSS";
+    break;
+  case GnssId_anyOf::eGnssId_anyOf::GLONASS:
+    j = "GLONASS";
+    break;
+  case GnssId_anyOf::eGnssId_anyOf::BDS:
+    j = "BDS";
+    break;
+  case GnssId_anyOf::eGnssId_anyOf::NAVIC:
+    j = "NAVIC";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, GnssId_anyOf& o) {
+void from_json(const nlohmann::json &j, GnssId_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "GPS") {
     o.setValue(GnssId_anyOf::eGnssId_anyOf::GPS);
@@ -116,11 +116,9 @@ void from_json(const nlohmann::json& j, GnssId_anyOf& o) {
   }
 }
 
-GnssId_anyOf::eGnssId_anyOf GnssId_anyOf::getValue() const {
-  return m_value;
-}
+GnssId_anyOf::eGnssId_anyOf GnssId_anyOf::getValue() const { return m_value; }
 void GnssId_anyOf::setValue(GnssId_anyOf::eGnssId_anyOf value) {
   m_value = value;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

@@ -30,7 +30,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class ImsVoPs {
- public:
+public:
   ImsVoPs();
   virtual ~ImsVoPs();
 
@@ -39,12 +39,12 @@ class ImsVoPs {
   /////////////////////////////////////////////
   /// ImsVoPs members
 
-  friend void to_json(nlohmann::json& j, const ImsVoPs& o);
-  friend void from_json(const nlohmann::json& j, ImsVoPs& o);
+  friend void to_json(nlohmann::json &j, const ImsVoPs &o);
+  friend void from_json(const nlohmann::json &j, ImsVoPs &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* ImsVoPs_H_ */

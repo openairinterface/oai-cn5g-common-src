@@ -11,20 +11,20 @@ extern "C" {
 
 namespace oai::ngap {
 class CountValueForPdcpSn18 {
- public:
+public:
   CountValueForPdcpSn18();
   virtual ~CountValueForPdcpSn18(){};
 
-  void set(const long& pDCP, const long& hfn_PDCP);
-  void get(long& pDCP, long& hFN_PDCP) const;
+  void set(const long &pDCP, const long &hfn_PDCP);
+  void get(long &pDCP, long &hFN_PDCP) const;
 
-  bool encode(Ngap_COUNTValueForPDCP_SN18_t& countvalue) const;
-  bool decode(const Ngap_COUNTValueForPDCP_SN18_t& countValue);
+  bool encode(Ngap_COUNTValueForPDCP_SN18_t &countvalue) const;
+  bool decode(const Ngap_COUNTValueForPDCP_SN18_t &countValue);
 
- private:
-  long m_Pdcp;     // Mandatory (18 bits)
-  long m_HfnPdcp;  // Mandatory (14 bits)
+private:
+  long m_Pdcp;    // Mandatory (18 bits)
+  long m_HfnPdcp; // Mandatory (14 bits)
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

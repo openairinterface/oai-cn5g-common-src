@@ -17,44 +17,43 @@ extern "C" {
 namespace oai::ngap {
 
 class GbrQosFlowInformation {
- public:
+public:
   GbrQosFlowInformation();
   GbrQosFlowInformation(
-      const long& maximumFlowBitRateDl, const long& maximumFlowBitRateUl,
-      const long& guaranteedFlowBitRateDl, const long& guaranteedFlowBitRateUl,
-      const std::optional<NotificationControl>& notificationControl,
-      const std::optional<PacketLossRate>& maximumPacketLossRateDl,
-      const std::optional<PacketLossRate>& maximumPacketLossRateUl);
+      const long &maximumFlowBitRateDl, const long &maximumFlowBitRateUl,
+      const long &guaranteedFlowBitRateDl, const long &guaranteedFlowBitRateUl,
+      const std::optional<NotificationControl> &notificationControl,
+      const std::optional<PacketLossRate> &maximumPacketLossRateDl,
+      const std::optional<PacketLossRate> &maximumPacketLossRateUl);
   virtual ~GbrQosFlowInformation();
 
-  void set(
-      const long& maximumFlowBitRateDl, const long& maximumFlowBitRateUl,
-      const long& guaranteedFlowBitRateDl, const long& guaranteedFlowBitRateUl,
-      const std::optional<NotificationControl>& notificationControl =
-          std::nullopt,
-      const std::optional<PacketLossRate>& maximumPacketLossRateDl =
-          std::nullopt,
-      const std::optional<PacketLossRate>& maximumPacketLossRateUl =
-          std::nullopt);
-  bool get(
-      long& maximumFlowBitRateDl, long& maximumFlowBitRateUl,
-      long& guaranteedFlowBitRateDl, long& guaranteedFlowBitRateUl,
-      std::optional<NotificationControl>& notificationControl,
-      std::optional<PacketLossRate>& maximumPacketLossRateDl,
-      std::optional<PacketLossRate>& maximumPacketLossRateUl) const;
+  void set(const long &maximumFlowBitRateDl, const long &maximumFlowBitRateUl,
+           const long &guaranteedFlowBitRateDl,
+           const long &guaranteedFlowBitRateUl,
+           const std::optional<NotificationControl> &notificationControl =
+               std::nullopt,
+           const std::optional<PacketLossRate> &maximumPacketLossRateDl =
+               std::nullopt,
+           const std::optional<PacketLossRate> &maximumPacketLossRateUl =
+               std::nullopt);
+  bool get(long &maximumFlowBitRateDl, long &maximumFlowBitRateUl,
+           long &guaranteedFlowBitRateDl, long &guaranteedFlowBitRateUl,
+           std::optional<NotificationControl> &notificationControl,
+           std::optional<PacketLossRate> &maximumPacketLossRateDl,
+           std::optional<PacketLossRate> &maximumPacketLossRateUl) const;
 
-  bool encode(Ngap_GBR_QosInformation_t&) const;
-  bool decode(const Ngap_GBR_QosInformation_t&);
+  bool encode(Ngap_GBR_QosInformation_t &) const;
+  bool decode(const Ngap_GBR_QosInformation_t &);
 
- private:
-  long m_MaximumFlowBitRateDl;                               // Mandatory
-  long m_MaximumFlowBitRateUl;                               // Mandatory
-  long m_GuaranteedFlowBitRateDl;                            // Mandatory
-  long m_GuaranteedFlowBitRateUl;                            // Mandatory
-  std::optional<NotificationControl> m_NotificationControl;  // Optional
-  std::optional<PacketLossRate> m_MaximumPacketLossRateDl;   // Optional
-  std::optional<PacketLossRate> m_MaximumPacketLossRateUl;   // Optional
+private:
+  long m_MaximumFlowBitRateDl;                              // Mandatory
+  long m_MaximumFlowBitRateUl;                              // Mandatory
+  long m_GuaranteedFlowBitRateDl;                           // Mandatory
+  long m_GuaranteedFlowBitRateUl;                           // Mandatory
+  std::optional<NotificationControl> m_NotificationControl; // Optional
+  std::optional<PacketLossRate> m_MaximumPacketLossRateDl;  // Optional
+  std::optional<PacketLossRate> m_MaximumPacketLossRateUl;  // Optional
 };
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

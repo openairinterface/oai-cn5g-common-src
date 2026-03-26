@@ -20,7 +20,7 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_RedundantQosFlowIndicator {
-  Ngap_RedundantQosFlowIndicator_true  = 0,
+  Ngap_RedundantQosFlowIndicator_true = 0,
   Ngap_RedundantQosFlowIndicator_false = 1
 } e_Ngap_RedundantQosFlowIndicator;
 

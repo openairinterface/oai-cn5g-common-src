@@ -16,7 +16,7 @@ extern "C" {
 namespace oai::ngap {
 
 class PduSessionResourceNotifyReleasedTransfer {
- public:
+public:
   PduSessionResourceNotifyReleasedTransfer();
   virtual ~PduSessionResourceNotifyReleasedTransfer();
 
@@ -29,16 +29,16 @@ class PduSessionResourceNotifyReleasedTransfer {
   long getChoiceOfCause() const;
   long getCause() const;
 
-  int encode(uint8_t* buf, int bufSize);
-  bool decode(uint8_t* buf, int bufSize);
+  int encode(uint8_t *buf, int bufSize);
+  bool decode(uint8_t *buf, int bufSize);
 
- private:
-  Ngap_PDUSessionResourceNotifyReleasedTransfer_t*
-      m_PduSessionResourceNotifyReleasedTransferIe;
+private:
+  Ngap_PDUSessionResourceNotifyReleasedTransfer_t
+      *m_PduSessionResourceNotifyReleasedTransferIe;
 
-  Cause m_CauseValue;  // Mandatory
+  Cause m_CauseValue; // Mandatory
   // TODO: Secondary RAT Usage Information
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

@@ -18,28 +18,28 @@ namespace oai::model::smf {
 using namespace oai::model::common;
 
 VsmfUpdateData::VsmfUpdateData() {
-  m_SessionAmbrIsSet               = false;
+  m_SessionAmbrIsSet = false;
   m_QosFlowsAddModRequestListIsSet = false;
-  m_QosFlowsRelRequestListIsSet    = false;
-  m_EpsBearerInfoIsSet             = false;
-  m_AssignEbiListIsSet             = false;
-  m_RevokeEbiListIsSet             = false;
-  m_ModifiedEbiListIsSet           = false;
-  m_Pti                            = 0;
-  m_PtiIsSet                       = false;
-  m_N1SmInfoToUeIsSet              = false;
-  m_AlwaysOnGranted                = false;
-  m_AlwaysOnGrantedIsSet           = false;
-  m_HsmfPduSessionUri              = "";
-  m_HsmfPduSessionUriIsSet         = false;
-  m_SupportedFeatures              = "";
-  m_SupportedFeaturesIsSet         = false;
-  m_CauseIsSet                     = false;
-  m_N1smCause                      = "";
-  m_N1smCauseIsSet                 = false;
-  m_BackOffTimer                   = 0;
-  m_BackOffTimerIsSet              = false;
-  m_MaReleaseIndIsSet              = false;
+  m_QosFlowsRelRequestListIsSet = false;
+  m_EpsBearerInfoIsSet = false;
+  m_AssignEbiListIsSet = false;
+  m_RevokeEbiListIsSet = false;
+  m_ModifiedEbiListIsSet = false;
+  m_Pti = 0;
+  m_PtiIsSet = false;
+  m_N1SmInfoToUeIsSet = false;
+  m_AlwaysOnGranted = false;
+  m_AlwaysOnGrantedIsSet = false;
+  m_HsmfPduSessionUri = "";
+  m_HsmfPduSessionUriIsSet = false;
+  m_SupportedFeatures = "";
+  m_SupportedFeaturesIsSet = false;
+  m_CauseIsSet = false;
+  m_N1smCause = "";
+  m_N1smCauseIsSet = false;
+  m_BackOffTimer = 0;
+  m_BackOffTimerIsSet = false;
+  m_MaReleaseIndIsSet = false;
 }
 
 VsmfUpdateData::~VsmfUpdateData() {}
@@ -48,32 +48,44 @@ void VsmfUpdateData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const VsmfUpdateData& o) {
-  j                      = nlohmann::json();
+void to_json(nlohmann::json &j, const VsmfUpdateData &o) {
+  j = nlohmann::json();
   j["requestIndication"] = o.m_RequestIndication;
-  if (o.sessionAmbrIsSet()) j["sessionAmbr"] = o.m_SessionAmbr;
+  if (o.sessionAmbrIsSet())
+    j["sessionAmbr"] = o.m_SessionAmbr;
   if (o.qosFlowsAddModRequestListIsSet())
     j["qosFlowsAddModRequestList"] = o.m_QosFlowsAddModRequestList;
   if (o.qosFlowsRelRequestListIsSet())
     j["qosFlowsRelRequestList"] = o.m_QosFlowsRelRequestList;
-  if (o.epsBearerInfoIsSet()) j["epsBearerInfo"] = o.m_EpsBearerInfo;
-  if (o.assignEbiListIsSet()) j["assignEbiList"] = o.m_AssignEbiList;
-  if (o.revokeEbiListIsSet()) j["revokeEbiList"] = o.m_RevokeEbiList;
-  if (o.modifiedEbiListIsSet()) j["modifiedEbiList"] = o.m_ModifiedEbiList;
-  if (o.ptiIsSet()) j["pti"] = o.m_Pti;
-  if (o.n1SmInfoToUeIsSet()) j["n1SmInfoToUe"] = o.m_N1SmInfoToUe;
-  if (o.alwaysOnGrantedIsSet()) j["alwaysOnGranted"] = o.m_AlwaysOnGranted;
+  if (o.epsBearerInfoIsSet())
+    j["epsBearerInfo"] = o.m_EpsBearerInfo;
+  if (o.assignEbiListIsSet())
+    j["assignEbiList"] = o.m_AssignEbiList;
+  if (o.revokeEbiListIsSet())
+    j["revokeEbiList"] = o.m_RevokeEbiList;
+  if (o.modifiedEbiListIsSet())
+    j["modifiedEbiList"] = o.m_ModifiedEbiList;
+  if (o.ptiIsSet())
+    j["pti"] = o.m_Pti;
+  if (o.n1SmInfoToUeIsSet())
+    j["n1SmInfoToUe"] = o.m_N1SmInfoToUe;
+  if (o.alwaysOnGrantedIsSet())
+    j["alwaysOnGranted"] = o.m_AlwaysOnGranted;
   if (o.hsmfPduSessionUriIsSet())
     j["hsmfPduSessionUri"] = o.m_HsmfPduSessionUri;
   if (o.supportedFeaturesIsSet())
     j["supportedFeatures"] = o.m_SupportedFeatures;
-  if (o.causeIsSet()) j["cause"] = o.m_Cause;
-  if (o.n1smCauseIsSet()) j["n1smCause"] = o.m_N1smCause;
-  if (o.backOffTimerIsSet()) j["backOffTimer"] = o.m_BackOffTimer;
-  if (o.maReleaseIndIsSet()) j["maReleaseInd"] = o.m_MaReleaseInd;
+  if (o.causeIsSet())
+    j["cause"] = o.m_Cause;
+  if (o.n1smCauseIsSet())
+    j["n1smCause"] = o.m_N1smCause;
+  if (o.backOffTimerIsSet())
+    j["backOffTimer"] = o.m_BackOffTimer;
+  if (o.maReleaseIndIsSet())
+    j["maReleaseInd"] = o.m_MaReleaseInd;
 }
 
-void from_json(const nlohmann::json& j, VsmfUpdateData& o) {
+void from_json(const nlohmann::json &j, VsmfUpdateData &o) {
   j.at("requestIndication").get_to(o.m_RequestIndication);
   if (j.find("sessionAmbr") != j.end()) {
     j.at("sessionAmbr").get_to(o.m_SessionAmbr);
@@ -144,23 +156,17 @@ void from_json(const nlohmann::json& j, VsmfUpdateData& o) {
 RequestIndication VsmfUpdateData::getRequestIndication() const {
   return m_RequestIndication;
 }
-void VsmfUpdateData::setRequestIndication(RequestIndication const& value) {
+void VsmfUpdateData::setRequestIndication(RequestIndication const &value) {
   m_RequestIndication = value;
 }
-Ambr VsmfUpdateData::getSessionAmbr() const {
-  return m_SessionAmbr;
-}
-void VsmfUpdateData::setSessionAmbr(Ambr const& value) {
-  m_SessionAmbr      = value;
+Ambr VsmfUpdateData::getSessionAmbr() const { return m_SessionAmbr; }
+void VsmfUpdateData::setSessionAmbr(Ambr const &value) {
+  m_SessionAmbr = value;
   m_SessionAmbrIsSet = true;
 }
-bool VsmfUpdateData::sessionAmbrIsSet() const {
-  return m_SessionAmbrIsSet;
-}
-void VsmfUpdateData::unsetSessionAmbr() {
-  m_SessionAmbrIsSet = false;
-}
-std::vector<QosFlowAddModifyRequestItem>&
+bool VsmfUpdateData::sessionAmbrIsSet() const { return m_SessionAmbrIsSet; }
+void VsmfUpdateData::unsetSessionAmbr() { m_SessionAmbrIsSet = false; }
+std::vector<QosFlowAddModifyRequestItem> &
 VsmfUpdateData::getQosFlowsAddModRequestList() {
   return m_QosFlowsAddModRequestList;
 }
@@ -170,7 +176,7 @@ bool VsmfUpdateData::qosFlowsAddModRequestListIsSet() const {
 void VsmfUpdateData::unsetQosFlowsAddModRequestList() {
   m_QosFlowsAddModRequestListIsSet = false;
 }
-std::vector<QosFlowReleaseRequestItem>&
+std::vector<QosFlowReleaseRequestItem> &
 VsmfUpdateData::getQosFlowsRelRequestList() {
   return m_QosFlowsRelRequestList;
 }
@@ -180,86 +186,58 @@ bool VsmfUpdateData::qosFlowsRelRequestListIsSet() const {
 void VsmfUpdateData::unsetQosFlowsRelRequestList() {
   m_QosFlowsRelRequestListIsSet = false;
 }
-std::vector<EpsBearerInfo>& VsmfUpdateData::getEpsBearerInfo() {
+std::vector<EpsBearerInfo> &VsmfUpdateData::getEpsBearerInfo() {
   return m_EpsBearerInfo;
 }
-bool VsmfUpdateData::epsBearerInfoIsSet() const {
-  return m_EpsBearerInfoIsSet;
-}
-void VsmfUpdateData::unsetEpsBearerInfo() {
-  m_EpsBearerInfoIsSet = false;
-}
-std::vector<int32_t>& VsmfUpdateData::getAssignEbiList() {
+bool VsmfUpdateData::epsBearerInfoIsSet() const { return m_EpsBearerInfoIsSet; }
+void VsmfUpdateData::unsetEpsBearerInfo() { m_EpsBearerInfoIsSet = false; }
+std::vector<int32_t> &VsmfUpdateData::getAssignEbiList() {
   return m_AssignEbiList;
 }
-bool VsmfUpdateData::assignEbiListIsSet() const {
-  return m_AssignEbiListIsSet;
-}
-void VsmfUpdateData::unsetAssignEbiList() {
-  m_AssignEbiListIsSet = false;
-}
-std::vector<int32_t>& VsmfUpdateData::getRevokeEbiList() {
+bool VsmfUpdateData::assignEbiListIsSet() const { return m_AssignEbiListIsSet; }
+void VsmfUpdateData::unsetAssignEbiList() { m_AssignEbiListIsSet = false; }
+std::vector<int32_t> &VsmfUpdateData::getRevokeEbiList() {
   return m_RevokeEbiList;
 }
-bool VsmfUpdateData::revokeEbiListIsSet() const {
-  return m_RevokeEbiListIsSet;
-}
-void VsmfUpdateData::unsetRevokeEbiList() {
-  m_RevokeEbiListIsSet = false;
-}
-std::vector<EbiArpMapping>& VsmfUpdateData::getModifiedEbiList() {
+bool VsmfUpdateData::revokeEbiListIsSet() const { return m_RevokeEbiListIsSet; }
+void VsmfUpdateData::unsetRevokeEbiList() { m_RevokeEbiListIsSet = false; }
+std::vector<EbiArpMapping> &VsmfUpdateData::getModifiedEbiList() {
   return m_ModifiedEbiList;
 }
 bool VsmfUpdateData::modifiedEbiListIsSet() const {
   return m_ModifiedEbiListIsSet;
 }
-void VsmfUpdateData::unsetModifiedEbiList() {
-  m_ModifiedEbiListIsSet = false;
-}
-int32_t VsmfUpdateData::getPti() const {
-  return m_Pti;
-}
+void VsmfUpdateData::unsetModifiedEbiList() { m_ModifiedEbiListIsSet = false; }
+int32_t VsmfUpdateData::getPti() const { return m_Pti; }
 void VsmfUpdateData::setPti(int32_t const value) {
-  m_Pti      = value;
+  m_Pti = value;
   m_PtiIsSet = true;
 }
-bool VsmfUpdateData::ptiIsSet() const {
-  return m_PtiIsSet;
-}
-void VsmfUpdateData::unsetPti() {
-  m_PtiIsSet = false;
-}
+bool VsmfUpdateData::ptiIsSet() const { return m_PtiIsSet; }
+void VsmfUpdateData::unsetPti() { m_PtiIsSet = false; }
 RefToBinaryData VsmfUpdateData::getN1SmInfoToUe() const {
   return m_N1SmInfoToUe;
 }
-void VsmfUpdateData::setN1SmInfoToUe(RefToBinaryData const& value) {
-  m_N1SmInfoToUe      = value;
+void VsmfUpdateData::setN1SmInfoToUe(RefToBinaryData const &value) {
+  m_N1SmInfoToUe = value;
   m_N1SmInfoToUeIsSet = true;
 }
-bool VsmfUpdateData::n1SmInfoToUeIsSet() const {
-  return m_N1SmInfoToUeIsSet;
-}
-void VsmfUpdateData::unsetN1SmInfoToUe() {
-  m_N1SmInfoToUeIsSet = false;
-}
-bool VsmfUpdateData::isAlwaysOnGranted() const {
-  return m_AlwaysOnGranted;
-}
+bool VsmfUpdateData::n1SmInfoToUeIsSet() const { return m_N1SmInfoToUeIsSet; }
+void VsmfUpdateData::unsetN1SmInfoToUe() { m_N1SmInfoToUeIsSet = false; }
+bool VsmfUpdateData::isAlwaysOnGranted() const { return m_AlwaysOnGranted; }
 void VsmfUpdateData::setAlwaysOnGranted(bool const value) {
-  m_AlwaysOnGranted      = value;
+  m_AlwaysOnGranted = value;
   m_AlwaysOnGrantedIsSet = true;
 }
 bool VsmfUpdateData::alwaysOnGrantedIsSet() const {
   return m_AlwaysOnGrantedIsSet;
 }
-void VsmfUpdateData::unsetAlwaysOnGranted() {
-  m_AlwaysOnGrantedIsSet = false;
-}
+void VsmfUpdateData::unsetAlwaysOnGranted() { m_AlwaysOnGrantedIsSet = false; }
 std::string VsmfUpdateData::getHsmfPduSessionUri() const {
   return m_HsmfPduSessionUri;
 }
-void VsmfUpdateData::setHsmfPduSessionUri(std::string const& value) {
-  m_HsmfPduSessionUri      = value;
+void VsmfUpdateData::setHsmfPduSessionUri(std::string const &value) {
+  m_HsmfPduSessionUri = value;
   m_HsmfPduSessionUriIsSet = true;
 }
 bool VsmfUpdateData::hsmfPduSessionUriIsSet() const {
@@ -271,8 +249,8 @@ void VsmfUpdateData::unsetHsmfPduSessionUri() {
 std::string VsmfUpdateData::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
-void VsmfUpdateData::setSupportedFeatures(std::string const& value) {
-  m_SupportedFeatures      = value;
+void VsmfUpdateData::setSupportedFeatures(std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool VsmfUpdateData::supportedFeaturesIsSet() const {
@@ -281,57 +259,35 @@ bool VsmfUpdateData::supportedFeaturesIsSet() const {
 void VsmfUpdateData::unsetSupportedFeatures() {
   m_SupportedFeaturesIsSet = false;
 }
-Cause VsmfUpdateData::getCause() const {
-  return m_Cause;
-}
-void VsmfUpdateData::setCause(Cause const& value) {
-  m_Cause      = value;
+Cause VsmfUpdateData::getCause() const { return m_Cause; }
+void VsmfUpdateData::setCause(Cause const &value) {
+  m_Cause = value;
   m_CauseIsSet = true;
 }
-bool VsmfUpdateData::causeIsSet() const {
-  return m_CauseIsSet;
-}
-void VsmfUpdateData::unsetCause() {
-  m_CauseIsSet = false;
-}
-std::string VsmfUpdateData::getN1smCause() const {
-  return m_N1smCause;
-}
-void VsmfUpdateData::setN1smCause(std::string const& value) {
-  m_N1smCause      = value;
+bool VsmfUpdateData::causeIsSet() const { return m_CauseIsSet; }
+void VsmfUpdateData::unsetCause() { m_CauseIsSet = false; }
+std::string VsmfUpdateData::getN1smCause() const { return m_N1smCause; }
+void VsmfUpdateData::setN1smCause(std::string const &value) {
+  m_N1smCause = value;
   m_N1smCauseIsSet = true;
 }
-bool VsmfUpdateData::n1smCauseIsSet() const {
-  return m_N1smCauseIsSet;
-}
-void VsmfUpdateData::unsetN1smCause() {
-  m_N1smCauseIsSet = false;
-}
-int32_t VsmfUpdateData::getBackOffTimer() const {
-  return m_BackOffTimer;
-}
+bool VsmfUpdateData::n1smCauseIsSet() const { return m_N1smCauseIsSet; }
+void VsmfUpdateData::unsetN1smCause() { m_N1smCauseIsSet = false; }
+int32_t VsmfUpdateData::getBackOffTimer() const { return m_BackOffTimer; }
 void VsmfUpdateData::setBackOffTimer(int32_t const value) {
-  m_BackOffTimer      = value;
+  m_BackOffTimer = value;
   m_BackOffTimerIsSet = true;
 }
-bool VsmfUpdateData::backOffTimerIsSet() const {
-  return m_BackOffTimerIsSet;
-}
-void VsmfUpdateData::unsetBackOffTimer() {
-  m_BackOffTimerIsSet = false;
-}
+bool VsmfUpdateData::backOffTimerIsSet() const { return m_BackOffTimerIsSet; }
+void VsmfUpdateData::unsetBackOffTimer() { m_BackOffTimerIsSet = false; }
 MaReleaseIndication VsmfUpdateData::getMaReleaseInd() const {
   return m_MaReleaseInd;
 }
-void VsmfUpdateData::setMaReleaseInd(MaReleaseIndication const& value) {
-  m_MaReleaseInd      = value;
+void VsmfUpdateData::setMaReleaseInd(MaReleaseIndication const &value) {
+  m_MaReleaseInd = value;
   m_MaReleaseIndIsSet = true;
 }
-bool VsmfUpdateData::maReleaseIndIsSet() const {
-  return m_MaReleaseIndIsSet;
-}
-void VsmfUpdateData::unsetMaReleaseInd() {
-  m_MaReleaseIndIsSet = false;
-}
+bool VsmfUpdateData::maReleaseIndIsSet() const { return m_MaReleaseIndIsSet; }
+void VsmfUpdateData::unsetMaReleaseInd() { m_MaReleaseIndIsSet = false; }
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

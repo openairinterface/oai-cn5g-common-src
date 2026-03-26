@@ -20,8 +20,8 @@
 #define UeRegStatusUpdateReqData_H_
 
 #include "UeContextTransferStatus.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::amf {
 
@@ -29,7 +29,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class UeRegStatusUpdateReqData {
- public:
+public:
   UeRegStatusUpdateReqData();
   virtual ~UeRegStatusUpdateReqData();
 
@@ -42,11 +42,11 @@ class UeRegStatusUpdateReqData {
   ///
   /// </summary>
   UeContextTransferStatus getTransferStatus() const;
-  void setTransferStatus(UeContextTransferStatus const& value);
+  void setTransferStatus(UeContextTransferStatus const &value);
   /// <summary>
   ///
   /// </summary>
-  std::vector<int32_t>& getToReleaseSessionList();
+  std::vector<int32_t> &getToReleaseSessionList();
   bool toReleaseSessionListIsSet() const;
   void unsetToReleaseSessionList();
   /// <summary>
@@ -57,10 +57,10 @@ class UeRegStatusUpdateReqData {
   bool pcfReselectedIndIsSet() const;
   void unsetPcfReselectedInd();
 
-  friend void to_json(nlohmann::json& j, const UeRegStatusUpdateReqData& o);
-  friend void from_json(const nlohmann::json& j, UeRegStatusUpdateReqData& o);
+  friend void to_json(nlohmann::json &j, const UeRegStatusUpdateReqData &o);
+  friend void from_json(const nlohmann::json &j, UeRegStatusUpdateReqData &o);
 
- protected:
+protected:
   UeContextTransferStatus m_TransferStatus;
 
   std::vector<int32_t> m_ToReleaseSessionList;
@@ -69,6 +69,6 @@ class UeRegStatusUpdateReqData {
   bool m_PcfReselectedIndIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* UeRegStatusUpdateReqData_H_ */

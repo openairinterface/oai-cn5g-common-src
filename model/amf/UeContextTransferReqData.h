@@ -19,12 +19,12 @@
 #ifndef UeContextTransferReqData_H_
 #define UeContextTransferReqData_H_
 
-#include "TransferReason.h"
-#include "N1MessageContainer.h"
-#include <string>
-#include "PlmnId.h"
 #include "AccessType.h"
+#include "N1MessageContainer.h"
+#include "PlmnId.h"
+#include "TransferReason.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::amf {
 
@@ -32,7 +32,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class UeContextTransferReqData {
- public:
+public:
   UeContextTransferReqData();
   virtual ~UeContextTransferReqData();
 
@@ -45,38 +45,38 @@ class UeContextTransferReqData {
   ///
   /// </summary>
   TransferReason getReason() const;
-  void setReason(TransferReason const& value);
+  void setReason(TransferReason const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::AccessType getAccessType() const;
-  void setAccessType(oai::model::common::AccessType const& value);
+  void setAccessType(oai::model::common::AccessType const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::PlmnId getPlmnId() const;
-  void setPlmnId(oai::model::common::PlmnId const& value);
+  void setPlmnId(oai::model::common::PlmnId const &value);
   bool plmnIdIsSet() const;
   void unsetPlmnId();
   /// <summary>
   ///
   /// </summary>
   N1MessageContainer getRegRequest() const;
-  void setRegRequest(N1MessageContainer const& value);
+  void setRegRequest(N1MessageContainer const &value);
   bool regRequestIsSet() const;
   void unsetRegRequest();
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
 
-  friend void to_json(nlohmann::json& j, const UeContextTransferReqData& o);
-  friend void from_json(const nlohmann::json& j, UeContextTransferReqData& o);
+  friend void to_json(nlohmann::json &j, const UeContextTransferReqData &o);
+  friend void from_json(const nlohmann::json &j, UeContextTransferReqData &o);
 
- protected:
+protected:
   TransferReason m_Reason;
 
   oai::model::common::AccessType m_AccessType;
@@ -89,6 +89,6 @@ class UeContextTransferReqData {
   bool m_SupportedFeaturesIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* UeContextTransferReqData_H_ */

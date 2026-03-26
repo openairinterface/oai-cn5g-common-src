@@ -21,8 +21,8 @@
 
 #include "DnnUpfInfoItem.h"
 #include "Snssai.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::nrf {
 
@@ -30,7 +30,7 @@ namespace oai::model::nrf {
 /// Set of parameters supported by UPF for a given S-NSSAI
 /// </summary>
 class SnssaiUpfInfoItem {
- public:
+public:
   SnssaiUpfInfoItem();
   virtual ~SnssaiUpfInfoItem() = default;
 
@@ -44,16 +44,16 @@ class SnssaiUpfInfoItem {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const SnssaiUpfInfoItem& rhs) const;
-  bool operator!=(const SnssaiUpfInfoItem& rhs) const;
+  bool operator==(const SnssaiUpfInfoItem &rhs) const;
+  bool operator!=(const SnssaiUpfInfoItem &rhs) const;
 
   /////////////////////////////////////////////
   /// SnssaiUpfInfoItem members
@@ -62,13 +62,13 @@ class SnssaiUpfInfoItem {
   ///
   /// </summary>
   oai::model::common::Snssai getSNssai() const;
-  void setSNssai(oai::model::common::Snssai const& value);
+  void setSNssai(oai::model::common::Snssai const &value);
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::nrf::DnnUpfInfoItem> getDnnUpfInfoList() const;
-  void setDnnUpfInfoList(
-      std::vector<oai::model::nrf::DnnUpfInfoItem> const& value);
+  void
+  setDnnUpfInfoList(std::vector<oai::model::nrf::DnnUpfInfoItem> const &value);
   /// <summary>
   ///
   /// </summary>
@@ -77,12 +77,12 @@ class SnssaiUpfInfoItem {
   bool redundantTransportIsSet() const;
   void unsetRedundantTransport();
 
-  friend void to_json(nlohmann::json& j, const SnssaiUpfInfoItem& o);
-  friend void from_json(const nlohmann::json& j, SnssaiUpfInfoItem& o);
+  friend void to_json(nlohmann::json &j, const SnssaiUpfInfoItem &o);
+  friend void from_json(const nlohmann::json &j, SnssaiUpfInfoItem &o);
 
   [[nodiscard]] std::string to_string(int indent_level) const;
 
- protected:
+protected:
   oai::model::common::Snssai m_SNssai;
 
   std::vector<oai::model::nrf::DnnUpfInfoItem> m_DnnUpfInfoList;
@@ -91,6 +91,6 @@ class SnssaiUpfInfoItem {
   bool m_RedundantTransportIsSet;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* SnssaiUpfInfoItem_H_ */

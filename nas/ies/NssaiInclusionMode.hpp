@@ -8,12 +8,12 @@
 #include "Type1NasIeFormatTv.hpp"
 
 constexpr uint8_t kNssaiInclusionModeLength = 1;
-constexpr auto kNssaiInclusionModeIeName    = "NSSAI Inclusion Mode";
+constexpr auto kNssaiInclusionModeIeName = "NSSAI Inclusion Mode";
 
 namespace oai::nas {
 
 class NssaiInclusionMode : public Type1NasIeFormatTv {
- public:
+public:
   NssaiInclusionMode();
   NssaiInclusionMode(uint8_t value);
   virtual ~NssaiInclusionMode();
@@ -23,9 +23,9 @@ class NssaiInclusionMode : public Type1NasIeFormatTv {
   void SetValue(uint8_t value);
   uint8_t GetValue() const;
 
- private:
+private:
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

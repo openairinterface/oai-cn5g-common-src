@@ -20,8 +20,8 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_M1ReportingTrigger {
-  Ngap_M1ReportingTrigger_periodic                  = 0,
-  Ngap_M1ReportingTrigger_a2eventtriggered          = 1,
+  Ngap_M1ReportingTrigger_periodic = 0,
+  Ngap_M1ReportingTrigger_a2eventtriggered = 1,
   Ngap_M1ReportingTrigger_a2eventtriggered_periodic = 2
   /*
    * Enumeration is extensible

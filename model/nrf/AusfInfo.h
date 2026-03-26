@@ -20,9 +20,9 @@
 #define AusfInfo_H_
 
 #include "SupiRange.h"
+#include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
-#include <nlohmann/json.hpp>
 
 namespace oai::model::nrf {
 
@@ -30,7 +30,7 @@ namespace oai::model::nrf {
 ///
 /// </summary>
 class AusfInfo {
- public:
+public:
   AusfInfo();
   virtual ~AusfInfo();
 
@@ -43,28 +43,28 @@ class AusfInfo {
   ///
   /// </summary>
   std::string getGroupId() const;
-  void setGroupId(std::string const& value);
+  void setGroupId(std::string const &value);
   bool groupIdIsSet() const;
   void unsetGroupId();
   /// <summary>
   ///
   /// </summary>
-  std::vector<SupiRange>& getSupiRanges();
-  void setSupiRanges(std::vector<SupiRange> const& value);
+  std::vector<SupiRange> &getSupiRanges();
+  void setSupiRanges(std::vector<SupiRange> const &value);
   bool supiRangesIsSet() const;
   void unsetSupiRanges();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getRoutingIndicators();
-  void setRoutingIndicators(std::vector<std::string> const& value);
+  std::vector<std::string> &getRoutingIndicators();
+  void setRoutingIndicators(std::vector<std::string> const &value);
   bool routingIndicatorsIsSet() const;
   void unsetRoutingIndicators();
 
-  friend void to_json(nlohmann::json& j, const AusfInfo& o);
-  friend void from_json(const nlohmann::json& j, AusfInfo& o);
+  friend void to_json(nlohmann::json &j, const AusfInfo &o);
+  friend void from_json(const nlohmann::json &j, AusfInfo &o);
 
- protected:
+protected:
   std::string m_GroupId;
   bool m_GroupIdIsSet;
   std::vector<SupiRange> m_SupiRanges;
@@ -73,6 +73,6 @@ class AusfInfo {
   bool m_RoutingIndicatorsIsSet;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* AusfInfo_H_ */

@@ -31,8 +31,8 @@ asn_TYPE_member_t asn_MBR_Ngap_PagingAttemptInformation_1[] = {
      "pagingAttemptCount"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_PagingAttemptInformation, intendedNumberOfPagingAttempts),
+     offsetof(struct Ngap_PagingAttemptInformation,
+              intendedNumberOfPagingAttempts),
      (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_IntendedNumberOfPagingAttempts,

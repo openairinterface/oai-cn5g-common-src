@@ -11,9 +11,8 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 DeregistrationRequestUeTerminated::DeregistrationRequestUeTerminated()
-    : ie_header_(
-          k5gsMobilityManagementMessages, kPlain5gsMessage,
-          kDeregistrationRequestUeTerminated) {}
+    : ie_header_(k5gsMobilityManagementMessages, kPlain5gsMessage,
+                 kDeregistrationRequestUeTerminated) {}
 
 //------------------------------------------------------------------------------
 DeregistrationRequestUeTerminated::~DeregistrationRequestUeTerminated() {}
@@ -23,7 +22,7 @@ uint32_t DeregistrationRequestUeTerminated::GetLength() const {
   uint32_t msg_len = 0;
   msg_len += ie_header_.GetLength();
   // msg_len += ie_deregistration_type_.GetIeLength();
-  msg_len += 1;  // 1/2 for De-registration type + 1/2 for Spare half octet
+  msg_len += 1; // 1/2 for De-registration type + 1/2 for Spare half octet
   if (ie_5gmm_cause_.has_value())
     msg_len += ie_5gmm_cause_.value().GetIeLength();
   if (ie_t3346_value_.has_value())
@@ -48,7 +47,7 @@ void DeregistrationRequestUeTerminated::SetDeregistrationType(
 
 //------------------------------------------------------------------------------
 void DeregistrationRequestUeTerminated::SetDeregistrationType(
-    const _5gs_deregistration_type_t& type) {
+    const _5gs_deregistration_type_t &type) {
   ie_deregistration_type_.Set(type);
 }
 
@@ -58,8 +57,8 @@ void DeregistrationRequestUeTerminated::Set5gmmCause(uint8_t value) {
 }
 
 //------------------------------------------------------------------------------
-std::optional<_5gmmCause> DeregistrationRequestUeTerminated::Get5gmmCause()
-    const {
+std::optional<_5gmmCause>
+DeregistrationRequestUeTerminated::Get5gmmCause() const {
   return ie_5gmm_cause_;
 }
 
@@ -69,14 +68,14 @@ void DeregistrationRequestUeTerminated::SetT3346Value(uint8_t value) {
 }
 
 //------------------------------------------------------------------------------
-std::optional<GprsTimer2> DeregistrationRequestUeTerminated::GetT3346Value()
-    const {
+std::optional<GprsTimer2>
+DeregistrationRequestUeTerminated::GetT3346Value() const {
   return ie_t3346_value_;
 }
 
 //------------------------------------------------------------------------------
 void DeregistrationRequestUeTerminated::SetRejectedNssai(
-    const std::vector<RejectedSNssai>& nssai) {
+    const std::vector<RejectedSNssai> &nssai) {
   if (nssai.size() > 0) {
     ie_rejected_nssai_ = std::make_optional<RejectedNssai>(kIeiRejectedNssaiDr);
     ie_rejected_nssai_.value().SetRejectedSNssais(nssai);
@@ -89,11 +88,11 @@ DeregistrationRequestUeTerminated::GetRejectedNssai() const {
 }
 
 //------------------------------------------------------------------------------
-int DeregistrationRequestUeTerminated::Encode(uint8_t* buf, int len) {
+int DeregistrationRequestUeTerminated::Encode(uint8_t *buf, int len) {
   oai::logger::logger_common::nas().debug(
       "Encoding DeregistrationRequestUeTerminated message");
 
-  int encoded_size    = 0;
+  int encoded_size = 0;
   int encoded_ie_size = 0;
 
   // Header
@@ -110,8 +109,8 @@ int DeregistrationRequestUeTerminated::Encode(uint8_t* buf, int len) {
   if ((encoded_ie_size == KEncodeDecodeError) or (encoded_ie_size != 0)) {
     return KEncodeDecodeError;
   }
-  encoded_size++;  // 1/2 octet for Deregistration Type, 1/2 for Spare half
-                   // octet
+  encoded_size++; // 1/2 octet for Deregistration Type, 1/2 for Spare half
+                  // octet
 
   // 5GMM Cause
   if ((encoded_ie_size = NasHelper::Encode(
@@ -139,11 +138,11 @@ int DeregistrationRequestUeTerminated::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int DeregistrationRequestUeTerminated::Decode(uint8_t* buf, int len) {
+int DeregistrationRequestUeTerminated::Decode(uint8_t *buf, int len) {
   oai::logger::logger_common::nas().debug(
       "Decoding DeregistrationRequestUeTerminated message");
 
-  int decoded_size    = 0;
+  int decoded_size = 0;
   int decoded_ie_size = 0;
 
   // Header
@@ -160,8 +159,8 @@ int DeregistrationRequestUeTerminated::Decode(uint8_t* buf, int len) {
   if ((decoded_ie_size == KEncodeDecodeError) or (decoded_ie_size != 0)) {
     return KEncodeDecodeError;
   }
-  decoded_size++;  // 1/2 octet for De-registration Type, 1/2 for Spare half
-                   // octet
+  decoded_size++; // 1/2 octet for De-registration Type, 1/2 for Spare half
+                  // octet
 
   // Decode other IEs
   uint8_t octet = 0x00;
@@ -169,50 +168,50 @@ int DeregistrationRequestUeTerminated::Decode(uint8_t* buf, int len) {
   oai::logger::logger_common::nas().debug("First option IEI (0x%x)", octet);
   while ((octet != 0x0)) {
     switch (octet) {
-      case kIei5gmmCause: {
-        oai::logger::logger_common::nas().debug(
-            "Decoding IEI 0x%x", kIei5gmmCause);
-        if ((decoded_ie_size = NasHelper::Decode(
-                 ie_5gmm_cause_, buf, len, decoded_size, true)) ==
-            KEncodeDecodeError) {
-          return KEncodeDecodeError;
-        }
-        DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
-      } break;
+    case kIei5gmmCause: {
+      oai::logger::logger_common::nas().debug("Decoding IEI 0x%x",
+                                              kIei5gmmCause);
+      if ((decoded_ie_size = NasHelper::Decode(ie_5gmm_cause_, buf, len,
+                                               decoded_size, true)) ==
+          KEncodeDecodeError) {
+        return KEncodeDecodeError;
+      }
+      DECODE_U8_VALUE(buf, octet, decoded_size, len);
+      oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
+    } break;
 
-      case kIeiGprsTimer2T3346: {
-        oai::logger::logger_common::nas().debug(
-            "Decoding IEI 0x%x", kIeiGprsTimer2T3346);
-        if ((decoded_ie_size = NasHelper::Decode(
-                 ie_t3346_value_, kIeiGprsTimer2T3346, buf, len, decoded_size,
-                 true)) == KEncodeDecodeError) {
-          return KEncodeDecodeError;
-        }
-        DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
-      } break;
+    case kIeiGprsTimer2T3346: {
+      oai::logger::logger_common::nas().debug("Decoding IEI 0x%x",
+                                              kIeiGprsTimer2T3346);
+      if ((decoded_ie_size =
+               NasHelper::Decode(ie_t3346_value_, kIeiGprsTimer2T3346, buf, len,
+                                 decoded_size, true)) == KEncodeDecodeError) {
+        return KEncodeDecodeError;
+      }
+      DECODE_U8_VALUE(buf, octet, decoded_size, len);
+      oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
+    } break;
 
-      case kIeiRejectedNssaiDr: {
-        oai::logger::logger_common::nas().debug(
-            "Decoding IEI 0x%x", kIeiRejectedNssaiDr);
-        if ((decoded_ie_size = NasHelper::Decode(
-                 ie_rejected_nssai_, kIeiRejectedNssaiDr, buf, len,
-                 decoded_size, true)) == KEncodeDecodeError) {
-          return KEncodeDecodeError;
-        }
-        DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
-      } break;
+    case kIeiRejectedNssaiDr: {
+      oai::logger::logger_common::nas().debug("Decoding IEI 0x%x",
+                                              kIeiRejectedNssaiDr);
+      if ((decoded_ie_size = NasHelper::Decode(
+               ie_rejected_nssai_, kIeiRejectedNssaiDr, buf, len, decoded_size,
+               true)) == KEncodeDecodeError) {
+        return KEncodeDecodeError;
+      }
+      DECODE_U8_VALUE(buf, octet, decoded_size, len);
+      oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
+    } break;
 
-        // TODO: CagInformationList ie_cag_information_list ; //Optional
+      // TODO: CagInformationList ie_cag_information_list ; //Optional
 
-      default: {
-        oai::logger::logger_common::nas().warn(
-            "Unknown IEI 0x%x, stop decoding...", octet);
-        // Stop decoding
-        octet = 0x00;
-      } break;
+    default: {
+      oai::logger::logger_common::nas().warn(
+          "Unknown IEI 0x%x, stop decoding...", octet);
+      // Stop decoding
+      octet = 0x00;
+    } break;
     }
   }
 

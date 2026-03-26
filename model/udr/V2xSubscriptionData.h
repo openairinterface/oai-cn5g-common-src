@@ -34,7 +34,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class V2xSubscriptionData {
- public:
+public:
   V2xSubscriptionData();
   virtual ~V2xSubscriptionData();
 
@@ -47,35 +47,35 @@ class V2xSubscriptionData {
   ///
   /// </summary>
   oai::model::common::NrV2xAuth getNrV2xServicesAuth() const;
-  void setNrV2xServicesAuth(oai::model::common::NrV2xAuth const& value);
+  void setNrV2xServicesAuth(oai::model::common::NrV2xAuth const &value);
   bool nrV2xServicesAuthIsSet() const;
   void unsetNrV2xServicesAuth();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::LteV2xAuth getLteV2xServicesAuth() const;
-  void setLteV2xServicesAuth(oai::model::common::LteV2xAuth const& value);
+  void setLteV2xServicesAuth(oai::model::common::LteV2xAuth const &value);
   bool lteV2xServicesAuthIsSet() const;
   void unsetLteV2xServicesAuth();
   /// <summary>
   ///
   /// </summary>
   std::string getNrUePc5Ambr() const;
-  void setNrUePc5Ambr(std::string const& value);
+  void setNrUePc5Ambr(std::string const &value);
   bool nrUePc5AmbrIsSet() const;
   void unsetNrUePc5Ambr();
   /// <summary>
   ///
   /// </summary>
   std::string getLtePc5Ambr() const;
-  void setLtePc5Ambr(std::string const& value);
+  void setLtePc5Ambr(std::string const &value);
   bool ltePc5AmbrIsSet() const;
   void unsetLtePc5Ambr();
 
-  friend void to_json(nlohmann::json& j, const V2xSubscriptionData& o);
-  friend void from_json(const nlohmann::json& j, V2xSubscriptionData& o);
+  friend void to_json(nlohmann::json &j, const V2xSubscriptionData &o);
+  friend void from_json(const nlohmann::json &j, V2xSubscriptionData &o);
 
- protected:
+protected:
   oai::model::common::NrV2xAuth m_NrV2xServicesAuth;
   bool m_NrV2xServicesAuthIsSet;
   oai::model::common::LteV2xAuth m_LteV2xServicesAuth;
@@ -86,6 +86,6 @@ class V2xSubscriptionData {
   bool m_LtePc5AmbrIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* V2xSubscriptionData_H_ */

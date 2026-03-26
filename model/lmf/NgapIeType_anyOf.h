@@ -27,7 +27,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class NgapIeType_anyOf {
- public:
+public:
   NgapIeType_anyOf();
   virtual ~NgapIeType_anyOf() = default;
 
@@ -65,16 +65,16 @@ class NgapIeType_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const NgapIeType_anyOf& rhs) const;
-  bool operator!=(const NgapIeType_anyOf& rhs) const;
+  bool operator==(const NgapIeType_anyOf &rhs) const;
+  bool operator!=(const NgapIeType_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// NgapIeType_anyOf members
@@ -82,14 +82,14 @@ class NgapIeType_anyOf {
   NgapIeType_anyOf::eNgapIeType_anyOf getValue() const;
   void setValue(NgapIeType_anyOf::eNgapIeType_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const NgapIeType_anyOf& o);
-  friend void from_json(const nlohmann::json& j, NgapIeType_anyOf& o);
+  friend void to_json(nlohmann::json &j, const NgapIeType_anyOf &o);
+  friend void from_json(const nlohmann::json &j, NgapIeType_anyOf &o);
 
- protected:
+protected:
   NgapIeType_anyOf::eNgapIeType_anyOf m_value =
       NgapIeType_anyOf::eNgapIeType_anyOf::INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* NgapIeType_anyOf_H_ */

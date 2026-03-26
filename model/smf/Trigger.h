@@ -29,7 +29,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class Trigger {
- public:
+public:
   Trigger();
   virtual ~Trigger();
 
@@ -42,12 +42,12 @@ class Trigger {
   ///
   /// </summary>
   TriggerType getTriggerType() const;
-  void setTriggerType(TriggerType const& value);
+  void setTriggerType(TriggerType const &value);
   /// <summary>
   ///
   /// </summary>
   TriggerCategory getTriggerCategory() const;
-  void setTriggerCategory(TriggerCategory const& value);
+  void setTriggerCategory(TriggerCategory const &value);
   /// <summary>
   ///
   /// </summary>
@@ -77,10 +77,10 @@ class Trigger {
   bool maxNumberOfcccIsSet() const;
   void unsetMaxNumberOfccc();
 
-  friend void to_json(nlohmann::json& j, const Trigger& o);
-  friend void from_json(const nlohmann::json& j, Trigger& o);
+  friend void to_json(nlohmann::json &j, const Trigger &o);
+  friend void from_json(const nlohmann::json &j, Trigger &o);
 
- protected:
+protected:
   TriggerType m_TriggerType;
 
   TriggerCategory m_TriggerCategory;
@@ -95,6 +95,6 @@ class Trigger {
   bool m_MaxNumberOfcccIsSet;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* Trigger_H_ */

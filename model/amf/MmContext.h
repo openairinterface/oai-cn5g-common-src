@@ -19,14 +19,14 @@
 #ifndef MmContext_H_
 #define MmContext_H_
 
-#include "ExpectedUeBehavior.h"
-#include "NssaiMapping.h"
-#include <string>
-#include "NasSecurityMode.h"
-#include "Snssai.h"
-#include <vector>
 #include "AccessType.h"
+#include "ExpectedUeBehavior.h"
+#include "NasSecurityMode.h"
+#include "NssaiMapping.h"
+#include "Snssai.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::amf {
 
@@ -34,7 +34,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class MmContext {
- public:
+public:
   MmContext();
   virtual ~MmContext();
 
@@ -47,12 +47,12 @@ class MmContext {
   ///
   /// </summary>
   oai::model::common::AccessType getAccessType() const;
-  void setAccessType(oai::model::common::AccessType const& value);
+  void setAccessType(oai::model::common::AccessType const &value);
   /// <summary>
   ///
   /// </summary>
   NasSecurityMode getNasSecurityMode() const;
-  void setNasSecurityMode(NasSecurityMode const& value);
+  void setNasSecurityMode(NasSecurityMode const &value);
   bool nasSecurityModeIsSet() const;
   void unsetNasSecurityMode();
   /// <summary>
@@ -73,46 +73,46 @@ class MmContext {
   ///
   /// </summary>
   std::string getUeSecurityCapability() const;
-  void setUeSecurityCapability(std::string const& value);
+  void setUeSecurityCapability(std::string const &value);
   bool ueSecurityCapabilityIsSet() const;
   void unsetUeSecurityCapability();
   /// <summary>
   ///
   /// </summary>
   std::string getS1UeNetworkCapability() const;
-  void setS1UeNetworkCapability(std::string const& value);
+  void setS1UeNetworkCapability(std::string const &value);
   bool s1UeNetworkCapabilityIsSet() const;
   void unsetS1UeNetworkCapability();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::Snssai>& getAllowedNssai();
+  std::vector<oai::model::common::Snssai> &getAllowedNssai();
   bool allowedNssaiIsSet() const;
   void unsetAllowedNssai();
   /// <summary>
   ///
   /// </summary>
-  std::vector<NssaiMapping>& getNssaiMappingList();
+  std::vector<NssaiMapping> &getNssaiMappingList();
   bool nssaiMappingListIsSet() const;
   void unsetNssaiMappingList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getNsInstanceList();
+  std::vector<std::string> &getNsInstanceList();
   bool nsInstanceListIsSet() const;
   void unsetNsInstanceList();
   /// <summary>
   ///
   /// </summary>
   ExpectedUeBehavior getExpectedUEbehavior() const;
-  void setExpectedUEbehavior(ExpectedUeBehavior const& value);
+  void setExpectedUEbehavior(ExpectedUeBehavior const &value);
   bool expectedUEbehaviorIsSet() const;
   void unsetExpectedUEbehavior();
 
-  friend void to_json(nlohmann::json& j, const MmContext& o);
-  friend void from_json(const nlohmann::json& j, MmContext& o);
+  friend void to_json(nlohmann::json &j, const MmContext &o);
+  friend void from_json(const nlohmann::json &j, MmContext &o);
 
- protected:
+protected:
   oai::model::common::AccessType m_AccessType;
 
   NasSecurityMode m_NasSecurityMode;
@@ -135,6 +135,6 @@ class MmContext {
   bool m_ExpectedUEbehaviorIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* MmContext_H_ */

@@ -27,12 +27,12 @@ void RequestedRuleDataType::validate() const {
   }
 }
 
-bool RequestedRuleDataType::validate(std::stringstream& msg) const {
+bool RequestedRuleDataType::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool RequestedRuleDataType::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool RequestedRuleDataType::validate(std::stringstream &msg,
+                                     const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "RequestedRuleDataType" : pathPrefix;
@@ -43,22 +43,22 @@ bool RequestedRuleDataType::validate(
   return success;
 }
 
-bool RequestedRuleDataType::operator==(const RequestedRuleDataType& rhs) const {
+bool RequestedRuleDataType::operator==(const RequestedRuleDataType &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool RequestedRuleDataType::operator!=(const RequestedRuleDataType& rhs) const {
+bool RequestedRuleDataType::operator!=(const RequestedRuleDataType &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const RequestedRuleDataType& o) {
+void to_json(nlohmann::json &j, const RequestedRuleDataType &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, RequestedRuleDataType& o) {
+void from_json(const nlohmann::json &j, RequestedRuleDataType &o) {
   from_json(j, o.m_value);
 }
 
@@ -80,4 +80,4 @@ void RequestedRuleDataType::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

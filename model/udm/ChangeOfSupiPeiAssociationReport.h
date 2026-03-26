@@ -22,8 +22,8 @@
 #ifndef ChangeOfSupiPeiAssociationReport_H_
 #define ChangeOfSupiPeiAssociationReport_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::udm {
 
@@ -31,7 +31,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class ChangeOfSupiPeiAssociationReport {
- public:
+public:
   ChangeOfSupiPeiAssociationReport();
   virtual ~ChangeOfSupiPeiAssociationReport() = default;
 
@@ -45,10 +45,10 @@ class ChangeOfSupiPeiAssociationReport {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const ChangeOfSupiPeiAssociationReport& rhs) const;
-  bool operator!=(const ChangeOfSupiPeiAssociationReport& rhs) const;
+  bool operator==(const ChangeOfSupiPeiAssociationReport &rhs) const;
+  bool operator!=(const ChangeOfSupiPeiAssociationReport &rhs) const;
 
   /////////////////////////////////////////////
   /// ChangeOfSupiPeiAssociationReport members
@@ -57,21 +57,21 @@ class ChangeOfSupiPeiAssociationReport {
   ///
   /// </summary>
   std::string getNewPei() const;
-  void setNewPei(std::string const& value);
+  void setNewPei(std::string const &value);
 
-  friend void to_json(
-      nlohmann::json& j, const ChangeOfSupiPeiAssociationReport& o);
-  friend void from_json(
-      const nlohmann::json& j, ChangeOfSupiPeiAssociationReport& o);
+  friend void to_json(nlohmann::json &j,
+                      const ChangeOfSupiPeiAssociationReport &o);
+  friend void from_json(const nlohmann::json &j,
+                        ChangeOfSupiPeiAssociationReport &o);
 
- protected:
+protected:
   std::string m_NewPei;
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* ChangeOfSupiPeiAssociationReport_H_ */

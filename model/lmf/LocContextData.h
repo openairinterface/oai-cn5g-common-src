@@ -20,20 +20,20 @@
 #define LocContextData_H_
 
 #include "AreaEventInfo.h"
-#include "Ncgi.h"
-#include <string>
-#include "PeriodicEventInfo.h"
-#include "EventReportMessage.h"
-#include <vector>
 #include "Ecgi.h"
-#include "UELocationInfo.h"
-#include "LdrType.h"
+#include "EventReportMessage.h"
 #include "EventReportingStatus.h"
+#include "Guami.h"
+#include "LdrType.h"
 #include "LocationQoS.h"
 #include "MotionEventInfo.h"
-#include "Guami.h"
+#include "Ncgi.h"
+#include "PeriodicEventInfo.h"
 #include "SupportedGADShapes.h"
+#include "UELocationInfo.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::lmf {
 
@@ -41,7 +41,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class LocContextData {
- public:
+public:
   LocContextData();
   virtual ~LocContextData() = default;
 
@@ -55,16 +55,16 @@ class LocContextData {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const LocContextData& rhs) const;
-  bool operator!=(const LocContextData& rhs) const;
+  bool operator==(const LocContextData &rhs) const;
+  bool operator!=(const LocContextData &rhs) const;
 
   /////////////////////////////////////////////
   /// LocContextData members
@@ -73,91 +73,91 @@ class LocContextData {
   ///
   /// </summary>
   std::string getAmfId() const;
-  void setAmfId(std::string const& value);
+  void setAmfId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::lmf::LocationQoS getLocationQoS() const;
-  void setLocationQoS(oai::model::lmf::LocationQoS const& value);
+  void setLocationQoS(oai::model::lmf::LocationQoS const &value);
   bool locationQoSIsSet() const;
   void unsetLocationQoS();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::lmf::SupportedGADShapes> getSupportedGADShapes()
-      const;
+  std::vector<oai::model::lmf::SupportedGADShapes>
+  getSupportedGADShapes() const;
   void setSupportedGADShapes(
-      std::vector<oai::model::lmf::SupportedGADShapes> const& value);
+      std::vector<oai::model::lmf::SupportedGADShapes> const &value);
   bool supportedGADShapesIsSet() const;
   void unsetSupportedGADShapes();
   /// <summary>
   ///
   /// </summary>
   std::string getSupi() const;
-  void setSupi(std::string const& value);
+  void setSupi(std::string const &value);
   bool supiIsSet() const;
   void unsetSupi();
   /// <summary>
   ///
   /// </summary>
   std::string getGpsi() const;
-  void setGpsi(std::string const& value);
+  void setGpsi(std::string const &value);
   bool gpsiIsSet() const;
   void unsetGpsi();
   /// <summary>
   ///
   /// </summary>
   oai::model::lmf::LdrType getLdrType() const;
-  void setLdrType(oai::model::lmf::LdrType const& value);
+  void setLdrType(oai::model::lmf::LdrType const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getHgmlcCallBackURI() const;
-  void setHgmlcCallBackURI(std::string const& value);
+  void setHgmlcCallBackURI(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getLdrReference() const;
-  void setLdrReference(std::string const& value);
+  void setLdrReference(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::lmf::PeriodicEventInfo getPeriodicEventInfo() const;
-  void setPeriodicEventInfo(oai::model::lmf::PeriodicEventInfo const& value);
+  void setPeriodicEventInfo(oai::model::lmf::PeriodicEventInfo const &value);
   bool periodicEventInfoIsSet() const;
   void unsetPeriodicEventInfo();
   /// <summary>
   ///
   /// </summary>
   oai::model::lmf::AreaEventInfo getAreaEventInfo() const;
-  void setAreaEventInfo(oai::model::lmf::AreaEventInfo const& value);
+  void setAreaEventInfo(oai::model::lmf::AreaEventInfo const &value);
   bool areaEventInfoIsSet() const;
   void unsetAreaEventInfo();
   /// <summary>
   ///
   /// </summary>
   oai::model::lmf::MotionEventInfo getMotionEventInfo() const;
-  void setMotionEventInfo(oai::model::lmf::MotionEventInfo const& value);
+  void setMotionEventInfo(oai::model::lmf::MotionEventInfo const &value);
   bool motionEventInfoIsSet() const;
   void unsetMotionEventInfo();
   /// <summary>
   ///
   /// </summary>
   oai::model::lmf::EventReportMessage getEventReportMessage() const;
-  void setEventReportMessage(oai::model::lmf::EventReportMessage const& value);
+  void setEventReportMessage(oai::model::lmf::EventReportMessage const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::lmf::EventReportingStatus getEventReportingStatus() const;
-  void setEventReportingStatus(
-      oai::model::lmf::EventReportingStatus const& value);
+  void
+  setEventReportingStatus(oai::model::lmf::EventReportingStatus const &value);
   bool eventReportingStatusIsSet() const;
   void unsetEventReportingStatus();
   /// <summary>
   ///
   /// </summary>
   oai::model::lmf::UELocationInfo getUeLocationInfo() const;
-  void setUeLocationInfo(oai::model::lmf::UELocationInfo const& value);
+  void setUeLocationInfo(oai::model::lmf::UELocationInfo const &value);
   bool ueLocationInfoIsSet() const;
   void unsetUeLocationInfo();
   /// <summary>
@@ -171,35 +171,35 @@ class LocContextData {
   ///
   /// </summary>
   oai::model::common::Ecgi getEcgi() const;
-  void setEcgi(oai::model::common::Ecgi const& value);
+  void setEcgi(oai::model::common::Ecgi const &value);
   bool ecgiIsSet() const;
   void unsetEcgi();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ncgi getNcgi() const;
-  void setNcgi(oai::model::common::Ncgi const& value);
+  void setNcgi(oai::model::common::Ncgi const &value);
   bool ncgiIsSet() const;
   void unsetNcgi();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Guami getGuami() const;
-  void setGuami(oai::model::common::Guami const& value);
+  void setGuami(oai::model::common::Guami const &value);
   bool guamiIsSet() const;
   void unsetGuami();
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
 
-  friend void to_json(nlohmann::json& j, const LocContextData& o);
-  friend void from_json(const nlohmann::json& j, LocContextData& o);
+  friend void to_json(nlohmann::json &j, const LocContextData &o);
+  friend void from_json(const nlohmann::json &j, LocContextData &o);
 
- protected:
+protected:
   std::string m_AmfId;
 
   oai::model::lmf::LocationQoS m_LocationQoS;
@@ -240,6 +240,6 @@ class LocContextData {
   bool m_SupportedFeaturesIsSet;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* LocContextData_H_ */

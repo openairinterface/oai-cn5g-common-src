@@ -30,7 +30,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class ReachabilityForSmsConfiguration {
- public:
+public:
   ReachabilityForSmsConfiguration();
   virtual ~ReachabilityForSmsConfiguration();
 
@@ -39,14 +39,14 @@ class ReachabilityForSmsConfiguration {
   /////////////////////////////////////////////
   /// ReachabilityForSmsConfiguration members
 
-  friend void to_json(
-      nlohmann::json& j, const ReachabilityForSmsConfiguration& o);
-  friend void from_json(
-      const nlohmann::json& j, ReachabilityForSmsConfiguration& o);
+  friend void to_json(nlohmann::json &j,
+                      const ReachabilityForSmsConfiguration &o);
+  friend void from_json(const nlohmann::json &j,
+                        ReachabilityForSmsConfiguration &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* ReachabilityForSmsConfiguration_H_ */

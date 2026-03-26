@@ -16,50 +16,50 @@
 namespace oai::model::amf {
 
 UeContext::UeContext() {
-  m_Supi                          = "";
-  m_SupiIsSet                     = false;
-  m_SupiUnauthInd                 = false;
-  m_SupiUnauthIndIsSet            = false;
-  m_GpsiListIsSet                 = false;
-  m_Pei                           = "";
-  m_PeiIsSet                      = false;
-  m_UdmGroupId                    = "";
-  m_UdmGroupIdIsSet               = false;
-  m_AusfGroupId                   = "";
-  m_AusfGroupIdIsSet              = false;
-  m_RoutingIndicator              = "";
-  m_RoutingIndicatorIsSet         = false;
-  m_GroupListIsSet                = false;
-  m_DrxParameterIsSet             = false;
-  m_SubRfsp                       = 0;
-  m_SubRfspIsSet                  = false;
-  m_UsedRfsp                      = 0;
-  m_UsedRfspIsSet                 = false;
-  m_SubUeAmbrIsSet                = false;
-  m_SmsSupportIsSet               = false;
-  m_SmsfId                        = "";
-  m_SmsfIdIsSet                   = false;
-  m_SeafDataIsSet                 = false;
-  m__5gMmCapabilityIsSet          = false;
-  m_PcfId                         = "";
-  m_PcfIdIsSet                    = false;
-  m_PcfAmPolicyUri                = "";
-  m_PcfAmPolicyUriIsSet           = false;
-  m_AmPolicyReqTriggerListIsSet   = false;
-  m_PcfUePolicyUri                = "";
-  m_PcfUePolicyUriIsSet           = false;
-  m_UePolicyReqTriggerListIsSet   = false;
-  m_HpcfId                        = "";
-  m_HpcfIdIsSet                   = false;
-  m_RestrictedRatListIsSet        = false;
-  m_ForbiddenAreaListIsSet        = false;
-  m_ServiceAreaRestrictionIsSet   = false;
+  m_Supi = "";
+  m_SupiIsSet = false;
+  m_SupiUnauthInd = false;
+  m_SupiUnauthIndIsSet = false;
+  m_GpsiListIsSet = false;
+  m_Pei = "";
+  m_PeiIsSet = false;
+  m_UdmGroupId = "";
+  m_UdmGroupIdIsSet = false;
+  m_AusfGroupId = "";
+  m_AusfGroupIdIsSet = false;
+  m_RoutingIndicator = "";
+  m_RoutingIndicatorIsSet = false;
+  m_GroupListIsSet = false;
+  m_DrxParameterIsSet = false;
+  m_SubRfsp = 0;
+  m_SubRfspIsSet = false;
+  m_UsedRfsp = 0;
+  m_UsedRfspIsSet = false;
+  m_SubUeAmbrIsSet = false;
+  m_SmsSupportIsSet = false;
+  m_SmsfId = "";
+  m_SmsfIdIsSet = false;
+  m_SeafDataIsSet = false;
+  m__5gMmCapabilityIsSet = false;
+  m_PcfId = "";
+  m_PcfIdIsSet = false;
+  m_PcfAmPolicyUri = "";
+  m_PcfAmPolicyUriIsSet = false;
+  m_AmPolicyReqTriggerListIsSet = false;
+  m_PcfUePolicyUri = "";
+  m_PcfUePolicyUriIsSet = false;
+  m_UePolicyReqTriggerListIsSet = false;
+  m_HpcfId = "";
+  m_HpcfIdIsSet = false;
+  m_RestrictedRatListIsSet = false;
+  m_ForbiddenAreaListIsSet = false;
+  m_ServiceAreaRestrictionIsSet = false;
   m_RestrictedCoreNwTypeListIsSet = false;
-  m_EventSubscriptionListIsSet    = false;
-  m_MmContextListIsSet            = false;
-  m_SessionContextListIsSet       = false;
-  m_TraceDataIsSet                = false;
-  m_RemainingServiceGapTimer      = 0;
+  m_EventSubscriptionListIsSet = false;
+  m_MmContextListIsSet = false;
+  m_SessionContextListIsSet = false;
+  m_TraceDataIsSet = false;
+  m_RemainingServiceGapTimer = 0;
   m_RemainingServiceGapTimerIsSet = false;
 }
 
@@ -69,32 +69,52 @@ void UeContext::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const UeContext& o) {
+void to_json(nlohmann::json &j, const UeContext &o) {
   j = nlohmann::json();
-  if (o.supiIsSet()) j["supi"] = o.m_Supi;
-  if (o.supiUnauthIndIsSet()) j["supiUnauthInd"] = o.m_SupiUnauthInd;
-  if (o.gpsiListIsSet()) j["gpsiList"] = o.m_GpsiList;
-  if (o.peiIsSet()) j["pei"] = o.m_Pei;
-  if (o.udmGroupIdIsSet()) j["udmGroupId"] = o.m_UdmGroupId;
-  if (o.ausfGroupIdIsSet()) j["ausfGroupId"] = o.m_AusfGroupId;
-  if (o.routingIndicatorIsSet()) j["routingIndicator"] = o.m_RoutingIndicator;
-  if (o.groupListIsSet()) j["groupList"] = o.m_GroupList;
-  if (o.drxParameterIsSet()) j["drxParameter"] = o.m_DrxParameter;
-  if (o.subRfspIsSet()) j["subRfsp"] = o.m_SubRfsp;
-  if (o.usedRfspIsSet()) j["usedRfsp"] = o.m_UsedRfsp;
-  if (o.subUeAmbrIsSet()) j["subUeAmbr"] = o.m_SubUeAmbr;
-  if (o.smsSupportIsSet()) j["smsSupport"] = o.m_SmsSupport;
-  if (o.smsfIdIsSet()) j["smsfId"] = o.m_SmsfId;
-  if (o.seafDataIsSet()) j["seafData"] = o.m_SeafData;
-  if (o._5gMmCapabilityIsSet()) j["5gMmCapability"] = o.m__5gMmCapability;
-  if (o.pcfIdIsSet()) j["pcfId"] = o.m_PcfId;
-  if (o.pcfAmPolicyUriIsSet()) j["pcfAmPolicyUri"] = o.m_PcfAmPolicyUri;
+  if (o.supiIsSet())
+    j["supi"] = o.m_Supi;
+  if (o.supiUnauthIndIsSet())
+    j["supiUnauthInd"] = o.m_SupiUnauthInd;
+  if (o.gpsiListIsSet())
+    j["gpsiList"] = o.m_GpsiList;
+  if (o.peiIsSet())
+    j["pei"] = o.m_Pei;
+  if (o.udmGroupIdIsSet())
+    j["udmGroupId"] = o.m_UdmGroupId;
+  if (o.ausfGroupIdIsSet())
+    j["ausfGroupId"] = o.m_AusfGroupId;
+  if (o.routingIndicatorIsSet())
+    j["routingIndicator"] = o.m_RoutingIndicator;
+  if (o.groupListIsSet())
+    j["groupList"] = o.m_GroupList;
+  if (o.drxParameterIsSet())
+    j["drxParameter"] = o.m_DrxParameter;
+  if (o.subRfspIsSet())
+    j["subRfsp"] = o.m_SubRfsp;
+  if (o.usedRfspIsSet())
+    j["usedRfsp"] = o.m_UsedRfsp;
+  if (o.subUeAmbrIsSet())
+    j["subUeAmbr"] = o.m_SubUeAmbr;
+  if (o.smsSupportIsSet())
+    j["smsSupport"] = o.m_SmsSupport;
+  if (o.smsfIdIsSet())
+    j["smsfId"] = o.m_SmsfId;
+  if (o.seafDataIsSet())
+    j["seafData"] = o.m_SeafData;
+  if (o._5gMmCapabilityIsSet())
+    j["5gMmCapability"] = o.m__5gMmCapability;
+  if (o.pcfIdIsSet())
+    j["pcfId"] = o.m_PcfId;
+  if (o.pcfAmPolicyUriIsSet())
+    j["pcfAmPolicyUri"] = o.m_PcfAmPolicyUri;
   if (o.amPolicyReqTriggerListIsSet())
     j["amPolicyReqTriggerList"] = o.m_AmPolicyReqTriggerList;
-  if (o.pcfUePolicyUriIsSet()) j["pcfUePolicyUri"] = o.m_PcfUePolicyUri;
+  if (o.pcfUePolicyUriIsSet())
+    j["pcfUePolicyUri"] = o.m_PcfUePolicyUri;
   if (o.uePolicyReqTriggerListIsSet())
     j["uePolicyReqTriggerList"] = o.m_UePolicyReqTriggerList;
-  if (o.hpcfIdIsSet()) j["hpcfId"] = o.m_HpcfId;
+  if (o.hpcfIdIsSet())
+    j["hpcfId"] = o.m_HpcfId;
   if (o.restrictedRatListIsSet())
     j["restrictedRatList"] = o.m_RestrictedRatList;
   if (o.forbiddenAreaListIsSet())
@@ -105,15 +125,17 @@ void to_json(nlohmann::json& j, const UeContext& o) {
     j["restrictedCoreNwTypeList"] = o.m_RestrictedCoreNwTypeList;
   if (o.eventSubscriptionListIsSet())
     j["eventSubscriptionList"] = o.m_EventSubscriptionList;
-  if (o.mmContextListIsSet()) j["mmContextList"] = o.m_MmContextList;
+  if (o.mmContextListIsSet())
+    j["mmContextList"] = o.m_MmContextList;
   if (o.sessionContextListIsSet())
     j["sessionContextList"] = o.m_SessionContextList;
-  if (o.traceDataIsSet()) j["traceData"] = o.m_TraceData;
+  if (o.traceDataIsSet())
+    j["traceData"] = o.m_TraceData;
   if (o.remainingServiceGapTimerIsSet())
     j["remainingServiceGapTimer"] = o.m_RemainingServiceGapTimer;
 }
 
-void from_json(const nlohmann::json& j, UeContext& o) {
+void from_json(const nlohmann::json &j, UeContext &o) {
   if (j.find("supi") != j.end()) {
     j.at("supi").get_to(o.m_Supi);
     o.m_SupiIsSet = true;
@@ -240,233 +262,129 @@ void from_json(const nlohmann::json& j, UeContext& o) {
   }
 }
 
-std::string UeContext::getSupi() const {
-  return m_Supi;
-}
-void UeContext::setSupi(std::string const& value) {
-  m_Supi      = value;
+std::string UeContext::getSupi() const { return m_Supi; }
+void UeContext::setSupi(std::string const &value) {
+  m_Supi = value;
   m_SupiIsSet = true;
 }
-bool UeContext::supiIsSet() const {
-  return m_SupiIsSet;
-}
-void UeContext::unsetSupi() {
-  m_SupiIsSet = false;
-}
-bool UeContext::isSupiUnauthInd() const {
-  return m_SupiUnauthInd;
-}
+bool UeContext::supiIsSet() const { return m_SupiIsSet; }
+void UeContext::unsetSupi() { m_SupiIsSet = false; }
+bool UeContext::isSupiUnauthInd() const { return m_SupiUnauthInd; }
 void UeContext::setSupiUnauthInd(bool const value) {
-  m_SupiUnauthInd      = value;
+  m_SupiUnauthInd = value;
   m_SupiUnauthIndIsSet = true;
 }
-bool UeContext::supiUnauthIndIsSet() const {
-  return m_SupiUnauthIndIsSet;
-}
-void UeContext::unsetSupiUnauthInd() {
-  m_SupiUnauthIndIsSet = false;
-}
-std::vector<std::string>& UeContext::getGpsiList() {
-  return m_GpsiList;
-}
-bool UeContext::gpsiListIsSet() const {
-  return m_GpsiListIsSet;
-}
-void UeContext::unsetGpsiList() {
-  m_GpsiListIsSet = false;
-}
-std::string UeContext::getPei() const {
-  return m_Pei;
-}
-void UeContext::setPei(std::string const& value) {
-  m_Pei      = value;
+bool UeContext::supiUnauthIndIsSet() const { return m_SupiUnauthIndIsSet; }
+void UeContext::unsetSupiUnauthInd() { m_SupiUnauthIndIsSet = false; }
+std::vector<std::string> &UeContext::getGpsiList() { return m_GpsiList; }
+bool UeContext::gpsiListIsSet() const { return m_GpsiListIsSet; }
+void UeContext::unsetGpsiList() { m_GpsiListIsSet = false; }
+std::string UeContext::getPei() const { return m_Pei; }
+void UeContext::setPei(std::string const &value) {
+  m_Pei = value;
   m_PeiIsSet = true;
 }
-bool UeContext::peiIsSet() const {
-  return m_PeiIsSet;
-}
-void UeContext::unsetPei() {
-  m_PeiIsSet = false;
-}
-std::string UeContext::getUdmGroupId() const {
-  return m_UdmGroupId;
-}
-void UeContext::setUdmGroupId(std::string const& value) {
-  m_UdmGroupId      = value;
+bool UeContext::peiIsSet() const { return m_PeiIsSet; }
+void UeContext::unsetPei() { m_PeiIsSet = false; }
+std::string UeContext::getUdmGroupId() const { return m_UdmGroupId; }
+void UeContext::setUdmGroupId(std::string const &value) {
+  m_UdmGroupId = value;
   m_UdmGroupIdIsSet = true;
 }
-bool UeContext::udmGroupIdIsSet() const {
-  return m_UdmGroupIdIsSet;
-}
-void UeContext::unsetUdmGroupId() {
-  m_UdmGroupIdIsSet = false;
-}
-std::string UeContext::getAusfGroupId() const {
-  return m_AusfGroupId;
-}
-void UeContext::setAusfGroupId(std::string const& value) {
-  m_AusfGroupId      = value;
+bool UeContext::udmGroupIdIsSet() const { return m_UdmGroupIdIsSet; }
+void UeContext::unsetUdmGroupId() { m_UdmGroupIdIsSet = false; }
+std::string UeContext::getAusfGroupId() const { return m_AusfGroupId; }
+void UeContext::setAusfGroupId(std::string const &value) {
+  m_AusfGroupId = value;
   m_AusfGroupIdIsSet = true;
 }
-bool UeContext::ausfGroupIdIsSet() const {
-  return m_AusfGroupIdIsSet;
-}
-void UeContext::unsetAusfGroupId() {
-  m_AusfGroupIdIsSet = false;
-}
+bool UeContext::ausfGroupIdIsSet() const { return m_AusfGroupIdIsSet; }
+void UeContext::unsetAusfGroupId() { m_AusfGroupIdIsSet = false; }
 std::string UeContext::getRoutingIndicator() const {
   return m_RoutingIndicator;
 }
-void UeContext::setRoutingIndicator(std::string const& value) {
-  m_RoutingIndicator      = value;
+void UeContext::setRoutingIndicator(std::string const &value) {
+  m_RoutingIndicator = value;
   m_RoutingIndicatorIsSet = true;
 }
 bool UeContext::routingIndicatorIsSet() const {
   return m_RoutingIndicatorIsSet;
 }
-void UeContext::unsetRoutingIndicator() {
-  m_RoutingIndicatorIsSet = false;
-}
-std::vector<std::string>& UeContext::getGroupList() {
-  return m_GroupList;
-}
-bool UeContext::groupListIsSet() const {
-  return m_GroupListIsSet;
-}
-void UeContext::unsetGroupList() {
-  m_GroupListIsSet = false;
-}
-std::string UeContext::getDrxParameter() const {
-  return m_DrxParameter;
-}
-void UeContext::setDrxParameter(std::string const& value) {
-  m_DrxParameter      = value;
+void UeContext::unsetRoutingIndicator() { m_RoutingIndicatorIsSet = false; }
+std::vector<std::string> &UeContext::getGroupList() { return m_GroupList; }
+bool UeContext::groupListIsSet() const { return m_GroupListIsSet; }
+void UeContext::unsetGroupList() { m_GroupListIsSet = false; }
+std::string UeContext::getDrxParameter() const { return m_DrxParameter; }
+void UeContext::setDrxParameter(std::string const &value) {
+  m_DrxParameter = value;
   m_DrxParameterIsSet = true;
 }
-bool UeContext::drxParameterIsSet() const {
-  return m_DrxParameterIsSet;
-}
-void UeContext::unsetDrxParameter() {
-  m_DrxParameterIsSet = false;
-}
-int32_t UeContext::getSubRfsp() const {
-  return m_SubRfsp;
-}
+bool UeContext::drxParameterIsSet() const { return m_DrxParameterIsSet; }
+void UeContext::unsetDrxParameter() { m_DrxParameterIsSet = false; }
+int32_t UeContext::getSubRfsp() const { return m_SubRfsp; }
 void UeContext::setSubRfsp(int32_t const value) {
-  m_SubRfsp      = value;
+  m_SubRfsp = value;
   m_SubRfspIsSet = true;
 }
-bool UeContext::subRfspIsSet() const {
-  return m_SubRfspIsSet;
-}
-void UeContext::unsetSubRfsp() {
-  m_SubRfspIsSet = false;
-}
-int32_t UeContext::getUsedRfsp() const {
-  return m_UsedRfsp;
-}
+bool UeContext::subRfspIsSet() const { return m_SubRfspIsSet; }
+void UeContext::unsetSubRfsp() { m_SubRfspIsSet = false; }
+int32_t UeContext::getUsedRfsp() const { return m_UsedRfsp; }
 void UeContext::setUsedRfsp(int32_t const value) {
-  m_UsedRfsp      = value;
+  m_UsedRfsp = value;
   m_UsedRfspIsSet = true;
 }
-bool UeContext::usedRfspIsSet() const {
-  return m_UsedRfspIsSet;
-}
-void UeContext::unsetUsedRfsp() {
-  m_UsedRfspIsSet = false;
-}
-oai::model::common::Ambr UeContext::getSubUeAmbr() const {
-  return m_SubUeAmbr;
-}
-void UeContext::setSubUeAmbr(oai::model::common::Ambr const& value) {
-  m_SubUeAmbr      = value;
+bool UeContext::usedRfspIsSet() const { return m_UsedRfspIsSet; }
+void UeContext::unsetUsedRfsp() { m_UsedRfspIsSet = false; }
+oai::model::common::Ambr UeContext::getSubUeAmbr() const { return m_SubUeAmbr; }
+void UeContext::setSubUeAmbr(oai::model::common::Ambr const &value) {
+  m_SubUeAmbr = value;
   m_SubUeAmbrIsSet = true;
 }
-bool UeContext::subUeAmbrIsSet() const {
-  return m_SubUeAmbrIsSet;
-}
-void UeContext::unsetSubUeAmbr() {
-  m_SubUeAmbrIsSet = false;
-}
-SmsSupport UeContext::getSmsSupport() const {
-  return m_SmsSupport;
-}
-void UeContext::setSmsSupport(SmsSupport const& value) {
-  m_SmsSupport      = value;
+bool UeContext::subUeAmbrIsSet() const { return m_SubUeAmbrIsSet; }
+void UeContext::unsetSubUeAmbr() { m_SubUeAmbrIsSet = false; }
+SmsSupport UeContext::getSmsSupport() const { return m_SmsSupport; }
+void UeContext::setSmsSupport(SmsSupport const &value) {
+  m_SmsSupport = value;
   m_SmsSupportIsSet = true;
 }
-bool UeContext::smsSupportIsSet() const {
-  return m_SmsSupportIsSet;
-}
-void UeContext::unsetSmsSupport() {
-  m_SmsSupportIsSet = false;
-}
-std::string UeContext::getSmsfId() const {
-  return m_SmsfId;
-}
-void UeContext::setSmsfId(std::string const& value) {
-  m_SmsfId      = value;
+bool UeContext::smsSupportIsSet() const { return m_SmsSupportIsSet; }
+void UeContext::unsetSmsSupport() { m_SmsSupportIsSet = false; }
+std::string UeContext::getSmsfId() const { return m_SmsfId; }
+void UeContext::setSmsfId(std::string const &value) {
+  m_SmsfId = value;
   m_SmsfIdIsSet = true;
 }
-bool UeContext::smsfIdIsSet() const {
-  return m_SmsfIdIsSet;
-}
-void UeContext::unsetSmsfId() {
-  m_SmsfIdIsSet = false;
-}
-SeafData UeContext::getSeafData() const {
-  return m_SeafData;
-}
-void UeContext::setSeafData(SeafData const& value) {
-  m_SeafData      = value;
+bool UeContext::smsfIdIsSet() const { return m_SmsfIdIsSet; }
+void UeContext::unsetSmsfId() { m_SmsfIdIsSet = false; }
+SeafData UeContext::getSeafData() const { return m_SeafData; }
+void UeContext::setSeafData(SeafData const &value) {
+  m_SeafData = value;
   m_SeafDataIsSet = true;
 }
-bool UeContext::seafDataIsSet() const {
-  return m_SeafDataIsSet;
-}
-void UeContext::unsetSeafData() {
-  m_SeafDataIsSet = false;
-}
-std::string UeContext::get5gMmCapability() const {
-  return m__5gMmCapability;
-}
-void UeContext::set5gMmCapability(std::string const& value) {
-  m__5gMmCapability      = value;
+bool UeContext::seafDataIsSet() const { return m_SeafDataIsSet; }
+void UeContext::unsetSeafData() { m_SeafDataIsSet = false; }
+std::string UeContext::get5gMmCapability() const { return m__5gMmCapability; }
+void UeContext::set5gMmCapability(std::string const &value) {
+  m__5gMmCapability = value;
   m__5gMmCapabilityIsSet = true;
 }
-bool UeContext::_5gMmCapabilityIsSet() const {
-  return m__5gMmCapabilityIsSet;
-}
-void UeContext::unset_5gMmCapability() {
-  m__5gMmCapabilityIsSet = false;
-}
-std::string UeContext::getPcfId() const {
-  return m_PcfId;
-}
-void UeContext::setPcfId(std::string const& value) {
-  m_PcfId      = value;
+bool UeContext::_5gMmCapabilityIsSet() const { return m__5gMmCapabilityIsSet; }
+void UeContext::unset_5gMmCapability() { m__5gMmCapabilityIsSet = false; }
+std::string UeContext::getPcfId() const { return m_PcfId; }
+void UeContext::setPcfId(std::string const &value) {
+  m_PcfId = value;
   m_PcfIdIsSet = true;
 }
-bool UeContext::pcfIdIsSet() const {
-  return m_PcfIdIsSet;
-}
-void UeContext::unsetPcfId() {
-  m_PcfIdIsSet = false;
-}
-std::string UeContext::getPcfAmPolicyUri() const {
-  return m_PcfAmPolicyUri;
-}
-void UeContext::setPcfAmPolicyUri(std::string const& value) {
-  m_PcfAmPolicyUri      = value;
+bool UeContext::pcfIdIsSet() const { return m_PcfIdIsSet; }
+void UeContext::unsetPcfId() { m_PcfIdIsSet = false; }
+std::string UeContext::getPcfAmPolicyUri() const { return m_PcfAmPolicyUri; }
+void UeContext::setPcfAmPolicyUri(std::string const &value) {
+  m_PcfAmPolicyUri = value;
   m_PcfAmPolicyUriIsSet = true;
 }
-bool UeContext::pcfAmPolicyUriIsSet() const {
-  return m_PcfAmPolicyUriIsSet;
-}
-void UeContext::unsetPcfAmPolicyUri() {
-  m_PcfAmPolicyUriIsSet = false;
-}
-std::vector<PolicyReqTrigger>& UeContext::getAmPolicyReqTriggerList() {
+bool UeContext::pcfAmPolicyUriIsSet() const { return m_PcfAmPolicyUriIsSet; }
+void UeContext::unsetPcfAmPolicyUri() { m_PcfAmPolicyUriIsSet = false; }
+std::vector<PolicyReqTrigger> &UeContext::getAmPolicyReqTriggerList() {
   return m_AmPolicyReqTriggerList;
 }
 bool UeContext::amPolicyReqTriggerListIsSet() const {
@@ -475,20 +393,14 @@ bool UeContext::amPolicyReqTriggerListIsSet() const {
 void UeContext::unsetAmPolicyReqTriggerList() {
   m_AmPolicyReqTriggerListIsSet = false;
 }
-std::string UeContext::getPcfUePolicyUri() const {
-  return m_PcfUePolicyUri;
-}
-void UeContext::setPcfUePolicyUri(std::string const& value) {
-  m_PcfUePolicyUri      = value;
+std::string UeContext::getPcfUePolicyUri() const { return m_PcfUePolicyUri; }
+void UeContext::setPcfUePolicyUri(std::string const &value) {
+  m_PcfUePolicyUri = value;
   m_PcfUePolicyUriIsSet = true;
 }
-bool UeContext::pcfUePolicyUriIsSet() const {
-  return m_PcfUePolicyUriIsSet;
-}
-void UeContext::unsetPcfUePolicyUri() {
-  m_PcfUePolicyUriIsSet = false;
-}
-std::vector<PolicyReqTrigger>& UeContext::getUePolicyReqTriggerList() {
+bool UeContext::pcfUePolicyUriIsSet() const { return m_PcfUePolicyUriIsSet; }
+void UeContext::unsetPcfUePolicyUri() { m_PcfUePolicyUriIsSet = false; }
+std::vector<PolicyReqTrigger> &UeContext::getUePolicyReqTriggerList() {
   return m_UePolicyReqTriggerList;
 }
 bool UeContext::uePolicyReqTriggerListIsSet() const {
@@ -497,44 +409,34 @@ bool UeContext::uePolicyReqTriggerListIsSet() const {
 void UeContext::unsetUePolicyReqTriggerList() {
   m_UePolicyReqTriggerListIsSet = false;
 }
-std::string UeContext::getHpcfId() const {
-  return m_HpcfId;
-}
-void UeContext::setHpcfId(std::string const& value) {
-  m_HpcfId      = value;
+std::string UeContext::getHpcfId() const { return m_HpcfId; }
+void UeContext::setHpcfId(std::string const &value) {
+  m_HpcfId = value;
   m_HpcfIdIsSet = true;
 }
-bool UeContext::hpcfIdIsSet() const {
-  return m_HpcfIdIsSet;
-}
-void UeContext::unsetHpcfId() {
-  m_HpcfIdIsSet = false;
-}
-std::vector<oai::model::common::RatType>& UeContext::getRestrictedRatList() {
+bool UeContext::hpcfIdIsSet() const { return m_HpcfIdIsSet; }
+void UeContext::unsetHpcfId() { m_HpcfIdIsSet = false; }
+std::vector<oai::model::common::RatType> &UeContext::getRestrictedRatList() {
   return m_RestrictedRatList;
 }
 bool UeContext::restrictedRatListIsSet() const {
   return m_RestrictedRatListIsSet;
 }
-void UeContext::unsetRestrictedRatList() {
-  m_RestrictedRatListIsSet = false;
-}
-std::vector<oai::model::common::Area>& UeContext::getForbiddenAreaList() {
+void UeContext::unsetRestrictedRatList() { m_RestrictedRatListIsSet = false; }
+std::vector<oai::model::common::Area> &UeContext::getForbiddenAreaList() {
   return m_ForbiddenAreaList;
 }
 bool UeContext::forbiddenAreaListIsSet() const {
   return m_ForbiddenAreaListIsSet;
 }
-void UeContext::unsetForbiddenAreaList() {
-  m_ForbiddenAreaListIsSet = false;
-}
+void UeContext::unsetForbiddenAreaList() { m_ForbiddenAreaListIsSet = false; }
 oai::model::common::ServiceAreaRestriction
 UeContext::getServiceAreaRestriction() const {
   return m_ServiceAreaRestriction;
 }
 void UeContext::setServiceAreaRestriction(
-    oai::model::common::ServiceAreaRestriction const& value) {
-  m_ServiceAreaRestriction      = value;
+    oai::model::common::ServiceAreaRestriction const &value) {
+  m_ServiceAreaRestriction = value;
   m_ServiceAreaRestrictionIsSet = true;
 }
 bool UeContext::serviceAreaRestrictionIsSet() const {
@@ -543,7 +445,7 @@ bool UeContext::serviceAreaRestrictionIsSet() const {
 void UeContext::unsetServiceAreaRestriction() {
   m_ServiceAreaRestrictionIsSet = false;
 }
-std::vector<oai::model::common::CoreNetworkType>&
+std::vector<oai::model::common::CoreNetworkType> &
 UeContext::getRestrictedCoreNwTypeList() {
   return m_RestrictedCoreNwTypeList;
 }
@@ -553,7 +455,7 @@ bool UeContext::restrictedCoreNwTypeListIsSet() const {
 void UeContext::unsetRestrictedCoreNwTypeList() {
   m_RestrictedCoreNwTypeListIsSet = false;
 }
-std::vector<AmfEventSubscription>& UeContext::getEventSubscriptionList() {
+std::vector<AmfEventSubscription> &UeContext::getEventSubscriptionList() {
   return m_EventSubscriptionList;
 }
 bool UeContext::eventSubscriptionListIsSet() const {
@@ -562,42 +464,32 @@ bool UeContext::eventSubscriptionListIsSet() const {
 void UeContext::unsetEventSubscriptionList() {
   m_EventSubscriptionListIsSet = false;
 }
-std::vector<MmContext>& UeContext::getMmContextList() {
+std::vector<MmContext> &UeContext::getMmContextList() {
   return m_MmContextList;
 }
-bool UeContext::mmContextListIsSet() const {
-  return m_MmContextListIsSet;
-}
-void UeContext::unsetMmContextList() {
-  m_MmContextListIsSet = false;
-}
-std::vector<PduSessionContext>& UeContext::getSessionContextList() {
+bool UeContext::mmContextListIsSet() const { return m_MmContextListIsSet; }
+void UeContext::unsetMmContextList() { m_MmContextListIsSet = false; }
+std::vector<PduSessionContext> &UeContext::getSessionContextList() {
   return m_SessionContextList;
 }
 bool UeContext::sessionContextListIsSet() const {
   return m_SessionContextListIsSet;
 }
-void UeContext::unsetSessionContextList() {
-  m_SessionContextListIsSet = false;
-}
+void UeContext::unsetSessionContextList() { m_SessionContextListIsSet = false; }
 oai::model::common::TraceData UeContext::getTraceData() const {
   return m_TraceData;
 }
-void UeContext::setTraceData(oai::model::common::TraceData const& value) {
-  m_TraceData      = value;
+void UeContext::setTraceData(oai::model::common::TraceData const &value) {
+  m_TraceData = value;
   m_TraceDataIsSet = true;
 }
-bool UeContext::traceDataIsSet() const {
-  return m_TraceDataIsSet;
-}
-void UeContext::unsetTraceData() {
-  m_TraceDataIsSet = false;
-}
+bool UeContext::traceDataIsSet() const { return m_TraceDataIsSet; }
+void UeContext::unsetTraceData() { m_TraceDataIsSet = false; }
 int32_t UeContext::getRemainingServiceGapTimer() const {
   return m_RemainingServiceGapTimer;
 }
 void UeContext::setRemainingServiceGapTimer(int32_t const value) {
-  m_RemainingServiceGapTimer      = value;
+  m_RemainingServiceGapTimer = value;
   m_RemainingServiceGapTimerIsSet = true;
 }
 bool UeContext::remainingServiceGapTimerIsSet() const {
@@ -607,4 +499,4 @@ void UeContext::unsetRemainingServiceGapTimer() {
   m_RemainingServiceGapTimerIsSet = false;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

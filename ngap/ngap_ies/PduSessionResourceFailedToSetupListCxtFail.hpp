@@ -16,22 +16,22 @@ extern "C" {
 namespace oai::ngap {
 
 class PduSessionResourceFailedToSetupListCxtFail {
- public:
+public:
   PduSessionResourceFailedToSetupListCxtFail();
   virtual ~PduSessionResourceFailedToSetupListCxtFail();
 
-  void set(const std::vector<PduSessionResourceFailedToSetupItemCxtFail>& list);
-  void get(std::vector<PduSessionResourceFailedToSetupItemCxtFail>& list) const;
+  void set(const std::vector<PduSessionResourceFailedToSetupItemCxtFail> &list);
+  void get(std::vector<PduSessionResourceFailedToSetupItemCxtFail> &list) const;
 
-  bool encode(Ngap_PDUSessionResourceFailedToSetupListCxtFail_t&
-                  pduSessionResourceFailedToSetupListCxtFail) const;
-  bool decode(const Ngap_PDUSessionResourceFailedToSetupListCxtFail_t&
-                  pduSessionResourceFailedToSetupListCxtFail);
+  bool encode(Ngap_PDUSessionResourceFailedToSetupListCxtFail_t
+                  &pduSessionResourceFailedToSetupListCxtFail) const;
+  bool decode(const Ngap_PDUSessionResourceFailedToSetupListCxtFail_t
+                  &pduSessionResourceFailedToSetupListCxtFail);
 
- private:
+private:
   std::vector<PduSessionResourceFailedToSetupItemCxtFail> m_ItemList;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

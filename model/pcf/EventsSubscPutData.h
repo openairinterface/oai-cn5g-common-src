@@ -21,42 +21,42 @@
 #ifndef EventsSubscPutData_H_
 #define EventsSubscPutData_H_
 
-#include "AfEventNotification.h"
-#include "QosNotificationControlInfo.h"
-#include "EventsNotification.h"
-#include "AccumulatedUsage.h"
 #include "AccNetChargingAddress.h"
-#include "PlmnIdNid.h"
-#include "Ipv6Prefix.h"
-#include "QosMonitoringInformation.h"
-#include "PortManagementContainer.h"
+#include "AccessNetChargingIdentifier.h"
+#include "AccessType.h"
+#include "AccumulatedUsage.h"
 #include "AdditionalAccessInfo.h"
-#include "EventsSubscReqData.h"
-#include "L4sSupport.h"
-#include "PdvMonitoringReport.h"
-#include "RequestedQosMonitoringParameter.h"
-#include "OutOfCreditInformation.h"
-#include "RatType.h"
-#include <string>
+#include "AfEventNotification.h"
+#include "AfEventSubscription.h"
+#include "AnGwAddress.h"
+#include "AppDetectionReport.h"
 #include "BatOffsetInfo.h"
 #include "BridgeManagementContainer.h"
-#include <vector>
-#include "AccessType.h"
-#include "AfEventSubscription.h"
-#include "AccessNetChargingIdentifier.h"
-#include "UsageThreshold.h"
-#include "ResourcesAllocationInfo.h"
-#include "AppDetectionReport.h"
+#include "EventsNotification.h"
+#include "EventsSubscReqData.h"
+#include "Ipv6Prefix.h"
+#include "L4sSupport.h"
 #include "NetLocAccessSupport.h"
+#include "OutOfCreditInformation.h"
+#include "PdvMonitoringReport.h"
+#include "PlmnIdNid.h"
+#include "PortManagementContainer.h"
+#include "QosMonitoringInformation.h"
 #include "QosMonitoringReport.h"
-#include "SatelliteBackhaulCategory.h"
-#include "UserLocation.h"
-#include "RedundantPduSessionInformation.h"
-#include "RequiredAccessInfo.h"
-#include "AnGwAddress.h"
-#include "SscMode.h"
+#include "QosNotificationControlInfo.h"
 #include "RanNasRelCause.h"
+#include "RatType.h"
+#include "RedundantPduSessionInformation.h"
+#include "RequestedQosMonitoringParameter.h"
+#include "RequiredAccessInfo.h"
+#include "ResourcesAllocationInfo.h"
+#include "SatelliteBackhaulCategory.h"
+#include "SscMode.h"
+#include "UsageThreshold.h"
+#include "UserLocation.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::pcf {
 
@@ -66,7 +66,7 @@ namespace oai::model::pcf {
 /// already met events.
 /// </summary>
 class EventsSubscPutData {
- public:
+public:
   EventsSubscPutData();
   virtual ~EventsSubscPutData() = default;
 
@@ -80,16 +80,16 @@ class EventsSubscPutData {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const EventsSubscPutData& rhs) const;
-  bool operator!=(const EventsSubscPutData& rhs) const;
+  bool operator==(const EventsSubscPutData &rhs) const;
+  bool operator!=(const EventsSubscPutData &rhs) const;
 
   /////////////////////////////////////////////
   /// EventsSubscPutData members
@@ -98,13 +98,13 @@ class EventsSubscPutData {
   ///
   /// </summary>
   std::vector<oai::model::pcf::AfEventSubscription> getEvents() const;
-  void setEvents(
-      std::vector<oai::model::pcf::AfEventSubscription> const& value);
+  void
+  setEvents(std::vector<oai::model::pcf::AfEventSubscription> const &value);
   /// <summary>
   /// String providing an URI formatted according to RFC 3986.
   /// </summary>
   std::string getNotifUri() const;
-  void setNotifUri(std::string const& value);
+  void setNotifUri(std::string const &value);
   bool notifUriIsSet() const;
   void unsetNotifUri();
   /// <summary>
@@ -113,22 +113,22 @@ class EventsSubscPutData {
   std::vector<oai::model::pcf::RequestedQosMonitoringParameter>
   getReqQosMonParams() const;
   void setReqQosMonParams(
-      std::vector<oai::model::pcf::RequestedQosMonitoringParameter> const&
-          value);
+      std::vector<oai::model::pcf::RequestedQosMonitoringParameter> const
+          &value);
   bool reqQosMonParamsIsSet() const;
   void unsetReqQosMonParams();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::QosMonitoringInformation getQosMon() const;
-  void setQosMon(oai::model::pcf::QosMonitoringInformation const& value);
+  void setQosMon(oai::model::pcf::QosMonitoringInformation const &value);
   bool qosMonIsSet() const;
   void unsetQosMon();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::QosMonitoringInformation getQosMonDatRate() const;
-  void setQosMonDatRate(oai::model::pcf::QosMonitoringInformation const& value);
+  void setQosMonDatRate(oai::model::pcf::QosMonitoringInformation const &value);
   bool qosMonDatRateIsSet() const;
   void unsetQosMonDatRate();
   /// <summary>
@@ -137,58 +137,58 @@ class EventsSubscPutData {
   std::vector<oai::model::pcf::RequestedQosMonitoringParameter>
   getPdvReqMonParams() const;
   void setPdvReqMonParams(
-      std::vector<oai::model::pcf::RequestedQosMonitoringParameter> const&
-          value);
+      std::vector<oai::model::pcf::RequestedQosMonitoringParameter> const
+          &value);
   bool pdvReqMonParamsIsSet() const;
   void unsetPdvReqMonParams();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::QosMonitoringInformation getPdvMon() const;
-  void setPdvMon(oai::model::pcf::QosMonitoringInformation const& value);
+  void setPdvMon(oai::model::pcf::QosMonitoringInformation const &value);
   bool pdvMonIsSet() const;
   void unsetPdvMon();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::QosMonitoringInformation getCongestMon() const;
-  void setCongestMon(oai::model::pcf::QosMonitoringInformation const& value);
+  void setCongestMon(oai::model::pcf::QosMonitoringInformation const &value);
   bool congestMonIsSet() const;
   void unsetCongestMon();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::QosMonitoringInformation getRttMon() const;
-  void setRttMon(oai::model::pcf::QosMonitoringInformation const& value);
+  void setRttMon(oai::model::pcf::QosMonitoringInformation const &value);
   bool rttMonIsSet() const;
   void unsetRttMon();
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::pcf::RequiredAccessInfo> getReqAnis() const;
-  void setReqAnis(
-      std::vector<oai::model::pcf::RequiredAccessInfo> const& value);
+  void
+  setReqAnis(std::vector<oai::model::pcf::RequiredAccessInfo> const &value);
   bool reqAnisIsSet() const;
   void unsetReqAnis();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::UsageThreshold getUsgThres() const;
-  void setUsgThres(oai::model::pcf::UsageThreshold const& value);
+  void setUsgThres(oai::model::pcf::UsageThreshold const &value);
   bool usgThresIsSet() const;
   void unsetUsgThres();
   /// <summary>
   ///
   /// </summary>
   std::string getNotifCorreId() const;
-  void setNotifCorreId(std::string const& value);
+  void setNotifCorreId(std::string const &value);
   bool notifCorreIdIsSet() const;
   void unsetNotifCorreId();
   /// <summary>
   ///
   /// </summary>
   std::vector<std::string> getAfAppIds() const;
-  void setAfAppIds(std::vector<std::string> const& value);
+  void setAfAppIds(std::vector<std::string> const &value);
   bool afAppIdsIsSet() const;
   void unsetAfAppIds();
   /// <summary>
@@ -212,79 +212,79 @@ class EventsSubscPutData {
   /// Includes the detected application report.
   /// </summary>
   std::vector<oai::model::pcf::AppDetectionReport> getAdReports() const;
-  void setAdReports(
-      std::vector<oai::model::pcf::AppDetectionReport> const& value);
+  void
+  setAdReports(std::vector<oai::model::pcf::AppDetectionReport> const &value);
   bool adReportsIsSet() const;
   void unsetAdReports();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::AccessType getAccessType() const;
-  void setAccessType(oai::model::common::AccessType const& value);
+  void setAccessType(oai::model::common::AccessType const &value);
   bool accessTypeIsSet() const;
   void unsetAccessType();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::AdditionalAccessInfo getAddAccessInfo() const;
-  void setAddAccessInfo(oai::model::pcf::AdditionalAccessInfo const& value);
+  void setAddAccessInfo(oai::model::pcf::AdditionalAccessInfo const &value);
   bool addAccessInfoIsSet() const;
   void unsetAddAccessInfo();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::AdditionalAccessInfo getRelAccessInfo() const;
-  void setRelAccessInfo(oai::model::pcf::AdditionalAccessInfo const& value);
+  void setRelAccessInfo(oai::model::pcf::AdditionalAccessInfo const &value);
   bool relAccessInfoIsSet() const;
   void unsetRelAccessInfo();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::AccNetChargingAddress getAnChargAddr() const;
-  void setAnChargAddr(oai::model::pcf::AccNetChargingAddress const& value);
+  void setAnChargAddr(oai::model::pcf::AccNetChargingAddress const &value);
   bool anChargAddrIsSet() const;
   void unsetAnChargAddr();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::pcf::AccessNetChargingIdentifier> getAnChargIds()
-      const;
+  std::vector<oai::model::pcf::AccessNetChargingIdentifier>
+  getAnChargIds() const;
   void setAnChargIds(
-      std::vector<oai::model::pcf::AccessNetChargingIdentifier> const& value);
+      std::vector<oai::model::pcf::AccessNetChargingIdentifier> const &value);
   bool anChargIdsIsSet() const;
   void unsetAnChargIds();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::AnGwAddress getAnGwAddr() const;
-  void setAnGwAddr(oai::model::pcf::AnGwAddress const& value);
+  void setAnGwAddr(oai::model::pcf::AnGwAddress const &value);
   bool anGwAddrIsSet() const;
   void unsetAnGwAddr();
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::pcf::L4sSupport> getL4sReports() const;
-  void setL4sReports(std::vector<oai::model::pcf::L4sSupport> const& value);
+  void setL4sReports(std::vector<oai::model::pcf::L4sSupport> const &value);
   bool l4sReportsIsSet() const;
   void unsetL4sReports();
   /// <summary>
   /// String providing an URI formatted according to RFC 3986.
   /// </summary>
   std::string getEvSubsUri() const;
-  void setEvSubsUri(std::string const& value);
+  void setEvSubsUri(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::pcf::AfEventNotification> getEvNotifs() const;
-  void setEvNotifs(
-      std::vector<oai::model::pcf::AfEventNotification> const& value);
+  void
+  setEvNotifs(std::vector<oai::model::pcf::AfEventNotification> const &value);
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::pcf::ResourcesAllocationInfo>
   getFailedResourcAllocReports() const;
   void setFailedResourcAllocReports(
-      std::vector<oai::model::pcf::ResourcesAllocationInfo> const& value);
+      std::vector<oai::model::pcf::ResourcesAllocationInfo> const &value);
   bool failedResourcAllocReportsIsSet() const;
   void unsetFailedResourcAllocReports();
   /// <summary>
@@ -293,39 +293,39 @@ class EventsSubscPutData {
   std::vector<oai::model::pcf::ResourcesAllocationInfo>
   getSuccResourcAllocReports() const;
   void setSuccResourcAllocReports(
-      std::vector<oai::model::pcf::ResourcesAllocationInfo> const& value);
+      std::vector<oai::model::pcf::ResourcesAllocationInfo> const &value);
   bool succResourcAllocReportsIsSet() const;
   void unsetSuccResourcAllocReports();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::NetLocAccessSupport getNoNetLocSupp() const;
-  void setNoNetLocSupp(oai::model::pcf::NetLocAccessSupport const& value);
+  void setNoNetLocSupp(oai::model::pcf::NetLocAccessSupport const &value);
   bool noNetLocSuppIsSet() const;
   void unsetNoNetLocSupp();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::pcf::OutOfCreditInformation> getOutOfCredReports()
-      const;
+  std::vector<oai::model::pcf::OutOfCreditInformation>
+  getOutOfCredReports() const;
   void setOutOfCredReports(
-      std::vector<oai::model::pcf::OutOfCreditInformation> const& value);
+      std::vector<oai::model::pcf::OutOfCreditInformation> const &value);
   bool outOfCredReportsIsSet() const;
   void unsetOutOfCredReports();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::PlmnIdNid getPlmnId() const;
-  void setPlmnId(oai::model::common::PlmnIdNid const& value);
+  void setPlmnId(oai::model::common::PlmnIdNid const &value);
   bool plmnIdIsSet() const;
   void unsetPlmnId();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::pcf::QosNotificationControlInfo> getQncReports()
-      const;
+  std::vector<oai::model::pcf::QosNotificationControlInfo>
+  getQncReports() const;
   void setQncReports(
-      std::vector<oai::model::pcf::QosNotificationControlInfo> const& value);
+      std::vector<oai::model::pcf::QosNotificationControlInfo> const &value);
   bool qncReportsIsSet() const;
   void unsetQncReports();
   /// <summary>
@@ -333,16 +333,16 @@ class EventsSubscPutData {
   /// </summary>
   std::vector<oai::model::pcf::QosMonitoringReport> getQosMonReports() const;
   void setQosMonReports(
-      std::vector<oai::model::pcf::QosMonitoringReport> const& value);
+      std::vector<oai::model::pcf::QosMonitoringReport> const &value);
   bool qosMonReportsIsSet() const;
   void unsetQosMonReports();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::pcf::QosMonitoringReport> getQosMonDatRateReps()
-      const;
+  std::vector<oai::model::pcf::QosMonitoringReport>
+  getQosMonDatRateReps() const;
   void setQosMonDatRateReps(
-      std::vector<oai::model::pcf::QosMonitoringReport> const& value);
+      std::vector<oai::model::pcf::QosMonitoringReport> const &value);
   bool qosMonDatRateRepsIsSet() const;
   void unsetQosMonDatRateReps();
   /// <summary>
@@ -350,7 +350,7 @@ class EventsSubscPutData {
   /// </summary>
   std::vector<oai::model::pcf::PdvMonitoringReport> getPdvMonReports() const;
   void setPdvMonReports(
-      std::vector<oai::model::pcf::PdvMonitoringReport> const& value);
+      std::vector<oai::model::pcf::PdvMonitoringReport> const &value);
   bool pdvMonReportsIsSet() const;
   void unsetPdvMonReports();
   /// <summary>
@@ -358,7 +358,7 @@ class EventsSubscPutData {
   /// </summary>
   std::vector<oai::model::pcf::QosMonitoringReport> getCongestReports() const;
   void setCongestReports(
-      std::vector<oai::model::pcf::QosMonitoringReport> const& value);
+      std::vector<oai::model::pcf::QosMonitoringReport> const &value);
   bool congestReportsIsSet() const;
   void unsetCongestReports();
   /// <summary>
@@ -366,22 +366,22 @@ class EventsSubscPutData {
   /// </summary>
   std::vector<oai::model::pcf::QosMonitoringReport> getRttMonReports() const;
   void setRttMonReports(
-      std::vector<oai::model::pcf::QosMonitoringReport> const& value);
+      std::vector<oai::model::pcf::QosMonitoringReport> const &value);
   bool rttMonReportsIsSet() const;
   void unsetRttMonReports();
   /// <summary>
   /// Contains the RAN and/or NAS release cause.
   /// </summary>
   std::vector<oai::model::pcf::RanNasRelCause> getRanNasRelCauses() const;
-  void setRanNasRelCauses(
-      std::vector<oai::model::pcf::RanNasRelCause> const& value);
+  void
+  setRanNasRelCauses(std::vector<oai::model::pcf::RanNasRelCause> const &value);
   bool ranNasRelCausesIsSet() const;
   void unsetRanNasRelCauses();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::RatType getRatType() const;
-  void setRatType(oai::model::common::RatType const& value);
+  void setRatType(oai::model::common::RatType const &value);
   bool ratTypeIsSet() const;
   void unsetRatType();
   /// <summary>
@@ -389,21 +389,21 @@ class EventsSubscPutData {
   /// </summary>
   oai::model::pcf::SatelliteBackhaulCategory getSatBackhaulCategory() const;
   void setSatBackhaulCategory(
-      oai::model::pcf::SatelliteBackhaulCategory const& value);
+      oai::model::pcf::SatelliteBackhaulCategory const &value);
   bool satBackhaulCategoryIsSet() const;
   void unsetSatBackhaulCategory();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::UserLocation getUeLoc() const;
-  void setUeLoc(oai::model::common::UserLocation const& value);
+  void setUeLoc(oai::model::common::UserLocation const &value);
   bool ueLocIsSet() const;
   void unsetUeLoc();
   /// <summary>
   /// string with format &#39;date-time&#39; as defined in OpenAPI.
   /// </summary>
   std::string getUeLocTime() const;
-  void setUeLocTime(std::string const& value);
+  void setUeLocTime(std::string const &value);
   bool ueLocTimeIsSet() const;
   void unsetUeLocTime();
   /// <summary>
@@ -417,28 +417,28 @@ class EventsSubscPutData {
   /// +1 hour adjustment for Daylight Saving Time.
   /// </summary>
   std::string getUeTimeZone() const;
-  void setUeTimeZone(std::string const& value);
+  void setUeTimeZone(std::string const &value);
   bool ueTimeZoneIsSet() const;
   void unsetUeTimeZone();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::AccumulatedUsage getUsgRep() const;
-  void setUsgRep(oai::model::pcf::AccumulatedUsage const& value);
+  void setUsgRep(oai::model::pcf::AccumulatedUsage const &value);
   bool usgRepIsSet() const;
   void unsetUsgRep();
   /// <summary>
   /// string with format &#39;bytes&#39; as defined in OpenAPI
   /// </summary>
   std::string getUrspEnfRep() const;
-  void setUrspEnfRep(std::string const& value);
+  void setUrspEnfRep(std::string const &value);
   bool urspEnfRepIsSet() const;
   void unsetUrspEnfRep();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::SscMode getSscMode() const;
-  void setSscMode(oai::model::common::SscMode const& value);
+  void setSscMode(oai::model::common::SscMode const &value);
   bool sscModeIsSet() const;
   void unsetSscMode();
   /// <summary>
@@ -450,70 +450,70 @@ class EventsSubscPutData {
   /// \&quot;Label1.Label2.Label3\&quot;).
   /// </summary>
   std::string getUeReqDnn() const;
-  void setUeReqDnn(std::string const& value);
+  void setUeReqDnn(std::string const &value);
   bool ueReqDnnIsSet() const;
   void unsetUeReqDnn();
   /// <summary>
   ///
   /// </summary>
-  oai::model::pcf::RedundantPduSessionInformation getRedundantPduSessionInfo()
-      const;
+  oai::model::pcf::RedundantPduSessionInformation
+  getRedundantPduSessionInfo() const;
   void setRedundantPduSessionInfo(
-      oai::model::pcf::RedundantPduSessionInformation const& value);
+      oai::model::pcf::RedundantPduSessionInformation const &value);
   bool redundantPduSessionInfoIsSet() const;
   void unsetRedundantPduSessionInfo();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::BridgeManagementContainer getTsnBridgeManCont() const;
-  void setTsnBridgeManCont(
-      oai::model::pcf::BridgeManagementContainer const& value);
+  void
+  setTsnBridgeManCont(oai::model::pcf::BridgeManagementContainer const &value);
   bool tsnBridgeManContIsSet() const;
   void unsetTsnBridgeManCont();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::PortManagementContainer getTsnPortManContDstt() const;
-  void setTsnPortManContDstt(
-      oai::model::pcf::PortManagementContainer const& value);
+  void
+  setTsnPortManContDstt(oai::model::pcf::PortManagementContainer const &value);
   bool tsnPortManContDsttIsSet() const;
   void unsetTsnPortManContDstt();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::pcf::PortManagementContainer> getTsnPortManContNwtts()
-      const;
+  std::vector<oai::model::pcf::PortManagementContainer>
+  getTsnPortManContNwtts() const;
   void setTsnPortManContNwtts(
-      std::vector<oai::model::pcf::PortManagementContainer> const& value);
+      std::vector<oai::model::pcf::PortManagementContainer> const &value);
   bool tsnPortManContNwttsIsSet() const;
   void unsetTsnPortManContNwtts();
   /// <summary>
   ///
   /// </summary>
   std::vector<std::string> getIpv4AddrList() const;
-  void setIpv4AddrList(std::vector<std::string> const& value);
+  void setIpv4AddrList(std::vector<std::string> const &value);
   bool ipv4AddrListIsSet() const;
   void unsetIpv4AddrList();
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::common::Ipv6Prefix> getIpv6PrefixList() const;
-  void setIpv6PrefixList(
-      std::vector<oai::model::common::Ipv6Prefix> const& value);
+  void
+  setIpv6PrefixList(std::vector<oai::model::common::Ipv6Prefix> const &value);
   bool ipv6PrefixListIsSet() const;
   void unsetIpv6PrefixList();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::BatOffsetInfo getBatOffsetInfo() const;
-  void setBatOffsetInfo(oai::model::pcf::BatOffsetInfo const& value);
+  void setBatOffsetInfo(oai::model::pcf::BatOffsetInfo const &value);
   bool batOffsetInfoIsSet() const;
   void unsetBatOffsetInfo();
 
-  friend void to_json(nlohmann::json& j, const EventsSubscPutData& o);
-  friend void from_json(const nlohmann::json& j, EventsSubscPutData& o);
+  friend void to_json(nlohmann::json &j, const EventsSubscPutData &o);
+  friend void from_json(const nlohmann::json &j, EventsSubscPutData &o);
 
- protected:
+protected:
   std::vector<oai::model::pcf::AfEventSubscription> m_Events;
 
   std::string m_NotifUri;
@@ -626,6 +626,6 @@ class EventsSubscPutData {
   bool m_BatOffsetInfoIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* EventsSubscPutData_H_ */

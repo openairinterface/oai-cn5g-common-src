@@ -19,18 +19,18 @@
 #ifndef GeographicArea_H_
 #define GeographicArea_H_
 
-#include "PointUncertaintyCircle.h"
-#include "Point.h"
-#include "PointUncertaintyEllipse.h"
-#include "GeographicalCoordinates.h"
-#include "PointAltitude.h"
-#include "UncertaintyEllipse.h"
 #include "EllipsoidArc.h"
+#include "GeographicalCoordinates.h"
+#include "Point.h"
+#include "PointAltitude.h"
 #include "PointAltitudeUncertainty.h"
+#include "PointUncertaintyCircle.h"
+#include "PointUncertaintyEllipse.h"
 #include "Polygon.h"
-#include <vector>
 #include "SupportedGADShapes.h"
+#include "UncertaintyEllipse.h"
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::lmf {
 
@@ -38,7 +38,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class GeographicArea {
- public:
+public:
   GeographicArea();
   virtual ~GeographicArea() = default;
 
@@ -52,16 +52,16 @@ class GeographicArea {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const GeographicArea& rhs) const;
-  bool operator!=(const GeographicArea& rhs) const;
+  bool operator==(const GeographicArea &rhs) const;
+  bool operator!=(const GeographicArea &rhs) const;
 
   /////////////////////////////////////////////
   /// GeographicArea members
@@ -70,12 +70,12 @@ class GeographicArea {
   ///
   /// </summary>
   oai::model::lmf::SupportedGADShapes getShape() const;
-  void setShape(oai::model::lmf::SupportedGADShapes const& value);
+  void setShape(oai::model::lmf::SupportedGADShapes const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::lmf::GeographicalCoordinates getPoint() const;
-  void setPoint(oai::model::lmf::GeographicalCoordinates const& value);
+  void setPoint(oai::model::lmf::GeographicalCoordinates const &value);
   /// <summary>
   ///
   /// </summary>
@@ -85,7 +85,7 @@ class GeographicArea {
   ///
   /// </summary>
   oai::model::lmf::UncertaintyEllipse getUncertaintyEllipse() const;
-  void setUncertaintyEllipse(oai::model::lmf::UncertaintyEllipse const& value);
+  void setUncertaintyEllipse(oai::model::lmf::UncertaintyEllipse const &value);
   /// <summary>
   ///
   /// </summary>
@@ -96,7 +96,7 @@ class GeographicArea {
   /// </summary>
   std::vector<oai::model::lmf::GeographicalCoordinates> getPointList() const;
   void setPointList(
-      std::vector<oai::model::lmf::GeographicalCoordinates> const& value);
+      std::vector<oai::model::lmf::GeographicalCoordinates> const &value);
   /// <summary>
   ///
   /// </summary>
@@ -128,10 +128,10 @@ class GeographicArea {
   int32_t getIncludedAngle() const;
   void setIncludedAngle(int32_t const value);
 
-  friend void to_json(nlohmann::json& j, const GeographicArea& o);
-  friend void from_json(const nlohmann::json& j, GeographicArea& o);
+  friend void to_json(nlohmann::json &j, const GeographicArea &o);
+  friend void from_json(const nlohmann::json &j, GeographicArea &o);
 
- protected:
+protected:
   oai::model::lmf::SupportedGADShapes m_Shape;
 
   oai::model::lmf::GeographicalCoordinates m_Point;
@@ -157,6 +157,6 @@ class GeographicArea {
   int32_t m_IncludedAngle;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* GeographicArea_H_ */

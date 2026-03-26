@@ -27,12 +27,12 @@ void EventClass::validate() const {
   }
 }
 
-bool EventClass::validate(std::stringstream& msg) const {
+bool EventClass::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool EventClass::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool EventClass::validate(std::stringstream &msg,
+                          const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "EventClass" : pathPrefix;
@@ -43,32 +43,28 @@ bool EventClass::validate(
   return success;
 }
 
-bool EventClass::operator==(const EventClass& rhs) const {
+bool EventClass::operator==(const EventClass &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool EventClass::operator!=(const EventClass& rhs) const {
+bool EventClass::operator!=(const EventClass &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const EventClass& o) {
+void to_json(nlohmann::json &j, const EventClass &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, EventClass& o) {
+void from_json(const nlohmann::json &j, EventClass &o) {
   from_json(j, o.m_value);
 }
 
-EventClass_anyOf EventClass::getValue() const {
-  return m_value;
-}
+EventClass_anyOf EventClass::getValue() const { return m_value; }
 
-void EventClass::setValue(EventClass_anyOf value) {
-  m_value = value;
-}
+void EventClass::setValue(EventClass_anyOf value) { m_value = value; }
 
 EventClass_anyOf::eEventClass_anyOf EventClass::getEnumValue() const {
   return m_value.getValue();
@@ -78,4 +74,4 @@ void EventClass::setEnumValue(EventClass_anyOf::eEventClass_anyOf value) {
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

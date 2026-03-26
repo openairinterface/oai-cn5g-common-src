@@ -27,7 +27,7 @@ namespace oai::model::smf {
 /// Possible values are   - REL_MAPDU_OVER_3GPP   - REL_MAPDU_OVER_N3GPP
 /// </summary>
 class MaReleaseIndication {
- public:
+public:
   MaReleaseIndication();
   virtual ~MaReleaseIndication();
 
@@ -36,12 +36,12 @@ class MaReleaseIndication {
   /////////////////////////////////////////////
   /// MaReleaseIndication members
 
-  friend void to_json(nlohmann::json& j, const MaReleaseIndication& o);
-  friend void from_json(const nlohmann::json& j, MaReleaseIndication& o);
+  friend void to_json(nlohmann::json &j, const MaReleaseIndication &o);
+  friend void from_json(const nlohmann::json &j, MaReleaseIndication &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* MaReleaseIndication_H_ */

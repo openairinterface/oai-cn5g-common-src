@@ -18,30 +18,29 @@ extern "C" {
 namespace oai::ngap {
 
 class PduSessionResourceSetupItemCxtReq {
- public:
+public:
   PduSessionResourceSetupItemCxtReq();
   virtual ~PduSessionResourceSetupItemCxtReq();
 
-  void set(
-      const PduSessionId& pduSessionId, const std::optional<NasPdu>& nasPdu,
-      const SNssai& sNssai,
-      const OCTET_STRING_t& pduSessionResourceSetupRequestTransfer);
-  void get(
-      PduSessionId& pduSessionId, std::optional<NasPdu>& nasPdu, SNssai& sNssai,
-      OCTET_STRING_t& pduSessionResourceSetupRequestTransfer) const;
+  void set(const PduSessionId &pduSessionId,
+           const std::optional<NasPdu> &nasPdu, const SNssai &sNssai,
+           const OCTET_STRING_t &pduSessionResourceSetupRequestTransfer);
+  void get(PduSessionId &pduSessionId, std::optional<NasPdu> &nasPdu,
+           SNssai &sNssai,
+           OCTET_STRING_t &pduSessionResourceSetupRequestTransfer) const;
 
   bool encode(
-      Ngap_PDUSessionResourceSetupItemCxtReq_t& pduSessionResourceItem) const;
+      Ngap_PDUSessionResourceSetupItemCxtReq_t &pduSessionResourceItem) const;
   bool decode(
-      const Ngap_PDUSessionResourceSetupItemCxtReq_t& pduSessionResourceItem);
+      const Ngap_PDUSessionResourceSetupItemCxtReq_t &pduSessionResourceItem);
 
- private:
-  PduSessionId m_PduSessionId;                              // Mandatory
-  std::optional<NasPdu> m_NasPdu;                           // Optional
-  SNssai m_SNssai;                                          // Mandatory
-  OCTET_STRING_t m_PduSessionResourceSetupRequestTransfer;  // Mandatory
+private:
+  PduSessionId m_PduSessionId;                             // Mandatory
+  std::optional<NasPdu> m_NasPdu;                          // Optional
+  SNssai m_SNssai;                                         // Mandatory
+  OCTET_STRING_t m_PduSessionResourceSetupRequestTransfer; // Mandatory
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

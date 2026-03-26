@@ -12,8 +12,8 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_RANNodeNameVisibleString.h"
 #include "Ngap_RANNodeNameUTF8String.h"
+#include "Ngap_RANNodeNameVisibleString.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -25,9 +25,9 @@ struct Ngap_ProtocolExtensionContainer;
 
 /* Ngap_Extended-RANNodeName */
 typedef struct Ngap_Extended_RANNodeName {
-  Ngap_RANNodeNameVisibleString_t* rANNodeNameVisibleString; /* OPTIONAL */
-  Ngap_RANNodeNameUTF8String_t* rANNodeNameUTF8String;       /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions;     /* OPTIONAL */
+  Ngap_RANNodeNameVisibleString_t *rANNodeNameVisibleString; /* OPTIONAL */
+  Ngap_RANNodeNameUTF8String_t *rANNodeNameUTF8String;       /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions;     /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

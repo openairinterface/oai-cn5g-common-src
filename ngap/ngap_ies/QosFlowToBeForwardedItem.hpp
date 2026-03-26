@@ -13,21 +13,21 @@ extern "C" {
 
 namespace oai::ngap {
 class QosFlowToBeForwardedItem {
- public:
+public:
   QosFlowToBeForwardedItem();
   virtual ~QosFlowToBeForwardedItem();
 
-  void setQosFlowIdentifier(const QosFlowIdentifier& qosFlowIdentifier);
-  bool getQosFlowIdentifier(QosFlowIdentifier& qosFlowIdentifier) const;
+  void setQosFlowIdentifier(const QosFlowIdentifier &qosFlowIdentifier);
+  bool getQosFlowIdentifier(QosFlowIdentifier &qosFlowIdentifier) const;
 
   // TODO: Get
 
-  bool encode(Ngap_QosFlowToBeForwardedItem_t& item) const;
-  bool decode(const Ngap_QosFlowToBeForwardedItem_t& item);
+  bool encode(Ngap_QosFlowToBeForwardedItem_t &item) const;
+  bool decode(const Ngap_QosFlowToBeForwardedItem_t &item);
   // TODO: decode
 
- private:
-  QosFlowIdentifier m_QosFlowIdentifier;  // Mandatory
+private:
+  QosFlowIdentifier m_QosFlowIdentifier; // Mandatory
 };
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

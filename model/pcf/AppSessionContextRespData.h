@@ -20,12 +20,12 @@
 #ifndef AppSessionContextRespData_H_
 #define AppSessionContextRespData_H_
 
-#include "ServAuthInfo.h"
-#include <string>
-#include "UeIdentityInfo.h"
-#include <vector>
 #include "DirectNotificationReport.h"
+#include "ServAuthInfo.h"
+#include "UeIdentityInfo.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::pcf {
 
@@ -34,7 +34,7 @@ namespace oai::model::pcf {
 /// Context created by the PCF.
 /// </summary>
 class AppSessionContextRespData {
- public:
+public:
   AppSessionContextRespData();
   virtual ~AppSessionContextRespData() = default;
 
@@ -48,16 +48,16 @@ class AppSessionContextRespData {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const AppSessionContextRespData& rhs) const;
-  bool operator!=(const AppSessionContextRespData& rhs) const;
+  bool operator==(const AppSessionContextRespData &rhs) const;
+  bool operator!=(const AppSessionContextRespData &rhs) const;
 
   /////////////////////////////////////////////
   /// AppSessionContextRespData members
@@ -66,24 +66,24 @@ class AppSessionContextRespData {
   ///
   /// </summary>
   oai::model::pcf::ServAuthInfo getServAuthInfo() const;
-  void setServAuthInfo(oai::model::pcf::ServAuthInfo const& value);
+  void setServAuthInfo(oai::model::pcf::ServAuthInfo const &value);
   bool servAuthInfoIsSet() const;
   void unsetServAuthInfo();
   /// <summary>
   /// QoS monitoring parameter(s) that cannot be directly notified for the
   /// indicated flows.
   /// </summary>
-  std::vector<oai::model::pcf::DirectNotificationReport> getDirectNotifReports()
-      const;
+  std::vector<oai::model::pcf::DirectNotificationReport>
+  getDirectNotifReports() const;
   void setDirectNotifReports(
-      std::vector<oai::model::pcf::DirectNotificationReport> const& value);
+      std::vector<oai::model::pcf::DirectNotificationReport> const &value);
   bool directNotifReportsIsSet() const;
   void unsetDirectNotifReports();
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::pcf::UeIdentityInfo> getUeIds() const;
-  void setUeIds(std::vector<oai::model::pcf::UeIdentityInfo> const& value);
+  void setUeIds(std::vector<oai::model::pcf::UeIdentityInfo> const &value);
   bool ueIdsIsSet() const;
   void unsetUeIds();
   /// <summary>
@@ -103,14 +103,14 @@ class AppSessionContextRespData {
   /// not supported.
   /// </summary>
   std::string getSuppFeat() const;
-  void setSuppFeat(std::string const& value);
+  void setSuppFeat(std::string const &value);
   bool suppFeatIsSet() const;
   void unsetSuppFeat();
 
-  friend void to_json(nlohmann::json& j, const AppSessionContextRespData& o);
-  friend void from_json(const nlohmann::json& j, AppSessionContextRespData& o);
+  friend void to_json(nlohmann::json &j, const AppSessionContextRespData &o);
+  friend void from_json(const nlohmann::json &j, AppSessionContextRespData &o);
 
- protected:
+protected:
   oai::model::pcf::ServAuthInfo m_ServAuthInfo;
   bool m_ServAuthInfoIsSet;
   std::vector<oai::model::pcf::DirectNotificationReport> m_DirectNotifReports;
@@ -121,6 +121,6 @@ class AppSessionContextRespData {
   bool m_SuppFeatIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* AppSessionContextRespData_H_ */

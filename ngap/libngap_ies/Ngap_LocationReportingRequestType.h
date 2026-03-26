@@ -13,8 +13,8 @@
 
 /* Including external dependencies */
 #include "Ngap_EventType.h"
-#include "Ngap_ReportArea.h"
 #include "Ngap_LocationReportingReferenceID.h"
+#include "Ngap_ReportArea.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -29,10 +29,10 @@ struct Ngap_ProtocolExtensionContainer;
 typedef struct Ngap_LocationReportingRequestType {
   Ngap_EventType_t eventType;
   Ngap_ReportArea_t reportArea;
-  struct Ngap_AreaOfInterestList* areaOfInterestList; /* OPTIONAL */
-  Ngap_LocationReportingReferenceID_t*
-      locationReportingReferenceIDToBeCancelled;         /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_AreaOfInterestList *areaOfInterestList; /* OPTIONAL */
+  Ngap_LocationReportingReferenceID_t
+      *locationReportingReferenceIDToBeCancelled;        /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

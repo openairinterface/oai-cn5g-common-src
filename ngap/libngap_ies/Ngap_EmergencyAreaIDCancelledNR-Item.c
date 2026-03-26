@@ -31,8 +31,8 @@ asn_TYPE_member_t asn_MBR_Ngap_EmergencyAreaIDCancelledNR_Item_1[] = {
      "emergencyAreaID"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_EmergencyAreaIDCancelledNR_Item, cancelledCellsInEAI_NR),
+     offsetof(struct Ngap_EmergencyAreaIDCancelledNR_Item,
+              cancelledCellsInEAI_NR),
      (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_CancelledCellsInEAI_NR,

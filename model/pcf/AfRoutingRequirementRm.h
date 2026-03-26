@@ -22,13 +22,13 @@
 #define AfRoutingRequirementRm_H_
 
 #include "EasIpReplacementInfo.h"
-#include "TrafficCorrelationInfo.h"
-#include "SpatialValidityRm.h"
 #include "RouteToLocation.h"
+#include "SpatialValidityRm.h"
 #include "TemporalValidity.h"
-#include <vector>
+#include "TrafficCorrelationInfo.h"
 #include "UpPathChgEvent.h"
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::pcf {
 
@@ -38,7 +38,7 @@ namespace oai::model::pcf {
 /// tempVals attributes defined as removable.
 /// </summary>
 class AfRoutingRequirementRm {
- public:
+public:
   AfRoutingRequirementRm();
   virtual ~AfRoutingRequirementRm() = default;
 
@@ -52,16 +52,16 @@ class AfRoutingRequirementRm {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const AfRoutingRequirementRm& rhs) const;
-  bool operator!=(const AfRoutingRequirementRm& rhs) const;
+  bool operator==(const AfRoutingRequirementRm &rhs) const;
+  bool operator!=(const AfRoutingRequirementRm &rhs) const;
 
   /////////////////////////////////////////////
   /// AfRoutingRequirementRm members
@@ -77,29 +77,29 @@ class AfRoutingRequirementRm {
   ///
   /// </summary>
   std::vector<oai::model::common::RouteToLocation> getRouteToLocs() const;
-  void setRouteToLocs(
-      std::vector<oai::model::common::RouteToLocation> const& value);
+  void
+  setRouteToLocs(std::vector<oai::model::common::RouteToLocation> const &value);
   bool routeToLocsIsSet() const;
   void unsetRouteToLocs();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::SpatialValidityRm getSpVal() const;
-  void setSpVal(oai::model::pcf::SpatialValidityRm const& value);
+  void setSpVal(oai::model::pcf::SpatialValidityRm const &value);
   bool spValIsSet() const;
   void unsetSpVal();
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::pcf::TemporalValidity> getTempVals() const;
-  void setTempVals(std::vector<oai::model::pcf::TemporalValidity> const& value);
+  void setTempVals(std::vector<oai::model::pcf::TemporalValidity> const &value);
   bool tempValsIsSet() const;
   void unsetTempVals();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::UpPathChgEvent getUpPathChgSub() const;
-  void setUpPathChgSub(oai::model::pcf::UpPathChgEvent const& value);
+  void setUpPathChgSub(oai::model::pcf::UpPathChgEvent const &value);
   bool upPathChgSubIsSet() const;
   void unsetUpPathChgSub();
   /// <summary>
@@ -128,10 +128,10 @@ class AfRoutingRequirementRm {
   /// <summary>
   /// Contains EAS IP replacement information.
   /// </summary>
-  std::vector<oai::model::pcf::EasIpReplacementInfo> getEasIpReplaceInfos()
-      const;
+  std::vector<oai::model::pcf::EasIpReplacementInfo>
+  getEasIpReplaceInfos() const;
   void setEasIpReplaceInfos(
-      std::vector<oai::model::pcf::EasIpReplacementInfo> const& value);
+      std::vector<oai::model::pcf::EasIpReplacementInfo> const &value);
   bool easIpReplaceInfosIsSet() const;
   void unsetEasIpReplaceInfos();
   /// <summary>
@@ -153,14 +153,14 @@ class AfRoutingRequirementRm {
   ///
   /// </summary>
   oai::model::pcf::TrafficCorrelationInfo getTfcCorreInfo() const;
-  void setTfcCorreInfo(oai::model::pcf::TrafficCorrelationInfo const& value);
+  void setTfcCorreInfo(oai::model::pcf::TrafficCorrelationInfo const &value);
   bool tfcCorreInfoIsSet() const;
   void unsetTfcCorreInfo();
 
-  friend void to_json(nlohmann::json& j, const AfRoutingRequirementRm& o);
-  friend void from_json(const nlohmann::json& j, AfRoutingRequirementRm& o);
+  friend void to_json(nlohmann::json &j, const AfRoutingRequirementRm &o);
+  friend void from_json(const nlohmann::json &j, AfRoutingRequirementRm &o);
 
- protected:
+protected:
   bool m_AppReloc;
   bool m_AppRelocIsSet;
   std::vector<oai::model::common::RouteToLocation> m_RouteToLocs;
@@ -187,6 +187,6 @@ class AfRoutingRequirementRm {
   bool m_TfcCorreInfoIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* AfRoutingRequirementRm_H_ */

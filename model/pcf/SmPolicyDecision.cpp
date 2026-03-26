@@ -19,43 +19,43 @@
 namespace oai::model::pcf {
 
 SmPolicyDecision::SmPolicyDecision() {
-  m_SessRulesIsSet             = false;
-  m_PccRulesIsSet              = false;
-  m_PcscfRestIndication        = false;
-  m_PcscfRestIndicationIsSet   = false;
-  m_QosDecsIsSet               = false;
-  m_ChgDecsIsSet               = false;
-  m_ChargingInfoIsSet          = false;
-  m_TraffContDecsIsSet         = false;
-  m_UmDecsIsSet                = false;
-  m_QosCharsIsSet              = false;
-  m_QosMonDecsIsSet            = false;
-  m_ReflectiveQoSTimer         = 0;
-  m_ReflectiveQoSTimerIsSet    = false;
-  m_CondsIsSet                 = false;
-  m_RevalidationTime           = "";
-  m_RevalidationTimeIsSet      = false;
-  m_Offline                    = false;
-  m_OfflineIsSet               = false;
-  m_Online                     = false;
-  m_OnlineIsSet                = false;
+  m_SessRulesIsSet = false;
+  m_PccRulesIsSet = false;
+  m_PcscfRestIndication = false;
+  m_PcscfRestIndicationIsSet = false;
+  m_QosDecsIsSet = false;
+  m_ChgDecsIsSet = false;
+  m_ChargingInfoIsSet = false;
+  m_TraffContDecsIsSet = false;
+  m_UmDecsIsSet = false;
+  m_QosCharsIsSet = false;
+  m_QosMonDecsIsSet = false;
+  m_ReflectiveQoSTimer = 0;
+  m_ReflectiveQoSTimerIsSet = false;
+  m_CondsIsSet = false;
+  m_RevalidationTime = "";
+  m_RevalidationTimeIsSet = false;
+  m_Offline = false;
+  m_OfflineIsSet = false;
+  m_Online = false;
+  m_OnlineIsSet = false;
   m_PolicyCtrlReqTriggersIsSet = false;
-  m_LastReqRuleDataIsSet       = false;
-  m_LastReqUsageDataIsSet      = false;
-  m_PraInfosIsSet              = false;
-  m_Ipv4Index                  = 0;
-  m_Ipv4IndexIsSet             = false;
-  m_Ipv6Index                  = 0;
-  m_Ipv6IndexIsSet             = false;
-  m_QosFlowUsageIsSet          = false;
-  m_RelCauseIsSet              = false;
-  m_SuppFeat                   = "";
-  m_SuppFeatIsSet              = false;
-  m_TsnBridgeManContIsSet      = false;
-  m_TsnPortManContDsttIsSet    = false;
-  m_TsnPortManContNwttsIsSet   = false;
-  m_RedSessIndication          = false;
-  m_RedSessIndicationIsSet     = false;
+  m_LastReqRuleDataIsSet = false;
+  m_LastReqUsageDataIsSet = false;
+  m_PraInfosIsSet = false;
+  m_Ipv4Index = 0;
+  m_Ipv4IndexIsSet = false;
+  m_Ipv6Index = 0;
+  m_Ipv6IndexIsSet = false;
+  m_QosFlowUsageIsSet = false;
+  m_RelCauseIsSet = false;
+  m_SuppFeat = "";
+  m_SuppFeatIsSet = false;
+  m_TsnBridgeManContIsSet = false;
+  m_TsnPortManContDsttIsSet = false;
+  m_TsnPortManContNwttsIsSet = false;
+  m_RedSessIndication = false;
+  m_RedSessIndicationIsSet = false;
 }
 
 void SmPolicyDecision::validate() const {
@@ -65,12 +65,12 @@ void SmPolicyDecision::validate() const {
   }
 }
 
-bool SmPolicyDecision::validate(std::stringstream& msg) const {
+bool SmPolicyDecision::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool SmPolicyDecision::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool SmPolicyDecision::validate(std::stringstream &msg,
+                                const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "SmPolicyDecision" : pathPrefix;
@@ -128,7 +128,7 @@ bool SmPolicyDecision::validate(
   }
   */
   if (policyCtrlReqTriggersIsSet()) {
-    const std::vector<oai::model::pcf::PolicyControlRequestTrigger>& value =
+    const std::vector<oai::model::pcf::PolicyControlRequestTrigger> &value =
         m_PolicyCtrlReqTriggers;
     const std::string currentValuePath = _pathPrefix + ".policyCtrlReqTriggers";
 
@@ -136,10 +136,10 @@ bool SmPolicyDecision::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::PolicyControlRequestTrigger& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::PolicyControlRequestTrigger &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -153,7 +153,7 @@ bool SmPolicyDecision::validate(
   }
 
   if (lastReqRuleDataIsSet()) {
-    const std::vector<oai::model::pcf::RequestedRuleData>& value =
+    const std::vector<oai::model::pcf::RequestedRuleData> &value =
         m_LastReqRuleData;
     const std::string currentValuePath = _pathPrefix + ".lastReqRuleData";
 
@@ -161,10 +161,10 @@ bool SmPolicyDecision::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::RequestedRuleData& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::RequestedRuleData &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -188,7 +188,7 @@ bool SmPolicyDecision::validate(
   }
   */
   if (tsnPortManContNwttsIsSet()) {
-    const std::vector<oai::model::pcf::PortManagementContainer>& value =
+    const std::vector<oai::model::pcf::PortManagementContainer> &value =
         m_TsnPortManContNwtts;
     const std::string currentValuePath = _pathPrefix + ".tsnPortManContNwtts";
 
@@ -196,10 +196,10 @@ bool SmPolicyDecision::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::PortManagementContainer& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::PortManagementContainer &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -215,7 +215,7 @@ bool SmPolicyDecision::validate(
   return success;
 }
 
-bool SmPolicyDecision::operator==(const SmPolicyDecision& rhs) const {
+bool SmPolicyDecision::operator==(const SmPolicyDecision &rhs) const {
   return
 
       ((!sessRulesIsSet() && !rhs.sessRulesIsSet()) ||
@@ -331,44 +331,62 @@ bool SmPolicyDecision::operator==(const SmPolicyDecision& rhs) const {
           ;
 }
 
-bool SmPolicyDecision::operator!=(const SmPolicyDecision& rhs) const {
+bool SmPolicyDecision::operator!=(const SmPolicyDecision &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const SmPolicyDecision& o) {
+void to_json(nlohmann::json &j, const SmPolicyDecision &o) {
   j = nlohmann::json();
   if (o.sessRulesIsSet() || !o.m_SessRules.empty())
     j["sessRules"] = o.m_SessRules;
-  if (o.pccRulesIsSet() || !o.m_PccRules.empty()) j["pccRules"] = o.m_PccRules;
+  if (o.pccRulesIsSet() || !o.m_PccRules.empty())
+    j["pccRules"] = o.m_PccRules;
   if (o.pcscfRestIndicationIsSet())
     j["pcscfRestIndication"] = o.m_PcscfRestIndication;
-  if (o.qosDecsIsSet() || !o.m_QosDecs.empty()) j["qosDecs"] = o.m_QosDecs;
-  if (o.chgDecsIsSet() || !o.m_ChgDecs.empty()) j["chgDecs"] = o.m_ChgDecs;
-  if (o.chargingInfoIsSet()) j["chargingInfo"] = o.m_ChargingInfo;
+  if (o.qosDecsIsSet() || !o.m_QosDecs.empty())
+    j["qosDecs"] = o.m_QosDecs;
+  if (o.chgDecsIsSet() || !o.m_ChgDecs.empty())
+    j["chgDecs"] = o.m_ChgDecs;
+  if (o.chargingInfoIsSet())
+    j["chargingInfo"] = o.m_ChargingInfo;
   if (o.traffContDecsIsSet() || !o.m_TraffContDecs.empty())
     j["traffContDecs"] = o.m_TraffContDecs;
-  if (o.umDecsIsSet() || !o.m_UmDecs.empty()) j["umDecs"] = o.m_UmDecs;
-  if (o.qosCharsIsSet() || !o.m_QosChars.empty()) j["qosChars"] = o.m_QosChars;
+  if (o.umDecsIsSet() || !o.m_UmDecs.empty())
+    j["umDecs"] = o.m_UmDecs;
+  if (o.qosCharsIsSet() || !o.m_QosChars.empty())
+    j["qosChars"] = o.m_QosChars;
   if (o.qosMonDecsIsSet() || !o.m_QosMonDecs.empty())
     j["qosMonDecs"] = o.m_QosMonDecs;
   if (o.reflectiveQoSTimerIsSet())
     j["reflectiveQoSTimer"] = o.m_ReflectiveQoSTimer;
-  if (o.condsIsSet() || !o.m_Conds.empty()) j["conds"] = o.m_Conds;
-  if (o.revalidationTimeIsSet()) j["revalidationTime"] = o.m_RevalidationTime;
-  if (o.offlineIsSet()) j["offline"] = o.m_Offline;
-  if (o.onlineIsSet()) j["online"] = o.m_Online;
+  if (o.condsIsSet() || !o.m_Conds.empty())
+    j["conds"] = o.m_Conds;
+  if (o.revalidationTimeIsSet())
+    j["revalidationTime"] = o.m_RevalidationTime;
+  if (o.offlineIsSet())
+    j["offline"] = o.m_Offline;
+  if (o.onlineIsSet())
+    j["online"] = o.m_Online;
   if (o.policyCtrlReqTriggersIsSet() || !o.m_PolicyCtrlReqTriggers.empty())
     j["policyCtrlReqTriggers"] = o.m_PolicyCtrlReqTriggers;
   if (o.lastReqRuleDataIsSet() || !o.m_LastReqRuleData.empty())
     j["lastReqRuleData"] = o.m_LastReqRuleData;
-  if (o.lastReqUsageDataIsSet()) j["lastReqUsageData"] = o.m_LastReqUsageData;
-  if (o.praInfosIsSet() || !o.m_PraInfos.empty()) j["praInfos"] = o.m_PraInfos;
-  if (o.ipv4IndexIsSet()) j["ipv4Index"] = o.m_Ipv4Index;
-  if (o.ipv6IndexIsSet()) j["ipv6Index"] = o.m_Ipv6Index;
-  if (o.qosFlowUsageIsSet()) j["qosFlowUsage"] = o.m_QosFlowUsage;
-  if (o.relCauseIsSet()) j["relCause"] = o.m_RelCause;
-  if (o.suppFeatIsSet()) j["suppFeat"] = o.m_SuppFeat;
-  if (o.tsnBridgeManContIsSet()) j["tsnBridgeManCont"] = o.m_TsnBridgeManCont;
+  if (o.lastReqUsageDataIsSet())
+    j["lastReqUsageData"] = o.m_LastReqUsageData;
+  if (o.praInfosIsSet() || !o.m_PraInfos.empty())
+    j["praInfos"] = o.m_PraInfos;
+  if (o.ipv4IndexIsSet())
+    j["ipv4Index"] = o.m_Ipv4Index;
+  if (o.ipv6IndexIsSet())
+    j["ipv6Index"] = o.m_Ipv6Index;
+  if (o.qosFlowUsageIsSet())
+    j["qosFlowUsage"] = o.m_QosFlowUsage;
+  if (o.relCauseIsSet())
+    j["relCause"] = o.m_RelCause;
+  if (o.suppFeatIsSet())
+    j["suppFeat"] = o.m_SuppFeat;
+  if (o.tsnBridgeManContIsSet())
+    j["tsnBridgeManCont"] = o.m_TsnBridgeManCont;
   if (o.tsnPortManContDsttIsSet())
     j["tsnPortManContDstt"] = o.m_TsnPortManContDstt;
   if (o.tsnPortManContNwttsIsSet() || !o.m_TsnPortManContNwtts.empty())
@@ -377,7 +395,7 @@ void to_json(nlohmann::json& j, const SmPolicyDecision& o) {
     j["redSessIndication"] = o.m_RedSessIndication;
 }
 
-void from_json(const nlohmann::json& j, SmPolicyDecision& o) {
+void from_json(const nlohmann::json &j, SmPolicyDecision &o) {
   if (j.find("sessRules") != j.end()) {
     j.at("sessRules").get_to(o.m_SessRules);
     o.m_SessRulesIsSet = true;
@@ -497,36 +515,28 @@ SmPolicyDecision::getSessRules() const {
   return m_SessRules;
 }
 void SmPolicyDecision::setSessRules(
-    std::map<std::string, oai::model::pcf::SessionRule> const& value) {
-  m_SessRules      = value;
+    std::map<std::string, oai::model::pcf::SessionRule> const &value) {
+  m_SessRules = value;
   m_SessRulesIsSet = true;
 }
-bool SmPolicyDecision::sessRulesIsSet() const {
-  return m_SessRulesIsSet;
-}
-void SmPolicyDecision::unsetSessRules() {
-  m_SessRulesIsSet = false;
-}
-std::map<std::string, oai::model::pcf::PccRule> SmPolicyDecision::getPccRules()
-    const {
+bool SmPolicyDecision::sessRulesIsSet() const { return m_SessRulesIsSet; }
+void SmPolicyDecision::unsetSessRules() { m_SessRulesIsSet = false; }
+std::map<std::string, oai::model::pcf::PccRule>
+SmPolicyDecision::getPccRules() const {
   return m_PccRules;
 }
 void SmPolicyDecision::setPccRules(
-    std::map<std::string, oai::model::pcf::PccRule> const& value) {
-  m_PccRules      = value;
+    std::map<std::string, oai::model::pcf::PccRule> const &value) {
+  m_PccRules = value;
   m_PccRulesIsSet = true;
 }
-bool SmPolicyDecision::pccRulesIsSet() const {
-  return m_PccRulesIsSet;
-}
-void SmPolicyDecision::unsetPccRules() {
-  m_PccRulesIsSet = false;
-}
+bool SmPolicyDecision::pccRulesIsSet() const { return m_PccRulesIsSet; }
+void SmPolicyDecision::unsetPccRules() { m_PccRulesIsSet = false; }
 bool SmPolicyDecision::isPcscfRestIndication() const {
   return m_PcscfRestIndication;
 }
 void SmPolicyDecision::setPcscfRestIndication(bool const value) {
-  m_PcscfRestIndication      = value;
+  m_PcscfRestIndication = value;
   m_PcscfRestIndicationIsSet = true;
 }
 bool SmPolicyDecision::pcscfRestIndicationIsSet() const {
@@ -535,115 +545,89 @@ bool SmPolicyDecision::pcscfRestIndicationIsSet() const {
 void SmPolicyDecision::unsetPcscfRestIndication() {
   m_PcscfRestIndicationIsSet = false;
 }
-std::map<std::string, oai::model::pcf::QosData> SmPolicyDecision::getQosDecs()
-    const {
+std::map<std::string, oai::model::pcf::QosData>
+SmPolicyDecision::getQosDecs() const {
   return m_QosDecs;
 }
 void SmPolicyDecision::setQosDecs(
-    std::map<std::string, oai::model::pcf::QosData> const& value) {
-  m_QosDecs      = value;
+    std::map<std::string, oai::model::pcf::QosData> const &value) {
+  m_QosDecs = value;
   m_QosDecsIsSet = true;
 }
-bool SmPolicyDecision::qosDecsIsSet() const {
-  return m_QosDecsIsSet;
-}
-void SmPolicyDecision::unsetQosDecs() {
-  m_QosDecsIsSet = false;
-}
+bool SmPolicyDecision::qosDecsIsSet() const { return m_QosDecsIsSet; }
+void SmPolicyDecision::unsetQosDecs() { m_QosDecsIsSet = false; }
 std::map<std::string, oai::model::pcf::ChargingData>
 SmPolicyDecision::getChgDecs() const {
   return m_ChgDecs;
 }
 void SmPolicyDecision::setChgDecs(
-    std::map<std::string, oai::model::pcf::ChargingData> const& value) {
-  m_ChgDecs      = value;
+    std::map<std::string, oai::model::pcf::ChargingData> const &value) {
+  m_ChgDecs = value;
   m_ChgDecsIsSet = true;
 }
-bool SmPolicyDecision::chgDecsIsSet() const {
-  return m_ChgDecsIsSet;
-}
-void SmPolicyDecision::unsetChgDecs() {
-  m_ChgDecsIsSet = false;
-}
+bool SmPolicyDecision::chgDecsIsSet() const { return m_ChgDecsIsSet; }
+void SmPolicyDecision::unsetChgDecs() { m_ChgDecsIsSet = false; }
 oai::model::pcf::ChargingInformation SmPolicyDecision::getChargingInfo() const {
   return m_ChargingInfo;
 }
 void SmPolicyDecision::setChargingInfo(
-    oai::model::pcf::ChargingInformation const& value) {
-  m_ChargingInfo      = value;
+    oai::model::pcf::ChargingInformation const &value) {
+  m_ChargingInfo = value;
   m_ChargingInfoIsSet = true;
 }
-bool SmPolicyDecision::chargingInfoIsSet() const {
-  return m_ChargingInfoIsSet;
-}
-void SmPolicyDecision::unsetChargingInfo() {
-  m_ChargingInfoIsSet = false;
-}
+bool SmPolicyDecision::chargingInfoIsSet() const { return m_ChargingInfoIsSet; }
+void SmPolicyDecision::unsetChargingInfo() { m_ChargingInfoIsSet = false; }
 std::map<std::string, oai::model::pcf::TrafficControlData>
 SmPolicyDecision::getTraffContDecs() const {
   return m_TraffContDecs;
 }
 void SmPolicyDecision::setTraffContDecs(
-    std::map<std::string, oai::model::pcf::TrafficControlData> const& value) {
-  m_TraffContDecs      = value;
+    std::map<std::string, oai::model::pcf::TrafficControlData> const &value) {
+  m_TraffContDecs = value;
   m_TraffContDecsIsSet = true;
 }
 bool SmPolicyDecision::traffContDecsIsSet() const {
   return m_TraffContDecsIsSet;
 }
-void SmPolicyDecision::unsetTraffContDecs() {
-  m_TraffContDecsIsSet = false;
-}
+void SmPolicyDecision::unsetTraffContDecs() { m_TraffContDecsIsSet = false; }
 std::map<std::string, oai::model::pcf::UsageMonitoringData>
 SmPolicyDecision::getUmDecs() const {
   return m_UmDecs;
 }
 void SmPolicyDecision::setUmDecs(
-    std::map<std::string, oai::model::pcf::UsageMonitoringData> const& value) {
-  m_UmDecs      = value;
+    std::map<std::string, oai::model::pcf::UsageMonitoringData> const &value) {
+  m_UmDecs = value;
   m_UmDecsIsSet = true;
 }
-bool SmPolicyDecision::umDecsIsSet() const {
-  return m_UmDecsIsSet;
-}
-void SmPolicyDecision::unsetUmDecs() {
-  m_UmDecsIsSet = false;
-}
+bool SmPolicyDecision::umDecsIsSet() const { return m_UmDecsIsSet; }
+void SmPolicyDecision::unsetUmDecs() { m_UmDecsIsSet = false; }
 std::map<std::string, oai::model::pcf::QosCharacteristics>
 SmPolicyDecision::getQosChars() const {
   return m_QosChars;
 }
 void SmPolicyDecision::setQosChars(
-    std::map<std::string, oai::model::pcf::QosCharacteristics> const& value) {
-  m_QosChars      = value;
+    std::map<std::string, oai::model::pcf::QosCharacteristics> const &value) {
+  m_QosChars = value;
   m_QosCharsIsSet = true;
 }
-bool SmPolicyDecision::qosCharsIsSet() const {
-  return m_QosCharsIsSet;
-}
-void SmPolicyDecision::unsetQosChars() {
-  m_QosCharsIsSet = false;
-}
+bool SmPolicyDecision::qosCharsIsSet() const { return m_QosCharsIsSet; }
+void SmPolicyDecision::unsetQosChars() { m_QosCharsIsSet = false; }
 std::map<std::string, oai::model::pcf::QosMonitoringData>
 SmPolicyDecision::getQosMonDecs() const {
   return m_QosMonDecs;
 }
 void SmPolicyDecision::setQosMonDecs(
-    std::map<std::string, oai::model::pcf::QosMonitoringData> const& value) {
-  m_QosMonDecs      = value;
+    std::map<std::string, oai::model::pcf::QosMonitoringData> const &value) {
+  m_QosMonDecs = value;
   m_QosMonDecsIsSet = true;
 }
-bool SmPolicyDecision::qosMonDecsIsSet() const {
-  return m_QosMonDecsIsSet;
-}
-void SmPolicyDecision::unsetQosMonDecs() {
-  m_QosMonDecsIsSet = false;
-}
+bool SmPolicyDecision::qosMonDecsIsSet() const { return m_QosMonDecsIsSet; }
+void SmPolicyDecision::unsetQosMonDecs() { m_QosMonDecsIsSet = false; }
 int32_t SmPolicyDecision::getReflectiveQoSTimer() const {
   return m_ReflectiveQoSTimer;
 }
 void SmPolicyDecision::setReflectiveQoSTimer(int32_t const value) {
-  m_ReflectiveQoSTimer      = value;
+  m_ReflectiveQoSTimer = value;
   m_ReflectiveQoSTimerIsSet = true;
 }
 bool SmPolicyDecision::reflectiveQoSTimerIsSet() const {
@@ -657,21 +641,17 @@ SmPolicyDecision::getConds() const {
   return m_Conds;
 }
 void SmPolicyDecision::setConds(
-    std::map<std::string, oai::model::pcf::ConditionData> const& value) {
-  m_Conds      = value;
+    std::map<std::string, oai::model::pcf::ConditionData> const &value) {
+  m_Conds = value;
   m_CondsIsSet = true;
 }
-bool SmPolicyDecision::condsIsSet() const {
-  return m_CondsIsSet;
-}
-void SmPolicyDecision::unsetConds() {
-  m_CondsIsSet = false;
-}
+bool SmPolicyDecision::condsIsSet() const { return m_CondsIsSet; }
+void SmPolicyDecision::unsetConds() { m_CondsIsSet = false; }
 std::string SmPolicyDecision::getRevalidationTime() const {
   return m_RevalidationTime;
 }
-void SmPolicyDecision::setRevalidationTime(std::string const& value) {
-  m_RevalidationTime      = value;
+void SmPolicyDecision::setRevalidationTime(std::string const &value) {
+  m_RevalidationTime = value;
   m_RevalidationTimeIsSet = true;
 }
 bool SmPolicyDecision::revalidationTimeIsSet() const {
@@ -680,39 +660,27 @@ bool SmPolicyDecision::revalidationTimeIsSet() const {
 void SmPolicyDecision::unsetRevalidationTime() {
   m_RevalidationTimeIsSet = false;
 }
-bool SmPolicyDecision::isOffline() const {
-  return m_Offline;
-}
+bool SmPolicyDecision::isOffline() const { return m_Offline; }
 void SmPolicyDecision::setOffline(bool const value) {
-  m_Offline      = value;
+  m_Offline = value;
   m_OfflineIsSet = true;
 }
-bool SmPolicyDecision::offlineIsSet() const {
-  return m_OfflineIsSet;
-}
-void SmPolicyDecision::unsetOffline() {
-  m_OfflineIsSet = false;
-}
-bool SmPolicyDecision::isOnline() const {
-  return m_Online;
-}
+bool SmPolicyDecision::offlineIsSet() const { return m_OfflineIsSet; }
+void SmPolicyDecision::unsetOffline() { m_OfflineIsSet = false; }
+bool SmPolicyDecision::isOnline() const { return m_Online; }
 void SmPolicyDecision::setOnline(bool const value) {
-  m_Online      = value;
+  m_Online = value;
   m_OnlineIsSet = true;
 }
-bool SmPolicyDecision::onlineIsSet() const {
-  return m_OnlineIsSet;
-}
-void SmPolicyDecision::unsetOnline() {
-  m_OnlineIsSet = false;
-}
+bool SmPolicyDecision::onlineIsSet() const { return m_OnlineIsSet; }
+void SmPolicyDecision::unsetOnline() { m_OnlineIsSet = false; }
 std::vector<oai::model::pcf::PolicyControlRequestTrigger>
 SmPolicyDecision::getPolicyCtrlReqTriggers() const {
   return m_PolicyCtrlReqTriggers;
 }
 void SmPolicyDecision::setPolicyCtrlReqTriggers(
-    std::vector<oai::model::pcf::PolicyControlRequestTrigger> const& value) {
-  m_PolicyCtrlReqTriggers      = value;
+    std::vector<oai::model::pcf::PolicyControlRequestTrigger> const &value) {
+  m_PolicyCtrlReqTriggers = value;
   m_PolicyCtrlReqTriggersIsSet = true;
 }
 bool SmPolicyDecision::policyCtrlReqTriggersIsSet() const {
@@ -726,8 +694,8 @@ SmPolicyDecision::getLastReqRuleData() const {
   return m_LastReqRuleData;
 }
 void SmPolicyDecision::setLastReqRuleData(
-    std::vector<oai::model::pcf::RequestedRuleData> const& value) {
-  m_LastReqRuleData      = value;
+    std::vector<oai::model::pcf::RequestedRuleData> const &value) {
+  m_LastReqRuleData = value;
   m_LastReqRuleDataIsSet = true;
 }
 bool SmPolicyDecision::lastReqRuleDataIsSet() const {
@@ -736,13 +704,13 @@ bool SmPolicyDecision::lastReqRuleDataIsSet() const {
 void SmPolicyDecision::unsetLastReqRuleData() {
   m_LastReqRuleDataIsSet = false;
 }
-oai::model::pcf::RequestedUsageData SmPolicyDecision::getLastReqUsageData()
-    const {
+oai::model::pcf::RequestedUsageData
+SmPolicyDecision::getLastReqUsageData() const {
   return m_LastReqUsageData;
 }
 void SmPolicyDecision::setLastReqUsageData(
-    oai::model::pcf::RequestedUsageData const& value) {
-  m_LastReqUsageData      = value;
+    oai::model::pcf::RequestedUsageData const &value) {
+  m_LastReqUsageData = value;
   m_LastReqUsageDataIsSet = true;
 }
 bool SmPolicyDecision::lastReqUsageDataIsSet() const {
@@ -756,91 +724,61 @@ SmPolicyDecision::getPraInfos() const {
   return m_PraInfos;
 }
 void SmPolicyDecision::setPraInfos(
-    std::map<std::string, oai::model::common::PresenceInfoRm> const& value) {
-  m_PraInfos      = value;
+    std::map<std::string, oai::model::common::PresenceInfoRm> const &value) {
+  m_PraInfos = value;
   m_PraInfosIsSet = true;
 }
-bool SmPolicyDecision::praInfosIsSet() const {
-  return m_PraInfosIsSet;
-}
-void SmPolicyDecision::unsetPraInfos() {
-  m_PraInfosIsSet = false;
-}
-int32_t SmPolicyDecision::getIpv4Index() const {
-  return m_Ipv4Index;
-}
+bool SmPolicyDecision::praInfosIsSet() const { return m_PraInfosIsSet; }
+void SmPolicyDecision::unsetPraInfos() { m_PraInfosIsSet = false; }
+int32_t SmPolicyDecision::getIpv4Index() const { return m_Ipv4Index; }
 void SmPolicyDecision::setIpv4Index(int32_t const value) {
-  m_Ipv4Index      = value;
+  m_Ipv4Index = value;
   m_Ipv4IndexIsSet = true;
 }
-bool SmPolicyDecision::ipv4IndexIsSet() const {
-  return m_Ipv4IndexIsSet;
-}
-void SmPolicyDecision::unsetIpv4Index() {
-  m_Ipv4IndexIsSet = false;
-}
-int32_t SmPolicyDecision::getIpv6Index() const {
-  return m_Ipv6Index;
-}
+bool SmPolicyDecision::ipv4IndexIsSet() const { return m_Ipv4IndexIsSet; }
+void SmPolicyDecision::unsetIpv4Index() { m_Ipv4IndexIsSet = false; }
+int32_t SmPolicyDecision::getIpv6Index() const { return m_Ipv6Index; }
 void SmPolicyDecision::setIpv6Index(int32_t const value) {
-  m_Ipv6Index      = value;
+  m_Ipv6Index = value;
   m_Ipv6IndexIsSet = true;
 }
-bool SmPolicyDecision::ipv6IndexIsSet() const {
-  return m_Ipv6IndexIsSet;
-}
-void SmPolicyDecision::unsetIpv6Index() {
-  m_Ipv6IndexIsSet = false;
-}
+bool SmPolicyDecision::ipv6IndexIsSet() const { return m_Ipv6IndexIsSet; }
+void SmPolicyDecision::unsetIpv6Index() { m_Ipv6IndexIsSet = false; }
 oai::model::pcf::QosFlowUsage SmPolicyDecision::getQosFlowUsage() const {
   return m_QosFlowUsage;
 }
 void SmPolicyDecision::setQosFlowUsage(
-    oai::model::pcf::QosFlowUsage const& value) {
-  m_QosFlowUsage      = value;
+    oai::model::pcf::QosFlowUsage const &value) {
+  m_QosFlowUsage = value;
   m_QosFlowUsageIsSet = true;
 }
-bool SmPolicyDecision::qosFlowUsageIsSet() const {
-  return m_QosFlowUsageIsSet;
-}
-void SmPolicyDecision::unsetQosFlowUsage() {
-  m_QosFlowUsageIsSet = false;
-}
-oai::model::pcf::SmPolicyAssociationReleaseCause SmPolicyDecision::getRelCause()
-    const {
+bool SmPolicyDecision::qosFlowUsageIsSet() const { return m_QosFlowUsageIsSet; }
+void SmPolicyDecision::unsetQosFlowUsage() { m_QosFlowUsageIsSet = false; }
+oai::model::pcf::SmPolicyAssociationReleaseCause
+SmPolicyDecision::getRelCause() const {
   return m_RelCause;
 }
 void SmPolicyDecision::setRelCause(
-    oai::model::pcf::SmPolicyAssociationReleaseCause const& value) {
-  m_RelCause      = value;
+    oai::model::pcf::SmPolicyAssociationReleaseCause const &value) {
+  m_RelCause = value;
   m_RelCauseIsSet = true;
 }
-bool SmPolicyDecision::relCauseIsSet() const {
-  return m_RelCauseIsSet;
-}
-void SmPolicyDecision::unsetRelCause() {
-  m_RelCauseIsSet = false;
-}
-std::string SmPolicyDecision::getSuppFeat() const {
-  return m_SuppFeat;
-}
-void SmPolicyDecision::setSuppFeat(std::string const& value) {
-  m_SuppFeat      = value;
+bool SmPolicyDecision::relCauseIsSet() const { return m_RelCauseIsSet; }
+void SmPolicyDecision::unsetRelCause() { m_RelCauseIsSet = false; }
+std::string SmPolicyDecision::getSuppFeat() const { return m_SuppFeat; }
+void SmPolicyDecision::setSuppFeat(std::string const &value) {
+  m_SuppFeat = value;
   m_SuppFeatIsSet = true;
 }
-bool SmPolicyDecision::suppFeatIsSet() const {
-  return m_SuppFeatIsSet;
-}
-void SmPolicyDecision::unsetSuppFeat() {
-  m_SuppFeatIsSet = false;
-}
+bool SmPolicyDecision::suppFeatIsSet() const { return m_SuppFeatIsSet; }
+void SmPolicyDecision::unsetSuppFeat() { m_SuppFeatIsSet = false; }
 oai::model::pcf::BridgeManagementContainer
 SmPolicyDecision::getTsnBridgeManCont() const {
   return m_TsnBridgeManCont;
 }
 void SmPolicyDecision::setTsnBridgeManCont(
-    oai::model::pcf::BridgeManagementContainer const& value) {
-  m_TsnBridgeManCont      = value;
+    oai::model::pcf::BridgeManagementContainer const &value) {
+  m_TsnBridgeManCont = value;
   m_TsnBridgeManContIsSet = true;
 }
 bool SmPolicyDecision::tsnBridgeManContIsSet() const {
@@ -854,8 +792,8 @@ SmPolicyDecision::getTsnPortManContDstt() const {
   return m_TsnPortManContDstt;
 }
 void SmPolicyDecision::setTsnPortManContDstt(
-    oai::model::pcf::PortManagementContainer const& value) {
-  m_TsnPortManContDstt      = value;
+    oai::model::pcf::PortManagementContainer const &value) {
+  m_TsnPortManContDstt = value;
   m_TsnPortManContDsttIsSet = true;
 }
 bool SmPolicyDecision::tsnPortManContDsttIsSet() const {
@@ -869,8 +807,8 @@ SmPolicyDecision::getTsnPortManContNwtts() const {
   return m_TsnPortManContNwtts;
 }
 void SmPolicyDecision::setTsnPortManContNwtts(
-    std::vector<oai::model::pcf::PortManagementContainer> const& value) {
-  m_TsnPortManContNwtts      = value;
+    std::vector<oai::model::pcf::PortManagementContainer> const &value) {
+  m_TsnPortManContNwtts = value;
   m_TsnPortManContNwttsIsSet = true;
 }
 bool SmPolicyDecision::tsnPortManContNwttsIsSet() const {
@@ -883,7 +821,7 @@ bool SmPolicyDecision::isRedSessIndication() const {
   return m_RedSessIndication;
 }
 void SmPolicyDecision::setRedSessIndication(bool const value) {
-  m_RedSessIndication      = value;
+  m_RedSessIndication = value;
   m_RedSessIndicationIsSet = true;
 }
 bool SmPolicyDecision::redSessIndicationIsSet() const {
@@ -893,11 +831,11 @@ void SmPolicyDecision::unsetRedSessIndication() {
   m_RedSessIndicationIsSet = false;
 }
 
-std::ostream& operator<<(
-    std::ostream& os, const oai::model::pcf::SmPolicyDecision& decision) {
+std::ostream &operator<<(std::ostream &os,
+                         const oai::model::pcf::SmPolicyDecision &decision) {
   os << "PCC Rule IDs: ";
   std::string ids;
-  for (const auto& rule : decision.getPccRules()) {
+  for (const auto &rule : decision.getPccRules()) {
     ids.append(rule.first);
     ids.append(", ");
   }
@@ -910,4 +848,4 @@ std::ostream& operator<<(
   return os;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

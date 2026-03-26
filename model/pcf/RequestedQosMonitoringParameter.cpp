@@ -27,12 +27,12 @@ void RequestedQosMonitoringParameter::validate() const {
   }
 }
 
-bool RequestedQosMonitoringParameter::validate(std::stringstream& msg) const {
+bool RequestedQosMonitoringParameter::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool RequestedQosMonitoringParameter::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "RequestedQosMonitoringParameter" : pathPrefix;
@@ -44,23 +44,23 @@ bool RequestedQosMonitoringParameter::validate(
 }
 
 bool RequestedQosMonitoringParameter::operator==(
-    const RequestedQosMonitoringParameter& rhs) const {
+    const RequestedQosMonitoringParameter &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
 bool RequestedQosMonitoringParameter::operator!=(
-    const RequestedQosMonitoringParameter& rhs) const {
+    const RequestedQosMonitoringParameter &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const RequestedQosMonitoringParameter& o) {
+void to_json(nlohmann::json &j, const RequestedQosMonitoringParameter &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, RequestedQosMonitoringParameter& o) {
+void from_json(const nlohmann::json &j, RequestedQosMonitoringParameter &o) {
   from_json(j, o.m_value);
 }
 
@@ -85,4 +85,4 @@ void RequestedQosMonitoringParameter::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

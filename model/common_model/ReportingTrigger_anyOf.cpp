@@ -13,8 +13,8 @@
 
 #include "ReportingTrigger_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::common {
 
@@ -27,12 +27,12 @@ void ReportingTrigger_anyOf::validate() const {
   }
 }
 
-bool ReportingTrigger_anyOf::validate(std::stringstream& msg) const {
+bool ReportingTrigger_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ReportingTrigger_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ReportingTrigger_anyOf::validate(std::stringstream &msg,
+                                      const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ReportingTrigger_anyOf" : pathPrefix;
@@ -47,42 +47,41 @@ bool ReportingTrigger_anyOf::validate(
 }
 
 bool ReportingTrigger_anyOf::operator==(
-    const ReportingTrigger_anyOf& rhs) const {
+    const ReportingTrigger_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool ReportingTrigger_anyOf::operator!=(
-    const ReportingTrigger_anyOf& rhs) const {
+    const ReportingTrigger_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ReportingTrigger_anyOf& o) {
+void to_json(nlohmann::json &j, const ReportingTrigger_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case ReportingTrigger_anyOf::eReportingTrigger_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case ReportingTrigger_anyOf::eReportingTrigger_anyOf::PERIODICAL:
-      j = "PERIODICAL";
-      break;
-    case ReportingTrigger_anyOf::eReportingTrigger_anyOf::EVENT_A2:
-      j = "EVENT_A2";
-      break;
-    case ReportingTrigger_anyOf::eReportingTrigger_anyOf::EVENT_A2_PERIODIC:
-      j = "EVENT_A2_PERIODIC";
-      break;
-    case ReportingTrigger_anyOf::eReportingTrigger_anyOf::
-        ALL_RRM_EVENT_TRIGGERS:
-      j = "ALL_RRM_EVENT_TRIGGERS";
-      break;
+  case ReportingTrigger_anyOf::eReportingTrigger_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case ReportingTrigger_anyOf::eReportingTrigger_anyOf::PERIODICAL:
+    j = "PERIODICAL";
+    break;
+  case ReportingTrigger_anyOf::eReportingTrigger_anyOf::EVENT_A2:
+    j = "EVENT_A2";
+    break;
+  case ReportingTrigger_anyOf::eReportingTrigger_anyOf::EVENT_A2_PERIODIC:
+    j = "EVENT_A2_PERIODIC";
+    break;
+  case ReportingTrigger_anyOf::eReportingTrigger_anyOf::ALL_RRM_EVENT_TRIGGERS:
+    j = "ALL_RRM_EVENT_TRIGGERS";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, ReportingTrigger_anyOf& o) {
+void from_json(const nlohmann::json &j, ReportingTrigger_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "PERIODICAL") {
     o.setValue(ReportingTrigger_anyOf::eReportingTrigger_anyOf::PERIODICAL);
@@ -112,4 +111,4 @@ void ReportingTrigger_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

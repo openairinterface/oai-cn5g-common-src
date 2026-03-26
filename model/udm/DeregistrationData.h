@@ -34,7 +34,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class DeregistrationData {
- public:
+public:
   DeregistrationData();
   virtual ~DeregistrationData();
 
@@ -47,12 +47,12 @@ class DeregistrationData {
   ///
   /// </summary>
   DeregistrationReason getDeregReason() const;
-  void setDeregReason(DeregistrationReason const& value);
+  void setDeregReason(DeregistrationReason const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::AccessType getAccessType() const;
-  void setAccessType(oai::model::common::AccessType const& value);
+  void setAccessType(oai::model::common::AccessType const &value);
   bool accessTypeIsSet() const;
   void unsetAccessType();
   /// <summary>
@@ -66,14 +66,14 @@ class DeregistrationData {
   ///
   /// </summary>
   std::string getNewSmfInstanceId() const;
-  void setNewSmfInstanceId(std::string const& value);
+  void setNewSmfInstanceId(std::string const &value);
   bool newSmfInstanceIdIsSet() const;
   void unsetNewSmfInstanceId();
 
-  friend void to_json(nlohmann::json& j, const DeregistrationData& o);
-  friend void from_json(const nlohmann::json& j, DeregistrationData& o);
+  friend void to_json(nlohmann::json &j, const DeregistrationData &o);
+  friend void from_json(const nlohmann::json &j, DeregistrationData &o);
 
- protected:
+protected:
   DeregistrationReason m_DeregReason;
 
   oai::model::common::AccessType m_AccessType;
@@ -84,6 +84,6 @@ class DeregistrationData {
   bool m_NewSmfInstanceIdIsSet;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* DeregistrationData_H_ */

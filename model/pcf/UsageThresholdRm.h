@@ -29,7 +29,7 @@ namespace oai::model::pcf {
 /// nullable:true property.
 /// </summary>
 class UsageThresholdRm {
- public:
+public:
   UsageThresholdRm();
   virtual ~UsageThresholdRm() = default;
 
@@ -43,16 +43,16 @@ class UsageThresholdRm {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const UsageThresholdRm& rhs) const;
-  bool operator!=(const UsageThresholdRm& rhs) const;
+  bool operator==(const UsageThresholdRm &rhs) const;
+  bool operator!=(const UsageThresholdRm &rhs) const;
 
   /////////////////////////////////////////////
   /// UsageThresholdRm members
@@ -90,10 +90,10 @@ class UsageThresholdRm {
   bool uplinkVolumeIsSet() const;
   void unsetUplinkVolume();
 
-  friend void to_json(nlohmann::json& j, const UsageThresholdRm& o);
-  friend void from_json(const nlohmann::json& j, UsageThresholdRm& o);
+  friend void to_json(nlohmann::json &j, const UsageThresholdRm &o);
+  friend void from_json(const nlohmann::json &j, UsageThresholdRm &o);
 
- protected:
+protected:
   int32_t m_Duration;
   bool m_DurationIsSet;
   int64_t m_TotalVolume;
@@ -104,6 +104,6 @@ class UsageThresholdRm {
   bool m_UplinkVolumeIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* UsageThresholdRm_H_ */

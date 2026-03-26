@@ -16,14 +16,14 @@ SecurityIndication::SecurityIndication() {
 
 //------------------------------------------------------------------------------
 SecurityIndication::SecurityIndication(
-    const IntegrityProtectionIndication& integrityProtectionIndication,
-    const ConfidentialityProtectionIndication&
-        confidentialityProtectionIndication,
-    const std::optional<MaximumIntegrityProtectedDataRate>&
-        maximumIntegrityProtectedDataRateUl,
-    const std::optional<MaximumIntegrityProtectedDataRate>&
-        maximumIntegrityProtectedDataRateDl) {
-  m_IntegrityProtectionIndication       = integrityProtectionIndication;
+    const IntegrityProtectionIndication &integrityProtectionIndication,
+    const ConfidentialityProtectionIndication
+        &confidentialityProtectionIndication,
+    const std::optional<MaximumIntegrityProtectedDataRate>
+        &maximumIntegrityProtectedDataRateUl,
+    const std::optional<MaximumIntegrityProtectedDataRate>
+        &maximumIntegrityProtectedDataRateDl) {
+  m_IntegrityProtectionIndication = integrityProtectionIndication;
   m_ConfidentialityProtectionIndication = confidentialityProtectionIndication;
   m_MaximumIntegrityProtectedDataRateUl = maximumIntegrityProtectedDataRateUl;
   m_MaximumIntegrityProtectedDataRateDl = maximumIntegrityProtectedDataRateDl;
@@ -34,14 +34,14 @@ SecurityIndication::~SecurityIndication() {}
 
 //------------------------------------------------------------------------------
 void SecurityIndication::set(
-    const IntegrityProtectionIndication& integrityProtectionIndication,
-    const ConfidentialityProtectionIndication&
-        confidentialityProtectionIndication,
-    const std::optional<MaximumIntegrityProtectedDataRate>&
-        maximumIntegrityProtectedDataRateUl,
-    const std::optional<MaximumIntegrityProtectedDataRate>&
-        maximumIntegrityProtectedDataRateDl) {
-  m_IntegrityProtectionIndication       = integrityProtectionIndication;
+    const IntegrityProtectionIndication &integrityProtectionIndication,
+    const ConfidentialityProtectionIndication
+        &confidentialityProtectionIndication,
+    const std::optional<MaximumIntegrityProtectedDataRate>
+        &maximumIntegrityProtectedDataRateUl,
+    const std::optional<MaximumIntegrityProtectedDataRate>
+        &maximumIntegrityProtectedDataRateDl) {
+  m_IntegrityProtectionIndication = integrityProtectionIndication;
   m_ConfidentialityProtectionIndication = confidentialityProtectionIndication;
   m_MaximumIntegrityProtectedDataRateUl = maximumIntegrityProtectedDataRateUl;
   m_MaximumIntegrityProtectedDataRateDl = maximumIntegrityProtectedDataRateDl;
@@ -49,13 +49,13 @@ void SecurityIndication::set(
 
 //------------------------------------------------------------------------------
 void SecurityIndication::get(
-    IntegrityProtectionIndication& integrityProtectionIndication,
-    ConfidentialityProtectionIndication& confidentialityProtectionIndication,
-    std::optional<MaximumIntegrityProtectedDataRate>&
-        maximumIntegrityProtectedDataRateUl,
-    std::optional<MaximumIntegrityProtectedDataRate>&
-        maximumIntegrityProtectedDataRateDl) const {
-  integrityProtectionIndication       = m_IntegrityProtectionIndication;
+    IntegrityProtectionIndication &integrityProtectionIndication,
+    ConfidentialityProtectionIndication &confidentialityProtectionIndication,
+    std::optional<MaximumIntegrityProtectedDataRate>
+        &maximumIntegrityProtectedDataRateUl,
+    std::optional<MaximumIntegrityProtectedDataRate>
+        &maximumIntegrityProtectedDataRateDl) const {
+  integrityProtectionIndication = m_IntegrityProtectionIndication;
   confidentialityProtectionIndication = m_ConfidentialityProtectionIndication;
   maximumIntegrityProtectedDataRateUl = m_MaximumIntegrityProtectedDataRateUl;
   maximumIntegrityProtectedDataRateDl = m_MaximumIntegrityProtectedDataRateDl;
@@ -63,7 +63,7 @@ void SecurityIndication::get(
 
 //------------------------------------------------------------------------------
 bool SecurityIndication::encode(
-    Ngap_SecurityIndication_t& securityIndication) const {
+    Ngap_SecurityIndication_t &securityIndication) const {
   if (!m_IntegrityProtectionIndication.encode(
           securityIndication.integrityProtectionIndication))
     return false;
@@ -71,12 +71,13 @@ bool SecurityIndication::encode(
           securityIndication.confidentialityProtectionIndication))
     return false;
   if (m_MaximumIntegrityProtectedDataRateUl.has_value()) {
-    Ngap_MaximumIntegrityProtectedDataRate_t* maxIPDataRate =
-        (Ngap_MaximumIntegrityProtectedDataRate_t*) calloc(
+    Ngap_MaximumIntegrityProtectedDataRate_t *maxIPDataRate =
+        (Ngap_MaximumIntegrityProtectedDataRate_t *)calloc(
             1, sizeof(Ngap_MaximumIntegrityProtectedDataRate_t));
-    if (!maxIPDataRate) return false;
+    if (!maxIPDataRate)
+      return false;
     if (!m_MaximumIntegrityProtectedDataRateUl.value().encode(*maxIPDataRate)) {
-      oai::utils::utils::free_wrapper((void**) &maxIPDataRate);
+      oai::utils::utils::free_wrapper((void **)&maxIPDataRate);
       return false;
     }
 
@@ -90,7 +91,7 @@ bool SecurityIndication::encode(
 
 //------------------------------------------------------------------------------
 bool SecurityIndication::decode(
-    const Ngap_SecurityIndication_t& securityIndication) {
+    const Ngap_SecurityIndication_t &securityIndication) {
   if (!m_IntegrityProtectionIndication.decode(
           securityIndication.integrityProtectionIndication))
     return false;
@@ -112,4 +113,4 @@ bool SecurityIndication::decode(
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

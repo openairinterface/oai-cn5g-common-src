@@ -19,9 +19,9 @@
 namespace oai::model::pcf {
 
 QosNotificationControlInfo::QosNotificationControlInfo() {
-  m_ContVer            = 0;
-  m_ContVerIsSet       = false;
-  m_AltQosParamId      = "";
+  m_ContVer = 0;
+  m_ContVerIsSet = false;
+  m_AltQosParamId = "";
   m_AltQosParamIdIsSet = false;
 }
 
@@ -32,19 +32,19 @@ void QosNotificationControlInfo::validate() const {
   }
 }
 
-bool QosNotificationControlInfo::validate(std::stringstream& msg) const {
+bool QosNotificationControlInfo::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool QosNotificationControlInfo::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool QosNotificationControlInfo::validate(std::stringstream &msg,
+                                          const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "QosNotificationControlInfo" : pathPrefix;
 
   /* RefPccRuleIds */ {
-    const std::vector<std::string>& value = m_RefPccRuleIds;
-    const std::string currentValuePath    = _pathPrefix + ".refPccRuleIds";
+    const std::vector<std::string> &value = m_RefPccRuleIds;
+    const std::string currentValuePath = _pathPrefix + ".refPccRuleIds";
 
     if (value.size() < 1) {
       success = false;
@@ -68,7 +68,7 @@ bool QosNotificationControlInfo::validate(
 }
 
 bool QosNotificationControlInfo::operator==(
-    const QosNotificationControlInfo& rhs) const {
+    const QosNotificationControlInfo &rhs) const {
   return
 
       (getRefPccRuleIds() == rhs.getRefPccRuleIds()) &&
@@ -87,19 +87,21 @@ bool QosNotificationControlInfo::operator==(
 }
 
 bool QosNotificationControlInfo::operator!=(
-    const QosNotificationControlInfo& rhs) const {
+    const QosNotificationControlInfo &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const QosNotificationControlInfo& o) {
-  j                  = nlohmann::json();
+void to_json(nlohmann::json &j, const QosNotificationControlInfo &o) {
+  j = nlohmann::json();
   j["refPccRuleIds"] = o.m_RefPccRuleIds;
-  j["notifType"]     = o.m_NotifType;
-  if (o.contVerIsSet()) j["contVer"] = o.m_ContVer;
-  if (o.altQosParamIdIsSet()) j["altQosParamId"] = o.m_AltQosParamId;
+  j["notifType"] = o.m_NotifType;
+  if (o.contVerIsSet())
+    j["contVer"] = o.m_ContVer;
+  if (o.altQosParamIdIsSet())
+    j["altQosParamId"] = o.m_AltQosParamId;
 }
 
-void from_json(const nlohmann::json& j, QosNotificationControlInfo& o) {
+void from_json(const nlohmann::json &j, QosNotificationControlInfo &o) {
   j.at("refPccRuleIds").get_to(o.m_RefPccRuleIds);
   j.at("notifType").get_to(o.m_NotifType);
   if (j.find("contVer") != j.end()) {
@@ -116,34 +118,28 @@ std::vector<std::string> QosNotificationControlInfo::getRefPccRuleIds() const {
   return m_RefPccRuleIds;
 }
 void QosNotificationControlInfo::setRefPccRuleIds(
-    std::vector<std::string> const& value) {
+    std::vector<std::string> const &value) {
   m_RefPccRuleIds = value;
 }
 oai::model::pcf::QosNotifType QosNotificationControlInfo::getNotifType() const {
   return m_NotifType;
 }
 void QosNotificationControlInfo::setNotifType(
-    oai::model::pcf::QosNotifType const& value) {
+    oai::model::pcf::QosNotifType const &value) {
   m_NotifType = value;
 }
-int32_t QosNotificationControlInfo::getContVer() const {
-  return m_ContVer;
-}
+int32_t QosNotificationControlInfo::getContVer() const { return m_ContVer; }
 void QosNotificationControlInfo::setContVer(int32_t const value) {
-  m_ContVer      = value;
+  m_ContVer = value;
   m_ContVerIsSet = true;
 }
-bool QosNotificationControlInfo::contVerIsSet() const {
-  return m_ContVerIsSet;
-}
-void QosNotificationControlInfo::unsetContVer() {
-  m_ContVerIsSet = false;
-}
+bool QosNotificationControlInfo::contVerIsSet() const { return m_ContVerIsSet; }
+void QosNotificationControlInfo::unsetContVer() { m_ContVerIsSet = false; }
 std::string QosNotificationControlInfo::getAltQosParamId() const {
   return m_AltQosParamId;
 }
-void QosNotificationControlInfo::setAltQosParamId(std::string const& value) {
-  m_AltQosParamId      = value;
+void QosNotificationControlInfo::setAltQosParamId(std::string const &value) {
+  m_AltQosParamId = value;
   m_AltQosParamIdIsSet = true;
 }
 bool QosNotificationControlInfo::altQosParamIdIsSet() const {
@@ -153,4 +149,4 @@ void QosNotificationControlInfo::unsetAltQosParamId() {
   m_AltQosParamIdIsSet = false;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

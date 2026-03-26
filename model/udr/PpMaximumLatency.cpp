@@ -19,12 +19,12 @@
 namespace oai::udr::model {
 
 PpMaximumLatency::PpMaximumLatency() {
-  m_MaximumLatency              = 0;
-  m_AfInstanceId                = "";
-  m_ReferenceId                 = 0;
-  m_ValidityTime                = "";
-  m_ValidityTimeIsSet           = false;
-  m_MtcProviderInformation      = "";
+  m_MaximumLatency = 0;
+  m_AfInstanceId = "";
+  m_ReferenceId = 0;
+  m_ValidityTime = "";
+  m_ValidityTimeIsSet = false;
+  m_MtcProviderInformation = "";
   m_MtcProviderInformationIsSet = false;
 }
 
@@ -34,17 +34,18 @@ void PpMaximumLatency::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const PpMaximumLatency& o) {
-  j                   = nlohmann::json();
+void to_json(nlohmann::json &j, const PpMaximumLatency &o) {
+  j = nlohmann::json();
   j["maximumLatency"] = o.m_MaximumLatency;
-  j["afInstanceId"]   = o.m_AfInstanceId;
-  j["referenceId"]    = o.m_ReferenceId;
-  if (o.validityTimeIsSet()) j["validityTime"] = o.m_ValidityTime;
+  j["afInstanceId"] = o.m_AfInstanceId;
+  j["referenceId"] = o.m_ReferenceId;
+  if (o.validityTimeIsSet())
+    j["validityTime"] = o.m_ValidityTime;
   if (o.mtcProviderInformationIsSet())
     j["mtcProviderInformation"] = o.m_MtcProviderInformation;
 }
 
-void from_json(const nlohmann::json& j, PpMaximumLatency& o) {
+void from_json(const nlohmann::json &j, PpMaximumLatency &o) {
   j.at("maximumLatency").get_to(o.m_MaximumLatency);
   j.at("afInstanceId").get_to(o.m_AfInstanceId);
   j.at("referenceId").get_to(o.m_ReferenceId);
@@ -58,42 +59,30 @@ void from_json(const nlohmann::json& j, PpMaximumLatency& o) {
   }
 }
 
-int32_t PpMaximumLatency::getMaximumLatency() const {
-  return m_MaximumLatency;
-}
+int32_t PpMaximumLatency::getMaximumLatency() const { return m_MaximumLatency; }
 void PpMaximumLatency::setMaximumLatency(int32_t const value) {
   m_MaximumLatency = value;
 }
-std::string PpMaximumLatency::getAfInstanceId() const {
-  return m_AfInstanceId;
-}
-void PpMaximumLatency::setAfInstanceId(std::string const& value) {
+std::string PpMaximumLatency::getAfInstanceId() const { return m_AfInstanceId; }
+void PpMaximumLatency::setAfInstanceId(std::string const &value) {
   m_AfInstanceId = value;
 }
-int32_t PpMaximumLatency::getReferenceId() const {
-  return m_ReferenceId;
-}
+int32_t PpMaximumLatency::getReferenceId() const { return m_ReferenceId; }
 void PpMaximumLatency::setReferenceId(int32_t const value) {
   m_ReferenceId = value;
 }
-std::string PpMaximumLatency::getValidityTime() const {
-  return m_ValidityTime;
-}
-void PpMaximumLatency::setValidityTime(std::string const& value) {
-  m_ValidityTime      = value;
+std::string PpMaximumLatency::getValidityTime() const { return m_ValidityTime; }
+void PpMaximumLatency::setValidityTime(std::string const &value) {
+  m_ValidityTime = value;
   m_ValidityTimeIsSet = true;
 }
-bool PpMaximumLatency::validityTimeIsSet() const {
-  return m_ValidityTimeIsSet;
-}
-void PpMaximumLatency::unsetValidityTime() {
-  m_ValidityTimeIsSet = false;
-}
+bool PpMaximumLatency::validityTimeIsSet() const { return m_ValidityTimeIsSet; }
+void PpMaximumLatency::unsetValidityTime() { m_ValidityTimeIsSet = false; }
 std::string PpMaximumLatency::getMtcProviderInformation() const {
   return m_MtcProviderInformation;
 }
-void PpMaximumLatency::setMtcProviderInformation(std::string const& value) {
-  m_MtcProviderInformation      = value;
+void PpMaximumLatency::setMtcProviderInformation(std::string const &value) {
+  m_MtcProviderInformation = value;
   m_MtcProviderInformationIsSet = true;
 }
 bool PpMaximumLatency::mtcProviderInformationIsSet() const {
@@ -103,4 +92,4 @@ void PpMaximumLatency::unsetMtcProviderInformation() {
   m_MtcProviderInformationIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

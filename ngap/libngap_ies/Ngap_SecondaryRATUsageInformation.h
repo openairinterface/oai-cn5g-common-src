@@ -25,9 +25,9 @@ struct Ngap_ProtocolExtensionContainer;
 
 /* Ngap_SecondaryRATUsageInformation */
 typedef struct Ngap_SecondaryRATUsageInformation {
-  struct Ngap_PDUSessionUsageReport* pDUSessionUsageReport;     /* OPTIONAL */
-  struct Ngap_QoSFlowsUsageReportList* qosFlowsUsageReportList; /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extension;         /* OPTIONAL */
+  struct Ngap_PDUSessionUsageReport *pDUSessionUsageReport;     /* OPTIONAL */
+  struct Ngap_QoSFlowsUsageReportList *qosFlowsUsageReportList; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extension;         /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

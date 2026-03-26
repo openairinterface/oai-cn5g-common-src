@@ -27,30 +27,28 @@ void RatTypeRm::validate() const {
   }
 }
 
-bool RatTypeRm::validate(std::stringstream& msg) const {
+bool RatTypeRm::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool RatTypeRm::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool RatTypeRm::validate(std::stringstream &msg,
+                         const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "RatTypeRm" : pathPrefix;
 
   return success;
 }
 
-bool RatTypeRm::operator==(const RatTypeRm& rhs) const {
+bool RatTypeRm::operator==(const RatTypeRm &rhs) const {
   return (*this == rhs);
 }
 
-bool RatTypeRm::operator!=(const RatTypeRm& rhs) const {
+bool RatTypeRm::operator!=(const RatTypeRm &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const RatTypeRm& o) {
-  j = nlohmann::json();
-}
+void to_json(nlohmann::json &j, const RatTypeRm &o) { j = nlohmann::json(); }
 
-void from_json(const nlohmann::json& j, RatTypeRm& o) {}
+void from_json(const nlohmann::json &j, RatTypeRm &o) {}
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

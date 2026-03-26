@@ -45,7 +45,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class SubscriptionDataSets {
- public:
+public:
   SubscriptionDataSets();
   virtual ~SubscriptionDataSets();
 
@@ -58,84 +58,84 @@ class SubscriptionDataSets {
   ///
   /// </summary>
   AccessAndMobilitySubscriptionData getAmData() const;
-  void setAmData(AccessAndMobilitySubscriptionData const& value);
+  void setAmData(AccessAndMobilitySubscriptionData const &value);
   bool amDataIsSet() const;
   void unsetAmData();
   /// <summary>
   ///
   /// </summary>
   SmfSelectionSubscriptionData getSmfSelData() const;
-  void setSmfSelData(SmfSelectionSubscriptionData const& value);
+  void setSmfSelData(SmfSelectionSubscriptionData const &value);
   bool smfSelDataIsSet() const;
   void unsetSmfSelData();
   /// <summary>
   ///
   /// </summary>
   UeContextInAmfData getUecAmfData() const;
-  void setUecAmfData(UeContextInAmfData const& value);
+  void setUecAmfData(UeContextInAmfData const &value);
   bool uecAmfDataIsSet() const;
   void unsetUecAmfData();
   /// <summary>
   ///
   /// </summary>
   UeContextInSmfData getUecSmfData() const;
-  void setUecSmfData(UeContextInSmfData const& value);
+  void setUecSmfData(UeContextInSmfData const &value);
   bool uecSmfDataIsSet() const;
   void unsetUecSmfData();
   /// <summary>
   ///
   /// </summary>
   UeContextInSmsfData getUecSmsfData() const;
-  void setUecSmsfData(UeContextInSmsfData const& value);
+  void setUecSmsfData(UeContextInSmsfData const &value);
   bool uecSmsfDataIsSet() const;
   void unsetUecSmsfData();
   /// <summary>
   ///
   /// </summary>
   SmsSubscriptionData getSmsSubsData() const;
-  void setSmsSubsData(SmsSubscriptionData const& value);
+  void setSmsSubsData(SmsSubscriptionData const &value);
   bool smsSubsDataIsSet() const;
   void unsetSmsSubsData();
   /// <summary>
   ///
   /// </summary>
-  std::vector<SessionManagementSubscriptionData>& getSmData();
-  void setSmData(std::vector<SessionManagementSubscriptionData> const& value);
+  std::vector<SessionManagementSubscriptionData> &getSmData();
+  void setSmData(std::vector<SessionManagementSubscriptionData> const &value);
   bool smDataIsSet() const;
   void unsetSmData();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::TraceData getTraceData() const;
-  void setTraceData(oai::model::common::TraceData const& value);
+  void setTraceData(oai::model::common::TraceData const &value);
   bool traceDataIsSet() const;
   void unsetTraceData();
   /// <summary>
   ///
   /// </summary>
   SmsManagementSubscriptionData getSmsMngData() const;
-  void setSmsMngData(SmsManagementSubscriptionData const& value);
+  void setSmsMngData(SmsManagementSubscriptionData const &value);
   bool smsMngDataIsSet() const;
   void unsetSmsMngData();
   /// <summary>
   ///
   /// </summary>
   LcsPrivacyData getLcsPrivacyData() const;
-  void setLcsPrivacyData(LcsPrivacyData const& value);
+  void setLcsPrivacyData(LcsPrivacyData const &value);
   bool lcsPrivacyDataIsSet() const;
   void unsetLcsPrivacyData();
   /// <summary>
   ///
   /// </summary>
   LcsMoData getLcsMoData() const;
-  void setLcsMoData(LcsMoData const& value);
+  void setLcsMoData(LcsMoData const &value);
   bool lcsMoDataIsSet() const;
   void unsetLcsMoData();
   /// <summary>
   ///
   /// </summary>
   V2xSubscriptionData getV2xData() const;
-  void setV2xData(V2xSubscriptionData const& value);
+  void setV2xData(V2xSubscriptionData const &value);
   bool v2xDataIsSet() const;
   void unsetV2xData();
   /// <summary>
@@ -143,14 +143,14 @@ class SubscriptionDataSets {
   /// </summary>
   LcsBroadcastAssistanceTypesData getLcsBroadcastAssistanceTypesData() const;
   void setLcsBroadcastAssistanceTypesData(
-      LcsBroadcastAssistanceTypesData const& value);
+      LcsBroadcastAssistanceTypesData const &value);
   bool lcsBroadcastAssistanceTypesDataIsSet() const;
   void unsetLcsBroadcastAssistanceTypesData();
 
-  friend void to_json(nlohmann::json& j, const SubscriptionDataSets& o);
-  friend void from_json(const nlohmann::json& j, SubscriptionDataSets& o);
+  friend void to_json(nlohmann::json &j, const SubscriptionDataSets &o);
+  friend void from_json(const nlohmann::json &j, SubscriptionDataSets &o);
 
- protected:
+protected:
   AccessAndMobilitySubscriptionData m_AmData;
   bool m_AmDataIsSet;
   SmfSelectionSubscriptionData m_SmfSelData;
@@ -179,6 +179,6 @@ class SubscriptionDataSets {
   bool m_LcsBroadcastAssistanceTypesDataIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* SubscriptionDataSets_H_ */

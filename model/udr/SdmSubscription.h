@@ -38,7 +38,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class SdmSubscription {
- public:
+public:
   SdmSubscription();
   virtual ~SdmSubscription();
 
@@ -51,7 +51,7 @@ class SdmSubscription {
   ///
   /// </summary>
   std::string getNfInstanceId() const;
-  void setNfInstanceId(std::string const& value);
+  void setNfInstanceId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
@@ -63,52 +63,52 @@ class SdmSubscription {
   ///
   /// </summary>
   std::string getExpires() const;
-  void setExpires(std::string const& value);
+  void setExpires(std::string const &value);
   bool expiresIsSet() const;
   void unsetExpires();
   /// <summary>
   ///
   /// </summary>
   std::string getCallbackReference() const;
-  void setCallbackReference(std::string const& value);
+  void setCallbackReference(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::nrf::ServiceName getAmfServiceName() const;
-  void setAmfServiceName(oai::model::nrf::ServiceName const& value);
+  void setAmfServiceName(oai::model::nrf::ServiceName const &value);
   bool amfServiceNameIsSet() const;
   void unsetAmfServiceName();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getMonitoredResourceUris();
-  void setMonitoredResourceUris(std::vector<std::string> const& value);
+  std::vector<std::string> &getMonitoredResourceUris();
+  void setMonitoredResourceUris(std::vector<std::string> const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Snssai getSingleNssai() const;
-  void setSingleNssai(oai::model::common::Snssai const& value);
+  void setSingleNssai(oai::model::common::Snssai const &value);
   bool singleNssaiIsSet() const;
   void unsetSingleNssai();
   /// <summary>
   ///
   /// </summary>
   std::string getDnn() const;
-  void setDnn(std::string const& value);
+  void setDnn(std::string const &value);
   bool dnnIsSet() const;
   void unsetDnn();
   /// <summary>
   ///
   /// </summary>
   std::string getSubscriptionId() const;
-  void setSubscriptionId(std::string const& value);
+  void setSubscriptionId(std::string const &value);
   bool subscriptionIdIsSet() const;
   void unsetSubscriptionId();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::PlmnId getPlmnId() const;
-  void setPlmnId(oai::model::common::PlmnId const& value);
+  void setPlmnId(oai::model::common::PlmnId const &value);
   bool plmnIdIsSet() const;
   void unsetPlmnId();
   /// <summary>
@@ -122,28 +122,28 @@ class SdmSubscription {
   ///
   /// </summary>
   SubscriptionDataSets getReport() const;
-  void setReport(SubscriptionDataSets const& value);
+  void setReport(SubscriptionDataSets const &value);
   bool reportIsSet() const;
   void unsetReport();
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
   /// <summary>
   ///
   /// </summary>
   ContextInfo getContextInfo() const;
-  void setContextInfo(ContextInfo const& value);
+  void setContextInfo(ContextInfo const &value);
   bool contextInfoIsSet() const;
   void unsetContextInfo();
 
-  friend void to_json(nlohmann::json& j, const SdmSubscription& o);
-  friend void from_json(const nlohmann::json& j, SdmSubscription& o);
+  friend void to_json(nlohmann::json &j, const SdmSubscription &o);
+  friend void from_json(const nlohmann::json &j, SdmSubscription &o);
 
- protected:
+protected:
   std::string m_NfInstanceId;
 
   bool m_ImplicitUnsubscribe;
@@ -174,6 +174,6 @@ class SdmSubscription {
   bool m_ContextInfoIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* SdmSubscription_H_ */

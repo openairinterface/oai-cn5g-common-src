@@ -19,13 +19,13 @@
 namespace oai::udr::model {
 
 CommunicationCharacteristics::CommunicationCharacteristics() {
-  m_PpSubsRegTimerIsSet        = false;
-  m_PpActiveTimeIsSet          = false;
-  m_PpDlPacketCount            = 0;
-  m_PpDlPacketCountIsSet       = false;
-  m_PpDlPacketCountExtIsSet    = false;
+  m_PpSubsRegTimerIsSet = false;
+  m_PpActiveTimeIsSet = false;
+  m_PpDlPacketCount = 0;
+  m_PpDlPacketCountIsSet = false;
+  m_PpDlPacketCountExtIsSet = false;
   m_PpMaximumResponseTimeIsSet = false;
-  m_PpMaximumLatencyIsSet      = false;
+  m_PpMaximumLatencyIsSet = false;
 }
 
 CommunicationCharacteristics::~CommunicationCharacteristics() {}
@@ -34,19 +34,23 @@ void CommunicationCharacteristics::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const CommunicationCharacteristics& o) {
+void to_json(nlohmann::json &j, const CommunicationCharacteristics &o) {
   j = nlohmann::json();
-  if (o.ppSubsRegTimerIsSet()) j["ppSubsRegTimer"] = o.m_PpSubsRegTimer;
-  if (o.ppActiveTimeIsSet()) j["ppActiveTime"] = o.m_PpActiveTime;
-  if (o.ppDlPacketCountIsSet()) j["ppDlPacketCount"] = o.m_PpDlPacketCount;
+  if (o.ppSubsRegTimerIsSet())
+    j["ppSubsRegTimer"] = o.m_PpSubsRegTimer;
+  if (o.ppActiveTimeIsSet())
+    j["ppActiveTime"] = o.m_PpActiveTime;
+  if (o.ppDlPacketCountIsSet())
+    j["ppDlPacketCount"] = o.m_PpDlPacketCount;
   if (o.ppDlPacketCountExtIsSet())
     j["ppDlPacketCountExt"] = o.m_PpDlPacketCountExt;
   if (o.ppMaximumResponseTimeIsSet())
     j["ppMaximumResponseTime"] = o.m_PpMaximumResponseTime;
-  if (o.ppMaximumLatencyIsSet()) j["ppMaximumLatency"] = o.m_PpMaximumLatency;
+  if (o.ppMaximumLatencyIsSet())
+    j["ppMaximumLatency"] = o.m_PpMaximumLatency;
 }
 
-void from_json(const nlohmann::json& j, CommunicationCharacteristics& o) {
+void from_json(const nlohmann::json &j, CommunicationCharacteristics &o) {
   if (j.find("ppSubsRegTimer") != j.end()) {
     j.at("ppSubsRegTimer").get_to(o.m_PpSubsRegTimer);
     o.m_PpSubsRegTimerIsSet = true;
@@ -77,8 +81,8 @@ PpSubsRegTimer CommunicationCharacteristics::getPpSubsRegTimer() const {
   return m_PpSubsRegTimer;
 }
 void CommunicationCharacteristics::setPpSubsRegTimer(
-    PpSubsRegTimer const& value) {
-  m_PpSubsRegTimer      = value;
+    PpSubsRegTimer const &value) {
+  m_PpSubsRegTimer = value;
   m_PpSubsRegTimerIsSet = true;
 }
 bool CommunicationCharacteristics::ppSubsRegTimerIsSet() const {
@@ -90,8 +94,8 @@ void CommunicationCharacteristics::unsetPpSubsRegTimer() {
 PpActiveTime CommunicationCharacteristics::getPpActiveTime() const {
   return m_PpActiveTime;
 }
-void CommunicationCharacteristics::setPpActiveTime(PpActiveTime const& value) {
-  m_PpActiveTime      = value;
+void CommunicationCharacteristics::setPpActiveTime(PpActiveTime const &value) {
+  m_PpActiveTime = value;
   m_PpActiveTimeIsSet = true;
 }
 bool CommunicationCharacteristics::ppActiveTimeIsSet() const {
@@ -104,7 +108,7 @@ int32_t CommunicationCharacteristics::getPpDlPacketCount() const {
   return m_PpDlPacketCount;
 }
 void CommunicationCharacteristics::setPpDlPacketCount(int32_t const value) {
-  m_PpDlPacketCount      = value;
+  m_PpDlPacketCount = value;
   m_PpDlPacketCountIsSet = true;
 }
 bool CommunicationCharacteristics::ppDlPacketCountIsSet() const {
@@ -117,8 +121,8 @@ PpDlPacketCountExt CommunicationCharacteristics::getPpDlPacketCountExt() const {
   return m_PpDlPacketCountExt;
 }
 void CommunicationCharacteristics::setPpDlPacketCountExt(
-    PpDlPacketCountExt const& value) {
-  m_PpDlPacketCountExt      = value;
+    PpDlPacketCountExt const &value) {
+  m_PpDlPacketCountExt = value;
   m_PpDlPacketCountExtIsSet = true;
 }
 bool CommunicationCharacteristics::ppDlPacketCountExtIsSet() const {
@@ -127,13 +131,13 @@ bool CommunicationCharacteristics::ppDlPacketCountExtIsSet() const {
 void CommunicationCharacteristics::unsetPpDlPacketCountExt() {
   m_PpDlPacketCountExtIsSet = false;
 }
-PpMaximumResponseTime CommunicationCharacteristics::getPpMaximumResponseTime()
-    const {
+PpMaximumResponseTime
+CommunicationCharacteristics::getPpMaximumResponseTime() const {
   return m_PpMaximumResponseTime;
 }
 void CommunicationCharacteristics::setPpMaximumResponseTime(
-    PpMaximumResponseTime const& value) {
-  m_PpMaximumResponseTime      = value;
+    PpMaximumResponseTime const &value) {
+  m_PpMaximumResponseTime = value;
   m_PpMaximumResponseTimeIsSet = true;
 }
 bool CommunicationCharacteristics::ppMaximumResponseTimeIsSet() const {
@@ -146,8 +150,8 @@ PpMaximumLatency CommunicationCharacteristics::getPpMaximumLatency() const {
   return m_PpMaximumLatency;
 }
 void CommunicationCharacteristics::setPpMaximumLatency(
-    PpMaximumLatency const& value) {
-  m_PpMaximumLatency      = value;
+    PpMaximumLatency const &value) {
+  m_PpMaximumLatency = value;
   m_PpMaximumLatencyIsSet = true;
 }
 bool CommunicationCharacteristics::ppMaximumLatencyIsSet() const {
@@ -157,4 +161,4 @@ void CommunicationCharacteristics::unsetPpMaximumLatency() {
   m_PpMaximumLatencyIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

@@ -28,7 +28,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class CreditManagementStatus {
- public:
+public:
   CreditManagementStatus();
   virtual ~CreditManagementStatus() = default;
 
@@ -42,36 +42,36 @@ class CreditManagementStatus {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const CreditManagementStatus& rhs) const;
-  bool operator!=(const CreditManagementStatus& rhs) const;
+  bool operator==(const CreditManagementStatus &rhs) const;
+  bool operator!=(const CreditManagementStatus &rhs) const;
 
   /////////////////////////////////////////////
   /// CreditManagementStatus members
 
   CreditManagementStatus_anyOf getValue() const;
   void setValue(CreditManagementStatus_anyOf value);
-  CreditManagementStatus_anyOf::eCreditManagementStatus_anyOf getEnumValue()
-      const;
+  CreditManagementStatus_anyOf::eCreditManagementStatus_anyOf
+  getEnumValue() const;
   void setEnumValue(
       CreditManagementStatus_anyOf::eCreditManagementStatus_anyOf value);
-  friend void to_json(nlohmann::json& j, const CreditManagementStatus& o);
-  friend void from_json(const nlohmann::json& j, CreditManagementStatus& o);
-  friend void to_json(nlohmann::json& j, const CreditManagementStatus_anyOf& o);
-  friend void from_json(
-      const nlohmann::json& j, CreditManagementStatus_anyOf& o);
+  friend void to_json(nlohmann::json &j, const CreditManagementStatus &o);
+  friend void from_json(const nlohmann::json &j, CreditManagementStatus &o);
+  friend void to_json(nlohmann::json &j, const CreditManagementStatus_anyOf &o);
+  friend void from_json(const nlohmann::json &j,
+                        CreditManagementStatus_anyOf &o);
 
- protected:
+protected:
   CreditManagementStatus_anyOf m_value;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* CreditManagementStatus_H_ */

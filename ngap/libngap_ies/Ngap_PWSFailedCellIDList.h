@@ -35,9 +35,9 @@ struct Ngap_ProtocolIE_SingleContainer;
 typedef struct Ngap_PWSFailedCellIDList {
   Ngap_PWSFailedCellIDList_PR present;
   union Ngap_PWSFailedCellIDList_u {
-    struct Ngap_EUTRA_CGIList* eUTRA_CGI_PWSFailedList;
-    struct Ngap_NR_CGIList* nR_CGI_PWSFailedList;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_EUTRA_CGIList *eUTRA_CGI_PWSFailedList;
+    struct Ngap_NR_CGIList *nR_CGI_PWSFailedList;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

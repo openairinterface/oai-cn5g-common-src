@@ -27,7 +27,7 @@ namespace oai::model::nrf {
 ///
 /// </summary>
 class N2InformationClass {
- public:
+public:
   N2InformationClass();
   virtual ~N2InformationClass();
 
@@ -36,13 +36,13 @@ class N2InformationClass {
   /////////////////////////////////////////////
   /// N2InformationClass members
 
-  friend void to_json(nlohmann::json& j, const N2InformationClass& o);
-  friend void from_json(const nlohmann::json& j, N2InformationClass& o);
+  friend void to_json(nlohmann::json &j, const N2InformationClass &o);
+  friend void from_json(const nlohmann::json &j, N2InformationClass &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::nrf
-namespace oai::model::nrf {}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
+namespace oai::model::nrf {} // namespace oai::model::nrf
 
 #endif /* N2InformationClass_H_ */

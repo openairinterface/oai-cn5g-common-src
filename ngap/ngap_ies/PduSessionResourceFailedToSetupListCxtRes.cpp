@@ -16,32 +16,33 @@ PduSessionResourceFailedToSetupListCxtRes::
 
 //------------------------------------------------------------------------------
 void PduSessionResourceFailedToSetupListCxtRes::set(
-    const std::vector<PduSessionResourceFailedToSetupItemCxtRes>& list) {
+    const std::vector<PduSessionResourceFailedToSetupItemCxtRes> &list) {
   m_ItemList = list;
 }
 
 //------------------------------------------------------------------------------
 void PduSessionResourceFailedToSetupListCxtRes::get(
-    std::vector<PduSessionResourceFailedToSetupItemCxtRes>& list) const {
+    std::vector<PduSessionResourceFailedToSetupItemCxtRes> &list) const {
   list = m_ItemList;
 }
 
 //------------------------------------------------------------------------------
 bool PduSessionResourceFailedToSetupListCxtRes::encode(
-    Ngap_PDUSessionResourceFailedToSetupListCxtRes_t&
-        pduSessionResourceFailedToSetupListCxtRes) const {
+    Ngap_PDUSessionResourceFailedToSetupListCxtRes_t
+        &pduSessionResourceFailedToSetupListCxtRes) const {
   for (std::vector<PduSessionResourceFailedToSetupItemCxtRes>::const_iterator
            it = m_ItemList.begin();
        it < m_ItemList.end(); ++it) {
-    Ngap_PDUSessionResourceFailedToSetupItemCxtRes_t* failedToResponse =
-        (Ngap_PDUSessionResourceFailedToSetupItemCxtRes_t*) calloc(
+    Ngap_PDUSessionResourceFailedToSetupItemCxtRes_t *failedToResponse =
+        (Ngap_PDUSessionResourceFailedToSetupItemCxtRes_t *)calloc(
             1, sizeof(Ngap_PDUSessionResourceFailedToSetupItemCxtRes_t));
-    if (!failedToResponse) return false;
+    if (!failedToResponse)
+      return false;
 
-    if (!it->encode(*failedToResponse)) return false;
-    if (ASN_SEQUENCE_ADD(
-            &pduSessionResourceFailedToSetupListCxtRes.list,
-            failedToResponse) != 0)
+    if (!it->encode(*failedToResponse))
+      return false;
+    if (ASN_SEQUENCE_ADD(&pduSessionResourceFailedToSetupListCxtRes.list,
+                         failedToResponse) != 0)
       return false;
   }
 
@@ -50,8 +51,8 @@ bool PduSessionResourceFailedToSetupListCxtRes::encode(
 
 //------------------------------------------------------------------------------
 bool PduSessionResourceFailedToSetupListCxtRes::decode(
-    const Ngap_PDUSessionResourceFailedToSetupListCxtRes_t&
-        pduSessionResourceFailedToSetupListCxtRes) {
+    const Ngap_PDUSessionResourceFailedToSetupListCxtRes_t
+        &pduSessionResourceFailedToSetupListCxtRes) {
   m_ItemList.reserve(pduSessionResourceFailedToSetupListCxtRes.list.count);
   for (int i = 0; i < pduSessionResourceFailedToSetupListCxtRes.list.count;
        i++) {
@@ -64,4 +65,4 @@ bool PduSessionResourceFailedToSetupListCxtRes::decode(
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

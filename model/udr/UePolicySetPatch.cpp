@@ -20,12 +20,12 @@ namespace oai::udr::model {
 
 UePolicySetPatch::UePolicySetPatch() {
   m_UePolicySectionsIsSet = false;
-  m_UpsisIsSet            = false;
-  m_AndspInd              = false;
-  m_AndspIndIsSet         = false;
-  m_Pei                   = "";
-  m_PeiIsSet              = false;
-  m_OsIdsIsSet            = false;
+  m_UpsisIsSet = false;
+  m_AndspInd = false;
+  m_AndspIndIsSet = false;
+  m_Pei = "";
+  m_PeiIsSet = false;
+  m_OsIdsIsSet = false;
 }
 
 UePolicySetPatch::~UePolicySetPatch() {}
@@ -34,17 +34,21 @@ void UePolicySetPatch::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const UePolicySetPatch& o) {
+void to_json(nlohmann::json &j, const UePolicySetPatch &o) {
   j = nlohmann::json();
   if (o.uePolicySectionsIsSet() || !o.m_UePolicySections.empty())
     j["uePolicySections"] = o.m_UePolicySections;
-  if (o.upsisIsSet() || !o.m_Upsis.empty()) j["upsis"] = o.m_Upsis;
-  if (o.andspIndIsSet()) j["andspInd"] = o.m_AndspInd;
-  if (o.peiIsSet()) j["pei"] = o.m_Pei;
-  if (o.osIdsIsSet() || !o.m_OsIds.empty()) j["osIds"] = o.m_OsIds;
+  if (o.upsisIsSet() || !o.m_Upsis.empty())
+    j["upsis"] = o.m_Upsis;
+  if (o.andspIndIsSet())
+    j["andspInd"] = o.m_AndspInd;
+  if (o.peiIsSet())
+    j["pei"] = o.m_Pei;
+  if (o.osIdsIsSet() || !o.m_OsIds.empty())
+    j["osIds"] = o.m_OsIds;
 }
 
-void from_json(const nlohmann::json& j, UePolicySetPatch& o) {
+void from_json(const nlohmann::json &j, UePolicySetPatch &o) {
   if (j.find("uePolicySections") != j.end()) {
     j.at("uePolicySections").get_to(o.m_UePolicySections);
     o.m_UePolicySectionsIsSet = true;
@@ -67,13 +71,13 @@ void from_json(const nlohmann::json& j, UePolicySetPatch& o) {
   }
 }
 
-std::map<std::string, UePolicySection>&
+std::map<std::string, UePolicySection> &
 UePolicySetPatch::getUePolicySections() {
   return m_UePolicySections;
 }
 void UePolicySetPatch::setUePolicySections(
-    std::map<std::string, UePolicySection> const& value) {
-  m_UePolicySections      = value;
+    std::map<std::string, UePolicySection> const &value) {
+  m_UePolicySections = value;
   m_UePolicySectionsIsSet = true;
 }
 bool UePolicySetPatch::uePolicySectionsIsSet() const {
@@ -82,57 +86,33 @@ bool UePolicySetPatch::uePolicySectionsIsSet() const {
 void UePolicySetPatch::unsetUePolicySections() {
   m_UePolicySectionsIsSet = false;
 }
-std::vector<std::string>& UePolicySetPatch::getUpsis() {
-  return m_Upsis;
-}
-void UePolicySetPatch::setUpsis(std::vector<std::string> const& value) {
-  m_Upsis      = value;
+std::vector<std::string> &UePolicySetPatch::getUpsis() { return m_Upsis; }
+void UePolicySetPatch::setUpsis(std::vector<std::string> const &value) {
+  m_Upsis = value;
   m_UpsisIsSet = true;
 }
-bool UePolicySetPatch::upsisIsSet() const {
-  return m_UpsisIsSet;
-}
-void UePolicySetPatch::unsetUpsis() {
-  m_UpsisIsSet = false;
-}
-bool UePolicySetPatch::isAndspInd() const {
-  return m_AndspInd;
-}
+bool UePolicySetPatch::upsisIsSet() const { return m_UpsisIsSet; }
+void UePolicySetPatch::unsetUpsis() { m_UpsisIsSet = false; }
+bool UePolicySetPatch::isAndspInd() const { return m_AndspInd; }
 void UePolicySetPatch::setAndspInd(bool const value) {
-  m_AndspInd      = value;
+  m_AndspInd = value;
   m_AndspIndIsSet = true;
 }
-bool UePolicySetPatch::andspIndIsSet() const {
-  return m_AndspIndIsSet;
-}
-void UePolicySetPatch::unsetAndspInd() {
-  m_AndspIndIsSet = false;
-}
-std::string UePolicySetPatch::getPei() const {
-  return m_Pei;
-}
-void UePolicySetPatch::setPei(std::string const& value) {
-  m_Pei      = value;
+bool UePolicySetPatch::andspIndIsSet() const { return m_AndspIndIsSet; }
+void UePolicySetPatch::unsetAndspInd() { m_AndspIndIsSet = false; }
+std::string UePolicySetPatch::getPei() const { return m_Pei; }
+void UePolicySetPatch::setPei(std::string const &value) {
+  m_Pei = value;
   m_PeiIsSet = true;
 }
-bool UePolicySetPatch::peiIsSet() const {
-  return m_PeiIsSet;
-}
-void UePolicySetPatch::unsetPei() {
-  m_PeiIsSet = false;
-}
-std::vector<std::string>& UePolicySetPatch::getOsIds() {
-  return m_OsIds;
-}
-void UePolicySetPatch::setOsIds(std::vector<std::string> const& value) {
-  m_OsIds      = value;
+bool UePolicySetPatch::peiIsSet() const { return m_PeiIsSet; }
+void UePolicySetPatch::unsetPei() { m_PeiIsSet = false; }
+std::vector<std::string> &UePolicySetPatch::getOsIds() { return m_OsIds; }
+void UePolicySetPatch::setOsIds(std::vector<std::string> const &value) {
+  m_OsIds = value;
   m_OsIdsIsSet = true;
 }
-bool UePolicySetPatch::osIdsIsSet() const {
-  return m_OsIdsIsSet;
-}
-void UePolicySetPatch::unsetOsIds() {
-  m_OsIdsIsSet = false;
-}
+bool UePolicySetPatch::osIdsIsSet() const { return m_OsIdsIsSet; }
+void UePolicySetPatch::unsetOsIds() { m_OsIdsIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

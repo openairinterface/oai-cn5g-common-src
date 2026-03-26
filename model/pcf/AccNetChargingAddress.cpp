@@ -21,7 +21,7 @@ namespace oai::model::pcf {
 using namespace oai::model::common;
 
 AccNetChargingAddress::AccNetChargingAddress() {
-  m_AnChargIpv4Addr      = "";
+  m_AnChargIpv4Addr = "";
   m_AnChargIpv4AddrIsSet = false;
   m_AnChargIpv6AddrIsSet = false;
 }
@@ -33,12 +33,12 @@ void AccNetChargingAddress::validate() const {
   }
 }
 
-bool AccNetChargingAddress::validate(std::stringstream& msg) const {
+bool AccNetChargingAddress::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool AccNetChargingAddress::validate(
-    std::stringstream& /* msg */, const std::string& /* pathPrefix */) const {
+    std::stringstream & /* msg */, const std::string & /* pathPrefix */) const {
   bool success = true;
   /*
   const std::string _pathPrefix =
@@ -53,7 +53,7 @@ bool AccNetChargingAddress::validate(
   return success;
 }
 
-bool AccNetChargingAddress::operator==(const AccNetChargingAddress& rhs) const {
+bool AccNetChargingAddress::operator==(const AccNetChargingAddress &rhs) const {
   return
 
       ((!anChargIpv4AddrIsSet() && !rhs.anChargIpv4AddrIsSet()) ||
@@ -67,17 +67,19 @@ bool AccNetChargingAddress::operator==(const AccNetChargingAddress& rhs) const {
           ;
 }
 
-bool AccNetChargingAddress::operator!=(const AccNetChargingAddress& rhs) const {
+bool AccNetChargingAddress::operator!=(const AccNetChargingAddress &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AccNetChargingAddress& o) {
+void to_json(nlohmann::json &j, const AccNetChargingAddress &o) {
   j = nlohmann::json();
-  if (o.anChargIpv4AddrIsSet()) j["anChargIpv4Addr"] = o.m_AnChargIpv4Addr;
-  if (o.anChargIpv6AddrIsSet()) j["anChargIpv6Addr"] = o.m_AnChargIpv6Addr;
+  if (o.anChargIpv4AddrIsSet())
+    j["anChargIpv4Addr"] = o.m_AnChargIpv4Addr;
+  if (o.anChargIpv6AddrIsSet())
+    j["anChargIpv6Addr"] = o.m_AnChargIpv6Addr;
 }
 
-void from_json(const nlohmann::json& j, AccNetChargingAddress& o) {
+void from_json(const nlohmann::json &j, AccNetChargingAddress &o) {
   if (j.find("anChargIpv4Addr") != j.end()) {
     j.at("anChargIpv4Addr").get_to(o.m_AnChargIpv4Addr);
     o.m_AnChargIpv4AddrIsSet = true;
@@ -91,8 +93,8 @@ void from_json(const nlohmann::json& j, AccNetChargingAddress& o) {
 std::string AccNetChargingAddress::getAnChargIpv4Addr() const {
   return m_AnChargIpv4Addr;
 }
-void AccNetChargingAddress::setAnChargIpv4Addr(std::string const& value) {
-  m_AnChargIpv4Addr      = value;
+void AccNetChargingAddress::setAnChargIpv4Addr(std::string const &value) {
+  m_AnChargIpv4Addr = value;
   m_AnChargIpv4AddrIsSet = true;
 }
 bool AccNetChargingAddress::anChargIpv4AddrIsSet() const {
@@ -104,8 +106,8 @@ void AccNetChargingAddress::unsetAnChargIpv4Addr() {
 Ipv6Addr AccNetChargingAddress::getAnChargIpv6Addr() const {
   return m_AnChargIpv6Addr;
 }
-void AccNetChargingAddress::setAnChargIpv6Addr(Ipv6Addr const& value) {
-  m_AnChargIpv6Addr      = value;
+void AccNetChargingAddress::setAnChargIpv6Addr(Ipv6Addr const &value) {
+  m_AnChargIpv6Addr = value;
   m_AnChargIpv6AddrIsSet = true;
 }
 bool AccNetChargingAddress::anChargIpv6AddrIsSet() const {
@@ -115,4 +117,4 @@ void AccNetChargingAddress::unsetAnChargIpv6Addr() {
   m_AnChargIpv6AddrIsSet = false;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

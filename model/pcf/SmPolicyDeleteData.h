@@ -19,14 +19,14 @@
 #ifndef SmPolicyDeleteData_H_
 #define SmPolicyDeleteData_H_
 
+#include "AccuUsageReport.h"
 #include "PduSessionRelCause.h"
 #include "PlmnIdNid.h"
-#include <string>
-#include "UserLocation.h"
-#include "AccuUsageReport.h"
-#include <vector>
 #include "RanNasRelCause.h"
+#include "UserLocation.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::pcf {
 
@@ -34,7 +34,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class SmPolicyDeleteData {
- public:
+public:
   SmPolicyDeleteData();
   virtual ~SmPolicyDeleteData() = default;
 
@@ -48,16 +48,16 @@ class SmPolicyDeleteData {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const SmPolicyDeleteData& rhs) const;
-  bool operator!=(const SmPolicyDeleteData& rhs) const;
+  bool operator==(const SmPolicyDeleteData &rhs) const;
+  bool operator!=(const SmPolicyDeleteData &rhs) const;
 
   /////////////////////////////////////////////
   /// SmPolicyDeleteData members
@@ -66,36 +66,36 @@ class SmPolicyDeleteData {
   ///
   /// </summary>
   oai::model::common::UserLocation getUserLocationInfo() const;
-  void setUserLocationInfo(oai::model::common::UserLocation const& value);
+  void setUserLocationInfo(oai::model::common::UserLocation const &value);
   bool userLocationInfoIsSet() const;
   void unsetUserLocationInfo();
   /// <summary>
   ///
   /// </summary>
   std::string getUeTimeZone() const;
-  void setUeTimeZone(std::string const& value);
+  void setUeTimeZone(std::string const &value);
   bool ueTimeZoneIsSet() const;
   void unsetUeTimeZone();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::PlmnIdNid getServingNetwork() const;
-  void setServingNetwork(oai::model::common::PlmnIdNid const& value);
+  void setServingNetwork(oai::model::common::PlmnIdNid const &value);
   bool servingNetworkIsSet() const;
   void unsetServingNetwork();
   /// <summary>
   ///
   /// </summary>
   std::string getUserLocationInfoTime() const;
-  void setUserLocationInfoTime(std::string const& value);
+  void setUserLocationInfoTime(std::string const &value);
   bool userLocationInfoTimeIsSet() const;
   void unsetUserLocationInfoTime();
   /// <summary>
   /// Contains the RAN and/or NAS release cause.
   /// </summary>
   std::vector<oai::model::pcf::RanNasRelCause> getRanNasRelCauses() const;
-  void setRanNasRelCauses(
-      std::vector<oai::model::pcf::RanNasRelCause> const& value);
+  void
+  setRanNasRelCauses(std::vector<oai::model::pcf::RanNasRelCause> const &value);
   bool ranNasRelCausesIsSet() const;
   void unsetRanNasRelCauses();
   /// <summary>
@@ -103,21 +103,21 @@ class SmPolicyDeleteData {
   /// </summary>
   std::vector<oai::model::pcf::AccuUsageReport> getAccuUsageReports() const;
   void setAccuUsageReports(
-      std::vector<oai::model::pcf::AccuUsageReport> const& value);
+      std::vector<oai::model::pcf::AccuUsageReport> const &value);
   bool accuUsageReportsIsSet() const;
   void unsetAccuUsageReports();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::PduSessionRelCause getPduSessRelCause() const;
-  void setPduSessRelCause(oai::model::pcf::PduSessionRelCause const& value);
+  void setPduSessRelCause(oai::model::pcf::PduSessionRelCause const &value);
   bool pduSessRelCauseIsSet() const;
   void unsetPduSessRelCause();
 
-  friend void to_json(nlohmann::json& j, const SmPolicyDeleteData& o);
-  friend void from_json(const nlohmann::json& j, SmPolicyDeleteData& o);
+  friend void to_json(nlohmann::json &j, const SmPolicyDeleteData &o);
+  friend void from_json(const nlohmann::json &j, SmPolicyDeleteData &o);
 
- protected:
+protected:
   oai::model::common::UserLocation m_UserLocationInfo;
   bool m_UserLocationInfoIsSet;
   std::string m_UeTimeZone;
@@ -134,6 +134,6 @@ class SmPolicyDeleteData {
   bool m_PduSessRelCauseIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* SmPolicyDeleteData_H_ */

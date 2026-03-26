@@ -40,47 +40,43 @@ const std::string BANDWIDTH_VALIDATION_REGEX =
     R"((^\d+(\.\d+)?) ?(bps|Kbps|Mbps|Gbps|Tbps)$)";
 
 class ValidationException : public std::runtime_error {
- public:
-  explicit ValidationException(const std::string& what)
+public:
+  explicit ValidationException(const std::string &what)
       : std::runtime_error(what) {}
   ~ValidationException() override = default;
 };
 
-bool validate_regex(
-    const std::string& regex, const std::string& value, std::stringstream& msg,
-    const std::string& pathPrefix);
+bool validate_regex(const std::string &regex, const std::string &value,
+                    std::stringstream &msg, const std::string &pathPrefix);
 
 /// <summary>
 /// Validate a string against the full-date definition of RFC 3339, section 5.6.
 /// </summary>
-bool validateRfc3339_date(const std::string& str);
+bool validateRfc3339_date(const std::string &str);
 
 /// <summary>
 /// Validate a string against the date-time definition of RFC 3339, section 5.6.
 /// </summary>
-bool validateRfc3339_date_time(const std::string& str);
+bool validateRfc3339_date_time(const std::string &str);
 
 namespace sfinae_helpers {
 struct NoType {};
-template<typename T1, typename T2>
-NoType operator==(const T1&, const T2&);
+template <typename T1, typename T2> NoType operator==(const T1 &, const T2 &);
 
-template<typename T1, typename T2>
-class EqualsOperatorAvailable {
- public:
+template <typename T1, typename T2> class EqualsOperatorAvailable {
+public:
   enum {
-    value = !std::is_same<
-        decltype(std::declval<T1>() == std::declval<T2>()), NoType>::value
+    value = !std::is_same<decltype(std::declval<T1>() == std::declval<T2>()),
+                          NoType>::value
   };
 };
-}  // namespace sfinae_helpers
+} // namespace sfinae_helpers
 
 /// <summary>
 /// Determine if the given vector<T> only has unique elements. T must provide
 /// the == operator.
 /// </summary>
-template<typename T>
-bool hasOnlyUniqueItems(const std::vector<T>& vec) {
+template <typename T> bool hasOnlyUniqueItems(const std::vector<T> &vec) {
   static_assert(
       sfinae_helpers::EqualsOperatorAvailable<T, T>::value,
       "hasOnlyUniqueItems<T> cannot be called, passed template type does not "
@@ -103,32 +99,32 @@ bool hasOnlyUniqueItems(const std::vector<T>& vec) {
   return true;
 }
 
-std::string toStringValue(const std::string& value);
+std::string toStringValue(const std::string &value);
 std::string toStringValue(const int32_t value);
 std::string toStringValue(const int64_t value);
 std::string toStringValue(const bool value);
 std::string toStringValue(const float value);
 std::string toStringValue(const double value);
 
-bool fromStringValue(const std::string& inStr, std::string& value);
-bool fromStringValue(const std::string& inStr, int32_t& value);
-bool fromStringValue(const std::string& inStr, int64_t& value);
-bool fromStringValue(const std::string& inStr, bool& value);
-bool fromStringValue(const std::string& inStr, float& value);
-bool fromStringValue(const std::string& inStr, double& value);
-bool fromStringValue(
-    const std::string& inStr, oai::model::common::PlmnId& value);
-bool fromStringValue(
-    const std::string& inStr, oai::model::common::Snssai& value);
-bool fromStringValue(
-    const std::string& inStr, oai::model::common::NFType& value);
-bool fromStringValue(const std::string& inStr, oai::model::common::Tai& value);
+bool fromStringValue(const std::string &inStr, std::string &value);
+bool fromStringValue(const std::string &inStr, int32_t &value);
+bool fromStringValue(const std::string &inStr, int64_t &value);
+bool fromStringValue(const std::string &inStr, bool &value);
+bool fromStringValue(const std::string &inStr, float &value);
+bool fromStringValue(const std::string &inStr, double &value);
+bool fromStringValue(const std::string &inStr,
+                     oai::model::common::PlmnId &value);
+bool fromStringValue(const std::string &inStr,
+                     oai::model::common::Snssai &value);
+bool fromStringValue(const std::string &inStr,
+                     oai::model::common::NFType &value);
+bool fromStringValue(const std::string &inStr, oai::model::common::Tai &value);
 
-template<typename T>
-bool fromStringValue(
-    const std::vector<std::string>& inStr, std::vector<T>& value) {
+template <typename T>
+bool fromStringValue(const std::vector<std::string> &inStr,
+                     std::vector<T> &value) {
   try {
-    for (auto& item : inStr) {
+    for (auto &item : inStr) {
       T itemValue;
       if (fromStringValue(item, itemValue)) {
         value.push_back(itemValue);
@@ -139,9 +135,9 @@ bool fromStringValue(
   }
   return value.size() > 0;
 }
-template<typename T>
-bool fromStringValue(
-    const std::string& inStr, std::vector<T>& value, char separator = ',') {
+template <typename T>
+bool fromStringValue(const std::string &inStr, std::vector<T> &value,
+                     char separator = ',') {
   std::vector<std::string> inStrings;
   std::istringstream f(inStr);
   std::string s;
@@ -151,8 +147,7 @@ bool fromStringValue(
   return fromStringValue(inStrings, value);
 }
 
-template<typename T>
-std::string enumToString(T enum_val) {
+template <typename T> std::string enumToString(T enum_val) {
   nlohmann::json j;
   to_json(j, enum_val);
   std::string e_str = j.dump();
@@ -163,6 +158,6 @@ std::string enumToString(T enum_val) {
   return e_str;
 }
 
-}  // namespace oai::model::common::helpers
+} // namespace oai::model::common::helpers
 
-#endif  // Helpers_H_
+#endif // Helpers_H_

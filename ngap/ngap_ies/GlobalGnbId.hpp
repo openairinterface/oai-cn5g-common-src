@@ -15,21 +15,21 @@ extern "C" {
 namespace oai::ngap {
 
 class GlobalGnbId {
- public:
+public:
   GlobalGnbId();
   virtual ~GlobalGnbId();
 
-  void set(const PlmnId& plmn, const GnbId& gnbId);
-  void get(PlmnId& plmn, GnbId& gnbId) const;
+  void set(const PlmnId &plmn, const GnbId &gnbId);
+  void get(PlmnId &plmn, GnbId &gnbId) const;
 
-  bool encode(Ngap_GlobalGNB_ID_t&) const;
-  bool decode(const Ngap_GlobalGNB_ID_t&);
+  bool encode(Ngap_GlobalGNB_ID_t &) const;
+  bool decode(const Ngap_GlobalGNB_ID_t &);
 
- private:
-  PlmnId m_PlmnId;  // Mandatory
-  GnbId m_GnbId;    // Mandatory
+private:
+  PlmnId m_PlmnId; // Mandatory
+  GnbId m_GnbId;   // Mandatory
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

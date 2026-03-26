@@ -30,12 +30,12 @@ void NssfEventType_anyOf::validate() const {
   // }
 }
 
-bool NssfEventType_anyOf::validate(std::stringstream& msg) const {
+bool NssfEventType_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool NssfEventType_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool NssfEventType_anyOf::validate(std::stringstream &msg,
+                                   const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "NssfEventType_anyOf" : pathPrefix;
@@ -49,31 +49,31 @@ bool NssfEventType_anyOf::validate(
   return success;
 }
 
-bool NssfEventType_anyOf::operator==(const NssfEventType_anyOf& rhs) const {
+bool NssfEventType_anyOf::operator==(const NssfEventType_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool NssfEventType_anyOf::operator!=(const NssfEventType_anyOf& rhs) const {
+bool NssfEventType_anyOf::operator!=(const NssfEventType_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const NssfEventType_anyOf& o) {
+void to_json(nlohmann::json &j, const NssfEventType_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case NssfEventType_anyOf::eNssfEventType_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case NssfEventType_anyOf::eNssfEventType_anyOf::SNSSAI_STATUS_CHANGE_REPORT:
-      j = "SNSSAI_STATUS_CHANGE_REPORT";
-      break;
+  case NssfEventType_anyOf::eNssfEventType_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case NssfEventType_anyOf::eNssfEventType_anyOf::SNSSAI_STATUS_CHANGE_REPORT:
+    j = "SNSSAI_STATUS_CHANGE_REPORT";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, NssfEventType_anyOf& o) {
+void from_json(const nlohmann::json &j, NssfEventType_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "SNSSAI_STATUS_CHANGE_REPORT") {
     o.setValue(
@@ -87,8 +87,8 @@ void from_json(const nlohmann::json& j, NssfEventType_anyOf& o) {
   }
 }
 
-NssfEventType_anyOf::eNssfEventType_anyOf NssfEventType_anyOf::getValue()
-    const {
+NssfEventType_anyOf::eNssfEventType_anyOf
+NssfEventType_anyOf::getValue() const {
   return m_value;
 }
 void NssfEventType_anyOf::setValue(
@@ -96,6 +96,6 @@ void NssfEventType_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace model
-}  // namespace nssf_server
-}  // namespace oai
+} // namespace model
+} // namespace nssf_server
+} // namespace oai

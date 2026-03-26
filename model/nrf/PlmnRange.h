@@ -19,8 +19,8 @@
 #ifndef PlmnRange_H_
 #define PlmnRange_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::nrf {
 
@@ -28,7 +28,7 @@ namespace oai::model::nrf {
 ///
 /// </summary>
 class PlmnRange {
- public:
+public:
   PlmnRange();
   virtual ~PlmnRange();
 
@@ -41,28 +41,28 @@ class PlmnRange {
   ///
   /// </summary>
   std::string getStart() const;
-  void setStart(std::string const& value);
+  void setStart(std::string const &value);
   bool startIsSet() const;
   void unsetStart();
   /// <summary>
   ///
   /// </summary>
   std::string getEnd() const;
-  void setEnd(std::string const& value);
+  void setEnd(std::string const &value);
   bool endIsSet() const;
   void unsetEnd();
   /// <summary>
   ///
   /// </summary>
   std::string getPattern() const;
-  void setPattern(std::string const& value);
+  void setPattern(std::string const &value);
   bool patternIsSet() const;
   void unsetPattern();
 
-  friend void to_json(nlohmann::json& j, const PlmnRange& o);
-  friend void from_json(const nlohmann::json& j, PlmnRange& o);
+  friend void to_json(nlohmann::json &j, const PlmnRange &o);
+  friend void from_json(const nlohmann::json &j, PlmnRange &o);
 
- protected:
+protected:
   std::string m_Start;
   bool m_StartIsSet;
   std::string m_End;
@@ -71,6 +71,6 @@ class PlmnRange {
   bool m_PatternIsSet;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* PlmnRange_H_ */

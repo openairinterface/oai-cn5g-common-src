@@ -19,18 +19,18 @@
 namespace oai::udr::model {
 
 EthFlowDescription::EthFlowDescription() {
-  m_DestMacAddr         = "";
-  m_DestMacAddrIsSet    = false;
-  m_EthType             = "";
-  m_FDesc               = "";
-  m_FDescIsSet          = false;
-  m_FDirIsSet           = false;
-  m_SourceMacAddr       = "";
-  m_SourceMacAddrIsSet  = false;
-  m_VlanTagsIsSet       = false;
-  m_SrcMacAddrEnd       = "";
-  m_SrcMacAddrEndIsSet  = false;
-  m_DestMacAddrEnd      = "";
+  m_DestMacAddr = "";
+  m_DestMacAddrIsSet = false;
+  m_EthType = "";
+  m_FDesc = "";
+  m_FDescIsSet = false;
+  m_FDirIsSet = false;
+  m_SourceMacAddr = "";
+  m_SourceMacAddrIsSet = false;
+  m_VlanTagsIsSet = false;
+  m_SrcMacAddrEnd = "";
+  m_SrcMacAddrEndIsSet = false;
+  m_DestMacAddrEnd = "";
   m_DestMacAddrEndIsSet = false;
 }
 
@@ -40,19 +40,26 @@ void EthFlowDescription::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const EthFlowDescription& o) {
+void to_json(nlohmann::json &j, const EthFlowDescription &o) {
   j = nlohmann::json();
-  if (o.destMacAddrIsSet()) j["destMacAddr"] = o.m_DestMacAddr;
+  if (o.destMacAddrIsSet())
+    j["destMacAddr"] = o.m_DestMacAddr;
   j["ethType"] = o.m_EthType;
-  if (o.fDescIsSet()) j["fDesc"] = o.m_FDesc;
-  if (o.fDirIsSet()) j["fDir"] = o.m_FDir;
-  if (o.sourceMacAddrIsSet()) j["sourceMacAddr"] = o.m_SourceMacAddr;
-  if (o.vlanTagsIsSet() || !o.m_VlanTags.empty()) j["vlanTags"] = o.m_VlanTags;
-  if (o.srcMacAddrEndIsSet()) j["srcMacAddrEnd"] = o.m_SrcMacAddrEnd;
-  if (o.destMacAddrEndIsSet()) j["destMacAddrEnd"] = o.m_DestMacAddrEnd;
+  if (o.fDescIsSet())
+    j["fDesc"] = o.m_FDesc;
+  if (o.fDirIsSet())
+    j["fDir"] = o.m_FDir;
+  if (o.sourceMacAddrIsSet())
+    j["sourceMacAddr"] = o.m_SourceMacAddr;
+  if (o.vlanTagsIsSet() || !o.m_VlanTags.empty())
+    j["vlanTags"] = o.m_VlanTags;
+  if (o.srcMacAddrEndIsSet())
+    j["srcMacAddrEnd"] = o.m_SrcMacAddrEnd;
+  if (o.destMacAddrEndIsSet())
+    j["destMacAddrEnd"] = o.m_DestMacAddrEnd;
 }
 
-void from_json(const nlohmann::json& j, EthFlowDescription& o) {
+void from_json(const nlohmann::json &j, EthFlowDescription &o) {
   if (j.find("destMacAddr") != j.end()) {
     j.at("destMacAddr").get_to(o.m_DestMacAddr);
     o.m_DestMacAddrIsSet = true;
@@ -84,95 +91,67 @@ void from_json(const nlohmann::json& j, EthFlowDescription& o) {
   }
 }
 
-std::string EthFlowDescription::getDestMacAddr() const {
-  return m_DestMacAddr;
-}
-void EthFlowDescription::setDestMacAddr(std::string const& value) {
-  m_DestMacAddr      = value;
+std::string EthFlowDescription::getDestMacAddr() const { return m_DestMacAddr; }
+void EthFlowDescription::setDestMacAddr(std::string const &value) {
+  m_DestMacAddr = value;
   m_DestMacAddrIsSet = true;
 }
-bool EthFlowDescription::destMacAddrIsSet() const {
-  return m_DestMacAddrIsSet;
-}
-void EthFlowDescription::unsetDestMacAddr() {
-  m_DestMacAddrIsSet = false;
-}
-std::string EthFlowDescription::getEthType() const {
-  return m_EthType;
-}
-void EthFlowDescription::setEthType(std::string const& value) {
+bool EthFlowDescription::destMacAddrIsSet() const { return m_DestMacAddrIsSet; }
+void EthFlowDescription::unsetDestMacAddr() { m_DestMacAddrIsSet = false; }
+std::string EthFlowDescription::getEthType() const { return m_EthType; }
+void EthFlowDescription::setEthType(std::string const &value) {
   m_EthType = value;
 }
-std::string EthFlowDescription::getFDesc() const {
-  return m_FDesc;
-}
-void EthFlowDescription::setFDesc(std::string const& value) {
-  m_FDesc      = value;
+std::string EthFlowDescription::getFDesc() const { return m_FDesc; }
+void EthFlowDescription::setFDesc(std::string const &value) {
+  m_FDesc = value;
   m_FDescIsSet = true;
 }
-bool EthFlowDescription::fDescIsSet() const {
-  return m_FDescIsSet;
-}
-void EthFlowDescription::unsetFDesc() {
-  m_FDescIsSet = false;
-}
-FlowDirection EthFlowDescription::getFDir() const {
-  return m_FDir;
-}
-void EthFlowDescription::setFDir(FlowDirection const& value) {
-  m_FDir      = value;
+bool EthFlowDescription::fDescIsSet() const { return m_FDescIsSet; }
+void EthFlowDescription::unsetFDesc() { m_FDescIsSet = false; }
+FlowDirection EthFlowDescription::getFDir() const { return m_FDir; }
+void EthFlowDescription::setFDir(FlowDirection const &value) {
+  m_FDir = value;
   m_FDirIsSet = true;
 }
-bool EthFlowDescription::fDirIsSet() const {
-  return m_FDirIsSet;
-}
-void EthFlowDescription::unsetFDir() {
-  m_FDirIsSet = false;
-}
+bool EthFlowDescription::fDirIsSet() const { return m_FDirIsSet; }
+void EthFlowDescription::unsetFDir() { m_FDirIsSet = false; }
 std::string EthFlowDescription::getSourceMacAddr() const {
   return m_SourceMacAddr;
 }
-void EthFlowDescription::setSourceMacAddr(std::string const& value) {
-  m_SourceMacAddr      = value;
+void EthFlowDescription::setSourceMacAddr(std::string const &value) {
+  m_SourceMacAddr = value;
   m_SourceMacAddrIsSet = true;
 }
 bool EthFlowDescription::sourceMacAddrIsSet() const {
   return m_SourceMacAddrIsSet;
 }
-void EthFlowDescription::unsetSourceMacAddr() {
-  m_SourceMacAddrIsSet = false;
-}
-std::vector<std::string>& EthFlowDescription::getVlanTags() {
+void EthFlowDescription::unsetSourceMacAddr() { m_SourceMacAddrIsSet = false; }
+std::vector<std::string> &EthFlowDescription::getVlanTags() {
   return m_VlanTags;
 }
-void EthFlowDescription::setVlanTags(std::vector<std::string> const& value) {
-  m_VlanTags      = value;
+void EthFlowDescription::setVlanTags(std::vector<std::string> const &value) {
+  m_VlanTags = value;
   m_VlanTagsIsSet = true;
 }
-bool EthFlowDescription::vlanTagsIsSet() const {
-  return m_VlanTagsIsSet;
-}
-void EthFlowDescription::unsetVlanTags() {
-  m_VlanTagsIsSet = false;
-}
+bool EthFlowDescription::vlanTagsIsSet() const { return m_VlanTagsIsSet; }
+void EthFlowDescription::unsetVlanTags() { m_VlanTagsIsSet = false; }
 std::string EthFlowDescription::getSrcMacAddrEnd() const {
   return m_SrcMacAddrEnd;
 }
-void EthFlowDescription::setSrcMacAddrEnd(std::string const& value) {
-  m_SrcMacAddrEnd      = value;
+void EthFlowDescription::setSrcMacAddrEnd(std::string const &value) {
+  m_SrcMacAddrEnd = value;
   m_SrcMacAddrEndIsSet = true;
 }
 bool EthFlowDescription::srcMacAddrEndIsSet() const {
   return m_SrcMacAddrEndIsSet;
 }
-void EthFlowDescription::unsetSrcMacAddrEnd() {
-  m_SrcMacAddrEndIsSet = false;
-}
+void EthFlowDescription::unsetSrcMacAddrEnd() { m_SrcMacAddrEndIsSet = false; }
 std::string EthFlowDescription::getDestMacAddrEnd() const {
   return m_DestMacAddrEnd;
 }
-void EthFlowDescription::setDestMacAddrEnd(std::string const& value) {
-  m_DestMacAddrEnd      = value;
+void EthFlowDescription::setDestMacAddrEnd(std::string const &value) {
+  m_DestMacAddrEnd = value;
   m_DestMacAddrEndIsSet = true;
 }
 bool EthFlowDescription::destMacAddrEndIsSet() const {
@@ -182,4 +161,4 @@ void EthFlowDescription::unsetDestMacAddrEnd() {
   m_DestMacAddrEndIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

@@ -29,7 +29,7 @@ namespace model {
 ///
 /// </summary>
 class DrxParameter {
- public:
+public:
   DrxParameter();
   virtual ~DrxParameter();
 
@@ -38,14 +38,14 @@ class DrxParameter {
   /////////////////////////////////////////////
   /// DrxParameter members
 
-  friend void to_json(nlohmann::json& j, const DrxParameter& o);
-  friend void from_json(const nlohmann::json& j, DrxParameter& o);
+  friend void to_json(nlohmann::json &j, const DrxParameter &o);
+  friend void from_json(const nlohmann::json &j, DrxParameter &o);
 
- protected:
+protected:
 };
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+} // namespace model
+} // namespace udm
+} // namespace oai
 
 #endif /* DrxParameter_H_ */

@@ -34,7 +34,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class TrafficInfluSub {
- public:
+public:
   TrafficInfluSub();
   virtual ~TrafficInfluSub();
 
@@ -46,55 +46,55 @@ class TrafficInfluSub {
   /// <summary>
   /// Each element identifies a DNN.
   /// </summary>
-  std::vector<std::string>& getDnns();
-  void setDnns(std::vector<std::string> const& value);
+  std::vector<std::string> &getDnns();
+  void setDnns(std::vector<std::string> const &value);
   bool dnnsIsSet() const;
   void unsetDnns();
   /// <summary>
   /// Each element identifies a slice.
   /// </summary>
-  std::vector<oai::model::common::Snssai>& getSnssais();
-  void setSnssais(std::vector<oai::model::common::Snssai> const& value);
+  std::vector<oai::model::common::Snssai> &getSnssais();
+  void setSnssais(std::vector<oai::model::common::Snssai> const &value);
   bool snssaisIsSet() const;
   void unsetSnssais();
   /// <summary>
   /// Each element identifies a group of users.
   /// </summary>
-  std::vector<std::string>& getInternalGroupIds();
-  void setInternalGroupIds(std::vector<std::string> const& value);
+  std::vector<std::string> &getInternalGroupIds();
+  void setInternalGroupIds(std::vector<std::string> const &value);
   bool internalGroupIdsIsSet() const;
   void unsetInternalGroupIds();
   /// <summary>
   /// Each element identifies the user.
   /// </summary>
-  std::vector<std::string>& getSupis();
-  void setSupis(std::vector<std::string> const& value);
+  std::vector<std::string> &getSupis();
+  void setSupis(std::vector<std::string> const &value);
   bool supisIsSet() const;
   void unsetSupis();
   /// <summary>
   ///
   /// </summary>
   std::string getNotificationUri() const;
-  void setNotificationUri(std::string const& value);
+  void setNotificationUri(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getExpiry() const;
-  void setExpiry(std::string const& value);
+  void setExpiry(std::string const &value);
   bool expiryIsSet() const;
   void unsetExpiry();
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
 
-  friend void to_json(nlohmann::json& j, const TrafficInfluSub& o);
-  friend void from_json(const nlohmann::json& j, TrafficInfluSub& o);
+  friend void to_json(nlohmann::json &j, const TrafficInfluSub &o);
+  friend void from_json(const nlohmann::json &j, TrafficInfluSub &o);
 
- protected:
+protected:
   std::vector<std::string> m_Dnns;
   bool m_DnnsIsSet;
   std::vector<oai::model::common::Snssai> m_Snssais;
@@ -111,6 +111,6 @@ class TrafficInfluSub {
   bool m_SupportedFeaturesIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* TrafficInfluSub_H_ */

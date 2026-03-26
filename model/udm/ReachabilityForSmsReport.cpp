@@ -22,7 +22,7 @@
 namespace oai::model::udm {
 
 ReachabilityForSmsReport::ReachabilityForSmsReport() {
-  m_MaxAvailabilityTime      = "";
+  m_MaxAvailabilityTime = "";
   m_MaxAvailabilityTimeIsSet = false;
 }
 
@@ -33,12 +33,12 @@ void ReachabilityForSmsReport::validate() const {
   }
 }
 
-bool ReachabilityForSmsReport::validate(std::stringstream& msg) const {
+bool ReachabilityForSmsReport::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ReachabilityForSmsReport::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ReachabilityForSmsReport::validate(std::stringstream &msg,
+                                        const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ReachabilityForSmsReport" : pathPrefix;
@@ -47,7 +47,7 @@ bool ReachabilityForSmsReport::validate(
 }
 
 bool ReachabilityForSmsReport::operator==(
-    const ReachabilityForSmsReport& rhs) const {
+    const ReachabilityForSmsReport &rhs) const {
   return true;
   // TODO
   /*
@@ -66,18 +66,18 @@ bool ReachabilityForSmsReport::operator==(
 }
 
 bool ReachabilityForSmsReport::operator!=(
-    const ReachabilityForSmsReport& rhs) const {
+    const ReachabilityForSmsReport &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ReachabilityForSmsReport& o) {
-  j                   = nlohmann::json();
+void to_json(nlohmann::json &j, const ReachabilityForSmsReport &o) {
+  j = nlohmann::json();
   j["smsfAccessType"] = o.m_SmsfAccessType;
   if (o.maxAvailabilityTimeIsSet())
     j["maxAvailabilityTime"] = o.m_MaxAvailabilityTime;
 }
 
-void from_json(const nlohmann::json& j, ReachabilityForSmsReport& o) {
+void from_json(const nlohmann::json &j, ReachabilityForSmsReport &o) {
   j.at("smsfAccessType").get_to(o.m_SmsfAccessType);
   if (j.find("maxAvailabilityTime") != j.end()) {
     j.at("maxAvailabilityTime").get_to(o.m_MaxAvailabilityTime);
@@ -85,20 +85,20 @@ void from_json(const nlohmann::json& j, ReachabilityForSmsReport& o) {
   }
 }
 
-oai::model::common::AccessType ReachabilityForSmsReport::getSmsfAccessType()
-    const {
+oai::model::common::AccessType
+ReachabilityForSmsReport::getSmsfAccessType() const {
   return m_SmsfAccessType;
 }
 void ReachabilityForSmsReport::setSmsfAccessType(
-    oai::model::common::AccessType const& value) {
+    oai::model::common::AccessType const &value) {
   m_SmsfAccessType = value;
 }
 std::string ReachabilityForSmsReport::getMaxAvailabilityTime() const {
   return m_MaxAvailabilityTime;
 }
 void ReachabilityForSmsReport::setMaxAvailabilityTime(
-    std::string const& value) {
-  m_MaxAvailabilityTime      = value;
+    std::string const &value) {
+  m_MaxAvailabilityTime = value;
   m_MaxAvailabilityTimeIsSet = true;
 }
 bool ReachabilityForSmsReport::maxAvailabilityTimeIsSet() const {
@@ -108,4 +108,4 @@ void ReachabilityForSmsReport::unsetMaxAvailabilityTime() {
   m_MaxAvailabilityTimeIsSet = false;
 }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

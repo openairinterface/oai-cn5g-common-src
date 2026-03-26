@@ -17,22 +17,22 @@ extern "C" {
 namespace oai::ngap {
 
 class PduSessionResourceReleasedListRelRes {
- public:
+public:
   PduSessionResourceReleasedListRelRes();
   virtual ~PduSessionResourceReleasedListRelRes();
 
-  void set(const std::vector<PduSessionResourceReleasedItemRelRes>& list);
-  void get(std::vector<PduSessionResourceReleasedItemRelRes>& list) const;
+  void set(const std::vector<PduSessionResourceReleasedItemRelRes> &list);
+  void get(std::vector<PduSessionResourceReleasedItemRelRes> &list) const;
 
-  bool encode(Ngap_PDUSessionResourceReleasedListRelRes_t&
-                  pduSessionResourceList) const;
-  bool decode(const Ngap_PDUSessionResourceReleasedListRelRes_t&
-                  pduSessionResourceList);
+  bool encode(Ngap_PDUSessionResourceReleasedListRelRes_t
+                  &pduSessionResourceList) const;
+  bool decode(const Ngap_PDUSessionResourceReleasedListRelRes_t
+                  &pduSessionResourceList);
 
- private:
+private:
   std::vector<PduSessionResourceReleasedItemRelRes> m_ItemList;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

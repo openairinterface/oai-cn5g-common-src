@@ -12,21 +12,21 @@ extern "C" {
 namespace oai::ngap {
 
 class UeIdentityIndexValue {
- public:
+public:
   UeIdentityIndexValue();
   virtual ~UeIdentityIndexValue();
 
-  void set(const uint16_t& index);
-  bool get(uint16_t& index) const;
+  void set(const uint16_t &index);
+  bool get(uint16_t &index) const;
 
-  bool encode(Ngap_UEIdentityIndexValue_t& index) const;
-  bool decode(const Ngap_UEIdentityIndexValue_t& index);
+  bool encode(Ngap_UEIdentityIndexValue_t &index) const;
+  bool decode(const Ngap_UEIdentityIndexValue_t &index);
 
- private:
+private:
   uint16_t m_Index;
   Ngap_UEIdentityIndexValue_PR m_Present;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

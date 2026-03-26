@@ -19,8 +19,8 @@
 namespace oai::model::common {
 
 TaiRm::TaiRm() {
-  m_Tac      = "";
-  m_Nid      = "";
+  m_Tac = "";
+  m_Nid = "";
   m_NidIsSet = false;
 }
 
@@ -31,29 +31,27 @@ void TaiRm::validate() const {
   }
 }
 
-bool TaiRm::validate(std::stringstream& msg) const {
-  return validate(msg, "");
-}
+bool TaiRm::validate(std::stringstream &msg) const { return validate(msg, ""); }
 
-bool TaiRm::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool TaiRm::validate(std::stringstream &msg,
+                     const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "TaiRm" : pathPrefix;
 
   /* Tac */ {
-    const std::string& value           = m_Tac;
+    const std::string &value = m_Tac;
     const std::string currentValuePath = _pathPrefix + ".tac";
   }
 
   if (nidIsSet()) {
-    const std::string& value           = m_Nid;
+    const std::string &value = m_Nid;
     const std::string currentValuePath = _pathPrefix + ".nid";
   }
 
   return success;
 }
 
-bool TaiRm::operator==(const TaiRm& rhs) const {
+bool TaiRm::operator==(const TaiRm &rhs) const {
   return
 
       (getPlmnId() == rhs.getPlmnId()) &&
@@ -66,18 +64,17 @@ bool TaiRm::operator==(const TaiRm& rhs) const {
           ;
 }
 
-bool TaiRm::operator!=(const TaiRm& rhs) const {
-  return !(*this == rhs);
-}
+bool TaiRm::operator!=(const TaiRm &rhs) const { return !(*this == rhs); }
 
-void to_json(nlohmann::json& j, const TaiRm& o) {
-  j           = nlohmann::json();
+void to_json(nlohmann::json &j, const TaiRm &o) {
+  j = nlohmann::json();
   j["plmnId"] = o.m_PlmnId;
-  j["tac"]    = o.m_Tac;
-  if (o.nidIsSet()) j["nid"] = o.m_Nid;
+  j["tac"] = o.m_Tac;
+  if (o.nidIsSet())
+    j["nid"] = o.m_Nid;
 }
 
-void from_json(const nlohmann::json& j, TaiRm& o) {
+void from_json(const nlohmann::json &j, TaiRm &o) {
   j.at("plmnId").get_to(o.m_PlmnId);
   j.at("tac").get_to(o.m_Tac);
   if (j.find("nid") != j.end()) {
@@ -86,30 +83,18 @@ void from_json(const nlohmann::json& j, TaiRm& o) {
   }
 }
 
-oai::model::common::PlmnId TaiRm::getPlmnId() const {
-  return m_PlmnId;
-}
-void TaiRm::setPlmnId(oai::model::common::PlmnId const& value) {
+oai::model::common::PlmnId TaiRm::getPlmnId() const { return m_PlmnId; }
+void TaiRm::setPlmnId(oai::model::common::PlmnId const &value) {
   m_PlmnId = value;
 }
-std::string TaiRm::getTac() const {
-  return m_Tac;
-}
-void TaiRm::setTac(std::string const& value) {
-  m_Tac = value;
-}
-std::string TaiRm::getNid() const {
-  return m_Nid;
-}
-void TaiRm::setNid(std::string const& value) {
-  m_Nid      = value;
+std::string TaiRm::getTac() const { return m_Tac; }
+void TaiRm::setTac(std::string const &value) { m_Tac = value; }
+std::string TaiRm::getNid() const { return m_Nid; }
+void TaiRm::setNid(std::string const &value) {
+  m_Nid = value;
   m_NidIsSet = true;
 }
-bool TaiRm::nidIsSet() const {
-  return m_NidIsSet;
-}
-void TaiRm::unsetNid() {
-  m_NidIsSet = false;
-}
+bool TaiRm::nidIsSet() const { return m_NidIsSet; }
+void TaiRm::unsetNid() { m_NidIsSet = false; }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

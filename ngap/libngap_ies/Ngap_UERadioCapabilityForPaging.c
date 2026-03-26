@@ -12,9 +12,8 @@
 asn_TYPE_member_t asn_MBR_Ngap_UERadioCapabilityForPaging_1[] = {
     {ATF_POINTER,
      3,
-     offsetof(
-         struct Ngap_UERadioCapabilityForPaging,
-         uERadioCapabilityForPagingOfNR),
+     offsetof(struct Ngap_UERadioCapabilityForPaging,
+              uERadioCapabilityForPagingOfNR),
      (ASN_TAG_CLASS_CONTEXT | (0 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_UERadioCapabilityForPagingOfNR,
@@ -33,9 +32,8 @@ asn_TYPE_member_t asn_MBR_Ngap_UERadioCapabilityForPaging_1[] = {
      "uERadioCapabilityForPagingOfNR"},
     {ATF_POINTER,
      2,
-     offsetof(
-         struct Ngap_UERadioCapabilityForPaging,
-         uERadioCapabilityForPagingOfEUTRA),
+     offsetof(struct Ngap_UERadioCapabilityForPaging,
+              uERadioCapabilityForPagingOfEUTRA),
      (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_UERadioCapabilityForPagingOfEUTRA,

@@ -29,7 +29,7 @@ namespace oai::model::pcf {
 /// Describes explicitly the route to an Application location.
 /// </summary>
 class SpatialValidity {
- public:
+public:
   SpatialValidity();
   virtual ~SpatialValidity() = default;
 
@@ -43,16 +43,16 @@ class SpatialValidity {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const SpatialValidity& rhs) const;
-  bool operator!=(const SpatialValidity& rhs) const;
+  bool operator==(const SpatialValidity &rhs) const;
+  bool operator!=(const SpatialValidity &rhs) const;
 
   /////////////////////////////////////////////
   /// SpatialValidity members
@@ -61,18 +61,18 @@ class SpatialValidity {
   /// Defines the presence information provisioned by the AF. The praId
   /// attribute within the PresenceInfo data type is the key of the map.
   /// </summary>
-  std::map<std::string, oai::model::common::PresenceInfo> getPresenceInfoList()
-      const;
+  std::map<std::string, oai::model::common::PresenceInfo>
+  getPresenceInfoList() const;
   void setPresenceInfoList(
-      std::map<std::string, oai::model::common::PresenceInfo> const& value);
+      std::map<std::string, oai::model::common::PresenceInfo> const &value);
 
-  friend void to_json(nlohmann::json& j, const SpatialValidity& o);
-  friend void from_json(const nlohmann::json& j, SpatialValidity& o);
+  friend void to_json(nlohmann::json &j, const SpatialValidity &o);
+  friend void from_json(const nlohmann::json &j, SpatialValidity &o);
 
- protected:
+protected:
   std::map<std::string, oai::model::common::PresenceInfo> m_PresenceInfoList;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* SpatialValidity_H_ */

@@ -28,7 +28,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class ReportingTrigger {
- public:
+public:
   ReportingTrigger();
   virtual ~ReportingTrigger() = default;
 
@@ -42,16 +42,16 @@ class ReportingTrigger {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const ReportingTrigger& rhs) const;
-  bool operator!=(const ReportingTrigger& rhs) const;
+  bool operator==(const ReportingTrigger &rhs) const;
+  bool operator!=(const ReportingTrigger &rhs) const;
 
   /////////////////////////////////////////////
   /// ReportingTrigger members
@@ -60,15 +60,15 @@ class ReportingTrigger {
   void setValue(ReportingTrigger_anyOf value);
   ReportingTrigger_anyOf::eReportingTrigger_anyOf getEnumValue() const;
   void setEnumValue(ReportingTrigger_anyOf::eReportingTrigger_anyOf value);
-  friend void to_json(nlohmann::json& j, const ReportingTrigger& o);
-  friend void from_json(const nlohmann::json& j, ReportingTrigger& o);
-  friend void to_json(nlohmann::json& j, const ReportingTrigger_anyOf& o);
-  friend void from_json(const nlohmann::json& j, ReportingTrigger_anyOf& o);
+  friend void to_json(nlohmann::json &j, const ReportingTrigger &o);
+  friend void from_json(const nlohmann::json &j, ReportingTrigger &o);
+  friend void to_json(nlohmann::json &j, const ReportingTrigger_anyOf &o);
+  friend void from_json(const nlohmann::json &j, ReportingTrigger_anyOf &o);
 
- protected:
+protected:
   ReportingTrigger_anyOf m_value;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* ReportingTrigger_H_ */

@@ -12,22 +12,22 @@ extern "C" {
 namespace oai::ngap {
 
 class SecurityKey {
- public:
+public:
   SecurityKey();
   virtual ~SecurityKey();
 
-  void set(uint8_t* buffer, const size_t& size = 256);
-  bool get(uint8_t*& buffer, size_t& size) const;
-  bool get(uint8_t*& buffer) const;
+  void set(uint8_t *buffer, const size_t &size = 256);
+  bool get(uint8_t *&buffer, size_t &size) const;
+  bool get(uint8_t *&buffer) const;
 
-  bool encode(Ngap_SecurityKey_t&) const;
-  bool decode(const Ngap_SecurityKey_t&);
+  bool encode(Ngap_SecurityKey_t &) const;
+  bool decode(const Ngap_SecurityKey_t &);
 
- private:
-  uint8_t* m_Buffer;
+private:
+  uint8_t *m_Buffer;
   size_t m_Size;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

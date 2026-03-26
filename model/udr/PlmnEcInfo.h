@@ -33,7 +33,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class PlmnEcInfo {
- public:
+public:
   PlmnEcInfo();
   virtual ~PlmnEcInfo();
 
@@ -46,12 +46,12 @@ class PlmnEcInfo {
   ///
   /// </summary>
   oai::model::common::PlmnId getPlmnId() const;
-  void setPlmnId(oai::model::common::PlmnId const& value);
+  void setPlmnId(oai::model::common::PlmnId const &value);
   /// <summary>
   ///
   /// </summary>
   EcRestrictionDataWb getEcRestrictionDataWb() const;
-  void setEcRestrictionDataWb(EcRestrictionDataWb const& value);
+  void setEcRestrictionDataWb(EcRestrictionDataWb const &value);
   bool ecRestrictionDataWbIsSet() const;
   void unsetEcRestrictionDataWb();
   /// <summary>
@@ -62,10 +62,10 @@ class PlmnEcInfo {
   bool ecRestrictionDataNbIsSet() const;
   void unsetEcRestrictionDataNb();
 
-  friend void to_json(nlohmann::json& j, const PlmnEcInfo& o);
-  friend void from_json(const nlohmann::json& j, PlmnEcInfo& o);
+  friend void to_json(nlohmann::json &j, const PlmnEcInfo &o);
+  friend void from_json(const nlohmann::json &j, PlmnEcInfo &o);
 
- protected:
+protected:
   oai::model::common::PlmnId m_PlmnId;
 
   EcRestrictionDataWb m_EcRestrictionDataWb;
@@ -74,6 +74,6 @@ class PlmnEcInfo {
   bool m_EcRestrictionDataNbIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* PlmnEcInfo_H_ */

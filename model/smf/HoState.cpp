@@ -23,13 +23,13 @@ void HoState::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const HoState& o) {
+void to_json(nlohmann::json &j, const HoState &o) {
   j = nlohmann::json();
   j = o.state;
 }
 
-void from_json(const nlohmann::json& j, HoState& o) {
+void from_json(const nlohmann::json &j, HoState &o) {
   o.state = j.get<std::string>();
 }
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

@@ -25,7 +25,7 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_CellBasedMDT-EUTRA */
 typedef struct Ngap_CellBasedMDT_EUTRA {
   Ngap_CellIdListforMDT_EUTRA_t cellIdListforMDT;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

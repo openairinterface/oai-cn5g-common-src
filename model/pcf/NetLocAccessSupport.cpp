@@ -27,12 +27,12 @@ void NetLocAccessSupport::validate() const {
   }
 }
 
-bool NetLocAccessSupport::validate(std::stringstream& msg) const {
+bool NetLocAccessSupport::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool NetLocAccessSupport::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool NetLocAccessSupport::validate(std::stringstream &msg,
+                                   const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "NetLocAccessSupport" : pathPrefix;
@@ -43,22 +43,22 @@ bool NetLocAccessSupport::validate(
   return success;
 }
 
-bool NetLocAccessSupport::operator==(const NetLocAccessSupport& rhs) const {
+bool NetLocAccessSupport::operator==(const NetLocAccessSupport &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool NetLocAccessSupport::operator!=(const NetLocAccessSupport& rhs) const {
+bool NetLocAccessSupport::operator!=(const NetLocAccessSupport &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const NetLocAccessSupport& o) {
+void to_json(nlohmann::json &j, const NetLocAccessSupport &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, NetLocAccessSupport& o) {
+void from_json(const nlohmann::json &j, NetLocAccessSupport &o) {
   from_json(j, o.m_value);
 }
 
@@ -80,4 +80,4 @@ void NetLocAccessSupport::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

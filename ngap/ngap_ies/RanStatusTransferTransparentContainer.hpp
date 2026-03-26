@@ -14,21 +14,21 @@ extern "C" {
 namespace oai::ngap {
 
 class RanStatusTransferTransparentContainer {
- public:
+public:
   RanStatusTransferTransparentContainer();
   virtual ~RanStatusTransferTransparentContainer();
 
-  void getDrbSubjectList(DrbSubjectToStatusTransferList& drblist) const;
-  void setDrbSubjectList(const DrbSubjectToStatusTransferList& drblist);
+  void getDrbSubjectList(DrbSubjectToStatusTransferList &drblist) const;
+  void setDrbSubjectList(const DrbSubjectToStatusTransferList &drblist);
 
   bool encode(
-      Ngap_RANStatusTransfer_TransparentContainer_t& ranStatusTransfer) const;
+      Ngap_RANStatusTransfer_TransparentContainer_t &ranStatusTransfer) const;
   bool decode(
-      const Ngap_RANStatusTransfer_TransparentContainer_t& ranStatusTransfer);
+      const Ngap_RANStatusTransfer_TransparentContainer_t &ranStatusTransfer);
 
- private:
-  DrbSubjectToStatusTransferList m_DrbList;  // Mandatory
+private:
+  DrbSubjectToStatusTransferList m_DrbList; // Mandatory
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

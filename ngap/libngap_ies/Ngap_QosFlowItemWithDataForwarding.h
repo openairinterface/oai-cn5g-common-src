@@ -12,8 +12,8 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_QosFlowIdentifier.h"
 #include "Ngap_DataForwardingAccepted.h"
+#include "Ngap_QosFlowIdentifier.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -26,8 +26,8 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_QosFlowItemWithDataForwarding */
 typedef struct Ngap_QosFlowItemWithDataForwarding {
   Ngap_QosFlowIdentifier_t qosFlowIdentifier;
-  Ngap_DataForwardingAccepted_t* dataForwardingAccepted; /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  Ngap_DataForwardingAccepted_t *dataForwardingAccepted; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

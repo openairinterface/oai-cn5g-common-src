@@ -19,8 +19,8 @@
 #ifndef BridgeManagementContainer_H_
 #define BridgeManagementContainer_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::pcf {
 
@@ -28,7 +28,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class BridgeManagementContainer {
- public:
+public:
   BridgeManagementContainer();
   virtual ~BridgeManagementContainer() = default;
 
@@ -42,16 +42,16 @@ class BridgeManagementContainer {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const BridgeManagementContainer& rhs) const;
-  bool operator!=(const BridgeManagementContainer& rhs) const;
+  bool operator==(const BridgeManagementContainer &rhs) const;
+  bool operator!=(const BridgeManagementContainer &rhs) const;
 
   /////////////////////////////////////////////
   /// BridgeManagementContainer members
@@ -60,15 +60,15 @@ class BridgeManagementContainer {
   ///
   /// </summary>
   std::string getBridgeManCont() const;
-  void setBridgeManCont(std::string const& value);
+  void setBridgeManCont(std::string const &value);
 
-  friend void to_json(nlohmann::json& j, const BridgeManagementContainer& o);
-  friend void from_json(const nlohmann::json& j, BridgeManagementContainer& o);
+  friend void to_json(nlohmann::json &j, const BridgeManagementContainer &o);
+  friend void from_json(const nlohmann::json &j, BridgeManagementContainer &o);
 
- protected:
+protected:
   std::string m_BridgeManCont;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* BridgeManagementContainer_H_ */

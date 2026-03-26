@@ -27,7 +27,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class CollectionPeriodRmmLteMdt_anyOf {
- public:
+public:
   CollectionPeriodRmmLteMdt_anyOf();
   virtual ~CollectionPeriodRmmLteMdt_anyOf() = default;
 
@@ -55,36 +55,36 @@ class CollectionPeriodRmmLteMdt_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const CollectionPeriodRmmLteMdt_anyOf& rhs) const;
-  bool operator!=(const CollectionPeriodRmmLteMdt_anyOf& rhs) const;
+  bool operator==(const CollectionPeriodRmmLteMdt_anyOf &rhs) const;
+  bool operator!=(const CollectionPeriodRmmLteMdt_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// CollectionPeriodRmmLteMdt_anyOf members
 
-  CollectionPeriodRmmLteMdt_anyOf::eCollectionPeriodRmmLteMdt_anyOf getValue()
-      const;
+  CollectionPeriodRmmLteMdt_anyOf::eCollectionPeriodRmmLteMdt_anyOf
+  getValue() const;
   void setValue(
       CollectionPeriodRmmLteMdt_anyOf::eCollectionPeriodRmmLteMdt_anyOf value);
 
-  friend void to_json(
-      nlohmann::json& j, const CollectionPeriodRmmLteMdt_anyOf& o);
-  friend void from_json(
-      const nlohmann::json& j, CollectionPeriodRmmLteMdt_anyOf& o);
+  friend void to_json(nlohmann::json &j,
+                      const CollectionPeriodRmmLteMdt_anyOf &o);
+  friend void from_json(const nlohmann::json &j,
+                        CollectionPeriodRmmLteMdt_anyOf &o);
 
- protected:
+protected:
   CollectionPeriodRmmLteMdt_anyOf::eCollectionPeriodRmmLteMdt_anyOf m_value =
       CollectionPeriodRmmLteMdt_anyOf::eCollectionPeriodRmmLteMdt_anyOf::
           INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* CollectionPeriodRmmLteMdt_anyOf_H_ */

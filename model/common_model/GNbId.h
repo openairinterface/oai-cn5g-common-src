@@ -19,8 +19,8 @@
 #ifndef GNbId_H_
 #define GNbId_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::common {
 
@@ -28,7 +28,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class GNbId {
- public:
+public:
   GNbId();
   virtual ~GNbId() = default;
 
@@ -42,16 +42,16 @@ class GNbId {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const GNbId& rhs) const;
-  bool operator!=(const GNbId& rhs) const;
+  bool operator==(const GNbId &rhs) const;
+  bool operator!=(const GNbId &rhs) const;
 
   /////////////////////////////////////////////
   /// GNbId members
@@ -65,17 +65,17 @@ class GNbId {
   ///
   /// </summary>
   std::string getGNBValue() const;
-  void setGNBValue(std::string const& value);
+  void setGNBValue(std::string const &value);
 
-  friend void to_json(nlohmann::json& j, const GNbId& o);
-  friend void from_json(const nlohmann::json& j, GNbId& o);
+  friend void to_json(nlohmann::json &j, const GNbId &o);
+  friend void from_json(const nlohmann::json &j, GNbId &o);
 
- protected:
+protected:
   int32_t m_BitLength;
 
   std::string m_GNBValue;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* GNbId_H_ */

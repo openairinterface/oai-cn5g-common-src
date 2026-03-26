@@ -19,11 +19,11 @@
 namespace oai::model::pcf {
 
 AfSfcRequirement::AfSfcRequirement() {
-  m_SfcIdDl       = "";
-  m_SfcIdDlIsSet  = false;
-  m_SfcIdUl       = "";
-  m_SfcIdUlIsSet  = false;
-  m_SpValIsSet    = false;
+  m_SfcIdDl = "";
+  m_SfcIdDlIsSet = false;
+  m_SfcIdUl = "";
+  m_SfcIdUlIsSet = false;
+  m_SpValIsSet = false;
   m_MetadataIsSet = false;
 }
 
@@ -34,12 +34,12 @@ void AfSfcRequirement::validate() const {
   }
 }
 
-bool AfSfcRequirement::validate(std::stringstream& msg) const {
+bool AfSfcRequirement::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AfSfcRequirement::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool AfSfcRequirement::validate(std::stringstream &msg,
+                                const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AfSfcRequirement" : pathPrefix;
@@ -47,7 +47,7 @@ bool AfSfcRequirement::validate(
   return success;
 }
 
-bool AfSfcRequirement::operator==(const AfSfcRequirement& rhs) const {
+bool AfSfcRequirement::operator==(const AfSfcRequirement &rhs) const {
   return
 
       ((!sfcIdDlIsSet() && !rhs.sfcIdDlIsSet()) ||
@@ -68,19 +68,23 @@ bool AfSfcRequirement::operator==(const AfSfcRequirement& rhs) const {
           ;
 }
 
-bool AfSfcRequirement::operator!=(const AfSfcRequirement& rhs) const {
+bool AfSfcRequirement::operator!=(const AfSfcRequirement &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AfSfcRequirement& o) {
+void to_json(nlohmann::json &j, const AfSfcRequirement &o) {
   j = nlohmann::json::object();
-  if (o.sfcIdDlIsSet()) j["sfcIdDl"] = o.m_SfcIdDl;
-  if (o.sfcIdUlIsSet()) j["sfcIdUl"] = o.m_SfcIdUl;
-  if (o.spValIsSet()) j["spVal"] = o.m_SpVal;
-  if (o.metadataIsSet()) j["metadata"] = o.m_Metadata;
+  if (o.sfcIdDlIsSet())
+    j["sfcIdDl"] = o.m_SfcIdDl;
+  if (o.sfcIdUlIsSet())
+    j["sfcIdUl"] = o.m_SfcIdUl;
+  if (o.spValIsSet())
+    j["spVal"] = o.m_SpVal;
+  if (o.metadataIsSet())
+    j["metadata"] = o.m_Metadata;
 }
 
-void from_json(const nlohmann::json& j, AfSfcRequirement& o) {
+void from_json(const nlohmann::json &j, AfSfcRequirement &o) {
   if (j.find("sfcIdDl") != j.end()) {
     j.at("sfcIdDl").get_to(o.m_SfcIdDl);
     o.m_SfcIdDlIsSet = true;
@@ -99,58 +103,36 @@ void from_json(const nlohmann::json& j, AfSfcRequirement& o) {
   }
 }
 
-std::string AfSfcRequirement::getSfcIdDl() const {
-  return m_SfcIdDl;
-}
-void AfSfcRequirement::setSfcIdDl(std::string const& value) {
-  m_SfcIdDl      = value;
+std::string AfSfcRequirement::getSfcIdDl() const { return m_SfcIdDl; }
+void AfSfcRequirement::setSfcIdDl(std::string const &value) {
+  m_SfcIdDl = value;
   m_SfcIdDlIsSet = true;
 }
-bool AfSfcRequirement::sfcIdDlIsSet() const {
-  return m_SfcIdDlIsSet;
-}
-void AfSfcRequirement::unsetSfcIdDl() {
-  m_SfcIdDlIsSet = false;
-}
-std::string AfSfcRequirement::getSfcIdUl() const {
-  return m_SfcIdUl;
-}
-void AfSfcRequirement::setSfcIdUl(std::string const& value) {
-  m_SfcIdUl      = value;
+bool AfSfcRequirement::sfcIdDlIsSet() const { return m_SfcIdDlIsSet; }
+void AfSfcRequirement::unsetSfcIdDl() { m_SfcIdDlIsSet = false; }
+std::string AfSfcRequirement::getSfcIdUl() const { return m_SfcIdUl; }
+void AfSfcRequirement::setSfcIdUl(std::string const &value) {
+  m_SfcIdUl = value;
   m_SfcIdUlIsSet = true;
 }
-bool AfSfcRequirement::sfcIdUlIsSet() const {
-  return m_SfcIdUlIsSet;
-}
-void AfSfcRequirement::unsetSfcIdUl() {
-  m_SfcIdUlIsSet = false;
-}
+bool AfSfcRequirement::sfcIdUlIsSet() const { return m_SfcIdUlIsSet; }
+void AfSfcRequirement::unsetSfcIdUl() { m_SfcIdUlIsSet = false; }
 oai::model::pcf::SpatialValidityRm AfSfcRequirement::getSpVal() const {
   return m_SpVal;
 }
 void AfSfcRequirement::setSpVal(
-    oai::model::pcf::SpatialValidityRm const& value) {
-  m_SpVal      = value;
+    oai::model::pcf::SpatialValidityRm const &value) {
+  m_SpVal = value;
   m_SpValIsSet = true;
 }
-bool AfSfcRequirement::spValIsSet() const {
-  return m_SpValIsSet;
-}
-void AfSfcRequirement::unsetSpVal() {
-  m_SpValIsSet = false;
-}
-std::string AfSfcRequirement::getMetadata() const {
-  return m_Metadata;
-}
-void AfSfcRequirement::setMetadata(std::string const& value) {
-  m_Metadata      = value;
+bool AfSfcRequirement::spValIsSet() const { return m_SpValIsSet; }
+void AfSfcRequirement::unsetSpVal() { m_SpValIsSet = false; }
+std::string AfSfcRequirement::getMetadata() const { return m_Metadata; }
+void AfSfcRequirement::setMetadata(std::string const &value) {
+  m_Metadata = value;
   m_MetadataIsSet = true;
 }
-bool AfSfcRequirement::metadataIsSet() const {
-  return m_MetadataIsSet;
-}
-void AfSfcRequirement::unsetMetadata() {
-  m_MetadataIsSet = false;
-}
+bool AfSfcRequirement::metadataIsSet() const { return m_MetadataIsSet; }
+void AfSfcRequirement::unsetMetadata() { m_MetadataIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

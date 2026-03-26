@@ -29,7 +29,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class NotificationControlRm : public NotificationControl {
- public:
+public:
   NotificationControlRm();
   virtual ~NotificationControlRm() = default;
 
@@ -37,18 +37,18 @@ class NotificationControlRm : public NotificationControl {
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(
-      std::stringstream& msg, const std::string& pathPrefix) const override;
+  bool validate(std::stringstream &msg,
+                const std::string &pathPrefix) const override;
 
   /////////////////////////////////////////////
   /// NotificationControlRm members
 
-  friend void to_json(nlohmann::json& j, const NotificationControlRm& o);
-  friend void from_json(const nlohmann::json& j, NotificationControlRm& o);
+  friend void to_json(nlohmann::json &j, const NotificationControlRm &o);
+  friend void from_json(const nlohmann::json &j, NotificationControlRm &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* NotificationControlRm_H_ */

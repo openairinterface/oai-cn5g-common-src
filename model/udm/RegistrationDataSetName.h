@@ -30,7 +30,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class RegistrationDataSetName {
- public:
+public:
   RegistrationDataSetName();
   virtual ~RegistrationDataSetName();
 
@@ -39,11 +39,11 @@ class RegistrationDataSetName {
   /////////////////////////////////////////////
   /// RegistrationDataSetName members
 
-  friend void to_json(nlohmann::json& j, const RegistrationDataSetName& o);
-  friend void from_json(const nlohmann::json& j, RegistrationDataSetName& o);
+  friend void to_json(nlohmann::json &j, const RegistrationDataSetName &o);
+  friend void from_json(const nlohmann::json &j, RegistrationDataSetName &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 #endif /* RegistrationDataSetName_H_ */

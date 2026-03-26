@@ -13,7 +13,7 @@ typedef struct recovery_s {
 } recovery_t;
 
 // Bit rate's unit, used by NAS and NGAP (3GPP TS 24.501)
-constexpr uint8_t kBitRateUnitValueIsNotUsed                       = 0b00000000;
+constexpr uint8_t kBitRateUnitValueIsNotUsed = 0b00000000;
 constexpr uint8_t kBitRateUnitValueIsIncrementedInMultiplesOf1Kbps = 0b00000001;
 constexpr uint8_t kBitRateUnitValueIsIncrementedInMultiplesOf4Kbps = 0b00000010;
 constexpr uint8_t kBitRateUnitValueIsIncrementedInMultiplesOf16Kbps =

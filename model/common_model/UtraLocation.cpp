@@ -19,18 +19,18 @@
 namespace oai::model::common {
 
 UtraLocation::UtraLocation() {
-  m_CgiIsSet                      = false;
-  m_SaiIsSet                      = false;
-  m_LaiIsSet                      = false;
-  m_RaiIsSet                      = false;
-  m_AgeOfLocationInformation      = 0;
+  m_CgiIsSet = false;
+  m_SaiIsSet = false;
+  m_LaiIsSet = false;
+  m_RaiIsSet = false;
+  m_AgeOfLocationInformation = 0;
   m_AgeOfLocationInformationIsSet = false;
-  m_UeLocationTimestamp           = "";
-  m_UeLocationTimestampIsSet      = false;
-  m_GeographicalInformation       = "";
-  m_GeographicalInformationIsSet  = false;
-  m_GeodeticInformation           = "";
-  m_GeodeticInformationIsSet      = false;
+  m_UeLocationTimestamp = "";
+  m_UeLocationTimestampIsSet = false;
+  m_GeographicalInformation = "";
+  m_GeographicalInformationIsSet = false;
+  m_GeodeticInformation = "";
+  m_GeodeticInformationIsSet = false;
 }
 
 void UtraLocation::validate() const {
@@ -40,18 +40,18 @@ void UtraLocation::validate() const {
   }
 }
 
-bool UtraLocation::validate(std::stringstream& msg) const {
+bool UtraLocation::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool UtraLocation::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool UtraLocation::validate(std::stringstream &msg,
+                            const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "UtraLocation" : pathPrefix;
 
   if (ageOfLocationInformationIsSet()) {
-    const int32_t& value = m_AgeOfLocationInformation;
+    const int32_t &value = m_AgeOfLocationInformation;
     const std::string currentValuePath =
         _pathPrefix + ".ageOfLocationInformation";
 
@@ -79,7 +79,7 @@ bool UtraLocation::validate(
   return success;
 }
 
-bool UtraLocation::operator==(const UtraLocation& rhs) const {
+bool UtraLocation::operator==(const UtraLocation &rhs) const {
   return
 
       ((!cgiIsSet() && !rhs.cgiIsSet()) ||
@@ -116,16 +116,20 @@ bool UtraLocation::operator==(const UtraLocation& rhs) const {
           ;
 }
 
-bool UtraLocation::operator!=(const UtraLocation& rhs) const {
+bool UtraLocation::operator!=(const UtraLocation &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const UtraLocation& o) {
+void to_json(nlohmann::json &j, const UtraLocation &o) {
   j = nlohmann::json();
-  if (o.cgiIsSet()) j["cgi"] = o.m_Cgi;
-  if (o.saiIsSet()) j["sai"] = o.m_Sai;
-  if (o.laiIsSet()) j["lai"] = o.m_Lai;
-  if (o.raiIsSet()) j["rai"] = o.m_Rai;
+  if (o.cgiIsSet())
+    j["cgi"] = o.m_Cgi;
+  if (o.saiIsSet())
+    j["sai"] = o.m_Sai;
+  if (o.laiIsSet())
+    j["lai"] = o.m_Lai;
+  if (o.raiIsSet())
+    j["rai"] = o.m_Rai;
   if (o.ageOfLocationInformationIsSet())
     j["ageOfLocationInformation"] = o.m_AgeOfLocationInformation;
   if (o.ueLocationTimestampIsSet())
@@ -136,7 +140,7 @@ void to_json(nlohmann::json& j, const UtraLocation& o) {
     j["geodeticInformation"] = o.m_GeodeticInformation;
 }
 
-void from_json(const nlohmann::json& j, UtraLocation& o) {
+void from_json(const nlohmann::json &j, UtraLocation &o) {
   if (j.find("cgi") != j.end()) {
     j.at("cgi").get_to(o.m_Cgi);
     o.m_CgiIsSet = true;
@@ -171,63 +175,41 @@ void from_json(const nlohmann::json& j, UtraLocation& o) {
   }
 }
 
-oai::model::common::CellGlobalId UtraLocation::getCgi() const {
-  return m_Cgi;
-}
-void UtraLocation::setCgi(oai::model::common::CellGlobalId const& value) {
-  m_Cgi      = value;
+oai::model::common::CellGlobalId UtraLocation::getCgi() const { return m_Cgi; }
+void UtraLocation::setCgi(oai::model::common::CellGlobalId const &value) {
+  m_Cgi = value;
   m_CgiIsSet = true;
 }
-bool UtraLocation::cgiIsSet() const {
-  return m_CgiIsSet;
-}
-void UtraLocation::unsetCgi() {
-  m_CgiIsSet = false;
-}
-oai::model::common::ServiceAreaId UtraLocation::getSai() const {
-  return m_Sai;
-}
-void UtraLocation::setSai(oai::model::common::ServiceAreaId const& value) {
-  m_Sai      = value;
+bool UtraLocation::cgiIsSet() const { return m_CgiIsSet; }
+void UtraLocation::unsetCgi() { m_CgiIsSet = false; }
+oai::model::common::ServiceAreaId UtraLocation::getSai() const { return m_Sai; }
+void UtraLocation::setSai(oai::model::common::ServiceAreaId const &value) {
+  m_Sai = value;
   m_SaiIsSet = true;
 }
-bool UtraLocation::saiIsSet() const {
-  return m_SaiIsSet;
-}
-void UtraLocation::unsetSai() {
-  m_SaiIsSet = false;
-}
+bool UtraLocation::saiIsSet() const { return m_SaiIsSet; }
+void UtraLocation::unsetSai() { m_SaiIsSet = false; }
 oai::model::common::LocationAreaId UtraLocation::getLai() const {
   return m_Lai;
 }
-void UtraLocation::setLai(oai::model::common::LocationAreaId const& value) {
-  m_Lai      = value;
+void UtraLocation::setLai(oai::model::common::LocationAreaId const &value) {
+  m_Lai = value;
   m_LaiIsSet = true;
 }
-bool UtraLocation::laiIsSet() const {
-  return m_LaiIsSet;
-}
-void UtraLocation::unsetLai() {
-  m_LaiIsSet = false;
-}
-oai::model::common::RoutingAreaId UtraLocation::getRai() const {
-  return m_Rai;
-}
-void UtraLocation::setRai(oai::model::common::RoutingAreaId const& value) {
-  m_Rai      = value;
+bool UtraLocation::laiIsSet() const { return m_LaiIsSet; }
+void UtraLocation::unsetLai() { m_LaiIsSet = false; }
+oai::model::common::RoutingAreaId UtraLocation::getRai() const { return m_Rai; }
+void UtraLocation::setRai(oai::model::common::RoutingAreaId const &value) {
+  m_Rai = value;
   m_RaiIsSet = true;
 }
-bool UtraLocation::raiIsSet() const {
-  return m_RaiIsSet;
-}
-void UtraLocation::unsetRai() {
-  m_RaiIsSet = false;
-}
+bool UtraLocation::raiIsSet() const { return m_RaiIsSet; }
+void UtraLocation::unsetRai() { m_RaiIsSet = false; }
 int32_t UtraLocation::getAgeOfLocationInformation() const {
   return m_AgeOfLocationInformation;
 }
 void UtraLocation::setAgeOfLocationInformation(int32_t const value) {
-  m_AgeOfLocationInformation      = value;
+  m_AgeOfLocationInformation = value;
   m_AgeOfLocationInformationIsSet = true;
 }
 bool UtraLocation::ageOfLocationInformationIsSet() const {
@@ -239,8 +221,8 @@ void UtraLocation::unsetAgeOfLocationInformation() {
 std::string UtraLocation::getUeLocationTimestamp() const {
   return m_UeLocationTimestamp;
 }
-void UtraLocation::setUeLocationTimestamp(std::string const& value) {
-  m_UeLocationTimestamp      = value;
+void UtraLocation::setUeLocationTimestamp(std::string const &value) {
+  m_UeLocationTimestamp = value;
   m_UeLocationTimestampIsSet = true;
 }
 bool UtraLocation::ueLocationTimestampIsSet() const {
@@ -252,8 +234,8 @@ void UtraLocation::unsetUeLocationTimestamp() {
 std::string UtraLocation::getGeographicalInformation() const {
   return m_GeographicalInformation;
 }
-void UtraLocation::setGeographicalInformation(std::string const& value) {
-  m_GeographicalInformation      = value;
+void UtraLocation::setGeographicalInformation(std::string const &value) {
+  m_GeographicalInformation = value;
   m_GeographicalInformationIsSet = true;
 }
 bool UtraLocation::geographicalInformationIsSet() const {
@@ -265,8 +247,8 @@ void UtraLocation::unsetGeographicalInformation() {
 std::string UtraLocation::getGeodeticInformation() const {
   return m_GeodeticInformation;
 }
-void UtraLocation::setGeodeticInformation(std::string const& value) {
-  m_GeodeticInformation      = value;
+void UtraLocation::setGeodeticInformation(std::string const &value) {
+  m_GeodeticInformation = value;
   m_GeodeticInformationIsSet = true;
 }
 bool UtraLocation::geodeticInformationIsSet() const {
@@ -276,4 +258,4 @@ void UtraLocation::unsetGeodeticInformation() {
   m_GeodeticInformationIsSet = false;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

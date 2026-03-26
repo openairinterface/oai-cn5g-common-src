@@ -13,7 +13,7 @@ namespace oai::ngap {
 PduSessionResourceModifyIndicationUnsuccessfulTransfer::
     PduSessionResourceModifyIndicationUnsuccessfulTransfer() {
   m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe =
-      (Ngap_PDUSessionResourceModifyIndicationUnsuccessfulTransfer_t*) calloc(
+      (Ngap_PDUSessionResourceModifyIndicationUnsuccessfulTransfer_t *)calloc(
           1,
           sizeof(
               Ngap_PDUSessionResourceModifyIndicationUnsuccessfulTransfer_t));
@@ -101,7 +101,7 @@ void PduSessionResourceModifyIndicationUnsuccessfulTransfer::setCauseMisc(
 
 //------------------------------------------------------------------------------
 int PduSessionResourceModifyIndicationUnsuccessfulTransfer::encode(
-    uint8_t* buf, int bufSize) {
+    uint8_t *buf, int bufSize) {
   ngap_utils::print_asn_msg(
       &asn_DEF_Ngap_PDUSessionResourceModifyIndicationUnsuccessfulTransfer,
       m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe);
@@ -115,11 +115,11 @@ int PduSessionResourceModifyIndicationUnsuccessfulTransfer::encode(
 
 //------------------------------------------------------------------------------
 bool PduSessionResourceModifyIndicationUnsuccessfulTransfer::decode(
-    uint8_t* buf, int bufSize) {
+    uint8_t *buf, int bufSize) {
   asn_dec_rval_t rc = asn_decode(
       NULL, ATS_ALIGNED_CANONICAL_PER,
       &asn_DEF_Ngap_PDUSessionResourceModifyIndicationUnsuccessfulTransfer,
-      (void**) &m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe, buf,
+      (void **)&m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe, buf,
       bufSize);
 
   if (rc.code == RC_OK) {
@@ -132,8 +132,8 @@ bool PduSessionResourceModifyIndicationUnsuccessfulTransfer::decode(
     return false;
   }
 
-  oai::logger::logger_common::ngap().debug(
-      "rc.consumed to decode %d", rc.consumed);
+  oai::logger::logger_common::ngap().debug("rc.consumed to decode %d",
+                                           rc.consumed);
   // asn_fprint(stderr,
   // &asn_DEF_Ngap_PDUSessionResourceModifyIndicationUnsuccessfulTransfer,
   // m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe);
@@ -156,4 +156,4 @@ long PduSessionResourceModifyIndicationUnsuccessfulTransfer::getChoiceOfCause()
 long PduSessionResourceModifyIndicationUnsuccessfulTransfer::getCause() const {
   return m_CauseValue.get();
 }
-}  // namespace oai::ngap
+} // namespace oai::ngap

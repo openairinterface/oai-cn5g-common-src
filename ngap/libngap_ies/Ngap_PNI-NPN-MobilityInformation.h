@@ -25,7 +25,7 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_PNI-NPN-MobilityInformation */
 typedef struct Ngap_PNI_NPN_MobilityInformation {
   Ngap_Allowed_PNI_NPN_List_t allowed_PNI_NPI_List;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

@@ -14,13 +14,13 @@ QosFlowAddOrModifyResponseItem::~QosFlowAddOrModifyResponseItem() {}
 
 //------------------------------------------------------------------------------
 void QosFlowAddOrModifyResponseItem::setQosFlowIdentifier(
-    const QosFlowIdentifier& qosFlowIdentifier) {
+    const QosFlowIdentifier &qosFlowIdentifier) {
   m_QosFlowIdentifier = qosFlowIdentifier;
 }
 
 //------------------------------------------------------------------------------
 void QosFlowAddOrModifyResponseItem::getQosFlowIdentifier(
-    QosFlowIdentifier& qosFlowIdentifier) const {
+    QosFlowIdentifier &qosFlowIdentifier) const {
   qosFlowIdentifier = m_QosFlowIdentifier;
 }
 
@@ -41,7 +41,7 @@ QosFlowAddOrModifyResponseItem::getCurrentQoSParametersSetIndex(std::optional<ui
 
 //------------------------------------------------------------------------------
 bool QosFlowAddOrModifyResponseItem::encode(
-    Ngap_QosFlowAddOrModifyResponseItem_t& QosFlowAddOrModifyResponseItem)
+    Ngap_QosFlowAddOrModifyResponseItem_t &QosFlowAddOrModifyResponseItem)
     const {
   if (!m_QosFlowIdentifier.encode(
           QosFlowAddOrModifyResponseItem.qosFlowIdentifier))
@@ -52,12 +52,12 @@ bool QosFlowAddOrModifyResponseItem::encode(
 
 //------------------------------------------------------------------------------
 bool QosFlowAddOrModifyResponseItem::decode(
-    const Ngap_QosFlowAddOrModifyResponseItem_t&
-        QosFlowAddOrModifyResponseItem) {
+    const Ngap_QosFlowAddOrModifyResponseItem_t
+        &QosFlowAddOrModifyResponseItem) {
   if (!m_QosFlowIdentifier.decode(
           QosFlowAddOrModifyResponseItem.qosFlowIdentifier))
     return false;
 
   return true;
 }
-}  // namespace oai::ngap
+} // namespace oai::ngap

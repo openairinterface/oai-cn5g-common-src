@@ -20,10 +20,10 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_PDUSessionType {
-  Ngap_PDUSessionType_ipv4         = 0,
-  Ngap_PDUSessionType_ipv6         = 1,
-  Ngap_PDUSessionType_ipv4v6       = 2,
-  Ngap_PDUSessionType_ethernet     = 3,
+  Ngap_PDUSessionType_ipv4 = 0,
+  Ngap_PDUSessionType_ipv6 = 1,
+  Ngap_PDUSessionType_ipv4v6 = 2,
+  Ngap_PDUSessionType_ethernet = 3,
   Ngap_PDUSessionType_unstructured = 4
   /*
    * Enumeration is extensible

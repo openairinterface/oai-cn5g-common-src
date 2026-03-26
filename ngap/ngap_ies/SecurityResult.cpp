@@ -14,24 +14,24 @@ SecurityResult::~SecurityResult() {}
 
 //------------------------------------------------------------------------------
 void SecurityResult::set(
-    const IntegrityProtectionResult& integrityProtectionResult,
-    const ConfidentialityProtectionResult& confidentialityProtectionResult) {
-  m_IntegrityProtectionResult       = integrityProtectionResult;
+    const IntegrityProtectionResult &integrityProtectionResult,
+    const ConfidentialityProtectionResult &confidentialityProtectionResult) {
+  m_IntegrityProtectionResult = integrityProtectionResult;
   m_ConfidentialityProtectionResult = confidentialityProtectionResult;
 }
 
 //------------------------------------------------------------------------------
 bool SecurityResult::get(
-    IntegrityProtectionResult& integrityProtectionResult,
-    ConfidentialityProtectionResult& confidentialityProtectionResult) const {
-  integrityProtectionResult       = m_IntegrityProtectionResult;
+    IntegrityProtectionResult &integrityProtectionResult,
+    ConfidentialityProtectionResult &confidentialityProtectionResult) const {
+  integrityProtectionResult = m_IntegrityProtectionResult;
   confidentialityProtectionResult = m_ConfidentialityProtectionResult;
 
   return true;
 }
 
 //------------------------------------------------------------------------------
-bool SecurityResult::encode(Ngap_SecurityResult_t& securityResult) const {
+bool SecurityResult::encode(Ngap_SecurityResult_t &securityResult) const {
   if (!m_IntegrityProtectionResult.encode(
           securityResult.integrityProtectionResult))
     return false;
@@ -43,7 +43,7 @@ bool SecurityResult::encode(Ngap_SecurityResult_t& securityResult) const {
 }
 
 //------------------------------------------------------------------------------
-bool SecurityResult::decode(const Ngap_SecurityResult_t& securityResult) {
+bool SecurityResult::decode(const Ngap_SecurityResult_t &securityResult) {
   if (!m_IntegrityProtectionResult.decode(
           securityResult.integrityProtectionResult))
     return false;
@@ -53,4 +53,4 @@ bool SecurityResult::decode(const Ngap_SecurityResult_t& securityResult) {
 
   return true;
 }
-}  // namespace oai::ngap
+} // namespace oai::ngap

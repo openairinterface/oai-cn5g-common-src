@@ -19,14 +19,14 @@
 namespace oai::model::lmf {
 
 GeographicArea::GeographicArea() {
-  m_Uncertainty         = 0.0f;
-  m_Confidence          = 0;
-  m_Altitude            = 0.0;
+  m_Uncertainty = 0.0f;
+  m_Confidence = 0;
+  m_Altitude = 0.0;
   m_UncertaintyAltitude = 0.0f;
-  m_InnerRadius         = 0;
-  m_UncertaintyRadius   = 0.0f;
-  m_OffsetAngle         = 0;
-  m_IncludedAngle       = 0;
+  m_InnerRadius = 0;
+  m_UncertaintyRadius = 0.0f;
+  m_OffsetAngle = 0;
+  m_IncludedAngle = 0;
 }
 
 void GeographicArea::validate() const {
@@ -36,18 +36,18 @@ void GeographicArea::validate() const {
   }
 }
 
-bool GeographicArea::validate(std::stringstream& msg) const {
+bool GeographicArea::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool GeographicArea::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool GeographicArea::validate(std::stringstream &msg,
+                              const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "GeographicArea" : pathPrefix;
 
   /* Uncertainty */ {
-    const float& value                 = m_Uncertainty;
+    const float &value = m_Uncertainty;
     const std::string currentValuePath = _pathPrefix + ".uncertainty";
 
     if (value < static_cast<float>(0)) {
@@ -57,7 +57,7 @@ bool GeographicArea::validate(
   }
 
   /* Confidence */ {
-    const int32_t& value               = m_Confidence;
+    const int32_t &value = m_Confidence;
     const std::string currentValuePath = _pathPrefix + ".confidence";
 
     if (value < 0) {
@@ -71,7 +71,7 @@ bool GeographicArea::validate(
   }
 
   /* PointList */ {
-    const std::vector<oai::model::lmf::GeographicalCoordinates>& value =
+    const std::vector<oai::model::lmf::GeographicalCoordinates> &value =
         m_PointList;
     const std::string currentValuePath = _pathPrefix + ".pointList";
 
@@ -83,10 +83,10 @@ bool GeographicArea::validate(
       success = false;
       msg << currentValuePath << ": must have at most 15 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::lmf::GeographicalCoordinates& value : value) {
+      int i = 0;
+      for (const oai::model::lmf::GeographicalCoordinates &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -99,7 +99,7 @@ bool GeographicArea::validate(
   }
 
   /* Altitude */ {
-    const double& value                = m_Altitude;
+    const double &value = m_Altitude;
     const std::string currentValuePath = _pathPrefix + ".altitude";
 
     if (value < -32767) {
@@ -113,7 +113,7 @@ bool GeographicArea::validate(
   }
 
   /* UncertaintyAltitude */ {
-    const float& value                 = m_UncertaintyAltitude;
+    const float &value = m_UncertaintyAltitude;
     const std::string currentValuePath = _pathPrefix + ".uncertaintyAltitude";
 
     if (value < static_cast<float>(0)) {
@@ -123,7 +123,7 @@ bool GeographicArea::validate(
   }
 
   /* InnerRadius */ {
-    const int32_t& value               = m_InnerRadius;
+    const int32_t &value = m_InnerRadius;
     const std::string currentValuePath = _pathPrefix + ".innerRadius";
 
     if (value < 0) {
@@ -137,7 +137,7 @@ bool GeographicArea::validate(
   }
 
   /* UncertaintyRadius */ {
-    const float& value                 = m_UncertaintyRadius;
+    const float &value = m_UncertaintyRadius;
     const std::string currentValuePath = _pathPrefix + ".uncertaintyRadius";
 
     if (value < static_cast<float>(0)) {
@@ -147,7 +147,7 @@ bool GeographicArea::validate(
   }
 
   /* OffsetAngle */ {
-    const int32_t& value               = m_OffsetAngle;
+    const int32_t &value = m_OffsetAngle;
     const std::string currentValuePath = _pathPrefix + ".offsetAngle";
 
     if (value < 0) {
@@ -161,7 +161,7 @@ bool GeographicArea::validate(
   }
 
   /* IncludedAngle */ {
-    const int32_t& value               = m_IncludedAngle;
+    const int32_t &value = m_IncludedAngle;
     const std::string currentValuePath = _pathPrefix + ".includedAngle";
 
     if (value < 0) {
@@ -177,7 +177,7 @@ bool GeographicArea::validate(
   return success;
 }
 
-bool GeographicArea::operator==(const GeographicArea& rhs) const {
+bool GeographicArea::operator==(const GeographicArea &rhs) const {
   return
 
       (getShape() == rhs.getShape()) &&
@@ -207,27 +207,27 @@ bool GeographicArea::operator==(const GeographicArea& rhs) const {
           ;
 }
 
-bool GeographicArea::operator!=(const GeographicArea& rhs) const {
+bool GeographicArea::operator!=(const GeographicArea &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const GeographicArea& o) {
-  j                        = nlohmann::json();
-  j["shape"]               = o.m_Shape;
-  j["point"]               = o.m_Point;
-  j["uncertainty"]         = o.m_Uncertainty;
-  j["uncertaintyEllipse"]  = o.m_UncertaintyEllipse;
-  j["confidence"]          = o.m_Confidence;
-  j["pointList"]           = o.m_PointList;
-  j["altitude"]            = o.m_Altitude;
+void to_json(nlohmann::json &j, const GeographicArea &o) {
+  j = nlohmann::json();
+  j["shape"] = o.m_Shape;
+  j["point"] = o.m_Point;
+  j["uncertainty"] = o.m_Uncertainty;
+  j["uncertaintyEllipse"] = o.m_UncertaintyEllipse;
+  j["confidence"] = o.m_Confidence;
+  j["pointList"] = o.m_PointList;
+  j["altitude"] = o.m_Altitude;
   j["uncertaintyAltitude"] = o.m_UncertaintyAltitude;
-  j["innerRadius"]         = o.m_InnerRadius;
-  j["uncertaintyRadius"]   = o.m_UncertaintyRadius;
-  j["offsetAngle"]         = o.m_OffsetAngle;
-  j["includedAngle"]       = o.m_IncludedAngle;
+  j["innerRadius"] = o.m_InnerRadius;
+  j["uncertaintyRadius"] = o.m_UncertaintyRadius;
+  j["offsetAngle"] = o.m_OffsetAngle;
+  j["includedAngle"] = o.m_IncludedAngle;
 }
 
-void from_json(const nlohmann::json& j, GeographicArea& o) {
+void from_json(const nlohmann::json &j, GeographicArea &o) {
   j.at("shape").get_to(o.m_Shape);
   j.at("point").get_to(o.m_Point);
   j.at("uncertainty").get_to(o.m_Uncertainty);
@@ -246,33 +246,29 @@ oai::model::lmf::SupportedGADShapes GeographicArea::getShape() const {
   return m_Shape;
 }
 void GeographicArea::setShape(
-    oai::model::lmf::SupportedGADShapes const& value) {
+    oai::model::lmf::SupportedGADShapes const &value) {
   m_Shape = value;
 }
 oai::model::lmf::GeographicalCoordinates GeographicArea::getPoint() const {
   return m_Point;
 }
 void GeographicArea::setPoint(
-    oai::model::lmf::GeographicalCoordinates const& value) {
+    oai::model::lmf::GeographicalCoordinates const &value) {
   m_Point = value;
 }
-float GeographicArea::getUncertainty() const {
-  return m_Uncertainty;
-}
+float GeographicArea::getUncertainty() const { return m_Uncertainty; }
 void GeographicArea::setUncertainty(float const value) {
   m_Uncertainty = value;
 }
-oai::model::lmf::UncertaintyEllipse GeographicArea::getUncertaintyEllipse()
-    const {
+oai::model::lmf::UncertaintyEllipse
+GeographicArea::getUncertaintyEllipse() const {
   return m_UncertaintyEllipse;
 }
 void GeographicArea::setUncertaintyEllipse(
-    oai::model::lmf::UncertaintyEllipse const& value) {
+    oai::model::lmf::UncertaintyEllipse const &value) {
   m_UncertaintyEllipse = value;
 }
-int32_t GeographicArea::getConfidence() const {
-  return m_Confidence;
-}
+int32_t GeographicArea::getConfidence() const { return m_Confidence; }
 void GeographicArea::setConfidence(int32_t const value) {
   m_Confidence = value;
 }
@@ -281,24 +277,18 @@ GeographicArea::getPointList() const {
   return m_PointList;
 }
 void GeographicArea::setPointList(
-    std::vector<oai::model::lmf::GeographicalCoordinates> const& value) {
+    std::vector<oai::model::lmf::GeographicalCoordinates> const &value) {
   m_PointList = value;
 }
-double GeographicArea::getAltitude() const {
-  return m_Altitude;
-}
-void GeographicArea::setAltitude(double const value) {
-  m_Altitude = value;
-}
+double GeographicArea::getAltitude() const { return m_Altitude; }
+void GeographicArea::setAltitude(double const value) { m_Altitude = value; }
 float GeographicArea::getUncertaintyAltitude() const {
   return m_UncertaintyAltitude;
 }
 void GeographicArea::setUncertaintyAltitude(float const value) {
   m_UncertaintyAltitude = value;
 }
-int32_t GeographicArea::getInnerRadius() const {
-  return m_InnerRadius;
-}
+int32_t GeographicArea::getInnerRadius() const { return m_InnerRadius; }
 void GeographicArea::setInnerRadius(int32_t const value) {
   m_InnerRadius = value;
 }
@@ -308,17 +298,13 @@ float GeographicArea::getUncertaintyRadius() const {
 void GeographicArea::setUncertaintyRadius(float const value) {
   m_UncertaintyRadius = value;
 }
-int32_t GeographicArea::getOffsetAngle() const {
-  return m_OffsetAngle;
-}
+int32_t GeographicArea::getOffsetAngle() const { return m_OffsetAngle; }
 void GeographicArea::setOffsetAngle(int32_t const value) {
   m_OffsetAngle = value;
 }
-int32_t GeographicArea::getIncludedAngle() const {
-  return m_IncludedAngle;
-}
+int32_t GeographicArea::getIncludedAngle() const { return m_IncludedAngle; }
 void GeographicArea::setIncludedAngle(int32_t const value) {
   m_IncludedAngle = value;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

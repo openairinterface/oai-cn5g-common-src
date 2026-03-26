@@ -36,8 +36,8 @@ typedef struct Ngap_SONInformation {
   Ngap_SONInformation_PR present;
   union Ngap_SONInformation_u {
     Ngap_SONInformationRequest_t sONInformationRequest;
-    struct Ngap_SONInformationReply* sONInformationReply;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_SONInformationReply *sONInformationReply;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

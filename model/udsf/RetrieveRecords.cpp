@@ -27,12 +27,12 @@ void RetrieveRecords::validate() const {
   }
 }
 
-bool RetrieveRecords::validate(std::stringstream& msg) const {
+bool RetrieveRecords::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool RetrieveRecords::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool RetrieveRecords::validate(std::stringstream &msg,
+                               const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "RetrieveRecords" : pathPrefix;
@@ -40,28 +40,24 @@ bool RetrieveRecords::validate(
   return success;
 }
 
-bool RetrieveRecords::operator==(const RetrieveRecords& rhs) const {
+bool RetrieveRecords::operator==(const RetrieveRecords &rhs) const {
   return (*this == rhs);
 }
 
-bool RetrieveRecords::operator!=(const RetrieveRecords& rhs) const {
+bool RetrieveRecords::operator!=(const RetrieveRecords &rhs) const {
   return !(*this == rhs);
 }
 
-std::string RetrieveRecords::get() const {
-  return value;
-}
-void RetrieveRecords::set(const std::string& v) {
-  value = v;
-}
+std::string RetrieveRecords::get() const { return value; }
+void RetrieveRecords::set(const std::string &v) { value = v; }
 
-void to_json(nlohmann::json& j, const RetrieveRecords& o) {
+void to_json(nlohmann::json &j, const RetrieveRecords &o) {
   j = nlohmann::json();
   j = o.get();
 }
 
-void from_json(const nlohmann::json& j, RetrieveRecords& o) {
+void from_json(const nlohmann::json &j, RetrieveRecords &o) {
   o.set(j.get<std::string>());
 }
 
-}  // namespace oai::model::udsf
+} // namespace oai::model::udsf

@@ -20,9 +20,9 @@
 #define SeafData_H_
 
 #include "KeyAmf.h"
-#include <string>
 #include "NgKsi.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::amf {
 
@@ -30,7 +30,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class SeafData {
- public:
+public:
   SeafData();
   virtual ~SeafData();
 
@@ -43,17 +43,17 @@ class SeafData {
   ///
   /// </summary>
   NgKsi getNgKsi() const;
-  void setNgKsi(NgKsi const& value);
+  void setNgKsi(NgKsi const &value);
   /// <summary>
   ///
   /// </summary>
   KeyAmf getKeyAmf() const;
-  void setKeyAmf(KeyAmf const& value);
+  void setKeyAmf(KeyAmf const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getNh() const;
-  void setNh(std::string const& value);
+  void setNh(std::string const &value);
   bool nhIsSet() const;
   void unsetNh();
   /// <summary>
@@ -78,10 +78,10 @@ class SeafData {
   bool keyAmfHDerivationIndIsSet() const;
   void unsetKeyAmfHDerivationInd();
 
-  friend void to_json(nlohmann::json& j, const SeafData& o);
-  friend void from_json(const nlohmann::json& j, SeafData& o);
+  friend void to_json(nlohmann::json &j, const SeafData &o);
+  friend void from_json(const nlohmann::json &j, SeafData &o);
 
- protected:
+protected:
   NgKsi m_NgKsi;
 
   KeyAmf m_KeyAmf;
@@ -96,6 +96,6 @@ class SeafData {
   bool m_KeyAmfHDerivationIndIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* SeafData_H_ */

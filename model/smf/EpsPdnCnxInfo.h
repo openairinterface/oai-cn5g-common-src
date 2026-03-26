@@ -19,8 +19,8 @@
 #ifndef EpsPdnCnxInfo_H_
 #define EpsPdnCnxInfo_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::smf {
 
@@ -28,7 +28,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class EpsPdnCnxInfo {
- public:
+public:
   EpsPdnCnxInfo();
   virtual ~EpsPdnCnxInfo();
 
@@ -41,25 +41,25 @@ class EpsPdnCnxInfo {
   ///
   /// </summary>
   std::string getPgwS8cFteid() const;
-  void setPgwS8cFteid(std::string const& value);
+  void setPgwS8cFteid(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getPgwNodeName() const;
-  void setPgwNodeName(std::string const& value);
+  void setPgwNodeName(std::string const &value);
   bool pgwNodeNameIsSet() const;
   void unsetPgwNodeName();
 
-  friend void to_json(nlohmann::json& j, const EpsPdnCnxInfo& o);
-  friend void from_json(const nlohmann::json& j, EpsPdnCnxInfo& o);
+  friend void to_json(nlohmann::json &j, const EpsPdnCnxInfo &o);
+  friend void from_json(const nlohmann::json &j, EpsPdnCnxInfo &o);
 
- protected:
+protected:
   std::string m_PgwS8cFteid;
 
   std::string m_PgwNodeName;
   bool m_PgwNodeNameIsSet;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* EpsPdnCnxInfo_H_ */

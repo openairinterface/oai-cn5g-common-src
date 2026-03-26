@@ -13,8 +13,8 @@
 
 #include "PolicyControlRequestTrigger_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::pcf {
 
@@ -27,12 +27,12 @@ void PolicyControlRequestTrigger_anyOf::validate() const {
   }
 }
 
-bool PolicyControlRequestTrigger_anyOf::validate(std::stringstream& msg) const {
+bool PolicyControlRequestTrigger_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool PolicyControlRequestTrigger_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PolicyControlRequestTrigger_anyOf" : pathPrefix;
@@ -48,197 +48,197 @@ bool PolicyControlRequestTrigger_anyOf::validate(
 }
 
 bool PolicyControlRequestTrigger_anyOf::operator==(
-    const PolicyControlRequestTrigger_anyOf& rhs) const {
+    const PolicyControlRequestTrigger_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool PolicyControlRequestTrigger_anyOf::operator!=(
-    const PolicyControlRequestTrigger_anyOf& rhs) const {
+    const PolicyControlRequestTrigger_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PolicyControlRequestTrigger_anyOf& o) {
+void to_json(nlohmann::json &j, const PolicyControlRequestTrigger_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        PLMN_CH:
-      j = "PLMN_CH";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        RES_MO_RE:
-      j = "RES_MO_RE";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        AC_TY_CH:
-      j = "AC_TY_CH";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        UE_IP_CH:
-      j = "UE_IP_CH";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        UE_MAC_CH:
-      j = "UE_MAC_CH";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        AN_CH_COR:
-      j = "AN_CH_COR";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        US_RE:
-      j = "US_RE";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        APP_STA:
-      j = "APP_STA";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        APP_STO:
-      j = "APP_STO";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        AN_INFO:
-      j = "AN_INFO";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        CM_SES_FAIL:
-      j = "CM_SES_FAIL";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        PS_DA_OFF:
-      j = "PS_DA_OFF";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        DEF_QOS_CH:
-      j = "DEF_QOS_CH";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        SE_AMBR_CH:
-      j = "SE_AMBR_CH";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        QOS_NOTIF:
-      j = "QOS_NOTIF";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        NO_CREDIT:
-      j = "NO_CREDIT";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        REALLO_OF_CREDIT:
-      j = "REALLO_OF_CREDIT";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        PRA_CH:
-      j = "PRA_CH";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        SAREA_CH:
-      j = "SAREA_CH";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        SCNN_CH:
-      j = "SCNN_CH";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        RE_TIMEOUT:
-      j = "RE_TIMEOUT";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        RES_RELEASE:
-      j = "RES_RELEASE";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        SUCC_RES_ALLO:
-      j = "SUCC_RES_ALLO";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        RAT_TY_CH:
-      j = "RAT_TY_CH";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        REF_QOS_IND_CH:
-      j = "REF_QOS_IND_CH";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        NUM_OF_PACKET_FILTER:
-      j = "NUM_OF_PACKET_FILTER";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        UE_STATUS_RESUME:
-      j = "UE_STATUS_RESUME";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        UE_TZ_CH:
-      j = "UE_TZ_CH";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        AUTH_PROF_CH:
-      j = "AUTH_PROF_CH";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        QOS_MONITORING:
-      j = "QOS_MONITORING";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        SCELL_CH:
-      j = "SCELL_CH";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        EPS_FALLBACK:
-      j = "EPS_FALLBACK";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        MA_PDU:
-      j = "MA_PDU";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        TSN_BRIDGE_INFO:
-      j = "TSN_BRIDGE_INFO";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        _5G_RG_JOIN:
-      j = "5G_RG_JOIN";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        _5G_RG_LEAVE:
-      j = "5G_RG_LEAVE";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        DDN_FAILURE:
-      j = "DDN_FAILURE";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        DDN_DELIVERY_STATUS:
-      j = "DDN_DELIVERY_STATUS";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        GROUP_ID_LIST_CHG:
-      j = "GROUP_ID_LIST_CHG";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        DDN_FAILURE_CANCELLATION:
-      j = "DDN_FAILURE_CANCELLATION";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        DDN_DELIVERY_STATUS_CANCELLATION:
-      j = "DDN_DELIVERY_STATUS_CANCELLATION";
-      break;
-    case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
-        VPLMN_QOS_CH:
-      j = "VPLMN_QOS_CH";
-      break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      PLMN_CH:
+    j = "PLMN_CH";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      RES_MO_RE:
+    j = "RES_MO_RE";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      AC_TY_CH:
+    j = "AC_TY_CH";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      UE_IP_CH:
+    j = "UE_IP_CH";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      UE_MAC_CH:
+    j = "UE_MAC_CH";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      AN_CH_COR:
+    j = "AN_CH_COR";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      US_RE:
+    j = "US_RE";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      APP_STA:
+    j = "APP_STA";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      APP_STO:
+    j = "APP_STO";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      AN_INFO:
+    j = "AN_INFO";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      CM_SES_FAIL:
+    j = "CM_SES_FAIL";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      PS_DA_OFF:
+    j = "PS_DA_OFF";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      DEF_QOS_CH:
+    j = "DEF_QOS_CH";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      SE_AMBR_CH:
+    j = "SE_AMBR_CH";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      QOS_NOTIF:
+    j = "QOS_NOTIF";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      NO_CREDIT:
+    j = "NO_CREDIT";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      REALLO_OF_CREDIT:
+    j = "REALLO_OF_CREDIT";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      PRA_CH:
+    j = "PRA_CH";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      SAREA_CH:
+    j = "SAREA_CH";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      SCNN_CH:
+    j = "SCNN_CH";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      RE_TIMEOUT:
+    j = "RE_TIMEOUT";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      RES_RELEASE:
+    j = "RES_RELEASE";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      SUCC_RES_ALLO:
+    j = "SUCC_RES_ALLO";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      RAT_TY_CH:
+    j = "RAT_TY_CH";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      REF_QOS_IND_CH:
+    j = "REF_QOS_IND_CH";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      NUM_OF_PACKET_FILTER:
+    j = "NUM_OF_PACKET_FILTER";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      UE_STATUS_RESUME:
+    j = "UE_STATUS_RESUME";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      UE_TZ_CH:
+    j = "UE_TZ_CH";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      AUTH_PROF_CH:
+    j = "AUTH_PROF_CH";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      QOS_MONITORING:
+    j = "QOS_MONITORING";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      SCELL_CH:
+    j = "SCELL_CH";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      EPS_FALLBACK:
+    j = "EPS_FALLBACK";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      MA_PDU:
+    j = "MA_PDU";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      TSN_BRIDGE_INFO:
+    j = "TSN_BRIDGE_INFO";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      _5G_RG_JOIN:
+    j = "5G_RG_JOIN";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      _5G_RG_LEAVE:
+    j = "5G_RG_LEAVE";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      DDN_FAILURE:
+    j = "DDN_FAILURE";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      DDN_DELIVERY_STATUS:
+    j = "DDN_DELIVERY_STATUS";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      GROUP_ID_LIST_CHG:
+    j = "GROUP_ID_LIST_CHG";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      DDN_FAILURE_CANCELLATION:
+    j = "DDN_FAILURE_CANCELLATION";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      DDN_DELIVERY_STATUS_CANCELLATION:
+    j = "DDN_DELIVERY_STATUS_CANCELLATION";
+    break;
+  case PolicyControlRequestTrigger_anyOf::ePolicyControlRequestTrigger_anyOf::
+      VPLMN_QOS_CH:
+    j = "VPLMN_QOS_CH";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, PolicyControlRequestTrigger_anyOf& o) {
+void from_json(const nlohmann::json &j, PolicyControlRequestTrigger_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "PLMN_CH") {
     o.setValue(PolicyControlRequestTrigger_anyOf::
@@ -388,4 +388,4 @@ void PolicyControlRequestTrigger_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

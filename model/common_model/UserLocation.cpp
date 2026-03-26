@@ -20,10 +20,10 @@ namespace oai::model::common {
 
 UserLocation::UserLocation() {
   m_EutraLocationIsSet = false;
-  m_NrLocationIsSet    = false;
-  m_N3gaLocationIsSet  = false;
-  m_UtraLocationIsSet  = false;
-  m_GeraLocationIsSet  = false;
+  m_NrLocationIsSet = false;
+  m_N3gaLocationIsSet = false;
+  m_UtraLocationIsSet = false;
+  m_GeraLocationIsSet = false;
 }
 
 void UserLocation::validate() const {
@@ -33,12 +33,12 @@ void UserLocation::validate() const {
   }
 }
 
-bool UserLocation::validate(std::stringstream& msg) const {
+bool UserLocation::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool UserLocation::validate(
-    std::stringstream& /* msg */, const std::string& /* pathPrefix */) const {
+bool UserLocation::validate(std::stringstream & /* msg */,
+                            const std::string & /* pathPrefix */) const {
   bool success = true;
   /*
   const std::string _pathPrefix =
@@ -47,7 +47,7 @@ bool UserLocation::validate(
   return success;
 }
 
-bool UserLocation::operator==(const UserLocation& rhs) const {
+bool UserLocation::operator==(const UserLocation &rhs) const {
   return
 
       ((!eutraLocationIsSet() && !rhs.eutraLocationIsSet()) ||
@@ -73,20 +73,25 @@ bool UserLocation::operator==(const UserLocation& rhs) const {
           ;
 }
 
-bool UserLocation::operator!=(const UserLocation& rhs) const {
+bool UserLocation::operator!=(const UserLocation &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const UserLocation& o) {
+void to_json(nlohmann::json &j, const UserLocation &o) {
   j = nlohmann::json();
-  if (o.eutraLocationIsSet()) j["eutraLocation"] = o.m_EutraLocation;
-  if (o.nrLocationIsSet()) j["nrLocation"] = o.m_NrLocation;
-  if (o.n3gaLocationIsSet()) j["n3gaLocation"] = o.m_N3gaLocation;
-  if (o.utraLocationIsSet()) j["utraLocation"] = o.m_UtraLocation;
-  if (o.geraLocationIsSet()) j["geraLocation"] = o.m_GeraLocation;
+  if (o.eutraLocationIsSet())
+    j["eutraLocation"] = o.m_EutraLocation;
+  if (o.nrLocationIsSet())
+    j["nrLocation"] = o.m_NrLocation;
+  if (o.n3gaLocationIsSet())
+    j["n3gaLocation"] = o.m_N3gaLocation;
+  if (o.utraLocationIsSet())
+    j["utraLocation"] = o.m_UtraLocation;
+  if (o.geraLocationIsSet())
+    j["geraLocation"] = o.m_GeraLocation;
 }
 
-void from_json(const nlohmann::json& j, UserLocation& o) {
+void from_json(const nlohmann::json &j, UserLocation &o) {
   if (j.find("eutraLocation") != j.end()) {
     j.at("eutraLocation").get_to(o.m_EutraLocation);
     o.m_EutraLocationIsSet = true;
@@ -113,70 +118,50 @@ oai::model::common::EutraLocation UserLocation::getEutraLocation() const {
   return m_EutraLocation;
 }
 void UserLocation::setEutraLocation(
-    oai::model::common::EutraLocation const& value) {
-  m_EutraLocation      = value;
+    oai::model::common::EutraLocation const &value) {
+  m_EutraLocation = value;
   m_EutraLocationIsSet = true;
 }
-bool UserLocation::eutraLocationIsSet() const {
-  return m_EutraLocationIsSet;
-}
-void UserLocation::unsetEutraLocation() {
-  m_EutraLocationIsSet = false;
-}
+bool UserLocation::eutraLocationIsSet() const { return m_EutraLocationIsSet; }
+void UserLocation::unsetEutraLocation() { m_EutraLocationIsSet = false; }
 oai::model::common::NrLocation UserLocation::getNrLocation() const {
   return m_NrLocation;
 }
-void UserLocation::setNrLocation(oai::model::common::NrLocation const& value) {
-  m_NrLocation      = value;
+void UserLocation::setNrLocation(oai::model::common::NrLocation const &value) {
+  m_NrLocation = value;
   m_NrLocationIsSet = true;
 }
-bool UserLocation::nrLocationIsSet() const {
-  return m_NrLocationIsSet;
-}
-void UserLocation::unsetNrLocation() {
-  m_NrLocationIsSet = false;
-}
+bool UserLocation::nrLocationIsSet() const { return m_NrLocationIsSet; }
+void UserLocation::unsetNrLocation() { m_NrLocationIsSet = false; }
 oai::model::common::N3gaLocation UserLocation::getN3gaLocation() const {
   return m_N3gaLocation;
 }
 void UserLocation::setN3gaLocation(
-    oai::model::common::N3gaLocation const& value) {
-  m_N3gaLocation      = value;
+    oai::model::common::N3gaLocation const &value) {
+  m_N3gaLocation = value;
   m_N3gaLocationIsSet = true;
 }
-bool UserLocation::n3gaLocationIsSet() const {
-  return m_N3gaLocationIsSet;
-}
-void UserLocation::unsetN3gaLocation() {
-  m_N3gaLocationIsSet = false;
-}
+bool UserLocation::n3gaLocationIsSet() const { return m_N3gaLocationIsSet; }
+void UserLocation::unsetN3gaLocation() { m_N3gaLocationIsSet = false; }
 oai::model::common::UtraLocation UserLocation::getUtraLocation() const {
   return m_UtraLocation;
 }
 void UserLocation::setUtraLocation(
-    oai::model::common::UtraLocation const& value) {
-  m_UtraLocation      = value;
+    oai::model::common::UtraLocation const &value) {
+  m_UtraLocation = value;
   m_UtraLocationIsSet = true;
 }
-bool UserLocation::utraLocationIsSet() const {
-  return m_UtraLocationIsSet;
-}
-void UserLocation::unsetUtraLocation() {
-  m_UtraLocationIsSet = false;
-}
+bool UserLocation::utraLocationIsSet() const { return m_UtraLocationIsSet; }
+void UserLocation::unsetUtraLocation() { m_UtraLocationIsSet = false; }
 oai::model::common::GeraLocation UserLocation::getGeraLocation() const {
   return m_GeraLocation;
 }
 void UserLocation::setGeraLocation(
-    oai::model::common::GeraLocation const& value) {
-  m_GeraLocation      = value;
+    oai::model::common::GeraLocation const &value) {
+  m_GeraLocation = value;
   m_GeraLocationIsSet = true;
 }
-bool UserLocation::geraLocationIsSet() const {
-  return m_GeraLocationIsSet;
-}
-void UserLocation::unsetGeraLocation() {
-  m_GeraLocationIsSet = false;
-}
+bool UserLocation::geraLocationIsSet() const { return m_GeraLocationIsSet; }
+void UserLocation::unsetGeraLocation() { m_GeraLocationIsSet = false; }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

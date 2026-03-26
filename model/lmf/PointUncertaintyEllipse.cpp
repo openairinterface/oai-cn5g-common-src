@@ -18,9 +18,7 @@
 
 namespace oai::model::lmf {
 
-PointUncertaintyEllipse::PointUncertaintyEllipse() {
-  m_Confidence = 0;
-}
+PointUncertaintyEllipse::PointUncertaintyEllipse() { m_Confidence = 0; }
 
 void PointUncertaintyEllipse::validate() const {
   std::stringstream msg;
@@ -29,18 +27,18 @@ void PointUncertaintyEllipse::validate() const {
   }
 }
 
-bool PointUncertaintyEllipse::validate(std::stringstream& msg) const {
+bool PointUncertaintyEllipse::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool PointUncertaintyEllipse::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool PointUncertaintyEllipse::validate(std::stringstream &msg,
+                                       const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PointUncertaintyEllipse" : pathPrefix;
 
   /* Confidence */ {
-    const int32_t& value               = m_Confidence;
+    const int32_t &value = m_Confidence;
     const std::string currentValuePath = _pathPrefix + ".confidence";
 
     if (value < 0) {
@@ -57,7 +55,7 @@ bool PointUncertaintyEllipse::validate(
 }
 
 bool PointUncertaintyEllipse::operator==(
-    const PointUncertaintyEllipse& rhs) const {
+    const PointUncertaintyEllipse &rhs) const {
   return
 
       (getShape() == rhs.getShape()) &&
@@ -72,19 +70,19 @@ bool PointUncertaintyEllipse::operator==(
 }
 
 bool PointUncertaintyEllipse::operator!=(
-    const PointUncertaintyEllipse& rhs) const {
+    const PointUncertaintyEllipse &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PointUncertaintyEllipse& o) {
-  j                       = nlohmann::json();
-  j["shape"]              = o.m_Shape;
-  j["point"]              = o.m_Point;
+void to_json(nlohmann::json &j, const PointUncertaintyEllipse &o) {
+  j = nlohmann::json();
+  j["shape"] = o.m_Shape;
+  j["point"] = o.m_Point;
   j["uncertaintyEllipse"] = o.m_UncertaintyEllipse;
-  j["confidence"]         = o.m_Confidence;
+  j["confidence"] = o.m_Confidence;
 }
 
-void from_json(const nlohmann::json& j, PointUncertaintyEllipse& o) {
+void from_json(const nlohmann::json &j, PointUncertaintyEllipse &o) {
   j.at("shape").get_to(o.m_Shape);
   j.at("point").get_to(o.m_Point);
   j.at("uncertaintyEllipse").get_to(o.m_UncertaintyEllipse);
@@ -95,15 +93,15 @@ oai::model::lmf::SupportedGADShapes PointUncertaintyEllipse::getShape() const {
   return m_Shape;
 }
 void PointUncertaintyEllipse::setShape(
-    oai::model::lmf::SupportedGADShapes const& value) {
+    oai::model::lmf::SupportedGADShapes const &value) {
   m_Shape = value;
 }
-oai::model::lmf::GeographicalCoordinates PointUncertaintyEllipse::getPoint()
-    const {
+oai::model::lmf::GeographicalCoordinates
+PointUncertaintyEllipse::getPoint() const {
   return m_Point;
 }
 void PointUncertaintyEllipse::setPoint(
-    oai::model::lmf::GeographicalCoordinates const& value) {
+    oai::model::lmf::GeographicalCoordinates const &value) {
   m_Point = value;
 }
 oai::model::lmf::UncertaintyEllipse
@@ -111,14 +109,12 @@ PointUncertaintyEllipse::getUncertaintyEllipse() const {
   return m_UncertaintyEllipse;
 }
 void PointUncertaintyEllipse::setUncertaintyEllipse(
-    oai::model::lmf::UncertaintyEllipse const& value) {
+    oai::model::lmf::UncertaintyEllipse const &value) {
   m_UncertaintyEllipse = value;
 }
-int32_t PointUncertaintyEllipse::getConfidence() const {
-  return m_Confidence;
-}
+int32_t PointUncertaintyEllipse::getConfidence() const { return m_Confidence; }
 void PointUncertaintyEllipse::setConfidence(int32_t const value) {
   m_Confidence = value;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

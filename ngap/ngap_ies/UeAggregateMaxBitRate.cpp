@@ -16,13 +16,13 @@ UeAggregateMaxBitRate::UeAggregateMaxBitRate() {
 UeAggregateMaxBitRate::~UeAggregateMaxBitRate() {}
 
 //------------------------------------------------------------------------------
-void UeAggregateMaxBitRate::set(const uint64_t& dl, const uint64_t& ul) {
+void UeAggregateMaxBitRate::set(const uint64_t &dl, const uint64_t &ul) {
   m_Dl = dl;
   m_Ul = ul;
 }
 
 //------------------------------------------------------------------------------
-bool UeAggregateMaxBitRate::get(uint64_t& dl, uint64_t& ul) const {
+bool UeAggregateMaxBitRate::get(uint64_t &dl, uint64_t &ul) const {
   dl = m_Dl;
   ul = m_Ul;
   return true;
@@ -30,11 +30,12 @@ bool UeAggregateMaxBitRate::get(uint64_t& dl, uint64_t& ul) const {
 
 //------------------------------------------------------------------------------
 bool UeAggregateMaxBitRate::encode(
-    Ngap_UEAggregateMaximumBitRate_t& bitRate) const {
-  bitRate.uEAggregateMaximumBitRateDL.size = 4;  // TODO: 6 bytes
+    Ngap_UEAggregateMaximumBitRate_t &bitRate) const {
+  bitRate.uEAggregateMaximumBitRateDL.size = 4; // TODO: 6 bytes
   bitRate.uEAggregateMaximumBitRateDL.buf =
-      (uint8_t*) calloc(1, bitRate.uEAggregateMaximumBitRateDL.size);
-  if (!bitRate.uEAggregateMaximumBitRateDL.buf) return false;
+      (uint8_t *)calloc(1, bitRate.uEAggregateMaximumBitRateDL.size);
+  if (!bitRate.uEAggregateMaximumBitRateDL.buf)
+    return false;
 
   for (int i = 0; i < bitRate.uEAggregateMaximumBitRateDL.size; i++) {
     bitRate.uEAggregateMaximumBitRateDL.buf[i] =
@@ -42,10 +43,11 @@ bool UeAggregateMaxBitRate::encode(
         ((bitRate.uEAggregateMaximumBitRateDL.size - i - 1) * 8);
   }
 
-  bitRate.uEAggregateMaximumBitRateUL.size = 4;  // TODO: 6 bytes
+  bitRate.uEAggregateMaximumBitRateUL.size = 4; // TODO: 6 bytes
   bitRate.uEAggregateMaximumBitRateUL.buf =
-      (uint8_t*) calloc(1, bitRate.uEAggregateMaximumBitRateUL.size);
-  if (!bitRate.uEAggregateMaximumBitRateUL.buf) return false;
+      (uint8_t *)calloc(1, bitRate.uEAggregateMaximumBitRateUL.size);
+  if (!bitRate.uEAggregateMaximumBitRateUL.buf)
+    return false;
 
   for (int i = 0; i < bitRate.uEAggregateMaximumBitRateUL.size; i++) {
     bitRate.uEAggregateMaximumBitRateUL.buf[i] =
@@ -58,9 +60,11 @@ bool UeAggregateMaxBitRate::encode(
 
 //------------------------------------------------------------------------------
 bool UeAggregateMaxBitRate::decode(
-    const Ngap_UEAggregateMaximumBitRate_t& bitRate) {
-  if (!bitRate.uEAggregateMaximumBitRateDL.buf) return false;
-  if (!bitRate.uEAggregateMaximumBitRateUL.buf) return false;
+    const Ngap_UEAggregateMaximumBitRate_t &bitRate) {
+  if (!bitRate.uEAggregateMaximumBitRateDL.buf)
+    return false;
+  if (!bitRate.uEAggregateMaximumBitRateUL.buf)
+    return false;
 
   m_Dl = 0;
   m_Ul = 0;
@@ -77,4 +81,4 @@ bool UeAggregateMaxBitRate::decode(
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

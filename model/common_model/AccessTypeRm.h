@@ -19,8 +19,8 @@
 #ifndef AccessTypeRm_H_
 #define AccessTypeRm_H_
 
-#include "NullValue.h"
 #include "AccessType.h"
+#include "NullValue.h"
 #include <nlohmann/json.hpp>
 
 namespace oai::model::common {
@@ -29,19 +29,19 @@ namespace oai::model::common {
 ///  The same as access type, but it is nullable
 /// </summary>
 class AccessTypeRm : public AccessType {
- public:
+public:
   AccessTypeRm();
   virtual ~AccessTypeRm() = default;
 
-  bool validate(
-      std::stringstream& msg, const std::string& pathPrefix) const override;
+  bool validate(std::stringstream &msg,
+                const std::string &pathPrefix) const override;
 
-  friend void to_json(nlohmann::json& j, const AccessTypeRm& o);
-  friend void from_json(const nlohmann::json& j, AccessTypeRm& o);
+  friend void to_json(nlohmann::json &j, const AccessTypeRm &o);
+  friend void from_json(const nlohmann::json &j, AccessTypeRm &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* AccessTypeRm_H_ */

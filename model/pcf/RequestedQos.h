@@ -19,8 +19,8 @@
 #ifndef RequestedQos_H_
 #define RequestedQos_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::pcf {
 
@@ -28,7 +28,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class RequestedQos {
- public:
+public:
   RequestedQos();
   virtual ~RequestedQos() = default;
 
@@ -42,16 +42,16 @@ class RequestedQos {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const RequestedQos& rhs) const;
-  bool operator!=(const RequestedQos& rhs) const;
+  bool operator==(const RequestedQos &rhs) const;
+  bool operator!=(const RequestedQos &rhs) const;
 
   /////////////////////////////////////////////
   /// RequestedQos members
@@ -65,21 +65,21 @@ class RequestedQos {
   ///
   /// </summary>
   std::string getGbrUl() const;
-  void setGbrUl(std::string const& value);
+  void setGbrUl(std::string const &value);
   bool gbrUlIsSet() const;
   void unsetGbrUl();
   /// <summary>
   ///
   /// </summary>
   std::string getGbrDl() const;
-  void setGbrDl(std::string const& value);
+  void setGbrDl(std::string const &value);
   bool gbrDlIsSet() const;
   void unsetGbrDl();
 
-  friend void to_json(nlohmann::json& j, const RequestedQos& o);
-  friend void from_json(const nlohmann::json& j, RequestedQos& o);
+  friend void to_json(nlohmann::json &j, const RequestedQos &o);
+  friend void from_json(const nlohmann::json &j, RequestedQos &o);
 
- protected:
+protected:
   int32_t m_r_5qi;
 
   std::string m_GbrUl;
@@ -88,6 +88,6 @@ class RequestedQos {
   bool m_GbrDlIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* RequestedQos_H_ */

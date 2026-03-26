@@ -27,7 +27,7 @@ namespace oai::model::smf {
 /// Possible values are - NONE - WITH_N26 - WITHOUT_N26 - IWK_NON_3GPP
 /// </summary>
 class EpsInterworkingIndication {
- public:
+public:
   EpsInterworkingIndication();
   virtual ~EpsInterworkingIndication();
 
@@ -36,12 +36,12 @@ class EpsInterworkingIndication {
   /////////////////////////////////////////////
   /// EpsInterworkingIndication members
 
-  friend void to_json(nlohmann::json& j, const EpsInterworkingIndication& o);
-  friend void from_json(const nlohmann::json& j, EpsInterworkingIndication& o);
+  friend void to_json(nlohmann::json &j, const EpsInterworkingIndication &o);
+  friend void from_json(const nlohmann::json &j, EpsInterworkingIndication &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* EpsInterworkingIndication_H_ */

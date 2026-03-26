@@ -27,7 +27,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class PartialRecordMethod {
- public:
+public:
   PartialRecordMethod();
   virtual ~PartialRecordMethod();
 
@@ -36,12 +36,12 @@ class PartialRecordMethod {
   /////////////////////////////////////////////
   /// PartialRecordMethod members
 
-  friend void to_json(nlohmann::json& j, const PartialRecordMethod& o);
-  friend void from_json(const nlohmann::json& j, PartialRecordMethod& o);
+  friend void to_json(nlohmann::json &j, const PartialRecordMethod &o);
+  friend void from_json(const nlohmann::json &j, PartialRecordMethod &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* PartialRecordMethod_H_ */

@@ -13,8 +13,8 @@
 
 #include "CollectionPeriodRmmLteMdt_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::common {
 
@@ -27,12 +27,12 @@ void CollectionPeriodRmmLteMdt_anyOf::validate() const {
   }
 }
 
-bool CollectionPeriodRmmLteMdt_anyOf::validate(std::stringstream& msg) const {
+bool CollectionPeriodRmmLteMdt_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool CollectionPeriodRmmLteMdt_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "CollectionPeriodRmmLteMdt_anyOf" : pathPrefix;
@@ -48,57 +48,52 @@ bool CollectionPeriodRmmLteMdt_anyOf::validate(
 }
 
 bool CollectionPeriodRmmLteMdt_anyOf::operator==(
-    const CollectionPeriodRmmLteMdt_anyOf& rhs) const {
+    const CollectionPeriodRmmLteMdt_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool CollectionPeriodRmmLteMdt_anyOf::operator!=(
-    const CollectionPeriodRmmLteMdt_anyOf& rhs) const {
+    const CollectionPeriodRmmLteMdt_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const CollectionPeriodRmmLteMdt_anyOf& o) {
+void to_json(nlohmann::json &j, const CollectionPeriodRmmLteMdt_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case CollectionPeriodRmmLteMdt_anyOf::eCollectionPeriodRmmLteMdt_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case CollectionPeriodRmmLteMdt_anyOf::eCollectionPeriodRmmLteMdt_anyOf::
-        _1024:
-      j = "1024";
-      break;
-    case CollectionPeriodRmmLteMdt_anyOf::eCollectionPeriodRmmLteMdt_anyOf::
-        _1280:
-      j = "1280";
-      break;
-    case CollectionPeriodRmmLteMdt_anyOf::eCollectionPeriodRmmLteMdt_anyOf::
-        _2048:
-      j = "2048";
-      break;
-    case CollectionPeriodRmmLteMdt_anyOf::eCollectionPeriodRmmLteMdt_anyOf::
-        _2560:
-      j = "2560";
-      break;
-    case CollectionPeriodRmmLteMdt_anyOf::eCollectionPeriodRmmLteMdt_anyOf::
-        _5120:
-      j = "5120";
-      break;
-    case CollectionPeriodRmmLteMdt_anyOf::eCollectionPeriodRmmLteMdt_anyOf::
-        _10240:
-      j = "10240";
-      break;
-    case CollectionPeriodRmmLteMdt_anyOf::eCollectionPeriodRmmLteMdt_anyOf::
-        _60000:
-      j = "60000";
-      break;
+  case CollectionPeriodRmmLteMdt_anyOf::eCollectionPeriodRmmLteMdt_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case CollectionPeriodRmmLteMdt_anyOf::eCollectionPeriodRmmLteMdt_anyOf::_1024:
+    j = "1024";
+    break;
+  case CollectionPeriodRmmLteMdt_anyOf::eCollectionPeriodRmmLteMdt_anyOf::_1280:
+    j = "1280";
+    break;
+  case CollectionPeriodRmmLteMdt_anyOf::eCollectionPeriodRmmLteMdt_anyOf::_2048:
+    j = "2048";
+    break;
+  case CollectionPeriodRmmLteMdt_anyOf::eCollectionPeriodRmmLteMdt_anyOf::_2560:
+    j = "2560";
+    break;
+  case CollectionPeriodRmmLteMdt_anyOf::eCollectionPeriodRmmLteMdt_anyOf::_5120:
+    j = "5120";
+    break;
+  case CollectionPeriodRmmLteMdt_anyOf::eCollectionPeriodRmmLteMdt_anyOf::
+      _10240:
+    j = "10240";
+    break;
+  case CollectionPeriodRmmLteMdt_anyOf::eCollectionPeriodRmmLteMdt_anyOf::
+      _60000:
+    j = "60000";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, CollectionPeriodRmmLteMdt_anyOf& o) {
+void from_json(const nlohmann::json &j, CollectionPeriodRmmLteMdt_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "1024") {
     o.setValue(CollectionPeriodRmmLteMdt_anyOf::
@@ -139,4 +134,4 @@ void CollectionPeriodRmmLteMdt_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

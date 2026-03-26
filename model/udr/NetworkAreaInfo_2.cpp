@@ -19,10 +19,10 @@
 namespace oai::udr::model {
 
 NetworkAreaInfo_2::NetworkAreaInfo_2() {
-  m_EcgisIsSet       = false;
-  m_NcgisIsSet       = false;
+  m_EcgisIsSet = false;
+  m_NcgisIsSet = false;
   m_GRanNodeIdsIsSet = false;
-  m_TaisIsSet        = false;
+  m_TaisIsSet = false;
 }
 
 NetworkAreaInfo_2::~NetworkAreaInfo_2() {}
@@ -31,16 +31,19 @@ void NetworkAreaInfo_2::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const NetworkAreaInfo_2& o) {
+void to_json(nlohmann::json &j, const NetworkAreaInfo_2 &o) {
   j = nlohmann::json();
-  if (o.ecgisIsSet() || !o.m_Ecgis.empty()) j["ecgis"] = o.m_Ecgis;
-  if (o.ncgisIsSet() || !o.m_Ncgis.empty()) j["ncgis"] = o.m_Ncgis;
+  if (o.ecgisIsSet() || !o.m_Ecgis.empty())
+    j["ecgis"] = o.m_Ecgis;
+  if (o.ncgisIsSet() || !o.m_Ncgis.empty())
+    j["ncgis"] = o.m_Ncgis;
   if (o.gRanNodeIdsIsSet() || !o.m_GRanNodeIds.empty())
     j["gRanNodeIds"] = o.m_GRanNodeIds;
-  if (o.taisIsSet() || !o.m_Tais.empty()) j["tais"] = o.m_Tais;
+  if (o.taisIsSet() || !o.m_Tais.empty())
+    j["tais"] = o.m_Tais;
 }
 
-void from_json(const nlohmann::json& j, NetworkAreaInfo_2& o) {
+void from_json(const nlohmann::json &j, NetworkAreaInfo_2 &o) {
   if (j.find("ecgis") != j.end()) {
     j.at("ecgis").get_to(o.m_Ecgis);
     o.m_EcgisIsSet = true;
@@ -59,62 +62,46 @@ void from_json(const nlohmann::json& j, NetworkAreaInfo_2& o) {
   }
 }
 
-std::vector<oai::model::common::Ecgi>& NetworkAreaInfo_2::getEcgis() {
+std::vector<oai::model::common::Ecgi> &NetworkAreaInfo_2::getEcgis() {
   return m_Ecgis;
 }
 void NetworkAreaInfo_2::setEcgis(
-    std::vector<oai::model::common::Ecgi> const& value) {
-  m_Ecgis      = value;
+    std::vector<oai::model::common::Ecgi> const &value) {
+  m_Ecgis = value;
   m_EcgisIsSet = true;
 }
-bool NetworkAreaInfo_2::ecgisIsSet() const {
-  return m_EcgisIsSet;
-}
-void NetworkAreaInfo_2::unsetEcgis() {
-  m_EcgisIsSet = false;
-}
-std::vector<oai::model::common::Ncgi>& NetworkAreaInfo_2::getNcgis() {
+bool NetworkAreaInfo_2::ecgisIsSet() const { return m_EcgisIsSet; }
+void NetworkAreaInfo_2::unsetEcgis() { m_EcgisIsSet = false; }
+std::vector<oai::model::common::Ncgi> &NetworkAreaInfo_2::getNcgis() {
   return m_Ncgis;
 }
 void NetworkAreaInfo_2::setNcgis(
-    std::vector<oai::model::common::Ncgi> const& value) {
-  m_Ncgis      = value;
+    std::vector<oai::model::common::Ncgi> const &value) {
+  m_Ncgis = value;
   m_NcgisIsSet = true;
 }
-bool NetworkAreaInfo_2::ncgisIsSet() const {
-  return m_NcgisIsSet;
-}
-void NetworkAreaInfo_2::unsetNcgis() {
-  m_NcgisIsSet = false;
-}
-std::vector<oai::model::common::GlobalRanNodeId>&
+bool NetworkAreaInfo_2::ncgisIsSet() const { return m_NcgisIsSet; }
+void NetworkAreaInfo_2::unsetNcgis() { m_NcgisIsSet = false; }
+std::vector<oai::model::common::GlobalRanNodeId> &
 NetworkAreaInfo_2::getGRanNodeIds() {
   return m_GRanNodeIds;
 }
 void NetworkAreaInfo_2::setGRanNodeIds(
-    std::vector<oai::model::common::GlobalRanNodeId> const& value) {
-  m_GRanNodeIds      = value;
+    std::vector<oai::model::common::GlobalRanNodeId> const &value) {
+  m_GRanNodeIds = value;
   m_GRanNodeIdsIsSet = true;
 }
-bool NetworkAreaInfo_2::gRanNodeIdsIsSet() const {
-  return m_GRanNodeIdsIsSet;
-}
-void NetworkAreaInfo_2::unsetGRanNodeIds() {
-  m_GRanNodeIdsIsSet = false;
-}
-std::vector<oai::model::common::Tai>& NetworkAreaInfo_2::getTais() {
+bool NetworkAreaInfo_2::gRanNodeIdsIsSet() const { return m_GRanNodeIdsIsSet; }
+void NetworkAreaInfo_2::unsetGRanNodeIds() { m_GRanNodeIdsIsSet = false; }
+std::vector<oai::model::common::Tai> &NetworkAreaInfo_2::getTais() {
   return m_Tais;
 }
 void NetworkAreaInfo_2::setTais(
-    std::vector<oai::model::common::Tai> const& value) {
-  m_Tais      = value;
+    std::vector<oai::model::common::Tai> const &value) {
+  m_Tais = value;
   m_TaisIsSet = true;
 }
-bool NetworkAreaInfo_2::taisIsSet() const {
-  return m_TaisIsSet;
-}
-void NetworkAreaInfo_2::unsetTais() {
-  m_TaisIsSet = false;
-}
+bool NetworkAreaInfo_2::taisIsSet() const { return m_TaisIsSet; }
+void NetworkAreaInfo_2::unsetTais() { m_TaisIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

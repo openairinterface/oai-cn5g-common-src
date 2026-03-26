@@ -21,13 +21,13 @@ namespace nssf_server {
 namespace model {
 
 SliceInfoForUEConfigurationUpdate::SliceInfoForUEConfigurationUpdate() {
-  m_SubscribedNssaiIsSet            = false;
-  m_AllowedNssaiCurrentAccessIsSet  = false;
-  m_AllowedNssaiOtherAccessIsSet    = false;
-  m_DefaultConfiguredSnssaiInd      = false;
+  m_SubscribedNssaiIsSet = false;
+  m_AllowedNssaiCurrentAccessIsSet = false;
+  m_AllowedNssaiOtherAccessIsSet = false;
+  m_DefaultConfiguredSnssaiInd = false;
   m_DefaultConfiguredSnssaiIndIsSet = false;
-  m_RequestedNssaiIsSet             = false;
-  m_MappingOfNssaiIsSet             = false;
+  m_RequestedNssaiIsSet = false;
+  m_MappingOfNssaiIsSet = false;
 }
 
 void SliceInfoForUEConfigurationUpdate::validate() const {
@@ -38,28 +38,28 @@ void SliceInfoForUEConfigurationUpdate::validate() const {
   // }
 }
 
-bool SliceInfoForUEConfigurationUpdate::validate(std::stringstream& msg) const {
+bool SliceInfoForUEConfigurationUpdate::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool SliceInfoForUEConfigurationUpdate::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "SliceInfoForUEConfigurationUpdate" : pathPrefix;
 
   if (subscribedNssaiIsSet()) {
-    const std::vector<SubscribedSnssai>& value = m_SubscribedNssai;
+    const std::vector<SubscribedSnssai> &value = m_SubscribedNssai;
     const std::string currentValuePath = _pathPrefix + ".subscribedNssai";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const SubscribedSnssai& value : value) {
+      int i = 0;
+      for (const SubscribedSnssai &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -72,17 +72,17 @@ bool SliceInfoForUEConfigurationUpdate::validate(
   }
 
   if (requestedNssaiIsSet()) {
-    const std::vector<oai::model::common::Snssai>& value = m_RequestedNssai;
+    const std::vector<oai::model::common::Snssai> &value = m_RequestedNssai;
     const std::string currentValuePath = _pathPrefix + ".requestedNssai";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::Snssai& value : value) {
+      int i = 0;
+      for (const oai::model::common::Snssai &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -95,17 +95,17 @@ bool SliceInfoForUEConfigurationUpdate::validate(
   }
 
   if (mappingOfNssaiIsSet()) {
-    const std::vector<MappingOfSnssai>& value = m_MappingOfNssai;
-    const std::string currentValuePath        = _pathPrefix + ".mappingOfNssai";
+    const std::vector<MappingOfSnssai> &value = m_MappingOfNssai;
+    const std::string currentValuePath = _pathPrefix + ".mappingOfNssai";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const MappingOfSnssai& value : value) {
+      int i = 0;
+      for (const MappingOfSnssai &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -121,7 +121,7 @@ bool SliceInfoForUEConfigurationUpdate::validate(
 }
 
 bool SliceInfoForUEConfigurationUpdate::operator==(
-    const SliceInfoForUEConfigurationUpdate& rhs) const {
+    const SliceInfoForUEConfigurationUpdate &rhs) const {
   return
 
       ((!subscribedNssaiIsSet() && !rhs.subscribedNssaiIsSet()) ||
@@ -159,11 +159,11 @@ bool SliceInfoForUEConfigurationUpdate::operator==(
 }
 
 bool SliceInfoForUEConfigurationUpdate::operator!=(
-    const SliceInfoForUEConfigurationUpdate& rhs) const {
+    const SliceInfoForUEConfigurationUpdate &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const SliceInfoForUEConfigurationUpdate& o) {
+void to_json(nlohmann::json &j, const SliceInfoForUEConfigurationUpdate &o) {
   j = nlohmann::json();
   if (o.subscribedNssaiIsSet() || !o.m_SubscribedNssai.empty())
     j["subscribedNssai"] = o.m_SubscribedNssai;
@@ -179,7 +179,7 @@ void to_json(nlohmann::json& j, const SliceInfoForUEConfigurationUpdate& o) {
     j["mappingOfNssai"] = o.m_MappingOfNssai;
 }
 
-void from_json(const nlohmann::json& j, SliceInfoForUEConfigurationUpdate& o) {
+void from_json(const nlohmann::json &j, SliceInfoForUEConfigurationUpdate &o) {
   if (j.find("subscribedNssai") != j.end()) {
     j.at("subscribedNssai").get_to(o.m_SubscribedNssai);
     o.m_SubscribedNssaiIsSet = true;
@@ -211,8 +211,8 @@ SliceInfoForUEConfigurationUpdate::getSubscribedNssai() const {
   return m_SubscribedNssai;
 }
 void SliceInfoForUEConfigurationUpdate::setSubscribedNssai(
-    std::vector<SubscribedSnssai> const& value) {
-  m_SubscribedNssai      = value;
+    std::vector<SubscribedSnssai> const &value) {
+  m_SubscribedNssai = value;
   m_SubscribedNssaiIsSet = true;
 }
 bool SliceInfoForUEConfigurationUpdate::subscribedNssaiIsSet() const {
@@ -221,13 +221,13 @@ bool SliceInfoForUEConfigurationUpdate::subscribedNssaiIsSet() const {
 void SliceInfoForUEConfigurationUpdate::unsetSubscribedNssai() {
   m_SubscribedNssaiIsSet = false;
 }
-AllowedNssai SliceInfoForUEConfigurationUpdate::getAllowedNssaiCurrentAccess()
-    const {
+AllowedNssai
+SliceInfoForUEConfigurationUpdate::getAllowedNssaiCurrentAccess() const {
   return m_AllowedNssaiCurrentAccess;
 }
 void SliceInfoForUEConfigurationUpdate::setAllowedNssaiCurrentAccess(
-    AllowedNssai const& value) {
-  m_AllowedNssaiCurrentAccess      = value;
+    AllowedNssai const &value) {
+  m_AllowedNssaiCurrentAccess = value;
   m_AllowedNssaiCurrentAccessIsSet = true;
 }
 bool SliceInfoForUEConfigurationUpdate::allowedNssaiCurrentAccessIsSet() const {
@@ -236,13 +236,13 @@ bool SliceInfoForUEConfigurationUpdate::allowedNssaiCurrentAccessIsSet() const {
 void SliceInfoForUEConfigurationUpdate::unsetAllowedNssaiCurrentAccess() {
   m_AllowedNssaiCurrentAccessIsSet = false;
 }
-AllowedNssai SliceInfoForUEConfigurationUpdate::getAllowedNssaiOtherAccess()
-    const {
+AllowedNssai
+SliceInfoForUEConfigurationUpdate::getAllowedNssaiOtherAccess() const {
   return m_AllowedNssaiOtherAccess;
 }
 void SliceInfoForUEConfigurationUpdate::setAllowedNssaiOtherAccess(
-    AllowedNssai const& value) {
-  m_AllowedNssaiOtherAccess      = value;
+    AllowedNssai const &value) {
+  m_AllowedNssaiOtherAccess = value;
   m_AllowedNssaiOtherAccessIsSet = true;
 }
 bool SliceInfoForUEConfigurationUpdate::allowedNssaiOtherAccessIsSet() const {
@@ -256,7 +256,7 @@ bool SliceInfoForUEConfigurationUpdate::isDefaultConfiguredSnssaiInd() const {
 }
 void SliceInfoForUEConfigurationUpdate::setDefaultConfiguredSnssaiInd(
     bool const value) {
-  m_DefaultConfiguredSnssaiInd      = value;
+  m_DefaultConfiguredSnssaiInd = value;
   m_DefaultConfiguredSnssaiIndIsSet = true;
 }
 bool SliceInfoForUEConfigurationUpdate::defaultConfiguredSnssaiIndIsSet()
@@ -271,8 +271,8 @@ SliceInfoForUEConfigurationUpdate::getRequestedNssai() const {
   return m_RequestedNssai;
 }
 void SliceInfoForUEConfigurationUpdate::setRequestedNssai(
-    std::vector<oai::model::common::Snssai> const& value) {
-  m_RequestedNssai      = value;
+    std::vector<oai::model::common::Snssai> const &value) {
+  m_RequestedNssai = value;
   m_RequestedNssaiIsSet = true;
 }
 bool SliceInfoForUEConfigurationUpdate::requestedNssaiIsSet() const {
@@ -286,8 +286,8 @@ SliceInfoForUEConfigurationUpdate::getMappingOfNssai() const {
   return m_MappingOfNssai;
 }
 void SliceInfoForUEConfigurationUpdate::setMappingOfNssai(
-    std::vector<MappingOfSnssai> const& value) {
-  m_MappingOfNssai      = value;
+    std::vector<MappingOfSnssai> const &value) {
+  m_MappingOfNssai = value;
   m_MappingOfNssaiIsSet = true;
 }
 bool SliceInfoForUEConfigurationUpdate::mappingOfNssaiIsSet() const {
@@ -297,6 +297,6 @@ void SliceInfoForUEConfigurationUpdate::unsetMappingOfNssai() {
   m_MappingOfNssaiIsSet = false;
 }
 
-}  // namespace model
-}  // namespace nssf_server
-}  // namespace oai
+} // namespace model
+} // namespace nssf_server
+} // namespace oai

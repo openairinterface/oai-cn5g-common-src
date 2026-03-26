@@ -12,7 +12,7 @@ constexpr auto kAllowedSscModeName = "Allowed SSC Mode";
 namespace oai::nas {
 
 class AllowedSscMode : public Type1NasIeFormatTv {
- public:
+public:
   AllowedSscMode();
   AllowedSscMode(uint8_t type);
   AllowedSscMode(uint8_t iei, uint8_t type);
@@ -28,6 +28,6 @@ class AllowedSscMode : public Type1NasIeFormatTv {
   bool IsSscMode3Allowed() const;
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

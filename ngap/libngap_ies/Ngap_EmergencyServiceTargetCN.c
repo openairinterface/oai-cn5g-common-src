@@ -28,8 +28,7 @@ asn_per_constraints_t asn_PER_type_Ngap_EmergencyServiceTargetCN_constr_1
           !defined(ASN_DISABLE_APER_SUPPORT) */
 static const asn_INTEGER_enum_map_t
     asn_MAP_Ngap_EmergencyServiceTargetCN_value2enum_1[] = {
-        {0, 6, "fiveGC"},
-        {1, 3, "epc"}
+        {0, 6, "fiveGC"}, {1, 3, "epc"}
         /* This list is extensible */
 };
 static const unsigned int asn_MAP_Ngap_EmergencyServiceTargetCN_enum2value_1[] =

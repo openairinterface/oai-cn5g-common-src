@@ -12,10 +12,10 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_FiveQI.h"
-#include "Ngap_PriorityLevelQos.h"
 #include "Ngap_AveragingWindow.h"
+#include "Ngap_FiveQI.h"
 #include "Ngap_MaximumDataBurstVolume.h"
+#include "Ngap_PriorityLevelQos.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -28,10 +28,10 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_NonDynamic5QIDescriptor */
 typedef struct Ngap_NonDynamic5QIDescriptor {
   Ngap_FiveQI_t fiveQI;
-  Ngap_PriorityLevelQos_t* priorityLevelQos;             /* OPTIONAL */
-  Ngap_AveragingWindow_t* averagingWindow;               /* OPTIONAL */
-  Ngap_MaximumDataBurstVolume_t* maximumDataBurstVolume; /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  Ngap_PriorityLevelQos_t *priorityLevelQos;             /* OPTIONAL */
+  Ngap_AveragingWindow_t *averagingWindow;               /* OPTIONAL */
+  Ngap_MaximumDataBurstVolume_t *maximumDataBurstVolume; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

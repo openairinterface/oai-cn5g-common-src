@@ -27,19 +27,19 @@ void SelfLink::validate() const {
   }
 }
 
-bool SelfLink::validate(std::stringstream& msg) const {
+bool SelfLink::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool SelfLink::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool SelfLink::validate(std::stringstream &msg,
+                        const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "SelfLink" : pathPrefix;
 
   return success;
 }
 
-bool SelfLink::operator==(const SelfLink& rhs) const {
+bool SelfLink::operator==(const SelfLink &rhs) const {
   return
 
       (getSelf() == rhs.getSelf())
@@ -47,24 +47,20 @@ bool SelfLink::operator==(const SelfLink& rhs) const {
           ;
 }
 
-bool SelfLink::operator!=(const SelfLink& rhs) const {
-  return !(*this == rhs);
-}
+bool SelfLink::operator!=(const SelfLink &rhs) const { return !(*this == rhs); }
 
-void to_json(nlohmann::json& j, const SelfLink& o) {
-  j         = nlohmann::json();
+void to_json(nlohmann::json &j, const SelfLink &o) {
+  j = nlohmann::json();
   j["self"] = o.m_Self;
 }
 
-void from_json(const nlohmann::json& j, SelfLink& o) {
+void from_json(const nlohmann::json &j, SelfLink &o) {
   j.at("self").get_to(o.m_Self);
 }
 
-oai::model::common::Link SelfLink::getSelf() const {
-  return m_Self;
-}
-void SelfLink::setSelf(oai::model::common::Link const& value) {
+oai::model::common::Link SelfLink::getSelf() const { return m_Self; }
+void SelfLink::setSelf(oai::model::common::Link const &value) {
   m_Self = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

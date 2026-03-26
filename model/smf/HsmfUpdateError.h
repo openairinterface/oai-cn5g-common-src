@@ -21,8 +21,8 @@
 
 #include "ProblemDetails.h"
 #include "RefToBinaryData.h"
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::smf {
 
@@ -30,7 +30,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class HsmfUpdateError {
- public:
+public:
   HsmfUpdateError();
   virtual ~HsmfUpdateError();
 
@@ -43,7 +43,7 @@ class HsmfUpdateError {
   ///
   /// </summary>
   oai::model::common::ProblemDetails getError() const;
-  void setError(oai::model::common::ProblemDetails const& value);
+  void setError(oai::model::common::ProblemDetails const &value);
   /// <summary>
   ///
   /// </summary>
@@ -55,14 +55,14 @@ class HsmfUpdateError {
   ///
   /// </summary>
   std::string getN1smCause() const;
-  void setN1smCause(std::string const& value);
+  void setN1smCause(std::string const &value);
   bool n1smCauseIsSet() const;
   void unsetN1smCause();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::RefToBinaryData getN1SmInfoToUe() const;
-  void setN1SmInfoToUe(oai::model::common::RefToBinaryData const& value);
+  void setN1SmInfoToUe(oai::model::common::RefToBinaryData const &value);
   bool n1SmInfoToUeIsSet() const;
   void unsetN1SmInfoToUe();
   /// <summary>
@@ -76,14 +76,14 @@ class HsmfUpdateError {
   ///
   /// </summary>
   std::string getRecoveryTime() const;
-  void setRecoveryTime(std::string const& value);
+  void setRecoveryTime(std::string const &value);
   bool recoveryTimeIsSet() const;
   void unsetRecoveryTime();
 
-  friend void to_json(nlohmann::json& j, const HsmfUpdateError& o);
-  friend void from_json(const nlohmann::json& j, HsmfUpdateError& o);
+  friend void to_json(nlohmann::json &j, const HsmfUpdateError &o);
+  friend void from_json(const nlohmann::json &j, HsmfUpdateError &o);
 
- protected:
+protected:
   oai::model::common::ProblemDetails m_Error;
 
   int32_t m_Pti;
@@ -98,6 +98,6 @@ class HsmfUpdateError {
   bool m_RecoveryTimeIsSet;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* HsmfUpdateError_H_ */

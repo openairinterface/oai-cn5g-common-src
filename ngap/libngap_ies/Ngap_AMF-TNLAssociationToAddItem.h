@@ -13,8 +13,8 @@
 
 /* Including external dependencies */
 #include "Ngap_CPTransportLayerInformation.h"
-#include "Ngap_TNLAssociationUsage.h"
 #include "Ngap_TNLAddressWeightFactor.h"
+#include "Ngap_TNLAssociationUsage.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -27,9 +27,9 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_AMF-TNLAssociationToAddItem */
 typedef struct Ngap_AMF_TNLAssociationToAddItem {
   Ngap_CPTransportLayerInformation_t aMF_TNLAssociationAddress;
-  Ngap_TNLAssociationUsage_t* tNLAssociationUsage; /* OPTIONAL */
+  Ngap_TNLAssociationUsage_t *tNLAssociationUsage; /* OPTIONAL */
   Ngap_TNLAddressWeightFactor_t tNLAddressWeightFactor;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

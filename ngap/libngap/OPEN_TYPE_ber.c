@@ -3,18 +3,19 @@
  * All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#include <asn_internal.h>
 #include <OPEN_TYPE.h>
+#include <asn_internal.h>
 #include <constr_CHOICE.h>
 
-asn_dec_rval_t OPEN_TYPE_ber_get(
-    const asn_codec_ctx_t* opt_codec_ctx, const asn_TYPE_descriptor_t* td,
-    void* sptr, const asn_TYPE_member_t* elm, const void* ptr, size_t size) {
+asn_dec_rval_t OPEN_TYPE_ber_get(const asn_codec_ctx_t *opt_codec_ctx,
+                                 const asn_TYPE_descriptor_t *td, void *sptr,
+                                 const asn_TYPE_member_t *elm, const void *ptr,
+                                 size_t size) {
   size_t consumed_myself = 0;
   asn_type_selector_result_t selected;
-  void* memb_ptr;   /* Pointer to the member */
-  void** memb_ptr2; /* Pointer to that pointer */
-  void* inner_value;
+  void *memb_ptr;   /* Pointer to the member */
+  void **memb_ptr2; /* Pointer to that pointer */
+  void *inner_value;
   asn_dec_rval_t rv;
 
   if (!(elm->flags & ATF_OPEN_TYPE)) {
@@ -22,9 +23,8 @@ asn_dec_rval_t OPEN_TYPE_ber_get(
   }
 
   if (!elm->type_selector) {
-    ASN_DEBUG(
-        "Type selector is not defined for Open Type %s->%s->%s", td->name,
-        elm->name, elm->type->name);
+    ASN_DEBUG("Type selector is not defined for Open Type %s->%s->%s", td->name,
+              elm->name, elm->type->name);
     ASN__DECODE_FAILED;
   }
 
@@ -35,9 +35,9 @@ asn_dec_rval_t OPEN_TYPE_ber_get(
 
   /* Fetch the pointer to this member */
   if (elm->flags & ATF_POINTER) {
-    memb_ptr2 = (void**) ((char*) sptr + elm->memb_offset);
+    memb_ptr2 = (void **)((char *)sptr + elm->memb_offset);
   } else {
-    memb_ptr  = (char*) sptr + elm->memb_offset;
+    memb_ptr = (char *)sptr + elm->memb_offset;
     memb_ptr2 = &memb_ptr;
   }
   if (*memb_ptr2 != NULL) {
@@ -47,7 +47,7 @@ asn_dec_rval_t OPEN_TYPE_ber_get(
     }
   }
 
-  inner_value = (char*) *memb_ptr2 +
+  inner_value = (char *)*memb_ptr2 +
                 elm->type->elements[selected.presence_index - 1].memb_offset;
 
   ASN_DEBUG("presence %d\n", selected.presence_index);
@@ -58,21 +58,21 @@ asn_dec_rval_t OPEN_TYPE_ber_get(
   ADVANCE(rv.consumed);
   rv.consumed = 0;
   switch (rv.code) {
-    case RC_OK:
-      if (CHOICE_variant_set_presence(
-              elm->type, *memb_ptr2, selected.presence_index) == 0) {
-        rv.code     = RC_OK;
-        rv.consumed = consumed_myself;
-        return rv;
-      } else {
-        /* Oh, now a full-blown failure failure */
-      }
-      /* Fall through */
-    case RC_FAIL:
+  case RC_OK:
+    if (CHOICE_variant_set_presence(elm->type, *memb_ptr2,
+                                    selected.presence_index) == 0) {
+      rv.code = RC_OK;
       rv.consumed = consumed_myself;
-      /* Fall through */
-    case RC_WMORE:
-      break;
+      return rv;
+    } else {
+      /* Oh, now a full-blown failure failure */
+    }
+    /* Fall through */
+  case RC_FAIL:
+    rv.consumed = consumed_myself;
+    /* Fall through */
+  case RC_WMORE:
+    break;
   }
 
   if (*memb_ptr2) {

@@ -31,7 +31,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class CnTypeChangeReport {
- public:
+public:
   CnTypeChangeReport();
   virtual ~CnTypeChangeReport() = default;
 
@@ -45,10 +45,10 @@ class CnTypeChangeReport {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const CnTypeChangeReport& rhs) const;
-  bool operator!=(const CnTypeChangeReport& rhs) const;
+  bool operator==(const CnTypeChangeReport &rhs) const;
+  bool operator!=(const CnTypeChangeReport &rhs) const;
 
   /////////////////////////////////////////////
   /// CnTypeChangeReport members
@@ -57,19 +57,19 @@ class CnTypeChangeReport {
   ///
   /// </summary>
   CnType getNewCnType() const;
-  void setNewCnType(CnType const& value);
+  void setNewCnType(CnType const &value);
   /// <summary>
   ///
   /// </summary>
   CnType getOldCnType() const;
-  void setOldCnType(CnType const& value);
+  void setOldCnType(CnType const &value);
   bool oldCnTypeIsSet() const;
   void unsetOldCnType();
 
-  friend void to_json(nlohmann::json& j, const CnTypeChangeReport& o);
-  friend void from_json(const nlohmann::json& j, CnTypeChangeReport& o);
+  friend void to_json(nlohmann::json &j, const CnTypeChangeReport &o);
+  friend void from_json(const nlohmann::json &j, CnTypeChangeReport &o);
 
- protected:
+protected:
   CnType m_NewCnType;
 
   CnType m_OldCnType;
@@ -77,9 +77,9 @@ class CnTypeChangeReport {
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* CnTypeChangeReport_H_ */

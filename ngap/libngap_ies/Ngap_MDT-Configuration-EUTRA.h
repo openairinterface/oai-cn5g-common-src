@@ -12,8 +12,8 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_MDT-Activation.h"
 #include "Ngap_AreaScopeOfMDT-EUTRA.h"
+#include "Ngap_MDT-Activation.h"
 #include "Ngap_MDTModeEutra.h"
 #include <constr_SEQUENCE.h>
 
@@ -30,8 +30,8 @@ typedef struct Ngap_MDT_Configuration_EUTRA {
   Ngap_MDT_Activation_t mdt_Activation;
   Ngap_AreaScopeOfMDT_EUTRA_t areaScopeOfMDT;
   Ngap_MDTModeEutra_t mDTMode;
-  struct Ngap_MDTPLMNList* signallingBasedMDTPLMNList;   /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_MDTPLMNList *signallingBasedMDTPLMNList;   /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

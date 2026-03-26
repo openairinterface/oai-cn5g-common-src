@@ -21,24 +21,24 @@ extern "C" {
 namespace oai::ngap {
 
 class PathSwitchRequestTransfer {
- public:
+public:
   PathSwitchRequestTransfer();
   virtual ~PathSwitchRequestTransfer(){};
 
   void setDlNgUUpTnlInformation(
-      const UpTransportLayerInformation& dlNgUUpTnlInformation);
+      const UpTransportLayerInformation &dlNgUUpTnlInformation);
   void getDlNgUUpTnlInformation(
-      UpTransportLayerInformation& dlNgUUpTnlInformation) const;
+      UpTransportLayerInformation &dlNgUUpTnlInformation) const;
 
   void setQosFlowAcceptedList(const std::vector<QosFlowAcceptedItem> list);
-  void setQosFlowAcceptedList(const QosFlowAcceptedList& list);
-  void getQosFlowAcceptedList(QosFlowAcceptedList& list) const;
+  void setQosFlowAcceptedList(const QosFlowAcceptedList &list);
+  void getQosFlowAcceptedList(QosFlowAcceptedList &list) const;
 
-  int encode(uint8_t* buf, int bufSize);
-  bool decode(uint8_t* buf, int bufSize);
+  int encode(uint8_t *buf, int bufSize);
+  bool decode(uint8_t *buf, int bufSize);
 
- private:
-  Ngap_PathSwitchRequestTransfer_t* m_Ie;
+private:
+  Ngap_PathSwitchRequestTransfer_t *m_Ie;
 
   // DL NG-U UP TNL Information (Mandatory)
   UpTransportLayerInformation m_DlNgUUpTnlInformation;
@@ -56,5 +56,5 @@ class PathSwitchRequestTransfer {
   // TODO: Global RAN Node ID of Secondary NG-RAN Node
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

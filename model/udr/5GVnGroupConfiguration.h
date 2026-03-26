@@ -34,7 +34,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class _5GVnGroupConfiguration {
- public:
+public:
   _5GVnGroupConfiguration();
   virtual ~_5GVnGroupConfiguration();
 
@@ -47,14 +47,14 @@ class _5GVnGroupConfiguration {
   ///
   /// </summary>
   _5GVnGroupData getR5gVnGroupData() const;
-  void setR5gVnGroupData(_5GVnGroupData const& value);
+  void setR5gVnGroupData(_5GVnGroupData const &value);
   bool r5gVnGroupDataIsSet() const;
   void unsetr_5gVnGroupData();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getMembers();
-  void setMembers(std::vector<std::string> const& value);
+  std::vector<std::string> &getMembers();
+  void setMembers(std::vector<std::string> const &value);
   bool membersIsSet() const;
   void unsetMembers();
   /// <summary>
@@ -68,28 +68,28 @@ class _5GVnGroupConfiguration {
   ///
   /// </summary>
   std::string getAfInstanceId() const;
-  void setAfInstanceId(std::string const& value);
+  void setAfInstanceId(std::string const &value);
   bool afInstanceIdIsSet() const;
   void unsetAfInstanceId();
   /// <summary>
   ///
   /// </summary>
   std::string getInternalGroupIdentifier() const;
-  void setInternalGroupIdentifier(std::string const& value);
+  void setInternalGroupIdentifier(std::string const &value);
   bool internalGroupIdentifierIsSet() const;
   void unsetInternalGroupIdentifier();
   /// <summary>
   ///
   /// </summary>
   std::string getMtcProviderInformation() const;
-  void setMtcProviderInformation(std::string const& value);
+  void setMtcProviderInformation(std::string const &value);
   bool mtcProviderInformationIsSet() const;
   void unsetMtcProviderInformation();
 
-  friend void to_json(nlohmann::json& j, const _5GVnGroupConfiguration& o);
-  friend void from_json(const nlohmann::json& j, _5GVnGroupConfiguration& o);
+  friend void to_json(nlohmann::json &j, const _5GVnGroupConfiguration &o);
+  friend void from_json(const nlohmann::json &j, _5GVnGroupConfiguration &o);
 
- protected:
+protected:
   _5GVnGroupData m_r_5gVnGroupData;
   bool m_r_5gVnGroupDataIsSet;
   std::vector<std::string> m_Members;
@@ -104,6 +104,6 @@ class _5GVnGroupConfiguration {
   bool m_MtcProviderInformationIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* 5GVnGroupConfiguration_H_ */

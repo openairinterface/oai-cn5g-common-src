@@ -19,14 +19,14 @@
 namespace oai::udr::model {
 
 DataFilter::DataFilter() {
-  m_DnnsIsSet             = false;
-  m_SnssaisIsSet          = false;
+  m_DnnsIsSet = false;
+  m_SnssaisIsSet = false;
   m_InternalGroupIdsIsSet = false;
-  m_SupisIsSet            = false;
-  m_AppIdsIsSet           = false;
-  m_UeIpv4sIsSet          = false;
-  m_UeIpv6sIsSet          = false;
-  m_UeMacsIsSet           = false;
+  m_SupisIsSet = false;
+  m_AppIdsIsSet = false;
+  m_UeIpv4sIsSet = false;
+  m_UeIpv6sIsSet = false;
+  m_UeMacsIsSet = false;
 }
 
 DataFilter::~DataFilter() {}
@@ -35,21 +35,28 @@ void DataFilter::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const DataFilter& o) {
-  j            = nlohmann::json();
+void to_json(nlohmann::json &j, const DataFilter &o) {
+  j = nlohmann::json();
   j["dataInd"] = o.m_DataInd;
-  if (o.dnnsIsSet() || !o.m_Dnns.empty()) j["dnns"] = o.m_Dnns;
-  if (o.snssaisIsSet() || !o.m_Snssais.empty()) j["snssais"] = o.m_Snssais;
+  if (o.dnnsIsSet() || !o.m_Dnns.empty())
+    j["dnns"] = o.m_Dnns;
+  if (o.snssaisIsSet() || !o.m_Snssais.empty())
+    j["snssais"] = o.m_Snssais;
   if (o.internalGroupIdsIsSet() || !o.m_InternalGroupIds.empty())
     j["internalGroupIds"] = o.m_InternalGroupIds;
-  if (o.supisIsSet() || !o.m_Supis.empty()) j["supis"] = o.m_Supis;
-  if (o.appIdsIsSet() || !o.m_AppIds.empty()) j["appIds"] = o.m_AppIds;
-  if (o.ueIpv4sIsSet() || !o.m_UeIpv4s.empty()) j["ueIpv4s"] = o.m_UeIpv4s;
-  if (o.ueIpv6sIsSet() || !o.m_UeIpv6s.empty()) j["ueIpv6s"] = o.m_UeIpv6s;
-  if (o.ueMacsIsSet() || !o.m_UeMacs.empty()) j["ueMacs"] = o.m_UeMacs;
+  if (o.supisIsSet() || !o.m_Supis.empty())
+    j["supis"] = o.m_Supis;
+  if (o.appIdsIsSet() || !o.m_AppIds.empty())
+    j["appIds"] = o.m_AppIds;
+  if (o.ueIpv4sIsSet() || !o.m_UeIpv4s.empty())
+    j["ueIpv4s"] = o.m_UeIpv4s;
+  if (o.ueIpv6sIsSet() || !o.m_UeIpv6s.empty())
+    j["ueIpv6s"] = o.m_UeIpv6s;
+  if (o.ueMacsIsSet() || !o.m_UeMacs.empty())
+    j["ueMacs"] = o.m_UeMacs;
 }
 
-void from_json(const nlohmann::json& j, DataFilter& o) {
+void from_json(const nlohmann::json &j, DataFilter &o) {
   j.at("dataInd").get_to(o.m_DataInd);
   if (j.find("dnns") != j.end()) {
     j.at("dnns").get_to(o.m_Dnns);
@@ -85,117 +92,73 @@ void from_json(const nlohmann::json& j, DataFilter& o) {
   }
 }
 
-DataInd DataFilter::getDataInd() const {
-  return m_DataInd;
-}
-void DataFilter::setDataInd(DataInd const& value) {
-  m_DataInd = value;
-}
-std::vector<std::string>& DataFilter::getDnns() {
-  return m_Dnns;
-}
-void DataFilter::setDnns(std::vector<std::string> const& value) {
-  m_Dnns      = value;
+DataInd DataFilter::getDataInd() const { return m_DataInd; }
+void DataFilter::setDataInd(DataInd const &value) { m_DataInd = value; }
+std::vector<std::string> &DataFilter::getDnns() { return m_Dnns; }
+void DataFilter::setDnns(std::vector<std::string> const &value) {
+  m_Dnns = value;
   m_DnnsIsSet = true;
 }
-bool DataFilter::dnnsIsSet() const {
-  return m_DnnsIsSet;
-}
-void DataFilter::unsetDnns() {
-  m_DnnsIsSet = false;
-}
-std::vector<oai::model::common::Snssai>& DataFilter::getSnssais() {
+bool DataFilter::dnnsIsSet() const { return m_DnnsIsSet; }
+void DataFilter::unsetDnns() { m_DnnsIsSet = false; }
+std::vector<oai::model::common::Snssai> &DataFilter::getSnssais() {
   return m_Snssais;
 }
 void DataFilter::setSnssais(
-    std::vector<oai::model::common::Snssai> const& value) {
-  m_Snssais      = value;
+    std::vector<oai::model::common::Snssai> const &value) {
+  m_Snssais = value;
   m_SnssaisIsSet = true;
 }
-bool DataFilter::snssaisIsSet() const {
-  return m_SnssaisIsSet;
-}
-void DataFilter::unsetSnssais() {
-  m_SnssaisIsSet = false;
-}
-std::vector<std::string>& DataFilter::getInternalGroupIds() {
+bool DataFilter::snssaisIsSet() const { return m_SnssaisIsSet; }
+void DataFilter::unsetSnssais() { m_SnssaisIsSet = false; }
+std::vector<std::string> &DataFilter::getInternalGroupIds() {
   return m_InternalGroupIds;
 }
-void DataFilter::setInternalGroupIds(std::vector<std::string> const& value) {
-  m_InternalGroupIds      = value;
+void DataFilter::setInternalGroupIds(std::vector<std::string> const &value) {
+  m_InternalGroupIds = value;
   m_InternalGroupIdsIsSet = true;
 }
 bool DataFilter::internalGroupIdsIsSet() const {
   return m_InternalGroupIdsIsSet;
 }
-void DataFilter::unsetInternalGroupIds() {
-  m_InternalGroupIdsIsSet = false;
-}
-std::vector<std::string>& DataFilter::getSupis() {
-  return m_Supis;
-}
-void DataFilter::setSupis(std::vector<std::string> const& value) {
-  m_Supis      = value;
+void DataFilter::unsetInternalGroupIds() { m_InternalGroupIdsIsSet = false; }
+std::vector<std::string> &DataFilter::getSupis() { return m_Supis; }
+void DataFilter::setSupis(std::vector<std::string> const &value) {
+  m_Supis = value;
   m_SupisIsSet = true;
 }
-bool DataFilter::supisIsSet() const {
-  return m_SupisIsSet;
-}
-void DataFilter::unsetSupis() {
-  m_SupisIsSet = false;
-}
-std::vector<std::string>& DataFilter::getAppIds() {
-  return m_AppIds;
-}
-void DataFilter::setAppIds(std::vector<std::string> const& value) {
-  m_AppIds      = value;
+bool DataFilter::supisIsSet() const { return m_SupisIsSet; }
+void DataFilter::unsetSupis() { m_SupisIsSet = false; }
+std::vector<std::string> &DataFilter::getAppIds() { return m_AppIds; }
+void DataFilter::setAppIds(std::vector<std::string> const &value) {
+  m_AppIds = value;
   m_AppIdsIsSet = true;
 }
-bool DataFilter::appIdsIsSet() const {
-  return m_AppIdsIsSet;
-}
-void DataFilter::unsetAppIds() {
-  m_AppIdsIsSet = false;
-}
-std::vector<std::string>& DataFilter::getUeIpv4s() {
-  return m_UeIpv4s;
-}
-void DataFilter::setUeIpv4s(std::vector<std::string> const& value) {
-  m_UeIpv4s      = value;
+bool DataFilter::appIdsIsSet() const { return m_AppIdsIsSet; }
+void DataFilter::unsetAppIds() { m_AppIdsIsSet = false; }
+std::vector<std::string> &DataFilter::getUeIpv4s() { return m_UeIpv4s; }
+void DataFilter::setUeIpv4s(std::vector<std::string> const &value) {
+  m_UeIpv4s = value;
   m_UeIpv4sIsSet = true;
 }
-bool DataFilter::ueIpv4sIsSet() const {
-  return m_UeIpv4sIsSet;
-}
-void DataFilter::unsetUeIpv4s() {
-  m_UeIpv4sIsSet = false;
-}
-std::vector<oai::model::common::Ipv6Addr>& DataFilter::getUeIpv6s() {
+bool DataFilter::ueIpv4sIsSet() const { return m_UeIpv4sIsSet; }
+void DataFilter::unsetUeIpv4s() { m_UeIpv4sIsSet = false; }
+std::vector<oai::model::common::Ipv6Addr> &DataFilter::getUeIpv6s() {
   return m_UeIpv6s;
 }
 void DataFilter::setUeIpv6s(
-    std::vector<oai::model::common::Ipv6Addr> const& value) {
-  m_UeIpv6s      = value;
+    std::vector<oai::model::common::Ipv6Addr> const &value) {
+  m_UeIpv6s = value;
   m_UeIpv6sIsSet = true;
 }
-bool DataFilter::ueIpv6sIsSet() const {
-  return m_UeIpv6sIsSet;
-}
-void DataFilter::unsetUeIpv6s() {
-  m_UeIpv6sIsSet = false;
-}
-std::vector<std::string>& DataFilter::getUeMacs() {
-  return m_UeMacs;
-}
-void DataFilter::setUeMacs(std::vector<std::string> const& value) {
-  m_UeMacs      = value;
+bool DataFilter::ueIpv6sIsSet() const { return m_UeIpv6sIsSet; }
+void DataFilter::unsetUeIpv6s() { m_UeIpv6sIsSet = false; }
+std::vector<std::string> &DataFilter::getUeMacs() { return m_UeMacs; }
+void DataFilter::setUeMacs(std::vector<std::string> const &value) {
+  m_UeMacs = value;
   m_UeMacsIsSet = true;
 }
-bool DataFilter::ueMacsIsSet() const {
-  return m_UeMacsIsSet;
-}
-void DataFilter::unsetUeMacs() {
-  m_UeMacsIsSet = false;
-}
+bool DataFilter::ueMacsIsSet() const { return m_UeMacsIsSet; }
+void DataFilter::unsetUeMacs() { m_UeMacsIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

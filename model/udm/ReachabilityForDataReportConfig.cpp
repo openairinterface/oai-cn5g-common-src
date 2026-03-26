@@ -30,12 +30,12 @@ void ReachabilityForDataReportConfig::validate() const {
   }
 }
 
-bool ReachabilityForDataReportConfig::validate(std::stringstream& msg) const {
+bool ReachabilityForDataReportConfig::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool ReachabilityForDataReportConfig::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ReachabilityForDataReportConfig" : pathPrefix;
@@ -44,19 +44,19 @@ bool ReachabilityForDataReportConfig::validate(
 }
 
 bool ReachabilityForDataReportConfig::operator==(
-    const ReachabilityForDataReportConfig& rhs) const {
+    const ReachabilityForDataReportConfig &rhs) const {
   return true;
 }
 
 bool ReachabilityForDataReportConfig::operator!=(
-    const ReachabilityForDataReportConfig& rhs) const {
+    const ReachabilityForDataReportConfig &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ReachabilityForDataReportConfig& o) {
+void to_json(nlohmann::json &j, const ReachabilityForDataReportConfig &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, ReachabilityForDataReportConfig& o) {}
+void from_json(const nlohmann::json &j, ReachabilityForDataReportConfig &o) {}
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

@@ -27,7 +27,7 @@ namespace oai::model::smf {
 /// Possible values are - RELEASED
 /// </summary>
 class ResourceStatus {
- public:
+public:
   ResourceStatus();
   virtual ~ResourceStatus();
 
@@ -36,12 +36,12 @@ class ResourceStatus {
   /////////////////////////////////////////////
   /// ResourceStatus members
 
-  friend void to_json(nlohmann::json& j, const ResourceStatus& o);
-  friend void from_json(const nlohmann::json& j, ResourceStatus& o);
+  friend void to_json(nlohmann::json &j, const ResourceStatus &o);
+  friend void from_json(const nlohmann::json &j, ResourceStatus &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* ResourceStatus_H_ */

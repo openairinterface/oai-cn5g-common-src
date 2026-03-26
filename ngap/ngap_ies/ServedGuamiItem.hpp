@@ -17,26 +17,26 @@ extern "C" {
 namespace oai::ngap {
 
 class ServedGuamiItem {
- public:
+public:
   ServedGuamiItem();
   virtual ~ServedGuamiItem();
 
-  void setGuami(const Guami& guami);
-  void getGuami(Guami& guami) const;
+  void setGuami(const Guami &guami);
+  void getGuami(Guami &guami) const;
 
-  void setBackupAmfName(const AmfName&);
-  bool getBackupAmfName(AmfName&) const;
+  void setBackupAmfName(const AmfName &);
+  bool getBackupAmfName(AmfName &) const;
 
-  bool encode(Ngap_ServedGUAMIItem&) const;
-  bool decode(const Ngap_ServedGUAMIItem&);
+  bool encode(Ngap_ServedGUAMIItem &) const;
+  bool decode(const Ngap_ServedGUAMIItem &);
 
- private:
-  Guami m_GuamiGroup;                      // Mandatory
-  std::optional<AmfName> m_BackupAmfName;  // Optional
+private:
+  Guami m_GuamiGroup;                     // Mandatory
+  std::optional<AmfName> m_BackupAmfName; // Optional
   // bool backupAMFNameIsSet;
   // TODO: Guami Type (Optional)
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

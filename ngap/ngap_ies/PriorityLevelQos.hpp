@@ -12,20 +12,20 @@ extern "C" {
 namespace oai::ngap {
 
 class PriorityLevelQos {
- public:
+public:
   PriorityLevelQos();
   virtual ~PriorityLevelQos();
 
-  void set(const long& value);
-  bool get(long& value) const;
+  void set(const long &value);
+  bool get(long &value) const;
 
-  bool encode(Ngap_PriorityLevelQos_t&) const;
-  bool decode(const Ngap_PriorityLevelQos_t&);
+  bool encode(Ngap_PriorityLevelQos_t &) const;
+  bool decode(const Ngap_PriorityLevelQos_t &);
 
- private:
+private:
   long m_PriorityLevelQos;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

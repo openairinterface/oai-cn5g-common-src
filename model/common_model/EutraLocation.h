@@ -20,10 +20,10 @@
 #define EutraLocation_H_
 
 #include "Ecgi.h"
-#include "Tai.h"
-#include <string>
 #include "GlobalRanNodeId.h"
+#include "Tai.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::common {
 
@@ -31,7 +31,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class EutraLocation {
- public:
+public:
   EutraLocation();
   virtual ~EutraLocation() = default;
 
@@ -45,16 +45,16 @@ class EutraLocation {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const EutraLocation& rhs) const;
-  bool operator!=(const EutraLocation& rhs) const;
+  bool operator==(const EutraLocation &rhs) const;
+  bool operator!=(const EutraLocation &rhs) const;
 
   /////////////////////////////////////////////
   /// EutraLocation members
@@ -63,7 +63,7 @@ class EutraLocation {
   ///
   /// </summary>
   oai::model::common::Tai getTai() const;
-  void setTai(oai::model::common::Tai const& value);
+  void setTai(oai::model::common::Tai const &value);
   /// <summary>
   ///
   /// </summary>
@@ -75,7 +75,7 @@ class EutraLocation {
   ///
   /// </summary>
   oai::model::common::Ecgi getEcgi() const;
-  void setEcgi(oai::model::common::Ecgi const& value);
+  void setEcgi(oai::model::common::Ecgi const &value);
   /// <summary>
   ///
   /// </summary>
@@ -94,42 +94,42 @@ class EutraLocation {
   ///
   /// </summary>
   std::string getUeLocationTimestamp() const;
-  void setUeLocationTimestamp(std::string const& value);
+  void setUeLocationTimestamp(std::string const &value);
   bool ueLocationTimestampIsSet() const;
   void unsetUeLocationTimestamp();
   /// <summary>
   ///
   /// </summary>
   std::string getGeographicalInformation() const;
-  void setGeographicalInformation(std::string const& value);
+  void setGeographicalInformation(std::string const &value);
   bool geographicalInformationIsSet() const;
   void unsetGeographicalInformation();
   /// <summary>
   ///
   /// </summary>
   std::string getGeodeticInformation() const;
-  void setGeodeticInformation(std::string const& value);
+  void setGeodeticInformation(std::string const &value);
   bool geodeticInformationIsSet() const;
   void unsetGeodeticInformation();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::GlobalRanNodeId getGlobalNgenbId() const;
-  void setGlobalNgenbId(oai::model::common::GlobalRanNodeId const& value);
+  void setGlobalNgenbId(oai::model::common::GlobalRanNodeId const &value);
   bool globalNgenbIdIsSet() const;
   void unsetGlobalNgenbId();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::GlobalRanNodeId getGlobalENbId() const;
-  void setGlobalENbId(oai::model::common::GlobalRanNodeId const& value);
+  void setGlobalENbId(oai::model::common::GlobalRanNodeId const &value);
   bool globalENbIdIsSet() const;
   void unsetGlobalENbId();
 
-  friend void to_json(nlohmann::json& j, const EutraLocation& o);
-  friend void from_json(const nlohmann::json& j, EutraLocation& o);
+  friend void to_json(nlohmann::json &j, const EutraLocation &o);
+  friend void from_json(const nlohmann::json &j, EutraLocation &o);
 
- protected:
+protected:
   oai::model::common::Tai m_Tai;
 
   bool m_IgnoreTai;
@@ -152,6 +152,6 @@ class EutraLocation {
   bool m_GlobalENbIdIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* EutraLocation_H_ */

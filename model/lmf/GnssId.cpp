@@ -27,13 +27,13 @@ void GnssId::validate() const {
   }
 }
 
-bool GnssId::validate(std::stringstream& msg) const {
+bool GnssId::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool GnssId::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool GnssId::validate(std::stringstream &msg,
+                      const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "GnssId" : pathPrefix;
 
   if (!m_value.validate(msg)) {
@@ -42,32 +42,24 @@ bool GnssId::validate(
   return success;
 }
 
-bool GnssId::operator==(const GnssId& rhs) const {
+bool GnssId::operator==(const GnssId &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool GnssId::operator!=(const GnssId& rhs) const {
-  return !(*this == rhs);
-}
+bool GnssId::operator!=(const GnssId &rhs) const { return !(*this == rhs); }
 
-void to_json(nlohmann::json& j, const GnssId& o) {
+void to_json(nlohmann::json &j, const GnssId &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, GnssId& o) {
-  from_json(j, o.m_value);
-}
+void from_json(const nlohmann::json &j, GnssId &o) { from_json(j, o.m_value); }
 
-GnssId_anyOf GnssId::getValue() const {
-  return m_value;
-}
+GnssId_anyOf GnssId::getValue() const { return m_value; }
 
-void GnssId::setValue(GnssId_anyOf value) {
-  m_value = value;
-}
+void GnssId::setValue(GnssId_anyOf value) { m_value = value; }
 
 GnssId_anyOf::eGnssId_anyOf GnssId::getEnumValue() const {
   return m_value.getValue();
@@ -77,4 +69,4 @@ void GnssId::setEnumValue(GnssId_anyOf::eGnssId_anyOf value) {
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

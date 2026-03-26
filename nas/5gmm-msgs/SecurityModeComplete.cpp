@@ -10,12 +10,11 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 SecurityModeComplete::SecurityModeComplete()
-    : ie_header_(
-          k5gsMobilityManagementMessages, kPlain5gsMessage,
-          kSecurityModeComplete) {
-  ie_imeisv_                = std::nullopt;
+    : ie_header_(k5gsMobilityManagementMessages, kPlain5gsMessage,
+                 kSecurityModeComplete) {
+  ie_imeisv_ = std::nullopt;
   ie_nas_message_container_ = std::nullopt;
-  ie_non_imeisvpei_         = std::nullopt;
+  ie_non_imeisvpei_ = std::nullopt;
 };
 
 //------------------------------------------------------------------------------
@@ -25,7 +24,8 @@ SecurityModeComplete::~SecurityModeComplete() {}
 uint32_t SecurityModeComplete::GetLength() const {
   uint32_t msg_len = 0;
   msg_len += ie_header_.GetLength();
-  if (ie_imeisv_.has_value()) msg_len += ie_imeisv_.value().GetIeLength();
+  if (ie_imeisv_.has_value())
+    msg_len += ie_imeisv_.value().GetIeLength();
   if (ie_nas_message_container_.has_value())
     msg_len += ie_nas_message_container_.value().GetIeLength();
   if (ie_non_imeisvpei_.has_value())
@@ -39,7 +39,7 @@ void SecurityModeComplete::SetHeader(uint8_t security_header_type) {
 }
 
 //------------------------------------------------------------------------------
-void SecurityModeComplete::SetImeisv(const IMEI_IMEISV_t& imeisv) {
+void SecurityModeComplete::SetImeisv(const IMEI_IMEISV_t &imeisv) {
   ie_imeisv_ =
       std::make_optional<_5gsMobileIdentity>(kIei5gsMobileIdentityImeiSv);
   // ie_imeisv_->SetIei(kIei5gsMobileIdentityImeiSv);
@@ -47,12 +47,12 @@ void SecurityModeComplete::SetImeisv(const IMEI_IMEISV_t& imeisv) {
 }
 
 //------------------------------------------------------------------------------
-void SecurityModeComplete::SetNasMessageContainer(const bstring& value) {
+void SecurityModeComplete::SetNasMessageContainer(const bstring &value) {
   ie_nas_message_container_ = std::make_optional<NasMessageContainer>(value);
 }
 
 //------------------------------------------------------------------------------
-void SecurityModeComplete::SetNonImeisv(const IMEI_IMEISV_t& imeisv) {
+void SecurityModeComplete::SetNonImeisv(const IMEI_IMEISV_t &imeisv) {
   ie_non_imeisvpei_ =
       std::make_optional<_5gsMobileIdentity>(kIei5gsMobileIdentityNonImeiSvPei);
   // ie_non_imeisvpei_->SetIei(kIei5gsMobileIdentityNonImeiSvPei);
@@ -60,7 +60,7 @@ void SecurityModeComplete::SetNonImeisv(const IMEI_IMEISV_t& imeisv) {
 }
 
 //------------------------------------------------------------------------------
-bool SecurityModeComplete::GetImeisv(IMEI_IMEISV_t& imeisv) const {
+bool SecurityModeComplete::GetImeisv(IMEI_IMEISV_t &imeisv) const {
   if (ie_imeisv_.has_value()) {
     ie_imeisv_.value().GetImeisv(imeisv);
     return true;
@@ -70,7 +70,7 @@ bool SecurityModeComplete::GetImeisv(IMEI_IMEISV_t& imeisv) const {
 }
 
 //------------------------------------------------------------------------------
-bool SecurityModeComplete::GetNasMessageContainer(bstring& nas) const {
+bool SecurityModeComplete::GetNasMessageContainer(bstring &nas) const {
   if (ie_nas_message_container_.has_value()) {
     ie_nas_message_container_.value().GetValue(nas);
     return true;
@@ -80,7 +80,7 @@ bool SecurityModeComplete::GetNasMessageContainer(bstring& nas) const {
 }
 
 //------------------------------------------------------------------------------
-bool SecurityModeComplete::GetNonImeisv(IMEI_IMEISV_t& imeisv) const {
+bool SecurityModeComplete::GetNonImeisv(IMEI_IMEISV_t &imeisv) const {
   if (ie_non_imeisvpei_.has_value()) {
     ie_non_imeisvpei_.value().GetImeisv(imeisv);
     return true;
@@ -90,10 +90,10 @@ bool SecurityModeComplete::GetNonImeisv(IMEI_IMEISV_t& imeisv) const {
 }
 
 //------------------------------------------------------------------------------
-int SecurityModeComplete::Encode(uint8_t* buf, int len) {
+int SecurityModeComplete::Encode(uint8_t *buf, int len) {
   oai::logger::logger_common::nas().debug(
       "Encoding SecurityModeComplete message");
-  int encoded_size    = 0;
+  int encoded_size = 0;
   int encoded_ie_size = 0;
 
   // Header
@@ -110,8 +110,8 @@ int SecurityModeComplete::Encode(uint8_t* buf, int len) {
   }
 
   // NAS Message Container
-  if ((encoded_ie_size = NasHelper::Encode(
-           ie_nas_message_container_, buf, len, encoded_size)) ==
+  if ((encoded_ie_size = NasHelper::Encode(ie_nas_message_container_, buf, len,
+                                           encoded_size)) ==
       KEncodeDecodeError) {
     return KEncodeDecodeError;
   }
@@ -128,11 +128,11 @@ int SecurityModeComplete::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int SecurityModeComplete::Decode(uint8_t* buf, int len) {
+int SecurityModeComplete::Decode(uint8_t *buf, int len) {
   oai::logger::logger_common::nas().debug(
       "Decoding SecurityModeComplete message");
 
-  int decoded_size    = 0;
+  int decoded_size = 0;
   int decoded_ie_size = 0;
 
   // Header
@@ -150,34 +150,34 @@ int SecurityModeComplete::Decode(uint8_t* buf, int len) {
     DECODE_U8_VALUE(buf, octet, decoded_size, len);
     oai::logger::logger_common::nas().debug("Decoding IEI (0x%x)", octet);
     switch (octet) {
-      case kIei5gsMobileIdentityImeiSv: {
-        if ((decoded_ie_size =
-                 NasHelper::Decode(ie_imeisv_, buf, len, decoded_size, true)) ==
-            KEncodeDecodeError) {
-          return KEncodeDecodeError;
-        }
-      } break;
-
-      case kIeiNasMessageContainer: {
-        if ((decoded_ie_size = NasHelper::Decode(
-                 ie_nas_message_container_, buf, len, decoded_size, true)) ==
-            KEncodeDecodeError) {
-          return KEncodeDecodeError;
-        }
-      } break;
-
-      case kIei5gsMobileIdentityNonImeiSvPei: {
-        if ((decoded_ie_size = NasHelper::Decode(
-                 ie_non_imeisvpei_, buf, len, decoded_size, true)) ==
-            KEncodeDecodeError) {
-          return KEncodeDecodeError;
-        }
-      } break;
-
-      default: {
-        oai::logger::logger_common::nas().warn("Unexpected IEI (0x%x)", octet);
-        return decoded_size;
+    case kIei5gsMobileIdentityImeiSv: {
+      if ((decoded_ie_size =
+               NasHelper::Decode(ie_imeisv_, buf, len, decoded_size, true)) ==
+          KEncodeDecodeError) {
+        return KEncodeDecodeError;
       }
+    } break;
+
+    case kIeiNasMessageContainer: {
+      if ((decoded_ie_size = NasHelper::Decode(ie_nas_message_container_, buf,
+                                               len, decoded_size, true)) ==
+          KEncodeDecodeError) {
+        return KEncodeDecodeError;
+      }
+    } break;
+
+    case kIei5gsMobileIdentityNonImeiSvPei: {
+      if ((decoded_ie_size = NasHelper::Decode(ie_non_imeisvpei_, buf, len,
+                                               decoded_size, true)) ==
+          KEncodeDecodeError) {
+        return KEncodeDecodeError;
+      }
+    } break;
+
+    default: {
+      oai::logger::logger_common::nas().warn("Unexpected IEI (0x%x)", octet);
+      return decoded_size;
+    }
     }
   }
 

@@ -19,11 +19,11 @@
 namespace oai::model::common {
 
 AtsssCapability::AtsssCapability() {
-  m_AtsssLL            = false;
-  m_AtsssLLIsSet       = false;
-  m_Mptcp              = false;
-  m_MptcpIsSet         = false;
-  m_RttWithoutPmf      = false;
+  m_AtsssLL = false;
+  m_AtsssLLIsSet = false;
+  m_Mptcp = false;
+  m_MptcpIsSet = false;
+  m_RttWithoutPmf = false;
   m_RttWithoutPmfIsSet = false;
 }
 
@@ -34,12 +34,12 @@ void AtsssCapability::validate() const {
   }
 }
 
-bool AtsssCapability::validate(std::stringstream& msg) const {
+bool AtsssCapability::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AtsssCapability::validate(
-    std::stringstream& /* msg */, const std::string& pathPrefix) const {
+bool AtsssCapability::validate(std::stringstream & /* msg */,
+                               const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AtsssCapability" : pathPrefix;
@@ -47,7 +47,7 @@ bool AtsssCapability::validate(
   return success;
 }
 
-bool AtsssCapability::operator==(const AtsssCapability& rhs) const {
+bool AtsssCapability::operator==(const AtsssCapability &rhs) const {
   return
 
       ((!atsssLLIsSet() && !rhs.atsssLLIsSet()) ||
@@ -64,18 +64,21 @@ bool AtsssCapability::operator==(const AtsssCapability& rhs) const {
           ;
 }
 
-bool AtsssCapability::operator!=(const AtsssCapability& rhs) const {
+bool AtsssCapability::operator!=(const AtsssCapability &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AtsssCapability& o) {
+void to_json(nlohmann::json &j, const AtsssCapability &o) {
   j = nlohmann::json();
-  if (o.atsssLLIsSet()) j["atsssLL"] = o.m_AtsssLL;
-  if (o.mptcpIsSet()) j["mptcp"] = o.m_Mptcp;
-  if (o.rttWithoutPmfIsSet()) j["rttWithoutPmf"] = o.m_RttWithoutPmf;
+  if (o.atsssLLIsSet())
+    j["atsssLL"] = o.m_AtsssLL;
+  if (o.mptcpIsSet())
+    j["mptcp"] = o.m_Mptcp;
+  if (o.rttWithoutPmfIsSet())
+    j["rttWithoutPmf"] = o.m_RttWithoutPmf;
 }
 
-void from_json(const nlohmann::json& j, AtsssCapability& o) {
+void from_json(const nlohmann::json &j, AtsssCapability &o) {
   if (j.find("atsssLL") != j.end()) {
     j.at("atsssLL").get_to(o.m_AtsssLL);
     o.m_AtsssLLIsSet = true;
@@ -90,44 +93,28 @@ void from_json(const nlohmann::json& j, AtsssCapability& o) {
   }
 }
 
-bool AtsssCapability::isAtsssLL() const {
-  return m_AtsssLL;
-}
+bool AtsssCapability::isAtsssLL() const { return m_AtsssLL; }
 void AtsssCapability::setAtsssLL(bool const value) {
-  m_AtsssLL      = value;
+  m_AtsssLL = value;
   m_AtsssLLIsSet = true;
 }
-bool AtsssCapability::atsssLLIsSet() const {
-  return m_AtsssLLIsSet;
-}
-void AtsssCapability::unsetAtsssLL() {
-  m_AtsssLLIsSet = false;
-}
-bool AtsssCapability::isMptcp() const {
-  return m_Mptcp;
-}
+bool AtsssCapability::atsssLLIsSet() const { return m_AtsssLLIsSet; }
+void AtsssCapability::unsetAtsssLL() { m_AtsssLLIsSet = false; }
+bool AtsssCapability::isMptcp() const { return m_Mptcp; }
 void AtsssCapability::setMptcp(bool const value) {
-  m_Mptcp      = value;
+  m_Mptcp = value;
   m_MptcpIsSet = true;
 }
-bool AtsssCapability::mptcpIsSet() const {
-  return m_MptcpIsSet;
-}
-void AtsssCapability::unsetMptcp() {
-  m_MptcpIsSet = false;
-}
-bool AtsssCapability::isRttWithoutPmf() const {
-  return m_RttWithoutPmf;
-}
+bool AtsssCapability::mptcpIsSet() const { return m_MptcpIsSet; }
+void AtsssCapability::unsetMptcp() { m_MptcpIsSet = false; }
+bool AtsssCapability::isRttWithoutPmf() const { return m_RttWithoutPmf; }
 void AtsssCapability::setRttWithoutPmf(bool const value) {
-  m_RttWithoutPmf      = value;
+  m_RttWithoutPmf = value;
   m_RttWithoutPmfIsSet = true;
 }
 bool AtsssCapability::rttWithoutPmfIsSet() const {
   return m_RttWithoutPmfIsSet;
 }
-void AtsssCapability::unsetRttWithoutPmf() {
-  m_RttWithoutPmfIsSet = false;
-}
+void AtsssCapability::unsetRttWithoutPmf() { m_RttWithoutPmfIsSet = false; }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

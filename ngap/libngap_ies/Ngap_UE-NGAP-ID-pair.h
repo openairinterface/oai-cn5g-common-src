@@ -27,7 +27,7 @@ struct Ngap_ProtocolExtensionContainer;
 typedef struct Ngap_UE_NGAP_ID_pair {
   Ngap_AMF_UE_NGAP_ID_t aMF_UE_NGAP_ID;
   Ngap_RAN_UE_NGAP_ID_t rAN_UE_NGAP_ID;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

@@ -38,7 +38,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class PduSessionManagementData {
- public:
+public:
   PduSessionManagementData();
   virtual ~PduSessionManagementData();
 
@@ -51,85 +51,85 @@ class PduSessionManagementData {
   ///
   /// </summary>
   PduSessionStatus getPduSessionStatus() const;
-  void setPduSessionStatus(PduSessionStatus const& value);
+  void setPduSessionStatus(PduSessionStatus const &value);
   bool pduSessionStatusIsSet() const;
   void unsetPduSessionStatus();
   /// <summary>
   ///
   /// </summary>
   std::string getPduSessionStatusTs() const;
-  void setPduSessionStatusTs(std::string const& value);
+  void setPduSessionStatusTs(std::string const &value);
   bool pduSessionStatusTsIsSet() const;
   void unsetPduSessionStatusTs();
   /// <summary>
   ///
   /// </summary>
   std::string getDnai() const;
-  void setDnai(std::string const& value);
+  void setDnai(std::string const &value);
   bool dnaiIsSet() const;
   void unsetDnai();
   /// <summary>
   ///
   /// </summary>
   std::string getDnaiTs() const;
-  void setDnaiTs(std::string const& value);
+  void setDnaiTs(std::string const &value);
   bool dnaiTsIsSet() const;
   void unsetDnaiTs();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::RouteToLocation>& getN6TrafficRoutingInfo();
+  std::vector<oai::model::common::RouteToLocation> &getN6TrafficRoutingInfo();
   void setN6TrafficRoutingInfo(
-      std::vector<oai::model::common::RouteToLocation> const& value);
+      std::vector<oai::model::common::RouteToLocation> const &value);
   bool n6TrafficRoutingInfoIsSet() const;
   void unsetN6TrafficRoutingInfo();
   /// <summary>
   ///
   /// </summary>
   std::string getN6TrafficRoutingInfoTs() const;
-  void setN6TrafficRoutingInfoTs(std::string const& value);
+  void setN6TrafficRoutingInfoTs(std::string const &value);
   bool n6TrafficRoutingInfoTsIsSet() const;
   void unsetN6TrafficRoutingInfoTs();
   /// <summary>
   ///
   /// </summary>
   std::string getIpv4Addr() const;
-  void setIpv4Addr(std::string const& value);
+  void setIpv4Addr(std::string const &value);
   bool ipv4AddrIsSet() const;
   void unsetIpv4Addr();
   /// <summary>
   /// UE IPv6 prefix.
   /// </summary>
-  std::vector<oai::model::common::Ipv6Prefix>& getIpv6Prefix();
-  void setIpv6Prefix(std::vector<oai::model::common::Ipv6Prefix> const& value);
+  std::vector<oai::model::common::Ipv6Prefix> &getIpv6Prefix();
+  void setIpv6Prefix(std::vector<oai::model::common::Ipv6Prefix> const &value);
   bool ipv6PrefixIsSet() const;
   void unsetIpv6Prefix();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::Ipv6Addr>& getIpv6Addrs();
-  void setIpv6Addrs(std::vector<oai::model::common::Ipv6Addr> const& value);
+  std::vector<oai::model::common::Ipv6Addr> &getIpv6Addrs();
+  void setIpv6Addrs(std::vector<oai::model::common::Ipv6Addr> const &value);
   bool ipv6AddrsIsSet() const;
   void unsetIpv6Addrs();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::PduSessionType getPduSessType() const;
-  void setPduSessType(oai::model::common::PduSessionType const& value);
+  void setPduSessType(oai::model::common::PduSessionType const &value);
   bool pduSessTypeIsSet() const;
   void unsetPduSessType();
   /// <summary>
   ///
   /// </summary>
   std::string getIpAddrTs() const;
-  void setIpAddrTs(std::string const& value);
+  void setIpAddrTs(std::string const &value);
   bool ipAddrTsIsSet() const;
   void unsetIpAddrTs();
   /// <summary>
   ///
   /// </summary>
   std::string getDnn() const;
-  void setDnn(std::string const& value);
+  void setDnn(std::string const &value);
   bool dnnIsSet() const;
   void unsetDnn();
   /// <summary>
@@ -143,14 +143,14 @@ class PduSessionManagementData {
   ///
   /// </summary>
   std::string getSuppFeat() const;
-  void setSuppFeat(std::string const& value);
+  void setSuppFeat(std::string const &value);
   bool suppFeatIsSet() const;
   void unsetSuppFeat();
 
-  friend void to_json(nlohmann::json& j, const PduSessionManagementData& o);
-  friend void from_json(const nlohmann::json& j, PduSessionManagementData& o);
+  friend void to_json(nlohmann::json &j, const PduSessionManagementData &o);
+  friend void from_json(const nlohmann::json &j, PduSessionManagementData &o);
 
- protected:
+protected:
   PduSessionStatus m_PduSessionStatus;
   bool m_PduSessionStatusIsSet;
   std::string m_PduSessionStatusTs;
@@ -181,6 +181,6 @@ class PduSessionManagementData {
   bool m_SuppFeatIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* PduSessionManagementData_H_ */

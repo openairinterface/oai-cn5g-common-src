@@ -37,10 +37,10 @@ struct Ngap_ProtocolIE_SingleContainer;
 typedef struct Ngap_UserLocationInformation {
   Ngap_UserLocationInformation_PR present;
   union Ngap_UserLocationInformation_u {
-    struct Ngap_UserLocationInformationEUTRA* userLocationInformationEUTRA;
-    struct Ngap_UserLocationInformationNR* userLocationInformationNR;
-    struct Ngap_UserLocationInformationN3IWF* userLocationInformationN3IWF;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_UserLocationInformationEUTRA *userLocationInformationEUTRA;
+    struct Ngap_UserLocationInformationNR *userLocationInformationNR;
+    struct Ngap_UserLocationInformationN3IWF *userLocationInformationN3IWF;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

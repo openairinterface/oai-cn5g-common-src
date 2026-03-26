@@ -16,21 +16,21 @@ extern "C" {
 namespace oai::ngap {
 
 class SecondaryRatDataUsageReportTransfer {
- public:
+public:
   SecondaryRatDataUsageReportTransfer();
   virtual ~SecondaryRatDataUsageReportTransfer();
 
   // TODO: Secondary RAT Usage Information (Optional)
 
-  int encode(uint8_t* buf, int bufSize);
-  bool decode(uint8_t* buf, int bufSize);
+  int encode(uint8_t *buf, int bufSize);
+  bool decode(uint8_t *buf, int bufSize);
 
- private:
-  Ngap_SecondaryRATDataUsageReportTransfer_t*
-      m_SecondaryRatDataUsageReportTransferIe;
+private:
+  Ngap_SecondaryRATDataUsageReportTransfer_t
+      *m_SecondaryRatDataUsageReportTransferIe;
 
   // TODO: Secondary RAT Usage Information (Optional)
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

@@ -12,8 +12,8 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_E-RAB-ID.h"
 #include "Ngap_DLForwarding.h"
+#include "Ngap_E-RAB-ID.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -26,8 +26,8 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_E-RABInformationItem */
 typedef struct Ngap_E_RABInformationItem {
   Ngap_E_RAB_ID_t e_RAB_ID;
-  Ngap_DLForwarding_t* dLForwarding;                     /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  Ngap_DLForwarding_t *dLForwarding;                     /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

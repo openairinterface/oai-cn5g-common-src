@@ -28,9 +28,9 @@ struct Ngap_ProtocolExtensionContainer;
 typedef struct Ngap_PDUSessionResourceInformationItem {
   Ngap_PDUSessionID_t pDUSessionID;
   Ngap_QosFlowInformationList_t qosFlowInformationList;
-  struct Ngap_DRBsToQosFlowsMappingList*
-      dRBsToQosFlowsMappingList;                         /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_DRBsToQosFlowsMappingList
+      *dRBsToQosFlowsMappingList;                        /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

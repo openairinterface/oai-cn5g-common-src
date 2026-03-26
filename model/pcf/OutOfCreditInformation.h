@@ -20,10 +20,10 @@
 #ifndef OutOfCreditInformation_H_
 #define OutOfCreditInformation_H_
 
-#include "Flows.h"
 #include "FinalUnitAction.h"
-#include <vector>
+#include "Flows.h"
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::pcf {
 
@@ -32,7 +32,7 @@ namespace oai::model::pcf {
 /// termination action.
 /// </summary>
 class OutOfCreditInformation {
- public:
+public:
   OutOfCreditInformation();
   virtual ~OutOfCreditInformation() = default;
 
@@ -46,16 +46,16 @@ class OutOfCreditInformation {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const OutOfCreditInformation& rhs) const;
-  bool operator!=(const OutOfCreditInformation& rhs) const;
+  bool operator==(const OutOfCreditInformation &rhs) const;
+  bool operator!=(const OutOfCreditInformation &rhs) const;
 
   /////////////////////////////////////////////
   /// OutOfCreditInformation members
@@ -64,25 +64,25 @@ class OutOfCreditInformation {
   ///
   /// </summary>
   oai::model::pcf::FinalUnitAction getFinUnitAct() const;
-  void setFinUnitAct(oai::model::pcf::FinalUnitAction const& value);
+  void setFinUnitAct(oai::model::pcf::FinalUnitAction const &value);
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::pcf::Flows> getFlows() const;
-  void setFlows(std::vector<oai::model::pcf::Flows> const& value);
+  void setFlows(std::vector<oai::model::pcf::Flows> const &value);
   bool flowsIsSet() const;
   void unsetFlows();
 
-  friend void to_json(nlohmann::json& j, const OutOfCreditInformation& o);
-  friend void from_json(const nlohmann::json& j, OutOfCreditInformation& o);
+  friend void to_json(nlohmann::json &j, const OutOfCreditInformation &o);
+  friend void from_json(const nlohmann::json &j, OutOfCreditInformation &o);
 
- protected:
+protected:
   oai::model::pcf::FinalUnitAction m_FinUnitAct;
 
   std::vector<oai::model::pcf::Flows> m_Flows;
   bool m_FlowsIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* OutOfCreditInformation_H_ */

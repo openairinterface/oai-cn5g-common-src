@@ -32,7 +32,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class ExposureDataSubscription {
- public:
+public:
   ExposureDataSubscription();
   virtual ~ExposureDataSubscription();
 
@@ -45,31 +45,31 @@ class ExposureDataSubscription {
   ///
   /// </summary>
   std::string getNotificationUri() const;
-  void setNotificationUri(std::string const& value);
+  void setNotificationUri(std::string const &value);
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getMonitoredResourceUris();
-  void setMonitoredResourceUris(std::vector<std::string> const& value);
+  std::vector<std::string> &getMonitoredResourceUris();
+  void setMonitoredResourceUris(std::vector<std::string> const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getExpiry() const;
-  void setExpiry(std::string const& value);
+  void setExpiry(std::string const &value);
   bool expiryIsSet() const;
   void unsetExpiry();
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
 
-  friend void to_json(nlohmann::json& j, const ExposureDataSubscription& o);
-  friend void from_json(const nlohmann::json& j, ExposureDataSubscription& o);
+  friend void to_json(nlohmann::json &j, const ExposureDataSubscription &o);
+  friend void from_json(const nlohmann::json &j, ExposureDataSubscription &o);
 
- protected:
+protected:
   std::string m_NotificationUri;
 
   std::vector<std::string> m_MonitoredResourceUris;
@@ -80,6 +80,6 @@ class ExposureDataSubscription {
   bool m_SupportedFeaturesIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* ExposureDataSubscription_H_ */

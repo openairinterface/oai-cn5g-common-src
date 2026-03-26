@@ -16,21 +16,21 @@ extern "C" {
 namespace oai::ngap {
 
 class NgapUeMessage : public NgapMessage {
- public:
-  NgapUeMessage(NgapUeMessage const&) = delete;
+public:
+  NgapUeMessage(NgapUeMessage const &) = delete;
   NgapUeMessage();
   virtual ~NgapUeMessage();
 
-  virtual void setAmfUeNgapId(const uint64_t& id) = 0;
+  virtual void setAmfUeNgapId(const uint64_t &id) = 0;
   uint64_t getAmfUeNgapId() const;
 
-  virtual void setRanUeNgapId(const uint32_t& id) = 0;
+  virtual void setRanUeNgapId(const uint32_t &id) = 0;
   uint32_t getRanUeNgapId() const;
 
- protected:
+protected:
   AmfUeNgapId m_AmfUeNgapId;
   RanUeNgapId m_RanUeNgapId;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

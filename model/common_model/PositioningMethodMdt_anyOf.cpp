@@ -13,8 +13,8 @@
 
 #include "PositioningMethodMdt_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::common {
 
@@ -27,12 +27,12 @@ void PositioningMethodMdt_anyOf::validate() const {
   }
 }
 
-bool PositioningMethodMdt_anyOf::validate(std::stringstream& msg) const {
+bool PositioningMethodMdt_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool PositioningMethodMdt_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool PositioningMethodMdt_anyOf::validate(std::stringstream &msg,
+                                          const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PositioningMethodMdt_anyOf" : pathPrefix;
@@ -47,35 +47,35 @@ bool PositioningMethodMdt_anyOf::validate(
 }
 
 bool PositioningMethodMdt_anyOf::operator==(
-    const PositioningMethodMdt_anyOf& rhs) const {
+    const PositioningMethodMdt_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool PositioningMethodMdt_anyOf::operator!=(
-    const PositioningMethodMdt_anyOf& rhs) const {
+    const PositioningMethodMdt_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PositioningMethodMdt_anyOf& o) {
+void to_json(nlohmann::json &j, const PositioningMethodMdt_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case PositioningMethodMdt_anyOf::ePositioningMethodMdt_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case PositioningMethodMdt_anyOf::ePositioningMethodMdt_anyOf::GNSS:
-      j = "GNSS";
-      break;
-    case PositioningMethodMdt_anyOf::ePositioningMethodMdt_anyOf::E_CELL_ID:
-      j = "E_CELL_ID";
-      break;
+  case PositioningMethodMdt_anyOf::ePositioningMethodMdt_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case PositioningMethodMdt_anyOf::ePositioningMethodMdt_anyOf::GNSS:
+    j = "GNSS";
+    break;
+  case PositioningMethodMdt_anyOf::ePositioningMethodMdt_anyOf::E_CELL_ID:
+    j = "E_CELL_ID";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, PositioningMethodMdt_anyOf& o) {
+void from_json(const nlohmann::json &j, PositioningMethodMdt_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "GNSS") {
     o.setValue(PositioningMethodMdt_anyOf::ePositioningMethodMdt_anyOf::GNSS);
@@ -100,4 +100,4 @@ void PositioningMethodMdt_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

@@ -13,8 +13,8 @@
 
 #include "StationaryIndication_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::common {
 
@@ -27,12 +27,12 @@ void StationaryIndication_anyOf::validate() const {
   }
 }
 
-bool StationaryIndication_anyOf::validate(std::stringstream& msg) const {
+bool StationaryIndication_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool StationaryIndication_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool StationaryIndication_anyOf::validate(std::stringstream &msg,
+                                          const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "StationaryIndication_anyOf" : pathPrefix;
@@ -47,35 +47,35 @@ bool StationaryIndication_anyOf::validate(
 }
 
 bool StationaryIndication_anyOf::operator==(
-    const StationaryIndication_anyOf& rhs) const {
+    const StationaryIndication_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool StationaryIndication_anyOf::operator!=(
-    const StationaryIndication_anyOf& rhs) const {
+    const StationaryIndication_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const StationaryIndication_anyOf& o) {
+void to_json(nlohmann::json &j, const StationaryIndication_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case StationaryIndication_anyOf::eStationaryIndication_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case StationaryIndication_anyOf::eStationaryIndication_anyOf::STATIONARY:
-      j = "STATIONARY";
-      break;
-    case StationaryIndication_anyOf::eStationaryIndication_anyOf::MOBILE:
-      j = "MOBILE";
-      break;
+  case StationaryIndication_anyOf::eStationaryIndication_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case StationaryIndication_anyOf::eStationaryIndication_anyOf::STATIONARY:
+    j = "STATIONARY";
+    break;
+  case StationaryIndication_anyOf::eStationaryIndication_anyOf::MOBILE:
+    j = "MOBILE";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, StationaryIndication_anyOf& o) {
+void from_json(const nlohmann::json &j, StationaryIndication_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "STATIONARY") {
     o.setValue(
@@ -100,4 +100,4 @@ void StationaryIndication_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

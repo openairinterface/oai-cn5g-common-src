@@ -20,12 +20,12 @@ namespace oai::model::pcf {
 using namespace oai::model::common;
 
 ErrorReport::ErrorReport() {
-  m_ErrorIsSet                = false;
-  m_RuleReportsIsSet          = false;
-  m_SessRuleReportsIsSet      = false;
+  m_ErrorIsSet = false;
+  m_RuleReportsIsSet = false;
+  m_SessRuleReportsIsSet = false;
   m_PolDecFailureReportsIsSet = false;
-  m_AltQosParamId             = "";
-  m_AltQosParamIdIsSet        = false;
+  m_AltQosParamId = "";
+  m_AltQosParamIdIsSet = false;
 }
 
 void ErrorReport::validate() const {
@@ -35,28 +35,28 @@ void ErrorReport::validate() const {
   }
 }
 
-bool ErrorReport::validate(std::stringstream& msg) const {
+bool ErrorReport::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ErrorReport::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ErrorReport::validate(std::stringstream &msg,
+                           const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ErrorReport" : pathPrefix;
 
   if (ruleReportsIsSet()) {
-    const std::vector<oai::model::pcf::RuleReport>& value = m_RuleReports;
+    const std::vector<oai::model::pcf::RuleReport> &value = m_RuleReports;
     const std::string currentValuePath = _pathPrefix + ".ruleReports";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::RuleReport& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::RuleReport &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -69,7 +69,7 @@ bool ErrorReport::validate(
   }
 
   if (sessRuleReportsIsSet()) {
-    const std::vector<oai::model::pcf::SessionRuleReport>& value =
+    const std::vector<oai::model::pcf::SessionRuleReport> &value =
         m_SessRuleReports;
     const std::string currentValuePath = _pathPrefix + ".sessRuleReports";
 
@@ -77,10 +77,10 @@ bool ErrorReport::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::SessionRuleReport& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::SessionRuleReport &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -93,7 +93,7 @@ bool ErrorReport::validate(
   }
 
   if (polDecFailureReportsIsSet()) {
-    const std::vector<oai::model::pcf::PolicyDecisionFailureCode>& value =
+    const std::vector<oai::model::pcf::PolicyDecisionFailureCode> &value =
         m_PolDecFailureReports;
     const std::string currentValuePath = _pathPrefix + ".polDecFailureReports";
 
@@ -101,10 +101,10 @@ bool ErrorReport::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::PolicyDecisionFailureCode& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::PolicyDecisionFailureCode &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -120,7 +120,7 @@ bool ErrorReport::validate(
   return success;
 }
 
-bool ErrorReport::operator==(const ErrorReport& rhs) const {
+bool ErrorReport::operator==(const ErrorReport &rhs) const {
   return
 
       ((!errorIsSet() && !rhs.errorIsSet()) ||
@@ -145,23 +145,25 @@ bool ErrorReport::operator==(const ErrorReport& rhs) const {
           ;
 }
 
-bool ErrorReport::operator!=(const ErrorReport& rhs) const {
+bool ErrorReport::operator!=(const ErrorReport &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ErrorReport& o) {
+void to_json(nlohmann::json &j, const ErrorReport &o) {
   j = nlohmann::json();
-  if (o.errorIsSet()) j["error"] = o.m_Error;
+  if (o.errorIsSet())
+    j["error"] = o.m_Error;
   if (o.ruleReportsIsSet() || !o.m_RuleReports.empty())
     j["ruleReports"] = o.m_RuleReports;
   if (o.sessRuleReportsIsSet() || !o.m_SessRuleReports.empty())
     j["sessRuleReports"] = o.m_SessRuleReports;
   if (o.polDecFailureReportsIsSet() || !o.m_PolDecFailureReports.empty())
     j["polDecFailureReports"] = o.m_PolDecFailureReports;
-  if (o.altQosParamIdIsSet()) j["altQosParamId"] = o.m_AltQosParamId;
+  if (o.altQosParamIdIsSet())
+    j["altQosParamId"] = o.m_AltQosParamId;
 }
 
-void from_json(const nlohmann::json& j, ErrorReport& o) {
+void from_json(const nlohmann::json &j, ErrorReport &o) {
   if (j.find("error") != j.end()) {
     j.at("error").get_to(o.m_Error);
     o.m_ErrorIsSet = true;
@@ -184,55 +186,43 @@ void from_json(const nlohmann::json& j, ErrorReport& o) {
   }
 }
 
-ProblemDetails ErrorReport::getError() const {
-  return m_Error;
-}
-void ErrorReport::setError(ProblemDetails const& value) {
-  m_Error      = value;
+ProblemDetails ErrorReport::getError() const { return m_Error; }
+void ErrorReport::setError(ProblemDetails const &value) {
+  m_Error = value;
   m_ErrorIsSet = true;
 }
-bool ErrorReport::errorIsSet() const {
-  return m_ErrorIsSet;
-}
-void ErrorReport::unsetError() {
-  m_ErrorIsSet = false;
-}
+bool ErrorReport::errorIsSet() const { return m_ErrorIsSet; }
+void ErrorReport::unsetError() { m_ErrorIsSet = false; }
 std::vector<oai::model::pcf::RuleReport> ErrorReport::getRuleReports() const {
   return m_RuleReports;
 }
 void ErrorReport::setRuleReports(
-    std::vector<oai::model::pcf::RuleReport> const& value) {
-  m_RuleReports      = value;
+    std::vector<oai::model::pcf::RuleReport> const &value) {
+  m_RuleReports = value;
   m_RuleReportsIsSet = true;
 }
-bool ErrorReport::ruleReportsIsSet() const {
-  return m_RuleReportsIsSet;
-}
-void ErrorReport::unsetRuleReports() {
-  m_RuleReportsIsSet = false;
-}
+bool ErrorReport::ruleReportsIsSet() const { return m_RuleReportsIsSet; }
+void ErrorReport::unsetRuleReports() { m_RuleReportsIsSet = false; }
 std::vector<oai::model::pcf::SessionRuleReport>
 ErrorReport::getSessRuleReports() const {
   return m_SessRuleReports;
 }
 void ErrorReport::setSessRuleReports(
-    std::vector<oai::model::pcf::SessionRuleReport> const& value) {
-  m_SessRuleReports      = value;
+    std::vector<oai::model::pcf::SessionRuleReport> const &value) {
+  m_SessRuleReports = value;
   m_SessRuleReportsIsSet = true;
 }
 bool ErrorReport::sessRuleReportsIsSet() const {
   return m_SessRuleReportsIsSet;
 }
-void ErrorReport::unsetSessRuleReports() {
-  m_SessRuleReportsIsSet = false;
-}
+void ErrorReport::unsetSessRuleReports() { m_SessRuleReportsIsSet = false; }
 std::vector<oai::model::pcf::PolicyDecisionFailureCode>
 ErrorReport::getPolDecFailureReports() const {
   return m_PolDecFailureReports;
 }
 void ErrorReport::setPolDecFailureReports(
-    std::vector<oai::model::pcf::PolicyDecisionFailureCode> const& value) {
-  m_PolDecFailureReports      = value;
+    std::vector<oai::model::pcf::PolicyDecisionFailureCode> const &value) {
+  m_PolDecFailureReports = value;
   m_PolDecFailureReportsIsSet = true;
 }
 bool ErrorReport::polDecFailureReportsIsSet() const {
@@ -241,18 +231,12 @@ bool ErrorReport::polDecFailureReportsIsSet() const {
 void ErrorReport::unsetPolDecFailureReports() {
   m_PolDecFailureReportsIsSet = false;
 }
-std::string ErrorReport::getAltQosParamId() const {
-  return m_AltQosParamId;
-}
-void ErrorReport::setAltQosParamId(std::string const& value) {
-  m_AltQosParamId      = value;
+std::string ErrorReport::getAltQosParamId() const { return m_AltQosParamId; }
+void ErrorReport::setAltQosParamId(std::string const &value) {
+  m_AltQosParamId = value;
   m_AltQosParamIdIsSet = true;
 }
-bool ErrorReport::altQosParamIdIsSet() const {
-  return m_AltQosParamIdIsSet;
-}
-void ErrorReport::unsetAltQosParamId() {
-  m_AltQosParamIdIsSet = false;
-}
+bool ErrorReport::altQosParamIdIsSet() const { return m_AltQosParamIdIsSet; }
+void ErrorReport::unsetAltQosParamId() { m_AltQosParamIdIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

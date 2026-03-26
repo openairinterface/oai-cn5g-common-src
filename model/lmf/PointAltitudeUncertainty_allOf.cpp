@@ -19,9 +19,9 @@
 namespace oai::model::lmf {
 
 PointAltitudeUncertainty_allOf::PointAltitudeUncertainty_allOf() {
-  m_Altitude            = 0.0;
+  m_Altitude = 0.0;
   m_UncertaintyAltitude = 0.0f;
-  m_Confidence          = 0;
+  m_Confidence = 0;
 }
 
 void PointAltitudeUncertainty_allOf::validate() const {
@@ -31,18 +31,18 @@ void PointAltitudeUncertainty_allOf::validate() const {
   }
 }
 
-bool PointAltitudeUncertainty_allOf::validate(std::stringstream& msg) const {
+bool PointAltitudeUncertainty_allOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool PointAltitudeUncertainty_allOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PointAltitudeUncertainty_allOf" : pathPrefix;
 
   /* Altitude */ {
-    const double& value                = m_Altitude;
+    const double &value = m_Altitude;
     const std::string currentValuePath = _pathPrefix + ".altitude";
 
     if (value < -32767) {
@@ -56,7 +56,7 @@ bool PointAltitudeUncertainty_allOf::validate(
   }
 
   /* UncertaintyAltitude */ {
-    const float& value                 = m_UncertaintyAltitude;
+    const float &value = m_UncertaintyAltitude;
     const std::string currentValuePath = _pathPrefix + ".uncertaintyAltitude";
 
     if (value < static_cast<float>(0)) {
@@ -66,7 +66,7 @@ bool PointAltitudeUncertainty_allOf::validate(
   }
 
   /* Confidence */ {
-    const int32_t& value               = m_Confidence;
+    const int32_t &value = m_Confidence;
     const std::string currentValuePath = _pathPrefix + ".confidence";
 
     if (value < 0) {
@@ -83,7 +83,7 @@ bool PointAltitudeUncertainty_allOf::validate(
 }
 
 bool PointAltitudeUncertainty_allOf::operator==(
-    const PointAltitudeUncertainty_allOf& rhs) const {
+    const PointAltitudeUncertainty_allOf &rhs) const {
   return
 
       (getPoint() == rhs.getPoint()) &&
@@ -100,20 +100,20 @@ bool PointAltitudeUncertainty_allOf::operator==(
 }
 
 bool PointAltitudeUncertainty_allOf::operator!=(
-    const PointAltitudeUncertainty_allOf& rhs) const {
+    const PointAltitudeUncertainty_allOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PointAltitudeUncertainty_allOf& o) {
-  j                        = nlohmann::json();
-  j["point"]               = o.m_Point;
-  j["altitude"]            = o.m_Altitude;
-  j["uncertaintyEllipse"]  = o.m_UncertaintyEllipse;
+void to_json(nlohmann::json &j, const PointAltitudeUncertainty_allOf &o) {
+  j = nlohmann::json();
+  j["point"] = o.m_Point;
+  j["altitude"] = o.m_Altitude;
+  j["uncertaintyEllipse"] = o.m_UncertaintyEllipse;
   j["uncertaintyAltitude"] = o.m_UncertaintyAltitude;
-  j["confidence"]          = o.m_Confidence;
+  j["confidence"] = o.m_Confidence;
 }
 
-void from_json(const nlohmann::json& j, PointAltitudeUncertainty_allOf& o) {
+void from_json(const nlohmann::json &j, PointAltitudeUncertainty_allOf &o) {
   j.at("point").get_to(o.m_Point);
   j.at("altitude").get_to(o.m_Altitude);
   j.at("uncertaintyEllipse").get_to(o.m_UncertaintyEllipse);
@@ -126,7 +126,7 @@ PointAltitudeUncertainty_allOf::getPoint() const {
   return m_Point;
 }
 void PointAltitudeUncertainty_allOf::setPoint(
-    oai::model::lmf::GeographicalCoordinates const& value) {
+    oai::model::lmf::GeographicalCoordinates const &value) {
   m_Point = value;
 }
 double PointAltitudeUncertainty_allOf::getAltitude() const {
@@ -140,7 +140,7 @@ PointAltitudeUncertainty_allOf::getUncertaintyEllipse() const {
   return m_UncertaintyEllipse;
 }
 void PointAltitudeUncertainty_allOf::setUncertaintyEllipse(
-    oai::model::lmf::UncertaintyEllipse const& value) {
+    oai::model::lmf::UncertaintyEllipse const &value) {
   m_UncertaintyEllipse = value;
 }
 float PointAltitudeUncertainty_allOf::getUncertaintyAltitude() const {
@@ -156,4 +156,4 @@ void PointAltitudeUncertainty_allOf::setConfidence(int32_t const value) {
   m_Confidence = value;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

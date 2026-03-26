@@ -19,8 +19,8 @@
 #ifndef N2InfoContent_H_
 #define N2InfoContent_H_
 
-#include "RefToBinaryData.h"
 #include "NgapIeType.h"
+#include "RefToBinaryData.h"
 #include <nlohmann/json.hpp>
 
 namespace oai::model::lmf {
@@ -29,7 +29,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class N2InfoContent {
- public:
+public:
   N2InfoContent();
   virtual ~N2InfoContent() = default;
 
@@ -43,16 +43,16 @@ class N2InfoContent {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const N2InfoContent& rhs) const;
-  bool operator!=(const N2InfoContent& rhs) const;
+  bool operator==(const N2InfoContent &rhs) const;
+  bool operator!=(const N2InfoContent &rhs) const;
 
   /////////////////////////////////////////////
   /// N2InfoContent members
@@ -68,19 +68,19 @@ class N2InfoContent {
   ///
   /// </summary>
   oai::model::lmf::NgapIeType getNgapIeType() const;
-  void setNgapIeType(oai::model::lmf::NgapIeType const& value);
+  void setNgapIeType(oai::model::lmf::NgapIeType const &value);
   bool ngapIeTypeIsSet() const;
   void unsetNgapIeType();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::RefToBinaryData getNgapData() const;
-  void setNgapData(oai::model::common::RefToBinaryData const& value);
+  void setNgapData(oai::model::common::RefToBinaryData const &value);
 
-  friend void to_json(nlohmann::json& j, const N2InfoContent& o);
-  friend void from_json(const nlohmann::json& j, N2InfoContent& o);
+  friend void to_json(nlohmann::json &j, const N2InfoContent &o);
+  friend void from_json(const nlohmann::json &j, N2InfoContent &o);
 
- protected:
+protected:
   int32_t m_NgapMessageType;
   bool m_NgapMessageTypeIsSet;
   oai::model::lmf::NgapIeType m_NgapIeType;
@@ -88,6 +88,6 @@ class N2InfoContent {
   oai::model::common::RefToBinaryData m_NgapData;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* N2InfoContent_H_ */

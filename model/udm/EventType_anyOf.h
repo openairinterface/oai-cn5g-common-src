@@ -30,7 +30,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class EventType_anyOf {
- public:
+public:
   EventType_anyOf();
   virtual ~EventType_anyOf() = default;
 
@@ -63,10 +63,10 @@ class EventType_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const EventType_anyOf& rhs) const;
-  bool operator!=(const EventType_anyOf& rhs) const;
+  bool operator==(const EventType_anyOf &rhs) const;
+  bool operator!=(const EventType_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// EventType_anyOf members
@@ -74,18 +74,18 @@ class EventType_anyOf {
   EventType_anyOf::eEventType_anyOf getValue() const;
   void setValue(EventType_anyOf::eEventType_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const EventType_anyOf& o);
-  friend void from_json(const nlohmann::json& j, EventType_anyOf& o);
+  friend void to_json(nlohmann::json &j, const EventType_anyOf &o);
+  friend void from_json(const nlohmann::json &j, EventType_anyOf &o);
 
- protected:
+protected:
   EventType_anyOf::eEventType_anyOf m_value =
       EventType_anyOf::eEventType_anyOf::INVALID_VALUE_OPENAPI_GENERATED;
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* EventType_anyOf_H_ */

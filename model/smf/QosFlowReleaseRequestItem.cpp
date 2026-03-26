@@ -16,8 +16,8 @@
 namespace oai::model::smf {
 
 QosFlowReleaseRequestItem::QosFlowReleaseRequestItem() {
-  m_Qfi                     = 0;
-  m_QosRulesIsSet           = false;
+  m_Qfi = 0;
+  m_QosRulesIsSet = false;
   m_QosFlowDescriptionIsSet = false;
 }
 
@@ -27,15 +27,16 @@ void QosFlowReleaseRequestItem::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const QosFlowReleaseRequestItem& o) {
-  j        = nlohmann::json();
+void to_json(nlohmann::json &j, const QosFlowReleaseRequestItem &o) {
+  j = nlohmann::json();
   j["qfi"] = o.m_Qfi;
-  if (o.qosRulesIsSet()) j["qosRules"] = o.m_QosRules;
+  if (o.qosRulesIsSet())
+    j["qosRules"] = o.m_QosRules;
   if (o.qosFlowDescriptionIsSet())
     j["qosFlowDescription"] = o.m_QosFlowDescription;
 }
 
-void from_json(const nlohmann::json& j, QosFlowReleaseRequestItem& o) {
+void from_json(const nlohmann::json &j, QosFlowReleaseRequestItem &o) {
   j.at("qfi").get_to(o.m_Qfi);
   if (j.find("qosRules") != j.end()) {
     j.at("qosRules").get_to(o.m_QosRules);
@@ -47,31 +48,25 @@ void from_json(const nlohmann::json& j, QosFlowReleaseRequestItem& o) {
   }
 }
 
-int32_t QosFlowReleaseRequestItem::getQfi() const {
-  return m_Qfi;
-}
-void QosFlowReleaseRequestItem::setQfi(int32_t const value) {
-  m_Qfi = value;
-}
+int32_t QosFlowReleaseRequestItem::getQfi() const { return m_Qfi; }
+void QosFlowReleaseRequestItem::setQfi(int32_t const value) { m_Qfi = value; }
 std::string QosFlowReleaseRequestItem::getQosRules() const {
   return m_QosRules;
 }
-void QosFlowReleaseRequestItem::setQosRules(std::string const& value) {
-  m_QosRules      = value;
+void QosFlowReleaseRequestItem::setQosRules(std::string const &value) {
+  m_QosRules = value;
   m_QosRulesIsSet = true;
 }
 bool QosFlowReleaseRequestItem::qosRulesIsSet() const {
   return m_QosRulesIsSet;
 }
-void QosFlowReleaseRequestItem::unsetQosRules() {
-  m_QosRulesIsSet = false;
-}
+void QosFlowReleaseRequestItem::unsetQosRules() { m_QosRulesIsSet = false; }
 std::string QosFlowReleaseRequestItem::getQosFlowDescription() const {
   return m_QosFlowDescription;
 }
 void QosFlowReleaseRequestItem::setQosFlowDescription(
-    std::string const& value) {
-  m_QosFlowDescription      = value;
+    std::string const &value) {
+  m_QosFlowDescription = value;
   m_QosFlowDescriptionIsSet = true;
 }
 bool QosFlowReleaseRequestItem::qosFlowDescriptionIsSet() const {
@@ -81,4 +76,4 @@ void QosFlowReleaseRequestItem::unsetQosFlowDescription() {
   m_QosFlowDescriptionIsSet = false;
 }
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

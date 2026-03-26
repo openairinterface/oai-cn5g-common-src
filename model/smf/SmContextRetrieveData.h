@@ -29,7 +29,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class SmContextRetrieveData {
- public:
+public:
   SmContextRetrieveData();
   virtual ~SmContextRetrieveData();
 
@@ -42,27 +42,27 @@ class SmContextRetrieveData {
   ///
   /// </summary>
   MmeCapabilities getTargetMmeCap() const;
-  void setTargetMmeCap(MmeCapabilities const& value);
+  void setTargetMmeCap(MmeCapabilities const &value);
   bool targetMmeCapIsSet() const;
   void unsetTargetMmeCap();
   /// <summary>
   ///
   /// </summary>
   SmContextType getSmContextType() const;
-  void setSmContextType(SmContextType const& value);
+  void setSmContextType(SmContextType const &value);
   bool smContextTypeIsSet() const;
   void unsetSmContextType();
 
-  friend void to_json(nlohmann::json& j, const SmContextRetrieveData& o);
-  friend void from_json(const nlohmann::json& j, SmContextRetrieveData& o);
+  friend void to_json(nlohmann::json &j, const SmContextRetrieveData &o);
+  friend void from_json(const nlohmann::json &j, SmContextRetrieveData &o);
 
- protected:
+protected:
   MmeCapabilities m_TargetMmeCap;
   bool m_TargetMmeCapIsSet;
   SmContextType m_SmContextType;
   bool m_SmContextTypeIsSet;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* SmContextRetrieveData_H_ */

@@ -31,7 +31,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class ChargingInformation {
- public:
+public:
   ChargingInformation();
   virtual ~ChargingInformation();
 
@@ -44,45 +44,45 @@ class ChargingInformation {
   ///
   /// </summary>
   std::string getPrimaryChfAddress() const;
-  void setPrimaryChfAddress(std::string const& value);
+  void setPrimaryChfAddress(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getSecondaryChfAddress() const;
-  void setSecondaryChfAddress(std::string const& value);
+  void setSecondaryChfAddress(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getPrimaryChfSetId() const;
-  void setPrimaryChfSetId(std::string const& value);
+  void setPrimaryChfSetId(std::string const &value);
   bool primaryChfSetIdIsSet() const;
   void unsetPrimaryChfSetId();
   /// <summary>
   ///
   /// </summary>
   std::string getPrimaryChfInstanceId() const;
-  void setPrimaryChfInstanceId(std::string const& value);
+  void setPrimaryChfInstanceId(std::string const &value);
   bool primaryChfInstanceIdIsSet() const;
   void unsetPrimaryChfInstanceId();
   /// <summary>
   ///
   /// </summary>
   std::string getSecondaryChfSetId() const;
-  void setSecondaryChfSetId(std::string const& value);
+  void setSecondaryChfSetId(std::string const &value);
   bool secondaryChfSetIdIsSet() const;
   void unsetSecondaryChfSetId();
   /// <summary>
   ///
   /// </summary>
   std::string getSecondaryChfInstanceId() const;
-  void setSecondaryChfInstanceId(std::string const& value);
+  void setSecondaryChfInstanceId(std::string const &value);
   bool secondaryChfInstanceIdIsSet() const;
   void unsetSecondaryChfInstanceId();
 
-  friend void to_json(nlohmann::json& j, const ChargingInformation& o);
-  friend void from_json(const nlohmann::json& j, ChargingInformation& o);
+  friend void to_json(nlohmann::json &j, const ChargingInformation &o);
+  friend void from_json(const nlohmann::json &j, ChargingInformation &o);
 
- protected:
+protected:
   std::string m_PrimaryChfAddress;
 
   std::string m_SecondaryChfAddress;
@@ -97,6 +97,6 @@ class ChargingInformation {
   bool m_SecondaryChfInstanceIdIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* ChargingInformation_H_ */

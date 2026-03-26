@@ -8,13 +8,12 @@
 
 #include "Ngap_TargetID.h"
 
+#include "Ngap_ProtocolIE-SingleContainer.h"
 #include "Ngap_TargetRANNodeID.h"
 #include "Ngap_TargeteNB-ID.h"
-#include "Ngap_ProtocolIE-SingleContainer.h"
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 static asn_oer_constraints_t asn_OER_type_Ngap_TargetID_constr_1 CC_NOTUSED = {
-    {0, 0},
-    -1};
+    {0, 0}, -1};
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 asn_per_constraints_t asn_PER_type_Ngap_TargetID_constr_1 CC_NOTUSED = {
@@ -93,7 +92,7 @@ asn_CHOICE_specifics_t asn_SPC_Ngap_TargetID_specs_1 = {
     sizeof(struct Ngap_TargetID),
     offsetof(struct Ngap_TargetID, _asn_ctx),
     offsetof(struct Ngap_TargetID, present),
-    sizeof(((struct Ngap_TargetID*) 0)->present),
+    sizeof(((struct Ngap_TargetID *)0)->present),
     asn_MAP_Ngap_TargetID_tag2el_1,
     3, /* Count of tags in the map */
     0,

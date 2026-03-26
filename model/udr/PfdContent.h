@@ -34,7 +34,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class PfdContent {
- public:
+public:
   PfdContent();
   virtual ~PfdContent();
 
@@ -47,45 +47,45 @@ class PfdContent {
   /// Identifies a PDF of an application identifier.
   /// </summary>
   std::string getPfdId() const;
-  void setPfdId(std::string const& value);
+  void setPfdId(std::string const &value);
   bool pfdIdIsSet() const;
   void unsetPfdId();
   /// <summary>
   /// Represents a 3-tuple with protocol, server ip and server port for UL/DL
   /// application traffic.
   /// </summary>
-  std::vector<std::string>& getFlowDescriptions();
-  void setFlowDescriptions(std::vector<std::string> const& value);
+  std::vector<std::string> &getFlowDescriptions();
+  void setFlowDescriptions(std::vector<std::string> const &value);
   bool flowDescriptionsIsSet() const;
   void unsetFlowDescriptions();
   /// <summary>
   /// Indicates a URL or a regular expression which is used to match the
   /// significant parts of the URL.
   /// </summary>
-  std::vector<std::string>& getUrls();
-  void setUrls(std::vector<std::string> const& value);
+  std::vector<std::string> &getUrls();
+  void setUrls(std::vector<std::string> const &value);
   bool urlsIsSet() const;
   void unsetUrls();
   /// <summary>
   /// Indicates an FQDN or a regular expression as a domain name matching
   /// criteria.
   /// </summary>
-  std::vector<std::string>& getDomainNames();
-  void setDomainNames(std::vector<std::string> const& value);
+  std::vector<std::string> &getDomainNames();
+  void setDomainNames(std::vector<std::string> const &value);
   bool domainNamesIsSet() const;
   void unsetDomainNames();
   /// <summary>
   ///
   /// </summary>
   DomainNameProtocol getDnProtocol() const;
-  void setDnProtocol(DomainNameProtocol const& value);
+  void setDnProtocol(DomainNameProtocol const &value);
   bool dnProtocolIsSet() const;
   void unsetDnProtocol();
 
-  friend void to_json(nlohmann::json& j, const PfdContent& o);
-  friend void from_json(const nlohmann::json& j, PfdContent& o);
+  friend void to_json(nlohmann::json &j, const PfdContent &o);
+  friend void from_json(const nlohmann::json &j, PfdContent &o);
 
- protected:
+protected:
   std::string m_PfdId;
   bool m_PfdIdIsSet;
   std::vector<std::string> m_FlowDescriptions;
@@ -98,6 +98,6 @@ class PfdContent {
   bool m_DnProtocolIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* PfdContent_H_ */

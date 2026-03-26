@@ -19,8 +19,8 @@
 #ifndef UpConfidentialityRm_H_
 #define UpConfidentialityRm_H_
 
-#include "UpConfidentiality.h"
 #include "NullValue.h"
+#include "UpConfidentiality.h"
 #include <nlohmann/json.hpp>
 
 namespace oai::model::common {
@@ -29,7 +29,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class UpConfidentialityRm {
- public:
+public:
   UpConfidentialityRm();
   virtual ~UpConfidentialityRm() = default;
 
@@ -43,26 +43,26 @@ class UpConfidentialityRm {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const UpConfidentialityRm& rhs) const;
-  bool operator!=(const UpConfidentialityRm& rhs) const;
+  bool operator==(const UpConfidentialityRm &rhs) const;
+  bool operator!=(const UpConfidentialityRm &rhs) const;
 
   /////////////////////////////////////////////
   /// UpConfidentialityRm members
 
-  friend void to_json(nlohmann::json& j, const UpConfidentialityRm& o);
-  friend void from_json(const nlohmann::json& j, UpConfidentialityRm& o);
+  friend void to_json(nlohmann::json &j, const UpConfidentialityRm &o);
+  friend void from_json(const nlohmann::json &j, UpConfidentialityRm &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* UpConfidentialityRm_H_ */

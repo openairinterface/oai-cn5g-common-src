@@ -17,22 +17,21 @@ extern "C" {
 namespace oai::ngap {
 
 class FiveGSTmsi {
- public:
+public:
   FiveGSTmsi();
   ~FiveGSTmsi();
 
- public:
-  void getTmsi(std::string& value) const;
+public:
+  void getTmsi(std::string &value) const;
 
-  void get(std::string& setId, std::string& pointer, std::string& tmsi) const;
-  bool set(
-      const std::string& setId, const std::string& pointer,
-      const std::string& tmsi);
+  void get(std::string &setId, std::string &pointer, std::string &tmsi) const;
+  bool set(const std::string &setId, const std::string &pointer,
+           const std::string &tmsi);
 
-  bool encode(Ngap_FiveG_S_TMSI_t& pdu) const;
-  bool decode(const Ngap_FiveG_S_TMSI_t& pdu);
+  bool encode(Ngap_FiveG_S_TMSI_t &pdu) const;
+  bool decode(const Ngap_FiveG_S_TMSI_t &pdu);
 
- private:
+private:
   std::string m_5gSTmsi;
   std::string m_TmsiValue;
 
@@ -40,6 +39,6 @@ class FiveGSTmsi {
   AmfPointer m_AmfPointer;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

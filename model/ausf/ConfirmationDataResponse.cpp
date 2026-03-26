@@ -19,10 +19,10 @@
 namespace oai::model::ausf {
 
 ConfirmationDataResponse::ConfirmationDataResponse() {
-  m_Supi         = "";
-  m_SupiIsSet    = false;
-  m_Kseaf        = "";
-  m_KseafIsSet   = false;
+  m_Supi = "";
+  m_SupiIsSet = false;
+  m_Kseaf = "";
+  m_KseafIsSet = false;
   m_PvsInfoIsSet = false;
 }
 
@@ -33,38 +33,38 @@ void ConfirmationDataResponse::validate() const {
   }
 }
 
-bool ConfirmationDataResponse::validate(std::stringstream& msg) const {
+bool ConfirmationDataResponse::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ConfirmationDataResponse::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ConfirmationDataResponse::validate(std::stringstream &msg,
+                                        const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ConfirmationDataResponse" : pathPrefix;
 
   if (supiIsSet()) {
-    const std::string& value           = m_Supi;
+    const std::string &value = m_Supi;
     const std::string currentValuePath = _pathPrefix + ".supi";
   }
 
   if (kseafIsSet()) {
-    const std::string& value           = m_Kseaf;
+    const std::string &value = m_Kseaf;
     const std::string currentValuePath = _pathPrefix + ".kseaf";
   }
 
   if (pvsInfoIsSet()) {
-    const std::vector<ServerAddressingInfo>& value = m_PvsInfo;
-    const std::string currentValuePath             = _pathPrefix + ".pvsInfo";
+    const std::vector<ServerAddressingInfo> &value = m_PvsInfo;
+    const std::string currentValuePath = _pathPrefix + ".pvsInfo";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const ServerAddressingInfo& value : value) {
+      int i = 0;
+      for (const ServerAddressingInfo &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -79,7 +79,7 @@ bool ConfirmationDataResponse::validate(
 }
 
 bool ConfirmationDataResponse::operator==(
-    const ConfirmationDataResponse& rhs) const {
+    const ConfirmationDataResponse &rhs) const {
   return
 
       (getAuthResult() == rhs.getAuthResult()) &&
@@ -98,19 +98,22 @@ bool ConfirmationDataResponse::operator==(
 }
 
 bool ConfirmationDataResponse::operator!=(
-    const ConfirmationDataResponse& rhs) const {
+    const ConfirmationDataResponse &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ConfirmationDataResponse& o) {
-  j               = nlohmann::json::object();
+void to_json(nlohmann::json &j, const ConfirmationDataResponse &o) {
+  j = nlohmann::json::object();
   j["authResult"] = o.m_AuthResult;
-  if (o.supiIsSet()) j["supi"] = o.m_Supi;
-  if (o.kseafIsSet()) j["kseaf"] = o.m_Kseaf;
-  if (o.pvsInfoIsSet() || !o.m_PvsInfo.empty()) j["pvsInfo"] = o.m_PvsInfo;
+  if (o.supiIsSet())
+    j["supi"] = o.m_Supi;
+  if (o.kseafIsSet())
+    j["kseaf"] = o.m_Kseaf;
+  if (o.pvsInfoIsSet() || !o.m_PvsInfo.empty())
+    j["pvsInfo"] = o.m_PvsInfo;
 }
 
-void from_json(const nlohmann::json& j, ConfirmationDataResponse& o) {
+void from_json(const nlohmann::json &j, ConfirmationDataResponse &o) {
   j.at("authResult").get_to(o.m_AuthResult);
   if (j.find("supi") != j.end()) {
     j.at("supi").get_to(o.m_Supi);
@@ -129,48 +132,32 @@ void from_json(const nlohmann::json& j, ConfirmationDataResponse& o) {
 AuthResult ConfirmationDataResponse::getAuthResult() const {
   return m_AuthResult;
 }
-void ConfirmationDataResponse::setAuthResult(AuthResult const& value) {
+void ConfirmationDataResponse::setAuthResult(AuthResult const &value) {
   m_AuthResult = value;
 }
-std::string ConfirmationDataResponse::getSupi() const {
-  return m_Supi;
-}
-void ConfirmationDataResponse::setSupi(std::string const& value) {
-  m_Supi      = value;
+std::string ConfirmationDataResponse::getSupi() const { return m_Supi; }
+void ConfirmationDataResponse::setSupi(std::string const &value) {
+  m_Supi = value;
   m_SupiIsSet = true;
 }
-bool ConfirmationDataResponse::supiIsSet() const {
-  return m_SupiIsSet;
-}
-void ConfirmationDataResponse::unsetSupi() {
-  m_SupiIsSet = false;
-}
-std::string ConfirmationDataResponse::getKseaf() const {
-  return m_Kseaf;
-}
-void ConfirmationDataResponse::setKseaf(std::string const& value) {
-  m_Kseaf      = value;
+bool ConfirmationDataResponse::supiIsSet() const { return m_SupiIsSet; }
+void ConfirmationDataResponse::unsetSupi() { m_SupiIsSet = false; }
+std::string ConfirmationDataResponse::getKseaf() const { return m_Kseaf; }
+void ConfirmationDataResponse::setKseaf(std::string const &value) {
+  m_Kseaf = value;
   m_KseafIsSet = true;
 }
-bool ConfirmationDataResponse::kseafIsSet() const {
-  return m_KseafIsSet;
-}
-void ConfirmationDataResponse::unsetKseaf() {
-  m_KseafIsSet = false;
-}
+bool ConfirmationDataResponse::kseafIsSet() const { return m_KseafIsSet; }
+void ConfirmationDataResponse::unsetKseaf() { m_KseafIsSet = false; }
 std::vector<ServerAddressingInfo> ConfirmationDataResponse::getPvsInfo() const {
   return m_PvsInfo;
 }
 void ConfirmationDataResponse::setPvsInfo(
-    std::vector<ServerAddressingInfo> const& value) {
-  m_PvsInfo      = value;
+    std::vector<ServerAddressingInfo> const &value) {
+  m_PvsInfo = value;
   m_PvsInfoIsSet = true;
 }
-bool ConfirmationDataResponse::pvsInfoIsSet() const {
-  return m_PvsInfoIsSet;
-}
-void ConfirmationDataResponse::unsetPvsInfo() {
-  m_PvsInfoIsSet = false;
-}
+bool ConfirmationDataResponse::pvsInfoIsSet() const { return m_PvsInfoIsSet; }
+void ConfirmationDataResponse::unsetPvsInfo() { m_PvsInfoIsSet = false; }
 
-}  // namespace oai::model::ausf
+} // namespace oai::model::ausf

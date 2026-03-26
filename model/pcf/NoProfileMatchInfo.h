@@ -21,8 +21,8 @@
 
 #include "NoProfileMatchReason.h"
 #include "QueryParamCombination.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::pcf {
 
@@ -30,7 +30,7 @@ namespace oai::model::pcf {
 /// Provides the reason for not finding NF matching the search criteria
 /// </summary>
 class NoProfileMatchInfo {
- public:
+public:
   NoProfileMatchInfo();
   virtual ~NoProfileMatchInfo() = default;
 
@@ -44,16 +44,16 @@ class NoProfileMatchInfo {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const NoProfileMatchInfo& rhs) const;
-  bool operator!=(const NoProfileMatchInfo& rhs) const;
+  bool operator==(const NoProfileMatchInfo &rhs) const;
+  bool operator!=(const NoProfileMatchInfo &rhs) const;
 
   /////////////////////////////////////////////
   /// NoProfileMatchInfo members
@@ -62,21 +62,21 @@ class NoProfileMatchInfo {
   ///
   /// </summary>
   oai::model::pcf::NoProfileMatchReason getReason() const;
-  void setReason(oai::model::pcf::NoProfileMatchReason const& value);
+  void setReason(oai::model::pcf::NoProfileMatchReason const &value);
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::pcf::QueryParamCombination>
   getQueryParamCombinationList() const;
   void setQueryParamCombinationList(
-      std::vector<oai::model::pcf::QueryParamCombination> const& value);
+      std::vector<oai::model::pcf::QueryParamCombination> const &value);
   bool queryParamCombinationListIsSet() const;
   void unsetQueryParamCombinationList();
 
-  friend void to_json(nlohmann::json& j, const NoProfileMatchInfo& o);
-  friend void from_json(const nlohmann::json& j, NoProfileMatchInfo& o);
+  friend void to_json(nlohmann::json &j, const NoProfileMatchInfo &o);
+  friend void from_json(const nlohmann::json &j, NoProfileMatchInfo &o);
 
- protected:
+protected:
   oai::model::pcf::NoProfileMatchReason m_Reason;
 
   std::vector<oai::model::pcf::QueryParamCombination>
@@ -84,6 +84,6 @@ class NoProfileMatchInfo {
   bool m_QueryParamCombinationListIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* NoProfileMatchInfo_H_ */

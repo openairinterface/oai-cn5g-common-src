@@ -20,13 +20,13 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_CauseProtocol {
-  Ngap_CauseProtocol_transfer_syntax_error                             = 0,
-  Ngap_CauseProtocol_abstract_syntax_error_reject                      = 1,
-  Ngap_CauseProtocol_abstract_syntax_error_ignore_and_notify           = 2,
-  Ngap_CauseProtocol_message_not_compatible_with_receiver_state        = 3,
-  Ngap_CauseProtocol_semantic_error                                    = 4,
+  Ngap_CauseProtocol_transfer_syntax_error = 0,
+  Ngap_CauseProtocol_abstract_syntax_error_reject = 1,
+  Ngap_CauseProtocol_abstract_syntax_error_ignore_and_notify = 2,
+  Ngap_CauseProtocol_message_not_compatible_with_receiver_state = 3,
+  Ngap_CauseProtocol_semantic_error = 4,
   Ngap_CauseProtocol_abstract_syntax_error_falsely_constructed_message = 5,
-  Ngap_CauseProtocol_unspecified                                       = 6
+  Ngap_CauseProtocol_unspecified = 6
   /*
    * Enumeration is extensible
    */

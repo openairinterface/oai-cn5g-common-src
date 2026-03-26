@@ -20,8 +20,8 @@
 #define QueryParamCombination_H_
 
 #include "QueryParameter.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::pcf {
 
@@ -29,7 +29,7 @@ namespace oai::model::pcf {
 /// Contains a list of Query Parameters
 /// </summary>
 class QueryParamCombination {
- public:
+public:
   QueryParamCombination();
   virtual ~QueryParamCombination() = default;
 
@@ -43,16 +43,16 @@ class QueryParamCombination {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const QueryParamCombination& rhs) const;
-  bool operator!=(const QueryParamCombination& rhs) const;
+  bool operator==(const QueryParamCombination &rhs) const;
+  bool operator!=(const QueryParamCombination &rhs) const;
 
   /////////////////////////////////////////////
   /// QueryParamCombination members
@@ -61,16 +61,16 @@ class QueryParamCombination {
   ///
   /// </summary>
   std::vector<oai::model::pcf::QueryParameter> getQueryParams() const;
-  void setQueryParams(
-      std::vector<oai::model::pcf::QueryParameter> const& value);
+  void
+  setQueryParams(std::vector<oai::model::pcf::QueryParameter> const &value);
 
-  friend void to_json(nlohmann::json& j, const QueryParamCombination& o);
-  friend void from_json(const nlohmann::json& j, QueryParamCombination& o);
+  friend void to_json(nlohmann::json &j, const QueryParamCombination &o);
+  friend void from_json(const nlohmann::json &j, QueryParamCombination &o);
 
- protected:
+protected:
   std::vector<oai::model::pcf::QueryParameter> m_QueryParams;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* QueryParamCombination_H_ */

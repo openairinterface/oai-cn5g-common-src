@@ -15,20 +15,20 @@ extern "C" {
 
 namespace oai::ngap {
 class DrbSubjectToStatusTransferList {
- public:
+public:
   DrbSubjectToStatusTransferList();
   virtual ~DrbSubjectToStatusTransferList();
 
-  void set(const std::vector<DrbSubjectToStatusTransferItem>& list);
-  void get(std::vector<DrbSubjectToStatusTransferItem>& list) const;
+  void set(const std::vector<DrbSubjectToStatusTransferItem> &list);
+  void get(std::vector<DrbSubjectToStatusTransferItem> &list) const;
 
-  bool encode(Ngap_DRBsSubjectToStatusTransferList_t&
-                  drbsSubjectToStatusTransferList) const;
-  bool decode(const Ngap_DRBsSubjectToStatusTransferList_t&
-                  drbsSubjectToStatusTransferList);
+  bool encode(Ngap_DRBsSubjectToStatusTransferList_t
+                  &drbsSubjectToStatusTransferList) const;
+  bool decode(const Ngap_DRBsSubjectToStatusTransferList_t
+                  &drbsSubjectToStatusTransferList);
 
- private:
+private:
   std::vector<DrbSubjectToStatusTransferItem> m_ItemList;
 };
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

@@ -33,7 +33,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class RmInfo {
- public:
+public:
   RmInfo();
   virtual ~RmInfo();
 
@@ -46,22 +46,22 @@ class RmInfo {
   ///
   /// </summary>
   RmState getRmState() const;
-  void setRmState(RmState const& value);
+  void setRmState(RmState const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::AccessType getAccessType() const;
-  void setAccessType(oai::model::common::AccessType const& value);
+  void setAccessType(oai::model::common::AccessType const &value);
 
-  friend void to_json(nlohmann::json& j, const RmInfo& o);
-  friend void from_json(const nlohmann::json& j, RmInfo& o);
+  friend void to_json(nlohmann::json &j, const RmInfo &o);
+  friend void from_json(const nlohmann::json &j, RmInfo &o);
 
- protected:
+protected:
   RmState m_RmState;
 
   oai::model::common::AccessType m_AccessType;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* RmInfo_H_ */

@@ -146,7 +146,7 @@ namespace oai::model::pcf {
 /// UE is in suspend state.
 /// </summary>
 class FailureCode {
- public:
+public:
   FailureCode();
   virtual ~FailureCode() = default;
 
@@ -160,16 +160,16 @@ class FailureCode {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const FailureCode& rhs) const;
-  bool operator!=(const FailureCode& rhs) const;
+  bool operator==(const FailureCode &rhs) const;
+  bool operator!=(const FailureCode &rhs) const;
 
   /////////////////////////////////////////////
   /// FailureCode members
@@ -178,15 +178,15 @@ class FailureCode {
   void setValue(FailureCode_anyOf value);
   FailureCode_anyOf::eFailureCode_anyOf getEnumValue() const;
   void setEnumValue(FailureCode_anyOf::eFailureCode_anyOf value);
-  friend void to_json(nlohmann::json& j, const FailureCode& o);
-  friend void from_json(const nlohmann::json& j, FailureCode& o);
-  friend void to_json(nlohmann::json& j, const FailureCode_anyOf& o);
-  friend void from_json(const nlohmann::json& j, FailureCode_anyOf& o);
+  friend void to_json(nlohmann::json &j, const FailureCode &o);
+  friend void from_json(const nlohmann::json &j, FailureCode &o);
+  friend void to_json(nlohmann::json &j, const FailureCode_anyOf &o);
+  friend void from_json(const nlohmann::json &j, FailureCode_anyOf &o);
 
- protected:
+protected:
   FailureCode_anyOf m_value;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* FailureCode_H_ */

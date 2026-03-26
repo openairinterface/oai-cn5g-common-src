@@ -13,8 +13,8 @@
 
 #include "N2InformationClass_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::amf {
 
@@ -27,12 +27,12 @@ void N2InformationClass_anyOf::validate() const {
   }
 }
 
-bool N2InformationClass_anyOf::validate(std::stringstream& msg) const {
+bool N2InformationClass_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool N2InformationClass_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool N2InformationClass_anyOf::validate(std::stringstream &msg,
+                                        const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "N2InformationClass_anyOf" : pathPrefix;
@@ -47,50 +47,50 @@ bool N2InformationClass_anyOf::validate(
 }
 
 bool N2InformationClass_anyOf::operator==(
-    const N2InformationClass_anyOf& rhs) const {
+    const N2InformationClass_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool N2InformationClass_anyOf::operator!=(
-    const N2InformationClass_anyOf& rhs) const {
+    const N2InformationClass_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const N2InformationClass_anyOf& o) {
+void to_json(nlohmann::json &j, const N2InformationClass_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case N2InformationClass_anyOf::eN2InformationClass_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case N2InformationClass_anyOf::eN2InformationClass_anyOf::SM:
-      j = "SM";
-      break;
-    case N2InformationClass_anyOf::eN2InformationClass_anyOf::NRPPA:
-      j = "NRPPa";
-      break;
-    case N2InformationClass_anyOf::eN2InformationClass_anyOf::PWS:
-      j = "PWS";
-      break;
-    case N2InformationClass_anyOf::eN2InformationClass_anyOf::PWS_BCAL:
-      j = "PWS-BCAL";
-      break;
-    case N2InformationClass_anyOf::eN2InformationClass_anyOf::PWS_RF:
-      j = "PWS-RF";
-      break;
-    case N2InformationClass_anyOf::eN2InformationClass_anyOf::RAN:
-      j = "RAN";
-      break;
-    case N2InformationClass_anyOf::eN2InformationClass_anyOf::V2X:
-      j = "V2X";
-      break;
+  case N2InformationClass_anyOf::eN2InformationClass_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case N2InformationClass_anyOf::eN2InformationClass_anyOf::SM:
+    j = "SM";
+    break;
+  case N2InformationClass_anyOf::eN2InformationClass_anyOf::NRPPA:
+    j = "NRPPa";
+    break;
+  case N2InformationClass_anyOf::eN2InformationClass_anyOf::PWS:
+    j = "PWS";
+    break;
+  case N2InformationClass_anyOf::eN2InformationClass_anyOf::PWS_BCAL:
+    j = "PWS-BCAL";
+    break;
+  case N2InformationClass_anyOf::eN2InformationClass_anyOf::PWS_RF:
+    j = "PWS-RF";
+    break;
+  case N2InformationClass_anyOf::eN2InformationClass_anyOf::RAN:
+    j = "RAN";
+    break;
+  case N2InformationClass_anyOf::eN2InformationClass_anyOf::V2X:
+    j = "V2X";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, N2InformationClass_anyOf& o) {
+void from_json(const nlohmann::json &j, N2InformationClass_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "SM") {
     o.setValue(N2InformationClass_anyOf::eN2InformationClass_anyOf::SM);
@@ -124,4 +124,4 @@ void N2InformationClass_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

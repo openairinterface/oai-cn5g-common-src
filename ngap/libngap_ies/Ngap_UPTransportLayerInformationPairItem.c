@@ -12,9 +12,8 @@
 asn_TYPE_member_t asn_MBR_Ngap_UPTransportLayerInformationPairItem_1[] = {
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_UPTransportLayerInformationPairItem,
-         uL_NGU_UP_TNLInformation),
+     offsetof(struct Ngap_UPTransportLayerInformationPairItem,
+              uL_NGU_UP_TNLInformation),
      (ASN_TAG_CLASS_CONTEXT | (0 << 2)),
      +1, /* EXPLICIT tag at current level */
      &asn_DEF_Ngap_UPTransportLayerInformation,
@@ -33,9 +32,8 @@ asn_TYPE_member_t asn_MBR_Ngap_UPTransportLayerInformationPairItem_1[] = {
      "uL-NGU-UP-TNLInformation"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_UPTransportLayerInformationPairItem,
-         dL_NGU_UP_TNLInformation),
+     offsetof(struct Ngap_UPTransportLayerInformationPairItem,
+              dL_NGU_UP_TNLInformation),
      (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
      +1, /* EXPLICIT tag at current level */
      &asn_DEF_Ngap_UPTransportLayerInformation,

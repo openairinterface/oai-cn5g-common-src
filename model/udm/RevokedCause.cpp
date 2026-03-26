@@ -30,12 +30,12 @@ void RevokedCause::validate() const {
   }
 }
 
-bool RevokedCause::validate(std::stringstream& msg) const {
+bool RevokedCause::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool RevokedCause::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool RevokedCause::validate(std::stringstream &msg,
+                            const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "RevokedCause" : pathPrefix;
@@ -43,18 +43,14 @@ bool RevokedCause::validate(
   return success;
 }
 
-bool RevokedCause::operator==(const RevokedCause& rhs) const {
-  return true;
-}
+bool RevokedCause::operator==(const RevokedCause &rhs) const { return true; }
 
-bool RevokedCause::operator!=(const RevokedCause& rhs) const {
+bool RevokedCause::operator!=(const RevokedCause &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const RevokedCause& o) {
-  j = nlohmann::json();
-}
+void to_json(nlohmann::json &j, const RevokedCause &o) { j = nlohmann::json(); }
 
-void from_json(const nlohmann::json& j, RevokedCause& o) {}
+void from_json(const nlohmann::json &j, RevokedCause &o) {}
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

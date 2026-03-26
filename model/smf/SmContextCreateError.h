@@ -21,8 +21,8 @@
 
 #include "ProblemDetails.h"
 #include "RefToBinaryData.h"
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::smf {
 
@@ -30,7 +30,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class SmContextCreateError {
- public:
+public:
   SmContextCreateError();
   virtual ~SmContextCreateError();
 
@@ -43,26 +43,26 @@ class SmContextCreateError {
   ///
   /// </summary>
   oai::model::common::ProblemDetails getError() const;
-  void setError(oai::model::common::ProblemDetails const& value);
+  void setError(oai::model::common::ProblemDetails const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::RefToBinaryData getN1SmMsg() const;
-  void setN1SmMsg(oai::model::common::RefToBinaryData const& value);
+  void setN1SmMsg(oai::model::common::RefToBinaryData const &value);
   bool n1SmMsgIsSet() const;
   void unsetN1SmMsg();
   /// <summary>
   ///
   /// </summary>
   std::string getRecoveryTime() const;
-  void setRecoveryTime(std::string const& value);
+  void setRecoveryTime(std::string const &value);
   bool recoveryTimeIsSet() const;
   void unsetRecoveryTime();
 
-  friend void to_json(nlohmann::json& j, const SmContextCreateError& o);
-  friend void from_json(const nlohmann::json& j, SmContextCreateError& o);
+  friend void to_json(nlohmann::json &j, const SmContextCreateError &o);
+  friend void from_json(const nlohmann::json &j, SmContextCreateError &o);
 
- protected:
+protected:
   oai::model::common::ProblemDetails m_Error;
 
   oai::model::common::RefToBinaryData m_N1SmMsg;
@@ -71,6 +71,6 @@ class SmContextCreateError {
   bool m_RecoveryTimeIsSet;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* SmContextCreateError_H_ */

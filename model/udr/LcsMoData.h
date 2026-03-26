@@ -33,7 +33,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class LcsMoData {
- public:
+public:
   LcsMoData();
   virtual ~LcsMoData();
 
@@ -45,16 +45,16 @@ class LcsMoData {
   /// <summary>
   ///
   /// </summary>
-  std::vector<LcsMoServiceClass>& getAllowedServiceClasses();
-  void setAllowedServiceClasses(std::vector<LcsMoServiceClass> const& value);
+  std::vector<LcsMoServiceClass> &getAllowedServiceClasses();
+  void setAllowedServiceClasses(std::vector<LcsMoServiceClass> const &value);
 
-  friend void to_json(nlohmann::json& j, const LcsMoData& o);
-  friend void from_json(const nlohmann::json& j, LcsMoData& o);
+  friend void to_json(nlohmann::json &j, const LcsMoData &o);
+  friend void from_json(const nlohmann::json &j, LcsMoData &o);
 
- protected:
+protected:
   std::vector<LcsMoServiceClass> m_AllowedServiceClasses;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* LcsMoData_H_ */

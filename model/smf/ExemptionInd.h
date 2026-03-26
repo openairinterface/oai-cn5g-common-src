@@ -27,7 +27,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class ExemptionInd {
- public:
+public:
   ExemptionInd();
   virtual ~ExemptionInd();
 
@@ -58,10 +58,10 @@ class ExemptionInd {
   bool snssaiDnnCongestionIsSet() const;
   void unsetSnssaiDnnCongestion();
 
-  friend void to_json(nlohmann::json& j, const ExemptionInd& o);
-  friend void from_json(const nlohmann::json& j, ExemptionInd& o);
+  friend void to_json(nlohmann::json &j, const ExemptionInd &o);
+  friend void from_json(const nlohmann::json &j, ExemptionInd &o);
 
- protected:
+protected:
   bool m_DnnCongestion;
   bool m_DnnCongestionIsSet;
   bool m_SnssaiOnlyCongestion;
@@ -70,6 +70,6 @@ class ExemptionInd {
   bool m_SnssaiDnnCongestionIsSet;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* ExemptionInd_H_ */

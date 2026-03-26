@@ -26,7 +26,7 @@ struct Ngap_ProtocolExtensionContainer;
 typedef struct Ngap_COUNTValueForPDCP_SN12 {
   long pDCP_SN12;
   long hFN_PDCP_SN12;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

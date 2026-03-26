@@ -17,9 +17,7 @@ namespace oai::model::smf {
 
 using namespace oai::model::common;
 
-HsmfUpdatedData::HsmfUpdatedData() {
-  m_N1SmInfoToUeIsSet = false;
-}
+HsmfUpdatedData::HsmfUpdatedData() { m_N1SmInfoToUeIsSet = false; }
 
 HsmfUpdatedData::~HsmfUpdatedData() {}
 
@@ -27,12 +25,13 @@ void HsmfUpdatedData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const HsmfUpdatedData& o) {
+void to_json(nlohmann::json &j, const HsmfUpdatedData &o) {
   j = nlohmann::json();
-  if (o.n1SmInfoToUeIsSet()) j["n1SmInfoToUe"] = o.m_N1SmInfoToUe;
+  if (o.n1SmInfoToUeIsSet())
+    j["n1SmInfoToUe"] = o.m_N1SmInfoToUe;
 }
 
-void from_json(const nlohmann::json& j, HsmfUpdatedData& o) {
+void from_json(const nlohmann::json &j, HsmfUpdatedData &o) {
   if (j.find("n1SmInfoToUe") != j.end()) {
     j.at("n1SmInfoToUe").get_to(o.m_N1SmInfoToUe);
     o.m_N1SmInfoToUeIsSet = true;
@@ -42,15 +41,11 @@ void from_json(const nlohmann::json& j, HsmfUpdatedData& o) {
 RefToBinaryData HsmfUpdatedData::getN1SmInfoToUe() const {
   return m_N1SmInfoToUe;
 }
-void HsmfUpdatedData::setN1SmInfoToUe(RefToBinaryData const& value) {
-  m_N1SmInfoToUe      = value;
+void HsmfUpdatedData::setN1SmInfoToUe(RefToBinaryData const &value) {
+  m_N1SmInfoToUe = value;
   m_N1SmInfoToUeIsSet = true;
 }
-bool HsmfUpdatedData::n1SmInfoToUeIsSet() const {
-  return m_N1SmInfoToUeIsSet;
-}
-void HsmfUpdatedData::unsetN1SmInfoToUe() {
-  m_N1SmInfoToUeIsSet = false;
-}
+bool HsmfUpdatedData::n1SmInfoToUeIsSet() const { return m_N1SmInfoToUeIsSet; }
+void HsmfUpdatedData::unsetN1SmInfoToUe() { m_N1SmInfoToUeIsSet = false; }
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

@@ -19,8 +19,8 @@
 #ifndef PointUncertaintyCircle_H_
 #define PointUncertaintyCircle_H_
 
-#include "GeographicalCoordinates.h"
 #include "GADShape.h"
+#include "GeographicalCoordinates.h"
 #include "SupportedGADShapes.h"
 #include <nlohmann/json.hpp>
 
@@ -30,7 +30,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class PointUncertaintyCircle {
- public:
+public:
   PointUncertaintyCircle();
   virtual ~PointUncertaintyCircle() = default;
 
@@ -44,16 +44,16 @@ class PointUncertaintyCircle {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const PointUncertaintyCircle& rhs) const;
-  bool operator!=(const PointUncertaintyCircle& rhs) const;
+  bool operator==(const PointUncertaintyCircle &rhs) const;
+  bool operator!=(const PointUncertaintyCircle &rhs) const;
 
   /////////////////////////////////////////////
   /// PointUncertaintyCircle members
@@ -62,22 +62,22 @@ class PointUncertaintyCircle {
   ///
   /// </summary>
   oai::model::lmf::SupportedGADShapes getShape() const;
-  void setShape(oai::model::lmf::SupportedGADShapes const& value);
+  void setShape(oai::model::lmf::SupportedGADShapes const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::lmf::GeographicalCoordinates getPoint() const;
-  void setPoint(oai::model::lmf::GeographicalCoordinates const& value);
+  void setPoint(oai::model::lmf::GeographicalCoordinates const &value);
   /// <summary>
   ///
   /// </summary>
   float getUncertainty() const;
   void setUncertainty(float const value);
 
-  friend void to_json(nlohmann::json& j, const PointUncertaintyCircle& o);
-  friend void from_json(const nlohmann::json& j, PointUncertaintyCircle& o);
+  friend void to_json(nlohmann::json &j, const PointUncertaintyCircle &o);
+  friend void from_json(const nlohmann::json &j, PointUncertaintyCircle &o);
 
- protected:
+protected:
   oai::model::lmf::SupportedGADShapes m_Shape;
 
   oai::model::lmf::GeographicalCoordinates m_Point;
@@ -85,6 +85,6 @@ class PointUncertaintyCircle {
   float m_Uncertainty;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* PointUncertaintyCircle_H_ */

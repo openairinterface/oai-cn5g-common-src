@@ -16,21 +16,21 @@ extern "C" {
 namespace oai::ngap {
 
 class AssociatedQosFlowList {
- public:
+public:
   AssociatedQosFlowList();
   virtual ~AssociatedQosFlowList();
 
-  void set(const std::vector<AssociatedQosFlowItem>& item_list);
-  void get(std::vector<AssociatedQosFlowItem>& item_list) const;
+  void set(const std::vector<AssociatedQosFlowItem> &item_list);
+  void get(std::vector<AssociatedQosFlowItem> &item_list) const;
 
-  bool encode(Ngap_AssociatedQosFlowList_t& associatedQosFlowList) const;
-  bool decode(const Ngap_AssociatedQosFlowList_t& associatedQosFlowList);
+  bool encode(Ngap_AssociatedQosFlowList_t &associatedQosFlowList) const;
+  bool decode(const Ngap_AssociatedQosFlowList_t &associatedQosFlowList);
 
- private:
+private:
   std::vector<AssociatedQosFlowItem> m_List;
   constexpr static uint8_t kMaxNoOfQoSFlows = 64;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

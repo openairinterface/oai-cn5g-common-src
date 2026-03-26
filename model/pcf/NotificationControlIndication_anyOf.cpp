@@ -13,8 +13,8 @@
 
 #include "NotificationControlIndication_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::pcf {
 
@@ -28,12 +28,12 @@ void NotificationControlIndication_anyOf::validate() const {
 }
 
 bool NotificationControlIndication_anyOf::validate(
-    std::stringstream& msg) const {
+    std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool NotificationControlIndication_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "NotificationControlIndication_anyOf" : pathPrefix;
@@ -49,38 +49,38 @@ bool NotificationControlIndication_anyOf::validate(
 }
 
 bool NotificationControlIndication_anyOf::operator==(
-    const NotificationControlIndication_anyOf& rhs) const {
+    const NotificationControlIndication_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool NotificationControlIndication_anyOf::operator!=(
-    const NotificationControlIndication_anyOf& rhs) const {
+    const NotificationControlIndication_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const NotificationControlIndication_anyOf& o) {
+void to_json(nlohmann::json &j, const NotificationControlIndication_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case NotificationControlIndication_anyOf::
-        eNotificationControlIndication_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case NotificationControlIndication_anyOf::
-        eNotificationControlIndication_anyOf::DDN_FAILURE:
-      j = "DDN_FAILURE";
-      break;
-    case NotificationControlIndication_anyOf::
-        eNotificationControlIndication_anyOf::DDD_STATUS:
-      j = "DDD_STATUS";
-      break;
+  case NotificationControlIndication_anyOf::
+      eNotificationControlIndication_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case NotificationControlIndication_anyOf::
+      eNotificationControlIndication_anyOf::DDN_FAILURE:
+    j = "DDN_FAILURE";
+    break;
+  case NotificationControlIndication_anyOf::
+      eNotificationControlIndication_anyOf::DDD_STATUS:
+    j = "DDD_STATUS";
+    break;
   }
 }
 
-void from_json(
-    const nlohmann::json& j, NotificationControlIndication_anyOf& o) {
+void from_json(const nlohmann::json &j,
+               NotificationControlIndication_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "DDN_FAILURE") {
     o.setValue(NotificationControlIndication_anyOf::
@@ -108,4 +108,4 @@ void NotificationControlIndication_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

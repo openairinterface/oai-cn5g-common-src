@@ -34,19 +34,19 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_ImmediateMDTNr */
 typedef struct Ngap_ImmediateMDTNr {
   Ngap_MeasurementsToActivate_t measurementsToActivate;
-  struct Ngap_M1Configuration* m1Configuration; /* OPTIONAL */
-  struct Ngap_M4Configuration* m4Configuration; /* OPTIONAL */
-  struct Ngap_M5Configuration* m5Configuration; /* OPTIONAL */
-  struct Ngap_M6Configuration* m6Configuration; /* OPTIONAL */
-  struct Ngap_M7Configuration* m7Configuration; /* OPTIONAL */
-  struct Ngap_BluetoothMeasurementConfiguration*
-      bluetoothMeasurementConfiguration; /* OPTIONAL */
-  struct Ngap_WLANMeasurementConfiguration*
-      wLANMeasurementConfiguration;                 /* OPTIONAL */
-  struct Ngap_MDT_Location_Info* mDT_Location_Info; /* OPTIONAL */
-  struct Ngap_SensorMeasurementConfiguration*
-      sensorMeasurementConfiguration;                    /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_M1Configuration *m1Configuration; /* OPTIONAL */
+  struct Ngap_M4Configuration *m4Configuration; /* OPTIONAL */
+  struct Ngap_M5Configuration *m5Configuration; /* OPTIONAL */
+  struct Ngap_M6Configuration *m6Configuration; /* OPTIONAL */
+  struct Ngap_M7Configuration *m7Configuration; /* OPTIONAL */
+  struct Ngap_BluetoothMeasurementConfiguration
+      *bluetoothMeasurementConfiguration; /* OPTIONAL */
+  struct Ngap_WLANMeasurementConfiguration
+      *wLANMeasurementConfiguration;                /* OPTIONAL */
+  struct Ngap_MDT_Location_Info *mDT_Location_Info; /* OPTIONAL */
+  struct Ngap_SensorMeasurementConfiguration
+      *sensorMeasurementConfiguration;                   /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

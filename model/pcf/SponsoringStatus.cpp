@@ -27,12 +27,12 @@ void SponsoringStatus::validate() const {
   }
 }
 
-bool SponsoringStatus::validate(std::stringstream& msg) const {
+bool SponsoringStatus::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool SponsoringStatus::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool SponsoringStatus::validate(std::stringstream &msg,
+                                const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "SponsoringStatus" : pathPrefix;
@@ -40,18 +40,18 @@ bool SponsoringStatus::validate(
   return success;
 }
 
-bool SponsoringStatus::operator==(const SponsoringStatus& rhs) const {
-  return true;  // TODO
+bool SponsoringStatus::operator==(const SponsoringStatus &rhs) const {
+  return true; // TODO
 }
 
-bool SponsoringStatus::operator!=(const SponsoringStatus& rhs) const {
+bool SponsoringStatus::operator!=(const SponsoringStatus &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const SponsoringStatus& o) {
+void to_json(nlohmann::json &j, const SponsoringStatus &o) {
   j = nlohmann::json::object();
 }
 
-void from_json(const nlohmann::json& j, SponsoringStatus& o) {}
+void from_json(const nlohmann::json &j, SponsoringStatus &o) {}
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

@@ -19,15 +19,15 @@
 namespace oai::model::pcf {
 
 SmPolicyDeleteData::SmPolicyDeleteData() {
-  m_UserLocationInfoIsSet     = false;
-  m_UeTimeZone                = "";
-  m_UeTimeZoneIsSet           = false;
-  m_ServingNetworkIsSet       = false;
-  m_UserLocationInfoTime      = "";
+  m_UserLocationInfoIsSet = false;
+  m_UeTimeZone = "";
+  m_UeTimeZoneIsSet = false;
+  m_ServingNetworkIsSet = false;
+  m_UserLocationInfoTime = "";
   m_UserLocationInfoTimeIsSet = false;
-  m_RanNasRelCausesIsSet      = false;
-  m_AccuUsageReportsIsSet     = false;
-  m_PduSessRelCauseIsSet      = false;
+  m_RanNasRelCausesIsSet = false;
+  m_AccuUsageReportsIsSet = false;
+  m_PduSessRelCauseIsSet = false;
 }
 
 void SmPolicyDeleteData::validate() const {
@@ -37,18 +37,18 @@ void SmPolicyDeleteData::validate() const {
   }
 }
 
-bool SmPolicyDeleteData::validate(std::stringstream& msg) const {
+bool SmPolicyDeleteData::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool SmPolicyDeleteData::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool SmPolicyDeleteData::validate(std::stringstream &msg,
+                                  const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "SmPolicyDeleteData" : pathPrefix;
 
   if (ranNasRelCausesIsSet()) {
-    const std::vector<oai::model::pcf::RanNasRelCause>& value =
+    const std::vector<oai::model::pcf::RanNasRelCause> &value =
         m_RanNasRelCauses;
     const std::string currentValuePath = _pathPrefix + ".ranNasRelCauses";
 
@@ -56,10 +56,10 @@ bool SmPolicyDeleteData::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::RanNasRelCause& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::RanNasRelCause &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -72,7 +72,7 @@ bool SmPolicyDeleteData::validate(
   }
 
   if (accuUsageReportsIsSet()) {
-    const std::vector<oai::model::pcf::AccuUsageReport>& value =
+    const std::vector<oai::model::pcf::AccuUsageReport> &value =
         m_AccuUsageReports;
     const std::string currentValuePath = _pathPrefix + ".accuUsageReports";
 
@@ -80,10 +80,10 @@ bool SmPolicyDeleteData::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::AccuUsageReport& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::AccuUsageReport &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -98,7 +98,7 @@ bool SmPolicyDeleteData::validate(
   return success;
 }
 
-bool SmPolicyDeleteData::operator==(const SmPolicyDeleteData& rhs) const {
+bool SmPolicyDeleteData::operator==(const SmPolicyDeleteData &rhs) const {
   return
 
       ((!userLocationInfoIsSet() && !rhs.userLocationInfoIsSet()) ||
@@ -132,25 +132,29 @@ bool SmPolicyDeleteData::operator==(const SmPolicyDeleteData& rhs) const {
           ;
 }
 
-bool SmPolicyDeleteData::operator!=(const SmPolicyDeleteData& rhs) const {
+bool SmPolicyDeleteData::operator!=(const SmPolicyDeleteData &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const SmPolicyDeleteData& o) {
+void to_json(nlohmann::json &j, const SmPolicyDeleteData &o) {
   j = nlohmann::json();
-  if (o.userLocationInfoIsSet()) j["userLocationInfo"] = o.m_UserLocationInfo;
-  if (o.ueTimeZoneIsSet()) j["ueTimeZone"] = o.m_UeTimeZone;
-  if (o.servingNetworkIsSet()) j["servingNetwork"] = o.m_ServingNetwork;
+  if (o.userLocationInfoIsSet())
+    j["userLocationInfo"] = o.m_UserLocationInfo;
+  if (o.ueTimeZoneIsSet())
+    j["ueTimeZone"] = o.m_UeTimeZone;
+  if (o.servingNetworkIsSet())
+    j["servingNetwork"] = o.m_ServingNetwork;
   if (o.userLocationInfoTimeIsSet())
     j["userLocationInfoTime"] = o.m_UserLocationInfoTime;
   if (o.ranNasRelCausesIsSet() || !o.m_RanNasRelCauses.empty())
     j["ranNasRelCauses"] = o.m_RanNasRelCauses;
   if (o.accuUsageReportsIsSet() || !o.m_AccuUsageReports.empty())
     j["accuUsageReports"] = o.m_AccuUsageReports;
-  if (o.pduSessRelCauseIsSet()) j["pduSessRelCause"] = o.m_PduSessRelCause;
+  if (o.pduSessRelCauseIsSet())
+    j["pduSessRelCause"] = o.m_PduSessRelCause;
 }
 
-void from_json(const nlohmann::json& j, SmPolicyDeleteData& o) {
+void from_json(const nlohmann::json &j, SmPolicyDeleteData &o) {
   if (j.find("userLocationInfo") != j.end()) {
     j.at("userLocationInfo").get_to(o.m_UserLocationInfo);
     o.m_UserLocationInfoIsSet = true;
@@ -181,13 +185,13 @@ void from_json(const nlohmann::json& j, SmPolicyDeleteData& o) {
   }
 }
 
-oai::model::common::UserLocation SmPolicyDeleteData::getUserLocationInfo()
-    const {
+oai::model::common::UserLocation
+SmPolicyDeleteData::getUserLocationInfo() const {
   return m_UserLocationInfo;
 }
 void SmPolicyDeleteData::setUserLocationInfo(
-    oai::model::common::UserLocation const& value) {
-  m_UserLocationInfo      = value;
+    oai::model::common::UserLocation const &value) {
+  m_UserLocationInfo = value;
   m_UserLocationInfoIsSet = true;
 }
 bool SmPolicyDeleteData::userLocationInfoIsSet() const {
@@ -196,25 +200,19 @@ bool SmPolicyDeleteData::userLocationInfoIsSet() const {
 void SmPolicyDeleteData::unsetUserLocationInfo() {
   m_UserLocationInfoIsSet = false;
 }
-std::string SmPolicyDeleteData::getUeTimeZone() const {
-  return m_UeTimeZone;
-}
-void SmPolicyDeleteData::setUeTimeZone(std::string const& value) {
-  m_UeTimeZone      = value;
+std::string SmPolicyDeleteData::getUeTimeZone() const { return m_UeTimeZone; }
+void SmPolicyDeleteData::setUeTimeZone(std::string const &value) {
+  m_UeTimeZone = value;
   m_UeTimeZoneIsSet = true;
 }
-bool SmPolicyDeleteData::ueTimeZoneIsSet() const {
-  return m_UeTimeZoneIsSet;
-}
-void SmPolicyDeleteData::unsetUeTimeZone() {
-  m_UeTimeZoneIsSet = false;
-}
+bool SmPolicyDeleteData::ueTimeZoneIsSet() const { return m_UeTimeZoneIsSet; }
+void SmPolicyDeleteData::unsetUeTimeZone() { m_UeTimeZoneIsSet = false; }
 oai::model::common::PlmnIdNid SmPolicyDeleteData::getServingNetwork() const {
   return m_ServingNetwork;
 }
 void SmPolicyDeleteData::setServingNetwork(
-    oai::model::common::PlmnIdNid const& value) {
-  m_ServingNetwork      = value;
+    oai::model::common::PlmnIdNid const &value) {
+  m_ServingNetwork = value;
   m_ServingNetworkIsSet = true;
 }
 bool SmPolicyDeleteData::servingNetworkIsSet() const {
@@ -226,8 +224,8 @@ void SmPolicyDeleteData::unsetServingNetwork() {
 std::string SmPolicyDeleteData::getUserLocationInfoTime() const {
   return m_UserLocationInfoTime;
 }
-void SmPolicyDeleteData::setUserLocationInfoTime(std::string const& value) {
-  m_UserLocationInfoTime      = value;
+void SmPolicyDeleteData::setUserLocationInfoTime(std::string const &value) {
+  m_UserLocationInfoTime = value;
   m_UserLocationInfoTimeIsSet = true;
 }
 bool SmPolicyDeleteData::userLocationInfoTimeIsSet() const {
@@ -241,8 +239,8 @@ SmPolicyDeleteData::getRanNasRelCauses() const {
   return m_RanNasRelCauses;
 }
 void SmPolicyDeleteData::setRanNasRelCauses(
-    std::vector<oai::model::pcf::RanNasRelCause> const& value) {
-  m_RanNasRelCauses      = value;
+    std::vector<oai::model::pcf::RanNasRelCause> const &value) {
+  m_RanNasRelCauses = value;
   m_RanNasRelCausesIsSet = true;
 }
 bool SmPolicyDeleteData::ranNasRelCausesIsSet() const {
@@ -256,8 +254,8 @@ SmPolicyDeleteData::getAccuUsageReports() const {
   return m_AccuUsageReports;
 }
 void SmPolicyDeleteData::setAccuUsageReports(
-    std::vector<oai::model::pcf::AccuUsageReport> const& value) {
-  m_AccuUsageReports      = value;
+    std::vector<oai::model::pcf::AccuUsageReport> const &value) {
+  m_AccuUsageReports = value;
   m_AccuUsageReportsIsSet = true;
 }
 bool SmPolicyDeleteData::accuUsageReportsIsSet() const {
@@ -266,13 +264,13 @@ bool SmPolicyDeleteData::accuUsageReportsIsSet() const {
 void SmPolicyDeleteData::unsetAccuUsageReports() {
   m_AccuUsageReportsIsSet = false;
 }
-oai::model::pcf::PduSessionRelCause SmPolicyDeleteData::getPduSessRelCause()
-    const {
+oai::model::pcf::PduSessionRelCause
+SmPolicyDeleteData::getPduSessRelCause() const {
   return m_PduSessRelCause;
 }
 void SmPolicyDeleteData::setPduSessRelCause(
-    oai::model::pcf::PduSessionRelCause const& value) {
-  m_PduSessRelCause      = value;
+    oai::model::pcf::PduSessionRelCause const &value) {
+  m_PduSessRelCause = value;
   m_PduSessRelCauseIsSet = true;
 }
 bool SmPolicyDeleteData::pduSessRelCauseIsSet() const {
@@ -282,4 +280,4 @@ void SmPolicyDeleteData::unsetPduSessRelCause() {
   m_PduSessRelCauseIsSet = false;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

@@ -13,15 +13,15 @@ constexpr auto kNetworkSlicingIndicationIeName = "Network Slicing Indication";
 namespace oai::nas {
 
 class NetworkSlicingIndication : public Type1NasIeFormatTv {
- public:
+public:
   NetworkSlicingIndication();
   NetworkSlicingIndication(uint8_t iei);
   NetworkSlicingIndication(uint8_t iei, bool dcni, bool nssci);
   NetworkSlicingIndication(bool dcni, bool nssci);
   virtual ~NetworkSlicingIndication();
 
-  int Encode(uint8_t* buf, int len) const override;
-  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+  int Encode(uint8_t *buf, int len) const override;
+  int Decode(const uint8_t *const buf, int len, bool is_iei = false) override;
 
   static std::string GetIeName() { return kNetworkSlicingIndicationIeName; }
 
@@ -34,10 +34,10 @@ class NetworkSlicingIndication : public Type1NasIeFormatTv {
   void SetNssci(bool value);
   bool GetNssci() const;
 
- private:
+private:
   bool dcni_;
   bool nssci_;
 };
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

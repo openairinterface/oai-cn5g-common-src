@@ -13,8 +13,8 @@
 
 #include "RedirectAddressType_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::pcf {
 
@@ -27,12 +27,12 @@ void RedirectAddressType_anyOf::validate() const {
   }
 }
 
-bool RedirectAddressType_anyOf::validate(std::stringstream& msg) const {
+bool RedirectAddressType_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool RedirectAddressType_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool RedirectAddressType_anyOf::validate(std::stringstream &msg,
+                                         const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "RedirectAddressType_anyOf" : pathPrefix;
@@ -47,41 +47,41 @@ bool RedirectAddressType_anyOf::validate(
 }
 
 bool RedirectAddressType_anyOf::operator==(
-    const RedirectAddressType_anyOf& rhs) const {
+    const RedirectAddressType_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool RedirectAddressType_anyOf::operator!=(
-    const RedirectAddressType_anyOf& rhs) const {
+    const RedirectAddressType_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const RedirectAddressType_anyOf& o) {
+void to_json(nlohmann::json &j, const RedirectAddressType_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case RedirectAddressType_anyOf::eRedirectAddressType_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case RedirectAddressType_anyOf::eRedirectAddressType_anyOf::IPV4_ADDR:
-      j = "IPV4_ADDR";
-      break;
-    case RedirectAddressType_anyOf::eRedirectAddressType_anyOf::IPV6_ADDR:
-      j = "IPV6_ADDR";
-      break;
-    case RedirectAddressType_anyOf::eRedirectAddressType_anyOf::URL:
-      j = "URL";
-      break;
-    case RedirectAddressType_anyOf::eRedirectAddressType_anyOf::SIP_URI:
-      j = "SIP_URI";
-      break;
+  case RedirectAddressType_anyOf::eRedirectAddressType_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case RedirectAddressType_anyOf::eRedirectAddressType_anyOf::IPV4_ADDR:
+    j = "IPV4_ADDR";
+    break;
+  case RedirectAddressType_anyOf::eRedirectAddressType_anyOf::IPV6_ADDR:
+    j = "IPV6_ADDR";
+    break;
+  case RedirectAddressType_anyOf::eRedirectAddressType_anyOf::URL:
+    j = "URL";
+    break;
+  case RedirectAddressType_anyOf::eRedirectAddressType_anyOf::SIP_URI:
+    j = "SIP_URI";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, RedirectAddressType_anyOf& o) {
+void from_json(const nlohmann::json &j, RedirectAddressType_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "IPV4_ADDR") {
     o.setValue(
@@ -111,4 +111,4 @@ void RedirectAddressType_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

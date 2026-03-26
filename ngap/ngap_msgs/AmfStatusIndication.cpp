@@ -27,18 +27,18 @@ void AmfStatusIndication::initialize() {
 
 //------------------------------------------------------------------------------
 void AmfStatusIndication::setUnavailableGuamiList(
-    const UnavailableGuamiList& list) {
+    const UnavailableGuamiList &list) {
   m_UnavailableGuamiList = list;
 }
 
 //------------------------------------------------------------------------------
 void AmfStatusIndication::getUnavailableGuamiList(
-    UnavailableGuamiList& list) const {
+    UnavailableGuamiList &list) const {
   list = m_UnavailableGuamiList;
 }
 
 //------------------------------------------------------------------------------
-bool AmfStatusIndication::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
+bool AmfStatusIndication::decode(Ngap_NGAP_PDU_t *ngapMsgPdu) {
   ngapPdu = ngapMsgPdu;
 
   if (ngapPdu->present == Ngap_NGAP_PDU_PR_initiatingMessage) {
@@ -64,34 +64,33 @@ bool AmfStatusIndication::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
 
   for (int i = 0; i < m_AmfStatusIndicationIEs->protocolIEs.list.count; i++) {
     switch (m_AmfStatusIndicationIEs->protocolIEs.list.array[i]->id) {
-      case Ngap_ProtocolIE_ID_id_UnavailableGUAMIList: {
-        if (m_AmfStatusIndicationIEs->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_reject &&
-            m_AmfStatusIndicationIEs->protocolIEs.list.array[i]
-                    ->value.present ==
-                Ngap_AMFStatusIndicationIEs__value_PR_UnavailableGUAMIList) {
-          if (!m_UnavailableGuamiList.decode(
-                  m_AmfStatusIndicationIEs->protocolIEs.list.array[i]
-                      ->value.choice.UnavailableGUAMIList)) {
-            oai::logger::logger_common::ngap().error(
-                "Decoded NGAP UnavailableGUAMIList error");
-            return false;
-          }
-        } else {
+    case Ngap_ProtocolIE_ID_id_UnavailableGUAMIList: {
+      if (m_AmfStatusIndicationIEs->protocolIEs.list.array[i]->criticality ==
+              Ngap_Criticality_reject &&
+          m_AmfStatusIndicationIEs->protocolIEs.list.array[i]->value.present ==
+              Ngap_AMFStatusIndicationIEs__value_PR_UnavailableGUAMIList) {
+        if (!m_UnavailableGuamiList.decode(
+                m_AmfStatusIndicationIEs->protocolIEs.list.array[i]
+                    ->value.choice.UnavailableGUAMIList)) {
           oai::logger::logger_common::ngap().error(
               "Decoded NGAP UnavailableGUAMIList error");
           return false;
         }
-      } break;
-      default: {
+      } else {
         oai::logger::logger_common::ngap().error(
-            "Decoded NGAP Message PDU error");
+            "Decoded NGAP UnavailableGUAMIList error");
         return false;
       }
+    } break;
+    default: {
+      oai::logger::logger_common::ngap().error(
+          "Decoded NGAP Message PDU error");
+      return false;
+    }
     }
   }
 
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

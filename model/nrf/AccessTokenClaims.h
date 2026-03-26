@@ -41,33 +41,33 @@ typedef struct audience_s {
 
   audience_s(uint8_t t) : type(t) { nf_type = 0; };
 
-  audience_s(const audience_s& a) : audience_s() {
+  audience_s(const audience_s &a) : audience_s() {
     type = a.type;
     switch (a.type) {
-      case 0:
-        nf_type = a.nf_type;
-        break;
-      case 1:
-        nf_instances = a.nf_instances;
-        break;
-      default:
-        break;
+    case 0:
+      nf_type = a.nf_type;
+      break;
+    case 1:
+      nf_instances = a.nf_instances;
+      break;
+    default:
+      break;
     }
   }
 
-  audience_s& operator=(const audience_s& a) {
+  audience_s &operator=(const audience_s &a) {
     type = a.type;
     switch (a.type) {
-      case 0: {
-        nf_type = a.nf_type;
-      } break;
+    case 0: {
+      nf_type = a.nf_type;
+    } break;
 
-      case 1: {
-        nf_instances = a.nf_instances;
-      } break;
-      default: {
-        // TODO:
-      }
+    case 1: {
+      nf_instances = a.nf_instances;
+    } break;
+    default: {
+      // TODO:
+    }
     }
     return *this;
     // TODO:
@@ -75,24 +75,24 @@ typedef struct audience_s {
 
   virtual ~audience_s(){};
 
-  friend void to_json(nlohmann::json& j, const audience_s& a) {
+  friend void to_json(nlohmann::json &j, const audience_s &a) {
     switch (a.type) {
-      case 0: {
-        j["nf_type"] = a.nf_type;
-      } break;
-      case 1: {
-        j["nf_instances"] = nlohmann::json::array();
-        for (auto i : a.nf_instances) {
-          j["nf_instances"].push_back(i);
-        }
-      } break;
-
-      default: {
+    case 0: {
+      j["nf_type"] = a.nf_type;
+    } break;
+    case 1: {
+      j["nf_instances"] = nlohmann::json::array();
+      for (auto i : a.nf_instances) {
+        j["nf_instances"].push_back(i);
       }
+    } break;
+
+    default: {
+    }
     }
   }
 
-  friend void from_json(const nlohmann::json& j, audience_s& a) {
+  friend void from_json(const nlohmann::json &j, audience_s &a) {
     if (j.find("nf_type") != j.end()) {
       j.at("nf_type").get_to(a.nf_type);
       a.type = 0;
@@ -107,7 +107,7 @@ typedef struct audience_s {
 } audience_t;
 
 class AccessTokenClaims {
- public:
+public:
   AccessTokenClaims();
   virtual ~AccessTokenClaims();
 
@@ -120,22 +120,22 @@ class AccessTokenClaims {
   ///
   /// </summary>
   std::string getIss() const;
-  void setIss(std::string const& value);
+  void setIss(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getSub() const;
-  void setSub(std::string const& value);
+  void setSub(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   audience_t getAud() const;
-  void setAud(audience_t const& value);
+  void setAud(audience_t const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getScope() const;
-  void setScope(std::string const& value);
+  void setScope(std::string const &value);
   /// <summary>
   ///
   /// </summary>
@@ -145,21 +145,21 @@ class AccessTokenClaims {
   ///
   /// </summary>
   oai::model::common::PlmnId getConsumerPlmnId() const;
-  void setConsumerPlmnId(common::PlmnId const& value);
+  void setConsumerPlmnId(common::PlmnId const &value);
   bool consumerPlmnIdIsSet() const;
   void unsetConsumerPlmnId();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::PlmnId getProducerPlmnId() const;
-  void setProducerPlmnId(common::PlmnId const& value);
+  void setProducerPlmnId(common::PlmnId const &value);
   bool producerPlmnIdIsSet() const;
   void unsetProducerPlmnId();
 
-  friend void to_json(nlohmann::json& j, const AccessTokenClaims& o);
-  friend void from_json(const nlohmann::json& j, AccessTokenClaims& o);
+  friend void to_json(nlohmann::json &j, const AccessTokenClaims &o);
+  friend void from_json(const nlohmann::json &j, AccessTokenClaims &o);
 
- protected:
+protected:
   std::string m_Iss;
 
   std::string m_Sub;
@@ -176,6 +176,6 @@ class AccessTokenClaims {
   bool m_ProducerPlmnIdIsSet;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* AccessTokenClaims_H_ */

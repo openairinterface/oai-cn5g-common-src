@@ -19,16 +19,16 @@
 namespace oai::udr::model {
 
 ProvisionedDataSets::ProvisionedDataSets() {
-  m_AmDataIsSet         = false;
-  m_SmfSelDataIsSet     = false;
-  m_SmsSubsDataIsSet    = false;
-  m_SmDataIsSet         = false;
-  m_TraceDataIsSet      = false;
-  m_SmsMngDataIsSet     = false;
+  m_AmDataIsSet = false;
+  m_SmfSelDataIsSet = false;
+  m_SmsSubsDataIsSet = false;
+  m_SmDataIsSet = false;
+  m_TraceDataIsSet = false;
+  m_SmsMngDataIsSet = false;
   m_LcsPrivacyDataIsSet = false;
-  m_LcsMoDataIsSet      = false;
-  m_LcsBcaDataIsSet     = false;
-  m_V2xDataIsSet        = false;
+  m_LcsMoDataIsSet = false;
+  m_LcsBcaDataIsSet = false;
+  m_V2xDataIsSet = false;
 }
 
 ProvisionedDataSets::~ProvisionedDataSets() {}
@@ -37,21 +37,31 @@ void ProvisionedDataSets::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const ProvisionedDataSets& o) {
+void to_json(nlohmann::json &j, const ProvisionedDataSets &o) {
   j = nlohmann::json();
-  if (o.amDataIsSet()) j["amData"] = o.m_AmData;
-  if (o.smfSelDataIsSet()) j["smfSelData"] = o.m_SmfSelData;
-  if (o.smsSubsDataIsSet()) j["smsSubsData"] = o.m_SmsSubsData;
-  if (o.smDataIsSet() || !o.m_SmData.empty()) j["smData"] = o.m_SmData;
-  if (o.traceDataIsSet()) j["traceData"] = o.m_TraceData;
-  if (o.smsMngDataIsSet()) j["smsMngData"] = o.m_SmsMngData;
-  if (o.lcsPrivacyDataIsSet()) j["lcsPrivacyData"] = o.m_LcsPrivacyData;
-  if (o.lcsMoDataIsSet()) j["lcsMoData"] = o.m_LcsMoData;
-  if (o.lcsBcaDataIsSet()) j["lcsBcaData"] = o.m_LcsBcaData;
-  if (o.v2xDataIsSet()) j["v2xData"] = o.m_V2xData;
+  if (o.amDataIsSet())
+    j["amData"] = o.m_AmData;
+  if (o.smfSelDataIsSet())
+    j["smfSelData"] = o.m_SmfSelData;
+  if (o.smsSubsDataIsSet())
+    j["smsSubsData"] = o.m_SmsSubsData;
+  if (o.smDataIsSet() || !o.m_SmData.empty())
+    j["smData"] = o.m_SmData;
+  if (o.traceDataIsSet())
+    j["traceData"] = o.m_TraceData;
+  if (o.smsMngDataIsSet())
+    j["smsMngData"] = o.m_SmsMngData;
+  if (o.lcsPrivacyDataIsSet())
+    j["lcsPrivacyData"] = o.m_LcsPrivacyData;
+  if (o.lcsMoDataIsSet())
+    j["lcsMoData"] = o.m_LcsMoData;
+  if (o.lcsBcaDataIsSet())
+    j["lcsBcaData"] = o.m_LcsBcaData;
+  if (o.v2xDataIsSet())
+    j["v2xData"] = o.m_V2xData;
 }
 
-void from_json(const nlohmann::json& j, ProvisionedDataSets& o) {
+void from_json(const nlohmann::json &j, ProvisionedDataSets &o) {
   if (j.find("amData") != j.end()) {
     j.at("amData").get_to(o.m_AmData);
     o.m_AmDataIsSet = true;
@@ -98,91 +108,69 @@ AccessAndMobilitySubscriptionData ProvisionedDataSets::getAmData() const {
   return m_AmData;
 }
 void ProvisionedDataSets::setAmData(
-    AccessAndMobilitySubscriptionData const& value) {
-  m_AmData      = value;
+    AccessAndMobilitySubscriptionData const &value) {
+  m_AmData = value;
   m_AmDataIsSet = true;
 }
-bool ProvisionedDataSets::amDataIsSet() const {
-  return m_AmDataIsSet;
-}
-void ProvisionedDataSets::unsetAmData() {
-  m_AmDataIsSet = false;
-}
+bool ProvisionedDataSets::amDataIsSet() const { return m_AmDataIsSet; }
+void ProvisionedDataSets::unsetAmData() { m_AmDataIsSet = false; }
 SmfSelectionSubscriptionData ProvisionedDataSets::getSmfSelData() const {
   return m_SmfSelData;
 }
 void ProvisionedDataSets::setSmfSelData(
-    SmfSelectionSubscriptionData const& value) {
-  m_SmfSelData      = value;
+    SmfSelectionSubscriptionData const &value) {
+  m_SmfSelData = value;
   m_SmfSelDataIsSet = true;
 }
-bool ProvisionedDataSets::smfSelDataIsSet() const {
-  return m_SmfSelDataIsSet;
-}
-void ProvisionedDataSets::unsetSmfSelData() {
-  m_SmfSelDataIsSet = false;
-}
+bool ProvisionedDataSets::smfSelDataIsSet() const { return m_SmfSelDataIsSet; }
+void ProvisionedDataSets::unsetSmfSelData() { m_SmfSelDataIsSet = false; }
 SmsSubscriptionData ProvisionedDataSets::getSmsSubsData() const {
   return m_SmsSubsData;
 }
-void ProvisionedDataSets::setSmsSubsData(SmsSubscriptionData const& value) {
-  m_SmsSubsData      = value;
+void ProvisionedDataSets::setSmsSubsData(SmsSubscriptionData const &value) {
+  m_SmsSubsData = value;
   m_SmsSubsDataIsSet = true;
 }
 bool ProvisionedDataSets::smsSubsDataIsSet() const {
   return m_SmsSubsDataIsSet;
 }
-void ProvisionedDataSets::unsetSmsSubsData() {
-  m_SmsSubsDataIsSet = false;
-}
-std::vector<SessionManagementSubscriptionData>&
+void ProvisionedDataSets::unsetSmsSubsData() { m_SmsSubsDataIsSet = false; }
+std::vector<SessionManagementSubscriptionData> &
 ProvisionedDataSets::getSmData() {
   return m_SmData;
 }
 void ProvisionedDataSets::setSmData(
-    std::vector<SessionManagementSubscriptionData> const& value) {
-  m_SmData      = value;
+    std::vector<SessionManagementSubscriptionData> const &value) {
+  m_SmData = value;
   m_SmDataIsSet = true;
 }
-bool ProvisionedDataSets::smDataIsSet() const {
-  return m_SmDataIsSet;
-}
-void ProvisionedDataSets::unsetSmData() {
-  m_SmDataIsSet = false;
-}
+bool ProvisionedDataSets::smDataIsSet() const { return m_SmDataIsSet; }
+void ProvisionedDataSets::unsetSmData() { m_SmDataIsSet = false; }
 oai::model::common::TraceData ProvisionedDataSets::getTraceData() const {
   return m_TraceData;
 }
 void ProvisionedDataSets::setTraceData(
-    oai::model::common::TraceData const& value) {
-  m_TraceData      = value;
+    oai::model::common::TraceData const &value) {
+  m_TraceData = value;
   m_TraceDataIsSet = true;
 }
-bool ProvisionedDataSets::traceDataIsSet() const {
-  return m_TraceDataIsSet;
-}
-void ProvisionedDataSets::unsetTraceData() {
-  m_TraceDataIsSet = false;
-}
+bool ProvisionedDataSets::traceDataIsSet() const { return m_TraceDataIsSet; }
+void ProvisionedDataSets::unsetTraceData() { m_TraceDataIsSet = false; }
 SmsManagementSubscriptionData ProvisionedDataSets::getSmsMngData() const {
   return m_SmsMngData;
 }
 void ProvisionedDataSets::setSmsMngData(
-    SmsManagementSubscriptionData const& value) {
-  m_SmsMngData      = value;
+    SmsManagementSubscriptionData const &value) {
+  m_SmsMngData = value;
   m_SmsMngDataIsSet = true;
 }
-bool ProvisionedDataSets::smsMngDataIsSet() const {
-  return m_SmsMngDataIsSet;
-}
-void ProvisionedDataSets::unsetSmsMngData() {
-  m_SmsMngDataIsSet = false;
-}
+bool ProvisionedDataSets::smsMngDataIsSet() const { return m_SmsMngDataIsSet; }
+void ProvisionedDataSets::unsetSmsMngData() { m_SmsMngDataIsSet = false; }
 LcsPrivacyData ProvisionedDataSets::getLcsPrivacyData() const {
   return m_LcsPrivacyData;
 }
-void ProvisionedDataSets::setLcsPrivacyData(LcsPrivacyData const& value) {
-  m_LcsPrivacyData      = value;
+void ProvisionedDataSets::setLcsPrivacyData(LcsPrivacyData const &value) {
+  m_LcsPrivacyData = value;
   m_LcsPrivacyDataIsSet = true;
 }
 bool ProvisionedDataSets::lcsPrivacyDataIsSet() const {
@@ -191,45 +179,31 @@ bool ProvisionedDataSets::lcsPrivacyDataIsSet() const {
 void ProvisionedDataSets::unsetLcsPrivacyData() {
   m_LcsPrivacyDataIsSet = false;
 }
-LcsMoData ProvisionedDataSets::getLcsMoData() const {
-  return m_LcsMoData;
-}
-void ProvisionedDataSets::setLcsMoData(LcsMoData const& value) {
-  m_LcsMoData      = value;
+LcsMoData ProvisionedDataSets::getLcsMoData() const { return m_LcsMoData; }
+void ProvisionedDataSets::setLcsMoData(LcsMoData const &value) {
+  m_LcsMoData = value;
   m_LcsMoDataIsSet = true;
 }
-bool ProvisionedDataSets::lcsMoDataIsSet() const {
-  return m_LcsMoDataIsSet;
-}
-void ProvisionedDataSets::unsetLcsMoData() {
-  m_LcsMoDataIsSet = false;
-}
+bool ProvisionedDataSets::lcsMoDataIsSet() const { return m_LcsMoDataIsSet; }
+void ProvisionedDataSets::unsetLcsMoData() { m_LcsMoDataIsSet = false; }
 LcsBroadcastAssistanceTypesData ProvisionedDataSets::getLcsBcaData() const {
   return m_LcsBcaData;
 }
 void ProvisionedDataSets::setLcsBcaData(
-    LcsBroadcastAssistanceTypesData const& value) {
-  m_LcsBcaData      = value;
+    LcsBroadcastAssistanceTypesData const &value) {
+  m_LcsBcaData = value;
   m_LcsBcaDataIsSet = true;
 }
-bool ProvisionedDataSets::lcsBcaDataIsSet() const {
-  return m_LcsBcaDataIsSet;
-}
-void ProvisionedDataSets::unsetLcsBcaData() {
-  m_LcsBcaDataIsSet = false;
-}
+bool ProvisionedDataSets::lcsBcaDataIsSet() const { return m_LcsBcaDataIsSet; }
+void ProvisionedDataSets::unsetLcsBcaData() { m_LcsBcaDataIsSet = false; }
 V2xSubscriptionData ProvisionedDataSets::getV2xData() const {
   return m_V2xData;
 }
-void ProvisionedDataSets::setV2xData(V2xSubscriptionData const& value) {
-  m_V2xData      = value;
+void ProvisionedDataSets::setV2xData(V2xSubscriptionData const &value) {
+  m_V2xData = value;
   m_V2xDataIsSet = true;
 }
-bool ProvisionedDataSets::v2xDataIsSet() const {
-  return m_V2xDataIsSet;
-}
-void ProvisionedDataSets::unsetV2xData() {
-  m_V2xDataIsSet = false;
-}
+bool ProvisionedDataSets::v2xDataIsSet() const { return m_V2xDataIsSet; }
+void ProvisionedDataSets::unsetV2xData() { m_V2xDataIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

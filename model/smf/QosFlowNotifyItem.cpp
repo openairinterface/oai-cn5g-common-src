@@ -15,9 +15,7 @@
 
 namespace oai::model::smf {
 
-QosFlowNotifyItem::QosFlowNotifyItem() {
-  m_Qfi = 0;
-}
+QosFlowNotifyItem::QosFlowNotifyItem() { m_Qfi = 0; }
 
 QosFlowNotifyItem::~QosFlowNotifyItem() {}
 
@@ -25,28 +23,24 @@ void QosFlowNotifyItem::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const QosFlowNotifyItem& o) {
-  j                      = nlohmann::json();
-  j["qfi"]               = o.m_Qfi;
+void to_json(nlohmann::json &j, const QosFlowNotifyItem &o) {
+  j = nlohmann::json();
+  j["qfi"] = o.m_Qfi;
   j["notificationCause"] = o.m_NotificationCause;
 }
 
-void from_json(const nlohmann::json& j, QosFlowNotifyItem& o) {
+void from_json(const nlohmann::json &j, QosFlowNotifyItem &o) {
   j.at("qfi").get_to(o.m_Qfi);
   j.at("notificationCause").get_to(o.m_NotificationCause);
 }
 
-int32_t QosFlowNotifyItem::getQfi() const {
-  return m_Qfi;
-}
-void QosFlowNotifyItem::setQfi(int32_t const value) {
-  m_Qfi = value;
-}
+int32_t QosFlowNotifyItem::getQfi() const { return m_Qfi; }
+void QosFlowNotifyItem::setQfi(int32_t const value) { m_Qfi = value; }
 NotificationCause QosFlowNotifyItem::getNotificationCause() const {
   return m_NotificationCause;
 }
-void QosFlowNotifyItem::setNotificationCause(NotificationCause const& value) {
+void QosFlowNotifyItem::setNotificationCause(NotificationCause const &value) {
   m_NotificationCause = value;
 }
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

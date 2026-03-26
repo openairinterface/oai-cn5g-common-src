@@ -21,8 +21,8 @@
 #define SnssaiExtension_H_
 
 #include "SdRange.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::common {
 
@@ -31,7 +31,7 @@ namespace oai::model::common {
 /// present simultaneously
 /// </summary>
 class SnssaiExtension {
- public:
+public:
   SnssaiExtension();
   virtual ~SnssaiExtension() = default;
 
@@ -45,16 +45,16 @@ class SnssaiExtension {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const SnssaiExtension& rhs) const;
-  bool operator!=(const SnssaiExtension& rhs) const;
+  bool operator==(const SnssaiExtension &rhs) const;
+  bool operator!=(const SnssaiExtension &rhs) const;
 
   /////////////////////////////////////////////
   /// SnssaiExtension members
@@ -65,7 +65,7 @@ class SnssaiExtension {
   /// of the Snssai data type
   /// </summary>
   std::vector<oai::model::common::SdRange> getSdRanges() const;
-  void setSdRanges(std::vector<oai::model::common::SdRange> const& value);
+  void setSdRanges(std::vector<oai::model::common::SdRange> const &value);
   bool sdRangesIsSet() const;
   void unsetSdRanges();
   /// <summary>
@@ -78,16 +78,16 @@ class SnssaiExtension {
   bool wildcardSdIsSet() const;
   void unsetWildcardSd();
 
-  friend void to_json(nlohmann::json& j, const SnssaiExtension& o);
-  friend void from_json(const nlohmann::json& j, SnssaiExtension& o);
+  friend void to_json(nlohmann::json &j, const SnssaiExtension &o);
+  friend void from_json(const nlohmann::json &j, SnssaiExtension &o);
 
- protected:
+protected:
   std::vector<oai::model::common::SdRange> m_SdRanges;
   bool m_SdRangesIsSet;
   bool m_WildcardSd;
   bool m_WildcardSdIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* SnssaiExtension_H_ */

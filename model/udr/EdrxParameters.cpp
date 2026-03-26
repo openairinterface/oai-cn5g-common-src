@@ -18,9 +18,7 @@
 
 namespace oai::udr::model {
 
-EdrxParameters::EdrxParameters() {
-  m_EdrxValue = "";
-}
+EdrxParameters::EdrxParameters() { m_EdrxValue = ""; }
 
 EdrxParameters::~EdrxParameters() {}
 
@@ -28,13 +26,13 @@ void EdrxParameters::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const EdrxParameters& o) {
-  j              = nlohmann::json();
-  j["ratType"]   = o.m_RatType;
+void to_json(nlohmann::json &j, const EdrxParameters &o) {
+  j = nlohmann::json();
+  j["ratType"] = o.m_RatType;
   j["edrxValue"] = o.m_EdrxValue;
 }
 
-void from_json(const nlohmann::json& j, EdrxParameters& o) {
+void from_json(const nlohmann::json &j, EdrxParameters &o) {
   j.at("ratType").get_to(o.m_RatType);
   j.at("edrxValue").get_to(o.m_EdrxValue);
 }
@@ -42,14 +40,12 @@ void from_json(const nlohmann::json& j, EdrxParameters& o) {
 oai::model::common::RatType EdrxParameters::getRatType() const {
   return m_RatType;
 }
-void EdrxParameters::setRatType(oai::model::common::RatType const& value) {
+void EdrxParameters::setRatType(oai::model::common::RatType const &value) {
   m_RatType = value;
 }
-std::string EdrxParameters::getEdrxValue() const {
-  return m_EdrxValue;
-}
-void EdrxParameters::setEdrxValue(std::string const& value) {
+std::string EdrxParameters::getEdrxValue() const { return m_EdrxValue; }
+void EdrxParameters::setEdrxValue(std::string const &value) {
   m_EdrxValue = value;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

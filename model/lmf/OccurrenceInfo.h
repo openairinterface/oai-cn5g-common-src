@@ -28,7 +28,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class OccurrenceInfo {
- public:
+public:
   OccurrenceInfo();
   virtual ~OccurrenceInfo() = default;
 
@@ -42,16 +42,16 @@ class OccurrenceInfo {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const OccurrenceInfo& rhs) const;
-  bool operator!=(const OccurrenceInfo& rhs) const;
+  bool operator==(const OccurrenceInfo &rhs) const;
+  bool operator!=(const OccurrenceInfo &rhs) const;
 
   /////////////////////////////////////////////
   /// OccurrenceInfo members
@@ -60,15 +60,15 @@ class OccurrenceInfo {
   void setValue(OccurrenceInfo_anyOf value);
   OccurrenceInfo_anyOf::eOccurrenceInfo_anyOf getEnumValue() const;
   void setEnumValue(OccurrenceInfo_anyOf::eOccurrenceInfo_anyOf value);
-  friend void to_json(nlohmann::json& j, const OccurrenceInfo& o);
-  friend void from_json(const nlohmann::json& j, OccurrenceInfo& o);
-  friend void to_json(nlohmann::json& j, const OccurrenceInfo_anyOf& o);
-  friend void from_json(const nlohmann::json& j, OccurrenceInfo_anyOf& o);
+  friend void to_json(nlohmann::json &j, const OccurrenceInfo &o);
+  friend void from_json(const nlohmann::json &j, OccurrenceInfo &o);
+  friend void to_json(nlohmann::json &j, const OccurrenceInfo_anyOf &o);
+  friend void from_json(const nlohmann::json &j, OccurrenceInfo_anyOf &o);
 
- protected:
+protected:
   OccurrenceInfo_anyOf m_value;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* OccurrenceInfo_H_ */

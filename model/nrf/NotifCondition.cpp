@@ -16,7 +16,7 @@
 namespace oai::model::nrf {
 
 NotifCondition::NotifCondition() {
-  m_MonitoredAttributesIsSet   = false;
+  m_MonitoredAttributesIsSet = false;
   m_UnmonitoredAttributesIsSet = false;
 }
 
@@ -26,7 +26,7 @@ void NotifCondition::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const NotifCondition& o) {
+void to_json(nlohmann::json &j, const NotifCondition &o) {
   j = nlohmann::json();
   if (o.monitoredAttributesIsSet() || !o.m_MonitoredAttributes.empty())
     j["monitoredAttributes"] = o.m_MonitoredAttributes;
@@ -34,7 +34,7 @@ void to_json(nlohmann::json& j, const NotifCondition& o) {
     j["unmonitoredAttributes"] = o.m_UnmonitoredAttributes;
 }
 
-void from_json(const nlohmann::json& j, NotifCondition& o) {
+void from_json(const nlohmann::json &j, NotifCondition &o) {
   if (j.find("monitoredAttributes") != j.end()) {
     j.at("monitoredAttributes").get_to(o.m_MonitoredAttributes);
     o.m_MonitoredAttributesIsSet = true;
@@ -45,12 +45,12 @@ void from_json(const nlohmann::json& j, NotifCondition& o) {
   }
 }
 
-std::vector<std::string>& NotifCondition::getMonitoredAttributes() {
+std::vector<std::string> &NotifCondition::getMonitoredAttributes() {
   return m_MonitoredAttributes;
 }
 void NotifCondition::setMonitoredAttributes(
-    std::vector<std::string> const& value) {
-  m_MonitoredAttributes      = value;
+    std::vector<std::string> const &value) {
+  m_MonitoredAttributes = value;
   m_MonitoredAttributesIsSet = true;
 }
 bool NotifCondition::monitoredAttributesIsSet() const {
@@ -59,12 +59,12 @@ bool NotifCondition::monitoredAttributesIsSet() const {
 void NotifCondition::unsetMonitoredAttributes() {
   m_MonitoredAttributesIsSet = false;
 }
-std::vector<std::string>& NotifCondition::getUnmonitoredAttributes() {
+std::vector<std::string> &NotifCondition::getUnmonitoredAttributes() {
   return m_UnmonitoredAttributes;
 }
 void NotifCondition::setUnmonitoredAttributes(
-    std::vector<std::string> const& value) {
-  m_UnmonitoredAttributes      = value;
+    std::vector<std::string> const &value) {
+  m_UnmonitoredAttributes = value;
   m_UnmonitoredAttributesIsSet = true;
 }
 bool NotifCondition::unmonitoredAttributesIsSet() const {
@@ -74,4 +74,4 @@ void NotifCondition::unsetUnmonitoredAttributes() {
   m_UnmonitoredAttributesIsSet = false;
 }
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

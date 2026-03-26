@@ -27,12 +27,12 @@ void AdditionalQosFlowInfo::validate() const {
   }
 }
 
-bool AdditionalQosFlowInfo::validate(std::stringstream& msg) const {
+bool AdditionalQosFlowInfo::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AdditionalQosFlowInfo::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool AdditionalQosFlowInfo::validate(std::stringstream &msg,
+                                     const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AdditionalQosFlowInfo" : pathPrefix;
@@ -40,18 +40,18 @@ bool AdditionalQosFlowInfo::validate(
   return success;
 }
 
-bool AdditionalQosFlowInfo::operator==(const AdditionalQosFlowInfo& rhs) const {
+bool AdditionalQosFlowInfo::operator==(const AdditionalQosFlowInfo &rhs) const {
   return true;
 }
 
-bool AdditionalQosFlowInfo::operator!=(const AdditionalQosFlowInfo& rhs) const {
+bool AdditionalQosFlowInfo::operator!=(const AdditionalQosFlowInfo &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AdditionalQosFlowInfo& o) {
+void to_json(nlohmann::json &j, const AdditionalQosFlowInfo &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, AdditionalQosFlowInfo& o) {}
+void from_json(const nlohmann::json &j, AdditionalQosFlowInfo &o) {}
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

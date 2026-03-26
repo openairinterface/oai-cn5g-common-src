@@ -23,12 +23,12 @@ void PduSessionNotifyItem::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const PduSessionNotifyItem& o) {
-  j                      = nlohmann::json();
+void to_json(nlohmann::json &j, const PduSessionNotifyItem &o) {
+  j = nlohmann::json();
   j["notificationCause"] = o.m_NotificationCause;
 }
 
-void from_json(const nlohmann::json& j, PduSessionNotifyItem& o) {
+void from_json(const nlohmann::json &j, PduSessionNotifyItem &o) {
   j.at("notificationCause").get_to(o.m_NotificationCause);
 }
 
@@ -36,8 +36,8 @@ NotificationCause PduSessionNotifyItem::getNotificationCause() const {
   return m_NotificationCause;
 }
 void PduSessionNotifyItem::setNotificationCause(
-    NotificationCause const& value) {
+    NotificationCause const &value) {
   m_NotificationCause = value;
 }
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

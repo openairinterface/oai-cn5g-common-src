@@ -26,7 +26,7 @@ struct Ngap_ProtocolExtensionContainer;
 typedef struct Ngap_UPTransportLayerInformationPairItem {
   Ngap_UPTransportLayerInformation_t uL_NGU_UP_TNLInformation;
   Ngap_UPTransportLayerInformation_t dL_NGU_UP_TNLInformation;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

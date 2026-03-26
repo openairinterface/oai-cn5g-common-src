@@ -19,8 +19,8 @@
 #ifndef ClientId_H_
 #define ClientId_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::udsf {
 
@@ -28,7 +28,7 @@ namespace oai::model::udsf {
 /// Defines the identity of the NF Consumer
 /// </summary>
 class ClientId {
- public:
+public:
   ClientId();
   virtual ~ClientId() = default;
 
@@ -42,16 +42,16 @@ class ClientId {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const ClientId& rhs) const;
-  bool operator!=(const ClientId& rhs) const;
+  bool operator==(const ClientId &rhs) const;
+  bool operator!=(const ClientId &rhs) const;
 
   /////////////////////////////////////////////
   /// ClientId members
@@ -62,7 +62,7 @@ class ClientId {
   /// described in IETF RFC 4122.
   /// </summary>
   std::string getNfId() const;
-  void setNfId(std::string const& value);
+  void setNfId(std::string const &value);
   bool nfIdIsSet() const;
   void unsetNfId();
   /// <summary>
@@ -82,20 +82,20 @@ class ClientId {
   /// shall end with either an alphabetic character or a digit.
   /// </summary>
   std::string getNfSetId() const;
-  void setNfSetId(std::string const& value);
+  void setNfSetId(std::string const &value);
   bool nfSetIdIsSet() const;
   void unsetNfSetId();
 
-  friend void to_json(nlohmann::json& j, const ClientId& o);
-  friend void from_json(const nlohmann::json& j, ClientId& o);
+  friend void to_json(nlohmann::json &j, const ClientId &o);
+  friend void from_json(const nlohmann::json &j, ClientId &o);
 
- protected:
+protected:
   std::string m_NfId;
   bool m_NfIdIsSet;
   std::string m_NfSetId;
   bool m_NfSetIdIsSet;
 };
 
-}  // namespace oai::model::udsf
+} // namespace oai::model::udsf
 
 #endif /* ClientId_H_ */

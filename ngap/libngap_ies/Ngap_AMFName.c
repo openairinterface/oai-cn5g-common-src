@@ -34,30 +34,30 @@ static const int permitted_alphabet_code2value_1[74] = {
     109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122,
 };
 
-static int check_permitted_alphabet_1(const void* sptr) {
-  const int* table = permitted_alphabet_table_1;
+static int check_permitted_alphabet_1(const void *sptr) {
+  const int *table = permitted_alphabet_table_1;
   /* The underlying type is PrintableString */
-  const PrintableString_t* st = (const PrintableString_t*) sptr;
-  const uint8_t* ch           = st->buf;
-  const uint8_t* end          = ch + st->size;
+  const PrintableString_t *st = (const PrintableString_t *)sptr;
+  const uint8_t *ch = st->buf;
+  const uint8_t *end = ch + st->size;
 
   for (; ch < end; ch++) {
     uint8_t cv = *ch;
-    if (!table[cv]) return -1;
+    if (!table[cv])
+      return -1;
   }
   return 0;
 }
 
-int Ngap_AMFName_constraint(
-    const asn_TYPE_descriptor_t* td, const void* sptr,
-    asn_app_constraint_failed_f* ctfailcb, void* app_key) {
-  const PrintableString_t* st = (const PrintableString_t*) sptr;
+int Ngap_AMFName_constraint(const asn_TYPE_descriptor_t *td, const void *sptr,
+                            asn_app_constraint_failed_f *ctfailcb,
+                            void *app_key) {
+  const PrintableString_t *st = (const PrintableString_t *)sptr;
   size_t size;
 
   if (!sptr) {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: value not given (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: value not given (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 
@@ -67,9 +67,8 @@ int Ngap_AMFName_constraint(
     /* Constraint check succeeded */
     return 0;
   } else {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: constraint failed (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: constraint failed (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 }
@@ -92,8 +91,7 @@ static int asn_PER_MAP_Ngap_AMFName_1_c2v(unsigned int code) {
  */
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 static asn_oer_constraints_t asn_OER_type_Ngap_AMFName_constr_1 CC_NOTUSED = {
-    {0, 0},
-    -1 /* (SIZE(0..MAX)) */};
+    {0, 0}, -1 /* (SIZE(0..MAX)) */};
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 asn_per_constraints_t asn_PER_type_Ngap_AMFName_constr_1 CC_NOTUSED = {

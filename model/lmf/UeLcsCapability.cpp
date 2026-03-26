@@ -19,9 +19,9 @@
 namespace oai::model::lmf {
 
 UeLcsCapability::UeLcsCapability() {
-  m_LppSupport            = true;
-  m_LppSupportIsSet       = false;
-  m_CiotOptimisation      = false;
+  m_LppSupport = true;
+  m_LppSupportIsSet = false;
+  m_CiotOptimisation = false;
   m_CiotOptimisationIsSet = false;
 }
 
@@ -32,12 +32,12 @@ void UeLcsCapability::validate() const {
   }
 }
 
-bool UeLcsCapability::validate(std::stringstream& msg) const {
+bool UeLcsCapability::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool UeLcsCapability::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool UeLcsCapability::validate(std::stringstream &msg,
+                               const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "UeLcsCapability" : pathPrefix;
@@ -45,7 +45,7 @@ bool UeLcsCapability::validate(
   return success;
 }
 
-bool UeLcsCapability::operator==(const UeLcsCapability& rhs) const {
+bool UeLcsCapability::operator==(const UeLcsCapability &rhs) const {
   return
 
       ((!lppSupportIsSet() && !rhs.lppSupportIsSet()) ||
@@ -59,17 +59,19 @@ bool UeLcsCapability::operator==(const UeLcsCapability& rhs) const {
           ;
 }
 
-bool UeLcsCapability::operator!=(const UeLcsCapability& rhs) const {
+bool UeLcsCapability::operator!=(const UeLcsCapability &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const UeLcsCapability& o) {
+void to_json(nlohmann::json &j, const UeLcsCapability &o) {
   j = nlohmann::json();
-  if (o.lppSupportIsSet()) j["lppSupport"] = o.m_LppSupport;
-  if (o.ciotOptimisationIsSet()) j["ciotOptimisation"] = o.m_CiotOptimisation;
+  if (o.lppSupportIsSet())
+    j["lppSupport"] = o.m_LppSupport;
+  if (o.ciotOptimisationIsSet())
+    j["ciotOptimisation"] = o.m_CiotOptimisation;
 }
 
-void from_json(const nlohmann::json& j, UeLcsCapability& o) {
+void from_json(const nlohmann::json &j, UeLcsCapability &o) {
   if (j.find("lppSupport") != j.end()) {
     j.at("lppSupport").get_to(o.m_LppSupport);
     o.m_LppSupportIsSet = true;
@@ -80,24 +82,16 @@ void from_json(const nlohmann::json& j, UeLcsCapability& o) {
   }
 }
 
-bool UeLcsCapability::isLppSupport() const {
-  return m_LppSupport;
-}
+bool UeLcsCapability::isLppSupport() const { return m_LppSupport; }
 void UeLcsCapability::setLppSupport(bool const value) {
-  m_LppSupport      = value;
+  m_LppSupport = value;
   m_LppSupportIsSet = true;
 }
-bool UeLcsCapability::lppSupportIsSet() const {
-  return m_LppSupportIsSet;
-}
-void UeLcsCapability::unsetLppSupport() {
-  m_LppSupportIsSet = false;
-}
-bool UeLcsCapability::isCiotOptimisation() const {
-  return m_CiotOptimisation;
-}
+bool UeLcsCapability::lppSupportIsSet() const { return m_LppSupportIsSet; }
+void UeLcsCapability::unsetLppSupport() { m_LppSupportIsSet = false; }
+bool UeLcsCapability::isCiotOptimisation() const { return m_CiotOptimisation; }
 void UeLcsCapability::setCiotOptimisation(bool const value) {
-  m_CiotOptimisation      = value;
+  m_CiotOptimisation = value;
   m_CiotOptimisationIsSet = true;
 }
 bool UeLcsCapability::ciotOptimisationIsSet() const {
@@ -107,4 +101,4 @@ void UeLcsCapability::unsetCiotOptimisation() {
   m_CiotOptimisationIsSet = false;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

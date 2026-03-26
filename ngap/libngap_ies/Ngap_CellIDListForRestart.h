@@ -35,9 +35,9 @@ struct Ngap_ProtocolIE_SingleContainer;
 typedef struct Ngap_CellIDListForRestart {
   Ngap_CellIDListForRestart_PR present;
   union Ngap_CellIDListForRestart_u {
-    struct Ngap_EUTRA_CGIList* eUTRA_CGIListforRestart;
-    struct Ngap_NR_CGIList* nR_CGIListforRestart;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_EUTRA_CGIList *eUTRA_CGIListforRestart;
+    struct Ngap_NR_CGIList *nR_CGIListforRestart;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

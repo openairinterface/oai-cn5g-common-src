@@ -15,26 +15,26 @@ extern "C" {
 namespace oai::ngap {
 
 class SecurityResult {
- public:
+public:
   SecurityResult();
   virtual ~SecurityResult();
 
-  void set(
-      const IntegrityProtectionResult& integrityProtectionResult,
-      const ConfidentialityProtectionResult& confidentialityProtectionResult);
-  bool get(
-      IntegrityProtectionResult& integrityProtectionResult,
-      ConfidentialityProtectionResult& confidentialityProtectionResult) const;
+  void
+  set(const IntegrityProtectionResult &integrityProtectionResult,
+      const ConfidentialityProtectionResult &confidentialityProtectionResult);
+  bool
+  get(IntegrityProtectionResult &integrityProtectionResult,
+      ConfidentialityProtectionResult &confidentialityProtectionResult) const;
 
-  bool encode(Ngap_SecurityResult_t&) const;
-  bool decode(const Ngap_SecurityResult_t&);
+  bool encode(Ngap_SecurityResult_t &) const;
+  bool decode(const Ngap_SecurityResult_t &);
 
- private:
-  IntegrityProtectionResult m_IntegrityProtectionResult;  // Mandatory
+private:
+  IntegrityProtectionResult m_IntegrityProtectionResult; // Mandatory
   ConfidentialityProtectionResult
-      m_ConfidentialityProtectionResult;  // Mandatory
+      m_ConfidentialityProtectionResult; // Mandatory
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

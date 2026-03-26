@@ -33,7 +33,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class ServiceParameterData {
- public:
+public:
   ServiceParameterData();
   virtual ~ServiceParameterData();
 
@@ -46,35 +46,35 @@ class ServiceParameterData {
   /// Identifies an application.
   /// </summary>
   std::string getAppId() const;
-  void setAppId(std::string const& value);
+  void setAppId(std::string const &value);
   bool appIdIsSet() const;
   void unsetAppId();
   /// <summary>
   ///
   /// </summary>
   std::string getDnn() const;
-  void setDnn(std::string const& value);
+  void setDnn(std::string const &value);
   bool dnnIsSet() const;
   void unsetDnn();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Snssai getSnssai() const;
-  void setSnssai(oai::model::common::Snssai const& value);
+  void setSnssai(oai::model::common::Snssai const &value);
   bool snssaiIsSet() const;
   void unsetSnssai();
   /// <summary>
   ///
   /// </summary>
   std::string getInterGroupId() const;
-  void setInterGroupId(std::string const& value);
+  void setInterGroupId(std::string const &value);
   bool interGroupIdIsSet() const;
   void unsetInterGroupId();
   /// <summary>
   ///
   /// </summary>
   std::string getSupi() const;
-  void setSupi(std::string const& value);
+  void setSupi(std::string const &value);
   bool supiIsSet() const;
   void unsetSupi();
   /// <summary>
@@ -82,7 +82,7 @@ class ServiceParameterData {
   /// decimal\&quot; notation as defined in IETF RFC 1166.
   /// </summary>
   std::string getUeIpv4() const;
-  void setUeIpv4(std::string const& value);
+  void setUeIpv4(std::string const &value);
   bool ueIpv4IsSet() const;
   void unsetUeIpv4();
   /// <summary>
@@ -91,14 +91,14 @@ class ServiceParameterData {
   /// IETF RFC 5952 shall not be used.
   /// </summary>
   std::string getUeIpv6() const;
-  void setUeIpv6(std::string const& value);
+  void setUeIpv6(std::string const &value);
   bool ueIpv6IsSet() const;
   void unsetUeIpv6();
   /// <summary>
   ///
   /// </summary>
   std::string getUeMac() const;
-  void setUeMac(std::string const& value);
+  void setUeMac(std::string const &value);
   bool ueMacIsSet() const;
   void unsetUeMac();
   /// <summary>
@@ -112,35 +112,35 @@ class ServiceParameterData {
   ///
   /// </summary>
   std::string getParamOverPc5() const;
-  void setParamOverPc5(std::string const& value);
+  void setParamOverPc5(std::string const &value);
   bool paramOverPc5IsSet() const;
   void unsetParamOverPc5();
   /// <summary>
   ///
   /// </summary>
   std::string getParamOverUu() const;
-  void setParamOverUu(std::string const& value);
+  void setParamOverUu(std::string const &value);
   bool paramOverUuIsSet() const;
   void unsetParamOverUu();
   /// <summary>
   ///
   /// </summary>
   std::string getSuppFeat() const;
-  void setSuppFeat(std::string const& value);
+  void setSuppFeat(std::string const &value);
   bool suppFeatIsSet() const;
   void unsetSuppFeat();
   /// <summary>
   ///
   /// </summary>
   std::string getResUri() const;
-  void setResUri(std::string const& value);
+  void setResUri(std::string const &value);
   bool resUriIsSet() const;
   void unsetResUri();
 
-  friend void to_json(nlohmann::json& j, const ServiceParameterData& o);
-  friend void from_json(const nlohmann::json& j, ServiceParameterData& o);
+  friend void to_json(nlohmann::json &j, const ServiceParameterData &o);
+  friend void from_json(const nlohmann::json &j, ServiceParameterData &o);
 
- protected:
+protected:
   std::string m_AppId;
   bool m_AppIdIsSet;
   std::string m_Dnn;
@@ -169,6 +169,6 @@ class ServiceParameterData {
   bool m_ResUriIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* ServiceParameterData_H_ */

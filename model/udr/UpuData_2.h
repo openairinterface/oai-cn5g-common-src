@@ -34,7 +34,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class UpuData_2 {
- public:
+public:
   UpuData_2();
   virtual ~UpuData_2();
 
@@ -47,29 +47,29 @@ class UpuData_2 {
   ///
   /// </summary>
   std::string getSecPacket() const;
-  void setSecPacket(std::string const& value);
+  void setSecPacket(std::string const &value);
   bool secPacketIsSet() const;
   void unsetSecPacket();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::Snssai>& getDefaultConfNssai();
-  void setDefaultConfNssai(
-      std::vector<oai::model::common::Snssai> const& value);
+  std::vector<oai::model::common::Snssai> &getDefaultConfNssai();
+  void
+  setDefaultConfNssai(std::vector<oai::model::common::Snssai> const &value);
   bool defaultConfNssaiIsSet() const;
   void unsetDefaultConfNssai();
   /// <summary>
   ///
   /// </summary>
   std::string getRoutingId() const;
-  void setRoutingId(std::string const& value);
+  void setRoutingId(std::string const &value);
   bool routingIdIsSet() const;
   void unsetRoutingId();
 
-  friend void to_json(nlohmann::json& j, const UpuData_2& o);
-  friend void from_json(const nlohmann::json& j, UpuData_2& o);
+  friend void to_json(nlohmann::json &j, const UpuData_2 &o);
+  friend void from_json(const nlohmann::json &j, UpuData_2 &o);
 
- protected:
+protected:
   std::string m_SecPacket;
   bool m_SecPacketIsSet;
   std::vector<oai::model::common::Snssai> m_DefaultConfNssai;
@@ -78,6 +78,6 @@ class UpuData_2 {
   bool m_RoutingIdIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* UpuData_2_H_ */

@@ -27,12 +27,12 @@ void PduSessionRelCause::validate() const {
   }
 }
 
-bool PduSessionRelCause::validate(std::stringstream& msg) const {
+bool PduSessionRelCause::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool PduSessionRelCause::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool PduSessionRelCause::validate(std::stringstream &msg,
+                                  const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PduSessionRelCause" : pathPrefix;
@@ -43,22 +43,22 @@ bool PduSessionRelCause::validate(
   return success;
 }
 
-bool PduSessionRelCause::operator==(const PduSessionRelCause& rhs) const {
+bool PduSessionRelCause::operator==(const PduSessionRelCause &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool PduSessionRelCause::operator!=(const PduSessionRelCause& rhs) const {
+bool PduSessionRelCause::operator!=(const PduSessionRelCause &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PduSessionRelCause& o) {
+void to_json(nlohmann::json &j, const PduSessionRelCause &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, PduSessionRelCause& o) {
+void from_json(const nlohmann::json &j, PduSessionRelCause &o) {
   from_json(j, o.m_value);
 }
 
@@ -80,4 +80,4 @@ void PduSessionRelCause::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

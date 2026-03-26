@@ -13,8 +13,8 @@
 
 #include "PositioningMode_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::lmf {
 
@@ -27,12 +27,12 @@ void PositioningMode_anyOf::validate() const {
   }
 }
 
-bool PositioningMode_anyOf::validate(std::stringstream& msg) const {
+bool PositioningMode_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool PositioningMode_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool PositioningMode_anyOf::validate(std::stringstream &msg,
+                                     const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PositioningMode_anyOf" : pathPrefix;
@@ -46,37 +46,37 @@ bool PositioningMode_anyOf::validate(
   return success;
 }
 
-bool PositioningMode_anyOf::operator==(const PositioningMode_anyOf& rhs) const {
+bool PositioningMode_anyOf::operator==(const PositioningMode_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool PositioningMode_anyOf::operator!=(const PositioningMode_anyOf& rhs) const {
+bool PositioningMode_anyOf::operator!=(const PositioningMode_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PositioningMode_anyOf& o) {
+void to_json(nlohmann::json &j, const PositioningMode_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case PositioningMode_anyOf::ePositioningMode_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case PositioningMode_anyOf::ePositioningMode_anyOf::UE_BASED:
-      j = "UE_BASED";
-      break;
-    case PositioningMode_anyOf::ePositioningMode_anyOf::UE_ASSISTED:
-      j = "UE_ASSISTED";
-      break;
-    case PositioningMode_anyOf::ePositioningMode_anyOf::CONVENTIONAL:
-      j = "CONVENTIONAL";
-      break;
+  case PositioningMode_anyOf::ePositioningMode_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case PositioningMode_anyOf::ePositioningMode_anyOf::UE_BASED:
+    j = "UE_BASED";
+    break;
+  case PositioningMode_anyOf::ePositioningMode_anyOf::UE_ASSISTED:
+    j = "UE_ASSISTED";
+    break;
+  case PositioningMode_anyOf::ePositioningMode_anyOf::CONVENTIONAL:
+    j = "CONVENTIONAL";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, PositioningMode_anyOf& o) {
+void from_json(const nlohmann::json &j, PositioningMode_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "UE_BASED") {
     o.setValue(PositioningMode_anyOf::ePositioningMode_anyOf::UE_BASED);
@@ -93,8 +93,8 @@ void from_json(const nlohmann::json& j, PositioningMode_anyOf& o) {
   }
 }
 
-PositioningMode_anyOf::ePositioningMode_anyOf PositioningMode_anyOf::getValue()
-    const {
+PositioningMode_anyOf::ePositioningMode_anyOf
+PositioningMode_anyOf::getValue() const {
   return m_value;
 }
 void PositioningMode_anyOf::setValue(
@@ -102,4 +102,4 @@ void PositioningMode_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

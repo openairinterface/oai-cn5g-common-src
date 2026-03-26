@@ -19,9 +19,9 @@
 #ifndef LadnInfo_H_
 #define LadnInfo_H_
 
-#include <string>
 #include "PresenceState.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::amf {
 
@@ -29,7 +29,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class LadnInfo {
- public:
+public:
   LadnInfo();
   virtual ~LadnInfo() = default;
 
@@ -43,10 +43,10 @@ class LadnInfo {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const LadnInfo& rhs) const;
-  bool operator!=(const LadnInfo& rhs) const;
+  bool operator==(const LadnInfo &rhs) const;
+  bool operator!=(const LadnInfo &rhs) const;
 
   /////////////////////////////////////////////
   /// LadnInfo members
@@ -55,19 +55,19 @@ class LadnInfo {
   ///
   /// </summary>
   std::string getLadn() const;
-  void setLadn(std::string const& value);
+  void setLadn(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::PresenceState getPresence() const;
-  void setPresence(oai::model::common::PresenceState const& value);
+  void setPresence(oai::model::common::PresenceState const &value);
   bool presenceIsSet() const;
   void unsetPresence();
 
-  friend void to_json(nlohmann::json& j, const LadnInfo& o);
-  friend void from_json(const nlohmann::json& j, LadnInfo& o);
+  friend void to_json(nlohmann::json &j, const LadnInfo &o);
+  friend void from_json(const nlohmann::json &j, LadnInfo &o);
 
- protected:
+protected:
   std::string m_Ladn;
 
   oai::model::common::PresenceState m_Presence;
@@ -75,9 +75,9 @@ class LadnInfo {
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* LadnInfo_H_ */

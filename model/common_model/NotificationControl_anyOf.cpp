@@ -13,8 +13,8 @@
 
 #include "NotificationControl_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::common {
 
@@ -27,12 +27,12 @@ void NotificationControl_anyOf::validate() const {
   }
 }
 
-bool NotificationControl_anyOf::validate(std::stringstream& msg) const {
+bool NotificationControl_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool NotificationControl_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool NotificationControl_anyOf::validate(std::stringstream &msg,
+                                         const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "NotificationControl_anyOf" : pathPrefix;
@@ -47,35 +47,35 @@ bool NotificationControl_anyOf::validate(
 }
 
 bool NotificationControl_anyOf::operator==(
-    const NotificationControl_anyOf& rhs) const {
+    const NotificationControl_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool NotificationControl_anyOf::operator!=(
-    const NotificationControl_anyOf& rhs) const {
+    const NotificationControl_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const NotificationControl_anyOf& o) {
+void to_json(nlohmann::json &j, const NotificationControl_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case NotificationControl_anyOf::eNotificationControl_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case NotificationControl_anyOf::eNotificationControl_anyOf::REQUESTED:
-      j = "REQUESTED";
-      break;
-    case NotificationControl_anyOf::eNotificationControl_anyOf::NOT_REQUESTED:
-      j = "NOT_REQUESTED";
-      break;
+  case NotificationControl_anyOf::eNotificationControl_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case NotificationControl_anyOf::eNotificationControl_anyOf::REQUESTED:
+    j = "REQUESTED";
+    break;
+  case NotificationControl_anyOf::eNotificationControl_anyOf::NOT_REQUESTED:
+    j = "NOT_REQUESTED";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, NotificationControl_anyOf& o) {
+void from_json(const nlohmann::json &j, NotificationControl_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "REQUESTED") {
     o.setValue(
@@ -101,4 +101,4 @@ void NotificationControl_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

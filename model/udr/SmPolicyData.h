@@ -37,7 +37,7 @@ namespace oai::udr::model {
 /// Contains the SM policy data for a given subscriber.
 /// </summary>
 class SmPolicyData {
- public:
+public:
   SmPolicyData();
   virtual ~SmPolicyData();
 
@@ -49,35 +49,35 @@ class SmPolicyData {
   /// <summary>
   ///
   /// </summary>
-  std::map<std::string, SmPolicySnssaiData>& getSmPolicySnssaiData();
-  void setSmPolicySnssaiData(
-      std::map<std::string, SmPolicySnssaiData> const& value);
+  std::map<std::string, SmPolicySnssaiData> &getSmPolicySnssaiData();
+  void
+  setSmPolicySnssaiData(std::map<std::string, SmPolicySnssaiData> const &value);
   /// <summary>
   ///
   /// </summary>
-  std::map<std::string, UsageMonDataLimit>& getUmDataLimits();
-  void setUmDataLimits(std::map<std::string, UsageMonDataLimit> const& value);
+  std::map<std::string, UsageMonDataLimit> &getUmDataLimits();
+  void setUmDataLimits(std::map<std::string, UsageMonDataLimit> const &value);
   bool umDataLimitsIsSet() const;
   void unsetUmDataLimits();
   /// <summary>
   ///
   /// </summary>
-  std::map<std::string, UsageMonData>& getUmData();
-  void setUmData(std::map<std::string, UsageMonData> const& value);
+  std::map<std::string, UsageMonData> &getUmData();
+  void setUmData(std::map<std::string, UsageMonData> const &value);
   bool umDataIsSet() const;
   void unsetUmData();
   /// <summary>
   ///
   /// </summary>
   std::string getSuppFeat() const;
-  void setSuppFeat(std::string const& value);
+  void setSuppFeat(std::string const &value);
   bool suppFeatIsSet() const;
   void unsetSuppFeat();
 
-  friend void to_json(nlohmann::json& j, const SmPolicyData& o);
-  friend void from_json(const nlohmann::json& j, SmPolicyData& o);
+  friend void to_json(nlohmann::json &j, const SmPolicyData &o);
+  friend void from_json(const nlohmann::json &j, SmPolicyData &o);
 
- protected:
+protected:
   std::map<std::string, SmPolicySnssaiData> m_SmPolicySnssaiData;
 
   std::map<std::string, UsageMonDataLimit> m_UmDataLimits;
@@ -88,6 +88,6 @@ class SmPolicyData {
   bool m_SuppFeatIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* SmPolicyData_H_ */

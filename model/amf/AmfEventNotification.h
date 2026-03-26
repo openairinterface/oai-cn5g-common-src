@@ -20,9 +20,9 @@
 #define AmfEventNotification_H_
 
 #include "AmfEventReport.h"
+#include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
-#include <nlohmann/json.hpp>
 
 namespace oai::model::amf {
 
@@ -30,7 +30,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class AmfEventNotification {
- public:
+public:
   AmfEventNotification();
   virtual ~AmfEventNotification() = default;
 
@@ -44,10 +44,10 @@ class AmfEventNotification {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const AmfEventNotification& rhs) const;
-  bool operator!=(const AmfEventNotification& rhs) const;
+  bool operator==(const AmfEventNotification &rhs) const;
+  bool operator!=(const AmfEventNotification &rhs) const;
 
   /////////////////////////////////////////////
   /// AmfEventNotification members
@@ -56,28 +56,28 @@ class AmfEventNotification {
   ///
   /// </summary>
   std::string getNotifyCorrelationId() const;
-  void setNotifyCorrelationId(std::string const& value);
+  void setNotifyCorrelationId(std::string const &value);
   bool notifyCorrelationIdIsSet() const;
   void unsetNotifyCorrelationId();
   /// <summary>
   ///
   /// </summary>
   std::string getSubsChangeNotifyCorrelationId() const;
-  void setSubsChangeNotifyCorrelationId(std::string const& value);
+  void setSubsChangeNotifyCorrelationId(std::string const &value);
   bool subsChangeNotifyCorrelationIdIsSet() const;
   void unsetSubsChangeNotifyCorrelationId();
   /// <summary>
   ///
   /// </summary>
   std::vector<AmfEventReport> getReportList() const;
-  void setReportList(std::vector<AmfEventReport> const& value);
+  void setReportList(std::vector<AmfEventReport> const &value);
   bool reportListIsSet() const;
   void unsetReportList();
 
-  friend void to_json(nlohmann::json& j, const AmfEventNotification& o);
-  friend void from_json(const nlohmann::json& j, AmfEventNotification& o);
+  friend void to_json(nlohmann::json &j, const AmfEventNotification &o);
+  friend void from_json(const nlohmann::json &j, AmfEventNotification &o);
 
- protected:
+protected:
   std::string m_NotifyCorrelationId;
   bool m_NotifyCorrelationIdIsSet;
   std::string m_SubsChangeNotifyCorrelationId;
@@ -87,9 +87,9 @@ class AmfEventNotification {
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* AmfEventNotification_H_ */

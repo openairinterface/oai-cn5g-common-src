@@ -28,14 +28,14 @@ void PointUncertaintyEllipse_allOf::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const PointUncertaintyEllipse_allOf& o) {
-  j                       = nlohmann::json();
-  j["point"]              = o.m_Point;
+void to_json(nlohmann::json &j, const PointUncertaintyEllipse_allOf &o) {
+  j = nlohmann::json();
+  j["point"] = o.m_Point;
   j["uncertaintyEllipse"] = o.m_UncertaintyEllipse;
-  j["confidence"]         = o.m_Confidence;
+  j["confidence"] = o.m_Confidence;
 }
 
-void from_json(const nlohmann::json& j, PointUncertaintyEllipse_allOf& o) {
+void from_json(const nlohmann::json &j, PointUncertaintyEllipse_allOf &o) {
   j.at("point").get_to(o.m_Point);
   j.at("uncertaintyEllipse").get_to(o.m_UncertaintyEllipse);
   j.at("confidence").get_to(o.m_Confidence);
@@ -45,15 +45,15 @@ GeographicalCoordinates PointUncertaintyEllipse_allOf::getPoint() const {
   return m_Point;
 }
 void PointUncertaintyEllipse_allOf::setPoint(
-    GeographicalCoordinates const& value) {
+    GeographicalCoordinates const &value) {
   m_Point = value;
 }
-UncertaintyEllipse PointUncertaintyEllipse_allOf::getUncertaintyEllipse()
-    const {
+UncertaintyEllipse
+PointUncertaintyEllipse_allOf::getUncertaintyEllipse() const {
   return m_UncertaintyEllipse;
 }
 void PointUncertaintyEllipse_allOf::setUncertaintyEllipse(
-    UncertaintyEllipse const& value) {
+    UncertaintyEllipse const &value) {
   m_UncertaintyEllipse = value;
 }
 int32_t PointUncertaintyEllipse_allOf::getConfidence() const {
@@ -63,4 +63,4 @@ void PointUncertaintyEllipse_allOf::setConfidence(int32_t const value) {
   m_Confidence = value;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

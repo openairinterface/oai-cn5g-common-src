@@ -13,8 +13,8 @@
 
 #include "MaPduIndication_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::pcf {
 
@@ -27,12 +27,12 @@ void MaPduIndication_anyOf::validate() const {
   }
 }
 
-bool MaPduIndication_anyOf::validate(std::stringstream& msg) const {
+bool MaPduIndication_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool MaPduIndication_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool MaPduIndication_anyOf::validate(std::stringstream &msg,
+                                     const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "MaPduIndication_anyOf" : pathPrefix;
@@ -46,34 +46,34 @@ bool MaPduIndication_anyOf::validate(
   return success;
 }
 
-bool MaPduIndication_anyOf::operator==(const MaPduIndication_anyOf& rhs) const {
+bool MaPduIndication_anyOf::operator==(const MaPduIndication_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool MaPduIndication_anyOf::operator!=(const MaPduIndication_anyOf& rhs) const {
+bool MaPduIndication_anyOf::operator!=(const MaPduIndication_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const MaPduIndication_anyOf& o) {
+void to_json(nlohmann::json &j, const MaPduIndication_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case MaPduIndication_anyOf::eMaPduIndication_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case MaPduIndication_anyOf::eMaPduIndication_anyOf::REQUEST:
-      j = "MA_PDU_REQUEST";
-      break;
-    case MaPduIndication_anyOf::eMaPduIndication_anyOf::NETWORK_UPGRADE_ALLOWED:
-      j = "MA_PDU_NETWORK_UPGRADE_ALLOWED";
-      break;
+  case MaPduIndication_anyOf::eMaPduIndication_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case MaPduIndication_anyOf::eMaPduIndication_anyOf::REQUEST:
+    j = "MA_PDU_REQUEST";
+    break;
+  case MaPduIndication_anyOf::eMaPduIndication_anyOf::NETWORK_UPGRADE_ALLOWED:
+    j = "MA_PDU_NETWORK_UPGRADE_ALLOWED";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, MaPduIndication_anyOf& o) {
+void from_json(const nlohmann::json &j, MaPduIndication_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "MA_PDU_REQUEST") {
     o.setValue(MaPduIndication_anyOf::eMaPduIndication_anyOf::REQUEST);
@@ -89,8 +89,8 @@ void from_json(const nlohmann::json& j, MaPduIndication_anyOf& o) {
   }
 }
 
-MaPduIndication_anyOf::eMaPduIndication_anyOf MaPduIndication_anyOf::getValue()
-    const {
+MaPduIndication_anyOf::eMaPduIndication_anyOf
+MaPduIndication_anyOf::getValue() const {
   return m_value;
 }
 void MaPduIndication_anyOf::setValue(
@@ -98,4 +98,4 @@ void MaPduIndication_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

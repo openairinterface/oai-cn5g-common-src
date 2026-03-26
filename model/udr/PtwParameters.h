@@ -33,7 +33,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class PtwParameters {
- public:
+public:
   PtwParameters();
   virtual ~PtwParameters();
 
@@ -46,22 +46,22 @@ class PtwParameters {
   ///
   /// </summary>
   OperationMode getOperationMode() const;
-  void setOperationMode(OperationMode const& value);
+  void setOperationMode(OperationMode const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getPtwValue() const;
-  void setPtwValue(std::string const& value);
+  void setPtwValue(std::string const &value);
 
-  friend void to_json(nlohmann::json& j, const PtwParameters& o);
-  friend void from_json(const nlohmann::json& j, PtwParameters& o);
+  friend void to_json(nlohmann::json &j, const PtwParameters &o);
+  friend void from_json(const nlohmann::json &j, PtwParameters &o);
 
- protected:
+protected:
   OperationMode m_OperationMode;
 
   std::string m_PtwValue;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* PtwParameters_H_ */

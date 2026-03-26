@@ -19,8 +19,8 @@
 #ifndef TacRange_H_
 #define TacRange_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::nrf {
 
@@ -28,7 +28,7 @@ namespace oai::model::nrf {
 /// Range of TACs (Tracking Area Codes)
 /// </summary>
 class TacRange {
- public:
+public:
   TacRange();
   virtual ~TacRange() = default;
 
@@ -42,16 +42,16 @@ class TacRange {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const TacRange& rhs) const;
-  bool operator!=(const TacRange& rhs) const;
+  bool operator==(const TacRange &rhs) const;
+  bool operator!=(const TacRange &rhs) const;
 
   /////////////////////////////////////////////
   /// TacRange members
@@ -60,28 +60,28 @@ class TacRange {
   ///
   /// </summary>
   std::string getStart() const;
-  void setStart(std::string const& value);
+  void setStart(std::string const &value);
   bool startIsSet() const;
   void unsetStart();
   /// <summary>
   ///
   /// </summary>
   std::string getEnd() const;
-  void setEnd(std::string const& value);
+  void setEnd(std::string const &value);
   bool endIsSet() const;
   void unsetEnd();
   /// <summary>
   ///
   /// </summary>
   std::string getPattern() const;
-  void setPattern(std::string const& value);
+  void setPattern(std::string const &value);
   bool patternIsSet() const;
   void unsetPattern();
 
-  friend void to_json(nlohmann::json& j, const TacRange& o);
-  friend void from_json(const nlohmann::json& j, TacRange& o);
+  friend void to_json(nlohmann::json &j, const TacRange &o);
+  friend void from_json(const nlohmann::json &j, TacRange &o);
 
- protected:
+protected:
   std::string m_Start;
   bool m_StartIsSet;
   std::string m_End;
@@ -90,6 +90,6 @@ class TacRange {
   bool m_PatternIsSet;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* TacRange_H_ */

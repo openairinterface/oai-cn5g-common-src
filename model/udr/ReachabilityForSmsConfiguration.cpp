@@ -26,10 +26,10 @@ void ReachabilityForSmsConfiguration::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const ReachabilityForSmsConfiguration& o) {
+void to_json(nlohmann::json &j, const ReachabilityForSmsConfiguration &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, ReachabilityForSmsConfiguration& o) {}
+void from_json(const nlohmann::json &j, ReachabilityForSmsConfiguration &o) {}
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

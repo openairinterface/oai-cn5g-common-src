@@ -18,9 +18,7 @@
 
 namespace oai::model::lmf {
 
-PointAltitude::PointAltitude() {
-  m_Altitude = 0.0;
-}
+PointAltitude::PointAltitude() { m_Altitude = 0.0; }
 
 void PointAltitude::validate() const {
   std::stringstream msg;
@@ -29,18 +27,18 @@ void PointAltitude::validate() const {
   }
 }
 
-bool PointAltitude::validate(std::stringstream& msg) const {
+bool PointAltitude::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool PointAltitude::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool PointAltitude::validate(std::stringstream &msg,
+                             const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PointAltitude" : pathPrefix;
 
   /* Altitude */ {
-    const double& value                = m_Altitude;
+    const double &value = m_Altitude;
     const std::string currentValuePath = _pathPrefix + ".altitude";
 
     if (value < -32767) {
@@ -56,7 +54,7 @@ bool PointAltitude::validate(
   return success;
 }
 
-bool PointAltitude::operator==(const PointAltitude& rhs) const {
+bool PointAltitude::operator==(const PointAltitude &rhs) const {
   return
 
       (getShape() == rhs.getShape()) &&
@@ -68,18 +66,18 @@ bool PointAltitude::operator==(const PointAltitude& rhs) const {
           ;
 }
 
-bool PointAltitude::operator!=(const PointAltitude& rhs) const {
+bool PointAltitude::operator!=(const PointAltitude &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PointAltitude& o) {
-  j             = nlohmann::json();
-  j["shape"]    = o.m_Shape;
-  j["point"]    = o.m_Point;
+void to_json(nlohmann::json &j, const PointAltitude &o) {
+  j = nlohmann::json();
+  j["shape"] = o.m_Shape;
+  j["point"] = o.m_Point;
   j["altitude"] = o.m_Altitude;
 }
 
-void from_json(const nlohmann::json& j, PointAltitude& o) {
+void from_json(const nlohmann::json &j, PointAltitude &o) {
   j.at("shape").get_to(o.m_Shape);
   j.at("point").get_to(o.m_Point);
   j.at("altitude").get_to(o.m_Altitude);
@@ -88,21 +86,17 @@ void from_json(const nlohmann::json& j, PointAltitude& o) {
 oai::model::lmf::SupportedGADShapes PointAltitude::getShape() const {
   return m_Shape;
 }
-void PointAltitude::setShape(oai::model::lmf::SupportedGADShapes const& value) {
+void PointAltitude::setShape(oai::model::lmf::SupportedGADShapes const &value) {
   m_Shape = value;
 }
 oai::model::lmf::GeographicalCoordinates PointAltitude::getPoint() const {
   return m_Point;
 }
 void PointAltitude::setPoint(
-    oai::model::lmf::GeographicalCoordinates const& value) {
+    oai::model::lmf::GeographicalCoordinates const &value) {
   m_Point = value;
 }
-double PointAltitude::getAltitude() const {
-  return m_Altitude;
-}
-void PointAltitude::setAltitude(double const value) {
-  m_Altitude = value;
-}
+double PointAltitude::getAltitude() const { return m_Altitude; }
+void PointAltitude::setAltitude(double const value) { m_Altitude = value; }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

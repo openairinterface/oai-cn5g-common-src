@@ -30,7 +30,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class EcRestrictionDataWb {
- public:
+public:
   EcRestrictionDataWb();
   virtual ~EcRestrictionDataWb();
 
@@ -54,16 +54,16 @@ class EcRestrictionDataWb {
   bool ecModeBRestrictedIsSet() const;
   void unsetEcModeBRestricted();
 
-  friend void to_json(nlohmann::json& j, const EcRestrictionDataWb& o);
-  friend void from_json(const nlohmann::json& j, EcRestrictionDataWb& o);
+  friend void to_json(nlohmann::json &j, const EcRestrictionDataWb &o);
+  friend void from_json(const nlohmann::json &j, EcRestrictionDataWb &o);
 
- protected:
+protected:
   bool m_EcModeARestricted;
   bool m_EcModeARestrictedIsSet;
   bool m_EcModeBRestricted;
   bool m_EcModeBRestrictedIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* EcRestrictionDataWb_H_ */

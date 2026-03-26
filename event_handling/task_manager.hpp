@@ -14,8 +14,8 @@ namespace oai::event_handling {
 
 class nf_event;
 class task_manager {
- public:
-  task_manager(const std::shared_ptr<nf_event>& ev);
+public:
+  task_manager(const std::shared_ptr<nf_event> &ev);
   ~task_manager();
 
   /*
@@ -32,7 +32,7 @@ class task_manager {
    */
   void run();
 
- private:
+private:
   /*
    * Make sure that the task tick run every 1ms
    * @param [void]
@@ -45,6 +45,6 @@ class task_manager {
   bool terminate;
   bool terminated;
 };
-}  // namespace oai::event_handling
+} // namespace oai::event_handling
 
 #endif

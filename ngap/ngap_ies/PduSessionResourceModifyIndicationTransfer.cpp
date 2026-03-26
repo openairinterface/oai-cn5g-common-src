@@ -13,7 +13,7 @@ namespace oai::ngap {
 //------------------------------------------------------------------------------
 PduSessionResourceModifyIndicationTransfer::
     PduSessionResourceModifyIndicationTransfer() {
-  m_Ie = (Ngap_PDUSessionResourceModifyIndicationTransfer_t*) calloc(
+  m_Ie = (Ngap_PDUSessionResourceModifyIndicationTransfer_t *)calloc(
       1, sizeof(Ngap_PDUSessionResourceModifyIndicationTransfer_t));
 }
 
@@ -23,20 +23,20 @@ PduSessionResourceModifyIndicationTransfer::
 
 //------------------------------------------------------------------------------
 void PduSessionResourceModifyIndicationTransfer::setDlQosFlowPerTnlInformation(
-    const QosFlowPerTnlInformation& dlQosFlowPerTnlInformation) {
+    const QosFlowPerTnlInformation &dlQosFlowPerTnlInformation) {
   m_DlQosFlowPerTnlInformation = dlQosFlowPerTnlInformation;
 }
 
 //------------------------------------------------------------------------------
 void PduSessionResourceModifyIndicationTransfer::getDlQosFlowPerTnlInformation(
-    QosFlowPerTnlInformation& dlQosFlowPerTnlInformation) const {
+    QosFlowPerTnlInformation &dlQosFlowPerTnlInformation) const {
   dlQosFlowPerTnlInformation = m_DlQosFlowPerTnlInformation;
 }
 
 //------------------------------------------------------------------------------
 void PduSessionResourceModifyIndicationTransfer::
     setAdditionalDlQosFlowPerTnlInformation(
-        const std::vector<QosFlowPerTnlInformationItem>& list) {
+        const std::vector<QosFlowPerTnlInformationItem> &list) {
   QosFlowPerTnlInformationList additionalDlQosFlowPerTnlInformation = {};
   additionalDlQosFlowPerTnlInformation.set(list);
   m_AdditionalDlQosFlowPerTnlInformation =
@@ -47,7 +47,7 @@ void PduSessionResourceModifyIndicationTransfer::
 //------------------------------------------------------------------------------
 void PduSessionResourceModifyIndicationTransfer::
     setAdditionalDlQosFlowPerTnlInformation(
-        const QosFlowPerTnlInformationList& list) {
+        const QosFlowPerTnlInformationList &list) {
   m_AdditionalDlQosFlowPerTnlInformation =
       std::make_optional<QosFlowPerTnlInformationList>(list);
 }
@@ -55,13 +55,13 @@ void PduSessionResourceModifyIndicationTransfer::
 //------------------------------------------------------------------------------
 void PduSessionResourceModifyIndicationTransfer::
     getAdditionalDlQosFlowPerTnlInformation(
-        std::optional<QosFlowPerTnlInformationList>& list) const {
+        std::optional<QosFlowPerTnlInformationList> &list) const {
   list = m_AdditionalDlQosFlowPerTnlInformation;
 }
 
 //------------------------------------------------------------------------------
-int PduSessionResourceModifyIndicationTransfer::encode(
-    uint8_t* buf, int bufSize) {
+int PduSessionResourceModifyIndicationTransfer::encode(uint8_t *buf,
+                                                       int bufSize) {
   ngap_utils::print_asn_msg(
       &asn_DEF_Ngap_PDUSessionResourceModifyIndicationTransfer, m_Ie);
   asn_enc_rval_t er = aper_encode_to_buffer(
@@ -73,12 +73,12 @@ int PduSessionResourceModifyIndicationTransfer::encode(
 }
 
 //------------------------------------------------------------------------------
-bool PduSessionResourceModifyIndicationTransfer::decode(
-    uint8_t* buf, int bufSize) {
-  asn_dec_rval_t rc = asn_decode(
-      NULL, ATS_ALIGNED_CANONICAL_PER,
-      &asn_DEF_Ngap_PDUSessionResourceModifyIndicationTransfer, (void**) &m_Ie,
-      buf, bufSize);
+bool PduSessionResourceModifyIndicationTransfer::decode(uint8_t *buf,
+                                                        int bufSize) {
+  asn_dec_rval_t rc =
+      asn_decode(NULL, ATS_ALIGNED_CANONICAL_PER,
+                 &asn_DEF_Ngap_PDUSessionResourceModifyIndicationTransfer,
+                 (void **)&m_Ie, buf, bufSize);
   if (rc.code == RC_OK) {
     oai::logger::logger_common::ngap().debug(
         "Decoded PduSessionResourceModifyIndicationTransfer successfully");
@@ -90,8 +90,8 @@ bool PduSessionResourceModifyIndicationTransfer::decode(
         "Failure to decode PduSessionResourceModifyIndicationTransfer data");
     // return false;
   }
-  oai::logger::logger_common::ngap().debug(
-      "rc.consumed to decode: %d", rc.consumed);
+  oai::logger::logger_common::ngap().debug("rc.consumed to decode: %d",
+                                           rc.consumed);
 
   if (!m_DlQosFlowPerTnlInformation.decode(m_Ie->dLQosFlowPerTNLInformation)) {
     oai::logger::logger_common::ngap().error(
@@ -115,4 +115,4 @@ bool PduSessionResourceModifyIndicationTransfer::decode(
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

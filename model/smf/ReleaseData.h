@@ -19,14 +19,14 @@
 #ifndef ReleaseData_H_
 #define ReleaseData_H_
 
+#include "Cause.h"
 #include "NgApCause.h"
 #include "SecondaryRatUsageInfo.h"
-#include "Cause.h"
-#include <string>
-#include "UserLocation.h"
 #include "SecondaryRatUsageReport.h"
-#include <vector>
+#include "UserLocation.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::smf {
 
@@ -34,7 +34,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class ReleaseData {
- public:
+public:
   ReleaseData();
   virtual ~ReleaseData();
 
@@ -47,14 +47,14 @@ class ReleaseData {
   ///
   /// </summary>
   Cause getCause() const;
-  void setCause(Cause const& value);
+  void setCause(Cause const &value);
   bool causeIsSet() const;
   void unsetCause();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::NgApCause getNgApCause() const;
-  void setNgApCause(oai::model::common::NgApCause const& value);
+  void setNgApCause(oai::model::common::NgApCause const &value);
   bool ngApCauseIsSet() const;
   void unsetNgApCause();
   /// <summary>
@@ -68,42 +68,42 @@ class ReleaseData {
   ///
   /// </summary>
   oai::model::common::UserLocation getUeLocation() const;
-  void setUeLocation(oai::model::common::UserLocation const& value);
+  void setUeLocation(oai::model::common::UserLocation const &value);
   bool ueLocationIsSet() const;
   void unsetUeLocation();
   /// <summary>
   ///
   /// </summary>
   std::string getUeTimeZone() const;
-  void setUeTimeZone(std::string const& value);
+  void setUeTimeZone(std::string const &value);
   bool ueTimeZoneIsSet() const;
   void unsetUeTimeZone();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::UserLocation getAddUeLocation() const;
-  void setAddUeLocation(oai::model::common::UserLocation const& value);
+  void setAddUeLocation(oai::model::common::UserLocation const &value);
   bool addUeLocationIsSet() const;
   void unsetAddUeLocation();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::SecondaryRatUsageReport>&
+  std::vector<oai::model::common::SecondaryRatUsageReport> &
   getSecondaryRatUsageReport();
   bool secondaryRatUsageReportIsSet() const;
   void unsetSecondaryRatUsageReport();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::SecondaryRatUsageInfo>&
+  std::vector<oai::model::common::SecondaryRatUsageInfo> &
   getSecondaryRatUsageInfo();
   bool secondaryRatUsageInfoIsSet() const;
   void unsetSecondaryRatUsageInfo();
 
-  friend void to_json(nlohmann::json& j, const ReleaseData& o);
-  friend void from_json(const nlohmann::json& j, ReleaseData& o);
+  friend void to_json(nlohmann::json &j, const ReleaseData &o);
+  friend void from_json(const nlohmann::json &j, ReleaseData &o);
 
- protected:
+protected:
   Cause m_Cause;
   bool m_CauseIsSet;
   oai::model::common::NgApCause m_NgApCause;
@@ -124,6 +124,6 @@ class ReleaseData {
   bool m_SecondaryRatUsageInfoIsSet;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* ReleaseData_H_ */

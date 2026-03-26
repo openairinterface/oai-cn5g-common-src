@@ -19,17 +19,17 @@
 namespace oai::udr::model {
 
 ReportingOptions::ReportingOptions() {
-  m_ReportModeIsSet      = false;
-  m_MaxNumOfReports      = 0;
+  m_ReportModeIsSet = false;
+  m_MaxNumOfReports = 0;
   m_MaxNumOfReportsIsSet = false;
-  m_Expiry               = "";
-  m_ExpiryIsSet          = false;
-  m_SamplingRatio        = 0;
-  m_SamplingRatioIsSet   = false;
-  m_GuardTime            = 0;
-  m_GuardTimeIsSet       = false;
-  m_ReportPeriod         = 0;
-  m_ReportPeriodIsSet    = false;
+  m_Expiry = "";
+  m_ExpiryIsSet = false;
+  m_SamplingRatio = 0;
+  m_SamplingRatioIsSet = false;
+  m_GuardTime = 0;
+  m_GuardTimeIsSet = false;
+  m_ReportPeriod = 0;
+  m_ReportPeriodIsSet = false;
 }
 
 ReportingOptions::~ReportingOptions() {}
@@ -38,17 +38,23 @@ void ReportingOptions::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const ReportingOptions& o) {
+void to_json(nlohmann::json &j, const ReportingOptions &o) {
   j = nlohmann::json();
-  if (o.reportModeIsSet()) j["reportMode"] = o.m_ReportMode;
-  if (o.maxNumOfReportsIsSet()) j["maxNumOfReports"] = o.m_MaxNumOfReports;
-  if (o.expiryIsSet()) j["expiry"] = o.m_Expiry;
-  if (o.samplingRatioIsSet()) j["samplingRatio"] = o.m_SamplingRatio;
-  if (o.guardTimeIsSet()) j["guardTime"] = o.m_GuardTime;
-  if (o.reportPeriodIsSet()) j["reportPeriod"] = o.m_ReportPeriod;
+  if (o.reportModeIsSet())
+    j["reportMode"] = o.m_ReportMode;
+  if (o.maxNumOfReportsIsSet())
+    j["maxNumOfReports"] = o.m_MaxNumOfReports;
+  if (o.expiryIsSet())
+    j["expiry"] = o.m_Expiry;
+  if (o.samplingRatioIsSet())
+    j["samplingRatio"] = o.m_SamplingRatio;
+  if (o.guardTimeIsSet())
+    j["guardTime"] = o.m_GuardTime;
+  if (o.reportPeriodIsSet())
+    j["reportPeriod"] = o.m_ReportPeriod;
 }
 
-void from_json(const nlohmann::json& j, ReportingOptions& o) {
+void from_json(const nlohmann::json &j, ReportingOptions &o) {
   if (j.find("reportMode") != j.end()) {
     j.at("reportMode").get_to(o.m_ReportMode);
     o.m_ReportModeIsSet = true;
@@ -75,24 +81,18 @@ void from_json(const nlohmann::json& j, ReportingOptions& o) {
   }
 }
 
-EventReportMode ReportingOptions::getReportMode() const {
-  return m_ReportMode;
-}
-void ReportingOptions::setReportMode(EventReportMode const& value) {
-  m_ReportMode      = value;
+EventReportMode ReportingOptions::getReportMode() const { return m_ReportMode; }
+void ReportingOptions::setReportMode(EventReportMode const &value) {
+  m_ReportMode = value;
   m_ReportModeIsSet = true;
 }
-bool ReportingOptions::reportModeIsSet() const {
-  return m_ReportModeIsSet;
-}
-void ReportingOptions::unsetReportMode() {
-  m_ReportModeIsSet = false;
-}
+bool ReportingOptions::reportModeIsSet() const { return m_ReportModeIsSet; }
+void ReportingOptions::unsetReportMode() { m_ReportModeIsSet = false; }
 int32_t ReportingOptions::getMaxNumOfReports() const {
   return m_MaxNumOfReports;
 }
 void ReportingOptions::setMaxNumOfReports(int32_t const value) {
-  m_MaxNumOfReports      = value;
+  m_MaxNumOfReports = value;
   m_MaxNumOfReportsIsSet = true;
 }
 bool ReportingOptions::maxNumOfReportsIsSet() const {
@@ -101,57 +101,35 @@ bool ReportingOptions::maxNumOfReportsIsSet() const {
 void ReportingOptions::unsetMaxNumOfReports() {
   m_MaxNumOfReportsIsSet = false;
 }
-std::string ReportingOptions::getExpiry() const {
-  return m_Expiry;
-}
-void ReportingOptions::setExpiry(std::string const& value) {
-  m_Expiry      = value;
+std::string ReportingOptions::getExpiry() const { return m_Expiry; }
+void ReportingOptions::setExpiry(std::string const &value) {
+  m_Expiry = value;
   m_ExpiryIsSet = true;
 }
-bool ReportingOptions::expiryIsSet() const {
-  return m_ExpiryIsSet;
-}
-void ReportingOptions::unsetExpiry() {
-  m_ExpiryIsSet = false;
-}
-int32_t ReportingOptions::getSamplingRatio() const {
-  return m_SamplingRatio;
-}
+bool ReportingOptions::expiryIsSet() const { return m_ExpiryIsSet; }
+void ReportingOptions::unsetExpiry() { m_ExpiryIsSet = false; }
+int32_t ReportingOptions::getSamplingRatio() const { return m_SamplingRatio; }
 void ReportingOptions::setSamplingRatio(int32_t const value) {
-  m_SamplingRatio      = value;
+  m_SamplingRatio = value;
   m_SamplingRatioIsSet = true;
 }
 bool ReportingOptions::samplingRatioIsSet() const {
   return m_SamplingRatioIsSet;
 }
-void ReportingOptions::unsetSamplingRatio() {
-  m_SamplingRatioIsSet = false;
-}
-int32_t ReportingOptions::getGuardTime() const {
-  return m_GuardTime;
-}
+void ReportingOptions::unsetSamplingRatio() { m_SamplingRatioIsSet = false; }
+int32_t ReportingOptions::getGuardTime() const { return m_GuardTime; }
 void ReportingOptions::setGuardTime(int32_t const value) {
-  m_GuardTime      = value;
+  m_GuardTime = value;
   m_GuardTimeIsSet = true;
 }
-bool ReportingOptions::guardTimeIsSet() const {
-  return m_GuardTimeIsSet;
-}
-void ReportingOptions::unsetGuardTime() {
-  m_GuardTimeIsSet = false;
-}
-int32_t ReportingOptions::getReportPeriod() const {
-  return m_ReportPeriod;
-}
+bool ReportingOptions::guardTimeIsSet() const { return m_GuardTimeIsSet; }
+void ReportingOptions::unsetGuardTime() { m_GuardTimeIsSet = false; }
+int32_t ReportingOptions::getReportPeriod() const { return m_ReportPeriod; }
 void ReportingOptions::setReportPeriod(int32_t const value) {
-  m_ReportPeriod      = value;
+  m_ReportPeriod = value;
   m_ReportPeriodIsSet = true;
 }
-bool ReportingOptions::reportPeriodIsSet() const {
-  return m_ReportPeriodIsSet;
-}
-void ReportingOptions::unsetReportPeriod() {
-  m_ReportPeriodIsSet = false;
-}
+bool ReportingOptions::reportPeriodIsSet() const { return m_ReportPeriodIsSet; }
+void ReportingOptions::unsetReportPeriod() { m_ReportPeriodIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

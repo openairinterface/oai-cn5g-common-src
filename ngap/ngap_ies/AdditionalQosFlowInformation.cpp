@@ -27,9 +27,9 @@ void AdditionalQosFlowInformation::set(
 
 //------------------------------------------------------------------------------
 bool AdditionalQosFlowInformation::get(
-    e_Ngap_AdditionalQosFlowInformation& value) const {
+    e_Ngap_AdditionalQosFlowInformation &value) const {
   if (m_QosFlowInfo == Ngap_AdditionalQosFlowInformation_more_likely)
-    value = (e_Ngap_AdditionalQosFlowInformation) m_QosFlowInfo;
+    value = (e_Ngap_AdditionalQosFlowInformation)m_QosFlowInfo;
   else
     return false;
 
@@ -38,7 +38,7 @@ bool AdditionalQosFlowInformation::get(
 
 //------------------------------------------------------------------------------
 bool AdditionalQosFlowInformation::encode(
-    Ngap_AdditionalQosFlowInformation_t& value) const {
+    Ngap_AdditionalQosFlowInformation_t &value) const {
   value = m_QosFlowInfo;
 
   return true;
@@ -46,9 +46,9 @@ bool AdditionalQosFlowInformation::encode(
 
 //------------------------------------------------------------------------------
 bool AdditionalQosFlowInformation::decode(
-    const Ngap_AdditionalQosFlowInformation_t& value) {
+    const Ngap_AdditionalQosFlowInformation_t &value) {
   m_QosFlowInfo = value;
 
   return true;
 }
-}  // namespace oai::ngap
+} // namespace oai::ngap

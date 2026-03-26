@@ -21,7 +21,7 @@ extern "C" {
 /* Dependencies */
 typedef enum Ngap_SourceOfUEActivityBehaviourInformation {
   Ngap_SourceOfUEActivityBehaviourInformation_subscription_information = 0,
-  Ngap_SourceOfUEActivityBehaviourInformation_statistics               = 1
+  Ngap_SourceOfUEActivityBehaviourInformation_statistics = 1
   /*
    * Enumeration is extensible
    */

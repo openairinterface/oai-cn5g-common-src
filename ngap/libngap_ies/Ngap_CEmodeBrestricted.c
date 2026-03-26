@@ -28,8 +28,7 @@ asn_per_constraints_t asn_PER_type_Ngap_CEmodeBrestricted_constr_1
           !defined(ASN_DISABLE_APER_SUPPORT) */
 static const asn_INTEGER_enum_map_t
     asn_MAP_Ngap_CEmodeBrestricted_value2enum_1[] = {
-        {0, 10, "restricted"},
-        {1, 14, "not-restricted"}
+        {0, 10, "restricted"}, {1, 14, "not-restricted"}
         /* This list is extensible */
 };
 static const unsigned int asn_MAP_Ngap_CEmodeBrestricted_enum2value_1[] = {

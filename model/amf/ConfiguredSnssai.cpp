@@ -18,9 +18,7 @@
 
 namespace oai::model::amf {
 
-ConfiguredSnssai::ConfiguredSnssai() {
-  m_MappedHomeSnssaiIsSet = false;
-}
+ConfiguredSnssai::ConfiguredSnssai() { m_MappedHomeSnssaiIsSet = false; }
 
 void ConfiguredSnssai::validate() const {
   std::stringstream msg;
@@ -30,12 +28,12 @@ void ConfiguredSnssai::validate() const {
   // }
 }
 
-bool ConfiguredSnssai::validate(std::stringstream& msg) const {
+bool ConfiguredSnssai::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ConfiguredSnssai::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ConfiguredSnssai::validate(std::stringstream &msg,
+                                const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ConfiguredSnssai" : pathPrefix;
@@ -43,7 +41,7 @@ bool ConfiguredSnssai::validate(
   return success;
 }
 
-bool ConfiguredSnssai::operator==(const ConfiguredSnssai& rhs) const {
+bool ConfiguredSnssai::operator==(const ConfiguredSnssai &rhs) const {
   return
 
       (getConfiguredSnssai() == rhs.getConfiguredSnssai()) &&
@@ -55,17 +53,18 @@ bool ConfiguredSnssai::operator==(const ConfiguredSnssai& rhs) const {
           ;
 }
 
-bool ConfiguredSnssai::operator!=(const ConfiguredSnssai& rhs) const {
+bool ConfiguredSnssai::operator!=(const ConfiguredSnssai &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ConfiguredSnssai& o) {
-  j                     = nlohmann::json();
+void to_json(nlohmann::json &j, const ConfiguredSnssai &o) {
+  j = nlohmann::json();
   j["configuredSnssai"] = o.m_ConfiguredSnssai;
-  if (o.mappedHomeSnssaiIsSet()) j["mappedHomeSnssai"] = o.m_MappedHomeSnssai;
+  if (o.mappedHomeSnssaiIsSet())
+    j["mappedHomeSnssai"] = o.m_MappedHomeSnssai;
 }
 
-void from_json(const nlohmann::json& j, ConfiguredSnssai& o) {
+void from_json(const nlohmann::json &j, ConfiguredSnssai &o) {
   j.at("configuredSnssai").get_to(o.m_ConfiguredSnssai);
   if (j.find("mappedHomeSnssai") != j.end()) {
     j.at("mappedHomeSnssai").get_to(o.m_MappedHomeSnssai);
@@ -77,15 +76,15 @@ oai::model::common::Snssai ConfiguredSnssai::getConfiguredSnssai() const {
   return m_ConfiguredSnssai;
 }
 void ConfiguredSnssai::setConfiguredSnssai(
-    oai::model::common::Snssai const& value) {
+    oai::model::common::Snssai const &value) {
   m_ConfiguredSnssai = value;
 }
 oai::model::common::Snssai ConfiguredSnssai::getMappedHomeSnssai() const {
   return m_MappedHomeSnssai;
 }
 void ConfiguredSnssai::setMappedHomeSnssai(
-    oai::model::common::Snssai const& value) {
-  m_MappedHomeSnssai      = value;
+    oai::model::common::Snssai const &value) {
+  m_MappedHomeSnssai = value;
   m_MappedHomeSnssaiIsSet = true;
 }
 bool ConfiguredSnssai::mappedHomeSnssaiIsSet() const {
@@ -95,4 +94,4 @@ void ConfiguredSnssai::unsetMappedHomeSnssai() {
   m_MappedHomeSnssaiIsSet = false;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

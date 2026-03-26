@@ -20,7 +20,7 @@ namespace oai::model::pcf {
 
 RtpPayloadInfo::RtpPayloadInfo() {
   m_RtpPayloadTypeListIsSet = false;
-  m_RtpPayloadFormatIsSet   = false;
+  m_RtpPayloadFormatIsSet = false;
 }
 
 void RtpPayloadInfo::validate() const {
@@ -30,28 +30,28 @@ void RtpPayloadInfo::validate() const {
   }
 }
 
-bool RtpPayloadInfo::validate(std::stringstream& msg) const {
+bool RtpPayloadInfo::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool RtpPayloadInfo::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool RtpPayloadInfo::validate(std::stringstream &msg,
+                              const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "RtpPayloadInfo" : pathPrefix;
 
   if (rtpPayloadTypeListIsSet()) {
-    const std::vector<int32_t>& value  = m_RtpPayloadTypeList;
+    const std::vector<int32_t> &value = m_RtpPayloadTypeList;
     const std::string currentValuePath = _pathPrefix + ".rtpPayloadTypeList";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const int32_t& value : value) {
+      int i = 0;
+      for (const int32_t &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -72,7 +72,7 @@ bool RtpPayloadInfo::validate(
   return success;
 }
 
-bool RtpPayloadInfo::operator==(const RtpPayloadInfo& rhs) const {
+bool RtpPayloadInfo::operator==(const RtpPayloadInfo &rhs) const {
   return
 
       ((!rtpPayloadTypeListIsSet() && !rhs.rtpPayloadTypeListIsSet()) ||
@@ -86,18 +86,19 @@ bool RtpPayloadInfo::operator==(const RtpPayloadInfo& rhs) const {
           ;
 }
 
-bool RtpPayloadInfo::operator!=(const RtpPayloadInfo& rhs) const {
+bool RtpPayloadInfo::operator!=(const RtpPayloadInfo &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const RtpPayloadInfo& o) {
+void to_json(nlohmann::json &j, const RtpPayloadInfo &o) {
   j = nlohmann::json::object();
   if (o.rtpPayloadTypeListIsSet() || !o.m_RtpPayloadTypeList.empty())
     j["rtpPayloadTypeList"] = o.m_RtpPayloadTypeList;
-  if (o.rtpPayloadFormatIsSet()) j["rtpPayloadFormat"] = o.m_RtpPayloadFormat;
+  if (o.rtpPayloadFormatIsSet())
+    j["rtpPayloadFormat"] = o.m_RtpPayloadFormat;
 }
 
-void from_json(const nlohmann::json& j, RtpPayloadInfo& o) {
+void from_json(const nlohmann::json &j, RtpPayloadInfo &o) {
   if (j.find("rtpPayloadTypeList") != j.end()) {
     j.at("rtpPayloadTypeList").get_to(o.m_RtpPayloadTypeList);
     o.m_RtpPayloadTypeListIsSet = true;
@@ -112,7 +113,7 @@ std::vector<int32_t> RtpPayloadInfo::getRtpPayloadTypeList() const {
   return m_RtpPayloadTypeList;
 }
 void RtpPayloadInfo::setRtpPayloadTypeList(std::vector<int32_t> const value) {
-  m_RtpPayloadTypeList      = value;
+  m_RtpPayloadTypeList = value;
   m_RtpPayloadTypeListIsSet = true;
 }
 bool RtpPayloadInfo::rtpPayloadTypeListIsSet() const {
@@ -125,8 +126,8 @@ oai::model::pcf::RtpPayloadFormat RtpPayloadInfo::getRtpPayloadFormat() const {
   return m_RtpPayloadFormat;
 }
 void RtpPayloadInfo::setRtpPayloadFormat(
-    oai::model::pcf::RtpPayloadFormat const& value) {
-  m_RtpPayloadFormat      = value;
+    oai::model::pcf::RtpPayloadFormat const &value) {
+  m_RtpPayloadFormat = value;
   m_RtpPayloadFormatIsSet = true;
 }
 bool RtpPayloadInfo::rtpPayloadFormatIsSet() const {
@@ -136,4 +137,4 @@ void RtpPayloadInfo::unsetRtpPayloadFormat() {
   m_RtpPayloadFormatIsSet = false;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

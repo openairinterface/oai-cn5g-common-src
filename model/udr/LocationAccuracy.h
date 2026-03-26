@@ -30,7 +30,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class LocationAccuracy {
- public:
+public:
   LocationAccuracy();
   virtual ~LocationAccuracy();
 
@@ -39,12 +39,12 @@ class LocationAccuracy {
   /////////////////////////////////////////////
   /// LocationAccuracy members
 
-  friend void to_json(nlohmann::json& j, const LocationAccuracy& o);
-  friend void from_json(const nlohmann::json& j, LocationAccuracy& o);
+  friend void to_json(nlohmann::json &j, const LocationAccuracy &o);
+  friend void from_json(const nlohmann::json &j, LocationAccuracy &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* LocationAccuracy_H_ */

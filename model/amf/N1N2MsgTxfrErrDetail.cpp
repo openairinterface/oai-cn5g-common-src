@@ -16,8 +16,8 @@
 namespace oai::model::amf {
 
 N1N2MsgTxfrErrDetail::N1N2MsgTxfrErrDetail() {
-  m_RetryAfter          = 0;
-  m_RetryAfterIsSet     = false;
+  m_RetryAfter = 0;
+  m_RetryAfterIsSet = false;
   m_HighestPrioArpIsSet = false;
 }
 
@@ -27,13 +27,15 @@ void N1N2MsgTxfrErrDetail::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const N1N2MsgTxfrErrDetail& o) {
+void to_json(nlohmann::json &j, const N1N2MsgTxfrErrDetail &o) {
   j = nlohmann::json();
-  if (o.retryAfterIsSet()) j["retryAfter"] = o.m_RetryAfter;
-  if (o.highestPrioArpIsSet()) j["highestPrioArp"] = o.m_HighestPrioArp;
+  if (o.retryAfterIsSet())
+    j["retryAfter"] = o.m_RetryAfter;
+  if (o.highestPrioArpIsSet())
+    j["highestPrioArp"] = o.m_HighestPrioArp;
 }
 
-void from_json(const nlohmann::json& j, N1N2MsgTxfrErrDetail& o) {
+void from_json(const nlohmann::json &j, N1N2MsgTxfrErrDetail &o) {
   if (j.find("retryAfter") != j.end()) {
     j.at("retryAfter").get_to(o.m_RetryAfter);
     o.m_RetryAfterIsSet = true;
@@ -44,25 +46,19 @@ void from_json(const nlohmann::json& j, N1N2MsgTxfrErrDetail& o) {
   }
 }
 
-int32_t N1N2MsgTxfrErrDetail::getRetryAfter() const {
-  return m_RetryAfter;
-}
+int32_t N1N2MsgTxfrErrDetail::getRetryAfter() const { return m_RetryAfter; }
 void N1N2MsgTxfrErrDetail::setRetryAfter(int32_t const value) {
-  m_RetryAfter      = value;
+  m_RetryAfter = value;
   m_RetryAfterIsSet = true;
 }
-bool N1N2MsgTxfrErrDetail::retryAfterIsSet() const {
-  return m_RetryAfterIsSet;
-}
-void N1N2MsgTxfrErrDetail::unsetRetryAfter() {
-  m_RetryAfterIsSet = false;
-}
+bool N1N2MsgTxfrErrDetail::retryAfterIsSet() const { return m_RetryAfterIsSet; }
+void N1N2MsgTxfrErrDetail::unsetRetryAfter() { m_RetryAfterIsSet = false; }
 oai::model::common::Arp N1N2MsgTxfrErrDetail::getHighestPrioArp() const {
   return m_HighestPrioArp;
 }
 void N1N2MsgTxfrErrDetail::setHighestPrioArp(
-    oai::model::common::Arp const& value) {
-  m_HighestPrioArp      = value;
+    oai::model::common::Arp const &value) {
+  m_HighestPrioArp = value;
   m_HighestPrioArpIsSet = true;
 }
 bool N1N2MsgTxfrErrDetail::highestPrioArpIsSet() const {
@@ -72,4 +68,4 @@ void N1N2MsgTxfrErrDetail::unsetHighestPrioArp() {
   m_HighestPrioArpIsSet = false;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

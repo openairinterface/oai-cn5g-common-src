@@ -28,7 +28,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class NgKsi {
- public:
+public:
   NgKsi();
   virtual ~NgKsi();
 
@@ -41,22 +41,22 @@ class NgKsi {
   ///
   /// </summary>
   ScType getTsc() const;
-  void setTsc(ScType const& value);
+  void setTsc(ScType const &value);
   /// <summary>
   ///
   /// </summary>
   int32_t getKsi() const;
   void setKsi(int32_t const value);
 
-  friend void to_json(nlohmann::json& j, const NgKsi& o);
-  friend void from_json(const nlohmann::json& j, NgKsi& o);
+  friend void to_json(nlohmann::json &j, const NgKsi &o);
+  friend void from_json(const nlohmann::json &j, NgKsi &o);
 
- protected:
+protected:
   ScType m_Tsc;
 
   int32_t m_Ksi;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* NgKsi_H_ */

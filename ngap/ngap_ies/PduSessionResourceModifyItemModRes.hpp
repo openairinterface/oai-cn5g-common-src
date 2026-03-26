@@ -14,27 +14,25 @@ extern "C" {
 namespace oai::ngap {
 
 class PduSessionResourceModifyItemModRes {
- public:
+public:
   PduSessionResourceModifyItemModRes();
   virtual ~PduSessionResourceModifyItemModRes();
 
-  void set(
-      const PduSessionId& pduSessionId,
-      const OCTET_STRING_t& pduSessionResourceModifyResponseTransfer);
-  void get(
-      PduSessionId& pduSessionId,
-      OCTET_STRING_t& pduSessionResourceModifyResponseTransfer) const;
+  void set(const PduSessionId &pduSessionId,
+           const OCTET_STRING_t &pduSessionResourceModifyResponseTransfer);
+  void get(PduSessionId &pduSessionId,
+           OCTET_STRING_t &pduSessionResourceModifyResponseTransfer) const;
 
   bool encode(
-      Ngap_PDUSessionResourceModifyItemModRes_t& pduSessionResourceItem) const;
+      Ngap_PDUSessionResourceModifyItemModRes_t &pduSessionResourceItem) const;
   bool decode(
-      const Ngap_PDUSessionResourceModifyItemModRes_t& pduSessionResourceItem);
+      const Ngap_PDUSessionResourceModifyItemModRes_t &pduSessionResourceItem);
 
- private:
-  PduSessionId m_PduSessionId;                                // Mandatory
-  OCTET_STRING_t m_PduSessionResourceModifyResponseTransfer;  // Mandatory
+private:
+  PduSessionId m_PduSessionId;                               // Mandatory
+  OCTET_STRING_t m_PduSessionResourceModifyResponseTransfer; // Mandatory
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

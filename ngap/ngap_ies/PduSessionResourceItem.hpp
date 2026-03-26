@@ -19,17 +19,17 @@ extern "C" {
 namespace oai::ngap {
 
 class PduSessionResourceItem {
- public:
+public:
   PduSessionResourceItem();
   virtual ~PduSessionResourceItem();
 
-  void set(const PduSessionId& pduSessionId, const OCTET_STRING_t& resource);
-  void get(PduSessionId& pduSessionId, OCTET_STRING_t& resource) const;
+  void set(const PduSessionId &pduSessionId, const OCTET_STRING_t &resource);
+  void get(PduSessionId &pduSessionId, OCTET_STRING_t &resource) const;
 
-  bool encode(
-      Ngap_PDUSessionID_t& pduSessionId, OCTET_STRING_t& resource) const;
-  bool decode(
-      const Ngap_PDUSessionID_t& pduSessionId, const OCTET_STRING_t& resource);
+  bool encode(Ngap_PDUSessionID_t &pduSessionId,
+              OCTET_STRING_t &resource) const;
+  bool decode(const Ngap_PDUSessionID_t &pduSessionId,
+              const OCTET_STRING_t &resource);
 
   // PDU SESSION RESOURCE SETUP REQUEST
   // For PDU Session Resource Setup Request Item (in child class)
@@ -37,9 +37,9 @@ class PduSessionResourceItem {
   // PDU SESSION RESOURCE SETUP RESPONSE
   // For PDU Session Resource Setup Response Item
   bool encode(
-      Ngap_PDUSessionResourceSetupItemCxtRes_t& pduSessionResourceItem) const;
+      Ngap_PDUSessionResourceSetupItemCxtRes_t &pduSessionResourceItem) const;
   bool decode(
-      const Ngap_PDUSessionResourceSetupItemCxtRes_t& pduSessionResourceItem);
+      const Ngap_PDUSessionResourceSetupItemCxtRes_t &pduSessionResourceItem);
   // TODO: For PDU Session Resource Failed to Setup Item
 
   // PDU SESSION RESOURCE RELEASE COMMAND
@@ -84,27 +84,27 @@ class PduSessionResourceItem {
 
   // HANDOVER REQUIRED
   // PDU Session Resource Item
-  bool encode(Ngap_PDUSessionResourceItemHORqd_t& item) const;
-  bool decode(const Ngap_PDUSessionResourceItemHORqd_t& item);
+  bool encode(Ngap_PDUSessionResourceItemHORqd_t &item) const;
+  bool decode(const Ngap_PDUSessionResourceItemHORqd_t &item);
 
   // HANDOVER COMMAND
   // PDU Session Resource Handover Item
-  bool encode(Ngap_PDUSessionResourceHandoverItem_t& item) const;
-  bool decode(const Ngap_PDUSessionResourceHandoverItem_t& item);
+  bool encode(Ngap_PDUSessionResourceHandoverItem_t &item) const;
+  bool decode(const Ngap_PDUSessionResourceHandoverItem_t &item);
   // PDU Session Resource to Release Item
-  bool encode(Ngap_PDUSessionResourceToReleaseItemHOCmd_t& item) const;
-  bool decode(const Ngap_PDUSessionResourceToReleaseItemHOCmd_t& item);
+  bool encode(Ngap_PDUSessionResourceToReleaseItemHOCmd_t &item) const;
+  bool decode(const Ngap_PDUSessionResourceToReleaseItemHOCmd_t &item);
 
   // HANDOVER REQUEST
   // PDU Session Resource Setup Item (in child class)
 
   // HANDOVER REQUEST ACKNOWLEDGE
   // TODO: PDU Session Resource Admitted Item
-  bool encode(Ngap_PDUSessionResourceAdmittedItem_t& item) const;
-  bool decode(const Ngap_PDUSessionResourceAdmittedItem_t& item);
+  bool encode(Ngap_PDUSessionResourceAdmittedItem_t &item) const;
+  bool decode(const Ngap_PDUSessionResourceAdmittedItem_t &item);
   // TODO: PDU Session Resource Failed to Setup Item
-  bool encode(Ngap_PDUSessionResourceFailedToSetupItemHOAck_t& item) const;
-  bool decode(const Ngap_PDUSessionResourceFailedToSetupItemHOAck_t& item);
+  bool encode(Ngap_PDUSessionResourceFailedToSetupItemHOAck_t &item) const;
+  bool decode(const Ngap_PDUSessionResourceFailedToSetupItemHOAck_t &item);
 
   // PATH SWITCH REQUEST
   // TODO: PDU Session Resource to be Switched in Downlink Item
@@ -120,11 +120,11 @@ class PduSessionResourceItem {
   // SECONDARY RAT DATA USAGE REPORT
   // TODO: PDU Session Resource Secondary RAT Usage Item
 
- private:
-  PduSessionId m_PduSessionId;  // Mandatory
+private:
+  PduSessionId m_PduSessionId; // Mandatory
   OCTET_STRING_t m_Resource;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

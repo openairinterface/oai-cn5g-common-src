@@ -19,9 +19,9 @@
 namespace oai::model::common {
 
 RouteToLocation::RouteToLocation() {
-  m_Dnai             = "";
-  m_RouteInfoIsSet   = false;
-  m_RouteProfId      = "";
+  m_Dnai = "";
+  m_RouteInfoIsSet = false;
+  m_RouteProfId = "";
   m_RouteProfIdIsSet = false;
 }
 
@@ -32,12 +32,12 @@ void RouteToLocation::validate() const {
   }
 }
 
-bool RouteToLocation::validate(std::stringstream& msg) const {
+bool RouteToLocation::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool RouteToLocation::validate(
-    std::stringstream& /* msg */, const std::string& /* pathPrefix */) const {
+bool RouteToLocation::validate(std::stringstream & /* msg */,
+                               const std::string & /* pathPrefix */) const {
   bool success = true;
   /*
   const std::string _pathPrefix =
@@ -46,7 +46,7 @@ bool RouteToLocation::validate(
   return success;
 }
 
-bool RouteToLocation::operator==(const RouteToLocation& rhs) const {
+bool RouteToLocation::operator==(const RouteToLocation &rhs) const {
   return
 
       (getDnai() == rhs.getDnai()) &&
@@ -62,18 +62,20 @@ bool RouteToLocation::operator==(const RouteToLocation& rhs) const {
           ;
 }
 
-bool RouteToLocation::operator!=(const RouteToLocation& rhs) const {
+bool RouteToLocation::operator!=(const RouteToLocation &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const RouteToLocation& o) {
-  j         = nlohmann::json();
+void to_json(nlohmann::json &j, const RouteToLocation &o) {
+  j = nlohmann::json();
   j["dnai"] = o.m_Dnai;
-  if (o.routeInfoIsSet()) j["routeInfo"] = o.m_RouteInfo;
-  if (o.routeProfIdIsSet()) j["routeProfId"] = o.m_RouteProfId;
+  if (o.routeInfoIsSet())
+    j["routeInfo"] = o.m_RouteInfo;
+  if (o.routeProfIdIsSet())
+    j["routeProfId"] = o.m_RouteProfId;
 }
 
-void from_json(const nlohmann::json& j, RouteToLocation& o) {
+void from_json(const nlohmann::json &j, RouteToLocation &o) {
   j.at("dnai").get_to(o.m_Dnai);
   if (j.find("routeInfo") != j.end()) {
     j.at("routeInfo").get_to(o.m_RouteInfo);
@@ -85,38 +87,24 @@ void from_json(const nlohmann::json& j, RouteToLocation& o) {
   }
 }
 
-std::string RouteToLocation::getDnai() const {
-  return m_Dnai;
-}
-void RouteToLocation::setDnai(std::string const& value) {
-  m_Dnai = value;
-}
+std::string RouteToLocation::getDnai() const { return m_Dnai; }
+void RouteToLocation::setDnai(std::string const &value) { m_Dnai = value; }
 oai::model::common::RouteInformation RouteToLocation::getRouteInfo() const {
   return m_RouteInfo;
 }
 void RouteToLocation::setRouteInfo(
-    oai::model::common::RouteInformation const& value) {
-  m_RouteInfo      = value;
+    oai::model::common::RouteInformation const &value) {
+  m_RouteInfo = value;
   m_RouteInfoIsSet = true;
 }
-bool RouteToLocation::routeInfoIsSet() const {
-  return m_RouteInfoIsSet;
-}
-void RouteToLocation::unsetRouteInfo() {
-  m_RouteInfoIsSet = false;
-}
-std::string RouteToLocation::getRouteProfId() const {
-  return m_RouteProfId;
-}
-void RouteToLocation::setRouteProfId(std::string const& value) {
-  m_RouteProfId      = value;
+bool RouteToLocation::routeInfoIsSet() const { return m_RouteInfoIsSet; }
+void RouteToLocation::unsetRouteInfo() { m_RouteInfoIsSet = false; }
+std::string RouteToLocation::getRouteProfId() const { return m_RouteProfId; }
+void RouteToLocation::setRouteProfId(std::string const &value) {
+  m_RouteProfId = value;
   m_RouteProfIdIsSet = true;
 }
-bool RouteToLocation::routeProfIdIsSet() const {
-  return m_RouteProfIdIsSet;
-}
-void RouteToLocation::unsetRouteProfId() {
-  m_RouteProfIdIsSet = false;
-}
+bool RouteToLocation::routeProfIdIsSet() const { return m_RouteProfIdIsSet; }
+void RouteToLocation::unsetRouteProfId() { m_RouteProfIdIsSet = false; }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

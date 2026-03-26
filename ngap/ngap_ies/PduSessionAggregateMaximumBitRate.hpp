@@ -12,23 +12,23 @@ extern "C" {
 namespace oai::ngap {
 
 class PduSessionAggregateMaximumBitRate {
- public:
+public:
   PduSessionAggregateMaximumBitRate();
-  PduSessionAggregateMaximumBitRate(
-      const long& bitRateDl, const long& bitRateUl);
+  PduSessionAggregateMaximumBitRate(const long &bitRateDl,
+                                    const long &bitRateUl);
   virtual ~PduSessionAggregateMaximumBitRate();
 
-  void set(const long& bitRateDl, const long& bitRateUl);
-  bool get(long& bitRateDl, long& bitRateUl) const;
+  void set(const long &bitRateDl, const long &bitRateUl);
+  bool get(long &bitRateDl, long &bitRateUl) const;
 
-  bool encode(Ngap_PDUSessionAggregateMaximumBitRate_t& bitRate) const;
-  bool decode(const Ngap_PDUSessionAggregateMaximumBitRate_t& bitRate);
+  bool encode(Ngap_PDUSessionAggregateMaximumBitRate_t &bitRate) const;
+  bool decode(const Ngap_PDUSessionAggregateMaximumBitRate_t &bitRate);
 
- private:
+private:
   long m_Dl;
   long m_Ul;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

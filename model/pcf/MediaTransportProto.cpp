@@ -27,12 +27,12 @@ void MediaTransportProto::validate() const {
   }
 }
 
-bool MediaTransportProto::validate(std::stringstream& msg) const {
+bool MediaTransportProto::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool MediaTransportProto::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool MediaTransportProto::validate(std::stringstream &msg,
+                                   const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "MediaTransportProto" : pathPrefix;
@@ -40,18 +40,18 @@ bool MediaTransportProto::validate(
   return success;
 }
 
-bool MediaTransportProto::operator==(const MediaTransportProto& rhs) const {
-  return true;  // TODO
+bool MediaTransportProto::operator==(const MediaTransportProto &rhs) const {
+  return true; // TODO
 }
 
-bool MediaTransportProto::operator!=(const MediaTransportProto& rhs) const {
+bool MediaTransportProto::operator!=(const MediaTransportProto &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const MediaTransportProto& o) {
+void to_json(nlohmann::json &j, const MediaTransportProto &o) {
   j = nlohmann::json::object();
 }
 
-void from_json(const nlohmann::json& j, MediaTransportProto& o) {}
+void from_json(const nlohmann::json &j, MediaTransportProto &o) {}
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

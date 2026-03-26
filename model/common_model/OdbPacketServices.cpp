@@ -27,12 +27,12 @@ void OdbPacketServices::validate() const {
   }
 }
 
-bool OdbPacketServices::validate(std::stringstream& msg) const {
+bool OdbPacketServices::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool OdbPacketServices::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool OdbPacketServices::validate(std::stringstream &msg,
+                                 const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "OdbPacketServices" : pathPrefix;
@@ -45,23 +45,21 @@ bool OdbPacketServices::validate(
   return success;
 }
 
-bool OdbPacketServices::operator==(const OdbPacketServices& rhs) const {
+bool OdbPacketServices::operator==(const OdbPacketServices &rhs) const {
   return getValue() == rhs.getValue();
 }
 
-bool OdbPacketServices::operator!=(const OdbPacketServices& rhs) const {
+bool OdbPacketServices::operator!=(const OdbPacketServices &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const OdbPacketServices& o) {
+void to_json(nlohmann::json &j, const OdbPacketServices &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, OdbPacketServices& o) {}
+void from_json(const nlohmann::json &j, OdbPacketServices &o) {}
 
-OdbPacketServices_anyOf OdbPacketServices::getValue() const {
-  return m_value;
-}
+OdbPacketServices_anyOf OdbPacketServices::getValue() const { return m_value; }
 
 void OdbPacketServices::setValue(OdbPacketServices_anyOf value) {
   m_value = value;
@@ -77,4 +75,4 @@ void OdbPacketServices::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

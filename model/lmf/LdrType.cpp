@@ -27,13 +27,13 @@ void LdrType::validate() const {
   }
 }
 
-bool LdrType::validate(std::stringstream& msg) const {
+bool LdrType::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool LdrType::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool LdrType::validate(std::stringstream &msg,
+                       const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "LdrType" : pathPrefix;
 
   if (!m_value.validate(msg)) {
@@ -42,32 +42,24 @@ bool LdrType::validate(
   return success;
 }
 
-bool LdrType::operator==(const LdrType& rhs) const {
+bool LdrType::operator==(const LdrType &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool LdrType::operator!=(const LdrType& rhs) const {
-  return !(*this == rhs);
-}
+bool LdrType::operator!=(const LdrType &rhs) const { return !(*this == rhs); }
 
-void to_json(nlohmann::json& j, const LdrType& o) {
+void to_json(nlohmann::json &j, const LdrType &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, LdrType& o) {
-  from_json(j, o.m_value);
-}
+void from_json(const nlohmann::json &j, LdrType &o) { from_json(j, o.m_value); }
 
-LdrType_anyOf LdrType::getValue() const {
-  return m_value;
-}
+LdrType_anyOf LdrType::getValue() const { return m_value; }
 
-void LdrType::setValue(LdrType_anyOf value) {
-  m_value = value;
-}
+void LdrType::setValue(LdrType_anyOf value) { m_value = value; }
 
 LdrType_anyOf::eLdrType_anyOf LdrType::getEnumValue() const {
   return m_value.getValue();
@@ -77,4 +69,4 @@ void LdrType::setEnumValue(LdrType_anyOf::eLdrType_anyOf value) {
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

@@ -14,7 +14,7 @@ constexpr auto kNon3gppNwProvidedPoliciesIeName =
 namespace oai::nas {
 
 class Non3gppNwProvidedPolicies : public Type1NasIeFormatTv {
- public:
+public:
   Non3gppNwProvidedPolicies();
   Non3gppNwProvidedPolicies(uint8_t value);
   virtual ~Non3gppNwProvidedPolicies();
@@ -24,9 +24,9 @@ class Non3gppNwProvidedPolicies : public Type1NasIeFormatTv {
   void SetValue(uint8_t value);
   uint8_t GetValue() const;
 
- private:
+private:
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

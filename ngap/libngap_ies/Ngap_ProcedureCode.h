@@ -37,101 +37,98 @@ per_type_decoder_f Ngap_ProcedureCode_decode_uper;
 per_type_encoder_f Ngap_ProcedureCode_encode_uper;
 per_type_decoder_f Ngap_ProcedureCode_decode_aper;
 per_type_encoder_f Ngap_ProcedureCode_encode_aper;
-#define Ngap_ProcedureCode_id_AMFConfigurationUpdate ((Ngap_ProcedureCode_t) 0)
-#define Ngap_ProcedureCode_id_AMFStatusIndication ((Ngap_ProcedureCode_t) 1)
-#define Ngap_ProcedureCode_id_CellTrafficTrace ((Ngap_ProcedureCode_t) 2)
-#define Ngap_ProcedureCode_id_DeactivateTrace ((Ngap_ProcedureCode_t) 3)
-#define Ngap_ProcedureCode_id_DownlinkNASTransport ((Ngap_ProcedureCode_t) 4)
+#define Ngap_ProcedureCode_id_AMFConfigurationUpdate ((Ngap_ProcedureCode_t)0)
+#define Ngap_ProcedureCode_id_AMFStatusIndication ((Ngap_ProcedureCode_t)1)
+#define Ngap_ProcedureCode_id_CellTrafficTrace ((Ngap_ProcedureCode_t)2)
+#define Ngap_ProcedureCode_id_DeactivateTrace ((Ngap_ProcedureCode_t)3)
+#define Ngap_ProcedureCode_id_DownlinkNASTransport ((Ngap_ProcedureCode_t)4)
 #define Ngap_ProcedureCode_id_DownlinkNonUEAssociatedNRPPaTransport            \
-  ((Ngap_ProcedureCode_t) 5)
+  ((Ngap_ProcedureCode_t)5)
 #define Ngap_ProcedureCode_id_DownlinkRANConfigurationTransfer                 \
-  ((Ngap_ProcedureCode_t) 6)
+  ((Ngap_ProcedureCode_t)6)
 #define Ngap_ProcedureCode_id_DownlinkRANStatusTransfer                        \
-  ((Ngap_ProcedureCode_t) 7)
+  ((Ngap_ProcedureCode_t)7)
 #define Ngap_ProcedureCode_id_DownlinkUEAssociatedNRPPaTransport               \
-  ((Ngap_ProcedureCode_t) 8)
-#define Ngap_ProcedureCode_id_ErrorIndication ((Ngap_ProcedureCode_t) 9)
-#define Ngap_ProcedureCode_id_HandoverCancel ((Ngap_ProcedureCode_t) 10)
-#define Ngap_ProcedureCode_id_HandoverNotification ((Ngap_ProcedureCode_t) 11)
-#define Ngap_ProcedureCode_id_HandoverPreparation ((Ngap_ProcedureCode_t) 12)
+  ((Ngap_ProcedureCode_t)8)
+#define Ngap_ProcedureCode_id_ErrorIndication ((Ngap_ProcedureCode_t)9)
+#define Ngap_ProcedureCode_id_HandoverCancel ((Ngap_ProcedureCode_t)10)
+#define Ngap_ProcedureCode_id_HandoverNotification ((Ngap_ProcedureCode_t)11)
+#define Ngap_ProcedureCode_id_HandoverPreparation ((Ngap_ProcedureCode_t)12)
 #define Ngap_ProcedureCode_id_HandoverResourceAllocation                       \
-  ((Ngap_ProcedureCode_t) 13)
-#define Ngap_ProcedureCode_id_InitialContextSetup ((Ngap_ProcedureCode_t) 14)
-#define Ngap_ProcedureCode_id_InitialUEMessage ((Ngap_ProcedureCode_t) 15)
+  ((Ngap_ProcedureCode_t)13)
+#define Ngap_ProcedureCode_id_InitialContextSetup ((Ngap_ProcedureCode_t)14)
+#define Ngap_ProcedureCode_id_InitialUEMessage ((Ngap_ProcedureCode_t)15)
 #define Ngap_ProcedureCode_id_LocationReportingControl                         \
-  ((Ngap_ProcedureCode_t) 16)
+  ((Ngap_ProcedureCode_t)16)
 #define Ngap_ProcedureCode_id_LocationReportingFailureIndication               \
-  ((Ngap_ProcedureCode_t) 17)
-#define Ngap_ProcedureCode_id_LocationReport ((Ngap_ProcedureCode_t) 18)
+  ((Ngap_ProcedureCode_t)17)
+#define Ngap_ProcedureCode_id_LocationReport ((Ngap_ProcedureCode_t)18)
 #define Ngap_ProcedureCode_id_NASNonDeliveryIndication                         \
-  ((Ngap_ProcedureCode_t) 19)
-#define Ngap_ProcedureCode_id_NGReset ((Ngap_ProcedureCode_t) 20)
-#define Ngap_ProcedureCode_id_NGSetup ((Ngap_ProcedureCode_t) 21)
-#define Ngap_ProcedureCode_id_OverloadStart ((Ngap_ProcedureCode_t) 22)
-#define Ngap_ProcedureCode_id_OverloadStop ((Ngap_ProcedureCode_t) 23)
-#define Ngap_ProcedureCode_id_Paging ((Ngap_ProcedureCode_t) 24)
-#define Ngap_ProcedureCode_id_PathSwitchRequest ((Ngap_ProcedureCode_t) 25)
+  ((Ngap_ProcedureCode_t)19)
+#define Ngap_ProcedureCode_id_NGReset ((Ngap_ProcedureCode_t)20)
+#define Ngap_ProcedureCode_id_NGSetup ((Ngap_ProcedureCode_t)21)
+#define Ngap_ProcedureCode_id_OverloadStart ((Ngap_ProcedureCode_t)22)
+#define Ngap_ProcedureCode_id_OverloadStop ((Ngap_ProcedureCode_t)23)
+#define Ngap_ProcedureCode_id_Paging ((Ngap_ProcedureCode_t)24)
+#define Ngap_ProcedureCode_id_PathSwitchRequest ((Ngap_ProcedureCode_t)25)
 #define Ngap_ProcedureCode_id_PDUSessionResourceModify                         \
-  ((Ngap_ProcedureCode_t) 26)
+  ((Ngap_ProcedureCode_t)26)
 #define Ngap_ProcedureCode_id_PDUSessionResourceModifyIndication               \
-  ((Ngap_ProcedureCode_t) 27)
+  ((Ngap_ProcedureCode_t)27)
 #define Ngap_ProcedureCode_id_PDUSessionResourceRelease                        \
-  ((Ngap_ProcedureCode_t) 28)
-#define Ngap_ProcedureCode_id_PDUSessionResourceSetup                          \
-  ((Ngap_ProcedureCode_t) 29)
+  ((Ngap_ProcedureCode_t)28)
+#define Ngap_ProcedureCode_id_PDUSessionResourceSetup ((Ngap_ProcedureCode_t)29)
 #define Ngap_ProcedureCode_id_PDUSessionResourceNotify                         \
-  ((Ngap_ProcedureCode_t) 30)
-#define Ngap_ProcedureCode_id_PrivateMessage ((Ngap_ProcedureCode_t) 31)
-#define Ngap_ProcedureCode_id_PWSCancel ((Ngap_ProcedureCode_t) 32)
-#define Ngap_ProcedureCode_id_PWSFailureIndication ((Ngap_ProcedureCode_t) 33)
-#define Ngap_ProcedureCode_id_PWSRestartIndication ((Ngap_ProcedureCode_t) 34)
-#define Ngap_ProcedureCode_id_RANConfigurationUpdate ((Ngap_ProcedureCode_t) 35)
-#define Ngap_ProcedureCode_id_RerouteNASRequest ((Ngap_ProcedureCode_t) 36)
+  ((Ngap_ProcedureCode_t)30)
+#define Ngap_ProcedureCode_id_PrivateMessage ((Ngap_ProcedureCode_t)31)
+#define Ngap_ProcedureCode_id_PWSCancel ((Ngap_ProcedureCode_t)32)
+#define Ngap_ProcedureCode_id_PWSFailureIndication ((Ngap_ProcedureCode_t)33)
+#define Ngap_ProcedureCode_id_PWSRestartIndication ((Ngap_ProcedureCode_t)34)
+#define Ngap_ProcedureCode_id_RANConfigurationUpdate ((Ngap_ProcedureCode_t)35)
+#define Ngap_ProcedureCode_id_RerouteNASRequest ((Ngap_ProcedureCode_t)36)
 #define Ngap_ProcedureCode_id_RRCInactiveTransitionReport                      \
-  ((Ngap_ProcedureCode_t) 37)
-#define Ngap_ProcedureCode_id_TraceFailureIndication ((Ngap_ProcedureCode_t) 38)
-#define Ngap_ProcedureCode_id_TraceStart ((Ngap_ProcedureCode_t) 39)
-#define Ngap_ProcedureCode_id_UEContextModification ((Ngap_ProcedureCode_t) 40)
-#define Ngap_ProcedureCode_id_UEContextRelease ((Ngap_ProcedureCode_t) 41)
-#define Ngap_ProcedureCode_id_UEContextReleaseRequest                          \
-  ((Ngap_ProcedureCode_t) 42)
-#define Ngap_ProcedureCode_id_UERadioCapabilityCheck ((Ngap_ProcedureCode_t) 43)
+  ((Ngap_ProcedureCode_t)37)
+#define Ngap_ProcedureCode_id_TraceFailureIndication ((Ngap_ProcedureCode_t)38)
+#define Ngap_ProcedureCode_id_TraceStart ((Ngap_ProcedureCode_t)39)
+#define Ngap_ProcedureCode_id_UEContextModification ((Ngap_ProcedureCode_t)40)
+#define Ngap_ProcedureCode_id_UEContextRelease ((Ngap_ProcedureCode_t)41)
+#define Ngap_ProcedureCode_id_UEContextReleaseRequest ((Ngap_ProcedureCode_t)42)
+#define Ngap_ProcedureCode_id_UERadioCapabilityCheck ((Ngap_ProcedureCode_t)43)
 #define Ngap_ProcedureCode_id_UERadioCapabilityInfoIndication                  \
-  ((Ngap_ProcedureCode_t) 44)
-#define Ngap_ProcedureCode_id_UETNLABindingRelease ((Ngap_ProcedureCode_t) 45)
-#define Ngap_ProcedureCode_id_UplinkNASTransport ((Ngap_ProcedureCode_t) 46)
+  ((Ngap_ProcedureCode_t)44)
+#define Ngap_ProcedureCode_id_UETNLABindingRelease ((Ngap_ProcedureCode_t)45)
+#define Ngap_ProcedureCode_id_UplinkNASTransport ((Ngap_ProcedureCode_t)46)
 #define Ngap_ProcedureCode_id_UplinkNonUEAssociatedNRPPaTransport              \
-  ((Ngap_ProcedureCode_t) 47)
+  ((Ngap_ProcedureCode_t)47)
 #define Ngap_ProcedureCode_id_UplinkRANConfigurationTransfer                   \
-  ((Ngap_ProcedureCode_t) 48)
-#define Ngap_ProcedureCode_id_UplinkRANStatusTransfer                          \
-  ((Ngap_ProcedureCode_t) 49)
+  ((Ngap_ProcedureCode_t)48)
+#define Ngap_ProcedureCode_id_UplinkRANStatusTransfer ((Ngap_ProcedureCode_t)49)
 #define Ngap_ProcedureCode_id_UplinkUEAssociatedNRPPaTransport                 \
-  ((Ngap_ProcedureCode_t) 50)
-#define Ngap_ProcedureCode_id_WriteReplaceWarning ((Ngap_ProcedureCode_t) 51)
+  ((Ngap_ProcedureCode_t)50)
+#define Ngap_ProcedureCode_id_WriteReplaceWarning ((Ngap_ProcedureCode_t)51)
 #define Ngap_ProcedureCode_id_SecondaryRATDataUsageReport                      \
-  ((Ngap_ProcedureCode_t) 52)
+  ((Ngap_ProcedureCode_t)52)
 #define Ngap_ProcedureCode_id_UplinkRIMInformationTransfer                     \
-  ((Ngap_ProcedureCode_t) 53)
+  ((Ngap_ProcedureCode_t)53)
 #define Ngap_ProcedureCode_id_DownlinkRIMInformationTransfer                   \
-  ((Ngap_ProcedureCode_t) 54)
-#define Ngap_ProcedureCode_id_RetrieveUEInformation ((Ngap_ProcedureCode_t) 55)
-#define Ngap_ProcedureCode_id_UEInformationTransfer ((Ngap_ProcedureCode_t) 56)
+  ((Ngap_ProcedureCode_t)54)
+#define Ngap_ProcedureCode_id_RetrieveUEInformation ((Ngap_ProcedureCode_t)55)
+#define Ngap_ProcedureCode_id_UEInformationTransfer ((Ngap_ProcedureCode_t)56)
 #define Ngap_ProcedureCode_id_RANCPRelocationIndication                        \
-  ((Ngap_ProcedureCode_t) 57)
-#define Ngap_ProcedureCode_id_UEContextResume ((Ngap_ProcedureCode_t) 58)
-#define Ngap_ProcedureCode_id_UEContextSuspend ((Ngap_ProcedureCode_t) 59)
+  ((Ngap_ProcedureCode_t)57)
+#define Ngap_ProcedureCode_id_UEContextResume ((Ngap_ProcedureCode_t)58)
+#define Ngap_ProcedureCode_id_UEContextSuspend ((Ngap_ProcedureCode_t)59)
 #define Ngap_ProcedureCode_id_UERadioCapabilityIDMapping                       \
-  ((Ngap_ProcedureCode_t) 60)
-#define Ngap_ProcedureCode_id_HandoverSuccess ((Ngap_ProcedureCode_t) 61)
+  ((Ngap_ProcedureCode_t)60)
+#define Ngap_ProcedureCode_id_HandoverSuccess ((Ngap_ProcedureCode_t)61)
 #define Ngap_ProcedureCode_id_UplinkRANEarlyStatusTransfer                     \
-  ((Ngap_ProcedureCode_t) 62)
+  ((Ngap_ProcedureCode_t)62)
 #define Ngap_ProcedureCode_id_DownlinkRANEarlyStatusTransfer                   \
-  ((Ngap_ProcedureCode_t) 63)
+  ((Ngap_ProcedureCode_t)63)
 #define Ngap_ProcedureCode_id_AMFCPRelocationIndication                        \
-  ((Ngap_ProcedureCode_t) 64)
+  ((Ngap_ProcedureCode_t)64)
 #define Ngap_ProcedureCode_id_ConnectionEstablishmentIndication                \
-  ((Ngap_ProcedureCode_t) 65)
+  ((Ngap_ProcedureCode_t)65)
 
 #ifdef __cplusplus
 }

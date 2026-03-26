@@ -28,8 +28,7 @@ asn_per_constraints_t asn_PER_type_Ngap_IMSVoiceSupportIndicator_constr_1
           !defined(ASN_DISABLE_APER_SUPPORT) */
 static const asn_INTEGER_enum_map_t
     asn_MAP_Ngap_IMSVoiceSupportIndicator_value2enum_1[] = {
-        {0, 9, "supported"},
-        {1, 13, "not-supported"}
+        {0, 9, "supported"}, {1, 13, "not-supported"}
         /* This list is extensible */
 };
 static const unsigned int asn_MAP_Ngap_IMSVoiceSupportIndicator_enum2value_1[] =

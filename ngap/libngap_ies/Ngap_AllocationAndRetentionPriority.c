@@ -31,8 +31,8 @@ asn_TYPE_member_t asn_MBR_Ngap_AllocationAndRetentionPriority_1[] = {
      "priorityLevelARP"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_AllocationAndRetentionPriority, pre_emptionCapability),
+     offsetof(struct Ngap_AllocationAndRetentionPriority,
+              pre_emptionCapability),
      (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_Pre_emptionCapability,
@@ -51,8 +51,8 @@ asn_TYPE_member_t asn_MBR_Ngap_AllocationAndRetentionPriority_1[] = {
      "pre-emptionCapability"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_AllocationAndRetentionPriority, pre_emptionVulnerability),
+     offsetof(struct Ngap_AllocationAndRetentionPriority,
+              pre_emptionVulnerability),
      (ASN_TAG_CLASS_CONTEXT | (2 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_Pre_emptionVulnerability,

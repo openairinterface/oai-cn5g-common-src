@@ -19,9 +19,9 @@
 namespace oai::udr::model {
 
 SmsSubscriptionData::SmsSubscriptionData() {
-  m_SmsSubscribed            = false;
-  m_SmsSubscribedIsSet       = false;
-  m_SharedSmsSubsDataId      = "";
+  m_SmsSubscribed = false;
+  m_SmsSubscribedIsSet = false;
+  m_SharedSmsSubsDataId = "";
   m_SharedSmsSubsDataIdIsSet = false;
 }
 
@@ -31,14 +31,15 @@ void SmsSubscriptionData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const SmsSubscriptionData& o) {
+void to_json(nlohmann::json &j, const SmsSubscriptionData &o) {
   j = nlohmann::json();
-  if (o.smsSubscribedIsSet()) j["smsSubscribed"] = o.m_SmsSubscribed;
+  if (o.smsSubscribedIsSet())
+    j["smsSubscribed"] = o.m_SmsSubscribed;
   if (o.sharedSmsSubsDataIdIsSet())
     j["sharedSmsSubsDataId"] = o.m_SharedSmsSubsDataId;
 }
 
-void from_json(const nlohmann::json& j, SmsSubscriptionData& o) {
+void from_json(const nlohmann::json &j, SmsSubscriptionData &o) {
   if (j.find("smsSubscribed") != j.end()) {
     j.at("smsSubscribed").get_to(o.m_SmsSubscribed);
     o.m_SmsSubscribedIsSet = true;
@@ -49,24 +50,20 @@ void from_json(const nlohmann::json& j, SmsSubscriptionData& o) {
   }
 }
 
-bool SmsSubscriptionData::isSmsSubscribed() const {
-  return m_SmsSubscribed;
-}
+bool SmsSubscriptionData::isSmsSubscribed() const { return m_SmsSubscribed; }
 void SmsSubscriptionData::setSmsSubscribed(bool const value) {
-  m_SmsSubscribed      = value;
+  m_SmsSubscribed = value;
   m_SmsSubscribedIsSet = true;
 }
 bool SmsSubscriptionData::smsSubscribedIsSet() const {
   return m_SmsSubscribedIsSet;
 }
-void SmsSubscriptionData::unsetSmsSubscribed() {
-  m_SmsSubscribedIsSet = false;
-}
+void SmsSubscriptionData::unsetSmsSubscribed() { m_SmsSubscribedIsSet = false; }
 std::string SmsSubscriptionData::getSharedSmsSubsDataId() const {
   return m_SharedSmsSubsDataId;
 }
-void SmsSubscriptionData::setSharedSmsSubsDataId(std::string const& value) {
-  m_SharedSmsSubsDataId      = value;
+void SmsSubscriptionData::setSharedSmsSubsDataId(std::string const &value) {
+  m_SharedSmsSubsDataId = value;
   m_SharedSmsSubsDataIdIsSet = true;
 }
 bool SmsSubscriptionData::sharedSmsSubsDataIdIsSet() const {
@@ -76,4 +73,4 @@ void SmsSubscriptionData::unsetSharedSmsSubsDataId() {
   m_SharedSmsSubsDataIdIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

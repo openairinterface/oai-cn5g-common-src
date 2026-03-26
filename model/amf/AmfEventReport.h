@@ -19,20 +19,20 @@
 #ifndef AmfEventReport_H_
 #define AmfEventReport_H_
 
-#include "RmInfo.h"
-#include "UeReachability.h"
-#include "AmfEventState.h"
-#include "AmfEventArea.h"
-#include <string>
-#include "UserLocation.h"
 #include "5GsUserStateInfo.h"
-#include <vector>
 #include "AccessType.h"
+#include "AmfEventArea.h"
+#include "AmfEventState.h"
 #include "AmfEventType.h"
 #include "CmInfo.h"
 #include "CommunicationFailure.h"
 #include "LossOfConnectivityReason.h"
+#include "RmInfo.h"
+#include "UeReachability.h"
+#include "UserLocation.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::amf {
 
@@ -40,7 +40,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class AmfEventReport {
- public:
+public:
   AmfEventReport();
   virtual ~AmfEventReport() = default;
 
@@ -54,10 +54,10 @@ class AmfEventReport {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const AmfEventReport& rhs) const;
-  bool operator!=(const AmfEventReport& rhs) const;
+  bool operator==(const AmfEventReport &rhs) const;
+  bool operator!=(const AmfEventReport &rhs) const;
 
   /////////////////////////////////////////////
   /// AmfEventReport members
@@ -66,22 +66,22 @@ class AmfEventReport {
   ///
   /// </summary>
   AmfEventType getType() const;
-  void setType(AmfEventType const& value);
+  void setType(AmfEventType const &value);
   /// <summary>
   ///
   /// </summary>
   AmfEventState getState() const;
-  void setState(AmfEventState const& value);
+  void setState(AmfEventState const &value);
   /// <summary>
   ///
   /// </summary>
   uint64_t getTimeStamp() const;
-  void setTimeStamp(uint64_t const& value);
+  void setTimeStamp(uint64_t const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getSubscriptionId() const;
-  void setSubscriptionId(std::string const& value);
+  void setSubscriptionId(std::string const &value);
   bool subscriptionIdIsSet() const;
   void unsetSubscriptionId();
   /// <summary>
@@ -95,14 +95,14 @@ class AmfEventReport {
   ///
   /// </summary>
   std::string getSupi() const;
-  void setSupi(std::string const& value);
+  void setSupi(std::string const &value);
   bool supiIsSet() const;
   void unsetSupi();
   /// <summary>
   ///
   /// </summary>
   std::vector<AmfEventArea> getAreaList() const;
-  void setAreaList(std::vector<AmfEventArea> const& value);
+  void setAreaList(std::vector<AmfEventArea> const &value);
   bool areaListIsSet() const;
   void unsetAreaList();
   /// <summary>
@@ -116,71 +116,71 @@ class AmfEventReport {
   ///
   /// </summary>
   std::string getGpsi() const;
-  void setGpsi(std::string const& value);
+  void setGpsi(std::string const &value);
   bool gpsiIsSet() const;
   void unsetGpsi();
   /// <summary>
   ///
   /// </summary>
   std::string getPei() const;
-  void setPei(std::string const& value);
+  void setPei(std::string const &value);
   bool peiIsSet() const;
   void unsetPei();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::UserLocation getLocation() const;
-  void setLocation(oai::model::common::UserLocation const& value);
+  void setLocation(oai::model::common::UserLocation const &value);
   bool locationIsSet() const;
   void unsetLocation();
   /// <summary>
   ///
   /// </summary>
   std::string getTimezone() const;
-  void setTimezone(std::string const& value);
+  void setTimezone(std::string const &value);
   bool timezoneIsSet() const;
   void unsetTimezone();
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::common::AccessType> getAccessTypeList() const;
-  void setAccessTypeList(
-      std::vector<oai::model::common::AccessType> const& value);
+  void
+  setAccessTypeList(std::vector<oai::model::common::AccessType> const &value);
   bool accessTypeListIsSet() const;
   void unsetAccessTypeList();
   /// <summary>
   ///
   /// </summary>
   std::vector<RmInfo> getRmInfoList() const;
-  void setRmInfoList(std::vector<RmInfo> const& value);
+  void setRmInfoList(std::vector<RmInfo> const &value);
   bool rmInfoListIsSet() const;
   void unsetRmInfoList();
   /// <summary>
   ///
   /// </summary>
   std::vector<CmInfo> getCmInfoList() const;
-  void setCmInfoList(std::vector<CmInfo> const& value);
+  void setCmInfoList(std::vector<CmInfo> const &value);
   bool cmInfoListIsSet() const;
   void unsetCmInfoList();
   /// <summary>
   ///
   /// </summary>
   UeReachability getReachability() const;
-  void setReachability(UeReachability const& value);
+  void setReachability(UeReachability const &value);
   bool reachabilityIsSet() const;
   void unsetReachability();
   /// <summary>
   ///
   /// </summary>
   CommunicationFailure getCommFailure() const;
-  void setCommFailure(CommunicationFailure const& value);
+  void setCommFailure(CommunicationFailure const &value);
   bool commFailureIsSet() const;
   void unsetCommFailure();
   /// <summary>
   ///
   /// </summary>
   LossOfConnectivityReason getLossOfConnectReason() const;
-  void setLossOfConnectReason(LossOfConnectivityReason const& value);
+  void setLossOfConnectReason(LossOfConnectivityReason const &value);
   bool lossOfConnectReasonIsSet() const;
   void unsetLossOfConnectReason();
   /// <summary>
@@ -208,17 +208,17 @@ class AmfEventReport {
   ///
   /// </summary>
   std::vector<_5GsUserStateInfo> getR5gsUserStateList() const;
-  void setR5gsUserStateList(std::vector<_5GsUserStateInfo> const& value);
+  void setR5gsUserStateList(std::vector<_5GsUserStateInfo> const &value);
   bool r5gsUserStateListIsSet() const;
   void unsetr_5gsUserStateList();
 
-  friend void to_json(nlohmann::json& j, const AmfEventReport& o);
-  friend void from_json(const nlohmann::json& j, AmfEventReport& o);
+  friend void to_json(nlohmann::json &j, const AmfEventReport &o);
+  friend void from_json(const nlohmann::json &j, AmfEventReport &o);
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
- protected:
+protected:
   AmfEventType m_Type;
 
   AmfEventState m_State;
@@ -265,6 +265,6 @@ class AmfEventReport {
   bool m_r_5gsUserStateListIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* AmfEventReport_H_ */

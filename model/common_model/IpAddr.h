@@ -19,10 +19,10 @@
 #ifndef IpAddr_H_
 #define IpAddr_H_
 
-#include <string>
-#include "Ipv6Prefix.h"
 #include "Ipv6Addr.h"
+#include "Ipv6Prefix.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::common {
 
@@ -30,7 +30,7 @@ namespace oai::model::common {
 /// Contains an IP adresse.
 /// </summary>
 class IpAddr {
- public:
+public:
   IpAddr();
   virtual ~IpAddr() = default;
 
@@ -44,16 +44,16 @@ class IpAddr {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const IpAddr& rhs) const;
-  bool operator!=(const IpAddr& rhs) const;
+  bool operator==(const IpAddr &rhs) const;
+  bool operator!=(const IpAddr &rhs) const;
 
   /////////////////////////////////////////////
   /// IpAddr members
@@ -63,28 +63,28 @@ class IpAddr {
   /// decimal&#39; notation as defined in RFC 1166.
   /// </summary>
   std::string getIpv4Addr() const;
-  void setIpv4Addr(std::string const& value);
+  void setIpv4Addr(std::string const &value);
   bool ipv4AddrIsSet() const;
   void unsetIpv4Addr();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ipv6Addr getIpv6Addr() const;
-  void setIpv6Addr(oai::model::common::Ipv6Addr const& value);
+  void setIpv6Addr(oai::model::common::Ipv6Addr const &value);
   bool ipv6AddrIsSet() const;
   void unsetIpv6Addr();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ipv6Prefix getIpv6Prefix() const;
-  void setIpv6Prefix(oai::model::common::Ipv6Prefix const& value);
+  void setIpv6Prefix(oai::model::common::Ipv6Prefix const &value);
   bool ipv6PrefixIsSet() const;
   void unsetIpv6Prefix();
 
-  friend void to_json(nlohmann::json& j, const IpAddr& o);
-  friend void from_json(const nlohmann::json& j, IpAddr& o);
+  friend void to_json(nlohmann::json &j, const IpAddr &o);
+  friend void from_json(const nlohmann::json &j, IpAddr &o);
 
- protected:
+protected:
   std::string m_Ipv4Addr;
   bool m_Ipv4AddrIsSet;
   oai::model::common::Ipv6Addr m_Ipv6Addr;
@@ -93,6 +93,6 @@ class IpAddr {
   bool m_Ipv6PrefixIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* IpAddr_H_ */

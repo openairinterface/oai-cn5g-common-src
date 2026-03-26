@@ -28,9 +28,7 @@ asn_per_constraints_t asn_PER_type_Ngap_TNLAssociationUsage_constr_1
           !defined(ASN_DISABLE_APER_SUPPORT) */
 static const asn_INTEGER_enum_map_t
     asn_MAP_Ngap_TNLAssociationUsage_value2enum_1[] = {
-        {0, 2, "ue"},
-        {1, 6, "non-ue"},
-        {2, 4, "both"}
+        {0, 2, "ue"}, {1, 6, "non-ue"}, {2, 4, "both"}
         /* This list is extensible */
 };
 static const unsigned int asn_MAP_Ngap_TNLAssociationUsage_enum2value_1[] = {

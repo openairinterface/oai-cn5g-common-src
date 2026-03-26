@@ -12,9 +12,9 @@ namespace oai::ngap {
 
 //------------------------------------------------------------------------------
 PduSessionResourceNotifyTransfer::PduSessionResourceNotifyTransfer() {
-  m_Ie = (Ngap_PDUSessionResourceNotifyTransfer_t*) calloc(
+  m_Ie = (Ngap_PDUSessionResourceNotifyTransfer_t *)calloc(
       1, sizeof(Ngap_PDUSessionResourceNotifyTransfer_t));
-  m_QosFlowNotifyList   = std::nullopt;
+  m_QosFlowNotifyList = std::nullopt;
   m_QosFlowReleasedList = std::nullopt;
   m_QosFlowFeedbackList = std::nullopt;
 }
@@ -30,13 +30,13 @@ void PduSessionResourceNotifyTransfer::setQosFlowNotifyList(
 
 //------------------------------------------------------------------------------
 void PduSessionResourceNotifyTransfer::setQosFlowNotifyList(
-    const QosFlowNotifyList& list) {
+    const QosFlowNotifyList &list) {
   m_QosFlowNotifyList = std::make_optional<QosFlowNotifyList>(list);
 }
 
 //------------------------------------------------------------------------------
 void PduSessionResourceNotifyTransfer::getQosFlowNotifyList(
-    std::optional<QosFlowNotifyList>& list) const {
+    std::optional<QosFlowNotifyList> &list) const {
   list = m_QosFlowNotifyList;
 }
 
@@ -51,13 +51,13 @@ void PduSessionResourceNotifyTransfer::setQosFlowReleasedList(
 
 //------------------------------------------------------------------------------
 void PduSessionResourceNotifyTransfer::setQosFlowReleasedList(
-    const QosFlowListWithCause& list) {
+    const QosFlowListWithCause &list) {
   m_QosFlowReleasedList = std::make_optional<QosFlowListWithCause>(list);
 }
 
 //------------------------------------------------------------------------------
 void PduSessionResourceNotifyTransfer::getQosFlowReleasedList(
-    std::optional<QosFlowListWithCause>& list) const {
+    std::optional<QosFlowListWithCause> &list) const {
   list = m_QosFlowReleasedList;
 }
 
@@ -72,19 +72,19 @@ void PduSessionResourceNotifyTransfer::setQosFlowFeedbackList(
 
 //------------------------------------------------------------------------------
 void PduSessionResourceNotifyTransfer::setQosFlowFeedbackList(
-    const QosFlowFeedbackList& list) {
+    const QosFlowFeedbackList &list) {
   m_QosFlowFeedbackList = std::make_optional<QosFlowFeedbackList>(list);
 }
 //------------------------------------------------------------------------------
 void PduSessionResourceNotifyTransfer::getQosFlowFeedbackList(
-    std::optional<QosFlowFeedbackList>& list) const {
+    std::optional<QosFlowFeedbackList> &list) const {
   list = m_QosFlowFeedbackList;
 }
 
 //------------------------------------------------------------------------------
-int PduSessionResourceNotifyTransfer::encode(uint8_t* buf, int bufSize) {
-  ngap_utils::print_asn_msg(
-      &asn_DEF_Ngap_PDUSessionResourceNotifyTransfer, m_Ie);
+int PduSessionResourceNotifyTransfer::encode(uint8_t *buf, int bufSize) {
+  ngap_utils::print_asn_msg(&asn_DEF_Ngap_PDUSessionResourceNotifyTransfer,
+                            m_Ie);
   asn_enc_rval_t er = aper_encode_to_buffer(
       &asn_DEF_Ngap_PDUSessionResourceNotifyTransfer, NULL, m_Ie, buf, bufSize);
   oai::logger::logger_common::ngap().debug("er.encoded( %d)", er.encoded);
@@ -93,11 +93,10 @@ int PduSessionResourceNotifyTransfer::encode(uint8_t* buf, int bufSize) {
 }
 
 //------------------------------------------------------------------------------
-bool PduSessionResourceNotifyTransfer::decode(uint8_t* buf, int bufSize) {
-  asn_dec_rval_t rc = asn_decode(
-      NULL, ATS_ALIGNED_CANONICAL_PER,
-      &asn_DEF_Ngap_PDUSessionResourceNotifyTransfer, (void**) &m_Ie, buf,
-      bufSize);
+bool PduSessionResourceNotifyTransfer::decode(uint8_t *buf, int bufSize) {
+  asn_dec_rval_t rc = asn_decode(NULL, ATS_ALIGNED_CANONICAL_PER,
+                                 &asn_DEF_Ngap_PDUSessionResourceNotifyTransfer,
+                                 (void **)&m_Ie, buf, bufSize);
   if (rc.code == RC_OK) {
     oai::logger::logger_common::ngap().debug("Decoded successfully");
   } else if (rc.code == RC_WMORE) {
@@ -141,4 +140,4 @@ bool PduSessionResourceNotifyTransfer::decode(uint8_t* buf, int bufSize) {
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

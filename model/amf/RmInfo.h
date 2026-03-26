@@ -19,8 +19,8 @@
 #ifndef RmInfo_H_
 #define RmInfo_H_
 
-#include "RmState.h"
 #include "AccessType.h"
+#include "RmState.h"
 #include <nlohmann/json.hpp>
 
 namespace oai::model::amf {
@@ -29,7 +29,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class RmInfo {
- public:
+public:
   RmInfo();
   virtual ~RmInfo() = default;
 
@@ -43,10 +43,10 @@ class RmInfo {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const RmInfo& rhs) const;
-  bool operator!=(const RmInfo& rhs) const;
+  bool operator==(const RmInfo &rhs) const;
+  bool operator!=(const RmInfo &rhs) const;
 
   /////////////////////////////////////////////
   /// RmInfo members
@@ -55,26 +55,26 @@ class RmInfo {
   ///
   /// </summary>
   RmState getRmState() const;
-  void setRmState(RmState const& value);
+  void setRmState(RmState const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::AccessType getAccessType() const;
-  void setAccessType(oai::model::common::AccessType const& value);
+  void setAccessType(oai::model::common::AccessType const &value);
 
-  friend void to_json(nlohmann::json& j, const RmInfo& o);
-  friend void from_json(const nlohmann::json& j, RmInfo& o);
+  friend void to_json(nlohmann::json &j, const RmInfo &o);
+  friend void from_json(const nlohmann::json &j, RmInfo &o);
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
- protected:
+protected:
   RmState m_RmState;
 
   oai::model::common::AccessType m_AccessType;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* RmInfo_H_ */

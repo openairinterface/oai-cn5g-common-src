@@ -28,7 +28,7 @@ namespace oai::model::pcf {
 /// Contains EAS IP replacement information for a Source and a Target EAS.
 /// </summary>
 class EasIpReplacementInfo {
- public:
+public:
   EasIpReplacementInfo();
   virtual ~EasIpReplacementInfo() = default;
 
@@ -42,16 +42,16 @@ class EasIpReplacementInfo {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const EasIpReplacementInfo& rhs) const;
-  bool operator!=(const EasIpReplacementInfo& rhs) const;
+  bool operator==(const EasIpReplacementInfo &rhs) const;
+  bool operator!=(const EasIpReplacementInfo &rhs) const;
 
   /////////////////////////////////////////////
   /// EasIpReplacementInfo members
@@ -60,22 +60,22 @@ class EasIpReplacementInfo {
   ///
   /// </summary>
   oai::model::pcf::EasServerAddress getSource() const;
-  void setSource(oai::model::pcf::EasServerAddress const& value);
+  void setSource(oai::model::pcf::EasServerAddress const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::EasServerAddress getTarget() const;
-  void setTarget(oai::model::pcf::EasServerAddress const& value);
+  void setTarget(oai::model::pcf::EasServerAddress const &value);
 
-  friend void to_json(nlohmann::json& j, const EasIpReplacementInfo& o);
-  friend void from_json(const nlohmann::json& j, EasIpReplacementInfo& o);
+  friend void to_json(nlohmann::json &j, const EasIpReplacementInfo &o);
+  friend void from_json(const nlohmann::json &j, EasIpReplacementInfo &o);
 
- protected:
+protected:
   oai::model::pcf::EasServerAddress m_Source;
 
   oai::model::pcf::EasServerAddress m_Target;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* EasIpReplacementInfo_H_ */

@@ -28,7 +28,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class QosFlowNotifyItem {
- public:
+public:
   QosFlowNotifyItem();
   virtual ~QosFlowNotifyItem();
 
@@ -46,17 +46,17 @@ class QosFlowNotifyItem {
   ///
   /// </summary>
   NotificationCause getNotificationCause() const;
-  void setNotificationCause(NotificationCause const& value);
+  void setNotificationCause(NotificationCause const &value);
 
-  friend void to_json(nlohmann::json& j, const QosFlowNotifyItem& o);
-  friend void from_json(const nlohmann::json& j, QosFlowNotifyItem& o);
+  friend void to_json(nlohmann::json &j, const QosFlowNotifyItem &o);
+  friend void from_json(const nlohmann::json &j, QosFlowNotifyItem &o);
 
- protected:
+protected:
   int32_t m_Qfi;
 
   NotificationCause m_NotificationCause;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* QosFlowNotifyItem_H_ */

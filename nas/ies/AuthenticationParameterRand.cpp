@@ -35,7 +35,7 @@ uint32_t AuthenticationParameterRand::GetIeLength() const {
 }
 
 //------------------------------------------------------------------------------
-int AuthenticationParameterRand::Encode(uint8_t* buf, int len) const {
+int AuthenticationParameterRand::Encode(uint8_t *buf, int len) const {
   oai::logger::logger_common::nas().debug("Encoding %s", GetIeName().c_str());
 
   if (len < kAuthenticationParameterRandLength) {
@@ -54,14 +54,14 @@ int AuthenticationParameterRand::Encode(uint8_t* buf, int len) const {
     ENCODE_U8(buf + encoded_size, value_[i], encoded_size);
   }
 
-  oai::logger::logger_common::nas().debug(
-      "Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
+  oai::logger::logger_common::nas().debug("Encoded %s, len (%d)",
+                                          GetIeName().c_str(), encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
-int AuthenticationParameterRand::Decode(
-    const uint8_t* const buf, int len, bool is_iei) {
+int AuthenticationParameterRand::Decode(const uint8_t *const buf, int len,
+                                        bool is_iei) {
   oai::logger::logger_common::nas().debug("Decoding %s", GetIeName().c_str());
 
   if (len < kAuthenticationParameterRandLength) {
@@ -86,7 +86,7 @@ int AuthenticationParameterRand::Decode(
         "Decoded AuthenticationParameterRand value (0x%2x)", value_[j]);
   }
 
-  oai::logger::logger_common::nas().debug(
-      "Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
+  oai::logger::logger_common::nas().debug("Decoded %s, len (%d)",
+                                          GetIeName().c_str(), decoded_size);
   return decoded_size;
 }

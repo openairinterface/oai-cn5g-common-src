@@ -21,19 +21,19 @@ extern "C" {
 /* Dependencies */
 typedef enum Ngap_Paging_eDRX_Cycle {
   Ngap_Paging_eDRX_Cycle_hfhalf = 0,
-  Ngap_Paging_eDRX_Cycle_hf1    = 1,
-  Ngap_Paging_eDRX_Cycle_hf2    = 2,
-  Ngap_Paging_eDRX_Cycle_hf4    = 3,
-  Ngap_Paging_eDRX_Cycle_hf6    = 4,
-  Ngap_Paging_eDRX_Cycle_hf8    = 5,
-  Ngap_Paging_eDRX_Cycle_hf10   = 6,
-  Ngap_Paging_eDRX_Cycle_hf12   = 7,
-  Ngap_Paging_eDRX_Cycle_hf14   = 8,
-  Ngap_Paging_eDRX_Cycle_hf16   = 9,
-  Ngap_Paging_eDRX_Cycle_hf32   = 10,
-  Ngap_Paging_eDRX_Cycle_hf64   = 11,
-  Ngap_Paging_eDRX_Cycle_hf128  = 12,
-  Ngap_Paging_eDRX_Cycle_hf256  = 13
+  Ngap_Paging_eDRX_Cycle_hf1 = 1,
+  Ngap_Paging_eDRX_Cycle_hf2 = 2,
+  Ngap_Paging_eDRX_Cycle_hf4 = 3,
+  Ngap_Paging_eDRX_Cycle_hf6 = 4,
+  Ngap_Paging_eDRX_Cycle_hf8 = 5,
+  Ngap_Paging_eDRX_Cycle_hf10 = 6,
+  Ngap_Paging_eDRX_Cycle_hf12 = 7,
+  Ngap_Paging_eDRX_Cycle_hf14 = 8,
+  Ngap_Paging_eDRX_Cycle_hf16 = 9,
+  Ngap_Paging_eDRX_Cycle_hf32 = 10,
+  Ngap_Paging_eDRX_Cycle_hf64 = 11,
+  Ngap_Paging_eDRX_Cycle_hf128 = 12,
+  Ngap_Paging_eDRX_Cycle_hf256 = 13
   /*
    * Enumeration is extensible
    */

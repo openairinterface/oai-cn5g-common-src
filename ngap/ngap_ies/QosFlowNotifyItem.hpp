@@ -15,15 +15,15 @@ extern "C" {
 namespace oai::ngap {
 
 class QosFlowNotifyItem {
- public:
+public:
   QosFlowNotifyItem();
   virtual ~QosFlowNotifyItem();
 
-  void setQosFlowIdentifier(const QosFlowIdentifier& qosFlowIdentifier);
-  void getQosFlowIdentifier(QosFlowIdentifier& qosFlowIdentifier) const;
+  void setQosFlowIdentifier(const QosFlowIdentifier &qosFlowIdentifier);
+  void getQosFlowIdentifier(QosFlowIdentifier &qosFlowIdentifier) const;
 
-  void setNotificationCause(const NotificationCause& notificationCause);
-  void getNotificationCause(NotificationCause& notificationCause) const;
+  void setNotificationCause(const NotificationCause &notificationCause);
+  void getNotificationCause(NotificationCause &notificationCause) const;
 
   /*
   void setCurrentQoSParametersSetIndex(uint32_t&
@@ -31,16 +31,16 @@ class QosFlowNotifyItem {
   void getCurrentQoSParametersSetIndex(std::optional<uint32_t>&
                   currentQoSParametersSetIndex) const;
 */
-  bool encode(Ngap_QosFlowNotifyItem_t&) const;
-  bool decode(const Ngap_QosFlowNotifyItem_t&);
+  bool encode(Ngap_QosFlowNotifyItem_t &) const;
+  bool decode(const Ngap_QosFlowNotifyItem_t &);
 
- private:
-  QosFlowIdentifier m_QosFlowIdentifier;  // Mandatory
+private:
+  QosFlowIdentifier m_QosFlowIdentifier; // Mandatory
   NotificationCause m_NotificationCause;
   // std::optional<uint32_t>
   //     m_CurrentQoSParametersSetIndex;  // Optional
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

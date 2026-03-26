@@ -17,8 +17,8 @@ namespace oai::model::amf {
 
 UeN1N2InfoSubscriptionCreatedData::UeN1N2InfoSubscriptionCreatedData() {
   m_N1n2NotifySubscriptionId = "";
-  m_SupportedFeatures        = "";
-  m_SupportedFeaturesIsSet   = false;
+  m_SupportedFeatures = "";
+  m_SupportedFeaturesIsSet = false;
 }
 
 UeN1N2InfoSubscriptionCreatedData::~UeN1N2InfoSubscriptionCreatedData() {}
@@ -27,14 +27,14 @@ void UeN1N2InfoSubscriptionCreatedData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const UeN1N2InfoSubscriptionCreatedData& o) {
-  j                             = nlohmann::json();
+void to_json(nlohmann::json &j, const UeN1N2InfoSubscriptionCreatedData &o) {
+  j = nlohmann::json();
   j["n1n2NotifySubscriptionId"] = o.m_N1n2NotifySubscriptionId;
   if (o.supportedFeaturesIsSet())
     j["supportedFeatures"] = o.m_SupportedFeatures;
 }
 
-void from_json(const nlohmann::json& j, UeN1N2InfoSubscriptionCreatedData& o) {
+void from_json(const nlohmann::json &j, UeN1N2InfoSubscriptionCreatedData &o) {
   j.at("n1n2NotifySubscriptionId").get_to(o.m_N1n2NotifySubscriptionId);
   if (j.find("supportedFeatures") != j.end()) {
     j.at("supportedFeatures").get_to(o.m_SupportedFeatures);
@@ -42,20 +42,20 @@ void from_json(const nlohmann::json& j, UeN1N2InfoSubscriptionCreatedData& o) {
   }
 }
 
-std::string UeN1N2InfoSubscriptionCreatedData::getN1n2NotifySubscriptionId()
-    const {
+std::string
+UeN1N2InfoSubscriptionCreatedData::getN1n2NotifySubscriptionId() const {
   return m_N1n2NotifySubscriptionId;
 }
 void UeN1N2InfoSubscriptionCreatedData::setN1n2NotifySubscriptionId(
-    std::string const& value) {
+    std::string const &value) {
   m_N1n2NotifySubscriptionId = value;
 }
 std::string UeN1N2InfoSubscriptionCreatedData::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
 void UeN1N2InfoSubscriptionCreatedData::setSupportedFeatures(
-    std::string const& value) {
-  m_SupportedFeatures      = value;
+    std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool UeN1N2InfoSubscriptionCreatedData::supportedFeaturesIsSet() const {
@@ -65,4 +65,4 @@ void UeN1N2InfoSubscriptionCreatedData::unsetSupportedFeatures() {
   m_SupportedFeaturesIsSet = false;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

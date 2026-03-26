@@ -27,12 +27,12 @@ void ComparisonOperator::validate() const {
   }
 }
 
-bool ComparisonOperator::validate(std::stringstream& msg) const {
+bool ComparisonOperator::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ComparisonOperator::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ComparisonOperator::validate(std::stringstream &msg,
+                                  const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ComparisonOperator" : pathPrefix;
@@ -40,33 +40,27 @@ bool ComparisonOperator::validate(
   return success;
 }
 
-bool ComparisonOperator::operator==(const ComparisonOperator& rhs) const {
+bool ComparisonOperator::operator==(const ComparisonOperator &rhs) const {
   return (*this == rhs);
 }
 
-bool ComparisonOperator::operator!=(const ComparisonOperator& rhs) const {
+bool ComparisonOperator::operator!=(const ComparisonOperator &rhs) const {
   return !(*this == rhs);
 }
 
-void ComparisonOperator::get(std::string& op) const {
-  op = value;
-}
+void ComparisonOperator::get(std::string &op) const { op = value; }
 
-std::string ComparisonOperator::get() const {
-  return value;
-}
+std::string ComparisonOperator::get() const { return value; }
 
-void ComparisonOperator::set(const std::string& op) {
-  value = op;
-}
+void ComparisonOperator::set(const std::string &op) { value = op; }
 
-void to_json(nlohmann::json& j, const ComparisonOperator& o) {
+void to_json(nlohmann::json &j, const ComparisonOperator &o) {
   j = nlohmann::json();
   j = o.get();
 }
 
-void from_json(const nlohmann::json& j, ComparisonOperator& o) {
+void from_json(const nlohmann::json &j, ComparisonOperator &o) {
   o.set(j.get<std::string>());
 }
 
-}  // namespace oai::model::udsf
+} // namespace oai::model::udsf

@@ -21,7 +21,7 @@ namespace oai::model::amf {
 ServerAddressingInfo::ServerAddressingInfo() {
   m_Ipv4AddressesIsSet = false;
   m_Ipv6AddressesIsSet = false;
-  m_FqdnListIsSet      = false;
+  m_FqdnListIsSet = false;
 }
 
 void ServerAddressingInfo::validate() const {
@@ -31,28 +31,28 @@ void ServerAddressingInfo::validate() const {
   }
 }
 
-bool ServerAddressingInfo::validate(std::stringstream& msg) const {
+bool ServerAddressingInfo::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ServerAddressingInfo::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ServerAddressingInfo::validate(std::stringstream &msg,
+                                    const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ServerAddressingInfo" : pathPrefix;
 
   if (ipv4AddressesIsSet()) {
-    const std::vector<std::string>& value = m_Ipv4Addresses;
-    const std::string currentValuePath    = _pathPrefix + ".ipv4Addresses";
+    const std::vector<std::string> &value = m_Ipv4Addresses;
+    const std::string currentValuePath = _pathPrefix + ".ipv4Addresses";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const std::string& value : value) {
+      int i = 0;
+      for (const std::string &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -62,17 +62,17 @@ bool ServerAddressingInfo::validate(
   }
 
   if (ipv6AddressesIsSet()) {
-    const std::vector<oai::model::common::Ipv6Addr>& value = m_Ipv6Addresses;
+    const std::vector<oai::model::common::Ipv6Addr> &value = m_Ipv6Addresses;
     const std::string currentValuePath = _pathPrefix + ".ipv6Addresses";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::Ipv6Addr& value : value) {
+      int i = 0;
+      for (const oai::model::common::Ipv6Addr &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -85,17 +85,17 @@ bool ServerAddressingInfo::validate(
   }
 
   if (fqdnListIsSet()) {
-    const std::vector<std::string>& value = m_FqdnList;
-    const std::string currentValuePath    = _pathPrefix + ".fqdnList";
+    const std::vector<std::string> &value = m_FqdnList;
+    const std::string currentValuePath = _pathPrefix + ".fqdnList";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const std::string& value : value) {
+      int i = 0;
+      for (const std::string &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -116,7 +116,7 @@ bool ServerAddressingInfo::validate(
   return success;
 }
 
-bool ServerAddressingInfo::operator==(const ServerAddressingInfo& rhs) const {
+bool ServerAddressingInfo::operator==(const ServerAddressingInfo &rhs) const {
   return
 
       ((!ipv4AddressesIsSet() && !rhs.ipv4AddressesIsSet()) ||
@@ -134,20 +134,21 @@ bool ServerAddressingInfo::operator==(const ServerAddressingInfo& rhs) const {
           ;
 }
 
-bool ServerAddressingInfo::operator!=(const ServerAddressingInfo& rhs) const {
+bool ServerAddressingInfo::operator!=(const ServerAddressingInfo &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ServerAddressingInfo& o) {
+void to_json(nlohmann::json &j, const ServerAddressingInfo &o) {
   j = nlohmann::json::object();
   if (o.ipv4AddressesIsSet() || !o.m_Ipv4Addresses.empty())
     j["ipv4Addresses"] = o.m_Ipv4Addresses;
   if (o.ipv6AddressesIsSet() || !o.m_Ipv6Addresses.empty())
     j["ipv6Addresses"] = o.m_Ipv6Addresses;
-  if (o.fqdnListIsSet() || !o.m_FqdnList.empty()) j["fqdnList"] = o.m_FqdnList;
+  if (o.fqdnListIsSet() || !o.m_FqdnList.empty())
+    j["fqdnList"] = o.m_FqdnList;
 }
 
-void from_json(const nlohmann::json& j, ServerAddressingInfo& o) {
+void from_json(const nlohmann::json &j, ServerAddressingInfo &o) {
   if (j.find("ipv4Addresses") != j.end()) {
     j.at("ipv4Addresses").get_to(o.m_Ipv4Addresses);
     o.m_Ipv4AddressesIsSet = true;
@@ -166,8 +167,8 @@ std::vector<std::string> ServerAddressingInfo::getIpv4Addresses() const {
   return m_Ipv4Addresses;
 }
 void ServerAddressingInfo::setIpv4Addresses(
-    std::vector<std::string> const& value) {
-  m_Ipv4Addresses      = value;
+    std::vector<std::string> const &value) {
+  m_Ipv4Addresses = value;
   m_Ipv4AddressesIsSet = true;
 }
 bool ServerAddressingInfo::ipv4AddressesIsSet() const {
@@ -181,8 +182,8 @@ ServerAddressingInfo::getIpv6Addresses() const {
   return m_Ipv6Addresses;
 }
 void ServerAddressingInfo::setIpv6Addresses(
-    std::vector<oai::model::common::Ipv6Addr> const& value) {
-  m_Ipv6Addresses      = value;
+    std::vector<oai::model::common::Ipv6Addr> const &value) {
+  m_Ipv6Addresses = value;
   m_Ipv6AddressesIsSet = true;
 }
 bool ServerAddressingInfo::ipv6AddressesIsSet() const {
@@ -194,15 +195,11 @@ void ServerAddressingInfo::unsetIpv6Addresses() {
 std::vector<std::string> ServerAddressingInfo::getFqdnList() const {
   return m_FqdnList;
 }
-void ServerAddressingInfo::setFqdnList(std::vector<std::string> const& value) {
-  m_FqdnList      = value;
+void ServerAddressingInfo::setFqdnList(std::vector<std::string> const &value) {
+  m_FqdnList = value;
   m_FqdnListIsSet = true;
 }
-bool ServerAddressingInfo::fqdnListIsSet() const {
-  return m_FqdnListIsSet;
-}
-void ServerAddressingInfo::unsetFqdnList() {
-  m_FqdnListIsSet = false;
-}
+bool ServerAddressingInfo::fqdnListIsSet() const { return m_FqdnListIsSet; }
+void ServerAddressingInfo::unsetFqdnList() { m_FqdnListIsSet = false; }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

@@ -19,10 +19,10 @@
 #ifndef RequestedRuleData_H_
 #define RequestedRuleData_H_
 
-#include <string>
-#include <vector>
 #include "RequestedRuleDataType.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::pcf {
 
@@ -30,7 +30,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class RequestedRuleData {
- public:
+public:
   RequestedRuleData();
   virtual ~RequestedRuleData() = default;
 
@@ -44,16 +44,16 @@ class RequestedRuleData {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const RequestedRuleData& rhs) const;
-  bool operator!=(const RequestedRuleData& rhs) const;
+  bool operator==(const RequestedRuleData &rhs) const;
+  bool operator!=(const RequestedRuleData &rhs) const;
 
   /////////////////////////////////////////////
   /// RequestedRuleData members
@@ -63,24 +63,24 @@ class RequestedRuleData {
   /// control data.
   /// </summary>
   std::vector<std::string> getRefPccRuleIds() const;
-  void setRefPccRuleIds(std::vector<std::string> const& value);
+  void setRefPccRuleIds(std::vector<std::string> const &value);
   /// <summary>
   /// Array of requested rule data type elements indicating what type of rule
   /// data is requested for the corresponding referenced PCC rules.
   /// </summary>
   std::vector<oai::model::pcf::RequestedRuleDataType> getReqData() const;
-  void setReqData(
-      std::vector<oai::model::pcf::RequestedRuleDataType> const& value);
+  void
+  setReqData(std::vector<oai::model::pcf::RequestedRuleDataType> const &value);
 
-  friend void to_json(nlohmann::json& j, const RequestedRuleData& o);
-  friend void from_json(const nlohmann::json& j, RequestedRuleData& o);
+  friend void to_json(nlohmann::json &j, const RequestedRuleData &o);
+  friend void from_json(const nlohmann::json &j, RequestedRuleData &o);
 
- protected:
+protected:
   std::vector<std::string> m_RefPccRuleIds;
 
   std::vector<oai::model::pcf::RequestedRuleDataType> m_ReqData;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* RequestedRuleData_H_ */

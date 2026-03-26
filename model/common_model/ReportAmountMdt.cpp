@@ -27,12 +27,12 @@ void ReportAmountMdt::validate() const {
   }
 }
 
-bool ReportAmountMdt::validate(std::stringstream& msg) const {
+bool ReportAmountMdt::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ReportAmountMdt::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ReportAmountMdt::validate(std::stringstream &msg,
+                               const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ReportAmountMdt" : pathPrefix;
@@ -43,35 +43,31 @@ bool ReportAmountMdt::validate(
   return success;
 }
 
-bool ReportAmountMdt::operator==(const ReportAmountMdt& rhs) const {
+bool ReportAmountMdt::operator==(const ReportAmountMdt &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool ReportAmountMdt::operator!=(const ReportAmountMdt& rhs) const {
+bool ReportAmountMdt::operator!=(const ReportAmountMdt &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ReportAmountMdt& o) {
+void to_json(nlohmann::json &j, const ReportAmountMdt &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, ReportAmountMdt& o) {
+void from_json(const nlohmann::json &j, ReportAmountMdt &o) {
   from_json(j, o.m_value);
 }
 
-ReportAmountMdt_anyOf ReportAmountMdt::getValue() const {
-  return m_value;
-}
+ReportAmountMdt_anyOf ReportAmountMdt::getValue() const { return m_value; }
 
-void ReportAmountMdt::setValue(ReportAmountMdt_anyOf value) {
-  m_value = value;
-}
+void ReportAmountMdt::setValue(ReportAmountMdt_anyOf value) { m_value = value; }
 
-ReportAmountMdt_anyOf::eReportAmountMdt_anyOf ReportAmountMdt::getEnumValue()
-    const {
+ReportAmountMdt_anyOf::eReportAmountMdt_anyOf
+ReportAmountMdt::getEnumValue() const {
   return m_value.getValue();
 }
 
@@ -80,4 +76,4 @@ void ReportAmountMdt::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

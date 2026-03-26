@@ -27,12 +27,12 @@ void SmPolicyAssociationReleaseCause::validate() const {
   }
 }
 
-bool SmPolicyAssociationReleaseCause::validate(std::stringstream& msg) const {
+bool SmPolicyAssociationReleaseCause::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool SmPolicyAssociationReleaseCause::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "SmPolicyAssociationReleaseCause" : pathPrefix;
@@ -44,23 +44,23 @@ bool SmPolicyAssociationReleaseCause::validate(
 }
 
 bool SmPolicyAssociationReleaseCause::operator==(
-    const SmPolicyAssociationReleaseCause& rhs) const {
+    const SmPolicyAssociationReleaseCause &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
 bool SmPolicyAssociationReleaseCause::operator!=(
-    const SmPolicyAssociationReleaseCause& rhs) const {
+    const SmPolicyAssociationReleaseCause &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const SmPolicyAssociationReleaseCause& o) {
+void to_json(nlohmann::json &j, const SmPolicyAssociationReleaseCause &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, SmPolicyAssociationReleaseCause& o) {
+void from_json(const nlohmann::json &j, SmPolicyAssociationReleaseCause &o) {
   from_json(j, o.m_value);
 }
 
@@ -85,4 +85,4 @@ void SmPolicyAssociationReleaseCause::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

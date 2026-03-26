@@ -16,8 +16,8 @@
 
 #include "EventType_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::udm {
 
@@ -30,12 +30,12 @@ void EventType_anyOf::validate() const {
   }
 }
 
-bool EventType_anyOf::validate(std::stringstream& msg) const {
+bool EventType_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool EventType_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool EventType_anyOf::validate(std::stringstream &msg,
+                               const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "EventType_anyOf" : pathPrefix;
@@ -49,63 +49,63 @@ bool EventType_anyOf::validate(
   return success;
 }
 
-bool EventType_anyOf::operator==(const EventType_anyOf& rhs) const {
+bool EventType_anyOf::operator==(const EventType_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool EventType_anyOf::operator!=(const EventType_anyOf& rhs) const {
+bool EventType_anyOf::operator!=(const EventType_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const EventType_anyOf& o) {
+void to_json(nlohmann::json &j, const EventType_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case EventType_anyOf::eEventType_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case EventType_anyOf::eEventType_anyOf::LOSS_OF_CONNECTIVITY:
-      j = "LOSS_OF_CONNECTIVITY";
-      break;
-    case EventType_anyOf::eEventType_anyOf::UE_REACHABILITY_FOR_DATA:
-      j = "UE_REACHABILITY_FOR_DATA";
-      break;
-    case EventType_anyOf::eEventType_anyOf::UE_REACHABILITY_FOR_SMS:
-      j = "UE_REACHABILITY_FOR_SMS";
-      break;
-    case EventType_anyOf::eEventType_anyOf::LOCATION_REPORTING:
-      j = "LOCATION_REPORTING";
-      break;
-    case EventType_anyOf::eEventType_anyOf::CHANGE_OF_SUPI_PEI_ASSOCIATION:
-      j = "CHANGE_OF_SUPI_PEI_ASSOCIATION";
-      break;
-    case EventType_anyOf::eEventType_anyOf::ROAMING_STATUS:
-      j = "ROAMING_STATUS";
-      break;
-    case EventType_anyOf::eEventType_anyOf::COMMUNICATION_FAILURE:
-      j = "COMMUNICATION_FAILURE";
-      break;
-    case EventType_anyOf::eEventType_anyOf::AVAILABILITY_AFTER_DDN_FAILURE:
-      j = "AVAILABILITY_AFTER_DDN_FAILURE";
-      break;
-    case EventType_anyOf::eEventType_anyOf::CN_TYPE_CHANGE:
-      j = "CN_TYPE_CHANGE";
-      break;
-    case EventType_anyOf::eEventType_anyOf::DL_DATA_DELIVERY_STATUS:
-      j = "DL_DATA_DELIVERY_STATUS";
-      break;
-    case EventType_anyOf::eEventType_anyOf::PDN_CONNECTIVITY_STATUS:
-      j = "PDN_CONNECTIVITY_STATUS";
-      break;
-    case EventType_anyOf::eEventType_anyOf::UE_CONNECTION_MANAGEMENT_STATE:
-      j = "UE_CONNECTION_MANAGEMENT_STATE";
-      break;
+  case EventType_anyOf::eEventType_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case EventType_anyOf::eEventType_anyOf::LOSS_OF_CONNECTIVITY:
+    j = "LOSS_OF_CONNECTIVITY";
+    break;
+  case EventType_anyOf::eEventType_anyOf::UE_REACHABILITY_FOR_DATA:
+    j = "UE_REACHABILITY_FOR_DATA";
+    break;
+  case EventType_anyOf::eEventType_anyOf::UE_REACHABILITY_FOR_SMS:
+    j = "UE_REACHABILITY_FOR_SMS";
+    break;
+  case EventType_anyOf::eEventType_anyOf::LOCATION_REPORTING:
+    j = "LOCATION_REPORTING";
+    break;
+  case EventType_anyOf::eEventType_anyOf::CHANGE_OF_SUPI_PEI_ASSOCIATION:
+    j = "CHANGE_OF_SUPI_PEI_ASSOCIATION";
+    break;
+  case EventType_anyOf::eEventType_anyOf::ROAMING_STATUS:
+    j = "ROAMING_STATUS";
+    break;
+  case EventType_anyOf::eEventType_anyOf::COMMUNICATION_FAILURE:
+    j = "COMMUNICATION_FAILURE";
+    break;
+  case EventType_anyOf::eEventType_anyOf::AVAILABILITY_AFTER_DDN_FAILURE:
+    j = "AVAILABILITY_AFTER_DDN_FAILURE";
+    break;
+  case EventType_anyOf::eEventType_anyOf::CN_TYPE_CHANGE:
+    j = "CN_TYPE_CHANGE";
+    break;
+  case EventType_anyOf::eEventType_anyOf::DL_DATA_DELIVERY_STATUS:
+    j = "DL_DATA_DELIVERY_STATUS";
+    break;
+  case EventType_anyOf::eEventType_anyOf::PDN_CONNECTIVITY_STATUS:
+    j = "PDN_CONNECTIVITY_STATUS";
+    break;
+  case EventType_anyOf::eEventType_anyOf::UE_CONNECTION_MANAGEMENT_STATE:
+    j = "UE_CONNECTION_MANAGEMENT_STATE";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, EventType_anyOf& o) {
+void from_json(const nlohmann::json &j, EventType_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "LOSS_OF_CONNECTIVITY") {
     o.setValue(EventType_anyOf::eEventType_anyOf::LOSS_OF_CONNECTIVITY);
@@ -150,4 +150,4 @@ void EventType_anyOf::setValue(EventType_anyOf::eEventType_anyOf value) {
   m_value = value;
 }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

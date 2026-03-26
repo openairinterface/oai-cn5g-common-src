@@ -28,7 +28,7 @@ namespace oai::model::smf {
 /// Possible values are - VERIFIED - UE_DNN_NOT_VERIFIED - NW_DNN_NOT_VERIFIED
 /// </summary>
 class DnnSelectionMode {
- public:
+public:
   DnnSelectionMode();
   virtual ~DnnSelectionMode() = default;
 
@@ -42,16 +42,16 @@ class DnnSelectionMode {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const DnnSelectionMode& rhs) const;
-  bool operator!=(const DnnSelectionMode& rhs) const;
+  bool operator==(const DnnSelectionMode &rhs) const;
+  bool operator!=(const DnnSelectionMode &rhs) const;
 
   /////////////////////////////////////////////
   /// DnnSelectionMode members
@@ -60,15 +60,15 @@ class DnnSelectionMode {
   void setValue(DnnSelectionMode_anyOf value);
   DnnSelectionMode_anyOf::eDnnSelectionMode_anyOf getEnumValue() const;
   void setEnumValue(DnnSelectionMode_anyOf::eDnnSelectionMode_anyOf value);
-  friend void to_json(nlohmann::json& j, const DnnSelectionMode& o);
-  friend void from_json(const nlohmann::json& j, DnnSelectionMode& o);
-  friend void to_json(nlohmann::json& j, const DnnSelectionMode_anyOf& o);
-  friend void from_json(const nlohmann::json& j, DnnSelectionMode_anyOf& o);
+  friend void to_json(nlohmann::json &j, const DnnSelectionMode &o);
+  friend void from_json(const nlohmann::json &j, DnnSelectionMode &o);
+  friend void to_json(nlohmann::json &j, const DnnSelectionMode_anyOf &o);
+  friend void from_json(const nlohmann::json &j, DnnSelectionMode_anyOf &o);
 
- protected:
+protected:
   DnnSelectionMode_anyOf m_value;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* DnnSelectionMode_H_ */

@@ -41,10 +41,10 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_WLANMeasurementConfiguration */
 typedef struct Ngap_WLANMeasurementConfiguration {
   Ngap_WLANMeasConfig_t wlanMeasConfig;
-  struct Ngap_WLANMeasConfigNameList* wlanMeasConfigNameList; /* OPTIONAL */
-  long* wlan_rssi;                                            /* OPTIONAL */
-  long* wlan_rtt;                                             /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions;      /* OPTIONAL */
+  struct Ngap_WLANMeasConfigNameList *wlanMeasConfigNameList; /* OPTIONAL */
+  long *wlan_rssi;                                            /* OPTIONAL */
+  long *wlan_rtt;                                             /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions;      /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

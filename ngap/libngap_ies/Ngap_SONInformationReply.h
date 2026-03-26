@@ -24,8 +24,8 @@ struct Ngap_ProtocolExtensionContainer;
 
 /* Ngap_SONInformationReply */
 typedef struct Ngap_SONInformationReply {
-  struct Ngap_XnTNLConfigurationInfo* xnTNLConfigurationInfo; /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions;      /* OPTIONAL */
+  struct Ngap_XnTNLConfigurationInfo *xnTNLConfigurationInfo; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions;      /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

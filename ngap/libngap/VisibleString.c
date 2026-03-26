@@ -2,8 +2,8 @@
  * Copyright (c) 2003, 2006 Lev Walkin <vlm@lionet.info>. All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#include <asn_internal.h>
 #include <VisibleString.h>
+#include <asn_internal.h>
 
 /*
  * VisibleString basic type description.
@@ -98,14 +98,14 @@ asn_TYPE_descriptor_t asn_DEF_VisibleString = {
     0  /* No specifics */
 };
 
-int VisibleString_constraint(
-    const asn_TYPE_descriptor_t* td, const void* sptr,
-    asn_app_constraint_failed_f* ctfailcb, void* app_key) {
-  const VisibleString_t* st = (const VisibleString_t*) sptr;
+int VisibleString_constraint(const asn_TYPE_descriptor_t *td, const void *sptr,
+                             asn_app_constraint_failed_f *ctfailcb,
+                             void *app_key) {
+  const VisibleString_t *st = (const VisibleString_t *)sptr;
 
   if (st && st->buf) {
-    uint8_t* buf = st->buf;
-    uint8_t* end = buf + st->size;
+    uint8_t *buf = st->buf;
+    uint8_t *end = buf + st->size;
 
     /*
      * Check the alphabet of the VisibleString.
@@ -115,18 +115,17 @@ int VisibleString_constraint(
      */
     for (; buf < end; buf++) {
       if (*buf < 0x20 || *buf > 0x7e) {
-        ASN__CTFAIL(
-            app_key, td, sptr,
-            "%s: value byte %ld (%d) "
-            "not in VisibleString alphabet (%s:%d)",
-            td->name, (long) ((buf - st->buf) + 1), *buf, __FILE__, __LINE__);
+        ASN__CTFAIL(app_key, td, sptr,
+                    "%s: value byte %ld (%d) "
+                    "not in VisibleString alphabet (%s:%d)",
+                    td->name, (long)((buf - st->buf) + 1), *buf, __FILE__,
+                    __LINE__);
         return -1;
       }
     }
   } else {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: value not given (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: value not given (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 

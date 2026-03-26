@@ -19,13 +19,13 @@
 #ifndef SmContextReleaseData_H_
 #define SmContextReleaseData_H_
 
-#include "NgApCause.h"
 #include "Cause.h"
-#include "RefToBinaryData.h"
-#include <string>
-#include "UserLocation.h"
 #include "N2SmInfoType.h"
+#include "NgApCause.h"
+#include "RefToBinaryData.h"
+#include "UserLocation.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::smf {
 
@@ -33,7 +33,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class SmContextReleaseData {
- public:
+public:
   SmContextReleaseData();
   virtual ~SmContextReleaseData();
 
@@ -46,14 +46,14 @@ class SmContextReleaseData {
   ///
   /// </summary>
   std::string getCause() const;
-  void setCause(std::string const& value);
+  void setCause(std::string const &value);
   bool causeIsSet() const;
   void unsetCause();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::NgApCause getNgApCause() const;
-  void setNgApCause(oai::model::common::NgApCause const& value);
+  void setNgApCause(oai::model::common::NgApCause const &value);
   bool ngApCauseIsSet() const;
   void unsetNgApCause();
   /// <summary>
@@ -67,21 +67,21 @@ class SmContextReleaseData {
   ///
   /// </summary>
   oai::model::common::UserLocation getUeLocation() const;
-  void setUeLocation(oai::model::common::UserLocation const& value);
+  void setUeLocation(oai::model::common::UserLocation const &value);
   bool ueLocationIsSet() const;
   void unsetUeLocation();
   /// <summary>
   ///
   /// </summary>
   std::string getUeTimeZone() const;
-  void setUeTimeZone(std::string const& value);
+  void setUeTimeZone(std::string const &value);
   bool ueTimeZoneIsSet() const;
   void unsetUeTimeZone();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::UserLocation getAddUeLocation() const;
-  void setAddUeLocation(oai::model::common::UserLocation const& value);
+  void setAddUeLocation(oai::model::common::UserLocation const &value);
   bool addUeLocationIsSet() const;
   void unsetAddUeLocation();
   /// <summary>
@@ -95,14 +95,14 @@ class SmContextReleaseData {
   ///
   /// </summary>
   oai::model::common::RefToBinaryData getN2SmInfo() const;
-  void setN2SmInfo(oai::model::common::RefToBinaryData const& value);
+  void setN2SmInfo(oai::model::common::RefToBinaryData const &value);
   bool n2SmInfoIsSet() const;
   void unsetN2SmInfo();
   /// <summary>
   ///
   /// </summary>
   std::string getN2SmInfoType() const;
-  void setN2SmInfoType(std::string const& value);
+  void setN2SmInfoType(std::string const &value);
   bool n2SmInfoTypeIsSet() const;
   void unsetN2SmInfoType();
   /// <summary>
@@ -113,10 +113,10 @@ class SmContextReleaseData {
   bool ismfReleaseOnlyIsSet() const;
   void unsetIsmfReleaseOnly();
 
-  friend void to_json(nlohmann::json& j, const SmContextReleaseData& o);
-  friend void from_json(const nlohmann::json& j, SmContextReleaseData& o);
+  friend void to_json(nlohmann::json &j, const SmContextReleaseData &o);
+  friend void from_json(const nlohmann::json &j, SmContextReleaseData &o);
 
- protected:
+protected:
   std::string m_Cause;
   bool m_CauseIsSet;
   oai::model::common::NgApCause m_NgApCause;
@@ -139,6 +139,6 @@ class SmContextReleaseData {
   bool m_IsmfReleaseOnlyIsSet;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* SmContextReleaseData_H_ */

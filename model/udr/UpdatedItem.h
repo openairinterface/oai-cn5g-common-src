@@ -32,7 +32,7 @@ namespace oai::udr::model {
 /// Identifies a fragment of a resource.
 /// </summary>
 class UpdatedItem {
- public:
+public:
   UpdatedItem();
   virtual ~UpdatedItem();
 
@@ -45,22 +45,22 @@ class UpdatedItem {
   /// Identifies a fragment (subset of resource data) of a given resource.
   /// </summary>
   std::string getItem() const;
-  void setItem(std::string const& value);
+  void setItem(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   //    AnyType getValue() const;
   //    void setValue(AnyType const& value);
 
-  friend void to_json(nlohmann::json& j, const UpdatedItem& o);
-  friend void from_json(const nlohmann::json& j, UpdatedItem& o);
+  friend void to_json(nlohmann::json &j, const UpdatedItem &o);
+  friend void from_json(const nlohmann::json &j, UpdatedItem &o);
 
- protected:
+protected:
   std::string m_Item;
 
   //    AnyType m_Value;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* UpdatedItem_H_ */

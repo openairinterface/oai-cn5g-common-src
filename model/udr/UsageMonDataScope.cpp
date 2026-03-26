@@ -18,9 +18,7 @@
 
 namespace oai::udr::model {
 
-UsageMonDataScope::UsageMonDataScope() {
-  m_DnnIsSet = false;
-}
+UsageMonDataScope::UsageMonDataScope() { m_DnnIsSet = false; }
 
 UsageMonDataScope::~UsageMonDataScope() {}
 
@@ -28,13 +26,14 @@ void UsageMonDataScope::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const UsageMonDataScope& o) {
-  j           = nlohmann::json();
+void to_json(nlohmann::json &j, const UsageMonDataScope &o) {
+  j = nlohmann::json();
   j["snssai"] = o.m_Snssai;
-  if (o.dnnIsSet() || !o.m_Dnn.empty()) j["dnn"] = o.m_Dnn;
+  if (o.dnnIsSet() || !o.m_Dnn.empty())
+    j["dnn"] = o.m_Dnn;
 }
 
-void from_json(const nlohmann::json& j, UsageMonDataScope& o) {
+void from_json(const nlohmann::json &j, UsageMonDataScope &o) {
   j.at("snssai").get_to(o.m_Snssai);
   if (j.find("dnn") != j.end()) {
     j.at("dnn").get_to(o.m_Dnn);
@@ -45,21 +44,15 @@ void from_json(const nlohmann::json& j, UsageMonDataScope& o) {
 oai::model::common::Snssai UsageMonDataScope::getSnssai() const {
   return m_Snssai;
 }
-void UsageMonDataScope::setSnssai(oai::model::common::Snssai const& value) {
+void UsageMonDataScope::setSnssai(oai::model::common::Snssai const &value) {
   m_Snssai = value;
 }
-std::vector<std::string>& UsageMonDataScope::getDnn() {
-  return m_Dnn;
-}
-void UsageMonDataScope::setDnn(std::vector<std::string> const& value) {
-  m_Dnn      = value;
+std::vector<std::string> &UsageMonDataScope::getDnn() { return m_Dnn; }
+void UsageMonDataScope::setDnn(std::vector<std::string> const &value) {
+  m_Dnn = value;
   m_DnnIsSet = true;
 }
-bool UsageMonDataScope::dnnIsSet() const {
-  return m_DnnIsSet;
-}
-void UsageMonDataScope::unsetDnn() {
-  m_DnnIsSet = false;
-}
+bool UsageMonDataScope::dnnIsSet() const { return m_DnnIsSet; }
+void UsageMonDataScope::unsetDnn() { m_DnnIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

@@ -14,8 +14,8 @@
 #include "ReportingLevel.h"
 #include "Helpers.h"
 
-#include <sstream>
 #include <iostream>
+#include <sstream>
 
 namespace oai::model::pcf {
 
@@ -28,12 +28,12 @@ void ReportingLevel::validate() const {
   }
 }
 
-bool ReportingLevel::validate(std::stringstream& msg) const {
+bool ReportingLevel::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ReportingLevel::validate(
-    std::stringstream& /* msg */, const std::string& /* pathPrefix */) const {
+bool ReportingLevel::validate(std::stringstream & /* msg */,
+                              const std::string & /* pathPrefix */) const {
   bool success = true;
   /*
   const std::string _pathPrefix =
@@ -42,35 +42,31 @@ bool ReportingLevel::validate(
   return success;
 }
 
-bool ReportingLevel::operator==(const ReportingLevel& rhs) const {
+bool ReportingLevel::operator==(const ReportingLevel &rhs) const {
   return getValue() == rhs.getValue();
 }
 
-bool ReportingLevel::operator!=(const ReportingLevel& rhs) const {
+bool ReportingLevel::operator!=(const ReportingLevel &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& /* j */, const ReportingLevel& /* o */) {
+void to_json(nlohmann::json & /* j */, const ReportingLevel & /* o */) {
   // j = nlohmann::json();
   std::cout << __PRETTY_FUNCTION__ + std::string{" not implemented"}
             << std::endl;
 }
 
-void from_json(const nlohmann::json& /* j */, ReportingLevel& /* o */) {
+void from_json(const nlohmann::json & /* j */, ReportingLevel & /* o */) {
   std::cout << __PRETTY_FUNCTION__ + std::string{" not implemented"}
             << std::endl;
 }
 
-ReportingLevel_anyOf ReportingLevel::getValue() const {
-  return m_value;
-}
+ReportingLevel_anyOf ReportingLevel::getValue() const { return m_value; }
 
-void ReportingLevel::setValue(ReportingLevel_anyOf value) {
-  m_value = value;
-}
+void ReportingLevel::setValue(ReportingLevel_anyOf value) { m_value = value; }
 
-ReportingLevel_anyOf::eReportingLevel_anyOf ReportingLevel::getEnumValue()
-    const {
+ReportingLevel_anyOf::eReportingLevel_anyOf
+ReportingLevel::getEnumValue() const {
   return m_value.getValue();
 }
 
@@ -79,4 +75,4 @@ void ReportingLevel::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

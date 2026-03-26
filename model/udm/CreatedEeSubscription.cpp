@@ -22,10 +22,10 @@
 namespace oai::model::udm {
 
 CreatedEeSubscription::CreatedEeSubscription() {
-  m_NumberOfUes       = 0;
-  m_NumberOfUesIsSet  = false;
+  m_NumberOfUes = 0;
+  m_NumberOfUesIsSet = false;
   m_EventReportsIsSet = false;
-  m_EpcStatusInd      = false;
+  m_EpcStatusInd = false;
   m_EpcStatusIndIsSet = false;
 }
 
@@ -36,18 +36,18 @@ void CreatedEeSubscription::validate() const {
   }
 }
 
-bool CreatedEeSubscription::validate(std::stringstream& msg) const {
+bool CreatedEeSubscription::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool CreatedEeSubscription::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool CreatedEeSubscription::validate(std::stringstream &msg,
+                                     const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "CreatedEeSubscription" : pathPrefix;
 
   if (numberOfUesIsSet()) {
-    const int32_t& value               = m_NumberOfUes;
+    const int32_t &value = m_NumberOfUes;
     const std::string currentValuePath = _pathPrefix + ".numberOfUes";
 
     if (value < 0) {
@@ -57,17 +57,17 @@ bool CreatedEeSubscription::validate(
   }
 
   if (eventReportsIsSet()) {
-    const std::vector<MonitoringReport>& value = m_EventReports;
-    const std::string currentValuePath         = _pathPrefix + ".eventReports";
+    const std::vector<MonitoringReport> &value = m_EventReports;
+    const std::string currentValuePath = _pathPrefix + ".eventReports";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const MonitoringReport& value : value) {
+      int i = 0;
+      for (const MonitoringReport &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -82,7 +82,7 @@ bool CreatedEeSubscription::validate(
   return success;
 }
 
-bool CreatedEeSubscription::operator==(const CreatedEeSubscription& rhs) const {
+bool CreatedEeSubscription::operator==(const CreatedEeSubscription &rhs) const {
   return
 
       (getEeSubscription() == rhs.getEeSubscription()) &&
@@ -102,20 +102,22 @@ bool CreatedEeSubscription::operator==(const CreatedEeSubscription& rhs) const {
           ;
 }
 
-bool CreatedEeSubscription::operator!=(const CreatedEeSubscription& rhs) const {
+bool CreatedEeSubscription::operator!=(const CreatedEeSubscription &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const CreatedEeSubscription& o) {
-  j                   = nlohmann::json();
+void to_json(nlohmann::json &j, const CreatedEeSubscription &o) {
+  j = nlohmann::json();
   j["eeSubscription"] = o.m_EeSubscription;
-  if (o.numberOfUesIsSet()) j["numberOfUes"] = o.m_NumberOfUes;
+  if (o.numberOfUesIsSet())
+    j["numberOfUes"] = o.m_NumberOfUes;
   if (o.eventReportsIsSet() || !o.m_EventReports.empty())
     j["eventReports"] = o.m_EventReports;
-  if (o.epcStatusIndIsSet()) j["epcStatusInd"] = o.m_EpcStatusInd;
+  if (o.epcStatusIndIsSet())
+    j["epcStatusInd"] = o.m_EpcStatusInd;
 }
 
-void from_json(const nlohmann::json& j, CreatedEeSubscription& o) {
+void from_json(const nlohmann::json &j, CreatedEeSubscription &o) {
   j.at("eeSubscription").get_to(o.m_EeSubscription);
   if (j.find("numberOfUes") != j.end()) {
     j.at("numberOfUes").get_to(o.m_NumberOfUes);
@@ -134,48 +136,38 @@ void from_json(const nlohmann::json& j, CreatedEeSubscription& o) {
 EeSubscription CreatedEeSubscription::getEeSubscription() const {
   return m_EeSubscription;
 }
-void CreatedEeSubscription::setEeSubscription(EeSubscription const& value) {
+void CreatedEeSubscription::setEeSubscription(EeSubscription const &value) {
   m_EeSubscription = value;
 }
-int32_t CreatedEeSubscription::getNumberOfUes() const {
-  return m_NumberOfUes;
-}
+int32_t CreatedEeSubscription::getNumberOfUes() const { return m_NumberOfUes; }
 void CreatedEeSubscription::setNumberOfUes(int32_t const value) {
-  m_NumberOfUes      = value;
+  m_NumberOfUes = value;
   m_NumberOfUesIsSet = true;
 }
 bool CreatedEeSubscription::numberOfUesIsSet() const {
   return m_NumberOfUesIsSet;
 }
-void CreatedEeSubscription::unsetNumberOfUes() {
-  m_NumberOfUesIsSet = false;
-}
+void CreatedEeSubscription::unsetNumberOfUes() { m_NumberOfUesIsSet = false; }
 std::vector<MonitoringReport> CreatedEeSubscription::getEventReports() const {
   return m_EventReports;
 }
 void CreatedEeSubscription::setEventReports(
-    std::vector<MonitoringReport> const& value) {
-  m_EventReports      = value;
+    std::vector<MonitoringReport> const &value) {
+  m_EventReports = value;
   m_EventReportsIsSet = true;
 }
 bool CreatedEeSubscription::eventReportsIsSet() const {
   return m_EventReportsIsSet;
 }
-void CreatedEeSubscription::unsetEventReports() {
-  m_EventReportsIsSet = false;
-}
-bool CreatedEeSubscription::isEpcStatusInd() const {
-  return m_EpcStatusInd;
-}
+void CreatedEeSubscription::unsetEventReports() { m_EventReportsIsSet = false; }
+bool CreatedEeSubscription::isEpcStatusInd() const { return m_EpcStatusInd; }
 void CreatedEeSubscription::setEpcStatusInd(bool const value) {
-  m_EpcStatusInd      = value;
+  m_EpcStatusInd = value;
   m_EpcStatusIndIsSet = true;
 }
 bool CreatedEeSubscription::epcStatusIndIsSet() const {
   return m_EpcStatusIndIsSet;
 }
-void CreatedEeSubscription::unsetEpcStatusInd() {
-  m_EpcStatusIndIsSet = false;
-}
+void CreatedEeSubscription::unsetEpcStatusInd() { m_EpcStatusIndIsSet = false; }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

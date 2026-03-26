@@ -5,8 +5,8 @@
 #include "nas_utils.hpp"
 
 #include "3gpp_24.501.hpp"
-#include "common_defs.hpp"
 #include "common_defs.h"
+#include "common_defs.hpp"
 #include "logger_base.hpp"
 #include "utils.hpp"
 
@@ -19,13 +19,13 @@ extern "C" {
 
 using namespace oai::nas;
 //------------------------------------------------------------------------------
-int nas_utils::encodeMccMnc2Buffer(
-    const std::string& mcc_str, const std::string& mnc_str, uint8_t* buf,
-    int len) {
+int nas_utils::encodeMccMnc2Buffer(const std::string &mcc_str,
+                                   const std::string &mnc_str, uint8_t *buf,
+                                   int len) {
   int encoded_size = 0;
-  uint8_t value    = 0;
-  int mcc          = oai::utils::utils::fromString<int>(mcc_str);
-  int mnc          = oai::utils::utils::fromString<int>(mnc_str);
+  uint8_t value = 0;
+  int mcc = oai::utils::utils::fromString<int>(mcc_str);
+  int mnc = oai::utils::utils::fromString<int>(mnc_str);
 
   // MCC digit 2, MCC digit 1
   value = (0x0f & (mcc / 100)) | ((0x0f & ((mcc % 100) / 10)) << 4);
@@ -52,15 +52,15 @@ int nas_utils::encodeMccMnc2Buffer(
     value = ((0x0f & ((mnc % 100) / 10)) << 4) | (0x0f & (mnc / 100));
     ENCODE_U8(buf + encoded_size, value, encoded_size);
   }
-  oai::logger::logger_common::nas().debug(
-      "MCC %s, MNC %s", mcc_str.c_str(), mnc_str.c_str());
+  oai::logger::logger_common::nas().debug("MCC %s, MNC %s", mcc_str.c_str(),
+                                          mnc_str.c_str());
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
-int nas_utils::decodeMccMncFromBuffer(
-    std::string& mcc_str, std::string& mnc_str, const uint8_t* const buf,
-    int len) {
+int nas_utils::decodeMccMncFromBuffer(std::string &mcc_str,
+                                      std::string &mnc_str,
+                                      const uint8_t *const buf, int len) {
   if (len < kMccMncLength) {
     oai::logger::logger_common::nas().error(
         "Buffer length is less than the minimum length of this IE (%d "
@@ -69,7 +69,7 @@ int nas_utils::decodeMccMncFromBuffer(
     return KEncodeDecodeError;
   }
   int decoded_size = 0;
-  uint8_t octet    = 0;
+  uint8_t octet = 0;
 
   DECODE_U8(buf + decoded_size, octet, decoded_size);
   int mcc = 0;
@@ -105,7 +105,7 @@ int nas_utils::decodeMccMncFromBuffer(
     mcc_str = "0" + mcc_str;
   }
 
-  oai::logger::logger_common::nas().debug(
-      "MCC %s, MNC %s", mcc_str.c_str(), mnc_str.c_str());
+  oai::logger::logger_common::nas().debug("MCC %s, MNC %s", mcc_str.c_str(),
+                                          mnc_str.c_str());
   return decoded_size;
 }

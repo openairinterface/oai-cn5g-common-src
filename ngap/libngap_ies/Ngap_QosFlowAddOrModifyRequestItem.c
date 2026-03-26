@@ -8,8 +8,8 @@
 
 #include "Ngap_QosFlowAddOrModifyRequestItem.h"
 
-#include "Ngap_QosFlowLevelQosParameters.h"
 #include "Ngap_ProtocolExtensionContainer.h"
+#include "Ngap_QosFlowLevelQosParameters.h"
 asn_TYPE_member_t asn_MBR_Ngap_QosFlowAddOrModifyRequestItem_1[] = {
     {ATF_NOFLAGS,
      0,
@@ -32,8 +32,8 @@ asn_TYPE_member_t asn_MBR_Ngap_QosFlowAddOrModifyRequestItem_1[] = {
      "qosFlowIdentifier"},
     {ATF_POINTER,
      3,
-     offsetof(
-         struct Ngap_QosFlowAddOrModifyRequestItem, qosFlowLevelQosParameters),
+     offsetof(struct Ngap_QosFlowAddOrModifyRequestItem,
+              qosFlowLevelQosParameters),
      (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_QosFlowLevelQosParameters,

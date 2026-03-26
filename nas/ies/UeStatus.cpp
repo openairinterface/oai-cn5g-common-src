@@ -29,45 +29,38 @@ UeStatus::UeStatus(bool n1, bool s1) : Type4NasIe(kIeiUeStatus) {
 UeStatus::~UeStatus() {}
 
 //------------------------------------------------------------------------------
-void UeStatus::SetS1(bool value) {
-  s1_ = value;
-}
+void UeStatus::SetS1(bool value) { s1_ = value; }
 
 //------------------------------------------------------------------------------
-bool UeStatus::GetS1() const {
-  return s1_;
-}
+bool UeStatus::GetS1() const { return s1_; }
 
 //------------------------------------------------------------------------------
-void UeStatus::SetN1(bool value) {
-  n1_ = value;
-}
+void UeStatus::SetN1(bool value) { n1_ = value; }
 
 //------------------------------------------------------------------------------
-bool UeStatus::GetN1() const {
-  return n1_;
-}
+bool UeStatus::GetN1() const { return n1_; }
 
 //------------------------------------------------------------------------------
-int UeStatus::Encode(uint8_t* buf, int len) const {
+int UeStatus::Encode(uint8_t *buf, int len) const {
   oai::logger::logger_common::nas().debug("Encoding %s", GetIeName().c_str());
 
   int encoded_size = 0;
   // Validate the buffer's length and Encode IEI/Length
   int encoded_header_size = Type4NasIe::Encode(buf + encoded_size, len);
-  if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
+  if (encoded_header_size == KEncodeDecodeError)
+    return KEncodeDecodeError;
   encoded_size += encoded_header_size;
 
   uint8_t octet = 0x03 & (s1_ | (n1_ << 1));
   ENCODE_U8(buf + encoded_size, octet, encoded_size);
 
-  oai::logger::logger_common::nas().debug(
-      "Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
+  oai::logger::logger_common::nas().debug("Encoded %s, len (%d)",
+                                          GetIeName().c_str(), encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
-int UeStatus::Decode(const uint8_t* const buf, int len, bool is_iei) {
+int UeStatus::Decode(const uint8_t *const buf, int len, bool is_iei) {
   oai::logger::logger_common::nas().debug("Decoding %s", GetIeName().c_str());
 
   if (len < kUeStatusIeLength) {
@@ -81,7 +74,8 @@ int UeStatus::Decode(const uint8_t* const buf, int len, bool is_iei) {
   int decoded_size = 0;
   // IEI and Length
   int decoded_header_size = Type4NasIe::Decode(buf + decoded_size, len, is_iei);
-  if (decoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
+  if (decoded_header_size == KEncodeDecodeError)
+    return KEncodeDecodeError;
   decoded_size += decoded_header_size;
 
   uint8_t octet = 0;
@@ -90,8 +84,8 @@ int UeStatus::Decode(const uint8_t* const buf, int len, bool is_iei) {
   n1_ = octet & 0x02;
   s1_ = octet & 0x01;
 
-  oai::logger::logger_common::nas().debug(
-      "Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
+  oai::logger::logger_common::nas().debug("Decoded %s, len (%d)",
+                                          GetIeName().c_str(), decoded_size);
 
   oai::logger::logger_common::nas().debug("N1 0x%x, S1 0x%x", n1_, s1_);
   return decoded_size;

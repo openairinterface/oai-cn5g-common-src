@@ -33,7 +33,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class UpuData {
- public:
+public:
   UpuData();
   virtual ~UpuData();
 
@@ -46,31 +46,31 @@ class UpuData {
   ///
   /// </summary>
   std::string getProvisioningTime() const;
-  void setProvisioningTime(std::string const& value);
+  void setProvisioningTime(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   UeUpdateStatus getUeUpdateStatus() const;
-  void setUeUpdateStatus(UeUpdateStatus const& value);
+  void setUeUpdateStatus(UeUpdateStatus const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getUpuXmacIue() const;
-  void setUpuXmacIue(std::string const& value);
+  void setUpuXmacIue(std::string const &value);
   bool upuXmacIueIsSet() const;
   void unsetUpuXmacIue();
   /// <summary>
   ///
   /// </summary>
   std::string getUpuMacIue() const;
-  void setUpuMacIue(std::string const& value);
+  void setUpuMacIue(std::string const &value);
   bool upuMacIueIsSet() const;
   void unsetUpuMacIue();
 
-  friend void to_json(nlohmann::json& j, const UpuData& o);
-  friend void from_json(const nlohmann::json& j, UpuData& o);
+  friend void to_json(nlohmann::json &j, const UpuData &o);
+  friend void from_json(const nlohmann::json &j, UpuData &o);
 
- protected:
+protected:
   std::string m_ProvisioningTime;
 
   UeUpdateStatus m_UeUpdateStatus;
@@ -81,6 +81,6 @@ class UpuData {
   bool m_UpuMacIueIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* UpuData_H_ */

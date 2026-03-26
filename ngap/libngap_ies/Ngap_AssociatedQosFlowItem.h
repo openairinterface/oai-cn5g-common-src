@@ -35,8 +35,8 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_AssociatedQosFlowItem */
 typedef struct Ngap_AssociatedQosFlowItem {
   Ngap_QosFlowIdentifier_t qosFlowIdentifier;
-  long* qosFlowMappingIndication;                        /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  long *qosFlowMappingIndication;                        /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

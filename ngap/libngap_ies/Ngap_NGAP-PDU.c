@@ -13,8 +13,7 @@
 #include "Ngap_UnsuccessfulOutcome.h"
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 static asn_oer_constraints_t asn_OER_type_Ngap_NGAP_PDU_constr_1 CC_NOTUSED = {
-    {0, 0},
-    -1};
+    {0, 0}, -1};
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 static asn_per_constraints_t asn_PER_type_Ngap_NGAP_PDU_constr_1 CC_NOTUSED = {
@@ -93,7 +92,7 @@ static asn_CHOICE_specifics_t asn_SPC_Ngap_NGAP_PDU_specs_1 = {
     sizeof(struct Ngap_NGAP_PDU),
     offsetof(struct Ngap_NGAP_PDU, _asn_ctx),
     offsetof(struct Ngap_NGAP_PDU, present),
-    sizeof(((struct Ngap_NGAP_PDU*) 0)->present),
+    sizeof(((struct Ngap_NGAP_PDU *)0)->present),
     asn_MAP_Ngap_NGAP_PDU_tag2el_1,
     3, /* Count of tags in the map */
     0,

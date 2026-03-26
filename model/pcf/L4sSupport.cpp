@@ -18,9 +18,7 @@
 
 namespace oai::model::pcf {
 
-L4sSupport::L4sSupport() {
-  m_FlowsIsSet = false;
-}
+L4sSupport::L4sSupport() { m_FlowsIsSet = false; }
 
 void L4sSupport::validate() const {
   std::stringstream msg;
@@ -29,12 +27,12 @@ void L4sSupport::validate() const {
   }
 }
 
-bool L4sSupport::validate(std::stringstream& msg) const {
+bool L4sSupport::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool L4sSupport::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool L4sSupport::validate(std::stringstream &msg,
+                          const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "L4sSupport" : pathPrefix;
@@ -44,17 +42,17 @@ bool L4sSupport::validate(
     success = false;
   }
   if (flowsIsSet()) {
-    const std::vector<oai::model::pcf::Flows>& value = m_Flows;
-    const std::string currentValuePath               = _pathPrefix + ".flows";
+    const std::vector<oai::model::pcf::Flows> &value = m_Flows;
+    const std::string currentValuePath = _pathPrefix + ".flows";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::Flows& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::Flows &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -68,7 +66,7 @@ bool L4sSupport::validate(
   return success;
 }
 
-bool L4sSupport::operator==(const L4sSupport& rhs) const {
+bool L4sSupport::operator==(const L4sSupport &rhs) const {
   return
 
       (getNotifType() == rhs.getNotifType()) &&
@@ -79,17 +77,18 @@ bool L4sSupport::operator==(const L4sSupport& rhs) const {
           ;
 }
 
-bool L4sSupport::operator!=(const L4sSupport& rhs) const {
+bool L4sSupport::operator!=(const L4sSupport &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const L4sSupport& o) {
-  j              = nlohmann::json::object();
+void to_json(nlohmann::json &j, const L4sSupport &o) {
+  j = nlohmann::json::object();
   j["notifType"] = o.m_NotifType;
-  if (o.flowsIsSet() || !o.m_Flows.empty()) j["flows"] = o.m_Flows;
+  if (o.flowsIsSet() || !o.m_Flows.empty())
+    j["flows"] = o.m_Flows;
 }
 
-void from_json(const nlohmann::json& j, L4sSupport& o) {
+void from_json(const nlohmann::json &j, L4sSupport &o) {
   j.at("notifType").get_to(o.m_NotifType);
   if (j.find("flows") != j.end()) {
     j.at("flows").get_to(o.m_Flows);
@@ -100,21 +99,17 @@ void from_json(const nlohmann::json& j, L4sSupport& o) {
 oai::model::pcf::L4sNotifType L4sSupport::getNotifType() const {
   return m_NotifType;
 }
-void L4sSupport::setNotifType(oai::model::pcf::L4sNotifType const& value) {
+void L4sSupport::setNotifType(oai::model::pcf::L4sNotifType const &value) {
   m_NotifType = value;
 }
 std::vector<oai::model::pcf::Flows> L4sSupport::getFlows() const {
   return m_Flows;
 }
-void L4sSupport::setFlows(std::vector<oai::model::pcf::Flows> const& value) {
-  m_Flows      = value;
+void L4sSupport::setFlows(std::vector<oai::model::pcf::Flows> const &value) {
+  m_Flows = value;
   m_FlowsIsSet = true;
 }
-bool L4sSupport::flowsIsSet() const {
-  return m_FlowsIsSet;
-}
-void L4sSupport::unsetFlows() {
-  m_FlowsIsSet = false;
-}
+bool L4sSupport::flowsIsSet() const { return m_FlowsIsSet; }
+void L4sSupport::unsetFlows() { m_FlowsIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

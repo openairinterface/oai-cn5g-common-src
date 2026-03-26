@@ -13,7 +13,7 @@ constexpr auto kRequestTypeIeName = "Request Type";
 namespace oai::nas {
 
 class RequestType : public Type1NasIeFormatTv {
- public:
+public:
   RequestType();
   RequestType(uint8_t value);
   virtual ~RequestType();
@@ -23,8 +23,8 @@ class RequestType : public Type1NasIeFormatTv {
   void SetValue(uint8_t value);
   uint8_t GetValue() const;
 
- private:
+private:
 };
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

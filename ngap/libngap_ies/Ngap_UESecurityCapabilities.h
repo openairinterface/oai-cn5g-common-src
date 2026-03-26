@@ -12,10 +12,10 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_NRencryptionAlgorithms.h"
-#include "Ngap_NRintegrityProtectionAlgorithms.h"
 #include "Ngap_EUTRAencryptionAlgorithms.h"
 #include "Ngap_EUTRAintegrityProtectionAlgorithms.h"
+#include "Ngap_NRencryptionAlgorithms.h"
+#include "Ngap_NRintegrityProtectionAlgorithms.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -31,7 +31,7 @@ typedef struct Ngap_UESecurityCapabilities {
   Ngap_NRintegrityProtectionAlgorithms_t nRintegrityProtectionAlgorithms;
   Ngap_EUTRAencryptionAlgorithms_t eUTRAencryptionAlgorithms;
   Ngap_EUTRAintegrityProtectionAlgorithms_t eUTRAintegrityProtectionAlgorithms;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

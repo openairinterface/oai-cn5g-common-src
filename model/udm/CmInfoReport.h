@@ -22,8 +22,8 @@
 #ifndef CmInfoReport_H_
 #define CmInfoReport_H_
 
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::udm {
 
@@ -31,7 +31,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class CmInfoReport {
- public:
+public:
   CmInfoReport();
   virtual ~CmInfoReport() = default;
 
@@ -45,10 +45,10 @@ class CmInfoReport {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const CmInfoReport& rhs) const;
-  bool operator!=(const CmInfoReport& rhs) const;
+  bool operator==(const CmInfoReport &rhs) const;
+  bool operator!=(const CmInfoReport &rhs) const;
 
   /////////////////////////////////////////////
   /// CmInfoReport members
@@ -57,28 +57,28 @@ class CmInfoReport {
   ///
   /// </summary>
   std::vector<std::string> getOldCmInfoList() const;
-  void setOldCmInfoList(std::vector<std::string> const& value);
+  void setOldCmInfoList(std::vector<std::string> const &value);
   bool oldCmInfoListIsSet() const;
   void unsetOldCmInfoList();
   /// <summary>
   ///
   /// </summary>
   std::vector<std::string> getNewCmInfoList() const;
-  void setNewCmInfoList(std::vector<std::string> const& value);
+  void setNewCmInfoList(std::vector<std::string> const &value);
 
-  friend void to_json(nlohmann::json& j, const CmInfoReport& o);
-  friend void from_json(const nlohmann::json& j, CmInfoReport& o);
+  friend void to_json(nlohmann::json &j, const CmInfoReport &o);
+  friend void from_json(const nlohmann::json &j, CmInfoReport &o);
 
- protected:
+protected:
   std::vector<std::string> m_OldCmInfoList;
   bool m_OldCmInfoListIsSet;
   std::vector<std::string> m_NewCmInfoList;
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* CmInfoReport_H_ */

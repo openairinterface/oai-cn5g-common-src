@@ -8,8 +8,8 @@
 
 #include "Ngap_M1Configuration.h"
 
-#include "Ngap_M1ThresholdEventA2.h"
 #include "Ngap_M1PeriodicReporting.h"
+#include "Ngap_M1ThresholdEventA2.h"
 #include "Ngap_ProtocolExtensionContainer.h"
 asn_TYPE_member_t asn_MBR_Ngap_M1Configuration_1[] = {
     {ATF_NOFLAGS,
@@ -89,7 +89,7 @@ asn_TYPE_member_t asn_MBR_Ngap_M1Configuration_1[] = {
      0, /* No default value */
      "iE-Extensions"},
 };
-static const int asn_MAP_Ngap_M1Configuration_oms_1[]            = {1, 2, 3};
+static const int asn_MAP_Ngap_M1Configuration_oms_1[] = {1, 2, 3};
 static const ber_tlv_tag_t asn_DEF_Ngap_M1Configuration_tags_1[] = {
     (ASN_TAG_CLASS_UNIVERSAL | (16 << 2))};
 static const asn_TYPE_tag2member_t asn_MAP_Ngap_M1Configuration_tag2el_1[] = {

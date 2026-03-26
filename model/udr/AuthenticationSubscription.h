@@ -34,7 +34,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class AuthenticationSubscription {
- public:
+public:
   AuthenticationSubscription();
   virtual ~AuthenticationSubscription();
 
@@ -47,54 +47,54 @@ class AuthenticationSubscription {
   ///
   /// </summary>
   std::string getAuthenticationMethod() const;
-  void setAuthenticationMethod(std::string const& value);
+  void setAuthenticationMethod(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getEncPermanentKey() const;
-  void setEncPermanentKey(std::string const& value);
+  void setEncPermanentKey(std::string const &value);
   bool encPermanentKeyIsSet() const;
   void unsetEncPermanentKey();
   /// <summary>
   ///
   /// </summary>
   std::string getProtectionParameterId() const;
-  void setProtectionParameterId(std::string const& value);
+  void setProtectionParameterId(std::string const &value);
   bool protectionParameterIdIsSet() const;
   void unsetProtectionParameterId();
   /// <summary>
   ///
   /// </summary>
   SequenceNumber getSequenceNumber() const;
-  void setSequenceNumber(SequenceNumber const& value);
+  void setSequenceNumber(SequenceNumber const &value);
   bool sequenceNumberIsSet() const;
   void unsetSequenceNumber();
   /// <summary>
   ///
   /// </summary>
   std::string getAuthenticationManagementField() const;
-  void setAuthenticationManagementField(std::string const& value);
+  void setAuthenticationManagementField(std::string const &value);
   bool authenticationManagementFieldIsSet() const;
   void unsetAuthenticationManagementField();
   /// <summary>
   ///
   /// </summary>
   std::string getAlgorithmId() const;
-  void setAlgorithmId(std::string const& value);
+  void setAlgorithmId(std::string const &value);
   bool algorithmIdIsSet() const;
   void unsetAlgorithmId();
   /// <summary>
   ///
   /// </summary>
   std::string getEncOpcKey() const;
-  void setEncOpcKey(std::string const& value);
+  void setEncOpcKey(std::string const &value);
   bool encOpcKeyIsSet() const;
   void unsetEncOpcKey();
   /// <summary>
   ///
   /// </summary>
   std::string getEncTopcKey() const;
-  void setEncTopcKey(std::string const& value);
+  void setEncTopcKey(std::string const &value);
   bool encTopcKeyIsSet() const;
   void unsetEncTopcKey();
   /// <summary>
@@ -108,7 +108,7 @@ class AuthenticationSubscription {
   ///
   /// </summary>
   std::string getN5gcAuthMethod() const;
-  void setN5gcAuthMethod(std::string const& value);
+  void setN5gcAuthMethod(std::string const &value);
   bool n5gcAuthMethodIsSet() const;
   void unsetN5gcAuthMethod();
   /// <summary>
@@ -122,14 +122,14 @@ class AuthenticationSubscription {
   ///
   /// </summary>
   std::string getSupi() const;
-  void setSupi(std::string const& value);
+  void setSupi(std::string const &value);
   bool supiIsSet() const;
   void unsetSupi();
 
-  friend void to_json(nlohmann::json& j, const AuthenticationSubscription& o);
-  friend void from_json(const nlohmann::json& j, AuthenticationSubscription& o);
+  friend void to_json(nlohmann::json &j, const AuthenticationSubscription &o);
+  friend void from_json(const nlohmann::json &j, AuthenticationSubscription &o);
 
- protected:
+protected:
   std::string m_AuthenticationMethod;
 
   std::string m_EncPermanentKey;
@@ -156,6 +156,6 @@ class AuthenticationSubscription {
   bool m_SupiIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* AuthenticationSubscription_H_ */

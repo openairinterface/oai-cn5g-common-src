@@ -20,16 +20,16 @@
 #define UpfInfo_H_
 
 #include "AtsssCapability.h"
+#include "InterfaceUpfInfoItem.h"
+#include "PduSessionType.h"
+#include "SnssaiUpfInfoItem.h"
+#include "Tai.h"
+#include "TngfInfo.h"
 #include "TwifInfo.h"
 #include "WAgfInfo.h"
-#include "Tai.h"
-#include "InterfaceUpfInfoItem.h"
-#include "SnssaiUpfInfoItem.h"
-#include <string>
-#include "PduSessionType.h"
-#include <vector>
-#include "TngfInfo.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::nrf {
 
@@ -37,7 +37,7 @@ namespace oai::model::nrf {
 /// Information of an UPF NF Instance
 /// </summary>
 class UpfInfo {
- public:
+public:
   UpfInfo();
   virtual ~UpfInfo() = default;
 
@@ -51,18 +51,17 @@ class UpfInfo {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg, bool check_nssai = true) const;
+  bool validate(std::stringstream &msg, bool check_nssai = true) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(
-      std::stringstream& msg, const std::string& pathPrefix,
-      bool check_nssai = true) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix,
+                bool check_nssai = true) const;
 
-  bool operator==(const UpfInfo& rhs) const;
-  bool operator!=(const UpfInfo& rhs) const;
+  bool operator==(const UpfInfo &rhs) const;
+  bool operator!=(const UpfInfo &rhs) const;
 
   /////////////////////////////////////////////
   /// UpfInfo members
@@ -72,21 +71,21 @@ class UpfInfo {
   /// </summary>
   std::vector<oai::model::nrf::SnssaiUpfInfoItem> getSNssaiUpfInfoList() const;
   void setSNssaiUpfInfoList(
-      std::vector<oai::model::nrf::SnssaiUpfInfoItem> const& value);
+      std::vector<oai::model::nrf::SnssaiUpfInfoItem> const &value);
   /// <summary>
   ///
   /// </summary>
   std::vector<std::string> getSmfServingArea() const;
-  void setSmfServingArea(std::vector<std::string> const& value);
+  void setSmfServingArea(std::vector<std::string> const &value);
   bool smfServingAreaIsSet() const;
   void unsetSmfServingArea();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::nrf::InterfaceUpfInfoItem> getInterfaceUpfInfoList()
-      const;
+  std::vector<oai::model::nrf::InterfaceUpfInfoItem>
+  getInterfaceUpfInfoList() const;
   void setInterfaceUpfInfoList(
-      std::vector<oai::model::nrf::InterfaceUpfInfoItem> const& value);
+      std::vector<oai::model::nrf::InterfaceUpfInfoItem> const &value);
   bool interfaceUpfInfoListIsSet() const;
   void unsetInterfaceUpfInfoList();
   /// <summary>
@@ -101,14 +100,14 @@ class UpfInfo {
   /// </summary>
   std::vector<oai::model::common::PduSessionType> getPduSessionTypes() const;
   void setPduSessionTypes(
-      std::vector<oai::model::common::PduSessionType> const& value);
+      std::vector<oai::model::common::PduSessionType> const &value);
   bool pduSessionTypesIsSet() const;
   void unsetPduSessionTypes();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::AtsssCapability getAtsssCapability() const;
-  void setAtsssCapability(oai::model::common::AtsssCapability const& value);
+  void setAtsssCapability(oai::model::common::AtsssCapability const &value);
   bool atsssCapabilityIsSet() const;
   void unsetAtsssCapability();
   /// <summary>
@@ -122,28 +121,28 @@ class UpfInfo {
   ///
   /// </summary>
   std::vector<oai::model::common::Tai> getTaiList() const;
-  void setTaiList(std::vector<oai::model::common::Tai> const& value);
+  void setTaiList(std::vector<oai::model::common::Tai> const &value);
   bool taiListIsSet() const;
   void unsetTaiList();
   /// <summary>
   ///
   /// </summary>
   oai::model::nrf::WAgfInfo getWAgfInfo() const;
-  void setWAgfInfo(oai::model::nrf::WAgfInfo const& value);
+  void setWAgfInfo(oai::model::nrf::WAgfInfo const &value);
   bool wAgfInfoIsSet() const;
   void unsetWAgfInfo();
   /// <summary>
   ///
   /// </summary>
   oai::model::nrf::TngfInfo getTngfInfo() const;
-  void setTngfInfo(oai::model::nrf::TngfInfo const& value);
+  void setTngfInfo(oai::model::nrf::TngfInfo const &value);
   bool tngfInfoIsSet() const;
   void unsetTngfInfo();
   /// <summary>
   ///
   /// </summary>
   oai::model::nrf::TwifInfo getTwifInfo() const;
-  void setTwifInfo(oai::model::nrf::TwifInfo const& value);
+  void setTwifInfo(oai::model::nrf::TwifInfo const &value);
   bool twifInfoIsSet() const;
   void unsetTwifInfo();
   /// <summary>
@@ -175,12 +174,12 @@ class UpfInfo {
   bool dataForwardingIsSet() const;
   void unsetDataForwarding();
 
-  friend void to_json(nlohmann::json& j, const UpfInfo& o);
-  friend void from_json(const nlohmann::json& j, UpfInfo& o);
+  friend void to_json(nlohmann::json &j, const UpfInfo &o);
+  friend void from_json(const nlohmann::json &j, UpfInfo &o);
 
   [[nodiscard]] std::string to_string(int indent_level) const;
 
- protected:
+protected:
   std::vector<oai::model::nrf::SnssaiUpfInfoItem> m_SNssaiUpfInfoList;
 
   std::vector<std::string> m_SmfServingArea;
@@ -213,6 +212,6 @@ class UpfInfo {
   bool m_DataForwardingIsSet;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* UpfInfo_H_ */

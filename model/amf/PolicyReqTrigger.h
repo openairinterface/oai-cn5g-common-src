@@ -27,7 +27,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class PolicyReqTrigger {
- public:
+public:
   PolicyReqTrigger();
   virtual ~PolicyReqTrigger();
 
@@ -36,12 +36,12 @@ class PolicyReqTrigger {
   /////////////////////////////////////////////
   /// PolicyReqTrigger members
 
-  friend void to_json(nlohmann::json& j, const PolicyReqTrigger& o);
-  friend void from_json(const nlohmann::json& j, PolicyReqTrigger& o);
+  friend void to_json(nlohmann::json &j, const PolicyReqTrigger &o);
+  friend void from_json(const nlohmann::json &j, PolicyReqTrigger &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* PolicyReqTrigger_H_ */

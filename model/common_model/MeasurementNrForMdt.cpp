@@ -27,12 +27,12 @@ void MeasurementNrForMdt::validate() const {
   }
 }
 
-bool MeasurementNrForMdt::validate(std::stringstream& msg) const {
+bool MeasurementNrForMdt::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool MeasurementNrForMdt::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool MeasurementNrForMdt::validate(std::stringstream &msg,
+                                   const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "MeasurementNrForMdt" : pathPrefix;
@@ -43,22 +43,22 @@ bool MeasurementNrForMdt::validate(
   return success;
 }
 
-bool MeasurementNrForMdt::operator==(const MeasurementNrForMdt& rhs) const {
+bool MeasurementNrForMdt::operator==(const MeasurementNrForMdt &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool MeasurementNrForMdt::operator!=(const MeasurementNrForMdt& rhs) const {
+bool MeasurementNrForMdt::operator!=(const MeasurementNrForMdt &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const MeasurementNrForMdt& o) {
+void to_json(nlohmann::json &j, const MeasurementNrForMdt &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, MeasurementNrForMdt& o) {
+void from_json(const nlohmann::json &j, MeasurementNrForMdt &o) {
   from_json(j, o.m_value);
 }
 
@@ -80,4 +80,4 @@ void MeasurementNrForMdt::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

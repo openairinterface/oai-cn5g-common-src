@@ -25,10 +25,10 @@ struct Ngap_ProtocolExtensionContainer;
 
 /* Ngap_PathSwitchRequestAcknowledgeTransfer */
 typedef struct Ngap_PathSwitchRequestAcknowledgeTransfer {
-  struct Ngap_UPTransportLayerInformation*
-      uL_NGU_UP_TNLInformation;                          /* OPTIONAL */
-  struct Ngap_SecurityIndication* securityIndication;    /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_UPTransportLayerInformation
+      *uL_NGU_UP_TNLInformation;                         /* OPTIONAL */
+  struct Ngap_SecurityIndication *securityIndication;    /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

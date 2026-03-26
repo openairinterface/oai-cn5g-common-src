@@ -19,11 +19,10 @@
 #ifndef RecordNotification_H_
 #define RecordNotification_H_
 
-#include <nlohmann/json.hpp>
 #include "NotificationDescription.h"
 #include "RecordMeta.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::udsf {
 
@@ -31,7 +30,7 @@ namespace oai::model::udsf {
 /// Definition of a notification on a record
 /// </summary>
 class RecordNotification {
- public:
+public:
   RecordNotification();
   virtual ~RecordNotification() = default;
 
@@ -45,16 +44,16 @@ class RecordNotification {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const RecordNotification& rhs) const;
-  bool operator!=(const RecordNotification& rhs) const;
+  bool operator==(const RecordNotification &rhs) const;
+  bool operator!=(const RecordNotification &rhs) const;
 
   /////////////////////////////////////////////
   /// RecordNotification members
@@ -63,24 +62,24 @@ class RecordNotification {
   ///
   /// </summary>
   oai::model::udsf::NotificationDescription getDescriptor() const;
-  void setDescriptor(oai::model::udsf::NotificationDescription const& value);
+  void setDescriptor(oai::model::udsf::NotificationDescription const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::udsf::RecordMeta getMeta() const;
-  void setMeta(oai::model::udsf::RecordMeta const& value);
+  void setMeta(oai::model::udsf::RecordMeta const &value);
   /// <summary>
   /// list of opaque Block&#39;s in this Record
   /// </summary>
   std::vector<nlohmann::json> getBlocks() const;
-  void setBlocks(std::vector<nlohmann::json> const& value);
+  void setBlocks(std::vector<nlohmann::json> const &value);
   bool blocksIsSet() const;
   void unsetBlocks();
 
-  friend void to_json(nlohmann::json& j, const RecordNotification& o);
-  friend void from_json(const nlohmann::json& j, RecordNotification& o);
+  friend void to_json(nlohmann::json &j, const RecordNotification &o);
+  friend void from_json(const nlohmann::json &j, RecordNotification &o);
 
- protected:
+protected:
   oai::model::udsf::NotificationDescription m_Descriptor;
 
   oai::model::udsf::RecordMeta m_Meta;
@@ -89,6 +88,6 @@ class RecordNotification {
   bool m_BlocksIsSet;
 };
 
-}  // namespace oai::model::udsf
+} // namespace oai::model::udsf
 
 #endif /* RecordNotification_H_ */

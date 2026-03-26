@@ -15,9 +15,7 @@
 
 namespace oai::model::smf {
 
-EpsPdnCnxInfo::EpsPdnCnxInfo() {
-  m_PgwNodeNameIsSet = false;
-}
+EpsPdnCnxInfo::EpsPdnCnxInfo() { m_PgwNodeNameIsSet = false; }
 
 EpsPdnCnxInfo::~EpsPdnCnxInfo() {}
 
@@ -25,13 +23,14 @@ void EpsPdnCnxInfo::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const EpsPdnCnxInfo& o) {
-  j                = nlohmann::json();
+void to_json(nlohmann::json &j, const EpsPdnCnxInfo &o) {
+  j = nlohmann::json();
   j["pgwS8cFteid"] = o.m_PgwS8cFteid;
-  if (o.pgwNodeNameIsSet()) j["pgwNodeName"] = o.m_PgwNodeName;
+  if (o.pgwNodeNameIsSet())
+    j["pgwNodeName"] = o.m_PgwNodeName;
 }
 
-void from_json(const nlohmann::json& j, EpsPdnCnxInfo& o) {
+void from_json(const nlohmann::json &j, EpsPdnCnxInfo &o) {
   j.at("pgwS8cFteid").get_to(o.m_PgwS8cFteid);
   if (j.find("pgwNodeName") != j.end()) {
     j.at("pgwNodeName").get_to(o.m_PgwNodeName);
@@ -39,24 +38,16 @@ void from_json(const nlohmann::json& j, EpsPdnCnxInfo& o) {
   }
 }
 
-std::string EpsPdnCnxInfo::getPgwS8cFteid() const {
-  return m_PgwS8cFteid;
-}
-void EpsPdnCnxInfo::setPgwS8cFteid(std::string const& value) {
+std::string EpsPdnCnxInfo::getPgwS8cFteid() const { return m_PgwS8cFteid; }
+void EpsPdnCnxInfo::setPgwS8cFteid(std::string const &value) {
   m_PgwS8cFteid = value;
 }
-std::string EpsPdnCnxInfo::getPgwNodeName() const {
-  return m_PgwNodeName;
-}
-void EpsPdnCnxInfo::setPgwNodeName(std::string const& value) {
-  m_PgwNodeName      = value;
+std::string EpsPdnCnxInfo::getPgwNodeName() const { return m_PgwNodeName; }
+void EpsPdnCnxInfo::setPgwNodeName(std::string const &value) {
+  m_PgwNodeName = value;
   m_PgwNodeNameIsSet = true;
 }
-bool EpsPdnCnxInfo::pgwNodeNameIsSet() const {
-  return m_PgwNodeNameIsSet;
-}
-void EpsPdnCnxInfo::unsetPgwNodeName() {
-  m_PgwNodeNameIsSet = false;
-}
+bool EpsPdnCnxInfo::pgwNodeNameIsSet() const { return m_PgwNodeNameIsSet; }
+void EpsPdnCnxInfo::unsetPgwNodeName() { m_PgwNodeNameIsSet = false; }
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

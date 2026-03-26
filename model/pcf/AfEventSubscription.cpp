@@ -19,11 +19,11 @@
 namespace oai::model::pcf {
 
 AfEventSubscription::AfEventSubscription() {
-  m_NotifMethodIsSet     = false;
-  m_RepPeriod            = 0;
-  m_RepPeriodIsSet       = false;
-  m_WaitTime             = 0;
-  m_WaitTimeIsSet        = false;
+  m_NotifMethodIsSet = false;
+  m_RepPeriod = 0;
+  m_RepPeriodIsSet = false;
+  m_WaitTime = 0;
+  m_WaitTimeIsSet = false;
   m_QosMonParamTypeIsSet = false;
 }
 
@@ -34,12 +34,12 @@ void AfEventSubscription::validate() const {
   }
 }
 
-bool AfEventSubscription::validate(std::stringstream& msg) const {
+bool AfEventSubscription::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AfEventSubscription::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool AfEventSubscription::validate(std::stringstream &msg,
+                                   const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AfEventSubscription" : pathPrefix;
@@ -51,7 +51,7 @@ bool AfEventSubscription::validate(
   return success;
 }
 
-bool AfEventSubscription::operator==(const AfEventSubscription& rhs) const {
+bool AfEventSubscription::operator==(const AfEventSubscription &rhs) const {
   return
 
       (getEvent() == rhs.getEvent()) &&
@@ -75,20 +75,24 @@ bool AfEventSubscription::operator==(const AfEventSubscription& rhs) const {
           ;
 }
 
-bool AfEventSubscription::operator!=(const AfEventSubscription& rhs) const {
+bool AfEventSubscription::operator!=(const AfEventSubscription &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AfEventSubscription& o) {
-  j          = nlohmann::json::object();
+void to_json(nlohmann::json &j, const AfEventSubscription &o) {
+  j = nlohmann::json::object();
   j["event"] = o.m_Event;
-  if (o.notifMethodIsSet()) j["notifMethod"] = o.m_NotifMethod;
-  if (o.repPeriodIsSet()) j["repPeriod"] = o.m_RepPeriod;
-  if (o.waitTimeIsSet()) j["waitTime"] = o.m_WaitTime;
-  if (o.qosMonParamTypeIsSet()) j["qosMonParamType"] = o.m_QosMonParamType;
+  if (o.notifMethodIsSet())
+    j["notifMethod"] = o.m_NotifMethod;
+  if (o.repPeriodIsSet())
+    j["repPeriod"] = o.m_RepPeriod;
+  if (o.waitTimeIsSet())
+    j["waitTime"] = o.m_WaitTime;
+  if (o.qosMonParamTypeIsSet())
+    j["qosMonParamType"] = o.m_QosMonParamType;
 }
 
-void from_json(const nlohmann::json& j, AfEventSubscription& o) {
+void from_json(const nlohmann::json &j, AfEventSubscription &o) {
   j.at("event").get_to(o.m_Event);
   if (j.find("notifMethod") != j.end()) {
     j.at("notifMethod").get_to(o.m_NotifMethod);
@@ -111,56 +115,42 @@ void from_json(const nlohmann::json& j, AfEventSubscription& o) {
 oai::model::pcf::AfEvent AfEventSubscription::getEvent() const {
   return m_Event;
 }
-void AfEventSubscription::setEvent(oai::model::pcf::AfEvent const& value) {
+void AfEventSubscription::setEvent(oai::model::pcf::AfEvent const &value) {
   m_Event = value;
 }
 oai::model::pcf::AfNotifMethod AfEventSubscription::getNotifMethod() const {
   return m_NotifMethod;
 }
 void AfEventSubscription::setNotifMethod(
-    oai::model::pcf::AfNotifMethod const& value) {
-  m_NotifMethod      = value;
+    oai::model::pcf::AfNotifMethod const &value) {
+  m_NotifMethod = value;
   m_NotifMethodIsSet = true;
 }
 bool AfEventSubscription::notifMethodIsSet() const {
   return m_NotifMethodIsSet;
 }
-void AfEventSubscription::unsetNotifMethod() {
-  m_NotifMethodIsSet = false;
-}
-int32_t AfEventSubscription::getRepPeriod() const {
-  return m_RepPeriod;
-}
+void AfEventSubscription::unsetNotifMethod() { m_NotifMethodIsSet = false; }
+int32_t AfEventSubscription::getRepPeriod() const { return m_RepPeriod; }
 void AfEventSubscription::setRepPeriod(int32_t const value) {
-  m_RepPeriod      = value;
+  m_RepPeriod = value;
   m_RepPeriodIsSet = true;
 }
-bool AfEventSubscription::repPeriodIsSet() const {
-  return m_RepPeriodIsSet;
-}
-void AfEventSubscription::unsetRepPeriod() {
-  m_RepPeriodIsSet = false;
-}
-int32_t AfEventSubscription::getWaitTime() const {
-  return m_WaitTime;
-}
+bool AfEventSubscription::repPeriodIsSet() const { return m_RepPeriodIsSet; }
+void AfEventSubscription::unsetRepPeriod() { m_RepPeriodIsSet = false; }
+int32_t AfEventSubscription::getWaitTime() const { return m_WaitTime; }
 void AfEventSubscription::setWaitTime(int32_t const value) {
-  m_WaitTime      = value;
+  m_WaitTime = value;
   m_WaitTimeIsSet = true;
 }
-bool AfEventSubscription::waitTimeIsSet() const {
-  return m_WaitTimeIsSet;
-}
-void AfEventSubscription::unsetWaitTime() {
-  m_WaitTimeIsSet = false;
-}
+bool AfEventSubscription::waitTimeIsSet() const { return m_WaitTimeIsSet; }
+void AfEventSubscription::unsetWaitTime() { m_WaitTimeIsSet = false; }
 oai::model::pcf::QosMonitoringParamType
 AfEventSubscription::getQosMonParamType() const {
   return m_QosMonParamType;
 }
 void AfEventSubscription::setQosMonParamType(
-    oai::model::pcf::QosMonitoringParamType const& value) {
-  m_QosMonParamType      = value;
+    oai::model::pcf::QosMonitoringParamType const &value) {
+  m_QosMonParamType = value;
   m_QosMonParamTypeIsSet = true;
 }
 bool AfEventSubscription::qosMonParamTypeIsSet() const {
@@ -170,4 +160,4 @@ void AfEventSubscription::unsetQosMonParamType() {
   m_QosMonParamTypeIsSet = false;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

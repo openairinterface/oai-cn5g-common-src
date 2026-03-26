@@ -19,8 +19,8 @@
 #ifndef N2InformationTransferError_H_
 #define N2InformationTransferError_H_
 
-#include "ProblemDetails.h"
 #include "PWSErrorData.h"
+#include "ProblemDetails.h"
 #include <nlohmann/json.hpp>
 
 namespace oai::model::amf {
@@ -29,7 +29,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class N2InformationTransferError {
- public:
+public:
   N2InformationTransferError();
   virtual ~N2InformationTransferError();
 
@@ -42,25 +42,25 @@ class N2InformationTransferError {
   ///
   /// </summary>
   oai::model::common::ProblemDetails getError() const;
-  void setError(oai::model::common::ProblemDetails const& value);
+  void setError(oai::model::common::ProblemDetails const &value);
   /// <summary>
   ///
   /// </summary>
   PWSErrorData getPwdErrorInfo() const;
-  void setPwdErrorInfo(PWSErrorData const& value);
+  void setPwdErrorInfo(PWSErrorData const &value);
   bool pwdErrorInfoIsSet() const;
   void unsetPwdErrorInfo();
 
-  friend void to_json(nlohmann::json& j, const N2InformationTransferError& o);
-  friend void from_json(const nlohmann::json& j, N2InformationTransferError& o);
+  friend void to_json(nlohmann::json &j, const N2InformationTransferError &o);
+  friend void from_json(const nlohmann::json &j, N2InformationTransferError &o);
 
- protected:
+protected:
   oai::model::common::ProblemDetails m_Error;
 
   PWSErrorData m_PwdErrorInfo;
   bool m_PwdErrorInfoIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* N2InformationTransferError_H_ */

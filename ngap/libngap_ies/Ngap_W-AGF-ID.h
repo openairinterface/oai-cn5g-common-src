@@ -34,7 +34,7 @@ typedef struct Ngap_W_AGF_ID {
   Ngap_W_AGF_ID_PR present;
   union Ngap_W_AGF_ID_u {
     BIT_STRING_t w_AGF_ID;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

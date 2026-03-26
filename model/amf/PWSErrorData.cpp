@@ -15,9 +15,7 @@
 
 namespace oai::model::amf {
 
-PWSErrorData::PWSErrorData() {
-  m_NamfCause = 0;
-}
+PWSErrorData::PWSErrorData() { m_NamfCause = 0; }
 
 PWSErrorData::~PWSErrorData() {}
 
@@ -25,20 +23,16 @@ void PWSErrorData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const PWSErrorData& o) {
-  j              = nlohmann::json();
+void to_json(nlohmann::json &j, const PWSErrorData &o) {
+  j = nlohmann::json();
   j["namfCause"] = o.m_NamfCause;
 }
 
-void from_json(const nlohmann::json& j, PWSErrorData& o) {
+void from_json(const nlohmann::json &j, PWSErrorData &o) {
   j.at("namfCause").get_to(o.m_NamfCause);
 }
 
-int32_t PWSErrorData::getNamfCause() const {
-  return m_NamfCause;
-}
-void PWSErrorData::setNamfCause(int32_t const value) {
-  m_NamfCause = value;
-}
+int32_t PWSErrorData::getNamfCause() const { return m_NamfCause; }
+void PWSErrorData::setNamfCause(int32_t const value) { m_NamfCause = value; }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

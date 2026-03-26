@@ -11,8 +11,7 @@
 #include "Ngap_ProtocolIE-SingleContainer.h"
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 static asn_oer_constraints_t asn_OER_type_Ngap_Cause_constr_1 CC_NOTUSED = {
-    {0, 0},
-    -1};
+    {0, 0}, -1};
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 asn_per_constraints_t asn_PER_type_Ngap_Cause_constr_1 CC_NOTUSED = {
@@ -151,7 +150,7 @@ asn_CHOICE_specifics_t asn_SPC_Ngap_Cause_specs_1 = {
     sizeof(struct Ngap_Cause),
     offsetof(struct Ngap_Cause, _asn_ctx),
     offsetof(struct Ngap_Cause, present),
-    sizeof(((struct Ngap_Cause*) 0)->present),
+    sizeof(((struct Ngap_Cause *)0)->present),
     asn_MAP_Ngap_Cause_tag2el_1,
     6, /* Count of tags in the map */
     0,

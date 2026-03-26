@@ -12,8 +12,8 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_AMFSetID.h"
 #include "Ngap_AMFPointer.h"
+#include "Ngap_AMFSetID.h"
 #include "Ngap_FiveG-TMSI.h"
 #include <constr_SEQUENCE.h>
 
@@ -29,7 +29,7 @@ typedef struct Ngap_FiveG_S_TMSI {
   Ngap_AMFSetID_t aMFSetID;
   Ngap_AMFPointer_t aMFPointer;
   Ngap_FiveG_TMSI_t fiveG_TMSI;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

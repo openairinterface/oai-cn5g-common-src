@@ -13,8 +13,8 @@
 
 #include "EventForMdt_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::common {
 
@@ -27,12 +27,12 @@ void EventForMdt_anyOf::validate() const {
   }
 }
 
-bool EventForMdt_anyOf::validate(std::stringstream& msg) const {
+bool EventForMdt_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool EventForMdt_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool EventForMdt_anyOf::validate(std::stringstream &msg,
+                                 const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "EventForMdt_anyOf" : pathPrefix;
@@ -46,33 +46,33 @@ bool EventForMdt_anyOf::validate(
   return success;
 }
 
-bool EventForMdt_anyOf::operator==(const EventForMdt_anyOf& rhs) const {
+bool EventForMdt_anyOf::operator==(const EventForMdt_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool EventForMdt_anyOf::operator!=(const EventForMdt_anyOf& rhs) const {
+bool EventForMdt_anyOf::operator!=(const EventForMdt_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const EventForMdt_anyOf& o) {
+void to_json(nlohmann::json &j, const EventForMdt_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case EventForMdt_anyOf::eEventForMdt_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case EventForMdt_anyOf::eEventForMdt_anyOf::OUT_OF_COVERAG:
-      j = "OUT_OF_COVERAG";
-      break;
-    case EventForMdt_anyOf::eEventForMdt_anyOf::A2_EVENT:
-      j = "A2_EVENT";
-      break;
+  case EventForMdt_anyOf::eEventForMdt_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case EventForMdt_anyOf::eEventForMdt_anyOf::OUT_OF_COVERAG:
+    j = "OUT_OF_COVERAG";
+    break;
+  case EventForMdt_anyOf::eEventForMdt_anyOf::A2_EVENT:
+    j = "A2_EVENT";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, EventForMdt_anyOf& o) {
+void from_json(const nlohmann::json &j, EventForMdt_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "OUT_OF_COVERAG") {
     o.setValue(EventForMdt_anyOf::eEventForMdt_anyOf::OUT_OF_COVERAG);
@@ -94,4 +94,4 @@ void EventForMdt_anyOf::setValue(EventForMdt_anyOf::eEventForMdt_anyOf value) {
   m_value = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

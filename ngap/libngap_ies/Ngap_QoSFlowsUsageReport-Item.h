@@ -13,8 +13,8 @@
 
 /* Including external dependencies */
 #include "Ngap_QosFlowIdentifier.h"
-#include <NativeEnumerated.h>
 #include "Ngap_VolumeTimedReportList.h"
+#include <NativeEnumerated.h>
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -23,12 +23,12 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_QoSFlowsUsageReport_Item__rATType {
-  Ngap_QoSFlowsUsageReport_Item__rATType_nr    = 0,
+  Ngap_QoSFlowsUsageReport_Item__rATType_nr = 0,
   Ngap_QoSFlowsUsageReport_Item__rATType_eutra = 1,
   /*
    * Enumeration is extensible
    */
-  Ngap_QoSFlowsUsageReport_Item__rATType_nr_unlicensed     = 2,
+  Ngap_QoSFlowsUsageReport_Item__rATType_nr_unlicensed = 2,
   Ngap_QoSFlowsUsageReport_Item__rATType_e_utra_unlicensed = 3
 } e_Ngap_QoSFlowsUsageReport_Item__rATType;
 
@@ -40,7 +40,7 @@ typedef struct Ngap_QoSFlowsUsageReport_Item {
   Ngap_QosFlowIdentifier_t qosFlowIdentifier;
   long rATType;
   Ngap_VolumeTimedReportList_t qoSFlowsTimedReportList;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

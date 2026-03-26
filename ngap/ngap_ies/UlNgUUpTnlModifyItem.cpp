@@ -16,45 +16,45 @@ UlNgUUpTnlModifyItem::~UlNgUUpTnlModifyItem() {}
 
 //------------------------------------------------------------------------------
 void UlNgUUpTnlModifyItem::set(
-    const UpTransportLayerInformation& ulNgUUpTnlInformation,
-    const UpTransportLayerInformation& dlNgUUpTnlInformation) {
+    const UpTransportLayerInformation &ulNgUUpTnlInformation,
+    const UpTransportLayerInformation &dlNgUUpTnlInformation) {
   m_UlNgUUpTnlInformation = ulNgUUpTnlInformation;
   m_DlNgUUpTnlInformation = dlNgUUpTnlInformation;
 }
 //------------------------------------------------------------------------------
 void UlNgUUpTnlModifyItem::get(
-    UpTransportLayerInformation& ulNgUUpTnlInformation,
-    UpTransportLayerInformation& dlNgUUpTnlInformation) const {
+    UpTransportLayerInformation &ulNgUUpTnlInformation,
+    UpTransportLayerInformation &dlNgUUpTnlInformation) const {
   ulNgUUpTnlInformation = m_UlNgUUpTnlInformation;
   dlNgUUpTnlInformation = m_DlNgUUpTnlInformation;
 }
 
 //------------------------------------------------------------------------------
 void UlNgUUpTnlModifyItem::setUlNgUUpTnlInformation(
-    const UpTransportLayerInformation& ulNgUUpTnlInformation) {
+    const UpTransportLayerInformation &ulNgUUpTnlInformation) {
   m_UlNgUUpTnlInformation = ulNgUUpTnlInformation;
 }
 
 //------------------------------------------------------------------------------
 void UlNgUUpTnlModifyItem::getUlNgUUpTnlInformation(
-    UpTransportLayerInformation& ulNgUUpTnlInformation) const {
+    UpTransportLayerInformation &ulNgUUpTnlInformation) const {
   ulNgUUpTnlInformation = m_UlNgUUpTnlInformation;
 }
 
 //------------------------------------------------------------------------------
 void UlNgUUpTnlModifyItem::setDlNgUUpTnlInformation(
-    const UpTransportLayerInformation& dlNgUUpTnlInformation) {
+    const UpTransportLayerInformation &dlNgUUpTnlInformation) {
   m_DlNgUUpTnlInformation = dlNgUUpTnlInformation;
 }
 //------------------------------------------------------------------------------
 void UlNgUUpTnlModifyItem::getDlNgUUpTnlInformation(
-    UpTransportLayerInformation& dlNgUUpTnlInformation) const {
+    UpTransportLayerInformation &dlNgUUpTnlInformation) const {
   dlNgUUpTnlInformation = m_DlNgUUpTnlInformation;
 }
 
 //------------------------------------------------------------------------------
 bool UlNgUUpTnlModifyItem::encode(
-    Ngap_UL_NGU_UP_TNLModifyItem_t& ulNgUUpTnlModifyItem) const {
+    Ngap_UL_NGU_UP_TNLModifyItem_t &ulNgUUpTnlModifyItem) const {
   if (!m_UlNgUUpTnlInformation.encode(
           ulNgUUpTnlModifyItem.uL_NGU_UP_TNLInformation)) {
     return false;
@@ -68,7 +68,7 @@ bool UlNgUUpTnlModifyItem::encode(
 
 //------------------------------------------------------------------------------
 bool UlNgUUpTnlModifyItem::decode(
-    const Ngap_UL_NGU_UP_TNLModifyItem_t& ulNgUUpTnlModifyItem) {
+    const Ngap_UL_NGU_UP_TNLModifyItem_t &ulNgUUpTnlModifyItem) {
   if (!m_UlNgUUpTnlInformation.decode(
           ulNgUUpTnlModifyItem.uL_NGU_UP_TNLInformation))
     false;
@@ -79,4 +79,4 @@ bool UlNgUUpTnlModifyItem::decode(
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

@@ -32,7 +32,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class PointUncertaintyCircle_allOf {
- public:
+public:
   PointUncertaintyCircle_allOf();
   virtual ~PointUncertaintyCircle_allOf();
 
@@ -45,23 +45,23 @@ class PointUncertaintyCircle_allOf {
   ///
   /// </summary>
   GeographicalCoordinates getPoint() const;
-  void setPoint(GeographicalCoordinates const& value);
+  void setPoint(GeographicalCoordinates const &value);
   /// <summary>
   ///
   /// </summary>
   float getUncertainty() const;
   void setUncertainty(float const value);
 
-  friend void to_json(nlohmann::json& j, const PointUncertaintyCircle_allOf& o);
-  friend void from_json(
-      const nlohmann::json& j, PointUncertaintyCircle_allOf& o);
+  friend void to_json(nlohmann::json &j, const PointUncertaintyCircle_allOf &o);
+  friend void from_json(const nlohmann::json &j,
+                        PointUncertaintyCircle_allOf &o);
 
- protected:
+protected:
   GeographicalCoordinates m_Point;
 
   float m_Uncertainty;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* PointUncertaintyCircle_allOf_H_ */

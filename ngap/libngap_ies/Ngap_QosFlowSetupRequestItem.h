@@ -12,9 +12,9 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
+#include "Ngap_E-RAB-ID.h"
 #include "Ngap_QosFlowIdentifier.h"
 #include "Ngap_QosFlowLevelQosParameters.h"
-#include "Ngap_E-RAB-ID.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -28,8 +28,8 @@ struct Ngap_ProtocolExtensionContainer;
 typedef struct Ngap_QosFlowSetupRequestItem {
   Ngap_QosFlowIdentifier_t qosFlowIdentifier;
   Ngap_QosFlowLevelQosParameters_t qosFlowLevelQosParameters;
-  Ngap_E_RAB_ID_t* e_RAB_ID;                             /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  Ngap_E_RAB_ID_t *e_RAB_ID;                             /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

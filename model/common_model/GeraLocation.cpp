@@ -19,24 +19,24 @@
 namespace oai::model::common {
 
 GeraLocation::GeraLocation() {
-  m_LocationNumber                = "";
-  m_LocationNumberIsSet           = false;
-  m_CgiIsSet                      = false;
-  m_RaiIsSet                      = false;
-  m_SaiIsSet                      = false;
-  m_LaiIsSet                      = false;
-  m_VlrNumber                     = "";
-  m_VlrNumberIsSet                = false;
-  m_MscNumber                     = "";
-  m_MscNumberIsSet                = false;
-  m_AgeOfLocationInformation      = 0;
+  m_LocationNumber = "";
+  m_LocationNumberIsSet = false;
+  m_CgiIsSet = false;
+  m_RaiIsSet = false;
+  m_SaiIsSet = false;
+  m_LaiIsSet = false;
+  m_VlrNumber = "";
+  m_VlrNumberIsSet = false;
+  m_MscNumber = "";
+  m_MscNumberIsSet = false;
+  m_AgeOfLocationInformation = 0;
   m_AgeOfLocationInformationIsSet = false;
-  m_UeLocationTimestamp           = "";
-  m_UeLocationTimestampIsSet      = false;
-  m_GeographicalInformation       = "";
-  m_GeographicalInformationIsSet  = false;
-  m_GeodeticInformation           = "";
-  m_GeodeticInformationIsSet      = false;
+  m_UeLocationTimestamp = "";
+  m_UeLocationTimestampIsSet = false;
+  m_GeographicalInformation = "";
+  m_GeographicalInformationIsSet = false;
+  m_GeodeticInformation = "";
+  m_GeodeticInformationIsSet = false;
 }
 
 void GeraLocation::validate() const {
@@ -46,18 +46,18 @@ void GeraLocation::validate() const {
   }
 }
 
-bool GeraLocation::validate(std::stringstream& msg) const {
+bool GeraLocation::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool GeraLocation::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool GeraLocation::validate(std::stringstream &msg,
+                            const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "GeraLocation" : pathPrefix;
 
   if (ageOfLocationInformationIsSet()) {
-    const int32_t& value = m_AgeOfLocationInformation;
+    const int32_t &value = m_AgeOfLocationInformation;
     const std::string currentValuePath =
         _pathPrefix + ".ageOfLocationInformation";
 
@@ -85,7 +85,7 @@ bool GeraLocation::validate(
   return success;
 }
 
-bool GeraLocation::operator==(const GeraLocation& rhs) const {
+bool GeraLocation::operator==(const GeraLocation &rhs) const {
   return
 
       ((!locationNumberIsSet() && !rhs.locationNumberIsSet()) ||
@@ -134,19 +134,26 @@ bool GeraLocation::operator==(const GeraLocation& rhs) const {
           ;
 }
 
-bool GeraLocation::operator!=(const GeraLocation& rhs) const {
+bool GeraLocation::operator!=(const GeraLocation &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const GeraLocation& o) {
+void to_json(nlohmann::json &j, const GeraLocation &o) {
   j = nlohmann::json();
-  if (o.locationNumberIsSet()) j["locationNumber"] = o.m_LocationNumber;
-  if (o.cgiIsSet()) j["cgi"] = o.m_Cgi;
-  if (o.raiIsSet()) j["rai"] = o.m_Rai;
-  if (o.saiIsSet()) j["sai"] = o.m_Sai;
-  if (o.laiIsSet()) j["lai"] = o.m_Lai;
-  if (o.vlrNumberIsSet()) j["vlrNumber"] = o.m_VlrNumber;
-  if (o.mscNumberIsSet()) j["mscNumber"] = o.m_MscNumber;
+  if (o.locationNumberIsSet())
+    j["locationNumber"] = o.m_LocationNumber;
+  if (o.cgiIsSet())
+    j["cgi"] = o.m_Cgi;
+  if (o.raiIsSet())
+    j["rai"] = o.m_Rai;
+  if (o.saiIsSet())
+    j["sai"] = o.m_Sai;
+  if (o.laiIsSet())
+    j["lai"] = o.m_Lai;
+  if (o.vlrNumberIsSet())
+    j["vlrNumber"] = o.m_VlrNumber;
+  if (o.mscNumberIsSet())
+    j["mscNumber"] = o.m_MscNumber;
   if (o.ageOfLocationInformationIsSet())
     j["ageOfLocationInformation"] = o.m_AgeOfLocationInformation;
   if (o.ueLocationTimestampIsSet())
@@ -157,7 +164,7 @@ void to_json(nlohmann::json& j, const GeraLocation& o) {
     j["geodeticInformation"] = o.m_GeodeticInformation;
 }
 
-void from_json(const nlohmann::json& j, GeraLocation& o) {
+void from_json(const nlohmann::json &j, GeraLocation &o) {
   if (j.find("locationNumber") != j.end()) {
     j.at("locationNumber").get_to(o.m_LocationNumber);
     o.m_LocationNumberIsSet = true;
@@ -204,102 +211,62 @@ void from_json(const nlohmann::json& j, GeraLocation& o) {
   }
 }
 
-std::string GeraLocation::getLocationNumber() const {
-  return m_LocationNumber;
-}
-void GeraLocation::setLocationNumber(std::string const& value) {
-  m_LocationNumber      = value;
+std::string GeraLocation::getLocationNumber() const { return m_LocationNumber; }
+void GeraLocation::setLocationNumber(std::string const &value) {
+  m_LocationNumber = value;
   m_LocationNumberIsSet = true;
 }
-bool GeraLocation::locationNumberIsSet() const {
-  return m_LocationNumberIsSet;
-}
-void GeraLocation::unsetLocationNumber() {
-  m_LocationNumberIsSet = false;
-}
-oai::model::common::CellGlobalId GeraLocation::getCgi() const {
-  return m_Cgi;
-}
-void GeraLocation::setCgi(oai::model::common::CellGlobalId const& value) {
-  m_Cgi      = value;
+bool GeraLocation::locationNumberIsSet() const { return m_LocationNumberIsSet; }
+void GeraLocation::unsetLocationNumber() { m_LocationNumberIsSet = false; }
+oai::model::common::CellGlobalId GeraLocation::getCgi() const { return m_Cgi; }
+void GeraLocation::setCgi(oai::model::common::CellGlobalId const &value) {
+  m_Cgi = value;
   m_CgiIsSet = true;
 }
-bool GeraLocation::cgiIsSet() const {
-  return m_CgiIsSet;
-}
-void GeraLocation::unsetCgi() {
-  m_CgiIsSet = false;
-}
-oai::model::common::RoutingAreaId GeraLocation::getRai() const {
-  return m_Rai;
-}
-void GeraLocation::setRai(oai::model::common::RoutingAreaId const& value) {
-  m_Rai      = value;
+bool GeraLocation::cgiIsSet() const { return m_CgiIsSet; }
+void GeraLocation::unsetCgi() { m_CgiIsSet = false; }
+oai::model::common::RoutingAreaId GeraLocation::getRai() const { return m_Rai; }
+void GeraLocation::setRai(oai::model::common::RoutingAreaId const &value) {
+  m_Rai = value;
   m_RaiIsSet = true;
 }
-bool GeraLocation::raiIsSet() const {
-  return m_RaiIsSet;
-}
-void GeraLocation::unsetRai() {
-  m_RaiIsSet = false;
-}
-oai::model::common::ServiceAreaId GeraLocation::getSai() const {
-  return m_Sai;
-}
-void GeraLocation::setSai(oai::model::common::ServiceAreaId const& value) {
-  m_Sai      = value;
+bool GeraLocation::raiIsSet() const { return m_RaiIsSet; }
+void GeraLocation::unsetRai() { m_RaiIsSet = false; }
+oai::model::common::ServiceAreaId GeraLocation::getSai() const { return m_Sai; }
+void GeraLocation::setSai(oai::model::common::ServiceAreaId const &value) {
+  m_Sai = value;
   m_SaiIsSet = true;
 }
-bool GeraLocation::saiIsSet() const {
-  return m_SaiIsSet;
-}
-void GeraLocation::unsetSai() {
-  m_SaiIsSet = false;
-}
+bool GeraLocation::saiIsSet() const { return m_SaiIsSet; }
+void GeraLocation::unsetSai() { m_SaiIsSet = false; }
 oai::model::common::LocationAreaId GeraLocation::getLai() const {
   return m_Lai;
 }
-void GeraLocation::setLai(oai::model::common::LocationAreaId const& value) {
-  m_Lai      = value;
+void GeraLocation::setLai(oai::model::common::LocationAreaId const &value) {
+  m_Lai = value;
   m_LaiIsSet = true;
 }
-bool GeraLocation::laiIsSet() const {
-  return m_LaiIsSet;
-}
-void GeraLocation::unsetLai() {
-  m_LaiIsSet = false;
-}
-std::string GeraLocation::getVlrNumber() const {
-  return m_VlrNumber;
-}
-void GeraLocation::setVlrNumber(std::string const& value) {
-  m_VlrNumber      = value;
+bool GeraLocation::laiIsSet() const { return m_LaiIsSet; }
+void GeraLocation::unsetLai() { m_LaiIsSet = false; }
+std::string GeraLocation::getVlrNumber() const { return m_VlrNumber; }
+void GeraLocation::setVlrNumber(std::string const &value) {
+  m_VlrNumber = value;
   m_VlrNumberIsSet = true;
 }
-bool GeraLocation::vlrNumberIsSet() const {
-  return m_VlrNumberIsSet;
-}
-void GeraLocation::unsetVlrNumber() {
-  m_VlrNumberIsSet = false;
-}
-std::string GeraLocation::getMscNumber() const {
-  return m_MscNumber;
-}
-void GeraLocation::setMscNumber(std::string const& value) {
-  m_MscNumber      = value;
+bool GeraLocation::vlrNumberIsSet() const { return m_VlrNumberIsSet; }
+void GeraLocation::unsetVlrNumber() { m_VlrNumberIsSet = false; }
+std::string GeraLocation::getMscNumber() const { return m_MscNumber; }
+void GeraLocation::setMscNumber(std::string const &value) {
+  m_MscNumber = value;
   m_MscNumberIsSet = true;
 }
-bool GeraLocation::mscNumberIsSet() const {
-  return m_MscNumberIsSet;
-}
-void GeraLocation::unsetMscNumber() {
-  m_MscNumberIsSet = false;
-}
+bool GeraLocation::mscNumberIsSet() const { return m_MscNumberIsSet; }
+void GeraLocation::unsetMscNumber() { m_MscNumberIsSet = false; }
 int32_t GeraLocation::getAgeOfLocationInformation() const {
   return m_AgeOfLocationInformation;
 }
 void GeraLocation::setAgeOfLocationInformation(int32_t const value) {
-  m_AgeOfLocationInformation      = value;
+  m_AgeOfLocationInformation = value;
   m_AgeOfLocationInformationIsSet = true;
 }
 bool GeraLocation::ageOfLocationInformationIsSet() const {
@@ -311,8 +278,8 @@ void GeraLocation::unsetAgeOfLocationInformation() {
 std::string GeraLocation::getUeLocationTimestamp() const {
   return m_UeLocationTimestamp;
 }
-void GeraLocation::setUeLocationTimestamp(std::string const& value) {
-  m_UeLocationTimestamp      = value;
+void GeraLocation::setUeLocationTimestamp(std::string const &value) {
+  m_UeLocationTimestamp = value;
   m_UeLocationTimestampIsSet = true;
 }
 bool GeraLocation::ueLocationTimestampIsSet() const {
@@ -324,8 +291,8 @@ void GeraLocation::unsetUeLocationTimestamp() {
 std::string GeraLocation::getGeographicalInformation() const {
   return m_GeographicalInformation;
 }
-void GeraLocation::setGeographicalInformation(std::string const& value) {
-  m_GeographicalInformation      = value;
+void GeraLocation::setGeographicalInformation(std::string const &value) {
+  m_GeographicalInformation = value;
   m_GeographicalInformationIsSet = true;
 }
 bool GeraLocation::geographicalInformationIsSet() const {
@@ -337,8 +304,8 @@ void GeraLocation::unsetGeographicalInformation() {
 std::string GeraLocation::getGeodeticInformation() const {
   return m_GeodeticInformation;
 }
-void GeraLocation::setGeodeticInformation(std::string const& value) {
-  m_GeodeticInformation      = value;
+void GeraLocation::setGeodeticInformation(std::string const &value) {
+  m_GeodeticInformation = value;
   m_GeodeticInformationIsSet = true;
 }
 bool GeraLocation::geodeticInformationIsSet() const {
@@ -348,4 +315,4 @@ void GeraLocation::unsetGeodeticInformation() {
   m_GeodeticInformationIsSet = false;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

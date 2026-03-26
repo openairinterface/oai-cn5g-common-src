@@ -12,7 +12,7 @@ namespace oai::ngap {
 //------------------------------------------------------------------------------
 PathSwitchRequestUnsuccessfulTransfer::PathSwitchRequestUnsuccessfulTransfer() {
   m_PathSwitchRequestUnsuccessfulTransferIe =
-      (Ngap_PathSwitchRequestUnsuccessfulTransfer_t*) calloc(
+      (Ngap_PathSwitchRequestUnsuccessfulTransfer_t *)calloc(
           1, sizeof(Ngap_PathSwitchRequestUnsuccessfulTransfer_t));
 }
 
@@ -107,10 +107,9 @@ long PathSwitchRequestUnsuccessfulTransfer::getCause() const {
 }
 
 //------------------------------------------------------------------------------
-int PathSwitchRequestUnsuccessfulTransfer::encode(uint8_t* buf, int bufSize) {
-  ngap_utils::print_asn_msg(
-      &asn_DEF_Ngap_PathSwitchRequestUnsuccessfulTransfer,
-      m_PathSwitchRequestUnsuccessfulTransferIe);
+int PathSwitchRequestUnsuccessfulTransfer::encode(uint8_t *buf, int bufSize) {
+  ngap_utils::print_asn_msg(&asn_DEF_Ngap_PathSwitchRequestUnsuccessfulTransfer,
+                            m_PathSwitchRequestUnsuccessfulTransferIe);
   asn_enc_rval_t er = aper_encode_to_buffer(
       &asn_DEF_Ngap_PathSwitchRequestUnsuccessfulTransfer, NULL,
       m_PathSwitchRequestUnsuccessfulTransferIe, buf, bufSize);
@@ -119,11 +118,11 @@ int PathSwitchRequestUnsuccessfulTransfer::encode(uint8_t* buf, int bufSize) {
 }
 
 //------------------------------------------------------------------------------
-bool PathSwitchRequestUnsuccessfulTransfer::decode(uint8_t* buf, int bufSize) {
+bool PathSwitchRequestUnsuccessfulTransfer::decode(uint8_t *buf, int bufSize) {
   asn_dec_rval_t rc = asn_decode(
       NULL, ATS_ALIGNED_CANONICAL_PER,
       &asn_DEF_Ngap_PathSwitchRequestUnsuccessfulTransfer,
-      (void**) &m_PathSwitchRequestUnsuccessfulTransferIe, buf, bufSize);
+      (void **)&m_PathSwitchRequestUnsuccessfulTransferIe, buf, bufSize);
 
   if (rc.code == RC_OK) {
     oai::logger::logger_common::ngap().debug("Decoded successfully");
@@ -135,8 +134,8 @@ bool PathSwitchRequestUnsuccessfulTransfer::decode(uint8_t* buf, int bufSize) {
     return false;
   }
 
-  oai::logger::logger_common::ngap().debug(
-      "rc.consumed to decode %d", rc.consumed);
+  oai::logger::logger_common::ngap().debug("rc.consumed to decode %d",
+                                           rc.consumed);
   // asn_fprint(stderr,
   // &asn_DEF_Ngap_PathSwitchRequestUnsuccessfulTransfer,
   // m_PathSwitchRequestUnsuccessfulTransferIe);
@@ -148,4 +147,4 @@ bool PathSwitchRequestUnsuccessfulTransfer::decode(uint8_t* buf, int bufSize) {
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

@@ -29,7 +29,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class UeContextCreateError {
- public:
+public:
   UeContextCreateError();
   virtual ~UeContextCreateError();
 
@@ -42,25 +42,25 @@ class UeContextCreateError {
   ///
   /// </summary>
   oai::model::common::ProblemDetails getError() const;
-  void setError(oai::model::common::ProblemDetails const& value);
+  void setError(oai::model::common::ProblemDetails const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::NgApCause getNgapCause() const;
-  void setNgapCause(oai::model::common::NgApCause const& value);
+  void setNgapCause(oai::model::common::NgApCause const &value);
   bool ngapCauseIsSet() const;
   void unsetNgapCause();
 
-  friend void to_json(nlohmann::json& j, const UeContextCreateError& o);
-  friend void from_json(const nlohmann::json& j, UeContextCreateError& o);
+  friend void to_json(nlohmann::json &j, const UeContextCreateError &o);
+  friend void from_json(const nlohmann::json &j, UeContextCreateError &o);
 
- protected:
+protected:
   oai::model::common::ProblemDetails m_Error;
 
   oai::model::common::NgApCause m_NgapCause;
   bool m_NgapCauseIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* UeContextCreateError_H_ */

@@ -28,7 +28,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class Point_allOf {
- public:
+public:
   Point_allOf();
   virtual ~Point_allOf() = default;
 
@@ -42,16 +42,16 @@ class Point_allOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const Point_allOf& rhs) const;
-  bool operator!=(const Point_allOf& rhs) const;
+  bool operator==(const Point_allOf &rhs) const;
+  bool operator!=(const Point_allOf &rhs) const;
 
   /////////////////////////////////////////////
   /// Point_allOf members
@@ -60,15 +60,15 @@ class Point_allOf {
   ///
   /// </summary>
   oai::model::lmf::GeographicalCoordinates getPoint() const;
-  void setPoint(oai::model::lmf::GeographicalCoordinates const& value);
+  void setPoint(oai::model::lmf::GeographicalCoordinates const &value);
 
-  friend void to_json(nlohmann::json& j, const Point_allOf& o);
-  friend void from_json(const nlohmann::json& j, Point_allOf& o);
+  friend void to_json(nlohmann::json &j, const Point_allOf &o);
+  friend void from_json(const nlohmann::json &j, Point_allOf &o);
 
- protected:
+protected:
   oai::model::lmf::GeographicalCoordinates m_Point;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* Point_allOf_H_ */

@@ -27,7 +27,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class TransportProtocol_anyOf {
- public:
+public:
   TransportProtocol_anyOf();
   virtual ~TransportProtocol_anyOf() = default;
 
@@ -50,16 +50,16 @@ class TransportProtocol_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const TransportProtocol_anyOf& rhs) const;
-  bool operator!=(const TransportProtocol_anyOf& rhs) const;
+  bool operator==(const TransportProtocol_anyOf &rhs) const;
+  bool operator!=(const TransportProtocol_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// TransportProtocol_anyOf members
@@ -67,15 +67,15 @@ class TransportProtocol_anyOf {
   TransportProtocol_anyOf::eTransportProtocol_anyOf getValue() const;
   void setValue(TransportProtocol_anyOf::eTransportProtocol_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const TransportProtocol_anyOf& o);
-  friend void from_json(const nlohmann::json& j, TransportProtocol_anyOf& o);
+  friend void to_json(nlohmann::json &j, const TransportProtocol_anyOf &o);
+  friend void from_json(const nlohmann::json &j, TransportProtocol_anyOf &o);
 
- protected:
+protected:
   TransportProtocol_anyOf::eTransportProtocol_anyOf m_value =
       TransportProtocol_anyOf::eTransportProtocol_anyOf::
           INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* TransportProtocol_anyOf_H_ */

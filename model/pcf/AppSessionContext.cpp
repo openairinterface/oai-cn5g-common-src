@@ -19,9 +19,9 @@
 namespace oai::model::pcf {
 
 AppSessionContext::AppSessionContext() {
-  m_AscReqDataIsSet  = false;
+  m_AscReqDataIsSet = false;
   m_AscRespDataIsSet = false;
-  m_EvsNotifIsSet    = false;
+  m_EvsNotifIsSet = false;
 }
 
 void AppSessionContext::validate() const {
@@ -31,12 +31,12 @@ void AppSessionContext::validate() const {
   }
 }
 
-bool AppSessionContext::validate(std::stringstream& msg) const {
+bool AppSessionContext::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AppSessionContext::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool AppSessionContext::validate(std::stringstream &msg,
+                                 const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AppSessionContext" : pathPrefix;
@@ -44,7 +44,7 @@ bool AppSessionContext::validate(
   return success;
 }
 
-bool AppSessionContext::operator==(const AppSessionContext& rhs) const {
+bool AppSessionContext::operator==(const AppSessionContext &rhs) const {
   return
 
       ((!ascReqDataIsSet() && !rhs.ascReqDataIsSet()) ||
@@ -62,18 +62,21 @@ bool AppSessionContext::operator==(const AppSessionContext& rhs) const {
           ;
 }
 
-bool AppSessionContext::operator!=(const AppSessionContext& rhs) const {
+bool AppSessionContext::operator!=(const AppSessionContext &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AppSessionContext& o) {
+void to_json(nlohmann::json &j, const AppSessionContext &o) {
   j = nlohmann::json::object();
-  if (o.ascReqDataIsSet()) j["ascReqData"] = o.m_AscReqData;
-  if (o.ascRespDataIsSet()) j["ascRespData"] = o.m_AscRespData;
-  if (o.evsNotifIsSet()) j["evsNotif"] = o.m_EvsNotif;
+  if (o.ascReqDataIsSet())
+    j["ascReqData"] = o.m_AscReqData;
+  if (o.ascRespDataIsSet())
+    j["ascRespData"] = o.m_AscRespData;
+  if (o.evsNotifIsSet())
+    j["evsNotif"] = o.m_EvsNotif;
 }
 
-void from_json(const nlohmann::json& j, AppSessionContext& o) {
+void from_json(const nlohmann::json &j, AppSessionContext &o) {
   if (j.find("ascReqData") != j.end()) {
     j.at("ascReqData").get_to(o.m_AscReqData);
     o.m_AscReqDataIsSet = true;
@@ -88,49 +91,37 @@ void from_json(const nlohmann::json& j, AppSessionContext& o) {
   }
 }
 
-oai::model::pcf::AppSessionContextReqData AppSessionContext::getAscReqData()
-    const {
+oai::model::pcf::AppSessionContextReqData
+AppSessionContext::getAscReqData() const {
   return m_AscReqData;
 }
 void AppSessionContext::setAscReqData(
-    oai::model::pcf::AppSessionContextReqData const& value) {
-  m_AscReqData      = value;
+    oai::model::pcf::AppSessionContextReqData const &value) {
+  m_AscReqData = value;
   m_AscReqDataIsSet = true;
 }
-bool AppSessionContext::ascReqDataIsSet() const {
-  return m_AscReqDataIsSet;
-}
-void AppSessionContext::unsetAscReqData() {
-  m_AscReqDataIsSet = false;
-}
-oai::model::pcf::AppSessionContextRespData AppSessionContext::getAscRespData()
-    const {
+bool AppSessionContext::ascReqDataIsSet() const { return m_AscReqDataIsSet; }
+void AppSessionContext::unsetAscReqData() { m_AscReqDataIsSet = false; }
+oai::model::pcf::AppSessionContextRespData
+AppSessionContext::getAscRespData() const {
   return m_AscRespData;
 }
 void AppSessionContext::setAscRespData(
-    oai::model::pcf::AppSessionContextRespData const& value) {
-  m_AscRespData      = value;
+    oai::model::pcf::AppSessionContextRespData const &value) {
+  m_AscRespData = value;
   m_AscRespDataIsSet = true;
 }
-bool AppSessionContext::ascRespDataIsSet() const {
-  return m_AscRespDataIsSet;
-}
-void AppSessionContext::unsetAscRespData() {
-  m_AscRespDataIsSet = false;
-}
+bool AppSessionContext::ascRespDataIsSet() const { return m_AscRespDataIsSet; }
+void AppSessionContext::unsetAscRespData() { m_AscRespDataIsSet = false; }
 oai::model::pcf::EventsNotification AppSessionContext::getEvsNotif() const {
   return m_EvsNotif;
 }
 void AppSessionContext::setEvsNotif(
-    oai::model::pcf::EventsNotification const& value) {
-  m_EvsNotif      = value;
+    oai::model::pcf::EventsNotification const &value) {
+  m_EvsNotif = value;
   m_EvsNotifIsSet = true;
 }
-bool AppSessionContext::evsNotifIsSet() const {
-  return m_EvsNotifIsSet;
-}
-void AppSessionContext::unsetEvsNotif() {
-  m_EvsNotifIsSet = false;
-}
+bool AppSessionContext::evsNotifIsSet() const { return m_EvsNotifIsSet; }
+void AppSessionContext::unsetEvsNotif() { m_EvsNotifIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

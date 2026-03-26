@@ -16,12 +16,12 @@
 namespace oai::model::smf {
 
 ExemptionInd::ExemptionInd() {
-  m_DnnCongestion             = false;
-  m_DnnCongestionIsSet        = false;
-  m_SnssaiOnlyCongestion      = false;
+  m_DnnCongestion = false;
+  m_DnnCongestionIsSet = false;
+  m_SnssaiOnlyCongestion = false;
   m_SnssaiOnlyCongestionIsSet = false;
-  m_SnssaiDnnCongestion       = false;
-  m_SnssaiDnnCongestionIsSet  = false;
+  m_SnssaiDnnCongestion = false;
+  m_SnssaiDnnCongestionIsSet = false;
 }
 
 ExemptionInd::~ExemptionInd() {}
@@ -30,16 +30,17 @@ void ExemptionInd::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const ExemptionInd& o) {
+void to_json(nlohmann::json &j, const ExemptionInd &o) {
   j = nlohmann::json();
-  if (o.dnnCongestionIsSet()) j["dnnCongestion"] = o.m_DnnCongestion;
+  if (o.dnnCongestionIsSet())
+    j["dnnCongestion"] = o.m_DnnCongestion;
   if (o.snssaiOnlyCongestionIsSet())
     j["snssaiOnlyCongestion"] = o.m_SnssaiOnlyCongestion;
   if (o.snssaiDnnCongestionIsSet())
     j["snssaiDnnCongestion"] = o.m_SnssaiDnnCongestion;
 }
 
-void from_json(const nlohmann::json& j, ExemptionInd& o) {
+void from_json(const nlohmann::json &j, ExemptionInd &o) {
   if (j.find("dnnCongestion") != j.end()) {
     j.at("dnnCongestion").get_to(o.m_DnnCongestion);
     o.m_DnnCongestionIsSet = true;
@@ -54,24 +55,18 @@ void from_json(const nlohmann::json& j, ExemptionInd& o) {
   }
 }
 
-bool ExemptionInd::isDnnCongestion() const {
-  return m_DnnCongestion;
-}
+bool ExemptionInd::isDnnCongestion() const { return m_DnnCongestion; }
 void ExemptionInd::setDnnCongestion(bool const value) {
-  m_DnnCongestion      = value;
+  m_DnnCongestion = value;
   m_DnnCongestionIsSet = true;
 }
-bool ExemptionInd::dnnCongestionIsSet() const {
-  return m_DnnCongestionIsSet;
-}
-void ExemptionInd::unsetDnnCongestion() {
-  m_DnnCongestionIsSet = false;
-}
+bool ExemptionInd::dnnCongestionIsSet() const { return m_DnnCongestionIsSet; }
+void ExemptionInd::unsetDnnCongestion() { m_DnnCongestionIsSet = false; }
 bool ExemptionInd::isSnssaiOnlyCongestion() const {
   return m_SnssaiOnlyCongestion;
 }
 void ExemptionInd::setSnssaiOnlyCongestion(bool const value) {
-  m_SnssaiOnlyCongestion      = value;
+  m_SnssaiOnlyCongestion = value;
   m_SnssaiOnlyCongestionIsSet = true;
 }
 bool ExemptionInd::snssaiOnlyCongestionIsSet() const {
@@ -84,7 +79,7 @@ bool ExemptionInd::isSnssaiDnnCongestion() const {
   return m_SnssaiDnnCongestion;
 }
 void ExemptionInd::setSnssaiDnnCongestion(bool const value) {
-  m_SnssaiDnnCongestion      = value;
+  m_SnssaiDnnCongestion = value;
   m_SnssaiDnnCongestionIsSet = true;
 }
 bool ExemptionInd::snssaiDnnCongestionIsSet() const {
@@ -94,4 +89,4 @@ void ExemptionInd::unsetSnssaiDnnCongestion() {
   m_SnssaiDnnCongestionIsSet = false;
 }
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

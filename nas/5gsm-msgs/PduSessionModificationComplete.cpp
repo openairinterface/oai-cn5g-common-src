@@ -10,8 +10,8 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 PduSessionModificationComplete::PduSessionModificationComplete()
-    : Nas5gsmMessage(
-          k5gsSessionManagementMessages, kPduSessionModificationComplete) {
+    : Nas5gsmMessage(k5gsSessionManagementMessages,
+                     kPduSessionModificationComplete) {
   ie_extended_protocol_configuration_options_ = std::nullopt;
 }
 
@@ -32,22 +32,22 @@ uint32_t PduSessionModificationComplete::GetLength() const {
 
 //------------------------------------------------------------------------------
 void PduSessionModificationComplete::SetExtendedProtocolConfigurationOptions(
-    const ExtendedProtocolConfigurationOptions& options) {
+    const ExtendedProtocolConfigurationOptions &options) {
   ie_extended_protocol_configuration_options_ =
       std::make_optional<ExtendedProtocolConfigurationOptions>(options);
 }
 
 //------------------------------------------------------------------------------
 void PduSessionModificationComplete::GetExtendedProtocolConfigurationOptions(
-    std::optional<ExtendedProtocolConfigurationOptions>& options) const {
+    std::optional<ExtendedProtocolConfigurationOptions> &options) const {
   options = ie_extended_protocol_configuration_options_;
 }
 
 //------------------------------------------------------------------------------
-int PduSessionModificationComplete::Encode(uint8_t* buf, int len) {
+int PduSessionModificationComplete::Encode(uint8_t *buf, int len) {
   oai::logger::logger_common::nas().debug(
       "Encoding PduSessionModificationComplete message");
-  int encoded_size    = 0;
+  int encoded_size = 0;
   int encoded_ie_size = 0;
   // Header
   if ((encoded_ie_size = Nas5gsmMessage::Encode(buf, len)) ==
@@ -58,9 +58,9 @@ int PduSessionModificationComplete::Encode(uint8_t* buf, int len) {
   encoded_size += encoded_ie_size;
 
   // Extended protocol configuration options
-  if ((encoded_ie_size = NasHelper::Encode(
-           ie_extended_protocol_configuration_options_, buf, len,
-           encoded_size)) == KEncodeDecodeError) {
+  if ((encoded_ie_size =
+           NasHelper::Encode(ie_extended_protocol_configuration_options_, buf,
+                             len, encoded_size)) == KEncodeDecodeError) {
     return KEncodeDecodeError;
   }
 
@@ -70,10 +70,10 @@ int PduSessionModificationComplete::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int PduSessionModificationComplete::Decode(uint8_t* buf, int len) {
+int PduSessionModificationComplete::Decode(uint8_t *buf, int len) {
   oai::logger::logger_common::nas().debug(
       "Decoding PduSessionModificationComplete message");
-  int decoded_size    = 0;
+  int decoded_size = 0;
   int decoded_ie_size = 0;
 
   // Header
@@ -91,27 +91,27 @@ int PduSessionModificationComplete::Decode(uint8_t* buf, int len) {
   bool flag = false;
   while ((octet != 0x0)) {
     switch (octet) {
-      case kIeiExtendedProtocolConfigurationOptions: {
-        oai::logger::logger_common::nas().debug(
-            "Decoding IEI 0x%x", kIeiExtendedProtocolConfigurationOptions);
-        if ((decoded_ie_size = NasHelper::Decode(
-                 ie_extended_protocol_configuration_options_, buf, len,
-                 decoded_size, true)) == KEncodeDecodeError) {
-          return KEncodeDecodeError;
-        }
-        DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
-      } break;
+    case kIeiExtendedProtocolConfigurationOptions: {
+      oai::logger::logger_common::nas().debug(
+          "Decoding IEI 0x%x", kIeiExtendedProtocolConfigurationOptions);
+      if ((decoded_ie_size = NasHelper::Decode(
+               ie_extended_protocol_configuration_options_, buf, len,
+               decoded_size, true)) == KEncodeDecodeError) {
+        return KEncodeDecodeError;
+      }
+      DECODE_U8_VALUE(buf, octet, decoded_size, len);
+      oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
+    } break;
 
-      default: {
-        // TODO:
-        if (flag) {
-          oai::logger::logger_common::nas().warn(
-              "Unknown IEI 0x%x, stop decoding...", octet);
-          // Stop decoding
-          octet = 0x00;
-        }
-      } break;
+    default: {
+      // TODO:
+      if (flag) {
+        oai::logger::logger_common::nas().warn(
+            "Unknown IEI 0x%x, stop decoding...", octet);
+        // Stop decoding
+        octet = 0x00;
+      }
+    } break;
     }
   }
 

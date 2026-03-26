@@ -19,16 +19,16 @@
 #ifndef MonitoringConfiguration_H_
 #define MonitoringConfiguration_H_
 
-#include "LocationReportingConfiguration.h"
-#include "PduSessionStatusCfg.h"
-#include <string>
+#include "AssociationType.h"
 #include "DatalinkReportingConfiguration.h"
 #include "EventType.h"
+#include "LocationReportingConfiguration.h"
 #include "LossConnectivityCfg.h"
-#include "AssociationType.h"
-#include "ReachabilityForSmsConfiguration.h"
+#include "PduSessionStatusCfg.h"
 #include "ReachabilityForDataConfiguration.h"
+#include "ReachabilityForSmsConfiguration.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::udm {
 
@@ -36,7 +36,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class MonitoringConfiguration {
- public:
+public:
   MonitoringConfiguration();
   virtual ~MonitoringConfiguration() = default;
 
@@ -50,10 +50,10 @@ class MonitoringConfiguration {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const MonitoringConfiguration& rhs) const;
-  bool operator!=(const MonitoringConfiguration& rhs) const;
+  bool operator==(const MonitoringConfiguration &rhs) const;
+  bool operator!=(const MonitoringConfiguration &rhs) const;
 
   /////////////////////////////////////////////
   /// MonitoringConfiguration members
@@ -62,7 +62,7 @@ class MonitoringConfiguration {
   ///
   /// </summary>
   EventType getEventType() const;
-  void setEventType(EventType const& value);
+  void setEventType(EventType const &value);
   /// <summary>
   ///
   /// </summary>
@@ -75,28 +75,28 @@ class MonitoringConfiguration {
   /// </summary>
   LocationReportingConfiguration getLocationReportingConfiguration() const;
   void setLocationReportingConfiguration(
-      LocationReportingConfiguration const& value);
+      LocationReportingConfiguration const &value);
   bool locationReportingConfigurationIsSet() const;
   void unsetLocationReportingConfiguration();
   /// <summary>
   ///
   /// </summary>
   AssociationType getAssociationType() const;
-  void setAssociationType(AssociationType const& value);
+  void setAssociationType(AssociationType const &value);
   bool associationTypeIsSet() const;
   void unsetAssociationType();
   /// <summary>
   ///
   /// </summary>
   DatalinkReportingConfiguration getDatalinkReportCfg() const;
-  void setDatalinkReportCfg(DatalinkReportingConfiguration const& value);
+  void setDatalinkReportCfg(DatalinkReportingConfiguration const &value);
   bool datalinkReportCfgIsSet() const;
   void unsetDatalinkReportCfg();
   /// <summary>
   ///
   /// </summary>
   LossConnectivityCfg getLossConnectivityCfg() const;
-  void setLossConnectivityCfg(LossConnectivityCfg const& value);
+  void setLossConnectivityCfg(LossConnectivityCfg const &value);
   bool lossConnectivityCfgIsSet() const;
   void unsetLossConnectivityCfg();
   /// <summary>
@@ -124,42 +124,42 @@ class MonitoringConfiguration {
   ///
   /// </summary>
   PduSessionStatusCfg getPduSessionStatusCfg() const;
-  void setPduSessionStatusCfg(PduSessionStatusCfg const& value);
+  void setPduSessionStatusCfg(PduSessionStatusCfg const &value);
   bool pduSessionStatusCfgIsSet() const;
   void unsetPduSessionStatusCfg();
   /// <summary>
   ///
   /// </summary>
   ReachabilityForSmsConfiguration getReachabilityForSmsCfg() const;
-  void setReachabilityForSmsCfg(ReachabilityForSmsConfiguration const& value);
+  void setReachabilityForSmsCfg(ReachabilityForSmsConfiguration const &value);
   bool reachabilityForSmsCfgIsSet() const;
   void unsetReachabilityForSmsCfg();
   /// <summary>
   ///
   /// </summary>
   std::string getMtcProviderInformation() const;
-  void setMtcProviderInformation(std::string const& value);
+  void setMtcProviderInformation(std::string const &value);
   bool mtcProviderInformationIsSet() const;
   void unsetMtcProviderInformation();
   /// <summary>
   ///
   /// </summary>
   std::string getAfId() const;
-  void setAfId(std::string const& value);
+  void setAfId(std::string const &value);
   bool afIdIsSet() const;
   void unsetAfId();
   /// <summary>
   ///
   /// </summary>
   ReachabilityForDataConfiguration getReachabilityForDataCfg() const;
-  void setReachabilityForDataCfg(ReachabilityForDataConfiguration const& value);
+  void setReachabilityForDataCfg(ReachabilityForDataConfiguration const &value);
   bool reachabilityForDataCfgIsSet() const;
   void unsetReachabilityForDataCfg();
 
-  friend void to_json(nlohmann::json& j, const MonitoringConfiguration& o);
-  friend void from_json(const nlohmann::json& j, MonitoringConfiguration& o);
+  friend void to_json(nlohmann::json &j, const MonitoringConfiguration &o);
+  friend void from_json(const nlohmann::json &j, MonitoringConfiguration &o);
 
- protected:
+protected:
   EventType m_EventType;
 
   bool m_ImmediateFlag;
@@ -191,9 +191,9 @@ class MonitoringConfiguration {
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* MonitoringConfiguration_H_ */

@@ -18,9 +18,7 @@
 
 namespace oai::udr::model {
 
-PointAltitude::PointAltitude() {
-  m_Altitude = 0.0;
-}
+PointAltitude::PointAltitude() { m_Altitude = 0.0; }
 
 PointAltitude::~PointAltitude() {}
 
@@ -28,36 +26,28 @@ void PointAltitude::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const PointAltitude& o) {
-  j             = nlohmann::json();
-  j["shape"]    = o.m_Shape;
-  j["point"]    = o.m_Point;
+void to_json(nlohmann::json &j, const PointAltitude &o) {
+  j = nlohmann::json();
+  j["shape"] = o.m_Shape;
+  j["point"] = o.m_Point;
   j["altitude"] = o.m_Altitude;
 }
 
-void from_json(const nlohmann::json& j, PointAltitude& o) {
+void from_json(const nlohmann::json &j, PointAltitude &o) {
   j.at("shape").get_to(o.m_Shape);
   j.at("point").get_to(o.m_Point);
   j.at("altitude").get_to(o.m_Altitude);
 }
 
-SupportedGADShapes PointAltitude::getShape() const {
-  return m_Shape;
-}
-void PointAltitude::setShape(SupportedGADShapes const& value) {
+SupportedGADShapes PointAltitude::getShape() const { return m_Shape; }
+void PointAltitude::setShape(SupportedGADShapes const &value) {
   m_Shape = value;
 }
-GeographicalCoordinates PointAltitude::getPoint() const {
-  return m_Point;
-}
-void PointAltitude::setPoint(GeographicalCoordinates const& value) {
+GeographicalCoordinates PointAltitude::getPoint() const { return m_Point; }
+void PointAltitude::setPoint(GeographicalCoordinates const &value) {
   m_Point = value;
 }
-double PointAltitude::getAltitude() const {
-  return m_Altitude;
-}
-void PointAltitude::setAltitude(double const value) {
-  m_Altitude = value;
-}
+double PointAltitude::getAltitude() const { return m_Altitude; }
+void PointAltitude::setAltitude(double const value) { m_Altitude = value; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

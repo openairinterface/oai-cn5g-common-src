@@ -26,7 +26,7 @@ struct Ngap_ProtocolExtensionContainer;
 typedef struct Ngap_CandidatePCI {
   long candidatePCI;
   long candidateNRARFCN;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

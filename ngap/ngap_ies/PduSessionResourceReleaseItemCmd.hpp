@@ -17,27 +17,25 @@ extern "C" {
 namespace oai::ngap {
 
 class PduSessionResourceReleaseItemCmd {
- public:
+public:
   PduSessionResourceReleaseItemCmd();
   virtual ~PduSessionResourceReleaseItemCmd();
 
-  void set(
-      const PduSessionId& pduSessionId,
-      const OCTET_STRING_t& pduSessionResourceRelease);
-  void get(
-      PduSessionId& pduSessionId,
-      OCTET_STRING_t& pduSessionResourceRelease) const;
+  void set(const PduSessionId &pduSessionId,
+           const OCTET_STRING_t &pduSessionResourceRelease);
+  void get(PduSessionId &pduSessionId,
+           OCTET_STRING_t &pduSessionResourceRelease) const;
 
-  bool encode(Ngap_PDUSessionResourceToReleaseItemRelCmd_t&
-                  pduSessionResourceReleaseItem) const;
-  bool decode(const Ngap_PDUSessionResourceToReleaseItemRelCmd_t&
-                  pduSessionResourceReleaseItem);
+  bool encode(Ngap_PDUSessionResourceToReleaseItemRelCmd_t
+                  &pduSessionResourceReleaseItem) const;
+  bool decode(const Ngap_PDUSessionResourceToReleaseItemRelCmd_t
+                  &pduSessionResourceReleaseItem);
 
- private:
-  PduSessionId m_PduSessionId;                                // Mandatory
-  OCTET_STRING_t m_PduSessionResourceReleaseCommandTransfer;  // Mandatory
+private:
+  PduSessionId m_PduSessionId;                               // Mandatory
+  OCTET_STRING_t m_PduSessionResourceReleaseCommandTransfer; // Mandatory
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

@@ -23,14 +23,14 @@
 #define Report_H_
 
 #include "ChangeOfSupiPeiAssociationReport.h"
-#include "CnType.h"
 #include "CmInfoReport.h"
-#include "RoamingStatusReport.h"
-#include <string>
-#include "PlmnId.h"
+#include "CnType.h"
 #include "CnTypeChangeReport.h"
-#include <vector>
+#include "PlmnId.h"
+#include "RoamingStatusReport.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::udm {
 
@@ -38,7 +38,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class Report {
- public:
+public:
   Report();
   virtual ~Report() = default;
 
@@ -52,10 +52,10 @@ class Report {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const Report& rhs) const;
-  bool operator!=(const Report& rhs) const;
+  bool operator==(const Report &rhs) const;
+  bool operator!=(const Report &rhs) const;
 
   /////////////////////////////////////////////
   /// Report members
@@ -64,7 +64,7 @@ class Report {
   ///
   /// </summary>
   std::string getNewPei() const;
-  void setNewPei(std::string const& value);
+  void setNewPei(std::string const &value);
   /// <summary>
   ///
   /// </summary>
@@ -74,36 +74,36 @@ class Report {
   ///
   /// </summary>
   oai::model::common::PlmnId getNewServingPlmn() const;
-  void setNewServingPlmn(oai::model::common::PlmnId const& value);
+  void setNewServingPlmn(oai::model::common::PlmnId const &value);
   /// <summary>
   ///
   /// </summary>
   CnType getNewCnType() const;
-  void setNewCnType(CnType const& value);
+  void setNewCnType(CnType const &value);
   /// <summary>
   ///
   /// </summary>
   CnType getOldCnType() const;
-  void setOldCnType(CnType const& value);
+  void setOldCnType(CnType const &value);
   bool oldCnTypeIsSet() const;
   void unsetOldCnType();
   /// <summary>
   ///
   /// </summary>
   std::vector<std::string> getOldCmInfoList() const;
-  void setOldCmInfoList(std::vector<std::string> const& value);
+  void setOldCmInfoList(std::vector<std::string> const &value);
   bool oldCmInfoListIsSet() const;
   void unsetOldCmInfoList();
   /// <summary>
   ///
   /// </summary>
   std::vector<std::string> getNewCmInfoList() const;
-  void setNewCmInfoList(std::vector<std::string> const& value);
+  void setNewCmInfoList(std::vector<std::string> const &value);
 
-  friend void to_json(nlohmann::json& j, const Report& o);
-  friend void from_json(const nlohmann::json& j, Report& o);
+  friend void to_json(nlohmann::json &j, const Report &o);
+  friend void from_json(const nlohmann::json &j, Report &o);
 
- protected:
+protected:
   std::string m_NewPei;
 
   bool m_Roaming;
@@ -120,9 +120,9 @@ class Report {
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* Report_H_ */

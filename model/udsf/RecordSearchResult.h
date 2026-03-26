@@ -19,11 +19,11 @@
 #ifndef RecordSearchResult_H_
 #define RecordSearchResult_H_
 
-#include <string>
 #include "Record.h"
 #include <map>
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::udsf {
 
@@ -31,7 +31,7 @@ namespace oai::model::udsf {
 /// Count and collection of Record references matching the providing filter.
 /// </summary>
 class RecordSearchResult {
- public:
+public:
   RecordSearchResult();
   virtual ~RecordSearchResult() = default;
 
@@ -45,16 +45,16 @@ class RecordSearchResult {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const RecordSearchResult& rhs) const;
-  bool operator!=(const RecordSearchResult& rhs) const;
+  bool operator==(const RecordSearchResult &rhs) const;
+  bool operator!=(const RecordSearchResult &rhs) const;
 
   /////////////////////////////////////////////
   /// RecordSearchResult members
@@ -68,7 +68,7 @@ class RecordSearchResult {
   ///
   /// </summary>
   std::vector<std::string> getReferences() const;
-  void setReferences(std::vector<std::string> const& value);
+  void setReferences(std::vector<std::string> const &value);
   bool referencesIsSet() const;
   void unsetReferences();
   /// <summary>
@@ -88,7 +88,7 @@ class RecordSearchResult {
   /// not supported.
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
   /// <summary>
@@ -96,14 +96,14 @@ class RecordSearchResult {
   /// </summary>
   std::map<std::string, oai::model::udsf::Record> getMatchingRecords() const;
   void setMatchingRecords(
-      std::map<std::string, oai::model::udsf::Record> const& value);
+      std::map<std::string, oai::model::udsf::Record> const &value);
   bool matchingRecordsIsSet() const;
   void unsetMatchingRecords();
 
-  friend void to_json(nlohmann::json& j, const RecordSearchResult& o);
-  friend void from_json(const nlohmann::json& j, RecordSearchResult& o);
+  friend void to_json(nlohmann::json &j, const RecordSearchResult &o);
+  friend void from_json(const nlohmann::json &j, RecordSearchResult &o);
 
- protected:
+protected:
   int32_t m_Count;
 
   std::vector<std::string> m_References;
@@ -114,6 +114,6 @@ class RecordSearchResult {
   bool m_MatchingRecordsIsSet;
 };
 
-}  // namespace oai::model::udsf
+} // namespace oai::model::udsf
 
 #endif /* RecordSearchResult_H_ */

@@ -23,10 +23,8 @@ void N2SmInfoType::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const N2SmInfoType& o) {
-  j = nlohmann::json();
-}
+void to_json(nlohmann::json &j, const N2SmInfoType &o) { j = nlohmann::json(); }
 
-void from_json(const nlohmann::json& j, N2SmInfoType& o) {}
+void from_json(const nlohmann::json &j, N2SmInfoType &o) {}
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

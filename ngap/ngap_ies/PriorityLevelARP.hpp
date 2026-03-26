@@ -12,20 +12,20 @@ extern "C" {
 namespace oai::ngap {
 
 class PriorityLevelARP {
- public:
+public:
   PriorityLevelARP();
   virtual ~PriorityLevelARP();
 
-  void set(const long& value);
-  bool get(long& value) const;
+  void set(const long &value);
+  bool get(long &value) const;
 
-  bool encode(Ngap_PriorityLevelARP_t&) const;
-  bool decode(const Ngap_PriorityLevelARP_t&);
+  bool encode(Ngap_PriorityLevelARP_t &) const;
+  bool decode(const Ngap_PriorityLevelARP_t &);
 
- private:
+private:
   long m_PriorityLevelArp;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

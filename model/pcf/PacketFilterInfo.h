@@ -20,8 +20,8 @@
 #define PacketFilterInfo_H_
 
 #include "FlowDirection.h"
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::pcf {
 
@@ -29,7 +29,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class PacketFilterInfo {
- public:
+public:
   PacketFilterInfo();
   virtual ~PacketFilterInfo() = default;
 
@@ -43,16 +43,16 @@ class PacketFilterInfo {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const PacketFilterInfo& rhs) const;
-  bool operator!=(const PacketFilterInfo& rhs) const;
+  bool operator==(const PacketFilterInfo &rhs) const;
+  bool operator!=(const PacketFilterInfo &rhs) const;
 
   /////////////////////////////////////////////
   /// PacketFilterInfo members
@@ -61,14 +61,14 @@ class PacketFilterInfo {
   /// An identifier of packet filter.
   /// </summary>
   std::string getPackFiltId() const;
-  void setPackFiltId(std::string const& value);
+  void setPackFiltId(std::string const &value);
   bool packFiltIdIsSet() const;
   void unsetPackFiltId();
   /// <summary>
   /// Defines a packet filter for an IP flow.
   /// </summary>
   std::string getPackFiltCont() const;
-  void setPackFiltCont(std::string const& value);
+  void setPackFiltCont(std::string const &value);
   bool packFiltContIsSet() const;
   void unsetPackFiltCont();
   /// <summary>
@@ -76,35 +76,35 @@ class PacketFilterInfo {
   /// field and mask field.
   /// </summary>
   std::string getTosTrafficClass() const;
-  void setTosTrafficClass(std::string const& value);
+  void setTosTrafficClass(std::string const &value);
   bool tosTrafficClassIsSet() const;
   void unsetTosTrafficClass();
   /// <summary>
   /// The security parameter index of the IPSec packet.
   /// </summary>
   std::string getSpi() const;
-  void setSpi(std::string const& value);
+  void setSpi(std::string const &value);
   bool spiIsSet() const;
   void unsetSpi();
   /// <summary>
   /// The Ipv6 flow label header field.
   /// </summary>
   std::string getFlowLabel() const;
-  void setFlowLabel(std::string const& value);
+  void setFlowLabel(std::string const &value);
   bool flowLabelIsSet() const;
   void unsetFlowLabel();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::FlowDirection getFlowDirection() const;
-  void setFlowDirection(oai::model::pcf::FlowDirection const& value);
+  void setFlowDirection(oai::model::pcf::FlowDirection const &value);
   bool flowDirectionIsSet() const;
   void unsetFlowDirection();
 
-  friend void to_json(nlohmann::json& j, const PacketFilterInfo& o);
-  friend void from_json(const nlohmann::json& j, PacketFilterInfo& o);
+  friend void to_json(nlohmann::json &j, const PacketFilterInfo &o);
+  friend void from_json(const nlohmann::json &j, PacketFilterInfo &o);
 
- protected:
+protected:
   std::string m_PackFiltId;
   bool m_PackFiltIdIsSet;
   std::string m_PackFiltCont;
@@ -119,6 +119,6 @@ class PacketFilterInfo {
   bool m_FlowDirectionIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* PacketFilterInfo_H_ */

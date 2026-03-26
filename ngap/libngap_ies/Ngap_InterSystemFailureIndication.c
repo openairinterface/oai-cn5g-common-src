@@ -8,8 +8,8 @@
 
 #include "Ngap_InterSystemFailureIndication.h"
 
-#include "Ngap_UERLFReportContainer.h"
 #include "Ngap_ProtocolExtensionContainer.h"
+#include "Ngap_UERLFReportContainer.h"
 asn_TYPE_member_t asn_MBR_Ngap_InterSystemFailureIndication_1[] = {
     {ATF_POINTER,
      2,

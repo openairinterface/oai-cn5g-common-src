@@ -19,9 +19,9 @@
 namespace oai::udr::model {
 
 AppDescriptor::AppDescriptor() {
-  m_OsId       = "";
-  m_OsIdIsSet  = false;
-  m_AppId      = "";
+  m_OsId = "";
+  m_OsIdIsSet = false;
+  m_AppId = "";
   m_AppIdIsSet = false;
 }
 
@@ -31,13 +31,15 @@ void AppDescriptor::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const AppDescriptor& o) {
+void to_json(nlohmann::json &j, const AppDescriptor &o) {
   j = nlohmann::json();
-  if (o.osIdIsSet()) j["osId"] = o.m_OsId;
-  if (o.appIdIsSet()) j["appId"] = o.m_AppId;
+  if (o.osIdIsSet())
+    j["osId"] = o.m_OsId;
+  if (o.appIdIsSet())
+    j["appId"] = o.m_AppId;
 }
 
-void from_json(const nlohmann::json& j, AppDescriptor& o) {
+void from_json(const nlohmann::json &j, AppDescriptor &o) {
   if (j.find("osId") != j.end()) {
     j.at("osId").get_to(o.m_OsId);
     o.m_OsIdIsSet = true;
@@ -48,31 +50,19 @@ void from_json(const nlohmann::json& j, AppDescriptor& o) {
   }
 }
 
-std::string AppDescriptor::getOsId() const {
-  return m_OsId;
-}
-void AppDescriptor::setOsId(std::string const& value) {
-  m_OsId      = value;
+std::string AppDescriptor::getOsId() const { return m_OsId; }
+void AppDescriptor::setOsId(std::string const &value) {
+  m_OsId = value;
   m_OsIdIsSet = true;
 }
-bool AppDescriptor::osIdIsSet() const {
-  return m_OsIdIsSet;
-}
-void AppDescriptor::unsetOsId() {
-  m_OsIdIsSet = false;
-}
-std::string AppDescriptor::getAppId() const {
-  return m_AppId;
-}
-void AppDescriptor::setAppId(std::string const& value) {
-  m_AppId      = value;
+bool AppDescriptor::osIdIsSet() const { return m_OsIdIsSet; }
+void AppDescriptor::unsetOsId() { m_OsIdIsSet = false; }
+std::string AppDescriptor::getAppId() const { return m_AppId; }
+void AppDescriptor::setAppId(std::string const &value) {
+  m_AppId = value;
   m_AppIdIsSet = true;
 }
-bool AppDescriptor::appIdIsSet() const {
-  return m_AppIdIsSet;
-}
-void AppDescriptor::unsetAppId() {
-  m_AppIdIsSet = false;
-}
+bool AppDescriptor::appIdIsSet() const { return m_AppIdIsSet; }
+void AppDescriptor::unsetAppId() { m_AppIdIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

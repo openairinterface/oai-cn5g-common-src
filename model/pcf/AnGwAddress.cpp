@@ -20,7 +20,7 @@ namespace oai::model::pcf {
 using namespace oai::model::common;
 
 AnGwAddress::AnGwAddress() {
-  m_AnGwIpv4Addr      = "";
+  m_AnGwIpv4Addr = "";
   m_AnGwIpv4AddrIsSet = false;
   m_AnGwIpv6AddrIsSet = false;
 }
@@ -32,12 +32,12 @@ void AnGwAddress::validate() const {
   }
 }
 
-bool AnGwAddress::validate(std::stringstream& msg) const {
+bool AnGwAddress::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AnGwAddress::validate(
-    std::stringstream& /* msg */, const std::string& /* pathPrefix */) const {
+bool AnGwAddress::validate(std::stringstream & /* msg */,
+                           const std::string & /* pathPrefix */) const {
   bool success = true;
   /*
   const std::string _pathPrefix =
@@ -51,7 +51,7 @@ bool AnGwAddress::validate(
   return success;
 }
 
-bool AnGwAddress::operator==(const AnGwAddress& rhs) const {
+bool AnGwAddress::operator==(const AnGwAddress &rhs) const {
   return
 
       ((!anGwIpv4AddrIsSet() && !rhs.anGwIpv4AddrIsSet()) ||
@@ -65,17 +65,19 @@ bool AnGwAddress::operator==(const AnGwAddress& rhs) const {
           ;
 }
 
-bool AnGwAddress::operator!=(const AnGwAddress& rhs) const {
+bool AnGwAddress::operator!=(const AnGwAddress &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AnGwAddress& o) {
+void to_json(nlohmann::json &j, const AnGwAddress &o) {
   j = nlohmann::json();
-  if (o.anGwIpv4AddrIsSet()) j["anGwIpv4Addr"] = o.m_AnGwIpv4Addr;
-  if (o.anGwIpv6AddrIsSet()) j["anGwIpv6Addr"] = o.m_AnGwIpv6Addr;
+  if (o.anGwIpv4AddrIsSet())
+    j["anGwIpv4Addr"] = o.m_AnGwIpv4Addr;
+  if (o.anGwIpv6AddrIsSet())
+    j["anGwIpv6Addr"] = o.m_AnGwIpv6Addr;
 }
 
-void from_json(const nlohmann::json& j, AnGwAddress& o) {
+void from_json(const nlohmann::json &j, AnGwAddress &o) {
   if (j.find("anGwIpv4Addr") != j.end()) {
     j.at("anGwIpv4Addr").get_to(o.m_AnGwIpv4Addr);
     o.m_AnGwIpv4AddrIsSet = true;
@@ -86,31 +88,19 @@ void from_json(const nlohmann::json& j, AnGwAddress& o) {
   }
 }
 
-std::string AnGwAddress::getAnGwIpv4Addr() const {
-  return m_AnGwIpv4Addr;
-}
-void AnGwAddress::setAnGwIpv4Addr(std::string const& value) {
-  m_AnGwIpv4Addr      = value;
+std::string AnGwAddress::getAnGwIpv4Addr() const { return m_AnGwIpv4Addr; }
+void AnGwAddress::setAnGwIpv4Addr(std::string const &value) {
+  m_AnGwIpv4Addr = value;
   m_AnGwIpv4AddrIsSet = true;
 }
-bool AnGwAddress::anGwIpv4AddrIsSet() const {
-  return m_AnGwIpv4AddrIsSet;
-}
-void AnGwAddress::unsetAnGwIpv4Addr() {
-  m_AnGwIpv4AddrIsSet = false;
-}
-Ipv6Addr AnGwAddress::getAnGwIpv6Addr() const {
-  return m_AnGwIpv6Addr;
-}
-void AnGwAddress::setAnGwIpv6Addr(Ipv6Addr const& value) {
-  m_AnGwIpv6Addr      = value;
+bool AnGwAddress::anGwIpv4AddrIsSet() const { return m_AnGwIpv4AddrIsSet; }
+void AnGwAddress::unsetAnGwIpv4Addr() { m_AnGwIpv4AddrIsSet = false; }
+Ipv6Addr AnGwAddress::getAnGwIpv6Addr() const { return m_AnGwIpv6Addr; }
+void AnGwAddress::setAnGwIpv6Addr(Ipv6Addr const &value) {
+  m_AnGwIpv6Addr = value;
   m_AnGwIpv6AddrIsSet = true;
 }
-bool AnGwAddress::anGwIpv6AddrIsSet() const {
-  return m_AnGwIpv6AddrIsSet;
-}
-void AnGwAddress::unsetAnGwIpv6Addr() {
-  m_AnGwIpv6AddrIsSet = false;
-}
+bool AnGwAddress::anGwIpv6AddrIsSet() const { return m_AnGwIpv6AddrIsSet; }
+void AnGwAddress::unsetAnGwIpv6Addr() { m_AnGwIpv6AddrIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

@@ -14,15 +14,15 @@ constexpr auto kProcedureTransactionIdentityIeName =
 namespace oai::nas {
 
 class ProcedureTransactionIdentity : public NasIe {
- public:
+public:
   ProcedureTransactionIdentity();
   ProcedureTransactionIdentity(uint8_t value);
   virtual ~ProcedureTransactionIdentity();
 
   bool Validate(int len) const override;
 
-  int Encode(uint8_t* buf, int len) const override;
-  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+  int Encode(uint8_t *buf, int len) const override;
+  int Decode(const uint8_t *const buf, int len, bool is_iei = false) override;
 
   static std::string GetIeName() { return kProcedureTransactionIdentityIeName; }
   uint32_t GetIeLength() const override;
@@ -30,9 +30,9 @@ class ProcedureTransactionIdentity : public NasIe {
   void Set(uint8_t value);
   uint8_t Get() const;
 
- private:
+private:
   uint8_t value_;
 };
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

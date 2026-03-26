@@ -19,12 +19,12 @@
 #ifndef PduSessionContext_H_
 #define PduSessionContext_H_
 
-#include <string>
+#include "AccessType.h"
 #include "EbiArpMapping_2.h"
 #include "Snssai.h"
-#include <vector>
-#include "AccessType.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::amf {
 
@@ -32,7 +32,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class PduSessionContext {
- public:
+public:
   PduSessionContext();
   virtual ~PduSessionContext();
 
@@ -50,61 +50,61 @@ class PduSessionContext {
   ///
   /// </summary>
   std::string getSmContextRef() const;
-  void setSmContextRef(std::string const& value);
+  void setSmContextRef(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Snssai getSNssai() const;
-  void setSNssai(oai::model::common::Snssai const& value);
+  void setSNssai(oai::model::common::Snssai const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getDnn() const;
-  void setDnn(std::string const& value);
+  void setDnn(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::AccessType getAccessType() const;
-  void setAccessType(oai::model::common::AccessType const& value);
+  void setAccessType(oai::model::common::AccessType const &value);
   /// <summary>
   ///
   /// </summary>
-  std::vector<EbiArpMapping_2>& getAllocatedEbiList();
+  std::vector<EbiArpMapping_2> &getAllocatedEbiList();
   bool allocatedEbiListIsSet() const;
   void unsetAllocatedEbiList();
   /// <summary>
   ///
   /// </summary>
   std::string getHsmfId() const;
-  void setHsmfId(std::string const& value);
+  void setHsmfId(std::string const &value);
   bool hsmfIdIsSet() const;
   void unsetHsmfId();
   /// <summary>
   ///
   /// </summary>
   std::string getVsmfId() const;
-  void setVsmfId(std::string const& value);
+  void setVsmfId(std::string const &value);
   bool vsmfIdIsSet() const;
   void unsetVsmfId();
   /// <summary>
   ///
   /// </summary>
   std::string getNsInstance() const;
-  void setNsInstance(std::string const& value);
+  void setNsInstance(std::string const &value);
   bool nsInstanceIsSet() const;
   void unsetNsInstance();
   /// <summary>
   ///
   /// </summary>
   std::string getSmfServiceInstanceId() const;
-  void setSmfServiceInstanceId(std::string const& value);
+  void setSmfServiceInstanceId(std::string const &value);
   bool smfServiceInstanceIdIsSet() const;
   void unsetSmfServiceInstanceId();
 
-  friend void to_json(nlohmann::json& j, const PduSessionContext& o);
-  friend void from_json(const nlohmann::json& j, PduSessionContext& o);
+  friend void to_json(nlohmann::json &j, const PduSessionContext &o);
+  friend void from_json(const nlohmann::json &j, PduSessionContext &o);
 
- protected:
+protected:
   int32_t m_PduSessionId;
 
   std::string m_SmContextRef;
@@ -127,6 +127,6 @@ class PduSessionContext {
   bool m_SmfServiceInstanceIdIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* PduSessionContext_H_ */

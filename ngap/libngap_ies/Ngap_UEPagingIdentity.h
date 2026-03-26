@@ -33,8 +33,8 @@ struct Ngap_ProtocolIE_SingleContainer;
 typedef struct Ngap_UEPagingIdentity {
   Ngap_UEPagingIdentity_PR present;
   union Ngap_UEPagingIdentity_u {
-    struct Ngap_FiveG_S_TMSI* fiveG_S_TMSI;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_FiveG_S_TMSI *fiveG_S_TMSI;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

@@ -31,7 +31,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class TriggerRequest {
- public:
+public:
   TriggerRequest();
   virtual ~TriggerRequest();
 
@@ -44,15 +44,15 @@ class TriggerRequest {
   ///
   /// </summary>
   std::string getSupi() const;
-  void setSupi(std::string const& value);
+  void setSupi(std::string const &value);
 
-  friend void to_json(nlohmann::json& j, const TriggerRequest& o);
-  friend void from_json(const nlohmann::json& j, TriggerRequest& o);
+  friend void to_json(nlohmann::json &j, const TriggerRequest &o);
+  friend void from_json(const nlohmann::json &j, TriggerRequest &o);
 
- protected:
+protected:
   std::string m_Supi;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* TriggerRequest_H_ */

@@ -13,8 +13,8 @@
 
 #include "LocationFilter_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::amf {
 
@@ -27,12 +27,12 @@ void LocationFilter_anyOf::validate() const {
   }
 }
 
-bool LocationFilter_anyOf::validate(std::stringstream& msg) const {
+bool LocationFilter_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool LocationFilter_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool LocationFilter_anyOf::validate(std::stringstream &msg,
+                                    const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "LocationFilter_anyOf" : pathPrefix;
@@ -46,43 +46,43 @@ bool LocationFilter_anyOf::validate(
   return success;
 }
 
-bool LocationFilter_anyOf::operator==(const LocationFilter_anyOf& rhs) const {
+bool LocationFilter_anyOf::operator==(const LocationFilter_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool LocationFilter_anyOf::operator!=(const LocationFilter_anyOf& rhs) const {
+bool LocationFilter_anyOf::operator!=(const LocationFilter_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const LocationFilter_anyOf& o) {
+void to_json(nlohmann::json &j, const LocationFilter_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case LocationFilter_anyOf::eLocationFilter_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case LocationFilter_anyOf::eLocationFilter_anyOf::TAI:
-      j = "TAI";
-      break;
-    case LocationFilter_anyOf::eLocationFilter_anyOf::CELL_ID:
-      j = "CELL_ID";
-      break;
-    case LocationFilter_anyOf::eLocationFilter_anyOf::N3IWF:
-      j = "N3IWF";
-      break;
-    case LocationFilter_anyOf::eLocationFilter_anyOf::UE_IP:
-      j = "UE_IP";
-      break;
-    case LocationFilter_anyOf::eLocationFilter_anyOf::UDP_PORT:
-      j = "UDP_PORT";
-      break;
+  case LocationFilter_anyOf::eLocationFilter_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case LocationFilter_anyOf::eLocationFilter_anyOf::TAI:
+    j = "TAI";
+    break;
+  case LocationFilter_anyOf::eLocationFilter_anyOf::CELL_ID:
+    j = "CELL_ID";
+    break;
+  case LocationFilter_anyOf::eLocationFilter_anyOf::N3IWF:
+    j = "N3IWF";
+    break;
+  case LocationFilter_anyOf::eLocationFilter_anyOf::UE_IP:
+    j = "UE_IP";
+    break;
+  case LocationFilter_anyOf::eLocationFilter_anyOf::UDP_PORT:
+    j = "UDP_PORT";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, LocationFilter_anyOf& o) {
+void from_json(const nlohmann::json &j, LocationFilter_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "TAI") {
     o.setValue(LocationFilter_anyOf::eLocationFilter_anyOf::TAI);
@@ -103,8 +103,8 @@ void from_json(const nlohmann::json& j, LocationFilter_anyOf& o) {
   }
 }
 
-LocationFilter_anyOf::eLocationFilter_anyOf LocationFilter_anyOf::getValue()
-    const {
+LocationFilter_anyOf::eLocationFilter_anyOf
+LocationFilter_anyOf::getValue() const {
   return m_value;
 }
 void LocationFilter_anyOf::setValue(
@@ -112,4 +112,4 @@ void LocationFilter_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

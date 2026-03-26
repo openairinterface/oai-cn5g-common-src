@@ -17,8 +17,8 @@ AlwaysOnPduSessionRequested::AlwaysOnPduSessionRequested(uint8_t iei)
     : Type1NasIeFormatTv(iei) {}
 
 //------------------------------------------------------------------------------
-AlwaysOnPduSessionRequested::AlwaysOnPduSessionRequested(
-    uint8_t iei, uint8_t value)
+AlwaysOnPduSessionRequested::AlwaysOnPduSessionRequested(uint8_t iei,
+                                                         uint8_t value)
     : Type1NasIeFormatTv(iei) {
   Type1NasIeFormatTv::SetValue(value & 0x0f);
 }
@@ -28,13 +28,12 @@ AlwaysOnPduSessionRequested::~AlwaysOnPduSessionRequested() {}
 
 //------------------------------------------------------------------------------
 void AlwaysOnPduSessionRequested::SetValue() {
-  if (apsr_) value_ = 0x01;
+  if (apsr_)
+    value_ = 0x01;
 }
 
 //------------------------------------------------------------------------------
-void AlwaysOnPduSessionRequested::GetValue() {
-  apsr_ = (0x01 & value_);
-}
+void AlwaysOnPduSessionRequested::GetValue() { apsr_ = (0x01 & value_); }
 
 //------------------------------------------------------------------------------
 void AlwaysOnPduSessionRequested::Set(uint8_t iei, bool apsr) {

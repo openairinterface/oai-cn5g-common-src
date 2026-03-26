@@ -14,7 +14,7 @@ extern "C" {
 namespace oai::ngap {
 
 class TimeToWait {
- public:
+public:
   TimeToWait();
   TimeToWait(e_Ngap_TimeToWait);
   virtual ~TimeToWait();
@@ -22,12 +22,12 @@ class TimeToWait {
   void set(e_Ngap_TimeToWait);
   long get() const;
 
-  bool encode(Ngap_TimeToWait_t&) const;
-  bool decode(const Ngap_TimeToWait_t&);
+  bool encode(Ngap_TimeToWait_t &) const;
+  bool decode(const Ngap_TimeToWait_t &);
 
- private:
+private:
   long m_Time;
 };
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

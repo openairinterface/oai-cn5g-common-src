@@ -14,23 +14,23 @@ extern "C" {
 namespace oai::ngap {
 
 class QosFlowFeedbackItem {
- public:
+public:
   QosFlowFeedbackItem();
   virtual ~QosFlowFeedbackItem();
 
-  void setQosFlowIdentifier(const QosFlowIdentifier& qosFlowIdentifier);
-  bool getQosFlowIdentifier(QosFlowIdentifier& qosFlowIdentifier) const;
+  void setQosFlowIdentifier(const QosFlowIdentifier &qosFlowIdentifier);
+  bool getQosFlowIdentifier(QosFlowIdentifier &qosFlowIdentifier) const;
 
-  bool encode(Ngap_QosFlowFeedbackItem_t&) const;
-  bool decode(const Ngap_QosFlowFeedbackItem_t&);
+  bool encode(Ngap_QosFlowFeedbackItem_t &) const;
+  bool decode(const Ngap_QosFlowFeedbackItem_t &);
 
- private:
-  QosFlowIdentifier m_QosFlowIdentifier;  // Mandatory
+private:
+  QosFlowIdentifier m_QosFlowIdentifier; // Mandatory
   // TODO: Update Feedback (Optional)
   // TODO: CN Packet Delay Budget Downlink (Optional)
   // TODO: CN Packet Delay Budget Uplink (Optional)
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

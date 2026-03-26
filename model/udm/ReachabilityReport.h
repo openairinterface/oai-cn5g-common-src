@@ -22,8 +22,8 @@
 #ifndef ReachabilityReport_H_
 #define ReachabilityReport_H_
 
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::udm {
 
@@ -31,7 +31,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class ReachabilityReport {
- public:
+public:
   ReachabilityReport();
   virtual ~ReachabilityReport() = default;
 
@@ -45,10 +45,10 @@ class ReachabilityReport {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const ReachabilityReport& rhs) const;
-  bool operator!=(const ReachabilityReport& rhs) const;
+  bool operator==(const ReachabilityReport &rhs) const;
+  bool operator!=(const ReachabilityReport &rhs) const;
 
   /////////////////////////////////////////////
   /// ReachabilityReport members
@@ -57,35 +57,35 @@ class ReachabilityReport {
   ///
   /// </summary>
   std::string getAmfInstanceId() const;
-  void setAmfInstanceId(std::string const& value);
+  void setAmfInstanceId(std::string const &value);
   bool amfInstanceIdIsSet() const;
   void unsetAmfInstanceId();
   /// <summary>
   ///
   /// </summary>
   std::vector<std::string> getAccessTypeList() const;
-  void setAccessTypeList(std::vector<std::string> const& value);
+  void setAccessTypeList(std::vector<std::string> const &value);
   bool accessTypeListIsSet() const;
   void unsetAccessTypeList();
   /// <summary>
   ///
   /// </summary>
   std::string getReachability() const;
-  void setReachability(std::string const& value);
+  void setReachability(std::string const &value);
   bool reachabilityIsSet() const;
   void unsetReachability();
   /// <summary>
   ///
   /// </summary>
   std::string getMaxAvailabilityTime() const;
-  void setMaxAvailabilityTime(std::string const& value);
+  void setMaxAvailabilityTime(std::string const &value);
   bool maxAvailabilityTimeIsSet() const;
   void unsetMaxAvailabilityTime();
 
-  friend void to_json(nlohmann::json& j, const ReachabilityReport& o);
-  friend void from_json(const nlohmann::json& j, ReachabilityReport& o);
+  friend void to_json(nlohmann::json &j, const ReachabilityReport &o);
+  friend void from_json(const nlohmann::json &j, ReachabilityReport &o);
 
- protected:
+protected:
   std::string m_AmfInstanceId;
   bool m_AmfInstanceIdIsSet;
   std::vector<std::string> m_AccessTypeList;
@@ -97,9 +97,9 @@ class ReachabilityReport {
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* ReachabilityReport_H_ */

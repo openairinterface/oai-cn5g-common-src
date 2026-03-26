@@ -20,13 +20,13 @@
 #define PresenceInfo_H_
 
 #include "Ecgi.h"
-#include "Ncgi.h"
-#include "Tai.h"
-#include <string>
-#include "PresenceState.h"
 #include "GlobalRanNodeId.h"
-#include <vector>
+#include "Ncgi.h"
+#include "PresenceState.h"
+#include "Tai.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::common {
 
@@ -34,7 +34,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class PresenceInfo {
- public:
+public:
   PresenceInfo();
   virtual ~PresenceInfo() = default;
 
@@ -48,16 +48,16 @@ class PresenceInfo {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const PresenceInfo& rhs) const;
-  bool operator!=(const PresenceInfo& rhs) const;
+  bool operator==(const PresenceInfo &rhs) const;
+  bool operator!=(const PresenceInfo &rhs) const;
 
   /////////////////////////////////////////////
   /// PresenceInfo members
@@ -66,51 +66,51 @@ class PresenceInfo {
   ///
   /// </summary>
   std::string getPraId() const;
-  void setPraId(std::string const& value);
+  void setPraId(std::string const &value);
   bool praIdIsSet() const;
   void unsetPraId();
   /// <summary>
   ///
   /// </summary>
   std::string getAdditionalPraId() const;
-  void setAdditionalPraId(std::string const& value);
+  void setAdditionalPraId(std::string const &value);
   bool additionalPraIdIsSet() const;
   void unsetAdditionalPraId();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::PresenceState getPresenceState() const;
-  void setPresenceState(oai::model::common::PresenceState const& value);
+  void setPresenceState(oai::model::common::PresenceState const &value);
   bool presenceStateIsSet() const;
   void unsetPresenceState();
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::common::Tai> getTrackingAreaList() const;
-  void setTrackingAreaList(std::vector<oai::model::common::Tai> const& value);
+  void setTrackingAreaList(std::vector<oai::model::common::Tai> const &value);
   bool trackingAreaListIsSet() const;
   void unsetTrackingAreaList();
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::common::Ecgi> getEcgiList() const;
-  void setEcgiList(std::vector<oai::model::common::Ecgi> const& value);
+  void setEcgiList(std::vector<oai::model::common::Ecgi> const &value);
   bool ecgiListIsSet() const;
   void unsetEcgiList();
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::common::Ncgi> getNcgiList() const;
-  void setNcgiList(std::vector<oai::model::common::Ncgi> const& value);
+  void setNcgiList(std::vector<oai::model::common::Ncgi> const &value);
   bool ncgiListIsSet() const;
   void unsetNcgiList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::GlobalRanNodeId> getGlobalRanNodeIdList()
-      const;
+  std::vector<oai::model::common::GlobalRanNodeId>
+  getGlobalRanNodeIdList() const;
   void setGlobalRanNodeIdList(
-      std::vector<oai::model::common::GlobalRanNodeId> const& value);
+      std::vector<oai::model::common::GlobalRanNodeId> const &value);
   bool globalRanNodeIdListIsSet() const;
   void unsetGlobalRanNodeIdList();
   /// <summary>
@@ -118,14 +118,14 @@ class PresenceInfo {
   /// </summary>
   std::vector<oai::model::common::GlobalRanNodeId> getGlobaleNbIdList() const;
   void setGlobaleNbIdList(
-      std::vector<oai::model::common::GlobalRanNodeId> const& value);
+      std::vector<oai::model::common::GlobalRanNodeId> const &value);
   bool globaleNbIdListIsSet() const;
   void unsetGlobaleNbIdList();
 
-  friend void to_json(nlohmann::json& j, const PresenceInfo& o);
-  friend void from_json(const nlohmann::json& j, PresenceInfo& o);
+  friend void to_json(nlohmann::json &j, const PresenceInfo &o);
+  friend void from_json(const nlohmann::json &j, PresenceInfo &o);
 
- protected:
+protected:
   std::string m_PraId;
   bool m_PraIdIsSet;
   std::string m_AdditionalPraId;
@@ -144,6 +144,6 @@ class PresenceInfo {
   bool m_GlobaleNbIdListIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* PresenceInfo_H_ */

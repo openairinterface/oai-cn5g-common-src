@@ -28,7 +28,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class HorizontalWithVerticalVelocityAndUncertainty {
- public:
+public:
   HorizontalWithVerticalVelocityAndUncertainty();
   virtual ~HorizontalWithVerticalVelocityAndUncertainty() = default;
 
@@ -42,18 +42,18 @@ class HorizontalWithVerticalVelocityAndUncertainty {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(
-      const HorizontalWithVerticalVelocityAndUncertainty& rhs) const;
-  bool operator!=(
-      const HorizontalWithVerticalVelocityAndUncertainty& rhs) const;
+  bool
+  operator==(const HorizontalWithVerticalVelocityAndUncertainty &rhs) const;
+  bool
+  operator!=(const HorizontalWithVerticalVelocityAndUncertainty &rhs) const;
 
   /////////////////////////////////////////////
   /// HorizontalWithVerticalVelocityAndUncertainty members
@@ -77,7 +77,7 @@ class HorizontalWithVerticalVelocityAndUncertainty {
   ///
   /// </summary>
   oai::model::lmf::VerticalDirection getVDirection() const;
-  void setVDirection(oai::model::lmf::VerticalDirection const& value);
+  void setVDirection(oai::model::lmf::VerticalDirection const &value);
   /// <summary>
   ///
   /// </summary>
@@ -89,12 +89,12 @@ class HorizontalWithVerticalVelocityAndUncertainty {
   float getVUncertainty() const;
   void setVUncertainty(float const value);
 
-  friend void to_json(
-      nlohmann::json& j, const HorizontalWithVerticalVelocityAndUncertainty& o);
-  friend void from_json(
-      const nlohmann::json& j, HorizontalWithVerticalVelocityAndUncertainty& o);
+  friend void to_json(nlohmann::json &j,
+                      const HorizontalWithVerticalVelocityAndUncertainty &o);
+  friend void from_json(const nlohmann::json &j,
+                        HorizontalWithVerticalVelocityAndUncertainty &o);
 
- protected:
+protected:
   float m_HSpeed;
 
   int32_t m_Bearing;
@@ -108,6 +108,6 @@ class HorizontalWithVerticalVelocityAndUncertainty {
   float m_VUncertainty;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* HorizontalWithVerticalVelocityAndUncertainty_H_ */

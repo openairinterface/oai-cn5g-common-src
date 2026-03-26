@@ -34,7 +34,7 @@ typedef struct Ngap_UEIdentityIndexValue {
   Ngap_UEIdentityIndexValue_PR present;
   union Ngap_UEIdentityIndexValue_u {
     BIT_STRING_t indexLength10;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

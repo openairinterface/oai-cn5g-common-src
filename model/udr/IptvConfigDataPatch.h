@@ -34,7 +34,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class IptvConfigDataPatch {
- public:
+public:
   IptvConfigDataPatch();
   virtual ~IptvConfigDataPatch();
 
@@ -46,20 +46,20 @@ class IptvConfigDataPatch {
   /// <summary>
   ///
   /// </summary>
-  std::map<std::string, MulticastAccessControl>& getMultiAccCtrls();
-  void setMultiAccCtrls(
-      std::map<std::string, MulticastAccessControl> const& value);
+  std::map<std::string, MulticastAccessControl> &getMultiAccCtrls();
+  void
+  setMultiAccCtrls(std::map<std::string, MulticastAccessControl> const &value);
   bool multiAccCtrlsIsSet() const;
   void unsetMultiAccCtrls();
 
-  friend void to_json(nlohmann::json& j, const IptvConfigDataPatch& o);
-  friend void from_json(const nlohmann::json& j, IptvConfigDataPatch& o);
+  friend void to_json(nlohmann::json &j, const IptvConfigDataPatch &o);
+  friend void from_json(const nlohmann::json &j, IptvConfigDataPatch &o);
 
- protected:
+protected:
   std::map<std::string, MulticastAccessControl> m_MultiAccCtrls;
   bool m_MultiAccCtrlsIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* IptvConfigDataPatch_H_ */

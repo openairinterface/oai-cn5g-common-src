@@ -25,7 +25,7 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_AssistanceDataForRecommendedCells */
 typedef struct Ngap_AssistanceDataForRecommendedCells {
   Ngap_RecommendedCellsForPaging_t recommendedCellsForPaging;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

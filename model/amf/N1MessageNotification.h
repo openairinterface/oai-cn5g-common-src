@@ -19,10 +19,10 @@
 #ifndef N1MessageNotification_H_
 #define N1MessageNotification_H_
 
-#include "RegistrationContextContainer.h"
 #include "N1MessageContainer.h"
-#include <string>
+#include "RegistrationContextContainer.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::amf {
 
@@ -30,7 +30,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class N1MessageNotification {
- public:
+public:
   N1MessageNotification();
   virtual ~N1MessageNotification();
 
@@ -43,33 +43,33 @@ class N1MessageNotification {
   ///
   /// </summary>
   std::string getN1NotifySubscriptionId() const;
-  void setN1NotifySubscriptionId(std::string const& value);
+  void setN1NotifySubscriptionId(std::string const &value);
   bool n1NotifySubscriptionIdIsSet() const;
   void unsetN1NotifySubscriptionId();
   /// <summary>
   ///
   /// </summary>
   N1MessageContainer getN1MessageContainer() const;
-  void setN1MessageContainer(N1MessageContainer const& value);
+  void setN1MessageContainer(N1MessageContainer const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getLcsCorrelationId() const;
-  void setLcsCorrelationId(std::string const& value);
+  void setLcsCorrelationId(std::string const &value);
   bool lcsCorrelationIdIsSet() const;
   void unsetLcsCorrelationId();
   /// <summary>
   ///
   /// </summary>
   RegistrationContextContainer getRegistrationCtxtContainer() const;
-  void setRegistrationCtxtContainer(RegistrationContextContainer const& value);
+  void setRegistrationCtxtContainer(RegistrationContextContainer const &value);
   bool registrationCtxtContainerIsSet() const;
   void unsetRegistrationCtxtContainer();
 
-  friend void to_json(nlohmann::json& j, const N1MessageNotification& o);
-  friend void from_json(const nlohmann::json& j, N1MessageNotification& o);
+  friend void to_json(nlohmann::json &j, const N1MessageNotification &o);
+  friend void from_json(const nlohmann::json &j, N1MessageNotification &o);
 
- protected:
+protected:
   std::string m_N1NotifySubscriptionId;
   bool m_N1NotifySubscriptionIdIsSet;
   N1MessageContainer m_N1MessageContainer;
@@ -80,6 +80,6 @@ class N1MessageNotification {
   bool m_RegistrationCtxtContainerIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* N1MessageNotification_H_ */

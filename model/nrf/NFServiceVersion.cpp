@@ -17,9 +17,9 @@ namespace oai::model::nrf {
 
 NFServiceVersion::NFServiceVersion() {
   m_ApiVersionInUri = "";
-  m_ApiFullVersion  = "";
-  m_Expiry          = "";
-  m_ExpiryIsSet     = false;
+  m_ApiFullVersion = "";
+  m_Expiry = "";
+  m_ExpiryIsSet = false;
 }
 
 NFServiceVersion::~NFServiceVersion() {}
@@ -28,14 +28,15 @@ void NFServiceVersion::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const NFServiceVersion& o) {
-  j                    = nlohmann::json();
+void to_json(nlohmann::json &j, const NFServiceVersion &o) {
+  j = nlohmann::json();
   j["apiVersionInUri"] = o.m_ApiVersionInUri;
-  j["apiFullVersion"]  = o.m_ApiFullVersion;
-  if (o.expiryIsSet()) j["expiry"] = o.m_Expiry;
+  j["apiFullVersion"] = o.m_ApiFullVersion;
+  if (o.expiryIsSet())
+    j["expiry"] = o.m_Expiry;
 }
 
-void from_json(const nlohmann::json& j, NFServiceVersion& o) {
+void from_json(const nlohmann::json &j, NFServiceVersion &o) {
   j.at("apiVersionInUri").get_to(o.m_ApiVersionInUri);
   j.at("apiFullVersion").get_to(o.m_ApiFullVersion);
   if (j.find("expiry") != j.end()) {
@@ -47,27 +48,21 @@ void from_json(const nlohmann::json& j, NFServiceVersion& o) {
 std::string NFServiceVersion::getApiVersionInUri() const {
   return m_ApiVersionInUri;
 }
-void NFServiceVersion::setApiVersionInUri(std::string const& value) {
+void NFServiceVersion::setApiVersionInUri(std::string const &value) {
   m_ApiVersionInUri = value;
 }
 std::string NFServiceVersion::getApiFullVersion() const {
   return m_ApiFullVersion;
 }
-void NFServiceVersion::setApiFullVersion(std::string const& value) {
+void NFServiceVersion::setApiFullVersion(std::string const &value) {
   m_ApiFullVersion = value;
 }
-std::string NFServiceVersion::getExpiry() const {
-  return m_Expiry;
-}
-void NFServiceVersion::setExpiry(std::string const& value) {
-  m_Expiry      = value;
+std::string NFServiceVersion::getExpiry() const { return m_Expiry; }
+void NFServiceVersion::setExpiry(std::string const &value) {
+  m_Expiry = value;
   m_ExpiryIsSet = true;
 }
-bool NFServiceVersion::expiryIsSet() const {
-  return m_ExpiryIsSet;
-}
-void NFServiceVersion::unsetExpiry() {
-  m_ExpiryIsSet = false;
-}
+bool NFServiceVersion::expiryIsSet() const { return m_ExpiryIsSet; }
+void NFServiceVersion::unsetExpiry() { m_ExpiryIsSet = false; }
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

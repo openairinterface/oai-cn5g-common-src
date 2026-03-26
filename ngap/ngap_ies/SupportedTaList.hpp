@@ -16,19 +16,19 @@ extern "C" {
 namespace oai::ngap {
 
 class SupportedTaList {
- public:
+public:
   SupportedTaList();
   virtual ~SupportedTaList();
 
-  void setSupportedTaItems(const std::vector<SupportedTaItem>& items);
-  void getSupportedTaItems(std::vector<SupportedTaItem>& items) const;
+  void setSupportedTaItems(const std::vector<SupportedTaItem> &items);
+  void getSupportedTaItems(std::vector<SupportedTaItem> &items) const;
 
-  bool encode(Ngap_SupportedTAList_t& supportedTaList) const;
-  bool decode(const Ngap_SupportedTAList_t& supportedTaList);
+  bool encode(Ngap_SupportedTAList_t &supportedTaList) const;
+  bool decode(const Ngap_SupportedTAList_t &supportedTaList);
 
- private:
+private:
   std::vector<SupportedTaItem> m_SupportedTaItems;
 };
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

@@ -18,9 +18,7 @@
 
 namespace oai::udr::model {
 
-PointUncertaintyEllipse::PointUncertaintyEllipse() {
-  m_Confidence = 0;
-}
+PointUncertaintyEllipse::PointUncertaintyEllipse() { m_Confidence = 0; }
 
 PointUncertaintyEllipse::~PointUncertaintyEllipse() {}
 
@@ -28,45 +26,41 @@ void PointUncertaintyEllipse::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const PointUncertaintyEllipse& o) {
-  j                       = nlohmann::json();
-  j["shape"]              = o.m_Shape;
-  j["point"]              = o.m_Point;
+void to_json(nlohmann::json &j, const PointUncertaintyEllipse &o) {
+  j = nlohmann::json();
+  j["shape"] = o.m_Shape;
+  j["point"] = o.m_Point;
   j["uncertaintyEllipse"] = o.m_UncertaintyEllipse;
-  j["confidence"]         = o.m_Confidence;
+  j["confidence"] = o.m_Confidence;
 }
 
-void from_json(const nlohmann::json& j, PointUncertaintyEllipse& o) {
+void from_json(const nlohmann::json &j, PointUncertaintyEllipse &o) {
   j.at("shape").get_to(o.m_Shape);
   j.at("point").get_to(o.m_Point);
   j.at("uncertaintyEllipse").get_to(o.m_UncertaintyEllipse);
   j.at("confidence").get_to(o.m_Confidence);
 }
 
-SupportedGADShapes PointUncertaintyEllipse::getShape() const {
-  return m_Shape;
-}
-void PointUncertaintyEllipse::setShape(SupportedGADShapes const& value) {
+SupportedGADShapes PointUncertaintyEllipse::getShape() const { return m_Shape; }
+void PointUncertaintyEllipse::setShape(SupportedGADShapes const &value) {
   m_Shape = value;
 }
 GeographicalCoordinates PointUncertaintyEllipse::getPoint() const {
   return m_Point;
 }
-void PointUncertaintyEllipse::setPoint(GeographicalCoordinates const& value) {
+void PointUncertaintyEllipse::setPoint(GeographicalCoordinates const &value) {
   m_Point = value;
 }
 UncertaintyEllipse PointUncertaintyEllipse::getUncertaintyEllipse() const {
   return m_UncertaintyEllipse;
 }
 void PointUncertaintyEllipse::setUncertaintyEllipse(
-    UncertaintyEllipse const& value) {
+    UncertaintyEllipse const &value) {
   m_UncertaintyEllipse = value;
 }
-int32_t PointUncertaintyEllipse::getConfidence() const {
-  return m_Confidence;
-}
+int32_t PointUncertaintyEllipse::getConfidence() const { return m_Confidence; }
 void PointUncertaintyEllipse::setConfidence(int32_t const value) {
   m_Confidence = value;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

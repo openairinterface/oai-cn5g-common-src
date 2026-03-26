@@ -19,7 +19,7 @@
 namespace oai::udr::model {
 
 LossConnectivityCfg::LossConnectivityCfg() {
-  m_MaxDetectionTime      = 0;
+  m_MaxDetectionTime = 0;
   m_MaxDetectionTimeIsSet = false;
 }
 
@@ -29,12 +29,13 @@ void LossConnectivityCfg::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const LossConnectivityCfg& o) {
+void to_json(nlohmann::json &j, const LossConnectivityCfg &o) {
   j = nlohmann::json();
-  if (o.maxDetectionTimeIsSet()) j["maxDetectionTime"] = o.m_MaxDetectionTime;
+  if (o.maxDetectionTimeIsSet())
+    j["maxDetectionTime"] = o.m_MaxDetectionTime;
 }
 
-void from_json(const nlohmann::json& j, LossConnectivityCfg& o) {
+void from_json(const nlohmann::json &j, LossConnectivityCfg &o) {
   if (j.find("maxDetectionTime") != j.end()) {
     j.at("maxDetectionTime").get_to(o.m_MaxDetectionTime);
     o.m_MaxDetectionTimeIsSet = true;
@@ -45,7 +46,7 @@ int32_t LossConnectivityCfg::getMaxDetectionTime() const {
   return m_MaxDetectionTime;
 }
 void LossConnectivityCfg::setMaxDetectionTime(int32_t const value) {
-  m_MaxDetectionTime      = value;
+  m_MaxDetectionTime = value;
   m_MaxDetectionTimeIsSet = true;
 }
 bool LossConnectivityCfg::maxDetectionTimeIsSet() const {
@@ -55,4 +56,4 @@ void LossConnectivityCfg::unsetMaxDetectionTime() {
   m_MaxDetectionTimeIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

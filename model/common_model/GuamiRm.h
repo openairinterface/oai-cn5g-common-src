@@ -19,11 +19,11 @@
 #ifndef GuamiRm_H_
 #define GuamiRm_H_
 
-#include "PlmnIdNid.h"
-#include <string>
-#include "NullValue.h"
 #include "Guami.h"
+#include "NullValue.h"
+#include "PlmnIdNid.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::common {
 
@@ -31,7 +31,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class GuamiRm {
- public:
+public:
   GuamiRm();
   virtual ~GuamiRm() = default;
 
@@ -45,16 +45,16 @@ class GuamiRm {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const GuamiRm& rhs) const;
-  bool operator!=(const GuamiRm& rhs) const;
+  bool operator==(const GuamiRm &rhs) const;
+  bool operator!=(const GuamiRm &rhs) const;
 
   /////////////////////////////////////////////
   /// GuamiRm members
@@ -63,22 +63,22 @@ class GuamiRm {
   ///
   /// </summary>
   oai::model::common::PlmnIdNid getPlmnId() const;
-  void setPlmnId(oai::model::common::PlmnIdNid const& value);
+  void setPlmnId(oai::model::common::PlmnIdNid const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getAmfId() const;
-  void setAmfId(std::string const& value);
+  void setAmfId(std::string const &value);
 
-  friend void to_json(nlohmann::json& j, const GuamiRm& o);
-  friend void from_json(const nlohmann::json& j, GuamiRm& o);
+  friend void to_json(nlohmann::json &j, const GuamiRm &o);
+  friend void from_json(const nlohmann::json &j, GuamiRm &o);
 
- protected:
+protected:
   oai::model::common::PlmnIdNid m_PlmnId;
 
   std::string m_AmfId;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* GuamiRm_H_ */

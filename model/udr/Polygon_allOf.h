@@ -33,7 +33,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class Polygon_allOf {
- public:
+public:
   Polygon_allOf();
   virtual ~Polygon_allOf();
 
@@ -45,16 +45,16 @@ class Polygon_allOf {
   /// <summary>
   ///
   /// </summary>
-  std::vector<GeographicalCoordinates>& getPointList();
-  void setPointList(std::vector<GeographicalCoordinates> const& value);
+  std::vector<GeographicalCoordinates> &getPointList();
+  void setPointList(std::vector<GeographicalCoordinates> const &value);
 
-  friend void to_json(nlohmann::json& j, const Polygon_allOf& o);
-  friend void from_json(const nlohmann::json& j, Polygon_allOf& o);
+  friend void to_json(nlohmann::json &j, const Polygon_allOf &o);
+  friend void from_json(const nlohmann::json &j, Polygon_allOf &o);
 
- protected:
+protected:
   std::vector<GeographicalCoordinates> m_PointList;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* Polygon_allOf_H_ */

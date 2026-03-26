@@ -11,24 +11,23 @@
 #include "Ngap_ProtocolExtensionContainer.h"
 static int
 memb_Ngap_pDUSessionResourceModifyIndicationUnsuccessfulTransfer_constraint_1(
-    const asn_TYPE_descriptor_t* td, const void* sptr,
-    asn_app_constraint_failed_f* ctfailcb, void* app_key) {
-  const OCTET_STRING_t* st = (const OCTET_STRING_t*) sptr;
+    const asn_TYPE_descriptor_t *td, const void *sptr,
+    asn_app_constraint_failed_f *ctfailcb, void *app_key) {
+  const OCTET_STRING_t *st = (const OCTET_STRING_t *)sptr;
 
   if (!sptr) {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: value not given (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: value not given (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 
   if (1 /* No applicable constraints whatsoever */) {
-    (void) st; /* Unused variable */
-               /* Nothing is here. See below */
+    (void)st; /* Unused variable */
+              /* Nothing is here. See below */
   }
 
-  return td->encoding_constraints.general_constraints(
-      td, sptr, ctfailcb, app_key);
+  return td->encoding_constraints.general_constraints(td, sptr, ctfailcb,
+                                                      app_key);
 }
 
 #if !defined(ASN_DISABLE_OER_SUPPORT)
@@ -50,8 +49,8 @@ static asn_per_constraints_t
 asn_TYPE_member_t asn_MBR_Ngap_PDUSessionResourceFailedToModifyItemModCfm_1[] = {
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_PDUSessionResourceFailedToModifyItemModCfm, pDUSessionID),
+     offsetof(struct Ngap_PDUSessionResourceFailedToModifyItemModCfm,
+              pDUSessionID),
      (ASN_TAG_CLASS_CONTEXT | (0 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_PDUSessionID,
@@ -70,9 +69,8 @@ asn_TYPE_member_t asn_MBR_Ngap_PDUSessionResourceFailedToModifyItemModCfm_1[] = 
      "pDUSessionID"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_PDUSessionResourceFailedToModifyItemModCfm,
-         pDUSessionResourceModifyIndicationUnsuccessfulTransfer),
+     offsetof(struct Ngap_PDUSessionResourceFailedToModifyItemModCfm,
+              pDUSessionResourceModifyIndicationUnsuccessfulTransfer),
      (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_OCTET_STRING,
@@ -91,8 +89,8 @@ asn_TYPE_member_t asn_MBR_Ngap_PDUSessionResourceFailedToModifyItemModCfm_1[] = 
      "pDUSessionResourceModifyIndicationUnsuccessfulTransfer"},
     {ATF_POINTER,
      1,
-     offsetof(
-         struct Ngap_PDUSessionResourceFailedToModifyItemModCfm, iE_Extensions),
+     offsetof(struct Ngap_PDUSessionResourceFailedToModifyItemModCfm,
+              iE_Extensions),
      (ASN_TAG_CLASS_CONTEXT | (2 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_ProtocolExtensionContainer_9666P150,
@@ -125,8 +123,8 @@ static const asn_TYPE_tag2member_t
 asn_SEQUENCE_specifics_t
     asn_SPC_Ngap_PDUSessionResourceFailedToModifyItemModCfm_specs_1 = {
         sizeof(struct Ngap_PDUSessionResourceFailedToModifyItemModCfm),
-        offsetof(
-            struct Ngap_PDUSessionResourceFailedToModifyItemModCfm, _asn_ctx),
+        offsetof(struct Ngap_PDUSessionResourceFailedToModifyItemModCfm,
+                 _asn_ctx),
         asn_MAP_Ngap_PDUSessionResourceFailedToModifyItemModCfm_tag2el_1,
         3, /* Count of tags in the map */
         asn_MAP_Ngap_PDUSessionResourceFailedToModifyItemModCfm_oms_1, /* Optional

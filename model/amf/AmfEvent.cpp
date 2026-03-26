@@ -19,12 +19,12 @@
 namespace oai::model::amf {
 
 AmfEvent::AmfEvent() {
-  m_ImmediateFlag           = false;
-  m_ImmediateFlagIsSet      = false;
-  m_AreaListIsSet           = false;
+  m_ImmediateFlag = false;
+  m_ImmediateFlagIsSet = false;
+  m_AreaListIsSet = false;
   m_LocationFilterListIsSet = false;
-  m_RefId                   = 0;
-  m_RefIdIsSet              = false;
+  m_RefId = 0;
+  m_RefIdIsSet = false;
 }
 
 void AmfEvent::validate() const {
@@ -34,27 +34,27 @@ void AmfEvent::validate() const {
   }
 }
 
-bool AmfEvent::validate(std::stringstream& msg) const {
+bool AmfEvent::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AmfEvent::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool AmfEvent::validate(std::stringstream &msg,
+                        const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "AmfEvent" : pathPrefix;
 
   if (areaListIsSet()) {
-    const std::vector<AmfEventArea>& value = m_AreaList;
-    const std::string currentValuePath     = _pathPrefix + ".areaList";
+    const std::vector<AmfEventArea> &value = m_AreaList;
+    const std::string currentValuePath = _pathPrefix + ".areaList";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const AmfEventArea& value : value) {
+      int i = 0;
+      for (const AmfEventArea &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -67,17 +67,17 @@ bool AmfEvent::validate(
   }
 
   if (locationFilterListIsSet()) {
-    const std::vector<LocationFilter>& value = m_LocationFilterList;
+    const std::vector<LocationFilter> &value = m_LocationFilterList;
     const std::string currentValuePath = _pathPrefix + ".locationFilterList";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const LocationFilter& value : value) {
+      int i = 0;
+      for (const LocationFilter &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -93,7 +93,7 @@ bool AmfEvent::validate(
   return success;
 }
 
-bool AmfEvent::operator==(const AmfEvent& rhs) const {
+bool AmfEvent::operator==(const AmfEvent &rhs) const {
   return
 
       ((getType() == rhs.getType()) &&
@@ -116,21 +116,22 @@ bool AmfEvent::operator==(const AmfEvent& rhs) const {
           ;
 }
 
-bool AmfEvent::operator!=(const AmfEvent& rhs) const {
-  return !(*this == rhs);
-}
+bool AmfEvent::operator!=(const AmfEvent &rhs) const { return !(*this == rhs); }
 
-void to_json(nlohmann::json& j, const AmfEvent& o) {
-  j         = nlohmann::json();
+void to_json(nlohmann::json &j, const AmfEvent &o) {
+  j = nlohmann::json();
   j["type"] = o.m_Type;
-  if (o.immediateFlagIsSet()) j["immediateFlag"] = o.m_ImmediateFlag;
-  if (o.areaListIsSet() || !o.m_AreaList.empty()) j["areaList"] = o.m_AreaList;
+  if (o.immediateFlagIsSet())
+    j["immediateFlag"] = o.m_ImmediateFlag;
+  if (o.areaListIsSet() || !o.m_AreaList.empty())
+    j["areaList"] = o.m_AreaList;
   if (o.locationFilterListIsSet() || !o.m_LocationFilterList.empty())
     j["locationFilterList"] = o.m_LocationFilterList;
-  if (o.refIdIsSet()) j["refId"] = o.m_RefId;
+  if (o.refIdIsSet())
+    j["refId"] = o.m_RefId;
 }
 
-void from_json(const nlohmann::json& j, AmfEvent& o) {
+void from_json(const nlohmann::json &j, AmfEvent &o) {
   j.at("type").get_to(o.m_Type);
   if (j.find("immediateFlag") != j.end()) {
     j.at("immediateFlag").get_to(o.m_ImmediateFlag);
@@ -150,63 +151,39 @@ void from_json(const nlohmann::json& j, AmfEvent& o) {
   }
 }
 
-AmfEventType AmfEvent::getType() const {
-  return m_Type;
-}
-void AmfEvent::setType(AmfEventType const& value) {
-  m_Type = value;
-}
-bool AmfEvent::isImmediateFlag() const {
-  return m_ImmediateFlag;
-}
+AmfEventType AmfEvent::getType() const { return m_Type; }
+void AmfEvent::setType(AmfEventType const &value) { m_Type = value; }
+bool AmfEvent::isImmediateFlag() const { return m_ImmediateFlag; }
 void AmfEvent::setImmediateFlag(bool const value) {
-  m_ImmediateFlag      = value;
+  m_ImmediateFlag = value;
   m_ImmediateFlagIsSet = true;
 }
-bool AmfEvent::immediateFlagIsSet() const {
-  return m_ImmediateFlagIsSet;
-}
-void AmfEvent::unsetImmediateFlag() {
-  m_ImmediateFlagIsSet = false;
-}
-std::vector<AmfEventArea> AmfEvent::getAreaList() const {
-  return m_AreaList;
-}
-void AmfEvent::setAreaList(std::vector<AmfEventArea> const& value) {
-  m_AreaList      = value;
+bool AmfEvent::immediateFlagIsSet() const { return m_ImmediateFlagIsSet; }
+void AmfEvent::unsetImmediateFlag() { m_ImmediateFlagIsSet = false; }
+std::vector<AmfEventArea> AmfEvent::getAreaList() const { return m_AreaList; }
+void AmfEvent::setAreaList(std::vector<AmfEventArea> const &value) {
+  m_AreaList = value;
   m_AreaListIsSet = true;
 }
-bool AmfEvent::areaListIsSet() const {
-  return m_AreaListIsSet;
-}
-void AmfEvent::unsetAreaList() {
-  m_AreaListIsSet = false;
-}
+bool AmfEvent::areaListIsSet() const { return m_AreaListIsSet; }
+void AmfEvent::unsetAreaList() { m_AreaListIsSet = false; }
 std::vector<LocationFilter> AmfEvent::getLocationFilterList() const {
   return m_LocationFilterList;
 }
-void AmfEvent::setLocationFilterList(std::vector<LocationFilter> const& value) {
-  m_LocationFilterList      = value;
+void AmfEvent::setLocationFilterList(std::vector<LocationFilter> const &value) {
+  m_LocationFilterList = value;
   m_LocationFilterListIsSet = true;
 }
 bool AmfEvent::locationFilterListIsSet() const {
   return m_LocationFilterListIsSet;
 }
-void AmfEvent::unsetLocationFilterList() {
-  m_LocationFilterListIsSet = false;
-}
-int32_t AmfEvent::getRefId() const {
-  return m_RefId;
-}
+void AmfEvent::unsetLocationFilterList() { m_LocationFilterListIsSet = false; }
+int32_t AmfEvent::getRefId() const { return m_RefId; }
 void AmfEvent::setRefId(int32_t const value) {
-  m_RefId      = value;
+  m_RefId = value;
   m_RefIdIsSet = true;
 }
-bool AmfEvent::refIdIsSet() const {
-  return m_RefIdIsSet;
-}
-void AmfEvent::unsetRefId() {
-  m_RefIdIsSet = false;
-}
+bool AmfEvent::refIdIsSet() const { return m_RefIdIsSet; }
+void AmfEvent::unsetRefId() { m_RefIdIsSet = false; }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

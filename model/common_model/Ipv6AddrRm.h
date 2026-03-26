@@ -19,8 +19,8 @@
 #ifndef Ipv6AddrRm_H_
 #define Ipv6AddrRm_H_
 
-#include <nlohmann/json.hpp>
 #include "Ipv6Addr.h"
+#include <nlohmann/json.hpp>
 
 namespace oai::model::common {
 
@@ -28,7 +28,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class Ipv6AddrRm : public Ipv6Addr {
- public:
+public:
   Ipv6AddrRm();
   virtual ~Ipv6AddrRm() = default;
 
@@ -36,17 +36,17 @@ class Ipv6AddrRm : public Ipv6Addr {
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(
-      std::stringstream& msg, const std::string& pathPrefix) const override;
+  bool validate(std::stringstream &msg,
+                const std::string &pathPrefix) const override;
   /////////////////////////////////////////////
   /// Ipv6AddrRm members
 
-  friend void to_json(nlohmann::json& j, const Ipv6AddrRm& o);
-  friend void from_json(const nlohmann::json& j, Ipv6AddrRm& o);
+  friend void to_json(nlohmann::json &j, const Ipv6AddrRm &o);
+  friend void from_json(const nlohmann::json &j, Ipv6AddrRm &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* Ipv6AddrRm_H_ */

@@ -19,21 +19,21 @@
 #ifndef PduSessionCreateData_H_
 #define PduSessionCreateData_H_
 
-#include "RatType.h"
-#include "RefToBinaryData.h"
-#include <string>
-#include "PlmnId.h"
-#include "Snssai.h"
-#include <vector>
 #include "AccessType.h"
 #include "DnnSelectionMode.h"
 #include "EpsInterworkingIndication.h"
-#include "UserLocation.h"
-#include "RoamingChargingProfile.h"
-#include "RequestType.h"
-#include "TunnelInfo.h"
 #include "Guami.h"
+#include "PlmnId.h"
+#include "RatType.h"
+#include "RefToBinaryData.h"
+#include "RequestType.h"
+#include "RoamingChargingProfile.h"
+#include "Snssai.h"
+#include "TunnelInfo.h"
+#include "UserLocation.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::smf {
 
@@ -41,7 +41,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class PduSessionCreateData {
- public:
+public:
   PduSessionCreateData();
   virtual ~PduSessionCreateData();
 
@@ -54,7 +54,7 @@ class PduSessionCreateData {
   ///
   /// </summary>
   std::string getSupi() const;
-  void setSupi(std::string const& value);
+  void setSupi(std::string const &value);
   bool supiIsSet() const;
   void unsetSupi();
   /// <summary>
@@ -68,7 +68,7 @@ class PduSessionCreateData {
   ///
   /// </summary>
   std::string getPei() const;
-  void setPei(std::string const& value);
+  void setPei(std::string const &value);
   bool peiIsSet() const;
   void unsetPei();
   /// <summary>
@@ -82,129 +82,129 @@ class PduSessionCreateData {
   ///
   /// </summary>
   std::string getDnn() const;
-  void setDnn(std::string const& value);
+  void setDnn(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Snssai getSNssai() const;
-  void setSNssai(oai::model::common::Snssai const& value);
+  void setSNssai(oai::model::common::Snssai const &value);
   bool sNssaiIsSet() const;
   void unsetSNssai();
   /// <summary>
   ///
   /// </summary>
   std::string getVsmfId() const;
-  void setVsmfId(std::string const& value);
+  void setVsmfId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::PlmnId getServingNetwork() const;
-  void setServingNetwork(oai::model::common::PlmnId const& value);
+  void setServingNetwork(oai::model::common::PlmnId const &value);
   /// <summary>
   ///
   /// </summary>
   RequestType getRequestType() const;
-  void setRequestType(RequestType const& value);
+  void setRequestType(RequestType const &value);
   bool requestTypeIsSet() const;
   void unsetRequestType();
   /// <summary>
   ///
   /// </summary>
-  std::vector<int32_t>& getEpsBearerId();
+  std::vector<int32_t> &getEpsBearerId();
   bool epsBearerIdIsSet() const;
   void unsetEpsBearerId();
   /// <summary>
   ///
   /// </summary>
   std::string getPgwS8cFteid() const;
-  void setPgwS8cFteid(std::string const& value);
+  void setPgwS8cFteid(std::string const &value);
   bool pgwS8cFteidIsSet() const;
   void unsetPgwS8cFteid();
   /// <summary>
   ///
   /// </summary>
   std::string getVsmfPduSessionUri() const;
-  void setVsmfPduSessionUri(std::string const& value);
+  void setVsmfPduSessionUri(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   TunnelInfo getVcnTunnelInfo() const;
-  void setVcnTunnelInfo(TunnelInfo const& value);
+  void setVcnTunnelInfo(TunnelInfo const &value);
   bool vcnTunnelInfoIsSet() const;
   void unsetVcnTunnelInfo();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::AccessType getAnType() const;
-  void setAnType(oai::model::common::AccessType const& value);
+  void setAnType(oai::model::common::AccessType const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::AccessType getSecondAnType() const;
-  void setSecondAnType(oai::model::common::AccessType const& value);
+  void setSecondAnType(oai::model::common::AccessType const &value);
   bool secondAnTypeIsSet() const;
   void unsetSecondAnType();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::RatType getRatType() const;
-  void setRatType(oai::model::common::RatType const& value);
+  void setRatType(oai::model::common::RatType const &value);
   bool ratTypeIsSet() const;
   void unsetRatType();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::UserLocation getUeLocation() const;
-  void setUeLocation(oai::model::common::UserLocation const& value);
+  void setUeLocation(oai::model::common::UserLocation const &value);
   bool ueLocationIsSet() const;
   void unsetUeLocation();
   /// <summary>
   ///
   /// </summary>
   std::string getUeTimeZone() const;
-  void setUeTimeZone(std::string const& value);
+  void setUeTimeZone(std::string const &value);
   bool ueTimeZoneIsSet() const;
   void unsetUeTimeZone();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::UserLocation getAddUeLocation() const;
-  void setAddUeLocation(oai::model::common::UserLocation const& value);
+  void setAddUeLocation(oai::model::common::UserLocation const &value);
   bool addUeLocationIsSet() const;
   void unsetAddUeLocation();
   /// <summary>
   ///
   /// </summary>
   std::string getGpsi() const;
-  void setGpsi(std::string const& value);
+  void setGpsi(std::string const &value);
   bool gpsiIsSet() const;
   void unsetGpsi();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::RefToBinaryData getN1SmInfoFromUe() const;
-  void setN1SmInfoFromUe(oai::model::common::RefToBinaryData const& value);
+  void setN1SmInfoFromUe(oai::model::common::RefToBinaryData const &value);
   bool n1SmInfoFromUeIsSet() const;
   void unsetN1SmInfoFromUe();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::RefToBinaryData getUnknownN1SmInfo() const;
-  void setUnknownN1SmInfo(oai::model::common::RefToBinaryData const& value);
+  void setUnknownN1SmInfo(oai::model::common::RefToBinaryData const &value);
   bool unknownN1SmInfoIsSet() const;
   void unsetUnknownN1SmInfo();
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
   /// <summary>
   ///
   /// </summary>
   std::string getHPcfId() const;
-  void setHPcfId(std::string const& value);
+  void setHPcfId(std::string const &value);
   bool hPcfIdIsSet() const;
   void unsetHPcfId();
   /// <summary>
@@ -218,7 +218,7 @@ class PduSessionCreateData {
   ///
   /// </summary>
   oai::model::smf::DnnSelectionMode getSelMode() const;
-  void setSelMode(oai::model::smf::DnnSelectionMode const& value);
+  void setSelMode(oai::model::smf::DnnSelectionMode const &value);
   bool selModeIsSet() const;
   void unsetSelMode();
   /// <summary>
@@ -232,49 +232,49 @@ class PduSessionCreateData {
   ///
   /// </summary>
   std::string getUdmGroupId() const;
-  void setUdmGroupId(std::string const& value);
+  void setUdmGroupId(std::string const &value);
   bool udmGroupIdIsSet() const;
   void unsetUdmGroupId();
   /// <summary>
   ///
   /// </summary>
   std::string getRoutingIndicator() const;
-  void setRoutingIndicator(std::string const& value);
+  void setRoutingIndicator(std::string const &value);
   bool routingIndicatorIsSet() const;
   void unsetRoutingIndicator();
   /// <summary>
   ///
   /// </summary>
   EpsInterworkingIndication getEpsInterworkingInd() const;
-  void setEpsInterworkingInd(EpsInterworkingIndication const& value);
+  void setEpsInterworkingInd(EpsInterworkingIndication const &value);
   bool epsInterworkingIndIsSet() const;
   void unsetEpsInterworkingInd();
   /// <summary>
   ///
   /// </summary>
   std::string getVSmfServiceInstanceId() const;
-  void setVSmfServiceInstanceId(std::string const& value);
+  void setVSmfServiceInstanceId(std::string const &value);
   bool vSmfServiceInstanceIdIsSet() const;
   void unsetVSmfServiceInstanceId();
   /// <summary>
   ///
   /// </summary>
   std::string getRecoveryTime() const;
-  void setRecoveryTime(std::string const& value);
+  void setRecoveryTime(std::string const &value);
   bool recoveryTimeIsSet() const;
   void unsetRecoveryTime();
   /// <summary>
   ///
   /// </summary>
   RoamingChargingProfile getRoamingChargingProfile() const;
-  void setRoamingChargingProfile(RoamingChargingProfile const& value);
+  void setRoamingChargingProfile(RoamingChargingProfile const &value);
   bool roamingChargingProfileIsSet() const;
   void unsetRoamingChargingProfile();
   /// <summary>
   ///
   /// </summary>
   std::string getChargingId() const;
-  void setChargingId(std::string const& value);
+  void setChargingId(std::string const &value);
   bool chargingIdIsSet() const;
   void unsetChargingId();
   /// <summary>
@@ -288,21 +288,21 @@ class PduSessionCreateData {
   ///
   /// </summary>
   std::string getEpsBearerCtxStatus() const;
-  void setEpsBearerCtxStatus(std::string const& value);
+  void setEpsBearerCtxStatus(std::string const &value);
   bool epsBearerCtxStatusIsSet() const;
   void unsetEpsBearerCtxStatus();
   /// <summary>
   ///
   /// </summary>
   std::string getAmfNfId() const;
-  void setAmfNfId(std::string const& value);
+  void setAmfNfId(std::string const &value);
   bool amfNfIdIsSet() const;
   void unsetAmfNfId();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Guami getGuami() const;
-  void setGuami(oai::model::common::Guami const& value);
+  void setGuami(oai::model::common::Guami const &value);
   bool guamiIsSet() const;
   void unsetGuami();
   /// <summary>
@@ -327,10 +327,10 @@ class PduSessionCreateData {
   bool maPduIndicationIsSet() const;
   void unsetMaPduIndication();
 
-  friend void to_json(nlohmann::json& j, const PduSessionCreateData& o);
-  friend void from_json(const nlohmann::json& j, PduSessionCreateData& o);
+  friend void to_json(nlohmann::json &j, const PduSessionCreateData &o);
+  friend void from_json(const nlohmann::json &j, PduSessionCreateData &o);
 
- protected:
+protected:
   std::string m_Supi;
   bool m_SupiIsSet;
   bool m_UnauthenticatedSupi;
@@ -415,6 +415,6 @@ class PduSessionCreateData {
   bool m_MaPduIndicationIsSet;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* PduSessionCreateData_H_ */

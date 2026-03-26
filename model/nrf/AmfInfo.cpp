@@ -17,13 +17,13 @@ namespace oai::model::nrf {
 using namespace oai::model::common;
 
 AmfInfo::AmfInfo() {
-  m_AmfSetId                  = "";
-  m_AmfRegionId               = "";
-  m_TaiListIsSet              = false;
-  m_TaiRangeListIsSet         = false;
+  m_AmfSetId = "";
+  m_AmfRegionId = "";
+  m_TaiListIsSet = false;
+  m_TaiRangeListIsSet = false;
   m_BackupInfoAmfFailureIsSet = false;
   m_BackupInfoAmfRemovalIsSet = false;
-  m_N2InterfaceAmfInfoIsSet   = false;
+  m_N2InterfaceAmfInfoIsSet = false;
 }
 
 AmfInfo::~AmfInfo() {}
@@ -32,12 +32,13 @@ void AmfInfo::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const AmfInfo& o) {
-  j                = nlohmann::json();
-  j["amfSetId"]    = o.m_AmfSetId;
+void to_json(nlohmann::json &j, const AmfInfo &o) {
+  j = nlohmann::json();
+  j["amfSetId"] = o.m_AmfSetId;
   j["amfRegionId"] = o.m_AmfRegionId;
-  j["guamiList"]   = o.m_GuamiList;
-  if (o.taiListIsSet() || !o.m_TaiList.empty()) j["taiList"] = o.m_TaiList;
+  j["guamiList"] = o.m_GuamiList;
+  if (o.taiListIsSet() || !o.m_TaiList.empty())
+    j["taiList"] = o.m_TaiList;
   if (o.taiRangeListIsSet() || !o.m_TaiRangeList.empty())
     j["taiRangeList"] = o.m_TaiRangeList;
   if (o.backupInfoAmfFailureIsSet() || !o.m_BackupInfoAmfFailure.empty())
@@ -48,7 +49,7 @@ void to_json(nlohmann::json& j, const AmfInfo& o) {
     j["n2InterfaceAmfInfo"] = o.m_N2InterfaceAmfInfo;
 }
 
-void from_json(const nlohmann::json& j, AmfInfo& o) {
+void from_json(const nlohmann::json &j, AmfInfo &o) {
   j.at("amfSetId").get_to(o.m_AmfSetId);
   j.at("amfRegionId").get_to(o.m_AmfRegionId);
   j.at("guamiList").get_to(o.m_GuamiList);
@@ -74,55 +75,35 @@ void from_json(const nlohmann::json& j, AmfInfo& o) {
   }
 }
 
-std::string AmfInfo::getAmfSetId() const {
-  return m_AmfSetId;
-}
-void AmfInfo::setAmfSetId(std::string const& value) {
-  m_AmfSetId = value;
-}
-std::string AmfInfo::getAmfRegionId() const {
-  return m_AmfRegionId;
-}
-void AmfInfo::setAmfRegionId(std::string const& value) {
+std::string AmfInfo::getAmfSetId() const { return m_AmfSetId; }
+void AmfInfo::setAmfSetId(std::string const &value) { m_AmfSetId = value; }
+std::string AmfInfo::getAmfRegionId() const { return m_AmfRegionId; }
+void AmfInfo::setAmfRegionId(std::string const &value) {
   m_AmfRegionId = value;
 }
-std::vector<Guami>& AmfInfo::getGuamiList() {
-  return m_GuamiList;
-}
-void AmfInfo::setGuamiList(std::vector<Guami> const& value) {
+std::vector<Guami> &AmfInfo::getGuamiList() { return m_GuamiList; }
+void AmfInfo::setGuamiList(std::vector<Guami> const &value) {
   m_GuamiList = value;
 }
-std::vector<Tai>& AmfInfo::getTaiList() {
-  return m_TaiList;
-}
-void AmfInfo::setTaiList(std::vector<Tai> const& value) {
-  m_TaiList      = value;
+std::vector<Tai> &AmfInfo::getTaiList() { return m_TaiList; }
+void AmfInfo::setTaiList(std::vector<Tai> const &value) {
+  m_TaiList = value;
   m_TaiListIsSet = true;
 }
-bool AmfInfo::taiListIsSet() const {
-  return m_TaiListIsSet;
-}
-void AmfInfo::unsetTaiList() {
-  m_TaiListIsSet = false;
-}
-std::vector<TaiRange>& AmfInfo::getTaiRangeList() {
-  return m_TaiRangeList;
-}
-void AmfInfo::setTaiRangeList(std::vector<TaiRange> const& value) {
-  m_TaiRangeList      = value;
+bool AmfInfo::taiListIsSet() const { return m_TaiListIsSet; }
+void AmfInfo::unsetTaiList() { m_TaiListIsSet = false; }
+std::vector<TaiRange> &AmfInfo::getTaiRangeList() { return m_TaiRangeList; }
+void AmfInfo::setTaiRangeList(std::vector<TaiRange> const &value) {
+  m_TaiRangeList = value;
   m_TaiRangeListIsSet = true;
 }
-bool AmfInfo::taiRangeListIsSet() const {
-  return m_TaiRangeListIsSet;
-}
-void AmfInfo::unsetTaiRangeList() {
-  m_TaiRangeListIsSet = false;
-}
-std::vector<Guami>& AmfInfo::getBackupInfoAmfFailure() {
+bool AmfInfo::taiRangeListIsSet() const { return m_TaiRangeListIsSet; }
+void AmfInfo::unsetTaiRangeList() { m_TaiRangeListIsSet = false; }
+std::vector<Guami> &AmfInfo::getBackupInfoAmfFailure() {
   return m_BackupInfoAmfFailure;
 }
-void AmfInfo::setBackupInfoAmfFailure(std::vector<Guami> const& value) {
-  m_BackupInfoAmfFailure      = value;
+void AmfInfo::setBackupInfoAmfFailure(std::vector<Guami> const &value) {
+  m_BackupInfoAmfFailure = value;
   m_BackupInfoAmfFailureIsSet = true;
 }
 bool AmfInfo::backupInfoAmfFailureIsSet() const {
@@ -131,11 +112,11 @@ bool AmfInfo::backupInfoAmfFailureIsSet() const {
 void AmfInfo::unsetBackupInfoAmfFailure() {
   m_BackupInfoAmfFailureIsSet = false;
 }
-std::vector<Guami>& AmfInfo::getBackupInfoAmfRemoval() {
+std::vector<Guami> &AmfInfo::getBackupInfoAmfRemoval() {
   return m_BackupInfoAmfRemoval;
 }
-void AmfInfo::setBackupInfoAmfRemoval(std::vector<Guami> const& value) {
-  m_BackupInfoAmfRemoval      = value;
+void AmfInfo::setBackupInfoAmfRemoval(std::vector<Guami> const &value) {
+  m_BackupInfoAmfRemoval = value;
   m_BackupInfoAmfRemovalIsSet = true;
 }
 bool AmfInfo::backupInfoAmfRemovalIsSet() const {
@@ -147,15 +128,13 @@ void AmfInfo::unsetBackupInfoAmfRemoval() {
 N2InterfaceAmfInfo AmfInfo::getN2InterfaceAmfInfo() const {
   return m_N2InterfaceAmfInfo;
 }
-void AmfInfo::setN2InterfaceAmfInfo(N2InterfaceAmfInfo const& value) {
-  m_N2InterfaceAmfInfo      = value;
+void AmfInfo::setN2InterfaceAmfInfo(N2InterfaceAmfInfo const &value) {
+  m_N2InterfaceAmfInfo = value;
   m_N2InterfaceAmfInfoIsSet = true;
 }
 bool AmfInfo::n2InterfaceAmfInfoIsSet() const {
   return m_N2InterfaceAmfInfoIsSet;
 }
-void AmfInfo::unsetN2InterfaceAmfInfo() {
-  m_N2InterfaceAmfInfoIsSet = false;
-}
+void AmfInfo::unsetN2InterfaceAmfInfo() { m_N2InterfaceAmfInfoIsSet = false; }
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

@@ -28,7 +28,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class CmState {
- public:
+public:
   CmState();
   virtual ~CmState() = default;
 
@@ -39,31 +39,31 @@ class CmState {
   void validate() const;
 
   void set_value(std::string value);
-  void get_value(std::string& value) const;
+  void get_value(std::string &value) const;
   std::string get_value() const;
 
   /// <summary>
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const CmState& rhs) const;
-  bool operator!=(const CmState& rhs) const;
+  bool operator==(const CmState &rhs) const;
+  bool operator!=(const CmState &rhs) const;
 
   /////////////////////////////////////////////
   /// CmState members
 
-  friend void to_json(nlohmann::json& j, const CmState& o);
-  friend void from_json(const nlohmann::json& j, CmState& o);
+  friend void to_json(nlohmann::json &j, const CmState &o);
+  friend void from_json(const nlohmann::json &j, CmState &o);
 
- protected:
+protected:
   std::string value;
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* CmState_H_ */

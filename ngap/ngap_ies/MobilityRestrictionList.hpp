@@ -14,18 +14,18 @@ extern "C" {
 namespace oai::ngap {
 
 class MobilityRestrictionList {
- public:
+public:
   MobilityRestrictionList();
   virtual ~MobilityRestrictionList();
 
-  void setPlmn(const PlmnId& plmn);
-  void getPlmn(PlmnId& plmn) const;
+  void setPlmn(const PlmnId &plmn);
+  void getPlmn(PlmnId &plmn) const;
 
-  bool encode(Ngap_MobilityRestrictionList_t& mobilityRestrictionList) const;
-  bool decode(const Ngap_MobilityRestrictionList_t& mobilityRestrictionList);
+  bool encode(Ngap_MobilityRestrictionList_t &mobilityRestrictionList) const;
+  bool decode(const Ngap_MobilityRestrictionList_t &mobilityRestrictionList);
 
- private:
-  PlmnId m_ServingPlmn;  // Mandatory
+private:
+  PlmnId m_ServingPlmn; // Mandatory
   // TODO: Equivalent PLMNs (optional)
   // TODO: RAT Restrictions (optional)
   // TODO: Forbidden Area Information (optional)
@@ -34,5 +34,5 @@ class MobilityRestrictionList {
   // TODO: Core Network Type Restriction for Serving PLMN (optional)
   // TODO: Core Network Type Restriction for Equivalent PLMNs (optional)
 };
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

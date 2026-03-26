@@ -15,9 +15,7 @@
 
 namespace oai::model::amf {
 
-ExpectedUeBehavior::ExpectedUeBehavior() {
-  m_ValidityTime = "";
-}
+ExpectedUeBehavior::ExpectedUeBehavior() { m_ValidityTime = ""; }
 
 ExpectedUeBehavior::~ExpectedUeBehavior() {}
 
@@ -25,26 +23,26 @@ void ExpectedUeBehavior::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const ExpectedUeBehavior& o) {
-  j                      = nlohmann::json();
+void to_json(nlohmann::json &j, const ExpectedUeBehavior &o) {
+  j = nlohmann::json();
   j["expMoveTrajectory"] = o.m_ExpMoveTrajectory;
-  j["validityTime"]      = o.m_ValidityTime;
+  j["validityTime"] = o.m_ValidityTime;
 }
 
-void from_json(const nlohmann::json& j, ExpectedUeBehavior& o) {
+void from_json(const nlohmann::json &j, ExpectedUeBehavior &o) {
   j.at("expMoveTrajectory").get_to(o.m_ExpMoveTrajectory);
   j.at("validityTime").get_to(o.m_ValidityTime);
 }
 
-std::vector<oai::model::common::UserLocation>&
+std::vector<oai::model::common::UserLocation> &
 ExpectedUeBehavior::getExpMoveTrajectory() {
   return m_ExpMoveTrajectory;
 }
 std::string ExpectedUeBehavior::getValidityTime() const {
   return m_ValidityTime;
 }
-void ExpectedUeBehavior::setValidityTime(std::string const& value) {
+void ExpectedUeBehavior::setValidityTime(std::string const &value) {
   m_ValidityTime = value;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

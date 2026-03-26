@@ -20,9 +20,9 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_TimeToWait {
-  Ngap_TimeToWait_v1s  = 0,
-  Ngap_TimeToWait_v2s  = 1,
-  Ngap_TimeToWait_v5s  = 2,
+  Ngap_TimeToWait_v1s = 0,
+  Ngap_TimeToWait_v2s = 1,
+  Ngap_TimeToWait_v5s = 2,
   Ngap_TimeToWait_v10s = 3,
   Ngap_TimeToWait_v20s = 4,
   Ngap_TimeToWait_v60s = 5

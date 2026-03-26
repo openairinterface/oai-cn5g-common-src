@@ -20,8 +20,8 @@
 #define AmfEventMode_H_
 
 #include "AmfEventTrigger.h"
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::amf {
 
@@ -29,7 +29,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class AmfEventMode {
- public:
+public:
   AmfEventMode();
   virtual ~AmfEventMode() = default;
 
@@ -43,10 +43,10 @@ class AmfEventMode {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const AmfEventMode& rhs) const;
-  bool operator!=(const AmfEventMode& rhs) const;
+  bool operator==(const AmfEventMode &rhs) const;
+  bool operator!=(const AmfEventMode &rhs) const;
 
   /////////////////////////////////////////////
   /// AmfEventMode members
@@ -55,7 +55,7 @@ class AmfEventMode {
   ///
   /// </summary>
   AmfEventTrigger getTrigger() const;
-  void setTrigger(AmfEventTrigger const& value);
+  void setTrigger(AmfEventTrigger const &value);
   /// <summary>
   ///
   /// </summary>
@@ -67,14 +67,14 @@ class AmfEventMode {
   ///
   /// </summary>
   std::string getExpiry() const;
-  void setExpiry(std::string const& value);
+  void setExpiry(std::string const &value);
   bool expiryIsSet() const;
   void unsetExpiry();
 
-  friend void to_json(nlohmann::json& j, const AmfEventMode& o);
-  friend void from_json(const nlohmann::json& j, AmfEventMode& o);
+  friend void to_json(nlohmann::json &j, const AmfEventMode &o);
+  friend void from_json(const nlohmann::json &j, AmfEventMode &o);
 
- protected:
+protected:
   AmfEventTrigger m_Trigger;
 
   int32_t m_MaxReports;
@@ -84,9 +84,9 @@ class AmfEventMode {
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* AmfEventMode_H_ */

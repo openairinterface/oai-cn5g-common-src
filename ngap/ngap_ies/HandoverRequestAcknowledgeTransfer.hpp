@@ -19,33 +19,33 @@ extern "C" {
 
 namespace oai::ngap {
 class HandoverRequestAcknowledgeTransfer {
- public:
+public:
   HandoverRequestAcknowledgeTransfer();
   virtual ~HandoverRequestAcknowledgeTransfer();
 
   // DL NG-U UP TNL Information
   void setDlNgUUpTnlInformation(
-      const UpTransportLayerInformation& dlNgUUpTnlInformation);
+      const UpTransportLayerInformation &dlNgUUpTnlInformation);
   void getDlNgUUpTnlInformation(
-      UpTransportLayerInformation& dlNgUUpTnlInformation) const;
+      UpTransportLayerInformation &dlNgUUpTnlInformation) const;
 
   // DL Forwarding UP TNL Information
   void setDlForwardingUpTnlInformation(
-      const UpTransportLayerInformation& dlForwardingUpTnlInformation);
+      const UpTransportLayerInformation &dlForwardingUpTnlInformation);
   void getDlForwardingUpTnlInformation(
-      std::optional<UpTransportLayerInformation>& dlForwardingUpTnlInformation)
+      std::optional<UpTransportLayerInformation> &dlForwardingUpTnlInformation)
       const;
-  bool getDlForwardingUpTnlInformation(GtpTunnel*& upTnlInfo);
+  bool getDlForwardingUpTnlInformation(GtpTunnel *&upTnlInfo);
 
   // TODO: Security Result
 
   // QoS Flow Setup Response List
   void setQosFlowSetupResponseList(
-      const std::vector<QosFlowItemWithDataForwarding>& list);
-  void setQosFlowSetupResponseList(const QosFlowListWithDataForwarding& list);
+      const std::vector<QosFlowItemWithDataForwarding> &list);
+  void setQosFlowSetupResponseList(const QosFlowListWithDataForwarding &list);
   void getQosFlowSetupResponseList(
-      std::vector<QosFlowItemWithDataForwarding>& list) const;
-  void getQosFlowSetupResponseList(QosFlowListWithDataForwarding& list) const;
+      std::vector<QosFlowItemWithDataForwarding> &list) const;
+  void getQosFlowSetupResponseList(QosFlowListWithDataForwarding &list) const;
 
   // TODO: QoS Flow Failed to Setup List
   // TODO: Data Forwarding Response DRB List
@@ -57,12 +57,12 @@ class HandoverRequestAcknowledgeTransfer {
   // TODO: Used RSN Information
   // TODO: Global RAN Node ID of Secondary NG-RAN Node
 
-  int encode(uint8_t* buf, int bufSize);
-  bool decode(uint8_t* buf, int bufSize);
+  int encode(uint8_t *buf, int bufSize);
+  bool decode(uint8_t *buf, int bufSize);
 
- private:
-  Ngap_HandoverRequestAcknowledgeTransfer_t*
-      m_HandoverRequestAcknowledegTransferIe;
+private:
+  Ngap_HandoverRequestAcknowledgeTransfer_t
+      *m_HandoverRequestAcknowledegTransferIe;
   // DL NG-U UP TNL Information (Mandatory)
   UpTransportLayerInformation m_DlNgUUpTnlInformation;
   // DL Forwarding UP TNL Information (Optional)
@@ -80,6 +80,6 @@ class HandoverRequestAcknowledgeTransfer {
   // TODO: Used RSN Information (Optional)
   // TODO: Global RAN Node ID of Secondary NG-RAN Node (Optional)
 };
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

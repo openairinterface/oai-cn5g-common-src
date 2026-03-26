@@ -27,7 +27,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class HorizontalVelocity {
- public:
+public:
   HorizontalVelocity();
   virtual ~HorizontalVelocity() = default;
 
@@ -41,16 +41,16 @@ class HorizontalVelocity {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const HorizontalVelocity& rhs) const;
-  bool operator!=(const HorizontalVelocity& rhs) const;
+  bool operator==(const HorizontalVelocity &rhs) const;
+  bool operator!=(const HorizontalVelocity &rhs) const;
 
   /////////////////////////////////////////////
   /// HorizontalVelocity members
@@ -66,15 +66,15 @@ class HorizontalVelocity {
   int32_t getBearing() const;
   void setBearing(int32_t const value);
 
-  friend void to_json(nlohmann::json& j, const HorizontalVelocity& o);
-  friend void from_json(const nlohmann::json& j, HorizontalVelocity& o);
+  friend void to_json(nlohmann::json &j, const HorizontalVelocity &o);
+  friend void from_json(const nlohmann::json &j, HorizontalVelocity &o);
 
- protected:
+protected:
   float m_HSpeed;
 
   int32_t m_Bearing;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* HorizontalVelocity_H_ */

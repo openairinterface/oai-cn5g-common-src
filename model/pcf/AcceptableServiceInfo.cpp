@@ -20,10 +20,10 @@ namespace oai::model::pcf {
 
 AcceptableServiceInfo::AcceptableServiceInfo() {
   m_AccBwMedCompsIsSet = false;
-  m_MarBwUl            = "";
-  m_MarBwUlIsSet       = false;
-  m_MarBwDl            = "";
-  m_MarBwDlIsSet       = false;
+  m_MarBwUl = "";
+  m_MarBwUlIsSet = false;
+  m_MarBwDl = "";
+  m_MarBwDlIsSet = false;
 }
 
 void AcceptableServiceInfo::validate() const {
@@ -33,36 +33,36 @@ void AcceptableServiceInfo::validate() const {
   }
 }
 
-bool AcceptableServiceInfo::validate(std::stringstream& msg) const {
+bool AcceptableServiceInfo::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AcceptableServiceInfo::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool AcceptableServiceInfo::validate(std::stringstream &msg,
+                                     const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AcceptableServiceInfo" : pathPrefix;
 
   if (accBwMedCompsIsSet()) {
-    const std::map<std::string, oai::model::pcf::MediaComponent>& value =
+    const std::map<std::string, oai::model::pcf::MediaComponent> &value =
         m_AccBwMedComps;
     const std::string currentValuePath = _pathPrefix + ".accBwMedComps";
   }
 
   if (marBwUlIsSet()) {
-    const std::string& value           = m_MarBwUl;
+    const std::string &value = m_MarBwUl;
     const std::string currentValuePath = _pathPrefix + ".marBwUl";
   }
 
   if (marBwDlIsSet()) {
-    const std::string& value           = m_MarBwDl;
+    const std::string &value = m_MarBwDl;
     const std::string currentValuePath = _pathPrefix + ".marBwDl";
   }
 
   return success;
 }
 
-bool AcceptableServiceInfo::operator==(const AcceptableServiceInfo& rhs) const {
+bool AcceptableServiceInfo::operator==(const AcceptableServiceInfo &rhs) const {
   return
 
       ((!accBwMedCompsIsSet() && !rhs.accBwMedCompsIsSet()) ||
@@ -80,19 +80,21 @@ bool AcceptableServiceInfo::operator==(const AcceptableServiceInfo& rhs) const {
           ;
 }
 
-bool AcceptableServiceInfo::operator!=(const AcceptableServiceInfo& rhs) const {
+bool AcceptableServiceInfo::operator!=(const AcceptableServiceInfo &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AcceptableServiceInfo& o) {
+void to_json(nlohmann::json &j, const AcceptableServiceInfo &o) {
   j = nlohmann::json::object();
   if (o.accBwMedCompsIsSet() || !o.m_AccBwMedComps.empty())
     j["accBwMedComps"] = o.m_AccBwMedComps;
-  if (o.marBwUlIsSet()) j["marBwUl"] = o.m_MarBwUl;
-  if (o.marBwDlIsSet()) j["marBwDl"] = o.m_MarBwDl;
+  if (o.marBwUlIsSet())
+    j["marBwUl"] = o.m_MarBwUl;
+  if (o.marBwDlIsSet())
+    j["marBwDl"] = o.m_MarBwDl;
 }
 
-void from_json(const nlohmann::json& j, AcceptableServiceInfo& o) {
+void from_json(const nlohmann::json &j, AcceptableServiceInfo &o) {
   if (j.find("accBwMedComps") != j.end()) {
     j.at("accBwMedComps").get_to(o.m_AccBwMedComps);
     o.m_AccBwMedCompsIsSet = true;
@@ -112,8 +114,8 @@ AcceptableServiceInfo::getAccBwMedComps() const {
   return m_AccBwMedComps;
 }
 void AcceptableServiceInfo::setAccBwMedComps(
-    std::map<std::string, oai::model::pcf::MediaComponent> const& value) {
-  m_AccBwMedComps      = value;
+    std::map<std::string, oai::model::pcf::MediaComponent> const &value) {
+  m_AccBwMedComps = value;
   m_AccBwMedCompsIsSet = true;
 }
 bool AcceptableServiceInfo::accBwMedCompsIsSet() const {
@@ -122,31 +124,19 @@ bool AcceptableServiceInfo::accBwMedCompsIsSet() const {
 void AcceptableServiceInfo::unsetAccBwMedComps() {
   m_AccBwMedCompsIsSet = false;
 }
-std::string AcceptableServiceInfo::getMarBwUl() const {
-  return m_MarBwUl;
-}
-void AcceptableServiceInfo::setMarBwUl(std::string const& value) {
-  m_MarBwUl      = value;
+std::string AcceptableServiceInfo::getMarBwUl() const { return m_MarBwUl; }
+void AcceptableServiceInfo::setMarBwUl(std::string const &value) {
+  m_MarBwUl = value;
   m_MarBwUlIsSet = true;
 }
-bool AcceptableServiceInfo::marBwUlIsSet() const {
-  return m_MarBwUlIsSet;
-}
-void AcceptableServiceInfo::unsetMarBwUl() {
-  m_MarBwUlIsSet = false;
-}
-std::string AcceptableServiceInfo::getMarBwDl() const {
-  return m_MarBwDl;
-}
-void AcceptableServiceInfo::setMarBwDl(std::string const& value) {
-  m_MarBwDl      = value;
+bool AcceptableServiceInfo::marBwUlIsSet() const { return m_MarBwUlIsSet; }
+void AcceptableServiceInfo::unsetMarBwUl() { m_MarBwUlIsSet = false; }
+std::string AcceptableServiceInfo::getMarBwDl() const { return m_MarBwDl; }
+void AcceptableServiceInfo::setMarBwDl(std::string const &value) {
+  m_MarBwDl = value;
   m_MarBwDlIsSet = true;
 }
-bool AcceptableServiceInfo::marBwDlIsSet() const {
-  return m_MarBwDlIsSet;
-}
-void AcceptableServiceInfo::unsetMarBwDl() {
-  m_MarBwDlIsSet = false;
-}
+bool AcceptableServiceInfo::marBwDlIsSet() const { return m_MarBwDlIsSet; }
+void AcceptableServiceInfo::unsetMarBwDl() { m_MarBwDlIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

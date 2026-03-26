@@ -27,12 +27,12 @@ void UplinkDownlinkSupport::validate() const {
   }
 }
 
-bool UplinkDownlinkSupport::validate(std::stringstream& msg) const {
+bool UplinkDownlinkSupport::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool UplinkDownlinkSupport::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool UplinkDownlinkSupport::validate(std::stringstream &msg,
+                                     const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "UplinkDownlinkSupport" : pathPrefix;
@@ -40,18 +40,18 @@ bool UplinkDownlinkSupport::validate(
   return success;
 }
 
-bool UplinkDownlinkSupport::operator==(const UplinkDownlinkSupport& rhs) const {
-  return true;  // TODO
+bool UplinkDownlinkSupport::operator==(const UplinkDownlinkSupport &rhs) const {
+  return true; // TODO
 }
 
-bool UplinkDownlinkSupport::operator!=(const UplinkDownlinkSupport& rhs) const {
+bool UplinkDownlinkSupport::operator!=(const UplinkDownlinkSupport &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const UplinkDownlinkSupport& o) {
+void to_json(nlohmann::json &j, const UplinkDownlinkSupport &o) {
   j = nlohmann::json::object();
 }
 
-void from_json(const nlohmann::json& j, UplinkDownlinkSupport& o) {}
+void from_json(const nlohmann::json &j, UplinkDownlinkSupport &o) {}
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

@@ -18,9 +18,7 @@
 
 namespace oai::model::pcf {
 
-AppDetectionReport::AppDetectionReport() {
-  m_AfAppId = "";
-}
+AppDetectionReport::AppDetectionReport() { m_AfAppId = ""; }
 
 void AppDetectionReport::validate() const {
   std::stringstream msg;
@@ -29,12 +27,12 @@ void AppDetectionReport::validate() const {
   }
 }
 
-bool AppDetectionReport::validate(std::stringstream& msg) const {
+bool AppDetectionReport::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AppDetectionReport::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool AppDetectionReport::validate(std::stringstream &msg,
+                                  const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AppDetectionReport" : pathPrefix;
@@ -46,7 +44,7 @@ bool AppDetectionReport::validate(
   return success;
 }
 
-bool AppDetectionReport::operator==(const AppDetectionReport& rhs) const {
+bool AppDetectionReport::operator==(const AppDetectionReport &rhs) const {
   return
 
       (getAdNotifType() == rhs.getAdNotifType()) &&
@@ -56,34 +54,32 @@ bool AppDetectionReport::operator==(const AppDetectionReport& rhs) const {
           ;
 }
 
-bool AppDetectionReport::operator!=(const AppDetectionReport& rhs) const {
+bool AppDetectionReport::operator!=(const AppDetectionReport &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AppDetectionReport& o) {
-  j                = nlohmann::json::object();
+void to_json(nlohmann::json &j, const AppDetectionReport &o) {
+  j = nlohmann::json::object();
   j["adNotifType"] = o.m_AdNotifType;
-  j["afAppId"]     = o.m_AfAppId;
+  j["afAppId"] = o.m_AfAppId;
 }
 
-void from_json(const nlohmann::json& j, AppDetectionReport& o) {
+void from_json(const nlohmann::json &j, AppDetectionReport &o) {
   j.at("adNotifType").get_to(o.m_AdNotifType);
   j.at("afAppId").get_to(o.m_AfAppId);
 }
 
-oai::model::pcf::AppDetectionNotifType AppDetectionReport::getAdNotifType()
-    const {
+oai::model::pcf::AppDetectionNotifType
+AppDetectionReport::getAdNotifType() const {
   return m_AdNotifType;
 }
 void AppDetectionReport::setAdNotifType(
-    oai::model::pcf::AppDetectionNotifType const& value) {
+    oai::model::pcf::AppDetectionNotifType const &value) {
   m_AdNotifType = value;
 }
-std::string AppDetectionReport::getAfAppId() const {
-  return m_AfAppId;
-}
-void AppDetectionReport::setAfAppId(std::string const& value) {
+std::string AppDetectionReport::getAfAppId() const { return m_AfAppId; }
+void AppDetectionReport::setAfAppId(std::string const &value) {
   m_AfAppId = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

@@ -19,9 +19,9 @@
 namespace oai::model::pcf {
 
 PartialSuccessReport::PartialSuccessReport() {
-  m_RuleReportsIsSet             = false;
-  m_SessRuleReportsIsSet         = false;
-  m_UeCampingRepIsSet            = false;
+  m_RuleReportsIsSet = false;
+  m_SessRuleReportsIsSet = false;
+  m_UeCampingRepIsSet = false;
   m_PolicyDecFailureReportsIsSet = false;
 }
 
@@ -32,28 +32,28 @@ void PartialSuccessReport::validate() const {
   }
 }
 
-bool PartialSuccessReport::validate(std::stringstream& msg) const {
+bool PartialSuccessReport::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool PartialSuccessReport::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool PartialSuccessReport::validate(std::stringstream &msg,
+                                    const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PartialSuccessReport" : pathPrefix;
 
   if (ruleReportsIsSet()) {
-    const std::vector<oai::model::pcf::RuleReport>& value = m_RuleReports;
+    const std::vector<oai::model::pcf::RuleReport> &value = m_RuleReports;
     const std::string currentValuePath = _pathPrefix + ".ruleReports";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::RuleReport& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::RuleReport &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -66,7 +66,7 @@ bool PartialSuccessReport::validate(
   }
 
   if (sessRuleReportsIsSet()) {
-    const std::vector<oai::model::pcf::SessionRuleReport>& value =
+    const std::vector<oai::model::pcf::SessionRuleReport> &value =
         m_SessRuleReports;
     const std::string currentValuePath = _pathPrefix + ".sessRuleReports";
 
@@ -74,10 +74,10 @@ bool PartialSuccessReport::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::SessionRuleReport& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::SessionRuleReport &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -90,7 +90,7 @@ bool PartialSuccessReport::validate(
   }
 
   if (policyDecFailureReportsIsSet()) {
-    const std::vector<oai::model::pcf::PolicyDecisionFailureCode>& value =
+    const std::vector<oai::model::pcf::PolicyDecisionFailureCode> &value =
         m_PolicyDecFailureReports;
     const std::string currentValuePath =
         _pathPrefix + ".policyDecFailureReports";
@@ -99,15 +99,15 @@ bool PartialSuccessReport::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::PolicyDecisionFailureCode& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::PolicyDecisionFailureCode &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
-        success = value.validate(
-                      msg, currentValuePath + ".policyDecFailureReports") &&
+        success = value.validate(msg, currentValuePath +
+                                          ".policyDecFailureReports") &&
                   success;
 
         i++;
@@ -118,7 +118,7 @@ bool PartialSuccessReport::validate(
   return success;
 }
 
-bool PartialSuccessReport::operator==(const PartialSuccessReport& rhs) const {
+bool PartialSuccessReport::operator==(const PartialSuccessReport &rhs) const {
   return
 
       (getFailureCause() == rhs.getFailureCause()) &&
@@ -143,23 +143,24 @@ bool PartialSuccessReport::operator==(const PartialSuccessReport& rhs) const {
           ;
 }
 
-bool PartialSuccessReport::operator!=(const PartialSuccessReport& rhs) const {
+bool PartialSuccessReport::operator!=(const PartialSuccessReport &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PartialSuccessReport& o) {
-  j                 = nlohmann::json();
+void to_json(nlohmann::json &j, const PartialSuccessReport &o) {
+  j = nlohmann::json();
   j["failureCause"] = o.m_FailureCause;
   if (o.ruleReportsIsSet() || !o.m_RuleReports.empty())
     j["ruleReports"] = o.m_RuleReports;
   if (o.sessRuleReportsIsSet() || !o.m_SessRuleReports.empty())
     j["sessRuleReports"] = o.m_SessRuleReports;
-  if (o.ueCampingRepIsSet()) j["ueCampingRep"] = o.m_UeCampingRep;
+  if (o.ueCampingRepIsSet())
+    j["ueCampingRep"] = o.m_UeCampingRep;
   if (o.policyDecFailureReportsIsSet() || !o.m_PolicyDecFailureReports.empty())
     j["policyDecFailureReports"] = o.m_PolicyDecFailureReports;
 }
 
-void from_json(const nlohmann::json& j, PartialSuccessReport& o) {
+void from_json(const nlohmann::json &j, PartialSuccessReport &o) {
   j.at("failureCause").get_to(o.m_FailureCause);
   if (j.find("ruleReports") != j.end()) {
     j.at("ruleReports").get_to(o.m_RuleReports);
@@ -183,31 +184,29 @@ oai::model::pcf::FailureCause PartialSuccessReport::getFailureCause() const {
   return m_FailureCause;
 }
 void PartialSuccessReport::setFailureCause(
-    oai::model::pcf::FailureCause const& value) {
+    oai::model::pcf::FailureCause const &value) {
   m_FailureCause = value;
 }
-std::vector<oai::model::pcf::RuleReport> PartialSuccessReport::getRuleReports()
-    const {
+std::vector<oai::model::pcf::RuleReport>
+PartialSuccessReport::getRuleReports() const {
   return m_RuleReports;
 }
 void PartialSuccessReport::setRuleReports(
-    std::vector<oai::model::pcf::RuleReport> const& value) {
-  m_RuleReports      = value;
+    std::vector<oai::model::pcf::RuleReport> const &value) {
+  m_RuleReports = value;
   m_RuleReportsIsSet = true;
 }
 bool PartialSuccessReport::ruleReportsIsSet() const {
   return m_RuleReportsIsSet;
 }
-void PartialSuccessReport::unsetRuleReports() {
-  m_RuleReportsIsSet = false;
-}
+void PartialSuccessReport::unsetRuleReports() { m_RuleReportsIsSet = false; }
 std::vector<oai::model::pcf::SessionRuleReport>
 PartialSuccessReport::getSessRuleReports() const {
   return m_SessRuleReports;
 }
 void PartialSuccessReport::setSessRuleReports(
-    std::vector<oai::model::pcf::SessionRuleReport> const& value) {
-  m_SessRuleReports      = value;
+    std::vector<oai::model::pcf::SessionRuleReport> const &value) {
+  m_SessRuleReports = value;
   m_SessRuleReportsIsSet = true;
 }
 bool PartialSuccessReport::sessRuleReportsIsSet() const {
@@ -220,23 +219,21 @@ oai::model::pcf::UeCampingRep PartialSuccessReport::getUeCampingRep() const {
   return m_UeCampingRep;
 }
 void PartialSuccessReport::setUeCampingRep(
-    oai::model::pcf::UeCampingRep const& value) {
-  m_UeCampingRep      = value;
+    oai::model::pcf::UeCampingRep const &value) {
+  m_UeCampingRep = value;
   m_UeCampingRepIsSet = true;
 }
 bool PartialSuccessReport::ueCampingRepIsSet() const {
   return m_UeCampingRepIsSet;
 }
-void PartialSuccessReport::unsetUeCampingRep() {
-  m_UeCampingRepIsSet = false;
-}
+void PartialSuccessReport::unsetUeCampingRep() { m_UeCampingRepIsSet = false; }
 std::vector<oai::model::pcf::PolicyDecisionFailureCode>
 PartialSuccessReport::getPolicyDecFailureReports() const {
   return m_PolicyDecFailureReports;
 }
 void PartialSuccessReport::setPolicyDecFailureReports(
-    std::vector<oai::model::pcf::PolicyDecisionFailureCode> const& value) {
-  m_PolicyDecFailureReports      = value;
+    std::vector<oai::model::pcf::PolicyDecisionFailureCode> const &value) {
+  m_PolicyDecFailureReports = value;
   m_PolicyDecFailureReportsIsSet = true;
 }
 bool PartialSuccessReport::policyDecFailureReportsIsSet() const {
@@ -246,4 +243,4 @@ void PartialSuccessReport::unsetPolicyDecFailureReports() {
   m_PolicyDecFailureReportsIsSet = false;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

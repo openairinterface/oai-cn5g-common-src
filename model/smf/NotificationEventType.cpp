@@ -27,12 +27,12 @@ void NotificationEventType::validate() const {
   }
 }
 
-bool NotificationEventType::validate(std::stringstream& msg) const {
+bool NotificationEventType::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool NotificationEventType::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool NotificationEventType::validate(std::stringstream &msg,
+                                     const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "NotificationEventType" : pathPrefix;
@@ -43,22 +43,22 @@ bool NotificationEventType::validate(
   return success;
 }
 
-bool NotificationEventType::operator==(const NotificationEventType& rhs) const {
+bool NotificationEventType::operator==(const NotificationEventType &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool NotificationEventType::operator!=(const NotificationEventType& rhs) const {
+bool NotificationEventType::operator!=(const NotificationEventType &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const NotificationEventType& o) {
+void to_json(nlohmann::json &j, const NotificationEventType &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, NotificationEventType& o) {
+void from_json(const nlohmann::json &j, NotificationEventType &o) {
   from_json(j, o.m_value);
 }
 
@@ -80,4 +80,4 @@ void NotificationEventType::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

@@ -10,9 +10,8 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 AuthenticationReject::AuthenticationReject()
-    : ie_header_(
-          k5gsMobilityManagementMessages, kPlain5gsMessage,
-          kAuthenticationReject) {
+    : ie_header_(k5gsMobilityManagementMessages, kPlain5gsMessage,
+                 kAuthenticationReject) {
   ie_eap_message_ = std::nullopt;
 }
 
@@ -35,18 +34,19 @@ void AuthenticationReject::SetHeader(uint8_t security_header_type) {
 }
 
 //------------------------------------------------------------------------------
-void AuthenticationReject::SetEapMessage(const bstring& eap) {
+void AuthenticationReject::SetEapMessage(const bstring &eap) {
   ie_eap_message_ = std::make_optional<EapMessage>(kIeiEapMessage, eap);
 }
 
 //------------------------------------------------------------------------------
-int AuthenticationReject::Encode(uint8_t* buf, int len) {
+int AuthenticationReject::Encode(uint8_t *buf, int len) {
   oai::logger::logger_common::nas().debug(
       "Encoding AuthenticationReject message");
 
-  if (!Validate(len)) return KEncodeDecodeError;
+  if (!Validate(len))
+    return KEncodeDecodeError;
 
-  int encoded_size    = 0;
+  int encoded_size = 0;
   int encoded_ie_size = 0;
 
   // Header
@@ -68,11 +68,11 @@ int AuthenticationReject::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int AuthenticationReject::Decode(uint8_t* buf, int len) {
+int AuthenticationReject::Decode(uint8_t *buf, int len) {
   oai::logger::logger_common::nas().debug(
       "Decoding AuthenticationReject message");
 
-  int decoded_size    = 0;
+  int decoded_size = 0;
   int decoded_ie_size = 0;
   // Header
   decoded_ie_size = ie_header_.Decode(buf, len);
@@ -88,22 +88,22 @@ int AuthenticationReject::Decode(uint8_t* buf, int len) {
   while ((octet != 0x0)) {
     oai::logger::logger_common::nas().debug("Decoding IEI (0x%x)", octet);
     switch (octet) {
-      case kIeiEapMessage: {
-        if ((decoded_ie_size = NasHelper::Decode(
-                 ie_eap_message_, buf, len, decoded_size, true)) ==
-            KEncodeDecodeError) {
-          return KEncodeDecodeError;
-        }
-        DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
-      } break;
+    case kIeiEapMessage: {
+      if ((decoded_ie_size = NasHelper::Decode(ie_eap_message_, buf, len,
+                                               decoded_size, true)) ==
+          KEncodeDecodeError) {
+        return KEncodeDecodeError;
+      }
+      DECODE_U8_VALUE(buf, octet, decoded_size, len);
+      oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
+    } break;
 
-      default: {
-        oai::logger::logger_common::nas().warn(
-            "Unknown IEI 0x%x, stop decoding...", octet);
-        // Stop decoding
-        octet = 0x00;
-      } break;
+    default: {
+      oai::logger::logger_common::nas().warn(
+          "Unknown IEI 0x%x, stop decoding...", octet);
+      // Stop decoding
+      octet = 0x00;
+    } break;
     }
   }
 

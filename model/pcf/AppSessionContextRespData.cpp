@@ -19,11 +19,11 @@
 namespace oai::model::pcf {
 
 AppSessionContextRespData::AppSessionContextRespData() {
-  m_ServAuthInfoIsSet       = false;
+  m_ServAuthInfoIsSet = false;
   m_DirectNotifReportsIsSet = false;
-  m_UeIdsIsSet              = false;
-  m_SuppFeat                = "";
-  m_SuppFeatIsSet           = false;
+  m_UeIdsIsSet = false;
+  m_SuppFeat = "";
+  m_SuppFeatIsSet = false;
 }
 
 void AppSessionContextRespData::validate() const {
@@ -33,18 +33,18 @@ void AppSessionContextRespData::validate() const {
   }
 }
 
-bool AppSessionContextRespData::validate(std::stringstream& msg) const {
+bool AppSessionContextRespData::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AppSessionContextRespData::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool AppSessionContextRespData::validate(std::stringstream &msg,
+                                         const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AppSessionContextRespData" : pathPrefix;
 
   if (directNotifReportsIsSet()) {
-    const std::vector<oai::model::pcf::DirectNotificationReport>& value =
+    const std::vector<oai::model::pcf::DirectNotificationReport> &value =
         m_DirectNotifReports;
     const std::string currentValuePath = _pathPrefix + ".directNotifReports";
 
@@ -52,10 +52,10 @@ bool AppSessionContextRespData::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::DirectNotificationReport& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::DirectNotificationReport &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -69,17 +69,17 @@ bool AppSessionContextRespData::validate(
   }
 
   if (ueIdsIsSet()) {
-    const std::vector<oai::model::pcf::UeIdentityInfo>& value = m_UeIds;
+    const std::vector<oai::model::pcf::UeIdentityInfo> &value = m_UeIds;
     const std::string currentValuePath = _pathPrefix + ".ueIds";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::UeIdentityInfo& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::UeIdentityInfo &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -91,7 +91,7 @@ bool AppSessionContextRespData::validate(
   }
 
   if (suppFeatIsSet()) {
-    const std::string& value           = m_SuppFeat;
+    const std::string &value = m_SuppFeat;
     const std::string currentValuePath = _pathPrefix + ".suppFeat";
   }
 
@@ -99,7 +99,7 @@ bool AppSessionContextRespData::validate(
 }
 
 bool AppSessionContextRespData::operator==(
-    const AppSessionContextRespData& rhs) const {
+    const AppSessionContextRespData &rhs) const {
   return
 
       ((!servAuthInfoIsSet() && !rhs.servAuthInfoIsSet()) ||
@@ -121,20 +121,23 @@ bool AppSessionContextRespData::operator==(
 }
 
 bool AppSessionContextRespData::operator!=(
-    const AppSessionContextRespData& rhs) const {
+    const AppSessionContextRespData &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AppSessionContextRespData& o) {
+void to_json(nlohmann::json &j, const AppSessionContextRespData &o) {
   j = nlohmann::json::object();
-  if (o.servAuthInfoIsSet()) j["servAuthInfo"] = o.m_ServAuthInfo;
+  if (o.servAuthInfoIsSet())
+    j["servAuthInfo"] = o.m_ServAuthInfo;
   if (o.directNotifReportsIsSet() || !o.m_DirectNotifReports.empty())
     j["directNotifReports"] = o.m_DirectNotifReports;
-  if (o.ueIdsIsSet() || !o.m_UeIds.empty()) j["ueIds"] = o.m_UeIds;
-  if (o.suppFeatIsSet()) j["suppFeat"] = o.m_SuppFeat;
+  if (o.ueIdsIsSet() || !o.m_UeIds.empty())
+    j["ueIds"] = o.m_UeIds;
+  if (o.suppFeatIsSet())
+    j["suppFeat"] = o.m_SuppFeat;
 }
 
-void from_json(const nlohmann::json& j, AppSessionContextRespData& o) {
+void from_json(const nlohmann::json &j, AppSessionContextRespData &o) {
   if (j.find("servAuthInfo") != j.end()) {
     j.at("servAuthInfo").get_to(o.m_ServAuthInfo);
     o.m_ServAuthInfoIsSet = true;
@@ -153,13 +156,13 @@ void from_json(const nlohmann::json& j, AppSessionContextRespData& o) {
   }
 }
 
-oai::model::pcf::ServAuthInfo AppSessionContextRespData::getServAuthInfo()
-    const {
+oai::model::pcf::ServAuthInfo
+AppSessionContextRespData::getServAuthInfo() const {
   return m_ServAuthInfo;
 }
 void AppSessionContextRespData::setServAuthInfo(
-    oai::model::pcf::ServAuthInfo const& value) {
-  m_ServAuthInfo      = value;
+    oai::model::pcf::ServAuthInfo const &value) {
+  m_ServAuthInfo = value;
   m_ServAuthInfoIsSet = true;
 }
 bool AppSessionContextRespData::servAuthInfoIsSet() const {
@@ -173,8 +176,8 @@ AppSessionContextRespData::getDirectNotifReports() const {
   return m_DirectNotifReports;
 }
 void AppSessionContextRespData::setDirectNotifReports(
-    std::vector<oai::model::pcf::DirectNotificationReport> const& value) {
-  m_DirectNotifReports      = value;
+    std::vector<oai::model::pcf::DirectNotificationReport> const &value) {
+  m_DirectNotifReports = value;
   m_DirectNotifReportsIsSet = true;
 }
 bool AppSessionContextRespData::directNotifReportsIsSet() const {
@@ -188,28 +191,22 @@ AppSessionContextRespData::getUeIds() const {
   return m_UeIds;
 }
 void AppSessionContextRespData::setUeIds(
-    std::vector<oai::model::pcf::UeIdentityInfo> const& value) {
-  m_UeIds      = value;
+    std::vector<oai::model::pcf::UeIdentityInfo> const &value) {
+  m_UeIds = value;
   m_UeIdsIsSet = true;
 }
-bool AppSessionContextRespData::ueIdsIsSet() const {
-  return m_UeIdsIsSet;
-}
-void AppSessionContextRespData::unsetUeIds() {
-  m_UeIdsIsSet = false;
-}
+bool AppSessionContextRespData::ueIdsIsSet() const { return m_UeIdsIsSet; }
+void AppSessionContextRespData::unsetUeIds() { m_UeIdsIsSet = false; }
 std::string AppSessionContextRespData::getSuppFeat() const {
   return m_SuppFeat;
 }
-void AppSessionContextRespData::setSuppFeat(std::string const& value) {
-  m_SuppFeat      = value;
+void AppSessionContextRespData::setSuppFeat(std::string const &value) {
+  m_SuppFeat = value;
   m_SuppFeatIsSet = true;
 }
 bool AppSessionContextRespData::suppFeatIsSet() const {
   return m_SuppFeatIsSet;
 }
-void AppSessionContextRespData::unsetSuppFeat() {
-  m_SuppFeatIsSet = false;
-}
+void AppSessionContextRespData::unsetSuppFeat() { m_SuppFeatIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

@@ -13,35 +13,35 @@ namespace oai::ngap {
 //------------------------------------------------------------------------------
 PduSessionResourceModifyResponseTransfer::
     PduSessionResourceModifyResponseTransfer() {
-  m_Ie = (Ngap_PDUSessionResourceModifyResponseTransfer_t*) calloc(
+  m_Ie = (Ngap_PDUSessionResourceModifyResponseTransfer_t *)calloc(
       1, sizeof(Ngap_PDUSessionResourceModifyResponseTransfer_t));
-  m_DlNgUUpTnlInformation          = std::nullopt;
-  m_UlNgUUpTnlInformation          = std::nullopt;
+  m_DlNgUUpTnlInformation = std::nullopt;
+  m_UlNgUUpTnlInformation = std::nullopt;
   m_QosFlowAddOrModifyResponseList = std::nullopt;
   m_QosFlowFailedToAddOrModifyList = std::nullopt;
 }
 
 //------------------------------------------------------------------------------
 void PduSessionResourceModifyResponseTransfer::setDlNgUUpTnlInformation(
-    const UpTransportLayerInformation& dlNgUUpTnlInformation) {
+    const UpTransportLayerInformation &dlNgUUpTnlInformation) {
   m_DlNgUUpTnlInformation =
       std::make_optional<UpTransportLayerInformation>(dlNgUUpTnlInformation);
 }
 //------------------------------------------------------------------------------
 void PduSessionResourceModifyResponseTransfer::getDlNgUUpTnlInformation(
-    std::optional<UpTransportLayerInformation>& dlNgUUpTnlInformation) const {
+    std::optional<UpTransportLayerInformation> &dlNgUUpTnlInformation) const {
   dlNgUUpTnlInformation = m_DlNgUUpTnlInformation;
 }
 
 //------------------------------------------------------------------------------
 void PduSessionResourceModifyResponseTransfer::setUlNgUUpTnlInformation(
-    const UpTransportLayerInformation& ulNgUUpTnlInformation) {
+    const UpTransportLayerInformation &ulNgUUpTnlInformation) {
   m_UlNgUUpTnlInformation =
       std::make_optional<UpTransportLayerInformation>(ulNgUUpTnlInformation);
 }
 //------------------------------------------------------------------------------
 void PduSessionResourceModifyResponseTransfer::getUlNgUUpTnlInformation(
-    std::optional<UpTransportLayerInformation>& ulNgUUpTnlInformation) const {
+    std::optional<UpTransportLayerInformation> &ulNgUUpTnlInformation) const {
   ulNgUUpTnlInformation = m_UlNgUUpTnlInformation;
 }
 
@@ -59,33 +59,33 @@ void PduSessionResourceModifyResponseTransfer::
 //------------------------------------------------------------------------------
 void PduSessionResourceModifyResponseTransfer::
     setQosFlowAddOrModifyResponseList(
-        const QosFlowAddOrModifyResponseList& list) {
+        const QosFlowAddOrModifyResponseList &list) {
   m_QosFlowAddOrModifyResponseList =
       std::make_optional<QosFlowAddOrModifyResponseList>(list);
 }
 //------------------------------------------------------------------------------
 void PduSessionResourceModifyResponseTransfer::getQosFlowAddOrModifyRequestList(
-    std::optional<QosFlowAddOrModifyResponseList>& list) const {
+    std::optional<QosFlowAddOrModifyResponseList> &list) const {
   list = m_QosFlowAddOrModifyResponseList;
 }
 
 //------------------------------------------------------------------------------
 void PduSessionResourceModifyResponseTransfer::
     setQosFlowFailedToAddOrModifyList(
-        const QosFlowListWithCause& qosFlowFailedToAddOrModifyList) {
+        const QosFlowListWithCause &qosFlowFailedToAddOrModifyList) {
   m_QosFlowFailedToAddOrModifyList = qosFlowFailedToAddOrModifyList;
 }
 //------------------------------------------------------------------------------
 void PduSessionResourceModifyResponseTransfer::
     getQosFlowFailedToAddOrModifyList(
-        std::optional<QosFlowListWithCause>& qosFlowFailedToAddOrModifyList)
+        std::optional<QosFlowListWithCause> &qosFlowFailedToAddOrModifyList)
         const {
   qosFlowFailedToAddOrModifyList = m_QosFlowFailedToAddOrModifyList;
 }
 
 //------------------------------------------------------------------------------
-int PduSessionResourceModifyResponseTransfer::encode(
-    uint8_t* buf, int bufSize) {
+int PduSessionResourceModifyResponseTransfer::encode(uint8_t *buf,
+                                                     int bufSize) {
   ngap_utils::print_asn_msg(
       &asn_DEF_Ngap_PDUSessionResourceModifyResponseTransfer, m_Ie);
   asn_enc_rval_t er = aper_encode_to_buffer(
@@ -97,12 +97,12 @@ int PduSessionResourceModifyResponseTransfer::encode(
 }
 
 //------------------------------------------------------------------------------
-bool PduSessionResourceModifyResponseTransfer::decode(
-    uint8_t* buf, int bufSize) {
-  asn_dec_rval_t rc = asn_decode(
-      NULL, ATS_ALIGNED_CANONICAL_PER,
-      &asn_DEF_Ngap_PDUSessionResourceModifyResponseTransfer, (void**) &m_Ie,
-      buf, bufSize);
+bool PduSessionResourceModifyResponseTransfer::decode(uint8_t *buf,
+                                                      int bufSize) {
+  asn_dec_rval_t rc =
+      asn_decode(NULL, ATS_ALIGNED_CANONICAL_PER,
+                 &asn_DEF_Ngap_PDUSessionResourceModifyResponseTransfer,
+                 (void **)&m_Ie, buf, bufSize);
   if (rc.code == RC_OK) {
     oai::logger::logger_common::ngap().debug("Decoded successfully");
   } else if (rc.code == RC_WMORE) {
@@ -171,4 +171,4 @@ bool PduSessionResourceModifyResponseTransfer::decode(
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

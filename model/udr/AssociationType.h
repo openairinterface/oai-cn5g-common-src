@@ -30,7 +30,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class AssociationType {
- public:
+public:
   AssociationType();
   virtual ~AssociationType();
 
@@ -39,12 +39,12 @@ class AssociationType {
   /////////////////////////////////////////////
   /// AssociationType members
 
-  friend void to_json(nlohmann::json& j, const AssociationType& o);
-  friend void from_json(const nlohmann::json& j, AssociationType& o);
+  friend void to_json(nlohmann::json &j, const AssociationType &o);
+  friend void from_json(const nlohmann::json &j, AssociationType &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* AssociationType_H_ */

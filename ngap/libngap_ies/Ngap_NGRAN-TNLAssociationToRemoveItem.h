@@ -26,9 +26,9 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_NGRAN-TNLAssociationToRemoveItem */
 typedef struct Ngap_NGRAN_TNLAssociationToRemoveItem {
   Ngap_CPTransportLayerInformation_t tNLAssociationTransportLayerAddress;
-  struct Ngap_CPTransportLayerInformation*
-      tNLAssociationTransportLayerAddressAMF;            /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_CPTransportLayerInformation
+      *tNLAssociationTransportLayerAddressAMF;           /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
 
   /* Context for parsing across buffer boundaries */
   asn_struct_ctx_t _asn_ctx;

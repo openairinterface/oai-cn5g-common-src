@@ -16,34 +16,34 @@ extern "C" {
 namespace oai::ngap {
 
 class PduSessionResourceSetupResponseMsg : public NgapUeMessage {
- public:
+public:
   PduSessionResourceSetupResponseMsg();
   virtual ~PduSessionResourceSetupResponseMsg();
 
   void initialize();
 
-  void setAmfUeNgapId(const uint64_t& id) override;
-  void setRanUeNgapId(const uint32_t& id) override;
-  bool decode(Ngap_NGAP_PDU_t* ngapMsgPdu) override;
+  void setAmfUeNgapId(const uint64_t &id) override;
+  void setRanUeNgapId(const uint32_t &id) override;
+  bool decode(Ngap_NGAP_PDU_t *ngapMsgPdu) override;
 
   void setPduSessionResourceSetupResponseList(
-      const std::vector<PDUSessionResourceSetupResponseItem_t>& list);
+      const std::vector<PDUSessionResourceSetupResponseItem_t> &list);
   bool getPduSessionResourceSetupResponseList(
-      std::vector<PDUSessionResourceSetupResponseItem_t>& list) const;
+      std::vector<PDUSessionResourceSetupResponseItem_t> &list) const;
 
   void setPduSessionResourceFailedToSetupList(
-      const std::vector<PDUSessionResourceFailedToSetupItem_t>& list);
+      const std::vector<PDUSessionResourceFailedToSetupItem_t> &list);
   bool getPduSessionResourceFailedToSetupList(
-      std::vector<PDUSessionResourceFailedToSetupItem_t>& list) const;
+      std::vector<PDUSessionResourceFailedToSetupItem_t> &list) const;
 
- private:
-  Ngap_PDUSessionResourceSetupResponse_t* m_PduSessionResourceSetupResponseIes;
+private:
+  Ngap_PDUSessionResourceSetupResponse_t *m_PduSessionResourceSetupResponseIes;
   std::optional<PduSessionResourceSetupListSURes>
-      m_PduSessionResourceSetupResponseList;  // Optional
+      m_PduSessionResourceSetupResponseList; // Optional
   std::optional<PduSessionResourceFailedToSetupListSURes>
-      m_PduSessionResourceFailedToSetupResponseList;  // Optional
+      m_PduSessionResourceFailedToSetupResponseList; // Optional
   // TODO: Criticality Diagnostics (Optional)
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

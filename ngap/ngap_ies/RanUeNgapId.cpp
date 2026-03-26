@@ -7,9 +7,7 @@
 namespace oai::ngap {
 
 //------------------------------------------------------------------------------
-RanUeNgapId::RanUeNgapId() {
-  m_Id = 0;
-}
+RanUeNgapId::RanUeNgapId() { m_Id = 0; }
 
 //------------------------------------------------------------------------------
 RanUeNgapId::RanUeNgapId(uint32_t id) : m_Id(id) {}
@@ -18,24 +16,20 @@ RanUeNgapId::RanUeNgapId(uint32_t id) : m_Id(id) {}
 RanUeNgapId::~RanUeNgapId() {}
 
 //------------------------------------------------------------------------------
-void RanUeNgapId::set(const uint32_t& id) {
-  m_Id = id;
-}
+void RanUeNgapId::set(const uint32_t &id) { m_Id = id; }
 
 //------------------------------------------------------------------------------
-uint32_t RanUeNgapId::get() const {
-  return m_Id;
-}
+uint32_t RanUeNgapId::get() const { return m_Id; }
 
 //------------------------------------------------------------------------------
-bool RanUeNgapId::encode(Ngap_RAN_UE_NGAP_ID_t& ranUeNgapId) const {
+bool RanUeNgapId::encode(Ngap_RAN_UE_NGAP_ID_t &ranUeNgapId) const {
   ranUeNgapId = m_Id;
   return true;
 }
 
 //------------------------------------------------------------------------------
-bool RanUeNgapId::decode(const Ngap_RAN_UE_NGAP_ID_t& ranUeNgapId) {
+bool RanUeNgapId::decode(const Ngap_RAN_UE_NGAP_ID_t &ranUeNgapId) {
   m_Id = ranUeNgapId;
   return true;
 }
-}  // namespace oai::ngap
+} // namespace oai::ngap

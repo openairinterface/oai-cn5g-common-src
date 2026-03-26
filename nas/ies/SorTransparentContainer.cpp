@@ -37,7 +37,7 @@ void SorTransparentContainer::GetValue(
 }
 
 //------------------------------------------------------------------------------
-int SorTransparentContainer::Encode(uint8_t* buf, int len) const {
+int SorTransparentContainer::Encode(uint8_t *buf, int len) const {
   oai::logger::logger_common::nas().debug("Encoding %s", GetIeName().c_str());
 
   int ie_len = GetIeLength();
@@ -47,7 +47,8 @@ int SorTransparentContainer::Encode(uint8_t* buf, int len) const {
   int len_pos = 0;
   int encoded_header_size =
       Type6NasIe::Encode(buf + encoded_size, len, len_pos);
-  if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
+  if (encoded_header_size == KEncodeDecodeError)
+    return KEncodeDecodeError;
   encoded_size += encoded_header_size;
 
   // Header
@@ -68,14 +69,14 @@ int SorTransparentContainer::Encode(uint8_t* buf, int len) const {
   int encoded_len_ie = 0;
   ENCODE_U16(buf + len_pos, encoded_size - GetHeaderLength(), encoded_len_ie);
 
-  oai::logger::logger_common::nas().debug(
-      "Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
+  oai::logger::logger_common::nas().debug("Encoded %s, len (%d)",
+                                          GetIeName().c_str(), encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
-int SorTransparentContainer::Decode(
-    const uint8_t* const buf, int len, bool is_iei) {
+int SorTransparentContainer::Decode(const uint8_t *const buf, int len,
+                                    bool is_iei) {
   if (len < kSorTransparentContainerMinimumLength) {
     oai::logger::logger_common::nas().error(
         "Buffer length is less than the minimum length of this IE (%d "
@@ -85,12 +86,13 @@ int SorTransparentContainer::Decode(
   }
 
   uint8_t decoded_size = 0;
-  uint8_t octet        = 0;
+  uint8_t octet = 0;
   oai::logger::logger_common::nas().debug("Decoding %s", GetIeName().c_str());
 
   // IEI and Length
   int decoded_header_size = Type6NasIe::Decode(buf + decoded_size, len, is_iei);
-  if (decoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
+  if (decoded_header_size == KEncodeDecodeError)
+    return KEncodeDecodeError;
   decoded_size += decoded_header_size;
 
   DECODE_U8(buf + decoded_size, header_, decoded_size);
@@ -113,7 +115,7 @@ int SorTransparentContainer::Decode(
     oai::logger::logger_common::nas().debug("Value 0x%2x", sor_mac_i_[j]);
   }
 
-  oai::logger::logger_common::nas().debug(
-      "Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
+  oai::logger::logger_common::nas().debug("Decoded %s, len (%d)",
+                                          GetIeName().c_str(), decoded_size);
   return decoded_size;
 }

@@ -19,11 +19,11 @@
 namespace oai::udr::model {
 
 EllipsoidArc::EllipsoidArc() {
-  m_InnerRadius       = 0;
+  m_InnerRadius = 0;
   m_UncertaintyRadius = 0.0f;
-  m_OffsetAngle       = 0;
-  m_IncludedAngle     = 0;
-  m_Confidence        = 0;
+  m_OffsetAngle = 0;
+  m_IncludedAngle = 0;
+  m_Confidence = 0;
 }
 
 EllipsoidArc::~EllipsoidArc() {}
@@ -32,18 +32,18 @@ void EllipsoidArc::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const EllipsoidArc& o) {
-  j                      = nlohmann::json();
-  j["shape"]             = o.m_Shape;
-  j["point"]             = o.m_Point;
-  j["innerRadius"]       = o.m_InnerRadius;
+void to_json(nlohmann::json &j, const EllipsoidArc &o) {
+  j = nlohmann::json();
+  j["shape"] = o.m_Shape;
+  j["point"] = o.m_Point;
+  j["innerRadius"] = o.m_InnerRadius;
   j["uncertaintyRadius"] = o.m_UncertaintyRadius;
-  j["offsetAngle"]       = o.m_OffsetAngle;
-  j["includedAngle"]     = o.m_IncludedAngle;
-  j["confidence"]        = o.m_Confidence;
+  j["offsetAngle"] = o.m_OffsetAngle;
+  j["includedAngle"] = o.m_IncludedAngle;
+  j["confidence"] = o.m_Confidence;
 }
 
-void from_json(const nlohmann::json& j, EllipsoidArc& o) {
+void from_json(const nlohmann::json &j, EllipsoidArc &o) {
   j.at("shape").get_to(o.m_Shape);
   j.at("point").get_to(o.m_Point);
   j.at("innerRadius").get_to(o.m_InnerRadius);
@@ -53,47 +53,31 @@ void from_json(const nlohmann::json& j, EllipsoidArc& o) {
   j.at("confidence").get_to(o.m_Confidence);
 }
 
-SupportedGADShapes EllipsoidArc::getShape() const {
-  return m_Shape;
-}
-void EllipsoidArc::setShape(SupportedGADShapes const& value) {
+SupportedGADShapes EllipsoidArc::getShape() const { return m_Shape; }
+void EllipsoidArc::setShape(SupportedGADShapes const &value) {
   m_Shape = value;
 }
-GeographicalCoordinates EllipsoidArc::getPoint() const {
-  return m_Point;
-}
-void EllipsoidArc::setPoint(GeographicalCoordinates const& value) {
+GeographicalCoordinates EllipsoidArc::getPoint() const { return m_Point; }
+void EllipsoidArc::setPoint(GeographicalCoordinates const &value) {
   m_Point = value;
 }
-int32_t EllipsoidArc::getInnerRadius() const {
-  return m_InnerRadius;
-}
+int32_t EllipsoidArc::getInnerRadius() const { return m_InnerRadius; }
 void EllipsoidArc::setInnerRadius(int32_t const value) {
   m_InnerRadius = value;
 }
-float EllipsoidArc::getUncertaintyRadius() const {
-  return m_UncertaintyRadius;
-}
+float EllipsoidArc::getUncertaintyRadius() const { return m_UncertaintyRadius; }
 void EllipsoidArc::setUncertaintyRadius(float const value) {
   m_UncertaintyRadius = value;
 }
-int32_t EllipsoidArc::getOffsetAngle() const {
-  return m_OffsetAngle;
-}
+int32_t EllipsoidArc::getOffsetAngle() const { return m_OffsetAngle; }
 void EllipsoidArc::setOffsetAngle(int32_t const value) {
   m_OffsetAngle = value;
 }
-int32_t EllipsoidArc::getIncludedAngle() const {
-  return m_IncludedAngle;
-}
+int32_t EllipsoidArc::getIncludedAngle() const { return m_IncludedAngle; }
 void EllipsoidArc::setIncludedAngle(int32_t const value) {
   m_IncludedAngle = value;
 }
-int32_t EllipsoidArc::getConfidence() const {
-  return m_Confidence;
-}
-void EllipsoidArc::setConfidence(int32_t const value) {
-  m_Confidence = value;
-}
+int32_t EllipsoidArc::getConfidence() const { return m_Confidence; }
+void EllipsoidArc::setConfidence(int32_t const value) { m_Confidence = value; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

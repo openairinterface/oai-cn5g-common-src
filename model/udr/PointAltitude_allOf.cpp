@@ -18,9 +18,7 @@
 
 namespace oai::udr::model {
 
-PointAltitude_allOf::PointAltitude_allOf() {
-  m_Altitude = 0.0;
-}
+PointAltitude_allOf::PointAltitude_allOf() { m_Altitude = 0.0; }
 
 PointAltitude_allOf::~PointAltitude_allOf() {}
 
@@ -28,13 +26,13 @@ void PointAltitude_allOf::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const PointAltitude_allOf& o) {
-  j             = nlohmann::json();
-  j["point"]    = o.m_Point;
+void to_json(nlohmann::json &j, const PointAltitude_allOf &o) {
+  j = nlohmann::json();
+  j["point"] = o.m_Point;
   j["altitude"] = o.m_Altitude;
 }
 
-void from_json(const nlohmann::json& j, PointAltitude_allOf& o) {
+void from_json(const nlohmann::json &j, PointAltitude_allOf &o) {
   j.at("point").get_to(o.m_Point);
   j.at("altitude").get_to(o.m_Altitude);
 }
@@ -42,14 +40,12 @@ void from_json(const nlohmann::json& j, PointAltitude_allOf& o) {
 GeographicalCoordinates PointAltitude_allOf::getPoint() const {
   return m_Point;
 }
-void PointAltitude_allOf::setPoint(GeographicalCoordinates const& value) {
+void PointAltitude_allOf::setPoint(GeographicalCoordinates const &value) {
   m_Point = value;
 }
-double PointAltitude_allOf::getAltitude() const {
-  return m_Altitude;
-}
+double PointAltitude_allOf::getAltitude() const { return m_Altitude; }
 void PointAltitude_allOf::setAltitude(double const value) {
   m_Altitude = value;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

@@ -19,8 +19,8 @@
 namespace oai::udr::model {
 
 LcsPrivacyData::LcsPrivacyData() {
-  m_LpiIsSet                 = false;
-  m_UnrelatedClassIsSet      = false;
+  m_LpiIsSet = false;
+  m_UnrelatedClassIsSet = false;
   m_PlmnOperatorClassesIsSet = false;
 }
 
@@ -30,15 +30,17 @@ void LcsPrivacyData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const LcsPrivacyData& o) {
+void to_json(nlohmann::json &j, const LcsPrivacyData &o) {
   j = nlohmann::json();
-  if (o.lpiIsSet()) j["lpi"] = o.m_Lpi;
-  if (o.unrelatedClassIsSet()) j["unrelatedClass"] = o.m_UnrelatedClass;
+  if (o.lpiIsSet())
+    j["lpi"] = o.m_Lpi;
+  if (o.unrelatedClassIsSet())
+    j["unrelatedClass"] = o.m_UnrelatedClass;
   if (o.plmnOperatorClassesIsSet() || !o.m_PlmnOperatorClasses.empty())
     j["plmnOperatorClasses"] = o.m_PlmnOperatorClasses;
 }
 
-void from_json(const nlohmann::json& j, LcsPrivacyData& o) {
+void from_json(const nlohmann::json &j, LcsPrivacyData &o) {
   if (j.find("lpi") != j.end()) {
     j.at("lpi").get_to(o.m_Lpi);
     o.m_LpiIsSet = true;
@@ -53,38 +55,30 @@ void from_json(const nlohmann::json& j, LcsPrivacyData& o) {
   }
 }
 
-Lpi LcsPrivacyData::getLpi() const {
-  return m_Lpi;
-}
-void LcsPrivacyData::setLpi(Lpi const& value) {
-  m_Lpi      = value;
+Lpi LcsPrivacyData::getLpi() const { return m_Lpi; }
+void LcsPrivacyData::setLpi(Lpi const &value) {
+  m_Lpi = value;
   m_LpiIsSet = true;
 }
-bool LcsPrivacyData::lpiIsSet() const {
-  return m_LpiIsSet;
-}
-void LcsPrivacyData::unsetLpi() {
-  m_LpiIsSet = false;
-}
+bool LcsPrivacyData::lpiIsSet() const { return m_LpiIsSet; }
+void LcsPrivacyData::unsetLpi() { m_LpiIsSet = false; }
 UnrelatedClass LcsPrivacyData::getUnrelatedClass() const {
   return m_UnrelatedClass;
 }
-void LcsPrivacyData::setUnrelatedClass(UnrelatedClass const& value) {
-  m_UnrelatedClass      = value;
+void LcsPrivacyData::setUnrelatedClass(UnrelatedClass const &value) {
+  m_UnrelatedClass = value;
   m_UnrelatedClassIsSet = true;
 }
 bool LcsPrivacyData::unrelatedClassIsSet() const {
   return m_UnrelatedClassIsSet;
 }
-void LcsPrivacyData::unsetUnrelatedClass() {
-  m_UnrelatedClassIsSet = false;
-}
-std::vector<PlmnOperatorClass>& LcsPrivacyData::getPlmnOperatorClasses() {
+void LcsPrivacyData::unsetUnrelatedClass() { m_UnrelatedClassIsSet = false; }
+std::vector<PlmnOperatorClass> &LcsPrivacyData::getPlmnOperatorClasses() {
   return m_PlmnOperatorClasses;
 }
 void LcsPrivacyData::setPlmnOperatorClasses(
-    std::vector<PlmnOperatorClass> const& value) {
-  m_PlmnOperatorClasses      = value;
+    std::vector<PlmnOperatorClass> const &value) {
+  m_PlmnOperatorClasses = value;
   m_PlmnOperatorClassesIsSet = true;
 }
 bool LcsPrivacyData::plmnOperatorClassesIsSet() const {
@@ -94,4 +88,4 @@ void LcsPrivacyData::unsetPlmnOperatorClasses() {
   m_PlmnOperatorClassesIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

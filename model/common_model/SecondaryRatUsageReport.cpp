@@ -27,18 +27,18 @@ void SecondaryRatUsageReport::validate() const {
   }
 }
 
-bool SecondaryRatUsageReport::validate(std::stringstream& msg) const {
+bool SecondaryRatUsageReport::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool SecondaryRatUsageReport::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool SecondaryRatUsageReport::validate(std::stringstream &msg,
+                                       const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "SecondaryRatUsageReport" : pathPrefix;
 
   /* QosFlowsUsageData */ {
-    const std::vector<oai::model::common::QosFlowUsageReport>& value =
+    const std::vector<oai::model::common::QosFlowUsageReport> &value =
         m_QosFlowsUsageData;
     const std::string currentValuePath = _pathPrefix + ".qosFlowsUsageData";
 
@@ -46,10 +46,10 @@ bool SecondaryRatUsageReport::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::QosFlowUsageReport& value : value) {
+      int i = 0;
+      for (const oai::model::common::QosFlowUsageReport &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -66,7 +66,7 @@ bool SecondaryRatUsageReport::validate(
 }
 
 bool SecondaryRatUsageReport::operator==(
-    const SecondaryRatUsageReport& rhs) const {
+    const SecondaryRatUsageReport &rhs) const {
   return
 
       (getSecondaryRatType() == rhs.getSecondaryRatType()) &&
@@ -77,27 +77,27 @@ bool SecondaryRatUsageReport::operator==(
 }
 
 bool SecondaryRatUsageReport::operator!=(
-    const SecondaryRatUsageReport& rhs) const {
+    const SecondaryRatUsageReport &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const SecondaryRatUsageReport& o) {
-  j                      = nlohmann::json();
-  j["secondaryRatType"]  = o.m_SecondaryRatType;
+void to_json(nlohmann::json &j, const SecondaryRatUsageReport &o) {
+  j = nlohmann::json();
+  j["secondaryRatType"] = o.m_SecondaryRatType;
   j["qosFlowsUsageData"] = o.m_QosFlowsUsageData;
 }
 
-void from_json(const nlohmann::json& j, SecondaryRatUsageReport& o) {
+void from_json(const nlohmann::json &j, SecondaryRatUsageReport &o) {
   j.at("secondaryRatType").get_to(o.m_SecondaryRatType);
   j.at("qosFlowsUsageData").get_to(o.m_QosFlowsUsageData);
 }
 
-oai::model::common::RatType SecondaryRatUsageReport::getSecondaryRatType()
-    const {
+oai::model::common::RatType
+SecondaryRatUsageReport::getSecondaryRatType() const {
   return m_SecondaryRatType;
 }
 void SecondaryRatUsageReport::setSecondaryRatType(
-    oai::model::common::RatType const& value) {
+    oai::model::common::RatType const &value) {
   m_SecondaryRatType = value;
 }
 std::vector<oai::model::common::QosFlowUsageReport>
@@ -105,8 +105,8 @@ SecondaryRatUsageReport::getQosFlowsUsageData() const {
   return m_QosFlowsUsageData;
 }
 void SecondaryRatUsageReport::setQosFlowsUsageData(
-    std::vector<oai::model::common::QosFlowUsageReport> const& value) {
+    std::vector<oai::model::common::QosFlowUsageReport> const &value) {
   m_QosFlowsUsageData = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

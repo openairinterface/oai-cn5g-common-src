@@ -27,7 +27,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class ReportingAreaType_anyOf {
- public:
+public:
   ReportingAreaType_anyOf();
   virtual ~ReportingAreaType_anyOf() = default;
 
@@ -52,16 +52,16 @@ class ReportingAreaType_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const ReportingAreaType_anyOf& rhs) const;
-  bool operator!=(const ReportingAreaType_anyOf& rhs) const;
+  bool operator==(const ReportingAreaType_anyOf &rhs) const;
+  bool operator!=(const ReportingAreaType_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// ReportingAreaType_anyOf members
@@ -69,15 +69,15 @@ class ReportingAreaType_anyOf {
   ReportingAreaType_anyOf::eReportingAreaType_anyOf getValue() const;
   void setValue(ReportingAreaType_anyOf::eReportingAreaType_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const ReportingAreaType_anyOf& o);
-  friend void from_json(const nlohmann::json& j, ReportingAreaType_anyOf& o);
+  friend void to_json(nlohmann::json &j, const ReportingAreaType_anyOf &o);
+  friend void from_json(const nlohmann::json &j, ReportingAreaType_anyOf &o);
 
- protected:
+protected:
   ReportingAreaType_anyOf::eReportingAreaType_anyOf m_value =
       ReportingAreaType_anyOf::eReportingAreaType_anyOf::
           INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* ReportingAreaType_anyOf_H_ */

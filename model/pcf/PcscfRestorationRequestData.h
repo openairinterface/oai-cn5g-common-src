@@ -19,10 +19,10 @@
 #ifndef PcscfRestorationRequestData_H_
 #define PcscfRestorationRequestData_H_
 
-#include <string>
 #include "Ipv6Addr.h"
 #include "Snssai.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::pcf {
 
@@ -30,7 +30,7 @@ namespace oai::model::pcf {
 /// Indicates P-CSCF restoration.
 /// </summary>
 class PcscfRestorationRequestData {
- public:
+public:
   PcscfRestorationRequestData();
   virtual ~PcscfRestorationRequestData() = default;
 
@@ -44,16 +44,16 @@ class PcscfRestorationRequestData {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const PcscfRestorationRequestData& rhs) const;
-  bool operator!=(const PcscfRestorationRequestData& rhs) const;
+  bool operator==(const PcscfRestorationRequestData &rhs) const;
+  bool operator!=(const PcscfRestorationRequestData &rhs) const;
 
   /////////////////////////////////////////////
   /// PcscfRestorationRequestData members
@@ -67,21 +67,21 @@ class PcscfRestorationRequestData {
   /// \&quot;Label1.Label2.Label3\&quot;).
   /// </summary>
   std::string getDnn() const;
-  void setDnn(std::string const& value);
+  void setDnn(std::string const &value);
   bool dnnIsSet() const;
   void unsetDnn();
   /// <summary>
   ///
   /// </summary>
   std::string getIpDomain() const;
-  void setIpDomain(std::string const& value);
+  void setIpDomain(std::string const &value);
   bool ipDomainIsSet() const;
   void unsetIpDomain();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Snssai getSliceInfo() const;
-  void setSliceInfo(oai::model::common::Snssai const& value);
+  void setSliceInfo(oai::model::common::Snssai const &value);
   bool sliceInfoIsSet() const;
   void unsetSliceInfo();
   /// <summary>
@@ -102,7 +102,7 @@ class PcscfRestorationRequestData {
   /// defined in 3GPP TS 29.501.
   /// </summary>
   std::string getSupi() const;
-  void setSupi(std::string const& value);
+  void setSupi(std::string const &value);
   bool supiIsSet() const;
   void unsetSupi();
   /// <summary>
@@ -110,22 +110,22 @@ class PcscfRestorationRequestData {
   /// decimal&#39; notation as defined in RFC 1166.
   /// </summary>
   std::string getUeIpv4() const;
-  void setUeIpv4(std::string const& value);
+  void setUeIpv4(std::string const &value);
   bool ueIpv4IsSet() const;
   void unsetUeIpv4();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ipv6Addr getUeIpv6() const;
-  void setUeIpv6(oai::model::common::Ipv6Addr const& value);
+  void setUeIpv6(oai::model::common::Ipv6Addr const &value);
   bool ueIpv6IsSet() const;
   void unsetUeIpv6();
 
-  friend void to_json(nlohmann::json& j, const PcscfRestorationRequestData& o);
-  friend void from_json(
-      const nlohmann::json& j, PcscfRestorationRequestData& o);
+  friend void to_json(nlohmann::json &j, const PcscfRestorationRequestData &o);
+  friend void from_json(const nlohmann::json &j,
+                        PcscfRestorationRequestData &o);
 
- protected:
+protected:
   std::string m_Dnn;
   bool m_DnnIsSet;
   std::string m_IpDomain;
@@ -140,6 +140,6 @@ class PcscfRestorationRequestData {
   bool m_UeIpv6IsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* PcscfRestorationRequestData_H_ */

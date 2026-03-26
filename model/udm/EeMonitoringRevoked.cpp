@@ -30,18 +30,18 @@ void EeMonitoringRevoked::validate() const {
   }
 }
 
-bool EeMonitoringRevoked::validate(std::stringstream& msg) const {
+bool EeMonitoringRevoked::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool EeMonitoringRevoked::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool EeMonitoringRevoked::validate(std::stringstream &msg,
+                                   const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "EeMonitoringRevoked" : pathPrefix;
 
   /* RevokedMonitoringEventList */ {
-    const std::map<std::string, MonitoringEvent>& value =
+    const std::map<std::string, MonitoringEvent> &value =
         m_RevokedMonitoringEventList;
     const std::string currentValuePath =
         _pathPrefix + ".revokedMonitoringEventList";
@@ -50,7 +50,7 @@ bool EeMonitoringRevoked::validate(
   return success;
 }
 
-bool EeMonitoringRevoked::operator==(const EeMonitoringRevoked& rhs) const {
+bool EeMonitoringRevoked::operator==(const EeMonitoringRevoked &rhs) const {
   return
 
       (getRevokedMonitoringEventList() == rhs.getRevokedMonitoringEventList())
@@ -58,16 +58,16 @@ bool EeMonitoringRevoked::operator==(const EeMonitoringRevoked& rhs) const {
           ;
 }
 
-bool EeMonitoringRevoked::operator!=(const EeMonitoringRevoked& rhs) const {
+bool EeMonitoringRevoked::operator!=(const EeMonitoringRevoked &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const EeMonitoringRevoked& o) {
-  j                               = nlohmann::json();
+void to_json(nlohmann::json &j, const EeMonitoringRevoked &o) {
+  j = nlohmann::json();
   j["revokedMonitoringEventList"] = o.m_RevokedMonitoringEventList;
 }
 
-void from_json(const nlohmann::json& j, EeMonitoringRevoked& o) {
+void from_json(const nlohmann::json &j, EeMonitoringRevoked &o) {
   j.at("revokedMonitoringEventList").get_to(o.m_RevokedMonitoringEventList);
 }
 
@@ -76,8 +76,8 @@ EeMonitoringRevoked::getRevokedMonitoringEventList() const {
   return m_RevokedMonitoringEventList;
 }
 void EeMonitoringRevoked::setRevokedMonitoringEventList(
-    std::map<std::string, MonitoringEvent> const& value) {
+    std::map<std::string, MonitoringEvent> const &value) {
   m_RevokedMonitoringEventList = value;
 }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

@@ -19,10 +19,10 @@
 namespace oai::model::udm {
 
 Av5GHeAka::Av5GHeAka() {
-  m_Rand     = "";
+  m_Rand = "";
   m_XresStar = "";
-  m_Autn     = "";
-  m_Kausf    = "";
+  m_Autn = "";
+  m_Kausf = "";
 }
 
 Av5GHeAka::~Av5GHeAka() {}
@@ -31,16 +31,16 @@ void Av5GHeAka::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const Av5GHeAka& o) {
-  j             = nlohmann::json();
-  j["avType"]   = o.m_AvType;
-  j["rand"]     = o.m_Rand;
+void to_json(nlohmann::json &j, const Av5GHeAka &o) {
+  j = nlohmann::json();
+  j["avType"] = o.m_AvType;
+  j["rand"] = o.m_Rand;
   j["xresStar"] = o.m_XresStar;
-  j["autn"]     = o.m_Autn;
-  j["kausf"]    = o.m_Kausf;
+  j["autn"] = o.m_Autn;
+  j["kausf"] = o.m_Kausf;
 }
 
-void from_json(const nlohmann::json& j, Av5GHeAka& o) {
+void from_json(const nlohmann::json &j, Av5GHeAka &o) {
   j.at("avType").get_to(o.m_AvType);
   j.at("rand").get_to(o.m_Rand);
   j.at("xresStar").get_to(o.m_XresStar);
@@ -48,35 +48,15 @@ void from_json(const nlohmann::json& j, Av5GHeAka& o) {
   j.at("kausf").get_to(o.m_Kausf);
 }
 
-AvType Av5GHeAka::getAvType() const {
-  return m_AvType;
-}
-void Av5GHeAka::setAvType(AvType const& value) {
-  m_AvType = value;
-}
-std::string Av5GHeAka::getRand() const {
-  return m_Rand;
-}
-void Av5GHeAka::setRand(std::string const& value) {
-  m_Rand = value;
-}
-std::string Av5GHeAka::getXresStar() const {
-  return m_XresStar;
-}
-void Av5GHeAka::setXresStar(std::string const& value) {
-  m_XresStar = value;
-}
-std::string Av5GHeAka::getAutn() const {
-  return m_Autn;
-}
-void Av5GHeAka::setAutn(std::string const& value) {
-  m_Autn = value;
-}
-std::string Av5GHeAka::getKausf() const {
-  return m_Kausf;
-}
-void Av5GHeAka::setKausf(std::string const& value) {
-  m_Kausf = value;
-}
+AvType Av5GHeAka::getAvType() const { return m_AvType; }
+void Av5GHeAka::setAvType(AvType const &value) { m_AvType = value; }
+std::string Av5GHeAka::getRand() const { return m_Rand; }
+void Av5GHeAka::setRand(std::string const &value) { m_Rand = value; }
+std::string Av5GHeAka::getXresStar() const { return m_XresStar; }
+void Av5GHeAka::setXresStar(std::string const &value) { m_XresStar = value; }
+std::string Av5GHeAka::getAutn() const { return m_Autn; }
+void Av5GHeAka::setAutn(std::string const &value) { m_Autn = value; }
+std::string Av5GHeAka::getKausf() const { return m_Kausf; }
+void Av5GHeAka::setKausf(std::string const &value) { m_Kausf = value; }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

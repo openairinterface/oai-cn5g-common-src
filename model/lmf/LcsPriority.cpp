@@ -27,12 +27,12 @@ void LcsPriority::validate() const {
   }
 }
 
-bool LcsPriority::validate(std::stringstream& msg) const {
+bool LcsPriority::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool LcsPriority::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool LcsPriority::validate(std::stringstream &msg,
+                           const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "LcsPriority" : pathPrefix;
@@ -43,32 +43,28 @@ bool LcsPriority::validate(
   return success;
 }
 
-bool LcsPriority::operator==(const LcsPriority& rhs) const {
+bool LcsPriority::operator==(const LcsPriority &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool LcsPriority::operator!=(const LcsPriority& rhs) const {
+bool LcsPriority::operator!=(const LcsPriority &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const LcsPriority& o) {
+void to_json(nlohmann::json &j, const LcsPriority &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, LcsPriority& o) {
+void from_json(const nlohmann::json &j, LcsPriority &o) {
   from_json(j, o.m_value);
 }
 
-LcsPriority_anyOf LcsPriority::getValue() const {
-  return m_value;
-}
+LcsPriority_anyOf LcsPriority::getValue() const { return m_value; }
 
-void LcsPriority::setValue(LcsPriority_anyOf value) {
-  m_value = value;
-}
+void LcsPriority::setValue(LcsPriority_anyOf value) { m_value = value; }
 
 LcsPriority_anyOf::eLcsPriority_anyOf LcsPriority::getEnumValue() const {
   return m_value.getValue();
@@ -78,4 +74,4 @@ void LcsPriority::setEnumValue(LcsPriority_anyOf::eLcsPriority_anyOf value) {
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

@@ -20,8 +20,8 @@
 #define GbrQosFlowInformation_H_
 
 #include "NotificationControl.h"
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::smf {
 
@@ -29,7 +29,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class GbrQosFlowInformation {
- public:
+public:
   GbrQosFlowInformation();
   virtual ~GbrQosFlowInformation();
 
@@ -42,27 +42,27 @@ class GbrQosFlowInformation {
   ///
   /// </summary>
   std::string getMaxFbrDl() const;
-  void setMaxFbrDl(std::string const& value);
+  void setMaxFbrDl(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getMaxFbrUl() const;
-  void setMaxFbrUl(std::string const& value);
+  void setMaxFbrUl(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getGuaFbrDl() const;
-  void setGuaFbrDl(std::string const& value);
+  void setGuaFbrDl(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getGuaFbrUl() const;
-  void setGuaFbrUl(std::string const& value);
+  void setGuaFbrUl(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::NotificationControl getNotifControl() const;
-  void setNotifControl(oai::model::common::NotificationControl const& value);
+  void setNotifControl(oai::model::common::NotificationControl const &value);
   bool notifControlIsSet() const;
   void unsetNotifControl();
   /// <summary>
@@ -80,10 +80,10 @@ class GbrQosFlowInformation {
   bool maxPacketLossRateUlIsSet() const;
   void unsetMaxPacketLossRateUl();
 
-  friend void to_json(nlohmann::json& j, const GbrQosFlowInformation& o);
-  friend void from_json(const nlohmann::json& j, GbrQosFlowInformation& o);
+  friend void to_json(nlohmann::json &j, const GbrQosFlowInformation &o);
+  friend void from_json(const nlohmann::json &j, GbrQosFlowInformation &o);
 
- protected:
+protected:
   std::string m_MaxFbrDl;
 
   std::string m_MaxFbrUl;
@@ -100,6 +100,6 @@ class GbrQosFlowInformation {
   bool m_MaxPacketLossRateUlIsSet;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* GbrQosFlowInformation_H_ */

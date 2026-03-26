@@ -16,9 +16,9 @@
 namespace oai::model::nrf {
 
 ChfServiceInfo::ChfServiceInfo() {
-  m_PrimaryChfServiceInstance        = "";
-  m_PrimaryChfServiceInstanceIsSet   = false;
-  m_SecondaryChfServiceInstance      = "";
+  m_PrimaryChfServiceInstance = "";
+  m_PrimaryChfServiceInstanceIsSet = false;
+  m_SecondaryChfServiceInstance = "";
   m_SecondaryChfServiceInstanceIsSet = false;
 }
 
@@ -28,7 +28,7 @@ void ChfServiceInfo::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const ChfServiceInfo& o) {
+void to_json(nlohmann::json &j, const ChfServiceInfo &o) {
   j = nlohmann::json();
   if (o.primaryChfServiceInstanceIsSet())
     j["primaryChfServiceInstance"] = o.m_PrimaryChfServiceInstance;
@@ -36,7 +36,7 @@ void to_json(nlohmann::json& j, const ChfServiceInfo& o) {
     j["secondaryChfServiceInstance"] = o.m_SecondaryChfServiceInstance;
 }
 
-void from_json(const nlohmann::json& j, ChfServiceInfo& o) {
+void from_json(const nlohmann::json &j, ChfServiceInfo &o) {
   if (j.find("primaryChfServiceInstance") != j.end()) {
     j.at("primaryChfServiceInstance").get_to(o.m_PrimaryChfServiceInstance);
     o.m_PrimaryChfServiceInstanceIsSet = true;
@@ -50,8 +50,8 @@ void from_json(const nlohmann::json& j, ChfServiceInfo& o) {
 std::string ChfServiceInfo::getPrimaryChfServiceInstance() const {
   return m_PrimaryChfServiceInstance;
 }
-void ChfServiceInfo::setPrimaryChfServiceInstance(std::string const& value) {
-  m_PrimaryChfServiceInstance      = value;
+void ChfServiceInfo::setPrimaryChfServiceInstance(std::string const &value) {
+  m_PrimaryChfServiceInstance = value;
   m_PrimaryChfServiceInstanceIsSet = true;
 }
 bool ChfServiceInfo::primaryChfServiceInstanceIsSet() const {
@@ -63,8 +63,8 @@ void ChfServiceInfo::unsetPrimaryChfServiceInstance() {
 std::string ChfServiceInfo::getSecondaryChfServiceInstance() const {
   return m_SecondaryChfServiceInstance;
 }
-void ChfServiceInfo::setSecondaryChfServiceInstance(std::string const& value) {
-  m_SecondaryChfServiceInstance      = value;
+void ChfServiceInfo::setSecondaryChfServiceInstance(std::string const &value) {
+  m_SecondaryChfServiceInstance = value;
   m_SecondaryChfServiceInstanceIsSet = true;
 }
 bool ChfServiceInfo::secondaryChfServiceInstanceIsSet() const {
@@ -74,4 +74,4 @@ void ChfServiceInfo::unsetSecondaryChfServiceInstance() {
   m_SecondaryChfServiceInstanceIsSet = false;
 }
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

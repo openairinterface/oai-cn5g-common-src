@@ -27,8 +27,7 @@ asn_per_constraints_t asn_PER_type_Ngap_IAB_Authorized_constr_1 CC_NOTUSED = {
           !defined(ASN_DISABLE_APER_SUPPORT) */
 static const asn_INTEGER_enum_map_t asn_MAP_Ngap_IAB_Authorized_value2enum_1[] =
     {
-        {0, 10, "authorized"},
-        {1, 14, "not-authorized"}
+        {0, 10, "authorized"}, {1, 14, "not-authorized"}
         /* This list is extensible */
 };
 static const unsigned int asn_MAP_Ngap_IAB_Authorized_enum2value_1[] = {

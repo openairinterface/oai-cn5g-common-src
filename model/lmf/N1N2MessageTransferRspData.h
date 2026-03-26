@@ -20,8 +20,8 @@
 #define N1N2MessageTransferRspData_H_
 
 #include "N1N2MessageTransferCause.h"
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::lmf {
 
@@ -29,7 +29,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class N1N2MessageTransferRspData {
- public:
+public:
   N1N2MessageTransferRspData();
   virtual ~N1N2MessageTransferRspData();
 
@@ -42,25 +42,25 @@ class N1N2MessageTransferRspData {
   ///
   /// </summary>
   N1N2MessageTransferCause getCause() const;
-  void setCause(N1N2MessageTransferCause const& value);
+  void setCause(N1N2MessageTransferCause const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
 
-  friend void to_json(nlohmann::json& j, const N1N2MessageTransferRspData& o);
-  friend void from_json(const nlohmann::json& j, N1N2MessageTransferRspData& o);
+  friend void to_json(nlohmann::json &j, const N1N2MessageTransferRspData &o);
+  friend void from_json(const nlohmann::json &j, N1N2MessageTransferRspData &o);
 
- protected:
+protected:
   N1N2MessageTransferCause m_Cause;
 
   std::string m_SupportedFeatures;
   bool m_SupportedFeaturesIsSet;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* N1N2MessageTransferRspData_H_ */

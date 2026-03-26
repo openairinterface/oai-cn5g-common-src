@@ -19,8 +19,8 @@
 namespace oai::model::udm {
 
 SdmSubsModification::SdmSubsModification() {
-  m_Expires                    = "";
-  m_ExpiresIsSet               = false;
+  m_Expires = "";
+  m_ExpiresIsSet = false;
   m_MonitoredResourceUrisIsSet = false;
 }
 
@@ -30,14 +30,15 @@ void SdmSubsModification::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const SdmSubsModification& o) {
+void to_json(nlohmann::json &j, const SdmSubsModification &o) {
   j = nlohmann::json();
-  if (o.expiresIsSet()) j["expires"] = o.m_Expires;
+  if (o.expiresIsSet())
+    j["expires"] = o.m_Expires;
   if (o.monitoredResourceUrisIsSet())
     j["monitoredResourceUris"] = o.m_MonitoredResourceUris;
 }
 
-void from_json(const nlohmann::json& j, SdmSubsModification& o) {
+void from_json(const nlohmann::json &j, SdmSubsModification &o) {
   if (j.find("expires") != j.end()) {
     j.at("expires").get_to(o.m_Expires);
     o.m_ExpiresIsSet = true;
@@ -48,20 +49,14 @@ void from_json(const nlohmann::json& j, SdmSubsModification& o) {
   }
 }
 
-std::string SdmSubsModification::getExpires() const {
-  return m_Expires;
-}
-void SdmSubsModification::setExpires(std::string const& value) {
-  m_Expires      = value;
+std::string SdmSubsModification::getExpires() const { return m_Expires; }
+void SdmSubsModification::setExpires(std::string const &value) {
+  m_Expires = value;
   m_ExpiresIsSet = true;
 }
-bool SdmSubsModification::expiresIsSet() const {
-  return m_ExpiresIsSet;
-}
-void SdmSubsModification::unsetExpires() {
-  m_ExpiresIsSet = false;
-}
-std::vector<std::string>& SdmSubsModification::getMonitoredResourceUris() {
+bool SdmSubsModification::expiresIsSet() const { return m_ExpiresIsSet; }
+void SdmSubsModification::unsetExpires() { m_ExpiresIsSet = false; }
+std::vector<std::string> &SdmSubsModification::getMonitoredResourceUris() {
   return m_MonitoredResourceUris;
 }
 bool SdmSubsModification::monitoredResourceUrisIsSet() const {
@@ -71,4 +66,4 @@ void SdmSubsModification::unsetMonitoredResourceUris() {
   m_MonitoredResourceUrisIsSet = false;
 }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

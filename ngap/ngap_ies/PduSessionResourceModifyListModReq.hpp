@@ -16,22 +16,22 @@ extern "C" {
 namespace oai::ngap {
 
 class PduSessionResourceModifyListModReq {
- public:
+public:
   PduSessionResourceModifyListModReq();
   virtual ~PduSessionResourceModifyListModReq();
 
-  void set(const std::vector<PduSessionResourceModifyItemModReq>& list);
-  void get(std::vector<PduSessionResourceModifyItemModReq>& list) const;
+  void set(const std::vector<PduSessionResourceModifyItemModReq> &list);
+  void get(std::vector<PduSessionResourceModifyItemModReq> &list) const;
 
   bool encode(
-      Ngap_PDUSessionResourceModifyListModReq_t& pduSessionResourceList) const;
+      Ngap_PDUSessionResourceModifyListModReq_t &pduSessionResourceList) const;
   bool decode(
-      const Ngap_PDUSessionResourceModifyListModReq_t& pduSessionResourceList);
+      const Ngap_PDUSessionResourceModifyListModReq_t &pduSessionResourceList);
 
- private:
+private:
   std::vector<PduSessionResourceModifyItemModReq> m_ItemList;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

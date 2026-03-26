@@ -12,8 +12,8 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_UPTransportLayerInformation.h"
 #include "Ngap_QosFlowListWithDataForwarding.h"
+#include "Ngap_UPTransportLayerInformation.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -30,14 +30,14 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_HandoverRequestAcknowledgeTransfer */
 typedef struct Ngap_HandoverRequestAcknowledgeTransfer {
   Ngap_UPTransportLayerInformation_t dL_NGU_UP_TNLInformation;
-  struct Ngap_UPTransportLayerInformation*
-      dLForwardingUP_TNLInformation;          /* OPTIONAL */
-  struct Ngap_SecurityResult* securityResult; /* OPTIONAL */
+  struct Ngap_UPTransportLayerInformation
+      *dLForwardingUP_TNLInformation;         /* OPTIONAL */
+  struct Ngap_SecurityResult *securityResult; /* OPTIONAL */
   Ngap_QosFlowListWithDataForwarding_t qosFlowSetupResponseList;
-  struct Ngap_QosFlowListWithCause* qosFlowFailedToSetupList; /* OPTIONAL */
-  struct Ngap_DataForwardingResponseDRBList*
-      dataForwardingResponseDRBList;                     /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_QosFlowListWithCause *qosFlowFailedToSetupList; /* OPTIONAL */
+  struct Ngap_DataForwardingResponseDRBList
+      *dataForwardingResponseDRBList;                    /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

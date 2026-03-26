@@ -36,8 +36,8 @@ typedef struct Ngap_ResetType {
   Ngap_ResetType_PR present;
   union Ngap_ResetType_u {
     Ngap_ResetAll_t nG_Interface;
-    struct Ngap_UE_associatedLogicalNG_connectionList* partOfNG_Interface;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_UE_associatedLogicalNG_connectionList *partOfNG_Interface;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

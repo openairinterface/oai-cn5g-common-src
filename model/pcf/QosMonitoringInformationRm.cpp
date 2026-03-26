@@ -19,20 +19,20 @@
 namespace oai::model::pcf {
 
 QosMonitoringInformationRm::QosMonitoringInformationRm() {
-  m_RepThreshDl             = 0;
-  m_RepThreshDlIsSet        = false;
-  m_RepThreshUl             = 0;
-  m_RepThreshUlIsSet        = false;
-  m_RepThreshRp             = 0;
-  m_RepThreshRpIsSet        = false;
-  m_RepThreshDatRateUl      = "";
+  m_RepThreshDl = 0;
+  m_RepThreshDlIsSet = false;
+  m_RepThreshUl = 0;
+  m_RepThreshUlIsSet = false;
+  m_RepThreshRp = 0;
+  m_RepThreshRpIsSet = false;
+  m_RepThreshDatRateUl = "";
   m_RepThreshDatRateUlIsSet = false;
-  m_RepThreshDatRateDl      = "";
+  m_RepThreshDatRateDl = "";
   m_RepThreshDatRateDlIsSet = false;
-  m_ConThreshDl             = 0;
-  m_ConThreshDlIsSet        = false;
-  m_ConThreshUl             = 0;
-  m_ConThreshUlIsSet        = false;
+  m_ConThreshDl = 0;
+  m_ConThreshDlIsSet = false;
+  m_ConThreshUl = 0;
+  m_ConThreshUlIsSet = false;
 }
 
 void QosMonitoringInformationRm::validate() const {
@@ -42,28 +42,28 @@ void QosMonitoringInformationRm::validate() const {
   }
 }
 
-bool QosMonitoringInformationRm::validate(std::stringstream& msg) const {
+bool QosMonitoringInformationRm::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool QosMonitoringInformationRm::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool QosMonitoringInformationRm::validate(std::stringstream &msg,
+                                          const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "QosMonitoringInformationRm" : pathPrefix;
 
   if (repThreshDatRateUlIsSet()) {
-    const std::string& value           = m_RepThreshDatRateUl;
+    const std::string &value = m_RepThreshDatRateUl;
     const std::string currentValuePath = _pathPrefix + ".repThreshDatRateUl";
   }
 
   if (repThreshDatRateDlIsSet()) {
-    const std::string& value           = m_RepThreshDatRateDl;
+    const std::string &value = m_RepThreshDatRateDl;
     const std::string currentValuePath = _pathPrefix + ".repThreshDatRateDl";
   }
 
   if (conThreshDlIsSet()) {
-    const int32_t& value               = m_ConThreshDl;
+    const int32_t &value = m_ConThreshDl;
     const std::string currentValuePath = _pathPrefix + ".conThreshDl";
 
     if (value < 0) {
@@ -73,7 +73,7 @@ bool QosMonitoringInformationRm::validate(
   }
 
   if (conThreshUlIsSet()) {
-    const int32_t& value               = m_ConThreshUl;
+    const int32_t &value = m_ConThreshUl;
     const std::string currentValuePath = _pathPrefix + ".conThreshUl";
 
     if (value < 0) {
@@ -86,7 +86,7 @@ bool QosMonitoringInformationRm::validate(
 }
 
 bool QosMonitoringInformationRm::operator==(
-    const QosMonitoringInformationRm& rhs) const {
+    const QosMonitoringInformationRm &rhs) const {
   return
 
       ((!repThreshDlIsSet() && !rhs.repThreshDlIsSet()) ||
@@ -121,24 +121,29 @@ bool QosMonitoringInformationRm::operator==(
 }
 
 bool QosMonitoringInformationRm::operator!=(
-    const QosMonitoringInformationRm& rhs) const {
+    const QosMonitoringInformationRm &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const QosMonitoringInformationRm& o) {
+void to_json(nlohmann::json &j, const QosMonitoringInformationRm &o) {
   j = nlohmann::json::object();
-  if (o.repThreshDlIsSet()) j["repThreshDl"] = o.m_RepThreshDl;
-  if (o.repThreshUlIsSet()) j["repThreshUl"] = o.m_RepThreshUl;
-  if (o.repThreshRpIsSet()) j["repThreshRp"] = o.m_RepThreshRp;
+  if (o.repThreshDlIsSet())
+    j["repThreshDl"] = o.m_RepThreshDl;
+  if (o.repThreshUlIsSet())
+    j["repThreshUl"] = o.m_RepThreshUl;
+  if (o.repThreshRpIsSet())
+    j["repThreshRp"] = o.m_RepThreshRp;
   if (o.repThreshDatRateUlIsSet())
     j["repThreshDatRateUl"] = o.m_RepThreshDatRateUl;
   if (o.repThreshDatRateDlIsSet())
     j["repThreshDatRateDl"] = o.m_RepThreshDatRateDl;
-  if (o.conThreshDlIsSet()) j["conThreshDl"] = o.m_ConThreshDl;
-  if (o.conThreshUlIsSet()) j["conThreshUl"] = o.m_ConThreshUl;
+  if (o.conThreshDlIsSet())
+    j["conThreshDl"] = o.m_ConThreshDl;
+  if (o.conThreshUlIsSet())
+    j["conThreshUl"] = o.m_ConThreshUl;
 }
 
-void from_json(const nlohmann::json& j, QosMonitoringInformationRm& o) {
+void from_json(const nlohmann::json &j, QosMonitoringInformationRm &o) {
   if (j.find("repThreshDl") != j.end()) {
     j.at("repThreshDl").get_to(o.m_RepThreshDl);
     o.m_RepThreshDlIsSet = true;
@@ -173,7 +178,7 @@ int32_t QosMonitoringInformationRm::getRepThreshDl() const {
   return m_RepThreshDl;
 }
 void QosMonitoringInformationRm::setRepThreshDl(int32_t const value) {
-  m_RepThreshDl      = value;
+  m_RepThreshDl = value;
   m_RepThreshDlIsSet = true;
 }
 bool QosMonitoringInformationRm::repThreshDlIsSet() const {
@@ -186,7 +191,7 @@ int32_t QosMonitoringInformationRm::getRepThreshUl() const {
   return m_RepThreshUl;
 }
 void QosMonitoringInformationRm::setRepThreshUl(int32_t const value) {
-  m_RepThreshUl      = value;
+  m_RepThreshUl = value;
   m_RepThreshUlIsSet = true;
 }
 bool QosMonitoringInformationRm::repThreshUlIsSet() const {
@@ -199,7 +204,7 @@ int32_t QosMonitoringInformationRm::getRepThreshRp() const {
   return m_RepThreshRp;
 }
 void QosMonitoringInformationRm::setRepThreshRp(int32_t const value) {
-  m_RepThreshRp      = value;
+  m_RepThreshRp = value;
   m_RepThreshRpIsSet = true;
 }
 bool QosMonitoringInformationRm::repThreshRpIsSet() const {
@@ -212,8 +217,8 @@ std::string QosMonitoringInformationRm::getRepThreshDatRateUl() const {
   return m_RepThreshDatRateUl;
 }
 void QosMonitoringInformationRm::setRepThreshDatRateUl(
-    std::string const& value) {
-  m_RepThreshDatRateUl      = value;
+    std::string const &value) {
+  m_RepThreshDatRateUl = value;
   m_RepThreshDatRateUlIsSet = true;
 }
 bool QosMonitoringInformationRm::repThreshDatRateUlIsSet() const {
@@ -226,8 +231,8 @@ std::string QosMonitoringInformationRm::getRepThreshDatRateDl() const {
   return m_RepThreshDatRateDl;
 }
 void QosMonitoringInformationRm::setRepThreshDatRateDl(
-    std::string const& value) {
-  m_RepThreshDatRateDl      = value;
+    std::string const &value) {
+  m_RepThreshDatRateDl = value;
   m_RepThreshDatRateDlIsSet = true;
 }
 bool QosMonitoringInformationRm::repThreshDatRateDlIsSet() const {
@@ -240,7 +245,7 @@ int32_t QosMonitoringInformationRm::getConThreshDl() const {
   return m_ConThreshDl;
 }
 void QosMonitoringInformationRm::setConThreshDl(int32_t const value) {
-  m_ConThreshDl      = value;
+  m_ConThreshDl = value;
   m_ConThreshDlIsSet = true;
 }
 bool QosMonitoringInformationRm::conThreshDlIsSet() const {
@@ -253,7 +258,7 @@ int32_t QosMonitoringInformationRm::getConThreshUl() const {
   return m_ConThreshUl;
 }
 void QosMonitoringInformationRm::setConThreshUl(int32_t const value) {
-  m_ConThreshUl      = value;
+  m_ConThreshUl = value;
   m_ConThreshUlIsSet = true;
 }
 bool QosMonitoringInformationRm::conThreshUlIsSet() const {
@@ -263,4 +268,4 @@ void QosMonitoringInformationRm::unsetConThreshUl() {
   m_ConThreshUlIsSet = false;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

@@ -27,7 +27,7 @@ namespace oai::model::smf {
 /// Possible values are   - 64_KBPS   - MAX_UE_RATE
 /// </summary>
 class MaxIntegrityProtectedDataRate {
- public:
+public:
   MaxIntegrityProtectedDataRate();
   virtual ~MaxIntegrityProtectedDataRate();
 
@@ -36,14 +36,14 @@ class MaxIntegrityProtectedDataRate {
   /////////////////////////////////////////////
   /// MaxIntegrityProtectedDataRate members
 
-  friend void to_json(
-      nlohmann::json& j, const MaxIntegrityProtectedDataRate& o);
-  friend void from_json(
-      const nlohmann::json& j, MaxIntegrityProtectedDataRate& o);
+  friend void to_json(nlohmann::json &j,
+                      const MaxIntegrityProtectedDataRate &o);
+  friend void from_json(const nlohmann::json &j,
+                        MaxIntegrityProtectedDataRate &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* MaxIntegrityProtectedDataRate_H_ */

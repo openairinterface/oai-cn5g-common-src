@@ -23,10 +23,10 @@ void MaReleaseIndication::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const MaReleaseIndication& o) {
+void to_json(nlohmann::json &j, const MaReleaseIndication &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, MaReleaseIndication& o) {}
+void from_json(const nlohmann::json &j, MaReleaseIndication &o) {}
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

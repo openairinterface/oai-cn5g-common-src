@@ -13,8 +13,8 @@
 
 #include "SensorMeasurement_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::common {
 
@@ -27,12 +27,12 @@ void SensorMeasurement_anyOf::validate() const {
   }
 }
 
-bool SensorMeasurement_anyOf::validate(std::stringstream& msg) const {
+bool SensorMeasurement_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool SensorMeasurement_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool SensorMeasurement_anyOf::validate(std::stringstream &msg,
+                                       const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "SensorMeasurement_anyOf" : pathPrefix;
@@ -47,38 +47,38 @@ bool SensorMeasurement_anyOf::validate(
 }
 
 bool SensorMeasurement_anyOf::operator==(
-    const SensorMeasurement_anyOf& rhs) const {
+    const SensorMeasurement_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool SensorMeasurement_anyOf::operator!=(
-    const SensorMeasurement_anyOf& rhs) const {
+    const SensorMeasurement_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const SensorMeasurement_anyOf& o) {
+void to_json(nlohmann::json &j, const SensorMeasurement_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case SensorMeasurement_anyOf::eSensorMeasurement_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case SensorMeasurement_anyOf::eSensorMeasurement_anyOf::BAROMETRIC_PRESSURE:
-      j = "BAROMETRIC_PRESSURE";
-      break;
-    case SensorMeasurement_anyOf::eSensorMeasurement_anyOf::UE_SPEED:
-      j = "UE_SPEED";
-      break;
-    case SensorMeasurement_anyOf::eSensorMeasurement_anyOf::UE_ORIENTATION:
-      j = "UE_ORIENTATION";
-      break;
+  case SensorMeasurement_anyOf::eSensorMeasurement_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case SensorMeasurement_anyOf::eSensorMeasurement_anyOf::BAROMETRIC_PRESSURE:
+    j = "BAROMETRIC_PRESSURE";
+    break;
+  case SensorMeasurement_anyOf::eSensorMeasurement_anyOf::UE_SPEED:
+    j = "UE_SPEED";
+    break;
+  case SensorMeasurement_anyOf::eSensorMeasurement_anyOf::UE_ORIENTATION:
+    j = "UE_ORIENTATION";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, SensorMeasurement_anyOf& o) {
+void from_json(const nlohmann::json &j, SensorMeasurement_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "BAROMETRIC_PRESSURE") {
     o.setValue(
@@ -106,4 +106,4 @@ void SensorMeasurement_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

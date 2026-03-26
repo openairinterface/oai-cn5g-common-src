@@ -21,9 +21,9 @@
 
 #include "ReportingFrequency.h"
 #include "RequestedQosMonitoringParameter.h"
+#include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
-#include <nlohmann/json.hpp>
 
 namespace oai::model::pcf {
 
@@ -31,7 +31,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class QosMonitoringData {
- public:
+public:
   QosMonitoringData();
   virtual ~QosMonitoringData() = default;
 
@@ -45,16 +45,16 @@ class QosMonitoringData {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const QosMonitoringData& rhs) const;
-  bool operator!=(const QosMonitoringData& rhs) const;
+  bool operator==(const QosMonitoringData &rhs) const;
+  bool operator!=(const QosMonitoringData &rhs) const;
 
   /////////////////////////////////////////////
   /// QosMonitoringData members
@@ -63,7 +63,7 @@ class QosMonitoringData {
   /// Univocally identifies the QoS monitoring policy data within a PDU session.
   /// </summary>
   std::string getQmId() const;
-  void setQmId(std::string const& value);
+  void setQmId(std::string const &value);
   /// <summary>
   /// indicates the UL packet delay, DL packet delay and/or round trip packet
   /// delay between the UE and the UPF is to be monitored when the QoS
@@ -72,14 +72,14 @@ class QosMonitoringData {
   std::vector<oai::model::pcf::RequestedQosMonitoringParameter>
   getReqQosMonParams() const;
   void setReqQosMonParams(
-      std::vector<oai::model::pcf::RequestedQosMonitoringParameter> const&
-          value);
+      std::vector<oai::model::pcf::RequestedQosMonitoringParameter> const
+          &value);
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::pcf::ReportingFrequency> getRepFreqs() const;
-  void setRepFreqs(
-      std::vector<oai::model::pcf::ReportingFrequency> const& value);
+  void
+  setRepFreqs(std::vector<oai::model::pcf::ReportingFrequency> const &value);
   /// <summary>
   /// Indicates the period of time in units of miliiseconds for DL packet delay.
   /// </summary>
@@ -120,21 +120,21 @@ class QosMonitoringData {
   ///
   /// </summary>
   std::string getNotifyUri() const;
-  void setNotifyUri(std::string const& value);
+  void setNotifyUri(std::string const &value);
   bool notifyUriIsSet() const;
   void unsetNotifyUri();
   /// <summary>
   ///
   /// </summary>
   std::string getNotifyCorreId() const;
-  void setNotifyCorreId(std::string const& value);
+  void setNotifyCorreId(std::string const &value);
   bool notifyCorreIdIsSet() const;
   void unsetNotifyCorreId();
 
-  friend void to_json(nlohmann::json& j, const QosMonitoringData& o);
-  friend void from_json(const nlohmann::json& j, QosMonitoringData& o);
+  friend void to_json(nlohmann::json &j, const QosMonitoringData &o);
+  friend void from_json(const nlohmann::json &j, QosMonitoringData &o);
 
- protected:
+protected:
   std::string m_QmId;
 
   std::vector<oai::model::pcf::RequestedQosMonitoringParameter>
@@ -158,6 +158,6 @@ class QosMonitoringData {
   bool m_NotifyCorreIdIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* QosMonitoringData_H_ */

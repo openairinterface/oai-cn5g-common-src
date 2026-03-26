@@ -36,7 +36,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class UeContextInSmfData {
- public:
+public:
   UeContextInSmfData();
   virtual ~UeContextInSmfData();
 
@@ -49,29 +49,29 @@ class UeContextInSmfData {
   /// A map (list of key-value pairs where PduSessionId serves as key) of
   /// PduSessions
   /// </summary>
-  std::map<std::string, PduSession>& getPduSessions();
-  void setPduSessions(std::map<std::string, PduSession> const& value);
+  std::map<std::string, PduSession> &getPduSessions();
+  void setPduSessions(std::map<std::string, PduSession> const &value);
   bool pduSessionsIsSet() const;
   void unsetPduSessions();
   /// <summary>
   ///
   /// </summary>
-  std::vector<PgwInfo>& getPgwInfo();
-  void setPgwInfo(std::vector<PgwInfo> const& value);
+  std::vector<PgwInfo> &getPgwInfo();
+  void setPgwInfo(std::vector<PgwInfo> const &value);
   bool pgwInfoIsSet() const;
   void unsetPgwInfo();
   /// <summary>
   ///
   /// </summary>
   EmergencyInfo getEmergencyInfo() const;
-  void setEmergencyInfo(EmergencyInfo const& value);
+  void setEmergencyInfo(EmergencyInfo const &value);
   bool emergencyInfoIsSet() const;
   void unsetEmergencyInfo();
 
-  friend void to_json(nlohmann::json& j, const UeContextInSmfData& o);
-  friend void from_json(const nlohmann::json& j, UeContextInSmfData& o);
+  friend void to_json(nlohmann::json &j, const UeContextInSmfData &o);
+  friend void from_json(const nlohmann::json &j, UeContextInSmfData &o);
 
- protected:
+protected:
   std::map<std::string, PduSession> m_PduSessions;
   bool m_PduSessionsIsSet;
   std::vector<PgwInfo> m_PgwInfo;
@@ -80,6 +80,6 @@ class UeContextInSmfData {
   bool m_EmergencyInfoIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* UeContextInSmfData_H_ */

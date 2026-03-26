@@ -29,7 +29,7 @@ namespace oai::model::pcf {
 /// DL or both, UL and DL.
 /// </summary>
 class UplinkDownlinkSupport {
- public:
+public:
   UplinkDownlinkSupport();
   virtual ~UplinkDownlinkSupport() = default;
 
@@ -43,26 +43,26 @@ class UplinkDownlinkSupport {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const UplinkDownlinkSupport& rhs) const;
-  bool operator!=(const UplinkDownlinkSupport& rhs) const;
+  bool operator==(const UplinkDownlinkSupport &rhs) const;
+  bool operator!=(const UplinkDownlinkSupport &rhs) const;
 
   /////////////////////////////////////////////
   /// UplinkDownlinkSupport members
 
-  friend void to_json(nlohmann::json& j, const UplinkDownlinkSupport& o);
-  friend void from_json(const nlohmann::json& j, UplinkDownlinkSupport& o);
+  friend void to_json(nlohmann::json &j, const UplinkDownlinkSupport &o);
+  friend void from_json(const nlohmann::json &j, UplinkDownlinkSupport &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* UplinkDownlinkSupport_H_ */

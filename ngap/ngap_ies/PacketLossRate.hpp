@@ -12,20 +12,20 @@ extern "C" {
 namespace oai::ngap {
 
 class PacketLossRate {
- public:
+public:
   PacketLossRate();
   virtual ~PacketLossRate();
 
   void set(long value);
-  bool get(long& value) const;
+  bool get(long &value) const;
 
-  bool encode(Ngap_PacketLossRate_t&) const;
-  bool decode(const Ngap_PacketLossRate_t&);
+  bool encode(Ngap_PacketLossRate_t &) const;
+  bool decode(const Ngap_PacketLossRate_t &);
 
- private:
+private:
   long m_PacketLossRate;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

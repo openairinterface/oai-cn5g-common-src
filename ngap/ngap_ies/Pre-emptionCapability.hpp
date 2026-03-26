@@ -12,20 +12,20 @@ extern "C" {
 namespace oai::ngap {
 
 class Pre_emptionCapability {
- public:
+public:
   Pre_emptionCapability();
   virtual ~Pre_emptionCapability();
 
   void set(e_Ngap_Pre_emptionCapability value);
-  bool get(e_Ngap_Pre_emptionCapability& value) const;
+  bool get(e_Ngap_Pre_emptionCapability &value) const;
 
-  bool encode(Ngap_Pre_emptionCapability_t&) const;
-  bool decode(const Ngap_Pre_emptionCapability_t&);
+  bool encode(Ngap_Pre_emptionCapability_t &) const;
+  bool decode(const Ngap_Pre_emptionCapability_t &);
 
- private:
+private:
   long m_Pre_emptionCapability;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

@@ -13,8 +13,8 @@
 
 #include "RequestedQosMonitoringParameter_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::pcf {
 
@@ -30,12 +30,12 @@ void RequestedQosMonitoringParameter_anyOf::validate() const {
 }
 
 bool RequestedQosMonitoringParameter_anyOf::validate(
-    std::stringstream& msg) const {
+    std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool RequestedQosMonitoringParameter_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "RequestedQosMonitoringParameter_anyOf" : pathPrefix;
@@ -51,43 +51,43 @@ bool RequestedQosMonitoringParameter_anyOf::validate(
 }
 
 bool RequestedQosMonitoringParameter_anyOf::operator==(
-    const RequestedQosMonitoringParameter_anyOf& rhs) const {
+    const RequestedQosMonitoringParameter_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool RequestedQosMonitoringParameter_anyOf::operator!=(
-    const RequestedQosMonitoringParameter_anyOf& rhs) const {
+    const RequestedQosMonitoringParameter_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(
-    nlohmann::json& j, const RequestedQosMonitoringParameter_anyOf& o) {
+void to_json(nlohmann::json &j,
+             const RequestedQosMonitoringParameter_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case RequestedQosMonitoringParameter_anyOf::
-        eRequestedQosMonitoringParameter_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case RequestedQosMonitoringParameter_anyOf::
-        eRequestedQosMonitoringParameter_anyOf::DOWNLINK:
-      j = "DOWNLINK";
-      break;
-    case RequestedQosMonitoringParameter_anyOf::
-        eRequestedQosMonitoringParameter_anyOf::UPLINK:
-      j = "UPLINK";
-      break;
-    case RequestedQosMonitoringParameter_anyOf::
-        eRequestedQosMonitoringParameter_anyOf::ROUND_TRIP:
-      j = "ROUND_TRIP";
-      break;
+  case RequestedQosMonitoringParameter_anyOf::
+      eRequestedQosMonitoringParameter_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case RequestedQosMonitoringParameter_anyOf::
+      eRequestedQosMonitoringParameter_anyOf::DOWNLINK:
+    j = "DOWNLINK";
+    break;
+  case RequestedQosMonitoringParameter_anyOf::
+      eRequestedQosMonitoringParameter_anyOf::UPLINK:
+    j = "UPLINK";
+    break;
+  case RequestedQosMonitoringParameter_anyOf::
+      eRequestedQosMonitoringParameter_anyOf::ROUND_TRIP:
+    j = "ROUND_TRIP";
+    break;
   }
 }
 
-void from_json(
-    const nlohmann::json& j, RequestedQosMonitoringParameter_anyOf& o) {
+void from_json(const nlohmann::json &j,
+               RequestedQosMonitoringParameter_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "DOWNLINK") {
     o.setValue(RequestedQosMonitoringParameter_anyOf::
@@ -118,4 +118,4 @@ void RequestedQosMonitoringParameter_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

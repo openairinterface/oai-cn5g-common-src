@@ -27,13 +27,13 @@ void RatType::validate() const {
   }
 }
 
-bool RatType::validate(std::stringstream& msg) const {
+bool RatType::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool RatType::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool RatType::validate(std::stringstream &msg,
+                       const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "RatType" : pathPrefix;
 
   if (!m_value.validate(msg)) {
@@ -42,32 +42,24 @@ bool RatType::validate(
   return success;
 }
 
-bool RatType::operator==(const RatType& rhs) const {
+bool RatType::operator==(const RatType &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool RatType::operator!=(const RatType& rhs) const {
-  return !(*this == rhs);
-}
+bool RatType::operator!=(const RatType &rhs) const { return !(*this == rhs); }
 
-void to_json(nlohmann::json& j, const RatType& o) {
+void to_json(nlohmann::json &j, const RatType &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, RatType& o) {
-  from_json(j, o.m_value);
-}
+void from_json(const nlohmann::json &j, RatType &o) { from_json(j, o.m_value); }
 
-RatType_anyOf RatType::getValue() const {
-  return m_value;
-}
+RatType_anyOf RatType::getValue() const { return m_value; }
 
-void RatType::setValue(RatType_anyOf value) {
-  m_value = value;
-}
+void RatType::setValue(RatType_anyOf value) { m_value = value; }
 
 RatType_anyOf::eRatType_anyOf RatType::getEnumValue() const {
   return m_value.getValue();
@@ -77,4 +69,4 @@ void RatType::setEnumValue(RatType_anyOf::eRatType_anyOf value) {
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

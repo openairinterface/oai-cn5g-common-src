@@ -31,7 +31,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class NiddInformation {
- public:
+public:
   NiddInformation();
   virtual ~NiddInformation();
 
@@ -44,25 +44,25 @@ class NiddInformation {
   ///
   /// </summary>
   std::string getAfInstanceId() const;
-  void setAfInstanceId(std::string const& value);
+  void setAfInstanceId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getGpsi() const;
-  void setGpsi(std::string const& value);
+  void setGpsi(std::string const &value);
   bool gpsiIsSet() const;
   void unsetGpsi();
 
-  friend void to_json(nlohmann::json& j, const NiddInformation& o);
-  friend void from_json(const nlohmann::json& j, NiddInformation& o);
+  friend void to_json(nlohmann::json &j, const NiddInformation &o);
+  friend void from_json(const nlohmann::json &j, NiddInformation &o);
 
- protected:
+protected:
   std::string m_AfInstanceId;
 
   std::string m_Gpsi;
   bool m_GpsiIsSet;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* NiddInformation_H_ */

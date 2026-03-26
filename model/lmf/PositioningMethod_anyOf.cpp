@@ -13,8 +13,8 @@
 
 #include "PositioningMethod_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::lmf {
 
@@ -27,12 +27,12 @@ void PositioningMethod_anyOf::validate() const {
   }
 }
 
-bool PositioningMethod_anyOf::validate(std::stringstream& msg) const {
+bool PositioningMethod_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool PositioningMethod_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool PositioningMethod_anyOf::validate(std::stringstream &msg,
+                                       const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PositioningMethod_anyOf" : pathPrefix;
@@ -47,74 +47,74 @@ bool PositioningMethod_anyOf::validate(
 }
 
 bool PositioningMethod_anyOf::operator==(
-    const PositioningMethod_anyOf& rhs) const {
+    const PositioningMethod_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool PositioningMethod_anyOf::operator!=(
-    const PositioningMethod_anyOf& rhs) const {
+    const PositioningMethod_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PositioningMethod_anyOf& o) {
+void to_json(nlohmann::json &j, const PositioningMethod_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case PositioningMethod_anyOf::ePositioningMethod_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case PositioningMethod_anyOf::ePositioningMethod_anyOf::CELLID:
-      j = "CELLID";
-      break;
-    case PositioningMethod_anyOf::ePositioningMethod_anyOf::ECID:
-      j = "ECID";
-      break;
-    case PositioningMethod_anyOf::ePositioningMethod_anyOf::OTDOA:
-      j = "OTDOA";
-      break;
-    case PositioningMethod_anyOf::ePositioningMethod_anyOf::BAROMETRIC_PRESSURE:
-      j = "BAROMETRIC_PRESSURE";
-      break;
-    case PositioningMethod_anyOf::ePositioningMethod_anyOf::WLAN:
-      j = "WLAN";
-      break;
-    case PositioningMethod_anyOf::ePositioningMethod_anyOf::BLUETOOTH:
-      j = "BLUETOOTH";
-      break;
-    case PositioningMethod_anyOf::ePositioningMethod_anyOf::MBS:
-      j = "MBS";
-      break;
-    case PositioningMethod_anyOf::ePositioningMethod_anyOf::MOTION_SENSOR:
-      j = "MOTION_SENSOR";
-      break;
-    case PositioningMethod_anyOf::ePositioningMethod_anyOf::DL_TDOA:
-      j = "DL_TDOA";
-      break;
-    case PositioningMethod_anyOf::ePositioningMethod_anyOf::DL_AOD:
-      j = "DL_AOD";
-      break;
-    case PositioningMethod_anyOf::ePositioningMethod_anyOf::MULTI_RTT:
-      j = "MULTI-RTT";
-      break;
-    case PositioningMethod_anyOf::ePositioningMethod_anyOf::NR_ECID:
-      j = "NR_ECID";
-      break;
-    case PositioningMethod_anyOf::ePositioningMethod_anyOf::UL_TDOA:
-      j = "UL_TDOA";
-      break;
-    case PositioningMethod_anyOf::ePositioningMethod_anyOf::UL_AOA:
-      j = "UL_AOA";
-      break;
-    case PositioningMethod_anyOf::ePositioningMethod_anyOf::NETWORK_SPECIFIC:
-      j = "NETWORK_SPECIFIC";
-      break;
+  case PositioningMethod_anyOf::ePositioningMethod_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case PositioningMethod_anyOf::ePositioningMethod_anyOf::CELLID:
+    j = "CELLID";
+    break;
+  case PositioningMethod_anyOf::ePositioningMethod_anyOf::ECID:
+    j = "ECID";
+    break;
+  case PositioningMethod_anyOf::ePositioningMethod_anyOf::OTDOA:
+    j = "OTDOA";
+    break;
+  case PositioningMethod_anyOf::ePositioningMethod_anyOf::BAROMETRIC_PRESSURE:
+    j = "BAROMETRIC_PRESSURE";
+    break;
+  case PositioningMethod_anyOf::ePositioningMethod_anyOf::WLAN:
+    j = "WLAN";
+    break;
+  case PositioningMethod_anyOf::ePositioningMethod_anyOf::BLUETOOTH:
+    j = "BLUETOOTH";
+    break;
+  case PositioningMethod_anyOf::ePositioningMethod_anyOf::MBS:
+    j = "MBS";
+    break;
+  case PositioningMethod_anyOf::ePositioningMethod_anyOf::MOTION_SENSOR:
+    j = "MOTION_SENSOR";
+    break;
+  case PositioningMethod_anyOf::ePositioningMethod_anyOf::DL_TDOA:
+    j = "DL_TDOA";
+    break;
+  case PositioningMethod_anyOf::ePositioningMethod_anyOf::DL_AOD:
+    j = "DL_AOD";
+    break;
+  case PositioningMethod_anyOf::ePositioningMethod_anyOf::MULTI_RTT:
+    j = "MULTI-RTT";
+    break;
+  case PositioningMethod_anyOf::ePositioningMethod_anyOf::NR_ECID:
+    j = "NR_ECID";
+    break;
+  case PositioningMethod_anyOf::ePositioningMethod_anyOf::UL_TDOA:
+    j = "UL_TDOA";
+    break;
+  case PositioningMethod_anyOf::ePositioningMethod_anyOf::UL_AOA:
+    j = "UL_AOA";
+    break;
+  case PositioningMethod_anyOf::ePositioningMethod_anyOf::NETWORK_SPECIFIC:
+    j = "NETWORK_SPECIFIC";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, PositioningMethod_anyOf& o) {
+void from_json(const nlohmann::json &j, PositioningMethod_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "CELLID") {
     o.setValue(PositioningMethod_anyOf::ePositioningMethod_anyOf::CELLID);
@@ -167,4 +167,4 @@ void PositioningMethod_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

@@ -20,8 +20,8 @@
 #define CommunicationFailure_H_
 
 #include "NgApCause.h"
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::amf {
 
@@ -29,7 +29,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class CommunicationFailure {
- public:
+public:
   CommunicationFailure();
   virtual ~CommunicationFailure() = default;
 
@@ -43,10 +43,10 @@ class CommunicationFailure {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const CommunicationFailure& rhs) const;
-  bool operator!=(const CommunicationFailure& rhs) const;
+  bool operator==(const CommunicationFailure &rhs) const;
+  bool operator!=(const CommunicationFailure &rhs) const;
 
   /////////////////////////////////////////////
   /// CommunicationFailure members
@@ -55,21 +55,21 @@ class CommunicationFailure {
   ///
   /// </summary>
   std::string getNasReleaseCode() const;
-  void setNasReleaseCode(std::string const& value);
+  void setNasReleaseCode(std::string const &value);
   bool nasReleaseCodeIsSet() const;
   void unsetNasReleaseCode();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::NgApCause getRanReleaseCode() const;
-  void setRanReleaseCode(oai::model::common::NgApCause const& value);
+  void setRanReleaseCode(oai::model::common::NgApCause const &value);
   bool ranReleaseCodeIsSet() const;
   void unsetRanReleaseCode();
 
-  friend void to_json(nlohmann::json& j, const CommunicationFailure& o);
-  friend void from_json(const nlohmann::json& j, CommunicationFailure& o);
+  friend void to_json(nlohmann::json &j, const CommunicationFailure &o);
+  friend void from_json(const nlohmann::json &j, CommunicationFailure &o);
 
- protected:
+protected:
   std::string m_NasReleaseCode;
   bool m_NasReleaseCodeIsSet;
   oai::model::common::NgApCause m_RanReleaseCode;
@@ -77,9 +77,9 @@ class CommunicationFailure {
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* CommunicationFailure_H_ */

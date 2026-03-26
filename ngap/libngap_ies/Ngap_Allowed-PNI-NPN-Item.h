@@ -12,9 +12,9 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
+#include "Ngap_Allowed-CAG-List-per-PLMN.h"
 #include "Ngap_PLMNIdentity.h"
 #include <NativeEnumerated.h>
-#include "Ngap_Allowed-CAG-List-per-PLMN.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -23,7 +23,7 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_Allowed_PNI_NPN_Item__pNI_NPN_restricted {
-  Ngap_Allowed_PNI_NPN_Item__pNI_NPN_restricted_restricted     = 0,
+  Ngap_Allowed_PNI_NPN_Item__pNI_NPN_restricted_restricted = 0,
   Ngap_Allowed_PNI_NPN_Item__pNI_NPN_restricted_not_restricted = 1
   /*
    * Enumeration is extensible
@@ -38,7 +38,7 @@ typedef struct Ngap_Allowed_PNI_NPN_Item {
   Ngap_PLMNIdentity_t pLMNIdentity;
   long pNI_NPN_restricted;
   Ngap_Allowed_CAG_List_per_PLMN_t allowed_CAG_List_per_PLMN;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

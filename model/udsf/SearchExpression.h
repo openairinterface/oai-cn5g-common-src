@@ -19,13 +19,13 @@
 #ifndef SearchExpression_H_
 #define SearchExpression_H_
 
-#include "RecordIdList.h"
-#include <string>
-#include <vector>
 #include "ComparisonOperator.h"
 #include "ConditionOperator.h"
+#include "RecordIdList.h"
 #include "SearchCondition.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::udsf {
 
@@ -33,7 +33,7 @@ namespace oai::model::udsf {
 /// A logical expression element
 /// </summary>
 class SearchExpression {
- public:
+public:
   SearchExpression();
   virtual ~SearchExpression() = default;
 
@@ -47,28 +47,28 @@ class SearchExpression {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const SearchExpression& rhs) const;
-  bool operator!=(const SearchExpression& rhs) const;
+  bool operator==(const SearchExpression &rhs) const;
+  bool operator!=(const SearchExpression &rhs) const;
 
   /////////////////////////////////////////////
   /// SearchExpression members
 
   oai::model::udsf::SearchCondition getSearchCondition() const;
-  void setSearchCondition(oai::model::udsf::SearchCondition const& value);
+  void setSearchCondition(oai::model::udsf::SearchCondition const &value);
 
   bool searchConditionIsSet() const;
   void unsetSearchCondition();
 
   oai::model::udsf::SearchComparison getSearchComparison() const;
-  void setSearchComparison(oai::model::udsf::SearchComparison const& value);
+  void setSearchComparison(oai::model::udsf::SearchComparison const &value);
 
   bool searchComparisonIsSet() const;
   void unsetSearchComparison();
@@ -76,15 +76,15 @@ class SearchExpression {
   ///
   /// </summary>
   std::vector<std::string> getRecordIdList() const;
-  void setRecordIdList(std::vector<std::string> const& value);
+  void setRecordIdList(std::vector<std::string> const &value);
 
   bool recordIdListIsSet() const;
   void unsetRecordIdList();
 
-  friend void to_json(nlohmann::json& j, const SearchExpression& o);
-  friend void from_json(const nlohmann::json& j, SearchExpression& o);
+  friend void to_json(nlohmann::json &j, const SearchExpression &o);
+  friend void from_json(const nlohmann::json &j, SearchExpression &o);
 
- protected:
+protected:
   oai::model::udsf::SearchCondition m_SearchCondition;
   bool m_SearchConditionIsSet;
   oai::model::udsf::SearchComparison m_SearchComparison;
@@ -93,6 +93,6 @@ class SearchExpression {
   bool m_RecordIdListIsSet;
 };
 
-}  // namespace oai::model::udsf
+} // namespace oai::model::udsf
 
 #endif /* SearchExpression_H_ */

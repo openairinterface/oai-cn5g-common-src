@@ -31,7 +31,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class UserIdentifier {
- public:
+public:
   UserIdentifier();
   virtual ~UserIdentifier();
 
@@ -44,26 +44,26 @@ class UserIdentifier {
   ///
   /// </summary>
   std::string getSupi() const;
-  void setSupi(std::string const& value);
+  void setSupi(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getGpsi() const;
-  void setGpsi(std::string const& value);
+  void setGpsi(std::string const &value);
   bool gpsiIsSet() const;
   void unsetGpsi();
   /// <summary>
   ///
   /// </summary>
   std::string getValidityTime() const;
-  void setValidityTime(std::string const& value);
+  void setValidityTime(std::string const &value);
   bool validityTimeIsSet() const;
   void unsetValidityTime();
 
-  friend void to_json(nlohmann::json& j, const UserIdentifier& o);
-  friend void from_json(const nlohmann::json& j, UserIdentifier& o);
+  friend void to_json(nlohmann::json &j, const UserIdentifier &o);
+  friend void from_json(const nlohmann::json &j, UserIdentifier &o);
 
- protected:
+protected:
   std::string m_Supi;
 
   std::string m_Gpsi;
@@ -72,6 +72,6 @@ class UserIdentifier {
   bool m_ValidityTimeIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* UserIdentifier_H_ */

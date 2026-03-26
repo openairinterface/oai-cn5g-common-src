@@ -70,7 +70,7 @@ asn_CHOICE_specifics_t asn_SPC_Ngap_OverloadResponse_specs_1 = {
     sizeof(struct Ngap_OverloadResponse),
     offsetof(struct Ngap_OverloadResponse, _asn_ctx),
     offsetof(struct Ngap_OverloadResponse, present),
-    sizeof(((struct Ngap_OverloadResponse*) 0)->present),
+    sizeof(((struct Ngap_OverloadResponse *)0)->present),
     asn_MAP_Ngap_OverloadResponse_tag2el_1,
     2, /* Count of tags in the map */
     0,

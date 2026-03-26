@@ -27,12 +27,12 @@ void PduSetHandlingInfo::validate() const {
   }
 }
 
-bool PduSetHandlingInfo::validate(std::stringstream& msg) const {
+bool PduSetHandlingInfo::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool PduSetHandlingInfo::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool PduSetHandlingInfo::validate(std::stringstream &msg,
+                                  const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PduSetHandlingInfo" : pathPrefix;
@@ -40,18 +40,18 @@ bool PduSetHandlingInfo::validate(
   return success;
 }
 
-bool PduSetHandlingInfo::operator==(const PduSetHandlingInfo& rhs) const {
-  return true;  // TODO
+bool PduSetHandlingInfo::operator==(const PduSetHandlingInfo &rhs) const {
+  return true; // TODO
 }
 
-bool PduSetHandlingInfo::operator!=(const PduSetHandlingInfo& rhs) const {
+bool PduSetHandlingInfo::operator!=(const PduSetHandlingInfo &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PduSetHandlingInfo& o) {
+void to_json(nlohmann::json &j, const PduSetHandlingInfo &o) {
   j = nlohmann::json::object();
 }
 
-void from_json(const nlohmann::json& j, PduSetHandlingInfo& o) {}
+void from_json(const nlohmann::json &j, PduSetHandlingInfo &o) {}
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

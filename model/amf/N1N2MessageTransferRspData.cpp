@@ -16,7 +16,7 @@
 namespace oai::model::amf {
 
 N1N2MessageTransferRspData::N1N2MessageTransferRspData() {
-  m_SupportedFeatures      = "";
+  m_SupportedFeatures = "";
   m_SupportedFeaturesIsSet = false;
 }
 
@@ -26,14 +26,14 @@ void N1N2MessageTransferRspData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const N1N2MessageTransferRspData& o) {
-  j          = nlohmann::json();
+void to_json(nlohmann::json &j, const N1N2MessageTransferRspData &o) {
+  j = nlohmann::json();
   j["cause"] = o.m_Cause;
   if (o.supportedFeaturesIsSet())
     j["supportedFeatures"] = o.m_SupportedFeatures;
 }
 
-void from_json(const nlohmann::json& j, N1N2MessageTransferRspData& o) {
+void from_json(const nlohmann::json &j, N1N2MessageTransferRspData &o) {
   j.at("cause").get_to(o.m_Cause);
   if (j.find("supportedFeatures") != j.end()) {
     j.at("supportedFeatures").get_to(o.m_SupportedFeatures);
@@ -45,15 +45,15 @@ N1N2MessageTransferCause N1N2MessageTransferRspData::getCause() const {
   return m_Cause;
 }
 void N1N2MessageTransferRspData::setCause(
-    N1N2MessageTransferCause const& value) {
+    N1N2MessageTransferCause const &value) {
   m_Cause = value;
 }
 std::string N1N2MessageTransferRspData::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
 void N1N2MessageTransferRspData::setSupportedFeatures(
-    std::string const& value) {
-  m_SupportedFeatures      = value;
+    std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool N1N2MessageTransferRspData::supportedFeaturesIsSet() const {
@@ -63,4 +63,4 @@ void N1N2MessageTransferRspData::unsetSupportedFeatures() {
   m_SupportedFeaturesIsSet = false;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

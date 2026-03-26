@@ -27,12 +27,12 @@ void QosNotifType::validate() const {
   }
 }
 
-bool QosNotifType::validate(std::stringstream& msg) const {
+bool QosNotifType::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool QosNotifType::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool QosNotifType::validate(std::stringstream &msg,
+                            const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "QosNotifType" : pathPrefix;
@@ -43,32 +43,28 @@ bool QosNotifType::validate(
   return success;
 }
 
-bool QosNotifType::operator==(const QosNotifType& rhs) const {
+bool QosNotifType::operator==(const QosNotifType &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool QosNotifType::operator!=(const QosNotifType& rhs) const {
+bool QosNotifType::operator!=(const QosNotifType &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const QosNotifType& o) {
+void to_json(nlohmann::json &j, const QosNotifType &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, QosNotifType& o) {
+void from_json(const nlohmann::json &j, QosNotifType &o) {
   from_json(j, o.m_value);
 }
 
-QosNotifType_anyOf QosNotifType::getValue() const {
-  return m_value;
-}
+QosNotifType_anyOf QosNotifType::getValue() const { return m_value; }
 
-void QosNotifType::setValue(QosNotifType_anyOf value) {
-  m_value = value;
-}
+void QosNotifType::setValue(QosNotifType_anyOf value) { m_value = value; }
 
 QosNotifType_anyOf::eQosNotifType_anyOf QosNotifType::getEnumValue() const {
   return m_value.getValue();
@@ -78,4 +74,4 @@ void QosNotifType::setEnumValue(QosNotifType_anyOf::eQosNotifType_anyOf value) {
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

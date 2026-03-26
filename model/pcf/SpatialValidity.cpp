@@ -27,18 +27,18 @@ void SpatialValidity::validate() const {
   }
 }
 
-bool SpatialValidity::validate(std::stringstream& msg) const {
+bool SpatialValidity::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool SpatialValidity::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool SpatialValidity::validate(std::stringstream &msg,
+                               const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "SpatialValidity" : pathPrefix;
 
   /* PresenceInfoList */ {
-    const std::map<std::string, oai::model::common::PresenceInfo>& value =
+    const std::map<std::string, oai::model::common::PresenceInfo> &value =
         m_PresenceInfoList;
     const std::string currentValuePath = _pathPrefix + ".presenceInfoList";
   }
@@ -46,7 +46,7 @@ bool SpatialValidity::validate(
   return success;
 }
 
-bool SpatialValidity::operator==(const SpatialValidity& rhs) const {
+bool SpatialValidity::operator==(const SpatialValidity &rhs) const {
   return
 
       (getPresenceInfoList() == rhs.getPresenceInfoList())
@@ -54,16 +54,16 @@ bool SpatialValidity::operator==(const SpatialValidity& rhs) const {
           ;
 }
 
-bool SpatialValidity::operator!=(const SpatialValidity& rhs) const {
+bool SpatialValidity::operator!=(const SpatialValidity &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const SpatialValidity& o) {
-  j                     = nlohmann::json::object();
+void to_json(nlohmann::json &j, const SpatialValidity &o) {
+  j = nlohmann::json::object();
   j["presenceInfoList"] = o.m_PresenceInfoList;
 }
 
-void from_json(const nlohmann::json& j, SpatialValidity& o) {
+void from_json(const nlohmann::json &j, SpatialValidity &o) {
   j.at("presenceInfoList").get_to(o.m_PresenceInfoList);
 }
 
@@ -72,8 +72,8 @@ SpatialValidity::getPresenceInfoList() const {
   return m_PresenceInfoList;
 }
 void SpatialValidity::setPresenceInfoList(
-    std::map<std::string, oai::model::common::PresenceInfo> const& value) {
+    std::map<std::string, oai::model::common::PresenceInfo> const &value) {
   m_PresenceInfoList = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

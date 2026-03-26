@@ -28,7 +28,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class HsmfUpdatedData {
- public:
+public:
   HsmfUpdatedData();
   virtual ~HsmfUpdatedData();
 
@@ -41,18 +41,18 @@ class HsmfUpdatedData {
   ///
   /// </summary>
   oai::model::common::RefToBinaryData getN1SmInfoToUe() const;
-  void setN1SmInfoToUe(oai::model::common::RefToBinaryData const& value);
+  void setN1SmInfoToUe(oai::model::common::RefToBinaryData const &value);
   bool n1SmInfoToUeIsSet() const;
   void unsetN1SmInfoToUe();
 
-  friend void to_json(nlohmann::json& j, const HsmfUpdatedData& o);
-  friend void from_json(const nlohmann::json& j, HsmfUpdatedData& o);
+  friend void to_json(nlohmann::json &j, const HsmfUpdatedData &o);
+  friend void from_json(const nlohmann::json &j, HsmfUpdatedData &o);
 
- protected:
+protected:
   oai::model::common::RefToBinaryData m_N1SmInfoToUe;
   bool m_N1SmInfoToUeIsSet;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* HsmfUpdatedData_H_ */

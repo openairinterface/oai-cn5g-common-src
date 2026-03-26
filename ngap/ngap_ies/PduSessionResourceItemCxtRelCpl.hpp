@@ -14,24 +14,24 @@ extern "C" {
 namespace oai::ngap {
 
 class PduSessionResourceItemCxtRelCpl {
- public:
+public:
   PduSessionResourceItemCxtRelCpl();
   virtual ~PduSessionResourceItemCxtRelCpl();
 
-  void set(const PduSessionId& pduSessionId);
-  void get(PduSessionId& pduSessionId) const;
+  void set(const PduSessionId &pduSessionId);
+  void get(PduSessionId &pduSessionId) const;
 
-  bool encode(
-      Ngap_PDUSessionResourceItemCxtRelCpl_t& pduSessionResourceItem) const;
-  bool decode(
-      const Ngap_PDUSessionResourceItemCxtRelCpl_t& pduSessionResourceItem);
+  bool
+  encode(Ngap_PDUSessionResourceItemCxtRelCpl_t &pduSessionResourceItem) const;
+  bool
+  decode(const Ngap_PDUSessionResourceItemCxtRelCpl_t &pduSessionResourceItem);
 
- private:
-  PduSessionId m_PduSessionId;  // Mandatory
+private:
+  PduSessionId m_PduSessionId; // Mandatory
   // TODO (not defined in ASN1C) OCTET_STRING_t
   // pdu_session_resource_release_response_transfer_; //Optional
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

@@ -20,14 +20,14 @@
 namespace oai::model::nrf {
 
 SmfInfo::SmfInfo() {
-  m_TaiListIsSet        = false;
-  m_TaiRangeListIsSet   = false;
-  m_PgwFqdn             = "";
-  m_PgwFqdnIsSet        = false;
-  m_AccessTypeIsSet     = false;
-  m_Priority            = 0;
-  m_PriorityIsSet       = false;
-  m_VsmfSupportInd      = false;
+  m_TaiListIsSet = false;
+  m_TaiRangeListIsSet = false;
+  m_PgwFqdn = "";
+  m_PgwFqdnIsSet = false;
+  m_AccessTypeIsSet = false;
+  m_Priority = 0;
+  m_PriorityIsSet = false;
+  m_VsmfSupportInd = false;
   m_VsmfSupportIndIsSet = false;
 }
 
@@ -38,17 +38,17 @@ void SmfInfo::validate() const {
   }
 }
 
-bool SmfInfo::validate(std::stringstream& msg) const {
+bool SmfInfo::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool SmfInfo::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool SmfInfo::validate(std::stringstream &msg,
+                       const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "SmfInfo" : pathPrefix;
 
   /* SNssaiSmfInfoList */ {
-    const std::vector<oai::model::nrf::SnssaiSmfInfoItem>& value =
+    const std::vector<oai::model::nrf::SnssaiSmfInfoItem> &value =
         m_SNssaiSmfInfoList;
     const std::string currentValuePath = _pathPrefix + ".sNssaiSmfInfoList";
 
@@ -56,10 +56,10 @@ bool SmfInfo::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::nrf::SnssaiSmfInfoItem& value : value) {
+      int i = 0;
+      for (const oai::model::nrf::SnssaiSmfInfoItem &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -73,17 +73,17 @@ bool SmfInfo::validate(
   }
 
   if (taiListIsSet()) {
-    const std::vector<oai::model::common::Tai>& value = m_TaiList;
+    const std::vector<oai::model::common::Tai> &value = m_TaiList;
     const std::string currentValuePath = _pathPrefix + ".taiList";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::Tai& value : value) {
+      int i = 0;
+      for (const oai::model::common::Tai &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -95,17 +95,17 @@ bool SmfInfo::validate(
   }
 
   if (taiRangeListIsSet()) {
-    const std::vector<oai::model::nrf::TaiRange>& value = m_TaiRangeList;
+    const std::vector<oai::model::nrf::TaiRange> &value = m_TaiRangeList;
     const std::string currentValuePath = _pathPrefix + ".taiRangeList";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::nrf::TaiRange& value : value) {
+      int i = 0;
+      for (const oai::model::nrf::TaiRange &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -118,17 +118,17 @@ bool SmfInfo::validate(
   }
 
   if (accessTypeIsSet()) {
-    const std::vector<oai::model::common::AccessType>& value = m_AccessType;
+    const std::vector<oai::model::common::AccessType> &value = m_AccessType;
     const std::string currentValuePath = _pathPrefix + ".accessType";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::AccessType& value : value) {
+      int i = 0;
+      for (const oai::model::common::AccessType &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -140,7 +140,7 @@ bool SmfInfo::validate(
   }
 
   if (priorityIsSet()) {
-    const int32_t& value               = m_Priority;
+    const int32_t &value = m_Priority;
     const std::string currentValuePath = _pathPrefix + ".priority";
 
     if (value < 0) {
@@ -156,7 +156,7 @@ bool SmfInfo::validate(
   return success;
 }
 
-bool SmfInfo::operator==(const SmfInfo& rhs) const {
+bool SmfInfo::operator==(const SmfInfo &rhs) const {
   return
 
       (getSNssaiSmfInfoList() == rhs.getSNssaiSmfInfoList()) &&
@@ -188,24 +188,26 @@ bool SmfInfo::operator==(const SmfInfo& rhs) const {
           ;
 }
 
-bool SmfInfo::operator!=(const SmfInfo& rhs) const {
-  return !(*this == rhs);
-}
+bool SmfInfo::operator!=(const SmfInfo &rhs) const { return !(*this == rhs); }
 
-void to_json(nlohmann::json& j, const SmfInfo& o) {
-  j                      = nlohmann::json::object();
+void to_json(nlohmann::json &j, const SmfInfo &o) {
+  j = nlohmann::json::object();
   j["sNssaiSmfInfoList"] = o.m_SNssaiSmfInfoList;
-  if (o.taiListIsSet() || !o.m_TaiList.empty()) j["taiList"] = o.m_TaiList;
+  if (o.taiListIsSet() || !o.m_TaiList.empty())
+    j["taiList"] = o.m_TaiList;
   if (o.taiRangeListIsSet() || !o.m_TaiRangeList.empty())
     j["taiRangeList"] = o.m_TaiRangeList;
-  if (o.pgwFqdnIsSet()) j["pgwFqdn"] = o.m_PgwFqdn;
+  if (o.pgwFqdnIsSet())
+    j["pgwFqdn"] = o.m_PgwFqdn;
   if (o.accessTypeIsSet() || !o.m_AccessType.empty())
     j["accessType"] = o.m_AccessType;
-  if (o.priorityIsSet()) j["priority"] = o.m_Priority;
-  if (o.vsmfSupportIndIsSet()) j["vsmfSupportInd"] = o.m_VsmfSupportInd;
+  if (o.priorityIsSet())
+    j["priority"] = o.m_Priority;
+  if (o.vsmfSupportIndIsSet())
+    j["vsmfSupportInd"] = o.m_VsmfSupportInd;
 }
 
-void from_json(const nlohmann::json& j, SmfInfo& o) {
+void from_json(const nlohmann::json &j, SmfInfo &o) {
   j.at("sNssaiSmfInfoList").get_to(o.m_SNssaiSmfInfoList);
   if (j.find("taiList") != j.end()) {
     j.at("taiList").get_to(o.m_TaiList);
@@ -233,94 +235,64 @@ void from_json(const nlohmann::json& j, SmfInfo& o) {
   }
 }
 
-std::vector<oai::model::nrf::SnssaiSmfInfoItem> SmfInfo::getSNssaiSmfInfoList()
-    const {
+std::vector<oai::model::nrf::SnssaiSmfInfoItem>
+SmfInfo::getSNssaiSmfInfoList() const {
   return m_SNssaiSmfInfoList;
 }
 void SmfInfo::setSNssaiSmfInfoList(
-    std::vector<oai::model::nrf::SnssaiSmfInfoItem> const& value) {
+    std::vector<oai::model::nrf::SnssaiSmfInfoItem> const &value) {
   m_SNssaiSmfInfoList = value;
 }
 std::vector<oai::model::common::Tai> SmfInfo::getTaiList() const {
   return m_TaiList;
 }
-void SmfInfo::setTaiList(std::vector<oai::model::common::Tai> const& value) {
-  m_TaiList      = value;
+void SmfInfo::setTaiList(std::vector<oai::model::common::Tai> const &value) {
+  m_TaiList = value;
   m_TaiListIsSet = true;
 }
-bool SmfInfo::taiListIsSet() const {
-  return m_TaiListIsSet;
-}
-void SmfInfo::unsetTaiList() {
-  m_TaiListIsSet = false;
-}
+bool SmfInfo::taiListIsSet() const { return m_TaiListIsSet; }
+void SmfInfo::unsetTaiList() { m_TaiListIsSet = false; }
 std::vector<oai::model::nrf::TaiRange> SmfInfo::getTaiRangeList() const {
   return m_TaiRangeList;
 }
 void SmfInfo::setTaiRangeList(
-    std::vector<oai::model::nrf::TaiRange> const& value) {
-  m_TaiRangeList      = value;
+    std::vector<oai::model::nrf::TaiRange> const &value) {
+  m_TaiRangeList = value;
   m_TaiRangeListIsSet = true;
 }
-bool SmfInfo::taiRangeListIsSet() const {
-  return m_TaiRangeListIsSet;
-}
-void SmfInfo::unsetTaiRangeList() {
-  m_TaiRangeListIsSet = false;
-}
-std::string SmfInfo::getPgwFqdn() const {
-  return m_PgwFqdn;
-}
-void SmfInfo::setPgwFqdn(std::string const& value) {
-  m_PgwFqdn      = value;
+bool SmfInfo::taiRangeListIsSet() const { return m_TaiRangeListIsSet; }
+void SmfInfo::unsetTaiRangeList() { m_TaiRangeListIsSet = false; }
+std::string SmfInfo::getPgwFqdn() const { return m_PgwFqdn; }
+void SmfInfo::setPgwFqdn(std::string const &value) {
+  m_PgwFqdn = value;
   m_PgwFqdnIsSet = true;
 }
-bool SmfInfo::pgwFqdnIsSet() const {
-  return m_PgwFqdnIsSet;
-}
-void SmfInfo::unsetPgwFqdn() {
-  m_PgwFqdnIsSet = false;
-}
+bool SmfInfo::pgwFqdnIsSet() const { return m_PgwFqdnIsSet; }
+void SmfInfo::unsetPgwFqdn() { m_PgwFqdnIsSet = false; }
 std::vector<oai::model::common::AccessType> SmfInfo::getAccessType() const {
   return m_AccessType;
 }
 void SmfInfo::setAccessType(
-    std::vector<oai::model::common::AccessType> const& value) {
-  m_AccessType      = value;
+    std::vector<oai::model::common::AccessType> const &value) {
+  m_AccessType = value;
   m_AccessTypeIsSet = true;
 }
-bool SmfInfo::accessTypeIsSet() const {
-  return m_AccessTypeIsSet;
-}
-void SmfInfo::unsetAccessType() {
-  m_AccessTypeIsSet = false;
-}
-int32_t SmfInfo::getPriority() const {
-  return m_Priority;
-}
+bool SmfInfo::accessTypeIsSet() const { return m_AccessTypeIsSet; }
+void SmfInfo::unsetAccessType() { m_AccessTypeIsSet = false; }
+int32_t SmfInfo::getPriority() const { return m_Priority; }
 void SmfInfo::setPriority(int32_t const value) {
-  m_Priority      = value;
+  m_Priority = value;
   m_PriorityIsSet = true;
 }
-bool SmfInfo::priorityIsSet() const {
-  return m_PriorityIsSet;
-}
-void SmfInfo::unsetPriority() {
-  m_PriorityIsSet = false;
-}
-bool SmfInfo::isVsmfSupportInd() const {
-  return m_VsmfSupportInd;
-}
+bool SmfInfo::priorityIsSet() const { return m_PriorityIsSet; }
+void SmfInfo::unsetPriority() { m_PriorityIsSet = false; }
+bool SmfInfo::isVsmfSupportInd() const { return m_VsmfSupportInd; }
 void SmfInfo::setVsmfSupportInd(bool const value) {
-  m_VsmfSupportInd      = value;
+  m_VsmfSupportInd = value;
   m_VsmfSupportIndIsSet = true;
 }
-bool SmfInfo::vsmfSupportIndIsSet() const {
-  return m_VsmfSupportIndIsSet;
-}
-void SmfInfo::unsetVsmfSupportInd() {
-  m_VsmfSupportIndIsSet = false;
-}
+bool SmfInfo::vsmfSupportIndIsSet() const { return m_VsmfSupportIndIsSet; }
+void SmfInfo::unsetVsmfSupportInd() { m_VsmfSupportIndIsSet = false; }
 
 std::string SmfInfo::to_string(int indent_level) const {
   std::string out;
@@ -328,7 +300,7 @@ std::string SmfInfo::to_string(int indent_level) const {
   out.append(fmt::format(fmt_title, "smf_info:"));
 
   if (!m_SNssaiSmfInfoList.empty()) {
-    for (const auto& info : m_SNssaiSmfInfoList) {
+    for (const auto &info : m_SNssaiSmfInfoList) {
       out.append(info.to_string(indent_level + 1));
     }
   }
@@ -337,4 +309,4 @@ std::string SmfInfo::to_string(int indent_level) const {
   return out;
 }
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

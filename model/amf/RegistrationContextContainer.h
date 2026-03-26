@@ -19,16 +19,16 @@
 #ifndef RegistrationContextContainer_H_
 #define RegistrationContextContainer_H_
 
+#include "AccessType.h"
 #include "AllowedNssai.h"
-#include "UeContext.h"
-#include <string>
-#include "UserLocation.h"
 #include "ConfiguredSnssai.h"
 #include "GlobalRanNodeId.h"
 #include "Snssai.h"
-#include <vector>
-#include "AccessType.h"
+#include "UeContext.h"
+#include "UserLocation.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::amf {
 
@@ -36,7 +36,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class RegistrationContextContainer {
- public:
+public:
   RegistrationContextContainer();
   virtual ~RegistrationContextContainer();
 
@@ -49,19 +49,19 @@ class RegistrationContextContainer {
   ///
   /// </summary>
   UeContext getUeContext() const;
-  void setUeContext(UeContext const& value);
+  void setUeContext(UeContext const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getLocalTimeZone() const;
-  void setLocalTimeZone(std::string const& value);
+  void setLocalTimeZone(std::string const &value);
   bool localTimeZoneIsSet() const;
   void unsetLocalTimeZone();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::AccessType getAnType() const;
-  void setAnType(oai::model::common::AccessType const& value);
+  void setAnType(oai::model::common::AccessType const &value);
   /// <summary>
   ///
   /// </summary>
@@ -71,22 +71,22 @@ class RegistrationContextContainer {
   ///
   /// </summary>
   oai::model::common::GlobalRanNodeId getRanNodeId() const;
-  void setRanNodeId(oai::model::common::GlobalRanNodeId const& value);
+  void setRanNodeId(oai::model::common::GlobalRanNodeId const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getInitialAmfName() const;
-  void setInitialAmfName(std::string const& value);
+  void setInitialAmfName(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::UserLocation getUserLocation() const;
-  void setUserLocation(oai::model::common::UserLocation const& value);
+  void setUserLocation(oai::model::common::UserLocation const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getRrcEstCause() const;
-  void setRrcEstCause(std::string const& value);
+  void setRrcEstCause(std::string const &value);
   bool rrcEstCauseIsSet() const;
   void unsetRrcEstCause();
   /// <summary>
@@ -100,47 +100,47 @@ class RegistrationContextContainer {
   ///
   /// </summary>
   std::string getAnN2IPv4Addr() const;
-  void setAnN2IPv4Addr(std::string const& value);
+  void setAnN2IPv4Addr(std::string const &value);
   bool anN2IPv4AddrIsSet() const;
   void unsetAnN2IPv4Addr();
   /// <summary>
   ///
   /// </summary>
   std::string getAnN2IPv6Addr() const;
-  void setAnN2IPv6Addr(std::string const& value);
+  void setAnN2IPv6Addr(std::string const &value);
   bool anN2IPv6AddrIsSet() const;
   void unsetAnN2IPv6Addr();
   /// <summary>
   ///
   /// </summary>
   AllowedNssai getAllowedNssai() const;
-  void setAllowedNssai(AllowedNssai const& value);
+  void setAllowedNssai(AllowedNssai const &value);
   bool allowedNssaiIsSet() const;
   void unsetAllowedNssai();
   /// <summary>
   ///
   /// </summary>
-  std::vector<ConfiguredSnssai>& getConfiguredNssai();
+  std::vector<ConfiguredSnssai> &getConfiguredNssai();
   bool configuredNssaiIsSet() const;
   void unsetConfiguredNssai();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::Snssai>& getRejectedNssaiInPlmn();
+  std::vector<oai::model::common::Snssai> &getRejectedNssaiInPlmn();
   bool rejectedNssaiInPlmnIsSet() const;
   void unsetRejectedNssaiInPlmn();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::Snssai>& getRejectedNssaiInTa();
+  std::vector<oai::model::common::Snssai> &getRejectedNssaiInTa();
   bool rejectedNssaiInTaIsSet() const;
   void unsetRejectedNssaiInTa();
 
-  friend void to_json(nlohmann::json& j, const RegistrationContextContainer& o);
-  friend void from_json(
-      const nlohmann::json& j, RegistrationContextContainer& o);
+  friend void to_json(nlohmann::json &j, const RegistrationContextContainer &o);
+  friend void from_json(const nlohmann::json &j,
+                        RegistrationContextContainer &o);
 
- protected:
+protected:
   UeContext m_UeContext;
 
   std::string m_LocalTimeZone;
@@ -173,6 +173,6 @@ class RegistrationContextContainer {
   bool m_RejectedNssaiInTaIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* RegistrationContextContainer_H_ */

@@ -18,12 +18,12 @@ namespace oai::model::smf {
 using namespace oai::model::common;
 
 QosFlowProfile::QosFlowProfile() {
-  m__5qi                       = 0;
-  m_NonDynamic5QiIsSet         = false;
-  m_Dynamic5QiIsSet            = false;
-  m_ArpIsSet                   = false;
-  m_GbrQosFlowInfoIsSet        = false;
-  m_RqaIsSet                   = false;
+  m__5qi = 0;
+  m_NonDynamic5QiIsSet = false;
+  m_Dynamic5QiIsSet = false;
+  m_ArpIsSet = false;
+  m_GbrQosFlowInfoIsSet = false;
+  m_RqaIsSet = false;
   m_AdditionalQosFlowInfoIsSet = false;
 }
 
@@ -33,19 +33,24 @@ void QosFlowProfile::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const QosFlowProfile& o) {
-  j        = nlohmann::json();
+void to_json(nlohmann::json &j, const QosFlowProfile &o) {
+  j = nlohmann::json();
   j["5qi"] = o.m__5qi;
-  if (o.nonDynamic5QiIsSet()) j["nonDynamic5Qi"] = o.m_NonDynamic5Qi;
-  if (o.dynamic5QiIsSet()) j["dynamic5Qi"] = o.m_Dynamic5Qi;
-  if (o.arpIsSet()) j["arp"] = o.m_Arp;
-  if (o.gbrQosFlowInfoIsSet()) j["gbrQosFlowInfo"] = o.m_GbrQosFlowInfo;
-  if (o.rqaIsSet()) j["rqa"] = o.m_Rqa;
+  if (o.nonDynamic5QiIsSet())
+    j["nonDynamic5Qi"] = o.m_NonDynamic5Qi;
+  if (o.dynamic5QiIsSet())
+    j["dynamic5Qi"] = o.m_Dynamic5Qi;
+  if (o.arpIsSet())
+    j["arp"] = o.m_Arp;
+  if (o.gbrQosFlowInfoIsSet())
+    j["gbrQosFlowInfo"] = o.m_GbrQosFlowInfo;
+  if (o.rqaIsSet())
+    j["rqa"] = o.m_Rqa;
   if (o.additionalQosFlowInfoIsSet())
     j["additionalQosFlowInfo"] = o.m_AdditionalQosFlowInfo;
 }
 
-void from_json(const nlohmann::json& j, QosFlowProfile& o) {
+void from_json(const nlohmann::json &j, QosFlowProfile &o) {
   j.at("5qi").get_to(o.m__5qi);
   if (j.find("nonDynamic5Qi") != j.end()) {
     j.at("nonDynamic5Qi").get_to(o.m_NonDynamic5Qi);
@@ -73,83 +78,55 @@ void from_json(const nlohmann::json& j, QosFlowProfile& o) {
   }
 }
 
-int32_t QosFlowProfile::get5qi() const {
-  return m__5qi;
-}
-void QosFlowProfile::set5qi(int32_t const value) {
-  m__5qi = value;
-}
+int32_t QosFlowProfile::get5qi() const { return m__5qi; }
+void QosFlowProfile::set5qi(int32_t const value) { m__5qi = value; }
 NonDynamic5Qi QosFlowProfile::getNonDynamic5Qi() const {
   return m_NonDynamic5Qi;
 }
-void QosFlowProfile::setNonDynamic5Qi(NonDynamic5Qi const& value) {
-  m_NonDynamic5Qi      = value;
+void QosFlowProfile::setNonDynamic5Qi(NonDynamic5Qi const &value) {
+  m_NonDynamic5Qi = value;
   m_NonDynamic5QiIsSet = true;
 }
-bool QosFlowProfile::nonDynamic5QiIsSet() const {
-  return m_NonDynamic5QiIsSet;
-}
-void QosFlowProfile::unsetNonDynamic5Qi() {
-  m_NonDynamic5QiIsSet = false;
-}
-Dynamic5Qi QosFlowProfile::getDynamic5Qi() const {
-  return m_Dynamic5Qi;
-}
-void QosFlowProfile::setDynamic5Qi(Dynamic5Qi const& value) {
-  m_Dynamic5Qi      = value;
+bool QosFlowProfile::nonDynamic5QiIsSet() const { return m_NonDynamic5QiIsSet; }
+void QosFlowProfile::unsetNonDynamic5Qi() { m_NonDynamic5QiIsSet = false; }
+Dynamic5Qi QosFlowProfile::getDynamic5Qi() const { return m_Dynamic5Qi; }
+void QosFlowProfile::setDynamic5Qi(Dynamic5Qi const &value) {
+  m_Dynamic5Qi = value;
   m_Dynamic5QiIsSet = true;
 }
-bool QosFlowProfile::dynamic5QiIsSet() const {
-  return m_Dynamic5QiIsSet;
-}
-void QosFlowProfile::unsetDynamic5Qi() {
-  m_Dynamic5QiIsSet = false;
-}
-Arp QosFlowProfile::getArp() const {
-  return m_Arp;
-}
-void QosFlowProfile::setArp(Arp const& value) {
-  m_Arp      = value;
+bool QosFlowProfile::dynamic5QiIsSet() const { return m_Dynamic5QiIsSet; }
+void QosFlowProfile::unsetDynamic5Qi() { m_Dynamic5QiIsSet = false; }
+Arp QosFlowProfile::getArp() const { return m_Arp; }
+void QosFlowProfile::setArp(Arp const &value) {
+  m_Arp = value;
   m_ArpIsSet = true;
 }
-bool QosFlowProfile::arpIsSet() const {
-  return m_ArpIsSet;
-}
-void QosFlowProfile::unsetArp() {
-  m_ArpIsSet = false;
-}
+bool QosFlowProfile::arpIsSet() const { return m_ArpIsSet; }
+void QosFlowProfile::unsetArp() { m_ArpIsSet = false; }
 GbrQosFlowInformation QosFlowProfile::getGbrQosFlowInfo() const {
   return m_GbrQosFlowInfo;
 }
-void QosFlowProfile::setGbrQosFlowInfo(GbrQosFlowInformation const& value) {
-  m_GbrQosFlowInfo      = value;
+void QosFlowProfile::setGbrQosFlowInfo(GbrQosFlowInformation const &value) {
+  m_GbrQosFlowInfo = value;
   m_GbrQosFlowInfoIsSet = true;
 }
 bool QosFlowProfile::gbrQosFlowInfoIsSet() const {
   return m_GbrQosFlowInfoIsSet;
 }
-void QosFlowProfile::unsetGbrQosFlowInfo() {
-  m_GbrQosFlowInfoIsSet = false;
-}
-ReflectiveQoSAttribute QosFlowProfile::getRqa() const {
-  return m_Rqa;
-}
-void QosFlowProfile::setRqa(ReflectiveQoSAttribute const& value) {
-  m_Rqa      = value;
+void QosFlowProfile::unsetGbrQosFlowInfo() { m_GbrQosFlowInfoIsSet = false; }
+ReflectiveQoSAttribute QosFlowProfile::getRqa() const { return m_Rqa; }
+void QosFlowProfile::setRqa(ReflectiveQoSAttribute const &value) {
+  m_Rqa = value;
   m_RqaIsSet = true;
 }
-bool QosFlowProfile::rqaIsSet() const {
-  return m_RqaIsSet;
-}
-void QosFlowProfile::unsetRqa() {
-  m_RqaIsSet = false;
-}
+bool QosFlowProfile::rqaIsSet() const { return m_RqaIsSet; }
+void QosFlowProfile::unsetRqa() { m_RqaIsSet = false; }
 AdditionalQosFlowInfo QosFlowProfile::getAdditionalQosFlowInfo() const {
   return m_AdditionalQosFlowInfo;
 }
 void QosFlowProfile::setAdditionalQosFlowInfo(
-    AdditionalQosFlowInfo const& value) {
-  m_AdditionalQosFlowInfo      = value;
+    AdditionalQosFlowInfo const &value) {
+  m_AdditionalQosFlowInfo = value;
   m_AdditionalQosFlowInfoIsSet = true;
 }
 bool QosFlowProfile::additionalQosFlowInfoIsSet() const {
@@ -159,4 +136,4 @@ void QosFlowProfile::unsetAdditionalQosFlowInfo() {
   m_AdditionalQosFlowInfoIsSet = false;
 }
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

@@ -15,9 +15,7 @@
 
 namespace oai::model::amf {
 
-StatusInfo::StatusInfo() {
-  m_CauseIsSet = false;
-}
+StatusInfo::StatusInfo() { m_CauseIsSet = false; }
 
 StatusInfo::~StatusInfo() {}
 
@@ -25,13 +23,14 @@ void StatusInfo::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const StatusInfo& o) {
-  j                   = nlohmann::json();
+void to_json(nlohmann::json &j, const StatusInfo &o) {
+  j = nlohmann::json();
   j["resourceStatus"] = o.m_ResourceStatus;
-  if (o.causeIsSet()) j["cause"] = o.m_Cause;
+  if (o.causeIsSet())
+    j["cause"] = o.m_Cause;
 }
 
-void from_json(const nlohmann::json& j, StatusInfo& o) {
+void from_json(const nlohmann::json &j, StatusInfo &o) {
   j.at("resourceStatus").get_to(o.m_ResourceStatus);
   if (j.find("cause") != j.end()) {
     j.at("cause").get_to(o.m_Cause);
@@ -42,21 +41,15 @@ void from_json(const nlohmann::json& j, StatusInfo& o) {
 ResourceStatus StatusInfo::getResourceStatus() const {
   return m_ResourceStatus;
 }
-void StatusInfo::setResourceStatus(ResourceStatus const& value) {
+void StatusInfo::setResourceStatus(ResourceStatus const &value) {
   m_ResourceStatus = value;
 }
-Cause StatusInfo::getCause() const {
-  return m_Cause;
-}
-void StatusInfo::setCause(Cause const& value) {
-  m_Cause      = value;
+Cause StatusInfo::getCause() const { return m_Cause; }
+void StatusInfo::setCause(Cause const &value) {
+  m_Cause = value;
   m_CauseIsSet = true;
 }
-bool StatusInfo::causeIsSet() const {
-  return m_CauseIsSet;
-}
-void StatusInfo::unsetCause() {
-  m_CauseIsSet = false;
-}
+bool StatusInfo::causeIsSet() const { return m_CauseIsSet; }
+void StatusInfo::unsetCause() { m_CauseIsSet = false; }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

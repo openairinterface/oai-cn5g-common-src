@@ -27,12 +27,12 @@ void NgapIeType::validate() const {
   }
 }
 
-bool NgapIeType::validate(std::stringstream& msg) const {
+bool NgapIeType::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool NgapIeType::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool NgapIeType::validate(std::stringstream &msg,
+                          const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "NgapIeType" : pathPrefix;
@@ -43,32 +43,28 @@ bool NgapIeType::validate(
   return success;
 }
 
-bool NgapIeType::operator==(const NgapIeType& rhs) const {
+bool NgapIeType::operator==(const NgapIeType &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool NgapIeType::operator!=(const NgapIeType& rhs) const {
+bool NgapIeType::operator!=(const NgapIeType &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const NgapIeType& o) {
+void to_json(nlohmann::json &j, const NgapIeType &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, NgapIeType& o) {
+void from_json(const nlohmann::json &j, NgapIeType &o) {
   from_json(j, o.m_value);
 }
 
-NgapIeType_anyOf NgapIeType::getValue() const {
-  return m_value;
-}
+NgapIeType_anyOf NgapIeType::getValue() const { return m_value; }
 
-void NgapIeType::setValue(NgapIeType_anyOf value) {
-  m_value = value;
-}
+void NgapIeType::setValue(NgapIeType_anyOf value) { m_value = value; }
 
 NgapIeType_anyOf::eNgapIeType_anyOf NgapIeType::getEnumValue() const {
   return m_value.getValue();
@@ -78,4 +74,4 @@ void NgapIeType::setEnumValue(NgapIeType_anyOf::eNgapIeType_anyOf value) {
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

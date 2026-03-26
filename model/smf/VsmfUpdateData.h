@@ -20,17 +20,17 @@
 #define VsmfUpdateData_H_
 
 #include "Ambr.h"
-#include "RequestIndication.h"
+#include "Cause.h"
+#include "EbiArpMapping.h"
 #include "EpsBearerInfo.h"
 #include "MaReleaseIndication.h"
-#include "EbiArpMapping.h"
-#include "QosFlowReleaseRequestItem.h"
-#include "Cause.h"
-#include "RefToBinaryData.h"
-#include <string>
 #include "QosFlowAddModifyRequestItem.h"
-#include <vector>
+#include "QosFlowReleaseRequestItem.h"
+#include "RefToBinaryData.h"
+#include "RequestIndication.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::smf {
 
@@ -38,7 +38,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class VsmfUpdateData {
- public:
+public:
   VsmfUpdateData();
   virtual ~VsmfUpdateData();
 
@@ -51,48 +51,48 @@ class VsmfUpdateData {
   ///
   /// </summary>
   RequestIndication getRequestIndication() const;
-  void setRequestIndication(RequestIndication const& value);
+  void setRequestIndication(RequestIndication const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ambr getSessionAmbr() const;
-  void setSessionAmbr(oai::model::common::Ambr const& value);
+  void setSessionAmbr(oai::model::common::Ambr const &value);
   bool sessionAmbrIsSet() const;
   void unsetSessionAmbr();
   /// <summary>
   ///
   /// </summary>
-  std::vector<QosFlowAddModifyRequestItem>& getQosFlowsAddModRequestList();
+  std::vector<QosFlowAddModifyRequestItem> &getQosFlowsAddModRequestList();
   bool qosFlowsAddModRequestListIsSet() const;
   void unsetQosFlowsAddModRequestList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<QosFlowReleaseRequestItem>& getQosFlowsRelRequestList();
+  std::vector<QosFlowReleaseRequestItem> &getQosFlowsRelRequestList();
   bool qosFlowsRelRequestListIsSet() const;
   void unsetQosFlowsRelRequestList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<EpsBearerInfo>& getEpsBearerInfo();
+  std::vector<EpsBearerInfo> &getEpsBearerInfo();
   bool epsBearerInfoIsSet() const;
   void unsetEpsBearerInfo();
   /// <summary>
   ///
   /// </summary>
-  std::vector<int32_t>& getAssignEbiList();
+  std::vector<int32_t> &getAssignEbiList();
   bool assignEbiListIsSet() const;
   void unsetAssignEbiList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<int32_t>& getRevokeEbiList();
+  std::vector<int32_t> &getRevokeEbiList();
   bool revokeEbiListIsSet() const;
   void unsetRevokeEbiList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<EbiArpMapping>& getModifiedEbiList();
+  std::vector<EbiArpMapping> &getModifiedEbiList();
   bool modifiedEbiListIsSet() const;
   void unsetModifiedEbiList();
   /// <summary>
@@ -106,7 +106,7 @@ class VsmfUpdateData {
   ///
   /// </summary>
   oai::model::common::RefToBinaryData getN1SmInfoToUe() const;
-  void setN1SmInfoToUe(oai::model::common::RefToBinaryData const& value);
+  void setN1SmInfoToUe(oai::model::common::RefToBinaryData const &value);
   bool n1SmInfoToUeIsSet() const;
   void unsetN1SmInfoToUe();
   /// <summary>
@@ -120,28 +120,28 @@ class VsmfUpdateData {
   ///
   /// </summary>
   std::string getHsmfPduSessionUri() const;
-  void setHsmfPduSessionUri(std::string const& value);
+  void setHsmfPduSessionUri(std::string const &value);
   bool hsmfPduSessionUriIsSet() const;
   void unsetHsmfPduSessionUri();
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
   /// <summary>
   ///
   /// </summary>
   Cause getCause() const;
-  void setCause(Cause const& value);
+  void setCause(Cause const &value);
   bool causeIsSet() const;
   void unsetCause();
   /// <summary>
   ///
   /// </summary>
   std::string getN1smCause() const;
-  void setN1smCause(std::string const& value);
+  void setN1smCause(std::string const &value);
   bool n1smCauseIsSet() const;
   void unsetN1smCause();
   /// <summary>
@@ -155,14 +155,14 @@ class VsmfUpdateData {
   ///
   /// </summary>
   MaReleaseIndication getMaReleaseInd() const;
-  void setMaReleaseInd(MaReleaseIndication const& value);
+  void setMaReleaseInd(MaReleaseIndication const &value);
   bool maReleaseIndIsSet() const;
   void unsetMaReleaseInd();
 
-  friend void to_json(nlohmann::json& j, const VsmfUpdateData& o);
-  friend void from_json(const nlohmann::json& j, VsmfUpdateData& o);
+  friend void to_json(nlohmann::json &j, const VsmfUpdateData &o);
+  friend void from_json(const nlohmann::json &j, VsmfUpdateData &o);
 
- protected:
+protected:
   RequestIndication m_RequestIndication;
 
   oai::model::common::Ambr m_SessionAmbr;
@@ -199,6 +199,6 @@ class VsmfUpdateData {
   bool m_MaReleaseIndIsSet;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* VsmfUpdateData_H_ */

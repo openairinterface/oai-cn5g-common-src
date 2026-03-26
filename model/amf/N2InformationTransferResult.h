@@ -27,7 +27,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class N2InformationTransferResult {
- public:
+public:
   N2InformationTransferResult();
   virtual ~N2InformationTransferResult();
 
@@ -36,13 +36,13 @@ class N2InformationTransferResult {
   /////////////////////////////////////////////
   /// N2InformationTransferResult members
 
-  friend void to_json(nlohmann::json& j, const N2InformationTransferResult& o);
-  friend void from_json(
-      const nlohmann::json& j, N2InformationTransferResult& o);
+  friend void to_json(nlohmann::json &j, const N2InformationTransferResult &o);
+  friend void from_json(const nlohmann::json &j,
+                        N2InformationTransferResult &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* N2InformationTransferResult_H_ */

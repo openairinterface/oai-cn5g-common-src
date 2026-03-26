@@ -19,8 +19,8 @@
 #ifndef TemporalValidity_H_
 #define TemporalValidity_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::pcf {
 
@@ -28,7 +28,7 @@ namespace oai::model::pcf {
 /// Indicates the time interval(s) during which the AF request is to be applied.
 /// </summary>
 class TemporalValidity {
- public:
+public:
   TemporalValidity();
   virtual ~TemporalValidity() = default;
 
@@ -42,16 +42,16 @@ class TemporalValidity {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const TemporalValidity& rhs) const;
-  bool operator!=(const TemporalValidity& rhs) const;
+  bool operator==(const TemporalValidity &rhs) const;
+  bool operator!=(const TemporalValidity &rhs) const;
 
   /////////////////////////////////////////////
   /// TemporalValidity members
@@ -60,27 +60,27 @@ class TemporalValidity {
   /// string with format &#39;date-time&#39; as defined in OpenAPI.
   /// </summary>
   std::string getStartTime() const;
-  void setStartTime(std::string const& value);
+  void setStartTime(std::string const &value);
   bool startTimeIsSet() const;
   void unsetStartTime();
   /// <summary>
   /// string with format &#39;date-time&#39; as defined in OpenAPI.
   /// </summary>
   std::string getStopTime() const;
-  void setStopTime(std::string const& value);
+  void setStopTime(std::string const &value);
   bool stopTimeIsSet() const;
   void unsetStopTime();
 
-  friend void to_json(nlohmann::json& j, const TemporalValidity& o);
-  friend void from_json(const nlohmann::json& j, TemporalValidity& o);
+  friend void to_json(nlohmann::json &j, const TemporalValidity &o);
+  friend void from_json(const nlohmann::json &j, TemporalValidity &o);
 
- protected:
+protected:
   std::string m_StartTime;
   bool m_StartTimeIsSet;
   std::string m_StopTime;
   bool m_StopTimeIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* TemporalValidity_H_ */

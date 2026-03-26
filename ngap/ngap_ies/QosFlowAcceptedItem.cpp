@@ -14,13 +14,13 @@ QosFlowAcceptedItem::~QosFlowAcceptedItem() {}
 
 //------------------------------------------------------------------------------
 void QosFlowAcceptedItem::setQosFlowIdentifier(
-    const QosFlowIdentifier& qosFlowIdentifier) {
+    const QosFlowIdentifier &qosFlowIdentifier) {
   m_QosFlowIdentifier = qosFlowIdentifier;
 }
 
 //------------------------------------------------------------------------------
 void QosFlowAcceptedItem::getQosFlowIdentifier(
-    QosFlowIdentifier& qosFlowIdentifier) const {
+    QosFlowIdentifier &qosFlowIdentifier) const {
   qosFlowIdentifier = m_QosFlowIdentifier;
 }
 
@@ -41,7 +41,7 @@ QosFlowAcceptedItem::getCurrentQoSParametersSetIndex(std::optional<uint32_t>&
 
 //------------------------------------------------------------------------------
 bool QosFlowAcceptedItem::encode(
-    Ngap_QosFlowAcceptedItem_t& QosFlowAcceptedItem) const {
+    Ngap_QosFlowAcceptedItem_t &QosFlowAcceptedItem) const {
   if (!m_QosFlowIdentifier.encode(QosFlowAcceptedItem.qosFlowIdentifier))
     return false;
 
@@ -50,10 +50,10 @@ bool QosFlowAcceptedItem::encode(
 
 //------------------------------------------------------------------------------
 bool QosFlowAcceptedItem::decode(
-    const Ngap_QosFlowAcceptedItem_t& QosFlowAcceptedItem) {
+    const Ngap_QosFlowAcceptedItem_t &QosFlowAcceptedItem) {
   if (!m_QosFlowIdentifier.decode(QosFlowAcceptedItem.qosFlowIdentifier))
     return false;
 
   return true;
 }
-}  // namespace oai::ngap
+} // namespace oai::ngap

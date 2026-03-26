@@ -27,7 +27,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class NFStatus {
- public:
+public:
   NFStatus();
   virtual ~NFStatus();
 
@@ -36,12 +36,12 @@ class NFStatus {
   /////////////////////////////////////////////
   /// NFStatus members
 
-  friend void to_json(nlohmann::json& j, const NFStatus& o);
-  friend void from_json(const nlohmann::json& j, NFStatus& o);
+  friend void to_json(nlohmann::json &j, const NFStatus &o);
+  friend void from_json(const nlohmann::json &j, NFStatus &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* NFStatus_H_ */

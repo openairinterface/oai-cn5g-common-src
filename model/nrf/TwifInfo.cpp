@@ -21,8 +21,8 @@ namespace oai::model::nrf {
 TwifInfo::TwifInfo() {
   m_Ipv4EndpointAddressesIsSet = false;
   m_Ipv6EndpointAddressesIsSet = false;
-  m_EndpointFqdn               = "";
-  m_EndpointFqdnIsSet          = false;
+  m_EndpointFqdn = "";
+  m_EndpointFqdnIsSet = false;
 }
 
 void TwifInfo::validate() const {
@@ -32,27 +32,27 @@ void TwifInfo::validate() const {
   }
 }
 
-bool TwifInfo::validate(std::stringstream& msg) const {
+bool TwifInfo::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool TwifInfo::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool TwifInfo::validate(std::stringstream &msg,
+                        const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "TwifInfo" : pathPrefix;
 
   if (ipv4EndpointAddressesIsSet()) {
-    const std::vector<std::string>& value = m_Ipv4EndpointAddresses;
+    const std::vector<std::string> &value = m_Ipv4EndpointAddresses;
     const std::string currentValuePath = _pathPrefix + ".ipv4EndpointAddresses";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const std::string& value : value) {
+      int i = 0;
+      for (const std::string &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -62,7 +62,7 @@ bool TwifInfo::validate(
   }
 
   if (ipv6EndpointAddressesIsSet()) {
-    const std::vector<oai::model::common::Ipv6Addr>& value =
+    const std::vector<oai::model::common::Ipv6Addr> &value =
         m_Ipv6EndpointAddresses;
     const std::string currentValuePath = _pathPrefix + ".ipv6EndpointAddresses";
 
@@ -70,10 +70,10 @@ bool TwifInfo::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::Ipv6Addr& value : value) {
+      int i = 0;
+      for (const oai::model::common::Ipv6Addr &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -89,7 +89,7 @@ bool TwifInfo::validate(
   return success;
 }
 
-bool TwifInfo::operator==(const TwifInfo& rhs) const {
+bool TwifInfo::operator==(const TwifInfo &rhs) const {
   return
 
       ((!ipv4EndpointAddressesIsSet() && !rhs.ipv4EndpointAddressesIsSet()) ||
@@ -107,20 +107,19 @@ bool TwifInfo::operator==(const TwifInfo& rhs) const {
           ;
 }
 
-bool TwifInfo::operator!=(const TwifInfo& rhs) const {
-  return !(*this == rhs);
-}
+bool TwifInfo::operator!=(const TwifInfo &rhs) const { return !(*this == rhs); }
 
-void to_json(nlohmann::json& j, const TwifInfo& o) {
+void to_json(nlohmann::json &j, const TwifInfo &o) {
   j = nlohmann::json();
   if (o.ipv4EndpointAddressesIsSet() || !o.m_Ipv4EndpointAddresses.empty())
     j["ipv4EndpointAddresses"] = o.m_Ipv4EndpointAddresses;
   if (o.ipv6EndpointAddressesIsSet() || !o.m_Ipv6EndpointAddresses.empty())
     j["ipv6EndpointAddresses"] = o.m_Ipv6EndpointAddresses;
-  if (o.endpointFqdnIsSet()) j["endpointFqdn"] = o.m_EndpointFqdn;
+  if (o.endpointFqdnIsSet())
+    j["endpointFqdn"] = o.m_EndpointFqdn;
 }
 
-void from_json(const nlohmann::json& j, TwifInfo& o) {
+void from_json(const nlohmann::json &j, TwifInfo &o) {
   if (j.find("ipv4EndpointAddresses") != j.end()) {
     j.at("ipv4EndpointAddresses").get_to(o.m_Ipv4EndpointAddresses);
     o.m_Ipv4EndpointAddressesIsSet = true;
@@ -138,8 +137,8 @@ void from_json(const nlohmann::json& j, TwifInfo& o) {
 std::vector<std::string> TwifInfo::getIpv4EndpointAddresses() const {
   return m_Ipv4EndpointAddresses;
 }
-void TwifInfo::setIpv4EndpointAddresses(std::vector<std::string> const& value) {
-  m_Ipv4EndpointAddresses      = value;
+void TwifInfo::setIpv4EndpointAddresses(std::vector<std::string> const &value) {
+  m_Ipv4EndpointAddresses = value;
   m_Ipv4EndpointAddressesIsSet = true;
 }
 bool TwifInfo::ipv4EndpointAddressesIsSet() const {
@@ -148,13 +147,13 @@ bool TwifInfo::ipv4EndpointAddressesIsSet() const {
 void TwifInfo::unsetIpv4EndpointAddresses() {
   m_Ipv4EndpointAddressesIsSet = false;
 }
-std::vector<oai::model::common::Ipv6Addr> TwifInfo::getIpv6EndpointAddresses()
-    const {
+std::vector<oai::model::common::Ipv6Addr>
+TwifInfo::getIpv6EndpointAddresses() const {
   return m_Ipv6EndpointAddresses;
 }
 void TwifInfo::setIpv6EndpointAddresses(
-    std::vector<oai::model::common::Ipv6Addr> const& value) {
-  m_Ipv6EndpointAddresses      = value;
+    std::vector<oai::model::common::Ipv6Addr> const &value) {
+  m_Ipv6EndpointAddresses = value;
   m_Ipv6EndpointAddressesIsSet = true;
 }
 bool TwifInfo::ipv6EndpointAddressesIsSet() const {
@@ -163,18 +162,12 @@ bool TwifInfo::ipv6EndpointAddressesIsSet() const {
 void TwifInfo::unsetIpv6EndpointAddresses() {
   m_Ipv6EndpointAddressesIsSet = false;
 }
-std::string TwifInfo::getEndpointFqdn() const {
-  return m_EndpointFqdn;
-}
-void TwifInfo::setEndpointFqdn(std::string const& value) {
-  m_EndpointFqdn      = value;
+std::string TwifInfo::getEndpointFqdn() const { return m_EndpointFqdn; }
+void TwifInfo::setEndpointFqdn(std::string const &value) {
+  m_EndpointFqdn = value;
   m_EndpointFqdnIsSet = true;
 }
-bool TwifInfo::endpointFqdnIsSet() const {
-  return m_EndpointFqdnIsSet;
-}
-void TwifInfo::unsetEndpointFqdn() {
-  m_EndpointFqdnIsSet = false;
-}
+bool TwifInfo::endpointFqdnIsSet() const { return m_EndpointFqdnIsSet; }
+void TwifInfo::unsetEndpointFqdn() { m_EndpointFqdnIsSet = false; }
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

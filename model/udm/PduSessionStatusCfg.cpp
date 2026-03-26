@@ -21,9 +21,7 @@
 
 namespace oai::model::udm {
 
-PduSessionStatusCfg::PduSessionStatusCfg() {
-  m_DnnIsSet = false;
-}
+PduSessionStatusCfg::PduSessionStatusCfg() { m_DnnIsSet = false; }
 
 void PduSessionStatusCfg::validate() const {
   std::stringstream msg;
@@ -32,12 +30,12 @@ void PduSessionStatusCfg::validate() const {
   }
 }
 
-bool PduSessionStatusCfg::validate(std::stringstream& msg) const {
+bool PduSessionStatusCfg::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool PduSessionStatusCfg::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool PduSessionStatusCfg::validate(std::stringstream &msg,
+                                   const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PduSessionStatusCfg" : pathPrefix;
@@ -45,7 +43,7 @@ bool PduSessionStatusCfg::validate(
   return success;
 }
 
-bool PduSessionStatusCfg::operator==(const PduSessionStatusCfg& rhs) const {
+bool PduSessionStatusCfg::operator==(const PduSessionStatusCfg &rhs) const {
   return
 
       ((!dnnIsSet() && !rhs.dnnIsSet()) ||
@@ -54,34 +52,29 @@ bool PduSessionStatusCfg::operator==(const PduSessionStatusCfg& rhs) const {
           ;
 }
 
-bool PduSessionStatusCfg::operator!=(const PduSessionStatusCfg& rhs) const {
+bool PduSessionStatusCfg::operator!=(const PduSessionStatusCfg &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PduSessionStatusCfg& o) {
+void to_json(nlohmann::json &j, const PduSessionStatusCfg &o) {
   j = nlohmann::json();
-  if (o.dnnIsSet()) j["dnn"] = o.m_Dnn;
+  if (o.dnnIsSet())
+    j["dnn"] = o.m_Dnn;
 }
 
-void from_json(const nlohmann::json& j, PduSessionStatusCfg& o) {
+void from_json(const nlohmann::json &j, PduSessionStatusCfg &o) {
   if (j.find("dnn") != j.end()) {
     j.at("dnn").get_to(o.m_Dnn);
     o.m_DnnIsSet = true;
   }
 }
 
-std::string PduSessionStatusCfg::getDnn() const {
-  return m_Dnn;
-}
-void PduSessionStatusCfg::setDnn(std::string const& value) {
-  m_Dnn      = value;
+std::string PduSessionStatusCfg::getDnn() const { return m_Dnn; }
+void PduSessionStatusCfg::setDnn(std::string const &value) {
+  m_Dnn = value;
   m_DnnIsSet = true;
 }
-bool PduSessionStatusCfg::dnnIsSet() const {
-  return m_DnnIsSet;
-}
-void PduSessionStatusCfg::unsetDnn() {
-  m_DnnIsSet = false;
-}
+bool PduSessionStatusCfg::dnnIsSet() const { return m_DnnIsSet; }
+void PduSessionStatusCfg::unsetDnn() { m_DnnIsSet = false; }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

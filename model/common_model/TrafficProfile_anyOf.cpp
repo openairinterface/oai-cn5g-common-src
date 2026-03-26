@@ -13,8 +13,8 @@
 
 #include "TrafficProfile_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::common {
 
@@ -27,12 +27,12 @@ void TrafficProfile_anyOf::validate() const {
   }
 }
 
-bool TrafficProfile_anyOf::validate(std::stringstream& msg) const {
+bool TrafficProfile_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool TrafficProfile_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool TrafficProfile_anyOf::validate(std::stringstream &msg,
+                                    const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "TrafficProfile_anyOf" : pathPrefix;
@@ -46,43 +46,43 @@ bool TrafficProfile_anyOf::validate(
   return success;
 }
 
-bool TrafficProfile_anyOf::operator==(const TrafficProfile_anyOf& rhs) const {
+bool TrafficProfile_anyOf::operator==(const TrafficProfile_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool TrafficProfile_anyOf::operator!=(const TrafficProfile_anyOf& rhs) const {
+bool TrafficProfile_anyOf::operator!=(const TrafficProfile_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const TrafficProfile_anyOf& o) {
+void to_json(nlohmann::json &j, const TrafficProfile_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case TrafficProfile_anyOf::eTrafficProfile_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case TrafficProfile_anyOf::eTrafficProfile_anyOf::SINGLE_TRANS_UL:
-      j = "SINGLE_TRANS_UL";
-      break;
-    case TrafficProfile_anyOf::eTrafficProfile_anyOf::SINGLE_TRANS_DL:
-      j = "SINGLE_TRANS_DL";
-      break;
-    case TrafficProfile_anyOf::eTrafficProfile_anyOf::DUAL_TRANS_UL_FIRST:
-      j = "DUAL_TRANS_UL_FIRST";
-      break;
-    case TrafficProfile_anyOf::eTrafficProfile_anyOf::DUAL_TRANS_DL_FIRST:
-      j = "DUAL_TRANS_DL_FIRST";
-      break;
-    case TrafficProfile_anyOf::eTrafficProfile_anyOf::MULTI_TRANS:
-      j = "MULTI_TRANS";
-      break;
+  case TrafficProfile_anyOf::eTrafficProfile_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case TrafficProfile_anyOf::eTrafficProfile_anyOf::SINGLE_TRANS_UL:
+    j = "SINGLE_TRANS_UL";
+    break;
+  case TrafficProfile_anyOf::eTrafficProfile_anyOf::SINGLE_TRANS_DL:
+    j = "SINGLE_TRANS_DL";
+    break;
+  case TrafficProfile_anyOf::eTrafficProfile_anyOf::DUAL_TRANS_UL_FIRST:
+    j = "DUAL_TRANS_UL_FIRST";
+    break;
+  case TrafficProfile_anyOf::eTrafficProfile_anyOf::DUAL_TRANS_DL_FIRST:
+    j = "DUAL_TRANS_DL_FIRST";
+    break;
+  case TrafficProfile_anyOf::eTrafficProfile_anyOf::MULTI_TRANS:
+    j = "MULTI_TRANS";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, TrafficProfile_anyOf& o) {
+void from_json(const nlohmann::json &j, TrafficProfile_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "SINGLE_TRANS_UL") {
     o.setValue(TrafficProfile_anyOf::eTrafficProfile_anyOf::SINGLE_TRANS_UL);
@@ -105,8 +105,8 @@ void from_json(const nlohmann::json& j, TrafficProfile_anyOf& o) {
   }
 }
 
-TrafficProfile_anyOf::eTrafficProfile_anyOf TrafficProfile_anyOf::getValue()
-    const {
+TrafficProfile_anyOf::eTrafficProfile_anyOf
+TrafficProfile_anyOf::getValue() const {
   return m_value;
 }
 void TrafficProfile_anyOf::setValue(
@@ -114,4 +114,4 @@ void TrafficProfile_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

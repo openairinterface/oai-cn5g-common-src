@@ -23,10 +23,10 @@ void N2InformationTransferResult::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const N2InformationTransferResult& o) {
+void to_json(nlohmann::json &j, const N2InformationTransferResult &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, N2InformationTransferResult& o) {}
+void from_json(const nlohmann::json &j, N2InformationTransferResult &o) {}
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

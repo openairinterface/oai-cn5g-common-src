@@ -28,7 +28,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class NssaiMapping {
- public:
+public:
   NssaiMapping();
   virtual ~NssaiMapping();
 
@@ -41,22 +41,22 @@ class NssaiMapping {
   ///
   /// </summary>
   oai::model::common::Snssai getMappedSnssai() const;
-  void setMappedSnssai(oai::model::common::Snssai const& value);
+  void setMappedSnssai(oai::model::common::Snssai const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Snssai getHSnssai() const;
-  void setHSnssai(oai::model::common::Snssai const& value);
+  void setHSnssai(oai::model::common::Snssai const &value);
 
-  friend void to_json(nlohmann::json& j, const NssaiMapping& o);
-  friend void from_json(const nlohmann::json& j, NssaiMapping& o);
+  friend void to_json(nlohmann::json &j, const NssaiMapping &o);
+  friend void from_json(const nlohmann::json &j, NssaiMapping &o);
 
- protected:
+protected:
   oai::model::common::Snssai m_MappedSnssai;
 
   oai::model::common::Snssai m_HSnssai;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* NssaiMapping_H_ */

@@ -19,7 +19,7 @@
 namespace oai::model::pcf {
 
 StringMatchingCondition::StringMatchingCondition() {
-  m_MatchingString      = "";
+  m_MatchingString = "";
   m_MatchingStringIsSet = false;
 }
 
@@ -30,12 +30,12 @@ void StringMatchingCondition::validate() const {
   }
 }
 
-bool StringMatchingCondition::validate(std::stringstream& msg) const {
+bool StringMatchingCondition::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool StringMatchingCondition::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool StringMatchingCondition::validate(std::stringstream &msg,
+                                       const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "StringMatchingCondition" : pathPrefix;
@@ -48,7 +48,7 @@ bool StringMatchingCondition::validate(
 }
 
 bool StringMatchingCondition::operator==(
-    const StringMatchingCondition& rhs) const {
+    const StringMatchingCondition &rhs) const {
   return
 
       ((!matchingStringIsSet() && !rhs.matchingStringIsSet()) ||
@@ -61,17 +61,18 @@ bool StringMatchingCondition::operator==(
 }
 
 bool StringMatchingCondition::operator!=(
-    const StringMatchingCondition& rhs) const {
+    const StringMatchingCondition &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const StringMatchingCondition& o) {
+void to_json(nlohmann::json &j, const StringMatchingCondition &o) {
   j = nlohmann::json::object();
-  if (o.matchingStringIsSet()) j["matchingString"] = o.m_MatchingString;
+  if (o.matchingStringIsSet())
+    j["matchingString"] = o.m_MatchingString;
   j["matchingOperator"] = o.m_MatchingOperator;
 }
 
-void from_json(const nlohmann::json& j, StringMatchingCondition& o) {
+void from_json(const nlohmann::json &j, StringMatchingCondition &o) {
   if (j.find("matchingString") != j.end()) {
     j.at("matchingString").get_to(o.m_MatchingString);
     o.m_MatchingStringIsSet = true;
@@ -82,8 +83,8 @@ void from_json(const nlohmann::json& j, StringMatchingCondition& o) {
 std::string StringMatchingCondition::getMatchingString() const {
   return m_MatchingString;
 }
-void StringMatchingCondition::setMatchingString(std::string const& value) {
-  m_MatchingString      = value;
+void StringMatchingCondition::setMatchingString(std::string const &value) {
+  m_MatchingString = value;
   m_MatchingStringIsSet = true;
 }
 bool StringMatchingCondition::matchingStringIsSet() const {
@@ -92,13 +93,13 @@ bool StringMatchingCondition::matchingStringIsSet() const {
 void StringMatchingCondition::unsetMatchingString() {
   m_MatchingStringIsSet = false;
 }
-oai::model::pcf::MatchingOperator StringMatchingCondition::getMatchingOperator()
-    const {
+oai::model::pcf::MatchingOperator
+StringMatchingCondition::getMatchingOperator() const {
   return m_MatchingOperator;
 }
 void StringMatchingCondition::setMatchingOperator(
-    oai::model::pcf::MatchingOperator const& value) {
+    oai::model::pcf::MatchingOperator const &value) {
   m_MatchingOperator = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

@@ -35,9 +35,9 @@ struct Ngap_ProtocolIE_SingleContainer;
 typedef struct Ngap_QosCharacteristics {
   Ngap_QosCharacteristics_PR present;
   union Ngap_QosCharacteristics_u {
-    struct Ngap_NonDynamic5QIDescriptor* nonDynamic5QI;
-    struct Ngap_Dynamic5QIDescriptor* dynamic5QI;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_NonDynamic5QIDescriptor *nonDynamic5QI;
+    struct Ngap_Dynamic5QIDescriptor *dynamic5QI;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

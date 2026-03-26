@@ -27,7 +27,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class SscMode_anyOf {
- public:
+public:
   SscMode_anyOf();
   virtual ~SscMode_anyOf() = default;
 
@@ -51,16 +51,16 @@ class SscMode_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const SscMode_anyOf& rhs) const;
-  bool operator!=(const SscMode_anyOf& rhs) const;
+  bool operator==(const SscMode_anyOf &rhs) const;
+  bool operator!=(const SscMode_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// SscMode_anyOf members
@@ -68,14 +68,14 @@ class SscMode_anyOf {
   SscMode_anyOf::eSscMode_anyOf getValue() const;
   void setValue(SscMode_anyOf::eSscMode_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const SscMode_anyOf& o);
-  friend void from_json(const nlohmann::json& j, SscMode_anyOf& o);
+  friend void to_json(nlohmann::json &j, const SscMode_anyOf &o);
+  friend void from_json(const nlohmann::json &j, SscMode_anyOf &o);
 
- protected:
+protected:
   SscMode_anyOf::eSscMode_anyOf m_value =
       SscMode_anyOf::eSscMode_anyOf::INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* SscMode_anyOf_H_ */

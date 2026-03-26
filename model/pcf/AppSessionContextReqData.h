@@ -20,24 +20,24 @@
 #ifndef AppSessionContextReqData_H_
 #define AppSessionContextReqData_H_
 
+#include "AfRequestedData.h"
+#include "AfRoutingRequirement.h"
+#include "AfSfcRequirement.h"
+#include "BridgeManagementContainer.h"
 #include "EventsSubscReqData.h"
+#include "Ipv6Addr.h"
+#include "MediaComponent.h"
+#include "MpsAction.h"
+#include "PortManagementContainer.h"
+#include "PreemptionControlInformation.h"
 #include "ReservPriority.h"
 #include "ServiceInfoStatus.h"
-#include "AfRoutingRequirement.h"
-#include "AfRequestedData.h"
-#include "MpsAction.h"
-#include "AfSfcRequirement.h"
-#include <string>
-#include "Ipv6Addr.h"
-#include "BridgeManagementContainer.h"
-#include "MediaComponent.h"
-#include "PreemptionControlInformation.h"
 #include "Snssai.h"
-#include <vector>
 #include "SponsoringStatus.h"
-#include "PortManagementContainer.h"
 #include <map>
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::pcf {
 
@@ -46,7 +46,7 @@ namespace oai::model::pcf {
 /// Context.
 /// </summary>
 class AppSessionContextReqData {
- public:
+public:
   AppSessionContextReqData();
   virtual ~AppSessionContextReqData() = default;
 
@@ -60,16 +60,16 @@ class AppSessionContextReqData {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const AppSessionContextReqData& rhs) const;
-  bool operator!=(const AppSessionContextReqData& rhs) const;
+  bool operator==(const AppSessionContextReqData &rhs) const;
+  bool operator!=(const AppSessionContextReqData &rhs) const;
 
   /////////////////////////////////////////////
   /// AppSessionContextReqData members
@@ -78,7 +78,7 @@ class AppSessionContextReqData {
   /// Contains an AF application identifier.
   /// </summary>
   std::string getAfAppId() const;
-  void setAfAppId(std::string const& value);
+  void setAfAppId(std::string const &value);
   bool afAppIdIsSet() const;
   void unsetAfAppId();
   /// <summary>
@@ -86,35 +86,35 @@ class AppSessionContextReqData {
   /// information.
   /// </summary>
   std::string getAfChargId() const;
-  void setAfChargId(std::string const& value);
+  void setAfChargId(std::string const &value);
   bool afChargIdIsSet() const;
   void unsetAfChargId();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::AfRequestedData getAfReqData() const;
-  void setAfReqData(oai::model::pcf::AfRequestedData const& value);
+  void setAfReqData(oai::model::pcf::AfRequestedData const &value);
   bool afReqDataIsSet() const;
   void unsetAfReqData();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::AfRoutingRequirement getAfRoutReq() const;
-  void setAfRoutReq(oai::model::pcf::AfRoutingRequirement const& value);
+  void setAfRoutReq(oai::model::pcf::AfRoutingRequirement const &value);
   bool afRoutReqIsSet() const;
   void unsetAfRoutReq();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::AfSfcRequirement getAfSfcReq() const;
-  void setAfSfcReq(oai::model::pcf::AfSfcRequirement const& value);
+  void setAfSfcReq(oai::model::pcf::AfSfcRequirement const &value);
   bool afSfcReqIsSet() const;
   void unsetAfSfcReq();
   /// <summary>
   /// Contains an identity of an application service provider.
   /// </summary>
   std::string getAspId() const;
-  void setAspId(std::string const& value);
+  void setAspId(std::string const &value);
   bool aspIdIsSet() const;
   void unsetAspId();
   /// <summary>
@@ -122,7 +122,7 @@ class AppSessionContextReqData {
   /// TS 29.154.
   /// </summary>
   std::string getBdtRefId() const;
-  void setBdtRefId(std::string const& value);
+  void setBdtRefId(std::string const &value);
   bool bdtRefIdIsSet() const;
   void unsetBdtRefId();
   /// <summary>
@@ -134,73 +134,73 @@ class AppSessionContextReqData {
   /// \&quot;Label1.Label2.Label3\&quot;).
   /// </summary>
   std::string getDnn() const;
-  void setDnn(std::string const& value);
+  void setDnn(std::string const &value);
   bool dnnIsSet() const;
   void unsetDnn();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::EventsSubscReqData getEvSubsc() const;
-  void setEvSubsc(oai::model::pcf::EventsSubscReqData const& value);
+  void setEvSubsc(oai::model::pcf::EventsSubscReqData const &value);
   bool evSubscIsSet() const;
   void unsetEvSubsc();
   /// <summary>
   /// Indication of MCPTT service request.
   /// </summary>
   std::string getMcpttId() const;
-  void setMcpttId(std::string const& value);
+  void setMcpttId(std::string const &value);
   bool mcpttIdIsSet() const;
   void unsetMcpttId();
   /// <summary>
   /// Indication of MCVideo service request.
   /// </summary>
   std::string getMcVideoId() const;
-  void setMcVideoId(std::string const& value);
+  void setMcVideoId(std::string const &value);
   bool mcVideoIdIsSet() const;
   void unsetMcVideoId();
   /// <summary>
   /// Contains media component information. The key of the map is the medCompN
   /// attribute.
   /// </summary>
-  std::map<std::string, oai::model::pcf::MediaComponent> getMedComponents()
-      const;
+  std::map<std::string, oai::model::pcf::MediaComponent>
+  getMedComponents() const;
   void setMedComponents(
-      std::map<std::string, oai::model::pcf::MediaComponent> const& value);
+      std::map<std::string, oai::model::pcf::MediaComponent> const &value);
   bool medComponentsIsSet() const;
   void unsetMedComponents();
   /// <summary>
   /// This data type contains a multi-modal service identifier.
   /// </summary>
   std::string getMultiModalId() const;
-  void setMultiModalId(std::string const& value);
+  void setMultiModalId(std::string const &value);
   bool multiModalIdIsSet() const;
   void unsetMultiModalId();
   /// <summary>
   ///
   /// </summary>
   std::string getIpDomain() const;
-  void setIpDomain(std::string const& value);
+  void setIpDomain(std::string const &value);
   bool ipDomainIsSet() const;
   void unsetIpDomain();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::MpsAction getMpsAction() const;
-  void setMpsAction(oai::model::pcf::MpsAction const& value);
+  void setMpsAction(oai::model::pcf::MpsAction const &value);
   bool mpsActionIsSet() const;
   void unsetMpsAction();
   /// <summary>
   /// Indication of MPS service request.
   /// </summary>
   std::string getMpsId() const;
-  void setMpsId(std::string const& value);
+  void setMpsId(std::string const &value);
   bool mpsIdIsSet() const;
   void unsetMpsId();
   /// <summary>
   /// Indication of MCS service request.
   /// </summary>
   std::string getMcsId() const;
-  void setMcsId(std::string const& value);
+  void setMcsId(std::string const &value);
   bool mcsIdIsSet() const;
   void unsetMcsId();
   /// <summary>
@@ -208,7 +208,7 @@ class AppSessionContextReqData {
   /// </summary>
   oai::model::pcf::PreemptionControlInformation getPreemptControlInfo() const;
   void setPreemptControlInfo(
-      oai::model::pcf::PreemptionControlInformation const& value);
+      oai::model::pcf::PreemptionControlInformation const &value);
   bool preemptControlInfoIsSet() const;
   void unsetPreemptControlInfo();
   /// <summary>
@@ -229,47 +229,47 @@ class AppSessionContextReqData {
   ///
   /// </summary>
   oai::model::pcf::ReservPriority getResPrio() const;
-  void setResPrio(oai::model::pcf::ReservPriority const& value);
+  void setResPrio(oai::model::pcf::ReservPriority const &value);
   bool resPrioIsSet() const;
   void unsetResPrio();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::ServiceInfoStatus getServInfStatus() const;
-  void setServInfStatus(oai::model::pcf::ServiceInfoStatus const& value);
+  void setServInfStatus(oai::model::pcf::ServiceInfoStatus const &value);
   bool servInfStatusIsSet() const;
   void unsetServInfStatus();
   /// <summary>
   /// String providing an URI formatted according to RFC 3986.
   /// </summary>
   std::string getNotifUri() const;
-  void setNotifUri(std::string const& value);
+  void setNotifUri(std::string const &value);
   /// <summary>
   /// Contains values of the service URN and may include subservices.
   /// </summary>
   std::string getServUrn() const;
-  void setServUrn(std::string const& value);
+  void setServUrn(std::string const &value);
   bool servUrnIsSet() const;
   void unsetServUrn();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Snssai getSliceInfo() const;
-  void setSliceInfo(oai::model::common::Snssai const& value);
+  void setSliceInfo(oai::model::common::Snssai const &value);
   bool sliceInfoIsSet() const;
   void unsetSliceInfo();
   /// <summary>
   /// Contains an identity of a sponsor.
   /// </summary>
   std::string getSponId() const;
-  void setSponId(std::string const& value);
+  void setSponId(std::string const &value);
   bool sponIdIsSet() const;
   void unsetSponId();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::SponsoringStatus getSponStatus() const;
-  void setSponStatus(oai::model::pcf::SponsoringStatus const& value);
+  void setSponStatus(oai::model::pcf::SponsoringStatus const &value);
   bool sponStatusIsSet() const;
   void unsetSponStatus();
   /// <summary>
@@ -290,7 +290,7 @@ class AppSessionContextReqData {
   /// defined in 3GPP TS 29.501.
   /// </summary>
   std::string getSupi() const;
-  void setSupi(std::string const& value);
+  void setSupi(std::string const &value);
   bool supiIsSet() const;
   void unsetSupi();
   /// <summary>
@@ -301,7 +301,7 @@ class AppSessionContextReqData {
   /// Identifier.
   /// </summary>
   std::string getGpsi() const;
-  void setGpsi(std::string const& value);
+  void setGpsi(std::string const &value);
   bool gpsiIsSet() const;
   void unsetGpsi();
   /// <summary>
@@ -321,20 +321,20 @@ class AppSessionContextReqData {
   /// not supported.
   /// </summary>
   std::string getSuppFeat() const;
-  void setSuppFeat(std::string const& value);
+  void setSuppFeat(std::string const &value);
   /// <summary>
   /// String identifying a IPv4 address formatted in the &#39;dotted
   /// decimal&#39; notation as defined in RFC 1166.
   /// </summary>
   std::string getUeIpv4() const;
-  void setUeIpv4(std::string const& value);
+  void setUeIpv4(std::string const &value);
   bool ueIpv4IsSet() const;
   void unsetUeIpv4();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ipv6Addr getUeIpv6() const;
-  void setUeIpv6(oai::model::common::Ipv6Addr const& value);
+  void setUeIpv6(oai::model::common::Ipv6Addr const &value);
   bool ueIpv6IsSet() const;
   void unsetUeIpv6();
   /// <summary>
@@ -342,53 +342,53 @@ class AppSessionContextReqData {
   /// according to clause 1.1 and clause 2.1 of RFC 7042.
   /// </summary>
   std::string getUeMac() const;
-  void setUeMac(std::string const& value);
+  void setUeMac(std::string const &value);
   bool ueMacIsSet() const;
   void unsetUeMac();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::BridgeManagementContainer getTsnBridgeManCont() const;
-  void setTsnBridgeManCont(
-      oai::model::pcf::BridgeManagementContainer const& value);
+  void
+  setTsnBridgeManCont(oai::model::pcf::BridgeManagementContainer const &value);
   bool tsnBridgeManContIsSet() const;
   void unsetTsnBridgeManCont();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::PortManagementContainer getTsnPortManContDstt() const;
-  void setTsnPortManContDstt(
-      oai::model::pcf::PortManagementContainer const& value);
+  void
+  setTsnPortManContDstt(oai::model::pcf::PortManagementContainer const &value);
   bool tsnPortManContDsttIsSet() const;
   void unsetTsnPortManContDstt();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::pcf::PortManagementContainer> getTsnPortManContNwtts()
-      const;
+  std::vector<oai::model::pcf::PortManagementContainer>
+  getTsnPortManContNwtts() const;
   void setTsnPortManContNwtts(
-      std::vector<oai::model::pcf::PortManagementContainer> const& value);
+      std::vector<oai::model::pcf::PortManagementContainer> const &value);
   bool tsnPortManContNwttsIsSet() const;
   void unsetTsnPortManContNwtts();
   /// <summary>
   /// String providing an URI formatted according to RFC 3986.
   /// </summary>
   std::string getTscNotifUri() const;
-  void setTscNotifUri(std::string const& value);
+  void setTscNotifUri(std::string const &value);
   bool tscNotifUriIsSet() const;
   void unsetTscNotifUri();
   /// <summary>
   /// Correlation identifier for TSC management information notifications.
   /// </summary>
   std::string getTscNotifCorreId() const;
-  void setTscNotifCorreId(std::string const& value);
+  void setTscNotifCorreId(std::string const &value);
   bool tscNotifCorreIdIsSet() const;
   void unsetTscNotifCorreId();
 
-  friend void to_json(nlohmann::json& j, const AppSessionContextReqData& o);
-  friend void from_json(const nlohmann::json& j, AppSessionContextReqData& o);
+  friend void to_json(nlohmann::json &j, const AppSessionContextReqData &o);
+  friend void from_json(const nlohmann::json &j, AppSessionContextReqData &o);
 
- protected:
+protected:
   std::string m_AfAppId;
   bool m_AfAppIdIsSet;
   std::string m_AfChargId;
@@ -467,6 +467,6 @@ class AppSessionContextReqData {
   bool m_TscNotifCorreIdIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* AppSessionContextReqData_H_ */

@@ -25,13 +25,13 @@ void N1N2MsgTxfrFailureNotification::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const N1N2MsgTxfrFailureNotification& o) {
-  j                   = nlohmann::json();
-  j["cause"]          = o.m_Cause;
+void to_json(nlohmann::json &j, const N1N2MsgTxfrFailureNotification &o) {
+  j = nlohmann::json();
+  j["cause"] = o.m_Cause;
   j["n1n2MsgDataUri"] = o.m_N1n2MsgDataUri;
 }
 
-void from_json(const nlohmann::json& j, N1N2MsgTxfrFailureNotification& o) {
+void from_json(const nlohmann::json &j, N1N2MsgTxfrFailureNotification &o) {
   j.at("cause").get_to(o.m_Cause);
   j.at("n1n2MsgDataUri").get_to(o.m_N1n2MsgDataUri);
 }
@@ -40,15 +40,15 @@ N1N2MessageTransferCause N1N2MsgTxfrFailureNotification::getCause() const {
   return m_Cause;
 }
 void N1N2MsgTxfrFailureNotification::setCause(
-    N1N2MessageTransferCause const& value) {
+    N1N2MessageTransferCause const &value) {
   m_Cause = value;
 }
 std::string N1N2MsgTxfrFailureNotification::getN1n2MsgDataUri() const {
   return m_N1n2MsgDataUri;
 }
 void N1N2MsgTxfrFailureNotification::setN1n2MsgDataUri(
-    std::string const& value) {
+    std::string const &value) {
   m_N1n2MsgDataUri = value;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

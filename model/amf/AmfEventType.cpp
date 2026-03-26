@@ -27,12 +27,12 @@ void AmfEventType::validate() const {
   }
 }
 
-bool AmfEventType::validate(std::stringstream& msg) const {
+bool AmfEventType::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AmfEventType::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool AmfEventType::validate(std::stringstream &msg,
+                            const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AmfEventType" : pathPrefix;
@@ -40,30 +40,22 @@ bool AmfEventType::validate(
   return success;
 }
 
-bool AmfEventType::operator==(const AmfEventType& rhs) const {
-  return true;  // TODO
+bool AmfEventType::operator==(const AmfEventType &rhs) const {
+  return true; // TODO
 }
 
-bool AmfEventType::operator!=(const AmfEventType& rhs) const {
+bool AmfEventType::operator!=(const AmfEventType &rhs) const {
   return !(*this == rhs);
 }
 
-void AmfEventType::set_value(std::string value) {
-  this->value = value;
-}
-void AmfEventType::get_value(std::string& value) const {
-  value = this->value;
-}
-std::string AmfEventType::get_value() const {
-  return value;
-}
+void AmfEventType::set_value(std::string value) { this->value = value; }
+void AmfEventType::get_value(std::string &value) const { value = this->value; }
+std::string AmfEventType::get_value() const { return value; }
 
-void to_json(nlohmann::json& j, const AmfEventType& o) {
-  j = o.get_value();
-}
+void to_json(nlohmann::json &j, const AmfEventType &o) { j = o.get_value(); }
 
-void from_json(const nlohmann::json& j, AmfEventType& o) {
+void from_json(const nlohmann::json &j, AmfEventType &o) {
   o.set_value(j.get<std::string>());
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

@@ -20,8 +20,8 @@
 #define N1N2MsgTxfrFailureNotification_H_
 
 #include "N1N2MessageTransferCause.h"
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::amf {
 
@@ -29,7 +29,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class N1N2MsgTxfrFailureNotification {
- public:
+public:
   N1N2MsgTxfrFailureNotification();
   virtual ~N1N2MsgTxfrFailureNotification();
 
@@ -42,24 +42,24 @@ class N1N2MsgTxfrFailureNotification {
   ///
   /// </summary>
   N1N2MessageTransferCause getCause() const;
-  void setCause(N1N2MessageTransferCause const& value);
+  void setCause(N1N2MessageTransferCause const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getN1n2MsgDataUri() const;
-  void setN1n2MsgDataUri(std::string const& value);
+  void setN1n2MsgDataUri(std::string const &value);
 
-  friend void to_json(
-      nlohmann::json& j, const N1N2MsgTxfrFailureNotification& o);
-  friend void from_json(
-      const nlohmann::json& j, N1N2MsgTxfrFailureNotification& o);
+  friend void to_json(nlohmann::json &j,
+                      const N1N2MsgTxfrFailureNotification &o);
+  friend void from_json(const nlohmann::json &j,
+                        N1N2MsgTxfrFailureNotification &o);
 
- protected:
+protected:
   N1N2MessageTransferCause m_Cause;
 
   std::string m_N1n2MsgDataUri;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* N1N2MsgTxfrFailureNotification_H_ */

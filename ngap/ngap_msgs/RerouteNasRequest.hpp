@@ -16,38 +16,38 @@ extern "C" {
 namespace oai::ngap {
 
 class RerouteNasRequest : public NgapMessage {
- public:
+public:
   RerouteNasRequest();
   virtual ~RerouteNasRequest();
 
   void initialize();
-  bool decode(Ngap_NGAP_PDU_t* ngap_msg_pdu) override;
+  bool decode(Ngap_NGAP_PDU_t *ngap_msg_pdu) override;
 
-  void setAmfUeNgapId(const uint64_t& id);  // 40 bits
-  bool getAmfUeNgapId(uint64_t& id) const;
+  void setAmfUeNgapId(const uint64_t &id); // 40 bits
+  bool getAmfUeNgapId(uint64_t &id) const;
 
-  void setRanUeNgapId(const uint32_t& id);  // 32 bits
+  void setRanUeNgapId(const uint32_t &id); // 32 bits
   uint32_t getRanUeNgapId() const;
 
-  void setNgapMessage(const OCTET_STRING_t& message);
-  bool getNgapMessage(OCTET_STRING_t& message) const;
+  void setNgapMessage(const OCTET_STRING_t &message);
+  bool getNgapMessage(OCTET_STRING_t &message) const;
 
-  bool setAmfSetId(const uint16_t& amfSetId);
-  void getAmfSetId(std::string& amfSetId) const;
+  bool setAmfSetId(const uint16_t &amfSetId);
+  void getAmfSetId(std::string &amfSetId) const;
 
-  void setAllowedNssai(const std::vector<S_Nssai>& list);
-  bool getAllowedNssai(std::vector<S_Nssai>& list) const;
+  void setAllowedNssai(const std::vector<S_Nssai> &list);
+  bool getAllowedNssai(std::vector<S_Nssai> &list) const;
 
- private:
-  Ngap_RerouteNASRequest_t* m_RerouteNASRequestIes;
+private:
+  Ngap_RerouteNASRequest_t *m_RerouteNASRequestIes;
 
-  RanUeNgapId m_RanUeNgapId;                   // Mandatory
-  std::optional<AmfUeNgapId> m_AmfUeNgapId;    // Optional
-  OCTET_STRING_t m_NgapMessage;                // Mandatory
-  AmfSetId m_AmfSetId;                         // Mandatory
-  std::optional<AllowedNSSAI> m_AllowedNssai;  // Optional
+  RanUeNgapId m_RanUeNgapId;                  // Mandatory
+  std::optional<AmfUeNgapId> m_AmfUeNgapId;   // Optional
+  OCTET_STRING_t m_NgapMessage;               // Mandatory
+  AmfSetId m_AmfSetId;                        // Mandatory
+  std::optional<AllowedNSSAI> m_AllowedNssai; // Optional
   // SourceToTarget-AMFInformationReroute //Optional
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

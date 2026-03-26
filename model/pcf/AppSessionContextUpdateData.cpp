@@ -19,43 +19,43 @@
 namespace oai::model::pcf {
 
 AppSessionContextUpdateData::AppSessionContextUpdateData() {
-  m_AfAppId                  = "";
-  m_AfAppIdIsSet             = false;
-  m_AfRoutReqIsSet           = false;
-  m_AfSfcReqIsSet            = false;
-  m_AspId                    = "";
-  m_AspIdIsSet               = false;
-  m_BdtRefId                 = "";
-  m_BdtRefIdIsSet            = false;
-  m_EvSubscIsSet             = false;
-  m_McpttId                  = "";
-  m_McpttIdIsSet             = false;
-  m_McVideoId                = "";
-  m_McVideoIdIsSet           = false;
-  m_MedComponentsIsSet       = false;
-  m_MpsActionIsSet           = false;
-  m_MpsId                    = "";
-  m_MpsIdIsSet               = false;
-  m_McsId                    = "";
-  m_McsIdIsSet               = false;
-  m_PreemptControlInfoIsSet  = false;
-  m_QosDuration              = 0;
-  m_QosDurationIsSet         = false;
-  m_QosInactInt              = 0;
-  m_QosInactIntIsSet         = false;
-  m_ResPrioIsSet             = false;
-  m_ServInfStatusIsSet       = false;
-  m_SipForkIndIsSet          = false;
-  m_SponId                   = "";
-  m_SponIdIsSet              = false;
-  m_SponStatusIsSet          = false;
-  m_TsnBridgeManContIsSet    = false;
-  m_TsnPortManContDsttIsSet  = false;
+  m_AfAppId = "";
+  m_AfAppIdIsSet = false;
+  m_AfRoutReqIsSet = false;
+  m_AfSfcReqIsSet = false;
+  m_AspId = "";
+  m_AspIdIsSet = false;
+  m_BdtRefId = "";
+  m_BdtRefIdIsSet = false;
+  m_EvSubscIsSet = false;
+  m_McpttId = "";
+  m_McpttIdIsSet = false;
+  m_McVideoId = "";
+  m_McVideoIdIsSet = false;
+  m_MedComponentsIsSet = false;
+  m_MpsActionIsSet = false;
+  m_MpsId = "";
+  m_MpsIdIsSet = false;
+  m_McsId = "";
+  m_McsIdIsSet = false;
+  m_PreemptControlInfoIsSet = false;
+  m_QosDuration = 0;
+  m_QosDurationIsSet = false;
+  m_QosInactInt = 0;
+  m_QosInactIntIsSet = false;
+  m_ResPrioIsSet = false;
+  m_ServInfStatusIsSet = false;
+  m_SipForkIndIsSet = false;
+  m_SponId = "";
+  m_SponIdIsSet = false;
+  m_SponStatusIsSet = false;
+  m_TsnBridgeManContIsSet = false;
+  m_TsnPortManContDsttIsSet = false;
   m_TsnPortManContNwttsIsSet = false;
-  m_TscNotifUri              = "";
-  m_TscNotifUriIsSet         = false;
-  m_TscNotifCorreId          = "";
-  m_TscNotifCorreIdIsSet     = false;
+  m_TscNotifUri = "";
+  m_TscNotifUriIsSet = false;
+  m_TscNotifCorreId = "";
+  m_TscNotifCorreIdIsSet = false;
 }
 
 void AppSessionContextUpdateData::validate() const {
@@ -65,24 +65,24 @@ void AppSessionContextUpdateData::validate() const {
   }
 }
 
-bool AppSessionContextUpdateData::validate(std::stringstream& msg) const {
+bool AppSessionContextUpdateData::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool AppSessionContextUpdateData::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AppSessionContextUpdateData" : pathPrefix;
 
   if (medComponentsIsSet()) {
-    const std::map<std::string, oai::model::pcf::MediaComponentRm>& value =
+    const std::map<std::string, oai::model::pcf::MediaComponentRm> &value =
         m_MedComponents;
     const std::string currentValuePath = _pathPrefix + ".medComponents";
   }
 
   if (tsnPortManContNwttsIsSet()) {
-    const std::vector<oai::model::pcf::PortManagementContainer>& value =
+    const std::vector<oai::model::pcf::PortManagementContainer> &value =
         m_TsnPortManContNwtts;
     const std::string currentValuePath = _pathPrefix + ".tsnPortManContNwtts";
 
@@ -90,10 +90,10 @@ bool AppSessionContextUpdateData::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::PortManagementContainer& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::PortManagementContainer &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -110,7 +110,7 @@ bool AppSessionContextUpdateData::validate(
 }
 
 bool AppSessionContextUpdateData::operator==(
-    const AppSessionContextUpdateData& rhs) const {
+    const AppSessionContextUpdateData &rhs) const {
   return
 
       ((!afAppIdIsSet() && !rhs.afAppIdIsSet()) ||
@@ -214,44 +214,65 @@ bool AppSessionContextUpdateData::operator==(
 }
 
 bool AppSessionContextUpdateData::operator!=(
-    const AppSessionContextUpdateData& rhs) const {
+    const AppSessionContextUpdateData &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AppSessionContextUpdateData& o) {
+void to_json(nlohmann::json &j, const AppSessionContextUpdateData &o) {
   j = nlohmann::json::object();
-  if (o.afAppIdIsSet()) j["afAppId"] = o.m_AfAppId;
-  if (o.afRoutReqIsSet()) j["afRoutReq"] = o.m_AfRoutReq;
-  if (o.afSfcReqIsSet()) j["afSfcReq"] = o.m_AfSfcReq;
-  if (o.aspIdIsSet()) j["aspId"] = o.m_AspId;
-  if (o.bdtRefIdIsSet()) j["bdtRefId"] = o.m_BdtRefId;
-  if (o.evSubscIsSet()) j["evSubsc"] = o.m_EvSubsc;
-  if (o.mcpttIdIsSet()) j["mcpttId"] = o.m_McpttId;
-  if (o.mcVideoIdIsSet()) j["mcVideoId"] = o.m_McVideoId;
+  if (o.afAppIdIsSet())
+    j["afAppId"] = o.m_AfAppId;
+  if (o.afRoutReqIsSet())
+    j["afRoutReq"] = o.m_AfRoutReq;
+  if (o.afSfcReqIsSet())
+    j["afSfcReq"] = o.m_AfSfcReq;
+  if (o.aspIdIsSet())
+    j["aspId"] = o.m_AspId;
+  if (o.bdtRefIdIsSet())
+    j["bdtRefId"] = o.m_BdtRefId;
+  if (o.evSubscIsSet())
+    j["evSubsc"] = o.m_EvSubsc;
+  if (o.mcpttIdIsSet())
+    j["mcpttId"] = o.m_McpttId;
+  if (o.mcVideoIdIsSet())
+    j["mcVideoId"] = o.m_McVideoId;
   if (o.medComponentsIsSet() || !o.m_MedComponents.empty())
     j["medComponents"] = o.m_MedComponents;
-  if (o.mpsActionIsSet()) j["mpsAction"] = o.m_MpsAction;
-  if (o.mpsIdIsSet()) j["mpsId"] = o.m_MpsId;
-  if (o.mcsIdIsSet()) j["mcsId"] = o.m_McsId;
+  if (o.mpsActionIsSet())
+    j["mpsAction"] = o.m_MpsAction;
+  if (o.mpsIdIsSet())
+    j["mpsId"] = o.m_MpsId;
+  if (o.mcsIdIsSet())
+    j["mcsId"] = o.m_McsId;
   if (o.preemptControlInfoIsSet())
     j["preemptControlInfo"] = o.m_PreemptControlInfo;
-  if (o.qosDurationIsSet()) j["qosDuration"] = o.m_QosDuration;
-  if (o.qosInactIntIsSet()) j["qosInactInt"] = o.m_QosInactInt;
-  if (o.resPrioIsSet()) j["resPrio"] = o.m_ResPrio;
-  if (o.servInfStatusIsSet()) j["servInfStatus"] = o.m_ServInfStatus;
-  if (o.sipForkIndIsSet()) j["sipForkInd"] = o.m_SipForkInd;
-  if (o.sponIdIsSet()) j["sponId"] = o.m_SponId;
-  if (o.sponStatusIsSet()) j["sponStatus"] = o.m_SponStatus;
-  if (o.tsnBridgeManContIsSet()) j["tsnBridgeManCont"] = o.m_TsnBridgeManCont;
+  if (o.qosDurationIsSet())
+    j["qosDuration"] = o.m_QosDuration;
+  if (o.qosInactIntIsSet())
+    j["qosInactInt"] = o.m_QosInactInt;
+  if (o.resPrioIsSet())
+    j["resPrio"] = o.m_ResPrio;
+  if (o.servInfStatusIsSet())
+    j["servInfStatus"] = o.m_ServInfStatus;
+  if (o.sipForkIndIsSet())
+    j["sipForkInd"] = o.m_SipForkInd;
+  if (o.sponIdIsSet())
+    j["sponId"] = o.m_SponId;
+  if (o.sponStatusIsSet())
+    j["sponStatus"] = o.m_SponStatus;
+  if (o.tsnBridgeManContIsSet())
+    j["tsnBridgeManCont"] = o.m_TsnBridgeManCont;
   if (o.tsnPortManContDsttIsSet())
     j["tsnPortManContDstt"] = o.m_TsnPortManContDstt;
   if (o.tsnPortManContNwttsIsSet() || !o.m_TsnPortManContNwtts.empty())
     j["tsnPortManContNwtts"] = o.m_TsnPortManContNwtts;
-  if (o.tscNotifUriIsSet()) j["tscNotifUri"] = o.m_TscNotifUri;
-  if (o.tscNotifCorreIdIsSet()) j["tscNotifCorreId"] = o.m_TscNotifCorreId;
+  if (o.tscNotifUriIsSet())
+    j["tscNotifUri"] = o.m_TscNotifUri;
+  if (o.tscNotifCorreIdIsSet())
+    j["tscNotifCorreId"] = o.m_TscNotifCorreId;
 }
 
-void from_json(const nlohmann::json& j, AppSessionContextUpdateData& o) {
+void from_json(const nlohmann::json &j, AppSessionContextUpdateData &o) {
   if (j.find("afAppId") != j.end()) {
     j.at("afAppId").get_to(o.m_AfAppId);
     o.m_AfAppIdIsSet = true;
@@ -357,120 +378,100 @@ void from_json(const nlohmann::json& j, AppSessionContextUpdateData& o) {
 std::string AppSessionContextUpdateData::getAfAppId() const {
   return m_AfAppId;
 }
-void AppSessionContextUpdateData::setAfAppId(std::string const& value) {
-  m_AfAppId      = value;
+void AppSessionContextUpdateData::setAfAppId(std::string const &value) {
+  m_AfAppId = value;
   m_AfAppIdIsSet = true;
 }
 bool AppSessionContextUpdateData::afAppIdIsSet() const {
   return m_AfAppIdIsSet;
 }
-void AppSessionContextUpdateData::unsetAfAppId() {
-  m_AfAppIdIsSet = false;
-}
+void AppSessionContextUpdateData::unsetAfAppId() { m_AfAppIdIsSet = false; }
 oai::model::pcf::AfRoutingRequirementRm
 AppSessionContextUpdateData::getAfRoutReq() const {
   return m_AfRoutReq;
 }
 void AppSessionContextUpdateData::setAfRoutReq(
-    oai::model::pcf::AfRoutingRequirementRm const& value) {
-  m_AfRoutReq      = value;
+    oai::model::pcf::AfRoutingRequirementRm const &value) {
+  m_AfRoutReq = value;
   m_AfRoutReqIsSet = true;
 }
 bool AppSessionContextUpdateData::afRoutReqIsSet() const {
   return m_AfRoutReqIsSet;
 }
-void AppSessionContextUpdateData::unsetAfRoutReq() {
-  m_AfRoutReqIsSet = false;
-}
-oai::model::pcf::AfSfcRequirement AppSessionContextUpdateData::getAfSfcReq()
-    const {
+void AppSessionContextUpdateData::unsetAfRoutReq() { m_AfRoutReqIsSet = false; }
+oai::model::pcf::AfSfcRequirement
+AppSessionContextUpdateData::getAfSfcReq() const {
   return m_AfSfcReq;
 }
 void AppSessionContextUpdateData::setAfSfcReq(
-    oai::model::pcf::AfSfcRequirement const& value) {
-  m_AfSfcReq      = value;
+    oai::model::pcf::AfSfcRequirement const &value) {
+  m_AfSfcReq = value;
   m_AfSfcReqIsSet = true;
 }
 bool AppSessionContextUpdateData::afSfcReqIsSet() const {
   return m_AfSfcReqIsSet;
 }
-void AppSessionContextUpdateData::unsetAfSfcReq() {
-  m_AfSfcReqIsSet = false;
-}
-std::string AppSessionContextUpdateData::getAspId() const {
-  return m_AspId;
-}
-void AppSessionContextUpdateData::setAspId(std::string const& value) {
-  m_AspId      = value;
+void AppSessionContextUpdateData::unsetAfSfcReq() { m_AfSfcReqIsSet = false; }
+std::string AppSessionContextUpdateData::getAspId() const { return m_AspId; }
+void AppSessionContextUpdateData::setAspId(std::string const &value) {
+  m_AspId = value;
   m_AspIdIsSet = true;
 }
-bool AppSessionContextUpdateData::aspIdIsSet() const {
-  return m_AspIdIsSet;
-}
-void AppSessionContextUpdateData::unsetAspId() {
-  m_AspIdIsSet = false;
-}
+bool AppSessionContextUpdateData::aspIdIsSet() const { return m_AspIdIsSet; }
+void AppSessionContextUpdateData::unsetAspId() { m_AspIdIsSet = false; }
 std::string AppSessionContextUpdateData::getBdtRefId() const {
   return m_BdtRefId;
 }
-void AppSessionContextUpdateData::setBdtRefId(std::string const& value) {
-  m_BdtRefId      = value;
+void AppSessionContextUpdateData::setBdtRefId(std::string const &value) {
+  m_BdtRefId = value;
   m_BdtRefIdIsSet = true;
 }
 bool AppSessionContextUpdateData::bdtRefIdIsSet() const {
   return m_BdtRefIdIsSet;
 }
-void AppSessionContextUpdateData::unsetBdtRefId() {
-  m_BdtRefIdIsSet = false;
-}
-oai::model::pcf::EventsSubscReqDataRm AppSessionContextUpdateData::getEvSubsc()
-    const {
+void AppSessionContextUpdateData::unsetBdtRefId() { m_BdtRefIdIsSet = false; }
+oai::model::pcf::EventsSubscReqDataRm
+AppSessionContextUpdateData::getEvSubsc() const {
   return m_EvSubsc;
 }
 void AppSessionContextUpdateData::setEvSubsc(
-    oai::model::pcf::EventsSubscReqDataRm const& value) {
-  m_EvSubsc      = value;
+    oai::model::pcf::EventsSubscReqDataRm const &value) {
+  m_EvSubsc = value;
   m_EvSubscIsSet = true;
 }
 bool AppSessionContextUpdateData::evSubscIsSet() const {
   return m_EvSubscIsSet;
 }
-void AppSessionContextUpdateData::unsetEvSubsc() {
-  m_EvSubscIsSet = false;
-}
+void AppSessionContextUpdateData::unsetEvSubsc() { m_EvSubscIsSet = false; }
 std::string AppSessionContextUpdateData::getMcpttId() const {
   return m_McpttId;
 }
-void AppSessionContextUpdateData::setMcpttId(std::string const& value) {
-  m_McpttId      = value;
+void AppSessionContextUpdateData::setMcpttId(std::string const &value) {
+  m_McpttId = value;
   m_McpttIdIsSet = true;
 }
 bool AppSessionContextUpdateData::mcpttIdIsSet() const {
   return m_McpttIdIsSet;
 }
-void AppSessionContextUpdateData::unsetMcpttId() {
-  m_McpttIdIsSet = false;
-}
+void AppSessionContextUpdateData::unsetMcpttId() { m_McpttIdIsSet = false; }
 std::string AppSessionContextUpdateData::getMcVideoId() const {
   return m_McVideoId;
 }
-void AppSessionContextUpdateData::setMcVideoId(std::string const& value) {
-  m_McVideoId      = value;
+void AppSessionContextUpdateData::setMcVideoId(std::string const &value) {
+  m_McVideoId = value;
   m_McVideoIdIsSet = true;
 }
 bool AppSessionContextUpdateData::mcVideoIdIsSet() const {
   return m_McVideoIdIsSet;
 }
-void AppSessionContextUpdateData::unsetMcVideoId() {
-  m_McVideoIdIsSet = false;
-}
+void AppSessionContextUpdateData::unsetMcVideoId() { m_McVideoIdIsSet = false; }
 std::map<std::string, oai::model::pcf::MediaComponentRm>
 AppSessionContextUpdateData::getMedComponents() const {
   return m_MedComponents;
 }
 void AppSessionContextUpdateData::setMedComponents(
-    std::map<std::string, oai::model::pcf::MediaComponentRm> const& value) {
-  m_MedComponents      = value;
+    std::map<std::string, oai::model::pcf::MediaComponentRm> const &value) {
+  m_MedComponents = value;
   m_MedComponentsIsSet = true;
 }
 bool AppSessionContextUpdateData::medComponentsIsSet() const {
@@ -483,49 +484,35 @@ oai::model::pcf::MpsAction AppSessionContextUpdateData::getMpsAction() const {
   return m_MpsAction;
 }
 void AppSessionContextUpdateData::setMpsAction(
-    oai::model::pcf::MpsAction const& value) {
-  m_MpsAction      = value;
+    oai::model::pcf::MpsAction const &value) {
+  m_MpsAction = value;
   m_MpsActionIsSet = true;
 }
 bool AppSessionContextUpdateData::mpsActionIsSet() const {
   return m_MpsActionIsSet;
 }
-void AppSessionContextUpdateData::unsetMpsAction() {
-  m_MpsActionIsSet = false;
-}
-std::string AppSessionContextUpdateData::getMpsId() const {
-  return m_MpsId;
-}
-void AppSessionContextUpdateData::setMpsId(std::string const& value) {
-  m_MpsId      = value;
+void AppSessionContextUpdateData::unsetMpsAction() { m_MpsActionIsSet = false; }
+std::string AppSessionContextUpdateData::getMpsId() const { return m_MpsId; }
+void AppSessionContextUpdateData::setMpsId(std::string const &value) {
+  m_MpsId = value;
   m_MpsIdIsSet = true;
 }
-bool AppSessionContextUpdateData::mpsIdIsSet() const {
-  return m_MpsIdIsSet;
-}
-void AppSessionContextUpdateData::unsetMpsId() {
-  m_MpsIdIsSet = false;
-}
-std::string AppSessionContextUpdateData::getMcsId() const {
-  return m_McsId;
-}
-void AppSessionContextUpdateData::setMcsId(std::string const& value) {
-  m_McsId      = value;
+bool AppSessionContextUpdateData::mpsIdIsSet() const { return m_MpsIdIsSet; }
+void AppSessionContextUpdateData::unsetMpsId() { m_MpsIdIsSet = false; }
+std::string AppSessionContextUpdateData::getMcsId() const { return m_McsId; }
+void AppSessionContextUpdateData::setMcsId(std::string const &value) {
+  m_McsId = value;
   m_McsIdIsSet = true;
 }
-bool AppSessionContextUpdateData::mcsIdIsSet() const {
-  return m_McsIdIsSet;
-}
-void AppSessionContextUpdateData::unsetMcsId() {
-  m_McsIdIsSet = false;
-}
+bool AppSessionContextUpdateData::mcsIdIsSet() const { return m_McsIdIsSet; }
+void AppSessionContextUpdateData::unsetMcsId() { m_McsIdIsSet = false; }
 oai::model::pcf::PreemptionControlInformation
 AppSessionContextUpdateData::getPreemptControlInfo() const {
   return m_PreemptControlInfo;
 }
 void AppSessionContextUpdateData::setPreemptControlInfo(
-    oai::model::pcf::PreemptionControlInformation const& value) {
-  m_PreemptControlInfo      = value;
+    oai::model::pcf::PreemptionControlInformation const &value) {
+  m_PreemptControlInfo = value;
   m_PreemptControlInfoIsSet = true;
 }
 bool AppSessionContextUpdateData::preemptControlInfoIsSet() const {
@@ -538,7 +525,7 @@ int32_t AppSessionContextUpdateData::getQosDuration() const {
   return m_QosDuration;
 }
 void AppSessionContextUpdateData::setQosDuration(int32_t const value) {
-  m_QosDuration      = value;
+  m_QosDuration = value;
   m_QosDurationIsSet = true;
 }
 bool AppSessionContextUpdateData::qosDurationIsSet() const {
@@ -551,7 +538,7 @@ int32_t AppSessionContextUpdateData::getQosInactInt() const {
   return m_QosInactInt;
 }
 void AppSessionContextUpdateData::setQosInactInt(int32_t const value) {
-  m_QosInactInt      = value;
+  m_QosInactInt = value;
   m_QosInactIntIsSet = true;
 }
 bool AppSessionContextUpdateData::qosInactIntIsSet() const {
@@ -560,28 +547,26 @@ bool AppSessionContextUpdateData::qosInactIntIsSet() const {
 void AppSessionContextUpdateData::unsetQosInactInt() {
   m_QosInactIntIsSet = false;
 }
-oai::model::pcf::ReservPriority AppSessionContextUpdateData::getResPrio()
-    const {
+oai::model::pcf::ReservPriority
+AppSessionContextUpdateData::getResPrio() const {
   return m_ResPrio;
 }
 void AppSessionContextUpdateData::setResPrio(
-    oai::model::pcf::ReservPriority const& value) {
-  m_ResPrio      = value;
+    oai::model::pcf::ReservPriority const &value) {
+  m_ResPrio = value;
   m_ResPrioIsSet = true;
 }
 bool AppSessionContextUpdateData::resPrioIsSet() const {
   return m_ResPrioIsSet;
 }
-void AppSessionContextUpdateData::unsetResPrio() {
-  m_ResPrioIsSet = false;
-}
+void AppSessionContextUpdateData::unsetResPrio() { m_ResPrioIsSet = false; }
 oai::model::pcf::ServiceInfoStatus
 AppSessionContextUpdateData::getServInfStatus() const {
   return m_ServInfStatus;
 }
 void AppSessionContextUpdateData::setServInfStatus(
-    oai::model::pcf::ServiceInfoStatus const& value) {
-  m_ServInfStatus      = value;
+    oai::model::pcf::ServiceInfoStatus const &value) {
+  m_ServInfStatus = value;
   m_ServInfStatusIsSet = true;
 }
 bool AppSessionContextUpdateData::servInfStatusIsSet() const {
@@ -595,8 +580,8 @@ AppSessionContextUpdateData::getSipForkInd() const {
   return m_SipForkInd;
 }
 void AppSessionContextUpdateData::setSipForkInd(
-    oai::model::pcf::SipForkingIndication const& value) {
-  m_SipForkInd      = value;
+    oai::model::pcf::SipForkingIndication const &value) {
+  m_SipForkInd = value;
   m_SipForkIndIsSet = true;
 }
 bool AppSessionContextUpdateData::sipForkIndIsSet() const {
@@ -605,26 +590,20 @@ bool AppSessionContextUpdateData::sipForkIndIsSet() const {
 void AppSessionContextUpdateData::unsetSipForkInd() {
   m_SipForkIndIsSet = false;
 }
-std::string AppSessionContextUpdateData::getSponId() const {
-  return m_SponId;
-}
-void AppSessionContextUpdateData::setSponId(std::string const& value) {
-  m_SponId      = value;
+std::string AppSessionContextUpdateData::getSponId() const { return m_SponId; }
+void AppSessionContextUpdateData::setSponId(std::string const &value) {
+  m_SponId = value;
   m_SponIdIsSet = true;
 }
-bool AppSessionContextUpdateData::sponIdIsSet() const {
-  return m_SponIdIsSet;
-}
-void AppSessionContextUpdateData::unsetSponId() {
-  m_SponIdIsSet = false;
-}
-oai::model::pcf::SponsoringStatus AppSessionContextUpdateData::getSponStatus()
-    const {
+bool AppSessionContextUpdateData::sponIdIsSet() const { return m_SponIdIsSet; }
+void AppSessionContextUpdateData::unsetSponId() { m_SponIdIsSet = false; }
+oai::model::pcf::SponsoringStatus
+AppSessionContextUpdateData::getSponStatus() const {
   return m_SponStatus;
 }
 void AppSessionContextUpdateData::setSponStatus(
-    oai::model::pcf::SponsoringStatus const& value) {
-  m_SponStatus      = value;
+    oai::model::pcf::SponsoringStatus const &value) {
+  m_SponStatus = value;
   m_SponStatusIsSet = true;
 }
 bool AppSessionContextUpdateData::sponStatusIsSet() const {
@@ -638,8 +617,8 @@ AppSessionContextUpdateData::getTsnBridgeManCont() const {
   return m_TsnBridgeManCont;
 }
 void AppSessionContextUpdateData::setTsnBridgeManCont(
-    oai::model::pcf::BridgeManagementContainer const& value) {
-  m_TsnBridgeManCont      = value;
+    oai::model::pcf::BridgeManagementContainer const &value) {
+  m_TsnBridgeManCont = value;
   m_TsnBridgeManContIsSet = true;
 }
 bool AppSessionContextUpdateData::tsnBridgeManContIsSet() const {
@@ -653,8 +632,8 @@ AppSessionContextUpdateData::getTsnPortManContDstt() const {
   return m_TsnPortManContDstt;
 }
 void AppSessionContextUpdateData::setTsnPortManContDstt(
-    oai::model::pcf::PortManagementContainer const& value) {
-  m_TsnPortManContDstt      = value;
+    oai::model::pcf::PortManagementContainer const &value) {
+  m_TsnPortManContDstt = value;
   m_TsnPortManContDsttIsSet = true;
 }
 bool AppSessionContextUpdateData::tsnPortManContDsttIsSet() const {
@@ -668,8 +647,8 @@ AppSessionContextUpdateData::getTsnPortManContNwtts() const {
   return m_TsnPortManContNwtts;
 }
 void AppSessionContextUpdateData::setTsnPortManContNwtts(
-    std::vector<oai::model::pcf::PortManagementContainer> const& value) {
-  m_TsnPortManContNwtts      = value;
+    std::vector<oai::model::pcf::PortManagementContainer> const &value) {
+  m_TsnPortManContNwtts = value;
   m_TsnPortManContNwttsIsSet = true;
 }
 bool AppSessionContextUpdateData::tsnPortManContNwttsIsSet() const {
@@ -681,8 +660,8 @@ void AppSessionContextUpdateData::unsetTsnPortManContNwtts() {
 std::string AppSessionContextUpdateData::getTscNotifUri() const {
   return m_TscNotifUri;
 }
-void AppSessionContextUpdateData::setTscNotifUri(std::string const& value) {
-  m_TscNotifUri      = value;
+void AppSessionContextUpdateData::setTscNotifUri(std::string const &value) {
+  m_TscNotifUri = value;
   m_TscNotifUriIsSet = true;
 }
 bool AppSessionContextUpdateData::tscNotifUriIsSet() const {
@@ -694,8 +673,8 @@ void AppSessionContextUpdateData::unsetTscNotifUri() {
 std::string AppSessionContextUpdateData::getTscNotifCorreId() const {
   return m_TscNotifCorreId;
 }
-void AppSessionContextUpdateData::setTscNotifCorreId(std::string const& value) {
-  m_TscNotifCorreId      = value;
+void AppSessionContextUpdateData::setTscNotifCorreId(std::string const &value) {
+  m_TscNotifCorreId = value;
   m_TscNotifCorreIdIsSet = true;
 }
 bool AppSessionContextUpdateData::tscNotifCorreIdIsSet() const {
@@ -705,4 +684,4 @@ void AppSessionContextUpdateData::unsetTscNotifCorreId() {
   m_TscNotifCorreIdIsSet = false;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

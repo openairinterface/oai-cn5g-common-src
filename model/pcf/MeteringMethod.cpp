@@ -27,12 +27,12 @@ void MeteringMethod::validate() const {
   }
 }
 
-bool MeteringMethod::validate(std::stringstream& msg) const {
+bool MeteringMethod::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool MeteringMethod::validate(
-    std::stringstream& /* msg */, const std::string& /* pathPrefix */) const {
+bool MeteringMethod::validate(std::stringstream & /* msg */,
+                              const std::string & /* pathPrefix */) const {
   bool success = true;
   /*
   const std::string _pathPrefix =
@@ -41,33 +41,29 @@ bool MeteringMethod::validate(
   return success;
 }
 
-bool MeteringMethod::operator==(const MeteringMethod& rhs) const {
+bool MeteringMethod::operator==(const MeteringMethod &rhs) const {
   return getValue() == rhs.getValue();
 }
 
-bool MeteringMethod::operator!=(const MeteringMethod& rhs) const {
+bool MeteringMethod::operator!=(const MeteringMethod &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const MeteringMethod& o) {
+void to_json(nlohmann::json &j, const MeteringMethod &o) {
   j = nlohmann::json();
   to_json(j, o);
 }
 
-void from_json(const nlohmann::json& j, MeteringMethod& o) {
+void from_json(const nlohmann::json &j, MeteringMethod &o) {
   from_json(j, o.m_value);
 }
 
-MeteringMethod_anyOf MeteringMethod::getValue() const {
-  return m_value;
-}
+MeteringMethod_anyOf MeteringMethod::getValue() const { return m_value; }
 
-void MeteringMethod::setValue(MeteringMethod_anyOf value) {
-  m_value = value;
-}
+void MeteringMethod::setValue(MeteringMethod_anyOf value) { m_value = value; }
 
-MeteringMethod_anyOf::eMeteringMethod_anyOf MeteringMethod::getEnumValue()
-    const {
+MeteringMethod_anyOf::eMeteringMethod_anyOf
+MeteringMethod::getEnumValue() const {
   return m_value.getValue();
 }
 
@@ -76,4 +72,4 @@ void MeteringMethod::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

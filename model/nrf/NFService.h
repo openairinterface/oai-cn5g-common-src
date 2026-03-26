@@ -19,18 +19,18 @@
 #ifndef NFService_H_
 #define NFService_H_
 
-#include "NFServiceStatus.h"
-#include "ServiceName.h"
-#include "NFServiceVersion.h"
-#include <string>
+#include "ChfServiceInfo.h"
 #include "DefaultNotificationSubscription.h"
 #include "IpEndPoint.h"
-#include "UriScheme.h"
+#include "NFServiceStatus.h"
+#include "NFServiceVersion.h"
 #include "PlmnId.h"
+#include "ServiceName.h"
 #include "Snssai.h"
-#include <vector>
-#include "ChfServiceInfo.h"
+#include "UriScheme.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::nrf {
 
@@ -38,7 +38,7 @@ namespace oai::model::nrf {
 ///
 /// </summary>
 class NFService {
- public:
+public:
   NFService();
   virtual ~NFService();
 
@@ -51,90 +51,90 @@ class NFService {
   ///
   /// </summary>
   std::string getServiceInstanceId() const;
-  void setServiceInstanceId(std::string const& value);
+  void setServiceInstanceId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getServiceName() const;
-  void setServiceName(std::string const& value);
+  void setServiceName(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::vector<NFServiceVersion> getVersions();
-  void setVersions(std::vector<NFServiceVersion> const& value);
+  void setVersions(std::vector<NFServiceVersion> const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getScheme() const;
-  void setScheme(std::string const& value);
+  void setScheme(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getNfServiceStatus() const;
-  void setNfServiceStatus(std::string const& value);
+  void setNfServiceStatus(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getFqdn() const;
-  void setFqdn(std::string const& value);
+  void setFqdn(std::string const &value);
   bool fqdnIsSet() const;
   void unsetFqdn();
   /// <summary>
   ///
   /// </summary>
   std::string getInterPlmnFqdn() const;
-  void setInterPlmnFqdn(std::string const& value);
+  void setInterPlmnFqdn(std::string const &value);
   bool interPlmnFqdnIsSet() const;
   void unsetInterPlmnFqdn();
   /// <summary>
   ///
   /// </summary>
-  std::vector<IpEndPoint>& getIpEndPoints();
-  void setIpEndPoints(std::vector<IpEndPoint> const& value);
+  std::vector<IpEndPoint> &getIpEndPoints();
+  void setIpEndPoints(std::vector<IpEndPoint> const &value);
   bool ipEndPointsIsSet() const;
   void unsetIpEndPoints();
   /// <summary>
   ///
   /// </summary>
   std::string getApiPrefix() const;
-  void setApiPrefix(std::string const& value);
+  void setApiPrefix(std::string const &value);
   bool apiPrefixIsSet() const;
   void unsetApiPrefix();
   /// <summary>
   ///
   /// </summary>
-  std::vector<DefaultNotificationSubscription>&
+  std::vector<DefaultNotificationSubscription> &
   getDefaultNotificationSubscriptions();
   void setDefaultNotificationSubscriptions(
-      std::vector<DefaultNotificationSubscription> const& value);
+      std::vector<DefaultNotificationSubscription> const &value);
   bool defaultNotificationSubscriptionsIsSet() const;
   void unsetDefaultNotificationSubscriptions();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::PlmnId>& getAllowedPlmns();
-  void setAllowedPlmns(std::vector<oai::model::common::PlmnId> const& value);
+  std::vector<oai::model::common::PlmnId> &getAllowedPlmns();
+  void setAllowedPlmns(std::vector<oai::model::common::PlmnId> const &value);
   bool allowedPlmnsIsSet() const;
   void unsetAllowedPlmns();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getAllowedNfTypes();
-  void setAllowedNfTypes(std::vector<std::string> const& value);
+  std::vector<std::string> &getAllowedNfTypes();
+  void setAllowedNfTypes(std::vector<std::string> const &value);
   bool allowedNfTypesIsSet() const;
   void unsetAllowedNfTypes();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getAllowedNfDomains();
-  void setAllowedNfDomains(std::vector<std::string> const& value);
+  std::vector<std::string> &getAllowedNfDomains();
+  void setAllowedNfDomains(std::vector<std::string> const &value);
   bool allowedNfDomainsIsSet() const;
   void unsetAllowedNfDomains();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::Snssai>& getAllowedNssais();
-  void setAllowedNssais(std::vector<oai::model::common::Snssai> const& value);
+  std::vector<oai::model::common::Snssai> &getAllowedNssais();
+  void setAllowedNssais(std::vector<oai::model::common::Snssai> const &value);
   bool allowedNssaisIsSet() const;
   void unsetAllowedNssais();
   /// <summary>
@@ -163,28 +163,28 @@ class NFService {
   ///
   /// </summary>
   std::string getRecoveryTime() const;
-  void setRecoveryTime(std::string const& value);
+  void setRecoveryTime(std::string const &value);
   bool recoveryTimeIsSet() const;
   void unsetRecoveryTime();
   /// <summary>
   ///
   /// </summary>
   ChfServiceInfo getChfServiceInfo() const;
-  void setChfServiceInfo(ChfServiceInfo const& value);
+  void setChfServiceInfo(ChfServiceInfo const &value);
   bool chfServiceInfoIsSet() const;
   void unsetChfServiceInfo();
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
 
-  friend void to_json(nlohmann::json& j, const NFService& o);
-  friend void from_json(const nlohmann::json& j, NFService& o);
+  friend void to_json(nlohmann::json &j, const NFService &o);
+  friend void from_json(const nlohmann::json &j, NFService &o);
 
- protected:
+protected:
   std::string m_ServiceInstanceId;
 
   std::string m_ServiceName;
@@ -228,6 +228,6 @@ class NFService {
   bool m_SupportedFeaturesIsSet;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* NFService_H_ */

@@ -20,7 +20,7 @@
 namespace oai::model::nrf {
 
 SnssaiUpfInfoItem::SnssaiUpfInfoItem() {
-  m_RedundantTransport      = false;
+  m_RedundantTransport = false;
   m_RedundantTransportIsSet = false;
 }
 
@@ -31,12 +31,12 @@ void SnssaiUpfInfoItem::validate() const {
   }
 }
 
-bool SnssaiUpfInfoItem::validate(std::stringstream& msg) const {
+bool SnssaiUpfInfoItem::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool SnssaiUpfInfoItem::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool SnssaiUpfInfoItem::validate(std::stringstream &msg,
+                                 const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "SnssaiUpfInfoItem" : pathPrefix;
@@ -47,7 +47,7 @@ bool SnssaiUpfInfoItem::validate(
   }
 
   /* DnnUpfInfoList */ {
-    const std::vector<oai::model::nrf::DnnUpfInfoItem>& value =
+    const std::vector<oai::model::nrf::DnnUpfInfoItem> &value =
         m_DnnUpfInfoList;
     const std::string currentValuePath = _pathPrefix + ".dnnUpfInfoList";
 
@@ -55,10 +55,10 @@ bool SnssaiUpfInfoItem::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::nrf::DnnUpfInfoItem& value : value) {
+      int i = 0;
+      for (const oai::model::nrf::DnnUpfInfoItem &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -73,7 +73,7 @@ bool SnssaiUpfInfoItem::validate(
   return success;
 }
 
-bool SnssaiUpfInfoItem::operator==(const SnssaiUpfInfoItem& rhs) const {
+bool SnssaiUpfInfoItem::operator==(const SnssaiUpfInfoItem &rhs) const {
   return
 
       (getSNssai() == rhs.getSNssai()) &&
@@ -87,19 +87,19 @@ bool SnssaiUpfInfoItem::operator==(const SnssaiUpfInfoItem& rhs) const {
           ;
 }
 
-bool SnssaiUpfInfoItem::operator!=(const SnssaiUpfInfoItem& rhs) const {
+bool SnssaiUpfInfoItem::operator!=(const SnssaiUpfInfoItem &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const SnssaiUpfInfoItem& o) {
-  j                   = nlohmann::json();
-  j["sNssai"]         = o.m_SNssai;
+void to_json(nlohmann::json &j, const SnssaiUpfInfoItem &o) {
+  j = nlohmann::json();
+  j["sNssai"] = o.m_SNssai;
   j["dnnUpfInfoList"] = o.m_DnnUpfInfoList;
   if (o.redundantTransportIsSet())
     j["redundantTransport"] = o.m_RedundantTransport;
 }
 
-void from_json(const nlohmann::json& j, SnssaiUpfInfoItem& o) {
+void from_json(const nlohmann::json &j, SnssaiUpfInfoItem &o) {
   j.at("sNssai").get_to(o.m_SNssai);
   j.at("dnnUpfInfoList").get_to(o.m_DnnUpfInfoList);
   if (j.find("redundantTransport") != j.end()) {
@@ -111,7 +111,7 @@ void from_json(const nlohmann::json& j, SnssaiUpfInfoItem& o) {
 oai::model::common::Snssai SnssaiUpfInfoItem::getSNssai() const {
   return m_SNssai;
 }
-void SnssaiUpfInfoItem::setSNssai(oai::model::common::Snssai const& value) {
+void SnssaiUpfInfoItem::setSNssai(oai::model::common::Snssai const &value) {
   m_SNssai = value;
 }
 std::vector<oai::model::nrf::DnnUpfInfoItem>
@@ -119,14 +119,14 @@ SnssaiUpfInfoItem::getDnnUpfInfoList() const {
   return m_DnnUpfInfoList;
 }
 void SnssaiUpfInfoItem::setDnnUpfInfoList(
-    std::vector<oai::model::nrf::DnnUpfInfoItem> const& value) {
+    std::vector<oai::model::nrf::DnnUpfInfoItem> const &value) {
   m_DnnUpfInfoList = value;
 }
 bool SnssaiUpfInfoItem::isRedundantTransport() const {
   return m_RedundantTransport;
 }
 void SnssaiUpfInfoItem::setRedundantTransport(bool const value) {
-  m_RedundantTransport      = value;
+  m_RedundantTransport = value;
   m_RedundantTransportIsSet = true;
 }
 bool SnssaiUpfInfoItem::redundantTransportIsSet() const {
@@ -145,11 +145,11 @@ std::string SnssaiUpfInfoItem::to_string(int indent_level) const {
   if (!m_DnnUpfInfoList.empty()) {
     fmt_title = oai::config::get_title_formatter(indent_level + 1);
     out.append(fmt::format(fmt_title, "dnns:"));
-    for (const auto& dnn : m_DnnUpfInfoList) {
+    for (const auto &dnn : m_DnnUpfInfoList) {
       out.append(dnn.to_string(indent_level + 2));
     }
   }
   return out;
 }
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

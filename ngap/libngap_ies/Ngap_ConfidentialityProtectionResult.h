@@ -20,7 +20,7 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_ConfidentialityProtectionResult {
-  Ngap_ConfidentialityProtectionResult_performed     = 0,
+  Ngap_ConfidentialityProtectionResult_performed = 0,
   Ngap_ConfidentialityProtectionResult_not_performed = 1
   /*
    * Enumeration is extensible

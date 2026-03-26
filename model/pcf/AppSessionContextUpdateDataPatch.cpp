@@ -29,12 +29,12 @@ void AppSessionContextUpdateDataPatch::validate() const {
   }
 }
 
-bool AppSessionContextUpdateDataPatch::validate(std::stringstream& msg) const {
+bool AppSessionContextUpdateDataPatch::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool AppSessionContextUpdateDataPatch::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AppSessionContextUpdateDataPatch" : pathPrefix;
@@ -43,7 +43,7 @@ bool AppSessionContextUpdateDataPatch::validate(
 }
 
 bool AppSessionContextUpdateDataPatch::operator==(
-    const AppSessionContextUpdateDataPatch& rhs) const {
+    const AppSessionContextUpdateDataPatch &rhs) const {
   return
 
       ((!ascReqDataIsSet() && !rhs.ascReqDataIsSet()) ||
@@ -54,16 +54,17 @@ bool AppSessionContextUpdateDataPatch::operator==(
 }
 
 bool AppSessionContextUpdateDataPatch::operator!=(
-    const AppSessionContextUpdateDataPatch& rhs) const {
+    const AppSessionContextUpdateDataPatch &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AppSessionContextUpdateDataPatch& o) {
+void to_json(nlohmann::json &j, const AppSessionContextUpdateDataPatch &o) {
   j = nlohmann::json::object();
-  if (o.ascReqDataIsSet()) j["ascReqData"] = o.m_AscReqData;
+  if (o.ascReqDataIsSet())
+    j["ascReqData"] = o.m_AscReqData;
 }
 
-void from_json(const nlohmann::json& j, AppSessionContextUpdateDataPatch& o) {
+void from_json(const nlohmann::json &j, AppSessionContextUpdateDataPatch &o) {
   if (j.find("ascReqData") != j.end()) {
     j.at("ascReqData").get_to(o.m_AscReqData);
     o.m_AscReqDataIsSet = true;
@@ -75,8 +76,8 @@ AppSessionContextUpdateDataPatch::getAscReqData() const {
   return m_AscReqData;
 }
 void AppSessionContextUpdateDataPatch::setAscReqData(
-    oai::model::pcf::AppSessionContextUpdateData const& value) {
-  m_AscReqData      = value;
+    oai::model::pcf::AppSessionContextUpdateData const &value) {
+  m_AscReqData = value;
   m_AscReqDataIsSet = true;
 }
 bool AppSessionContextUpdateDataPatch::ascReqDataIsSet() const {
@@ -86,4 +87,4 @@ void AppSessionContextUpdateDataPatch::unsetAscReqData() {
   m_AscReqDataIsSet = false;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

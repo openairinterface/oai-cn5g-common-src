@@ -19,10 +19,10 @@
 #ifndef RoamingChargingProfile_H_
 #define RoamingChargingProfile_H_
 
-#include "Trigger.h"
 #include "PartialRecordMethod.h"
-#include <vector>
+#include "Trigger.h"
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::smf {
 
@@ -30,7 +30,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class RoamingChargingProfile {
- public:
+public:
   RoamingChargingProfile();
   virtual ~RoamingChargingProfile();
 
@@ -42,27 +42,27 @@ class RoamingChargingProfile {
   /// <summary>
   ///
   /// </summary>
-  std::vector<Trigger>& getTriggers();
+  std::vector<Trigger> &getTriggers();
   bool triggersIsSet() const;
   void unsetTriggers();
   /// <summary>
   ///
   /// </summary>
   PartialRecordMethod getPartialRecordMethod() const;
-  void setPartialRecordMethod(PartialRecordMethod const& value);
+  void setPartialRecordMethod(PartialRecordMethod const &value);
   bool partialRecordMethodIsSet() const;
   void unsetPartialRecordMethod();
 
-  friend void to_json(nlohmann::json& j, const RoamingChargingProfile& o);
-  friend void from_json(const nlohmann::json& j, RoamingChargingProfile& o);
+  friend void to_json(nlohmann::json &j, const RoamingChargingProfile &o);
+  friend void from_json(const nlohmann::json &j, RoamingChargingProfile &o);
 
- protected:
+protected:
   std::vector<Trigger> m_Triggers;
   bool m_TriggersIsSet;
   PartialRecordMethod m_PartialRecordMethod;
   bool m_PartialRecordMethodIsSet;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* RoamingChargingProfile_H_ */

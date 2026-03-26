@@ -20,8 +20,8 @@ namespace oai::model::common {
 
 EcgiRm::EcgiRm() {
   m_EutraCellId = "";
-  m_Nid         = "";
-  m_NidIsSet    = false;
+  m_Nid = "";
+  m_NidIsSet = false;
 }
 
 void EcgiRm::validate() const {
@@ -31,29 +31,29 @@ void EcgiRm::validate() const {
   }
 }
 
-bool EcgiRm::validate(std::stringstream& msg) const {
+bool EcgiRm::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool EcgiRm::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool EcgiRm::validate(std::stringstream &msg,
+                      const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "EcgiRm" : pathPrefix;
 
   /* EutraCellId */ {
-    const std::string& value           = m_EutraCellId;
+    const std::string &value = m_EutraCellId;
     const std::string currentValuePath = _pathPrefix + ".eutraCellId";
   }
 
   if (nidIsSet()) {
-    const std::string& value           = m_Nid;
+    const std::string &value = m_Nid;
     const std::string currentValuePath = _pathPrefix + ".nid";
   }
 
   return success;
 }
 
-bool EcgiRm::operator==(const EcgiRm& rhs) const {
+bool EcgiRm::operator==(const EcgiRm &rhs) const {
   return
 
       (getPlmnId() == rhs.getPlmnId()) &&
@@ -66,18 +66,17 @@ bool EcgiRm::operator==(const EcgiRm& rhs) const {
           ;
 }
 
-bool EcgiRm::operator!=(const EcgiRm& rhs) const {
-  return !(*this == rhs);
-}
+bool EcgiRm::operator!=(const EcgiRm &rhs) const { return !(*this == rhs); }
 
-void to_json(nlohmann::json& j, const EcgiRm& o) {
-  j                = nlohmann::json();
-  j["plmnId"]      = o.m_PlmnId;
+void to_json(nlohmann::json &j, const EcgiRm &o) {
+  j = nlohmann::json();
+  j["plmnId"] = o.m_PlmnId;
   j["eutraCellId"] = o.m_EutraCellId;
-  if (o.nidIsSet()) j["nid"] = o.m_Nid;
+  if (o.nidIsSet())
+    j["nid"] = o.m_Nid;
 }
 
-void from_json(const nlohmann::json& j, EcgiRm& o) {
+void from_json(const nlohmann::json &j, EcgiRm &o) {
   j.at("plmnId").get_to(o.m_PlmnId);
   j.at("eutraCellId").get_to(o.m_EutraCellId);
   if (j.find("nid") != j.end()) {
@@ -86,30 +85,18 @@ void from_json(const nlohmann::json& j, EcgiRm& o) {
   }
 }
 
-oai::model::common::PlmnId EcgiRm::getPlmnId() const {
-  return m_PlmnId;
-}
-void EcgiRm::setPlmnId(oai::model::common::PlmnId const& value) {
+oai::model::common::PlmnId EcgiRm::getPlmnId() const { return m_PlmnId; }
+void EcgiRm::setPlmnId(oai::model::common::PlmnId const &value) {
   m_PlmnId = value;
 }
-std::string EcgiRm::getEutraCellId() const {
-  return m_EutraCellId;
-}
-void EcgiRm::setEutraCellId(std::string const& value) {
-  m_EutraCellId = value;
-}
-std::string EcgiRm::getNid() const {
-  return m_Nid;
-}
-void EcgiRm::setNid(std::string const& value) {
-  m_Nid      = value;
+std::string EcgiRm::getEutraCellId() const { return m_EutraCellId; }
+void EcgiRm::setEutraCellId(std::string const &value) { m_EutraCellId = value; }
+std::string EcgiRm::getNid() const { return m_Nid; }
+void EcgiRm::setNid(std::string const &value) {
+  m_Nid = value;
   m_NidIsSet = true;
 }
-bool EcgiRm::nidIsSet() const {
-  return m_NidIsSet;
-}
-void EcgiRm::unsetNid() {
-  m_NidIsSet = false;
-}
+bool EcgiRm::nidIsSet() const { return m_NidIsSet; }
+void EcgiRm::unsetNid() { m_NidIsSet = false; }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

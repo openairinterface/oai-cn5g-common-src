@@ -27,7 +27,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class IntegrityAlgorithm {
- public:
+public:
   IntegrityAlgorithm();
   virtual ~IntegrityAlgorithm();
 
@@ -36,12 +36,12 @@ class IntegrityAlgorithm {
   /////////////////////////////////////////////
   /// IntegrityAlgorithm members
 
-  friend void to_json(nlohmann::json& j, const IntegrityAlgorithm& o);
-  friend void from_json(const nlohmann::json& j, IntegrityAlgorithm& o);
+  friend void to_json(nlohmann::json &j, const IntegrityAlgorithm &o);
+  friend void from_json(const nlohmann::json &j, IntegrityAlgorithm &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* IntegrityAlgorithm_H_ */

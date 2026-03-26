@@ -32,7 +32,7 @@ namespace model {
 ///
 /// </summary>
 class NssfEventSubscriptionCreatedData {
- public:
+public:
   NssfEventSubscriptionCreatedData();
   virtual ~NssfEventSubscriptionCreatedData() = default;
 
@@ -46,16 +46,16 @@ class NssfEventSubscriptionCreatedData {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const NssfEventSubscriptionCreatedData& rhs) const;
-  bool operator!=(const NssfEventSubscriptionCreatedData& rhs) const;
+  bool operator==(const NssfEventSubscriptionCreatedData &rhs) const;
+  bool operator!=(const NssfEventSubscriptionCreatedData &rhs) const;
 
   /////////////////////////////////////////////
   /// NssfEventSubscriptionCreatedData members
@@ -64,12 +64,12 @@ class NssfEventSubscriptionCreatedData {
   ///
   /// </summary>
   std::string getSubscriptionId() const;
-  void setSubscriptionId(std::string const& value);
+  void setSubscriptionId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getExpiry() const;
-  void setExpiry(std::string const& value);
+  void setExpiry(std::string const &value);
   bool expiryIsSet() const;
   void unsetExpiry();
   /// <summary>
@@ -78,23 +78,23 @@ class NssfEventSubscriptionCreatedData {
   std::vector<AuthorizedNssaiAvailabilityData>
   getAuthorizedNssaiAvailabilityData() const;
   void setAuthorizedNssaiAvailabilityData(
-      std::vector<AuthorizedNssaiAvailabilityData> const& value);
+      std::vector<AuthorizedNssaiAvailabilityData> const &value);
   bool authorizedNssaiAvailabilityDataIsSet() const;
   void unsetAuthorizedNssaiAvailabilityData();
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
 
-  friend void to_json(
-      nlohmann::json& j, const NssfEventSubscriptionCreatedData& o);
-  friend void from_json(
-      const nlohmann::json& j, NssfEventSubscriptionCreatedData& o);
+  friend void to_json(nlohmann::json &j,
+                      const NssfEventSubscriptionCreatedData &o);
+  friend void from_json(const nlohmann::json &j,
+                        NssfEventSubscriptionCreatedData &o);
 
- protected:
+protected:
   std::string m_SubscriptionId;
 
   std::string m_Expiry;
@@ -106,8 +106,8 @@ class NssfEventSubscriptionCreatedData {
   bool m_SupportedFeaturesIsSet;
 };
 
-}  // namespace model
-}  // namespace nssf_server
-}  // namespace oai
+} // namespace model
+} // namespace nssf_server
+} // namespace oai
 
 #endif /* NssfEventSubscriptionCreatedData_H_ */

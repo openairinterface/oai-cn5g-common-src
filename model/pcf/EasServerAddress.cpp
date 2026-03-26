@@ -18,9 +18,7 @@
 
 namespace oai::model::pcf {
 
-EasServerAddress::EasServerAddress() {
-  m_Port = 0;
-}
+EasServerAddress::EasServerAddress() { m_Port = 0; }
 
 void EasServerAddress::validate() const {
   std::stringstream msg;
@@ -29,12 +27,12 @@ void EasServerAddress::validate() const {
   }
 }
 
-bool EasServerAddress::validate(std::stringstream& msg) const {
+bool EasServerAddress::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool EasServerAddress::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool EasServerAddress::validate(std::stringstream &msg,
+                                const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "EasServerAddress" : pathPrefix;
@@ -45,7 +43,7 @@ bool EasServerAddress::validate(
   }
 
   /* Port */ {
-    const int32_t& value               = m_Port;
+    const int32_t &value = m_Port;
     const std::string currentValuePath = _pathPrefix + ".port";
 
     if (value < 0) {
@@ -57,7 +55,7 @@ bool EasServerAddress::validate(
   return success;
 }
 
-bool EasServerAddress::operator==(const EasServerAddress& rhs) const {
+bool EasServerAddress::operator==(const EasServerAddress &rhs) const {
   return
 
       (getIp() == rhs.getIp()) &&
@@ -67,32 +65,26 @@ bool EasServerAddress::operator==(const EasServerAddress& rhs) const {
           ;
 }
 
-bool EasServerAddress::operator!=(const EasServerAddress& rhs) const {
+bool EasServerAddress::operator!=(const EasServerAddress &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const EasServerAddress& o) {
-  j         = nlohmann::json::object();
-  j["ip"]   = o.m_Ip;
+void to_json(nlohmann::json &j, const EasServerAddress &o) {
+  j = nlohmann::json::object();
+  j["ip"] = o.m_Ip;
   j["port"] = o.m_Port;
 }
 
-void from_json(const nlohmann::json& j, EasServerAddress& o) {
+void from_json(const nlohmann::json &j, EasServerAddress &o) {
   j.at("ip").get_to(o.m_Ip);
   j.at("port").get_to(o.m_Port);
 }
 
-oai::model::common::IpAddr EasServerAddress::getIp() const {
-  return m_Ip;
-}
-void EasServerAddress::setIp(oai::model::common::IpAddr const& value) {
+oai::model::common::IpAddr EasServerAddress::getIp() const { return m_Ip; }
+void EasServerAddress::setIp(oai::model::common::IpAddr const &value) {
   m_Ip = value;
 }
-int32_t EasServerAddress::getPort() const {
-  return m_Port;
-}
-void EasServerAddress::setPort(int32_t const value) {
-  m_Port = value;
-}
+int32_t EasServerAddress::getPort() const { return m_Port; }
+void EasServerAddress::setPort(int32_t const value) { m_Port = value; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

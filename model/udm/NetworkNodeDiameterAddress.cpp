@@ -19,7 +19,7 @@
 namespace oai::model::udm {
 
 NetworkNodeDiameterAddress::NetworkNodeDiameterAddress() {
-  m_Name  = "";
+  m_Name = "";
   m_Realm = "";
 }
 
@@ -29,28 +29,24 @@ void NetworkNodeDiameterAddress::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const NetworkNodeDiameterAddress& o) {
-  j          = nlohmann::json();
-  j["name"]  = o.m_Name;
+void to_json(nlohmann::json &j, const NetworkNodeDiameterAddress &o) {
+  j = nlohmann::json();
+  j["name"] = o.m_Name;
   j["realm"] = o.m_Realm;
 }
 
-void from_json(const nlohmann::json& j, NetworkNodeDiameterAddress& o) {
+void from_json(const nlohmann::json &j, NetworkNodeDiameterAddress &o) {
   j.at("name").get_to(o.m_Name);
   j.at("realm").get_to(o.m_Realm);
 }
 
-std::string NetworkNodeDiameterAddress::getName() const {
-  return m_Name;
-}
-void NetworkNodeDiameterAddress::setName(std::string const& value) {
+std::string NetworkNodeDiameterAddress::getName() const { return m_Name; }
+void NetworkNodeDiameterAddress::setName(std::string const &value) {
   m_Name = value;
 }
-std::string NetworkNodeDiameterAddress::getRealm() const {
-  return m_Realm;
-}
-void NetworkNodeDiameterAddress::setRealm(std::string const& value) {
+std::string NetworkNodeDiameterAddress::getRealm() const { return m_Realm; }
+void NetworkNodeDiameterAddress::setRealm(std::string const &value) {
   m_Realm = value;
 }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

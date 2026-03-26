@@ -19,8 +19,8 @@
 #ifndef AccessTokenErr_H_
 #define AccessTokenErr_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::common {
 
@@ -28,7 +28,7 @@ namespace oai::model::common {
 /// Error returned in the access token response message
 /// </summary>
 class AccessTokenErr {
- public:
+public:
   AccessTokenErr();
   virtual ~AccessTokenErr() = default;
 
@@ -42,16 +42,16 @@ class AccessTokenErr {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const AccessTokenErr& rhs) const;
-  bool operator!=(const AccessTokenErr& rhs) const;
+  bool operator==(const AccessTokenErr &rhs) const;
+  bool operator!=(const AccessTokenErr &rhs) const;
 
   /////////////////////////////////////////////
   /// AccessTokenErr members
@@ -60,26 +60,26 @@ class AccessTokenErr {
   ///
   /// </summary>
   std::string getError() const;
-  void setError(std::string const& value);
+  void setError(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getErrorDescription() const;
-  void setErrorDescription(std::string const& value);
+  void setErrorDescription(std::string const &value);
   bool errorDescriptionIsSet() const;
   void unsetError_description();
   /// <summary>
   ///
   /// </summary>
   std::string getErrorUri() const;
-  void setErrorUri(std::string const& value);
+  void setErrorUri(std::string const &value);
   bool errorUriIsSet() const;
   void unsetError_uri();
 
-  friend void to_json(nlohmann::json& j, const AccessTokenErr& o);
-  friend void from_json(const nlohmann::json& j, AccessTokenErr& o);
+  friend void to_json(nlohmann::json &j, const AccessTokenErr &o);
+  friend void from_json(const nlohmann::json &j, AccessTokenErr &o);
 
- protected:
+protected:
   std::string m_Error;
 
   std::string m_Error_description;
@@ -88,6 +88,6 @@ class AccessTokenErr {
   bool m_Error_uriIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* AccessTokenErr_H_ */

@@ -12,8 +12,8 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_GUAMI.h"
 #include "Ngap_AMFName.h"
+#include "Ngap_GUAMI.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -26,8 +26,8 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_ServedGUAMIItem */
 typedef struct Ngap_ServedGUAMIItem {
   Ngap_GUAMI_t gUAMI;
-  Ngap_AMFName_t* backupAMFName;                         /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  Ngap_AMFName_t *backupAMFName;                         /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

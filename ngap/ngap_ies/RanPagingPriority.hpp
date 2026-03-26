@@ -16,20 +16,20 @@ extern "C" {
 namespace oai::ngap {
 
 class RanPagingPriority {
- public:
+public:
   RanPagingPriority();
   virtual ~RanPagingPriority();
 
-  bool set(const uint32_t&);
+  bool set(const uint32_t &);
   uint32_t get() const;
 
-  bool encode(Ngap_RANPagingPriority_t&) const;
-  bool decode(const Ngap_RANPagingPriority_t&);
+  bool encode(Ngap_RANPagingPriority_t &) const;
+  bool decode(const Ngap_RANPagingPriority_t &);
 
- private:
+private:
   uint32_t m_RanPagingPriority;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

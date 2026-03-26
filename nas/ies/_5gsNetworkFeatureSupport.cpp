@@ -14,7 +14,7 @@ using namespace oai::nas;
 //------------------------------------------------------------------------------
 _5gsNetworkFeatureSupport::_5gsNetworkFeatureSupport()
     : Type4NasIe(kIei5gsNetworkFeatureSupport) {
-  value_  = 0;
+  value_ = 0;
   value2_ = 0;
   SetLengthIndicator(k5gsNetworkFeatureSupportContentMinimumLength);
 }
@@ -22,16 +22,16 @@ _5gsNetworkFeatureSupport::_5gsNetworkFeatureSupport()
 //------------------------------------------------------------------------------
 _5gsNetworkFeatureSupport::_5gsNetworkFeatureSupport(uint8_t value)
     : Type4NasIe(kIei5gsNetworkFeatureSupport) {
-  value_  = value;
+  value_ = value;
   value2_ = 0;
   SetLengthIndicator(k5gsNetworkFeatureSupportContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
-_5gsNetworkFeatureSupport::_5gsNetworkFeatureSupport(
-    uint8_t value, uint8_t value2)
+_5gsNetworkFeatureSupport::_5gsNetworkFeatureSupport(uint8_t value,
+                                                     uint8_t value2)
     : Type4NasIe(kIei5gsNetworkFeatureSupport) {
-  value_  = value;
+  value_ = value;
   value2_ = value2;
   SetLengthIndicator(2);
 }
@@ -41,19 +41,20 @@ _5gsNetworkFeatureSupport::~_5gsNetworkFeatureSupport() {}
 
 //------------------------------------------------------------------------------
 void _5gsNetworkFeatureSupport::SetValue(uint8_t value, uint8_t value2) {
-  value_  = value;
+  value_ = value;
   value2_ = value2;
   SetLengthIndicator(2);
 }
 
 //------------------------------------------------------------------------------
-int _5gsNetworkFeatureSupport::Encode(uint8_t* buf, int len) const {
+int _5gsNetworkFeatureSupport::Encode(uint8_t *buf, int len) const {
   oai::logger::logger_common::nas().debug("Encoding %s", GetIeName().c_str());
 
   int encoded_size = 0;
   // Validate the buffer's length and Encode IEI/Length
   int encoded_header_size = Type4NasIe::Encode(buf + encoded_size, len);
-  if (encoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
+  if (encoded_header_size == KEncodeDecodeError)
+    return KEncodeDecodeError;
   encoded_size += encoded_header_size;
 
   // Octet 3
@@ -69,14 +70,14 @@ int _5gsNetworkFeatureSupport::Encode(uint8_t* buf, int len) const {
     ENCODE_U8(buf + encoded_size, spare, encoded_size);
   }
 
-  oai::logger::logger_common::nas().debug(
-      "Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
+  oai::logger::logger_common::nas().debug("Encoded %s, len (%d)",
+                                          GetIeName().c_str(), encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
-int _5gsNetworkFeatureSupport::Decode(
-    const uint8_t* const buf, int len, bool is_iei) {
+int _5gsNetworkFeatureSupport::Decode(const uint8_t *const buf, int len,
+                                      bool is_iei) {
   if (len < k5gsNetworkFeatureSupportMinimumLength) {
     oai::logger::logger_common::nas().error(
         "Buffer length is less than the minimum length of this IE (%d "
@@ -86,12 +87,13 @@ int _5gsNetworkFeatureSupport::Decode(
   }
 
   uint8_t decoded_size = 0;
-  uint8_t octet        = 0;
+  uint8_t octet = 0;
   oai::logger::logger_common::nas().debug("Decoding %s", GetIeName().c_str());
 
   // IEI and Length
   int decoded_header_size = Type4NasIe::Decode(buf + decoded_size, len, is_iei);
-  if (decoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
+  if (decoded_header_size == KEncodeDecodeError)
+    return KEncodeDecodeError;
   decoded_size += decoded_header_size;
 
   // Octet 3
@@ -106,10 +108,10 @@ int _5gsNetworkFeatureSupport::Decode(
     DECODE_U8(buf + decoded_size, spare, decoded_size);
   }
 
-  oai::logger::logger_common::nas().debug(
-      "Decoded %s, value (0x%x)", GetIeName().c_str(), value_);
+  oai::logger::logger_common::nas().debug("Decoded %s, value (0x%x)",
+                                          GetIeName().c_str(), value_);
 
-  oai::logger::logger_common::nas().debug(
-      "Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
+  oai::logger::logger_common::nas().debug("Decoded %s, len (%d)",
+                                          GetIeName().c_str(), decoded_size);
   return decoded_size;
 }

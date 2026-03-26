@@ -16,21 +16,21 @@ extern "C" {
 namespace oai::ngap {
 
 class QosFlowPerTnlInformationList {
- public:
+public:
   QosFlowPerTnlInformationList();
   virtual ~QosFlowPerTnlInformationList();
 
-  void set(const std::vector<QosFlowPerTnlInformationItem>& list);
-  void get(std::vector<QosFlowPerTnlInformationItem>& list) const;
+  void set(const std::vector<QosFlowPerTnlInformationItem> &list);
+  void get(std::vector<QosFlowPerTnlInformationItem> &list) const;
 
   bool encode(
-      Ngap_QosFlowPerTNLInformationList_t& qosFlowPerTnlInformationList) const;
+      Ngap_QosFlowPerTNLInformationList_t &qosFlowPerTnlInformationList) const;
   bool decode(
-      const Ngap_QosFlowPerTNLInformationList_t& qosFlowPerTnlInformationList);
+      const Ngap_QosFlowPerTNLInformationList_t &qosFlowPerTnlInformationList);
 
- private:
+private:
   std::vector<QosFlowPerTnlInformationItem> m_ItemList;
   constexpr static uint8_t KMaxNoOfMultiConnectivityMinusOne = 3;
 };
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

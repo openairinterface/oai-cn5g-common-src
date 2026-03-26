@@ -21,8 +21,8 @@
 
 #include "Ambr.h"
 #include "AuthorizedDefaultQos.h"
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::pcf {
 
@@ -30,7 +30,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class SessionRule {
- public:
+public:
   SessionRule();
   virtual ~SessionRule() = default;
 
@@ -44,16 +44,16 @@ class SessionRule {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const SessionRule& rhs) const;
-  bool operator!=(const SessionRule& rhs) const;
+  bool operator==(const SessionRule &rhs) const;
+  bool operator!=(const SessionRule &rhs) const;
 
   /////////////////////////////////////////////
   /// SessionRule members
@@ -62,27 +62,27 @@ class SessionRule {
   ///
   /// </summary>
   oai::model::common::Ambr getAuthSessAmbr() const;
-  void setAuthSessAmbr(oai::model::common::Ambr const& value);
+  void setAuthSessAmbr(oai::model::common::Ambr const &value);
   bool authSessAmbrIsSet() const;
   void unsetAuthSessAmbr();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::AuthorizedDefaultQos getAuthDefQos() const;
-  void setAuthDefQos(oai::model::pcf::AuthorizedDefaultQos const& value);
+  void setAuthDefQos(oai::model::pcf::AuthorizedDefaultQos const &value);
   bool authDefQosIsSet() const;
   void unsetAuthDefQos();
   /// <summary>
   /// Univocally identifies the session rule within a PDU session.
   /// </summary>
   std::string getSessRuleId() const;
-  void setSessRuleId(std::string const& value);
+  void setSessRuleId(std::string const &value);
   /// <summary>
   /// A reference to UsageMonitoringData policy decision type. It is the umId
   /// described in subclause 5.6.2.12.
   /// </summary>
   std::string getRefUmData() const;
-  void setRefUmData(std::string const& value);
+  void setRefUmData(std::string const &value);
   bool refUmDataIsSet() const;
   void unsetRefUmData();
   /// <summary>
@@ -90,7 +90,7 @@ class SessionRule {
   /// Non-3GPP access. It is the umId described in subclause 5.6.2.12.
   /// </summary>
   std::string getRefUmN3gData() const;
-  void setRefUmN3gData(std::string const& value);
+  void setRefUmN3gData(std::string const &value);
   bool refUmN3gDataIsSet() const;
   void unsetRefUmN3gData();
   /// <summary>
@@ -98,14 +98,14 @@ class SessionRule {
   /// subclause 5.6.2.9.
   /// </summary>
   std::string getRefCondData() const;
-  void setRefCondData(std::string const& value);
+  void setRefCondData(std::string const &value);
   bool refCondDataIsSet() const;
   void unsetRefCondData();
 
-  friend void to_json(nlohmann::json& j, const SessionRule& o);
-  friend void from_json(const nlohmann::json& j, SessionRule& o);
+  friend void to_json(nlohmann::json &j, const SessionRule &o);
+  friend void from_json(const nlohmann::json &j, SessionRule &o);
 
- protected:
+protected:
   oai::model::common::Ambr m_AuthSessAmbr;
   bool m_AuthSessAmbrIsSet;
   oai::model::pcf::AuthorizedDefaultQos m_AuthDefQos;
@@ -120,6 +120,6 @@ class SessionRule {
   bool m_RefCondDataIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* SessionRule_H_ */

@@ -13,8 +13,8 @@
 
 #include "NetLocAccessSupport_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::pcf {
 
@@ -27,12 +27,12 @@ void NetLocAccessSupport_anyOf::validate() const {
   }
 }
 
-bool NetLocAccessSupport_anyOf::validate(std::stringstream& msg) const {
+bool NetLocAccessSupport_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool NetLocAccessSupport_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool NetLocAccessSupport_anyOf::validate(std::stringstream &msg,
+                                         const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "NetLocAccessSupport_anyOf" : pathPrefix;
@@ -47,41 +47,38 @@ bool NetLocAccessSupport_anyOf::validate(
 }
 
 bool NetLocAccessSupport_anyOf::operator==(
-    const NetLocAccessSupport_anyOf& rhs) const {
+    const NetLocAccessSupport_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool NetLocAccessSupport_anyOf::operator!=(
-    const NetLocAccessSupport_anyOf& rhs) const {
+    const NetLocAccessSupport_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const NetLocAccessSupport_anyOf& o) {
+void to_json(nlohmann::json &j, const NetLocAccessSupport_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case NetLocAccessSupport_anyOf::eNetLocAccessSupport_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case NetLocAccessSupport_anyOf::eNetLocAccessSupport_anyOf::
-        ANR_NOT_SUPPORTED:
-      j = "ANR_NOT_SUPPORTED";
-      break;
-    case NetLocAccessSupport_anyOf::eNetLocAccessSupport_anyOf::
-        TZR_NOT_SUPPORTED:
-      j = "TZR_NOT_SUPPORTED";
-      break;
-    case NetLocAccessSupport_anyOf::eNetLocAccessSupport_anyOf::
-        LOC_NOT_SUPPORTED:
-      j = "LOC_NOT_SUPPORTED";
-      break;
+  case NetLocAccessSupport_anyOf::eNetLocAccessSupport_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case NetLocAccessSupport_anyOf::eNetLocAccessSupport_anyOf::ANR_NOT_SUPPORTED:
+    j = "ANR_NOT_SUPPORTED";
+    break;
+  case NetLocAccessSupport_anyOf::eNetLocAccessSupport_anyOf::TZR_NOT_SUPPORTED:
+    j = "TZR_NOT_SUPPORTED";
+    break;
+  case NetLocAccessSupport_anyOf::eNetLocAccessSupport_anyOf::LOC_NOT_SUPPORTED:
+    j = "LOC_NOT_SUPPORTED";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, NetLocAccessSupport_anyOf& o) {
+void from_json(const nlohmann::json &j, NetLocAccessSupport_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "ANR_NOT_SUPPORTED") {
     o.setValue(NetLocAccessSupport_anyOf::eNetLocAccessSupport_anyOf::
@@ -110,4 +107,4 @@ void NetLocAccessSupport_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

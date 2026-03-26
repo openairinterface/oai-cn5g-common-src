@@ -17,8 +17,8 @@ namespace oai::model::nrf {
 using namespace oai::model::common;
 
 NotificationData::NotificationData() {
-  m_NfInstanceUri       = "";
-  m_NfProfileIsSet      = false;
+  m_NfInstanceUri = "";
+  m_NfProfileIsSet = false;
   m_ProfileChangesIsSet = false;
 }
 
@@ -28,16 +28,17 @@ void NotificationData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const NotificationData& o) {
-  j                  = nlohmann::json();
-  j["event"]         = o.m_Event;
+void to_json(nlohmann::json &j, const NotificationData &o) {
+  j = nlohmann::json();
+  j["event"] = o.m_Event;
   j["nfInstanceUri"] = o.m_NfInstanceUri;
-  if (o.nfProfileIsSet()) j["nfProfile"] = o.m_NfProfile;
+  if (o.nfProfileIsSet())
+    j["nfProfile"] = o.m_NfProfile;
   if (o.profileChangesIsSet() || !o.m_ProfileChanges.empty())
     j["profileChanges"] = o.m_ProfileChanges;
 }
 
-void from_json(const nlohmann::json& j, NotificationData& o) {
+void from_json(const nlohmann::json &j, NotificationData &o) {
   j.at("event").get_to(o.m_Event);
   j.at("nfInstanceUri").get_to(o.m_NfInstanceUri);
   if (j.find("nfProfile") != j.end()) {
@@ -50,43 +51,33 @@ void from_json(const nlohmann::json& j, NotificationData& o) {
   }
 }
 
-NotificationEventType NotificationData::getEvent() const {
-  return m_Event;
-}
-void NotificationData::setEvent(NotificationEventType const& value) {
+NotificationEventType NotificationData::getEvent() const { return m_Event; }
+void NotificationData::setEvent(NotificationEventType const &value) {
   m_Event = value;
 }
 std::string NotificationData::getNfInstanceUri() const {
   return m_NfInstanceUri;
 }
-void NotificationData::setNfInstanceUri(std::string const& value) {
+void NotificationData::setNfInstanceUri(std::string const &value) {
   m_NfInstanceUri = value;
 }
-NFProfile NotificationData::getNfProfile() const {
-  return m_NfProfile;
-}
-void NotificationData::setNfProfile(NFProfile const& value) {
-  m_NfProfile      = value;
+NFProfile NotificationData::getNfProfile() const { return m_NfProfile; }
+void NotificationData::setNfProfile(NFProfile const &value) {
+  m_NfProfile = value;
   m_NfProfileIsSet = true;
 }
-bool NotificationData::nfProfileIsSet() const {
-  return m_NfProfileIsSet;
-}
-void NotificationData::unsetNfProfile() {
-  m_NfProfileIsSet = false;
-}
-std::vector<ChangeItem>& NotificationData::getProfileChanges() {
+bool NotificationData::nfProfileIsSet() const { return m_NfProfileIsSet; }
+void NotificationData::unsetNfProfile() { m_NfProfileIsSet = false; }
+std::vector<ChangeItem> &NotificationData::getProfileChanges() {
   return m_ProfileChanges;
 }
-void NotificationData::setProfileChanges(std::vector<ChangeItem> const& value) {
-  m_ProfileChanges      = value;
+void NotificationData::setProfileChanges(std::vector<ChangeItem> const &value) {
+  m_ProfileChanges = value;
   m_ProfileChangesIsSet = true;
 }
 bool NotificationData::profileChangesIsSet() const {
   return m_ProfileChangesIsSet;
 }
-void NotificationData::unsetProfileChanges() {
-  m_ProfileChangesIsSet = false;
-}
+void NotificationData::unsetProfileChanges() { m_ProfileChangesIsSet = false; }
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

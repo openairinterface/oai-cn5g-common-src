@@ -23,10 +23,10 @@ void SmfChangeIndication::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const SmfChangeIndication& o) {
+void to_json(nlohmann::json &j, const SmfChangeIndication &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, SmfChangeIndication& o) {}
+void from_json(const nlohmann::json &j, SmfChangeIndication &o) {}
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

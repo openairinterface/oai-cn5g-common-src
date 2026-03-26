@@ -20,11 +20,11 @@ namespace oai::model::pcf {
 
 RtpHeaderExtInfo::RtpHeaderExtInfo() {
   m_RtpHeaderExtTypeIsSet = false;
-  m_RtpHeaderExtId        = 0;
-  m_RtpHeaderExtIdIsSet   = false;
-  m_LongFormat            = false;
-  m_LongFormatIsSet       = false;
-  m_PduSetSizeActive      = false;
+  m_RtpHeaderExtId = 0;
+  m_RtpHeaderExtIdIsSet = false;
+  m_LongFormat = false;
+  m_LongFormatIsSet = false;
+  m_PduSetSizeActive = false;
   m_PduSetSizeActiveIsSet = false;
 }
 
@@ -35,18 +35,18 @@ void RtpHeaderExtInfo::validate() const {
   }
 }
 
-bool RtpHeaderExtInfo::validate(std::stringstream& msg) const {
+bool RtpHeaderExtInfo::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool RtpHeaderExtInfo::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool RtpHeaderExtInfo::validate(std::stringstream &msg,
+                                const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "RtpHeaderExtInfo" : pathPrefix;
 
   if (rtpHeaderExtIdIsSet()) {
-    const int32_t& value               = m_RtpHeaderExtId;
+    const int32_t &value = m_RtpHeaderExtId;
     const std::string currentValuePath = _pathPrefix + ".rtpHeaderExtId";
 
     if (value < 1) {
@@ -62,7 +62,7 @@ bool RtpHeaderExtInfo::validate(
   return success;
 }
 
-bool RtpHeaderExtInfo::operator==(const RtpHeaderExtInfo& rhs) const {
+bool RtpHeaderExtInfo::operator==(const RtpHeaderExtInfo &rhs) const {
   return
 
       ((!rtpHeaderExtTypeIsSet() && !rhs.rtpHeaderExtTypeIsSet()) ||
@@ -84,19 +84,23 @@ bool RtpHeaderExtInfo::operator==(const RtpHeaderExtInfo& rhs) const {
           ;
 }
 
-bool RtpHeaderExtInfo::operator!=(const RtpHeaderExtInfo& rhs) const {
+bool RtpHeaderExtInfo::operator!=(const RtpHeaderExtInfo &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const RtpHeaderExtInfo& o) {
+void to_json(nlohmann::json &j, const RtpHeaderExtInfo &o) {
   j = nlohmann::json::object();
-  if (o.rtpHeaderExtTypeIsSet()) j["rtpHeaderExtType"] = o.m_RtpHeaderExtType;
-  if (o.rtpHeaderExtIdIsSet()) j["rtpHeaderExtId"] = o.m_RtpHeaderExtId;
-  if (o.longFormatIsSet()) j["longFormat"] = o.m_LongFormat;
-  if (o.pduSetSizeActiveIsSet()) j["pduSetSizeActive"] = o.m_PduSetSizeActive;
+  if (o.rtpHeaderExtTypeIsSet())
+    j["rtpHeaderExtType"] = o.m_RtpHeaderExtType;
+  if (o.rtpHeaderExtIdIsSet())
+    j["rtpHeaderExtId"] = o.m_RtpHeaderExtId;
+  if (o.longFormatIsSet())
+    j["longFormat"] = o.m_LongFormat;
+  if (o.pduSetSizeActiveIsSet())
+    j["pduSetSizeActive"] = o.m_PduSetSizeActive;
 }
 
-void from_json(const nlohmann::json& j, RtpHeaderExtInfo& o) {
+void from_json(const nlohmann::json &j, RtpHeaderExtInfo &o) {
   if (j.find("rtpHeaderExtType") != j.end()) {
     j.at("rtpHeaderExtType").get_to(o.m_RtpHeaderExtType);
     o.m_RtpHeaderExtTypeIsSet = true;
@@ -115,13 +119,13 @@ void from_json(const nlohmann::json& j, RtpHeaderExtInfo& o) {
   }
 }
 
-oai::model::pcf::RtpHeaderExtType RtpHeaderExtInfo::getRtpHeaderExtType()
-    const {
+oai::model::pcf::RtpHeaderExtType
+RtpHeaderExtInfo::getRtpHeaderExtType() const {
   return m_RtpHeaderExtType;
 }
 void RtpHeaderExtInfo::setRtpHeaderExtType(
-    oai::model::pcf::RtpHeaderExtType const& value) {
-  m_RtpHeaderExtType      = value;
+    oai::model::pcf::RtpHeaderExtType const &value) {
+  m_RtpHeaderExtType = value;
   m_RtpHeaderExtTypeIsSet = true;
 }
 bool RtpHeaderExtInfo::rtpHeaderExtTypeIsSet() const {
@@ -130,37 +134,25 @@ bool RtpHeaderExtInfo::rtpHeaderExtTypeIsSet() const {
 void RtpHeaderExtInfo::unsetRtpHeaderExtType() {
   m_RtpHeaderExtTypeIsSet = false;
 }
-int32_t RtpHeaderExtInfo::getRtpHeaderExtId() const {
-  return m_RtpHeaderExtId;
-}
+int32_t RtpHeaderExtInfo::getRtpHeaderExtId() const { return m_RtpHeaderExtId; }
 void RtpHeaderExtInfo::setRtpHeaderExtId(int32_t const value) {
-  m_RtpHeaderExtId      = value;
+  m_RtpHeaderExtId = value;
   m_RtpHeaderExtIdIsSet = true;
 }
 bool RtpHeaderExtInfo::rtpHeaderExtIdIsSet() const {
   return m_RtpHeaderExtIdIsSet;
 }
-void RtpHeaderExtInfo::unsetRtpHeaderExtId() {
-  m_RtpHeaderExtIdIsSet = false;
-}
-bool RtpHeaderExtInfo::isLongFormat() const {
-  return m_LongFormat;
-}
+void RtpHeaderExtInfo::unsetRtpHeaderExtId() { m_RtpHeaderExtIdIsSet = false; }
+bool RtpHeaderExtInfo::isLongFormat() const { return m_LongFormat; }
 void RtpHeaderExtInfo::setLongFormat(bool const value) {
-  m_LongFormat      = value;
+  m_LongFormat = value;
   m_LongFormatIsSet = true;
 }
-bool RtpHeaderExtInfo::longFormatIsSet() const {
-  return m_LongFormatIsSet;
-}
-void RtpHeaderExtInfo::unsetLongFormat() {
-  m_LongFormatIsSet = false;
-}
-bool RtpHeaderExtInfo::isPduSetSizeActive() const {
-  return m_PduSetSizeActive;
-}
+bool RtpHeaderExtInfo::longFormatIsSet() const { return m_LongFormatIsSet; }
+void RtpHeaderExtInfo::unsetLongFormat() { m_LongFormatIsSet = false; }
+bool RtpHeaderExtInfo::isPduSetSizeActive() const { return m_PduSetSizeActive; }
 void RtpHeaderExtInfo::setPduSetSizeActive(bool const value) {
-  m_PduSetSizeActive      = value;
+  m_PduSetSizeActive = value;
   m_PduSetSizeActiveIsSet = true;
 }
 bool RtpHeaderExtInfo::pduSetSizeActiveIsSet() const {
@@ -170,4 +162,4 @@ void RtpHeaderExtInfo::unsetPduSetSizeActive() {
   m_PduSetSizeActiveIsSet = false;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

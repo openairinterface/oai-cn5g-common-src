@@ -20,7 +20,7 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_IntegrityProtectionResult {
-  Ngap_IntegrityProtectionResult_performed     = 0,
+  Ngap_IntegrityProtectionResult_performed = 0,
   Ngap_IntegrityProtectionResult_not_performed = 1
   /*
    * Enumeration is extensible

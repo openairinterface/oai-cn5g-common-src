@@ -19,8 +19,8 @@
 #ifndef NsiInformation_H_
 #define NsiInformation_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::amf {
 
@@ -28,7 +28,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class NsiInformation {
- public:
+public:
   NsiInformation();
   virtual ~NsiInformation() = default;
 
@@ -42,16 +42,16 @@ class NsiInformation {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const NsiInformation& rhs) const;
-  bool operator!=(const NsiInformation& rhs) const;
+  bool operator==(const NsiInformation &rhs) const;
+  bool operator!=(const NsiInformation &rhs) const;
 
   /////////////////////////////////////////////
   /// NsiInformation members
@@ -60,33 +60,33 @@ class NsiInformation {
   ///
   /// </summary>
   std::string getNrfId() const;
-  void setNrfId(std::string const& value);
+  void setNrfId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getNsiId() const;
-  void setNsiId(std::string const& value);
+  void setNsiId(std::string const &value);
   bool nsiIdIsSet() const;
   void unsetNsiId();
   /// <summary>
   ///
   /// </summary>
   std::string getNrfNfMgtUri() const;
-  void setNrfNfMgtUri(std::string const& value);
+  void setNrfNfMgtUri(std::string const &value);
   bool nrfNfMgtUriIsSet() const;
   void unsetNrfNfMgtUri();
   /// <summary>
   ///
   /// </summary>
   std::string getNrfAccessTokenUri() const;
-  void setNrfAccessTokenUri(std::string const& value);
+  void setNrfAccessTokenUri(std::string const &value);
   bool nrfAccessTokenUriIsSet() const;
   void unsetNrfAccessTokenUri();
 
-  friend void to_json(nlohmann::json& j, const NsiInformation& o);
-  friend void from_json(const nlohmann::json& j, NsiInformation& o);
+  friend void to_json(nlohmann::json &j, const NsiInformation &o);
+  friend void from_json(const nlohmann::json &j, NsiInformation &o);
 
- protected:
+protected:
   std::string m_NrfId;
 
   std::string m_NsiId;
@@ -97,6 +97,6 @@ class NsiInformation {
   bool m_NrfAccessTokenUriIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* NsiInformation_H_ */

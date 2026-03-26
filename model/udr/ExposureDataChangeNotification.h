@@ -35,7 +35,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class ExposureDataChangeNotification {
- public:
+public:
   ExposureDataChangeNotification();
   virtual ~ExposureDataChangeNotification();
 
@@ -48,38 +48,38 @@ class ExposureDataChangeNotification {
   ///
   /// </summary>
   std::string getUeId() const;
-  void setUeId(std::string const& value);
+  void setUeId(std::string const &value);
   bool ueIdIsSet() const;
   void unsetUeId();
   /// <summary>
   ///
   /// </summary>
   AccessAndMobilityData getAccessAndMobilityData() const;
-  void setAccessAndMobilityData(AccessAndMobilityData const& value);
+  void setAccessAndMobilityData(AccessAndMobilityData const &value);
   bool accessAndMobilityDataIsSet() const;
   void unsetAccessAndMobilityData();
   /// <summary>
   ///
   /// </summary>
-  std::vector<PduSessionManagementData>& getPduSessionManagementData();
+  std::vector<PduSessionManagementData> &getPduSessionManagementData();
   void setPduSessionManagementData(
-      std::vector<PduSessionManagementData> const& value);
+      std::vector<PduSessionManagementData> const &value);
   bool pduSessionManagementDataIsSet() const;
   void unsetPduSessionManagementData();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getDelResources();
-  void setDelResources(std::vector<std::string> const& value);
+  std::vector<std::string> &getDelResources();
+  void setDelResources(std::vector<std::string> const &value);
   bool delResourcesIsSet() const;
   void unsetDelResources();
 
-  friend void to_json(
-      nlohmann::json& j, const ExposureDataChangeNotification& o);
-  friend void from_json(
-      const nlohmann::json& j, ExposureDataChangeNotification& o);
+  friend void to_json(nlohmann::json &j,
+                      const ExposureDataChangeNotification &o);
+  friend void from_json(const nlohmann::json &j,
+                        ExposureDataChangeNotification &o);
 
- protected:
+protected:
   std::string m_UeId;
   bool m_UeIdIsSet;
   AccessAndMobilityData m_AccessAndMobilityData;
@@ -90,6 +90,6 @@ class ExposureDataChangeNotification {
   bool m_DelResourcesIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* ExposureDataChangeNotification_H_ */

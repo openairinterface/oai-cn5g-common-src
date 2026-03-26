@@ -4,16 +4,16 @@
 
 #include "task_manager.hpp"
 
-#include <unistd.h>
 #include <iostream>
 #include <thread>
+#include <unistd.h>
 
 using namespace oai::event_handling;
 
 //------------------------------------------------------------------------------
-task_manager::task_manager(const std::shared_ptr<nf_event>& ev)
+task_manager::task_manager(const std::shared_ptr<nf_event> &ev)
     : event_sub_(ev) {
-  terminate  = false;
+  terminate = false;
   terminated = false;
 
   struct itimerspec its;
@@ -21,9 +21,9 @@ task_manager::task_manager(const std::shared_ptr<nf_event>& ev)
   sfd = timerfd_create(CLOCK_MONOTONIC, 0);
 
   /* Start the timer */
-  its.it_value.tv_sec     = 0;
-  its.it_value.tv_nsec    = 1000 * 1000;
-  its.it_interval.tv_sec  = its.it_value.tv_sec;
+  its.it_value.tv_sec = 0;
+  its.it_value.tv_nsec = 1000 * 1000;
+  its.it_interval.tv_sec = its.it_value.tv_sec;
   its.it_interval.tv_nsec = its.it_value.tv_nsec;
 
   if (timerfd_settime(sfd, TFD_TIMER_ABSTIME, &its, NULL) == -1) {
@@ -41,7 +41,7 @@ task_manager::~task_manager() {
 
 //------------------------------------------------------------------------------
 void task_manager::run() {
-  terminate  = false;
+  terminate = false;
   terminated = false;
   manage_tasks();
 }

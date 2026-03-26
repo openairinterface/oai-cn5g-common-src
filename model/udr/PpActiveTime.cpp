@@ -19,12 +19,12 @@
 namespace oai::udr::model {
 
 PpActiveTime::PpActiveTime() {
-  m_ActiveTime                  = 0;
-  m_AfInstanceId                = "";
-  m_ReferenceId                 = 0;
-  m_ValidityTime                = "";
-  m_ValidityTimeIsSet           = false;
-  m_MtcProviderInformation      = "";
+  m_ActiveTime = 0;
+  m_AfInstanceId = "";
+  m_ReferenceId = 0;
+  m_ValidityTime = "";
+  m_ValidityTimeIsSet = false;
+  m_MtcProviderInformation = "";
   m_MtcProviderInformationIsSet = false;
 }
 
@@ -34,17 +34,18 @@ void PpActiveTime::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const PpActiveTime& o) {
-  j                 = nlohmann::json();
-  j["activeTime"]   = o.m_ActiveTime;
+void to_json(nlohmann::json &j, const PpActiveTime &o) {
+  j = nlohmann::json();
+  j["activeTime"] = o.m_ActiveTime;
   j["afInstanceId"] = o.m_AfInstanceId;
-  j["referenceId"]  = o.m_ReferenceId;
-  if (o.validityTimeIsSet()) j["validityTime"] = o.m_ValidityTime;
+  j["referenceId"] = o.m_ReferenceId;
+  if (o.validityTimeIsSet())
+    j["validityTime"] = o.m_ValidityTime;
   if (o.mtcProviderInformationIsSet())
     j["mtcProviderInformation"] = o.m_MtcProviderInformation;
 }
 
-void from_json(const nlohmann::json& j, PpActiveTime& o) {
+void from_json(const nlohmann::json &j, PpActiveTime &o) {
   j.at("activeTime").get_to(o.m_ActiveTime);
   j.at("afInstanceId").get_to(o.m_AfInstanceId);
   j.at("referenceId").get_to(o.m_ReferenceId);
@@ -58,42 +59,28 @@ void from_json(const nlohmann::json& j, PpActiveTime& o) {
   }
 }
 
-int32_t PpActiveTime::getActiveTime() const {
-  return m_ActiveTime;
-}
-void PpActiveTime::setActiveTime(int32_t const value) {
-  m_ActiveTime = value;
-}
-std::string PpActiveTime::getAfInstanceId() const {
-  return m_AfInstanceId;
-}
-void PpActiveTime::setAfInstanceId(std::string const& value) {
+int32_t PpActiveTime::getActiveTime() const { return m_ActiveTime; }
+void PpActiveTime::setActiveTime(int32_t const value) { m_ActiveTime = value; }
+std::string PpActiveTime::getAfInstanceId() const { return m_AfInstanceId; }
+void PpActiveTime::setAfInstanceId(std::string const &value) {
   m_AfInstanceId = value;
 }
-int32_t PpActiveTime::getReferenceId() const {
-  return m_ReferenceId;
-}
+int32_t PpActiveTime::getReferenceId() const { return m_ReferenceId; }
 void PpActiveTime::setReferenceId(int32_t const value) {
   m_ReferenceId = value;
 }
-std::string PpActiveTime::getValidityTime() const {
-  return m_ValidityTime;
-}
-void PpActiveTime::setValidityTime(std::string const& value) {
-  m_ValidityTime      = value;
+std::string PpActiveTime::getValidityTime() const { return m_ValidityTime; }
+void PpActiveTime::setValidityTime(std::string const &value) {
+  m_ValidityTime = value;
   m_ValidityTimeIsSet = true;
 }
-bool PpActiveTime::validityTimeIsSet() const {
-  return m_ValidityTimeIsSet;
-}
-void PpActiveTime::unsetValidityTime() {
-  m_ValidityTimeIsSet = false;
-}
+bool PpActiveTime::validityTimeIsSet() const { return m_ValidityTimeIsSet; }
+void PpActiveTime::unsetValidityTime() { m_ValidityTimeIsSet = false; }
 std::string PpActiveTime::getMtcProviderInformation() const {
   return m_MtcProviderInformation;
 }
-void PpActiveTime::setMtcProviderInformation(std::string const& value) {
-  m_MtcProviderInformation      = value;
+void PpActiveTime::setMtcProviderInformation(std::string const &value) {
+  m_MtcProviderInformation = value;
   m_MtcProviderInformationIsSet = true;
 }
 bool PpActiveTime::mtcProviderInformationIsSet() const {
@@ -103,4 +90,4 @@ void PpActiveTime::unsetMtcProviderInformation() {
   m_MtcProviderInformationIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

@@ -12,12 +12,12 @@ namespace oai::nas {
 using namespace oai::nas;
 
 class RegistrationComplete : public Nas5gmmMessage {
- public:
+public:
   RegistrationComplete();
   ~RegistrationComplete();
 
-  int Encode(uint8_t* buf, int len) override;
-  int Decode(uint8_t* buf, int len) override;
+  int Encode(uint8_t *buf, int len) override;
+  int Decode(uint8_t *buf, int len) override;
 
   uint32_t GetLength() const override;
 
@@ -28,12 +28,12 @@ class RegistrationComplete : public Nas5gmmMessage {
       const uint8_t (&value)[kSorTransparentContainerIeMacLength]);
   // TODO: Get
 
- private:
-  NasMmPlainHeader ie_header_;  // Mandatory
+private:
+  NasMmPlainHeader ie_header_; // Mandatory
   std::optional<SorTransparentContainer>
-      ie_sor_transparent_container_;  // Optional
+      ie_sor_transparent_container_; // Optional
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

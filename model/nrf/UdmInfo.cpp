@@ -16,12 +16,12 @@
 namespace oai::model::nrf {
 
 UdmInfo::UdmInfo() {
-  m_GroupId                             = "";
-  m_GroupIdIsSet                        = false;
-  m_SupiRangesIsSet                     = false;
-  m_GpsiRangesIsSet                     = false;
+  m_GroupId = "";
+  m_GroupIdIsSet = false;
+  m_SupiRangesIsSet = false;
+  m_GpsiRangesIsSet = false;
   m_ExternalGroupIdentifiersRangesIsSet = false;
-  m_RoutingIndicatorsIsSet              = false;
+  m_RoutingIndicatorsIsSet = false;
 }
 
 UdmInfo::~UdmInfo() {}
@@ -30,9 +30,10 @@ void UdmInfo::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const UdmInfo& o) {
+void to_json(nlohmann::json &j, const UdmInfo &o) {
   j = nlohmann::json();
-  if (o.groupIdIsSet()) j["groupId"] = o.m_GroupId;
+  if (o.groupIdIsSet())
+    j["groupId"] = o.m_GroupId;
   if (o.supiRangesIsSet() || !o.m_SupiRanges.empty())
     j["supiRanges"] = o.m_SupiRanges;
   if (o.gpsiRangesIsSet() || !o.m_GpsiRanges.empty())
@@ -44,7 +45,7 @@ void to_json(nlohmann::json& j, const UdmInfo& o) {
     j["routingIndicators"] = o.m_RoutingIndicators;
 }
 
-void from_json(const nlohmann::json& j, UdmInfo& o) {
+void from_json(const nlohmann::json &j, UdmInfo &o) {
   if (j.find("groupId") != j.end()) {
     j.at("groupId").get_to(o.m_GroupId);
     o.m_GroupIdIsSet = true;
@@ -68,51 +69,33 @@ void from_json(const nlohmann::json& j, UdmInfo& o) {
   }
 }
 
-std::string UdmInfo::getGroupId() const {
-  return m_GroupId;
-}
-void UdmInfo::setGroupId(std::string const& value) {
-  m_GroupId      = value;
+std::string UdmInfo::getGroupId() const { return m_GroupId; }
+void UdmInfo::setGroupId(std::string const &value) {
+  m_GroupId = value;
   m_GroupIdIsSet = true;
 }
-bool UdmInfo::groupIdIsSet() const {
-  return m_GroupIdIsSet;
-}
-void UdmInfo::unsetGroupId() {
-  m_GroupIdIsSet = false;
-}
-std::vector<SupiRange>& UdmInfo::getSupiRanges() {
-  return m_SupiRanges;
-}
-void UdmInfo::setSupiRanges(std::vector<SupiRange> const& value) {
-  m_SupiRanges      = value;
+bool UdmInfo::groupIdIsSet() const { return m_GroupIdIsSet; }
+void UdmInfo::unsetGroupId() { m_GroupIdIsSet = false; }
+std::vector<SupiRange> &UdmInfo::getSupiRanges() { return m_SupiRanges; }
+void UdmInfo::setSupiRanges(std::vector<SupiRange> const &value) {
+  m_SupiRanges = value;
   m_SupiRangesIsSet = true;
 }
-bool UdmInfo::supiRangesIsSet() const {
-  return m_SupiRangesIsSet;
-}
-void UdmInfo::unsetSupiRanges() {
-  m_SupiRangesIsSet = false;
-}
-std::vector<IdentityRange>& UdmInfo::getGpsiRanges() {
-  return m_GpsiRanges;
-}
-void UdmInfo::setGpsiRanges(std::vector<IdentityRange> const& value) {
-  m_GpsiRanges      = value;
+bool UdmInfo::supiRangesIsSet() const { return m_SupiRangesIsSet; }
+void UdmInfo::unsetSupiRanges() { m_SupiRangesIsSet = false; }
+std::vector<IdentityRange> &UdmInfo::getGpsiRanges() { return m_GpsiRanges; }
+void UdmInfo::setGpsiRanges(std::vector<IdentityRange> const &value) {
+  m_GpsiRanges = value;
   m_GpsiRangesIsSet = true;
 }
-bool UdmInfo::gpsiRangesIsSet() const {
-  return m_GpsiRangesIsSet;
-}
-void UdmInfo::unsetGpsiRanges() {
-  m_GpsiRangesIsSet = false;
-}
-std::vector<IdentityRange>& UdmInfo::getExternalGroupIdentifiersRanges() {
+bool UdmInfo::gpsiRangesIsSet() const { return m_GpsiRangesIsSet; }
+void UdmInfo::unsetGpsiRanges() { m_GpsiRangesIsSet = false; }
+std::vector<IdentityRange> &UdmInfo::getExternalGroupIdentifiersRanges() {
   return m_ExternalGroupIdentifiersRanges;
 }
 void UdmInfo::setExternalGroupIdentifiersRanges(
-    std::vector<IdentityRange> const& value) {
-  m_ExternalGroupIdentifiersRanges      = value;
+    std::vector<IdentityRange> const &value) {
+  m_ExternalGroupIdentifiersRanges = value;
   m_ExternalGroupIdentifiersRangesIsSet = true;
 }
 bool UdmInfo::externalGroupIdentifiersRangesIsSet() const {
@@ -121,18 +104,16 @@ bool UdmInfo::externalGroupIdentifiersRangesIsSet() const {
 void UdmInfo::unsetExternalGroupIdentifiersRanges() {
   m_ExternalGroupIdentifiersRangesIsSet = false;
 }
-std::vector<std::string>& UdmInfo::getRoutingIndicators() {
+std::vector<std::string> &UdmInfo::getRoutingIndicators() {
   return m_RoutingIndicators;
 }
-void UdmInfo::setRoutingIndicators(std::vector<std::string> const& value) {
-  m_RoutingIndicators      = value;
+void UdmInfo::setRoutingIndicators(std::vector<std::string> const &value) {
+  m_RoutingIndicators = value;
   m_RoutingIndicatorsIsSet = true;
 }
 bool UdmInfo::routingIndicatorsIsSet() const {
   return m_RoutingIndicatorsIsSet;
 }
-void UdmInfo::unsetRoutingIndicators() {
-  m_RoutingIndicatorsIsSet = false;
-}
+void UdmInfo::unsetRoutingIndicators() { m_RoutingIndicatorsIsSet = false; }
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

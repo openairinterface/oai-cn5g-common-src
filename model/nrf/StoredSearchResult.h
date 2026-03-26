@@ -20,8 +20,8 @@
 #define StoredSearchResult_H_
 
 #include "NFProfile.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::nrf {
 
@@ -29,7 +29,7 @@ namespace oai::model::nrf {
 ///
 /// </summary>
 class StoredSearchResult {
- public:
+public:
   StoredSearchResult();
   virtual ~StoredSearchResult();
 
@@ -41,16 +41,16 @@ class StoredSearchResult {
   /// <summary>
   ///
   /// </summary>
-  std::vector<NFProfile>& getNfInstances();
-  void setNfInstances(std::vector<NFProfile> const& value);
+  std::vector<NFProfile> &getNfInstances();
+  void setNfInstances(std::vector<NFProfile> const &value);
 
-  friend void to_json(nlohmann::json& j, const StoredSearchResult& o);
-  friend void from_json(const nlohmann::json& j, StoredSearchResult& o);
+  friend void to_json(nlohmann::json &j, const StoredSearchResult &o);
+  friend void from_json(const nlohmann::json &j, StoredSearchResult &o);
 
- protected:
+protected:
   std::vector<NFProfile> m_NfInstances;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* StoredSearchResult_H_ */

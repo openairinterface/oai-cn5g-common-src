@@ -31,7 +31,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class DnnInfo {
- public:
+public:
   DnnInfo();
   virtual ~DnnInfo();
 
@@ -44,7 +44,7 @@ class DnnInfo {
   ///
   /// </summary>
   std::string getDnn() const;
-  void setDnn(std::string const& value);
+  void setDnn(std::string const &value);
   /// <summary>
   ///
   /// </summary>
@@ -67,10 +67,10 @@ class DnnInfo {
   bool iwkEpsIndIsSet() const;
   void unsetIwkEpsInd();
 
-  friend void to_json(nlohmann::json& j, const DnnInfo& o);
-  friend void from_json(const nlohmann::json& j, DnnInfo& o);
+  friend void to_json(nlohmann::json &j, const DnnInfo &o);
+  friend void from_json(const nlohmann::json &j, DnnInfo &o);
 
- protected:
+protected:
   std::string m_Dnn;
 
   bool m_DefaultDnnIndicator;
@@ -81,6 +81,6 @@ class DnnInfo {
   bool m_IwkEpsIndIsSet;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* DnnInfo_H_ */

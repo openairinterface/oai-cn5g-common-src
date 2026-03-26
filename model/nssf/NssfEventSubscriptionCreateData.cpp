@@ -22,12 +22,12 @@ namespace model {
 
 NssfEventSubscriptionCreateData::NssfEventSubscriptionCreateData() {
   m_NfNssaiAvailabilityUri = "";
-  m_Expiry                 = "";
-  m_ExpiryIsSet            = false;
-  m_AmfSetId               = "";
-  m_AmfSetIdIsSet          = false;
-  m_TaiRangeListIsSet      = false;
-  m_SupportedFeatures      = "";
+  m_Expiry = "";
+  m_ExpiryIsSet = false;
+  m_AmfSetId = "";
+  m_AmfSetIdIsSet = false;
+  m_TaiRangeListIsSet = false;
+  m_SupportedFeatures = "";
   m_SupportedFeaturesIsSet = false;
 }
 
@@ -39,24 +39,24 @@ void NssfEventSubscriptionCreateData::validate() const {
   // }
 }
 
-bool NssfEventSubscriptionCreateData::validate(std::stringstream& msg) const {
+bool NssfEventSubscriptionCreateData::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool NssfEventSubscriptionCreateData::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "NssfEventSubscriptionCreateData" : pathPrefix;
 
   /* TaiList */ {
-    const std::vector<oai::model::common::Tai>& value = m_TaiList;
+    const std::vector<oai::model::common::Tai> &value = m_TaiList;
     const std::string currentValuePath = _pathPrefix + ".taiList";
 
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::Tai& value : value) {
+      int i = 0;
+      for (const oai::model::common::Tai &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -68,22 +68,22 @@ bool NssfEventSubscriptionCreateData::validate(
   }
 
   if (amfSetIdIsSet()) {
-    const std::string& value           = m_AmfSetId;
+    const std::string &value = m_AmfSetId;
     const std::string currentValuePath = _pathPrefix + ".amfSetId";
   }
 
   if (taiRangeListIsSet()) {
-    const std::vector<oai::model::nrf::TaiRange>& value = m_TaiRangeList;
+    const std::vector<oai::model::nrf::TaiRange> &value = m_TaiRangeList;
     const std::string currentValuePath = _pathPrefix + ".taiRangeList";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::nrf::TaiRange& value : value) {
+      int i = 0;
+      for (const oai::model::nrf::TaiRange &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -96,7 +96,7 @@ bool NssfEventSubscriptionCreateData::validate(
   }
 
   if (supportedFeaturesIsSet()) {
-    const std::string& value           = m_SupportedFeatures;
+    const std::string &value = m_SupportedFeatures;
     const std::string currentValuePath = _pathPrefix + ".supportedFeatures";
   }
 
@@ -104,7 +104,7 @@ bool NssfEventSubscriptionCreateData::validate(
 }
 
 bool NssfEventSubscriptionCreateData::operator==(
-    const NssfEventSubscriptionCreateData& rhs) const {
+    const NssfEventSubscriptionCreateData &rhs) const {
   return
 
       (getNfNssaiAvailabilityUri() == rhs.getNfNssaiAvailabilityUri()) &&
@@ -133,24 +133,26 @@ bool NssfEventSubscriptionCreateData::operator==(
 }
 
 bool NssfEventSubscriptionCreateData::operator!=(
-    const NssfEventSubscriptionCreateData& rhs) const {
+    const NssfEventSubscriptionCreateData &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const NssfEventSubscriptionCreateData& o) {
-  j                           = nlohmann::json();
+void to_json(nlohmann::json &j, const NssfEventSubscriptionCreateData &o) {
+  j = nlohmann::json();
   j["nfNssaiAvailabilityUri"] = o.m_NfNssaiAvailabilityUri;
-  j["taiList"]                = o.m_TaiList;
-  j["event"]                  = o.m_Event;
-  if (o.expiryIsSet()) j["expiry"] = o.m_Expiry;
-  if (o.amfSetIdIsSet()) j["amfSetId"] = o.m_AmfSetId;
+  j["taiList"] = o.m_TaiList;
+  j["event"] = o.m_Event;
+  if (o.expiryIsSet())
+    j["expiry"] = o.m_Expiry;
+  if (o.amfSetIdIsSet())
+    j["amfSetId"] = o.m_AmfSetId;
   if (o.taiRangeListIsSet() || !o.m_TaiRangeList.empty())
     j["taiRangeList"] = o.m_TaiRangeList;
   if (o.supportedFeaturesIsSet())
     j["supportedFeatures"] = o.m_SupportedFeatures;
 }
 
-void from_json(const nlohmann::json& j, NssfEventSubscriptionCreateData& o) {
+void from_json(const nlohmann::json &j, NssfEventSubscriptionCreateData &o) {
   j.at("nfNssaiAvailabilityUri").get_to(o.m_NfNssaiAvailabilityUri);
   j.at("taiList").get_to(o.m_TaiList);
   j.at("event").get_to(o.m_Event);
@@ -176,7 +178,7 @@ std::string NssfEventSubscriptionCreateData::getNfNssaiAvailabilityUri() const {
   return m_NfNssaiAvailabilityUri;
 }
 void NssfEventSubscriptionCreateData::setNfNssaiAvailabilityUri(
-    std::string const& value) {
+    std::string const &value) {
   m_NfNssaiAvailabilityUri = value;
 }
 std::vector<oai::model::common::Tai>
@@ -184,33 +186,31 @@ NssfEventSubscriptionCreateData::getTaiList() const {
   return m_TaiList;
 }
 void NssfEventSubscriptionCreateData::setTaiList(
-    std::vector<oai::model::common::Tai> const& value) {
+    std::vector<oai::model::common::Tai> const &value) {
   m_TaiList = value;
 }
 NssfEventType NssfEventSubscriptionCreateData::getEvent() const {
   return m_Event;
 }
-void NssfEventSubscriptionCreateData::setEvent(NssfEventType const& value) {
+void NssfEventSubscriptionCreateData::setEvent(NssfEventType const &value) {
   m_Event = value;
 }
 std::string NssfEventSubscriptionCreateData::getExpiry() const {
   return m_Expiry;
 }
-void NssfEventSubscriptionCreateData::setExpiry(std::string const& value) {
-  m_Expiry      = value;
+void NssfEventSubscriptionCreateData::setExpiry(std::string const &value) {
+  m_Expiry = value;
   m_ExpiryIsSet = true;
 }
 bool NssfEventSubscriptionCreateData::expiryIsSet() const {
   return m_ExpiryIsSet;
 }
-void NssfEventSubscriptionCreateData::unsetExpiry() {
-  m_ExpiryIsSet = false;
-}
+void NssfEventSubscriptionCreateData::unsetExpiry() { m_ExpiryIsSet = false; }
 std::string NssfEventSubscriptionCreateData::getAmfSetId() const {
   return m_AmfSetId;
 }
-void NssfEventSubscriptionCreateData::setAmfSetId(std::string const& value) {
-  m_AmfSetId      = value;
+void NssfEventSubscriptionCreateData::setAmfSetId(std::string const &value) {
+  m_AmfSetId = value;
   m_AmfSetIdIsSet = true;
 }
 bool NssfEventSubscriptionCreateData::amfSetIdIsSet() const {
@@ -224,8 +224,8 @@ NssfEventSubscriptionCreateData::getTaiRangeList() const {
   return m_TaiRangeList;
 }
 void NssfEventSubscriptionCreateData::setTaiRangeList(
-    std::vector<oai::model::nrf::TaiRange> const& value) {
-  m_TaiRangeList      = value;
+    std::vector<oai::model::nrf::TaiRange> const &value) {
+  m_TaiRangeList = value;
   m_TaiRangeListIsSet = true;
 }
 bool NssfEventSubscriptionCreateData::taiRangeListIsSet() const {
@@ -238,8 +238,8 @@ std::string NssfEventSubscriptionCreateData::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
 void NssfEventSubscriptionCreateData::setSupportedFeatures(
-    std::string const& value) {
-  m_SupportedFeatures      = value;
+    std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool NssfEventSubscriptionCreateData::supportedFeaturesIsSet() const {
@@ -249,6 +249,6 @@ void NssfEventSubscriptionCreateData::unsetSupportedFeatures() {
   m_SupportedFeaturesIsSet = false;
 }
 
-}  // namespace model
-}  // namespace nssf_server
-}  // namespace oai
+} // namespace model
+} // namespace nssf_server
+} // namespace oai

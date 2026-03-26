@@ -17,8 +17,8 @@ namespace oai::model::amf {
 
 UeRegStatusUpdateReqData::UeRegStatusUpdateReqData() {
   m_ToReleaseSessionListIsSet = false;
-  m_PcfReselectedInd          = false;
-  m_PcfReselectedIndIsSet     = false;
+  m_PcfReselectedInd = false;
+  m_PcfReselectedIndIsSet = false;
 }
 
 UeRegStatusUpdateReqData::~UeRegStatusUpdateReqData() {}
@@ -27,15 +27,16 @@ void UeRegStatusUpdateReqData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const UeRegStatusUpdateReqData& o) {
-  j                   = nlohmann::json();
+void to_json(nlohmann::json &j, const UeRegStatusUpdateReqData &o) {
+  j = nlohmann::json();
   j["transferStatus"] = o.m_TransferStatus;
   if (o.toReleaseSessionListIsSet())
     j["toReleaseSessionList"] = o.m_ToReleaseSessionList;
-  if (o.pcfReselectedIndIsSet()) j["pcfReselectedInd"] = o.m_PcfReselectedInd;
+  if (o.pcfReselectedIndIsSet())
+    j["pcfReselectedInd"] = o.m_PcfReselectedInd;
 }
 
-void from_json(const nlohmann::json& j, UeRegStatusUpdateReqData& o) {
+void from_json(const nlohmann::json &j, UeRegStatusUpdateReqData &o) {
   j.at("transferStatus").get_to(o.m_TransferStatus);
   if (j.find("toReleaseSessionList") != j.end()) {
     j.at("toReleaseSessionList").get_to(o.m_ToReleaseSessionList);
@@ -51,10 +52,10 @@ UeContextTransferStatus UeRegStatusUpdateReqData::getTransferStatus() const {
   return m_TransferStatus;
 }
 void UeRegStatusUpdateReqData::setTransferStatus(
-    UeContextTransferStatus const& value) {
+    UeContextTransferStatus const &value) {
   m_TransferStatus = value;
 }
-std::vector<int32_t>& UeRegStatusUpdateReqData::getToReleaseSessionList() {
+std::vector<int32_t> &UeRegStatusUpdateReqData::getToReleaseSessionList() {
   return m_ToReleaseSessionList;
 }
 bool UeRegStatusUpdateReqData::toReleaseSessionListIsSet() const {
@@ -67,7 +68,7 @@ bool UeRegStatusUpdateReqData::isPcfReselectedInd() const {
   return m_PcfReselectedInd;
 }
 void UeRegStatusUpdateReqData::setPcfReselectedInd(bool const value) {
-  m_PcfReselectedInd      = value;
+  m_PcfReselectedInd = value;
   m_PcfReselectedIndIsSet = true;
 }
 bool UeRegStatusUpdateReqData::pcfReselectedIndIsSet() const {
@@ -77,4 +78,4 @@ void UeRegStatusUpdateReqData::unsetPcfReselectedInd() {
   m_PcfReselectedIndIsSet = false;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

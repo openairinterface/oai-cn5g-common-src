@@ -28,25 +28,25 @@ void EnhancedCoverageRestrictionData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const EnhancedCoverageRestrictionData& o) {
+void to_json(nlohmann::json &j, const EnhancedCoverageRestrictionData &o) {
   j = nlohmann::json();
   if (o.plmnEcInfoListIsSet() || !o.m_PlmnEcInfoList.empty())
     j["plmnEcInfoList"] = o.m_PlmnEcInfoList;
 }
 
-void from_json(const nlohmann::json& j, EnhancedCoverageRestrictionData& o) {
+void from_json(const nlohmann::json &j, EnhancedCoverageRestrictionData &o) {
   if (j.find("plmnEcInfoList") != j.end()) {
     j.at("plmnEcInfoList").get_to(o.m_PlmnEcInfoList);
     o.m_PlmnEcInfoListIsSet = true;
   }
 }
 
-std::vector<PlmnEcInfo>& EnhancedCoverageRestrictionData::getPlmnEcInfoList() {
+std::vector<PlmnEcInfo> &EnhancedCoverageRestrictionData::getPlmnEcInfoList() {
   return m_PlmnEcInfoList;
 }
 void EnhancedCoverageRestrictionData::setPlmnEcInfoList(
-    std::vector<PlmnEcInfo> const& value) {
-  m_PlmnEcInfoList      = value;
+    std::vector<PlmnEcInfo> const &value) {
+  m_PlmnEcInfoList = value;
   m_PlmnEcInfoListIsSet = true;
 }
 bool EnhancedCoverageRestrictionData::plmnEcInfoListIsSet() const {
@@ -56,4 +56,4 @@ void EnhancedCoverageRestrictionData::unsetPlmnEcInfoList() {
   m_PlmnEcInfoListIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

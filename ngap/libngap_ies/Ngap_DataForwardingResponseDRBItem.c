@@ -8,8 +8,8 @@
 
 #include "Ngap_DataForwardingResponseDRBItem.h"
 
-#include "Ngap_UPTransportLayerInformation.h"
 #include "Ngap_ProtocolExtensionContainer.h"
+#include "Ngap_UPTransportLayerInformation.h"
 asn_TYPE_member_t asn_MBR_Ngap_DataForwardingResponseDRBItem_1[] = {
     {ATF_NOFLAGS,
      0,
@@ -32,9 +32,8 @@ asn_TYPE_member_t asn_MBR_Ngap_DataForwardingResponseDRBItem_1[] = {
      "dRB-ID"},
     {ATF_POINTER,
      3,
-     offsetof(
-         struct Ngap_DataForwardingResponseDRBItem,
-         dLForwardingUP_TNLInformation),
+     offsetof(struct Ngap_DataForwardingResponseDRBItem,
+              dLForwardingUP_TNLInformation),
      (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
      +1, /* EXPLICIT tag at current level */
      &asn_DEF_Ngap_UPTransportLayerInformation,
@@ -53,9 +52,8 @@ asn_TYPE_member_t asn_MBR_Ngap_DataForwardingResponseDRBItem_1[] = {
      "dLForwardingUP-TNLInformation"},
     {ATF_POINTER,
      2,
-     offsetof(
-         struct Ngap_DataForwardingResponseDRBItem,
-         uLForwardingUP_TNLInformation),
+     offsetof(struct Ngap_DataForwardingResponseDRBItem,
+              uLForwardingUP_TNLInformation),
      (ASN_TAG_CLASS_CONTEXT | (2 << 2)),
      +1, /* EXPLICIT tag at current level */
      &asn_DEF_Ngap_UPTransportLayerInformation,

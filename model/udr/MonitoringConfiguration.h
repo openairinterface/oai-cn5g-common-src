@@ -39,7 +39,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class MonitoringConfiguration {
- public:
+public:
   MonitoringConfiguration();
   virtual ~MonitoringConfiguration();
 
@@ -52,7 +52,7 @@ class MonitoringConfiguration {
   ///
   /// </summary>
   EventType getEventType() const;
-  void setEventType(EventType const& value);
+  void setEventType(EventType const &value);
   /// <summary>
   ///
   /// </summary>
@@ -65,28 +65,28 @@ class MonitoringConfiguration {
   /// </summary>
   LocationReportingConfiguration getLocationReportingConfiguration() const;
   void setLocationReportingConfiguration(
-      LocationReportingConfiguration const& value);
+      LocationReportingConfiguration const &value);
   bool locationReportingConfigurationIsSet() const;
   void unsetLocationReportingConfiguration();
   /// <summary>
   ///
   /// </summary>
   AssociationType getAssociationType() const;
-  void setAssociationType(AssociationType const& value);
+  void setAssociationType(AssociationType const &value);
   bool associationTypeIsSet() const;
   void unsetAssociationType();
   /// <summary>
   ///
   /// </summary>
   DatalinkReportingConfiguration getDatalinkReportCfg() const;
-  void setDatalinkReportCfg(DatalinkReportingConfiguration const& value);
+  void setDatalinkReportCfg(DatalinkReportingConfiguration const &value);
   bool datalinkReportCfgIsSet() const;
   void unsetDatalinkReportCfg();
   /// <summary>
   ///
   /// </summary>
   LossConnectivityCfg getLossConnectivityCfg() const;
-  void setLossConnectivityCfg(LossConnectivityCfg const& value);
+  void setLossConnectivityCfg(LossConnectivityCfg const &value);
   bool lossConnectivityCfgIsSet() const;
   void unsetLossConnectivityCfg();
   /// <summary>
@@ -114,35 +114,35 @@ class MonitoringConfiguration {
   ///
   /// </summary>
   PduSessionStatusCfg getPduSessionStatusCfg() const;
-  void setPduSessionStatusCfg(PduSessionStatusCfg const& value);
+  void setPduSessionStatusCfg(PduSessionStatusCfg const &value);
   bool pduSessionStatusCfgIsSet() const;
   void unsetPduSessionStatusCfg();
   /// <summary>
   ///
   /// </summary>
   ReachabilityForSmsConfiguration getReachabilityForSmsCfg() const;
-  void setReachabilityForSmsCfg(ReachabilityForSmsConfiguration const& value);
+  void setReachabilityForSmsCfg(ReachabilityForSmsConfiguration const &value);
   bool reachabilityForSmsCfgIsSet() const;
   void unsetReachabilityForSmsCfg();
   /// <summary>
   ///
   /// </summary>
   std::string getMtcProviderInformation() const;
-  void setMtcProviderInformation(std::string const& value);
+  void setMtcProviderInformation(std::string const &value);
   bool mtcProviderInformationIsSet() const;
   void unsetMtcProviderInformation();
   /// <summary>
   ///
   /// </summary>
   std::string getAfId() const;
-  void setAfId(std::string const& value);
+  void setAfId(std::string const &value);
   bool afIdIsSet() const;
   void unsetAfId();
 
-  friend void to_json(nlohmann::json& j, const MonitoringConfiguration& o);
-  friend void from_json(const nlohmann::json& j, MonitoringConfiguration& o);
+  friend void to_json(nlohmann::json &j, const MonitoringConfiguration &o);
+  friend void from_json(const nlohmann::json &j, MonitoringConfiguration &o);
 
- protected:
+protected:
   EventType m_EventType;
 
   bool m_ImmediateFlag;
@@ -171,6 +171,6 @@ class MonitoringConfiguration {
   bool m_AfIdIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* MonitoringConfiguration_H_ */

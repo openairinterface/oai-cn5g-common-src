@@ -19,10 +19,10 @@
 #ifndef QosNotificationControlInfo_H_
 #define QosNotificationControlInfo_H_
 
-#include <string>
 #include "QosNotifType.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::pcf {
 
@@ -30,7 +30,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class QosNotificationControlInfo {
- public:
+public:
   QosNotificationControlInfo();
   virtual ~QosNotificationControlInfo() = default;
 
@@ -44,16 +44,16 @@ class QosNotificationControlInfo {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const QosNotificationControlInfo& rhs) const;
-  bool operator!=(const QosNotificationControlInfo& rhs) const;
+  bool operator==(const QosNotificationControlInfo &rhs) const;
+  bool operator!=(const QosNotificationControlInfo &rhs) const;
 
   /////////////////////////////////////////////
   /// QosNotificationControlInfo members
@@ -63,12 +63,12 @@ class QosNotificationControlInfo {
   /// QoS notification control info.
   /// </summary>
   std::vector<std::string> getRefPccRuleIds() const;
-  void setRefPccRuleIds(std::vector<std::string> const& value);
+  void setRefPccRuleIds(std::vector<std::string> const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::QosNotifType getNotifType() const;
-  void setNotifType(oai::model::pcf::QosNotifType const& value);
+  void setNotifType(oai::model::pcf::QosNotifType const &value);
   /// <summary>
   /// Represents the content version of some content.
   /// </summary>
@@ -80,14 +80,14 @@ class QosNotificationControlInfo {
   ///
   /// </summary>
   std::string getAltQosParamId() const;
-  void setAltQosParamId(std::string const& value);
+  void setAltQosParamId(std::string const &value);
   bool altQosParamIdIsSet() const;
   void unsetAltQosParamId();
 
-  friend void to_json(nlohmann::json& j, const QosNotificationControlInfo& o);
-  friend void from_json(const nlohmann::json& j, QosNotificationControlInfo& o);
+  friend void to_json(nlohmann::json &j, const QosNotificationControlInfo &o);
+  friend void from_json(const nlohmann::json &j, QosNotificationControlInfo &o);
 
- protected:
+protected:
   std::vector<std::string> m_RefPccRuleIds;
 
   oai::model::pcf::QosNotifType m_NotifType;
@@ -98,6 +98,6 @@ class QosNotificationControlInfo {
   bool m_AltQosParamIdIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* QosNotificationControlInfo_H_ */

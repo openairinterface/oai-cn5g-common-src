@@ -25,13 +25,14 @@ void N2InformationTransferError::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const N2InformationTransferError& o) {
-  j          = nlohmann::json();
+void to_json(nlohmann::json &j, const N2InformationTransferError &o) {
+  j = nlohmann::json();
   j["error"] = o.m_Error;
-  if (o.pwdErrorInfoIsSet()) j["pwdErrorInfo"] = o.m_PwdErrorInfo;
+  if (o.pwdErrorInfoIsSet())
+    j["pwdErrorInfo"] = o.m_PwdErrorInfo;
 }
 
-void from_json(const nlohmann::json& j, N2InformationTransferError& o) {
+void from_json(const nlohmann::json &j, N2InformationTransferError &o) {
   j.at("error").get_to(o.m_Error);
   if (j.find("pwdErrorInfo") != j.end()) {
     j.at("pwdErrorInfo").get_to(o.m_PwdErrorInfo);
@@ -39,19 +40,19 @@ void from_json(const nlohmann::json& j, N2InformationTransferError& o) {
   }
 }
 
-oai::model::common::ProblemDetails N2InformationTransferError::getError()
-    const {
+oai::model::common::ProblemDetails
+N2InformationTransferError::getError() const {
   return m_Error;
 }
 void N2InformationTransferError::setError(
-    oai::model::common::ProblemDetails const& value) {
+    oai::model::common::ProblemDetails const &value) {
   m_Error = value;
 }
 PWSErrorData N2InformationTransferError::getPwdErrorInfo() const {
   return m_PwdErrorInfo;
 }
-void N2InformationTransferError::setPwdErrorInfo(PWSErrorData const& value) {
-  m_PwdErrorInfo      = value;
+void N2InformationTransferError::setPwdErrorInfo(PWSErrorData const &value) {
+  m_PwdErrorInfo = value;
   m_PwdErrorInfoIsSet = true;
 }
 bool N2InformationTransferError::pwdErrorInfoIsSet() const {
@@ -61,4 +62,4 @@ void N2InformationTransferError::unsetPwdErrorInfo() {
   m_PwdErrorInfoIsSet = false;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

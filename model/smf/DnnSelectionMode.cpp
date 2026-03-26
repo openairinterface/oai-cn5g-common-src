@@ -27,12 +27,12 @@ void DnnSelectionMode::validate() const {
   }
 }
 
-bool DnnSelectionMode::validate(std::stringstream& msg) const {
+bool DnnSelectionMode::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool DnnSelectionMode::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool DnnSelectionMode::validate(std::stringstream &msg,
+                                const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "DnnSelectionMode" : pathPrefix;
@@ -43,35 +43,33 @@ bool DnnSelectionMode::validate(
   return success;
 }
 
-bool DnnSelectionMode::operator==(const DnnSelectionMode& rhs) const {
+bool DnnSelectionMode::operator==(const DnnSelectionMode &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool DnnSelectionMode::operator!=(const DnnSelectionMode& rhs) const {
+bool DnnSelectionMode::operator!=(const DnnSelectionMode &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const DnnSelectionMode& o) {
+void to_json(nlohmann::json &j, const DnnSelectionMode &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, DnnSelectionMode& o) {
+void from_json(const nlohmann::json &j, DnnSelectionMode &o) {
   from_json(j, o.m_value);
 }
 
-DnnSelectionMode_anyOf DnnSelectionMode::getValue() const {
-  return m_value;
-}
+DnnSelectionMode_anyOf DnnSelectionMode::getValue() const { return m_value; }
 
 void DnnSelectionMode::setValue(DnnSelectionMode_anyOf value) {
   m_value = value;
 }
 
-DnnSelectionMode_anyOf::eDnnSelectionMode_anyOf DnnSelectionMode::getEnumValue()
-    const {
+DnnSelectionMode_anyOf::eDnnSelectionMode_anyOf
+DnnSelectionMode::getEnumValue() const {
   return m_value.getValue();
 }
 
@@ -80,4 +78,4 @@ void DnnSelectionMode::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

@@ -19,8 +19,8 @@
 #ifndef TscaiInputContainer_H_
 #define TscaiInputContainer_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::pcf {
 
@@ -28,7 +28,7 @@ namespace oai::model::pcf {
 /// Indicates TSC Traffic pattern.
 /// </summary>
 class TscaiInputContainer {
- public:
+public:
   TscaiInputContainer();
   virtual ~TscaiInputContainer() = default;
 
@@ -42,16 +42,16 @@ class TscaiInputContainer {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const TscaiInputContainer& rhs) const;
-  bool operator!=(const TscaiInputContainer& rhs) const;
+  bool operator==(const TscaiInputContainer &rhs) const;
+  bool operator!=(const TscaiInputContainer &rhs) const;
 
   /////////////////////////////////////////////
   /// TscaiInputContainer members
@@ -67,20 +67,20 @@ class TscaiInputContainer {
   ///
   /// </summary>
   std::string getBurstArrivalTime() const;
-  void setBurstArrivalTime(std::string const& value);
+  void setBurstArrivalTime(std::string const &value);
   bool burstArrivalTimeIsSet() const;
   void unsetBurstArrivalTime();
 
-  friend void to_json(nlohmann::json& j, const TscaiInputContainer& o);
-  friend void from_json(const nlohmann::json& j, TscaiInputContainer& o);
+  friend void to_json(nlohmann::json &j, const TscaiInputContainer &o);
+  friend void from_json(const nlohmann::json &j, TscaiInputContainer &o);
 
- protected:
+protected:
   int32_t m_Periodicity;
   bool m_PeriodicityIsSet;
   std::string m_BurstArrivalTime;
   bool m_BurstArrivalTimeIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* TscaiInputContainer_H_ */

@@ -20,8 +20,8 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_UEPresence {
-  Ngap_UEPresence_in      = 0,
-  Ngap_UEPresence_out     = 1,
+  Ngap_UEPresence_in = 0,
+  Ngap_UEPresence_out = 1,
   Ngap_UEPresence_unknown = 2
   /*
    * Enumeration is extensible

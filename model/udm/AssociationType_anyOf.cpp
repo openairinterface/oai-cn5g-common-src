@@ -16,8 +16,8 @@
 
 #include "AssociationType_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::udm {
 
@@ -30,12 +30,12 @@ void AssociationType_anyOf::validate() const {
   }
 }
 
-bool AssociationType_anyOf::validate(std::stringstream& msg) const {
+bool AssociationType_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AssociationType_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool AssociationType_anyOf::validate(std::stringstream &msg,
+                                     const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AssociationType_anyOf" : pathPrefix;
@@ -49,34 +49,34 @@ bool AssociationType_anyOf::validate(
   return success;
 }
 
-bool AssociationType_anyOf::operator==(const AssociationType_anyOf& rhs) const {
+bool AssociationType_anyOf::operator==(const AssociationType_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool AssociationType_anyOf::operator!=(const AssociationType_anyOf& rhs) const {
+bool AssociationType_anyOf::operator!=(const AssociationType_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AssociationType_anyOf& o) {
+void to_json(nlohmann::json &j, const AssociationType_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case AssociationType_anyOf::eAssociationType_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case AssociationType_anyOf::eAssociationType_anyOf::IMEI_CHANGE:
-      j = "IMEI_CHANGE";
-      break;
-    case AssociationType_anyOf::eAssociationType_anyOf::IMEISV_CHANGE:
-      j = "IMEISV_CHANGE";
-      break;
+  case AssociationType_anyOf::eAssociationType_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case AssociationType_anyOf::eAssociationType_anyOf::IMEI_CHANGE:
+    j = "IMEI_CHANGE";
+    break;
+  case AssociationType_anyOf::eAssociationType_anyOf::IMEISV_CHANGE:
+    j = "IMEISV_CHANGE";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, AssociationType_anyOf& o) {
+void from_json(const nlohmann::json &j, AssociationType_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "IMEI_CHANGE") {
     o.setValue(AssociationType_anyOf::eAssociationType_anyOf::IMEI_CHANGE);
@@ -91,8 +91,8 @@ void from_json(const nlohmann::json& j, AssociationType_anyOf& o) {
   }
 }
 
-AssociationType_anyOf::eAssociationType_anyOf AssociationType_anyOf::getValue()
-    const {
+AssociationType_anyOf::eAssociationType_anyOf
+AssociationType_anyOf::getValue() const {
   return m_value;
 }
 void AssociationType_anyOf::setValue(
@@ -100,4 +100,4 @@ void AssociationType_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

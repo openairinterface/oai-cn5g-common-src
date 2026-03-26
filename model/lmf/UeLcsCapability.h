@@ -27,7 +27,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class UeLcsCapability {
- public:
+public:
   UeLcsCapability();
   virtual ~UeLcsCapability() = default;
 
@@ -41,16 +41,16 @@ class UeLcsCapability {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const UeLcsCapability& rhs) const;
-  bool operator!=(const UeLcsCapability& rhs) const;
+  bool operator==(const UeLcsCapability &rhs) const;
+  bool operator!=(const UeLcsCapability &rhs) const;
 
   /////////////////////////////////////////////
   /// UeLcsCapability members
@@ -70,16 +70,16 @@ class UeLcsCapability {
   bool ciotOptimisationIsSet() const;
   void unsetCiotOptimisation();
 
-  friend void to_json(nlohmann::json& j, const UeLcsCapability& o);
-  friend void from_json(const nlohmann::json& j, UeLcsCapability& o);
+  friend void to_json(nlohmann::json &j, const UeLcsCapability &o);
+  friend void from_json(const nlohmann::json &j, UeLcsCapability &o);
 
- protected:
+protected:
   bool m_LppSupport;
   bool m_LppSupportIsSet;
   bool m_CiotOptimisation;
   bool m_CiotOptimisationIsSet;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* UeLcsCapability_H_ */

@@ -20,11 +20,11 @@ namespace oai::model::common {
 
 WirelineArea::WirelineArea() {
   m_GlobalLineIdsIsSet = false;
-  m_HfcNIdsIsSet       = false;
-  m_AreaCodeB          = "";
-  m_AreaCodeBIsSet     = false;
-  m_AreaCodeC          = "";
-  m_AreaCodeCIsSet     = false;
+  m_HfcNIdsIsSet = false;
+  m_AreaCodeB = "";
+  m_AreaCodeBIsSet = false;
+  m_AreaCodeC = "";
+  m_AreaCodeCIsSet = false;
 }
 
 void WirelineArea::validate() const {
@@ -34,28 +34,28 @@ void WirelineArea::validate() const {
   }
 }
 
-bool WirelineArea::validate(std::stringstream& msg) const {
+bool WirelineArea::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool WirelineArea::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool WirelineArea::validate(std::stringstream &msg,
+                            const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "WirelineArea" : pathPrefix;
 
   if (globalLineIdsIsSet()) {
-    const std::vector<std::string>& value = m_GlobalLineIds;
-    const std::string currentValuePath    = _pathPrefix + ".globalLineIds";
+    const std::vector<std::string> &value = m_GlobalLineIds;
+    const std::string currentValuePath = _pathPrefix + ".globalLineIds";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const std::string& value : value) {
+      int i = 0;
+      for (const std::string &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -65,17 +65,17 @@ bool WirelineArea::validate(
   }
 
   if (hfcNIdsIsSet()) {
-    const std::vector<std::string>& value = m_HfcNIds;
-    const std::string currentValuePath    = _pathPrefix + ".hfcNIds";
+    const std::vector<std::string> &value = m_HfcNIds;
+    const std::string currentValuePath = _pathPrefix + ".hfcNIds";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const std::string& value : value) {
+      int i = 0;
+      for (const std::string &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -92,7 +92,7 @@ bool WirelineArea::validate(
   return success;
 }
 
-bool WirelineArea::operator==(const WirelineArea& rhs) const {
+bool WirelineArea::operator==(const WirelineArea &rhs) const {
   return
 
       ((!globalLineIdsIsSet() && !rhs.globalLineIdsIsSet()) ||
@@ -114,20 +114,23 @@ bool WirelineArea::operator==(const WirelineArea& rhs) const {
           ;
 }
 
-bool WirelineArea::operator!=(const WirelineArea& rhs) const {
+bool WirelineArea::operator!=(const WirelineArea &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const WirelineArea& o) {
+void to_json(nlohmann::json &j, const WirelineArea &o) {
   j = nlohmann::json();
   if (o.globalLineIdsIsSet() || !o.m_GlobalLineIds.empty())
     j["globalLineIds"] = o.m_GlobalLineIds;
-  if (o.hfcNIdsIsSet() || !o.m_HfcNIds.empty()) j["hfcNIds"] = o.m_HfcNIds;
-  if (o.areaCodeBIsSet()) j["areaCodeB"] = o.m_AreaCodeB;
-  if (o.areaCodeCIsSet()) j["areaCodeC"] = o.m_AreaCodeC;
+  if (o.hfcNIdsIsSet() || !o.m_HfcNIds.empty())
+    j["hfcNIds"] = o.m_HfcNIds;
+  if (o.areaCodeBIsSet())
+    j["areaCodeB"] = o.m_AreaCodeB;
+  if (o.areaCodeCIsSet())
+    j["areaCodeC"] = o.m_AreaCodeC;
 }
 
-void from_json(const nlohmann::json& j, WirelineArea& o) {
+void from_json(const nlohmann::json &j, WirelineArea &o) {
   if (j.find("globalLineIds") != j.end()) {
     j.at("globalLineIds").get_to(o.m_GlobalLineIds);
     o.m_GlobalLineIdsIsSet = true;
@@ -149,54 +152,32 @@ void from_json(const nlohmann::json& j, WirelineArea& o) {
 std::vector<std::string> WirelineArea::getGlobalLineIds() const {
   return m_GlobalLineIds;
 }
-void WirelineArea::setGlobalLineIds(std::vector<std::string> const& value) {
-  m_GlobalLineIds      = value;
+void WirelineArea::setGlobalLineIds(std::vector<std::string> const &value) {
+  m_GlobalLineIds = value;
   m_GlobalLineIdsIsSet = true;
 }
-bool WirelineArea::globalLineIdsIsSet() const {
-  return m_GlobalLineIdsIsSet;
-}
-void WirelineArea::unsetGlobalLineIds() {
-  m_GlobalLineIdsIsSet = false;
-}
-std::vector<std::string> WirelineArea::getHfcNIds() const {
-  return m_HfcNIds;
-}
-void WirelineArea::setHfcNIds(std::vector<std::string> const& value) {
-  m_HfcNIds      = value;
+bool WirelineArea::globalLineIdsIsSet() const { return m_GlobalLineIdsIsSet; }
+void WirelineArea::unsetGlobalLineIds() { m_GlobalLineIdsIsSet = false; }
+std::vector<std::string> WirelineArea::getHfcNIds() const { return m_HfcNIds; }
+void WirelineArea::setHfcNIds(std::vector<std::string> const &value) {
+  m_HfcNIds = value;
   m_HfcNIdsIsSet = true;
 }
-bool WirelineArea::hfcNIdsIsSet() const {
-  return m_HfcNIdsIsSet;
-}
-void WirelineArea::unsetHfcNIds() {
-  m_HfcNIdsIsSet = false;
-}
-std::string WirelineArea::getAreaCodeB() const {
-  return m_AreaCodeB;
-}
-void WirelineArea::setAreaCodeB(std::string const& value) {
-  m_AreaCodeB      = value;
+bool WirelineArea::hfcNIdsIsSet() const { return m_HfcNIdsIsSet; }
+void WirelineArea::unsetHfcNIds() { m_HfcNIdsIsSet = false; }
+std::string WirelineArea::getAreaCodeB() const { return m_AreaCodeB; }
+void WirelineArea::setAreaCodeB(std::string const &value) {
+  m_AreaCodeB = value;
   m_AreaCodeBIsSet = true;
 }
-bool WirelineArea::areaCodeBIsSet() const {
-  return m_AreaCodeBIsSet;
-}
-void WirelineArea::unsetAreaCodeB() {
-  m_AreaCodeBIsSet = false;
-}
-std::string WirelineArea::getAreaCodeC() const {
-  return m_AreaCodeC;
-}
-void WirelineArea::setAreaCodeC(std::string const& value) {
-  m_AreaCodeC      = value;
+bool WirelineArea::areaCodeBIsSet() const { return m_AreaCodeBIsSet; }
+void WirelineArea::unsetAreaCodeB() { m_AreaCodeBIsSet = false; }
+std::string WirelineArea::getAreaCodeC() const { return m_AreaCodeC; }
+void WirelineArea::setAreaCodeC(std::string const &value) {
+  m_AreaCodeC = value;
   m_AreaCodeCIsSet = true;
 }
-bool WirelineArea::areaCodeCIsSet() const {
-  return m_AreaCodeCIsSet;
-}
-void WirelineArea::unsetAreaCodeC() {
-  m_AreaCodeCIsSet = false;
-}
+bool WirelineArea::areaCodeCIsSet() const { return m_AreaCodeCIsSet; }
+void WirelineArea::unsetAreaCodeC() { m_AreaCodeCIsSet = false; }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

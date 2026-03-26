@@ -29,7 +29,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class LineTypeRm : public LineType {
- public:
+public:
   LineTypeRm();
   virtual ~LineTypeRm() = default;
 
@@ -37,17 +37,17 @@ class LineTypeRm : public LineType {
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(
-      std::stringstream& msg, const std::string& pathPrefix) const override;
+  bool validate(std::stringstream &msg,
+                const std::string &pathPrefix) const override;
   /////////////////////////////////////////////
   /// LineTypeRm members
 
-  friend void to_json(nlohmann::json& j, const LineTypeRm& o);
-  friend void from_json(const nlohmann::json& j, LineTypeRm& o);
+  friend void to_json(nlohmann::json &j, const LineTypeRm &o);
+  friend void from_json(const nlohmann::json &j, LineTypeRm &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* LineTypeRm_H_ */

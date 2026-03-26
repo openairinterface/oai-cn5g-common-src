@@ -27,7 +27,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class NFType_anyOf {
- public:
+public:
   NFType_anyOf();
   virtual ~NFType_anyOf() = default;
 
@@ -85,16 +85,16 @@ class NFType_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const NFType_anyOf& rhs) const;
-  bool operator!=(const NFType_anyOf& rhs) const;
+  bool operator==(const NFType_anyOf &rhs) const;
+  bool operator!=(const NFType_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// NFType_anyOf members
@@ -102,14 +102,14 @@ class NFType_anyOf {
   NFType_anyOf::eNFType_anyOf getValue() const;
   void setValue(NFType_anyOf::eNFType_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const NFType_anyOf& o);
-  friend void from_json(const nlohmann::json& j, NFType_anyOf& o);
+  friend void to_json(nlohmann::json &j, const NFType_anyOf &o);
+  friend void from_json(const nlohmann::json &j, NFType_anyOf &o);
 
- protected:
+protected:
   NFType_anyOf::eNFType_anyOf m_value =
       NFType_anyOf::eNFType_anyOf::INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* NFType_anyOf_H_ */

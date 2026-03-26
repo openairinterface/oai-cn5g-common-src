@@ -16,10 +16,10 @@
 namespace oai::model::amf {
 
 N1MessageNotification::N1MessageNotification() {
-  m_N1NotifySubscriptionId         = "";
-  m_N1NotifySubscriptionIdIsSet    = false;
-  m_LcsCorrelationId               = "";
-  m_LcsCorrelationIdIsSet          = false;
+  m_N1NotifySubscriptionId = "";
+  m_N1NotifySubscriptionIdIsSet = false;
+  m_LcsCorrelationId = "";
+  m_LcsCorrelationIdIsSet = false;
   m_RegistrationCtxtContainerIsSet = false;
 }
 
@@ -29,17 +29,18 @@ void N1MessageNotification::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const N1MessageNotification& o) {
+void to_json(nlohmann::json &j, const N1MessageNotification &o) {
   j = nlohmann::json();
   if (o.n1NotifySubscriptionIdIsSet())
     j["n1NotifySubscriptionId"] = o.m_N1NotifySubscriptionId;
   j["n1MessageContainer"] = o.m_N1MessageContainer;
-  if (o.lcsCorrelationIdIsSet()) j["lcsCorrelationId"] = o.m_LcsCorrelationId;
+  if (o.lcsCorrelationIdIsSet())
+    j["lcsCorrelationId"] = o.m_LcsCorrelationId;
   if (o.registrationCtxtContainerIsSet())
     j["registrationCtxtContainer"] = o.m_RegistrationCtxtContainer;
 }
 
-void from_json(const nlohmann::json& j, N1MessageNotification& o) {
+void from_json(const nlohmann::json &j, N1MessageNotification &o) {
   if (j.find("n1NotifySubscriptionId") != j.end()) {
     j.at("n1NotifySubscriptionId").get_to(o.m_N1NotifySubscriptionId);
     o.m_N1NotifySubscriptionIdIsSet = true;
@@ -59,8 +60,8 @@ std::string N1MessageNotification::getN1NotifySubscriptionId() const {
   return m_N1NotifySubscriptionId;
 }
 void N1MessageNotification::setN1NotifySubscriptionId(
-    std::string const& value) {
-  m_N1NotifySubscriptionId      = value;
+    std::string const &value) {
+  m_N1NotifySubscriptionId = value;
   m_N1NotifySubscriptionIdIsSet = true;
 }
 bool N1MessageNotification::n1NotifySubscriptionIdIsSet() const {
@@ -73,14 +74,14 @@ N1MessageContainer N1MessageNotification::getN1MessageContainer() const {
   return m_N1MessageContainer;
 }
 void N1MessageNotification::setN1MessageContainer(
-    N1MessageContainer const& value) {
+    N1MessageContainer const &value) {
   m_N1MessageContainer = value;
 }
 std::string N1MessageNotification::getLcsCorrelationId() const {
   return m_LcsCorrelationId;
 }
-void N1MessageNotification::setLcsCorrelationId(std::string const& value) {
-  m_LcsCorrelationId      = value;
+void N1MessageNotification::setLcsCorrelationId(std::string const &value) {
+  m_LcsCorrelationId = value;
   m_LcsCorrelationIdIsSet = true;
 }
 bool N1MessageNotification::lcsCorrelationIdIsSet() const {
@@ -94,8 +95,8 @@ N1MessageNotification::getRegistrationCtxtContainer() const {
   return m_RegistrationCtxtContainer;
 }
 void N1MessageNotification::setRegistrationCtxtContainer(
-    RegistrationContextContainer const& value) {
-  m_RegistrationCtxtContainer      = value;
+    RegistrationContextContainer const &value) {
+  m_RegistrationCtxtContainer = value;
   m_RegistrationCtxtContainerIsSet = true;
 }
 bool N1MessageNotification::registrationCtxtContainerIsSet() const {
@@ -105,4 +106,4 @@ void N1MessageNotification::unsetRegistrationCtxtContainer() {
   m_RegistrationCtxtContainerIsSet = false;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

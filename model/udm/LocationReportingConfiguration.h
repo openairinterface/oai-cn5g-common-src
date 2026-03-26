@@ -31,7 +31,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class LocationReportingConfiguration {
- public:
+public:
   LocationReportingConfiguration();
   virtual ~LocationReportingConfiguration() = default;
 
@@ -45,10 +45,10 @@ class LocationReportingConfiguration {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const LocationReportingConfiguration& rhs) const;
-  bool operator!=(const LocationReportingConfiguration& rhs) const;
+  bool operator==(const LocationReportingConfiguration &rhs) const;
+  bool operator!=(const LocationReportingConfiguration &rhs) const;
 
   /////////////////////////////////////////////
   /// LocationReportingConfiguration members
@@ -69,23 +69,23 @@ class LocationReportingConfiguration {
   ///
   /// </summary>
   LocationAccuracy getAccuracy() const;
-  void setAccuracy(LocationAccuracy const& value);
+  void setAccuracy(LocationAccuracy const &value);
   bool accuracyIsSet() const;
   void unsetAccuracy();
   /// <summary>
   ///
   /// </summary>
   LocationAccuracy getN3gppAccuracy() const;
-  void setN3gppAccuracy(LocationAccuracy const& value);
+  void setN3gppAccuracy(LocationAccuracy const &value);
   bool n3gppAccuracyIsSet() const;
   void unsetN3gppAccuracy();
 
-  friend void to_json(
-      nlohmann::json& j, const LocationReportingConfiguration& o);
-  friend void from_json(
-      const nlohmann::json& j, LocationReportingConfiguration& o);
+  friend void to_json(nlohmann::json &j,
+                      const LocationReportingConfiguration &o);
+  friend void from_json(const nlohmann::json &j,
+                        LocationReportingConfiguration &o);
 
- protected:
+protected:
   bool m_CurrentLocation;
 
   bool m_OneTime;
@@ -97,9 +97,9 @@ class LocationReportingConfiguration {
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* LocationReportingConfiguration_H_ */

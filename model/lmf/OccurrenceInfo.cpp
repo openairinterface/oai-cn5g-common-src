@@ -27,12 +27,12 @@ void OccurrenceInfo::validate() const {
   }
 }
 
-bool OccurrenceInfo::validate(std::stringstream& msg) const {
+bool OccurrenceInfo::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool OccurrenceInfo::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool OccurrenceInfo::validate(std::stringstream &msg,
+                              const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "OccurrenceInfo" : pathPrefix;
@@ -43,35 +43,31 @@ bool OccurrenceInfo::validate(
   return success;
 }
 
-bool OccurrenceInfo::operator==(const OccurrenceInfo& rhs) const {
+bool OccurrenceInfo::operator==(const OccurrenceInfo &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool OccurrenceInfo::operator!=(const OccurrenceInfo& rhs) const {
+bool OccurrenceInfo::operator!=(const OccurrenceInfo &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const OccurrenceInfo& o) {
+void to_json(nlohmann::json &j, const OccurrenceInfo &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, OccurrenceInfo& o) {
+void from_json(const nlohmann::json &j, OccurrenceInfo &o) {
   from_json(j, o.m_value);
 }
 
-OccurrenceInfo_anyOf OccurrenceInfo::getValue() const {
-  return m_value;
-}
+OccurrenceInfo_anyOf OccurrenceInfo::getValue() const { return m_value; }
 
-void OccurrenceInfo::setValue(OccurrenceInfo_anyOf value) {
-  m_value = value;
-}
+void OccurrenceInfo::setValue(OccurrenceInfo_anyOf value) { m_value = value; }
 
-OccurrenceInfo_anyOf::eOccurrenceInfo_anyOf OccurrenceInfo::getEnumValue()
-    const {
+OccurrenceInfo_anyOf::eOccurrenceInfo_anyOf
+OccurrenceInfo::getEnumValue() const {
   return m_value.getValue();
 }
 
@@ -80,4 +76,4 @@ void OccurrenceInfo::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

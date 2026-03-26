@@ -30,7 +30,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class RevokedCause_anyOf {
- public:
+public:
   RevokedCause_anyOf();
   virtual ~RevokedCause_anyOf() = default;
 
@@ -52,10 +52,10 @@ class RevokedCause_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const RevokedCause_anyOf& rhs) const;
-  bool operator!=(const RevokedCause_anyOf& rhs) const;
+  bool operator==(const RevokedCause_anyOf &rhs) const;
+  bool operator!=(const RevokedCause_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// RevokedCause_anyOf members
@@ -63,18 +63,18 @@ class RevokedCause_anyOf {
   RevokedCause_anyOf::eRevokedCause_anyOf getValue() const;
   void setValue(RevokedCause_anyOf::eRevokedCause_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const RevokedCause_anyOf& o);
-  friend void from_json(const nlohmann::json& j, RevokedCause_anyOf& o);
+  friend void to_json(nlohmann::json &j, const RevokedCause_anyOf &o);
+  friend void from_json(const nlohmann::json &j, RevokedCause_anyOf &o);
 
- protected:
+protected:
   RevokedCause_anyOf::eRevokedCause_anyOf m_value =
       RevokedCause_anyOf::eRevokedCause_anyOf::INVALID_VALUE_OPENAPI_GENERATED;
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* RevokedCause_anyOf_H_ */

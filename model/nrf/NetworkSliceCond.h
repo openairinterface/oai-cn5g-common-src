@@ -19,10 +19,10 @@
 #ifndef NetworkSliceCond_H_
 #define NetworkSliceCond_H_
 
-#include <string>
 #include "Snssai.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::nrf {
 
@@ -30,7 +30,7 @@ namespace oai::model::nrf {
 ///
 /// </summary>
 class NetworkSliceCond {
- public:
+public:
   NetworkSliceCond();
   virtual ~NetworkSliceCond();
 
@@ -42,26 +42,26 @@ class NetworkSliceCond {
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::Snssai>& getSnssaiList();
-  void setSnssaiList(std::vector<oai::model::common::Snssai> const& value);
+  std::vector<oai::model::common::Snssai> &getSnssaiList();
+  void setSnssaiList(std::vector<oai::model::common::Snssai> const &value);
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getNsiList();
-  void setNsiList(std::vector<std::string> const& value);
+  std::vector<std::string> &getNsiList();
+  void setNsiList(std::vector<std::string> const &value);
   bool nsiListIsSet() const;
   void unsetNsiList();
 
-  friend void to_json(nlohmann::json& j, const NetworkSliceCond& o);
-  friend void from_json(const nlohmann::json& j, NetworkSliceCond& o);
+  friend void to_json(nlohmann::json &j, const NetworkSliceCond &o);
+  friend void from_json(const nlohmann::json &j, NetworkSliceCond &o);
 
- protected:
+protected:
   std::vector<oai::model::common::Snssai> m_SnssaiList;
 
   std::vector<std::string> m_NsiList;
   bool m_NsiListIsSet;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* NetworkSliceCond_H_ */

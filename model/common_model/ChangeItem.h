@@ -19,10 +19,9 @@
 #ifndef ChangeItem_H_
 #define ChangeItem_H_
 
-#include <nlohmann/json.hpp>
 #include "ChangeType.h"
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::common {
 
@@ -30,7 +29,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class ChangeItem {
- public:
+public:
   ChangeItem();
   virtual ~ChangeItem() = default;
 
@@ -44,16 +43,16 @@ class ChangeItem {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const ChangeItem& rhs) const;
-  bool operator!=(const ChangeItem& rhs) const;
+  bool operator==(const ChangeItem &rhs) const;
+  bool operator!=(const ChangeItem &rhs) const;
 
   /////////////////////////////////////////////
   /// ChangeItem members
@@ -62,38 +61,38 @@ class ChangeItem {
   ///
   /// </summary>
   oai::model::common::ChangeType getOp() const;
-  void setOp(oai::model::common::ChangeType const& value);
+  void setOp(oai::model::common::ChangeType const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getPath() const;
-  void setPath(std::string const& value);
+  void setPath(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getFrom() const;
-  void setFrom(std::string const& value);
+  void setFrom(std::string const &value);
   bool fromIsSet() const;
   void unsetFrom();
   /// <summary>
   ///
   /// </summary>
   nlohmann::json getOrigValue() const;
-  void setOrigValue(nlohmann::json const& value);
+  void setOrigValue(nlohmann::json const &value);
   bool origValueIsSet() const;
   void unsetOrigValue();
   /// <summary>
   ///
   /// </summary>
   nlohmann::json getNewValue() const;
-  void setNewValue(nlohmann::json const& value);
+  void setNewValue(nlohmann::json const &value);
   bool newValueIsSet() const;
   void unsetNewValue();
 
-  friend void to_json(nlohmann::json& j, const ChangeItem& o);
-  friend void from_json(const nlohmann::json& j, ChangeItem& o);
+  friend void to_json(nlohmann::json &j, const ChangeItem &o);
+  friend void from_json(const nlohmann::json &j, ChangeItem &o);
 
- protected:
+protected:
   oai::model::common::ChangeType m_Op;
 
   std::string m_Path;
@@ -106,6 +105,6 @@ class ChangeItem {
   bool m_NewValueIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* ChangeItem_H_ */

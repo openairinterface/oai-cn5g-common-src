@@ -29,18 +29,18 @@ void PointUncertaintyCircle_allOf::validate() const {
   }
 }
 
-bool PointUncertaintyCircle_allOf::validate(std::stringstream& msg) const {
+bool PointUncertaintyCircle_allOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool PointUncertaintyCircle_allOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PointUncertaintyCircle_allOf" : pathPrefix;
 
   /* Uncertainty */ {
-    const float& value                 = m_Uncertainty;
+    const float &value = m_Uncertainty;
     const std::string currentValuePath = _pathPrefix + ".uncertainty";
 
     if (value < static_cast<float>(0)) {
@@ -53,7 +53,7 @@ bool PointUncertaintyCircle_allOf::validate(
 }
 
 bool PointUncertaintyCircle_allOf::operator==(
-    const PointUncertaintyCircle_allOf& rhs) const {
+    const PointUncertaintyCircle_allOf &rhs) const {
   return
 
       (getPoint() == rhs.getPoint()) &&
@@ -64,17 +64,17 @@ bool PointUncertaintyCircle_allOf::operator==(
 }
 
 bool PointUncertaintyCircle_allOf::operator!=(
-    const PointUncertaintyCircle_allOf& rhs) const {
+    const PointUncertaintyCircle_allOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PointUncertaintyCircle_allOf& o) {
-  j                = nlohmann::json();
-  j["point"]       = o.m_Point;
+void to_json(nlohmann::json &j, const PointUncertaintyCircle_allOf &o) {
+  j = nlohmann::json();
+  j["point"] = o.m_Point;
   j["uncertainty"] = o.m_Uncertainty;
 }
 
-void from_json(const nlohmann::json& j, PointUncertaintyCircle_allOf& o) {
+void from_json(const nlohmann::json &j, PointUncertaintyCircle_allOf &o) {
   j.at("point").get_to(o.m_Point);
   j.at("uncertainty").get_to(o.m_Uncertainty);
 }
@@ -84,7 +84,7 @@ PointUncertaintyCircle_allOf::getPoint() const {
   return m_Point;
 }
 void PointUncertaintyCircle_allOf::setPoint(
-    oai::model::lmf::GeographicalCoordinates const& value) {
+    oai::model::lmf::GeographicalCoordinates const &value) {
   m_Point = value;
 }
 float PointUncertaintyCircle_allOf::getUncertainty() const {
@@ -94,4 +94,4 @@ void PointUncertaintyCircle_allOf::setUncertainty(float const value) {
   m_Uncertainty = value;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

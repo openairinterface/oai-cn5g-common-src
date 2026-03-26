@@ -20,8 +20,8 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_QosMonitoringRequest {
-  Ngap_QosMonitoringRequest_ul   = 0,
-  Ngap_QosMonitoringRequest_dl   = 1,
+  Ngap_QosMonitoringRequest_ul = 0,
+  Ngap_QosMonitoringRequest_dl = 1,
   Ngap_QosMonitoringRequest_both = 2,
   /*
    * Enumeration is extensible

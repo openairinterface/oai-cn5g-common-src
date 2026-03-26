@@ -18,24 +18,24 @@ extern "C" {
 namespace oai::ngap {
 
 class UeAssociatedLogicalNgConnectionItem {
- public:
+public:
   UeAssociatedLogicalNgConnectionItem();
   virtual ~UeAssociatedLogicalNgConnectionItem(){};
 
-  bool setAmfUeNgapId(const uint64_t& id);
-  bool getAmfUeNgapId(uint64_t& id) const;
-  void setRanUeNgapId(const uint32_t& id);
-  bool getRanUeNgapId(uint32_t& id) const;
+  bool setAmfUeNgapId(const uint64_t &id);
+  bool getAmfUeNgapId(uint64_t &id) const;
+  void setRanUeNgapId(const uint32_t &id);
+  bool getRanUeNgapId(uint32_t &id) const;
 
-  void get(UeAssociatedLogicalNgConnectionItem& item) const;
+  void get(UeAssociatedLogicalNgConnectionItem &item) const;
 
-  bool encode(Ngap_UE_associatedLogicalNG_connectionItem_t& item) const;
-  bool decode(const Ngap_UE_associatedLogicalNG_connectionItem_t& item);
+  bool encode(Ngap_UE_associatedLogicalNG_connectionItem_t &item) const;
+  bool decode(const Ngap_UE_associatedLogicalNG_connectionItem_t &item);
 
- private:
-  std::optional<AmfUeNgapId> m_AmfUeNgapId;  // Optional
-  std::optional<RanUeNgapId> m_RanUeNgapId;  // Optional
+private:
+  std::optional<AmfUeNgapId> m_AmfUeNgapId; // Optional
+  std::optional<RanUeNgapId> m_RanUeNgapId; // Optional
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

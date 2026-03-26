@@ -31,8 +31,8 @@ asn_TYPE_member_t asn_MBR_Ngap_SecurityIndication_1[] = {
      "integrityProtectionIndication"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_SecurityIndication, confidentialityProtectionIndication),
+     offsetof(struct Ngap_SecurityIndication,
+              confidentialityProtectionIndication),
      (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_ConfidentialityProtectionIndication,
@@ -51,8 +51,8 @@ asn_TYPE_member_t asn_MBR_Ngap_SecurityIndication_1[] = {
      "confidentialityProtectionIndication"},
     {ATF_POINTER,
      2,
-     offsetof(
-         struct Ngap_SecurityIndication, maximumIntegrityProtectedDataRate_UL),
+     offsetof(struct Ngap_SecurityIndication,
+              maximumIntegrityProtectedDataRate_UL),
      (ASN_TAG_CLASS_CONTEXT | (2 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_MaximumIntegrityProtectedDataRate,
@@ -89,7 +89,7 @@ asn_TYPE_member_t asn_MBR_Ngap_SecurityIndication_1[] = {
      0, /* No default value */
      "iE-Extensions"},
 };
-static const int asn_MAP_Ngap_SecurityIndication_oms_1[]            = {2, 3};
+static const int asn_MAP_Ngap_SecurityIndication_oms_1[] = {2, 3};
 static const ber_tlv_tag_t asn_DEF_Ngap_SecurityIndication_tags_1[] = {
     (ASN_TAG_CLASS_UNIVERSAL | (16 << 2))};
 static const asn_TYPE_tag2member_t asn_MAP_Ngap_SecurityIndication_tag2el_1[] =

@@ -27,12 +27,12 @@ void TransportProtocol::validate() const {
   }
 }
 
-bool TransportProtocol::validate(std::stringstream& msg) const {
+bool TransportProtocol::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool TransportProtocol::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool TransportProtocol::validate(std::stringstream &msg,
+                                 const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "TransportProtocol" : pathPrefix;
@@ -43,28 +43,26 @@ bool TransportProtocol::validate(
   return success;
 }
 
-bool TransportProtocol::operator==(const TransportProtocol& rhs) const {
+bool TransportProtocol::operator==(const TransportProtocol &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool TransportProtocol::operator!=(const TransportProtocol& rhs) const {
+bool TransportProtocol::operator!=(const TransportProtocol &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const TransportProtocol& o) {
+void to_json(nlohmann::json &j, const TransportProtocol &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, TransportProtocol& o) {
+void from_json(const nlohmann::json &j, TransportProtocol &o) {
   from_json(j, o.m_value);
 }
 
-TransportProtocol_anyOf TransportProtocol::getValue() const {
-  return m_value;
-}
+TransportProtocol_anyOf TransportProtocol::getValue() const { return m_value; }
 
 void TransportProtocol::setValue(TransportProtocol_anyOf value) {
   m_value = value;
@@ -80,4 +78,4 @@ void TransportProtocol::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

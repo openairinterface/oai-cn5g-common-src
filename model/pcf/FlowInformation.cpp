@@ -19,20 +19,20 @@
 namespace oai::model::pcf {
 
 FlowInformation::FlowInformation() {
-  m_FlowDescription         = "";
-  m_FlowDescriptionIsSet    = false;
+  m_FlowDescription = "";
+  m_FlowDescriptionIsSet = false;
   m_EthFlowDescriptionIsSet = false;
-  m_PackFiltId              = "";
-  m_PackFiltIdIsSet         = false;
-  m_PacketFilterUsage       = false;
-  m_PacketFilterUsageIsSet  = false;
-  m_TosTrafficClass         = "";
-  m_TosTrafficClassIsSet    = false;
-  m_Spi                     = "";
-  m_SpiIsSet                = false;
-  m_FlowLabel               = "";
-  m_FlowLabelIsSet          = false;
-  m_FlowDirectionIsSet      = false;
+  m_PackFiltId = "";
+  m_PackFiltIdIsSet = false;
+  m_PacketFilterUsage = false;
+  m_PacketFilterUsageIsSet = false;
+  m_TosTrafficClass = "";
+  m_TosTrafficClassIsSet = false;
+  m_Spi = "";
+  m_SpiIsSet = false;
+  m_FlowLabel = "";
+  m_FlowLabelIsSet = false;
+  m_FlowDirectionIsSet = false;
 }
 
 void FlowInformation::validate() const {
@@ -42,12 +42,12 @@ void FlowInformation::validate() const {
   }
 }
 
-bool FlowInformation::validate(std::stringstream& msg) const {
+bool FlowInformation::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool FlowInformation::validate(
-    std::stringstream& /* msg */, const std::string& /* pathPrefix */) const {
+bool FlowInformation::validate(std::stringstream & /* msg */,
+                               const std::string & /* pathPrefix */) const {
   bool success = true;
   /*
   const std::string _pathPrefix =
@@ -56,7 +56,7 @@ bool FlowInformation::validate(
   return success;
 }
 
-bool FlowInformation::operator==(const FlowInformation& rhs) const {
+bool FlowInformation::operator==(const FlowInformation &rhs) const {
   return
 
       ((!flowDescriptionIsSet() && !rhs.flowDescriptionIsSet()) ||
@@ -93,25 +93,31 @@ bool FlowInformation::operator==(const FlowInformation& rhs) const {
           ;
 }
 
-bool FlowInformation::operator!=(const FlowInformation& rhs) const {
+bool FlowInformation::operator!=(const FlowInformation &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const FlowInformation& o) {
+void to_json(nlohmann::json &j, const FlowInformation &o) {
   j = nlohmann::json();
-  if (o.flowDescriptionIsSet()) j["flowDescription"] = o.m_FlowDescription;
+  if (o.flowDescriptionIsSet())
+    j["flowDescription"] = o.m_FlowDescription;
   if (o.ethFlowDescriptionIsSet())
     j["ethFlowDescription"] = o.m_EthFlowDescription;
-  if (o.packFiltIdIsSet()) j["packFiltId"] = o.m_PackFiltId;
+  if (o.packFiltIdIsSet())
+    j["packFiltId"] = o.m_PackFiltId;
   if (o.packetFilterUsageIsSet())
     j["packetFilterUsage"] = o.m_PacketFilterUsage;
-  if (o.tosTrafficClassIsSet()) j["tosTrafficClass"] = o.m_TosTrafficClass;
-  if (o.spiIsSet()) j["spi"] = o.m_Spi;
-  if (o.flowLabelIsSet()) j["flowLabel"] = o.m_FlowLabel;
-  if (o.flowDirectionIsSet()) j["flowDirection"] = o.m_FlowDirection;
+  if (o.tosTrafficClassIsSet())
+    j["tosTrafficClass"] = o.m_TosTrafficClass;
+  if (o.spiIsSet())
+    j["spi"] = o.m_Spi;
+  if (o.flowLabelIsSet())
+    j["flowLabel"] = o.m_FlowLabel;
+  if (o.flowDirectionIsSet())
+    j["flowDirection"] = o.m_FlowDirection;
 }
 
-void from_json(const nlohmann::json& j, FlowInformation& o) {
+void from_json(const nlohmann::json &j, FlowInformation &o) {
   if (j.find("flowDescription") != j.end()) {
     j.at("flowDescription").get_to(o.m_FlowDescription);
     o.m_FlowDescriptionIsSet = true;
@@ -149,23 +155,21 @@ void from_json(const nlohmann::json& j, FlowInformation& o) {
 std::string FlowInformation::getFlowDescription() const {
   return m_FlowDescription;
 }
-void FlowInformation::setFlowDescription(std::string const& value) {
-  m_FlowDescription      = value;
+void FlowInformation::setFlowDescription(std::string const &value) {
+  m_FlowDescription = value;
   m_FlowDescriptionIsSet = true;
 }
 bool FlowInformation::flowDescriptionIsSet() const {
   return m_FlowDescriptionIsSet;
 }
-void FlowInformation::unsetFlowDescription() {
-  m_FlowDescriptionIsSet = false;
-}
-oai::model::pcf::EthFlowDescription FlowInformation::getEthFlowDescription()
-    const {
+void FlowInformation::unsetFlowDescription() { m_FlowDescriptionIsSet = false; }
+oai::model::pcf::EthFlowDescription
+FlowInformation::getEthFlowDescription() const {
   return m_EthFlowDescription;
 }
 void FlowInformation::setEthFlowDescription(
-    oai::model::pcf::EthFlowDescription const& value) {
-  m_EthFlowDescription      = value;
+    oai::model::pcf::EthFlowDescription const &value) {
+  m_EthFlowDescription = value;
   m_EthFlowDescriptionIsSet = true;
 }
 bool FlowInformation::ethFlowDescriptionIsSet() const {
@@ -174,24 +178,18 @@ bool FlowInformation::ethFlowDescriptionIsSet() const {
 void FlowInformation::unsetEthFlowDescription() {
   m_EthFlowDescriptionIsSet = false;
 }
-std::string FlowInformation::getPackFiltId() const {
-  return m_PackFiltId;
-}
-void FlowInformation::setPackFiltId(std::string const& value) {
-  m_PackFiltId      = value;
+std::string FlowInformation::getPackFiltId() const { return m_PackFiltId; }
+void FlowInformation::setPackFiltId(std::string const &value) {
+  m_PackFiltId = value;
   m_PackFiltIdIsSet = true;
 }
-bool FlowInformation::packFiltIdIsSet() const {
-  return m_PackFiltIdIsSet;
-}
-void FlowInformation::unsetPackFiltId() {
-  m_PackFiltIdIsSet = false;
-}
+bool FlowInformation::packFiltIdIsSet() const { return m_PackFiltIdIsSet; }
+void FlowInformation::unsetPackFiltId() { m_PackFiltIdIsSet = false; }
 bool FlowInformation::isPacketFilterUsage() const {
   return m_PacketFilterUsage;
 }
 void FlowInformation::setPacketFilterUsage(bool const value) {
-  m_PacketFilterUsage      = value;
+  m_PacketFilterUsage = value;
   m_PacketFilterUsageIsSet = true;
 }
 bool FlowInformation::packetFilterUsageIsSet() const {
@@ -203,55 +201,39 @@ void FlowInformation::unsetPacketFilterUsage() {
 std::string FlowInformation::getTosTrafficClass() const {
   return m_TosTrafficClass;
 }
-void FlowInformation::setTosTrafficClass(std::string const& value) {
-  m_TosTrafficClass      = value;
+void FlowInformation::setTosTrafficClass(std::string const &value) {
+  m_TosTrafficClass = value;
   m_TosTrafficClassIsSet = true;
 }
 bool FlowInformation::tosTrafficClassIsSet() const {
   return m_TosTrafficClassIsSet;
 }
-void FlowInformation::unsetTosTrafficClass() {
-  m_TosTrafficClassIsSet = false;
-}
-std::string FlowInformation::getSpi() const {
-  return m_Spi;
-}
-void FlowInformation::setSpi(std::string const& value) {
-  m_Spi      = value;
+void FlowInformation::unsetTosTrafficClass() { m_TosTrafficClassIsSet = false; }
+std::string FlowInformation::getSpi() const { return m_Spi; }
+void FlowInformation::setSpi(std::string const &value) {
+  m_Spi = value;
   m_SpiIsSet = true;
 }
-bool FlowInformation::spiIsSet() const {
-  return m_SpiIsSet;
-}
-void FlowInformation::unsetSpi() {
-  m_SpiIsSet = false;
-}
-std::string FlowInformation::getFlowLabel() const {
-  return m_FlowLabel;
-}
-void FlowInformation::setFlowLabel(std::string const& value) {
-  m_FlowLabel      = value;
+bool FlowInformation::spiIsSet() const { return m_SpiIsSet; }
+void FlowInformation::unsetSpi() { m_SpiIsSet = false; }
+std::string FlowInformation::getFlowLabel() const { return m_FlowLabel; }
+void FlowInformation::setFlowLabel(std::string const &value) {
+  m_FlowLabel = value;
   m_FlowLabelIsSet = true;
 }
-bool FlowInformation::flowLabelIsSet() const {
-  return m_FlowLabelIsSet;
-}
-void FlowInformation::unsetFlowLabel() {
-  m_FlowLabelIsSet = false;
-}
+bool FlowInformation::flowLabelIsSet() const { return m_FlowLabelIsSet; }
+void FlowInformation::unsetFlowLabel() { m_FlowLabelIsSet = false; }
 oai::model::pcf::FlowDirectionRm FlowInformation::getFlowDirection() const {
   return m_FlowDirection;
 }
 void FlowInformation::setFlowDirection(
-    oai::model::pcf::FlowDirectionRm const& value) {
-  m_FlowDirection      = value;
+    oai::model::pcf::FlowDirectionRm const &value) {
+  m_FlowDirection = value;
   m_FlowDirectionIsSet = true;
 }
 bool FlowInformation::flowDirectionIsSet() const {
   return m_FlowDirectionIsSet;
 }
-void FlowInformation::unsetFlowDirection() {
-  m_FlowDirectionIsSet = false;
-}
+void FlowInformation::unsetFlowDirection() { m_FlowDirectionIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

@@ -19,14 +19,14 @@
 namespace oai::model::pcf {
 
 TsnQosContainer::TsnQosContainer() {
-  m_MaxTscBurstSize      = 0;
+  m_MaxTscBurstSize = 0;
   m_MaxTscBurstSizeIsSet = false;
-  m_TscPackDelay         = 0;
-  m_TscPackDelayIsSet    = false;
-  m_MaxPer               = "";
-  m_MaxPerIsSet          = false;
-  m_TscPrioLevel         = 0;
-  m_TscPrioLevelIsSet    = false;
+  m_TscPackDelay = 0;
+  m_TscPackDelayIsSet = false;
+  m_MaxPer = "";
+  m_MaxPerIsSet = false;
+  m_TscPrioLevel = 0;
+  m_TscPrioLevelIsSet = false;
 }
 
 void TsnQosContainer::validate() const {
@@ -36,18 +36,18 @@ void TsnQosContainer::validate() const {
   }
 }
 
-bool TsnQosContainer::validate(std::stringstream& msg) const {
+bool TsnQosContainer::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool TsnQosContainer::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool TsnQosContainer::validate(std::stringstream &msg,
+                               const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "TsnQosContainer" : pathPrefix;
 
   if (maxTscBurstSizeIsSet()) {
-    const int32_t& value               = m_MaxTscBurstSize;
+    const int32_t &value = m_MaxTscBurstSize;
     const std::string currentValuePath = _pathPrefix + ".maxTscBurstSize";
 
     if (value < 4096) {
@@ -61,7 +61,7 @@ bool TsnQosContainer::validate(
   }
 
   if (tscPackDelayIsSet()) {
-    const int32_t& value               = m_TscPackDelay;
+    const int32_t &value = m_TscPackDelay;
     const std::string currentValuePath = _pathPrefix + ".tscPackDelay";
 
     if (value < 1) {
@@ -71,12 +71,12 @@ bool TsnQosContainer::validate(
   }
 
   if (maxPerIsSet()) {
-    const std::string& value           = m_MaxPer;
+    const std::string &value = m_MaxPer;
     const std::string currentValuePath = _pathPrefix + ".maxPer";
   }
 
   if (tscPrioLevelIsSet()) {
-    const int32_t& value               = m_TscPrioLevel;
+    const int32_t &value = m_TscPrioLevel;
     const std::string currentValuePath = _pathPrefix + ".tscPrioLevel";
 
     if (value < 1) {
@@ -92,7 +92,7 @@ bool TsnQosContainer::validate(
   return success;
 }
 
-bool TsnQosContainer::operator==(const TsnQosContainer& rhs) const {
+bool TsnQosContainer::operator==(const TsnQosContainer &rhs) const {
   return
 
       ((!maxTscBurstSizeIsSet() && !rhs.maxTscBurstSizeIsSet()) ||
@@ -114,19 +114,23 @@ bool TsnQosContainer::operator==(const TsnQosContainer& rhs) const {
           ;
 }
 
-bool TsnQosContainer::operator!=(const TsnQosContainer& rhs) const {
+bool TsnQosContainer::operator!=(const TsnQosContainer &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const TsnQosContainer& o) {
+void to_json(nlohmann::json &j, const TsnQosContainer &o) {
   j = nlohmann::json::object();
-  if (o.maxTscBurstSizeIsSet()) j["maxTscBurstSize"] = o.m_MaxTscBurstSize;
-  if (o.tscPackDelayIsSet()) j["tscPackDelay"] = o.m_TscPackDelay;
-  if (o.maxPerIsSet()) j["maxPer"] = o.m_MaxPer;
-  if (o.tscPrioLevelIsSet()) j["tscPrioLevel"] = o.m_TscPrioLevel;
+  if (o.maxTscBurstSizeIsSet())
+    j["maxTscBurstSize"] = o.m_MaxTscBurstSize;
+  if (o.tscPackDelayIsSet())
+    j["tscPackDelay"] = o.m_TscPackDelay;
+  if (o.maxPerIsSet())
+    j["maxPer"] = o.m_MaxPer;
+  if (o.tscPrioLevelIsSet())
+    j["tscPrioLevel"] = o.m_TscPrioLevel;
 }
 
-void from_json(const nlohmann::json& j, TsnQosContainer& o) {
+void from_json(const nlohmann::json &j, TsnQosContainer &o) {
   if (j.find("maxTscBurstSize") != j.end()) {
     j.at("maxTscBurstSize").get_to(o.m_MaxTscBurstSize);
     o.m_MaxTscBurstSizeIsSet = true;
@@ -149,53 +153,33 @@ int32_t TsnQosContainer::getMaxTscBurstSize() const {
   return m_MaxTscBurstSize;
 }
 void TsnQosContainer::setMaxTscBurstSize(int32_t const value) {
-  m_MaxTscBurstSize      = value;
+  m_MaxTscBurstSize = value;
   m_MaxTscBurstSizeIsSet = true;
 }
 bool TsnQosContainer::maxTscBurstSizeIsSet() const {
   return m_MaxTscBurstSizeIsSet;
 }
-void TsnQosContainer::unsetMaxTscBurstSize() {
-  m_MaxTscBurstSizeIsSet = false;
-}
-int32_t TsnQosContainer::getTscPackDelay() const {
-  return m_TscPackDelay;
-}
+void TsnQosContainer::unsetMaxTscBurstSize() { m_MaxTscBurstSizeIsSet = false; }
+int32_t TsnQosContainer::getTscPackDelay() const { return m_TscPackDelay; }
 void TsnQosContainer::setTscPackDelay(int32_t const value) {
-  m_TscPackDelay      = value;
+  m_TscPackDelay = value;
   m_TscPackDelayIsSet = true;
 }
-bool TsnQosContainer::tscPackDelayIsSet() const {
-  return m_TscPackDelayIsSet;
-}
-void TsnQosContainer::unsetTscPackDelay() {
-  m_TscPackDelayIsSet = false;
-}
-std::string TsnQosContainer::getMaxPer() const {
-  return m_MaxPer;
-}
-void TsnQosContainer::setMaxPer(std::string const& value) {
-  m_MaxPer      = value;
+bool TsnQosContainer::tscPackDelayIsSet() const { return m_TscPackDelayIsSet; }
+void TsnQosContainer::unsetTscPackDelay() { m_TscPackDelayIsSet = false; }
+std::string TsnQosContainer::getMaxPer() const { return m_MaxPer; }
+void TsnQosContainer::setMaxPer(std::string const &value) {
+  m_MaxPer = value;
   m_MaxPerIsSet = true;
 }
-bool TsnQosContainer::maxPerIsSet() const {
-  return m_MaxPerIsSet;
-}
-void TsnQosContainer::unsetMaxPer() {
-  m_MaxPerIsSet = false;
-}
-int32_t TsnQosContainer::getTscPrioLevel() const {
-  return m_TscPrioLevel;
-}
+bool TsnQosContainer::maxPerIsSet() const { return m_MaxPerIsSet; }
+void TsnQosContainer::unsetMaxPer() { m_MaxPerIsSet = false; }
+int32_t TsnQosContainer::getTscPrioLevel() const { return m_TscPrioLevel; }
 void TsnQosContainer::setTscPrioLevel(int32_t const value) {
-  m_TscPrioLevel      = value;
+  m_TscPrioLevel = value;
   m_TscPrioLevelIsSet = true;
 }
-bool TsnQosContainer::tscPrioLevelIsSet() const {
-  return m_TscPrioLevelIsSet;
-}
-void TsnQosContainer::unsetTscPrioLevel() {
-  m_TscPrioLevelIsSet = false;
-}
+bool TsnQosContainer::tscPrioLevelIsSet() const { return m_TscPrioLevelIsSet; }
+void TsnQosContainer::unsetTscPrioLevel() { m_TscPrioLevelIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

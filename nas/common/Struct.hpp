@@ -29,12 +29,12 @@ typedef struct SNSSAI_s {
   int32_t mHplmnSd;
   uint8_t length;
 
-  SNSSAI_s& operator=(const struct SNSSAI_s& s) {
-    sst       = s.sst;
-    sd        = s.sd;
+  SNSSAI_s &operator=(const struct SNSSAI_s &s) {
+    sst = s.sst;
+    sd = s.sd;
     mHplmnSst = s.mHplmnSst;
-    mHplmnSd  = s.mHplmnSd;
-    length    = s.length;
+    mHplmnSd = s.mHplmnSd;
+    length = s.length;
     return *this;
   }
 
@@ -112,10 +112,10 @@ typedef struct _5G_GUTI_s {
 // IMEI or IMEISV
 typedef struct IMEI_or_IMEISV_s {
   uint8_t type_of_identity_ : 3;
-  bool odd_even_indic;   // for imei, even means bits 5 to 8 of last octet is
-                         // "1111", for imeisv, bits 5 to 8 of last octet is
-                         // "1111"
-  std::string identity;  // "46011000001": without 1111
+  bool odd_even_indic;  // for imei, even means bits 5 to 8 of last octet is
+                        // "1111", for imeisv, bits 5 to 8 of last octet is
+                        // "1111"
+  std::string identity; // "46011000001": without 1111
 } IMEI_IMEISV_t;
 
 // TODO:
@@ -128,11 +128,11 @@ typedef struct SUCI_imsi_s {
   uint8_t supi_format : 3;
   std::string mcc;
   std::string mnc;
-  std::optional<std::string> routing_indicator;  //"1234"
-  uint8_t protection_scheme_id : 4;              // 0000
-  uint8_t home_network_pki;                      // 00000000
-  std::string msin;  // two types of coding; BCD & hexadecimal
-} SUCI_imsi_t;       // SUPI format "IMSI"
+  std::optional<std::string> routing_indicator; //"1234"
+  uint8_t protection_scheme_id : 4;             // 0000
+  uint8_t home_network_pki;                     // 00000000
+  std::string msin; // two types of coding; BCD & hexadecimal
+} SUCI_imsi_t;      // SUPI format "IMSI"
 
 // TODO: SUCI and SUPI format "Network specific identifier"
 
@@ -170,6 +170,6 @@ typedef struct {
 
 // QoS Flow Description-related IEs
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

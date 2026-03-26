@@ -19,9 +19,9 @@
 #ifndef AfSfcRequirement_H_
 #define AfSfcRequirement_H_
 
-#include <string>
 #include "SpatialValidityRm.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::pcf {
 
@@ -29,7 +29,7 @@ namespace oai::model::pcf {
 /// Describes AF requirements on steering traffic to N6-LAN.
 /// </summary>
 class AfSfcRequirement {
- public:
+public:
   AfSfcRequirement();
   virtual ~AfSfcRequirement() = default;
 
@@ -43,16 +43,16 @@ class AfSfcRequirement {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const AfSfcRequirement& rhs) const;
-  bool operator!=(const AfSfcRequirement& rhs) const;
+  bool operator==(const AfSfcRequirement &rhs) const;
+  bool operator!=(const AfSfcRequirement &rhs) const;
 
   /////////////////////////////////////////////
   /// AfSfcRequirement members
@@ -61,21 +61,21 @@ class AfSfcRequirement {
   /// Reference to a pre-configured SFC for downlink traffic.
   /// </summary>
   std::string getSfcIdDl() const;
-  void setSfcIdDl(std::string const& value);
+  void setSfcIdDl(std::string const &value);
   bool sfcIdDlIsSet() const;
   void unsetSfcIdDl();
   /// <summary>
   /// Reference to a pre-configured SFC for uplink traffic.
   /// </summary>
   std::string getSfcIdUl() const;
-  void setSfcIdUl(std::string const& value);
+  void setSfcIdUl(std::string const &value);
   bool sfcIdUlIsSet() const;
   void unsetSfcIdUl();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::SpatialValidityRm getSpVal() const;
-  void setSpVal(oai::model::pcf::SpatialValidityRm const& value);
+  void setSpVal(oai::model::pcf::SpatialValidityRm const &value);
   bool spValIsSet() const;
   void unsetSpVal();
   /// <summary>
@@ -83,14 +83,14 @@ class AfSfcRequirement {
   /// traffic to SFC.
   /// </summary>
   std::string getMetadata() const;
-  void setMetadata(std::string const& value);
+  void setMetadata(std::string const &value);
   bool metadataIsSet() const;
   void unsetMetadata();
 
-  friend void to_json(nlohmann::json& j, const AfSfcRequirement& o);
-  friend void from_json(const nlohmann::json& j, AfSfcRequirement& o);
+  friend void to_json(nlohmann::json &j, const AfSfcRequirement &o);
+  friend void from_json(const nlohmann::json &j, AfSfcRequirement &o);
 
- protected:
+protected:
   std::string m_SfcIdDl;
   bool m_SfcIdDlIsSet;
   std::string m_SfcIdUl;
@@ -101,6 +101,6 @@ class AfSfcRequirement {
   bool m_MetadataIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* AfSfcRequirement_H_ */

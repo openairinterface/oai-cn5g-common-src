@@ -22,8 +22,8 @@
 #ifndef MonitoringEvent_H_
 #define MonitoringEvent_H_
 
-#include "RevokedCause.h"
 #include "EventType.h"
+#include "RevokedCause.h"
 #include <nlohmann/json.hpp>
 
 namespace oai::model::udm {
@@ -32,7 +32,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class MonitoringEvent {
- public:
+public:
   MonitoringEvent();
   virtual ~MonitoringEvent() = default;
 
@@ -46,10 +46,10 @@ class MonitoringEvent {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const MonitoringEvent& rhs) const;
-  bool operator!=(const MonitoringEvent& rhs) const;
+  bool operator==(const MonitoringEvent &rhs) const;
+  bool operator!=(const MonitoringEvent &rhs) const;
 
   /////////////////////////////////////////////
   /// MonitoringEvent members
@@ -58,19 +58,19 @@ class MonitoringEvent {
   ///
   /// </summary>
   EventType getEventType() const;
-  void setEventType(EventType const& value);
+  void setEventType(EventType const &value);
   /// <summary>
   ///
   /// </summary>
   RevokedCause getRevokedCause() const;
-  void setRevokedCause(RevokedCause const& value);
+  void setRevokedCause(RevokedCause const &value);
   bool revokedCauseIsSet() const;
   void unsetRevokedCause();
 
-  friend void to_json(nlohmann::json& j, const MonitoringEvent& o);
-  friend void from_json(const nlohmann::json& j, MonitoringEvent& o);
+  friend void to_json(nlohmann::json &j, const MonitoringEvent &o);
+  friend void from_json(const nlohmann::json &j, MonitoringEvent &o);
 
- protected:
+protected:
   EventType m_EventType;
 
   RevokedCause m_RevokedCause;
@@ -78,9 +78,9 @@ class MonitoringEvent {
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* MonitoringEvent_H_ */

@@ -32,7 +32,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class CagInfo {
- public:
+public:
   CagInfo();
   virtual ~CagInfo();
 
@@ -44,8 +44,8 @@ class CagInfo {
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getAllowedCagList();
-  void setAllowedCagList(std::vector<std::string> const& value);
+  std::vector<std::string> &getAllowedCagList();
+  void setAllowedCagList(std::vector<std::string> const &value);
   /// <summary>
   ///
   /// </summary>
@@ -54,16 +54,16 @@ class CagInfo {
   bool cagOnlyIndicatorIsSet() const;
   void unsetCagOnlyIndicator();
 
-  friend void to_json(nlohmann::json& j, const CagInfo& o);
-  friend void from_json(const nlohmann::json& j, CagInfo& o);
+  friend void to_json(nlohmann::json &j, const CagInfo &o);
+  friend void from_json(const nlohmann::json &j, CagInfo &o);
 
- protected:
+protected:
   std::vector<std::string> m_AllowedCagList;
 
   bool m_CagOnlyIndicator;
   bool m_CagOnlyIndicatorIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* CagInfo_H_ */

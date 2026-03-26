@@ -21,7 +21,7 @@ extern "C" {
 /* Dependencies */
 typedef enum Ngap_OverloadAction {
   Ngap_OverloadAction_reject_non_emergency_mo_dt = 0,
-  Ngap_OverloadAction_reject_rrc_cr_signalling   = 1,
+  Ngap_OverloadAction_reject_rrc_cr_signalling = 1,
   Ngap_OverloadAction_permit_emergency_sessions_and_mobile_terminated_services_only =
       2,
   Ngap_OverloadAction_permit_high_priority_sessions_and_mobile_terminated_services_only =

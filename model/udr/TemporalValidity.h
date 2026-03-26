@@ -31,7 +31,7 @@ namespace oai::udr::model {
 /// Indicates the time interval(s) during which the AF request is to be applied
 /// </summary>
 class TemporalValidity {
- public:
+public:
   TemporalValidity();
   virtual ~TemporalValidity();
 
@@ -44,27 +44,27 @@ class TemporalValidity {
   ///
   /// </summary>
   std::string getStartTime() const;
-  void setStartTime(std::string const& value);
+  void setStartTime(std::string const &value);
   bool startTimeIsSet() const;
   void unsetStartTime();
   /// <summary>
   ///
   /// </summary>
   std::string getStopTime() const;
-  void setStopTime(std::string const& value);
+  void setStopTime(std::string const &value);
   bool stopTimeIsSet() const;
   void unsetStopTime();
 
-  friend void to_json(nlohmann::json& j, const TemporalValidity& o);
-  friend void from_json(const nlohmann::json& j, TemporalValidity& o);
+  friend void to_json(nlohmann::json &j, const TemporalValidity &o);
+  friend void from_json(const nlohmann::json &j, TemporalValidity &o);
 
- protected:
+protected:
   std::string m_StartTime;
   bool m_StartTimeIsSet;
   std::string m_StopTime;
   bool m_StopTimeIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* TemporalValidity_H_ */

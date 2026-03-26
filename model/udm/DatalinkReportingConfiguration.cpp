@@ -25,9 +25,9 @@ using namespace oai::model::common;
 
 DatalinkReportingConfiguration::DatalinkReportingConfiguration() {
   m_DddTrafficDesIsSet = false;
-  m_Dnn                = "";
-  m_DnnIsSet           = false;
-  m_SliceIsSet         = false;
+  m_Dnn = "";
+  m_DnnIsSet = false;
+  m_SliceIsSet = false;
   m_DddStatusListIsSet = false;
 }
 
@@ -38,28 +38,28 @@ void DatalinkReportingConfiguration::validate() const {
   }
 }
 
-bool DatalinkReportingConfiguration::validate(std::stringstream& msg) const {
+bool DatalinkReportingConfiguration::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool DatalinkReportingConfiguration::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "DatalinkReportingConfiguration" : pathPrefix;
 
   if (dddTrafficDesIsSet()) {
-    const std::vector<DddTrafficDescriptor>& value = m_DddTrafficDes;
+    const std::vector<DddTrafficDescriptor> &value = m_DddTrafficDes;
     const std::string currentValuePath = _pathPrefix + ".dddTrafficDes";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const DddTrafficDescriptor& value : value) {
+      int i = 0;
+      for (const DddTrafficDescriptor &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -72,17 +72,17 @@ bool DatalinkReportingConfiguration::validate(
   }
 
   if (dddStatusListIsSet()) {
-    const std::vector<DlDataDeliveryStatus>& value = m_DddStatusList;
+    const std::vector<DlDataDeliveryStatus> &value = m_DddStatusList;
     const std::string currentValuePath = _pathPrefix + ".dddStatusList";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const DlDataDeliveryStatus& value : value) {
+      int i = 0;
+      for (const DlDataDeliveryStatus &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -98,7 +98,7 @@ bool DatalinkReportingConfiguration::validate(
 }
 
 bool DatalinkReportingConfiguration::operator==(
-    const DatalinkReportingConfiguration& rhs) const {
+    const DatalinkReportingConfiguration &rhs) const {
   return true;
   // TODO
 
@@ -123,21 +123,23 @@ bool DatalinkReportingConfiguration::operator==(
 }
 
 bool DatalinkReportingConfiguration::operator!=(
-    const DatalinkReportingConfiguration& rhs) const {
+    const DatalinkReportingConfiguration &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const DatalinkReportingConfiguration& o) {
+void to_json(nlohmann::json &j, const DatalinkReportingConfiguration &o) {
   j = nlohmann::json();
   if (o.dddTrafficDesIsSet() || !o.m_DddTrafficDes.empty())
     j["dddTrafficDes"] = o.m_DddTrafficDes;
-  if (o.dnnIsSet()) j["dnn"] = o.m_Dnn;
-  if (o.sliceIsSet()) j["slice"] = o.m_Slice;
+  if (o.dnnIsSet())
+    j["dnn"] = o.m_Dnn;
+  if (o.sliceIsSet())
+    j["slice"] = o.m_Slice;
   if (o.dddStatusListIsSet() || !o.m_DddStatusList.empty())
     j["dddStatusList"] = o.m_DddStatusList;
 }
 
-void from_json(const nlohmann::json& j, DatalinkReportingConfiguration& o) {
+void from_json(const nlohmann::json &j, DatalinkReportingConfiguration &o) {
   if (j.find("dddTrafficDes") != j.end()) {
     j.at("dddTrafficDes").get_to(o.m_DddTrafficDes);
     o.m_DddTrafficDesIsSet = true;
@@ -161,8 +163,8 @@ DatalinkReportingConfiguration::getDddTrafficDes() const {
   return m_DddTrafficDes;
 }
 void DatalinkReportingConfiguration::setDddTrafficDes(
-    std::vector<DddTrafficDescriptor> const& value) {
-  m_DddTrafficDes      = value;
+    std::vector<DddTrafficDescriptor> const &value) {
+  m_DddTrafficDes = value;
   m_DddTrafficDesIsSet = true;
 }
 bool DatalinkReportingConfiguration::dddTrafficDesIsSet() const {
@@ -171,39 +173,27 @@ bool DatalinkReportingConfiguration::dddTrafficDesIsSet() const {
 void DatalinkReportingConfiguration::unsetDddTrafficDes() {
   m_DddTrafficDesIsSet = false;
 }
-std::string DatalinkReportingConfiguration::getDnn() const {
-  return m_Dnn;
-}
-void DatalinkReportingConfiguration::setDnn(std::string const& value) {
-  m_Dnn      = value;
+std::string DatalinkReportingConfiguration::getDnn() const { return m_Dnn; }
+void DatalinkReportingConfiguration::setDnn(std::string const &value) {
+  m_Dnn = value;
   m_DnnIsSet = true;
 }
-bool DatalinkReportingConfiguration::dnnIsSet() const {
-  return m_DnnIsSet;
-}
-void DatalinkReportingConfiguration::unsetDnn() {
-  m_DnnIsSet = false;
-}
-Snssai DatalinkReportingConfiguration::getSlice() const {
-  return m_Slice;
-}
-void DatalinkReportingConfiguration::setSlice(Snssai const& value) {
-  m_Slice      = value;
+bool DatalinkReportingConfiguration::dnnIsSet() const { return m_DnnIsSet; }
+void DatalinkReportingConfiguration::unsetDnn() { m_DnnIsSet = false; }
+Snssai DatalinkReportingConfiguration::getSlice() const { return m_Slice; }
+void DatalinkReportingConfiguration::setSlice(Snssai const &value) {
+  m_Slice = value;
   m_SliceIsSet = true;
 }
-bool DatalinkReportingConfiguration::sliceIsSet() const {
-  return m_SliceIsSet;
-}
-void DatalinkReportingConfiguration::unsetSlice() {
-  m_SliceIsSet = false;
-}
+bool DatalinkReportingConfiguration::sliceIsSet() const { return m_SliceIsSet; }
+void DatalinkReportingConfiguration::unsetSlice() { m_SliceIsSet = false; }
 std::vector<DlDataDeliveryStatus>
 DatalinkReportingConfiguration::getDddStatusList() const {
   return m_DddStatusList;
 }
 void DatalinkReportingConfiguration::setDddStatusList(
-    std::vector<DlDataDeliveryStatus> const& value) {
-  m_DddStatusList      = value;
+    std::vector<DlDataDeliveryStatus> const &value) {
+  m_DddStatusList = value;
   m_DddStatusListIsSet = true;
 }
 bool DatalinkReportingConfiguration::dddStatusListIsSet() const {
@@ -213,4 +203,4 @@ void DatalinkReportingConfiguration::unsetDddStatusList() {
   m_DddStatusListIsSet = false;
 }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

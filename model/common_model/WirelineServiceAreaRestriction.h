@@ -21,8 +21,8 @@
 
 #include "RestrictionType.h"
 #include "WirelineArea.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::common {
 
@@ -30,7 +30,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class WirelineServiceAreaRestriction {
- public:
+public:
   WirelineServiceAreaRestriction();
   virtual ~WirelineServiceAreaRestriction() = default;
 
@@ -44,16 +44,16 @@ class WirelineServiceAreaRestriction {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const WirelineServiceAreaRestriction& rhs) const;
-  bool operator!=(const WirelineServiceAreaRestriction& rhs) const;
+  bool operator==(const WirelineServiceAreaRestriction &rhs) const;
+  bool operator!=(const WirelineServiceAreaRestriction &rhs) const;
 
   /////////////////////////////////////////////
   /// WirelineServiceAreaRestriction members
@@ -62,29 +62,29 @@ class WirelineServiceAreaRestriction {
   ///
   /// </summary>
   oai::model::common::RestrictionType getRestrictionType() const;
-  void setRestrictionType(oai::model::common::RestrictionType const& value);
+  void setRestrictionType(oai::model::common::RestrictionType const &value);
   bool restrictionTypeIsSet() const;
   void unsetRestrictionType();
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::common::WirelineArea> getAreas() const;
-  void setAreas(std::vector<oai::model::common::WirelineArea> const& value);
+  void setAreas(std::vector<oai::model::common::WirelineArea> const &value);
   bool areasIsSet() const;
   void unsetAreas();
 
-  friend void to_json(
-      nlohmann::json& j, const WirelineServiceAreaRestriction& o);
-  friend void from_json(
-      const nlohmann::json& j, WirelineServiceAreaRestriction& o);
+  friend void to_json(nlohmann::json &j,
+                      const WirelineServiceAreaRestriction &o);
+  friend void from_json(const nlohmann::json &j,
+                        WirelineServiceAreaRestriction &o);
 
- protected:
+protected:
   oai::model::common::RestrictionType m_RestrictionType;
   bool m_RestrictionTypeIsSet;
   std::vector<oai::model::common::WirelineArea> m_Areas;
   bool m_AreasIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* WirelineServiceAreaRestriction_H_ */

@@ -23,10 +23,10 @@ void UeContextTransferStatus::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const UeContextTransferStatus& o) {
+void to_json(nlohmann::json &j, const UeContextTransferStatus &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, UeContextTransferStatus& o) {}
+void from_json(const nlohmann::json &j, UeContextTransferStatus &o) {}
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

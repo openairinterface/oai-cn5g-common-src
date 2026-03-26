@@ -19,38 +19,38 @@
 namespace oai::udr::model {
 
 AccessAndMobilityData::AccessAndMobilityData() {
-  m_LocationIsSet             = false;
-  m_LocationTs                = "";
-  m_LocationTsIsSet           = false;
-  m_TimeZone                  = "";
-  m_TimeZoneIsSet             = false;
-  m_TimeZoneTs                = "";
-  m_TimeZoneTsIsSet           = false;
-  m_AccessTypeIsSet           = false;
-  m_RegStatesIsSet            = false;
-  m_RegStatesTs               = "";
-  m_RegStatesTsIsSet          = false;
-  m_ConnStatesIsSet           = false;
-  m_ConnStatesTs              = "";
-  m_ConnStatesTsIsSet         = false;
-  m_ReachabilityStatusIsSet   = false;
-  m_ReachabilityStatusTs      = "";
+  m_LocationIsSet = false;
+  m_LocationTs = "";
+  m_LocationTsIsSet = false;
+  m_TimeZone = "";
+  m_TimeZoneIsSet = false;
+  m_TimeZoneTs = "";
+  m_TimeZoneTsIsSet = false;
+  m_AccessTypeIsSet = false;
+  m_RegStatesIsSet = false;
+  m_RegStatesTs = "";
+  m_RegStatesTsIsSet = false;
+  m_ConnStatesIsSet = false;
+  m_ConnStatesTs = "";
+  m_ConnStatesTsIsSet = false;
+  m_ReachabilityStatusIsSet = false;
+  m_ReachabilityStatusTs = "";
   m_ReachabilityStatusTsIsSet = false;
-  m_SmsOverNasStatusIsSet     = false;
-  m_SmsOverNasStatusTs        = "";
-  m_SmsOverNasStatusTsIsSet   = false;
-  m_RoamingStatus             = false;
-  m_RoamingStatusIsSet        = false;
-  m_RoamingStatusTs           = "";
-  m_RoamingStatusTsIsSet      = false;
-  m_CurrentPlmnIsSet          = false;
-  m_CurrentPlmnTs             = "";
-  m_CurrentPlmnTsIsSet        = false;
-  m_RatTypeIsSet              = false;
-  m_RatTypesTs                = "";
-  m_RatTypesTsIsSet           = false;
-  m_SuppFeat                  = "";
-  m_SuppFeatIsSet             = false;
+  m_SmsOverNasStatusIsSet = false;
+  m_SmsOverNasStatusTs = "";
+  m_SmsOverNasStatusTsIsSet = false;
+  m_RoamingStatus = false;
+  m_RoamingStatusIsSet = false;
+  m_RoamingStatusTs = "";
+  m_RoamingStatusTsIsSet = false;
+  m_CurrentPlmnIsSet = false;
+  m_CurrentPlmnTs = "";
+  m_CurrentPlmnTsIsSet = false;
+  m_RatTypeIsSet = false;
+  m_RatTypesTs = "";
+  m_RatTypesTsIsSet = false;
+  m_SuppFeat = "";
+  m_SuppFeatIsSet = false;
 }
 
 AccessAndMobilityData::~AccessAndMobilityData() {}
@@ -59,36 +59,51 @@ void AccessAndMobilityData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const AccessAndMobilityData& o) {
+void to_json(nlohmann::json &j, const AccessAndMobilityData &o) {
   j = nlohmann::json();
-  if (o.locationIsSet()) j["location"] = o.m_Location;
-  if (o.locationTsIsSet()) j["locationTs"] = o.m_LocationTs;
-  if (o.timeZoneIsSet()) j["timeZone"] = o.m_TimeZone;
-  if (o.timeZoneTsIsSet()) j["timeZoneTs"] = o.m_TimeZoneTs;
-  if (o.accessTypeIsSet()) j["accessType"] = o.m_AccessType;
+  if (o.locationIsSet())
+    j["location"] = o.m_Location;
+  if (o.locationTsIsSet())
+    j["locationTs"] = o.m_LocationTs;
+  if (o.timeZoneIsSet())
+    j["timeZone"] = o.m_TimeZone;
+  if (o.timeZoneTsIsSet())
+    j["timeZoneTs"] = o.m_TimeZoneTs;
+  if (o.accessTypeIsSet())
+    j["accessType"] = o.m_AccessType;
   if (o.regStatesIsSet() || !o.m_RegStates.empty())
     j["regStates"] = o.m_RegStates;
-  if (o.regStatesTsIsSet()) j["regStatesTs"] = o.m_RegStatesTs;
+  if (o.regStatesTsIsSet())
+    j["regStatesTs"] = o.m_RegStatesTs;
   if (o.connStatesIsSet() || !o.m_ConnStates.empty())
     j["connStates"] = o.m_ConnStates;
-  if (o.connStatesTsIsSet()) j["connStatesTs"] = o.m_ConnStatesTs;
+  if (o.connStatesTsIsSet())
+    j["connStatesTs"] = o.m_ConnStatesTs;
   if (o.reachabilityStatusIsSet())
     j["reachabilityStatus"] = o.m_ReachabilityStatus;
   if (o.reachabilityStatusTsIsSet())
     j["reachabilityStatusTs"] = o.m_ReachabilityStatusTs;
-  if (o.smsOverNasStatusIsSet()) j["smsOverNasStatus"] = o.m_SmsOverNasStatus;
+  if (o.smsOverNasStatusIsSet())
+    j["smsOverNasStatus"] = o.m_SmsOverNasStatus;
   if (o.smsOverNasStatusTsIsSet())
     j["smsOverNasStatusTs"] = o.m_SmsOverNasStatusTs;
-  if (o.roamingStatusIsSet()) j["roamingStatus"] = o.m_RoamingStatus;
-  if (o.roamingStatusTsIsSet()) j["roamingStatusTs"] = o.m_RoamingStatusTs;
-  if (o.currentPlmnIsSet()) j["currentPlmn"] = o.m_CurrentPlmn;
-  if (o.currentPlmnTsIsSet()) j["currentPlmnTs"] = o.m_CurrentPlmnTs;
-  if (o.ratTypeIsSet() || !o.m_RatType.empty()) j["ratType"] = o.m_RatType;
-  if (o.ratTypesTsIsSet()) j["ratTypesTs"] = o.m_RatTypesTs;
-  if (o.suppFeatIsSet()) j["suppFeat"] = o.m_SuppFeat;
+  if (o.roamingStatusIsSet())
+    j["roamingStatus"] = o.m_RoamingStatus;
+  if (o.roamingStatusTsIsSet())
+    j["roamingStatusTs"] = o.m_RoamingStatusTs;
+  if (o.currentPlmnIsSet())
+    j["currentPlmn"] = o.m_CurrentPlmn;
+  if (o.currentPlmnTsIsSet())
+    j["currentPlmnTs"] = o.m_CurrentPlmnTs;
+  if (o.ratTypeIsSet() || !o.m_RatType.empty())
+    j["ratType"] = o.m_RatType;
+  if (o.ratTypesTsIsSet())
+    j["ratTypesTs"] = o.m_RatTypesTs;
+  if (o.suppFeatIsSet())
+    j["suppFeat"] = o.m_SuppFeat;
 }
 
-void from_json(const nlohmann::json& j, AccessAndMobilityData& o) {
+void from_json(const nlohmann::json &j, AccessAndMobilityData &o) {
   if (j.find("location") != j.end()) {
     j.at("location").get_to(o.m_Location);
     o.m_LocationIsSet = true;
@@ -175,126 +190,100 @@ oai::model::common::UserLocation AccessAndMobilityData::getLocation() const {
   return m_Location;
 }
 void AccessAndMobilityData::setLocation(
-    oai::model::common::UserLocation const& value) {
-  m_Location      = value;
+    oai::model::common::UserLocation const &value) {
+  m_Location = value;
   m_LocationIsSet = true;
 }
-bool AccessAndMobilityData::locationIsSet() const {
-  return m_LocationIsSet;
-}
-void AccessAndMobilityData::unsetLocation() {
-  m_LocationIsSet = false;
-}
+bool AccessAndMobilityData::locationIsSet() const { return m_LocationIsSet; }
+void AccessAndMobilityData::unsetLocation() { m_LocationIsSet = false; }
 std::string AccessAndMobilityData::getLocationTs() const {
   return m_LocationTs;
 }
-void AccessAndMobilityData::setLocationTs(std::string const& value) {
-  m_LocationTs      = value;
+void AccessAndMobilityData::setLocationTs(std::string const &value) {
+  m_LocationTs = value;
   m_LocationTsIsSet = true;
 }
 bool AccessAndMobilityData::locationTsIsSet() const {
   return m_LocationTsIsSet;
 }
-void AccessAndMobilityData::unsetLocationTs() {
-  m_LocationTsIsSet = false;
-}
-std::string AccessAndMobilityData::getTimeZone() const {
-  return m_TimeZone;
-}
-void AccessAndMobilityData::setTimeZone(std::string const& value) {
-  m_TimeZone      = value;
+void AccessAndMobilityData::unsetLocationTs() { m_LocationTsIsSet = false; }
+std::string AccessAndMobilityData::getTimeZone() const { return m_TimeZone; }
+void AccessAndMobilityData::setTimeZone(std::string const &value) {
+  m_TimeZone = value;
   m_TimeZoneIsSet = true;
 }
-bool AccessAndMobilityData::timeZoneIsSet() const {
-  return m_TimeZoneIsSet;
-}
-void AccessAndMobilityData::unsetTimeZone() {
-  m_TimeZoneIsSet = false;
-}
+bool AccessAndMobilityData::timeZoneIsSet() const { return m_TimeZoneIsSet; }
+void AccessAndMobilityData::unsetTimeZone() { m_TimeZoneIsSet = false; }
 std::string AccessAndMobilityData::getTimeZoneTs() const {
   return m_TimeZoneTs;
 }
-void AccessAndMobilityData::setTimeZoneTs(std::string const& value) {
-  m_TimeZoneTs      = value;
+void AccessAndMobilityData::setTimeZoneTs(std::string const &value) {
+  m_TimeZoneTs = value;
   m_TimeZoneTsIsSet = true;
 }
 bool AccessAndMobilityData::timeZoneTsIsSet() const {
   return m_TimeZoneTsIsSet;
 }
-void AccessAndMobilityData::unsetTimeZoneTs() {
-  m_TimeZoneTsIsSet = false;
-}
+void AccessAndMobilityData::unsetTimeZoneTs() { m_TimeZoneTsIsSet = false; }
 oai::model::common::AccessType AccessAndMobilityData::getAccessType() const {
   return m_AccessType;
 }
 void AccessAndMobilityData::setAccessType(
-    oai::model::common::AccessType const& value) {
-  m_AccessType      = value;
+    oai::model::common::AccessType const &value) {
+  m_AccessType = value;
   m_AccessTypeIsSet = true;
 }
 bool AccessAndMobilityData::accessTypeIsSet() const {
   return m_AccessTypeIsSet;
 }
-void AccessAndMobilityData::unsetAccessType() {
-  m_AccessTypeIsSet = false;
-}
-std::vector<RmInfo>& AccessAndMobilityData::getRegStates() {
+void AccessAndMobilityData::unsetAccessType() { m_AccessTypeIsSet = false; }
+std::vector<RmInfo> &AccessAndMobilityData::getRegStates() {
   return m_RegStates;
 }
-void AccessAndMobilityData::setRegStates(std::vector<RmInfo> const& value) {
-  m_RegStates      = value;
+void AccessAndMobilityData::setRegStates(std::vector<RmInfo> const &value) {
+  m_RegStates = value;
   m_RegStatesIsSet = true;
 }
-bool AccessAndMobilityData::regStatesIsSet() const {
-  return m_RegStatesIsSet;
-}
-void AccessAndMobilityData::unsetRegStates() {
-  m_RegStatesIsSet = false;
-}
+bool AccessAndMobilityData::regStatesIsSet() const { return m_RegStatesIsSet; }
+void AccessAndMobilityData::unsetRegStates() { m_RegStatesIsSet = false; }
 std::string AccessAndMobilityData::getRegStatesTs() const {
   return m_RegStatesTs;
 }
-void AccessAndMobilityData::setRegStatesTs(std::string const& value) {
-  m_RegStatesTs      = value;
+void AccessAndMobilityData::setRegStatesTs(std::string const &value) {
+  m_RegStatesTs = value;
   m_RegStatesTsIsSet = true;
 }
 bool AccessAndMobilityData::regStatesTsIsSet() const {
   return m_RegStatesTsIsSet;
 }
-void AccessAndMobilityData::unsetRegStatesTs() {
-  m_RegStatesTsIsSet = false;
-}
-std::vector<CmInfo>& AccessAndMobilityData::getConnStates() {
+void AccessAndMobilityData::unsetRegStatesTs() { m_RegStatesTsIsSet = false; }
+std::vector<CmInfo> &AccessAndMobilityData::getConnStates() {
   return m_ConnStates;
 }
-void AccessAndMobilityData::setConnStates(std::vector<CmInfo> const& value) {
-  m_ConnStates      = value;
+void AccessAndMobilityData::setConnStates(std::vector<CmInfo> const &value) {
+  m_ConnStates = value;
   m_ConnStatesIsSet = true;
 }
 bool AccessAndMobilityData::connStatesIsSet() const {
   return m_ConnStatesIsSet;
 }
-void AccessAndMobilityData::unsetConnStates() {
-  m_ConnStatesIsSet = false;
-}
+void AccessAndMobilityData::unsetConnStates() { m_ConnStatesIsSet = false; }
 std::string AccessAndMobilityData::getConnStatesTs() const {
   return m_ConnStatesTs;
 }
-void AccessAndMobilityData::setConnStatesTs(std::string const& value) {
-  m_ConnStatesTs      = value;
+void AccessAndMobilityData::setConnStatesTs(std::string const &value) {
+  m_ConnStatesTs = value;
   m_ConnStatesTsIsSet = true;
 }
 bool AccessAndMobilityData::connStatesTsIsSet() const {
   return m_ConnStatesTsIsSet;
 }
-void AccessAndMobilityData::unsetConnStatesTs() {
-  m_ConnStatesTsIsSet = false;
-}
+void AccessAndMobilityData::unsetConnStatesTs() { m_ConnStatesTsIsSet = false; }
 UeReachability AccessAndMobilityData::getReachabilityStatus() const {
   return m_ReachabilityStatus;
 }
-void AccessAndMobilityData::setReachabilityStatus(UeReachability const& value) {
-  m_ReachabilityStatus      = value;
+void AccessAndMobilityData::setReachabilityStatus(UeReachability const &value) {
+  m_ReachabilityStatus = value;
   m_ReachabilityStatusIsSet = true;
 }
 bool AccessAndMobilityData::reachabilityStatusIsSet() const {
@@ -306,8 +295,8 @@ void AccessAndMobilityData::unsetReachabilityStatus() {
 std::string AccessAndMobilityData::getReachabilityStatusTs() const {
   return m_ReachabilityStatusTs;
 }
-void AccessAndMobilityData::setReachabilityStatusTs(std::string const& value) {
-  m_ReachabilityStatusTs      = value;
+void AccessAndMobilityData::setReachabilityStatusTs(std::string const &value) {
+  m_ReachabilityStatusTs = value;
   m_ReachabilityStatusTsIsSet = true;
 }
 bool AccessAndMobilityData::reachabilityStatusTsIsSet() const {
@@ -319,8 +308,8 @@ void AccessAndMobilityData::unsetReachabilityStatusTs() {
 SmsSupport AccessAndMobilityData::getSmsOverNasStatus() const {
   return m_SmsOverNasStatus;
 }
-void AccessAndMobilityData::setSmsOverNasStatus(SmsSupport const& value) {
-  m_SmsOverNasStatus      = value;
+void AccessAndMobilityData::setSmsOverNasStatus(SmsSupport const &value) {
+  m_SmsOverNasStatus = value;
   m_SmsOverNasStatusIsSet = true;
 }
 bool AccessAndMobilityData::smsOverNasStatusIsSet() const {
@@ -332,8 +321,8 @@ void AccessAndMobilityData::unsetSmsOverNasStatus() {
 std::string AccessAndMobilityData::getSmsOverNasStatusTs() const {
   return m_SmsOverNasStatusTs;
 }
-void AccessAndMobilityData::setSmsOverNasStatusTs(std::string const& value) {
-  m_SmsOverNasStatusTs      = value;
+void AccessAndMobilityData::setSmsOverNasStatusTs(std::string const &value) {
+  m_SmsOverNasStatusTs = value;
   m_SmsOverNasStatusTsIsSet = true;
 }
 bool AccessAndMobilityData::smsOverNasStatusTsIsSet() const {
@@ -342,11 +331,9 @@ bool AccessAndMobilityData::smsOverNasStatusTsIsSet() const {
 void AccessAndMobilityData::unsetSmsOverNasStatusTs() {
   m_SmsOverNasStatusTsIsSet = false;
 }
-bool AccessAndMobilityData::isRoamingStatus() const {
-  return m_RoamingStatus;
-}
+bool AccessAndMobilityData::isRoamingStatus() const { return m_RoamingStatus; }
 void AccessAndMobilityData::setRoamingStatus(bool const value) {
-  m_RoamingStatus      = value;
+  m_RoamingStatus = value;
   m_RoamingStatusIsSet = true;
 }
 bool AccessAndMobilityData::roamingStatusIsSet() const {
@@ -358,8 +345,8 @@ void AccessAndMobilityData::unsetRoamingStatus() {
 std::string AccessAndMobilityData::getRoamingStatusTs() const {
   return m_RoamingStatusTs;
 }
-void AccessAndMobilityData::setRoamingStatusTs(std::string const& value) {
-  m_RoamingStatusTs      = value;
+void AccessAndMobilityData::setRoamingStatusTs(std::string const &value) {
+  m_RoamingStatusTs = value;
   m_RoamingStatusTsIsSet = true;
 }
 bool AccessAndMobilityData::roamingStatusTsIsSet() const {
@@ -372,21 +359,19 @@ oai::model::common::PlmnId AccessAndMobilityData::getCurrentPlmn() const {
   return m_CurrentPlmn;
 }
 void AccessAndMobilityData::setCurrentPlmn(
-    oai::model::common::PlmnId const& value) {
-  m_CurrentPlmn      = value;
+    oai::model::common::PlmnId const &value) {
+  m_CurrentPlmn = value;
   m_CurrentPlmnIsSet = true;
 }
 bool AccessAndMobilityData::currentPlmnIsSet() const {
   return m_CurrentPlmnIsSet;
 }
-void AccessAndMobilityData::unsetCurrentPlmn() {
-  m_CurrentPlmnIsSet = false;
-}
+void AccessAndMobilityData::unsetCurrentPlmn() { m_CurrentPlmnIsSet = false; }
 std::string AccessAndMobilityData::getCurrentPlmnTs() const {
   return m_CurrentPlmnTs;
 }
-void AccessAndMobilityData::setCurrentPlmnTs(std::string const& value) {
-  m_CurrentPlmnTs      = value;
+void AccessAndMobilityData::setCurrentPlmnTs(std::string const &value) {
+  m_CurrentPlmnTs = value;
   m_CurrentPlmnTsIsSet = true;
 }
 bool AccessAndMobilityData::currentPlmnTsIsSet() const {
@@ -395,45 +380,33 @@ bool AccessAndMobilityData::currentPlmnTsIsSet() const {
 void AccessAndMobilityData::unsetCurrentPlmnTs() {
   m_CurrentPlmnTsIsSet = false;
 }
-std::vector<oai::model::common::RatType>& AccessAndMobilityData::getRatType() {
+std::vector<oai::model::common::RatType> &AccessAndMobilityData::getRatType() {
   return m_RatType;
 }
 void AccessAndMobilityData::setRatType(
-    std::vector<oai::model::common::RatType> const& value) {
-  m_RatType      = value;
+    std::vector<oai::model::common::RatType> const &value) {
+  m_RatType = value;
   m_RatTypeIsSet = true;
 }
-bool AccessAndMobilityData::ratTypeIsSet() const {
-  return m_RatTypeIsSet;
-}
-void AccessAndMobilityData::unsetRatType() {
-  m_RatTypeIsSet = false;
-}
+bool AccessAndMobilityData::ratTypeIsSet() const { return m_RatTypeIsSet; }
+void AccessAndMobilityData::unsetRatType() { m_RatTypeIsSet = false; }
 std::string AccessAndMobilityData::getRatTypesTs() const {
   return m_RatTypesTs;
 }
-void AccessAndMobilityData::setRatTypesTs(std::string const& value) {
-  m_RatTypesTs      = value;
+void AccessAndMobilityData::setRatTypesTs(std::string const &value) {
+  m_RatTypesTs = value;
   m_RatTypesTsIsSet = true;
 }
 bool AccessAndMobilityData::ratTypesTsIsSet() const {
   return m_RatTypesTsIsSet;
 }
-void AccessAndMobilityData::unsetRatTypesTs() {
-  m_RatTypesTsIsSet = false;
-}
-std::string AccessAndMobilityData::getSuppFeat() const {
-  return m_SuppFeat;
-}
-void AccessAndMobilityData::setSuppFeat(std::string const& value) {
-  m_SuppFeat      = value;
+void AccessAndMobilityData::unsetRatTypesTs() { m_RatTypesTsIsSet = false; }
+std::string AccessAndMobilityData::getSuppFeat() const { return m_SuppFeat; }
+void AccessAndMobilityData::setSuppFeat(std::string const &value) {
+  m_SuppFeat = value;
   m_SuppFeatIsSet = true;
 }
-bool AccessAndMobilityData::suppFeatIsSet() const {
-  return m_SuppFeatIsSet;
-}
-void AccessAndMobilityData::unsetSuppFeat() {
-  m_SuppFeatIsSet = false;
-}
+bool AccessAndMobilityData::suppFeatIsSet() const { return m_SuppFeatIsSet; }
+void AccessAndMobilityData::unsetSuppFeat() { m_SuppFeatIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

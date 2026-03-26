@@ -20,8 +20,8 @@ namespace oai::model::common {
 
 NotificationControlRm::NotificationControlRm() {}
 
-bool NotificationControlRm::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool NotificationControlRm::validate(std::stringstream &msg,
+                                     const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "NotificationControlRm" : pathPrefix;
@@ -29,7 +29,7 @@ bool NotificationControlRm::validate(
   return success;
 }
 
-void to_json(nlohmann::json& j, const NotificationControlRm& o) {
+void to_json(nlohmann::json &j, const NotificationControlRm &o) {
   j = nlohmann::json();
   if (o.m_value.getValue() ==
       NotificationControl_anyOf::eNotificationControl_anyOf::
@@ -40,7 +40,7 @@ void to_json(nlohmann::json& j, const NotificationControlRm& o) {
   }
 }
 
-void from_json(const nlohmann::json& j, NotificationControlRm& o) {
+void from_json(const nlohmann::json &j, NotificationControlRm &o) {
   if (j.is_null()) {
     o.setEnumValue(NotificationControl_anyOf::eNotificationControl_anyOf::
                        INVALID_VALUE_OPENAPI_GENERATED);
@@ -49,4 +49,4 @@ void from_json(const nlohmann::json& j, NotificationControlRm& o) {
   }
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

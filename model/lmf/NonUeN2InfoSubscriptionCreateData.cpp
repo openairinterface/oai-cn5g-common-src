@@ -17,11 +17,11 @@ namespace oai::model::lmf {
 
 NonUeN2InfoSubscriptionCreateData::NonUeN2InfoSubscriptionCreateData() {
   m_GlobalRanNodeListIsSet = false;
-  m_AnTypeListIsSet        = false;
-  m_N2NotifyCallbackUri    = "";
-  m_NfId                   = "";
-  m_NfIdIsSet              = false;
-  m_SupportedFeatures      = "";
+  m_AnTypeListIsSet = false;
+  m_N2NotifyCallbackUri = "";
+  m_NfId = "";
+  m_NfIdIsSet = false;
+  m_SupportedFeatures = "";
   m_SupportedFeaturesIsSet = false;
 }
 
@@ -31,19 +31,21 @@ void NonUeN2InfoSubscriptionCreateData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const NonUeN2InfoSubscriptionCreateData& o) {
+void to_json(nlohmann::json &j, const NonUeN2InfoSubscriptionCreateData &o) {
   j = nlohmann::json();
   if (o.globalRanNodeListIsSet())
     j["globalRanNodeList"] = o.m_GlobalRanNodeList;
-  if (o.anTypeListIsSet()) j["anTypeList"] = o.m_AnTypeList;
-  j["n2InformationClass"]  = o.m_N2InformationClass;
+  if (o.anTypeListIsSet())
+    j["anTypeList"] = o.m_AnTypeList;
+  j["n2InformationClass"] = o.m_N2InformationClass;
   j["n2NotifyCallbackUri"] = o.m_N2NotifyCallbackUri;
-  if (o.nfIdIsSet()) j["nfId"] = o.m_NfId;
+  if (o.nfIdIsSet())
+    j["nfId"] = o.m_NfId;
   if (o.supportedFeaturesIsSet())
     j["supportedFeatures"] = o.m_SupportedFeatures;
 }
 
-void from_json(const nlohmann::json& j, NonUeN2InfoSubscriptionCreateData& o) {
+void from_json(const nlohmann::json &j, NonUeN2InfoSubscriptionCreateData &o) {
   if (j.find("globalRanNodeList") != j.end()) {
     j.at("globalRanNodeList").get_to(o.m_GlobalRanNodeList);
     o.m_GlobalRanNodeListIsSet = true;
@@ -64,7 +66,7 @@ void from_json(const nlohmann::json& j, NonUeN2InfoSubscriptionCreateData& o) {
   }
 }
 
-std::vector<oai::model::common::GlobalRanNodeId>&
+std::vector<oai::model::common::GlobalRanNodeId> &
 NonUeN2InfoSubscriptionCreateData::getGlobalRanNodeList() {
   return m_GlobalRanNodeList;
 }
@@ -74,7 +76,7 @@ bool NonUeN2InfoSubscriptionCreateData::globalRanNodeListIsSet() const {
 void NonUeN2InfoSubscriptionCreateData::unsetGlobalRanNodeList() {
   m_GlobalRanNodeListIsSet = false;
 }
-std::vector<oai::model::common::AccessType>&
+std::vector<oai::model::common::AccessType> &
 NonUeN2InfoSubscriptionCreateData::getAnTypeList() {
   return m_AnTypeList;
 }
@@ -84,40 +86,38 @@ bool NonUeN2InfoSubscriptionCreateData::anTypeListIsSet() const {
 void NonUeN2InfoSubscriptionCreateData::unsetAnTypeList() {
   m_AnTypeListIsSet = false;
 }
-N2InformationClass NonUeN2InfoSubscriptionCreateData::getN2InformationClass()
-    const {
+N2InformationClass
+NonUeN2InfoSubscriptionCreateData::getN2InformationClass() const {
   return m_N2InformationClass;
 }
 void NonUeN2InfoSubscriptionCreateData::setN2InformationClass(
-    N2InformationClass const& value) {
+    N2InformationClass const &value) {
   m_N2InformationClass = value;
 }
 std::string NonUeN2InfoSubscriptionCreateData::getN2NotifyCallbackUri() const {
   return m_N2NotifyCallbackUri;
 }
 void NonUeN2InfoSubscriptionCreateData::setN2NotifyCallbackUri(
-    std::string const& value) {
+    std::string const &value) {
   m_N2NotifyCallbackUri = value;
 }
 std::string NonUeN2InfoSubscriptionCreateData::getNfId() const {
   return m_NfId;
 }
-void NonUeN2InfoSubscriptionCreateData::setNfId(std::string const& value) {
-  m_NfId      = value;
+void NonUeN2InfoSubscriptionCreateData::setNfId(std::string const &value) {
+  m_NfId = value;
   m_NfIdIsSet = true;
 }
 bool NonUeN2InfoSubscriptionCreateData::nfIdIsSet() const {
   return m_NfIdIsSet;
 }
-void NonUeN2InfoSubscriptionCreateData::unsetNfId() {
-  m_NfIdIsSet = false;
-}
+void NonUeN2InfoSubscriptionCreateData::unsetNfId() { m_NfIdIsSet = false; }
 std::string NonUeN2InfoSubscriptionCreateData::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
 void NonUeN2InfoSubscriptionCreateData::setSupportedFeatures(
-    std::string const& value) {
-  m_SupportedFeatures      = value;
+    std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool NonUeN2InfoSubscriptionCreateData::supportedFeaturesIsSet() const {
@@ -127,4 +127,4 @@ void NonUeN2InfoSubscriptionCreateData::unsetSupportedFeatures() {
   m_SupportedFeaturesIsSet = false;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

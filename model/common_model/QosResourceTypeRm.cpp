@@ -27,12 +27,12 @@ void QosResourceTypeRm::validate() const {
   }
 }
 
-bool QosResourceTypeRm::validate(std::stringstream& msg) const {
+bool QosResourceTypeRm::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool QosResourceTypeRm::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool QosResourceTypeRm::validate(std::stringstream &msg,
+                                 const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "QosResourceTypeRm" : pathPrefix;
@@ -40,18 +40,18 @@ bool QosResourceTypeRm::validate(
   return success;
 }
 
-bool QosResourceTypeRm::operator==(const QosResourceTypeRm& rhs) const {
+bool QosResourceTypeRm::operator==(const QosResourceTypeRm &rhs) const {
   return (*this == rhs);
 }
 
-bool QosResourceTypeRm::operator!=(const QosResourceTypeRm& rhs) const {
+bool QosResourceTypeRm::operator!=(const QosResourceTypeRm &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const QosResourceTypeRm& o) {
+void to_json(nlohmann::json &j, const QosResourceTypeRm &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, QosResourceTypeRm& o) {}
+void from_json(const nlohmann::json &j, QosResourceTypeRm &o) {}
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

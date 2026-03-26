@@ -19,8 +19,8 @@
 namespace oai::model::pcf {
 
 FqdnPatternMatchingRule::FqdnPatternMatchingRule() {
-  m_Regex                   = "";
-  m_RegexIsSet              = false;
+  m_Regex = "";
+  m_RegexIsSet = false;
   m_StringMatchingRuleIsSet = false;
 }
 
@@ -31,12 +31,12 @@ void FqdnPatternMatchingRule::validate() const {
   }
 }
 
-bool FqdnPatternMatchingRule::validate(std::stringstream& msg) const {
+bool FqdnPatternMatchingRule::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool FqdnPatternMatchingRule::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool FqdnPatternMatchingRule::validate(std::stringstream &msg,
+                                       const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "FqdnPatternMatchingRule" : pathPrefix;
@@ -45,7 +45,7 @@ bool FqdnPatternMatchingRule::validate(
 }
 
 bool FqdnPatternMatchingRule::operator==(
-    const FqdnPatternMatchingRule& rhs) const {
+    const FqdnPatternMatchingRule &rhs) const {
   return
 
       ((!regexIsSet() && !rhs.regexIsSet()) ||
@@ -59,18 +59,19 @@ bool FqdnPatternMatchingRule::operator==(
 }
 
 bool FqdnPatternMatchingRule::operator!=(
-    const FqdnPatternMatchingRule& rhs) const {
+    const FqdnPatternMatchingRule &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const FqdnPatternMatchingRule& o) {
+void to_json(nlohmann::json &j, const FqdnPatternMatchingRule &o) {
   j = nlohmann::json::object();
-  if (o.regexIsSet()) j["regex"] = o.m_Regex;
+  if (o.regexIsSet())
+    j["regex"] = o.m_Regex;
   if (o.stringMatchingRuleIsSet())
     j["stringMatchingRule"] = o.m_StringMatchingRule;
 }
 
-void from_json(const nlohmann::json& j, FqdnPatternMatchingRule& o) {
+void from_json(const nlohmann::json &j, FqdnPatternMatchingRule &o) {
   if (j.find("regex") != j.end()) {
     j.at("regex").get_to(o.m_Regex);
     o.m_RegexIsSet = true;
@@ -81,26 +82,20 @@ void from_json(const nlohmann::json& j, FqdnPatternMatchingRule& o) {
   }
 }
 
-std::string FqdnPatternMatchingRule::getRegex() const {
-  return m_Regex;
-}
-void FqdnPatternMatchingRule::setRegex(std::string const& value) {
-  m_Regex      = value;
+std::string FqdnPatternMatchingRule::getRegex() const { return m_Regex; }
+void FqdnPatternMatchingRule::setRegex(std::string const &value) {
+  m_Regex = value;
   m_RegexIsSet = true;
 }
-bool FqdnPatternMatchingRule::regexIsSet() const {
-  return m_RegexIsSet;
-}
-void FqdnPatternMatchingRule::unsetRegex() {
-  m_RegexIsSet = false;
-}
+bool FqdnPatternMatchingRule::regexIsSet() const { return m_RegexIsSet; }
+void FqdnPatternMatchingRule::unsetRegex() { m_RegexIsSet = false; }
 oai::model::pcf::StringMatchingRule
 FqdnPatternMatchingRule::getStringMatchingRule() const {
   return m_StringMatchingRule;
 }
 void FqdnPatternMatchingRule::setStringMatchingRule(
-    oai::model::pcf::StringMatchingRule const& value) {
-  m_StringMatchingRule      = value;
+    oai::model::pcf::StringMatchingRule const &value) {
+  m_StringMatchingRule = value;
   m_StringMatchingRuleIsSet = true;
 }
 bool FqdnPatternMatchingRule::stringMatchingRuleIsSet() const {
@@ -110,4 +105,4 @@ void FqdnPatternMatchingRule::unsetStringMatchingRule() {
   m_StringMatchingRuleIsSet = false;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

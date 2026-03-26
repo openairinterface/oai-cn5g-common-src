@@ -3,18 +3,19 @@
  * All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#include <asn_internal.h>
 #include <OPEN_TYPE.h>
+#include <asn_internal.h>
 #include <constr_CHOICE.h>
 #include <uper_opentype.h>
 
-asn_dec_rval_t OPEN_TYPE_uper_get(
-    const asn_codec_ctx_t* opt_codec_ctx, const asn_TYPE_descriptor_t* td,
-    void* sptr, const asn_TYPE_member_t* elm, asn_per_data_t* pd) {
+asn_dec_rval_t OPEN_TYPE_uper_get(const asn_codec_ctx_t *opt_codec_ctx,
+                                  const asn_TYPE_descriptor_t *td, void *sptr,
+                                  const asn_TYPE_member_t *elm,
+                                  asn_per_data_t *pd) {
   asn_type_selector_result_t selected;
-  void* memb_ptr;   /* Pointer to the member */
-  void** memb_ptr2; /* Pointer to that pointer */
-  void* inner_value;
+  void *memb_ptr;   /* Pointer to the member */
+  void **memb_ptr2; /* Pointer to that pointer */
+  void *inner_value;
   asn_dec_rval_t rv;
 
   if (!(elm->flags & ATF_OPEN_TYPE)) {
@@ -22,9 +23,8 @@ asn_dec_rval_t OPEN_TYPE_uper_get(
   }
 
   if (!elm->type_selector) {
-    ASN_DEBUG(
-        "Type selector is not defined for Open Type %s->%s->%s", td->name,
-        elm->name, elm->type->name);
+    ASN_DEBUG("Type selector is not defined for Open Type %s->%s->%s", td->name,
+              elm->name, elm->type->name);
     ASN__DECODE_FAILED;
   }
 
@@ -36,9 +36,9 @@ asn_dec_rval_t OPEN_TYPE_uper_get(
   /* Fetch the pointer to this member */
   assert(elm->flags == ATF_OPEN_TYPE);
   if (elm->flags & ATF_POINTER) {
-    memb_ptr2 = (void**) ((char*) sptr + elm->memb_offset);
+    memb_ptr2 = (void **)((char *)sptr + elm->memb_offset);
   } else {
-    memb_ptr  = (char*) sptr + elm->memb_offset;
+    memb_ptr = (char *)sptr + elm->memb_offset;
     memb_ptr2 = &memb_ptr;
   }
   if (*memb_ptr2 != NULL) {
@@ -48,43 +48,43 @@ asn_dec_rval_t OPEN_TYPE_uper_get(
     }
   }
 
-  inner_value = (char*) *memb_ptr2 +
+  inner_value = (char *)*memb_ptr2 +
                 elm->type->elements[selected.presence_index - 1].memb_offset;
 
-  rv = uper_open_type_get(
-      opt_codec_ctx, selected.type_descriptor, NULL, &inner_value, pd);
+  rv = uper_open_type_get(opt_codec_ctx, selected.type_descriptor, NULL,
+                          &inner_value, pd);
   switch (rv.code) {
-    case RC_OK:
-      if (CHOICE_variant_set_presence(
-              elm->type, *memb_ptr2, selected.presence_index) == 0) {
-        break;
+  case RC_OK:
+    if (CHOICE_variant_set_presence(elm->type, *memb_ptr2,
+                                    selected.presence_index) == 0) {
+      break;
+    } else {
+      rv.code = RC_FAIL;
+    }
+    /* Fall through */
+  case RC_WMORE:
+  case RC_FAIL:
+    if (*memb_ptr2) {
+      if (elm->flags & ATF_POINTER) {
+        ASN_STRUCT_FREE(*selected.type_descriptor, inner_value);
+        *memb_ptr2 = NULL;
       } else {
-        rv.code = RC_FAIL;
+        ASN_STRUCT_RESET(*selected.type_descriptor, inner_value);
       }
-      /* Fall through */
-    case RC_WMORE:
-    case RC_FAIL:
-      if (*memb_ptr2) {
-        if (elm->flags & ATF_POINTER) {
-          ASN_STRUCT_FREE(*selected.type_descriptor, inner_value);
-          *memb_ptr2 = NULL;
-        } else {
-          ASN_STRUCT_RESET(*selected.type_descriptor, inner_value);
-        }
-      }
+    }
   }
   return rv;
 }
 
-asn_enc_rval_t OPEN_TYPE_encode_uper(
-    const asn_TYPE_descriptor_t* td, const asn_per_constraints_t* constraints,
-    const void* sptr, asn_per_outp_t* po) {
-  const void* memb_ptr;   /* Pointer to the member */
-  asn_TYPE_member_t* elm; /* CHOICE's element */
+asn_enc_rval_t OPEN_TYPE_encode_uper(const asn_TYPE_descriptor_t *td,
+                                     const asn_per_constraints_t *constraints,
+                                     const void *sptr, asn_per_outp_t *po) {
+  const void *memb_ptr;   /* Pointer to the member */
+  asn_TYPE_member_t *elm; /* CHOICE's element */
   asn_enc_rval_t er = {0, 0, 0};
   unsigned present;
 
-  (void) constraints;
+  (void)constraints;
 
   present = CHOICE_variant_get_presence(td, sptr);
   if (present == 0 || present > td->elements_count) {
@@ -98,10 +98,11 @@ asn_enc_rval_t OPEN_TYPE_encode_uper(
   elm = &td->elements[present];
   if (elm->flags & ATF_POINTER) {
     /* Member is a pointer to another structure */
-    memb_ptr = *(const void* const*) ((const char*) sptr + elm->memb_offset);
-    if (!memb_ptr) ASN__ENCODE_FAILED;
+    memb_ptr = *(const void *const *)((const char *)sptr + elm->memb_offset);
+    if (!memb_ptr)
+      ASN__ENCODE_FAILED;
   } else {
-    memb_ptr = (const char*) sptr + elm->memb_offset;
+    memb_ptr = (const char *)sptr + elm->memb_offset;
   }
 
   if (uper_open_type_put(elm->type, NULL, memb_ptr, po) < 0) {

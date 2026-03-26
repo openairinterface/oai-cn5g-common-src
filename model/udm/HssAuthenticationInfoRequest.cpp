@@ -19,13 +19,13 @@
 namespace oai::model::udm {
 
 HssAuthenticationInfoRequest::HssAuthenticationInfoRequest() {
-  m_SupportedFeatures          = "";
-  m_SupportedFeaturesIsSet     = false;
-  m_NumOfRequestedVectors      = 0;
-  m_RequestingNodeTypeIsSet    = false;
-  m_ServingNetworkIdIsSet      = false;
+  m_SupportedFeatures = "";
+  m_SupportedFeaturesIsSet = false;
+  m_NumOfRequestedVectors = 0;
+  m_RequestingNodeTypeIsSet = false;
+  m_ServingNetworkIdIsSet = false;
   m_ResynchronizationInfoIsSet = false;
-  m_AnIdIsSet                  = false;
+  m_AnIdIsSet = false;
 }
 
 HssAuthenticationInfoRequest::~HssAuthenticationInfoRequest() {}
@@ -34,21 +34,23 @@ void HssAuthenticationInfoRequest::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const HssAuthenticationInfoRequest& o) {
+void to_json(nlohmann::json &j, const HssAuthenticationInfoRequest &o) {
   j = nlohmann::json();
   if (o.supportedFeaturesIsSet())
     j["supportedFeatures"] = o.m_SupportedFeatures;
-  j["hssAuthType"]           = o.m_HssAuthType;
+  j["hssAuthType"] = o.m_HssAuthType;
   j["numOfRequestedVectors"] = o.m_NumOfRequestedVectors;
   if (o.requestingNodeTypeIsSet())
     j["requestingNodeType"] = o.m_RequestingNodeType;
-  if (o.servingNetworkIdIsSet()) j["servingNetworkId"] = o.m_ServingNetworkId;
+  if (o.servingNetworkIdIsSet())
+    j["servingNetworkId"] = o.m_ServingNetworkId;
   if (o.resynchronizationInfoIsSet())
     j["resynchronizationInfo"] = o.m_ResynchronizationInfo;
-  if (o.anIdIsSet()) j["anId"] = o.m_AnId;
+  if (o.anIdIsSet())
+    j["anId"] = o.m_AnId;
 }
 
-void from_json(const nlohmann::json& j, HssAuthenticationInfoRequest& o) {
+void from_json(const nlohmann::json &j, HssAuthenticationInfoRequest &o) {
   if (j.find("supportedFeatures") != j.end()) {
     j.at("supportedFeatures").get_to(o.m_SupportedFeatures);
     o.m_SupportedFeaturesIsSet = true;
@@ -77,8 +79,8 @@ std::string HssAuthenticationInfoRequest::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
 void HssAuthenticationInfoRequest::setSupportedFeatures(
-    std::string const& value) {
-  m_SupportedFeatures      = value;
+    std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool HssAuthenticationInfoRequest::supportedFeaturesIsSet() const {
@@ -90,7 +92,7 @@ void HssAuthenticationInfoRequest::unsetSupportedFeatures() {
 HssAuthType HssAuthenticationInfoRequest::getHssAuthType() const {
   return m_HssAuthType;
 }
-void HssAuthenticationInfoRequest::setHssAuthType(HssAuthType const& value) {
+void HssAuthenticationInfoRequest::setHssAuthType(HssAuthType const &value) {
   m_HssAuthType = value;
 }
 int32_t HssAuthenticationInfoRequest::getNumOfRequestedVectors() const {
@@ -104,8 +106,8 @@ NodeType HssAuthenticationInfoRequest::getRequestingNodeType() const {
   return m_RequestingNodeType;
 }
 void HssAuthenticationInfoRequest::setRequestingNodeType(
-    NodeType const& value) {
-  m_RequestingNodeType      = value;
+    NodeType const &value) {
+  m_RequestingNodeType = value;
   m_RequestingNodeTypeIsSet = true;
 }
 bool HssAuthenticationInfoRequest::requestingNodeTypeIsSet() const {
@@ -114,13 +116,13 @@ bool HssAuthenticationInfoRequest::requestingNodeTypeIsSet() const {
 void HssAuthenticationInfoRequest::unsetRequestingNodeType() {
   m_RequestingNodeTypeIsSet = false;
 }
-oai::model::common::PlmnId HssAuthenticationInfoRequest::getServingNetworkId()
-    const {
+oai::model::common::PlmnId
+HssAuthenticationInfoRequest::getServingNetworkId() const {
   return m_ServingNetworkId;
 }
 void HssAuthenticationInfoRequest::setServingNetworkId(
-    oai::model::common::PlmnId const& value) {
-  m_ServingNetworkId      = value;
+    oai::model::common::PlmnId const &value) {
+  m_ServingNetworkId = value;
   m_ServingNetworkIdIsSet = true;
 }
 bool HssAuthenticationInfoRequest::servingNetworkIdIsSet() const {
@@ -129,13 +131,13 @@ bool HssAuthenticationInfoRequest::servingNetworkIdIsSet() const {
 void HssAuthenticationInfoRequest::unsetServingNetworkId() {
   m_ServingNetworkIdIsSet = false;
 }
-ResynchronizationInfo HssAuthenticationInfoRequest::getResynchronizationInfo()
-    const {
+ResynchronizationInfo
+HssAuthenticationInfoRequest::getResynchronizationInfo() const {
   return m_ResynchronizationInfo;
 }
 void HssAuthenticationInfoRequest::setResynchronizationInfo(
-    ResynchronizationInfo const& value) {
-  m_ResynchronizationInfo      = value;
+    ResynchronizationInfo const &value) {
+  m_ResynchronizationInfo = value;
   m_ResynchronizationInfoIsSet = true;
 }
 bool HssAuthenticationInfoRequest::resynchronizationInfoIsSet() const {
@@ -144,18 +146,12 @@ bool HssAuthenticationInfoRequest::resynchronizationInfoIsSet() const {
 void HssAuthenticationInfoRequest::unsetResynchronizationInfo() {
   m_ResynchronizationInfoIsSet = false;
 }
-AccessNetworkId HssAuthenticationInfoRequest::getAnId() const {
-  return m_AnId;
-}
-void HssAuthenticationInfoRequest::setAnId(AccessNetworkId const& value) {
-  m_AnId      = value;
+AccessNetworkId HssAuthenticationInfoRequest::getAnId() const { return m_AnId; }
+void HssAuthenticationInfoRequest::setAnId(AccessNetworkId const &value) {
+  m_AnId = value;
   m_AnIdIsSet = true;
 }
-bool HssAuthenticationInfoRequest::anIdIsSet() const {
-  return m_AnIdIsSet;
-}
-void HssAuthenticationInfoRequest::unsetAnId() {
-  m_AnIdIsSet = false;
-}
+bool HssAuthenticationInfoRequest::anIdIsSet() const { return m_AnIdIsSet; }
+void HssAuthenticationInfoRequest::unsetAnId() { m_AnIdIsSet = false; }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

@@ -12,21 +12,21 @@ extern "C" {
 namespace oai::ngap {
 
 class NetworkInstance {
- public:
+public:
   NetworkInstance();
-  NetworkInstance(const long& networkInstance);
+  NetworkInstance(const long &networkInstance);
   virtual ~NetworkInstance();
 
-  void set(const long& networkInstance);
-  bool get(long& networkInstance) const;
+  void set(const long &networkInstance);
+  bool get(long &networkInstance) const;
 
-  bool encode(Ngap_NetworkInstance_t&) const;
-  bool decode(const Ngap_NetworkInstance_t&);
+  bool encode(Ngap_NetworkInstance_t &) const;
+  bool decode(const Ngap_NetworkInstance_t &);
 
- private:
+private:
   long m_NetworkInstance;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

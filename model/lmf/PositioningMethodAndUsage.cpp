@@ -19,7 +19,7 @@
 namespace oai::model::lmf {
 
 PositioningMethodAndUsage::PositioningMethodAndUsage() {
-  m_MethodCode      = 0;
+  m_MethodCode = 0;
   m_MethodCodeIsSet = false;
 }
 
@@ -30,18 +30,18 @@ void PositioningMethodAndUsage::validate() const {
   }
 }
 
-bool PositioningMethodAndUsage::validate(std::stringstream& msg) const {
+bool PositioningMethodAndUsage::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool PositioningMethodAndUsage::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool PositioningMethodAndUsage::validate(std::stringstream &msg,
+                                         const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PositioningMethodAndUsage" : pathPrefix;
 
   if (methodCodeIsSet()) {
-    const int32_t& value               = m_MethodCode;
+    const int32_t &value = m_MethodCode;
     const std::string currentValuePath = _pathPrefix + ".methodCode";
 
     if (value < 16) {
@@ -58,7 +58,7 @@ bool PositioningMethodAndUsage::validate(
 }
 
 bool PositioningMethodAndUsage::operator==(
-    const PositioningMethodAndUsage& rhs) const {
+    const PositioningMethodAndUsage &rhs) const {
   return
 
       (getMethod() == rhs.getMethod()) &&
@@ -75,19 +75,20 @@ bool PositioningMethodAndUsage::operator==(
 }
 
 bool PositioningMethodAndUsage::operator!=(
-    const PositioningMethodAndUsage& rhs) const {
+    const PositioningMethodAndUsage &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PositioningMethodAndUsage& o) {
-  j           = nlohmann::json();
+void to_json(nlohmann::json &j, const PositioningMethodAndUsage &o) {
+  j = nlohmann::json();
   j["method"] = o.m_Method;
-  j["mode"]   = o.m_Mode;
-  j["usage"]  = o.m_Usage;
-  if (o.methodCodeIsSet()) j["methodCode"] = o.m_MethodCode;
+  j["mode"] = o.m_Mode;
+  j["usage"] = o.m_Usage;
+  if (o.methodCodeIsSet())
+    j["methodCode"] = o.m_MethodCode;
 }
 
-void from_json(const nlohmann::json& j, PositioningMethodAndUsage& o) {
+void from_json(const nlohmann::json &j, PositioningMethodAndUsage &o) {
   j.at("method").get_to(o.m_Method);
   j.at("mode").get_to(o.m_Mode);
   j.at("usage").get_to(o.m_Usage);
@@ -97,39 +98,37 @@ void from_json(const nlohmann::json& j, PositioningMethodAndUsage& o) {
   }
 }
 
-oai::model::lmf::PositioningMethod PositioningMethodAndUsage::getMethod()
-    const {
+oai::model::lmf::PositioningMethod
+PositioningMethodAndUsage::getMethod() const {
   return m_Method;
 }
 void PositioningMethodAndUsage::setMethod(
-    oai::model::lmf::PositioningMethod const& value) {
+    oai::model::lmf::PositioningMethod const &value) {
   m_Method = value;
 }
 oai::model::lmf::PositioningMode PositioningMethodAndUsage::getMode() const {
   return m_Mode;
 }
 void PositioningMethodAndUsage::setMode(
-    oai::model::lmf::PositioningMode const& value) {
+    oai::model::lmf::PositioningMode const &value) {
   m_Mode = value;
 }
 oai::model::lmf::Usage PositioningMethodAndUsage::getUsage() const {
   return m_Usage;
 }
-void PositioningMethodAndUsage::setUsage(oai::model::lmf::Usage const& value) {
+void PositioningMethodAndUsage::setUsage(oai::model::lmf::Usage const &value) {
   m_Usage = value;
 }
 int32_t PositioningMethodAndUsage::getMethodCode() const {
   return m_MethodCode;
 }
 void PositioningMethodAndUsage::setMethodCode(int32_t const value) {
-  m_MethodCode      = value;
+  m_MethodCode = value;
   m_MethodCodeIsSet = true;
 }
 bool PositioningMethodAndUsage::methodCodeIsSet() const {
   return m_MethodCodeIsSet;
 }
-void PositioningMethodAndUsage::unsetMethodCode() {
-  m_MethodCodeIsSet = false;
-}
+void PositioningMethodAndUsage::unsetMethodCode() { m_MethodCodeIsSet = false; }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

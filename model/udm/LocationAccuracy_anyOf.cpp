@@ -16,8 +16,8 @@
 
 #include "LocationAccuracy_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::udm {
 
@@ -30,12 +30,12 @@ void LocationAccuracy_anyOf::validate() const {
   }
 }
 
-bool LocationAccuracy_anyOf::validate(std::stringstream& msg) const {
+bool LocationAccuracy_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool LocationAccuracy_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool LocationAccuracy_anyOf::validate(std::stringstream &msg,
+                                      const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "LocationAccuracy_anyOf" : pathPrefix;
@@ -50,47 +50,47 @@ bool LocationAccuracy_anyOf::validate(
 }
 
 bool LocationAccuracy_anyOf::operator==(
-    const LocationAccuracy_anyOf& rhs) const {
+    const LocationAccuracy_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool LocationAccuracy_anyOf::operator!=(
-    const LocationAccuracy_anyOf& rhs) const {
+    const LocationAccuracy_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const LocationAccuracy_anyOf& o) {
+void to_json(nlohmann::json &j, const LocationAccuracy_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case LocationAccuracy_anyOf::eLocationAccuracy_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case LocationAccuracy_anyOf::eLocationAccuracy_anyOf::CELL_LEVEL:
-      j = "CELL_LEVEL";
-      break;
-    case LocationAccuracy_anyOf::eLocationAccuracy_anyOf::RAN_NODE_LEVEL:
-      j = "RAN_NODE_LEVEL";
-      break;
-    case LocationAccuracy_anyOf::eLocationAccuracy_anyOf::TA_LEVEL:
-      j = "TA_LEVEL";
-      break;
-    case LocationAccuracy_anyOf::eLocationAccuracy_anyOf::N3IWF_LEVEL:
-      j = "N3IWF_LEVEL";
-      break;
-    case LocationAccuracy_anyOf::eLocationAccuracy_anyOf::UE_IP:
-      j = "UE_IP";
-      break;
-    case LocationAccuracy_anyOf::eLocationAccuracy_anyOf::UE_PORT:
-      j = "UE_PORT";
-      break;
+  case LocationAccuracy_anyOf::eLocationAccuracy_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case LocationAccuracy_anyOf::eLocationAccuracy_anyOf::CELL_LEVEL:
+    j = "CELL_LEVEL";
+    break;
+  case LocationAccuracy_anyOf::eLocationAccuracy_anyOf::RAN_NODE_LEVEL:
+    j = "RAN_NODE_LEVEL";
+    break;
+  case LocationAccuracy_anyOf::eLocationAccuracy_anyOf::TA_LEVEL:
+    j = "TA_LEVEL";
+    break;
+  case LocationAccuracy_anyOf::eLocationAccuracy_anyOf::N3IWF_LEVEL:
+    j = "N3IWF_LEVEL";
+    break;
+  case LocationAccuracy_anyOf::eLocationAccuracy_anyOf::UE_IP:
+    j = "UE_IP";
+    break;
+  case LocationAccuracy_anyOf::eLocationAccuracy_anyOf::UE_PORT:
+    j = "UE_PORT";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, LocationAccuracy_anyOf& o) {
+void from_json(const nlohmann::json &j, LocationAccuracy_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "CELL_LEVEL") {
     o.setValue(LocationAccuracy_anyOf::eLocationAccuracy_anyOf::CELL_LEVEL);
@@ -122,4 +122,4 @@ void LocationAccuracy_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

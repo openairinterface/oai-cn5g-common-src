@@ -19,8 +19,8 @@
 #ifndef NfGroupCond_H_
 #define NfGroupCond_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::nrf {
 
@@ -28,7 +28,7 @@ namespace oai::model::nrf {
 ///
 /// </summary>
 class NfGroupCond {
- public:
+public:
   NfGroupCond();
   virtual ~NfGroupCond();
 
@@ -41,22 +41,22 @@ class NfGroupCond {
   ///
   /// </summary>
   std::string getNfType() const;
-  void setNfType(std::string const& value);
+  void setNfType(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getNfGroupId() const;
-  void setNfGroupId(std::string const& value);
+  void setNfGroupId(std::string const &value);
 
-  friend void to_json(nlohmann::json& j, const NfGroupCond& o);
-  friend void from_json(const nlohmann::json& j, NfGroupCond& o);
+  friend void to_json(nlohmann::json &j, const NfGroupCond &o);
+  friend void from_json(const nlohmann::json &j, NfGroupCond &o);
 
- protected:
+protected:
   std::string m_NfType;
 
   std::string m_NfGroupId;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* NfGroupCond_H_ */

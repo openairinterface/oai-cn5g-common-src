@@ -34,7 +34,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class IpAddress {
- public:
+public:
   IpAddress();
   virtual ~IpAddress();
 
@@ -47,28 +47,28 @@ class IpAddress {
   ///
   /// </summary>
   std::string getIpv4Addr() const;
-  void setIpv4Addr(std::string const& value);
+  void setIpv4Addr(std::string const &value);
   bool ipv4AddrIsSet() const;
   void unsetIpv4Addr();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ipv6Addr getIpv6Addr() const;
-  void setIpv6Addr(oai::model::common::Ipv6Addr const& value);
+  void setIpv6Addr(oai::model::common::Ipv6Addr const &value);
   bool ipv6AddrIsSet() const;
   void unsetIpv6Addr();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ipv6Prefix getIpv6Prefix() const;
-  void setIpv6Prefix(oai::model::common::Ipv6Prefix const& value);
+  void setIpv6Prefix(oai::model::common::Ipv6Prefix const &value);
   bool ipv6PrefixIsSet() const;
   void unsetIpv6Prefix();
 
-  friend void to_json(nlohmann::json& j, const IpAddress& o);
-  friend void from_json(const nlohmann::json& j, IpAddress& o);
+  friend void to_json(nlohmann::json &j, const IpAddress &o);
+  friend void from_json(const nlohmann::json &j, IpAddress &o);
 
- protected:
+protected:
   std::string m_Ipv4Addr;
   bool m_Ipv4AddrIsSet;
   oai::model::common::Ipv6Addr m_Ipv6Addr;
@@ -77,6 +77,6 @@ class IpAddress {
   bool m_Ipv6PrefixIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* IpAddress_H_ */

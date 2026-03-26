@@ -29,8 +29,7 @@ static asn_per_constraints_t asn_PER_type_Ngap_rIM_RSDetection_constr_3
           !defined(ASN_DISABLE_APER_SUPPORT) */
 static const asn_INTEGER_enum_map_t
     asn_MAP_Ngap_rIM_RSDetection_value2enum_3[] = {
-        {0, 11, "rs-detected"},
-        {1, 14, "rs-disappeared"}
+        {0, 11, "rs-detected"}, {1, 14, "rs-disappeared"}
         /* This list is extensible */
 };
 static const unsigned int asn_MAP_Ngap_rIM_RSDetection_enum2value_3[] = {
@@ -133,7 +132,7 @@ asn_TYPE_member_t asn_MBR_Ngap_RIMInformation_1[] = {
      0, /* No default value */
      "iE-Extensions"},
 };
-static const int asn_MAP_Ngap_RIMInformation_oms_1[]            = {2};
+static const int asn_MAP_Ngap_RIMInformation_oms_1[] = {2};
 static const ber_tlv_tag_t asn_DEF_Ngap_RIMInformation_tags_1[] = {
     (ASN_TAG_CLASS_UNIVERSAL | (16 << 2))};
 static const asn_TYPE_tag2member_t asn_MAP_Ngap_RIMInformation_tag2el_1[] = {

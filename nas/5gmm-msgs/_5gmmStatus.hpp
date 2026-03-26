@@ -11,12 +11,12 @@
 namespace oai::nas {
 
 class _5gmmStatus : public Nas5gmmMessage {
- public:
+public:
   _5gmmStatus();
   ~_5gmmStatus();
 
-  int Encode(uint8_t* buf, int len) override;
-  int Decode(uint8_t* buf, int len) override;
+  int Encode(uint8_t *buf, int len) override;
+  int Decode(uint8_t *buf, int len) override;
 
   uint32_t GetLength() const override;
 
@@ -25,11 +25,11 @@ class _5gmmStatus : public Nas5gmmMessage {
   void Set5gmmCause(uint8_t value);
   uint8_t Get5gmmCause() const;
 
- private:
-  NasMmPlainHeader ie_header_;  // Mandatory
-  _5gmmCause ie_5gmm_cause_;    // Mandatory
+private:
+  NasMmPlainHeader ie_header_; // Mandatory
+  _5gmmCause ie_5gmm_cause_;   // Mandatory
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

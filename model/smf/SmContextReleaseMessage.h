@@ -20,8 +20,8 @@
 #define Sm_Context_Release_Message_H_
 
 #include "SmContextReleaseData.h"
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::smf {
 
@@ -29,7 +29,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class SmContextReleaseMessage {
- public:
+public:
   SmContextReleaseMessage();
   virtual ~SmContextReleaseMessage();
 
@@ -42,26 +42,26 @@ class SmContextReleaseMessage {
   ///
   /// </summary>
   SmContextReleaseData getJsonData() const;
-  void setJsonData(SmContextReleaseData const& value);
+  void setJsonData(SmContextReleaseData const &value);
   bool jsonDataIsSet() const;
   void unsetJsonData();
 
   /// </summary>
   std::string getBinaryDataN2SmInformation() const;
-  void setBinaryDataN2SmInformation(std::string const& value);
+  void setBinaryDataN2SmInformation(std::string const &value);
   bool binaryDataN2SmInformationIsSet() const;
   void unsetBinaryDataN2SmInformation();
 
-  friend void to_json(nlohmann::json& j, const SmContextReleaseMessage& o);
-  friend void from_json(const nlohmann::json& j, SmContextReleaseMessage& o);
+  friend void to_json(nlohmann::json &j, const SmContextReleaseMessage &o);
+  friend void from_json(const nlohmann::json &j, SmContextReleaseMessage &o);
 
- protected:
+protected:
   SmContextReleaseData m_JsonData;
   bool m_JsonDataIsSet;
   std::string m_BinaryDataN2SmInformation;
   bool m_BinaryDataN2SmInformationIsSet;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* Sm_Context_Release_Message_H_ */

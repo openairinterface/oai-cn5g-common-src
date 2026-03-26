@@ -19,8 +19,8 @@
 #ifndef NonUeN2InfoSubscriptionCreatedData_H_
 #define NonUeN2InfoSubscriptionCreatedData_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::lmf {
 
@@ -28,7 +28,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class NonUeN2InfoSubscriptionCreatedData {
- public:
+public:
   NonUeN2InfoSubscriptionCreatedData();
   virtual ~NonUeN2InfoSubscriptionCreatedData();
 
@@ -41,27 +41,27 @@ class NonUeN2InfoSubscriptionCreatedData {
   ///
   /// </summary>
   std::string getN2NotifySubscriptionId() const;
-  void setN2NotifySubscriptionId(std::string const& value);
+  void setN2NotifySubscriptionId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
 
-  friend void to_json(
-      nlohmann::json& j, const NonUeN2InfoSubscriptionCreatedData& o);
-  friend void from_json(
-      const nlohmann::json& j, NonUeN2InfoSubscriptionCreatedData& o);
+  friend void to_json(nlohmann::json &j,
+                      const NonUeN2InfoSubscriptionCreatedData &o);
+  friend void from_json(const nlohmann::json &j,
+                        NonUeN2InfoSubscriptionCreatedData &o);
 
- protected:
+protected:
   std::string m_N2NotifySubscriptionId;
 
   std::string m_SupportedFeatures;
   bool m_SupportedFeaturesIsSet;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* NonUeN2InfoSubscriptionCreatedData_H_ */

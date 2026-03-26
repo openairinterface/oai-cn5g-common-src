@@ -20,12 +20,12 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_ExpectedHOInterval {
-  Ngap_ExpectedHOInterval_sec15     = 0,
-  Ngap_ExpectedHOInterval_sec30     = 1,
-  Ngap_ExpectedHOInterval_sec60     = 2,
-  Ngap_ExpectedHOInterval_sec90     = 3,
-  Ngap_ExpectedHOInterval_sec120    = 4,
-  Ngap_ExpectedHOInterval_sec180    = 5,
+  Ngap_ExpectedHOInterval_sec15 = 0,
+  Ngap_ExpectedHOInterval_sec30 = 1,
+  Ngap_ExpectedHOInterval_sec60 = 2,
+  Ngap_ExpectedHOInterval_sec90 = 3,
+  Ngap_ExpectedHOInterval_sec120 = 4,
+  Ngap_ExpectedHOInterval_sec180 = 5,
   Ngap_ExpectedHOInterval_long_time = 6
   /*
    * Enumeration is extensible

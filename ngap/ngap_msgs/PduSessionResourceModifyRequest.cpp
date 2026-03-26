@@ -30,13 +30,13 @@ void PduSessionResourceModifyRequestMsg::initialize() {
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceModifyRequestMsg::setAmfUeNgapId(const uint64_t& id) {
+void PduSessionResourceModifyRequestMsg::setAmfUeNgapId(const uint64_t &id) {
   NgapUeMessage::m_AmfUeNgapId.set(id);
 
-  Ngap_PDUSessionResourceModifyRequestIEs_t* ie =
-      (Ngap_PDUSessionResourceModifyRequestIEs_t*) calloc(
+  Ngap_PDUSessionResourceModifyRequestIEs_t *ie =
+      (Ngap_PDUSessionResourceModifyRequestIEs_t *)calloc(
           1, sizeof(Ngap_PDUSessionResourceModifyRequestIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID;
+  ie->id = Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID;
   ie->criticality = Ngap_Criticality_reject;
   ie->value.present =
       Ngap_PDUSessionResourceModifyRequestIEs__value_PR_AMF_UE_NGAP_ID;
@@ -46,7 +46,7 @@ void PduSessionResourceModifyRequestMsg::setAmfUeNgapId(const uint64_t& id) {
   if (!ret) {
     oai::logger::logger_common::ngap().error(
         "Encode NGAP AMF_UE_NGAP_ID IE error");
-    oai::utils::utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void **)&ie);
     return;
   }
 
@@ -59,13 +59,13 @@ void PduSessionResourceModifyRequestMsg::setAmfUeNgapId(const uint64_t& id) {
 
 //------------------------------------------------------------------------------
 void PduSessionResourceModifyRequestMsg::setRanUeNgapId(
-    const uint32_t& ranUeNgapId) {
+    const uint32_t &ranUeNgapId) {
   NgapUeMessage::m_RanUeNgapId.set(ranUeNgapId);
 
-  Ngap_PDUSessionResourceModifyRequestIEs_t* ie =
-      (Ngap_PDUSessionResourceModifyRequestIEs_t*) calloc(
+  Ngap_PDUSessionResourceModifyRequestIEs_t *ie =
+      (Ngap_PDUSessionResourceModifyRequestIEs_t *)calloc(
           1, sizeof(Ngap_PDUSessionResourceModifyRequestIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID;
+  ie->id = Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID;
   ie->criticality = Ngap_Criticality_reject;
   ie->value.present =
       Ngap_PDUSessionResourceModifyRequestIEs__value_PR_RAN_UE_NGAP_ID;
@@ -75,7 +75,7 @@ void PduSessionResourceModifyRequestMsg::setRanUeNgapId(
   if (!ret) {
     oai::logger::logger_common::ngap().error(
         "Encode NGAP RAN_UE_NGAP_ID IE error");
-    oai::utils::utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void **)&ie);
     return;
   }
 
@@ -88,15 +88,16 @@ void PduSessionResourceModifyRequestMsg::setRanUeNgapId(
 
 //------------------------------------------------------------------------------
 void PduSessionResourceModifyRequestMsg::setRanPagingPriority(
-    const uint32_t& priority) {
-  if (!m_RanPagingPriority) m_RanPagingPriority = new RanPagingPriority();
+    const uint32_t &priority) {
+  if (!m_RanPagingPriority)
+    m_RanPagingPriority = new RanPagingPriority();
 
   m_RanPagingPriority->set(priority);
 
-  Ngap_PDUSessionResourceModifyRequestIEs_t* ie =
-      (Ngap_PDUSessionResourceModifyRequestIEs_t*) calloc(
+  Ngap_PDUSessionResourceModifyRequestIEs_t *ie =
+      (Ngap_PDUSessionResourceModifyRequestIEs_t *)calloc(
           1, sizeof(Ngap_PDUSessionResourceModifyRequestIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_RANPagingPriority;
+  ie->id = Ngap_ProtocolIE_ID_id_RANPagingPriority;
   ie->criticality = Ngap_Criticality_ignore;
   ie->value.present =
       Ngap_PDUSessionResourceModifyRequestIEs__value_PR_RANPagingPriority;
@@ -105,7 +106,7 @@ void PduSessionResourceModifyRequestMsg::setRanPagingPriority(
   if (!ret) {
     oai::logger::logger_common::ngap().error(
         "Encode NGAP RANPagingPriority IE error");
-    oai::utils::utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void **)&ie);
     return;
   }
 
@@ -118,13 +119,14 @@ void PduSessionResourceModifyRequestMsg::setRanPagingPriority(
 
 //------------------------------------------------------------------------------
 int PduSessionResourceModifyRequestMsg::getRanPagingPriority() const {
-  if (!m_RanPagingPriority) return -1;
+  if (!m_RanPagingPriority)
+    return -1;
   return m_RanPagingPriority->get();
 }
 
 //------------------------------------------------------------------------------
 void PduSessionResourceModifyRequestMsg::setPduSessionResourceModifyRequestList(
-    const std::vector<PDUSessionResourceModifyRequestItem_t>& list) {
+    const std::vector<PDUSessionResourceModifyRequestItem_t> &list) {
   std::vector<PduSessionResourceModifyItemModReq>
       pduSessionResourceModifyItemModReq;
 
@@ -145,18 +147,17 @@ void PduSessionResourceModifyRequestMsg::setPduSessionResourceModifyRequestList(
 
     PduSessionResourceModifyItemModReq item = {};
 
-    item.set(
-        pduSessionId, nasPdu, list[i].pduSessionResourceModifyRequestTransfer,
-        snssai);
+    item.set(pduSessionId, nasPdu,
+             list[i].pduSessionResourceModifyRequestTransfer, snssai);
     pduSessionResourceModifyItemModReq.push_back(item);
   }
 
   m_PduSessionResourceModifyList.set(pduSessionResourceModifyItemModReq);
 
-  Ngap_PDUSessionResourceModifyRequestIEs_t* ie =
-      (Ngap_PDUSessionResourceModifyRequestIEs_t*) calloc(
+  Ngap_PDUSessionResourceModifyRequestIEs_t *ie =
+      (Ngap_PDUSessionResourceModifyRequestIEs_t *)calloc(
           1, sizeof(Ngap_PDUSessionResourceModifyRequestIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_PDUSessionResourceModifyListModReq;
+  ie->id = Ngap_ProtocolIE_ID_id_PDUSessionResourceModifyListModReq;
   ie->criticality = Ngap_Criticality_reject;
   ie->value.present =
       Ngap_PDUSessionResourceModifyRequestIEs__value_PR_PDUSessionResourceModifyListModReq;
@@ -166,7 +167,7 @@ void PduSessionResourceModifyRequestMsg::setPduSessionResourceModifyRequestList(
   if (!ret) {
     oai::logger::logger_common::ngap().error(
         "Encode NGAP PDUSessionResourceModifyListModReq IE error");
-    oai::utils::utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void **)&ie);
     return;
   }
 
@@ -179,7 +180,7 @@ void PduSessionResourceModifyRequestMsg::setPduSessionResourceModifyRequestList(
 
 //------------------------------------------------------------------------------
 bool PduSessionResourceModifyRequestMsg::getPduSessionResourceModifyRequestList(
-    std::vector<PDUSessionResourceModifyRequestItem_t>& list) const {
+    std::vector<PDUSessionResourceModifyRequestItem_t> &list) const {
   std::vector<PduSessionResourceModifyItemModReq>
       pduSessionResourceModifyItemModReq;
   m_PduSessionResourceModifyList.get(pduSessionResourceModifyItemModReq);
@@ -187,7 +188,7 @@ bool PduSessionResourceModifyRequestMsg::getPduSessionResourceModifyRequestList(
   for (int i = 0; i < pduSessionResourceModifyItemModReq.size(); i++) {
     PDUSessionResourceModifyRequestItem_t request = {};
 
-    PduSessionId pduSessionId    = {};
+    PduSessionId pduSessionId = {};
     std::optional<NasPdu> nasPdu = std::nullopt;
     std::optional<SNssai> SNssai = std::nullopt;
 
@@ -196,7 +197,8 @@ bool PduSessionResourceModifyRequestMsg::getPduSessionResourceModifyRequestList(
         SNssai);
 
     pduSessionId.get(request.pduSessionId);
-    if (nasPdu.has_value()) nasPdu.value().get(request.nasPdu);
+    if (nasPdu.has_value())
+      nasPdu.value().get(request.nasPdu);
     if (SNssai.has_value()) {
       S_Nssai tmp = {};
       SNssai.value().getSd(tmp.sd);
@@ -211,7 +213,7 @@ bool PduSessionResourceModifyRequestMsg::getPduSessionResourceModifyRequestList(
 }
 
 //------------------------------------------------------------------------------
-bool PduSessionResourceModifyRequestMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
+bool PduSessionResourceModifyRequestMsg::decode(Ngap_NGAP_PDU_t *ngapMsgPdu) {
   ngapPdu = ngapMsgPdu;
 
   if (ngapPdu->present == Ngap_NGAP_PDU_PR_initiatingMessage) {
@@ -239,98 +241,94 @@ bool PduSessionResourceModifyRequestMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
        i < m_PduSessionResourceModifyRequestIes->protocolIEs.list.count; i++) {
     switch (
         m_PduSessionResourceModifyRequestIes->protocolIEs.list.array[i]->id) {
-      case Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID: {
-        if (m_PduSessionResourceModifyRequestIes->protocolIEs.list.array[i]
-                    ->criticality == Ngap_Criticality_reject &&
-            m_PduSessionResourceModifyRequestIes->protocolIEs.list.array[i]
-                    ->value.present ==
-                Ngap_PDUSessionResourceModifyRequestIEs__value_PR_AMF_UE_NGAP_ID) {
-          if (!NgapUeMessage::m_AmfUeNgapId.decode(
-                  m_PduSessionResourceModifyRequestIes->protocolIEs.list
-                      .array[i]
-                      ->value.choice.AMF_UE_NGAP_ID)) {
-            oai::logger::logger_common::ngap().error(
-                "Decoded NGAP AMF_UE_NGAP_ID IE error");
-            return false;
-          }
-        } else {
+    case Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID: {
+      if (m_PduSessionResourceModifyRequestIes->protocolIEs.list.array[i]
+                  ->criticality == Ngap_Criticality_reject &&
+          m_PduSessionResourceModifyRequestIes->protocolIEs.list.array[i]
+                  ->value.present ==
+              Ngap_PDUSessionResourceModifyRequestIEs__value_PR_AMF_UE_NGAP_ID) {
+        if (!NgapUeMessage::m_AmfUeNgapId.decode(
+                m_PduSessionResourceModifyRequestIes->protocolIEs.list.array[i]
+                    ->value.choice.AMF_UE_NGAP_ID)) {
           oai::logger::logger_common::ngap().error(
               "Decoded NGAP AMF_UE_NGAP_ID IE error");
           return false;
         }
-      } break;
-      case Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID: {
-        if (m_PduSessionResourceModifyRequestIes->protocolIEs.list.array[i]
-                    ->criticality == Ngap_Criticality_reject &&
-            m_PduSessionResourceModifyRequestIes->protocolIEs.list.array[i]
-                    ->value.present ==
-                Ngap_PDUSessionResourceModifyRequestIEs__value_PR_RAN_UE_NGAP_ID) {
-          if (!NgapUeMessage::m_RanUeNgapId.decode(
-                  m_PduSessionResourceModifyRequestIes->protocolIEs.list
-                      .array[i]
-                      ->value.choice.RAN_UE_NGAP_ID)) {
-            oai::logger::logger_common::ngap().error(
-                "Decoded NGAP RAN_UE_NGAP_ID IE error");
-            return false;
-          }
-        } else {
+      } else {
+        oai::logger::logger_common::ngap().error(
+            "Decoded NGAP AMF_UE_NGAP_ID IE error");
+        return false;
+      }
+    } break;
+    case Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID: {
+      if (m_PduSessionResourceModifyRequestIes->protocolIEs.list.array[i]
+                  ->criticality == Ngap_Criticality_reject &&
+          m_PduSessionResourceModifyRequestIes->protocolIEs.list.array[i]
+                  ->value.present ==
+              Ngap_PDUSessionResourceModifyRequestIEs__value_PR_RAN_UE_NGAP_ID) {
+        if (!NgapUeMessage::m_RanUeNgapId.decode(
+                m_PduSessionResourceModifyRequestIes->protocolIEs.list.array[i]
+                    ->value.choice.RAN_UE_NGAP_ID)) {
           oai::logger::logger_common::ngap().error(
               "Decoded NGAP RAN_UE_NGAP_ID IE error");
           return false;
         }
-      } break;
-      case Ngap_ProtocolIE_ID_id_RANPagingPriority: {
-        if (m_PduSessionResourceModifyRequestIes->protocolIEs.list.array[i]
-                    ->criticality == Ngap_Criticality_ignore &&
-            m_PduSessionResourceModifyRequestIes->protocolIEs.list.array[i]
-                    ->value.present ==
-                Ngap_PDUSessionResourceModifyRequestIEs__value_PR_RANPagingPriority) {
-          m_RanPagingPriority = new RanPagingPriority();
-          if (!m_RanPagingPriority->decode(
-                  m_PduSessionResourceModifyRequestIes->protocolIEs.list
-                      .array[i]
-                      ->value.choice.RANPagingPriority)) {
-            oai::logger::logger_common::ngap().error(
-                "Decoded NGAP RANPagingPriority IE error");
-            return false;
-          }
-        } else {
+      } else {
+        oai::logger::logger_common::ngap().error(
+            "Decoded NGAP RAN_UE_NGAP_ID IE error");
+        return false;
+      }
+    } break;
+    case Ngap_ProtocolIE_ID_id_RANPagingPriority: {
+      if (m_PduSessionResourceModifyRequestIes->protocolIEs.list.array[i]
+                  ->criticality == Ngap_Criticality_ignore &&
+          m_PduSessionResourceModifyRequestIes->protocolIEs.list.array[i]
+                  ->value.present ==
+              Ngap_PDUSessionResourceModifyRequestIEs__value_PR_RANPagingPriority) {
+        m_RanPagingPriority = new RanPagingPriority();
+        if (!m_RanPagingPriority->decode(
+                m_PduSessionResourceModifyRequestIes->protocolIEs.list.array[i]
+                    ->value.choice.RANPagingPriority)) {
           oai::logger::logger_common::ngap().error(
               "Decoded NGAP RANPagingPriority IE error");
           return false;
         }
-      } break;
-
-      case Ngap_ProtocolIE_ID_id_PDUSessionResourceModifyListModReq: {
-        if (m_PduSessionResourceModifyRequestIes->protocolIEs.list.array[i]
-                    ->criticality == Ngap_Criticality_reject &&
-            m_PduSessionResourceModifyRequestIes->protocolIEs.list.array[i]
-                    ->value.present ==
-                Ngap_PDUSessionResourceModifyRequestIEs__value_PR_PDUSessionResourceModifyListModReq) {
-          if (!m_PduSessionResourceModifyList.decode(
-                  m_PduSessionResourceModifyRequestIes->protocolIEs.list
-                      .array[i]
-                      ->value.choice.PDUSessionResourceModifyListModReq)) {
-            oai::logger::logger_common::ngap().error(
-                "Decoded NGAP PDUSessionResourceModifyListModReq IE error");
-            return false;
-          }
-        } else {
-          oai::logger::logger_common::ngap().error(
-              "Decoded NGAP PDUSessionResourceModifyListModReq IE error");
-
-          return false;
-        }
-      } break;
-      default: {
+      } else {
         oai::logger::logger_common::ngap().error(
-            "Decoded NGAP Message PDU error");
+            "Decoded NGAP RANPagingPriority IE error");
         return false;
       }
+    } break;
+
+    case Ngap_ProtocolIE_ID_id_PDUSessionResourceModifyListModReq: {
+      if (m_PduSessionResourceModifyRequestIes->protocolIEs.list.array[i]
+                  ->criticality == Ngap_Criticality_reject &&
+          m_PduSessionResourceModifyRequestIes->protocolIEs.list.array[i]
+                  ->value.present ==
+              Ngap_PDUSessionResourceModifyRequestIEs__value_PR_PDUSessionResourceModifyListModReq) {
+        if (!m_PduSessionResourceModifyList.decode(
+                m_PduSessionResourceModifyRequestIes->protocolIEs.list.array[i]
+                    ->value.choice.PDUSessionResourceModifyListModReq)) {
+          oai::logger::logger_common::ngap().error(
+              "Decoded NGAP PDUSessionResourceModifyListModReq IE error");
+          return false;
+        }
+      } else {
+        oai::logger::logger_common::ngap().error(
+            "Decoded NGAP PDUSessionResourceModifyListModReq IE error");
+
+        return false;
+      }
+    } break;
+    default: {
+      oai::logger::logger_common::ngap().error(
+          "Decoded NGAP Message PDU error");
+      return false;
+    }
     }
   }
 
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

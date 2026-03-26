@@ -22,12 +22,12 @@
 #ifndef DatalinkReportingConfiguration_H_
 #define DatalinkReportingConfiguration_H_
 
-#include "DlDataDeliveryStatus.h"
 #include "DddTrafficDescriptor.h"
-#include <string>
+#include "DlDataDeliveryStatus.h"
 #include "Snssai.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::udm {
 
@@ -35,7 +35,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class DatalinkReportingConfiguration {
- public:
+public:
   DatalinkReportingConfiguration();
   virtual ~DatalinkReportingConfiguration() = default;
 
@@ -49,10 +49,10 @@ class DatalinkReportingConfiguration {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const DatalinkReportingConfiguration& rhs) const;
-  bool operator!=(const DatalinkReportingConfiguration& rhs) const;
+  bool operator==(const DatalinkReportingConfiguration &rhs) const;
+  bool operator!=(const DatalinkReportingConfiguration &rhs) const;
 
   /////////////////////////////////////////////
   /// DatalinkReportingConfiguration members
@@ -60,42 +60,42 @@ class DatalinkReportingConfiguration {
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::DddTrafficDescriptor> getDddTrafficDes()
-      const;
+  std::vector<oai::model::common::DddTrafficDescriptor>
+  getDddTrafficDes() const;
   void setDddTrafficDes(
-      std::vector<oai::model::common::DddTrafficDescriptor> const& value);
+      std::vector<oai::model::common::DddTrafficDescriptor> const &value);
   bool dddTrafficDesIsSet() const;
   void unsetDddTrafficDes();
   /// <summary>
   ///
   /// </summary>
   std::string getDnn() const;
-  void setDnn(std::string const& value);
+  void setDnn(std::string const &value);
   bool dnnIsSet() const;
   void unsetDnn();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Snssai getSlice() const;
-  void setSlice(oai::model::common::Snssai const& value);
+  void setSlice(oai::model::common::Snssai const &value);
   bool sliceIsSet() const;
   void unsetSlice();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::DlDataDeliveryStatus> getDddStatusList()
-      const;
+  std::vector<oai::model::common::DlDataDeliveryStatus>
+  getDddStatusList() const;
   void setDddStatusList(
-      std::vector<oai::model::common::DlDataDeliveryStatus> const& value);
+      std::vector<oai::model::common::DlDataDeliveryStatus> const &value);
   bool dddStatusListIsSet() const;
   void unsetDddStatusList();
 
-  friend void to_json(
-      nlohmann::json& j, const DatalinkReportingConfiguration& o);
-  friend void from_json(
-      const nlohmann::json& j, DatalinkReportingConfiguration& o);
+  friend void to_json(nlohmann::json &j,
+                      const DatalinkReportingConfiguration &o);
+  friend void from_json(const nlohmann::json &j,
+                        DatalinkReportingConfiguration &o);
 
- protected:
+protected:
   std::vector<oai::model::common::DddTrafficDescriptor> m_DddTrafficDes;
   bool m_DddTrafficDesIsSet;
   std::string m_Dnn;
@@ -107,9 +107,9 @@ class DatalinkReportingConfiguration {
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* DatalinkReportingConfiguration_H_ */

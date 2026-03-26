@@ -13,7 +13,7 @@ MaximumIntegrityProtectedDataRate::MaximumIntegrityProtectedDataRate() {
 
 //------------------------------------------------------------------------------
 MaximumIntegrityProtectedDataRate::MaximumIntegrityProtectedDataRate(
-    const e_Ngap_MaximumIntegrityProtectedDataRate& value) {
+    const e_Ngap_MaximumIntegrityProtectedDataRate &value) {
   m_MaximumIntegrityProtectedDataRate = value;
 }
 //------------------------------------------------------------------------------
@@ -21,12 +21,12 @@ MaximumIntegrityProtectedDataRate::~MaximumIntegrityProtectedDataRate() {}
 
 //------------------------------------------------------------------------------
 void MaximumIntegrityProtectedDataRate::set(
-    const e_Ngap_MaximumIntegrityProtectedDataRate& value) {
+    const e_Ngap_MaximumIntegrityProtectedDataRate &value) {
   m_MaximumIntegrityProtectedDataRate = value;
 }
 
 //------------------------------------------------------------------------------
-bool MaximumIntegrityProtectedDataRate::get(long& value) const {
+bool MaximumIntegrityProtectedDataRate::get(long &value) const {
   value = m_MaximumIntegrityProtectedDataRate;
 
   return true;
@@ -34,7 +34,7 @@ bool MaximumIntegrityProtectedDataRate::get(long& value) const {
 
 //------------------------------------------------------------------------------
 bool MaximumIntegrityProtectedDataRate::encode(
-    Ngap_MaximumIntegrityProtectedDataRate_t& value) const {
+    Ngap_MaximumIntegrityProtectedDataRate_t &value) const {
   value = m_MaximumIntegrityProtectedDataRate;
 
   return true;
@@ -42,10 +42,10 @@ bool MaximumIntegrityProtectedDataRate::encode(
 
 //------------------------------------------------------------------------------
 bool MaximumIntegrityProtectedDataRate::decode(
-    const Ngap_MaximumIntegrityProtectedDataRate_t& value) {
+    const Ngap_MaximumIntegrityProtectedDataRate_t &value) {
   m_MaximumIntegrityProtectedDataRate = value;
 
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

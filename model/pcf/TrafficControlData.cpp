@@ -19,24 +19,24 @@
 namespace oai::model::pcf {
 
 TrafficControlData::TrafficControlData() {
-  m_TcId                        = "";
-  m_FlowStatusIsSet             = false;
-  m_RedirectInfoIsSet           = false;
-  m_AddRedirectInfoIsSet        = false;
-  m_MuteNotif                   = false;
-  m_MuteNotifIsSet              = false;
-  m_TrafficSteeringPolIdDl      = "";
+  m_TcId = "";
+  m_FlowStatusIsSet = false;
+  m_RedirectInfoIsSet = false;
+  m_AddRedirectInfoIsSet = false;
+  m_MuteNotif = false;
+  m_MuteNotifIsSet = false;
+  m_TrafficSteeringPolIdDl = "";
   m_TrafficSteeringPolIdDlIsSet = false;
-  m_TrafficSteeringPolIdUl      = "";
+  m_TrafficSteeringPolIdUl = "";
   m_TrafficSteeringPolIdUlIsSet = false;
-  m_RouteToLocsIsSet            = false;
-  m_TraffCorreInd               = false;
-  m_TraffCorreIndIsSet          = false;
-  m_UpPathChgEventIsSet         = false;
-  m_SteerFunIsSet               = false;
-  m_SteerModeDlIsSet            = false;
-  m_SteerModeUlIsSet            = false;
-  m_MulAccCtrlIsSet             = false;
+  m_RouteToLocsIsSet = false;
+  m_TraffCorreInd = false;
+  m_TraffCorreIndIsSet = false;
+  m_UpPathChgEventIsSet = false;
+  m_SteerFunIsSet = false;
+  m_SteerModeDlIsSet = false;
+  m_SteerModeUlIsSet = false;
+  m_MulAccCtrlIsSet = false;
 }
 
 void TrafficControlData::validate() const {
@@ -46,18 +46,18 @@ void TrafficControlData::validate() const {
   }
 }
 
-bool TrafficControlData::validate(std::stringstream& msg) const {
+bool TrafficControlData::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool TrafficControlData::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool TrafficControlData::validate(std::stringstream &msg,
+                                  const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "TrafficControlData" : pathPrefix;
 
   if (addRedirectInfoIsSet()) {
-    const std::vector<oai::model::pcf::RedirectInformation>& value =
+    const std::vector<oai::model::pcf::RedirectInformation> &value =
         m_AddRedirectInfo;
     const std::string currentValuePath = _pathPrefix + ".addRedirectInfo";
 
@@ -65,10 +65,10 @@ bool TrafficControlData::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::RedirectInformation& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::RedirectInformation &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -81,7 +81,7 @@ bool TrafficControlData::validate(
   }
 
   if (routeToLocsIsSet()) {
-    const std::vector<oai::model::common::RouteToLocation>& value =
+    const std::vector<oai::model::common::RouteToLocation> &value =
         m_RouteToLocs;
     const std::string currentValuePath = _pathPrefix + ".routeToLocs";
 
@@ -89,10 +89,10 @@ bool TrafficControlData::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::RouteToLocation& value : value) {
+      int i = 0;
+      for (const oai::model::common::RouteToLocation &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -107,7 +107,7 @@ bool TrafficControlData::validate(
   return success;
 }
 
-bool TrafficControlData::operator==(const TrafficControlData& rhs) const {
+bool TrafficControlData::operator==(const TrafficControlData &rhs) const {
   return
 
       (getTcId() == rhs.getTcId()) &&
@@ -167,33 +167,42 @@ bool TrafficControlData::operator==(const TrafficControlData& rhs) const {
           ;
 }
 
-bool TrafficControlData::operator!=(const TrafficControlData& rhs) const {
+bool TrafficControlData::operator!=(const TrafficControlData &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const TrafficControlData& o) {
-  j         = nlohmann::json();
+void to_json(nlohmann::json &j, const TrafficControlData &o) {
+  j = nlohmann::json();
   j["tcId"] = o.m_TcId;
-  if (o.flowStatusIsSet()) j["flowStatus"] = o.m_FlowStatus;
-  if (o.redirectInfoIsSet()) j["redirectInfo"] = o.m_RedirectInfo;
+  if (o.flowStatusIsSet())
+    j["flowStatus"] = o.m_FlowStatus;
+  if (o.redirectInfoIsSet())
+    j["redirectInfo"] = o.m_RedirectInfo;
   if (o.addRedirectInfoIsSet() || !o.m_AddRedirectInfo.empty())
     j["addRedirectInfo"] = o.m_AddRedirectInfo;
-  if (o.muteNotifIsSet()) j["muteNotif"] = o.m_MuteNotif;
+  if (o.muteNotifIsSet())
+    j["muteNotif"] = o.m_MuteNotif;
   if (o.trafficSteeringPolIdDlIsSet())
     j["trafficSteeringPolIdDl"] = o.m_TrafficSteeringPolIdDl;
   if (o.trafficSteeringPolIdUlIsSet())
     j["trafficSteeringPolIdUl"] = o.m_TrafficSteeringPolIdUl;
   if (o.routeToLocsIsSet() || !o.m_RouteToLocs.empty())
     j["routeToLocs"] = o.m_RouteToLocs;
-  if (o.traffCorreIndIsSet()) j["traffCorreInd"] = o.m_TraffCorreInd;
-  if (o.upPathChgEventIsSet()) j["upPathChgEvent"] = o.m_UpPathChgEvent;
-  if (o.steerFunIsSet()) j["steerFun"] = o.m_SteerFun;
-  if (o.steerModeDlIsSet()) j["steerModeDl"] = o.m_SteerModeDl;
-  if (o.steerModeUlIsSet()) j["steerModeUl"] = o.m_SteerModeUl;
-  if (o.mulAccCtrlIsSet()) j["mulAccCtrl"] = o.m_MulAccCtrl;
+  if (o.traffCorreIndIsSet())
+    j["traffCorreInd"] = o.m_TraffCorreInd;
+  if (o.upPathChgEventIsSet())
+    j["upPathChgEvent"] = o.m_UpPathChgEvent;
+  if (o.steerFunIsSet())
+    j["steerFun"] = o.m_SteerFun;
+  if (o.steerModeDlIsSet())
+    j["steerModeDl"] = o.m_SteerModeDl;
+  if (o.steerModeUlIsSet())
+    j["steerModeUl"] = o.m_SteerModeUl;
+  if (o.mulAccCtrlIsSet())
+    j["mulAccCtrl"] = o.m_MulAccCtrl;
 }
 
-void from_json(const nlohmann::json& j, TrafficControlData& o) {
+void from_json(const nlohmann::json &j, TrafficControlData &o) {
   if (j.find("tcId") != j.end()) {
     j.at("tcId").get_to(o.m_TcId);
   }
@@ -251,48 +260,38 @@ void from_json(const nlohmann::json& j, TrafficControlData& o) {
   }
 }
 
-std::string TrafficControlData::getTcId() const {
-  return m_TcId;
-}
-void TrafficControlData::setTcId(std::string const& value) {
-  m_TcId = value;
-}
+std::string TrafficControlData::getTcId() const { return m_TcId; }
+void TrafficControlData::setTcId(std::string const &value) { m_TcId = value; }
 oai::model::pcf::FlowStatus TrafficControlData::getFlowStatus() const {
   return m_FlowStatus;
 }
 void TrafficControlData::setFlowStatus(
-    oai::model::pcf::FlowStatus const& value) {
-  m_FlowStatus      = value;
+    oai::model::pcf::FlowStatus const &value) {
+  m_FlowStatus = value;
   m_FlowStatusIsSet = true;
 }
-bool TrafficControlData::flowStatusIsSet() const {
-  return m_FlowStatusIsSet;
-}
-void TrafficControlData::unsetFlowStatus() {
-  m_FlowStatusIsSet = false;
-}
-oai::model::pcf::RedirectInformation TrafficControlData::getRedirectInfo()
-    const {
+bool TrafficControlData::flowStatusIsSet() const { return m_FlowStatusIsSet; }
+void TrafficControlData::unsetFlowStatus() { m_FlowStatusIsSet = false; }
+oai::model::pcf::RedirectInformation
+TrafficControlData::getRedirectInfo() const {
   return m_RedirectInfo;
 }
 void TrafficControlData::setRedirectInfo(
-    oai::model::pcf::RedirectInformation const& value) {
-  m_RedirectInfo      = value;
+    oai::model::pcf::RedirectInformation const &value) {
+  m_RedirectInfo = value;
   m_RedirectInfoIsSet = true;
 }
 bool TrafficControlData::redirectInfoIsSet() const {
   return m_RedirectInfoIsSet;
 }
-void TrafficControlData::unsetRedirectInfo() {
-  m_RedirectInfoIsSet = false;
-}
+void TrafficControlData::unsetRedirectInfo() { m_RedirectInfoIsSet = false; }
 std::vector<oai::model::pcf::RedirectInformation>
 TrafficControlData::getAddRedirectInfo() const {
   return m_AddRedirectInfo;
 }
 void TrafficControlData::setAddRedirectInfo(
-    std::vector<oai::model::pcf::RedirectInformation> const& value) {
-  m_AddRedirectInfo      = value;
+    std::vector<oai::model::pcf::RedirectInformation> const &value) {
+  m_AddRedirectInfo = value;
   m_AddRedirectInfoIsSet = true;
 }
 bool TrafficControlData::addRedirectInfoIsSet() const {
@@ -301,24 +300,18 @@ bool TrafficControlData::addRedirectInfoIsSet() const {
 void TrafficControlData::unsetAddRedirectInfo() {
   m_AddRedirectInfoIsSet = false;
 }
-bool TrafficControlData::isMuteNotif() const {
-  return m_MuteNotif;
-}
+bool TrafficControlData::isMuteNotif() const { return m_MuteNotif; }
 void TrafficControlData::setMuteNotif(bool const value) {
-  m_MuteNotif      = value;
+  m_MuteNotif = value;
   m_MuteNotifIsSet = true;
 }
-bool TrafficControlData::muteNotifIsSet() const {
-  return m_MuteNotifIsSet;
-}
-void TrafficControlData::unsetMuteNotif() {
-  m_MuteNotifIsSet = false;
-}
+bool TrafficControlData::muteNotifIsSet() const { return m_MuteNotifIsSet; }
+void TrafficControlData::unsetMuteNotif() { m_MuteNotifIsSet = false; }
 std::string TrafficControlData::getTrafficSteeringPolIdDl() const {
   return m_TrafficSteeringPolIdDl;
 }
-void TrafficControlData::setTrafficSteeringPolIdDl(std::string const& value) {
-  m_TrafficSteeringPolIdDl      = value;
+void TrafficControlData::setTrafficSteeringPolIdDl(std::string const &value) {
+  m_TrafficSteeringPolIdDl = value;
   m_TrafficSteeringPolIdDlIsSet = true;
 }
 bool TrafficControlData::trafficSteeringPolIdDlIsSet() const {
@@ -330,8 +323,8 @@ void TrafficControlData::unsetTrafficSteeringPolIdDl() {
 std::string TrafficControlData::getTrafficSteeringPolIdUl() const {
   return m_TrafficSteeringPolIdUl;
 }
-void TrafficControlData::setTrafficSteeringPolIdUl(std::string const& value) {
-  m_TrafficSteeringPolIdUl      = value;
+void TrafficControlData::setTrafficSteeringPolIdUl(std::string const &value) {
+  m_TrafficSteeringPolIdUl = value;
   m_TrafficSteeringPolIdUlIsSet = true;
 }
 bool TrafficControlData::trafficSteeringPolIdUlIsSet() const {
@@ -345,35 +338,27 @@ TrafficControlData::getRouteToLocs() const {
   return m_RouteToLocs;
 }
 void TrafficControlData::setRouteToLocs(
-    std::vector<oai::model::common::RouteToLocation> const& value) {
-  m_RouteToLocs      = value;
+    std::vector<oai::model::common::RouteToLocation> const &value) {
+  m_RouteToLocs = value;
   m_RouteToLocsIsSet = true;
 }
-bool TrafficControlData::routeToLocsIsSet() const {
-  return m_RouteToLocsIsSet;
-}
-void TrafficControlData::unsetRouteToLocs() {
-  m_RouteToLocsIsSet = false;
-}
-bool TrafficControlData::isTraffCorreInd() const {
-  return m_TraffCorreInd;
-}
+bool TrafficControlData::routeToLocsIsSet() const { return m_RouteToLocsIsSet; }
+void TrafficControlData::unsetRouteToLocs() { m_RouteToLocsIsSet = false; }
+bool TrafficControlData::isTraffCorreInd() const { return m_TraffCorreInd; }
 void TrafficControlData::setTraffCorreInd(bool const value) {
-  m_TraffCorreInd      = value;
+  m_TraffCorreInd = value;
   m_TraffCorreIndIsSet = true;
 }
 bool TrafficControlData::traffCorreIndIsSet() const {
   return m_TraffCorreIndIsSet;
 }
-void TrafficControlData::unsetTraffCorreInd() {
-  m_TraffCorreIndIsSet = false;
-}
+void TrafficControlData::unsetTraffCorreInd() { m_TraffCorreIndIsSet = false; }
 oai::model::pcf::UpPathChgEvent TrafficControlData::getUpPathChgEvent() const {
   return m_UpPathChgEvent;
 }
 void TrafficControlData::setUpPathChgEvent(
-    oai::model::pcf::UpPathChgEvent const& value) {
-  m_UpPathChgEvent      = value;
+    oai::model::pcf::UpPathChgEvent const &value) {
+  m_UpPathChgEvent = value;
   m_UpPathChgEventIsSet = true;
 }
 bool TrafficControlData::upPathChgEventIsSet() const {
@@ -386,58 +371,42 @@ oai::model::pcf::SteeringFunctionality TrafficControlData::getSteerFun() const {
   return m_SteerFun;
 }
 void TrafficControlData::setSteerFun(
-    oai::model::pcf::SteeringFunctionality const& value) {
-  m_SteerFun      = value;
+    oai::model::pcf::SteeringFunctionality const &value) {
+  m_SteerFun = value;
   m_SteerFunIsSet = true;
 }
-bool TrafficControlData::steerFunIsSet() const {
-  return m_SteerFunIsSet;
-}
-void TrafficControlData::unsetSteerFun() {
-  m_SteerFunIsSet = false;
-}
+bool TrafficControlData::steerFunIsSet() const { return m_SteerFunIsSet; }
+void TrafficControlData::unsetSteerFun() { m_SteerFunIsSet = false; }
 oai::model::pcf::SteeringMode TrafficControlData::getSteerModeDl() const {
   return m_SteerModeDl;
 }
 void TrafficControlData::setSteerModeDl(
-    oai::model::pcf::SteeringMode const& value) {
-  m_SteerModeDl      = value;
+    oai::model::pcf::SteeringMode const &value) {
+  m_SteerModeDl = value;
   m_SteerModeDlIsSet = true;
 }
-bool TrafficControlData::steerModeDlIsSet() const {
-  return m_SteerModeDlIsSet;
-}
-void TrafficControlData::unsetSteerModeDl() {
-  m_SteerModeDlIsSet = false;
-}
+bool TrafficControlData::steerModeDlIsSet() const { return m_SteerModeDlIsSet; }
+void TrafficControlData::unsetSteerModeDl() { m_SteerModeDlIsSet = false; }
 oai::model::pcf::SteeringMode TrafficControlData::getSteerModeUl() const {
   return m_SteerModeUl;
 }
 void TrafficControlData::setSteerModeUl(
-    oai::model::pcf::SteeringMode const& value) {
-  m_SteerModeUl      = value;
+    oai::model::pcf::SteeringMode const &value) {
+  m_SteerModeUl = value;
   m_SteerModeUlIsSet = true;
 }
-bool TrafficControlData::steerModeUlIsSet() const {
-  return m_SteerModeUlIsSet;
-}
-void TrafficControlData::unsetSteerModeUl() {
-  m_SteerModeUlIsSet = false;
-}
-oai::model::pcf::MulticastAccessControl TrafficControlData::getMulAccCtrl()
-    const {
+bool TrafficControlData::steerModeUlIsSet() const { return m_SteerModeUlIsSet; }
+void TrafficControlData::unsetSteerModeUl() { m_SteerModeUlIsSet = false; }
+oai::model::pcf::MulticastAccessControl
+TrafficControlData::getMulAccCtrl() const {
   return m_MulAccCtrl;
 }
 void TrafficControlData::setMulAccCtrl(
-    oai::model::pcf::MulticastAccessControl const& value) {
-  m_MulAccCtrl      = value;
+    oai::model::pcf::MulticastAccessControl const &value) {
+  m_MulAccCtrl = value;
   m_MulAccCtrlIsSet = true;
 }
-bool TrafficControlData::mulAccCtrlIsSet() const {
-  return m_MulAccCtrlIsSet;
-}
-void TrafficControlData::unsetMulAccCtrl() {
-  m_MulAccCtrlIsSet = false;
-}
+bool TrafficControlData::mulAccCtrlIsSet() const { return m_MulAccCtrlIsSet; }
+void TrafficControlData::unsetMulAccCtrl() { m_MulAccCtrlIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

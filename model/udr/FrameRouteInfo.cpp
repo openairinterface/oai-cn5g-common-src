@@ -19,8 +19,8 @@
 namespace oai::udr::model {
 
 FrameRouteInfo::FrameRouteInfo() {
-  m_Ipv4Mask        = "";
-  m_Ipv4MaskIsSet   = false;
+  m_Ipv4Mask = "";
+  m_Ipv4MaskIsSet = false;
   m_Ipv6PrefixIsSet = false;
 }
 
@@ -30,13 +30,15 @@ void FrameRouteInfo::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const FrameRouteInfo& o) {
+void to_json(nlohmann::json &j, const FrameRouteInfo &o) {
   j = nlohmann::json();
-  if (o.ipv4MaskIsSet()) j["ipv4Mask"] = o.m_Ipv4Mask;
-  if (o.ipv6PrefixIsSet()) j["ipv6Prefix"] = o.m_Ipv6Prefix;
+  if (o.ipv4MaskIsSet())
+    j["ipv4Mask"] = o.m_Ipv4Mask;
+  if (o.ipv6PrefixIsSet())
+    j["ipv6Prefix"] = o.m_Ipv6Prefix;
 }
 
-void from_json(const nlohmann::json& j, FrameRouteInfo& o) {
+void from_json(const nlohmann::json &j, FrameRouteInfo &o) {
   if (j.find("ipv4Mask") != j.end()) {
     j.at("ipv4Mask").get_to(o.m_Ipv4Mask);
     o.m_Ipv4MaskIsSet = true;
@@ -47,32 +49,22 @@ void from_json(const nlohmann::json& j, FrameRouteInfo& o) {
   }
 }
 
-std::string FrameRouteInfo::getIpv4Mask() const {
-  return m_Ipv4Mask;
-}
-void FrameRouteInfo::setIpv4Mask(std::string const& value) {
-  m_Ipv4Mask      = value;
+std::string FrameRouteInfo::getIpv4Mask() const { return m_Ipv4Mask; }
+void FrameRouteInfo::setIpv4Mask(std::string const &value) {
+  m_Ipv4Mask = value;
   m_Ipv4MaskIsSet = true;
 }
-bool FrameRouteInfo::ipv4MaskIsSet() const {
-  return m_Ipv4MaskIsSet;
-}
-void FrameRouteInfo::unsetIpv4Mask() {
-  m_Ipv4MaskIsSet = false;
-}
+bool FrameRouteInfo::ipv4MaskIsSet() const { return m_Ipv4MaskIsSet; }
+void FrameRouteInfo::unsetIpv4Mask() { m_Ipv4MaskIsSet = false; }
 oai::model::common::Ipv6Prefix FrameRouteInfo::getIpv6Prefix() const {
   return m_Ipv6Prefix;
 }
 void FrameRouteInfo::setIpv6Prefix(
-    oai::model::common::Ipv6Prefix const& value) {
-  m_Ipv6Prefix      = value;
+    oai::model::common::Ipv6Prefix const &value) {
+  m_Ipv6Prefix = value;
   m_Ipv6PrefixIsSet = true;
 }
-bool FrameRouteInfo::ipv6PrefixIsSet() const {
-  return m_Ipv6PrefixIsSet;
-}
-void FrameRouteInfo::unsetIpv6Prefix() {
-  m_Ipv6PrefixIsSet = false;
-}
+bool FrameRouteInfo::ipv6PrefixIsSet() const { return m_Ipv6PrefixIsSet; }
+void FrameRouteInfo::unsetIpv6Prefix() { m_Ipv6PrefixIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

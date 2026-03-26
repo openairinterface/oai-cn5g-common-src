@@ -28,7 +28,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class V2xInformation {
- public:
+public:
   V2xInformation();
   virtual ~V2xInformation() = default;
 
@@ -42,16 +42,16 @@ class V2xInformation {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const V2xInformation& rhs) const;
-  bool operator!=(const V2xInformation& rhs) const;
+  bool operator==(const V2xInformation &rhs) const;
+  bool operator!=(const V2xInformation &rhs) const;
 
   /////////////////////////////////////////////
   /// V2xInformation members
@@ -60,18 +60,18 @@ class V2xInformation {
   ///
   /// </summary>
   oai::model::amf::N2InfoContent getN2Pc5Pol() const;
-  void setN2Pc5Pol(oai::model::amf::N2InfoContent const& value);
+  void setN2Pc5Pol(oai::model::amf::N2InfoContent const &value);
   bool n2Pc5PolIsSet() const;
   void unsetN2Pc5Pol();
 
-  friend void to_json(nlohmann::json& j, const V2xInformation& o);
-  friend void from_json(const nlohmann::json& j, V2xInformation& o);
+  friend void to_json(nlohmann::json &j, const V2xInformation &o);
+  friend void from_json(const nlohmann::json &j, V2xInformation &o);
 
- protected:
+protected:
   oai::model::amf::N2InfoContent m_N2Pc5Pol;
   bool m_N2Pc5PolIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* V2xInformation_H_ */

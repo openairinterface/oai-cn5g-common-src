@@ -27,7 +27,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class AmfEventTrigger_anyOf {
- public:
+public:
   AmfEventTrigger_anyOf();
   virtual ~AmfEventTrigger_anyOf() = default;
 
@@ -50,10 +50,10 @@ class AmfEventTrigger_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const AmfEventTrigger_anyOf& rhs) const;
-  bool operator!=(const AmfEventTrigger_anyOf& rhs) const;
+  bool operator==(const AmfEventTrigger_anyOf &rhs) const;
+  bool operator!=(const AmfEventTrigger_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// AmfEventTrigger_anyOf members
@@ -61,19 +61,19 @@ class AmfEventTrigger_anyOf {
   AmfEventTrigger_anyOf::eAmfEventTrigger_anyOf getValue() const;
   void setValue(AmfEventTrigger_anyOf::eAmfEventTrigger_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const AmfEventTrigger_anyOf& o);
-  friend void from_json(const nlohmann::json& j, AmfEventTrigger_anyOf& o);
+  friend void to_json(nlohmann::json &j, const AmfEventTrigger_anyOf &o);
+  friend void from_json(const nlohmann::json &j, AmfEventTrigger_anyOf &o);
 
- protected:
+protected:
   AmfEventTrigger_anyOf::eAmfEventTrigger_anyOf m_value =
       AmfEventTrigger_anyOf::eAmfEventTrigger_anyOf::
           INVALID_VALUE_OPENAPI_GENERATED;
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* AmfEventTrigger_anyOf_H_ */

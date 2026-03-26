@@ -19,8 +19,8 @@
 #ifndef NgRanTargetId_H_
 #define NgRanTargetId_H_
 
-#include "Tai.h"
 #include "GlobalRanNodeId.h"
+#include "Tai.h"
 #include <nlohmann/json.hpp>
 
 namespace oai::model::amf {
@@ -29,7 +29,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class NgRanTargetId {
- public:
+public:
   NgRanTargetId();
   virtual ~NgRanTargetId();
 
@@ -42,22 +42,22 @@ class NgRanTargetId {
   ///
   /// </summary>
   oai::model::common::GlobalRanNodeId getRanNodeId() const;
-  void setRanNodeId(oai::model::common::GlobalRanNodeId const& value);
+  void setRanNodeId(oai::model::common::GlobalRanNodeId const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Tai getTai() const;
-  void setTai(oai::model::common::Tai const& value);
+  void setTai(oai::model::common::Tai const &value);
 
-  friend void to_json(nlohmann::json& j, const NgRanTargetId& o);
-  friend void from_json(const nlohmann::json& j, NgRanTargetId& o);
+  friend void to_json(nlohmann::json &j, const NgRanTargetId &o);
+  friend void from_json(const nlohmann::json &j, NgRanTargetId &o);
 
- protected:
+protected:
   oai::model::common::GlobalRanNodeId m_RanNodeId;
 
   oai::model::common::Tai m_Tai;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* NgRanTargetId_H_ */

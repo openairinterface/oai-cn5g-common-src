@@ -12,8 +12,8 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_EmergencyAreaID.h"
 #include "Ngap_CompletedCellsInEAI-EUTRA.h"
+#include "Ngap_EmergencyAreaID.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -27,7 +27,7 @@ struct Ngap_ProtocolExtensionContainer;
 typedef struct Ngap_EmergencyAreaIDBroadcastEUTRA_Item {
   Ngap_EmergencyAreaID_t emergencyAreaID;
   Ngap_CompletedCellsInEAI_EUTRA_t completedCellsInEAI_EUTRA;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

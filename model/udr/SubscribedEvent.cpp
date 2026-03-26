@@ -26,10 +26,10 @@ void SubscribedEvent::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const SubscribedEvent& o) {
+void to_json(nlohmann::json &j, const SubscribedEvent &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, SubscribedEvent& o) {}
+void from_json(const nlohmann::json &j, SubscribedEvent &o) {}
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

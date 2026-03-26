@@ -20,11 +20,11 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_LoggingDuration {
-  Ngap_LoggingDuration_m10  = 0,
-  Ngap_LoggingDuration_m20  = 1,
-  Ngap_LoggingDuration_m40  = 2,
-  Ngap_LoggingDuration_m60  = 3,
-  Ngap_LoggingDuration_m90  = 4,
+  Ngap_LoggingDuration_m10 = 0,
+  Ngap_LoggingDuration_m20 = 1,
+  Ngap_LoggingDuration_m40 = 2,
+  Ngap_LoggingDuration_m60 = 3,
+  Ngap_LoggingDuration_m90 = 4,
   Ngap_LoggingDuration_m120 = 5
   /*
    * Enumeration is extensible

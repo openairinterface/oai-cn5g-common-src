@@ -20,8 +20,8 @@
 #define NfTypeCond_H_
 
 //#include "NFType.h"
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::nrf {
 
@@ -29,7 +29,7 @@ namespace oai::model::nrf {
 ///
 /// </summary>
 class NfTypeCond {
- public:
+public:
   NfTypeCond();
   virtual ~NfTypeCond();
 
@@ -42,15 +42,15 @@ class NfTypeCond {
   ///
   /// </summary>
   std::string getNfType() const;
-  void setNfType(std::string const& value);
+  void setNfType(std::string const &value);
 
-  friend void to_json(nlohmann::json& j, const NfTypeCond& o);
-  friend void from_json(const nlohmann::json& j, NfTypeCond& o);
+  friend void to_json(nlohmann::json &j, const NfTypeCond &o);
+  friend void from_json(const nlohmann::json &j, NfTypeCond &o);
 
- protected:
+protected:
   std::string m_NfType;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* NfTypeCond_H_ */

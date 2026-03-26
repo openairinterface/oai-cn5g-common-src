@@ -19,24 +19,24 @@
 namespace oai::model::amf {
 
 AmfEventSubscription::AmfEventSubscription() {
-  m_EventNotifyUri                     = "";
-  m_NotifyCorrelationId                = "";
-  m_NfId                               = "";
-  m_SubsChangeNotifyUri                = "";
-  m_SubsChangeNotifyUriIsSet           = false;
-  m_SubsChangeNotifyCorrelationId      = "";
+  m_EventNotifyUri = "";
+  m_NotifyCorrelationId = "";
+  m_NfId = "";
+  m_SubsChangeNotifyUri = "";
+  m_SubsChangeNotifyUriIsSet = false;
+  m_SubsChangeNotifyCorrelationId = "";
   m_SubsChangeNotifyCorrelationIdIsSet = false;
-  m_Supi                               = "";
-  m_SupiIsSet                          = false;
-  m_GroupId                            = "";
-  m_GroupIdIsSet                       = false;
-  m_Gpsi                               = "";
-  m_GpsiIsSet                          = false;
-  m_Pei                                = "";
-  m_PeiIsSet                           = false;
-  m_AnyUE                              = false;
-  m_AnyUEIsSet                         = false;
-  m_OptionsIsSet                       = false;
+  m_Supi = "";
+  m_SupiIsSet = false;
+  m_GroupId = "";
+  m_GroupIdIsSet = false;
+  m_Gpsi = "";
+  m_GpsiIsSet = false;
+  m_Pei = "";
+  m_PeiIsSet = false;
+  m_AnyUE = false;
+  m_AnyUEIsSet = false;
+  m_OptionsIsSet = false;
 }
 
 void AmfEventSubscription::validate() const {
@@ -46,28 +46,28 @@ void AmfEventSubscription::validate() const {
   }
 }
 
-bool AmfEventSubscription::validate(std::stringstream& msg) const {
+bool AmfEventSubscription::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AmfEventSubscription::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool AmfEventSubscription::validate(std::stringstream &msg,
+                                    const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AmfEventSubscription" : pathPrefix;
 
   /* EventList */ {
-    const std::vector<AmfEvent>& value = m_EventList;
+    const std::vector<AmfEvent> &value = m_EventList;
     const std::string currentValuePath = _pathPrefix + ".eventList";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const AmfEvent& value : value) {
+      int i = 0;
+      for (const AmfEvent &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -80,29 +80,29 @@ bool AmfEventSubscription::validate(
   }
 
   if (supiIsSet()) {
-    const std::string& value           = m_Supi;
+    const std::string &value = m_Supi;
     const std::string currentValuePath = _pathPrefix + ".supi";
   }
 
   if (groupIdIsSet()) {
-    const std::string& value           = m_GroupId;
+    const std::string &value = m_GroupId;
     const std::string currentValuePath = _pathPrefix + ".groupId";
   }
 
   if (gpsiIsSet()) {
-    const std::string& value           = m_Gpsi;
+    const std::string &value = m_Gpsi;
     const std::string currentValuePath = _pathPrefix + ".gpsi";
   }
 
   if (peiIsSet()) {
-    const std::string& value           = m_Pei;
+    const std::string &value = m_Pei;
     const std::string currentValuePath = _pathPrefix + ".pei";
   }
 
   return success;
 }
 
-bool AmfEventSubscription::operator==(const AmfEventSubscription& rhs) const {
+bool AmfEventSubscription::operator==(const AmfEventSubscription &rhs) const {
   return
 
       (getEventList() == rhs.getEventList()) &&
@@ -147,29 +147,35 @@ bool AmfEventSubscription::operator==(const AmfEventSubscription& rhs) const {
           ;
 }
 
-bool AmfEventSubscription::operator!=(const AmfEventSubscription& rhs) const {
+bool AmfEventSubscription::operator!=(const AmfEventSubscription &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AmfEventSubscription& o) {
-  j                        = nlohmann::json();
-  j["eventList"]           = o.m_EventList;
-  j["eventNotifyUri"]      = o.m_EventNotifyUri;
+void to_json(nlohmann::json &j, const AmfEventSubscription &o) {
+  j = nlohmann::json();
+  j["eventList"] = o.m_EventList;
+  j["eventNotifyUri"] = o.m_EventNotifyUri;
   j["notifyCorrelationId"] = o.m_NotifyCorrelationId;
-  j["nfId"]                = o.m_NfId;
+  j["nfId"] = o.m_NfId;
   if (o.subsChangeNotifyUriIsSet())
     j["subsChangeNotifyUri"] = o.m_SubsChangeNotifyUri;
   if (o.subsChangeNotifyCorrelationIdIsSet())
     j["subsChangeNotifyCorrelationId"] = o.m_SubsChangeNotifyCorrelationId;
-  if (o.supiIsSet()) j["supi"] = o.m_Supi;
-  if (o.groupIdIsSet()) j["groupId"] = o.m_GroupId;
-  if (o.gpsiIsSet()) j["gpsi"] = o.m_Gpsi;
-  if (o.peiIsSet()) j["pei"] = o.m_Pei;
-  if (o.anyUEIsSet()) j["anyUE"] = o.m_AnyUE;
-  if (o.optionsIsSet()) j["options"] = o.m_Options;
+  if (o.supiIsSet())
+    j["supi"] = o.m_Supi;
+  if (o.groupIdIsSet())
+    j["groupId"] = o.m_GroupId;
+  if (o.gpsiIsSet())
+    j["gpsi"] = o.m_Gpsi;
+  if (o.peiIsSet())
+    j["pei"] = o.m_Pei;
+  if (o.anyUEIsSet())
+    j["anyUE"] = o.m_AnyUE;
+  if (o.optionsIsSet())
+    j["options"] = o.m_Options;
 }
 
-void from_json(const nlohmann::json& j, AmfEventSubscription& o) {
+void from_json(const nlohmann::json &j, AmfEventSubscription &o) {
   j.at("eventList").get_to(o.m_EventList);
   j.at("eventNotifyUri").get_to(o.m_EventNotifyUri);
   j.at("notifyCorrelationId").get_to(o.m_NotifyCorrelationId);
@@ -212,32 +218,28 @@ void from_json(const nlohmann::json& j, AmfEventSubscription& o) {
 std::vector<AmfEvent> AmfEventSubscription::getEventList() const {
   return m_EventList;
 }
-void AmfEventSubscription::setEventList(std::vector<AmfEvent> const& value) {
+void AmfEventSubscription::setEventList(std::vector<AmfEvent> const &value) {
   m_EventList = value;
 }
 std::string AmfEventSubscription::getEventNotifyUri() const {
   return m_EventNotifyUri;
 }
-void AmfEventSubscription::setEventNotifyUri(std::string const& value) {
+void AmfEventSubscription::setEventNotifyUri(std::string const &value) {
   m_EventNotifyUri = value;
 }
 std::string AmfEventSubscription::getNotifyCorrelationId() const {
   return m_NotifyCorrelationId;
 }
-void AmfEventSubscription::setNotifyCorrelationId(std::string const& value) {
+void AmfEventSubscription::setNotifyCorrelationId(std::string const &value) {
   m_NotifyCorrelationId = value;
 }
-std::string AmfEventSubscription::getNfId() const {
-  return m_NfId;
-}
-void AmfEventSubscription::setNfId(std::string const& value) {
-  m_NfId = value;
-}
+std::string AmfEventSubscription::getNfId() const { return m_NfId; }
+void AmfEventSubscription::setNfId(std::string const &value) { m_NfId = value; }
 std::string AmfEventSubscription::getSubsChangeNotifyUri() const {
   return m_SubsChangeNotifyUri;
 }
-void AmfEventSubscription::setSubsChangeNotifyUri(std::string const& value) {
-  m_SubsChangeNotifyUri      = value;
+void AmfEventSubscription::setSubsChangeNotifyUri(std::string const &value) {
+  m_SubsChangeNotifyUri = value;
   m_SubsChangeNotifyUriIsSet = true;
 }
 bool AmfEventSubscription::subsChangeNotifyUriIsSet() const {
@@ -250,8 +252,8 @@ std::string AmfEventSubscription::getSubsChangeNotifyCorrelationId() const {
   return m_SubsChangeNotifyCorrelationId;
 }
 void AmfEventSubscription::setSubsChangeNotifyCorrelationId(
-    std::string const& value) {
-  m_SubsChangeNotifyCorrelationId      = value;
+    std::string const &value) {
+  m_SubsChangeNotifyCorrelationId = value;
   m_SubsChangeNotifyCorrelationIdIsSet = true;
 }
 bool AmfEventSubscription::subsChangeNotifyCorrelationIdIsSet() const {
@@ -260,83 +262,47 @@ bool AmfEventSubscription::subsChangeNotifyCorrelationIdIsSet() const {
 void AmfEventSubscription::unsetSubsChangeNotifyCorrelationId() {
   m_SubsChangeNotifyCorrelationIdIsSet = false;
 }
-std::string AmfEventSubscription::getSupi() const {
-  return m_Supi;
-}
-void AmfEventSubscription::setSupi(std::string const& value) {
-  m_Supi      = value;
+std::string AmfEventSubscription::getSupi() const { return m_Supi; }
+void AmfEventSubscription::setSupi(std::string const &value) {
+  m_Supi = value;
   m_SupiIsSet = true;
 }
-bool AmfEventSubscription::supiIsSet() const {
-  return m_SupiIsSet;
-}
-void AmfEventSubscription::unsetSupi() {
-  m_SupiIsSet = false;
-}
-std::string AmfEventSubscription::getGroupId() const {
-  return m_GroupId;
-}
-void AmfEventSubscription::setGroupId(std::string const& value) {
-  m_GroupId      = value;
+bool AmfEventSubscription::supiIsSet() const { return m_SupiIsSet; }
+void AmfEventSubscription::unsetSupi() { m_SupiIsSet = false; }
+std::string AmfEventSubscription::getGroupId() const { return m_GroupId; }
+void AmfEventSubscription::setGroupId(std::string const &value) {
+  m_GroupId = value;
   m_GroupIdIsSet = true;
 }
-bool AmfEventSubscription::groupIdIsSet() const {
-  return m_GroupIdIsSet;
-}
-void AmfEventSubscription::unsetGroupId() {
-  m_GroupIdIsSet = false;
-}
-std::string AmfEventSubscription::getGpsi() const {
-  return m_Gpsi;
-}
-void AmfEventSubscription::setGpsi(std::string const& value) {
-  m_Gpsi      = value;
+bool AmfEventSubscription::groupIdIsSet() const { return m_GroupIdIsSet; }
+void AmfEventSubscription::unsetGroupId() { m_GroupIdIsSet = false; }
+std::string AmfEventSubscription::getGpsi() const { return m_Gpsi; }
+void AmfEventSubscription::setGpsi(std::string const &value) {
+  m_Gpsi = value;
   m_GpsiIsSet = true;
 }
-bool AmfEventSubscription::gpsiIsSet() const {
-  return m_GpsiIsSet;
-}
-void AmfEventSubscription::unsetGpsi() {
-  m_GpsiIsSet = false;
-}
-std::string AmfEventSubscription::getPei() const {
-  return m_Pei;
-}
-void AmfEventSubscription::setPei(std::string const& value) {
-  m_Pei      = value;
+bool AmfEventSubscription::gpsiIsSet() const { return m_GpsiIsSet; }
+void AmfEventSubscription::unsetGpsi() { m_GpsiIsSet = false; }
+std::string AmfEventSubscription::getPei() const { return m_Pei; }
+void AmfEventSubscription::setPei(std::string const &value) {
+  m_Pei = value;
   m_PeiIsSet = true;
 }
-bool AmfEventSubscription::peiIsSet() const {
-  return m_PeiIsSet;
-}
-void AmfEventSubscription::unsetPei() {
-  m_PeiIsSet = false;
-}
-bool AmfEventSubscription::isAnyUE() const {
-  return m_AnyUE;
-}
+bool AmfEventSubscription::peiIsSet() const { return m_PeiIsSet; }
+void AmfEventSubscription::unsetPei() { m_PeiIsSet = false; }
+bool AmfEventSubscription::isAnyUE() const { return m_AnyUE; }
 void AmfEventSubscription::setAnyUE(bool const value) {
-  m_AnyUE      = value;
+  m_AnyUE = value;
   m_AnyUEIsSet = true;
 }
-bool AmfEventSubscription::anyUEIsSet() const {
-  return m_AnyUEIsSet;
-}
-void AmfEventSubscription::unsetAnyUE() {
-  m_AnyUEIsSet = false;
-}
-AmfEventMode AmfEventSubscription::getOptions() const {
-  return m_Options;
-}
-void AmfEventSubscription::setOptions(AmfEventMode const& value) {
-  m_Options      = value;
+bool AmfEventSubscription::anyUEIsSet() const { return m_AnyUEIsSet; }
+void AmfEventSubscription::unsetAnyUE() { m_AnyUEIsSet = false; }
+AmfEventMode AmfEventSubscription::getOptions() const { return m_Options; }
+void AmfEventSubscription::setOptions(AmfEventMode const &value) {
+  m_Options = value;
   m_OptionsIsSet = true;
 }
-bool AmfEventSubscription::optionsIsSet() const {
-  return m_OptionsIsSet;
-}
-void AmfEventSubscription::unsetOptions() {
-  m_OptionsIsSet = false;
-}
+bool AmfEventSubscription::optionsIsSet() const { return m_OptionsIsSet; }
+void AmfEventSubscription::unsetOptions() { m_OptionsIsSet = false; }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

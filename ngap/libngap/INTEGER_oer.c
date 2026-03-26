@@ -3,34 +3,37 @@
  * All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#include <asn_internal.h>
 #include <INTEGER.h>
+#include <asn_internal.h>
 
-asn_dec_rval_t INTEGER_decode_oer(
-    const asn_codec_ctx_t* opt_codec_ctx, const asn_TYPE_descriptor_t* td,
-    const asn_oer_constraints_t* constraints, void** sptr, const void* ptr,
-    size_t size) {
-  const asn_INTEGER_specifics_t* specs =
-      (const asn_INTEGER_specifics_t*) td->specifics;
-  asn_dec_rval_t rval                   = {RC_OK, 0};
-  INTEGER_t* st                         = (INTEGER_t*) *sptr;
+asn_dec_rval_t INTEGER_decode_oer(const asn_codec_ctx_t *opt_codec_ctx,
+                                  const asn_TYPE_descriptor_t *td,
+                                  const asn_oer_constraints_t *constraints,
+                                  void **sptr, const void *ptr, size_t size) {
+  const asn_INTEGER_specifics_t *specs =
+      (const asn_INTEGER_specifics_t *)td->specifics;
+  asn_dec_rval_t rval = {RC_OK, 0};
+  INTEGER_t *st = (INTEGER_t *)*sptr;
   struct asn_oer_constraint_number_s ct = {0, 0};
   size_t req_bytes;
 
-  (void) opt_codec_ctx;
-  (void) specs;
+  (void)opt_codec_ctx;
+  (void)specs;
 
   if (!st) {
-    st = (INTEGER_t*) (*sptr = CALLOC(1, sizeof(*st)));
-    if (!st) ASN__DECODE_FAILED;
+    st = (INTEGER_t *)(*sptr = CALLOC(1, sizeof(*st)));
+    if (!st)
+      ASN__DECODE_FAILED;
   }
 
   FREEMEM(st->buf);
-  st->buf  = 0;
+  st->buf = 0;
   st->size = 0;
 
-  if (!constraints) constraints = td->encoding_constraints.oer_constraints;
-  if (constraints) ct = constraints->value;
+  if (!constraints)
+    constraints = td->encoding_constraints.oer_constraints;
+  if (constraints)
+    ct = constraints->value;
 
   if (ct.width) {
     req_bytes = ct.width;
@@ -44,7 +47,7 @@ asn_dec_rval_t INTEGER_decode_oer(
       ASN__DECODE_FAILED;
     }
     rval.consumed += consumed;
-    ptr = (const char*) ptr + consumed;
+    ptr = (const char *)ptr + consumed;
     size -= consumed;
   }
 
@@ -58,9 +61,9 @@ asn_dec_rval_t INTEGER_decode_oer(
     size_t useful_size;
 
     /* Check most significant bit */
-    msb         = *(const uint8_t*) ptr >> 7; /* yields 0 or 1 */
+    msb = *(const uint8_t *)ptr >> 7; /* yields 0 or 1 */
     useful_size = msb + req_bytes;
-    st->buf     = (uint8_t*) MALLOC(useful_size + 1);
+    st->buf = (uint8_t *)MALLOC(useful_size + 1);
     if (!st->buf) {
       ASN__DECODE_FAILED;
     }
@@ -72,20 +75,20 @@ asn_dec_rval_t INTEGER_decode_oer(
     st->buf[0] = '\0';
     memcpy(st->buf + msb, ptr, req_bytes);
     st->buf[useful_size] = '\0'; /* Just in case, 0-terminate */
-    st->size             = useful_size;
+    st->size = useful_size;
 
     rval.consumed += req_bytes;
     return rval;
   } else {
     /* X.969 08/2015 10.2(b) */
-    st->buf = (uint8_t*) MALLOC(req_bytes + 1);
+    st->buf = (uint8_t *)MALLOC(req_bytes + 1);
     if (!st->buf) {
       ASN__DECODE_FAILED;
     }
 
     memcpy(st->buf, ptr, req_bytes);
     st->buf[req_bytes] = '\0'; /* Just in case, 0-terminate */
-    st->size           = req_bytes;
+    st->size = req_bytes;
 
     rval.consumed += req_bytes;
     return rval;
@@ -95,22 +98,26 @@ asn_dec_rval_t INTEGER_decode_oer(
 /*
  * Encode as Canonical OER.
  */
-asn_enc_rval_t INTEGER_encode_oer(
-    const asn_TYPE_descriptor_t* td, const asn_oer_constraints_t* constraints,
-    const void* sptr, asn_app_consume_bytes_f* cb, void* app_key) {
-  const INTEGER_t* st                   = sptr;
-  asn_enc_rval_t er                     = {0, 0, 0};
+asn_enc_rval_t INTEGER_encode_oer(const asn_TYPE_descriptor_t *td,
+                                  const asn_oer_constraints_t *constraints,
+                                  const void *sptr, asn_app_consume_bytes_f *cb,
+                                  void *app_key) {
+  const INTEGER_t *st = sptr;
+  asn_enc_rval_t er = {0, 0, 0};
   struct asn_oer_constraint_number_s ct = {0, 0};
-  const uint8_t* buf;
-  const uint8_t* end;
+  const uint8_t *buf;
+  const uint8_t *end;
   size_t useful_bytes;
   size_t req_bytes = 0;
-  int sign         = 0;
+  int sign = 0;
 
-  if (!st || st->size == 0) ASN__ENCODE_FAILED;
+  if (!st || st->size == 0)
+    ASN__ENCODE_FAILED;
 
-  if (!constraints) constraints = td->encoding_constraints.oer_constraints;
-  if (constraints) ct = constraints->value;
+  if (!constraints)
+    constraints = td->encoding_constraints.oer_constraints;
+  if (constraints)
+    ct = constraints->value;
 
   er.encoded = 0;
 
@@ -127,7 +134,8 @@ asn_enc_rval_t INTEGER_encode_oer(
     }
     /* Remove leading zeros. */
     for (; buf + 1 < end; buf++) {
-      if (buf[0] != 0x0) break;
+      if (buf[0] != 0x0)
+        break;
     }
   } else {
     for (; buf + 1 < end; buf++) {

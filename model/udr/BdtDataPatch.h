@@ -33,7 +33,7 @@ namespace oai::udr::model {
 /// Contains the modified background data transfer data.
 /// </summary>
 class BdtDataPatch {
- public:
+public:
   BdtDataPatch();
   virtual ~BdtDataPatch();
 
@@ -46,27 +46,27 @@ class BdtDataPatch {
   ///
   /// </summary>
   TransferPolicy getTransPolicy() const;
-  void setTransPolicy(TransferPolicy const& value);
+  void setTransPolicy(TransferPolicy const &value);
   bool transPolicyIsSet() const;
   void unsetTransPolicy();
   /// <summary>
   ///
   /// </summary>
   BdtPolicyStatus getBdtpStatus() const;
-  void setBdtpStatus(BdtPolicyStatus const& value);
+  void setBdtpStatus(BdtPolicyStatus const &value);
   bool bdtpStatusIsSet() const;
   void unsetBdtpStatus();
 
-  friend void to_json(nlohmann::json& j, const BdtDataPatch& o);
-  friend void from_json(const nlohmann::json& j, BdtDataPatch& o);
+  friend void to_json(nlohmann::json &j, const BdtDataPatch &o);
+  friend void from_json(const nlohmann::json &j, BdtDataPatch &o);
 
- protected:
+protected:
   TransferPolicy m_TransPolicy;
   bool m_TransPolicyIsSet;
   BdtPolicyStatus m_BdtpStatus;
   bool m_BdtpStatusIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* BdtDataPatch_H_ */

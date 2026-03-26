@@ -27,27 +27,25 @@ void Dnf::validate() const {
   }
 }
 
-bool Dnf::validate(std::stringstream& msg) const {
-  return validate(msg, "");
-}
+bool Dnf::validate(std::stringstream &msg) const { return validate(msg, ""); }
 
-bool Dnf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool Dnf::validate(std::stringstream &msg,
+                   const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "Dnf" : pathPrefix;
 
   /* DnfUnits */ {
-    const std::vector<oai::model::common::DnfUnit>& value = m_DnfUnits;
+    const std::vector<oai::model::common::DnfUnit> &value = m_DnfUnits;
     const std::string currentValuePath = _pathPrefix + ".dnfUnits";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::DnfUnit& value : value) {
+      int i = 0;
+      for (const oai::model::common::DnfUnit &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -62,7 +60,7 @@ bool Dnf::validate(
   return success;
 }
 
-bool Dnf::operator==(const Dnf& rhs) const {
+bool Dnf::operator==(const Dnf &rhs) const {
   return
 
       (getDnfUnits() == rhs.getDnfUnits())
@@ -70,24 +68,22 @@ bool Dnf::operator==(const Dnf& rhs) const {
           ;
 }
 
-bool Dnf::operator!=(const Dnf& rhs) const {
-  return !(*this == rhs);
-}
+bool Dnf::operator!=(const Dnf &rhs) const { return !(*this == rhs); }
 
-void to_json(nlohmann::json& j, const Dnf& o) {
-  j             = nlohmann::json();
+void to_json(nlohmann::json &j, const Dnf &o) {
+  j = nlohmann::json();
   j["dnfUnits"] = o.m_DnfUnits;
 }
 
-void from_json(const nlohmann::json& j, Dnf& o) {
+void from_json(const nlohmann::json &j, Dnf &o) {
   j.at("dnfUnits").get_to(o.m_DnfUnits);
 }
 
 std::vector<oai::model::common::DnfUnit> Dnf::getDnfUnits() const {
   return m_DnfUnits;
 }
-void Dnf::setDnfUnits(std::vector<oai::model::common::DnfUnit> const& value) {
+void Dnf::setDnfUnits(std::vector<oai::model::common::DnfUnit> const &value) {
   m_DnfUnits = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

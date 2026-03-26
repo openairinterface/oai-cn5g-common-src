@@ -13,25 +13,25 @@ constexpr auto kConfigurationUpdateIndicationIeName =
 namespace oai::nas {
 
 class ConfigurationUpdateIndication : public Type1NasIe {
- public:
+public:
   ConfigurationUpdateIndication();
   ConfigurationUpdateIndication(bool red, bool ack);
   virtual ~ConfigurationUpdateIndication();
 
-  int Encode(uint8_t* buf, int len) const override;
-  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+  int Encode(uint8_t *buf, int len) const override;
+  int Decode(const uint8_t *const buf, int len, bool is_iei = false) override;
 
   static std::string GetIeName() {
     return kConfigurationUpdateIndicationIeName;
   }
 
   void SetRed(bool value);
-  void GetRed(bool& value) const;
+  void GetRed(bool &value) const;
 
   void SetAck(bool value);
-  void GetAck(bool& value) const;
+  void GetAck(bool &value) const;
 
- private:
+private:
   bool red_;
   bool ack_;
 
@@ -39,6 +39,6 @@ class ConfigurationUpdateIndication : public Type1NasIe {
   void GetValue() override;
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

@@ -13,27 +13,27 @@
 namespace oai::ngap {
 
 class NgResetMsg : public NgapMessage {
- public:
+public:
   NgResetMsg();
   virtual ~NgResetMsg();
 
   void initialize();
 
-  void setCause(const Cause&);
-  void getCause(Cause&) const;
+  void setCause(const Cause &);
+  void getCause(Cause &) const;
 
-  void setResetType(const ResetType&);
-  bool getResetType(ResetType&) const;
+  void setResetType(const ResetType &);
+  bool getResetType(ResetType &) const;
 
-  bool decode(Ngap_NGAP_PDU_t* ngapMsgPdu) override;
+  bool decode(Ngap_NGAP_PDU_t *ngapMsgPdu) override;
 
- private:
-  Ngap_NGReset_t* m_NgResetIes;
+private:
+  Ngap_NGReset_t *m_NgResetIes;
 
-  Cause m_Cause;          // Mandatory
-  ResetType m_ResetType;  // Mandatory
+  Cause m_Cause;         // Mandatory
+  ResetType m_ResetType; // Mandatory
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

@@ -30,30 +30,26 @@ void EventType::validate() const {
   }
 }
 
-bool EventType::validate(std::stringstream& msg) const {
+bool EventType::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool EventType::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool EventType::validate(std::stringstream &msg,
+                         const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "EventType" : pathPrefix;
 
   return success;
 }
 
-bool EventType::operator==(const EventType& rhs) const {
-  return true;
-}
+bool EventType::operator==(const EventType &rhs) const { return true; }
 
-bool EventType::operator!=(const EventType& rhs) const {
+bool EventType::operator!=(const EventType &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const EventType& o) {
-  j = nlohmann::json();
-}
+void to_json(nlohmann::json &j, const EventType &o) { j = nlohmann::json(); }
 
-void from_json(const nlohmann::json& j, EventType& o) {}
+void from_json(const nlohmann::json &j, EventType &o) {}
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

@@ -18,9 +18,7 @@
 
 namespace oai::model::udsf {
 
-Record::Record() {
-  m_BlocksIsSet = false;
-}
+Record::Record() { m_BlocksIsSet = false; }
 
 void Record::validate() const {
   std::stringstream msg;
@@ -29,27 +27,27 @@ void Record::validate() const {
   }
 }
 
-bool Record::validate(std::stringstream& msg) const {
+bool Record::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool Record::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool Record::validate(std::stringstream &msg,
+                      const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "Record" : pathPrefix;
 
   if (blocksIsSet()) {
-    const std::vector<nlohmann::json>& value = m_Blocks;
-    const std::string currentValuePath       = _pathPrefix + ".blocks";
+    const std::vector<nlohmann::json> &value = m_Blocks;
+    const std::string currentValuePath = _pathPrefix + ".blocks";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const nlohmann::json& value : value) {
+      int i = 0;
+      for (const nlohmann::json &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -61,7 +59,7 @@ bool Record::validate(
   return success;
 }
 
-bool Record::operator==(const Record& rhs) const {
+bool Record::operator==(const Record &rhs) const {
   return
 
       (getMeta() == rhs.getMeta()) &&
@@ -72,17 +70,16 @@ bool Record::operator==(const Record& rhs) const {
           ;
 }
 
-bool Record::operator!=(const Record& rhs) const {
-  return !(*this == rhs);
-}
+bool Record::operator!=(const Record &rhs) const { return !(*this == rhs); }
 
-void to_json(nlohmann::json& j, const Record& o) {
-  j         = nlohmann::json();
+void to_json(nlohmann::json &j, const Record &o) {
+  j = nlohmann::json();
   j["meta"] = o.m_Meta;
-  if (o.blocksIsSet() || !o.m_Blocks.empty()) j["blocks"] = o.m_Blocks;
+  if (o.blocksIsSet() || !o.m_Blocks.empty())
+    j["blocks"] = o.m_Blocks;
 }
 
-void from_json(const nlohmann::json& j, Record& o) {
+void from_json(const nlohmann::json &j, Record &o) {
   j.at("meta").get_to(o.m_Meta);
   if (j.find("blocks") != j.end()) {
     j.at("blocks").get_to(o.m_Blocks);
@@ -90,24 +87,16 @@ void from_json(const nlohmann::json& j, Record& o) {
   }
 }
 
-oai::model::udsf::RecordMeta Record::getMeta() const {
-  return m_Meta;
-}
-void Record::setMeta(oai::model::udsf::RecordMeta const& value) {
+oai::model::udsf::RecordMeta Record::getMeta() const { return m_Meta; }
+void Record::setMeta(oai::model::udsf::RecordMeta const &value) {
   m_Meta = value;
 }
-std::vector<nlohmann::json> Record::getBlocks() const {
-  return m_Blocks;
-}
-void Record::setBlocks(std::vector<nlohmann::json> const& value) {
-  m_Blocks      = value;
+std::vector<nlohmann::json> Record::getBlocks() const { return m_Blocks; }
+void Record::setBlocks(std::vector<nlohmann::json> const &value) {
+  m_Blocks = value;
   m_BlocksIsSet = true;
 }
-bool Record::blocksIsSet() const {
-  return m_BlocksIsSet;
-}
-void Record::unsetBlocks() {
-  m_BlocksIsSet = false;
-}
+bool Record::blocksIsSet() const { return m_BlocksIsSet; }
+void Record::unsetBlocks() { m_BlocksIsSet = false; }
 
-}  // namespace oai::model::udsf
+} // namespace oai::model::udsf

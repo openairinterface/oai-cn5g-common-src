@@ -8,18 +8,17 @@
 
 #include "Ngap_PDUSessionResourceModifyResponseTransfer.h"
 
-#include "Ngap_UPTransportLayerInformation.h"
-#include "Ngap_QosFlowAddOrModifyResponseList.h"
-#include "Ngap_QosFlowPerTNLInformationList.h"
-#include "Ngap_QosFlowListWithCause.h"
 #include "Ngap_ProtocolExtensionContainer.h"
+#include "Ngap_QosFlowAddOrModifyResponseList.h"
+#include "Ngap_QosFlowListWithCause.h"
+#include "Ngap_QosFlowPerTNLInformationList.h"
+#include "Ngap_UPTransportLayerInformation.h"
 static asn_TYPE_member_t
     asn_MBR_Ngap_PDUSessionResourceModifyResponseTransfer_1[] = {
         {ATF_POINTER,
          6,
-         offsetof(
-             struct Ngap_PDUSessionResourceModifyResponseTransfer,
-             dL_NGU_UP_TNLInformation),
+         offsetof(struct Ngap_PDUSessionResourceModifyResponseTransfer,
+                  dL_NGU_UP_TNLInformation),
          (ASN_TAG_CLASS_CONTEXT | (0 << 2)),
          +1, /* EXPLICIT tag at current level */
          &asn_DEF_Ngap_UPTransportLayerInformation,
@@ -38,9 +37,8 @@ static asn_TYPE_member_t
          "dL-NGU-UP-TNLInformation"},
         {ATF_POINTER,
          5,
-         offsetof(
-             struct Ngap_PDUSessionResourceModifyResponseTransfer,
-             uL_NGU_UP_TNLInformation),
+         offsetof(struct Ngap_PDUSessionResourceModifyResponseTransfer,
+                  uL_NGU_UP_TNLInformation),
          (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
          +1, /* EXPLICIT tag at current level */
          &asn_DEF_Ngap_UPTransportLayerInformation,
@@ -59,9 +57,8 @@ static asn_TYPE_member_t
          "uL-NGU-UP-TNLInformation"},
         {ATF_POINTER,
          4,
-         offsetof(
-             struct Ngap_PDUSessionResourceModifyResponseTransfer,
-             qosFlowAddOrModifyResponseList),
+         offsetof(struct Ngap_PDUSessionResourceModifyResponseTransfer,
+                  qosFlowAddOrModifyResponseList),
          (ASN_TAG_CLASS_CONTEXT | (2 << 2)),
          -1, /* IMPLICIT tag at current level */
          &asn_DEF_Ngap_QosFlowAddOrModifyResponseList,
@@ -80,9 +77,8 @@ static asn_TYPE_member_t
          "qosFlowAddOrModifyResponseList"},
         {ATF_POINTER,
          3,
-         offsetof(
-             struct Ngap_PDUSessionResourceModifyResponseTransfer,
-             additionalDLQosFlowPerTNLInformation),
+         offsetof(struct Ngap_PDUSessionResourceModifyResponseTransfer,
+                  additionalDLQosFlowPerTNLInformation),
          (ASN_TAG_CLASS_CONTEXT | (3 << 2)),
          -1, /* IMPLICIT tag at current level */
          &asn_DEF_Ngap_QosFlowPerTNLInformationList,
@@ -101,9 +97,8 @@ static asn_TYPE_member_t
          "additionalDLQosFlowPerTNLInformation"},
         {ATF_POINTER,
          2,
-         offsetof(
-             struct Ngap_PDUSessionResourceModifyResponseTransfer,
-             qosFlowFailedToAddOrModifyList),
+         offsetof(struct Ngap_PDUSessionResourceModifyResponseTransfer,
+                  qosFlowFailedToAddOrModifyList),
          (ASN_TAG_CLASS_CONTEXT | (4 << 2)),
          -1, /* IMPLICIT tag at current level */
          &asn_DEF_Ngap_QosFlowListWithCause,
@@ -122,9 +117,8 @@ static asn_TYPE_member_t
          "qosFlowFailedToAddOrModifyList"},
         {ATF_POINTER,
          1,
-         offsetof(
-             struct Ngap_PDUSessionResourceModifyResponseTransfer,
-             iE_Extensions),
+         offsetof(struct Ngap_PDUSessionResourceModifyResponseTransfer,
+                  iE_Extensions),
          (ASN_TAG_CLASS_CONTEXT | (5 << 2)),
          -1, /* IMPLICIT tag at current level */
          &asn_DEF_Ngap_ProtocolExtensionContainer_9666P166,
@@ -164,8 +158,8 @@ static const asn_TYPE_tag2member_t
 static asn_SEQUENCE_specifics_t
     asn_SPC_Ngap_PDUSessionResourceModifyResponseTransfer_specs_1 = {
         sizeof(struct Ngap_PDUSessionResourceModifyResponseTransfer),
-        offsetof(
-            struct Ngap_PDUSessionResourceModifyResponseTransfer, _asn_ctx),
+        offsetof(struct Ngap_PDUSessionResourceModifyResponseTransfer,
+                 _asn_ctx),
         asn_MAP_Ngap_PDUSessionResourceModifyResponseTransfer_tag2el_1,
         6, /* Count of tags in the map */
         asn_MAP_Ngap_PDUSessionResourceModifyResponseTransfer_oms_1, /* Optional

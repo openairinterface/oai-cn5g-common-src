@@ -19,12 +19,12 @@
 #ifndef NwdafInfo_H_
 #define NwdafInfo_H_
 
-#include "Tai.h"
-#include "NwdafEvent.h"
 #include "EventId.h"
+#include "NwdafEvent.h"
+#include "Tai.h"
 #include "TaiRange.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::nrf {
 
@@ -32,7 +32,7 @@ namespace oai::model::nrf {
 ///
 /// </summary>
 class NwdafInfo {
- public:
+public:
   NwdafInfo();
   virtual ~NwdafInfo();
 
@@ -44,36 +44,36 @@ class NwdafInfo {
   /// <summary>
   ///
   /// </summary>
-  std::vector<EventId>& getEventIds();
-  void setEventIds(std::vector<EventId> const& value);
+  std::vector<EventId> &getEventIds();
+  void setEventIds(std::vector<EventId> const &value);
   bool eventIdsIsSet() const;
   void unsetEventIds();
   /// <summary>
   ///
   /// </summary>
-  std::vector<NwdafEvent>& getNwdafEvents();
-  void setNwdafEvents(std::vector<NwdafEvent> const& value);
+  std::vector<NwdafEvent> &getNwdafEvents();
+  void setNwdafEvents(std::vector<NwdafEvent> const &value);
   bool nwdafEventsIsSet() const;
   void unsetNwdafEvents();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::Tai>& getTaiList();
-  void setTaiList(std::vector<oai::model::common::Tai> const& value);
+  std::vector<oai::model::common::Tai> &getTaiList();
+  void setTaiList(std::vector<oai::model::common::Tai> const &value);
   bool taiListIsSet() const;
   void unsetTaiList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<TaiRange>& getTaiRangeList();
-  void setTaiRangeList(std::vector<TaiRange> const& value);
+  std::vector<TaiRange> &getTaiRangeList();
+  void setTaiRangeList(std::vector<TaiRange> const &value);
   bool taiRangeListIsSet() const;
   void unsetTaiRangeList();
 
-  friend void to_json(nlohmann::json& j, const NwdafInfo& o);
-  friend void from_json(const nlohmann::json& j, NwdafInfo& o);
+  friend void to_json(nlohmann::json &j, const NwdafInfo &o);
+  friend void from_json(const nlohmann::json &j, NwdafInfo &o);
 
- protected:
+protected:
   std::vector<EventId> m_EventIds;
   bool m_EventIdsIsSet;
   std::vector<NwdafEvent> m_NwdafEvents;
@@ -84,6 +84,6 @@ class NwdafInfo {
   bool m_TaiRangeListIsSet;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* NwdafInfo_H_ */

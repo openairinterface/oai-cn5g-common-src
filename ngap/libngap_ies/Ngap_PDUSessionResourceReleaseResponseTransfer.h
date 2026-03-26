@@ -23,7 +23,7 @@ struct Ngap_ProtocolExtensionContainer;
 
 /* Ngap_PDUSessionResourceReleaseResponseTransfer */
 typedef struct Ngap_PDUSessionResourceReleaseResponseTransfer {
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

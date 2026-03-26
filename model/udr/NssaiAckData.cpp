@@ -18,9 +18,7 @@
 
 namespace oai::udr::model {
 
-NssaiAckData::NssaiAckData() {
-  m_ProvisioningTime = "";
-}
+NssaiAckData::NssaiAckData() { m_ProvisioningTime = ""; }
 
 NssaiAckData::~NssaiAckData() {}
 
@@ -28,13 +26,13 @@ void NssaiAckData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const NssaiAckData& o) {
-  j                     = nlohmann::json();
+void to_json(nlohmann::json &j, const NssaiAckData &o) {
+  j = nlohmann::json();
   j["provisioningTime"] = o.m_ProvisioningTime;
-  j["ueUpdateStatus"]   = o.m_UeUpdateStatus;
+  j["ueUpdateStatus"] = o.m_UeUpdateStatus;
 }
 
-void from_json(const nlohmann::json& j, NssaiAckData& o) {
+void from_json(const nlohmann::json &j, NssaiAckData &o) {
   j.at("provisioningTime").get_to(o.m_ProvisioningTime);
   j.at("ueUpdateStatus").get_to(o.m_UeUpdateStatus);
 }
@@ -42,14 +40,14 @@ void from_json(const nlohmann::json& j, NssaiAckData& o) {
 std::string NssaiAckData::getProvisioningTime() const {
   return m_ProvisioningTime;
 }
-void NssaiAckData::setProvisioningTime(std::string const& value) {
+void NssaiAckData::setProvisioningTime(std::string const &value) {
   m_ProvisioningTime = value;
 }
 UeUpdateStatus NssaiAckData::getUeUpdateStatus() const {
   return m_UeUpdateStatus;
 }
-void NssaiAckData::setUeUpdateStatus(UeUpdateStatus const& value) {
+void NssaiAckData::setUeUpdateStatus(UeUpdateStatus const &value) {
   m_UeUpdateStatus = value;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

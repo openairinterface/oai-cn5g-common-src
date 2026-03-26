@@ -19,7 +19,7 @@
 namespace oai::model::lmf {
 
 ReportingArea::ReportingArea() {
-  m_TaiIsSet  = false;
+  m_TaiIsSet = false;
   m_EcgiIsSet = false;
   m_NcgiIsSet = false;
 }
@@ -31,12 +31,12 @@ void ReportingArea::validate() const {
   }
 }
 
-bool ReportingArea::validate(std::stringstream& msg) const {
+bool ReportingArea::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ReportingArea::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ReportingArea::validate(std::stringstream &msg,
+                             const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ReportingArea" : pathPrefix;
@@ -44,7 +44,7 @@ bool ReportingArea::validate(
   return success;
 }
 
-bool ReportingArea::operator==(const ReportingArea& rhs) const {
+bool ReportingArea::operator==(const ReportingArea &rhs) const {
   return
 
       (getAreaType() == rhs.getAreaType()) &&
@@ -61,19 +61,22 @@ bool ReportingArea::operator==(const ReportingArea& rhs) const {
           ;
 }
 
-bool ReportingArea::operator!=(const ReportingArea& rhs) const {
+bool ReportingArea::operator!=(const ReportingArea &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ReportingArea& o) {
-  j             = nlohmann::json();
+void to_json(nlohmann::json &j, const ReportingArea &o) {
+  j = nlohmann::json();
   j["areaType"] = o.m_AreaType;
-  if (o.taiIsSet()) j["tai"] = o.m_Tai;
-  if (o.ecgiIsSet()) j["ecgi"] = o.m_Ecgi;
-  if (o.ncgiIsSet()) j["ncgi"] = o.m_Ncgi;
+  if (o.taiIsSet())
+    j["tai"] = o.m_Tai;
+  if (o.ecgiIsSet())
+    j["ecgi"] = o.m_Ecgi;
+  if (o.ncgiIsSet())
+    j["ncgi"] = o.m_Ncgi;
 }
 
-void from_json(const nlohmann::json& j, ReportingArea& o) {
+void from_json(const nlohmann::json &j, ReportingArea &o) {
   j.at("areaType").get_to(o.m_AreaType);
   if (j.find("tai") != j.end()) {
     j.at("tai").get_to(o.m_Tai);
@@ -93,47 +96,29 @@ oai::model::lmf::ReportingAreaType ReportingArea::getAreaType() const {
   return m_AreaType;
 }
 void ReportingArea::setAreaType(
-    oai::model::lmf::ReportingAreaType const& value) {
+    oai::model::lmf::ReportingAreaType const &value) {
   m_AreaType = value;
 }
-oai::model::common::Tai ReportingArea::getTai() const {
-  return m_Tai;
-}
-void ReportingArea::setTai(oai::model::common::Tai const& value) {
-  m_Tai      = value;
+oai::model::common::Tai ReportingArea::getTai() const { return m_Tai; }
+void ReportingArea::setTai(oai::model::common::Tai const &value) {
+  m_Tai = value;
   m_TaiIsSet = true;
 }
-bool ReportingArea::taiIsSet() const {
-  return m_TaiIsSet;
-}
-void ReportingArea::unsetTai() {
-  m_TaiIsSet = false;
-}
-oai::model::common::Ecgi ReportingArea::getEcgi() const {
-  return m_Ecgi;
-}
-void ReportingArea::setEcgi(oai::model::common::Ecgi const& value) {
-  m_Ecgi      = value;
+bool ReportingArea::taiIsSet() const { return m_TaiIsSet; }
+void ReportingArea::unsetTai() { m_TaiIsSet = false; }
+oai::model::common::Ecgi ReportingArea::getEcgi() const { return m_Ecgi; }
+void ReportingArea::setEcgi(oai::model::common::Ecgi const &value) {
+  m_Ecgi = value;
   m_EcgiIsSet = true;
 }
-bool ReportingArea::ecgiIsSet() const {
-  return m_EcgiIsSet;
-}
-void ReportingArea::unsetEcgi() {
-  m_EcgiIsSet = false;
-}
-oai::model::common::Ncgi ReportingArea::getNcgi() const {
-  return m_Ncgi;
-}
-void ReportingArea::setNcgi(oai::model::common::Ncgi const& value) {
-  m_Ncgi      = value;
+bool ReportingArea::ecgiIsSet() const { return m_EcgiIsSet; }
+void ReportingArea::unsetEcgi() { m_EcgiIsSet = false; }
+oai::model::common::Ncgi ReportingArea::getNcgi() const { return m_Ncgi; }
+void ReportingArea::setNcgi(oai::model::common::Ncgi const &value) {
+  m_Ncgi = value;
   m_NcgiIsSet = true;
 }
-bool ReportingArea::ncgiIsSet() const {
-  return m_NcgiIsSet;
-}
-void ReportingArea::unsetNcgi() {
-  m_NcgiIsSet = false;
-}
+bool ReportingArea::ncgiIsSet() const { return m_NcgiIsSet; }
+void ReportingArea::unsetNcgi() { m_NcgiIsSet = false; }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

@@ -24,8 +24,8 @@
 #ifndef ResynchronizationInfo_H_
 #define ResynchronizationInfo_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::ausf {
 
@@ -33,7 +33,7 @@ namespace oai::model::ausf {
 ///
 /// </summary>
 class ResynchronizationInfo {
- public:
+public:
   ResynchronizationInfo();
   virtual ~ResynchronizationInfo();
 
@@ -46,22 +46,22 @@ class ResynchronizationInfo {
   ///
   /// </summary>
   std::string getRand() const;
-  void setRand(std::string const& value);
+  void setRand(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getAuts() const;
-  void setAuts(std::string const& value);
+  void setAuts(std::string const &value);
 
-  friend void to_json(nlohmann::json& j, const ResynchronizationInfo& o);
-  friend void from_json(const nlohmann::json& j, ResynchronizationInfo& o);
+  friend void to_json(nlohmann::json &j, const ResynchronizationInfo &o);
+  friend void from_json(const nlohmann::json &j, ResynchronizationInfo &o);
 
- protected:
+protected:
   std::string m_Rand;
 
   std::string m_Auts;
 };
 
-}  // namespace oai::model::ausf
+} // namespace oai::model::ausf
 
 #endif /* ResynchronizationInfo_H_ */

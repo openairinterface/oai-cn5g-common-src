@@ -20,8 +20,8 @@ namespace oai::model::common {
 
 LineTypeRm::LineTypeRm() {}
 
-bool LineTypeRm::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool LineTypeRm::validate(std::stringstream &msg,
+                          const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "LineTypeRm" : pathPrefix;
@@ -29,7 +29,7 @@ bool LineTypeRm::validate(
   return success;
 }
 
-void to_json(nlohmann::json& j, const LineTypeRm& o) {
+void to_json(nlohmann::json &j, const LineTypeRm &o) {
   j = nlohmann::json();
 
   if (o.m_value.getValue() ==
@@ -40,7 +40,7 @@ void to_json(nlohmann::json& j, const LineTypeRm& o) {
   }
 }
 
-void from_json(const nlohmann::json& j, LineTypeRm& o) {
+void from_json(const nlohmann::json &j, LineTypeRm &o) {
   if (j.is_null()) {
     o.setEnumValue(
         LineType_anyOf::eLineType_anyOf::INVALID_VALUE_OPENAPI_GENERATED);
@@ -49,4 +49,4 @@ void from_json(const nlohmann::json& j, LineTypeRm& o) {
   }
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

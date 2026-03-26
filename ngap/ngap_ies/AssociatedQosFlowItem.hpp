@@ -14,28 +14,27 @@ extern "C" {
 namespace oai::ngap {
 
 class AssociatedQosFlowItem {
- public:
+public:
   AssociatedQosFlowItem();
   virtual ~AssociatedQosFlowItem();
 
-  void set(
-      const e_Ngap_AssociatedQosFlowItem__qosFlowMappingIndication&
-          qosFlowMappingIndication,
-      const QosFlowIdentifier& qosFlowIdentifier);
-  bool get(long& qosFlowMappingIndication, QosFlowIdentifier& qosFlowIdentifier)
-      const;
+  void set(const e_Ngap_AssociatedQosFlowItem__qosFlowMappingIndication
+               &qosFlowMappingIndication,
+           const QosFlowIdentifier &qosFlowIdentifier);
+  bool get(long &qosFlowMappingIndication,
+           QosFlowIdentifier &qosFlowIdentifier) const;
 
-  void set(const QosFlowIdentifier& qosFlowIdentifier);
-  void get(QosFlowIdentifier& qosFlowIdentifier) const;
+  void set(const QosFlowIdentifier &qosFlowIdentifier);
+  void get(QosFlowIdentifier &qosFlowIdentifier) const;
 
-  bool encode(Ngap_AssociatedQosFlowItem_t& associatedQosFlowItem) const;
-  bool decode(const Ngap_AssociatedQosFlowItem_t& associatedQosFlowItem);
+  bool encode(Ngap_AssociatedQosFlowItem_t &associatedQosFlowItem) const;
+  bool decode(const Ngap_AssociatedQosFlowItem_t &associatedQosFlowItem);
 
- private:
-  QosFlowIdentifier m_QosFlowIdentifier;  // Mandatory
-  long m_QosFlowMappingIndication;        // TODO: Optional
+private:
+  QosFlowIdentifier m_QosFlowIdentifier; // Mandatory
+  long m_QosFlowMappingIndication;       // TODO: Optional
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

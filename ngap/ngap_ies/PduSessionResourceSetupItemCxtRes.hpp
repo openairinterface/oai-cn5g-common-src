@@ -14,27 +14,25 @@ extern "C" {
 namespace oai::ngap {
 
 class PduSessionResourceSetupItemCxtRes {
- public:
+public:
   PduSessionResourceSetupItemCxtRes();
   virtual ~PduSessionResourceSetupItemCxtRes();
 
-  void set(
-      const PduSessionId& pduSessionId,
-      const OCTET_STRING_t& pduSessionResourceSetupResponseTransfer);
-  void get(
-      PduSessionId& pduSessionId,
-      OCTET_STRING_t& pduSessionResourceSetupResponseTransfer) const;
+  void set(const PduSessionId &pduSessionId,
+           const OCTET_STRING_t &pduSessionResourceSetupResponseTransfer);
+  void get(PduSessionId &pduSessionId,
+           OCTET_STRING_t &pduSessionResourceSetupResponseTransfer) const;
 
   bool encode(
-      Ngap_PDUSessionResourceSetupItemCxtRes_t& pduSessionResourceItem) const;
+      Ngap_PDUSessionResourceSetupItemCxtRes_t &pduSessionResourceItem) const;
   bool decode(
-      const Ngap_PDUSessionResourceSetupItemCxtRes_t& pduSessionResourceItem);
+      const Ngap_PDUSessionResourceSetupItemCxtRes_t &pduSessionResourceItem);
 
- private:
-  PduSessionId m_PduSessionId;                               // Mandatory
-  OCTET_STRING_t m_PduSessionResourceSetupResponseTransfer;  // Mandatory
+private:
+  PduSessionId m_PduSessionId;                              // Mandatory
+  OCTET_STRING_t m_PduSessionResourceSetupResponseTransfer; // Mandatory
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

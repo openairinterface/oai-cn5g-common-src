@@ -36,7 +36,7 @@ namespace oai::udr::model {
 /// Contains changed application data for which notification was requested.
 /// </summary>
 class ApplicationDataChangeNotif {
- public:
+public:
   ApplicationDataChangeNotif();
   virtual ~ApplicationDataChangeNotif();
 
@@ -49,40 +49,40 @@ class ApplicationDataChangeNotif {
   ///
   /// </summary>
   IptvConfigData getIptvConfigData() const;
-  void setIptvConfigData(IptvConfigData const& value);
+  void setIptvConfigData(IptvConfigData const &value);
   bool iptvConfigDataIsSet() const;
   void unsetIptvConfigData();
   /// <summary>
   ///
   /// </summary>
   PfdChangeNotification getPfdData() const;
-  void setPfdData(PfdChangeNotification const& value);
+  void setPfdData(PfdChangeNotification const &value);
   bool pfdDataIsSet() const;
   void unsetPfdData();
   /// <summary>
   ///
   /// </summary>
   BdtPolicyData getBdtPolicyData() const;
-  void setBdtPolicyData(BdtPolicyData const& value);
+  void setBdtPolicyData(BdtPolicyData const &value);
   bool bdtPolicyDataIsSet() const;
   void unsetBdtPolicyData();
   /// <summary>
   ///
   /// </summary>
   std::string getResUri() const;
-  void setResUri(std::string const& value);
+  void setResUri(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   ServiceParameterData getSerParamData() const;
-  void setSerParamData(ServiceParameterData const& value);
+  void setSerParamData(ServiceParameterData const &value);
   bool serParamDataIsSet() const;
   void unsetSerParamData();
 
-  friend void to_json(nlohmann::json& j, const ApplicationDataChangeNotif& o);
-  friend void from_json(const nlohmann::json& j, ApplicationDataChangeNotif& o);
+  friend void to_json(nlohmann::json &j, const ApplicationDataChangeNotif &o);
+  friend void from_json(const nlohmann::json &j, ApplicationDataChangeNotif &o);
 
- protected:
+protected:
   IptvConfigData m_IptvConfigData;
   bool m_IptvConfigDataIsSet;
   PfdChangeNotification m_PfdData;
@@ -95,6 +95,6 @@ class ApplicationDataChangeNotif {
   bool m_SerParamDataIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* ApplicationDataChangeNotif_H_ */

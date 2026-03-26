@@ -19,23 +19,23 @@ extern "C" {
 namespace oai::ngap {
 
 class DrbStatusDl {
- public:
+public:
   DrbStatusDl();
   virtual ~DrbStatusDl();
 
-  void setDrbStatusDl18(const DrbStatusDl18& dl18);
-  void getDrbStatusDl18(std::optional<DrbStatusDl18>& dl18) const;
+  void setDrbStatusDl18(const DrbStatusDl18 &dl18);
+  void getDrbStatusDl18(std::optional<DrbStatusDl18> &dl18) const;
 
-  void setDrbStatusDl12(const DrbStatusDl12& dl12);
-  void getDrbStatusDl12(std::optional<DrbStatusDl12>& dl12) const;
+  void setDrbStatusDl12(const DrbStatusDl12 &dl12);
+  void getDrbStatusDl12(std::optional<DrbStatusDl12> &dl12) const;
 
-  bool encode(Ngap_DRBStatusDL_t& dl) const;
-  bool decode(const Ngap_DRBStatusDL_t& dl);
+  bool encode(Ngap_DRBStatusDL_t &dl) const;
+  bool decode(const Ngap_DRBStatusDL_t &dl);
 
- private:
+private:
   std::optional<DrbStatusDl18> m_Dl18;
   std::optional<DrbStatusDl12> m_Dl12;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

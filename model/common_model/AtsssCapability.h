@@ -27,7 +27,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class AtsssCapability {
- public:
+public:
   AtsssCapability();
   virtual ~AtsssCapability() = default;
 
@@ -41,16 +41,16 @@ class AtsssCapability {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const AtsssCapability& rhs) const;
-  bool operator!=(const AtsssCapability& rhs) const;
+  bool operator==(const AtsssCapability &rhs) const;
+  bool operator!=(const AtsssCapability &rhs) const;
 
   /////////////////////////////////////////////
   /// AtsssCapability members
@@ -77,10 +77,10 @@ class AtsssCapability {
   bool rttWithoutPmfIsSet() const;
   void unsetRttWithoutPmf();
 
-  friend void to_json(nlohmann::json& j, const AtsssCapability& o);
-  friend void from_json(const nlohmann::json& j, AtsssCapability& o);
+  friend void to_json(nlohmann::json &j, const AtsssCapability &o);
+  friend void from_json(const nlohmann::json &j, AtsssCapability &o);
 
- protected:
+protected:
   bool m_AtsssLL;
   bool m_AtsssLLIsSet;
   bool m_Mptcp;
@@ -89,6 +89,6 @@ class AtsssCapability {
   bool m_RttWithoutPmfIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* AtsssCapability_H_ */

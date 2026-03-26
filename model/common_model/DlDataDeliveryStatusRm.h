@@ -29,19 +29,19 @@ namespace oai::model::common {
 ///
 /// </summary>
 class DlDataDeliveryStatusRm : public DlDataDeliveryStatus {
- public:
+public:
   DlDataDeliveryStatusRm();
   virtual ~DlDataDeliveryStatusRm() = default;
 
-  virtual bool validate(
-      std::stringstream& msg, const std::string& pathPrefix) const override;
+  virtual bool validate(std::stringstream &msg,
+                        const std::string &pathPrefix) const override;
 
-  friend void to_json(nlohmann::json& j, const DlDataDeliveryStatusRm& o);
-  friend void from_json(const nlohmann::json& j, DlDataDeliveryStatusRm& o);
+  friend void to_json(nlohmann::json &j, const DlDataDeliveryStatusRm &o);
+  friend void from_json(const nlohmann::json &j, DlDataDeliveryStatusRm &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* DlDataDeliveryStatusRm_H_ */

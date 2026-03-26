@@ -20,9 +20,9 @@
 #define NotificationSubscription_H_
 
 #include "ClientId.h"
-#include <string>
 #include "SubscriptionFilter.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::udsf {
 
@@ -30,7 +30,7 @@ namespace oai::model::udsf {
 /// Definition of a notification subscription
 /// </summary>
 class NotificationSubscription {
- public:
+public:
   NotificationSubscription();
   virtual ~NotificationSubscription() = default;
 
@@ -44,16 +44,16 @@ class NotificationSubscription {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const NotificationSubscription& rhs) const;
-  bool operator!=(const NotificationSubscription& rhs) const;
+  bool operator==(const NotificationSubscription &rhs) const;
+  bool operator!=(const NotificationSubscription &rhs) const;
 
   /////////////////////////////////////////////
   /// NotificationSubscription members
@@ -62,24 +62,24 @@ class NotificationSubscription {
   ///
   /// </summary>
   oai::model::udsf::ClientId getClientId() const;
-  void setClientId(oai::model::udsf::ClientId const& value);
+  void setClientId(oai::model::udsf::ClientId const &value);
   /// <summary>
   /// String providing an URI formatted according to RFC 3986.
   /// </summary>
   std::string getCallbackReference() const;
-  void setCallbackReference(std::string const& value);
+  void setCallbackReference(std::string const &value);
   /// <summary>
   /// String providing an URI formatted according to RFC 3986.
   /// </summary>
   std::string getExpiryCallbackReference() const;
-  void setExpiryCallbackReference(std::string const& value);
+  void setExpiryCallbackReference(std::string const &value);
   bool expiryCallbackReferenceIsSet() const;
   void unsetExpiryCallbackReference();
   /// <summary>
   /// string with format &#39;date-time&#39; as defined in OpenAPI.
   /// </summary>
   std::string getExpiry() const;
-  void setExpiry(std::string const& value);
+  void setExpiry(std::string const &value);
   bool expiryIsSet() const;
   void unsetExpiry();
   /// <summary>
@@ -93,7 +93,7 @@ class NotificationSubscription {
   ///
   /// </summary>
   oai::model::udsf::SubscriptionFilter getSubFilter() const;
-  void setSubFilter(oai::model::udsf::SubscriptionFilter const& value);
+  void setSubFilter(oai::model::udsf::SubscriptionFilter const &value);
   bool subFilterIsSet() const;
   void unsetSubFilter();
   /// <summary>
@@ -113,14 +113,14 @@ class NotificationSubscription {
   /// not supported.
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
 
-  friend void to_json(nlohmann::json& j, const NotificationSubscription& o);
-  friend void from_json(const nlohmann::json& j, NotificationSubscription& o);
+  friend void to_json(nlohmann::json &j, const NotificationSubscription &o);
+  friend void from_json(const nlohmann::json &j, NotificationSubscription &o);
 
- protected:
+protected:
   oai::model::udsf::ClientId m_ClientId;
 
   std::string m_CallbackReference;
@@ -137,6 +137,6 @@ class NotificationSubscription {
   bool m_SupportedFeaturesIsSet;
 };
 
-}  // namespace oai::model::udsf
+} // namespace oai::model::udsf
 
 #endif /* NotificationSubscription_H_ */

@@ -27,6 +27,4 @@ void Non3gppNwProvidedPolicies::SetValue(uint8_t value) {
 }
 
 //------------------------------------------------------------------------------
-uint8_t Non3gppNwProvidedPolicies::GetValue() const {
-  return GetValue();
-}
+uint8_t Non3gppNwProvidedPolicies::GetValue() const { return GetValue(); }

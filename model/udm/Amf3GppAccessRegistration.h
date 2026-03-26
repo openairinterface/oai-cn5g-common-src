@@ -41,7 +41,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class Amf3GppAccessRegistration {
- public:
+public:
   Amf3GppAccessRegistration();
   virtual ~Amf3GppAccessRegistration();
 
@@ -54,12 +54,12 @@ class Amf3GppAccessRegistration {
   ///
   /// </summary>
   std::string getAmfInstanceId() const;
-  void setAmfInstanceId(std::string const& value);
+  void setAmfInstanceId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
   /// <summary>
@@ -73,40 +73,40 @@ class Amf3GppAccessRegistration {
   ///
   /// </summary>
   std::string getPei() const;
-  void setPei(std::string const& value);
+  void setPei(std::string const &value);
   bool peiIsSet() const;
   void unsetPei();
   /// <summary>
   ///
   /// </summary>
   ImsVoPs getImsVoPs() const;
-  void setImsVoPs(ImsVoPs const& value);
+  void setImsVoPs(ImsVoPs const &value);
   bool imsVoPsIsSet() const;
   void unsetImsVoPs();
   /// <summary>
   ///
   /// </summary>
   std::string getDeregCallbackUri() const;
-  void setDeregCallbackUri(std::string const& value);
+  void setDeregCallbackUri(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::nrf::ServiceName getAmfServiceNameDereg() const;
-  void setAmfServiceNameDereg(oai::model::nrf::ServiceName const& value);
+  void setAmfServiceNameDereg(oai::model::nrf::ServiceName const &value);
   bool amfServiceNameDeregIsSet() const;
   void unsetAmfServiceNameDereg();
   /// <summary>
   ///
   /// </summary>
   std::string getPcscfRestorationCallbackUri() const;
-  void setPcscfRestorationCallbackUri(std::string const& value);
+  void setPcscfRestorationCallbackUri(std::string const &value);
   bool pcscfRestorationCallbackUriIsSet() const;
   void unsetPcscfRestorationCallbackUri();
   /// <summary>
   ///
   /// </summary>
   oai::model::nrf::ServiceName getAmfServiceNamePcscfRest() const;
-  void setAmfServiceNamePcscfRest(oai::model::nrf::ServiceName const& value);
+  void setAmfServiceNamePcscfRest(oai::model::nrf::ServiceName const &value);
   bool amfServiceNamePcscfRestIsSet() const;
   void unsetAmfServiceNamePcscfRest();
   /// <summary>
@@ -120,13 +120,13 @@ class Amf3GppAccessRegistration {
   ///
   /// </summary>
   oai::model::common::Guami getGuami() const;
-  void setGuami(oai::model::common::Guami const& value);
+  void setGuami(oai::model::common::Guami const &value);
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::BackupAmfInfo>& getBackupAmfInfo();
-  void setBackupAmfInfo(
-      std::vector<oai::model::common::BackupAmfInfo> const& value);
+  std::vector<oai::model::common::BackupAmfInfo> &getBackupAmfInfo();
+  void
+  setBackupAmfInfo(std::vector<oai::model::common::BackupAmfInfo> const &value);
   bool backupAmfInfoIsSet() const;
   void unsetBackupAmfInfo();
   /// <summary>
@@ -140,7 +140,7 @@ class Amf3GppAccessRegistration {
   ///
   /// </summary>
   oai::model::common::RatType getRatType() const;
-  void setRatType(oai::model::common::RatType const& value);
+  void setRatType(oai::model::common::RatType const &value);
   /// <summary>
   ///
   /// </summary>
@@ -152,14 +152,14 @@ class Amf3GppAccessRegistration {
   ///
   /// </summary>
   std::string getAmfEeSubscriptionId() const;
-  void setAmfEeSubscriptionId(std::string const& value);
+  void setAmfEeSubscriptionId(std::string const &value);
   bool amfEeSubscriptionIdIsSet() const;
   void unsetAmfEeSubscriptionId();
   /// <summary>
   ///
   /// </summary>
   EpsInterworkingInfo getEpsInterworkingInfo() const;
-  void setEpsInterworkingInfo(EpsInterworkingInfo const& value);
+  void setEpsInterworkingInfo(EpsInterworkingInfo const &value);
   bool epsInterworkingInfoIsSet() const;
   void unsetEpsInterworkingInfo();
   /// <summary>
@@ -173,21 +173,21 @@ class Amf3GppAccessRegistration {
   ///
   /// </summary>
   std::string getRegistrationTime() const;
-  void setRegistrationTime(std::string const& value);
+  void setRegistrationTime(std::string const &value);
   bool registrationTimeIsSet() const;
   void unsetRegistrationTime();
   /// <summary>
   ///
   /// </summary>
   VgmlcAddress getVgmlcAddress() const;
-  void setVgmlcAddress(VgmlcAddress const& value);
+  void setVgmlcAddress(VgmlcAddress const &value);
   bool vgmlcAddressIsSet() const;
   void unsetVgmlcAddress();
   /// <summary>
   ///
   /// </summary>
   ContextInfo getContextInfo() const;
-  void setContextInfo(ContextInfo const& value);
+  void setContextInfo(ContextInfo const &value);
   bool contextInfoIsSet() const;
   void unsetContextInfo();
   /// <summary>
@@ -198,10 +198,10 @@ class Amf3GppAccessRegistration {
   bool noEeSubscriptionIndIsSet() const;
   void unsetNoEeSubscriptionInd();
 
-  friend void to_json(nlohmann::json& j, const Amf3GppAccessRegistration& o);
-  friend void from_json(const nlohmann::json& j, Amf3GppAccessRegistration& o);
+  friend void to_json(nlohmann::json &j, const Amf3GppAccessRegistration &o);
+  friend void from_json(const nlohmann::json &j, Amf3GppAccessRegistration &o);
 
- protected:
+protected:
   std::string m_AmfInstanceId;
 
   std::string m_SupportedFeatures;
@@ -248,6 +248,6 @@ class Amf3GppAccessRegistration {
   bool m_NoEeSubscriptionIndIsSet;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* Amf3GppAccessRegistration_H_ */

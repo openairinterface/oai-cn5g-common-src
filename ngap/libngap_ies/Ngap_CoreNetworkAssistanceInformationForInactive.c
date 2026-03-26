@@ -14,9 +14,8 @@ asn_TYPE_member_t asn_MBR_Ngap_CoreNetworkAssistanceInformationForInactive_1[] =
     {
         {ATF_NOFLAGS,
          0,
-         offsetof(
-             struct Ngap_CoreNetworkAssistanceInformationForInactive,
-             uEIdentityIndexValue),
+         offsetof(struct Ngap_CoreNetworkAssistanceInformationForInactive,
+                  uEIdentityIndexValue),
          (ASN_TAG_CLASS_CONTEXT | (0 << 2)),
          +1, /* EXPLICIT tag at current level */
          &asn_DEF_Ngap_UEIdentityIndexValue,
@@ -35,9 +34,8 @@ asn_TYPE_member_t asn_MBR_Ngap_CoreNetworkAssistanceInformationForInactive_1[] =
          "uEIdentityIndexValue"},
         {ATF_POINTER,
          1,
-         offsetof(
-             struct Ngap_CoreNetworkAssistanceInformationForInactive,
-             uESpecificDRX),
+         offsetof(struct Ngap_CoreNetworkAssistanceInformationForInactive,
+                  uESpecificDRX),
          (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
          -1, /* IMPLICIT tag at current level */
          &asn_DEF_Ngap_PagingDRX,
@@ -56,9 +54,8 @@ asn_TYPE_member_t asn_MBR_Ngap_CoreNetworkAssistanceInformationForInactive_1[] =
          "uESpecificDRX"},
         {ATF_NOFLAGS,
          0,
-         offsetof(
-             struct Ngap_CoreNetworkAssistanceInformationForInactive,
-             periodicRegistrationUpdateTimer),
+         offsetof(struct Ngap_CoreNetworkAssistanceInformationForInactive,
+                  periodicRegistrationUpdateTimer),
          (ASN_TAG_CLASS_CONTEXT | (2 << 2)),
          -1, /* IMPLICIT tag at current level */
          &asn_DEF_Ngap_PeriodicRegistrationUpdateTimer,
@@ -77,9 +74,8 @@ asn_TYPE_member_t asn_MBR_Ngap_CoreNetworkAssistanceInformationForInactive_1[] =
          "periodicRegistrationUpdateTimer"},
         {ATF_POINTER,
          1,
-         offsetof(
-             struct Ngap_CoreNetworkAssistanceInformationForInactive,
-             mICOModeIndication),
+         offsetof(struct Ngap_CoreNetworkAssistanceInformationForInactive,
+                  mICOModeIndication),
          (ASN_TAG_CLASS_CONTEXT | (3 << 2)),
          -1, /* IMPLICIT tag at current level */
          &asn_DEF_Ngap_MICOModeIndication,
@@ -98,9 +94,8 @@ asn_TYPE_member_t asn_MBR_Ngap_CoreNetworkAssistanceInformationForInactive_1[] =
          "mICOModeIndication"},
         {ATF_NOFLAGS,
          0,
-         offsetof(
-             struct Ngap_CoreNetworkAssistanceInformationForInactive,
-             tAIListForInactive),
+         offsetof(struct Ngap_CoreNetworkAssistanceInformationForInactive,
+                  tAIListForInactive),
          (ASN_TAG_CLASS_CONTEXT | (4 << 2)),
          -1, /* IMPLICIT tag at current level */
          &asn_DEF_Ngap_TAIListForInactive,
@@ -119,9 +114,8 @@ asn_TYPE_member_t asn_MBR_Ngap_CoreNetworkAssistanceInformationForInactive_1[] =
          "tAIListForInactive"},
         {ATF_POINTER,
          2,
-         offsetof(
-             struct Ngap_CoreNetworkAssistanceInformationForInactive,
-             expectedUEBehaviour),
+         offsetof(struct Ngap_CoreNetworkAssistanceInformationForInactive,
+                  expectedUEBehaviour),
          (ASN_TAG_CLASS_CONTEXT | (5 << 2)),
          -1, /* IMPLICIT tag at current level */
          &asn_DEF_Ngap_ExpectedUEBehaviour,
@@ -140,9 +134,8 @@ asn_TYPE_member_t asn_MBR_Ngap_CoreNetworkAssistanceInformationForInactive_1[] =
          "expectedUEBehaviour"},
         {ATF_POINTER,
          1,
-         offsetof(
-             struct Ngap_CoreNetworkAssistanceInformationForInactive,
-             iE_Extensions),
+         offsetof(struct Ngap_CoreNetworkAssistanceInformationForInactive,
+                  iE_Extensions),
          (ASN_TAG_CLASS_CONTEXT | (6 << 2)),
          -1, /* IMPLICIT tag at current level */
          &asn_DEF_Ngap_ProtocolExtensionContainer_9666P40,
@@ -161,8 +154,8 @@ asn_TYPE_member_t asn_MBR_Ngap_CoreNetworkAssistanceInformationForInactive_1[] =
          "iE-Extensions"},
 };
 static const int
-    asn_MAP_Ngap_CoreNetworkAssistanceInformationForInactive_oms_1[] = {
-        1, 3, 5, 6};
+    asn_MAP_Ngap_CoreNetworkAssistanceInformationForInactive_oms_1[] = {1, 3, 5,
+                                                                        6};
 static const ber_tlv_tag_t
     asn_DEF_Ngap_CoreNetworkAssistanceInformationForInactive_tags_1[] = {
         (ASN_TAG_CLASS_UNIVERSAL | (16 << 2))};
@@ -181,8 +174,8 @@ static const asn_TYPE_tag2member_t
 asn_SEQUENCE_specifics_t
     asn_SPC_Ngap_CoreNetworkAssistanceInformationForInactive_specs_1 = {
         sizeof(struct Ngap_CoreNetworkAssistanceInformationForInactive),
-        offsetof(
-            struct Ngap_CoreNetworkAssistanceInformationForInactive, _asn_ctx),
+        offsetof(struct Ngap_CoreNetworkAssistanceInformationForInactive,
+                 _asn_ctx),
         asn_MAP_Ngap_CoreNetworkAssistanceInformationForInactive_tag2el_1,
         7, /* Count of tags in the map */
         asn_MAP_Ngap_CoreNetworkAssistanceInformationForInactive_oms_1, /* Optional

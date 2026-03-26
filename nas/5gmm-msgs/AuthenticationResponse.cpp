@@ -10,11 +10,10 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 AuthenticationResponse::AuthenticationResponse()
-    : ie_header_(
-          k5gsMobilityManagementMessages, kPlain5gsMessage,
-          kAuthenticationResponse) {
+    : ie_header_(k5gsMobilityManagementMessages, kPlain5gsMessage,
+                 kAuthenticationResponse) {
   ie_authentication_response_parameter_ = std::nullopt;
-  ie_eap_message_                       = std::nullopt;
+  ie_eap_message_ = std::nullopt;
 }
 
 //------------------------------------------------------------------------------
@@ -39,14 +38,14 @@ void AuthenticationResponse::SetHeader(uint8_t security_header_type) {
 
 //------------------------------------------------------------------------------
 void AuthenticationResponse::SetAuthenticationResponseParameter(
-    const bstring& para) {
+    const bstring &para) {
   ie_authentication_response_parameter_ =
       std::make_optional<AuthenticationResponseParameter>(para);
 }
 
 //------------------------------------------------------------------------------
 bool AuthenticationResponse::GetAuthenticationResponseParameter(
-    bstring& para) const {
+    bstring &para) const {
   if (ie_authentication_response_parameter_.has_value()) {
     ie_authentication_response_parameter_.value().GetValue(para);
     return true;
@@ -56,12 +55,12 @@ bool AuthenticationResponse::GetAuthenticationResponseParameter(
 }
 
 //------------------------------------------------------------------------------
-void AuthenticationResponse::SetEapMessage(const bstring& eap) {
+void AuthenticationResponse::SetEapMessage(const bstring &eap) {
   ie_eap_message_ = std::make_optional<EapMessage>(kIeiEapMessage, eap);
 }
 
 //------------------------------------------------------------------------------
-bool AuthenticationResponse::GetEapMessage(bstring& eap) const {
+bool AuthenticationResponse::GetEapMessage(bstring &eap) const {
   if (ie_eap_message_.has_value()) {
     ie_eap_message_.value().GetValue(eap);
     return true;
@@ -71,13 +70,14 @@ bool AuthenticationResponse::GetEapMessage(bstring& eap) const {
 }
 
 //------------------------------------------------------------------------------
-int AuthenticationResponse::Encode(uint8_t* buf, int len) {
+int AuthenticationResponse::Encode(uint8_t *buf, int len) {
   oai::logger::logger_common::nas().debug(
       "Encoding AuthenticationResponse message");
 
-  if (!Validate(len)) return KEncodeDecodeError;
+  if (!Validate(len))
+    return KEncodeDecodeError;
 
-  int encoded_size    = 0;
+  int encoded_size = 0;
   int encoded_ie_size = 0;
 
   // Header
@@ -87,9 +87,9 @@ int AuthenticationResponse::Encode(uint8_t* buf, int len) {
   }
   encoded_size += encoded_ie_size;
 
-  if ((encoded_ie_size = NasHelper::Encode(
-           ie_authentication_response_parameter_, buf, len, encoded_size)) ==
-      KEncodeDecodeError) {
+  if ((encoded_ie_size =
+           NasHelper::Encode(ie_authentication_response_parameter_, buf, len,
+                             encoded_size)) == KEncodeDecodeError) {
     return KEncodeDecodeError;
   }
 
@@ -104,10 +104,10 @@ int AuthenticationResponse::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int AuthenticationResponse::Decode(uint8_t* buf, int len) {
+int AuthenticationResponse::Decode(uint8_t *buf, int len) {
   oai::logger::logger_common::nas().debug(
       "Decoding AuthenticationResponse message");
-  int decoded_size    = 0;
+  int decoded_size = 0;
   int decoded_ie_size = 0;
   // Header
   decoded_ie_size = ie_header_.Encode(buf, len);
@@ -124,32 +124,32 @@ int AuthenticationResponse::Decode(uint8_t* buf, int len) {
   while ((octet != 0x0)) {
     oai::logger::logger_common::nas().debug("Decoding IEI 0x%x", octet);
     switch (octet) {
-      case kIeiAuthenticationResponseParameter: {
-        if ((decoded_ie_size = NasHelper::Decode(
-                 ie_authentication_response_parameter_, buf, len, decoded_size,
-                 true)) == KEncodeDecodeError) {
-          return KEncodeDecodeError;
-        }
-        DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
-      } break;
+    case kIeiAuthenticationResponseParameter: {
+      if ((decoded_ie_size = NasHelper::Decode(
+               ie_authentication_response_parameter_, buf, len, decoded_size,
+               true)) == KEncodeDecodeError) {
+        return KEncodeDecodeError;
+      }
+      DECODE_U8_VALUE(buf, octet, decoded_size, len);
+      oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
+    } break;
 
-      case kIeiEapMessage: {
-        if ((decoded_ie_size = NasHelper::Decode(
-                 ie_eap_message_, buf, len, decoded_size, true)) ==
-            KEncodeDecodeError) {
-          return KEncodeDecodeError;
-        }
-        DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
-      } break;
+    case kIeiEapMessage: {
+      if ((decoded_ie_size = NasHelper::Decode(ie_eap_message_, buf, len,
+                                               decoded_size, true)) ==
+          KEncodeDecodeError) {
+        return KEncodeDecodeError;
+      }
+      DECODE_U8_VALUE(buf, octet, decoded_size, len);
+      oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
+    } break;
 
-      default: {
-        oai::logger::logger_common::nas().warn(
-            "Unknown IEI 0x%x, stop decoding...", octet);
-        // Stop decoding
-        octet = 0x00;
-      } break;
+    default: {
+      oai::logger::logger_common::nas().warn(
+          "Unknown IEI 0x%x, stop decoding...", octet);
+      // Stop decoding
+      octet = 0x00;
+    } break;
     }
   }
 

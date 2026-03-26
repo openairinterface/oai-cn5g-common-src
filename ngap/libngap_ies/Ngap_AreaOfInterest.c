@@ -8,9 +8,9 @@
 
 #include "Ngap_AreaOfInterest.h"
 
-#include "Ngap_AreaOfInterestTAIList.h"
 #include "Ngap_AreaOfInterestCellList.h"
 #include "Ngap_AreaOfInterestRANNodeList.h"
+#include "Ngap_AreaOfInterestTAIList.h"
 #include "Ngap_ProtocolExtensionContainer.h"
 asn_TYPE_member_t asn_MBR_Ngap_AreaOfInterest_1[] = {
     {ATF_POINTER,
@@ -90,7 +90,7 @@ asn_TYPE_member_t asn_MBR_Ngap_AreaOfInterest_1[] = {
      0, /* No default value */
      "iE-Extensions"},
 };
-static const int asn_MAP_Ngap_AreaOfInterest_oms_1[]            = {0, 1, 2, 3};
+static const int asn_MAP_Ngap_AreaOfInterest_oms_1[] = {0, 1, 2, 3};
 static const ber_tlv_tag_t asn_DEF_Ngap_AreaOfInterest_tags_1[] = {
     (ASN_TAG_CLASS_UNIVERSAL | (16 << 2))};
 static const asn_TYPE_tag2member_t asn_MAP_Ngap_AreaOfInterest_tag2el_1[] = {

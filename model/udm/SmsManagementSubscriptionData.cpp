@@ -19,22 +19,22 @@
 namespace oai::model::udm {
 
 SmsManagementSubscriptionData::SmsManagementSubscriptionData() {
-  m_SupportedFeatures        = "";
-  m_SupportedFeaturesIsSet   = false;
-  m_MtSmsSubscribed          = false;
-  m_MtSmsSubscribedIsSet     = false;
-  m_MtSmsBarringAll          = false;
-  m_MtSmsBarringAllIsSet     = false;
-  m_MtSmsBarringRoaming      = false;
+  m_SupportedFeatures = "";
+  m_SupportedFeaturesIsSet = false;
+  m_MtSmsSubscribed = false;
+  m_MtSmsSubscribedIsSet = false;
+  m_MtSmsBarringAll = false;
+  m_MtSmsBarringAllIsSet = false;
+  m_MtSmsBarringRoaming = false;
   m_MtSmsBarringRoamingIsSet = false;
-  m_MoSmsSubscribed          = false;
-  m_MoSmsSubscribedIsSet     = false;
-  m_MoSmsBarringAll          = false;
-  m_MoSmsBarringAllIsSet     = false;
-  m_MoSmsBarringRoaming      = false;
+  m_MoSmsSubscribed = false;
+  m_MoSmsSubscribedIsSet = false;
+  m_MoSmsBarringAll = false;
+  m_MoSmsBarringAllIsSet = false;
+  m_MoSmsBarringRoaming = false;
   m_MoSmsBarringRoamingIsSet = false;
   m_SharedSmsMngDataIdsIsSet = false;
-  m_TraceDataIsSet           = false;
+  m_TraceDataIsSet = false;
 }
 
 SmsManagementSubscriptionData::~SmsManagementSubscriptionData() {}
@@ -43,24 +43,29 @@ void SmsManagementSubscriptionData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const SmsManagementSubscriptionData& o) {
+void to_json(nlohmann::json &j, const SmsManagementSubscriptionData &o) {
   j = nlohmann::json();
   if (o.supportedFeaturesIsSet())
     j["supportedFeatures"] = o.m_SupportedFeatures;
-  if (o.mtSmsSubscribedIsSet()) j["mtSmsSubscribed"] = o.m_MtSmsSubscribed;
-  if (o.mtSmsBarringAllIsSet()) j["mtSmsBarringAll"] = o.m_MtSmsBarringAll;
+  if (o.mtSmsSubscribedIsSet())
+    j["mtSmsSubscribed"] = o.m_MtSmsSubscribed;
+  if (o.mtSmsBarringAllIsSet())
+    j["mtSmsBarringAll"] = o.m_MtSmsBarringAll;
   if (o.mtSmsBarringRoamingIsSet())
     j["mtSmsBarringRoaming"] = o.m_MtSmsBarringRoaming;
-  if (o.moSmsSubscribedIsSet()) j["moSmsSubscribed"] = o.m_MoSmsSubscribed;
-  if (o.moSmsBarringAllIsSet()) j["moSmsBarringAll"] = o.m_MoSmsBarringAll;
+  if (o.moSmsSubscribedIsSet())
+    j["moSmsSubscribed"] = o.m_MoSmsSubscribed;
+  if (o.moSmsBarringAllIsSet())
+    j["moSmsBarringAll"] = o.m_MoSmsBarringAll;
   if (o.moSmsBarringRoamingIsSet())
     j["moSmsBarringRoaming"] = o.m_MoSmsBarringRoaming;
   if (o.sharedSmsMngDataIdsIsSet())
     j["sharedSmsMngDataIds"] = o.m_SharedSmsMngDataIds;
-  if (o.traceDataIsSet()) j["traceData"] = o.m_TraceData;
+  if (o.traceDataIsSet())
+    j["traceData"] = o.m_TraceData;
 }
 
-void from_json(const nlohmann::json& j, SmsManagementSubscriptionData& o) {
+void from_json(const nlohmann::json &j, SmsManagementSubscriptionData &o) {
   if (j.find("supportedFeatures") != j.end()) {
     j.at("supportedFeatures").get_to(o.m_SupportedFeatures);
     o.m_SupportedFeaturesIsSet = true;
@@ -103,8 +108,8 @@ std::string SmsManagementSubscriptionData::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
 void SmsManagementSubscriptionData::setSupportedFeatures(
-    std::string const& value) {
-  m_SupportedFeatures      = value;
+    std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool SmsManagementSubscriptionData::supportedFeaturesIsSet() const {
@@ -117,7 +122,7 @@ bool SmsManagementSubscriptionData::isMtSmsSubscribed() const {
   return m_MtSmsSubscribed;
 }
 void SmsManagementSubscriptionData::setMtSmsSubscribed(bool const value) {
-  m_MtSmsSubscribed      = value;
+  m_MtSmsSubscribed = value;
   m_MtSmsSubscribedIsSet = true;
 }
 bool SmsManagementSubscriptionData::mtSmsSubscribedIsSet() const {
@@ -130,7 +135,7 @@ bool SmsManagementSubscriptionData::isMtSmsBarringAll() const {
   return m_MtSmsBarringAll;
 }
 void SmsManagementSubscriptionData::setMtSmsBarringAll(bool const value) {
-  m_MtSmsBarringAll      = value;
+  m_MtSmsBarringAll = value;
   m_MtSmsBarringAllIsSet = true;
 }
 bool SmsManagementSubscriptionData::mtSmsBarringAllIsSet() const {
@@ -143,7 +148,7 @@ bool SmsManagementSubscriptionData::isMtSmsBarringRoaming() const {
   return m_MtSmsBarringRoaming;
 }
 void SmsManagementSubscriptionData::setMtSmsBarringRoaming(bool const value) {
-  m_MtSmsBarringRoaming      = value;
+  m_MtSmsBarringRoaming = value;
   m_MtSmsBarringRoamingIsSet = true;
 }
 bool SmsManagementSubscriptionData::mtSmsBarringRoamingIsSet() const {
@@ -156,7 +161,7 @@ bool SmsManagementSubscriptionData::isMoSmsSubscribed() const {
   return m_MoSmsSubscribed;
 }
 void SmsManagementSubscriptionData::setMoSmsSubscribed(bool const value) {
-  m_MoSmsSubscribed      = value;
+  m_MoSmsSubscribed = value;
   m_MoSmsSubscribedIsSet = true;
 }
 bool SmsManagementSubscriptionData::moSmsSubscribedIsSet() const {
@@ -169,7 +174,7 @@ bool SmsManagementSubscriptionData::isMoSmsBarringAll() const {
   return m_MoSmsBarringAll;
 }
 void SmsManagementSubscriptionData::setMoSmsBarringAll(bool const value) {
-  m_MoSmsBarringAll      = value;
+  m_MoSmsBarringAll = value;
   m_MoSmsBarringAllIsSet = true;
 }
 bool SmsManagementSubscriptionData::moSmsBarringAllIsSet() const {
@@ -182,7 +187,7 @@ bool SmsManagementSubscriptionData::isMoSmsBarringRoaming() const {
   return m_MoSmsBarringRoaming;
 }
 void SmsManagementSubscriptionData::setMoSmsBarringRoaming(bool const value) {
-  m_MoSmsBarringRoaming      = value;
+  m_MoSmsBarringRoaming = value;
   m_MoSmsBarringRoamingIsSet = true;
 }
 bool SmsManagementSubscriptionData::moSmsBarringRoamingIsSet() const {
@@ -191,7 +196,7 @@ bool SmsManagementSubscriptionData::moSmsBarringRoamingIsSet() const {
 void SmsManagementSubscriptionData::unsetMoSmsBarringRoaming() {
   m_MoSmsBarringRoamingIsSet = false;
 }
-std::vector<std::string>&
+std::vector<std::string> &
 SmsManagementSubscriptionData::getSharedSmsMngDataIds() {
   return m_SharedSmsMngDataIds;
 }
@@ -201,13 +206,13 @@ bool SmsManagementSubscriptionData::sharedSmsMngDataIdsIsSet() const {
 void SmsManagementSubscriptionData::unsetSharedSmsMngDataIds() {
   m_SharedSmsMngDataIdsIsSet = false;
 }
-oai::model::common::TraceData SmsManagementSubscriptionData::getTraceData()
-    const {
+oai::model::common::TraceData
+SmsManagementSubscriptionData::getTraceData() const {
   return m_TraceData;
 }
 void SmsManagementSubscriptionData::setTraceData(
-    oai::model::common::TraceData const& value) {
-  m_TraceData      = value;
+    oai::model::common::TraceData const &value) {
+  m_TraceData = value;
   m_TraceDataIsSet = true;
 }
 bool SmsManagementSubscriptionData::traceDataIsSet() const {
@@ -217,4 +222,4 @@ void SmsManagementSubscriptionData::unsetTraceData() {
   m_TraceDataIsSet = false;
 }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

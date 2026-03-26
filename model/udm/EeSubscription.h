@@ -22,13 +22,13 @@
 #ifndef EeSubscription_H_
 #define EeSubscription_H_
 
-#include "MonitoringConfiguration.h"
 #include "ContextInfo.h"
-#include <string>
+#include "MonitoringConfiguration.h"
 #include "ReportingOptions.h"
 #include <map>
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::udm {
 
@@ -36,7 +36,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class EeSubscription {
- public:
+public:
   EeSubscription();
   virtual ~EeSubscription() = default;
 
@@ -50,10 +50,10 @@ class EeSubscription {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const EeSubscription& rhs) const;
-  bool operator!=(const EeSubscription& rhs) const;
+  bool operator==(const EeSubscription &rhs) const;
+  bool operator!=(const EeSubscription &rhs) const;
 
   /////////////////////////////////////////////
   /// EeSubscription members
@@ -62,41 +62,41 @@ class EeSubscription {
   ///
   /// </summary>
   std::string getCallbackReference() const;
-  void setCallbackReference(std::string const& value);
+  void setCallbackReference(std::string const &value);
   /// <summary>
   /// A map (list of key-value pairs where ReferenceId serves as key) of
   /// MonitoringConfigurations
   /// </summary>
-  std::map<std::string, MonitoringConfiguration> getMonitoringConfigurations()
-      const;
+  std::map<std::string, MonitoringConfiguration>
+  getMonitoringConfigurations() const;
   void setMonitoringConfigurations(
-      std::map<std::string, MonitoringConfiguration> const& value);
+      std::map<std::string, MonitoringConfiguration> const &value);
   /// <summary>
   ///
   /// </summary>
   ReportingOptions getReportingOptions() const;
-  void setReportingOptions(ReportingOptions const& value);
+  void setReportingOptions(ReportingOptions const &value);
   bool reportingOptionsIsSet() const;
   void unsetReportingOptions();
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
   /// <summary>
   ///
   /// </summary>
   std::string getSubscriptionId() const;
-  void setSubscriptionId(std::string const& value);
+  void setSubscriptionId(std::string const &value);
   bool subscriptionIdIsSet() const;
   void unsetSubscriptionId();
   /// <summary>
   ///
   /// </summary>
   ContextInfo getContextInfo() const;
-  void setContextInfo(ContextInfo const& value);
+  void setContextInfo(ContextInfo const &value);
   bool contextInfoIsSet() const;
   void unsetContextInfo();
   /// <summary>
@@ -110,35 +110,35 @@ class EeSubscription {
   ///
   /// </summary>
   std::string getScefDiamHost() const;
-  void setScefDiamHost(std::string const& value);
+  void setScefDiamHost(std::string const &value);
   bool scefDiamHostIsSet() const;
   void unsetScefDiamHost();
   /// <summary>
   ///
   /// </summary>
   std::string getScefDiamRealm() const;
-  void setScefDiamRealm(std::string const& value);
+  void setScefDiamRealm(std::string const &value);
   bool scefDiamRealmIsSet() const;
   void unsetScefDiamRealm();
   /// <summary>
   ///
   /// </summary>
   std::string getNotifyCorrelationId() const;
-  void setNotifyCorrelationId(std::string const& value);
+  void setNotifyCorrelationId(std::string const &value);
   bool notifyCorrelationIdIsSet() const;
   void unsetNotifyCorrelationId();
   /// <summary>
   ///
   /// </summary>
   std::string getSecondCallbackRef() const;
-  void setSecondCallbackRef(std::string const& value);
+  void setSecondCallbackRef(std::string const &value);
   bool secondCallbackRefIsSet() const;
   void unsetSecondCallbackRef();
 
-  friend void to_json(nlohmann::json& j, const EeSubscription& o);
-  friend void from_json(const nlohmann::json& j, EeSubscription& o);
+  friend void to_json(nlohmann::json &j, const EeSubscription &o);
+  friend void from_json(const nlohmann::json &j, EeSubscription &o);
 
- protected:
+protected:
   std::string m_CallbackReference;
 
   std::map<std::string, MonitoringConfiguration> m_MonitoringConfigurations;
@@ -164,9 +164,9 @@ class EeSubscription {
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* EeSubscription_H_ */

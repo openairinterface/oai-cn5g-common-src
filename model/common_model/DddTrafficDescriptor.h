@@ -19,9 +19,9 @@
 #ifndef DddTrafficDescriptor_H_
 #define DddTrafficDescriptor_H_
 
-#include <string>
 #include "Ipv6Addr.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::common {
 
@@ -29,7 +29,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class DddTrafficDescriptor {
- public:
+public:
   DddTrafficDescriptor();
   virtual ~DddTrafficDescriptor() = default;
 
@@ -43,16 +43,16 @@ class DddTrafficDescriptor {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const DddTrafficDescriptor& rhs) const;
-  bool operator!=(const DddTrafficDescriptor& rhs) const;
+  bool operator==(const DddTrafficDescriptor &rhs) const;
+  bool operator!=(const DddTrafficDescriptor &rhs) const;
 
   /////////////////////////////////////////////
   /// DddTrafficDescriptor members
@@ -61,14 +61,14 @@ class DddTrafficDescriptor {
   ///
   /// </summary>
   std::string getIpv4Addr() const;
-  void setIpv4Addr(std::string const& value);
+  void setIpv4Addr(std::string const &value);
   bool ipv4AddrIsSet() const;
   void unsetIpv4Addr();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ipv6Addr getIpv6Addr() const;
-  void setIpv6Addr(oai::model::common::Ipv6Addr const& value);
+  void setIpv6Addr(oai::model::common::Ipv6Addr const &value);
   bool ipv6AddrIsSet() const;
   void unsetIpv6Addr();
   /// <summary>
@@ -82,14 +82,14 @@ class DddTrafficDescriptor {
   ///
   /// </summary>
   std::string getMacAddr() const;
-  void setMacAddr(std::string const& value);
+  void setMacAddr(std::string const &value);
   bool macAddrIsSet() const;
   void unsetMacAddr();
 
-  friend void to_json(nlohmann::json& j, const DddTrafficDescriptor& o);
-  friend void from_json(const nlohmann::json& j, DddTrafficDescriptor& o);
+  friend void to_json(nlohmann::json &j, const DddTrafficDescriptor &o);
+  friend void from_json(const nlohmann::json &j, DddTrafficDescriptor &o);
 
- protected:
+protected:
   std::string m_Ipv4Addr;
   bool m_Ipv4AddrIsSet;
   oai::model::common::Ipv6Addr m_Ipv6Addr;
@@ -100,6 +100,6 @@ class DddTrafficDescriptor {
   bool m_MacAddrIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* DddTrafficDescriptor_H_ */

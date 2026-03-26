@@ -16,15 +16,15 @@ constexpr auto kIntegrityProtectionMaximumDataRateIeName =
 namespace oai::nas {
 
 class IntegrityProtectionMaximumDataRate : public Type3NasIe {
- public:
+public:
   IntegrityProtectionMaximumDataRate();
   IntegrityProtectionMaximumDataRate(uint8_t iei);
-  IntegrityProtectionMaximumDataRate(
-      uint8_t iei, uint8_t uplink, uint8_t downlink);
+  IntegrityProtectionMaximumDataRate(uint8_t iei, uint8_t uplink,
+                                     uint8_t downlink);
   virtual ~IntegrityProtectionMaximumDataRate();
 
-  int Encode(uint8_t* buf, int len) const override;
-  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+  int Encode(uint8_t *buf, int len) const override;
+  int Decode(const uint8_t *const buf, int len, bool is_iei = false) override;
 
   static std::string GetIeName() {
     return kIntegrityProtectionMaximumDataRateIeName;
@@ -39,11 +39,11 @@ class IntegrityProtectionMaximumDataRate : public Type3NasIe {
   void SetDownlink(uint8_t downlink);
   uint8_t GetDownlink() const;
 
- private:
+private:
   uint8_t uplink_;
   uint8_t downlink_;
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

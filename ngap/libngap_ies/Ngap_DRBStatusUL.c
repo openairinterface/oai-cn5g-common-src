@@ -92,7 +92,7 @@ asn_CHOICE_specifics_t asn_SPC_Ngap_DRBStatusUL_specs_1 = {
     sizeof(struct Ngap_DRBStatusUL),
     offsetof(struct Ngap_DRBStatusUL, _asn_ctx),
     offsetof(struct Ngap_DRBStatusUL, present),
-    sizeof(((struct Ngap_DRBStatusUL*) 0)->present),
+    sizeof(((struct Ngap_DRBStatusUL *)0)->present),
     asn_MAP_Ngap_DRBStatusUL_tag2el_1,
     3, /* Count of tags in the map */
     0,

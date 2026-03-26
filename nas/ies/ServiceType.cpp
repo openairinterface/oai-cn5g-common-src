@@ -25,7 +25,7 @@ void ServiceType::SetValue(uint8_t value) {
 }
 
 //------------------------------------------------------------------------------
-void ServiceType::GetValue(uint8_t& value) const {
+void ServiceType::GetValue(uint8_t &value) const {
   value = service_type_value_;
 }
 
@@ -35,6 +35,4 @@ void ServiceType::SetValue() {
 }
 
 //------------------------------------------------------------------------------
-void ServiceType::GetValue() {
-  service_type_value_ = value_ & 0x0f;
-}
+void ServiceType::GetValue() { service_type_value_ = value_ & 0x0f; }

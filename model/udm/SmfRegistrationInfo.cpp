@@ -26,21 +26,21 @@ void SmfRegistrationInfo::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const SmfRegistrationInfo& o) {
-  j                        = nlohmann::json();
+void to_json(nlohmann::json &j, const SmfRegistrationInfo &o) {
+  j = nlohmann::json();
   j["smfRegistrationList"] = o.m_SmfRegistrationList;
 }
 
-void from_json(const nlohmann::json& j, SmfRegistrationInfo& o) {
+void from_json(const nlohmann::json &j, SmfRegistrationInfo &o) {
   j.at("smfRegistrationList").get_to(o.m_SmfRegistrationList);
 }
 
-std::vector<SmfRegistration>& SmfRegistrationInfo::getSmfRegistrationList() {
+std::vector<SmfRegistration> &SmfRegistrationInfo::getSmfRegistrationList() {
   return m_SmfRegistrationList;
 }
 void SmfRegistrationInfo::setSmfRegistrationList(
-    std::vector<SmfRegistration> const& value) {
+    std::vector<SmfRegistration> const &value) {
   m_SmfRegistrationList = value;
 }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

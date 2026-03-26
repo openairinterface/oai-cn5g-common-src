@@ -19,8 +19,8 @@
 #ifndef AdditionalAccessInfo_H_
 #define AdditionalAccessInfo_H_
 
-#include "RatType.h"
 #include "AccessType.h"
+#include "RatType.h"
 #include <nlohmann/json.hpp>
 
 namespace oai::model::pcf {
@@ -29,7 +29,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class AdditionalAccessInfo {
- public:
+public:
   AdditionalAccessInfo();
   virtual ~AdditionalAccessInfo() = default;
 
@@ -43,16 +43,16 @@ class AdditionalAccessInfo {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const AdditionalAccessInfo& rhs) const;
-  bool operator!=(const AdditionalAccessInfo& rhs) const;
+  bool operator==(const AdditionalAccessInfo &rhs) const;
+  bool operator!=(const AdditionalAccessInfo &rhs) const;
 
   /////////////////////////////////////////////
   /// AdditionalAccessInfo members
@@ -61,25 +61,25 @@ class AdditionalAccessInfo {
   ///
   /// </summary>
   oai::model::common::AccessType getAccessType() const;
-  void setAccessType(oai::model::common::AccessType const& value);
+  void setAccessType(oai::model::common::AccessType const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::RatType getRatType() const;
-  void setRatType(oai::model::common::RatType const& value);
+  void setRatType(oai::model::common::RatType const &value);
   bool ratTypeIsSet() const;
   void unsetRatType();
 
-  friend void to_json(nlohmann::json& j, const AdditionalAccessInfo& o);
-  friend void from_json(const nlohmann::json& j, AdditionalAccessInfo& o);
+  friend void to_json(nlohmann::json &j, const AdditionalAccessInfo &o);
+  friend void from_json(const nlohmann::json &j, AdditionalAccessInfo &o);
 
- protected:
+protected:
   oai::model::common::AccessType m_AccessType;
 
   oai::model::common::RatType m_RatType;
   bool m_RatTypeIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* AdditionalAccessInfo_H_ */

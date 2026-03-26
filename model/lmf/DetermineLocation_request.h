@@ -19,9 +19,9 @@
 #ifndef DetermineLocation_request_H_
 #define DetermineLocation_request_H_
 
-#include <string>
 #include "InputData.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::lmf {
 
@@ -29,7 +29,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class DetermineLocation_request {
- public:
+public:
   DetermineLocation_request();
   virtual ~DetermineLocation_request() = default;
 
@@ -43,16 +43,16 @@ class DetermineLocation_request {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const DetermineLocation_request& rhs) const;
-  bool operator!=(const DetermineLocation_request& rhs) const;
+  bool operator==(const DetermineLocation_request &rhs) const;
+  bool operator!=(const DetermineLocation_request &rhs) const;
 
   /////////////////////////////////////////////
   /// DetermineLocation_request members
@@ -61,27 +61,27 @@ class DetermineLocation_request {
   ///
   /// </summary>
   oai::model::lmf::InputData getJsonData() const;
-  void setJsonData(oai::model::lmf::InputData const& value);
+  void setJsonData(oai::model::lmf::InputData const &value);
   bool jsonDataIsSet() const;
   void unsetJsonData();
   /// <summary>
   ///
   /// </summary>
   std::string getBinaryDataLppMessage() const;
-  void setBinaryDataLppMessage(std::string const& value);
+  void setBinaryDataLppMessage(std::string const &value);
   bool binaryDataLppMessageIsSet() const;
   void unsetBinaryDataLppMessage();
 
-  friend void to_json(nlohmann::json& j, const DetermineLocation_request& o);
-  friend void from_json(const nlohmann::json& j, DetermineLocation_request& o);
+  friend void to_json(nlohmann::json &j, const DetermineLocation_request &o);
+  friend void from_json(const nlohmann::json &j, DetermineLocation_request &o);
 
- protected:
+protected:
   oai::model::lmf::InputData m_JsonData;
   bool m_JsonDataIsSet;
   std::string m_BinaryDataLppMessage;
   bool m_BinaryDataLppMessageIsSet;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* DetermineLocation_request_H_ */

@@ -19,8 +19,8 @@
 namespace oai::model::smf {
 
 NotificationData::NotificationData() {
-  m_NfInstanceUri       = "";
-  m_NfProfileIsSet      = false;
+  m_NfInstanceUri = "";
+  m_NfProfileIsSet = false;
   m_ProfileChangesIsSet = false;
   m_ConditionEventIsSet = false;
 }
@@ -32,28 +32,28 @@ void NotificationData::validate() const {
   }
 }
 
-bool NotificationData::validate(std::stringstream& msg) const {
+bool NotificationData::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool NotificationData::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool NotificationData::validate(std::stringstream &msg,
+                                const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "NotificationData" : pathPrefix;
 
   if (profileChangesIsSet()) {
-    const std::vector<oai::model::common::ChangeItem>& value = m_ProfileChanges;
+    const std::vector<oai::model::common::ChangeItem> &value = m_ProfileChanges;
     const std::string currentValuePath = _pathPrefix + ".profileChanges";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::ChangeItem& value : value) {
+      int i = 0;
+      for (const oai::model::common::ChangeItem &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -67,7 +67,7 @@ bool NotificationData::validate(
   return success;
 }
 
-bool NotificationData::operator==(const NotificationData& rhs) const {
+bool NotificationData::operator==(const NotificationData &rhs) const {
   return
 
       (getEvent() == rhs.getEvent()) &&
@@ -89,21 +89,23 @@ bool NotificationData::operator==(const NotificationData& rhs) const {
           ;
 }
 
-bool NotificationData::operator!=(const NotificationData& rhs) const {
+bool NotificationData::operator!=(const NotificationData &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const NotificationData& o) {
-  j                  = nlohmann::json();
-  j["event"]         = o.m_Event;
+void to_json(nlohmann::json &j, const NotificationData &o) {
+  j = nlohmann::json();
+  j["event"] = o.m_Event;
   j["nfInstanceUri"] = o.m_NfInstanceUri;
-  if (o.nfProfileIsSet()) j["nfProfile"] = o.m_NfProfile;
+  if (o.nfProfileIsSet())
+    j["nfProfile"] = o.m_NfProfile;
   if (o.profileChangesIsSet() || !o.m_ProfileChanges.empty())
     j["profileChanges"] = o.m_ProfileChanges;
-  if (o.conditionEventIsSet()) j["conditionEvent"] = o.m_ConditionEvent;
+  if (o.conditionEventIsSet())
+    j["conditionEvent"] = o.m_ConditionEvent;
 }
 
-void from_json(const nlohmann::json& j, NotificationData& o) {
+void from_json(const nlohmann::json &j, NotificationData &o) {
   j.at("event").get_to(o.m_Event);
   j.at("nfInstanceUri").get_to(o.m_NfInstanceUri);
   if (j.find("nfProfile") != j.end()) {
@@ -124,57 +126,49 @@ oai::model::smf::NotificationEventType NotificationData::getEvent() const {
   return m_Event;
 }
 void NotificationData::setEvent(
-    oai::model::smf::NotificationEventType const& value) {
+    oai::model::smf::NotificationEventType const &value) {
   m_Event = value;
 }
 std::string NotificationData::getNfInstanceUri() const {
   return m_NfInstanceUri;
 }
-void NotificationData::setNfInstanceUri(std::string const& value) {
+void NotificationData::setNfInstanceUri(std::string const &value) {
   m_NfInstanceUri = value;
 }
 oai::model::smf::NFProfile NotificationData::getNfProfile() const {
   return m_NfProfile;
 }
-void NotificationData::setNfProfile(oai::model::smf::NFProfile const& value) {
-  m_NfProfile      = value;
+void NotificationData::setNfProfile(oai::model::smf::NFProfile const &value) {
+  m_NfProfile = value;
   m_NfProfileIsSet = true;
 }
-bool NotificationData::nfProfileIsSet() const {
-  return m_NfProfileIsSet;
-}
-void NotificationData::unsetNfProfile() {
-  m_NfProfileIsSet = false;
-}
+bool NotificationData::nfProfileIsSet() const { return m_NfProfileIsSet; }
+void NotificationData::unsetNfProfile() { m_NfProfileIsSet = false; }
 std::vector<oai::model::common::ChangeItem>
 NotificationData::getProfileChanges() const {
   return m_ProfileChanges;
 }
 void NotificationData::setProfileChanges(
-    std::vector<oai::model::common::ChangeItem> const& value) {
-  m_ProfileChanges      = value;
+    std::vector<oai::model::common::ChangeItem> const &value) {
+  m_ProfileChanges = value;
   m_ProfileChangesIsSet = true;
 }
 bool NotificationData::profileChangesIsSet() const {
   return m_ProfileChangesIsSet;
 }
-void NotificationData::unsetProfileChanges() {
-  m_ProfileChangesIsSet = false;
-}
-oai::model::smf::ConditionEventType NotificationData::getConditionEvent()
-    const {
+void NotificationData::unsetProfileChanges() { m_ProfileChangesIsSet = false; }
+oai::model::smf::ConditionEventType
+NotificationData::getConditionEvent() const {
   return m_ConditionEvent;
 }
 void NotificationData::setConditionEvent(
-    oai::model::smf::ConditionEventType const& value) {
-  m_ConditionEvent      = value;
+    oai::model::smf::ConditionEventType const &value) {
+  m_ConditionEvent = value;
   m_ConditionEventIsSet = true;
 }
 bool NotificationData::conditionEventIsSet() const {
   return m_ConditionEventIsSet;
 }
-void NotificationData::unsetConditionEvent() {
-  m_ConditionEventIsSet = false;
-}
+void NotificationData::unsetConditionEvent() { m_ConditionEventIsSet = false; }
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

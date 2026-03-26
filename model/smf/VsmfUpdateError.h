@@ -22,9 +22,9 @@
 #include "NgApCause.h"
 #include "ProblemDetails.h"
 #include "RefToBinaryData.h"
+#include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
-#include <nlohmann/json.hpp>
 
 namespace oai::model::smf {
 
@@ -32,7 +32,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class VsmfUpdateError {
- public:
+public:
   VsmfUpdateError();
   virtual ~VsmfUpdateError();
 
@@ -45,7 +45,7 @@ class VsmfUpdateError {
   ///
   /// </summary>
   oai::model::common::ProblemDetails getError() const;
-  void setError(oai::model::common::ProblemDetails const& value);
+  void setError(oai::model::common::ProblemDetails const &value);
   /// <summary>
   ///
   /// </summary>
@@ -57,34 +57,34 @@ class VsmfUpdateError {
   ///
   /// </summary>
   std::string getN1smCause() const;
-  void setN1smCause(std::string const& value);
+  void setN1smCause(std::string const &value);
   bool n1smCauseIsSet() const;
   void unsetN1smCause();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::RefToBinaryData getN1SmInfoFromUe() const;
-  void setN1SmInfoFromUe(oai::model::common::RefToBinaryData const& value);
+  void setN1SmInfoFromUe(oai::model::common::RefToBinaryData const &value);
   bool n1SmInfoFromUeIsSet() const;
   void unsetN1SmInfoFromUe();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::RefToBinaryData getUnknownN1SmInfo() const;
-  void setUnknownN1SmInfo(oai::model::common::RefToBinaryData const& value);
+  void setUnknownN1SmInfo(oai::model::common::RefToBinaryData const &value);
   bool unknownN1SmInfoIsSet() const;
   void unsetUnknownN1SmInfo();
   /// <summary>
   ///
   /// </summary>
-  std::vector<int32_t>& getFailedToAssignEbiList();
+  std::vector<int32_t> &getFailedToAssignEbiList();
   bool failedToAssignEbiListIsSet() const;
   void unsetFailedToAssignEbiList();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::NgApCause getNgApCause() const;
-  void setNgApCause(oai::model::common::NgApCause const& value);
+  void setNgApCause(oai::model::common::NgApCause const &value);
   bool ngApCauseIsSet() const;
   void unsetNgApCause();
   /// <summary>
@@ -98,14 +98,14 @@ class VsmfUpdateError {
   ///
   /// </summary>
   std::string getRecoveryTime() const;
-  void setRecoveryTime(std::string const& value);
+  void setRecoveryTime(std::string const &value);
   bool recoveryTimeIsSet() const;
   void unsetRecoveryTime();
 
-  friend void to_json(nlohmann::json& j, const VsmfUpdateError& o);
-  friend void from_json(const nlohmann::json& j, VsmfUpdateError& o);
+  friend void to_json(nlohmann::json &j, const VsmfUpdateError &o);
+  friend void from_json(const nlohmann::json &j, VsmfUpdateError &o);
 
- protected:
+protected:
   oai::model::common::ProblemDetails m_Error;
 
   int32_t m_Pti;
@@ -126,6 +126,6 @@ class VsmfUpdateError {
   bool m_RecoveryTimeIsSet;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* VsmfUpdateError_H_ */

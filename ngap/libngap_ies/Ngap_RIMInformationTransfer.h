@@ -12,9 +12,9 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_TargetRANNodeID.h"
-#include "Ngap_SourceRANNodeID.h"
 #include "Ngap_RIMInformation.h"
+#include "Ngap_SourceRANNodeID.h"
+#include "Ngap_TargetRANNodeID.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -29,7 +29,7 @@ typedef struct Ngap_RIMInformationTransfer {
   Ngap_TargetRANNodeID_t targetRANNodeID;
   Ngap_SourceRANNodeID_t sourceRANNodeID;
   Ngap_RIMInformation_t rIMInformation;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

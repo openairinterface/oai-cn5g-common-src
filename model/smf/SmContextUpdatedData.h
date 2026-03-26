@@ -19,15 +19,15 @@
 #ifndef SmContextUpdatedData_H_
 #define SmContextUpdatedData_H_
 
-#include "EbiArpMapping.h"
 #include "Cause.h"
-#include "RefToBinaryData.h"
-#include <string>
-#include "UpCnxState.h"
+#include "EbiArpMapping.h"
 #include "HoState.h"
 #include "N2SmInfoType.h"
-#include <vector>
+#include "RefToBinaryData.h"
+#include "UpCnxState.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::smf {
 
@@ -35,7 +35,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class SmContextUpdatedData {
- public:
+public:
   SmContextUpdatedData();
   virtual ~SmContextUpdatedData();
 
@@ -48,59 +48,59 @@ class SmContextUpdatedData {
   ///
   /// </summary>
   UpCnxState getUpCnxState() const;
-  void setUpCnxState(UpCnxState const& value);
+  void setUpCnxState(UpCnxState const &value);
   bool upCnxStateIsSet() const;
   void unsetUpCnxState();
   /// <summary>
   ///
   /// </summary>
   HoState getHoState() const;
-  void setHoState(HoState const& value);
+  void setHoState(HoState const &value);
   bool hoStateIsSet() const;
   void unsetHoState();
   /// <summary>
   ///
   /// </summary>
-  std::vector<int32_t>& getReleaseEbiList();
+  std::vector<int32_t> &getReleaseEbiList();
   bool releaseEbiListIsSet() const;
   void unsetReleaseEbiList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<EbiArpMapping>& getAllocatedEbiList();
+  std::vector<EbiArpMapping> &getAllocatedEbiList();
   bool allocatedEbiListIsSet() const;
   void unsetAllocatedEbiList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<EbiArpMapping>& getModifiedEbiList();
+  std::vector<EbiArpMapping> &getModifiedEbiList();
   bool modifiedEbiListIsSet() const;
   void unsetModifiedEbiList();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::RefToBinaryData getN1SmMsg() const;
-  void setN1SmMsg(oai::model::common::RefToBinaryData const& value);
+  void setN1SmMsg(oai::model::common::RefToBinaryData const &value);
   bool n1SmMsgIsSet() const;
   void unsetN1SmMsg();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::RefToBinaryData getN2SmInfo() const;
-  void setN2SmInfo(oai::model::common::RefToBinaryData const& value);
+  void setN2SmInfo(oai::model::common::RefToBinaryData const &value);
   bool n2SmInfoIsSet() const;
   void unsetN2SmInfo();
   /// <summary>
   ///
   /// </summary>
   N2SmInfoType getN2SmInfoType() const;
-  void setN2SmInfoType(N2SmInfoType const& value);
+  void setN2SmInfoType(N2SmInfoType const &value);
   bool n2SmInfoTypeIsSet() const;
   void unsetN2SmInfoType();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getEpsBearerSetup();
+  std::vector<std::string> &getEpsBearerSetup();
   bool epsBearerSetupIsSet() const;
   void unsetEpsBearerSetup();
   /// <summary>
@@ -114,14 +114,14 @@ class SmContextUpdatedData {
   ///
   /// </summary>
   Cause getCause() const;
-  void setCause(Cause const& value);
+  void setCause(Cause const &value);
   bool causeIsSet() const;
   void unsetCause();
 
-  friend void to_json(nlohmann::json& j, const SmContextUpdatedData& o);
-  friend void from_json(const nlohmann::json& j, SmContextUpdatedData& o);
+  friend void to_json(nlohmann::json &j, const SmContextUpdatedData &o);
+  friend void from_json(const nlohmann::json &j, SmContextUpdatedData &o);
 
- protected:
+protected:
   UpCnxState m_UpCnxState;
   bool m_UpCnxStateIsSet;
   HoState m_HoState;
@@ -146,6 +146,6 @@ class SmContextUpdatedData {
   bool m_CauseIsSet;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* SmContextUpdatedData_H_ */

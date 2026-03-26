@@ -27,7 +27,7 @@ namespace oai::model::smf {
 /// Possible values are   - EPS_PDN_CONNECTION   - SM_CONTEXT
 /// </summary>
 class SmContextType {
- public:
+public:
   SmContextType();
   virtual ~SmContextType();
 
@@ -36,12 +36,12 @@ class SmContextType {
   /////////////////////////////////////////////
   /// SmContextType members
 
-  friend void to_json(nlohmann::json& j, const SmContextType& o);
-  friend void from_json(const nlohmann::json& j, SmContextType& o);
+  friend void to_json(nlohmann::json &j, const SmContextType &o);
+  friend void from_json(const nlohmann::json &j, SmContextType &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* SmContextType_H_ */

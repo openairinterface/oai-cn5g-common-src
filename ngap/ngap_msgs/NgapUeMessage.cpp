@@ -15,13 +15,9 @@ NgapUeMessage::NgapUeMessage() : NgapMessage() {}
 NgapUeMessage::~NgapUeMessage() {}
 
 //------------------------------------------------------------------------------
-uint64_t NgapUeMessage::getAmfUeNgapId() const {
-  return m_AmfUeNgapId.get();
-}
+uint64_t NgapUeMessage::getAmfUeNgapId() const { return m_AmfUeNgapId.get(); }
 
 //------------------------------------------------------------------------------
-uint32_t NgapUeMessage::getRanUeNgapId() const {
-  return m_RanUeNgapId.get();
-}
+uint32_t NgapUeMessage::getRanUeNgapId() const { return m_RanUeNgapId.get(); }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

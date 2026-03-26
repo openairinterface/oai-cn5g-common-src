@@ -27,7 +27,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class MeasurementLteForMdt_anyOf {
- public:
+public:
   MeasurementLteForMdt_anyOf();
   virtual ~MeasurementLteForMdt_anyOf() = default;
 
@@ -61,16 +61,16 @@ class MeasurementLteForMdt_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const MeasurementLteForMdt_anyOf& rhs) const;
-  bool operator!=(const MeasurementLteForMdt_anyOf& rhs) const;
+  bool operator==(const MeasurementLteForMdt_anyOf &rhs) const;
+  bool operator!=(const MeasurementLteForMdt_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// MeasurementLteForMdt_anyOf members
@@ -78,15 +78,15 @@ class MeasurementLteForMdt_anyOf {
   MeasurementLteForMdt_anyOf::eMeasurementLteForMdt_anyOf getValue() const;
   void setValue(MeasurementLteForMdt_anyOf::eMeasurementLteForMdt_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const MeasurementLteForMdt_anyOf& o);
-  friend void from_json(const nlohmann::json& j, MeasurementLteForMdt_anyOf& o);
+  friend void to_json(nlohmann::json &j, const MeasurementLteForMdt_anyOf &o);
+  friend void from_json(const nlohmann::json &j, MeasurementLteForMdt_anyOf &o);
 
- protected:
+protected:
   MeasurementLteForMdt_anyOf::eMeasurementLteForMdt_anyOf m_value =
       MeasurementLteForMdt_anyOf::eMeasurementLteForMdt_anyOf::
           INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* MeasurementLteForMdt_anyOf_H_ */

@@ -10,14 +10,10 @@
 using namespace oai::nas;
 
 //------------------------------------------------------------------------------
-_5gmmCause::_5gmmCause(uint8_t iei) : Type3NasIe(iei) {
-  value_ = 0;
-}
+_5gmmCause::_5gmmCause(uint8_t iei) : Type3NasIe(iei) { value_ = 0; }
 
 //------------------------------------------------------------------------------
-_5gmmCause::_5gmmCause() : Type3NasIe() {
-  value_ = 0;
-}
+_5gmmCause::_5gmmCause() : Type3NasIe() { value_ = 0; }
 
 //------------------------------------------------------------------------------
 _5gmmCause::_5gmmCause(uint8_t iei, uint8_t value) : Type3NasIe(iei) {
@@ -33,14 +29,10 @@ uint32_t _5gmmCause::GetIeLength() const {
 }
 
 //------------------------------------------------------------------------------
-void _5gmmCause::SetValue(uint8_t value) {
-  value_ = value;
-}
+void _5gmmCause::SetValue(uint8_t value) { value_ = value; }
 
 //------------------------------------------------------------------------------
-uint8_t _5gmmCause::GetValue() const {
-  return value_;
-}
+uint8_t _5gmmCause::GetValue() const { return value_; }
 
 //------------------------------------------------------------------------------
 void _5gmmCause::Set(uint8_t iei, uint8_t value) {
@@ -49,7 +41,7 @@ void _5gmmCause::Set(uint8_t iei, uint8_t value) {
 }
 
 //------------------------------------------------------------------------------
-int _5gmmCause::Encode(uint8_t* buf, int len) const {
+int _5gmmCause::Encode(uint8_t *buf, int len) const {
   oai::logger::logger_common::nas().debug("Encoding %s", GetIeName().c_str());
 
   if (len < k5gmmCauseMinimumLength) {
@@ -66,13 +58,13 @@ int _5gmmCause::Encode(uint8_t* buf, int len) const {
   // Value
   ENCODE_U8(buf + encoded_size, value_, encoded_size);
 
-  oai::logger::logger_common::nas().debug(
-      "Encoded %s, len (%d)", GetIeName().c_str(), encoded_size);
+  oai::logger::logger_common::nas().debug("Encoded %s, len (%d)",
+                                          GetIeName().c_str(), encoded_size);
   return encoded_size;
 }
 
 //------------------------------------------------------------------------------
-int _5gmmCause::Decode(const uint8_t* const buf, int len, bool is_iei) {
+int _5gmmCause::Decode(const uint8_t *const buf, int len, bool is_iei) {
   oai::logger::logger_common::nas().debug("Decoding %s", GetIeName().c_str());
 
   if (len < k5gmmCauseMinimumLength) {
@@ -90,7 +82,7 @@ int _5gmmCause::Decode(const uint8_t* const buf, int len, bool is_iei) {
   DECODE_U8(buf + decoded_size, value_, decoded_size);
 
   oai::logger::logger_common::nas().debug("Decoded value 0x%x", value_);
-  oai::logger::logger_common::nas().debug(
-      "Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
+  oai::logger::logger_common::nas().debug("Decoded %s, len (%d)",
+                                          GetIeName().c_str(), decoded_size);
   return decoded_size;
 }

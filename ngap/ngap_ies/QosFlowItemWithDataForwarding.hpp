@@ -17,29 +17,28 @@ extern "C" {
 namespace oai::ngap {
 
 class QosFlowItemWithDataForwarding {
- public:
+public:
   QosFlowItemWithDataForwarding();
   virtual ~QosFlowItemWithDataForwarding();
 
-  void set(
-      const QosFlowIdentifier& qfi,
-      const std::optional<long>& dataForwardingAccepted);
+  void set(const QosFlowIdentifier &qfi,
+           const std::optional<long> &dataForwardingAccepted);
 
-  void setQosFlowIdentifier(const QosFlowIdentifier& qosFlowIdentifier);
-  void getQosFlowIdentifier(QosFlowIdentifier& qosFlowIdentifier) const;
+  void setQosFlowIdentifier(const QosFlowIdentifier &qosFlowIdentifier);
+  void getQosFlowIdentifier(QosFlowIdentifier &qosFlowIdentifier) const;
 
   void setDataForwardingAccepted(long dataForwardingAccepted);
-  void getDataForwardingAccepted(
-      std::optional<long>& dataForwardingAccepted) const;
+  void
+  getDataForwardingAccepted(std::optional<long> &dataForwardingAccepted) const;
 
-  bool encode(Ngap_QosFlowItemWithDataForwarding_t&) const;
-  bool decode(const Ngap_QosFlowItemWithDataForwarding_t&);
+  bool encode(Ngap_QosFlowItemWithDataForwarding_t &) const;
+  bool decode(const Ngap_QosFlowItemWithDataForwarding_t &);
 
- private:
-  QosFlowIdentifier m_QosFlowIdentifier;         // Mandatory
-  std::optional<long> m_DataForwardingAccepted;  // Optional
+private:
+  QosFlowIdentifier m_QosFlowIdentifier;        // Mandatory
+  std::optional<long> m_DataForwardingAccepted; // Optional
   // TODO: Current QoS Parameters Set Index
 };
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
-#endif  // !_QOSFLOWITEMWITHDATAFORWARDING_H_
+#endif // !_QOSFLOWITEMWITHDATAFORWARDING_H_

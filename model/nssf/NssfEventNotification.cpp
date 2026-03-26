@@ -20,9 +20,7 @@ namespace oai {
 namespace nssf_server {
 namespace model {
 
-NssfEventNotification::NssfEventNotification() {
-  m_SubscriptionId = "";
-}
+NssfEventNotification::NssfEventNotification() { m_SubscriptionId = ""; }
 
 void NssfEventNotification::validate() const {
   std::stringstream msg;
@@ -32,33 +30,32 @@ void NssfEventNotification::validate() const {
   // }
 }
 
-bool NssfEventNotification::validate(std::stringstream& msg) const {
+bool NssfEventNotification::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool NssfEventNotification::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool NssfEventNotification::validate(std::stringstream &msg,
+                                     const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "NssfEventNotification" : pathPrefix;
 
   /* AuthorizedNssaiAvailabilityData */ {
-    const std::vector<AuthorizedNssaiAvailabilityData>& value =
+    const std::vector<AuthorizedNssaiAvailabilityData> &value =
         m_AuthorizedNssaiAvailabilityData;
     const std::string currentValuePath =
         _pathPrefix + ".authorizedNssaiAvailabilityData";
 
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const AuthorizedNssaiAvailabilityData& value : value) {
+      int i = 0;
+      for (const AuthorizedNssaiAvailabilityData &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
-        success =
-            value.validate(
-                msg, currentValuePath + ".authorizedNssaiAvailabilityData") &&
-            success;
+        success = value.validate(msg, currentValuePath +
+                                          ".authorizedNssaiAvailabilityData") &&
+                  success;
 
         i++;
       }
@@ -68,7 +65,7 @@ bool NssfEventNotification::validate(
   return success;
 }
 
-bool NssfEventNotification::operator==(const NssfEventNotification& rhs) const {
+bool NssfEventNotification::operator==(const NssfEventNotification &rhs) const {
   return
 
       (getSubscriptionId() == rhs.getSubscriptionId()) &&
@@ -79,17 +76,17 @@ bool NssfEventNotification::operator==(const NssfEventNotification& rhs) const {
           ;
 }
 
-bool NssfEventNotification::operator!=(const NssfEventNotification& rhs) const {
+bool NssfEventNotification::operator!=(const NssfEventNotification &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const NssfEventNotification& o) {
-  j                                    = nlohmann::json();
-  j["subscriptionId"]                  = o.m_SubscriptionId;
+void to_json(nlohmann::json &j, const NssfEventNotification &o) {
+  j = nlohmann::json();
+  j["subscriptionId"] = o.m_SubscriptionId;
   j["authorizedNssaiAvailabilityData"] = o.m_AuthorizedNssaiAvailabilityData;
 }
 
-void from_json(const nlohmann::json& j, NssfEventNotification& o) {
+void from_json(const nlohmann::json &j, NssfEventNotification &o) {
   j.at("subscriptionId").get_to(o.m_SubscriptionId);
   j.at("authorizedNssaiAvailabilityData")
       .get_to(o.m_AuthorizedNssaiAvailabilityData);
@@ -98,7 +95,7 @@ void from_json(const nlohmann::json& j, NssfEventNotification& o) {
 std::string NssfEventNotification::getSubscriptionId() const {
   return m_SubscriptionId;
 }
-void NssfEventNotification::setSubscriptionId(std::string const& value) {
+void NssfEventNotification::setSubscriptionId(std::string const &value) {
   m_SubscriptionId = value;
 }
 std::vector<AuthorizedNssaiAvailabilityData>
@@ -106,10 +103,10 @@ NssfEventNotification::getAuthorizedNssaiAvailabilityData() const {
   return m_AuthorizedNssaiAvailabilityData;
 }
 void NssfEventNotification::setAuthorizedNssaiAvailabilityData(
-    std::vector<AuthorizedNssaiAvailabilityData> const& value) {
+    std::vector<AuthorizedNssaiAvailabilityData> const &value) {
   m_AuthorizedNssaiAvailabilityData = value;
 }
 
-}  // namespace model
-}  // namespace nssf_server
-}  // namespace oai
+} // namespace model
+} // namespace nssf_server
+} // namespace oai

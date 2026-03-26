@@ -44,7 +44,7 @@ namespace oai::model::common {
 /// downlink data to be buffered is exceeded.
 /// </summary>
 class DlDataDeliveryStatus {
- public:
+public:
   DlDataDeliveryStatus();
   virtual ~DlDataDeliveryStatus() = default;
 
@@ -58,17 +58,17 @@ class DlDataDeliveryStatus {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  virtual bool validate(
-      std::stringstream& msg, const std::string& pathPrefix) const;
+  virtual bool validate(std::stringstream &msg,
+                        const std::string &pathPrefix) const;
 
-  bool operator==(const DlDataDeliveryStatus& rhs) const;
-  bool operator!=(const DlDataDeliveryStatus& rhs) const;
+  bool operator==(const DlDataDeliveryStatus &rhs) const;
+  bool operator!=(const DlDataDeliveryStatus &rhs) const;
 
   /////////////////////////////////////////////
   /// DlDataDeliveryStatus members
@@ -76,17 +76,17 @@ class DlDataDeliveryStatus {
   DlDataDeliveryStatus_anyOf getValue() const;
   void setValue(DlDataDeliveryStatus_anyOf value);
   DlDataDeliveryStatus_anyOf::eDlDataDeliveryStatus_anyOf getEnumValue() const;
-  void setEnumValue(
-      DlDataDeliveryStatus_anyOf::eDlDataDeliveryStatus_anyOf value);
-  friend void to_json(nlohmann::json& j, const DlDataDeliveryStatus& o);
-  friend void from_json(const nlohmann::json& j, DlDataDeliveryStatus& o);
-  friend void to_json(nlohmann::json& j, const DlDataDeliveryStatus_anyOf& o);
-  friend void from_json(const nlohmann::json& j, DlDataDeliveryStatus_anyOf& o);
+  void
+  setEnumValue(DlDataDeliveryStatus_anyOf::eDlDataDeliveryStatus_anyOf value);
+  friend void to_json(nlohmann::json &j, const DlDataDeliveryStatus &o);
+  friend void from_json(const nlohmann::json &j, DlDataDeliveryStatus &o);
+  friend void to_json(nlohmann::json &j, const DlDataDeliveryStatus_anyOf &o);
+  friend void from_json(const nlohmann::json &j, DlDataDeliveryStatus_anyOf &o);
 
- protected:
+protected:
   DlDataDeliveryStatus_anyOf m_value;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* DlDataDeliveryStatus_H_ */

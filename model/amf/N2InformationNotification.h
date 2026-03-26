@@ -19,12 +19,12 @@
 #ifndef N2InformationNotification_H_
 #define N2InformationNotification_H_
 
-#include "SmfChangeIndication.h"
-#include "N2InfoNotifyReason.h"
-#include <string>
 #include "N2InfoContainer.h"
-#include <vector>
+#include "N2InfoNotifyReason.h"
+#include "SmfChangeIndication.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::amf {
 
@@ -32,7 +32,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class N2InformationNotification {
- public:
+public:
   N2InformationNotification();
   virtual ~N2InformationNotification();
 
@@ -45,46 +45,46 @@ class N2InformationNotification {
   ///
   /// </summary>
   std::string getN2NotifySubscriptionId() const;
-  void setN2NotifySubscriptionId(std::string const& value);
+  void setN2NotifySubscriptionId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   N2InfoContainer getN2InfoContainer() const;
-  void setN2InfoContainer(N2InfoContainer const& value);
+  void setN2InfoContainer(N2InfoContainer const &value);
   bool n2InfoContainerIsSet() const;
   void unsetN2InfoContainer();
   /// <summary>
   ///
   /// </summary>
-  std::vector<int32_t>& getToReleaseSessionList();
+  std::vector<int32_t> &getToReleaseSessionList();
   bool toReleaseSessionListIsSet() const;
   void unsetToReleaseSessionList();
   /// <summary>
   ///
   /// </summary>
   std::string getLcsCorrelationId() const;
-  void setLcsCorrelationId(std::string const& value);
+  void setLcsCorrelationId(std::string const &value);
   bool lcsCorrelationIdIsSet() const;
   void unsetLcsCorrelationId();
   /// <summary>
   ///
   /// </summary>
   N2InfoNotifyReason getNotifyReason() const;
-  void setNotifyReason(N2InfoNotifyReason const& value);
+  void setNotifyReason(N2InfoNotifyReason const &value);
   bool notifyReasonIsSet() const;
   void unsetNotifyReason();
   /// <summary>
   ///
   /// </summary>
   SmfChangeIndication getSmfChangeInd() const;
-  void setSmfChangeInd(SmfChangeIndication const& value);
+  void setSmfChangeInd(SmfChangeIndication const &value);
   bool smfChangeIndIsSet() const;
   void unsetSmfChangeInd();
 
-  friend void to_json(nlohmann::json& j, const N2InformationNotification& o);
-  friend void from_json(const nlohmann::json& j, N2InformationNotification& o);
+  friend void to_json(nlohmann::json &j, const N2InformationNotification &o);
+  friend void from_json(const nlohmann::json &j, N2InformationNotification &o);
 
- protected:
+protected:
   std::string m_N2NotifySubscriptionId;
 
   N2InfoContainer m_N2InfoContainer;
@@ -99,6 +99,6 @@ class N2InformationNotification {
   bool m_SmfChangeIndIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* N2InformationNotification_H_ */

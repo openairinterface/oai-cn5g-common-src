@@ -28,7 +28,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class TerminationCause {
- public:
+public:
   TerminationCause();
   virtual ~TerminationCause() = default;
 
@@ -42,16 +42,16 @@ class TerminationCause {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const TerminationCause& rhs) const;
-  bool operator!=(const TerminationCause& rhs) const;
+  bool operator==(const TerminationCause &rhs) const;
+  bool operator!=(const TerminationCause &rhs) const;
 
   /////////////////////////////////////////////
   /// TerminationCause members
@@ -60,15 +60,15 @@ class TerminationCause {
   void setValue(TerminationCause_anyOf value);
   TerminationCause_anyOf::eTerminationCause_anyOf getEnumValue() const;
   void setEnumValue(TerminationCause_anyOf::eTerminationCause_anyOf value);
-  friend void to_json(nlohmann::json& j, const TerminationCause& o);
-  friend void from_json(const nlohmann::json& j, TerminationCause& o);
-  friend void to_json(nlohmann::json& j, const TerminationCause_anyOf& o);
-  friend void from_json(const nlohmann::json& j, TerminationCause_anyOf& o);
+  friend void to_json(nlohmann::json &j, const TerminationCause &o);
+  friend void from_json(const nlohmann::json &j, TerminationCause &o);
+  friend void to_json(nlohmann::json &j, const TerminationCause_anyOf &o);
+  friend void from_json(const nlohmann::json &j, TerminationCause_anyOf &o);
 
- protected:
+protected:
   TerminationCause_anyOf m_value;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* TerminationCause_H_ */

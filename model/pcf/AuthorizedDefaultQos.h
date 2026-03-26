@@ -19,9 +19,9 @@
 #ifndef AuthorizedDefaultQos_H_
 #define AuthorizedDefaultQos_H_
 
-#include <string>
 #include "Arp.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::pcf {
 
@@ -29,7 +29,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class AuthorizedDefaultQos {
- public:
+public:
   AuthorizedDefaultQos();
   virtual ~AuthorizedDefaultQos() = default;
 
@@ -43,16 +43,16 @@ class AuthorizedDefaultQos {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const AuthorizedDefaultQos& rhs) const;
-  bool operator!=(const AuthorizedDefaultQos& rhs) const;
+  bool operator==(const AuthorizedDefaultQos &rhs) const;
+  bool operator!=(const AuthorizedDefaultQos &rhs) const;
 
   /////////////////////////////////////////////
   /// AuthorizedDefaultQos members
@@ -68,7 +68,7 @@ class AuthorizedDefaultQos {
   ///
   /// </summary>
   oai::model::common::Arp getArp() const;
-  void setArp(oai::model::common::Arp const& value);
+  void setArp(oai::model::common::Arp const &value);
   bool arpIsSet() const;
   void unsetArp();
   /// <summary>
@@ -96,28 +96,28 @@ class AuthorizedDefaultQos {
   ///
   /// </summary>
   std::string getMaxbrUl() const;
-  void setMaxbrUl(std::string const& value);
+  void setMaxbrUl(std::string const &value);
   bool maxbrUlIsSet() const;
   void unsetMaxbrUl();
   /// <summary>
   ///
   /// </summary>
   std::string getMaxbrDl() const;
-  void setMaxbrDl(std::string const& value);
+  void setMaxbrDl(std::string const &value);
   bool maxbrDlIsSet() const;
   void unsetMaxbrDl();
   /// <summary>
   ///
   /// </summary>
   std::string getGbrUl() const;
-  void setGbrUl(std::string const& value);
+  void setGbrUl(std::string const &value);
   bool gbrUlIsSet() const;
   void unsetGbrUl();
   /// <summary>
   ///
   /// </summary>
   std::string getGbrDl() const;
-  void setGbrDl(std::string const& value);
+  void setGbrDl(std::string const &value);
   bool gbrDlIsSet() const;
   void unsetGbrDl();
   /// <summary>
@@ -128,10 +128,10 @@ class AuthorizedDefaultQos {
   bool extMaxDataBurstVolIsSet() const;
   void unsetExtMaxDataBurstVol();
 
-  friend void to_json(nlohmann::json& j, const AuthorizedDefaultQos& o);
-  friend void from_json(const nlohmann::json& j, AuthorizedDefaultQos& o);
+  friend void to_json(nlohmann::json &j, const AuthorizedDefaultQos &o);
+  friend void from_json(const nlohmann::json &j, AuthorizedDefaultQos &o);
 
- protected:
+protected:
   int32_t m_r_5qi;
   bool m_r_5qiIsSet;
   oai::model::common::Arp m_Arp;
@@ -154,6 +154,6 @@ class AuthorizedDefaultQos {
   bool m_ExtMaxDataBurstVolIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* AuthorizedDefaultQos_H_ */

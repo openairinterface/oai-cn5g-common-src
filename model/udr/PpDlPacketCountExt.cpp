@@ -19,11 +19,11 @@
 namespace oai::udr::model {
 
 PpDlPacketCountExt::PpDlPacketCountExt() {
-  m_AfInstanceId                = "";
-  m_ReferenceId                 = 0;
-  m_ValidityTime                = "";
-  m_ValidityTimeIsSet           = false;
-  m_MtcProviderInformation      = "";
+  m_AfInstanceId = "";
+  m_ReferenceId = 0;
+  m_ValidityTime = "";
+  m_ValidityTimeIsSet = false;
+  m_MtcProviderInformation = "";
   m_MtcProviderInformationIsSet = false;
 }
 
@@ -33,16 +33,17 @@ void PpDlPacketCountExt::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const PpDlPacketCountExt& o) {
-  j                 = nlohmann::json();
+void to_json(nlohmann::json &j, const PpDlPacketCountExt &o) {
+  j = nlohmann::json();
   j["afInstanceId"] = o.m_AfInstanceId;
-  j["referenceId"]  = o.m_ReferenceId;
-  if (o.validityTimeIsSet()) j["validityTime"] = o.m_ValidityTime;
+  j["referenceId"] = o.m_ReferenceId;
+  if (o.validityTimeIsSet())
+    j["validityTime"] = o.m_ValidityTime;
   if (o.mtcProviderInformationIsSet())
     j["mtcProviderInformation"] = o.m_MtcProviderInformation;
 }
 
-void from_json(const nlohmann::json& j, PpDlPacketCountExt& o) {
+void from_json(const nlohmann::json &j, PpDlPacketCountExt &o) {
   j.at("afInstanceId").get_to(o.m_AfInstanceId);
   j.at("referenceId").get_to(o.m_ReferenceId);
   if (j.find("validityTime") != j.end()) {
@@ -58,33 +59,29 @@ void from_json(const nlohmann::json& j, PpDlPacketCountExt& o) {
 std::string PpDlPacketCountExt::getAfInstanceId() const {
   return m_AfInstanceId;
 }
-void PpDlPacketCountExt::setAfInstanceId(std::string const& value) {
+void PpDlPacketCountExt::setAfInstanceId(std::string const &value) {
   m_AfInstanceId = value;
 }
-int32_t PpDlPacketCountExt::getReferenceId() const {
-  return m_ReferenceId;
-}
+int32_t PpDlPacketCountExt::getReferenceId() const { return m_ReferenceId; }
 void PpDlPacketCountExt::setReferenceId(int32_t const value) {
   m_ReferenceId = value;
 }
 std::string PpDlPacketCountExt::getValidityTime() const {
   return m_ValidityTime;
 }
-void PpDlPacketCountExt::setValidityTime(std::string const& value) {
-  m_ValidityTime      = value;
+void PpDlPacketCountExt::setValidityTime(std::string const &value) {
+  m_ValidityTime = value;
   m_ValidityTimeIsSet = true;
 }
 bool PpDlPacketCountExt::validityTimeIsSet() const {
   return m_ValidityTimeIsSet;
 }
-void PpDlPacketCountExt::unsetValidityTime() {
-  m_ValidityTimeIsSet = false;
-}
+void PpDlPacketCountExt::unsetValidityTime() { m_ValidityTimeIsSet = false; }
 std::string PpDlPacketCountExt::getMtcProviderInformation() const {
   return m_MtcProviderInformation;
 }
-void PpDlPacketCountExt::setMtcProviderInformation(std::string const& value) {
-  m_MtcProviderInformation      = value;
+void PpDlPacketCountExt::setMtcProviderInformation(std::string const &value) {
+  m_MtcProviderInformation = value;
   m_MtcProviderInformationIsSet = true;
 }
 bool PpDlPacketCountExt::mtcProviderInformationIsSet() const {
@@ -94,4 +91,4 @@ void PpDlPacketCountExt::unsetMtcProviderInformation() {
   m_MtcProviderInformationIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

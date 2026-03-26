@@ -27,12 +27,12 @@ void SipForkingIndication::validate() const {
   }
 }
 
-bool SipForkingIndication::validate(std::stringstream& msg) const {
+bool SipForkingIndication::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool SipForkingIndication::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool SipForkingIndication::validate(std::stringstream &msg,
+                                    const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "SipForkingIndication" : pathPrefix;
@@ -40,18 +40,18 @@ bool SipForkingIndication::validate(
   return success;
 }
 
-bool SipForkingIndication::operator==(const SipForkingIndication& rhs) const {
-  return true;  // TODO
+bool SipForkingIndication::operator==(const SipForkingIndication &rhs) const {
+  return true; // TODO
 }
 
-bool SipForkingIndication::operator!=(const SipForkingIndication& rhs) const {
+bool SipForkingIndication::operator!=(const SipForkingIndication &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const SipForkingIndication& o) {
+void to_json(nlohmann::json &j, const SipForkingIndication &o) {
   j = nlohmann::json::object();
 }
 
-void from_json(const nlohmann::json& j, SipForkingIndication& o) {}
+void from_json(const nlohmann::json &j, SipForkingIndication &o) {}
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

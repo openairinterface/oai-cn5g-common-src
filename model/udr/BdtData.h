@@ -37,7 +37,7 @@ namespace oai::udr::model {
 /// Contains the background data transfer data.
 /// </summary>
 class BdtData {
- public:
+public:
   BdtData();
   virtual ~BdtData();
 
@@ -50,25 +50,25 @@ class BdtData {
   ///
   /// </summary>
   std::string getAspId() const;
-  void setAspId(std::string const& value);
+  void setAspId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   TransferPolicy getTransPolicy() const;
-  void setTransPolicy(TransferPolicy const& value);
+  void setTransPolicy(TransferPolicy const &value);
   /// <summary>
   /// string identifying a BDT Reference ID as defined in subclause 5.3.3 of
   /// 3GPP TS 29.154.
   /// </summary>
   std::string getBdtRefId() const;
-  void setBdtRefId(std::string const& value);
+  void setBdtRefId(std::string const &value);
   bool bdtRefIdIsSet() const;
   void unsetBdtRefId();
   /// <summary>
   ///
   /// </summary>
   NetworkAreaInfo_2 getNwAreaInfo() const;
-  void setNwAreaInfo(NetworkAreaInfo_2 const& value);
+  void setNwAreaInfo(NetworkAreaInfo_2 const &value);
   bool nwAreaInfoIsSet() const;
   void unsetNwAreaInfo();
   /// <summary>
@@ -82,21 +82,21 @@ class BdtData {
   ///
   /// </summary>
   UsageThreshold getVolPerUe() const;
-  void setVolPerUe(UsageThreshold const& value);
+  void setVolPerUe(UsageThreshold const &value);
   bool volPerUeIsSet() const;
   void unsetVolPerUe();
   /// <summary>
   ///
   /// </summary>
   std::string getDnn() const;
-  void setDnn(std::string const& value);
+  void setDnn(std::string const &value);
   bool dnnIsSet() const;
   void unsetDnn();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Snssai getSnssai() const;
-  void setSnssai(oai::model::common::Snssai const& value);
+  void setSnssai(oai::model::common::Snssai const &value);
   bool snssaiIsSet() const;
   void unsetSnssai();
   /// <summary>
@@ -104,28 +104,28 @@ class BdtData {
   /// TS 24.526, octets v+5 to w.
   /// </summary>
   std::string getTrafficDes() const;
-  void setTrafficDes(std::string const& value);
+  void setTrafficDes(std::string const &value);
   bool trafficDesIsSet() const;
   void unsetTrafficDes();
   /// <summary>
   ///
   /// </summary>
   BdtPolicyStatus getBdtpStatus() const;
-  void setBdtpStatus(BdtPolicyStatus const& value);
+  void setBdtpStatus(BdtPolicyStatus const &value);
   bool bdtpStatusIsSet() const;
   void unsetBdtpStatus();
   /// <summary>
   ///
   /// </summary>
   std::string getSuppFeat() const;
-  void setSuppFeat(std::string const& value);
+  void setSuppFeat(std::string const &value);
   bool suppFeatIsSet() const;
   void unsetSuppFeat();
 
-  friend void to_json(nlohmann::json& j, const BdtData& o);
-  friend void from_json(const nlohmann::json& j, BdtData& o);
+  friend void to_json(nlohmann::json &j, const BdtData &o);
+  friend void from_json(const nlohmann::json &j, BdtData &o);
 
- protected:
+protected:
   std::string m_AspId;
 
   TransferPolicy m_TransPolicy;
@@ -150,6 +150,6 @@ class BdtData {
   bool m_SuppFeatIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* BdtData_H_ */

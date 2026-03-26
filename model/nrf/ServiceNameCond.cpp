@@ -23,20 +23,18 @@ void ServiceNameCond::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const ServiceNameCond& o) {
-  j                = nlohmann::json();
+void to_json(nlohmann::json &j, const ServiceNameCond &o) {
+  j = nlohmann::json();
   j["serviceName"] = o.m_ServiceName;
 }
 
-void from_json(const nlohmann::json& j, ServiceNameCond& o) {
+void from_json(const nlohmann::json &j, ServiceNameCond &o) {
   j.at("serviceName").get_to(o.m_ServiceName);
 }
 
-std::string ServiceNameCond::getServiceName() const {
-  return m_ServiceName;
-}
-void ServiceNameCond::setServiceName(std::string const& value) {
+std::string ServiceNameCond::getServiceName() const { return m_ServiceName; }
+void ServiceNameCond::setServiceName(std::string const &value) {
   m_ServiceName = value;
 }
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

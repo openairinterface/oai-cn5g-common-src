@@ -13,8 +13,8 @@
 
 #include "RatType_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::common {
 
@@ -27,12 +27,12 @@ void RatType_anyOf::validate() const {
   }
 }
 
-bool RatType_anyOf::validate(std::stringstream& msg) const {
+bool RatType_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool RatType_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool RatType_anyOf::validate(std::stringstream &msg,
+                             const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "RatType_anyOf" : pathPrefix;
@@ -46,72 +46,72 @@ bool RatType_anyOf::validate(
   return success;
 }
 
-bool RatType_anyOf::operator==(const RatType_anyOf& rhs) const {
+bool RatType_anyOf::operator==(const RatType_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool RatType_anyOf::operator!=(const RatType_anyOf& rhs) const {
+bool RatType_anyOf::operator!=(const RatType_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const RatType_anyOf& o) {
+void to_json(nlohmann::json &j, const RatType_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case RatType_anyOf::eRatType_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case RatType_anyOf::eRatType_anyOf::NR:
-      j = "NR";
-      break;
-    case RatType_anyOf::eRatType_anyOf::EUTRA:
-      j = "EUTRA";
-      break;
-    case RatType_anyOf::eRatType_anyOf::WLAN:
-      j = "WLAN";
-      break;
-    case RatType_anyOf::eRatType_anyOf::VIRTUAL:
-      j = "VIRTUAL";
-      break;
-    case RatType_anyOf::eRatType_anyOf::NBIOT:
-      j = "NBIOT";
-      break;
-    case RatType_anyOf::eRatType_anyOf::WIRELINE:
-      j = "WIRELINE";
-      break;
-    case RatType_anyOf::eRatType_anyOf::WIRELINE_CABLE:
-      j = "WIRELINE_CABLE";
-      break;
-    case RatType_anyOf::eRatType_anyOf::WIRELINE_BBF:
-      j = "WIRELINE_BBF";
-      break;
-    case RatType_anyOf::eRatType_anyOf::LTE_M:
-      j = "LTE-M";
-      break;
-    case RatType_anyOf::eRatType_anyOf::NR_U:
-      j = "NR_U";
-      break;
-    case RatType_anyOf::eRatType_anyOf::EUTRA_U:
-      j = "EUTRA_U";
-      break;
-    case RatType_anyOf::eRatType_anyOf::TRUSTED_N3GA:
-      j = "TRUSTED_N3GA";
-      break;
-    case RatType_anyOf::eRatType_anyOf::TRUSTED_WLAN:
-      j = "TRUSTED_WLAN";
-      break;
-    case RatType_anyOf::eRatType_anyOf::UTRA:
-      j = "UTRA";
-      break;
-    case RatType_anyOf::eRatType_anyOf::GERA:
-      j = "GERA";
-      break;
+  case RatType_anyOf::eRatType_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case RatType_anyOf::eRatType_anyOf::NR:
+    j = "NR";
+    break;
+  case RatType_anyOf::eRatType_anyOf::EUTRA:
+    j = "EUTRA";
+    break;
+  case RatType_anyOf::eRatType_anyOf::WLAN:
+    j = "WLAN";
+    break;
+  case RatType_anyOf::eRatType_anyOf::VIRTUAL:
+    j = "VIRTUAL";
+    break;
+  case RatType_anyOf::eRatType_anyOf::NBIOT:
+    j = "NBIOT";
+    break;
+  case RatType_anyOf::eRatType_anyOf::WIRELINE:
+    j = "WIRELINE";
+    break;
+  case RatType_anyOf::eRatType_anyOf::WIRELINE_CABLE:
+    j = "WIRELINE_CABLE";
+    break;
+  case RatType_anyOf::eRatType_anyOf::WIRELINE_BBF:
+    j = "WIRELINE_BBF";
+    break;
+  case RatType_anyOf::eRatType_anyOf::LTE_M:
+    j = "LTE-M";
+    break;
+  case RatType_anyOf::eRatType_anyOf::NR_U:
+    j = "NR_U";
+    break;
+  case RatType_anyOf::eRatType_anyOf::EUTRA_U:
+    j = "EUTRA_U";
+    break;
+  case RatType_anyOf::eRatType_anyOf::TRUSTED_N3GA:
+    j = "TRUSTED_N3GA";
+    break;
+  case RatType_anyOf::eRatType_anyOf::TRUSTED_WLAN:
+    j = "TRUSTED_WLAN";
+    break;
+  case RatType_anyOf::eRatType_anyOf::UTRA:
+    j = "UTRA";
+    break;
+  case RatType_anyOf::eRatType_anyOf::GERA:
+    j = "GERA";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, RatType_anyOf& o) {
+void from_json(const nlohmann::json &j, RatType_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "NR") {
     o.setValue(RatType_anyOf::eRatType_anyOf::NR);
@@ -159,4 +159,4 @@ void RatType_anyOf::setValue(RatType_anyOf::eRatType_anyOf value) {
   m_value = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

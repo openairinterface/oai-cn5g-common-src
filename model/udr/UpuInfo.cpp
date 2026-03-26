@@ -19,12 +19,12 @@
 namespace oai::udr::model {
 
 UpuInfo::UpuInfo() {
-  m_UpuRegInd        = false;
-  m_UpuAckInd        = false;
-  m_UpuMacIausf      = "";
+  m_UpuRegInd = false;
+  m_UpuAckInd = false;
+  m_UpuMacIausf = "";
   m_UpuMacIausfIsSet = false;
-  m_CounterUpu       = "";
-  m_CounterUpuIsSet  = false;
+  m_CounterUpu = "";
+  m_CounterUpuIsSet = false;
   m_ProvisioningTime = "";
 }
 
@@ -34,17 +34,19 @@ void UpuInfo::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const UpuInfo& o) {
-  j                = nlohmann::json();
+void to_json(nlohmann::json &j, const UpuInfo &o) {
+  j = nlohmann::json();
   j["upuDataList"] = o.m_UpuDataList;
-  j["upuRegInd"]   = o.m_UpuRegInd;
-  j["upuAckInd"]   = o.m_UpuAckInd;
-  if (o.upuMacIausfIsSet()) j["upuMacIausf"] = o.m_UpuMacIausf;
-  if (o.counterUpuIsSet()) j["counterUpu"] = o.m_CounterUpu;
+  j["upuRegInd"] = o.m_UpuRegInd;
+  j["upuAckInd"] = o.m_UpuAckInd;
+  if (o.upuMacIausfIsSet())
+    j["upuMacIausf"] = o.m_UpuMacIausf;
+  if (o.counterUpuIsSet())
+    j["counterUpu"] = o.m_CounterUpu;
   j["provisioningTime"] = o.m_ProvisioningTime;
 }
 
-void from_json(const nlohmann::json& j, UpuInfo& o) {
+void from_json(const nlohmann::json &j, UpuInfo &o) {
   j.at("upuDataList").get_to(o.m_UpuDataList);
   j.at("upuRegInd").get_to(o.m_UpuRegInd);
   j.at("upuAckInd").get_to(o.m_UpuAckInd);
@@ -59,55 +61,31 @@ void from_json(const nlohmann::json& j, UpuInfo& o) {
   j.at("provisioningTime").get_to(o.m_ProvisioningTime);
 }
 
-std::vector<UpuData_2>& UpuInfo::getUpuDataList() {
-  return m_UpuDataList;
-}
-void UpuInfo::setUpuDataList(std::vector<UpuData_2> const& value) {
+std::vector<UpuData_2> &UpuInfo::getUpuDataList() { return m_UpuDataList; }
+void UpuInfo::setUpuDataList(std::vector<UpuData_2> const &value) {
   m_UpuDataList = value;
 }
-bool UpuInfo::isUpuRegInd() const {
-  return m_UpuRegInd;
-}
-void UpuInfo::setUpuRegInd(bool const value) {
-  m_UpuRegInd = value;
-}
-bool UpuInfo::isUpuAckInd() const {
-  return m_UpuAckInd;
-}
-void UpuInfo::setUpuAckInd(bool const value) {
-  m_UpuAckInd = value;
-}
-std::string UpuInfo::getUpuMacIausf() const {
-  return m_UpuMacIausf;
-}
-void UpuInfo::setUpuMacIausf(std::string const& value) {
-  m_UpuMacIausf      = value;
+bool UpuInfo::isUpuRegInd() const { return m_UpuRegInd; }
+void UpuInfo::setUpuRegInd(bool const value) { m_UpuRegInd = value; }
+bool UpuInfo::isUpuAckInd() const { return m_UpuAckInd; }
+void UpuInfo::setUpuAckInd(bool const value) { m_UpuAckInd = value; }
+std::string UpuInfo::getUpuMacIausf() const { return m_UpuMacIausf; }
+void UpuInfo::setUpuMacIausf(std::string const &value) {
+  m_UpuMacIausf = value;
   m_UpuMacIausfIsSet = true;
 }
-bool UpuInfo::upuMacIausfIsSet() const {
-  return m_UpuMacIausfIsSet;
-}
-void UpuInfo::unsetUpuMacIausf() {
-  m_UpuMacIausfIsSet = false;
-}
-std::string UpuInfo::getCounterUpu() const {
-  return m_CounterUpu;
-}
-void UpuInfo::setCounterUpu(std::string const& value) {
-  m_CounterUpu      = value;
+bool UpuInfo::upuMacIausfIsSet() const { return m_UpuMacIausfIsSet; }
+void UpuInfo::unsetUpuMacIausf() { m_UpuMacIausfIsSet = false; }
+std::string UpuInfo::getCounterUpu() const { return m_CounterUpu; }
+void UpuInfo::setCounterUpu(std::string const &value) {
+  m_CounterUpu = value;
   m_CounterUpuIsSet = true;
 }
-bool UpuInfo::counterUpuIsSet() const {
-  return m_CounterUpuIsSet;
-}
-void UpuInfo::unsetCounterUpu() {
-  m_CounterUpuIsSet = false;
-}
-std::string UpuInfo::getProvisioningTime() const {
-  return m_ProvisioningTime;
-}
-void UpuInfo::setProvisioningTime(std::string const& value) {
+bool UpuInfo::counterUpuIsSet() const { return m_CounterUpuIsSet; }
+void UpuInfo::unsetCounterUpu() { m_CounterUpuIsSet = false; }
+std::string UpuInfo::getProvisioningTime() const { return m_ProvisioningTime; }
+void UpuInfo::setProvisioningTime(std::string const &value) {
   m_ProvisioningTime = value;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

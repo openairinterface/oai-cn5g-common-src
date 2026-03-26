@@ -14,22 +14,22 @@ extern "C" {
 namespace oai::ngap {
 
 class PduSessionResourceHandoverItem {
- public:
+public:
   PduSessionResourceHandoverItem();
   virtual ~PduSessionResourceHandoverItem();
 
-  void set(
-      const PduSessionId& sessionId, const OCTET_STRING_t& commandTransfer);
-  void get(PduSessionId& sessionId, OCTET_STRING_t& commandTransfer) const;
+  void set(const PduSessionId &sessionId,
+           const OCTET_STRING_t &commandTransfer);
+  void get(PduSessionId &sessionId, OCTET_STRING_t &commandTransfer) const;
 
-  bool encode(Ngap_PDUSessionResourceHandoverItem_t& item) const;
-  bool decode(const Ngap_PDUSessionResourceHandoverItem_t& item);
+  bool encode(Ngap_PDUSessionResourceHandoverItem_t &item) const;
+  bool decode(const Ngap_PDUSessionResourceHandoverItem_t &item);
 
- private:
-  PduSessionId m_PduSessionId;               // Mandatory
-  OCTET_STRING_t m_HandoverCommandTransfer;  // Mandatory
+private:
+  PduSessionId m_PduSessionId;              // Mandatory
+  OCTET_STRING_t m_HandoverCommandTransfer; // Mandatory
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

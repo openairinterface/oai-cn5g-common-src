@@ -22,7 +22,7 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_CNTypeRestrictionsForEquivalentItem__cn_Type {
-  Ngap_CNTypeRestrictionsForEquivalentItem__cn_Type_epc_forbidden    = 0,
+  Ngap_CNTypeRestrictionsForEquivalentItem__cn_Type_epc_forbidden = 0,
   Ngap_CNTypeRestrictionsForEquivalentItem__cn_Type_fiveGC_forbidden = 1
   /*
    * Enumeration is extensible
@@ -36,7 +36,7 @@ struct Ngap_ProtocolExtensionContainer;
 typedef struct Ngap_CNTypeRestrictionsForEquivalentItem {
   Ngap_PLMNIdentity_t plmnIdentity;
   long cn_Type;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

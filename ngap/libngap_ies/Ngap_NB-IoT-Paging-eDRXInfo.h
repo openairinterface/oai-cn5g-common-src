@@ -12,8 +12,8 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_NB-IoT-Paging-eDRXCycle.h"
 #include "Ngap_NB-IoT-Paging-TimeWindow.h"
+#include "Ngap_NB-IoT-Paging-eDRXCycle.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -26,8 +26,8 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_NB-IoT-Paging-eDRXInfo */
 typedef struct Ngap_NB_IoT_Paging_eDRXInfo {
   Ngap_NB_IoT_Paging_eDRXCycle_t nB_IoT_Paging_eDRXCycle;
-  Ngap_NB_IoT_Paging_TimeWindow_t* nB_IoT_Paging_TimeWindow; /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions;     /* OPTIONAL */
+  Ngap_NB_IoT_Paging_TimeWindow_t *nB_IoT_Paging_TimeWindow; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions;     /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

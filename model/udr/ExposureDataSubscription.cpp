@@ -19,10 +19,10 @@
 namespace oai::udr::model {
 
 ExposureDataSubscription::ExposureDataSubscription() {
-  m_NotificationUri        = "";
-  m_Expiry                 = "";
-  m_ExpiryIsSet            = false;
-  m_SupportedFeatures      = "";
+  m_NotificationUri = "";
+  m_Expiry = "";
+  m_ExpiryIsSet = false;
+  m_SupportedFeatures = "";
   m_SupportedFeaturesIsSet = false;
 }
 
@@ -32,16 +32,17 @@ void ExposureDataSubscription::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const ExposureDataSubscription& o) {
-  j                          = nlohmann::json();
-  j["notificationUri"]       = o.m_NotificationUri;
+void to_json(nlohmann::json &j, const ExposureDataSubscription &o) {
+  j = nlohmann::json();
+  j["notificationUri"] = o.m_NotificationUri;
   j["monitoredResourceUris"] = o.m_MonitoredResourceUris;
-  if (o.expiryIsSet()) j["expiry"] = o.m_Expiry;
+  if (o.expiryIsSet())
+    j["expiry"] = o.m_Expiry;
   if (o.supportedFeaturesIsSet())
     j["supportedFeatures"] = o.m_SupportedFeatures;
 }
 
-void from_json(const nlohmann::json& j, ExposureDataSubscription& o) {
+void from_json(const nlohmann::json &j, ExposureDataSubscription &o) {
   j.at("notificationUri").get_to(o.m_NotificationUri);
   j.at("monitoredResourceUris").get_to(o.m_MonitoredResourceUris);
   if (j.find("expiry") != j.end()) {
@@ -57,34 +58,28 @@ void from_json(const nlohmann::json& j, ExposureDataSubscription& o) {
 std::string ExposureDataSubscription::getNotificationUri() const {
   return m_NotificationUri;
 }
-void ExposureDataSubscription::setNotificationUri(std::string const& value) {
+void ExposureDataSubscription::setNotificationUri(std::string const &value) {
   m_NotificationUri = value;
 }
-std::vector<std::string>& ExposureDataSubscription::getMonitoredResourceUris() {
+std::vector<std::string> &ExposureDataSubscription::getMonitoredResourceUris() {
   return m_MonitoredResourceUris;
 }
 void ExposureDataSubscription::setMonitoredResourceUris(
-    std::vector<std::string> const& value) {
+    std::vector<std::string> const &value) {
   m_MonitoredResourceUris = value;
 }
-std::string ExposureDataSubscription::getExpiry() const {
-  return m_Expiry;
-}
-void ExposureDataSubscription::setExpiry(std::string const& value) {
-  m_Expiry      = value;
+std::string ExposureDataSubscription::getExpiry() const { return m_Expiry; }
+void ExposureDataSubscription::setExpiry(std::string const &value) {
+  m_Expiry = value;
   m_ExpiryIsSet = true;
 }
-bool ExposureDataSubscription::expiryIsSet() const {
-  return m_ExpiryIsSet;
-}
-void ExposureDataSubscription::unsetExpiry() {
-  m_ExpiryIsSet = false;
-}
+bool ExposureDataSubscription::expiryIsSet() const { return m_ExpiryIsSet; }
+void ExposureDataSubscription::unsetExpiry() { m_ExpiryIsSet = false; }
 std::string ExposureDataSubscription::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
-void ExposureDataSubscription::setSupportedFeatures(std::string const& value) {
-  m_SupportedFeatures      = value;
+void ExposureDataSubscription::setSupportedFeatures(std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool ExposureDataSubscription::supportedFeaturesIsSet() const {
@@ -94,4 +89,4 @@ void ExposureDataSubscription::unsetSupportedFeatures() {
   m_SupportedFeaturesIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

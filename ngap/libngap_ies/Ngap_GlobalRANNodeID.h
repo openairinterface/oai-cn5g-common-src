@@ -37,10 +37,10 @@ struct Ngap_ProtocolIE_SingleContainer;
 typedef struct Ngap_GlobalRANNodeID {
   Ngap_GlobalRANNodeID_PR present;
   union Ngap_GlobalRANNodeID_u {
-    struct Ngap_GlobalGNB_ID* globalGNB_ID;
-    struct Ngap_GlobalNgENB_ID* globalNgENB_ID;
-    struct Ngap_GlobalN3IWF_ID* globalN3IWF_ID;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_GlobalGNB_ID *globalGNB_ID;
+    struct Ngap_GlobalNgENB_ID *globalNgENB_ID;
+    struct Ngap_GlobalN3IWF_ID *globalN3IWF_ID;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

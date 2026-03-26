@@ -33,7 +33,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class TrafficInfluDataNotif {
- public:
+public:
   TrafficInfluDataNotif();
   virtual ~TrafficInfluDataNotif();
 
@@ -46,25 +46,25 @@ class TrafficInfluDataNotif {
   ///
   /// </summary>
   std::string getResUri() const;
-  void setResUri(std::string const& value);
+  void setResUri(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   TrafficInfluData getTrafficInfluData() const;
-  void setTrafficInfluData(TrafficInfluData const& value);
+  void setTrafficInfluData(TrafficInfluData const &value);
   bool trafficInfluDataIsSet() const;
   void unsetTrafficInfluData();
 
-  friend void to_json(nlohmann::json& j, const TrafficInfluDataNotif& o);
-  friend void from_json(const nlohmann::json& j, TrafficInfluDataNotif& o);
+  friend void to_json(nlohmann::json &j, const TrafficInfluDataNotif &o);
+  friend void from_json(const nlohmann::json &j, TrafficInfluDataNotif &o);
 
- protected:
+protected:
   std::string m_ResUri;
 
   TrafficInfluData m_TrafficInfluData;
   bool m_TrafficInfluDataIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* TrafficInfluDataNotif_H_ */

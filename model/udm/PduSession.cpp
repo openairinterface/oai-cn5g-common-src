@@ -19,7 +19,7 @@
 namespace oai::model::udm {
 
 PduSession::PduSession() {
-  m_Dnn           = "";
+  m_Dnn = "";
   m_SmfInstanceId = "";
 }
 
@@ -29,36 +29,28 @@ void PduSession::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const PduSession& o) {
-  j                  = nlohmann::json();
-  j["dnn"]           = o.m_Dnn;
+void to_json(nlohmann::json &j, const PduSession &o) {
+  j = nlohmann::json();
+  j["dnn"] = o.m_Dnn;
   j["smfInstanceId"] = o.m_SmfInstanceId;
-  j["plmnId"]        = o.m_PlmnId;
+  j["plmnId"] = o.m_PlmnId;
 }
 
-void from_json(const nlohmann::json& j, PduSession& o) {
+void from_json(const nlohmann::json &j, PduSession &o) {
   j.at("dnn").get_to(o.m_Dnn);
   j.at("smfInstanceId").get_to(o.m_SmfInstanceId);
   j.at("plmnId").get_to(o.m_PlmnId);
 }
 
-std::string PduSession::getDnn() const {
-  return m_Dnn;
-}
-void PduSession::setDnn(std::string const& value) {
-  m_Dnn = value;
-}
-std::string PduSession::getSmfInstanceId() const {
-  return m_SmfInstanceId;
-}
-void PduSession::setSmfInstanceId(std::string const& value) {
+std::string PduSession::getDnn() const { return m_Dnn; }
+void PduSession::setDnn(std::string const &value) { m_Dnn = value; }
+std::string PduSession::getSmfInstanceId() const { return m_SmfInstanceId; }
+void PduSession::setSmfInstanceId(std::string const &value) {
   m_SmfInstanceId = value;
 }
-oai::model::common::PlmnId PduSession::getPlmnId() const {
-  return m_PlmnId;
-}
-void PduSession::setPlmnId(oai::model::common::PlmnId const& value) {
+oai::model::common::PlmnId PduSession::getPlmnId() const { return m_PlmnId; }
+void PduSession::setPlmnId(oai::model::common::PlmnId const &value) {
   m_PlmnId = value;
 }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

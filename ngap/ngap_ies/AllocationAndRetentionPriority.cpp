@@ -14,28 +14,28 @@ AllocationAndRetentionPriority::~AllocationAndRetentionPriority() {}
 
 //------------------------------------------------------------------------------
 void AllocationAndRetentionPriority::set(
-    const PriorityLevelARP& priorityLevelArp,
-    const Pre_emptionCapability& pre_emptionCapability,
-    const Pre_emptionVulnerability& pre_emptionVulnerability) {
-  m_PriorityLevelArp         = priorityLevelArp;
-  m_Pre_emptionCapability    = pre_emptionCapability;
+    const PriorityLevelARP &priorityLevelArp,
+    const Pre_emptionCapability &pre_emptionCapability,
+    const Pre_emptionVulnerability &pre_emptionVulnerability) {
+  m_PriorityLevelArp = priorityLevelArp;
+  m_Pre_emptionCapability = pre_emptionCapability;
   m_Pre_emptionVulnerability = pre_emptionVulnerability;
 }
 
 //------------------------------------------------------------------------------
 bool AllocationAndRetentionPriority::get(
-    PriorityLevelARP& priorityLevelArp,
-    Pre_emptionCapability& pre_emptionCapability,
-    Pre_emptionVulnerability& pre_emptionVulnerability) const {
-  priorityLevelArp         = m_PriorityLevelArp;
-  pre_emptionCapability    = m_Pre_emptionCapability;
+    PriorityLevelARP &priorityLevelArp,
+    Pre_emptionCapability &pre_emptionCapability,
+    Pre_emptionVulnerability &pre_emptionVulnerability) const {
+  priorityLevelArp = m_PriorityLevelArp;
+  pre_emptionCapability = m_Pre_emptionCapability;
   pre_emptionVulnerability = m_Pre_emptionVulnerability;
   return true;
 }
 
 //------------------------------------------------------------------------------
 bool AllocationAndRetentionPriority::encode(
-    Ngap_AllocationAndRetentionPriority_t& allocationAndRetentionPriority)
+    Ngap_AllocationAndRetentionPriority_t &allocationAndRetentionPriority)
     const {
   if (!m_PriorityLevelArp.encode(
           allocationAndRetentionPriority.priorityLevelARP))
@@ -52,8 +52,8 @@ bool AllocationAndRetentionPriority::encode(
 
 //------------------------------------------------------------------------------
 bool AllocationAndRetentionPriority::decode(
-    const Ngap_AllocationAndRetentionPriority_t&
-        allocationAndRetentionPriority) {
+    const Ngap_AllocationAndRetentionPriority_t
+        &allocationAndRetentionPriority) {
   if (!m_PriorityLevelArp.decode(
           allocationAndRetentionPriority.priorityLevelARP))
     return false;
@@ -66,4 +66,4 @@ bool AllocationAndRetentionPriority::decode(
 
   return true;
 }
-}  // namespace oai::ngap
+} // namespace oai::ngap

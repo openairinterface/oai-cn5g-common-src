@@ -13,8 +13,8 @@
 
 #include "FailureCause_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::pcf {
 
@@ -27,12 +27,12 @@ void FailureCause_anyOf::validate() const {
   }
 }
 
-bool FailureCause_anyOf::validate(std::stringstream& msg) const {
+bool FailureCause_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool FailureCause_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool FailureCause_anyOf::validate(std::stringstream &msg,
+                                  const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "FailureCause_anyOf" : pathPrefix;
@@ -46,43 +46,42 @@ bool FailureCause_anyOf::validate(
   return success;
 }
 
-bool FailureCause_anyOf::operator==(const FailureCause_anyOf& rhs) const {
+bool FailureCause_anyOf::operator==(const FailureCause_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool FailureCause_anyOf::operator!=(const FailureCause_anyOf& rhs) const {
+bool FailureCause_anyOf::operator!=(const FailureCause_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const FailureCause_anyOf& o) {
+void to_json(nlohmann::json &j, const FailureCause_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case FailureCause_anyOf::eFailureCause_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case FailureCause_anyOf::eFailureCause_anyOf::PCC_RULE_EVENT:
-      j = "PCC_RULE_EVENT";
-      break;
-    case FailureCause_anyOf::eFailureCause_anyOf::PCC_QOS_FLOW_EVENT:
-      j = "PCC_QOS_FLOW_EVENT";
-      break;
-    case FailureCause_anyOf::eFailureCause_anyOf::RULE_PERMANENT_ERROR:
-      j = "RULE_PERMANENT_ERROR";
-      break;
-    case FailureCause_anyOf::eFailureCause_anyOf::RULE_TEMPORARY_ERROR:
-      j = "RULE_TEMPORARY_ERROR";
-      break;
-    case FailureCause_anyOf::eFailureCause_anyOf::POL_DEC_ERROR:
-      j = "POL_DEC_ERROR";
-      break;
+  case FailureCause_anyOf::eFailureCause_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case FailureCause_anyOf::eFailureCause_anyOf::PCC_RULE_EVENT:
+    j = "PCC_RULE_EVENT";
+    break;
+  case FailureCause_anyOf::eFailureCause_anyOf::PCC_QOS_FLOW_EVENT:
+    j = "PCC_QOS_FLOW_EVENT";
+    break;
+  case FailureCause_anyOf::eFailureCause_anyOf::RULE_PERMANENT_ERROR:
+    j = "RULE_PERMANENT_ERROR";
+    break;
+  case FailureCause_anyOf::eFailureCause_anyOf::RULE_TEMPORARY_ERROR:
+    j = "RULE_TEMPORARY_ERROR";
+    break;
+  case FailureCause_anyOf::eFailureCause_anyOf::POL_DEC_ERROR:
+    j = "POL_DEC_ERROR";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, FailureCause_anyOf& o) {
+void from_json(const nlohmann::json &j, FailureCause_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "PCC_RULE_EVENT") {
     o.setValue(FailureCause_anyOf::eFailureCause_anyOf::PCC_RULE_EVENT);
@@ -111,4 +110,4 @@ void FailureCause_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

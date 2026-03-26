@@ -22,8 +22,8 @@
 
 #include "Flows.h"
 #include "QosMonitoringParamType.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::pcf {
 
@@ -32,7 +32,7 @@ namespace oai::model::pcf {
 /// for the indicated flows.
 /// </summary>
 class DirectNotificationReport {
- public:
+public:
   DirectNotificationReport();
   virtual ~DirectNotificationReport() = default;
 
@@ -46,16 +46,16 @@ class DirectNotificationReport {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const DirectNotificationReport& rhs) const;
-  bool operator!=(const DirectNotificationReport& rhs) const;
+  bool operator==(const DirectNotificationReport &rhs) const;
+  bool operator!=(const DirectNotificationReport &rhs) const;
 
   /////////////////////////////////////////////
   /// DirectNotificationReport members
@@ -64,25 +64,25 @@ class DirectNotificationReport {
   ///
   /// </summary>
   oai::model::pcf::QosMonitoringParamType getQosMonParamType() const;
-  void setQosMonParamType(oai::model::pcf::QosMonitoringParamType const& value);
+  void setQosMonParamType(oai::model::pcf::QosMonitoringParamType const &value);
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::pcf::Flows> getFlows() const;
-  void setFlows(std::vector<oai::model::pcf::Flows> const& value);
+  void setFlows(std::vector<oai::model::pcf::Flows> const &value);
   bool flowsIsSet() const;
   void unsetFlows();
 
-  friend void to_json(nlohmann::json& j, const DirectNotificationReport& o);
-  friend void from_json(const nlohmann::json& j, DirectNotificationReport& o);
+  friend void to_json(nlohmann::json &j, const DirectNotificationReport &o);
+  friend void from_json(const nlohmann::json &j, DirectNotificationReport &o);
 
- protected:
+protected:
   oai::model::pcf::QosMonitoringParamType m_QosMonParamType;
 
   std::vector<oai::model::pcf::Flows> m_Flows;
   bool m_FlowsIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* DirectNotificationReport_H_ */

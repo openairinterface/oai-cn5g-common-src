@@ -17,53 +17,51 @@ PlmnSupportItem::PlmnSupportItem() {}
 PlmnSupportItem::~PlmnSupportItem() {}
 
 //------------------------------------------------------------------------------
-void PlmnSupportItem::set(
-    const PlmnId& plmnId, const std::vector<SNssai>& sNssais) {
+void PlmnSupportItem::set(const PlmnId &plmnId,
+                          const std::vector<SNssai> &sNssais) {
   m_PlmnId = plmnId;
   m_SliceSupportList.setSliceSupportItems(sNssais);
 }
 
 //------------------------------------------------------------------------------
-void PlmnSupportItem::get(PlmnId& plmnId, std::vector<SNssai>& sNssais) const {
+void PlmnSupportItem::get(PlmnId &plmnId, std::vector<SNssai> &sNssais) const {
   plmnId = m_PlmnId;
   m_SliceSupportList.getSliceSupportItems(sNssais);
 }
 
 //------------------------------------------------------------------------------
-void PlmnSupportItem::setPlmn(const PlmnId& plmnId) {
-  m_PlmnId = plmnId;
-}
+void PlmnSupportItem::setPlmn(const PlmnId &plmnId) { m_PlmnId = plmnId; }
 
 //------------------------------------------------------------------------------
-void PlmnSupportItem::getPlmn(PlmnId& plmnId) const {
-  plmnId = m_PlmnId;
-}
+void PlmnSupportItem::getPlmn(PlmnId &plmnId) const { plmnId = m_PlmnId; }
 
 //------------------------------------------------------------------------------
 void PlmnSupportItem::setSliceSupportList(
-    const SliceSupportList& sliceSupportList) {
+    const SliceSupportList &sliceSupportList) {
   m_SliceSupportList = sliceSupportList;
 }
 
 //------------------------------------------------------------------------------
 void PlmnSupportItem::getSliceSupportList(
-    SliceSupportList& sliceSupportList) const {
+    SliceSupportList &sliceSupportList) const {
   sliceSupportList = m_SliceSupportList;
 }
 
 //------------------------------------------------------------------------------
-bool PlmnSupportItem::encode(Ngap_PLMNSupportItem_t& plmnSupportItem) const {
-  if (!m_PlmnId.encode(plmnSupportItem.pLMNIdentity)) return false;
+bool PlmnSupportItem::encode(Ngap_PLMNSupportItem_t &plmnSupportItem) const {
+  if (!m_PlmnId.encode(plmnSupportItem.pLMNIdentity))
+    return false;
   if (!m_SliceSupportList.encode(plmnSupportItem.sliceSupportList))
     return false;
   return true;
 }
 
 //------------------------------------------------------------------------------
-bool PlmnSupportItem::decode(const Ngap_PLMNSupportItem_t& plmnSupportItem) {
-  if (!m_PlmnId.decode(plmnSupportItem.pLMNIdentity)) return false;
+bool PlmnSupportItem::decode(const Ngap_PLMNSupportItem_t &plmnSupportItem) {
+  if (!m_PlmnId.decode(plmnSupportItem.pLMNIdentity))
+    return false;
   if (!m_SliceSupportList.decode(plmnSupportItem.sliceSupportList))
     return false;
   return true;
 }
-}  // namespace oai::ngap
+} // namespace oai::ngap

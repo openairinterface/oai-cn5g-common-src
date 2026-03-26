@@ -19,12 +19,12 @@
 namespace oai::udr::model {
 
 _5GVnGroupData::_5GVnGroupData() {
-  m_Dnn                  = "";
+  m_Dnn = "";
   m_PduSessionTypesIsSet = false;
-  m_AppDescriptorsIsSet  = false;
-  m_SecondaryAuth        = false;
-  m_SecondaryAuthIsSet   = false;
-  m_DnAaaAddressIsSet    = false;
+  m_AppDescriptorsIsSet = false;
+  m_SecondaryAuth = false;
+  m_SecondaryAuthIsSet = false;
+  m_DnAaaAddressIsSet = false;
 }
 
 _5GVnGroupData::~_5GVnGroupData() {}
@@ -33,19 +33,21 @@ void _5GVnGroupData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const _5GVnGroupData& o) {
-  j           = nlohmann::json();
-  j["dnn"]    = o.m_Dnn;
+void to_json(nlohmann::json &j, const _5GVnGroupData &o) {
+  j = nlohmann::json();
+  j["dnn"] = o.m_Dnn;
   j["sNssai"] = o.m_SNssai;
   if (o.pduSessionTypesIsSet() || !o.m_PduSessionTypes.empty())
     j["pduSessionTypes"] = o.m_PduSessionTypes;
   if (o.appDescriptorsIsSet() || !o.m_AppDescriptors.empty())
     j["appDescriptors"] = o.m_AppDescriptors;
-  if (o.secondaryAuthIsSet()) j["secondaryAuth"] = o.m_SecondaryAuth;
-  if (o.dnAaaAddressIsSet()) j["dnAaaAddress"] = o.m_DnAaaAddress;
+  if (o.secondaryAuthIsSet())
+    j["secondaryAuth"] = o.m_SecondaryAuth;
+  if (o.dnAaaAddressIsSet())
+    j["dnAaaAddress"] = o.m_DnAaaAddress;
 }
 
-void from_json(const nlohmann::json& j, _5GVnGroupData& o) {
+void from_json(const nlohmann::json &j, _5GVnGroupData &o) {
   j.at("dnn").get_to(o.m_Dnn);
   j.at("sNssai").get_to(o.m_SNssai);
   if (j.find("pduSessionTypes") != j.end()) {
@@ -66,72 +68,52 @@ void from_json(const nlohmann::json& j, _5GVnGroupData& o) {
   }
 }
 
-std::string _5GVnGroupData::getDnn() const {
-  return m_Dnn;
-}
-void _5GVnGroupData::setDnn(std::string const& value) {
-  m_Dnn = value;
-}
+std::string _5GVnGroupData::getDnn() const { return m_Dnn; }
+void _5GVnGroupData::setDnn(std::string const &value) { m_Dnn = value; }
 oai::model::common::Snssai _5GVnGroupData::getSNssai() const {
   return m_SNssai;
 }
-void _5GVnGroupData::setSNssai(oai::model::common::Snssai const& value) {
+void _5GVnGroupData::setSNssai(oai::model::common::Snssai const &value) {
   m_SNssai = value;
 }
-std::vector<oai::model::common::PduSessionType>&
+std::vector<oai::model::common::PduSessionType> &
 _5GVnGroupData::getPduSessionTypes() {
   return m_PduSessionTypes;
 }
 void _5GVnGroupData::setPduSessionTypes(
-    std::vector<oai::model::common::PduSessionType> const& value) {
-  m_PduSessionTypes      = value;
+    std::vector<oai::model::common::PduSessionType> const &value) {
+  m_PduSessionTypes = value;
   m_PduSessionTypesIsSet = true;
 }
 bool _5GVnGroupData::pduSessionTypesIsSet() const {
   return m_PduSessionTypesIsSet;
 }
-void _5GVnGroupData::unsetPduSessionTypes() {
-  m_PduSessionTypesIsSet = false;
-}
-std::vector<AppDescriptor>& _5GVnGroupData::getAppDescriptors() {
+void _5GVnGroupData::unsetPduSessionTypes() { m_PduSessionTypesIsSet = false; }
+std::vector<AppDescriptor> &_5GVnGroupData::getAppDescriptors() {
   return m_AppDescriptors;
 }
 void _5GVnGroupData::setAppDescriptors(
-    std::vector<AppDescriptor> const& value) {
-  m_AppDescriptors      = value;
+    std::vector<AppDescriptor> const &value) {
+  m_AppDescriptors = value;
   m_AppDescriptorsIsSet = true;
 }
 bool _5GVnGroupData::appDescriptorsIsSet() const {
   return m_AppDescriptorsIsSet;
 }
-void _5GVnGroupData::unsetAppDescriptors() {
-  m_AppDescriptorsIsSet = false;
-}
-bool _5GVnGroupData::isSecondaryAuth() const {
-  return m_SecondaryAuth;
-}
+void _5GVnGroupData::unsetAppDescriptors() { m_AppDescriptorsIsSet = false; }
+bool _5GVnGroupData::isSecondaryAuth() const { return m_SecondaryAuth; }
 void _5GVnGroupData::setSecondaryAuth(bool const value) {
-  m_SecondaryAuth      = value;
+  m_SecondaryAuth = value;
   m_SecondaryAuthIsSet = true;
 }
-bool _5GVnGroupData::secondaryAuthIsSet() const {
-  return m_SecondaryAuthIsSet;
-}
-void _5GVnGroupData::unsetSecondaryAuth() {
-  m_SecondaryAuthIsSet = false;
-}
-IpAddress _5GVnGroupData::getDnAaaAddress() const {
-  return m_DnAaaAddress;
-}
-void _5GVnGroupData::setDnAaaAddress(IpAddress const& value) {
-  m_DnAaaAddress      = value;
+bool _5GVnGroupData::secondaryAuthIsSet() const { return m_SecondaryAuthIsSet; }
+void _5GVnGroupData::unsetSecondaryAuth() { m_SecondaryAuthIsSet = false; }
+IpAddress _5GVnGroupData::getDnAaaAddress() const { return m_DnAaaAddress; }
+void _5GVnGroupData::setDnAaaAddress(IpAddress const &value) {
+  m_DnAaaAddress = value;
   m_DnAaaAddressIsSet = true;
 }
-bool _5GVnGroupData::dnAaaAddressIsSet() const {
-  return m_DnAaaAddressIsSet;
-}
-void _5GVnGroupData::unsetDnAaaAddress() {
-  m_DnAaaAddressIsSet = false;
-}
+bool _5GVnGroupData::dnAaaAddressIsSet() const { return m_DnAaaAddressIsSet; }
+void _5GVnGroupData::unsetDnAaaAddress() { m_DnAaaAddressIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

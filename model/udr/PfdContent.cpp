@@ -19,12 +19,12 @@
 namespace oai::udr::model {
 
 PfdContent::PfdContent() {
-  m_PfdId                 = "";
-  m_PfdIdIsSet            = false;
+  m_PfdId = "";
+  m_PfdIdIsSet = false;
   m_FlowDescriptionsIsSet = false;
-  m_UrlsIsSet             = false;
-  m_DomainNamesIsSet      = false;
-  m_DnProtocolIsSet       = false;
+  m_UrlsIsSet = false;
+  m_DomainNamesIsSet = false;
+  m_DnProtocolIsSet = false;
 }
 
 PfdContent::~PfdContent() {}
@@ -33,18 +33,21 @@ void PfdContent::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const PfdContent& o) {
+void to_json(nlohmann::json &j, const PfdContent &o) {
   j = nlohmann::json();
-  if (o.pfdIdIsSet()) j["pfdId"] = o.m_PfdId;
+  if (o.pfdIdIsSet())
+    j["pfdId"] = o.m_PfdId;
   if (o.flowDescriptionsIsSet() || !o.m_FlowDescriptions.empty())
     j["flowDescriptions"] = o.m_FlowDescriptions;
-  if (o.urlsIsSet() || !o.m_Urls.empty()) j["urls"] = o.m_Urls;
+  if (o.urlsIsSet() || !o.m_Urls.empty())
+    j["urls"] = o.m_Urls;
   if (o.domainNamesIsSet() || !o.m_DomainNames.empty())
     j["domainNames"] = o.m_DomainNames;
-  if (o.dnProtocolIsSet()) j["dnProtocol"] = o.m_DnProtocol;
+  if (o.dnProtocolIsSet())
+    j["dnProtocol"] = o.m_DnProtocol;
 }
 
-void from_json(const nlohmann::json& j, PfdContent& o) {
+void from_json(const nlohmann::json &j, PfdContent &o) {
   if (j.find("pfdId") != j.end()) {
     j.at("pfdId").get_to(o.m_PfdId);
     o.m_PfdIdIsSet = true;
@@ -67,70 +70,44 @@ void from_json(const nlohmann::json& j, PfdContent& o) {
   }
 }
 
-std::string PfdContent::getPfdId() const {
-  return m_PfdId;
-}
-void PfdContent::setPfdId(std::string const& value) {
-  m_PfdId      = value;
+std::string PfdContent::getPfdId() const { return m_PfdId; }
+void PfdContent::setPfdId(std::string const &value) {
+  m_PfdId = value;
   m_PfdIdIsSet = true;
 }
-bool PfdContent::pfdIdIsSet() const {
-  return m_PfdIdIsSet;
-}
-void PfdContent::unsetPfdId() {
-  m_PfdIdIsSet = false;
-}
-std::vector<std::string>& PfdContent::getFlowDescriptions() {
+bool PfdContent::pfdIdIsSet() const { return m_PfdIdIsSet; }
+void PfdContent::unsetPfdId() { m_PfdIdIsSet = false; }
+std::vector<std::string> &PfdContent::getFlowDescriptions() {
   return m_FlowDescriptions;
 }
-void PfdContent::setFlowDescriptions(std::vector<std::string> const& value) {
-  m_FlowDescriptions      = value;
+void PfdContent::setFlowDescriptions(std::vector<std::string> const &value) {
+  m_FlowDescriptions = value;
   m_FlowDescriptionsIsSet = true;
 }
 bool PfdContent::flowDescriptionsIsSet() const {
   return m_FlowDescriptionsIsSet;
 }
-void PfdContent::unsetFlowDescriptions() {
-  m_FlowDescriptionsIsSet = false;
-}
-std::vector<std::string>& PfdContent::getUrls() {
-  return m_Urls;
-}
-void PfdContent::setUrls(std::vector<std::string> const& value) {
-  m_Urls      = value;
+void PfdContent::unsetFlowDescriptions() { m_FlowDescriptionsIsSet = false; }
+std::vector<std::string> &PfdContent::getUrls() { return m_Urls; }
+void PfdContent::setUrls(std::vector<std::string> const &value) {
+  m_Urls = value;
   m_UrlsIsSet = true;
 }
-bool PfdContent::urlsIsSet() const {
-  return m_UrlsIsSet;
-}
-void PfdContent::unsetUrls() {
-  m_UrlsIsSet = false;
-}
-std::vector<std::string>& PfdContent::getDomainNames() {
-  return m_DomainNames;
-}
-void PfdContent::setDomainNames(std::vector<std::string> const& value) {
-  m_DomainNames      = value;
+bool PfdContent::urlsIsSet() const { return m_UrlsIsSet; }
+void PfdContent::unsetUrls() { m_UrlsIsSet = false; }
+std::vector<std::string> &PfdContent::getDomainNames() { return m_DomainNames; }
+void PfdContent::setDomainNames(std::vector<std::string> const &value) {
+  m_DomainNames = value;
   m_DomainNamesIsSet = true;
 }
-bool PfdContent::domainNamesIsSet() const {
-  return m_DomainNamesIsSet;
-}
-void PfdContent::unsetDomainNames() {
-  m_DomainNamesIsSet = false;
-}
-DomainNameProtocol PfdContent::getDnProtocol() const {
-  return m_DnProtocol;
-}
-void PfdContent::setDnProtocol(DomainNameProtocol const& value) {
-  m_DnProtocol      = value;
+bool PfdContent::domainNamesIsSet() const { return m_DomainNamesIsSet; }
+void PfdContent::unsetDomainNames() { m_DomainNamesIsSet = false; }
+DomainNameProtocol PfdContent::getDnProtocol() const { return m_DnProtocol; }
+void PfdContent::setDnProtocol(DomainNameProtocol const &value) {
+  m_DnProtocol = value;
   m_DnProtocolIsSet = true;
 }
-bool PfdContent::dnProtocolIsSet() const {
-  return m_DnProtocolIsSet;
-}
-void PfdContent::unsetDnProtocol() {
-  m_DnProtocolIsSet = false;
-}
+bool PfdContent::dnProtocolIsSet() const { return m_DnProtocolIsSet; }
+void PfdContent::unsetDnProtocol() { m_DnProtocolIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

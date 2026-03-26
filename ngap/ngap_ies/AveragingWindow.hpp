@@ -12,20 +12,20 @@ extern "C" {
 namespace oai::ngap {
 
 class AveragingWindow {
- public:
+public:
   AveragingWindow();
   virtual ~AveragingWindow();
 
-  void set(const long& value);
-  bool get(long& value) const;
+  void set(const long &value);
+  bool get(long &value) const;
 
-  bool encode(Ngap_AveragingWindow_t&) const;
-  bool decode(const Ngap_AveragingWindow_t&);
+  bool encode(Ngap_AveragingWindow_t &) const;
+  bool decode(const Ngap_AveragingWindow_t &);
 
- private:
-  long m_AveragingWindow;  // Madatory
+private:
+  long m_AveragingWindow; // Madatory
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

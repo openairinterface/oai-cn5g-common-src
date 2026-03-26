@@ -10,9 +10,8 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 IdentityResponse::IdentityResponse()
-    : ie_header_(
-          k5gsMobilityManagementMessages, kPlain5gsMessage, kIdentityResponse) {
-}
+    : ie_header_(k5gsMobilityManagementMessages, kPlain5gsMessage,
+                 kIdentityResponse) {}
 
 //------------------------------------------------------------------------------
 IdentityResponse::~IdentityResponse() {}
@@ -33,7 +32,7 @@ void IdentityResponse::SetHeader(uint8_t security_header_type) {
 
 //------------------------------------------------------------------------------
 void IdentityResponse::Get5gsMobileIdentity(
-    _5gsMobileIdentity& mobile_identity) const {
+    _5gsMobileIdentity &mobile_identity) const {
   mobile_identity = ie_mobile_identity_;
 }
 
@@ -43,26 +42,29 @@ _5gsMobileIdentity IdentityResponse::Get5gsMobileIdentity() const {
 }
 
 //------------------------------------------------------------------------------
-void IdentityResponse::SetSuciSupiFormatImsi(
-    const std::string& mcc, const std::string& mnc,
-    const std::string& routing_ind, uint8_t protection_sch_id,
-    const std::string& msin) {
+void IdentityResponse::SetSuciSupiFormatImsi(const std::string &mcc,
+                                             const std::string &mnc,
+                                             const std::string &routing_ind,
+                                             uint8_t protection_sch_id,
+                                             const std::string &msin) {
   if (protection_sch_id != kNullScheme) {
     oai::logger::logger_common::nas().error(
         "Encoding suci and supi format for imsi error, please choose right "
         "interface");
     return;
   } else {
-    ie_mobile_identity_.SetSuciWithSupiImsi(
-        mcc, mnc, routing_ind, protection_sch_id, msin);
+    ie_mobile_identity_.SetSuciWithSupiImsi(mcc, mnc, routing_ind,
+                                            protection_sch_id, msin);
   }
 }
 
 //------------------------------------------------------------------------------
-void IdentityResponse::SetSuciSupiFormatImsi(
-    const std::string& mcc, const std::string& mnc,
-    const std::string& routingInd, uint8_t protection_sch_id, uint8_t hnpki,
-    const std::string& msin) {
+void IdentityResponse::SetSuciSupiFormatImsi(const std::string &mcc,
+                                             const std::string &mnc,
+                                             const std::string &routingInd,
+                                             uint8_t protection_sch_id,
+                                             uint8_t hnpki,
+                                             const std::string &msin) {
   // TODO:
 }
 
@@ -82,9 +84,9 @@ void IdentityResponse::Set5gSTmsi() {
 }
 
 //------------------------------------------------------------------------------
-int IdentityResponse::Encode(uint8_t* buf, int len) {
+int IdentityResponse::Encode(uint8_t *buf, int len) {
   oai::logger::logger_common::nas().debug("Encoding IdentityResponse message");
-  int encoded_size    = 0;
+  int encoded_size = 0;
   int encoded_ie_size = 0;
 
   // Header
@@ -107,10 +109,10 @@ int IdentityResponse::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int IdentityResponse::Decode(uint8_t* buf, int len) {
+int IdentityResponse::Decode(uint8_t *buf, int len) {
   oai::logger::logger_common::nas().debug("Decoding IdentityResponse message");
 
-  int decoded_size    = 0;
+  int decoded_size = 0;
   int decoded_ie_size = 0;
 
   // Header
@@ -122,8 +124,8 @@ int IdentityResponse::Decode(uint8_t* buf, int len) {
   decoded_size += decoded_ie_size;
 
   // Mobile Identity
-  if ((decoded_ie_size = NasHelper::Decode(
-           ie_mobile_identity_, buf, len, decoded_size, false)) ==
+  if ((decoded_ie_size = NasHelper::Decode(ie_mobile_identity_, buf, len,
+                                           decoded_size, false)) ==
       KEncodeDecodeError) {
     return KEncodeDecodeError;
   }

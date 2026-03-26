@@ -27,7 +27,7 @@ namespace oai::model::udsf {
 /// Indicate operation made on a record
 /// </summary>
 class RecordOperation {
- public:
+public:
   RecordOperation();
   virtual ~RecordOperation() = default;
 
@@ -41,26 +41,26 @@ class RecordOperation {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const RecordOperation& rhs) const;
-  bool operator!=(const RecordOperation& rhs) const;
+  bool operator==(const RecordOperation &rhs) const;
+  bool operator!=(const RecordOperation &rhs) const;
 
   /////////////////////////////////////////////
   /// RecordOperation members
 
-  friend void to_json(nlohmann::json& j, const RecordOperation& o);
-  friend void from_json(const nlohmann::json& j, RecordOperation& o);
+  friend void to_json(nlohmann::json &j, const RecordOperation &o);
+  friend void from_json(const nlohmann::json &j, RecordOperation &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::udsf
+} // namespace oai::model::udsf
 
 #endif /* RecordOperation_H_ */

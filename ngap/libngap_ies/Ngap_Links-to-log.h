@@ -20,8 +20,8 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_Links_to_log {
-  Ngap_Links_to_log_uplink                   = 0,
-  Ngap_Links_to_log_downlink                 = 1,
+  Ngap_Links_to_log_uplink = 0,
+  Ngap_Links_to_log_downlink = 1,
   Ngap_Links_to_log_both_uplink_and_downlink = 2
   /*
    * Enumeration is extensible

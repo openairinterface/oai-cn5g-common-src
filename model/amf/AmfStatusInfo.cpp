@@ -16,9 +16,9 @@
 namespace oai::model::amf {
 
 AmfStatusInfo::AmfStatusInfo() {
-  m_TargetAmfRemoval      = "";
+  m_TargetAmfRemoval = "";
   m_TargetAmfRemovalIsSet = false;
-  m_TargetAmfFailure      = "";
+  m_TargetAmfFailure = "";
   m_TargetAmfFailureIsSet = false;
 }
 
@@ -28,15 +28,17 @@ void AmfStatusInfo::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const AmfStatusInfo& o) {
-  j                 = nlohmann::json();
-  j["guamiList"]    = o.m_GuamiList;
+void to_json(nlohmann::json &j, const AmfStatusInfo &o) {
+  j = nlohmann::json();
+  j["guamiList"] = o.m_GuamiList;
   j["statusChange"] = o.m_StatusChange;
-  if (o.targetAmfRemovalIsSet()) j["targetAmfRemoval"] = o.m_TargetAmfRemoval;
-  if (o.targetAmfFailureIsSet()) j["targetAmfFailure"] = o.m_TargetAmfFailure;
+  if (o.targetAmfRemovalIsSet())
+    j["targetAmfRemoval"] = o.m_TargetAmfRemoval;
+  if (o.targetAmfFailureIsSet())
+    j["targetAmfFailure"] = o.m_TargetAmfFailure;
 }
 
-void from_json(const nlohmann::json& j, AmfStatusInfo& o) {
+void from_json(const nlohmann::json &j, AmfStatusInfo &o) {
   j.at("guamiList").get_to(o.m_GuamiList);
   j.at("statusChange").get_to(o.m_StatusChange);
   if (j.find("targetAmfRemoval") != j.end()) {
@@ -49,40 +51,34 @@ void from_json(const nlohmann::json& j, AmfStatusInfo& o) {
   }
 }
 
-std::vector<oai::model::common::Guami>& AmfStatusInfo::getGuamiList() {
+std::vector<oai::model::common::Guami> &AmfStatusInfo::getGuamiList() {
   return m_GuamiList;
 }
-StatusChange AmfStatusInfo::getStatusChange() const {
-  return m_StatusChange;
-}
-void AmfStatusInfo::setStatusChange(StatusChange const& value) {
+StatusChange AmfStatusInfo::getStatusChange() const { return m_StatusChange; }
+void AmfStatusInfo::setStatusChange(StatusChange const &value) {
   m_StatusChange = value;
 }
 std::string AmfStatusInfo::getTargetAmfRemoval() const {
   return m_TargetAmfRemoval;
 }
-void AmfStatusInfo::setTargetAmfRemoval(std::string const& value) {
-  m_TargetAmfRemoval      = value;
+void AmfStatusInfo::setTargetAmfRemoval(std::string const &value) {
+  m_TargetAmfRemoval = value;
   m_TargetAmfRemovalIsSet = true;
 }
 bool AmfStatusInfo::targetAmfRemovalIsSet() const {
   return m_TargetAmfRemovalIsSet;
 }
-void AmfStatusInfo::unsetTargetAmfRemoval() {
-  m_TargetAmfRemovalIsSet = false;
-}
+void AmfStatusInfo::unsetTargetAmfRemoval() { m_TargetAmfRemovalIsSet = false; }
 std::string AmfStatusInfo::getTargetAmfFailure() const {
   return m_TargetAmfFailure;
 }
-void AmfStatusInfo::setTargetAmfFailure(std::string const& value) {
-  m_TargetAmfFailure      = value;
+void AmfStatusInfo::setTargetAmfFailure(std::string const &value) {
+  m_TargetAmfFailure = value;
   m_TargetAmfFailureIsSet = true;
 }
 bool AmfStatusInfo::targetAmfFailureIsSet() const {
   return m_TargetAmfFailureIsSet;
 }
-void AmfStatusInfo::unsetTargetAmfFailure() {
-  m_TargetAmfFailureIsSet = false;
-}
+void AmfStatusInfo::unsetTargetAmfFailure() { m_TargetAmfFailureIsSet = false; }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

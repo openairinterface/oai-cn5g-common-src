@@ -12,21 +12,21 @@ extern "C" {
 namespace oai::ngap {
 
 class PduSessionId {
- public:
+public:
   PduSessionId();
   virtual ~PduSessionId();
 
-  void set(const uint8_t& id);
-  void get(uint8_t& id) const;
+  void set(const uint8_t &id);
+  void get(uint8_t &id) const;
   uint8_t get() const;
 
-  bool encode(Ngap_PDUSessionID_t& pduSessionId) const;
+  bool encode(Ngap_PDUSessionID_t &pduSessionId) const;
   bool decode(Ngap_PDUSessionID_t pduSessionId);
 
- private:
+private:
   uint8_t m_PduSessionId;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

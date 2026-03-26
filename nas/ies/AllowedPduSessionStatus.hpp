@@ -10,31 +10,31 @@
 constexpr uint8_t kAllowedPduSessionStatusMinimumLength = 4;
 constexpr uint8_t kAllowedPduSessionStatusContentMinimumLength =
     kAllowedPduSessionStatusMinimumLength -
-    2;  // Minimum length - 2 octets for IEI/Length
+    2; // Minimum length - 2 octets for IEI/Length
 constexpr uint8_t kAllowedPduSessionStatusMaximumLength = 34;
 constexpr auto kAllowedPduSessionStatusIeName = "Allowed PDU Session Status";
 
 namespace oai::nas {
 
 class AllowedPduSessionStatus : public Type4NasIe {
- public:
+public:
   AllowedPduSessionStatus();
   AllowedPduSessionStatus(uint16_t value);
   virtual ~AllowedPduSessionStatus();
 
-  int Encode(uint8_t* buf, int len) const override;
-  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+  int Encode(uint8_t *buf, int len) const override;
+  int Decode(const uint8_t *const buf, int len, bool is_iei = false) override;
 
   static std::string GetIeName() { return kAllowedPduSessionStatusIeName; }
 
   void SetValue(uint16_t value);
   uint16_t GetValue() const;
 
- private:
+private:
   uint16_t value_;
   // TODO: spare
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

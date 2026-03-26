@@ -13,8 +13,8 @@
 
 #include "MeteringMethod_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::pcf {
 
@@ -27,12 +27,12 @@ void MeteringMethod_anyOf::validate() const {
   }
 }
 
-bool MeteringMethod_anyOf::validate(std::stringstream& msg) const {
+bool MeteringMethod_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool MeteringMethod_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool MeteringMethod_anyOf::validate(std::stringstream &msg,
+                                    const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "MeteringMethod_anyOf" : pathPrefix;
@@ -46,43 +46,43 @@ bool MeteringMethod_anyOf::validate(
   return success;
 }
 
-bool MeteringMethod_anyOf::operator==(const MeteringMethod_anyOf& rhs) const {
+bool MeteringMethod_anyOf::operator==(const MeteringMethod_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool MeteringMethod_anyOf::operator!=(const MeteringMethod_anyOf& rhs) const {
+bool MeteringMethod_anyOf::operator!=(const MeteringMethod_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const MeteringMethod_anyOf& o) {
+void to_json(nlohmann::json &j, const MeteringMethod_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case MeteringMethod_anyOf::eMeteringMethod_anyOf::NULL_VALUE:
-      j = nullptr;
-      break;
-    case MeteringMethod_anyOf::eMeteringMethod_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case MeteringMethod_anyOf::eMeteringMethod_anyOf::DURATION:
-      j = "DURATION";
-      break;
-    case MeteringMethod_anyOf::eMeteringMethod_anyOf::VOLUME:
-      j = "VOLUME";
-      break;
-    case MeteringMethod_anyOf::eMeteringMethod_anyOf::DURATION_VOLUME:
-      j = "DURATION_VOLUME";
-      break;
-    case MeteringMethod_anyOf::eMeteringMethod_anyOf::EVENT:
-      j = "EVENT";
-      break;
+  case MeteringMethod_anyOf::eMeteringMethod_anyOf::NULL_VALUE:
+    j = nullptr;
+    break;
+  case MeteringMethod_anyOf::eMeteringMethod_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case MeteringMethod_anyOf::eMeteringMethod_anyOf::DURATION:
+    j = "DURATION";
+    break;
+  case MeteringMethod_anyOf::eMeteringMethod_anyOf::VOLUME:
+    j = "VOLUME";
+    break;
+  case MeteringMethod_anyOf::eMeteringMethod_anyOf::DURATION_VOLUME:
+    j = "DURATION_VOLUME";
+    break;
+  case MeteringMethod_anyOf::eMeteringMethod_anyOf::EVENT:
+    j = "EVENT";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, MeteringMethod_anyOf& o) {
+void from_json(const nlohmann::json &j, MeteringMethod_anyOf &o) {
   if (j.is_null()) {
     o.setValue(MeteringMethod_anyOf::eMeteringMethod_anyOf::NULL_VALUE);
     return;
@@ -108,8 +108,8 @@ void from_json(const nlohmann::json& j, MeteringMethod_anyOf& o) {
   }
 }
 
-MeteringMethod_anyOf::eMeteringMethod_anyOf MeteringMethod_anyOf::getValue()
-    const {
+MeteringMethod_anyOf::eMeteringMethod_anyOf
+MeteringMethod_anyOf::getValue() const {
   return m_value;
 }
 void MeteringMethod_anyOf::setValue(
@@ -117,4 +117,4 @@ void MeteringMethod_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

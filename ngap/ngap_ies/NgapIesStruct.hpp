@@ -29,24 +29,27 @@ typedef struct S_Nssai_s {
   std::string sst;
   std::string sd;
 
-  S_Nssai_s& operator=(const S_Nssai_s& s) {
+  S_Nssai_s &operator=(const S_Nssai_s &s) {
     sst = s.sst;
-    sd  = s.sd;
+    sd = s.sd;
     return *this;
   }
 
-  bool operator==(const struct S_Nssai_s& s) const {
+  bool operator==(const struct S_Nssai_s &s) const {
     if ((s.sst == this->sst) && (s.sd.compare(this->sd) == 0)) {
       return true;
     } else {
       return false;
     }
   }
-  bool operator>(const struct S_Nssai_s& s) const {
-    if (this->sst.compare(s.sst) > 0) return true;
+  bool operator>(const struct S_Nssai_s &s) const {
+    if (this->sst.compare(s.sst) > 0)
+      return true;
     if (this->sst.compare(s.sst) == 0) {
-      if (this->sd.compare(s.sd) > 0) return true;
-      if (this->sd.compare(s.sd) < 0) return false;
+      if (this->sd.compare(s.sd) > 0)
+        return true;
+      if (this->sd.compare(s.sd) < 0)
+        return false;
     }
   }
 } S_Nssai;
@@ -54,10 +57,10 @@ typedef struct S_Nssai_s {
 typedef struct GuamiItem_s {
   std::string mcc;
   std::string mnc;
-  uint8_t regionId;           // 8 bits
-  uint16_t amfSetId;          // 10 bits
-  uint8_t amfPointer;         // 6 bits
-  std::string backupAmfName;  // optional
+  uint8_t regionId;          // 8 bits
+  uint16_t amfSetId;         // 10 bits
+  uint8_t amfPointer;        // 6 bits
+  std::string backupAmfName; // optional
 } GuamiItem_t;
 
 typedef struct NrCgi_s {
@@ -111,9 +114,9 @@ typedef struct {
 
 typedef struct {
   long _5qi;
-  long* priorityLevelQos;
-  long* averagingWindow;
-  long* maximumDataBurstVolume;
+  long *priorityLevelQos;
+  long *averagingWindow;
+  long *maximumDataBurstVolume;
 } NonDynamic5qi_t;
 
 typedef struct {
@@ -125,15 +128,15 @@ typedef struct {
   long priorityLevelQos;
   long packetDelayBudget;
   PacketErrorRate_t packetErrorRate;
-  long* _5qi;
-  e_Ngap_DelayCritical* delayCritical;
-  long* averagingWindow;
-  long* maximumDataBurstVolume;
+  long *_5qi;
+  e_Ngap_DelayCritical *delayCritical;
+  long *averagingWindow;
+  long *maximumDataBurstVolume;
 } Dynamic5qi_t;
 
 typedef struct {
-  NonDynamic5qi_t* nonDynamic5qi;
-  Dynamic5qi_t* dynamic5qi;
+  NonDynamic5qi_t *nonDynamic5qi;
+  Dynamic5qi_t *dynamic5qi;
 } QosCharacteristics_t;
 
 typedef struct {
@@ -147,17 +150,17 @@ typedef struct {
   long maximumFlowBitRateUl;
   long guaranteedFlowBitRateDl;
   long guaranteedFlowBitRateUl;
-  e_Ngap_NotificationControl* notificationControl;
-  long* maximumPacketLossRateDl;
-  long* maximumPacketLossRateUl;
+  e_Ngap_NotificationControl *notificationControl;
+  long *maximumPacketLossRateDl;
+  long *maximumPacketLossRateUl;
 } GBR_QosInformation_t;
 
 typedef struct {
   QosCharacteristics_t qosc;
   AllocationAndRetentionPriority_t arp;
-  GBR_QosInformation_t* gbrQosInformation;
-  e_Ngap_ReflectiveQosAttribute* reflectiveQosAttribute;
-  e_Ngap_AdditionalQosFlowInformation* additionalQosFlowInformation;
+  GBR_QosInformation_t *gbrQosInformation;
+  e_Ngap_ReflectiveQosAttribute *reflectiveQosAttribute;
+  e_Ngap_AdditionalQosFlowInformation *additionalQosFlowInformation;
 } QosFlowLevelQosParameters_t;
 
 typedef struct {
@@ -167,8 +170,8 @@ typedef struct {
 
 typedef struct {
   long qosFlowIdentifier;
-  e_Ngap_AssociatedQosFlowItem__qosFlowMappingIndication*
-      qosFlowMappingIndication;
+  e_Ngap_AssociatedQosFlowItem__qosFlowMappingIndication
+      *qosFlowMappingIndication;
 } AssociatedQosFlow_t;
 
 typedef struct {
@@ -207,13 +210,13 @@ typedef struct {
 typedef struct gNBId_s {
   uint32_t id;
   uint8_t bitLength;
-} gNBId_t;  // 22bits to 32bits
+} gNBId_t; // 22bits to 32bits
 
 typedef struct {
   uint8_t pduSessionId;
   OCTET_STRING_t handoverCommandTransfer;
 } PDUSessionResourceHandoverItem_t;
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

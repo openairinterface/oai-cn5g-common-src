@@ -20,11 +20,11 @@
 #define GeraLocation_H_
 
 #include "CellGlobalId.h"
-#include <string>
-#include "RoutingAreaId.h"
 #include "LocationAreaId.h"
+#include "RoutingAreaId.h"
 #include "ServiceAreaId.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::common {
 
@@ -32,7 +32,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class GeraLocation {
- public:
+public:
   GeraLocation();
   virtual ~GeraLocation() = default;
 
@@ -46,16 +46,16 @@ class GeraLocation {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const GeraLocation& rhs) const;
-  bool operator!=(const GeraLocation& rhs) const;
+  bool operator==(const GeraLocation &rhs) const;
+  bool operator!=(const GeraLocation &rhs) const;
 
   /////////////////////////////////////////////
   /// GeraLocation members
@@ -64,49 +64,49 @@ class GeraLocation {
   ///
   /// </summary>
   std::string getLocationNumber() const;
-  void setLocationNumber(std::string const& value);
+  void setLocationNumber(std::string const &value);
   bool locationNumberIsSet() const;
   void unsetLocationNumber();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::CellGlobalId getCgi() const;
-  void setCgi(oai::model::common::CellGlobalId const& value);
+  void setCgi(oai::model::common::CellGlobalId const &value);
   bool cgiIsSet() const;
   void unsetCgi();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::RoutingAreaId getRai() const;
-  void setRai(oai::model::common::RoutingAreaId const& value);
+  void setRai(oai::model::common::RoutingAreaId const &value);
   bool raiIsSet() const;
   void unsetRai();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::ServiceAreaId getSai() const;
-  void setSai(oai::model::common::ServiceAreaId const& value);
+  void setSai(oai::model::common::ServiceAreaId const &value);
   bool saiIsSet() const;
   void unsetSai();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::LocationAreaId getLai() const;
-  void setLai(oai::model::common::LocationAreaId const& value);
+  void setLai(oai::model::common::LocationAreaId const &value);
   bool laiIsSet() const;
   void unsetLai();
   /// <summary>
   ///
   /// </summary>
   std::string getVlrNumber() const;
-  void setVlrNumber(std::string const& value);
+  void setVlrNumber(std::string const &value);
   bool vlrNumberIsSet() const;
   void unsetVlrNumber();
   /// <summary>
   ///
   /// </summary>
   std::string getMscNumber() const;
-  void setMscNumber(std::string const& value);
+  void setMscNumber(std::string const &value);
   bool mscNumberIsSet() const;
   void unsetMscNumber();
   /// <summary>
@@ -120,28 +120,28 @@ class GeraLocation {
   ///
   /// </summary>
   std::string getUeLocationTimestamp() const;
-  void setUeLocationTimestamp(std::string const& value);
+  void setUeLocationTimestamp(std::string const &value);
   bool ueLocationTimestampIsSet() const;
   void unsetUeLocationTimestamp();
   /// <summary>
   ///
   /// </summary>
   std::string getGeographicalInformation() const;
-  void setGeographicalInformation(std::string const& value);
+  void setGeographicalInformation(std::string const &value);
   bool geographicalInformationIsSet() const;
   void unsetGeographicalInformation();
   /// <summary>
   ///
   /// </summary>
   std::string getGeodeticInformation() const;
-  void setGeodeticInformation(std::string const& value);
+  void setGeodeticInformation(std::string const &value);
   bool geodeticInformationIsSet() const;
   void unsetGeodeticInformation();
 
-  friend void to_json(nlohmann::json& j, const GeraLocation& o);
-  friend void from_json(const nlohmann::json& j, GeraLocation& o);
+  friend void to_json(nlohmann::json &j, const GeraLocation &o);
+  friend void from_json(const nlohmann::json &j, GeraLocation &o);
 
- protected:
+protected:
   std::string m_LocationNumber;
   bool m_LocationNumberIsSet;
   oai::model::common::CellGlobalId m_Cgi;
@@ -166,6 +166,6 @@ class GeraLocation {
   bool m_GeodeticInformationIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* GeraLocation_H_ */

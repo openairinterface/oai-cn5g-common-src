@@ -19,9 +19,9 @@
 #ifndef ServiceAreaId_H_
 #define ServiceAreaId_H_
 
-#include <string>
 #include "PlmnId.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::common {
 
@@ -29,7 +29,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class ServiceAreaId {
- public:
+public:
   ServiceAreaId();
   virtual ~ServiceAreaId() = default;
 
@@ -43,16 +43,16 @@ class ServiceAreaId {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const ServiceAreaId& rhs) const;
-  bool operator!=(const ServiceAreaId& rhs) const;
+  bool operator==(const ServiceAreaId &rhs) const;
+  bool operator!=(const ServiceAreaId &rhs) const;
 
   /////////////////////////////////////////////
   /// ServiceAreaId members
@@ -61,22 +61,22 @@ class ServiceAreaId {
   ///
   /// </summary>
   oai::model::common::PlmnId getPlmnId() const;
-  void setPlmnId(oai::model::common::PlmnId const& value);
+  void setPlmnId(oai::model::common::PlmnId const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getLac() const;
-  void setLac(std::string const& value);
+  void setLac(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getSac() const;
-  void setSac(std::string const& value);
+  void setSac(std::string const &value);
 
-  friend void to_json(nlohmann::json& j, const ServiceAreaId& o);
-  friend void from_json(const nlohmann::json& j, ServiceAreaId& o);
+  friend void to_json(nlohmann::json &j, const ServiceAreaId &o);
+  friend void from_json(const nlohmann::json &j, ServiceAreaId &o);
 
- protected:
+protected:
   oai::model::common::PlmnId m_PlmnId;
 
   std::string m_Lac;
@@ -84,6 +84,6 @@ class ServiceAreaId {
   std::string m_Sac;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* ServiceAreaId_H_ */

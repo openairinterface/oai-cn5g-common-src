@@ -25,12 +25,12 @@ void UeRegStatusUpdateRspData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const UeRegStatusUpdateRspData& o) {
-  j                              = nlohmann::json();
+void to_json(nlohmann::json &j, const UeRegStatusUpdateRspData &o) {
+  j = nlohmann::json();
   j["regStatusTransferComplete"] = o.m_RegStatusTransferComplete;
 }
 
-void from_json(const nlohmann::json& j, UeRegStatusUpdateRspData& o) {
+void from_json(const nlohmann::json &j, UeRegStatusUpdateRspData &o) {
   j.at("regStatusTransferComplete").get_to(o.m_RegStatusTransferComplete);
 }
 
@@ -41,4 +41,4 @@ void UeRegStatusUpdateRspData::setRegStatusTransferComplete(bool const value) {
   m_RegStatusTransferComplete = value;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

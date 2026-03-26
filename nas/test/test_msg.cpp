@@ -1,8 +1,8 @@
 /*
  * SPDX-License-Identifier: LicenseRef-CSSL-1.0
  */
-#include "AuthenticationResponse.hpp"
 #include "AuthenticationFailure.hpp"
+#include "AuthenticationResponse.hpp"
 #include "IdentityResponse.hpp"
 #include "RegistrationComplete.hpp"
 #include "RegistrationRequest.hpp"
@@ -626,7 +626,7 @@ a1ae7e561b544b7c74030989a92155d78bbf28535fb59423b4cb640e6c1ed437 Ciphertext:
                             0x53, 0x5f, 0xb5, 0x94, 0x23, 0xb4, 0xcb, 0x64,
                             0x0e, 0x6c, 0x1e, 0xd4, 0x37, 0x15, 0xe8, 0x3c,
                             0x72, 0x39, 0x1f, 0x15, 0x8a, 0x9d, 0x7a, 0xcc,
-                            0x09, 0x4b};  // TODO check may add 0x00 ?};
+                            0x09, 0x4b}; // TODO check may add 0x00 ?};
 
   oai::nas::IdentityResponse nas_obj = {};
   int decode_result = nas_obj.Decode(packet_bytes, sizeof(packet_bytes));

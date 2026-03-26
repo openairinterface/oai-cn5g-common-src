@@ -19,10 +19,10 @@
 #ifndef N2InformationTransferRspData_H_
 #define N2InformationTransferRspData_H_
 
-#include "PWSResponseData.h"
-#include <string>
 #include "N2InformationTransferResult.h"
+#include "PWSResponseData.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::amf {
 
@@ -30,7 +30,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class N2InformationTransferRspData {
- public:
+public:
   N2InformationTransferRspData();
   virtual ~N2InformationTransferRspData();
 
@@ -43,27 +43,27 @@ class N2InformationTransferRspData {
   ///
   /// </summary>
   N2InformationTransferResult getResult() const;
-  void setResult(N2InformationTransferResult const& value);
+  void setResult(N2InformationTransferResult const &value);
   /// <summary>
   ///
   /// </summary>
   PWSResponseData getPwsRspData() const;
-  void setPwsRspData(PWSResponseData const& value);
+  void setPwsRspData(PWSResponseData const &value);
   bool pwsRspDataIsSet() const;
   void unsetPwsRspData();
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
 
-  friend void to_json(nlohmann::json& j, const N2InformationTransferRspData& o);
-  friend void from_json(
-      const nlohmann::json& j, N2InformationTransferRspData& o);
+  friend void to_json(nlohmann::json &j, const N2InformationTransferRspData &o);
+  friend void from_json(const nlohmann::json &j,
+                        N2InformationTransferRspData &o);
 
- protected:
+protected:
   N2InformationTransferResult m_Result;
 
   PWSResponseData m_PwsRspData;
@@ -72,6 +72,6 @@ class N2InformationTransferRspData {
   bool m_SupportedFeaturesIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* N2InformationTransferRspData_H_ */

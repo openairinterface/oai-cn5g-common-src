@@ -12,8 +12,8 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_AMFNameVisibleString.h"
 #include "Ngap_AMFNameUTF8String.h"
+#include "Ngap_AMFNameVisibleString.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -25,9 +25,9 @@ struct Ngap_ProtocolExtensionContainer;
 
 /* Ngap_Extended-AMFName */
 typedef struct Ngap_Extended_AMFName {
-  Ngap_AMFNameVisibleString_t* aMFNameVisibleString;     /* OPTIONAL */
-  Ngap_AMFNameUTF8String_t* aMFNameUTF8String;           /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  Ngap_AMFNameVisibleString_t *aMFNameVisibleString;     /* OPTIONAL */
+  Ngap_AMFNameUTF8String_t *aMFNameUTF8String;           /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

@@ -27,7 +27,7 @@ struct Ngap_ProtocolExtensionContainer;
 typedef struct Ngap_FromNGRANtoEUTRAN {
   Ngap_IntersystemSONNGRANnodeID_t sourceNGRANnodeID;
   Ngap_IntersystemSONeNBID_t targeteNBID;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
 
   /* Context for parsing across buffer boundaries */
   asn_struct_ctx_t _asn_ctx;

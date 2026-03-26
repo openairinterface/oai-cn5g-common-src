@@ -14,28 +14,26 @@ extern "C" {
 namespace oai::ngap {
 
 class PduSessionResourceReleasedItemRelRes {
- public:
+public:
   PduSessionResourceReleasedItemRelRes();
   virtual ~PduSessionResourceReleasedItemRelRes();
 
-  void set(
-      const PduSessionId& pduSessionId,
-      const OCTET_STRING_t& pduSessionResourceReleaseResponseTransfer);
+  void set(const PduSessionId &pduSessionId,
+           const OCTET_STRING_t &pduSessionResourceReleaseResponseTransfer);
 
-  void get(
-      PduSessionId& pduSessionId,
-      OCTET_STRING_t& pduSessionResourceReleaseResponseTransfer) const;
+  void get(PduSessionId &pduSessionId,
+           OCTET_STRING_t &pduSessionResourceReleaseResponseTransfer) const;
 
-  bool encode(Ngap_PDUSessionResourceReleasedItemRelRes_t&
-                  pduSessionResourceItem) const;
-  bool decode(const Ngap_PDUSessionResourceReleasedItemRelRes_t&
-                  pduSessionResourceItem);
+  bool encode(Ngap_PDUSessionResourceReleasedItemRelRes_t
+                  &pduSessionResourceItem) const;
+  bool decode(const Ngap_PDUSessionResourceReleasedItemRelRes_t
+                  &pduSessionResourceItem);
 
- private:
+private:
   PduSessionId m_PduSessionId;
   OCTET_STRING_t m_PduSessionResourceReleaseResponseTransfer;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

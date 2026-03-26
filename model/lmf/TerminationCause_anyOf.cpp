@@ -13,8 +13,8 @@
 
 #include "TerminationCause_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::lmf {
 
@@ -27,12 +27,12 @@ void TerminationCause_anyOf::validate() const {
   }
 }
 
-bool TerminationCause_anyOf::validate(std::stringstream& msg) const {
+bool TerminationCause_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool TerminationCause_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool TerminationCause_anyOf::validate(std::stringstream &msg,
+                                      const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "TerminationCause_anyOf" : pathPrefix;
@@ -47,39 +47,38 @@ bool TerminationCause_anyOf::validate(
 }
 
 bool TerminationCause_anyOf::operator==(
-    const TerminationCause_anyOf& rhs) const {
+    const TerminationCause_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool TerminationCause_anyOf::operator!=(
-    const TerminationCause_anyOf& rhs) const {
+    const TerminationCause_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const TerminationCause_anyOf& o) {
+void to_json(nlohmann::json &j, const TerminationCause_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case TerminationCause_anyOf::eTerminationCause_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case TerminationCause_anyOf::eTerminationCause_anyOf::TERMINATION_BY_UE:
-      j = "TERMINATION_BY_UE";
-      break;
-    case TerminationCause_anyOf::eTerminationCause_anyOf::
-        TERMINATION_BY_NETWORK:
-      j = "TERMINATION_BY_NETWORK";
-      break;
-    case TerminationCause_anyOf::eTerminationCause_anyOf::NORMAL_TERMINATION:
-      j = "NORMAL_TERMINATION";
-      break;
+  case TerminationCause_anyOf::eTerminationCause_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case TerminationCause_anyOf::eTerminationCause_anyOf::TERMINATION_BY_UE:
+    j = "TERMINATION_BY_UE";
+    break;
+  case TerminationCause_anyOf::eTerminationCause_anyOf::TERMINATION_BY_NETWORK:
+    j = "TERMINATION_BY_NETWORK";
+    break;
+  case TerminationCause_anyOf::eTerminationCause_anyOf::NORMAL_TERMINATION:
+    j = "NORMAL_TERMINATION";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, TerminationCause_anyOf& o) {
+void from_json(const nlohmann::json &j, TerminationCause_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "TERMINATION_BY_UE") {
     o.setValue(
@@ -108,4 +107,4 @@ void TerminationCause_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

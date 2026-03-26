@@ -13,7 +13,7 @@ namespace oai::ngap {
 PduSessionResourceReleaseCommandTransfer::
     PduSessionResourceReleaseCommandTransfer() {
   m_PduSessionResourceReleaseCommandTransferIe =
-      (Ngap_PDUSessionResourceReleaseCommandTransfer_t*) calloc(
+      (Ngap_PDUSessionResourceReleaseCommandTransfer_t *)calloc(
           1, sizeof(Ngap_PDUSessionResourceReleaseCommandTransfer_t));
 }
 
@@ -27,7 +27,7 @@ PduSessionResourceReleaseCommandTransfer::
 }
 
 //------------------------------------------------------------------------------
-void PduSessionResourceReleaseCommandTransfer::setCause(const Cause& cause) {
+void PduSessionResourceReleaseCommandTransfer::setCause(const Cause &cause) {
   m_CauseValue = cause;
   int ret =
       m_CauseValue.encode(m_PduSessionResourceReleaseCommandTransferIe->cause);
@@ -109,8 +109,8 @@ void PduSessionResourceReleaseCommandTransfer::setCauseMisc(
 }
 
 //------------------------------------------------------------------------------
-int PduSessionResourceReleaseCommandTransfer::encode(
-    uint8_t* buf, int bufSize) {
+int PduSessionResourceReleaseCommandTransfer::encode(uint8_t *buf,
+                                                     int bufSize) {
   ngap_utils::print_asn_msg(
       &asn_DEF_Ngap_PDUSessionResourceReleaseCommandTransfer,
       m_PduSessionResourceReleaseCommandTransferIe);
@@ -123,25 +123,25 @@ int PduSessionResourceReleaseCommandTransfer::encode(
 
 //------------------------------------------------------------------------------
 void PduSessionResourceReleaseCommandTransfer::encode2NewBuffer(
-    uint8_t*& buf, int& encoded_size) {
+    uint8_t *&buf, int &encoded_size) {
   ngap_utils::print_asn_msg(
       &asn_DEF_Ngap_PDUSessionResourceReleaseCommandTransfer,
       m_PduSessionResourceReleaseCommandTransferIe);
   encoded_size = aper_encode_to_new_buffer(
       &asn_DEF_Ngap_PDUSessionResourceReleaseCommandTransfer, NULL,
-      m_PduSessionResourceReleaseCommandTransferIe, (void**) &buf);
-  oai::logger::logger_common::ngap().debug(
-      "Encoded message size ( %d )", encoded_size);
+      m_PduSessionResourceReleaseCommandTransferIe, (void **)&buf);
+  oai::logger::logger_common::ngap().debug("Encoded message size ( %d )",
+                                           encoded_size);
   return;
 }
 
 //------------------------------------------------------------------------------
-bool PduSessionResourceReleaseCommandTransfer::decode(
-    uint8_t* buf, int bufSize) {
+bool PduSessionResourceReleaseCommandTransfer::decode(uint8_t *buf,
+                                                      int bufSize) {
   asn_dec_rval_t rc = asn_decode(
       NULL, ATS_ALIGNED_CANONICAL_PER,
       &asn_DEF_Ngap_PDUSessionResourceReleaseCommandTransfer,
-      (void**) &m_PduSessionResourceReleaseCommandTransferIe, buf, bufSize);
+      (void **)&m_PduSessionResourceReleaseCommandTransferIe, buf, bufSize);
 
   if (rc.code == RC_OK) {
     oai::logger::logger_common::ngap().debug("Decoded successfully");
@@ -153,8 +153,8 @@ bool PduSessionResourceReleaseCommandTransfer::decode(
     return false;
   }
 
-  oai::logger::logger_common::ngap().debug(
-      "rc.consumed to decode %d", rc.consumed);
+  oai::logger::logger_common::ngap().debug("rc.consumed to decode %d",
+                                           rc.consumed);
   // asn_fprint(stderr,
   // &asn_DEF_Ngap_PDUSessionResourceSetupUnsuccessfulTransfer,
   // pduSessionResourceSetupUnsuccessfulTransferIEs);
@@ -176,4 +176,4 @@ long PduSessionResourceReleaseCommandTransfer::getChoiceOfCause() const {
 long PduSessionResourceReleaseCommandTransfer::getCause() const {
   return m_CauseValue.get();
 }
-}  // namespace oai::ngap
+} // namespace oai::ngap

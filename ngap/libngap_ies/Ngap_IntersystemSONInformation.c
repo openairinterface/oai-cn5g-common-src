@@ -12,9 +12,8 @@
 #include "Ngap_ProtocolIE-SingleContainer.h"
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 static asn_oer_constraints_t
-    asn_OER_type_Ngap_IntersystemSONInformation_constr_1 CC_NOTUSED = {
-        {0, 0},
-        -1};
+    asn_OER_type_Ngap_IntersystemSONInformation_constr_1 CC_NOTUSED = {{0, 0},
+                                                                       -1};
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 asn_per_constraints_t asn_PER_type_Ngap_IntersystemSONInformation_constr_1
@@ -29,9 +28,8 @@ asn_per_constraints_t asn_PER_type_Ngap_IntersystemSONInformation_constr_1
 asn_TYPE_member_t asn_MBR_Ngap_IntersystemSONInformation_1[] = {
     {ATF_POINTER,
      0,
-     offsetof(
-         struct Ngap_IntersystemSONInformation,
-         choice.intersystemSONInformationReport),
+     offsetof(struct Ngap_IntersystemSONInformation,
+              choice.intersystemSONInformationReport),
      (ASN_TAG_CLASS_CONTEXT | (0 << 2)),
      +1, /* EXPLICIT tag at current level */
      &asn_DEF_Ngap_IntersystemSONInformationReport,
@@ -78,7 +76,7 @@ asn_CHOICE_specifics_t asn_SPC_Ngap_IntersystemSONInformation_specs_1 = {
     sizeof(struct Ngap_IntersystemSONInformation),
     offsetof(struct Ngap_IntersystemSONInformation, _asn_ctx),
     offsetof(struct Ngap_IntersystemSONInformation, present),
-    sizeof(((struct Ngap_IntersystemSONInformation*) 0)->present),
+    sizeof(((struct Ngap_IntersystemSONInformation *)0)->present),
     asn_MAP_Ngap_IntersystemSONInformation_tag2el_1,
     2, /* Count of tags in the map */
     0,

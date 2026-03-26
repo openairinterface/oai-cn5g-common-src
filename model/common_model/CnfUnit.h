@@ -20,8 +20,8 @@
 #define CnfUnit_H_
 
 #include "Atom.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::common {
 
@@ -29,7 +29,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class CnfUnit {
- public:
+public:
   CnfUnit();
   virtual ~CnfUnit() = default;
 
@@ -43,16 +43,16 @@ class CnfUnit {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const CnfUnit& rhs) const;
-  bool operator!=(const CnfUnit& rhs) const;
+  bool operator==(const CnfUnit &rhs) const;
+  bool operator!=(const CnfUnit &rhs) const;
 
   /////////////////////////////////////////////
   /// CnfUnit members
@@ -61,15 +61,15 @@ class CnfUnit {
   ///
   /// </summary>
   std::vector<oai::model::common::Atom> getCnfUnit() const;
-  void setCnfUnit(std::vector<oai::model::common::Atom> const& value);
+  void setCnfUnit(std::vector<oai::model::common::Atom> const &value);
 
-  friend void to_json(nlohmann::json& j, const CnfUnit& o);
-  friend void from_json(const nlohmann::json& j, CnfUnit& o);
+  friend void to_json(nlohmann::json &j, const CnfUnit &o);
+  friend void from_json(const nlohmann::json &j, CnfUnit &o);
 
- protected:
+protected:
   std::vector<oai::model::common::Atom> m_CnfUnit;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* CnfUnit_H_ */

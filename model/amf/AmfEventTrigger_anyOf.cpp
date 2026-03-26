@@ -13,8 +13,8 @@
 
 #include "AmfEventTrigger_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::amf {
 
@@ -27,12 +27,12 @@ void AmfEventTrigger_anyOf::validate() const {
   }
 }
 
-bool AmfEventTrigger_anyOf::validate(std::stringstream& msg) const {
+bool AmfEventTrigger_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AmfEventTrigger_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool AmfEventTrigger_anyOf::validate(std::stringstream &msg,
+                                     const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AmfEventTrigger_anyOf" : pathPrefix;
@@ -46,34 +46,34 @@ bool AmfEventTrigger_anyOf::validate(
   return success;
 }
 
-bool AmfEventTrigger_anyOf::operator==(const AmfEventTrigger_anyOf& rhs) const {
+bool AmfEventTrigger_anyOf::operator==(const AmfEventTrigger_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool AmfEventTrigger_anyOf::operator!=(const AmfEventTrigger_anyOf& rhs) const {
+bool AmfEventTrigger_anyOf::operator!=(const AmfEventTrigger_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AmfEventTrigger_anyOf& o) {
+void to_json(nlohmann::json &j, const AmfEventTrigger_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case AmfEventTrigger_anyOf::eAmfEventTrigger_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case AmfEventTrigger_anyOf::eAmfEventTrigger_anyOf::ONE_TIME:
-      j = "ONE_TIME";
-      break;
-    case AmfEventTrigger_anyOf::eAmfEventTrigger_anyOf::CONTINUOUS:
-      j = "CONTINUOUS";
-      break;
+  case AmfEventTrigger_anyOf::eAmfEventTrigger_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case AmfEventTrigger_anyOf::eAmfEventTrigger_anyOf::ONE_TIME:
+    j = "ONE_TIME";
+    break;
+  case AmfEventTrigger_anyOf::eAmfEventTrigger_anyOf::CONTINUOUS:
+    j = "CONTINUOUS";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, AmfEventTrigger_anyOf& o) {
+void from_json(const nlohmann::json &j, AmfEventTrigger_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "ONE_TIME") {
     o.setValue(AmfEventTrigger_anyOf::eAmfEventTrigger_anyOf::ONE_TIME);
@@ -88,8 +88,8 @@ void from_json(const nlohmann::json& j, AmfEventTrigger_anyOf& o) {
   }
 }
 
-AmfEventTrigger_anyOf::eAmfEventTrigger_anyOf AmfEventTrigger_anyOf::getValue()
-    const {
+AmfEventTrigger_anyOf::eAmfEventTrigger_anyOf
+AmfEventTrigger_anyOf::getValue() const {
   return m_value;
 }
 void AmfEventTrigger_anyOf::setValue(
@@ -97,4 +97,4 @@ void AmfEventTrigger_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

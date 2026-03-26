@@ -19,9 +19,9 @@
 namespace oai::udr::model {
 
 PointAltitudeUncertainty::PointAltitudeUncertainty() {
-  m_Altitude            = 0.0;
+  m_Altitude = 0.0;
   m_UncertaintyAltitude = 0.0f;
-  m_Confidence          = 0;
+  m_Confidence = 0;
 }
 
 PointAltitudeUncertainty::~PointAltitudeUncertainty() {}
@@ -30,17 +30,17 @@ void PointAltitudeUncertainty::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const PointAltitudeUncertainty& o) {
-  j                        = nlohmann::json();
-  j["shape"]               = o.m_Shape;
-  j["point"]               = o.m_Point;
-  j["altitude"]            = o.m_Altitude;
-  j["uncertaintyEllipse"]  = o.m_UncertaintyEllipse;
+void to_json(nlohmann::json &j, const PointAltitudeUncertainty &o) {
+  j = nlohmann::json();
+  j["shape"] = o.m_Shape;
+  j["point"] = o.m_Point;
+  j["altitude"] = o.m_Altitude;
+  j["uncertaintyEllipse"] = o.m_UncertaintyEllipse;
   j["uncertaintyAltitude"] = o.m_UncertaintyAltitude;
-  j["confidence"]          = o.m_Confidence;
+  j["confidence"] = o.m_Confidence;
 }
 
-void from_json(const nlohmann::json& j, PointAltitudeUncertainty& o) {
+void from_json(const nlohmann::json &j, PointAltitudeUncertainty &o) {
   j.at("shape").get_to(o.m_Shape);
   j.at("point").get_to(o.m_Point);
   j.at("altitude").get_to(o.m_Altitude);
@@ -52,18 +52,16 @@ void from_json(const nlohmann::json& j, PointAltitudeUncertainty& o) {
 SupportedGADShapes PointAltitudeUncertainty::getShape() const {
   return m_Shape;
 }
-void PointAltitudeUncertainty::setShape(SupportedGADShapes const& value) {
+void PointAltitudeUncertainty::setShape(SupportedGADShapes const &value) {
   m_Shape = value;
 }
 GeographicalCoordinates PointAltitudeUncertainty::getPoint() const {
   return m_Point;
 }
-void PointAltitudeUncertainty::setPoint(GeographicalCoordinates const& value) {
+void PointAltitudeUncertainty::setPoint(GeographicalCoordinates const &value) {
   m_Point = value;
 }
-double PointAltitudeUncertainty::getAltitude() const {
-  return m_Altitude;
-}
+double PointAltitudeUncertainty::getAltitude() const { return m_Altitude; }
 void PointAltitudeUncertainty::setAltitude(double const value) {
   m_Altitude = value;
 }
@@ -71,7 +69,7 @@ UncertaintyEllipse PointAltitudeUncertainty::getUncertaintyEllipse() const {
   return m_UncertaintyEllipse;
 }
 void PointAltitudeUncertainty::setUncertaintyEllipse(
-    UncertaintyEllipse const& value) {
+    UncertaintyEllipse const &value) {
   m_UncertaintyEllipse = value;
 }
 float PointAltitudeUncertainty::getUncertaintyAltitude() const {
@@ -80,11 +78,9 @@ float PointAltitudeUncertainty::getUncertaintyAltitude() const {
 void PointAltitudeUncertainty::setUncertaintyAltitude(float const value) {
   m_UncertaintyAltitude = value;
 }
-int32_t PointAltitudeUncertainty::getConfidence() const {
-  return m_Confidence;
-}
+int32_t PointAltitudeUncertainty::getConfidence() const { return m_Confidence; }
 void PointAltitudeUncertainty::setConfidence(int32_t const value) {
   m_Confidence = value;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

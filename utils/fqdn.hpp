@@ -2,7 +2,6 @@
  * SPDX-License-Identifier: LicenseRef-CSSL-1.0
  */
 
-
 #ifndef FILE_FQDN_HPP_SEEN
 #define FILE_FQDN_HPP_SEEN
 
@@ -10,7 +9,7 @@
 
 namespace oai::utils {
 class fqdn {
- public:
+public:
   /*
    * Resolve a DNS name to get host's IP Addr
    * @param [const std::string &] host_name: host's name/url
@@ -18,9 +17,9 @@ class fqdn {
    * @param [uint8_t &] addr_type: addr_type (Ipv4/v6)
    * @return void
    */
-  static bool resolve(
-      const std::string& host_name, std::string& address, uint32_t& port,
-      uint8_t& addr_type, const std::string& protocol = "http");
+  static bool resolve(const std::string &host_name, std::string &address,
+                      uint32_t &port, uint8_t &addr_type,
+                      const std::string &protocol = "http");
 };
-}  // namespace oai::utils
+} // namespace oai::utils
 #endif /* FILE_FQDN_HPP_SEEN */

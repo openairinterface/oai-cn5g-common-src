@@ -14,24 +14,24 @@ extern "C" {
 
 namespace oai::ngap {
 class UserLocationInformationNr {
- public:
+public:
   UserLocationInformationNr();
   virtual ~UserLocationInformationNr();
 
-  void set(const NrCgi&, const Tai&);
-  void get(NrCgi&, Tai&) const;
+  void set(const NrCgi &, const Tai &);
+  void get(NrCgi &, Tai &) const;
 
-  bool encode(Ngap_UserLocationInformationNR_t&) const;
-  bool decode(const Ngap_UserLocationInformationNR_t&);
+  bool encode(Ngap_UserLocationInformationNR_t &) const;
+  bool decode(const Ngap_UserLocationInformationNR_t &);
 
- private:
-  NrCgi m_NrCgi;  // Mandatory
-  Tai m_Tai;      // Mandatory
+private:
+  NrCgi m_NrCgi; // Mandatory
+  Tai m_Tai;     // Mandatory
   // bool timeStampIsSet;
   // TODO: TimeStamp timeStamp; //Age of Location (Optional)
   // TODO: PSCell Information
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

@@ -33,7 +33,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class EnhancedCoverageRestrictionData {
- public:
+public:
   EnhancedCoverageRestrictionData();
   virtual ~EnhancedCoverageRestrictionData();
 
@@ -45,21 +45,21 @@ class EnhancedCoverageRestrictionData {
   /// <summary>
   ///
   /// </summary>
-  std::vector<PlmnEcInfo>& getPlmnEcInfoList();
-  void setPlmnEcInfoList(std::vector<PlmnEcInfo> const& value);
+  std::vector<PlmnEcInfo> &getPlmnEcInfoList();
+  void setPlmnEcInfoList(std::vector<PlmnEcInfo> const &value);
   bool plmnEcInfoListIsSet() const;
   void unsetPlmnEcInfoList();
 
-  friend void to_json(
-      nlohmann::json& j, const EnhancedCoverageRestrictionData& o);
-  friend void from_json(
-      const nlohmann::json& j, EnhancedCoverageRestrictionData& o);
+  friend void to_json(nlohmann::json &j,
+                      const EnhancedCoverageRestrictionData &o);
+  friend void from_json(const nlohmann::json &j,
+                        EnhancedCoverageRestrictionData &o);
 
- protected:
+protected:
   std::vector<PlmnEcInfo> m_PlmnEcInfoList;
   bool m_PlmnEcInfoListIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* EnhancedCoverageRestrictionData_H_ */

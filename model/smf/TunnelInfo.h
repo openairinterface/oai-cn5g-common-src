@@ -19,8 +19,8 @@
 #ifndef TunnelInfo_H_
 #define TunnelInfo_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::smf {
 
@@ -28,7 +28,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class TunnelInfo {
- public:
+public:
   TunnelInfo();
   virtual ~TunnelInfo();
 
@@ -41,26 +41,26 @@ class TunnelInfo {
   ///
   /// </summary>
   std::string getIpv4Addr() const;
-  void setIpv4Addr(std::string const& value);
+  void setIpv4Addr(std::string const &value);
   bool ipv4AddrIsSet() const;
   void unsetIpv4Addr();
   /// <summary>
   ///
   /// </summary>
   std::string getIpv6Addr() const;
-  void setIpv6Addr(std::string const& value);
+  void setIpv6Addr(std::string const &value);
   bool ipv6AddrIsSet() const;
   void unsetIpv6Addr();
   /// <summary>
   ///
   /// </summary>
   std::string getGtpTeid() const;
-  void setGtpTeid(std::string const& value);
+  void setGtpTeid(std::string const &value);
 
-  friend void to_json(nlohmann::json& j, const TunnelInfo& o);
-  friend void from_json(const nlohmann::json& j, TunnelInfo& o);
+  friend void to_json(nlohmann::json &j, const TunnelInfo &o);
+  friend void from_json(const nlohmann::json &j, TunnelInfo &o);
 
- protected:
+protected:
   std::string m_Ipv4Addr;
   bool m_Ipv4AddrIsSet;
   std::string m_Ipv6Addr;
@@ -68,6 +68,6 @@ class TunnelInfo {
   std::string m_GtpTeid;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* TunnelInfo_H_ */

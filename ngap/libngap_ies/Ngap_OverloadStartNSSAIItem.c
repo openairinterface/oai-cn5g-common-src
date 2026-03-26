@@ -51,9 +51,8 @@ asn_TYPE_member_t asn_MBR_Ngap_OverloadStartNSSAIItem_1[] = {
      "sliceOverloadResponse"},
     {ATF_POINTER,
      2,
-     offsetof(
-         struct Ngap_OverloadStartNSSAIItem,
-         sliceTrafficLoadReductionIndication),
+     offsetof(struct Ngap_OverloadStartNSSAIItem,
+              sliceTrafficLoadReductionIndication),
      (ASN_TAG_CLASS_CONTEXT | (2 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_TrafficLoadReductionIndication,

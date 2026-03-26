@@ -18,10 +18,10 @@ namespace oai::model::nrf {
 using namespace oai::model::common;
 
 AccessTokenClaims::AccessTokenClaims() {
-  m_Iss                 = "";
-  m_Sub                 = "";
-  m_Scope               = "";
-  m_Exp                 = 0;
+  m_Iss = "";
+  m_Sub = "";
+  m_Scope = "";
+  m_Exp = 0;
   m_ConsumerPlmnIdIsSet = false;
   m_ProducerPlmnIdIsSet = false;
 }
@@ -32,18 +32,20 @@ void AccessTokenClaims::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const AccessTokenClaims& o) {
-  j          = nlohmann::json();
-  j["iss"]   = o.m_Iss;
-  j["sub"]   = o.m_Sub;
-  j["aud"]   = o.m_Aud;
+void to_json(nlohmann::json &j, const AccessTokenClaims &o) {
+  j = nlohmann::json();
+  j["iss"] = o.m_Iss;
+  j["sub"] = o.m_Sub;
+  j["aud"] = o.m_Aud;
   j["scope"] = o.m_Scope;
-  j["exp"]   = o.m_Exp;
-  if (o.consumerPlmnIdIsSet()) j["consumerPlmnId"] = o.m_ConsumerPlmnId;
-  if (o.producerPlmnIdIsSet()) j["producerPlmnId"] = o.m_ProducerPlmnId;
+  j["exp"] = o.m_Exp;
+  if (o.consumerPlmnIdIsSet())
+    j["consumerPlmnId"] = o.m_ConsumerPlmnId;
+  if (o.producerPlmnIdIsSet())
+    j["producerPlmnId"] = o.m_ProducerPlmnId;
 }
 
-void from_json(const nlohmann::json& j, AccessTokenClaims& o) {
+void from_json(const nlohmann::json &j, AccessTokenClaims &o) {
   j.at("iss").get_to(o.m_Iss);
   j.at("sub").get_to(o.m_Sub);
   j.at("aud").get_to(o.m_Aud);
@@ -59,61 +61,33 @@ void from_json(const nlohmann::json& j, AccessTokenClaims& o) {
   }
 }
 
-std::string AccessTokenClaims::getIss() const {
-  return m_Iss;
-}
-void AccessTokenClaims::setIss(std::string const& value) {
-  m_Iss = value;
-}
-std::string AccessTokenClaims::getSub() const {
-  return m_Sub;
-}
-void AccessTokenClaims::setSub(std::string const& value) {
-  m_Sub = value;
-}
-audience_t AccessTokenClaims::getAud() const {
-  return m_Aud;
-}
-void AccessTokenClaims::setAud(audience_t const& value) {
-  m_Aud = value;
-}
-std::string AccessTokenClaims::getScope() const {
-  return m_Scope;
-}
-void AccessTokenClaims::setScope(std::string const& value) {
-  m_Scope = value;
-}
-int32_t AccessTokenClaims::getExp() const {
-  return m_Exp;
-}
-void AccessTokenClaims::setExp(int32_t const value) {
-  m_Exp = value;
-}
-PlmnId AccessTokenClaims::getConsumerPlmnId() const {
-  return m_ConsumerPlmnId;
-}
-void AccessTokenClaims::setConsumerPlmnId(PlmnId const& value) {
-  m_ConsumerPlmnId      = value;
+std::string AccessTokenClaims::getIss() const { return m_Iss; }
+void AccessTokenClaims::setIss(std::string const &value) { m_Iss = value; }
+std::string AccessTokenClaims::getSub() const { return m_Sub; }
+void AccessTokenClaims::setSub(std::string const &value) { m_Sub = value; }
+audience_t AccessTokenClaims::getAud() const { return m_Aud; }
+void AccessTokenClaims::setAud(audience_t const &value) { m_Aud = value; }
+std::string AccessTokenClaims::getScope() const { return m_Scope; }
+void AccessTokenClaims::setScope(std::string const &value) { m_Scope = value; }
+int32_t AccessTokenClaims::getExp() const { return m_Exp; }
+void AccessTokenClaims::setExp(int32_t const value) { m_Exp = value; }
+PlmnId AccessTokenClaims::getConsumerPlmnId() const { return m_ConsumerPlmnId; }
+void AccessTokenClaims::setConsumerPlmnId(PlmnId const &value) {
+  m_ConsumerPlmnId = value;
   m_ConsumerPlmnIdIsSet = true;
 }
 bool AccessTokenClaims::consumerPlmnIdIsSet() const {
   return m_ConsumerPlmnIdIsSet;
 }
-void AccessTokenClaims::unsetConsumerPlmnId() {
-  m_ConsumerPlmnIdIsSet = false;
-}
-PlmnId AccessTokenClaims::getProducerPlmnId() const {
-  return m_ProducerPlmnId;
-}
-void AccessTokenClaims::setProducerPlmnId(PlmnId const& value) {
-  m_ProducerPlmnId      = value;
+void AccessTokenClaims::unsetConsumerPlmnId() { m_ConsumerPlmnIdIsSet = false; }
+PlmnId AccessTokenClaims::getProducerPlmnId() const { return m_ProducerPlmnId; }
+void AccessTokenClaims::setProducerPlmnId(PlmnId const &value) {
+  m_ProducerPlmnId = value;
   m_ProducerPlmnIdIsSet = true;
 }
 bool AccessTokenClaims::producerPlmnIdIsSet() const {
   return m_ProducerPlmnIdIsSet;
 }
-void AccessTokenClaims::unsetProducerPlmnId() {
-  m_ProducerPlmnIdIsSet = false;
-}
+void AccessTokenClaims::unsetProducerPlmnId() { m_ProducerPlmnIdIsSet = false; }
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

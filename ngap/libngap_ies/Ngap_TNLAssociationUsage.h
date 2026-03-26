@@ -20,9 +20,9 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_TNLAssociationUsage {
-  Ngap_TNLAssociationUsage_ue     = 0,
+  Ngap_TNLAssociationUsage_ue = 0,
   Ngap_TNLAssociationUsage_non_ue = 1,
-  Ngap_TNLAssociationUsage_both   = 2
+  Ngap_TNLAssociationUsage_both = 2
   /*
    * Enumeration is extensible
    */

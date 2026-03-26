@@ -19,9 +19,9 @@
 namespace oai::model::common {
 
 PatchItem::PatchItem() {
-  m_Path       = "";
-  m_From       = "";
-  m_FromIsSet  = false;
+  m_Path = "";
+  m_From = "";
+  m_FromIsSet = false;
   m_ValueIsSet = false;
 }
 
@@ -32,19 +32,19 @@ void PatchItem::validate() const {
   }
 }
 
-bool PatchItem::validate(std::stringstream& msg) const {
+bool PatchItem::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool PatchItem::validate(
-    std::stringstream& /* msg */, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool PatchItem::validate(std::stringstream & /* msg */,
+                         const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "PatchItem" : pathPrefix;
 
   return success;
 }
 
-bool PatchItem::operator==(const PatchItem& rhs) const {
+bool PatchItem::operator==(const PatchItem &rhs) const {
   return
 
       (getOp() == rhs.getOp()) &&
@@ -60,19 +60,21 @@ bool PatchItem::operator==(const PatchItem& rhs) const {
           ;
 }
 
-bool PatchItem::operator!=(const PatchItem& rhs) const {
+bool PatchItem::operator!=(const PatchItem &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PatchItem& o) {
-  j         = nlohmann::json();
-  j["op"]   = o.m_Op;
+void to_json(nlohmann::json &j, const PatchItem &o) {
+  j = nlohmann::json();
+  j["op"] = o.m_Op;
   j["path"] = o.m_Path;
-  if (o.fromIsSet()) j["from"] = o.m_From;
-  if (o.valueIsSet()) j["value"] = o.m_Value;
+  if (o.fromIsSet())
+    j["from"] = o.m_From;
+  if (o.valueIsSet())
+    j["value"] = o.m_Value;
 }
 
-void from_json(const nlohmann::json& j, PatchItem& o) {
+void from_json(const nlohmann::json &j, PatchItem &o) {
   j.at("op").get_to(o.m_Op);
   j.at("path").get_to(o.m_Path);
   if (j.find("from") != j.end()) {
@@ -85,43 +87,25 @@ void from_json(const nlohmann::json& j, PatchItem& o) {
   }
 }
 
-oai::model::common::PatchOperation PatchItem::getOp() const {
-  return m_Op;
-}
-void PatchItem::setOp(oai::model::common::PatchOperation const& value) {
+oai::model::common::PatchOperation PatchItem::getOp() const { return m_Op; }
+void PatchItem::setOp(oai::model::common::PatchOperation const &value) {
   m_Op = value;
 }
-std::string PatchItem::getPath() const {
-  return m_Path;
-}
-void PatchItem::setPath(std::string const& value) {
-  m_Path = value;
-}
-std::string PatchItem::getFrom() const {
-  return m_From;
-}
-void PatchItem::setFrom(std::string const& value) {
-  m_From      = value;
+std::string PatchItem::getPath() const { return m_Path; }
+void PatchItem::setPath(std::string const &value) { m_Path = value; }
+std::string PatchItem::getFrom() const { return m_From; }
+void PatchItem::setFrom(std::string const &value) {
+  m_From = value;
   m_FromIsSet = true;
 }
-bool PatchItem::fromIsSet() const {
-  return m_FromIsSet;
-}
-void PatchItem::unsetFrom() {
-  m_FromIsSet = false;
-}
-std::string PatchItem::getValue() const {
-  return m_Value;
-}
-void PatchItem::setValue(std::string const& value) {
-  m_Value      = value;
+bool PatchItem::fromIsSet() const { return m_FromIsSet; }
+void PatchItem::unsetFrom() { m_FromIsSet = false; }
+std::string PatchItem::getValue() const { return m_Value; }
+void PatchItem::setValue(std::string const &value) {
+  m_Value = value;
   m_ValueIsSet = true;
 }
-bool PatchItem::valueIsSet() const {
-  return m_ValueIsSet;
-}
-void PatchItem::unsetValue() {
-  m_ValueIsSet = false;
-}
+bool PatchItem::valueIsSet() const { return m_ValueIsSet; }
+void PatchItem::unsetValue() { m_ValueIsSet = false; }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

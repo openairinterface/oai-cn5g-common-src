@@ -18,9 +18,7 @@
 
 namespace oai::udr::model {
 
-SteeringInfo::SteeringInfo() {
-  m_AccessTechListIsSet = false;
-}
+SteeringInfo::SteeringInfo() { m_AccessTechListIsSet = false; }
 
 SteeringInfo::~SteeringInfo() {}
 
@@ -28,14 +26,14 @@ void SteeringInfo::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const SteeringInfo& o) {
-  j           = nlohmann::json();
+void to_json(nlohmann::json &j, const SteeringInfo &o) {
+  j = nlohmann::json();
   j["plmnId"] = o.m_PlmnId;
   if (o.accessTechListIsSet() || !o.m_AccessTechList.empty())
     j["accessTechList"] = o.m_AccessTechList;
 }
 
-void from_json(const nlohmann::json& j, SteeringInfo& o) {
+void from_json(const nlohmann::json &j, SteeringInfo &o) {
   j.at("plmnId").get_to(o.m_PlmnId);
   if (j.find("accessTechList") != j.end()) {
     j.at("accessTechList").get_to(o.m_AccessTechList);
@@ -43,24 +41,18 @@ void from_json(const nlohmann::json& j, SteeringInfo& o) {
   }
 }
 
-oai::model::common::PlmnId SteeringInfo::getPlmnId() const {
-  return m_PlmnId;
-}
-void SteeringInfo::setPlmnId(oai::model::common::PlmnId const& value) {
+oai::model::common::PlmnId SteeringInfo::getPlmnId() const { return m_PlmnId; }
+void SteeringInfo::setPlmnId(oai::model::common::PlmnId const &value) {
   m_PlmnId = value;
 }
-std::vector<AccessTech>& SteeringInfo::getAccessTechList() {
+std::vector<AccessTech> &SteeringInfo::getAccessTechList() {
   return m_AccessTechList;
 }
-void SteeringInfo::setAccessTechList(std::vector<AccessTech> const& value) {
-  m_AccessTechList      = value;
+void SteeringInfo::setAccessTechList(std::vector<AccessTech> const &value) {
+  m_AccessTechList = value;
   m_AccessTechListIsSet = true;
 }
-bool SteeringInfo::accessTechListIsSet() const {
-  return m_AccessTechListIsSet;
-}
-void SteeringInfo::unsetAccessTechList() {
-  m_AccessTechListIsSet = false;
-}
+bool SteeringInfo::accessTechListIsSet() const { return m_AccessTechListIsSet; }
+void SteeringInfo::unsetAccessTechList() { m_AccessTechListIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

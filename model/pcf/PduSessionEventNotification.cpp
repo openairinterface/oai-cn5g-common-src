@@ -19,20 +19,20 @@
 namespace oai::model::pcf {
 
 PduSessionEventNotification::PduSessionEventNotification() {
-  m_Supi         = "";
-  m_SupiIsSet    = false;
-  m_UeIpv4       = "";
-  m_UeIpv4IsSet  = false;
-  m_UeIpv6IsSet  = false;
-  m_UeMac        = "";
-  m_UeMacIsSet   = false;
-  m_StatusIsSet  = false;
+  m_Supi = "";
+  m_SupiIsSet = false;
+  m_UeIpv4 = "";
+  m_UeIpv4IsSet = false;
+  m_UeIpv6IsSet = false;
+  m_UeMac = "";
+  m_UeMacIsSet = false;
+  m_StatusIsSet = false;
   m_PcfInfoIsSet = false;
-  m_Dnn          = "";
-  m_DnnIsSet     = false;
-  m_SnssaiIsSet  = false;
-  m_Gpsi         = "";
-  m_GpsiIsSet    = false;
+  m_Dnn = "";
+  m_DnnIsSet = false;
+  m_SnssaiIsSet = false;
+  m_Gpsi = "";
+  m_GpsiIsSet = false;
 }
 
 void PduSessionEventNotification::validate() const {
@@ -42,12 +42,12 @@ void PduSessionEventNotification::validate() const {
   }
 }
 
-bool PduSessionEventNotification::validate(std::stringstream& msg) const {
+bool PduSessionEventNotification::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool PduSessionEventNotification::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PduSessionEventNotification" : pathPrefix;
@@ -57,22 +57,22 @@ bool PduSessionEventNotification::validate(
     success = false;
   }
   if (supiIsSet()) {
-    const std::string& value           = m_Supi;
+    const std::string &value = m_Supi;
     const std::string currentValuePath = _pathPrefix + ".supi";
   }
 
   if (ueIpv4IsSet()) {
-    const std::string& value           = m_UeIpv4;
+    const std::string &value = m_UeIpv4;
     const std::string currentValuePath = _pathPrefix + ".ueIpv4";
   }
 
   if (ueMacIsSet()) {
-    const std::string& value           = m_UeMac;
+    const std::string &value = m_UeMac;
     const std::string currentValuePath = _pathPrefix + ".ueMac";
   }
 
   if (gpsiIsSet()) {
-    const std::string& value           = m_Gpsi;
+    const std::string &value = m_Gpsi;
     const std::string currentValuePath = _pathPrefix + ".gpsi";
   }
 
@@ -80,7 +80,7 @@ bool PduSessionEventNotification::validate(
 }
 
 bool PduSessionEventNotification::operator==(
-    const PduSessionEventNotification& rhs) const {
+    const PduSessionEventNotification &rhs) const {
   return
 
       (getEvNotif() == rhs.getEvNotif()) &&
@@ -121,25 +121,34 @@ bool PduSessionEventNotification::operator==(
 }
 
 bool PduSessionEventNotification::operator!=(
-    const PduSessionEventNotification& rhs) const {
+    const PduSessionEventNotification &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PduSessionEventNotification& o) {
-  j            = nlohmann::json::object();
+void to_json(nlohmann::json &j, const PduSessionEventNotification &o) {
+  j = nlohmann::json::object();
   j["evNotif"] = o.m_EvNotif;
-  if (o.supiIsSet()) j["supi"] = o.m_Supi;
-  if (o.ueIpv4IsSet()) j["ueIpv4"] = o.m_UeIpv4;
-  if (o.ueIpv6IsSet()) j["ueIpv6"] = o.m_UeIpv6;
-  if (o.ueMacIsSet()) j["ueMac"] = o.m_UeMac;
-  if (o.statusIsSet()) j["status"] = o.m_Status;
-  if (o.pcfInfoIsSet()) j["pcfInfo"] = o.m_PcfInfo;
-  if (o.dnnIsSet()) j["dnn"] = o.m_Dnn;
-  if (o.snssaiIsSet()) j["snssai"] = o.m_Snssai;
-  if (o.gpsiIsSet()) j["gpsi"] = o.m_Gpsi;
+  if (o.supiIsSet())
+    j["supi"] = o.m_Supi;
+  if (o.ueIpv4IsSet())
+    j["ueIpv4"] = o.m_UeIpv4;
+  if (o.ueIpv6IsSet())
+    j["ueIpv6"] = o.m_UeIpv6;
+  if (o.ueMacIsSet())
+    j["ueMac"] = o.m_UeMac;
+  if (o.statusIsSet())
+    j["status"] = o.m_Status;
+  if (o.pcfInfoIsSet())
+    j["pcfInfo"] = o.m_PcfInfo;
+  if (o.dnnIsSet())
+    j["dnn"] = o.m_Dnn;
+  if (o.snssaiIsSet())
+    j["snssai"] = o.m_Snssai;
+  if (o.gpsiIsSet())
+    j["gpsi"] = o.m_Gpsi;
 }
 
-void from_json(const nlohmann::json& j, PduSessionEventNotification& o) {
+void from_json(const nlohmann::json &j, PduSessionEventNotification &o) {
   j.at("evNotif").get_to(o.m_EvNotif);
   if (j.find("supi") != j.end()) {
     j.at("supi").get_to(o.m_Supi);
@@ -179,136 +188,92 @@ void from_json(const nlohmann::json& j, PduSessionEventNotification& o) {
   }
 }
 
-oai::model::pcf::AfEventNotification PduSessionEventNotification::getEvNotif()
-    const {
+oai::model::pcf::AfEventNotification
+PduSessionEventNotification::getEvNotif() const {
   return m_EvNotif;
 }
 void PduSessionEventNotification::setEvNotif(
-    oai::model::pcf::AfEventNotification const& value) {
+    oai::model::pcf::AfEventNotification const &value) {
   m_EvNotif = value;
 }
-std::string PduSessionEventNotification::getSupi() const {
-  return m_Supi;
-}
-void PduSessionEventNotification::setSupi(std::string const& value) {
-  m_Supi      = value;
+std::string PduSessionEventNotification::getSupi() const { return m_Supi; }
+void PduSessionEventNotification::setSupi(std::string const &value) {
+  m_Supi = value;
   m_SupiIsSet = true;
 }
-bool PduSessionEventNotification::supiIsSet() const {
-  return m_SupiIsSet;
-}
-void PduSessionEventNotification::unsetSupi() {
-  m_SupiIsSet = false;
-}
-std::string PduSessionEventNotification::getUeIpv4() const {
-  return m_UeIpv4;
-}
-void PduSessionEventNotification::setUeIpv4(std::string const& value) {
-  m_UeIpv4      = value;
+bool PduSessionEventNotification::supiIsSet() const { return m_SupiIsSet; }
+void PduSessionEventNotification::unsetSupi() { m_SupiIsSet = false; }
+std::string PduSessionEventNotification::getUeIpv4() const { return m_UeIpv4; }
+void PduSessionEventNotification::setUeIpv4(std::string const &value) {
+  m_UeIpv4 = value;
   m_UeIpv4IsSet = true;
 }
-bool PduSessionEventNotification::ueIpv4IsSet() const {
-  return m_UeIpv4IsSet;
-}
-void PduSessionEventNotification::unsetUeIpv4() {
-  m_UeIpv4IsSet = false;
-}
+bool PduSessionEventNotification::ueIpv4IsSet() const { return m_UeIpv4IsSet; }
+void PduSessionEventNotification::unsetUeIpv4() { m_UeIpv4IsSet = false; }
 oai::model::common::Ipv6Addr PduSessionEventNotification::getUeIpv6() const {
   return m_UeIpv6;
 }
 void PduSessionEventNotification::setUeIpv6(
-    oai::model::common::Ipv6Addr const& value) {
-  m_UeIpv6      = value;
+    oai::model::common::Ipv6Addr const &value) {
+  m_UeIpv6 = value;
   m_UeIpv6IsSet = true;
 }
-bool PduSessionEventNotification::ueIpv6IsSet() const {
-  return m_UeIpv6IsSet;
-}
-void PduSessionEventNotification::unsetUeIpv6() {
-  m_UeIpv6IsSet = false;
-}
-std::string PduSessionEventNotification::getUeMac() const {
-  return m_UeMac;
-}
-void PduSessionEventNotification::setUeMac(std::string const& value) {
-  m_UeMac      = value;
+bool PduSessionEventNotification::ueIpv6IsSet() const { return m_UeIpv6IsSet; }
+void PduSessionEventNotification::unsetUeIpv6() { m_UeIpv6IsSet = false; }
+std::string PduSessionEventNotification::getUeMac() const { return m_UeMac; }
+void PduSessionEventNotification::setUeMac(std::string const &value) {
+  m_UeMac = value;
   m_UeMacIsSet = true;
 }
-bool PduSessionEventNotification::ueMacIsSet() const {
-  return m_UeMacIsSet;
-}
-void PduSessionEventNotification::unsetUeMac() {
-  m_UeMacIsSet = false;
-}
-oai::model::pcf::PduSessionStatus PduSessionEventNotification::getStatus()
-    const {
+bool PduSessionEventNotification::ueMacIsSet() const { return m_UeMacIsSet; }
+void PduSessionEventNotification::unsetUeMac() { m_UeMacIsSet = false; }
+oai::model::pcf::PduSessionStatus
+PduSessionEventNotification::getStatus() const {
   return m_Status;
 }
 void PduSessionEventNotification::setStatus(
-    oai::model::pcf::PduSessionStatus const& value) {
-  m_Status      = value;
+    oai::model::pcf::PduSessionStatus const &value) {
+  m_Status = value;
   m_StatusIsSet = true;
 }
-bool PduSessionEventNotification::statusIsSet() const {
-  return m_StatusIsSet;
-}
-void PduSessionEventNotification::unsetStatus() {
-  m_StatusIsSet = false;
-}
-oai::model::pcf::PcfAddressingInfo PduSessionEventNotification::getPcfInfo()
-    const {
+bool PduSessionEventNotification::statusIsSet() const { return m_StatusIsSet; }
+void PduSessionEventNotification::unsetStatus() { m_StatusIsSet = false; }
+oai::model::pcf::PcfAddressingInfo
+PduSessionEventNotification::getPcfInfo() const {
   return m_PcfInfo;
 }
 void PduSessionEventNotification::setPcfInfo(
-    oai::model::pcf::PcfAddressingInfo const& value) {
-  m_PcfInfo      = value;
+    oai::model::pcf::PcfAddressingInfo const &value) {
+  m_PcfInfo = value;
   m_PcfInfoIsSet = true;
 }
 bool PduSessionEventNotification::pcfInfoIsSet() const {
   return m_PcfInfoIsSet;
 }
-void PduSessionEventNotification::unsetPcfInfo() {
-  m_PcfInfoIsSet = false;
-}
-std::string PduSessionEventNotification::getDnn() const {
-  return m_Dnn;
-}
-void PduSessionEventNotification::setDnn(std::string const& value) {
-  m_Dnn      = value;
+void PduSessionEventNotification::unsetPcfInfo() { m_PcfInfoIsSet = false; }
+std::string PduSessionEventNotification::getDnn() const { return m_Dnn; }
+void PduSessionEventNotification::setDnn(std::string const &value) {
+  m_Dnn = value;
   m_DnnIsSet = true;
 }
-bool PduSessionEventNotification::dnnIsSet() const {
-  return m_DnnIsSet;
-}
-void PduSessionEventNotification::unsetDnn() {
-  m_DnnIsSet = false;
-}
+bool PduSessionEventNotification::dnnIsSet() const { return m_DnnIsSet; }
+void PduSessionEventNotification::unsetDnn() { m_DnnIsSet = false; }
 oai::model::common::Snssai PduSessionEventNotification::getSnssai() const {
   return m_Snssai;
 }
 void PduSessionEventNotification::setSnssai(
-    oai::model::common::Snssai const& value) {
-  m_Snssai      = value;
+    oai::model::common::Snssai const &value) {
+  m_Snssai = value;
   m_SnssaiIsSet = true;
 }
-bool PduSessionEventNotification::snssaiIsSet() const {
-  return m_SnssaiIsSet;
-}
-void PduSessionEventNotification::unsetSnssai() {
-  m_SnssaiIsSet = false;
-}
-std::string PduSessionEventNotification::getGpsi() const {
-  return m_Gpsi;
-}
-void PduSessionEventNotification::setGpsi(std::string const& value) {
-  m_Gpsi      = value;
+bool PduSessionEventNotification::snssaiIsSet() const { return m_SnssaiIsSet; }
+void PduSessionEventNotification::unsetSnssai() { m_SnssaiIsSet = false; }
+std::string PduSessionEventNotification::getGpsi() const { return m_Gpsi; }
+void PduSessionEventNotification::setGpsi(std::string const &value) {
+  m_Gpsi = value;
   m_GpsiIsSet = true;
 }
-bool PduSessionEventNotification::gpsiIsSet() const {
-  return m_GpsiIsSet;
-}
-void PduSessionEventNotification::unsetGpsi() {
-  m_GpsiIsSet = false;
-}
+bool PduSessionEventNotification::gpsiIsSet() const { return m_GpsiIsSet; }
+void PduSessionEventNotification::unsetGpsi() { m_GpsiIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

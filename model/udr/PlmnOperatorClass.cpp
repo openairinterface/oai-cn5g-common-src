@@ -26,13 +26,13 @@ void PlmnOperatorClass::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const PlmnOperatorClass& o) {
-  j                   = nlohmann::json();
+void to_json(nlohmann::json &j, const PlmnOperatorClass &o) {
+  j = nlohmann::json();
   j["lcsClientClass"] = o.m_LcsClientClass;
-  j["lcsClientIds"]   = o.m_LcsClientIds;
+  j["lcsClientIds"] = o.m_LcsClientIds;
 }
 
-void from_json(const nlohmann::json& j, PlmnOperatorClass& o) {
+void from_json(const nlohmann::json &j, PlmnOperatorClass &o) {
   j.at("lcsClientClass").get_to(o.m_LcsClientClass);
   j.at("lcsClientIds").get_to(o.m_LcsClientIds);
 }
@@ -40,14 +40,14 @@ void from_json(const nlohmann::json& j, PlmnOperatorClass& o) {
 LcsClientClass PlmnOperatorClass::getLcsClientClass() const {
   return m_LcsClientClass;
 }
-void PlmnOperatorClass::setLcsClientClass(LcsClientClass const& value) {
+void PlmnOperatorClass::setLcsClientClass(LcsClientClass const &value) {
   m_LcsClientClass = value;
 }
-std::vector<std::string>& PlmnOperatorClass::getLcsClientIds() {
+std::vector<std::string> &PlmnOperatorClass::getLcsClientIds() {
   return m_LcsClientIds;
 }
-void PlmnOperatorClass::setLcsClientIds(std::vector<std::string> const& value) {
+void PlmnOperatorClass::setLcsClientIds(std::vector<std::string> const &value) {
   m_LcsClientIds = value;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

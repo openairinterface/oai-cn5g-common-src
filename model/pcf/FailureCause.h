@@ -28,7 +28,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class FailureCause {
- public:
+public:
   FailureCause();
   virtual ~FailureCause() = default;
 
@@ -42,16 +42,16 @@ class FailureCause {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const FailureCause& rhs) const;
-  bool operator!=(const FailureCause& rhs) const;
+  bool operator==(const FailureCause &rhs) const;
+  bool operator!=(const FailureCause &rhs) const;
 
   /////////////////////////////////////////////
   /// FailureCause members
@@ -60,15 +60,15 @@ class FailureCause {
   void setValue(FailureCause_anyOf value);
   FailureCause_anyOf::eFailureCause_anyOf getEnumValue() const;
   void setEnumValue(FailureCause_anyOf::eFailureCause_anyOf value);
-  friend void to_json(nlohmann::json& j, const FailureCause& o);
-  friend void from_json(const nlohmann::json& j, FailureCause& o);
-  friend void to_json(nlohmann::json& j, const FailureCause_anyOf& o);
-  friend void from_json(const nlohmann::json& j, FailureCause_anyOf& o);
+  friend void to_json(nlohmann::json &j, const FailureCause &o);
+  friend void from_json(const nlohmann::json &j, FailureCause &o);
+  friend void to_json(nlohmann::json &j, const FailureCause_anyOf &o);
+  friend void from_json(const nlohmann::json &j, FailureCause_anyOf &o);
 
- protected:
+protected:
   FailureCause_anyOf m_value;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* FailureCause_H_ */

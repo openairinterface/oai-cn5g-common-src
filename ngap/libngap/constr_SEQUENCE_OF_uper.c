@@ -3,20 +3,21 @@
  * All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
+#include <asn_SEQUENCE_OF.h>
 #include <asn_internal.h>
 #include <constr_SEQUENCE_OF.h>
-#include <asn_SEQUENCE_OF.h>
 
-asn_enc_rval_t SEQUENCE_OF_encode_uper(
-    const asn_TYPE_descriptor_t* td, const asn_per_constraints_t* constraints,
-    const void* sptr, asn_per_outp_t* po) {
-  const asn_anonymous_sequence_* list;
-  const asn_per_constraint_t* ct;
-  asn_enc_rval_t er            = {0, 0, 0};
-  const asn_TYPE_member_t* elm = td->elements;
+asn_enc_rval_t SEQUENCE_OF_encode_uper(const asn_TYPE_descriptor_t *td,
+                                       const asn_per_constraints_t *constraints,
+                                       const void *sptr, asn_per_outp_t *po) {
+  const asn_anonymous_sequence_ *list;
+  const asn_per_constraint_t *ct;
+  asn_enc_rval_t er = {0, 0, 0};
+  const asn_TYPE_member_t *elm = td->elements;
   size_t encoded_edx;
 
-  if (!sptr) ASN__ENCODE_FAILED;
+  if (!sptr)
+    ASN__ENCODE_FAILED;
   list = _A_CSEQUENCE_FROM_VOID(sptr);
 
   er.encoded = 0;
@@ -34,13 +35,14 @@ asn_enc_rval_t SEQUENCE_OF_encode_uper(
   if (ct) {
     int not_in_root =
         (list->count < ct->lower_bound || list->count > ct->upper_bound);
-    ASN_DEBUG(
-        "lb %ld ub %ld %s", ct->lower_bound, ct->upper_bound,
-        ct->flags & APC_EXTENSIBLE ? "ext" : "fix");
+    ASN_DEBUG("lb %ld ub %ld %s", ct->lower_bound, ct->upper_bound,
+              ct->flags & APC_EXTENSIBLE ? "ext" : "fix");
     if (ct->flags & APC_EXTENSIBLE) {
       /* Declare whether size is in extension root */
-      if (per_put_few_bits(po, not_in_root, 1)) ASN__ENCODE_FAILED;
-      if (not_in_root) ct = 0;
+      if (per_put_few_bits(po, not_in_root, 1))
+        ASN__ENCODE_FAILED;
+      if (not_in_root)
+        ct = 0;
     } else if (not_in_root && ct->effective_bits >= 0) {
       ASN__ENCODE_FAILED;
     }
@@ -60,7 +62,7 @@ asn_enc_rval_t SEQUENCE_OF_encode_uper(
     ASN__ENCODED_OK(er);
   }
 
-  for (encoded_edx = 0; (ssize_t) encoded_edx < list->count;) {
+  for (encoded_edx = 0; (ssize_t)encoded_edx < list->count;) {
     ssize_t may_encode;
     size_t edx;
     int need_eom = 0;
@@ -69,15 +71,18 @@ asn_enc_rval_t SEQUENCE_OF_encode_uper(
       may_encode = list->count;
     } else {
       may_encode = uper_put_length(po, list->count - encoded_edx, &need_eom);
-      if (may_encode < 0) ASN__ENCODE_FAILED;
+      if (may_encode < 0)
+        ASN__ENCODE_FAILED;
     }
 
     for (edx = encoded_edx; edx < encoded_edx + may_encode; edx++) {
-      void* memb_ptr = list->array[edx];
-      if (!memb_ptr) ASN__ENCODE_FAILED;
+      void *memb_ptr = list->array[edx];
+      if (!memb_ptr)
+        ASN__ENCODE_FAILED;
       er = elm->type->op->uper_encoder(
           elm->type, elm->encoding_constraints.per_constraints, memb_ptr, po);
-      if (er.encoded == -1) ASN__ENCODE_FAILED;
+      if (er.encoded == -1)
+        ASN__ENCODE_FAILED;
     }
 
     if (need_eom && uper_put_length(po, 0, 0))

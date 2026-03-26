@@ -14,12 +14,12 @@ extern "C" {
 namespace oai::ngap {
 
 class QosFlowAcceptedItem {
- public:
+public:
   QosFlowAcceptedItem();
   virtual ~QosFlowAcceptedItem();
 
-  void setQosFlowIdentifier(const QosFlowIdentifier& qosFlowIdentifier);
-  void getQosFlowIdentifier(QosFlowIdentifier& qosFlowIdentifier) const;
+  void setQosFlowIdentifier(const QosFlowIdentifier &qosFlowIdentifier);
+  void getQosFlowIdentifier(QosFlowIdentifier &qosFlowIdentifier) const;
 
   /*
   void setCurrentQoSParametersSetIndex(uint32_t&
@@ -27,15 +27,15 @@ class QosFlowAcceptedItem {
   void getCurrentQoSParametersSetIndex(std::optional<uint32_t>&
                   currentQoSParametersSetIndex) const;
 */
-  bool encode(Ngap_QosFlowAcceptedItem_t&) const;
-  bool decode(const Ngap_QosFlowAcceptedItem_t&);
+  bool encode(Ngap_QosFlowAcceptedItem_t &) const;
+  bool decode(const Ngap_QosFlowAcceptedItem_t &);
 
- private:
-  QosFlowIdentifier m_QosFlowIdentifier;  // Mandatory
+private:
+  QosFlowIdentifier m_QosFlowIdentifier; // Mandatory
   // std::optional<uint32_t>
   //     m_CurrentQoSParametersSetIndex;  // Optional
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

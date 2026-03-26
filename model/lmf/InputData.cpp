@@ -19,44 +19,44 @@
 namespace oai::model::lmf {
 
 InputData::InputData() {
-  m_ExternalClientTypeIsSet   = false;
-  m_CorrelationID             = "";
-  m_CorrelationIDIsSet        = false;
-  m_AmfId                     = "";
-  m_AmfIdIsSet                = false;
-  m_LocationQoSIsSet          = false;
-  m_SupportedGADShapesIsSet   = false;
-  m_Supi                      = "";
-  m_SupiIsSet                 = false;
-  m_Pei                       = "";
-  m_PeiIsSet                  = false;
-  m_Gpsi                      = "";
-  m_GpsiIsSet                 = false;
-  m_EcgiIsSet                 = false;
-  m_EcgiOnSecondNodeIsSet     = false;
-  m_NcgiIsSet                 = false;
-  m_NcgiOnSecondNodeIsSet     = false;
-  m_PriorityIsSet             = false;
-  m_VelocityRequestedIsSet    = false;
-  m_UeLcsCapIsSet             = false;
-  m_LcsServiceType            = 0;
-  m_LcsServiceTypeIsSet       = false;
-  m_LdrTypeIsSet              = false;
-  m_HgmlcCallBackURI          = "";
-  m_HgmlcCallBackURIIsSet     = false;
-  m_VgmlcAddress              = "";
-  m_VgmlcAddressIsSet         = false;
-  m_LdrReference              = "";
-  m_LdrReferenceIsSet         = false;
-  m_PeriodicEventInfoIsSet    = false;
-  m_AreaEventInfoIsSet        = false;
-  m_MotionEventInfoIsSet      = false;
+  m_ExternalClientTypeIsSet = false;
+  m_CorrelationID = "";
+  m_CorrelationIDIsSet = false;
+  m_AmfId = "";
+  m_AmfIdIsSet = false;
+  m_LocationQoSIsSet = false;
+  m_SupportedGADShapesIsSet = false;
+  m_Supi = "";
+  m_SupiIsSet = false;
+  m_Pei = "";
+  m_PeiIsSet = false;
+  m_Gpsi = "";
+  m_GpsiIsSet = false;
+  m_EcgiIsSet = false;
+  m_EcgiOnSecondNodeIsSet = false;
+  m_NcgiIsSet = false;
+  m_NcgiOnSecondNodeIsSet = false;
+  m_PriorityIsSet = false;
+  m_VelocityRequestedIsSet = false;
+  m_UeLcsCapIsSet = false;
+  m_LcsServiceType = 0;
+  m_LcsServiceTypeIsSet = false;
+  m_LdrTypeIsSet = false;
+  m_HgmlcCallBackURI = "";
+  m_HgmlcCallBackURIIsSet = false;
+  m_VgmlcAddress = "";
+  m_VgmlcAddressIsSet = false;
+  m_LdrReference = "";
+  m_LdrReferenceIsSet = false;
+  m_PeriodicEventInfoIsSet = false;
+  m_AreaEventInfoIsSet = false;
+  m_MotionEventInfoIsSet = false;
   m_ReportingAccessTypesIsSet = false;
   m_UeConnectivityStatesIsSet = false;
   m_UeLocationServiceIndIsSet = false;
-  m_LppMessageIsSet           = false;
-  m_SupportedFeatures         = "";
-  m_SupportedFeaturesIsSet    = false;
+  m_LppMessageIsSet = false;
+  m_SupportedFeatures = "";
+  m_SupportedFeaturesIsSet = false;
 }
 
 void InputData::validate() const {
@@ -66,17 +66,17 @@ void InputData::validate() const {
   }
 }
 
-bool InputData::validate(std::stringstream& msg) const {
+bool InputData::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool InputData::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool InputData::validate(std::stringstream &msg,
+                         const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "InputData" : pathPrefix;
 
   if (correlationIDIsSet()) {
-    const std::string& value           = m_CorrelationID;
+    const std::string &value = m_CorrelationID;
     const std::string currentValuePath = _pathPrefix + ".correlationID";
 
     if (value.length() < 1) {
@@ -90,7 +90,7 @@ bool InputData::validate(
   }
 
   if (supportedGADShapesIsSet()) {
-    const std::vector<oai::model::lmf::SupportedGADShapes>& value =
+    const std::vector<oai::model::lmf::SupportedGADShapes> &value =
         m_SupportedGADShapes;
     const std::string currentValuePath = _pathPrefix + ".supportedGADShapes";
 
@@ -98,10 +98,10 @@ bool InputData::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::lmf::SupportedGADShapes& value : value) {
+      int i = 0;
+      for (const oai::model::lmf::SupportedGADShapes &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -115,22 +115,22 @@ bool InputData::validate(
   }
 
   if (supiIsSet()) {
-    const std::string& value           = m_Supi;
+    const std::string &value = m_Supi;
     const std::string currentValuePath = _pathPrefix + ".supi";
   }
 
   if (peiIsSet()) {
-    const std::string& value           = m_Pei;
+    const std::string &value = m_Pei;
     const std::string currentValuePath = _pathPrefix + ".pei";
   }
 
   if (gpsiIsSet()) {
-    const std::string& value           = m_Gpsi;
+    const std::string &value = m_Gpsi;
     const std::string currentValuePath = _pathPrefix + ".gpsi";
   }
 
   if (lcsServiceTypeIsSet()) {
-    const int32_t& value               = m_LcsServiceType;
+    const int32_t &value = m_LcsServiceType;
     const std::string currentValuePath = _pathPrefix + ".lcsServiceType";
 
     if (value < 0) {
@@ -144,7 +144,7 @@ bool InputData::validate(
   }
 
   if (ldrReferenceIsSet()) {
-    const std::string& value           = m_LdrReference;
+    const std::string &value = m_LdrReference;
     const std::string currentValuePath = _pathPrefix + ".ldrReference";
 
     if (value.length() < 2) {
@@ -158,7 +158,7 @@ bool InputData::validate(
   }
 
   if (reportingAccessTypesIsSet()) {
-    const std::vector<oai::model::lmf::ReportingAccessType>& value =
+    const std::vector<oai::model::lmf::ReportingAccessType> &value =
         m_ReportingAccessTypes;
     const std::string currentValuePath = _pathPrefix + ".reportingAccessTypes";
 
@@ -166,10 +166,10 @@ bool InputData::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::lmf::ReportingAccessType& value : value) {
+      int i = 0;
+      for (const oai::model::lmf::ReportingAccessType &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -183,14 +183,14 @@ bool InputData::validate(
   }
 
   if (supportedFeaturesIsSet()) {
-    const std::string& value           = m_SupportedFeatures;
+    const std::string &value = m_SupportedFeatures;
     const std::string currentValuePath = _pathPrefix + ".supportedFeatures";
   }
 
   return success;
 }
 
-bool InputData::operator==(const InputData& rhs) const {
+bool InputData::operator==(const InputData &rhs) const {
   return
 
       ((!externalClientTypeIsSet() && !rhs.externalClientTypeIsSet()) ||
@@ -302,51 +302,71 @@ bool InputData::operator==(const InputData& rhs) const {
           ;
 }
 
-bool InputData::operator!=(const InputData& rhs) const {
+bool InputData::operator!=(const InputData &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const InputData& o) {
+void to_json(nlohmann::json &j, const InputData &o) {
   j = nlohmann::json();
   if (o.externalClientTypeIsSet())
     j["externalClientType"] = o.m_ExternalClientType;
-  if (o.correlationIDIsSet()) j["correlationID"] = o.m_CorrelationID;
-  if (o.amfIdIsSet()) j["amfId"] = o.m_AmfId;
-  if (o.locationQoSIsSet()) j["locationQoS"] = o.m_LocationQoS;
+  if (o.correlationIDIsSet())
+    j["correlationID"] = o.m_CorrelationID;
+  if (o.amfIdIsSet())
+    j["amfId"] = o.m_AmfId;
+  if (o.locationQoSIsSet())
+    j["locationQoS"] = o.m_LocationQoS;
   if (o.supportedGADShapesIsSet() || !o.m_SupportedGADShapes.empty())
     j["supportedGADShapes"] = o.m_SupportedGADShapes;
-  if (o.supiIsSet()) j["supi"] = o.m_Supi;
-  if (o.peiIsSet()) j["pei"] = o.m_Pei;
-  if (o.gpsiIsSet()) j["gpsi"] = o.m_Gpsi;
-  if (o.ecgiIsSet()) j["ecgi"] = o.m_Ecgi;
-  if (o.ecgiOnSecondNodeIsSet()) j["ecgiOnSecondNode"] = o.m_EcgiOnSecondNode;
-  if (o.ncgiIsSet()) j["ncgi"] = o.m_Ncgi;
-  if (o.ncgiOnSecondNodeIsSet()) j["ncgiOnSecondNode"] = o.m_NcgiOnSecondNode;
-  if (o.priorityIsSet()) j["priority"] = o.m_Priority;
+  if (o.supiIsSet())
+    j["supi"] = o.m_Supi;
+  if (o.peiIsSet())
+    j["pei"] = o.m_Pei;
+  if (o.gpsiIsSet())
+    j["gpsi"] = o.m_Gpsi;
+  if (o.ecgiIsSet())
+    j["ecgi"] = o.m_Ecgi;
+  if (o.ecgiOnSecondNodeIsSet())
+    j["ecgiOnSecondNode"] = o.m_EcgiOnSecondNode;
+  if (o.ncgiIsSet())
+    j["ncgi"] = o.m_Ncgi;
+  if (o.ncgiOnSecondNodeIsSet())
+    j["ncgiOnSecondNode"] = o.m_NcgiOnSecondNode;
+  if (o.priorityIsSet())
+    j["priority"] = o.m_Priority;
   if (o.velocityRequestedIsSet())
     j["velocityRequested"] = o.m_VelocityRequested;
-  if (o.ueLcsCapIsSet()) j["ueLcsCap"] = o.m_UeLcsCap;
-  if (o.lcsServiceTypeIsSet()) j["lcsServiceType"] = o.m_LcsServiceType;
-  if (o.ldrTypeIsSet()) j["ldrType"] = o.m_LdrType;
-  if (o.hgmlcCallBackURIIsSet()) j["hgmlcCallBackURI"] = o.m_HgmlcCallBackURI;
-  if (o.vgmlcAddressIsSet()) j["vgmlcAddress"] = o.m_VgmlcAddress;
-  if (o.ldrReferenceIsSet()) j["ldrReference"] = o.m_LdrReference;
+  if (o.ueLcsCapIsSet())
+    j["ueLcsCap"] = o.m_UeLcsCap;
+  if (o.lcsServiceTypeIsSet())
+    j["lcsServiceType"] = o.m_LcsServiceType;
+  if (o.ldrTypeIsSet())
+    j["ldrType"] = o.m_LdrType;
+  if (o.hgmlcCallBackURIIsSet())
+    j["hgmlcCallBackURI"] = o.m_HgmlcCallBackURI;
+  if (o.vgmlcAddressIsSet())
+    j["vgmlcAddress"] = o.m_VgmlcAddress;
+  if (o.ldrReferenceIsSet())
+    j["ldrReference"] = o.m_LdrReference;
   if (o.periodicEventInfoIsSet())
     j["periodicEventInfo"] = o.m_PeriodicEventInfo;
-  if (o.areaEventInfoIsSet()) j["areaEventInfo"] = o.m_AreaEventInfo;
-  if (o.motionEventInfoIsSet()) j["motionEventInfo"] = o.m_MotionEventInfo;
+  if (o.areaEventInfoIsSet())
+    j["areaEventInfo"] = o.m_AreaEventInfo;
+  if (o.motionEventInfoIsSet())
+    j["motionEventInfo"] = o.m_MotionEventInfo;
   if (o.reportingAccessTypesIsSet() || !o.m_ReportingAccessTypes.empty())
     j["reportingAccessTypes"] = o.m_ReportingAccessTypes;
   if (o.ueConnectivityStatesIsSet())
     j["ueConnectivityStates"] = o.m_UeConnectivityStates;
   if (o.ueLocationServiceIndIsSet())
     j["ueLocationServiceInd"] = o.m_UeLocationServiceInd;
-  if (o.lppMessageIsSet()) j["lppMessage"] = o.m_LppMessage;
+  if (o.lppMessageIsSet())
+    j["lppMessage"] = o.m_LppMessage;
   if (o.supportedFeaturesIsSet())
     j["supportedFeatures"] = o.m_SupportedFeatures;
 }
 
-void from_json(const nlohmann::json& j, InputData& o) {
+void from_json(const nlohmann::json &j, InputData &o) {
   if (j.find("externalClientType") != j.end()) {
     j.at("externalClientType").get_to(o.m_ExternalClientType);
     o.m_ExternalClientTypeIsSet = true;
@@ -465,314 +485,214 @@ oai::model::lmf::ExternalClientType InputData::getExternalClientType() const {
   return m_ExternalClientType;
 }
 void InputData::setExternalClientType(
-    oai::model::lmf::ExternalClientType const& value) {
-  m_ExternalClientType      = value;
+    oai::model::lmf::ExternalClientType const &value) {
+  m_ExternalClientType = value;
   m_ExternalClientTypeIsSet = true;
 }
 bool InputData::externalClientTypeIsSet() const {
   return m_ExternalClientTypeIsSet;
 }
-void InputData::unsetExternalClientType() {
-  m_ExternalClientTypeIsSet = false;
-}
-std::string InputData::getCorrelationID() const {
-  return m_CorrelationID;
-}
-void InputData::setCorrelationID(std::string const& value) {
-  m_CorrelationID      = value;
+void InputData::unsetExternalClientType() { m_ExternalClientTypeIsSet = false; }
+std::string InputData::getCorrelationID() const { return m_CorrelationID; }
+void InputData::setCorrelationID(std::string const &value) {
+  m_CorrelationID = value;
   m_CorrelationIDIsSet = true;
 }
-bool InputData::correlationIDIsSet() const {
-  return m_CorrelationIDIsSet;
-}
-void InputData::unsetCorrelationID() {
-  m_CorrelationIDIsSet = false;
-}
-std::string InputData::getAmfId() const {
-  return m_AmfId;
-}
-void InputData::setAmfId(std::string const& value) {
-  m_AmfId      = value;
+bool InputData::correlationIDIsSet() const { return m_CorrelationIDIsSet; }
+void InputData::unsetCorrelationID() { m_CorrelationIDIsSet = false; }
+std::string InputData::getAmfId() const { return m_AmfId; }
+void InputData::setAmfId(std::string const &value) {
+  m_AmfId = value;
   m_AmfIdIsSet = true;
 }
-bool InputData::amfIdIsSet() const {
-  return m_AmfIdIsSet;
-}
-void InputData::unsetAmfId() {
-  m_AmfIdIsSet = false;
-}
+bool InputData::amfIdIsSet() const { return m_AmfIdIsSet; }
+void InputData::unsetAmfId() { m_AmfIdIsSet = false; }
 oai::model::lmf::LocationQoS InputData::getLocationQoS() const {
   return m_LocationQoS;
 }
-void InputData::setLocationQoS(oai::model::lmf::LocationQoS const& value) {
-  m_LocationQoS      = value;
+void InputData::setLocationQoS(oai::model::lmf::LocationQoS const &value) {
+  m_LocationQoS = value;
   m_LocationQoSIsSet = true;
 }
-bool InputData::locationQoSIsSet() const {
-  return m_LocationQoSIsSet;
-}
-void InputData::unsetLocationQoS() {
-  m_LocationQoSIsSet = false;
-}
+bool InputData::locationQoSIsSet() const { return m_LocationQoSIsSet; }
+void InputData::unsetLocationQoS() { m_LocationQoSIsSet = false; }
 std::vector<oai::model::lmf::SupportedGADShapes>
 InputData::getSupportedGADShapes() const {
   return m_SupportedGADShapes;
 }
 void InputData::setSupportedGADShapes(
-    std::vector<oai::model::lmf::SupportedGADShapes> const& value) {
-  m_SupportedGADShapes      = value;
+    std::vector<oai::model::lmf::SupportedGADShapes> const &value) {
+  m_SupportedGADShapes = value;
   m_SupportedGADShapesIsSet = true;
 }
 bool InputData::supportedGADShapesIsSet() const {
   return m_SupportedGADShapesIsSet;
 }
-void InputData::unsetSupportedGADShapes() {
-  m_SupportedGADShapesIsSet = false;
-}
-std::string InputData::getSupi() const {
-  return m_Supi;
-}
-void InputData::setSupi(std::string const& value) {
-  m_Supi      = value;
+void InputData::unsetSupportedGADShapes() { m_SupportedGADShapesIsSet = false; }
+std::string InputData::getSupi() const { return m_Supi; }
+void InputData::setSupi(std::string const &value) {
+  m_Supi = value;
   m_SupiIsSet = true;
 }
-bool InputData::supiIsSet() const {
-  return m_SupiIsSet;
-}
-void InputData::unsetSupi() {
-  m_SupiIsSet = false;
-}
-std::string InputData::getPei() const {
-  return m_Pei;
-}
-void InputData::setPei(std::string const& value) {
-  m_Pei      = value;
+bool InputData::supiIsSet() const { return m_SupiIsSet; }
+void InputData::unsetSupi() { m_SupiIsSet = false; }
+std::string InputData::getPei() const { return m_Pei; }
+void InputData::setPei(std::string const &value) {
+  m_Pei = value;
   m_PeiIsSet = true;
 }
-bool InputData::peiIsSet() const {
-  return m_PeiIsSet;
-}
-void InputData::unsetPei() {
-  m_PeiIsSet = false;
-}
-std::string InputData::getGpsi() const {
-  return m_Gpsi;
-}
-void InputData::setGpsi(std::string const& value) {
-  m_Gpsi      = value;
+bool InputData::peiIsSet() const { return m_PeiIsSet; }
+void InputData::unsetPei() { m_PeiIsSet = false; }
+std::string InputData::getGpsi() const { return m_Gpsi; }
+void InputData::setGpsi(std::string const &value) {
+  m_Gpsi = value;
   m_GpsiIsSet = true;
 }
-bool InputData::gpsiIsSet() const {
-  return m_GpsiIsSet;
-}
-void InputData::unsetGpsi() {
-  m_GpsiIsSet = false;
-}
-oai::model::common::Ecgi InputData::getEcgi() const {
-  return m_Ecgi;
-}
-void InputData::setEcgi(oai::model::common::Ecgi const& value) {
-  m_Ecgi      = value;
+bool InputData::gpsiIsSet() const { return m_GpsiIsSet; }
+void InputData::unsetGpsi() { m_GpsiIsSet = false; }
+oai::model::common::Ecgi InputData::getEcgi() const { return m_Ecgi; }
+void InputData::setEcgi(oai::model::common::Ecgi const &value) {
+  m_Ecgi = value;
   m_EcgiIsSet = true;
 }
-bool InputData::ecgiIsSet() const {
-  return m_EcgiIsSet;
-}
-void InputData::unsetEcgi() {
-  m_EcgiIsSet = false;
-}
+bool InputData::ecgiIsSet() const { return m_EcgiIsSet; }
+void InputData::unsetEcgi() { m_EcgiIsSet = false; }
 oai::model::common::Ecgi InputData::getEcgiOnSecondNode() const {
   return m_EcgiOnSecondNode;
 }
-void InputData::setEcgiOnSecondNode(oai::model::common::Ecgi const& value) {
-  m_EcgiOnSecondNode      = value;
+void InputData::setEcgiOnSecondNode(oai::model::common::Ecgi const &value) {
+  m_EcgiOnSecondNode = value;
   m_EcgiOnSecondNodeIsSet = true;
 }
 bool InputData::ecgiOnSecondNodeIsSet() const {
   return m_EcgiOnSecondNodeIsSet;
 }
-void InputData::unsetEcgiOnSecondNode() {
-  m_EcgiOnSecondNodeIsSet = false;
-}
-oai::model::common::Ncgi InputData::getNcgi() const {
-  return m_Ncgi;
-}
-void InputData::setNcgi(oai::model::common::Ncgi const& value) {
-  m_Ncgi      = value;
+void InputData::unsetEcgiOnSecondNode() { m_EcgiOnSecondNodeIsSet = false; }
+oai::model::common::Ncgi InputData::getNcgi() const { return m_Ncgi; }
+void InputData::setNcgi(oai::model::common::Ncgi const &value) {
+  m_Ncgi = value;
   m_NcgiIsSet = true;
 }
-bool InputData::ncgiIsSet() const {
-  return m_NcgiIsSet;
-}
-void InputData::unsetNcgi() {
-  m_NcgiIsSet = false;
-}
+bool InputData::ncgiIsSet() const { return m_NcgiIsSet; }
+void InputData::unsetNcgi() { m_NcgiIsSet = false; }
 oai::model::common::Ncgi InputData::getNcgiOnSecondNode() const {
   return m_NcgiOnSecondNode;
 }
-void InputData::setNcgiOnSecondNode(oai::model::common::Ncgi const& value) {
-  m_NcgiOnSecondNode      = value;
+void InputData::setNcgiOnSecondNode(oai::model::common::Ncgi const &value) {
+  m_NcgiOnSecondNode = value;
   m_NcgiOnSecondNodeIsSet = true;
 }
 bool InputData::ncgiOnSecondNodeIsSet() const {
   return m_NcgiOnSecondNodeIsSet;
 }
-void InputData::unsetNcgiOnSecondNode() {
-  m_NcgiOnSecondNodeIsSet = false;
-}
+void InputData::unsetNcgiOnSecondNode() { m_NcgiOnSecondNodeIsSet = false; }
 oai::model::lmf::LcsPriority InputData::getPriority() const {
   return m_Priority;
 }
-void InputData::setPriority(oai::model::lmf::LcsPriority const& value) {
-  m_Priority      = value;
+void InputData::setPriority(oai::model::lmf::LcsPriority const &value) {
+  m_Priority = value;
   m_PriorityIsSet = true;
 }
-bool InputData::priorityIsSet() const {
-  return m_PriorityIsSet;
-}
-void InputData::unsetPriority() {
-  m_PriorityIsSet = false;
-}
+bool InputData::priorityIsSet() const { return m_PriorityIsSet; }
+void InputData::unsetPriority() { m_PriorityIsSet = false; }
 oai::model::lmf::VelocityRequested InputData::getVelocityRequested() const {
   return m_VelocityRequested;
 }
 void InputData::setVelocityRequested(
-    oai::model::lmf::VelocityRequested const& value) {
-  m_VelocityRequested      = value;
+    oai::model::lmf::VelocityRequested const &value) {
+  m_VelocityRequested = value;
   m_VelocityRequestedIsSet = true;
 }
 bool InputData::velocityRequestedIsSet() const {
   return m_VelocityRequestedIsSet;
 }
-void InputData::unsetVelocityRequested() {
-  m_VelocityRequestedIsSet = false;
-}
+void InputData::unsetVelocityRequested() { m_VelocityRequestedIsSet = false; }
 oai::model::lmf::UeLcsCapability InputData::getUeLcsCap() const {
   return m_UeLcsCap;
 }
-void InputData::setUeLcsCap(oai::model::lmf::UeLcsCapability const& value) {
-  m_UeLcsCap      = value;
+void InputData::setUeLcsCap(oai::model::lmf::UeLcsCapability const &value) {
+  m_UeLcsCap = value;
   m_UeLcsCapIsSet = true;
 }
-bool InputData::ueLcsCapIsSet() const {
-  return m_UeLcsCapIsSet;
-}
-void InputData::unsetUeLcsCap() {
-  m_UeLcsCapIsSet = false;
-}
-int32_t InputData::getLcsServiceType() const {
-  return m_LcsServiceType;
-}
+bool InputData::ueLcsCapIsSet() const { return m_UeLcsCapIsSet; }
+void InputData::unsetUeLcsCap() { m_UeLcsCapIsSet = false; }
+int32_t InputData::getLcsServiceType() const { return m_LcsServiceType; }
 void InputData::setLcsServiceType(int32_t const value) {
-  m_LcsServiceType      = value;
+  m_LcsServiceType = value;
   m_LcsServiceTypeIsSet = true;
 }
-bool InputData::lcsServiceTypeIsSet() const {
-  return m_LcsServiceTypeIsSet;
-}
-void InputData::unsetLcsServiceType() {
-  m_LcsServiceTypeIsSet = false;
-}
-oai::model::lmf::LdrType InputData::getLdrType() const {
-  return m_LdrType;
-}
-void InputData::setLdrType(oai::model::lmf::LdrType const& value) {
-  m_LdrType      = value;
+bool InputData::lcsServiceTypeIsSet() const { return m_LcsServiceTypeIsSet; }
+void InputData::unsetLcsServiceType() { m_LcsServiceTypeIsSet = false; }
+oai::model::lmf::LdrType InputData::getLdrType() const { return m_LdrType; }
+void InputData::setLdrType(oai::model::lmf::LdrType const &value) {
+  m_LdrType = value;
   m_LdrTypeIsSet = true;
 }
-bool InputData::ldrTypeIsSet() const {
-  return m_LdrTypeIsSet;
-}
-void InputData::unsetLdrType() {
-  m_LdrTypeIsSet = false;
-}
+bool InputData::ldrTypeIsSet() const { return m_LdrTypeIsSet; }
+void InputData::unsetLdrType() { m_LdrTypeIsSet = false; }
 std::string InputData::getHgmlcCallBackURI() const {
   return m_HgmlcCallBackURI;
 }
-void InputData::setHgmlcCallBackURI(std::string const& value) {
-  m_HgmlcCallBackURI      = value;
+void InputData::setHgmlcCallBackURI(std::string const &value) {
+  m_HgmlcCallBackURI = value;
   m_HgmlcCallBackURIIsSet = true;
 }
 bool InputData::hgmlcCallBackURIIsSet() const {
   return m_HgmlcCallBackURIIsSet;
 }
-void InputData::unsetHgmlcCallBackURI() {
-  m_HgmlcCallBackURIIsSet = false;
-}
-std::string InputData::getVgmlcAddress() const {
-  return m_VgmlcAddress;
-}
-void InputData::setVgmlcAddress(std::string const& value) {
-  m_VgmlcAddress      = value;
+void InputData::unsetHgmlcCallBackURI() { m_HgmlcCallBackURIIsSet = false; }
+std::string InputData::getVgmlcAddress() const { return m_VgmlcAddress; }
+void InputData::setVgmlcAddress(std::string const &value) {
+  m_VgmlcAddress = value;
   m_VgmlcAddressIsSet = true;
 }
-bool InputData::vgmlcAddressIsSet() const {
-  return m_VgmlcAddressIsSet;
-}
-void InputData::unsetVgmlcAddress() {
-  m_VgmlcAddressIsSet = false;
-}
-std::string InputData::getLdrReference() const {
-  return m_LdrReference;
-}
-void InputData::setLdrReference(std::string const& value) {
-  m_LdrReference      = value;
+bool InputData::vgmlcAddressIsSet() const { return m_VgmlcAddressIsSet; }
+void InputData::unsetVgmlcAddress() { m_VgmlcAddressIsSet = false; }
+std::string InputData::getLdrReference() const { return m_LdrReference; }
+void InputData::setLdrReference(std::string const &value) {
+  m_LdrReference = value;
   m_LdrReferenceIsSet = true;
 }
-bool InputData::ldrReferenceIsSet() const {
-  return m_LdrReferenceIsSet;
-}
-void InputData::unsetLdrReference() {
-  m_LdrReferenceIsSet = false;
-}
+bool InputData::ldrReferenceIsSet() const { return m_LdrReferenceIsSet; }
+void InputData::unsetLdrReference() { m_LdrReferenceIsSet = false; }
 oai::model::lmf::PeriodicEventInfo InputData::getPeriodicEventInfo() const {
   return m_PeriodicEventInfo;
 }
 void InputData::setPeriodicEventInfo(
-    oai::model::lmf::PeriodicEventInfo const& value) {
-  m_PeriodicEventInfo      = value;
+    oai::model::lmf::PeriodicEventInfo const &value) {
+  m_PeriodicEventInfo = value;
   m_PeriodicEventInfoIsSet = true;
 }
 bool InputData::periodicEventInfoIsSet() const {
   return m_PeriodicEventInfoIsSet;
 }
-void InputData::unsetPeriodicEventInfo() {
-  m_PeriodicEventInfoIsSet = false;
-}
+void InputData::unsetPeriodicEventInfo() { m_PeriodicEventInfoIsSet = false; }
 oai::model::lmf::AreaEventInfo InputData::getAreaEventInfo() const {
   return m_AreaEventInfo;
 }
-void InputData::setAreaEventInfo(oai::model::lmf::AreaEventInfo const& value) {
-  m_AreaEventInfo      = value;
+void InputData::setAreaEventInfo(oai::model::lmf::AreaEventInfo const &value) {
+  m_AreaEventInfo = value;
   m_AreaEventInfoIsSet = true;
 }
-bool InputData::areaEventInfoIsSet() const {
-  return m_AreaEventInfoIsSet;
-}
-void InputData::unsetAreaEventInfo() {
-  m_AreaEventInfoIsSet = false;
-}
+bool InputData::areaEventInfoIsSet() const { return m_AreaEventInfoIsSet; }
+void InputData::unsetAreaEventInfo() { m_AreaEventInfoIsSet = false; }
 oai::model::lmf::MotionEventInfo InputData::getMotionEventInfo() const {
   return m_MotionEventInfo;
 }
 void InputData::setMotionEventInfo(
-    oai::model::lmf::MotionEventInfo const& value) {
-  m_MotionEventInfo      = value;
+    oai::model::lmf::MotionEventInfo const &value) {
+  m_MotionEventInfo = value;
   m_MotionEventInfoIsSet = true;
 }
-bool InputData::motionEventInfoIsSet() const {
-  return m_MotionEventInfoIsSet;
-}
-void InputData::unsetMotionEventInfo() {
-  m_MotionEventInfoIsSet = false;
-}
+bool InputData::motionEventInfoIsSet() const { return m_MotionEventInfoIsSet; }
+void InputData::unsetMotionEventInfo() { m_MotionEventInfoIsSet = false; }
 std::vector<oai::model::lmf::ReportingAccessType>
 InputData::getReportingAccessTypes() const {
   return m_ReportingAccessTypes;
 }
 void InputData::setReportingAccessTypes(
-    std::vector<oai::model::lmf::ReportingAccessType> const& value) {
-  m_ReportingAccessTypes      = value;
+    std::vector<oai::model::lmf::ReportingAccessType> const &value) {
+  m_ReportingAccessTypes = value;
   m_ReportingAccessTypesIsSet = true;
 }
 bool InputData::reportingAccessTypesIsSet() const {
@@ -781,13 +701,13 @@ bool InputData::reportingAccessTypesIsSet() const {
 void InputData::unsetReportingAccessTypes() {
   m_ReportingAccessTypesIsSet = false;
 }
-oai::model::lmf::UeConnectivityState InputData::getUeConnectivityStates()
-    const {
+oai::model::lmf::UeConnectivityState
+InputData::getUeConnectivityStates() const {
   return m_UeConnectivityStates;
 }
 void InputData::setUeConnectivityStates(
-    oai::model::lmf::UeConnectivityState const& value) {
-  m_UeConnectivityStates      = value;
+    oai::model::lmf::UeConnectivityState const &value) {
+  m_UeConnectivityStates = value;
   m_UeConnectivityStatesIsSet = true;
 }
 bool InputData::ueConnectivityStatesIsSet() const {
@@ -796,13 +716,13 @@ bool InputData::ueConnectivityStatesIsSet() const {
 void InputData::unsetUeConnectivityStates() {
   m_UeConnectivityStatesIsSet = false;
 }
-oai::model::lmf::UeLocationServiceInd InputData::getUeLocationServiceInd()
-    const {
+oai::model::lmf::UeLocationServiceInd
+InputData::getUeLocationServiceInd() const {
   return m_UeLocationServiceInd;
 }
 void InputData::setUeLocationServiceInd(
-    oai::model::lmf::UeLocationServiceInd const& value) {
-  m_UeLocationServiceInd      = value;
+    oai::model::lmf::UeLocationServiceInd const &value) {
+  m_UeLocationServiceInd = value;
   m_UeLocationServiceIndIsSet = true;
 }
 bool InputData::ueLocationServiceIndIsSet() const {
@@ -815,28 +735,22 @@ oai::model::common::RefToBinaryData InputData::getLppMessage() const {
   return m_LppMessage;
 }
 void InputData::setLppMessage(
-    oai::model::common::RefToBinaryData const& value) {
-  m_LppMessage      = value;
+    oai::model::common::RefToBinaryData const &value) {
+  m_LppMessage = value;
   m_LppMessageIsSet = true;
 }
-bool InputData::lppMessageIsSet() const {
-  return m_LppMessageIsSet;
-}
-void InputData::unsetLppMessage() {
-  m_LppMessageIsSet = false;
-}
+bool InputData::lppMessageIsSet() const { return m_LppMessageIsSet; }
+void InputData::unsetLppMessage() { m_LppMessageIsSet = false; }
 std::string InputData::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
-void InputData::setSupportedFeatures(std::string const& value) {
-  m_SupportedFeatures      = value;
+void InputData::setSupportedFeatures(std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool InputData::supportedFeaturesIsSet() const {
   return m_SupportedFeaturesIsSet;
 }
-void InputData::unsetSupportedFeatures() {
-  m_SupportedFeaturesIsSet = false;
-}
+void InputData::unsetSupportedFeatures() { m_SupportedFeaturesIsSet = false; }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

@@ -27,9 +27,9 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_ServiceAreaInformation-Item */
 typedef struct Ngap_ServiceAreaInformation_Item {
   Ngap_PLMNIdentity_t pLMNIdentity;
-  struct Ngap_AllowedTACs* allowedTACs;                  /* OPTIONAL */
-  struct Ngap_NotAllowedTACs* notAllowedTACs;            /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_AllowedTACs *allowedTACs;                  /* OPTIONAL */
+  struct Ngap_NotAllowedTACs *notAllowedTACs;            /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

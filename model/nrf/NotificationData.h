@@ -19,12 +19,12 @@
 #ifndef NotificationData_H_
 #define NotificationData_H_
 
-#include "NFProfile.h"
 #include "ChangeItem.h"
-#include <string>
+#include "NFProfile.h"
 #include "NotificationEventType.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::nrf {
 
@@ -32,7 +32,7 @@ namespace oai::model::nrf {
 ///
 /// </summary>
 class NotificationData {
- public:
+public:
   NotificationData();
   virtual ~NotificationData();
 
@@ -45,32 +45,32 @@ class NotificationData {
   ///
   /// </summary>
   NotificationEventType getEvent() const;
-  void setEvent(NotificationEventType const& value);
+  void setEvent(NotificationEventType const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getNfInstanceUri() const;
-  void setNfInstanceUri(std::string const& value);
+  void setNfInstanceUri(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   NFProfile getNfProfile() const;
-  void setNfProfile(NFProfile const& value);
+  void setNfProfile(NFProfile const &value);
   bool nfProfileIsSet() const;
   void unsetNfProfile();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::ChangeItem>& getProfileChanges();
-  void setProfileChanges(
-      std::vector<oai::model::common::ChangeItem> const& value);
+  std::vector<oai::model::common::ChangeItem> &getProfileChanges();
+  void
+  setProfileChanges(std::vector<oai::model::common::ChangeItem> const &value);
   bool profileChangesIsSet() const;
   void unsetProfileChanges();
 
-  friend void to_json(nlohmann::json& j, const NotificationData& o);
-  friend void from_json(const nlohmann::json& j, NotificationData& o);
+  friend void to_json(nlohmann::json &j, const NotificationData &o);
+  friend void from_json(const nlohmann::json &j, NotificationData &o);
 
- protected:
+protected:
   NotificationEventType m_Event;
 
   std::string m_NfInstanceUri;
@@ -81,6 +81,6 @@ class NotificationData {
   bool m_ProfileChangesIsSet;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* NotificationData_H_ */

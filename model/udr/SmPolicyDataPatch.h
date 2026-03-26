@@ -35,7 +35,7 @@ namespace oai::udr::model {
 /// Contains the SM policy data for a given subscriber.
 /// </summary>
 class SmPolicyDataPatch {
- public:
+public:
   SmPolicyDataPatch();
   virtual ~SmPolicyDataPatch();
 
@@ -47,29 +47,29 @@ class SmPolicyDataPatch {
   /// <summary>
   ///
   /// </summary>
-  std::map<std::string, UsageMonData>& getUmData();
-  void setUmData(std::map<std::string, UsageMonData> const& value);
+  std::map<std::string, UsageMonData> &getUmData();
+  void setUmData(std::map<std::string, UsageMonData> const &value);
   bool umDataIsSet() const;
   void unsetUmData();
   /// <summary>
   ///
   /// </summary>
-  std::map<std::string, SmPolicySnssaiDataPatch>& getSmPolicySnssaiData();
+  std::map<std::string, SmPolicySnssaiDataPatch> &getSmPolicySnssaiData();
   void setSmPolicySnssaiData(
-      std::map<std::string, SmPolicySnssaiDataPatch> const& value);
+      std::map<std::string, SmPolicySnssaiDataPatch> const &value);
   bool smPolicySnssaiDataIsSet() const;
   void unsetSmPolicySnssaiData();
 
-  friend void to_json(nlohmann::json& j, const SmPolicyDataPatch& o);
-  friend void from_json(const nlohmann::json& j, SmPolicyDataPatch& o);
+  friend void to_json(nlohmann::json &j, const SmPolicyDataPatch &o);
+  friend void from_json(const nlohmann::json &j, SmPolicyDataPatch &o);
 
- protected:
+protected:
   std::map<std::string, UsageMonData> m_UmData;
   bool m_UmDataIsSet;
   std::map<std::string, SmPolicySnssaiDataPatch> m_SmPolicySnssaiData;
   bool m_SmPolicySnssaiDataIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* SmPolicyDataPatch_H_ */

@@ -21,24 +21,24 @@ namespace nssf_server {
 namespace model {
 
 AuthorizedNetworkSliceInfo::AuthorizedNetworkSliceInfo() {
-  m_AllowedNssaiListIsSet        = false;
-  m_ConfiguredNssaiIsSet         = false;
-  m_TargetAmfSet                 = "";
-  m_TargetAmfSetIsSet            = false;
-  m_CandidateAmfListIsSet        = false;
-  m_RejectedNssaiInPlmnIsSet     = false;
-  m_RejectedNssaiInTaIsSet       = false;
-  m_NsiInformationIsSet          = false;
-  m_SupportedFeatures            = "";
-  m_SupportedFeaturesIsSet       = false;
-  m_NrfAmfSet                    = "";
-  m_NrfAmfSetIsSet               = false;
-  m_NrfAmfSetNfMgtUri            = "";
-  m_NrfAmfSetNfMgtUriIsSet       = false;
-  m_NrfAmfSetAccessTokenUri      = "";
+  m_AllowedNssaiListIsSet = false;
+  m_ConfiguredNssaiIsSet = false;
+  m_TargetAmfSet = "";
+  m_TargetAmfSetIsSet = false;
+  m_CandidateAmfListIsSet = false;
+  m_RejectedNssaiInPlmnIsSet = false;
+  m_RejectedNssaiInTaIsSet = false;
+  m_NsiInformationIsSet = false;
+  m_SupportedFeatures = "";
+  m_SupportedFeaturesIsSet = false;
+  m_NrfAmfSet = "";
+  m_NrfAmfSetIsSet = false;
+  m_NrfAmfSetNfMgtUri = "";
+  m_NrfAmfSetNfMgtUriIsSet = false;
+  m_NrfAmfSetAccessTokenUri = "";
   m_NrfAmfSetAccessTokenUriIsSet = false;
-  m_TargetAmfServiceSet          = "";
-  m_TargetAmfServiceSetIsSet     = false;
+  m_TargetAmfServiceSet = "";
+  m_TargetAmfServiceSetIsSet = false;
 }
 
 void AuthorizedNetworkSliceInfo::validate() const {
@@ -49,28 +49,28 @@ void AuthorizedNetworkSliceInfo::validate() const {
   // }
 }
 
-bool AuthorizedNetworkSliceInfo::validate(std::stringstream& msg) const {
+bool AuthorizedNetworkSliceInfo::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AuthorizedNetworkSliceInfo::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool AuthorizedNetworkSliceInfo::validate(std::stringstream &msg,
+                                          const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AuthorizedNetworkSliceInfo" : pathPrefix;
 
   if (allowedNssaiListIsSet()) {
-    const std::vector<AllowedNssai>& value = m_AllowedNssaiList;
-    const std::string currentValuePath     = _pathPrefix + ".allowedNssaiList";
+    const std::vector<AllowedNssai> &value = m_AllowedNssaiList;
+    const std::string currentValuePath = _pathPrefix + ".allowedNssaiList";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const AllowedNssai& value : value) {
+      int i = 0;
+      for (const AllowedNssai &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -83,17 +83,17 @@ bool AuthorizedNetworkSliceInfo::validate(
   }
 
   if (configuredNssaiIsSet()) {
-    const std::vector<ConfiguredSnssai>& value = m_ConfiguredNssai;
+    const std::vector<ConfiguredSnssai> &value = m_ConfiguredNssai;
     const std::string currentValuePath = _pathPrefix + ".configuredNssai";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const ConfiguredSnssai& value : value) {
+      int i = 0;
+      for (const ConfiguredSnssai &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -106,22 +106,22 @@ bool AuthorizedNetworkSliceInfo::validate(
   }
 
   if (targetAmfSetIsSet()) {
-    const std::string& value           = m_TargetAmfSet;
+    const std::string &value = m_TargetAmfSet;
     const std::string currentValuePath = _pathPrefix + ".targetAmfSet";
   }
 
   if (candidateAmfListIsSet()) {
-    const std::vector<std::string>& value = m_CandidateAmfList;
-    const std::string currentValuePath    = _pathPrefix + ".candidateAmfList";
+    const std::vector<std::string> &value = m_CandidateAmfList;
+    const std::string currentValuePath = _pathPrefix + ".candidateAmfList";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const std::string& value : value) {
+      int i = 0;
+      for (const std::string &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -131,7 +131,7 @@ bool AuthorizedNetworkSliceInfo::validate(
   }
 
   if (rejectedNssaiInPlmnIsSet()) {
-    const std::vector<oai::model::common::Snssai>& value =
+    const std::vector<oai::model::common::Snssai> &value =
         m_RejectedNssaiInPlmn;
     const std::string currentValuePath = _pathPrefix + ".rejectedNssaiInPlmn";
 
@@ -139,10 +139,10 @@ bool AuthorizedNetworkSliceInfo::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::Snssai& value : value) {
+      int i = 0;
+      for (const oai::model::common::Snssai &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -156,17 +156,17 @@ bool AuthorizedNetworkSliceInfo::validate(
   }
 
   if (rejectedNssaiInTaIsSet()) {
-    const std::vector<oai::model::common::Snssai>& value = m_RejectedNssaiInTa;
+    const std::vector<oai::model::common::Snssai> &value = m_RejectedNssaiInTa;
     const std::string currentValuePath = _pathPrefix + ".rejectedNssaiInTa";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::Snssai& value : value) {
+      int i = 0;
+      for (const oai::model::common::Snssai &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -180,7 +180,7 @@ bool AuthorizedNetworkSliceInfo::validate(
   }
 
   if (supportedFeaturesIsSet()) {
-    const std::string& value           = m_SupportedFeatures;
+    const std::string &value = m_SupportedFeatures;
     const std::string currentValuePath = _pathPrefix + ".supportedFeatures";
   }
 
@@ -188,7 +188,7 @@ bool AuthorizedNetworkSliceInfo::validate(
 }
 
 bool AuthorizedNetworkSliceInfo::operator==(
-    const AuthorizedNetworkSliceInfo& rhs) const {
+    const AuthorizedNetworkSliceInfo &rhs) const {
   return
 
       ((!allowedNssaiListIsSet() && !rhs.allowedNssaiListIsSet()) ||
@@ -244,27 +244,30 @@ bool AuthorizedNetworkSliceInfo::operator==(
 }
 
 bool AuthorizedNetworkSliceInfo::operator!=(
-    const AuthorizedNetworkSliceInfo& rhs) const {
+    const AuthorizedNetworkSliceInfo &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AuthorizedNetworkSliceInfo& o) {
+void to_json(nlohmann::json &j, const AuthorizedNetworkSliceInfo &o) {
   j = nlohmann::json();
   if (o.allowedNssaiListIsSet() || !o.m_AllowedNssaiList.empty())
     j["allowedNssaiList"] = o.m_AllowedNssaiList;
   if (o.configuredNssaiIsSet() || !o.m_ConfiguredNssai.empty())
     j["configuredNssai"] = o.m_ConfiguredNssai;
-  if (o.targetAmfSetIsSet()) j["targetAmfSet"] = o.m_TargetAmfSet;
+  if (o.targetAmfSetIsSet())
+    j["targetAmfSet"] = o.m_TargetAmfSet;
   if (o.candidateAmfListIsSet() || !o.m_CandidateAmfList.empty())
     j["candidateAmfList"] = o.m_CandidateAmfList;
   if (o.rejectedNssaiInPlmnIsSet() || !o.m_RejectedNssaiInPlmn.empty())
     j["rejectedNssaiInPlmn"] = o.m_RejectedNssaiInPlmn;
   if (o.rejectedNssaiInTaIsSet() || !o.m_RejectedNssaiInTa.empty())
     j["rejectedNssaiInTa"] = o.m_RejectedNssaiInTa;
-  if (o.nsiInformationIsSet()) j["nsiInformation"] = o.m_NsiInformation;
+  if (o.nsiInformationIsSet())
+    j["nsiInformation"] = o.m_NsiInformation;
   if (o.supportedFeaturesIsSet())
     j["supportedFeatures"] = o.m_SupportedFeatures;
-  if (o.nrfAmfSetIsSet()) j["nrfAmfSet"] = o.m_NrfAmfSet;
+  if (o.nrfAmfSetIsSet())
+    j["nrfAmfSet"] = o.m_NrfAmfSet;
   if (o.nrfAmfSetNfMgtUriIsSet())
     j["nrfAmfSetNfMgtUri"] = o.m_NrfAmfSetNfMgtUri;
   if (o.nrfAmfSetAccessTokenUriIsSet())
@@ -273,7 +276,7 @@ void to_json(nlohmann::json& j, const AuthorizedNetworkSliceInfo& o) {
     j["targetAmfServiceSet"] = o.m_TargetAmfServiceSet;
 }
 
-void from_json(const nlohmann::json& j, AuthorizedNetworkSliceInfo& o) {
+void from_json(const nlohmann::json &j, AuthorizedNetworkSliceInfo &o) {
   if (j.find("allowedNssaiList") != j.end()) {
     j.at("allowedNssaiList").get_to(o.m_AllowedNssaiList);
     o.m_AllowedNssaiListIsSet = true;
@@ -324,13 +327,13 @@ void from_json(const nlohmann::json& j, AuthorizedNetworkSliceInfo& o) {
   }
 }
 
-std::vector<AllowedNssai> AuthorizedNetworkSliceInfo::getAllowedNssaiList()
-    const {
+std::vector<AllowedNssai>
+AuthorizedNetworkSliceInfo::getAllowedNssaiList() const {
   return m_AllowedNssaiList;
 }
 void AuthorizedNetworkSliceInfo::setAllowedNssaiList(
-    std::vector<AllowedNssai> const& value) {
-  m_AllowedNssaiList      = value;
+    std::vector<AllowedNssai> const &value) {
+  m_AllowedNssaiList = value;
   m_AllowedNssaiListIsSet = true;
 }
 bool AuthorizedNetworkSliceInfo::allowedNssaiListIsSet() const {
@@ -339,13 +342,13 @@ bool AuthorizedNetworkSliceInfo::allowedNssaiListIsSet() const {
 void AuthorizedNetworkSliceInfo::unsetAllowedNssaiList() {
   m_AllowedNssaiListIsSet = false;
 }
-std::vector<ConfiguredSnssai> AuthorizedNetworkSliceInfo::getConfiguredNssai()
-    const {
+std::vector<ConfiguredSnssai>
+AuthorizedNetworkSliceInfo::getConfiguredNssai() const {
   return m_ConfiguredNssai;
 }
 void AuthorizedNetworkSliceInfo::setConfiguredNssai(
-    std::vector<ConfiguredSnssai> const& value) {
-  m_ConfiguredNssai      = value;
+    std::vector<ConfiguredSnssai> const &value) {
+  m_ConfiguredNssai = value;
   m_ConfiguredNssaiIsSet = true;
 }
 bool AuthorizedNetworkSliceInfo::configuredNssaiIsSet() const {
@@ -357,8 +360,8 @@ void AuthorizedNetworkSliceInfo::unsetConfiguredNssai() {
 std::string AuthorizedNetworkSliceInfo::getTargetAmfSet() const {
   return m_TargetAmfSet;
 }
-void AuthorizedNetworkSliceInfo::setTargetAmfSet(std::string const& value) {
-  m_TargetAmfSet      = value;
+void AuthorizedNetworkSliceInfo::setTargetAmfSet(std::string const &value) {
+  m_TargetAmfSet = value;
   m_TargetAmfSetIsSet = true;
 }
 bool AuthorizedNetworkSliceInfo::targetAmfSetIsSet() const {
@@ -367,13 +370,13 @@ bool AuthorizedNetworkSliceInfo::targetAmfSetIsSet() const {
 void AuthorizedNetworkSliceInfo::unsetTargetAmfSet() {
   m_TargetAmfSetIsSet = false;
 }
-std::vector<std::string> AuthorizedNetworkSliceInfo::getCandidateAmfList()
-    const {
+std::vector<std::string>
+AuthorizedNetworkSliceInfo::getCandidateAmfList() const {
   return m_CandidateAmfList;
 }
 void AuthorizedNetworkSliceInfo::setCandidateAmfList(
-    std::vector<std::string> const& value) {
-  m_CandidateAmfList      = value;
+    std::vector<std::string> const &value) {
+  m_CandidateAmfList = value;
   m_CandidateAmfListIsSet = true;
 }
 bool AuthorizedNetworkSliceInfo::candidateAmfListIsSet() const {
@@ -387,8 +390,8 @@ AuthorizedNetworkSliceInfo::getRejectedNssaiInPlmn() const {
   return m_RejectedNssaiInPlmn;
 }
 void AuthorizedNetworkSliceInfo::setRejectedNssaiInPlmn(
-    std::vector<oai::model::common::Snssai> const& value) {
-  m_RejectedNssaiInPlmn      = value;
+    std::vector<oai::model::common::Snssai> const &value) {
+  m_RejectedNssaiInPlmn = value;
   m_RejectedNssaiInPlmnIsSet = true;
 }
 bool AuthorizedNetworkSliceInfo::rejectedNssaiInPlmnIsSet() const {
@@ -402,8 +405,8 @@ AuthorizedNetworkSliceInfo::getRejectedNssaiInTa() const {
   return m_RejectedNssaiInTa;
 }
 void AuthorizedNetworkSliceInfo::setRejectedNssaiInTa(
-    std::vector<oai::model::common::Snssai> const& value) {
-  m_RejectedNssaiInTa      = value;
+    std::vector<oai::model::common::Snssai> const &value) {
+  m_RejectedNssaiInTa = value;
   m_RejectedNssaiInTaIsSet = true;
 }
 bool AuthorizedNetworkSliceInfo::rejectedNssaiInTaIsSet() const {
@@ -416,8 +419,8 @@ NsiInformation AuthorizedNetworkSliceInfo::getNsiInformation() const {
   return m_NsiInformation;
 }
 void AuthorizedNetworkSliceInfo::setNsiInformation(
-    NsiInformation const& value) {
-  m_NsiInformation      = value;
+    NsiInformation const &value) {
+  m_NsiInformation = value;
   m_NsiInformationIsSet = true;
 }
 bool AuthorizedNetworkSliceInfo::nsiInformationIsSet() const {
@@ -430,8 +433,8 @@ std::string AuthorizedNetworkSliceInfo::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
 void AuthorizedNetworkSliceInfo::setSupportedFeatures(
-    std::string const& value) {
-  m_SupportedFeatures      = value;
+    std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool AuthorizedNetworkSliceInfo::supportedFeaturesIsSet() const {
@@ -443,22 +446,20 @@ void AuthorizedNetworkSliceInfo::unsetSupportedFeatures() {
 std::string AuthorizedNetworkSliceInfo::getNrfAmfSet() const {
   return m_NrfAmfSet;
 }
-void AuthorizedNetworkSliceInfo::setNrfAmfSet(std::string const& value) {
-  m_NrfAmfSet      = value;
+void AuthorizedNetworkSliceInfo::setNrfAmfSet(std::string const &value) {
+  m_NrfAmfSet = value;
   m_NrfAmfSetIsSet = true;
 }
 bool AuthorizedNetworkSliceInfo::nrfAmfSetIsSet() const {
   return m_NrfAmfSetIsSet;
 }
-void AuthorizedNetworkSliceInfo::unsetNrfAmfSet() {
-  m_NrfAmfSetIsSet = false;
-}
+void AuthorizedNetworkSliceInfo::unsetNrfAmfSet() { m_NrfAmfSetIsSet = false; }
 std::string AuthorizedNetworkSliceInfo::getNrfAmfSetNfMgtUri() const {
   return m_NrfAmfSetNfMgtUri;
 }
 void AuthorizedNetworkSliceInfo::setNrfAmfSetNfMgtUri(
-    std::string const& value) {
-  m_NrfAmfSetNfMgtUri      = value;
+    std::string const &value) {
+  m_NrfAmfSetNfMgtUri = value;
   m_NrfAmfSetNfMgtUriIsSet = true;
 }
 bool AuthorizedNetworkSliceInfo::nrfAmfSetNfMgtUriIsSet() const {
@@ -471,8 +472,8 @@ std::string AuthorizedNetworkSliceInfo::getNrfAmfSetAccessTokenUri() const {
   return m_NrfAmfSetAccessTokenUri;
 }
 void AuthorizedNetworkSliceInfo::setNrfAmfSetAccessTokenUri(
-    std::string const& value) {
-  m_NrfAmfSetAccessTokenUri      = value;
+    std::string const &value) {
+  m_NrfAmfSetAccessTokenUri = value;
   m_NrfAmfSetAccessTokenUriIsSet = true;
 }
 bool AuthorizedNetworkSliceInfo::nrfAmfSetAccessTokenUriIsSet() const {
@@ -485,8 +486,8 @@ std::string AuthorizedNetworkSliceInfo::getTargetAmfServiceSet() const {
   return m_TargetAmfServiceSet;
 }
 void AuthorizedNetworkSliceInfo::setTargetAmfServiceSet(
-    std::string const& value) {
-  m_TargetAmfServiceSet      = value;
+    std::string const &value) {
+  m_TargetAmfServiceSet = value;
   m_TargetAmfServiceSetIsSet = true;
 }
 bool AuthorizedNetworkSliceInfo::targetAmfServiceSetIsSet() const {
@@ -496,6 +497,6 @@ void AuthorizedNetworkSliceInfo::unsetTargetAmfServiceSet() {
   m_TargetAmfServiceSetIsSet = false;
 }
 
-}  // namespace model
-}  // namespace nssf_server
-}  // namespace oai
+} // namespace model
+} // namespace nssf_server
+} // namespace oai

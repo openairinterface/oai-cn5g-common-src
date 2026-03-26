@@ -13,8 +13,8 @@
 
 #include "ConditionEventType_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::smf {
 
@@ -27,12 +27,12 @@ void ConditionEventType_anyOf::validate() const {
   }
 }
 
-bool ConditionEventType_anyOf::validate(std::stringstream& msg) const {
+bool ConditionEventType_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ConditionEventType_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ConditionEventType_anyOf::validate(std::stringstream &msg,
+                                        const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ConditionEventType_anyOf" : pathPrefix;
@@ -47,35 +47,35 @@ bool ConditionEventType_anyOf::validate(
 }
 
 bool ConditionEventType_anyOf::operator==(
-    const ConditionEventType_anyOf& rhs) const {
+    const ConditionEventType_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool ConditionEventType_anyOf::operator!=(
-    const ConditionEventType_anyOf& rhs) const {
+    const ConditionEventType_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ConditionEventType_anyOf& o) {
+void to_json(nlohmann::json &j, const ConditionEventType_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case ConditionEventType_anyOf::eConditionEventType_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case ConditionEventType_anyOf::eConditionEventType_anyOf::ADDED:
-      j = "NF_ADDED";
-      break;
-    case ConditionEventType_anyOf::eConditionEventType_anyOf::REMOVED:
-      j = "NF_REMOVED";
-      break;
+  case ConditionEventType_anyOf::eConditionEventType_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case ConditionEventType_anyOf::eConditionEventType_anyOf::ADDED:
+    j = "NF_ADDED";
+    break;
+  case ConditionEventType_anyOf::eConditionEventType_anyOf::REMOVED:
+    j = "NF_REMOVED";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, ConditionEventType_anyOf& o) {
+void from_json(const nlohmann::json &j, ConditionEventType_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "NF_ADDED") {
     o.setValue(ConditionEventType_anyOf::eConditionEventType_anyOf::ADDED);
@@ -99,4 +99,4 @@ void ConditionEventType_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

@@ -27,7 +27,7 @@ namespace oai::model::pcf {
 /// Represents an event to notify to the AF.
 /// </summary>
 class AfEvent {
- public:
+public:
   AfEvent();
   virtual ~AfEvent() = default;
 
@@ -41,26 +41,26 @@ class AfEvent {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const AfEvent& rhs) const;
-  bool operator!=(const AfEvent& rhs) const;
+  bool operator==(const AfEvent &rhs) const;
+  bool operator!=(const AfEvent &rhs) const;
 
   /////////////////////////////////////////////
   /// AfEvent members
 
-  friend void to_json(nlohmann::json& j, const AfEvent& o);
-  friend void from_json(const nlohmann::json& j, AfEvent& o);
+  friend void to_json(nlohmann::json &j, const AfEvent &o);
+  friend void from_json(const nlohmann::json &j, AfEvent &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* AfEvent_H_ */

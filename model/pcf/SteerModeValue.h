@@ -28,7 +28,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class SteerModeValue {
- public:
+public:
   SteerModeValue();
   virtual ~SteerModeValue() = default;
 
@@ -42,16 +42,16 @@ class SteerModeValue {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const SteerModeValue& rhs) const;
-  bool operator!=(const SteerModeValue& rhs) const;
+  bool operator==(const SteerModeValue &rhs) const;
+  bool operator!=(const SteerModeValue &rhs) const;
 
   /////////////////////////////////////////////
   /// SteerModeValue members
@@ -60,15 +60,15 @@ class SteerModeValue {
   void setValue(SteerModeValue_anyOf value);
   SteerModeValue_anyOf::eSteerModeValue_anyOf getEnumValue() const;
   void setEnumValue(SteerModeValue_anyOf::eSteerModeValue_anyOf value);
-  friend void to_json(nlohmann::json& j, const SteerModeValue& o);
-  friend void from_json(const nlohmann::json& j, SteerModeValue& o);
-  friend void to_json(nlohmann::json& j, const SteerModeValue_anyOf& o);
-  friend void from_json(const nlohmann::json& j, SteerModeValue_anyOf& o);
+  friend void to_json(nlohmann::json &j, const SteerModeValue &o);
+  friend void from_json(const nlohmann::json &j, SteerModeValue &o);
+  friend void to_json(nlohmann::json &j, const SteerModeValue_anyOf &o);
+  friend void from_json(const nlohmann::json &j, SteerModeValue_anyOf &o);
 
- protected:
+protected:
   SteerModeValue_anyOf m_value;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* SteerModeValue_H_ */

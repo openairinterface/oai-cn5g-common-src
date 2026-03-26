@@ -27,12 +27,12 @@ void RedirectAddressType::validate() const {
   }
 }
 
-bool RedirectAddressType::validate(std::stringstream& msg) const {
+bool RedirectAddressType::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool RedirectAddressType::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool RedirectAddressType::validate(std::stringstream &msg,
+                                   const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "RedirectAddressType" : pathPrefix;
@@ -43,22 +43,22 @@ bool RedirectAddressType::validate(
   return success;
 }
 
-bool RedirectAddressType::operator==(const RedirectAddressType& rhs) const {
+bool RedirectAddressType::operator==(const RedirectAddressType &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool RedirectAddressType::operator!=(const RedirectAddressType& rhs) const {
+bool RedirectAddressType::operator!=(const RedirectAddressType &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const RedirectAddressType& o) {
+void to_json(nlohmann::json &j, const RedirectAddressType &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, RedirectAddressType& o) {
+void from_json(const nlohmann::json &j, RedirectAddressType &o) {
   from_json(j, o.m_value);
 }
 
@@ -80,4 +80,4 @@ void RedirectAddressType::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

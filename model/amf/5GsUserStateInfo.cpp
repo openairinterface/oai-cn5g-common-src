@@ -27,12 +27,12 @@ void _5GsUserStateInfo::validate() const {
   }
 }
 
-bool _5GsUserStateInfo::validate(std::stringstream& msg) const {
+bool _5GsUserStateInfo::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool _5GsUserStateInfo::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool _5GsUserStateInfo::validate(std::stringstream &msg,
+                                 const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "5GsUserStateInfo" : pathPrefix;
@@ -40,7 +40,7 @@ bool _5GsUserStateInfo::validate(
   return success;
 }
 
-bool _5GsUserStateInfo::operator==(const _5GsUserStateInfo& rhs) const {
+bool _5GsUserStateInfo::operator==(const _5GsUserStateInfo &rhs) const {
   return
 
       (getR5gsUserState() == rhs.getR5gsUserState()) &&
@@ -50,17 +50,17 @@ bool _5GsUserStateInfo::operator==(const _5GsUserStateInfo& rhs) const {
           ;
 }
 
-bool _5GsUserStateInfo::operator!=(const _5GsUserStateInfo& rhs) const {
+bool _5GsUserStateInfo::operator!=(const _5GsUserStateInfo &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const _5GsUserStateInfo& o) {
-  j                 = nlohmann::json();
+void to_json(nlohmann::json &j, const _5GsUserStateInfo &o) {
+  j = nlohmann::json();
   j["5gsUserState"] = o.m_r_5gsUserState;
-  j["accessType"]   = o.m_AccessType;
+  j["accessType"] = o.m_AccessType;
 }
 
-void from_json(const nlohmann::json& j, _5GsUserStateInfo& o) {
+void from_json(const nlohmann::json &j, _5GsUserStateInfo &o) {
   j.at("5gsUserState").get_to(o.m_r_5gsUserState);
   j.at("accessType").get_to(o.m_AccessType);
 }
@@ -68,15 +68,15 @@ void from_json(const nlohmann::json& j, _5GsUserStateInfo& o) {
 _5GsUserState _5GsUserStateInfo::getR5gsUserState() const {
   return m_r_5gsUserState;
 }
-void _5GsUserStateInfo::setR5gsUserState(_5GsUserState const& value) {
+void _5GsUserStateInfo::setR5gsUserState(_5GsUserState const &value) {
   m_r_5gsUserState = value;
 }
 oai::model::common::AccessType _5GsUserStateInfo::getAccessType() const {
   return m_AccessType;
 }
 void _5GsUserStateInfo::setAccessType(
-    oai::model::common::AccessType const& value) {
+    oai::model::common::AccessType const &value) {
   m_AccessType = value;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

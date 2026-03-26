@@ -19,11 +19,11 @@
 #ifndef PwsInformation_H_
 #define PwsInformation_H_
 
-#include "N2InfoContent.h"
-#include <string>
 #include "GlobalRanNodeId.h"
-#include <vector>
+#include "N2InfoContent.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::amf {
 
@@ -31,7 +31,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class PwsInformation {
- public:
+public:
   PwsInformation();
   virtual ~PwsInformation() = default;
 
@@ -45,16 +45,16 @@ class PwsInformation {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const PwsInformation& rhs) const;
-  bool operator!=(const PwsInformation& rhs) const;
+  bool operator==(const PwsInformation &rhs) const;
+  bool operator!=(const PwsInformation &rhs) const;
 
   /////////////////////////////////////////////
   /// PwsInformation members
@@ -73,13 +73,13 @@ class PwsInformation {
   ///
   /// </summary>
   oai::model::amf::N2InfoContent getPwsContainer() const;
-  void setPwsContainer(oai::model::amf::N2InfoContent const& value);
+  void setPwsContainer(oai::model::amf::N2InfoContent const &value);
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::common::GlobalRanNodeId> getBcEmptyAreaList() const;
   void setBcEmptyAreaList(
-      std::vector<oai::model::common::GlobalRanNodeId> const& value);
+      std::vector<oai::model::common::GlobalRanNodeId> const &value);
   bool bcEmptyAreaListIsSet() const;
   void unsetBcEmptyAreaList();
   /// <summary>
@@ -93,14 +93,14 @@ class PwsInformation {
   ///
   /// </summary>
   std::string getOmcId() const;
-  void setOmcId(std::string const& value);
+  void setOmcId(std::string const &value);
   bool omcIdIsSet() const;
   void unsetOmcId();
 
-  friend void to_json(nlohmann::json& j, const PwsInformation& o);
-  friend void from_json(const nlohmann::json& j, PwsInformation& o);
+  friend void to_json(nlohmann::json &j, const PwsInformation &o);
+  friend void from_json(const nlohmann::json &j, PwsInformation &o);
 
- protected:
+protected:
   int32_t m_MessageIdentifier;
 
   int32_t m_SerialNumber;
@@ -115,6 +115,6 @@ class PwsInformation {
   bool m_OmcIdIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* PwsInformation_H_ */

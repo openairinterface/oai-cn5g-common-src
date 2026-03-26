@@ -12,11 +12,11 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_UEIdentityIndexValue.h"
+#include "Ngap_MICOModeIndication.h"
 #include "Ngap_PagingDRX.h"
 #include "Ngap_PeriodicRegistrationUpdateTimer.h"
-#include "Ngap_MICOModeIndication.h"
 #include "Ngap_TAIListForInactive.h"
+#include "Ngap_UEIdentityIndexValue.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -30,12 +30,12 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_CoreNetworkAssistanceInformationForInactive */
 typedef struct Ngap_CoreNetworkAssistanceInformationForInactive {
   Ngap_UEIdentityIndexValue_t uEIdentityIndexValue;
-  Ngap_PagingDRX_t* uESpecificDRX; /* OPTIONAL */
+  Ngap_PagingDRX_t *uESpecificDRX; /* OPTIONAL */
   Ngap_PeriodicRegistrationUpdateTimer_t periodicRegistrationUpdateTimer;
-  Ngap_MICOModeIndication_t* mICOModeIndication; /* OPTIONAL */
+  Ngap_MICOModeIndication_t *mICOModeIndication; /* OPTIONAL */
   Ngap_TAIListForInactive_t tAIListForInactive;
-  struct Ngap_ExpectedUEBehaviour* expectedUEBehaviour;  /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ExpectedUEBehaviour *expectedUEBehaviour;  /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

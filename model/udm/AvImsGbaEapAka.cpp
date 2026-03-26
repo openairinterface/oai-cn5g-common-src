@@ -22,8 +22,8 @@ AvImsGbaEapAka::AvImsGbaEapAka() {
   m_Rand = "";
   m_Xres = "";
   m_Autn = "";
-  m_Ck   = "";
-  m_Ik   = "";
+  m_Ck = "";
+  m_Ik = "";
 }
 
 AvImsGbaEapAka::~AvImsGbaEapAka() {}
@@ -32,17 +32,17 @@ void AvImsGbaEapAka::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const AvImsGbaEapAka& o) {
-  j           = nlohmann::json();
+void to_json(nlohmann::json &j, const AvImsGbaEapAka &o) {
+  j = nlohmann::json();
   j["avType"] = o.m_AvType;
-  j["rand"]   = o.m_Rand;
-  j["xres"]   = o.m_Xres;
-  j["autn"]   = o.m_Autn;
-  j["ck"]     = o.m_Ck;
-  j["ik"]     = o.m_Ik;
+  j["rand"] = o.m_Rand;
+  j["xres"] = o.m_Xres;
+  j["autn"] = o.m_Autn;
+  j["ck"] = o.m_Ck;
+  j["ik"] = o.m_Ik;
 }
 
-void from_json(const nlohmann::json& j, AvImsGbaEapAka& o) {
+void from_json(const nlohmann::json &j, AvImsGbaEapAka &o) {
   j.at("avType").get_to(o.m_AvType);
   j.at("rand").get_to(o.m_Rand);
   j.at("xres").get_to(o.m_Xres);
@@ -51,41 +51,17 @@ void from_json(const nlohmann::json& j, AvImsGbaEapAka& o) {
   j.at("ik").get_to(o.m_Ik);
 }
 
-HssAvType AvImsGbaEapAka::getAvType() const {
-  return m_AvType;
-}
-void AvImsGbaEapAka::setAvType(HssAvType const& value) {
-  m_AvType = value;
-}
-std::string AvImsGbaEapAka::getRand() const {
-  return m_Rand;
-}
-void AvImsGbaEapAka::setRand(std::string const& value) {
-  m_Rand = value;
-}
-std::string AvImsGbaEapAka::getXres() const {
-  return m_Xres;
-}
-void AvImsGbaEapAka::setXres(std::string const& value) {
-  m_Xres = value;
-}
-std::string AvImsGbaEapAka::getAutn() const {
-  return m_Autn;
-}
-void AvImsGbaEapAka::setAutn(std::string const& value) {
-  m_Autn = value;
-}
-std::string AvImsGbaEapAka::getCk() const {
-  return m_Ck;
-}
-void AvImsGbaEapAka::setCk(std::string const& value) {
-  m_Ck = value;
-}
-std::string AvImsGbaEapAka::getIk() const {
-  return m_Ik;
-}
-void AvImsGbaEapAka::setIk(std::string const& value) {
-  m_Ik = value;
-}
+HssAvType AvImsGbaEapAka::getAvType() const { return m_AvType; }
+void AvImsGbaEapAka::setAvType(HssAvType const &value) { m_AvType = value; }
+std::string AvImsGbaEapAka::getRand() const { return m_Rand; }
+void AvImsGbaEapAka::setRand(std::string const &value) { m_Rand = value; }
+std::string AvImsGbaEapAka::getXres() const { return m_Xres; }
+void AvImsGbaEapAka::setXres(std::string const &value) { m_Xres = value; }
+std::string AvImsGbaEapAka::getAutn() const { return m_Autn; }
+void AvImsGbaEapAka::setAutn(std::string const &value) { m_Autn = value; }
+std::string AvImsGbaEapAka::getCk() const { return m_Ck; }
+void AvImsGbaEapAka::setCk(std::string const &value) { m_Ck = value; }
+std::string AvImsGbaEapAka::getIk() const { return m_Ik; }
+void AvImsGbaEapAka::setIk(std::string const &value) { m_Ik = value; }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

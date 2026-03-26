@@ -31,19 +31,19 @@ void QosMonitoringReport::validate() const {
   }
 }
 
-bool QosMonitoringReport::validate(std::stringstream& msg) const {
+bool QosMonitoringReport::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool QosMonitoringReport::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool QosMonitoringReport::validate(std::stringstream &msg,
+                                   const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "QosMonitoringReport" : pathPrefix;
 
   /* RefPccRuleIds */ {
-    const std::vector<std::string>& value = m_RefPccRuleIds;
-    const std::string currentValuePath    = _pathPrefix + ".refPccRuleIds";
+    const std::vector<std::string> &value = m_RefPccRuleIds;
+    const std::string currentValuePath = _pathPrefix + ".refPccRuleIds";
 
     if (value.size() < 1) {
       success = false;
@@ -64,7 +64,7 @@ bool QosMonitoringReport::validate(
   }
 
   if (ulDelaysIsSet()) {
-    const std::vector<int32_t>& value  = m_UlDelays;
+    const std::vector<int32_t> &value = m_UlDelays;
     const std::string currentValuePath = _pathPrefix + ".ulDelays";
 
     if (value.size() < 1) {
@@ -86,7 +86,7 @@ bool QosMonitoringReport::validate(
   }
 
   if (dlDelaysIsSet()) {
-    const std::vector<int32_t>& value  = m_DlDelays;
+    const std::vector<int32_t> &value = m_DlDelays;
     const std::string currentValuePath = _pathPrefix + ".dlDelays";
 
     if (value.size() < 1) {
@@ -108,7 +108,7 @@ bool QosMonitoringReport::validate(
   }
 
   if (rtDelaysIsSet()) {
-    const std::vector<int32_t>& value  = m_RtDelays;
+    const std::vector<int32_t> &value = m_RtDelays;
     const std::string currentValuePath = _pathPrefix + ".rtDelays";
 
     if (value.size() < 1) {
@@ -132,7 +132,7 @@ bool QosMonitoringReport::validate(
   return success;
 }
 
-bool QosMonitoringReport::operator==(const QosMonitoringReport& rhs) const {
+bool QosMonitoringReport::operator==(const QosMonitoringReport &rhs) const {
   return
 
       (getRefPccRuleIds() == rhs.getRefPccRuleIds()) &&
@@ -152,19 +152,22 @@ bool QosMonitoringReport::operator==(const QosMonitoringReport& rhs) const {
           ;
 }
 
-bool QosMonitoringReport::operator!=(const QosMonitoringReport& rhs) const {
+bool QosMonitoringReport::operator!=(const QosMonitoringReport &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const QosMonitoringReport& o) {
-  j                  = nlohmann::json();
+void to_json(nlohmann::json &j, const QosMonitoringReport &o) {
+  j = nlohmann::json();
   j["refPccRuleIds"] = o.m_RefPccRuleIds;
-  if (o.ulDelaysIsSet() || !o.m_UlDelays.empty()) j["ulDelays"] = o.m_UlDelays;
-  if (o.dlDelaysIsSet() || !o.m_DlDelays.empty()) j["dlDelays"] = o.m_DlDelays;
-  if (o.rtDelaysIsSet() || !o.m_RtDelays.empty()) j["rtDelays"] = o.m_RtDelays;
+  if (o.ulDelaysIsSet() || !o.m_UlDelays.empty())
+    j["ulDelays"] = o.m_UlDelays;
+  if (o.dlDelaysIsSet() || !o.m_DlDelays.empty())
+    j["dlDelays"] = o.m_DlDelays;
+  if (o.rtDelaysIsSet() || !o.m_RtDelays.empty())
+    j["rtDelays"] = o.m_RtDelays;
 }
 
-void from_json(const nlohmann::json& j, QosMonitoringReport& o) {
+void from_json(const nlohmann::json &j, QosMonitoringReport &o) {
   j.at("refPccRuleIds").get_to(o.m_RefPccRuleIds);
   if (j.find("ulDelays") != j.end()) {
     j.at("ulDelays").get_to(o.m_UlDelays);
@@ -184,47 +187,35 @@ std::vector<std::string> QosMonitoringReport::getRefPccRuleIds() const {
   return m_RefPccRuleIds;
 }
 void QosMonitoringReport::setRefPccRuleIds(
-    std::vector<std::string> const& value) {
+    std::vector<std::string> const &value) {
   m_RefPccRuleIds = value;
 }
 std::vector<int32_t> QosMonitoringReport::getUlDelays() const {
   return m_UlDelays;
 }
 void QosMonitoringReport::setUlDelays(std::vector<int32_t> const value) {
-  m_UlDelays      = value;
+  m_UlDelays = value;
   m_UlDelaysIsSet = true;
 }
-bool QosMonitoringReport::ulDelaysIsSet() const {
-  return m_UlDelaysIsSet;
-}
-void QosMonitoringReport::unsetUlDelays() {
-  m_UlDelaysIsSet = false;
-}
+bool QosMonitoringReport::ulDelaysIsSet() const { return m_UlDelaysIsSet; }
+void QosMonitoringReport::unsetUlDelays() { m_UlDelaysIsSet = false; }
 std::vector<int32_t> QosMonitoringReport::getDlDelays() const {
   return m_DlDelays;
 }
 void QosMonitoringReport::setDlDelays(std::vector<int32_t> const value) {
-  m_DlDelays      = value;
+  m_DlDelays = value;
   m_DlDelaysIsSet = true;
 }
-bool QosMonitoringReport::dlDelaysIsSet() const {
-  return m_DlDelaysIsSet;
-}
-void QosMonitoringReport::unsetDlDelays() {
-  m_DlDelaysIsSet = false;
-}
+bool QosMonitoringReport::dlDelaysIsSet() const { return m_DlDelaysIsSet; }
+void QosMonitoringReport::unsetDlDelays() { m_DlDelaysIsSet = false; }
 std::vector<int32_t> QosMonitoringReport::getRtDelays() const {
   return m_RtDelays;
 }
 void QosMonitoringReport::setRtDelays(std::vector<int32_t> const value) {
-  m_RtDelays      = value;
+  m_RtDelays = value;
   m_RtDelaysIsSet = true;
 }
-bool QosMonitoringReport::rtDelaysIsSet() const {
-  return m_RtDelaysIsSet;
-}
-void QosMonitoringReport::unsetRtDelays() {
-  m_RtDelaysIsSet = false;
-}
+bool QosMonitoringReport::rtDelaysIsSet() const { return m_RtDelaysIsSet; }
+void QosMonitoringReport::unsetRtDelays() { m_RtDelaysIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

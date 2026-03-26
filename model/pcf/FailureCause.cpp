@@ -27,12 +27,12 @@ void FailureCause::validate() const {
   }
 }
 
-bool FailureCause::validate(std::stringstream& msg) const {
+bool FailureCause::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool FailureCause::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool FailureCause::validate(std::stringstream &msg,
+                            const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "FailureCause" : pathPrefix;
@@ -43,32 +43,28 @@ bool FailureCause::validate(
   return success;
 }
 
-bool FailureCause::operator==(const FailureCause& rhs) const {
+bool FailureCause::operator==(const FailureCause &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool FailureCause::operator!=(const FailureCause& rhs) const {
+bool FailureCause::operator!=(const FailureCause &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const FailureCause& o) {
+void to_json(nlohmann::json &j, const FailureCause &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, FailureCause& o) {
+void from_json(const nlohmann::json &j, FailureCause &o) {
   from_json(j, o.m_value);
 }
 
-FailureCause_anyOf FailureCause::getValue() const {
-  return m_value;
-}
+FailureCause_anyOf FailureCause::getValue() const { return m_value; }
 
-void FailureCause::setValue(FailureCause_anyOf value) {
-  m_value = value;
-}
+void FailureCause::setValue(FailureCause_anyOf value) { m_value = value; }
 
 FailureCause_anyOf::eFailureCause_anyOf FailureCause::getEnumValue() const {
   return m_value.getValue();
@@ -78,4 +74,4 @@ void FailureCause::setEnumValue(FailureCause_anyOf::eFailureCause_anyOf value) {
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

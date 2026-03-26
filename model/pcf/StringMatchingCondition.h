@@ -20,8 +20,8 @@
 #define StringMatchingCondition_H_
 
 #include "MatchingOperator.h"
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::pcf {
 
@@ -29,7 +29,7 @@ namespace oai::model::pcf {
 /// A String with Matching Operator
 /// </summary>
 class StringMatchingCondition {
- public:
+public:
   StringMatchingCondition();
   virtual ~StringMatchingCondition() = default;
 
@@ -43,16 +43,16 @@ class StringMatchingCondition {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const StringMatchingCondition& rhs) const;
-  bool operator!=(const StringMatchingCondition& rhs) const;
+  bool operator==(const StringMatchingCondition &rhs) const;
+  bool operator!=(const StringMatchingCondition &rhs) const;
 
   /////////////////////////////////////////////
   /// StringMatchingCondition members
@@ -61,24 +61,24 @@ class StringMatchingCondition {
   ///
   /// </summary>
   std::string getMatchingString() const;
-  void setMatchingString(std::string const& value);
+  void setMatchingString(std::string const &value);
   bool matchingStringIsSet() const;
   void unsetMatchingString();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::MatchingOperator getMatchingOperator() const;
-  void setMatchingOperator(oai::model::pcf::MatchingOperator const& value);
+  void setMatchingOperator(oai::model::pcf::MatchingOperator const &value);
 
-  friend void to_json(nlohmann::json& j, const StringMatchingCondition& o);
-  friend void from_json(const nlohmann::json& j, StringMatchingCondition& o);
+  friend void to_json(nlohmann::json &j, const StringMatchingCondition &o);
+  friend void from_json(const nlohmann::json &j, StringMatchingCondition &o);
 
- protected:
+protected:
   std::string m_MatchingString;
   bool m_MatchingStringIsSet;
   oai::model::pcf::MatchingOperator m_MatchingOperator;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* StringMatchingCondition_H_ */

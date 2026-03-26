@@ -27,12 +27,12 @@ void PrioritySharingIndicator::validate() const {
   }
 }
 
-bool PrioritySharingIndicator::validate(std::stringstream& msg) const {
+bool PrioritySharingIndicator::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool PrioritySharingIndicator::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool PrioritySharingIndicator::validate(std::stringstream &msg,
+                                        const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PrioritySharingIndicator" : pathPrefix;
@@ -41,19 +41,19 @@ bool PrioritySharingIndicator::validate(
 }
 
 bool PrioritySharingIndicator::operator==(
-    const PrioritySharingIndicator& rhs) const {
-  return true;  // TODO
+    const PrioritySharingIndicator &rhs) const {
+  return true; // TODO
 }
 
 bool PrioritySharingIndicator::operator!=(
-    const PrioritySharingIndicator& rhs) const {
+    const PrioritySharingIndicator &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PrioritySharingIndicator& o) {
+void to_json(nlohmann::json &j, const PrioritySharingIndicator &o) {
   j = nlohmann::json::object();
 }
 
-void from_json(const nlohmann::json& j, PrioritySharingIndicator& o) {}
+void from_json(const nlohmann::json &j, PrioritySharingIndicator &o) {}
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

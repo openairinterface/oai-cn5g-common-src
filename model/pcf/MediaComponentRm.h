@@ -20,25 +20,25 @@
 #ifndef MediaComponentRm_H_
 #define MediaComponentRm_H_
 
-#include "ReservPriority.h"
-#include "AfSfcRequirement.h"
-#include "FlowStatus.h"
-#include <string>
-#include "UplinkDownlinkSupport.h"
-#include "PreemptionVulnerability.h"
-#include "TsnQosContainerRm.h"
 #include "AfRoutingRequirementRm.h"
-#include <vector>
-#include "TscaiInputContainer.h"
-#include "PrioritySharingIndicator.h"
+#include "AfSfcRequirement.h"
 #include "AlternativeServiceRequirementsData.h"
-#include "PreemptionCapability.h"
-#include "ProtocolDescription.h"
-#include "MediaType.h"
+#include "FlowStatus.h"
 #include "MediaSubComponentRm.h"
-#include <map>
+#include "MediaType.h"
 #include "PduSetQosPara.h"
+#include "PreemptionCapability.h"
+#include "PreemptionVulnerability.h"
+#include "PrioritySharingIndicator.h"
+#include "ProtocolDescription.h"
+#include "ReservPriority.h"
+#include "TscaiInputContainer.h"
+#include "TsnQosContainerRm.h"
+#include "UplinkDownlinkSupport.h"
+#include <map>
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::pcf {
 
@@ -47,7 +47,7 @@ namespace oai::model::pcf {
 /// but with the  OpenAPI nullable property set to true.
 /// </summary>
 class MediaComponentRm {
- public:
+public:
   MediaComponentRm();
   virtual ~MediaComponentRm() = default;
 
@@ -61,16 +61,16 @@ class MediaComponentRm {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const MediaComponentRm& rhs) const;
-  bool operator!=(const MediaComponentRm& rhs) const;
+  bool operator==(const MediaComponentRm &rhs) const;
+  bool operator!=(const MediaComponentRm &rhs) const;
 
   /////////////////////////////////////////////
   /// MediaComponentRm members
@@ -79,35 +79,35 @@ class MediaComponentRm {
   /// Contains an AF application identifier.
   /// </summary>
   std::string getAfAppId() const;
-  void setAfAppId(std::string const& value);
+  void setAfAppId(std::string const &value);
   bool afAppIdIsSet() const;
   void unsetAfAppId();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::AfRoutingRequirementRm getAfRoutReq() const;
-  void setAfRoutReq(oai::model::pcf::AfRoutingRequirementRm const& value);
+  void setAfRoutReq(oai::model::pcf::AfRoutingRequirementRm const &value);
   bool afRoutReqIsSet() const;
   void unsetAfRoutReq();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::AfSfcRequirement getAfSfcReq() const;
-  void setAfSfcReq(oai::model::pcf::AfSfcRequirement const& value);
+  void setAfSfcReq(oai::model::pcf::AfSfcRequirement const &value);
   bool afSfcReqIsSet() const;
   void unsetAfSfcReq();
   /// <summary>
   ///
   /// </summary>
   std::string getQosReference() const;
-  void setQosReference(std::string const& value);
+  void setQosReference(std::string const &value);
   bool qosReferenceIsSet() const;
   void unsetQosReference();
   /// <summary>
   ///
   /// </summary>
   std::vector<std::string> getAltSerReqs() const;
-  void setAltSerReqs(std::vector<std::string> const& value);
+  void setAltSerReqs(std::vector<std::string> const &value);
   bool altSerReqsIsSet() const;
   void unsetAltSerReqs();
   /// <summary>
@@ -117,8 +117,8 @@ class MediaComponentRm {
   std::vector<oai::model::pcf::AlternativeServiceRequirementsData>
   getAltSerReqsData() const;
   void setAltSerReqsData(
-      std::vector<oai::model::pcf::AlternativeServiceRequirementsData> const&
-          value);
+      std::vector<oai::model::pcf::AlternativeServiceRequirementsData> const
+          &value);
   bool altSerReqsDataIsSet() const;
   void unsetAltSerReqsData();
   /// <summary>
@@ -139,7 +139,7 @@ class MediaComponentRm {
   ///
   /// </summary>
   std::vector<std::string> getCodecs() const;
-  void setCodecs(std::vector<std::string> const& value);
+  void setCodecs(std::vector<std::string> const &value);
   bool codecsIsSet() const;
   void unsetCodecs();
   /// <summary>
@@ -162,14 +162,14 @@ class MediaComponentRm {
   ///
   /// </summary>
   std::string getFlusId() const;
-  void setFlusId(std::string const& value);
+  void setFlusId(std::string const &value);
   bool flusIdIsSet() const;
   void unsetFlusId();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::FlowStatus getFStatus() const;
-  void setFStatus(oai::model::pcf::FlowStatus const& value);
+  void setFStatus(oai::model::pcf::FlowStatus const &value);
   bool fStatusIsSet() const;
   void unsetFStatus();
   /// <summary>
@@ -177,7 +177,7 @@ class MediaComponentRm {
   /// type, but with the OpenAPI &#39;nullable: true&#39; property.
   /// </summary>
   std::string getMarBwDl() const;
-  void setMarBwDl(std::string const& value);
+  void setMarBwDl(std::string const &value);
   bool marBwDlIsSet() const;
   void unsetMarBwDl();
   /// <summary>
@@ -185,7 +185,7 @@ class MediaComponentRm {
   /// type, but with the OpenAPI &#39;nullable: true&#39; property.
   /// </summary>
   std::string getMarBwUl() const;
-  void setMarBwUl(std::string const& value);
+  void setMarBwUl(std::string const &value);
   bool marBwUlIsSet() const;
   void unsetMarBwUl();
   /// <summary>
@@ -209,7 +209,7 @@ class MediaComponentRm {
   /// type, but with the OpenAPI &#39;nullable: true&#39; property.
   /// </summary>
   std::string getMaxSuppBwDl() const;
-  void setMaxSuppBwDl(std::string const& value);
+  void setMaxSuppBwDl(std::string const &value);
   bool maxSuppBwDlIsSet() const;
   void unsetMaxSuppBwDl();
   /// <summary>
@@ -217,7 +217,7 @@ class MediaComponentRm {
   /// type, but with the OpenAPI &#39;nullable: true&#39; property.
   /// </summary>
   std::string getMaxSuppBwUl() const;
-  void setMaxSuppBwUl(std::string const& value);
+  void setMaxSuppBwUl(std::string const &value);
   bool maxSuppBwUlIsSet() const;
   void unsetMaxSuppBwUl();
   /// <summary>
@@ -230,17 +230,17 @@ class MediaComponentRm {
   /// flows identified by their common flow identifier. The key of the map is
   /// the fNum attribute.
   /// </summary>
-  std::map<std::string, oai::model::pcf::MediaSubComponentRm> getMedSubComps()
-      const;
+  std::map<std::string, oai::model::pcf::MediaSubComponentRm>
+  getMedSubComps() const;
   void setMedSubComps(
-      std::map<std::string, oai::model::pcf::MediaSubComponentRm> const& value);
+      std::map<std::string, oai::model::pcf::MediaSubComponentRm> const &value);
   bool medSubCompsIsSet() const;
   void unsetMedSubComps();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::MediaType getMedType() const;
-  void setMedType(oai::model::pcf::MediaType const& value);
+  void setMedType(oai::model::pcf::MediaType const &value);
   bool medTypeIsSet() const;
   void unsetMedType();
   /// <summary>
@@ -248,7 +248,7 @@ class MediaComponentRm {
   /// type, but with the OpenAPI &#39;nullable: true&#39; property.
   /// </summary>
   std::string getMinDesBwDl() const;
-  void setMinDesBwDl(std::string const& value);
+  void setMinDesBwDl(std::string const &value);
   bool minDesBwDlIsSet() const;
   void unsetMinDesBwDl();
   /// <summary>
@@ -256,7 +256,7 @@ class MediaComponentRm {
   /// type, but with the OpenAPI &#39;nullable: true&#39; property.
   /// </summary>
   std::string getMinDesBwUl() const;
-  void setMinDesBwUl(std::string const& value);
+  void setMinDesBwUl(std::string const &value);
   bool minDesBwUlIsSet() const;
   void unsetMinDesBwUl();
   /// <summary>
@@ -264,7 +264,7 @@ class MediaComponentRm {
   /// type, but with the OpenAPI &#39;nullable: true&#39; property.
   /// </summary>
   std::string getMirBwDl() const;
-  void setMirBwDl(std::string const& value);
+  void setMirBwDl(std::string const &value);
   bool mirBwDlIsSet() const;
   void unsetMirBwDl();
   /// <summary>
@@ -272,36 +272,36 @@ class MediaComponentRm {
   /// type, but with the OpenAPI &#39;nullable: true&#39; property.
   /// </summary>
   std::string getMirBwUl() const;
-  void setMirBwUl(std::string const& value);
+  void setMirBwUl(std::string const &value);
   bool mirBwUlIsSet() const;
   void unsetMirBwUl();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::PreemptionCapability getPreemptCap() const;
-  void setPreemptCap(oai::model::common::PreemptionCapability const& value);
+  void setPreemptCap(oai::model::common::PreemptionCapability const &value);
   bool preemptCapIsSet() const;
   void unsetPreemptCap();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::PreemptionVulnerability getPreemptVuln() const;
-  void setPreemptVuln(oai::model::common::PreemptionVulnerability const& value);
+  void setPreemptVuln(oai::model::common::PreemptionVulnerability const &value);
   bool preemptVulnIsSet() const;
   void unsetPreemptVuln();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::PrioritySharingIndicator getPrioSharingInd() const;
-  void setPrioSharingInd(
-      oai::model::pcf::PrioritySharingIndicator const& value);
+  void
+  setPrioSharingInd(oai::model::pcf::PrioritySharingIndicator const &value);
   bool prioSharingIndIsSet() const;
   void unsetPrioSharingInd();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::ReservPriority getResPrio() const;
-  void setResPrio(oai::model::pcf::ReservPriority const& value);
+  void setResPrio(oai::model::pcf::ReservPriority const &value);
   bool resPrioIsSet() const;
   void unsetResPrio();
   /// <summary>
@@ -309,7 +309,7 @@ class MediaComponentRm {
   /// type, but with the OpenAPI &#39;nullable: true&#39; property.
   /// </summary>
   std::string getRrBw() const;
-  void setRrBw(std::string const& value);
+  void setRrBw(std::string const &value);
   bool rrBwIsSet() const;
   void unsetRrBw();
   /// <summary>
@@ -317,7 +317,7 @@ class MediaComponentRm {
   /// type, but with the OpenAPI &#39;nullable: true&#39; property.
   /// </summary>
   std::string getRsBw() const;
-  void setRsBw(std::string const& value);
+  void setRsBw(std::string const &value);
   bool rsBwIsSet() const;
   void unsetRsBw();
   /// <summary>
@@ -342,21 +342,21 @@ class MediaComponentRm {
   ///
   /// </summary>
   oai::model::pcf::TsnQosContainerRm getTsnQos() const;
-  void setTsnQos(oai::model::pcf::TsnQosContainerRm const& value);
+  void setTsnQos(oai::model::pcf::TsnQosContainerRm const &value);
   bool tsnQosIsSet() const;
   void unsetTsnQos();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::TscaiInputContainer getTscaiInputDl() const;
-  void setTscaiInputDl(oai::model::pcf::TscaiInputContainer const& value);
+  void setTscaiInputDl(oai::model::pcf::TscaiInputContainer const &value);
   bool tscaiInputDlIsSet() const;
   void unsetTscaiInputDl();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::TscaiInputContainer getTscaiInputUl() const;
-  void setTscaiInputUl(oai::model::pcf::TscaiInputContainer const& value);
+  void setTscaiInputUl(oai::model::pcf::TscaiInputContainer const &value);
   bool tscaiInputUlIsSet() const;
   void unsetTscaiInputUl();
   /// <summary>
@@ -388,28 +388,28 @@ class MediaComponentRm {
   ///
   /// </summary>
   oai::model::pcf::PduSetQosPara getPduSetQosDl() const;
-  void setPduSetQosDl(oai::model::pcf::PduSetQosPara const& value);
+  void setPduSetQosDl(oai::model::pcf::PduSetQosPara const &value);
   bool pduSetQosDlIsSet() const;
   void unsetPduSetQosDl();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::PduSetQosPara getPduSetQosUl() const;
-  void setPduSetQosUl(oai::model::pcf::PduSetQosPara const& value);
+  void setPduSetQosUl(oai::model::pcf::PduSetQosPara const &value);
   bool pduSetQosUlIsSet() const;
   void unsetPduSetQosUl();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::ProtocolDescription getProtoDescDl() const;
-  void setProtoDescDl(oai::model::pcf::ProtocolDescription const& value);
+  void setProtoDescDl(oai::model::pcf::ProtocolDescription const &value);
   bool protoDescDlIsSet() const;
   void unsetProtoDescDl();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::ProtocolDescription getProtoDescUl() const;
-  void setProtoDescUl(oai::model::pcf::ProtocolDescription const& value);
+  void setProtoDescUl(oai::model::pcf::ProtocolDescription const &value);
   bool protoDescUlIsSet() const;
   void unsetProtoDescUl();
   /// <summary>
@@ -434,14 +434,14 @@ class MediaComponentRm {
   ///
   /// </summary>
   oai::model::pcf::UplinkDownlinkSupport getL4sInd() const;
-  void setL4sInd(oai::model::pcf::UplinkDownlinkSupport const& value);
+  void setL4sInd(oai::model::pcf::UplinkDownlinkSupport const &value);
   bool l4sIndIsSet() const;
   void unsetL4sInd();
 
-  friend void to_json(nlohmann::json& j, const MediaComponentRm& o);
-  friend void from_json(const nlohmann::json& j, MediaComponentRm& o);
+  friend void to_json(nlohmann::json &j, const MediaComponentRm &o);
+  friend void from_json(const nlohmann::json &j, MediaComponentRm &o);
 
- protected:
+protected:
   std::string m_AfAppId;
   bool m_AfAppIdIsSet;
   oai::model::pcf::AfRoutingRequirementRm m_AfRoutReq;
@@ -539,6 +539,6 @@ class MediaComponentRm {
   bool m_L4sIndIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* MediaComponentRm_H_ */

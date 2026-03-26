@@ -19,13 +19,13 @@
 namespace oai::udr::model {
 
 UsageMonData::UsageMonData() {
-  m_LimitId           = "";
-  m_ScopesIsSet       = false;
-  m_UmLevelIsSet      = false;
+  m_LimitId = "";
+  m_ScopesIsSet = false;
+  m_UmLevelIsSet = false;
   m_AllowedUsageIsSet = false;
-  m_ResetTimeIsSet    = false;
-  m_SuppFeat          = "";
-  m_SuppFeatIsSet     = false;
+  m_ResetTimeIsSet = false;
+  m_SuppFeat = "";
+  m_SuppFeatIsSet = false;
 }
 
 UsageMonData::~UsageMonData() {}
@@ -34,17 +34,22 @@ void UsageMonData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const UsageMonData& o) {
-  j            = nlohmann::json();
+void to_json(nlohmann::json &j, const UsageMonData &o) {
+  j = nlohmann::json();
   j["limitId"] = o.m_LimitId;
-  if (o.scopesIsSet() || !o.m_Scopes.empty()) j["scopes"] = o.m_Scopes;
-  if (o.umLevelIsSet()) j["umLevel"] = o.m_UmLevel;
-  if (o.allowedUsageIsSet()) j["allowedUsage"] = o.m_AllowedUsage;
-  if (o.resetTimeIsSet()) j["resetTime"] = o.m_ResetTime;
-  if (o.suppFeatIsSet()) j["suppFeat"] = o.m_SuppFeat;
+  if (o.scopesIsSet() || !o.m_Scopes.empty())
+    j["scopes"] = o.m_Scopes;
+  if (o.umLevelIsSet())
+    j["umLevel"] = o.m_UmLevel;
+  if (o.allowedUsageIsSet())
+    j["allowedUsage"] = o.m_AllowedUsage;
+  if (o.resetTimeIsSet())
+    j["resetTime"] = o.m_ResetTime;
+  if (o.suppFeatIsSet())
+    j["suppFeat"] = o.m_SuppFeat;
 }
 
-void from_json(const nlohmann::json& j, UsageMonData& o) {
+void from_json(const nlohmann::json &j, UsageMonData &o) {
   j.at("limitId").get_to(o.m_LimitId);
   if (j.find("scopes") != j.end()) {
     j.at("scopes").get_to(o.m_Scopes);
@@ -68,77 +73,45 @@ void from_json(const nlohmann::json& j, UsageMonData& o) {
   }
 }
 
-std::string UsageMonData::getLimitId() const {
-  return m_LimitId;
-}
-void UsageMonData::setLimitId(std::string const& value) {
-  m_LimitId = value;
-}
-std::map<std::string, UsageMonDataScope>& UsageMonData::getScopes() {
+std::string UsageMonData::getLimitId() const { return m_LimitId; }
+void UsageMonData::setLimitId(std::string const &value) { m_LimitId = value; }
+std::map<std::string, UsageMonDataScope> &UsageMonData::getScopes() {
   return m_Scopes;
 }
 void UsageMonData::setScopes(
-    std::map<std::string, UsageMonDataScope> const& value) {
-  m_Scopes      = value;
+    std::map<std::string, UsageMonDataScope> const &value) {
+  m_Scopes = value;
   m_ScopesIsSet = true;
 }
-bool UsageMonData::scopesIsSet() const {
-  return m_ScopesIsSet;
-}
-void UsageMonData::unsetScopes() {
-  m_ScopesIsSet = false;
-}
-UsageMonLevel UsageMonData::getUmLevel() const {
-  return m_UmLevel;
-}
-void UsageMonData::setUmLevel(UsageMonLevel const& value) {
-  m_UmLevel      = value;
+bool UsageMonData::scopesIsSet() const { return m_ScopesIsSet; }
+void UsageMonData::unsetScopes() { m_ScopesIsSet = false; }
+UsageMonLevel UsageMonData::getUmLevel() const { return m_UmLevel; }
+void UsageMonData::setUmLevel(UsageMonLevel const &value) {
+  m_UmLevel = value;
   m_UmLevelIsSet = true;
 }
-bool UsageMonData::umLevelIsSet() const {
-  return m_UmLevelIsSet;
-}
-void UsageMonData::unsetUmLevel() {
-  m_UmLevelIsSet = false;
-}
-UsageThreshold UsageMonData::getAllowedUsage() const {
-  return m_AllowedUsage;
-}
-void UsageMonData::setAllowedUsage(UsageThreshold const& value) {
-  m_AllowedUsage      = value;
+bool UsageMonData::umLevelIsSet() const { return m_UmLevelIsSet; }
+void UsageMonData::unsetUmLevel() { m_UmLevelIsSet = false; }
+UsageThreshold UsageMonData::getAllowedUsage() const { return m_AllowedUsage; }
+void UsageMonData::setAllowedUsage(UsageThreshold const &value) {
+  m_AllowedUsage = value;
   m_AllowedUsageIsSet = true;
 }
-bool UsageMonData::allowedUsageIsSet() const {
-  return m_AllowedUsageIsSet;
-}
-void UsageMonData::unsetAllowedUsage() {
-  m_AllowedUsageIsSet = false;
-}
-TimePeriod UsageMonData::getResetTime() const {
-  return m_ResetTime;
-}
-void UsageMonData::setResetTime(TimePeriod const& value) {
-  m_ResetTime      = value;
+bool UsageMonData::allowedUsageIsSet() const { return m_AllowedUsageIsSet; }
+void UsageMonData::unsetAllowedUsage() { m_AllowedUsageIsSet = false; }
+TimePeriod UsageMonData::getResetTime() const { return m_ResetTime; }
+void UsageMonData::setResetTime(TimePeriod const &value) {
+  m_ResetTime = value;
   m_ResetTimeIsSet = true;
 }
-bool UsageMonData::resetTimeIsSet() const {
-  return m_ResetTimeIsSet;
-}
-void UsageMonData::unsetResetTime() {
-  m_ResetTimeIsSet = false;
-}
-std::string UsageMonData::getSuppFeat() const {
-  return m_SuppFeat;
-}
-void UsageMonData::setSuppFeat(std::string const& value) {
-  m_SuppFeat      = value;
+bool UsageMonData::resetTimeIsSet() const { return m_ResetTimeIsSet; }
+void UsageMonData::unsetResetTime() { m_ResetTimeIsSet = false; }
+std::string UsageMonData::getSuppFeat() const { return m_SuppFeat; }
+void UsageMonData::setSuppFeat(std::string const &value) {
+  m_SuppFeat = value;
   m_SuppFeatIsSet = true;
 }
-bool UsageMonData::suppFeatIsSet() const {
-  return m_SuppFeatIsSet;
-}
-void UsageMonData::unsetSuppFeat() {
-  m_SuppFeatIsSet = false;
-}
+bool UsageMonData::suppFeatIsSet() const { return m_SuppFeatIsSet; }
+void UsageMonData::unsetSuppFeat() { m_SuppFeatIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

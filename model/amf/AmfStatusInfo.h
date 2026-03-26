@@ -19,11 +19,11 @@
 #ifndef AmfStatusInfo_H_
 #define AmfStatusInfo_H_
 
-#include <string>
-#include "StatusChange.h"
-#include <vector>
 #include "Guami.h"
+#include "StatusChange.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::amf {
 
@@ -31,7 +31,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class AmfStatusInfo {
- public:
+public:
   AmfStatusInfo();
   virtual ~AmfStatusInfo();
 
@@ -43,31 +43,31 @@ class AmfStatusInfo {
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::Guami>& getGuamiList();
+  std::vector<oai::model::common::Guami> &getGuamiList();
   /// <summary>
   ///
   /// </summary>
   StatusChange getStatusChange() const;
-  void setStatusChange(StatusChange const& value);
+  void setStatusChange(StatusChange const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getTargetAmfRemoval() const;
-  void setTargetAmfRemoval(std::string const& value);
+  void setTargetAmfRemoval(std::string const &value);
   bool targetAmfRemovalIsSet() const;
   void unsetTargetAmfRemoval();
   /// <summary>
   ///
   /// </summary>
   std::string getTargetAmfFailure() const;
-  void setTargetAmfFailure(std::string const& value);
+  void setTargetAmfFailure(std::string const &value);
   bool targetAmfFailureIsSet() const;
   void unsetTargetAmfFailure();
 
-  friend void to_json(nlohmann::json& j, const AmfStatusInfo& o);
-  friend void from_json(const nlohmann::json& j, AmfStatusInfo& o);
+  friend void to_json(nlohmann::json &j, const AmfStatusInfo &o);
+  friend void from_json(const nlohmann::json &j, AmfStatusInfo &o);
 
- protected:
+protected:
   std::vector<oai::model::common::Guami> m_GuamiList;
 
   StatusChange m_StatusChange;
@@ -78,6 +78,6 @@ class AmfStatusInfo {
   bool m_TargetAmfFailureIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* AmfStatusInfo_H_ */

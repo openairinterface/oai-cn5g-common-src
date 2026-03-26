@@ -22,9 +22,9 @@
 #include "N2InfoContent.h"
 #include "N2SmInformation.h"
 #include "UeContext.h"
+#include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
-#include <nlohmann/json.hpp>
 
 namespace oai::model::amf {
 
@@ -32,7 +32,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class UeContextCreatedData {
- public:
+public:
   UeContextCreatedData();
   virtual ~UeContextCreatedData();
 
@@ -45,27 +45,27 @@ class UeContextCreatedData {
   ///
   /// </summary>
   UeContext getUeContext() const;
-  void setUeContext(UeContext const& value);
+  void setUeContext(UeContext const &value);
   /// <summary>
   ///
   /// </summary>
   N2InfoContent getTargetToSourceData() const;
-  void setTargetToSourceData(N2InfoContent const& value);
+  void setTargetToSourceData(N2InfoContent const &value);
   /// <summary>
   ///
   /// </summary>
-  std::vector<N2SmInformation>& getPduSessionList();
+  std::vector<N2SmInformation> &getPduSessionList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<N2SmInformation>& getFailedSessionList();
+  std::vector<N2SmInformation> &getFailedSessionList();
   bool failedSessionListIsSet() const;
   void unsetFailedSessionList();
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
   /// <summary>
@@ -76,10 +76,10 @@ class UeContextCreatedData {
   bool pcfReselectedIndIsSet() const;
   void unsetPcfReselectedInd();
 
-  friend void to_json(nlohmann::json& j, const UeContextCreatedData& o);
-  friend void from_json(const nlohmann::json& j, UeContextCreatedData& o);
+  friend void to_json(nlohmann::json &j, const UeContextCreatedData &o);
+  friend void from_json(const nlohmann::json &j, UeContextCreatedData &o);
 
- protected:
+protected:
   UeContext m_UeContext;
 
   N2InfoContent m_TargetToSourceData;
@@ -94,6 +94,6 @@ class UeContextCreatedData {
   bool m_PcfReselectedIndIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* UeContextCreatedData_H_ */

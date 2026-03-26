@@ -29,7 +29,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class _5GsUserStateInfo {
- public:
+public:
   _5GsUserStateInfo();
   virtual ~_5GsUserStateInfo() = default;
 
@@ -43,10 +43,10 @@ class _5GsUserStateInfo {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const _5GsUserStateInfo& rhs) const;
-  bool operator!=(const _5GsUserStateInfo& rhs) const;
+  bool operator==(const _5GsUserStateInfo &rhs) const;
+  bool operator!=(const _5GsUserStateInfo &rhs) const;
 
   /////////////////////////////////////////////
   /// _5GsUserStateInfo members
@@ -55,26 +55,26 @@ class _5GsUserStateInfo {
   ///
   /// </summary>
   _5GsUserState getR5gsUserState() const;
-  void setR5gsUserState(_5GsUserState const& value);
+  void setR5gsUserState(_5GsUserState const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::AccessType getAccessType() const;
-  void setAccessType(oai::model::common::AccessType const& value);
+  void setAccessType(oai::model::common::AccessType const &value);
 
-  friend void to_json(nlohmann::json& j, const _5GsUserStateInfo& o);
-  friend void from_json(const nlohmann::json& j, _5GsUserStateInfo& o);
+  friend void to_json(nlohmann::json &j, const _5GsUserStateInfo &o);
+  friend void from_json(const nlohmann::json &j, _5GsUserStateInfo &o);
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
- protected:
+protected:
   _5GsUserState m_r_5gsUserState;
 
   oai::model::common::AccessType m_AccessType;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* _5GsUserStateInfo_H_ */

@@ -13,7 +13,7 @@ constexpr auto kAlwaysOnPduSessionRequestedIeName =
 namespace oai::nas {
 
 class AlwaysOnPduSessionRequested : public Type1NasIeFormatTv {
- public:
+public:
   AlwaysOnPduSessionRequested();
   AlwaysOnPduSessionRequested(uint8_t type);
   AlwaysOnPduSessionRequested(uint8_t iei, uint8_t type);
@@ -29,10 +29,10 @@ class AlwaysOnPduSessionRequested : public Type1NasIeFormatTv {
   void SetApsr(bool apsr);
   bool IsApsr();
 
- private:
+private:
   bool apsr_;
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

@@ -7,25 +7,21 @@
 namespace oai::ngap {
 
 //------------------------------------------------------------------------------
-RrcEstablishmentCause::RrcEstablishmentCause() {
-  m_Cause = -1;
-}
+RrcEstablishmentCause::RrcEstablishmentCause() { m_Cause = -1; }
 
 //------------------------------------------------------------------------------
 RrcEstablishmentCause::~RrcEstablishmentCause() {}
 
 //------------------------------------------------------------------------------
-void RrcEstablishmentCause::set(const e_Ngap_RRCEstablishmentCause& cause) {
+void RrcEstablishmentCause::set(const e_Ngap_RRCEstablishmentCause &cause) {
   m_Cause = cause;
 }
 
 //------------------------------------------------------------------------------
-int RrcEstablishmentCause::get() const {
-  return m_Cause;
-}
+int RrcEstablishmentCause::get() const { return m_Cause; }
 
 //------------------------------------------------------------------------------
-bool RrcEstablishmentCause::encode(Ngap_RRCEstablishmentCause_t& cause) const {
+bool RrcEstablishmentCause::encode(Ngap_RRCEstablishmentCause_t &cause) const {
   cause = m_Cause;
   return true;
 }
@@ -36,4 +32,4 @@ bool RrcEstablishmentCause::decode(Ngap_RRCEstablishmentCause_t cause) {
 
   return true;
 }
-}  // namespace oai::ngap
+} // namespace oai::ngap

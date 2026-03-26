@@ -12,21 +12,21 @@ extern "C" {
 namespace oai::ngap {
 
 class UeAggregateMaxBitRate {
- public:
+public:
   UeAggregateMaxBitRate();
   virtual ~UeAggregateMaxBitRate();
 
-  void set(const uint64_t& dl, const uint64_t& ul);
-  bool get(uint64_t& dl, uint64_t& ul) const;
+  void set(const uint64_t &dl, const uint64_t &ul);
+  bool get(uint64_t &dl, uint64_t &ul) const;
 
-  bool encode(Ngap_UEAggregateMaximumBitRate_t& bitrate) const;
-  bool decode(const Ngap_UEAggregateMaximumBitRate_t& bitrate);
+  bool encode(Ngap_UEAggregateMaximumBitRate_t &bitrate) const;
+  bool decode(const Ngap_UEAggregateMaximumBitRate_t &bitrate);
 
- private:
+private:
   uint64_t m_Dl;
   uint64_t m_Ul;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

@@ -27,12 +27,12 @@ void MulticastAccessControl::validate() const {
   }
 }
 
-bool MulticastAccessControl::validate(std::stringstream& msg) const {
+bool MulticastAccessControl::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool MulticastAccessControl::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool MulticastAccessControl::validate(std::stringstream &msg,
+                                      const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "MulticastAccessControl" : pathPrefix;
@@ -44,23 +44,23 @@ bool MulticastAccessControl::validate(
 }
 
 bool MulticastAccessControl::operator==(
-    const MulticastAccessControl& rhs) const {
+    const MulticastAccessControl &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
 bool MulticastAccessControl::operator!=(
-    const MulticastAccessControl& rhs) const {
+    const MulticastAccessControl &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const MulticastAccessControl& o) {
+void to_json(nlohmann::json &j, const MulticastAccessControl &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, MulticastAccessControl& o) {
+void from_json(const nlohmann::json &j, MulticastAccessControl &o) {
   from_json(j, o.m_value);
 }
 
@@ -82,4 +82,4 @@ void MulticastAccessControl::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

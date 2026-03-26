@@ -27,7 +27,7 @@ namespace oai::model::smf {
 /// Possible values are - PERIODIC - ONE_TIME - ON_EVENT_DETECTION
 /// </summary>
 class NotificationMethod {
- public:
+public:
   NotificationMethod();
   virtual ~NotificationMethod();
 
@@ -36,12 +36,12 @@ class NotificationMethod {
   /////////////////////////////////////////////
   /// NotificationMethod members
 
-  friend void to_json(nlohmann::json& j, const NotificationMethod& o);
-  friend void from_json(const nlohmann::json& j, NotificationMethod& o);
+  friend void to_json(nlohmann::json &j, const NotificationMethod &o);
+  friend void from_json(const nlohmann::json &j, NotificationMethod &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* NotificationMethod_H_ */

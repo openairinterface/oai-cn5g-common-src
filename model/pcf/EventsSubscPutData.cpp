@@ -19,64 +19,64 @@
 namespace oai::model::pcf {
 
 EventsSubscPutData::EventsSubscPutData() {
-  m_NotifUri                       = "";
-  m_NotifUriIsSet                  = false;
-  m_ReqQosMonParamsIsSet           = false;
-  m_QosMonIsSet                    = false;
-  m_QosMonDatRateIsSet             = false;
-  m_PdvReqMonParamsIsSet           = false;
-  m_PdvMonIsSet                    = false;
-  m_CongestMonIsSet                = false;
-  m_RttMonIsSet                    = false;
-  m_ReqAnisIsSet                   = false;
-  m_UsgThresIsSet                  = false;
-  m_NotifCorreId                   = "";
-  m_NotifCorreIdIsSet              = false;
-  m_AfAppIdsIsSet                  = false;
-  m_DirectNotifInd                 = false;
-  m_DirectNotifIndIsSet            = false;
-  m_AvrgWndw                       = 2000;
-  m_AvrgWndwIsSet                  = false;
-  m_AdReportsIsSet                 = false;
-  m_AccessTypeIsSet                = false;
-  m_AddAccessInfoIsSet             = false;
-  m_RelAccessInfoIsSet             = false;
-  m_AnChargAddrIsSet               = false;
-  m_AnChargIdsIsSet                = false;
-  m_AnGwAddrIsSet                  = false;
-  m_L4sReportsIsSet                = false;
-  m_EvSubsUri                      = "";
+  m_NotifUri = "";
+  m_NotifUriIsSet = false;
+  m_ReqQosMonParamsIsSet = false;
+  m_QosMonIsSet = false;
+  m_QosMonDatRateIsSet = false;
+  m_PdvReqMonParamsIsSet = false;
+  m_PdvMonIsSet = false;
+  m_CongestMonIsSet = false;
+  m_RttMonIsSet = false;
+  m_ReqAnisIsSet = false;
+  m_UsgThresIsSet = false;
+  m_NotifCorreId = "";
+  m_NotifCorreIdIsSet = false;
+  m_AfAppIdsIsSet = false;
+  m_DirectNotifInd = false;
+  m_DirectNotifIndIsSet = false;
+  m_AvrgWndw = 2000;
+  m_AvrgWndwIsSet = false;
+  m_AdReportsIsSet = false;
+  m_AccessTypeIsSet = false;
+  m_AddAccessInfoIsSet = false;
+  m_RelAccessInfoIsSet = false;
+  m_AnChargAddrIsSet = false;
+  m_AnChargIdsIsSet = false;
+  m_AnGwAddrIsSet = false;
+  m_L4sReportsIsSet = false;
+  m_EvSubsUri = "";
   m_FailedResourcAllocReportsIsSet = false;
-  m_SuccResourcAllocReportsIsSet   = false;
-  m_NoNetLocSuppIsSet              = false;
-  m_OutOfCredReportsIsSet          = false;
-  m_PlmnIdIsSet                    = false;
-  m_QncReportsIsSet                = false;
-  m_QosMonReportsIsSet             = false;
-  m_QosMonDatRateRepsIsSet         = false;
-  m_PdvMonReportsIsSet             = false;
-  m_CongestReportsIsSet            = false;
-  m_RttMonReportsIsSet             = false;
-  m_RanNasRelCausesIsSet           = false;
-  m_RatTypeIsSet                   = false;
-  m_SatBackhaulCategoryIsSet       = false;
-  m_UeLocIsSet                     = false;
-  m_UeLocTime                      = "";
-  m_UeLocTimeIsSet                 = false;
-  m_UeTimeZone                     = "";
-  m_UeTimeZoneIsSet                = false;
-  m_UsgRepIsSet                    = false;
-  m_UrspEnfRepIsSet                = false;
-  m_SscModeIsSet                   = false;
-  m_UeReqDnn                       = "";
-  m_UeReqDnnIsSet                  = false;
-  m_RedundantPduSessionInfoIsSet   = false;
-  m_TsnBridgeManContIsSet          = false;
-  m_TsnPortManContDsttIsSet        = false;
-  m_TsnPortManContNwttsIsSet       = false;
-  m_Ipv4AddrListIsSet              = false;
-  m_Ipv6PrefixListIsSet            = false;
-  m_BatOffsetInfoIsSet             = false;
+  m_SuccResourcAllocReportsIsSet = false;
+  m_NoNetLocSuppIsSet = false;
+  m_OutOfCredReportsIsSet = false;
+  m_PlmnIdIsSet = false;
+  m_QncReportsIsSet = false;
+  m_QosMonReportsIsSet = false;
+  m_QosMonDatRateRepsIsSet = false;
+  m_PdvMonReportsIsSet = false;
+  m_CongestReportsIsSet = false;
+  m_RttMonReportsIsSet = false;
+  m_RanNasRelCausesIsSet = false;
+  m_RatTypeIsSet = false;
+  m_SatBackhaulCategoryIsSet = false;
+  m_UeLocIsSet = false;
+  m_UeLocTime = "";
+  m_UeLocTimeIsSet = false;
+  m_UeTimeZone = "";
+  m_UeTimeZoneIsSet = false;
+  m_UsgRepIsSet = false;
+  m_UrspEnfRepIsSet = false;
+  m_SscModeIsSet = false;
+  m_UeReqDnn = "";
+  m_UeReqDnnIsSet = false;
+  m_RedundantPduSessionInfoIsSet = false;
+  m_TsnBridgeManContIsSet = false;
+  m_TsnPortManContDsttIsSet = false;
+  m_TsnPortManContNwttsIsSet = false;
+  m_Ipv4AddrListIsSet = false;
+  m_Ipv6PrefixListIsSet = false;
+  m_BatOffsetInfoIsSet = false;
 }
 
 void EventsSubscPutData::validate() const {
@@ -86,28 +86,28 @@ void EventsSubscPutData::validate() const {
   }
 }
 
-bool EventsSubscPutData::validate(std::stringstream& msg) const {
+bool EventsSubscPutData::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool EventsSubscPutData::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool EventsSubscPutData::validate(std::stringstream &msg,
+                                  const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "EventsSubscPutData" : pathPrefix;
 
   /* Events */ {
-    const std::vector<oai::model::pcf::AfEventSubscription>& value = m_Events;
+    const std::vector<oai::model::pcf::AfEventSubscription> &value = m_Events;
     const std::string currentValuePath = _pathPrefix + ".events";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::AfEventSubscription& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::AfEventSubscription &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -119,7 +119,7 @@ bool EventsSubscPutData::validate(
   }
 
   if (reqQosMonParamsIsSet()) {
-    const std::vector<oai::model::pcf::RequestedQosMonitoringParameter>& value =
+    const std::vector<oai::model::pcf::RequestedQosMonitoringParameter> &value =
         m_ReqQosMonParams;
     const std::string currentValuePath = _pathPrefix + ".reqQosMonParams";
 
@@ -127,10 +127,10 @@ bool EventsSubscPutData::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::RequestedQosMonitoringParameter& value :
+      int i = 0;
+      for (const oai::model::pcf::RequestedQosMonitoringParameter &value :
            value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
@@ -144,7 +144,7 @@ bool EventsSubscPutData::validate(
   }
 
   if (pdvReqMonParamsIsSet()) {
-    const std::vector<oai::model::pcf::RequestedQosMonitoringParameter>& value =
+    const std::vector<oai::model::pcf::RequestedQosMonitoringParameter> &value =
         m_PdvReqMonParams;
     const std::string currentValuePath = _pathPrefix + ".pdvReqMonParams";
 
@@ -152,10 +152,10 @@ bool EventsSubscPutData::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::RequestedQosMonitoringParameter& value :
+      int i = 0;
+      for (const oai::model::pcf::RequestedQosMonitoringParameter &value :
            value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
@@ -169,17 +169,17 @@ bool EventsSubscPutData::validate(
   }
 
   if (reqAnisIsSet()) {
-    const std::vector<oai::model::pcf::RequiredAccessInfo>& value = m_ReqAnis;
+    const std::vector<oai::model::pcf::RequiredAccessInfo> &value = m_ReqAnis;
     const std::string currentValuePath = _pathPrefix + ".reqAnis";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::RequiredAccessInfo& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::RequiredAccessInfo &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -191,17 +191,17 @@ bool EventsSubscPutData::validate(
   }
 
   if (afAppIdsIsSet()) {
-    const std::vector<std::string>& value = m_AfAppIds;
-    const std::string currentValuePath    = _pathPrefix + ".afAppIds";
+    const std::vector<std::string> &value = m_AfAppIds;
+    const std::string currentValuePath = _pathPrefix + ".afAppIds";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const std::string& value : value) {
+      int i = 0;
+      for (const std::string &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -211,7 +211,7 @@ bool EventsSubscPutData::validate(
   }
 
   if (avrgWndwIsSet()) {
-    const int32_t& value               = m_AvrgWndw;
+    const int32_t &value = m_AvrgWndw;
     const std::string currentValuePath = _pathPrefix + ".avrgWndw";
 
     if (value < 1) {
@@ -225,17 +225,17 @@ bool EventsSubscPutData::validate(
   }
 
   if (adReportsIsSet()) {
-    const std::vector<oai::model::pcf::AppDetectionReport>& value = m_AdReports;
+    const std::vector<oai::model::pcf::AppDetectionReport> &value = m_AdReports;
     const std::string currentValuePath = _pathPrefix + ".adReports";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::AppDetectionReport& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::AppDetectionReport &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -248,7 +248,7 @@ bool EventsSubscPutData::validate(
   }
 
   if (anChargIdsIsSet()) {
-    const std::vector<oai::model::pcf::AccessNetChargingIdentifier>& value =
+    const std::vector<oai::model::pcf::AccessNetChargingIdentifier> &value =
         m_AnChargIds;
     const std::string currentValuePath = _pathPrefix + ".anChargIds";
 
@@ -256,10 +256,10 @@ bool EventsSubscPutData::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::AccessNetChargingIdentifier& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::AccessNetChargingIdentifier &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -272,17 +272,17 @@ bool EventsSubscPutData::validate(
   }
 
   if (l4sReportsIsSet()) {
-    const std::vector<oai::model::pcf::L4sSupport>& value = m_L4sReports;
+    const std::vector<oai::model::pcf::L4sSupport> &value = m_L4sReports;
     const std::string currentValuePath = _pathPrefix + ".l4sReports";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::L4sSupport& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::L4sSupport &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -295,17 +295,17 @@ bool EventsSubscPutData::validate(
   }
 
   /* EvNotifs */ {
-    const std::vector<oai::model::pcf::AfEventNotification>& value = m_EvNotifs;
+    const std::vector<oai::model::pcf::AfEventNotification> &value = m_EvNotifs;
     const std::string currentValuePath = _pathPrefix + ".evNotifs";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::AfEventNotification& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::AfEventNotification &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -318,7 +318,7 @@ bool EventsSubscPutData::validate(
   }
 
   if (failedResourcAllocReportsIsSet()) {
-    const std::vector<oai::model::pcf::ResourcesAllocationInfo>& value =
+    const std::vector<oai::model::pcf::ResourcesAllocationInfo> &value =
         m_FailedResourcAllocReports;
     const std::string currentValuePath =
         _pathPrefix + ".failedResourcAllocReports";
@@ -327,15 +327,15 @@ bool EventsSubscPutData::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::ResourcesAllocationInfo& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::ResourcesAllocationInfo &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
-        success = value.validate(
-                      msg, currentValuePath + ".failedResourcAllocReports") &&
+        success = value.validate(msg, currentValuePath +
+                                          ".failedResourcAllocReports") &&
                   success;
 
         i++;
@@ -344,7 +344,7 @@ bool EventsSubscPutData::validate(
   }
 
   if (succResourcAllocReportsIsSet()) {
-    const std::vector<oai::model::pcf::ResourcesAllocationInfo>& value =
+    const std::vector<oai::model::pcf::ResourcesAllocationInfo> &value =
         m_SuccResourcAllocReports;
     const std::string currentValuePath =
         _pathPrefix + ".succResourcAllocReports";
@@ -353,15 +353,15 @@ bool EventsSubscPutData::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::ResourcesAllocationInfo& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::ResourcesAllocationInfo &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
-        success = value.validate(
-                      msg, currentValuePath + ".succResourcAllocReports") &&
+        success = value.validate(msg, currentValuePath +
+                                          ".succResourcAllocReports") &&
                   success;
 
         i++;
@@ -370,7 +370,7 @@ bool EventsSubscPutData::validate(
   }
 
   if (outOfCredReportsIsSet()) {
-    const std::vector<oai::model::pcf::OutOfCreditInformation>& value =
+    const std::vector<oai::model::pcf::OutOfCreditInformation> &value =
         m_OutOfCredReports;
     const std::string currentValuePath = _pathPrefix + ".outOfCredReports";
 
@@ -378,10 +378,10 @@ bool EventsSubscPutData::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::OutOfCreditInformation& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::OutOfCreditInformation &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -394,7 +394,7 @@ bool EventsSubscPutData::validate(
   }
 
   if (qncReportsIsSet()) {
-    const std::vector<oai::model::pcf::QosNotificationControlInfo>& value =
+    const std::vector<oai::model::pcf::QosNotificationControlInfo> &value =
         m_QncReports;
     const std::string currentValuePath = _pathPrefix + ".qncReports";
 
@@ -402,10 +402,10 @@ bool EventsSubscPutData::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::QosNotificationControlInfo& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::QosNotificationControlInfo &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -418,7 +418,7 @@ bool EventsSubscPutData::validate(
   }
 
   if (qosMonReportsIsSet()) {
-    const std::vector<oai::model::pcf::QosMonitoringReport>& value =
+    const std::vector<oai::model::pcf::QosMonitoringReport> &value =
         m_QosMonReports;
     const std::string currentValuePath = _pathPrefix + ".qosMonReports";
 
@@ -426,10 +426,10 @@ bool EventsSubscPutData::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::QosMonitoringReport& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::QosMonitoringReport &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -442,7 +442,7 @@ bool EventsSubscPutData::validate(
   }
 
   if (qosMonDatRateRepsIsSet()) {
-    const std::vector<oai::model::pcf::QosMonitoringReport>& value =
+    const std::vector<oai::model::pcf::QosMonitoringReport> &value =
         m_QosMonDatRateReps;
     const std::string currentValuePath = _pathPrefix + ".qosMonDatRateReps";
 
@@ -450,10 +450,10 @@ bool EventsSubscPutData::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::QosMonitoringReport& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::QosMonitoringReport &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -467,7 +467,7 @@ bool EventsSubscPutData::validate(
   }
 
   if (pdvMonReportsIsSet()) {
-    const std::vector<oai::model::pcf::PdvMonitoringReport>& value =
+    const std::vector<oai::model::pcf::PdvMonitoringReport> &value =
         m_PdvMonReports;
     const std::string currentValuePath = _pathPrefix + ".pdvMonReports";
 
@@ -475,10 +475,10 @@ bool EventsSubscPutData::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::PdvMonitoringReport& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::PdvMonitoringReport &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -491,7 +491,7 @@ bool EventsSubscPutData::validate(
   }
 
   if (congestReportsIsSet()) {
-    const std::vector<oai::model::pcf::QosMonitoringReport>& value =
+    const std::vector<oai::model::pcf::QosMonitoringReport> &value =
         m_CongestReports;
     const std::string currentValuePath = _pathPrefix + ".congestReports";
 
@@ -499,10 +499,10 @@ bool EventsSubscPutData::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::QosMonitoringReport& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::QosMonitoringReport &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -515,7 +515,7 @@ bool EventsSubscPutData::validate(
   }
 
   if (rttMonReportsIsSet()) {
-    const std::vector<oai::model::pcf::QosMonitoringReport>& value =
+    const std::vector<oai::model::pcf::QosMonitoringReport> &value =
         m_RttMonReports;
     const std::string currentValuePath = _pathPrefix + ".rttMonReports";
 
@@ -523,10 +523,10 @@ bool EventsSubscPutData::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::QosMonitoringReport& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::QosMonitoringReport &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -539,7 +539,7 @@ bool EventsSubscPutData::validate(
   }
 
   if (ranNasRelCausesIsSet()) {
-    const std::vector<oai::model::pcf::RanNasRelCause>& value =
+    const std::vector<oai::model::pcf::RanNasRelCause> &value =
         m_RanNasRelCauses;
     const std::string currentValuePath = _pathPrefix + ".ranNasRelCauses";
 
@@ -547,10 +547,10 @@ bool EventsSubscPutData::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::RanNasRelCause& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::RanNasRelCause &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -563,7 +563,7 @@ bool EventsSubscPutData::validate(
   }
 
   if (tsnPortManContNwttsIsSet()) {
-    const std::vector<oai::model::pcf::PortManagementContainer>& value =
+    const std::vector<oai::model::pcf::PortManagementContainer> &value =
         m_TsnPortManContNwtts;
     const std::string currentValuePath = _pathPrefix + ".tsnPortManContNwtts";
 
@@ -571,10 +571,10 @@ bool EventsSubscPutData::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::PortManagementContainer& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::PortManagementContainer &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -588,17 +588,17 @@ bool EventsSubscPutData::validate(
   }
 
   if (ipv4AddrListIsSet()) {
-    const std::vector<std::string>& value = m_Ipv4AddrList;
-    const std::string currentValuePath    = _pathPrefix + ".ipv4AddrList";
+    const std::vector<std::string> &value = m_Ipv4AddrList;
+    const std::string currentValuePath = _pathPrefix + ".ipv4AddrList";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const std::string& value : value) {
+      int i = 0;
+      for (const std::string &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -608,17 +608,17 @@ bool EventsSubscPutData::validate(
   }
 
   if (ipv6PrefixListIsSet()) {
-    const std::vector<oai::model::common::Ipv6Prefix>& value = m_Ipv6PrefixList;
+    const std::vector<oai::model::common::Ipv6Prefix> &value = m_Ipv6PrefixList;
     const std::string currentValuePath = _pathPrefix + ".ipv6PrefixList";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::Ipv6Prefix& value : value) {
+      int i = 0;
+      for (const oai::model::common::Ipv6Prefix &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -633,7 +633,7 @@ bool EventsSubscPutData::validate(
   return success;
 }
 
-bool EventsSubscPutData::operator==(const EventsSubscPutData& rhs) const {
+bool EventsSubscPutData::operator==(const EventsSubscPutData &rhs) const {
   return
 
       (getEvents() == rhs.getEvents()) &&
@@ -849,51 +849,70 @@ bool EventsSubscPutData::operator==(const EventsSubscPutData& rhs) const {
           ;
 }
 
-bool EventsSubscPutData::operator!=(const EventsSubscPutData& rhs) const {
+bool EventsSubscPutData::operator!=(const EventsSubscPutData &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const EventsSubscPutData& o) {
-  j           = nlohmann::json::object();
+void to_json(nlohmann::json &j, const EventsSubscPutData &o) {
+  j = nlohmann::json::object();
   j["events"] = o.m_Events;
-  if (o.notifUriIsSet()) j["notifUri"] = o.m_NotifUri;
+  if (o.notifUriIsSet())
+    j["notifUri"] = o.m_NotifUri;
   if (o.reqQosMonParamsIsSet() || !o.m_ReqQosMonParams.empty())
     j["reqQosMonParams"] = o.m_ReqQosMonParams;
-  if (o.qosMonIsSet()) j["qosMon"] = o.m_QosMon;
-  if (o.qosMonDatRateIsSet()) j["qosMonDatRate"] = o.m_QosMonDatRate;
+  if (o.qosMonIsSet())
+    j["qosMon"] = o.m_QosMon;
+  if (o.qosMonDatRateIsSet())
+    j["qosMonDatRate"] = o.m_QosMonDatRate;
   if (o.pdvReqMonParamsIsSet() || !o.m_PdvReqMonParams.empty())
     j["pdvReqMonParams"] = o.m_PdvReqMonParams;
-  if (o.pdvMonIsSet()) j["pdvMon"] = o.m_PdvMon;
-  if (o.congestMonIsSet()) j["congestMon"] = o.m_CongestMon;
-  if (o.rttMonIsSet()) j["rttMon"] = o.m_RttMon;
-  if (o.reqAnisIsSet() || !o.m_ReqAnis.empty()) j["reqAnis"] = o.m_ReqAnis;
-  if (o.usgThresIsSet()) j["usgThres"] = o.m_UsgThres;
-  if (o.notifCorreIdIsSet()) j["notifCorreId"] = o.m_NotifCorreId;
-  if (o.afAppIdsIsSet() || !o.m_AfAppIds.empty()) j["afAppIds"] = o.m_AfAppIds;
-  if (o.directNotifIndIsSet()) j["directNotifInd"] = o.m_DirectNotifInd;
-  if (o.avrgWndwIsSet()) j["avrgWndw"] = o.m_AvrgWndw;
+  if (o.pdvMonIsSet())
+    j["pdvMon"] = o.m_PdvMon;
+  if (o.congestMonIsSet())
+    j["congestMon"] = o.m_CongestMon;
+  if (o.rttMonIsSet())
+    j["rttMon"] = o.m_RttMon;
+  if (o.reqAnisIsSet() || !o.m_ReqAnis.empty())
+    j["reqAnis"] = o.m_ReqAnis;
+  if (o.usgThresIsSet())
+    j["usgThres"] = o.m_UsgThres;
+  if (o.notifCorreIdIsSet())
+    j["notifCorreId"] = o.m_NotifCorreId;
+  if (o.afAppIdsIsSet() || !o.m_AfAppIds.empty())
+    j["afAppIds"] = o.m_AfAppIds;
+  if (o.directNotifIndIsSet())
+    j["directNotifInd"] = o.m_DirectNotifInd;
+  if (o.avrgWndwIsSet())
+    j["avrgWndw"] = o.m_AvrgWndw;
   if (o.adReportsIsSet() || !o.m_AdReports.empty())
     j["adReports"] = o.m_AdReports;
-  if (o.accessTypeIsSet()) j["accessType"] = o.m_AccessType;
-  if (o.addAccessInfoIsSet()) j["addAccessInfo"] = o.m_AddAccessInfo;
-  if (o.relAccessInfoIsSet()) j["relAccessInfo"] = o.m_RelAccessInfo;
-  if (o.anChargAddrIsSet()) j["anChargAddr"] = o.m_AnChargAddr;
+  if (o.accessTypeIsSet())
+    j["accessType"] = o.m_AccessType;
+  if (o.addAccessInfoIsSet())
+    j["addAccessInfo"] = o.m_AddAccessInfo;
+  if (o.relAccessInfoIsSet())
+    j["relAccessInfo"] = o.m_RelAccessInfo;
+  if (o.anChargAddrIsSet())
+    j["anChargAddr"] = o.m_AnChargAddr;
   if (o.anChargIdsIsSet() || !o.m_AnChargIds.empty())
     j["anChargIds"] = o.m_AnChargIds;
-  if (o.anGwAddrIsSet()) j["anGwAddr"] = o.m_AnGwAddr;
+  if (o.anGwAddrIsSet())
+    j["anGwAddr"] = o.m_AnGwAddr;
   if (o.l4sReportsIsSet() || !o.m_L4sReports.empty())
     j["l4sReports"] = o.m_L4sReports;
   j["evSubsUri"] = o.m_EvSubsUri;
-  j["evNotifs"]  = o.m_EvNotifs;
+  j["evNotifs"] = o.m_EvNotifs;
   if (o.failedResourcAllocReportsIsSet() ||
       !o.m_FailedResourcAllocReports.empty())
     j["failedResourcAllocReports"] = o.m_FailedResourcAllocReports;
   if (o.succResourcAllocReportsIsSet() || !o.m_SuccResourcAllocReports.empty())
     j["succResourcAllocReports"] = o.m_SuccResourcAllocReports;
-  if (o.noNetLocSuppIsSet()) j["noNetLocSupp"] = o.m_NoNetLocSupp;
+  if (o.noNetLocSuppIsSet())
+    j["noNetLocSupp"] = o.m_NoNetLocSupp;
   if (o.outOfCredReportsIsSet() || !o.m_OutOfCredReports.empty())
     j["outOfCredReports"] = o.m_OutOfCredReports;
-  if (o.plmnIdIsSet()) j["plmnId"] = o.m_PlmnId;
+  if (o.plmnIdIsSet())
+    j["plmnId"] = o.m_PlmnId;
   if (o.qncReportsIsSet() || !o.m_QncReports.empty())
     j["qncReports"] = o.m_QncReports;
   if (o.qosMonReportsIsSet() || !o.m_QosMonReports.empty())
@@ -908,19 +927,28 @@ void to_json(nlohmann::json& j, const EventsSubscPutData& o) {
     j["rttMonReports"] = o.m_RttMonReports;
   if (o.ranNasRelCausesIsSet() || !o.m_RanNasRelCauses.empty())
     j["ranNasRelCauses"] = o.m_RanNasRelCauses;
-  if (o.ratTypeIsSet()) j["ratType"] = o.m_RatType;
+  if (o.ratTypeIsSet())
+    j["ratType"] = o.m_RatType;
   if (o.satBackhaulCategoryIsSet())
     j["satBackhaulCategory"] = o.m_SatBackhaulCategory;
-  if (o.ueLocIsSet()) j["ueLoc"] = o.m_UeLoc;
-  if (o.ueLocTimeIsSet()) j["ueLocTime"] = o.m_UeLocTime;
-  if (o.ueTimeZoneIsSet()) j["ueTimeZone"] = o.m_UeTimeZone;
-  if (o.usgRepIsSet()) j["usgRep"] = o.m_UsgRep;
-  if (o.urspEnfRepIsSet()) j["urspEnfRep"] = o.m_UrspEnfRep;
-  if (o.sscModeIsSet()) j["sscMode"] = o.m_SscMode;
-  if (o.ueReqDnnIsSet()) j["ueReqDnn"] = o.m_UeReqDnn;
+  if (o.ueLocIsSet())
+    j["ueLoc"] = o.m_UeLoc;
+  if (o.ueLocTimeIsSet())
+    j["ueLocTime"] = o.m_UeLocTime;
+  if (o.ueTimeZoneIsSet())
+    j["ueTimeZone"] = o.m_UeTimeZone;
+  if (o.usgRepIsSet())
+    j["usgRep"] = o.m_UsgRep;
+  if (o.urspEnfRepIsSet())
+    j["urspEnfRep"] = o.m_UrspEnfRep;
+  if (o.sscModeIsSet())
+    j["sscMode"] = o.m_SscMode;
+  if (o.ueReqDnnIsSet())
+    j["ueReqDnn"] = o.m_UeReqDnn;
   if (o.redundantPduSessionInfoIsSet())
     j["redundantPduSessionInfo"] = o.m_RedundantPduSessionInfo;
-  if (o.tsnBridgeManContIsSet()) j["tsnBridgeManCont"] = o.m_TsnBridgeManCont;
+  if (o.tsnBridgeManContIsSet())
+    j["tsnBridgeManCont"] = o.m_TsnBridgeManCont;
   if (o.tsnPortManContDsttIsSet())
     j["tsnPortManContDstt"] = o.m_TsnPortManContDstt;
   if (o.tsnPortManContNwttsIsSet() || !o.m_TsnPortManContNwtts.empty())
@@ -929,10 +957,11 @@ void to_json(nlohmann::json& j, const EventsSubscPutData& o) {
     j["ipv4AddrList"] = o.m_Ipv4AddrList;
   if (o.ipv6PrefixListIsSet() || !o.m_Ipv6PrefixList.empty())
     j["ipv6PrefixList"] = o.m_Ipv6PrefixList;
-  if (o.batOffsetInfoIsSet()) j["batOffsetInfo"] = o.m_BatOffsetInfo;
+  if (o.batOffsetInfoIsSet())
+    j["batOffsetInfo"] = o.m_BatOffsetInfo;
 }
 
-void from_json(const nlohmann::json& j, EventsSubscPutData& o) {
+void from_json(const nlohmann::json &j, EventsSubscPutData &o) {
   j.at("events").get_to(o.m_Events);
   if (j.find("notifUri") != j.end()) {
     j.at("notifUri").get_to(o.m_NotifUri);
@@ -1143,30 +1172,24 @@ EventsSubscPutData::getEvents() const {
   return m_Events;
 }
 void EventsSubscPutData::setEvents(
-    std::vector<oai::model::pcf::AfEventSubscription> const& value) {
+    std::vector<oai::model::pcf::AfEventSubscription> const &value) {
   m_Events = value;
 }
-std::string EventsSubscPutData::getNotifUri() const {
-  return m_NotifUri;
-}
-void EventsSubscPutData::setNotifUri(std::string const& value) {
-  m_NotifUri      = value;
+std::string EventsSubscPutData::getNotifUri() const { return m_NotifUri; }
+void EventsSubscPutData::setNotifUri(std::string const &value) {
+  m_NotifUri = value;
   m_NotifUriIsSet = true;
 }
-bool EventsSubscPutData::notifUriIsSet() const {
-  return m_NotifUriIsSet;
-}
-void EventsSubscPutData::unsetNotifUri() {
-  m_NotifUriIsSet = false;
-}
+bool EventsSubscPutData::notifUriIsSet() const { return m_NotifUriIsSet; }
+void EventsSubscPutData::unsetNotifUri() { m_NotifUriIsSet = false; }
 std::vector<oai::model::pcf::RequestedQosMonitoringParameter>
 EventsSubscPutData::getReqQosMonParams() const {
   return m_ReqQosMonParams;
 }
 void EventsSubscPutData::setReqQosMonParams(
-    std::vector<oai::model::pcf::RequestedQosMonitoringParameter> const&
-        value) {
-  m_ReqQosMonParams      = value;
+    std::vector<oai::model::pcf::RequestedQosMonitoringParameter> const
+        &value) {
+  m_ReqQosMonParams = value;
   m_ReqQosMonParamsIsSet = true;
 }
 bool EventsSubscPutData::reqQosMonParamsIsSet() const {
@@ -1175,44 +1198,38 @@ bool EventsSubscPutData::reqQosMonParamsIsSet() const {
 void EventsSubscPutData::unsetReqQosMonParams() {
   m_ReqQosMonParamsIsSet = false;
 }
-oai::model::pcf::QosMonitoringInformation EventsSubscPutData::getQosMon()
-    const {
+oai::model::pcf::QosMonitoringInformation
+EventsSubscPutData::getQosMon() const {
   return m_QosMon;
 }
 void EventsSubscPutData::setQosMon(
-    oai::model::pcf::QosMonitoringInformation const& value) {
-  m_QosMon      = value;
+    oai::model::pcf::QosMonitoringInformation const &value) {
+  m_QosMon = value;
   m_QosMonIsSet = true;
 }
-bool EventsSubscPutData::qosMonIsSet() const {
-  return m_QosMonIsSet;
-}
-void EventsSubscPutData::unsetQosMon() {
-  m_QosMonIsSet = false;
-}
-oai::model::pcf::QosMonitoringInformation EventsSubscPutData::getQosMonDatRate()
-    const {
+bool EventsSubscPutData::qosMonIsSet() const { return m_QosMonIsSet; }
+void EventsSubscPutData::unsetQosMon() { m_QosMonIsSet = false; }
+oai::model::pcf::QosMonitoringInformation
+EventsSubscPutData::getQosMonDatRate() const {
   return m_QosMonDatRate;
 }
 void EventsSubscPutData::setQosMonDatRate(
-    oai::model::pcf::QosMonitoringInformation const& value) {
-  m_QosMonDatRate      = value;
+    oai::model::pcf::QosMonitoringInformation const &value) {
+  m_QosMonDatRate = value;
   m_QosMonDatRateIsSet = true;
 }
 bool EventsSubscPutData::qosMonDatRateIsSet() const {
   return m_QosMonDatRateIsSet;
 }
-void EventsSubscPutData::unsetQosMonDatRate() {
-  m_QosMonDatRateIsSet = false;
-}
+void EventsSubscPutData::unsetQosMonDatRate() { m_QosMonDatRateIsSet = false; }
 std::vector<oai::model::pcf::RequestedQosMonitoringParameter>
 EventsSubscPutData::getPdvReqMonParams() const {
   return m_PdvReqMonParams;
 }
 void EventsSubscPutData::setPdvReqMonParams(
-    std::vector<oai::model::pcf::RequestedQosMonitoringParameter> const&
-        value) {
-  m_PdvReqMonParams      = value;
+    std::vector<oai::model::pcf::RequestedQosMonitoringParameter> const
+        &value) {
+  m_PdvReqMonParams = value;
   m_PdvReqMonParamsIsSet = true;
 }
 bool EventsSubscPutData::pdvReqMonParamsIsSet() const {
@@ -1221,111 +1238,83 @@ bool EventsSubscPutData::pdvReqMonParamsIsSet() const {
 void EventsSubscPutData::unsetPdvReqMonParams() {
   m_PdvReqMonParamsIsSet = false;
 }
-oai::model::pcf::QosMonitoringInformation EventsSubscPutData::getPdvMon()
-    const {
+oai::model::pcf::QosMonitoringInformation
+EventsSubscPutData::getPdvMon() const {
   return m_PdvMon;
 }
 void EventsSubscPutData::setPdvMon(
-    oai::model::pcf::QosMonitoringInformation const& value) {
-  m_PdvMon      = value;
+    oai::model::pcf::QosMonitoringInformation const &value) {
+  m_PdvMon = value;
   m_PdvMonIsSet = true;
 }
-bool EventsSubscPutData::pdvMonIsSet() const {
-  return m_PdvMonIsSet;
-}
-void EventsSubscPutData::unsetPdvMon() {
-  m_PdvMonIsSet = false;
-}
-oai::model::pcf::QosMonitoringInformation EventsSubscPutData::getCongestMon()
-    const {
+bool EventsSubscPutData::pdvMonIsSet() const { return m_PdvMonIsSet; }
+void EventsSubscPutData::unsetPdvMon() { m_PdvMonIsSet = false; }
+oai::model::pcf::QosMonitoringInformation
+EventsSubscPutData::getCongestMon() const {
   return m_CongestMon;
 }
 void EventsSubscPutData::setCongestMon(
-    oai::model::pcf::QosMonitoringInformation const& value) {
-  m_CongestMon      = value;
+    oai::model::pcf::QosMonitoringInformation const &value) {
+  m_CongestMon = value;
   m_CongestMonIsSet = true;
 }
-bool EventsSubscPutData::congestMonIsSet() const {
-  return m_CongestMonIsSet;
-}
-void EventsSubscPutData::unsetCongestMon() {
-  m_CongestMonIsSet = false;
-}
-oai::model::pcf::QosMonitoringInformation EventsSubscPutData::getRttMon()
-    const {
+bool EventsSubscPutData::congestMonIsSet() const { return m_CongestMonIsSet; }
+void EventsSubscPutData::unsetCongestMon() { m_CongestMonIsSet = false; }
+oai::model::pcf::QosMonitoringInformation
+EventsSubscPutData::getRttMon() const {
   return m_RttMon;
 }
 void EventsSubscPutData::setRttMon(
-    oai::model::pcf::QosMonitoringInformation const& value) {
-  m_RttMon      = value;
+    oai::model::pcf::QosMonitoringInformation const &value) {
+  m_RttMon = value;
   m_RttMonIsSet = true;
 }
-bool EventsSubscPutData::rttMonIsSet() const {
-  return m_RttMonIsSet;
-}
-void EventsSubscPutData::unsetRttMon() {
-  m_RttMonIsSet = false;
-}
+bool EventsSubscPutData::rttMonIsSet() const { return m_RttMonIsSet; }
+void EventsSubscPutData::unsetRttMon() { m_RttMonIsSet = false; }
 std::vector<oai::model::pcf::RequiredAccessInfo>
 EventsSubscPutData::getReqAnis() const {
   return m_ReqAnis;
 }
 void EventsSubscPutData::setReqAnis(
-    std::vector<oai::model::pcf::RequiredAccessInfo> const& value) {
-  m_ReqAnis      = value;
+    std::vector<oai::model::pcf::RequiredAccessInfo> const &value) {
+  m_ReqAnis = value;
   m_ReqAnisIsSet = true;
 }
-bool EventsSubscPutData::reqAnisIsSet() const {
-  return m_ReqAnisIsSet;
-}
-void EventsSubscPutData::unsetReqAnis() {
-  m_ReqAnisIsSet = false;
-}
+bool EventsSubscPutData::reqAnisIsSet() const { return m_ReqAnisIsSet; }
+void EventsSubscPutData::unsetReqAnis() { m_ReqAnisIsSet = false; }
 oai::model::pcf::UsageThreshold EventsSubscPutData::getUsgThres() const {
   return m_UsgThres;
 }
 void EventsSubscPutData::setUsgThres(
-    oai::model::pcf::UsageThreshold const& value) {
-  m_UsgThres      = value;
+    oai::model::pcf::UsageThreshold const &value) {
+  m_UsgThres = value;
   m_UsgThresIsSet = true;
 }
-bool EventsSubscPutData::usgThresIsSet() const {
-  return m_UsgThresIsSet;
-}
-void EventsSubscPutData::unsetUsgThres() {
-  m_UsgThresIsSet = false;
-}
+bool EventsSubscPutData::usgThresIsSet() const { return m_UsgThresIsSet; }
+void EventsSubscPutData::unsetUsgThres() { m_UsgThresIsSet = false; }
 std::string EventsSubscPutData::getNotifCorreId() const {
   return m_NotifCorreId;
 }
-void EventsSubscPutData::setNotifCorreId(std::string const& value) {
-  m_NotifCorreId      = value;
+void EventsSubscPutData::setNotifCorreId(std::string const &value) {
+  m_NotifCorreId = value;
   m_NotifCorreIdIsSet = true;
 }
 bool EventsSubscPutData::notifCorreIdIsSet() const {
   return m_NotifCorreIdIsSet;
 }
-void EventsSubscPutData::unsetNotifCorreId() {
-  m_NotifCorreIdIsSet = false;
-}
+void EventsSubscPutData::unsetNotifCorreId() { m_NotifCorreIdIsSet = false; }
 std::vector<std::string> EventsSubscPutData::getAfAppIds() const {
   return m_AfAppIds;
 }
-void EventsSubscPutData::setAfAppIds(std::vector<std::string> const& value) {
-  m_AfAppIds      = value;
+void EventsSubscPutData::setAfAppIds(std::vector<std::string> const &value) {
+  m_AfAppIds = value;
   m_AfAppIdsIsSet = true;
 }
-bool EventsSubscPutData::afAppIdsIsSet() const {
-  return m_AfAppIdsIsSet;
-}
-void EventsSubscPutData::unsetAfAppIds() {
-  m_AfAppIdsIsSet = false;
-}
-bool EventsSubscPutData::isDirectNotifInd() const {
-  return m_DirectNotifInd;
-}
+bool EventsSubscPutData::afAppIdsIsSet() const { return m_AfAppIdsIsSet; }
+void EventsSubscPutData::unsetAfAppIds() { m_AfAppIdsIsSet = false; }
+bool EventsSubscPutData::isDirectNotifInd() const { return m_DirectNotifInd; }
 void EventsSubscPutData::setDirectNotifInd(bool const value) {
-  m_DirectNotifInd      = value;
+  m_DirectNotifInd = value;
   m_DirectNotifIndIsSet = true;
 }
 bool EventsSubscPutData::directNotifIndIsSet() const {
@@ -1334,141 +1323,105 @@ bool EventsSubscPutData::directNotifIndIsSet() const {
 void EventsSubscPutData::unsetDirectNotifInd() {
   m_DirectNotifIndIsSet = false;
 }
-int32_t EventsSubscPutData::getAvrgWndw() const {
-  return m_AvrgWndw;
-}
+int32_t EventsSubscPutData::getAvrgWndw() const { return m_AvrgWndw; }
 void EventsSubscPutData::setAvrgWndw(int32_t const value) {
-  m_AvrgWndw      = value;
+  m_AvrgWndw = value;
   m_AvrgWndwIsSet = true;
 }
-bool EventsSubscPutData::avrgWndwIsSet() const {
-  return m_AvrgWndwIsSet;
-}
-void EventsSubscPutData::unsetAvrgWndw() {
-  m_AvrgWndwIsSet = false;
-}
+bool EventsSubscPutData::avrgWndwIsSet() const { return m_AvrgWndwIsSet; }
+void EventsSubscPutData::unsetAvrgWndw() { m_AvrgWndwIsSet = false; }
 std::vector<oai::model::pcf::AppDetectionReport>
 EventsSubscPutData::getAdReports() const {
   return m_AdReports;
 }
 void EventsSubscPutData::setAdReports(
-    std::vector<oai::model::pcf::AppDetectionReport> const& value) {
-  m_AdReports      = value;
+    std::vector<oai::model::pcf::AppDetectionReport> const &value) {
+  m_AdReports = value;
   m_AdReportsIsSet = true;
 }
-bool EventsSubscPutData::adReportsIsSet() const {
-  return m_AdReportsIsSet;
-}
-void EventsSubscPutData::unsetAdReports() {
-  m_AdReportsIsSet = false;
-}
+bool EventsSubscPutData::adReportsIsSet() const { return m_AdReportsIsSet; }
+void EventsSubscPutData::unsetAdReports() { m_AdReportsIsSet = false; }
 oai::model::common::AccessType EventsSubscPutData::getAccessType() const {
   return m_AccessType;
 }
 void EventsSubscPutData::setAccessType(
-    oai::model::common::AccessType const& value) {
-  m_AccessType      = value;
+    oai::model::common::AccessType const &value) {
+  m_AccessType = value;
   m_AccessTypeIsSet = true;
 }
-bool EventsSubscPutData::accessTypeIsSet() const {
-  return m_AccessTypeIsSet;
-}
-void EventsSubscPutData::unsetAccessType() {
-  m_AccessTypeIsSet = false;
-}
-oai::model::pcf::AdditionalAccessInfo EventsSubscPutData::getAddAccessInfo()
-    const {
+bool EventsSubscPutData::accessTypeIsSet() const { return m_AccessTypeIsSet; }
+void EventsSubscPutData::unsetAccessType() { m_AccessTypeIsSet = false; }
+oai::model::pcf::AdditionalAccessInfo
+EventsSubscPutData::getAddAccessInfo() const {
   return m_AddAccessInfo;
 }
 void EventsSubscPutData::setAddAccessInfo(
-    oai::model::pcf::AdditionalAccessInfo const& value) {
-  m_AddAccessInfo      = value;
+    oai::model::pcf::AdditionalAccessInfo const &value) {
+  m_AddAccessInfo = value;
   m_AddAccessInfoIsSet = true;
 }
 bool EventsSubscPutData::addAccessInfoIsSet() const {
   return m_AddAccessInfoIsSet;
 }
-void EventsSubscPutData::unsetAddAccessInfo() {
-  m_AddAccessInfoIsSet = false;
-}
-oai::model::pcf::AdditionalAccessInfo EventsSubscPutData::getRelAccessInfo()
-    const {
+void EventsSubscPutData::unsetAddAccessInfo() { m_AddAccessInfoIsSet = false; }
+oai::model::pcf::AdditionalAccessInfo
+EventsSubscPutData::getRelAccessInfo() const {
   return m_RelAccessInfo;
 }
 void EventsSubscPutData::setRelAccessInfo(
-    oai::model::pcf::AdditionalAccessInfo const& value) {
-  m_RelAccessInfo      = value;
+    oai::model::pcf::AdditionalAccessInfo const &value) {
+  m_RelAccessInfo = value;
   m_RelAccessInfoIsSet = true;
 }
 bool EventsSubscPutData::relAccessInfoIsSet() const {
   return m_RelAccessInfoIsSet;
 }
-void EventsSubscPutData::unsetRelAccessInfo() {
-  m_RelAccessInfoIsSet = false;
-}
-oai::model::pcf::AccNetChargingAddress EventsSubscPutData::getAnChargAddr()
-    const {
+void EventsSubscPutData::unsetRelAccessInfo() { m_RelAccessInfoIsSet = false; }
+oai::model::pcf::AccNetChargingAddress
+EventsSubscPutData::getAnChargAddr() const {
   return m_AnChargAddr;
 }
 void EventsSubscPutData::setAnChargAddr(
-    oai::model::pcf::AccNetChargingAddress const& value) {
-  m_AnChargAddr      = value;
+    oai::model::pcf::AccNetChargingAddress const &value) {
+  m_AnChargAddr = value;
   m_AnChargAddrIsSet = true;
 }
-bool EventsSubscPutData::anChargAddrIsSet() const {
-  return m_AnChargAddrIsSet;
-}
-void EventsSubscPutData::unsetAnChargAddr() {
-  m_AnChargAddrIsSet = false;
-}
+bool EventsSubscPutData::anChargAddrIsSet() const { return m_AnChargAddrIsSet; }
+void EventsSubscPutData::unsetAnChargAddr() { m_AnChargAddrIsSet = false; }
 std::vector<oai::model::pcf::AccessNetChargingIdentifier>
 EventsSubscPutData::getAnChargIds() const {
   return m_AnChargIds;
 }
 void EventsSubscPutData::setAnChargIds(
-    std::vector<oai::model::pcf::AccessNetChargingIdentifier> const& value) {
-  m_AnChargIds      = value;
+    std::vector<oai::model::pcf::AccessNetChargingIdentifier> const &value) {
+  m_AnChargIds = value;
   m_AnChargIdsIsSet = true;
 }
-bool EventsSubscPutData::anChargIdsIsSet() const {
-  return m_AnChargIdsIsSet;
-}
-void EventsSubscPutData::unsetAnChargIds() {
-  m_AnChargIdsIsSet = false;
-}
+bool EventsSubscPutData::anChargIdsIsSet() const { return m_AnChargIdsIsSet; }
+void EventsSubscPutData::unsetAnChargIds() { m_AnChargIdsIsSet = false; }
 oai::model::pcf::AnGwAddress EventsSubscPutData::getAnGwAddr() const {
   return m_AnGwAddr;
 }
 void EventsSubscPutData::setAnGwAddr(
-    oai::model::pcf::AnGwAddress const& value) {
-  m_AnGwAddr      = value;
+    oai::model::pcf::AnGwAddress const &value) {
+  m_AnGwAddr = value;
   m_AnGwAddrIsSet = true;
 }
-bool EventsSubscPutData::anGwAddrIsSet() const {
-  return m_AnGwAddrIsSet;
-}
-void EventsSubscPutData::unsetAnGwAddr() {
-  m_AnGwAddrIsSet = false;
-}
-std::vector<oai::model::pcf::L4sSupport> EventsSubscPutData::getL4sReports()
-    const {
+bool EventsSubscPutData::anGwAddrIsSet() const { return m_AnGwAddrIsSet; }
+void EventsSubscPutData::unsetAnGwAddr() { m_AnGwAddrIsSet = false; }
+std::vector<oai::model::pcf::L4sSupport>
+EventsSubscPutData::getL4sReports() const {
   return m_L4sReports;
 }
 void EventsSubscPutData::setL4sReports(
-    std::vector<oai::model::pcf::L4sSupport> const& value) {
-  m_L4sReports      = value;
+    std::vector<oai::model::pcf::L4sSupport> const &value) {
+  m_L4sReports = value;
   m_L4sReportsIsSet = true;
 }
-bool EventsSubscPutData::l4sReportsIsSet() const {
-  return m_L4sReportsIsSet;
-}
-void EventsSubscPutData::unsetL4sReports() {
-  m_L4sReportsIsSet = false;
-}
-std::string EventsSubscPutData::getEvSubsUri() const {
-  return m_EvSubsUri;
-}
-void EventsSubscPutData::setEvSubsUri(std::string const& value) {
+bool EventsSubscPutData::l4sReportsIsSet() const { return m_L4sReportsIsSet; }
+void EventsSubscPutData::unsetL4sReports() { m_L4sReportsIsSet = false; }
+std::string EventsSubscPutData::getEvSubsUri() const { return m_EvSubsUri; }
+void EventsSubscPutData::setEvSubsUri(std::string const &value) {
   m_EvSubsUri = value;
 }
 std::vector<oai::model::pcf::AfEventNotification>
@@ -1476,7 +1429,7 @@ EventsSubscPutData::getEvNotifs() const {
   return m_EvNotifs;
 }
 void EventsSubscPutData::setEvNotifs(
-    std::vector<oai::model::pcf::AfEventNotification> const& value) {
+    std::vector<oai::model::pcf::AfEventNotification> const &value) {
   m_EvNotifs = value;
 }
 std::vector<oai::model::pcf::ResourcesAllocationInfo>
@@ -1484,8 +1437,8 @@ EventsSubscPutData::getFailedResourcAllocReports() const {
   return m_FailedResourcAllocReports;
 }
 void EventsSubscPutData::setFailedResourcAllocReports(
-    std::vector<oai::model::pcf::ResourcesAllocationInfo> const& value) {
-  m_FailedResourcAllocReports      = value;
+    std::vector<oai::model::pcf::ResourcesAllocationInfo> const &value) {
+  m_FailedResourcAllocReports = value;
   m_FailedResourcAllocReportsIsSet = true;
 }
 bool EventsSubscPutData::failedResourcAllocReportsIsSet() const {
@@ -1499,8 +1452,8 @@ EventsSubscPutData::getSuccResourcAllocReports() const {
   return m_SuccResourcAllocReports;
 }
 void EventsSubscPutData::setSuccResourcAllocReports(
-    std::vector<oai::model::pcf::ResourcesAllocationInfo> const& value) {
-  m_SuccResourcAllocReports      = value;
+    std::vector<oai::model::pcf::ResourcesAllocationInfo> const &value) {
+  m_SuccResourcAllocReports = value;
   m_SuccResourcAllocReportsIsSet = true;
 }
 bool EventsSubscPutData::succResourcAllocReportsIsSet() const {
@@ -1509,28 +1462,26 @@ bool EventsSubscPutData::succResourcAllocReportsIsSet() const {
 void EventsSubscPutData::unsetSuccResourcAllocReports() {
   m_SuccResourcAllocReportsIsSet = false;
 }
-oai::model::pcf::NetLocAccessSupport EventsSubscPutData::getNoNetLocSupp()
-    const {
+oai::model::pcf::NetLocAccessSupport
+EventsSubscPutData::getNoNetLocSupp() const {
   return m_NoNetLocSupp;
 }
 void EventsSubscPutData::setNoNetLocSupp(
-    oai::model::pcf::NetLocAccessSupport const& value) {
-  m_NoNetLocSupp      = value;
+    oai::model::pcf::NetLocAccessSupport const &value) {
+  m_NoNetLocSupp = value;
   m_NoNetLocSuppIsSet = true;
 }
 bool EventsSubscPutData::noNetLocSuppIsSet() const {
   return m_NoNetLocSuppIsSet;
 }
-void EventsSubscPutData::unsetNoNetLocSupp() {
-  m_NoNetLocSuppIsSet = false;
-}
+void EventsSubscPutData::unsetNoNetLocSupp() { m_NoNetLocSuppIsSet = false; }
 std::vector<oai::model::pcf::OutOfCreditInformation>
 EventsSubscPutData::getOutOfCredReports() const {
   return m_OutOfCredReports;
 }
 void EventsSubscPutData::setOutOfCredReports(
-    std::vector<oai::model::pcf::OutOfCreditInformation> const& value) {
-  m_OutOfCredReports      = value;
+    std::vector<oai::model::pcf::OutOfCreditInformation> const &value) {
+  m_OutOfCredReports = value;
   m_OutOfCredReportsIsSet = true;
 }
 bool EventsSubscPutData::outOfCredReportsIsSet() const {
@@ -1542,53 +1493,43 @@ void EventsSubscPutData::unsetOutOfCredReports() {
 oai::model::common::PlmnIdNid EventsSubscPutData::getPlmnId() const {
   return m_PlmnId;
 }
-void EventsSubscPutData::setPlmnId(oai::model::common::PlmnIdNid const& value) {
-  m_PlmnId      = value;
+void EventsSubscPutData::setPlmnId(oai::model::common::PlmnIdNid const &value) {
+  m_PlmnId = value;
   m_PlmnIdIsSet = true;
 }
-bool EventsSubscPutData::plmnIdIsSet() const {
-  return m_PlmnIdIsSet;
-}
-void EventsSubscPutData::unsetPlmnId() {
-  m_PlmnIdIsSet = false;
-}
+bool EventsSubscPutData::plmnIdIsSet() const { return m_PlmnIdIsSet; }
+void EventsSubscPutData::unsetPlmnId() { m_PlmnIdIsSet = false; }
 std::vector<oai::model::pcf::QosNotificationControlInfo>
 EventsSubscPutData::getQncReports() const {
   return m_QncReports;
 }
 void EventsSubscPutData::setQncReports(
-    std::vector<oai::model::pcf::QosNotificationControlInfo> const& value) {
-  m_QncReports      = value;
+    std::vector<oai::model::pcf::QosNotificationControlInfo> const &value) {
+  m_QncReports = value;
   m_QncReportsIsSet = true;
 }
-bool EventsSubscPutData::qncReportsIsSet() const {
-  return m_QncReportsIsSet;
-}
-void EventsSubscPutData::unsetQncReports() {
-  m_QncReportsIsSet = false;
-}
+bool EventsSubscPutData::qncReportsIsSet() const { return m_QncReportsIsSet; }
+void EventsSubscPutData::unsetQncReports() { m_QncReportsIsSet = false; }
 std::vector<oai::model::pcf::QosMonitoringReport>
 EventsSubscPutData::getQosMonReports() const {
   return m_QosMonReports;
 }
 void EventsSubscPutData::setQosMonReports(
-    std::vector<oai::model::pcf::QosMonitoringReport> const& value) {
-  m_QosMonReports      = value;
+    std::vector<oai::model::pcf::QosMonitoringReport> const &value) {
+  m_QosMonReports = value;
   m_QosMonReportsIsSet = true;
 }
 bool EventsSubscPutData::qosMonReportsIsSet() const {
   return m_QosMonReportsIsSet;
 }
-void EventsSubscPutData::unsetQosMonReports() {
-  m_QosMonReportsIsSet = false;
-}
+void EventsSubscPutData::unsetQosMonReports() { m_QosMonReportsIsSet = false; }
 std::vector<oai::model::pcf::QosMonitoringReport>
 EventsSubscPutData::getQosMonDatRateReps() const {
   return m_QosMonDatRateReps;
 }
 void EventsSubscPutData::setQosMonDatRateReps(
-    std::vector<oai::model::pcf::QosMonitoringReport> const& value) {
-  m_QosMonDatRateReps      = value;
+    std::vector<oai::model::pcf::QosMonitoringReport> const &value) {
+  m_QosMonDatRateReps = value;
   m_QosMonDatRateRepsIsSet = true;
 }
 bool EventsSubscPutData::qosMonDatRateRepsIsSet() const {
@@ -1602,23 +1543,21 @@ EventsSubscPutData::getPdvMonReports() const {
   return m_PdvMonReports;
 }
 void EventsSubscPutData::setPdvMonReports(
-    std::vector<oai::model::pcf::PdvMonitoringReport> const& value) {
-  m_PdvMonReports      = value;
+    std::vector<oai::model::pcf::PdvMonitoringReport> const &value) {
+  m_PdvMonReports = value;
   m_PdvMonReportsIsSet = true;
 }
 bool EventsSubscPutData::pdvMonReportsIsSet() const {
   return m_PdvMonReportsIsSet;
 }
-void EventsSubscPutData::unsetPdvMonReports() {
-  m_PdvMonReportsIsSet = false;
-}
+void EventsSubscPutData::unsetPdvMonReports() { m_PdvMonReportsIsSet = false; }
 std::vector<oai::model::pcf::QosMonitoringReport>
 EventsSubscPutData::getCongestReports() const {
   return m_CongestReports;
 }
 void EventsSubscPutData::setCongestReports(
-    std::vector<oai::model::pcf::QosMonitoringReport> const& value) {
-  m_CongestReports      = value;
+    std::vector<oai::model::pcf::QosMonitoringReport> const &value) {
+  m_CongestReports = value;
   m_CongestReportsIsSet = true;
 }
 bool EventsSubscPutData::congestReportsIsSet() const {
@@ -1632,23 +1571,21 @@ EventsSubscPutData::getRttMonReports() const {
   return m_RttMonReports;
 }
 void EventsSubscPutData::setRttMonReports(
-    std::vector<oai::model::pcf::QosMonitoringReport> const& value) {
-  m_RttMonReports      = value;
+    std::vector<oai::model::pcf::QosMonitoringReport> const &value) {
+  m_RttMonReports = value;
   m_RttMonReportsIsSet = true;
 }
 bool EventsSubscPutData::rttMonReportsIsSet() const {
   return m_RttMonReportsIsSet;
 }
-void EventsSubscPutData::unsetRttMonReports() {
-  m_RttMonReportsIsSet = false;
-}
+void EventsSubscPutData::unsetRttMonReports() { m_RttMonReportsIsSet = false; }
 std::vector<oai::model::pcf::RanNasRelCause>
 EventsSubscPutData::getRanNasRelCauses() const {
   return m_RanNasRelCauses;
 }
 void EventsSubscPutData::setRanNasRelCauses(
-    std::vector<oai::model::pcf::RanNasRelCause> const& value) {
-  m_RanNasRelCauses      = value;
+    std::vector<oai::model::pcf::RanNasRelCause> const &value) {
+  m_RanNasRelCauses = value;
   m_RanNasRelCausesIsSet = true;
 }
 bool EventsSubscPutData::ranNasRelCausesIsSet() const {
@@ -1660,23 +1597,19 @@ void EventsSubscPutData::unsetRanNasRelCauses() {
 oai::model::common::RatType EventsSubscPutData::getRatType() const {
   return m_RatType;
 }
-void EventsSubscPutData::setRatType(oai::model::common::RatType const& value) {
-  m_RatType      = value;
+void EventsSubscPutData::setRatType(oai::model::common::RatType const &value) {
+  m_RatType = value;
   m_RatTypeIsSet = true;
 }
-bool EventsSubscPutData::ratTypeIsSet() const {
-  return m_RatTypeIsSet;
-}
-void EventsSubscPutData::unsetRatType() {
-  m_RatTypeIsSet = false;
-}
+bool EventsSubscPutData::ratTypeIsSet() const { return m_RatTypeIsSet; }
+void EventsSubscPutData::unsetRatType() { m_RatTypeIsSet = false; }
 oai::model::pcf::SatelliteBackhaulCategory
 EventsSubscPutData::getSatBackhaulCategory() const {
   return m_SatBackhaulCategory;
 }
 void EventsSubscPutData::setSatBackhaulCategory(
-    oai::model::pcf::SatelliteBackhaulCategory const& value) {
-  m_SatBackhaulCategory      = value;
+    oai::model::pcf::SatelliteBackhaulCategory const &value) {
+  m_SatBackhaulCategory = value;
   m_SatBackhaulCategoryIsSet = true;
 }
 bool EventsSubscPutData::satBackhaulCategoryIsSet() const {
@@ -1689,102 +1622,66 @@ oai::model::common::UserLocation EventsSubscPutData::getUeLoc() const {
   return m_UeLoc;
 }
 void EventsSubscPutData::setUeLoc(
-    oai::model::common::UserLocation const& value) {
-  m_UeLoc      = value;
+    oai::model::common::UserLocation const &value) {
+  m_UeLoc = value;
   m_UeLocIsSet = true;
 }
-bool EventsSubscPutData::ueLocIsSet() const {
-  return m_UeLocIsSet;
-}
-void EventsSubscPutData::unsetUeLoc() {
-  m_UeLocIsSet = false;
-}
-std::string EventsSubscPutData::getUeLocTime() const {
-  return m_UeLocTime;
-}
-void EventsSubscPutData::setUeLocTime(std::string const& value) {
-  m_UeLocTime      = value;
+bool EventsSubscPutData::ueLocIsSet() const { return m_UeLocIsSet; }
+void EventsSubscPutData::unsetUeLoc() { m_UeLocIsSet = false; }
+std::string EventsSubscPutData::getUeLocTime() const { return m_UeLocTime; }
+void EventsSubscPutData::setUeLocTime(std::string const &value) {
+  m_UeLocTime = value;
   m_UeLocTimeIsSet = true;
 }
-bool EventsSubscPutData::ueLocTimeIsSet() const {
-  return m_UeLocTimeIsSet;
-}
-void EventsSubscPutData::unsetUeLocTime() {
-  m_UeLocTimeIsSet = false;
-}
-std::string EventsSubscPutData::getUeTimeZone() const {
-  return m_UeTimeZone;
-}
-void EventsSubscPutData::setUeTimeZone(std::string const& value) {
-  m_UeTimeZone      = value;
+bool EventsSubscPutData::ueLocTimeIsSet() const { return m_UeLocTimeIsSet; }
+void EventsSubscPutData::unsetUeLocTime() { m_UeLocTimeIsSet = false; }
+std::string EventsSubscPutData::getUeTimeZone() const { return m_UeTimeZone; }
+void EventsSubscPutData::setUeTimeZone(std::string const &value) {
+  m_UeTimeZone = value;
   m_UeTimeZoneIsSet = true;
 }
-bool EventsSubscPutData::ueTimeZoneIsSet() const {
-  return m_UeTimeZoneIsSet;
-}
-void EventsSubscPutData::unsetUeTimeZone() {
-  m_UeTimeZoneIsSet = false;
-}
+bool EventsSubscPutData::ueTimeZoneIsSet() const { return m_UeTimeZoneIsSet; }
+void EventsSubscPutData::unsetUeTimeZone() { m_UeTimeZoneIsSet = false; }
 oai::model::pcf::AccumulatedUsage EventsSubscPutData::getUsgRep() const {
   return m_UsgRep;
 }
 void EventsSubscPutData::setUsgRep(
-    oai::model::pcf::AccumulatedUsage const& value) {
-  m_UsgRep      = value;
+    oai::model::pcf::AccumulatedUsage const &value) {
+  m_UsgRep = value;
   m_UsgRepIsSet = true;
 }
-bool EventsSubscPutData::usgRepIsSet() const {
-  return m_UsgRepIsSet;
-}
-void EventsSubscPutData::unsetUsgRep() {
-  m_UsgRepIsSet = false;
-}
-std::string EventsSubscPutData::getUrspEnfRep() const {
-  return m_UrspEnfRep;
-}
-void EventsSubscPutData::setUrspEnfRep(std::string const& value) {
-  m_UrspEnfRep      = value;
+bool EventsSubscPutData::usgRepIsSet() const { return m_UsgRepIsSet; }
+void EventsSubscPutData::unsetUsgRep() { m_UsgRepIsSet = false; }
+std::string EventsSubscPutData::getUrspEnfRep() const { return m_UrspEnfRep; }
+void EventsSubscPutData::setUrspEnfRep(std::string const &value) {
+  m_UrspEnfRep = value;
   m_UrspEnfRepIsSet = true;
 }
-bool EventsSubscPutData::urspEnfRepIsSet() const {
-  return m_UrspEnfRepIsSet;
-}
-void EventsSubscPutData::unsetUrspEnfRep() {
-  m_UrspEnfRepIsSet = false;
-}
+bool EventsSubscPutData::urspEnfRepIsSet() const { return m_UrspEnfRepIsSet; }
+void EventsSubscPutData::unsetUrspEnfRep() { m_UrspEnfRepIsSet = false; }
 oai::model::common::SscMode EventsSubscPutData::getSscMode() const {
   return m_SscMode;
 }
-void EventsSubscPutData::setSscMode(oai::model::common::SscMode const& value) {
-  m_SscMode      = value;
+void EventsSubscPutData::setSscMode(oai::model::common::SscMode const &value) {
+  m_SscMode = value;
   m_SscModeIsSet = true;
 }
-bool EventsSubscPutData::sscModeIsSet() const {
-  return m_SscModeIsSet;
-}
-void EventsSubscPutData::unsetSscMode() {
-  m_SscModeIsSet = false;
-}
-std::string EventsSubscPutData::getUeReqDnn() const {
-  return m_UeReqDnn;
-}
-void EventsSubscPutData::setUeReqDnn(std::string const& value) {
-  m_UeReqDnn      = value;
+bool EventsSubscPutData::sscModeIsSet() const { return m_SscModeIsSet; }
+void EventsSubscPutData::unsetSscMode() { m_SscModeIsSet = false; }
+std::string EventsSubscPutData::getUeReqDnn() const { return m_UeReqDnn; }
+void EventsSubscPutData::setUeReqDnn(std::string const &value) {
+  m_UeReqDnn = value;
   m_UeReqDnnIsSet = true;
 }
-bool EventsSubscPutData::ueReqDnnIsSet() const {
-  return m_UeReqDnnIsSet;
-}
-void EventsSubscPutData::unsetUeReqDnn() {
-  m_UeReqDnnIsSet = false;
-}
+bool EventsSubscPutData::ueReqDnnIsSet() const { return m_UeReqDnnIsSet; }
+void EventsSubscPutData::unsetUeReqDnn() { m_UeReqDnnIsSet = false; }
 oai::model::pcf::RedundantPduSessionInformation
 EventsSubscPutData::getRedundantPduSessionInfo() const {
   return m_RedundantPduSessionInfo;
 }
 void EventsSubscPutData::setRedundantPduSessionInfo(
-    oai::model::pcf::RedundantPduSessionInformation const& value) {
-  m_RedundantPduSessionInfo      = value;
+    oai::model::pcf::RedundantPduSessionInformation const &value) {
+  m_RedundantPduSessionInfo = value;
   m_RedundantPduSessionInfoIsSet = true;
 }
 bool EventsSubscPutData::redundantPduSessionInfoIsSet() const {
@@ -1798,8 +1695,8 @@ EventsSubscPutData::getTsnBridgeManCont() const {
   return m_TsnBridgeManCont;
 }
 void EventsSubscPutData::setTsnBridgeManCont(
-    oai::model::pcf::BridgeManagementContainer const& value) {
-  m_TsnBridgeManCont      = value;
+    oai::model::pcf::BridgeManagementContainer const &value) {
+  m_TsnBridgeManCont = value;
   m_TsnBridgeManContIsSet = true;
 }
 bool EventsSubscPutData::tsnBridgeManContIsSet() const {
@@ -1813,8 +1710,8 @@ EventsSubscPutData::getTsnPortManContDstt() const {
   return m_TsnPortManContDstt;
 }
 void EventsSubscPutData::setTsnPortManContDstt(
-    oai::model::pcf::PortManagementContainer const& value) {
-  m_TsnPortManContDstt      = value;
+    oai::model::pcf::PortManagementContainer const &value) {
+  m_TsnPortManContDstt = value;
   m_TsnPortManContDsttIsSet = true;
 }
 bool EventsSubscPutData::tsnPortManContDsttIsSet() const {
@@ -1828,8 +1725,8 @@ EventsSubscPutData::getTsnPortManContNwtts() const {
   return m_TsnPortManContNwtts;
 }
 void EventsSubscPutData::setTsnPortManContNwtts(
-    std::vector<oai::model::pcf::PortManagementContainer> const& value) {
-  m_TsnPortManContNwtts      = value;
+    std::vector<oai::model::pcf::PortManagementContainer> const &value) {
+  m_TsnPortManContNwtts = value;
   m_TsnPortManContNwttsIsSet = true;
 }
 bool EventsSubscPutData::tsnPortManContNwttsIsSet() const {
@@ -1842,23 +1739,21 @@ std::vector<std::string> EventsSubscPutData::getIpv4AddrList() const {
   return m_Ipv4AddrList;
 }
 void EventsSubscPutData::setIpv4AddrList(
-    std::vector<std::string> const& value) {
-  m_Ipv4AddrList      = value;
+    std::vector<std::string> const &value) {
+  m_Ipv4AddrList = value;
   m_Ipv4AddrListIsSet = true;
 }
 bool EventsSubscPutData::ipv4AddrListIsSet() const {
   return m_Ipv4AddrListIsSet;
 }
-void EventsSubscPutData::unsetIpv4AddrList() {
-  m_Ipv4AddrListIsSet = false;
-}
+void EventsSubscPutData::unsetIpv4AddrList() { m_Ipv4AddrListIsSet = false; }
 std::vector<oai::model::common::Ipv6Prefix>
 EventsSubscPutData::getIpv6PrefixList() const {
   return m_Ipv6PrefixList;
 }
 void EventsSubscPutData::setIpv6PrefixList(
-    std::vector<oai::model::common::Ipv6Prefix> const& value) {
-  m_Ipv6PrefixList      = value;
+    std::vector<oai::model::common::Ipv6Prefix> const &value) {
+  m_Ipv6PrefixList = value;
   m_Ipv6PrefixListIsSet = true;
 }
 bool EventsSubscPutData::ipv6PrefixListIsSet() const {
@@ -1871,15 +1766,13 @@ oai::model::pcf::BatOffsetInfo EventsSubscPutData::getBatOffsetInfo() const {
   return m_BatOffsetInfo;
 }
 void EventsSubscPutData::setBatOffsetInfo(
-    oai::model::pcf::BatOffsetInfo const& value) {
-  m_BatOffsetInfo      = value;
+    oai::model::pcf::BatOffsetInfo const &value) {
+  m_BatOffsetInfo = value;
   m_BatOffsetInfoIsSet = true;
 }
 bool EventsSubscPutData::batOffsetInfoIsSet() const {
   return m_BatOffsetInfoIsSet;
 }
-void EventsSubscPutData::unsetBatOffsetInfo() {
-  m_BatOffsetInfoIsSet = false;
-}
+void EventsSubscPutData::unsetBatOffsetInfo() { m_BatOffsetInfoIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

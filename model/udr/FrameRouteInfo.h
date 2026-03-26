@@ -33,7 +33,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class FrameRouteInfo {
- public:
+public:
   FrameRouteInfo();
   virtual ~FrameRouteInfo();
 
@@ -46,27 +46,27 @@ class FrameRouteInfo {
   ///
   /// </summary>
   std::string getIpv4Mask() const;
-  void setIpv4Mask(std::string const& value);
+  void setIpv4Mask(std::string const &value);
   bool ipv4MaskIsSet() const;
   void unsetIpv4Mask();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ipv6Prefix getIpv6Prefix() const;
-  void setIpv6Prefix(oai::model::common::Ipv6Prefix const& value);
+  void setIpv6Prefix(oai::model::common::Ipv6Prefix const &value);
   bool ipv6PrefixIsSet() const;
   void unsetIpv6Prefix();
 
-  friend void to_json(nlohmann::json& j, const FrameRouteInfo& o);
-  friend void from_json(const nlohmann::json& j, FrameRouteInfo& o);
+  friend void to_json(nlohmann::json &j, const FrameRouteInfo &o);
+  friend void from_json(const nlohmann::json &j, FrameRouteInfo &o);
 
- protected:
+protected:
   std::string m_Ipv4Mask;
   bool m_Ipv4MaskIsSet;
   oai::model::common::Ipv6Prefix m_Ipv6Prefix;
   bool m_Ipv6PrefixIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* FrameRouteInfo_H_ */

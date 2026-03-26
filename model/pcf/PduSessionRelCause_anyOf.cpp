@@ -13,8 +13,8 @@
 
 #include "PduSessionRelCause_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::pcf {
 
@@ -27,12 +27,12 @@ void PduSessionRelCause_anyOf::validate() const {
   }
 }
 
-bool PduSessionRelCause_anyOf::validate(std::stringstream& msg) const {
+bool PduSessionRelCause_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool PduSessionRelCause_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool PduSessionRelCause_anyOf::validate(std::stringstream &msg,
+                                        const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PduSessionRelCause_anyOf" : pathPrefix;
@@ -47,32 +47,32 @@ bool PduSessionRelCause_anyOf::validate(
 }
 
 bool PduSessionRelCause_anyOf::operator==(
-    const PduSessionRelCause_anyOf& rhs) const {
+    const PduSessionRelCause_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool PduSessionRelCause_anyOf::operator!=(
-    const PduSessionRelCause_anyOf& rhs) const {
+    const PduSessionRelCause_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PduSessionRelCause_anyOf& o) {
+void to_json(nlohmann::json &j, const PduSessionRelCause_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case PduSessionRelCause_anyOf::ePduSessionRelCause_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case PduSessionRelCause_anyOf::ePduSessionRelCause_anyOf::PS_TO_CS_HO:
-      j = "PS_TO_CS_HO";
-      break;
+  case PduSessionRelCause_anyOf::ePduSessionRelCause_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case PduSessionRelCause_anyOf::ePduSessionRelCause_anyOf::PS_TO_CS_HO:
+    j = "PS_TO_CS_HO";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, PduSessionRelCause_anyOf& o) {
+void from_json(const nlohmann::json &j, PduSessionRelCause_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "PS_TO_CS_HO") {
     o.setValue(
@@ -95,4 +95,4 @@ void PduSessionRelCause_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

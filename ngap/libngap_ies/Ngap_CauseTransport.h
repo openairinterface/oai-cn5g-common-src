@@ -21,7 +21,7 @@ extern "C" {
 /* Dependencies */
 typedef enum Ngap_CauseTransport {
   Ngap_CauseTransport_transport_resource_unavailable = 0,
-  Ngap_CauseTransport_unspecified                    = 1
+  Ngap_CauseTransport_unspecified = 1
   /*
    * Enumeration is extensible
    */

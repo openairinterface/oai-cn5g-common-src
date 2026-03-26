@@ -34,7 +34,7 @@ namespace model {
 ///
 /// </summary>
 class AuthorizedNssaiAvailabilityData {
- public:
+public:
   AuthorizedNssaiAvailabilityData();
   virtual ~AuthorizedNssaiAvailabilityData() = default;
 
@@ -48,16 +48,16 @@ class AuthorizedNssaiAvailabilityData {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const AuthorizedNssaiAvailabilityData& rhs) const;
-  bool operator!=(const AuthorizedNssaiAvailabilityData& rhs) const;
+  bool operator==(const AuthorizedNssaiAvailabilityData &rhs) const;
+  bool operator!=(const AuthorizedNssaiAvailabilityData &rhs) const;
 
   /////////////////////////////////////////////
   /// AuthorizedNssaiAvailabilityData members
@@ -66,41 +66,41 @@ class AuthorizedNssaiAvailabilityData {
   ///
   /// </summary>
   oai::model::common::Tai getTai() const;
-  void setTai(oai::model::common::Tai const& value);
+  void setTai(oai::model::common::Tai const &value);
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::common::ExtSnssai> getSupportedSnssaiList() const;
   void setSupportedSnssaiList(
-      std::vector<oai::model::common::ExtSnssai> const& value);
+      std::vector<oai::model::common::ExtSnssai> const &value);
   /// <summary>
   ///
   /// </summary>
   std::vector<RestrictedSnssai> getRestrictedSnssaiList() const;
-  void setRestrictedSnssaiList(std::vector<RestrictedSnssai> const& value);
+  void setRestrictedSnssaiList(std::vector<RestrictedSnssai> const &value);
   bool restrictedSnssaiListIsSet() const;
   void unsetRestrictedSnssaiList();
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::common::Tai> getTaiList() const;
-  void setTaiList(std::vector<oai::model::common::Tai> const& value);
+  void setTaiList(std::vector<oai::model::common::Tai> const &value);
   bool taiListIsSet() const;
   void unsetTaiList();
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::nrf::TaiRange> getTaiRangeList() const;
-  void setTaiRangeList(std::vector<oai::model::nrf::TaiRange> const& value);
+  void setTaiRangeList(std::vector<oai::model::nrf::TaiRange> const &value);
   bool taiRangeListIsSet() const;
   void unsetTaiRangeList();
 
-  friend void to_json(
-      nlohmann::json& j, const AuthorizedNssaiAvailabilityData& o);
-  friend void from_json(
-      const nlohmann::json& j, AuthorizedNssaiAvailabilityData& o);
+  friend void to_json(nlohmann::json &j,
+                      const AuthorizedNssaiAvailabilityData &o);
+  friend void from_json(const nlohmann::json &j,
+                        AuthorizedNssaiAvailabilityData &o);
 
- protected:
+protected:
   oai::model::common::Tai m_Tai;
 
   std::vector<oai::model::common::ExtSnssai> m_SupportedSnssaiList;
@@ -113,8 +113,8 @@ class AuthorizedNssaiAvailabilityData {
   bool m_TaiRangeListIsSet;
 };
 
-}  // namespace model
-}  // namespace nssf_server
-}  // namespace oai
+} // namespace model
+} // namespace nssf_server
+} // namespace oai
 
 #endif /* AuthorizedNssaiAvailabilityData_H_ */

@@ -20,9 +20,9 @@ namespace oai::udr::model {
 
 SmPolicyData::SmPolicyData() {
   m_UmDataLimitsIsSet = false;
-  m_UmDataIsSet       = false;
-  m_SuppFeat          = "";
-  m_SuppFeatIsSet     = false;
+  m_UmDataIsSet = false;
+  m_SuppFeat = "";
+  m_SuppFeatIsSet = false;
 }
 
 SmPolicyData::~SmPolicyData() {}
@@ -31,16 +31,18 @@ void SmPolicyData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const SmPolicyData& o) {
-  j                       = nlohmann::json();
+void to_json(nlohmann::json &j, const SmPolicyData &o) {
+  j = nlohmann::json();
   j["smPolicySnssaiData"] = o.m_SmPolicySnssaiData;
   if (o.umDataLimitsIsSet() || !o.m_UmDataLimits.empty())
     j["umDataLimits"] = o.m_UmDataLimits;
-  if (o.umDataIsSet() || !o.m_UmData.empty()) j["umData"] = o.m_UmData;
-  if (o.suppFeatIsSet()) j["suppFeat"] = o.m_SuppFeat;
+  if (o.umDataIsSet() || !o.m_UmData.empty())
+    j["umData"] = o.m_UmData;
+  if (o.suppFeatIsSet())
+    j["suppFeat"] = o.m_SuppFeat;
 }
 
-void from_json(const nlohmann::json& j, SmPolicyData& o) {
+void from_json(const nlohmann::json &j, SmPolicyData &o) {
   j.at("smPolicySnssaiData").get_to(o.m_SmPolicySnssaiData);
   if (j.find("umDataLimits") != j.end()) {
     j.at("umDataLimits").get_to(o.m_UmDataLimits);
@@ -56,53 +58,39 @@ void from_json(const nlohmann::json& j, SmPolicyData& o) {
   }
 }
 
-std::map<std::string, SmPolicySnssaiData>&
+std::map<std::string, SmPolicySnssaiData> &
 SmPolicyData::getSmPolicySnssaiData() {
   return m_SmPolicySnssaiData;
 }
 void SmPolicyData::setSmPolicySnssaiData(
-    std::map<std::string, SmPolicySnssaiData> const& value) {
+    std::map<std::string, SmPolicySnssaiData> const &value) {
   m_SmPolicySnssaiData = value;
 }
-std::map<std::string, UsageMonDataLimit>& SmPolicyData::getUmDataLimits() {
+std::map<std::string, UsageMonDataLimit> &SmPolicyData::getUmDataLimits() {
   return m_UmDataLimits;
 }
 void SmPolicyData::setUmDataLimits(
-    std::map<std::string, UsageMonDataLimit> const& value) {
-  m_UmDataLimits      = value;
+    std::map<std::string, UsageMonDataLimit> const &value) {
+  m_UmDataLimits = value;
   m_UmDataLimitsIsSet = true;
 }
-bool SmPolicyData::umDataLimitsIsSet() const {
-  return m_UmDataLimitsIsSet;
-}
-void SmPolicyData::unsetUmDataLimits() {
-  m_UmDataLimitsIsSet = false;
-}
-std::map<std::string, UsageMonData>& SmPolicyData::getUmData() {
+bool SmPolicyData::umDataLimitsIsSet() const { return m_UmDataLimitsIsSet; }
+void SmPolicyData::unsetUmDataLimits() { m_UmDataLimitsIsSet = false; }
+std::map<std::string, UsageMonData> &SmPolicyData::getUmData() {
   return m_UmData;
 }
-void SmPolicyData::setUmData(std::map<std::string, UsageMonData> const& value) {
-  m_UmData      = value;
+void SmPolicyData::setUmData(std::map<std::string, UsageMonData> const &value) {
+  m_UmData = value;
   m_UmDataIsSet = true;
 }
-bool SmPolicyData::umDataIsSet() const {
-  return m_UmDataIsSet;
-}
-void SmPolicyData::unsetUmData() {
-  m_UmDataIsSet = false;
-}
-std::string SmPolicyData::getSuppFeat() const {
-  return m_SuppFeat;
-}
-void SmPolicyData::setSuppFeat(std::string const& value) {
-  m_SuppFeat      = value;
+bool SmPolicyData::umDataIsSet() const { return m_UmDataIsSet; }
+void SmPolicyData::unsetUmData() { m_UmDataIsSet = false; }
+std::string SmPolicyData::getSuppFeat() const { return m_SuppFeat; }
+void SmPolicyData::setSuppFeat(std::string const &value) {
+  m_SuppFeat = value;
   m_SuppFeatIsSet = true;
 }
-bool SmPolicyData::suppFeatIsSet() const {
-  return m_SuppFeatIsSet;
-}
-void SmPolicyData::unsetSuppFeat() {
-  m_SuppFeatIsSet = false;
-}
+bool SmPolicyData::suppFeatIsSet() const { return m_SuppFeatIsSet; }
+void SmPolicyData::unsetSuppFeat() { m_SuppFeatIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

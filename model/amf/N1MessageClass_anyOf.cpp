@@ -13,8 +13,8 @@
 
 #include "N1MessageClass_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::amf {
 
@@ -27,12 +27,12 @@ void N1MessageClass_anyOf::validate() const {
   }
 }
 
-bool N1MessageClass_anyOf::validate(std::stringstream& msg) const {
+bool N1MessageClass_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool N1MessageClass_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool N1MessageClass_anyOf::validate(std::stringstream &msg,
+                                    const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "N1MessageClass_anyOf" : pathPrefix;
@@ -46,46 +46,46 @@ bool N1MessageClass_anyOf::validate(
   return success;
 }
 
-bool N1MessageClass_anyOf::operator==(const N1MessageClass_anyOf& rhs) const {
+bool N1MessageClass_anyOf::operator==(const N1MessageClass_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool N1MessageClass_anyOf::operator!=(const N1MessageClass_anyOf& rhs) const {
+bool N1MessageClass_anyOf::operator!=(const N1MessageClass_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const N1MessageClass_anyOf& o) {
+void to_json(nlohmann::json &j, const N1MessageClass_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case N1MessageClass_anyOf::eN1MessageClass_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case N1MessageClass_anyOf::eN1MessageClass_anyOf::_5GMM:
-      j = "5GMM";
-      break;
-    case N1MessageClass_anyOf::eN1MessageClass_anyOf::SM:
-      j = "SM";
-      break;
-    case N1MessageClass_anyOf::eN1MessageClass_anyOf::LPP:
-      j = "LPP";
-      break;
-    case N1MessageClass_anyOf::eN1MessageClass_anyOf::SMS:
-      j = "SMS";
-      break;
-    case N1MessageClass_anyOf::eN1MessageClass_anyOf::UPDP:
-      j = "UPDP";
-      break;
-    case N1MessageClass_anyOf::eN1MessageClass_anyOf::LCS:
-      j = "LCS";
-      break;
+  case N1MessageClass_anyOf::eN1MessageClass_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case N1MessageClass_anyOf::eN1MessageClass_anyOf::_5GMM:
+    j = "5GMM";
+    break;
+  case N1MessageClass_anyOf::eN1MessageClass_anyOf::SM:
+    j = "SM";
+    break;
+  case N1MessageClass_anyOf::eN1MessageClass_anyOf::LPP:
+    j = "LPP";
+    break;
+  case N1MessageClass_anyOf::eN1MessageClass_anyOf::SMS:
+    j = "SMS";
+    break;
+  case N1MessageClass_anyOf::eN1MessageClass_anyOf::UPDP:
+    j = "UPDP";
+    break;
+  case N1MessageClass_anyOf::eN1MessageClass_anyOf::LCS:
+    j = "LCS";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, N1MessageClass_anyOf& o) {
+void from_json(const nlohmann::json &j, N1MessageClass_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "5GMM") {
     o.setValue(N1MessageClass_anyOf::eN1MessageClass_anyOf::_5GMM);
@@ -108,8 +108,8 @@ void from_json(const nlohmann::json& j, N1MessageClass_anyOf& o) {
   }
 }
 
-N1MessageClass_anyOf::eN1MessageClass_anyOf N1MessageClass_anyOf::getValue()
-    const {
+N1MessageClass_anyOf::eN1MessageClass_anyOf
+N1MessageClass_anyOf::getValue() const {
   return m_value;
 }
 void N1MessageClass_anyOf::setValue(
@@ -117,4 +117,4 @@ void N1MessageClass_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

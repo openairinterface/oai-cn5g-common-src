@@ -27,12 +27,12 @@ void EventReportMessage::validate() const {
   }
 }
 
-bool EventReportMessage::validate(std::stringstream& msg) const {
+bool EventReportMessage::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool EventReportMessage::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool EventReportMessage::validate(std::stringstream &msg,
+                                  const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "EventReportMessage" : pathPrefix;
@@ -40,7 +40,7 @@ bool EventReportMessage::validate(
   return success;
 }
 
-bool EventReportMessage::operator==(const EventReportMessage& rhs) const {
+bool EventReportMessage::operator==(const EventReportMessage &rhs) const {
   return
 
       (getEventClass() == rhs.getEventClass()) &&
@@ -50,17 +50,17 @@ bool EventReportMessage::operator==(const EventReportMessage& rhs) const {
           ;
 }
 
-bool EventReportMessage::operator!=(const EventReportMessage& rhs) const {
+bool EventReportMessage::operator!=(const EventReportMessage &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const EventReportMessage& o) {
-  j                 = nlohmann::json();
-  j["eventClass"]   = o.m_EventClass;
+void to_json(nlohmann::json &j, const EventReportMessage &o) {
+  j = nlohmann::json();
+  j["eventClass"] = o.m_EventClass;
   j["eventContent"] = o.m_EventContent;
 }
 
-void from_json(const nlohmann::json& j, EventReportMessage& o) {
+void from_json(const nlohmann::json &j, EventReportMessage &o) {
   j.at("eventClass").get_to(o.m_EventClass);
   j.at("eventContent").get_to(o.m_EventContent);
 }
@@ -69,16 +69,16 @@ oai::model::lmf::EventClass EventReportMessage::getEventClass() const {
   return m_EventClass;
 }
 void EventReportMessage::setEventClass(
-    oai::model::lmf::EventClass const& value) {
+    oai::model::lmf::EventClass const &value) {
   m_EventClass = value;
 }
-oai::model::common::RefToBinaryData EventReportMessage::getEventContent()
-    const {
+oai::model::common::RefToBinaryData
+EventReportMessage::getEventContent() const {
   return m_EventContent;
 }
 void EventReportMessage::setEventContent(
-    oai::model::common::RefToBinaryData const& value) {
+    oai::model::common::RefToBinaryData const &value) {
   m_EventContent = value;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

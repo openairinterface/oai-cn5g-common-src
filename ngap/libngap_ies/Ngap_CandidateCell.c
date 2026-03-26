@@ -92,7 +92,7 @@ asn_CHOICE_specifics_t asn_SPC_Ngap_CandidateCell_specs_1 = {
     sizeof(struct Ngap_CandidateCell),
     offsetof(struct Ngap_CandidateCell, _asn_ctx),
     offsetof(struct Ngap_CandidateCell, present),
-    sizeof(((struct Ngap_CandidateCell*) 0)->present),
+    sizeof(((struct Ngap_CandidateCell *)0)->present),
     asn_MAP_Ngap_CandidateCell_tag2el_1,
     3, /* Count of tags in the map */
     0,

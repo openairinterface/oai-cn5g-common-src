@@ -20,8 +20,8 @@
 #define Guami_H_
 
 #include "PlmnIdNid.h"
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::common {
 
@@ -29,7 +29,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class Guami {
- public:
+public:
   Guami();
   virtual ~Guami() = default;
 
@@ -43,16 +43,16 @@ class Guami {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const Guami& rhs) const;
-  bool operator!=(const Guami& rhs) const;
+  bool operator==(const Guami &rhs) const;
+  bool operator!=(const Guami &rhs) const;
 
   /////////////////////////////////////////////
   /// Guami members
@@ -61,22 +61,22 @@ class Guami {
   ///
   /// </summary>
   oai::model::common::PlmnIdNid getPlmnId() const;
-  void setPlmnId(oai::model::common::PlmnIdNid const& value);
+  void setPlmnId(oai::model::common::PlmnIdNid const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getAmfId() const;
-  void setAmfId(std::string const& value);
+  void setAmfId(std::string const &value);
 
-  friend void to_json(nlohmann::json& j, const Guami& o);
-  friend void from_json(const nlohmann::json& j, Guami& o);
+  friend void to_json(nlohmann::json &j, const Guami &o);
+  friend void from_json(const nlohmann::json &j, Guami &o);
 
- protected:
+protected:
   oai::model::common::PlmnIdNid m_PlmnId;
 
   std::string m_AmfId;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* Guami_H_ */

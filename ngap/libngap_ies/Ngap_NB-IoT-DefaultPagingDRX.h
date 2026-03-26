@@ -20,9 +20,9 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_NB_IoT_DefaultPagingDRX {
-  Ngap_NB_IoT_DefaultPagingDRX_rf128  = 0,
-  Ngap_NB_IoT_DefaultPagingDRX_rf256  = 1,
-  Ngap_NB_IoT_DefaultPagingDRX_rf512  = 2,
+  Ngap_NB_IoT_DefaultPagingDRX_rf128 = 0,
+  Ngap_NB_IoT_DefaultPagingDRX_rf256 = 1,
+  Ngap_NB_IoT_DefaultPagingDRX_rf512 = 2,
   Ngap_NB_IoT_DefaultPagingDRX_rf1024 = 3
   /*
    * Enumeration is extensible

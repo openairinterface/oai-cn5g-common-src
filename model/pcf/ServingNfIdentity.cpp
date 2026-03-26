@@ -19,10 +19,10 @@
 namespace oai::model::pcf {
 
 ServingNfIdentity::ServingNfIdentity() {
-  m_ServNfInstId      = "";
+  m_ServNfInstId = "";
   m_ServNfInstIdIsSet = false;
-  m_GuamiIsSet        = false;
-  m_AnGwAddrIsSet     = false;
+  m_GuamiIsSet = false;
+  m_AnGwAddrIsSet = false;
 }
 
 void ServingNfIdentity::validate() const {
@@ -32,12 +32,12 @@ void ServingNfIdentity::validate() const {
   }
 }
 
-bool ServingNfIdentity::validate(std::stringstream& msg) const {
+bool ServingNfIdentity::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ServingNfIdentity::validate(
-    std::stringstream& /* msg */, const std::string& /* pathPrefix */) const {
+bool ServingNfIdentity::validate(std::stringstream & /* msg */,
+                                 const std::string & /* pathPrefix */) const {
   bool success = true;
   /*
   const std::string _pathPrefix =
@@ -46,7 +46,7 @@ bool ServingNfIdentity::validate(
   return success;
 }
 
-bool ServingNfIdentity::operator==(const ServingNfIdentity& rhs) const {
+bool ServingNfIdentity::operator==(const ServingNfIdentity &rhs) const {
   return
 
       ((!servNfInstIdIsSet() && !rhs.servNfInstIdIsSet()) ||
@@ -63,18 +63,21 @@ bool ServingNfIdentity::operator==(const ServingNfIdentity& rhs) const {
           ;
 }
 
-bool ServingNfIdentity::operator!=(const ServingNfIdentity& rhs) const {
+bool ServingNfIdentity::operator!=(const ServingNfIdentity &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ServingNfIdentity& o) {
+void to_json(nlohmann::json &j, const ServingNfIdentity &o) {
   j = nlohmann::json();
-  if (o.servNfInstIdIsSet()) j["servNfInstId"] = o.m_ServNfInstId;
-  if (o.guamiIsSet()) j["guami"] = o.m_Guami;
-  if (o.anGwAddrIsSet()) j["anGwAddr"] = o.m_AnGwAddr;
+  if (o.servNfInstIdIsSet())
+    j["servNfInstId"] = o.m_ServNfInstId;
+  if (o.guamiIsSet())
+    j["guami"] = o.m_Guami;
+  if (o.anGwAddrIsSet())
+    j["anGwAddr"] = o.m_AnGwAddr;
 }
 
-void from_json(const nlohmann::json& j, ServingNfIdentity& o) {
+void from_json(const nlohmann::json &j, ServingNfIdentity &o) {
   if (j.find("servNfInstId") != j.end()) {
     j.at("servNfInstId").get_to(o.m_ServNfInstId);
     o.m_ServNfInstIdIsSet = true;
@@ -92,41 +95,31 @@ void from_json(const nlohmann::json& j, ServingNfIdentity& o) {
 std::string ServingNfIdentity::getServNfInstId() const {
   return m_ServNfInstId;
 }
-void ServingNfIdentity::setServNfInstId(std::string const& value) {
-  m_ServNfInstId      = value;
+void ServingNfIdentity::setServNfInstId(std::string const &value) {
+  m_ServNfInstId = value;
   m_ServNfInstIdIsSet = true;
 }
 bool ServingNfIdentity::servNfInstIdIsSet() const {
   return m_ServNfInstIdIsSet;
 }
-void ServingNfIdentity::unsetServNfInstId() {
-  m_ServNfInstIdIsSet = false;
-}
+void ServingNfIdentity::unsetServNfInstId() { m_ServNfInstIdIsSet = false; }
 oai::model::common::Guami ServingNfIdentity::getGuami() const {
   return m_Guami;
 }
-void ServingNfIdentity::setGuami(oai::model::common::Guami const& value) {
-  m_Guami      = value;
+void ServingNfIdentity::setGuami(oai::model::common::Guami const &value) {
+  m_Guami = value;
   m_GuamiIsSet = true;
 }
-bool ServingNfIdentity::guamiIsSet() const {
-  return m_GuamiIsSet;
-}
-void ServingNfIdentity::unsetGuami() {
-  m_GuamiIsSet = false;
-}
+bool ServingNfIdentity::guamiIsSet() const { return m_GuamiIsSet; }
+void ServingNfIdentity::unsetGuami() { m_GuamiIsSet = false; }
 oai::model::pcf::AnGwAddress ServingNfIdentity::getAnGwAddr() const {
   return m_AnGwAddr;
 }
-void ServingNfIdentity::setAnGwAddr(oai::model::pcf::AnGwAddress const& value) {
-  m_AnGwAddr      = value;
+void ServingNfIdentity::setAnGwAddr(oai::model::pcf::AnGwAddress const &value) {
+  m_AnGwAddr = value;
   m_AnGwAddrIsSet = true;
 }
-bool ServingNfIdentity::anGwAddrIsSet() const {
-  return m_AnGwAddrIsSet;
-}
-void ServingNfIdentity::unsetAnGwAddr() {
-  m_AnGwAddrIsSet = false;
-}
+bool ServingNfIdentity::anGwAddrIsSet() const { return m_AnGwAddrIsSet; }
+void ServingNfIdentity::unsetAnGwAddr() { m_AnGwAddrIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

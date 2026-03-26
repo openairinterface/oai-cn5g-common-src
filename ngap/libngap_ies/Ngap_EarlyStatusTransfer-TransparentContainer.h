@@ -25,7 +25,7 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_EarlyStatusTransfer-TransparentContainer */
 typedef struct Ngap_EarlyStatusTransfer_TransparentContainer {
   Ngap_ProcedureStageChoice_t procedureStage;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

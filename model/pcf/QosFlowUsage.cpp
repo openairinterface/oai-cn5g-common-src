@@ -27,12 +27,12 @@ void QosFlowUsage::validate() const {
   }
 }
 
-bool QosFlowUsage::validate(std::stringstream& msg) const {
+bool QosFlowUsage::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool QosFlowUsage::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool QosFlowUsage::validate(std::stringstream &msg,
+                            const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "QosFlowUsage" : pathPrefix;
@@ -43,32 +43,28 @@ bool QosFlowUsage::validate(
   return success;
 }
 
-bool QosFlowUsage::operator==(const QosFlowUsage& rhs) const {
+bool QosFlowUsage::operator==(const QosFlowUsage &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool QosFlowUsage::operator!=(const QosFlowUsage& rhs) const {
+bool QosFlowUsage::operator!=(const QosFlowUsage &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const QosFlowUsage& o) {
+void to_json(nlohmann::json &j, const QosFlowUsage &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, QosFlowUsage& o) {
+void from_json(const nlohmann::json &j, QosFlowUsage &o) {
   from_json(j, o.m_value);
 }
 
-QosFlowUsage_anyOf QosFlowUsage::getValue() const {
-  return m_value;
-}
+QosFlowUsage_anyOf QosFlowUsage::getValue() const { return m_value; }
 
-void QosFlowUsage::setValue(QosFlowUsage_anyOf value) {
-  m_value = value;
-}
+void QosFlowUsage::setValue(QosFlowUsage_anyOf value) { m_value = value; }
 
 QosFlowUsage_anyOf::eQosFlowUsage_anyOf QosFlowUsage::getEnumValue() const {
   return m_value.getValue();
@@ -78,4 +74,4 @@ void QosFlowUsage::setEnumValue(QosFlowUsage_anyOf::eQosFlowUsage_anyOf value) {
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

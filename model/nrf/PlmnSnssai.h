@@ -21,8 +21,8 @@
 
 #include "PlmnId.h"
 #include "Snssai.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::nrf {
 
@@ -30,7 +30,7 @@ namespace oai::model::nrf {
 ///
 /// </summary>
 class PlmnSnssai {
- public:
+public:
   PlmnSnssai();
   virtual ~PlmnSnssai();
 
@@ -43,22 +43,22 @@ class PlmnSnssai {
   ///
   /// </summary>
   oai::model::common::PlmnId getPlmnId() const;
-  void setPlmnId(oai::model::common::PlmnId const& value);
+  void setPlmnId(oai::model::common::PlmnId const &value);
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::Snssai>& getSNssaiList();
-  void setSNssaiList(std::vector<oai::model::common::Snssai> const& value);
+  std::vector<oai::model::common::Snssai> &getSNssaiList();
+  void setSNssaiList(std::vector<oai::model::common::Snssai> const &value);
 
-  friend void to_json(nlohmann::json& j, const PlmnSnssai& o);
-  friend void from_json(const nlohmann::json& j, PlmnSnssai& o);
+  friend void to_json(nlohmann::json &j, const PlmnSnssai &o);
+  friend void from_json(const nlohmann::json &j, PlmnSnssai &o);
 
- protected:
+protected:
   oai::model::common::PlmnId m_PlmnId;
 
   std::vector<oai::model::common::Snssai> m_SNssaiList;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* PlmnSnssai_H_ */

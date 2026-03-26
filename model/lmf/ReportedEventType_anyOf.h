@@ -27,7 +27,7 @@ namespace oai::model::lmf {
 ///
 /// </summary>
 class ReportedEventType_anyOf {
- public:
+public:
   ReportedEventType_anyOf();
   virtual ~ReportedEventType_anyOf() = default;
 
@@ -55,16 +55,16 @@ class ReportedEventType_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const ReportedEventType_anyOf& rhs) const;
-  bool operator!=(const ReportedEventType_anyOf& rhs) const;
+  bool operator==(const ReportedEventType_anyOf &rhs) const;
+  bool operator!=(const ReportedEventType_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// ReportedEventType_anyOf members
@@ -72,15 +72,15 @@ class ReportedEventType_anyOf {
   ReportedEventType_anyOf::eReportedEventType_anyOf getValue() const;
   void setValue(ReportedEventType_anyOf::eReportedEventType_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const ReportedEventType_anyOf& o);
-  friend void from_json(const nlohmann::json& j, ReportedEventType_anyOf& o);
+  friend void to_json(nlohmann::json &j, const ReportedEventType_anyOf &o);
+  friend void from_json(const nlohmann::json &j, ReportedEventType_anyOf &o);
 
- protected:
+protected:
   ReportedEventType_anyOf::eReportedEventType_anyOf m_value =
       ReportedEventType_anyOf::eReportedEventType_anyOf::
           INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf
 
 #endif /* ReportedEventType_anyOf_H_ */

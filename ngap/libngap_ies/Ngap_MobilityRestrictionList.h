@@ -29,11 +29,11 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_MobilityRestrictionList */
 typedef struct Ngap_MobilityRestrictionList {
   Ngap_PLMNIdentity_t servingPLMN;
-  struct Ngap_EquivalentPLMNs* equivalentPLMNs;                   /* OPTIONAL */
-  struct Ngap_RATRestrictions* rATRestrictions;                   /* OPTIONAL */
-  struct Ngap_ForbiddenAreaInformation* forbiddenAreaInformation; /* OPTIONAL */
-  struct Ngap_ServiceAreaInformation* serviceAreaInformation;     /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions;          /* OPTIONAL */
+  struct Ngap_EquivalentPLMNs *equivalentPLMNs;                   /* OPTIONAL */
+  struct Ngap_RATRestrictions *rATRestrictions;                   /* OPTIONAL */
+  struct Ngap_ForbiddenAreaInformation *forbiddenAreaInformation; /* OPTIONAL */
+  struct Ngap_ServiceAreaInformation *serviceAreaInformation;     /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions;          /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

@@ -26,8 +26,8 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_AreaScopeOfNeighCellsItem */
 typedef struct Ngap_AreaScopeOfNeighCellsItem {
   Ngap_NRFrequencyInfo_t nrFrequencyInfo;
-  struct Ngap_PCIListForMDT* pciListForMDT;              /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_PCIListForMDT *pciListForMDT;              /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

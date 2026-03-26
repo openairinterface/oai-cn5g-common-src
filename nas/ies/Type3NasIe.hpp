@@ -13,23 +13,23 @@ constexpr uint8_t kType3NasIeFormatTvLength = 1;
 namespace oai::nas {
 
 class Type3NasIe : public NasIe {
- public:
+public:
   Type3NasIe();
   Type3NasIe(uint8_t iei);
   virtual ~Type3NasIe() = default;
 
-  int Encode(uint8_t* buf, int len) const override;
-  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+  int Encode(uint8_t *buf, int len) const override;
+  int Decode(const uint8_t *const buf, int len, bool is_iei = false) override;
 
   uint32_t GetIeLength() const override;
   bool Validate(int len) const override;
 
   void SetIei(uint8_t iei);
 
- protected:
-  std::optional<uint8_t> iei_;  // IEI present format TV
+protected:
+  std::optional<uint8_t> iei_; // IEI present format TV
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

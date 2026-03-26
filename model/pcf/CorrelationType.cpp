@@ -27,12 +27,12 @@ void CorrelationType::validate() const {
   }
 }
 
-bool CorrelationType::validate(std::stringstream& msg) const {
+bool CorrelationType::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool CorrelationType::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool CorrelationType::validate(std::stringstream &msg,
+                               const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "CorrelationType" : pathPrefix;
@@ -40,18 +40,18 @@ bool CorrelationType::validate(
   return success;
 }
 
-bool CorrelationType::operator==(const CorrelationType& rhs) const {
-  return true;  // TODO
+bool CorrelationType::operator==(const CorrelationType &rhs) const {
+  return true; // TODO
 }
 
-bool CorrelationType::operator!=(const CorrelationType& rhs) const {
+bool CorrelationType::operator!=(const CorrelationType &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const CorrelationType& o) {
+void to_json(nlohmann::json &j, const CorrelationType &o) {
   j = nlohmann::json::object();
 }
 
-void from_json(const nlohmann::json& j, CorrelationType& o) {}
+void from_json(const nlohmann::json &j, CorrelationType &o) {}
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

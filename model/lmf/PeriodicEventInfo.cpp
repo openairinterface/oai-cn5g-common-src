@@ -19,7 +19,7 @@
 namespace oai::model::lmf {
 
 PeriodicEventInfo::PeriodicEventInfo() {
-  m_ReportingAmount   = 0;
+  m_ReportingAmount = 0;
   m_ReportingInterval = 0;
 }
 
@@ -30,18 +30,18 @@ void PeriodicEventInfo::validate() const {
   }
 }
 
-bool PeriodicEventInfo::validate(std::stringstream& msg) const {
+bool PeriodicEventInfo::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool PeriodicEventInfo::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool PeriodicEventInfo::validate(std::stringstream &msg,
+                                 const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PeriodicEventInfo" : pathPrefix;
 
   /* ReportingAmount */ {
-    const int32_t& value               = m_ReportingAmount;
+    const int32_t &value = m_ReportingAmount;
     const std::string currentValuePath = _pathPrefix + ".reportingAmount";
 
     if (value < 1) {
@@ -55,7 +55,7 @@ bool PeriodicEventInfo::validate(
   }
 
   /* ReportingInterval */ {
-    const int32_t& value               = m_ReportingInterval;
+    const int32_t &value = m_ReportingInterval;
     const std::string currentValuePath = _pathPrefix + ".reportingInterval";
 
     if (value < 1) {
@@ -71,7 +71,7 @@ bool PeriodicEventInfo::validate(
   return success;
 }
 
-bool PeriodicEventInfo::operator==(const PeriodicEventInfo& rhs) const {
+bool PeriodicEventInfo::operator==(const PeriodicEventInfo &rhs) const {
   return
 
       (getReportingAmount() == rhs.getReportingAmount()) &&
@@ -81,17 +81,17 @@ bool PeriodicEventInfo::operator==(const PeriodicEventInfo& rhs) const {
           ;
 }
 
-bool PeriodicEventInfo::operator!=(const PeriodicEventInfo& rhs) const {
+bool PeriodicEventInfo::operator!=(const PeriodicEventInfo &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PeriodicEventInfo& o) {
-  j                      = nlohmann::json();
-  j["reportingAmount"]   = o.m_ReportingAmount;
+void to_json(nlohmann::json &j, const PeriodicEventInfo &o) {
+  j = nlohmann::json();
+  j["reportingAmount"] = o.m_ReportingAmount;
   j["reportingInterval"] = o.m_ReportingInterval;
 }
 
-void from_json(const nlohmann::json& j, PeriodicEventInfo& o) {
+void from_json(const nlohmann::json &j, PeriodicEventInfo &o) {
   j.at("reportingAmount").get_to(o.m_ReportingAmount);
   j.at("reportingInterval").get_to(o.m_ReportingInterval);
 }
@@ -109,4 +109,4 @@ void PeriodicEventInfo::setReportingInterval(int32_t const value) {
   m_ReportingInterval = value;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

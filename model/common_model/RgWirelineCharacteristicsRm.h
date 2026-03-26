@@ -28,7 +28,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class RgWirelineCharacteristicsRm {
- public:
+public:
   RgWirelineCharacteristicsRm();
   virtual ~RgWirelineCharacteristicsRm() = default;
 
@@ -42,16 +42,16 @@ class RgWirelineCharacteristicsRm {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const RgWirelineCharacteristicsRm& rhs) const;
-  bool operator!=(const RgWirelineCharacteristicsRm& rhs) const;
+  bool operator==(const RgWirelineCharacteristicsRm &rhs) const;
+  bool operator!=(const RgWirelineCharacteristicsRm &rhs) const;
 
   /////////////////////////////////////////////
   /// RgWirelineCharacteristicsRm members
@@ -60,16 +60,16 @@ class RgWirelineCharacteristicsRm {
   void setValue(NullValue value);
   NullValue::eNullValue getEnumValue() const;
   void setEnumValue(NullValue::eNullValue value);
-  friend void to_json(nlohmann::json& j, const RgWirelineCharacteristicsRm& o);
-  friend void from_json(
-      const nlohmann::json& j, RgWirelineCharacteristicsRm& o);
-  friend void to_json(nlohmann::json& j, const NullValue& o);
-  friend void from_json(const nlohmann::json& j, NullValue& o);
+  friend void to_json(nlohmann::json &j, const RgWirelineCharacteristicsRm &o);
+  friend void from_json(const nlohmann::json &j,
+                        RgWirelineCharacteristicsRm &o);
+  friend void to_json(nlohmann::json &j, const NullValue &o);
+  friend void from_json(const nlohmann::json &j, NullValue &o);
 
- protected:
+protected:
   NullValue m_value;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* RgWirelineCharacteristicsRm_H_ */

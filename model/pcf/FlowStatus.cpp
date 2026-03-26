@@ -27,12 +27,12 @@ void FlowStatus::validate() const {
   }
 }
 
-bool FlowStatus::validate(std::stringstream& msg) const {
+bool FlowStatus::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool FlowStatus::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool FlowStatus::validate(std::stringstream &msg,
+                          const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "FlowStatus" : pathPrefix;
@@ -43,32 +43,28 @@ bool FlowStatus::validate(
   return success;
 }
 
-bool FlowStatus::operator==(const FlowStatus& rhs) const {
+bool FlowStatus::operator==(const FlowStatus &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool FlowStatus::operator!=(const FlowStatus& rhs) const {
+bool FlowStatus::operator!=(const FlowStatus &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const FlowStatus& o) {
+void to_json(nlohmann::json &j, const FlowStatus &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, FlowStatus& o) {
+void from_json(const nlohmann::json &j, FlowStatus &o) {
   from_json(j, o.m_value);
 }
 
-FlowStatus_anyOf FlowStatus::getValue() const {
-  return m_value;
-}
+FlowStatus_anyOf FlowStatus::getValue() const { return m_value; }
 
-void FlowStatus::setValue(FlowStatus_anyOf value) {
-  m_value = value;
-}
+void FlowStatus::setValue(FlowStatus_anyOf value) { m_value = value; }
 
 FlowStatus_anyOf::eFlowStatus_anyOf FlowStatus::getEnumValue() const {
   return m_value.getValue();
@@ -78,4 +74,4 @@ void FlowStatus::setEnumValue(FlowStatus_anyOf::eFlowStatus_anyOf value) {
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

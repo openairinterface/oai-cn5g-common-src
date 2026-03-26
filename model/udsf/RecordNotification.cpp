@@ -18,9 +18,7 @@
 
 namespace oai::model::udsf {
 
-RecordNotification::RecordNotification() {
-  m_BlocksIsSet = false;
-}
+RecordNotification::RecordNotification() { m_BlocksIsSet = false; }
 
 void RecordNotification::validate() const {
   std::stringstream msg;
@@ -29,24 +27,24 @@ void RecordNotification::validate() const {
   }
 }
 
-bool RecordNotification::validate(std::stringstream& msg) const {
+bool RecordNotification::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool RecordNotification::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool RecordNotification::validate(std::stringstream &msg,
+                                  const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "RecordNotification" : pathPrefix;
 
   if (blocksIsSet()) {
-    const std::vector<nlohmann::json>& value = m_Blocks;
-    const std::string currentValuePath       = _pathPrefix + ".blocks";
+    const std::vector<nlohmann::json> &value = m_Blocks;
+    const std::string currentValuePath = _pathPrefix + ".blocks";
 
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const nlohmann::json& value : value) {
+      int i = 0;
+      for (const nlohmann::json &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -58,7 +56,7 @@ bool RecordNotification::validate(
   return success;
 }
 
-bool RecordNotification::operator==(const RecordNotification& rhs) const {
+bool RecordNotification::operator==(const RecordNotification &rhs) const {
   return
 
       (getDescriptor() == rhs.getDescriptor()) &&
@@ -71,18 +69,19 @@ bool RecordNotification::operator==(const RecordNotification& rhs) const {
           ;
 }
 
-bool RecordNotification::operator!=(const RecordNotification& rhs) const {
+bool RecordNotification::operator!=(const RecordNotification &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const RecordNotification& o) {
-  j               = nlohmann::json();
+void to_json(nlohmann::json &j, const RecordNotification &o) {
+  j = nlohmann::json();
   j["descriptor"] = o.m_Descriptor;
-  j["meta"]       = o.m_Meta;
-  if (o.blocksIsSet() || !o.m_Blocks.empty()) j["blocks"] = o.m_Blocks;
+  j["meta"] = o.m_Meta;
+  if (o.blocksIsSet() || !o.m_Blocks.empty())
+    j["blocks"] = o.m_Blocks;
 }
 
-void from_json(const nlohmann::json& j, RecordNotification& o) {
+void from_json(const nlohmann::json &j, RecordNotification &o) {
   j.at("descriptor").get_to(o.m_Descriptor);
   j.at("meta").get_to(o.m_Meta);
   if (j.find("blocks") != j.end()) {
@@ -91,32 +90,28 @@ void from_json(const nlohmann::json& j, RecordNotification& o) {
   }
 }
 
-oai::model::udsf::NotificationDescription RecordNotification::getDescriptor()
-    const {
+oai::model::udsf::NotificationDescription
+RecordNotification::getDescriptor() const {
   return m_Descriptor;
 }
 void RecordNotification::setDescriptor(
-    oai::model::udsf::NotificationDescription const& value) {
+    oai::model::udsf::NotificationDescription const &value) {
   m_Descriptor = value;
 }
 oai::model::udsf::RecordMeta RecordNotification::getMeta() const {
   return m_Meta;
 }
-void RecordNotification::setMeta(oai::model::udsf::RecordMeta const& value) {
+void RecordNotification::setMeta(oai::model::udsf::RecordMeta const &value) {
   m_Meta = value;
 }
 std::vector<nlohmann::json> RecordNotification::getBlocks() const {
   return m_Blocks;
 }
-void RecordNotification::setBlocks(std::vector<nlohmann::json> const& value) {
-  m_Blocks      = value;
+void RecordNotification::setBlocks(std::vector<nlohmann::json> const &value) {
+  m_Blocks = value;
   m_BlocksIsSet = true;
 }
-bool RecordNotification::blocksIsSet() const {
-  return m_BlocksIsSet;
-}
-void RecordNotification::unsetBlocks() {
-  m_BlocksIsSet = false;
-}
+bool RecordNotification::blocksIsSet() const { return m_BlocksIsSet; }
+void RecordNotification::unsetBlocks() { m_BlocksIsSet = false; }
 
-}  // namespace oai::model::udsf
+} // namespace oai::model::udsf

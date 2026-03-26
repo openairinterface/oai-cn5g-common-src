@@ -13,8 +13,8 @@
 
 #include "RequestedRuleDataType_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::pcf {
 
@@ -27,12 +27,12 @@ void RequestedRuleDataType_anyOf::validate() const {
   }
 }
 
-bool RequestedRuleDataType_anyOf::validate(std::stringstream& msg) const {
+bool RequestedRuleDataType_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool RequestedRuleDataType_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "RequestedRuleDataType_anyOf" : pathPrefix;
@@ -47,51 +47,47 @@ bool RequestedRuleDataType_anyOf::validate(
 }
 
 bool RequestedRuleDataType_anyOf::operator==(
-    const RequestedRuleDataType_anyOf& rhs) const {
+    const RequestedRuleDataType_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool RequestedRuleDataType_anyOf::operator!=(
-    const RequestedRuleDataType_anyOf& rhs) const {
+    const RequestedRuleDataType_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const RequestedRuleDataType_anyOf& o) {
+void to_json(nlohmann::json &j, const RequestedRuleDataType_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case RequestedRuleDataType_anyOf::eRequestedRuleDataType_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case RequestedRuleDataType_anyOf::eRequestedRuleDataType_anyOf::CH_ID:
-      j = "CH_ID";
-      break;
-    case RequestedRuleDataType_anyOf::eRequestedRuleDataType_anyOf::
-        MS_TIME_ZONE:
-      j = "MS_TIME_ZONE";
-      break;
-    case RequestedRuleDataType_anyOf::eRequestedRuleDataType_anyOf::
-        USER_LOC_INFO:
-      j = "USER_LOC_INFO";
-      break;
-    case RequestedRuleDataType_anyOf::eRequestedRuleDataType_anyOf::RES_RELEASE:
-      j = "RES_RELEASE";
-      break;
-    case RequestedRuleDataType_anyOf::eRequestedRuleDataType_anyOf::
-        SUCC_RES_ALLO:
-      j = "SUCC_RES_ALLO";
-      break;
-    case RequestedRuleDataType_anyOf::eRequestedRuleDataType_anyOf::
-        EPS_FALLBACK:
-      j = "EPS_FALLBACK";
-      break;
+  case RequestedRuleDataType_anyOf::eRequestedRuleDataType_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case RequestedRuleDataType_anyOf::eRequestedRuleDataType_anyOf::CH_ID:
+    j = "CH_ID";
+    break;
+  case RequestedRuleDataType_anyOf::eRequestedRuleDataType_anyOf::MS_TIME_ZONE:
+    j = "MS_TIME_ZONE";
+    break;
+  case RequestedRuleDataType_anyOf::eRequestedRuleDataType_anyOf::USER_LOC_INFO:
+    j = "USER_LOC_INFO";
+    break;
+  case RequestedRuleDataType_anyOf::eRequestedRuleDataType_anyOf::RES_RELEASE:
+    j = "RES_RELEASE";
+    break;
+  case RequestedRuleDataType_anyOf::eRequestedRuleDataType_anyOf::SUCC_RES_ALLO:
+    j = "SUCC_RES_ALLO";
+    break;
+  case RequestedRuleDataType_anyOf::eRequestedRuleDataType_anyOf::EPS_FALLBACK:
+    j = "EPS_FALLBACK";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, RequestedRuleDataType_anyOf& o) {
+void from_json(const nlohmann::json &j, RequestedRuleDataType_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "CH_ID") {
     o.setValue(
@@ -129,4 +125,4 @@ void RequestedRuleDataType_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

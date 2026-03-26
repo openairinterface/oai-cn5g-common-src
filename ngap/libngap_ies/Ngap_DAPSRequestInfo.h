@@ -33,7 +33,7 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_DAPSRequestInfo */
 typedef struct Ngap_DAPSRequestInfo {
   long dAPSIndicator;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

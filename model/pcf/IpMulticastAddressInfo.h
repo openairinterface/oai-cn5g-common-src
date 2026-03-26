@@ -19,9 +19,9 @@
 #ifndef IpMulticastAddressInfo_H_
 #define IpMulticastAddressInfo_H_
 
-#include <string>
 #include "Ipv6Addr.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::pcf {
 
@@ -29,7 +29,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class IpMulticastAddressInfo {
- public:
+public:
   IpMulticastAddressInfo();
   virtual ~IpMulticastAddressInfo() = default;
 
@@ -43,16 +43,16 @@ class IpMulticastAddressInfo {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const IpMulticastAddressInfo& rhs) const;
-  bool operator!=(const IpMulticastAddressInfo& rhs) const;
+  bool operator==(const IpMulticastAddressInfo &rhs) const;
+  bool operator!=(const IpMulticastAddressInfo &rhs) const;
 
   /////////////////////////////////////////////
   /// IpMulticastAddressInfo members
@@ -61,35 +61,35 @@ class IpMulticastAddressInfo {
   ///
   /// </summary>
   std::string getSrcIpv4Addr() const;
-  void setSrcIpv4Addr(std::string const& value);
+  void setSrcIpv4Addr(std::string const &value);
   bool srcIpv4AddrIsSet() const;
   void unsetSrcIpv4Addr();
   /// <summary>
   ///
   /// </summary>
   std::string getIpv4MulAddr() const;
-  void setIpv4MulAddr(std::string const& value);
+  void setIpv4MulAddr(std::string const &value);
   bool ipv4MulAddrIsSet() const;
   void unsetIpv4MulAddr();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ipv6Addr getSrcIpv6Addr() const;
-  void setSrcIpv6Addr(oai::model::common::Ipv6Addr const& value);
+  void setSrcIpv6Addr(oai::model::common::Ipv6Addr const &value);
   bool srcIpv6AddrIsSet() const;
   void unsetSrcIpv6Addr();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ipv6Addr getIpv6MulAddr() const;
-  void setIpv6MulAddr(oai::model::common::Ipv6Addr const& value);
+  void setIpv6MulAddr(oai::model::common::Ipv6Addr const &value);
   bool ipv6MulAddrIsSet() const;
   void unsetIpv6MulAddr();
 
-  friend void to_json(nlohmann::json& j, const IpMulticastAddressInfo& o);
-  friend void from_json(const nlohmann::json& j, IpMulticastAddressInfo& o);
+  friend void to_json(nlohmann::json &j, const IpMulticastAddressInfo &o);
+  friend void from_json(const nlohmann::json &j, IpMulticastAddressInfo &o);
 
- protected:
+protected:
   std::string m_SrcIpv4Addr;
   bool m_SrcIpv4AddrIsSet;
   std::string m_Ipv4MulAddr;
@@ -100,6 +100,6 @@ class IpMulticastAddressInfo {
   bool m_Ipv6MulAddrIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* IpMulticastAddressInfo_H_ */

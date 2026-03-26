@@ -27,13 +27,13 @@ void DownlinkRanStatusTransfer::initialize() {
 }
 
 //------------------------------------------------------------------------------
-void DownlinkRanStatusTransfer::setAmfUeNgapId(const uint64_t& id) {
+void DownlinkRanStatusTransfer::setAmfUeNgapId(const uint64_t &id) {
   NgapUeMessage::m_AmfUeNgapId.set(id);
 
-  Ngap_DownlinkRANStatusTransferIEs_t* ie =
-      (Ngap_DownlinkRANStatusTransferIEs_t*) calloc(
+  Ngap_DownlinkRANStatusTransferIEs_t *ie =
+      (Ngap_DownlinkRANStatusTransferIEs_t *)calloc(
           1, sizeof(Ngap_DownlinkRANStatusTransferIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID;
+  ie->id = Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID;
   ie->criticality = Ngap_Criticality_reject;
   ie->value.present =
       Ngap_DownlinkRANStatusTransferIEs__value_PR_AMF_UE_NGAP_ID;
@@ -42,7 +42,7 @@ void DownlinkRanStatusTransfer::setAmfUeNgapId(const uint64_t& id) {
       NgapUeMessage::m_AmfUeNgapId.encode(ie->value.choice.AMF_UE_NGAP_ID);
   if (!ret) {
     oai::logger::logger_common::ngap().error("Encode AMF_UE_NGAP_ID IE error");
-    oai::utils::utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void **)&ie);
     return;
   }
 
@@ -52,13 +52,13 @@ void DownlinkRanStatusTransfer::setAmfUeNgapId(const uint64_t& id) {
 }
 
 //------------------------------------------------------------------------------
-void DownlinkRanStatusTransfer::setRanUeNgapId(const uint32_t& id) {
+void DownlinkRanStatusTransfer::setRanUeNgapId(const uint32_t &id) {
   NgapUeMessage::m_RanUeNgapId.set(id);
 
-  Ngap_DownlinkRANStatusTransferIEs_t* ie =
-      (Ngap_DownlinkRANStatusTransferIEs_t*) calloc(
+  Ngap_DownlinkRANStatusTransferIEs_t *ie =
+      (Ngap_DownlinkRANStatusTransferIEs_t *)calloc(
           1, sizeof(Ngap_DownlinkRANStatusTransferIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID;
+  ie->id = Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID;
   ie->criticality = Ngap_Criticality_reject;
   ie->value.present =
       Ngap_DownlinkRANStatusTransferIEs__value_PR_RAN_UE_NGAP_ID;
@@ -67,7 +67,7 @@ void DownlinkRanStatusTransfer::setRanUeNgapId(const uint32_t& id) {
       NgapUeMessage::m_RanUeNgapId.encode(ie->value.choice.RAN_UE_NGAP_ID);
   if (!ret) {
     oai::logger::logger_common::ngap().error("Encode RAN_UE_NGAP_ID IE error");
-    oai::utils::utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void **)&ie);
     return;
   }
 
@@ -78,10 +78,10 @@ void DownlinkRanStatusTransfer::setRanUeNgapId(const uint32_t& id) {
 
 //------------------------------------------------------------------------------
 void DownlinkRanStatusTransfer::setRanStatusTransferTransparentContainer(
-    const long& drbIDValue, const long& ulPdcpValue, const long& ulHfnPdcpValue,
-    const long& dlPdcpValue, const long& dlHfnPdcpValue) {
-  Ngap_DRB_ID_t dRB_id               = {};
-  dRB_id                             = drbIDValue;
+    const long &drbIDValue, const long &ulPdcpValue, const long &ulHfnPdcpValue,
+    const long &dlPdcpValue, const long &dlHfnPdcpValue) {
+  Ngap_DRB_ID_t dRB_id = {};
+  dRB_id = drbIDValue;
   CountValueForPdcpSn18 countValueUL = {};
   countValueUL.set(ulPdcpValue, ulHfnPdcpValue);
   CountValueForPdcpSn18 countValueDL{};
@@ -103,8 +103,8 @@ void DownlinkRanStatusTransfer::setRanStatusTransferTransparentContainer(
   m_list.set(dRBSubjectItemList);
   m_RanStatusTransferTransparentContainer.setDrbSubjectList(m_list);
 
-  Ngap_DownlinkRANStatusTransferIEs_t* ie =
-      (Ngap_DownlinkRANStatusTransferIEs_t*) calloc(
+  Ngap_DownlinkRANStatusTransferIEs_t *ie =
+      (Ngap_DownlinkRANStatusTransferIEs_t *)calloc(
           1, sizeof(Ngap_DownlinkRANStatusTransferIEs_t));
   ie->id = Ngap_ProtocolIE_ID_id_RANStatusTransfer_TransparentContainer;
   ie->criticality = Ngap_Criticality_reject;
@@ -115,7 +115,7 @@ void DownlinkRanStatusTransfer::setRanStatusTransferTransparentContainer(
   if (!ret) {
     oai::logger::logger_common::ngap().error(
         "Encode RANStatusTransfer_TransparentContainer IE error");
-    oai::utils::utils::free_wrapper((void**) &ie);
+    oai::utils::utils::free_wrapper((void **)&ie);
   }
   if (ASN_SEQUENCE_ADD(&m_DownlinkranstatustransferIes->protocolIEs.list, ie) !=
       0) {
@@ -126,13 +126,13 @@ void DownlinkRanStatusTransfer::setRanStatusTransferTransparentContainer(
 
 //------------------------------------------------------------------------------
 void DownlinkRanStatusTransfer::getRanStatusTransferTransparentContainer(
-    long& drbIDValue, long& ulPdcpValue, long& ulHfnPdcpValue,
-    long& dlPdcpValue, long& dlHfnPdcpValue) const {
+    long &drbIDValue, long &ulPdcpValue, long &ulHfnPdcpValue,
+    long &dlPdcpValue, long &dlHfnPdcpValue) const {
   // TODO:
 }
 
 //------------------------------------------------------------------------------
-bool DownlinkRanStatusTransfer::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
+bool DownlinkRanStatusTransfer::decode(Ngap_NGAP_PDU_t *ngapMsgPdu) {
   ngapPdu = ngapMsgPdu;
 
   if (ngapPdu->present == Ngap_NGAP_PDU_PR_initiatingMessage) {
@@ -158,76 +158,76 @@ bool DownlinkRanStatusTransfer::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
   for (int i = 0; i < m_DownlinkranstatustransferIes->protocolIEs.list.count;
        i++) {
     switch (m_DownlinkranstatustransferIes->protocolIEs.list.array[i]->id) {
-      case Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID: {
-        if (m_DownlinkranstatustransferIes->protocolIEs.list.array[i]
-                    ->criticality == Ngap_Criticality_reject &&
-            m_DownlinkranstatustransferIes->protocolIEs.list.array[i]
-                    ->value.present ==
-                Ngap_DownlinkRANStatusTransferIEs__value_PR_AMF_UE_NGAP_ID) {
-          if (!NgapUeMessage::m_AmfUeNgapId.decode(
-                  m_DownlinkranstatustransferIes->protocolIEs.list.array[i]
-                      ->value.choice.AMF_UE_NGAP_ID)) {
-            oai::logger::logger_common::ngap().error(
-                "Decoded NGAP AMF_UE_NGAP_ID IE error");
-            return false;
-          }
-        } else {
+    case Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID: {
+      if (m_DownlinkranstatustransferIes->protocolIEs.list.array[i]
+                  ->criticality == Ngap_Criticality_reject &&
+          m_DownlinkranstatustransferIes->protocolIEs.list.array[i]
+                  ->value.present ==
+              Ngap_DownlinkRANStatusTransferIEs__value_PR_AMF_UE_NGAP_ID) {
+        if (!NgapUeMessage::m_AmfUeNgapId.decode(
+                m_DownlinkranstatustransferIes->protocolIEs.list.array[i]
+                    ->value.choice.AMF_UE_NGAP_ID)) {
           oai::logger::logger_common::ngap().error(
               "Decoded NGAP AMF_UE_NGAP_ID IE error");
           return false;
         }
-      } break;
-      case Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID: {
-        if (m_DownlinkranstatustransferIes->protocolIEs.list.array[i]
-                    ->criticality == Ngap_Criticality_reject &&
-            m_DownlinkranstatustransferIes->protocolIEs.list.array[i]
-                    ->value.present ==
-                Ngap_DownlinkRANStatusTransferIEs__value_PR_RAN_UE_NGAP_ID) {
-          if (!NgapUeMessage::m_RanUeNgapId.decode(
-                  m_DownlinkranstatustransferIes->protocolIEs.list.array[i]
-                      ->value.choice.RAN_UE_NGAP_ID)) {
-            oai::logger::logger_common::ngap().error(
-                "Decoded NGAP RAN_UE_NGAP_ID IE error");
-            return false;
-          }
-        } else {
+      } else {
+        oai::logger::logger_common::ngap().error(
+            "Decoded NGAP AMF_UE_NGAP_ID IE error");
+        return false;
+      }
+    } break;
+    case Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID: {
+      if (m_DownlinkranstatustransferIes->protocolIEs.list.array[i]
+                  ->criticality == Ngap_Criticality_reject &&
+          m_DownlinkranstatustransferIes->protocolIEs.list.array[i]
+                  ->value.present ==
+              Ngap_DownlinkRANStatusTransferIEs__value_PR_RAN_UE_NGAP_ID) {
+        if (!NgapUeMessage::m_RanUeNgapId.decode(
+                m_DownlinkranstatustransferIes->protocolIEs.list.array[i]
+                    ->value.choice.RAN_UE_NGAP_ID)) {
           oai::logger::logger_common::ngap().error(
               "Decoded NGAP RAN_UE_NGAP_ID IE error");
           return false;
         }
-      } break;
-      case Ngap_ProtocolIE_ID_id_RANStatusTransfer_TransparentContainer: {
-        if (m_DownlinkranstatustransferIes->protocolIEs.list.array[i]
-                    ->criticality == Ngap_Criticality_reject &&
-            m_DownlinkranstatustransferIes->protocolIEs.list.array[i]
-                    ->value.present ==
-                Ngap_DownlinkRANStatusTransferIEs__value_PR_RANStatusTransfer_TransparentContainer) {
-          if (!m_RanStatusTransferTransparentContainer.decode(
-                  m_DownlinkranstatustransferIes->protocolIEs.list.array[i]
-                      ->value.choice.RANStatusTransfer_TransparentContainer)) {
-            oai::logger::logger_common::ngap().error(
-                "Decoded NGAP RANStatusTransfer_TransparentContainer IE "
-                "error");
-            return false;
-          }
-        } else {
+      } else {
+        oai::logger::logger_common::ngap().error(
+            "Decoded NGAP RAN_UE_NGAP_ID IE error");
+        return false;
+      }
+    } break;
+    case Ngap_ProtocolIE_ID_id_RANStatusTransfer_TransparentContainer: {
+      if (m_DownlinkranstatustransferIes->protocolIEs.list.array[i]
+                  ->criticality == Ngap_Criticality_reject &&
+          m_DownlinkranstatustransferIes->protocolIEs.list.array[i]
+                  ->value.present ==
+              Ngap_DownlinkRANStatusTransferIEs__value_PR_RANStatusTransfer_TransparentContainer) {
+        if (!m_RanStatusTransferTransparentContainer.decode(
+                m_DownlinkranstatustransferIes->protocolIEs.list.array[i]
+                    ->value.choice.RANStatusTransfer_TransparentContainer)) {
           oai::logger::logger_common::ngap().error(
               "Decoded NGAP RANStatusTransfer_TransparentContainer IE "
               "error");
           return false;
         }
-
-      } break;
-      default: {
+      } else {
         oai::logger::logger_common::ngap().error(
-            "Decoded NGAP Message PDU error");
-
+            "Decoded NGAP RANStatusTransfer_TransparentContainer IE "
+            "error");
         return false;
       }
+
+    } break;
+    default: {
+      oai::logger::logger_common::ngap().error(
+          "Decoded NGAP Message PDU error");
+
+      return false;
+    }
     }
   }
 
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

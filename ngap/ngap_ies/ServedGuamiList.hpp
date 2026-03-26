@@ -16,22 +16,22 @@ extern "C" {
 namespace oai::ngap {
 
 class ServedGuamiList {
- public:
+public:
   ServedGuamiList();
   virtual ~ServedGuamiList();
 
-  void set(const std::vector<ServedGuamiItem>& list);
-  void get(std::vector<ServedGuamiItem>& list) const;
+  void set(const std::vector<ServedGuamiItem> &list);
+  void get(std::vector<ServedGuamiItem> &list) const;
 
-  void addItem(const ServedGuamiItem& item);
+  void addItem(const ServedGuamiItem &item);
 
-  bool encode(Ngap_ServedGUAMIList_t&) const;
-  bool decode(const Ngap_ServedGUAMIList_t&);
+  bool encode(Ngap_ServedGUAMIList_t &) const;
+  bool decode(const Ngap_ServedGUAMIList_t &);
 
- private:
+private:
   std::vector<ServedGuamiItem> m_ItemList;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

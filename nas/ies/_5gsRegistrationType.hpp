@@ -12,7 +12,7 @@ constexpr auto k5gsRegistrationTypeName = "5GS Registration Type";
 namespace oai::nas {
 
 class _5gsRegistrationType : public Type1NasIeFormatTv {
- public:
+public:
   _5gsRegistrationType();
   _5gsRegistrationType(bool follow_on_req, uint8_t type);
   _5gsRegistrationType(uint8_t iei, bool follow_on_req, uint8_t type);
@@ -34,11 +34,11 @@ class _5gsRegistrationType : public Type1NasIeFormatTv {
   void SetRegType(uint8_t type);
   uint8_t GetRegType();
 
- private:
+private:
   bool follow_on_req_;
   uint8_t reg_type_ : 3;
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

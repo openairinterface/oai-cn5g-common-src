@@ -15,20 +15,20 @@ extern "C" {
 namespace oai::ngap {
 
 class EutraCgi {
- public:
+public:
   EutraCgi();
   virtual ~EutraCgi();
 
-  void set(const PlmnId&, const EutraCellIdentity&);
-  void get(PlmnId&, EutraCellIdentity&) const;
+  void set(const PlmnId &, const EutraCellIdentity &);
+  void get(PlmnId &, EutraCellIdentity &) const;
 
-  bool encode(Ngap_EUTRA_CGI_t&) const;
-  bool decode(const Ngap_EUTRA_CGI_t&);
+  bool encode(Ngap_EUTRA_CGI_t &) const;
+  bool decode(const Ngap_EUTRA_CGI_t &);
 
- private:
-  PlmnId m_PlmnId;                        // Mandatory
-  EutraCellIdentity m_eutraCellIdentity;  // Mandatory
+private:
+  PlmnId m_PlmnId;                       // Mandatory
+  EutraCellIdentity m_eutraCellIdentity; // Mandatory
 };
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

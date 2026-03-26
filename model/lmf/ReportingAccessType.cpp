@@ -27,12 +27,12 @@ void ReportingAccessType::validate() const {
   }
 }
 
-bool ReportingAccessType::validate(std::stringstream& msg) const {
+bool ReportingAccessType::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ReportingAccessType::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ReportingAccessType::validate(std::stringstream &msg,
+                                   const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ReportingAccessType" : pathPrefix;
@@ -43,22 +43,22 @@ bool ReportingAccessType::validate(
   return success;
 }
 
-bool ReportingAccessType::operator==(const ReportingAccessType& rhs) const {
+bool ReportingAccessType::operator==(const ReportingAccessType &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool ReportingAccessType::operator!=(const ReportingAccessType& rhs) const {
+bool ReportingAccessType::operator!=(const ReportingAccessType &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ReportingAccessType& o) {
+void to_json(nlohmann::json &j, const ReportingAccessType &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, ReportingAccessType& o) {
+void from_json(const nlohmann::json &j, ReportingAccessType &o) {
   from_json(j, o.m_value);
 }
 
@@ -80,4 +80,4 @@ void ReportingAccessType::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

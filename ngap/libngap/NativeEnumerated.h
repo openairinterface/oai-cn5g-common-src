@@ -64,7 +64,7 @@ per_type_encoder_f NativeEnumerated_encode_aper;
 #endif /* !defined(ASN_DISABLE_RFILL_SUPPORT) */
 
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
-int NativeEnumerated__compar_value2enum(const void* ap, const void* bp);
+int NativeEnumerated__compar_value2enum(const void *ap, const void *bp);
 #endif /* !defined(ASN_DISABLE_UPER_SUPPORT) ||                                \
           !defined(ASN_DISABLE_APER_SUPPORT) */
 

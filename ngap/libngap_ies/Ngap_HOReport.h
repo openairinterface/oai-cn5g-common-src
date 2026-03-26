@@ -12,11 +12,11 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include <NativeEnumerated.h>
 #include "Ngap_Cause.h"
+#include "Ngap_MobilityInformation.h"
 #include "Ngap_NGRAN-CGI.h"
 #include <BIT_STRING.h>
-#include "Ngap_MobilityInformation.h"
+#include <NativeEnumerated.h>
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -25,8 +25,8 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_HOReport__handoverReportType {
-  Ngap_HOReport__handoverReportType_ho_too_early          = 0,
-  Ngap_HOReport__handoverReportType_ho_to_wrong_cell      = 1,
+  Ngap_HOReport__handoverReportType_ho_too_early = 0,
+  Ngap_HOReport__handoverReportType_ho_to_wrong_cell = 1,
   Ngap_HOReport__handoverReportType_intersystem_ping_pong = 2
   /*
    * Enumeration is extensible
@@ -45,12 +45,12 @@ typedef struct Ngap_HOReport {
   Ngap_Cause_t handoverCause;
   Ngap_NGRAN_CGI_t sourcecellCGI;
   Ngap_NGRAN_CGI_t targetcellCGI;
-  struct Ngap_NGRAN_CGI* reestablishmentcellCGI;          /* OPTIONAL */
-  BIT_STRING_t* sourcecellC_RNTI;                         /* OPTIONAL */
-  struct Ngap_EUTRA_CGI* targetcellinE_UTRAN;             /* OPTIONAL */
-  Ngap_MobilityInformation_t* mobilityInformation;        /* OPTIONAL */
-  struct Ngap_UERLFReportContainer* uERLFReportContainer; /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions;  /* OPTIONAL */
+  struct Ngap_NGRAN_CGI *reestablishmentcellCGI;          /* OPTIONAL */
+  BIT_STRING_t *sourcecellC_RNTI;                         /* OPTIONAL */
+  struct Ngap_EUTRA_CGI *targetcellinE_UTRAN;             /* OPTIONAL */
+  Ngap_MobilityInformation_t *mobilityInformation;        /* OPTIONAL */
+  struct Ngap_UERLFReportContainer *uERLFReportContainer; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions;  /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

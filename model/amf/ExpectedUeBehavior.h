@@ -19,10 +19,10 @@
 #ifndef ExpectedUeBehavior_H_
 #define ExpectedUeBehavior_H_
 
-#include <string>
 #include "UserLocation.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::amf {
 
@@ -30,7 +30,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class ExpectedUeBehavior {
- public:
+public:
   ExpectedUeBehavior();
   virtual ~ExpectedUeBehavior();
 
@@ -42,22 +42,22 @@ class ExpectedUeBehavior {
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::UserLocation>& getExpMoveTrajectory();
+  std::vector<oai::model::common::UserLocation> &getExpMoveTrajectory();
   /// <summary>
   ///
   /// </summary>
   std::string getValidityTime() const;
-  void setValidityTime(std::string const& value);
+  void setValidityTime(std::string const &value);
 
-  friend void to_json(nlohmann::json& j, const ExpectedUeBehavior& o);
-  friend void from_json(const nlohmann::json& j, ExpectedUeBehavior& o);
+  friend void to_json(nlohmann::json &j, const ExpectedUeBehavior &o);
+  friend void from_json(const nlohmann::json &j, ExpectedUeBehavior &o);
 
- protected:
+protected:
   std::vector<oai::model::common::UserLocation> m_ExpMoveTrajectory;
 
   std::string m_ValidityTime;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* ExpectedUeBehavior_H_ */

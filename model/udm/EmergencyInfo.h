@@ -30,7 +30,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class EmergencyInfo {
- public:
+public:
   EmergencyInfo();
   virtual ~EmergencyInfo();
 
@@ -39,12 +39,12 @@ class EmergencyInfo {
   /////////////////////////////////////////////
   /// EmergencyInfo members
 
-  friend void to_json(nlohmann::json& j, const EmergencyInfo& o);
-  friend void from_json(const nlohmann::json& j, EmergencyInfo& o);
+  friend void to_json(nlohmann::json &j, const EmergencyInfo &o);
+  friend void from_json(const nlohmann::json &j, EmergencyInfo &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* EmergencyInfo_H_ */

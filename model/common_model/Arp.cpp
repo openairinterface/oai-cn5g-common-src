@@ -18,9 +18,7 @@
 
 namespace oai::model::common {
 
-Arp::Arp() {
-  m_PriorityLevel = 0;
-}
+Arp::Arp() { m_PriorityLevel = 0; }
 
 void Arp::validate() const {
   std::stringstream msg;
@@ -29,17 +27,15 @@ void Arp::validate() const {
   }
 }
 
-bool Arp::validate(std::stringstream& msg) const {
-  return validate(msg, "");
-}
+bool Arp::validate(std::stringstream &msg) const { return validate(msg, ""); }
 
-bool Arp::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool Arp::validate(std::stringstream &msg,
+                   const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "Arp" : pathPrefix;
 
   /* PriorityLevel */ {
-    const int32_t& value               = m_PriorityLevel;
+    const int32_t &value = m_PriorityLevel;
     const std::string currentValuePath = _pathPrefix + ".priorityLevel";
 
     if (value < 1) {
@@ -55,7 +51,7 @@ bool Arp::validate(
   return success;
 }
 
-bool Arp::operator==(const Arp& rhs) const {
+bool Arp::operator==(const Arp &rhs) const {
   return
 
       (getPriorityLevel() == rhs.getPriorityLevel()) &&
@@ -67,41 +63,35 @@ bool Arp::operator==(const Arp& rhs) const {
           ;
 }
 
-bool Arp::operator!=(const Arp& rhs) const {
-  return !(*this == rhs);
-}
+bool Arp::operator!=(const Arp &rhs) const { return !(*this == rhs); }
 
-void to_json(nlohmann::json& j, const Arp& o) {
-  j                  = nlohmann::json();
+void to_json(nlohmann::json &j, const Arp &o) {
+  j = nlohmann::json();
   j["priorityLevel"] = o.m_PriorityLevel;
-  j["preemptCap"]    = o.m_PreemptCap;
-  j["preemptVuln"]   = o.m_PreemptVuln;
+  j["preemptCap"] = o.m_PreemptCap;
+  j["preemptVuln"] = o.m_PreemptVuln;
 }
 
-void from_json(const nlohmann::json& j, Arp& o) {
+void from_json(const nlohmann::json &j, Arp &o) {
   j.at("priorityLevel").get_to(o.m_PriorityLevel);
   j.at("preemptCap").get_to(o.m_PreemptCap);
   j.at("preemptVuln").get_to(o.m_PreemptVuln);
 }
 
-int32_t Arp::getPriorityLevel() const {
-  return m_PriorityLevel;
-}
-void Arp::setPriorityLevel(int32_t const value) {
-  m_PriorityLevel = value;
-}
+int32_t Arp::getPriorityLevel() const { return m_PriorityLevel; }
+void Arp::setPriorityLevel(int32_t const value) { m_PriorityLevel = value; }
 oai::model::common::PreemptionCapability Arp::getPreemptCap() const {
   return m_PreemptCap;
 }
-void Arp::setPreemptCap(oai::model::common::PreemptionCapability const& value) {
+void Arp::setPreemptCap(oai::model::common::PreemptionCapability const &value) {
   m_PreemptCap = value;
 }
 oai::model::common::PreemptionVulnerability Arp::getPreemptVuln() const {
   return m_PreemptVuln;
 }
 void Arp::setPreemptVuln(
-    oai::model::common::PreemptionVulnerability const& value) {
+    oai::model::common::PreemptionVulnerability const &value) {
   m_PreemptVuln = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

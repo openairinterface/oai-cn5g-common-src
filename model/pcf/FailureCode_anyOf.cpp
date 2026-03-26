@@ -13,8 +13,8 @@
 
 #include "FailureCode_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::pcf {
 
@@ -27,12 +27,12 @@ void FailureCode_anyOf::validate() const {
   }
 }
 
-bool FailureCode_anyOf::validate(std::stringstream& msg) const {
+bool FailureCode_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool FailureCode_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool FailureCode_anyOf::validate(std::stringstream &msg,
+                                 const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "FailureCode_anyOf" : pathPrefix;
@@ -46,90 +46,90 @@ bool FailureCode_anyOf::validate(
   return success;
 }
 
-bool FailureCode_anyOf::operator==(const FailureCode_anyOf& rhs) const {
+bool FailureCode_anyOf::operator==(const FailureCode_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool FailureCode_anyOf::operator!=(const FailureCode_anyOf& rhs) const {
+bool FailureCode_anyOf::operator!=(const FailureCode_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const FailureCode_anyOf& o) {
+void to_json(nlohmann::json &j, const FailureCode_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case FailureCode_anyOf::eFailureCode_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case FailureCode_anyOf::eFailureCode_anyOf::UNK_RULE_ID:
-      j = "UNK_RULE_ID";
-      break;
-    case FailureCode_anyOf::eFailureCode_anyOf::RA_GR_ERR:
-      j = "RA_GR_ERR";
-      break;
-    case FailureCode_anyOf::eFailureCode_anyOf::SER_ID_ERR:
-      j = "SER_ID_ERR";
-      break;
-    case FailureCode_anyOf::eFailureCode_anyOf::NF_MAL:
-      j = "NF_MAL";
-      break;
-    case FailureCode_anyOf::eFailureCode_anyOf::RES_LIM:
-      j = "RES_LIM";
-      break;
-    case FailureCode_anyOf::eFailureCode_anyOf::MAX_NR_QOS_FLOW:
-      j = "MAX_NR_QoS_FLOW";
-      break;
-    case FailureCode_anyOf::eFailureCode_anyOf::MISS_FLOW_INFO:
-      j = "MISS_FLOW_INFO";
-      break;
-    case FailureCode_anyOf::eFailureCode_anyOf::RES_ALLO_FAIL:
-      j = "RES_ALLO_FAIL";
-      break;
-    case FailureCode_anyOf::eFailureCode_anyOf::UNSUCC_QOS_VAL:
-      j = "UNSUCC_QOS_VAL";
-      break;
-    case FailureCode_anyOf::eFailureCode_anyOf::INCOR_FLOW_INFO:
-      j = "INCOR_FLOW_INFO";
-      break;
-    case FailureCode_anyOf::eFailureCode_anyOf::PS_TO_CS_HAN:
-      j = "PS_TO_CS_HAN";
-      break;
-    case FailureCode_anyOf::eFailureCode_anyOf::APP_ID_ERR:
-      j = "APP_ID_ERR";
-      break;
-    case FailureCode_anyOf::eFailureCode_anyOf::NO_QOS_FLOW_BOUND:
-      j = "NO_QOS_FLOW_BOUND";
-      break;
-    case FailureCode_anyOf::eFailureCode_anyOf::FILTER_RES:
-      j = "FILTER_RES";
-      break;
-    case FailureCode_anyOf::eFailureCode_anyOf::MISS_REDI_SER_ADDR:
-      j = "MISS_REDI_SER_ADDR";
-      break;
-    case FailureCode_anyOf::eFailureCode_anyOf::CM_END_USER_SER_DENIED:
-      j = "CM_END_USER_SER_DENIED";
-      break;
-    case FailureCode_anyOf::eFailureCode_anyOf::CM_CREDIT_CON_NOT_APP:
-      j = "CM_CREDIT_CON_NOT_APP";
-      break;
-    case FailureCode_anyOf::eFailureCode_anyOf::CM_AUTH_REJ:
-      j = "CM_AUTH_REJ";
-      break;
-    case FailureCode_anyOf::eFailureCode_anyOf::CM_USER_UNK:
-      j = "CM_USER_UNK";
-      break;
-    case FailureCode_anyOf::eFailureCode_anyOf::CM_RAT_FAILED:
-      j = "CM_RAT_FAILED";
-      break;
-    case FailureCode_anyOf::eFailureCode_anyOf::UE_STA_SUSP:
-      j = "UE_STA_SUSP";
-      break;
+  case FailureCode_anyOf::eFailureCode_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case FailureCode_anyOf::eFailureCode_anyOf::UNK_RULE_ID:
+    j = "UNK_RULE_ID";
+    break;
+  case FailureCode_anyOf::eFailureCode_anyOf::RA_GR_ERR:
+    j = "RA_GR_ERR";
+    break;
+  case FailureCode_anyOf::eFailureCode_anyOf::SER_ID_ERR:
+    j = "SER_ID_ERR";
+    break;
+  case FailureCode_anyOf::eFailureCode_anyOf::NF_MAL:
+    j = "NF_MAL";
+    break;
+  case FailureCode_anyOf::eFailureCode_anyOf::RES_LIM:
+    j = "RES_LIM";
+    break;
+  case FailureCode_anyOf::eFailureCode_anyOf::MAX_NR_QOS_FLOW:
+    j = "MAX_NR_QoS_FLOW";
+    break;
+  case FailureCode_anyOf::eFailureCode_anyOf::MISS_FLOW_INFO:
+    j = "MISS_FLOW_INFO";
+    break;
+  case FailureCode_anyOf::eFailureCode_anyOf::RES_ALLO_FAIL:
+    j = "RES_ALLO_FAIL";
+    break;
+  case FailureCode_anyOf::eFailureCode_anyOf::UNSUCC_QOS_VAL:
+    j = "UNSUCC_QOS_VAL";
+    break;
+  case FailureCode_anyOf::eFailureCode_anyOf::INCOR_FLOW_INFO:
+    j = "INCOR_FLOW_INFO";
+    break;
+  case FailureCode_anyOf::eFailureCode_anyOf::PS_TO_CS_HAN:
+    j = "PS_TO_CS_HAN";
+    break;
+  case FailureCode_anyOf::eFailureCode_anyOf::APP_ID_ERR:
+    j = "APP_ID_ERR";
+    break;
+  case FailureCode_anyOf::eFailureCode_anyOf::NO_QOS_FLOW_BOUND:
+    j = "NO_QOS_FLOW_BOUND";
+    break;
+  case FailureCode_anyOf::eFailureCode_anyOf::FILTER_RES:
+    j = "FILTER_RES";
+    break;
+  case FailureCode_anyOf::eFailureCode_anyOf::MISS_REDI_SER_ADDR:
+    j = "MISS_REDI_SER_ADDR";
+    break;
+  case FailureCode_anyOf::eFailureCode_anyOf::CM_END_USER_SER_DENIED:
+    j = "CM_END_USER_SER_DENIED";
+    break;
+  case FailureCode_anyOf::eFailureCode_anyOf::CM_CREDIT_CON_NOT_APP:
+    j = "CM_CREDIT_CON_NOT_APP";
+    break;
+  case FailureCode_anyOf::eFailureCode_anyOf::CM_AUTH_REJ:
+    j = "CM_AUTH_REJ";
+    break;
+  case FailureCode_anyOf::eFailureCode_anyOf::CM_USER_UNK:
+    j = "CM_USER_UNK";
+    break;
+  case FailureCode_anyOf::eFailureCode_anyOf::CM_RAT_FAILED:
+    j = "CM_RAT_FAILED";
+    break;
+  case FailureCode_anyOf::eFailureCode_anyOf::UE_STA_SUSP:
+    j = "UE_STA_SUSP";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, FailureCode_anyOf& o) {
+void from_json(const nlohmann::json &j, FailureCode_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "UNK_RULE_ID") {
     o.setValue(FailureCode_anyOf::eFailureCode_anyOf::UNK_RULE_ID);
@@ -189,4 +189,4 @@ void FailureCode_anyOf::setValue(FailureCode_anyOf::eFailureCode_anyOf value) {
   m_value = value;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

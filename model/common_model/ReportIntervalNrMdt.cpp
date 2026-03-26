@@ -27,12 +27,12 @@ void ReportIntervalNrMdt::validate() const {
   }
 }
 
-bool ReportIntervalNrMdt::validate(std::stringstream& msg) const {
+bool ReportIntervalNrMdt::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ReportIntervalNrMdt::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ReportIntervalNrMdt::validate(std::stringstream &msg,
+                                   const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ReportIntervalNrMdt" : pathPrefix;
@@ -43,22 +43,22 @@ bool ReportIntervalNrMdt::validate(
   return success;
 }
 
-bool ReportIntervalNrMdt::operator==(const ReportIntervalNrMdt& rhs) const {
+bool ReportIntervalNrMdt::operator==(const ReportIntervalNrMdt &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool ReportIntervalNrMdt::operator!=(const ReportIntervalNrMdt& rhs) const {
+bool ReportIntervalNrMdt::operator!=(const ReportIntervalNrMdt &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ReportIntervalNrMdt& o) {
+void to_json(nlohmann::json &j, const ReportIntervalNrMdt &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, ReportIntervalNrMdt& o) {
+void from_json(const nlohmann::json &j, ReportIntervalNrMdt &o) {
   from_json(j, o.m_value);
 }
 
@@ -80,4 +80,4 @@ void ReportIntervalNrMdt::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

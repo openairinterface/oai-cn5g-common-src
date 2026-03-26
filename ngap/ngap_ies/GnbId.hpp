@@ -19,25 +19,25 @@ constexpr uint8_t NGAP_GNB_ID_SIZE_MAX = 32;
 constexpr uint8_t NGAP_GNB_ID_SIZE_MIN = 22;
 
 class GnbId {
- public:
+public:
   GnbId();
   virtual ~GnbId();
 
-  void set(const gNBId_t& gnbId);
-  bool get(gNBId_t& gnbId) const;
+  void set(const gNBId_t &gnbId);
+  bool get(gNBId_t &gnbId) const;
 
-  bool set(const uint32_t& id, const uint8_t& bitLength);
+  bool set(const uint32_t &id, const uint8_t &bitLength);
   // long get() const;
-  bool get(uint32_t& id) const;
+  bool get(uint32_t &id) const;
 
-  bool encode(Ngap_GNB_ID_t&) const;
-  bool decode(const Ngap_GNB_ID_t&);
+  bool encode(Ngap_GNB_ID_t &) const;
+  bool decode(const Ngap_GNB_ID_t &);
 
- private:
-  std::optional<gNBId_t> m_GnbId;  // 22bits to 32bits
+private:
+  std::optional<gNBId_t> m_GnbId; // 22bits to 32bits
   Ngap_GNB_ID_PR m_Present;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

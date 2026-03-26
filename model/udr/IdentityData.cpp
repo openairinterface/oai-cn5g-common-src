@@ -29,13 +29,15 @@ void IdentityData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const IdentityData& o) {
+void to_json(nlohmann::json &j, const IdentityData &o) {
   j = nlohmann::json();
-  if (o.supiListIsSet() || !o.m_SupiList.empty()) j["supiList"] = o.m_SupiList;
-  if (o.gpsiListIsSet() || !o.m_GpsiList.empty()) j["gpsiList"] = o.m_GpsiList;
+  if (o.supiListIsSet() || !o.m_SupiList.empty())
+    j["supiList"] = o.m_SupiList;
+  if (o.gpsiListIsSet() || !o.m_GpsiList.empty())
+    j["gpsiList"] = o.m_GpsiList;
 }
 
-void from_json(const nlohmann::json& j, IdentityData& o) {
+void from_json(const nlohmann::json &j, IdentityData &o) {
   if (j.find("supiList") != j.end()) {
     j.at("supiList").get_to(o.m_SupiList);
     o.m_SupiListIsSet = true;
@@ -46,31 +48,19 @@ void from_json(const nlohmann::json& j, IdentityData& o) {
   }
 }
 
-std::vector<std::string>& IdentityData::getSupiList() {
-  return m_SupiList;
-}
-void IdentityData::setSupiList(std::vector<std::string> const& value) {
-  m_SupiList      = value;
+std::vector<std::string> &IdentityData::getSupiList() { return m_SupiList; }
+void IdentityData::setSupiList(std::vector<std::string> const &value) {
+  m_SupiList = value;
   m_SupiListIsSet = true;
 }
-bool IdentityData::supiListIsSet() const {
-  return m_SupiListIsSet;
-}
-void IdentityData::unsetSupiList() {
-  m_SupiListIsSet = false;
-}
-std::vector<std::string>& IdentityData::getGpsiList() {
-  return m_GpsiList;
-}
-void IdentityData::setGpsiList(std::vector<std::string> const& value) {
-  m_GpsiList      = value;
+bool IdentityData::supiListIsSet() const { return m_SupiListIsSet; }
+void IdentityData::unsetSupiList() { m_SupiListIsSet = false; }
+std::vector<std::string> &IdentityData::getGpsiList() { return m_GpsiList; }
+void IdentityData::setGpsiList(std::vector<std::string> const &value) {
+  m_GpsiList = value;
   m_GpsiListIsSet = true;
 }
-bool IdentityData::gpsiListIsSet() const {
-  return m_GpsiListIsSet;
-}
-void IdentityData::unsetGpsiList() {
-  m_GpsiListIsSet = false;
-}
+bool IdentityData::gpsiListIsSet() const { return m_GpsiListIsSet; }
+void IdentityData::unsetGpsiList() { m_GpsiListIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

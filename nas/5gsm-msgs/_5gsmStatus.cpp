@@ -25,19 +25,19 @@ uint32_t _5gsmStatus::GetLength() const {
 }
 
 //------------------------------------------------------------------------------
-void _5gsmStatus::Set5gsmCause(const _5gsmCause& _5gsm_cause) {
+void _5gsmStatus::Set5gsmCause(const _5gsmCause &_5gsm_cause) {
   ie_5gsm_cause_ = _5gsm_cause;
 }
 
 //------------------------------------------------------------------------------
-void _5gsmStatus::Get5gsmCause(_5gsmCause& _5gsm_cause) const {
+void _5gsmStatus::Get5gsmCause(_5gsmCause &_5gsm_cause) const {
   _5gsm_cause = ie_5gsm_cause_;
 }
 
 //------------------------------------------------------------------------------
-int _5gsmStatus::Encode(uint8_t* buf, int len) {
+int _5gsmStatus::Encode(uint8_t *buf, int len) {
   oai::logger::logger_common::nas().debug("Encoding _5gsmStatus message");
-  int encoded_size    = 0;
+  int encoded_size = 0;
   int encoded_ie_size = 0;
   // Header
   if ((encoded_ie_size = Nas5gsmMessage::Encode(buf, len)) ==
@@ -59,9 +59,9 @@ int _5gsmStatus::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int _5gsmStatus::Decode(uint8_t* buf, int len) {
+int _5gsmStatus::Decode(uint8_t *buf, int len) {
   oai::logger::logger_common::nas().debug("Decoding _5gsmStatus message");
-  int decoded_size    = 0;
+  int decoded_size = 0;
   int decoded_ie_size = 0;
 
   // Header

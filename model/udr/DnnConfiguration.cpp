@@ -19,30 +19,30 @@
 namespace oai::udr::model {
 
 DnnConfiguration::DnnConfiguration() {
-  m_IwkEpsInd                          = false;
-  m_IwkEpsIndIsSet                     = false;
-  m_r_5gQosProfileIsSet                = false;
-  m_SessionAmbrIsSet                   = false;
-  m_r_3gppChargingCharacteristics      = "";
+  m_IwkEpsInd = false;
+  m_IwkEpsIndIsSet = false;
+  m_r_5gQosProfileIsSet = false;
+  m_SessionAmbrIsSet = false;
+  m_r_3gppChargingCharacteristics = "";
   m_r_3gppChargingCharacteristicsIsSet = false;
-  m_StaticIpAddressIsSet               = false;
-  m_UpSecurityIsSet                    = false;
-  m_PduSessionContinuityIndIsSet       = false;
-  m_NiddNefId                          = "";
-  m_NiddNefIdIsSet                     = false;
-  m_NiddInfoIsSet                      = false;
-  m_RedundantSessionAllowed            = false;
-  m_RedundantSessionAllowedIsSet       = false;
-  m_AcsInfoIsSet                       = false;
-  m_Ipv4FrameRouteListIsSet            = false;
-  m_Ipv6FrameRouteListIsSet            = false;
-  m_AtsssAllowed                       = false;
-  m_AtsssAllowedIsSet                  = false;
-  m_SecondaryAuth                      = false;
-  m_SecondaryAuthIsSet                 = false;
-  m_DnAaaIpAddressAllocation           = false;
-  m_DnAaaIpAddressAllocationIsSet      = false;
-  m_DnAaaAddressIsSet                  = false;
+  m_StaticIpAddressIsSet = false;
+  m_UpSecurityIsSet = false;
+  m_PduSessionContinuityIndIsSet = false;
+  m_NiddNefId = "";
+  m_NiddNefIdIsSet = false;
+  m_NiddInfoIsSet = false;
+  m_RedundantSessionAllowed = false;
+  m_RedundantSessionAllowedIsSet = false;
+  m_AcsInfoIsSet = false;
+  m_Ipv4FrameRouteListIsSet = false;
+  m_Ipv6FrameRouteListIsSet = false;
+  m_AtsssAllowed = false;
+  m_AtsssAllowedIsSet = false;
+  m_SecondaryAuth = false;
+  m_SecondaryAuthIsSet = false;
+  m_DnAaaIpAddressAllocation = false;
+  m_DnAaaIpAddressAllocationIsSet = false;
+  m_DnAaaAddressIsSet = false;
 }
 
 DnnConfiguration::~DnnConfiguration() {}
@@ -51,37 +51,47 @@ void DnnConfiguration::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const DnnConfiguration& o) {
-  j                    = nlohmann::json();
+void to_json(nlohmann::json &j, const DnnConfiguration &o) {
+  j = nlohmann::json();
   j["pduSessionTypes"] = o.m_PduSessionTypes;
-  j["sscModes"]        = o.m_SscModes;
-  if (o.iwkEpsIndIsSet()) j["iwkEpsInd"] = o.m_IwkEpsInd;
-  if (o.r5gQosProfileIsSet()) j["5gQosProfile"] = o.m_r_5gQosProfile;
-  if (o.sessionAmbrIsSet()) j["sessionAmbr"] = o.m_SessionAmbr;
+  j["sscModes"] = o.m_SscModes;
+  if (o.iwkEpsIndIsSet())
+    j["iwkEpsInd"] = o.m_IwkEpsInd;
+  if (o.r5gQosProfileIsSet())
+    j["5gQosProfile"] = o.m_r_5gQosProfile;
+  if (o.sessionAmbrIsSet())
+    j["sessionAmbr"] = o.m_SessionAmbr;
   if (o.r3gppChargingCharacteristicsIsSet())
     j["3gppChargingCharacteristics"] = o.m_r_3gppChargingCharacteristics;
   if (o.staticIpAddressIsSet() || !o.m_StaticIpAddress.empty())
     j["staticIpAddress"] = o.m_StaticIpAddress;
-  if (o.upSecurityIsSet()) j["upSecurity"] = o.m_UpSecurity;
+  if (o.upSecurityIsSet())
+    j["upSecurity"] = o.m_UpSecurity;
   if (o.pduSessionContinuityIndIsSet())
     j["pduSessionContinuityInd"] = o.m_PduSessionContinuityInd;
-  if (o.niddNefIdIsSet()) j["niddNefId"] = o.m_NiddNefId;
-  if (o.niddInfoIsSet()) j["niddInfo"] = o.m_NiddInfo;
+  if (o.niddNefIdIsSet())
+    j["niddNefId"] = o.m_NiddNefId;
+  if (o.niddInfoIsSet())
+    j["niddInfo"] = o.m_NiddInfo;
   if (o.redundantSessionAllowedIsSet())
     j["redundantSessionAllowed"] = o.m_RedundantSessionAllowed;
-  if (o.acsInfoIsSet()) j["acsInfo"] = o.m_AcsInfo;
+  if (o.acsInfoIsSet())
+    j["acsInfo"] = o.m_AcsInfo;
   if (o.ipv4FrameRouteListIsSet() || !o.m_Ipv4FrameRouteList.empty())
     j["ipv4FrameRouteList"] = o.m_Ipv4FrameRouteList;
   if (o.ipv6FrameRouteListIsSet() || !o.m_Ipv6FrameRouteList.empty())
     j["ipv6FrameRouteList"] = o.m_Ipv6FrameRouteList;
-  if (o.atsssAllowedIsSet()) j["atsssAllowed"] = o.m_AtsssAllowed;
-  if (o.secondaryAuthIsSet()) j["secondaryAuth"] = o.m_SecondaryAuth;
+  if (o.atsssAllowedIsSet())
+    j["atsssAllowed"] = o.m_AtsssAllowed;
+  if (o.secondaryAuthIsSet())
+    j["secondaryAuth"] = o.m_SecondaryAuth;
   if (o.dnAaaIpAddressAllocationIsSet())
     j["dnAaaIpAddressAllocation"] = o.m_DnAaaIpAddressAllocation;
-  if (o.dnAaaAddressIsSet()) j["dnAaaAddress"] = o.m_DnAaaAddress;
+  if (o.dnAaaAddressIsSet())
+    j["dnAaaAddress"] = o.m_DnAaaAddress;
 }
 
-void from_json(const nlohmann::json& j, DnnConfiguration& o) {
+void from_json(const nlohmann::json &j, DnnConfiguration &o) {
   j.at("pduSessionTypes").get_to(o.m_PduSessionTypes);
   j.at("sscModes").get_to(o.m_SscModes);
   if (j.find("iwkEpsInd") != j.end()) {
@@ -158,62 +168,48 @@ void from_json(const nlohmann::json& j, DnnConfiguration& o) {
 PduSessionTypes DnnConfiguration::getPduSessionTypes() const {
   return m_PduSessionTypes;
 }
-void DnnConfiguration::setPduSessionTypes(PduSessionTypes const& value) {
+void DnnConfiguration::setPduSessionTypes(PduSessionTypes const &value) {
   m_PduSessionTypes = value;
 }
-SscModes DnnConfiguration::getSscModes() const {
-  return m_SscModes;
-}
-void DnnConfiguration::setSscModes(SscModes const& value) {
+SscModes DnnConfiguration::getSscModes() const { return m_SscModes; }
+void DnnConfiguration::setSscModes(SscModes const &value) {
   m_SscModes = value;
 }
-bool DnnConfiguration::isIwkEpsInd() const {
-  return m_IwkEpsInd;
-}
+bool DnnConfiguration::isIwkEpsInd() const { return m_IwkEpsInd; }
 void DnnConfiguration::setIwkEpsInd(bool const value) {
-  m_IwkEpsInd      = value;
+  m_IwkEpsInd = value;
   m_IwkEpsIndIsSet = true;
 }
-bool DnnConfiguration::iwkEpsIndIsSet() const {
-  return m_IwkEpsIndIsSet;
-}
-void DnnConfiguration::unsetIwkEpsInd() {
-  m_IwkEpsIndIsSet = false;
-}
-oai::model::common::SubscribedDefaultQos DnnConfiguration::getR5gQosProfile()
-    const {
+bool DnnConfiguration::iwkEpsIndIsSet() const { return m_IwkEpsIndIsSet; }
+void DnnConfiguration::unsetIwkEpsInd() { m_IwkEpsIndIsSet = false; }
+oai::model::common::SubscribedDefaultQos
+DnnConfiguration::getR5gQosProfile() const {
   return m_r_5gQosProfile;
 }
 void DnnConfiguration::setR5gQosProfile(
-    oai::model::common::SubscribedDefaultQos const& value) {
-  m_r_5gQosProfile      = value;
+    oai::model::common::SubscribedDefaultQos const &value) {
+  m_r_5gQosProfile = value;
   m_r_5gQosProfileIsSet = true;
 }
 bool DnnConfiguration::r5gQosProfileIsSet() const {
   return m_r_5gQosProfileIsSet;
 }
-void DnnConfiguration::unsetr_5gQosProfile() {
-  m_r_5gQosProfileIsSet = false;
-}
+void DnnConfiguration::unsetr_5gQosProfile() { m_r_5gQosProfileIsSet = false; }
 oai::model::common::Ambr DnnConfiguration::getSessionAmbr() const {
   return m_SessionAmbr;
 }
-void DnnConfiguration::setSessionAmbr(oai::model::common::Ambr const& value) {
-  m_SessionAmbr      = value;
+void DnnConfiguration::setSessionAmbr(oai::model::common::Ambr const &value) {
+  m_SessionAmbr = value;
   m_SessionAmbrIsSet = true;
 }
-bool DnnConfiguration::sessionAmbrIsSet() const {
-  return m_SessionAmbrIsSet;
-}
-void DnnConfiguration::unsetSessionAmbr() {
-  m_SessionAmbrIsSet = false;
-}
+bool DnnConfiguration::sessionAmbrIsSet() const { return m_SessionAmbrIsSet; }
+void DnnConfiguration::unsetSessionAmbr() { m_SessionAmbrIsSet = false; }
 std::string DnnConfiguration::getR3gppChargingCharacteristics() const {
   return m_r_3gppChargingCharacteristics;
 }
 void DnnConfiguration::setR3gppChargingCharacteristics(
-    std::string const& value) {
-  m_r_3gppChargingCharacteristics      = value;
+    std::string const &value) {
+  m_r_3gppChargingCharacteristics = value;
   m_r_3gppChargingCharacteristicsIsSet = true;
 }
 bool DnnConfiguration::r3gppChargingCharacteristicsIsSet() const {
@@ -222,11 +218,11 @@ bool DnnConfiguration::r3gppChargingCharacteristicsIsSet() const {
 void DnnConfiguration::unsetr_3gppChargingCharacteristics() {
   m_r_3gppChargingCharacteristicsIsSet = false;
 }
-std::vector<IpAddress>& DnnConfiguration::getStaticIpAddress() {
+std::vector<IpAddress> &DnnConfiguration::getStaticIpAddress() {
   return m_StaticIpAddress;
 }
-void DnnConfiguration::setStaticIpAddress(std::vector<IpAddress> const& value) {
-  m_StaticIpAddress      = value;
+void DnnConfiguration::setStaticIpAddress(std::vector<IpAddress> const &value) {
+  m_StaticIpAddress = value;
   m_StaticIpAddressIsSet = true;
 }
 bool DnnConfiguration::staticIpAddressIsSet() const {
@@ -239,22 +235,18 @@ oai::model::common::UpSecurity DnnConfiguration::getUpSecurity() const {
   return m_UpSecurity;
 }
 void DnnConfiguration::setUpSecurity(
-    oai::model::common::UpSecurity const& value) {
-  m_UpSecurity      = value;
+    oai::model::common::UpSecurity const &value) {
+  m_UpSecurity = value;
   m_UpSecurityIsSet = true;
 }
-bool DnnConfiguration::upSecurityIsSet() const {
-  return m_UpSecurityIsSet;
-}
-void DnnConfiguration::unsetUpSecurity() {
-  m_UpSecurityIsSet = false;
-}
+bool DnnConfiguration::upSecurityIsSet() const { return m_UpSecurityIsSet; }
+void DnnConfiguration::unsetUpSecurity() { m_UpSecurityIsSet = false; }
 PduSessionContinuityInd DnnConfiguration::getPduSessionContinuityInd() const {
   return m_PduSessionContinuityInd;
 }
 void DnnConfiguration::setPduSessionContinuityInd(
-    PduSessionContinuityInd const& value) {
-  m_PduSessionContinuityInd      = value;
+    PduSessionContinuityInd const &value) {
+  m_PduSessionContinuityInd = value;
   m_PduSessionContinuityIndIsSet = true;
 }
 bool DnnConfiguration::pduSessionContinuityIndIsSet() const {
@@ -263,37 +255,25 @@ bool DnnConfiguration::pduSessionContinuityIndIsSet() const {
 void DnnConfiguration::unsetPduSessionContinuityInd() {
   m_PduSessionContinuityIndIsSet = false;
 }
-std::string DnnConfiguration::getNiddNefId() const {
-  return m_NiddNefId;
-}
-void DnnConfiguration::setNiddNefId(std::string const& value) {
-  m_NiddNefId      = value;
+std::string DnnConfiguration::getNiddNefId() const { return m_NiddNefId; }
+void DnnConfiguration::setNiddNefId(std::string const &value) {
+  m_NiddNefId = value;
   m_NiddNefIdIsSet = true;
 }
-bool DnnConfiguration::niddNefIdIsSet() const {
-  return m_NiddNefIdIsSet;
-}
-void DnnConfiguration::unsetNiddNefId() {
-  m_NiddNefIdIsSet = false;
-}
-NiddInformation DnnConfiguration::getNiddInfo() const {
-  return m_NiddInfo;
-}
-void DnnConfiguration::setNiddInfo(NiddInformation const& value) {
-  m_NiddInfo      = value;
+bool DnnConfiguration::niddNefIdIsSet() const { return m_NiddNefIdIsSet; }
+void DnnConfiguration::unsetNiddNefId() { m_NiddNefIdIsSet = false; }
+NiddInformation DnnConfiguration::getNiddInfo() const { return m_NiddInfo; }
+void DnnConfiguration::setNiddInfo(NiddInformation const &value) {
+  m_NiddInfo = value;
   m_NiddInfoIsSet = true;
 }
-bool DnnConfiguration::niddInfoIsSet() const {
-  return m_NiddInfoIsSet;
-}
-void DnnConfiguration::unsetNiddInfo() {
-  m_NiddInfoIsSet = false;
-}
+bool DnnConfiguration::niddInfoIsSet() const { return m_NiddInfoIsSet; }
+void DnnConfiguration::unsetNiddInfo() { m_NiddInfoIsSet = false; }
 bool DnnConfiguration::isRedundantSessionAllowed() const {
   return m_RedundantSessionAllowed;
 }
 void DnnConfiguration::setRedundantSessionAllowed(bool const value) {
-  m_RedundantSessionAllowed      = value;
+  m_RedundantSessionAllowed = value;
   m_RedundantSessionAllowedIsSet = true;
 }
 bool DnnConfiguration::redundantSessionAllowedIsSet() const {
@@ -305,22 +285,18 @@ void DnnConfiguration::unsetRedundantSessionAllowed() {
 oai::model::common::AcsInfo DnnConfiguration::getAcsInfo() const {
   return m_AcsInfo;
 }
-void DnnConfiguration::setAcsInfo(oai::model::common::AcsInfo const& value) {
-  m_AcsInfo      = value;
+void DnnConfiguration::setAcsInfo(oai::model::common::AcsInfo const &value) {
+  m_AcsInfo = value;
   m_AcsInfoIsSet = true;
 }
-bool DnnConfiguration::acsInfoIsSet() const {
-  return m_AcsInfoIsSet;
-}
-void DnnConfiguration::unsetAcsInfo() {
-  m_AcsInfoIsSet = false;
-}
-std::vector<FrameRouteInfo>& DnnConfiguration::getIpv4FrameRouteList() {
+bool DnnConfiguration::acsInfoIsSet() const { return m_AcsInfoIsSet; }
+void DnnConfiguration::unsetAcsInfo() { m_AcsInfoIsSet = false; }
+std::vector<FrameRouteInfo> &DnnConfiguration::getIpv4FrameRouteList() {
   return m_Ipv4FrameRouteList;
 }
 void DnnConfiguration::setIpv4FrameRouteList(
-    std::vector<FrameRouteInfo> const& value) {
-  m_Ipv4FrameRouteList      = value;
+    std::vector<FrameRouteInfo> const &value) {
+  m_Ipv4FrameRouteList = value;
   m_Ipv4FrameRouteListIsSet = true;
 }
 bool DnnConfiguration::ipv4FrameRouteListIsSet() const {
@@ -329,12 +305,12 @@ bool DnnConfiguration::ipv4FrameRouteListIsSet() const {
 void DnnConfiguration::unsetIpv4FrameRouteList() {
   m_Ipv4FrameRouteListIsSet = false;
 }
-std::vector<FrameRouteInfo>& DnnConfiguration::getIpv6FrameRouteList() {
+std::vector<FrameRouteInfo> &DnnConfiguration::getIpv6FrameRouteList() {
   return m_Ipv6FrameRouteList;
 }
 void DnnConfiguration::setIpv6FrameRouteList(
-    std::vector<FrameRouteInfo> const& value) {
-  m_Ipv6FrameRouteList      = value;
+    std::vector<FrameRouteInfo> const &value) {
+  m_Ipv6FrameRouteList = value;
   m_Ipv6FrameRouteListIsSet = true;
 }
 bool DnnConfiguration::ipv6FrameRouteListIsSet() const {
@@ -343,37 +319,27 @@ bool DnnConfiguration::ipv6FrameRouteListIsSet() const {
 void DnnConfiguration::unsetIpv6FrameRouteList() {
   m_Ipv6FrameRouteListIsSet = false;
 }
-bool DnnConfiguration::isAtsssAllowed() const {
-  return m_AtsssAllowed;
-}
+bool DnnConfiguration::isAtsssAllowed() const { return m_AtsssAllowed; }
 void DnnConfiguration::setAtsssAllowed(bool const value) {
-  m_AtsssAllowed      = value;
+  m_AtsssAllowed = value;
   m_AtsssAllowedIsSet = true;
 }
-bool DnnConfiguration::atsssAllowedIsSet() const {
-  return m_AtsssAllowedIsSet;
-}
-void DnnConfiguration::unsetAtsssAllowed() {
-  m_AtsssAllowedIsSet = false;
-}
-bool DnnConfiguration::isSecondaryAuth() const {
-  return m_SecondaryAuth;
-}
+bool DnnConfiguration::atsssAllowedIsSet() const { return m_AtsssAllowedIsSet; }
+void DnnConfiguration::unsetAtsssAllowed() { m_AtsssAllowedIsSet = false; }
+bool DnnConfiguration::isSecondaryAuth() const { return m_SecondaryAuth; }
 void DnnConfiguration::setSecondaryAuth(bool const value) {
-  m_SecondaryAuth      = value;
+  m_SecondaryAuth = value;
   m_SecondaryAuthIsSet = true;
 }
 bool DnnConfiguration::secondaryAuthIsSet() const {
   return m_SecondaryAuthIsSet;
 }
-void DnnConfiguration::unsetSecondaryAuth() {
-  m_SecondaryAuthIsSet = false;
-}
+void DnnConfiguration::unsetSecondaryAuth() { m_SecondaryAuthIsSet = false; }
 bool DnnConfiguration::isDnAaaIpAddressAllocation() const {
   return m_DnAaaIpAddressAllocation;
 }
 void DnnConfiguration::setDnAaaIpAddressAllocation(bool const value) {
-  m_DnAaaIpAddressAllocation      = value;
+  m_DnAaaIpAddressAllocation = value;
   m_DnAaaIpAddressAllocationIsSet = true;
 }
 bool DnnConfiguration::dnAaaIpAddressAllocationIsSet() const {
@@ -382,18 +348,12 @@ bool DnnConfiguration::dnAaaIpAddressAllocationIsSet() const {
 void DnnConfiguration::unsetDnAaaIpAddressAllocation() {
   m_DnAaaIpAddressAllocationIsSet = false;
 }
-IpAddress DnnConfiguration::getDnAaaAddress() const {
-  return m_DnAaaAddress;
-}
-void DnnConfiguration::setDnAaaAddress(IpAddress const& value) {
-  m_DnAaaAddress      = value;
+IpAddress DnnConfiguration::getDnAaaAddress() const { return m_DnAaaAddress; }
+void DnnConfiguration::setDnAaaAddress(IpAddress const &value) {
+  m_DnAaaAddress = value;
   m_DnAaaAddressIsSet = true;
 }
-bool DnnConfiguration::dnAaaAddressIsSet() const {
-  return m_DnAaaAddressIsSet;
-}
-void DnnConfiguration::unsetDnAaaAddress() {
-  m_DnAaaAddressIsSet = false;
-}
+bool DnnConfiguration::dnAaaAddressIsSet() const { return m_DnAaaAddressIsSet; }
+void DnnConfiguration::unsetDnAaaAddress() { m_DnAaaAddressIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

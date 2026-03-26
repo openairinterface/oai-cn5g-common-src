@@ -20,7 +20,7 @@ extern "C" {
 
 /* Dependencies */
 typedef enum Ngap_EndIndication {
-  Ngap_EndIndication_no_further_data     = 0,
+  Ngap_EndIndication_no_further_data = 0,
   Ngap_EndIndication_further_data_exists = 1
   /*
    * Enumeration is extensible

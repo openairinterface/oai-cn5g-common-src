@@ -10,30 +10,30 @@
 constexpr uint8_t kEpsNasMessageContainerMinimumLength = 4;
 constexpr uint8_t kEpsNasMessageContainerContentMinimumLength =
     kEpsNasMessageContainerMinimumLength -
-    3;  // Minimum length - 3 octets for IEI/Length
-constexpr uint8_t kEpsNasMessageContainer    = 253;
+    3; // Minimum length - 3 octets for IEI/Length
+constexpr uint8_t kEpsNasMessageContainer = 253;
 constexpr auto kEpsNasMessageContainerIeName = "EPS NAS Message Container";
 
 namespace oai::nas {
 
 class EpsNasMessageContainer : public Type6NasIe {
- public:
+public:
   EpsNasMessageContainer();
-  EpsNasMessageContainer(const bstring& value);
+  EpsNasMessageContainer(const bstring &value);
   virtual ~EpsNasMessageContainer();
 
-  int Encode(uint8_t* buf, int len) const override;
-  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+  int Encode(uint8_t *buf, int len) const override;
+  int Decode(const uint8_t *const buf, int len, bool is_iei = false) override;
 
   static std::string GetIeName() { return kEpsNasMessageContainerIeName; }
 
   // TODO: SetValue(const bstring& value)
-  void GetValue(bstring& value) const;
+  void GetValue(bstring &value) const;
 
- private:
+private:
   bstring value_;
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

@@ -20,7 +20,7 @@ namespace oai::model::common {
 
 WirelineServiceAreaRestriction::WirelineServiceAreaRestriction() {
   m_RestrictionTypeIsSet = false;
-  m_AreasIsSet           = false;
+  m_AreasIsSet = false;
 }
 
 void WirelineServiceAreaRestriction::validate() const {
@@ -30,24 +30,24 @@ void WirelineServiceAreaRestriction::validate() const {
   }
 }
 
-bool WirelineServiceAreaRestriction::validate(std::stringstream& msg) const {
+bool WirelineServiceAreaRestriction::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool WirelineServiceAreaRestriction::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "WirelineServiceAreaRestriction" : pathPrefix;
 
   if (areasIsSet()) {
-    const std::vector<oai::model::common::WirelineArea>& value = m_Areas;
+    const std::vector<oai::model::common::WirelineArea> &value = m_Areas;
     const std::string currentValuePath = _pathPrefix + ".areas";
 
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::WirelineArea& value : value) {
+      int i = 0;
+      for (const oai::model::common::WirelineArea &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -62,7 +62,7 @@ bool WirelineServiceAreaRestriction::validate(
 }
 
 bool WirelineServiceAreaRestriction::operator==(
-    const WirelineServiceAreaRestriction& rhs) const {
+    const WirelineServiceAreaRestriction &rhs) const {
   return
 
       ((!restrictionTypeIsSet() && !rhs.restrictionTypeIsSet()) ||
@@ -76,17 +76,19 @@ bool WirelineServiceAreaRestriction::operator==(
 }
 
 bool WirelineServiceAreaRestriction::operator!=(
-    const WirelineServiceAreaRestriction& rhs) const {
+    const WirelineServiceAreaRestriction &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const WirelineServiceAreaRestriction& o) {
+void to_json(nlohmann::json &j, const WirelineServiceAreaRestriction &o) {
   j = nlohmann::json();
-  if (o.restrictionTypeIsSet()) j["restrictionType"] = o.m_RestrictionType;
-  if (o.areasIsSet() || !o.m_Areas.empty()) j["areas"] = o.m_Areas;
+  if (o.restrictionTypeIsSet())
+    j["restrictionType"] = o.m_RestrictionType;
+  if (o.areasIsSet() || !o.m_Areas.empty())
+    j["areas"] = o.m_Areas;
 }
 
-void from_json(const nlohmann::json& j, WirelineServiceAreaRestriction& o) {
+void from_json(const nlohmann::json &j, WirelineServiceAreaRestriction &o) {
   if (j.find("restrictionType") != j.end()) {
     j.at("restrictionType").get_to(o.m_RestrictionType);
     o.m_RestrictionTypeIsSet = true;
@@ -102,8 +104,8 @@ WirelineServiceAreaRestriction::getRestrictionType() const {
   return m_RestrictionType;
 }
 void WirelineServiceAreaRestriction::setRestrictionType(
-    oai::model::common::RestrictionType const& value) {
-  m_RestrictionType      = value;
+    oai::model::common::RestrictionType const &value) {
+  m_RestrictionType = value;
   m_RestrictionTypeIsSet = true;
 }
 bool WirelineServiceAreaRestriction::restrictionTypeIsSet() const {
@@ -117,15 +119,11 @@ WirelineServiceAreaRestriction::getAreas() const {
   return m_Areas;
 }
 void WirelineServiceAreaRestriction::setAreas(
-    std::vector<oai::model::common::WirelineArea> const& value) {
-  m_Areas      = value;
+    std::vector<oai::model::common::WirelineArea> const &value) {
+  m_Areas = value;
   m_AreasIsSet = true;
 }
-bool WirelineServiceAreaRestriction::areasIsSet() const {
-  return m_AreasIsSet;
-}
-void WirelineServiceAreaRestriction::unsetAreas() {
-  m_AreasIsSet = false;
-}
+bool WirelineServiceAreaRestriction::areasIsSet() const { return m_AreasIsSet; }
+void WirelineServiceAreaRestriction::unsetAreas() { m_AreasIsSet = false; }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

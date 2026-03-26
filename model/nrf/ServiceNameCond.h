@@ -28,7 +28,7 @@ namespace oai::model::nrf {
 ///
 /// </summary>
 class ServiceNameCond {
- public:
+public:
   ServiceNameCond();
   virtual ~ServiceNameCond();
 
@@ -41,15 +41,15 @@ class ServiceNameCond {
   ///
   /// </summary>
   std::string getServiceName() const;
-  void setServiceName(std::string const& value);
+  void setServiceName(std::string const &value);
 
-  friend void to_json(nlohmann::json& j, const ServiceNameCond& o);
-  friend void from_json(const nlohmann::json& j, ServiceNameCond& o);
+  friend void to_json(nlohmann::json &j, const ServiceNameCond &o);
+  friend void from_json(const nlohmann::json &j, ServiceNameCond &o);
 
- protected:
+protected:
   std::string m_ServiceName;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* ServiceNameCond_H_ */

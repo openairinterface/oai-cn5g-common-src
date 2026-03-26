@@ -19,10 +19,10 @@
 #ifndef AssignedEbiData_H_
 #define AssignedEbiData_H_
 
-#include "EbiArpMapping.h"
-#include <vector>
 #include "Arp.h"
+#include "EbiArpMapping.h"
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::amf {
 
@@ -30,7 +30,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class AssignedEbiData {
- public:
+public:
   AssignedEbiData();
   virtual ~AssignedEbiData();
 
@@ -47,24 +47,24 @@ class AssignedEbiData {
   /// <summary>
   ///
   /// </summary>
-  std::vector<EbiArpMapping>& getAssignedEbiList();
+  std::vector<EbiArpMapping> &getAssignedEbiList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::model::common::Arp>& getFailedArpList();
+  std::vector<oai::model::common::Arp> &getFailedArpList();
   bool failedArpListIsSet() const;
   void unsetFailedArpList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<int32_t>& getReleasedEbiList();
+  std::vector<int32_t> &getReleasedEbiList();
   bool releasedEbiListIsSet() const;
   void unsetReleasedEbiList();
 
-  friend void to_json(nlohmann::json& j, const AssignedEbiData& o);
-  friend void from_json(const nlohmann::json& j, AssignedEbiData& o);
+  friend void to_json(nlohmann::json &j, const AssignedEbiData &o);
+  friend void from_json(const nlohmann::json &j, AssignedEbiData &o);
 
- protected:
+protected:
   int32_t m_PduSessionId;
 
   std::vector<EbiArpMapping> m_AssignedEbiList;
@@ -75,6 +75,6 @@ class AssignedEbiData {
   bool m_ReleasedEbiListIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* AssignedEbiData_H_ */

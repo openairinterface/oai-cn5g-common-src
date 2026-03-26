@@ -28,7 +28,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class SubscribedSnssai {
- public:
+public:
   SubscribedSnssai();
   virtual ~SubscribedSnssai() = default;
 
@@ -42,16 +42,16 @@ class SubscribedSnssai {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const SubscribedSnssai& rhs) const;
-  bool operator!=(const SubscribedSnssai& rhs) const;
+  bool operator==(const SubscribedSnssai &rhs) const;
+  bool operator!=(const SubscribedSnssai &rhs) const;
 
   /////////////////////////////////////////////
   /// SubscribedSnssai members
@@ -60,7 +60,7 @@ class SubscribedSnssai {
   ///
   /// </summary>
   oai::model::common::Snssai getSubscribedSnssai() const;
-  void setSubscribedSnssai(oai::model::common::Snssai const& value);
+  void setSubscribedSnssai(oai::model::common::Snssai const &value);
   /// <summary>
   ///
   /// </summary>
@@ -69,16 +69,16 @@ class SubscribedSnssai {
   bool defaultIndicationIsSet() const;
   void unsetDefaultIndication();
 
-  friend void to_json(nlohmann::json& j, const SubscribedSnssai& o);
-  friend void from_json(const nlohmann::json& j, SubscribedSnssai& o);
+  friend void to_json(nlohmann::json &j, const SubscribedSnssai &o);
+  friend void from_json(const nlohmann::json &j, SubscribedSnssai &o);
 
- protected:
+protected:
   oai::model::common::Snssai m_SubscribedSnssai;
 
   bool m_DefaultIndication;
   bool m_DefaultIndicationIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* SubscribedSnssai_H_ */

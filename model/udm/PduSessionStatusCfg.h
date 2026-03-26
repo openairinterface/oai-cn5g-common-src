@@ -30,7 +30,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class PduSessionStatusCfg {
- public:
+public:
   PduSessionStatusCfg();
   virtual ~PduSessionStatusCfg() = default;
 
@@ -44,10 +44,10 @@ class PduSessionStatusCfg {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const PduSessionStatusCfg& rhs) const;
-  bool operator!=(const PduSessionStatusCfg& rhs) const;
+  bool operator==(const PduSessionStatusCfg &rhs) const;
+  bool operator!=(const PduSessionStatusCfg &rhs) const;
 
   /////////////////////////////////////////////
   /// PduSessionStatusCfg members
@@ -56,22 +56,22 @@ class PduSessionStatusCfg {
   ///
   /// </summary>
   std::string getDnn() const;
-  void setDnn(std::string const& value);
+  void setDnn(std::string const &value);
   bool dnnIsSet() const;
   void unsetDnn();
 
-  friend void to_json(nlohmann::json& j, const PduSessionStatusCfg& o);
-  friend void from_json(const nlohmann::json& j, PduSessionStatusCfg& o);
+  friend void to_json(nlohmann::json &j, const PduSessionStatusCfg &o);
+  friend void from_json(const nlohmann::json &j, PduSessionStatusCfg &o);
 
- protected:
+protected:
   std::string m_Dnn;
   bool m_DnnIsSet;
 
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* PduSessionStatusCfg_H_ */

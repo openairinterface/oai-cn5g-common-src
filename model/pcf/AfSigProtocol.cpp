@@ -27,12 +27,12 @@ void AfSigProtocol::validate() const {
   }
 }
 
-bool AfSigProtocol::validate(std::stringstream& msg) const {
+bool AfSigProtocol::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AfSigProtocol::validate(
-    std::stringstream& /* msg */, const std::string& pathPrefix) const {
+bool AfSigProtocol::validate(std::stringstream & /* msg */,
+                             const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AfSigProtocol" : pathPrefix;
@@ -40,30 +40,26 @@ bool AfSigProtocol::validate(
   return success;
 }
 
-bool AfSigProtocol::operator==(const AfSigProtocol& rhs) const {
+bool AfSigProtocol::operator==(const AfSigProtocol &rhs) const {
   return getValue() == rhs.getValue();
 }
 
-bool AfSigProtocol::operator!=(const AfSigProtocol& rhs) const {
+bool AfSigProtocol::operator!=(const AfSigProtocol &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AfSigProtocol& o) {
+void to_json(nlohmann::json &j, const AfSigProtocol &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, AfSigProtocol& o) {
+void from_json(const nlohmann::json &j, AfSigProtocol &o) {
   from_json(j, o.m_value);
 }
 
-AfSigProtocol_anyOf AfSigProtocol::getValue() const {
-  return m_value;
-}
+AfSigProtocol_anyOf AfSigProtocol::getValue() const { return m_value; }
 
-void AfSigProtocol::setValue(AfSigProtocol_anyOf value) {
-  m_value = value;
-}
+void AfSigProtocol::setValue(AfSigProtocol_anyOf value) { m_value = value; }
 
 AfSigProtocol_anyOf::eAfSigProtocol_anyOf AfSigProtocol::getEnumValue() const {
   return m_value.getValue();
@@ -74,4 +70,4 @@ void AfSigProtocol::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

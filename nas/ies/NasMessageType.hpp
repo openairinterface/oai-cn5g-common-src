@@ -8,18 +8,18 @@
 #include "NasIe.hpp"
 
 constexpr uint8_t kNasMessageTypeIeSize = 1;
-constexpr auto kNasMessageTypeIeName    = "NAS Message Type";
+constexpr auto kNasMessageTypeIeName = "NAS Message Type";
 
 namespace oai::nas {
 
 class NasMessageType : public NasIe {
- public:
-  NasMessageType() : NasIe(){};  // TODO: = delete;
+public:
+  NasMessageType() : NasIe(){}; // TODO: = delete;
   NasMessageType(uint8_t message_type);
   virtual ~NasMessageType(){};
 
-  int Encode(uint8_t* buf, int len) const override;
-  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+  int Encode(uint8_t *buf, int len) const override;
+  int Decode(const uint8_t *const buf, int len, bool is_iei = false) override;
 
   static std::string GetIeName() { return kNasMessageTypeIeName; }
 
@@ -27,13 +27,13 @@ class NasMessageType : public NasIe {
   uint32_t GetIeLength() const override;
 
   void Set(uint8_t message_type);
-  void Get(uint8_t& message_type) const;
+  void Get(uint8_t &message_type) const;
   uint8_t Get() const;
 
- private:
+private:
   uint8_t message_type_;
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

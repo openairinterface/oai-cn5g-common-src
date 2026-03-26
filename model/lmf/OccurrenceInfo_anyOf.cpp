@@ -13,8 +13,8 @@
 
 #include "OccurrenceInfo_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::lmf {
 
@@ -27,12 +27,12 @@ void OccurrenceInfo_anyOf::validate() const {
   }
 }
 
-bool OccurrenceInfo_anyOf::validate(std::stringstream& msg) const {
+bool OccurrenceInfo_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool OccurrenceInfo_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool OccurrenceInfo_anyOf::validate(std::stringstream &msg,
+                                    const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "OccurrenceInfo_anyOf" : pathPrefix;
@@ -46,34 +46,34 @@ bool OccurrenceInfo_anyOf::validate(
   return success;
 }
 
-bool OccurrenceInfo_anyOf::operator==(const OccurrenceInfo_anyOf& rhs) const {
+bool OccurrenceInfo_anyOf::operator==(const OccurrenceInfo_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool OccurrenceInfo_anyOf::operator!=(const OccurrenceInfo_anyOf& rhs) const {
+bool OccurrenceInfo_anyOf::operator!=(const OccurrenceInfo_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const OccurrenceInfo_anyOf& o) {
+void to_json(nlohmann::json &j, const OccurrenceInfo_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case OccurrenceInfo_anyOf::eOccurrenceInfo_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case OccurrenceInfo_anyOf::eOccurrenceInfo_anyOf::ONE_TIME_EVENT:
-      j = "ONE_TIME_EVENT";
-      break;
-    case OccurrenceInfo_anyOf::eOccurrenceInfo_anyOf::MULTIPLE_TIME_EVENT:
-      j = "MULTIPLE_TIME_EVENT";
-      break;
+  case OccurrenceInfo_anyOf::eOccurrenceInfo_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case OccurrenceInfo_anyOf::eOccurrenceInfo_anyOf::ONE_TIME_EVENT:
+    j = "ONE_TIME_EVENT";
+    break;
+  case OccurrenceInfo_anyOf::eOccurrenceInfo_anyOf::MULTIPLE_TIME_EVENT:
+    j = "MULTIPLE_TIME_EVENT";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, OccurrenceInfo_anyOf& o) {
+void from_json(const nlohmann::json &j, OccurrenceInfo_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "ONE_TIME_EVENT") {
     o.setValue(OccurrenceInfo_anyOf::eOccurrenceInfo_anyOf::ONE_TIME_EVENT);
@@ -89,8 +89,8 @@ void from_json(const nlohmann::json& j, OccurrenceInfo_anyOf& o) {
   }
 }
 
-OccurrenceInfo_anyOf::eOccurrenceInfo_anyOf OccurrenceInfo_anyOf::getValue()
-    const {
+OccurrenceInfo_anyOf::eOccurrenceInfo_anyOf
+OccurrenceInfo_anyOf::getValue() const {
   return m_value;
 }
 void OccurrenceInfo_anyOf::setValue(
@@ -98,4 +98,4 @@ void OccurrenceInfo_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

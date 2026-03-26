@@ -33,7 +33,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class Av5GHeAka {
- public:
+public:
   Av5GHeAka();
   virtual ~Av5GHeAka();
 
@@ -46,32 +46,32 @@ class Av5GHeAka {
   ///
   /// </summary>
   AvType getAvType() const;
-  void setAvType(AvType const& value);
+  void setAvType(AvType const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getRand() const;
-  void setRand(std::string const& value);
+  void setRand(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getXresStar() const;
-  void setXresStar(std::string const& value);
+  void setXresStar(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getAutn() const;
-  void setAutn(std::string const& value);
+  void setAutn(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getKausf() const;
-  void setKausf(std::string const& value);
+  void setKausf(std::string const &value);
 
-  friend void to_json(nlohmann::json& j, const Av5GHeAka& o);
-  friend void from_json(const nlohmann::json& j, Av5GHeAka& o);
+  friend void to_json(nlohmann::json &j, const Av5GHeAka &o);
+  friend void from_json(const nlohmann::json &j, Av5GHeAka &o);
 
- protected:
+protected:
   AvType m_AvType;
 
   std::string m_Rand;
@@ -83,6 +83,6 @@ class Av5GHeAka {
   std::string m_Kausf;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* Av5GHeAka_H_ */

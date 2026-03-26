@@ -10,26 +10,26 @@
 #include "SNssai.hpp"
 
 extern "C" {
-#include "Ngap_SliceSupportList.h"
 #include "Ngap_SliceSupportItem.h"
+#include "Ngap_SliceSupportList.h"
 }
 
 namespace oai::ngap {
 
 class SliceSupportList {
- public:
+public:
   SliceSupportList();
   virtual ~SliceSupportList();
 
-  void setSliceSupportItems(const std::vector<SNssai>& items);
-  void getSliceSupportItems(std::vector<SNssai>& items) const;
+  void setSliceSupportItems(const std::vector<SNssai> &items);
+  void getSliceSupportItems(std::vector<SNssai> &items) const;
 
-  bool encode(Ngap_SliceSupportList_t& SliceSupportList) const;
-  bool decode(const Ngap_SliceSupportList_t& SliceSupportList);
+  bool encode(Ngap_SliceSupportList_t &SliceSupportList) const;
+  bool decode(const Ngap_SliceSupportList_t &SliceSupportList);
 
- private:
+private:
   std::vector<SNssai> m_SliceSupportItems;
 };
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

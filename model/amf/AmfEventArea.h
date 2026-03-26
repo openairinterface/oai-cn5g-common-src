@@ -19,8 +19,8 @@
 #ifndef AmfEventArea_H_
 #define AmfEventArea_H_
 
-#include "PresenceInfo.h"
 #include "LadnInfo.h"
+#include "PresenceInfo.h"
 #include <nlohmann/json.hpp>
 
 namespace oai::model::amf {
@@ -29,7 +29,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class AmfEventArea {
- public:
+public:
   AmfEventArea();
   virtual ~AmfEventArea() = default;
 
@@ -43,10 +43,10 @@ class AmfEventArea {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
-  bool operator==(const AmfEventArea& rhs) const;
-  bool operator!=(const AmfEventArea& rhs) const;
+  bool operator==(const AmfEventArea &rhs) const;
+  bool operator!=(const AmfEventArea &rhs) const;
 
   /////////////////////////////////////////////
   /// AmfEventArea members
@@ -55,30 +55,30 @@ class AmfEventArea {
   ///
   /// </summary>
   oai::model::common::PresenceInfo getPresenceInfo() const;
-  void setPresenceInfo(oai::model::common::PresenceInfo const& value);
+  void setPresenceInfo(oai::model::common::PresenceInfo const &value);
   bool presenceInfoIsSet() const;
   void unsetPresenceInfo();
   /// <summary>
   ///
   /// </summary>
   LadnInfo getLadnInfo() const;
-  void setLadnInfo(LadnInfo const& value);
+  void setLadnInfo(LadnInfo const &value);
   bool ladnInfoIsSet() const;
   void unsetLadnInfo();
 
-  friend void to_json(nlohmann::json& j, const AmfEventArea& o);
-  friend void from_json(const nlohmann::json& j, AmfEventArea& o);
+  friend void to_json(nlohmann::json &j, const AmfEventArea &o);
+  friend void from_json(const nlohmann::json &j, AmfEventArea &o);
   // Helper overload for validate. Used when one model stores another model and
   // calls it's validate.
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
- protected:
+protected:
   oai::model::common::PresenceInfo m_PresenceInfo;
   bool m_PresenceInfoIsSet;
   LadnInfo m_LadnInfo;
   bool m_LadnInfoIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* AmfEventArea_H_ */

@@ -19,10 +19,10 @@
 namespace oai::udr::model {
 
 MulticastAccessControl::MulticastAccessControl() {
-  m_SrcIpv4Addr          = "";
-  m_SrcIpv4AddrIsSet     = false;
-  m_SrcIpv6AddrIsSet     = false;
-  m_MulticastV4Addr      = "";
+  m_SrcIpv4Addr = "";
+  m_SrcIpv4AddrIsSet = false;
+  m_SrcIpv6AddrIsSet = false;
+  m_MulticastV4Addr = "";
   m_MulticastV4AddrIsSet = false;
   m_MulticastV6AddrIsSet = false;
 }
@@ -33,16 +33,20 @@ void MulticastAccessControl::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const MulticastAccessControl& o) {
+void to_json(nlohmann::json &j, const MulticastAccessControl &o) {
   j = nlohmann::json();
-  if (o.srcIpv4AddrIsSet()) j["srcIpv4Addr"] = o.m_SrcIpv4Addr;
-  if (o.srcIpv6AddrIsSet()) j["srcIpv6Addr"] = o.m_SrcIpv6Addr;
-  if (o.multicastV4AddrIsSet()) j["multicastV4Addr"] = o.m_MulticastV4Addr;
-  if (o.multicastV6AddrIsSet()) j["multicastV6Addr"] = o.m_MulticastV6Addr;
+  if (o.srcIpv4AddrIsSet())
+    j["srcIpv4Addr"] = o.m_SrcIpv4Addr;
+  if (o.srcIpv6AddrIsSet())
+    j["srcIpv6Addr"] = o.m_SrcIpv6Addr;
+  if (o.multicastV4AddrIsSet())
+    j["multicastV4Addr"] = o.m_MulticastV4Addr;
+  if (o.multicastV6AddrIsSet())
+    j["multicastV6Addr"] = o.m_MulticastV6Addr;
   j["accStatus"] = o.m_AccStatus;
 }
 
-void from_json(const nlohmann::json& j, MulticastAccessControl& o) {
+void from_json(const nlohmann::json &j, MulticastAccessControl &o) {
   if (j.find("srcIpv4Addr") != j.end()) {
     j.at("srcIpv4Addr").get_to(o.m_SrcIpv4Addr);
     o.m_SrcIpv4AddrIsSet = true;
@@ -65,35 +69,31 @@ void from_json(const nlohmann::json& j, MulticastAccessControl& o) {
 std::string MulticastAccessControl::getSrcIpv4Addr() const {
   return m_SrcIpv4Addr;
 }
-void MulticastAccessControl::setSrcIpv4Addr(std::string const& value) {
-  m_SrcIpv4Addr      = value;
+void MulticastAccessControl::setSrcIpv4Addr(std::string const &value) {
+  m_SrcIpv4Addr = value;
   m_SrcIpv4AddrIsSet = true;
 }
 bool MulticastAccessControl::srcIpv4AddrIsSet() const {
   return m_SrcIpv4AddrIsSet;
 }
-void MulticastAccessControl::unsetSrcIpv4Addr() {
-  m_SrcIpv4AddrIsSet = false;
-}
+void MulticastAccessControl::unsetSrcIpv4Addr() { m_SrcIpv4AddrIsSet = false; }
 oai::model::common::Ipv6Addr MulticastAccessControl::getSrcIpv6Addr() const {
   return m_SrcIpv6Addr;
 }
 void MulticastAccessControl::setSrcIpv6Addr(
-    oai::model::common::Ipv6Addr const& value) {
-  m_SrcIpv6Addr      = value;
+    oai::model::common::Ipv6Addr const &value) {
+  m_SrcIpv6Addr = value;
   m_SrcIpv6AddrIsSet = true;
 }
 bool MulticastAccessControl::srcIpv6AddrIsSet() const {
   return m_SrcIpv6AddrIsSet;
 }
-void MulticastAccessControl::unsetSrcIpv6Addr() {
-  m_SrcIpv6AddrIsSet = false;
-}
+void MulticastAccessControl::unsetSrcIpv6Addr() { m_SrcIpv6AddrIsSet = false; }
 std::string MulticastAccessControl::getMulticastV4Addr() const {
   return m_MulticastV4Addr;
 }
-void MulticastAccessControl::setMulticastV4Addr(std::string const& value) {
-  m_MulticastV4Addr      = value;
+void MulticastAccessControl::setMulticastV4Addr(std::string const &value) {
+  m_MulticastV4Addr = value;
   m_MulticastV4AddrIsSet = true;
 }
 bool MulticastAccessControl::multicastV4AddrIsSet() const {
@@ -102,13 +102,13 @@ bool MulticastAccessControl::multicastV4AddrIsSet() const {
 void MulticastAccessControl::unsetMulticastV4Addr() {
   m_MulticastV4AddrIsSet = false;
 }
-oai::model::common::Ipv6Addr MulticastAccessControl::getMulticastV6Addr()
-    const {
+oai::model::common::Ipv6Addr
+MulticastAccessControl::getMulticastV6Addr() const {
   return m_MulticastV6Addr;
 }
 void MulticastAccessControl::setMulticastV6Addr(
-    oai::model::common::Ipv6Addr const& value) {
-  m_MulticastV6Addr      = value;
+    oai::model::common::Ipv6Addr const &value) {
+  m_MulticastV6Addr = value;
   m_MulticastV6AddrIsSet = true;
 }
 bool MulticastAccessControl::multicastV6AddrIsSet() const {
@@ -120,8 +120,8 @@ void MulticastAccessControl::unsetMulticastV6Addr() {
 AccessRightStatus MulticastAccessControl::getAccStatus() const {
   return m_AccStatus;
 }
-void MulticastAccessControl::setAccStatus(AccessRightStatus const& value) {
+void MulticastAccessControl::setAccStatus(AccessRightStatus const &value) {
   m_AccStatus = value;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

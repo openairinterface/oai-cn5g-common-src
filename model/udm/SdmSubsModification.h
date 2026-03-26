@@ -32,7 +32,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class SdmSubsModification {
- public:
+public:
   SdmSubsModification();
   virtual ~SdmSubsModification();
 
@@ -45,26 +45,26 @@ class SdmSubsModification {
   ///
   /// </summary>
   std::string getExpires() const;
-  void setExpires(std::string const& value);
+  void setExpires(std::string const &value);
   bool expiresIsSet() const;
   void unsetExpires();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getMonitoredResourceUris();
+  std::vector<std::string> &getMonitoredResourceUris();
   bool monitoredResourceUrisIsSet() const;
   void unsetMonitoredResourceUris();
 
-  friend void to_json(nlohmann::json& j, const SdmSubsModification& o);
-  friend void from_json(const nlohmann::json& j, SdmSubsModification& o);
+  friend void to_json(nlohmann::json &j, const SdmSubsModification &o);
+  friend void from_json(const nlohmann::json &j, SdmSubsModification &o);
 
- protected:
+protected:
   std::string m_Expires;
   bool m_ExpiresIsSet;
   std::vector<std::string> m_MonitoredResourceUris;
   bool m_MonitoredResourceUrisIsSet;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* SdmSubsModification_H_ */

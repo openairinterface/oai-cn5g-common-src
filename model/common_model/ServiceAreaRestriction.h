@@ -19,10 +19,10 @@
 #ifndef ServiceAreaRestriction_H_
 #define ServiceAreaRestriction_H_
 
-#include "RestrictionType.h"
 #include "Area.h"
-#include <vector>
+#include "RestrictionType.h"
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::common {
 
@@ -30,7 +30,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class ServiceAreaRestriction {
- public:
+public:
   ServiceAreaRestriction();
   virtual ~ServiceAreaRestriction() = default;
 
@@ -44,16 +44,16 @@ class ServiceAreaRestriction {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const ServiceAreaRestriction& rhs) const;
-  bool operator!=(const ServiceAreaRestriction& rhs) const;
+  bool operator==(const ServiceAreaRestriction &rhs) const;
+  bool operator!=(const ServiceAreaRestriction &rhs) const;
 
   /////////////////////////////////////////////
   /// ServiceAreaRestriction members
@@ -62,14 +62,14 @@ class ServiceAreaRestriction {
   ///
   /// </summary>
   oai::model::common::RestrictionType getRestrictionType() const;
-  void setRestrictionType(oai::model::common::RestrictionType const& value);
+  void setRestrictionType(oai::model::common::RestrictionType const &value);
   bool restrictionTypeIsSet() const;
   void unsetRestrictionType();
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::common::Area> getAreas() const;
-  void setAreas(std::vector<oai::model::common::Area> const& value);
+  void setAreas(std::vector<oai::model::common::Area> const &value);
   bool areasIsSet() const;
   void unsetAreas();
   /// <summary>
@@ -87,10 +87,10 @@ class ServiceAreaRestriction {
   bool maxNumOfTAsForNotAllowedAreasIsSet() const;
   void unsetMaxNumOfTAsForNotAllowedAreas();
 
-  friend void to_json(nlohmann::json& j, const ServiceAreaRestriction& o);
-  friend void from_json(const nlohmann::json& j, ServiceAreaRestriction& o);
+  friend void to_json(nlohmann::json &j, const ServiceAreaRestriction &o);
+  friend void from_json(const nlohmann::json &j, ServiceAreaRestriction &o);
 
- protected:
+protected:
   oai::model::common::RestrictionType m_RestrictionType;
   bool m_RestrictionTypeIsSet;
   std::vector<oai::model::common::Area> m_Areas;
@@ -101,6 +101,6 @@ class ServiceAreaRestriction {
   bool m_MaxNumOfTAsForNotAllowedAreasIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* ServiceAreaRestriction_H_ */

@@ -31,7 +31,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class PeiUpdateInfo {
- public:
+public:
   PeiUpdateInfo();
   virtual ~PeiUpdateInfo();
 
@@ -44,15 +44,15 @@ class PeiUpdateInfo {
   ///
   /// </summary>
   std::string getPei() const;
-  void setPei(std::string const& value);
+  void setPei(std::string const &value);
 
-  friend void to_json(nlohmann::json& j, const PeiUpdateInfo& o);
-  friend void from_json(const nlohmann::json& j, PeiUpdateInfo& o);
+  friend void to_json(nlohmann::json &j, const PeiUpdateInfo &o);
+  friend void from_json(const nlohmann::json &j, PeiUpdateInfo &o);
 
- protected:
+protected:
   std::string m_Pei;
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* PeiUpdateInfo_H_ */

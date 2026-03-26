@@ -19,12 +19,12 @@
 namespace oai::udr::model {
 
 PfdChangeNotification::PfdChangeNotification() {
-  m_ApplicationId    = "";
-  m_RemovalFlag      = false;
+  m_ApplicationId = "";
+  m_RemovalFlag = false;
   m_RemovalFlagIsSet = false;
-  m_PartialFlag      = false;
+  m_PartialFlag = false;
   m_PartialFlagIsSet = false;
-  m_PfdsIsSet        = false;
+  m_PfdsIsSet = false;
 }
 
 PfdChangeNotification::~PfdChangeNotification() {}
@@ -33,15 +33,18 @@ void PfdChangeNotification::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const PfdChangeNotification& o) {
-  j                  = nlohmann::json();
+void to_json(nlohmann::json &j, const PfdChangeNotification &o) {
+  j = nlohmann::json();
   j["applicationId"] = o.m_ApplicationId;
-  if (o.removalFlagIsSet()) j["removalFlag"] = o.m_RemovalFlag;
-  if (o.partialFlagIsSet()) j["partialFlag"] = o.m_PartialFlag;
-  if (o.pfdsIsSet() || !o.m_Pfds.empty()) j["pfds"] = o.m_Pfds;
+  if (o.removalFlagIsSet())
+    j["removalFlag"] = o.m_RemovalFlag;
+  if (o.partialFlagIsSet())
+    j["partialFlag"] = o.m_PartialFlag;
+  if (o.pfdsIsSet() || !o.m_Pfds.empty())
+    j["pfds"] = o.m_Pfds;
 }
 
-void from_json(const nlohmann::json& j, PfdChangeNotification& o) {
+void from_json(const nlohmann::json &j, PfdChangeNotification &o) {
   j.at("applicationId").get_to(o.m_ApplicationId);
   if (j.find("removalFlag") != j.end()) {
     j.at("removalFlag").get_to(o.m_RemovalFlag);
@@ -60,47 +63,33 @@ void from_json(const nlohmann::json& j, PfdChangeNotification& o) {
 std::string PfdChangeNotification::getApplicationId() const {
   return m_ApplicationId;
 }
-void PfdChangeNotification::setApplicationId(std::string const& value) {
+void PfdChangeNotification::setApplicationId(std::string const &value) {
   m_ApplicationId = value;
 }
-bool PfdChangeNotification::isRemovalFlag() const {
-  return m_RemovalFlag;
-}
+bool PfdChangeNotification::isRemovalFlag() const { return m_RemovalFlag; }
 void PfdChangeNotification::setRemovalFlag(bool const value) {
-  m_RemovalFlag      = value;
+  m_RemovalFlag = value;
   m_RemovalFlagIsSet = true;
 }
 bool PfdChangeNotification::removalFlagIsSet() const {
   return m_RemovalFlagIsSet;
 }
-void PfdChangeNotification::unsetRemovalFlag() {
-  m_RemovalFlagIsSet = false;
-}
-bool PfdChangeNotification::isPartialFlag() const {
-  return m_PartialFlag;
-}
+void PfdChangeNotification::unsetRemovalFlag() { m_RemovalFlagIsSet = false; }
+bool PfdChangeNotification::isPartialFlag() const { return m_PartialFlag; }
 void PfdChangeNotification::setPartialFlag(bool const value) {
-  m_PartialFlag      = value;
+  m_PartialFlag = value;
   m_PartialFlagIsSet = true;
 }
 bool PfdChangeNotification::partialFlagIsSet() const {
   return m_PartialFlagIsSet;
 }
-void PfdChangeNotification::unsetPartialFlag() {
-  m_PartialFlagIsSet = false;
-}
-std::vector<PfdContent>& PfdChangeNotification::getPfds() {
-  return m_Pfds;
-}
-void PfdChangeNotification::setPfds(std::vector<PfdContent> const& value) {
-  m_Pfds      = value;
+void PfdChangeNotification::unsetPartialFlag() { m_PartialFlagIsSet = false; }
+std::vector<PfdContent> &PfdChangeNotification::getPfds() { return m_Pfds; }
+void PfdChangeNotification::setPfds(std::vector<PfdContent> const &value) {
+  m_Pfds = value;
   m_PfdsIsSet = true;
 }
-bool PfdChangeNotification::pfdsIsSet() const {
-  return m_PfdsIsSet;
-}
-void PfdChangeNotification::unsetPfds() {
-  m_PfdsIsSet = false;
-}
+bool PfdChangeNotification::pfdsIsSet() const { return m_PfdsIsSet; }
+void PfdChangeNotification::unsetPfds() { m_PfdsIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

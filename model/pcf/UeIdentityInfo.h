@@ -19,8 +19,8 @@
 #ifndef UeIdentityInfo_H_
 #define UeIdentityInfo_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::pcf {
 
@@ -28,7 +28,7 @@ namespace oai::model::pcf {
 /// Represents 5GS-Level UE identities.
 /// </summary>
 class UeIdentityInfo {
- public:
+public:
   UeIdentityInfo();
   virtual ~UeIdentityInfo() = default;
 
@@ -42,16 +42,16 @@ class UeIdentityInfo {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const UeIdentityInfo& rhs) const;
-  bool operator!=(const UeIdentityInfo& rhs) const;
+  bool operator==(const UeIdentityInfo &rhs) const;
+  bool operator!=(const UeIdentityInfo &rhs) const;
 
   /////////////////////////////////////////////
   /// UeIdentityInfo members
@@ -64,7 +64,7 @@ class UeIdentityInfo {
   /// Identifier.
   /// </summary>
   std::string getGpsi() const;
-  void setGpsi(std::string const& value);
+  void setGpsi(std::string const &value);
   bool gpsiIsSet() const;
   void unsetGpsi();
   /// <summary>
@@ -77,7 +77,7 @@ class UeIdentityInfo {
   /// imeisv-0123456789012345.
   /// </summary>
   std::string getPei() const;
-  void setPei(std::string const& value);
+  void setPei(std::string const &value);
   bool peiIsSet() const;
   void unsetPei();
   /// <summary>
@@ -98,14 +98,14 @@ class UeIdentityInfo {
   /// defined in 3GPP TS 29.501.
   /// </summary>
   std::string getSupi() const;
-  void setSupi(std::string const& value);
+  void setSupi(std::string const &value);
   bool supiIsSet() const;
   void unsetSupi();
 
-  friend void to_json(nlohmann::json& j, const UeIdentityInfo& o);
-  friend void from_json(const nlohmann::json& j, UeIdentityInfo& o);
+  friend void to_json(nlohmann::json &j, const UeIdentityInfo &o);
+  friend void from_json(const nlohmann::json &j, UeIdentityInfo &o);
 
- protected:
+protected:
   std::string m_Gpsi;
   bool m_GpsiIsSet;
   std::string m_Pei;
@@ -114,6 +114,6 @@ class UeIdentityInfo {
   bool m_SupiIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* UeIdentityInfo_H_ */

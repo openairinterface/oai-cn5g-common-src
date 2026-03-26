@@ -27,7 +27,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class RoamingOdb_anyOf {
- public:
+public:
   RoamingOdb_anyOf();
   virtual ~RoamingOdb_anyOf() = default;
 
@@ -50,16 +50,16 @@ class RoamingOdb_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const RoamingOdb_anyOf& rhs) const;
-  bool operator!=(const RoamingOdb_anyOf& rhs) const;
+  bool operator==(const RoamingOdb_anyOf &rhs) const;
+  bool operator!=(const RoamingOdb_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// RoamingOdb_anyOf members
@@ -67,14 +67,14 @@ class RoamingOdb_anyOf {
   RoamingOdb_anyOf::eRoamingOdb_anyOf getValue() const;
   void setValue(RoamingOdb_anyOf::eRoamingOdb_anyOf value);
 
-  friend void to_json(nlohmann::json& j, const RoamingOdb_anyOf& o);
-  friend void from_json(const nlohmann::json& j, RoamingOdb_anyOf& o);
+  friend void to_json(nlohmann::json &j, const RoamingOdb_anyOf &o);
+  friend void from_json(const nlohmann::json &j, RoamingOdb_anyOf &o);
 
- protected:
+protected:
   RoamingOdb_anyOf::eRoamingOdb_anyOf m_value =
       RoamingOdb_anyOf::eRoamingOdb_anyOf::INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* RoamingOdb_anyOf_H_ */

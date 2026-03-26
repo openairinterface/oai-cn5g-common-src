@@ -20,19 +20,19 @@
 #define PduSessionCreatedData_H_
 
 #include "Ambr.h"
-#include "MaxIntegrityProtectedDataRate.h"
-#include "RefToBinaryData.h"
-#include <string>
-#include "UpSecurity.h"
-#include "QosFlowSetupItem.h"
-#include "Snssai.h"
-#include <vector>
-#include "EpsPdnCnxInfo.h"
 #include "EpsBearerInfo.h"
+#include "EpsPdnCnxInfo.h"
+#include "MaxIntegrityProtectedDataRate.h"
 #include "PduSessionType.h"
+#include "QosFlowSetupItem.h"
+#include "RefToBinaryData.h"
 #include "RoamingChargingProfile.h"
+#include "Snssai.h"
 #include "TunnelInfo.h"
+#include "UpSecurity.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::smf {
 
@@ -40,7 +40,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class PduSessionCreatedData {
- public:
+public:
   PduSessionCreatedData();
   virtual ~PduSessionCreatedData();
 
@@ -53,37 +53,37 @@ class PduSessionCreatedData {
   ///
   /// </summary>
   oai::model::common::PduSessionType getPduSessionType() const;
-  void setPduSessionType(oai::model::common::PduSessionType const& value);
+  void setPduSessionType(oai::model::common::PduSessionType const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getSscMode() const;
-  void setSscMode(std::string const& value);
+  void setSscMode(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   TunnelInfo getHcnTunnelInfo() const;
-  void setHcnTunnelInfo(TunnelInfo const& value);
+  void setHcnTunnelInfo(TunnelInfo const &value);
   bool hcnTunnelInfoIsSet() const;
   void unsetHcnTunnelInfo();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Ambr getSessionAmbr() const;
-  void setSessionAmbr(oai::model::common::Ambr const& value);
+  void setSessionAmbr(oai::model::common::Ambr const &value);
   bool sessionAmbrIsSet() const;
   void unsetSessionAmbr();
   /// <summary>
   ///
   /// </summary>
-  std::vector<QosFlowSetupItem>& getQosFlowsSetupList();
+  std::vector<QosFlowSetupItem> &getQosFlowsSetupList();
   bool qosFlowsSetupListIsSet() const;
   void unsetQosFlowsSetupList();
   /// <summary>
   ///
   /// </summary>
   std::string getHSmfInstanceId() const;
-  void setHSmfInstanceId(std::string const& value);
+  void setHSmfInstanceId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
@@ -95,7 +95,7 @@ class PduSessionCreatedData {
   ///
   /// </summary>
   oai::model::common::Snssai getSNssai() const;
-  void setSNssai(oai::model::common::Snssai const& value);
+  void setSNssai(oai::model::common::Snssai const &value);
   bool sNssaiIsSet() const;
   void unsetSNssai();
   /// <summary>
@@ -109,49 +109,49 @@ class PduSessionCreatedData {
   ///
   /// </summary>
   std::string getUeIpv4Address() const;
-  void setUeIpv4Address(std::string const& value);
+  void setUeIpv4Address(std::string const &value);
   bool ueIpv4AddressIsSet() const;
   void unsetUeIpv4Address();
   /// <summary>
   ///
   /// </summary>
   std::string getUeIpv6Prefix() const;
-  void setUeIpv6Prefix(std::string const& value);
+  void setUeIpv6Prefix(std::string const &value);
   bool ueIpv6PrefixIsSet() const;
   void unsetUeIpv6Prefix();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::RefToBinaryData getN1SmInfoToUe() const;
-  void setN1SmInfoToUe(oai::model::common::RefToBinaryData const& value);
+  void setN1SmInfoToUe(oai::model::common::RefToBinaryData const &value);
   bool n1SmInfoToUeIsSet() const;
   void unsetN1SmInfoToUe();
   /// <summary>
   ///
   /// </summary>
   EpsPdnCnxInfo getEpsPdnCnxInfo() const;
-  void setEpsPdnCnxInfo(EpsPdnCnxInfo const& value);
+  void setEpsPdnCnxInfo(EpsPdnCnxInfo const &value);
   bool epsPdnCnxInfoIsSet() const;
   void unsetEpsPdnCnxInfo();
   /// <summary>
   ///
   /// </summary>
-  std::vector<EpsBearerInfo>& getEpsBearerInfo();
+  std::vector<EpsBearerInfo> &getEpsBearerInfo();
   bool epsBearerInfoIsSet() const;
   void unsetEpsBearerInfo();
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
   /// <summary>
   ///
   /// </summary>
   MaxIntegrityProtectedDataRate getMaxIntegrityProtectedDataRate() const;
-  void setMaxIntegrityProtectedDataRate(
-      MaxIntegrityProtectedDataRate const& value);
+  void
+  setMaxIntegrityProtectedDataRate(MaxIntegrityProtectedDataRate const &value);
   bool maxIntegrityProtectedDataRateIsSet() const;
   void unsetMaxIntegrityProtectedDataRate();
   /// <summary>
@@ -165,42 +165,42 @@ class PduSessionCreatedData {
   ///
   /// </summary>
   std::string getGpsi() const;
-  void setGpsi(std::string const& value);
+  void setGpsi(std::string const &value);
   bool gpsiIsSet() const;
   void unsetGpsi();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::UpSecurity getUpSecurity() const;
-  void setUpSecurity(oai::model::common::UpSecurity const& value);
+  void setUpSecurity(oai::model::common::UpSecurity const &value);
   bool upSecurityIsSet() const;
   void unsetUpSecurity();
   /// <summary>
   ///
   /// </summary>
   RoamingChargingProfile getRoamingChargingProfile() const;
-  void setRoamingChargingProfile(RoamingChargingProfile const& value);
+  void setRoamingChargingProfile(RoamingChargingProfile const &value);
   bool roamingChargingProfileIsSet() const;
   void unsetRoamingChargingProfile();
   /// <summary>
   ///
   /// </summary>
   std::string getHSmfServiceInstanceId() const;
-  void setHSmfServiceInstanceId(std::string const& value);
+  void setHSmfServiceInstanceId(std::string const &value);
   bool hSmfServiceInstanceIdIsSet() const;
   void unsetHSmfServiceInstanceId();
   /// <summary>
   ///
   /// </summary>
   std::string getRecoveryTime() const;
-  void setRecoveryTime(std::string const& value);
+  void setRecoveryTime(std::string const &value);
   bool recoveryTimeIsSet() const;
   void unsetRecoveryTime();
 
-  friend void to_json(nlohmann::json& j, const PduSessionCreatedData& o);
-  friend void from_json(const nlohmann::json& j, PduSessionCreatedData& o);
+  friend void to_json(nlohmann::json &j, const PduSessionCreatedData &o);
+  friend void from_json(const nlohmann::json &j, PduSessionCreatedData &o);
 
- protected:
+protected:
   oai::model::common::PduSessionType m_PduSessionType;
 
   std::string m_SscMode;
@@ -247,6 +247,6 @@ class PduSessionCreatedData {
   bool m_RecoveryTimeIsSet;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* PduSessionCreatedData_H_ */

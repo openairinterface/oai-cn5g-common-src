@@ -23,10 +23,10 @@ void NotificationType::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const NotificationType& o) {
+void to_json(nlohmann::json &j, const NotificationType &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, NotificationType& o) {}
+void from_json(const nlohmann::json &j, NotificationType &o) {}
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

@@ -35,9 +35,9 @@ struct Ngap_ProtocolIE_SingleContainer;
 typedef struct Ngap_UserLocationInformationW_AGF {
   Ngap_UserLocationInformationW_AGF_PR present;
   union Ngap_UserLocationInformationW_AGF_u {
-    struct Ngap_GlobalLine_ID* globalLine_ID;
+    struct Ngap_GlobalLine_ID *globalLine_ID;
     Ngap_HFCNode_ID_t hFCNode_ID;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

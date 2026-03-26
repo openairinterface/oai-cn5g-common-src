@@ -17,9 +17,7 @@
 #include "PeiUpdateInfo.h"
 
 namespace oai::model::udm {
-PeiUpdateInfo::PeiUpdateInfo() {
-  m_Pei = "";
-}
+PeiUpdateInfo::PeiUpdateInfo() { m_Pei = ""; }
 
 PeiUpdateInfo::~PeiUpdateInfo() {}
 
@@ -27,20 +25,16 @@ void PeiUpdateInfo::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const PeiUpdateInfo& o) {
-  j        = nlohmann::json();
+void to_json(nlohmann::json &j, const PeiUpdateInfo &o) {
+  j = nlohmann::json();
   j["pei"] = o.m_Pei;
 }
 
-void from_json(const nlohmann::json& j, PeiUpdateInfo& o) {
+void from_json(const nlohmann::json &j, PeiUpdateInfo &o) {
   j.at("pei").get_to(o.m_Pei);
 }
 
-std::string PeiUpdateInfo::getPei() const {
-  return m_Pei;
-}
-void PeiUpdateInfo::setPei(std::string const& value) {
-  m_Pei = value;
-}
+std::string PeiUpdateInfo::getPei() const { return m_Pei; }
+void PeiUpdateInfo::setPei(std::string const &value) { m_Pei = value; }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

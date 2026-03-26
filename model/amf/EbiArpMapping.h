@@ -28,7 +28,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class EbiArpMapping {
- public:
+public:
   EbiArpMapping();
   virtual ~EbiArpMapping();
 
@@ -46,17 +46,17 @@ class EbiArpMapping {
   ///
   /// </summary>
   oai::model::common::Arp getArp() const;
-  void setArp(oai::model::common::Arp const& value);
+  void setArp(oai::model::common::Arp const &value);
 
-  friend void to_json(nlohmann::json& j, const EbiArpMapping& o);
-  friend void from_json(const nlohmann::json& j, EbiArpMapping& o);
+  friend void to_json(nlohmann::json &j, const EbiArpMapping &o);
+  friend void from_json(const nlohmann::json &j, EbiArpMapping &o);
 
- protected:
+protected:
   int32_t m_EpsBearerId;
 
   oai::model::common::Arp m_Arp;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* EbiArpMapping_H_ */

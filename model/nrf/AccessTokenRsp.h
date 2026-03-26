@@ -19,8 +19,8 @@
 #ifndef AccessTokenRsp_H_
 #define AccessTokenRsp_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::nrf {
 
@@ -28,7 +28,7 @@ namespace oai::model::nrf {
 ///
 /// </summary>
 class AccessTokenRsp {
- public:
+public:
   AccessTokenRsp();
   virtual ~AccessTokenRsp();
 
@@ -42,12 +42,12 @@ class AccessTokenRsp {
   /// (AccessTokenClaims)
   /// </summary>
   std::string getAccessToken() const;
-  void setAccessToken(std::string const& value);
+  void setAccessToken(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getTokenType() const;
-  void setTokenType(std::string const& value);
+  void setTokenType(std::string const &value);
   /// <summary>
   ///
   /// </summary>
@@ -59,14 +59,14 @@ class AccessTokenRsp {
   ///
   /// </summary>
   std::string getScope() const;
-  void setScope(std::string const& value);
+  void setScope(std::string const &value);
   bool scopeIsSet() const;
   void unsetScope();
 
-  friend void to_json(nlohmann::json& j, const AccessTokenRsp& o);
-  friend void from_json(const nlohmann::json& j, AccessTokenRsp& o);
+  friend void to_json(nlohmann::json &j, const AccessTokenRsp &o);
+  friend void from_json(const nlohmann::json &j, AccessTokenRsp &o);
 
- protected:
+protected:
   std::string m_Access_token;
 
   std::string m_Token_type;
@@ -77,6 +77,6 @@ class AccessTokenRsp {
   bool m_ScopeIsSet;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* AccessTokenRsp_H_ */

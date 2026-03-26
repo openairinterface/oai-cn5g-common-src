@@ -19,7 +19,7 @@
 namespace oai::model::common {
 
 SecondaryRatUsageInfo::SecondaryRatUsageInfo() {
-  m_QosFlowsUsageDataIsSet   = false;
+  m_QosFlowsUsageDataIsSet = false;
   m_PduSessionUsageDataIsSet = false;
 }
 
@@ -30,18 +30,18 @@ void SecondaryRatUsageInfo::validate() const {
   }
 }
 
-bool SecondaryRatUsageInfo::validate(std::stringstream& msg) const {
+bool SecondaryRatUsageInfo::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool SecondaryRatUsageInfo::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool SecondaryRatUsageInfo::validate(std::stringstream &msg,
+                                     const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "SecondaryRatUsageInfo" : pathPrefix;
 
   if (qosFlowsUsageDataIsSet()) {
-    const std::vector<oai::model::common::QosFlowUsageReport>& value =
+    const std::vector<oai::model::common::QosFlowUsageReport> &value =
         m_QosFlowsUsageData;
     const std::string currentValuePath = _pathPrefix + ".qosFlowsUsageData";
 
@@ -49,10 +49,10 @@ bool SecondaryRatUsageInfo::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::QosFlowUsageReport& value : value) {
+      int i = 0;
+      for (const oai::model::common::QosFlowUsageReport &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -66,7 +66,7 @@ bool SecondaryRatUsageInfo::validate(
   }
 
   if (pduSessionUsageDataIsSet()) {
-    const std::vector<oai::model::common::VolumeTimedReport>& value =
+    const std::vector<oai::model::common::VolumeTimedReport> &value =
         m_PduSessionUsageData;
     const std::string currentValuePath = _pathPrefix + ".pduSessionUsageData";
 
@@ -74,10 +74,10 @@ bool SecondaryRatUsageInfo::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::VolumeTimedReport& value : value) {
+      int i = 0;
+      for (const oai::model::common::VolumeTimedReport &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -93,7 +93,7 @@ bool SecondaryRatUsageInfo::validate(
   return success;
 }
 
-bool SecondaryRatUsageInfo::operator==(const SecondaryRatUsageInfo& rhs) const {
+bool SecondaryRatUsageInfo::operator==(const SecondaryRatUsageInfo &rhs) const {
   return
 
       (getSecondaryRatType() == rhs.getSecondaryRatType()) &&
@@ -109,12 +109,12 @@ bool SecondaryRatUsageInfo::operator==(const SecondaryRatUsageInfo& rhs) const {
           ;
 }
 
-bool SecondaryRatUsageInfo::operator!=(const SecondaryRatUsageInfo& rhs) const {
+bool SecondaryRatUsageInfo::operator!=(const SecondaryRatUsageInfo &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const SecondaryRatUsageInfo& o) {
-  j                     = nlohmann::json();
+void to_json(nlohmann::json &j, const SecondaryRatUsageInfo &o) {
+  j = nlohmann::json();
   j["secondaryRatType"] = o.m_SecondaryRatType;
   if (o.qosFlowsUsageDataIsSet() || !o.m_QosFlowsUsageData.empty())
     j["qosFlowsUsageData"] = o.m_QosFlowsUsageData;
@@ -122,7 +122,7 @@ void to_json(nlohmann::json& j, const SecondaryRatUsageInfo& o) {
     j["pduSessionUsageData"] = o.m_PduSessionUsageData;
 }
 
-void from_json(const nlohmann::json& j, SecondaryRatUsageInfo& o) {
+void from_json(const nlohmann::json &j, SecondaryRatUsageInfo &o) {
   j.at("secondaryRatType").get_to(o.m_SecondaryRatType);
   if (j.find("qosFlowsUsageData") != j.end()) {
     j.at("qosFlowsUsageData").get_to(o.m_QosFlowsUsageData);
@@ -138,7 +138,7 @@ oai::model::common::RatType SecondaryRatUsageInfo::getSecondaryRatType() const {
   return m_SecondaryRatType;
 }
 void SecondaryRatUsageInfo::setSecondaryRatType(
-    oai::model::common::RatType const& value) {
+    oai::model::common::RatType const &value) {
   m_SecondaryRatType = value;
 }
 std::vector<oai::model::common::QosFlowUsageReport>
@@ -146,8 +146,8 @@ SecondaryRatUsageInfo::getQosFlowsUsageData() const {
   return m_QosFlowsUsageData;
 }
 void SecondaryRatUsageInfo::setQosFlowsUsageData(
-    std::vector<oai::model::common::QosFlowUsageReport> const& value) {
-  m_QosFlowsUsageData      = value;
+    std::vector<oai::model::common::QosFlowUsageReport> const &value) {
+  m_QosFlowsUsageData = value;
   m_QosFlowsUsageDataIsSet = true;
 }
 bool SecondaryRatUsageInfo::qosFlowsUsageDataIsSet() const {
@@ -161,8 +161,8 @@ SecondaryRatUsageInfo::getPduSessionUsageData() const {
   return m_PduSessionUsageData;
 }
 void SecondaryRatUsageInfo::setPduSessionUsageData(
-    std::vector<oai::model::common::VolumeTimedReport> const& value) {
-  m_PduSessionUsageData      = value;
+    std::vector<oai::model::common::VolumeTimedReport> const &value) {
+  m_PduSessionUsageData = value;
   m_PduSessionUsageDataIsSet = true;
 }
 bool SecondaryRatUsageInfo::pduSessionUsageDataIsSet() const {
@@ -172,4 +172,4 @@ void SecondaryRatUsageInfo::unsetPduSessionUsageData() {
   m_PduSessionUsageDataIsSet = false;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

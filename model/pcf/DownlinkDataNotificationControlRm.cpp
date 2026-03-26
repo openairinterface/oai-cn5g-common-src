@@ -20,7 +20,7 @@ namespace oai::model::pcf {
 
 DownlinkDataNotificationControlRm::DownlinkDataNotificationControlRm() {
   m_NotifCtrlIndsIsSet = false;
-  m_TypesOfNotifIsSet  = false;
+  m_TypesOfNotifIsSet = false;
 }
 
 void DownlinkDataNotificationControlRm::validate() const {
@@ -30,18 +30,18 @@ void DownlinkDataNotificationControlRm::validate() const {
   }
 }
 
-bool DownlinkDataNotificationControlRm::validate(std::stringstream& msg) const {
+bool DownlinkDataNotificationControlRm::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool DownlinkDataNotificationControlRm::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "DownlinkDataNotificationControlRm" : pathPrefix;
 
   if (notifCtrlIndsIsSet()) {
-    const std::vector<oai::model::pcf::NotificationControlIndication>& value =
+    const std::vector<oai::model::pcf::NotificationControlIndication> &value =
         m_NotifCtrlInds;
     const std::string currentValuePath = _pathPrefix + ".notifCtrlInds";
 
@@ -49,10 +49,10 @@ bool DownlinkDataNotificationControlRm::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::NotificationControlIndication& value :
+      int i = 0;
+      for (const oai::model::pcf::NotificationControlIndication &value :
            value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
@@ -66,7 +66,7 @@ bool DownlinkDataNotificationControlRm::validate(
   }
 
   if (typesOfNotifIsSet()) {
-    const std::vector<oai::model::common::DlDataDeliveryStatus>& value =
+    const std::vector<oai::model::common::DlDataDeliveryStatus> &value =
         m_TypesOfNotif;
     const std::string currentValuePath = _pathPrefix + ".typesOfNotif";
 
@@ -74,10 +74,10 @@ bool DownlinkDataNotificationControlRm::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::DlDataDeliveryStatus& value : value) {
+      int i = 0;
+      for (const oai::model::common::DlDataDeliveryStatus &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -93,7 +93,7 @@ bool DownlinkDataNotificationControlRm::validate(
 }
 
 bool DownlinkDataNotificationControlRm::operator==(
-    const DownlinkDataNotificationControlRm& rhs) const {
+    const DownlinkDataNotificationControlRm &rhs) const {
   return
 
       ((!notifCtrlIndsIsSet() && !rhs.notifCtrlIndsIsSet()) ||
@@ -108,11 +108,11 @@ bool DownlinkDataNotificationControlRm::operator==(
 }
 
 bool DownlinkDataNotificationControlRm::operator!=(
-    const DownlinkDataNotificationControlRm& rhs) const {
+    const DownlinkDataNotificationControlRm &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const DownlinkDataNotificationControlRm& o) {
+void to_json(nlohmann::json &j, const DownlinkDataNotificationControlRm &o) {
   j = nlohmann::json();
   if (o.notifCtrlIndsIsSet() || !o.m_NotifCtrlInds.empty())
     j["notifCtrlInds"] = o.m_NotifCtrlInds;
@@ -120,7 +120,7 @@ void to_json(nlohmann::json& j, const DownlinkDataNotificationControlRm& o) {
     j["typesOfNotif"] = o.m_TypesOfNotif;
 }
 
-void from_json(const nlohmann::json& j, DownlinkDataNotificationControlRm& o) {
+void from_json(const nlohmann::json &j, DownlinkDataNotificationControlRm &o) {
   if (j.find("notifCtrlInds") != j.end()) {
     j.at("notifCtrlInds").get_to(o.m_NotifCtrlInds);
     o.m_NotifCtrlIndsIsSet = true;
@@ -136,8 +136,8 @@ DownlinkDataNotificationControlRm::getNotifCtrlInds() const {
   return m_NotifCtrlInds;
 }
 void DownlinkDataNotificationControlRm::setNotifCtrlInds(
-    std::vector<oai::model::pcf::NotificationControlIndication> const& value) {
-  m_NotifCtrlInds      = value;
+    std::vector<oai::model::pcf::NotificationControlIndication> const &value) {
+  m_NotifCtrlInds = value;
   m_NotifCtrlIndsIsSet = true;
 }
 bool DownlinkDataNotificationControlRm::notifCtrlIndsIsSet() const {
@@ -151,8 +151,8 @@ DownlinkDataNotificationControlRm::getTypesOfNotif() const {
   return m_TypesOfNotif;
 }
 void DownlinkDataNotificationControlRm::setTypesOfNotif(
-    std::vector<oai::model::common::DlDataDeliveryStatus> const& value) {
-  m_TypesOfNotif      = value;
+    std::vector<oai::model::common::DlDataDeliveryStatus> const &value) {
+  m_TypesOfNotif = value;
   m_TypesOfNotifIsSet = true;
 }
 bool DownlinkDataNotificationControlRm::typesOfNotifIsSet() const {
@@ -162,4 +162,4 @@ void DownlinkDataNotificationControlRm::unsetTypesOfNotif() {
   m_TypesOfNotifIsSet = false;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

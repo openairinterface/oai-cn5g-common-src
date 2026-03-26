@@ -27,12 +27,12 @@ void ReportingTrigger::validate() const {
   }
 }
 
-bool ReportingTrigger::validate(std::stringstream& msg) const {
+bool ReportingTrigger::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ReportingTrigger::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ReportingTrigger::validate(std::stringstream &msg,
+                                const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ReportingTrigger" : pathPrefix;
@@ -43,35 +43,33 @@ bool ReportingTrigger::validate(
   return success;
 }
 
-bool ReportingTrigger::operator==(const ReportingTrigger& rhs) const {
+bool ReportingTrigger::operator==(const ReportingTrigger &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool ReportingTrigger::operator!=(const ReportingTrigger& rhs) const {
+bool ReportingTrigger::operator!=(const ReportingTrigger &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ReportingTrigger& o) {
+void to_json(nlohmann::json &j, const ReportingTrigger &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, ReportingTrigger& o) {
+void from_json(const nlohmann::json &j, ReportingTrigger &o) {
   from_json(j, o.m_value);
 }
 
-ReportingTrigger_anyOf ReportingTrigger::getValue() const {
-  return m_value;
-}
+ReportingTrigger_anyOf ReportingTrigger::getValue() const { return m_value; }
 
 void ReportingTrigger::setValue(ReportingTrigger_anyOf value) {
   m_value = value;
 }
 
-ReportingTrigger_anyOf::eReportingTrigger_anyOf ReportingTrigger::getEnumValue()
-    const {
+ReportingTrigger_anyOf::eReportingTrigger_anyOf
+ReportingTrigger::getEnumValue() const {
   return m_value.getValue();
 }
 
@@ -80,4 +78,4 @@ void ReportingTrigger::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

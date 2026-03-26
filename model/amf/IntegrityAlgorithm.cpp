@@ -23,10 +23,10 @@ void IntegrityAlgorithm::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const IntegrityAlgorithm& o) {
+void to_json(nlohmann::json &j, const IntegrityAlgorithm &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, IntegrityAlgorithm& o) {}
+void from_json(const nlohmann::json &j, IntegrityAlgorithm &o) {}
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

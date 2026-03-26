@@ -27,12 +27,12 @@ void ServAuthInfo::validate() const {
   }
 }
 
-bool ServAuthInfo::validate(std::stringstream& msg) const {
+bool ServAuthInfo::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ServAuthInfo::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ServAuthInfo::validate(std::stringstream &msg,
+                            const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ServAuthInfo" : pathPrefix;
@@ -40,18 +40,18 @@ bool ServAuthInfo::validate(
   return success;
 }
 
-bool ServAuthInfo::operator==(const ServAuthInfo& rhs) const {
-  return true;  // TODO
+bool ServAuthInfo::operator==(const ServAuthInfo &rhs) const {
+  return true; // TODO
 }
 
-bool ServAuthInfo::operator!=(const ServAuthInfo& rhs) const {
+bool ServAuthInfo::operator!=(const ServAuthInfo &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ServAuthInfo& o) {
+void to_json(nlohmann::json &j, const ServAuthInfo &o) {
   j = nlohmann::json::object();
 }
 
-void from_json(const nlohmann::json& j, ServAuthInfo& o) {}
+void from_json(const nlohmann::json &j, ServAuthInfo &o) {}
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

@@ -20,7 +20,7 @@ namespace oai::model::amf {
 
 AllowedSnssai::AllowedSnssai() {
   m_NsiInformationListIsSet = false;
-  m_MappedHomeSnssaiIsSet   = false;
+  m_MappedHomeSnssaiIsSet = false;
 }
 
 void AllowedSnssai::validate() const {
@@ -31,28 +31,28 @@ void AllowedSnssai::validate() const {
   // }
 }
 
-bool AllowedSnssai::validate(std::stringstream& msg) const {
+bool AllowedSnssai::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool AllowedSnssai::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool AllowedSnssai::validate(std::stringstream &msg,
+                             const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "AllowedSnssai" : pathPrefix;
 
   if (nsiInformationListIsSet()) {
-    const std::vector<NsiInformation>& value = m_NsiInformationList;
+    const std::vector<NsiInformation> &value = m_NsiInformationList;
     const std::string currentValuePath = _pathPrefix + ".nsiInformationList";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const NsiInformation& value : value) {
+      int i = 0;
+      for (const NsiInformation &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -68,7 +68,7 @@ bool AllowedSnssai::validate(
   return success;
 }
 
-bool AllowedSnssai::operator==(const AllowedSnssai& rhs) const {
+bool AllowedSnssai::operator==(const AllowedSnssai &rhs) const {
   return
 
       (getAllowedSnssai() == rhs.getAllowedSnssai()) &&
@@ -84,19 +84,20 @@ bool AllowedSnssai::operator==(const AllowedSnssai& rhs) const {
           ;
 }
 
-bool AllowedSnssai::operator!=(const AllowedSnssai& rhs) const {
+bool AllowedSnssai::operator!=(const AllowedSnssai &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const AllowedSnssai& o) {
-  j                  = nlohmann::json();
+void to_json(nlohmann::json &j, const AllowedSnssai &o) {
+  j = nlohmann::json();
   j["allowedSnssai"] = o.m_AllowedSnssai;
   if (o.nsiInformationListIsSet() || !o.m_NsiInformationList.empty())
     j["nsiInformationList"] = o.m_NsiInformationList;
-  if (o.mappedHomeSnssaiIsSet()) j["mappedHomeSnssai"] = o.m_MappedHomeSnssai;
+  if (o.mappedHomeSnssaiIsSet())
+    j["mappedHomeSnssai"] = o.m_MappedHomeSnssai;
 }
 
-void from_json(const nlohmann::json& j, AllowedSnssai& o) {
+void from_json(const nlohmann::json &j, AllowedSnssai &o) {
   j.at("allowedSnssai").get_to(o.m_AllowedSnssai);
   if (j.find("nsiInformationList") != j.end()) {
     j.at("nsiInformationList").get_to(o.m_NsiInformationList);
@@ -111,15 +112,15 @@ void from_json(const nlohmann::json& j, AllowedSnssai& o) {
 oai::model::common::Snssai AllowedSnssai::getAllowedSnssai() const {
   return m_AllowedSnssai;
 }
-void AllowedSnssai::setAllowedSnssai(oai::model::common::Snssai const& value) {
+void AllowedSnssai::setAllowedSnssai(oai::model::common::Snssai const &value) {
   m_AllowedSnssai = value;
 }
 std::vector<NsiInformation> AllowedSnssai::getNsiInformationList() const {
   return m_NsiInformationList;
 }
 void AllowedSnssai::setNsiInformationList(
-    std::vector<NsiInformation> const& value) {
-  m_NsiInformationList      = value;
+    std::vector<NsiInformation> const &value) {
+  m_NsiInformationList = value;
   m_NsiInformationListIsSet = true;
 }
 bool AllowedSnssai::nsiInformationListIsSet() const {
@@ -132,15 +133,13 @@ oai::model::common::Snssai AllowedSnssai::getMappedHomeSnssai() const {
   return m_MappedHomeSnssai;
 }
 void AllowedSnssai::setMappedHomeSnssai(
-    oai::model::common::Snssai const& value) {
-  m_MappedHomeSnssai      = value;
+    oai::model::common::Snssai const &value) {
+  m_MappedHomeSnssai = value;
   m_MappedHomeSnssaiIsSet = true;
 }
 bool AllowedSnssai::mappedHomeSnssaiIsSet() const {
   return m_MappedHomeSnssaiIsSet;
 }
-void AllowedSnssai::unsetMappedHomeSnssai() {
-  m_MappedHomeSnssaiIsSet = false;
-}
+void AllowedSnssai::unsetMappedHomeSnssai() { m_MappedHomeSnssaiIsSet = false; }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

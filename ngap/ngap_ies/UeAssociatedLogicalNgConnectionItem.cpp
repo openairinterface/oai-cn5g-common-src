@@ -15,28 +15,29 @@ UeAssociatedLogicalNgConnectionItem::UeAssociatedLogicalNgConnectionItem() {
 }
 
 //------------------------------------------------------------------------------
-bool UeAssociatedLogicalNgConnectionItem::setAmfUeNgapId(const uint64_t& id) {
+bool UeAssociatedLogicalNgConnectionItem::setAmfUeNgapId(const uint64_t &id) {
   AmfUeNgapId tmp = {};
-  if (!tmp.set(id)) return false;
+  if (!tmp.set(id))
+    return false;
   m_AmfUeNgapId = std::optional<AmfUeNgapId>(tmp);
 
-  Ngap_DownlinkNASTransport_IEs_t* ie =
-      (Ngap_DownlinkNASTransport_IEs_t*) calloc(
+  Ngap_DownlinkNASTransport_IEs_t *ie =
+      (Ngap_DownlinkNASTransport_IEs_t *)calloc(
           1, sizeof(Ngap_DownlinkNASTransport_IEs_t));
-  ie->id            = Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID;
-  ie->criticality   = Ngap_Criticality_reject;
+  ie->id = Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID;
+  ie->criticality = Ngap_Criticality_reject;
   ie->value.present = Ngap_DownlinkNASTransport_IEs__value_PR_AMF_UE_NGAP_ID;
 
   int ret = m_AmfUeNgapId.value().encode(ie->value.choice.AMF_UE_NGAP_ID);
   if (!ret) {
     oai::logger::logger_common::ngap().error("Encode AMF_UE_NGAP_ID IE error");
   }
-  oai::utils::utils::free_wrapper((void**) &ie);
+  oai::utils::utils::free_wrapper((void **)&ie);
   return true;
 }
 
 //------------------------------------------------------------------------------
-bool UeAssociatedLogicalNgConnectionItem::getAmfUeNgapId(uint64_t& id) const {
+bool UeAssociatedLogicalNgConnectionItem::getAmfUeNgapId(uint64_t &id) const {
   if (m_AmfUeNgapId.has_value()) {
     id = m_AmfUeNgapId.value().get();
     return true;
@@ -46,27 +47,27 @@ bool UeAssociatedLogicalNgConnectionItem::getAmfUeNgapId(uint64_t& id) const {
 
 //------------------------------------------------------------------------------
 void UeAssociatedLogicalNgConnectionItem::setRanUeNgapId(
-    const uint32_t& ranUeNgapId) {
+    const uint32_t &ranUeNgapId) {
   m_RanUeNgapId = std::make_optional<RanUeNgapId>(ranUeNgapId);
 
-  Ngap_DownlinkNASTransport_IEs_t* ie =
-      (Ngap_DownlinkNASTransport_IEs_t*) calloc(
+  Ngap_DownlinkNASTransport_IEs_t *ie =
+      (Ngap_DownlinkNASTransport_IEs_t *)calloc(
           1, sizeof(Ngap_DownlinkNASTransport_IEs_t));
-  ie->id            = Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID;
-  ie->criticality   = Ngap_Criticality_reject;
+  ie->id = Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID;
+  ie->criticality = Ngap_Criticality_reject;
   ie->value.present = Ngap_DownlinkNASTransport_IEs__value_PR_RAN_UE_NGAP_ID;
 
   int ret = m_RanUeNgapId.value().encode(ie->value.choice.RAN_UE_NGAP_ID);
   if (!ret) {
     oai::logger::logger_common::ngap().error("Encode RAN_UE_NGAP_ID IE error");
   }
-  oai::utils::utils::free_wrapper((void**) &ie);
+  oai::utils::utils::free_wrapper((void **)&ie);
   return;
 }
 
 //------------------------------------------------------------------------------
 bool UeAssociatedLogicalNgConnectionItem::getRanUeNgapId(
-    uint32_t& ranUeNgapId) const {
+    uint32_t &ranUeNgapId) const {
   if (m_RanUeNgapId.has_value()) {
     ranUeNgapId = m_RanUeNgapId.value().get();
     return true;
@@ -76,7 +77,7 @@ bool UeAssociatedLogicalNgConnectionItem::getRanUeNgapId(
 
 //------------------------------------------------------------------------------
 void UeAssociatedLogicalNgConnectionItem::get(
-    UeAssociatedLogicalNgConnectionItem& item) const {
+    UeAssociatedLogicalNgConnectionItem &item) const {
   if (m_AmfUeNgapId.has_value()) {
     item.setAmfUeNgapId(m_AmfUeNgapId.value().get());
   }
@@ -87,7 +88,7 @@ void UeAssociatedLogicalNgConnectionItem::get(
 
 //------------------------------------------------------------------------------
 bool UeAssociatedLogicalNgConnectionItem::encode(
-    Ngap_UE_associatedLogicalNG_connectionItem_t& item) const {
+    Ngap_UE_associatedLogicalNG_connectionItem_t &item) const {
   item.aMF_UE_NGAP_ID = new Ngap_AMF_UE_NGAP_ID_t();
   m_AmfUeNgapId.value().encode(*item.aMF_UE_NGAP_ID);
   item.rAN_UE_NGAP_ID = new Ngap_RAN_UE_NGAP_ID_t();
@@ -97,7 +98,7 @@ bool UeAssociatedLogicalNgConnectionItem::encode(
 
 //------------------------------------------------------------------------------
 bool UeAssociatedLogicalNgConnectionItem::decode(
-    const Ngap_UE_associatedLogicalNG_connectionItem_t& item) {
+    const Ngap_UE_associatedLogicalNG_connectionItem_t &item) {
   if (item.aMF_UE_NGAP_ID) {
     AmfUeNgapId tmp = {};
     if (!tmp.decode(*item.aMF_UE_NGAP_ID)) {
@@ -120,4 +121,4 @@ bool UeAssociatedLogicalNgConnectionItem::decode(
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

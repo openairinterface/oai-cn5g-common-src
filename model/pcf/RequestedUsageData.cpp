@@ -20,7 +20,7 @@ namespace oai::model::pcf {
 
 RequestedUsageData::RequestedUsageData() {
   m_RefUmIdsIsSet = false;
-  m_AllUmIds      = false;
+  m_AllUmIds = false;
   m_AllUmIdsIsSet = false;
 }
 
@@ -31,19 +31,19 @@ void RequestedUsageData::validate() const {
   }
 }
 
-bool RequestedUsageData::validate(std::stringstream& msg) const {
+bool RequestedUsageData::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool RequestedUsageData::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool RequestedUsageData::validate(std::stringstream &msg,
+                                  const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "RequestedUsageData" : pathPrefix;
 
   if (refUmIdsIsSet()) {
-    const std::vector<std::string>& value = m_RefUmIds;
-    const std::string currentValuePath    = _pathPrefix + ".refUmIds";
+    const std::vector<std::string> &value = m_RefUmIds;
+    const std::string currentValuePath = _pathPrefix + ".refUmIds";
 
     if (value.size() < 1) {
       success = false;
@@ -66,7 +66,7 @@ bool RequestedUsageData::validate(
   return success;
 }
 
-bool RequestedUsageData::operator==(const RequestedUsageData& rhs) const {
+bool RequestedUsageData::operator==(const RequestedUsageData &rhs) const {
   return
 
       ((!refUmIdsIsSet() && !rhs.refUmIdsIsSet()) ||
@@ -80,17 +80,19 @@ bool RequestedUsageData::operator==(const RequestedUsageData& rhs) const {
           ;
 }
 
-bool RequestedUsageData::operator!=(const RequestedUsageData& rhs) const {
+bool RequestedUsageData::operator!=(const RequestedUsageData &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const RequestedUsageData& o) {
+void to_json(nlohmann::json &j, const RequestedUsageData &o) {
   j = nlohmann::json();
-  if (o.refUmIdsIsSet() || !o.m_RefUmIds.empty()) j["refUmIds"] = o.m_RefUmIds;
-  if (o.allUmIdsIsSet()) j["allUmIds"] = o.m_AllUmIds;
+  if (o.refUmIdsIsSet() || !o.m_RefUmIds.empty())
+    j["refUmIds"] = o.m_RefUmIds;
+  if (o.allUmIdsIsSet())
+    j["allUmIds"] = o.m_AllUmIds;
 }
 
-void from_json(const nlohmann::json& j, RequestedUsageData& o) {
+void from_json(const nlohmann::json &j, RequestedUsageData &o) {
   if (j.find("refUmIds") != j.end()) {
     j.at("refUmIds").get_to(o.m_RefUmIds);
     o.m_RefUmIdsIsSet = true;
@@ -104,28 +106,18 @@ void from_json(const nlohmann::json& j, RequestedUsageData& o) {
 std::vector<std::string> RequestedUsageData::getRefUmIds() const {
   return m_RefUmIds;
 }
-void RequestedUsageData::setRefUmIds(std::vector<std::string> const& value) {
-  m_RefUmIds      = value;
+void RequestedUsageData::setRefUmIds(std::vector<std::string> const &value) {
+  m_RefUmIds = value;
   m_RefUmIdsIsSet = true;
 }
-bool RequestedUsageData::refUmIdsIsSet() const {
-  return m_RefUmIdsIsSet;
-}
-void RequestedUsageData::unsetRefUmIds() {
-  m_RefUmIdsIsSet = false;
-}
-bool RequestedUsageData::isAllUmIds() const {
-  return m_AllUmIds;
-}
+bool RequestedUsageData::refUmIdsIsSet() const { return m_RefUmIdsIsSet; }
+void RequestedUsageData::unsetRefUmIds() { m_RefUmIdsIsSet = false; }
+bool RequestedUsageData::isAllUmIds() const { return m_AllUmIds; }
 void RequestedUsageData::setAllUmIds(bool const value) {
-  m_AllUmIds      = value;
+  m_AllUmIds = value;
   m_AllUmIdsIsSet = true;
 }
-bool RequestedUsageData::allUmIdsIsSet() const {
-  return m_AllUmIdsIsSet;
-}
-void RequestedUsageData::unsetAllUmIds() {
-  m_AllUmIdsIsSet = false;
-}
+bool RequestedUsageData::allUmIdsIsSet() const { return m_AllUmIdsIsSet; }
+void RequestedUsageData::unsetAllUmIds() { m_AllUmIdsIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

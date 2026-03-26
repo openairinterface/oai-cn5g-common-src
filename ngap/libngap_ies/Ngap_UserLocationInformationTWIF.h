@@ -12,9 +12,9 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
+#include "Ngap_PortNumber.h"
 #include "Ngap_TWAP-ID.h"
 #include "Ngap_TransportLayerAddress.h"
-#include "Ngap_PortNumber.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -28,8 +28,8 @@ struct Ngap_ProtocolExtensionContainer;
 typedef struct Ngap_UserLocationInformationTWIF {
   Ngap_TWAP_ID_t tWAP_ID;
   Ngap_TransportLayerAddress_t iPAddress;
-  Ngap_PortNumber_t* portNumber;                         /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  Ngap_PortNumber_t *portNumber;                         /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

@@ -19,7 +19,7 @@
 namespace oai::udr::model {
 
 TimePeriod::TimePeriod() {
-  m_MaxNumPeriod      = 0;
+  m_MaxNumPeriod = 0;
   m_MaxNumPeriodIsSet = false;
 }
 
@@ -29,13 +29,14 @@ void TimePeriod::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const TimePeriod& o) {
-  j           = nlohmann::json();
+void to_json(nlohmann::json &j, const TimePeriod &o) {
+  j = nlohmann::json();
   j["period"] = o.m_Period;
-  if (o.maxNumPeriodIsSet()) j["maxNumPeriod"] = o.m_MaxNumPeriod;
+  if (o.maxNumPeriodIsSet())
+    j["maxNumPeriod"] = o.m_MaxNumPeriod;
 }
 
-void from_json(const nlohmann::json& j, TimePeriod& o) {
+void from_json(const nlohmann::json &j, TimePeriod &o) {
   j.at("period").get_to(o.m_Period);
   if (j.find("maxNumPeriod") != j.end()) {
     j.at("maxNumPeriod").get_to(o.m_MaxNumPeriod);
@@ -43,24 +44,14 @@ void from_json(const nlohmann::json& j, TimePeriod& o) {
   }
 }
 
-Periodicity TimePeriod::getPeriod() const {
-  return m_Period;
-}
-void TimePeriod::setPeriod(Periodicity const& value) {
-  m_Period = value;
-}
-int32_t TimePeriod::getMaxNumPeriod() const {
-  return m_MaxNumPeriod;
-}
+Periodicity TimePeriod::getPeriod() const { return m_Period; }
+void TimePeriod::setPeriod(Periodicity const &value) { m_Period = value; }
+int32_t TimePeriod::getMaxNumPeriod() const { return m_MaxNumPeriod; }
 void TimePeriod::setMaxNumPeriod(int32_t const value) {
-  m_MaxNumPeriod      = value;
+  m_MaxNumPeriod = value;
   m_MaxNumPeriodIsSet = true;
 }
-bool TimePeriod::maxNumPeriodIsSet() const {
-  return m_MaxNumPeriodIsSet;
-}
-void TimePeriod::unsetMaxNumPeriod() {
-  m_MaxNumPeriodIsSet = false;
-}
+bool TimePeriod::maxNumPeriodIsSet() const { return m_MaxNumPeriodIsSet; }
+void TimePeriod::unsetMaxNumPeriod() { m_MaxNumPeriodIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

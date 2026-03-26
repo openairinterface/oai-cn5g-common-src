@@ -19,8 +19,8 @@
 #ifndef QueryParameter_H_
 #define QueryParameter_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::pcf {
 
@@ -28,7 +28,7 @@ namespace oai::model::pcf {
 /// Contains the name and value of a query parameter
 /// </summary>
 class QueryParameter {
- public:
+public:
   QueryParameter();
   virtual ~QueryParameter() = default;
 
@@ -42,16 +42,16 @@ class QueryParameter {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const QueryParameter& rhs) const;
-  bool operator!=(const QueryParameter& rhs) const;
+  bool operator==(const QueryParameter &rhs) const;
+  bool operator!=(const QueryParameter &rhs) const;
 
   /////////////////////////////////////////////
   /// QueryParameter members
@@ -60,22 +60,22 @@ class QueryParameter {
   ///
   /// </summary>
   std::string getName() const;
-  void setName(std::string const& value);
+  void setName(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getValue() const;
-  void setValue(std::string const& value);
+  void setValue(std::string const &value);
 
-  friend void to_json(nlohmann::json& j, const QueryParameter& o);
-  friend void from_json(const nlohmann::json& j, QueryParameter& o);
+  friend void to_json(nlohmann::json &j, const QueryParameter &o);
+  friend void from_json(const nlohmann::json &j, QueryParameter &o);
 
- protected:
+protected:
   std::string m_Name;
 
   std::string m_Value;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* QueryParameter_H_ */

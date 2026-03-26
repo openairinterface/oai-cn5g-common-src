@@ -25,7 +25,7 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_LTEUESidelinkAggregateMaximumBitrate */
 typedef struct Ngap_LTEUESidelinkAggregateMaximumBitrate {
   Ngap_BitRate_t uESidelinkAggregateMaximumBitRate;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

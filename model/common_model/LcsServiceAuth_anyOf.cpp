@@ -13,8 +13,8 @@
 
 #include "LcsServiceAuth_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::common {
 
@@ -27,12 +27,12 @@ void LcsServiceAuth_anyOf::validate() const {
   }
 }
 
-bool LcsServiceAuth_anyOf::validate(std::stringstream& msg) const {
+bool LcsServiceAuth_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool LcsServiceAuth_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool LcsServiceAuth_anyOf::validate(std::stringstream &msg,
+                                    const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "LcsServiceAuth_anyOf" : pathPrefix;
@@ -46,51 +46,51 @@ bool LcsServiceAuth_anyOf::validate(
   return success;
 }
 
-bool LcsServiceAuth_anyOf::operator==(const LcsServiceAuth_anyOf& rhs) const {
+bool LcsServiceAuth_anyOf::operator==(const LcsServiceAuth_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool LcsServiceAuth_anyOf::operator!=(const LcsServiceAuth_anyOf& rhs) const {
+bool LcsServiceAuth_anyOf::operator!=(const LcsServiceAuth_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const LcsServiceAuth_anyOf& o) {
+void to_json(nlohmann::json &j, const LcsServiceAuth_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case LcsServiceAuth_anyOf::eLcsServiceAuth_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case LcsServiceAuth_anyOf::eLcsServiceAuth_anyOf::
-        LOCATION_ALLOWED_WITH_NOTIFICATION:
-      j = "LOCATION_ALLOWED_WITH_NOTIFICATION";
-      break;
-    case LcsServiceAuth_anyOf::eLcsServiceAuth_anyOf::
-        LOCATION_ALLOWED_WITHOUT_NOTIFICATION:
-      j = "LOCATION_ALLOWED_WITHOUT_NOTIFICATION";
-      break;
-    case LcsServiceAuth_anyOf::eLcsServiceAuth_anyOf::
-        LOCATION_ALLOWED_WITHOUT_RESPONSE:
-      j = "LOCATION_ALLOWED_WITHOUT_RESPONSE";
-      break;
-    case LcsServiceAuth_anyOf::eLcsServiceAuth_anyOf::
-        LOCATION_RESTRICTED_WITHOUT_RESPONSE:
-      j = "LOCATION_RESTRICTED_WITHOUT_RESPONSE";
-      break;
-    case LcsServiceAuth_anyOf::eLcsServiceAuth_anyOf::NOTIFICATION_ONLY:
-      j = "NOTIFICATION_ONLY";
-      break;
-    case LcsServiceAuth_anyOf::eLcsServiceAuth_anyOf::
-        NOTIFICATION_AND_VERIFICATION_ONLY:
-      j = "NOTIFICATION_AND_VERIFICATION_ONLY";
-      break;
+  case LcsServiceAuth_anyOf::eLcsServiceAuth_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case LcsServiceAuth_anyOf::eLcsServiceAuth_anyOf::
+      LOCATION_ALLOWED_WITH_NOTIFICATION:
+    j = "LOCATION_ALLOWED_WITH_NOTIFICATION";
+    break;
+  case LcsServiceAuth_anyOf::eLcsServiceAuth_anyOf::
+      LOCATION_ALLOWED_WITHOUT_NOTIFICATION:
+    j = "LOCATION_ALLOWED_WITHOUT_NOTIFICATION";
+    break;
+  case LcsServiceAuth_anyOf::eLcsServiceAuth_anyOf::
+      LOCATION_ALLOWED_WITHOUT_RESPONSE:
+    j = "LOCATION_ALLOWED_WITHOUT_RESPONSE";
+    break;
+  case LcsServiceAuth_anyOf::eLcsServiceAuth_anyOf::
+      LOCATION_RESTRICTED_WITHOUT_RESPONSE:
+    j = "LOCATION_RESTRICTED_WITHOUT_RESPONSE";
+    break;
+  case LcsServiceAuth_anyOf::eLcsServiceAuth_anyOf::NOTIFICATION_ONLY:
+    j = "NOTIFICATION_ONLY";
+    break;
+  case LcsServiceAuth_anyOf::eLcsServiceAuth_anyOf::
+      NOTIFICATION_AND_VERIFICATION_ONLY:
+    j = "NOTIFICATION_AND_VERIFICATION_ONLY";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, LcsServiceAuth_anyOf& o) {
+void from_json(const nlohmann::json &j, LcsServiceAuth_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "LOCATION_ALLOWED_WITH_NOTIFICATION") {
     o.setValue(LcsServiceAuth_anyOf::eLcsServiceAuth_anyOf::
@@ -118,8 +118,8 @@ void from_json(const nlohmann::json& j, LcsServiceAuth_anyOf& o) {
   }
 }
 
-LcsServiceAuth_anyOf::eLcsServiceAuth_anyOf LcsServiceAuth_anyOf::getValue()
-    const {
+LcsServiceAuth_anyOf::eLcsServiceAuth_anyOf
+LcsServiceAuth_anyOf::getValue() const {
   return m_value;
 }
 void LcsServiceAuth_anyOf::setValue(
@@ -127,4 +127,4 @@ void LcsServiceAuth_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

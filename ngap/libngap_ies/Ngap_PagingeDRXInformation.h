@@ -12,8 +12,8 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_Paging-eDRX-Cycle.h"
 #include "Ngap_Paging-Time-Window.h"
+#include "Ngap_Paging-eDRX-Cycle.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -26,8 +26,8 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_PagingeDRXInformation */
 typedef struct Ngap_PagingeDRXInformation {
   Ngap_Paging_eDRX_Cycle_t paging_eDRX_Cycle;
-  Ngap_Paging_Time_Window_t* paging_Time_Window;         /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  Ngap_Paging_Time_Window_t *paging_Time_Window;         /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

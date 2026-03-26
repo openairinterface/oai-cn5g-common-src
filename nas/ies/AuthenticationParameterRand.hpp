@@ -16,23 +16,23 @@ constexpr auto kAuthenticationParameterRandIeName =
 namespace oai::nas {
 
 class AuthenticationParameterRand : public Type3NasIe {
- public:
+public:
   AuthenticationParameterRand();
   AuthenticationParameterRand(uint8_t iei);
   AuthenticationParameterRand(
       uint8_t iei, uint8_t value[kAuthenticationParameterRandValueLength]);
   virtual ~AuthenticationParameterRand();
 
-  int Encode(uint8_t* buf, int len) const override;
-  int Decode(const uint8_t* const buf, int len, bool is_iei = false) override;
+  int Encode(uint8_t *buf, int len) const override;
+  int Decode(const uint8_t *const buf, int len, bool is_iei = false) override;
 
   static std::string GetIeName() { return kAuthenticationParameterRandIeName; }
   uint32_t GetIeLength() const override;
 
- private:
+private:
   uint8_t value_[kAuthenticationParameterRandValueLength];
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

@@ -13,8 +13,8 @@
 
 #include "DnnSelectionMode_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::smf {
 
@@ -27,12 +27,12 @@ void DnnSelectionMode_anyOf::validate() const {
   }
 }
 
-bool DnnSelectionMode_anyOf::validate(std::stringstream& msg) const {
+bool DnnSelectionMode_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool DnnSelectionMode_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool DnnSelectionMode_anyOf::validate(std::stringstream &msg,
+                                      const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "DnnSelectionMode_anyOf" : pathPrefix;
@@ -47,38 +47,38 @@ bool DnnSelectionMode_anyOf::validate(
 }
 
 bool DnnSelectionMode_anyOf::operator==(
-    const DnnSelectionMode_anyOf& rhs) const {
+    const DnnSelectionMode_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool DnnSelectionMode_anyOf::operator!=(
-    const DnnSelectionMode_anyOf& rhs) const {
+    const DnnSelectionMode_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const DnnSelectionMode_anyOf& o) {
+void to_json(nlohmann::json &j, const DnnSelectionMode_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case DnnSelectionMode_anyOf::eDnnSelectionMode_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case DnnSelectionMode_anyOf::eDnnSelectionMode_anyOf::VERIFIED:
-      j = "VERIFIED";
-      break;
-    case DnnSelectionMode_anyOf::eDnnSelectionMode_anyOf::UE_DNN_NOT_VERIFIED:
-      j = "UE_DNN_NOT_VERIFIED";
-      break;
-    case DnnSelectionMode_anyOf::eDnnSelectionMode_anyOf::NW_DNN_NOT_VERIFIED:
-      j = "NW_DNN_NOT_VERIFIED";
-      break;
+  case DnnSelectionMode_anyOf::eDnnSelectionMode_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case DnnSelectionMode_anyOf::eDnnSelectionMode_anyOf::VERIFIED:
+    j = "VERIFIED";
+    break;
+  case DnnSelectionMode_anyOf::eDnnSelectionMode_anyOf::UE_DNN_NOT_VERIFIED:
+    j = "UE_DNN_NOT_VERIFIED";
+    break;
+  case DnnSelectionMode_anyOf::eDnnSelectionMode_anyOf::NW_DNN_NOT_VERIFIED:
+    j = "NW_DNN_NOT_VERIFIED";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, DnnSelectionMode_anyOf& o) {
+void from_json(const nlohmann::json &j, DnnSelectionMode_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "VERIFIED") {
     o.setValue(DnnSelectionMode_anyOf::eDnnSelectionMode_anyOf::VERIFIED);
@@ -106,4 +106,4 @@ void DnnSelectionMode_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

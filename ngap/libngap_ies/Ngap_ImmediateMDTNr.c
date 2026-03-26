@@ -8,16 +8,16 @@
 
 #include "Ngap_ImmediateMDTNr.h"
 
+#include "Ngap_BluetoothMeasurementConfiguration.h"
 #include "Ngap_M1Configuration.h"
 #include "Ngap_M4Configuration.h"
 #include "Ngap_M5Configuration.h"
 #include "Ngap_M6Configuration.h"
 #include "Ngap_M7Configuration.h"
-#include "Ngap_BluetoothMeasurementConfiguration.h"
-#include "Ngap_WLANMeasurementConfiguration.h"
 #include "Ngap_MDT-Location-Info.h"
-#include "Ngap_SensorMeasurementConfiguration.h"
 #include "Ngap_ProtocolExtensionContainer.h"
+#include "Ngap_SensorMeasurementConfiguration.h"
+#include "Ngap_WLANMeasurementConfiguration.h"
 asn_TYPE_member_t asn_MBR_Ngap_ImmediateMDTNr_1[] = {
     {ATF_NOFLAGS,
      0,

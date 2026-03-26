@@ -27,7 +27,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class PolicyDecisionFailureCode_anyOf {
- public:
+public:
   PolicyDecisionFailureCode_anyOf();
   virtual ~PolicyDecisionFailureCode_anyOf() = default;
 
@@ -54,36 +54,36 @@ class PolicyDecisionFailureCode_anyOf {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const PolicyDecisionFailureCode_anyOf& rhs) const;
-  bool operator!=(const PolicyDecisionFailureCode_anyOf& rhs) const;
+  bool operator==(const PolicyDecisionFailureCode_anyOf &rhs) const;
+  bool operator!=(const PolicyDecisionFailureCode_anyOf &rhs) const;
 
   /////////////////////////////////////////////
   /// PolicyDecisionFailureCode_anyOf members
 
-  PolicyDecisionFailureCode_anyOf::ePolicyDecisionFailureCode_anyOf getValue()
-      const;
+  PolicyDecisionFailureCode_anyOf::ePolicyDecisionFailureCode_anyOf
+  getValue() const;
   void setValue(
       PolicyDecisionFailureCode_anyOf::ePolicyDecisionFailureCode_anyOf value);
 
-  friend void to_json(
-      nlohmann::json& j, const PolicyDecisionFailureCode_anyOf& o);
-  friend void from_json(
-      const nlohmann::json& j, PolicyDecisionFailureCode_anyOf& o);
+  friend void to_json(nlohmann::json &j,
+                      const PolicyDecisionFailureCode_anyOf &o);
+  friend void from_json(const nlohmann::json &j,
+                        PolicyDecisionFailureCode_anyOf &o);
 
- protected:
+protected:
   PolicyDecisionFailureCode_anyOf::ePolicyDecisionFailureCode_anyOf m_value =
       PolicyDecisionFailureCode_anyOf::ePolicyDecisionFailureCode_anyOf::
           INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* PolicyDecisionFailureCode_anyOf_H_ */

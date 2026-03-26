@@ -29,24 +29,24 @@ void GetBlockList_200_response::validate() const {
   }
 }
 
-bool GetBlockList_200_response::validate(std::stringstream& msg) const {
+bool GetBlockList_200_response::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool GetBlockList_200_response::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool GetBlockList_200_response::validate(std::stringstream &msg,
+                                         const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "GetBlockList_200_response" : pathPrefix;
 
   if (blocksIsSet()) {
-    const std::vector<nlohmann::json>& value = m_Blocks;
-    const std::string currentValuePath       = _pathPrefix + ".blocks";
+    const std::vector<nlohmann::json> &value = m_Blocks;
+    const std::string currentValuePath = _pathPrefix + ".blocks";
 
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const nlohmann::json& value : value) {
+      int i = 0;
+      for (const nlohmann::json &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -59,7 +59,7 @@ bool GetBlockList_200_response::validate(
 }
 
 bool GetBlockList_200_response::operator==(
-    const GetBlockList_200_response& rhs) const {
+    const GetBlockList_200_response &rhs) const {
   return
 
       ((!blocksIsSet() && !rhs.blocksIsSet()) ||
@@ -69,16 +69,17 @@ bool GetBlockList_200_response::operator==(
 }
 
 bool GetBlockList_200_response::operator!=(
-    const GetBlockList_200_response& rhs) const {
+    const GetBlockList_200_response &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const GetBlockList_200_response& o) {
+void to_json(nlohmann::json &j, const GetBlockList_200_response &o) {
   j = nlohmann::json();
-  if (o.blocksIsSet() || !o.m_Blocks.empty()) j["blocks"] = o.m_Blocks;
+  if (o.blocksIsSet() || !o.m_Blocks.empty())
+    j["blocks"] = o.m_Blocks;
 }
 
-void from_json(const nlohmann::json& j, GetBlockList_200_response& o) {
+void from_json(const nlohmann::json &j, GetBlockList_200_response &o) {
   if (j.find("blocks") != j.end()) {
     j.at("blocks").get_to(o.m_Blocks);
     o.m_BlocksIsSet = true;
@@ -89,15 +90,11 @@ std::vector<nlohmann::json> GetBlockList_200_response::getBlocks() const {
   return m_Blocks;
 }
 void GetBlockList_200_response::setBlocks(
-    std::vector<nlohmann::json> const& value) {
-  m_Blocks      = value;
+    std::vector<nlohmann::json> const &value) {
+  m_Blocks = value;
   m_BlocksIsSet = true;
 }
-bool GetBlockList_200_response::blocksIsSet() const {
-  return m_BlocksIsSet;
-}
-void GetBlockList_200_response::unsetBlocks() {
-  m_BlocksIsSet = false;
-}
+bool GetBlockList_200_response::blocksIsSet() const { return m_BlocksIsSet; }
+void GetBlockList_200_response::unsetBlocks() { m_BlocksIsSet = false; }
 
-}  // namespace oai::model::udsf
+} // namespace oai::model::udsf

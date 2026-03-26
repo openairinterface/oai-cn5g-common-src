@@ -19,11 +19,11 @@
 #ifndef HalTemplate_H_
 #define HalTemplate_H_
 
-#include <string>
 #include "HttpMethod.h"
-#include <vector>
 #include "Property.h"
 #include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
 
 namespace oai::model::common {
 
@@ -31,7 +31,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class HalTemplate {
- public:
+public:
   HalTemplate();
   virtual ~HalTemplate() = default;
 
@@ -45,16 +45,16 @@ class HalTemplate {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const HalTemplate& rhs) const;
-  bool operator!=(const HalTemplate& rhs) const;
+  bool operator==(const HalTemplate &rhs) const;
+  bool operator!=(const HalTemplate &rhs) const;
 
   /////////////////////////////////////////////
   /// HalTemplate members
@@ -63,33 +63,33 @@ class HalTemplate {
   ///
   /// </summary>
   std::string getTitle() const;
-  void setTitle(std::string const& value);
+  void setTitle(std::string const &value);
   bool titleIsSet() const;
   void unsetTitle();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::HttpMethod getMethod() const;
-  void setMethod(oai::model::common::HttpMethod const& value);
+  void setMethod(oai::model::common::HttpMethod const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getContentType() const;
-  void setContentType(std::string const& value);
+  void setContentType(std::string const &value);
   bool contentTypeIsSet() const;
   void unsetContentType();
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::common::Property> getProperties() const;
-  void setProperties(std::vector<oai::model::common::Property> const& value);
+  void setProperties(std::vector<oai::model::common::Property> const &value);
   bool propertiesIsSet() const;
   void unsetProperties();
 
-  friend void to_json(nlohmann::json& j, const HalTemplate& o);
-  friend void from_json(const nlohmann::json& j, HalTemplate& o);
+  friend void to_json(nlohmann::json &j, const HalTemplate &o);
+  friend void from_json(const nlohmann::json &j, HalTemplate &o);
 
- protected:
+protected:
   std::string m_Title;
   bool m_TitleIsSet;
   oai::model::common::HttpMethod m_Method;
@@ -100,6 +100,6 @@ class HalTemplate {
   bool m_PropertiesIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* HalTemplate_H_ */

@@ -19,8 +19,8 @@
 #ifndef NFServiceVersion_H_
 #define NFServiceVersion_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::nrf {
 
@@ -28,7 +28,7 @@ namespace oai::model::nrf {
 ///
 /// </summary>
 class NFServiceVersion {
- public:
+public:
   NFServiceVersion();
   virtual ~NFServiceVersion();
 
@@ -41,24 +41,24 @@ class NFServiceVersion {
   ///
   /// </summary>
   std::string getApiVersionInUri() const;
-  void setApiVersionInUri(std::string const& value);
+  void setApiVersionInUri(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getApiFullVersion() const;
-  void setApiFullVersion(std::string const& value);
+  void setApiFullVersion(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getExpiry() const;
-  void setExpiry(std::string const& value);
+  void setExpiry(std::string const &value);
   bool expiryIsSet() const;
   void unsetExpiry();
 
-  friend void to_json(nlohmann::json& j, const NFServiceVersion& o);
-  friend void from_json(const nlohmann::json& j, NFServiceVersion& o);
+  friend void to_json(nlohmann::json &j, const NFServiceVersion &o);
+  friend void from_json(const nlohmann::json &j, NFServiceVersion &o);
 
- protected:
+protected:
   std::string m_ApiVersionInUri;
 
   std::string m_ApiFullVersion;
@@ -67,6 +67,6 @@ class NFServiceVersion {
   bool m_ExpiryIsSet;
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* NFServiceVersion_H_ */

@@ -96,7 +96,7 @@ asn_CHOICE_specifics_t asn_SPC_Ngap_CellIDListForRestart_specs_1 = {
     sizeof(struct Ngap_CellIDListForRestart),
     offsetof(struct Ngap_CellIDListForRestart, _asn_ctx),
     offsetof(struct Ngap_CellIDListForRestart, present),
-    sizeof(((struct Ngap_CellIDListForRestart*) 0)->present),
+    sizeof(((struct Ngap_CellIDListForRestart *)0)->present),
     asn_MAP_Ngap_CellIDListForRestart_tag2el_1,
     3, /* Count of tags in the map */
     0,

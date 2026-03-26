@@ -30,7 +30,7 @@ namespace oai::udr::model {
 /// Indicates the validation status of a negotiated BDT policy.
 /// </summary>
 class BdtPolicyStatus {
- public:
+public:
   BdtPolicyStatus();
   virtual ~BdtPolicyStatus();
 
@@ -39,12 +39,12 @@ class BdtPolicyStatus {
   /////////////////////////////////////////////
   /// BdtPolicyStatus members
 
-  friend void to_json(nlohmann::json& j, const BdtPolicyStatus& o);
-  friend void from_json(const nlohmann::json& j, BdtPolicyStatus& o);
+  friend void to_json(nlohmann::json &j, const BdtPolicyStatus &o);
+  friend void from_json(const nlohmann::json &j, BdtPolicyStatus &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* BdtPolicyStatus_H_ */

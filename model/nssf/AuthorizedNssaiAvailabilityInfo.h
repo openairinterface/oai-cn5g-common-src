@@ -32,7 +32,7 @@ namespace model {
 ///
 /// </summary>
 class AuthorizedNssaiAvailabilityInfo {
- public:
+public:
   AuthorizedNssaiAvailabilityInfo();
   virtual ~AuthorizedNssaiAvailabilityInfo() = default;
 
@@ -46,16 +46,16 @@ class AuthorizedNssaiAvailabilityInfo {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const AuthorizedNssaiAvailabilityInfo& rhs) const;
-  bool operator!=(const AuthorizedNssaiAvailabilityInfo& rhs) const;
+  bool operator==(const AuthorizedNssaiAvailabilityInfo &rhs) const;
+  bool operator!=(const AuthorizedNssaiAvailabilityInfo &rhs) const;
 
   /////////////////////////////////////////////
   /// AuthorizedNssaiAvailabilityInfo members
@@ -66,21 +66,21 @@ class AuthorizedNssaiAvailabilityInfo {
   std::vector<AuthorizedNssaiAvailabilityData>
   getAuthorizedNssaiAvailabilityData() const;
   void setAuthorizedNssaiAvailabilityData(
-      std::vector<AuthorizedNssaiAvailabilityData> const& value);
+      std::vector<AuthorizedNssaiAvailabilityData> const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
 
-  friend void to_json(
-      nlohmann::json& j, const AuthorizedNssaiAvailabilityInfo& o);
-  friend void from_json(
-      const nlohmann::json& j, AuthorizedNssaiAvailabilityInfo& o);
+  friend void to_json(nlohmann::json &j,
+                      const AuthorizedNssaiAvailabilityInfo &o);
+  friend void from_json(const nlohmann::json &j,
+                        AuthorizedNssaiAvailabilityInfo &o);
 
- protected:
+protected:
   std::vector<AuthorizedNssaiAvailabilityData>
       m_AuthorizedNssaiAvailabilityData;
 
@@ -88,8 +88,8 @@ class AuthorizedNssaiAvailabilityInfo {
   bool m_SupportedFeaturesIsSet;
 };
 
-}  // namespace model
-}  // namespace nssf_server
-}  // namespace oai
+} // namespace model
+} // namespace nssf_server
+} // namespace oai
 
 #endif /* AuthorizedNssaiAvailabilityInfo_H_ */

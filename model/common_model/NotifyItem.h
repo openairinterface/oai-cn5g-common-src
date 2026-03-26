@@ -20,9 +20,9 @@
 #define NotifyItem_H_
 
 #include "ChangeItem.h"
+#include <nlohmann/json.hpp>
 #include <string>
 #include <vector>
-#include <nlohmann/json.hpp>
 
 namespace oai::model::common {
 
@@ -30,7 +30,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class NotifyItem {
- public:
+public:
   NotifyItem();
   virtual ~NotifyItem() = default;
 
@@ -44,16 +44,16 @@ class NotifyItem {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const NotifyItem& rhs) const;
-  bool operator!=(const NotifyItem& rhs) const;
+  bool operator==(const NotifyItem &rhs) const;
+  bool operator!=(const NotifyItem &rhs) const;
 
   /////////////////////////////////////////////
   /// NotifyItem members
@@ -62,22 +62,22 @@ class NotifyItem {
   ///
   /// </summary>
   std::string getResourceId() const;
-  void setResourceId(std::string const& value);
+  void setResourceId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::vector<oai::model::common::ChangeItem> getChanges() const;
-  void setChanges(std::vector<oai::model::common::ChangeItem> const& value);
+  void setChanges(std::vector<oai::model::common::ChangeItem> const &value);
 
-  friend void to_json(nlohmann::json& j, const NotifyItem& o);
-  friend void from_json(const nlohmann::json& j, NotifyItem& o);
+  friend void to_json(nlohmann::json &j, const NotifyItem &o);
+  friend void from_json(const nlohmann::json &j, NotifyItem &o);
 
- protected:
+protected:
   std::string m_ResourceId;
 
   std::vector<oai::model::common::ChangeItem> m_Changes;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* NotifyItem_H_ */

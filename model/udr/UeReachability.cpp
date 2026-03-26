@@ -26,10 +26,10 @@ void UeReachability::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const UeReachability& o) {
+void to_json(nlohmann::json &j, const UeReachability &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, UeReachability& o) {}
+void from_json(const nlohmann::json &j, UeReachability &o) {}
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

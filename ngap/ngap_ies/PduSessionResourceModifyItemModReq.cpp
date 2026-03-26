@@ -17,9 +17,9 @@ PduSessionResourceModifyItemModReq::~PduSessionResourceModifyItemModReq() {}
 
 //------------------------------------------------------------------------------
 void PduSessionResourceModifyItemModReq::set(
-    const PduSessionId& pduSessionId, const std::optional<NasPdu>& nasPdu,
-    const OCTET_STRING_t& pduSessionResourceModifyRequestTransfer,
-    const std::optional<SNssai>& sNssai) {
+    const PduSessionId &pduSessionId, const std::optional<NasPdu> &nasPdu,
+    const OCTET_STRING_t &pduSessionResourceModifyRequestTransfer,
+    const std::optional<SNssai> &sNssai) {
   m_PduSessionId = pduSessionId;
   if (nasPdu.has_value()) {
     NasPdu tmp = {};
@@ -34,14 +34,15 @@ void PduSessionResourceModifyItemModReq::set(
 
 //------------------------------------------------------------------------------
 bool PduSessionResourceModifyItemModReq::encode(
-    Ngap_PDUSessionResourceModifyItemModReq_t&
-        pduSessionResourceModifyItemModReq) const {
+    Ngap_PDUSessionResourceModifyItemModReq_t
+        &pduSessionResourceModifyItemModReq) const {
   if (!m_PduSessionId.encode(pduSessionResourceModifyItemModReq.pDUSessionID))
     return false;
   if (m_NasPdu.has_value()) {
     pduSessionResourceModifyItemModReq.nAS_PDU =
-        (Ngap_NAS_PDU_t*) calloc(1, sizeof(Ngap_NAS_PDU_t));
-    if (!pduSessionResourceModifyItemModReq.nAS_PDU) return false;
+        (Ngap_NAS_PDU_t *)calloc(1, sizeof(Ngap_NAS_PDU_t));
+    if (!pduSessionResourceModifyItemModReq.nAS_PDU)
+      return false;
     if (!m_NasPdu.value().encode(*pduSessionResourceModifyItemModReq.nAS_PDU)) {
       if (pduSessionResourceModifyItemModReq.nAS_PDU != nullptr)
         free(pduSessionResourceModifyItemModReq.nAS_PDU);
@@ -57,14 +58,15 @@ bool PduSessionResourceModifyItemModReq::encode(
 
 //------------------------------------------------------------------------------
 bool PduSessionResourceModifyItemModReq::decode(
-    const Ngap_PDUSessionResourceModifyItemModReq_t&
-        pduSessionResourceModifyItemModReq) {
+    const Ngap_PDUSessionResourceModifyItemModReq_t
+        &pduSessionResourceModifyItemModReq) {
   if (!m_PduSessionId.decode(pduSessionResourceModifyItemModReq.pDUSessionID))
     return false;
 
   if (pduSessionResourceModifyItemModReq.nAS_PDU) {
     NasPdu tmp = {};
-    if (!tmp.decode(*pduSessionResourceModifyItemModReq.nAS_PDU)) return false;
+    if (!tmp.decode(*pduSessionResourceModifyItemModReq.nAS_PDU))
+      return false;
     m_NasPdu = std::optional<NasPdu>(tmp);
   }
 
@@ -77,11 +79,11 @@ bool PduSessionResourceModifyItemModReq::decode(
 
 //------------------------------------------------------------------------------
 void PduSessionResourceModifyItemModReq::get(
-    PduSessionId& pduSessionId, std::optional<NasPdu>& nasPdu,
-    OCTET_STRING_t& pduSessionResourceModifyRequestTransfer,
-    std::optional<SNssai>& sNssai) const {
+    PduSessionId &pduSessionId, std::optional<NasPdu> &nasPdu,
+    OCTET_STRING_t &pduSessionResourceModifyRequestTransfer,
+    std::optional<SNssai> &sNssai) const {
   pduSessionId = m_PduSessionId;
-  nasPdu       = *m_NasPdu;
+  nasPdu = *m_NasPdu;
   if (m_NasPdu.has_value()) {
     NasPdu tmp = {};
     tmp.set(nasPdu.value());
@@ -93,4 +95,4 @@ void PduSessionResourceModifyItemModReq::get(
   sNssai = m_SNssai;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

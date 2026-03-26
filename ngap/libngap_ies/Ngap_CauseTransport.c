@@ -27,8 +27,7 @@ asn_per_constraints_t asn_PER_type_Ngap_CauseTransport_constr_1 CC_NOTUSED = {
           !defined(ASN_DISABLE_APER_SUPPORT) */
 static const asn_INTEGER_enum_map_t asn_MAP_Ngap_CauseTransport_value2enum_1[] =
     {
-        {0, 30, "transport-resource-unavailable"},
-        {1, 11, "unspecified"}
+        {0, 30, "transport-resource-unavailable"}, {1, 11, "unspecified"}
         /* This list is extensible */
 };
 static const unsigned int asn_MAP_Ngap_CauseTransport_enum2value_1[] = {

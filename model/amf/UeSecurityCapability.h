@@ -29,7 +29,7 @@ namespace model {
 ///
 /// </summary>
 class UeSecurityCapability {
- public:
+public:
   UeSecurityCapability();
   virtual ~UeSecurityCapability();
 
@@ -38,14 +38,14 @@ class UeSecurityCapability {
   /////////////////////////////////////////////
   /// UeSecurityCapability members
 
-  friend void to_json(nlohmann::json& j, const UeSecurityCapability& o);
-  friend void from_json(const nlohmann::json& j, UeSecurityCapability& o);
+  friend void to_json(nlohmann::json &j, const UeSecurityCapability &o);
+  friend void from_json(const nlohmann::json &j, UeSecurityCapability &o);
 
- protected:
+protected:
 };
 
-}  // namespace model
-}  // namespace udm
-}  // namespace oai
+} // namespace model
+} // namespace udm
+} // namespace oai
 
 #endif /* UeSecurityCapability_H_ */

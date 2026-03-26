@@ -30,7 +30,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class IpAddress {
- public:
+public:
   IpAddress();
   virtual ~IpAddress();
 
@@ -39,12 +39,12 @@ class IpAddress {
   /////////////////////////////////////////////
   /// IpAddress members
 
-  friend void to_json(nlohmann::json& j, const IpAddress& o);
-  friend void from_json(const nlohmann::json& j, IpAddress& o);
+  friend void to_json(nlohmann::json &j, const IpAddress &o);
+  friend void from_json(const nlohmann::json &j, IpAddress &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* IpAddress_H_ */

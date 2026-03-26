@@ -20,8 +20,8 @@
 #ifndef QosMonitoringInformation_H_
 #define QosMonitoringInformation_H_
 
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::pcf {
 
@@ -30,7 +30,7 @@ namespace oai::model::pcf {
 /// round trip delay.
 /// </summary>
 class QosMonitoringInformation {
- public:
+public:
   QosMonitoringInformation();
   virtual ~QosMonitoringInformation() = default;
 
@@ -44,16 +44,16 @@ class QosMonitoringInformation {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const QosMonitoringInformation& rhs) const;
-  bool operator!=(const QosMonitoringInformation& rhs) const;
+  bool operator==(const QosMonitoringInformation &rhs) const;
+  bool operator!=(const QosMonitoringInformation &rhs) const;
 
   /////////////////////////////////////////////
   /// QosMonitoringInformation members
@@ -86,7 +86,7 @@ class QosMonitoringInformation {
   /// standard symbol \&quot;k\&quot;.
   /// </summary>
   std::string getRepThreshDatRateUl() const;
-  void setRepThreshDatRateUl(std::string const& value);
+  void setRepThreshDatRateUl(std::string const &value);
   bool repThreshDatRateUlIsSet() const;
   void unsetRepThreshDatRateUl();
   /// <summary>
@@ -96,7 +96,7 @@ class QosMonitoringInformation {
   /// standard symbol \&quot;k\&quot;.
   /// </summary>
   std::string getRepThreshDatRateDl() const;
-  void setRepThreshDatRateDl(std::string const& value);
+  void setRepThreshDatRateDl(std::string const &value);
   bool repThreshDatRateDlIsSet() const;
   void unsetRepThreshDatRateDl();
   /// <summary>
@@ -114,10 +114,10 @@ class QosMonitoringInformation {
   bool conThreshUlIsSet() const;
   void unsetConThreshUl();
 
-  friend void to_json(nlohmann::json& j, const QosMonitoringInformation& o);
-  friend void from_json(const nlohmann::json& j, QosMonitoringInformation& o);
+  friend void to_json(nlohmann::json &j, const QosMonitoringInformation &o);
+  friend void from_json(const nlohmann::json &j, QosMonitoringInformation &o);
 
- protected:
+protected:
   int32_t m_RepThreshDl;
   bool m_RepThreshDlIsSet;
   int32_t m_RepThreshUl;
@@ -134,6 +134,6 @@ class QosMonitoringInformation {
   bool m_ConThreshUlIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* QosMonitoringInformation_H_ */

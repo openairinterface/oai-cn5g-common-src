@@ -26,20 +26,18 @@ void Point_allOf::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const Point_allOf& o) {
-  j          = nlohmann::json();
+void to_json(nlohmann::json &j, const Point_allOf &o) {
+  j = nlohmann::json();
   j["point"] = o.m_Point;
 }
 
-void from_json(const nlohmann::json& j, Point_allOf& o) {
+void from_json(const nlohmann::json &j, Point_allOf &o) {
   j.at("point").get_to(o.m_Point);
 }
 
-GeographicalCoordinates Point_allOf::getPoint() const {
-  return m_Point;
-}
-void Point_allOf::setPoint(GeographicalCoordinates const& value) {
+GeographicalCoordinates Point_allOf::getPoint() const { return m_Point; }
+void Point_allOf::setPoint(GeographicalCoordinates const &value) {
   m_Point = value;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

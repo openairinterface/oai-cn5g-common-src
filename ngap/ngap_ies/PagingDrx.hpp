@@ -8,11 +8,11 @@
 namespace oai::ngap {
 
 class PagingDRX {
- public:
- private:
+public:
+private:
   enum { 32, 64, 128, 256 } pagingDrx;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

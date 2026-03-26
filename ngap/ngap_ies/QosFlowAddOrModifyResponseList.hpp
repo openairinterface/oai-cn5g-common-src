@@ -15,23 +15,23 @@ extern "C" {
 namespace oai::ngap {
 
 class QosFlowAddOrModifyResponseList {
- public:
+public:
   QosFlowAddOrModifyResponseList();
   virtual ~QosFlowAddOrModifyResponseList();
 
-  void set(const std::vector<QosFlowAddOrModifyResponseItem>& list);
-  void get(std::vector<QosFlowAddOrModifyResponseItem>& list) const;
+  void set(const std::vector<QosFlowAddOrModifyResponseItem> &list);
+  void get(std::vector<QosFlowAddOrModifyResponseItem> &list) const;
 
-  void addItem(const QosFlowAddOrModifyResponseItem& item);
+  void addItem(const QosFlowAddOrModifyResponseItem &item);
 
-  bool encode(Ngap_QosFlowAddOrModifyResponseList_t& list) const;
-  bool decode(const Ngap_QosFlowAddOrModifyResponseList_t& list);
+  bool encode(Ngap_QosFlowAddOrModifyResponseList_t &list) const;
+  bool decode(const Ngap_QosFlowAddOrModifyResponseList_t &list);
 
- private:
+private:
   std::vector<QosFlowAddOrModifyResponseItem> m_ItemList;
   constexpr static uint8_t KMaxNoOfQosFlows = 64;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

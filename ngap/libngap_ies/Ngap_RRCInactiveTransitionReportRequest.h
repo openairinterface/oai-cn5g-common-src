@@ -23,7 +23,7 @@ typedef enum Ngap_RRCInactiveTransitionReportRequest {
   Ngap_RRCInactiveTransitionReportRequest_subsequent_state_transition_report =
       0,
   Ngap_RRCInactiveTransitionReportRequest_single_rrc_connected_state_report = 1,
-  Ngap_RRCInactiveTransitionReportRequest_cancel_report                     = 2
+  Ngap_RRCInactiveTransitionReportRequest_cancel_report = 2
   /*
    * Enumeration is extensible
    */

@@ -15,17 +15,18 @@ DrbSubjectToStatusTransferItem::DrbSubjectToStatusTransferItem() {}
 DrbSubjectToStatusTransferItem::~DrbSubjectToStatusTransferItem() {}
 
 //------------------------------------------------------------------------------
-void DrbSubjectToStatusTransferItem::set(
-    const Ngap_DRB_ID_t& drbId, const DrbStatusUl& drbUl,
-    const DrbStatusDl& drbDl) {
+void DrbSubjectToStatusTransferItem::set(const Ngap_DRB_ID_t &drbId,
+                                         const DrbStatusUl &drbUl,
+                                         const DrbStatusDl &drbDl) {
   m_DrbId = drbId;
   m_DrbUl = drbUl;
   m_DrbDl = drbDl;
 }
 
 //------------------------------------------------------------------------------
-void DrbSubjectToStatusTransferItem::get(
-    Ngap_DRB_ID_t& drbId, DrbStatusUl& drbUl, DrbStatusDl& drbDl) const {
+void DrbSubjectToStatusTransferItem::get(Ngap_DRB_ID_t &drbId,
+                                         DrbStatusUl &drbUl,
+                                         DrbStatusDl &drbDl) const {
   drbId = m_DrbId;
   drbUl = m_DrbUl;
   drbDl = m_DrbDl;
@@ -33,7 +34,7 @@ void DrbSubjectToStatusTransferItem::get(
 
 //------------------------------------------------------------------------------
 bool DrbSubjectToStatusTransferItem::decode(
-    const Ngap_DRBsSubjectToStatusTransferItem_t& drbItem) {
+    const Ngap_DRBsSubjectToStatusTransferItem_t &drbItem) {
   if (drbItem.dRB_ID) {
     m_DrbId = drbItem.dRB_ID;
   }
@@ -48,7 +49,7 @@ bool DrbSubjectToStatusTransferItem::decode(
 
 //------------------------------------------------------------------------------
 bool DrbSubjectToStatusTransferItem::encode(
-    Ngap_DRBsSubjectToStatusTransferItem_t& drbItem) const {
+    Ngap_DRBsSubjectToStatusTransferItem_t &drbItem) const {
   drbItem.dRB_ID = m_DrbId;
 
   if (!m_DrbUl.encode(drbItem.dRBStatusUL)) {
@@ -63,4 +64,4 @@ bool DrbSubjectToStatusTransferItem::encode(
       "Encode from DrbSubjectToStatusTransferItem successfully");
   return true;
 }
-}  // namespace oai::ngap
+} // namespace oai::ngap

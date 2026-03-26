@@ -110,7 +110,7 @@ asn_CHOICE_specifics_t asn_SPC_Ngap_M1ThresholdType_specs_1 = {
     sizeof(struct Ngap_M1ThresholdType),
     offsetof(struct Ngap_M1ThresholdType, _asn_ctx),
     offsetof(struct Ngap_M1ThresholdType, present),
-    sizeof(((struct Ngap_M1ThresholdType*) 0)->present),
+    sizeof(((struct Ngap_M1ThresholdType *)0)->present),
     asn_MAP_Ngap_M1ThresholdType_tag2el_1,
     4, /* Count of tags in the map */
     0,

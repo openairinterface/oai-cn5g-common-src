@@ -37,7 +37,7 @@ namespace oai::udr::model {
 /// Contains usage monitoring control data for a subscriber.
 /// </summary>
 class UsageMonDataLimit {
- public:
+public:
   UsageMonDataLimit();
   virtual ~UsageMonDataLimit();
 
@@ -50,54 +50,54 @@ class UsageMonDataLimit {
   ///
   /// </summary>
   std::string getLimitId() const;
-  void setLimitId(std::string const& value);
+  void setLimitId(std::string const &value);
   /// <summary>
   ///
   /// </summary>
-  std::map<std::string, UsageMonDataScope>& getScopes();
-  void setScopes(std::map<std::string, UsageMonDataScope> const& value);
+  std::map<std::string, UsageMonDataScope> &getScopes();
+  void setScopes(std::map<std::string, UsageMonDataScope> const &value);
   bool scopesIsSet() const;
   void unsetScopes();
   /// <summary>
   ///
   /// </summary>
   UsageMonLevel getUmLevel() const;
-  void setUmLevel(UsageMonLevel const& value);
+  void setUmLevel(UsageMonLevel const &value);
   bool umLevelIsSet() const;
   void unsetUmLevel();
   /// <summary>
   ///
   /// </summary>
   std::string getStartDate() const;
-  void setStartDate(std::string const& value);
+  void setStartDate(std::string const &value);
   bool startDateIsSet() const;
   void unsetStartDate();
   /// <summary>
   ///
   /// </summary>
   std::string getEndDate() const;
-  void setEndDate(std::string const& value);
+  void setEndDate(std::string const &value);
   bool endDateIsSet() const;
   void unsetEndDate();
   /// <summary>
   ///
   /// </summary>
   UsageThreshold getUsageLimit() const;
-  void setUsageLimit(UsageThreshold const& value);
+  void setUsageLimit(UsageThreshold const &value);
   bool usageLimitIsSet() const;
   void unsetUsageLimit();
   /// <summary>
   ///
   /// </summary>
   std::string getResetPeriod() const;
-  void setResetPeriod(std::string const& value);
+  void setResetPeriod(std::string const &value);
   bool resetPeriodIsSet() const;
   void unsetResetPeriod();
 
-  friend void to_json(nlohmann::json& j, const UsageMonDataLimit& o);
-  friend void from_json(const nlohmann::json& j, UsageMonDataLimit& o);
+  friend void to_json(nlohmann::json &j, const UsageMonDataLimit &o);
+  friend void from_json(const nlohmann::json &j, UsageMonDataLimit &o);
 
- protected:
+protected:
   std::string m_LimitId;
 
   std::map<std::string, UsageMonDataScope> m_Scopes;
@@ -114,6 +114,6 @@ class UsageMonDataLimit {
   bool m_ResetPeriodIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* UsageMonDataLimit_H_ */

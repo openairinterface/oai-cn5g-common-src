@@ -20,20 +20,20 @@ namespace oai::model::lmf {
 
 LocationData::LocationData() {
   m_AccuracyFulfilmentIndicatorIsSet = false;
-  m_AgeOfLocationEstimate            = 0;
-  m_AgeOfLocationEstimateIsSet       = false;
-  m_VelocityEstimateIsSet            = false;
-  m_CivicAddressIsSet                = false;
-  m_PositioningDataListIsSet         = false;
-  m_GnssPositioningDataListIsSet     = false;
-  m_EcgiIsSet                        = false;
-  m_NcgiIsSet                        = false;
-  m_Altitude                         = 0.0;
-  m_AltitudeIsSet                    = false;
-  m_BarometricPressure               = 0;
-  m_BarometricPressureIsSet          = false;
-  m_ServingLMFIdentification         = "";
-  m_ServingLMFIdentificationIsSet    = false;
+  m_AgeOfLocationEstimate = 0;
+  m_AgeOfLocationEstimateIsSet = false;
+  m_VelocityEstimateIsSet = false;
+  m_CivicAddressIsSet = false;
+  m_PositioningDataListIsSet = false;
+  m_GnssPositioningDataListIsSet = false;
+  m_EcgiIsSet = false;
+  m_NcgiIsSet = false;
+  m_Altitude = 0.0;
+  m_AltitudeIsSet = false;
+  m_BarometricPressure = 0;
+  m_BarometricPressureIsSet = false;
+  m_ServingLMFIdentification = "";
+  m_ServingLMFIdentificationIsSet = false;
 }
 
 void LocationData::validate() const {
@@ -43,18 +43,18 @@ void LocationData::validate() const {
   }
 }
 
-bool LocationData::validate(std::stringstream& msg) const {
+bool LocationData::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool LocationData::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool LocationData::validate(std::stringstream &msg,
+                            const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "LocationData" : pathPrefix;
 
   if (ageOfLocationEstimateIsSet()) {
-    const int32_t& value               = m_AgeOfLocationEstimate;
+    const int32_t &value = m_AgeOfLocationEstimate;
     const std::string currentValuePath = _pathPrefix + ".ageOfLocationEstimate";
 
     if (value < 0) {
@@ -68,7 +68,7 @@ bool LocationData::validate(
   }
 
   if (positioningDataListIsSet()) {
-    const std::vector<oai::model::lmf::PositioningMethodAndUsage>& value =
+    const std::vector<oai::model::lmf::PositioningMethodAndUsage> &value =
         m_PositioningDataList;
     const std::string currentValuePath = _pathPrefix + ".positioningDataList";
 
@@ -76,10 +76,10 @@ bool LocationData::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::lmf::PositioningMethodAndUsage& value : value) {
+      int i = 0;
+      for (const oai::model::lmf::PositioningMethodAndUsage &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -93,7 +93,7 @@ bool LocationData::validate(
   }
 
   if (gnssPositioningDataListIsSet()) {
-    const std::vector<oai::model::lmf::GnssPositioningMethodAndUsage>& value =
+    const std::vector<oai::model::lmf::GnssPositioningMethodAndUsage> &value =
         m_GnssPositioningDataList;
     const std::string currentValuePath =
         _pathPrefix + ".gnssPositioningDataList";
@@ -102,16 +102,16 @@ bool LocationData::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::lmf::GnssPositioningMethodAndUsage& value :
+      int i = 0;
+      for (const oai::model::lmf::GnssPositioningMethodAndUsage &value :
            value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
-        success = value.validate(
-                      msg, currentValuePath + ".gnssPositioningDataList") &&
+        success = value.validate(msg, currentValuePath +
+                                          ".gnssPositioningDataList") &&
                   success;
 
         i++;
@@ -120,7 +120,7 @@ bool LocationData::validate(
   }
 
   if (altitudeIsSet()) {
-    const double& value                = m_Altitude;
+    const double &value = m_Altitude;
     const std::string currentValuePath = _pathPrefix + ".altitude";
 
     if (value < -32767) {
@@ -134,7 +134,7 @@ bool LocationData::validate(
   }
 
   if (barometricPressureIsSet()) {
-    const int32_t& value               = m_BarometricPressure;
+    const int32_t &value = m_BarometricPressure;
     const std::string currentValuePath = _pathPrefix + ".barometricPressure";
 
     if (value < 30000) {
@@ -150,7 +150,7 @@ bool LocationData::validate(
   return success;
 }
 
-bool LocationData::operator==(const LocationData& rhs) const {
+bool LocationData::operator==(const LocationData &rhs) const {
   return
 
       (getLocationEstimate() == rhs.getLocationEstimate()) &&
@@ -206,33 +206,38 @@ bool LocationData::operator==(const LocationData& rhs) const {
           ;
 }
 
-bool LocationData::operator!=(const LocationData& rhs) const {
+bool LocationData::operator!=(const LocationData &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const LocationData& o) {
-  j                     = nlohmann::json();
+void to_json(nlohmann::json &j, const LocationData &o) {
+  j = nlohmann::json();
   j["locationEstimate"] = o.m_LocationEstimate;
   if (o.accuracyFulfilmentIndicatorIsSet())
     j["accuracyFulfilmentIndicator"] = o.m_AccuracyFulfilmentIndicator;
   if (o.ageOfLocationEstimateIsSet())
     j["ageOfLocationEstimate"] = o.m_AgeOfLocationEstimate;
-  if (o.velocityEstimateIsSet()) j["velocityEstimate"] = o.m_VelocityEstimate;
-  if (o.civicAddressIsSet()) j["civicAddress"] = o.m_CivicAddress;
+  if (o.velocityEstimateIsSet())
+    j["velocityEstimate"] = o.m_VelocityEstimate;
+  if (o.civicAddressIsSet())
+    j["civicAddress"] = o.m_CivicAddress;
   if (o.positioningDataListIsSet() || !o.m_PositioningDataList.empty())
     j["positioningDataList"] = o.m_PositioningDataList;
   if (o.gnssPositioningDataListIsSet() || !o.m_GnssPositioningDataList.empty())
     j["gnssPositioningDataList"] = o.m_GnssPositioningDataList;
-  if (o.ecgiIsSet()) j["ecgi"] = o.m_Ecgi;
-  if (o.ncgiIsSet()) j["ncgi"] = o.m_Ncgi;
-  if (o.altitudeIsSet()) j["altitude"] = o.m_Altitude;
+  if (o.ecgiIsSet())
+    j["ecgi"] = o.m_Ecgi;
+  if (o.ncgiIsSet())
+    j["ncgi"] = o.m_Ncgi;
+  if (o.altitudeIsSet())
+    j["altitude"] = o.m_Altitude;
   if (o.barometricPressureIsSet())
     j["barometricPressure"] = o.m_BarometricPressure;
   if (o.servingLMFIdentificationIsSet())
     j["servingLMFIdentification"] = o.m_ServingLMFIdentification;
 }
 
-void from_json(const nlohmann::json& j, LocationData& o) {
+void from_json(const nlohmann::json &j, LocationData &o) {
   j.at("locationEstimate").get_to(o.m_LocationEstimate);
   if (j.find("accuracyFulfilmentIndicator") != j.end()) {
     j.at("accuracyFulfilmentIndicator").get_to(o.m_AccuracyFulfilmentIndicator);
@@ -284,7 +289,7 @@ oai::model::lmf::GeographicArea LocationData::getLocationEstimate() const {
   return m_LocationEstimate;
 }
 void LocationData::setLocationEstimate(
-    oai::model::lmf::GeographicArea const& value) {
+    oai::model::lmf::GeographicArea const &value) {
   m_LocationEstimate = value;
 }
 oai::model::lmf::AccuracyFulfilmentIndicator
@@ -292,8 +297,8 @@ LocationData::getAccuracyFulfilmentIndicator() const {
   return m_AccuracyFulfilmentIndicator;
 }
 void LocationData::setAccuracyFulfilmentIndicator(
-    oai::model::lmf::AccuracyFulfilmentIndicator const& value) {
-  m_AccuracyFulfilmentIndicator      = value;
+    oai::model::lmf::AccuracyFulfilmentIndicator const &value) {
+  m_AccuracyFulfilmentIndicator = value;
   m_AccuracyFulfilmentIndicatorIsSet = true;
 }
 bool LocationData::accuracyFulfilmentIndicatorIsSet() const {
@@ -306,7 +311,7 @@ int32_t LocationData::getAgeOfLocationEstimate() const {
   return m_AgeOfLocationEstimate;
 }
 void LocationData::setAgeOfLocationEstimate(int32_t const value) {
-  m_AgeOfLocationEstimate      = value;
+  m_AgeOfLocationEstimate = value;
   m_AgeOfLocationEstimateIsSet = true;
 }
 bool LocationData::ageOfLocationEstimateIsSet() const {
@@ -319,36 +324,30 @@ oai::model::lmf::VelocityEstimate LocationData::getVelocityEstimate() const {
   return m_VelocityEstimate;
 }
 void LocationData::setVelocityEstimate(
-    oai::model::lmf::VelocityEstimate const& value) {
-  m_VelocityEstimate      = value;
+    oai::model::lmf::VelocityEstimate const &value) {
+  m_VelocityEstimate = value;
   m_VelocityEstimateIsSet = true;
 }
 bool LocationData::velocityEstimateIsSet() const {
   return m_VelocityEstimateIsSet;
 }
-void LocationData::unsetVelocityEstimate() {
-  m_VelocityEstimateIsSet = false;
-}
+void LocationData::unsetVelocityEstimate() { m_VelocityEstimateIsSet = false; }
 oai::model::lmf::CivicAddress LocationData::getCivicAddress() const {
   return m_CivicAddress;
 }
-void LocationData::setCivicAddress(oai::model::lmf::CivicAddress const& value) {
-  m_CivicAddress      = value;
+void LocationData::setCivicAddress(oai::model::lmf::CivicAddress const &value) {
+  m_CivicAddress = value;
   m_CivicAddressIsSet = true;
 }
-bool LocationData::civicAddressIsSet() const {
-  return m_CivicAddressIsSet;
-}
-void LocationData::unsetCivicAddress() {
-  m_CivicAddressIsSet = false;
-}
+bool LocationData::civicAddressIsSet() const { return m_CivicAddressIsSet; }
+void LocationData::unsetCivicAddress() { m_CivicAddressIsSet = false; }
 std::vector<oai::model::lmf::PositioningMethodAndUsage>
 LocationData::getPositioningDataList() const {
   return m_PositioningDataList;
 }
 void LocationData::setPositioningDataList(
-    std::vector<oai::model::lmf::PositioningMethodAndUsage> const& value) {
-  m_PositioningDataList      = value;
+    std::vector<oai::model::lmf::PositioningMethodAndUsage> const &value) {
+  m_PositioningDataList = value;
   m_PositioningDataListIsSet = true;
 }
 bool LocationData::positioningDataListIsSet() const {
@@ -362,8 +361,8 @@ LocationData::getGnssPositioningDataList() const {
   return m_GnssPositioningDataList;
 }
 void LocationData::setGnssPositioningDataList(
-    std::vector<oai::model::lmf::GnssPositioningMethodAndUsage> const& value) {
-  m_GnssPositioningDataList      = value;
+    std::vector<oai::model::lmf::GnssPositioningMethodAndUsage> const &value) {
+  m_GnssPositioningDataList = value;
   m_GnssPositioningDataListIsSet = true;
 }
 bool LocationData::gnssPositioningDataListIsSet() const {
@@ -372,50 +371,32 @@ bool LocationData::gnssPositioningDataListIsSet() const {
 void LocationData::unsetGnssPositioningDataList() {
   m_GnssPositioningDataListIsSet = false;
 }
-oai::model::common::Ecgi LocationData::getEcgi() const {
-  return m_Ecgi;
-}
-void LocationData::setEcgi(oai::model::common::Ecgi const& value) {
-  m_Ecgi      = value;
+oai::model::common::Ecgi LocationData::getEcgi() const { return m_Ecgi; }
+void LocationData::setEcgi(oai::model::common::Ecgi const &value) {
+  m_Ecgi = value;
   m_EcgiIsSet = true;
 }
-bool LocationData::ecgiIsSet() const {
-  return m_EcgiIsSet;
-}
-void LocationData::unsetEcgi() {
-  m_EcgiIsSet = false;
-}
-oai::model::common::Ncgi LocationData::getNcgi() const {
-  return m_Ncgi;
-}
-void LocationData::setNcgi(oai::model::common::Ncgi const& value) {
-  m_Ncgi      = value;
+bool LocationData::ecgiIsSet() const { return m_EcgiIsSet; }
+void LocationData::unsetEcgi() { m_EcgiIsSet = false; }
+oai::model::common::Ncgi LocationData::getNcgi() const { return m_Ncgi; }
+void LocationData::setNcgi(oai::model::common::Ncgi const &value) {
+  m_Ncgi = value;
   m_NcgiIsSet = true;
 }
-bool LocationData::ncgiIsSet() const {
-  return m_NcgiIsSet;
-}
-void LocationData::unsetNcgi() {
-  m_NcgiIsSet = false;
-}
-double LocationData::getAltitude() const {
-  return m_Altitude;
-}
+bool LocationData::ncgiIsSet() const { return m_NcgiIsSet; }
+void LocationData::unsetNcgi() { m_NcgiIsSet = false; }
+double LocationData::getAltitude() const { return m_Altitude; }
 void LocationData::setAltitude(double const value) {
-  m_Altitude      = value;
+  m_Altitude = value;
   m_AltitudeIsSet = true;
 }
-bool LocationData::altitudeIsSet() const {
-  return m_AltitudeIsSet;
-}
-void LocationData::unsetAltitude() {
-  m_AltitudeIsSet = false;
-}
+bool LocationData::altitudeIsSet() const { return m_AltitudeIsSet; }
+void LocationData::unsetAltitude() { m_AltitudeIsSet = false; }
 int32_t LocationData::getBarometricPressure() const {
   return m_BarometricPressure;
 }
 void LocationData::setBarometricPressure(int32_t const value) {
-  m_BarometricPressure      = value;
+  m_BarometricPressure = value;
   m_BarometricPressureIsSet = true;
 }
 bool LocationData::barometricPressureIsSet() const {
@@ -427,8 +408,8 @@ void LocationData::unsetBarometricPressure() {
 std::string LocationData::getServingLMFIdentification() const {
   return m_ServingLMFIdentification;
 }
-void LocationData::setServingLMFIdentification(std::string const& value) {
-  m_ServingLMFIdentification      = value;
+void LocationData::setServingLMFIdentification(std::string const &value) {
+  m_ServingLMFIdentification = value;
   m_ServingLMFIdentificationIsSet = true;
 }
 bool LocationData::servingLMFIdentificationIsSet() const {
@@ -438,4 +419,4 @@ void LocationData::unsetServingLMFIdentification() {
   m_ServingLMFIdentificationIsSet = false;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

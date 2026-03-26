@@ -8,8 +8,8 @@
 
 #include "Ngap_SensorMeasurementConfiguration.h"
 
-#include "Ngap_SensorMeasConfigNameList.h"
 #include "Ngap_ProtocolExtensionContainer.h"
+#include "Ngap_SensorMeasConfigNameList.h"
 asn_TYPE_member_t asn_MBR_Ngap_SensorMeasurementConfiguration_1[] = {
     {ATF_NOFLAGS,
      0,
@@ -32,8 +32,8 @@ asn_TYPE_member_t asn_MBR_Ngap_SensorMeasurementConfiguration_1[] = {
      "sensorMeasConfig"},
     {ATF_POINTER,
      2,
-     offsetof(
-         struct Ngap_SensorMeasurementConfiguration, sensorMeasConfigNameList),
+     offsetof(struct Ngap_SensorMeasurementConfiguration,
+              sensorMeasConfigNameList),
      (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_SensorMeasConfigNameList,

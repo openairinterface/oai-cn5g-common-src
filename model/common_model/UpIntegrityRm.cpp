@@ -27,12 +27,12 @@ void UpIntegrityRm::validate() const {
   }
 }
 
-bool UpIntegrityRm::validate(std::stringstream& msg) const {
+bool UpIntegrityRm::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool UpIntegrityRm::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool UpIntegrityRm::validate(std::stringstream &msg,
+                             const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "UpIntegrityRm" : pathPrefix;
@@ -40,18 +40,18 @@ bool UpIntegrityRm::validate(
   return success;
 }
 
-bool UpIntegrityRm::operator==(const UpIntegrityRm& rhs) const {
+bool UpIntegrityRm::operator==(const UpIntegrityRm &rhs) const {
   return (*this == rhs);
 }
 
-bool UpIntegrityRm::operator!=(const UpIntegrityRm& rhs) const {
+bool UpIntegrityRm::operator!=(const UpIntegrityRm &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const UpIntegrityRm& o) {
+void to_json(nlohmann::json &j, const UpIntegrityRm &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, UpIntegrityRm& o) {}
+void from_json(const nlohmann::json &j, UpIntegrityRm &o) {}
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

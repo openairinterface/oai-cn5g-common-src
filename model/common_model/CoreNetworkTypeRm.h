@@ -29,19 +29,19 @@ namespace oai::model::common {
 ///
 /// </summary>
 class CoreNetworkTypeRm : public CoreNetworkType {
- public:
+public:
   CoreNetworkTypeRm();
   virtual ~CoreNetworkTypeRm() = default;
 
-  bool validate(
-      std::stringstream& msg, const std::string& pathPrefix) const override;
+  bool validate(std::stringstream &msg,
+                const std::string &pathPrefix) const override;
 
-  friend void to_json(nlohmann::json& j, const CoreNetworkTypeRm& o);
-  friend void from_json(const nlohmann::json& j, CoreNetworkTypeRm& o);
+  friend void to_json(nlohmann::json &j, const CoreNetworkTypeRm &o);
+  friend void from_json(const nlohmann::json &j, CoreNetworkTypeRm &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* CoreNetworkTypeRm_H_ */

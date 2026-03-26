@@ -12,7 +12,7 @@ constexpr auto kServiceTypeIeName = "Service Type";
 namespace oai::nas {
 
 class ServiceType : public Type1NasIe {
- public:
+public:
   ServiceType();
   ServiceType(uint8_t value);
   virtual ~ServiceType();
@@ -20,14 +20,14 @@ class ServiceType : public Type1NasIe {
   static std::string GetIeName() { return kServiceTypeIeName; }
 
   void SetValue(uint8_t value);
-  void GetValue(uint8_t& value) const;
+  void GetValue(uint8_t &value) const;
 
- private:
+private:
   void SetValue() override;
   void GetValue() override;
   uint8_t service_type_value_;
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

@@ -31,7 +31,7 @@ namespace oai::model::smf {
 /// data are discarded.
 /// </summary>
 class DddStatus {
- public:
+public:
   DddStatus();
   virtual ~DddStatus();
 
@@ -40,12 +40,12 @@ class DddStatus {
   /////////////////////////////////////////////
   /// DddStatus members
 
-  friend void to_json(nlohmann::json& j, const DddStatus& o);
-  friend void from_json(const nlohmann::json& j, DddStatus& o);
+  friend void to_json(nlohmann::json &j, const DddStatus &o);
+  friend void from_json(const nlohmann::json &j, DddStatus &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* DddStatus_H_ */

@@ -16,34 +16,34 @@ extern "C" {
 namespace oai::ngap {
 
 class PduSessionResourceModifyRequestMsg : public NgapUeMessage {
- public:
+public:
   PduSessionResourceModifyRequestMsg();
   virtual ~PduSessionResourceModifyRequestMsg();
 
   void initialize();
 
-  void setAmfUeNgapId(const uint64_t& id) override;
-  void setRanUeNgapId(const uint32_t& id) override;
-  bool decode(Ngap_NGAP_PDU_t* ngapMsgPdu) override;
+  void setAmfUeNgapId(const uint64_t &id) override;
+  void setRanUeNgapId(const uint32_t &id) override;
+  bool decode(Ngap_NGAP_PDU_t *ngapMsgPdu) override;
 
-  void setRanPagingPriority(const uint32_t& priority);
+  void setRanPagingPriority(const uint32_t &priority);
   int getRanPagingPriority() const;
 
-  void setNasPdu(const bstring& pdu);
-  bool getNasPdu(bstring& pdu) const;
+  void setNasPdu(const bstring &pdu);
+  bool getNasPdu(bstring &pdu) const;
 
   void setPduSessionResourceModifyRequestList(
-      const std::vector<PDUSessionResourceModifyRequestItem_t>& list);
+      const std::vector<PDUSessionResourceModifyRequestItem_t> &list);
   bool getPduSessionResourceModifyRequestList(
-      std::vector<PDUSessionResourceModifyRequestItem_t>& list) const;
+      std::vector<PDUSessionResourceModifyRequestItem_t> &list) const;
 
- private:
-  Ngap_PDUSessionResourceModifyRequest_t* m_PduSessionResourceModifyRequestIes;
+private:
+  Ngap_PDUSessionResourceModifyRequest_t *m_PduSessionResourceModifyRequestIes;
 
-  RanPagingPriority* m_RanPagingPriority;  // Optional
+  RanPagingPriority *m_RanPagingPriority; // Optional
   PduSessionResourceModifyListModReq
-      m_PduSessionResourceModifyList;  // Mandatory
+      m_PduSessionResourceModifyList; // Mandatory
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

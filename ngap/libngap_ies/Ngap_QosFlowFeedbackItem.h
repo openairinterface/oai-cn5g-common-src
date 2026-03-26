@@ -12,9 +12,9 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
+#include "Ngap_ExtendedPacketDelayBudget.h"
 #include "Ngap_QosFlowIdentifier.h"
 #include "Ngap_UpdateFeedback.h"
-#include "Ngap_ExtendedPacketDelayBudget.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -27,10 +27,10 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_QosFlowFeedbackItem */
 typedef struct Ngap_QosFlowFeedbackItem {
   Ngap_QosFlowIdentifier_t qosFlowIdentifier;
-  Ngap_UpdateFeedback_t* updateFeedback;                   /* OPTIONAL */
-  Ngap_ExtendedPacketDelayBudget_t* cNpacketDelayBudgetDL; /* OPTIONAL */
-  Ngap_ExtendedPacketDelayBudget_t* cNpacketDelayBudgetUL; /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions;   /* OPTIONAL */
+  Ngap_UpdateFeedback_t *updateFeedback;                   /* OPTIONAL */
+  Ngap_ExtendedPacketDelayBudget_t *cNpacketDelayBudgetDL; /* OPTIONAL */
+  Ngap_ExtendedPacketDelayBudget_t *cNpacketDelayBudgetUL; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions;   /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

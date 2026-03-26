@@ -21,27 +21,27 @@ extern "C" {
 namespace oai::ngap {
 
 class PduSessionResourceNotifyTransfer {
- public:
+public:
   PduSessionResourceNotifyTransfer();
   virtual ~PduSessionResourceNotifyTransfer(){};
 
   void setQosFlowNotifyList(const std::vector<QosFlowNotifyItem> list);
-  void setQosFlowNotifyList(const QosFlowNotifyList& list);
-  void getQosFlowNotifyList(std::optional<QosFlowNotifyList>& list) const;
+  void setQosFlowNotifyList(const QosFlowNotifyList &list);
+  void getQosFlowNotifyList(std::optional<QosFlowNotifyList> &list) const;
 
   void setQosFlowReleasedList(const std::vector<QosFlowWithCauseItem> list);
-  void setQosFlowReleasedList(const QosFlowListWithCause& list);
-  void getQosFlowReleasedList(std::optional<QosFlowListWithCause>& list) const;
+  void setQosFlowReleasedList(const QosFlowListWithCause &list);
+  void getQosFlowReleasedList(std::optional<QosFlowListWithCause> &list) const;
 
   void setQosFlowFeedbackList(const std::vector<QosFlowFeedbackItem> list);
-  void setQosFlowFeedbackList(const QosFlowFeedbackList& list);
-  void getQosFlowFeedbackList(std::optional<QosFlowFeedbackList>& list) const;
+  void setQosFlowFeedbackList(const QosFlowFeedbackList &list);
+  void getQosFlowFeedbackList(std::optional<QosFlowFeedbackList> &list) const;
 
-  int encode(uint8_t* buf, int bufSize);
-  bool decode(uint8_t* buf, int bufSize);
+  int encode(uint8_t *buf, int bufSize);
+  bool decode(uint8_t *buf, int bufSize);
 
- private:
-  Ngap_PDUSessionResourceNotifyTransfer_t* m_Ie;
+private:
+  Ngap_PDUSessionResourceNotifyTransfer_t *m_Ie;
 
   // QoS Flow Notify List (Optional 0..)
   std::optional<QosFlowNotifyList> m_QosFlowNotifyList;
@@ -52,5 +52,5 @@ class PduSessionResourceNotifyTransfer {
   std::optional<QosFlowFeedbackList> m_QosFlowFeedbackList;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

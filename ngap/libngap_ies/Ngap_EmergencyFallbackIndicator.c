@@ -12,9 +12,8 @@
 asn_TYPE_member_t asn_MBR_Ngap_EmergencyFallbackIndicator_1[] = {
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_EmergencyFallbackIndicator,
-         emergencyFallbackRequestIndicator),
+     offsetof(struct Ngap_EmergencyFallbackIndicator,
+              emergencyFallbackRequestIndicator),
      (ASN_TAG_CLASS_CONTEXT | (0 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_EmergencyFallbackRequestIndicator,

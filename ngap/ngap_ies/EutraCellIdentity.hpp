@@ -6,7 +6,7 @@
 #define _EUTRA_CELL_IDENTITY_H_
 #include <cstdint>
 
-constexpr uint32_t kEUTRACellIdentityMaxValue = 268435455;  // 2^28-1
+constexpr uint32_t kEUTRACellIdentityMaxValue = 268435455; // 2^28-1
 
 extern "C" {
 #include "Ngap_EUTRACellIdentity.h"
@@ -15,19 +15,19 @@ extern "C" {
 namespace oai::ngap {
 
 class EutraCellIdentity {
- public:
+public:
   EutraCellIdentity();
   virtual ~EutraCellIdentity();
 
   uint32_t get() const;
-  bool set(const uint32_t& eutraCellIdentity);
+  bool set(const uint32_t &eutraCellIdentity);
 
-  bool encode(Ngap_EUTRACellIdentity_t& eutraCellIdentity) const;
-  bool decode(const Ngap_EUTRACellIdentity_t& eutraCellIdentity);
+  bool encode(Ngap_EUTRACellIdentity_t &eutraCellIdentity) const;
+  bool decode(const Ngap_EUTRACellIdentity_t &eutraCellIdentity);
 
- private:
+private:
   uint32_t m_EutraCellIdentity;
 };
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

@@ -22,10 +22,10 @@ void NFServiceStatus::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const NFServiceStatus& o) {
+void to_json(nlohmann::json &j, const NFServiceStatus &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, NFServiceStatus& o) {}
+void from_json(const nlohmann::json &j, NFServiceStatus &o) {}
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf

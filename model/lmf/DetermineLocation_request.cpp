@@ -19,7 +19,7 @@
 namespace oai::model::lmf {
 
 DetermineLocation_request::DetermineLocation_request() {
-  m_JsonDataIsSet             = false;
+  m_JsonDataIsSet = false;
   m_BinaryDataLppMessageIsSet = false;
 }
 
@@ -30,12 +30,12 @@ void DetermineLocation_request::validate() const {
   }
 }
 
-bool DetermineLocation_request::validate(std::stringstream& msg) const {
+bool DetermineLocation_request::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool DetermineLocation_request::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool DetermineLocation_request::validate(std::stringstream &msg,
+                                         const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "DetermineLocation_request" : pathPrefix;
@@ -44,7 +44,7 @@ bool DetermineLocation_request::validate(
 }
 
 bool DetermineLocation_request::operator==(
-    const DetermineLocation_request& rhs) const {
+    const DetermineLocation_request &rhs) const {
   return
 
       ((!jsonDataIsSet() && !rhs.jsonDataIsSet()) ||
@@ -59,18 +59,19 @@ bool DetermineLocation_request::operator==(
 }
 
 bool DetermineLocation_request::operator!=(
-    const DetermineLocation_request& rhs) const {
+    const DetermineLocation_request &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const DetermineLocation_request& o) {
+void to_json(nlohmann::json &j, const DetermineLocation_request &o) {
   j = nlohmann::json();
-  if (o.jsonDataIsSet()) j["jsonData"] = o.m_JsonData;
+  if (o.jsonDataIsSet())
+    j["jsonData"] = o.m_JsonData;
   if (o.binaryDataLppMessageIsSet())
     j["binaryDataLppMessage"] = o.m_BinaryDataLppMessage;
 }
 
-void from_json(const nlohmann::json& j, DetermineLocation_request& o) {
+void from_json(const nlohmann::json &j, DetermineLocation_request &o) {
   if (j.find("jsonData") != j.end()) {
     j.at("jsonData").get_to(o.m_JsonData);
     o.m_JsonDataIsSet = true;
@@ -85,22 +86,20 @@ oai::model::lmf::InputData DetermineLocation_request::getJsonData() const {
   return m_JsonData;
 }
 void DetermineLocation_request::setJsonData(
-    oai::model::lmf::InputData const& value) {
-  m_JsonData      = value;
+    oai::model::lmf::InputData const &value) {
+  m_JsonData = value;
   m_JsonDataIsSet = true;
 }
 bool DetermineLocation_request::jsonDataIsSet() const {
   return m_JsonDataIsSet;
 }
-void DetermineLocation_request::unsetJsonData() {
-  m_JsonDataIsSet = false;
-}
+void DetermineLocation_request::unsetJsonData() { m_JsonDataIsSet = false; }
 std::string DetermineLocation_request::getBinaryDataLppMessage() const {
   return m_BinaryDataLppMessage;
 }
 void DetermineLocation_request::setBinaryDataLppMessage(
-    std::string const& value) {
-  m_BinaryDataLppMessage      = value;
+    std::string const &value) {
+  m_BinaryDataLppMessage = value;
   m_BinaryDataLppMessageIsSet = true;
 }
 bool DetermineLocation_request::binaryDataLppMessageIsSet() const {
@@ -110,4 +109,4 @@ void DetermineLocation_request::unsetBinaryDataLppMessage() {
   m_BinaryDataLppMessageIsSet = false;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

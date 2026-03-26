@@ -20,11 +20,11 @@ namespace oai::model::pcf {
 
 PdvMonitoringReport::PdvMonitoringReport() {
   m_FlowsIsSet = false;
-  m_UlPdv      = 0;
+  m_UlPdv = 0;
   m_UlPdvIsSet = false;
-  m_DlPdv      = 0;
+  m_DlPdv = 0;
   m_DlPdvIsSet = false;
-  m_RtPdv      = 0;
+  m_RtPdv = 0;
   m_RtPdvIsSet = false;
 }
 
@@ -35,28 +35,28 @@ void PdvMonitoringReport::validate() const {
   }
 }
 
-bool PdvMonitoringReport::validate(std::stringstream& msg) const {
+bool PdvMonitoringReport::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool PdvMonitoringReport::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool PdvMonitoringReport::validate(std::stringstream &msg,
+                                   const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "PdvMonitoringReport" : pathPrefix;
 
   if (flowsIsSet()) {
-    const std::vector<oai::model::pcf::Flows>& value = m_Flows;
-    const std::string currentValuePath               = _pathPrefix + ".flows";
+    const std::vector<oai::model::pcf::Flows> &value = m_Flows;
+    const std::string currentValuePath = _pathPrefix + ".flows";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::Flows& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::Flows &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -70,7 +70,7 @@ bool PdvMonitoringReport::validate(
   return success;
 }
 
-bool PdvMonitoringReport::operator==(const PdvMonitoringReport& rhs) const {
+bool PdvMonitoringReport::operator==(const PdvMonitoringReport &rhs) const {
   return
 
       ((!flowsIsSet() && !rhs.flowsIsSet()) ||
@@ -88,19 +88,23 @@ bool PdvMonitoringReport::operator==(const PdvMonitoringReport& rhs) const {
           ;
 }
 
-bool PdvMonitoringReport::operator!=(const PdvMonitoringReport& rhs) const {
+bool PdvMonitoringReport::operator!=(const PdvMonitoringReport &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const PdvMonitoringReport& o) {
+void to_json(nlohmann::json &j, const PdvMonitoringReport &o) {
   j = nlohmann::json::object();
-  if (o.flowsIsSet() || !o.m_Flows.empty()) j["flows"] = o.m_Flows;
-  if (o.ulPdvIsSet()) j["ulPdv"] = o.m_UlPdv;
-  if (o.dlPdvIsSet()) j["dlPdv"] = o.m_DlPdv;
-  if (o.rtPdvIsSet()) j["rtPdv"] = o.m_RtPdv;
+  if (o.flowsIsSet() || !o.m_Flows.empty())
+    j["flows"] = o.m_Flows;
+  if (o.ulPdvIsSet())
+    j["ulPdv"] = o.m_UlPdv;
+  if (o.dlPdvIsSet())
+    j["dlPdv"] = o.m_DlPdv;
+  if (o.rtPdvIsSet())
+    j["rtPdv"] = o.m_RtPdv;
 }
 
-void from_json(const nlohmann::json& j, PdvMonitoringReport& o) {
+void from_json(const nlohmann::json &j, PdvMonitoringReport &o) {
   if (j.find("flows") != j.end()) {
     j.at("flows").get_to(o.m_Flows);
     o.m_FlowsIsSet = true;
@@ -123,54 +127,32 @@ std::vector<oai::model::pcf::Flows> PdvMonitoringReport::getFlows() const {
   return m_Flows;
 }
 void PdvMonitoringReport::setFlows(
-    std::vector<oai::model::pcf::Flows> const& value) {
-  m_Flows      = value;
+    std::vector<oai::model::pcf::Flows> const &value) {
+  m_Flows = value;
   m_FlowsIsSet = true;
 }
-bool PdvMonitoringReport::flowsIsSet() const {
-  return m_FlowsIsSet;
-}
-void PdvMonitoringReport::unsetFlows() {
-  m_FlowsIsSet = false;
-}
-int32_t PdvMonitoringReport::getUlPdv() const {
-  return m_UlPdv;
-}
+bool PdvMonitoringReport::flowsIsSet() const { return m_FlowsIsSet; }
+void PdvMonitoringReport::unsetFlows() { m_FlowsIsSet = false; }
+int32_t PdvMonitoringReport::getUlPdv() const { return m_UlPdv; }
 void PdvMonitoringReport::setUlPdv(int32_t const value) {
-  m_UlPdv      = value;
+  m_UlPdv = value;
   m_UlPdvIsSet = true;
 }
-bool PdvMonitoringReport::ulPdvIsSet() const {
-  return m_UlPdvIsSet;
-}
-void PdvMonitoringReport::unsetUlPdv() {
-  m_UlPdvIsSet = false;
-}
-int32_t PdvMonitoringReport::getDlPdv() const {
-  return m_DlPdv;
-}
+bool PdvMonitoringReport::ulPdvIsSet() const { return m_UlPdvIsSet; }
+void PdvMonitoringReport::unsetUlPdv() { m_UlPdvIsSet = false; }
+int32_t PdvMonitoringReport::getDlPdv() const { return m_DlPdv; }
 void PdvMonitoringReport::setDlPdv(int32_t const value) {
-  m_DlPdv      = value;
+  m_DlPdv = value;
   m_DlPdvIsSet = true;
 }
-bool PdvMonitoringReport::dlPdvIsSet() const {
-  return m_DlPdvIsSet;
-}
-void PdvMonitoringReport::unsetDlPdv() {
-  m_DlPdvIsSet = false;
-}
-int32_t PdvMonitoringReport::getRtPdv() const {
-  return m_RtPdv;
-}
+bool PdvMonitoringReport::dlPdvIsSet() const { return m_DlPdvIsSet; }
+void PdvMonitoringReport::unsetDlPdv() { m_DlPdvIsSet = false; }
+int32_t PdvMonitoringReport::getRtPdv() const { return m_RtPdv; }
 void PdvMonitoringReport::setRtPdv(int32_t const value) {
-  m_RtPdv      = value;
+  m_RtPdv = value;
   m_RtPdvIsSet = true;
 }
-bool PdvMonitoringReport::rtPdvIsSet() const {
-  return m_RtPdvIsSet;
-}
-void PdvMonitoringReport::unsetRtPdv() {
-  m_RtPdvIsSet = false;
-}
+bool PdvMonitoringReport::rtPdvIsSet() const { return m_RtPdvIsSet; }
+void PdvMonitoringReport::unsetRtPdv() { m_RtPdvIsSet = false; }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

@@ -16,27 +16,27 @@ extern "C" {
 
 namespace oai::ngap {
 class PduSessionResourceModifyIndicationTransfer {
- public:
+public:
   PduSessionResourceModifyIndicationTransfer();
   virtual ~PduSessionResourceModifyIndicationTransfer();
 
   void setDlQosFlowPerTnlInformation(
-      const QosFlowPerTnlInformation& dlQosFlowPerTnlInformation);
+      const QosFlowPerTnlInformation &dlQosFlowPerTnlInformation);
   void getDlQosFlowPerTnlInformation(
-      QosFlowPerTnlInformation& dlQosFlowPerTnlInformation) const;
+      QosFlowPerTnlInformation &dlQosFlowPerTnlInformation) const;
 
   void setAdditionalDlQosFlowPerTnlInformation(
-      const std::vector<QosFlowPerTnlInformationItem>& list);
+      const std::vector<QosFlowPerTnlInformationItem> &list);
   void setAdditionalDlQosFlowPerTnlInformation(
-      const QosFlowPerTnlInformationList& list);
+      const QosFlowPerTnlInformationList &list);
   void getAdditionalDlQosFlowPerTnlInformation(
-      std::optional<QosFlowPerTnlInformationList>& list) const;
+      std::optional<QosFlowPerTnlInformationList> &list) const;
 
-  int encode(uint8_t* buf, int bufSize);
-  bool decode(uint8_t* buf, int bufSize);
+  int encode(uint8_t *buf, int bufSize);
+  bool decode(uint8_t *buf, int bufSize);
 
- private:
-  Ngap_PDUSessionResourceModifyIndicationTransfer_t* m_Ie;
+private:
+  Ngap_PDUSessionResourceModifyIndicationTransfer_t *m_Ie;
 
   // DL QoS Flow per TNL Information (Mandatory)
   QosFlowPerTnlInformation m_DlQosFlowPerTnlInformation;
@@ -49,6 +49,6 @@ class PduSessionResourceModifyIndicationTransfer {
   //  Redundant DL QoS Flow per TNL Information (Optional)
   // Global RAN Node ID of Secondary NG-RAN Node (Optional)
 };
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

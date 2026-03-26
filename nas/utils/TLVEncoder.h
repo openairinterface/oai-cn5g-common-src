@@ -26,8 +26,8 @@
 
 extern int errorCodeEncoder;
 
-int encode_bstring(
-    const_bstring const str, uint8_t* const buffer, const uint32_t buflen);
+int encode_bstring(const_bstring const str, uint8_t *const buffer,
+                   const uint32_t buflen);
 
 void tlv_encode_perror(void);
 

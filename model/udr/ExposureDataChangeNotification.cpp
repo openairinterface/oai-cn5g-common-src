@@ -19,11 +19,11 @@
 namespace oai::udr::model {
 
 ExposureDataChangeNotification::ExposureDataChangeNotification() {
-  m_UeId                          = "";
-  m_UeIdIsSet                     = false;
-  m_AccessAndMobilityDataIsSet    = false;
+  m_UeId = "";
+  m_UeIdIsSet = false;
+  m_AccessAndMobilityDataIsSet = false;
   m_PduSessionManagementDataIsSet = false;
-  m_DelResourcesIsSet             = false;
+  m_DelResourcesIsSet = false;
 }
 
 ExposureDataChangeNotification::~ExposureDataChangeNotification() {}
@@ -32,9 +32,10 @@ void ExposureDataChangeNotification::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const ExposureDataChangeNotification& o) {
+void to_json(nlohmann::json &j, const ExposureDataChangeNotification &o) {
   j = nlohmann::json();
-  if (o.ueIdIsSet()) j["ueId"] = o.m_UeId;
+  if (o.ueIdIsSet())
+    j["ueId"] = o.m_UeId;
   if (o.accessAndMobilityDataIsSet())
     j["accessAndMobilityData"] = o.m_AccessAndMobilityData;
   if (o.pduSessionManagementDataIsSet() ||
@@ -44,7 +45,7 @@ void to_json(nlohmann::json& j, const ExposureDataChangeNotification& o) {
     j["delResources"] = o.m_DelResources;
 }
 
-void from_json(const nlohmann::json& j, ExposureDataChangeNotification& o) {
+void from_json(const nlohmann::json &j, ExposureDataChangeNotification &o) {
   if (j.find("ueId") != j.end()) {
     j.at("ueId").get_to(o.m_UeId);
     o.m_UeIdIsSet = true;
@@ -63,26 +64,20 @@ void from_json(const nlohmann::json& j, ExposureDataChangeNotification& o) {
   }
 }
 
-std::string ExposureDataChangeNotification::getUeId() const {
-  return m_UeId;
-}
-void ExposureDataChangeNotification::setUeId(std::string const& value) {
-  m_UeId      = value;
+std::string ExposureDataChangeNotification::getUeId() const { return m_UeId; }
+void ExposureDataChangeNotification::setUeId(std::string const &value) {
+  m_UeId = value;
   m_UeIdIsSet = true;
 }
-bool ExposureDataChangeNotification::ueIdIsSet() const {
-  return m_UeIdIsSet;
-}
-void ExposureDataChangeNotification::unsetUeId() {
-  m_UeIdIsSet = false;
-}
-AccessAndMobilityData ExposureDataChangeNotification::getAccessAndMobilityData()
-    const {
+bool ExposureDataChangeNotification::ueIdIsSet() const { return m_UeIdIsSet; }
+void ExposureDataChangeNotification::unsetUeId() { m_UeIdIsSet = false; }
+AccessAndMobilityData
+ExposureDataChangeNotification::getAccessAndMobilityData() const {
   return m_AccessAndMobilityData;
 }
 void ExposureDataChangeNotification::setAccessAndMobilityData(
-    AccessAndMobilityData const& value) {
-  m_AccessAndMobilityData      = value;
+    AccessAndMobilityData const &value) {
+  m_AccessAndMobilityData = value;
   m_AccessAndMobilityDataIsSet = true;
 }
 bool ExposureDataChangeNotification::accessAndMobilityDataIsSet() const {
@@ -91,13 +86,13 @@ bool ExposureDataChangeNotification::accessAndMobilityDataIsSet() const {
 void ExposureDataChangeNotification::unsetAccessAndMobilityData() {
   m_AccessAndMobilityDataIsSet = false;
 }
-std::vector<PduSessionManagementData>&
+std::vector<PduSessionManagementData> &
 ExposureDataChangeNotification::getPduSessionManagementData() {
   return m_PduSessionManagementData;
 }
 void ExposureDataChangeNotification::setPduSessionManagementData(
-    std::vector<PduSessionManagementData> const& value) {
-  m_PduSessionManagementData      = value;
+    std::vector<PduSessionManagementData> const &value) {
+  m_PduSessionManagementData = value;
   m_PduSessionManagementDataIsSet = true;
 }
 bool ExposureDataChangeNotification::pduSessionManagementDataIsSet() const {
@@ -106,12 +101,12 @@ bool ExposureDataChangeNotification::pduSessionManagementDataIsSet() const {
 void ExposureDataChangeNotification::unsetPduSessionManagementData() {
   m_PduSessionManagementDataIsSet = false;
 }
-std::vector<std::string>& ExposureDataChangeNotification::getDelResources() {
+std::vector<std::string> &ExposureDataChangeNotification::getDelResources() {
   return m_DelResources;
 }
 void ExposureDataChangeNotification::setDelResources(
-    std::vector<std::string> const& value) {
-  m_DelResources      = value;
+    std::vector<std::string> const &value) {
+  m_DelResources = value;
   m_DelResourcesIsSet = true;
 }
 bool ExposureDataChangeNotification::delResourcesIsSet() const {
@@ -121,4 +116,4 @@ void ExposureDataChangeNotification::unsetDelResources() {
   m_DelResourcesIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

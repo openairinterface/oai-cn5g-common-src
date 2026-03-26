@@ -26,10 +26,10 @@ void LocationPrivacyInd::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const LocationPrivacyInd& o) {
+void to_json(nlohmann::json &j, const LocationPrivacyInd &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, LocationPrivacyInd& o) {}
+void from_json(const nlohmann::json &j, LocationPrivacyInd &o) {}
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

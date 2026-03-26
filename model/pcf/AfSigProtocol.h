@@ -33,7 +33,7 @@ namespace oai::model::pcf {
 /// signalling protocol is Session Initiation Protocol.
 /// </summary>
 class AfSigProtocol {
- public:
+public:
   AfSigProtocol();
   virtual ~AfSigProtocol() = default;
 
@@ -47,32 +47,32 @@ class AfSigProtocol {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const AfSigProtocol& rhs) const;
-  bool operator!=(const AfSigProtocol& rhs) const;
+  bool operator==(const AfSigProtocol &rhs) const;
+  bool operator!=(const AfSigProtocol &rhs) const;
 
   /////////////////////////////////////////////
   /// AfSigProtocol members
 
-  friend void to_json(nlohmann::json& j, const AfSigProtocol& o);
-  friend void from_json(const nlohmann::json& j, AfSigProtocol& o);
+  friend void to_json(nlohmann::json &j, const AfSigProtocol &o);
+  friend void from_json(const nlohmann::json &j, AfSigProtocol &o);
 
   AfSigProtocol_anyOf getValue() const;
   void setValue(AfSigProtocol_anyOf value);
   AfSigProtocol_anyOf::eAfSigProtocol_anyOf getEnumValue() const;
   void setEnumValue(AfSigProtocol_anyOf::eAfSigProtocol_anyOf value);
 
- protected:
+protected:
   AfSigProtocol_anyOf m_value;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* AfSigProtocol_H_ */

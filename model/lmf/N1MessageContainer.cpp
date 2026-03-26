@@ -19,9 +19,9 @@
 namespace oai::model::lmf {
 
 N1MessageContainer::N1MessageContainer() {
-  m_NfId                   = "";
-  m_NfIdIsSet              = false;
-  m_ServiceInstanceId      = "";
+  m_NfId = "";
+  m_NfIdIsSet = false;
+  m_ServiceInstanceId = "";
   m_ServiceInstanceIdIsSet = false;
 }
 
@@ -32,12 +32,12 @@ void N1MessageContainer::validate() const {
   }
 }
 
-bool N1MessageContainer::validate(std::stringstream& msg) const {
+bool N1MessageContainer::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool N1MessageContainer::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool N1MessageContainer::validate(std::stringstream &msg,
+                                  const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "N1MessageContainer" : pathPrefix;
@@ -45,7 +45,7 @@ bool N1MessageContainer::validate(
   return success;
 }
 
-bool N1MessageContainer::operator==(const N1MessageContainer& rhs) const {
+bool N1MessageContainer::operator==(const N1MessageContainer &rhs) const {
   return
 
       (getN1MessageClass() == rhs.getN1MessageClass()) &&
@@ -62,20 +62,21 @@ bool N1MessageContainer::operator==(const N1MessageContainer& rhs) const {
           ;
 }
 
-bool N1MessageContainer::operator!=(const N1MessageContainer& rhs) const {
+bool N1MessageContainer::operator!=(const N1MessageContainer &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const N1MessageContainer& o) {
-  j                     = nlohmann::json();
-  j["n1MessageClass"]   = o.m_N1MessageClass;
+void to_json(nlohmann::json &j, const N1MessageContainer &o) {
+  j = nlohmann::json();
+  j["n1MessageClass"] = o.m_N1MessageClass;
   j["n1MessageContent"] = o.m_N1MessageContent;
-  if (o.nfIdIsSet()) j["nfId"] = o.m_NfId;
+  if (o.nfIdIsSet())
+    j["nfId"] = o.m_NfId;
   if (o.serviceInstanceIdIsSet())
     j["serviceInstanceId"] = o.m_ServiceInstanceId;
 }
 
-void from_json(const nlohmann::json& j, N1MessageContainer& o) {
+void from_json(const nlohmann::json &j, N1MessageContainer &o) {
   j.at("n1MessageClass").get_to(o.m_N1MessageClass);
   j.at("n1MessageContent").get_to(o.m_N1MessageContent);
   if (j.find("nfId") != j.end()) {
@@ -92,35 +93,29 @@ oai::model::lmf::N1MessageClass N1MessageContainer::getN1MessageClass() const {
   return m_N1MessageClass;
 }
 void N1MessageContainer::setN1MessageClass(
-    oai::model::lmf::N1MessageClass const& value) {
+    oai::model::lmf::N1MessageClass const &value) {
   m_N1MessageClass = value;
 }
-oai::model::common::RefToBinaryData N1MessageContainer::getN1MessageContent()
-    const {
+oai::model::common::RefToBinaryData
+N1MessageContainer::getN1MessageContent() const {
   return m_N1MessageContent;
 }
 void N1MessageContainer::setN1MessageContent(
-    oai::model::common::RefToBinaryData const& value) {
+    oai::model::common::RefToBinaryData const &value) {
   m_N1MessageContent = value;
 }
-std::string N1MessageContainer::getNfId() const {
-  return m_NfId;
-}
-void N1MessageContainer::setNfId(std::string const& value) {
-  m_NfId      = value;
+std::string N1MessageContainer::getNfId() const { return m_NfId; }
+void N1MessageContainer::setNfId(std::string const &value) {
+  m_NfId = value;
   m_NfIdIsSet = true;
 }
-bool N1MessageContainer::nfIdIsSet() const {
-  return m_NfIdIsSet;
-}
-void N1MessageContainer::unsetNfId() {
-  m_NfIdIsSet = false;
-}
+bool N1MessageContainer::nfIdIsSet() const { return m_NfIdIsSet; }
+void N1MessageContainer::unsetNfId() { m_NfIdIsSet = false; }
 std::string N1MessageContainer::getServiceInstanceId() const {
   return m_ServiceInstanceId;
 }
-void N1MessageContainer::setServiceInstanceId(std::string const& value) {
-  m_ServiceInstanceId      = value;
+void N1MessageContainer::setServiceInstanceId(std::string const &value) {
+  m_ServiceInstanceId = value;
   m_ServiceInstanceIdIsSet = true;
 }
 bool N1MessageContainer::serviceInstanceIdIsSet() const {
@@ -130,4 +125,4 @@ void N1MessageContainer::unsetServiceInstanceId() {
   m_ServiceInstanceIdIsSet = false;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

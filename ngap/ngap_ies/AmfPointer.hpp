@@ -7,7 +7,7 @@
 
 #include <string>
 
-constexpr uint8_t kAmfPointerMaxValue = 63;  // 6 bits
+constexpr uint8_t kAmfPointerMaxValue = 63; // 6 bits
 
 extern "C" {
 #include "Ngap_AMFPointer.h"
@@ -16,23 +16,23 @@ extern "C" {
 namespace oai::ngap {
 
 class AmfPointer {
- public:
+public:
   AmfPointer();
   virtual ~AmfPointer();
 
-  bool set(const std::string&);
-  void get(std::string&) const;
+  bool set(const std::string &);
+  void get(std::string &) const;
 
-  bool set(const uint8_t&);
-  void get(uint8_t&) const;
+  bool set(const uint8_t &);
+  void get(uint8_t &) const;
 
-  bool encode(Ngap_AMFPointer_t&) const;
-  bool decode(const Ngap_AMFPointer_t&);
+  bool encode(Ngap_AMFPointer_t &) const;
+  bool decode(const Ngap_AMFPointer_t &);
 
- private:
+private:
   uint8_t m_Pointer;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

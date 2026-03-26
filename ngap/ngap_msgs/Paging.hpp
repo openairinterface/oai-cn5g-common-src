@@ -18,29 +18,28 @@ extern "C" {
 namespace oai::ngap {
 
 class PagingMsg : public NgapMessage {
- public:
+public:
   PagingMsg();
   virtual ~PagingMsg();
 
   void initialize();
-  bool decode(Ngap_NGAP_PDU_t* ngap_msg_pdu) override;
+  bool decode(Ngap_NGAP_PDU_t *ngap_msg_pdu) override;
 
-  void setUePagingIdentity(
-      const std::string& setId, const std::string& pointer,
-      const std::string tmsi);
-  void getUePagingIdentity(std::string& _5g_s_tmsi) const;
-  void getUePagingIdentity(
-      std::string& setId, std::string& pointer, std::string& tmsi) const;
+  void setUePagingIdentity(const std::string &setId, const std::string &pointer,
+                           const std::string tmsi);
+  void getUePagingIdentity(std::string &_5g_s_tmsi) const;
+  void getUePagingIdentity(std::string &setId, std::string &pointer,
+                           std::string &tmsi) const;
 
-  void setTaiListForPaging(const std::vector<Tai_t>& list);
-  void getTaiListForPaging(std::vector<Tai_t>& list) const;
+  void setTaiListForPaging(const std::vector<Tai_t> &list);
+  void getTaiListForPaging(std::vector<Tai_t> &list) const;
 
- private:
-  Ngap_Paging_t* m_PagingIes;
+private:
+  Ngap_Paging_t *m_PagingIes;
 
-  UePagingIdentity m_UePagingIdentity;  // Mandatory
+  UePagingIdentity m_UePagingIdentity; // Mandatory
   // TODO: Paging DRX (Optional)
-  TaiListForPaging m_TaiListForPaging;  // Mandatory
+  TaiListForPaging m_TaiListForPaging; // Mandatory
   // TODO: Paging Priority (Optional)
   // TODO: UE Radio Capability for Paging (Optional)
   // TODO: Paging Origin (Optional)
@@ -53,6 +52,6 @@ class PagingMsg : public NgapMessage {
   // TODO: CE-mode-B Restricted (Optional, Rel 16.14.0)
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

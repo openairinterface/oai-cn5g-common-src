@@ -12,21 +12,21 @@ extern "C" {
 namespace oai::ngap {
 
 class PacketErrorRate {
- public:
+public:
   PacketErrorRate();
   virtual ~PacketErrorRate();
 
-  void set(const long& scalar, const long& exponent);
-  bool get(long& scalar, long& exponent) const;
+  void set(const long &scalar, const long &exponent);
+  bool get(long &scalar, long &exponent) const;
 
-  bool encode(Ngap_PacketErrorRate_t&) const;
-  bool decode(const Ngap_PacketErrorRate_t&);
+  bool encode(Ngap_PacketErrorRate_t &) const;
+  bool decode(const Ngap_PacketErrorRate_t &);
 
- private:
+private:
   long m_Scalar;
   long m_Exponent;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

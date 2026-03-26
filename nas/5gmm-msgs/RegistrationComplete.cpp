@@ -10,9 +10,8 @@ using namespace oai::nas;
 
 //------------------------------------------------------------------------------
 RegistrationComplete::RegistrationComplete()
-    : ie_header_(
-          k5gsMobilityManagementMessages, kPlain5gsMessage,
-          kRegistrationComplete) {
+    : ie_header_(k5gsMobilityManagementMessages, kPlain5gsMessage,
+                 kRegistrationComplete) {
   ie_sor_transparent_container_ = std::nullopt;
 }
 
@@ -43,11 +42,11 @@ void RegistrationComplete::SetSorTransparentContainer(
 }
 
 //------------------------------------------------------------------------------
-int RegistrationComplete::Encode(uint8_t* buf, int len) {
+int RegistrationComplete::Encode(uint8_t *buf, int len) {
   oai::logger::logger_common::nas().debug(
       "Encoding RegistrationComplete message");
 
-  int encoded_size    = 0;
+  int encoded_size = 0;
   int encoded_ie_size = 0;
 
   // Header
@@ -57,8 +56,8 @@ int RegistrationComplete::Encode(uint8_t* buf, int len) {
   }
   encoded_size += encoded_ie_size;
 
-  if ((encoded_ie_size = NasHelper::Encode(
-           ie_sor_transparent_container_, buf, len, encoded_size)) ==
+  if ((encoded_ie_size = NasHelper::Encode(ie_sor_transparent_container_, buf,
+                                           len, encoded_size)) ==
       KEncodeDecodeError) {
     return KEncodeDecodeError;
   }
@@ -69,11 +68,11 @@ int RegistrationComplete::Encode(uint8_t* buf, int len) {
 }
 
 //------------------------------------------------------------------------------
-int RegistrationComplete::Decode(uint8_t* buf, int len) {
+int RegistrationComplete::Decode(uint8_t *buf, int len) {
   oai::logger::logger_common::nas().debug(
       "Decoding RegistrationComplete message");
 
-  int decoded_size    = 0;
+  int decoded_size = 0;
   int decoded_ie_size = 0;
 
   // Header
@@ -92,24 +91,24 @@ int RegistrationComplete::Decode(uint8_t* buf, int len) {
   oai::logger::logger_common::nas().debug("First option IEI (0x%x)", octet);
   while ((octet != 0x0)) {
     switch (octet) {
-      case kIeiSorTransparentContainer: {
-        oai::logger::logger_common::nas().debug(
-            "Decoding IEI 0x%x", kIeiSorTransparentContainer);
-        if ((decoded_ie_size = NasHelper::Decode(
-                 ie_sor_transparent_container_, buf, len, decoded_size,
-                 true)) == KEncodeDecodeError) {
-          return KEncodeDecodeError;
-        }
-        DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
-      } break;
+    case kIeiSorTransparentContainer: {
+      oai::logger::logger_common::nas().debug("Decoding IEI 0x%x",
+                                              kIeiSorTransparentContainer);
+      if ((decoded_ie_size = NasHelper::Decode(ie_sor_transparent_container_,
+                                               buf, len, decoded_size, true)) ==
+          KEncodeDecodeError) {
+        return KEncodeDecodeError;
+      }
+      DECODE_U8_VALUE(buf, octet, decoded_size, len);
+      oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
+    } break;
 
-      default: {
-        oai::logger::logger_common::nas().warn(
-            "Unknown IEI 0x%x, stop decoding...", octet);
-        // Stop decoding
-        octet = 0x00;
-      } break;
+    default: {
+      oai::logger::logger_common::nas().warn(
+          "Unknown IEI 0x%x, stop decoding...", octet);
+      // Stop decoding
+      octet = 0x00;
+    } break;
     }
   }
   oai::logger::logger_common::nas().debug(

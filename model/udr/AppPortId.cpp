@@ -19,10 +19,10 @@
 namespace oai::udr::model {
 
 AppPortId::AppPortId() {
-  m_DestinationPort      = 0;
+  m_DestinationPort = 0;
   m_DestinationPortIsSet = false;
-  m_OriginatorPort       = 0;
-  m_OriginatorPortIsSet  = false;
+  m_OriginatorPort = 0;
+  m_OriginatorPortIsSet = false;
 }
 
 AppPortId::~AppPortId() {}
@@ -31,13 +31,15 @@ void AppPortId::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const AppPortId& o) {
+void to_json(nlohmann::json &j, const AppPortId &o) {
   j = nlohmann::json();
-  if (o.destinationPortIsSet()) j["destinationPort"] = o.m_DestinationPort;
-  if (o.originatorPortIsSet()) j["originatorPort"] = o.m_OriginatorPort;
+  if (o.destinationPortIsSet())
+    j["destinationPort"] = o.m_DestinationPort;
+  if (o.originatorPortIsSet())
+    j["originatorPort"] = o.m_OriginatorPort;
 }
 
-void from_json(const nlohmann::json& j, AppPortId& o) {
+void from_json(const nlohmann::json &j, AppPortId &o) {
   if (j.find("destinationPort") != j.end()) {
     j.at("destinationPort").get_to(o.m_DestinationPort);
     o.m_DestinationPortIsSet = true;
@@ -48,31 +50,19 @@ void from_json(const nlohmann::json& j, AppPortId& o) {
   }
 }
 
-int32_t AppPortId::getDestinationPort() const {
-  return m_DestinationPort;
-}
+int32_t AppPortId::getDestinationPort() const { return m_DestinationPort; }
 void AppPortId::setDestinationPort(int32_t const value) {
-  m_DestinationPort      = value;
+  m_DestinationPort = value;
   m_DestinationPortIsSet = true;
 }
-bool AppPortId::destinationPortIsSet() const {
-  return m_DestinationPortIsSet;
-}
-void AppPortId::unsetDestinationPort() {
-  m_DestinationPortIsSet = false;
-}
-int32_t AppPortId::getOriginatorPort() const {
-  return m_OriginatorPort;
-}
+bool AppPortId::destinationPortIsSet() const { return m_DestinationPortIsSet; }
+void AppPortId::unsetDestinationPort() { m_DestinationPortIsSet = false; }
+int32_t AppPortId::getOriginatorPort() const { return m_OriginatorPort; }
 void AppPortId::setOriginatorPort(int32_t const value) {
-  m_OriginatorPort      = value;
+  m_OriginatorPort = value;
   m_OriginatorPortIsSet = true;
 }
-bool AppPortId::originatorPortIsSet() const {
-  return m_OriginatorPortIsSet;
-}
-void AppPortId::unsetOriginatorPort() {
-  m_OriginatorPortIsSet = false;
-}
+bool AppPortId::originatorPortIsSet() const { return m_OriginatorPortIsSet; }
+void AppPortId::unsetOriginatorPort() { m_OriginatorPortIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

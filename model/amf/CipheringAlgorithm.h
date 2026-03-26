@@ -27,7 +27,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class CipheringAlgorithm {
- public:
+public:
   CipheringAlgorithm();
   virtual ~CipheringAlgorithm();
 
@@ -36,12 +36,12 @@ class CipheringAlgorithm {
   /////////////////////////////////////////////
   /// CipheringAlgorithm members
 
-  friend void to_json(nlohmann::json& j, const CipheringAlgorithm& o);
-  friend void from_json(const nlohmann::json& j, CipheringAlgorithm& o);
+  friend void to_json(nlohmann::json &j, const CipheringAlgorithm &o);
+  friend void from_json(const nlohmann::json &j, CipheringAlgorithm &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* CipheringAlgorithm_H_ */

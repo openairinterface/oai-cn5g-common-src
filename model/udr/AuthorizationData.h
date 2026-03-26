@@ -35,7 +35,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class AuthorizationData {
- public:
+public:
   AuthorizationData();
   virtual ~AuthorizationData();
 
@@ -53,20 +53,20 @@ class AuthorizationData {
   ///
   /// </summary>
   std::string getValidityTime() const;
-  void setValidityTime(std::string const& value);
+  void setValidityTime(std::string const &value);
   bool validityTimeIsSet() const;
   void unsetValidityTime();
 
-  friend void to_json(nlohmann::json& j, const AuthorizationData& o);
-  friend void from_json(const nlohmann::json& j, AuthorizationData& o);
+  friend void to_json(nlohmann::json &j, const AuthorizationData &o);
+  friend void from_json(const nlohmann::json &j, AuthorizationData &o);
 
- protected:
+protected:
   //   Set<UserIdentifier> m_AuthorizationData;
 
   std::string m_ValidityTime;
   bool m_ValidityTimeIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* AuthorizationData_H_ */

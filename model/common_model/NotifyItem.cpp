@@ -18,9 +18,7 @@
 
 namespace oai::model::common {
 
-NotifyItem::NotifyItem() {
-  m_ResourceId = "";
-}
+NotifyItem::NotifyItem() { m_ResourceId = ""; }
 
 void NotifyItem::validate() const {
   std::stringstream msg;
@@ -29,28 +27,28 @@ void NotifyItem::validate() const {
   }
 }
 
-bool NotifyItem::validate(std::stringstream& msg) const {
+bool NotifyItem::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool NotifyItem::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool NotifyItem::validate(std::stringstream &msg,
+                          const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "NotifyItem" : pathPrefix;
 
   /* Changes */ {
-    const std::vector<oai::model::common::ChangeItem>& value = m_Changes;
+    const std::vector<oai::model::common::ChangeItem> &value = m_Changes;
     const std::string currentValuePath = _pathPrefix + ".changes";
 
     if (value.size() < 1) {
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::common::ChangeItem& value : value) {
+      int i = 0;
+      for (const oai::model::common::ChangeItem &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -64,7 +62,7 @@ bool NotifyItem::validate(
   return success;
 }
 
-bool NotifyItem::operator==(const NotifyItem& rhs) const {
+bool NotifyItem::operator==(const NotifyItem &rhs) const {
   return
 
       (getResourceId() == rhs.getResourceId()) &&
@@ -74,33 +72,31 @@ bool NotifyItem::operator==(const NotifyItem& rhs) const {
           ;
 }
 
-bool NotifyItem::operator!=(const NotifyItem& rhs) const {
+bool NotifyItem::operator!=(const NotifyItem &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const NotifyItem& o) {
-  j               = nlohmann::json();
+void to_json(nlohmann::json &j, const NotifyItem &o) {
+  j = nlohmann::json();
   j["resourceId"] = o.m_ResourceId;
-  j["changes"]    = o.m_Changes;
+  j["changes"] = o.m_Changes;
 }
 
-void from_json(const nlohmann::json& j, NotifyItem& o) {
+void from_json(const nlohmann::json &j, NotifyItem &o) {
   j.at("resourceId").get_to(o.m_ResourceId);
   j.at("changes").get_to(o.m_Changes);
 }
 
-std::string NotifyItem::getResourceId() const {
-  return m_ResourceId;
-}
-void NotifyItem::setResourceId(std::string const& value) {
+std::string NotifyItem::getResourceId() const { return m_ResourceId; }
+void NotifyItem::setResourceId(std::string const &value) {
   m_ResourceId = value;
 }
 std::vector<oai::model::common::ChangeItem> NotifyItem::getChanges() const {
   return m_Changes;
 }
 void NotifyItem::setChanges(
-    std::vector<oai::model::common::ChangeItem> const& value) {
+    std::vector<oai::model::common::ChangeItem> const &value) {
   m_Changes = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

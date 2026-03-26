@@ -19,15 +19,15 @@
 namespace oai::udr::model {
 
 ContextDataSets::ContextDataSets() {
-  m_Amf3GppIsSet                       = false;
-  m_AmfNon3GppIsSet                    = false;
-  m_SdmSubscriptionsIsSet              = false;
-  m_EeSubscriptionsIsSet               = false;
-  m_Smsf3GppAccessIsSet                = false;
-  m_SmsfNon3GppAccessIsSet             = false;
+  m_Amf3GppIsSet = false;
+  m_AmfNon3GppIsSet = false;
+  m_SdmSubscriptionsIsSet = false;
+  m_EeSubscriptionsIsSet = false;
+  m_Smsf3GppAccessIsSet = false;
+  m_SmsfNon3GppAccessIsSet = false;
   m_SubscriptionDataSubscriptionsIsSet = false;
-  m_SmfRegistrationsIsSet              = false;
-  m_IpSmGwIsSet                        = false;
+  m_SmfRegistrationsIsSet = false;
+  m_IpSmGwIsSet = false;
 }
 
 ContextDataSets::~ContextDataSets() {}
@@ -36,15 +36,18 @@ void ContextDataSets::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const ContextDataSets& o) {
+void to_json(nlohmann::json &j, const ContextDataSets &o) {
   j = nlohmann::json();
-  if (o.amf3GppIsSet()) j["amf3Gpp"] = o.m_Amf3Gpp;
-  if (o.amfNon3GppIsSet()) j["amfNon3Gpp"] = o.m_AmfNon3Gpp;
+  if (o.amf3GppIsSet())
+    j["amf3Gpp"] = o.m_Amf3Gpp;
+  if (o.amfNon3GppIsSet())
+    j["amfNon3Gpp"] = o.m_AmfNon3Gpp;
   if (o.sdmSubscriptionsIsSet() || !o.m_SdmSubscriptions.empty())
     j["sdmSubscriptions"] = o.m_SdmSubscriptions;
   if (o.eeSubscriptionsIsSet() || !o.m_EeSubscriptions.empty())
     j["eeSubscriptions"] = o.m_EeSubscriptions;
-  if (o.smsf3GppAccessIsSet()) j["smsf3GppAccess"] = o.m_Smsf3GppAccess;
+  if (o.smsf3GppAccessIsSet())
+    j["smsf3GppAccess"] = o.m_Smsf3GppAccess;
   if (o.smsfNon3GppAccessIsSet())
     j["smsfNon3GppAccess"] = o.m_SmsfNon3GppAccess;
   if (o.subscriptionDataSubscriptionsIsSet() ||
@@ -52,10 +55,11 @@ void to_json(nlohmann::json& j, const ContextDataSets& o) {
     j["subscriptionDataSubscriptions"] = o.m_SubscriptionDataSubscriptions;
   if (o.smfRegistrationsIsSet() || !o.m_SmfRegistrations.empty())
     j["smfRegistrations"] = o.m_SmfRegistrations;
-  if (o.ipSmGwIsSet()) j["ipSmGw"] = o.m_IpSmGw;
+  if (o.ipSmGwIsSet())
+    j["ipSmGw"] = o.m_IpSmGw;
 }
 
-void from_json(const nlohmann::json& j, ContextDataSets& o) {
+void from_json(const nlohmann::json &j, ContextDataSets &o) {
   if (j.find("amf3Gpp") != j.end()) {
     j.at("amf3Gpp").get_to(o.m_Amf3Gpp);
     o.m_Amf3GppIsSet = true;
@@ -98,35 +102,27 @@ void from_json(const nlohmann::json& j, ContextDataSets& o) {
 Amf3GppAccessRegistration ContextDataSets::getAmf3Gpp() const {
   return m_Amf3Gpp;
 }
-void ContextDataSets::setAmf3Gpp(Amf3GppAccessRegistration const& value) {
-  m_Amf3Gpp      = value;
+void ContextDataSets::setAmf3Gpp(Amf3GppAccessRegistration const &value) {
+  m_Amf3Gpp = value;
   m_Amf3GppIsSet = true;
 }
-bool ContextDataSets::amf3GppIsSet() const {
-  return m_Amf3GppIsSet;
-}
-void ContextDataSets::unsetAmf3Gpp() {
-  m_Amf3GppIsSet = false;
-}
+bool ContextDataSets::amf3GppIsSet() const { return m_Amf3GppIsSet; }
+void ContextDataSets::unsetAmf3Gpp() { m_Amf3GppIsSet = false; }
 AmfNon3GppAccessRegistration ContextDataSets::getAmfNon3Gpp() const {
   return m_AmfNon3Gpp;
 }
-void ContextDataSets::setAmfNon3Gpp(AmfNon3GppAccessRegistration const& value) {
-  m_AmfNon3Gpp      = value;
+void ContextDataSets::setAmfNon3Gpp(AmfNon3GppAccessRegistration const &value) {
+  m_AmfNon3Gpp = value;
   m_AmfNon3GppIsSet = true;
 }
-bool ContextDataSets::amfNon3GppIsSet() const {
-  return m_AmfNon3GppIsSet;
-}
-void ContextDataSets::unsetAmfNon3Gpp() {
-  m_AmfNon3GppIsSet = false;
-}
-std::vector<SdmSubscription>& ContextDataSets::getSdmSubscriptions() {
+bool ContextDataSets::amfNon3GppIsSet() const { return m_AmfNon3GppIsSet; }
+void ContextDataSets::unsetAmfNon3Gpp() { m_AmfNon3GppIsSet = false; }
+std::vector<SdmSubscription> &ContextDataSets::getSdmSubscriptions() {
   return m_SdmSubscriptions;
 }
 void ContextDataSets::setSdmSubscriptions(
-    std::vector<SdmSubscription> const& value) {
-  m_SdmSubscriptions      = value;
+    std::vector<SdmSubscription> const &value) {
+  m_SdmSubscriptions = value;
   m_SdmSubscriptionsIsSet = true;
 }
 bool ContextDataSets::sdmSubscriptionsIsSet() const {
@@ -135,38 +131,34 @@ bool ContextDataSets::sdmSubscriptionsIsSet() const {
 void ContextDataSets::unsetSdmSubscriptions() {
   m_SdmSubscriptionsIsSet = false;
 }
-std::vector<EeSubscription>& ContextDataSets::getEeSubscriptions() {
+std::vector<EeSubscription> &ContextDataSets::getEeSubscriptions() {
   return m_EeSubscriptions;
 }
 void ContextDataSets::setEeSubscriptions(
-    std::vector<EeSubscription> const& value) {
-  m_EeSubscriptions      = value;
+    std::vector<EeSubscription> const &value) {
+  m_EeSubscriptions = value;
   m_EeSubscriptionsIsSet = true;
 }
 bool ContextDataSets::eeSubscriptionsIsSet() const {
   return m_EeSubscriptionsIsSet;
 }
-void ContextDataSets::unsetEeSubscriptions() {
-  m_EeSubscriptionsIsSet = false;
-}
+void ContextDataSets::unsetEeSubscriptions() { m_EeSubscriptionsIsSet = false; }
 SmsfRegistration ContextDataSets::getSmsf3GppAccess() const {
   return m_Smsf3GppAccess;
 }
-void ContextDataSets::setSmsf3GppAccess(SmsfRegistration const& value) {
-  m_Smsf3GppAccess      = value;
+void ContextDataSets::setSmsf3GppAccess(SmsfRegistration const &value) {
+  m_Smsf3GppAccess = value;
   m_Smsf3GppAccessIsSet = true;
 }
 bool ContextDataSets::smsf3GppAccessIsSet() const {
   return m_Smsf3GppAccessIsSet;
 }
-void ContextDataSets::unsetSmsf3GppAccess() {
-  m_Smsf3GppAccessIsSet = false;
-}
+void ContextDataSets::unsetSmsf3GppAccess() { m_Smsf3GppAccessIsSet = false; }
 SmsfRegistration ContextDataSets::getSmsfNon3GppAccess() const {
   return m_SmsfNon3GppAccess;
 }
-void ContextDataSets::setSmsfNon3GppAccess(SmsfRegistration const& value) {
-  m_SmsfNon3GppAccess      = value;
+void ContextDataSets::setSmsfNon3GppAccess(SmsfRegistration const &value) {
+  m_SmsfNon3GppAccess = value;
   m_SmsfNon3GppAccessIsSet = true;
 }
 bool ContextDataSets::smsfNon3GppAccessIsSet() const {
@@ -175,13 +167,13 @@ bool ContextDataSets::smsfNon3GppAccessIsSet() const {
 void ContextDataSets::unsetSmsfNon3GppAccess() {
   m_SmsfNon3GppAccessIsSet = false;
 }
-std::vector<SubscriptionDataSubscriptions>&
+std::vector<SubscriptionDataSubscriptions> &
 ContextDataSets::getSubscriptionDataSubscriptions() {
   return m_SubscriptionDataSubscriptions;
 }
 void ContextDataSets::setSubscriptionDataSubscriptions(
-    std::vector<SubscriptionDataSubscriptions> const& value) {
-  m_SubscriptionDataSubscriptions      = value;
+    std::vector<SubscriptionDataSubscriptions> const &value) {
+  m_SubscriptionDataSubscriptions = value;
   m_SubscriptionDataSubscriptionsIsSet = true;
 }
 bool ContextDataSets::subscriptionDataSubscriptionsIsSet() const {
@@ -190,12 +182,12 @@ bool ContextDataSets::subscriptionDataSubscriptionsIsSet() const {
 void ContextDataSets::unsetSubscriptionDataSubscriptions() {
   m_SubscriptionDataSubscriptionsIsSet = false;
 }
-std::vector<SmfRegistration>& ContextDataSets::getSmfRegistrations() {
+std::vector<SmfRegistration> &ContextDataSets::getSmfRegistrations() {
   return m_SmfRegistrations;
 }
 void ContextDataSets::setSmfRegistrations(
-    std::vector<SmfRegistration> const& value) {
-  m_SmfRegistrations      = value;
+    std::vector<SmfRegistration> const &value) {
+  m_SmfRegistrations = value;
   m_SmfRegistrationsIsSet = true;
 }
 bool ContextDataSets::smfRegistrationsIsSet() const {
@@ -204,18 +196,12 @@ bool ContextDataSets::smfRegistrationsIsSet() const {
 void ContextDataSets::unsetSmfRegistrations() {
   m_SmfRegistrationsIsSet = false;
 }
-IpSmGwRegistration ContextDataSets::getIpSmGw() const {
-  return m_IpSmGw;
-}
-void ContextDataSets::setIpSmGw(IpSmGwRegistration const& value) {
-  m_IpSmGw      = value;
+IpSmGwRegistration ContextDataSets::getIpSmGw() const { return m_IpSmGw; }
+void ContextDataSets::setIpSmGw(IpSmGwRegistration const &value) {
+  m_IpSmGw = value;
   m_IpSmGwIsSet = true;
 }
-bool ContextDataSets::ipSmGwIsSet() const {
-  return m_IpSmGwIsSet;
-}
-void ContextDataSets::unsetIpSmGw() {
-  m_IpSmGwIsSet = false;
-}
+bool ContextDataSets::ipSmGwIsSet() const { return m_IpSmGwIsSet; }
+void ContextDataSets::unsetIpSmGw() { m_IpSmGwIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

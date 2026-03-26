@@ -28,8 +28,7 @@ asn_per_constraints_t asn_PER_type_Ngap_SRVCCOperationPossible_constr_1
           !defined(ASN_DISABLE_APER_SUPPORT) */
 static const asn_INTEGER_enum_map_t
     asn_MAP_Ngap_SRVCCOperationPossible_value2enum_1[] = {
-        {0, 8, "possible"},
-        {1, 11, "notPossible"}
+        {0, 8, "possible"}, {1, 11, "notPossible"}
         /* This list is extensible */
 };
 static const unsigned int asn_MAP_Ngap_SRVCCOperationPossible_enum2value_1[] = {

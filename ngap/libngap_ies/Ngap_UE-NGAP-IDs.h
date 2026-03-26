@@ -35,9 +35,9 @@ struct Ngap_ProtocolIE_SingleContainer;
 typedef struct Ngap_UE_NGAP_IDs {
   Ngap_UE_NGAP_IDs_PR present;
   union Ngap_UE_NGAP_IDs_u {
-    struct Ngap_UE_NGAP_ID_pair* uE_NGAP_ID_pair;
+    struct Ngap_UE_NGAP_ID_pair *uE_NGAP_ID_pair;
     Ngap_AMF_UE_NGAP_ID_t aMF_UE_NGAP_ID;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

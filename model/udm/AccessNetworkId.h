@@ -30,7 +30,7 @@ namespace oai::model::udm {
 ///
 /// </summary>
 class AccessNetworkId {
- public:
+public:
   AccessNetworkId();
   virtual ~AccessNetworkId();
 
@@ -39,12 +39,12 @@ class AccessNetworkId {
   /////////////////////////////////////////////
   /// AccessNetworkId members
 
-  friend void to_json(nlohmann::json& j, const AccessNetworkId& o);
-  friend void from_json(const nlohmann::json& j, AccessNetworkId& o);
+  friend void to_json(nlohmann::json &j, const AccessNetworkId &o);
+  friend void from_json(const nlohmann::json &j, AccessNetworkId &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm
 
 #endif /* AccessNetworkId_H_ */

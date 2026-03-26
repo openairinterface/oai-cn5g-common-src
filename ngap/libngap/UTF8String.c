@@ -3,8 +3,8 @@
  * All rights reserved.
  * Redistribution and modifications are permitted subject to BSD license.
  */
-#include <asn_internal.h>
 #include <UTF8String.h>
+#include <asn_internal.h>
 
 /*
  * UTF8String basic type description.
@@ -113,85 +113,88 @@ static const int32_t UTF8String_mv[7] = {
 #define U8E_NOTMIN -4   /* Not minimal length encoding */
 #define U8E_EINVAL -5   /* Invalid arguments */
 
-int UTF8String_constraint(
-    const asn_TYPE_descriptor_t* td, const void* sptr,
-    asn_app_constraint_failed_f* ctfailcb, void* app_key) {
-  ssize_t len = UTF8String_length((const UTF8String_t*) sptr);
+int UTF8String_constraint(const asn_TYPE_descriptor_t *td, const void *sptr,
+                          asn_app_constraint_failed_f *ctfailcb,
+                          void *app_key) {
+  ssize_t len = UTF8String_length((const UTF8String_t *)sptr);
   switch (len) {
-    case U8E_EINVAL:
-      ASN__CTFAIL(app_key, td, sptr, "%s: value not given", td->name);
-      break;
-    case U8E_TRUNC:
-      ASN__CTFAIL(
-          app_key, td, sptr, "%s: truncated UTF-8 sequence (%s:%d)", td->name,
-          __FILE__, __LINE__);
-      break;
-    case U8E_ILLSTART:
-      ASN__CTFAIL(
-          app_key, td, sptr, "%s: UTF-8 illegal start of encoding (%s:%d)",
-          td->name, __FILE__, __LINE__);
-      break;
-    case U8E_NOTCONT:
-      ASN__CTFAIL(
-          app_key, td, sptr, "%s: UTF-8 not continuation (%s:%d)", td->name,
-          __FILE__, __LINE__);
-      break;
-    case U8E_NOTMIN:
-      ASN__CTFAIL(
-          app_key, td, sptr, "%s: UTF-8 not minimal sequence (%s:%d)", td->name,
-          __FILE__, __LINE__);
-      break;
+  case U8E_EINVAL:
+    ASN__CTFAIL(app_key, td, sptr, "%s: value not given", td->name);
+    break;
+  case U8E_TRUNC:
+    ASN__CTFAIL(app_key, td, sptr, "%s: truncated UTF-8 sequence (%s:%d)",
+                td->name, __FILE__, __LINE__);
+    break;
+  case U8E_ILLSTART:
+    ASN__CTFAIL(app_key, td, sptr,
+                "%s: UTF-8 illegal start of encoding (%s:%d)", td->name,
+                __FILE__, __LINE__);
+    break;
+  case U8E_NOTCONT:
+    ASN__CTFAIL(app_key, td, sptr, "%s: UTF-8 not continuation (%s:%d)",
+                td->name, __FILE__, __LINE__);
+    break;
+  case U8E_NOTMIN:
+    ASN__CTFAIL(app_key, td, sptr, "%s: UTF-8 not minimal sequence (%s:%d)",
+                td->name, __FILE__, __LINE__);
+    break;
   }
   return (len < 0) ? -1 : 0;
 }
 
-static ssize_t UTF8String__process(
-    const UTF8String_t* st, uint32_t* dst, size_t dstlen) {
-  size_t length    = 0;
-  uint8_t* buf     = (st == NULL) ? NULL : st->buf;
-  uint8_t* end     = (buf == NULL) ? NULL : buf + st->size;
-  uint32_t* dstend = (dst == NULL) ? NULL : dst + dstlen;
+static ssize_t UTF8String__process(const UTF8String_t *st, uint32_t *dst,
+                                   size_t dstlen) {
+  size_t length = 0;
+  uint8_t *buf = (st == NULL) ? NULL : st->buf;
+  uint8_t *end = (buf == NULL) ? NULL : buf + st->size;
+  uint32_t *dstend = (dst == NULL) ? NULL : dst + dstlen;
 
   for (length = 0; buf < end; length++) {
     int ch = *buf;
-    uint8_t* cend;
+    uint8_t *cend;
     int32_t value;
     int want;
 
     /* Compute the sequence length */
     want = UTF8String_ht[0][ch >> 4];
     switch (want) {
-      case -1:
-        /* Second half of the table, long sequence */
-        want = UTF8String_ht[1][ch & 0x0F];
-        if (want != -1) break;
-        /* Fall through */
-      case 0:
-        return U8E_ILLSTART;
+    case -1:
+      /* Second half of the table, long sequence */
+      want = UTF8String_ht[1][ch & 0x0F];
+      if (want != -1)
+        break;
+      /* Fall through */
+    case 0:
+      return U8E_ILLSTART;
     }
 
     /* assert(want >= 1 && want <= 6) */
 
     /* Check character sequence length */
-    if (buf + want > end) return U8E_TRUNC;
+    if (buf + want > end)
+      return U8E_TRUNC;
 
     value = ch & (0xff >> want);
-    cend  = buf + want;
+    cend = buf + want;
     for (buf++; buf < cend; buf++) {
       ch = *buf;
-      if (ch < 0x80 || ch > 0xbf) return U8E_NOTCONT;
+      if (ch < 0x80 || ch > 0xbf)
+        return U8E_NOTCONT;
       value = (value << 6) | (ch & 0x3F);
     }
-    if (value < UTF8String_mv[want]) return U8E_NOTMIN;
-    if (dst < dstend) *dst++ = value; /* Record value */
+    if (value < UTF8String_mv[want])
+      return U8E_NOTMIN;
+    if (dst < dstend)
+      *dst++ = value; /* Record value */
   }
 
-  if (dst < dstend) *dst = 0; /* zero-terminate */
+  if (dst < dstend)
+    *dst = 0; /* zero-terminate */
 
   return length;
 }
 
-ssize_t UTF8String_length(const UTF8String_t* st) {
+ssize_t UTF8String_length(const UTF8String_t *st) {
   if (st && st->buf) {
     return UTF8String__process(st, 0, 0);
   } else {
@@ -199,7 +202,7 @@ ssize_t UTF8String_length(const UTF8String_t* st) {
   }
 }
 
-size_t UTF8String_to_wcs(const UTF8String_t* st, uint32_t* dst, size_t dstlen) {
+size_t UTF8String_to_wcs(const UTF8String_t *st, uint32_t *dst, size_t dstlen) {
   if (st && st->buf) {
     ssize_t ret = UTF8String__process(st, dst, dstlen);
     return (ret < 0) ? 0 : ret;

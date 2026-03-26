@@ -19,7 +19,7 @@
 namespace oai::model::pcf {
 
 SessionRuleReport::SessionRuleReport() {
-  m_SessRuleFailureCodeIsSet     = false;
+  m_SessRuleFailureCodeIsSet = false;
   m_PolicyDecFailureReportsIsSet = false;
 }
 
@@ -30,19 +30,19 @@ void SessionRuleReport::validate() const {
   }
 }
 
-bool SessionRuleReport::validate(std::stringstream& msg) const {
+bool SessionRuleReport::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool SessionRuleReport::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool SessionRuleReport::validate(std::stringstream &msg,
+                                 const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "SessionRuleReport" : pathPrefix;
 
   /* RuleIds */ {
-    const std::vector<std::string>& value = m_RuleIds;
-    const std::string currentValuePath    = _pathPrefix + ".ruleIds";
+    const std::vector<std::string> &value = m_RuleIds;
+    const std::string currentValuePath = _pathPrefix + ".ruleIds";
 
     if (value.size() < 1) {
       success = false;
@@ -63,7 +63,7 @@ bool SessionRuleReport::validate(
   }
 
   if (policyDecFailureReportsIsSet()) {
-    const std::vector<oai::model::pcf::PolicyDecisionFailureCode>& value =
+    const std::vector<oai::model::pcf::PolicyDecisionFailureCode> &value =
         m_PolicyDecFailureReports;
     const std::string currentValuePath =
         _pathPrefix + ".policyDecFailureReports";
@@ -72,15 +72,15 @@ bool SessionRuleReport::validate(
       success = false;
       msg << currentValuePath << ": must have at least 1 elements;";
     }
-    {  // Recursive validation of array elements
+    { // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
-      int i                          = 0;
-      for (const oai::model::pcf::PolicyDecisionFailureCode& value : value) {
+      int i = 0;
+      for (const oai::model::pcf::PolicyDecisionFailureCode &value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
-        success = value.validate(
-                      msg, currentValuePath + ".policyDecFailureReports") &&
+        success = value.validate(msg, currentValuePath +
+                                          ".policyDecFailureReports") &&
                   success;
 
         i++;
@@ -91,7 +91,7 @@ bool SessionRuleReport::validate(
   return success;
 }
 
-bool SessionRuleReport::operator==(const SessionRuleReport& rhs) const {
+bool SessionRuleReport::operator==(const SessionRuleReport &rhs) const {
   return
 
       (getRuleIds() == rhs.getRuleIds()) &&
@@ -110,13 +110,13 @@ bool SessionRuleReport::operator==(const SessionRuleReport& rhs) const {
           ;
 }
 
-bool SessionRuleReport::operator!=(const SessionRuleReport& rhs) const {
+bool SessionRuleReport::operator!=(const SessionRuleReport &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const SessionRuleReport& o) {
-  j               = nlohmann::json();
-  j["ruleIds"]    = o.m_RuleIds;
+void to_json(nlohmann::json &j, const SessionRuleReport &o) {
+  j = nlohmann::json();
+  j["ruleIds"] = o.m_RuleIds;
   j["ruleStatus"] = o.m_RuleStatus;
   if (o.sessRuleFailureCodeIsSet())
     j["sessRuleFailureCode"] = o.m_SessRuleFailureCode;
@@ -124,7 +124,7 @@ void to_json(nlohmann::json& j, const SessionRuleReport& o) {
     j["policyDecFailureReports"] = o.m_PolicyDecFailureReports;
 }
 
-void from_json(const nlohmann::json& j, SessionRuleReport& o) {
+void from_json(const nlohmann::json &j, SessionRuleReport &o) {
   j.at("ruleIds").get_to(o.m_RuleIds);
   j.at("ruleStatus").get_to(o.m_RuleStatus);
   if (j.find("sessRuleFailureCode") != j.end()) {
@@ -140,14 +140,14 @@ void from_json(const nlohmann::json& j, SessionRuleReport& o) {
 std::vector<std::string> SessionRuleReport::getRuleIds() const {
   return m_RuleIds;
 }
-void SessionRuleReport::setRuleIds(std::vector<std::string> const& value) {
+void SessionRuleReport::setRuleIds(std::vector<std::string> const &value) {
   m_RuleIds = value;
 }
 oai::model::pcf::RuleStatus SessionRuleReport::getRuleStatus() const {
   return m_RuleStatus;
 }
 void SessionRuleReport::setRuleStatus(
-    oai::model::pcf::RuleStatus const& value) {
+    oai::model::pcf::RuleStatus const &value) {
   m_RuleStatus = value;
 }
 oai::model::pcf::SessionRuleFailureCode
@@ -155,8 +155,8 @@ SessionRuleReport::getSessRuleFailureCode() const {
   return m_SessRuleFailureCode;
 }
 void SessionRuleReport::setSessRuleFailureCode(
-    oai::model::pcf::SessionRuleFailureCode const& value) {
-  m_SessRuleFailureCode      = value;
+    oai::model::pcf::SessionRuleFailureCode const &value) {
+  m_SessRuleFailureCode = value;
   m_SessRuleFailureCodeIsSet = true;
 }
 bool SessionRuleReport::sessRuleFailureCodeIsSet() const {
@@ -170,8 +170,8 @@ SessionRuleReport::getPolicyDecFailureReports() const {
   return m_PolicyDecFailureReports;
 }
 void SessionRuleReport::setPolicyDecFailureReports(
-    std::vector<oai::model::pcf::PolicyDecisionFailureCode> const& value) {
-  m_PolicyDecFailureReports      = value;
+    std::vector<oai::model::pcf::PolicyDecisionFailureCode> const &value) {
+  m_PolicyDecFailureReports = value;
   m_PolicyDecFailureReportsIsSet = true;
 }
 bool SessionRuleReport::policyDecFailureReportsIsSet() const {
@@ -181,4 +181,4 @@ void SessionRuleReport::unsetPolicyDecFailureReports() {
   m_PolicyDecFailureReportsIsSet = false;
 }
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf

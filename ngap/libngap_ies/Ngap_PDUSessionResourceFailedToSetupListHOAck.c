@@ -52,8 +52,8 @@ static const ber_tlv_tag_t
 asn_SET_OF_specifics_t
     asn_SPC_Ngap_PDUSessionResourceFailedToSetupListHOAck_specs_1 = {
         sizeof(struct Ngap_PDUSessionResourceFailedToSetupListHOAck),
-        offsetof(
-            struct Ngap_PDUSessionResourceFailedToSetupListHOAck, _asn_ctx),
+        offsetof(struct Ngap_PDUSessionResourceFailedToSetupListHOAck,
+                 _asn_ctx),
         0, /* XER encoding is XMLDelimitedItemList */
 };
 asn_TYPE_descriptor_t asn_DEF_Ngap_PDUSessionResourceFailedToSetupListHOAck = {

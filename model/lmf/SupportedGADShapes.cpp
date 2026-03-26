@@ -27,12 +27,12 @@ void SupportedGADShapes::validate() const {
   }
 }
 
-bool SupportedGADShapes::validate(std::stringstream& msg) const {
+bool SupportedGADShapes::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool SupportedGADShapes::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool SupportedGADShapes::validate(std::stringstream &msg,
+                                  const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "SupportedGADShapes" : pathPrefix;
@@ -43,22 +43,22 @@ bool SupportedGADShapes::validate(
   return success;
 }
 
-bool SupportedGADShapes::operator==(const SupportedGADShapes& rhs) const {
+bool SupportedGADShapes::operator==(const SupportedGADShapes &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool SupportedGADShapes::operator!=(const SupportedGADShapes& rhs) const {
+bool SupportedGADShapes::operator!=(const SupportedGADShapes &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const SupportedGADShapes& o) {
+void to_json(nlohmann::json &j, const SupportedGADShapes &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, SupportedGADShapes& o) {
+void from_json(const nlohmann::json &j, SupportedGADShapes &o) {
   from_json(j, o.m_value);
 }
 
@@ -80,4 +80,4 @@ void SupportedGADShapes::setEnumValue(
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

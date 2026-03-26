@@ -25,7 +25,7 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_AMF-TNLAssociationToRemoveItem */
 typedef struct Ngap_AMF_TNLAssociationToRemoveItem {
   Ngap_CPTransportLayerInformation_t aMF_TNLAssociationAddress;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

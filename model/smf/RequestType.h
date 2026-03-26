@@ -29,7 +29,7 @@ namespace oai::model::smf {
 /// INITIAL_EMERGENCY_REQUEST - EXISTING_EMERGENCY_PDU_SESSION
 /// </summary>
 class RequestType {
- public:
+public:
   RequestType();
   virtual ~RequestType();
 
@@ -38,12 +38,12 @@ class RequestType {
   /////////////////////////////////////////////
   /// RequestType members
 
-  friend void to_json(nlohmann::json& j, const RequestType& o);
-  friend void from_json(const nlohmann::json& j, RequestType& o);
+  friend void to_json(nlohmann::json &j, const RequestType &o);
+  friend void from_json(const nlohmann::json &j, RequestType &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* RequestType_H_ */

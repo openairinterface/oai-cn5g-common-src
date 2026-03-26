@@ -19,7 +19,7 @@
 namespace oai::udr::model {
 
 PfdDataForAppExt_allOf::PfdDataForAppExt_allOf() {
-  m_SuppFeat      = "";
+  m_SuppFeat = "";
   m_SuppFeatIsSet = false;
 }
 
@@ -29,30 +29,25 @@ void PfdDataForAppExt_allOf::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const PfdDataForAppExt_allOf& o) {
+void to_json(nlohmann::json &j, const PfdDataForAppExt_allOf &o) {
   j = nlohmann::json();
-  if (o.suppFeatIsSet()) j["suppFeat"] = o.m_SuppFeat;
+  if (o.suppFeatIsSet())
+    j["suppFeat"] = o.m_SuppFeat;
 }
 
-void from_json(const nlohmann::json& j, PfdDataForAppExt_allOf& o) {
+void from_json(const nlohmann::json &j, PfdDataForAppExt_allOf &o) {
   if (j.find("suppFeat") != j.end()) {
     j.at("suppFeat").get_to(o.m_SuppFeat);
     o.m_SuppFeatIsSet = true;
   }
 }
 
-std::string PfdDataForAppExt_allOf::getSuppFeat() const {
-  return m_SuppFeat;
-}
-void PfdDataForAppExt_allOf::setSuppFeat(std::string const& value) {
-  m_SuppFeat      = value;
+std::string PfdDataForAppExt_allOf::getSuppFeat() const { return m_SuppFeat; }
+void PfdDataForAppExt_allOf::setSuppFeat(std::string const &value) {
+  m_SuppFeat = value;
   m_SuppFeatIsSet = true;
 }
-bool PfdDataForAppExt_allOf::suppFeatIsSet() const {
-  return m_SuppFeatIsSet;
-}
-void PfdDataForAppExt_allOf::unsetSuppFeat() {
-  m_SuppFeatIsSet = false;
-}
+bool PfdDataForAppExt_allOf::suppFeatIsSet() const { return m_SuppFeatIsSet; }
+void PfdDataForAppExt_allOf::unsetSuppFeat() { m_SuppFeatIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

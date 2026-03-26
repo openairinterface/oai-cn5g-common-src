@@ -17,26 +17,26 @@ extern "C" {
 namespace oai::ngap {
 
 class SupportedTaItem {
- public:
+public:
   SupportedTaItem();
   virtual ~SupportedTaItem();
 
-  void setTac(const TAC& m_tac);
-  void getTac(TAC& m_tac) const;
+  void setTac(const TAC &m_tac);
+  void getTac(TAC &m_tac) const;
   TAC getTac() const;
 
-  void setBroadcastPlmnList(const std::vector<BroadcastPlmnItem>& list);
-  void getBroadcastPlmnList(std::vector<BroadcastPlmnItem>& list) const;
+  void setBroadcastPlmnList(const std::vector<BroadcastPlmnItem> &list);
+  void getBroadcastPlmnList(std::vector<BroadcastPlmnItem> &list) const;
   std::vector<BroadcastPlmnItem> getBroadcastPlmnList() const;
 
-  bool encode(Ngap_SupportedTAItem_t& ta) const;
-  bool decode(const Ngap_SupportedTAItem_t& ta);
+  bool encode(Ngap_SupportedTAItem_t &ta) const;
+  bool decode(const Ngap_SupportedTAItem_t &ta);
 
- private:
-  TAC m_Tac;                                           // Mandatory
-  std::vector<BroadcastPlmnItem> m_BroadcastPlmnList;  // Mandatory
+private:
+  TAC m_Tac;                                          // Mandatory
+  std::vector<BroadcastPlmnItem> m_BroadcastPlmnList; // Mandatory
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

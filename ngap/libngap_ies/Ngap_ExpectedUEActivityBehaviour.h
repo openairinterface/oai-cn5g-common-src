@@ -26,11 +26,11 @@ struct Ngap_ProtocolExtensionContainer;
 
 /* Ngap_ExpectedUEActivityBehaviour */
 typedef struct Ngap_ExpectedUEActivityBehaviour {
-  Ngap_ExpectedActivityPeriod_t* expectedActivityPeriod; /* OPTIONAL */
-  Ngap_ExpectedIdlePeriod_t* expectedIdlePeriod;         /* OPTIONAL */
-  Ngap_SourceOfUEActivityBehaviourInformation_t*
-      sourceOfUEActivityBehaviourInformation;            /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  Ngap_ExpectedActivityPeriod_t *expectedActivityPeriod; /* OPTIONAL */
+  Ngap_ExpectedIdlePeriod_t *expectedIdlePeriod;         /* OPTIONAL */
+  Ngap_SourceOfUEActivityBehaviourInformation_t
+      *sourceOfUEActivityBehaviourInformation;           /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

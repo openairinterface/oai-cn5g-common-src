@@ -19,10 +19,10 @@
 #ifndef GlobalRanNodeId_H_
 #define GlobalRanNodeId_H_
 
-#include <string>
 #include "GNbId.h"
 #include "PlmnId.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::common {
 
@@ -30,7 +30,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class GlobalRanNodeId {
- public:
+public:
   GlobalRanNodeId();
   virtual ~GlobalRanNodeId() = default;
 
@@ -44,16 +44,16 @@ class GlobalRanNodeId {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const GlobalRanNodeId& rhs) const;
-  bool operator!=(const GlobalRanNodeId& rhs) const;
+  bool operator==(const GlobalRanNodeId &rhs) const;
+  bool operator!=(const GlobalRanNodeId &rhs) const;
 
   /////////////////////////////////////////////
   /// GlobalRanNodeId members
@@ -62,61 +62,61 @@ class GlobalRanNodeId {
   ///
   /// </summary>
   oai::model::common::PlmnId getPlmnId() const;
-  void setPlmnId(oai::model::common::PlmnId const& value);
+  void setPlmnId(oai::model::common::PlmnId const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getN3IwfId() const;
-  void setN3IwfId(std::string const& value);
+  void setN3IwfId(std::string const &value);
   bool n3IwfIdIsSet() const;
   void unsetN3IwfId();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::GNbId getGNbId() const;
-  void setGNbId(oai::model::common::GNbId const& value);
+  void setGNbId(oai::model::common::GNbId const &value);
   bool gNbIdIsSet() const;
   void unsetGNbId();
   /// <summary>
   ///
   /// </summary>
   std::string getNgeNbId() const;
-  void setNgeNbId(std::string const& value);
+  void setNgeNbId(std::string const &value);
   bool ngeNbIdIsSet() const;
   void unsetNgeNbId();
   /// <summary>
   ///
   /// </summary>
   std::string getWagfId() const;
-  void setWagfId(std::string const& value);
+  void setWagfId(std::string const &value);
   bool wagfIdIsSet() const;
   void unsetWagfId();
   /// <summary>
   ///
   /// </summary>
   std::string getTngfId() const;
-  void setTngfId(std::string const& value);
+  void setTngfId(std::string const &value);
   bool tngfIdIsSet() const;
   void unsetTngfId();
   /// <summary>
   ///
   /// </summary>
   std::string getNid() const;
-  void setNid(std::string const& value);
+  void setNid(std::string const &value);
   bool nidIsSet() const;
   void unsetNid();
   /// <summary>
   ///
   /// </summary>
   std::string getENbId() const;
-  void setENbId(std::string const& value);
+  void setENbId(std::string const &value);
   bool eNbIdIsSet() const;
   void unsetENbId();
 
-  friend void to_json(nlohmann::json& j, const GlobalRanNodeId& o);
-  friend void from_json(const nlohmann::json& j, GlobalRanNodeId& o);
+  friend void to_json(nlohmann::json &j, const GlobalRanNodeId &o);
+  friend void from_json(const nlohmann::json &j, GlobalRanNodeId &o);
 
- protected:
+protected:
   oai::model::common::PlmnId m_PlmnId;
 
   std::string m_N3IwfId;
@@ -135,6 +135,6 @@ class GlobalRanNodeId {
   bool m_ENbIdIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* GlobalRanNodeId_H_ */

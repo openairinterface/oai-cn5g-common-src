@@ -9,9 +9,9 @@
 #include "Ngap_AreaScopeOfMDT-NR.h"
 
 #include "Ngap_CellBasedMDT-NR.h"
+#include "Ngap_ProtocolIE-SingleContainer.h"
 #include "Ngap_TABasedMDT.h"
 #include "Ngap_TAIBasedMDT.h"
-#include "Ngap_ProtocolIE-SingleContainer.h"
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 static asn_oer_constraints_t asn_OER_type_Ngap_AreaScopeOfMDT_NR_constr_1
     CC_NOTUSED = {{0, 0}, -1};
@@ -134,7 +134,7 @@ asn_CHOICE_specifics_t asn_SPC_Ngap_AreaScopeOfMDT_NR_specs_1 = {
     sizeof(struct Ngap_AreaScopeOfMDT_NR),
     offsetof(struct Ngap_AreaScopeOfMDT_NR, _asn_ctx),
     offsetof(struct Ngap_AreaScopeOfMDT_NR, present),
-    sizeof(((struct Ngap_AreaScopeOfMDT_NR*) 0)->present),
+    sizeof(((struct Ngap_AreaScopeOfMDT_NR *)0)->present),
     asn_MAP_Ngap_AreaScopeOfMDT_NR_tag2el_1,
     5, /* Count of tags in the map */
     0,

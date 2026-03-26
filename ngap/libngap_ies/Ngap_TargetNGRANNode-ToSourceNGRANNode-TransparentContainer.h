@@ -25,7 +25,7 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_TargetNGRANNode-ToSourceNGRANNode-TransparentContainer */
 typedef struct Ngap_TargetNGRANNode_ToSourceNGRANNode_TransparentContainer {
   Ngap_RRCContainer_t rRCContainer;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

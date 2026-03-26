@@ -28,10 +28,7 @@ asn_per_constraints_t asn_PER_type_Ngap_NB_IoT_DefaultPagingDRX_constr_1
           !defined(ASN_DISABLE_APER_SUPPORT) */
 static const asn_INTEGER_enum_map_t
     asn_MAP_Ngap_NB_IoT_DefaultPagingDRX_value2enum_1[] = {
-        {0, 5, "rf128"},
-        {1, 5, "rf256"},
-        {2, 5, "rf512"},
-        {3, 6, "rf1024"}
+        {0, 5, "rf128"}, {1, 5, "rf256"}, {2, 5, "rf512"}, {3, 6, "rf1024"}
         /* This list is extensible */
 };
 static const unsigned int asn_MAP_Ngap_NB_IoT_DefaultPagingDRX_enum2value_1[] =

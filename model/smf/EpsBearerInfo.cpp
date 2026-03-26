@@ -15,9 +15,7 @@
 
 namespace oai::model::smf {
 
-EpsBearerInfo::EpsBearerInfo() {
-  m_Ebi = 0;
-}
+EpsBearerInfo::EpsBearerInfo() { m_Ebi = 0; }
 
 EpsBearerInfo::~EpsBearerInfo() {}
 
@@ -25,36 +23,30 @@ void EpsBearerInfo::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const EpsBearerInfo& o) {
-  j                   = nlohmann::json();
-  j["ebi"]            = o.m_Ebi;
-  j["pgwS8uFteid"]    = o.m_PgwS8uFteid;
+void to_json(nlohmann::json &j, const EpsBearerInfo &o) {
+  j = nlohmann::json();
+  j["ebi"] = o.m_Ebi;
+  j["pgwS8uFteid"] = o.m_PgwS8uFteid;
   j["bearerLevelQoS"] = o.m_BearerLevelQoS;
 }
 
-void from_json(const nlohmann::json& j, EpsBearerInfo& o) {
+void from_json(const nlohmann::json &j, EpsBearerInfo &o) {
   j.at("ebi").get_to(o.m_Ebi);
   j.at("pgwS8uFteid").get_to(o.m_PgwS8uFteid);
   j.at("bearerLevelQoS").get_to(o.m_BearerLevelQoS);
 }
 
-int32_t EpsBearerInfo::getEbi() const {
-  return m_Ebi;
-}
-void EpsBearerInfo::setEbi(int32_t const value) {
-  m_Ebi = value;
-}
-std::string EpsBearerInfo::getPgwS8uFteid() const {
-  return m_PgwS8uFteid;
-}
-void EpsBearerInfo::setPgwS8uFteid(std::string const& value) {
+int32_t EpsBearerInfo::getEbi() const { return m_Ebi; }
+void EpsBearerInfo::setEbi(int32_t const value) { m_Ebi = value; }
+std::string EpsBearerInfo::getPgwS8uFteid() const { return m_PgwS8uFteid; }
+void EpsBearerInfo::setPgwS8uFteid(std::string const &value) {
   m_PgwS8uFteid = value;
 }
 std::string EpsBearerInfo::getBearerLevelQoS() const {
   return m_BearerLevelQoS;
 }
-void EpsBearerInfo::setBearerLevelQoS(std::string const& value) {
+void EpsBearerInfo::setBearerLevelQoS(std::string const &value) {
   m_BearerLevelQoS = value;
 }
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

@@ -13,8 +13,8 @@
 
 #include "NullValue.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::common {
 
@@ -27,13 +27,13 @@ void NullValue::validate() const {
   }
 }
 
-bool NullValue::validate(std::stringstream& msg) const {
+bool NullValue::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool NullValue::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool NullValue::validate(std::stringstream &msg,
+                         const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "NullValue" : pathPrefix;
 
   if (m_value == NullValue::eNullValue::INVALID_VALUE_OPENAPI_GENERATED) {
@@ -44,30 +44,30 @@ bool NullValue::validate(
   return success;
 }
 
-bool NullValue::operator==(const NullValue& rhs) const {
+bool NullValue::operator==(const NullValue &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool NullValue::operator!=(const NullValue& rhs) const {
+bool NullValue::operator!=(const NullValue &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const NullValue& o) {
+void to_json(nlohmann::json &j, const NullValue &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case NullValue::eNullValue::INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case NullValue::eNullValue::_NULL:
-      j = "null";
-      break;
+  case NullValue::eNullValue::INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case NullValue::eNullValue::_NULL:
+    j = "null";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, NullValue& o) {
+void from_json(const nlohmann::json &j, NullValue &o) {
   auto s = j.get<std::string>();
   if (s == "null") {
     o.setValue(NullValue::eNullValue::_NULL);
@@ -80,11 +80,7 @@ void from_json(const nlohmann::json& j, NullValue& o) {
   }
 }
 
-NullValue::eNullValue NullValue::getValue() const {
-  return m_value;
-}
-void NullValue::setValue(NullValue::eNullValue value) {
-  m_value = value;
-}
+NullValue::eNullValue NullValue::getValue() const { return m_value; }
+void NullValue::setValue(NullValue::eNullValue value) { m_value = value; }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

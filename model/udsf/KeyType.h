@@ -27,7 +27,7 @@ namespace oai::model::udsf {
 /// Represents the type of a key.
 /// </summary>
 class KeyType {
- public:
+public:
   KeyType();
   virtual ~KeyType() = default;
 
@@ -41,31 +41,31 @@ class KeyType {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const KeyType& rhs) const;
-  bool operator!=(const KeyType& rhs) const;
+  bool operator==(const KeyType &rhs) const;
+  bool operator!=(const KeyType &rhs) const;
 
-  void get(std::string& kt) const;
+  void get(std::string &kt) const;
   std::string get() const;
-  void set(const std::string& kt);
+  void set(const std::string &kt);
 
   /////////////////////////////////////////////
   /// KeyType members
 
-  friend void to_json(nlohmann::json& j, const KeyType& o);
-  friend void from_json(const nlohmann::json& j, KeyType& o);
+  friend void to_json(nlohmann::json &j, const KeyType &o);
+  friend void from_json(const nlohmann::json &j, KeyType &o);
 
- protected:
+protected:
   std::string value;
 };
 
-}  // namespace oai::model::udsf
+} // namespace oai::model::udsf
 
 #endif /* KeyType_H_ */

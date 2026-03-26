@@ -12,20 +12,20 @@ extern "C" {
 namespace oai::ngap {
 
 class TAC {
- public:
+public:
   TAC();
   virtual ~TAC();
 
   uint32_t get() const;
-  void set(const uint32_t& tac);
+  void set(const uint32_t &tac);
 
-  bool encode(Ngap_TAC_t&) const;
-  bool decode(const Ngap_TAC_t& m_tac);
+  bool encode(Ngap_TAC_t &) const;
+  bool decode(const Ngap_TAC_t &m_tac);
 
- private:
+private:
   uint32_t m_Tac : 24;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

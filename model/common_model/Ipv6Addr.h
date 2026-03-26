@@ -27,7 +27,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class Ipv6Addr {
- public:
+public:
   Ipv6Addr();
   virtual ~Ipv6Addr() = default;
 
@@ -41,31 +41,31 @@ class Ipv6Addr {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  virtual bool validate(
-      std::stringstream& msg, const std::string& pathPrefix) const;
+  virtual bool validate(std::stringstream &msg,
+                        const std::string &pathPrefix) const;
 
-  bool operator==(const Ipv6Addr& rhs) const;
-  bool operator!=(const Ipv6Addr& rhs) const;
+  bool operator==(const Ipv6Addr &rhs) const;
+  bool operator!=(const Ipv6Addr &rhs) const;
 
   /////////////////////////////////////////////
   /// Ipv6Addr members
 
-  friend void to_json(nlohmann::json& j, const Ipv6Addr& o);
-  friend void from_json(const nlohmann::json& j, Ipv6Addr& o);
+  friend void to_json(nlohmann::json &j, const Ipv6Addr &o);
+  friend void from_json(const nlohmann::json &j, Ipv6Addr &o);
 
   std::string getIpv6Addr() const;
-  void setIpv6Addr(std::string const& value);
+  void setIpv6Addr(std::string const &value);
 
- protected:
+protected:
   std::string m_Ipv6Addr;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* Ipv6Addr_H_ */

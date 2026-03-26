@@ -19,10 +19,10 @@
 #ifndef AcceptableServiceInfo_H_
 #define AcceptableServiceInfo_H_
 
-#include <string>
-#include <map>
 #include "MediaComponent.h"
+#include <map>
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::pcf {
 
@@ -30,7 +30,7 @@ namespace oai::model::pcf {
 /// Indicates the maximum bandwidth that shall be authorized by the PCF.
 /// </summary>
 class AcceptableServiceInfo {
- public:
+public:
   AcceptableServiceInfo();
   virtual ~AcceptableServiceInfo() = default;
 
@@ -44,16 +44,16 @@ class AcceptableServiceInfo {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const AcceptableServiceInfo& rhs) const;
-  bool operator!=(const AcceptableServiceInfo& rhs) const;
+  bool operator==(const AcceptableServiceInfo &rhs) const;
+  bool operator!=(const AcceptableServiceInfo &rhs) const;
 
   /////////////////////////////////////////////
   /// AcceptableServiceInfo members
@@ -63,10 +63,10 @@ class AcceptableServiceInfo {
   /// each media component of the map. The key of the map is the media component
   /// number.
   /// </summary>
-  std::map<std::string, oai::model::pcf::MediaComponent> getAccBwMedComps()
-      const;
+  std::map<std::string, oai::model::pcf::MediaComponent>
+  getAccBwMedComps() const;
   void setAccBwMedComps(
-      std::map<std::string, oai::model::pcf::MediaComponent> const& value);
+      std::map<std::string, oai::model::pcf::MediaComponent> const &value);
   bool accBwMedCompsIsSet() const;
   void unsetAccBwMedComps();
   /// <summary>
@@ -76,7 +76,7 @@ class AcceptableServiceInfo {
   /// standard symbol \&quot;k\&quot;.
   /// </summary>
   std::string getMarBwUl() const;
-  void setMarBwUl(std::string const& value);
+  void setMarBwUl(std::string const &value);
   bool marBwUlIsSet() const;
   void unsetMarBwUl();
   /// <summary>
@@ -86,14 +86,14 @@ class AcceptableServiceInfo {
   /// standard symbol \&quot;k\&quot;.
   /// </summary>
   std::string getMarBwDl() const;
-  void setMarBwDl(std::string const& value);
+  void setMarBwDl(std::string const &value);
   bool marBwDlIsSet() const;
   void unsetMarBwDl();
 
-  friend void to_json(nlohmann::json& j, const AcceptableServiceInfo& o);
-  friend void from_json(const nlohmann::json& j, AcceptableServiceInfo& o);
+  friend void to_json(nlohmann::json &j, const AcceptableServiceInfo &o);
+  friend void from_json(const nlohmann::json &j, AcceptableServiceInfo &o);
 
- protected:
+protected:
   std::map<std::string, oai::model::pcf::MediaComponent> m_AccBwMedComps;
   bool m_AccBwMedCompsIsSet;
   std::string m_MarBwUl;
@@ -102,6 +102,6 @@ class AcceptableServiceInfo {
   bool m_MarBwDlIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* AcceptableServiceInfo_H_ */

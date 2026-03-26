@@ -13,8 +13,8 @@
 
 #include "DnaiChangeType_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::common {
 
@@ -27,12 +27,12 @@ void DnaiChangeType_anyOf::validate() const {
   }
 }
 
-bool DnaiChangeType_anyOf::validate(std::stringstream& msg) const {
+bool DnaiChangeType_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool DnaiChangeType_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool DnaiChangeType_anyOf::validate(std::stringstream &msg,
+                                    const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "DnaiChangeType_anyOf" : pathPrefix;
@@ -46,37 +46,37 @@ bool DnaiChangeType_anyOf::validate(
   return success;
 }
 
-bool DnaiChangeType_anyOf::operator==(const DnaiChangeType_anyOf& rhs) const {
+bool DnaiChangeType_anyOf::operator==(const DnaiChangeType_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
-bool DnaiChangeType_anyOf::operator!=(const DnaiChangeType_anyOf& rhs) const {
+bool DnaiChangeType_anyOf::operator!=(const DnaiChangeType_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const DnaiChangeType_anyOf& o) {
+void to_json(nlohmann::json &j, const DnaiChangeType_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case DnaiChangeType_anyOf::eDnaiChangeType_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case DnaiChangeType_anyOf::eDnaiChangeType_anyOf::EARLY:
-      j = "EARLY";
-      break;
-    case DnaiChangeType_anyOf::eDnaiChangeType_anyOf::EARLY_LATE:
-      j = "EARLY_LATE";
-      break;
-    case DnaiChangeType_anyOf::eDnaiChangeType_anyOf::LATE:
-      j = "LATE";
-      break;
+  case DnaiChangeType_anyOf::eDnaiChangeType_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case DnaiChangeType_anyOf::eDnaiChangeType_anyOf::EARLY:
+    j = "EARLY";
+    break;
+  case DnaiChangeType_anyOf::eDnaiChangeType_anyOf::EARLY_LATE:
+    j = "EARLY_LATE";
+    break;
+  case DnaiChangeType_anyOf::eDnaiChangeType_anyOf::LATE:
+    j = "LATE";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, DnaiChangeType_anyOf& o) {
+void from_json(const nlohmann::json &j, DnaiChangeType_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "EARLY") {
     o.setValue(DnaiChangeType_anyOf::eDnaiChangeType_anyOf::EARLY);
@@ -93,8 +93,8 @@ void from_json(const nlohmann::json& j, DnaiChangeType_anyOf& o) {
   }
 }
 
-DnaiChangeType_anyOf::eDnaiChangeType_anyOf DnaiChangeType_anyOf::getValue()
-    const {
+DnaiChangeType_anyOf::eDnaiChangeType_anyOf
+DnaiChangeType_anyOf::getValue() const {
   return m_value;
 }
 void DnaiChangeType_anyOf::setValue(
@@ -102,4 +102,4 @@ void DnaiChangeType_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

@@ -8,6 +8,6 @@
 #include <stdint.h>
 
 constexpr int KEncodeDecodeError = -1;
-constexpr int KEncodeDecodeOK    = 0;
+constexpr int KEncodeDecodeOK = 0;
 
 #endif /* FILE_COMMON_DEFS_HPP_SEEN */

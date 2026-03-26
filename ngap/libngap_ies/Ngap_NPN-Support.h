@@ -34,7 +34,7 @@ typedef struct Ngap_NPN_Support {
   Ngap_NPN_Support_PR present;
   union Ngap_NPN_Support_u {
     Ngap_NID_t sNPN;
-    struct Ngap_ProtocolIE_SingleContainer* choice_Extensions;
+    struct Ngap_ProtocolIE_SingleContainer *choice_Extensions;
   } choice;
 
   /* Context for parsing across buffer boundaries */

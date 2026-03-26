@@ -27,7 +27,7 @@ namespace oai::model::nrf {
 ///
 /// </summary>
 class N1MessageClass {
- public:
+public:
   N1MessageClass();
   virtual ~N1MessageClass();
 
@@ -36,12 +36,12 @@ class N1MessageClass {
   /////////////////////////////////////////////
   /// N1MessageClass members
 
-  friend void to_json(nlohmann::json& j, const N1MessageClass& o);
-  friend void from_json(const nlohmann::json& j, N1MessageClass& o);
+  friend void to_json(nlohmann::json &j, const N1MessageClass &o);
+  friend void from_json(const nlohmann::json &j, N1MessageClass &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::nrf
+} // namespace oai::model::nrf
 
 #endif /* N1MessageClass_H_ */

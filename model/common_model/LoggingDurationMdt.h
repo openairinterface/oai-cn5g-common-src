@@ -28,7 +28,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class LoggingDurationMdt {
- public:
+public:
   LoggingDurationMdt();
   virtual ~LoggingDurationMdt() = default;
 
@@ -42,16 +42,16 @@ class LoggingDurationMdt {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const LoggingDurationMdt& rhs) const;
-  bool operator!=(const LoggingDurationMdt& rhs) const;
+  bool operator==(const LoggingDurationMdt &rhs) const;
+  bool operator!=(const LoggingDurationMdt &rhs) const;
 
   /////////////////////////////////////////////
   /// LoggingDurationMdt members
@@ -60,15 +60,15 @@ class LoggingDurationMdt {
   void setValue(LoggingDurationMdt_anyOf value);
   LoggingDurationMdt_anyOf::eLoggingDurationMdt_anyOf getEnumValue() const;
   void setEnumValue(LoggingDurationMdt_anyOf::eLoggingDurationMdt_anyOf value);
-  friend void to_json(nlohmann::json& j, const LoggingDurationMdt& o);
-  friend void from_json(const nlohmann::json& j, LoggingDurationMdt& o);
-  friend void to_json(nlohmann::json& j, const LoggingDurationMdt_anyOf& o);
-  friend void from_json(const nlohmann::json& j, LoggingDurationMdt_anyOf& o);
+  friend void to_json(nlohmann::json &j, const LoggingDurationMdt &o);
+  friend void from_json(const nlohmann::json &j, LoggingDurationMdt &o);
+  friend void to_json(nlohmann::json &j, const LoggingDurationMdt_anyOf &o);
+  friend void from_json(const nlohmann::json &j, LoggingDurationMdt_anyOf &o);
 
- protected:
+protected:
   LoggingDurationMdt_anyOf m_value;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* LoggingDurationMdt_H_ */

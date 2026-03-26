@@ -13,8 +13,8 @@
 
 #include "ReportIntervalNrMdt_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::common {
 
@@ -27,12 +27,12 @@ void ReportIntervalNrMdt_anyOf::validate() const {
   }
 }
 
-bool ReportIntervalNrMdt_anyOf::validate(std::stringstream& msg) const {
+bool ReportIntervalNrMdt_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ReportIntervalNrMdt_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ReportIntervalNrMdt_anyOf::validate(std::stringstream &msg,
+                                         const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ReportIntervalNrMdt_anyOf" : pathPrefix;
@@ -47,74 +47,74 @@ bool ReportIntervalNrMdt_anyOf::validate(
 }
 
 bool ReportIntervalNrMdt_anyOf::operator==(
-    const ReportIntervalNrMdt_anyOf& rhs) const {
+    const ReportIntervalNrMdt_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool ReportIntervalNrMdt_anyOf::operator!=(
-    const ReportIntervalNrMdt_anyOf& rhs) const {
+    const ReportIntervalNrMdt_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ReportIntervalNrMdt_anyOf& o) {
+void to_json(nlohmann::json &j, const ReportIntervalNrMdt_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case ReportIntervalNrMdt_anyOf::eReportIntervalNrMdt_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case ReportIntervalNrMdt_anyOf::eReportIntervalNrMdt_anyOf::_120:
-      j = "120";
-      break;
-    case ReportIntervalNrMdt_anyOf::eReportIntervalNrMdt_anyOf::_240:
-      j = "240";
-      break;
-    case ReportIntervalNrMdt_anyOf::eReportIntervalNrMdt_anyOf::_480:
-      j = "480";
-      break;
-    case ReportIntervalNrMdt_anyOf::eReportIntervalNrMdt_anyOf::_640:
-      j = "640";
-      break;
-    case ReportIntervalNrMdt_anyOf::eReportIntervalNrMdt_anyOf::_1024:
-      j = "1024";
-      break;
-    case ReportIntervalNrMdt_anyOf::eReportIntervalNrMdt_anyOf::_2048:
-      j = "2048";
-      break;
-    case ReportIntervalNrMdt_anyOf::eReportIntervalNrMdt_anyOf::_5120:
-      j = "5120";
-      break;
-    case ReportIntervalNrMdt_anyOf::eReportIntervalNrMdt_anyOf::_10240:
-      j = "10240";
-      break;
-    case ReportIntervalNrMdt_anyOf::eReportIntervalNrMdt_anyOf::_20480:
-      j = "20480";
-      break;
-    case ReportIntervalNrMdt_anyOf::eReportIntervalNrMdt_anyOf::_40960:
-      j = "40960";
-      break;
-    case ReportIntervalNrMdt_anyOf::eReportIntervalNrMdt_anyOf::_60000:
-      j = "60000";
-      break;
-    case ReportIntervalNrMdt_anyOf::eReportIntervalNrMdt_anyOf::_360000:
-      j = "360000";
-      break;
-    case ReportIntervalNrMdt_anyOf::eReportIntervalNrMdt_anyOf::_720000:
-      j = "720000";
-      break;
-    case ReportIntervalNrMdt_anyOf::eReportIntervalNrMdt_anyOf::_1800000:
-      j = "1800000";
-      break;
-    case ReportIntervalNrMdt_anyOf::eReportIntervalNrMdt_anyOf::_3600000:
-      j = "3600000";
-      break;
+  case ReportIntervalNrMdt_anyOf::eReportIntervalNrMdt_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case ReportIntervalNrMdt_anyOf::eReportIntervalNrMdt_anyOf::_120:
+    j = "120";
+    break;
+  case ReportIntervalNrMdt_anyOf::eReportIntervalNrMdt_anyOf::_240:
+    j = "240";
+    break;
+  case ReportIntervalNrMdt_anyOf::eReportIntervalNrMdt_anyOf::_480:
+    j = "480";
+    break;
+  case ReportIntervalNrMdt_anyOf::eReportIntervalNrMdt_anyOf::_640:
+    j = "640";
+    break;
+  case ReportIntervalNrMdt_anyOf::eReportIntervalNrMdt_anyOf::_1024:
+    j = "1024";
+    break;
+  case ReportIntervalNrMdt_anyOf::eReportIntervalNrMdt_anyOf::_2048:
+    j = "2048";
+    break;
+  case ReportIntervalNrMdt_anyOf::eReportIntervalNrMdt_anyOf::_5120:
+    j = "5120";
+    break;
+  case ReportIntervalNrMdt_anyOf::eReportIntervalNrMdt_anyOf::_10240:
+    j = "10240";
+    break;
+  case ReportIntervalNrMdt_anyOf::eReportIntervalNrMdt_anyOf::_20480:
+    j = "20480";
+    break;
+  case ReportIntervalNrMdt_anyOf::eReportIntervalNrMdt_anyOf::_40960:
+    j = "40960";
+    break;
+  case ReportIntervalNrMdt_anyOf::eReportIntervalNrMdt_anyOf::_60000:
+    j = "60000";
+    break;
+  case ReportIntervalNrMdt_anyOf::eReportIntervalNrMdt_anyOf::_360000:
+    j = "360000";
+    break;
+  case ReportIntervalNrMdt_anyOf::eReportIntervalNrMdt_anyOf::_720000:
+    j = "720000";
+    break;
+  case ReportIntervalNrMdt_anyOf::eReportIntervalNrMdt_anyOf::_1800000:
+    j = "1800000";
+    break;
+  case ReportIntervalNrMdt_anyOf::eReportIntervalNrMdt_anyOf::_3600000:
+    j = "3600000";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, ReportIntervalNrMdt_anyOf& o) {
+void from_json(const nlohmann::json &j, ReportIntervalNrMdt_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "120") {
     o.setValue(ReportIntervalNrMdt_anyOf::eReportIntervalNrMdt_anyOf::_120);
@@ -164,4 +164,4 @@ void ReportIntervalNrMdt_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

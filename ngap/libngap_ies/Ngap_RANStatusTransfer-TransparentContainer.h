@@ -25,7 +25,7 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_RANStatusTransfer-TransparentContainer */
 typedef struct Ngap_RANStatusTransfer_TransparentContainer {
   Ngap_DRBsSubjectToStatusTransferList_t dRBsSubjectToStatusTransferList;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

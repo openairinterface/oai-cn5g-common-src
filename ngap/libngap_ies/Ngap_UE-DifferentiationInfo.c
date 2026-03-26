@@ -8,8 +8,8 @@
 
 #include "Ngap_UE-DifferentiationInfo.h"
 
-#include "Ngap_ScheduledCommunicationTime.h"
 #include "Ngap_ProtocolExtensionContainer.h"
+#include "Ngap_ScheduledCommunicationTime.h"
 /*
  * This type is implemented using NativeEnumerated,
  * so here we adjust the DEF accordingly.
@@ -27,26 +27,24 @@
  * so here we adjust the DEF accordingly.
  */
 static int memb_Ngap_periodicTime_constraint_1(
-    const asn_TYPE_descriptor_t* td, const void* sptr,
-    asn_app_constraint_failed_f* ctfailcb, void* app_key) {
+    const asn_TYPE_descriptor_t *td, const void *sptr,
+    asn_app_constraint_failed_f *ctfailcb, void *app_key) {
   long value;
 
   if (!sptr) {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: value not given (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: value not given (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 
-  value = *(const long*) sptr;
+  value = *(const long *)sptr;
 
   if ((value >= 1L && value <= 3600L)) {
     /* Constraint check succeeded */
     return 0;
   } else {
-    ASN__CTFAIL(
-        app_key, td, sptr, "%s: constraint failed (%s:%d)", td->name, __FILE__,
-        __LINE__);
+    ASN__CTFAIL(app_key, td, sptr, "%s: constraint failed (%s:%d)", td->name,
+                __FILE__, __LINE__);
     return -1;
   }
 }
@@ -54,8 +52,7 @@ static int memb_Ngap_periodicTime_constraint_1(
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 static asn_oer_constraints_t
     asn_OER_type_Ngap_periodicCommunicationIndicator_constr_2 CC_NOTUSED = {
-        {0, 0},
-        -1};
+        {0, 0}, -1};
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 static asn_per_constraints_t
@@ -125,8 +122,7 @@ static asn_per_constraints_t asn_PER_memb_Ngap_periodicTime_constr_6
           !defined(ASN_DISABLE_APER_SUPPORT) */
 static const asn_INTEGER_enum_map_t
     asn_MAP_Ngap_periodicCommunicationIndicator_value2enum_2[] = {
-        {0, 12, "periodically"},
-        {1, 8, "ondemand"}
+        {0, 12, "periodically"}, {1, 8, "ondemand"}
         /* This list is extensible */
 };
 static const unsigned int
@@ -182,8 +178,7 @@ static /* Use -fall-defs-global to expose */
 
 static const asn_INTEGER_enum_map_t
     asn_MAP_Ngap_stationaryIndication_value2enum_8[] = {
-        {0, 10, "stationary"},
-        {1, 6, "mobile"}
+        {0, 10, "stationary"}, {1, 6, "mobile"}
         /* This list is extensible */
 };
 static const unsigned int asn_MAP_Ngap_stationaryIndication_enum2value_8[] = {
@@ -331,8 +326,8 @@ static /* Use -fall-defs-global to expose */
 asn_TYPE_member_t asn_MBR_Ngap_UE_DifferentiationInfo_1[] = {
     {ATF_POINTER,
      7,
-     offsetof(
-         struct Ngap_UE_DifferentiationInfo, periodicCommunicationIndicator),
+     offsetof(struct Ngap_UE_DifferentiationInfo,
+              periodicCommunicationIndicator),
      (ASN_TAG_CLASS_CONTEXT | (0 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_periodicCommunicationIndicator_2,

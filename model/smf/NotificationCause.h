@@ -29,7 +29,7 @@ namespace oai::model::smf {
 /// UP_SEC_NOT_FULFILLED
 /// </summary>
 class NotificationCause {
- public:
+public:
   NotificationCause();
   virtual ~NotificationCause();
 
@@ -38,12 +38,12 @@ class NotificationCause {
   /////////////////////////////////////////////
   /// NotificationCause members
 
-  friend void to_json(nlohmann::json& j, const NotificationCause& o);
-  friend void from_json(const nlohmann::json& j, NotificationCause& o);
+  friend void to_json(nlohmann::json &j, const NotificationCause &o);
+  friend void from_json(const nlohmann::json &j, NotificationCause &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* NotificationCause_H_ */

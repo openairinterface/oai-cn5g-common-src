@@ -26,20 +26,20 @@ void AmfDeregInfo::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const AmfDeregInfo& o) {
-  j                = nlohmann::json();
+void to_json(nlohmann::json &j, const AmfDeregInfo &o) {
+  j = nlohmann::json();
   j["deregReason"] = o.m_DeregReason;
 }
 
-void from_json(const nlohmann::json& j, AmfDeregInfo& o) {
+void from_json(const nlohmann::json &j, AmfDeregInfo &o) {
   j.at("deregReason").get_to(o.m_DeregReason);
 }
 
 DeregistrationReason AmfDeregInfo::getDeregReason() const {
   return m_DeregReason;
 }
-void AmfDeregInfo::setDeregReason(DeregistrationReason const& value) {
+void AmfDeregInfo::setDeregReason(DeregistrationReason const &value) {
   m_DeregReason = value;
 }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

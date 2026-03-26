@@ -12,8 +12,7 @@
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 static asn_oer_constraints_t
     asn_OER_type_Ngap_MeasurementThresholdL1LoggedMDT_constr_1 CC_NOTUSED = {
-        {0, 0},
-        -1};
+        {0, 0}, -1};
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
 asn_per_constraints_t asn_PER_type_Ngap_MeasurementThresholdL1LoggedMDT_constr_1
@@ -28,8 +27,8 @@ asn_per_constraints_t asn_PER_type_Ngap_MeasurementThresholdL1LoggedMDT_constr_1
 asn_TYPE_member_t asn_MBR_Ngap_MeasurementThresholdL1LoggedMDT_1[] = {
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_MeasurementThresholdL1LoggedMDT, choice.threshold_RSRP),
+     offsetof(struct Ngap_MeasurementThresholdL1LoggedMDT,
+              choice.threshold_RSRP),
      (ASN_TAG_CLASS_CONTEXT | (0 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_Threshold_RSRP,
@@ -48,8 +47,8 @@ asn_TYPE_member_t asn_MBR_Ngap_MeasurementThresholdL1LoggedMDT_1[] = {
      "threshold-RSRP"},
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_MeasurementThresholdL1LoggedMDT, choice.threshold_RSRQ),
+     offsetof(struct Ngap_MeasurementThresholdL1LoggedMDT,
+              choice.threshold_RSRQ),
      (ASN_TAG_CLASS_CONTEXT | (1 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_Threshold_RSRQ,
@@ -68,8 +67,8 @@ asn_TYPE_member_t asn_MBR_Ngap_MeasurementThresholdL1LoggedMDT_1[] = {
      "threshold-RSRQ"},
     {ATF_POINTER,
      0,
-     offsetof(
-         struct Ngap_MeasurementThresholdL1LoggedMDT, choice.choice_Extensions),
+     offsetof(struct Ngap_MeasurementThresholdL1LoggedMDT,
+              choice.choice_Extensions),
      (ASN_TAG_CLASS_CONTEXT | (2 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_ProtocolIE_SingleContainer_9618P14,
@@ -97,7 +96,7 @@ asn_CHOICE_specifics_t asn_SPC_Ngap_MeasurementThresholdL1LoggedMDT_specs_1 = {
     sizeof(struct Ngap_MeasurementThresholdL1LoggedMDT),
     offsetof(struct Ngap_MeasurementThresholdL1LoggedMDT, _asn_ctx),
     offsetof(struct Ngap_MeasurementThresholdL1LoggedMDT, present),
-    sizeof(((struct Ngap_MeasurementThresholdL1LoggedMDT*) 0)->present),
+    sizeof(((struct Ngap_MeasurementThresholdL1LoggedMDT *)0)->present),
     asn_MAP_Ngap_MeasurementThresholdL1LoggedMDT_tag2el_1,
     3, /* Count of tags in the map */
     0,

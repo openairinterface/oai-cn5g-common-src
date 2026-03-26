@@ -30,7 +30,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class EventType {
- public:
+public:
   EventType();
   virtual ~EventType();
 
@@ -39,12 +39,12 @@ class EventType {
   /////////////////////////////////////////////
   /// EventType members
 
-  friend void to_json(nlohmann::json& j, const EventType& o);
-  friend void from_json(const nlohmann::json& j, EventType& o);
+  friend void to_json(nlohmann::json &j, const EventType &o);
+  friend void from_json(const nlohmann::json &j, EventType &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* EventType_H_ */

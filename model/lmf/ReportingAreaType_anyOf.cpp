@@ -13,8 +13,8 @@
 
 #include "ReportingAreaType_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::lmf {
 
@@ -27,12 +27,12 @@ void ReportingAreaType_anyOf::validate() const {
   }
 }
 
-bool ReportingAreaType_anyOf::validate(std::stringstream& msg) const {
+bool ReportingAreaType_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ReportingAreaType_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ReportingAreaType_anyOf::validate(std::stringstream &msg,
+                                       const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ReportingAreaType_anyOf" : pathPrefix;
@@ -47,45 +47,45 @@ bool ReportingAreaType_anyOf::validate(
 }
 
 bool ReportingAreaType_anyOf::operator==(
-    const ReportingAreaType_anyOf& rhs) const {
+    const ReportingAreaType_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool ReportingAreaType_anyOf::operator!=(
-    const ReportingAreaType_anyOf& rhs) const {
+    const ReportingAreaType_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ReportingAreaType_anyOf& o) {
+void to_json(nlohmann::json &j, const ReportingAreaType_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case ReportingAreaType_anyOf::eReportingAreaType_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case ReportingAreaType_anyOf::eReportingAreaType_anyOf::
-        EPS_TRACKING_AREA_IDENTITY:
-      j = "EPS_TRACKING_AREA_IDENTITY";
-      break;
-    case ReportingAreaType_anyOf::eReportingAreaType_anyOf::
-        E_UTRAN_CELL_GLOBAL_IDENTIFICATION:
-      j = "E-UTRAN_CELL_GLOBAL_IDENTIFICATION";
-      break;
-    case ReportingAreaType_anyOf::eReportingAreaType_anyOf::
-        _5GS_TRACKING_AREA_IDENTITY:
-      j = "5GS_TRACKING_AREA_IDENTITY";
-      break;
-    case ReportingAreaType_anyOf::eReportingAreaType_anyOf::
-        NR_CELL_GLOBAL_IDENTITY:
-      j = "NR_CELL_GLOBAL_IDENTITY";
-      break;
+  case ReportingAreaType_anyOf::eReportingAreaType_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case ReportingAreaType_anyOf::eReportingAreaType_anyOf::
+      EPS_TRACKING_AREA_IDENTITY:
+    j = "EPS_TRACKING_AREA_IDENTITY";
+    break;
+  case ReportingAreaType_anyOf::eReportingAreaType_anyOf::
+      E_UTRAN_CELL_GLOBAL_IDENTIFICATION:
+    j = "E-UTRAN_CELL_GLOBAL_IDENTIFICATION";
+    break;
+  case ReportingAreaType_anyOf::eReportingAreaType_anyOf::
+      _5GS_TRACKING_AREA_IDENTITY:
+    j = "5GS_TRACKING_AREA_IDENTITY";
+    break;
+  case ReportingAreaType_anyOf::eReportingAreaType_anyOf::
+      NR_CELL_GLOBAL_IDENTITY:
+    j = "NR_CELL_GLOBAL_IDENTITY";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, ReportingAreaType_anyOf& o) {
+void from_json(const nlohmann::json &j, ReportingAreaType_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "EPS_TRACKING_AREA_IDENTITY") {
     o.setValue(ReportingAreaType_anyOf::eReportingAreaType_anyOf::
@@ -117,4 +117,4 @@ void ReportingAreaType_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

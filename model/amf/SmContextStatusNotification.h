@@ -28,7 +28,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class SmContextStatusNotification {
- public:
+public:
   SmContextStatusNotification();
   virtual ~SmContextStatusNotification();
 
@@ -41,16 +41,16 @@ class SmContextStatusNotification {
   ///
   /// </summary>
   StatusInfo getStatusInfo() const;
-  void setStatusInfo(StatusInfo const& value);
+  void setStatusInfo(StatusInfo const &value);
 
-  friend void to_json(nlohmann::json& j, const SmContextStatusNotification& o);
-  friend void from_json(
-      const nlohmann::json& j, SmContextStatusNotification& o);
+  friend void to_json(nlohmann::json &j, const SmContextStatusNotification &o);
+  friend void from_json(const nlohmann::json &j,
+                        SmContextStatusNotification &o);
 
- protected:
+protected:
   StatusInfo m_StatusInfo;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* SmContextStatusNotification_H_ */

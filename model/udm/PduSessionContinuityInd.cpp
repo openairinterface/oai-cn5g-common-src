@@ -26,10 +26,10 @@ void PduSessionContinuityInd::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const PduSessionContinuityInd& o) {
+void to_json(nlohmann::json &j, const PduSessionContinuityInd &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, PduSessionContinuityInd& o) {}
+void from_json(const nlohmann::json &j, PduSessionContinuityInd &o) {}
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

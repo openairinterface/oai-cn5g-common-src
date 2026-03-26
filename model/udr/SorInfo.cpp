@@ -20,12 +20,12 @@ namespace oai::udr::model {
 
 SorInfo::SorInfo() {
   m_SteeringContainerIsSet = false;
-  m_AckInd                 = false;
-  m_SorMacIausf            = "";
-  m_SorMacIausfIsSet       = false;
-  m_Countersor             = "";
-  m_CountersorIsSet        = false;
-  m_ProvisioningTime       = "";
+  m_AckInd = false;
+  m_SorMacIausf = "";
+  m_SorMacIausfIsSet = false;
+  m_Countersor = "";
+  m_CountersorIsSet = false;
+  m_ProvisioningTime = "";
 }
 
 SorInfo::~SorInfo() {}
@@ -34,17 +34,19 @@ void SorInfo::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const SorInfo& o) {
+void to_json(nlohmann::json &j, const SorInfo &o) {
   j = nlohmann::json();
   if (o.steeringContainerIsSet())
     j["steeringContainer"] = o.m_SteeringContainer;
   j["ackInd"] = o.m_AckInd;
-  if (o.sorMacIausfIsSet()) j["sorMacIausf"] = o.m_SorMacIausf;
-  if (o.countersorIsSet()) j["countersor"] = o.m_Countersor;
+  if (o.sorMacIausfIsSet())
+    j["sorMacIausf"] = o.m_SorMacIausf;
+  if (o.countersorIsSet())
+    j["countersor"] = o.m_Countersor;
   j["provisioningTime"] = o.m_ProvisioningTime;
 }
 
-void from_json(const nlohmann::json& j, SorInfo& o) {
+void from_json(const nlohmann::json &j, SorInfo &o) {
   if (j.find("steeringContainer") != j.end()) {
     j.at("steeringContainer").get_to(o.m_SteeringContainer);
     o.m_SteeringContainerIsSet = true;
@@ -64,53 +66,33 @@ void from_json(const nlohmann::json& j, SorInfo& o) {
 SteeringContainer SorInfo::getSteeringContainer() const {
   return m_SteeringContainer;
 }
-void SorInfo::setSteeringContainer(SteeringContainer const& value) {
-  m_SteeringContainer      = value;
+void SorInfo::setSteeringContainer(SteeringContainer const &value) {
+  m_SteeringContainer = value;
   m_SteeringContainerIsSet = true;
 }
 bool SorInfo::steeringContainerIsSet() const {
   return m_SteeringContainerIsSet;
 }
-void SorInfo::unsetSteeringContainer() {
-  m_SteeringContainerIsSet = false;
-}
-bool SorInfo::isAckInd() const {
-  return m_AckInd;
-}
-void SorInfo::setAckInd(bool const value) {
-  m_AckInd = value;
-}
-std::string SorInfo::getSorMacIausf() const {
-  return m_SorMacIausf;
-}
-void SorInfo::setSorMacIausf(std::string const& value) {
-  m_SorMacIausf      = value;
+void SorInfo::unsetSteeringContainer() { m_SteeringContainerIsSet = false; }
+bool SorInfo::isAckInd() const { return m_AckInd; }
+void SorInfo::setAckInd(bool const value) { m_AckInd = value; }
+std::string SorInfo::getSorMacIausf() const { return m_SorMacIausf; }
+void SorInfo::setSorMacIausf(std::string const &value) {
+  m_SorMacIausf = value;
   m_SorMacIausfIsSet = true;
 }
-bool SorInfo::sorMacIausfIsSet() const {
-  return m_SorMacIausfIsSet;
-}
-void SorInfo::unsetSorMacIausf() {
-  m_SorMacIausfIsSet = false;
-}
-std::string SorInfo::getCountersor() const {
-  return m_Countersor;
-}
-void SorInfo::setCountersor(std::string const& value) {
-  m_Countersor      = value;
+bool SorInfo::sorMacIausfIsSet() const { return m_SorMacIausfIsSet; }
+void SorInfo::unsetSorMacIausf() { m_SorMacIausfIsSet = false; }
+std::string SorInfo::getCountersor() const { return m_Countersor; }
+void SorInfo::setCountersor(std::string const &value) {
+  m_Countersor = value;
   m_CountersorIsSet = true;
 }
-bool SorInfo::countersorIsSet() const {
-  return m_CountersorIsSet;
-}
-void SorInfo::unsetCountersor() {
-  m_CountersorIsSet = false;
-}
-std::string SorInfo::getProvisioningTime() const {
-  return m_ProvisioningTime;
-}
-void SorInfo::setProvisioningTime(std::string const& value) {
+bool SorInfo::countersorIsSet() const { return m_CountersorIsSet; }
+void SorInfo::unsetCountersor() { m_CountersorIsSet = false; }
+std::string SorInfo::getProvisioningTime() const { return m_ProvisioningTime; }
+void SorInfo::setProvisioningTime(std::string const &value) {
   m_ProvisioningTime = value;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

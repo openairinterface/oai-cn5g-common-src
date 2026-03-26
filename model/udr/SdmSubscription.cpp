@@ -19,25 +19,25 @@
 namespace oai::udr::model {
 
 SdmSubscription::SdmSubscription() {
-  m_NfInstanceId             = "";
-  m_ImplicitUnsubscribe      = false;
+  m_NfInstanceId = "";
+  m_ImplicitUnsubscribe = false;
   m_ImplicitUnsubscribeIsSet = false;
-  m_Expires                  = "";
-  m_ExpiresIsSet             = false;
-  m_CallbackReference        = "";
-  m_AmfServiceNameIsSet      = false;
-  m_SingleNssaiIsSet         = false;
-  m_Dnn                      = "";
-  m_DnnIsSet                 = false;
-  m_SubscriptionId           = "";
-  m_SubscriptionIdIsSet      = false;
-  m_PlmnIdIsSet              = false;
-  m_ImmediateReport          = false;
-  m_ImmediateReportIsSet     = false;
-  m_ReportIsSet              = false;
-  m_SupportedFeatures        = "";
-  m_SupportedFeaturesIsSet   = false;
-  m_ContextInfoIsSet         = false;
+  m_Expires = "";
+  m_ExpiresIsSet = false;
+  m_CallbackReference = "";
+  m_AmfServiceNameIsSet = false;
+  m_SingleNssaiIsSet = false;
+  m_Dnn = "";
+  m_DnnIsSet = false;
+  m_SubscriptionId = "";
+  m_SubscriptionIdIsSet = false;
+  m_PlmnIdIsSet = false;
+  m_ImmediateReport = false;
+  m_ImmediateReportIsSet = false;
+  m_ReportIsSet = false;
+  m_SupportedFeatures = "";
+  m_SupportedFeaturesIsSet = false;
+  m_ContextInfoIsSet = false;
 }
 
 SdmSubscription::~SdmSubscription() {}
@@ -46,27 +46,36 @@ void SdmSubscription::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const SdmSubscription& o) {
-  j                 = nlohmann::json();
+void to_json(nlohmann::json &j, const SdmSubscription &o) {
+  j = nlohmann::json();
   j["nfInstanceId"] = o.m_NfInstanceId;
   if (o.implicitUnsubscribeIsSet())
     j["implicitUnsubscribe"] = o.m_ImplicitUnsubscribe;
-  if (o.expiresIsSet()) j["expires"] = o.m_Expires;
+  if (o.expiresIsSet())
+    j["expires"] = o.m_Expires;
   j["callbackReference"] = o.m_CallbackReference;
-  if (o.amfServiceNameIsSet()) j["amfServiceName"] = o.m_AmfServiceName;
+  if (o.amfServiceNameIsSet())
+    j["amfServiceName"] = o.m_AmfServiceName;
   j["monitoredResourceUris"] = o.m_MonitoredResourceUris;
-  if (o.singleNssaiIsSet()) j["singleNssai"] = o.m_SingleNssai;
-  if (o.dnnIsSet()) j["dnn"] = o.m_Dnn;
-  if (o.subscriptionIdIsSet()) j["subscriptionId"] = o.m_SubscriptionId;
-  if (o.plmnIdIsSet()) j["plmnId"] = o.m_PlmnId;
-  if (o.immediateReportIsSet()) j["immediateReport"] = o.m_ImmediateReport;
-  if (o.reportIsSet()) j["report"] = o.m_Report;
+  if (o.singleNssaiIsSet())
+    j["singleNssai"] = o.m_SingleNssai;
+  if (o.dnnIsSet())
+    j["dnn"] = o.m_Dnn;
+  if (o.subscriptionIdIsSet())
+    j["subscriptionId"] = o.m_SubscriptionId;
+  if (o.plmnIdIsSet())
+    j["plmnId"] = o.m_PlmnId;
+  if (o.immediateReportIsSet())
+    j["immediateReport"] = o.m_ImmediateReport;
+  if (o.reportIsSet())
+    j["report"] = o.m_Report;
   if (o.supportedFeaturesIsSet())
     j["supportedFeatures"] = o.m_SupportedFeatures;
-  if (o.contextInfoIsSet()) j["contextInfo"] = o.m_ContextInfo;
+  if (o.contextInfoIsSet())
+    j["contextInfo"] = o.m_ContextInfo;
 }
 
-void from_json(const nlohmann::json& j, SdmSubscription& o) {
+void from_json(const nlohmann::json &j, SdmSubscription &o) {
   j.at("nfInstanceId").get_to(o.m_NfInstanceId);
   if (j.find("implicitUnsubscribe") != j.end()) {
     j.at("implicitUnsubscribe").get_to(o.m_ImplicitUnsubscribe);
@@ -116,17 +125,15 @@ void from_json(const nlohmann::json& j, SdmSubscription& o) {
   }
 }
 
-std::string SdmSubscription::getNfInstanceId() const {
-  return m_NfInstanceId;
-}
-void SdmSubscription::setNfInstanceId(std::string const& value) {
+std::string SdmSubscription::getNfInstanceId() const { return m_NfInstanceId; }
+void SdmSubscription::setNfInstanceId(std::string const &value) {
   m_NfInstanceId = value;
 }
 bool SdmSubscription::isImplicitUnsubscribe() const {
   return m_ImplicitUnsubscribe;
 }
 void SdmSubscription::setImplicitUnsubscribe(bool const value) {
-  m_ImplicitUnsubscribe      = value;
+  m_ImplicitUnsubscribe = value;
   m_ImplicitUnsubscribeIsSet = true;
 }
 bool SdmSubscription::implicitUnsubscribeIsSet() const {
@@ -135,129 +142,95 @@ bool SdmSubscription::implicitUnsubscribeIsSet() const {
 void SdmSubscription::unsetImplicitUnsubscribe() {
   m_ImplicitUnsubscribeIsSet = false;
 }
-std::string SdmSubscription::getExpires() const {
-  return m_Expires;
-}
-void SdmSubscription::setExpires(std::string const& value) {
-  m_Expires      = value;
+std::string SdmSubscription::getExpires() const { return m_Expires; }
+void SdmSubscription::setExpires(std::string const &value) {
+  m_Expires = value;
   m_ExpiresIsSet = true;
 }
-bool SdmSubscription::expiresIsSet() const {
-  return m_ExpiresIsSet;
-}
-void SdmSubscription::unsetExpires() {
-  m_ExpiresIsSet = false;
-}
+bool SdmSubscription::expiresIsSet() const { return m_ExpiresIsSet; }
+void SdmSubscription::unsetExpires() { m_ExpiresIsSet = false; }
 std::string SdmSubscription::getCallbackReference() const {
   return m_CallbackReference;
 }
-void SdmSubscription::setCallbackReference(std::string const& value) {
+void SdmSubscription::setCallbackReference(std::string const &value) {
   m_CallbackReference = value;
 }
 oai::model::nrf::ServiceName SdmSubscription::getAmfServiceName() const {
   return m_AmfServiceName;
 }
 void SdmSubscription::setAmfServiceName(
-    oai::model::nrf::ServiceName const& value) {
-  m_AmfServiceName      = value;
+    oai::model::nrf::ServiceName const &value) {
+  m_AmfServiceName = value;
   m_AmfServiceNameIsSet = true;
 }
 bool SdmSubscription::amfServiceNameIsSet() const {
   return m_AmfServiceNameIsSet;
 }
-void SdmSubscription::unsetAmfServiceName() {
-  m_AmfServiceNameIsSet = false;
-}
-std::vector<std::string>& SdmSubscription::getMonitoredResourceUris() {
+void SdmSubscription::unsetAmfServiceName() { m_AmfServiceNameIsSet = false; }
+std::vector<std::string> &SdmSubscription::getMonitoredResourceUris() {
   return m_MonitoredResourceUris;
 }
 void SdmSubscription::setMonitoredResourceUris(
-    std::vector<std::string> const& value) {
+    std::vector<std::string> const &value) {
   m_MonitoredResourceUris = value;
 }
 oai::model::common::Snssai SdmSubscription::getSingleNssai() const {
   return m_SingleNssai;
 }
-void SdmSubscription::setSingleNssai(oai::model::common::Snssai const& value) {
-  m_SingleNssai      = value;
+void SdmSubscription::setSingleNssai(oai::model::common::Snssai const &value) {
+  m_SingleNssai = value;
   m_SingleNssaiIsSet = true;
 }
-bool SdmSubscription::singleNssaiIsSet() const {
-  return m_SingleNssaiIsSet;
-}
-void SdmSubscription::unsetSingleNssai() {
-  m_SingleNssaiIsSet = false;
-}
-std::string SdmSubscription::getDnn() const {
-  return m_Dnn;
-}
-void SdmSubscription::setDnn(std::string const& value) {
-  m_Dnn      = value;
+bool SdmSubscription::singleNssaiIsSet() const { return m_SingleNssaiIsSet; }
+void SdmSubscription::unsetSingleNssai() { m_SingleNssaiIsSet = false; }
+std::string SdmSubscription::getDnn() const { return m_Dnn; }
+void SdmSubscription::setDnn(std::string const &value) {
+  m_Dnn = value;
   m_DnnIsSet = true;
 }
-bool SdmSubscription::dnnIsSet() const {
-  return m_DnnIsSet;
-}
-void SdmSubscription::unsetDnn() {
-  m_DnnIsSet = false;
-}
+bool SdmSubscription::dnnIsSet() const { return m_DnnIsSet; }
+void SdmSubscription::unsetDnn() { m_DnnIsSet = false; }
 std::string SdmSubscription::getSubscriptionId() const {
   return m_SubscriptionId;
 }
-void SdmSubscription::setSubscriptionId(std::string const& value) {
-  m_SubscriptionId      = value;
+void SdmSubscription::setSubscriptionId(std::string const &value) {
+  m_SubscriptionId = value;
   m_SubscriptionIdIsSet = true;
 }
 bool SdmSubscription::subscriptionIdIsSet() const {
   return m_SubscriptionIdIsSet;
 }
-void SdmSubscription::unsetSubscriptionId() {
-  m_SubscriptionIdIsSet = false;
-}
+void SdmSubscription::unsetSubscriptionId() { m_SubscriptionIdIsSet = false; }
 oai::model::common::PlmnId SdmSubscription::getPlmnId() const {
   return m_PlmnId;
 }
-void SdmSubscription::setPlmnId(oai::model::common::PlmnId const& value) {
-  m_PlmnId      = value;
+void SdmSubscription::setPlmnId(oai::model::common::PlmnId const &value) {
+  m_PlmnId = value;
   m_PlmnIdIsSet = true;
 }
-bool SdmSubscription::plmnIdIsSet() const {
-  return m_PlmnIdIsSet;
-}
-void SdmSubscription::unsetPlmnId() {
-  m_PlmnIdIsSet = false;
-}
-bool SdmSubscription::isImmediateReport() const {
-  return m_ImmediateReport;
-}
+bool SdmSubscription::plmnIdIsSet() const { return m_PlmnIdIsSet; }
+void SdmSubscription::unsetPlmnId() { m_PlmnIdIsSet = false; }
+bool SdmSubscription::isImmediateReport() const { return m_ImmediateReport; }
 void SdmSubscription::setImmediateReport(bool const value) {
-  m_ImmediateReport      = value;
+  m_ImmediateReport = value;
   m_ImmediateReportIsSet = true;
 }
 bool SdmSubscription::immediateReportIsSet() const {
   return m_ImmediateReportIsSet;
 }
-void SdmSubscription::unsetImmediateReport() {
-  m_ImmediateReportIsSet = false;
-}
-SubscriptionDataSets SdmSubscription::getReport() const {
-  return m_Report;
-}
-void SdmSubscription::setReport(SubscriptionDataSets const& value) {
-  m_Report      = value;
+void SdmSubscription::unsetImmediateReport() { m_ImmediateReportIsSet = false; }
+SubscriptionDataSets SdmSubscription::getReport() const { return m_Report; }
+void SdmSubscription::setReport(SubscriptionDataSets const &value) {
+  m_Report = value;
   m_ReportIsSet = true;
 }
-bool SdmSubscription::reportIsSet() const {
-  return m_ReportIsSet;
-}
-void SdmSubscription::unsetReport() {
-  m_ReportIsSet = false;
-}
+bool SdmSubscription::reportIsSet() const { return m_ReportIsSet; }
+void SdmSubscription::unsetReport() { m_ReportIsSet = false; }
 std::string SdmSubscription::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
-void SdmSubscription::setSupportedFeatures(std::string const& value) {
-  m_SupportedFeatures      = value;
+void SdmSubscription::setSupportedFeatures(std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool SdmSubscription::supportedFeaturesIsSet() const {
@@ -266,18 +239,12 @@ bool SdmSubscription::supportedFeaturesIsSet() const {
 void SdmSubscription::unsetSupportedFeatures() {
   m_SupportedFeaturesIsSet = false;
 }
-ContextInfo SdmSubscription::getContextInfo() const {
-  return m_ContextInfo;
-}
-void SdmSubscription::setContextInfo(ContextInfo const& value) {
-  m_ContextInfo      = value;
+ContextInfo SdmSubscription::getContextInfo() const { return m_ContextInfo; }
+void SdmSubscription::setContextInfo(ContextInfo const &value) {
+  m_ContextInfo = value;
   m_ContextInfoIsSet = true;
 }
-bool SdmSubscription::contextInfoIsSet() const {
-  return m_ContextInfoIsSet;
-}
-void SdmSubscription::unsetContextInfo() {
-  m_ContextInfoIsSet = false;
-}
+bool SdmSubscription::contextInfoIsSet() const { return m_ContextInfoIsSet; }
+void SdmSubscription::unsetContextInfo() { m_ContextInfoIsSet = false; }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

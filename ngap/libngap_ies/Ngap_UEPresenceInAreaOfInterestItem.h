@@ -27,7 +27,7 @@ struct Ngap_ProtocolExtensionContainer;
 typedef struct Ngap_UEPresenceInAreaOfInterestItem {
   Ngap_LocationReportingReferenceID_t locationReportingReferenceID;
   Ngap_UEPresence_t uEPresence;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

@@ -9,8 +9,8 @@
  * implementation deals with the standard (machine-specific) representation
  * of them instead of using the platform-independent buffer.
  */
-#include <asn_internal.h>
 #include <NativeEnumerated.h>
+#include <asn_internal.h>
 
 /*
  * NativeEnumerated basic type description.
@@ -97,11 +97,13 @@ asn_TYPE_descriptor_t asn_DEF_NativeEnumerated = {
 };
 
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
-int NativeEnumerated__compar_value2enum(const void* ap, const void* bp) {
-  const asn_INTEGER_enum_map_t* a = ap;
-  const asn_INTEGER_enum_map_t* b = bp;
-  if (a->nat_value == b->nat_value) return 0;
-  if (a->nat_value < b->nat_value) return -1;
+int NativeEnumerated__compar_value2enum(const void *ap, const void *bp) {
+  const asn_INTEGER_enum_map_t *a = ap;
+  const asn_INTEGER_enum_map_t *b = bp;
+  if (a->nat_value == b->nat_value)
+    return 0;
+  if (a->nat_value < b->nat_value)
+    return -1;
   return 1;
 }
 #endif /* !defined(ASN_DISABLE_UPER_SUPPORT) ||                                \

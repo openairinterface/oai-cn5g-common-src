@@ -16,9 +16,9 @@
 namespace oai::model::amf {
 
 UEContextRelease::UEContextRelease() {
-  m_Supi                     = "";
-  m_SupiIsSet                = false;
-  m_UnauthenticatedSupi      = false;
+  m_Supi = "";
+  m_SupiIsSet = false;
+  m_UnauthenticatedSupi = false;
   m_UnauthenticatedSupiIsSet = false;
 }
 
@@ -28,15 +28,16 @@ void UEContextRelease::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const UEContextRelease& o) {
+void to_json(nlohmann::json &j, const UEContextRelease &o) {
   j = nlohmann::json();
-  if (o.supiIsSet()) j["supi"] = o.m_Supi;
+  if (o.supiIsSet())
+    j["supi"] = o.m_Supi;
   if (o.unauthenticatedSupiIsSet())
     j["unauthenticatedSupi"] = o.m_UnauthenticatedSupi;
   j["ngapCause"] = o.m_NgapCause;
 }
 
-void from_json(const nlohmann::json& j, UEContextRelease& o) {
+void from_json(const nlohmann::json &j, UEContextRelease &o) {
   if (j.find("supi") != j.end()) {
     j.at("supi").get_to(o.m_Supi);
     o.m_SupiIsSet = true;
@@ -48,24 +49,18 @@ void from_json(const nlohmann::json& j, UEContextRelease& o) {
   j.at("ngapCause").get_to(o.m_NgapCause);
 }
 
-std::string UEContextRelease::getSupi() const {
-  return m_Supi;
-}
-void UEContextRelease::setSupi(std::string const& value) {
-  m_Supi      = value;
+std::string UEContextRelease::getSupi() const { return m_Supi; }
+void UEContextRelease::setSupi(std::string const &value) {
+  m_Supi = value;
   m_SupiIsSet = true;
 }
-bool UEContextRelease::supiIsSet() const {
-  return m_SupiIsSet;
-}
-void UEContextRelease::unsetSupi() {
-  m_SupiIsSet = false;
-}
+bool UEContextRelease::supiIsSet() const { return m_SupiIsSet; }
+void UEContextRelease::unsetSupi() { m_SupiIsSet = false; }
 bool UEContextRelease::isUnauthenticatedSupi() const {
   return m_UnauthenticatedSupi;
 }
 void UEContextRelease::setUnauthenticatedSupi(bool const value) {
-  m_UnauthenticatedSupi      = value;
+  m_UnauthenticatedSupi = value;
   m_UnauthenticatedSupiIsSet = true;
 }
 bool UEContextRelease::unauthenticatedSupiIsSet() const {
@@ -78,8 +73,8 @@ oai::model::common::NgApCause UEContextRelease::getNgapCause() const {
   return m_NgapCause;
 }
 void UEContextRelease::setNgapCause(
-    oai::model::common::NgApCause const& value) {
+    oai::model::common::NgApCause const &value) {
   m_NgapCause = value;
 }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

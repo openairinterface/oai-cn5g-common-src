@@ -13,8 +13,8 @@
 
 #include "NotificationEventType_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::smf {
 
@@ -27,12 +27,12 @@ void NotificationEventType_anyOf::validate() const {
   }
 }
 
-bool NotificationEventType_anyOf::validate(std::stringstream& msg) const {
+bool NotificationEventType_anyOf::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool NotificationEventType_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "NotificationEventType_anyOf" : pathPrefix;
@@ -47,40 +47,39 @@ bool NotificationEventType_anyOf::validate(
 }
 
 bool NotificationEventType_anyOf::operator==(
-    const NotificationEventType_anyOf& rhs) const {
+    const NotificationEventType_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool NotificationEventType_anyOf::operator!=(
-    const NotificationEventType_anyOf& rhs) const {
+    const NotificationEventType_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const NotificationEventType_anyOf& o) {
+void to_json(nlohmann::json &j, const NotificationEventType_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case NotificationEventType_anyOf::eNotificationEventType_anyOf::
-        INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case NotificationEventType_anyOf::eNotificationEventType_anyOf::REGISTERED:
-      j = "NF_REGISTERED";
-      break;
-    case NotificationEventType_anyOf::eNotificationEventType_anyOf::
-        DEREGISTERED:
-      j = "NF_DEREGISTERED";
-      break;
-    case NotificationEventType_anyOf::eNotificationEventType_anyOf::
-        PROFILE_CHANGED:
-      j = "NF_PROFILE_CHANGED";
-      break;
+  case NotificationEventType_anyOf::eNotificationEventType_anyOf::
+      INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case NotificationEventType_anyOf::eNotificationEventType_anyOf::REGISTERED:
+    j = "NF_REGISTERED";
+    break;
+  case NotificationEventType_anyOf::eNotificationEventType_anyOf::DEREGISTERED:
+    j = "NF_DEREGISTERED";
+    break;
+  case NotificationEventType_anyOf::eNotificationEventType_anyOf::
+      PROFILE_CHANGED:
+    j = "NF_PROFILE_CHANGED";
+    break;
   }
 }
 
-void from_json(const nlohmann::json& j, NotificationEventType_anyOf& o) {
+void from_json(const nlohmann::json &j, NotificationEventType_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "NF_REGISTERED") {
     o.setValue(
@@ -109,4 +108,4 @@ void NotificationEventType_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf

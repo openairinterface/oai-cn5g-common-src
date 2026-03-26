@@ -27,12 +27,12 @@ void ResponseTime::validate() const {
   }
 }
 
-bool ResponseTime::validate(std::stringstream& msg) const {
+bool ResponseTime::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ResponseTime::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ResponseTime::validate(std::stringstream &msg,
+                            const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ResponseTime" : pathPrefix;
@@ -43,32 +43,28 @@ bool ResponseTime::validate(
   return success;
 }
 
-bool ResponseTime::operator==(const ResponseTime& rhs) const {
+bool ResponseTime::operator==(const ResponseTime &rhs) const {
   return
 
       getValue() == rhs.getValue();
 }
 
-bool ResponseTime::operator!=(const ResponseTime& rhs) const {
+bool ResponseTime::operator!=(const ResponseTime &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ResponseTime& o) {
+void to_json(nlohmann::json &j, const ResponseTime &o) {
   j = nlohmann::json();
   to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, ResponseTime& o) {
+void from_json(const nlohmann::json &j, ResponseTime &o) {
   from_json(j, o.m_value);
 }
 
-ResponseTime_anyOf ResponseTime::getValue() const {
-  return m_value;
-}
+ResponseTime_anyOf ResponseTime::getValue() const { return m_value; }
 
-void ResponseTime::setValue(ResponseTime_anyOf value) {
-  m_value = value;
-}
+void ResponseTime::setValue(ResponseTime_anyOf value) { m_value = value; }
 
 ResponseTime_anyOf::eResponseTime_anyOf ResponseTime::getEnumValue() const {
   return m_value.getValue();
@@ -78,4 +74,4 @@ void ResponseTime::setEnumValue(ResponseTime_anyOf::eResponseTime_anyOf value) {
   m_value.setValue(value);
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

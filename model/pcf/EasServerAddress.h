@@ -28,7 +28,7 @@ namespace oai::model::pcf {
 /// Represents the IP address and port of an EAS server.
 /// </summary>
 class EasServerAddress {
- public:
+public:
   EasServerAddress();
   virtual ~EasServerAddress() = default;
 
@@ -42,16 +42,16 @@ class EasServerAddress {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const EasServerAddress& rhs) const;
-  bool operator!=(const EasServerAddress& rhs) const;
+  bool operator==(const EasServerAddress &rhs) const;
+  bool operator!=(const EasServerAddress &rhs) const;
 
   /////////////////////////////////////////////
   /// EasServerAddress members
@@ -60,22 +60,22 @@ class EasServerAddress {
   ///
   /// </summary>
   oai::model::common::IpAddr getIp() const;
-  void setIp(oai::model::common::IpAddr const& value);
+  void setIp(oai::model::common::IpAddr const &value);
   /// <summary>
   /// Unsigned Integer, i.e. only value 0 and integers above 0 are permissible.
   /// </summary>
   int32_t getPort() const;
   void setPort(int32_t const value);
 
-  friend void to_json(nlohmann::json& j, const EasServerAddress& o);
-  friend void from_json(const nlohmann::json& j, EasServerAddress& o);
+  friend void to_json(nlohmann::json &j, const EasServerAddress &o);
+  friend void from_json(const nlohmann::json &j, EasServerAddress &o);
 
- protected:
+protected:
   oai::model::common::IpAddr m_Ip;
 
   int32_t m_Port;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* EasServerAddress_H_ */

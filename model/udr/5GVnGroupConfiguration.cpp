@@ -19,16 +19,16 @@
 namespace oai::udr::model {
 
 _5GVnGroupConfiguration::_5GVnGroupConfiguration() {
-  m_r_5gVnGroupDataIsSet         = false;
-  m_MembersIsSet                 = false;
-  m_ReferenceId                  = 0;
-  m_ReferenceIdIsSet             = false;
-  m_AfInstanceId                 = "";
-  m_AfInstanceIdIsSet            = false;
-  m_InternalGroupIdentifier      = "";
+  m_r_5gVnGroupDataIsSet = false;
+  m_MembersIsSet = false;
+  m_ReferenceId = 0;
+  m_ReferenceIdIsSet = false;
+  m_AfInstanceId = "";
+  m_AfInstanceIdIsSet = false;
+  m_InternalGroupIdentifier = "";
   m_InternalGroupIdentifierIsSet = false;
-  m_MtcProviderInformation       = "";
-  m_MtcProviderInformationIsSet  = false;
+  m_MtcProviderInformation = "";
+  m_MtcProviderInformationIsSet = false;
 }
 
 _5GVnGroupConfiguration::~_5GVnGroupConfiguration() {}
@@ -37,19 +37,23 @@ void _5GVnGroupConfiguration::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const _5GVnGroupConfiguration& o) {
+void to_json(nlohmann::json &j, const _5GVnGroupConfiguration &o) {
   j = nlohmann::json();
-  if (o.r5gVnGroupDataIsSet()) j["5gVnGroupData"] = o.m_r_5gVnGroupData;
-  if (o.membersIsSet() || !o.m_Members.empty()) j["members"] = o.m_Members;
-  if (o.referenceIdIsSet()) j["referenceId"] = o.m_ReferenceId;
-  if (o.afInstanceIdIsSet()) j["afInstanceId"] = o.m_AfInstanceId;
+  if (o.r5gVnGroupDataIsSet())
+    j["5gVnGroupData"] = o.m_r_5gVnGroupData;
+  if (o.membersIsSet() || !o.m_Members.empty())
+    j["members"] = o.m_Members;
+  if (o.referenceIdIsSet())
+    j["referenceId"] = o.m_ReferenceId;
+  if (o.afInstanceIdIsSet())
+    j["afInstanceId"] = o.m_AfInstanceId;
   if (o.internalGroupIdentifierIsSet())
     j["internalGroupIdentifier"] = o.m_InternalGroupIdentifier;
   if (o.mtcProviderInformationIsSet())
     j["mtcProviderInformation"] = o.m_MtcProviderInformation;
 }
 
-void from_json(const nlohmann::json& j, _5GVnGroupConfiguration& o) {
+void from_json(const nlohmann::json &j, _5GVnGroupConfiguration &o) {
   if (j.find("5gVnGroupData") != j.end()) {
     j.at("5gVnGroupData").get_to(o.m_r_5gVnGroupData);
     o.m_r_5gVnGroupDataIsSet = true;
@@ -79,8 +83,8 @@ void from_json(const nlohmann::json& j, _5GVnGroupConfiguration& o) {
 _5GVnGroupData _5GVnGroupConfiguration::getR5gVnGroupData() const {
   return m_r_5gVnGroupData;
 }
-void _5GVnGroupConfiguration::setR5gVnGroupData(_5GVnGroupData const& value) {
-  m_r_5gVnGroupData      = value;
+void _5GVnGroupConfiguration::setR5gVnGroupData(_5GVnGroupData const &value) {
+  m_r_5gVnGroupData = value;
   m_r_5gVnGroupDataIsSet = true;
 }
 bool _5GVnGroupConfiguration::r5gVnGroupDataIsSet() const {
@@ -89,38 +93,32 @@ bool _5GVnGroupConfiguration::r5gVnGroupDataIsSet() const {
 void _5GVnGroupConfiguration::unsetr_5gVnGroupData() {
   m_r_5gVnGroupDataIsSet = false;
 }
-std::vector<std::string>& _5GVnGroupConfiguration::getMembers() {
+std::vector<std::string> &_5GVnGroupConfiguration::getMembers() {
   return m_Members;
 }
 void _5GVnGroupConfiguration::setMembers(
-    std::vector<std::string> const& value) {
-  m_Members      = value;
+    std::vector<std::string> const &value) {
+  m_Members = value;
   m_MembersIsSet = true;
 }
-bool _5GVnGroupConfiguration::membersIsSet() const {
-  return m_MembersIsSet;
-}
-void _5GVnGroupConfiguration::unsetMembers() {
-  m_MembersIsSet = false;
-}
+bool _5GVnGroupConfiguration::membersIsSet() const { return m_MembersIsSet; }
+void _5GVnGroupConfiguration::unsetMembers() { m_MembersIsSet = false; }
 int32_t _5GVnGroupConfiguration::getReferenceId() const {
   return m_ReferenceId;
 }
 void _5GVnGroupConfiguration::setReferenceId(int32_t const value) {
-  m_ReferenceId      = value;
+  m_ReferenceId = value;
   m_ReferenceIdIsSet = true;
 }
 bool _5GVnGroupConfiguration::referenceIdIsSet() const {
   return m_ReferenceIdIsSet;
 }
-void _5GVnGroupConfiguration::unsetReferenceId() {
-  m_ReferenceIdIsSet = false;
-}
+void _5GVnGroupConfiguration::unsetReferenceId() { m_ReferenceIdIsSet = false; }
 std::string _5GVnGroupConfiguration::getAfInstanceId() const {
   return m_AfInstanceId;
 }
-void _5GVnGroupConfiguration::setAfInstanceId(std::string const& value) {
-  m_AfInstanceId      = value;
+void _5GVnGroupConfiguration::setAfInstanceId(std::string const &value) {
+  m_AfInstanceId = value;
   m_AfInstanceIdIsSet = true;
 }
 bool _5GVnGroupConfiguration::afInstanceIdIsSet() const {
@@ -133,8 +131,8 @@ std::string _5GVnGroupConfiguration::getInternalGroupIdentifier() const {
   return m_InternalGroupIdentifier;
 }
 void _5GVnGroupConfiguration::setInternalGroupIdentifier(
-    std::string const& value) {
-  m_InternalGroupIdentifier      = value;
+    std::string const &value) {
+  m_InternalGroupIdentifier = value;
   m_InternalGroupIdentifierIsSet = true;
 }
 bool _5GVnGroupConfiguration::internalGroupIdentifierIsSet() const {
@@ -147,8 +145,8 @@ std::string _5GVnGroupConfiguration::getMtcProviderInformation() const {
   return m_MtcProviderInformation;
 }
 void _5GVnGroupConfiguration::setMtcProviderInformation(
-    std::string const& value) {
-  m_MtcProviderInformation      = value;
+    std::string const &value) {
+  m_MtcProviderInformation = value;
   m_MtcProviderInformationIsSet = true;
 }
 bool _5GVnGroupConfiguration::mtcProviderInformationIsSet() const {
@@ -158,4 +156,4 @@ void _5GVnGroupConfiguration::unsetMtcProviderInformation() {
   m_MtcProviderInformationIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

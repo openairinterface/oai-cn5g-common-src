@@ -19,9 +19,9 @@
 #ifndef Tai_H_
 #define Tai_H_
 
-#include <string>
 #include "PlmnId.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::common {
 
@@ -29,7 +29,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class Tai {
- public:
+public:
   Tai();
   virtual ~Tai() = default;
 
@@ -43,16 +43,16 @@ class Tai {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const Tai& rhs) const;
-  bool operator!=(const Tai& rhs) const;
+  bool operator==(const Tai &rhs) const;
+  bool operator!=(const Tai &rhs) const;
 
   /////////////////////////////////////////////
   /// Tai members
@@ -61,24 +61,24 @@ class Tai {
   ///
   /// </summary>
   oai::model::common::PlmnId getPlmnId() const;
-  void setPlmnId(oai::model::common::PlmnId const& value);
+  void setPlmnId(oai::model::common::PlmnId const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getTac() const;
-  void setTac(std::string const& value);
+  void setTac(std::string const &value);
   /// <summary>
   ///
   /// </summary>
   std::string getNid() const;
-  void setNid(std::string const& value);
+  void setNid(std::string const &value);
   bool nidIsSet() const;
   void unsetNid();
 
-  friend void to_json(nlohmann::json& j, const Tai& o);
-  friend void from_json(const nlohmann::json& j, Tai& o);
+  friend void to_json(nlohmann::json &j, const Tai &o);
+  friend void from_json(const nlohmann::json &j, Tai &o);
 
- protected:
+protected:
   oai::model::common::PlmnId m_PlmnId;
 
   std::string m_Tac;
@@ -87,6 +87,6 @@ class Tai {
   bool m_NidIsSet;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* Tai_H_ */

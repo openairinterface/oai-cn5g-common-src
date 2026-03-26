@@ -16,9 +16,9 @@
 namespace oai::model::amf {
 
 PWSResponseData::PWSResponseData() {
-  m_NgapMessageType     = 0;
-  m_SerialNumber        = 0;
-  m_MessageIdentifier   = 0;
+  m_NgapMessageType = 0;
+  m_SerialNumber = 0;
+  m_MessageIdentifier = 0;
   m_UnknownTaiListIsSet = false;
 }
 
@@ -28,15 +28,16 @@ void PWSResponseData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const PWSResponseData& o) {
-  j                      = nlohmann::json();
-  j["ngapMessageType"]   = o.m_NgapMessageType;
-  j["serialNumber"]      = o.m_SerialNumber;
+void to_json(nlohmann::json &j, const PWSResponseData &o) {
+  j = nlohmann::json();
+  j["ngapMessageType"] = o.m_NgapMessageType;
+  j["serialNumber"] = o.m_SerialNumber;
   j["messageIdentifier"] = o.m_MessageIdentifier;
-  if (o.unknownTaiListIsSet()) j["unknownTaiList"] = o.m_UnknownTaiList;
+  if (o.unknownTaiListIsSet())
+    j["unknownTaiList"] = o.m_UnknownTaiList;
 }
 
-void from_json(const nlohmann::json& j, PWSResponseData& o) {
+void from_json(const nlohmann::json &j, PWSResponseData &o) {
   j.at("ngapMessageType").get_to(o.m_NgapMessageType);
   j.at("serialNumber").get_to(o.m_SerialNumber);
   j.at("messageIdentifier").get_to(o.m_MessageIdentifier);
@@ -52,9 +53,7 @@ int32_t PWSResponseData::getNgapMessageType() const {
 void PWSResponseData::setNgapMessageType(int32_t const value) {
   m_NgapMessageType = value;
 }
-int32_t PWSResponseData::getSerialNumber() const {
-  return m_SerialNumber;
-}
+int32_t PWSResponseData::getSerialNumber() const { return m_SerialNumber; }
 void PWSResponseData::setSerialNumber(int32_t const value) {
   m_SerialNumber = value;
 }
@@ -64,14 +63,12 @@ int32_t PWSResponseData::getMessageIdentifier() const {
 void PWSResponseData::setMessageIdentifier(int32_t const value) {
   m_MessageIdentifier = value;
 }
-std::vector<oai::model::common::Tai>& PWSResponseData::getUnknownTaiList() {
+std::vector<oai::model::common::Tai> &PWSResponseData::getUnknownTaiList() {
   return m_UnknownTaiList;
 }
 bool PWSResponseData::unknownTaiListIsSet() const {
   return m_UnknownTaiListIsSet;
 }
-void PWSResponseData::unsetUnknownTaiList() {
-  m_UnknownTaiListIsSet = false;
-}
+void PWSResponseData::unsetUnknownTaiList() { m_UnknownTaiListIsSet = false; }
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf

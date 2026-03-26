@@ -19,20 +19,20 @@
 namespace oai::udr::model {
 
 EeSubscription::EeSubscription() {
-  m_CallbackReference        = "";
-  m_ReportingOptionsIsSet    = false;
-  m_SupportedFeatures        = "";
-  m_SupportedFeaturesIsSet   = false;
-  m_SubscriptionId           = "";
-  m_SubscriptionIdIsSet      = false;
-  m_ContextInfoIsSet         = false;
-  m_EpcAppliedInd            = false;
-  m_EpcAppliedIndIsSet       = false;
-  m_ScefDiamHost             = "";
-  m_ScefDiamHostIsSet        = false;
-  m_ScefDiamRealm            = "";
-  m_ScefDiamRealmIsSet       = false;
-  m_NotifyCorrelationId      = "";
+  m_CallbackReference = "";
+  m_ReportingOptionsIsSet = false;
+  m_SupportedFeatures = "";
+  m_SupportedFeaturesIsSet = false;
+  m_SubscriptionId = "";
+  m_SubscriptionIdIsSet = false;
+  m_ContextInfoIsSet = false;
+  m_EpcAppliedInd = false;
+  m_EpcAppliedIndIsSet = false;
+  m_ScefDiamHost = "";
+  m_ScefDiamHostIsSet = false;
+  m_ScefDiamRealm = "";
+  m_ScefDiamRealmIsSet = false;
+  m_NotifyCorrelationId = "";
   m_NotifyCorrelationIdIsSet = false;
 }
 
@@ -42,23 +42,29 @@ void EeSubscription::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const EeSubscription& o) {
-  j                             = nlohmann::json();
-  j["callbackReference"]        = o.m_CallbackReference;
+void to_json(nlohmann::json &j, const EeSubscription &o) {
+  j = nlohmann::json();
+  j["callbackReference"] = o.m_CallbackReference;
   j["monitoringConfigurations"] = o.m_MonitoringConfigurations;
-  if (o.reportingOptionsIsSet()) j["reportingOptions"] = o.m_ReportingOptions;
+  if (o.reportingOptionsIsSet())
+    j["reportingOptions"] = o.m_ReportingOptions;
   if (o.supportedFeaturesIsSet())
     j["supportedFeatures"] = o.m_SupportedFeatures;
-  if (o.subscriptionIdIsSet()) j["subscriptionId"] = o.m_SubscriptionId;
-  if (o.contextInfoIsSet()) j["contextInfo"] = o.m_ContextInfo;
-  if (o.epcAppliedIndIsSet()) j["epcAppliedInd"] = o.m_EpcAppliedInd;
-  if (o.scefDiamHostIsSet()) j["scefDiamHost"] = o.m_ScefDiamHost;
-  if (o.scefDiamRealmIsSet()) j["scefDiamRealm"] = o.m_ScefDiamRealm;
+  if (o.subscriptionIdIsSet())
+    j["subscriptionId"] = o.m_SubscriptionId;
+  if (o.contextInfoIsSet())
+    j["contextInfo"] = o.m_ContextInfo;
+  if (o.epcAppliedIndIsSet())
+    j["epcAppliedInd"] = o.m_EpcAppliedInd;
+  if (o.scefDiamHostIsSet())
+    j["scefDiamHost"] = o.m_ScefDiamHost;
+  if (o.scefDiamRealmIsSet())
+    j["scefDiamRealm"] = o.m_ScefDiamRealm;
   if (o.notifyCorrelationIdIsSet())
     j["notifyCorrelationId"] = o.m_NotifyCorrelationId;
 }
 
-void from_json(const nlohmann::json& j, EeSubscription& o) {
+void from_json(const nlohmann::json &j, EeSubscription &o) {
   j.at("callbackReference").get_to(o.m_CallbackReference);
   j.at("monitoringConfigurations").get_to(o.m_MonitoringConfigurations);
   if (j.find("reportingOptions") != j.end()) {
@@ -98,22 +104,22 @@ void from_json(const nlohmann::json& j, EeSubscription& o) {
 std::string EeSubscription::getCallbackReference() const {
   return m_CallbackReference;
 }
-void EeSubscription::setCallbackReference(std::string const& value) {
+void EeSubscription::setCallbackReference(std::string const &value) {
   m_CallbackReference = value;
 }
-std::map<std::string, MonitoringConfiguration>&
+std::map<std::string, MonitoringConfiguration> &
 EeSubscription::getMonitoringConfigurations() {
   return m_MonitoringConfigurations;
 }
 void EeSubscription::setMonitoringConfigurations(
-    std::map<std::string, MonitoringConfiguration> const& value) {
+    std::map<std::string, MonitoringConfiguration> const &value) {
   m_MonitoringConfigurations = value;
 }
 ReportingOptions EeSubscription::getReportingOptions() const {
   return m_ReportingOptions;
 }
-void EeSubscription::setReportingOptions(ReportingOptions const& value) {
-  m_ReportingOptions      = value;
+void EeSubscription::setReportingOptions(ReportingOptions const &value) {
+  m_ReportingOptions = value;
   m_ReportingOptionsIsSet = true;
 }
 bool EeSubscription::reportingOptionsIsSet() const {
@@ -125,8 +131,8 @@ void EeSubscription::unsetReportingOptions() {
 std::string EeSubscription::getSupportedFeatures() const {
   return m_SupportedFeatures;
 }
-void EeSubscription::setSupportedFeatures(std::string const& value) {
-  m_SupportedFeatures      = value;
+void EeSubscription::setSupportedFeatures(std::string const &value) {
+  m_SupportedFeatures = value;
   m_SupportedFeaturesIsSet = true;
 }
 bool EeSubscription::supportedFeaturesIsSet() const {
@@ -138,73 +144,47 @@ void EeSubscription::unsetSupportedFeatures() {
 std::string EeSubscription::getSubscriptionId() const {
   return m_SubscriptionId;
 }
-void EeSubscription::setSubscriptionId(std::string const& value) {
-  m_SubscriptionId      = value;
+void EeSubscription::setSubscriptionId(std::string const &value) {
+  m_SubscriptionId = value;
   m_SubscriptionIdIsSet = true;
 }
 bool EeSubscription::subscriptionIdIsSet() const {
   return m_SubscriptionIdIsSet;
 }
-void EeSubscription::unsetSubscriptionId() {
-  m_SubscriptionIdIsSet = false;
-}
-ContextInfo EeSubscription::getContextInfo() const {
-  return m_ContextInfo;
-}
-void EeSubscription::setContextInfo(ContextInfo const& value) {
-  m_ContextInfo      = value;
+void EeSubscription::unsetSubscriptionId() { m_SubscriptionIdIsSet = false; }
+ContextInfo EeSubscription::getContextInfo() const { return m_ContextInfo; }
+void EeSubscription::setContextInfo(ContextInfo const &value) {
+  m_ContextInfo = value;
   m_ContextInfoIsSet = true;
 }
-bool EeSubscription::contextInfoIsSet() const {
-  return m_ContextInfoIsSet;
-}
-void EeSubscription::unsetContextInfo() {
-  m_ContextInfoIsSet = false;
-}
-bool EeSubscription::isEpcAppliedInd() const {
-  return m_EpcAppliedInd;
-}
+bool EeSubscription::contextInfoIsSet() const { return m_ContextInfoIsSet; }
+void EeSubscription::unsetContextInfo() { m_ContextInfoIsSet = false; }
+bool EeSubscription::isEpcAppliedInd() const { return m_EpcAppliedInd; }
 void EeSubscription::setEpcAppliedInd(bool const value) {
-  m_EpcAppliedInd      = value;
+  m_EpcAppliedInd = value;
   m_EpcAppliedIndIsSet = true;
 }
-bool EeSubscription::epcAppliedIndIsSet() const {
-  return m_EpcAppliedIndIsSet;
-}
-void EeSubscription::unsetEpcAppliedInd() {
-  m_EpcAppliedIndIsSet = false;
-}
-std::string EeSubscription::getScefDiamHost() const {
-  return m_ScefDiamHost;
-}
-void EeSubscription::setScefDiamHost(std::string const& value) {
-  m_ScefDiamHost      = value;
+bool EeSubscription::epcAppliedIndIsSet() const { return m_EpcAppliedIndIsSet; }
+void EeSubscription::unsetEpcAppliedInd() { m_EpcAppliedIndIsSet = false; }
+std::string EeSubscription::getScefDiamHost() const { return m_ScefDiamHost; }
+void EeSubscription::setScefDiamHost(std::string const &value) {
+  m_ScefDiamHost = value;
   m_ScefDiamHostIsSet = true;
 }
-bool EeSubscription::scefDiamHostIsSet() const {
-  return m_ScefDiamHostIsSet;
-}
-void EeSubscription::unsetScefDiamHost() {
-  m_ScefDiamHostIsSet = false;
-}
-std::string EeSubscription::getScefDiamRealm() const {
-  return m_ScefDiamRealm;
-}
-void EeSubscription::setScefDiamRealm(std::string const& value) {
-  m_ScefDiamRealm      = value;
+bool EeSubscription::scefDiamHostIsSet() const { return m_ScefDiamHostIsSet; }
+void EeSubscription::unsetScefDiamHost() { m_ScefDiamHostIsSet = false; }
+std::string EeSubscription::getScefDiamRealm() const { return m_ScefDiamRealm; }
+void EeSubscription::setScefDiamRealm(std::string const &value) {
+  m_ScefDiamRealm = value;
   m_ScefDiamRealmIsSet = true;
 }
-bool EeSubscription::scefDiamRealmIsSet() const {
-  return m_ScefDiamRealmIsSet;
-}
-void EeSubscription::unsetScefDiamRealm() {
-  m_ScefDiamRealmIsSet = false;
-}
+bool EeSubscription::scefDiamRealmIsSet() const { return m_ScefDiamRealmIsSet; }
+void EeSubscription::unsetScefDiamRealm() { m_ScefDiamRealmIsSet = false; }
 std::string EeSubscription::getNotifyCorrelationId() const {
   return m_NotifyCorrelationId;
 }
-void EeSubscription::setNotifyCorrelationId(std::string const& value) {
-  m_NotifyCorrelationId      = value;
+void EeSubscription::setNotifyCorrelationId(std::string const &value) {
+  m_NotifyCorrelationId = value;
   m_NotifyCorrelationIdIsSet = true;
 }
 bool EeSubscription::notifyCorrelationIdIsSet() const {
@@ -214,4 +194,4 @@ void EeSubscription::unsetNotifyCorrelationId() {
   m_NotifyCorrelationIdIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

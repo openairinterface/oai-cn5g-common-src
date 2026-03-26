@@ -18,22 +18,22 @@ constexpr uint16_t kMaxNoOfServedGuami = 256;
 namespace oai::ngap {
 
 class UnavailableGuamiList {
- public:
+public:
   UnavailableGuamiList();
   virtual ~UnavailableGuamiList();
 
-  void set(const std::vector<UnavailableGuamiItem>& list);
-  void get(std::vector<UnavailableGuamiItem>& list) const;
+  void set(const std::vector<UnavailableGuamiItem> &list);
+  void get(std::vector<UnavailableGuamiItem> &list) const;
 
-  void addItem(const UnavailableGuamiItem& item);
+  void addItem(const UnavailableGuamiItem &item);
 
-  bool encode(Ngap_UnavailableGUAMIList_t&) const;
-  bool decode(const Ngap_UnavailableGUAMIList_t&);
+  bool encode(Ngap_UnavailableGUAMIList_t &) const;
+  bool decode(const Ngap_UnavailableGUAMIList_t &);
 
- private:
+private:
   std::vector<UnavailableGuamiItem> m_ItemList;
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

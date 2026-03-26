@@ -12,8 +12,8 @@
 asn_TYPE_member_t asn_MBR_Ngap_AMF_TNLAssociationToUpdateItem_1[] = {
     {ATF_NOFLAGS,
      0,
-     offsetof(
-         struct Ngap_AMF_TNLAssociationToUpdateItem, aMF_TNLAssociationAddress),
+     offsetof(struct Ngap_AMF_TNLAssociationToUpdateItem,
+              aMF_TNLAssociationAddress),
      (ASN_TAG_CLASS_CONTEXT | (0 << 2)),
      +1, /* EXPLICIT tag at current level */
      &asn_DEF_Ngap_CPTransportLayerInformation,
@@ -51,8 +51,8 @@ asn_TYPE_member_t asn_MBR_Ngap_AMF_TNLAssociationToUpdateItem_1[] = {
      "tNLAssociationUsage"},
     {ATF_POINTER,
      2,
-     offsetof(
-         struct Ngap_AMF_TNLAssociationToUpdateItem, tNLAddressWeightFactor),
+     offsetof(struct Ngap_AMF_TNLAssociationToUpdateItem,
+              tNLAddressWeightFactor),
      (ASN_TAG_CLASS_CONTEXT | (2 << 2)),
      -1, /* IMPLICIT tag at current level */
      &asn_DEF_Ngap_TNLAddressWeightFactor,
@@ -89,8 +89,8 @@ asn_TYPE_member_t asn_MBR_Ngap_AMF_TNLAssociationToUpdateItem_1[] = {
      0, /* No default value */
      "iE-Extensions"},
 };
-static const int asn_MAP_Ngap_AMF_TNLAssociationToUpdateItem_oms_1[] = {
-    1, 2, 3};
+static const int asn_MAP_Ngap_AMF_TNLAssociationToUpdateItem_oms_1[] = {1, 2,
+                                                                        3};
 static const ber_tlv_tag_t
     asn_DEF_Ngap_AMF_TNLAssociationToUpdateItem_tags_1[] = {
         (ASN_TAG_CLASS_UNIVERSAL | (16 << 2))};

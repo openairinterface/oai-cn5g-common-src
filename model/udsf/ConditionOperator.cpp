@@ -27,12 +27,12 @@ void ConditionOperator::validate() const {
   }
 }
 
-bool ConditionOperator::validate(std::stringstream& msg) const {
+bool ConditionOperator::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ConditionOperator::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ConditionOperator::validate(std::stringstream &msg,
+                                 const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ConditionOperator" : pathPrefix;
@@ -40,33 +40,27 @@ bool ConditionOperator::validate(
   return success;
 }
 
-bool ConditionOperator::operator==(const ConditionOperator& rhs) const {
+bool ConditionOperator::operator==(const ConditionOperator &rhs) const {
   return (*this == rhs);
 }
 
-bool ConditionOperator::operator!=(const ConditionOperator& rhs) const {
+bool ConditionOperator::operator!=(const ConditionOperator &rhs) const {
   return !(*this == rhs);
 }
 
-void ConditionOperator::get(std::string& op) const {
-  op = value;
-}
+void ConditionOperator::get(std::string &op) const { op = value; }
 
-std::string ConditionOperator::get() const {
-  return value;
-}
+std::string ConditionOperator::get() const { return value; }
 
-void ConditionOperator::set(const std::string& op) {
-  value = op;
-}
+void ConditionOperator::set(const std::string &op) { value = op; }
 
-void to_json(nlohmann::json& j, const ConditionOperator& o) {
+void to_json(nlohmann::json &j, const ConditionOperator &o) {
   j = nlohmann::json();
   j = o.get();
 }
 
-void from_json(const nlohmann::json& j, ConditionOperator& o) {
+void from_json(const nlohmann::json &j, ConditionOperator &o) {
   o.set(j.get<std::string>());
 }
 
-}  // namespace oai::model::udsf
+} // namespace oai::model::udsf

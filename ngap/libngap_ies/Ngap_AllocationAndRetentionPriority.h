@@ -12,9 +12,9 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_PriorityLevelARP.h"
 #include "Ngap_Pre-emptionCapability.h"
 #include "Ngap_Pre-emptionVulnerability.h"
+#include "Ngap_PriorityLevelARP.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -29,7 +29,7 @@ typedef struct Ngap_AllocationAndRetentionPriority {
   Ngap_PriorityLevelARP_t priorityLevelARP;
   Ngap_Pre_emptionCapability_t pre_emptionCapability;
   Ngap_Pre_emptionVulnerability_t pre_emptionVulnerability;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

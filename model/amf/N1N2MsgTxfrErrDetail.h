@@ -28,7 +28,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class N1N2MsgTxfrErrDetail {
- public:
+public:
   N1N2MsgTxfrErrDetail();
   virtual ~N1N2MsgTxfrErrDetail();
 
@@ -48,20 +48,20 @@ class N1N2MsgTxfrErrDetail {
   ///
   /// </summary>
   oai::model::common::Arp getHighestPrioArp() const;
-  void setHighestPrioArp(oai::model::common::Arp const& value);
+  void setHighestPrioArp(oai::model::common::Arp const &value);
   bool highestPrioArpIsSet() const;
   void unsetHighestPrioArp();
 
-  friend void to_json(nlohmann::json& j, const N1N2MsgTxfrErrDetail& o);
-  friend void from_json(const nlohmann::json& j, N1N2MsgTxfrErrDetail& o);
+  friend void to_json(nlohmann::json &j, const N1N2MsgTxfrErrDetail &o);
+  friend void from_json(const nlohmann::json &j, N1N2MsgTxfrErrDetail &o);
 
- protected:
+protected:
   int32_t m_RetryAfter;
   bool m_RetryAfterIsSet;
   oai::model::common::Arp m_HighestPrioArp;
   bool m_HighestPrioArpIsSet;
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* N1N2MsgTxfrErrDetail_H_ */

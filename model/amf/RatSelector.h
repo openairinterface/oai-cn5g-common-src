@@ -27,7 +27,7 @@ namespace oai::model::amf {
 ///
 /// </summary>
 class RatSelector {
- public:
+public:
   RatSelector();
   virtual ~RatSelector();
 
@@ -36,12 +36,12 @@ class RatSelector {
   /////////////////////////////////////////////
   /// RatSelector members
 
-  friend void to_json(nlohmann::json& j, const RatSelector& o);
-  friend void from_json(const nlohmann::json& j, RatSelector& o);
+  friend void to_json(nlohmann::json &j, const RatSelector &o);
+  friend void from_json(const nlohmann::json &j, RatSelector &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::model::amf
+} // namespace oai::model::amf
 
 #endif /* RatSelector_H_ */

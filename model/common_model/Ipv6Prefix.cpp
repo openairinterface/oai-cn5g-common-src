@@ -27,12 +27,12 @@ void Ipv6Prefix::validate() const {
   }
 }
 
-bool Ipv6Prefix::validate(std::stringstream& msg) const {
+bool Ipv6Prefix::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool Ipv6Prefix::validate(
-    std::stringstream& /* msg */, const std::string& /* pathPrefix */) const {
+bool Ipv6Prefix::validate(std::stringstream & /* msg */,
+                          const std::string & /* pathPrefix */) const {
   bool success = true;
   /*
   const std::string _pathPrefix =
@@ -41,28 +41,22 @@ bool Ipv6Prefix::validate(
   return success;
 }
 
-bool Ipv6Prefix::operator==(const Ipv6Prefix& rhs) const {
+bool Ipv6Prefix::operator==(const Ipv6Prefix &rhs) const {
   return getIpv6Prefix() == rhs.getIpv6Prefix();
 }
 
-bool Ipv6Prefix::operator!=(const Ipv6Prefix& rhs) const {
+bool Ipv6Prefix::operator!=(const Ipv6Prefix &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const Ipv6Prefix& o) {
-  j = o.getIpv6Prefix();
-}
+void to_json(nlohmann::json &j, const Ipv6Prefix &o) { j = o.getIpv6Prefix(); }
 
-void from_json(const nlohmann::json& j, Ipv6Prefix& o) {
-  o.setIpv6Prefix(j);
-}
+void from_json(const nlohmann::json &j, Ipv6Prefix &o) { o.setIpv6Prefix(j); }
 
-void Ipv6Prefix::setIpv6Prefix(const std::string& value) {
+void Ipv6Prefix::setIpv6Prefix(const std::string &value) {
   m_Ipv6Prefix = value;
 }
 
-std::string Ipv6Prefix::getIpv6Prefix() const {
-  return m_Ipv6Prefix;
-}
+std::string Ipv6Prefix::getIpv6Prefix() const { return m_Ipv6Prefix; }
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

@@ -19,46 +19,46 @@
 namespace oai::ngap {
 
 class NgSetupRequestMsg : public NgapMessage {
- public:
+public:
   NgSetupRequestMsg();
   virtual ~NgSetupRequestMsg();
 
   void initialize();
 
-  void setGlobalRanNodeId(
-      const std::string& mcc, const std::string& mnc,
-      const Ngap_GlobalRANNodeID_PR& ranNodeType, const uint32_t& ranNodeId,
-      const uint8_t& ranNodeIdSize);
-  bool getGlobalGnbId(
-      uint32_t& gnbId, std::string& mcc, std::string& mnc) const;
+  void setGlobalRanNodeId(const std::string &mcc, const std::string &mnc,
+                          const Ngap_GlobalRANNodeID_PR &ranNodeType,
+                          const uint32_t &ranNodeId,
+                          const uint8_t &ranNodeIdSize);
+  bool getGlobalGnbId(uint32_t &gnbId, std::string &mcc,
+                      std::string &mnc) const;
 
-  void setRanNodeName(const std::string& ranNodeName);
-  bool getRanNodeName(std::string& name) const;
+  void setRanNodeName(const std::string &ranNodeName);
+  bool getRanNodeName(std::string &name) const;
 
-  void setSupportedTaList(const std::vector<SupportedTaItem>& list);
-  bool getSupportedTaList(std::vector<SupportedTaItem>& list) const;
+  void setSupportedTaList(const std::vector<SupportedTaItem> &list);
+  bool getSupportedTaList(std::vector<SupportedTaItem> &list) const;
 
-  void setDefaultPagingDrx(const e_Ngap_PagingDRX& value);
+  void setDefaultPagingDrx(const e_Ngap_PagingDRX &value);
   e_Ngap_PagingDRX getDefaultPagingDrx() const;
 
-  void setUeRetentionInformation(const UeRetentionInformation& value);
-  void getUeRetentionInformation(
-      std::optional<UeRetentionInformation>& value) const;
+  void setUeRetentionInformation(const UeRetentionInformation &value);
+  void
+  getUeRetentionInformation(std::optional<UeRetentionInformation> &value) const;
 
-  bool decode(Ngap_NGAP_PDU_t* ngapMsgPdu) override;
+  bool decode(Ngap_NGAP_PDU_t *ngapMsgPdu) override;
 
- private:
-  Ngap_NGSetupRequest_t* m_NgSetupRequestIes;
+private:
+  Ngap_NGSetupRequest_t *m_NgSetupRequestIes;
 
-  GlobalRanNodeId m_GlobalRanNodeId;                               // Mandatory
-  std::optional<RanNodeName> m_RanNodeName;                        // Optional
-  SupportedTaList m_SupportedTaList;                               // Mandatory
-  DefaultPagingDrx m_DefaultPagingDrx;                             // Mandatory
-  std::optional<UeRetentionInformation> m_UeRetentionInformation;  // Optional
+  GlobalRanNodeId m_GlobalRanNodeId;                              // Mandatory
+  std::optional<RanNodeName> m_RanNodeName;                       // Optional
+  SupportedTaList m_SupportedTaList;                              // Mandatory
+  DefaultPagingDrx m_DefaultPagingDrx;                            // Mandatory
+  std::optional<UeRetentionInformation> m_UeRetentionInformation; // Optional
   // TODO: NB-IoT Default Paging DRX  (Optional, Rel 16.14.0)
   // TODO: Extended RAN Node Name (Optional, Rel 16.14.0)
 };
 
-}  // namespace oai::ngap
+} // namespace oai::ngap
 
 #endif

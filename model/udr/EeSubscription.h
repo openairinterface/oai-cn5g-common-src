@@ -37,7 +37,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class EeSubscription {
- public:
+public:
   EeSubscription();
   virtual ~EeSubscription();
 
@@ -50,40 +50,40 @@ class EeSubscription {
   ///
   /// </summary>
   std::string getCallbackReference() const;
-  void setCallbackReference(std::string const& value);
+  void setCallbackReference(std::string const &value);
   /// <summary>
   /// A map (list of key-value pairs where ReferenceId serves as key) of
   /// MonitoringConfigurations
   /// </summary>
-  std::map<std::string, MonitoringConfiguration>& getMonitoringConfigurations();
+  std::map<std::string, MonitoringConfiguration> &getMonitoringConfigurations();
   void setMonitoringConfigurations(
-      std::map<std::string, MonitoringConfiguration> const& value);
+      std::map<std::string, MonitoringConfiguration> const &value);
   /// <summary>
   ///
   /// </summary>
   ReportingOptions getReportingOptions() const;
-  void setReportingOptions(ReportingOptions const& value);
+  void setReportingOptions(ReportingOptions const &value);
   bool reportingOptionsIsSet() const;
   void unsetReportingOptions();
   /// <summary>
   ///
   /// </summary>
   std::string getSupportedFeatures() const;
-  void setSupportedFeatures(std::string const& value);
+  void setSupportedFeatures(std::string const &value);
   bool supportedFeaturesIsSet() const;
   void unsetSupportedFeatures();
   /// <summary>
   ///
   /// </summary>
   std::string getSubscriptionId() const;
-  void setSubscriptionId(std::string const& value);
+  void setSubscriptionId(std::string const &value);
   bool subscriptionIdIsSet() const;
   void unsetSubscriptionId();
   /// <summary>
   ///
   /// </summary>
   ContextInfo getContextInfo() const;
-  void setContextInfo(ContextInfo const& value);
+  void setContextInfo(ContextInfo const &value);
   bool contextInfoIsSet() const;
   void unsetContextInfo();
   /// <summary>
@@ -97,28 +97,28 @@ class EeSubscription {
   ///
   /// </summary>
   std::string getScefDiamHost() const;
-  void setScefDiamHost(std::string const& value);
+  void setScefDiamHost(std::string const &value);
   bool scefDiamHostIsSet() const;
   void unsetScefDiamHost();
   /// <summary>
   ///
   /// </summary>
   std::string getScefDiamRealm() const;
-  void setScefDiamRealm(std::string const& value);
+  void setScefDiamRealm(std::string const &value);
   bool scefDiamRealmIsSet() const;
   void unsetScefDiamRealm();
   /// <summary>
   ///
   /// </summary>
   std::string getNotifyCorrelationId() const;
-  void setNotifyCorrelationId(std::string const& value);
+  void setNotifyCorrelationId(std::string const &value);
   bool notifyCorrelationIdIsSet() const;
   void unsetNotifyCorrelationId();
 
-  friend void to_json(nlohmann::json& j, const EeSubscription& o);
-  friend void from_json(const nlohmann::json& j, EeSubscription& o);
+  friend void to_json(nlohmann::json &j, const EeSubscription &o);
+  friend void from_json(const nlohmann::json &j, EeSubscription &o);
 
- protected:
+protected:
   std::string m_CallbackReference;
 
   std::map<std::string, MonitoringConfiguration> m_MonitoringConfigurations;
@@ -141,6 +141,6 @@ class EeSubscription {
   bool m_NotifyCorrelationIdIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* EeSubscription_H_ */

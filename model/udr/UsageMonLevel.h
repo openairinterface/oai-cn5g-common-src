@@ -30,7 +30,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class UsageMonLevel {
- public:
+public:
   UsageMonLevel();
   virtual ~UsageMonLevel();
 
@@ -39,12 +39,12 @@ class UsageMonLevel {
   /////////////////////////////////////////////
   /// UsageMonLevel members
 
-  friend void to_json(nlohmann::json& j, const UsageMonLevel& o);
-  friend void from_json(const nlohmann::json& j, UsageMonLevel& o);
+  friend void to_json(nlohmann::json &j, const UsageMonLevel &o);
+  friend void from_json(const nlohmann::json &j, UsageMonLevel &o);
 
- protected:
+protected:
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* UsageMonLevel_H_ */

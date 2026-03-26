@@ -27,7 +27,7 @@ namespace oai::model::common {
 ///
 /// </summary>
 class NullValue {
- public:
+public:
   NullValue();
   virtual ~NullValue() = default;
 
@@ -49,16 +49,16 @@ class NullValue {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const NullValue& rhs) const;
-  bool operator!=(const NullValue& rhs) const;
+  bool operator==(const NullValue &rhs) const;
+  bool operator!=(const NullValue &rhs) const;
 
   /////////////////////////////////////////////
   /// NullValue members
@@ -66,14 +66,14 @@ class NullValue {
   NullValue::eNullValue getValue() const;
   void setValue(NullValue::eNullValue value);
 
-  friend void to_json(nlohmann::json& j, const NullValue& o);
-  friend void from_json(const nlohmann::json& j, NullValue& o);
+  friend void to_json(nlohmann::json &j, const NullValue &o);
+  friend void from_json(const nlohmann::json &j, NullValue &o);
 
- protected:
+protected:
   NullValue::eNullValue m_value =
       NullValue::eNullValue::INVALID_VALUE_OPENAPI_GENERATED;
 };
 
-}  // namespace oai::model::common
+} // namespace oai::model::common
 
 #endif /* NullValue_H_ */

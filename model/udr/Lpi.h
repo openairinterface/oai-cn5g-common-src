@@ -33,7 +33,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class Lpi {
- public:
+public:
   Lpi();
   virtual ~Lpi();
 
@@ -46,25 +46,25 @@ class Lpi {
   ///
   /// </summary>
   LocationPrivacyInd getLocationPrivacyInd() const;
-  void setLocationPrivacyInd(LocationPrivacyInd const& value);
+  void setLocationPrivacyInd(LocationPrivacyInd const &value);
   /// <summary>
   ///
   /// </summary>
   ValidTimePeriod getValidTimePeriod() const;
-  void setValidTimePeriod(ValidTimePeriod const& value);
+  void setValidTimePeriod(ValidTimePeriod const &value);
   bool validTimePeriodIsSet() const;
   void unsetValidTimePeriod();
 
-  friend void to_json(nlohmann::json& j, const Lpi& o);
-  friend void from_json(const nlohmann::json& j, Lpi& o);
+  friend void to_json(nlohmann::json &j, const Lpi &o);
+  friend void from_json(const nlohmann::json &j, Lpi &o);
 
- protected:
+protected:
   LocationPrivacyInd m_LocationPrivacyInd;
 
   ValidTimePeriod m_ValidTimePeriod;
   bool m_ValidTimePeriodIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* Lpi_H_ */

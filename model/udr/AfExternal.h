@@ -36,7 +36,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class AfExternal {
- public:
+public:
   AfExternal();
   virtual ~AfExternal();
 
@@ -49,35 +49,35 @@ class AfExternal {
   ///
   /// </summary>
   std::string getAfId() const;
-  void setAfId(std::string const& value);
+  void setAfId(std::string const &value);
   bool afIdIsSet() const;
   void unsetAfId();
   /// <summary>
   ///
   /// </summary>
-  std::vector<GeographicArea>& getAllowedGeographicArea();
-  void setAllowedGeographicArea(std::vector<GeographicArea> const& value);
+  std::vector<GeographicArea> &getAllowedGeographicArea();
+  void setAllowedGeographicArea(std::vector<GeographicArea> const &value);
   bool allowedGeographicAreaIsSet() const;
   void unsetAllowedGeographicArea();
   /// <summary>
   ///
   /// </summary>
   PrivacyCheckRelatedAction getPrivacyCheckRelatedAction() const;
-  void setPrivacyCheckRelatedAction(PrivacyCheckRelatedAction const& value);
+  void setPrivacyCheckRelatedAction(PrivacyCheckRelatedAction const &value);
   bool privacyCheckRelatedActionIsSet() const;
   void unsetPrivacyCheckRelatedAction();
   /// <summary>
   ///
   /// </summary>
   ValidTimePeriod getValidTimePeriod() const;
-  void setValidTimePeriod(ValidTimePeriod const& value);
+  void setValidTimePeriod(ValidTimePeriod const &value);
   bool validTimePeriodIsSet() const;
   void unsetValidTimePeriod();
 
-  friend void to_json(nlohmann::json& j, const AfExternal& o);
-  friend void from_json(const nlohmann::json& j, AfExternal& o);
+  friend void to_json(nlohmann::json &j, const AfExternal &o);
+  friend void from_json(const nlohmann::json &j, AfExternal &o);
 
- protected:
+protected:
   std::string m_AfId;
   bool m_AfIdIsSet;
   std::vector<GeographicArea> m_AllowedGeographicArea;
@@ -88,6 +88,6 @@ class AfExternal {
   bool m_ValidTimePeriodIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* AfExternal_H_ */

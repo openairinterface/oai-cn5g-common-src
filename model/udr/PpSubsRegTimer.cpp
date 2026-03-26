@@ -19,12 +19,12 @@
 namespace oai::udr::model {
 
 PpSubsRegTimer::PpSubsRegTimer() {
-  m_SubsRegTimer                = 0;
-  m_AfInstanceId                = "";
-  m_ReferenceId                 = 0;
-  m_ValidityTime                = "";
-  m_ValidityTimeIsSet           = false;
-  m_MtcProviderInformation      = "";
+  m_SubsRegTimer = 0;
+  m_AfInstanceId = "";
+  m_ReferenceId = 0;
+  m_ValidityTime = "";
+  m_ValidityTimeIsSet = false;
+  m_MtcProviderInformation = "";
   m_MtcProviderInformationIsSet = false;
 }
 
@@ -34,17 +34,18 @@ void PpSubsRegTimer::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const PpSubsRegTimer& o) {
-  j                 = nlohmann::json();
+void to_json(nlohmann::json &j, const PpSubsRegTimer &o) {
+  j = nlohmann::json();
   j["subsRegTimer"] = o.m_SubsRegTimer;
   j["afInstanceId"] = o.m_AfInstanceId;
-  j["referenceId"]  = o.m_ReferenceId;
-  if (o.validityTimeIsSet()) j["validityTime"] = o.m_ValidityTime;
+  j["referenceId"] = o.m_ReferenceId;
+  if (o.validityTimeIsSet())
+    j["validityTime"] = o.m_ValidityTime;
   if (o.mtcProviderInformationIsSet())
     j["mtcProviderInformation"] = o.m_MtcProviderInformation;
 }
 
-void from_json(const nlohmann::json& j, PpSubsRegTimer& o) {
+void from_json(const nlohmann::json &j, PpSubsRegTimer &o) {
   j.at("subsRegTimer").get_to(o.m_SubsRegTimer);
   j.at("afInstanceId").get_to(o.m_AfInstanceId);
   j.at("referenceId").get_to(o.m_ReferenceId);
@@ -58,42 +59,30 @@ void from_json(const nlohmann::json& j, PpSubsRegTimer& o) {
   }
 }
 
-int32_t PpSubsRegTimer::getSubsRegTimer() const {
-  return m_SubsRegTimer;
-}
+int32_t PpSubsRegTimer::getSubsRegTimer() const { return m_SubsRegTimer; }
 void PpSubsRegTimer::setSubsRegTimer(int32_t const value) {
   m_SubsRegTimer = value;
 }
-std::string PpSubsRegTimer::getAfInstanceId() const {
-  return m_AfInstanceId;
-}
-void PpSubsRegTimer::setAfInstanceId(std::string const& value) {
+std::string PpSubsRegTimer::getAfInstanceId() const { return m_AfInstanceId; }
+void PpSubsRegTimer::setAfInstanceId(std::string const &value) {
   m_AfInstanceId = value;
 }
-int32_t PpSubsRegTimer::getReferenceId() const {
-  return m_ReferenceId;
-}
+int32_t PpSubsRegTimer::getReferenceId() const { return m_ReferenceId; }
 void PpSubsRegTimer::setReferenceId(int32_t const value) {
   m_ReferenceId = value;
 }
-std::string PpSubsRegTimer::getValidityTime() const {
-  return m_ValidityTime;
-}
-void PpSubsRegTimer::setValidityTime(std::string const& value) {
-  m_ValidityTime      = value;
+std::string PpSubsRegTimer::getValidityTime() const { return m_ValidityTime; }
+void PpSubsRegTimer::setValidityTime(std::string const &value) {
+  m_ValidityTime = value;
   m_ValidityTimeIsSet = true;
 }
-bool PpSubsRegTimer::validityTimeIsSet() const {
-  return m_ValidityTimeIsSet;
-}
-void PpSubsRegTimer::unsetValidityTime() {
-  m_ValidityTimeIsSet = false;
-}
+bool PpSubsRegTimer::validityTimeIsSet() const { return m_ValidityTimeIsSet; }
+void PpSubsRegTimer::unsetValidityTime() { m_ValidityTimeIsSet = false; }
 std::string PpSubsRegTimer::getMtcProviderInformation() const {
   return m_MtcProviderInformation;
 }
-void PpSubsRegTimer::setMtcProviderInformation(std::string const& value) {
-  m_MtcProviderInformation      = value;
+void PpSubsRegTimer::setMtcProviderInformation(std::string const &value) {
+  m_MtcProviderInformation = value;
   m_MtcProviderInformationIsSet = true;
 }
 bool PpSubsRegTimer::mtcProviderInformationIsSet() const {
@@ -103,4 +92,4 @@ void PpSubsRegTimer::unsetMtcProviderInformation() {
   m_MtcProviderInformationIsSet = false;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

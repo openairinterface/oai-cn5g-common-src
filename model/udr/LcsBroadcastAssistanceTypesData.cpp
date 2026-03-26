@@ -26,22 +26,22 @@ void LcsBroadcastAssistanceTypesData::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const LcsBroadcastAssistanceTypesData& o) {
-  j                           = nlohmann::json();
+void to_json(nlohmann::json &j, const LcsBroadcastAssistanceTypesData &o) {
+  j = nlohmann::json();
   j["locationAssistanceType"] = o.m_LocationAssistanceType;
 }
 
-void from_json(const nlohmann::json& j, LcsBroadcastAssistanceTypesData& o) {
+void from_json(const nlohmann::json &j, LcsBroadcastAssistanceTypesData &o) {
   j.at("locationAssistanceType").get_to(o.m_LocationAssistanceType);
 }
 
-std::vector<std::string>&
+std::vector<std::string> &
 LcsBroadcastAssistanceTypesData::getLocationAssistanceType() {
   return m_LocationAssistanceType;
 }
 void LcsBroadcastAssistanceTypesData::setLocationAssistanceType(
-    std::vector<std::string> const& value) {
+    std::vector<std::string> const &value) {
   m_LocationAssistanceType = value;
 }
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

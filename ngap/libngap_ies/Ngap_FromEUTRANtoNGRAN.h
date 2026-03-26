@@ -12,8 +12,8 @@
 #include <asn_application.h>
 
 /* Including external dependencies */
-#include "Ngap_IntersystemSONeNBID.h"
 #include "Ngap_IntersystemSONNGRANnodeID.h"
+#include "Ngap_IntersystemSONeNBID.h"
 #include <constr_SEQUENCE.h>
 
 #ifdef __cplusplus
@@ -27,7 +27,7 @@ struct Ngap_ProtocolExtensionContainer;
 typedef struct Ngap_FromEUTRANtoNGRAN {
   Ngap_IntersystemSONeNBID_t sourceeNBID;
   Ngap_IntersystemSONNGRANnodeID_t targetNGRANnodeID;
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
 
   /* Context for parsing across buffer boundaries */
   asn_struct_ctx_t _asn_ctx;

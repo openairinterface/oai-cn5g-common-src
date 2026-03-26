@@ -32,7 +32,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class IdentityData {
- public:
+public:
   IdentityData();
   virtual ~IdentityData();
 
@@ -44,28 +44,28 @@ class IdentityData {
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getSupiList();
-  void setSupiList(std::vector<std::string> const& value);
+  std::vector<std::string> &getSupiList();
+  void setSupiList(std::vector<std::string> const &value);
   bool supiListIsSet() const;
   void unsetSupiList();
   /// <summary>
   ///
   /// </summary>
-  std::vector<std::string>& getGpsiList();
-  void setGpsiList(std::vector<std::string> const& value);
+  std::vector<std::string> &getGpsiList();
+  void setGpsiList(std::vector<std::string> const &value);
   bool gpsiListIsSet() const;
   void unsetGpsiList();
 
-  friend void to_json(nlohmann::json& j, const IdentityData& o);
-  friend void from_json(const nlohmann::json& j, IdentityData& o);
+  friend void to_json(nlohmann::json &j, const IdentityData &o);
+  friend void from_json(const nlohmann::json &j, IdentityData &o);
 
- protected:
+protected:
   std::vector<std::string> m_SupiList;
   bool m_SupiListIsSet;
   std::vector<std::string> m_GpsiList;
   bool m_GpsiListIsSet;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* IdentityData_H_ */

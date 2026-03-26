@@ -26,10 +26,10 @@ void SteeringContainer::validate() {
   // TODO: implement validation
 }
 
-void to_json(nlohmann::json& j, const SteeringContainer& o) {
+void to_json(nlohmann::json &j, const SteeringContainer &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, SteeringContainer& o) {}
+void from_json(const nlohmann::json &j, SteeringContainer &o) {}
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model

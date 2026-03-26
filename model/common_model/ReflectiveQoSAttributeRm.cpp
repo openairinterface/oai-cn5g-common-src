@@ -27,12 +27,12 @@ void ReflectiveQoSAttributeRm::validate() const {
   }
 }
 
-bool ReflectiveQoSAttributeRm::validate(std::stringstream& msg) const {
+bool ReflectiveQoSAttributeRm::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool ReflectiveQoSAttributeRm::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool ReflectiveQoSAttributeRm::validate(std::stringstream &msg,
+                                        const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ReflectiveQoSAttributeRm" : pathPrefix;
@@ -41,19 +41,19 @@ bool ReflectiveQoSAttributeRm::validate(
 }
 
 bool ReflectiveQoSAttributeRm::operator==(
-    const ReflectiveQoSAttributeRm& rhs) const {
+    const ReflectiveQoSAttributeRm &rhs) const {
   return (*this == rhs);
 }
 
 bool ReflectiveQoSAttributeRm::operator!=(
-    const ReflectiveQoSAttributeRm& rhs) const {
+    const ReflectiveQoSAttributeRm &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const ReflectiveQoSAttributeRm& o) {
+void to_json(nlohmann::json &j, const ReflectiveQoSAttributeRm &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, ReflectiveQoSAttributeRm& o) {}
+void from_json(const nlohmann::json &j, ReflectiveQoSAttributeRm &o) {}
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

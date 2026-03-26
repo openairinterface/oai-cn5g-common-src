@@ -26,11 +26,11 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_DataForwardingResponseDRBItem */
 typedef struct Ngap_DataForwardingResponseDRBItem {
   Ngap_DRB_ID_t dRB_ID;
-  struct Ngap_UPTransportLayerInformation*
-      dLForwardingUP_TNLInformation; /* OPTIONAL */
-  struct Ngap_UPTransportLayerInformation*
-      uLForwardingUP_TNLInformation;                     /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions; /* OPTIONAL */
+  struct Ngap_UPTransportLayerInformation
+      *dLForwardingUP_TNLInformation; /* OPTIONAL */
+  struct Ngap_UPTransportLayerInformation
+      *uLForwardingUP_TNLInformation;                    /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions; /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

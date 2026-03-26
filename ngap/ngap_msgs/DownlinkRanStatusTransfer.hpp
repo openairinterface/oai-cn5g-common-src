@@ -13,29 +13,32 @@ extern "C" {
 }
 namespace oai::ngap {
 class DownlinkRanStatusTransfer : public NgapUeMessage {
- public:
+public:
   DownlinkRanStatusTransfer();
   virtual ~DownlinkRanStatusTransfer();
 
   void initialize();
-  void setAmfUeNgapId(const uint64_t& id) override;
-  void setRanUeNgapId(const uint32_t& id) override;
-  bool decode(Ngap_NGAP_PDU_t* ngapMsgPdu) override;
+  void setAmfUeNgapId(const uint64_t &id) override;
+  void setRanUeNgapId(const uint32_t &id) override;
+  bool decode(Ngap_NGAP_PDU_t *ngapMsgPdu) override;
 
-  void setRanStatusTransferTransparentContainer(
-      const long& drbIDValue, const long& ulPdcpValue,
-      const long& ulHfnPdcpValue, const long& dlPdcpValue,
-      const long& dlHfnPdcpValue);
-  void getRanStatusTransferTransparentContainer(
-      long& drbIDValue, long& ulPdcpValue, long& ulHfnPdcpValue,
-      long& dlPdcpValue, long& dlHfnPdcpValue) const;
+  void setRanStatusTransferTransparentContainer(const long &drbIDValue,
+                                                const long &ulPdcpValue,
+                                                const long &ulHfnPdcpValue,
+                                                const long &dlPdcpValue,
+                                                const long &dlHfnPdcpValue);
+  void getRanStatusTransferTransparentContainer(long &drbIDValue,
+                                                long &ulPdcpValue,
+                                                long &ulHfnPdcpValue,
+                                                long &dlPdcpValue,
+                                                long &dlHfnPdcpValue) const;
 
- private:
-  Ngap_DownlinkRANStatusTransfer_t* m_DownlinkranstatustransferIes;
+private:
+  Ngap_DownlinkRANStatusTransfer_t *m_DownlinkranstatustransferIes;
   // AMF_UE_NGAP_ID (Mandatory)
   // RAN_UE_NGAP_ID (Mandatory)
   RanStatusTransferTransparentContainer
-      m_RanStatusTransferTransparentContainer;  // Mandatory
+      m_RanStatusTransferTransparentContainer; // Mandatory
 };
-}  // namespace oai::ngap
+} // namespace oai::ngap
 #endif

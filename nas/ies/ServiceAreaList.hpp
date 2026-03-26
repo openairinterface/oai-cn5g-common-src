@@ -13,34 +13,34 @@
 constexpr uint8_t kServiceAreaListMinimumLength = 6;
 constexpr uint8_t kServiceAreaListContentMinimumLength =
     kServiceAreaListMinimumLength -
-    2;  // Minimum length - 2 octets for IEI/Length
-constexpr uint8_t kServiceAreaListMaximumLength        = 114;
+    2; // Minimum length - 2 octets for IEI/Length
+constexpr uint8_t kServiceAreaListMaximumLength = 114;
 constexpr uint8_t kServiceAreaListMaximumSupportedTAIs = 16;
-constexpr auto kServiceAreaListIeName                  = "Service Area List";
+constexpr auto kServiceAreaListIeName = "Service Area List";
 
 namespace oai::nas {
 
 class ServiceAreaList : public Type4NasIe {
- public:
+public:
   ServiceAreaList();
   ServiceAreaList(bool iei);
-  ServiceAreaList(const std::vector<service_area_list_ie_t>& list);
+  ServiceAreaList(const std::vector<service_area_list_ie_t> &list);
 
-  int Encode(uint8_t* buf, int len) const override;
+  int Encode(uint8_t *buf, int len) const override;
   // TODO: int Decode(uint8_t* buf, int len);
 
   static std::string GetIeName() { return kServiceAreaListIeName; }
 
- private:
+private:
   std::vector<service_area_list_ie_t> ie_list_;
 
- private:
-  int EncodeType00(service_area_list_ie_t item, uint8_t* buf, int len) const;
-  int EncodeType01(service_area_list_ie_t item, uint8_t* buf, int len) const;
-  int EncodeType10(service_area_list_ie_t item, uint8_t* buf, int len) const;
-  int EncodeType11(service_area_list_ie_t item, uint8_t* buf, int len) const;
+private:
+  int EncodeType00(service_area_list_ie_t item, uint8_t *buf, int len) const;
+  int EncodeType01(service_area_list_ie_t item, uint8_t *buf, int len) const;
+  int EncodeType10(service_area_list_ie_t item, uint8_t *buf, int len) const;
+  int EncodeType11(service_area_list_ie_t item, uint8_t *buf, int len) const;
 };
 
-}  // namespace oai::nas
+} // namespace oai::nas
 
 #endif

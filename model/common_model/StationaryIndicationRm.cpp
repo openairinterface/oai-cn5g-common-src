@@ -27,12 +27,12 @@ void StationaryIndicationRm::validate() const {
   }
 }
 
-bool StationaryIndicationRm::validate(std::stringstream& msg) const {
+bool StationaryIndicationRm::validate(std::stringstream &msg) const {
   return validate(msg, "");
 }
 
-bool StationaryIndicationRm::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+bool StationaryIndicationRm::validate(std::stringstream &msg,
+                                      const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "StationaryIndicationRm" : pathPrefix;
@@ -41,19 +41,19 @@ bool StationaryIndicationRm::validate(
 }
 
 bool StationaryIndicationRm::operator==(
-    const StationaryIndicationRm& rhs) const {
+    const StationaryIndicationRm &rhs) const {
   return (*this == rhs);
 }
 
 bool StationaryIndicationRm::operator!=(
-    const StationaryIndicationRm& rhs) const {
+    const StationaryIndicationRm &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(nlohmann::json& j, const StationaryIndicationRm& o) {
+void to_json(nlohmann::json &j, const StationaryIndicationRm &o) {
   j = nlohmann::json();
 }
 
-void from_json(const nlohmann::json& j, StationaryIndicationRm& o) {}
+void from_json(const nlohmann::json &j, StationaryIndicationRm &o) {}
 
-}  // namespace oai::model::common
+} // namespace oai::model::common

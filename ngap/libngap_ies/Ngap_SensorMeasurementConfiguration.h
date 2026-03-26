@@ -26,8 +26,8 @@ struct Ngap_ProtocolExtensionContainer;
 /* Ngap_SensorMeasurementConfiguration */
 typedef struct Ngap_SensorMeasurementConfiguration {
   Ngap_SensorMeasConfig_t sensorMeasConfig;
-  struct Ngap_SensorMeasConfigNameList* sensorMeasConfigNameList; /* OPTIONAL */
-  struct Ngap_ProtocolExtensionContainer* iE_Extensions;          /* OPTIONAL */
+  struct Ngap_SensorMeasConfigNameList *sensorMeasConfigNameList; /* OPTIONAL */
+  struct Ngap_ProtocolExtensionContainer *iE_Extensions;          /* OPTIONAL */
   /*
    * This type is extensible,
    * possible extensions are below.

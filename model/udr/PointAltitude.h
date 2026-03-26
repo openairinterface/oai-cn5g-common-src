@@ -35,7 +35,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class PointAltitude {
- public:
+public:
   PointAltitude();
   virtual ~PointAltitude();
 
@@ -48,22 +48,22 @@ class PointAltitude {
   ///
   /// </summary>
   SupportedGADShapes getShape() const;
-  void setShape(SupportedGADShapes const& value);
+  void setShape(SupportedGADShapes const &value);
   /// <summary>
   ///
   /// </summary>
   GeographicalCoordinates getPoint() const;
-  void setPoint(GeographicalCoordinates const& value);
+  void setPoint(GeographicalCoordinates const &value);
   /// <summary>
   ///
   /// </summary>
   double getAltitude() const;
   void setAltitude(double const value);
 
-  friend void to_json(nlohmann::json& j, const PointAltitude& o);
-  friend void from_json(const nlohmann::json& j, PointAltitude& o);
+  friend void to_json(nlohmann::json &j, const PointAltitude &o);
+  friend void from_json(const nlohmann::json &j, PointAltitude &o);
 
- protected:
+protected:
   SupportedGADShapes m_Shape;
 
   GeographicalCoordinates m_Point;
@@ -71,6 +71,6 @@ class PointAltitude {
   double m_Altitude;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* PointAltitude_H_ */

@@ -29,14 +29,14 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class FlowDirectionRm : public FlowDirection {
- public:
+public:
   FlowDirectionRm();
   virtual ~FlowDirectionRm() = default;
 
-  friend void to_json(nlohmann::json& j, const FlowDirectionRm& o);
-  friend void from_json(const nlohmann::json& j, FlowDirectionRm& o);
+  friend void to_json(nlohmann::json &j, const FlowDirectionRm &o);
+  friend void from_json(const nlohmann::json &j, FlowDirectionRm &o);
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* FlowDirectionRm_H_ */

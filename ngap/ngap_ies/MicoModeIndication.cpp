@@ -14,19 +14,20 @@ MicoModeIndication::MicoModeIndication()
 MicoModeIndication::~MicoModeIndication() {}
 
 //------------------------------------------------------------------------------
-void MicoModeIndication::set(const long& micoModeIndication) {
+void MicoModeIndication::set(const long &micoModeIndication) {
   m_MicoModeIndication = micoModeIndication;
 }
 
 //------------------------------------------------------------------------------
-void MicoModeIndication::get(long& micoModeIndication) const {
+void MicoModeIndication::get(long &micoModeIndication) const {
   micoModeIndication = m_MicoModeIndication;
 }
 
 //------------------------------------------------------------------------------
 bool MicoModeIndication::encode(
-    Ngap_MICOModeIndication_t& micoModeIndication) const {
-  if (!micoModeIndication) return false;
+    Ngap_MICOModeIndication_t &micoModeIndication) const {
+  if (!micoModeIndication)
+    return false;
   micoModeIndication = m_MicoModeIndication;
 
   return true;
@@ -34,11 +35,12 @@ bool MicoModeIndication::encode(
 
 //------------------------------------------------------------------------------
 bool MicoModeIndication::decode(
-    const Ngap_MICOModeIndication_t& micoModeIndication) {
-  if (!micoModeIndication) return false;
+    const Ngap_MICOModeIndication_t &micoModeIndication) {
+  if (!micoModeIndication)
+    return false;
   m_MicoModeIndication = micoModeIndication;
 
   return true;
 }
 
-}  // namespace oai::ngap
+} // namespace oai::ngap

@@ -27,19 +27,17 @@ void Point::validate() const {
   }
 }
 
-bool Point::validate(std::stringstream& msg) const {
-  return validate(msg, "");
-}
+bool Point::validate(std::stringstream &msg) const { return validate(msg, ""); }
 
-bool Point::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success                  = true;
+bool Point::validate(std::stringstream &msg,
+                     const std::string &pathPrefix) const {
+  bool success = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "Point" : pathPrefix;
 
   return success;
 }
 
-bool Point::operator==(const Point& rhs) const {
+bool Point::operator==(const Point &rhs) const {
   return
 
       (getShape() == rhs.getShape()) &&
@@ -49,32 +47,28 @@ bool Point::operator==(const Point& rhs) const {
           ;
 }
 
-bool Point::operator!=(const Point& rhs) const {
-  return !(*this == rhs);
-}
+bool Point::operator!=(const Point &rhs) const { return !(*this == rhs); }
 
-void to_json(nlohmann::json& j, const Point& o) {
-  j          = nlohmann::json();
+void to_json(nlohmann::json &j, const Point &o) {
+  j = nlohmann::json();
   j["shape"] = o.m_Shape;
   j["point"] = o.m_Point;
 }
 
-void from_json(const nlohmann::json& j, Point& o) {
+void from_json(const nlohmann::json &j, Point &o) {
   j.at("shape").get_to(o.m_Shape);
   j.at("point").get_to(o.m_Point);
 }
 
-oai::model::lmf::SupportedGADShapes Point::getShape() const {
-  return m_Shape;
-}
-void Point::setShape(oai::model::lmf::SupportedGADShapes const& value) {
+oai::model::lmf::SupportedGADShapes Point::getShape() const { return m_Shape; }
+void Point::setShape(oai::model::lmf::SupportedGADShapes const &value) {
   m_Shape = value;
 }
 oai::model::lmf::GeographicalCoordinates Point::getPoint() const {
   return m_Point;
 }
-void Point::setPoint(oai::model::lmf::GeographicalCoordinates const& value) {
+void Point::setPoint(oai::model::lmf::GeographicalCoordinates const &value) {
   m_Point = value;
 }
 
-}  // namespace oai::model::lmf
+} // namespace oai::model::lmf

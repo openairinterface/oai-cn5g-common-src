@@ -19,12 +19,12 @@
 #ifndef EventSubscription_H_
 #define EventSubscription_H_
 
-#include "DnaiChangeType.h"
-#include "DddTrafficDescriptor.h"
 #include "DddStatus.h"
+#include "DddTrafficDescriptor.h"
+#include "DnaiChangeType.h"
 #include "SmfEvent.h"
-#include <vector>
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace oai::model::smf {
 
@@ -32,7 +32,7 @@ namespace oai::model::smf {
 ///
 /// </summary>
 class EventSubscription {
- public:
+public:
   EventSubscription();
   virtual ~EventSubscription();
 
@@ -45,33 +45,33 @@ class EventSubscription {
   ///
   /// </summary>
   SmfEvent getEvent() const;
-  void setEvent(SmfEvent const& value);
+  void setEvent(SmfEvent const &value);
   /// <summary>
   ///
   /// </summary>
   oai::model::common::DnaiChangeType getDnaiChgType() const;
-  void setDnaiChgType(oai::model::common::DnaiChangeType const& value);
+  void setDnaiChgType(oai::model::common::DnaiChangeType const &value);
   bool dnaiChgTypeIsSet() const;
   void unsetDnaiChgType();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::DddTrafficDescriptor getDddTraDes() const;
-  void setDddTraDes(oai::model::common::DddTrafficDescriptor const& value);
+  void setDddTraDes(oai::model::common::DddTrafficDescriptor const &value);
   bool dddTraDesIsSet() const;
   void unsetDddTraDes();
   /// <summary>
   ///
   /// </summary>
-  std::vector<DddStatus>& getDddStati();
-  void setDddStati(std::vector<DddStatus> const& value);
+  std::vector<DddStatus> &getDddStati();
+  void setDddStati(std::vector<DddStatus> const &value);
   bool dddStatiIsSet() const;
   void unsetDddStati();
 
-  friend void to_json(nlohmann::json& j, const EventSubscription& o);
-  friend void from_json(const nlohmann::json& j, EventSubscription& o);
+  friend void to_json(nlohmann::json &j, const EventSubscription &o);
+  friend void from_json(const nlohmann::json &j, EventSubscription &o);
 
- protected:
+protected:
   SmfEvent m_Event;
 
   oai::model::common::DnaiChangeType m_DnaiChgType;
@@ -82,6 +82,6 @@ class EventSubscription {
   bool m_DddStatiIsSet;
 };
 
-}  // namespace oai::model::smf
+} // namespace oai::model::smf
 
 #endif /* EventSubscription_H_ */

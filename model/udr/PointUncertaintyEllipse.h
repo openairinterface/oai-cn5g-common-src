@@ -36,7 +36,7 @@ namespace oai::udr::model {
 ///
 /// </summary>
 class PointUncertaintyEllipse {
- public:
+public:
   PointUncertaintyEllipse();
   virtual ~PointUncertaintyEllipse();
 
@@ -49,27 +49,27 @@ class PointUncertaintyEllipse {
   ///
   /// </summary>
   SupportedGADShapes getShape() const;
-  void setShape(SupportedGADShapes const& value);
+  void setShape(SupportedGADShapes const &value);
   /// <summary>
   ///
   /// </summary>
   GeographicalCoordinates getPoint() const;
-  void setPoint(GeographicalCoordinates const& value);
+  void setPoint(GeographicalCoordinates const &value);
   /// <summary>
   ///
   /// </summary>
   UncertaintyEllipse getUncertaintyEllipse() const;
-  void setUncertaintyEllipse(UncertaintyEllipse const& value);
+  void setUncertaintyEllipse(UncertaintyEllipse const &value);
   /// <summary>
   ///
   /// </summary>
   int32_t getConfidence() const;
   void setConfidence(int32_t const value);
 
-  friend void to_json(nlohmann::json& j, const PointUncertaintyEllipse& o);
-  friend void from_json(const nlohmann::json& j, PointUncertaintyEllipse& o);
+  friend void to_json(nlohmann::json &j, const PointUncertaintyEllipse &o);
+  friend void from_json(const nlohmann::json &j, PointUncertaintyEllipse &o);
 
- protected:
+protected:
   SupportedGADShapes m_Shape;
 
   GeographicalCoordinates m_Point;
@@ -79,6 +79,6 @@ class PointUncertaintyEllipse {
   int32_t m_Confidence;
 };
 
-}  // namespace oai::udr::model
+} // namespace oai::udr::model
 
 #endif /* PointUncertaintyEllipse_H_ */

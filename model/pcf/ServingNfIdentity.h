@@ -19,10 +19,10 @@
 #ifndef ServingNfIdentity_H_
 #define ServingNfIdentity_H_
 
-#include <string>
 #include "AnGwAddress.h"
 #include "Guami.h"
 #include <nlohmann/json.hpp>
+#include <string>
 
 namespace oai::model::pcf {
 
@@ -30,7 +30,7 @@ namespace oai::model::pcf {
 ///
 /// </summary>
 class ServingNfIdentity {
- public:
+public:
   ServingNfIdentity();
   virtual ~ServingNfIdentity() = default;
 
@@ -44,16 +44,16 @@ class ServingNfIdentity {
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream &msg) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(std::stringstream &msg, const std::string &pathPrefix) const;
 
-  bool operator==(const ServingNfIdentity& rhs) const;
-  bool operator!=(const ServingNfIdentity& rhs) const;
+  bool operator==(const ServingNfIdentity &rhs) const;
+  bool operator!=(const ServingNfIdentity &rhs) const;
 
   /////////////////////////////////////////////
   /// ServingNfIdentity members
@@ -62,28 +62,28 @@ class ServingNfIdentity {
   ///
   /// </summary>
   std::string getServNfInstId() const;
-  void setServNfInstId(std::string const& value);
+  void setServNfInstId(std::string const &value);
   bool servNfInstIdIsSet() const;
   void unsetServNfInstId();
   /// <summary>
   ///
   /// </summary>
   oai::model::common::Guami getGuami() const;
-  void setGuami(oai::model::common::Guami const& value);
+  void setGuami(oai::model::common::Guami const &value);
   bool guamiIsSet() const;
   void unsetGuami();
   /// <summary>
   ///
   /// </summary>
   oai::model::pcf::AnGwAddress getAnGwAddr() const;
-  void setAnGwAddr(oai::model::pcf::AnGwAddress const& value);
+  void setAnGwAddr(oai::model::pcf::AnGwAddress const &value);
   bool anGwAddrIsSet() const;
   void unsetAnGwAddr();
 
-  friend void to_json(nlohmann::json& j, const ServingNfIdentity& o);
-  friend void from_json(const nlohmann::json& j, ServingNfIdentity& o);
+  friend void to_json(nlohmann::json &j, const ServingNfIdentity &o);
+  friend void from_json(const nlohmann::json &j, ServingNfIdentity &o);
 
- protected:
+protected:
   std::string m_ServNfInstId;
   bool m_ServNfInstIdIsSet;
   oai::model::common::Guami m_Guami;
@@ -92,6 +92,6 @@ class ServingNfIdentity {
   bool m_AnGwAddrIsSet;
 };
 
-}  // namespace oai::model::pcf
+} // namespace oai::model::pcf
 
 #endif /* ServingNfIdentity_H_ */

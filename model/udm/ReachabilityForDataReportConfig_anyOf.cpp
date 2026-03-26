@@ -16,8 +16,8 @@
 
 #include "ReachabilityForDataReportConfig_anyOf.h"
 #include "Helpers.h"
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
 namespace oai::model::udm {
 
@@ -33,12 +33,12 @@ void ReachabilityForDataReportConfig_anyOf::validate() const {
 }
 
 bool ReachabilityForDataReportConfig_anyOf::validate(
-    std::stringstream& msg) const {
+    std::stringstream &msg) const {
   return validate(msg, "");
 }
 
 bool ReachabilityForDataReportConfig_anyOf::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream &msg, const std::string &pathPrefix) const {
   bool success = true;
   const std::string _pathPrefix =
       pathPrefix.empty() ? "ReachabilityForDataReportConfig_anyOf" : pathPrefix;
@@ -54,39 +54,39 @@ bool ReachabilityForDataReportConfig_anyOf::validate(
 }
 
 bool ReachabilityForDataReportConfig_anyOf::operator==(
-    const ReachabilityForDataReportConfig_anyOf& rhs) const {
+    const ReachabilityForDataReportConfig_anyOf &rhs) const {
   return getValue() == rhs.getValue()
 
       ;
 }
 
 bool ReachabilityForDataReportConfig_anyOf::operator!=(
-    const ReachabilityForDataReportConfig_anyOf& rhs) const {
+    const ReachabilityForDataReportConfig_anyOf &rhs) const {
   return !(*this == rhs);
 }
 
-void to_json(
-    nlohmann::json& j, const ReachabilityForDataReportConfig_anyOf& o) {
+void to_json(nlohmann::json &j,
+             const ReachabilityForDataReportConfig_anyOf &o) {
   j = nlohmann::json();
 
   switch (o.getValue()) {
-    case ReachabilityForDataReportConfig_anyOf::
-        eReachabilityForDataReportConfig_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
-      j = "INVALID_VALUE_OPENAPI_GENERATED";
-      break;
-    case ReachabilityForDataReportConfig_anyOf::
-        eReachabilityForDataReportConfig_anyOf::DIRECT_REPORT:
-      j = "DIRECT_REPORT";
-      break;
-    case ReachabilityForDataReportConfig_anyOf::
-        eReachabilityForDataReportConfig_anyOf::INDIRECT_REPORT:
-      j = "INDIRECT_REPORT";
-      break;
+  case ReachabilityForDataReportConfig_anyOf::
+      eReachabilityForDataReportConfig_anyOf::INVALID_VALUE_OPENAPI_GENERATED:
+    j = "INVALID_VALUE_OPENAPI_GENERATED";
+    break;
+  case ReachabilityForDataReportConfig_anyOf::
+      eReachabilityForDataReportConfig_anyOf::DIRECT_REPORT:
+    j = "DIRECT_REPORT";
+    break;
+  case ReachabilityForDataReportConfig_anyOf::
+      eReachabilityForDataReportConfig_anyOf::INDIRECT_REPORT:
+    j = "INDIRECT_REPORT";
+    break;
   }
 }
 
-void from_json(
-    const nlohmann::json& j, ReachabilityForDataReportConfig_anyOf& o) {
+void from_json(const nlohmann::json &j,
+               ReachabilityForDataReportConfig_anyOf &o) {
   auto s = j.get<std::string>();
   if (s == "DIRECT_REPORT") {
     o.setValue(ReachabilityForDataReportConfig_anyOf::
@@ -114,4 +114,4 @@ void ReachabilityForDataReportConfig_anyOf::setValue(
   m_value = value;
 }
 
-}  // namespace oai::model::udm
+} // namespace oai::model::udm

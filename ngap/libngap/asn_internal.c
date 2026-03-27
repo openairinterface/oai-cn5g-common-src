@@ -1,6 +1,3 @@
-/*
- * SPDX-License-Identifier: LicenseRef-CSSL-1.0
- */
 #include <asn_internal.h>
 
 ssize_t asn__format_to_callback(

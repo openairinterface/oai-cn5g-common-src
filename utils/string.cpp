@@ -41,15 +41,14 @@ std::string& oai::utils::trim(std::string& s) {
 }
 
 // extract query param from given querystring
-std::string query_param_tmp;
-//
 std::string oai::utils::get_query_param(
     std::string querystring, std::string param) {
   std::regex reList("([^=]*)=([^&]*)&?");
+  std::string query_param_tmp;
   query_param_tmp.clear();
   std::for_each(
       std::sregex_iterator(querystring.begin(), querystring.end(), reList),
-      std::sregex_iterator(), [param](std::smatch match) {
+      std::sregex_iterator(), [&](std::smatch match) {
         if (match[1] == param) {
           query_param_tmp = match[2].str().c_str();
           return;

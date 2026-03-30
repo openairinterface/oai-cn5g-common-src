@@ -1,5 +1,7 @@
 # CI Pipeline Documentation for `OAI-CN5G-COMMON-SRC`
 
+> SPDX-License-Identifier: LicenseRef-CSSL-1.0
+
 ## 1. Overview
 
 The CI pipeline [OAI-CN5G-COMMON-SRC](https://jenkins-oai.eurecom.fr/view/5G%20Core%20Network/job/OAI-CN5G-Common-Src/) determines:

@@ -1,5 +1,6 @@
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
-# Contributing to OpenAir-CN-5G #
+
+# Contributing to OpenAir-CN-5G
 
 We want to make contributing to this project as easy and transparent as possible.
 
@@ -16,36 +17,50 @@ Please refer to the steps described on our website: [How to contribute to OAI](h
       * The Continuous Integration will reject your pull request.
    - All pull requests SHALL have **`develop`** branch as target branch.
 
-## Coding Styles ##
+## Coding Styles
 
 We are using `clang-format` as formatting tool on the C/C++ code.
 
-At the time of writing (March 30th, 2020), we are using `clang-format` version 8.0.0 or above. By default, on a Ubuntu bionic Desktop edition, you would install version 6.0.0.
-
-So it is very likely you will have to install it manually. Again, at the time of writing, the working version we found was 9.0.0.
+On a Ubuntu-22 server:
 
 ```bash
-$ wget https://releases.llvm.org/9.0.0/clang+llvm-9.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz
-$ mkdir clang_tmp
-$ tar xvfJ  clang+llvm-9.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz -C ./clang_tmp
-$ sudo cp clang_tmp/clang+llvm-9.0.0-x86_64-linux-gnu-ubuntu-18.04/bin/clang-format /usr/bin/clang-format
-$ rm -Rf clang*
-$ clang-format --version
-clang-format version 9.0.0 (tags/RELEASE_900/final)
+sudo apt-get update
+sudo apt-get install clang-format-12
+sudo update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-12 20
+clang-format --version
+Ubuntu clang-format version 12.0.1-19ubuntu3
 ```
 
-How to format:
+How to test (as CI):
+
+```
+# run the below command in the parent folder
+ci-scripts/common/bash/checkCodingFormattingRules.sh
+```
+
+How to format (fix issues reported by above script):
 
 ```bash
-$ cd myClonedWorkspace/src
-$ clang-format -i theFilesYouWantToFormat
+cd myClonedWorkspace/src
+clang-format -i theFilesYouWantToFormat
 ```
 
-## License ##
+## License
 
-By contributing to OpenAirInterface, you agree that your contributions will be licensed under the [LICENSE](LICENSE) file in the root directory of this source tree.
+By contributing to OpenAirInterface, you agree that your contributions will be
+licensed under
 
-## Continuous Integration process ##
+1. [CSSL v1.0 license](LICENSES/preferred/CSSL-v1.0.txt): for network function
+   related source code or unit test cases
+2. [CC-BY-4.0](LICENSES/preferred/CC-BY-4.0.txt): All the documentation
+3. [MIT](LICENSES/preferred/MIT.txt): Orchestration files (helm-charts,
+   docker-compose yaml files, health scripts, openshift build files)
+   and CI-scripts under the MIT License
+
+Certain source files and 3rd party dependencies are using different licenses;
+you can read about them in [NOTICE](NOTICE).
+
+## Continuous Integration process
 
 1.  You push your modified code with the new branch onto our [official GitLab repository](https://gitlab.eurecom.fr/oai/cn5g/oai-cn5g-common-src).
     -  Please make the name of the branch explicit and short.

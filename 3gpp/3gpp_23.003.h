@@ -26,7 +26,6 @@
 
 #include <nlohmann/json.hpp>
 #include <string>
-#include <Snssai.h>
 #include <boost/algorithm/string.hpp>
 
 #include "logger_base.hpp"
@@ -41,7 +40,7 @@ const uint8_t SD_LENGTH  = 3;
 typedef struct s_nssai  // section 28.4, TS23.003
 {
   uint8_t sst;
-  std::string sd = oai::_3gpp::model::SD_DEFAULT_VALUE;
+  std::string sd = "ffffff";
   // s_nssai(const uint8_t& m_sst, const uint32_t m_sd) : sst(m_sst), sd(m_sd)
   // {}
   s_nssai(const uint8_t& m_sst, const std::string& m_sd)
@@ -74,14 +73,6 @@ typedef struct s_nssai  // section 28.4, TS23.003
     json_data["sst"]         = sst;
     json_data["sd"]          = sd;
     return json_data;
-  }
-  // TODO remove, only temporary, in the future only use model SNSSAI
-  oai::_3gpp::model::Snssai to_model_snssai() const {
-    oai::_3gpp::model::Snssai snssai;
-    snssai.setSst(sst);
-    // TODO this puts a decimal string but SD should be a hex string
-    snssai.setSd(sd);
-    return snssai;
   }
 
   void from_json(nlohmann::json& json_data) {

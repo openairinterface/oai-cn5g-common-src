@@ -372,8 +372,8 @@ int _5gsMobileIdentity::DecodeSuci(
         digit_high = (octet & 0xf0) >> 4;
         digit_low  = octet & 0x0f;
         msin +=
-            ((const std::string) (std::to_string(digit_low)) +
-             (const std::string) (std::to_string(digit_high)));
+            ((const std::string)(std::to_string(digit_low)) +
+             (const std::string)(std::to_string(digit_high)));
       }
 
       // Verify if the MSIN includes an odd number of digits,
@@ -383,10 +383,10 @@ int _5gsMobileIdentity::DecodeSuci(
       digit_low  = octet & 0x0f;
       if (digit_high != 0x0f) {
         msin +=
-            ((const std::string) (std::to_string(digit_low)) +
-             (const std::string) (std::to_string(digit_high)));
+            ((const std::string)(std::to_string(digit_low)) +
+             (const std::string)(std::to_string(digit_high)));
       } else {
-        msin += (const std::string) (std::to_string(digit_low));
+        msin += (const std::string)(std::to_string(digit_low));
       }
 
       supi_format_imsi_tmp.msin = msin;

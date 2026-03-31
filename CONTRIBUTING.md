@@ -1,4 +1,6 @@
-# Contributing to OpenAir-CN-5G #
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
+# Contributing to OpenAir-CN-5G
 
 We want to make contributing to this project as easy and transparent as possible.
 
@@ -15,7 +17,7 @@ Please refer to the steps described on our website: [How to contribute to OAI](h
       * The Continuous Integration will reject your pull request.
    - All pull requests SHALL have **`develop`** branch as target branch.
 
-## Coding Styles ##
+## Coding Styles
 
 We are using `clang-format` as formatting tool on the C/C++ code.
 
@@ -40,11 +42,11 @@ $ cd myClonedWorkspace/src
 $ clang-format -i theFilesYouWantToFormat
 ```
 
-## License ##
+## License
 
 By contributing to OpenAirInterface, you agree that your contributions will be licensed under the [LICENSE](LICENSE) file in the root directory of this source tree.
 
-## Continuous Integration process ##
+## Continuous Integration process
 
 1.  You push your modified code with the new branch onto our [official GitLab repository](https://gitlab.eurecom.fr/oai/cn5g/oai-cn5g-common-src).
     -  Please make the name of the branch explicit and short.

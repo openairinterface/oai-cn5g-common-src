@@ -2847,54 +2847,66 @@ class pfcp_apply_action_ie : public pfcp_ie {
 //      s.set(dl_buffering_suggested_packet_count);
 //  }
 //};
-////-------------------------------------
-//// IE PFCPSMREQ_FLAGS
-// class pfcp_pfcpsmreq_flags_ie : public pfcp_ie {
-// public:
-//  uint8_t todo;
-//
-//  //--------
-//  pfcp_pfcpsmreq_flags_ie(const pfcp::pfcpsmreq_flags_t& b) :
-//  pfcp_ie(PFCP_IE_PFCPSMREQ_FLAGS){
-//    todo = 0;
-//    tlv.set_length(1);
-//  }
-//  //--------
-//  pfcp_pfcpsmreq_flags_ie() : pfcp_ie(PFCP_IE_PFCPSMREQ_FLAGS){
-//    todo = 0;
-//    tlv.set_length(1);
-//  }
-//  //--------
-//  pfcp_pfcpsmreq_flags_ie(const pfcp_tlv& t) : pfcp_ie(t) {
-//    todo = 0;
-//  };
-//  //--------
-//  void to_core_type(pfcp::pfcpsmreq_flags_t& b) {
-//    b.todo = todo;
-//  }
-//  //--------
-//  void dump_to(std::ostream& os) {
-//    tlv.dump_to(os);
-//    os.write(reinterpret_cast<const char*>(&todo), sizeof(todo));
-//  }
-//  //--------
-//  void load_from(std::istream& is) {
-//    //tlv.load_from(is);
-//    if (tlv.get_length() != 1) {
-//      throw pfcp_tlv_bad_length_exception(tlv.type, tlv.get_length(),
-//      __FILE__, __LINE__);
-//    }
-//    is.read(reinterpret_cast<char*>(&todo), sizeof(todo));
-//  }
-//  //--------
-//  void to_core_type(pfcp_ies_container& s) {
-//      pfcp::pfcpsmreq_flags_t pfcpsmreq_flags = {};
-//      to_core_type(pfcpsmreq_flags);
-//      s.set(pfcpsmreq_flags);
-//  }
-//};
-////-------------------------------------
-//// IE PFCPSRRSP_FLAGS
+
+//-------------------------------------
+// IE PFCPSMREQ_FLAGS
+class pfcp_pfcpsmreq_flags_ie : public pfcp_ie {
+ public:
+  uint8_t flags;
+
+  //--------
+  pfcp_pfcpsmreq_flags_ie(const pfcp::pfcpsmreq_flags_t& b)
+      : pfcp_ie(PFCP_IE_PFCPSMREQ_FLAGS) {
+    flags = 0;
+    flags |= (b.drobu & 0x01);
+    flags |= (b.sndem & 0x01) << 1;
+    flags |= (b.qaurr & 0x01) << 2;
+    tlv.set_length(1);
+  }
+
+  //--------
+  pfcp_pfcpsmreq_flags_ie() : pfcp_ie(PFCP_IE_PFCPSMREQ_FLAGS) {
+    flags = 0;
+    tlv.set_length(1);
+  }
+
+  //--------
+  pfcp_pfcpsmreq_flags_ie(const pfcp_tlv& t) : pfcp_ie(t) { flags = 0; };
+
+  //--------
+  void to_core_type(pfcp::pfcpsmreq_flags_t& b) {
+    b.drobu = flags & 0x01;
+    b.sndem = (flags >> 1) & 0x01;
+    b.qaurr = (flags >> 2) & 0x01;
+    b.spare = 0;
+  }
+
+  //--------
+  void dump_to(std::ostream& os) {
+    tlv.dump_to(os);
+    os.write(reinterpret_cast<const char*>(&flags), sizeof(flags));
+  }
+
+  //--------
+  void load_from(std::istream& is) {
+    // tlv.load_from(is);
+    if (tlv.get_length() != 1) {
+      throw pfcp_tlv_bad_length_exception(
+          tlv.type, tlv.get_length(), __FILE__, __LINE__);
+    }
+    is.read(reinterpret_cast<char*>(&flags), sizeof(flags));
+  }
+
+  //--------
+  void to_core_type(pfcp_ies_container& s) {
+    pfcp::pfcpsmreq_flags_t pfcpsmreq_flags = {};
+    to_core_type(pfcpsmreq_flags);
+    s.set(pfcpsmreq_flags);
+  }
+};
+
+//-------------------------------------
+// IE PFCPSRRSP_FLAGS
 // class pfcp_pfcpsrrsp_flags_ie : public pfcp_ie {
 // public:
 //  uint8_t todo;
@@ -4783,6 +4795,11 @@ class pfcp_query_urr_ie : public pfcp_grouped_ie {
   pfcp_query_urr_ie() : pfcp_grouped_ie(PFCP_IE_QUERY_URR) {}
   explicit pfcp_query_urr_ie(const pfcp_tlv& t) : pfcp_grouped_ie(t) {}
   //--------
+  /** @brief Deserialize sub-IEs into a typed pfcp::duplicating_parameters
+   * container.
+   *  @param c  Output container populated from the decoded sub-IEs.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.2.3 Table 7.5.2.3-3
+   */
   void to_core_type(pfcp::duplicating_parameters& c) {
     for (auto sie : ies) {
       sie.get()->to_core_type(c);
@@ -5146,9 +5163,14 @@ class pfcp_create_bar_ie : public pfcp_grouped_ie {
       : pfcp_grouped_ie(PFCP_IE_CREATE_BAR) {
     tlv.set_length(0);
     if (b.bar_id.first) {
-      std::shared_ptr<pfcp_bar_id_ie> sie(new pfcp_bar_id_ie(b.bar_id.second));
+      std::shared_ptr<pfcp_bar_id_ie> sie(
+          new pfcp_bar_id_ie(b.bar_id.second));  // §8.2.57 — M
       add_ie(sie);
     }
+    // TODO §8.2.83  Downlink Data Notification Delay —
+    // pfcp_downlink_data_notification_delay_ie not in lib
+    // TODO §8.2.85  Suggested Buffering Packets Count —
+    // pfcp_suggested_buffering_packets_count_ie not in lib
   }
   //--------
   pfcp_create_bar_ie() : pfcp_grouped_ie(PFCP_IE_CREATE_BAR) {}
@@ -5921,54 +5943,81 @@ class pfcp_dl_flow_level_marking_ie : public pfcp_ie {
 //      s.set(error_indication_report);
 //  }
 //};
-////-------------------------------------
-//// IE MEASUREMENT_INFORMATION
-// class pfcp_measurement_information_ie : public pfcp_ie {
-// public:
-//  uint8_t todo;
-//
-//  //--------
-//  pfcp_measurement_information_ie(const pfcp::measurement_information_t& b) :
-//  pfcp_ie(PFCP_IE_MEASUREMENT_INFORMATION){
-//    todo = 0;
-//    tlv.set_length(1);
-//  }
-//  //--------
-//  pfcp_measurement_information_ie() :
-//  pfcp_ie(PFCP_IE_MEASUREMENT_INFORMATION){
-//    todo = 0;
-//    tlv.set_length(1);
-//  }
-//  //--------
-//  pfcp_measurement_information_ie(const pfcp_tlv& t) : pfcp_ie(t) {
-//    todo = 0;
-//  };
-//  //--------
-//  void to_core_type(pfcp::measurement_information_t& b) {
-//    b.todo = todo;
-//  }
-//  //--------
-//  void dump_to(std::ostream& os) {
-//    tlv.dump_to(os);
-//    os.write(reinterpret_cast<const char*>(&todo), sizeof(todo));
-//  }
-//  //--------
-//  void load_from(std::istream& is) {
-//    //tlv.load_from(is);
-//    if (tlv.get_length() != 1) {
-//      throw pfcp_tlv_bad_length_exception(tlv.type, tlv.get_length(),
-//      __FILE__, __LINE__);
-//    }
-//    is.read(reinterpret_cast<char*>(&todo), sizeof(todo));
-//  }
-//  //--------
-//  void to_core_type(pfcp_ies_container& s) {
-//      pfcp::measurement_information_t measurement_information = {};
-//      to_core_type(measurement_information);
-//      s.set(measurement_information);
-//  }
-//};
-////-------------------------------------
+
+//-------------------------------------
+// IE MEASUREMENT_INFORMATION
+// 3GPP TS 29.244 V18.10.0 Section 8.2.68
+// This IE provides information on the requested measurement information
+class pfcp_measurement_information_ie : public pfcp_ie {
+ public:
+  // Octet 5 flags - as per 3GPP TS 29.244 Section 8.2.68
+  union {
+    struct {
+      uint8_t mbqe : 1;   // Bit 1: Measurement Before QoS Enforcement
+      uint8_t inam : 1;   // Bit 2: Inactive Measurement
+      uint8_t radi : 1;   // Bit 3: Reduced Application Detection Information
+      uint8_t istm : 1;   // Bit 4: Immediate Start Time Metering
+      uint8_t mnop : 1;   // Bit 5: Measurement of Number of Packets
+      uint8_t sspoc : 1;  // Bit 6: Send Start Pause of Charging
+      uint8_t aspoc : 1;  // Bit 7: Applicable for Start of Pause of Charging
+      uint8_t ciam : 1;   // Bit 8: Control of Inactive Measurement
+    } bf;
+    uint8_t b;
+  } u1;
+
+  //--------
+  pfcp_measurement_information_ie() : pfcp_ie(PFCP_IE_MEASUREMENT_INFORMATION) {
+    u1.b = 0;
+    tlv.set_length(1);
+  }
+  //--------
+  pfcp_measurement_information_ie(const pfcp_tlv& t) : pfcp_ie(t) { u1.b = 0; };
+  //--------
+  void dump_to(std::ostream& os) {
+    tlv.dump_to(os);
+    os.write(reinterpret_cast<const char*>(&u1.b), sizeof(u1.b));
+  }
+  //--------
+  void load_from(std::istream& is) {
+    // tlv.load_from(is); - already loaded in new_pfcp_ie_from_stream
+    // 3GPP TS 29.244 Section 8.2.68: minimum length is 1 byte (flags)
+    // Additional octets may be present for future extensions
+    if (tlv.get_length() < 1) {
+      throw pfcp_tlv_bad_length_exception(
+          tlv.type, tlv.get_length(), __FILE__, __LINE__);
+    }
+    // Read the mandatory flags byte
+    is.read(reinterpret_cast<char*>(&u1.b), sizeof(u1.b));
+
+    // Skip any additional octets if length > 1 (for future extensions)
+    // 3GPP TS 29.244 Section 8.2.68: "Octets 6 to (n+4) present only if
+    // explicitly specified"
+    if (tlv.get_length() > 1) {
+      is.seekg(tlv.get_length() - 1, std::ios_base::cur);
+    }
+  }
+  //--------
+  void to_core_type(pfcp_ies_container& s) {
+    // For now, we just parse and acknowledge the IE
+    // Future implementations can use the flags for measurement control
+  }
+  // void to_core_type(pfcp_ies_container& s) {
+  //   pfcp::measurement_information_t measurement_information = {};
+  //   to_core_type(measurement_information);
+  //   s.set(measurement_information);
+  // }
+
+  pfcp_measurement_information_ie(const measurement_information_s& b)
+      : pfcp_ie(PFCP_IE_MEASUREMENT_INFORMATION) {
+    u1.b       = 0;
+    u1.bf.mbqe = b.mbqe;
+    u1.bf.inam = b.inam;
+    u1.bf.radi = b.radi;
+    tlv.set_length(1);
+  }
+};
+
+//-------------------------------------
 // IE NODE_REPORT_TYPE
 class pfcp_node_report_type_ie : public pfcp_ie {
  public:
@@ -9304,6 +9353,10 @@ class pfcp_3gpp_interface_type_ie : public pfcp_ie {
 class pfcp_pdi_ie : public pfcp_grouped_ie {
  public:
   //--------
+  /** @brief Serialize pfcp::pdi core-type into wire-format grouped TLV.
+   *  @param b  Core-type container carrying the grouped IE fields.
+   *  @see   3GPP TS 29.244 V17.10.0 Table 7.5.2.2-2
+   */
   explicit pfcp_pdi_ie(const pfcp::pdi& b) : pfcp_grouped_ie(PFCP_IE_PDI) {
     tlv.set_length(0);
     if (b.source_interface.first) {
@@ -9367,18 +9420,35 @@ class pfcp_pdi_ie : public pfcp_grouped_ie {
     // if (b.framed_ipv6_route.first)
     // {std::shared_ptr<pfcp_framed_ipv6_route_ie> sie(new
     // pfcp_framed_ipv6_route_ie(b.framed_ipv6_route.second)); add_ie(sie);}
+    if (b.source_interface_type.first) {
+      std::shared_ptr<pfcp_3gpp_interface_type_ie> sie(
+          new pfcp_3gpp_interface_type_ie(
+              b.source_interface_type.second));  // §8.2.134 — O
+      add_ie(sie);
+    }
+    // TODO §8.2.x   Traffic Endpoint ID — pfcp_traffic_endpoint_id_ie not in
+    // lib
   }
   //--------
   pfcp_pdi_ie() : pfcp_grouped_ie(PFCP_IE_PDI) {}
   //--------
   explicit pfcp_pdi_ie(const pfcp_tlv& t) : pfcp_grouped_ie(t) {}
   //--------
+  /** @brief Deserialize sub-IEs into a typed pfcp::pdi container.
+   *  @param c  Output container populated from the decoded sub-IEs.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.2.2 Table 7.5.2.2-2
+   */
   void to_core_type(pfcp::pdi& c) {
     for (auto sie : ies) {
       sie.get()->to_core_type(c);
     }
   }
   //--------
+  /** @brief Decode this grouped IE and push its value into a message
+   *         pfcp_ies_container via set().
+   *  @param s  Message container receiving the decoded grouped IE.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.2.2 Table 7.5.2.2-2
+   */
   void to_core_type(pfcp_ies_container& s) {
     pfcp::pdi i = {};
     to_core_type(i);
@@ -9390,6 +9460,11 @@ class pfcp_pdi_ie : public pfcp_grouped_ie {
 class pfcp_forwarding_parameters_ie : public pfcp_grouped_ie {
  public:
   //--------
+  /** @brief Serialize pfcp::forwarding_parameters core-type into wire-format
+   * grouped TLV.
+   *  @param b  Core-type container carrying the grouped IE fields.
+   *  @see   3GPP TS 29.244 V17.10.0 Table 7.5.2.3-2
+   */
   explicit pfcp_forwarding_parameters_ie(const pfcp::forwarding_parameters& b)
       : pfcp_grouped_ie(PFCP_IE_FORWARDING_PARAMETERS) {
     tlv.set_length(0);
@@ -9436,6 +9511,15 @@ class pfcp_forwarding_parameters_ie : public pfcp_grouped_ie {
     // pfcp_linked_traffic_endpoint_id_t_ie(b.linked_traffic_endpoint_id_t.second));
     // add_ie(sie);} if (b.proxying.first) {std::shared_ptr<pfcp_proxying_ie>
     // sie(new pfcp_proxying_ie(b.proxying.second)); add_ie(sie);}
+    if (b.destination_interface_type.first) {
+      std::shared_ptr<pfcp_3gpp_interface_type_ie> sie(
+          new pfcp_3gpp_interface_type_ie(
+              b.destination_interface_type.second));  // §8.2.134 — O
+      add_ie(sie);
+    }
+    // TODO §8.2.x   Header Enrichment — pfcp_header_enrichment_ie not in lib
+    // TODO §8.2.x   Linked Traffic Endpoint ID —
+    // pfcp_linked_traffic_endpoint_id_ie not in lib
   }
   //--------
   pfcp_forwarding_parameters_ie()
@@ -9444,12 +9528,22 @@ class pfcp_forwarding_parameters_ie : public pfcp_grouped_ie {
   explicit pfcp_forwarding_parameters_ie(const pfcp_tlv& t)
       : pfcp_grouped_ie(t) {}
   //--------
+  /** @brief Deserialize sub-IEs into a typed pfcp::forwarding_parameters
+   * container.
+   *  @param c  Output container populated from the decoded sub-IEs.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.2.3 Table 7.5.2.3-2
+   */
   void to_core_type(pfcp::forwarding_parameters& c) {
     for (auto sie : ies) {
       sie.get()->to_core_type(c);
     }
   }
   //--------
+  /** @brief Decode this grouped IE and push its value into a message
+   *         pfcp_ies_container via set().
+   *  @param s  Message container receiving the decoded grouped IE.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.2.3 Table 7.5.2.3-2
+   */
   void to_core_type(pfcp_ies_container& s) {
     pfcp::forwarding_parameters v = {};
     to_core_type(v);
@@ -9461,9 +9555,38 @@ class pfcp_forwarding_parameters_ie : public pfcp_grouped_ie {
 class pfcp_duplicating_parameters_ie : public pfcp_grouped_ie {
  public:
   //--------
+  /** @brief Serialize pfcp::duplicating_parameters core-type into wire-format
+   * grouped TLV.
+   *  @param b  Core-type container carrying the grouped IE fields.
+   *  @see   3GPP TS 29.244 V17.10.0 Table 7.5.2.3-3
+   */
   explicit pfcp_duplicating_parameters_ie(const pfcp::duplicating_parameters& b)
       : pfcp_grouped_ie(PFCP_IE_DUPLICATING_PARAMETERS) {
     tlv.set_length(0);
+    if (b.destination_interface.first) {
+      std::shared_ptr<pfcp_destination_interface_ie> sie(
+          new pfcp_destination_interface_ie(
+              b.destination_interface.second));  // §8.2.2 — C
+      add_ie(sie);
+    }
+    if (b.outer_header_creation.first) {
+      std::shared_ptr<pfcp_outer_header_creation_ie> sie(
+          new pfcp_outer_header_creation_ie(
+              b.outer_header_creation.second));  // §8.2.56 — C
+      add_ie(sie);
+    }
+    if (b.transport_level_marking.first) {
+      std::shared_ptr<pfcp_transport_level_marking_ie> sie(
+          new pfcp_transport_level_marking_ie(
+              b.transport_level_marking.second));  // §8.2.23 — C
+      add_ie(sie);
+    }
+    if (b.forwarding_policy.first) {
+      std::shared_ptr<pfcp_forwarding_policy_ie> sie(
+          new pfcp_forwarding_policy_ie(
+              b.forwarding_policy.second));  // §8.2.53 — C
+      add_ie(sie);
+    }
   }
   //--------
   pfcp_duplicating_parameters_ie()
@@ -9478,6 +9601,11 @@ class pfcp_duplicating_parameters_ie : public pfcp_grouped_ie {
     }
   }
   //--------
+  /** @brief Decode this grouped IE and push its value into a message
+   *         pfcp_ies_container via set().
+   *  @param s  Message container receiving the decoded grouped IE.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.2.3 Table 7.5.2.3-3
+   */
   void to_core_type(pfcp_ies_container& s) {
     pfcp::duplicating_parameters i = {};
     to_core_type(i);
@@ -9487,9 +9615,35 @@ class pfcp_duplicating_parameters_ie : public pfcp_grouped_ie {
 
 //-------------------------------------
 // IE CREATE_PDR
+// clang-format off
+/*! @brief Serialization of Create PDR grouped IE
+ *  3GPP TS 29.244 V17.10.0 Table 7.5.2.2-1
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * PDR ID                              M     X   X   X   X    X   §8.2.36
+ * Precedence                          M     -   X   X   X    X   §8.2.11
+ * PDI                                 M     X   X   X   X    X   §7.5.2.2-2
+ * Outer Header Removal                C     X   X   -   X    X   §8.2.64
+ * FAR ID                              C     X   X   X   X    X   §8.2.74
+ * URR ID                              C     X   X   X   X    -   §8.2.54
+ * QER ID                              C     -   X   X   X    X   §8.2.75
+ * Activate Predefined Rules           C     -   X   X   X    -   §8.2.72
+ * Deactivate Predefined Rules         C     -   X   X   X    -   §8.2.73  [TODO — not in lib]
+ * Activation Time                     O     -   X   X   X    -   §8.2.121 [TODO — not in lib]
+ * Deactivation Time                   O     -   X   X   X    -   §8.2.122 [TODO — not in lib]
+ * MAR ID                              C     -   -   -   X    -   §8.2.123
+ * Packet Replication and Detection    C     -   -   -   X    -   §8.2.130 [TODO — not in lib]
+ *   Carry-On Information
+ */
+// clang-format on
 class pfcp_create_pdr_ie : public pfcp_grouped_ie {
  public:
   //--------
+  /** @brief Serialize pfcp::create_pdr core-type into wire-format grouped TLV.
+   *  @param b  Core-type container carrying the grouped IE fields.
+   *  @see   3GPP TS 29.244 V17.10.0 Table 7.5.2.2-1
+   */
   explicit pfcp_create_pdr_ie(const pfcp::create_pdr& b)
       : pfcp_grouped_ie(PFCP_IE_CREATE_PDR) {
     tlv.set_length(0);
@@ -9535,23 +9689,47 @@ class pfcp_create_pdr_ie : public pfcp_grouped_ie {
   //--------
   explicit pfcp_create_pdr_ie(const pfcp_tlv& t) : pfcp_grouped_ie(t) {}
   //--------
+  /** @brief Deserialize sub-IEs into a typed pfcp::create_pdr container.
+   *  @param c  Output container populated from the decoded sub-IEs.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.2.2 Table 7.5.2.2-1
+   */
   void to_core_type(pfcp::create_pdr& c) {
     for (auto sie : ies) {
       sie.get()->to_core_type(c);
     }
   }
   //--------
+  /** @brief Decode this grouped IE and push its value into a message
+   *         pfcp_ies_container via set().
+   *  @param s  Message container receiving the decoded grouped IE.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.2.2 Table 7.5.2.2-1
+   */
   void to_core_type(pfcp_ies_container& s) {
     pfcp::create_pdr i = {};
     to_core_type(i);
     s.set(i);
   }
 };
-//-------------------------------------
-// IE CREATE_FAR
+// clang-format off
+/*! @brief Serialization of Create FAR grouped IE
+ *  3GPP TS 29.244 V17.10.0 Table 7.5.2.3-1
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * FAR ID                              M     X   X   X   X    X   §8.2.74
+ * Apply Action                        M     X   X   X   X    X   §8.2.26
+ * Forwarding Parameters               C     X   X   -   X    X   §7.5.2.3-2
+ * Duplicating Parameters              C     -   X   -   X    -   §7.5.2.3-3
+ * BAR ID                              C     -   X   -   X    -   §8.2.57
+ */
+// clang-format on
 class pfcp_create_far_ie : public pfcp_grouped_ie {
  public:
   //--------
+  /** @brief Serialize pfcp::create_far core-type into wire-format grouped TLV.
+   *  @param b  Core-type container carrying the grouped IE fields.
+   *  @see   3GPP TS 29.244 V17.10.0 Table 7.5.2.3-1
+   */
   explicit pfcp_create_far_ie(const pfcp::create_far& b)
       : pfcp_grouped_ie(PFCP_IE_CREATE_FAR) {
     tlv.set_length(0);
@@ -9584,23 +9762,66 @@ class pfcp_create_far_ie : public pfcp_grouped_ie {
   //--------
   explicit pfcp_create_far_ie(const pfcp_tlv& t) : pfcp_grouped_ie(t) {}
   //--------
+  /** @brief Deserialize sub-IEs into a typed pfcp::create_far container.
+   *  @param c  Output container populated from the decoded sub-IEs.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.2.3 Table 7.5.2.3-1
+   */
   void to_core_type(pfcp::create_far& c) {
     for (auto sie : ies) {
       sie.get()->to_core_type(c);
     }
   }
   //--------
+  /** @brief Decode this grouped IE and push its value into a message
+   *         pfcp_ies_container via set().
+   *  @param s  Message container receiving the decoded grouped IE.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.2.3 Table 7.5.2.3-1
+   */
   void to_core_type(pfcp_ies_container& s) {
     pfcp::create_far i = {};
     to_core_type(i);
     s.set(i);
   }
 };
-//-------------------------------------
-// IE CREATE_URR
+// clang-format off
+/*! @brief Serialization of Create URR grouped IE
+ *  3GPP TS 29.244 V17.10.0 Table 7.5.2.4-1
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * URR ID                              M     X   X   X   X    -   §8.2.54
+ * Measurement Method                  M     X   X   X   X    -   §8.2.40
+ * Reporting Triggers                  M     X   X   X   X    -   §8.2.41
+ * Measurement Period                  C     X   X   X   X    -   §8.2.42
+ * Volume Threshold                    C     X   X   X   X    -   §8.2.43
+ * Volume Quota                        C     -   X   -   X    -   §8.2.46
+ * Time Threshold                      C     X   X   X   X    -   §8.2.47
+ * Time Quota                          C     -   X   -   X    -   §8.2.48
+ * Quota Holding Time                  C     -   X   -   X    -   §8.2.64
+ * Dropped DL Traffic Threshold        C     -   X   -   X    -   §8.2.67
+ * Quota Validity Time                 C     -   X   -   X    -   §8.2.129 [TODO — not in lib]
+ * Monitoring Time                     O     -   X   X   X    -   §8.2.55
+ * Subsequent Volume Threshold         C     -   X   -   X    -   §8.2.56
+ * Subsequent Time Threshold           C     -   X   -   X    -   §8.2.57
+ * Inactivity Detection Time           C     -   X   -   X    -   §8.2.58
+ * Linked URR ID                       O     -   X   X   X    -   §8.2.59
+ * Measurement Information             C     -   X   -   X    -   §8.2.60
+ * Time Quota Mechanism                C     -   X   -   X    -   §8.2.62
+ * Aggregated URRs                     C     -   -   -   X    -   grouped
+ * FAR ID for Quota Action             C     -   X   -   X    -   §8.2.74
+ * Ethernet Inactivity Timer           C     -   X   -   X    -   §8.2.130
+ * Additional Monitoring Time          O     -   -   -   X    -   grouped
+ * Number of Reports                   C     -   -   -   X    -   §8.2.163 [TODO — not in lib]
+ * Event Information                   C     -   -   -   X    -   grouped
+ */
+// clang-format on
 class pfcp_create_urr_ie : public pfcp_grouped_ie {
  public:
   //--------
+  /** @brief Serialize pfcp::create_urr core-type into wire-format grouped TLV.
+   *  @param b  Core-type container carrying the grouped IE fields.
+   *  @see   3GPP TS 29.244 V17.10.0 Table 7.5.2.4-1
+   */
   explicit pfcp_create_urr_ie(const pfcp::create_urr& b)
       : pfcp_grouped_ie(PFCP_IE_CREATE_URR) {
     tlv.set_length(0);
@@ -9608,67 +9829,218 @@ class pfcp_create_urr_ie : public pfcp_grouped_ie {
       std::shared_ptr<pfcp_urr_id_ie> sie(new pfcp_urr_id_ie(b.urr_id.second));
       add_ie(sie);
     }
-    if (b.urr_id.first) {
+    if (b.measurement_method.first) {
       std::shared_ptr<pfcp_measurement_method_ie> sie(
           new pfcp_measurement_method_ie(b.measurement_method.second));
       add_ie(sie);
     }
-    if (b.urr_id.first) {
+    if (b.reporting_triggers.first) {
       std::shared_ptr<pfcp_reporting_triggers_ie> sie(
           new pfcp_reporting_triggers_ie(b.reporting_triggers.second));
       add_ie(sie);
     }
-    if (b.urr_id.first) {
-      if (b.measurement_period.first) {
-        std::shared_ptr<pfcp_measurement_period_ie> sie(
-            new pfcp_measurement_period_ie(b.measurement_period.second));
-        add_ie(sie);
-      }
-      if (b.volume_threshold.first) {
-        std::shared_ptr<pfcp_volume_threshold_ie> sie(
-            new pfcp_volume_threshold_ie(b.volume_threshold.second));
-        add_ie(sie);
-      }
-      if (b.volume_quota.first) {
-        std::shared_ptr<pfcp_volume_quota_ie> sie(
-            new pfcp_volume_quota_ie(b.volume_quota.second));
-        add_ie(sie);
-      }
-      if (b.time_threshold.first) {
-        std::shared_ptr<pfcp_time_threshold_ie> sie(
-            new pfcp_time_threshold_ie(b.time_threshold.second));
-        add_ie(sie);
-      }
-      if (b.time_quota.first) {
-        std::shared_ptr<pfcp_time_quota_ie> sie(
-            new pfcp_time_quota_ie(b.time_quota.second));
-        add_ie(sie);
-      }
+    if (b.measurement_period.first) {
+      std::shared_ptr<pfcp_measurement_period_ie> sie(
+          new pfcp_measurement_period_ie(b.measurement_period.second));
+      add_ie(sie);
     }
-    // ToDo: Optional IEs
+    if (b.volume_threshold.first) {
+      std::shared_ptr<pfcp_volume_threshold_ie> sie(
+          new pfcp_volume_threshold_ie(b.volume_threshold.second));
+      add_ie(sie);
+    }
+    if (b.volume_quota.first) {
+      std::shared_ptr<pfcp_volume_quota_ie> sie(
+          new pfcp_volume_quota_ie(b.volume_quota.second));
+      add_ie(sie);
+    }
+    if (b.time_threshold.first) {
+      std::shared_ptr<pfcp_time_threshold_ie> sie(
+          new pfcp_time_threshold_ie(b.time_threshold.second));
+      add_ie(sie);
+    }
+    if (b.time_quota.first) {
+      std::shared_ptr<pfcp_time_quota_ie> sie(
+          new pfcp_time_quota_ie(b.time_quota.second));
+      add_ie(sie);
+    }
+    if (b.monitoring_time.first) {
+      std::shared_ptr<pfcp_monitoring_time_ie> sie(
+          new pfcp_monitoring_time_ie(b.monitoring_time.second));
+      add_ie(sie);
+    }
+    if (b.subsequent_volume_threshold.first) {
+      std::shared_ptr<pfcp_subsequent_volume_threshold_ie> sie(
+          new pfcp_subsequent_volume_threshold_ie(
+              b.subsequent_volume_threshold.second));
+      add_ie(sie);
+    }
+    if (b.subsequent_time_threshold.first) {
+      std::shared_ptr<pfcp_subsequent_time_threshold_ie> sie(
+          new pfcp_subsequent_time_threshold_ie(
+              b.subsequent_time_threshold.second));
+      add_ie(sie);
+    }
+    if (b.inactivity_detection_time.first) {
+      std::shared_ptr<pfcp_inactivity_detection_time_ie> sie(
+          new pfcp_inactivity_detection_time_ie(
+              b.inactivity_detection_time.second));
+      add_ie(sie);
+    }
+    if (b.measurement_information.first) {
+      std::shared_ptr<pfcp_measurement_information_ie> sie(
+          new pfcp_measurement_information_ie(
+              b.measurement_information.second));
+      add_ie(sie);
+    }
+    // TODO §8.2.x   b.subsequent_volume_quota — pfcp_subsequent_volume_quota_ie
+    // not in lib
+    // TODO §8.2.x   b.subsequent_time_quota — pfcp_subsequent_time_quota_ie not
+    // in lib
+    // TODO §8.2.59  b.linked_urr_id — pfcp_linked_urr_id_ie not in lib
+    // TODO §8.2.62  b.time_quota_mechanism — pfcp_time_quota_mechanism_ie not
+    // in lib
+    // TODO grouped  b.aggregated_urrs — pfcp_aggregated_urrs_ie not in lib
+    // TODO §8.2.130 b.ethernet_inactivity_timer —
+    // pfcp_ethernet_inactivity_timer_ie not in lib
+    // TODO grouped  b.additional_monitoring_time —
+    // pfcp_additional_monitoring_time_ie not in lib
+    // TODO §8.2.163 Number of Reports — not in lib
+    // TODO §8.2.129 Quota Validity Time — not in lib
+    // TODO §8.2.163 Number of Reports — not in lib
   }
   //--------
   pfcp_create_urr_ie() : pfcp_grouped_ie(PFCP_IE_CREATE_URR) {}
   //--------
   explicit pfcp_create_urr_ie(const pfcp_tlv& t) : pfcp_grouped_ie(t) {}
   //--------
-  void to_core_type(pfcp::duplicating_parameters& c) {
+  /** @brief Deserialize sub-IEs into a typed pfcp::create_urr container.
+   *  @param c  Output container populated from the decoded sub-IEs.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.2.4 Table 7.5.2.4-1
+   */
+  void to_core_type(pfcp::create_urr& c) {
     for (auto sie : ies) {
       sie.get()->to_core_type(c);
     }
   }
   //--------
+  /** @brief Decode this grouped IE and push its value into a message
+   *         pfcp_ies_container via set().
+   *  @param s  Message container receiving the decoded grouped IE.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.2.4 Table 7.5.2.4-1
+   */
   void to_core_type(pfcp_ies_container& s) {
     pfcp::create_urr i = {};
-    // to_core_type(i);
+    to_core_type(i);
     s.set(i);
   }
 };
+// clang-format off
+/*! @brief Serialization of Create QER grouped IE
+ *  3GPP TS 29.244 V17.10.0 Table 7.5.2.5-1
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * QER ID                              M     -   X   X   X    X   §8.2.75
+ * QER Correlation ID                  C     -   X   X   X    -   §8.2.76
+ * Gate Status                         M     -   X   X   X    X   §8.2.7
+ * Maximum Bitrate                     C     -   X   X   X    X   §8.2.8
+ * Guaranteed Bitrate                  C     -   X   X   X    X   §8.2.9
+ * Packet Rate                         C     -   X   -   X    -   §8.2.21
+ * DL Flow Level Marking               C     -   X   -   X    -   §8.2.22
+ * QoS Flow Identifier (QFI)           C     -   -   -   X    X   §8.2.89
+ * Reflective QoS (RQI)                C     -   -   -   X    X   §8.2.88
+ * Paging Policy Indicator (PPI)       C     -   -   -   X    -   §8.2.91
+ * Averaging Window                    O     -   -   -   X    -   §8.2.118
+ * QER Control Indications             O     -   -   -   X    -   §8.2.177 [TODO — not in lib]
+ */
+// clang-format on
 //-------------------------------------
-// IE CREATE_QER
+// IE PAGING POLICY INDICATOR  §8.2.92
+//-------------------------------------
+//-------------------------------------
+// IE PAGING POLICY INDICATOR  §8.2.92
+//-------------------------------------
+class pfcp_paging_policy_indicator_ie : public pfcp_ie {
+ public:
+  uint8_t ppi;  // 4-bit value, bits 3..0
+
+  pfcp_paging_policy_indicator_ie()
+      : pfcp_ie(PFCP_IE_PAGING_POLICY_INDICATOR), ppi(0) {
+    tlv.set_length(1);
+  }
+
+  explicit pfcp_paging_policy_indicator_ie(const pfcp_tlv& t)
+      : pfcp_ie(t), ppi(0) {}
+
+  explicit pfcp_paging_policy_indicator_ie(const paging_policy_indicator_s& s)
+      : pfcp_ie(PFCP_IE_PAGING_POLICY_INDICATOR),
+        ppi(s.ppi_value & 0x0F) {  // use s.ppi_value — the actual field name
+    tlv.set_length(1);
+  }
+
+  void to_core_type(paging_policy_indicator_s& s) {
+    s.ppi_value = ppi & 0x0F;  // mirror the field name
+  }
+
+  void dump_to(std::ostream& os) override {
+    tlv.dump_to(os);
+    os.write(reinterpret_cast<const char*>(&ppi), 1);
+  }
+
+  void load_from(std::istream& is) override {
+    is.read(reinterpret_cast<char*>(&ppi), 1);
+    ppi &= 0x0F;
+  }
+};
+//-------------------------------------
+// IE AVERAGING WINDOW  §8.2.134
+//-------------------------------------
+//-------------------------------------
+// IE AVERAGING WINDOW  §8.2.134
+//-------------------------------------
+class pfcp_averaging_window_ie : public pfcp_ie {
+ public:
+  uint32_t averaging_window;  // milliseconds, host byte order
+
+  pfcp_averaging_window_ie()
+      : pfcp_ie(PFCP_IE_AVERAGING_WINDOW), averaging_window(0) {
+    tlv.set_length(sizeof(uint32_t));
+  }
+
+  explicit pfcp_averaging_window_ie(const pfcp_tlv& t)
+      : pfcp_ie(t), averaging_window(0) {}
+
+  explicit pfcp_averaging_window_ie(const averaging_window_s& s)
+      : pfcp_ie(PFCP_IE_AVERAGING_WINDOW),
+        averaging_window(s.averaging_window) {
+    tlv.set_length(sizeof(uint32_t));
+  }
+
+  void to_core_type(averaging_window_s& s) {
+    s.averaging_window = averaging_window;
+  }
+
+  void dump_to(std::ostream& os) override {
+    tlv.dump_to(os);
+    auto be = htobe32(averaging_window);
+    os.write(reinterpret_cast<const char*>(&be), sizeof(be));
+  }
+
+  void load_from(std::istream& is) override {
+    uint32_t be = 0;
+    is.read(reinterpret_cast<char*>(&be), sizeof(be));
+    averaging_window = be32toh(be);
+  }
+};
+
 class pfcp_create_qer_ie : public pfcp_grouped_ie {
  public:
   //--------
+  /** @brief Serialize pfcp::create_qer core-type into wire-format grouped TLV.
+   *  @param b  Core-type container carrying the grouped IE fields.
+   *  @see   3GPP TS 29.244 V17.10.0 Table 7.5.2.5-1
+   */
   explicit pfcp_create_qer_ie(const pfcp::create_qer& b)
       : pfcp_grouped_ie(PFCP_IE_CREATE_QER) {
     tlv.set_length(0);
@@ -9719,18 +10091,39 @@ class pfcp_create_qer_ie : public pfcp_grouped_ie {
           std::make_shared<pfcp_rqi_ie>(b.reflective_qos.second);
       add_ie(sie);
     }
+    if (b.paging_policy_indicator.first) {
+      std::shared_ptr<pfcp_paging_policy_indicator_ie> sie =
+          std::make_shared<pfcp_paging_policy_indicator_ie>(
+              b.paging_policy_indicator.second);
+      add_ie(sie);
+    }
+    if (b.averaging_window.first) {
+      std::shared_ptr<pfcp_averaging_window_ie> sie =
+          std::make_shared<pfcp_averaging_window_ie>(b.averaging_window.second);
+      add_ie(sie);
+    }
+    // TODO §8.2.177 QER Control Indications — not in lib
   }
   //--------
   pfcp_create_qer_ie() : pfcp_grouped_ie(PFCP_IE_CREATE_QER) {}
   //--------
   explicit pfcp_create_qer_ie(const pfcp_tlv& t) : pfcp_grouped_ie(t) {}
   //--------
+  /** @brief Deserialize sub-IEs into a typed pfcp::create_qer container.
+   *  @param c  Output container populated from the decoded sub-IEs.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.2.5 Table 7.5.2.5-1
+   */
   void to_core_type(pfcp::create_qer& c) {
     for (auto sie : ies) {
       sie.get()->to_core_type(c);
     }
   }
   //--------
+  /** @brief Decode this grouped IE and push its value into a message
+   *         pfcp_ies_container via set().
+   *  @param s  Message container receiving the decoded grouped IE.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.2.5 Table 7.5.2.5-1
+   */
   void to_core_type(pfcp_ies_container& s) {
     pfcp::create_qer i = {};
     to_core_type(i);
@@ -9742,6 +10135,10 @@ class pfcp_create_qer_ie : public pfcp_grouped_ie {
 class pfcp_created_pdr_ie : public pfcp_grouped_ie {
  public:
   //--------
+  /** @brief Serialize pfcp::created_pdr core-type into wire-format grouped TLV.
+   *  @param b  Core-type container carrying the grouped IE fields.
+   *  @see   3GPP TS 29.244 V17.10.0 Table 7.5.3.2
+   */
   explicit pfcp_created_pdr_ie(const pfcp::created_pdr& b)
       : pfcp_grouped_ie(PFCP_IE_CREATED_PDR) {
     tlv.set_length(0);
@@ -9760,38 +10157,59 @@ class pfcp_created_pdr_ie : public pfcp_grouped_ie {
   //--------
   explicit pfcp_created_pdr_ie(const pfcp_tlv& t) : pfcp_grouped_ie(t) {}
   //--------
+  /** @brief Deserialize sub-IEs into a typed pfcp::created_pdr container.
+   *  @param c  Output container populated from the decoded sub-IEs.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.3 Table 7.5.3.2
+   */
   void to_core_type(pfcp::created_pdr& c) {
     for (auto sie : ies) {
       sie.get()->to_core_type(c);
     }
   }
   //--------
+  /** @brief Decode this grouped IE and push its value into a message
+   *         pfcp_ies_container via set().
+   *  @param s  Message container receiving the decoded grouped IE.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.3 Table 7.5.3.2
+   */
   void to_core_type(pfcp_ies_container& s) {
     pfcp::created_pdr i = {};
     to_core_type(i);
     s.set(i);
   }
 };
-//-------------------------------------
-// IE UPDATE_PDR
+// clang-format off
+/*! @brief Serialization of Update PDR grouped IE
+ *  3GPP TS 29.244 V17.10.0 Table 7.5.4.2-1
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * PDR ID                              M     X   X   X   X    X   §8.2.36
+ * Outer Header Removal                C     X   X   -   X    X   §8.2.64
+ * Precedence                          C     -   X   X   X    X   §8.2.11
+ * PDI                                 C     X   X   X   X    X   §7.5.2.2-2
+ * FAR ID                              C     X   X   X   X    X   §8.2.74
+ * URR ID                              C     X   X   X   X    -   §8.2.54
+ * QER ID                              C     -   X   X   X    X   §8.2.75
+ * Activate Predefined Rules           C     -   X   X   X    -   §8.2.72
+ * Deactivate Predefined Rules         C     -   X   X   X    -   §8.2.73
+ * Activation Time                     O     -   X   X   X    -   §8.2.121 [TODO — not in lib]
+ * Deactivation Time                   O     -   X   X   X    -   §8.2.122 [TODO — not in lib]
+ */
+// clang-format on
 class pfcp_update_pdr_ie : public pfcp_grouped_ie {
  public:
   //--------
+  /** @brief Serialize pfcp::update_pdr core-type into wire-format grouped TLV.
+   *  @param b  Core-type container carrying the grouped IE fields.
+   *  @see   3GPP TS 29.244 V17.10.0 Table 7.5.4.2-1
+   */
   explicit pfcp_update_pdr_ie(const pfcp::update_pdr& b)
       : pfcp_grouped_ie(PFCP_IE_UPDATE_PDR) {
     tlv.set_length(0);
-    std::shared_ptr<pfcp_pdr_id_ie> sie(new pfcp_pdr_id_ie(b.pdr_id));
-    add_ie(sie);
-    if (b.far_id.first) {
-      std::shared_ptr<pfcp_far_id_ie> sie(new pfcp_far_id_ie(b.far_id.second));
-      add_ie(sie);
-    }
-    if (b.qer_id.first) {
-      std::shared_ptr<pfcp_qer_id_ie> sie(new pfcp_qer_id_ie(b.qer_id.second));
-      add_ie(sie);
-    }
-    if (b.pdi.first) {
-      std::shared_ptr<pfcp_pdi_ie> sie(new pfcp_pdi_ie(b.pdi.second));
+    // PDR ID — Mandatory, stored as plain type in update_pdr
+    {
+      std::shared_ptr<pfcp_pdr_id_ie> sie(new pfcp_pdr_id_ie(b.pdr_id));
       add_ie(sie);
     }
     if (b.outer_header_removal.first) {
@@ -9804,18 +10222,57 @@ class pfcp_update_pdr_ie : public pfcp_grouped_ie {
           new pfcp_precedence_ie(b.precedence.second));
       add_ie(sie);
     }
+    if (b.pdi.first) {
+      std::shared_ptr<pfcp_pdi_ie> sie(new pfcp_pdi_ie(b.pdi.second));
+      add_ie(sie);
+    }
+    if (b.far_id.first) {
+      std::shared_ptr<pfcp_far_id_ie> sie(new pfcp_far_id_ie(b.far_id.second));
+      add_ie(sie);
+    }
+    if (b.urr_id.first) {
+      std::shared_ptr<pfcp_urr_id_ie> sie(new pfcp_urr_id_ie(b.urr_id.second));
+      add_ie(sie);
+    }
+    if (b.qer_id.first) {
+      std::shared_ptr<pfcp_qer_id_ie> sie(new pfcp_qer_id_ie(b.qer_id.second));
+      add_ie(sie);
+    }
+    // §8.2.72 — multiple names: iterate vector
+    for (const auto& apr : b.activate_predefined_rules) {
+      std::shared_ptr<pfcp_activate_predefined_rules_ie> sie(
+          new pfcp_activate_predefined_rules_ie(apr));
+      add_ie(sie);
+    }
+    // §8.2.73 — multiple names: iterate vector
+    for (const auto& dpr : b.deactivate_predefined_rules) {
+      std::shared_ptr<pfcp_deactivate_predefined_rules_ie> sie(
+          new pfcp_deactivate_predefined_rules_ie(dpr));
+      add_ie(sie);
+    }
+    // TODO §8.2.121 Activation Time — not in lib
+    // TODO §8.2.122 Deactivation Time — not in lib
   }
   //--------
   pfcp_update_pdr_ie() : pfcp_grouped_ie(PFCP_IE_UPDATE_PDR) {}
   //--------
   explicit pfcp_update_pdr_ie(const pfcp_tlv& t) : pfcp_grouped_ie(t) {}
   //--------
+  /** @brief Deserialize sub-IEs into a typed pfcp::update_pdr container.
+   *  @param c  Output container populated from the decoded sub-IEs.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.4.2 Table 7.5.4.2-1
+   */
   void to_core_type(pfcp::update_pdr& c) {
     for (auto sie : ies) {
       sie.get()->to_core_type(c);
     }
   }
   //--------
+  /** @brief Decode this grouped IE and push its value into a message
+   *         pfcp_ies_container via set().
+   *  @param s  Message container receiving the decoded grouped IE.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.4.2 Table 7.5.4.2-1
+   */
   void to_core_type(pfcp_ies_container& s) {
     pfcp::update_pdr i = {};
     to_core_type(i);
@@ -9823,10 +10280,33 @@ class pfcp_update_pdr_ie : public pfcp_grouped_ie {
   }
 };
 //-------------------------------------
+// clang-format off
+/*! @brief Serialization of Update Forwarding Parameters grouped IE
+ *  3GPP TS 29.244 V17.10.0 Table 7.5.4.3-2
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * Destination Interface               C     X   X   -   X    X   §8.2.24
+ * Network Instance                    C     X   X   -   X    X   §8.2.44
+ * Redirect Information                C     X   X   -   X    -   §8.2.20
+ * Outer Header Creation               C     X   X   -   X    X   §8.2.56
+ * Transport Level Marking             C     X   X   -   X    -   §8.2.30
+ * Forwarding Policy                   C     -   X   -   X    -   §8.2.31
+ * Header Enrichment                   C     -   X   -   X    -   §8.2.97
+ * Linked Traffic Endpoint ID          C     -   -   -   X    -   §8.2.92
+ * PFCPSMReq-Flags                     C     -   -   -   X    -   §8.2.93
+ * Destination Interface Type          C     -   -   -   X    -   §8.2.115
+ */
+// clang-format on
 // IE UPDATE_FORWARDING_PARAMETERS
 class pfcp_update_forwarding_parameters_ie : public pfcp_grouped_ie {
  public:
   //--------
+  /** @brief Serialize pfcp::update_forwarding_parameters core-type into
+   * wire-format grouped TLV.
+   *  @param b  Core-type container carrying the grouped IE fields.
+   *  @see   3GPP TS 29.244 V17.10.0 Table 7.5.4.3-2
+   */
   explicit pfcp_update_forwarding_parameters_ie(
       const pfcp::update_forwarding_parameters& b)
       : pfcp_grouped_ie(PFCP_IE_UPDATE_FORWARDING_PARAMETERS) {
@@ -9875,12 +10355,22 @@ class pfcp_update_forwarding_parameters_ie : public pfcp_grouped_ie {
   explicit pfcp_update_forwarding_parameters_ie(const pfcp_tlv& t)
       : pfcp_grouped_ie(t) {}
   //--------
+  /** @brief Deserialize sub-IEs into a typed pfcp::update_forwarding_parameters
+   * container.
+   *  @param c  Output container populated from the decoded sub-IEs.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.4.3 Table 7.5.4.3-2
+   */
   void to_core_type(pfcp::update_forwarding_parameters& c) {
     for (auto sie : ies) {
       sie.get()->to_core_type(c);
     }
   }
   //--------
+  /** @brief Decode this grouped IE and push its value into a message
+   *         pfcp_ies_container via set().
+   *  @param s  Message container receiving the decoded grouped IE.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.4.3 Table 7.5.4.3-2
+   */
   void to_core_type(pfcp_ies_container& s) {
     pfcp::update_forwarding_parameters i = {};
     to_core_type(i);
@@ -9889,10 +10379,27 @@ class pfcp_update_forwarding_parameters_ie : public pfcp_grouped_ie {
 };
 
 //-------------------------------------
+// clang-format off
+/*! @brief Serialization of Update FAR grouped IE
+ *  3GPP TS 29.244 V17.10.0 Table 7.5.4.3-1
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * FAR ID                              M     X   X   X   X    X   §8.2.74
+ * Apply Action                        C     X   X   X   X    X   §8.2.26
+ * Update Forwarding Parameters        C     X   X   -   X    X   §7.5.4.3-2
+ * Update Duplicating Parameters       C     -   X   -   X    -   §7.5.4.3-3
+ * BAR ID                              C     -   X   -   X    -   §8.2.57
+ */
+// clang-format on
 // IE UPDATE_FAR
 class pfcp_update_far_ie : public pfcp_grouped_ie {
  public:
   //--------
+  /** @brief Serialize pfcp::update_far core-type into wire-format grouped TLV.
+   *  @param b  Core-type container carrying the grouped IE fields.
+   *  @see   3GPP TS 29.244 V17.10.0 Table 7.5.4.3-1
+   */
   explicit pfcp_update_far_ie(const pfcp::update_far& b)
       : pfcp_grouped_ie(PFCP_IE_UPDATE_FAR) {
     tlv.set_length(0);
@@ -9923,12 +10430,21 @@ class pfcp_update_far_ie : public pfcp_grouped_ie {
   //--------
   explicit pfcp_update_far_ie(const pfcp_tlv& t) : pfcp_grouped_ie(t) {}
   //--------
+  /** @brief Deserialize sub-IEs into a typed pfcp::update_far container.
+   *  @param c  Output container populated from the decoded sub-IEs.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.4.3 Table 7.5.4.3-1
+   */
   void to_core_type(pfcp::update_far& c) {
     for (auto sie : ies) {
       sie.get()->to_core_type(c);
     }
   }
   //--------
+  /** @brief Decode this grouped IE and push its value into a message
+   *         pfcp_ies_container via set().
+   *  @param s  Message container receiving the decoded grouped IE.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.4.3 Table 7.5.4.3-1
+   */
   void to_core_type(pfcp_ies_container& s) {
     pfcp::update_far i = {};
     to_core_type(i);
@@ -9946,6 +10462,16 @@ class pfcp_update_bar_within_pfcp_session_report_response_ie
       : pfcp_grouped_ie(
             PFCP_IE_UPDATE_BAR_WITHIN_PFCP_SESSION_REPORT_RESPONSE) {
     tlv.set_length(0);
+    if (b.bar_id.first) {
+      std::shared_ptr<pfcp_bar_id_ie> sie(
+          new pfcp_bar_id_ie(b.bar_id.second));  // §8.2.57 — M
+      add_ie(sie);
+    }
+    // TODO §8.2.83  Downlink Data Notification Delay — not in lib
+    // TODO §8.2.x   DL Buffering Duration — pfcp_dl_buffering_duration_ie not
+    // in lib
+    // TODO §8.2.x   DL Buffering Suggested Packet Count — not in lib
+    // TODO §8.2.85  Suggested Buffering Packets Count — not in lib
   }
   //--------
   pfcp_update_bar_within_pfcp_session_report_response_ie()
@@ -9969,25 +10495,166 @@ class pfcp_update_bar_within_pfcp_session_report_response_ie
   }
 };
 //-------------------------------------
+// clang-format off
+/*! @brief Serialization of Update URR grouped IE
+ *  3GPP TS 29.244 V17.10.0 Table 7.5.4.4-1
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * URR ID                              M     X   X   X   X    -   §8.2.54
+ * Measurement Method                  C     X   X   X   X    -   §8.2.40
+ * Reporting Triggers                  C     X   X   X   X    -   §8.2.41
+ * Measurement Period                  C     X   X   X   X    -   §8.2.42
+ * Volume Threshold                    C     X   X   X   X    -   §8.2.43
+ * Volume Quota                        C     -   X   -   X    -   §8.2.46
+ * Time Threshold                      C     X   X   X   X    -   §8.2.47
+ * Time Quota                          C     -   X   -   X    -   §8.2.48
+ * Quota Holding Time                  C     -   X   -   X    -   §8.2.64
+ * Dropped DL Traffic Threshold        C     -   X   -   X    -   §8.2.67
+ * Quota Validity Time                 C     -   X   -   X    -   §8.2.129 [TODO — not in lib]
+ * Monitoring Time                     O     -   X   X   X    -   §8.2.55
+ * Subsequent Volume Threshold         C     -   X   -   X    -   §8.2.56
+ * Subsequent Time Threshold           C     -   X   -   X    -   §8.2.57
+ * Inactivity Detection Time           C     -   X   -   X    -   §8.2.58
+ * Linked URR ID                       O     -   X   X   X    -   §8.2.59
+ * Measurement Information             C     -   X   -   X    -   §8.2.60
+ * Time Quota Mechanism                C     -   X   -   X    -   §8.2.62
+ * Aggregated URRs                     C     -   -   -   X    -   grouped
+ * FAR ID for Quota Action             C     -   X   -   X    -   §8.2.74
+ * Ethernet Inactivity Timer           C     -   X   -   X    -   §8.2.130
+ * Additional Monitoring Time          O     -   -   -   X    -   grouped
+ * Number of Reports                   C     -   -   -   X    -   §8.2.163 [TODO — not in lib]
+ * Event Information                   C     -   -   -   X    -   grouped
+ */
+// clang-format on
 // IE UPDATE_URR
 class pfcp_update_urr_ie : public pfcp_grouped_ie {
  public:
   //--------
+  /** @brief Serialize pfcp::update_urr core-type into wire-format grouped TLV.
+   *  @param b  Core-type container carrying the grouped IE fields.
+   *  @see   3GPP TS 29.244 V17.10.0 Table 7.5.4.4-1
+   */
   explicit pfcp_update_urr_ie(const pfcp::update_urr& b)
       : pfcp_grouped_ie(PFCP_IE_UPDATE_URR) {
     tlv.set_length(0);
+    if (b.urr_id.first) {
+      std::shared_ptr<pfcp_urr_id_ie> sie(
+          new pfcp_urr_id_ie(b.urr_id.second));  // §8.2.54 — M
+      add_ie(sie);
+    }
+    if (b.measurement_method.first) {
+      std::shared_ptr<pfcp_measurement_method_ie> sie(
+          new pfcp_measurement_method_ie(
+              b.measurement_method.second));  // §8.2.40
+      add_ie(sie);
+    }
+    if (b.reporting_triggers.first) {
+      std::shared_ptr<pfcp_reporting_triggers_ie> sie(
+          new pfcp_reporting_triggers_ie(
+              b.reporting_triggers.second));  // §8.2.41
+      add_ie(sie);
+    }
+    if (b.measurement_period.first) {
+      std::shared_ptr<pfcp_measurement_period_ie> sie(
+          new pfcp_measurement_period_ie(
+              b.measurement_period.second));  // §8.2.42
+      add_ie(sie);
+    }
+    if (b.volume_threshold.first) {
+      std::shared_ptr<pfcp_volume_threshold_ie> sie(
+          new pfcp_volume_threshold_ie(b.volume_threshold.second));  // §8.2.43
+      add_ie(sie);
+    }
+    if (b.volume_quota.first) {
+      std::shared_ptr<pfcp_volume_quota_ie> sie(
+          new pfcp_volume_quota_ie(b.volume_quota.second));  // §8.2.46
+      add_ie(sie);
+    }
+    if (b.time_threshold.first) {
+      std::shared_ptr<pfcp_time_threshold_ie> sie(
+          new pfcp_time_threshold_ie(b.time_threshold.second));  // §8.2.47
+      add_ie(sie);
+    }
+    if (b.time_quota.first) {
+      std::shared_ptr<pfcp_time_quota_ie> sie(
+          new pfcp_time_quota_ie(b.time_quota.second));  // §8.2.48
+      add_ie(sie);
+    }
+    // TODO §8.2.64  b.quota_holding_time — pfcp_quota_holding_time_ie not in
+    // lib
+    // TODO §8.2.67  b.dropped_dl_traffic_threshold —
+    // pfcp_dropped_dl_traffic_threshold_ie not in lib
+    // TODO §8.2.129 Quota Validity Time — not in lib
+    if (b.monitoring_time.first) {
+      std::shared_ptr<pfcp_monitoring_time_ie> sie(
+          new pfcp_monitoring_time_ie(b.monitoring_time.second));  // §8.2.55
+      add_ie(sie);
+    }
+    if (b.subsequent_volume_threshold.first) {
+      std::shared_ptr<pfcp_subsequent_volume_threshold_ie> sie(
+          new pfcp_subsequent_volume_threshold_ie(
+              b.subsequent_volume_threshold.second));  // §8.2.56
+      add_ie(sie);
+    }
+    if (b.subsequent_time_threshold.first) {
+      std::shared_ptr<pfcp_subsequent_time_threshold_ie> sie(
+          new pfcp_subsequent_time_threshold_ie(
+              b.subsequent_time_threshold.second));  // §8.2.57
+      add_ie(sie);
+    }
+    // TODO §8.2.x   Subsequent Volume Quota — pfcp_subsequent_volume_quota_ie
+    // not in lib
+    // TODO §8.2.x   Subsequent Time Quota — pfcp_subsequent_time_quota_ie not
+    // in lib
+    if (b.inactivity_detection_time.first) {
+      std::shared_ptr<pfcp_inactivity_detection_time_ie> sie(
+          new pfcp_inactivity_detection_time_ie(
+              b.inactivity_detection_time.second));  // §8.2.58
+      add_ie(sie);
+    }
+    // TODO §8.2.59  Linked URR ID — pfcp_linked_urr_id_ie not in lib
+    if (b.measurement_information.first) {
+      std::shared_ptr<pfcp_measurement_information_ie> sie(
+          new pfcp_measurement_information_ie(
+              b.measurement_information.second));  // §8.2.60
+      add_ie(sie);
+    }
+    // TODO §8.2.62  Time Quota Mechanism — pfcp_time_quota_mechanism_ie not in
+    // lib
+    // TODO grouped  Aggregated URRs — pfcp_aggregated_urrs_ie not in lib
+    if (b.far_id_for_quota_action.first) {
+      std::shared_ptr<pfcp_far_id_ie> sie(
+          new pfcp_far_id_ie(b.far_id_for_quota_action.second));  // §8.2.74
+      add_ie(sie);
+    }
+    // TODO §8.2.130 Ethernet Inactivity Timer —
+    // pfcp_ethernet_inactivity_timer_ie not in lib
+    // TODO grouped  Additional Monitoring Time —
+    // pfcp_additional_monitoring_time_ie not in lib
+    // TODO §8.2.163 Number of Reports — not in lib
+    // TODO grouped  Event Information — pfcp_event_information_ie not in lib
   }
   //--------
   pfcp_update_urr_ie() : pfcp_grouped_ie(PFCP_IE_UPDATE_URR) {}
   //--------
   explicit pfcp_update_urr_ie(const pfcp_tlv& t) : pfcp_grouped_ie(t) {}
   //--------
+  /** @brief Deserialize sub-IEs into a typed pfcp::update_urr container.
+   *  @param c  Output container populated from the decoded sub-IEs.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.4.4 Table 7.5.4.4-1
+   */
   void to_core_type(pfcp::update_urr& c) {
     for (auto sie : ies) {
       sie.get()->to_core_type(c);
     }
   }
   //--------
+  /** @brief Decode this grouped IE and push its value into a message
+   *         pfcp_ies_container via set().
+   *  @param s  Message container receiving the decoded grouped IE.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.4.4 Table 7.5.4.4-1
+   */
   void to_core_type(pfcp_ies_container& s) {
     pfcp::update_urr i = {};
     to_core_type(i);
@@ -9995,17 +10662,42 @@ class pfcp_update_urr_ie : public pfcp_grouped_ie {
   }
 };
 //-------------------------------------
+// clang-format off
+/*! @brief Serialization of Update QER grouped IE
+ *  3GPP TS 29.244 V17.10.0 Table 7.5.4.5-1
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * QER ID                              M     -   X   X   X    X   §8.2.75
+ * QER Correlation ID                  C     -   X   X   X    -   §8.2.76
+ * Gate Status                         C     -   X   X   X    X   §8.2.7
+ * Maximum Bitrate                     C     -   X   X   X    X   §8.2.8
+ * Guaranteed Bitrate                  C     -   X   X   X    X   §8.2.9
+ * Packet Rate                         C     -   X   -   X    -   §8.2.21
+ * DL Flow Level Marking               C     -   X   -   X    -   §8.2.22
+ * QoS Flow Identifier (QFI)           C     -   -   -   X    X   §8.2.89
+ * Reflective QoS (RQI)                C     -   -   -   X    X   §8.2.88
+ * Paging Policy Indicator (PPI)       C     -   -   -   X    -   §8.2.91
+ * Averaging Window                    O     -   -   -   X    -   §8.2.118
+ * QER Control Indications             O     -   -   -   X    -   §8.2.177 [TODO — not in lib]
+ */
+// clang-format on
 // IE UPDATE_QER
 class pfcp_update_qer_ie : public pfcp_grouped_ie {
  public:
   //--------
+  /** @brief Serialize pfcp::update_qer core-type into wire-format grouped TLV.
+   *  @param b  Core-type container carrying the grouped IE fields.
+   *  @see   3GPP TS 29.244 V17.10.0 Table 7.5.4.5-1
+   */
   explicit pfcp_update_qer_ie(const pfcp::update_qer& b)
       : pfcp_grouped_ie(PFCP_IE_UPDATE_QER) {
     tlv.set_length(0);
 
-    if (b.qer_id.first) {
+    // QER ID — Mandatory, stored as plain type in update_qer (§8.2.75)
+    {
       std::shared_ptr<pfcp_qer_id_ie> sie =
-          std::make_shared<pfcp_qer_id_ie>(b.qer_id.second);
+          std::make_shared<pfcp_qer_id_ie>(b.qer_id);
       add_ie(sie);
     }
 
@@ -10058,18 +10750,41 @@ class pfcp_update_qer_ie : public pfcp_grouped_ie {
           std::make_shared<pfcp_rqi_ie>(b.reflective_qos.second);
       add_ie(sie);
     }
+
+    if (b.paging_policy_indicator.first) {
+      std::shared_ptr<pfcp_paging_policy_indicator_ie> sie =
+          std::make_shared<pfcp_paging_policy_indicator_ie>(
+              b.paging_policy_indicator.second);
+      add_ie(sie);
+    }
+
+    if (b.averaging_window.first) {
+      std::shared_ptr<pfcp_averaging_window_ie> sie =
+          std::make_shared<pfcp_averaging_window_ie>(b.averaging_window.second);
+      add_ie(sie);
+    }
+    // TODO §8.2.177 QER Control Indications — not in lib
   }
   //--------
   pfcp_update_qer_ie() : pfcp_grouped_ie(PFCP_IE_UPDATE_QER) {}
   //--------
   explicit pfcp_update_qer_ie(const pfcp_tlv& t) : pfcp_grouped_ie(t) {}
   //--------
+  /** @brief Deserialize sub-IEs into a typed pfcp::update_qer container.
+   *  @param c  Output container populated from the decoded sub-IEs.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.4.5 Table 7.5.4.5-1
+   */
   void to_core_type(pfcp::update_qer& c) {
     for (auto sie : ies) {
       sie.get()->to_core_type(c);
     }
   }
   //--------
+  /** @brief Decode this grouped IE and push its value into a message
+   *         pfcp_ies_container via set().
+   *  @param s  Message container receiving the decoded grouped IE.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.4.5 Table 7.5.4.5-1
+   */
   void to_core_type(pfcp_ies_container& s) {
     pfcp::update_qer i = {};
     to_core_type(i);
@@ -10077,39 +10792,94 @@ class pfcp_update_qer_ie : public pfcp_grouped_ie {
   }
 };
 ////-------------------------------------
-//// IE UPDATE_BARR
-// class pfcp_update_bar_ie : public pfcp_grouped_ie {
-// public:
-//
-//  //--------
-//  pfcp_update_bar_ie(const pfcp::update_bar& b) :
-//  pfcp_grouped_ie(PFCP_IE_UPDATE_BAR){
-//    tlv.set_length(0);
-//  }
-//  //--------
-//  pfcp_update_bar_ie() : pfcp_grouped_ie(PFCP_IE_UPDATE_BAR){
-//  }
-//  //--------
-//  pfcp_update_bar_ie(const pfcp_tlv& t) : pfcp_grouped_ie(t){
-//  }
-//  //--------
-//  void to_core_type(pfcp::update_bar& c) {
-//    for (auto sie : ies) {
-//      sie.get()->to_core_type(c);
-//    }
-//  }
-//  //--------
-//  void to_core_type(pfcp_ies_container& s) {
-//    pfcp::update_bar i = {};
-//    to_core_type(i);
-//    s.set(i);
-//  }
-//};
 //-------------------------------------
+// clang-format off
+/*! @brief Serialization of Update BAR (Session Modification Request) grouped IE
+ *  3GPP TS 29.244 V17.10.0 Table 7.5.4.11-1
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * BAR ID                              M     -   X   -   X    -   §8.2.57
+ * Downlink Data Notification Delay    C     -   X   -   X    -   §8.2.83 [TODO — not in lib]
+ * Suggested Buffering Packets Count   C     -   X   -   X    -   §8.2.85 [TODO — not in lib]
+ * MT-EDT Control Information          C     -   -   -   X    -   §8.2.204 [TODO — not in lib]
+ */
+// clang-format on
+// IE UPDATE_BAR_WITHIN_SESSION_MODIFICATION_REQUEST
+class pfcp_update_bar_within_pfcp_session_modification_request_ie
+    : public pfcp_grouped_ie {
+ public:
+  //--------
+  /** @brief Serialize pfcp::update_bar_within_pfcp_session_modification_request
+   *         core-type into wire-format grouped TLV.
+   *  @param b  Core-type container carrying the grouped IE fields.
+   *  @see   3GPP TS 29.244 V17.10.0 Table 7.5.4.11-1
+   */
+  explicit pfcp_update_bar_within_pfcp_session_modification_request_ie(
+      const pfcp::update_bar_within_pfcp_session_modification_request& b)
+      : pfcp_grouped_ie(
+            PFCP_IE_UPDATE_BAR_WITHIN_PFCP_SESSION_MODIFICATION_REQUEST) {
+    tlv.set_length(0);
+    if (b.bar_id.first) {
+      std::shared_ptr<pfcp_bar_id_ie> sie(
+          new pfcp_bar_id_ie(b.bar_id.second));  // §8.2.57 — M
+      add_ie(sie);
+    }
+    // TODO §8.2.83  Downlink Data Notification Delay — not in lib
+    // TODO §8.2.85  Suggested Buffering Packets Count — not in lib
+    // TODO §8.2.204 MT-EDT Control Information — not in lib
+  }
+  //--------
+  pfcp_update_bar_within_pfcp_session_modification_request_ie()
+      : pfcp_grouped_ie(
+            PFCP_IE_UPDATE_BAR_WITHIN_PFCP_SESSION_MODIFICATION_REQUEST) {}
+  //--------
+  explicit pfcp_update_bar_within_pfcp_session_modification_request_ie(
+      const pfcp_tlv& t)
+      : pfcp_grouped_ie(t) {}
+  //--------
+  /** @brief Deserialize sub-IEs into a typed
+   *         pfcp::update_bar_within_pfcp_session_modification_request
+   * container.
+   *  @param c  Output container populated from the decoded sub-IEs.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.4.11 Table 7.5.4.11-1
+   */
+  void to_core_type(
+      pfcp::update_bar_within_pfcp_session_modification_request& c) {
+    for (auto sie : ies) {
+      sie.get()->to_core_type(c);
+    }
+  }
+  //--------
+  /** @brief Decode this grouped IE and push its value into a message
+   *         pfcp_ies_container via set().
+   *  @param s  Message container receiving the decoded grouped IE.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.4.11 Table 7.5.4.11-1
+   */
+  void to_core_type(pfcp_ies_container& s) {
+    pfcp::update_bar_within_pfcp_session_modification_request i = {};
+    to_core_type(i);
+    s.set(i);
+  }
+};
+//-------------------------------------
+// clang-format off
+/*! @brief Serialization of Remove PDR grouped IE
+ *  3GPP TS 29.244 V17.10.0 Table 7.5.4.6-1
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * PDR ID                              M     X   X   X   X    X   §8.2.36
+ */
+// clang-format on
 // IE REMOVE_PDR
 class pfcp_remove_pdr_ie : public pfcp_grouped_ie {
  public:
   //--------
+  /** @brief Serialize pfcp::remove_pdr core-type into wire-format grouped TLV.
+   *  @param b  Core-type container carrying the grouped IE fields.
+   *  @see   3GPP TS 29.244 V17.10.0 Table 7.5.4.6-1
+   */
   explicit pfcp_remove_pdr_ie(const pfcp::remove_pdr& b)
       : pfcp_grouped_ie(PFCP_IE_REMOVE_PDR) {
     tlv.set_length(0);
@@ -10123,12 +10893,21 @@ class pfcp_remove_pdr_ie : public pfcp_grouped_ie {
   //--------
   explicit pfcp_remove_pdr_ie(const pfcp_tlv& t) : pfcp_grouped_ie(t) {}
   //--------
+  /** @brief Deserialize sub-IEs into a typed pfcp::remove_pdr container.
+   *  @param c  Output container populated from the decoded sub-IEs.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.4.6 Table 7.5.4.6-1
+   */
   void to_core_type(pfcp::remove_pdr& c) {
     for (auto sie : ies) {
       sie.get()->to_core_type(c);
     }
   }
   //--------
+  /** @brief Decode this grouped IE and push its value into a message
+   *         pfcp_ies_container via set().
+   *  @param s  Message container receiving the decoded grouped IE.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.4.6 Table 7.5.4.6-1
+   */
   void to_core_type(pfcp_ies_container& s) {
     pfcp::remove_pdr i = {};
     to_core_type(i);
@@ -10136,10 +10915,23 @@ class pfcp_remove_pdr_ie : public pfcp_grouped_ie {
   }
 };
 //-------------------------------------
+// clang-format off
+/*! @brief Serialization of Remove FAR grouped IE
+ *  3GPP TS 29.244 V17.10.0 Table 7.5.4.7-1
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * FAR ID                              M     X   X   X   X    X   §8.2.74
+ */
+// clang-format on
 // IE REMOVE_FAR
 class pfcp_remove_far_ie : public pfcp_grouped_ie {
  public:
   //--------
+  /** @brief Serialize pfcp::remove_far core-type into wire-format grouped TLV.
+   *  @param b  Core-type container carrying the grouped IE fields.
+   *  @see   3GPP TS 29.244 V17.10.0 Table 7.5.4.7-1
+   */
   explicit pfcp_remove_far_ie(const pfcp::remove_far& b)
       : pfcp_grouped_ie(PFCP_IE_REMOVE_FAR) {
     tlv.set_length(0);
@@ -10153,12 +10945,21 @@ class pfcp_remove_far_ie : public pfcp_grouped_ie {
   //--------
   explicit pfcp_remove_far_ie(const pfcp_tlv& t) : pfcp_grouped_ie(t) {}
   //--------
+  /** @brief Deserialize sub-IEs into a typed pfcp::remove_far container.
+   *  @param c  Output container populated from the decoded sub-IEs.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.4.7 Table 7.5.4.7-1
+   */
   void to_core_type(pfcp::remove_far& c) {
     for (auto sie : ies) {
       sie.get()->to_core_type(c);
     }
   }
   //--------
+  /** @brief Decode this grouped IE and push its value into a message
+   *         pfcp_ies_container via set().
+   *  @param s  Message container receiving the decoded grouped IE.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.4.7 Table 7.5.4.7-1
+   */
   void to_core_type(pfcp_ies_container& s) {
     pfcp::remove_far i = {};
     to_core_type(i);
@@ -10166,25 +10967,51 @@ class pfcp_remove_far_ie : public pfcp_grouped_ie {
   }
 };
 //-------------------------------------
+// clang-format off
+/*! @brief Serialization of Remove URR grouped IE
+ *  3GPP TS 29.244 V17.10.0 Table 7.5.4.8-1
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * URR ID                              M     X   X   X   X    -   §8.2.54
+ */
+// clang-format on
 // IE REMOVE_URR
 class pfcp_remove_urr_ie : public pfcp_grouped_ie {
  public:
   //--------
+  /** @brief Serialize pfcp::remove_urr core-type into wire-format grouped TLV.
+   *  @param b  Core-type container carrying the grouped IE fields.
+   *  @see   3GPP TS 29.244 V17.10.0 Table 7.5.4.8-1
+   */
   explicit pfcp_remove_urr_ie(const pfcp::remove_urr& b)
       : pfcp_grouped_ie(PFCP_IE_REMOVE_URR) {
     tlv.set_length(0);
+    if (b.urr_id.first) {
+      std::shared_ptr<pfcp_urr_id_ie> sie(new pfcp_urr_id_ie(b.urr_id.second));
+      add_ie(sie);
+    }
   }
   //--------
   pfcp_remove_urr_ie() : pfcp_grouped_ie(PFCP_IE_REMOVE_URR) {}
   //--------
   explicit pfcp_remove_urr_ie(const pfcp_tlv& t) : pfcp_grouped_ie(t) {}
   //--------
+  /** @brief Deserialize sub-IEs into a typed pfcp::remove_urr container.
+   *  @param c  Output container populated from the decoded sub-IEs.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.4.8 Table 7.5.4.8-1
+   */
   void to_core_type(pfcp::remove_urr& c) {
     for (auto sie : ies) {
       sie.get()->to_core_type(c);
     }
   }
   //--------
+  /** @brief Decode this grouped IE and push its value into a message
+   *         pfcp_ies_container via set().
+   *  @param s  Message container receiving the decoded grouped IE.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.4.8 Table 7.5.4.8-1
+   */
   void to_core_type(pfcp_ies_container& s) {
     pfcp::remove_urr i = {};
     to_core_type(i);
@@ -10192,10 +11019,23 @@ class pfcp_remove_urr_ie : public pfcp_grouped_ie {
   }
 };
 //-------------------------------------
+// clang-format off
+/*! @brief Serialization of Remove QER grouped IE
+ *  3GPP TS 29.244 V17.10.0 Table 7.5.4.9-1
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * QER ID                              M     -   X   X   X    X   §8.2.75
+ */
+// clang-format on
 // IE REMOVE_QER
 class pfcp_remove_qer_ie : public pfcp_grouped_ie {
  public:
   //--------
+  /** @brief Serialize pfcp::remove_qer core-type into wire-format grouped TLV.
+   *  @param b  Core-type container carrying the grouped IE fields.
+   *  @see   3GPP TS 29.244 V17.10.0 Table 7.5.4.9-1
+   */
   explicit pfcp_remove_qer_ie(const pfcp::remove_qer& b)
       : pfcp_grouped_ie(PFCP_IE_REMOVE_QER) {
     tlv.set_length(0);
@@ -10209,12 +11049,21 @@ class pfcp_remove_qer_ie : public pfcp_grouped_ie {
   //--------
   explicit pfcp_remove_qer_ie(const pfcp_tlv& t) : pfcp_grouped_ie(t) {}
   //--------
+  /** @brief Deserialize sub-IEs into a typed pfcp::remove_qer container.
+   *  @param c  Output container populated from the decoded sub-IEs.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.4.9 Table 7.5.4.9-1
+   */
   void to_core_type(pfcp::remove_qer& c) {
     for (auto sie : ies) {
       sie.get()->to_core_type(c);
     }
   }
   //--------
+  /** @brief Decode this grouped IE and push its value into a message
+   *         pfcp_ies_container via set().
+   *  @param s  Message container receiving the decoded grouped IE.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.4.9 Table 7.5.4.9-1
+   */
   void to_core_type(pfcp_ies_container& s) {
     pfcp::remove_qer i = {};
     to_core_type(i);
@@ -10223,35 +11072,234 @@ class pfcp_remove_qer_ie : public pfcp_grouped_ie {
 };
 
 ////-------------------------------------
-//// IE REMOVE_BAR
-// class pfcp_remove_bar_ie : public pfcp_grouped_ie {
-// public:
-//
-//  //--------
-//  pfcp_remove_bar_ie(const pfcp::remove_bar& b) :
-//  pfcp_grouped_ie(PFCP_IE_REMOVE_BAR){
-//    tlv.set_length(0);
-//  }
-//  //--------
-//  pfcp_remove_bar_ie() : pfcp_grouped_ie(PFCP_IE_REMOVE_BAR){
-//  }
-//  //--------
-//  pfcp_remove_bar_ie(const pfcp_tlv& t) : pfcp_grouped_ie(t){
-//  }
-//  //--------
-//  void to_core_type(pfcp::remove_bar& c) {
-//    for (auto sie : ies) {
-//      sie.get()->to_core_type(c);
-//    }
-//  }
-//  //--------
-//  void to_core_type(pfcp_ies_container& s) {
-//    pfcp::remove_bar i = {};
-//    to_core_type(i);
-//    s.set(i);
-//  }
-//};
+//-------------------------------------
+// clang-format off
+/*! @brief Serialization of Remove BAR grouped IE
+ *  3GPP TS 29.244 V17.10.0 Table 7.5.4.12-1
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * BAR ID                              M     -   X   -   X    -   §8.2.57
+ */
+// clang-format on
+// IE REMOVE_BAR
+class pfcp_remove_bar_ie : public pfcp_grouped_ie {
+ public:
+  //--------
+  /** @brief Serialize pfcp::remove_bar core-type into wire-format grouped TLV.
+   *  @param b  Core-type container carrying the grouped IE fields.
+   *  @see   3GPP TS 29.244 V17.10.0 Table 7.5.4.12-1
+   */
+  explicit pfcp_remove_bar_ie(const pfcp::remove_bar& b)
+      : pfcp_grouped_ie(PFCP_IE_REMOVE_BAR) {
+    tlv.set_length(0);
+    if (b.bar_id.first) {
+      std::shared_ptr<pfcp_bar_id_ie> sie(
+          new pfcp_bar_id_ie(b.bar_id.second));  // §8.2.57 — M
+      add_ie(sie);
+    }
+  }
+  //--------
+  pfcp_remove_bar_ie() : pfcp_grouped_ie(PFCP_IE_REMOVE_BAR) {}
+  //--------
+  explicit pfcp_remove_bar_ie(const pfcp_tlv& t) : pfcp_grouped_ie(t) {}
+  //--------
+  /** @brief Deserialize sub-IEs into a typed pfcp::remove_bar container.
+   *  @param c  Output container populated from the decoded sub-IEs.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.4.12 Table 7.5.4.12-1
+   */
+  void to_core_type(pfcp::remove_bar& c) {
+    for (auto sie : ies) {
+      sie.get()->to_core_type(c);
+    }
+  }
+  //--------
+  /** @brief Decode this grouped IE and push its value into a message
+   *         pfcp_ies_container via set().
+   *  @param s  Message container receiving the decoded grouped IE.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.4.12 Table 7.5.4.12-1
+   */
+  void to_core_type(pfcp_ies_container& s) {
+    pfcp::remove_bar i = {};
+    to_core_type(i);
+    s.set(i);
+  }
+};
 
+//-------------------------------------
+// clang-format off
+/*! @brief Serialization of Create MAR grouped IE
+ *  3GPP TS 29.244 V17.10.0 Table 7.5.2.8-1
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * MAR ID                              M     -   -   -   X    -   §8.2.123 [TODO — not in lib]
+ * Steering Functionality              M     -   -   -   X    -   §8.2.124 [TODO — not in lib]
+ * Steering Mode                       M     -   -   -   X    -   §8.2.125 [TODO — not in lib]
+ * Access Forwarding Action Info 1     C     -   -   -   X    -   §8.2.126 [TODO — not in lib]
+ * Access Forwarding Action Info 2     C     -   -   -   X    -   §8.2.127 [TODO — not in lib]
+ *
+ * NOTE: All individual IE classes for MAR are not yet in the lib.
+ *       This class is a correct structural stub — body is empty until
+ *       pfcp_mar_id_ie, pfcp_steering_functionality_ie, pfcp_steering_mode_ie,
+ *       and pfcp_access_forwarding_action_information_ie are implemented.
+ */
+// clang-format on
+// IE CREATE_MAR
+class pfcp_create_mar_ie : public pfcp_grouped_ie {
+ public:
+  //--------
+  /** @brief Serialize pfcp::create_mar core-type into wire-format grouped TLV.
+   *  @param b  Core-type container carrying the grouped IE fields.
+   *  @see   3GPP TS 29.244 V17.10.0 Table 7.5.2.8-1
+   */
+  explicit pfcp_create_mar_ie(const pfcp::create_mar& b)
+      : pfcp_grouped_ie(PFCP_IE_CREATE_MAR) {
+    tlv.set_length(0);
+    // TODO §8.2.123 MAR ID — pfcp_mar_id_ie not in lib
+    // TODO §8.2.124 Steering Functionality — pfcp_steering_functionality_ie not
+    // in lib
+    // TODO §8.2.125 Steering Mode — pfcp_steering_mode_ie not in lib
+    // TODO §8.2.126 Access Forwarding Action Information 1 — not in lib
+    // TODO §8.2.127 Access Forwarding Action Information 2 — not in lib
+  }
+  //--------
+  pfcp_create_mar_ie() : pfcp_grouped_ie(PFCP_IE_CREATE_MAR) {}
+  //--------
+  explicit pfcp_create_mar_ie(const pfcp_tlv& t) : pfcp_grouped_ie(t) {}
+  //--------
+  /** @brief Deserialize sub-IEs into a typed pfcp::create_mar container.
+   *  @param c  Output container populated from the decoded sub-IEs.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.2.8 Table 7.5.2.8-1
+   */
+  void to_core_type(pfcp::create_mar& c) {
+    for (auto sie : ies) {
+      sie.get()->to_core_type(c);
+    }
+  }
+  //--------
+  /** @brief Decode this grouped IE and push its value into a message
+   *         pfcp_ies_container via set().
+   *  @param s  Message container receiving the decoded grouped IE.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.2.8 Table 7.5.2.8-1
+   */
+  void to_core_type(pfcp_ies_container& s) {
+    pfcp::create_mar i = {};
+    to_core_type(i);
+    s.set(i);
+  }
+};
+//-------------------------------------
+// clang-format off
+/*! @brief Serialization of Update MAR grouped IE
+ *  3GPP TS 29.244 V17.10.0 Table 7.5.4.x-1 (Multi-Access Rule update)
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * MAR ID                              M     -   -   -   X    -   §8.2.123 [TODO — not in lib]
+ * Steering Functionality              C     -   -   -   X    -   §8.2.124 [TODO — not in lib]
+ * Steering Mode                       C     -   -   -   X    -   §8.2.125 [TODO — not in lib]
+ * Update Access Forwarding Action Info 1  C  -  -   -   X    -   §8.2.126 [TODO — not in lib]
+ * Update Access Forwarding Action Info 2  C  -  -   -   X    -   §8.2.127 [TODO — not in lib]
+ *
+ * NOTE: All individual IE classes for MAR are not yet in the lib.
+ */
+// clang-format on
+// IE UPDATE_MAR
+class pfcp_update_mar_ie : public pfcp_grouped_ie {
+ public:
+  //--------
+  /** @brief Serialize pfcp::update_mar core-type into wire-format grouped TLV.
+   *  @param b  Core-type container carrying the grouped IE fields.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.4 (Update MAR)
+   */
+  explicit pfcp_update_mar_ie(const pfcp::update_mar& b)
+      : pfcp_grouped_ie(PFCP_IE_UPDATE_MAR) {
+    tlv.set_length(0);
+    // TODO §8.2.123 MAR ID — pfcp_mar_id_ie not in lib
+    // TODO §8.2.124 Steering Functionality — pfcp_steering_functionality_ie not
+    // in lib
+    // TODO §8.2.125 Steering Mode — pfcp_steering_mode_ie not in lib
+    // TODO §8.2.126 Update Access Forwarding Action Information 1 — not in lib
+    // TODO §8.2.127 Update Access Forwarding Action Information 2 — not in lib
+  }
+  //--------
+  pfcp_update_mar_ie() : pfcp_grouped_ie(PFCP_IE_UPDATE_MAR) {}
+  //--------
+  explicit pfcp_update_mar_ie(const pfcp_tlv& t) : pfcp_grouped_ie(t) {}
+  //--------
+  /** @brief Deserialize sub-IEs into a typed pfcp::update_mar container.
+   *  @param c  Output container populated from the decoded sub-IEs.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.4 (Update MAR)
+   */
+  void to_core_type(pfcp::update_mar& c) {
+    for (auto sie : ies) {
+      sie.get()->to_core_type(c);
+    }
+  }
+  //--------
+  /** @brief Decode this grouped IE and push its value into a message
+   *         pfcp_ies_container via set().
+   *  @param s  Message container receiving the decoded grouped IE.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.4 (Update MAR)
+   */
+  void to_core_type(pfcp_ies_container& s) {
+    pfcp::update_mar i = {};
+    to_core_type(i);
+    s.set(i);
+  }
+};
+//-------------------------------------
+// clang-format off
+/*! @brief Serialization of Remove MAR grouped IE
+ *  3GPP TS 29.244 V17.10.0 Table 7.5.4.x-1 (Multi-Access Rule removal)
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * MAR ID                              M     -   -   -   X    -   §8.2.123 [TODO — not in lib]
+ *
+ * NOTE: pfcp_mar_id_ie is not yet in the lib.
+ */
+// clang-format on
+// IE REMOVE_MAR
+class pfcp_remove_mar_ie : public pfcp_grouped_ie {
+ public:
+  //--------
+  /** @brief Serialize pfcp::remove_mar core-type into wire-format grouped TLV.
+   *  @param b  Core-type container carrying the grouped IE fields.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.4 (Remove MAR)
+   */
+  explicit pfcp_remove_mar_ie(const pfcp::remove_mar& b)
+      : pfcp_grouped_ie(PFCP_IE_REMOVE_MAR) {
+    tlv.set_length(0);
+    // TODO §8.2.123 MAR ID — pfcp_mar_id_ie not in lib
+  }
+  //--------
+  pfcp_remove_mar_ie() : pfcp_grouped_ie(PFCP_IE_REMOVE_MAR) {}
+  //--------
+  explicit pfcp_remove_mar_ie(const pfcp_tlv& t) : pfcp_grouped_ie(t) {}
+  //--------
+  /** @brief Deserialize sub-IEs into a typed pfcp::remove_mar container.
+   *  @param c  Output container populated from the decoded sub-IEs.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.4 (Remove MAR)
+   */
+  void to_core_type(pfcp::remove_mar& c) {
+    for (auto sie : ies) {
+      sie.get()->to_core_type(c);
+    }
+  }
+  //--------
+  /** @brief Decode this grouped IE and push its value into a message
+   *         pfcp_ies_container via set().
+   *  @param s  Message container receiving the decoded grouped IE.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.4 (Remove MAR)
+   */
+  void to_core_type(pfcp_ies_container& s) {
+    pfcp::remove_mar i = {};
+    to_core_type(i);
+    s.set(i);
+  }
+};
 //-------------------------------------
 // IE CREATE_TRAFFIC_ENDPOINT
 class pfcp_create_traffic_endpoint_ie : public pfcp_grouped_ie {
@@ -10261,6 +11309,37 @@ class pfcp_create_traffic_endpoint_ie : public pfcp_grouped_ie {
       const pfcp::create_traffic_endpoint& b)
       : pfcp_grouped_ie(PFCP_IE_CREATE_TRAFFIC_ENDPOINT) {
     tlv.set_length(0);
+    // TODO §8.2.x   Traffic Endpoint ID — pfcp_traffic_endpoint_id_ie not in
+    // lib
+    if (b.local_fteid.first) {
+      std::shared_ptr<pfcp_fteid_ie> sie(
+          new pfcp_fteid_ie(b.local_fteid.second));  // §8.2.3 — C
+      add_ie(sie);
+    }
+    if (b.network_instance.first) {
+      std::shared_ptr<pfcp_network_instance_ie> sie(
+          new pfcp_network_instance_ie(
+              b.network_instance.second));  // §8.2.4 — C
+      add_ie(sie);
+    }
+    if (b.ue_ip_address.first) {
+      std::shared_ptr<pfcp_ue_ip_address_ie> sie(
+          new pfcp_ue_ip_address_ie(b.ue_ip_address.second));  // §8.2.6 — C
+      add_ie(sie);
+    }
+    if (b.ethernet_pdu_session_information.first) {
+      std::shared_ptr<pfcp_ethernet_pdu_session_information_ie> sie(
+          new pfcp_ethernet_pdu_session_information_ie(
+              b.ethernet_pdu_session_information.second));  // §8.2.117 — C
+      add_ie(sie);
+    }
+    if (b.framed_route.first) {
+      std::shared_ptr<pfcp_framed_route_ie> sie(
+          new pfcp_framed_route_ie(b.framed_route.second));  // §8.2.132 — C
+      add_ie(sie);
+    }
+    // TODO §8.2.133 Framed Routing — pfcp_framed_routing_ie not in lib
+    // TODO §8.2.134 Framed IPv6 Route — pfcp_framed_ipv6_route_ie not in lib
   }
   //--------
   pfcp_create_traffic_endpoint_ie()

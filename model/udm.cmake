@@ -489,10 +489,23 @@ file(GLOB UDM_MODEL_SRC_FILES
     ${UDM_MODEL_DIR}/AtsssCapability.cpp
     ${UDM_MODEL_DIR}/OdbPacketServices_anyOf.cpp
     ${UDM_MODEL_DIR}/SequenceNumber.cpp
+    ${UDM_MODEL_DIR}/SqnScheme_anyOf.cpp
     ${UDM_MODEL_DIR}/Sign.cpp
     ${UDM_MODEL_DIR}/SqnScheme.cpp
+    ${UDM_MODEL_DIR}/ReservPriority.cpp
+    ${UDM_MODEL_DIR}/ReservPriority_anyOf.cpp
     ${UDM_MODEL_DIR}/UeContextInfoClass.cpp
     ${UDM_MODEL_DIR}/UeContextInfoClass_anyOf.cpp
+    ${UDM_MODEL_DIR}/MbsMediaCompRm.cpp
+    ${UDM_MODEL_DIR}/MbsServiceType_anyOf.cpp
+    ${UDM_MODEL_DIR}/MbsQoSReq.cpp
+    ${UDM_MODEL_DIR}/MbsMediaInfo.cpp
+    ${UDM_MODEL_DIR}/MediaType.cpp
+    ${UDM_MODEL_DIR}/MediaType_anyOf.cpp
+    ${UDM_MODEL_DIR}/MbsSessionActivityStatus_anyOf.cpp
+    ${UDM_MODEL_DIR}/MbsSessionEvent.cpp
+    ${UDM_MODEL_DIR}/MbsSessionEventType.cpp
+    ${UDM_MODEL_DIR}/MbsSessionEventType_anyOf.cpp
     ${UDM_MODEL_DIR}/Helpers.cpp
 
 )

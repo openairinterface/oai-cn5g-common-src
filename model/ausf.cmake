@@ -19,40 +19,60 @@
 #      contact@openairinterface.org
 ################################################################################
 
-include(${SRC_TOP_DIR}/${MOUNTED_COMMON}/model/common_model/common_model.cmake)
-include(${SRC_TOP_DIR}/${MOUNTED_COMMON}/model/nrf/nrf_model.cmake)
+include(${SRC_TOP_DIR}/${MOUNTED_COMMON}/model/common_model.cmake)
 
-SET(AUSF_MODEL_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/model/ausf)
-
-set(COMMON_MODEL_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/model/common_model)
+SET(AUSF_MODEL_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/model)
 
 include_directories(${AUSF_MODEL_DIR})
 
 file(GLOB AUSF_MODEL_SRC_FILES
-    ${AUSF_MODEL_DIR}/*.cpp
-    ${COMMON_MODEL_DIR}/Helpers.cpp
-    ${COMMON_MODEL_DIR}/InvalidParam.cpp
-    ${COMMON_MODEL_DIR}/Ipv6Addr.cpp
-    ${COMMON_MODEL_DIR}/Link.cpp
-    ${COMMON_MODEL_DIR}/LinksValueSchema.cpp
-    ${COMMON_MODEL_DIR}/PatchItem.cpp
-    ${COMMON_MODEL_DIR}/PatchOperation.cpp
-    ${COMMON_MODEL_DIR}/PatchOperation_anyOf.cpp
-    ${COMMON_MODEL_DIR}/TraceData.cpp
-    ${COMMON_MODEL_DIR}/TraceDepth.cpp
-    ${COMMON_MODEL_DIR}/TraceDepth_anyOf.cpp
-    ${COMMON_MODEL_DIR}/ProblemDetails.cpp
-    ${COMMON_MODEL_DIR}/AccessTokenErr.cpp
-    ${COMMON_MODEL_DIR}/AccessTokenReq.cpp
-    ${COMMON_MODEL_DIR}/NFType.cpp
-    ${COMMON_MODEL_DIR}/NFType_anyOf.cpp
-    ${COMMON_MODEL_DIR}/PlmnId.cpp
-    ${COMMON_MODEL_DIR}/PlmnIdNid.cpp
-    ${COMMON_MODEL_DIR}/Snssai.cpp
-    ${COMMON_MODEL_DIR}/Tai.cpp
+    ${AUSF_MODEL_DIR}/AccessTech.cpp
+    ${AUSF_MODEL_DIR}/AccessTech_anyOf.cpp
+    ${AUSF_MODEL_DIR}/AccessTokenErr.cpp
+    ${AUSF_MODEL_DIR}/AccessTokenReq.cpp
+    ${AUSF_MODEL_DIR}/AuthResult.cpp
+    ${AUSF_MODEL_DIR}/AuthType.cpp
+    ${AUSF_MODEL_DIR}/AuthType_anyOf.cpp
+    ${AUSF_MODEL_DIR}/AuthenticationInfo.cpp
+    ${AUSF_MODEL_DIR}/Av5gAka.cpp
+    ${AUSF_MODEL_DIR}/ConfirmationData.cpp
+    ${AUSF_MODEL_DIR}/ConfirmationDataResponse.cpp
+    ${AUSF_MODEL_DIR}/DeregistrationInfo.cpp
+    ${AUSF_MODEL_DIR}/EapSession.cpp
+    ${AUSF_MODEL_DIR}/InvalidParam.cpp
+    ${AUSF_MODEL_DIR}/Ipv6Addr.cpp
+    ${AUSF_MODEL_DIR}/Link.cpp
+    ${AUSF_MODEL_DIR}/LinksValueSchema.cpp
+    ${AUSF_MODEL_DIR}/NFType.cpp
+    ${AUSF_MODEL_DIR}/NFType_anyOf.cpp
+    ${AUSF_MODEL_DIR}/PlmnId.cpp
+    ${AUSF_MODEL_DIR}/PlmnIdNid.cpp
+    ${AUSF_MODEL_DIR}/ProSeAuthData.cpp
+    ${AUSF_MODEL_DIR}/ProSeAuthenticationCtx.cpp
+    ${AUSF_MODEL_DIR}/ProSeAuthenticationInfo.cpp
+    ${AUSF_MODEL_DIR}/ProSeAuthenticationResult.cpp
+    ${AUSF_MODEL_DIR}/ProSeEapSession.cpp
+    ${AUSF_MODEL_DIR}/ProblemDetails.cpp
+    ${AUSF_MODEL_DIR}/RedirectResponse.cpp
+    ${AUSF_MODEL_DIR}/ResynchronizationInfo.cpp
+    ${AUSF_MODEL_DIR}/RgAuthCtx.cpp
+    ${AUSF_MODEL_DIR}/RgAuthenticationInfo.cpp
+    ${AUSF_MODEL_DIR}/ServerAddressingInfo.cpp
+    ${AUSF_MODEL_DIR}/Snssai.cpp
+    ${AUSF_MODEL_DIR}/SorInfo.cpp
+    ${AUSF_MODEL_DIR}/SorSecurityInfo.cpp
+    ${AUSF_MODEL_DIR}/SteeringContainer.cpp
+    ${AUSF_MODEL_DIR}/SteeringInfo.cpp
+    ${AUSF_MODEL_DIR}/TraceData.cpp
+    ${AUSF_MODEL_DIR}/TraceDepth.cpp
+    ${AUSF_MODEL_DIR}/TraceDepth_anyOf.cpp
+    ${AUSF_MODEL_DIR}/UEAuthenticationCtx.cpp
+    ${AUSF_MODEL_DIR}/UEAuthenticationCtx_5gAuthData.cpp
+    ${AUSF_MODEL_DIR}/UpuData.cpp
+    ${AUSF_MODEL_DIR}/UpuInfo.cpp
+    ${AUSF_MODEL_DIR}/UpuSecurityInfo.cpp
 )
 
-## CONFIG used in NF_TARGET (main)
 if (TARGET ${NF_TARGET})
     target_include_directories(${NF_TARGET} PUBLIC ${AUSF_MODEL_DIR})
     target_sources(${NF_TARGET} PRIVATE

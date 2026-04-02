@@ -19,7 +19,6 @@
 #      contact@openairinterface.org
 ################################################################################
 
-# Model files are in the flat model/ directory (no common_model subdirectory exists)
 SET(COMMON_MODEL_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/model)
 
 include_directories(${COMMON_MODEL_DIR})

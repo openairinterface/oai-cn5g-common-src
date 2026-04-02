@@ -19,8 +19,6 @@
 #      contact@openairinterface.org
 ################################################################################
 
-include(${SRC_TOP_DIR}/${MOUNTED_COMMON}/model/common_model.cmake)
-
 SET(UDM_MODEL_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/model)
 
 include_directories(${UDM_MODEL_DIR})
@@ -488,6 +486,15 @@ file(GLOB UDM_MODEL_SRC_FILES
     ${UDM_MODEL_DIR}/r_5GVnGroupData.cpp
     ${UDM_MODEL_DIR}/r_5GsUserState.cpp
     ${UDM_MODEL_DIR}/r_5MbsAuthorizationInfo.cpp
+    ${UDM_MODEL_DIR}/AtsssCapability.cpp
+    ${UDM_MODEL_DIR}/OdbPacketServices_anyOf.cpp
+    ${UDM_MODEL_DIR}/SequenceNumber.cpp
+    ${UDM_MODEL_DIR}/Sign.cpp
+    ${UDM_MODEL_DIR}/SqnScheme.cpp
+    ${UDM_MODEL_DIR}/UeContextInfoClass.cpp
+    ${UDM_MODEL_DIR}/UeContextInfoClass_anyOf.cpp
+    ${UDM_MODEL_DIR}/Helpers.cpp
+
 )
 
 if (TARGET ${NF_TARGET})

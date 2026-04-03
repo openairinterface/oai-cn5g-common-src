@@ -45,6 +45,9 @@ file(GLOB AUSF_MODEL_SRC_FILES
     ${AUSF_MODEL_DIR}/LinksValueSchema.cpp
     ${AUSF_MODEL_DIR}/NFType.cpp
     ${AUSF_MODEL_DIR}/NFType_anyOf.cpp
+    ${AUSF_MODEL_DIR}/PatchItem.cpp
+    ${AUSF_MODEL_DIR}/PatchOperation.cpp
+    ${AUSF_MODEL_DIR}/PatchOperation_anyOf.cpp
     ${AUSF_MODEL_DIR}/PlmnId.cpp
     ${AUSF_MODEL_DIR}/PlmnIdNid.cpp
     ${AUSF_MODEL_DIR}/ProSeAuthData.cpp
@@ -63,14 +66,18 @@ file(GLOB AUSF_MODEL_SRC_FILES
     ${AUSF_MODEL_DIR}/SorSecurityInfo.cpp
     ${AUSF_MODEL_DIR}/SteeringContainer.cpp
     ${AUSF_MODEL_DIR}/SteeringInfo.cpp
+    ${AUSF_MODEL_DIR}/Tai.cpp
     ${AUSF_MODEL_DIR}/TraceData.cpp
     ${AUSF_MODEL_DIR}/TraceDepth.cpp
     ${AUSF_MODEL_DIR}/TraceDepth_anyOf.cpp
     ${AUSF_MODEL_DIR}/UEAuthenticationCtx.cpp
     ${AUSF_MODEL_DIR}/UEAuthenticationCtx_5gAuthData.cpp
+    ${AUSF_MODEL_DIR}/UeContextInfoClass.cpp
+    ${AUSF_MODEL_DIR}/UeContextInfoClass_anyOf.cpp
     ${AUSF_MODEL_DIR}/UpuData.cpp
     ${AUSF_MODEL_DIR}/UpuInfo.cpp
     ${AUSF_MODEL_DIR}/UpuSecurityInfo.cpp
+    ${AUSF_MODEL_DIR}/Helpers.cpp
 )
 
 if (TARGET ${NF_TARGET})

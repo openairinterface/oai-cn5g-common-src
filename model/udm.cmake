@@ -56,6 +56,7 @@ file(GLOB UDM_MODEL_SRC_FILES
     ${UDM_MODEL_DIR}/Arp.cpp
     ${UDM_MODEL_DIR}/AssociationType.cpp
     ${UDM_MODEL_DIR}/AssociationType_anyOf.cpp
+    ${UDM_MODEL_DIR}/AtsssCapability.cpp
     ${UDM_MODEL_DIR}/AuthEvent.cpp
     ${UDM_MODEL_DIR}/AuthResult.cpp
     ${UDM_MODEL_DIR}/AuthType.cpp
@@ -231,7 +232,15 @@ file(GLOB UDM_MODEL_SRC_FILES
     ${UDM_MODEL_DIR}/LossOfConnectivityReason_anyOf.cpp
     ${UDM_MODEL_DIR}/Lpi.cpp
     ${UDM_MODEL_DIR}/LteV2xAuth.cpp
+    ${UDM_MODEL_DIR}/MbsMediaCompRm.cpp
+    ${UDM_MODEL_DIR}/MbsQoSReq.cpp
+    ${UDM_MODEL_DIR}/MbsMediaInfo.cpp
+    ${UDM_MODEL_DIR}/MbsSessionActivityStatus_anyOf.cpp
+    ${UDM_MODEL_DIR}/MbsSessionEvent.cpp
+    ${UDM_MODEL_DIR}/MbsSessionEventType.cpp
+    ${UDM_MODEL_DIR}/MbsSessionEventType_anyOf.cpp
     ${UDM_MODEL_DIR}/MbsSessionId.cpp
+    ${UDM_MODEL_DIR}/MbsServiceType_anyOf.cpp    
     ${UDM_MODEL_DIR}/MbsSubscriptionData.cpp
     ${UDM_MODEL_DIR}/MbsfnArea.cpp
     ${UDM_MODEL_DIR}/MdtConfiguration.cpp
@@ -241,6 +250,8 @@ file(GLOB UDM_MODEL_SRC_FILES
     ${UDM_MODEL_DIR}/MeasurementLteForMdt_anyOf.cpp
     ${UDM_MODEL_DIR}/MeasurementNrForMdt.cpp
     ${UDM_MODEL_DIR}/MeasurementPeriodLteMdt.cpp
+    ${UDM_MODEL_DIR}/MediaType.cpp
+    ${UDM_MODEL_DIR}/MediaType_anyOf.cpp
     ${UDM_MODEL_DIR}/ModificationNotification.cpp
     ${UDM_MODEL_DIR}/MonitoringConfiguration.cpp
     ${UDM_MODEL_DIR}/MonitoringEvent.cpp
@@ -270,8 +281,9 @@ file(GLOB UDM_MODEL_SRC_FILES
     ${UDM_MODEL_DIR}/NwdafRegistrationInfo.cpp
     ${UDM_MODEL_DIR}/NwdafRegistrationModification.cpp
     ${UDM_MODEL_DIR}/OdbPacketServices.cpp
+    ${UDM_MODEL_DIR}/OdbPacketServices_anyOf.cpp
     ${UDM_MODEL_DIR}/OperationMode.cpp
-    ${UDM_MODEL_DIR}/OperationMode_anyOf.cpp
+    ${UDM_MODEL_DIR}/OperationMode_anyOf.cpp  
     ${UDM_MODEL_DIR}/PatchItem.cpp
     ${UDM_MODEL_DIR}/PatchOperation.cpp
     ${UDM_MODEL_DIR}/PatchOperation_anyOf.cpp
@@ -377,6 +389,7 @@ file(GLOB UDM_MODEL_SRC_FILES
     ${UDM_MODEL_DIR}/SdmSubscription.cpp
     ${UDM_MODEL_DIR}/SensorMeasurement.cpp
     ${UDM_MODEL_DIR}/SensorMeasurement_anyOf.cpp
+    ${UDM_MODEL_DIR}/SequenceNumber.cpp
     ${UDM_MODEL_DIR}/ServerAddressingInfo.cpp
     ${UDM_MODEL_DIR}/ServiceAreaId.cpp
     ${UDM_MODEL_DIR}/ServiceAreaRestriction.cpp
@@ -388,10 +401,11 @@ file(GLOB UDM_MODEL_SRC_FILES
     ${UDM_MODEL_DIR}/ServiceType.cpp
     ${UDM_MODEL_DIR}/ServiceTypeUnrelatedClass.cpp
     ${UDM_MODEL_DIR}/ServiceType_anyOf.cpp
-    ${UDM_MODEL_DIR}/SessionManagementSubscriptionData.cpp
+    ${UDM_MODEL_DIR}/SessionManagementSubscriptionData.cpp   
     ${UDM_MODEL_DIR}/SharedData.cpp
     ${UDM_MODEL_DIR}/SharedDataTreatmentInstruction.cpp
     ${UDM_MODEL_DIR}/SharedDataTreatmentInstruction_anyOf.cpp
+    ${UDM_MODEL_DIR}/Sign.cpp   
     ${UDM_MODEL_DIR}/SliceMbr.cpp
     ${UDM_MODEL_DIR}/SliceMbrRm.cpp
     ${UDM_MODEL_DIR}/SmDeliveryStatus.cpp
@@ -412,6 +426,8 @@ file(GLOB UDM_MODEL_SRC_FILES
     ${UDM_MODEL_DIR}/SorUpdateIndicator_anyOf.cpp
     ${UDM_MODEL_DIR}/SorUpdateInfo.cpp
     ${UDM_MODEL_DIR}/SpatialValidityCond.cpp
+    ${UDM_MODEL_DIR}/SqnScheme.cpp
+    ${UDM_MODEL_DIR}/SqnScheme_anyOf.cpp
     ${UDM_MODEL_DIR}/SscMode.cpp
     ${UDM_MODEL_DIR}/SscMode_anyOf.cpp
     ${UDM_MODEL_DIR}/SscModes.cpp
@@ -429,6 +445,7 @@ file(GLOB UDM_MODEL_SRC_FILES
     ${UDM_MODEL_DIR}/SupportedGADShapes.cpp
     ${UDM_MODEL_DIR}/SupportedGADShapes_anyOf.cpp
     ${UDM_MODEL_DIR}/TacInfo.cpp
+    ${UDM_MODEL_DIR}/TacRange.cpp
     ${UDM_MODEL_DIR}/Tai.cpp
     ${UDM_MODEL_DIR}/TaiRange.cpp
     ${UDM_MODEL_DIR}/Tmgi.cpp
@@ -444,6 +461,8 @@ file(GLOB UDM_MODEL_SRC_FILES
     ${UDM_MODEL_DIR}/TransportProtocol_anyOf.cpp
     ${UDM_MODEL_DIR}/TriggerRequest.cpp
     ${UDM_MODEL_DIR}/TwapId.cpp
+    ${UDM_MODEL_DIR}/ReservPriority.cpp
+    ${UDM_MODEL_DIR}/ReservPriority_anyOf.cpp
     ${UDM_MODEL_DIR}/UcPurpose.cpp
     ${UDM_MODEL_DIR}/UcPurpose_anyOf.cpp
     ${UDM_MODEL_DIR}/UcSubscriptionData.cpp
@@ -454,12 +473,14 @@ file(GLOB UDM_MODEL_SRC_FILES
     ${UDM_MODEL_DIR}/UeContextInSmfDataSubFilter.cpp
     ${UDM_MODEL_DIR}/UeContextInSmsfData.cpp
     ${UDM_MODEL_DIR}/UeContextInfo.cpp
+    ${UDM_MODEL_DIR}/UeContextInfoClass.cpp
+    ${UDM_MODEL_DIR}/UeContextInfoClass_anyOf.cpp
     ${UDM_MODEL_DIR}/UeId.cpp
     ${UDM_MODEL_DIR}/UeInfo.cpp
     ${UDM_MODEL_DIR}/UeReachability.cpp
     ${UDM_MODEL_DIR}/UeReachability_anyOf.cpp
     ${UDM_MODEL_DIR}/UeReachableInd.cpp
-    ${UDM_MODEL_DIR}/UeReachableInd_anyOf.cpp
+    ${UDM_MODEL_DIR}/UeReachableInd_anyOf.cpp    
     ${UDM_MODEL_DIR}/UmtTime.cpp
     ${UDM_MODEL_DIR}/UncertaintyEllipse.cpp
     ${UDM_MODEL_DIR}/UnrelatedClass.cpp
@@ -486,26 +507,6 @@ file(GLOB UDM_MODEL_SRC_FILES
     ${UDM_MODEL_DIR}/r_5GVnGroupData.cpp
     ${UDM_MODEL_DIR}/r_5GsUserState.cpp
     ${UDM_MODEL_DIR}/r_5MbsAuthorizationInfo.cpp
-    ${UDM_MODEL_DIR}/AtsssCapability.cpp
-    ${UDM_MODEL_DIR}/OdbPacketServices_anyOf.cpp
-    ${UDM_MODEL_DIR}/SequenceNumber.cpp
-    ${UDM_MODEL_DIR}/SqnScheme_anyOf.cpp
-    ${UDM_MODEL_DIR}/Sign.cpp
-    ${UDM_MODEL_DIR}/SqnScheme.cpp
-    ${UDM_MODEL_DIR}/ReservPriority.cpp
-    ${UDM_MODEL_DIR}/ReservPriority_anyOf.cpp
-    ${UDM_MODEL_DIR}/UeContextInfoClass.cpp
-    ${UDM_MODEL_DIR}/UeContextInfoClass_anyOf.cpp
-    ${UDM_MODEL_DIR}/MbsMediaCompRm.cpp
-    ${UDM_MODEL_DIR}/MbsServiceType_anyOf.cpp
-    ${UDM_MODEL_DIR}/MbsQoSReq.cpp
-    ${UDM_MODEL_DIR}/MbsMediaInfo.cpp
-    ${UDM_MODEL_DIR}/MediaType.cpp
-    ${UDM_MODEL_DIR}/MediaType_anyOf.cpp
-    ${UDM_MODEL_DIR}/MbsSessionActivityStatus_anyOf.cpp
-    ${UDM_MODEL_DIR}/MbsSessionEvent.cpp
-    ${UDM_MODEL_DIR}/MbsSessionEventType.cpp
-    ${UDM_MODEL_DIR}/MbsSessionEventType_anyOf.cpp
     ${UDM_MODEL_DIR}/Helpers.cpp
 
 )

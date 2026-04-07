@@ -22,7 +22,7 @@
 #define NsmfEventExposure_H_
 
 #include "NotificationFlag.h"
-#include "EventSubscription.h"
+#include "SmfEventSubscription.h"
 #include "PartitioningCriteria.h"
 #include "NotificationMethod.h"
 #include "ServiceName.h"
@@ -196,9 +196,9 @@ class NsmfEventExposure {
   /// <summary>
   /// Subscribed events
   /// </summary>
-  std::vector<oai::_3gpp::model::EventSubscription> getEventSubs() const;
+  std::vector<oai::_3gpp::model::SmfEventSubscription> getEventSubs() const;
   void setEventSubs(
-      std::vector<oai::_3gpp::model::EventSubscription> const& value);
+      std::vector<oai::_3gpp::model::SmfEventSubscription> const& value);
   /// <summary>
   ///
   /// </summary>
@@ -338,7 +338,7 @@ class NsmfEventExposure {
   bool m_AltNotifIpv6AddrsIsSet;
   std::vector<std::string> m_AltNotifFqdns;
   bool m_AltNotifFqdnsIsSet;
-  std::vector<oai::_3gpp::model::EventSubscription> m_EventSubs;
+  std::vector<oai::_3gpp::model::SmfEventSubscription> m_EventSubs;
 
   std::vector<oai::_3gpp::model::EventNotification> m_EventNotifs;
   bool m_EventNotifsIsSet;

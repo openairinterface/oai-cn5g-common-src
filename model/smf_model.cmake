@@ -268,6 +268,7 @@ file(GLOB SMF_MODEL_SRC_FILES
     ${SMF_MODEL_DIR}/SmcceInfo.cpp
     ${SMF_MODEL_DIR}/SmfEvent.cpp
     ${SMF_MODEL_DIR}/SmfEvent_anyOf.cpp
+    ${SMF_MODEL_DIR}/SmfEventSubscription.cpp
     ${SMF_MODEL_DIR}/SmfSelectionType.cpp
     ${SMF_MODEL_DIR}/SmfSelectionType_anyOf.cpp
     ${SMF_MODEL_DIR}/Snssai.cpp
@@ -328,6 +329,87 @@ file(GLOB SMF_MODEL_SRC_FILES
     ${SMF_MODEL_DIR}/WAgfInfo.cpp
     ${SMF_MODEL_DIR}/WlanPerformanceInfo.cpp
     ${SMF_MODEL_DIR}/WlanPerformanceReq.cpp
+    ${SMF_MODEL_DIR}/ConditionEventType.cpp
+    ${SMF_MODEL_DIR}/ConditionEventType_anyOf.cpp
+    ${SMF_MODEL_DIR}/DddStatus.cpp
+    ${SMF_MODEL_DIR}/SmContextMessage.cpp
+    ${SMF_MODEL_DIR}/SmContextReleaseMessage.cpp
+    ${SMF_MODEL_DIR}/SmContextUpdateMessage.cpp
+${SMF_MODEL_DIR}/Accuracy.cpp
+    ${SMF_MODEL_DIR}/AdditionalMeasurement.cpp
+    ${SMF_MODEL_DIR}/AnalyticsMetadata.cpp
+    ${SMF_MODEL_DIR}/AnalyticsMetadataIndication.cpp
+    ${SMF_MODEL_DIR}/AnalyticsSubset_anyOf.cpp
+    ${SMF_MODEL_DIR}/AppListForUeComm.cpp
+    ${SMF_MODEL_DIR}/AuthorizedDefaultQos.cpp
+    ${SMF_MODEL_DIR}/ClassCriterion.cpp
+    ${SMF_MODEL_DIR}/DatasetStatisticalProperty.cpp
+    ${SMF_MODEL_DIR}/DispersionCollection.cpp
+    ${SMF_MODEL_DIR}/DispersionOrderingCriterion.cpp
+    ${SMF_MODEL_DIR}/DispersionType.cpp
+    ${SMF_MODEL_DIR}/DnnSmfInfoItem.cpp
+    ${SMF_MODEL_DIR}/DnnUpfInfoItem.cpp
+    ${SMF_MODEL_DIR}/DnPerf.cpp
+    ${SMF_MODEL_DIR}/DnPerfOrderingCriterion.cpp
+    ${SMF_MODEL_DIR}/ExceptionId.cpp
+    ${SMF_MODEL_DIR}/ExceptionTrend.cpp
+    ${SMF_MODEL_DIR}/ExpectedAnalyticsType_anyOf.cpp
+    ${SMF_MODEL_DIR}/FlowDirectionRm.cpp
+    ${SMF_MODEL_DIR}/InterfaceUpfInfoItem.cpp
+    ${SMF_MODEL_DIR}/LocationArea.cpp
+    ${SMF_MODEL_DIR}/LocationInfo.cpp
+    ${SMF_MODEL_DIR}/MatchingDirection_anyOf.cpp
+    ${SMF_MODEL_DIR}/NetworkPerfType.cpp
+    ${SMF_MODEL_DIR}/NFProfile.cpp
+    ${SMF_MODEL_DIR}/NfStatus.cpp
+    ${SMF_MODEL_DIR}/NotificationData.cpp
+    ${SMF_MODEL_DIR}/NotificationEventType.cpp
+    ${SMF_MODEL_DIR}/NumberAverage.cpp
+    ${SMF_MODEL_DIR}/NwdafEvent_anyOf.cpp
+    ${SMF_MODEL_DIR}/NwdafFailureCode_anyOf.cpp
+    ${SMF_MODEL_DIR}/OutputStrategy.cpp
+    ${SMF_MODEL_DIR}/PatchItem.cpp
+    ${SMF_MODEL_DIR}/PatchOperation.cpp
+    ${SMF_MODEL_DIR}/PatchOperation_anyOf.cpp
+    ${SMF_MODEL_DIR}/PccRule.cpp
+    ${SMF_MODEL_DIR}/QosData.cpp
+    ${SMF_MODEL_DIR}/RankingCriterion.cpp
+    ${SMF_MODEL_DIR}/RedirectAddressType.cpp
+    ${SMF_MODEL_DIR}/RedirectInformation.cpp
+    ${SMF_MODEL_DIR}/RedTransExpOrderingCriterion.cpp
+    ${SMF_MODEL_DIR}/RedundantTransmissionExpPerTS.cpp
+    ${SMF_MODEL_DIR}/ReleaseCause_anyOf.cpp
+    ${SMF_MODEL_DIR}/ResourceUsage.cpp
+    ${SMF_MODEL_DIR}/SdmSubscription.cpp
+    ${SMF_MODEL_DIR}/SearchResult.cpp
+    ${SMF_MODEL_DIR}/ServiceExperienceType.cpp
+    ${SMF_MODEL_DIR}/SessInactTimerForUeComm.cpp
+    ${SMF_MODEL_DIR}/SessionRule.cpp
+    ${SMF_MODEL_DIR}/SmallDataRateControl.cpp
+    ${SMF_MODEL_DIR}/SmcceUeList.cpp
+    ${SMF_MODEL_DIR}/SmContextStatus_anyOf.cpp
+    ${SMF_MODEL_DIR}/SmfInfo.cpp
+    ${SMF_MODEL_DIR}/SmfRegistration.cpp
+    ${SMF_MODEL_DIR}/SmPolicyContextData.cpp
+    ${SMF_MODEL_DIR}/SmPolicyControl.cpp
+    ${SMF_MODEL_DIR}/SmPolicyDecision.cpp
+    ${SMF_MODEL_DIR}/SmPolicyDeleteData.cpp
+    ${SMF_MODEL_DIR}/SmPolicyNotification.cpp
+    ${SMF_MODEL_DIR}/SmPolicyUpdateContextData.cpp
+    ${SMF_MODEL_DIR}/SnssaiSmfInfoItem.cpp
+    ${SMF_MODEL_DIR}/SnssaiUpfInfoItem.cpp
+    ${SMF_MODEL_DIR}/SubscribedDefaultQos.cpp
+    ${SMF_MODEL_DIR}/SvcExperience.cpp
+    ${SMF_MODEL_DIR}/TerminationNotification.cpp
+    ${SMF_MODEL_DIR}/TimeUnit.cpp
+    ${SMF_MODEL_DIR}/TrafficCharacterization.cpp
+    ${SMF_MODEL_DIR}/TrafficControlData.cpp
+    ${SMF_MODEL_DIR}/UpfInfo.cpp
+    ${SMF_MODEL_DIR}/UPInterfaceType.cpp
+    ${SMF_MODEL_DIR}/UPInterfaceType_anyOf.cpp
+    ${SMF_MODEL_DIR}/WlanOrderingCriterion.cpp
+    ${SMF_MODEL_DIR}/WlanPerSsIdPerformanceInfo.cpp
+    ${SMF_MODEL_DIR}/UsageReport.cpp
 )
 
 if (TARGET ${NF_TARGET})

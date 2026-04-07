@@ -13,6 +13,7 @@
 
 #include "UpfInfo.h"
 #include "Helpers.h"
+#include "config.hpp"
 
 #include <sstream>
 
@@ -608,4 +609,23 @@ void UpfInfo::unsetSupportedPfcpFeatures() {
   m_SupportedPfcpFeaturesIsSet = false;
 }
 
+std::string UpfInfo::to_string(int indent_level) const {
+  std::string out;
+
+  std::string fmt_title = oai::config::get_title_formatter(indent_level);
+  out.append(fmt::format(fmt_title, "upf_info:"));
+
+  if (!m_SNssaiUpfInfoList.empty()) {
+    for (const auto& info : m_SNssaiUpfInfoList) {
+      out.append(info.to_string(indent_level + 1));
+    }
+  }
+  if (!m_InterfaceUpfInfoList.empty()) {
+    for (const auto& iface : m_InterfaceUpfInfoList) {
+      out.append(iface.to_string(indent_level + 1));
+    }
+  }
+  return out;
+  // TODO other values
+}
 }  // namespace oai::_3gpp::model

@@ -18,174 +18,505 @@
 # For more information about the OpenAirInterface (OAI) Software Alliance:
 #      contact@openairinterface.org
 ################################################################################
-
-include(${SRC_TOP_DIR}/${MOUNTED_COMMON}/model/common_model.cmake)
-
 SET(SMF_MODEL_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/model)
 
 include_directories(${SMF_MODEL_DIR})
 
 file(GLOB SMF_MODEL_SRC_FILES
+    ${SMF_MODEL_DIR}/AanfInfo.cpp
     ${SMF_MODEL_DIR}/AbnormalBehaviour.cpp
+    ${SMF_MODEL_DIR}/AccessAndMobilitySubscriptionData.cpp
+    ${SMF_MODEL_DIR}/AccessAndMobilitySubscriptionData_subscribedDnnList_inner.cpp
+    ${SMF_MODEL_DIR}/AccessTech_anyOf.cpp
+    ${SMF_MODEL_DIR}/AccessTech.cpp
     ${SMF_MODEL_DIR}/AccessTokenErr.cpp
     ${SMF_MODEL_DIR}/AccessTokenReq.cpp
     ${SMF_MODEL_DIR}/AccessType.cpp
+    ${SMF_MODEL_DIR}/AccessTypeRm.cpp
+    ${SMF_MODEL_DIR}/AccNetChargingAddress.cpp
+    ${SMF_MODEL_DIR}/AccNetChId.cpp
+    ${SMF_MODEL_DIR}/Accuracy_anyOf.cpp
+    ${SMF_MODEL_DIR}/Accuracy.cpp
+    ${SMF_MODEL_DIR}/AccuUsageReport.cpp
     ${SMF_MODEL_DIR}/AckOfNotify.cpp
+    ${SMF_MODEL_DIR}/AcsInfo.cpp
+    ${SMF_MODEL_DIR}/AdditionalAccessInfo.cpp
+    ${SMF_MODEL_DIR}/AdditionalMeasurement.cpp
     ${SMF_MODEL_DIR}/AdditionalQosFlowInfo.cpp
+    ${SMF_MODEL_DIR}/AdditionalSnssaiData.cpp
+    ${SMF_MODEL_DIR}/AddressList.cpp
     ${SMF_MODEL_DIR}/AddrFqdn.cpp
+    ${SMF_MODEL_DIR}/AerialUeIndication_anyOf.cpp
+    ${SMF_MODEL_DIR}/AerialUeIndication.cpp
+    ${SMF_MODEL_DIR}/AerialUeSubscriptionInfo.cpp
     ${SMF_MODEL_DIR}/AfCoordinationInfo.cpp
+    ${SMF_MODEL_DIR}/AfEvent_anyOf.cpp
+    ${SMF_MODEL_DIR}/AfEvent.cpp
+    ${SMF_MODEL_DIR}/AfEventExposureData.cpp
+    ${SMF_MODEL_DIR}/AfExternal.cpp
     ${SMF_MODEL_DIR}/AfResultInfo.cpp
-    ${SMF_MODEL_DIR}/AfResultStatus.cpp
     ${SMF_MODEL_DIR}/AfResultStatus_anyOf.cpp
+    ${SMF_MODEL_DIR}/AfResultStatus.cpp
+    ${SMF_MODEL_DIR}/AfSigProtocol_anyOf.cpp
+    ${SMF_MODEL_DIR}/AfSigProtocol.cpp
     ${SMF_MODEL_DIR}/AlternativeQosProfile.cpp
     ${SMF_MODEL_DIR}/Ambr.cpp
+    ${SMF_MODEL_DIR}/AmbrRm.cpp
+    ${SMF_MODEL_DIR}/AmfCond.cpp
+    ${SMF_MODEL_DIR}/AmfInfo.cpp
     ${SMF_MODEL_DIR}/AnalyticsMetadataInfo.cpp
-    ${SMF_MODEL_DIR}/AnalyticsSubset.cpp
     ${SMF_MODEL_DIR}/AnchorSmfFeatures.cpp
+    ${SMF_MODEL_DIR}/AnGwAddress.cpp
+    ${SMF_MODEL_DIR}/AnNodeType_anyOf.cpp
+    ${SMF_MODEL_DIR}/AnNodeType.cpp
     ${SMF_MODEL_DIR}/ApnRateStatus.cpp
-    ${SMF_MODEL_DIR}/AppliedSmccType.cpp
+    ${SMF_MODEL_DIR}/AppDescriptor.cpp
+    ${SMF_MODEL_DIR}/AppDetectionInfo.cpp
+    ${SMF_MODEL_DIR}/ApplicationVolume.cpp
     ${SMF_MODEL_DIR}/AppliedSmccType_anyOf.cpp
+    ${SMF_MODEL_DIR}/AppliedSmccType.cpp
+    ${SMF_MODEL_DIR}/AppListForUeComm.cpp
+    ${SMF_MODEL_DIR}/Area.cpp
+    ${SMF_MODEL_DIR}/AreaScope.cpp
     ${SMF_MODEL_DIR}/Arp.cpp
+    ${SMF_MODEL_DIR}/AtsssCapability.cpp
+    ${SMF_MODEL_DIR}/AusfInfo.cpp
+    ${SMF_MODEL_DIR}/AuthorizedDefaultQos.cpp
     ${SMF_MODEL_DIR}/BackupAmfInfo.cpp
     ${SMF_MODEL_DIR}/BatteryIndication.cpp
-    ${SMF_MODEL_DIR}/BwRequirement.cpp
-    ${SMF_MODEL_DIR}/Cause.cpp
+    ${SMF_MODEL_DIR}/BridgeManagementContainer.cpp
+    ${SMF_MODEL_DIR}/BsfInfo.cpp
+    ${SMF_MODEL_DIR}/CagData.cpp
+    ${SMF_MODEL_DIR}/CagInfo.cpp
     ${SMF_MODEL_DIR}/Cause_anyOf.cpp
+    ${SMF_MODEL_DIR}/Cause.cpp
     ${SMF_MODEL_DIR}/CellGlobalId.cpp
+    ${SMF_MODEL_DIR}/ChangeItem.cpp
+    ${SMF_MODEL_DIR}/ChangeType_anyOf.cpp
+    ${SMF_MODEL_DIR}/ChangeType.cpp
+    ${SMF_MODEL_DIR}/ChargingData.cpp
     ${SMF_MODEL_DIR}/ChargingInformation.cpp
+    ${SMF_MODEL_DIR}/ChfInfo.cpp
+    ${SMF_MODEL_DIR}/CircumstanceDescription.cpp
+    ${SMF_MODEL_DIR}/CivicAddress.cpp
     ${SMF_MODEL_DIR}/CnAssistedRanPara.cpp
+    ${SMF_MODEL_DIR}/CodeWordInd_anyOf.cpp
+    ${SMF_MODEL_DIR}/CodeWordInd.cpp
+    ${SMF_MODEL_DIR}/CollectionPeriodRmmLteMdt_anyOf.cpp
+    ${SMF_MODEL_DIR}/CollectionPeriodRmmLteMdt.cpp
+    ${SMF_MODEL_DIR}/CollectionPeriodRmmNrMdt_anyOf.cpp
+    ${SMF_MODEL_DIR}/CollectionPeriodRmmNrMdt.cpp
+    ${SMF_MODEL_DIR}/CollocatedNfInstance.cpp
+    ${SMF_MODEL_DIR}/CollocatedNfType_anyOf.cpp
+    ${SMF_MODEL_DIR}/CollocatedNfType.cpp
     ${SMF_MODEL_DIR}/CommunicationFailure.cpp
+    ${SMF_MODEL_DIR}/ConditionData.cpp
+    ${SMF_MODEL_DIR}/ConditionEventType_anyOf.cpp
+    ${SMF_MODEL_DIR}/ConditionEventType.cpp
+    ${SMF_MODEL_DIR}/CongestionInfo.cpp
+    ${SMF_MODEL_DIR}/CongestionType_anyOf.cpp
+    ${SMF_MODEL_DIR}/CongestionType.cpp
+    ${SMF_MODEL_DIR}/ContextInfo.cpp
+    ${SMF_MODEL_DIR}/CoreNetworkType_anyOf.cpp
+    ${SMF_MODEL_DIR}/CoreNetworkType.cpp
+    ${SMF_MODEL_DIR}/CreditManagementStatus_anyOf.cpp
+    ${SMF_MODEL_DIR}/CreditManagementStatus.cpp
+    ${SMF_MODEL_DIR}/DataSetId_anyOf.cpp
+    ${SMF_MODEL_DIR}/DataSetId.cpp
+    ${SMF_MODEL_DIR}/DatasetStatisticalProperty_anyOf.cpp
+    ${SMF_MODEL_DIR}/DatasetStatisticalProperty.cpp
+    ${SMF_MODEL_DIR}/DccfCond.cpp
+    ${SMF_MODEL_DIR}/DccfInfo.cpp
+    ${SMF_MODEL_DIR}/DddStatus.cpp
     ${SMF_MODEL_DIR}/DddTrafficDescriptor.cpp
     ${SMF_MODEL_DIR}/DdnFailureSubInfo.cpp
     ${SMF_MODEL_DIR}/DdnFailureSubs.cpp
+    ${SMF_MODEL_DIR}/DefaultNotificationSubscription.cpp
+    ${SMF_MODEL_DIR}/DefaultUnrelatedClass.cpp
+    ${SMF_MODEL_DIR}/DefSubServiceInfo.cpp
+    ${SMF_MODEL_DIR}/DispersionClass.cpp
+    ${SMF_MODEL_DIR}/DispersionClass_oneOf.cpp
+    ${SMF_MODEL_DIR}/DispersionCollection.cpp
     ${SMF_MODEL_DIR}/DispersionInfo.cpp
-    ${SMF_MODEL_DIR}/DispersionRequirement.cpp
-    ${SMF_MODEL_DIR}/DlDataDeliveryStatus.cpp
+    ${SMF_MODEL_DIR}/DispersionType.cpp
+    ${SMF_MODEL_DIR}/DispersionType_oneOf.cpp
     ${SMF_MODEL_DIR}/DlDataDeliveryStatus_anyOf.cpp
-    ${SMF_MODEL_DIR}/DnPerfInfo.cpp
-    ${SMF_MODEL_DIR}/DnPerformanceReq.cpp
-    ${SMF_MODEL_DIR}/DnaiChangeType.cpp
+    ${SMF_MODEL_DIR}/DlDataDeliveryStatus.cpp
     ${SMF_MODEL_DIR}/DnaiChangeType_anyOf.cpp
+    ${SMF_MODEL_DIR}/DnaiChangeType.cpp
     ${SMF_MODEL_DIR}/DnaiInformation.cpp
-    ${SMF_MODEL_DIR}/DnnSelectionMode.cpp
+    ${SMF_MODEL_DIR}/DnnConfiguration.cpp
+    ${SMF_MODEL_DIR}/DnnEasdfInfoItem.cpp
+    ${SMF_MODEL_DIR}/DnnInfoItem.cpp
+    ${SMF_MODEL_DIR}/DnnMbSmfInfoItem.cpp
     ${SMF_MODEL_DIR}/DnnSelectionMode_anyOf.cpp
+    ${SMF_MODEL_DIR}/DnnSelectionMode.cpp
+    ${SMF_MODEL_DIR}/DnnSmfInfoItem.cpp
+    ${SMF_MODEL_DIR}/DnnSmfInfoItem_dnn.cpp
+    ${SMF_MODEL_DIR}/DnnTsctsfInfoItem.cpp
+    ${SMF_MODEL_DIR}/DnnUpfInfoItem.cpp
+    ${SMF_MODEL_DIR}/DnPerf.cpp
+    ${SMF_MODEL_DIR}/DnPerfInfo.cpp
     ${SMF_MODEL_DIR}/DnsServerIdentifier.cpp
+    ${SMF_MODEL_DIR}/DownlinkDataNotificationControl.cpp
+    ${SMF_MODEL_DIR}/DownlinkDataNotificationControlRm.cpp
     ${SMF_MODEL_DIR}/Dynamic5Qi.cpp
+    ${SMF_MODEL_DIR}/EasdfInfo.cpp
     ${SMF_MODEL_DIR}/EasIpReplacementInfo.cpp
     ${SMF_MODEL_DIR}/EasServerAddress.cpp
     ${SMF_MODEL_DIR}/EbiArpMapping.cpp
     ${SMF_MODEL_DIR}/Ecgi.cpp
+    ${SMF_MODEL_DIR}/EcRestrictionDataWb.cpp
+    ${SMF_MODEL_DIR}/EcsAddrConfigInfo.cpp
+    ${SMF_MODEL_DIR}/EcsServerAddr.cpp
+    ${SMF_MODEL_DIR}/EdrxParameters.cpp
+    ${SMF_MODEL_DIR}/EllipsoidArc.cpp
+    ${SMF_MODEL_DIR}/EmergencyInfo.cpp
     ${SMF_MODEL_DIR}/EpsBearerInfo.cpp
-    ${SMF_MODEL_DIR}/EpsInterworkingIndication.cpp
     ${SMF_MODEL_DIR}/EpsInterworkingIndication_anyOf.cpp
+    ${SMF_MODEL_DIR}/EpsInterworkingIndication.cpp
+    ${SMF_MODEL_DIR}/EpsInterworkingInfo.cpp
+    ${SMF_MODEL_DIR}/EpsIwkPgw.cpp
     ${SMF_MODEL_DIR}/EpsPdnCnxInfo.cpp
     ${SMF_MODEL_DIR}/EthFlowDescription.cpp
     ${SMF_MODEL_DIR}/EutraLocation.cpp
+    ${SMF_MODEL_DIR}/EventForMdt_anyOf.cpp
+    ${SMF_MODEL_DIR}/EventForMdt.cpp
+    ${SMF_MODEL_DIR}/EventId_anyOf.cpp
+    ${SMF_MODEL_DIR}/EventId.cpp
     ${SMF_MODEL_DIR}/EventNotification.cpp
-    ${SMF_MODEL_DIR}/EventReportingRequirement.cpp
-    ${SMF_MODEL_DIR}/EventSubscription.cpp
     ${SMF_MODEL_DIR}/Exception.cpp
+    ${SMF_MODEL_DIR}/ExceptionId_anyOf.cpp
+    ${SMF_MODEL_DIR}/ExceptionId.cpp
+    ${SMF_MODEL_DIR}/ExceptionTrend_anyOf.cpp
+    ${SMF_MODEL_DIR}/ExceptionTrend.cpp
     ${SMF_MODEL_DIR}/ExemptionInd.cpp
-    ${SMF_MODEL_DIR}/ExpectedAnalyticsType.cpp
     ${SMF_MODEL_DIR}/ExpectedUeBehaviourData.cpp
+    ${SMF_MODEL_DIR}/ExtendedSmSubsData.cpp
+    ${SMF_MODEL_DIR}/ExternalClientType_anyOf.cpp
+    ${SMF_MODEL_DIR}/ExternalClientType.cpp
+    ${SMF_MODEL_DIR}/ExternalMbsServiceArea.cpp
+    ${SMF_MODEL_DIR}/ExternalUnrelatedClass.cpp
     ${SMF_MODEL_DIR}/ExtProblemDetails.cpp
-    ${SMF_MODEL_DIR}/FlowDirection.cpp
+    ${SMF_MODEL_DIR}/ExtSnssai.cpp
+    ${SMF_MODEL_DIR}/FailureCode_anyOf.cpp
+    ${SMF_MODEL_DIR}/FailureCode.cpp
+    ${SMF_MODEL_DIR}/FinalUnitAction_anyOf.cpp
+    ${SMF_MODEL_DIR}/FinalUnitAction.cpp
     ${SMF_MODEL_DIR}/FlowDirection_anyOf.cpp
-    ${SMF_MODEL_DIR}/GNbId.cpp
+    ${SMF_MODEL_DIR}/FlowDirection.cpp
+    ${SMF_MODEL_DIR}/FlowDirectionRm.cpp
+    ${SMF_MODEL_DIR}/FlowInfo.cpp
+    ${SMF_MODEL_DIR}/FlowInformation.cpp
+    ${SMF_MODEL_DIR}/Flows.cpp
+    ${SMF_MODEL_DIR}/FlowStatus_anyOf.cpp
+    ${SMF_MODEL_DIR}/FlowStatus.cpp
+    ${SMF_MODEL_DIR}/FrameRouteInfo.cpp
+    ${SMF_MODEL_DIR}/GADShape.cpp
     ${SMF_MODEL_DIR}/GbrQosFlowInformation.cpp
+    ${SMF_MODEL_DIR}/GeographicalCoordinates.cpp
+    ${SMF_MODEL_DIR}/GeographicArea.cpp
+    ${SMF_MODEL_DIR}/GeoServiceArea.cpp
     ${SMF_MODEL_DIR}/GeraLocation.cpp
     ${SMF_MODEL_DIR}/GlobalRanNodeId.cpp
+    ${SMF_MODEL_DIR}/GmlcInfo.cpp
+    ${SMF_MODEL_DIR}/GNbId.cpp
     ${SMF_MODEL_DIR}/Guami.cpp
+    ${SMF_MODEL_DIR}/GuamiListCond.cpp
     ${SMF_MODEL_DIR}/HfcNodeId.cpp
-    ${SMF_MODEL_DIR}/HoState.cpp
     ${SMF_MODEL_DIR}/HoState_anyOf.cpp
+    ${SMF_MODEL_DIR}/HoState.cpp
     ${SMF_MODEL_DIR}/HsmfUpdateData.cpp
-    ${SMF_MODEL_DIR}/HsmfUpdateError.cpp
     ${SMF_MODEL_DIR}/HsmfUpdatedData.cpp
+    ${SMF_MODEL_DIR}/HsmfUpdateError.cpp
+    ${SMF_MODEL_DIR}/HssInfo.cpp
+    ${SMF_MODEL_DIR}/IdentityRange.cpp
+    ${SMF_MODEL_DIR}/ImmediateReport.cpp
+    ${SMF_MODEL_DIR}/ImsiRange.cpp
     ${SMF_MODEL_DIR}/IndirectDataForwardingTunnelInfo.cpp
+    ${SMF_MODEL_DIR}/InterfaceUpfInfoItem.cpp
+    ${SMF_MODEL_DIR}/InterFreqTargetInfo.cpp
+    ${SMF_MODEL_DIR}/InternalGroupIdRange.cpp
     ${SMF_MODEL_DIR}/InvalidParam.cpp
     ${SMF_MODEL_DIR}/IpAddr.cpp
     ${SMF_MODEL_DIR}/IpAddress.cpp
+    ${SMF_MODEL_DIR}/IpEndPoint.cpp
+    ${SMF_MODEL_DIR}/IpEthFlowDescription.cpp
     ${SMF_MODEL_DIR}/IpIndex.cpp
+    ${SMF_MODEL_DIR}/IpMulticastAddressInfo.cpp
+    ${SMF_MODEL_DIR}/IpReachability_anyOf.cpp
+    ${SMF_MODEL_DIR}/IpReachability.cpp
+    ${SMF_MODEL_DIR}/Ipv4AddressRange.cpp
     ${SMF_MODEL_DIR}/Ipv6Addr.cpp
     ${SMF_MODEL_DIR}/Ipv6Prefix.cpp
-    ${SMF_MODEL_DIR}/LineType.cpp
+    ${SMF_MODEL_DIR}/Ipv6PrefixRange.cpp
+    ${SMF_MODEL_DIR}/IwmscInfo.cpp
+    ${SMF_MODEL_DIR}/JobType_anyOf.cpp
+    ${SMF_MODEL_DIR}/JobType.cpp
+    ${SMF_MODEL_DIR}/LcsBroadcastAssistanceTypesData.cpp
+    ${SMF_MODEL_DIR}/LcsClientClass_anyOf.cpp
+    ${SMF_MODEL_DIR}/LcsClientClass.cpp
+    ${SMF_MODEL_DIR}/LcsClientExternal.cpp
+    ${SMF_MODEL_DIR}/LcsClientGroupExternal.cpp
+    ${SMF_MODEL_DIR}/LcsMoData.cpp
+    ${SMF_MODEL_DIR}/LcsMoServiceClass_anyOf.cpp
+    ${SMF_MODEL_DIR}/LcsMoServiceClass.cpp
+    ${SMF_MODEL_DIR}/LcsPrivacyData.cpp
     ${SMF_MODEL_DIR}/LineType_anyOf.cpp
+    ${SMF_MODEL_DIR}/LineType.cpp
+    ${SMF_MODEL_DIR}/LmfInfo.cpp
+    ${SMF_MODEL_DIR}/LocationArea.cpp
     ${SMF_MODEL_DIR}/LocationAreaId.cpp
-    ${SMF_MODEL_DIR}/MaReleaseIndication.cpp
+    ${SMF_MODEL_DIR}/LocationInfo.cpp
+    ${SMF_MODEL_DIR}/LocationPrivacyInd_anyOf.cpp
+    ${SMF_MODEL_DIR}/LocationPrivacyInd.cpp
+    ${SMF_MODEL_DIR}/LoggingDurationMdt_anyOf.cpp
+    ${SMF_MODEL_DIR}/LoggingDurationMdt.cpp
+    ${SMF_MODEL_DIR}/LoggingDurationNrMdt.cpp
+    ${SMF_MODEL_DIR}/LoggingIntervalMdt_anyOf.cpp
+    ${SMF_MODEL_DIR}/LoggingIntervalMdt.cpp
+    ${SMF_MODEL_DIR}/LoggingIntervalNrMdt_anyOf.cpp
+    ${SMF_MODEL_DIR}/LoggingIntervalNrMdt.cpp
+    ${SMF_MODEL_DIR}/Lpi.cpp
+    ${SMF_MODEL_DIR}/LteV2xAuth.cpp
+    ${SMF_MODEL_DIR}/MaPduIndication_anyOf.cpp
+    ${SMF_MODEL_DIR}/MaPduIndication.cpp
     ${SMF_MODEL_DIR}/MaReleaseIndication_anyOf.cpp
+    ${SMF_MODEL_DIR}/MaReleaseIndication.cpp
+    ${SMF_MODEL_DIR}/MatchingDirection_anyOf.cpp
     ${SMF_MODEL_DIR}/MatchingDirection.cpp
-    ${SMF_MODEL_DIR}/MaxIntegrityProtectedDataRate.cpp
     ${SMF_MODEL_DIR}/MaxIntegrityProtectedDataRate_anyOf.cpp
+    ${SMF_MODEL_DIR}/MaxIntegrityProtectedDataRate.cpp
+    ${SMF_MODEL_DIR}/MbsfnArea.cpp
+    ${SMF_MODEL_DIR}/MbsMediaComp.cpp
+    ${SMF_MODEL_DIR}/MbsMediaCompRm.cpp
+    ${SMF_MODEL_DIR}/MbsMediaInfo.cpp
+    ${SMF_MODEL_DIR}/MbSmfInfo.cpp
+    ${SMF_MODEL_DIR}/MbsQoSReq.cpp
+    ${SMF_MODEL_DIR}/MbsServiceArea.cpp
+    ${SMF_MODEL_DIR}/MbsServiceInfo.cpp
+    ${SMF_MODEL_DIR}/MbsServiceType_anyOf.cpp
+    ${SMF_MODEL_DIR}/MbsServiceType.cpp
+    ${SMF_MODEL_DIR}/MbsSessionActivityStatus_anyOf.cpp
+    ${SMF_MODEL_DIR}/MbsSessionActivityStatus.cpp
+    ${SMF_MODEL_DIR}/MbsSession.cpp
+    ${SMF_MODEL_DIR}/MbsSessionEvent.cpp
+    ${SMF_MODEL_DIR}/MbsSessionEventType_anyOf.cpp
+    ${SMF_MODEL_DIR}/MbsSessionEventType.cpp
+    ${SMF_MODEL_DIR}/MbsSessionId.cpp
+    ${SMF_MODEL_DIR}/MbsSessionSubscription.cpp
+    ${SMF_MODEL_DIR}/MbsSubscriptionData.cpp
+    ${SMF_MODEL_DIR}/MbUpfInfo.cpp
+    ${SMF_MODEL_DIR}/MdtConfiguration.cpp
+    ${SMF_MODEL_DIR}/MdtUserConsent_anyOf.cpp
+    ${SMF_MODEL_DIR}/MdtUserConsent.cpp
+    ${SMF_MODEL_DIR}/MeasurementLteForMdt_anyOf.cpp
+    ${SMF_MODEL_DIR}/MeasurementLteForMdt.cpp
+    ${SMF_MODEL_DIR}/MeasurementNrForMdt.cpp
+    ${SMF_MODEL_DIR}/MeasurementPeriodLteMdt.cpp
+    ${SMF_MODEL_DIR}/MediaType_anyOf.cpp
+    ${SMF_MODEL_DIR}/MediaType.cpp
+    ${SMF_MODEL_DIR}/MeteringMethod_anyOf.cpp
+    ${SMF_MODEL_DIR}/MeteringMethod.cpp
+    ${SMF_MODEL_DIR}/MfafInfo.cpp
+    ${SMF_MODEL_DIR}/MlAnalyticsInfo.cpp
     ${SMF_MODEL_DIR}/MmeCapabilities.cpp
+    ${SMF_MODEL_DIR}/MnpfInfo.cpp
     ${SMF_MODEL_DIR}/MoExpDataCounter.cpp
-    ${SMF_MODEL_DIR}/N2SmInfoType.cpp
+    ${SMF_MODEL_DIR}/MulticastAccessControl_anyOf.cpp
+    ${SMF_MODEL_DIR}/MulticastAccessControl.cpp
+    ${SMF_MODEL_DIR}/N1MessageClass_anyOf.cpp
+    ${SMF_MODEL_DIR}/N1MessageClass.cpp
+    ${SMF_MODEL_DIR}/N2InformationClass_anyOf.cpp
+    ${SMF_MODEL_DIR}/N2InformationClass.cpp
+    ${SMF_MODEL_DIR}/N2InterfaceAmfInfo.cpp
     ${SMF_MODEL_DIR}/N2SmInfoType_anyOf.cpp
+    ${SMF_MODEL_DIR}/N2SmInfoType.cpp
     ${SMF_MODEL_DIR}/N3gaLocation.cpp
     ${SMF_MODEL_DIR}/N4Information.cpp
-    ${SMF_MODEL_DIR}/N4MessageType.cpp
     ${SMF_MODEL_DIR}/N4MessageType_anyOf.cpp
-    ${SMF_MODEL_DIR}/NFType.cpp
-    ${SMF_MODEL_DIR}/NFType_anyOf.cpp
+    ${SMF_MODEL_DIR}/N4MessageType.cpp
     ${SMF_MODEL_DIR}/Ncgi.cpp
+    ${SMF_MODEL_DIR}/NcgiTai.cpp
+    ${SMF_MODEL_DIR}/NefCond.cpp
+    ${SMF_MODEL_DIR}/NefInfo.cpp
     ${SMF_MODEL_DIR}/NetworkAreaInfo.cpp
+    ${SMF_MODEL_DIR}/NetworkNodeDiameterAddress.cpp
     ${SMF_MODEL_DIR}/NetworkPerfInfo.cpp
-    ${SMF_MODEL_DIR}/NetworkPerfRequirement.cpp
+    ${SMF_MODEL_DIR}/NetworkPerfType_anyOf.cpp
+    ${SMF_MODEL_DIR}/NetworkPerfType.cpp
+    ${SMF_MODEL_DIR}/NetworkSliceCond.cpp
+    ${SMF_MODEL_DIR}/NfGroupCond.cpp
+    ${SMF_MODEL_DIR}/NfGroupListCond.cpp
+    ${SMF_MODEL_DIR}/NfInfo.cpp
+    ${SMF_MODEL_DIR}/NfInstanceIdCond.cpp
+    ${SMF_MODEL_DIR}/NfInstanceIdListCond.cpp
+    ${SMF_MODEL_DIR}/NfInstanceInfo.cpp
     ${SMF_MODEL_DIR}/NfLoadLevelInformation.cpp
+    ${SMF_MODEL_DIR}/NFProfile.cpp
+    ${SMF_MODEL_DIR}/NFService.cpp
+    ${SMF_MODEL_DIR}/NfServiceSetCond.cpp
+    ${SMF_MODEL_DIR}/NFServiceStatus.cpp
+    ${SMF_MODEL_DIR}/NFServiceVersion.cpp
+    ${SMF_MODEL_DIR}/NfSetCond.cpp
+    ${SMF_MODEL_DIR}/NFStatus_anyOf.cpp
+    ${SMF_MODEL_DIR}/NfStatus.cpp
+    ${SMF_MODEL_DIR}/NFStatus.cpp
+    ${SMF_MODEL_DIR}/NFType_anyOf.cpp
+    ${SMF_MODEL_DIR}/NfTypeCond.cpp
+    ${SMF_MODEL_DIR}/NFType.cpp
     ${SMF_MODEL_DIR}/NgApCause.cpp
     ${SMF_MODEL_DIR}/NgRanTargetId.cpp
     ${SMF_MODEL_DIR}/NiddInformation.cpp
     ${SMF_MODEL_DIR}/NonDynamic5Qi.cpp
-    ${SMF_MODEL_DIR}/NotificationCause.cpp
+    ${SMF_MODEL_DIR}/NoProfileMatchInfo.cpp
+    ${SMF_MODEL_DIR}/NoProfileMatchReason_anyOf.cpp
+    ${SMF_MODEL_DIR}/NoProfileMatchReason.cpp
     ${SMF_MODEL_DIR}/NotificationCause_anyOf.cpp
-    ${SMF_MODEL_DIR}/NotificationControl.cpp
+    ${SMF_MODEL_DIR}/NotificationCause.cpp
     ${SMF_MODEL_DIR}/NotificationControl_anyOf.cpp
-    ${SMF_MODEL_DIR}/NotificationFlag.cpp
+    ${SMF_MODEL_DIR}/NotificationControl.cpp
+    ${SMF_MODEL_DIR}/NotificationControlIndication_anyOf.cpp
+    ${SMF_MODEL_DIR}/NotificationControlIndication.cpp
+    ${SMF_MODEL_DIR}/NotificationData.cpp
+    ${SMF_MODEL_DIR}/NotificationEventType_anyOf.cpp
+    ${SMF_MODEL_DIR}/NotificationEventType.cpp
     ${SMF_MODEL_DIR}/NotificationFlag_anyOf.cpp
+    ${SMF_MODEL_DIR}/NotificationFlag.cpp
     ${SMF_MODEL_DIR}/NotificationInfo.cpp
-    ${SMF_MODEL_DIR}/NotificationMethod.cpp
     ${SMF_MODEL_DIR}/NotificationMethod_anyOf.cpp
+    ${SMF_MODEL_DIR}/NotificationMethod.cpp
+    ${SMF_MODEL_DIR}/NotificationType_anyOf.cpp
+    ${SMF_MODEL_DIR}/NotificationType.cpp
+    ${SMF_MODEL_DIR}/NrfInfo.cpp
+    ${SMF_MODEL_DIR}/NrfInfo_servedAanfInfoList_value_value.cpp
+    ${SMF_MODEL_DIR}/NrfInfo_servedAmfInfo_value.cpp
+    ${SMF_MODEL_DIR}/NrfInfo_servedAusfInfo_value.cpp
+    ${SMF_MODEL_DIR}/NrfInfo_servedBsfInfo_value.cpp
+    ${SMF_MODEL_DIR}/NrfInfo_servedChfInfo_value.cpp
+    ${SMF_MODEL_DIR}/NrfInfo_servedGmlcInfo_value.cpp
+    ${SMF_MODEL_DIR}/NrfInfo_servedHssInfoList_value_value.cpp
+    ${SMF_MODEL_DIR}/NrfInfo_servedLmfInfo_value.cpp
+    ${SMF_MODEL_DIR}/NrfInfo_servedMbSmfInfoList_value_value.cpp
+    ${SMF_MODEL_DIR}/NrfInfo_servedNefInfo_value.cpp
+    ${SMF_MODEL_DIR}/NrfInfo_servedNwdafInfo_value.cpp
+    ${SMF_MODEL_DIR}/NrfInfo_servedPcfInfo_value.cpp
+    ${SMF_MODEL_DIR}/NrfInfo_servedPcscfInfoList_value_value.cpp
+    ${SMF_MODEL_DIR}/NrfInfo_servedScpInfoList_value.cpp
+    ${SMF_MODEL_DIR}/NrfInfo_servedSeppInfoList_value.cpp
+    ${SMF_MODEL_DIR}/NrfInfo_servedSmfInfo_value.cpp
+    ${SMF_MODEL_DIR}/NrfInfo_servedUdmInfo_value.cpp
+    ${SMF_MODEL_DIR}/NrfInfo_servedUdrInfo_value.cpp
+    ${SMF_MODEL_DIR}/NrfInfo_servedUdsfInfo_value.cpp
+    ${SMF_MODEL_DIR}/NrfInfo_servedUpfInfo_value.cpp
     ${SMF_MODEL_DIR}/NrLocation.cpp
-    ${SMF_MODEL_DIR}/NsiIdInfo.cpp
+    ${SMF_MODEL_DIR}/NrV2xAuth.cpp
+    ${SMF_MODEL_DIR}/NsacfCapability.cpp
+    ${SMF_MODEL_DIR}/NsacfInfo.cpp
     ${SMF_MODEL_DIR}/NsiLoadLevelInfo.cpp
     ${SMF_MODEL_DIR}/NsmfEventExposure.cpp
     ${SMF_MODEL_DIR}/NsmfEventExposureNotification.cpp
+    ${SMF_MODEL_DIR}/NssaafInfo.cpp
+    ${SMF_MODEL_DIR}/Nssai.cpp
+    ${SMF_MODEL_DIR}/NullValue.cpp
+    ${SMF_MODEL_DIR}/NumberAverage.cpp
+    ${SMF_MODEL_DIR}/NwdafCapability.cpp
+    ${SMF_MODEL_DIR}/NwdafCond.cpp
+    ${SMF_MODEL_DIR}/NwdafData.cpp
+    ${SMF_MODEL_DIR}/NwdafEvent_anyOf.cpp
     ${SMF_MODEL_DIR}/NwdafEvent.cpp
+    ${SMF_MODEL_DIR}/NwdafFailureCode_anyOf.cpp
     ${SMF_MODEL_DIR}/NwdafFailureCode.cpp
-    ${SMF_MODEL_DIR}/PartialRecordMethod.cpp
+    ${SMF_MODEL_DIR}/NwdafInfo.cpp
+    ${SMF_MODEL_DIR}/ObservedRedundantTransExp.cpp
+    ${SMF_MODEL_DIR}/OdbPacketServices.cpp
+    ${SMF_MODEL_DIR}/OperationMode_anyOf.cpp
+    ${SMF_MODEL_DIR}/OperationMode.cpp
+    ${SMF_MODEL_DIR}/OutputStrategy_anyOf.cpp
+    ${SMF_MODEL_DIR}/OutputStrategy.cpp
+    ${SMF_MODEL_DIR}/PacketFilterInfo.cpp
     ${SMF_MODEL_DIR}/PartialRecordMethod_anyOf.cpp
-    ${SMF_MODEL_DIR}/PartitioningCriteria.cpp
+    ${SMF_MODEL_DIR}/PartialRecordMethod.cpp
     ${SMF_MODEL_DIR}/PartitioningCriteria_anyOf.cpp
+    ${SMF_MODEL_DIR}/PartitioningCriteria.cpp
+    ${SMF_MODEL_DIR}/PatchItem.cpp
+    ${SMF_MODEL_DIR}/PatchOperation_anyOf.cpp
+    ${SMF_MODEL_DIR}/PatchOperation.cpp
+    ${SMF_MODEL_DIR}/PccRule.cpp
+    ${SMF_MODEL_DIR}/PcfInfo.cpp
+    ${SMF_MODEL_DIR}/PcfSelectionAssistanceInfo.cpp
     ${SMF_MODEL_DIR}/PcfUeCallbackInfo.cpp
-    ${SMF_MODEL_DIR}/PduSessionContextType.cpp
+    ${SMF_MODEL_DIR}/PcscfInfo.cpp
     ${SMF_MODEL_DIR}/PduSessionContextType_anyOf.cpp
+    ${SMF_MODEL_DIR}/PduSessionContextType.cpp
+    ${SMF_MODEL_DIR}/PduSessionContinuityInd_anyOf.cpp
+    ${SMF_MODEL_DIR}/PduSessionContinuityInd.cpp
+    ${SMF_MODEL_DIR}/PduSession.cpp
     ${SMF_MODEL_DIR}/PduSessionCreateData.cpp
-    ${SMF_MODEL_DIR}/PduSessionCreateError.cpp
     ${SMF_MODEL_DIR}/PduSessionCreatedData.cpp
+    ${SMF_MODEL_DIR}/PduSessionCreateError.cpp
     ${SMF_MODEL_DIR}/PduSessionInfo.cpp
     ${SMF_MODEL_DIR}/PduSessionInformation.cpp
     ${SMF_MODEL_DIR}/PduSessionNotifyItem.cpp
-    ${SMF_MODEL_DIR}/PduSessionStatus.cpp
+    ${SMF_MODEL_DIR}/PduSessionRelCause_anyOf.cpp
+    ${SMF_MODEL_DIR}/PduSessionRelCause.cpp
     ${SMF_MODEL_DIR}/PduSessionStatus_anyOf.cpp
-    ${SMF_MODEL_DIR}/PduSessionType.cpp
+    ${SMF_MODEL_DIR}/PduSessionStatus.cpp
     ${SMF_MODEL_DIR}/PduSessionType_anyOf.cpp
+    ${SMF_MODEL_DIR}/PduSessionType.cpp
+    ${SMF_MODEL_DIR}/PduSessionTypes.cpp
+    ${SMF_MODEL_DIR}/PerfData.cpp
+    ${SMF_MODEL_DIR}/PfdData.cpp
+    ${SMF_MODEL_DIR}/PgwInfo.cpp
     ${SMF_MODEL_DIR}/PlmnId.cpp
     ${SMF_MODEL_DIR}/PlmnIdNid.cpp
-    ${SMF_MODEL_DIR}/PreemptionCapability.cpp
+    ${SMF_MODEL_DIR}/PlmnOauth2.cpp
+    ${SMF_MODEL_DIR}/PlmnOperatorClass.cpp
+    ${SMF_MODEL_DIR}/PlmnRange.cpp
+    ${SMF_MODEL_DIR}/PlmnRestriction.cpp
+    ${SMF_MODEL_DIR}/PlmnSnssai.cpp
+    ${SMF_MODEL_DIR}/PointAltitude.cpp
+    ${SMF_MODEL_DIR}/PointAltitudeUncertainty.cpp
+    ${SMF_MODEL_DIR}/Point.cpp
+    ${SMF_MODEL_DIR}/PointUncertaintyCircle.cpp
+    ${SMF_MODEL_DIR}/PointUncertaintyEllipse.cpp
+    ${SMF_MODEL_DIR}/PolicyControlRequestTrigger_anyOf.cpp
+    ${SMF_MODEL_DIR}/PolicyControlRequestTrigger.cpp
+    ${SMF_MODEL_DIR}/PolicyDecisionFailureCode_anyOf.cpp
+    ${SMF_MODEL_DIR}/PolicyDecisionFailureCode.cpp
+    ${SMF_MODEL_DIR}/Polygon.cpp
+    ${SMF_MODEL_DIR}/PortManagementContainer.cpp
+    ${SMF_MODEL_DIR}/PositioningMethodMdt_anyOf.cpp
+    ${SMF_MODEL_DIR}/PositioningMethodMdt.cpp
     ${SMF_MODEL_DIR}/PreemptionCapability_anyOf.cpp
-    ${SMF_MODEL_DIR}/PreemptionVulnerability.cpp
+    ${SMF_MODEL_DIR}/PreemptionCapability.cpp
     ${SMF_MODEL_DIR}/PreemptionVulnerability_anyOf.cpp
-    ${SMF_MODEL_DIR}/PresenceState.cpp
+    ${SMF_MODEL_DIR}/PreemptionVulnerability.cpp
+    ${SMF_MODEL_DIR}/PreferredSearch.cpp
+    ${SMF_MODEL_DIR}/PresenceInfo.cpp
+    ${SMF_MODEL_DIR}/PresenceInfoRm.cpp
     ${SMF_MODEL_DIR}/PresenceState_anyOf.cpp
-    ${SMF_MODEL_DIR}/ProblemDetails.cpp
+    ${SMF_MODEL_DIR}/PresenceState.cpp
+    ${SMF_MODEL_DIR}/PrivacyCheckRelatedAction_anyOf.cpp
+    ${SMF_MODEL_DIR}/PrivacyCheckRelatedAction.cpp
     ${SMF_MODEL_DIR}/ProblemDetailsAddInfo.cpp
-    ${SMF_MODEL_DIR}/ProtectionResult.cpp
+    ${SMF_MODEL_DIR}/ProblemDetails.cpp
+    ${SMF_MODEL_DIR}/ProSeAllowedPlmn.cpp
+    ${SMF_MODEL_DIR}/ProSeCapability.cpp
+    ${SMF_MODEL_DIR}/ProseDirectAllowed_anyOf.cpp
+    ${SMF_MODEL_DIR}/ProseDirectAllowed.cpp
+    ${SMF_MODEL_DIR}/ProseServiceAuth.cpp
+    ${SMF_MODEL_DIR}/ProseSubscriptionData.cpp
     ${SMF_MODEL_DIR}/ProtectionResult_anyOf.cpp
-    ${SMF_MODEL_DIR}/PsaIndication.cpp
+    ${SMF_MODEL_DIR}/ProtectionResult.cpp
     ${SMF_MODEL_DIR}/PsaIndication_anyOf.cpp
+    ${SMF_MODEL_DIR}/PsaIndication.cpp
     ${SMF_MODEL_DIR}/PsaInformation.cpp
-    ${SMF_MODEL_DIR}/QosFlowAccessType.cpp
+    ${SMF_MODEL_DIR}/PtwParameters.cpp
+    ${SMF_MODEL_DIR}/QosCharacteristics.cpp
+    ${SMF_MODEL_DIR}/QosData.cpp
     ${SMF_MODEL_DIR}/QosFlowAccessType_anyOf.cpp
+    ${SMF_MODEL_DIR}/QosFlowAccessType.cpp
     ${SMF_MODEL_DIR}/QosFlowAddModifyRequestItem.cpp
     ${SMF_MODEL_DIR}/QosFlowItem.cpp
     ${SMF_MODEL_DIR}/QosFlowNotifyItem.cpp
@@ -193,225 +524,331 @@ file(GLOB SMF_MODEL_SRC_FILES
     ${SMF_MODEL_DIR}/QosFlowReleaseRequestItem.cpp
     ${SMF_MODEL_DIR}/QosFlowSetupItem.cpp
     ${SMF_MODEL_DIR}/QosFlowTunnel.cpp
+    ${SMF_MODEL_DIR}/QosFlowUsage_anyOf.cpp
+    ${SMF_MODEL_DIR}/QosFlowUsage.cpp
     ${SMF_MODEL_DIR}/QosFlowUsageReport.cpp
+    ${SMF_MODEL_DIR}/QosMonitoringData.cpp
     ${SMF_MODEL_DIR}/QosMonitoringInfo.cpp
-    ${SMF_MODEL_DIR}/QosMonitoringReq.cpp
+    ${SMF_MODEL_DIR}/QosMonitoringReport.cpp
     ${SMF_MODEL_DIR}/QosMonitoringReq_anyOf.cpp
-    ${SMF_MODEL_DIR}/QosRequirement.cpp
-    ${SMF_MODEL_DIR}/QosResourceType.cpp
+    ${SMF_MODEL_DIR}/QosMonitoringReq.cpp
+    ${SMF_MODEL_DIR}/QosNotificationControlInfo.cpp
+    ${SMF_MODEL_DIR}/QosNotifType_anyOf.cpp
+    ${SMF_MODEL_DIR}/QosNotifType.cpp
     ${SMF_MODEL_DIR}/QosResourceType_anyOf.cpp
+    ${SMF_MODEL_DIR}/QosResourceType.cpp
     ${SMF_MODEL_DIR}/QosSustainabilityInfo.cpp
+    ${SMF_MODEL_DIR}/QueryParamCombination.cpp
+    ${SMF_MODEL_DIR}/QueryParameter.cpp
+    ${SMF_MODEL_DIR}/r_5GDdnmfInfo.cpp
+    ${SMF_MODEL_DIR}/RanNasRelCause.cpp
     ${SMF_MODEL_DIR}/RatFreqInformation.cpp
-    ${SMF_MODEL_DIR}/RatType.cpp
     ${SMF_MODEL_DIR}/RatType_anyOf.cpp
+    ${SMF_MODEL_DIR}/RatType.cpp
+    ${SMF_MODEL_DIR}/RedirectAddressType_anyOf.cpp
+    ${SMF_MODEL_DIR}/RedirectAddressType.cpp
+    ${SMF_MODEL_DIR}/RedirectInformation.cpp
     ${SMF_MODEL_DIR}/RedirectResponse.cpp
     ${SMF_MODEL_DIR}/RedundantPduSessionInformation.cpp
     ${SMF_MODEL_DIR}/RedundantTransmissionExpInfo.cpp
-    ${SMF_MODEL_DIR}/RedundantTransmissionExpReq.cpp
-    ${SMF_MODEL_DIR}/RefToBinaryData.cpp
-    ${SMF_MODEL_DIR}/ReflectiveQoSAttribute.cpp
+    ${SMF_MODEL_DIR}/RedundantTransmissionExpPerTS.cpp
     ${SMF_MODEL_DIR}/ReflectiveQoSAttribute_anyOf.cpp
+    ${SMF_MODEL_DIR}/ReflectiveQoSAttribute.cpp
+    ${SMF_MODEL_DIR}/RefToBinaryData.cpp
+    ${SMF_MODEL_DIR}/RegistrationReason_anyOf.cpp
+    ${SMF_MODEL_DIR}/RegistrationReason.cpp
+    ${SMF_MODEL_DIR}/ReleaseCause_anyOf.cpp
     ${SMF_MODEL_DIR}/ReleaseCause.cpp
     ${SMF_MODEL_DIR}/ReleaseData.cpp
     ${SMF_MODEL_DIR}/ReleasedData.cpp
-    ${SMF_MODEL_DIR}/RequestIndication.cpp
+    ${SMF_MODEL_DIR}/ReportAmountMdt_anyOf.cpp
+    ${SMF_MODEL_DIR}/ReportAmountMdt.cpp
+    ${SMF_MODEL_DIR}/ReportingFrequency_anyOf.cpp
+    ${SMF_MODEL_DIR}/ReportingFrequency.cpp
+    ${SMF_MODEL_DIR}/ReportingLevel_anyOf.cpp
+    ${SMF_MODEL_DIR}/ReportingLevel.cpp
+    ${SMF_MODEL_DIR}/ReportingTrigger_anyOf.cpp
+    ${SMF_MODEL_DIR}/ReportingTrigger.cpp
+    ${SMF_MODEL_DIR}/ReportIntervalMdt_anyOf.cpp
+    ${SMF_MODEL_DIR}/ReportIntervalMdt.cpp
+    ${SMF_MODEL_DIR}/ReportIntervalNrMdt_anyOf.cpp
+    ${SMF_MODEL_DIR}/ReportIntervalNrMdt.cpp
+    ${SMF_MODEL_DIR}/ReportTypeMdt_anyOf.cpp
+    ${SMF_MODEL_DIR}/ReportTypeMdt.cpp
+    ${SMF_MODEL_DIR}/RequestedQos.cpp
+    ${SMF_MODEL_DIR}/RequestedQosMonitoringParameter_anyOf.cpp
+    ${SMF_MODEL_DIR}/RequestedQosMonitoringParameter.cpp
+    ${SMF_MODEL_DIR}/RequestedRuleData.cpp
+    ${SMF_MODEL_DIR}/RequestedRuleDataType_anyOf.cpp
+    ${SMF_MODEL_DIR}/RequestedRuleDataType.cpp
+    ${SMF_MODEL_DIR}/RequestedUsageData.cpp
     ${SMF_MODEL_DIR}/RequestIndication_anyOf.cpp
-    ${SMF_MODEL_DIR}/RequestType.cpp
+    ${SMF_MODEL_DIR}/RequestIndication.cpp
     ${SMF_MODEL_DIR}/RequestType_anyOf.cpp
-    ${SMF_MODEL_DIR}/ResourceStatus.cpp
+    ${SMF_MODEL_DIR}/RequestType.cpp
+    ${SMF_MODEL_DIR}/ReservPriority_anyOf.cpp
+    ${SMF_MODEL_DIR}/ReservPriority.cpp
     ${SMF_MODEL_DIR}/ResourceStatus_anyOf.cpp
+    ${SMF_MODEL_DIR}/ResourceStatus.cpp
+    ${SMF_MODEL_DIR}/ResourceUsage.cpp
+    ${SMF_MODEL_DIR}/RestrictionType_anyOf.cpp
+    ${SMF_MODEL_DIR}/RestrictionType.cpp
     ${SMF_MODEL_DIR}/RetainabilityThreshold.cpp
     ${SMF_MODEL_DIR}/RetrieveData.cpp
     ${SMF_MODEL_DIR}/RetrievedData.cpp
     ${SMF_MODEL_DIR}/RoamingChargingProfile.cpp
+    ${SMF_MODEL_DIR}/RoamingRestrictions.cpp
     ${SMF_MODEL_DIR}/RouteInformation.cpp
     ${SMF_MODEL_DIR}/RouteToLocation.cpp
     ${SMF_MODEL_DIR}/RoutingAreaId.cpp
-    ${SMF_MODEL_DIR}/Rsn.cpp
     ${SMF_MODEL_DIR}/Rsn_anyOf.cpp
-    ${SMF_MODEL_DIR}/SatelliteBackhaulCategory.cpp
+    ${SMF_MODEL_DIR}/Rsn.cpp
+    ${SMF_MODEL_DIR}/RuleOperation_anyOf.cpp
+    ${SMF_MODEL_DIR}/RuleOperation.cpp
+    ${SMF_MODEL_DIR}/RuleReport.cpp
+    ${SMF_MODEL_DIR}/RuleStatus_anyOf.cpp
+    ${SMF_MODEL_DIR}/RuleStatus.cpp
     ${SMF_MODEL_DIR}/SatelliteBackhaulCategory_anyOf.cpp
-    ${SMF_MODEL_DIR}/SbiBindingLevel.cpp
+    ${SMF_MODEL_DIR}/SatelliteBackhaulCategory.cpp
     ${SMF_MODEL_DIR}/SbiBindingLevel_anyOf.cpp
+    ${SMF_MODEL_DIR}/SbiBindingLevel.cpp
     ${SMF_MODEL_DIR}/ScheduledCommunicationTime.cpp
-    ${SMF_MODEL_DIR}/ScheduledCommunicationType.cpp
     ${SMF_MODEL_DIR}/ScheduledCommunicationType_anyOf.cpp
+    ${SMF_MODEL_DIR}/ScheduledCommunicationType.cpp
+    ${SMF_MODEL_DIR}/ScpCapability_anyOf.cpp
+    ${SMF_MODEL_DIR}/ScpCapability.cpp
+    ${SMF_MODEL_DIR}/ScpDomainCond.cpp
+    ${SMF_MODEL_DIR}/ScpDomainInfo.cpp
+    ${SMF_MODEL_DIR}/ScpInfo.cpp
+    ${SMF_MODEL_DIR}/SdmSubscription.cpp
+    ${SMF_MODEL_DIR}/SdRange.cpp
+    ${SMF_MODEL_DIR}/SearchResult.cpp
     ${SMF_MODEL_DIR}/SecondaryRatUsageInfo.cpp
     ${SMF_MODEL_DIR}/SecondaryRatUsageReport.cpp
     ${SMF_MODEL_DIR}/SecurityResult.cpp
     ${SMF_MODEL_DIR}/SendMoDataReqData.cpp
+    ${SMF_MODEL_DIR}/SensorMeasurement_anyOf.cpp
+    ${SMF_MODEL_DIR}/SensorMeasurement.cpp
+    ${SMF_MODEL_DIR}/SeppInfo.cpp
     ${SMF_MODEL_DIR}/ServerAddressingInfo.cpp
     ${SMF_MODEL_DIR}/ServiceAreaId.cpp
+    ${SMF_MODEL_DIR}/ServiceAreaRestriction.cpp
     ${SMF_MODEL_DIR}/ServiceExperienceInfo.cpp
-    ${SMF_MODEL_DIR}/ServiceName.cpp
+    ${SMF_MODEL_DIR}/ServiceExperienceType_anyOf.cpp
+    ${SMF_MODEL_DIR}/ServiceExperienceType.cpp
     ${SMF_MODEL_DIR}/ServiceName_anyOf.cpp
+    ${SMF_MODEL_DIR}/ServiceNameCond.cpp
+    ${SMF_MODEL_DIR}/ServiceName.cpp
+    ${SMF_MODEL_DIR}/ServiceNameListCond.cpp
+    ${SMF_MODEL_DIR}/ServiceTypeUnrelatedClass.cpp
+    ${SMF_MODEL_DIR}/ServingNfIdentity.cpp
+    ${SMF_MODEL_DIR}/SessInactTimerForUeComm.cpp
+    ${SMF_MODEL_DIR}/SessionManagementSubscriptionData.cpp
+    ${SMF_MODEL_DIR}/SessionRule.cpp
+    ${SMF_MODEL_DIR}/SessionRuleFailureCode_anyOf.cpp
+    ${SMF_MODEL_DIR}/SessionRuleFailureCode.cpp
+    ${SMF_MODEL_DIR}/SessionRuleReport.cpp
+    ${SMF_MODEL_DIR}/SgsnAddress.cpp
+    ${SMF_MODEL_DIR}/SharedData.cpp
+    ${SMF_MODEL_DIR}/SharedDataIdRange.cpp
+    ${SMF_MODEL_DIR}/SharedDataTreatmentInstruction_anyOf.cpp
+    ${SMF_MODEL_DIR}/SharedDataTreatmentInstruction.cpp
     ${SMF_MODEL_DIR}/SliceLoadLevelInformation.cpp
-    ${SMF_MODEL_DIR}/SmContext.cpp
-    ${SMF_MODEL_DIR}/SmContextConfiguration.cpp
-    ${SMF_MODEL_DIR}/SmContextCreateData.cpp
-    ${SMF_MODEL_DIR}/SmContextCreateError.cpp
-    ${SMF_MODEL_DIR}/SmContextCreatedData.cpp
-    ${SMF_MODEL_DIR}/SmContextReleaseData.cpp
-    ${SMF_MODEL_DIR}/SmContextReleasedData.cpp
-    ${SMF_MODEL_DIR}/SmContextRetrieveData.cpp
-    ${SMF_MODEL_DIR}/SmContextRetrievedData.cpp
-    ${SMF_MODEL_DIR}/SmContextStatus.cpp
-    ${SMF_MODEL_DIR}/SmContextStatusNotification.cpp
-    ${SMF_MODEL_DIR}/SmContextType.cpp
-    ${SMF_MODEL_DIR}/SmContextType_anyOf.cpp
-    ${SMF_MODEL_DIR}/SmContextUpdateData.cpp
-    ${SMF_MODEL_DIR}/SmContextUpdateError.cpp
-    ${SMF_MODEL_DIR}/SmContextUpdatedData.cpp
-    ${SMF_MODEL_DIR}/SmNasFromSmf.cpp
-    ${SMF_MODEL_DIR}/SmNasFromUe.cpp
+    ${SMF_MODEL_DIR}/SliceMbr.cpp
+    ${SMF_MODEL_DIR}/SliceMbrRm.cpp
     ${SMF_MODEL_DIR}/SmallDataRateStatus.cpp
     ${SMF_MODEL_DIR}/SmcceInfo.cpp
-    ${SMF_MODEL_DIR}/SmfEvent.cpp
-    ${SMF_MODEL_DIR}/SmfEvent_anyOf.cpp
-    ${SMF_MODEL_DIR}/SmfEventSubscription.cpp
-    ${SMF_MODEL_DIR}/SmfSelectionType.cpp
-    ${SMF_MODEL_DIR}/SmfSelectionType_anyOf.cpp
-    ${SMF_MODEL_DIR}/Snssai.cpp
-    ${SMF_MODEL_DIR}/StationaryIndication.cpp
-    ${SMF_MODEL_DIR}/StationaryIndication_anyOf.cpp
-    ${SMF_MODEL_DIR}/StatusInfo.cpp
-    ${SMF_MODEL_DIR}/StatusNotification.cpp
-    ${SMF_MODEL_DIR}/Tai.cpp
-    ${SMF_MODEL_DIR}/TargetDnaiInfo.cpp
-    ${SMF_MODEL_DIR}/TargetUeInformation.cpp
-    ${SMF_MODEL_DIR}/ThresholdLevel.cpp
-    ${SMF_MODEL_DIR}/TimeWindow.cpp
-    ${SMF_MODEL_DIR}/TnapId.cpp
-    ${SMF_MODEL_DIR}/TngfInfo.cpp
-    ${SMF_MODEL_DIR}/TraceData.cpp
-    ${SMF_MODEL_DIR}/TraceDepth.cpp
-    ${SMF_MODEL_DIR}/TraceDepth_anyOf.cpp
-    ${SMF_MODEL_DIR}/TrafficProfile.cpp
-    ${SMF_MODEL_DIR}/TrafficProfile_anyOf.cpp
-    ${SMF_MODEL_DIR}/TransactionInfo.cpp
-    ${SMF_MODEL_DIR}/TransactionMetric.cpp
-    ${SMF_MODEL_DIR}/TransactionMetric_anyOf.cpp
-    ${SMF_MODEL_DIR}/TransferMoDataReqData.cpp
-    ${SMF_MODEL_DIR}/TransferMtDataAddInfo.cpp
-    ${SMF_MODEL_DIR}/TransferMtDataError.cpp
-    ${SMF_MODEL_DIR}/TransferMtDataReqData.cpp
-    ${SMF_MODEL_DIR}/TransportProtocol.cpp
-    ${SMF_MODEL_DIR}/TransportProtocol_anyOf.cpp
-    ${SMF_MODEL_DIR}/Trigger.cpp
-    ${SMF_MODEL_DIR}/TriggerCategory.cpp
-    ${SMF_MODEL_DIR}/TriggerCategory_anyOf.cpp
-    ${SMF_MODEL_DIR}/TriggerType.cpp
-    ${SMF_MODEL_DIR}/TriggerType_anyOf.cpp
-    ${SMF_MODEL_DIR}/TunnelInfo.cpp
-    ${SMF_MODEL_DIR}/TwapId.cpp
-    ${SMF_MODEL_DIR}/TwifInfo.cpp
-    ${SMF_MODEL_DIR}/UeCommunication.cpp
-    ${SMF_MODEL_DIR}/UeMobility.cpp
-    ${SMF_MODEL_DIR}/UlclBpInformation.cpp
-    ${SMF_MODEL_DIR}/UnavailableAccessIndication.cpp
-    ${SMF_MODEL_DIR}/UnavailableAccessIndication_anyOf.cpp
-    ${SMF_MODEL_DIR}/UpCnxState.cpp
-    ${SMF_MODEL_DIR}/UpCnxState_anyOf.cpp
-    ${SMF_MODEL_DIR}/UpConfidentiality.cpp
-    ${SMF_MODEL_DIR}/UpIntegrity.cpp
-    ${SMF_MODEL_DIR}/UpIntegrity_anyOf.cpp
-    ${SMF_MODEL_DIR}/UpSecurity.cpp
-    ${SMF_MODEL_DIR}/UpSecurityInfo.cpp
-    ${SMF_MODEL_DIR}/UpfInformation.cpp
-    ${SMF_MODEL_DIR}/UserDataCongestionInfo.cpp
-    ${SMF_MODEL_DIR}/UserLocation.cpp
-    ${SMF_MODEL_DIR}/UtraLocation.cpp
-    ${SMF_MODEL_DIR}/VolumeTimedReport.cpp
-    ${SMF_MODEL_DIR}/VplmnQos.cpp
-    ${SMF_MODEL_DIR}/VsmfUpdateData.cpp
-    ${SMF_MODEL_DIR}/VsmfUpdateError.cpp
-    ${SMF_MODEL_DIR}/VsmfUpdatedData.cpp
-    ${SMF_MODEL_DIR}/WAgfInfo.cpp
-    ${SMF_MODEL_DIR}/WlanPerformanceInfo.cpp
-    ${SMF_MODEL_DIR}/WlanPerformanceReq.cpp
-    ${SMF_MODEL_DIR}/ConditionEventType.cpp
-    ${SMF_MODEL_DIR}/ConditionEventType_anyOf.cpp
-    ${SMF_MODEL_DIR}/DddStatus.cpp
-    ${SMF_MODEL_DIR}/SmContextMessage.cpp
-    ${SMF_MODEL_DIR}/SmContextReleaseMessage.cpp
-    ${SMF_MODEL_DIR}/SmContextUpdateMessage.cpp
-${SMF_MODEL_DIR}/Accuracy.cpp
-    ${SMF_MODEL_DIR}/AdditionalMeasurement.cpp
-    ${SMF_MODEL_DIR}/AnalyticsMetadata.cpp
-    ${SMF_MODEL_DIR}/AnalyticsMetadataIndication.cpp
-    ${SMF_MODEL_DIR}/AnalyticsSubset_anyOf.cpp
-    ${SMF_MODEL_DIR}/AppListForUeComm.cpp
-    ${SMF_MODEL_DIR}/AuthorizedDefaultQos.cpp
-    ${SMF_MODEL_DIR}/ClassCriterion.cpp
-    ${SMF_MODEL_DIR}/DatasetStatisticalProperty.cpp
-    ${SMF_MODEL_DIR}/DispersionCollection.cpp
-    ${SMF_MODEL_DIR}/DispersionOrderingCriterion.cpp
-    ${SMF_MODEL_DIR}/DispersionType.cpp
-    ${SMF_MODEL_DIR}/DnnSmfInfoItem.cpp
-    ${SMF_MODEL_DIR}/DnnUpfInfoItem.cpp
-    ${SMF_MODEL_DIR}/DnPerf.cpp
-    ${SMF_MODEL_DIR}/DnPerfOrderingCriterion.cpp
-    ${SMF_MODEL_DIR}/ExceptionId.cpp
-    ${SMF_MODEL_DIR}/ExceptionTrend.cpp
-    ${SMF_MODEL_DIR}/ExpectedAnalyticsType_anyOf.cpp
-    ${SMF_MODEL_DIR}/FlowDirectionRm.cpp
-    ${SMF_MODEL_DIR}/InterfaceUpfInfoItem.cpp
-    ${SMF_MODEL_DIR}/LocationArea.cpp
-    ${SMF_MODEL_DIR}/LocationInfo.cpp
-    ${SMF_MODEL_DIR}/MatchingDirection_anyOf.cpp
-    ${SMF_MODEL_DIR}/NetworkPerfType.cpp
-    ${SMF_MODEL_DIR}/NFProfile.cpp
-    ${SMF_MODEL_DIR}/NfStatus.cpp
-    ${SMF_MODEL_DIR}/NotificationData.cpp
-    ${SMF_MODEL_DIR}/NotificationEventType.cpp
-    ${SMF_MODEL_DIR}/NumberAverage.cpp
-    ${SMF_MODEL_DIR}/NwdafEvent_anyOf.cpp
-    ${SMF_MODEL_DIR}/NwdafFailureCode_anyOf.cpp
-    ${SMF_MODEL_DIR}/OutputStrategy.cpp
-    ${SMF_MODEL_DIR}/PatchItem.cpp
-    ${SMF_MODEL_DIR}/PatchOperation.cpp
-    ${SMF_MODEL_DIR}/PatchOperation_anyOf.cpp
-    ${SMF_MODEL_DIR}/PccRule.cpp
-    ${SMF_MODEL_DIR}/QosData.cpp
-    ${SMF_MODEL_DIR}/RankingCriterion.cpp
-    ${SMF_MODEL_DIR}/RedirectAddressType.cpp
-    ${SMF_MODEL_DIR}/RedirectInformation.cpp
-    ${SMF_MODEL_DIR}/RedTransExpOrderingCriterion.cpp
-    ${SMF_MODEL_DIR}/RedundantTransmissionExpPerTS.cpp
-    ${SMF_MODEL_DIR}/ReleaseCause_anyOf.cpp
-    ${SMF_MODEL_DIR}/ResourceUsage.cpp
-    ${SMF_MODEL_DIR}/SdmSubscription.cpp
-    ${SMF_MODEL_DIR}/SearchResult.cpp
-    ${SMF_MODEL_DIR}/ServiceExperienceType.cpp
-    ${SMF_MODEL_DIR}/SessInactTimerForUeComm.cpp
-    ${SMF_MODEL_DIR}/SessionRule.cpp
-    ${SMF_MODEL_DIR}/SmallDataRateControl.cpp
     ${SMF_MODEL_DIR}/SmcceUeList.cpp
+    ${SMF_MODEL_DIR}/SmContext.cpp
+    ${SMF_MODEL_DIR}/SmContextCreateData.cpp
+    ${SMF_MODEL_DIR}/SmContextCreatedData.cpp
+    ${SMF_MODEL_DIR}/SmContextCreateError.cpp
+    ${SMF_MODEL_DIR}/SmContextMessage.cpp
+    ${SMF_MODEL_DIR}/SmContextReleaseData.cpp
+    ${SMF_MODEL_DIR}/SmContextReleasedData.cpp
+    ${SMF_MODEL_DIR}/SmContextReleaseMessage.cpp
+    ${SMF_MODEL_DIR}/SmContextRetrieveData.cpp
+    ${SMF_MODEL_DIR}/SmContextRetrievedData.cpp
     ${SMF_MODEL_DIR}/SmContextStatus_anyOf.cpp
+    ${SMF_MODEL_DIR}/SmContextStatus.cpp
+    ${SMF_MODEL_DIR}/SmContextStatusNotification.cpp
+    ${SMF_MODEL_DIR}/SmContextType_anyOf.cpp
+    ${SMF_MODEL_DIR}/SmContextType.cpp
+    ${SMF_MODEL_DIR}/SmContextUpdateData.cpp
+    ${SMF_MODEL_DIR}/SmContextUpdatedData.cpp
+    ${SMF_MODEL_DIR}/SmContextUpdateError.cpp
+    ${SMF_MODEL_DIR}/SmContextUpdateMessage.cpp
+    ${SMF_MODEL_DIR}/SmfEvent_anyOf.cpp
+    ${SMF_MODEL_DIR}/SmfEvent.cpp
+    ${SMF_MODEL_DIR}/SmfEventSubscription.cpp
     ${SMF_MODEL_DIR}/SmfInfo.cpp
     ${SMF_MODEL_DIR}/SmfRegistration.cpp
+    ${SMF_MODEL_DIR}/SmfSelectionSubscriptionData.cpp
+    ${SMF_MODEL_DIR}/SmfSelectionType_anyOf.cpp
+    ${SMF_MODEL_DIR}/SmfSelectionType.cpp
+    ${SMF_MODEL_DIR}/SmNasFromSmf.cpp
+    ${SMF_MODEL_DIR}/SmNasFromUe.cpp
+    ${SMF_MODEL_DIR}/SmPolicyAssociationReleaseCause_anyOf.cpp
+    ${SMF_MODEL_DIR}/SmPolicyAssociationReleaseCause.cpp
     ${SMF_MODEL_DIR}/SmPolicyContextData.cpp
     ${SMF_MODEL_DIR}/SmPolicyControl.cpp
     ${SMF_MODEL_DIR}/SmPolicyDecision.cpp
     ${SMF_MODEL_DIR}/SmPolicyDeleteData.cpp
     ${SMF_MODEL_DIR}/SmPolicyNotification.cpp
     ${SMF_MODEL_DIR}/SmPolicyUpdateContextData.cpp
+    ${SMF_MODEL_DIR}/SmsfInfo.cpp
+    ${SMF_MODEL_DIR}/SmsManagementSubscriptionData.cpp
+    ${SMF_MODEL_DIR}/SmsSubscriptionData.cpp
+    ${SMF_MODEL_DIR}/SmSubsData.cpp
+    ${SMF_MODEL_DIR}/Snssai.cpp
+    ${SMF_MODEL_DIR}/SnssaiEasdfInfoItem.cpp
+    ${SMF_MODEL_DIR}/SnssaiInfo.cpp
+    ${SMF_MODEL_DIR}/SnssaiInfoItem.cpp
+    ${SMF_MODEL_DIR}/SnssaiMbSmfInfoItem.cpp
     ${SMF_MODEL_DIR}/SnssaiSmfInfoItem.cpp
+    ${SMF_MODEL_DIR}/SnssaiTsctsfInfoItem.cpp
     ${SMF_MODEL_DIR}/SnssaiUpfInfoItem.cpp
+    ${SMF_MODEL_DIR}/SorInfo.cpp
+    ${SMF_MODEL_DIR}/SorUpdateIndicator_anyOf.cpp
+    ${SMF_MODEL_DIR}/SorUpdateIndicator.cpp
+    ${SMF_MODEL_DIR}/SpatialValidityCond.cpp
+    ${SMF_MODEL_DIR}/SscMode_anyOf.cpp
+    ${SMF_MODEL_DIR}/SscMode.cpp
+    ${SMF_MODEL_DIR}/SscModes.cpp
+    ${SMF_MODEL_DIR}/Ssm.cpp
+    ${SMF_MODEL_DIR}/StationaryIndication_anyOf.cpp
+    ${SMF_MODEL_DIR}/StationaryIndication.cpp
+    ${SMF_MODEL_DIR}/StatusInfo.cpp
+    ${SMF_MODEL_DIR}/StatusNotification.cpp
+    ${SMF_MODEL_DIR}/SteeringContainer.cpp
+    ${SMF_MODEL_DIR}/SteeringFunctionality_anyOf.cpp
+    ${SMF_MODEL_DIR}/SteeringFunctionality.cpp
+    ${SMF_MODEL_DIR}/SteeringInfo.cpp
+    ${SMF_MODEL_DIR}/SteeringMode.cpp
+    ${SMF_MODEL_DIR}/SteerModeIndicator_anyOf.cpp
+    ${SMF_MODEL_DIR}/SteerModeIndicator.cpp
+    ${SMF_MODEL_DIR}/SteerModeValue_anyOf.cpp
+    ${SMF_MODEL_DIR}/SteerModeValue.cpp
+    ${SMF_MODEL_DIR}/SubscrCond.cpp
     ${SMF_MODEL_DIR}/SubscribedDefaultQos.cpp
+    ${SMF_MODEL_DIR}/SubscriptionContext.cpp
+    ${SMF_MODEL_DIR}/SubscriptionDataSets.cpp
+    ${SMF_MODEL_DIR}/SuciInfo.cpp
+    ${SMF_MODEL_DIR}/SuggestedPacketNumDl.cpp
+    ${SMF_MODEL_DIR}/SupiRange.cpp
+    ${SMF_MODEL_DIR}/SupportedGADShapes_anyOf.cpp
+    ${SMF_MODEL_DIR}/SupportedGADShapes.cpp
     ${SMF_MODEL_DIR}/SvcExperience.cpp
+    ${SMF_MODEL_DIR}/TacInfo.cpp
+    ${SMF_MODEL_DIR}/TacRange.cpp
+    ${SMF_MODEL_DIR}/Tai.cpp
+    ${SMF_MODEL_DIR}/TaiRange.cpp
+    ${SMF_MODEL_DIR}/TargetDnaiInfo.cpp
     ${SMF_MODEL_DIR}/TerminationNotification.cpp
+    ${SMF_MODEL_DIR}/ThresholdLevel.cpp
+    ${SMF_MODEL_DIR}/ThresholdValue.cpp
+    ${SMF_MODEL_DIR}/TimeUnit_anyOf.cpp
     ${SMF_MODEL_DIR}/TimeUnit.cpp
+    ${SMF_MODEL_DIR}/TimeWindow.cpp
+    ${SMF_MODEL_DIR}/Tmgi.cpp
+    ${SMF_MODEL_DIR}/TmgiRange.cpp
+    ${SMF_MODEL_DIR}/TnapId.cpp
+    ${SMF_MODEL_DIR}/TngfInfo.cpp
+    ${SMF_MODEL_DIR}/TopApplication.cpp
+    ${SMF_MODEL_DIR}/TraceData.cpp
+    ${SMF_MODEL_DIR}/TraceDepth_anyOf.cpp
+    ${SMF_MODEL_DIR}/TraceDepth.cpp
     ${SMF_MODEL_DIR}/TrafficCharacterization.cpp
     ${SMF_MODEL_DIR}/TrafficControlData.cpp
+    ${SMF_MODEL_DIR}/TrafficInformation.cpp
+    ${SMF_MODEL_DIR}/TrafficProfile_anyOf.cpp
+    ${SMF_MODEL_DIR}/TrafficProfile.cpp
+    ${SMF_MODEL_DIR}/TransactionInfo.cpp
+    ${SMF_MODEL_DIR}/TransactionMetric_anyOf.cpp
+    ${SMF_MODEL_DIR}/TransactionMetric.cpp
+    ${SMF_MODEL_DIR}/TransferMoDataReqData.cpp
+    ${SMF_MODEL_DIR}/TransferMtDataAddInfo.cpp
+    ${SMF_MODEL_DIR}/TransferMtDataError.cpp
+    ${SMF_MODEL_DIR}/TransferMtDataReqData.cpp
+    ${SMF_MODEL_DIR}/TransportProtocol_anyOf.cpp
+    ${SMF_MODEL_DIR}/TransportProtocol.cpp
+    ${SMF_MODEL_DIR}/TriggerCategory_anyOf.cpp
+    ${SMF_MODEL_DIR}/TriggerCategory.cpp
+    ${SMF_MODEL_DIR}/Trigger.cpp
+    ${SMF_MODEL_DIR}/TriggerType_anyOf.cpp
+    ${SMF_MODEL_DIR}/TriggerType.cpp
+    ${SMF_MODEL_DIR}/TrustAfInfo.cpp
+    ${SMF_MODEL_DIR}/TscaiInputContainer.cpp
+    ${SMF_MODEL_DIR}/TsctsfInfo.cpp
+    ${SMF_MODEL_DIR}/TsnBridgeInfo.cpp
+    ${SMF_MODEL_DIR}/TunnelAddress.cpp
+    ${SMF_MODEL_DIR}/TunnelInfo.cpp
+    ${SMF_MODEL_DIR}/TwapId.cpp
+    ${SMF_MODEL_DIR}/TwifInfo.cpp
+    ${SMF_MODEL_DIR}/UcSubscriptionData.cpp
+    ${SMF_MODEL_DIR}/UdmInfo.cpp
+    ${SMF_MODEL_DIR}/UdrInfo.cpp
+    ${SMF_MODEL_DIR}/UdsfInfo.cpp
+    ${SMF_MODEL_DIR}/UeAuth_anyOf.cpp
+    ${SMF_MODEL_DIR}/UeAuth.cpp
+    ${SMF_MODEL_DIR}/UeCommunication.cpp
+    ${SMF_MODEL_DIR}/UeContextInAmfData.cpp
+    ${SMF_MODEL_DIR}/UeContextInfoClass_anyOf.cpp
+    ${SMF_MODEL_DIR}/UeContextInfoClass.cpp
+    ${SMF_MODEL_DIR}/UeContextInSmfData.cpp
+    ${SMF_MODEL_DIR}/UeContextInSmfDataSubFilter.cpp
+    ${SMF_MODEL_DIR}/UeContextInSmsfData.cpp
+    ${SMF_MODEL_DIR}/UeInitiatedResourceRequest.cpp
+    ${SMF_MODEL_DIR}/UeMobility.cpp
+    ${SMF_MODEL_DIR}/UlclBpInformation.cpp
+    ${SMF_MODEL_DIR}/UmtTime.cpp
+    ${SMF_MODEL_DIR}/UnavailableAccessIndication_anyOf.cpp
+    ${SMF_MODEL_DIR}/UnavailableAccessIndication.cpp
+    ${SMF_MODEL_DIR}/UncertaintyEllipse.cpp
+    ${SMF_MODEL_DIR}/UnrelatedClass.cpp
+    ${SMF_MODEL_DIR}/UnTrustAfInfo.cpp
+    ${SMF_MODEL_DIR}/UpCnxState_anyOf.cpp
+    ${SMF_MODEL_DIR}/UpCnxState.cpp
+    ${SMF_MODEL_DIR}/UpConfidentiality.cpp
+    ${SMF_MODEL_DIR}/UpfCond.cpp
     ${SMF_MODEL_DIR}/UpfInfo.cpp
-    ${SMF_MODEL_DIR}/UPInterfaceType.cpp
+    ${SMF_MODEL_DIR}/UpfInformation.cpp
+    ${SMF_MODEL_DIR}/UpIntegrity_anyOf.cpp
+    ${SMF_MODEL_DIR}/UpIntegrity.cpp
     ${SMF_MODEL_DIR}/UPInterfaceType_anyOf.cpp
-    ${SMF_MODEL_DIR}/WlanOrderingCriterion.cpp
+    ${SMF_MODEL_DIR}/UPInterfaceType.cpp
+    ${SMF_MODEL_DIR}/UpPathChgEvent.cpp
+    ${SMF_MODEL_DIR}/UpSecurity.cpp
+    ${SMF_MODEL_DIR}/UpSecurityInfo.cpp
+    ${SMF_MODEL_DIR}/UpuData.cpp
+    ${SMF_MODEL_DIR}/UpuInfo.cpp
+    ${SMF_MODEL_DIR}/UriScheme_anyOf.cpp
+    ${SMF_MODEL_DIR}/UriScheme.cpp
+    ${SMF_MODEL_DIR}/UsageMonitoringData.cpp
+    ${SMF_MODEL_DIR}/UserConsent.cpp
+    ${SMF_MODEL_DIR}/UserDataCongestionInfo.cpp
+    ${SMF_MODEL_DIR}/UserLocation.cpp
+    ${SMF_MODEL_DIR}/UtraLocation.cpp
+    ${SMF_MODEL_DIR}/V2xCapability.cpp
+    ${SMF_MODEL_DIR}/V2xSubscriptionData.cpp
+    ${SMF_MODEL_DIR}/ValidTimePeriod.cpp
+    ${SMF_MODEL_DIR}/VendorSpecificFeature.cpp
+    ${SMF_MODEL_DIR}/VnGroupData.cpp
+    ${SMF_MODEL_DIR}/VolumeTimedReport.cpp
+    ${SMF_MODEL_DIR}/VplmnQos.cpp
+    ${SMF_MODEL_DIR}/VsmfUpdateData.cpp
+    ${SMF_MODEL_DIR}/VsmfUpdatedData.cpp
+    ${SMF_MODEL_DIR}/VsmfUpdateError.cpp
+    ${SMF_MODEL_DIR}/WAgfInfo.cpp
+    ${SMF_MODEL_DIR}/WirelineArea.cpp
+    ${SMF_MODEL_DIR}/WirelineServiceAreaRestriction.cpp
+    ${SMF_MODEL_DIR}/WlanPerformanceInfo.cpp
     ${SMF_MODEL_DIR}/WlanPerSsIdPerformanceInfo.cpp
-    ${SMF_MODEL_DIR}/UsageReport.cpp
+    ${SMF_MODEL_DIR}/WlanPerTsPerformanceInfo.cpp
+    ${SMF_MODEL_DIR}/Helpers.cpp
 )
 
+## CONFIG used in NF_TARGET (main)
 if (TARGET ${NF_TARGET})
     target_include_directories(${NF_TARGET} PUBLIC ${SMF_MODEL_DIR})
     target_sources(${NF_TARGET} PRIVATE

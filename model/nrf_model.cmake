@@ -18,9 +18,6 @@
 #For more information about the OpenAirInterface(OAI) Software Alliance:
 #contact @openairinterface.org
 ################################################################################
-
-include(${SRC_TOP_DIR}/${MOUNTED_COMMON}/model/common_model.cmake)
-
 SET(NRF_MODEL_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/model)
 
 include_directories(${NRF_MODEL_DIR})
@@ -77,7 +74,6 @@ file(GLOB NRF_MODEL_SRC_FILES
     ${NRF_MODEL_DIR}/ExtSnssai.cpp
     ${NRF_MODEL_DIR}/ExternalClientType.cpp
     ${NRF_MODEL_DIR}/ExternalClientType_anyOf.cpp
-    ${NRF_MODEL_DIR}/ExternalMbsServiceArea.cpp
     ${NRF_MODEL_DIR}/GmlcInfo.cpp
     ${NRF_MODEL_DIR}/Guami.cpp
     ${NRF_MODEL_DIR}/GuamiListCond.cpp
@@ -102,14 +98,6 @@ file(GLOB NRF_MODEL_SRC_FILES
     ${NRF_MODEL_DIR}/LmfInfo.cpp
     ${NRF_MODEL_DIR}/MbSmfInfo.cpp
     ${NRF_MODEL_DIR}/MbUpfInfo.cpp
-    ${NRF_MODEL_DIR}/MbsServiceArea.cpp
-    ${NRF_MODEL_DIR}/MbsServiceAreaInfo.cpp
-    ${NRF_MODEL_DIR}/MbsServiceInfo.cpp
-    ${NRF_MODEL_DIR}/MbsServiceType.cpp
-    ${NRF_MODEL_DIR}/MbsSession.cpp
-    ${NRF_MODEL_DIR}/MbsSessionActivityStatus.cpp
-    ${NRF_MODEL_DIR}/MbsSessionId.cpp
-    ${NRF_MODEL_DIR}/MbsSessionSubscription.cpp
     ${NRF_MODEL_DIR}/MfafInfo.cpp
     ${NRF_MODEL_DIR}/MlAnalyticsInfo.cpp
     ${NRF_MODEL_DIR}/MnpfInfo.cpp
@@ -266,6 +254,55 @@ file(GLOB NRF_MODEL_SRC_FILES
     ${NRF_MODEL_DIR}/VendorSpecificFeature.cpp
     ${NRF_MODEL_DIR}/WAgfInfo.cpp
     ${NRF_MODEL_DIR}/r_5GDdnmfInfo.cpp
+    ${NRF_MODEL_DIR}/Helpers.cpp
+    ${NRF_MODEL_DIR}/UeContextInfoClass.cpp
+    ${NRF_MODEL_DIR}/UeContextInfoClass_anyOf.cpp
+    ${NRF_MODEL_DIR}/CivicAddress.cpp
+    ${NRF_MODEL_DIR}/GeographicArea.cpp
+    ${NRF_MODEL_DIR}/GeographicalCoordinates.cpp
+    ${NRF_MODEL_DIR}/EllipsoidArc.cpp
+    ${NRF_MODEL_DIR}/EllipsoidArc_allOf.cpp
+    ${NRF_MODEL_DIR}/Point.cpp
+    ${NRF_MODEL_DIR}/Point_allOf.cpp
+    ${NRF_MODEL_DIR}/PointAltitude.cpp
+    ${NRF_MODEL_DIR}/PointAltitude_allOf.cpp
+    ${NRF_MODEL_DIR}/PointAltitudeUncertainty.cpp
+    ${NRF_MODEL_DIR}/PointAltitudeUncertainty_allOf.cpp
+    ${NRF_MODEL_DIR}/PointUncertaintyCircle.cpp
+    ${NRF_MODEL_DIR}/PointUncertaintyCircle_allOf.cpp
+    ${NRF_MODEL_DIR}/PointUncertaintyEllipse.cpp
+    ${NRF_MODEL_DIR}/PointUncertaintyEllipse_allOf.cpp
+    ${NRF_MODEL_DIR}/Polygon.cpp
+    ${NRF_MODEL_DIR}/Polygon_allOf.cpp
+    ${NRF_MODEL_DIR}/UncertaintyEllipse.cpp
+    ${NRF_MODEL_DIR}/UncertaintyEllipsoid.cpp
+    ${NRF_MODEL_DIR}/ExternalMbsServiceArea.cpp
+    ${NRF_MODEL_DIR}/MbsServiceArea.cpp
+    ${NRF_MODEL_DIR}/MbsServiceAreaInfo.cpp
+    ${NRF_MODEL_DIR}/MbsServiceInfo.cpp
+    ${NRF_MODEL_DIR}/MbsServiceType.cpp
+    ${NRF_MODEL_DIR}/MbsServiceType_anyOf.cpp
+    ${NRF_MODEL_DIR}/MbsSessionActivityStatus.cpp
+    ${NRF_MODEL_DIR}/MbsSessionActivityStatus_anyOf.cpp
+    ${NRF_MODEL_DIR}/MbsSession.cpp
+    ${NRF_MODEL_DIR}/MbsSessionEvent.cpp
+    ${NRF_MODEL_DIR}/MbsSessionEventType.cpp
+    ${NRF_MODEL_DIR}/MbsSessionEventType_anyOf.cpp
+    ${NRF_MODEL_DIR}/MbsSessionId.cpp
+    ${NRF_MODEL_DIR}/MbsSessionSubscription.cpp
+    ${NRF_MODEL_DIR}/ReservPriority.cpp
+    ${NRF_MODEL_DIR}/ReservPriority_anyOf.cpp
+    ${NRF_MODEL_DIR}/MbsMediaComp.cpp
+    ${NRF_MODEL_DIR}/MbsMediaCompRm.cpp
+    ${NRF_MODEL_DIR}/MbsMediaInfo.cpp
+    ${NRF_MODEL_DIR}/MbsQoSReq.cpp
+    ${NRF_MODEL_DIR}/Arp.cpp
+    ${NRF_MODEL_DIR}/MediaType.cpp
+    ${NRF_MODEL_DIR}/MediaType_anyOf.cpp
+    ${NRF_MODEL_DIR}/PreemptionCapability.cpp
+    ${NRF_MODEL_DIR}/PreemptionCapability_anyOf.cpp
+    ${NRF_MODEL_DIR}/PreemptionVulnerability.cpp
+    ${NRF_MODEL_DIR}/PreemptionVulnerability_anyOf.cpp
 )
 
 if (TARGET ${NF_TARGET})

@@ -184,7 +184,7 @@ file(GLOB SMF_MODEL_SRC_FILES
     ${SMF_MODEL_DIR}/EventForMdt.cpp
     ${SMF_MODEL_DIR}/EventId_anyOf.cpp
     ${SMF_MODEL_DIR}/EventId.cpp
-    ${SMF_MODEL_DIR}/EventNotification.cpp
+    ${SMF_MODEL_DIR}/SmfEventNotification.cpp
     ${SMF_MODEL_DIR}/Exception.cpp
     ${SMF_MODEL_DIR}/ExceptionId_anyOf.cpp
     ${SMF_MODEL_DIR}/ExceptionId.cpp
@@ -824,6 +824,7 @@ file(GLOB SMF_MODEL_SRC_FILES
     ${SMF_MODEL_DIR}/UpuInfo.cpp
     ${SMF_MODEL_DIR}/UriScheme_anyOf.cpp
     ${SMF_MODEL_DIR}/UriScheme.cpp
+    ${SMF_MODEL_DIR}/UsageReport.cpp
     ${SMF_MODEL_DIR}/UsageMonitoringData.cpp
     ${SMF_MODEL_DIR}/UserConsent.cpp
     ${SMF_MODEL_DIR}/UserDataCongestionInfo.cpp

@@ -30,7 +30,7 @@
 #include "Ipv6Addr.h"
 #include "Snssai.h"
 #include <vector>
-#include "EventNotification.h"
+#include "SmfEventNotification.h"
 #include "Guami.h"
 #include <nlohmann/json.hpp>
 
@@ -202,9 +202,9 @@ class NsmfEventExposure {
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::_3gpp::model::EventNotification> getEventNotifs() const;
+  std::vector<oai::_3gpp::model::SmfEventNotification> getEventNotifs() const;
   void setEventNotifs(
-      std::vector<oai::_3gpp::model::EventNotification> const& value);
+      std::vector<oai::_3gpp::model::SmfEventNotification> const& value);
   bool eventNotifsIsSet() const;
   void unsetEventNotifs();
   /// <summary>
@@ -340,7 +340,7 @@ class NsmfEventExposure {
   bool m_AltNotifFqdnsIsSet;
   std::vector<oai::_3gpp::model::SmfEventSubscription> m_EventSubs;
 
-  std::vector<oai::_3gpp::model::EventNotification> m_EventNotifs;
+  std::vector<oai::_3gpp::model::SmfEventNotification> m_EventNotifs;
   bool m_EventNotifsIsSet;
   bool m_ImmeRep;
   bool m_ImmeRepIsSet;

@@ -252,6 +252,7 @@ bool UsageReport::dlVolIsSet() const {
 void UsageReport::unsetDlVol() {
   m_dlVolIsSet = false;
 }
+
 pfcp::usage_report_trigger_t UsageReport::getURTrigger() const {
   return m_urTrig;
 }
@@ -259,6 +260,7 @@ void UsageReport::setURTrigger(pfcp::usage_report_trigger_t const& value) {
   m_urTrig      = value;
   m_urTrigIsSet = true;
 }
+
 bool UsageReport::urTriggerIsSet() const {
   return m_urTrigIsSet;
 }

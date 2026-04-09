@@ -21,7 +21,7 @@
 
 #include <string>
 #include <vector>
-#include "EventNotification.h"
+#include "SmfEventNotification.h"
 #include <nlohmann/json.hpp>
 
 namespace oai::_3gpp::model {
@@ -66,9 +66,9 @@ class NsmfEventExposureNotification {
   /// <summary>
   /// Notifications about Individual Events
   /// </summary>
-  std::vector<oai::_3gpp::model::EventNotification> getEventNotifs() const;
+  std::vector<oai::_3gpp::model::SmfEventNotification> getEventNotifs() const;
   void setEventNotifs(
-      std::vector<oai::_3gpp::model::EventNotification> const& value);
+      std::vector<oai::_3gpp::model::SmfEventNotification> const& value);
   /// <summary>
   /// String providing an URI formatted according to RFC 3986.
   /// </summary>
@@ -85,7 +85,7 @@ class NsmfEventExposureNotification {
  protected:
   std::string m_NotifId;
 
-  std::vector<oai::_3gpp::model::EventNotification> m_EventNotifs;
+  std::vector<oai::_3gpp::model::SmfEventNotification> m_EventNotifs;
 
   std::string m_AckUri;
   bool m_AckUriIsSet;

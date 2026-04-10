@@ -74,6 +74,7 @@ struct http_status_code {
   static constexpr uint16_t PAYLOAD_TOO_LARGE      = 413;
   static constexpr uint16_t URI_TOO_LONG           = 414;
   static constexpr uint16_t UNSUPPORTED_MEDIA_TYPE = 415;
+  static constexpr uint16_t UNPROCESSABLE_ENTITY   = 422;
   static constexpr uint16_t TOO_MANY_REQUESTS      = 429;
   static constexpr uint16_t INTERNAL_SERVER_ERROR  = 500;
   static constexpr uint16_t NOT_IMPLEMENTED        = 501;

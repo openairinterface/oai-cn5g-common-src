@@ -24,7 +24,7 @@
 
 #include <optional>
 
-#include "DefaultPagingDrx.hpp"
+#include "PagingDrx.hpp"
 #include "GlobalRanNodeId.hpp"
 #include "MessageType.hpp"
 #include "NgapIesStruct.hpp"
@@ -70,7 +70,7 @@ class NgSetupRequestMsg : public NgapMessage {
   GlobalRanNodeId m_GlobalRanNodeId;                               // Mandatory
   std::optional<RanNodeName> m_RanNodeName;                        // Optional
   SupportedTaList m_SupportedTaList;                               // Mandatory
-  DefaultPagingDrx m_DefaultPagingDrx;                             // Mandatory
+  PagingDrx m_DefaultPagingDrx;                                    // Mandatory
   std::optional<UeRetentionInformation> m_UeRetentionInformation;  // Optional
   // TODO: NB-IoT Default Paging DRX  (Optional, Rel 16.14.0)
   // TODO: Extended RAN Node Name (Optional, Rel 16.14.0)

@@ -19,28 +19,32 @@
  *      contact@openairinterface.org
  */
 
-#ifndef _DEFAULT_PAGING_DRX_H_
-#define _DEFAULT_PAGING_DRX_H_
+#ifndef _PAGING_PRIORITY_H_
+#define _PAGING_PRIORITY_H_
+
+#include <cstdint>
 
 extern "C" {
-#include "Ngap_PagingDRX.h"
+#include "Ngap_PagingPriority.h"
 }
 
 namespace oai::ngap {
 
-class DefaultPagingDrx {
+class PagingPriority {
  public:
-  DefaultPagingDrx();
-  virtual ~DefaultPagingDrx();
+  PagingPriority();
+  virtual ~PagingPriority();
 
-  void set(const e_Ngap_PagingDRX& pagingDrx);
-  e_Ngap_PagingDRX get() const;
+  void set(e_Ngap_PagingPriority priority);
+  // PPI 0 (highest, TS 23.501 §5.6.3) → priolevel1; PPI 7 → priolevel8
+  void setFromPpi(uint8_t ppi);
+  e_Ngap_PagingPriority get() const;
 
-  bool encode(Ngap_PagingDRX_t&) const;
-  bool decode(const Ngap_PagingDRX_t&);
+  bool encode(Ngap_PagingPriority_t&) const;
+  bool decode(const Ngap_PagingPriority_t&);
 
  private:
-  e_Ngap_PagingDRX m_PagingDrx;
+  e_Ngap_PagingPriority m_PagingPriority;
 };
 
 }  // namespace oai::ngap

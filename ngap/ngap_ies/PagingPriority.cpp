@@ -19,57 +19,45 @@
  *      contact@openairinterface.org
  */
 
-#include "DefaultPagingDrx.hpp"
+#include "PagingPriority.hpp"
 
 namespace oai::ngap {
 
 //------------------------------------------------------------------------------
-DefaultPagingDrx::DefaultPagingDrx() {
-  m_PagingDrx = Ngap_PagingDRX_v32;
+PagingPriority::PagingPriority() {
+  m_PagingPriority = Ngap_PagingPriority_priolevel1;
 }
 
 //------------------------------------------------------------------------------
-DefaultPagingDrx::~DefaultPagingDrx() {}
+PagingPriority::~PagingPriority() {}
 
 //------------------------------------------------------------------------------
-void DefaultPagingDrx::set(const e_Ngap_PagingDRX& pagingDrx) {
-  m_PagingDrx = pagingDrx;
+void PagingPriority::set(e_Ngap_PagingPriority priority) {
+  m_PagingPriority = priority;
 }
 
 //------------------------------------------------------------------------------
-e_Ngap_PagingDRX DefaultPagingDrx::get() const {
-  return m_PagingDrx;
+void PagingPriority::setFromPpi(uint8_t ppi) {
+  // TS 23.501 §5.6.3: PPI 0 = highest priority → priolevel1 (enum 0)
+  // PPI 7 = lowest priority → priolevel8 (enum 7); direct mapping
+  if (ppi > 7) ppi = 7;
+  m_PagingPriority = static_cast<e_Ngap_PagingPriority>(ppi);
 }
 
 //------------------------------------------------------------------------------
-bool DefaultPagingDrx::encode(Ngap_PagingDRX_t& pagingDrx) const {
-  pagingDrx = m_PagingDrx;
+e_Ngap_PagingPriority PagingPriority::get() const {
+  return m_PagingPriority;
+}
+
+//------------------------------------------------------------------------------
+bool PagingPriority::encode(Ngap_PagingPriority_t& pagingPriority) const {
+  pagingPriority = m_PagingPriority;
   return true;
 }
 
 //------------------------------------------------------------------------------
-bool DefaultPagingDrx::decode(const Ngap_PagingDRX_t& pagingDrx) {
-  switch (pagingDrx) {
-    case 32: {
-      m_PagingDrx = Ngap_PagingDRX_v32;
-    } break;
-    case 64: {
-      m_PagingDrx = Ngap_PagingDRX_v64;
-    } break;
-
-    case 128: {
-      m_PagingDrx = Ngap_PagingDRX_v128;
-    } break;
-
-    case 256: {
-      m_PagingDrx = Ngap_PagingDRX_v256;
-    } break;
-
-    default: {
-      m_PagingDrx = (e_Ngap_PagingDRX) pagingDrx;
-    }
-  }
-
+bool PagingPriority::decode(const Ngap_PagingPriority_t& pagingPriority) {
+  m_PagingPriority = static_cast<e_Ngap_PagingPriority>(pagingPriority);
   return true;
 }
 

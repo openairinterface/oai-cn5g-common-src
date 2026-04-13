@@ -22,13 +22,21 @@
 #ifndef _PAGING_H_
 #define _PAGING_H_
 
+#include <optional>
+#include <vector>
+#include <cstdint>
+
+#include "PagingDrx.hpp"
 #include "NgapMessage.hpp"
+#include "PagingPriority.hpp"
 #include "TaiListforPaging.hpp"
 #include "UePagingIdentity.hpp"
 
 extern "C" {
 #include "Ngap_NGAP-PDU.h"
 #include "Ngap_Paging.h"
+#include "Ngap_PagingDRX.h"
+#include "Ngap_PagingOrigin.h"
 #include "Ngap_ProtocolIE-Field.h"
 }
 
@@ -52,16 +60,29 @@ class PagingMsg : public NgapMessage {
   void setTaiListForPaging(const std::vector<Tai_t>& list);
   void getTaiListForPaging(std::vector<Tai_t>& list) const;
 
+  // Paging DRX (Optional) — per-UE override of the gNB default
+  void setPagingDrx(e_Ngap_PagingDRX drx);
+
+  // Paging Priority (Optional) — mapped from Paging Policy Indicator
+  void setPagingPriority(uint8_t ppi);
+
+  // Assistance Data for Paging (Optional) — raw APER-encoded bytes from
+  // a prior UE Context Release Complete; stub: stores bytes for future use
+  void setPagingAssistanceData(const std::vector<uint8_t>& data);
+
+  // Paging Origin — not set for 3GPP paging (current scope)
+  // void setPagingOrigin(e_Ngap_PagingOrigin origin); // TODO: non-3GPP
+
  private:
   Ngap_Paging_t* m_PagingIes;
 
-  UePagingIdentity m_UePagingIdentity;  // Mandatory
-  // TODO: Paging DRX (Optional)
-  TaiListForPaging m_TaiListForPaging;  // Mandatory
-  // TODO: Paging Priority (Optional)
+  UePagingIdentity m_UePagingIdentity;             // Mandatory
+  std::optional<PagingDrx> m_pagingDRX;            // Optional
+  TaiListForPaging m_TaiListForPaging;             // Mandatory
+  std::optional<PagingPriority> m_pagingPriority;  // Optional
   // TODO: UE Radio Capability for Paging (Optional)
-  // TODO: Paging Origin (Optional)
-  // TODO: Assistance Data for Paging (Optional)
+  // PagingOrigin not set (3GPP-only paging, current scope)
+  std::optional<std::vector<uint8_t>> m_assistanceDataRaw;  // Optional
   // TODO: NB-IoT Paging eDRX Information (Optional, Rel 16.14.0)
   // TODO: NB-IoT Paging DRX (Optional, Rel 16.14.0)
   // TODO: Enhanced Coverage Restriction (Optional, Rel 16.14.0)

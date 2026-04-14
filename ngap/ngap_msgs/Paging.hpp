@@ -66,10 +66,6 @@ class PagingMsg : public NgapMessage {
   // Paging Priority (Optional) — mapped from Paging Policy Indicator
   void setPagingPriority(uint8_t ppi);
 
-  // Assistance Data for Paging (Optional) — raw APER-encoded bytes from
-  // a prior UE Context Release Complete; stub: stores bytes for future use
-  void setPagingAssistanceData(const std::vector<uint8_t>& data);
-
   // Paging Origin — not set for 3GPP paging (current scope)
   // void setPagingOrigin(e_Ngap_PagingOrigin origin); // TODO: non-3GPP
 
@@ -81,8 +77,8 @@ class PagingMsg : public NgapMessage {
   TaiListForPaging m_TaiListForPaging;             // Mandatory
   std::optional<PagingPriority> m_pagingPriority;  // Optional
   // TODO: UE Radio Capability for Paging (Optional)
-  // PagingOrigin not set (3GPP-only paging, current scope)
-  std::optional<std::vector<uint8_t>> m_assistanceDataRaw;  // Optional
+  // TODO: PagingOrigin not set (3GPP-only paging, current scope)
+  // TODO: Assistance Data for Paging (Optional)
   // TODO: NB-IoT Paging eDRX Information (Optional, Rel 16.14.0)
   // TODO: NB-IoT Paging DRX (Optional, Rel 16.14.0)
   // TODO: Enhanced Coverage Restriction (Optional, Rel 16.14.0)

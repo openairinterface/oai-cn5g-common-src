@@ -301,20 +301,4 @@ void PagingMsg::setPagingPriority(uint8_t ppi) {
         "Encode NGAP PagingPriority IE error");
 }
 
-//------------------------------------------------------------------------------
-// Assistance Data for Paging (stub)
-// Stores raw APER-encoded bytes received in a prior UEContextReleaseComplete.
-// Full re-encoding into the Paging IE requires aper_decode into
-// Ngap_AssistanceDataForPaging_t — deferred until the UEContextReleaseComplete
-// parser populates paging_assistance_data.
-// TODO: implement APER decode + IE injection when extraction side is complete.
-void PagingMsg::setPagingAssistanceData(const std::vector<uint8_t>& data) {
-  if (data.empty()) return;
-  m_assistanceDataRaw = data;
-  oai::logger::logger_common::ngap().debug(
-      "PagingMsg: AssistanceDataForPaging stored (%zu bytes) — "
-      "IE encoding deferred (see TODO in Paging.cpp)",
-      data.size());
-}
-
 }  // namespace oai::ngap

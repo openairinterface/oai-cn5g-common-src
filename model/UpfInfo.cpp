@@ -45,23 +45,24 @@ UpfInfo::UpfInfo() {
   m_SupportedPfcpFeaturesIsSet = false;
 }
 
-void UpfInfo::validate() const {
+void UpfInfo::validate(bool check_snssai) const {
   std::stringstream msg;
-  if (!validate(msg)) {
+  if (!validate(msg, check_snssai)) {
     throw oai::_3gpp::model::helpers::ValidationException(msg.str());
   }
 }
 
-bool UpfInfo::validate(std::stringstream& msg) const {
-  return validate(msg, "");
+bool UpfInfo::validate(std::stringstream& msg, bool check_snssai) const {
+  return validate(msg, "", check_snssai);
 }
 
 bool UpfInfo::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
+    std::stringstream& msg, const std::string& pathPrefix,
+    bool check_snssai) const {
   bool success                  = true;
   const std::string _pathPrefix = pathPrefix.empty() ? "UpfInfo" : pathPrefix;
 
-  /* SNssaiUpfInfoList */ {
+  if (check_snssai) {
     const std::vector<oai::_3gpp::model::SnssaiUpfInfoItem>& value =
         m_SNssaiUpfInfoList;
     const std::string currentValuePath = _pathPrefix + ".sNssaiUpfInfoList";
@@ -319,7 +320,11 @@ void to_json(nlohmann::json& j, const UpfInfo& o) {
 }
 
 void from_json(const nlohmann::json& j, UpfInfo& o) {
-  j.at("sNssaiUpfInfoList").get_to(o.m_SNssaiUpfInfoList);
+  // "sNssaiUpfInfoList is mandatory, but because we use it also from yaml
+  // config, we have to check it here
+  if (j.find("sNssaiUpfInfoList") != j.end()) {
+    j.at("sNssaiUpfInfoList").get_to(o.m_SNssaiUpfInfoList);
+  }
   if (j.find("smfServingArea") != j.end()) {
     j.at("smfServingArea").get_to(o.m_SmfServingArea);
     o.m_SmfServingAreaIsSet = true;

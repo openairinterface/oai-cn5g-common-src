@@ -19,8 +19,6 @@
 #      contact@openairinterface.org
 ################################################################################
 
-include(${SRC_TOP_DIR}/${MOUNTED_COMMON}/model/common_model.cmake)
-
 SET(AUSF_MODEL_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/model)
 
 include_directories(${AUSF_MODEL_DIR})

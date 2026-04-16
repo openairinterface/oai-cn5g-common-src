@@ -46,19 +46,21 @@ class UpfInfo {
   /// Validate the current data in the model. Throws a ValidationException on
   /// failure.
   /// </summary>
-  void validate() const;
+  void validate(bool check_nssai = true) const;
 
   /// <summary>
   /// Validate the current data in the model. Returns false on error and writes
   /// an error message into the given stringstream.
   /// </summary>
-  bool validate(std::stringstream& msg) const;
+  bool validate(std::stringstream& msg, bool check_nssai = true) const;
 
   /// <summary>
   /// Helper overload for validate. Used when one model stores another model and
   /// calls it's validate. Not meant to be called outside that case.
   /// </summary>
-  bool validate(std::stringstream& msg, const std::string& pathPrefix) const;
+  bool validate(
+      std::stringstream& msg, const std::string& pathPrefix,
+      bool check_nssai = true) const;
 
   bool operator==(const UpfInfo& rhs) const;
   bool operator!=(const UpfInfo& rhs) const;

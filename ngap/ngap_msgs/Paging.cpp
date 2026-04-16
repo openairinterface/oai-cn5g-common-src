@@ -24,6 +24,10 @@
 #include "logger_base.hpp"
 #include "utils.hpp"
 
+extern "C" {
+#include "Ngap_ProtocolIE-ID.h"
+}
+
 namespace oai::ngap {
 
 //------------------------------------------------------------------------------
@@ -82,6 +86,25 @@ bool PagingMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           return false;
         }
       } break;
+      case Ngap_ProtocolIE_ID_id_PagingDRX: {
+        if (m_PagingIes->protocolIEs.list.array[i]->criticality ==
+                Ngap_Criticality_ignore &&
+            m_PagingIes->protocolIEs.list.array[i]->value.present ==
+                Ngap_PagingIEs__value_PR_PagingDRX) {
+          PagingDrx paging_drx = {};
+          if (!paging_drx.decode(m_PagingIes->protocolIEs.list.array[i]
+                                     ->value.choice.PagingDRX)) {
+            oai::logger::logger_common::ngap().error(
+                "Decoded NGAP PagingDRX IE error");
+            return false;
+          }
+          m_pagingDRX = std::make_optional<PagingDrx>(paging_drx);
+        } else {
+          oai::logger::logger_common::ngap().error(
+              "Decoded NGAP PagingDRX IE error");
+          return false;
+        }
+      } break;
       case Ngap_ProtocolIE_ID_id_TAIListForPaging: {
         if (m_PagingIes->protocolIEs.list.array[i]->criticality ==
                 Ngap_Criticality_ignore &&
@@ -99,6 +122,28 @@ bool PagingMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           return false;
         }
       } break;
+
+      case Ngap_ProtocolIE_ID_id_PagingPriority: {
+        if (m_PagingIes->protocolIEs.list.array[i]->criticality ==
+                Ngap_Criticality_ignore &&
+            m_PagingIes->protocolIEs.list.array[i]->value.present ==
+                Ngap_PagingIEs__value_PR_PagingPriority) {
+          PagingPriority paging_priority = {};
+          if (!paging_priority.decode(m_PagingIes->protocolIEs.list.array[i]
+                                          ->value.choice.PagingPriority)) {
+            oai::logger::logger_common::ngap().error(
+                "Decoded NGAP PagingPriority IE error");
+            return false;
+          }
+          m_pagingPriority =
+              std::make_optional<PagingPriority>(paging_priority);
+        } else {
+          oai::logger::logger_common::ngap().error(
+              "Decoded NGAP PagingPriority IE error");
+          return false;
+        }
+      } break;
+
       default: {
         oai::logger::logger_common::ngap().warn(
             "Not decoded IE %d", m_PagingIes->protocolIEs.list.array[i]->id);
@@ -195,6 +240,65 @@ void PagingMsg::getTaiListForPaging(std::vector<Tai_t>& list) const {
     tai.get(t);
     list.push_back(t);
   }
+}
+
+//------------------------------------------------------------------------------
+// Paging DRX — per-UE DRX cycle override (TS 38.413 §9.3.1.102)
+void PagingMsg::setPagingDrx(e_Ngap_PagingDRX drx) {
+  PagingDrx paging_drx = {};
+  paging_drx.set(drx);
+  m_pagingDRX = std::make_optional<PagingDrx>(paging_drx);
+
+  Ngap_PagingIEs_t* ie =
+      (Ngap_PagingIEs_t*) calloc(1, sizeof(Ngap_PagingIEs_t));
+  if (!ie) {
+    oai::logger::logger_common::ngap().error("calloc failed for Paging DRX IE");
+    return;
+  }
+  ie->id            = Ngap_ProtocolIE_ID_id_PagingDRX;
+  ie->criticality   = Ngap_Criticality_ignore;
+  ie->value.present = Ngap_PagingIEs__value_PR_PagingDRX;
+
+  if (!paging_drx.encode(ie->value.choice.PagingDRX)) {
+    oai::logger::logger_common::ngap().error("Encode NGAP PagingDRX IE error");
+    free(ie);
+    return;
+  }
+
+  int ret = ASN_SEQUENCE_ADD(&m_PagingIes->protocolIEs.list, ie);
+  if (ret != 0)
+    oai::logger::logger_common::ngap().error("Encode NGAP PagingDRX IE error");
+}
+
+//------------------------------------------------------------------------------
+// Paging Priority — mapped from Paging Policy Indicator (TS 23.501 §5.6.3)
+void PagingMsg::setPagingPriority(uint8_t ppi) {
+  PagingPriority paging_priority = {};
+  paging_priority.setFromPpi(ppi);
+  m_pagingPriority = std::make_optional<PagingPriority>(paging_priority);
+
+  Ngap_PagingIEs_t* ie =
+      (Ngap_PagingIEs_t*) calloc(1, sizeof(Ngap_PagingIEs_t));
+  if (!ie) {
+    oai::logger::logger_common::ngap().error(
+        "calloc failed for Paging Priority IE");
+    return;
+  }
+  ie->id            = Ngap_ProtocolIE_ID_id_PagingPriority;
+  ie->criticality   = Ngap_Criticality_ignore;
+  ie->value.present = Ngap_PagingIEs__value_PR_PagingPriority;
+
+  if (!paging_priority.encode(ie->value.choice.PagingPriority)) {
+    oai::logger::logger_common::ngap().error(
+        "Encode NGAP PagingPriority IE error");
+    free(ie);
+    return;
+  }
+
+  int ret = ASN_SEQUENCE_ADD(&m_PagingIes->protocolIEs.list, ie);
+  if (ret != 0)
+    oai::logger::logger_common::ngap().error(
+        "Encode NGAP PagingPriority IE error");
 }
 
 }  // namespace oai::ngap

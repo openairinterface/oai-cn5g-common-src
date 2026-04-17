@@ -22,7 +22,7 @@
 #define NsmfEventExposure_H_
 
 #include "NotificationFlag.h"
-#include "EventSubscription.h"
+#include "SmfEventSubscription.h"
 #include "PartitioningCriteria.h"
 #include "NotificationMethod.h"
 #include "ServiceName.h"
@@ -30,7 +30,7 @@
 #include "Ipv6Addr.h"
 #include "Snssai.h"
 #include <vector>
-#include "EventNotification.h"
+#include "SmfEventNotification.h"
 #include "Guami.h"
 #include <nlohmann/json.hpp>
 
@@ -196,15 +196,15 @@ class NsmfEventExposure {
   /// <summary>
   /// Subscribed events
   /// </summary>
-  std::vector<oai::_3gpp::model::EventSubscription> getEventSubs() const;
+  std::vector<oai::_3gpp::model::SmfEventSubscription> getEventSubs() const;
   void setEventSubs(
-      std::vector<oai::_3gpp::model::EventSubscription> const& value);
+      std::vector<oai::_3gpp::model::SmfEventSubscription> const& value);
   /// <summary>
   ///
   /// </summary>
-  std::vector<oai::_3gpp::model::EventNotification> getEventNotifs() const;
+  std::vector<oai::_3gpp::model::SmfEventNotification> getEventNotifs() const;
   void setEventNotifs(
-      std::vector<oai::_3gpp::model::EventNotification> const& value);
+      std::vector<oai::_3gpp::model::SmfEventNotification> const& value);
   bool eventNotifsIsSet() const;
   void unsetEventNotifs();
   /// <summary>
@@ -338,9 +338,9 @@ class NsmfEventExposure {
   bool m_AltNotifIpv6AddrsIsSet;
   std::vector<std::string> m_AltNotifFqdns;
   bool m_AltNotifFqdnsIsSet;
-  std::vector<oai::_3gpp::model::EventSubscription> m_EventSubs;
+  std::vector<oai::_3gpp::model::SmfEventSubscription> m_EventSubs;
 
-  std::vector<oai::_3gpp::model::EventNotification> m_EventNotifs;
+  std::vector<oai::_3gpp::model::SmfEventNotification> m_EventNotifs;
   bool m_EventNotifsIsSet;
   bool m_ImmeRep;
   bool m_ImmeRepIsSet;

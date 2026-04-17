@@ -2,8 +2,8 @@
  * SPDX-License-Identifier: LicenseRef-CSSL-1.0
  */
 
-#ifndef _PDU_SESSION_TYPE_H_
-#define _PDU_SESSION_TYPE_H_
+#ifndef _NGAP_PDU_SESSION_TYPE_H_
+#define _NGAP_PDU_SESSION_TYPE_H_
 
 extern "C" {
 #include "Ngap_PDUSessionType.h"

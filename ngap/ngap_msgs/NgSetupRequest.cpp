@@ -157,7 +157,7 @@ void NgSetupRequestMsg::setSupportedTaList(
 
 //------------------------------------------------------------------------------
 void NgSetupRequestMsg::setDefaultPagingDrx(const e_Ngap_PagingDRX& value) {
-  DefaultPagingDrx defaultPagingDRXIE;
+  PagingDrx defaultPagingDRXIE;
   defaultPagingDRXIE.set(value);
 
   Ngap_NGSetupRequestIEs_t* ie =

@@ -59,6 +59,7 @@ class UPInterfaceType {
   UPInterfaceType_anyOf getValue() const;
   void setValue(UPInterfaceType_anyOf value);
   UPInterfaceType_anyOf::eUPInterfaceType_anyOf getEnumValue() const;
+  std::string getEnumString() const;
   void setEnumValue(UPInterfaceType_anyOf::eUPInterfaceType_anyOf value);
   friend void to_json(nlohmann::json& j, const UPInterfaceType& o);
   friend void from_json(const nlohmann::json& j, UPInterfaceType& o);

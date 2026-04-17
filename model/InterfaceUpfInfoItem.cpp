@@ -13,10 +13,13 @@
 
 #include "InterfaceUpfInfoItem.h"
 #include "Helpers.h"
+#include "config.hpp"
 
 #include <sstream>
 
 namespace oai::_3gpp::model {
+
+using namespace oai::_3gpp::model;
 
 InterfaceUpfInfoItem::InterfaceUpfInfoItem() {
   m_Ipv4EndpointAddressesIsSet = false;
@@ -228,6 +231,23 @@ bool InterfaceUpfInfoItem::networkInstanceIsSet() const {
 }
 void InterfaceUpfInfoItem::unsetNetworkInstance() {
   m_NetworkInstanceIsSet = false;
+}
+
+std::string InterfaceUpfInfoItem::to_string(int indent_level) const {
+  std::string out;
+  std::string fmt_title = oai::config::get_title_formatter(indent_level);
+  std::string fmt_value_inner =
+      oai::config::get_value_formatter(indent_level + 1);
+
+  out.append(fmt::format(fmt_title, "interface_upf_info_item:"));
+  out.append(fmt::format(
+      fmt_value_inner, "interface_type", m_InterfaceType.getEnumString()));
+  if (m_NetworkInstanceIsSet) {
+    out.append(
+        fmt::format(fmt_value_inner, "network_instance", m_NetworkInstance));
+  }
+  // TODO other values
+  return out;
 }
 
 }  // namespace oai::_3gpp::model

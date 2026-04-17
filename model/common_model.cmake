@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: LicenseRef-CSSL-1.0
 
-SET(COMMON_MODEL_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/model/common_model)
+SET(COMMON_MODEL_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/model)
 
 include_directories(${COMMON_MODEL_DIR})
 

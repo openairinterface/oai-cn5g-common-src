@@ -13,6 +13,7 @@
 
 #include "SmfInfo.h"
 #include "Helpers.h"
+#include "config.hpp"
 
 #include <sstream>
 
@@ -509,6 +510,21 @@ bool SmfInfo::smfUPRPCapabilityIsSet() const {
 }
 void SmfInfo::unsetSmfUPRPCapability() {
   m_SmfUPRPCapabilityIsSet = false;
+}
+
+std::string SmfInfo::to_string(int indent_level) const {
+  std::string out;
+  std::string fmt_title = oai::config::get_title_formatter(indent_level);
+  out.append(fmt::format(fmt_title, "smf_info:"));
+
+  if (!m_SNssaiSmfInfoList.empty()) {
+    for (const auto& info : m_SNssaiSmfInfoList) {
+      out.append(info.to_string(indent_level + 1));
+    }
+  }
+  // TODO other values
+
+  return out;
 }
 
 }  // namespace oai::_3gpp::model

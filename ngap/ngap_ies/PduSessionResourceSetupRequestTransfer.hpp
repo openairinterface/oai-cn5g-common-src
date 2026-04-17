@@ -101,7 +101,7 @@ class PduSessionResourceSetupRequestTransfer {
   // Data Forwarding Not Possible (Optional)
   std::optional<DataForwardingNotPossible> m_DataForwardingNotPossible;
   // PDU Session Type (Mandatory)
-  PduSessionType m_PduSessionType;
+  oai::ngap::PduSessionType m_PduSessionType;
   // Security Indication (Optional)
   std::optional<SecurityIndication> m_SecurityIndication;
   // Network Instance (Optional)

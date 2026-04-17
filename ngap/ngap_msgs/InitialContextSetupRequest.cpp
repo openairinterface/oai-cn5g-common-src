@@ -209,7 +209,7 @@ void InitialContextSetupRequestMsg::setCoreNetworkAssistanceInfo(
 
   UeIdentityIndexValue ueIdentityIndexValue = {};
   ueIdentityIndexValue.set(ueIdentityIndexValue_Value);
-  DefaultPagingDrx defaultPagingDrx = {};
+  PagingDrx defaultPagingDrx = {};
   defaultPagingDrx.set(defaultPagingDrx_Value);
   PeriodicRegistrationUpdateTimer periodicRegistrationUpdateTimer = {};
   periodicRegistrationUpdateTimer.set(periodicRegistrationUpdateTimer_Value);
@@ -260,8 +260,8 @@ bool InitialContextSetupRequestMsg::getCoreNetworkAssistanceInfo(
     uint8_t& periodicRegistrationUpdateTimer_Value, bool& micoModeIndValue,
     std::vector<Tai_t>& taiListForRrcInactive) const {
   if (!m_CoreNetworkAssistanceInformationForInactive.has_value()) return false;
-  UeIdentityIndexValue ueIdentityIndexValue        = {};
-  std::optional<DefaultPagingDrx> defaultPagingDrx = std::nullopt;
+  UeIdentityIndexValue ueIdentityIndexValue = {};
+  std::optional<PagingDrx> defaultPagingDrx = std::nullopt;
   PeriodicRegistrationUpdateTimer periodicRegistrationUpdateTimer = {};
 
   std::vector<Tai> taiList;

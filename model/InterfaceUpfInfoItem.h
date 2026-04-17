@@ -97,6 +97,8 @@ class InterfaceUpfInfoItem {
   friend void to_json(nlohmann::json& j, const InterfaceUpfInfoItem& o);
   friend void from_json(const nlohmann::json& j, InterfaceUpfInfoItem& o);
 
+  [[nodiscard]] std::string to_string(int indent_level) const;
+
  protected:
   oai::_3gpp::model::UPInterfaceType m_InterfaceType;
 

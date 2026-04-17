@@ -82,8 +82,8 @@ class PatchItem {
   /// <summary>
   ///
   /// </summary>
-  std::string getValue() const;
-  void setValue(std::string const& value);
+  nlohmann::json getValue() const;
+  void setValue(nlohmann::json const& value);
   bool valueIsSet() const;
   void unsetValue();
 
@@ -97,7 +97,7 @@ class PatchItem {
 
   std::string m_From;
   bool m_FromIsSet;
-  std::string m_Value;
+  nlohmann::json m_Value;
   bool m_ValueIsSet;
 };
 

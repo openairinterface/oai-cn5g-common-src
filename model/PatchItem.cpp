@@ -110,10 +110,10 @@ bool PatchItem::fromIsSet() const {
 void PatchItem::unsetFrom() {
   m_FromIsSet = false;
 }
-std::string PatchItem::getValue() const {
+nlohmann::json PatchItem::getValue() const {
   return m_Value;
 }
-void PatchItem::setValue(std::string const& value) {
+void PatchItem::setValue(nlohmann::json const& value) {
   m_Value      = value;
   m_ValueIsSet = true;
 }

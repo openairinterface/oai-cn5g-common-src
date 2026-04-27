@@ -118,12 +118,12 @@ void UEContextReleaseCompleteMsg::setUserLocationInfoNr(
 }
 
 //------------------------------------------------------------------------------
-void UEContextReleaseCompleteMsg::getUserLocationInfoNr(
+bool UEContextReleaseCompleteMsg::getUserLocationInfoNr(
     NrCgi_t& cig, Tai_t& tai) const {
   if (m_UserLocationInformation.has_value()) {
     UserLocationInformationNr userLocationInformationNR = {};
     if (!m_UserLocationInformation.value().get(userLocationInformationNR))
-      return;
+      return false;
 
     NrCgi nrCgi = {};
     Tai taiNr   = {};
@@ -143,7 +143,10 @@ void UEContextReleaseCompleteMsg::getUserLocationInfoNr(
     plmnId.getMcc(tai.mcc);
     plmnId.getMnc(tai.mnc);
     tai.tac = tac.get() & 0x00ffffff;
+    return true;
   }
+
+  return false;
 }
 
 //------------------------------------------------------------------------------

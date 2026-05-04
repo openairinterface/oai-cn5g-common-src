@@ -27,12 +27,11 @@ PrivateRegistryURL="selfix.sboai.cs.eurecom.fr"
 // By default, for build with parameters, set as 'PUSH' event
 gitlabTriggerType = env.gitlabActionType ?: 'PUSH'
 
-// For PUSH Events - exception cases
-amf_common_src_commit = params.amf_common_src_commit
-smf_common_src_commit = params.smf_common_src_commit
-udm_common_src_commit = params.udm_common_src_commit
-main_common_src_commit = params.main_common_src_commit
+// Required NFs for MERGE events - comma-separated string
+requiredNFs = params.requiredNFs ?: "NRF,AUSF,UPF,UDR,AMF,UDM,SMF"
 
+// Default NF branch for missing NFs in MERGE events
+defaultNFBranch = params.defaultNFBranch ?: "develop"
 //-------------------------------------------------------------------------------
 
 // Pipeline start
@@ -96,11 +95,11 @@ pipeline {
 
             (nfList, nfCommitList) = retrieveMergeRequestDescription()
 
-            allRequiredNFs = ["NRF", "AUSF", "UPF", "UDR", "AMF", "UDM", "SMF"]
+            allRequiredNFs = requiredNFs.split(',').collect { it.trim() }
             allRequiredNFs.each { reqNF ->
               if (!nfList.contains(reqNF)) {
                 nfList.add(reqNF)
-                nfCommitList.add("develop")
+                nfCommitList.add(defaultNFBranch)
               }
             }
             echo "Final List of Network Functions: ${nfList}"
@@ -122,48 +121,14 @@ pipeline {
 
             shortenShaOne = sh returnStdout: true, script: 'git log -1 --pretty=format:"%h" --abbrev=8 ' + env.GIT_COMMIT
             shortenShaOne = shortenShaOne.trim()
-            src_tag       = 'develop-' + shortenShaOne
             common_src_branch    = env.GIT_BRANCH
-
-            nfList = ["NRF", "AUSF", "UPF", "UDR", "AMF", "UDM", "SMF"]
-            nfCommitList = []
-            commonSrcCommitMap = [:]  // initialize map for push events
-            // For push events (including build with parameters events on the CI)
-            // We will need to ensure to push NFs to 'develop' first
-            nfList.each { nf ->
-              if (nf == "AMF") {
-              nfCommitList.add("develop")
-              commonSrcCommitMap[nf] = shortenShaOne
-              }
-              else {
-                nfCommitList.add("develop")
-                commonSrcCommitMap[nf] = main_common_src_commit
-              }
-            }
-            // Treat AMF, SMF, UDM as exception and override if a different common src commit is provided
-            ["AMF","SMF","UDM"].each { nf ->
-            def paramValue = params["${nf.toLowerCase()}_common_src_commit"]
-            if (paramValue)
-            {
-              if (nf == "AMF")
-              {
-                def gitBranchName = env.GIT_BRANCH?.tokenize('/')?.last()
-                if (gitBranchName != "develop") // if push to develop, AMF uses shortenShaOne
-                commonSrcCommitMap[nf] = paramValue
-              }
-              else {
-                commonSrcCommitMap[nf] = paramValue // SMF and UDM do not currenly build on either main or develop
-              }
-            }
-            }
+            src_tag = common_src_branch.tokenize('/')?.last() + '-' + shortenShaOne
+            runFullSuite = false
             echo "\uD83D\uDE80 THIS IS A PUSH REQUEST \uD83D\uDE80"
             echo "Git Branch     : ${GIT_BRANCH}"
             echo "Git Commit     : ${GIT_COMMIT}"
             echo "CI  User Email : ${gitCommittorEmailAddr}"
             echo "CI develop Tag : ${src_tag}"
-
-            echo "Final List of Network Functions for PUSH REQUEST: ${nfList}"
-            echo "Branches/Commit SHAs of Network Functions: ${nfCommitList}"
           }
           prepareWorkspaceMergeCase()
         }
@@ -226,6 +191,13 @@ pipeline {
     }
   } // End of Stages
   post {
+        always {
+          script {
+            if (!"MERGE".equals(env.gitlabActionType)) {
+              updateGitlabCommitStatus name: 'Build Ubuntu Images', state: 'success'
+            }
+          }
+        }
           success {
               script {
                   if ("MERGE".equals(env.gitlabActionType)) {

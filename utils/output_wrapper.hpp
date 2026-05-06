@@ -6,6 +6,7 @@
 #define _OUTPUT_WRAPPER_H
 
 #include <string>
+#include <cstdint>
 
 namespace oai::utils {
 class output_wrapper {

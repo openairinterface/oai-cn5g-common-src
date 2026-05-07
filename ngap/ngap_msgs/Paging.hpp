@@ -5,13 +5,21 @@
 #ifndef _PAGING_H_
 #define _PAGING_H_
 
+#include <optional>
+#include <vector>
+#include <cstdint>
+
+#include "PagingDrx.hpp"
 #include "NgapMessage.hpp"
+#include "PagingPriority.hpp"
 #include "TaiListforPaging.hpp"
 #include "UePagingIdentity.hpp"
 
 extern "C" {
 #include "Ngap_NGAP-PDU.h"
 #include "Ngap_Paging.h"
+#include "Ngap_PagingDRX.h"
+#include "Ngap_PagingOrigin.h"
 #include "Ngap_ProtocolIE-Field.h"
 }
 
@@ -35,15 +43,24 @@ class PagingMsg : public NgapMessage {
   void setTaiListForPaging(const std::vector<Tai_t>& list);
   void getTaiListForPaging(std::vector<Tai_t>& list) const;
 
+  // Paging DRX (Optional) — per-UE override of the gNB default
+  void setPagingDrx(e_Ngap_PagingDRX drx);
+
+  // Paging Priority (Optional) — mapped from Paging Policy Indicator
+  void setPagingPriority(uint8_t ppi);
+
+  // Paging Origin — not set for 3GPP paging (current scope)
+  // void setPagingOrigin(e_Ngap_PagingOrigin origin); // TODO: non-3GPP
+
  private:
   Ngap_Paging_t* m_PagingIes;
 
-  UePagingIdentity m_UePagingIdentity;  // Mandatory
-  // TODO: Paging DRX (Optional)
-  TaiListForPaging m_TaiListForPaging;  // Mandatory
-  // TODO: Paging Priority (Optional)
+  UePagingIdentity m_UePagingIdentity;             // Mandatory
+  std::optional<PagingDrx> m_pagingDRX;            // Optional
+  TaiListForPaging m_TaiListForPaging;             // Mandatory
+  std::optional<PagingPriority> m_pagingPriority;  // Optional
   // TODO: UE Radio Capability for Paging (Optional)
-  // TODO: Paging Origin (Optional)
+  // TODO: PagingOrigin not set (3GPP-only paging, current scope)
   // TODO: Assistance Data for Paging (Optional)
   // TODO: NB-IoT Paging eDRX Information (Optional, Rel 16.14.0)
   // TODO: NB-IoT Paging DRX (Optional, Rel 16.14.0)

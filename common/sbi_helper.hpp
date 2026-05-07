@@ -311,7 +311,7 @@ class sbi_helper {
       "/pdu-sessions/:pduSessionRef/transfer-mo-data";
   // SMF: Session Management Event Exposure Service
   static inline const std::string SmfEventExposureBase =
-      "/nsmf_event-exposure/";
+      "/nsmf-event-exposure/";
   static inline const std::string SmfEventExposurePathSubscriptions =
       "/subscriptions";
   static inline const std::string

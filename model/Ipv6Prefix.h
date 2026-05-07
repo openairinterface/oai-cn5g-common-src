@@ -57,10 +57,14 @@ class Ipv6Prefix {
   /////////////////////////////////////////////
   /// Ipv6Prefix members
 
+  std::string getIpv6Prefix() const;
+  void setIpv6Prefix(std::string const& value);
+
   friend void to_json(nlohmann::json& j, const Ipv6Prefix& o);
   friend void from_json(const nlohmann::json& j, Ipv6Prefix& o);
 
  protected:
+  std::string m_Ipv6Prefix;
 };
 
 }  // namespace oai::_3gpp::model

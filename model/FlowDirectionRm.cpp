@@ -20,34 +20,6 @@ namespace oai::_3gpp::model {
 
 FlowDirectionRm::FlowDirectionRm() {}
 
-void FlowDirectionRm::validate() const {
-  std::stringstream msg;
-  if (!validate(msg)) {
-    throw oai::_3gpp::model::helpers::ValidationException(msg.str());
-  }
-}
-
-bool FlowDirectionRm::validate(std::stringstream& msg) const {
-  return validate(msg, "");
-}
-
-bool FlowDirectionRm::validate(
-    std::stringstream& msg, const std::string& pathPrefix) const {
-  bool success = true;
-  const std::string _pathPrefix =
-      pathPrefix.empty() ? "FlowDirectionRm" : pathPrefix;
-
-  return success;
-}
-
-bool FlowDirectionRm::operator==(const FlowDirectionRm& rhs) const {
-  return (*this == rhs);
-}
-
-bool FlowDirectionRm::operator!=(const FlowDirectionRm& rhs) const {
-  return !(*this == rhs);
-}
-
 void to_json(nlohmann::json& j, const FlowDirectionRm& o) {
   j = nlohmann::json();
 }

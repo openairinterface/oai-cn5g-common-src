@@ -20,11 +20,11 @@ CoreNetworkAssistanceInformationForInactive::
 //------------------------------------------------------------------------------
 void CoreNetworkAssistanceInformationForInactive::set(
     const UeIdentityIndexValue& ueIdentityIndexValue,
-    const DefaultPagingDrx& pagingDrx,
+    const PagingDrx& pagingDrx,
     const PeriodicRegistrationUpdateTimer& periodicRegUpdateTimer,
     bool micoModeInd, const std::vector<Tai>& tai) {
   m_UeIdentityIndexValue   = ueIdentityIndexValue;
-  m_PagingDRX              = std::optional<DefaultPagingDrx>(pagingDrx);
+  m_PagingDRX              = std::optional<PagingDrx>(pagingDrx);
   m_PeriodicRegUpdateTimer = periodicRegUpdateTimer;
   if (micoModeInd) {
     m_MicoModeInd = std::make_optional<MicoModeIndication>();
@@ -34,7 +34,7 @@ void CoreNetworkAssistanceInformationForInactive::set(
 //------------------------------------------------------------------------------
 void CoreNetworkAssistanceInformationForInactive::get(
     UeIdentityIndexValue& ueIdentityIndexValue,
-    std::optional<DefaultPagingDrx>& pagingDrx,
+    std::optional<PagingDrx>& pagingDrx,
     PeriodicRegistrationUpdateTimer& periodicRegUpdateTimer, bool& micoModeInd,
     std::vector<Tai>& tai) const {
   ueIdentityIndexValue   = m_UeIdentityIndexValue;
@@ -116,10 +116,10 @@ bool CoreNetworkAssistanceInformationForInactive::decode(
   }
 
   if (coreNetworkAssistanceInformation.uESpecificDRX) {
-    DefaultPagingDrx tmp = {};
+    PagingDrx tmp = {};
     if (!tmp.decode(*(coreNetworkAssistanceInformation.uESpecificDRX)))
       return false;
-    m_PagingDRX = std::optional<DefaultPagingDrx>(tmp);
+    m_PagingDRX = std::optional<PagingDrx>(tmp);
   }
 
   if (coreNetworkAssistanceInformation.mICOModeIndication) {

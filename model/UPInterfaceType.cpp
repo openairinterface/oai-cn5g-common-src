@@ -80,4 +80,8 @@ void UPInterfaceType::setEnumValue(
   m_value.setValue(value);
 }
 
+std::string UPInterfaceType::getEnumString() const {
+  return oai::_3gpp::model::helpers::enumToString(m_value);
+}
+
 }  // namespace oai::_3gpp::model

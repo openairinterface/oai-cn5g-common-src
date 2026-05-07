@@ -42,7 +42,7 @@ bool NsmfEventExposureNotification::validate(
       pathPrefix.empty() ? "NsmfEventExposureNotification" : pathPrefix;
 
   /* EventNotifs */ {
-    const std::vector<oai::_3gpp::model::EventNotification>& value =
+    const std::vector<oai::_3gpp::model::SmfEventNotification>& value =
         m_EventNotifs;
     const std::string currentValuePath = _pathPrefix + ".eventNotifs";
 
@@ -53,7 +53,7 @@ bool NsmfEventExposureNotification::validate(
     {  // Recursive validation of array elements
       const std::string oldValuePath = currentValuePath;
       int i                          = 0;
-      for (const oai::_3gpp::model::EventNotification& value : value) {
+      for (const oai::_3gpp::model::SmfEventNotification& value : value) {
         const std::string currentValuePath =
             oldValuePath + "[" + std::to_string(i) + "]";
 
@@ -109,12 +109,12 @@ std::string NsmfEventExposureNotification::getNotifId() const {
 void NsmfEventExposureNotification::setNotifId(std::string const& value) {
   m_NotifId = value;
 }
-std::vector<oai::_3gpp::model::EventNotification>
+std::vector<oai::_3gpp::model::SmfEventNotification>
 NsmfEventExposureNotification::getEventNotifs() const {
   return m_EventNotifs;
 }
 void NsmfEventExposureNotification::setEventNotifs(
-    std::vector<oai::_3gpp::model::EventNotification> const& value) {
+    std::vector<oai::_3gpp::model::SmfEventNotification> const& value) {
   m_EventNotifs = value;
 }
 std::string NsmfEventExposureNotification::getAckUri() const {

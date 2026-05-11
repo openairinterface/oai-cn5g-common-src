@@ -1491,6 +1491,19 @@ std::string tls_config::to_string(const std::string& indent) const {
   return out;
 }
 
+void tls_config::validate() {
+  if (!m_enable_tls.get_value()) {
+    return;
+  }
+  if (m_cert_certificate_path.get_value().empty()) {
+    throw std::runtime_error(
+        "TLS is enabled but cert_certificate_path is empty");
+  }
+  if (m_cert_key_path.get_value().empty()) {
+    throw std::runtime_error("TLS is enabled but cert_key_path is empty");
+  }
+}
+
 bool tls_config::enable_tls() const {
   return m_enable_tls.get_value();
 }

@@ -204,6 +204,7 @@ bool config::validate() {
   }
   success &= safe_validate_field(m_register_nrf_feature);
   success &= safe_validate_field(m_http_version);
+  success &= safe_validate_field(m_tls_config);
   success &= safe_validate_field(m_http_request_timeout);
   for (auto& nf : m_nf_map) {
     success &= safe_validate_field(*nf.second);

@@ -188,7 +188,7 @@ class h2_session : public std::enable_shared_from_this<h2_session> {
       nghttp2_session*, int32_t stream_id, uint32_t error_code,
       void* user_data);
 
-  static nghttp2_ssize body_read_cb(
+  static ssize_t body_read_cb(
       nghttp2_session*, int32_t stream_id, uint8_t* buf, size_t length,
       uint32_t* data_flags, nghttp2_data_source* source, void* user_data);
 
@@ -498,7 +498,7 @@ void h2_session::initialize_session() {
   return 0;
 }
 
-/*static*/ nghttp2_ssize h2_session::body_read_cb(
+/*static*/ ssize_t h2_session::body_read_cb(
     nghttp2_session* /*session*/, int32_t /*stream_id*/, uint8_t* buf,
     size_t length, uint32_t* data_flags, nghttp2_data_source* source,
     void* /*user_data*/) {
@@ -513,7 +513,7 @@ void h2_session::initialize_session() {
   if (acc->body_offset >= acc->request_body.size()) {
     *data_flags |= NGHTTP2_DATA_FLAG_EOF;
   }
-  return static_cast<nghttp2_ssize>(n);
+  return static_cast<ssize_t>(n);
 }
 
 // ============================================================================
@@ -525,10 +525,10 @@ void h2_session::pump_send() {
 
   while (nghttp2_session_want_write(session_)) {
     const uint8_t* data = nullptr;
-    nghttp2_ssize len   = nghttp2_session_mem_send2(session_, &data);
+    ssize_t len         = nghttp2_session_mem_send(session_, &data);
 
     if (len < 0) {
-      fail_all("nghttp2_session_mem_send2 error: " + std::to_string(len));
+      fail_all("nghttp2_session_mem_send error: " + std::to_string(len));
       return;
     }
     if (len == 0) break;
@@ -555,12 +555,12 @@ void h2_session::do_read() {
                   }
                   if (!session_) return;
 
-                  nghttp2_ssize rv = nghttp2_session_mem_recv2(
+                  ssize_t rv = nghttp2_session_mem_recv(
                       session_, recv_buf_.data(), bytes);
 
                   if (rv < 0) {
                     fail_all(
-                        "nghttp2_session_mem_recv2 error: " +
+                        "nghttp2_session_mem_recv error: " +
                         std::to_string(rv));
                     return;
                   }
@@ -681,15 +681,15 @@ void h2_session::submit_internal(
   acc->prom         = prom;
   acc->request_body = body;
 
-  nghttp2_data_provider2 dp{};
-  nghttp2_data_provider2* dp_ptr = nullptr;
+  nghttp2_data_provider dp{};
+  nghttp2_data_provider* dp_ptr = nullptr;
   if (!body.empty()) {
     dp.source.ptr    = acc.get();
     dp.read_callback = body_read_cb;
     dp_ptr           = &dp;
   }
 
-  int32_t stream_id = nghttp2_submit_request2(
+  int32_t stream_id = nghttp2_submit_request(
       session_, /*pri_spec=*/nullptr, nva.data(), nva.size(), dp_ptr,
       /*stream_user_data=*/acc.get());
 
@@ -697,7 +697,7 @@ void h2_session::submit_internal(
     try {
       prom->set_value(
           {503,
-           "nghttp2_submit_request2 failed: " + std::to_string(stream_id),
+           "nghttp2_submit_request failed: " + std::to_string(stream_id),
            {}});
     } catch (...) {
     }

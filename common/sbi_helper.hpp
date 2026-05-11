@@ -249,7 +249,9 @@ class sbi_helper {
   static inline const std::string
       NrfDiscPathScpDomainRoutingInfoSubsSubscriptionId =
           "/scp-domain-routing-info-subs/:subscriptionID";
-  // TODO: NRF: Access Token Service
+  // NRF: Access Token Service (OAuth2)
+  static inline const std::string NrfOauthBase      = "/nnrf-oauth2/";
+  static inline const std::string NrfOauthPathToken = "/oauth2/token";
   // TODO: NRF: Bootstrapping Service
 
   // NSSF: Network Slice Selection Service

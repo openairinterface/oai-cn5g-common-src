@@ -458,6 +458,7 @@ class tls_config : public config_type {
   bool from_json(const nlohmann::json& json_data) override;
 
   [[nodiscard]] std::string to_string(const std::string& indent) const override;
+  void validate() override;
   [[nodiscard]] bool enable_tls() const;
   [[nodiscard]] const std::string& get_cert_certificate_path() const;
   [[nodiscard]] const std::string& get_cert_key_path() const;

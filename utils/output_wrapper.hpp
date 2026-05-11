@@ -5,6 +5,7 @@
 #ifndef _OUTPUT_WRAPPER_H
 #define _OUTPUT_WRAPPER_H
 
+#include <cstdint>
 #include <string>
 
 namespace oai::utils {

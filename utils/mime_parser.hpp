@@ -5,10 +5,11 @@
 #ifndef FILE_MIME_PARSER_HPP_SEEN
 #define FILE_MIME_PARSER_HPP_SEEN
 
-#include <unordered_map>
-#include <string>
-#include <vector>
+#include <cstdint>
 #include <optional>
+#include <string>
+#include <unordered_map>
+#include <vector>
 
 namespace oai::utils {
 

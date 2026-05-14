@@ -808,5 +808,46 @@ class sbi_helper {
   static void parse_query(
       const std::string& query_string,
       std::map<std::string, std::string>& parameters);
+
+  // -----------------------------------------------------------------------
+  // UDSF Nudsf_DR URI helpers (3GPP TS 29.598)
+  // -----------------------------------------------------------------------
+
+  /*
+   * Get UDSF Record URI for a single record (PUT / GET / DELETE)
+   * @param [const nf_addr_t&] udsf_addr: UDSF address/api_version
+   * @param [const std::string&] realm:      realmId    (e.g. "amf-realm")
+   * @param [const std::string&] storage_id: storageId  (e.g. "ue-context")
+   * @param [const std::string&] record_id:  recordId   (SUPI of the UE)
+   * @return Full URI string
+   */
+  static std::string get_udsf_record_uri(
+      const nf_addr_t& udsf_addr, const std::string& realm,
+      const std::string& storage_id, const std::string& record_id);
+
+  /*
+   * Get UDSF Records URI for search/list operations (GET with filter)
+   * @param [const nf_addr_t&] udsf_addr: UDSF address/api_version
+   * @param [const std::string&] realm:      realmId
+   * @param [const std::string&] storage_id: storageId
+   * @return URI without trailing record_id (ends at /records)
+   */
+  static std::string get_udsf_records_uri(
+      const nf_addr_t& udsf_addr, const std::string& realm,
+      const std::string& storage_id);
+
+  /*
+   * Get UDSF Block URI for a named block within a record (GET / PUT)
+   * @param [const nf_addr_t&] udsf_addr: UDSF address/api_version
+   * @param [const std::string&] realm:      realmId
+   * @param [const std::string&] storage_id: storageId
+   * @param [const std::string&] record_id:  recordId (SUPI)
+   * @param [const std::string&] block_id:   blockId  (e.g. "ue_context")
+   * @return Full URI string
+   */
+  static std::string get_udsf_block_uri(
+      const nf_addr_t& udsf_addr, const std::string& realm,
+      const std::string& storage_id, const std::string& record_id,
+      const std::string& block_id);
 };
 }  // namespace oai::common::sbi

@@ -9,7 +9,7 @@
 
 #include "Type6NasIe.hpp"
 
-constexpr uint8_t kNsagInformationMinimumContentLength  = 6;
+constexpr uint8_t kNsagInformationMinimumContentLength  = 9;
 constexpr uint16_t kNsagInformationMaximumContentLength = 3143;
 constexpr uint8_t kNsagInformationMaxEntries            = 32;
 constexpr auto kNsagInformationIeName                   = "NSAG Information";
@@ -31,7 +31,7 @@ class NsagInformation : public Type6NasIe {
   const std::vector<uint8_t>& GetValue() const;
 
  private:
-  std::vector<uint8_t> value_;  // raw content bytes (opaque container)
+  std::vector<uint8_t> value_;  // raw content bytes
 };
 
 }  // namespace oai::nas

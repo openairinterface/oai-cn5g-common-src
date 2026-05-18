@@ -4,10 +4,15 @@
 #include "AuthenticationResponse.hpp"
 #include "AuthenticationFailure.hpp"
 #include "IdentityResponse.hpp"
+#include "RegistrationAccept.hpp"
 #include "RegistrationComplete.hpp"
 #include "RegistrationRequest.hpp"
 #include "SecurityModeComplete.hpp"
 #include "ServiceRequest.hpp"
+#include "NssrgInformation.hpp"
+#include "NsagInformation.hpp"
+#include "PriorityIndicator.hpp"
+#include "IeConst.hpp"
 #include "endian.h"
 
 #include <glog/logging.h>
@@ -915,4 +920,190 @@ TEST(TestSuiteNasMsg, positiveTestingServiceRequestWithPdu) {
   uint16_t pdu_session_status;
   nas_obj.GetPduSessionStatus(pdu_session_status);
   EXPECT_EQ(pdu_session_status, 0x2000);
+}
+
+// ============================================================================
+// Stage 2 Release 17.10 Tests
+// ============================================================================
+
+// Task 2.5 test 4: IEI alias disambiguation — static_assert checks
+// These verify that the constants have the correct values and relationships.
+static_assert(
+    kIeiNssrgInformation == 0x70, "kIeiNssrgInformation must be 0x70");
+static_assert(
+    kIeiNssrgInformation == kIeiEpsNasMessageContainer,
+    "NSSRG and EPS NAS Message Container share value 0x70 (different "
+    "contexts)");
+static_assert(
+    kIeiServiceLevelAaContainerRegistrationRequest == 0x72,
+    "Service-level-AA container (RR) must be 0x72");
+static_assert(
+    kIeiServiceLevelAaContainerRegistrationRequest ==
+        kIeiPduSessionReactivationResultErrorCause,
+    "Service-level-AA container and PDU Session Reactivation Error Cause share "
+    "0x72 (different contexts)");
+static_assert(kIeiNsagInformationCuc == 0x73, "NSAG (CUC) must be 0x73");
+static_assert(
+    kIeiNsagInformationRegistrationAccept == 0x7C,
+    "NSAG (Registration Accept) must be 0x7C");
+static_assert(
+    kIeiNsagInformationRegistrationAccept != kIeiNsagInformationCuc,
+    "NSAG IEI differs between Registration Accept (0x7C) and CUC (0x73)");
+
+// Task 2.5 test 1: Registration Request with Service-level-AA container TLV-E
+// Verifies decode does NOT truncate and does NOT confuse 0x72 with
+// kIeiPduSessionReactivationResultErrorCause in Registration Accept context.
+TEST(TestSuiteNasMsg, rel1710RegistrationRequestSkipServiceLevelAAContainer) {
+  // Build a minimal Registration Request with a Service-level-AA container
+  // IEI 0x72, TLV-E format.  The minimum packet is:
+  //   Header (3) + RegType+KSI (1) + Mobile identity len (2) + identity (3) = 9
+  // Then append TLV-E IE: IEI(1) + len_hi(1) + len_lo(1) + content(6) = 9
+  // Content = 6 bytes (arbitrary fill).
+  // Total = 18 bytes.
+  //
+  // Byte layout for mobile identity (5G-GUTI minimal SUCI null scheme):
+  //   0x00, 0x03   length = 3
+  //   0x01, 0xf0, 0xff  (type SUCI, MCC/MNC placeholder, null scheme)
+  uint8_t packet[] = {
+      // Header
+      0x7e,
+      0x00,
+      0x41,
+      // Registration type (initial) + KSI
+      0x09,
+      // 5GS Mobile Identity: SUCI, length=3, content=3 bytes
+      0x00,
+      0x03,
+      0x01,
+      0xf0,
+      0xff,
+      // Service-level-AA container: IEI=0x72, TLV-E: len_hi=0x00, len_lo=0x06,
+      // content = 6 bytes
+      0x72,
+      0x00,
+      0x06,
+      0xAA,
+      0xBB,
+      0xCC,
+      0xDD,
+      0xEE,
+      0xFF,
+  };
+  oai::nas::RegistrationRequest rr = {};
+  int result                       = rr.Decode(packet, sizeof(packet));
+  // Decode must succeed (not return KEncodeDecodeError = -1).
+  EXPECT_NE(result, KEncodeDecodeError);
+  // Decode must consume all bytes (no truncation).
+  EXPECT_EQ(result, static_cast<int>(sizeof(packet)));
+}
+
+// Task 2.5 test 2: Malformed TLV-E length in Registration Request
+// Verifies decode returns error when length field claims more bytes than
+// available.
+TEST(TestSuiteNasMsg, rel1710RegistrationRequestMalformedTlvE) {
+  uint8_t packet[] = {
+      // Header
+      0x7e,
+      0x00,
+      0x41,
+      // Registration type + KSI
+      0x09,
+      // 5GS Mobile Identity: SUCI, length=3
+      0x00,
+      0x03,
+      0x01,
+      0xf0,
+      0xff,
+      // Service-level-AA container: IEI=0x72, TLV-E: claims 100 bytes but
+      // only 2 content bytes follow
+      0x72,
+      0x00,
+      0x64,
+      0xAA,
+      0xBB,
+  };
+  oai::nas::RegistrationRequest rr = {};
+  int result                       = rr.Decode(packet, sizeof(packet));
+  EXPECT_EQ(result, KEncodeDecodeError);
+}
+
+// Task 2.5 test 3: NSSRG and NSAG encode/decode round-trip in Registration
+// Accept
+TEST(TestSuiteNasMsg, rel1710RegistrationAcceptNssrgNsagRoundTrip) {
+  // Build a Registration Accept, set NSSRG and NSAG, encode, then decode.
+  oai::nas::RegistrationAccept ra_enc = {};
+  ra_enc.SetHeader(0);
+  ra_enc.Set5gsRegistrationResult(false, false, false, 1);
+
+  // Set NSSRG with 7 content bytes
+  oai::nas::NssrgInformation nssrg;
+  nssrg.SetIei(kIeiNssrgInformation);
+  std::vector<uint8_t> nssrg_data = {0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06};
+  nssrg.SetValue(nssrg_data);
+  ra_enc.SetNssrgInformation(nssrg);
+
+  // Set NSAG with 9 content bytes
+  oai::nas::NsagInformation nsag;
+  nsag.SetIei(kIeiNsagInformationRegistrationAccept);
+  std::vector<uint8_t> nsag_data = {0x10, 0x11, 0x12, 0x13, 0x14,
+                                    0x15, 0x16, 0x17, 0x18};
+  nsag.SetValue(nsag_data);
+  ra_enc.SetNsagInformation(nsag);
+
+  // Encode
+  std::vector<uint8_t> buf(512, 0);
+  int enc_len = ra_enc.Encode(buf.data(), buf.size());
+  ASSERT_GT(enc_len, 0);
+
+  // Decode
+  oai::nas::RegistrationAccept ra_dec = {};
+  int dec_len                         = ra_dec.Decode(buf.data(), enc_len);
+  EXPECT_EQ(dec_len, enc_len);
+
+  // Verify NSSRG recovered
+  auto got_nssrg = ra_dec.GetNssrgInformation();
+  ASSERT_TRUE(got_nssrg.has_value());
+  EXPECT_EQ(got_nssrg.value().GetValue(), nssrg_data);
+
+  // Verify NSAG recovered
+  auto got_nsag = ra_dec.GetNsagInformation();
+  ASSERT_TRUE(got_nsag.has_value());
+  EXPECT_EQ(got_nsag.value().GetValue(), nsag_data);
+
+  // Verify NSAG IEI 0x7C (RA) != NSAG IEI 0x73 (CUC)
+  EXPECT_NE(kIeiNsagInformationRegistrationAccept, kIeiNsagInformationCuc);
+}
+
+// Task 2.5 test 5: Priority indicator encode/decode
+TEST(TestSuiteNasMsg, rel1710PriorityIndicatorEncodeDecodeValue) {
+  // Encode PriorityIndicator with MPSI=1, verify encoded byte = 0xE1
+  oai::nas::PriorityIndicator pi1(kPriorityIndicatorIei, 1);
+  uint8_t buf1[4] = {0};
+  int len1        = pi1.Encode(buf1, sizeof(buf1));
+  ASSERT_EQ(len1, 1);
+  // Type 1 TV: upper nibble = IEI (0xE), lower nibble = value (MPSI=1)
+  EXPECT_EQ(buf1[0], 0xE1);
+
+  // Encode PriorityIndicator with MPSI=0, verify encoded byte = 0xE0
+  oai::nas::PriorityIndicator pi0(kPriorityIndicatorIei, 0);
+  uint8_t buf0[4] = {0};
+  int len0        = pi0.Encode(buf0, sizeof(buf0));
+  ASSERT_EQ(len0, 1);
+  EXPECT_EQ(buf0[0], 0xE0);
+
+  // Decode round-trip
+  oai::nas::PriorityIndicator pi_dec;
+  int dec_len = pi_dec.Decode(buf1, sizeof(buf1), true);
+  ASSERT_EQ(dec_len, 1);
+  EXPECT_EQ(pi_dec.GetMpsi(), 1);
+
+  // Task 7.5 note (Stage 7: MPS Indicator Update via CUC):
+  //   - MPSI=1 encodes as 0xE1 (IEI nibble 0xE, value nibble 0x1).
+  //   - MPSI=0 encodes as 0xE0 (IEI nibble 0xE, value nibble 0x0).
+  //   - Spare bits (value nibble bits 2-4) are forced to zero by the
+  //     Type1NasIeFormatTv base class — the SetValue(v & 0x0F) mask in
+  //     Type1NasIeFormatTv::Encode() ensures no spare bits leak through.
+  //   - trigger_mps_indicator_update() uses PriorityIndicator(0x0E, mpsi)
+  //     to build the IE and calls send_configuration_update_command() with
+  //     ack_requested=false per TS 24.501 §5.4.4.2 (ack optional for MPS).
 }

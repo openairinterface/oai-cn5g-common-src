@@ -13,9 +13,11 @@
 // Format: Type 6 TLV-E
 //   IEI 0x7C in Registration Accept (table 8.2.7.1.1)
 //   IEI 0x73 in Configuration Update Command (table 8.2.19.1.1)
-// Minimum content length: 9 octets; maximum: 3143 octets.
+// Minimum content length: 6 octets (one entry with one SST-only S-NSSAI and
+//   priority, no TAI list: 1+1+1+1+1+1 = 6 bytes per §9.11.3.87 table);
+// maximum: 3143 octets.
 // Maximum 32 NSAG entries; maximum 4 entries with TAI list.
-constexpr uint8_t kNsagInformationMinimumContentLength  = 9;
+constexpr uint8_t kNsagInformationMinimumContentLength  = 6;
 constexpr uint16_t kNsagInformationMaximumContentLength = 3143;
 constexpr uint8_t kNsagInformationMaxEntries            = 32;
 constexpr auto kNsagInformationIeName                   = "NSAG Information";

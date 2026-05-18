@@ -26,6 +26,8 @@
 
 namespace oai::_3gpp::model {
 
+// NOTE: model-only until wired — see Stage 9 / enable_uas_uuaa_mm
+
 /// <summary>
 /// Contains the Aerial UE Subscription Information, it at least contains the
 /// Aerial UE Indication.

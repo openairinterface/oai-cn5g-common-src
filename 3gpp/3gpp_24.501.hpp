@@ -254,6 +254,10 @@ constexpr uint8_t kUePolicyContainer       = 0x05;
 constexpr uint8_t kUeParametersUpdate      = 0x06;
 constexpr uint8_t kMultiplePayloads        = 0x0f;
 
+// NOTE: Service-level-AA container (IEI 0x72 in Registration Request and CUC)
+// contains CAA-level UAV ID as a nested field. CAA-level UAV ID is NOT a
+// standalone top-level Registration Request IE.
+
 constexpr uint8_t kPduSessionInitialRequest          = 0b001;
 constexpr uint8_t kExistingPduSession                = 0b010;
 constexpr uint8_t kPduSessionInitialEmergencyRequest = 0b011;

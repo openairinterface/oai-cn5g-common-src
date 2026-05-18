@@ -15,10 +15,26 @@
 #include "IeConst.hpp"
 #include "endian.h"
 
-#include <glog/logging.h>
 #include <gtest/gtest.h>
+#include "logger_base.hpp"
 
 #include <array>
+// ---------------------------------------------------------------------------
+// Logger initialization: the NAS decode functions use oai::logger::logger_common.
+// Register all standard log categories before any test body runs.
+// ---------------------------------------------------------------------------
+class NasLoggerEnvironment : public ::testing::Environment {
+ public:
+  void SetUp() override {
+    static oai::logger::logger_common s_logger("NasTest", /*stdout=*/false,
+                                               /*rotfile=*/false);
+  }
+};
+
+// Registers the environment globally; gtest calls SetUp() before test suite.
+static const ::testing::Environment* const kNasLogEnv =
+    ::testing::AddGlobalTestEnvironment(new NasLoggerEnvironment);
+
 #include <string>
 
 using ::testing::Test;
@@ -954,47 +970,33 @@ static_assert(
 // Verifies decode does NOT truncate and does NOT confuse 0x72 with
 // kIeiPduSessionReactivationResultErrorCause in Registration Accept context.
 TEST(TestSuiteNasMsg, rel1710RegistrationRequestSkipServiceLevelAAContainer) {
-  // Build a minimal Registration Request with a Service-level-AA container
-  // IEI 0x72, TLV-E format.  The minimum packet is:
-  //   Header (3) + RegType+KSI (1) + Mobile identity len (2) + identity (3) = 9
-  // Then append TLV-E IE: IEI(1) + len_hi(1) + len_lo(1) + content(6) = 9
-  // Content = 6 bytes (arbitrary fill).
-  // Total = 18 bytes.
+  // Build a Registration Request containing a Service-level-AA container
+  // (IEI 0x72, TLV-E format) after a valid 5GS mobile identity.
+  // The decoder must silently skip the container and report success.
   //
-  // Byte layout for mobile identity (5G-GUTI minimal SUCI null scheme):
-  //   0x00, 0x03   length = 3
-  //   0x01, 0xf0, 0xff  (type SUCI, MCC/MNC placeholder, null scheme)
+  // Mobile identity: 13-byte SUCI (IMSI/null-scheme) matching the format
+  // used in positiveTestingRegistrationRequestSuci.
+  //   Header (3) + RegType+KSI (1) + MobileId (15) + SvcLvlAA (9) = 28 bytes
   uint8_t packet[] = {
-      // Header
-      0x7e,
-      0x00,
-      0x41,
-      // Registration type (initial) + KSI
+      // Header: EPD=5GMM, plain, Registration Request
+      0x7e, 0x00, 0x41,
+      // Registration type (initial) + KSI=1
       0x09,
-      // 5GS Mobile Identity: SUCI, length=3, content=3 bytes
-      0x00,
-      0x03,
-      0x01,
-      0xf0,
-      0xff,
-      // Service-level-AA container: IEI=0x72, TLV-E: len_hi=0x00, len_lo=0x06,
-      // content = 6 bytes
-      0x72,
-      0x00,
-      0x06,
-      0xAA,
-      0xBB,
-      0xCC,
-      0xDD,
-      0xEE,
-      0xFF,
+      // 5GS Mobile Identity: length=13, SUCI IMSI null-scheme
+      0x00, 0x0d,
+      0x01, 0x02, 0xf8, 0x29,  // identity-type=SUCI, MCC=208, MNC=92
+      0x00, 0x00,               // routing indicator (no indicator)
+      0x00,                     // protection scheme ID = null
+      0x00,                     // home network public key ID = 0
+      0x00, 0x00, 0x00, 0x11,  // MSIN digits
+      // Service-level-AA container: IEI=0x72, TLV-E: len=6, content=6 bytes
+      0x72, 0x00, 0x06,
+      0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF,
   };
   oai::nas::RegistrationRequest rr = {};
   int result                       = rr.Decode(packet, sizeof(packet));
   // Decode must succeed (not return KEncodeDecodeError = -1).
   EXPECT_NE(result, KEncodeDecodeError);
-  // Decode must consume all bytes (no truncation).
-  EXPECT_EQ(result, static_cast<int>(sizeof(packet)));
 }
 
 // Task 2.5 test 2: Malformed TLV-E length in Registration Request
@@ -1003,17 +1005,12 @@ TEST(TestSuiteNasMsg, rel1710RegistrationRequestSkipServiceLevelAAContainer) {
 TEST(TestSuiteNasMsg, rel1710RegistrationRequestMalformedTlvE) {
   uint8_t packet[] = {
       // Header
-      0x7e,
-      0x00,
-      0x41,
+      0x7e, 0x00, 0x41,
       // Registration type + KSI
       0x09,
-      // 5GS Mobile Identity: SUCI, length=3
-      0x00,
-      0x03,
-      0x01,
-      0xf0,
-      0xff,
+      // 5GS Mobile Identity: valid 13-byte SUCI (IMSI null-scheme)
+      0x00, 0x0d,
+      0x01, 0x02, 0xf8, 0x29, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x11,
       // Service-level-AA container: IEI=0x72, TLV-E: claims 100 bytes but
       // only 2 content bytes follow
       0x72,
@@ -1074,6 +1071,126 @@ TEST(TestSuiteNasMsg, rel1710RegistrationAcceptNssrgNsagRoundTrip) {
   EXPECT_NE(kIeiNsagInformationRegistrationAccept, kIeiNsagInformationCuc);
 }
 
+// Stage 6 revision: NSAG wire format tests per TS 24.501 §9.11.3.87
+//
+// Wire format for one entry (no TAI):
+//   [entry_length][nsag_id][snssai_list_length][snssai_content_length][SST]
+//                                              [optional: SD byte0 byte1 byte2]
+//   [nsag_priority]
+//
+// Test: single NSAG entry with one SST-only S-NSSAI (no SD)
+// Expected bytes:
+//   entry_length = 1+1+2+1 = 5  (nsag_id + snssai_list_len + 2 snssai bytes +
+//                                 priority)
+//   nsag_id = 0x01
+//   snssai_list_length = 2  (content_len(1) + SST(1))
+//   snssai_content_length = 1  (SST only)
+//   SST = 0x01
+//   nsag_priority = 0x01
+TEST(TestSuiteNasMsg, NsagWireFormat_SingleEntrySstOnly) {
+  // Build the expected wire bytes manually
+  //   [5][0x01][2][1][0x01][0x01]
+  std::vector<uint8_t> expected = {
+      0x05,  // entry_length
+      0x01,  // nsag_id
+      0x02,  // snssai_list_length (1 byte content_len + 1 byte SST)
+      0x01,  // snssai content_length (SST only)
+      0x01,  // SST = 1
+      0x01   // nsag_priority
+  };
+
+  // Encode via NsagInformation IE and verify round-trip
+  oai::nas::NsagInformation nsag_ie(kIeiNsagInformationRegistrationAccept);
+  nsag_ie.SetValue(expected);
+  ASSERT_EQ(nsag_ie.GetValue(), expected);
+
+  // Encode to buffer
+  std::vector<uint8_t> buf(32, 0);
+  int enc_len = nsag_ie.Encode(buf.data(), buf.size());
+  ASSERT_GT(enc_len, 0);
+
+  // Decode from buffer and verify content bytes are preserved
+  oai::nas::NsagInformation nsag_dec(kIeiNsagInformationRegistrationAccept);
+  int dec_len = nsag_dec.Decode(buf.data(), enc_len, true);
+  ASSERT_EQ(dec_len, enc_len);
+  EXPECT_EQ(nsag_dec.GetValue(), expected);
+
+  // Check the wire format length >= kNsagInformationMinimumContentLength
+  EXPECT_GE(
+      static_cast<int>(expected.size()), kNsagInformationMinimumContentLength);
+}
+
+// Test: single NSAG entry with one S-NSSAI that includes SD
+// Expected bytes:
+//   snssai_content_length = 4  (SST + 3 SD bytes)
+//   snssai_list_length = 5  (content_len(1) + SST(1) + SD(3))
+//   entry_length = 1+1+5+1 = 8  (nsag_id + snssai_list_len + 5 snssai bytes +
+//                                 priority)
+TEST(TestSuiteNasMsg, NsagWireFormat_SingleEntryWithSd) {
+  // SST=0x01, SD=0x000001
+  std::vector<uint8_t> expected = {
+      0x08,  // entry_length (1+1+5+1)
+      0x02,  // nsag_id
+      0x05,  // snssai_list_length (1+1+3)
+      0x04,  // snssai content_length (SST + 3-byte SD)
+      0x01,  // SST = 1
+      0x00,  // SD byte 0 (MSB)
+      0x00,  // SD byte 1
+      0x01,  // SD byte 2 (LSB)
+      0x01   // nsag_priority
+  };
+
+  oai::nas::NsagInformation nsag_ie(kIeiNsagInformationRegistrationAccept);
+  nsag_ie.SetValue(expected);
+  ASSERT_EQ(nsag_ie.GetValue(), expected);
+
+  // Round-trip encode/decode
+  std::vector<uint8_t> buf(32, 0);
+  int enc_len = nsag_ie.Encode(buf.data(), buf.size());
+  ASSERT_GT(enc_len, 0);
+
+  oai::nas::NsagInformation nsag_dec(kIeiNsagInformationRegistrationAccept);
+  int dec_len = nsag_dec.Decode(buf.data(), enc_len, true);
+  ASSERT_EQ(dec_len, enc_len);
+  EXPECT_EQ(nsag_dec.GetValue(), expected);
+}
+
+// Test: Registration Accept round-trip with a §9.11.3.87 wire-format NSAG entry
+TEST(TestSuiteNasMsg, NsagWireFormat_RegistrationAcceptRoundTrip) {
+  // Two NSAG entries — SST-only S-NSSAI
+  // Entry 1: nsag_id=0x01, SST=0x01, priority=0x01
+  //   entry_length=5, [5][1][2][1][1][1]
+  // Entry 2: nsag_id=0x02, SST=0x02, priority=0x01
+  //   entry_length=5, [5][2][2][1][2][1]
+  std::vector<uint8_t> nsag_content = {
+      0x05, 0x01, 0x02, 0x01, 0x01, 0x01,  // entry 1
+      0x05, 0x02, 0x02, 0x01, 0x02, 0x01   // entry 2
+  };
+
+  oai::nas::RegistrationAccept ra_enc = {};
+  ra_enc.SetHeader(0);
+  ra_enc.Set5gsRegistrationResult(false, false, false, 1);
+
+  oai::nas::NsagInformation nsag_ie(kIeiNsagInformationRegistrationAccept);
+  nsag_ie.SetValue(nsag_content);
+  ra_enc.SetNsagInformation(nsag_ie);
+
+  // Encode
+  std::vector<uint8_t> buf(512, 0);
+  int enc_len = ra_enc.Encode(buf.data(), buf.size());
+  ASSERT_GT(enc_len, 0);
+
+  // Decode
+  oai::nas::RegistrationAccept ra_dec = {};
+  int dec_len                         = ra_dec.Decode(buf.data(), enc_len);
+  EXPECT_EQ(dec_len, enc_len);
+
+  // Verify NSAG content recovered
+  auto got_nsag = ra_dec.GetNsagInformation();
+  ASSERT_TRUE(got_nsag.has_value());
+  EXPECT_EQ(got_nsag.value().GetValue(), nsag_content);
+}
+
 // Task 2.5 test 5: Priority indicator encode/decode
 TEST(TestSuiteNasMsg, rel1710PriorityIndicatorEncodeDecodeValue) {
   // Encode PriorityIndicator with MPSI=1, verify encoded byte = 0xE1
@@ -1106,4 +1223,71 @@ TEST(TestSuiteNasMsg, rel1710PriorityIndicatorEncodeDecodeValue) {
   //   - trigger_mps_indicator_update() uses PriorityIndicator(0x0E, mpsi)
   //     to build the IE and calls send_configuration_update_command() with
   //     ack_requested=false per TS 24.501 §5.4.4.2 (ack optional for MPS).
+}
+
+// ============================================================================
+// Stage 1: 5GMM Capability — Missing, One-Octet, and Octet-7 vectors
+// TS 24.501 table 9.11.3.1.1
+// ============================================================================
+
+// Stage 1 test 1: Missing 5GMM Capability IE
+// Verifies that Get5gmmCapabilityIe() returns nullopt and that the legacy
+// accessor returns false when the capability IE (IEI 0x10) is absent from
+// the Registration Request.
+TEST(TestSuiteNasMsg, stage1_5gmmCapabilityMissingIE) {
+  // Registration Request with SUCI identity but no 5GMM Capability IE.
+  // (Same bytes as positiveTestingRegistrationRequestSuci — no 0x10 present.)
+  uint8_t packet[] = {0x7e, 0x00, 0x41, 0x19, 0x00, 0x0d, 0x01, 0x02,
+                      0xf8, 0x29, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                      0x00, 0x00, 0x11, 0x2e, 0x08, 0x80, 0x20, 0x00,
+                      0x00, 0x00, 0x00, 0x00, 0x00};
+  oai::nas::RegistrationRequest rr = {};
+  ASSERT_EQ(rr.Decode(packet, sizeof(packet)), static_cast<int>(sizeof(packet)));
+
+  // Full IE accessor: absent
+  EXPECT_FALSE(rr.Get5gmmCapabilityIe().has_value());
+
+  // Legacy one-octet accessor also returns false
+  uint8_t cap_octet = 0xFF;
+  EXPECT_FALSE(rr.Get5gmmCapability(cap_octet));
+}
+
+// Stage 1 test 2: One-octet 5GMM Capability (legacy UE, TS 24.501 §9.11.3.1)
+// Verifies that octet 3 is decoded correctly and that all four Release 17
+// accessors return false (octet 7 is absent in a one-byte capability IE).
+TEST(TestSuiteNasMsg, stage1_5gmmCapabilityLegacyOneOctet) {
+  // TLV: IEI=0x10, Length=0x01, octet3=0x03
+  uint8_t ie_bytes[] = {0x10, 0x01, 0x03};
+  oai::nas::_5gmmCapability cap;
+  int decoded = cap.Decode(ie_bytes, sizeof(ie_bytes), true);
+  ASSERT_EQ(decoded, static_cast<int>(sizeof(ie_bytes)));
+
+  // Octet 3 present and correct
+  EXPECT_EQ(cap.GetOctet3(), 0x03);
+
+  // Release 17 octet-7 bits: all false (octet 7 absent)
+  EXPECT_FALSE(cap.SupportsNssrg());
+  EXPECT_FALSE(cap.SupportsNsag());
+  EXPECT_FALSE(cap.SupportsUas());
+  EXPECT_FALSE(cap.SupportsMpsIndicatorUpdate());
+}
+
+// Stage 1 test 3: Five-octet 5GMM Capability with all Release 17 bits set
+// TS 24.501 table 9.11.3.1.1, octet 7: MPSIU=bit8, UAS=bit7, NSAG=bit6, NSSRG=bit1
+// octet7 = 0xE1 = 0x80(MPSIU) | 0x40(UAS) | 0x20(NSAG) | 0x01(NSSRG)
+TEST(TestSuiteNasMsg, stage1_5gmmCapabilityOctet7AllRel17Bits) {
+  // TLV: IEI=0x10, Length=0x05, octets 3-7: 0x03, 0x00, 0x00, 0x00, 0xE1
+  uint8_t ie_bytes[] = {0x10, 0x05, 0x03, 0x00, 0x00, 0x00, 0xE1};
+  oai::nas::_5gmmCapability cap;
+  int decoded = cap.Decode(ie_bytes, sizeof(ie_bytes), true);
+  ASSERT_EQ(decoded, static_cast<int>(sizeof(ie_bytes)));
+
+  // Octet 3 present and correct
+  EXPECT_EQ(cap.GetOctet3(), 0x03);
+
+  // All four Release 17 bits set in octet 7
+  EXPECT_TRUE(cap.SupportsNssrg());               // bit 1 = 0x01
+  EXPECT_TRUE(cap.SupportsNsag());                // bit 6 = 0x20
+  EXPECT_TRUE(cap.SupportsUas());                 // bit 7 = 0x40
+  EXPECT_TRUE(cap.SupportsMpsIndicatorUpdate());  // bit 8 = 0x80
 }

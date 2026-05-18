@@ -4,6 +4,7 @@
 #ifndef _AMF_SET_ID_H_
 #define _AMF_SET_ID_H_
 
+#include <cstdint>
 #include <string>
 constexpr uint16_t kAmfSetIdMaxValue = 1023;
 

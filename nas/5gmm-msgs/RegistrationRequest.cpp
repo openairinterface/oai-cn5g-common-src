@@ -238,11 +238,16 @@ void RegistrationRequest::Set5gmmCapability(uint8_t value) {
 //------------------------------------------------------------------------------
 bool RegistrationRequest::Get5gmmCapability(uint8_t& value) const {
   if (ie_5g_mm_capability_.has_value()) {
-    value =
-        ie_5g_mm_capability_.value().GetOctet3();  // TODO: get multiple octets
+    value = ie_5g_mm_capability_.value().GetOctet3();  // Legacy: octet 3 only
     return true;
   } else
     return false;
+}
+
+//------------------------------------------------------------------------------
+std::optional<_5gmmCapability> RegistrationRequest::Get5gmmCapabilityIe()
+    const {
+  return ie_5g_mm_capability_;
 }
 
 //------------------------------------------------------------------------------
@@ -1115,13 +1120,62 @@ int RegistrationRequest::Decode(uint8_t* buf, int len) {
         oai::logger::logger_common::nas().debug("Next IEI 0x%x", octet);
       } break;
 
-      default: {
-        // TODO:
-        if (flag) {
+      // Release 17.10: Service-level-AA container, IEI 0x72 (TLV-E).
+      // NOTE: 0x72 is kIeiPduSessionReactivationResultErrorCause in other
+      // message contexts; in Registration Request it is Service-level-AA
+      // container (TS 24.501 table 8.2.6.1.1). UAS is disabled, so skip it.
+      case kIeiServiceLevelAaContainerRegistrationRequest: {
+        if (decoded_size + 2 >= len) {
           oai::logger::logger_common::nas().warn(
-              "Unknown IEI 0x%x, stop decoding...", octet);
-          // Stop decoding
-          octet = 0x00;
+              "Service-level-AA container skip: buffer too short for IEI "
+              "0x%02x",
+              octet);
+          return KEncodeDecodeError;
+        }
+        uint16_t ext_len = (static_cast<uint16_t>(buf[decoded_size + 1]) << 8) |
+                           buf[decoded_size + 2];
+        int total =
+            1 + 2 + static_cast<int>(ext_len);  // IEI + 2-byte len + content
+        if (decoded_size + total > len) {
+          oai::logger::logger_common::nas().warn(
+              "Service-level-AA container skip: malformed TLV-E length %u > "
+              "remaining %d for IEI 0x%02x",
+              ext_len, len - decoded_size, octet);
+          return KEncodeDecodeError;
+        }
+        oai::logger::logger_common::nas().debug(
+            "Skipping Service-level-AA container IEI 0x72 length %u", ext_len);
+        decoded_size += total;
+        DECODE_U8_VALUE(buf, octet, decoded_size, len);
+        oai::logger::logger_common::nas().debug("Next IEI 0x%x", octet);
+      } break;
+
+      default: {
+        // Unknown optional IE — skip safely using TLV heuristic.
+        // Only TLV (Type 4) and TLV-E (Type 6) can be skipped.
+        // TV/half-octet (Type 1) would already have matched an upper-nibble
+        // case in the first switch above; they are not skipped here.
+        if (flag) {
+          if (decoded_size + 1 >= len) {
+            oai::logger::logger_common::nas().warn(
+                "Optional IE skip: buffer too short for IEI 0x%02x", octet);
+            return KEncodeDecodeError;
+          }
+          uint8_t ie_len = buf[decoded_size + 1];
+          int skip_len   = 2 + ie_len;  // 1 IEI + 1 length + content
+          if (decoded_size + skip_len > len) {
+            oai::logger::logger_common::nas().warn(
+                "Optional IE skip: malformed TLV length %u > remaining %d "
+                "for IEI 0x%02x",
+                ie_len, len - decoded_size, octet);
+            return KEncodeDecodeError;
+          }
+          oai::logger::logger_common::nas().debug(
+              "Optional IE: skipping unknown IEI 0x%02x length %u", octet,
+              ie_len);
+          decoded_size += skip_len;
+          DECODE_U8_VALUE(buf, octet, decoded_size, len);
+          oai::logger::logger_common::nas().debug("Next IEI 0x%x", octet);
         }
       } break;
     }

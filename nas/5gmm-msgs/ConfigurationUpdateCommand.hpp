@@ -44,6 +44,18 @@ class ConfigurationUpdateCommand : public Nas5gmmMessage {
   void SetShortNameForNetwork(const std::string& text_string);
   void GetShortNameForNetwork(NetworkName& name) const;
 
+  // Release 17.10: NSSRG information (IEI 0x70, TLV-E)
+  void SetNssrgInformation(const NssrgInformation& nssrg);
+  std::optional<NssrgInformation> GetNssrgInformation() const;
+
+  // Release 17.10: NSAG information (IEI 0x73, TLV-E)
+  void SetNsagInformation(const NsagInformation& nsag);
+  std::optional<NsagInformation> GetNsagInformation() const;
+
+  // Release 17.10: Priority indicator (IEI 0xE-, Type 1 TV)
+  void SetPriorityIndicator(uint8_t mpsi);
+  std::optional<PriorityIndicator> GetPriorityIndicator() const;
+
  private:
   NasMmPlainHeader ie_header_;  // Mandatory
   // Configuration update indication
@@ -74,6 +86,11 @@ class ConfigurationUpdateCommand : public Nas5gmmMessage {
   // TODO: 5GS registration result (Rel 16.4.1) (Optional)
   // TODO: Truncated 5G-S-TMSI configuration (Rel 16.4.1) (Optional)
   // TODO: Additional configuration indication (Rel 16.14.0) (Optional)
+  // Release 17.10 IEs
+  std::optional<NssrgInformation> ie_nssrg_information_;  // IEI 0x70, TLV-E
+  std::optional<NsagInformation> ie_nsag_information_;    // IEI 0x73, TLV-E
+  std::optional<PriorityIndicator>
+      ie_priority_indicator_;  // IEI 0xE-, Type 1 TV
 };
 
 }  // namespace oai::nas

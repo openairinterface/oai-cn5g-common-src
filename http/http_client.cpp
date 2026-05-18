@@ -282,8 +282,8 @@ void http_client::prepare_session(
 
   // Enable SSL/TLS
   if (m_enable_tls) {
-    cpr::SslOptions sslOpts =
-        cpr::Ssl(cpr::ssl::ALPN{false}, cpr::ssl::NPN{false});
+    cpr::SslOptions sslOpts = {};
+    // cpr::Ssl(cpr::ssl::ALPN{false}, cpr::ssl::NPN{false});
     sslOpts.SetOption(cpr::ssl::TLSv1_0{});
     sslOpts.SetOption(cpr::ssl::VerifyHost{false});
     sslOpts.SetOption(cpr::ssl::VerifyPeer{false});

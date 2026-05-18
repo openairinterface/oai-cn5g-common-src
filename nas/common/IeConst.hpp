@@ -66,7 +66,10 @@ constexpr uint8_t kIeiFullNameForNetwork           = 0x43;
 constexpr uint8_t kIeiShortNameForNetwork          = 0x45;
 
 // OK
-constexpr uint8_t kIeiPayloadContainerType     = 0x08;  // Should be verified
+constexpr uint8_t kIeiPayloadContainerType =
+    0x08;  // TS 24.501 Table 8.2.6.1.1: IEI nibble 8H (Type 1 half-octet TV);
+           // content values (0x01–0x0F) are in Table 9.11.3.40, defined
+           // separately in 3gpp_24.501.hpp
 constexpr uint8_t kIeiRequestType              = 0x08;  // 8-(4 higher bits)
 constexpr uint8_t kIeiNetworkSlicingIndication = 0x09;  // 9-(4 higher bits)
 
@@ -136,3 +139,29 @@ constexpr uint8_t kIei5gGuti                                 = 0x77;
 
 constexpr uint8_t kIeiEapMessage       = 0x78;
 constexpr uint8_t kIeiPayloadContainer = 0x7b;
+
+// TS 24.501 Release 17.10 message-scoped aliases.
+// IMPORTANT: these IEI values are reused across message contexts;
+// always use the message-scoped alias rather than the numeric literal.
+
+// 0x70: used as kIeiEpsNasMessageContainer in Registration Request.
+//       Used as NSSRG Information in Registration Accept and CUC.
+constexpr uint8_t kIeiNssrgInformation = 0x70;
+
+// 0x72: used as kIeiPduSessionReactivationResultErrorCause in Service Request.
+//       Used as Service-level-AA container in Registration Request
+//       (table 8.2.6.1.1). Used as Service-level-AA container in CUC
+//       (table 8.2.19.1.1).
+constexpr uint8_t kIeiServiceLevelAaContainerRegistrationRequest = 0x72;
+constexpr uint8_t kIeiServiceLevelAaContainerCuc                 = 0x72;
+
+// 0x73: used as kIeiSorTransparentContainer in Registration Accept.
+//       Used as NSAG Information in CUC (table 8.2.19.1.1).
+constexpr uint8_t kIeiNsagInformationCuc = 0x73;
+
+// 0x7C: NSAG Information in Registration Accept (table 8.2.7.1.1).
+constexpr uint8_t kIeiNsagInformationRegistrationAccept = 0x7C;
+
+// 0x7B: Service-level-AA container in Registration Accept (table 8.2.7.1.1).
+// Only used when enable_uas_uuaa_mm is enabled.
+constexpr uint8_t kIeiServiceLevelAaContainerRegistrationAccept = 0x7B;

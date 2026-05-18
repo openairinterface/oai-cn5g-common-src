@@ -5,6 +5,8 @@
 #ifndef _5GMM_CAPABILITY_H_
 #define _5GMM_CAPABILITY_H_
 
+#include <vector>
+
 #include "Type4NasIe.hpp"
 
 constexpr uint8_t k5gmmCapabilityMinimumLength = 3;
@@ -30,11 +32,21 @@ class _5gmmCapability : public Type4NasIe {
   void SetOctet3(uint8_t iei, uint8_t octet3);
   uint8_t GetOctet3() const;
 
+  // Release 17 capability accessors (TS 24.501 table 9.11.3.1.1 octet 7)
+  // Returns false (unsupported) if octet 7 was not present in the message.
+  bool SupportsNssrg() const;               // octet 7 bit 1
+  bool SupportsNsag() const;                // octet 7 bit 6
+  bool SupportsUas() const;                 // octet 7 bit 7
+  bool SupportsMpsIndicatorUpdate() const;  // octet 7 bit 8
+
  private:
   uint8_t octet3_;  // minimum length of 3 octets
   std::optional<uint8_t> octet4_;
   std::optional<uint8_t> octet5_;
-  // TODO: octets 6-15
+  std::optional<uint8_t> octet6_;
+  std::optional<uint8_t> octet7_;
+  // Raw bytes for octets 8-15 (preserved for diagnostics)
+  std::vector<uint8_t> extra_octets_;
 };
 
 }  // namespace oai::nas

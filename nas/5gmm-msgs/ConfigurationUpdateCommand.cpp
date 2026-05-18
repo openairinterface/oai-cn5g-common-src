@@ -17,6 +17,9 @@ ConfigurationUpdateCommand::ConfigurationUpdateCommand()
   ie_5g_guti_                         = std::nullopt;
   ie_full_name_for_network_           = std::nullopt;
   ie_short_name_for_network_          = std::nullopt;
+  ie_nssrg_information_               = std::nullopt;
+  ie_nsag_information_                = std::nullopt;
+  ie_priority_indicator_              = std::nullopt;
 }
 
 //------------------------------------------------------------------------------
@@ -33,6 +36,12 @@ uint32_t ConfigurationUpdateCommand::GetLength() const {
     msg_len += ie_full_name_for_network_.value().GetIeLength();
   if (ie_short_name_for_network_.has_value())
     msg_len += ie_short_name_for_network_.value().GetIeLength();
+  if (ie_nssrg_information_.has_value())
+    msg_len += ie_nssrg_information_.value().GetIeLength();
+  if (ie_nsag_information_.has_value())
+    msg_len += ie_nsag_information_.value().GetIeLength();
+  if (ie_priority_indicator_.has_value())
+    msg_len += ie_priority_indicator_.value().GetIeLength();
 
   return msg_len;
 }
@@ -119,6 +128,44 @@ void ConfigurationUpdateCommand::GetShortNameForNetwork(
     NetworkName& name) const {}
 
 //------------------------------------------------------------------------------
+void ConfigurationUpdateCommand::SetNssrgInformation(
+    const NssrgInformation& nssrg) {
+  ie_nssrg_information_ = std::make_optional<NssrgInformation>(nssrg);
+  ie_nssrg_information_.value().SetIei(kIeiNssrgInformation);
+}
+
+//------------------------------------------------------------------------------
+std::optional<NssrgInformation>
+ConfigurationUpdateCommand::GetNssrgInformation() const {
+  return ie_nssrg_information_;
+}
+
+//------------------------------------------------------------------------------
+void ConfigurationUpdateCommand::SetNsagInformation(
+    const NsagInformation& nsag) {
+  ie_nsag_information_ = std::make_optional<NsagInformation>(nsag);
+  ie_nsag_information_.value().SetIei(kIeiNsagInformationCuc);
+}
+
+//------------------------------------------------------------------------------
+std::optional<NsagInformation> ConfigurationUpdateCommand::GetNsagInformation()
+    const {
+  return ie_nsag_information_;
+}
+
+//------------------------------------------------------------------------------
+void ConfigurationUpdateCommand::SetPriorityIndicator(uint8_t mpsi) {
+  ie_priority_indicator_ =
+      std::make_optional<PriorityIndicator>(kPriorityIndicatorIei, mpsi);
+}
+
+//------------------------------------------------------------------------------
+std::optional<PriorityIndicator>
+ConfigurationUpdateCommand::GetPriorityIndicator() const {
+  return ie_priority_indicator_;
+}
+
+//------------------------------------------------------------------------------
 int ConfigurationUpdateCommand::Encode(uint8_t* buf, int len) {
   oai::logger::logger_common::nas().debug(
       "Encoding ConfigurationUpdateCommand message");
@@ -152,6 +199,25 @@ int ConfigurationUpdateCommand::Encode(uint8_t* buf, int len) {
 
   if ((encoded_ie_size = NasHelper::Encode(
            ie_short_name_for_network_, buf, len, encoded_size)) ==
+      KEncodeDecodeError) {
+    return KEncodeDecodeError;
+  }
+
+  // Release 17.10 IEs
+  if ((encoded_ie_size =
+           NasHelper::Encode(ie_priority_indicator_, buf, len, encoded_size)) ==
+      KEncodeDecodeError) {
+    return KEncodeDecodeError;
+  }
+
+  if ((encoded_ie_size =
+           NasHelper::Encode(ie_nssrg_information_, buf, len, encoded_size)) ==
+      KEncodeDecodeError) {
+    return KEncodeDecodeError;
+  }
+
+  if ((encoded_ie_size =
+           NasHelper::Encode(ie_nsag_information_, buf, len, encoded_size)) ==
       KEncodeDecodeError) {
     return KEncodeDecodeError;
   }
@@ -196,6 +262,19 @@ int ConfigurationUpdateCommand::Decode(uint8_t* buf, int len) {
         oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
       } break;
 
+      // Release 17.10: Priority indicator, IEI nibble 0xE (Type 1 TV)
+      case kPriorityIndicatorIei: {
+        oai::logger::logger_common::nas().debug(
+            "Decoding Priority indicator IEI 0x%x", octet);
+        if ((decoded_ie_size = NasHelper::Decode(
+                 ie_priority_indicator_, buf, len, decoded_size, true)) ==
+            KEncodeDecodeError) {
+          return KEncodeDecodeError;
+        }
+        DECODE_U8_VALUE(buf, octet, decoded_size, len);
+        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
+      } break;
+
       default: {
         flag = true;
       }
@@ -226,13 +305,58 @@ int ConfigurationUpdateCommand::Decode(uint8_t* buf, int len) {
         oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
       } break;
 
+      // Release 17.10: NSSRG Information, IEI 0x70 (TLV-E)
+      case kIeiNssrgInformation: {
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI 0x%x (NSSRG Information)", kIeiNssrgInformation);
+        if ((decoded_ie_size = NasHelper::Decode(
+                 ie_nssrg_information_, buf, len, decoded_size, true)) ==
+            KEncodeDecodeError) {
+          return KEncodeDecodeError;
+        }
+        DECODE_U8_VALUE(buf, octet, decoded_size, len);
+        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
+      } break;
+
+      // Release 17.10: NSAG Information, IEI 0x73 (TLV-E)
+      case kIeiNsagInformationCuc: {
+        oai::logger::logger_common::nas().debug(
+            "Decoding IEI 0x%x (NSAG Information)", kIeiNsagInformationCuc);
+        if ((decoded_ie_size = NasHelper::Decode(
+                 ie_nsag_information_, buf, len, decoded_size, true)) ==
+            KEncodeDecodeError) {
+          return KEncodeDecodeError;
+        }
+        DECODE_U8_VALUE(buf, octet, decoded_size, len);
+        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
+      } break;
+
       default: {
-        // TODO:
+        // Unknown optional IE — skip safely using TLV heuristic.
+        // Only TLV (Type 4) and TLV-E (Type 6) can be skipped.
+        // TV/half-octet (Type 1) would already have matched an upper-nibble
+        // case in the first switch above; they are not skipped here.
         if (flag) {
-          oai::logger::logger_common::nas().warn(
-              "Unknown IEI 0x%x, stop decoding...", octet);
-          // Stop decoding
-          octet = 0x00;
+          if (decoded_size + 1 >= len) {
+            oai::logger::logger_common::nas().warn(
+                "Optional IE skip: buffer too short for IEI 0x%02x", octet);
+            return KEncodeDecodeError;
+          }
+          uint8_t ie_len = buf[decoded_size + 1];
+          int skip_len   = 2 + ie_len;  // 1 IEI + 1 length + content
+          if (decoded_size + skip_len > len) {
+            oai::logger::logger_common::nas().warn(
+                "Optional IE skip: malformed TLV length %u > remaining %d "
+                "for IEI 0x%02x",
+                ie_len, len - decoded_size, octet);
+            return KEncodeDecodeError;
+          }
+          oai::logger::logger_common::nas().debug(
+              "Optional IE: skipping unknown IEI 0x%02x length %u", octet,
+              ie_len);
+          decoded_size += skip_len;
+          DECODE_U8_VALUE(buf, octet, decoded_size, len);
+          oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
         }
       } break;
     }

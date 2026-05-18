@@ -62,7 +62,9 @@ class RegistrationRequest : public Nas5gmmMessage {
 
   // TODO: 5GMM Capability as an array[]
   void Set5gmmCapability(uint8_t value);
-  bool Get5gmmCapability(uint8_t& value) const;
+  bool Get5gmmCapability(uint8_t& value) const;  // Legacy: returns octet 3 only
+  // Returns the full 5GMM Capability IE when present (all decoded octets).
+  std::optional<_5gmmCapability> Get5gmmCapabilityIe() const;
 
   void SetUeSecurityCapability(uint8_t ea, uint8_t ia);
   void SetUeSecurityCapability(

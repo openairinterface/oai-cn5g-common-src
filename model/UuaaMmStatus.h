@@ -24,6 +24,8 @@
 
 namespace oai::_3gpp::model {
 
+// NOTE: model-only until wired — see Stage 9 / enable_uas_uuaa_mm
+
 /// <summary>
 /// Indicates the UUAA-MM status
 /// </summary>

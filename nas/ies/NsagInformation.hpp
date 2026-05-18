@@ -9,7 +9,7 @@
 
 #include "Type6NasIe.hpp"
 
-constexpr uint8_t kNsagInformationMinimumContentLength  = 9;
+constexpr uint8_t kNsagInformationMinimumContentLength  = 6;
 constexpr uint16_t kNsagInformationMaximumContentLength = 3143;
 constexpr uint8_t kNsagInformationMaxEntries            = 32;
 constexpr auto kNsagInformationIeName                   = "NSAG Information";

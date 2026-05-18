@@ -252,7 +252,9 @@ constexpr uint8_t kLtePositioningProtocol  = 0x03;
 constexpr uint8_t kSorTransparentContainer = 0x04;
 constexpr uint8_t kUePolicyContainer       = 0x05;
 constexpr uint8_t kUeParametersUpdate      = 0x06;
-constexpr uint8_t kMultiplePayloads        = 0x0f;
+constexpr uint8_t kServiceLevelAaPayloadContainerType =
+    0x09;  // TS 24.501 table 9.11.3.40
+constexpr uint8_t kMultiplePayloads = 0x0f;
 
 // NOTE: Service-level-AA container (IEI 0x72 in Registration Request and CUC)
 // contains CAA-level UAV ID as a nested field. CAA-level UAV ID is NOT a

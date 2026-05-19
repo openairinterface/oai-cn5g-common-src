@@ -22,8 +22,11 @@ FlowDirectionRm::FlowDirectionRm() {}
 
 void to_json(nlohmann::json& j, const FlowDirectionRm& o) {
   j = nlohmann::json();
+  to_json(j, o.m_value);
 }
 
-void from_json(const nlohmann::json& j, FlowDirectionRm& o) {}
+void from_json(const nlohmann::json& j, FlowDirectionRm& o) {
+  from_json(j, o.m_value);
+}
 
 }  // namespace oai::_3gpp::model

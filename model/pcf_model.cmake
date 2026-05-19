@@ -1,7 +1,5 @@
 # SPDX-License-Identifier: LicenseRef-CSSL-1.0
 
-include(${SRC_TOP_DIR}/${MOUNTED_COMMON}/model/common_model.cmake)
-
 SET(PCF_MODEL_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/model)
 
 include_directories(${PCF_MODEL_DIR})
@@ -347,6 +345,7 @@ file(GLOB PCF_MODEL_SRC_FILES
     ${PCF_MODEL_DIR}/VplmnQos.cpp
     ${PCF_MODEL_DIR}/WirelineArea.cpp
     ${PCF_MODEL_DIR}/WirelineServiceAreaRestriction.cpp
+    ${PCF_MODEL_DIR}/Helpers.cpp
 )
 
 if (TARGET ${NF_TARGET})

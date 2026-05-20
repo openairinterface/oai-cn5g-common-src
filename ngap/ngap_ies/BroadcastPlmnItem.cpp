@@ -10,6 +10,7 @@
 extern "C" {
 #include "Ngap_BroadcastPLMNList.h"
 #include "Ngap_SliceSupportItem.h"
+#include "Ngap_SliceSupportList.h"
 }
 
 namespace oai::ngap {
@@ -69,8 +70,15 @@ bool BroadcastPlmnItem::encode(Ngap_BroadcastPLMNItem_t& plmnItem) const {
     Ngap_SliceSupportItem_t* slice =
         (Ngap_SliceSupportItem_t*) calloc(1, sizeof(Ngap_SliceSupportItem_t));
     if (!slice) return false;
-    if (!it->encode(slice->s_NSSAI)) return false;
-    if (ASN_SEQUENCE_ADD(&plmnItem.tAISliceSupportList.list, slice) != 0)
+    slice->s_NSSAI = (Ngap_S_NSSAI_t*) calloc(1, sizeof(Ngap_S_NSSAI_t));
+    if (!slice->s_NSSAI) return false;
+    if (!it->encode(*slice->s_NSSAI)) return false;
+    if (!plmnItem.tAISliceSupportList) {
+      plmnItem.tAISliceSupportList = (Ngap_SliceSupportList_t*) calloc(
+          1, sizeof(Ngap_SliceSupportList_t));
+      if (!plmnItem.tAISliceSupportList) return false;
+    }
+    if (ASN_SEQUENCE_ADD(&plmnItem.tAISliceSupportList->list, slice) != 0)
       return false;
   }
   return true;
@@ -79,9 +87,11 @@ bool BroadcastPlmnItem::encode(Ngap_BroadcastPLMNItem_t& plmnItem) const {
 //------------------------------------------------------------------------------
 bool BroadcastPlmnItem::decode(const Ngap_BroadcastPLMNItem_t& pdu) {
   if (!m_Plmn.decode(pdu.pLMNIdentity)) return false;
-  for (int i = 0; i < pdu.tAISliceSupportList.list.count; i++) {
+  if (!pdu.tAISliceSupportList) return false;
+  for (int i = 0; i < pdu.tAISliceSupportList->list.count; i++) {
     SNssai snssai = {};
-    if (!snssai.decode(pdu.tAISliceSupportList.list.array[i]->s_NSSAI))
+    if (!pdu.tAISliceSupportList->list.array[i]->s_NSSAI) return false;
+    if (!snssai.decode(*pdu.tAISliceSupportList->list.array[i]->s_NSSAI))
       return false;
     m_SupportedSliceList.push_back(snssai);
   }

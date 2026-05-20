@@ -6,6 +6,8 @@
 #define _NG_SETUP_RESPONSE_H_
 
 #include "AmfName.hpp"
+#include "ExtendedAmfName.hpp"
+#include "IabSupported.hpp"
 #include "MessageType.hpp"
 #include "NgapIesStruct.hpp"
 #include "NgapMessage.hpp"
@@ -43,6 +45,10 @@ class NgSetupResponseMsg : public NgapMessage {
   void getUeRetentionInformation(
       std::optional<UeRetentionInformation>& value) const;
 
+  // Rel-17: security — source from AMF configuration only
+  void setIabSupported(const IabSupported& value);
+  void setExtendedAmfName(const ExtendedAmfName& value);
+
   bool decode(Ngap_NGAP_PDU_t* ngapMsgPdu) override;
 
  private:
@@ -54,8 +60,8 @@ class NgSetupResponseMsg : public NgapMessage {
   PlmnSupportList m_PlmnSupportList;          // Mandatory
   // TODO: CriticalityDiagnostics //Optional
   std::optional<UeRetentionInformation> m_UeRetentionInformation;  // Optional
-  // TODO:IAB Supported (Optional, Rel 16.14.0)
-  // TODO:Extended AMF Name (Optional, Rel 16.14.0)
+  std::optional<IabSupported> m_IabSupported;      // Optional, Rel-17
+  std::optional<ExtendedAmfName> m_ExtendedAmfName;  // Optional, Rel-17
 };
 
 }  // namespace oai::ngap

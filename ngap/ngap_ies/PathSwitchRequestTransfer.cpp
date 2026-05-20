@@ -74,14 +74,16 @@ bool PathSwitchRequestTransfer::decode(uint8_t* buf, int bufSize) {
   // m_Ie);
 
   // Decode DL NG-U UP TNL Information
-  if (!m_DlNgUUpTnlInformation.decode(m_Ie->dL_NGU_UP_TNLInformation)) {
+  if (!m_Ie->dL_NGU_UP_TNLInformation) return false;
+  if (!m_DlNgUUpTnlInformation.decode(*m_Ie->dL_NGU_UP_TNLInformation)) {
     oai::logger::logger_common::ngap().error(
         "Failure to decode DL NG-U UP TNL Information IE");
     return false;
   }
 
   // Decode QoS Flow Accepted List
-  if (!m_QosFlowAcceptedList.decode(m_Ie->qosFlowAcceptedList)) {
+  if (!m_Ie->qosFlowAcceptedList) return false;
+  if (!m_QosFlowAcceptedList.decode(*m_Ie->qosFlowAcceptedList)) {
     oai::logger::logger_common::ngap().error(
         "Failure to decode  QoS Flow Accepted List IE");
     return false;

@@ -27,14 +27,16 @@ void GlobalNgEnbId::get(PlmnId& plmnId, NgEnbId& ngEnbId) const {
 //------------------------------------------------------------------------------
 bool GlobalNgEnbId::encode(Ngap_GlobalNgENB_ID_t& globalNgEnbId) const {
   if (!m_PlmnId.encode(globalNgEnbId.pLMNIdentity)) return false;
-  if (!m_NgEnbId.encode(globalNgEnbId.ngENB_ID)) return false;
+  if (!globalNgEnbId.ngENB_ID) globalNgEnbId.ngENB_ID = (Ngap_NgENB_ID_t*) calloc(1, sizeof(Ngap_NgENB_ID_t));
+  if (!m_NgEnbId.encode(*globalNgEnbId.ngENB_ID)) return false;
   return true;
 }
 
 //------------------------------------------------------------------------------
 bool GlobalNgEnbId::decode(const Ngap_GlobalNgENB_ID_t& globalNgEnbId) {
   if (!m_PlmnId.decode(globalNgEnbId.pLMNIdentity)) return false;
-  if (!m_NgEnbId.decode(globalNgEnbId.ngENB_ID)) return false;
+  if (!globalNgEnbId.ngENB_ID) return false;
+  if (!m_NgEnbId.decode(*globalNgEnbId.ngENB_ID)) return false;
   return true;
 }
 }  // namespace oai::ngap

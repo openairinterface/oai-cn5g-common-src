@@ -51,7 +51,8 @@ void UnavailableGuamiItem::getBackupAmfName(
 
 //------------------------------------------------------------------------------
 bool UnavailableGuamiItem::encode(Ngap_UnavailableGUAMIItem& item) const {
-  if (!m_Guami.encode(item.gUAMI)) return false;
+  if (!item.gUAMI) item.gUAMI = (Ngap_GUAMI_t*) calloc(1, sizeof(Ngap_GUAMI_t));
+  if (!m_Guami.encode(*item.gUAMI)) return false;
   if (m_TimerApproachForGuamiRemoval.has_value()) {
     if (!m_TimerApproachForGuamiRemoval.value().encode(
             *item.timerApproachForGUAMIRemoval))
@@ -64,7 +65,8 @@ bool UnavailableGuamiItem::encode(Ngap_UnavailableGUAMIItem& item) const {
 
 //------------------------------------------------------------------------------
 bool UnavailableGuamiItem::decode(const Ngap_UnavailableGUAMIItem& item) {
-  if (!m_Guami.decode(item.gUAMI)) return false;
+  if (!item.gUAMI) return false;
+  if (!m_Guami.decode(*item.gUAMI)) return false;
 
   if (item.timerApproachForGUAMIRemoval) {
     TimerApproachForGuamiRemoval tmp = {};

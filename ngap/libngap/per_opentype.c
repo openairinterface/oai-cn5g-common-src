@@ -8,21 +8,21 @@
  * Internal functions.
  */
 
-asn_dec_rval_t uper_sot_suck(
-    const asn_codec_ctx_t* ctx, const asn_TYPE_descriptor_t* td,
-    const asn_per_constraints_t* constraints, void** sptr, asn_per_data_t* pd) {
-  asn_dec_rval_t rv;
+asn_dec_rval_t
+uper_sot_suck(const asn_codec_ctx_t *ctx, const asn_TYPE_descriptor_t *td,
+              const asn_per_constraints_t *constraints, void **sptr,
+              asn_per_data_t *pd) {
+    asn_dec_rval_t rv;
 
-  (void) ctx;
-  (void) td;
-  (void) constraints;
-  (void) sptr;
+	(void)ctx;
+	(void)td;
+	(void)constraints;
+	(void)sptr;
 
-  while (per_get_few_bits(pd, 1) >= 0)
-    ;
+	while(per_get_few_bits(pd, 1) >= 0);
 
-  rv.code     = RC_OK;
-  rv.consumed = pd->moved;
+	rv.code = RC_OK;
+	rv.consumed = pd->moved;
 
-  return rv;
+	return rv;
 }

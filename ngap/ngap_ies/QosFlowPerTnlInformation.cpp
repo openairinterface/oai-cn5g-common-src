@@ -31,12 +31,14 @@ void QosFlowPerTnlInformation::get(
 //------------------------------------------------------------------------------
 bool QosFlowPerTnlInformation::encode(
     Ngap_QosFlowPerTNLInformation_t& qosFlowPerTnlInformation) const {
+  if (!qosFlowPerTnlInformation.uPTransportLayerInformation) qosFlowPerTnlInformation.uPTransportLayerInformation = (Ngap_UPTransportLayerInformation_t*) calloc(1, sizeof(Ngap_UPTransportLayerInformation_t));
   if (!m_UpTransportLayerInformation.encode(
-          qosFlowPerTnlInformation.uPTransportLayerInformation))
+          *qosFlowPerTnlInformation.uPTransportLayerInformation))
     return false;
 
+  if (!qosFlowPerTnlInformation.associatedQosFlowList) qosFlowPerTnlInformation.associatedQosFlowList = (Ngap_AssociatedQosFlowList_t*) calloc(1, sizeof(Ngap_AssociatedQosFlowList_t));
   if (!m_AssociatedQosFlowList.encode(
-          qosFlowPerTnlInformation.associatedQosFlowList))
+          *qosFlowPerTnlInformation.associatedQosFlowList))
     return false;
 
   return true;
@@ -45,11 +47,13 @@ bool QosFlowPerTnlInformation::encode(
 //------------------------------------------------------------------------------
 bool QosFlowPerTnlInformation::decode(
     const Ngap_QosFlowPerTNLInformation_t& qosFlowPerTnlInformation) {
+  if (!qosFlowPerTnlInformation.uPTransportLayerInformation) return false;
   if (!m_UpTransportLayerInformation.decode(
-          qosFlowPerTnlInformation.uPTransportLayerInformation))
+          *qosFlowPerTnlInformation.uPTransportLayerInformation))
     return false;
+  if (!qosFlowPerTnlInformation.associatedQosFlowList) return false;
   if (!m_AssociatedQosFlowList.decode(
-          qosFlowPerTnlInformation.associatedQosFlowList))
+          *qosFlowPerTnlInformation.associatedQosFlowList))
     return false;
 
   return true;

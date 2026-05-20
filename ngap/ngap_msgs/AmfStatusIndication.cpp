@@ -5,6 +5,9 @@
 #include "AmfStatusIndication.hpp"
 
 #include "logger_base.hpp"
+extern "C" {
+#include "Ngap_ProtocolIE_Container_compat.h"
+}
 #include "utils.hpp"
 
 namespace oai::ngap {
@@ -62,16 +65,18 @@ bool AmfStatusIndication::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
     return false;
   }
 
-  for (int i = 0; i < m_AmfStatusIndicationIEs->protocolIEs.list.count; i++) {
-    switch (m_AmfStatusIndicationIEs->protocolIEs.list.array[i]->id) {
+  for (int i = 0; i < m_AmfStatusIndicationIEs->protocolIEs->list.count; i++) {
+    Ngap_AMFStatusIndicationIEs_t* ngap_ie =
+        (Ngap_AMFStatusIndicationIEs_t*) m_AmfStatusIndicationIEs->protocolIEs->list.array[i];
+    switch (ngap_ie->id) {
       case Ngap_ProtocolIE_ID_id_UnavailableGUAMIList: {
-        if (m_AmfStatusIndicationIEs->protocolIEs.list.array[i]->criticality ==
+        if (ngap_ie->criticality ==
                 Ngap_Criticality_reject &&
-            m_AmfStatusIndicationIEs->protocolIEs.list.array[i]
+            ngap_ie
                     ->value.present ==
                 Ngap_AMFStatusIndicationIEs__value_PR_UnavailableGUAMIList) {
           if (!m_UnavailableGuamiList.decode(
-                  m_AmfStatusIndicationIEs->protocolIEs.list.array[i]
+                  ngap_ie
                       ->value.choice.UnavailableGUAMIList)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP UnavailableGUAMIList error");

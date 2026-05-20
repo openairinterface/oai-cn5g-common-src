@@ -5,6 +5,9 @@
 #include "PduSessionResourceModifyResponse.hpp"
 
 #include "logger_base.hpp"
+extern "C" {
+#include "Ngap_ProtocolIE_Container_compat.h"
+}
 #include "utils.hpp"
 
 namespace oai::ngap {
@@ -51,7 +54,7 @@ void PduSessionResourceModifyResponseMsg::setAmfUeNgapId(const uint64_t& id) {
   }
 
   ret = ASN_SEQUENCE_ADD(
-      &pduSessionResourceModifyResponseIes->protocolIEs.list, ie);
+      &pduSessionResourceModifyResponseIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode NGAP AMF_UE_NGAP_ID IE error");
@@ -80,7 +83,7 @@ void PduSessionResourceModifyResponseMsg::setRanUeNgapId(
   }
 
   ret = ASN_SEQUENCE_ADD(
-      &pduSessionResourceModifyResponseIes->protocolIEs.list, ie);
+      &pduSessionResourceModifyResponseIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode NGAP RAN_UE_NGAP_ID IE error");
@@ -125,7 +128,7 @@ void PduSessionResourceModifyResponseMsg::
   }
 
   ret = ASN_SEQUENCE_ADD(
-      &pduSessionResourceModifyResponseIes->protocolIEs.list, ie);
+      &pduSessionResourceModifyResponseIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode NGAP PDUSessionResourceSetupListSUReq IE error");
@@ -178,19 +181,17 @@ bool PduSessionResourceModifyResponseMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
   }
 
   for (int i = 0;
-       i < pduSessionResourceModifyResponseIes->protocolIEs.list.count; i++) {
-    switch (
-        pduSessionResourceModifyResponseIes->protocolIEs.list.array[i]->id) {
+       i < pduSessionResourceModifyResponseIes->protocolIEs->list.count; i++) {
+    Ngap_PDUSessionResourceModifyResponseIEs_t* ngap_ie =
+        (Ngap_PDUSessionResourceModifyResponseIEs_t*)
+            pduSessionResourceModifyResponseIes->protocolIEs->list.array[i];
+    switch (ngap_ie->id) {
       case Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID: {
-        if (pduSessionResourceModifyResponseIes->protocolIEs.list.array[i]
-                    ->criticality == Ngap_Criticality_ignore &&
-            pduSessionResourceModifyResponseIes->protocolIEs.list.array[i]
-                    ->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_ignore &&
+            ngap_ie->value.present ==
                 Ngap_PDUSessionResourceModifyResponseIEs__value_PR_AMF_UE_NGAP_ID) {
           if (!NgapUeMessage::m_AmfUeNgapId.decode(
-                  pduSessionResourceModifyResponseIes->protocolIEs.list
-                      .array[i]
-                      ->value.choice.AMF_UE_NGAP_ID)) {
+                  ngap_ie->value.choice.AMF_UE_NGAP_ID)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP AMF_UE_NGAP_ID IE error");
             return false;
@@ -202,15 +203,11 @@ bool PduSessionResourceModifyResponseMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID: {
-        if (pduSessionResourceModifyResponseIes->protocolIEs.list.array[i]
-                    ->criticality == Ngap_Criticality_reject &&
-            pduSessionResourceModifyResponseIes->protocolIEs.list.array[i]
-                    ->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
+            ngap_ie->value.present ==
                 Ngap_PDUSessionResourceModifyResponseIEs__value_PR_RAN_UE_NGAP_ID) {
           if (!NgapUeMessage::m_RanUeNgapId.decode(
-                  pduSessionResourceModifyResponseIes->protocolIEs.list
-                      .array[i]
-                      ->value.choice.RAN_UE_NGAP_ID)) {
+                  ngap_ie->value.choice.RAN_UE_NGAP_ID)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP RAN_UE_NGAP_ID IE error");
             return false;
@@ -222,16 +219,12 @@ bool PduSessionResourceModifyResponseMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_PDUSessionResourceModifyListModRes: {
-        if (pduSessionResourceModifyResponseIes->protocolIEs.list.array[i]
-                    ->criticality == Ngap_Criticality_ignore &&
-            pduSessionResourceModifyResponseIes->protocolIEs.list.array[i]
-                    ->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_ignore &&
+            ngap_ie->value.present ==
                 Ngap_PDUSessionResourceModifyResponseIEs__value_PR_PDUSessionResourceModifyListModRes) {
           PduSessionResourceModifyListModRes item_list = {};
           if (!item_list.decode(
-                  pduSessionResourceModifyResponseIes->protocolIEs.list
-                      .array[i]
-                      ->value.choice.PDUSessionResourceModifyListModRes)) {
+                  ngap_ie->value.choice.PDUSessionResourceModifyListModRes)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP PDUSessionResourceModifyListModRes IE error");
             return false;

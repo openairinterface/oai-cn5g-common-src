@@ -5,6 +5,9 @@
 #include "DownlinkUeAssociatedNrppaTransport.hpp"
 
 #include "logger_base.hpp"
+extern "C" {
+#include "Ngap_ProtocolIE_Container_compat.h"
+}
 #include "ngap_utils.hpp"
 #include "utils.hpp"
 
@@ -49,7 +52,7 @@ void DownlinkUeAssociatedNrppaTransportMsg::setAmfUeNgapId(const uint64_t& id) {
   }
 
   ret = ASN_SEQUENCE_ADD(
-      &m_DownlinkUeAssociatedNrppaTransportIes->protocolIEs.list, ie);
+      &m_DownlinkUeAssociatedNrppaTransportIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode AMF_UE_NGAP_ID IE error");
 }
@@ -76,7 +79,7 @@ void DownlinkUeAssociatedNrppaTransportMsg::setRanUeNgapId(
   }
 
   ret = ASN_SEQUENCE_ADD(
-      &m_DownlinkUeAssociatedNrppaTransportIes->protocolIEs.list, ie);
+      &m_DownlinkUeAssociatedNrppaTransportIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode RAN_UE_NGAP_ID IE error");
 }
@@ -109,20 +112,18 @@ bool DownlinkUeAssociatedNrppaTransportMsg::decode(
   }
 
   for (int i = 0;
-       i < m_DownlinkUeAssociatedNrppaTransportIes->protocolIEs.list.count;
+       i < m_DownlinkUeAssociatedNrppaTransportIes->protocolIEs->list.count;
        i++) {
-    switch (m_DownlinkUeAssociatedNrppaTransportIes->protocolIEs.list.array[i]
-                ->id) {
+    Ngap_DownlinkUEAssociatedNRPPaTransportIEs_t* ngap_ie =
+        (Ngap_DownlinkUEAssociatedNRPPaTransportIEs_t*)
+            m_DownlinkUeAssociatedNrppaTransportIes->protocolIEs->list.array[i];
+    switch (ngap_ie->id) {
       case Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID: {
-        if (m_DownlinkUeAssociatedNrppaTransportIes->protocolIEs.list.array[i]
-                    ->criticality == Ngap_Criticality_reject &&
-            m_DownlinkUeAssociatedNrppaTransportIes->protocolIEs.list.array[i]
-                    ->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
+            ngap_ie->value.present ==
                 Ngap_DownlinkUEAssociatedNRPPaTransportIEs__value_PR_AMF_UE_NGAP_ID) {
           if (!NgapUeMessage::m_AmfUeNgapId.decode(
-                  m_DownlinkUeAssociatedNrppaTransportIes->protocolIEs.list
-                      .array[i]
-                      ->value.choice.AMF_UE_NGAP_ID)) {
+                  ngap_ie->value.choice.AMF_UE_NGAP_ID)) {
             oai::logger::logger_common::ngap().error(
                 "Decode NGAP AMF_UE_NGAP_ID IE error");
             return false;
@@ -134,15 +135,11 @@ bool DownlinkUeAssociatedNrppaTransportMsg::decode(
         }
       } break;
       case Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID: {
-        if (m_DownlinkUeAssociatedNrppaTransportIes->protocolIEs.list.array[i]
-                    ->criticality == Ngap_Criticality_reject &&
-            m_DownlinkUeAssociatedNrppaTransportIes->protocolIEs.list.array[i]
-                    ->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
+            ngap_ie->value.present ==
                 Ngap_DownlinkUEAssociatedNRPPaTransportIEs__value_PR_RAN_UE_NGAP_ID) {
           if (!NgapUeMessage::m_RanUeNgapId.decode(
-                  m_DownlinkUeAssociatedNrppaTransportIes->protocolIEs.list
-                      .array[i]
-                      ->value.choice.RAN_UE_NGAP_ID)) {
+                  ngap_ie->value.choice.RAN_UE_NGAP_ID)) {
             oai::logger::logger_common::ngap().error(
                 "Decode NGAP RAN_UE_NGAP_ID IE error");
             return false;
@@ -155,16 +152,11 @@ bool DownlinkUeAssociatedNrppaTransportMsg::decode(
       } break;
 
       case Ngap_ProtocolIE_ID_id_RoutingID: {
-        if (m_DownlinkUeAssociatedNrppaTransportIes->protocolIEs.list.array[i]
-                    ->criticality == Ngap_Criticality_reject &&
-            m_DownlinkUeAssociatedNrppaTransportIes->protocolIEs.list.array[i]
-                    ->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
+            ngap_ie->value.present ==
                 Ngap_DownlinkUEAssociatedNRPPaTransportIEs__value_PR_RoutingID) {
           ngap_utils::octet_string_2_bstring(
-              m_DownlinkUeAssociatedNrppaTransportIes->protocolIEs.list
-                  .array[i]
-                  ->value.choice.RoutingID,
-              m_RoutingId);
+              ngap_ie->value.choice.RoutingID, m_RoutingId);
         } else {
           oai::logger::logger_common::ngap().error(
               "Decode NGAP RoutingID IE error");
@@ -173,16 +165,11 @@ bool DownlinkUeAssociatedNrppaTransportMsg::decode(
 
       } break;
       case Ngap_ProtocolIE_ID_id_NRPPa_PDU: {
-        if (m_DownlinkUeAssociatedNrppaTransportIes->protocolIEs.list.array[i]
-                    ->criticality == Ngap_Criticality_reject &&
-            m_DownlinkUeAssociatedNrppaTransportIes->protocolIEs.list.array[i]
-                    ->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
+            ngap_ie->value.present ==
                 Ngap_DownlinkUEAssociatedNRPPaTransportIEs__value_PR_NRPPa_PDU) {
           ngap_utils::octet_string_2_bstring(
-              m_DownlinkUeAssociatedNrppaTransportIes->protocolIEs.list
-                  .array[i]
-                  ->value.choice.NRPPa_PDU,
-              m_NrppaPdu);
+              ngap_ie->value.choice.NRPPa_PDU, m_NrppaPdu);
         } else {
           oai::logger::logger_common::ngap().error(
               "Decode NGAP NRPPa PDU IE error");
@@ -215,7 +202,7 @@ void DownlinkUeAssociatedNrppaTransportMsg::setRoutingId(const bstring& pdu) {
   ngap_utils::bstring_2_octet_string(m_RoutingId, ie->value.choice.RoutingID);
 
   int ret = ASN_SEQUENCE_ADD(
-      &m_DownlinkUeAssociatedNrppaTransportIes->protocolIEs.list, ie);
+      &m_DownlinkUeAssociatedNrppaTransportIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode RoutingID IE error");
 }
@@ -240,7 +227,7 @@ void DownlinkUeAssociatedNrppaTransportMsg::setNrppaPdu(const bstring& pdu) {
   ngap_utils::bstring_2_octet_string(m_NrppaPdu, ie->value.choice.NRPPa_PDU);
 
   int ret = ASN_SEQUENCE_ADD(
-      &m_DownlinkUeAssociatedNrppaTransportIes->protocolIEs.list, ie);
+      &m_DownlinkUeAssociatedNrppaTransportIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode NRPPa_PDU IE error");
 }

@@ -11,14 +11,22 @@
 #include "AllowedNssai.hpp"
 #include "AmfName.hpp"
 #include "CoreNetworkAssistanceInformationForInactive.hpp"
+#include "FiveGProSeAuthorized.hpp"
+#include "FiveGProSePC5QoSParameters.hpp"
+#include "FiveGProSeUePC5AggregateMaximumBitRate.hpp"
 #include "Guami.hpp"
+#include "ManagementBasedMdtPlmnList.hpp"
 #include "MobilityRestrictionList.hpp"
 #include "NgapUeMessage.hpp"
 #include "PduSessionResourceSetupListCxtReq.hpp"
+#include "QmcConfigInfo.hpp"
 #include "SecurityKey.hpp"
+#include "TargetNssaiInformation.hpp"
+#include "TimeSynchronisationAssistanceInfo.hpp"
 #include "UeAggregateMaxBitRate.hpp"
 #include "UeRadioCapability.hpp"
 #include "UeSecurityCapabilities.hpp"
+#include "UeSliceMaximumBitRateList.hpp"
 
 extern "C" {
 #include "Ngap_InitialContextSetupRequest.h"
@@ -94,6 +102,17 @@ class InitialContextSetupRequestMsg : public NgapUeMessage {
   void setNasPdu(const bstring& pdu);
   bool getNasPdu(bstring& pdu) const;
 
+  void setManagementBasedMdtPlmnList(const ManagementBasedMdtPlmnList& value);
+  void setTimeSynchronisationAssistanceInfo(
+      const TimeSynchronisationAssistanceInfo& value);
+  void setQmcConfigInfo(const QmcConfigInfo& value);
+  void setTargetNssaiInformation(const TargetNssaiInformation& value);
+  void setUeSliceMaximumBitRateList(const UeSliceMaximumBitRateList& value);
+  void setFiveGProSeAuthorized(const FiveGProSeAuthorized& value);
+  void setFiveGProSeUePC5AggregateMaximumBitRate(
+      const FiveGProSeUePC5AggregateMaximumBitRate& value);
+  void setFiveGProSePC5QoSParameters(const FiveGProSePC5QoSParameters& value);
+
  private:
   Ngap_InitialContextSetupRequest_t* m_InitialContextSetupRequestIes;
 
@@ -132,7 +151,16 @@ class InitialContextSetupRequestMsg : public NgapUeMessage {
   // TODO: CE-mode-B Restricted (Optional, Rel 16.14.0)
   // TODO: UE User Plane CIoT Support Indicator (Optional, Rel 16.14.0)
   // TODO: RG Level Wireline Access Characteristics (Optional, Rel 16.14.0)
-  // TODO: Management Based MDT PLMN List (Optional, Rel 16.14.0)
+  std::optional<ManagementBasedMdtPlmnList> m_ManagementBasedMdtPlmnList;
+  std::optional<TimeSynchronisationAssistanceInfo>
+      m_TimeSynchronisationAssistanceInfo;
+  std::optional<QmcConfigInfo> m_QmcConfigInfo;
+  std::optional<TargetNssaiInformation> m_TargetNssaiInformation;
+  std::optional<UeSliceMaximumBitRateList> m_UeSliceMaximumBitRateList;
+  std::optional<FiveGProSeAuthorized> m_FiveGProSeAuthorized;
+  std::optional<FiveGProSeUePC5AggregateMaximumBitRate>
+      m_FiveGProSeUePC5AggregateMaximumBitRate;
+  std::optional<FiveGProSePC5QoSParameters> m_FiveGProSePC5QoSParameters;
   // TODO: UE Radio Capability ID (Optional, Rel 16.14.0)
 };
 

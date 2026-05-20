@@ -12,6 +12,8 @@
 #include "NasPdu.hpp"
 #include "NgapIesStruct.hpp"
 #include "NgapMessage.hpp"
+#include "NpnAccessInformation.hpp"
+#include "RedCapIndication.hpp"
 #include "RrcEstablishmentCause.hpp"
 #include "UeContextRequest.hpp"
 #include "UserLocationInformation.hpp"
@@ -55,6 +57,9 @@ class InitialUeMessageMsg : public NgapMessage {
   void setAllowedNssai(const AllowedNSSAI& allowedNssai);
   bool getAllowedNssai(AllowedNSSAI& allowedNssai) const;
 
+  bool getRedCapIndication(RedCapIndication& value) const;
+  bool getNpnAccessInformation(NpnAccessInformation& value) const;
+
  private:
   Ngap_InitialUEMessage_t* m_InitialUEMessageIes;
 
@@ -65,7 +70,9 @@ class InitialUeMessageMsg : public NgapMessage {
   std::optional<FiveGSTmsi> m_FiveGSTmsi;              // 5G-S-TMSI (Optional)
   std::optional<AmfSetId> m_AmfSetId;                  // Optional
   std::optional<UeContextRequest> m_UeContextRequest;  // Optional
-  std::optional<AllowedNSSAI> m_AllowedNssai;          // Optional
+  std::optional<AllowedNSSAI> m_AllowedNssai;                       // Optional
+  std::optional<RedCapIndication> m_RedCapIndication;               // Rel-17
+  std::optional<NpnAccessInformation> m_NpnAccessInformation;      // Rel-17
   // TODO: Source to Target AMF Information Reroute (Optional)
   // TODO: Selected PLMN Identity (Optional, Rel 16.14.0)
   // TODO: IAB Node Indication (Optional, Rel 16.14.0)
@@ -73,7 +80,6 @@ class InitialUeMessageMsg : public NgapMessage {
   // TODO: LTE-M Indication (Optional, Rel 16.14.0)
   // TODO: EDT Session (Optional, Rel 16.14.0)
   // TODO: Authenticated Indication (Optional, Rel 16.14.0)
-  // TODO: NPN Access Information (Optional, Rel 16.14.0)
 };
 
 }  // namespace oai::ngap

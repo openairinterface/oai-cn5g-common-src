@@ -5,16 +5,23 @@
 #include "DownlinkNasTransport.hpp"
 
 #include "logger_base.hpp"
+extern "C" {
+#include "Ngap_DownlinkNASTransport.h"
+#include "Ngap_ProtocolIE-Field.h"
+#include "Ngap_ProtocolIE-ID.h"
+#include "Ngap_ProtocolIE_Container_compat.h"
+}
 #include "utils.hpp"
 
 namespace oai::ngap {
 
 //------------------------------------------------------------------------------
 DownLinkNasTransportMsg::DownLinkNasTransportMsg() : NgapUeMessage() {
-  m_DownLinkNasTransportIes = nullptr;
-  m_OldAmf                  = std::nullopt;
-  m_RanPagingPriority       = std::nullopt;
-  m_IndexToRfsp             = std::nullopt;
+  m_DownLinkNasTransportIes  = nullptr;
+  m_OldAmf                   = std::nullopt;
+  m_RanPagingPriority        = std::nullopt;
+  m_IndexToRfsp              = std::nullopt;
+  m_TargetNssaiInformation   = std::nullopt;
 
   setMessageType(NgapMessageType::DOWNLINK_NAS_TRANSPORT);
   initialize();
@@ -48,7 +55,7 @@ void DownLinkNasTransportMsg::setAmfUeNgapId(const uint64_t& id) {
     return;
   }
 
-  ret = ASN_SEQUENCE_ADD(&m_DownLinkNasTransportIes->protocolIEs.list, ie);
+  ret = ASN_SEQUENCE_ADD(&m_DownLinkNasTransportIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode AMF_UE_NGAP_ID IE error");
 }
@@ -72,7 +79,7 @@ void DownLinkNasTransportMsg::setRanUeNgapId(const uint32_t& ranUeNgapId) {
     return;
   }
 
-  ret = ASN_SEQUENCE_ADD(&m_DownLinkNasTransportIes->protocolIEs.list, ie);
+  ret = ASN_SEQUENCE_ADD(&m_DownLinkNasTransportIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode RAN_UE_NGAP_ID IE error");
 }
@@ -97,7 +104,7 @@ void DownLinkNasTransportMsg::setOldAmf(const std::string& name) {
     return;
   }
 
-  ret = ASN_SEQUENCE_ADD(&m_DownLinkNasTransportIes->protocolIEs.list, ie);
+  ret = ASN_SEQUENCE_ADD(&m_DownLinkNasTransportIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode oldAmfName IE error");
 }
@@ -132,7 +139,7 @@ bool DownLinkNasTransportMsg::setRanPagingPriority(
     return false;
   }
 
-  ret = ASN_SEQUENCE_ADD(&m_DownLinkNasTransportIes->protocolIEs.list, ie);
+  ret = ASN_SEQUENCE_ADD(&m_DownLinkNasTransportIes->protocolIEs->list, ie);
   if (ret != 0) {
     oai::logger::logger_common::ngap().error(
         "Encode NGAP RANPagingPriority IE error");
@@ -167,7 +174,7 @@ void DownLinkNasTransportMsg::setNasPdu(const bstring& pdu) {
     return;
   }
 
-  ret = ASN_SEQUENCE_ADD(&m_DownLinkNasTransportIes->protocolIEs.list, ie);
+  ret = ASN_SEQUENCE_ADD(&m_DownLinkNasTransportIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode NAS_PDU IE error");
 }
@@ -191,8 +198,9 @@ void DownLinkNasTransportMsg::setMobilityRestrictionList(
   ie->value.present =
       Ngap_DownlinkNASTransport_IEs__value_PR_MobilityRestrictionList;
 
+  if (!ie->value.choice.MobilityRestrictionList) ie->value.choice.MobilityRestrictionList = (Ngap_MobilityRestrictionList_t*) calloc(1, sizeof(Ngap_MobilityRestrictionList_t));
   int ret = m_MobilityRestrictionList.value().encode(
-      ie->value.choice.MobilityRestrictionList);
+      *ie->value.choice.MobilityRestrictionList);
   if (!ret) {
     oai::logger::logger_common::ngap().error(
         "Encode MobilityRestrictionList IE error");
@@ -200,7 +208,7 @@ void DownLinkNasTransportMsg::setMobilityRestrictionList(
     return;
   }
 
-  ret = ASN_SEQUENCE_ADD(&m_DownLinkNasTransportIes->protocolIEs.list, ie);
+  ret = ASN_SEQUENCE_ADD(&m_DownLinkNasTransportIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode NGAP MobilityRestrictionList IE error");
@@ -238,7 +246,7 @@ void DownLinkNasTransportMsg::setUeAggregateMaxBitRate(
     return;
   }
 
-  ret = ASN_SEQUENCE_ADD(&m_DownLinkNasTransportIes->protocolIEs.list, ie);
+  ret = ASN_SEQUENCE_ADD(&m_DownLinkNasTransportIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode NGAP UEAggregateMaximumBitRate IE error");
@@ -273,7 +281,7 @@ void DownLinkNasTransportMsg::setIndex2RatFrequencySelectionPriority(
     return;
   }
 
-  ret = ASN_SEQUENCE_ADD(&m_DownLinkNasTransportIes->protocolIEs.list, ie);
+  ret = ASN_SEQUENCE_ADD(&m_DownLinkNasTransportIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode IndexToRFSP IE error");
 }
@@ -306,7 +314,7 @@ void DownLinkNasTransportMsg::setAllowedNssai(
     return;
   }
 
-  ret = ASN_SEQUENCE_ADD(&m_DownLinkNasTransportIes->protocolIEs.list, ie);
+  ret = ASN_SEQUENCE_ADD(&m_DownLinkNasTransportIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode AllowedNSSAI IE error");
 }
@@ -343,16 +351,18 @@ bool DownLinkNasTransportMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         "Decode NGAP MessageType IE error");
     return false;
   }
-  for (int i = 0; i < m_DownLinkNasTransportIes->protocolIEs.list.count; i++) {
-    switch (m_DownLinkNasTransportIes->protocolIEs.list.array[i]->id) {
+  for (int i = 0; i < m_DownLinkNasTransportIes->protocolIEs->list.count; i++) {
+    Ngap_DownlinkNASTransport_IEs_t* ngap_ie =
+        (Ngap_DownlinkNASTransport_IEs_t*) m_DownLinkNasTransportIes->protocolIEs->list.array[i];
+    switch (ngap_ie->id) {
       case Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID: {
-        if (m_DownLinkNasTransportIes->protocolIEs.list.array[i]->criticality ==
+        if (ngap_ie->criticality ==
                 Ngap_Criticality_reject &&
-            m_DownLinkNasTransportIes->protocolIEs.list.array[i]
+            ngap_ie
                     ->value.present ==
                 Ngap_DownlinkNASTransport_IEs__value_PR_AMF_UE_NGAP_ID) {
           if (!NgapUeMessage::m_AmfUeNgapId.decode(
-                  m_DownLinkNasTransportIes->protocolIEs.list.array[i]
+                  ngap_ie
                       ->value.choice.AMF_UE_NGAP_ID)) {
             oai::logger::logger_common::ngap().error(
                 "Decode NGAP AMF_UE_NGAP_ID IE error");
@@ -365,13 +375,13 @@ bool DownLinkNasTransportMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID: {
-        if (m_DownLinkNasTransportIes->protocolIEs.list.array[i]->criticality ==
+        if (ngap_ie->criticality ==
                 Ngap_Criticality_reject &&
-            m_DownLinkNasTransportIes->protocolIEs.list.array[i]
+            ngap_ie
                     ->value.present ==
                 Ngap_DownlinkNASTransport_IEs__value_PR_RAN_UE_NGAP_ID) {
           if (!NgapUeMessage::m_RanUeNgapId.decode(
-                  m_DownLinkNasTransportIes->protocolIEs.list.array[i]
+                  ngap_ie
                       ->value.choice.RAN_UE_NGAP_ID)) {
             oai::logger::logger_common::ngap().error(
                 "Decode NGAP RAN_UE_NGAP_ID IE error");
@@ -384,13 +394,13 @@ bool DownLinkNasTransportMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_OldAMF: {
-        if (m_DownLinkNasTransportIes->protocolIEs.list.array[i]->criticality ==
+        if (ngap_ie->criticality ==
                 Ngap_Criticality_reject &&
-            m_DownLinkNasTransportIes->protocolIEs.list.array[i]
+            ngap_ie
                     ->value.present ==
                 Ngap_DownlinkNASTransport_IEs__value_PR_AMFName) {
           AmfName tmp = {};
-          if (!tmp.decode(m_DownLinkNasTransportIes->protocolIEs.list.array[i]
+          if (!tmp.decode(ngap_ie
                               ->value.choice.AMFName)) {
             oai::logger::logger_common::ngap().error(
                 "Decode NGAP OldAMFName IE error");
@@ -404,13 +414,13 @@ bool DownLinkNasTransportMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_RANPagingPriority: {
-        if (m_DownLinkNasTransportIes->protocolIEs.list.array[i]->criticality ==
+        if (ngap_ie->criticality ==
                 Ngap_Criticality_ignore &&
-            m_DownLinkNasTransportIes->protocolIEs.list.array[i]
+            ngap_ie
                     ->value.present ==
                 Ngap_DownlinkNASTransport_IEs__value_PR_RANPagingPriority) {
           RanPagingPriority tmp = {};
-          if (!tmp.decode(m_DownLinkNasTransportIes->protocolIEs.list.array[i]
+          if (!tmp.decode(ngap_ie
                               ->value.choice.RANPagingPriority)) {
             oai::logger::logger_common::ngap().error(
                 "Decode NGAP RANPagingPriority IE error");
@@ -424,13 +434,13 @@ bool DownLinkNasTransportMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_NAS_PDU: {
-        if (m_DownLinkNasTransportIes->protocolIEs.list.array[i]->criticality ==
+        if (ngap_ie->criticality ==
                 Ngap_Criticality_reject &&
-            m_DownLinkNasTransportIes->protocolIEs.list.array[i]
+            ngap_ie
                     ->value.present ==
                 Ngap_DownlinkNASTransport_IEs__value_PR_NAS_PDU) {
           if (!m_NasPdu.decode(
-                  m_DownLinkNasTransportIes->protocolIEs.list.array[i]
+                  ngap_ie
                       ->value.choice.NAS_PDU)) {
             oai::logger::logger_common::ngap().error(
                 "Decode NGAP NAS_PDU IE error");
@@ -444,14 +454,14 @@ bool DownLinkNasTransportMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
       } break;
 
       case Ngap_ProtocolIE_ID_id_MobilityRestrictionList: {
-        if (m_DownLinkNasTransportIes->protocolIEs.list.array[i]->criticality ==
+        if (ngap_ie->criticality ==
                 Ngap_Criticality_ignore &&
-            m_DownLinkNasTransportIes->protocolIEs.list.array[i]
+            ngap_ie
                     ->value.present ==
                 Ngap_DownlinkNASTransport_IEs__value_PR_MobilityRestrictionList) {
           MobilityRestrictionList tmp = {};
-          if (!tmp.decode(m_DownLinkNasTransportIes->protocolIEs.list.array[i]
-                              ->value.choice.MobilityRestrictionList)) {
+          if (!ngap_ie->value.choice.MobilityRestrictionList) return false;
+          if (!tmp.decode(*ngap_ie->value.choice.MobilityRestrictionList)) {
             oai::logger::logger_common::ngap().error(
                 "Decode NGAP MobilityRestrictionList IE error");
             return false;
@@ -466,13 +476,13 @@ bool DownLinkNasTransportMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
       } break;
 
       case Ngap_ProtocolIE_ID_id_IndexToRFSP: {
-        if (m_DownLinkNasTransportIes->protocolIEs.list.array[i]->criticality ==
+        if (ngap_ie->criticality ==
                 Ngap_Criticality_ignore &&
-            m_DownLinkNasTransportIes->protocolIEs.list.array[i]
+            ngap_ie
                     ->value.present ==
                 Ngap_DownlinkNASTransport_IEs__value_PR_IndexToRFSP) {
           IndexToRfsp tmp = {};
-          if (!tmp.decode(m_DownLinkNasTransportIes->protocolIEs.list.array[i]
+          if (!tmp.decode(ngap_ie
                               ->value.choice.IndexToRFSP)) {
             oai::logger::logger_common::ngap().error(
                 "Decode NGAP IndexToRFSP IE error");
@@ -487,13 +497,13 @@ bool DownLinkNasTransportMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
       } break;
 
       case Ngap_ProtocolIE_ID_id_UEAggregateMaximumBitRate: {
-        if (m_DownLinkNasTransportIes->protocolIEs.list.array[i]->criticality ==
+        if (ngap_ie->criticality ==
                 Ngap_Criticality_ignore &&
-            m_DownLinkNasTransportIes->protocolIEs.list.array[i]
+            ngap_ie
                     ->value.present ==
                 Ngap_DownlinkNASTransport_IEs__value_PR_UEAggregateMaximumBitRate) {
           UeAggregateMaxBitRate tmp = {};
-          if (!tmp.decode(m_DownLinkNasTransportIes->protocolIEs.list.array[i]
+          if (!tmp.decode(ngap_ie
                               ->value.choice.UEAggregateMaximumBitRate)) {
             oai::logger::logger_common::ngap().error(
                 "Decode NGAP UEAggregateMaximumBitRate IE error");
@@ -508,13 +518,13 @@ bool DownLinkNasTransportMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
       } break;
 
       case Ngap_ProtocolIE_ID_id_AllowedNSSAI: {
-        if (m_DownLinkNasTransportIes->protocolIEs.list.array[i]->criticality ==
+        if (ngap_ie->criticality ==
                 Ngap_Criticality_reject &&
-            m_DownLinkNasTransportIes->protocolIEs.list.array[i]
+            ngap_ie
                     ->value.present ==
                 Ngap_DownlinkNASTransport_IEs__value_PR_AllowedNSSAI) {
           AllowedNSSAI tmp = {};
-          if (!tmp.decode(m_DownLinkNasTransportIes->protocolIEs.list.array[i]
+          if (!tmp.decode(ngap_ie
                               ->value.choice.AllowedNSSAI)) {
             oai::logger::logger_common::ngap().error(
                 "Decode NGAP AllowedNSSAI IE error");
@@ -528,6 +538,19 @@ bool DownLinkNasTransportMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
 
+      case Ngap_ProtocolIE_ID_id_TargetNSSAIInformation: {
+        if (ngap_ie->value.present ==
+            Ngap_DownlinkNASTransport_IEs__value_PR_TargetNSSAIInformation) {
+          TargetNssaiInformation tmp{};
+          if (!tmp.decode(ngap_ie->value.choice.TargetNSSAIInformation)) {
+            oai::logger::logger_common::ngap().error(
+                "Decode NGAP TargetNSSAIInformation IE error");
+            return false;
+          }
+          m_TargetNssaiInformation =
+              std::make_optional<TargetNssaiInformation>(tmp);
+        }
+      } break;
       default: {
         oai::logger::logger_common::ngap().error(
             "Decode NGAP message PDU error");
@@ -537,6 +560,30 @@ bool DownLinkNasTransportMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
   }
 
   return true;
+}
+
+//------------------------------------------------------------------------------
+void DownLinkNasTransportMsg::setTargetNssaiInformation(
+    const TargetNssaiInformation& value) {
+  m_TargetNssaiInformation = std::make_optional<TargetNssaiInformation>(value);
+  Ngap_DownlinkNASTransport_IEs_t* ie =
+      (Ngap_DownlinkNASTransport_IEs_t*) calloc(
+          1, sizeof(Ngap_DownlinkNASTransport_IEs_t));
+  ie->id          = Ngap_ProtocolIE_ID_id_TargetNSSAIInformation;
+  ie->criticality = Ngap_Criticality_ignore;
+  ie->value.present =
+      Ngap_DownlinkNASTransport_IEs__value_PR_TargetNSSAIInformation;
+  if (!m_TargetNssaiInformation.value().encode(
+          ie->value.choice.TargetNSSAIInformation)) {
+    oai::logger::logger_common::ngap().error(
+        "Encode TargetNssaiInformation IE error");
+    free(ie);
+    return;
+  }
+  int ret = ASN_SEQUENCE_ADD(&m_DownLinkNasTransportIes->protocolIEs->list, ie);
+  if (ret != 0)
+    oai::logger::logger_common::ngap().error(
+        "Encode TargetNssaiInformation IE error");
 }
 
 }  // namespace oai::ngap

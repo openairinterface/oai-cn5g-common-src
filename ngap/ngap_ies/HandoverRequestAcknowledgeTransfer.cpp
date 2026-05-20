@@ -99,8 +99,9 @@ bool HandoverRequestAcknowledgeTransfer::decode(uint8_t* buf, int bufSize) {
   oai::logger::logger_common::ngap().debug(
       "rc.consumed to decode: %d", rc.consumed);
 
+  if (!m_HandoverRequestAcknowledegTransferIe->dL_NGU_UP_TNLInformation) return false;
   if (!m_DlNgUUpTnlInformation.decode(
-          m_HandoverRequestAcknowledegTransferIe->dL_NGU_UP_TNLInformation)) {
+          *m_HandoverRequestAcknowledegTransferIe->dL_NGU_UP_TNLInformation)) {
     oai::logger::logger_common::ngap().error(
         "Decode NGAP DL NG-U UP TNL Information IE error");
     return false;
@@ -121,8 +122,9 @@ bool HandoverRequestAcknowledgeTransfer::decode(uint8_t* buf, int bufSize) {
             dlForwardingUpTnlInformation);
   }
 
+  if (!m_HandoverRequestAcknowledegTransferIe->qosFlowSetupResponseList) return false;
   if (!m_QosFlowSetupResponseList.decode(
-          m_HandoverRequestAcknowledegTransferIe->qosFlowSetupResponseList)) {
+          *m_HandoverRequestAcknowledegTransferIe->qosFlowSetupResponseList)) {
     oai::logger::logger_common::ngap().error(
         "Decode NGAP QosFlowSetupResponseList IE error");
     return false;

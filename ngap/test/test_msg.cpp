@@ -7,10 +7,25 @@ extern "C" {
 }
 #include "UplinkNasTransport.hpp"
 #include "ngap_utils.hpp"
-#include <glog/logging.h>
+#include "logger_base.hpp"
 #include <gtest/gtest.h>
 
 #include <string>
+
+// ---------------------------------------------------------------------------
+// Logger initialization: the NGAP decode functions use oai::logger::ngap().
+// Register all standard log categories before any test body runs.
+// ---------------------------------------------------------------------------
+class NgapLoggerEnvironment : public ::testing::Environment {
+ public:
+  void SetUp() override {
+    static oai::logger::logger_common s_logger("NgapTest", /*stdout=*/false,
+                                               /*rotfile=*/false);
+  }
+};
+
+static const ::testing::Environment* const kNgapLogEnv =
+    ::testing::AddGlobalTestEnvironment(new NgapLoggerEnvironment);
 
 using ::testing::Test;
 
@@ -84,4 +99,28 @@ Country Code (MCC): France (208) Mobile Network Code (MNC): Unknown (92) tAC: 1
   oai::ngap::UplinkNasTransportMsg* uplink_nas_transport =
       new oai::ngap::UplinkNasTransportMsg();
   EXPECT_NE(uplink_nas_transport->decode(ngap_msg_pdu), 0);
+}
+
+// Stage 1 regression placeholders: verify unknown IEs do not truncate decoding.
+// Replace SUCCEED() with real APER bytes in Stage 10.
+TEST(TestSuiteNGAPMsg, UnknownIeDoesNotTruncateInitialUeMessage) {
+  SUCCEED();
+}
+
+TEST(TestSuiteNGAPMsg, UnknownIeDoesNotTruncatePaging) {
+  SUCCEED();
+}
+
+TEST(TestSuiteNGAPMsg, UnknownIeDoesNotTruncateHandoverNotify) {
+  SUCCEED();
+}
+
+TEST(TestSuiteNGAPMsg, CauseRadioNetworkRedcapUeNotSupported) {
+  // TODO Stage 10: encode + APER decode round-trip for redcap_ue_not_supported
+  SUCCEED() << "Placeholder — real APER round-trip deferred to Stage 10";
+}
+
+TEST(TestSuiteNGAPMsg, CauseRadioNetworkUnknownMbsSessionId) {
+  // TODO Stage 10: encode + APER decode round-trip for unknown_MBS_Session_ID
+  SUCCEED() << "Placeholder — real APER round-trip deferred to Stage 10";
 }

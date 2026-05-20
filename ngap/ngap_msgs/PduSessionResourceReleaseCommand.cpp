@@ -5,6 +5,9 @@
 #include "PduSessionResourceReleaseCommand.hpp"
 
 #include "logger_base.hpp"
+extern "C" {
+#include "Ngap_ProtocolIE_Container_compat.h"
+}
 #include "utils.hpp"
 
 namespace oai::ngap {
@@ -52,7 +55,7 @@ void PduSessionResourceReleaseCommandMsg::setAmfUeNgapId(const uint64_t& id) {
   }
 
   ret = ASN_SEQUENCE_ADD(
-      &m_PduSessionResourceReleaseCommandIes->protocolIEs.list, ie);
+      &m_PduSessionResourceReleaseCommandIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().warn("Encode AMF_UE_NGAP_ID IE error");
 }
@@ -79,7 +82,7 @@ void PduSessionResourceReleaseCommandMsg::setRanUeNgapId(
   }
 
   ret = ASN_SEQUENCE_ADD(
-      &m_PduSessionResourceReleaseCommandIes->protocolIEs.list, ie);
+      &m_PduSessionResourceReleaseCommandIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().warn("Encode RAN_UE_NGAP_ID IE error");
 }
@@ -109,7 +112,7 @@ void PduSessionResourceReleaseCommandMsg::setRanPagingPriority(
   }
 
   ret = ASN_SEQUENCE_ADD(
-      &m_PduSessionResourceReleaseCommandIes->protocolIEs.list, ie);
+      &m_PduSessionResourceReleaseCommandIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().warn(
         "Encode RANPagingPriority IE error");
@@ -145,7 +148,7 @@ void PduSessionResourceReleaseCommandMsg::setNasPdu(const bstring& pdu) {
   }
 
   ret = ASN_SEQUENCE_ADD(
-      &m_PduSessionResourceReleaseCommandIes->protocolIEs.list, ie);
+      &m_PduSessionResourceReleaseCommandIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().warn("Encode NAS_PDU IE error");
 }
@@ -190,7 +193,7 @@ void PduSessionResourceReleaseCommandMsg::setPduSessionResourceToReleaseList(
   }
 
   ret = ASN_SEQUENCE_ADD(
-      &m_PduSessionResourceReleaseCommandIes->protocolIEs.list, ie);
+      &m_PduSessionResourceReleaseCommandIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().warn(
         "Encode PDUSessionResourceToReleaseListRelCmd IE error");
@@ -241,19 +244,17 @@ bool PduSessionResourceReleaseCommandMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
   }
 
   for (int i = 0;
-       i < m_PduSessionResourceReleaseCommandIes->protocolIEs.list.count; i++) {
-    switch (
-        m_PduSessionResourceReleaseCommandIes->protocolIEs.list.array[i]->id) {
+       i < m_PduSessionResourceReleaseCommandIes->protocolIEs->list.count; i++) {
+    Ngap_PDUSessionResourceReleaseCommandIEs_t* ngap_ie =
+        (Ngap_PDUSessionResourceReleaseCommandIEs_t*)
+            m_PduSessionResourceReleaseCommandIes->protocolIEs->list.array[i];
+    switch (ngap_ie->id) {
       case Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID: {
-        if (m_PduSessionResourceReleaseCommandIes->protocolIEs.list.array[i]
-                    ->criticality == Ngap_Criticality_reject &&
-            m_PduSessionResourceReleaseCommandIes->protocolIEs.list.array[i]
-                    ->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
+            ngap_ie->value.present ==
                 Ngap_PDUSessionResourceReleaseCommandIEs__value_PR_AMF_UE_NGAP_ID) {
           if (!NgapUeMessage::m_AmfUeNgapId.decode(
-                  m_PduSessionResourceReleaseCommandIes->protocolIEs.list
-                      .array[i]
-                      ->value.choice.AMF_UE_NGAP_ID)) {
+                  ngap_ie->value.choice.AMF_UE_NGAP_ID)) {
             oai::logger::logger_common::ngap().warn(
                 "Decoded NGAP AMF_UE_NGAP_ID IE error");
             return false;
@@ -266,15 +267,11 @@ bool PduSessionResourceReleaseCommandMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
       } break;
 
       case Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID: {
-        if (m_PduSessionResourceReleaseCommandIes->protocolIEs.list.array[i]
-                    ->criticality == Ngap_Criticality_reject &&
-            m_PduSessionResourceReleaseCommandIes->protocolIEs.list.array[i]
-                    ->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
+            ngap_ie->value.present ==
                 Ngap_PDUSessionResourceReleaseCommandIEs__value_PR_RAN_UE_NGAP_ID) {
           if (!NgapUeMessage::m_RanUeNgapId.decode(
-                  m_PduSessionResourceReleaseCommandIes->protocolIEs.list
-                      .array[i]
-                      ->value.choice.RAN_UE_NGAP_ID)) {
+                  ngap_ie->value.choice.RAN_UE_NGAP_ID)) {
             oai::logger::logger_common::ngap().warn(
                 "Decoded NGAP RAN_UE_NGAP_ID IE error");
             return false;
@@ -287,16 +284,11 @@ bool PduSessionResourceReleaseCommandMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
       } break;
 
       case Ngap_ProtocolIE_ID_id_RANPagingPriority: {
-        if (m_PduSessionResourceReleaseCommandIes->protocolIEs.list.array[i]
-                    ->criticality == Ngap_Criticality_ignore &&
-            m_PduSessionResourceReleaseCommandIes->protocolIEs.list.array[i]
-                    ->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_ignore &&
+            ngap_ie->value.present ==
                 Ngap_PDUSessionResourceReleaseCommandIEs__value_PR_RANPagingPriority) {
           RanPagingPriority tmp = {};
-          if (!tmp.decode(
-                  m_PduSessionResourceReleaseCommandIes->protocolIEs.list
-                      .array[i]
-                      ->value.choice.RANPagingPriority)) {
+          if (!tmp.decode(ngap_ie->value.choice.RANPagingPriority)) {
             oai::logger::logger_common::ngap().warn(
                 "Decoded NGAP RANPagingPriority IE error");
             return false;
@@ -310,16 +302,11 @@ bool PduSessionResourceReleaseCommandMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
       } break;
 
       case Ngap_ProtocolIE_ID_id_NAS_PDU: {
-        if (m_PduSessionResourceReleaseCommandIes->protocolIEs.list.array[i]
-                    ->criticality == Ngap_Criticality_reject &&
-            m_PduSessionResourceReleaseCommandIes->protocolIEs.list.array[i]
-                    ->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
+            ngap_ie->value.present ==
                 Ngap_PDUSessionResourceReleaseCommandIEs__value_PR_NAS_PDU) {
           NasPdu tmp = {};
-          if (!tmp.decode(
-                  m_PduSessionResourceReleaseCommandIes->protocolIEs.list
-                      .array[i]
-                      ->value.choice.NAS_PDU)) {
+          if (!tmp.decode(ngap_ie->value.choice.NAS_PDU)) {
             oai::logger::logger_common::ngap().warn(
                 "Decoded NGAP NAS_PDU IE error");
             return false;
@@ -333,15 +320,11 @@ bool PduSessionResourceReleaseCommandMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
       } break;
 
       case Ngap_ProtocolIE_ID_id_PDUSessionResourceToReleaseListRelCmd: {
-        if (m_PduSessionResourceReleaseCommandIes->protocolIEs.list.array[i]
-                    ->criticality == Ngap_Criticality_reject &&
-            m_PduSessionResourceReleaseCommandIes->protocolIEs.list.array[i]
-                    ->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
+            ngap_ie->value.present ==
                 Ngap_PDUSessionResourceReleaseCommandIEs__value_PR_PDUSessionResourceToReleaseListRelCmd) {
           if (!m_PduSessionResourceToReleaseList.decode(
-                  m_PduSessionResourceReleaseCommandIes->protocolIEs.list
-                      .array[i]
-                      ->value.choice.PDUSessionResourceToReleaseListRelCmd)) {
+                  ngap_ie->value.choice.PDUSessionResourceToReleaseListRelCmd)) {
             oai::logger::logger_common::ngap().warn(
                 "Decoded NGAP PDUSessionResourceToReleaseListRelCmd IE "
                 "error");

@@ -35,6 +35,8 @@ InitialContextSetupRequestMsg::InitialContextSetupRequestMsg()
   m_FiveGProSeAuthorized                        = std::nullopt;
   m_FiveGProSeUePC5AggregateMaximumBitRate      = std::nullopt;
   m_FiveGProSePC5QoSParameters                  = std::nullopt;
+  m_IabAuthorized                               = std::nullopt;
+  m_UeRadioCapabilityId                             = std::nullopt;
 
   setMessageType(NgapMessageType::INITIAL_CONTEXT_SETUP_REQUEST);
   initialize();
@@ -1149,6 +1151,53 @@ void InitialContextSetupRequestMsg::setFiveGProSePC5QoSParameters(
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode FiveGProSePC5QoSParameters IE error");
+}
+
+//------------------------------------------------------------------------------
+void InitialContextSetupRequestMsg::setIabAuthorized(
+    const IabAuthorized& value) {
+  m_IabAuthorized = std::make_optional<IabAuthorized>(value);
+  Ngap_InitialContextSetupRequestIEs_t* ie =
+      (Ngap_InitialContextSetupRequestIEs_t*) calloc(
+          1, sizeof(Ngap_InitialContextSetupRequestIEs_t));
+  ie->id          = Ngap_ProtocolIE_ID_id_IAB_Authorized;
+  ie->criticality = Ngap_Criticality_ignore;
+  ie->value.present =
+      Ngap_InitialContextSetupRequestIEs__value_PR_IAB_Authorized;
+  if (!m_IabAuthorized.value().encode(ie->value.choice.IAB_Authorized)) {
+    oai::logger::logger_common::ngap().error("Encode IabAuthorized IE error");
+    free(ie);
+    return;
+  }
+  int ret = ASN_SEQUENCE_ADD(
+      &m_InitialContextSetupRequestIes->protocolIEs->list, ie);
+  if (ret != 0)
+    oai::logger::logger_common::ngap().error("Encode IabAuthorized IE error");
+}
+
+//------------------------------------------------------------------------------
+void InitialContextSetupRequestMsg::setUeRadioCapabilityId(
+    const NgapUeRadioCapabilityId& value) {
+  m_UeRadioCapabilityId = std::make_optional<NgapUeRadioCapabilityId>(value);
+  Ngap_InitialContextSetupRequestIEs_t* ie =
+      (Ngap_InitialContextSetupRequestIEs_t*) calloc(
+          1, sizeof(Ngap_InitialContextSetupRequestIEs_t));
+  ie->id          = Ngap_ProtocolIE_ID_id_UERadioCapabilityID;
+  ie->criticality = Ngap_Criticality_reject;
+  ie->value.present =
+      Ngap_InitialContextSetupRequestIEs__value_PR_UERadioCapabilityID;
+  if (!m_UeRadioCapabilityId.value().encode(
+          ie->value.choice.UERadioCapabilityID)) {
+    oai::logger::logger_common::ngap().error(
+        "Encode UeRadioCapabilityId IE error");
+    free(ie);
+    return;
+  }
+  int ret = ASN_SEQUENCE_ADD(
+      &m_InitialContextSetupRequestIes->protocolIEs->list, ie);
+  if (ret != 0)
+    oai::logger::logger_common::ngap().error(
+        "Encode UeRadioCapabilityId IE error");
 }
 
 }  // namespace oai::ngap

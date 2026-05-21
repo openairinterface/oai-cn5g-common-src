@@ -24,7 +24,9 @@
 #include "TargetNssaiInformation.hpp"
 #include "TimeSynchronisationAssistanceInfo.hpp"
 #include "UeAggregateMaxBitRate.hpp"
+#include "IabAuthorized.hpp"
 #include "UeRadioCapability.hpp"
+#include "NgapUeRadioCapabilityId.hpp"
 #include "UeSecurityCapabilities.hpp"
 #include "UeSliceMaximumBitRateList.hpp"
 
@@ -113,6 +115,9 @@ class InitialContextSetupRequestMsg : public NgapUeMessage {
       const FiveGProSeUePC5AggregateMaximumBitRate& value);
   void setFiveGProSePC5QoSParameters(const FiveGProSePC5QoSParameters& value);
 
+  void setIabAuthorized(const IabAuthorized& value);
+  void setUeRadioCapabilityId(const NgapUeRadioCapabilityId& value);
+
  private:
   Ngap_InitialContextSetupRequest_t* m_InitialContextSetupRequestIes;
 
@@ -139,7 +144,7 @@ class InitialContextSetupRequestMsg : public NgapUeMessage {
   // TODO: Location Reporting Request Type
   // TODO: CN Assisted RAN Parameters Tuning
   // TODO: SRVCC Operation Possible (Optional, Rel 16.14.0)
-  // TODO: IAB Authorized (Optional, Rel 16.14.0)
+  std::optional<IabAuthorized> m_IabAuthorized;  // Optional, Rel-16
   // TODO: Enhanced Coverage Restriction (Optional, Rel 16.14.0)
   // TODO: Extended Connected Time (Optional, Rel 16.14.0)
   // TODO: UE Differentiation Information (Optional, Rel 16.14.0)
@@ -161,7 +166,7 @@ class InitialContextSetupRequestMsg : public NgapUeMessage {
   std::optional<FiveGProSeUePC5AggregateMaximumBitRate>
       m_FiveGProSeUePC5AggregateMaximumBitRate;
   std::optional<FiveGProSePC5QoSParameters> m_FiveGProSePC5QoSParameters;
-  // TODO: UE Radio Capability ID (Optional, Rel 16.14.0)
+  std::optional<NgapUeRadioCapabilityId> m_UeRadioCapabilityId;  // Optional, Rel-16
 };
 
 }  // namespace oai::ngap

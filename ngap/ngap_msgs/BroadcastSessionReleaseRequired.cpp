@@ -77,12 +77,6 @@ bool BroadcastSessionReleaseRequiredMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
                 "Decode NGAP MBS-SessionID IE error");
             return false;
           }
-          // Defensive: session ID must be present (mandatory)
-          if (!m_MbsSessionId.getTmgi(
-                  (uint8_t*&) nullptr, (size_t&) * (size_t*) nullptr)) {
-            // getTmgi with null args is just a presence check placeholder;
-            // real validation is that decode succeeded above.
-          }
         } else {
           oai::logger::logger_common::ngap().error(
               "Decode NGAP MBS-SessionID IE error");

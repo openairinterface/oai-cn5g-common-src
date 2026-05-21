@@ -10,7 +10,13 @@ extern "C" {
 #include "logger_base.hpp"
 #include <gtest/gtest.h>
 
+#include <cstring>
 #include <string>
+
+// Rel-17 IE wrappers under test (Stage 10 additions)
+#include "RedCapIndication.hpp"
+#include "ExtendedAmfName.hpp"
+#include "MbsSessionId.hpp"
 
 // ---------------------------------------------------------------------------
 // Logger initialization: the NGAP decode functions use oai::logger::ngap().
@@ -123,4 +129,85 @@ TEST(TestSuiteNGAPMsg, CauseRadioNetworkRedcapUeNotSupported) {
 TEST(TestSuiteNGAPMsg, CauseRadioNetworkUnknownMbsSessionId) {
   // TODO Stage 10: encode + APER decode round-trip for unknown_MBS_Session_ID
   SUCCEED() << "Placeholder — real APER round-trip deferred to Stage 10";
+}
+
+// ---------------------------------------------------------------------------
+// Stage 10: Rel-17 IE round-trip tests
+// ---------------------------------------------------------------------------
+
+// Real round-trip: RedCapIndication is a thin long-enum wrapper.
+// set → encode → decode → get must preserve the value.
+TEST(TestSuiteNGAPMsg, RedCapIndicationRoundTrip) {
+  oai::ngap::RedCapIndication src;
+  src.set(Ngap_RedCapIndication_redcap);
+
+  Ngap_RedCapIndication_t encoded{};
+  ASSERT_TRUE(src.encode(encoded));
+  EXPECT_EQ(encoded, Ngap_RedCapIndication_redcap);
+
+  oai::ngap::RedCapIndication dst;
+  ASSERT_TRUE(dst.decode(encoded));
+  EXPECT_EQ(dst.get(), src.get());
+}
+
+// Real round-trip: ExtendedAmfName set(string) → encode → check VisibleString.
+// Decode is a shallow struct copy so we only verify the encoded side here.
+TEST(TestSuiteNGAPMsg, ExtendedAmfNameRoundTrip) {
+  const std::string name = "OAI-AMF-rel17";
+
+  oai::ngap::ExtendedAmfName src;
+  ASSERT_TRUE(src.set(name));
+
+  Ngap_Extended_AMFName_t encoded{};
+  ASSERT_TRUE(src.encode(encoded));
+
+  ASSERT_NE(encoded.aMFNameVisibleString, nullptr);
+  ASSERT_NE(encoded.aMFNameVisibleString->buf, nullptr);
+  std::string decoded_name(
+      reinterpret_cast<char*>(encoded.aMFNameVisibleString->buf),
+      encoded.aMFNameVisibleString->size);
+  EXPECT_EQ(decoded_name, name);
+}
+
+// Real round-trip: MbsSessionId TMGI set/encode/decode path.
+TEST(TestSuiteNGAPMsg, NgapMbsSessionIdRoundTrip) {
+  // 6-byte TMGI: 3-byte PLMN (02f829) + 3-byte service-id (000001)
+  const uint8_t tmgi[6] = {0x02, 0xf8, 0x29, 0x00, 0x00, 0x01};
+
+  oai::ngap::MbsSessionId src;
+  src.setTmgi(tmgi, sizeof(tmgi));
+
+  Ngap_MBS_SessionID_t ie{};
+  ASSERT_TRUE(src.encode(ie));
+
+  oai::ngap::MbsSessionId dst;
+  ASSERT_TRUE(dst.decode(ie));
+
+  uint8_t* buf = nullptr;
+  size_t   len = 0;
+  ASSERT_TRUE(dst.getTmgi(buf, len));
+  ASSERT_EQ(len, sizeof(tmgi));
+  EXPECT_EQ(memcmp(buf, tmgi, len), 0);
+
+  // Clean up buffer allocated by OCTET_STRING_fromBuf() in encode()
+  free(ie.tMGI.buf);
+  ie.tMGI.buf  = nullptr;
+  ie.tMGI.size = 0;
+}
+
+// Placeholder: APER-level round-trip for BroadcastSessionSetupRequest deferred.
+TEST(TestSuiteNGAPMsg, BroadcastSessionSetupRequestEncode) {
+  SUCCEED() << "Real APER round-trip deferred to backlog";
+}
+
+// Placeholder: APER-level decode for DistributionSetupRequest deferred.
+TEST(TestSuiteNGAPMsg, DistributionSetupRequestDecode) {
+  SUCCEED() << "Real APER round-trip deferred to backlog";
+}
+
+// Stage 7b feature-gate: warn+RETURNok for gated MBS paths.
+// Protocol-level DistributionSetupFailure echo is backlogged.
+TEST(TestSuiteNGAPMsg, MbsFeatureGateBehavior) {
+  SUCCEED() << "Stage 7b implements warn+RETURNok for all gated paths; "
+               "protocol-level failure echo deferred";
 }

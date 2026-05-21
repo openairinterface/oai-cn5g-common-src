@@ -6,6 +6,7 @@
 #define _EXTENDED_AMF_NAME_H_
 
 #include <string>
+#include <cstring>
 
 extern "C" {
 #include "Ngap_Extended-AMFName.h"
@@ -29,8 +30,16 @@ class ExtendedAmfName {
   const Ngap_Extended_AMFName_t& get() const { return m_Value; }
   void set(const Ngap_Extended_AMFName_t& v) { m_Value = v; }
 
+  /**
+   * Set from a plain string using the VisibleString alternative (§9.3.3.51).
+   * Stores the C-string pointer in aMFNameVisibleString; the caller must ensure
+   * the ExtendedAmfName lifetime exceeds the encode call.
+   */
+  bool set(const std::string& name);
+
  private:
   Ngap_Extended_AMFName_t m_Value{};
+  std::string m_VisibleStringBuf;  // backing store for set(const std::string&)
 };
 
 }  // namespace oai::ngap

@@ -1675,7 +1675,7 @@ class pdi : public pfcp::pfcp_ies_container {
   std::pair<bool, std::vector<pfcp::framed_route_t>> framed_route;
   std::pair<bool, pfcp::framed_routing_t> framed_routing;
   std::pair<bool, pfcp::framed_ipv6_route_t> framed_ipv6_route;
-  std::pair<bool, pfcp::_3gpp_interface_type_t> _3gpp_interface_type;
+  std::pair<bool, pfcp::_3gpp_interface_type_t> source_interface_type;
 
   pdi()
       : source_interface(),
@@ -1690,7 +1690,8 @@ class pdi : public pfcp::pfcp_ies_container {
         qfi(),
         framed_route(),
         framed_routing(),
-        framed_ipv6_route() {}
+        framed_ipv6_route(),
+        source_interface_type() {}
 
   pdi(const pdi& p)
       : source_interface(p.source_interface),
@@ -1705,7 +1706,8 @@ class pdi : public pfcp::pfcp_ies_container {
         qfi(p.qfi),
         framed_route(p.framed_route),
         framed_routing(p.framed_routing),
-        framed_ipv6_route(p.framed_ipv6_route) {}
+        framed_ipv6_route(p.framed_ipv6_route),
+        source_interface_type(p.source_interface_type) {}
 
   // virtual ~pdi() {};
   void set(const pfcp::source_interface_t& v) {
@@ -1761,8 +1763,8 @@ class pdi : public pfcp::pfcp_ies_container {
     framed_ipv6_route.second = v;
   }
   void set(const pfcp::_3gpp_interface_type_t& v) {
-    _3gpp_interface_type.first  = true;
-    _3gpp_interface_type.second = v;
+    source_interface_type.first  = true;
+    source_interface_type.second = v;
   }
 
   bool get(pfcp::source_interface_t& v) const {
@@ -1857,8 +1859,8 @@ class pdi : public pfcp::pfcp_ies_container {
     return false;
   }
   bool get(pfcp::_3gpp_interface_type_t& v) const {
-    if (_3gpp_interface_type.first) {
-      v = _3gpp_interface_type.second;
+    if (source_interface_type.first) {
+      v = source_interface_type.second;
       return true;
     }
     return false;
@@ -1877,6 +1879,8 @@ class create_pdr : public pfcp::pfcp_ies_container {
   std::pair<bool, pfcp::urr_id_t> urr_id;
   std::pair<bool, pfcp::qer_id_t> qer_id;
   std::pair<bool, pfcp::activate_predefined_rules_t> activate_predefined_rules;
+  // std::pair<bool, std::vector<pfcp::activate_predefined_rules_t>>
+  // activate_predefined_rules;
 
   create_pdr()
       : pdr_id(),
@@ -1996,32 +2000,38 @@ class update_forwarding_parameters : public pfcp::pfcp_ies_container {
  public:
   std::pair<bool, pfcp::destination_interface_t> destination_interface;
   std::pair<bool, pfcp::network_instance_t> network_instance;
+  std::pair<bool, pfcp::redirect_information_t> redirect_inforamtion;
   std::pair<bool, pfcp::outer_header_creation_t> outer_header_creation;
   std::pair<bool, pfcp::transport_level_marking_t> transport_level_marking;
   std::pair<bool, pfcp::forwarding_policy_t> forwarding_policy;
   std::pair<bool, pfcp::header_enrichment_t> header_enrichment;
   std::pair<bool, pfcp::pfcpsmreq_flags_t> pfcpsmreq_flags;
   std::pair<bool, pfcp::traffic_endpoint_id_t> linked_traffic_endpoint_id;
+  std::pair<bool, pfcp::_3gpp_interface_type_t> destination_interface_type;
 
   update_forwarding_parameters()
       : destination_interface(),
         network_instance(),
+        redirect_inforamtion(),
         outer_header_creation(),
         transport_level_marking(),
         forwarding_policy(),
         header_enrichment(),
         pfcpsmreq_flags(),
-        linked_traffic_endpoint_id() {}
+        linked_traffic_endpoint_id(),
+        destination_interface_type() {}
 
   update_forwarding_parameters(const update_forwarding_parameters& u)
       : destination_interface(u.destination_interface),
         network_instance(u.network_instance),
+        redirect_inforamtion(u.redirect_inforamtion),
         outer_header_creation(u.outer_header_creation),
         transport_level_marking(u.transport_level_marking),
         forwarding_policy(u.forwarding_policy),
         header_enrichment(u.header_enrichment),
         pfcpsmreq_flags(u.pfcpsmreq_flags),
-        linked_traffic_endpoint_id(u.linked_traffic_endpoint_id) {}
+        linked_traffic_endpoint_id(u.linked_traffic_endpoint_id),
+        destination_interface_type(u.destination_interface_type) {}
 
   // virtual ~update_forwarding_parameters() {};
   void set(const pfcp::destination_interface_t& v) {
@@ -2031,6 +2041,10 @@ class update_forwarding_parameters : public pfcp::pfcp_ies_container {
   void set(const pfcp::network_instance_t& v) {
     network_instance.first  = true;
     network_instance.second = v;
+  }
+  void set(const pfcp::redirect_information_t& v) {
+    redirect_inforamtion.first  = true;
+    redirect_inforamtion.second = v;
   }
   void set(const pfcp::outer_header_creation_t& v) {
     outer_header_creation.first  = true;
@@ -2056,6 +2070,10 @@ class update_forwarding_parameters : public pfcp::pfcp_ies_container {
     linked_traffic_endpoint_id.first  = true;
     linked_traffic_endpoint_id.second = v;
   }
+  void set(const pfcp::_3gpp_interface_type_t& v) {
+    destination_interface_type.first  = true;
+    destination_interface_type.second = v;
+  }
 
   bool get(pfcp::destination_interface_t& v) const {
     if (destination_interface.first) {
@@ -2067,6 +2085,13 @@ class update_forwarding_parameters : public pfcp::pfcp_ies_container {
   bool get(pfcp::network_instance_t& v) const {
     if (network_instance.first) {
       v = network_instance.second;
+      return true;
+    }
+    return false;
+  }
+  bool get(pfcp::redirect_information_t& v) const {
+    if (redirect_inforamtion.first) {
+      v = redirect_inforamtion.second;
       return true;
     }
     return false;
@@ -2113,6 +2138,13 @@ class update_forwarding_parameters : public pfcp::pfcp_ies_container {
     }
     return false;
   }
+  bool get(pfcp::_3gpp_interface_type_t& v) const {
+    if (destination_interface_type.first) {
+      v = destination_interface_type.second;
+      return true;
+    }
+    return false;
+  }
 };
 
 //------------------------------------------------------------------------------
@@ -2128,6 +2160,7 @@ class forwarding_parameters : public pfcp::pfcp_ies_container {
   std::pair<bool, pfcp::header_enrichment_t> header_enrichment;
   std::pair<bool, pfcp::traffic_endpoint_id_t> linked_traffic_endpoint_id;
   std::pair<bool, pfcp::proxying_t> proxying;
+  std::pair<bool, pfcp::_3gpp_interface_type_t> destination_interface_type;
 
   forwarding_parameters()
       : destination_interface(),
@@ -2138,7 +2171,8 @@ class forwarding_parameters : public pfcp::pfcp_ies_container {
         forwarding_policy(),
         header_enrichment(),
         linked_traffic_endpoint_id(),
-        proxying() {}
+        proxying(),
+        destination_interface_type() {}
 
   forwarding_parameters(const forwarding_parameters& f)
       : destination_interface(f.destination_interface),
@@ -2149,17 +2183,21 @@ class forwarding_parameters : public pfcp::pfcp_ies_container {
         forwarding_policy(f.forwarding_policy),
         header_enrichment(f.header_enrichment),
         linked_traffic_endpoint_id(f.linked_traffic_endpoint_id),
-        proxying(f.proxying) {}
+        proxying(f.proxying),
+        destination_interface_type(f.destination_interface_type) {}
 
   bool update(const update_forwarding_parameters& u) {
     if (u.destination_interface.first) set(u.destination_interface.second);
     if (u.network_instance.first) set(u.network_instance.second);
+    if (u.redirect_inforamtion.first) set(u.redirect_inforamtion.second);
     if (u.outer_header_creation.first) set(u.outer_header_creation.second);
     if (u.transport_level_marking.first) set(u.transport_level_marking.second);
     if (u.forwarding_policy.first) set(u.forwarding_policy.second);
     if (u.header_enrichment.first) set(u.header_enrichment.second);
     if (u.linked_traffic_endpoint_id.first)
       set(u.linked_traffic_endpoint_id.second);
+    if (u.destination_interface_type.first)
+      set(u.destination_interface_type.second);
     return true;
   }
 
@@ -2199,6 +2237,10 @@ class forwarding_parameters : public pfcp::pfcp_ies_container {
   void set(const pfcp::proxying_t& v) {
     proxying.first  = true;
     proxying.second = v;
+  }
+  void set(const pfcp::_3gpp_interface_type_t& v) {
+    destination_interface_type.first  = true;
+    destination_interface_type.second = v;
   }
 
   bool get(pfcp::destination_interface_t& v) const {
@@ -2260,6 +2302,13 @@ class forwarding_parameters : public pfcp::pfcp_ies_container {
   bool get(pfcp::proxying_t& v) const {
     if (proxying.first) {
       v = proxying.second;
+      return true;
+    }
+    return false;
+  }
+  bool get(pfcp::_3gpp_interface_type_t& v) const {
+    if (destination_interface_type.first) {
+      v = destination_interface_type.second;
       return true;
     }
     return false;
@@ -3019,6 +3068,8 @@ class create_qer : public pfcp::pfcp_ies_container {
   std::pair<bool, pfcp::dl_flow_level_marking_t> dl_flow_level_marking;
   std::pair<bool, pfcp::qfi_t> qos_flow_identifier;
   std::pair<bool, pfcp::rqi_t> reflective_qos;
+  std::pair<bool, pfcp::paging_policy_indicator_t> paging_policy_indicator;
+  std::pair<bool, pfcp::averaging_window_t> averaging_window;
 
   create_qer()
       : qer_id(),
@@ -3029,7 +3080,9 @@ class create_qer : public pfcp::pfcp_ies_container {
         packet_rate(),
         dl_flow_level_marking(),
         qos_flow_identifier(),
-        reflective_qos() {}
+        reflective_qos(),
+        paging_policy_indicator(),
+        averaging_window() {}
 
   create_qer(const create_qer& c)
       : qer_id(c.qer_id),
@@ -3040,7 +3093,9 @@ class create_qer : public pfcp::pfcp_ies_container {
         packet_rate(c.packet_rate),
         dl_flow_level_marking(c.dl_flow_level_marking),
         qos_flow_identifier(c.qos_flow_identifier),
-        reflective_qos(c.reflective_qos) {}
+        reflective_qos(c.reflective_qos),
+        paging_policy_indicator(c.paging_policy_indicator),
+        averaging_window(c.averaging_window) {}
 
   // virtual ~create_qer() {};
   void set(const pfcp::qer_id_t& v) {
@@ -3078,6 +3133,14 @@ class create_qer : public pfcp::pfcp_ies_container {
   void set(const pfcp::rqi_t& v) {
     reflective_qos.first  = true;
     reflective_qos.second = v;
+  }
+  void set(const pfcp::paging_policy_indicator_t& v) {
+    paging_policy_indicator.first  = true;
+    paging_policy_indicator.second = v;
+  }
+  void set(const pfcp::averaging_window_t& v) {
+    averaging_window.first  = true;
+    averaging_window.second = v;
   }
 
   bool get(pfcp::qer_id_t& v) const {
@@ -3139,6 +3202,20 @@ class create_qer : public pfcp::pfcp_ies_container {
   bool get(pfcp::rqi_t& v) const {
     if (reflective_qos.first) {
       v = reflective_qos.second;
+      return true;
+    }
+    return false;
+  }
+  bool get(pfcp::paging_policy_indicator_t& v) const {
+    if (paging_policy_indicator.first) {
+      v = paging_policy_indicator.second;
+      return true;
+    }
+    return false;
+  }
+  bool get(pfcp::averaging_window_t& v) const {
+    if (averaging_window.first) {
+      v = averaging_window.second;
       return true;
     }
     return false;
@@ -3597,6 +3674,25 @@ class update_pdr : public pfcp::pfcp_ies_container {
     }
     return false;
   }
+
+  // Vector getters for predefined rules
+  const std::vector<pfcp::activate_predefined_rules_t>&
+  get_activate_predefined_rules() const {
+    return activate_predefined_rules;
+  }
+
+  const std::vector<pfcp::deactivate_predefined_rules_t>&
+  get_deactivate_predefined_rules() const {
+    return deactivate_predefined_rules;
+  }
+
+  bool has_activate_predefined_rules() const {
+    return !activate_predefined_rules.empty();
+  }
+
+  bool has_deactivate_predefined_rules() const {
+    return !deactivate_predefined_rules.empty();
+  }
 };
 
 //------------------------------------------------------------------------------
@@ -4042,6 +4138,8 @@ class update_qer : public pfcp::pfcp_ies_container {
   std::pair<bool, pfcp::dl_flow_level_marking_t> dl_flow_level_marking;
   std::pair<bool, pfcp::qfi_t> qos_flow_identifier;
   std::pair<bool, pfcp::rqi_t> reflective_qos;
+  std::pair<bool, pfcp::paging_policy_indicator_t> paging_policy_indicator;
+  std::pair<bool, pfcp::averaging_window_t> averaging_window;
 
   update_qer()
       : qer_id(),
@@ -4052,18 +4150,22 @@ class update_qer : public pfcp::pfcp_ies_container {
         packet_rate(),
         dl_flow_level_marking(),
         qos_flow_identifier(),
-        reflective_qos() {}
+        reflective_qos(),
+        paging_policy_indicator(),
+        averaging_window() {}
 
   update_qer(const update_qer& u) {
-    qer_id                = u.qer_id;
-    qer_correlation_id    = u.qer_correlation_id;
-    gate_status           = u.gate_status;
-    maximum_bitrate       = u.maximum_bitrate;
-    guaranteed_bitrate    = u.guaranteed_bitrate;
-    packet_rate           = u.packet_rate;
-    dl_flow_level_marking = u.dl_flow_level_marking;
-    qos_flow_identifier   = u.qos_flow_identifier;
-    reflective_qos        = u.reflective_qos;
+    qer_id                  = u.qer_id;
+    qer_correlation_id      = u.qer_correlation_id;
+    gate_status             = u.gate_status;
+    maximum_bitrate         = u.maximum_bitrate;
+    guaranteed_bitrate      = u.guaranteed_bitrate;
+    packet_rate             = u.packet_rate;
+    dl_flow_level_marking   = u.dl_flow_level_marking;
+    qos_flow_identifier     = u.qos_flow_identifier;
+    reflective_qos          = u.reflective_qos;
+    paging_policy_indicator = u.paging_policy_indicator;
+    averaging_window        = u.averaging_window;
   }
 
   // virtual ~update_qer() {};
@@ -4102,6 +4204,14 @@ class update_qer : public pfcp::pfcp_ies_container {
   void set(const pfcp::rqi_t& v) {
     reflective_qos.first  = true;
     reflective_qos.second = v;
+  }
+  void set(const pfcp::paging_policy_indicator_t& v) {
+    paging_policy_indicator.first  = true;
+    paging_policy_indicator.second = v;
+  }
+  void set(const pfcp::averaging_window_t& v) {
+    averaging_window.first  = true;
+    averaging_window.second = v;
   }
 
   bool get(pfcp::qer_id_t& v) const {
@@ -4163,6 +4273,20 @@ class update_qer : public pfcp::pfcp_ies_container {
   bool get(pfcp::rqi_t& v) const {
     if (reflective_qos.first) {
       v = reflective_qos.second;
+      return true;
+    }
+    return false;
+  }
+  bool get(pfcp::paging_policy_indicator_t& v) const {
+    if (paging_policy_indicator.first) {
+      v = paging_policy_indicator.second;
+      return true;
+    }
+    return false;
+  }
+  bool get(pfcp::averaging_window_t& v) const {
+    if (averaging_window.first) {
+      v = averaging_window.second;
       return true;
     }
     return false;

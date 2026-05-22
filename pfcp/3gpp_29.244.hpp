@@ -2847,54 +2847,66 @@ class pfcp_apply_action_ie : public pfcp_ie {
 //      s.set(dl_buffering_suggested_packet_count);
 //  }
 //};
-////-------------------------------------
-//// IE PFCPSMREQ_FLAGS
-// class pfcp_pfcpsmreq_flags_ie : public pfcp_ie {
-// public:
-//  uint8_t todo;
-//
-//  //--------
-//  pfcp_pfcpsmreq_flags_ie(const pfcp::pfcpsmreq_flags_t& b) :
-//  pfcp_ie(PFCP_IE_PFCPSMREQ_FLAGS){
-//    todo = 0;
-//    tlv.set_length(1);
-//  }
-//  //--------
-//  pfcp_pfcpsmreq_flags_ie() : pfcp_ie(PFCP_IE_PFCPSMREQ_FLAGS){
-//    todo = 0;
-//    tlv.set_length(1);
-//  }
-//  //--------
-//  pfcp_pfcpsmreq_flags_ie(const pfcp_tlv& t) : pfcp_ie(t) {
-//    todo = 0;
-//  };
-//  //--------
-//  void to_core_type(pfcp::pfcpsmreq_flags_t& b) {
-//    b.todo = todo;
-//  }
-//  //--------
-//  void dump_to(std::ostream& os) {
-//    tlv.dump_to(os);
-//    os.write(reinterpret_cast<const char*>(&todo), sizeof(todo));
-//  }
-//  //--------
-//  void load_from(std::istream& is) {
-//    //tlv.load_from(is);
-//    if (tlv.get_length() != 1) {
-//      throw pfcp_tlv_bad_length_exception(tlv.type, tlv.get_length(),
-//      __FILE__, __LINE__);
-//    }
-//    is.read(reinterpret_cast<char*>(&todo), sizeof(todo));
-//  }
-//  //--------
-//  void to_core_type(pfcp_ies_container& s) {
-//      pfcp::pfcpsmreq_flags_t pfcpsmreq_flags = {};
-//      to_core_type(pfcpsmreq_flags);
-//      s.set(pfcpsmreq_flags);
-//  }
-//};
-////-------------------------------------
-//// IE PFCPSRRSP_FLAGS
+
+//-------------------------------------
+// IE PFCPSMREQ_FLAGS
+class pfcp_pfcpsmreq_flags_ie : public pfcp_ie {
+ public:
+  uint8_t flags;
+
+  //--------
+  pfcp_pfcpsmreq_flags_ie(const pfcp::pfcpsmreq_flags_t& b)
+      : pfcp_ie(PFCP_IE_PFCPSMREQ_FLAGS) {
+    flags = 0;
+    flags |= (b.drobu & 0x01);
+    flags |= (b.sndem & 0x01) << 1;
+    flags |= (b.qaurr & 0x01) << 2;
+    tlv.set_length(1);
+  }
+
+  //--------
+  pfcp_pfcpsmreq_flags_ie() : pfcp_ie(PFCP_IE_PFCPSMREQ_FLAGS) {
+    flags = 0;
+    tlv.set_length(1);
+  }
+
+  //--------
+  pfcp_pfcpsmreq_flags_ie(const pfcp_tlv& t) : pfcp_ie(t) { flags = 0; };
+
+  //--------
+  void to_core_type(pfcp::pfcpsmreq_flags_t& b) {
+    b.drobu = flags & 0x01;
+    b.sndem = (flags >> 1) & 0x01;
+    b.qaurr = (flags >> 2) & 0x01;
+    b.spare = 0;
+  }
+
+  //--------
+  void dump_to(std::ostream& os) {
+    tlv.dump_to(os);
+    os.write(reinterpret_cast<const char*>(&flags), sizeof(flags));
+  }
+
+  //--------
+  void load_from(std::istream& is) {
+    // tlv.load_from(is);
+    if (tlv.get_length() != 1) {
+      throw pfcp_tlv_bad_length_exception(
+          tlv.type, tlv.get_length(), __FILE__, __LINE__);
+    }
+    is.read(reinterpret_cast<char*>(&flags), sizeof(flags));
+  }
+
+  //--------
+  void to_core_type(pfcp_ies_container& s) {
+    pfcp::pfcpsmreq_flags_t pfcpsmreq_flags = {};
+    to_core_type(pfcpsmreq_flags);
+    s.set(pfcpsmreq_flags);
+  }
+};
+
+//-------------------------------------
+// IE PFCPSRRSP_FLAGS
 // class pfcp_pfcpsrrsp_flags_ie : public pfcp_ie {
 // public:
 //  uint8_t todo;
@@ -5921,54 +5933,79 @@ class pfcp_dl_flow_level_marking_ie : public pfcp_ie {
 //      s.set(error_indication_report);
 //  }
 //};
-////-------------------------------------
-//// IE MEASUREMENT_INFORMATION
-// class pfcp_measurement_information_ie : public pfcp_ie {
-// public:
-//  uint8_t todo;
-//
-//  //--------
-//  pfcp_measurement_information_ie(const pfcp::measurement_information_t& b) :
-//  pfcp_ie(PFCP_IE_MEASUREMENT_INFORMATION){
-//    todo = 0;
-//    tlv.set_length(1);
-//  }
-//  //--------
-//  pfcp_measurement_information_ie() :
-//  pfcp_ie(PFCP_IE_MEASUREMENT_INFORMATION){
-//    todo = 0;
-//    tlv.set_length(1);
-//  }
-//  //--------
-//  pfcp_measurement_information_ie(const pfcp_tlv& t) : pfcp_ie(t) {
-//    todo = 0;
-//  };
-//  //--------
-//  void to_core_type(pfcp::measurement_information_t& b) {
-//    b.todo = todo;
-//  }
-//  //--------
-//  void dump_to(std::ostream& os) {
-//    tlv.dump_to(os);
-//    os.write(reinterpret_cast<const char*>(&todo), sizeof(todo));
-//  }
-//  //--------
-//  void load_from(std::istream& is) {
-//    //tlv.load_from(is);
-//    if (tlv.get_length() != 1) {
-//      throw pfcp_tlv_bad_length_exception(tlv.type, tlv.get_length(),
-//      __FILE__, __LINE__);
-//    }
-//    is.read(reinterpret_cast<char*>(&todo), sizeof(todo));
-//  }
-//  //--------
-//  void to_core_type(pfcp_ies_container& s) {
-//      pfcp::measurement_information_t measurement_information = {};
-//      to_core_type(measurement_information);
-//      s.set(measurement_information);
-//  }
-//};
-////-------------------------------------
+
+//-------------------------------------
+// IE MEASUREMENT_INFORMATION
+// 3GPP TS 29.244 V18.10.0 Section 8.2.68
+// This IE provides information on the requested measurement information
+class pfcp_measurement_information_ie : public pfcp_ie {
+ public:
+  // Octet 5 flags - as per 3GPP TS 29.244 Section 8.2.68
+  union {
+    struct {
+      uint8_t mbqe : 1;   // Bit 1: Measurement Before QoS Enforcement
+      uint8_t inam : 1;   // Bit 2: Inactive Measurement
+      uint8_t radi : 1;   // Bit 3: Reduced Application Detection Information
+      uint8_t istm : 1;   // Bit 4: Immediate Start Time Metering
+      uint8_t mnop : 1;   // Bit 5: Measurement of Number of Packets
+      uint8_t sspoc : 1;  // Bit 6: Send Start Pause of Charging
+      uint8_t aspoc : 1;  // Bit 7: Applicable for Start of Pause of Charging
+      uint8_t ciam : 1;   // Bit 8: Control of Inactive Measurement
+    } bf;
+    uint8_t b;
+  } u1;
+
+  //--------
+  pfcp_measurement_information_ie() : pfcp_ie(PFCP_IE_MEASUREMENT_INFORMATION) {
+    u1.b = 0;
+    tlv.set_length(1);
+  }
+  //--------
+  pfcp_measurement_information_ie(const pfcp_tlv& t) : pfcp_ie(t) { u1.b = 0; };
+  //--------
+  void dump_to(std::ostream& os) {
+    tlv.dump_to(os);
+    os.write(reinterpret_cast<const char*>(&u1.b), sizeof(u1.b));
+  }
+  //--------
+  void load_from(std::istream& is) {
+    // tlv.load_from(is); - already loaded in new_pfcp_ie_from_stream
+    // 3GPP TS 29.244 Section 8.2.68: minimum length is 1 byte (flags)
+    // Additional octets may be present for future extensions
+    if (tlv.get_length() < 1) {
+      throw pfcp_tlv_bad_length_exception(
+          tlv.type, tlv.get_length(), __FILE__, __LINE__);
+    }
+    // Read the mandatory flags byte
+    is.read(reinterpret_cast<char*>(&u1.b), sizeof(u1.b));
+
+    // Skip any additional octets if length > 1 (for future extensions)
+    // 3GPP TS 29.244 Section 8.2.68: "Octets 6 to (n+4) present only if
+    // explicitly specified"
+    if (tlv.get_length() > 1) {
+      is.seekg(tlv.get_length() - 1, std::ios_base::cur);
+    }
+  }
+  //--------
+  void to_core_type(pfcp_ies_container& s) {
+    // For now, we just parse and acknowledge the IE
+    // Future implementations can use the flags for measurement control
+  }
+  // void to_core_type(pfcp_ies_container& s) {
+  //   pfcp::measurement_information_t measurement_information = {};
+  //   to_core_type(measurement_information);
+  //   s.set(measurement_information);
+  // }
+
+  // void to_core_type(pfcp::measurement_information_t& b) {
+  //   u1.b       = 0;
+  //   u1.bf.mbqe = b.mbqe;
+  //   u1.bf.inam = b.inam;
+  //   u1.bf.radi = b.radi;
+  // }
+};
+
+//-------------------------------------
 // IE NODE_REPORT_TYPE
 class pfcp_node_report_type_ie : public pfcp_ie {
  public:

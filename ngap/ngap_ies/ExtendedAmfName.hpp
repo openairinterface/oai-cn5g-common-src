@@ -32,13 +32,14 @@ class ExtendedAmfName {
 
   /**
    * Set from a plain string using the VisibleString alternative (§9.3.3.51).
-   * Stores the C-string pointer in aMFNameVisibleString; the caller must ensure
-   * the ExtendedAmfName lifetime exceeds the encode call.
+   * Stores pointers into members; the caller must ensure the ExtendedAmfName
+   * lifetime exceeds the encode call.
    */
   bool set(const std::string& name);
 
  private:
   Ngap_Extended_AMFName_t m_Value{};
+  Ngap_AMFNameVisibleString_t m_VisibleString{};
   std::string m_VisibleStringBuf;  // backing store for set(const std::string&)
 };
 

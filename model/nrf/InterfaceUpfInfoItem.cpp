@@ -231,7 +231,18 @@ std::string InterfaceUpfInfoItem::to_string(int indent_level) const {
     out.append(
         fmt::format(fmt_value_inner, "network_instance", m_NetworkInstance));
   }
-  // TODO other values
+  if (m_Ipv4EndpointAddressesIsSet && !m_Ipv4EndpointAddresses.empty()) {
+    std::string ipv4_list;
+    for (size_t i = 0; i < m_Ipv4EndpointAddresses.size(); ++i) {
+      if (i > 0) ipv4_list += ", ";
+      ipv4_list += m_Ipv4EndpointAddresses[i];
+    }
+    out.append(
+        fmt::format(fmt_value_inner, "ipv4_endpoint_addresses", ipv4_list));
+  }
+  if (m_EndpointFqdnIsSet) {
+    out.append(fmt::format(fmt_value_inner, "endpoint_fqdn", m_EndpointFqdn));
+  }
   return out;
 }
 

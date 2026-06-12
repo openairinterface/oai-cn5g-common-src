@@ -7,10 +7,6 @@
 
 #include "Type1NasIeFormatTv.hpp"
 
-// TS 24.501 – Priority indicator IE
-// Format: Type 1 half-octet TV, upper nibble IEI = 0xE
-// The lower nibble carries: bit 1 = MPSI (MPS Indicator), bits 2-4 = spare.
-// Packed as: (0xE << 4) | (mpsi & 0x01)
 constexpr uint8_t kPriorityIndicatorIei = 0x0E;  // upper nibble value
 constexpr auto kPriorityIndicatorIeName = "Priority Indicator";
 

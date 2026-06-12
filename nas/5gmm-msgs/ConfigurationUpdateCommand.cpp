@@ -262,7 +262,7 @@ int ConfigurationUpdateCommand::Decode(uint8_t* buf, int len) {
         oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
       } break;
 
-      // Release 17.10: Priority indicator, IEI nibble 0xE (Type 1 TV)
+      // Release 17.10: Priority indicator, IEI 0xE (Type 1 TV)
       case kPriorityIndicatorIei: {
         oai::logger::logger_common::nas().debug(
             "Decoding Priority indicator IEI 0x%x", octet);
@@ -332,10 +332,10 @@ int ConfigurationUpdateCommand::Decode(uint8_t* buf, int len) {
       } break;
 
       default: {
-        // Unknown optional IE — skip safely using TLV heuristic.
+        // Unknown optional IE
         // Only TLV (Type 4) and TLV-E (Type 6) can be skipped.
         // TV/half-octet (Type 1) would already have matched an upper-nibble
-        // case in the first switch above; they are not skipped here.
+        // case in the first switch above.
         if (flag) {
           if (decoded_size + 1 >= len) {
             oai::logger::logger_common::nas().warn(

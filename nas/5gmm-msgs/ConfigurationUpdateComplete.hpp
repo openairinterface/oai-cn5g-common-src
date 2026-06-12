@@ -5,10 +5,6 @@
 #ifndef CONFIGURATION_UPDATE_COMPLETE_H_
 #define CONFIGURATION_UPDATE_COMPLETE_H_
 
-// TS 24.501 §8.2.20 — Configuration Update Complete
-// The message body contains only the NAS header; there are no optional IEs
-// defined in Table 8.2.20.1.1.
-
 #include "NasIeHeader.hpp"
 #include "NasMmPlainHeader.hpp"
 

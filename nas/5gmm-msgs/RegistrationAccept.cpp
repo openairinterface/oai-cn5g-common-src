@@ -353,7 +353,6 @@ void RegistrationAccept::SetTaiList(const std::vector<p_tai_t>& tai_list) {
 //------------------------------------------------------------------------------
 void RegistrationAccept::SetNssrgInformation(const NssrgInformation& nssrg) {
   ie_nssrg_information_ = std::make_optional<NssrgInformation>(nssrg);
-  // Ensure the IEI is set for Registration Accept context (0x70)
   ie_nssrg_information_.value().SetIei(kIeiNssrgInformation);
 }
 
@@ -366,7 +365,6 @@ std::optional<NssrgInformation> RegistrationAccept::GetNssrgInformation()
 //------------------------------------------------------------------------------
 void RegistrationAccept::SetNsagInformation(const NsagInformation& nsag) {
   ie_nsag_information_ = std::make_optional<NsagInformation>(nsag);
-  // Ensure the IEI is set for Registration Accept context (0x7C)
   ie_nsag_information_.value().SetIei(kIeiNsagInformationRegistrationAccept);
 }
 
@@ -984,10 +982,10 @@ int RegistrationAccept::Decode(uint8_t* buf, int len) {
       } break;
 
       default: {
-        // Unknown optional IE — skip safely using TLV heuristic.
+        // Unknown optional IE
         // Only TLV (Type 4) and TLV-E (Type 6) can be skipped.
         // TV/half-octet (Type 1) would already have matched an upper-nibble
-        // case in the first switch above; they are not skipped here.
+        // case in the first switch above.
         if (flag) {
           if (decoded_size + 1 >= len) {
             oai::logger::logger_common::nas().warn(

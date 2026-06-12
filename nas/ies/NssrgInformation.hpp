@@ -10,8 +10,6 @@
 #include "Type6NasIe.hpp"
 
 // TS 24.501 clause 9.11.3.82 – NSSRG information
-// Format: Type 6 TLV-E, IEI 0x70 (Registration Accept / CUC)
-// Minimum content length: 7 octets; maximum: 4099 octets.
 constexpr uint8_t kNssrgInformationMinimumContentLength  = 7;
 constexpr uint16_t kNssrgInformationMaximumContentLength = 4099;
 constexpr auto kNssrgInformationIeName                   = "NSSRG Information";
@@ -33,7 +31,7 @@ class NssrgInformation : public Type6NasIe {
   const std::vector<uint8_t>& GetValue() const;
 
  private:
-  std::vector<uint8_t> value_;  // raw content bytes (opaque container)
+  std::vector<uint8_t> value_;  // raw content bytes
 };
 
 }  // namespace oai::nas

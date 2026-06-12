@@ -2,10 +2,6 @@
  * SPDX-License-Identifier: LicenseRef-CSSL-1.0
  */
 
-// TS 24.501 §8.2.20 — Configuration Update Complete
-// The UE sends this message to acknowledge a Configuration Update Command
-// that had the ACK bit set.  The message body contains only the NAS header.
-
 #include "ConfigurationUpdateComplete.hpp"
 
 #include "NasHelper.hpp"

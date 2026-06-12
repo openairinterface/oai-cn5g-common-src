@@ -31,9 +31,7 @@ class _5gmmCapability : public Type4NasIe {
 
   void SetOctet3(uint8_t iei, uint8_t octet3);
   uint8_t GetOctet3() const;
-
-  // Release 17 capability accessors (TS 24.501 table 9.11.3.1.1 octet 7)
-  // Returns false (unsupported) if octet 7 was not present in the message.
+  // Rel 17.10 IE
   bool SupportsNssrg() const;               // octet 7 bit 1
   bool SupportsNsag() const;                // octet 7 bit 6
   bool SupportsUas() const;                 // octet 7 bit 7
@@ -45,7 +43,7 @@ class _5gmmCapability : public Type4NasIe {
   std::optional<uint8_t> octet5_;
   std::optional<uint8_t> octet6_;
   std::optional<uint8_t> octet7_;
-  // Raw bytes for octets 8-15 (preserved for diagnostics)
+  // Raw bytes for octets 8-15
   std::vector<uint8_t> extra_octets_;
 };
 

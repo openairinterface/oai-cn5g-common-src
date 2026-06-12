@@ -227,6 +227,24 @@ class sbi_helper {
   // TODO: AUSF: SoR Protection
   // TODO: AUSF: UPU Protection
 
+  // NEF
+  // Northbound API base paths (TS 29.522)
+  static inline const std::string NefMonitoringEventBase =
+      "/3gpp-monitoring-event/";
+  static inline const std::string NefTrafficInfluenceBase =
+      "/3gpp-traffic-influence/";
+  static inline const std::string NefPfdManagementBase =
+      "/3gpp-pfd-management/";
+  static inline const std::string NefBdtBase = "/3gpp-bdt/";
+  static inline const std::string NefQosMonitoringBase =
+      "/3gpp-as-session-with-qos/";
+  static inline const std::string NefAnalyticsBase = "/3gpp-analyticsexposure/";
+
+  // NEF inbound notification endpoint (NEF gives this to AMF/SMF/PCF)
+  // The path is: NefNotifyBase + api_version + "/notify/" + nf_sub_id
+  // e.g.  /nef-notify/v1/notify/amf-sub-abc123
+  static inline const std::string NefNotifyBase = "/nef-notify/";
+
   // NRF: NF Management Service
   static inline const std::string NrfNfmBase = "/nnrf-nfm/";
   static inline const std::string NrfNfmPathNfInstancesNfInstanceId =
@@ -283,6 +301,12 @@ class sbi_helper {
       "/policies/{polAssoId}";
   static inline const std::string PcfAmPolicyControlPathPoliciesAssoIdUpdate =
       "/policies/{polAssoId}/update";
+  // PCF: Npcf_PolicyAuthorization (TS 29.514)
+  static inline const std::string PcfPolicyAuthBase =
+      "/npcf-policyauthorization/";
+  // PCF: Npcf_BDTPolicyControl (TS 29.554)
+  static inline const std::string PcfBdtPolicyControlBase =
+      "/npcf-bdtpolicycontrol/";
 
   // SMF: SMF PDU Session Service
   static inline const std::string SmfPduSessionBase = "/nsmf-pdusession/";

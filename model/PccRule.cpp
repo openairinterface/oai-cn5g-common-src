@@ -484,7 +484,9 @@ void from_json(const nlohmann::json& j, PccRule& o) {
     j.at("contVer").get_to(o.m_ContVer);
     o.m_ContVerIsSet = true;
   }
-  j.at("pccRuleId").get_to(o.m_PccRuleId);
+  if (j.find("pccRuleId") != j.end()) {
+    j.at("pccRuleId").get_to(o.m_PccRuleId);
+  }
   if (j.find("precedence") != j.end()) {
     j.at("precedence").get_to(o.m_Precedence);
     o.m_PrecedenceIsSet = true;

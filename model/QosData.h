@@ -23,12 +23,17 @@
 #include "Arp.h"
 #include <nlohmann/json.hpp>
 
+namespace odb {
+class access;
+}
 namespace oai::_3gpp::model {
 
 /// <summary>
 /// Contains the QoS parameters.
 /// </summary>
 class QosData {
+  friend class odb::access;
+
  public:
   QosData();
   virtual ~QosData() = default;

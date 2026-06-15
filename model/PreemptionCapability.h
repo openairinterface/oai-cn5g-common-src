@@ -24,6 +24,9 @@
 #include "PreemptionCapability_anyOf.h"
 #include <nlohmann/json.hpp>
 
+namespace odb {
+class access;
+}
 namespace oai::_3gpp::model {
 
 /// <summary>
@@ -32,6 +35,8 @@ namespace oai::_3gpp::model {
 /// comply with the provisions defined in table 5.5.3.1-1.
 /// </summary>
 class PreemptionCapability {
+  friend class odb::access;
+
  public:
   PreemptionCapability();
   virtual ~PreemptionCapability() = default;

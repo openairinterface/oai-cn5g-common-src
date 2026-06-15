@@ -25,6 +25,9 @@
 #include <string>
 #include <nlohmann/json.hpp>
 
+namespace odb {
+class access;
+}
 namespace oai::_3gpp::model {
 
 const std::string SD_VALIDATION_REGEX =
@@ -39,6 +42,8 @@ const uint32_t SD_DEFAULT_VALUE_INT = 0xFFFFFF;
 /// \&quot;sd\&quot;.
 /// </summary>
 class Snssai {
+  friend class odb::access;
+
  public:
   Snssai();
   Snssai(const int32_t& sst) : m_Sst(sst) {

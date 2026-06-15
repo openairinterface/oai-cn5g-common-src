@@ -21,12 +21,17 @@
 
 #include <nlohmann/json.hpp>
 
+namespace odb {
+class access;
+}
 namespace oai::_3gpp::model {
 
 /// <summary>
 ///
 /// </summary>
 class PreemptionCapability_anyOf {
+  friend class odb::access;
+
  public:
   PreemptionCapability_anyOf();
   virtual ~PreemptionCapability_anyOf() = default;

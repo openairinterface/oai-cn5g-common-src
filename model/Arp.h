@@ -23,12 +23,17 @@
 #include "PreemptionVulnerability.h"
 #include <nlohmann/json.hpp>
 
+namespace odb {
+class access;
+}
 namespace oai::_3gpp::model {
 
 /// <summary>
 /// Contains Allocation and Retention Priority information.
 /// </summary>
 class Arp {
+  friend class odb::access;
+
  public:
   Arp();
   virtual ~Arp() = default;

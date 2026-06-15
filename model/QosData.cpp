@@ -324,7 +324,9 @@ void to_json(nlohmann::json& j, const QosData& o) {
 }
 
 void from_json(const nlohmann::json& j, QosData& o) {
-  j.at("qosId").get_to(o.m_QosId);
+  if (j.find("qosId") != j.end()) {
+    j.at("qosId").get_to(o.m_QosId);
+  }
   if (j.find("5qi") != j.end()) {
     j.at("5qi").get_to(o.m_r_5qi);
     o.m_r_5qiIsSet = true;

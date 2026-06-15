@@ -41,6 +41,51 @@ file(GLOB PCF_MODEL_SRC_FILES
     ${PCF_MODEL_DIR}/AppSessionContextRespData.cpp
     ${PCF_MODEL_DIR}/AppSessionContextUpdateData.cpp
     ${PCF_MODEL_DIR}/AppSessionContextUpdateDataPatch.cpp
+    ${PCF_MODEL_DIR}/ApplicationVolume.cpp
+    ${PCF_MODEL_DIR}/UserDataCongestionCollection.cpp
+    ${PCF_MODEL_DIR}/UeMobilityCollection.cpp
+    ${PCF_MODEL_DIR}/UeCommunicationCollection.cpp
+    ${PCF_MODEL_DIR}/ServiceExperienceInfoPerApp.cpp
+    ${PCF_MODEL_DIR}/AddrFqdn.cpp
+    ${PCF_MODEL_DIR}/ApplicationVolume.cpp
+    ${PCF_MODEL_DIR}/CommunicationCollection.cpp
+    ${PCF_MODEL_DIR}/DispersionClass.cpp
+    ${PCF_MODEL_DIR}/DynamicPolicy.cpp
+    ${PCF_MODEL_DIR}/Exception.cpp
+    ${PCF_MODEL_DIR}/FlowInfo.cpp
+    ${PCF_MODEL_DIR}/LocationArea5G.cpp
+    ${PCF_MODEL_DIR}/MediaStreamingAccessRecord.cpp
+    ${PCF_MODEL_DIR}/NetworkAssistanceSession.cpp
+    ${PCF_MODEL_DIR}/PatchItem.cpp
+    ${PCF_MODEL_DIR}/PatchOperation.cpp
+    ${PCF_MODEL_DIR}/PatchOperation_anyOf.cpp
+    ${PCF_MODEL_DIR}/PerUeAttribute.cpp
+    ${PCF_MODEL_DIR}/PerformanceData.cpp
+    ${PCF_MODEL_DIR}/ServiceExperienceInfoPerFlow.cpp
+    ${PCF_MODEL_DIR}/UeContextInfoClass.cpp
+    ${PCF_MODEL_DIR}/UeContextInfoClass_anyOf.cpp
+    ${PCF_MODEL_DIR}/UeTrajectoryCollection.cpp
+    ${PCF_MODEL_DIR}/ServiceDataFlowDescription.cpp
+    ${PCF_MODEL_DIR}/M5QoSSpecification.cpp
+    ${PCF_MODEL_DIR}/ExceptionId.cpp
+    ${PCF_MODEL_DIR}/ExceptionId_anyOf.cpp
+    ${PCF_MODEL_DIR}/ExceptionTrend.cpp
+    ${PCF_MODEL_DIR}/ExceptionTrend_anyOf.cpp
+    ${PCF_MODEL_DIR}/CivicAddress.cpp
+    ${PCF_MODEL_DIR}/GeographicArea.cpp
+    ${PCF_MODEL_DIR}/EndpointAddress.cpp
+    ${PCF_MODEL_DIR}/MediaStreamingAccessRecord_allOf_requestMessage.cpp
+    ${PCF_MODEL_DIR}/MediaStreamingAccessRecord_allOf_responseMessage.cpp
+    ${PCF_MODEL_DIR}/MediaStreamingAccessRecord_allOf_connectionMetrics.cpp
+    ${PCF_MODEL_DIR}/CacheStatus.cpp
+    ${PCF_MODEL_DIR}/CacheStatus_anyOf.cpp
+    ${PCF_MODEL_DIR}/SvcExperience.cpp
+    ${PCF_MODEL_DIR}/SupportedGADShapes.cpp
+    ${PCF_MODEL_DIR}/SupportedGADShapes_anyOf.cpp
+    ${PCF_MODEL_DIR}/GeographicalCoordinates.cpp
+    ${PCF_MODEL_DIR}/UncertaintyEllipse.cpp
+    ${PCF_MODEL_DIR}/IpPacketFilterSet.cpp
+    ${PCF_MODEL_DIR}/M5QoSSpecification.cpp
     ${PCF_MODEL_DIR}/Area.cpp
     ${PCF_MODEL_DIR}/Arp.cpp
     ${PCF_MODEL_DIR}/AsTimeDistributionParam.cpp

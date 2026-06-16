@@ -214,6 +214,8 @@ class sbi_helper {
                                              // access
   static inline const std::string AmfCallbackPathPolicyUpdateNotification =
       "/:ueId/PolicyUpdateNotification";  // for PolicyUpdateNotification
+  static inline const std::string AmfCallbackPathNudmSdmNotification =
+      "/:supi/nudm-sdm-notification";  // for Nudm_SDM_Notification callback
 
   // AUSF: UEAuthentication
   static inline const std::string AusfAuthBase = "/nausf-auth/";

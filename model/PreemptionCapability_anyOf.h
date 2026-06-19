@@ -24,6 +24,7 @@
 namespace odb {
 class access;
 }
+
 namespace oai::_3gpp::model {
 
 /// <summary>
@@ -79,6 +80,9 @@ class PreemptionCapability_anyOf {
   PreemptionCapability_anyOf::ePreemptionCapability_anyOf m_value =
       PreemptionCapability_anyOf::ePreemptionCapability_anyOf::
           INVALID_VALUE_OPENAPI_GENERATED;
+
+ private:
+  friend class odb::access;
 };
 
 }  // namespace oai::_3gpp::model

@@ -47,6 +47,25 @@
 
 namespace oai::model {
 
+// Bridge: this header was auto-generated using oai::model but its includes
+// define types in oai::_3gpp::model. Aliases let the class members compile.
+using DlDataDeliveryStatus = oai::_3gpp::model::DlDataDeliveryStatus;
+using IpAddr               = oai::_3gpp::model::IpAddr;
+using LocationType         = oai::_3gpp::model::LocationType;
+using SACInfo              = oai::_3gpp::model::SACInfo;
+using Snssai               = oai::_3gpp::model::Snssai;
+using LdrType              = oai::_3gpp::model::LdrType;
+using WebsockNotifConfig   = oai::_3gpp::model::WebsockNotifConfig;
+using LocationArea         = oai::_3gpp::model::LocationArea;
+using Accuracy             = oai::_3gpp::model::Accuracy;
+using DddTrafficDescriptor = oai::_3gpp::model::DddTrafficDescriptor;
+using LocationQoS          = oai::_3gpp::model::LocationQoS;
+using VelocityRequested    = oai::_3gpp::model::VelocityRequested;
+using TimeWindow           = oai::_3gpp::model::TimeWindow;
+using LocationArea5G       = oai::_3gpp::model::LocationArea5G;
+using AssociationType      = oai::_3gpp::model::AssociationType;
+using SupportedGADShapes   = oai::_3gpp::model::SupportedGADShapes;
+
 /// <summary>
 /// Represents a subscription to event(s) monitoring.
 /// </summary>

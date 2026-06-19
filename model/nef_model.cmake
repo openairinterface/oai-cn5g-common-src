@@ -14,6 +14,7 @@ set(NEF_MODEL_SRC_FILES
     ${NEF_MODEL_DIR}/AccessStateTransitionType.cpp
     ${NEF_MODEL_DIR}/AccessStateTransitionType_anyOf.cpp
     ${NEF_MODEL_DIR}/AccessType.cpp
+    ${NEF_MODEL_DIR}/AccumulatedUsage.cpp
     ${NEF_MODEL_DIR}/AddrFqdn.cpp
     ${NEF_MODEL_DIR}/AfEvent.cpp
     ${NEF_MODEL_DIR}/AfEventExposureData.cpp
@@ -120,6 +121,7 @@ set(NEF_MODEL_SRC_FILES
     ${NEF_MODEL_DIR}/FlowDirection.cpp
     ${NEF_MODEL_DIR}/FlowDirection_anyOf.cpp
     ${NEF_MODEL_DIR}/FlowInfo.cpp
+    ${NEF_MODEL_DIR}/Flows.cpp
     ${NEF_MODEL_DIR}/FlowStatus.cpp
     ${NEF_MODEL_DIR}/FlowStatus_anyOf.cpp
     ${NEF_MODEL_DIR}/FlowUsage.cpp
@@ -310,6 +312,7 @@ set(NEF_MODEL_SRC_FILES
     ${NEF_MODEL_DIR}/ProSeCapability.cpp
     ${NEF_MODEL_DIR}/QosMonitoringInformation.cpp
     ${NEF_MODEL_DIR}/QosMonitoringInformationRm.cpp
+    ${NEF_MODEL_DIR}/QosMonitoringReport.cpp
     ${NEF_MODEL_DIR}/RatFreqInformation.cpp
     ${NEF_MODEL_DIR}/RatType.cpp
     ${NEF_MODEL_DIR}/RatType_anyOf.cpp
@@ -426,6 +429,8 @@ set(NEF_MODEL_SRC_FILES
     ${NEF_MODEL_DIR}/UserDataCongestionCollection.cpp
     ${NEF_MODEL_DIR}/UserPlaneEvent.cpp
     ${NEF_MODEL_DIR}/UserPlaneEvent_anyOf.cpp
+    ${NEF_MODEL_DIR}/UserPlaneEventReport.cpp
+    ${NEF_MODEL_DIR}/UserPlaneNotificationData.cpp
     ${NEF_MODEL_DIR}/UserLocation.cpp
     ${NEF_MODEL_DIR}/UtraLocation.cpp
     ${NEF_MODEL_DIR}/V2xCapability.cpp

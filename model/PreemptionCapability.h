@@ -77,6 +77,9 @@ class PreemptionCapability {
 
  protected:
   PreemptionCapability_anyOf m_value;
+
+ private:
+  friend class odb::access;
 };
 
 }  // namespace oai::_3gpp::model

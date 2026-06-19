@@ -267,6 +267,9 @@ class QosData {
   bool m_PacketDelayBudgetIsSet;
   std::string m_PacketErrorRate;
   bool m_PacketErrorRateIsSet;
+
+ private:
+  friend class odb::access;
 };
 
 }  // namespace oai::_3gpp::model

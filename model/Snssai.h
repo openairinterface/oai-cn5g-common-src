@@ -120,6 +120,9 @@ class Snssai {
 
   std::string m_Sd;
   bool m_SdIsSet;
+
+ private:
+  friend class odb::access;
 };
 
 }  // namespace oai::_3gpp::model

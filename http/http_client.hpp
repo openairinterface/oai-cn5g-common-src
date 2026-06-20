@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <functional>
 #include <future>
 #include <memory>
 #include <optional>
@@ -21,6 +22,10 @@ const std::string MIME_BOUNDARY = "----Boundary";
 
 // Forward declaration — implementation details hidden in http_client.cpp
 class http_client_impl;
+
+// Callback type for async responses. Invoked on an Asio I/O thread.
+// The callback must be non-blocking; offload heavy work or UI updates.
+using response_cb = std::function<void(response)>;
 
 class http_client : public std::enable_shared_from_this<http_client> {
  private:
@@ -68,6 +73,15 @@ class http_client : public std::enable_shared_from_this<http_client> {
    * @return the corresponding Response
    */
   response send_http_request(const method_e& method, const request& request);
+
+  /*
+   * Non-blocking HTTP request. Returns immediately; callback fires on an
+   * Asio I/O thread when the response arrives (or on error). The callback
+   * must be non-blocking. Bearer token must be captured by value before
+   * calling and re-set inside the callback if nef_app methods are invoked.
+   */
+  void send_http_request_async(
+      const method_e& method, const request& req, response_cb callback);
 
   /*
    * Sets the correct headers for a JSON request

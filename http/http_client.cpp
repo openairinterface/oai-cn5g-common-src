@@ -102,12 +102,25 @@ struct response_accumulator {
   int status_code{0};
   std::string body;
   std::map<std::string, std::string> headers;
-  std::shared_ptr<std::promise<response>> prom;
+  std::shared_ptr<std::promise<response>> prom;  // set on blocking path
+  std::function<void(response)> callback;        // set on async path
   // Fields for request body provider (set only for POST/PUT/PATCH):
   std::string request_body;
   std::size_t body_offset{0};
   // Timer stored here so on_stream_close_cb can cancel it:
   std::shared_ptr<boost::asio::steady_timer> timer;
+
+  // Deliver response to whichever completion sink is set.
+  void deliver(response r) {
+    if (callback) {
+      callback(std::move(r));
+    } else if (prom) {
+      try {
+        prom->set_value(std::move(r));
+      } catch (...) {
+      }
+    }
+  }
 };
 
 // ============================================================================
@@ -150,6 +163,12 @@ class h2_session : public std::enable_shared_from_this<h2_session> {
       const std::string& body, std::shared_ptr<std::promise<response>> prom,
       int timeout_ms);
 
+  void submit_async(
+      const std::string& method, const std::string& full_uri,
+      const std::map<std::string, std::string>& req_headers,
+      const std::string& body, std::function<void(response)> callback,
+      int timeout_ms);
+
   void shutdown();
 
  private:
@@ -168,6 +187,12 @@ class h2_session : public std::enable_shared_from_this<h2_session> {
       const std::string& method, const std::string& full_uri,
       const std::map<std::string, std::string>& req_headers,
       const std::string& body, std::shared_ptr<std::promise<response>> prom,
+      int timeout_ms);
+
+  void submit_internal_with_acc(
+      const std::string& method, const std::string& full_uri,
+      const std::map<std::string, std::string>& req_headers,
+      const std::string& body, std::shared_ptr<response_accumulator> acc,
       int timeout_ms);
 
   void fail_all(const std::string& reason);
@@ -198,6 +223,7 @@ class h2_session : public std::enable_shared_from_this<h2_session> {
     std::map<std::string, std::string> req_headers;
     std::string body;
     std::shared_ptr<std::promise<response>> prom;
+    std::function<void(response)> callback;  // set on async path; prom is null
     int timeout_ms;
   };
 
@@ -361,9 +387,18 @@ void h2_session::on_connected() {
   m_connected.store(true, std::memory_order_release);
 
   for (auto& req : pending_) {
-    submit_internal(
-        req.method, req.full_uri, req.req_headers, req.body, req.prom,
-        req.timeout_ms);
+    if (req.callback) {
+      auto acc          = std::make_shared<response_accumulator>();
+      acc->callback     = std::move(req.callback);
+      acc->request_body = req.body;
+      submit_internal_with_acc(
+          req.method, req.full_uri, req.req_headers, req.body, std::move(acc),
+          req.timeout_ms);
+    } else {
+      submit_internal(
+          req.method, req.full_uri, req.req_headers, req.body, req.prom,
+          req.timeout_ms);
+    }
   }
   pending_.clear();
 
@@ -474,26 +509,13 @@ void h2_session::initialize_session() {
   if (acc->timer) acc->timer->cancel();
 
   if (error_code == NGHTTP2_NO_ERROR) {
-    try {
-      acc->prom->set_value({acc->status_code, acc->body, acc->headers});
-    } catch (...) {
-    }
+    acc->deliver({acc->status_code, acc->body, acc->headers});
   } else if (error_code == NGHTTP2_CANCEL) {
-    try {
-      acc->prom->set_value({408, "Request timeout", {}});
-    } catch (...) {
-    }
+    acc->deliver({408, "Request timeout", {}});
   } else if (error_code == NGHTTP2_ENHANCE_YOUR_CALM) {
-    try {
-      acc->prom->set_value({429, "Rate limited", {}});
-    } catch (...) {
-    }
+    acc->deliver({429, "Rate limited", {}});
   } else {
-    try {
-      acc->prom->set_value(
-          {503, "Stream error: " + std::to_string(error_code), {}});
-    } catch (...) {
-    }
+    acc->deliver({503, "Stream error: " + std::to_string(error_code), {}});
   }
   return 0;
 }
@@ -617,11 +639,127 @@ void h2_session::submit(
         }
         if (!m_connected.load(std::memory_order_acquire)) {
           pending_.push_back(
-              {method, full_uri, req_headers, body, prom, timeout_ms});
+              {method, full_uri, req_headers, body, prom, {}, timeout_ms});
           return;
         }
         submit_internal(method, full_uri, req_headers, body, prom, timeout_ms);
       });
+}
+
+void h2_session::submit_async(
+    const std::string& method, const std::string& full_uri,
+    const std::map<std::string, std::string>& req_headers,
+    const std::string& body, std::function<void(response)> callback,
+    int timeout_ms) {
+  auto self = shared_from_this();
+  boost::asio::dispatch(
+      strand_, [this, self, method, full_uri, req_headers, body,
+                callback = std::move(callback), timeout_ms]() mutable {
+        if (m_errored.load(std::memory_order_acquire)) {
+          callback({503, "Session errored", {}});
+          return;
+        }
+        if (!m_connected.load(std::memory_order_acquire)) {
+          pending_.push_back(
+              {method, full_uri, req_headers, body, nullptr,
+               std::move(callback), timeout_ms});
+          return;
+        }
+        // Reuse submit_internal via a thin promise that bridges to callback.
+        // The callback fires from the Asio I/O thread (on_stream_close_cb).
+        auto acc          = std::make_shared<response_accumulator>();
+        acc->callback     = std::move(callback);
+        acc->request_body = body;
+        submit_internal_with_acc(
+            method, full_uri, req_headers, body, std::move(acc), timeout_ms);
+      });
+}
+
+// Internal shared path: acc already has prom or callback set.
+void h2_session::submit_internal_with_acc(
+    const std::string& method, const std::string& full_uri,
+    const std::map<std::string, std::string>& req_headers,
+    const std::string& body, std::shared_ptr<response_accumulator> acc,
+    int timeout_ms) {
+  uri_components uri_parts;
+  try {
+    uri_parts = parse_uri(full_uri);
+  } catch (const std::exception& e) {
+    acc->deliver({400, e.what(), {}});
+    return;
+  }
+
+  std::vector<std::string> name_store, val_store;
+  std::vector<nghttp2_nv> nva;
+  name_store.reserve(10);
+  val_store.reserve(10);
+  nva.reserve(10);
+
+  auto push_hdr = [&](std::string name, std::string val) {
+    name_store.push_back(std::move(name));
+    val_store.push_back(std::move(val));
+    nghttp2_nv nv;
+    nv.name     = reinterpret_cast<uint8_t*>(name_store.back().data());
+    nv.namelen  = name_store.back().size();
+    nv.value    = reinterpret_cast<uint8_t*>(val_store.back().data());
+    nv.valuelen = val_store.back().size();
+    nv.flags    = NGHTTP2_NV_FLAG_NO_COPY_NAME | NGHTTP2_NV_FLAG_NO_COPY_VALUE;
+    nva.push_back(nv);
+  };
+
+  push_hdr(":method", method);
+  push_hdr(":scheme", uri_parts.scheme);
+  push_hdr(":authority", uri_parts.host + ":" + uri_parts.port);
+  push_hdr(":path", uri_parts.path);
+
+  bool has_accept = false;
+  for (const auto& [orig_k, v] : req_headers) {
+    std::string k = orig_k;
+    std::transform(k.begin(), k.end(), k.begin(), ::tolower);
+    if (k.empty() || k[0] == ':') continue;
+    if (k == "expect") continue;
+    if (k == "accept") has_accept = true;
+    push_hdr(k, v);
+  }
+  if (!has_accept) push_hdr("accept", "application/json");
+  if (!body.empty()) push_hdr("content-length", std::to_string(body.size()));
+
+  nghttp2_data_provider2 dp{};
+  nghttp2_data_provider2* dp_ptr = nullptr;
+  if (!body.empty()) {
+    dp.source.ptr    = acc.get();
+    dp.read_callback = body_read_cb;
+    dp_ptr           = &dp;
+  }
+
+  int32_t stream_id = nghttp2_submit_request2(
+      session_, nullptr, nva.data(), nva.size(), dp_ptr, acc.get());
+
+  if (stream_id < 0) {
+    acc->deliver(
+        {503,
+         "nghttp2_submit_request2 failed: " + std::to_string(stream_id),
+         {}});
+    return;
+  }
+
+  streams_[stream_id] = acc;
+  m_active_streams.fetch_add(1, std::memory_order_relaxed);
+
+  auto timer = std::make_shared<boost::asio::steady_timer>(io_service_);
+  acc->timer = timer;
+  timer->expires_from_now(std::chrono::milliseconds(timeout_ms));
+  auto self = shared_from_this();
+  timer->async_wait(boost::asio::bind_executor(
+      strand_, [this, self, stream_id](boost::system::error_code tec) {
+        if (tec == boost::asio::error::operation_aborted) return;
+        if (streams_.find(stream_id) == streams_.end()) return;
+        nghttp2_submit_rst_stream(
+            session_, NGHTTP2_FLAG_NONE, stream_id, NGHTTP2_CANCEL);
+        pump_send();
+      }));
+
+  pump_send();
 }
 
 void h2_session::submit_internal(
@@ -733,18 +871,19 @@ void h2_session::fail_all(const std::string& reason) {
 
   for (auto& [sid, acc] : streams_) {
     if (acc->timer) acc->timer->cancel();
-    try {
-      acc->prom->set_value({503, reason, {}});
-    } catch (...) {
-    }
+    acc->deliver({503, reason, {}});
   }
   streams_.clear();
   m_active_streams.store(0, std::memory_order_relaxed);
 
   for (auto& req : pending_) {
-    try {
-      req.prom->set_value({503, reason, {}});
-    } catch (...) {
+    if (req.callback) {
+      req.callback({503, reason, {}});
+    } else if (req.prom) {
+      try {
+        req.prom->set_value({503, reason, {}});
+      } catch (...) {
+      }
     }
   }
   pending_.clear();
@@ -942,6 +1081,10 @@ class http_client_impl {
 
   response send_simple(const method_e& method, const request& req);
 
+  void send_async(
+      const method_e& method, const request& req,
+      std::function<void(response)> callback);
+
   static request build_json_request(
       const std::string& uri, const std::string& body,
       const std::string& content_type);
@@ -1004,6 +1147,42 @@ http_client_impl::~http_client_impl() {
   for (auto& t : m_io_threads) {
     if (t.joinable()) t.join();
   }
+}
+
+void http_client_impl::send_async(
+    const method_e& method, const request& req,
+    std::function<void(response)> callback) {
+  m_logger.debug(
+      "NgHttp2 send_async: %s %s", internal::method_to_string(method).c_str(),
+      req.uri.c_str());
+
+  internal::uri_components uri_parts;
+  try {
+    uri_parts = internal::parse_uri(req.uri);
+  } catch (const std::exception& e) {
+    m_logger.error("URI parse error: %s", e.what());
+    callback({400, "Invalid URI: " + req.uri, {}});
+    return;
+  }
+
+  const bool use_tls = (uri_parts.scheme == "https");
+
+  std::shared_ptr<internal::h2_session> session;
+  try {
+    session = m_pool->get_or_create(uri_parts.host, uri_parts.port, use_tls);
+  } catch (const std::exception& e) {
+    m_logger.error("Connection pool error: %s", e.what());
+    callback({503, "Connection pool error", {}});
+    return;
+  }
+
+  std::map<std::string, std::string> merged = req.headers;
+  merged.insert({"accept", "application/json"});
+
+  const std::string method_str = internal::method_to_string(method);
+  // callback fires on an Asio I/O thread when the response arrives.
+  session->submit_async(
+      method_str, req.uri, merged, req.body, std::move(callback), m_timeout_ms);
 }
 
 response http_client_impl::send_simple(
@@ -1117,6 +1296,11 @@ std::shared_ptr<http_client> http_client::create_instance(
 response http_client::send_http_request(
     const method_e& method, const request& req) {
   return m_impl->send_simple(method, req);
+}
+
+void http_client::send_http_request_async(
+    const method_e& method, const request& req, response_cb callback) {
+  m_impl->send_async(method, req, std::move(callback));
 }
 
 request http_client::prepare_json_request(

@@ -213,6 +213,48 @@ void PduSessionResourceModifyRequestTransfer::
 }
 
 //------------------------------------------------------------------------------
+void PduSessionResourceModifyRequestTransfer::setQosFlowToReleaseList(
+    const QosFlowListWithCause& list) {
+  m_QosFlowToReleaseList = std::make_optional<QosFlowListWithCause>(list);
+
+  // Add to the PduSessionResourceModifyRequestTransfer->protocolIEs.list
+  addQosFlowToReleaseList();
+}
+
+//------------------------------------------------------------------------------
+void PduSessionResourceModifyRequestTransfer::getQosFlowToReleaseList(
+    std::optional<QosFlowListWithCause>& list) const {
+  list = m_QosFlowToReleaseList;
+}
+
+//------------------------------------------------------------------------------
+void PduSessionResourceModifyRequestTransfer::addQosFlowToReleaseList() {
+  if (!m_QosFlowToReleaseList.has_value()) return;
+
+  Ngap_PDUSessionResourceModifyRequestTransferIEs_t* ie =
+      (Ngap_PDUSessionResourceModifyRequestTransferIEs_t*) calloc(
+          1, sizeof(Ngap_PDUSessionResourceModifyRequestTransferIEs_t));
+  ie->id          = Ngap_ProtocolIE_ID_id_QosFlowToReleaseList;
+  ie->criticality = Ngap_Criticality_reject;
+  ie->value.present =
+      Ngap_PDUSessionResourceModifyRequestTransferIEs__value_PR_QosFlowListWithCause;
+
+  if (!m_QosFlowToReleaseList.value().encode(
+          ie->value.choice.QosFlowListWithCause)) {
+    oai::logger::logger_common::ngap().error(
+        "Encode QosFlowToReleaseList IE error");
+    oai::utils::utils::free_wrapper((void**) &ie);
+    return;
+  }
+
+  int ret = ASN_SEQUENCE_ADD(&m_Ie->protocolIEs.list, ie);
+  if (ret != 0)
+    oai::logger::logger_common::ngap().error(
+        "Encode QosFlowToReleaseList IE error");
+  // oai::utils::utils::free_wrapper((void**) &ie);
+}
+
+//------------------------------------------------------------------------------
 int PduSessionResourceModifyRequestTransfer::encode(uint8_t* buf, int bufSize) {
   ngap_utils::print_asn_msg(
       &asn_DEF_Ngap_PDUSessionResourceModifyRequestTransfer, m_Ie);
@@ -334,7 +376,27 @@ bool PduSessionResourceModifyRequestTransfer::decode(
           return false;
         }
       } break;
-      // TODO: QoS Flow to Release List (Optional)
+      case Ngap_ProtocolIE_ID_id_QosFlowToReleaseList: {
+        if (m_Ie->protocolIEs.list.array[i]->criticality ==
+                Ngap_Criticality_reject &&
+            m_Ie->protocolIEs.list.array[i]->value.present ==
+                Ngap_PDUSessionResourceModifyRequestTransferIEs__value_PR_QosFlowListWithCause) {
+          QosFlowListWithCause qosFlowToReleaseList = {};
+          if (!qosFlowToReleaseList.decode(
+                  m_Ie->protocolIEs.list.array[i]
+                      ->value.choice.QosFlowListWithCause)) {
+            oai::logger::logger_common::ngap().error(
+                "Decode NGAP QosFlowToReleaseList IE error");
+            return false;
+          }
+          m_QosFlowToReleaseList =
+              std::make_optional<QosFlowListWithCause>(qosFlowToReleaseList);
+        } else {
+          oai::logger::logger_common::ngap().error(
+              "Decode NGAP QosFlowToReleaseList IE error");
+          return false;
+        }
+      } break;
       // TODO: Additional UL NG-U UP TNL Information (Optional)
       // TODO: Common Network Instance (Optional)
       // TODO: Additional Redundant UL NG-U UP TNL Information (Optional)

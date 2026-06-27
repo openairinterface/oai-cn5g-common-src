@@ -243,7 +243,22 @@ class sbi_helper {
   // NEF inbound notification endpoint (NEF gives this to AMF/SMF/PCF)
   // The path is: NefNotifyBase + api_version + "/notify/" + nf_sub_id
   // e.g.  /nef-notify/v1/notify/amf-sub-abc123
-  static inline const std::string NefNotifyBase = "/nef-notify/";
+  static inline const std::string NefNotifyBase       = "/nef-notify/";
+  static inline const std::string NefNotifyPathNotify = "/notify";
+  static inline const std::string NefHealthPath       = "/health";
+  // NNEF PFD Management service paths
+  static inline const std::string NnefEventExposureBase =
+      "/nnef-eventexposure/";
+  static inline const std::string NnefPfdManagementBase =
+      "/nnef-pfdmanagement/";
+  static inline const std::string NnefPfdManagementPathTransactions =
+      "/transactions";
+  static inline const std::string NnefPfdManagementPathApplications =
+      "/applications";
+  static inline const std::string NnefPfdManagementPathPartialPull =
+      "/partial-pull";
+  static inline const std::string NnefPfdManagementPathSubscriptions =
+      "/subscriptions";
 
   // NRF: NF Management Service
   static inline const std::string NrfNfmBase = "/nnrf-nfm/";

@@ -290,3 +290,14 @@ u_int8_t xgpp_conv::pdu_session_type_to_ngap_pdu_session_type(
       return 5;
   }
 }
+
+bool xgpp_conv::usage_report_model_to_pfcp_usage_report_trigger(
+    const oai::_3gpp::model::UsageReport& ur_model,
+    pfcp::usage_report_trigger_t& purt) {
+  // TODO: incomplete WIP stub (pre-existing, unrelated to paging work). Returns
+  // false as a placeholder so the translation unit compiles; implement the
+  // UsageReport -> PFCP usage_report_trigger mapping when this is picked up.
+  (void) ur_model;
+  (void) purt;
+  return false;
+}

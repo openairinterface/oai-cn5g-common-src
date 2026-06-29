@@ -10,6 +10,7 @@
 #include "3gpp_29.281.h"
 #include "3gpp_24.501.hpp"
 #include "endpoint.hpp"
+#include "UsageReport.h"
 
 namespace oai::utils {
 
@@ -39,6 +40,10 @@ class xgpp_conv {
       const endpoint& ep, gtp_u_peer_address_t& gpa);
   static u_int8_t pdu_session_type_to_ngap_pdu_session_type(
       u_int8_t pdu_session_type_24_501);
+  static bool usage_report_model_to_pfcp_usage_report_trigger(
+      const oai::_3gpp::model::UsageReport& ur_model,
+      pfcp::usage_report_trigger_t& purt);
+
 };  // class xgpp_conv
 }  // namespace oai::utils
 

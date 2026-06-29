@@ -66,7 +66,8 @@ constexpr uint8_t kIeiFullNameForNetwork           = 0x43;
 constexpr uint8_t kIeiShortNameForNetwork          = 0x45;
 
 // OK
-constexpr uint8_t kIeiPayloadContainerType     = 0x08;  // Should be verified
+constexpr uint8_t kIeiPayloadContainerType =
+    0x08;  // TS 24.501 Table 8.2.6.1.1: IEI nibble 8H (Type 1 half-octet TV);
 constexpr uint8_t kIeiRequestType              = 0x08;  // 8-(4 higher bits)
 constexpr uint8_t kIeiNetworkSlicingIndication = 0x09;  // 9-(4 higher bits)
 
@@ -136,3 +137,11 @@ constexpr uint8_t kIei5gGuti                                 = 0x77;
 
 constexpr uint8_t kIeiEapMessage       = 0x78;
 constexpr uint8_t kIeiPayloadContainer = 0x7b;
+
+// TS 24.501 Release 17.10
+constexpr uint8_t kIeiNssrgInformation                           = 0x70;
+constexpr uint8_t kIeiServiceLevelAaContainerRegistrationRequest = 0x72;
+constexpr uint8_t kIeiServiceLevelAaContainerCuc                 = 0x72;
+constexpr uint8_t kIeiNsagInformationCuc                         = 0x73;
+constexpr uint8_t kIeiNsagInformationRegistrationAccept          = 0x7C;
+constexpr uint8_t kIeiServiceLevelAaContainerRegistrationAccept  = 0x7B;

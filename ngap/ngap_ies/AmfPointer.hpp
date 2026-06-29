@@ -5,6 +5,7 @@
 #ifndef _AMF_POINTER_H_
 #define _AMF_POINTER_H_
 
+#include <cstdint>
 #include <string>
 
 constexpr uint8_t kAmfPointerMaxValue = 63;  // 6 bits

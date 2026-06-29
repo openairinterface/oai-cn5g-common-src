@@ -103,6 +103,9 @@ file(GLOB AMF_MODEL_SRC_FILES
     ${AMF_MODEL_DIR}/CandidateForReplacement.cpp
     ${AMF_MODEL_DIR}/CeModeBInd.cpp
     ${AMF_MODEL_DIR}/CellGlobalId.cpp
+    ${AMF_MODEL_DIR}/ChangeItem.cpp
+    ${AMF_MODEL_DIR}/ChangeType.cpp
+    ${AMF_MODEL_DIR}/ChangeType_anyOf.cpp
     ${AMF_MODEL_DIR}/ChfInfo.cpp
     ${AMF_MODEL_DIR}/CipheringAlgorithm.cpp
     ${AMF_MODEL_DIR}/CipheringAlgorithm_anyOf.cpp
@@ -235,6 +238,7 @@ file(GLOB AMF_MODEL_SRC_FILES
     ${AMF_MODEL_DIR}/IdentityRange.cpp
     ${AMF_MODEL_DIR}/IdleStatusIndication.cpp
     ${AMF_MODEL_DIR}/ImmediateMdtConf.cpp
+    ${AMF_MODEL_DIR}/ImmediateReport.cpp
     ${AMF_MODEL_DIR}/ImsVoPs.cpp
     ${AMF_MODEL_DIR}/ImsVoPs_anyOf.cpp
     ${AMF_MODEL_DIR}/ImsiRange.cpp
@@ -347,6 +351,7 @@ file(GLOB AMF_MODEL_SRC_FILES
     ${AMF_MODEL_DIR}/MmTransactionLocationReportItem.cpp
     ${AMF_MODEL_DIR}/MmTransactionSliceReportItem.cpp
     ${AMF_MODEL_DIR}/MnpfInfo.cpp
+    ${AMF_MODEL_DIR}/ModificationNotification.cpp
     ${AMF_MODEL_DIR}/MoExpDataCounter.cpp
     ${AMF_MODEL_DIR}/MotionEventInfo.cpp
     ${AMF_MODEL_DIR}/N1MessageClass.cpp
@@ -421,6 +426,7 @@ file(GLOB AMF_MODEL_SRC_FILES
     ${AMF_MODEL_DIR}/NotificationType.cpp
     ${AMF_MODEL_DIR}/NotificationType_anyOf.cpp
     ${AMF_MODEL_DIR}/NotifiedPosInfo.cpp
+    ${AMF_MODEL_DIR}/NotifyItem.cpp
     ${AMF_MODEL_DIR}/NpnAccessInfo.cpp
     ${AMF_MODEL_DIR}/NrLocation.cpp
     ${AMF_MODEL_DIR}/NrV2xAuth.cpp
@@ -619,6 +625,7 @@ file(GLOB AMF_MODEL_SRC_FILES
     ${AMF_MODEL_DIR}/ScpDomainInfo.cpp
     ${AMF_MODEL_DIR}/ScpInfo.cpp
     ${AMF_MODEL_DIR}/SdRange.cpp
+    ${AMF_MODEL_DIR}/SdmSubscription.cpp
     ${AMF_MODEL_DIR}/SeafData.cpp
     ${AMF_MODEL_DIR}/SearchResult.cpp
     ${AMF_MODEL_DIR}/SensorMeasurement.cpp
@@ -803,6 +810,73 @@ file(GLOB AMF_MODEL_SRC_FILES
     ${AMF_MODEL_DIR}/r_5GsUserState.cpp
     ${AMF_MODEL_DIR}/r_5GsUserStateInfo.cpp
     ${AMF_MODEL_DIR}/Helpers.cpp
+    ${AMF_MODEL_DIR}/AcsInfo.cpp
+    ${AMF_MODEL_DIR}/AfExternal.cpp
+    ${AMF_MODEL_DIR}/AppDescriptor.cpp
+    ${AMF_MODEL_DIR}/CodeWordInd.cpp
+    ${AMF_MODEL_DIR}/CodeWordInd_anyOf.cpp
+    ${AMF_MODEL_DIR}/DefaultUnrelatedClass.cpp
+    ${AMF_MODEL_DIR}/DnnConfiguration.cpp
+    ${AMF_MODEL_DIR}/EcsAddrConfigInfo.cpp
+    ${AMF_MODEL_DIR}/EcsServerAddr.cpp
+    ${AMF_MODEL_DIR}/ExtendedSmSubsData.cpp
+    ${AMF_MODEL_DIR}/ExternalUnrelatedClass.cpp
+    ${AMF_MODEL_DIR}/FrameRouteInfo.cpp
+    ${AMF_MODEL_DIR}/GeoServiceArea.cpp
+    ${AMF_MODEL_DIR}/LcsBroadcastAssistanceTypesData.cpp
+    ${AMF_MODEL_DIR}/LcsClientClass.cpp
+    ${AMF_MODEL_DIR}/LcsClientClass_anyOf.cpp
+    ${AMF_MODEL_DIR}/LcsClientExternal.cpp
+    ${AMF_MODEL_DIR}/LcsClientGroupExternal.cpp
+    ${AMF_MODEL_DIR}/LcsMoData.cpp
+    ${AMF_MODEL_DIR}/LcsMoServiceClass.cpp
+    ${AMF_MODEL_DIR}/LcsMoServiceClass_anyOf.cpp
+    ${AMF_MODEL_DIR}/LcsPrivacyData.cpp
+    ${AMF_MODEL_DIR}/LocationPrivacyInd.cpp
+    ${AMF_MODEL_DIR}/LocationPrivacyInd_anyOf.cpp
+    ${AMF_MODEL_DIR}/Lpi.cpp
+    ${AMF_MODEL_DIR}/MbsSubscriptionData.cpp
+    ${AMF_MODEL_DIR}/NiddInformation.cpp
+    ${AMF_MODEL_DIR}/PduSessionContinuityInd.cpp
+    ${AMF_MODEL_DIR}/PduSessionContinuityInd_anyOf.cpp
+    ${AMF_MODEL_DIR}/PduSessionTypes.cpp
+    ${AMF_MODEL_DIR}/PlmnOperatorClass.cpp
+    ${AMF_MODEL_DIR}/PrivacyCheckRelatedAction.cpp
+    ${AMF_MODEL_DIR}/PrivacyCheckRelatedAction_anyOf.cpp
+    ${AMF_MODEL_DIR}/ProSeAllowedPlmn.cpp
+    ${AMF_MODEL_DIR}/ProseDirectAllowed.cpp
+    ${AMF_MODEL_DIR}/ProseDirectAllowed_anyOf.cpp
+    ${AMF_MODEL_DIR}/ProseServiceAuth.cpp
+    ${AMF_MODEL_DIR}/ProseSubscriptionData.cpp
+    ${AMF_MODEL_DIR}/ServiceTypeUnrelatedClass.cpp
+    ${AMF_MODEL_DIR}/SessionManagementSubscriptionData.cpp
+    ${AMF_MODEL_DIR}/SharedData.cpp
+    ${AMF_MODEL_DIR}/SharedDataTreatmentInstruction.cpp
+    ${AMF_MODEL_DIR}/SharedDataTreatmentInstruction_anyOf.cpp
+    ${AMF_MODEL_DIR}/SmSubsData.cpp
+    ${AMF_MODEL_DIR}/SmsManagementSubscriptionData.cpp
+    ${AMF_MODEL_DIR}/SmsSubscriptionData.cpp
+    ${AMF_MODEL_DIR}/SmsfInfo.cpp
+    ${AMF_MODEL_DIR}/SpatialValidityCond.cpp
+    ${AMF_MODEL_DIR}/SscMode.cpp
+    ${AMF_MODEL_DIR}/SscMode_anyOf.cpp
+    ${AMF_MODEL_DIR}/SscModes.cpp
+    ${AMF_MODEL_DIR}/SubscribedDefaultQos.cpp
+    ${AMF_MODEL_DIR}/SubscriptionDataSets.cpp
+    ${AMF_MODEL_DIR}/SuggestedPacketNumDl.cpp
+    ${AMF_MODEL_DIR}/UcSubscriptionData.cpp
+    ${AMF_MODEL_DIR}/UeContextInAmfData.cpp
+    ${AMF_MODEL_DIR}/UeContextInSmfDataSubFilter.cpp
+    ${AMF_MODEL_DIR}/UeContextInSmsfData.cpp
+    ${AMF_MODEL_DIR}/UnrelatedClass.cpp
+    ${AMF_MODEL_DIR}/UpConfidentiality.cpp
+    ${AMF_MODEL_DIR}/UpIntegrity.cpp
+    ${AMF_MODEL_DIR}/UpIntegrity_anyOf.cpp
+    ${AMF_MODEL_DIR}/UpSecurity.cpp
+    ${AMF_MODEL_DIR}/UserConsent.cpp
+    ${AMF_MODEL_DIR}/V2xSubscriptionData.cpp
+    ${AMF_MODEL_DIR}/ValidTimePeriod.cpp
+    ${AMF_MODEL_DIR}/VnGroupData.cpp
 )
 
 ## CONFIG used in NF_TARGET (main)

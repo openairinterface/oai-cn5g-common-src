@@ -282,6 +282,7 @@ void http_client::prepare_session(
 
   // Enable SSL/TLS
   if (m_enable_tls) {
+    // TODO: fix this for U24
     cpr::SslOptions sslOpts =
         cpr::Ssl(cpr::ssl::ALPN{false}, cpr::ssl::NPN{false});
     sslOpts.SetOption(cpr::ssl::TLSv1_0{});

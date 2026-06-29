@@ -7,6 +7,7 @@
 
 #include <string>
 #include "3gpp_29.244.h"
+#include <cstdint>
 
 namespace oai::utils {
 class fqdn {

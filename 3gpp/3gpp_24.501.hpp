@@ -252,7 +252,9 @@ constexpr uint8_t kLtePositioningProtocol  = 0x03;
 constexpr uint8_t kSorTransparentContainer = 0x04;
 constexpr uint8_t kUePolicyContainer       = 0x05;
 constexpr uint8_t kUeParametersUpdate      = 0x06;
-constexpr uint8_t kMultiplePayloads        = 0x0f;
+constexpr uint8_t kServiceLevelAaPayloadContainerType =
+    0x09;  // TS 24.501 table 9.11.3.40
+constexpr uint8_t kMultiplePayloads = 0x0f;
 
 constexpr uint8_t kPduSessionInitialRequest          = 0b001;
 constexpr uint8_t kExistingPduSession                = 0b010;

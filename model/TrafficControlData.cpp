@@ -257,7 +257,9 @@ void to_json(nlohmann::json& j, const TrafficControlData& o) {
 }
 
 void from_json(const nlohmann::json& j, TrafficControlData& o) {
-  j.at("tcId").get_to(o.m_TcId);
+  if (j.find("tcId") != j.end()) {
+    j.at("tcId").get_to(o.m_TcId);
+  }
   if (j.find("flowStatus") != j.end()) {
     j.at("flowStatus").get_to(o.m_FlowStatus);
     o.m_FlowStatusIsSet = true;

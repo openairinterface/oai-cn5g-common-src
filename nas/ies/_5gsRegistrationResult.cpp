@@ -108,18 +108,20 @@ int _5gsRegistrationResult::Decode(
     const uint8_t* const buf, int len, bool is_iei) {
   oai::logger::logger_common::nas().debug("Decoding %s", GetIeName().c_str());
 
-  if (len < k5gsRegistrationResultLength) {
+  const int min_len = is_iei ? k5gsRegistrationResultLength :
+                               (k5gsRegistrationResultLength - 1);
+  if (len < min_len) {
     oai::logger::logger_common::nas().error(
         "Buffer length is less than the minimum length of this IE (%d "
         "octet)",
-        k5gsRegistrationResultLength);
+        min_len);
     return KEncodeDecodeError;
   }
 
   int decoded_size = 0;
 
   // IEI and Length
-  int decoded_header_size = Type4NasIe::Decode(buf + decoded_size, len, true);
+  int decoded_header_size = Type4NasIe::Decode(buf + decoded_size, len, is_iei);
   if (decoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   decoded_size += decoded_header_size;
 

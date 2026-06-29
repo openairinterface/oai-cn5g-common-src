@@ -135,6 +135,14 @@ class RegistrationAccept : public Nas5gmmMessage {
   void SetPendingNssai(const std::vector<struct SNSSAI_s>& nssai);
   // TODO: Get
 
+  // Release 17.10: NSSRG information (IEI 0x70, TLV-E)
+  void SetNssrgInformation(const NssrgInformation& nssrg);
+  std::optional<NssrgInformation> GetNssrgInformation() const;
+
+  // Release 17.10: NSAG information (IEI 0x7C, TLV-E)
+  void SetNsagInformation(const NsagInformation& nsag);
+  std::optional<NsagInformation> GetNsagInformation() const;
+
  private:
   NasMmPlainHeader ie_header_;                         // Mandatory
   _5gsRegistrationResult ie_5gs_registration_result_;  // Mandatory
@@ -187,6 +195,9 @@ class RegistrationAccept : public Nas5gmmMessage {
   // TODO: Truncated 5G-S-TMSI configuration (Release 16.4.1)
   // TODO: Negotiated WUS assistance information (Release 16.4.1)
   // TODO: Negotiated NB-N1 mode DRX parameters (Release 16.14.0)
+  // Release 17.10 IEs
+  std::optional<NssrgInformation> ie_nssrg_information_;  // IEI 0x70, TLV-E
+  std::optional<NsagInformation> ie_nsag_information_;    // IEI 0x7C, TLV-E
 };
 
 }  // namespace oai::nas

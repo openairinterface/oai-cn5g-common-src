@@ -43,6 +43,10 @@ class downlink_data_report;
 class create_bar;
 class update_bar_within_pfcp_session_modification_request;
 class remove_bar;
+class create_mar;
+class update_mar;
+class remove_mar;
+class access_forwarding_action_information;
 class error_indication_report;
 class user_plane_path_failure_report;
 class update_duplicating_parameters;
@@ -862,6 +866,27 @@ class pfcp_ies_container {
     throw pfcp_msg_illegal_ie_exception(
         0, PFCP_IE_REMOVE_BAR, __FILE__, __LINE__);
   }
+  //  PFCP_IE_CREATE_MAR (3GPP TS 29.244 Section 7.5.2.8)
+  virtual bool get(pfcp::create_mar& v) const {
+    throw pfcp_msg_illegal_ie_exception(0, PFCP_IE_MAR_ID, __FILE__, __LINE__);
+  }
+  virtual void set(const pfcp::create_mar& v) {
+    throw pfcp_msg_illegal_ie_exception(0, PFCP_IE_MAR_ID, __FILE__, __LINE__);
+  }
+  //  PFCP_IE_UPDATE_MAR (3GPP TS 29.244 Section 7.5.4.x)
+  virtual bool get(pfcp::update_mar& v) const {
+    throw pfcp_msg_illegal_ie_exception(0, PFCP_IE_MAR_ID, __FILE__, __LINE__);
+  }
+  virtual void set(const pfcp::update_mar& v) {
+    throw pfcp_msg_illegal_ie_exception(0, PFCP_IE_MAR_ID, __FILE__, __LINE__);
+  }
+  //  PFCP_IE_REMOVE_MAR (3GPP TS 29.244 Section 7.5.4.x)
+  virtual bool get(pfcp::remove_mar& v) const {
+    throw pfcp_msg_illegal_ie_exception(0, PFCP_IE_MAR_ID, __FILE__, __LINE__);
+  }
+  virtual void set(const pfcp::remove_mar& v) {
+    throw pfcp_msg_illegal_ie_exception(0, PFCP_IE_MAR_ID, __FILE__, __LINE__);
+  }
   //  PFCP_IE_BAR_ID
   virtual bool get(pfcp::bar_id_t& v) const {
     throw pfcp_msg_illegal_ie_exception(0, PFCP_IE_BAR_ID, __FILE__, __LINE__);
@@ -1659,6 +1684,27 @@ class ethernet_packet_filter : public pfcp::pfcp_ies_container {
 
 //------------------------------------------------------------------------------
 // Table 7.5.2.2-2: PDI IE within PFCP Session Establishment Request
+// clang-format off
+/*! @brief PDI grouped IE core-type — 3GPP TS 29.244 V17.10.0 Table 7.5.2.2-2
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * Source Interface                    M     X   X   X   X    X   §8.2.33
+ * Local F-TEID                        C     X   X   X   X    X   §8.2.3
+ * Network Instance                    C     X   X   X   X    X   §8.2.4
+ * UE IP Address                       C     X   X   X   X    X   §8.2.6
+ * Traffic Endpoint ID                 C     -   -   -   X    -   §8.2.x  [TODO — not in lib]
+ * SDF Filter                          C     X   X   X   X    X   §8.2.5
+ * Application ID                      C     X   X   X   X    X   §8.2.35
+ * Ethernet PDU Session Information    C     -   X   -   X    -   §8.2.117
+ * Ethernet Packet Filter              C     -   X   -   X    -   §7.5.2.2-3
+ * QFI                                 C     -   -   -   X    X   §8.2.89
+ * Framed Route                        C     -   X   -   -    -   §8.2.132
+ * Framed Routing                      C     -   X   -   -    -   §8.2.133 [TODO — not in lib]
+ * Framed IPv6 Route                   C     -   X   -   -    -   §8.2.134 [TODO — not in lib]
+ * Source Interface Type (3GPP)        O     -   -   -   X    -   §8.2.134
+ */
+// clang-format on
 class pdi : public pfcp::pfcp_ies_container {
  public:
   std::pair<bool, pfcp::source_interface_t> source_interface;
@@ -1675,8 +1721,9 @@ class pdi : public pfcp::pfcp_ies_container {
   std::pair<bool, std::vector<pfcp::framed_route_t>> framed_route;
   std::pair<bool, pfcp::framed_routing_t> framed_routing;
   std::pair<bool, pfcp::framed_ipv6_route_t> framed_ipv6_route;
-  std::pair<bool, pfcp::_3gpp_interface_type_t> _3gpp_interface_type;
+  std::pair<bool, pfcp::_3gpp_interface_type_t> source_interface_type;
 
+  /** @brief Default constructor — all fields absent. */
   pdi()
       : source_interface(),
         local_fteid(),
@@ -1690,8 +1737,13 @@ class pdi : public pfcp::pfcp_ies_container {
         qfi(),
         framed_route(),
         framed_routing(),
-        framed_ipv6_route() {}
+        framed_ipv6_route(),
+        source_interface_type() {}
 
+  /** @brief Copy constructor.
+   *  @param p  Source pdi to copy.
+   *  @see   3GPP TS 29.244 V17.10.0 Table 7.5.2.2-2
+   */
   pdi(const pdi& p)
       : source_interface(p.source_interface),
         local_fteid(p.local_fteid),
@@ -1705,7 +1757,8 @@ class pdi : public pfcp::pfcp_ies_container {
         qfi(p.qfi),
         framed_route(p.framed_route),
         framed_routing(p.framed_routing),
-        framed_ipv6_route(p.framed_ipv6_route) {}
+        framed_ipv6_route(p.framed_ipv6_route),
+        source_interface_type(p.source_interface_type) {}
 
   // virtual ~pdi() {};
   void set(const pfcp::source_interface_t& v) {
@@ -1761,8 +1814,8 @@ class pdi : public pfcp::pfcp_ies_container {
     framed_ipv6_route.second = v;
   }
   void set(const pfcp::_3gpp_interface_type_t& v) {
-    _3gpp_interface_type.first  = true;
-    _3gpp_interface_type.second = v;
+    source_interface_type.first  = true;
+    source_interface_type.second = v;
   }
 
   bool get(pfcp::source_interface_t& v) const {
@@ -1857,8 +1910,8 @@ class pdi : public pfcp::pfcp_ies_container {
     return false;
   }
   bool get(pfcp::_3gpp_interface_type_t& v) const {
-    if (_3gpp_interface_type.first) {
-      v = _3gpp_interface_type.second;
+    if (source_interface_type.first) {
+      v = source_interface_type.second;
       return true;
     }
     return false;
@@ -1867,6 +1920,30 @@ class pdi : public pfcp::pfcp_ies_container {
 
 //------------------------------------------------------------------------------
 // Table 7.5.2.2-1: Create PDR IE within PFCP Session Establishment Request
+// clang-format off
+/*! @brief Create PDR grouped IE — 3GPP TS 29.244 V17.10.0 Table 7.5.2.2-1
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * PDR ID                              M     X   X   X   X    X   §8.2.36
+ * Precedence                          M     -   X   X   X    X   §8.2.11
+ * PDI                                 M     X   X   X   X    X   §7.5.2.2-2
+ * Outer Header Removal                C     X   X   -   X    X   §8.2.64
+ * FAR ID                              C     X   X   X   X    X   §8.2.74
+ * URR ID                              C     X   X   X   X    -   §8.2.54
+ * QER ID                              C     -   X   X   X    X   §8.2.75
+ * Activate Predefined Rules           C     -   X   X   X    -   §8.2.72
+ * Deactivate Predefined Rules         C     -   X   X   X    -   §8.2.73  [TODO — not in lib]
+ * Activation Time                     O     -   X   X   X    -   §8.2.121 [TODO — not in lib]
+ * Deactivation Time                   O     -   X   X   X    -   §8.2.122 [TODO — not in lib]
+ * MAR ID                              C     -   -   -   X    -   §8.2.123
+ * Packet Replication and Detection    C     -   -   -   X    -   §8.2.130 [TODO — not in lib]
+ *   Carry-On Information
+ * IP Multicast Addressing Info        O     -   -   -   X    -   grouped  [TODO — not in lib]
+ * UE IP address Pool Identity         O     -   X   -   X    -   §8.2.128 [TODO — not in lib]
+ * MPTCP Applicable Indication         C     -   -   -   X    -   §8.2.181 [TODO — not in lib]
+ */
+// clang-format on
 class create_pdr : public pfcp::pfcp_ies_container {
  public:
   std::pair<bool, pfcp::pdr_id_t> pdr_id;
@@ -1877,6 +1954,8 @@ class create_pdr : public pfcp::pfcp_ies_container {
   std::pair<bool, pfcp::urr_id_t> urr_id;
   std::pair<bool, pfcp::qer_id_t> qer_id;
   std::pair<bool, pfcp::activate_predefined_rules_t> activate_predefined_rules;
+  // std::pair<bool, std::vector<pfcp::activate_predefined_rules_t>>
+  // activate_predefined_rules;
 
   create_pdr()
       : pdr_id(),
@@ -1992,36 +2071,64 @@ class create_pdr : public pfcp::pfcp_ies_container {
 
 //------------------------------------------------------------------------------
 // Table 7.5.4.3-2: Update Forwarding Parameters IE in FAR
+// clang-format off
+/*! @brief Update Forwarding Parameters grouped IE core-type — 3GPP TS 29.244 V17.10.0 Table 7.5.4.3-2
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * Destination Interface               C     X   X   -   X    X   §8.2.2
+ * Network Instance                    C     X   X   X   X    X   §8.2.4
+ * Redirect Information                C     X   X   -   X    X   §8.2.20
+ * Outer Header Creation               C     X   X   -   X    X   §8.2.56
+ * Transport Level Marking             C     X   X   -   X    -   §8.2.23
+ * Forwarding Policy                   C     X   X   -   X    -   §8.2.53
+ * Header Enrichment                   C     -   X   -   X    -   §8.2.97  [TODO — not in lib]
+ * PFCPSMREQ-Flags                     C     -   -   -   X    -   §8.2.94
+ * Linked Traffic Endpoint ID          C     -   -   -   X    -   §8.2.x   [TODO — not in lib]
+ * Destination Interface Type (3GPP)   O     -   -   -   X    -   §8.2.134
+ */
+// clang-format on
 class update_forwarding_parameters : public pfcp::pfcp_ies_container {
  public:
   std::pair<bool, pfcp::destination_interface_t> destination_interface;
   std::pair<bool, pfcp::network_instance_t> network_instance;
+  std::pair<bool, pfcp::redirect_information_t> redirect_inforamtion;
   std::pair<bool, pfcp::outer_header_creation_t> outer_header_creation;
   std::pair<bool, pfcp::transport_level_marking_t> transport_level_marking;
   std::pair<bool, pfcp::forwarding_policy_t> forwarding_policy;
   std::pair<bool, pfcp::header_enrichment_t> header_enrichment;
   std::pair<bool, pfcp::pfcpsmreq_flags_t> pfcpsmreq_flags;
   std::pair<bool, pfcp::traffic_endpoint_id_t> linked_traffic_endpoint_id;
+  std::pair<bool, pfcp::_3gpp_interface_type_t> destination_interface_type;
 
+  /** @brief Default constructor — all fields absent. */
   update_forwarding_parameters()
       : destination_interface(),
         network_instance(),
+        redirect_inforamtion(),
         outer_header_creation(),
         transport_level_marking(),
         forwarding_policy(),
         header_enrichment(),
         pfcpsmreq_flags(),
-        linked_traffic_endpoint_id() {}
+        linked_traffic_endpoint_id(),
+        destination_interface_type() {}
 
+  /** @brief Copy constructor.
+   *  @param u  Source update_forwarding_parameters to copy.
+   *  @see   3GPP TS 29.244 V17.10.0 Table 7.5.4.3-2
+   */
   update_forwarding_parameters(const update_forwarding_parameters& u)
       : destination_interface(u.destination_interface),
         network_instance(u.network_instance),
+        redirect_inforamtion(u.redirect_inforamtion),
         outer_header_creation(u.outer_header_creation),
         transport_level_marking(u.transport_level_marking),
         forwarding_policy(u.forwarding_policy),
         header_enrichment(u.header_enrichment),
         pfcpsmreq_flags(u.pfcpsmreq_flags),
-        linked_traffic_endpoint_id(u.linked_traffic_endpoint_id) {}
+        linked_traffic_endpoint_id(u.linked_traffic_endpoint_id),
+        destination_interface_type(u.destination_interface_type) {}
 
   // virtual ~update_forwarding_parameters() {};
   void set(const pfcp::destination_interface_t& v) {
@@ -2031,6 +2138,10 @@ class update_forwarding_parameters : public pfcp::pfcp_ies_container {
   void set(const pfcp::network_instance_t& v) {
     network_instance.first  = true;
     network_instance.second = v;
+  }
+  void set(const pfcp::redirect_information_t& v) {
+    redirect_inforamtion.first  = true;
+    redirect_inforamtion.second = v;
   }
   void set(const pfcp::outer_header_creation_t& v) {
     outer_header_creation.first  = true;
@@ -2056,6 +2167,10 @@ class update_forwarding_parameters : public pfcp::pfcp_ies_container {
     linked_traffic_endpoint_id.first  = true;
     linked_traffic_endpoint_id.second = v;
   }
+  void set(const pfcp::_3gpp_interface_type_t& v) {
+    destination_interface_type.first  = true;
+    destination_interface_type.second = v;
+  }
 
   bool get(pfcp::destination_interface_t& v) const {
     if (destination_interface.first) {
@@ -2067,6 +2182,13 @@ class update_forwarding_parameters : public pfcp::pfcp_ies_container {
   bool get(pfcp::network_instance_t& v) const {
     if (network_instance.first) {
       v = network_instance.second;
+      return true;
+    }
+    return false;
+  }
+  bool get(pfcp::redirect_information_t& v) const {
+    if (redirect_inforamtion.first) {
+      v = redirect_inforamtion.second;
       return true;
     }
     return false;
@@ -2113,10 +2235,34 @@ class update_forwarding_parameters : public pfcp::pfcp_ies_container {
     }
     return false;
   }
+  bool get(pfcp::_3gpp_interface_type_t& v) const {
+    if (destination_interface_type.first) {
+      v = destination_interface_type.second;
+      return true;
+    }
+    return false;
+  }
 };
 
 //------------------------------------------------------------------------------
 // Table 7.5.2.3-2: Forwarding Parameters IE in FAR
+// clang-format off
+/*! @brief Forwarding Parameters grouped IE core-type — 3GPP TS 29.244 V17.10.0 Table 7.5.2.3-2
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * Destination Interface               M     X   X   -   X    X   §8.2.2
+ * Network Instance                    C     X   X   X   X    X   §8.2.4
+ * Redirect Information                C     X   X   -   X    X   §8.2.20
+ * Outer Header Creation               C     X   X   -   X    X   §8.2.56
+ * Transport Level Marking             C     X   X   -   X    -   §8.2.23
+ * Forwarding Policy                   C     X   X   -   X    -   §8.2.53
+ * Header Enrichment                   C     -   X   -   X    -   §8.2.97  [TODO — not in lib]
+ * Linked Traffic Endpoint ID          C     -   -   -   X    -   §8.2.x   [TODO — not in lib]
+ * Proxying                            C     -   X   -   -    -   §8.2.100 [TODO — not in lib]
+ * Destination Interface Type (3GPP)   O     -   -   -   X    -   §8.2.134
+ */
+// clang-format on
 class forwarding_parameters : public pfcp::pfcp_ies_container {
  public:
   std::pair<bool, pfcp::destination_interface_t> destination_interface;
@@ -2128,7 +2274,9 @@ class forwarding_parameters : public pfcp::pfcp_ies_container {
   std::pair<bool, pfcp::header_enrichment_t> header_enrichment;
   std::pair<bool, pfcp::traffic_endpoint_id_t> linked_traffic_endpoint_id;
   std::pair<bool, pfcp::proxying_t> proxying;
+  std::pair<bool, pfcp::_3gpp_interface_type_t> destination_interface_type;
 
+  /** @brief Default constructor — all fields absent. */
   forwarding_parameters()
       : destination_interface(),
         network_instance(),
@@ -2138,8 +2286,13 @@ class forwarding_parameters : public pfcp::pfcp_ies_container {
         forwarding_policy(),
         header_enrichment(),
         linked_traffic_endpoint_id(),
-        proxying() {}
+        proxying(),
+        destination_interface_type() {}
 
+  /** @brief Copy constructor.
+   *  @param f  Source forwarding_parameters to copy.
+   *  @see   3GPP TS 29.244 V17.10.0 Table 7.5.2.3-2
+   */
   forwarding_parameters(const forwarding_parameters& f)
       : destination_interface(f.destination_interface),
         network_instance(f.network_instance),
@@ -2149,17 +2302,21 @@ class forwarding_parameters : public pfcp::pfcp_ies_container {
         forwarding_policy(f.forwarding_policy),
         header_enrichment(f.header_enrichment),
         linked_traffic_endpoint_id(f.linked_traffic_endpoint_id),
-        proxying(f.proxying) {}
+        proxying(f.proxying),
+        destination_interface_type(f.destination_interface_type) {}
 
   bool update(const update_forwarding_parameters& u) {
     if (u.destination_interface.first) set(u.destination_interface.second);
     if (u.network_instance.first) set(u.network_instance.second);
+    if (u.redirect_inforamtion.first) set(u.redirect_inforamtion.second);
     if (u.outer_header_creation.first) set(u.outer_header_creation.second);
     if (u.transport_level_marking.first) set(u.transport_level_marking.second);
     if (u.forwarding_policy.first) set(u.forwarding_policy.second);
     if (u.header_enrichment.first) set(u.header_enrichment.second);
     if (u.linked_traffic_endpoint_id.first)
       set(u.linked_traffic_endpoint_id.second);
+    if (u.destination_interface_type.first)
+      set(u.destination_interface_type.second);
     return true;
   }
 
@@ -2199,6 +2356,10 @@ class forwarding_parameters : public pfcp::pfcp_ies_container {
   void set(const pfcp::proxying_t& v) {
     proxying.first  = true;
     proxying.second = v;
+  }
+  void set(const pfcp::_3gpp_interface_type_t& v) {
+    destination_interface_type.first  = true;
+    destination_interface_type.second = v;
   }
 
   bool get(pfcp::destination_interface_t& v) const {
@@ -2260,6 +2421,13 @@ class forwarding_parameters : public pfcp::pfcp_ies_container {
   bool get(pfcp::proxying_t& v) const {
     if (proxying.first) {
       v = proxying.second;
+      return true;
+    }
+    return false;
+  }
+  bool get(pfcp::_3gpp_interface_type_t& v) const {
+    if (destination_interface_type.first) {
+      v = destination_interface_type.second;
       return true;
     }
     return false;
@@ -2337,6 +2505,17 @@ class update_duplicating_parameters : public pfcp::pfcp_ies_container {
 
 //------------------------------------------------------------------------------
 // Table 7.5.2.3-3: Duplicating Parameters IE in FAR
+// clang-format off
+/*! @brief Duplicating Parameters grouped IE core-type — 3GPP TS 29.244 V17.10.0 Table 7.5.2.3-3
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * Destination Interface               C     -   X   -   X    -   §8.2.2
+ * Outer Header Creation               C     -   X   -   X    -   §8.2.56
+ * Transport Level Marking             C     -   X   -   X    -   §8.2.23
+ * Forwarding Policy                   C     -   X   -   X    -   §8.2.53
+ */
+// clang-format on
 class duplicating_parameters : public pfcp::pfcp_ies_container {
  public:
   std::pair<bool, pfcp::destination_interface_t> destination_interface;
@@ -2344,12 +2523,17 @@ class duplicating_parameters : public pfcp::pfcp_ies_container {
   std::pair<bool, pfcp::transport_level_marking_t> transport_level_marking;
   std::pair<bool, pfcp::forwarding_policy_t> forwarding_policy;
 
+  /** @brief Default constructor — all fields absent. */
   duplicating_parameters()
       : destination_interface(),
         outer_header_creation(),
         transport_level_marking(),
         forwarding_policy() {}
 
+  /** @brief Copy constructor.
+   *  @param d  Source duplicating_parameters to copy.
+   *  @see   3GPP TS 29.244 V17.10.0 Table 7.5.2.3-3
+   */
   duplicating_parameters(const duplicating_parameters& d)
       : destination_interface(d.destination_interface),
         outer_header_creation(d.outer_header_creation),
@@ -2411,8 +2595,18 @@ class duplicating_parameters : public pfcp::pfcp_ies_container {
   }
 };
 
-//------------------------------------------------------------------------------
-// Table 7.5.2.3-1: Create FAR IE within PFCP Session Establishment Request
+// clang-format off
+/*! @brief Create FAR grouped IE — 3GPP TS 29.244 V17.10.0 Table 7.5.2.3-1
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * FAR ID                              M     X   X   X   X    X   §8.2.74
+ * Apply Action                        M     X   X   X   X    X   §8.2.26
+ * Forwarding Parameters               C     X   X   -   X    X   §7.5.2.3-2
+ * Duplicating Parameters              C     -   X   -   X    -   §7.5.2.3-3
+ * BAR ID                              C     -   X   -   X    -   §8.2.57
+ */
+// clang-format on
 class create_far : public pfcp::pfcp_ies_container {
  public:
   std::pair<bool, pfcp::far_id_t> far_id;
@@ -2654,9 +2848,38 @@ class event_information : public pfcp::pfcp_ies_container {
   }
 };
 
-//------------------------------------------------------------------------------
-// Table 7.5.2.4-1: Create URR IE within PFCP Session Establishment Request
-// Section 7.5.4.17: Create URR IE within PFCP Session Modification Request
+// clang-format off
+/*! @brief Create URR grouped IE — 3GPP TS 29.244 V17.10.0 Table 7.5.2.4-1
+ *         also used in: Table 7.5.4.17-1 (Session Modification Request)
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * URR ID                              M     X   X   X   X    -   §8.2.54
+ * Measurement Method                  M     X   X   X   X    -   §8.2.40
+ * Reporting Triggers                  M     X   X   X   X    -   §8.2.41
+ * Measurement Period                  C     X   X   X   X    -   §8.2.42
+ * Volume Threshold                    C     X   X   X   X    -   §8.2.43
+ * Volume Quota                        C     -   X   -   X    -   §8.2.46
+ * Time Threshold                      C     X   X   X   X    -   §8.2.47
+ * Time Quota                          C     -   X   -   X    -   §8.2.48
+ * Quota Holding Time                  C     -   X   -   X    -   §8.2.64
+ * Dropped DL Traffic Threshold        C     -   X   -   X    -   §8.2.67
+ * Quota Validity Time                 C     -   X   -   X    -   §8.2.129 [TODO — not in lib]
+ * Monitoring Time                     O     -   X   X   X    -   §8.2.55
+ * Subsequent Volume Threshold         C     -   X   -   X    -   §8.2.56
+ * Subsequent Time Threshold           C     -   X   -   X    -   §8.2.57
+ * Inactivity Detection Time           C     -   X   -   X    -   §8.2.58
+ * Linked URR ID                       O     -   X   X   X    -   §8.2.59
+ * Measurement Information             C     -   X   -   X    -   §8.2.60
+ * Time Quota Mechanism                C     -   X   -   X    -   §8.2.62
+ * Aggregated URRs                     C     -   -   -   X    -   grouped
+ * FAR ID for Quota Action             C     -   X   -   X    -   §8.2.74
+ * Ethernet Inactivity Timer           C     -   X   -   X    -   §8.2.130
+ * Additional Monitoring Time          O     -   -   -   X    -   grouped
+ * Number of Reports                   C     -   -   -   X    -   §8.2.163 [TODO — not in lib]
+ * Event Information                   C     -   -   -   X    -   grouped
+ */
+// clang-format on
 class create_urr : public pfcp::pfcp_ies_container {
  public:
   std::pair<bool, pfcp::urr_id_t> urr_id;
@@ -3007,7 +3230,25 @@ class create_urr : public pfcp::pfcp_ies_container {
 };
 
 //------------------------------------------------------------------------------
-// Table 7.5.2.5-1: Create QER IE within PFCP Session Establishment Request
+// clang-format off
+/*! @brief Create QER grouped IE — 3GPP TS 29.244 V17.10.0 Table 7.5.2.5-1
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * QER ID                              M     -   X   X   X    X   §8.2.75
+ * QER Correlation ID                  C     -   X   X   X    -   §8.2.76
+ * Gate Status                         M     -   X   X   X    X   §8.2.7
+ * Maximum Bitrate                     C     -   X   X   X    X   §8.2.8
+ * Guaranteed Bitrate                  C     -   X   X   X    X   §8.2.9
+ * Packet Rate                         C     -   X   -   X    -   §8.2.21
+ * DL Flow Level Marking               C     -   X   -   X    -   §8.2.22
+ * QoS Flow Identifier (QFI)           C     -   -   -   X    X   §8.2.89
+ * Reflective QoS (RQI)                C     -   -   -   X    X   §8.2.88
+ * Paging Policy Indicator (PPI)       C     -   -   -   X    -   §8.2.91
+ * Averaging Window                    O     -   -   -   X    -   §8.2.118 [TODO — paging_policy_indicator & averaging_window not in lib IE classes]
+ * QER Control Indications             O     -   -   -   X    -   §8.2.177 [TODO — not in lib]
+ */
+// clang-format on
 class create_qer : public pfcp::pfcp_ies_container {
  public:
   std::pair<bool, pfcp::qer_id_t> qer_id;
@@ -3019,6 +3260,8 @@ class create_qer : public pfcp::pfcp_ies_container {
   std::pair<bool, pfcp::dl_flow_level_marking_t> dl_flow_level_marking;
   std::pair<bool, pfcp::qfi_t> qos_flow_identifier;
   std::pair<bool, pfcp::rqi_t> reflective_qos;
+  std::pair<bool, pfcp::paging_policy_indicator_t> paging_policy_indicator;
+  std::pair<bool, pfcp::averaging_window_t> averaging_window;
 
   create_qer()
       : qer_id(),
@@ -3029,7 +3272,9 @@ class create_qer : public pfcp::pfcp_ies_container {
         packet_rate(),
         dl_flow_level_marking(),
         qos_flow_identifier(),
-        reflective_qos() {}
+        reflective_qos(),
+        paging_policy_indicator(),
+        averaging_window() {}
 
   create_qer(const create_qer& c)
       : qer_id(c.qer_id),
@@ -3040,7 +3285,9 @@ class create_qer : public pfcp::pfcp_ies_container {
         packet_rate(c.packet_rate),
         dl_flow_level_marking(c.dl_flow_level_marking),
         qos_flow_identifier(c.qos_flow_identifier),
-        reflective_qos(c.reflective_qos) {}
+        reflective_qos(c.reflective_qos),
+        paging_policy_indicator(c.paging_policy_indicator),
+        averaging_window(c.averaging_window) {}
 
   // virtual ~create_qer() {};
   void set(const pfcp::qer_id_t& v) {
@@ -3078,6 +3325,14 @@ class create_qer : public pfcp::pfcp_ies_container {
   void set(const pfcp::rqi_t& v) {
     reflective_qos.first  = true;
     reflective_qos.second = v;
+  }
+  void set(const pfcp::paging_policy_indicator_t& v) {
+    paging_policy_indicator.first  = true;
+    paging_policy_indicator.second = v;
+  }
+  void set(const pfcp::averaging_window_t& v) {
+    averaging_window.first  = true;
+    averaging_window.second = v;
   }
 
   bool get(pfcp::qer_id_t& v) const {
@@ -3143,10 +3398,34 @@ class create_qer : public pfcp::pfcp_ies_container {
     }
     return false;
   }
+  bool get(pfcp::paging_policy_indicator_t& v) const {
+    if (paging_policy_indicator.first) {
+      v = paging_policy_indicator.second;
+      return true;
+    }
+    return false;
+  }
+  bool get(pfcp::averaging_window_t& v) const {
+    if (averaging_window.first) {
+      v = averaging_window.second;
+      return true;
+    }
+    return false;
+  }
 };
 
 //------------------------------------------------------------------------------
-// Table 7.5.2.6-1: Create BAR IE within PFCP Session Establishment Request
+// clang-format off
+/*! @brief Create BAR grouped IE — 3GPP TS 29.244 V17.10.0 Table 7.5.2.6-1
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * BAR ID                              M     -   X   -   X    -   §8.2.57
+ * Downlink Data Notification Delay    C     -   X   -   X    -   §8.2.68
+ * Suggested Buffering Packets Count   C     -   X   -   X    -   §8.2.71
+ * MT-EDT Control Information         C     -   -   -   X    -   §8.2.166 [TODO — not in lib]
+ */
+// clang-format on
 class create_bar : public pfcp::pfcp_ies_container {
  public:
   std::pair<bool, pfcp::bar_id_t> bar_id;
@@ -3206,6 +3485,21 @@ class create_bar : public pfcp::pfcp_ies_container {
 //------------------------------------------------------------------------------
 // Table 7.5.2.7-1: Create Traffic Endpoint IE within PFCP Session Establishment
 // Request
+// clang-format off
+/*! @brief Create Traffic Endpoint grouped IE core-type — 3GPP TS 29.244 V17.10.0 Table 7.5.2.7-1
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * Traffic Endpoint ID                 M     -   -   -   X    -   §8.2.x   [TODO — not in lib]
+ * Local F-TEID                        C     -   -   -   X    -   §8.2.3
+ * Network Instance                    C     -   -   -   X    -   §8.2.4
+ * UE IP Address                       C     -   -   -   X    -   §8.2.6
+ * Ethernet PDU Session Information    C     -   -   -   X    -   §8.2.117
+ * Framed Route                        C     -   -   -   X    -   §8.2.132
+ * Framed Routing                      C     -   -   -   X    -   §8.2.133 [TODO — not in lib]
+ * Framed IPv6 Route                   C     -   -   -   X    -   §8.2.134 [TODO — not in lib]
+ */
+// clang-format on
 class create_traffic_endpoint : public pfcp::pfcp_ies_container {
  public:
   std::pair<bool, pfcp::traffic_endpoint_id_t> traffic_endpoint_id;
@@ -3218,6 +3512,7 @@ class create_traffic_endpoint : public pfcp::pfcp_ies_container {
   std::pair<bool, pfcp::framed_routing_t> framed_routing;
   std::pair<bool, pfcp::framed_ipv6_route_t> framed_ipv6_route;
 
+  /** @brief Default constructor — all fields absent. */
   create_traffic_endpoint()
       : traffic_endpoint_id(),
         local_fteid(),
@@ -3228,6 +3523,10 @@ class create_traffic_endpoint : public pfcp::pfcp_ies_container {
         framed_routing(),
         framed_ipv6_route() {}
 
+  /** @brief Copy constructor.
+   *  @param c  Source create_traffic_endpoint to copy.
+   *  @see   3GPP TS 29.244 V17.10.0 Table 7.5.2.7-1
+   */
   create_traffic_endpoint(const create_traffic_endpoint& c)
       : traffic_endpoint_id(c.traffic_endpoint_id),
         local_fteid(c.local_fteid),
@@ -3332,13 +3631,27 @@ class create_traffic_endpoint : public pfcp::pfcp_ies_container {
 
 //------------------------------------------------------------------------------
 // Table 7.5.3.2-1: Created PDR IE within PFCP Session Establishment Response
+// clang-format off
+/*! @brief Created PDR grouped IE core-type — 3GPP TS 29.244 V17.10.0 Table 7.5.3.2
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * PDR ID                              M     X   X   X   X    X   §8.2.36
+ * Local F-TEID                        C     X   X   X   X    X   §8.2.3
+ */
+// clang-format on
 class created_pdr : public pfcp::pfcp_ies_container {
  public:
   std::pair<bool, pfcp::pdr_id_t> pdr_id;
   std::pair<bool, pfcp::fteid_t> local_fteid;
 
+  /** @brief Default constructor — all fields absent. */
   created_pdr() : pdr_id(), local_fteid() {}
 
+  /** @brief Copy constructor.
+   *  @param c  Source created_pdr to copy.
+   *  @see   3GPP TS 29.244 V17.10.0 Table 7.5.3.2
+   */
   created_pdr(const created_pdr& c) {
     pdr_id      = c.pdr_id;
     local_fteid = c.local_fteid;
@@ -3483,7 +3796,27 @@ class overload_control_information : public pfcp::pfcp_ies_container {
 };
 
 //------------------------------------------------------------------------------
-// Table 7.5.4.2-1: Update PDR IE within PFCP Session Modification Request
+// clang-format off
+/*! @brief Update PDR grouped IE — 3GPP TS 29.244 V17.10.0 Table 7.5.4.2-1
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * PDR ID                              M     X   X   X   X    X   §8.2.36
+ * Outer Header Removal                C     X   X   -   X    X   §8.2.64
+ * Precedence                          C     -   X   X   X    X   §8.2.11
+ * PDI                                 C     X   X   X   X    X   §7.5.2.2-2
+ * FAR ID                              C     X   X   X   X    X   §8.2.74
+ * URR ID                              C     X   X   X   X    -   §8.2.54
+ * QER ID                              C     -   X   X   X    X   §8.2.75
+ * Activate Predefined Rules           C     -   X   X   X    -   §8.2.72
+ * Deactivate Predefined Rules         C     -   X   X   X    -   §8.2.73
+ * Activation Time                     O     -   X   X   X    -   §8.2.121 [TODO — not in lib]
+ * Deactivation Time                   O     -   X   X   X    -   §8.2.122 [TODO — not in lib]
+ * IP Multicast Addressing Info        O     -   -   -   X    -   grouped  [TODO — not in lib]
+ * Transport Delay Reporting           C     -   -   -   X    -   grouped  [TODO — not in lib]
+ * RAT Type                            O     -   -   -   X    -   §8.2.186 [TODO — not in lib]
+ */
+// clang-format on
 class update_pdr : public pfcp::pfcp_ies_container {
  public:
   pfcp::pdr_id_t pdr_id;
@@ -3597,10 +3930,40 @@ class update_pdr : public pfcp::pfcp_ies_container {
     }
     return false;
   }
+
+  // Vector getters for predefined rules
+  const std::vector<pfcp::activate_predefined_rules_t>&
+  get_activate_predefined_rules() const {
+    return activate_predefined_rules;
+  }
+
+  const std::vector<pfcp::deactivate_predefined_rules_t>&
+  get_deactivate_predefined_rules() const {
+    return deactivate_predefined_rules;
+  }
+
+  bool has_activate_predefined_rules() const {
+    return !activate_predefined_rules.empty();
+  }
+
+  bool has_deactivate_predefined_rules() const {
+    return !deactivate_predefined_rules.empty();
+  }
 };
 
 //------------------------------------------------------------------------------
-// Table 7.5.4.3-1: Update FAR IE within PFCP Session Modification Request
+// clang-format off
+/*! @brief Update FAR grouped IE — 3GPP TS 29.244 V17.10.0 Table 7.5.4.3-1
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * FAR ID                              M     X   X   X   X    X   §8.2.74
+ * Apply Action                        C     X   X   X   X    X   §8.2.26
+ * Update Forwarding Parameters        C     X   X   -   X    X   §7.5.4.3-2
+ * Update Duplicating Parameters       C     -   X   -   X    -   §7.5.4.3-3
+ * BAR ID                              C     -   X   -   X    -   §8.2.57
+ */
+// clang-format on
 class update_far : public pfcp::pfcp_ies_container {
  public:
   pfcp::far_id_t far_id;
@@ -3679,7 +4042,37 @@ class update_far : public pfcp::pfcp_ies_container {
 };
 
 //------------------------------------------------------------------------------
-// Table 7.5.4.4-1: Update URR IE within PFCP Session Modification Request
+// clang-format off
+/*! @brief Update URR grouped IE — 3GPP TS 29.244 V17.10.0 Table 7.5.4.4-1
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * URR ID                              M     X   X   X   X    -   §8.2.54
+ * Measurement Method                  C     X   X   X   X    -   §8.2.40
+ * Reporting Triggers                  C     X   X   X   X    -   §8.2.41
+ * Measurement Period                  C     X   X   X   X    -   §8.2.42
+ * Volume Threshold                    C     X   X   X   X    -   §8.2.43
+ * Volume Quota                        C     -   X   -   X    -   §8.2.46
+ * Time Threshold                      C     X   X   X   X    -   §8.2.47
+ * Time Quota                          C     -   X   -   X    -   §8.2.48
+ * Quota Holding Time                  C     -   X   -   X    -   §8.2.64
+ * Dropped DL Traffic Threshold        C     -   X   -   X    -   §8.2.67
+ * Quota Validity Time                 C     -   X   -   X    -   §8.2.129 [TODO — not in lib]
+ * Monitoring Time                     O     -   X   X   X    -   §8.2.55
+ * Subsequent Volume Threshold         C     -   X   -   X    -   §8.2.56
+ * Subsequent Time Threshold           C     -   X   -   X    -   §8.2.57
+ * Inactivity Detection Time           C     -   X   -   X    -   §8.2.58
+ * Linked URR ID                       O     -   X   X   X    -   §8.2.59
+ * Measurement Information             C     -   X   -   X    -   §8.2.60
+ * Time Quota Mechanism                C     -   X   -   X    -   §8.2.62
+ * Aggregated URRs                     C     -   -   -   X    -   grouped
+ * FAR ID for Quota Action             C     -   X   -   X    -   §8.2.74
+ * Ethernet Inactivity Timer           C     -   X   -   X    -   §8.2.130
+ * Additional Monitoring Time          O     -   -   -   X    -   grouped
+ * Number of Reports                   C     -   -   -   X    -   §8.2.163 [TODO — not in lib]
+ * Event Information                   C     -   -   -   X    -   grouped
+ */
+// clang-format on
 class update_urr : public pfcp::pfcp_ies_container {
  public:
   std::pair<bool, pfcp::urr_id_t> urr_id;
@@ -4030,10 +4423,29 @@ class update_urr : public pfcp::pfcp_ies_container {
 };
 
 //------------------------------------------------------------------------------
-// Table 7.5.4.5-1: Update QER IE within PFCP Session Modification Request
+// clang-format off
+/*! @brief Update QER grouped IE — 3GPP TS 29.244 V17.10.0 Table 7.5.4.5-1
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * QER ID                              M     -   X   X   X    X   §8.2.75
+ * QER Correlation ID                  C     -   X   X   X    -   §8.2.76
+ * Gate Status                         C     -   X   X   X    X   §8.2.7
+ * Maximum Bitrate                     C     -   X   X   X    X   §8.2.8
+ * Guaranteed Bitrate                  C     -   X   X   X    X   §8.2.9
+ * Packet Rate                         C     -   X   -   X    -   §8.2.21
+ * DL Flow Level Marking               C     -   X   -   X    -   §8.2.22
+ * QoS Flow Identifier (QFI)           C     -   -   -   X    X   §8.2.89
+ * Reflective QoS (RQI)                C     -   -   -   X    X   §8.2.88
+ * Paging Policy Indicator (PPI)       C     -   -   -   X    -   §8.2.91
+ * Averaging Window                    O     -   -   -   X    -   §8.2.118 [TODO — paging_policy_indicator & averaging_window not in lib IE classes]
+ * QER Control Indications             O     -   -   -   X    -   §8.2.177 [TODO — not in lib]
+ */
+// clang-format on
 class update_qer : public pfcp::pfcp_ies_container {
  public:
-  std::pair<bool, pfcp::qer_id_t> qer_id;
+  /// QER ID is Mandatory (§8.2.75) — plain type, no presence flag needed.
+  pfcp::qer_id_t qer_id;
   std::pair<bool, pfcp::qer_correlation_id_t> qer_correlation_id;
   std::pair<bool, pfcp::gate_status_t> gate_status;
   std::pair<bool, pfcp::mbr_t> maximum_bitrate;
@@ -4042,6 +4454,8 @@ class update_qer : public pfcp::pfcp_ies_container {
   std::pair<bool, pfcp::dl_flow_level_marking_t> dl_flow_level_marking;
   std::pair<bool, pfcp::qfi_t> qos_flow_identifier;
   std::pair<bool, pfcp::rqi_t> reflective_qos;
+  std::pair<bool, pfcp::paging_policy_indicator_t> paging_policy_indicator;
+  std::pair<bool, pfcp::averaging_window_t> averaging_window;
 
   update_qer()
       : qer_id(),
@@ -4052,25 +4466,26 @@ class update_qer : public pfcp::pfcp_ies_container {
         packet_rate(),
         dl_flow_level_marking(),
         qos_flow_identifier(),
-        reflective_qos() {}
+        reflective_qos(),
+        paging_policy_indicator(),
+        averaging_window() {}
 
-  update_qer(const update_qer& u) {
-    qer_id                = u.qer_id;
-    qer_correlation_id    = u.qer_correlation_id;
-    gate_status           = u.gate_status;
-    maximum_bitrate       = u.maximum_bitrate;
-    guaranteed_bitrate    = u.guaranteed_bitrate;
-    packet_rate           = u.packet_rate;
-    dl_flow_level_marking = u.dl_flow_level_marking;
-    qos_flow_identifier   = u.qos_flow_identifier;
-    reflective_qos        = u.reflective_qos;
-  }
+  update_qer(const update_qer& u)
+      : qer_id(u.qer_id),
+        qer_correlation_id(u.qer_correlation_id),
+        gate_status(u.gate_status),
+        maximum_bitrate(u.maximum_bitrate),
+        guaranteed_bitrate(u.guaranteed_bitrate),
+        packet_rate(u.packet_rate),
+        dl_flow_level_marking(u.dl_flow_level_marking),
+        qos_flow_identifier(u.qos_flow_identifier),
+        reflective_qos(u.reflective_qos),
+        paging_policy_indicator(u.paging_policy_indicator),
+        averaging_window(u.averaging_window) {}
 
   // virtual ~update_qer() {};
-  void set(const pfcp::qer_id_t& v) {
-    qer_id.first  = true;
-    qer_id.second = v;
-  }
+  /// QER ID is mandatory — set directly (no presence pair).
+  void set(const pfcp::qer_id_t& v) { qer_id = v; }
   void set(const pfcp::qer_correlation_id_t& v) {
     qer_correlation_id.first  = true;
     qer_correlation_id.second = v;
@@ -4103,13 +4518,19 @@ class update_qer : public pfcp::pfcp_ies_container {
     reflective_qos.first  = true;
     reflective_qos.second = v;
   }
+  void set(const pfcp::paging_policy_indicator_t& v) {
+    paging_policy_indicator.first  = true;
+    paging_policy_indicator.second = v;
+  }
+  void set(const pfcp::averaging_window_t& v) {
+    averaging_window.first  = true;
+    averaging_window.second = v;
+  }
 
+  /// QER ID is mandatory — always returns true.
   bool get(pfcp::qer_id_t& v) const {
-    if (qer_id.first) {
-      v = qer_id.second;
-      return true;
-    }
-    return false;
+    v = qer_id;
+    return true;
   }
   bool get(pfcp::qer_correlation_id_t& v) const {
     if (qer_correlation_id.first) {
@@ -4167,10 +4588,30 @@ class update_qer : public pfcp::pfcp_ies_container {
     }
     return false;
   }
+  bool get(pfcp::paging_policy_indicator_t& v) const {
+    if (paging_policy_indicator.first) {
+      v = paging_policy_indicator.second;
+      return true;
+    }
+    return false;
+  }
+  bool get(pfcp::averaging_window_t& v) const {
+    if (averaging_window.first) {
+      v = averaging_window.second;
+      return true;
+    }
+    return false;
+  }
 };
 
-//------------------------------------------------------------------------------
-// Table 7.5.4.6-1: Remove PDR IE within PFCP Session Modification Request
+// clang-format off
+/*! @brief Remove PDR grouped IE — 3GPP TS 29.244 V17.10.0 Table 7.5.4.6-1
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * PDR ID                              M     X   X   X   X    X   §8.2.36
+ */
+// clang-format on
 class remove_pdr : public pfcp::pfcp_ies_container {
  public:
   std::pair<bool, pfcp::pdr_id_t> pdr_id;
@@ -4194,8 +4635,14 @@ class remove_pdr : public pfcp::pfcp_ies_container {
   }
 };
 
-//------------------------------------------------------------------------------
-// Table 7.5.4.7-1: Remove FAR IE within PFCP Session Modification Request
+// clang-format off
+/*! @brief Remove FAR grouped IE — 3GPP TS 29.244 V17.10.0 Table 7.5.4.7-1
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * FAR ID                              M     X   X   X   X    X   §8.2.74
+ */
+// clang-format on
 class remove_far : public pfcp::pfcp_ies_container {
  public:
   std::pair<bool, pfcp::far_id_t> far_id;
@@ -4219,8 +4666,14 @@ class remove_far : public pfcp::pfcp_ies_container {
   }
 };
 
-//------------------------------------------------------------------------------
-// Table 7.5.4.8-1: Remove URR IE within PFCP Session Modification Request
+// clang-format off
+/*! @brief Remove URR grouped IE — 3GPP TS 29.244 V17.10.0 Table 7.5.4.8-1
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * URR ID                              M     X   X   X   X    -   §8.2.54
+ */
+// clang-format on
 class remove_urr : public pfcp::pfcp_ies_container {
  public:
   std::pair<bool, pfcp::urr_id_t> urr_id;
@@ -4244,8 +4697,14 @@ class remove_urr : public pfcp::pfcp_ies_container {
   }
 };
 
-//------------------------------------------------------------------------------
-// Table 7.5.4.9-1: Remove QER IE PFCP Session Modification Request
+// clang-format off
+/*! @brief Remove QER grouped IE — 3GPP TS 29.244 V17.10.0 Table 7.5.4.9-1
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * QER ID                              M     -   X   X   X    X   §8.2.75
+ */
+// clang-format on
 class remove_qer : public pfcp::pfcp_ies_container {
  public:
   std::pair<bool, pfcp::qer_id_t> qer_id;
@@ -4296,6 +4755,17 @@ class query_urr : public pfcp::pfcp_ies_container {
 
 //------------------------------------------------------------------------------
 // Table 7.5.4.11-1: Update BAR IE within PFCP Session Modification Request
+// clang-format off
+/*! @brief Update BAR (Session Modification Request) grouped IE core-type
+ *  3GPP TS 29.244 V17.10.0 Table 7.5.4.11-1
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * BAR ID                              M     -   X   -   X    -   §8.2.57
+ * Downlink Data Notification Delay    C     -   X   -   X    -   §8.2.83 [TODO — not in lib]
+ * Suggested Buffering Packets Count   C     -   X   -   X    -   §8.2.85 [TODO — not in lib]
+ */
+// clang-format on
 class update_bar_within_pfcp_session_modification_request
     : public pfcp::pfcp_ies_container {
  public:
@@ -4305,11 +4775,17 @@ class update_bar_within_pfcp_session_modification_request
   std::pair<bool, pfcp::suggested_buffering_packets_count_t>
       suggested_buffering_packets_count;
 
+  /** @brief Default constructor — all fields absent. */
   update_bar_within_pfcp_session_modification_request()
       : bar_id(),
         downlink_data_notification_delay(),
         suggested_buffering_packets_count() {}
 
+  /** @brief Copy constructor.
+   *  @param u  Source update_bar_within_pfcp_session_modification_request to
+   * copy.
+   *  @see   3GPP TS 29.244 V17.10.0 Table 7.5.4.11-1
+   */
   update_bar_within_pfcp_session_modification_request(
       const update_bar_within_pfcp_session_modification_request& u) {
     bar_id                            = u.bar_id;
@@ -4356,12 +4832,25 @@ class update_bar_within_pfcp_session_modification_request
 
 //------------------------------------------------------------------------------
 // Table 7.5.4.12-1: Remove BAR IE within PFCP Session Modification Request
+// clang-format off
+/*! @brief Remove BAR grouped IE core-type — 3GPP TS 29.244 V17.10.0 Table 7.5.4.12-1
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * BAR ID                              M     -   X   -   X    -   §8.2.57
+ */
+// clang-format on
 class remove_bar : public pfcp::pfcp_ies_container {
  public:
   std::pair<bool, pfcp::bar_id_t> bar_id;
 
+  /** @brief Default constructor — bar_id absent. */
   remove_bar() : bar_id() {}
 
+  /** @brief Copy constructor.
+   *  @param r  Source remove_bar to copy.
+   *  @see   3GPP TS 29.244 V17.10.0 Table 7.5.4.12-1
+   */
   remove_bar(const remove_bar& r) : bar_id(r.bar_id) {}
 
   // virtual ~remove_bar() {};
@@ -4373,6 +4862,269 @@ class remove_bar : public pfcp::pfcp_ies_container {
   bool get(pfcp::bar_id_t& v) const {
     if (bar_id.first) {
       v = bar_id.second;
+      return true;
+    }
+    return false;
+  }
+};
+
+//------------------------------------------------------------------------------
+// 3GPP TS 29.244 Section 8.2.97-98
+// Access Forwarding Action Information (used in MAR)
+class access_forwarding_action_information : public pfcp::pfcp_ies_container {
+ public:
+  std::pair<bool, pfcp::far_id_t> far_id;
+  std::pair<bool, pfcp::urr_id_t> urr_id;
+  std::pair<bool, uint8_t> weight;
+  std::pair<bool, uint8_t> priority;
+
+  access_forwarding_action_information()
+      : far_id(), urr_id(), weight(), priority() {}
+
+  access_forwarding_action_information(
+      const access_forwarding_action_information& c)
+      : far_id(c.far_id),
+        urr_id(c.urr_id),
+        weight(c.weight),
+        priority(c.priority) {}
+
+  void set(const pfcp::far_id_t& v) {
+    far_id.first  = true;
+    far_id.second = v;
+  }
+  void set(const pfcp::urr_id_t& v) {
+    urr_id.first  = true;
+    urr_id.second = v;
+  }
+
+  bool get(pfcp::far_id_t& v) const {
+    if (far_id.first) {
+      v = far_id.second;
+      return true;
+    }
+    return false;
+  }
+  bool get(pfcp::urr_id_t& v) const {
+    if (urr_id.first) {
+      v = urr_id.second;
+      return true;
+    }
+    return false;
+  }
+};
+// NOTE: pfcp_mar.hpp defines pfcp::mar_access_forwarding_action_t as the
+// session-level type for AFAI. pfcp::access_forwarding_action_information is
+// the PFCP message IE (used in create_mar / update_mar classes above).
+
+//------------------------------------------------------------------------------
+// 3GPP TS 29.244 Section 7.5.2.8
+// Create MAR (Multi-Access Rule) IE
+// clang-format off
+/*! @brief Create MAR grouped IE core-type — 3GPP TS 29.244 V17.10.0 Table 7.5.2.8-1
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * MAR ID                              M     -   -   -   X    -   §8.2.123 [TODO — not in lib]
+ * Steering Functionality              M     -   -   -   X    -   §8.2.124 [TODO — not in lib]
+ * Steering Mode                       M     -   -   -   X    -   §8.2.125 [TODO — not in lib]
+ * Access Forwarding Action Info 1     C     -   -   -   X    -   §8.2.126 [TODO — not in lib]
+ * Access Forwarding Action Info 2     C     -   -   -   X    -   §8.2.127 [TODO — not in lib]
+ */
+// clang-format on
+class create_mar : public pfcp::pfcp_ies_container {
+ public:
+  std::pair<bool, pfcp::mar_id_t> mar_id;
+  std::pair<bool, pfcp::steering_functionality_t> steering_functionality;
+  std::pair<bool, pfcp::steering_mode_t> steering_mode;
+  std::pair<bool, pfcp::access_forwarding_action_information>
+      access_forwarding_action_information_1;
+  std::pair<bool, pfcp::access_forwarding_action_information>
+      access_forwarding_action_information_2;
+
+  /** @brief Default constructor — all fields absent. */
+  create_mar()
+      : mar_id(),
+        steering_functionality(),
+        steering_mode(),
+        access_forwarding_action_information_1(),
+        access_forwarding_action_information_2() {}
+
+  /** @brief Copy constructor.
+   *  @param c  Source create_mar to copy.
+   *  @see   3GPP TS 29.244 V17.10.0 Table 7.5.2.8-1
+   */
+  create_mar(const create_mar& c)
+      : mar_id(c.mar_id),
+        steering_functionality(c.steering_functionality),
+        steering_mode(c.steering_mode),
+        access_forwarding_action_information_1(
+            c.access_forwarding_action_information_1),
+        access_forwarding_action_information_2(
+            c.access_forwarding_action_information_2) {}
+
+  void set(const pfcp::mar_id_t& v) {
+    mar_id.first  = true;
+    mar_id.second = v;
+  }
+  void set(const pfcp::steering_functionality_t& v) {
+    steering_functionality.first  = true;
+    steering_functionality.second = v;
+  }
+  void set(const pfcp::steering_mode_t& v) {
+    steering_mode.first  = true;
+    steering_mode.second = v;
+  }
+
+  bool get(pfcp::mar_id_t& v) const {
+    if (mar_id.first) {
+      v = mar_id.second;
+      return true;
+    }
+    return false;
+  }
+  bool get(pfcp::steering_mode_t& v) const {
+    if (steering_mode.first) {
+      v = steering_mode.second;
+      return true;
+    }
+    return false;
+  }
+  bool get_access_forwarding_action_information_1(
+      pfcp::access_forwarding_action_information& v) const {
+    if (access_forwarding_action_information_1.first) {
+      v = access_forwarding_action_information_1.second;
+      return true;
+    }
+    return false;
+  }
+  bool get_access_forwarding_action_information_2(
+      pfcp::access_forwarding_action_information& v) const {
+    if (access_forwarding_action_information_2.first) {
+      v = access_forwarding_action_information_2.second;
+      return true;
+    }
+    return false;
+  }
+};
+
+//------------------------------------------------------------------------------
+// 3GPP TS 29.244 Section 7.5.4.x
+// Update MAR IE within PFCP Session Modification Request
+// clang-format off
+/*! @brief Update MAR grouped IE core-type — 3GPP TS 29.244 V17.10.0 §7.5.4 (Update MAR)
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * MAR ID                              M     -   -   -   X    -   §8.2.123 [TODO — not in lib]
+ * Steering Functionality              C     -   -   -   X    -   §8.2.124 [TODO — not in lib]
+ * Steering Mode                       C     -   -   -   X    -   §8.2.125 [TODO — not in lib]
+ * Update Access Forwarding Action Info 1 C  -   -   -   X    -   §8.2.126 [TODO — not in lib]
+ * Update Access Forwarding Action Info 2 C  -   -   -   X    -   §8.2.127 [TODO — not in lib]
+ */
+// clang-format on
+class update_mar : public pfcp::pfcp_ies_container {
+ public:
+  std::pair<bool, pfcp::mar_id_t> mar_id;
+  std::pair<bool, pfcp::steering_functionality_t> steering_functionality;
+  std::pair<bool, pfcp::steering_mode_t> steering_mode;
+  std::pair<bool, pfcp::access_forwarding_action_information>
+      access_forwarding_action_information_1;
+  std::pair<bool, pfcp::access_forwarding_action_information>
+      access_forwarding_action_information_2;
+
+  /** @brief Default constructor — all fields absent. */
+  update_mar()
+      : mar_id(),
+        steering_functionality(),
+        steering_mode(),
+        access_forwarding_action_information_1(),
+        access_forwarding_action_information_2() {}
+
+  /** @brief Copy constructor.
+   *  @param u  Source update_mar to copy.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.4 (Update MAR)
+   */
+  update_mar(const update_mar& u)
+      : mar_id(u.mar_id),
+        steering_functionality(u.steering_functionality),
+        steering_mode(u.steering_mode),
+        access_forwarding_action_information_1(
+            u.access_forwarding_action_information_1),
+        access_forwarding_action_information_2(
+            u.access_forwarding_action_information_2) {}
+
+  void set(const pfcp::mar_id_t& v) {
+    mar_id.first  = true;
+    mar_id.second = v;
+  }
+  void set(const pfcp::steering_mode_t& v) {
+    steering_mode.first  = true;
+    steering_mode.second = v;
+  }
+
+  bool get(pfcp::mar_id_t& v) const {
+    if (mar_id.first) {
+      v = mar_id.second;
+      return true;
+    }
+    return false;
+  }
+  bool get(pfcp::steering_mode_t& v) const {
+    if (steering_mode.first) {
+      v = steering_mode.second;
+      return true;
+    }
+    return false;
+  }
+  bool get_access_forwarding_action_information_1(
+      pfcp::access_forwarding_action_information& v) const {
+    if (access_forwarding_action_information_1.first) {
+      v = access_forwarding_action_information_1.second;
+      return true;
+    }
+    return false;
+  }
+  bool get_access_forwarding_action_information_2(
+      pfcp::access_forwarding_action_information& v) const {
+    if (access_forwarding_action_information_2.first) {
+      v = access_forwarding_action_information_2.second;
+      return true;
+    }
+    return false;
+  }
+};
+
+//------------------------------------------------------------------------------
+// 3GPP TS 29.244 Section 7.5.4.x
+// Remove MAR IE within PFCP Session Modification Request
+// clang-format off
+/*! @brief Remove MAR grouped IE core-type — 3GPP TS 29.244 V17.10.0 §7.5.4 (Remove MAR)
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * MAR ID                              M     -   -   -   X    -   §8.2.123 [TODO — not in lib]
+ */
+// clang-format on
+class remove_mar : public pfcp::pfcp_ies_container {
+ public:
+  std::pair<bool, pfcp::mar_id_t> mar_id;
+
+  /** @brief Default constructor — mar_id absent. */
+  remove_mar() : mar_id() {}
+  /** @brief Copy constructor.
+   *  @param r  Source remove_mar to copy.
+   *  @see   3GPP TS 29.244 V17.10.0 §7.5.4 (Remove MAR)
+   */
+  remove_mar(const remove_mar& r) : mar_id(r.mar_id) {}
+
+  void set(const pfcp::mar_id_t& v) {
+    mar_id.first  = true;
+    mar_id.second = v;
+  }
+
+  bool get(pfcp::mar_id_t& v) const {
+    if (mar_id.first) {
+      v = mar_id.second;
       return true;
     }
     return false;
@@ -5364,6 +6116,19 @@ class error_indication_report : public pfcp::pfcp_ies_container {
 
 //------------------------------------------------------------------------------
 // Table 7.5.9.2-1: Update BAR IE in PFCP Session Report Response
+// clang-format off
+/*! @brief Update BAR (Session Report Response) grouped IE core-type
+ *  3GPP TS 29.244 V17.10.0 Table 7.5.9.3-1
+ *
+ * Information element                 P    Sxa Sxb Sxc  N4  N4mb  §-ref
+ * ---------------------------------------------------------------------------
+ * BAR ID                              M     -   X   -   X    -   §8.2.57
+ * Downlink Data Notification Delay    C     -   X   -   X    -   §8.2.83 [TODO — not in lib]
+ * DL Buffering Duration               C     -   X   -   X    -   §8.2.x  [TODO — not in lib]
+ * DL Buffering Suggested Packet Count C     -   X   -   X    -   §8.2.x  [TODO — not in lib]
+ * Suggested Buffering Packets Count   C     -   X   -   X    -   §8.2.85 [TODO — not in lib]
+ */
+// clang-format on
 class update_bar_within_pfcp_session_report_response
     : public pfcp::pfcp_ies_container {
  public:
@@ -5376,6 +6141,7 @@ class update_bar_within_pfcp_session_report_response
   std::pair<bool, pfcp::suggested_buffering_packets_count_t>
       suggested_buffering_packets_count;
 
+  /** @brief Default constructor — all fields absent. */
   update_bar_within_pfcp_session_report_response()
       : bar_id(),
         downlink_data_notification_delay(),
@@ -5383,6 +6149,10 @@ class update_bar_within_pfcp_session_report_response
         dl_buffering_buffering_suggested_packet_count(),
         suggested_buffering_packets_count() {}
 
+  /** @brief Copy constructor.
+   *  @param u  Source update_bar_within_pfcp_session_report_response to copy.
+   *  @see   3GPP TS 29.244 V17.10.0 Table 7.5.9.3-1
+   */
   update_bar_within_pfcp_session_report_response(
       const update_bar_within_pfcp_session_report_response& u)
       : bar_id(u.bar_id),
@@ -6393,6 +7163,8 @@ class pfcp_session_establishment_request : public pfcp_ies_container {
   std::vector<pfcp::create_far> create_fars;
   std::vector<pfcp::create_urr> create_urrs;
   std::vector<pfcp::create_qer> create_qers;
+  std::vector<pfcp::create_mar> create_mars;
+  std::vector<pfcp::create_bar> create_bars;
   std::pair<bool, pfcp::create_bar> create_bar;
   std::pair<bool, pfcp::create_traffic_endpoint> create_traffic_endpoint;
   std::pair<bool, pfcp::pdn_type_t> pdn_type;
@@ -6799,7 +7571,8 @@ class pfcp_session_modification_request : public pfcp_ies_container {
   std::vector<pfcp::remove_far> remove_fars;
   std::vector<pfcp::remove_urr> remove_urrs;
   std::vector<pfcp::remove_qer> remove_qers;
-  std::pair<bool, pfcp::remove_bar> remove_bar;
+  std::vector<pfcp::remove_bar> remove_bars;
+  std::vector<pfcp::remove_mar> remove_mars;
   std::pair<bool, pfcp::remove_traffic_endpoint> remove_traffic_endpoint;
   std::vector<pfcp::create_pdr> create_pdrs;
   std::vector<pfcp::create_far> create_fars;
@@ -6808,14 +7581,16 @@ class pfcp_session_modification_request : public pfcp_ies_container {
   std::vector<pfcp::query_urr> query_urrs;
 
   std::vector<pfcp::create_qer> create_qers;
-  std::pair<bool, pfcp::create_bar> create_bar;
+  std::vector<pfcp::create_bar> create_bars;
+  std::vector<pfcp::create_mar> create_mars;
   std::pair<bool, pfcp::create_traffic_endpoint> create_traffic_endpoint;
   std::vector<pfcp::update_pdr> update_pdrs;
   std::vector<pfcp::update_far> update_fars;
   std::vector<pfcp::update_urr> update_urrs;
   std::vector<pfcp::update_qer> update_qers;
-  std::pair<bool, pfcp::update_bar_within_pfcp_session_modification_request>
-      update_bar;
+  std::vector<pfcp::update_bar_within_pfcp_session_modification_request>
+      update_bars;
+  std::vector<pfcp::update_mar> update_mars;
   std::pair<bool, pfcp::update_traffic_endpoint> update_traffic_endpoint;
   std::pair<bool, pfcp::pfcpsmreq_flags_t> pfcpsmreq_flags;
   std::pair<bool, fq_csid_t> pgw_c_fq_csid;
@@ -6834,20 +7609,23 @@ class pfcp_session_modification_request : public pfcp_ies_container {
         remove_fars(),
         remove_urrs(),
         remove_qers(),
-        remove_bar(),
+        remove_bars(),
+        remove_mars(),
         remove_traffic_endpoint(),
         create_pdrs(),
         create_fars(),
         create_urrs(),
         create_qers(),
         query_urrs(),
-        create_bar(),
+        create_bars(),
+        create_mars(),
         create_traffic_endpoint(),
         update_pdrs(),
         update_fars(),
         update_urrs(),
         update_qers(),
-        update_bar(),
+        update_bars(),
+        update_mars(),
         update_traffic_endpoint(),
         pfcpsmreq_flags(),
         pgw_c_fq_csid(),
@@ -6865,20 +7643,23 @@ class pfcp_session_modification_request : public pfcp_ies_container {
         remove_fars(i.remove_fars),
         remove_urrs(i.remove_urrs),
         remove_qers(i.remove_qers),
-        remove_bar(i.remove_bar),
+        remove_bars(i.remove_bars),
+        remove_mars(i.remove_mars),
         remove_traffic_endpoint(i.remove_traffic_endpoint),
         create_pdrs(i.create_pdrs),
         create_fars(i.create_fars),
         create_urrs(i.create_urrs),
         create_qers(i.create_qers),
         query_urrs(i.query_urrs),
-        create_bar(i.create_bar),
+        create_bars(i.create_bars),
+        create_mars(i.create_mars),
         create_traffic_endpoint(i.create_traffic_endpoint),
         update_pdrs(i.update_pdrs),
         update_fars(i.update_fars),
         update_urrs(i.update_urrs),
         update_qers(i.update_qers),
-        update_bar(i.update_bar),
+        update_bars(i.update_bars),
+        update_mars(i.update_mars),
         update_traffic_endpoint(i.update_traffic_endpoint),
         pfcpsmreq_flags(i.pfcpsmreq_flags),
         pgw_c_fq_csid(i.pgw_c_fq_csid),
@@ -6902,8 +7683,8 @@ class pfcp_session_modification_request : public pfcp_ies_container {
     return false;
   }
   bool get(pfcp::remove_bar& v) const {
-    if (remove_bar.first) {
-      v = remove_bar.second;
+    if (!remove_bars.empty()) {
+      v = remove_bars.front();
       return true;
     }
     return false;
@@ -6916,8 +7697,8 @@ class pfcp_session_modification_request : public pfcp_ies_container {
     return false;
   }
   bool get(pfcp::create_bar& v) const {
-    if (create_bar.first) {
-      v = create_bar.second;
+    if (!create_bars.empty()) {
+      v = create_bars.front();
       return true;
     }
     return false;
@@ -6930,8 +7711,8 @@ class pfcp_session_modification_request : public pfcp_ies_container {
     return false;
   }
   bool get(pfcp::update_bar_within_pfcp_session_modification_request& v) const {
-    if (update_bar.first) {
-      v = update_bar.second;
+    if (!update_bars.empty()) {
+      v = update_bars.front();
       return true;
     }
     return false;
@@ -7025,10 +7806,8 @@ class pfcp_session_modification_request : public pfcp_ies_container {
   void set(const pfcp::remove_urr& v) { remove_urrs.push_back(v); }
   void set(const pfcp::remove_qer& v) { remove_qers.push_back(v); }
   void set(const pfcp::query_urr& v) { query_urrs.push_back(v); }
-  void set(const pfcp::remove_bar& v) {
-    remove_bar.first  = true;
-    remove_bar.second = v;
-  }
+  void set(const pfcp::remove_bar& v) { remove_bars.push_back(v); }
+  void set(const pfcp::remove_mar& v) { remove_mars.push_back(v); }
   void set(const pfcp::remove_traffic_endpoint& v) {
     remove_traffic_endpoint.first  = true;
     remove_traffic_endpoint.second = v;
@@ -7037,10 +7816,8 @@ class pfcp_session_modification_request : public pfcp_ies_container {
   void set(const pfcp::create_far& v) { create_fars.push_back(v); }
   void set(const pfcp::create_urr& v) { create_urrs.push_back(v); }
   void set(const pfcp::create_qer& v) { create_qers.push_back(v); }
-  void set(const pfcp::create_bar& v) {
-    create_bar.first  = true;
-    create_bar.second = v;
-  }
+  void set(const pfcp::create_bar& v) { create_bars.push_back(v); }
+  void set(const pfcp::create_mar& v) { create_mars.push_back(v); }
   void set(const pfcp::create_traffic_endpoint& v) {
     create_traffic_endpoint.first  = true;
     create_traffic_endpoint.second = v;
@@ -7050,9 +7827,9 @@ class pfcp_session_modification_request : public pfcp_ies_container {
   void set(const pfcp::update_urr& v) { update_urrs.push_back(v); }
   void set(const pfcp::update_qer& v) { update_qers.push_back(v); }
   void set(const pfcp::update_bar_within_pfcp_session_modification_request& v) {
-    update_bar.first  = true;
-    update_bar.second = v;
+    update_bars.push_back(v);
   }
+  void set(const pfcp::update_mar& v) { update_mars.push_back(v); }
   void set(const pfcp::update_traffic_endpoint& v) {
     update_traffic_endpoint.first  = true;
     update_traffic_endpoint.second = v;

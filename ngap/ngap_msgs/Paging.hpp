@@ -13,6 +13,7 @@
 #include "NgapMessage.hpp"
 #include "PagingPriority.hpp"
 #include "TaiListforPaging.hpp"
+#include "UeRadioCapabilityForPaging.hpp"
 #include "UePagingIdentity.hpp"
 
 extern "C" {
@@ -49,25 +50,30 @@ class PagingMsg : public NgapMessage {
   // Paging Priority (Optional) — mapped from Paging Policy Indicator
   void setPagingPriority(uint8_t ppi);
 
-  // Paging Origin — not set for 3GPP paging (current scope)
-  // void setPagingOrigin(e_Ngap_PagingOrigin origin); // TODO: non-3GPP
+  // Paging Origin (Optional) — set when the pending data is associated with
+  // non-3GPP access.
+  void setPagingOrigin(e_Ngap_PagingOrigin origin);
+
+  void setUeRadioCapabilityForPaging(
+      const OCTET_STRING_t& ue_radio_capability_for_paging_of_nr,
+      const OCTET_STRING_t& ue_radio_capability_for_paging_of_eutra);
 
  private:
   Ngap_Paging_t* m_PagingIes;
 
-  UePagingIdentity m_UePagingIdentity;             // Mandatory
-  std::optional<PagingDrx> m_pagingDRX;            // Optional
-  TaiListForPaging m_TaiListForPaging;             // Mandatory
-  std::optional<PagingPriority> m_pagingPriority;  // Optional
-  // TODO: UE Radio Capability for Paging (Optional)
-  // TODO: PagingOrigin not set (3GPP-only paging, current scope)
-  // TODO: Assistance Data for Paging (Optional)
-  // TODO: NB-IoT Paging eDRX Information (Optional, Rel 16.14.0)
-  // TODO: NB-IoT Paging DRX (Optional, Rel 16.14.0)
-  // TODO: Enhanced Coverage Restriction (Optional, Rel 16.14.0)
-  // TODO: WUS Assistance Information (Optional, Rel 16.14.0)
-  // TODO: Paging eDRX Information (Optional, Rel 16.14.0)
-  // TODO: CE-mode-B Restricted (Optional, Rel 16.14.0)
+  UePagingIdentity m_UePagingIdentity;                // Mandatory
+  std::optional<PagingDrx> m_pagingDRX;               // Optional
+  TaiListForPaging m_TaiListForPaging;                // Mandatory
+  std::optional<PagingPriority> m_pagingPriority;     // Optional
+  std::optional<e_Ngap_PagingOrigin> m_pagingOrigin;  // Optional
+  std::optional<UeRadioCapabilityForPaging>
+      m_ueRadioCapabilityForPaging;  // Optional
+  // TODO: Assistance Data for Paging
+  // TODO: NB-IoT paging eDRX/DRX
+  // TODO: Enhanced Coverage Restriction;
+  // TODO: WUS Assistance Information
+  // TODO: Paging eDRX Information
+  // TODO: CE-mode-B Restricted
 };
 
 }  // namespace oai::ngap

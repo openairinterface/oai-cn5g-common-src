@@ -342,7 +342,7 @@ bool PduSessionResourceSetupResponseMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
             "implemented");
       } break;
       default: {
-         // Handle unknown/optional IEs based on criticality
+        // Handle unknown/optional IEs based on criticality
         if (m_PduSessionResourceSetupResponseIes->protocolIEs.list.array[i]
                 ->criticality == Ngap_Criticality_ignore) {
           oai::logger::logger_common::ngap().debug(

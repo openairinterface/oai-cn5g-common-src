@@ -6,6 +6,8 @@
 
 #include <cstdint>
 #include <string>
+#include <cstdint>
+
 constexpr uint16_t kAmfSetIdMaxValue = 1023;
 
 extern "C" {

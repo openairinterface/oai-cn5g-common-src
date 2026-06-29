@@ -7,6 +7,7 @@
 
 #include <cstdint>
 #include <string>
+#include <cstdint>
 
 namespace oai::utils {
 class output_wrapper {

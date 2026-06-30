@@ -5,6 +5,7 @@
 #ifndef FILE_MIME_PARSER_HPP_SEEN
 #define FILE_MIME_PARSER_HPP_SEEN
 
+#include <cstdint>
 #include <unordered_map>
 #include <string>
 #include <vector>

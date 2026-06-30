@@ -5,6 +5,9 @@
 #include "HandoverPreparationFailure.hpp"
 
 #include "logger_base.hpp"
+extern "C" {
+#include "Ngap_ProtocolIE_Container_compat.h"
+}
 #include "utils.hpp"
 
 namespace oai::ngap {
@@ -47,7 +50,7 @@ void HandoverPreparationFailure::setAmfUeNgapId(const uint64_t& id) {
     return;
   }
 
-  ret = ASN_SEQUENCE_ADD(&m_HOPreparationFailureIes->protocolIEs.list, ie);
+  ret = ASN_SEQUENCE_ADD(&m_HOPreparationFailureIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode AMF_UE_NGAP_ID IE error");
 }
@@ -72,7 +75,7 @@ void HandoverPreparationFailure::setRanUeNgapId(const uint32_t& ranUeNgapId) {
     return;
   }
 
-  ret = ASN_SEQUENCE_ADD(&m_HOPreparationFailureIes->protocolIEs.list, ie);
+  ret = ASN_SEQUENCE_ADD(&m_HOPreparationFailureIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode RAN_UE_NGAP_ID IE error");
 }
@@ -92,7 +95,7 @@ void HandoverPreparationFailure::setCause(
   m_Cause.setChoiceOfCause(causePresent);
   if (causePresent != Ngap_Cause_PR_NOTHING) m_Cause.set(value);
   m_Cause.encode(ie->value.choice.Cause);
-  int ret = ASN_SEQUENCE_ADD(&m_HOPreparationFailureIes->protocolIEs.list, ie);
+  int ret = ASN_SEQUENCE_ADD(&m_HOPreparationFailureIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode Cause IE error");
 }
@@ -128,16 +131,18 @@ bool HandoverPreparationFailure::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
     return false;
   }
 
-  for (int i = 0; i < m_HOPreparationFailureIes->protocolIEs.list.count; i++) {
-    switch (m_HOPreparationFailureIes->protocolIEs.list.array[i]->id) {
+  for (int i = 0; i < m_HOPreparationFailureIes->protocolIEs->list.count; i++) {
+    Ngap_HandoverPreparationFailureIEs_t* ngap_ie =
+        (Ngap_HandoverPreparationFailureIEs_t*) m_HOPreparationFailureIes->protocolIEs->list.array[i];
+    switch (ngap_ie->id) {
       case Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID: {
-        if (m_HOPreparationFailureIes->protocolIEs.list.array[i]->criticality ==
+        if (ngap_ie->criticality ==
                 Ngap_Criticality_ignore &&
-            m_HOPreparationFailureIes->protocolIEs.list.array[i]
+            ngap_ie
                     ->value.present ==
                 Ngap_HandoverPreparationFailureIEs__value_PR_AMF_UE_NGAP_ID) {
           if (!NgapUeMessage::m_AmfUeNgapId.decode(
-                  m_HOPreparationFailureIes->protocolIEs.list.array[i]
+                  ngap_ie
                       ->value.choice.AMF_UE_NGAP_ID)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP AMF_UE_NGAP_ID IE error");
@@ -150,13 +155,13 @@ bool HandoverPreparationFailure::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID: {
-        if (m_HOPreparationFailureIes->protocolIEs.list.array[i]->criticality ==
+        if (ngap_ie->criticality ==
                 Ngap_Criticality_ignore &&
-            m_HOPreparationFailureIes->protocolIEs.list.array[i]
+            ngap_ie
                     ->value.present ==
                 Ngap_HandoverPreparationFailureIEs__value_PR_RAN_UE_NGAP_ID) {
           if (!NgapUeMessage::m_RanUeNgapId.decode(
-                  m_HOPreparationFailureIes->protocolIEs.list.array[i]
+                  ngap_ie
                       ->value.choice.RAN_UE_NGAP_ID)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP RAN_UE_NGAP_ID IE error");
@@ -169,13 +174,13 @@ bool HandoverPreparationFailure::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_Cause: {
-        if (m_HOPreparationFailureIes->protocolIEs.list.array[i]->criticality ==
+        if (ngap_ie->criticality ==
                 Ngap_Criticality_ignore &&
-            m_HOPreparationFailureIes->protocolIEs.list.array[i]
+            ngap_ie
                     ->value.present ==
                 Ngap_HandoverPreparationFailureIEs__value_PR_Cause) {
           if (!m_Cause.decode(
-                  m_HOPreparationFailureIes->protocolIEs.list.array[i]
+                  ngap_ie
                       ->value.choice.Cause)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP Cause IE error");
@@ -189,9 +194,9 @@ bool HandoverPreparationFailure::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
 
       } break;
       case Ngap_ProtocolIE_ID_id_CriticalityDiagnostics: {
-        if (m_HOPreparationFailureIes->protocolIEs.list.array[i]->criticality ==
+        if (ngap_ie->criticality ==
                 Ngap_Criticality_ignore &&
-            m_HOPreparationFailureIes->protocolIEs.list.array[i]
+            ngap_ie
                     ->value.present ==
                 Ngap_HandoverPreparationFailureIEs__value_PR_CriticalityDiagnostics) {
           // TODO:

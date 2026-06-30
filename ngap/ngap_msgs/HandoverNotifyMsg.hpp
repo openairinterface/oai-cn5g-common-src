@@ -5,8 +5,11 @@
 #ifndef _HANDOVER_NOTIFY_MSG_H_
 #define _HANDOVER_NOTIFY_MSG_H_
 
+#include <optional>
+
 #include "AmfUeNgapId.hpp"
 #include "NgapUeMessage.hpp"
+#include "NotifySourceNgRanNode.hpp"
 #include "UserLocationInformation.hpp"
 
 extern "C" {
@@ -27,12 +30,14 @@ class HandoverNotifyMsg : public NgapUeMessage {
   void setUserLocationInfoNr(const NrCgi_t& cig, const Tai_t& tai);
   bool getUserLocationInfoNr(NrCgi_t& cig, Tai_t& tai) const;
 
+  bool getNotifySourceNgRanNode(NotifySourceNgRanNode& value) const;
+
  private:
   Ngap_HandoverNotify_t* m_HandoverNotifyIes;
   // AMF_UE_NGAP_ID (Mandatory)
   // RAN_UE_NGAP_ID (Mandatory)
-  UserLocationInformation m_UserLocationInformation;  // Mandatory
-  // TODO: Notify Source NG-RAN Node (Optional, Rel 16.14.0)
+  UserLocationInformation m_UserLocationInformation;           // Mandatory
+  std::optional<NotifySourceNgRanNode> m_NotifySourceNgRanNode;  // Rel-17
 };
 
 }  // namespace oai::ngap

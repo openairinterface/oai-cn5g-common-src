@@ -6,8 +6,10 @@
 #define _HANDOVER_REQUEST_ACK_H_
 
 #include "NgapUeMessage.hpp"
+#include "NpnAccessInformation.hpp"
 #include "PduSessionResourceAdmittedList.hpp"
 #include "PduSessionResourceFailedToSetupListHoAck.hpp"
+#include "RedCapIndication.hpp"
 
 extern "C" {
 #include "Ngap_HandoverRequestAcknowledge.h"
@@ -42,6 +44,9 @@ class HandoverRequestAck : public NgapUeMessage {
       const OCTET_STRING_t& targetTosource);
   OCTET_STRING_t getTargetToSourceTransparentContainer() const;
 
+  bool getRedCapIndication(RedCapIndication& value) const;
+  bool getNpnAccessInformation(NpnAccessInformation& value) const;
+
  private:
   Ngap_HandoverRequestAcknowledge_t* m_HandoverRequestAckIes;
   // AMF_UE_NGAP_ID (Mandatory)
@@ -51,7 +56,8 @@ class HandoverRequestAck : public NgapUeMessage {
       m_PduSessionResourceFailedToSetupList;                // Optional
   OCTET_STRING_t m_TargetToSourceTransparentContainer;      // TODO: Mandatory
   Ngap_CriticalityDiagnostics_t* m_CriticalityDiagnostics;  // TODO: Optional
-  // TODO: NPN Access Information (Optional, Rel 16.14.0)
+  std::optional<RedCapIndication> m_RedCapIndication;        // Rel-17
+  std::optional<NpnAccessInformation> m_NpnAccessInformation;  // Rel-17
 };
 
 }  // namespace oai::ngap

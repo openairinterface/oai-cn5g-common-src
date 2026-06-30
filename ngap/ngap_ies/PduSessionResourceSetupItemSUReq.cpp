@@ -53,7 +53,8 @@ bool PduSessionResourceSetupItemSUReq::encode(
     }
     pduSessionResourceItem.pDUSessionNAS_PDU = naspdu;
   }
-  if (!m_SNssai.encode(pduSessionResourceItem.s_NSSAI)) return false;
+  if (!pduSessionResourceItem.s_NSSAI) pduSessionResourceItem.s_NSSAI = (Ngap_S_NSSAI_t*) calloc(1, sizeof(Ngap_S_NSSAI_t));
+  if (!m_SNssai.encode(*pduSessionResourceItem.s_NSSAI)) return false;
   pduSessionResourceItem.pDUSessionResourceSetupRequestTransfer =
       m_PduSessionResourceSetupRequestTransfer;
 
@@ -64,7 +65,8 @@ bool PduSessionResourceSetupItemSUReq::encode(
 bool PduSessionResourceSetupItemSUReq::decode(
     const Ngap_PDUSessionResourceSetupItemSUReq_t& pduSessionResourceItem) {
   if (!m_PduSessionId.decode(pduSessionResourceItem.pDUSessionID)) return false;
-  if (!m_SNssai.decode(pduSessionResourceItem.s_NSSAI)) return false;
+  if (!pduSessionResourceItem.s_NSSAI) return false;
+  if (!m_SNssai.decode(*pduSessionResourceItem.s_NSSAI)) return false;
 
   if (pduSessionResourceItem.pDUSessionNAS_PDU) {
     NasPdu tmp = {};

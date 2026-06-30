@@ -93,7 +93,8 @@ bool PduSessionResourceModifyConfirmTransfer::decode(
   // m_Ie);
 
   // Decode QoS Flow Modify Confirm List
-  if (!m_QosFlowModifyConfirmList.decode(m_Ie->qosFlowModifyConfirmList)) {
+  if (!m_Ie->qosFlowModifyConfirmList) return false;
+  if (!m_QosFlowModifyConfirmList.decode(*m_Ie->qosFlowModifyConfirmList)) {
     oai::logger::logger_common::ngap().error(
         "Failure to decode QoS Flow Modify Confirm List IE");
     return false;
@@ -101,7 +102,8 @@ bool PduSessionResourceModifyConfirmTransfer::decode(
 
   // Decode UL NG-U UP TNL Information
   UpTransportLayerInformation ulNgUUpTnlInformation = {};
-  if (!m_UlNgUUpTnlInformation.decode(m_Ie->uLNGU_UP_TNLInformation)) {
+  if (!m_Ie->uLNGU_UP_TNLInformation) return false;
+  if (!m_UlNgUUpTnlInformation.decode(*m_Ie->uLNGU_UP_TNLInformation)) {
     oai::logger::logger_common::ngap().error(
         "Failure to decode UL NG-U UP TNL Information IE");
     return false;

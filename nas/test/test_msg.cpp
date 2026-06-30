@@ -20,14 +20,12 @@
 
 #include <array>
 // ---------------------------------------------------------------------------
-// Logger initialization: the NAS decode functions use oai::logger::logger_common.
-// Register all standard log categories before any test body runs.
-// ---------------------------------------------------------------------------
 class NasLoggerEnvironment : public ::testing::Environment {
  public:
   void SetUp() override {
-    static oai::logger::logger_common s_logger("NasTest", /*stdout=*/false,
-                                               /*rotfile=*/false);
+    static oai::logger::logger_common s_logger(
+        "NasTest", /*stdout=*/false,
+        /*rotfile=*/false);
   }
 };
 
@@ -939,11 +937,9 @@ TEST(TestSuiteNasMsg, positiveTestingServiceRequestWithPdu) {
 }
 
 // ============================================================================
-// Stage 2 Release 17.10 Tests
+// Release 17.10 Tests
 // ============================================================================
 
-// Task 2.5 test 4: IEI alias disambiguation — static_assert checks
-// These verify that the constants have the correct values and relationships.
 static_assert(
     kIeiNssrgInformation == 0x70, "kIeiNssrgInformation must be 0x70");
 static_assert(
@@ -966,7 +962,7 @@ static_assert(
     kIeiNsagInformationRegistrationAccept != kIeiNsagInformationCuc,
     "NSAG IEI differs between Registration Accept (0x7C) and CUC (0x73)");
 
-// Task 2.5 test 1: Registration Request with Service-level-AA container TLV-E
+// Registration Request with Service-level-AA container TLV-E
 // Verifies decode does NOT truncate and does NOT confuse 0x72 with
 // kIeiPduSessionReactivationResultErrorCause in Registration Accept context.
 TEST(TestSuiteNasMsg, rel1710RegistrationRequestSkipServiceLevelAAContainer) {
@@ -979,19 +975,36 @@ TEST(TestSuiteNasMsg, rel1710RegistrationRequestSkipServiceLevelAAContainer) {
   //   Header (3) + RegType+KSI (1) + MobileId (15) + SvcLvlAA (9) = 28 bytes
   uint8_t packet[] = {
       // Header: EPD=5GMM, plain, Registration Request
-      0x7e, 0x00, 0x41,
+      0x7e,
+      0x00,
+      0x41,
       // Registration type (initial) + KSI=1
       0x09,
       // 5GS Mobile Identity: length=13, SUCI IMSI null-scheme
-      0x00, 0x0d,
-      0x01, 0x02, 0xf8, 0x29,  // identity-type=SUCI, MCC=208, MNC=92
-      0x00, 0x00,               // routing indicator (no indicator)
-      0x00,                     // protection scheme ID = null
-      0x00,                     // home network public key ID = 0
-      0x00, 0x00, 0x00, 0x11,  // MSIN digits
+      0x00,
+      0x0d,
+      0x01,
+      0x02,
+      0xf8,
+      0x29,  // identity-type=SUCI, MCC=208, MNC=92
+      0x00,
+      0x00,  // routing indicator (no indicator)
+      0x00,  // protection scheme ID = null
+      0x00,  // home network public key ID = 0
+      0x00,
+      0x00,
+      0x00,
+      0x11,  // MSIN digits
       // Service-level-AA container: IEI=0x72, TLV-E: len=6, content=6 bytes
-      0x72, 0x00, 0x06,
-      0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF,
+      0x72,
+      0x00,
+      0x06,
+      0xAA,
+      0xBB,
+      0xCC,
+      0xDD,
+      0xEE,
+      0xFF,
   };
   oai::nas::RegistrationRequest rr = {};
   int result                       = rr.Decode(packet, sizeof(packet));
@@ -999,18 +1012,33 @@ TEST(TestSuiteNasMsg, rel1710RegistrationRequestSkipServiceLevelAAContainer) {
   EXPECT_NE(result, KEncodeDecodeError);
 }
 
-// Task 2.5 test 2: Malformed TLV-E length in Registration Request
+// Registration Request with malformed TLV-E length
 // Verifies decode returns error when length field claims more bytes than
 // available.
 TEST(TestSuiteNasMsg, rel1710RegistrationRequestMalformedTlvE) {
   uint8_t packet[] = {
       // Header
-      0x7e, 0x00, 0x41,
+      0x7e,
+      0x00,
+      0x41,
       // Registration type + KSI
       0x09,
       // 5GS Mobile Identity: valid 13-byte SUCI (IMSI null-scheme)
-      0x00, 0x0d,
-      0x01, 0x02, 0xf8, 0x29, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x11,
+      0x00,
+      0x0d,
+      0x01,
+      0x02,
+      0xf8,
+      0x29,
+      0x00,
+      0x00,
+      0x00,
+      0x00,
+      0x00,
+      0x00,
+      0x00,
+      0x00,
+      0x11,
       // Service-level-AA container: IEI=0x72, TLV-E: claims 100 bytes but
       // only 2 content bytes follow
       0x72,
@@ -1024,7 +1052,7 @@ TEST(TestSuiteNasMsg, rel1710RegistrationRequestMalformedTlvE) {
   EXPECT_EQ(result, KEncodeDecodeError);
 }
 
-// Task 2.5 test 3: NSSRG and NSAG encode/decode round-trip in Registration
+// NSSRG and NSAG encode/decode round-trip in Registration
 // Accept
 TEST(TestSuiteNasMsg, rel1710RegistrationAcceptNssrgNsagRoundTrip) {
   // Build a Registration Accept, set NSSRG and NSAG, encode, then decode.
@@ -1071,7 +1099,7 @@ TEST(TestSuiteNasMsg, rel1710RegistrationAcceptNssrgNsagRoundTrip) {
   EXPECT_NE(kIeiNsagInformationRegistrationAccept, kIeiNsagInformationCuc);
 }
 
-// Stage 6 revision: NSAG wire format tests per TS 24.501 §9.11.3.87
+// NSAG wire format tests per TS 24.501 §9.11.3.87
 //
 // Wire format for one entry (no TAI):
 //   [entry_length][nsag_id][snssai_list_length][snssai_content_length][SST]
@@ -1191,7 +1219,7 @@ TEST(TestSuiteNasMsg, NsagWireFormat_RegistrationAcceptRoundTrip) {
   EXPECT_EQ(got_nsag.value().GetValue(), nsag_content);
 }
 
-// Task 2.5 test 5: Priority indicator encode/decode
+// Priority indicator encode/decode
 TEST(TestSuiteNasMsg, rel1710PriorityIndicatorEncodeDecodeValue) {
   // Encode PriorityIndicator with MPSI=1, verify encoded byte = 0xE1
   oai::nas::PriorityIndicator pi1(kPriorityIndicatorIei, 1);
@@ -1214,7 +1242,7 @@ TEST(TestSuiteNasMsg, rel1710PriorityIndicatorEncodeDecodeValue) {
   ASSERT_EQ(dec_len, 1);
   EXPECT_EQ(pi_dec.GetMpsi(), 1);
 
-  // Task 7.5 note (Stage 7: MPS Indicator Update via CUC):
+  // MPS Indicator Update via CUC
   //   - MPSI=1 encodes as 0xE1 (IEI nibble 0xE, value nibble 0x1).
   //   - MPSI=0 encodes as 0xE0 (IEI nibble 0xE, value nibble 0x0).
   //   - Spare bits (value nibble bits 2-4) are forced to zero by the
@@ -1242,7 +1270,8 @@ TEST(TestSuiteNasMsg, stage1_5gmmCapabilityMissingIE) {
                       0x00, 0x00, 0x11, 0x2e, 0x08, 0x80, 0x20, 0x00,
                       0x00, 0x00, 0x00, 0x00, 0x00};
   oai::nas::RegistrationRequest rr = {};
-  ASSERT_EQ(rr.Decode(packet, sizeof(packet)), static_cast<int>(sizeof(packet)));
+  ASSERT_EQ(
+      rr.Decode(packet, sizeof(packet)), static_cast<int>(sizeof(packet)));
 
   // Full IE accessor: absent
   EXPECT_FALSE(rr.Get5gmmCapabilityIe().has_value());
@@ -1273,8 +1302,8 @@ TEST(TestSuiteNasMsg, stage1_5gmmCapabilityLegacyOneOctet) {
 }
 
 // Stage 1 test 3: Five-octet 5GMM Capability with all Release 17 bits set
-// TS 24.501 table 9.11.3.1.1, octet 7: MPSIU=bit8, UAS=bit7, NSAG=bit6, NSSRG=bit1
-// octet7 = 0xE1 = 0x80(MPSIU) | 0x40(UAS) | 0x20(NSAG) | 0x01(NSSRG)
+// TS 24.501 table 9.11.3.1.1, octet 7: MPSIU=bit8, UAS=bit7, NSAG=bit6,
+// NSSRG=bit1 octet7 = 0xE1 = 0x80(MPSIU) | 0x40(UAS) | 0x20(NSAG) | 0x01(NSSRG)
 TEST(TestSuiteNasMsg, stage1_5gmmCapabilityOctet7AllRel17Bits) {
   // TLV: IEI=0x10, Length=0x05, octets 3-7: 0x03, 0x00, 0x00, 0x00, 0xE1
   uint8_t ie_bytes[] = {0x10, 0x05, 0x03, 0x00, 0x00, 0x00, 0xE1};

@@ -37,13 +37,6 @@ class _5gmmCapability : public Type4NasIe {
   bool SupportsUas() const;                 // octet 7 bit 7
   bool SupportsMpsIndicatorUpdate() const;  // octet 7 bit 8
 
-  // Release 17 capability accessors (TS 24.501 table 9.11.3.1.1 octet 7)
-  // Returns false (unsupported) if octet 7 was not present in the message.
-  bool SupportsNssrg() const;               // octet 7 bit 1
-  bool SupportsNsag() const;                // octet 7 bit 6
-  bool SupportsUas() const;                 // octet 7 bit 7
-  bool SupportsMpsIndicatorUpdate() const;  // octet 7 bit 8
-
  private:
   uint8_t octet3_;  // minimum length of 3 octets
   std::optional<uint8_t> octet4_;

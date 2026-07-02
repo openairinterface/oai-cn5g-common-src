@@ -26,8 +26,11 @@ class _5gsTrackingAreaIdList : public Type4NasIe {
   _5gsTrackingAreaIdList(bool iei);
   _5gsTrackingAreaIdList(const std::vector<p_tai_t>& tai_list);
   int Encode(uint8_t* buf, int len) const override;
+  int Decode(const uint8_t* const buf, int len, bool is_iei) override;
 
   static std::string GetIeName() { return k5gsTrackingAreaIdListIeName; }
+
+  void GetTaiList(std::vector<p_tai_t>& tai_list) const;
 
  private:
   std::vector<p_tai_t> tai_list_;
@@ -36,6 +39,7 @@ class _5gsTrackingAreaIdList : public Type4NasIe {
   int EncodeType00(p_tai_t item, uint8_t* buf, int len) const;
   int EncodeType01(p_tai_t item, uint8_t* buf, int len) const;
   int EncodeType10(p_tai_t item, uint8_t* buf, int len) const;
+  int DecodeType00(p_tai_t& item, const uint8_t* buf, int len);
 };
 
 }  // namespace oai::nas

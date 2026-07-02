@@ -56,15 +56,30 @@ class ConfigurationUpdateCommand : public Nas5gmmMessage {
   void SetPriorityIndicator(uint8_t mpsi);
   std::optional<PriorityIndicator> GetPriorityIndicator() const;
 
+  // Core A&MM IEs (mirror RegistrationAccept setter signatures)
+  void SetTaiList(const std::vector<p_tai_t>& tai_list);
+  void SetAllowedNssai(const std::vector<struct SNSSAI_s>& nssai);
+  void SetConfiguredNssai(const std::vector<struct SNSSAI_s>& nssai);
+  // Rejected NSSAI uses the CUC-specific IEI (0x11), NOT the RA IEI
+  void SetRejectedNssai(const std::vector<RejectedSNssai>& nssai);
+  void SetServiceAreaList(const std::vector<service_area_list_ie_t>& list);
+  void SetLadnInformation(const LadnInformation& ladn_information);
+  void SetMicoIndication(bool sprti, bool raai);
+  void SetNetworkSlicingIndication(bool dcni, bool nssci);
+  // 5GS Registration Result: optional TLV with IEI 0x44 (NOT the RA bare field)
+  void Set5gsRegistrationResult(
+      bool emergency, bool nssaa, bool sms, uint8_t value);
+
  private:
   NasMmPlainHeader ie_header_;  // Mandatory
   // Configuration update indication
   std::optional<ConfigurationUpdateIndication>
       ie_configuration_update_indication_;        // Optional
   std::optional<_5gsMobileIdentity> ie_5g_guti_;  // Optional
-  // TODO: TAI list (Optional)
-  // TODO: Allowed NSSAI (Optional)
-  // TODO: Service area list (Optional)
+  std::optional<_5gsTrackingAreaIdList>
+      ie_tai_list_;                        // TAI list, IEI 0x54, TLV
+  std::optional<Nssai> ie_allowed_nssai_;  // Allowed NSSAI, IEI 0x15, TLV
+  std::optional<ServiceAreaList> ie_service_area_list_;  // IEI 0x27, TLV
   // Full name for network (Optional)
   std::optional<NetworkName> ie_full_name_for_network_;  // Optional
   // Short name for network
@@ -72,18 +87,20 @@ class ConfigurationUpdateCommand : public Nas5gmmMessage {
   // TODO: Local time zone (Optional)
   // TODO: Universal time and local time zone (Optional)
   // TODO: Network daylight saving time (Optional)
-  // TODO: LADN information (Optional)
-  // TODO: MICO indication (Optional)
-  // TODO: Network slicing indication (Optional)
-  // TODO: Configured NSSAI (Optional)
-  // TODO: Rejected NSSAI (Optional)
+  std::optional<LadnInformation> ie_ladn_information_;  // IEI 0x79, TLV-E
+  std::optional<MicoIndication> ie_mico_indication_;    // IEI 0xB-, Type 1 TV
+  std::optional<NetworkSlicingIndication>
+      ie_network_slicing_indication_;         // IEI 0x9-, Type 1 TV
+  std::optional<Nssai> ie_configured_nssai_;  // Configured NSSAI, IEI 0x31, TLV
+  std::optional<RejectedNssai> ie_rejected_nssai_;  // IEI 0x11 (CUC), TLV
   // TODO: Operator-defined access category definitions (Optional)
   // TODO: SMS indication (Optional)
   // TODO: T3447 value (Optional)
   // TODO: CAG information list (Rel 16.4.1) (Optional)
   // TODO: UE radio capability ID (Rel 16.4.1) (Optional)
   // TODO: UE radio capability ID deletion indication (Rel 16.4.1) (Optional)
-  // TODO: 5GS registration result (Rel 16.4.1) (Optional)
+  std::optional<_5gsRegistrationResult>
+      ie_5gs_registration_result_;  // IEI 0x44, optional TLV
   // TODO: Truncated 5G-S-TMSI configuration (Rel 16.4.1) (Optional)
   // TODO: Additional configuration indication (Rel 16.14.0) (Optional)
   // Release 17.10 IEs

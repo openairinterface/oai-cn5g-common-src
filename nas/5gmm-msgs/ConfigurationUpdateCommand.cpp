@@ -15,8 +15,17 @@ ConfigurationUpdateCommand::ConfigurationUpdateCommand()
           kConfigurationUpdateCommand) {
   ie_configuration_update_indication_ = std::nullopt;
   ie_5g_guti_                         = std::nullopt;
+  ie_tai_list_                        = std::nullopt;
+  ie_allowed_nssai_                   = std::nullopt;
+  ie_service_area_list_               = std::nullopt;
   ie_full_name_for_network_           = std::nullopt;
   ie_short_name_for_network_          = std::nullopt;
+  ie_ladn_information_                = std::nullopt;
+  ie_mico_indication_                 = std::nullopt;
+  ie_network_slicing_indication_      = std::nullopt;
+  ie_configured_nssai_                = std::nullopt;
+  ie_rejected_nssai_                  = std::nullopt;
+  ie_5gs_registration_result_         = std::nullopt;
   ie_nssrg_information_               = std::nullopt;
   ie_nsag_information_                = std::nullopt;
   ie_priority_indicator_              = std::nullopt;
@@ -32,6 +41,23 @@ uint32_t ConfigurationUpdateCommand::GetLength() const {
   if (ie_configuration_update_indication_.has_value())
     msg_len += ie_configuration_update_indication_.value().GetIeLength();
   if (ie_5g_guti_.has_value()) msg_len += ie_5g_guti_.value().GetIeLength();
+  if (ie_tai_list_.has_value()) msg_len += ie_tai_list_.value().GetIeLength();
+  if (ie_allowed_nssai_.has_value())
+    msg_len += ie_allowed_nssai_.value().GetIeLength();
+  if (ie_service_area_list_.has_value())
+    msg_len += ie_service_area_list_.value().GetIeLength();
+  if (ie_ladn_information_.has_value())
+    msg_len += ie_ladn_information_.value().GetIeLength();
+  if (ie_mico_indication_.has_value())
+    msg_len += ie_mico_indication_.value().GetIeLength();
+  if (ie_network_slicing_indication_.has_value())
+    msg_len += ie_network_slicing_indication_.value().GetIeLength();
+  if (ie_configured_nssai_.has_value())
+    msg_len += ie_configured_nssai_.value().GetIeLength();
+  if (ie_rejected_nssai_.has_value())
+    msg_len += ie_rejected_nssai_.value().GetIeLength();
+  if (ie_5gs_registration_result_.has_value())
+    msg_len += ie_5gs_registration_result_.value().GetIeLength();
   if (ie_full_name_for_network_.has_value())
     msg_len += ie_full_name_for_network_.value().GetIeLength();
   if (ie_short_name_for_network_.has_value())
@@ -75,6 +101,76 @@ void ConfigurationUpdateCommand::Set5gGuti(
   ie_5g_guti_tmp.Set5gGuti(
       mcc, mnc, amf_region_id, amf_set_id, amf_pointer, tmsi);
   ie_5g_guti_ = std::optional<_5gsMobileIdentity>(ie_5g_guti_tmp);
+}
+
+//------------------------------------------------------------------------------
+void ConfigurationUpdateCommand::SetTaiList(
+    const std::vector<p_tai_t>& tai_list) {
+  // Constructor sets IEI kIei5gsTrackingAreaIdentityList (0x54) internally
+  ie_tai_list_ = std::make_optional<_5gsTrackingAreaIdList>(tai_list);
+}
+
+//------------------------------------------------------------------------------
+void ConfigurationUpdateCommand::SetAllowedNssai(
+    const std::vector<struct SNSSAI_s>& nssai) {
+  if (nssai.size() > 0) {
+    ie_allowed_nssai_ = std::make_optional<Nssai>(kIeiNSSAIAllowed, nssai);
+  }
+}
+
+//------------------------------------------------------------------------------
+void ConfigurationUpdateCommand::SetConfiguredNssai(
+    const std::vector<struct SNSSAI_s>& nssai) {
+  if (nssai.size() > 0) {
+    ie_configured_nssai_ =
+        std::make_optional<Nssai>(kIeiNSSAIConfigured, nssai);
+  }
+}
+
+//------------------------------------------------------------------------------
+void ConfigurationUpdateCommand::SetRejectedNssai(
+    const std::vector<RejectedSNssai>& nssai) {
+  if (nssai.size() > 0) {
+    // CUC uses the CUC-specific Rejected NSSAI IEI (0x11), NOT the RA IEI
+    ie_rejected_nssai_ =
+        std::make_optional<RejectedNssai>(kIeiRejectedNssaiCuc);
+    ie_rejected_nssai_.value().SetRejectedSNssais(nssai);
+  }
+}
+
+//------------------------------------------------------------------------------
+void ConfigurationUpdateCommand::SetServiceAreaList(
+    const std::vector<service_area_list_ie_t>& list) {
+  // Constructor sets IEI kIeiServiceAreaList (0x27) internally
+  ie_service_area_list_ = std::make_optional<ServiceAreaList>(list);
+}
+
+//------------------------------------------------------------------------------
+void ConfigurationUpdateCommand::SetLadnInformation(
+    const LadnInformation& ladn_information) {
+  ie_ladn_information_ = std::make_optional<LadnInformation>(ladn_information);
+}
+
+//------------------------------------------------------------------------------
+void ConfigurationUpdateCommand::SetMicoIndication(bool sprti, bool raai) {
+  // Constructor sets IEI kIeiMicoIndication (0xB-) internally
+  ie_mico_indication_ = std::make_optional<MicoIndication>(sprti, raai);
+}
+
+//------------------------------------------------------------------------------
+void ConfigurationUpdateCommand::SetNetworkSlicingIndication(
+    bool dcni, bool nssci) {
+  ie_network_slicing_indication_ = std::make_optional<NetworkSlicingIndication>(
+      kIeiNetworkSlicingIndication, dcni, nssci);
+}
+
+//------------------------------------------------------------------------------
+void ConfigurationUpdateCommand::Set5gsRegistrationResult(
+    bool emergency, bool nssaa, bool sms, uint8_t value) {
+  ie_5gs_registration_result_ =
+      std::make_optional<_5gsRegistrationResult>(kIei5gsRegistrationResult);
+  ie_5gs_registration_result_.value().Set(
+      kIei5gsRegistrationResult, emergency, nssaa, sms, value);
 }
 
 //------------------------------------------------------------------------------
@@ -192,6 +288,22 @@ int ConfigurationUpdateCommand::Encode(uint8_t* buf, int len) {
   }
 
   if ((encoded_ie_size = NasHelper::Encode(
+           ie_tai_list_, buf, len, encoded_size)) == KEncodeDecodeError) {
+    return KEncodeDecodeError;
+  }
+
+  if ((encoded_ie_size = NasHelper::Encode(
+           ie_allowed_nssai_, buf, len, encoded_size)) == KEncodeDecodeError) {
+    return KEncodeDecodeError;
+  }
+
+  if ((encoded_ie_size =
+           NasHelper::Encode(ie_service_area_list_, buf, len, encoded_size)) ==
+      KEncodeDecodeError) {
+    return KEncodeDecodeError;
+  }
+
+  if ((encoded_ie_size = NasHelper::Encode(
            ie_full_name_for_network_, buf, len, encoded_size)) ==
       KEncodeDecodeError) {
     return KEncodeDecodeError;
@@ -199,6 +311,41 @@ int ConfigurationUpdateCommand::Encode(uint8_t* buf, int len) {
 
   if ((encoded_ie_size = NasHelper::Encode(
            ie_short_name_for_network_, buf, len, encoded_size)) ==
+      KEncodeDecodeError) {
+    return KEncodeDecodeError;
+  }
+
+  if ((encoded_ie_size =
+           NasHelper::Encode(ie_ladn_information_, buf, len, encoded_size)) ==
+      KEncodeDecodeError) {
+    return KEncodeDecodeError;
+  }
+
+  if ((encoded_ie_size =
+           NasHelper::Encode(ie_mico_indication_, buf, len, encoded_size)) ==
+      KEncodeDecodeError) {
+    return KEncodeDecodeError;
+  }
+
+  if ((encoded_ie_size = NasHelper::Encode(
+           ie_network_slicing_indication_, buf, len, encoded_size)) ==
+      KEncodeDecodeError) {
+    return KEncodeDecodeError;
+  }
+
+  if ((encoded_ie_size =
+           NasHelper::Encode(ie_configured_nssai_, buf, len, encoded_size)) ==
+      KEncodeDecodeError) {
+    return KEncodeDecodeError;
+  }
+
+  if ((encoded_ie_size = NasHelper::Encode(
+           ie_rejected_nssai_, buf, len, encoded_size)) == KEncodeDecodeError) {
+    return KEncodeDecodeError;
+  }
+
+  if ((encoded_ie_size = NasHelper::Encode(
+           ie_5gs_registration_result_, buf, len, encoded_size)) ==
       KEncodeDecodeError) {
     return KEncodeDecodeError;
   }
@@ -247,8 +394,17 @@ int ConfigurationUpdateCommand::Decode(uint8_t* buf, int len) {
   uint8_t octet = 0x00;
   DECODE_U8_VALUE(buf, octet, decoded_size, len);
   oai::logger::logger_common::nas().debug("First option IEI (0x%x)", octet);
-  bool flag = false;
-  while ((octet != 0x0)) {
+
+  // Each iteration decodes exactly one optional IE, then reads the next IEI at
+  // the bottom of the loop. Type-1 (half-octet TV) IEs are dispatched on the
+  // upper nibble; all other IEs are dispatched on the full IEI octet. The two
+  // ranges are disjoint (Type-1 nibbles 0x9/0xB/0xD/0xE never collide with a
+  // full-octet IEI upper nibble), so a single per-iteration dispatch is safe
+  // and, unlike a two-switch cascade, correctly handles consecutive Type-1
+  // IEs.
+  while (octet != 0x0 && decoded_size < len) {
+    bool decoded_one = true;
+
     switch ((octet & 0xf0) >> 4) {
       case kIeiConfigurationUpdateIndication: {
         oai::logger::logger_common::nas().debug(
@@ -258,8 +414,6 @@ int ConfigurationUpdateCommand::Decode(uint8_t* buf, int len) {
                  true)) == KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
-        DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
       } break;
 
       // Release 17.10: Priority indicator, IEI 0xE (Type 1 TV)
@@ -271,95 +425,189 @@ int ConfigurationUpdateCommand::Decode(uint8_t* buf, int len) {
             KEncodeDecodeError) {
           return KEncodeDecodeError;
         }
-        DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
+      } break;
+
+      // MICO indication, IEI 0xB- (Type 1 TV)
+      case kIeiMicoIndication: {
+        oai::logger::logger_common::nas().debug(
+            "Decoding MICO indication IEI 0x%x", octet);
+        if ((decoded_ie_size = NasHelper::Decode(
+                 ie_mico_indication_, buf, len, decoded_size, true)) ==
+            KEncodeDecodeError) {
+          return KEncodeDecodeError;
+        }
+      } break;
+
+      // Network slicing indication, IEI 0x9- (Type 1 TV)
+      case kIeiNetworkSlicingIndication: {
+        oai::logger::logger_common::nas().debug(
+            "Decoding Network slicing indication IEI 0x%x", octet);
+        if ((decoded_ie_size = NasHelper::Decode(
+                 ie_network_slicing_indication_, buf, len, decoded_size,
+                 true)) == KEncodeDecodeError) {
+          return KEncodeDecodeError;
+        }
       } break;
 
       default: {
-        flag = true;
+        decoded_one = false;
       }
     }
 
-    switch (octet) {
-      case kIeiFullNameForNetwork: {
-        oai::logger::logger_common::nas().debug(
-            "Decoding IEI 0x%x", kIeiFullNameForNetwork);
-        if ((decoded_ie_size = NasHelper::Decode(
-                 ie_full_name_for_network_, buf, len, decoded_size, true)) ==
-            KEncodeDecodeError) {
-          return KEncodeDecodeError;
-        }
-        DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
-      } break;
-
-      case kIeiShortNameForNetwork: {
-        oai::logger::logger_common::nas().debug(
-            "Decoding IEI 0x%x", kIeiShortNameForNetwork);
-        if ((decoded_ie_size = NasHelper::Decode(
-                 ie_short_name_for_network_, buf, len, decoded_size, true)) ==
-            KEncodeDecodeError) {
-          return KEncodeDecodeError;
-        }
-        DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
-      } break;
-
-      // Release 17.10: NSSRG Information, IEI 0x70 (TLV-E)
-      case kIeiNssrgInformation: {
-        oai::logger::logger_common::nas().debug(
-            "Decoding IEI 0x%x (NSSRG Information)", kIeiNssrgInformation);
-        if ((decoded_ie_size = NasHelper::Decode(
-                 ie_nssrg_information_, buf, len, decoded_size, true)) ==
-            KEncodeDecodeError) {
-          return KEncodeDecodeError;
-        }
-        DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
-      } break;
-
-      // Release 17.10: NSAG Information, IEI 0x73 (TLV-E)
-      case kIeiNsagInformationCuc: {
-        oai::logger::logger_common::nas().debug(
-            "Decoding IEI 0x%x (NSAG Information)", kIeiNsagInformationCuc);
-        if ((decoded_ie_size = NasHelper::Decode(
-                 ie_nsag_information_, buf, len, decoded_size, true)) ==
-            KEncodeDecodeError) {
-          return KEncodeDecodeError;
-        }
-        DECODE_U8_VALUE(buf, octet, decoded_size, len);
-        oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
-      } break;
-
-      default: {
-        // Unknown optional IE
-        // Only TLV (Type 4) and TLV-E (Type 6) can be skipped.
-        // TV/half-octet (Type 1) would already have matched an upper-nibble
-        // case in the first switch above.
-        if (flag) {
-          if (decoded_size + 1 >= len) {
-            oai::logger::logger_common::nas().warn(
-                "Optional IE skip: buffer too short for IEI 0x%02x", octet);
-            return KEncodeDecodeError;
-          }
-          uint8_t ie_len = buf[decoded_size + 1];
-          int skip_len   = 2 + ie_len;  // 1 IEI + 1 length + content
-          if (decoded_size + skip_len > len) {
-            oai::logger::logger_common::nas().warn(
-                "Optional IE skip: malformed TLV length %u > remaining %d "
-                "for IEI 0x%02x",
-                ie_len, len - decoded_size, octet);
-            return KEncodeDecodeError;
-          }
+    if (!decoded_one) {
+      decoded_one = true;
+      switch (octet) {
+        case kIeiFullNameForNetwork: {
           oai::logger::logger_common::nas().debug(
-              "Optional IE: skipping unknown IEI 0x%02x length %u", octet,
-              ie_len);
-          decoded_size += skip_len;
-          DECODE_U8_VALUE(buf, octet, decoded_size, len);
-          oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
+              "Decoding IEI 0x%x", kIeiFullNameForNetwork);
+          if ((decoded_ie_size = NasHelper::Decode(
+                   ie_full_name_for_network_, buf, len, decoded_size, true)) ==
+              KEncodeDecodeError) {
+            return KEncodeDecodeError;
+          }
+        } break;
+
+        case kIeiShortNameForNetwork: {
+          oai::logger::logger_common::nas().debug(
+              "Decoding IEI 0x%x", kIeiShortNameForNetwork);
+          if ((decoded_ie_size = NasHelper::Decode(
+                   ie_short_name_for_network_, buf, len, decoded_size, true)) ==
+              KEncodeDecodeError) {
+            return KEncodeDecodeError;
+          }
+        } break;
+
+        // Release 17.10: NSSRG Information, IEI 0x70 (TLV-E)
+        case kIeiNssrgInformation: {
+          oai::logger::logger_common::nas().debug(
+              "Decoding IEI 0x%x (NSSRG Information)", kIeiNssrgInformation);
+          if ((decoded_ie_size = NasHelper::Decode(
+                   ie_nssrg_information_, buf, len, decoded_size, true)) ==
+              KEncodeDecodeError) {
+            return KEncodeDecodeError;
+          }
+        } break;
+
+        // Release 17.10: NSAG Information, IEI 0x73 (TLV-E)
+        case kIeiNsagInformationCuc: {
+          oai::logger::logger_common::nas().debug(
+              "Decoding IEI 0x%x (NSAG Information)", kIeiNsagInformationCuc);
+          if ((decoded_ie_size = NasHelper::Decode(
+                   ie_nsag_information_, buf, len, decoded_size, true)) ==
+              KEncodeDecodeError) {
+            return KEncodeDecodeError;
+          }
+        } break;
+
+        // TAI list, IEI 0x54 (TLV)
+        case kIei5gsTrackingAreaIdentityList: {
+          oai::logger::logger_common::nas().debug(
+              "Decoding IEI 0x%x (TAI list)", kIei5gsTrackingAreaIdentityList);
+          if ((decoded_ie_size = NasHelper::Decode(
+                   ie_tai_list_, buf, len, decoded_size, true)) ==
+              KEncodeDecodeError) {
+            return KEncodeDecodeError;
+          }
+        } break;
+
+        // Allowed NSSAI, IEI 0x15 (TLV)
+        case kIeiNSSAIAllowed: {
+          oai::logger::logger_common::nas().debug(
+              "Decoding IEI 0x%x (Allowed NSSAI)", kIeiNSSAIAllowed);
+          if ((decoded_ie_size = NasHelper::Decode(
+                   ie_allowed_nssai_, buf, len, decoded_size, true)) ==
+              KEncodeDecodeError) {
+            return KEncodeDecodeError;
+          }
+        } break;
+
+        // Rejected NSSAI (CUC IEI 0x11, TLV)
+        case kIeiRejectedNssaiCuc: {
+          oai::logger::logger_common::nas().debug(
+              "Decoding IEI 0x%x (Rejected NSSAI)", kIeiRejectedNssaiCuc);
+          if ((decoded_ie_size = NasHelper::Decode(
+                   ie_rejected_nssai_, kIeiRejectedNssaiCuc, buf, len,
+                   decoded_size, true)) == KEncodeDecodeError) {
+            return KEncodeDecodeError;
+          }
+        } break;
+
+        // Configured NSSAI, IEI 0x31 (TLV)
+        case kIeiNSSAIConfigured: {
+          oai::logger::logger_common::nas().debug(
+              "Decoding IEI 0x%x (Configured NSSAI)", kIeiNSSAIConfigured);
+          if ((decoded_ie_size = NasHelper::Decode(
+                   ie_configured_nssai_, buf, len, decoded_size, true)) ==
+              KEncodeDecodeError) {
+            return KEncodeDecodeError;
+          }
+        } break;
+
+        // Service area list, IEI 0x27 (TLV)
+        case kIeiServiceAreaList: {
+          oai::logger::logger_common::nas().debug(
+              "Decoding IEI 0x%x (Service area list)", kIeiServiceAreaList);
+          if ((decoded_ie_size = NasHelper::Decode(
+                   ie_service_area_list_, buf, len, decoded_size, true)) ==
+              KEncodeDecodeError) {
+            return KEncodeDecodeError;
+          }
+        } break;
+
+        // LADN information, IEI 0x79 (TLV-E)
+        case kIeiLadnInformation: {
+          oai::logger::logger_common::nas().debug(
+              "Decoding IEI 0x%x (LADN information)", kIeiLadnInformation);
+          if ((decoded_ie_size = NasHelper::Decode(
+                   ie_ladn_information_, buf, len, decoded_size, true)) ==
+              KEncodeDecodeError) {
+            return KEncodeDecodeError;
+          }
+        } break;
+
+        // 5GS registration result, IEI 0x44 (optional TLV)
+        case kIei5gsRegistrationResult: {
+          oai::logger::logger_common::nas().debug(
+              "Decoding IEI 0x%x (5GS registration result)",
+              kIei5gsRegistrationResult);
+          if ((decoded_ie_size = NasHelper::Decode(
+                   ie_5gs_registration_result_, buf, len, decoded_size,
+                   true)) == KEncodeDecodeError) {
+            return KEncodeDecodeError;
+          }
+        } break;
+
+        default: {
+          decoded_one = false;
         }
-      } break;
+      }
     }
+
+    if (!decoded_one) {
+      // Unknown optional IE. Only TLV (Type 4) and TLV-E (Type 6) can be
+      // skipped; Type-1 (half-octet) IEs would already have matched an
+      // upper-nibble case above.
+      if (decoded_size + 1 >= len) {
+        oai::logger::logger_common::nas().warn(
+            "Optional IE skip: buffer too short for IEI 0x%02x", octet);
+        return KEncodeDecodeError;
+      }
+      uint8_t ie_len = buf[decoded_size + 1];
+      int skip_len   = 2 + ie_len;  // 1 IEI + 1 length + content
+      if (decoded_size + skip_len > len) {
+        oai::logger::logger_common::nas().warn(
+            "Optional IE skip: malformed TLV length %u > remaining %d "
+            "for IEI 0x%02x",
+            ie_len, len - decoded_size, octet);
+        return KEncodeDecodeError;
+      }
+      oai::logger::logger_common::nas().debug(
+          "Optional IE: skipping unknown IEI 0x%02x length %u", octet, ie_len);
+      decoded_size += skip_len;
+    }
+
+    DECODE_U8_VALUE(buf, octet, decoded_size, len);
+    oai::logger::logger_common::nas().debug("Next IEI (0x%x)", octet);
   }
 
   oai::logger::logger_common::nas().debug(

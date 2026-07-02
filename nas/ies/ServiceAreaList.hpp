@@ -27,9 +27,11 @@ class ServiceAreaList : public Type4NasIe {
   ServiceAreaList(const std::vector<service_area_list_ie_t>& list);
 
   int Encode(uint8_t* buf, int len) const override;
-  // TODO: int Decode(uint8_t* buf, int len);
+  int Decode(const uint8_t* const buf, int len, bool is_iei) override;
 
   static std::string GetIeName() { return kServiceAreaListIeName; }
+
+  void GetServiceAreaList(std::vector<service_area_list_ie_t>& list) const;
 
  private:
   std::vector<service_area_list_ie_t> ie_list_;
@@ -39,6 +41,7 @@ class ServiceAreaList : public Type4NasIe {
   int EncodeType01(service_area_list_ie_t item, uint8_t* buf, int len) const;
   int EncodeType10(service_area_list_ie_t item, uint8_t* buf, int len) const;
   int EncodeType11(service_area_list_ie_t item, uint8_t* buf, int len) const;
+  int DecodeType00(service_area_list_ie_t& item, const uint8_t* buf, int len);
 };
 
 }  // namespace oai::nas

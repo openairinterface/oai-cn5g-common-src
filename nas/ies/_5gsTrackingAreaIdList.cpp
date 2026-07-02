@@ -126,6 +126,83 @@ int _5gsTrackingAreaIdList::EncodeType00(
 }
 
 //------------------------------------------------------------------------------
+int _5gsTrackingAreaIdList::Decode(
+    const uint8_t* const buf, int len, bool is_iei) {
+  oai::logger::logger_common::nas().debug("Decoding %s", GetIeName().c_str());
+
+  int decoded_size = 0;
+  tai_list_.clear();
+
+  // IEI and Length indicator
+  int decoded_header_size = Type4NasIe::Decode(buf + decoded_size, len, is_iei);
+  if (decoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
+  decoded_size += decoded_header_size;
+
+  int content_len = GetLengthIndicator();
+  int consumed    = 0;
+  while (consumed < content_len) {
+    // Type of list is carried in bits 7-6 of the first octet of each partial
+    // list. Only type 0x00 (list of TACs belonging to one PLMN) is supported
+    // on encode, so only that is decoded here.
+    uint8_t type = (buf[decoded_size + consumed] & 0x60);
+    p_tai_t item = {};
+    int item_len = 0;
+    switch (type) {
+      case 0x00: {
+        item_len = DecodeType00(
+            item, buf + decoded_size + consumed, content_len - consumed);
+      } break;
+      default: {
+        oai::logger::logger_common::nas().error(
+            "Decoding %s: unsupported TAI list type 0x%x", GetIeName().c_str(),
+            type);
+        return KEncodeDecodeError;
+      }
+    }
+    if (item_len == KEncodeDecodeError) return KEncodeDecodeError;
+    tai_list_.push_back(item);
+    consumed += item_len;
+  }
+  decoded_size += consumed;
+
+  oai::logger::logger_common::nas().debug(
+      "Decoded %s, len (%d)", GetIeName().c_str(), decoded_size);
+  return decoded_size;
+}
+
+//------------------------------------------------------------------------------
+int _5gsTrackingAreaIdList::DecodeType00(
+    p_tai_t& item, const uint8_t* buf, int len) {
+  int decoded_size = 0;
+  // Type of list/Number of elements
+  uint8_t octet = 0;
+  DECODE_U8(buf + decoded_size, octet, decoded_size);
+  item.type       = octet & 0x60;
+  uint8_t num_tac = (octet & 0x1f) + 1;
+
+  // Decode PLMN (shared by all TACs)
+  nas_plmn_t plmn = {};
+  int plmn_len    = nas_utils::decodeMccMncFromBuffer(
+      plmn.mcc, plmn.mnc, buf + decoded_size, len - decoded_size);
+  if (plmn_len == KEncodeDecodeError) return KEncodeDecodeError;
+  decoded_size += plmn_len;
+  item.plmn_list.push_back(plmn);
+
+  // Decode TAC list
+  for (int i = 0; i < num_tac; i++) {
+    uint32_t tac = 0;
+    DECODE_U24(buf + decoded_size, tac, decoded_size);
+    item.tac_list.push_back(tac);
+  }
+  return decoded_size;
+}
+
+//------------------------------------------------------------------------------
+void _5gsTrackingAreaIdList::GetTaiList(std::vector<p_tai_t>& tai_list) const {
+  tai_list = tai_list_;
+}
+
+//------------------------------------------------------------------------------
 int _5gsTrackingAreaIdList::EncodeType01(
     p_tai_t item, uint8_t* buf, int len) const {
   // TODO:

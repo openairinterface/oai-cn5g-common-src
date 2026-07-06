@@ -166,11 +166,12 @@ class local_interface : public config_type {
  protected:
   string_config_value m_host{};
   int_config_value m_port{};
+  string_config_value m_ip_override{};
   [[nodiscard]] std::string to_string_for_local(
       const std::string& indent) const;
 
   // these values are read from the m_if_name
-  in_addr m_addr4{};
+  in_addr m_addr4{}, m_addr4_override{};
   in6_addr m_addr6{};
 
  private:
@@ -194,6 +195,7 @@ class local_interface : public config_type {
   [[nodiscard]] const std::string& get_host() const;
   [[nodiscard]] const std::string& get_if_name() const;
   [[nodiscard]] const in_addr& get_addr4() const;
+  [[nodiscard]] const in_addr& get_addr4ov() const;
   [[nodiscard]] const in6_addr& get_addr6() const;
   [[nodiscard]] unsigned int get_mtu() const;
   [[nodiscard]] uint16_t get_port() const;

@@ -45,11 +45,18 @@ bool PostSmContexts_201_response::validate(
 
 bool PostSmContexts_201_response::operator==(
     const PostSmContexts_201_response& rhs) const {
+  const auto jsonDataEq = [this, &rhs]() {
+    nlohmann::json lhsJson;
+    nlohmann::json rhsJson;
+    to_json(lhsJson, getJsonData());
+    to_json(rhsJson, rhs.getJsonData());
+    return lhsJson == rhsJson;
+  };
+
   return
 
       ((!jsonDataIsSet() && !rhs.jsonDataIsSet()) ||
-       (jsonDataIsSet() && rhs.jsonDataIsSet() &&
-        getJsonData() == rhs.getJsonData())) &&
+       (jsonDataIsSet() && rhs.jsonDataIsSet() && jsonDataEq())) &&
 
       ((!binaryDataN2SmInformationIsSet() &&
         !rhs.binaryDataN2SmInformationIsSet()) ||

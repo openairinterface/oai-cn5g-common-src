@@ -45,18 +45,11 @@ bool ReleaseSmContext_request::validate(
 
 bool ReleaseSmContext_request::operator==(
     const ReleaseSmContext_request& rhs) const {
-  const auto jsonDataEq = [this, &rhs]() {
-    nlohmann::json lhsJson;
-    nlohmann::json rhsJson;
-    to_json(lhsJson, getJsonData());
-    to_json(rhsJson, rhs.getJsonData());
-    return lhsJson == rhsJson;
-  };
-
   return
 
       ((!jsonDataIsSet() && !rhs.jsonDataIsSet()) ||
-       (jsonDataIsSet() && rhs.jsonDataIsSet() && jsonDataEq())) &&
+       (jsonDataIsSet() && rhs.jsonDataIsSet() &&
+        getJsonData() == rhs.getJsonData())) &&
 
       ((!binaryDataN2SmInformationIsSet() &&
         !rhs.binaryDataN2SmInformationIsSet()) ||

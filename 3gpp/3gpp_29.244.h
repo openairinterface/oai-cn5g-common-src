@@ -295,8 +295,7 @@ struct pfcp_ie_value_exception : public pfcp_ie_exception {
 #define PFCP_IE_APN_DNN (159)
 #define PFCP_IE_3GPP_INTERFACE_TYPE (160)
 #define PFCP_IE_ENTERPRISE_SPECIFIC_RANGE_START (32768)
-#define PFCP_IE_ENTERPRISE_SPECIFIC_RANGE_END (65535)
-#define PFCP_IE_ENTERPRISE_SPECIFIC_RANGE_END (65535)
+#define PFCP_IE_ENTERPRISE_SPECIFIC_RANGE_END (65535) /* single definition */
 #define OAI_PRIVATE_ENTERPRISE_NUMBER (56701)
 
 #define PFCP_IE_PFCPSRREQ_FLAGS_3GPP (161)
@@ -317,8 +316,39 @@ struct pfcp_ie_value_exception : public pfcp_ie_exception {
 #define PFCP_IE_UPDATE_ACCESS_FORWARDING_ACTION_INFORMATION_2 (176)
 #define PFCP_IE_UE_IP_ADDRESS_POOL_IDENTITY (177)
 #define PFCP_IE_ALTERNATIVE_SMF_IP_ADDRESS (178)
-#define PFCP_IE_SPARED (179)
-#define PFCP_IE_S_NSSAI (257)
+/* 179: spare */
+
+/* ── R16 additions ─────────────────────────────────────────────────────── */
+#define PFCP_IE_TSN_TIME_DOMAIN_NUMBER (180)            /* §8.2.130 Rel-16 */
+#define PFCP_IE_TIME_OFFSET_THRESHOLD (181)             /* §8.2.131 Rel-16 */
+#define PFCP_IE_CUMULATIVE_RATE_RATIO_THRESHOLD (182)   /* §8.2.132 Rel-16 */
+#define PFCP_IE_TIME_OFFSET_MEASUREMENT (183)           /* §8.2.133 Rel-16 */
+#define PFCP_IE_CUMULATIVE_RATE_RATIO_MEASUREMENT (184) /* §8.2.134 Rel-16 */
+#define PFCP_IE_AGGREGATE_BITRATE (185)                 /* §8.2.135 Rel-16 */
+#define PFCP_IE_PACKET_RATE_STATUS (186)                /* §8.2.136 Rel-16 */
+#define PFCP_IE_CREATE_BRIDGE_INFO_FOR_TSC (187)        /* §8.2.137 Rel-16 */
+#define PFCP_IE_CREATED_BRIDGE_INFO_FOR_TSC (188)       /* §8.2.138 Rel-16 */
+#define PFCP_IE_DS_TT_PORT_NUMBER (189)                 /* §8.2.139 Rel-16 */
+#define PFCP_IE_NW_TT_PORT_NUMBER (190)                 /* §8.2.140 Rel-16 */
+#define PFCP_IE_TSN_BRIDGE_ID (191)                     /* §8.2.141 Rel-16 */
+#define PFCP_IE_TSN_TIME_DOMAIN_NUMBER_2 (192)          /* §8.2.142 Rel-16 */
+#define PFCP_IE_AVERAGE_PACKET_DELAY (193)              /* §8.2.143 Rel-16 */
+#define PFCP_IE_MINIMUM_PACKET_DELAY (194)              /* §8.2.144 Rel-16 */
+#define PFCP_IE_MAXIMUM_PACKET_DELAY (195)              /* §8.2.145 Rel-16 */
+#define PFCP_IE_QOS_REPORT_TRIGGER (196)                /* §8.2.146 Rel-16 */
+#define PFCP_IE_GTP_U_PATH_QOS_CONTROL_INFO (197)       /* §8.2.147 Rel-16 */
+#define PFCP_IE_GTP_U_PATH_QOS_REPORT (198)             /* §8.2.148 Rel-16 */
+#define PFCP_IE_PATH_MANAGEMENT_REPORT (199)            /* §8.2.149 Rel-16 */
+
+/* ── R17 additions ─────────────────────────────────────────────────────── */
+#define PFCP_IE_NUMBER_OF_UE_IP_ADDRESSES (200)       /* §8.2.150 Rel-17 */
+#define PFCP_IE_VALIDITY_TIMER (201)                  /* §8.2.151 Rel-17 */
+#define PFCP_IE_OFFENDING_IE_INFORMATION (202)        /* §8.2.152 Rel-17 */
+#define PFCP_IE_PFCP_SESSION_CHANGE_INFO (203)        /* §8.2.153 Rel-17 */
+#define PFCP_IE_UE_IP_ADDRESS_USAGE_INFORMATION (204) /* §8.2.154 Rel-17 */
+#define PFCP_IE_REDUNDANT_TRANSMISSION_PARAMS (205)   /* §8.2.155 Rel-17 */
+#define PFCP_IE_UPDATED_PDR (206)                     /* §8.2.156 Rel-17 */
+#define PFCP_IE_S_NSSAI (257)                         /* §8.2.157 Rel-17 */
 
 #define PFCP_MESSAGE_RESERVED (0)
 // PFCP_NODE_RELATED_MESSAGES
@@ -594,7 +624,7 @@ typedef struct inactivity_detection_time_s {
 } inactivity_detection_time_t;
 
 //-------------------------------------
-// 8.2.19 Reporting Triggers
+// 8.2.19 Reporting Triggers  (R17.10.0: added REEMR bit)
 typedef struct reporting_triggers_s {
   uint16_t liusa : 1;
   uint16_t droth : 1;
@@ -604,7 +634,7 @@ typedef struct reporting_triggers_s {
   uint16_t timth : 1;
   uint16_t volth : 1;
   uint16_t perio : 1;
-  uint16_t spare1 : 1;
+  uint16_t reemr : 1; /* §8.2.19 — Re-Enabling of Monitoring Report, Rel-17 */
   uint16_t spare2 : 1;
   uint16_t spare3 : 1;
   uint16_t eveth : 1;
@@ -725,7 +755,14 @@ struct up_function_features_s {
   uint8_t rds : 1;
 
   uint8_t rttwp : 1;
-  uint8_t spare : 7;
+  /* ── R17 additions ───────────────────────────────────────────────────── */
+  uint8_t nspoc : 1;  /* Non-Standard Port On CP — Rel-17                   */
+  uint8_t quasf : 1;  /* QoS/Usage reporting based on Serving Func — Rel-17 */
+  uint8_t resps : 1;  /* Restoration of Sessions  — Rel-17                  */
+  uint8_t upber : 1;  /* UP Buffering for Early Release — Rel-17            */
+  uint8_t l2tp : 1;   /* L2TP  — Rel-17                                     */
+  uint8_t nspoc2 : 1; /* spare / reserved                                   */
+  uint8_t spare : 1;
 
   // up_function_features_s& operator=(up_function_features_s i)
   //{
@@ -779,6 +816,12 @@ struct up_function_features_s {
         rds(0),
 
         rttwp(0),
+        nspoc(0),
+        quasf(0),
+        resps(0),
+        upber(0),
+        l2tp(0),
+        nspoc2(0),
         spare(0) {}
 
   up_function_features_s(const up_function_features_s& i) {
@@ -828,7 +871,14 @@ struct up_function_features_s {
     ddds     = i.ddds;
     rds      = i.rds;
 
-    rttwp = i.rttwp;
+    rttwp  = i.rttwp;
+    nspoc  = i.nspoc;
+    quasf  = i.quasf;
+    resps  = i.resps;
+    upber  = i.upber;
+    l2tp   = i.l2tp;
+    nspoc2 = i.nspoc2;
+    spare  = i.spare;
   }
 };
 // typedef struct up_function_features_s up_function_features_t;
@@ -1337,25 +1387,16 @@ typedef struct flow_information_s {
 } flow_information_t;
 
 //-------------------------------------
-// 8.2.62 UE IP Address
+// 8.2.62 UE IP Address  (Rel-16: added CHV4/CHV6 bits for UPF-allocated addr)
 typedef struct ue_ip_address_s {
-  uint8_t ipv6d : 1;  // This bit is only applicable to the UE IP address IE in
-                      // the PDI IE and whhen V6 bit is set to "1". If this bit
-                      // is set to "1", then the IPv6 Prefix Delegation Bits
-                      // field shall be present, otherwise the UP function shall
-                      // consider IPv6 prefix is default /64.
-  uint8_t
-      sd : 1;  // This bit is only applicable to the UE IP Address IE in the PDI
-               // IE. It shall be set to "0" and ignored by the receiver in IEs
-               // other than PDI IE. In the PDI IE, if this bit is set to "0",
-               // this indicates a Source IP address; if this bit is set to "1",
-               // this indicates a Destination IP address.
-  uint8_t v4 : 1;  // If this bit is set to "1", then the IPv4 address field
-                   // shall be present in the UE IP Address, otherwise the IPv4
-                   // address field shall not be present.
-  uint8_t v6 : 1;  // If this bit is set to "1", then the IPv6 address field
-                   // shall be present in the UE IP Address, otherwise the IPv6
-                   // address field shall not be present.
+  uint8_t spare : 1;
+  uint8_t chv6 : 1; /* Choose IPv6 — UPF shall assign an IPv6 address/prefix  */
+  uint8_t chv4 : 1; /* Choose IPv4 — UPF shall assign an IPv4 address         */
+  uint8_t ipv6d : 1; /* IPv6 Prefix Delegation Bits field present */
+  uint8_t sd : 1; /* 0=Source / 1=Destination (PDI IE only)                  */
+  uint8_t v4 : 1; /* IPv4 address field present                              */
+  uint8_t v6 : 1; /* IPv6 address field present                              */
+  uint8_t spare2 : 1; /* spare LSB */
   struct in_addr ipv4_address;
   struct in6_addr ipv6_address;
   uint8_t ipv6_prefix_delegation_bits;
@@ -1413,12 +1454,14 @@ typedef struct header_enrichment_s {
 } header_enrichment_t;
 
 //-------------------------------------
-// 8.2.68 Measurement Information
+// 8.2.68 Measurement Information  (R17.10.0: added CIAM and REIN bits)
 typedef struct measurement_information_s {
-  uint8_t spare : 5;
-  uint8_t radi : 1;
-  uint8_t inam : 1;
-  uint8_t mbqe : 1;
+  uint8_t spare : 3;
+  uint8_t rein : 1; /* Report the first UL/DL packet after re-enabling     */
+  uint8_t ciam : 1; /* Converged IMS Awareness Measurement — Rel-17        */
+  uint8_t radi : 1; /* Reporting a Drop of Downlink — Rel-15               */
+  uint8_t inam : 1; /* Immediate Start — no wait for first packet          */
+  uint8_t mbqe : 1; /* Measurement Before QoS Enforcement                 */
 } measurement_information_t;
 
 //-------------------------------------
@@ -1516,11 +1559,13 @@ typedef struct pdn_type_s {
 enum rule_id_type_e {
   /* Request / Initial message */
   FAILED_RULE_ID_TYPE_PDR = 0,
-  FAILED_RULE_ID_TYPE_FAR,
-  FAILED_RULE_ID_TYPE_QER,
-  FAILED_RULE_ID_TYPE_URR,
-  FAILED_RULE_ID_TYPE_BAR
+  FAILED_RULE_ID_TYPE_FAR = 1,
+  FAILED_RULE_ID_TYPE_QER = 2,
+  FAILED_RULE_ID_TYPE_URR = 3,
+  FAILED_RULE_ID_TYPE_BAR = 4,
+  FAILED_RULE_ID_TYPE_MAR = 5
 };
+
 typedef struct failed_rule_id_s {
   uint8_t spare : 3;
   uint8_t rule_id_type : 5;
@@ -1974,7 +2019,115 @@ typedef struct alternative_smf_ip_address_s {
 } alternative_smf_ip_address_t;
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-// Specific IEs
+// R16 / R17 additions — 3GPP TS 29.244 V17.10.0
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+//-------------------------------------
+// 8.2.130 TSN Time Domain Number  (Rel-16 §8.2.130)
+typedef struct tsn_time_domain_number_s {
+  uint8_t time_domain_number;
+} tsn_time_domain_number_t;
+
+//-------------------------------------
+// 8.2.131 Time Offset Threshold  (Rel-16 §8.2.131)
+typedef struct time_offset_threshold_s {
+  int64_t time_offset_threshold; /* nanoseconds, signed */
+} time_offset_threshold_t;
+
+//-------------------------------------
+// 8.2.132 Cumulative rateRatio Threshold  (Rel-16 §8.2.132)
+typedef struct cumulative_rate_ratio_threshold_s {
+  int32_t cumulative_rate_ratio_threshold;
+} cumulative_rate_ratio_threshold_t;
+
+//-------------------------------------
+// 8.2.133 Time Offset Measurement  (Rel-16 §8.2.133)
+typedef struct time_offset_measurement_s {
+  int64_t time_offset_measurement; /* nanoseconds, signed */
+} time_offset_measurement_t;
+
+//-------------------------------------
+// 8.2.134 Cumulative rateRatio Measurement  (Rel-16 §8.2.134)
+typedef struct cumulative_rate_ratio_measurement_s {
+  int32_t cumulative_rate_ratio_measurement;
+} cumulative_rate_ratio_measurement_t;
+
+//-------------------------------------
+// 8.2.136 Packet Rate Status  (Rel-16 §8.2.136)
+typedef struct packet_rate_status_s {
+  uint8_t spare : 5;
+  uint8_t apr : 1; /* Additional Packet Rate Status */
+  uint8_t dl : 1;  /* Downlink packet rate present  */
+  uint8_t ul : 1;  /* Uplink packet rate present    */
+  uint16_t number_of_remaining_uplink_packets_allowed;
+  uint16_t number_of_remaining_downlink_packets_allowed;
+  uint16_t
+      number_of_remaining_uplink_packets_allowed_for_additional_packet_rate;
+  uint64_t rate_control_status_validity_time; /* NTP timestamp */
+} packet_rate_status_t;
+
+//-------------------------------------
+// 8.2.143 Average Packet Delay  (Rel-16 §8.2.143)
+typedef struct average_packet_delay_s {
+  uint32_t average_packet_delay; /* microseconds */
+} average_packet_delay_t;
+
+//-------------------------------------
+// 8.2.144 Minimum Packet Delay  (Rel-16 §8.2.144)
+typedef struct minimum_packet_delay_s {
+  uint32_t minimum_packet_delay; /* microseconds */
+} minimum_packet_delay_t;
+
+//-------------------------------------
+// 8.2.145 Maximum Packet Delay  (Rel-16 §8.2.145)
+typedef struct maximum_packet_delay_s {
+  uint32_t maximum_packet_delay; /* microseconds */
+} maximum_packet_delay_t;
+
+//-------------------------------------
+// 8.2.146 QoS Report Trigger  (Rel-16 §8.2.146)
+typedef struct qos_report_trigger_s {
+  uint8_t spare : 5;
+  uint8_t ire : 1; /* Immediate Report */
+  uint8_t thr : 1; /* Threshold        */
+  uint8_t per : 1; /* Periodic         */
+} qos_report_trigger_t;
+
+//-------------------------------------
+// 8.2.150 Number of UE IP Addresses  (Rel-17 §8.2.150)
+typedef struct number_of_ue_ip_addresses_s {
+  uint8_t spare : 6;
+  uint8_t ipv6 : 1;
+  uint8_t ipv4 : 1;
+  uint32_t number_of_ue_ipv4_addresses;
+  uint32_t number_of_ue_ipv6_addresses;
+} number_of_ue_ip_addresses_t;
+
+//-------------------------------------
+// 8.2.151 Validity Timer  (Rel-17 §8.2.151)
+typedef struct validity_timer_s {
+  uint32_t validity_timer; /* seconds */
+} validity_timer_t;
+
+//-------------------------------------
+// 8.2.154 UE IP Address Usage Information  (Rel-17 §8.2.154)
+typedef struct ue_ip_address_usage_information_s {
+  uint8_t sequence_number;
+  uint32_t validity_timer; /* seconds         */
+  uint32_t number_of_ue_ipv4_addresses;
+  uint32_t number_of_ue_ipv6_prefixes;
+} ue_ip_address_usage_information_t;
+
+//-------------------------------------
+// 8.2.155 Redundant Transmission Parameters  (Rel-17 §8.2.155)
+typedef struct redundant_transmission_parameters_s {
+  /* The IE carries an F-TEID for the redundant path; no extra fields beyond
+   * the grouped-IE structure — parsed as sub-IEs in the grouped IE layer.   */
+  uint8_t spare;
+} redundant_transmission_parameters_t;
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// Specific IEs (grouped / session-level)
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 //  // Table 7.4.3.1-3: PFD

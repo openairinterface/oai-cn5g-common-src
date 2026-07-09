@@ -80,6 +80,7 @@ class SmContextStatusNotification {
   friend void to_json(nlohmann::json& j, const SmContextStatusNotification& o);
   friend void from_json(
       const nlohmann::json& j, SmContextStatusNotification& o);
+
  protected:
   oai::_3gpp::model::StatusInfo m_StatusInfo;
   oai::_3gpp::model::ReleaseCause m_Cause;
